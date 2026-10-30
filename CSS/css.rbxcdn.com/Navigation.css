@@ -918,12 +918,12 @@ div.MuiDialog-root:not(:first-of-type) .MuiDialog-container {
     padding-bottom: var(--padding-xsmall) !important
 }
 
-.\!padding-left-xsmall {
-    padding-left: var(--padding-xsmall) !important
+.\!padding-left-medium {
+    padding-left: var(--padding-medium) !important
 }
 
-.\!padding-right-medium {
-    padding-right: var(--padding-medium) !important
+.\!padding-right-xsmall {
+    padding-right: var(--padding-xsmall) !important
 }
 
 .content-\[var\(--color-surface-0\)\] {

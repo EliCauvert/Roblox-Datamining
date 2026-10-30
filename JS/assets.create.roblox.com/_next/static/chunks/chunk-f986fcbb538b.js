@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "09cadaaa-04c5-9e89-3a22-7be4cb0bcbf0")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "1afb42e6-814d-3521-b488-db699d2e5d4a")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 272593, 650502, t => {
@@ -1487,6 +1487,17 @@
                 clearTimeout(e)
             }
         }, [t, s]), o
+    }, "useInterval", 0, (t, s) => {
+        let o = (0, e.useRef)(t);
+        (0, e.useEffect)(() => {
+            o.current = t
+        }, [t]), (0, e.useEffect)(() => {
+            if (null === s) return;
+            let t = setInterval(() => o.current(), s);
+            return () => {
+                clearInterval(t)
+            }
+        }, [s])
     }, "useLocalStorage", 0, (t, e) => o(() => window.localStorage, "local-storage")(t, e), "usePrevious", 0, t => {
         let s = (0, e.useRef)(void 0);
         return (0, e.useEffect)(() => {
@@ -1495,5 +1506,5 @@
     }, "useSessionStorage", 0, (t, e) => o(() => window.sessionStorage, "session-storage")(t, e)])
 }]);
 
-//# debugId=09cadaaa-04c5-9e89-3a22-7be4cb0bcbf0
-//# sourceMappingURL=42ik78qztjtmk.js.map
+//# debugId=1afb42e6-814d-3521-b488-db699d2e5d4a
+//# sourceMappingURL=1c6jgyb8bkndp.js.map

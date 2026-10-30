@@ -701,40 +701,6 @@
     width: 100%
 }
 
-:root {
-    --header-height: 74px;
-    --header-height-var: 41px;
-    --rbx-navbar-display: flex;
-    --rbx-navbar-display-var: none;
-    --navigation-top: 74px;
-    --navigation-top-var: 41px;
-    --container-main-margin-top: 74px;
-    --container-main-margin-top-var: 40px;
-    --container-main-margin-top-mobile-var: 0;
-    --content-padding-top: 24px;
-    --content-padding-top-var: 0px
-}
-
-@media (max-width:543px) {
-    #header {
-        height: var(--header-height)
-    }
-}
-
-#header .rbx-navbar.hidden-md {
-    display: var(--rbx-navbar-display)
-}
-
-@media (max-width:543px) {
-    #navigation {
-        top: var(--navigation-top)
-    }
-
-    #container-main {
-        margin-top: var(--container-main-margin-top)
-    }
-}
-
 .light-theme .collectible-item-bonus-item-banner {
     background-color: var(--color-shift-200)
 }
@@ -1411,10 +1377,6 @@
     }
 }
 
-.button-extra-wide {
-    width: 200px
-}
-
 .robux-amount-strike-through {
     background-color: currentColor;
     width: 100%;
@@ -1584,6 +1546,52 @@
 
 .payment-method-image.robloxCredit {
     background-position: 0 -194px
+}
+
+.robux-amount-icon.icon {
+    width: var(--icon-size-small);
+    height: var(--icon-size-small)
+}
+
+.robux-amount-strike-icon.icon {
+    width: var(--icon-size-xsmall);
+    height: var(--icon-size-xsmall)
+}
+
+@media (min-width:361px) {
+    .robux-amount-icon.icon {
+        width: var(--icon-size-medium);
+        height: var(--icon-size-medium)
+    }
+
+    .robux-amount-strike-icon.icon {
+        width: var(--icon-size-small);
+        height: var(--icon-size-small)
+    }
+}
+
+@media (min-width:400px) {
+    .robux-amount-icon.icon {
+        width: var(--icon-size-large);
+        height: var(--icon-size-large)
+    }
+
+    .robux-amount-strike-icon.icon {
+        width: var(--icon-size-medium);
+        height: var(--icon-size-medium)
+    }
+}
+
+@media (min-width:1141px) {
+    .robux-amount-icon.icon {
+        width: var(--icon-size-xlarge);
+        height: var(--icon-size-xlarge)
+    }
+
+    .robux-amount-strike-icon.icon {
+        width: var(--icon-size-large);
+        height: var(--icon-size-large)
+    }
 }
 
 .light-theme .buy-robux-section-header {
@@ -1833,13 +1841,44 @@ h5 {
         flex-direction: row
     }
 
+    .small\:height-1000 {
+        height: var(--size-1000)
+    }
+
     .small\:min-width-\[120px\] {
         min-width: 120px
+    }
+
+    .small\:padding-x-medium {
+        padding-left: var(--padding-medium);
+        padding-right: var(--padding-medium)
     }
 
     .small\:padding-x-xlarge {
         padding-left: var(--padding-xlarge);
         padding-right: var(--padding-xlarge)
+    }
+
+    .small\:text-heading-small {
+        font: var(--typography-heading-small-font);
+        letter-spacing: var(--typography-heading-small-letter-spacing)
+    }
+
+    .small\:text-label-medium {
+        font: var(--typography-label-medium-font);
+        letter-spacing: var(--typography-label-medium-letter-spacing)
+    }
+}
+
+@media (min-width:400px) {
+    .min-\[400px\]\:text-heading-medium {
+        font: var(--typography-heading-medium-font);
+        letter-spacing: var(--typography-heading-medium-letter-spacing)
+    }
+
+    .min-\[400px\]\:text-title-large {
+        font: var(--typography-title-large-font);
+        letter-spacing: var(--typography-title-large-letter-spacing)
     }
 }
 
@@ -1937,6 +1976,11 @@ h5 {
         height: var(--size-2200) !important
     }
 
+    .medium\:size-\[var\(--icon-size-xlarge\)\] {
+        width: var(--icon-size-xlarge);
+        height: var(--icon-size-xlarge)
+    }
+
     .medium\:max-height-3000 {
         max-height: var(--size-3000)
     }
@@ -1963,6 +2007,10 @@ h5 {
 
     .medium\:min-width-\[200px\] {
         min-width: 200px
+    }
+
+    .medium\:width-\[200px\] {
+        width: 200px
     }
 
     .medium\:width-\[230px\] {
@@ -2089,6 +2137,11 @@ h5 {
         text-align: center
     }
 
+    .large\:size-\[var\(--icon-size-xlarge\)\] {
+        width: var(--icon-size-xlarge);
+        height: var(--icon-size-xlarge)
+    }
+
     .large\:width-\[230px\] {
         width: 230px
     }
@@ -2096,6 +2149,16 @@ h5 {
     .large\:padding-y-xxlarge {
         padding-top: var(--padding-xxlarge);
         padding-bottom: var(--padding-xxlarge)
+    }
+
+    .large\:text-heading-large {
+        font: var(--typography-heading-large-font);
+        letter-spacing: var(--typography-heading-large-letter-spacing)
+    }
+
+    .large\:text-heading-small {
+        font: var(--typography-heading-small-font);
+        letter-spacing: var(--typography-heading-small-letter-spacing)
     }
 }
 
@@ -2156,4 +2219,15 @@ h5 {
 .\[\&\>div\]\:padding-y-small>div {
     padding-top: var(--padding-small);
     padding-bottom: var(--padding-small)
+}
+
+@media (min-width:361px) {
+    .small\:\[\&\>span\]\:gap-small>span {
+        gap: var(--gap-small)
+    }
+
+    .small\:\[\&_\.icon\]\:size-\[var\(--icon-size-medium\)\] .icon {
+        width: var(--icon-size-medium);
+        height: var(--icon-size-medium)
+    }
 }

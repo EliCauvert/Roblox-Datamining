@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "56c9edfc-8dac-b4a1-30a7-e6a6128528cd")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "aabfbedb-62f0-bb5b-7571-d60e7bcef44e")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 736570, t => {
@@ -14818,8 +14818,8 @@
         e5 = t.i(279149),
         e6 = t.i(677753),
         e8 = t.i(176936),
-        e7 = t.i(537068),
-        e9 = t.i(710675),
+        e9 = t.i(537068),
+        e7 = t.i(663624),
         te = t.i(627808),
         tt = t.i(199202),
         tn = t.i(168315),
@@ -15050,12 +15050,12 @@
         t5 = new Set(["virtual", "audienceReach"]),
         t6 = new Set(["/dashboard/creations", "/credentials", "/dashboard/creations/upload", "/", "/dashboard/analytics", "/dashboard/group/profile", "/dashboard/group/members", "/dashboard/group/activity-history", "/dashboard/group/payouts", "/dashboard/group/roles"]),
         t8 = (0, r.createContext)(null),
-        t7 = () => {
+        t9 = () => {
             let t = (0, r.useContext)(t8);
             if (null === t) throw Error("useWorkspaces must be used within a WorkspaceProvider");
             return t
         },
-        t9 = t => {
+        t7 = t => {
             var n, o;
             let {
                 children: a
@@ -15299,7 +15299,7 @@
                 ...c,
                 target: "_blank",
                 rel: "noreferrer"
-            }, u) : n.startsWith("http") ? r.default.createElement("a", c, u) : r.default.createElement(e7.default, c, u)
+            }, u) : n.startsWith("http") ? r.default.createElement("a", c, u) : r.default.createElement(e9.default, c, u)
         },
         nr = t => {
             let {
@@ -15524,7 +15524,7 @@
                     } = tQ(),
                     {
                         currentWorkspace: p
-                    } = t7(),
+                    } = t9(),
                     {
                         creatorWalletsNavigation: m,
                         enableTalentHubV2M2: h,
@@ -15771,7 +15771,7 @@
                 currentWorkspace: {
                     creatorType: C
                 }
-            } = t7(), E = (0, r.useCallback)(t => {
+            } = t9(), E = (0, r.useCallback)(t => {
                 n(t)
             }, [n]), w = (0, r.useRef)(null), [I, S] = (0, r.useState)(2);
             (0, r.useEffect)(() => {
@@ -16230,7 +16230,7 @@
                 currentProduct: a,
                 robloxEnvironment: i,
                 target: l
-            } = tS(), s = (o = tU(l, i), "https://ecsv2.".concat(o)), u = (0, r.useMemo)(() => new e9.UnifiedLogger({
+            } = tS(), s = (o = tU(l, i), "https://ecsv2.".concat(o)), u = (0, r.useMemo)(() => new e7.UnifiedLogger({
                 eventBaseUrl: s,
                 product: "CreatorHubShell",
                 sessionProductGroup: "CreatorHub"
@@ -16582,7 +16582,7 @@
                     })
                 },
                 noWrap: !0
-            }, n.creatorName), a && r.default.createElement(e7.default, {
+            }, n.creatorName), a && r.default.createElement(e9.default, {
                 href: v.getCommunitiesUrl(n.creatorId),
                 style: {
                     textDecoration: "none"
@@ -16803,7 +16803,7 @@
                     classes: {
                         root: R
                     }
-                }, r.default.createElement(e7.default, {
+                }, r.default.createElement(e9.default, {
                     href: G.groupProfile,
                     className: M
                 }, r.default.createElement(l.Typography, {
@@ -16812,7 +16812,7 @@
                     classes: {
                         root: R
                     }
-                }, r.default.createElement(e7.default, {
+                }, r.default.createElement(e9.default, {
                     href: G.groupMembers,
                     className: M
                 }, r.default.createElement(l.Typography, {
@@ -16821,7 +16821,7 @@
                     classes: {
                         root: R
                     }
-                }, r.default.createElement(e7.default, {
+                }, r.default.createElement(e9.default, {
                     href: G.groupRoles,
                     className: M
                 }, r.default.createElement(l.Typography, {
@@ -16830,7 +16830,7 @@
                     classes: {
                         root: R
                     }
-                }, r.default.createElement(e7.default, {
+                }, r.default.createElement(e9.default, {
                     href: G.groupModeration,
                     className: M
                 }, r.default.createElement(l.Typography, {
@@ -16839,7 +16839,7 @@
                     classes: {
                         root: R
                     }
-                }, r.default.createElement(e7.default, {
+                }, r.default.createElement(e9.default, {
                     href: G.groupActivityHistory,
                     className: M
                 }, r.default.createElement(l.Typography, {
@@ -16938,7 +16938,7 @@
                 height: "42px"
             }
         })),
-        n7 = t => {
+        n9 = t => {
             let {
                 collapsed: n
             } = t, {
@@ -16956,7 +16956,7 @@
                 currentWorkspace: u,
                 isLoading: c,
                 setCurrentWorkspace: d
-            } = t7(), p = (0, r.useCallback)(() => {
+            } = t9(), p = (0, r.useCallback)(() => {
                 /^https?:\/\//.test(a) ? window.location.assign(a) : eY.default.push(a)
             }, [a]);
             return null === s || c ? r.default.createElement("div", {
@@ -16973,14 +16973,14 @@
                 onWorkspaceSelect: d
             })
         },
-        n9 = new Set(["GB", "GG", "IM", "JE"]),
+        n7 = new Set(["GB", "GG", "IM", "JE"]),
         re = t => {
             if (!t) return !1;
             let n = t.trim().toUpperCase().replace("_", "-");
-            if ("GBP" === n || n9.has(n)) return !0;
+            if ("GBP" === n || n7.has(n)) return !0;
             try {
                 let n = new Intl.Locale(t.replace("_", "-")).maximize().region;
-                return null != n && n9.has(n)
+                return null != n && n7.has(n)
             } catch (t) {
                 return !1
             }
@@ -17304,7 +17304,7 @@
                 href: b
             }, G) : null != b ? r.default.createElement(y.Button, {
                 ...W,
-                component: e7.default,
+                component: e9.default,
                 href: b,
                 prefetch: !1
             }, G) : r.default.createElement(y.Button, W, G), r.default.createElement("div", {
@@ -17443,7 +17443,7 @@
                 currentWorkspace: {
                     creatorType: L
                 }
-            } = t7(), {
+            } = t9(), {
                 translate: F
             } = (0, e$.useTranslation)(), R = (0, m.useMediaQuery)(t => t.breakpoints.down("Medium")), {
                 Dashboard: N,
@@ -17508,7 +17508,7 @@
                 label: F("Label.Creator"),
                 onClick: () => X("Header"),
                 href: N.home
-            }), o && r.default.createElement(n7, {
+            }), o && r.default.createElement(n9, {
                 collapsed: b
             }), r.default.createElement(rl, {
                 enableAnimation: I && S,
@@ -18548,8 +18548,8 @@
             }
         })),
         r8 = ["get", "put", "post", "delete", "options", "head", "patch", "trace"],
-        r7 = (0, e6.createFetchClient)({}),
-        r9 = async function(t) {
+        r9 = (0, e6.createFetchClient)({}),
+        r7 = async function(t) {
             let n = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 5e3,
                 r = t.method.toLowerCase();
             if (!r8.includes(r)) throw Error("Unsupported notification CTA HTTP method: ".concat(t.method));
@@ -18559,7 +18559,7 @@
                 var i, l;
                 let {
                     response: n
-                } = await r7.request(r, t.url, {
+                } = await r9.request(r, t.url, {
                     credentials: "include",
                     headers: null != (i = t.headers) ? i : void 0,
                     body: null != (l = t.body) ? l : void 0,
@@ -18710,7 +18710,7 @@
                         httpRequest: n,
                         timeoutMs: r
                     } = t;
-                    return r9(n, r)
+                    return r7(n, r)
                 }
             }), C = (0, r.useCallback)(t => {
                 if (t.stopPropagation(), t.preventDefault(), null == o || o(n), l) {
@@ -21836,7 +21836,7 @@
                 setSnackbarConfig: I
             })))))
         },
-        o7 = t => {
+        o9 = t => {
             let {
                 menuItems: n,
                 onLogout: o
@@ -21858,7 +21858,7 @@
                 onLogout: o
             })
         },
-        o9 = (0, i.makeStyles)()(t => ({
+        o7 = (0, i.makeStyles)()(t => ({
             header: {
                 fontSize: "24px",
                 fontWeight: 600,
@@ -22512,7 +22512,7 @@
             let {
                 children: n
             } = t;
-            return r.default.createElement(nJ, null, r.default.createElement(t9, null, r.default.createElement(ag, null, n)))
+            return r.default.createElement(nJ, null, r.default.createElement(t7, null, r.default.createElement(ag, null, n)))
         };
 
     function av(t) {
@@ -22533,7 +22533,7 @@
                 hamburgerTitle: h,
                 container: f
             }
-        } = o9(), {
+        } = o7(), {
             primaryRailOpen: g,
             drawerVariant: y,
             setPrimaryRailOpen: v
@@ -22573,7 +22573,7 @@
         }), r.default.createElement(oF, {
             user: b,
             size: "medium"
-        }), r.default.createElement(o7, {
+        }), r.default.createElement(o9, {
             onLogout: i,
             menuItems: o
         }))))
@@ -23372,8 +23372,8 @@
             }
         })), "navTreeLabel"),
         a8 = "navTreeContentWithTrailing",
-        a7 = "navTreeExpandOnly",
-        a9 = (0, i.makeStyles)()(t => ({
+        a9 = "navTreeExpandOnly",
+        a7 = (0, i.makeStyles)()(t => ({
             root: {
                 display: "flex",
                 flexDirection: "column",
@@ -23459,13 +23459,13 @@
                     margin: 0,
                     padding: 0
                 },
-                ["&& .".concat(eK.treeItemClasses.content, ".").concat(a7, "[data-focused]:not([data-selected])")]: {
+                ["&& .".concat(eK.treeItemClasses.content, ".").concat(a9, "[data-focused]:not([data-selected])")]: {
                     backgroundColor: "transparent"
                 },
-                ["&& .".concat(eK.treeItemClasses.content, ":hover, && .").concat(eK.treeItemClasses.content, ".").concat(a7, "[data-focused]:not([data-selected]):hover, && .").concat(eK.treeItemClasses.content, "[data-selected], && .").concat(eK.treeItemClasses.content, "[data-selected][data-focused], && .").concat(eK.treeItemClasses.content, "[data-focused]:not(.").concat(a7, ")")]: {
+                ["&& .".concat(eK.treeItemClasses.content, ":hover, && .").concat(eK.treeItemClasses.content, ".").concat(a9, "[data-focused]:not([data-selected]):hover, && .").concat(eK.treeItemClasses.content, "[data-selected], && .").concat(eK.treeItemClasses.content, "[data-selected][data-focused], && .").concat(eK.treeItemClasses.content, "[data-focused]:not(.").concat(a9, ")")]: {
                     backgroundColor: "var(--color-shift-200)"
                 },
-                ["&& .".concat(eK.treeItemClasses.content, ":active:hover, && .").concat(eK.treeItemClasses.content, ".").concat(a7, "[data-focused]:not([data-selected]):active:hover, && .").concat(eK.treeItemClasses.content, "[data-selected]:hover, && .").concat(eK.treeItemClasses.content, "[data-selected][data-focused]:hover, && .").concat(eK.treeItemClasses.content, "[data-focused]:not(.").concat(a7, "):hover")]: {
+                ["&& .".concat(eK.treeItemClasses.content, ":active:hover, && .").concat(eK.treeItemClasses.content, ".").concat(a9, "[data-focused]:not([data-selected]):active:hover, && .").concat(eK.treeItemClasses.content, "[data-selected]:hover, && .").concat(eK.treeItemClasses.content, "[data-selected][data-focused]:hover, && .").concat(eK.treeItemClasses.content, "[data-focused]:not(.").concat(a9, "):hover")]: {
                     backgroundColor: "var(--color-shift-300)"
                 },
                 ["& .".concat(eK.treeItemClasses.label)]: {
@@ -23647,7 +23647,7 @@
             component: "a",
             href: rP.href
         })) : null
-    }, "AuthenticationStatusContainer", 0, o7, "CreatorHubLayout", 0, ay, "CurrentProductName", 0, () => {
+    }, "AuthenticationStatusContainer", 0, o9, "CreatorHubLayout", 0, ay, "CurrentProductName", 0, () => {
         let {
             currentProduct: t
         } = tS(), n = av(t);
@@ -23723,7 +23723,7 @@
         }, []);
         let D = (0, r.useMemo)(() => {
                 let t;
-                return new e9.UnifiedLogger({
+                return new e7.UnifiedLogger({
                     eventBaseUrl: (t = tL(i, n), "https://ecsv2.".concat(t)),
                     product: "CreatorHubShell",
                     sessionProductGroup: "CreatorHub"
@@ -23792,7 +23792,7 @@
                 expandIcon: d,
                 collapseIcon: p
             }
-        } = a9(), [m, h] = (0, r.useState)(null != i ? i : []), f = (0, r.useCallback)((t, n) => {
+        } = a7(), [m, h] = (0, r.useState)(null != i ? i : []), f = (0, r.useCallback)((t, n) => {
             o && n.filter(t => !m.includes(t)).forEach(o), a && m.filter(t => !n.includes(t)).forEach(a), h(n)
         }, [m, a, o]), g = (0, r.useCallback)((t, n) => {
             u && t && n && u(t, n)
@@ -23857,7 +23857,7 @@
         }, a), A ? r.default.createElement("span", {
             className: f("navTreeTrailing", w)
         }, A) : null);
-        return o && (j = r.default.createElement(e7.default, {
+        return o && (j = r.default.createElement(e9.default, {
             className: f(g, k ? y : void 0),
             href: o,
             onClick: it
@@ -23866,7 +23866,7 @@
             label: j,
             classes: {
                 ...c,
-                content: f(null == c ? void 0 : c.content, s ? a8 : void 0, T ? a7 : void 0)
+                content: f(null == c ? void 0 : c.content, s ? a8 : void 0, T ? a9 : void 0)
             },
             slotProps: {
                 ...d,
@@ -24038,7 +24038,7 @@
             XSmall: "auto",
             item: !0
         }, n)), o)
-    }, "getGroupsQueryKey", 0, tq, "useNavigationConfigs", 0, tS, "useRailContext", 0, nq, "useWorkspaces", 0, t7])
+    }, "getGroupsQueryKey", 0, tq, "useNavigationConfigs", 0, tS, "useRailContext", 0, nq, "useWorkspaces", 0, t9])
 }, 798731, 319332, t => {
     "use strict";
     var n = t.i(92794),
@@ -24079,7 +24079,7 @@
         B = t.i(87034),
         P = t.i(927575);
     t.i(848427);
-    var O = t.i(710675),
+    var O = t.i(663624),
         H = t.i(533414),
         U = t.i(677753),
         z = function(t, n) {
@@ -24854,8 +24854,8 @@
         e5 = ey(/\${[\w\W]*/g),
         e6 = ey(/^data-[\-\w.\u00B7-\uFFFF]+$/),
         e8 = ey(/^aria-[\-\w]+$/),
-        e7 = ey(/^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp|matrix):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i),
-        e9 = ey(/^(?:\w+script|data):/i),
+        e9 = ey(/^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp|matrix):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i),
+        e7 = ey(/^(?:\w+script|data):/i),
         te = ey(/[\u0000-\u0020\u00A0\u1680\u180E\u2000-\u2029\u205F\u3000]/g),
         tt = ey(/^html$/i),
         tn = ey(/^[a-z][.\w]*(-[.\w]+)+$/i),
@@ -24924,7 +24924,7 @@
             _ = i.importNode,
             L = to();
         o.isSupported = "function" == typeof ed && "function" == typeof I && T && void 0 !== T.createHTMLDocument;
-        let F = e7,
+        let F = e9,
             R = null,
             N = eV({}, [...eG, ...eK, ...eJ, ...eX, ...eQ]),
             M = null,
@@ -25016,7 +25016,7 @@
                     } catch (t) {
                         return !1
                     }
-                }(t.ALLOWED_URI_REGEXP) ? e7 : t.ALLOWED_URI_REGEXP, ey = "string" == typeof t.NAMESPACE ? t.NAMESPACE : ef, ez = eP(t, "MATHML_TEXT_INTEGRATION_POINTS") && t.MATHML_TEXT_INTEGRATION_POINTS && "object" == typeof t.MATHML_TEXT_INTEGRATION_POINTS ? eq(t.MATHML_TEXT_INTEGRATION_POINTS) : eV({}, ["mi", "mo", "mn", "ms", "mtext"]), ta = eP(t, "HTML_INTEGRATION_POINTS") && t.HTML_INTEGRATION_POINTS && "object" == typeof t.HTML_INTEGRATION_POINTS ? eq(t.HTML_INTEGRATION_POINTS) : eV({}, ["annotation-xml"]);
+                }(t.ALLOWED_URI_REGEXP) ? e9 : t.ALLOWED_URI_REGEXP, ey = "string" == typeof t.NAMESPACE ? t.NAMESPACE : ef, ez = eP(t, "MATHML_TEXT_INTEGRATION_POINTS") && t.MATHML_TEXT_INTEGRATION_POINTS && "object" == typeof t.MATHML_TEXT_INTEGRATION_POINTS ? eq(t.MATHML_TEXT_INTEGRATION_POINTS) : eV({}, ["mi", "mo", "mn", "ms", "mtext"]), ta = eP(t, "HTML_INTEGRATION_POINTS") && t.HTML_INTEGRATION_POINTS && "object" == typeof t.HTML_INTEGRATION_POINTS ? eq(t.HTML_INTEGRATION_POINTS) : eV({}, ["annotation-xml"]);
                 let r = eP(t, "CUSTOM_ELEMENT_HANDLING") && t.CUSTOM_ELEMENT_HANDLING && "object" == typeof t.CUSTOM_ELEMENT_HANDLING ? eq(t.CUSTOM_ELEMENT_HANDLING) : ev(null);
                 if (P = ev(null), eP(r, "tagNameCheck") && tp(r.tagNameCheck) && (P.tagNameCheck = r.tagNameCheck), eP(r, "attributeNameCheck") && tp(r.attributeNameCheck) && (P.attributeNameCheck = r.attributeNameCheck), eP(r, "allowCustomizedBuiltInElements") && "boolean" == typeof r.allowCustomizedBuiltInElements && (P.allowCustomizedBuiltInElements = r.allowCustomizedBuiltInElements), G && (V = !1), Q && (Y = !0), ea && (R = eV({}, eQ), M = ev(null), !0 === ea.html && (eV(R, eG), eV(M, e$)), !0 === ea.svg && (eV(R, eK), eV(M, e0), eV(M, e2)), !0 === ea.svgFilters && (eV(R, eJ), eV(M, e0), eV(M, e2)), !0 === ea.mathMl && (eV(R, eX), eV(M, e1), eV(M, e2))), U.tagCheck = null, U.attributeCheck = null, eP(t, "ADD_TAGS") && ("function" == typeof t.ADD_TAGS ? U.tagCheck = t.ADD_TAGS : eT(t.ADD_TAGS) && (R === N && (R = eq(R)), eV(R, t.ADD_TAGS, tu))), eP(t, "ADD_ATTR") && ("function" == typeof t.ADD_ATTR ? U.attributeCheck = t.ADD_ATTR : eT(t.ADD_ATTR) && (M === B && (M = eq(M)), eV(M, t.ADD_ATTR, tu))), eP(t, "ADD_URI_SAFE_ATTR") && eT(t.ADD_URI_SAFE_ATTR) && eV(ec, t.ADD_URI_SAFE_ATTR, tu), eP(t, "FORBID_CONTENTS") && eT(t.FORBID_CONTENTS) && (ei === el && (ei = eq(ei)), eV(ei, t.FORBID_CONTENTS, tu)), eP(t, "ADD_FORBID_CONTENTS") && eT(t.ADD_FORBID_CONTENTS) && (ei === el && (ei = eq(ei)), eV(ei, t.ADD_FORBID_CONTENTS, tu)), er && (R["#text"] = !0), J && eV(R, ["html", "head", "body"]), R.table && (eV(R, ["tbody"]), delete O.tbody), t.TRUSTED_TYPES_POLICY) {
                     if ("function" != typeof t.TRUSTED_TYPES_POLICY.createHTML) throw eU('TRUSTED_TYPES_POLICY configuration option must provide a "createHTML" hook.');
@@ -25158,7 +25158,7 @@
                 } else if (ec[n]);
                 else if (eH(F, e_(r, te, "")));
                 else if (("src" === n || "xlink:href" === n || "href" === n) && "script" !== t && 0 === eL(r, "data:") && es[t]);
-                else if (q && !eH(e9, e_(r, te, "")));
+                else if (q && !eH(e7, e_(r, te, "")));
                 else if (r) return !1;
                 return !0
             },
@@ -25768,7 +25768,7 @@
         }
     }
 
-    function t7(t, n) {
+    function t9(t, n) {
         let {
             getFn: r = t6.getFn,
             fieldNormWeight: o = t6.fieldNormWeight
@@ -25779,7 +25779,7 @@
         return a.setKeys(t.map(t4)), a.setSources(n), a.create(), a
     }
 
-    function t9(t) {
+    function t7(t) {
         if (t.length <= 1) return t;
         t.sort((t, n) => t[0] - n[0] || t[1] - n[1]);
         let n = [t[0]];
@@ -25934,7 +25934,7 @@
                 isMatch: m,
                 score: m ? p / this.chunks.length : 1
             };
-            return m && o && (h.indices = t9(d)), h
+            return m && o && (h.indices = t7(d)), h
         }
         constructor(t, {
             location: n = t6.location,
@@ -26333,7 +26333,7 @@
         }
         setCollection(t, n) {
             if (this._docs = t, n && !(n instanceof t8)) throw Error("Incorrect 'index' type");
-            if (this._myIndex = n || t7(this.options.keys, this._docs, {
+            if (this._myIndex = n || t9(this.options.keys, this._docs, {
                     getFn: this.options.getFn,
                     fieldNormWeight: this.options.fieldNormWeight
                 }), this.options.useTokenSearch) {
@@ -26661,7 +26661,7 @@
             }, this.options.useExtendedSearch, this.options.useTokenSearch, this._keyStore = new t2(this.options.keys), this._docs = t, this._myIndex = null, this._invertedIndex = null, this.setCollection(t, r), this._lastQuery = null, this._lastSearcher = null
         }
     }
-    nS.version = "7.4.0", nS.createIndex = t7, nS.parseIndex = function(t) {
+    nS.version = "7.4.0", nS.createIndex = t9, nS.parseIndex = function(t) {
         let {
             getFn: n = t6.getFn,
             fieldNormWeight: r = t6.fieldNormWeight
@@ -26720,7 +26720,7 @@
                         isMatch: !0,
                         score: s / i
                     };
-                    return u && (t.hasInverse = !0), r && (t.indices = t9(l)), t
+                    return u && (t.hasInverse = !0), r && (t.indices = t7(l)), t
                 }
             }
             return {
@@ -26836,7 +26836,7 @@
                 isMatch: !0,
                 score: Math.max(.001, o > 0 ? 1 - r / o : 0)
             };
-            return this.options.includeMatches && n.length && (s.indices = t9(n)), this.combineAll && (this.useMask ? s.matchedMask = i : s.matchedTerms = l, s.termCount = this.numTerms), s
+            return this.options.includeMatches && n.length && (s.indices = t7(n)), this.combineAll && (this.useMask ? s.matchedMask = i : s.matchedTerms = l, s.termCount = this.numTerms), s
         }
         constructor(t, n) {
             this.options = n, this.analyzer = nC({
@@ -26965,10 +26965,10 @@
         }
         static async getDataset(t) {
             let r;
-            if ("titles" === n.default.env.recommendedSearchType) r = nx("https://assets.create.roblox.com/4c911cd452dcbbc3cd49c7458128a242d2a87e28", "data", "searchRecommendations", "titles", "".concat(t.toLocaleLowerCase(), ".json"));
+            if ("titles" === n.default.env.recommendedSearchType) r = nx("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a", "data", "searchRecommendations", "titles", "".concat(t.toLocaleLowerCase(), ".json"));
             else {
                 if (!nT()) return [];
-                r = nx("https://assets.create.roblox.com/4c911cd452dcbbc3cd49c7458128a242d2a87e28", "data", "searchRecommendations", "scoredTitles", "".concat(t.toLocaleLowerCase(), ".json"))
+                r = nx("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a", "data", "searchRecommendations", "scoredTitles", "".concat(t.toLocaleLowerCase(), ".json"))
             }
             let o = await fetch(r),
                 a = await o.json();
@@ -27298,10 +27298,10 @@
         },
         n6 = /\/dashboard\/creations\/experiences\/(\d+)/,
         n8 = " ▪ ",
-        n7 = {
+        n9 = {
             Icon: () => null
         },
-        n9 = (t, n) => t.label ? "string" == typeof t.label ? t.label : "object" == typeof t.label && "translationKey" in t.label ? n(t.label.translationKey, t.label.translationKeyParams) : "" : "",
+        n7 = (t, n) => t.label ? "string" == typeof t.label ? t.label : "object" == typeof t.label && "translationKey" in t.label ? n(t.label.translationKey, t.label.translationKeyParams) : "" : "",
         re = (t, n) => {
             var r;
             return n(t.type && null != (r = n5[t.type]) ? r : "Label.Article")
@@ -28088,7 +28088,7 @@
                 translate: x
             } = (0, o.useTranslation)(), {
                 robloxSiteDomain: A
-            } = tx(), T = "".concat(tw(A), "/docs"), k = (0, a.useMemo)(() => n9(l, x), [l, x]), D = (0, a.useMemo)(() => {
+            } = tx(), T = "".concat(tw(A), "/docs"), k = (0, a.useMemo)(() => n7(l, x), [l, x]), D = (0, a.useMemo)(() => {
                 var t;
                 return !!(null != (t = l.hubBreadcrumb) ? t : l.authorName)
             }, [l]), j = (0, a.useMemo)(() => rR(l.title), [l.title]), _ = (0, a.useMemo)(() => rR(l.description), [l.description]), L = D ? a.default.createElement(c.Typography, {
@@ -28275,7 +28275,7 @@
                 n.unobserve(t), n.disconnect(), A.cancel()
             }
         }, [_, y, v, A]);
-        let L = (0, a.useMemo)(() => n9(u, T), [u, T]),
+        let L = (0, a.useMemo)(() => n7(u, T), [u, T]),
             F = u.documentationContentType !== tN.Store && (null == (l = u.path) ? void 0 : l.startsWith("http"));
         return a.default.createElement("div", {
             ref: _
@@ -28327,7 +28327,7 @@
             onKeyDown: t => {
                 nO(t) && l(n.id)
             }
-        }), [n.id, n.title, l, u]), d = (0, a.useMemo)(() => n9(n, u), [n, u]), p = null != s ? s : rt(n, d, u);
+        }), [n.id, n.title, l, u]), d = (0, a.useMemo)(() => n7(n, u), [n, u]), p = null != s ? s : rt(n, d, u);
         return a.default.createElement("a", {
             tabIndex: -1,
             href: n.path,
@@ -28494,7 +28494,7 @@
                 onClickItem: w,
                 className: t.className,
                 ariaLabel: t.ariaLabel,
-                endAdornment: n7,
+                endAdornment: n9,
                 impressionContext: m ? {
                     ...m,
                     rank: n
@@ -29472,10 +29472,10 @@
             })))
         };
     var r8 = ((tf = {}).Hidden = "Hidden", tf.NotReplicated = "NotReplicated", tf.ReadOnly = "ReadOnly", tf.NotScriptable = "NotScriptable", tf.NotBrowsable = "NotBrowsable", tf.NotCreatable = "NotCreatable", tf.CanYield = "CanYield", tf.Yields = "Yields", tf.NoYield = "NoYield", tf.Service = "Service", tf.PlayerReplicated = "PlayerReplicated", tf.OpenCloudSecurity = "OpenCloudSecurity", tf.PluginSecurity = "PluginSecurity", tf.CustomLuaState = "CustomLuaState", tf.Deprecated = "Deprecated", tf.Settings = "Settings", tf.UserSettings = "UserSettings", tf),
-        r7 = ((tg = {}).OutputOnly = "OutputOnly", tg.InputOnly = "InputOnly", tg.Required = "Required", tg.Immutable = "Immutable", tg.Deprecated = "Deprecated", tg.Beta = "Beta", tg.Experimental = "Experimental", tg.Stable = "Stable", tg.RecommendedAlternatives = "RecommendedAlternatives", tg);
-    let r9 = t => {
+        r9 = ((tg = {}).OutputOnly = "OutputOnly", tg.InputOnly = "InputOnly", tg.Required = "Required", tg.Immutable = "Immutable", tg.Deprecated = "Deprecated", tg.Beta = "Beta", tg.Experimental = "Experimental", tg.Stable = "Stable", tg.RecommendedAlternatives = "RecommendedAlternatives", tg);
+    let r7 = t => {
             let n = String(t).toLowerCase();
-            return n === r8.Deprecated.toLowerCase() || n === r7.Deprecated.toLowerCase()
+            return n === r8.Deprecated.toLowerCase() || n === r9.Deprecated.toLowerCase()
         },
         oe = (t, n) => {
             let r = 0 === t.length ? {} : t.reduce((t, n) => {
@@ -29543,7 +29543,7 @@
                 translate: i
             } = t, l = (0, a.useRef)(null), {
                 onKeyDownSearch: s
-            } = nW(l), [u, d] = (0, a.useState)(n7);
+            } = nW(l), [u, d] = (0, a.useState)(n9);
             return a.default.createElement(b.ListItem, {
                 key: n,
                 ref: l,
@@ -29559,7 +29559,7 @@
                     })
                 },
                 onBlur: () => {
-                    d(n7)
+                    d(n9)
                 },
                 onClick: () => {
                     r(n)
@@ -30106,7 +30106,7 @@
                                 documentationSubType: t.documentationSubType,
                                 documentationThirdType: t.documentationThirdType,
                                 categoryTranslationLabels: tW(t),
-                                deprecated: null != (a = (t.documentationContentType === tN.LuaAPI || t.documentationContentType === tN.CloudAPI) && (null == (p = t.tags) ? void 0 : p.some(r9))) && a,
+                                deprecated: null != (a = (t.documentationContentType === tN.LuaAPI || t.documentationContentType === tN.CloudAPI) && (null == (p = t.tags) ? void 0 : p.some(r7))) && a,
                                 isSemantic: null != (l = i.isSemantic) && l,
                                 isQueryUnderstandApplied: i.isQueryUnderstandApplied,
                                 createdAtUtc: null != (u = t.createdAtUtc) ? u : "",
@@ -32787,5 +32787,5 @@
     }])
 }]);
 
-//# debugId=56c9edfc-8dac-b4a1-30a7-e6a6128528cd
-//# sourceMappingURL=1mbmihe5dz178.js.map
+//# debugId=aabfbedb-62f0-bb5b-7571-d60e7bcef44e
+//# sourceMappingURL=0zi33tw42ttd6.js.map

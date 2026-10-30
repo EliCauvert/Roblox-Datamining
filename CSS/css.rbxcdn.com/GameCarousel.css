@@ -3275,23 +3275,23 @@ button.btn-common-play-game-unplayable-lg {
     opacity: 0
 }
 
-.light-theme .sdui-tile-image-container:has(img.loading) {
+.light-theme .sdui-tile-image-container:has(img.loading, img.sdui-thumbnail-loading) {
     background-repeat: no-repeat;
     background-size: 100% 100%;
     animation: 1.7s linear infinite placeholderShimmer
 }
 
-.dark-theme .sdui-tile-image-container:has(img.loading) {
+.dark-theme .sdui-tile-image-container:has(img.loading, img.sdui-thumbnail-loading) {
     background-repeat: no-repeat;
     background-size: 100% 100%;
     animation: 1.7s linear infinite placeholderShimmer
 }
 
-.light-theme .sdui-tile-image-container:has(img.loading) {
+.light-theme .sdui-tile-image-container:has(img.loading, img.sdui-thumbnail-loading) {
     background-image: linear-gradient(to right, transparent, var(--color-extended-black-30)50%, transparent)
 }
 
-.dark-theme .sdui-tile-image-container:has(img.loading) {
+.dark-theme .sdui-tile-image-container:has(img.loading, img.sdui-thumbnail-loading) {
     background-image: linear-gradient(to right, transparent, var(--color-extended-white-30)50%, transparent)
 }
 
@@ -3545,10 +3545,6 @@ button.btn-common-play-game-unplayable-lg {
         padding-left: 0;
         padding-right: 0
     }
-}
-
-.no-gutter-ads.logged-in:not(.left-nav-new-width) main.container-main:not(.no-header-nav) .content {
-    margin-left: var(--left-nav-reserved-width)
 }
 
 .games-page-container .body-sorts {

@@ -1,5 +1,5 @@
-; // bundle: pageEnd___cd7e1d5fd94ac8ec0814372afd7e90d9_m
-; // files: ~/Generated/js/Roblox_TranslationResources_Common_PresenceResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_LoginResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_OneTimePasscodeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_CaptchaResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ForceAuthenticatorResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ForceTwoStepVerificationResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ProofOfWorkChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ReauthenticationResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_RostileChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_SecurityQuestionsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_PrivateAccessTokenChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_DeviceIntegrityChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_VerificationUpsellResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AccountSettingsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_AccountSwitchResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_ControlsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_RecommendationsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ProfileBadgesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_FeaturesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_MessagesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Common_AlertsAndOptionsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Common_VisitGameResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_DownloadLandingResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ShopDialogResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Purchasing_RedeemGameCardResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_NotApprovedResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_PasskeyResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_TrackingResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AccountSecurityPromptResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_IdVerificationResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AgeVerificationUpsellResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ParentsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_FriendsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Verification_IdentityResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Common_AssetTypesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Purchasing_PurchaseDialogResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_TradesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Notifications_NotificationStreamResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_PlayerSearchResultsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ReportAbuseResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_PremiumResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ItemResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ItemModelResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ChatResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AppealsPortalResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_GameLaunchGuestModeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_UserAgreementsResources_en_us_standard.js
+; // bundle: pageEnd___84bdf1545879acc935e2412f01a2add0_m
+; // files: ~/Generated/js/Roblox_TranslationResources_Common_PresenceResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_LoginResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_OneTimePasscodeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_CaptchaResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_MessagesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ForceAuthenticatorResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ForceTwoStepVerificationResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ProofOfWorkChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ReauthenticationResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_RostileChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_SecurityQuestionsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_PrivateAccessTokenChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_DeviceIntegrityChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_VerificationUpsellResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AccountSettingsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_AccountSwitchResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_ControlsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_RecommendationsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ProfileBadgesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_FeaturesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Common_AlertsAndOptionsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Common_VisitGameResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_DownloadLandingResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ShopDialogResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Purchasing_RedeemGameCardResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_NotApprovedResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_PasskeyResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_TrackingResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AccountSecurityPromptResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_IdVerificationResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AgeVerificationUpsellResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ParentsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_FriendsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Verification_IdentityResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Common_AssetTypesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Purchasing_PurchaseDialogResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_TradesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Notifications_NotificationStreamResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_PlayerSearchResultsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ReportAbuseResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_PremiumResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ItemResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ItemModelResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ChatResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AppealsPortalResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_GameLaunchGuestModeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_UserAgreementsResources_en_us_standard.js
 
 ; // ~/Generated/js/Roblox_TranslationResources_Common_PresenceResources_en_us_standard.js
 var Roblox = Roblox || {};
@@ -237,6 +237,58 @@ Roblox.Lang['Authentication.Captcha'] = {
     "Response.CaptchaNotEnteredError": "Please fill out the Captcha"
 };
 Roblox.Lang['CaptchaResources'] = Roblox.Lang['Authentication.Captcha'];
+
+; // ~/Generated/js/Roblox_TranslationResources_CommonUI_MessagesResources_en_us_standard.js
+var Roblox = Roblox || {};
+Roblox.Lang = Roblox.Lang || {};
+Roblox.Lang['CommonUI.Messages'] = {
+    "Action.Accept": "Accept All",
+    "Action.Decline": "Decline All",
+    "Action.OK": "OK",
+    "Action.PreviousPage": "Go to the Previous Page",
+    "Action.ReturnHome": "Return Home",
+    "CookieLawNoticev2": "Roblox uses cookies to personalize content, provide social media features and analyze the traffic on our site. To learn about how we use cookies and how you can {startLink}manage cookie preferences{endLink}, please refer to our {startLink2}Privacy and Cookie Policy{endLink2}.",
+    "Description.ErrorPageCheckStatus": "If you continue to receive this message, check out {startLink}our status{endLink}.",
+    "Label.Error": "Error",
+    "Label.ErrorImage": "Error Image",
+    "Label.TooManyCharacters": "Too many characters!",
+    "Message.AlwaysAllowed": "Always allowed",
+    "Message.AnalyiticsCookies": "Analytics Cookies",
+    "Message.AnalyiticsCookiesDescription": "These cookies used for improving site performance or understanding site usage.",
+    "Message.AnalyiticsCookiesItem1": "Google Analytics",
+    "Message.AnalyiticsCookiesItem2": "Google Universal Analytics",
+    "Message.CDRedirection": "This page has been migrated to the Creator Dashboard. You can use the updated page by clicking.",
+    "Message.CDRedirectionLinkText": "[here]",
+    "Message.CDRedirectionMessage": "This page has been migrated to the Creator Dashboard. You can use the updated page by clicking {linkText}.",
+    "Message.CookieLawNotice": "Roblox uses cookies to offer you a better experience. For further information, including information on how to withdraw consent and how to manage the use of cookies on Roblox, please refer to our {startLink}Privacy and Cookie Policy{endLink}.",
+    "Message.CookieLawNoticev2": "Roblox uses cookies to personalize content, provide social media features and analyze the traffic on our site. To learn about how we use cookies and how you can {startLink}manage cookie preferences{endLink}, please refer to our {startLink2}Privacy and Cookie Policy{endLink2}.",
+    "Message.CookieModalText": "Please choose whether this site may use cookies as described below. You can learn more about how this site uses cookies and related technologies by reading our {startLink}privacy policy{endLink}.",
+    "Message.ErrorGeneral": "Something went wrong. Please check back in a few minutes.",
+    "Message.EssentialCookies": "Essential Cookies",
+    "Message.EssentialCookiesDescription": "These cookies are required to provide the functionality on the site, such as for user authentication, securing the system or saving cookie preferences.",
+    "Message.EssentialCookiesItem1": "Roblox",
+    "Message.EssentialCookiesItem2": "Zendesk",
+    "Message.ManageCookies": "Manage Cookies",
+    "Message.OperationUnavailable": "The operation is temporarily unavailable. Please try again later.",
+    "Message.RequestSizeOverLimit": "Request size was over limit.",
+    "Message.TextWasModerated": "Text was moderated.",
+    "MessageEssentialCookiesItem3": "Gigya",
+    "Response.AccessDenied": "Access Denied",
+    "Response.AccessDeniedDescription": "You don't have permission to view this page",
+    "Response.BadRequest": "Bad Request",
+    "Response.BadRequestDescription": "There was a problem with your request",
+    "Response.InternalServerError": "Internal Server Error",
+    "Response.InternalServerErrorDescription": "An unexpected error occurred",
+    "Response.PageNotFound": "Page Not found",
+    "Response.PageNotFoundDescrition": "Page cannot be found or no longer exists",
+    "Response.RequestError": "Error with your request",
+    "Response.SomethingWentWrong": "Something went wrong",
+    "Response.TooManyAttemptsText": "Too Many Attempts",
+    "Response.UnexpectedError": "An unexpected error occurred. Please try again later.",
+    "Response.UnsafeInput": "You are not allowed to use HTML characters such as <b> in forms on the website.",
+    "Title.UnsafeInput": "Unsafe Input"
+};
+Roblox.Lang['MessagesResources'] = Roblox.Lang['CommonUI.Messages'];
 
 ; // ~/Generated/js/Roblox_TranslationResources_Feature_ForceAuthenticatorResources_en_us_standard.js
 var Roblox = Roblox || {};
@@ -842,58 +894,6 @@ Roblox.Lang['CommonUI.Features'] = {
     "Lable.sBuyRobux": "Buy Robux"
 };
 Roblox.Lang['FeaturesResources'] = Roblox.Lang['CommonUI.Features'];
-
-; // ~/Generated/js/Roblox_TranslationResources_CommonUI_MessagesResources_en_us_standard.js
-var Roblox = Roblox || {};
-Roblox.Lang = Roblox.Lang || {};
-Roblox.Lang['CommonUI.Messages'] = {
-    "Action.Accept": "Accept All",
-    "Action.Decline": "Decline All",
-    "Action.OK": "OK",
-    "Action.PreviousPage": "Go to the Previous Page",
-    "Action.ReturnHome": "Return Home",
-    "CookieLawNoticev2": "Roblox uses cookies to personalize content, provide social media features and analyze the traffic on our site. To learn about how we use cookies and how you can {startLink}manage cookie preferences{endLink}, please refer to our {startLink2}Privacy and Cookie Policy{endLink2}.",
-    "Description.ErrorPageCheckStatus": "If you continue to receive this message, check out {startLink}our status{endLink}.",
-    "Label.Error": "Error",
-    "Label.ErrorImage": "Error Image",
-    "Label.TooManyCharacters": "Too many characters!",
-    "Message.AlwaysAllowed": "Always allowed",
-    "Message.AnalyiticsCookies": "Analytics Cookies",
-    "Message.AnalyiticsCookiesDescription": "These cookies used for improving site performance or understanding site usage.",
-    "Message.AnalyiticsCookiesItem1": "Google Analytics",
-    "Message.AnalyiticsCookiesItem2": "Google Universal Analytics",
-    "Message.CDRedirection": "This page has been migrated to the Creator Dashboard. You can use the updated page by clicking.",
-    "Message.CDRedirectionLinkText": "[here]",
-    "Message.CDRedirectionMessage": "This page has been migrated to the Creator Dashboard. You can use the updated page by clicking {linkText}.",
-    "Message.CookieLawNotice": "Roblox uses cookies to offer you a better experience. For further information, including information on how to withdraw consent and how to manage the use of cookies on Roblox, please refer to our {startLink}Privacy and Cookie Policy{endLink}.",
-    "Message.CookieLawNoticev2": "Roblox uses cookies to personalize content, provide social media features and analyze the traffic on our site. To learn about how we use cookies and how you can {startLink}manage cookie preferences{endLink}, please refer to our {startLink2}Privacy and Cookie Policy{endLink2}.",
-    "Message.CookieModalText": "Please choose whether this site may use cookies as described below. You can learn more about how this site uses cookies and related technologies by reading our {startLink}privacy policy{endLink}.",
-    "Message.ErrorGeneral": "Something went wrong. Please check back in a few minutes.",
-    "Message.EssentialCookies": "Essential Cookies",
-    "Message.EssentialCookiesDescription": "These cookies are required to provide the functionality on the site, such as for user authentication, securing the system or saving cookie preferences.",
-    "Message.EssentialCookiesItem1": "Roblox",
-    "Message.EssentialCookiesItem2": "Zendesk",
-    "Message.ManageCookies": "Manage Cookies",
-    "Message.OperationUnavailable": "The operation is temporarily unavailable. Please try again later.",
-    "Message.RequestSizeOverLimit": "Request size was over limit.",
-    "Message.TextWasModerated": "Text was moderated.",
-    "MessageEssentialCookiesItem3": "Gigya",
-    "Response.AccessDenied": "Access Denied",
-    "Response.AccessDeniedDescription": "You don't have permission to view this page",
-    "Response.BadRequest": "Bad Request",
-    "Response.BadRequestDescription": "There was a problem with your request",
-    "Response.InternalServerError": "Internal Server Error",
-    "Response.InternalServerErrorDescription": "An unexpected error occurred",
-    "Response.PageNotFound": "Page Not found",
-    "Response.PageNotFoundDescrition": "Page cannot be found or no longer exists",
-    "Response.RequestError": "Error with your request",
-    "Response.SomethingWentWrong": "Something went wrong",
-    "Response.TooManyAttemptsText": "Too Many Attempts",
-    "Response.UnexpectedError": "An unexpected error occurred. Please try again later.",
-    "Response.UnsafeInput": "You are not allowed to use HTML characters such as <b> in forms on the website.",
-    "Title.UnsafeInput": "Unsafe Input"
-};
-Roblox.Lang['MessagesResources'] = Roblox.Lang['CommonUI.Messages'];
 
 ; // ~/Generated/js/Roblox_TranslationResources_Common_AlertsAndOptionsResources_en_us_standard.js
 var Roblox = Roblox || {};
@@ -1635,7 +1635,7 @@ Roblox.Lang['Feature.Parents'] = {
     "Action.RestartSession": "Restart Session",
     "Action.ReviewRequest": "Review Request",
     "Action.SendAnotherEmail": "Send Another Email",
-    "Description.AllSet": "You’ve already responded to this request",
+    "Description.AllSet": "This request has already been answered",
     "Description.AutoUnlink": "Once your child reaches the age of majority, your accounts will automatically unlink. ",
     "Description.CantLinkAccountCurrentChild": "We can’t link your account to another child account. To complete your child’s request, enter a different parent email on your child’s device.",
     "Description.ChargebackConsent": "Your child’s account was locked due to unauthorized charges.{breakLine}As a parent, you can now give your child permission to unlock their account. ",

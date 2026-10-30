@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "bc702131-25ce-6532-7b1f-9a122ef438c4")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "76d885b4-48e0-628c-2228-ac9e0556c6d6")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 138726, e => {
@@ -11,21 +11,22 @@
     var t = e.i(221628),
         n = e.i(416340),
         i = e.i(589624),
-        r = e.i(458451),
-        o = e.i(725924),
-        s = e.i(969687),
-        a = e.i(222634),
-        l = e.i(695763),
-        u = e.i(71375),
-        c = e.i(829425);
-    let d = (0, l.makeStyles)()(e => ({
+        r = e.i(80768),
+        o = e.i(458451),
+        s = e.i(725924),
+        a = e.i(969687),
+        l = e.i(222634),
+        u = e.i(695763),
+        c = e.i(71375),
+        d = e.i(829425);
+    let f = (0, u.makeStyles)()(e => ({
         loading: {
             width: "50%",
             maxWidth: 250,
             margin: "250px auto"
         },
         background: {
-            ...(0, s.getWebViewLoadingStyles)(),
+            ...(0, a.getWebViewLoadingStyles)(),
             height: "100%",
             width: "100%",
             margin: "0"
@@ -47,43 +48,50 @@
     }));
     e.s(["default", 0, e => {
         let {
-            children: s
+            children: a
         } = e, {
             classes: {
-                loading: l,
-                content: f,
-                background: h
+                loading: u,
+                content: h,
+                background: v
             }
-        } = d(), {
-            status: v,
-            login: g
-        } = (0, r.useRobloxAuthentication)(), m = (0, o.usePolyfills)();
-        return ((0, n.useEffect)(() => {
-            "unauthenticated" === v && g(), "logged-out" === v && i.default.push(c.creatorHub.getUrl())
-        }, [g, v]), "initial" !== v && "loading" !== v && m) ? "error" === v ? (0, t.jsx)("div", {
-            className: h,
+        } = f(), {
+            status: g,
+            user: m,
+            login: w
+        } = (0, o.useRobloxAuthentication)(), x = (0, s.usePolyfills)(), [p, b] = (0, n.useState)(!1);
+        (0, n.useEffect)(() => {
+            "unauthenticated" === g && w().catch(e => {
+                (0, r.captureException)(e), b(!0)
+            }), "logged-out" === g && i.default.push(d.creatorHub.getUrl())
+        }, [w, g]);
+        let y = (0, t.jsx)("div", {
+            className: v,
             children: (0, t.jsx)("div", {
-                className: f,
-                children: (0, t.jsx)(u.default, {
+                className: h,
+                children: (0, t.jsx)(l.LinearProgress, {
+                    classes: {
+                        root: u
+                    },
+                    title: "loading"
+                })
+            })
+        });
+        return "initial" !== g && "loading" !== g && x ? "error" === g || p ? (0, t.jsx)("div", {
+            className: v,
+            children: (0, t.jsx)("div", {
+                className: h,
+                children: (0, t.jsx)(c.default, {
                     onReload: () => {
                         i.default.reload()
                     }
                 })
             })
-        }) : (0, t.jsx)(t.Fragment, {
-            children: s
-        }) : (0, t.jsx)("div", {
-            className: h,
-            children: (0, t.jsx)("div", {
-                className: f,
-                children: (0, t.jsx)(a.LinearProgress, {
-                    classes: {
-                        root: l
-                    },
-                    title: "loading"
-                })
-            })
-        })
+        }) : "moderated" === g ? (0, t.jsx)(t.Fragment, {
+            children: a
+        }) : "success" !== g || null === m ? y : (0, t.jsx)(t.Fragment, {
+            children: a
+        }) : y
     }])
 }, 776344, e => {
     "use strict";
@@ -981,15 +989,15 @@
                     return i && i.length > 1 ? i[1] : ""
                 })(), []), N = (0, f.useCallback)((e, t) => y.setListener(e, t), [y]), A = (0, f.useCallback)((e, t) => {
                     y.removeListener(e, t)
-                }, [y]), [D, O] = (0, v.useSessionStorage)("web_view_theme_override", null), [V, B] = (0, v.useSessionStorage)("web_view_locale_override", null), j = u.get("locale"), R = I(j);
+                }, [y]), [D, O] = (0, v.useSessionStorage)("web_view_theme_override", null), [V, j] = (0, v.useSessionStorage)("web_view_locale_override", null), B = u.get("locale"), R = I(B);
                 (0, f.useEffect)(() => {
                     let e = u.get("mockWebview"),
                         t = "true" === l.default.env.NEXT_PUBLIC_MOCK_WEB_VIEW || "true" === e;
                     if (a || (t ? h(!0) : "false" === e && h(!1)), m) {
                         let e = u.get("theme");
-                        e && O(e.includes("light") ? w.LightFoundation : w.DarkFoundation), R ? B(R) : j && console.warn("Ignoring unsupported mocked Studio locale: ".concat(j))
+                        e && O(e.includes("light") ? w.LightFoundation : w.DarkFoundation), R ? j(R) : B && console.warn("Ignoring unsupported mocked Studio locale: ".concat(B))
                     }
-                }, [a, u, h, j, R, B, O, m]);
+                }, [a, u, h, B, R, j, O, m]);
                 let P = (0, f.useMemo)(() => {
                         let e = p && 1 ? C().theme : x;
                         return null != D ? D : e
@@ -1041,5 +1049,5 @@
     }])
 }]);
 
-//# debugId=bc702131-25ce-6532-7b1f-9a122ef438c4
-//# sourceMappingURL=3y33kw_1zcf-1.js.map
+//# debugId=76d885b4-48e0-628c-2228-ac9e0556c6d6
+//# sourceMappingURL=2ow0zeypz-j1m.js.map

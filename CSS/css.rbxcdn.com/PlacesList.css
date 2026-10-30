@@ -6816,10 +6816,6 @@ body {
     }
 }
 
-.no-gutter-ads.logged-in:not(.left-nav-new-width) main.container-main:not(.no-header-nav) .content {
-    margin-left: var(--left-nav-reserved-width)
-}
-
 .places-list {
     height: 274px
 }

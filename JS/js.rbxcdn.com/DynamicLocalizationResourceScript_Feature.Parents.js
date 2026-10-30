@@ -477,6 +477,16 @@ Roblox.LangDynamic["Feature.Parents"] = {
     "ODPChallenge.OdpHandoff.Headline": "Hand this device to your parent",
     "ODPChallenge.OdpHandoff.Body": "Once they confirm they're a parent, they can help with your ask and adjust your settings.",
     "ODPChallenge.OdpHandoff.ContinueLabel": "Continue as a parent",
+    "ODPChallenge.VerificationMethod.ContinueLabel": "Continue",
+    "ODPChallenge.VerificationMethod.Title": "Choose a verification method",
+    "ODPChallenge.VerificationMethod.Description": "Confirm you're an adult to manage your child's settings. We'll delete your personal information after processing.",
+    "ODPChallenge.VerificationMethod.OptionsLabel": "How to verify",
+    "ODPChallenge.VerificationMethod.FAE.Label": "Facial age estimation",
+    "ODPChallenge.VerificationMethod.FAE.Description": "Use your camera for a quick age estimate. It only takes a minute.",
+    "ODPChallenge.VerificationMethod.IDV.Label": "Government ID",
+    "ODPChallenge.VerificationMethod.IDV.Description": "Scan a government ID to verify your age.",
+    "ODPChallenge.VerificationMethod.CCV.Label": "Credit card",
+    "ODPChallenge.VerificationMethod.CCV.Description": "Verify quickly with a credit card. You’ll see a temporary hold, but we won’t charge you.",
     "Email.PrivatePlaytest.Subject": "Friend game previews are coming to Roblox",
     "Email.PrivatePlaytest.Intro": "Your child will soon be able to preview games created by friends in similar age groups or trusted friends, before they're available in our games catalog for kids and young teens. When your child tests a game, Roblox will conduct a preliminary review against our safety standards.",
     "Email.PrivatePlaytest.Control": "You can manage your child's game preview access anytime in {aTagWithHref}{parentalControlsLink}{hrefEnd}Parental Controls{htmlCloseAHref}.",
@@ -566,6 +576,7 @@ Roblox.LangDynamic["Feature.Parents"] = {
     "Heading.ConversationalRequest.BlockExperience": "Do you want to block this game for your child?",
     "Heading.ConversationalRequest.ApproveExperience": "Do you want to approve this game for your child?",
     "Heading.ConversationalRequest.BlockUser": "Do you want to block this user for your child?",
+    "ODPChallenge.VerificationMethod.HeaderTitle": "Parent mode",
     "ODPChallenge.Prologue.Action.ManageExperience": "unblock this experience",
     "ODPChallenge.Prologue.Action.ManageFriend": "unblock this user",
     "ODPChallenge.Prologue.Action.AddTrustedConnection": "add this trusted friend",
@@ -583,6 +594,10 @@ Roblox.LangDynamic["Feature.Parents"] = {
     "Description.VPCRequestDoNotDisturbTimeWindow": "Your child only gets notifications outside of the Do not disturb hours you set.",
     "Heading.ConversationalRequest.SpendNotifications": "Update notifications about your child's spending?",
     "Heading.ConversationalRequest.RevokeExperienceApproval": "Remove this game from your child’s list of allowed games?",
-    "Description.ConversationalRequest.RevokeExperienceApproval": "Your child won't be able to play it unless its content maturity rating is now considered right for their age."
+    "Description.ConversationalRequest.RevokeExperienceApproval": "Your child won't be able to play it unless its content maturity rating is now considered right for their age.",
+    "Label.RobloxKids": "Roblox Kids",
+    "Label.RobloxSelect": "Roblox Select",
+    "Label.Roblox": "Roblox",
+    "Label.ContentTierWithAges": "{tierName} • Ages {minAge}-{maxAge}"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Parents");

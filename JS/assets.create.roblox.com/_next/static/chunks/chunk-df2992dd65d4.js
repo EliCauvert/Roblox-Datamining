@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "b5bf3e38-5823-124f-2a48-8c03144ae8bb")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "c757021d-13f1-9a00-3f05-f8995fd40103")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 962059, e => {
@@ -14,7 +14,7 @@
         o = e.i(384621),
         r = e.i(138726),
         l = e.i(589624),
-        u = e.i(629450),
+        u = e.i(944672),
         d = e.i(79187),
         c = e.i(134731),
         m = e.i(671376),
@@ -103,9 +103,9 @@
             items: n
         })
     };
-    var E = e.i(562991),
-        P = e.i(489098),
-        k = e.i(36482),
+    var E = e.i(880343),
+        P = e.i(494118),
+        k = e.i(441515),
         N = e.i(197649);
     let L = () => a.default.createElement("div", {
             className: "flex items-center justify-center shrink-0 width-600"
@@ -252,16 +252,16 @@
                 fallback: r
             }) : r
         },
-        F = (0, a.createContext)({
+        q = (0, a.createContext)({
             isResolving: !1
         });
-    var q = e.i(814975),
-        V = e.i(252842),
+    var V = e.i(814975),
+        F = e.i(252842),
         G = e.i(533414),
         H = e.i(456810);
     let K = {
             sort: H.defaultAssetsSort,
-            sortOrder: V.SortOrder.Desc,
+            sortOrder: F.SortOrder.Desc,
             isArchived: !1,
             isPublishOnly: !1,
             isOnMarketplace: !1
@@ -271,7 +271,7 @@
                 children: t
             } = e, {
                 user: n
-            } = (0, q.useAuthentication)(), [s, o] = (0, G.useLocalStorage)("creationSort.".concat(null == n ? void 0 : n.id), K.sort), r = (0, a.useRef)(s), l = (0, a.useMemo)(() => {
+            } = (0, V.useAuthentication)(), [s, o] = (0, G.useLocalStorage)("creationSort.".concat(null == n ? void 0 : n.id), K.sort), r = (0, a.useRef)(s), l = (0, a.useMemo)(() => {
                 let e = r.current;
                 return Object.keys(s).some(t => s[t] !== e[t]) && (r.current = s), r.current
             }, [s]), [u, d] = (0, G.useLocalStorage)("creationSortOrder.".concat(null == n ? void 0 : n.id), K.sortOrder), [c, m] = (0, a.useState)(K.isArchived), [p, h] = (0, a.useState)(!1), [v, f] = (0, a.useState)(K.isPublishOnly), [x, g] = (0, a.useState)(K.isOnMarketplace), y = (0, a.useCallback)(() => {
@@ -300,7 +300,7 @@
         J = e.i(507742),
         Q = e.i(9618),
         X = e.i(37819),
-        Z = e.i(580683),
+        Z = e.i(830655),
         $ = e.i(537683),
         ee = e.i(714039),
         et = e.i(896852),
@@ -309,9 +309,9 @@
         ea = e.i(845592),
         es = e.i(339544),
         eo = e.i(475642),
-        er = e.i(278862),
-        el = e.i(711950),
-        eu = e.i(643992),
+        er = e.i(968892),
+        el = e.i(826246),
+        eu = e.i(973047),
         ed = e.i(211388);
     let ec = "CreatorHub.MomentsCreations.local",
         em = e => "".concat(ec, ".").concat(e),
@@ -438,7 +438,7 @@
     }, eO = {
         version: "1",
         moments: []
-    }, eD = e => "object" == typeof e && null !== e && !Array.isArray(e), e_ = e => eD(e) && "1" === e.version && Array.isArray(e.moments) ? e.moments : [], eU = e => "string" == typeof e ? e : void 0, eB = e => "number" == typeof e && Number.isFinite(e) ? e : void 0, ez = new Set(Object.values(d.Locale)), eF = e => e_(e).map(e => (e => {
+    }, eD = e => "object" == typeof e && null !== e && !Array.isArray(e), e_ = e => eD(e) && "1" === e.version && Array.isArray(e.moments) ? e.moments : [], eU = e => "string" == typeof e ? e : void 0, eB = e => "number" == typeof e && Number.isFinite(e) ? e : void 0, ez = new Set(Object.values(d.Locale)), eq = e => e_(e).map(e => (e => {
         var t, n, i, a, s, o;
         let r;
         if (!eD(e)) return null;
@@ -460,28 +460,28 @@
                 hasLocalVideo: e.hasLocalVideo
             } : {}
         }
-    })(e)).filter(e => null != e), eq = e => {
+    })(e)).filter(e => null != e), eV = e => {
         if (!e) return [];
         try {
             let t = JSON.parse(e);
-            return eF(t)
+            return eq(t)
         } catch (e) {
             return []
         }
-    }, eV = e => ({
+    }, eF = e => ({
         version: "1",
         moments: e
     }), eG = () => {
         let {
             user: e
-        } = (0, q.useAuthentication)(), t = null == e ? void 0 : e.id, n = null != t, i = n ? em(t) : ep, [s, o] = (0, G.useLocalStorage)(i, eO), r = (0, a.useMemo)(() => n ? eF(s) : [], [n, s]);
+        } = (0, V.useAuthentication)(), t = null == e ? void 0 : e.id, n = null != t, i = n ? em(t) : ep, [s, o] = (0, G.useLocalStorage)(i, eO), r = (0, a.useMemo)(() => n ? eq(s) : [], [n, s]);
         (0, a.useEffect)(() => {
             if (!n || null == t) return;
             let e = e_(s).filter(e => eD(e) && e.status !== ef).map(e => {
                 var t, n;
                 return eD(e) && null != (t = null != (n = eU(e.draftId)) ? n : eU(e.id)) ? t : ""
             }).filter(e => "" !== e);
-            0 !== e.length && (o(eV(r)), eR(t, e))
+            0 !== e.length && (o(eF(r)), eR(t, e))
         }, [n, r, s, o, t]);
         let l = (0, a.useCallback)((e, a) => {
                 var s, r, l;
@@ -492,7 +492,7 @@
                 let {
                     moments: u,
                     evictedMediaDraftIds: d
-                } = (l = eq(window.localStorage.getItem(i)), {
+                } = (l = eV(window.localStorage.getItem(i)), {
                     moments: [...e.map(e => {
                         var t;
                         return {
@@ -510,7 +510,7 @@
                         hasLocalVideo: !1
                     } : e)
                 })(u, null != (s = null == a ? void 0 : a.storageEvictedMediaDraftIds) ? s : []), m = [...new Set([...null != (r = null == a ? void 0 : a.storageEvictedMediaDraftIds) ? r : [], ...d])];
-                return o(eV(c)), m.length > 0 && eR(t, m), {
+                return o(eF(c)), m.length > 0 && eR(t, m), {
                     moments: c,
                     evictedMediaDraftIds: m
                 }
@@ -528,12 +528,12 @@
                         modifiedAt: new Date().toISOString()
                     }, a
                 })(r, e, i);
-                return a ? (o(eV(a)), a) : null
+                return a ? (o(eF(a)), a) : null
             }, [n, r, o, t]),
             c = (0, a.useCallback)(e => {
                 if (!n || null == t) return null;
                 let i = -1 === r.findIndex(t => t.draftId === e) ? null : r.filter(t => t.draftId !== e);
-                return i ? (o(eV(i)), eR(t, [e]), i) : null
+                return i ? (o(eF(i)), eR(t, [e]), i) : null
             }, [n, r, o, t]),
             m = (0, a.useCallback)(e => {
                 if (!n || null == t) return null;
@@ -546,7 +546,7 @@
                 if (!i) return null;
                 let a = new Set(e),
                     s = r.filter(e => a.has(e.draftId)).map(e => e.draftId);
-                return o(eV(i)), eR(t, s), i
+                return o(eF(i)), eR(t, s), i
             }, [n, r, o, t]);
         return {
             moments: r,
@@ -2528,7 +2528,7 @@
             let n;
             return null != t.momentId && (e.momentId = t.momentId), null != t.feedItemId && (e.feedItemId = t.feedItemId), null != t.draftId && (e.draftId = t.draftId), null != t.experienceId && (e.experienceId = String(t.experienceId)), null != t.placeId && (e.placeId = String(t.placeId)), null != t.fileCount && (e.fileCount = String(t.fileCount)), null != t.fileSize && (e.fileSize = String(t.fileSize)), null != t.fileType && t.fileType.length > 0 && (e.fileType = t.fileType), null != t.locale && t.locale.length > 0 && (e.locale = t.locale), null != t.inputValue && t.inputValue.length > 0 && (e.inputValue = (n = t.inputValue).length <= 200 ? n : n.slice(0, 200)), null != t.idType && (e.idType = t.idType), null != t.matchedId && (e.matchedId = String(t.matchedId)), null != t.userId && (e.userId = String(t.userId)), null != t.pageCount && (e.pageCount = String(t.pageCount)), null != t.momentCount && (e.momentCount = String(t.momentCount)), null != t.persistedVideoCount && (e.persistedVideoCount = String(t.persistedVideoCount)), null != t.isLocalMoment && (e.isLocalMoment = String(t.isLocalMoment)), null != t.universeIdCount && (e.universeIdCount = String(t.universeIdCount)), e
         },
-        tF = async (e, t) => {
+        tq = async (e, t) => {
             var n;
             let i = await (0, tD.default)(e),
                 a = e instanceof Error ? e.message : "string" == typeof e ? e : "Unknown error";
@@ -2539,7 +2539,7 @@
             } : {
                 reason: null != t ? t : a
             }
-        }, tq = function(e, t) {
+        }, tV = function(e, t) {
             let n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {};
             return {
                 eventName: t_.default.MomentsCreationsError,
@@ -2554,15 +2554,15 @@
                     } : {}
                 }, n)
             }
-        }, tV = async function(e, t) {
+        }, tF = async function(e, t) {
             let n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {},
                 i = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : tU.default,
-                a = await tF(t, n.reason);
-            i.logErrorEvent(tq(e, a, n))
+                a = await tq(t, n.reason);
+            i.logErrorEvent(tV(e, a, n))
         }, tG = function(e, t) {
             let n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {},
                 i = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : tU.default;
-            tV(e, t, n, i)
+            tF(e, t, n, i)
         }, tH = function(e) {
             let t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
             return {
@@ -3331,7 +3331,7 @@
                 s = (0, eH.useQueryClient)(),
                 {
                     user: o
-                } = (0, q.useAuthentication)(),
+                } = (0, V.useAuthentication)(),
                 r = nL() ? ey : eg;
             return {
                 statusTab: (e = null == n ? void 0 : Array.isArray(n) ? n[0] : n, (t = r.find(t => t === e)) || ef),
@@ -3355,7 +3355,7 @@
             try {
                 let s, o, {
                     evictedMediaDraftIds: r
-                } = await ek(e, t, n, (s = eq(window.localStorage.getItem(em(e))), o = new Set(i.map(e => e.draftId)), [...i, ...s.filter(e => !o.has(e.draftId))]));
+                } = await ek(e, t, n, (s = eV(window.localStorage.getItem(em(e))), o = new Set(i.map(e => e.draftId)), [...i, ...s.filter(e => !o.has(e.draftId))]));
                 return tY(tB.PersistLocalVideo, a), {
                     hasLocalVideo: !0,
                     storageEvictedMediaDraftIds: r
@@ -3404,19 +3404,19 @@
             })]
         })
     }, [ei.TranslationNamespace.Creations]);
-    var nU = e.i(809166),
+    var nU = e.i(756199),
         nB = e.i(392782);
     let nz = "UniverseId",
-        nF = "PlaceId",
-        nq = /(?:https?:\/\/)?create\.roblox\.com\/dashboard\/creations\/experiences\/(\d+)/,
-        nV = /(?:https?:\/\/)?(?:www\.)?roblox\.com(?:\/[A-Za-z]{2}(?:-[A-Za-z0-9]{2,3})?)?\/games\/(\d+)/,
+        nq = "PlaceId",
+        nV = /(?:https?:\/\/)?create\.roblox\.com\/dashboard\/creations\/experiences\/(\d+)/,
+        nF = /(?:https?:\/\/)?(?:www\.)?roblox\.com(?:\/[A-Za-z]{2}(?:-[A-Za-z0-9]{2,3})?)?\/games\/(\d+)/,
         nG = /^\d+$/,
         nH = [{
             regex: /(?:https?:\/\/)?create\.sitetest\d\.robloxlabs\.com\/dashboard\/creations\/experiences\/(\d+)/,
             idType: nz
         }, {
             regex: /(?:https?:\/\/)?(?:www\.)?sitetest\d\.robloxlabs\.com(?:\/[A-Za-z]{2}(?:-[A-Za-z0-9]{2,3})?)?\/games\/(\d+)/,
-            idType: nF
+            idType: nq
         }],
         nK = (0, d.withTranslation)(e => {
             let {
@@ -3428,11 +3428,11 @@
                 ready: o,
                 value: r
             } = (0, u.useFlag)(T.isMomentsSitetestUrlParsingEnabled), [l, c] = (0, a.useState)(""), [m, p] = (0, a.useState)(!1), [h, v] = (0, a.useState)(), f = (0, a.useMemo)(() => [{
-                regex: nq,
+                regex: nV,
                 idType: nz
             }, {
-                regex: nV,
-                idType: nF
+                regex: nF,
+                idType: nq
             }, ...o && null != r && r ? nH : [], {
                 regex: nG,
                 idType: nz
@@ -3461,7 +3461,7 @@
                 p(!0), v(void 0), tW(tB.ResolveExperience, h);
                 try {
                     let e;
-                    if (d.idType === nF) {
+                    if (d.idType === nq) {
                         let t = null == (r = (await nB.default.multigetPlaceDetails([m]))[0]) ? void 0 : r.universeId;
                         if (!t) {
                             tG(tB.ResolveExperience, "Experience not found", {
@@ -3490,12 +3490,12 @@
                     }), tY(tB.ResolveExperience, {
                         ...h,
                         experienceId: l.id,
-                        placeId: d.idType === nF ? m : void 0
+                        placeId: d.idType === nq ? m : void 0
                     }), c("")
                 } catch (e) {
                     tG(tB.ResolveExperience, e, {
                         ...h,
-                        placeId: d.idType === nF ? m : void 0,
+                        placeId: d.idType === nq ? m : void 0,
                         experienceId: d.idType === nz ? m : void 0
                     }), v(s("Error.ExperienceNotFound"))
                 } finally {
@@ -3534,8 +3534,8 @@
                 })]
             })
         }, [ei.TranslationNamespace.Creations, ei.TranslationNamespace.Controls]);
-    var nW = e.i(108872),
-        nY = e.i(152324);
+    var nW = e.i(222298),
+        nY = e.i(732749);
     let nJ = (0, d.withTranslation)(e => {
         let {
             value: t,
@@ -3779,7 +3779,7 @@
             } = (() => {
                 let {
                     user: e
-                } = (0, q.useAuthentication)(), [t, n] = (0, a.useState)(!1), [i, s] = (0, a.useState)(0);
+                } = (0, V.useAuthentication)(), [t, n] = (0, a.useState)(!1), [i, s] = (0, a.useState)(0);
                 return {
                     uploadVideo: (0, a.useCallback)(async t => {
                         let {
@@ -4011,7 +4011,7 @@
                 })
             })
         };
-    var n9 = e.i(591012);
+    var n9 = e.i(420028);
     let ie = e => {
             let {
                 tabs: t = eg,
@@ -4285,77 +4285,45 @@
             })
         };
     var iT = e.i(54842),
-        iC = e.i(801913),
-        iw = e.i(699297),
-        iS = e.i(848427),
-        iA = e.i(484541),
-        iM = e.i(485681),
-        ij = e.i(423581),
-        iE = e.i(243048),
-        iP = e.i(118922),
-        ik = e.i(519801),
-        iN = e.i(695073),
-        iL = e.i(611043),
-        iR = e.i(239328),
-        iO = e.i(776344),
-        iD = e.i(823062),
-        i_ = e.i(198528),
-        iU = e.i(949599),
-        iB = e.i(704443),
-        iz = e.i(696564),
-        iF = e.i(418162);
-    let iq = (0, id.makeStyles)()(e => ({
-        toolbarContainer: {
-            [e.breakpoints.down("Large")]: {
-                flexGrow: 1,
-                justifyContent: "space-between"
-            },
-            paddingLeft: 12
-        },
-        sortContainer: {
-            marginTop: -12,
-            [e.breakpoints.down("Large")]: {
-                marginTop: 0
-            }
-        },
-        labelText: {
-            marginRight: 26,
-            whiteSpace: "nowrap"
-        },
-        timedOptionsButton: {
-            marginLeft: 12,
-            marginRight: 12
-        },
-        timedOptionsButtonDivider: {
-            marginLeft: 12,
-            marginRight: 12
-        }
-    }));
-    var iV = e.i(547710),
-        iG = e.i(319266),
-        iH = e.i(157852),
-        iK = e.i(930669),
-        iW = e.i(230553),
-        iY = e.i(525861),
-        iJ = e.i(893502),
-        iQ = e.i(205357),
-        iX = e.i(46591),
-        iZ = e.i(459703),
-        i$ = e.i(913893),
-        i0 = e.i(185915);
+        iC = e.i(960916),
+        iw = e.i(610932),
+        iS = e.i(246602),
+        iA = e.i(239328),
+        iM = e.i(823062),
+        ij = e.i(198528),
+        iE = e.i(949599),
+        iP = e.i(704443),
+        ik = e.i(696564),
+        iN = e.i(848427),
+        iL = e.i(547710),
+        iR = e.i(319266),
+        iO = e.i(157852),
+        iD = e.i(484541),
+        i_ = e.i(485681),
+        iU = e.i(930669),
+        iB = e.i(230553),
+        iz = e.i(525861),
+        iq = e.i(893502),
+        iV = e.i(695073),
+        iF = e.i(205357),
+        iG = e.i(46591),
+        iH = e.i(611043),
+        iK = e.i(459703),
+        iW = e.i(913893),
+        iY = e.i(185915);
 
-    function i1(e) {
+    function iJ(e) {
         if (void 0 === e.id || void 0 === e.autoPublishEnabled) throw Error("Publishing preferences response was malformed");
         return e
     }
-    async function i2(e) {
-        return i1(await i$.default.getPublishingPreferences(e))
+    async function iQ(e) {
+        return iJ(await iW.default.getPublishingPreferences(e))
     }
-    async function i4(e) {
-        return i1(await i$.default.createPublishingPreferences(e))
+    async function iX(e) {
+        return iJ(await iW.default.createPublishingPreferences(e))
     }
-    var i5 = e.i(812141);
-    let i8 = e => {
+    var iZ = e.i(812141);
+    let i$ = e => {
         let {
             label: t,
             children: n,
@@ -4369,18 +4337,18 @@
                     className: "text-label-large ".concat(null != s ? s : ""),
                     children: t
                 }), n]
-            }), (0, i.jsx)(iA.Divider, {})]
+            }), (0, i.jsx)(iD.Divider, {})]
         })
     };
 
-    function i3(e) {
+    function i0(e) {
         return 4 === e || 2 === e
     }
 
-    function i6(e, t, n) {
+    function i1(e, t, n) {
         return e && t && "all" === n ? 1 : e && t && "specific" === n ? 4 : e && !t ? 3 : !e && t ? 2 : 0
     }
-    let i7 = e => {
+    let i2 = e => {
         var t;
         let {
             open: n,
@@ -4389,13 +4357,13 @@
             translate: o
         } = (0, d.useTranslation)(), {
             enqueue: r
-        } = (0, iZ.useSnackbar)(), {
+        } = (0, iK.useSnackbar)(), {
             user: l
-        } = (0, q.useAuthentication)(), u = (0, f.useCurrentGroup)(), c = null == u ? void 0 : u.id, {
+        } = (0, V.useAuthentication)(), u = (0, f.useCurrentGroup)(), c = null == u ? void 0 : u.id, {
             data: m
-        } = (0, i5.default)(i$.default), p = null != (t = null == m ? void 0 : m.maxCollectiblePrice) ? t : iz.DefaultMaxCollectiblePrice, [h, v] = (0, a.useState)(!0), [x, g] = (0, a.useState)(!1), [y, b] = (0, a.useState)(!1), [I, T] = (0, a.useState)(""), [C, w] = (0, a.useState)(""), [S, A] = (0, a.useState)(!0), [M, j] = (0, a.useState)(!0), [E, P] = (0, a.useState)(!0), [k, N] = (0, a.useState)("all"), [L, R] = (0, a.useState)(""), [O, D] = (0, a.useState)(!1);
+        } = (0, iZ.default)(iW.default), p = null != (t = null == m ? void 0 : m.maxCollectiblePrice) ? t : ik.DefaultMaxCollectiblePrice, [h, v] = (0, a.useState)(!0), [x, g] = (0, a.useState)(!1), [y, b] = (0, a.useState)(!1), [I, T] = (0, a.useState)(""), [C, w] = (0, a.useState)(""), [S, A] = (0, a.useState)(!0), [M, j] = (0, a.useState)(!0), [E, P] = (0, a.useState)(!0), [k, N] = (0, a.useState)("all"), [L, R] = (0, a.useState)(""), [O, D] = (0, a.useState)(!1);
         (0, a.useEffect)(() => {
-            n && i2(c).then(e => {
+            n && iQ(c).then(e => {
                 T(String(e.priceOffset)), w(e.priceInRobux > 0 ? String(e.priceInRobux) : ""), A(e.enableRegionalPricing), b(e.isRentalOptIn);
                 let t = function(e) {
                     switch (e) {
@@ -4420,7 +4388,7 @@
                 j(t.sellInMarketplace), P(t.sellInExperiences), N(t.experienceLocationMode), e.places.length > 0 && R(e.places.join(","))
             }).catch(e => {
                 var t;
-                (null == (t = (0, i0.default)(e)) ? void 0 : t.status) !== 404 && (D(!0), r({
+                (null == (t = (0, iY.default)(e)) ? void 0 : t.status) !== 404 && (D(!0), r({
                     message: o("Message.ErrorProcessingRequest"),
                     autoHide: !0,
                     autoHideDuration: 3e3,
@@ -4435,9 +4403,9 @@
                 if (null == l ? void 0 : l.id) {
                     g(!0);
                     try {
-                        let e = i6(M, E, k),
-                            t = i3(e) ? L.split(",").filter(Boolean).map(e => Number(e)) : [];
-                        await i4({
+                        let e = i1(M, E, k),
+                            t = i0(e) ? L.split(",").filter(Boolean).map(e => Number(e)) : [];
+                        await iX({
                             creatorUserId: l.id,
                             creatorGroupId: c,
                             publishingType: 2,
@@ -4485,7 +4453,7 @@
                 let t = e.target.value.replaceAll(/[^0-9]/g, "").replace(/^0+(\d)/, "$1");
                 ("" === t || +t <= p) && w(t)
             }, [p]),
-            F = (0, a.useCallback)(e => {
+            q = (0, a.useCallback)(e => {
                 let t = e.target.value.replaceAll(/[^0-9,]/g, "").replaceAll(/,{2,}/g, ",").replace(/^,/, "").split(",").map(e => e.replace(/^0+(\d)/, "$1")).filter(e => "0" !== e).join(","),
                     n = t.split(",").filter(Boolean);
                 if (!(n.length > 5)) {
@@ -4493,8 +4461,8 @@
                     R(t)
                 }
             }, []),
-            V = h || x || O || !M && !E || "" === I || "" === C || 0 >= Number(C) || i3(i6(M, E, k)) && 0 === L.split(",").filter(Boolean).length;
-        return (0, i.jsxs)(iV.Dialog, {
+            F = h || x || O || !M && !E || "" === I || "" === C || 0 >= Number(C) || i0(i1(M, E, k)) && 0 === L.split(",").filter(Boolean).length;
+        return (0, i.jsxs)(iL.Dialog, {
             open: n,
             onClose: s,
             maxWidth: "Medium",
@@ -4502,7 +4470,7 @@
             PaperProps: {
                 className: "[width:580px]"
             },
-            children: [(0, i.jsx)(iH.DialogTitle, {
+            children: [(0, i.jsx)(iO.DialogTitle, {
                 className: "padding-bottom-none",
                 children: (0, i.jsxs)("div", {
                     className: "flex justify-between items-start",
@@ -4514,29 +4482,29 @@
                         onClick: s,
                         size: "small",
                         color: "inherit",
-                        children: (0, i.jsx)(iK.CloseIcon, {})
+                        children: (0, i.jsx)(iU.CloseIcon, {})
                     })]
                 })
-            }), (0, i.jsxs)(iG.DialogContent, {
+            }), (0, i.jsxs)(iR.DialogContent, {
                 className: "padding-top-small",
-                children: [(0, i.jsx)(iL.Typography, {
+                children: [(0, i.jsx)(iH.Typography, {
                     variant: "body2",
                     className: "[opacity:0.7] padding-bottom-medium",
                     children: o("Description.StudioPublishSettingsSubtitle")
-                }), (0, i.jsx)(i8, {
+                }), (0, i.jsx)(i$, {
                     label: o("Label.Availability"),
                     children: (0, i.jsx)("span", {
                         className: "text-label-large [margin-left:12px]",
                         children: o("Label.NonLimited")
                     })
-                }), (0, i.jsx)(i8, {
+                }), (0, i.jsx)(i$, {
                     label: o("Label.TimedOption"),
-                    children: (0, i.jsx)(iN.Switch, {
+                    children: (0, i.jsx)(iV.Switch, {
                         checked: y,
                         onChange: () => b(e => !e),
                         "aria-label": "Timed Option"
                     })
-                }), (0, i.jsx)(i8, {
+                }), (0, i.jsx)(i$, {
                     label: o("Label.PriceConfigurations"),
                     className: "grid [grid-template-columns:175px_1fr] padding-y-large gap-xsmall",
                     labelClassName: "padding-top-small",
@@ -4544,7 +4512,7 @@
                         className: "flex flex-col [flex:1] gap-xsmall",
                         children: [(0, i.jsxs)("div", {
                             className: "flex items-center gap-xsmall",
-                            children: [(0, i.jsx)(iQ.TextField, {
+                            children: [(0, i.jsx)(iF.TextField, {
                                 id: "price-offset",
                                 label: "",
                                 placeholder: o("Placeholder.AmountAbovePriceFloor"),
@@ -4553,17 +4521,17 @@
                                 value: I,
                                 onChange: B,
                                 fullWidth: !0
-                            }), (0, i.jsx)(iX.Tooltip, {
+                            }), (0, i.jsx)(iG.Tooltip, {
                                 title: o("Tooltip.AmountAbovePriceFloor"),
                                 children: (0, i.jsx)(ir.IconButton, {
                                     "aria-label": "price offset info",
                                     size: "small",
-                                    children: (0, i.jsx)(iW.InfoOutlinedIcon, {})
+                                    children: (0, i.jsx)(iB.InfoOutlinedIcon, {})
                                 })
                             })]
                         }), (0, i.jsxs)("div", {
                             className: "flex items-center gap-xsmall",
-                            children: [(0, i.jsx)(iQ.TextField, {
+                            children: [(0, i.jsx)(iF.TextField, {
                                 id: "price-floor-minimum",
                                 label: "",
                                 placeholder: o("Placeholder.DoNotPriceBelow"),
@@ -4572,26 +4540,26 @@
                                 value: C,
                                 onChange: z,
                                 fullWidth: !0
-                            }), (0, i.jsx)(iX.Tooltip, {
+                            }), (0, i.jsx)(iG.Tooltip, {
                                 title: o("Tooltip.MinimumPriceFloor"),
                                 children: (0, i.jsx)(ir.IconButton, {
                                     "aria-label": "minimum price info",
                                     size: "small",
-                                    children: (0, i.jsx)(iW.InfoOutlinedIcon, {})
+                                    children: (0, i.jsx)(iB.InfoOutlinedIcon, {})
                                 })
                             })]
                         })]
                     })
-                }), (0, i.jsx)(i8, {
+                }), (0, i.jsx)(i$, {
                     label: o("Label.RegionalPricing"),
-                    children: (0, i.jsx)(iN.Switch, {
+                    children: (0, i.jsx)(iV.Switch, {
                         checked: S,
                         onChange: () => A(e => !e),
                         "aria-label": "Regional Pricing"
                     })
-                }), (0, i.jsx)(i8, {
+                }), (0, i.jsx)(i$, {
                     label: o("Label.SellInMarketplace"),
-                    children: (0, i.jsx)(iN.Switch, {
+                    children: (0, i.jsx)(iV.Switch, {
                         checked: M,
                         onChange: () => {
                             let e = !M;
@@ -4599,22 +4567,22 @@
                         },
                         "aria-label": "Sell in Marketplace"
                     })
-                }), (0, i.jsx)(i8, {
+                }), (0, i.jsx)(i$, {
                     label: o("Label.SellInExperiences"),
-                    children: (0, i.jsx)(iN.Switch, {
+                    children: (0, i.jsx)(iV.Switch, {
                         checked: E,
                         onChange: () => P(e => !e),
                         "aria-label": "Sell in experiences"
                     })
                 }), E && (0, i.jsxs)(i.Fragment, {
-                    children: [(0, i.jsx)(iA.Divider, {}), (0, i.jsxs)("div", {
+                    children: [(0, i.jsx)(iD.Divider, {}), (0, i.jsxs)("div", {
                         className: "padding-y-large",
                         children: [(0, i.jsxs)("div", {
                             className: "grid [grid-template-columns:175px_1fr] items-center",
                             children: [(0, i.jsx)("span", {
                                 className: "text-label-large",
                                 children: o("Label.ExperienceLocations")
-                            }), (0, i.jsxs)(iJ.RadioGroup, {
+                            }), (0, i.jsxs)(iq.RadioGroup, {
                                 row: !0,
                                 value: k,
                                 onChange: e => {
@@ -4622,18 +4590,18 @@
                                     ("all" === t || "specific" === t) && N(t)
                                 },
                                 className: "flex flex-row no-wrap gap-xsmall [margin-left:12px]",
-                                children: [(0, i.jsx)(iM.FormControlLabel, {
+                                children: [(0, i.jsx)(i_.FormControlLabel, {
                                     value: "all",
                                     disabled: !M,
-                                    control: (0, i.jsx)(iY.Radio, {
+                                    control: (0, i.jsx)(iz.Radio, {
                                         "aria-label": o("Label.AllGames"),
                                         size: "small"
                                     }),
                                     label: o("Label.AllGames"),
                                     className: "margin-right-medium"
-                                }), (0, i.jsx)(iM.FormControlLabel, {
+                                }), (0, i.jsx)(i_.FormControlLabel, {
                                     value: "specific",
-                                    control: (0, i.jsx)(iY.Radio, {
+                                    control: (0, i.jsx)(iz.Radio, {
                                         "aria-label": o("Label.SpecificExperiences"),
                                         size: "small"
                                     }),
@@ -4642,16 +4610,16 @@
                             })]
                         }), "specific" === k && (0, i.jsxs)("div", {
                             className: "[margin-left:187px] [margin-top:10px]",
-                            children: [(0, i.jsx)(iQ.TextField, {
+                            children: [(0, i.jsx)(iF.TextField, {
                                 id: "place-ids",
                                 label: "",
                                 placeholder: o("Placeholder.EnterExperienceIDs"),
                                 variant: "outlined",
                                 size: "small",
                                 value: L,
-                                onChange: F,
+                                onChange: q,
                                 fullWidth: !0
-                            }), (0, i.jsxs)(iL.Typography, {
+                            }), (0, i.jsxs)(iH.Typography, {
                                 variant: "caption",
                                 className: "[opacity:0.6] block [margin-top:4px]",
                                 children: [L ? L.split(",").filter(Boolean).length : 0, "/", 5, " ", o("Label.ExperiencesCount")]
@@ -4661,15 +4629,15 @@
                 })]
             }), (0, i.jsxs)("div", {
                 className: "flex padding-x-large padding-y-medium gap-small",
-                children: [(0, i.jsx)(iS.Button, {
+                children: [(0, i.jsx)(iN.Button, {
                     variant: "contained",
                     color: "primaryBrand",
                     onClick: U,
-                    disabled: V,
+                    disabled: F,
                     size: "large",
                     className: "[flex:1] radius-medium",
                     children: o("Action.Save")
-                }), (0, i.jsx)(iS.Button, {
+                }), (0, i.jsx)(iN.Button, {
                     variant: "contained",
                     color: "secondary",
                     onClick: s,
@@ -4680,9 +4648,10 @@
             })]
         })
     };
-    var i9 = e.i(464508),
-        ae = e.i(759283);
-    let at = (e, t) => {
+    var i4 = e.i(464508),
+        i5 = e.i(759283),
+        i8 = e.i(776344);
+    let i3 = (e, t) => {
         switch (null == e ? void 0 : e.code) {
             case void 0:
             default:
@@ -4745,9 +4714,10 @@
                 return "Message.GrantedItemCannotBePublished"
         }
     };
-    var an = e.i(614875),
-        ai = e.i(912359);
-    let aa = (0, id.makeStyles)()(e => ({
+    var i6 = e.i(202289),
+        i7 = e.i(912359),
+        i9 = e.i(418162);
+    let ae = (0, id.makeStyles)()(e => ({
             dialogPaper: {
                 minWidth: 376,
                 maxWidth: 480
@@ -4825,9 +4795,9 @@
                 minWidth: 0
             }
         })),
-        as = ["makeup", "clothing", "accessories"],
-        ao = ["clothing", "makeup"],
-        ar = {
+        at = ["makeup", "clothing", "accessories"],
+        an = ["clothing", "makeup"],
+        ai = {
             makeup: {
                 all: "Label.AllMakeup",
                 short: "Label.Makeup"
@@ -4842,10 +4812,10 @@
             }
         };
 
-    function al(e) {
-        return e ? ar.clothing.all : "Label.ClothingOnlyTShirtsPantsSweaters"
+    function aa(e) {
+        return e ? ai.clothing.all : "Label.ClothingOnlyTShirtsPantsSweaters"
     }
-    let au = (0, d.withTranslation)(e => {
+    let as = (0, d.withTranslation)(e => {
         let t, {
                 open: n,
                 onClose: s,
@@ -4858,14 +4828,14 @@
             {
                 classes: u,
                 cx: c
-            } = aa(),
+            } = ae(),
             {
                 enqueue: m,
                 close: p
-            } = (0, iZ.useSnackbar)(),
+            } = (0, iK.useSnackbar)(),
             h = (0, f.useCurrentGroup)(),
             v = !1 !== o.showCategorySubtypeDropdowns,
-            x = (0, a.useMemo)(() => v ? as : ao, [v]),
+            x = (0, a.useMemo)(() => v ? at : an, [v]),
             [g, y] = (0, a.useState)({
                 clothing: !1,
                 makeup: !1,
@@ -4930,24 +4900,24 @@
                 if (!r || null === A) return void s();
                 let e = x.flatMap(e => E[e] ? j[e].filter(e => b[e]) : []);
                 try {
-                    await i$.default.bulkUpdateCollectible(V.uuidService.generateRandomUuid(), null == h ? void 0 : h.id, e.map(e => (0, iF.translateAssetType)(e)), "enable" === A), m({
+                    await iW.default.bulkUpdateCollectible(F.uuidService.generateRandomUuid(), null == h ? void 0 : h.id, e.map(e => (0, i9.translateAssetType)(e)), "enable" === A), m({
                         message: l("Message.TimedOptionSettingsApplied"),
                         anchorOrigin: {
                             vertical: "bottom",
                             horizontal: "center"
                         },
-                        autoHideDuration: ae.toastDurationTime,
+                        autoHideDuration: i5.toastDurationTime,
                         autoHide: !0,
                         onClose: p
                     }), window.location.reload(), s()
                 } catch (e) {
                     m({
-                        message: l(at(await (0, tD.default)(e), "Error.Unknown")),
+                        message: l(i3(await (0, tD.default)(e), "Error.Unknown")),
                         anchorOrigin: {
                             vertical: "bottom",
                             horizontal: "center"
                         },
-                        autoHideDuration: ae.toastDurationTime,
+                        autoHideDuration: i5.toastDurationTime,
                         autoHide: !0,
                         onClose: p
                     })
@@ -4962,17 +4932,17 @@
                 if (0 === t.length) return null;
                 let n = t.filter(e => b[e]);
                 if (0 === n.length) return null;
-                if (n.length === t.length) return l("clothing" === e ? al(v) : ar[e].all);
-                let i = l(ar[e].short),
-                    a = n.map(e => l(ae.assetFullNameKeys[e])).join(", ");
+                if (n.length === t.length) return l("clothing" === e ? aa(v) : ai[e].all);
+                let i = l(ai[e].short),
+                    a = n.map(e => l(i5.assetFullNameKeys[e])).join(", ");
                 return "".concat(i, " (").concat(a, ")")
             }).filter(e => null !== e), [b, j, E, v, l, x]),
             D = (0, a.useMemo)(() => x.some(e => E[e] && j[e].some(e => b[e])), [b, j, E, x]),
             _ = (0, i.jsxs)(i.Fragment, {
-                children: [(0, i.jsx)(i9.DialogContentText, {
+                children: [(0, i.jsx)(i4.DialogContentText, {
                     className: u.descriptionText,
                     children: l("Description.BulkUpdateAllTimedOptions")
-                }), (0, i.jsx)(iO.default, {
+                }), (0, i.jsx)(i8.default, {
                     flexDirection: "column",
                     classes: {
                         root: u.checkboxList
@@ -4982,7 +4952,7 @@
                         if (!E[e]) return null;
                         let n = g[e],
                             s = "timed-options-bulk-".concat(e, "-subtypes"),
-                            o = l("clothing" === e ? al(v) : ar[e].all);
+                            o = l("clothing" === e ? aa(v) : ai[e].all);
                         return (0, i.jsxs)(a.default.Fragment, {
                             children: [(0, i.jsxs)("div", {
                                 className: u.categoryRow,
@@ -5000,10 +4970,10 @@
                                         categoryName: o
                                     }),
                                     color: "inherit",
-                                    children: (0, i.jsx)(ai.ChevronRightIcon, {
+                                    children: (0, i.jsx)(i7.ChevronRightIcon, {
                                         className: c(n ? u.expandToggleExpanded : u.expandToggleCollapsed)
                                     })
-                                }) : null, (0, i.jsx)(an.Checkbox, {
+                                }) : null, (0, i.jsx)(i6.Checkbox, {
                                     label: o,
                                     size: "Small",
                                     placement: "Start",
@@ -5032,8 +5002,8 @@
                             }), v && n ? (0, i.jsx)("div", {
                                 id: s,
                                 className: u.subtypeIndent,
-                                children: t.map(e => (0, i.jsx)(an.Checkbox, {
-                                    label: l(ae.assetFullNameKeys[e]),
+                                children: t.map(e => (0, i.jsx)(i6.Checkbox, {
+                                    label: l(i5.assetFullNameKeys[e]),
                                     size: "Small",
                                     placement: "Start",
                                     isChecked: b[e],
@@ -5047,12 +5017,12 @@
                             }) : null]
                         }, e)
                     })(e))
-                }), (0, i.jsxs)(iO.default, {
+                }), (0, i.jsxs)(i8.default, {
                     flexDirection: "row",
                     classes: {
                         root: u.buttonContainer
                     },
-                    children: [(0, i.jsx)(iS.Button, {
+                    children: [(0, i.jsx)(iN.Button, {
                         variant: "contained",
                         color: "secondary",
                         onClick: k,
@@ -5060,7 +5030,7 @@
                         className: u.actionButton,
                         disabled: !D,
                         children: l("Action.Enable")
-                    }), (0, i.jsx)(iS.Button, {
+                    }), (0, i.jsx)(iN.Button, {
                         variant: "contained",
                         color: "secondary",
                         onClick: N,
@@ -5072,7 +5042,7 @@
                 })]
             });
         return w && (t = "enable" === A ? "Description.ThisWillEnableTimedOptionsFor" : "Description.ThisWillDisableTimedOptionsFor", _ = (0, i.jsxs)(i.Fragment, {
-            children: [(0, i.jsx)(i9.DialogContentText, {
+            children: [(0, i.jsx)(i4.DialogContentText, {
                 className: u.descriptionText,
                 children: l(t)
             }), O.length > 0 && (0, i.jsx)("ul", {
@@ -5080,22 +5050,22 @@
                 children: O.map(e => (0, i.jsx)("li", {
                     children: e
                 }, e))
-            }), (0, i.jsx)(i9.DialogContentText, {
+            }), (0, i.jsx)(i4.DialogContentText, {
                 className: u.descriptionText,
                 children: l("Description.ThisWillAlsoReplaceAnyItemLevelSettings")
-            }), (0, i.jsxs)(iO.default, {
+            }), (0, i.jsxs)(i8.default, {
                 flexDirection: "row",
                 classes: {
                     root: u.buttonContainer
                 },
-                children: [(0, i.jsx)(iS.Button, {
+                children: [(0, i.jsx)(iN.Button, {
                     variant: "contained",
                     color: "primaryBrand",
                     onClick: L,
                     size: "medium",
                     className: u.actionButton,
                     children: l("Action.Confirm")
-                }), (0, i.jsx)(iS.Button, {
+                }), (0, i.jsx)(iN.Button, {
                     variant: "contained",
                     color: "secondary",
                     onClick: R,
@@ -5104,7 +5074,7 @@
                     children: l("Action.Cancel")
                 })]
             })]
-        })), (0, i.jsxs)(iV.Dialog, {
+        })), (0, i.jsxs)(iL.Dialog, {
             open: n,
             onClose: P,
             maxWidth: "Small",
@@ -5112,7 +5082,7 @@
             classes: {
                 paper: u.dialogPaper
             },
-            children: [(0, i.jsxs)(iH.DialogTitle, {
+            children: [(0, i.jsxs)(iO.DialogTitle, {
                 className: u.dialogTitle,
                 children: [(0, i.jsx)("span", {
                     className: u.dialogTitleText,
@@ -5123,19 +5093,19 @@
                     size: "small",
                     className: u.closeButton,
                     color: "inherit",
-                    children: (0, i.jsx)(iK.CloseIcon, {})
+                    children: (0, i.jsx)(iU.CloseIcon, {})
                 })]
-            }), (0, i.jsx)(iG.DialogContent, {
+            }), (0, i.jsx)(iR.DialogContent, {
                 className: u.dialogContent,
                 children: _
             })]
         })
     }, [ei.TranslationNamespace.ConfigureItem, ei.TranslationNamespace.Creations, ei.TranslationNamespace.AssetTypes]);
 
-    function ad(e) {
+    function ao(e) {
         return "Tshirt" === e ? m.Asset.TShirt : "TshirtAccessory" === e ? m.Asset.TShirtAccessory : e
     }
-    let ac = (0, id.makeStyles)()(e => ({
+    let ar = (0, id.makeStyles)()(e => ({
             dialogContent: {
                 padding: e.spacing(3),
                 minWidth: 300
@@ -5159,7 +5129,7 @@
                 marginLeft: "auto"
             }
         })),
-        am = (0, d.withTranslation)(e => {
+        al = (0, d.withTranslation)(e => {
             let t, n, s, o, {
                     open: r,
                     onClose: l
@@ -5170,14 +5140,14 @@
                 } = (0, d.useTranslation)(),
                 {
                     classes: p
-                } = ac(),
+                } = ar(),
                 {
                     enqueue: h,
                     close: v
-                } = (0, iZ.useSnackbar)(),
+                } = (0, iK.useSnackbar)(),
                 x = (0, f.useCurrentGroup)(),
                 [g, y] = (0, a.useState)(null),
-                [b, I] = (0, a.useState)(() => V.uuidService.generateRandomUuid()),
+                [b, I] = (0, a.useState)(() => F.uuidService.generateRandomUuid()),
                 [T, C] = (0, a.useState)({
                     showClothing: !1,
                     showMakeup: !1,
@@ -5186,9 +5156,9 @@
                 }),
                 [w, S] = (0, a.useState)(!1);
             (0, a.useEffect)(() => {
-                r ? (y(null), I(V.uuidService.generateRandomUuid()), (0, iz.getValidTimedOptionsTypes)().then(() => {
-                    let e = new Set(iz.ValidTimedOptionsAssetTypes.map(e => ad(e))),
-                        t = 3 === e.size && Array.from(iU.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).every(t => e.has(t));
+                r ? (y(null), I(F.uuidService.generateRandomUuid()), (0, ik.getValidTimedOptionsTypes)().then(() => {
+                    let e = new Set(ik.ValidTimedOptionsAssetTypes.map(e => ao(e))),
+                        t = 3 === e.size && Array.from(iE.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).every(t => e.has(t));
                     if (S(t), t) C({
                         showClothing: !1,
                         showMakeup: !1,
@@ -5196,10 +5166,10 @@
                         showCategorySubtypeDropdowns: !0
                     });
                     else {
-                        let t = [...e].every(e => iU.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES.has(e) || iU.MAKEUP_ASSET_TYPES.includes(e)),
+                        let t = [...e].every(e => iE.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES.has(e) || iE.MAKEUP_ASSET_TYPES.includes(e)),
                             n = e.has(m.Asset.EyeMakeup),
-                            i = iU.CLOTHING_ASSET_TYPES.some(t => e.has(t) && !iU.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES.has(t)),
-                            a = Array.from(iU.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).some(t => e.has(t));
+                            i = iE.CLOTHING_ASSET_TYPES.some(t => e.has(t) && !iE.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES.has(t)),
+                            a = Array.from(iE.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).some(t => e.has(t));
                         C({
                             showClothing: i || a,
                             showMakeup: n,
@@ -5207,28 +5177,28 @@
                             showCategorySubtypeDropdowns: !t
                         })
                     }
-                })) : I(V.uuidService.generateRandomUuid())
+                })) : I(F.uuidService.generateRandomUuid())
             }, [r]);
             let A = (0, a.useCallback)(async () => {
                     try {
-                        await i$.default.bulkUpdateCollectible(b, null == x ? void 0 : x.id, [64, 66, 68], !0 === g), h({
+                        await iW.default.bulkUpdateCollectible(b, null == x ? void 0 : x.id, [64, 66, 68], !0 === g), h({
                             message: u("Message.TimedOptionSettingsApplied"),
                             anchorOrigin: {
                                 vertical: "bottom",
                                 horizontal: "center"
                             },
-                            autoHideDuration: ae.toastDurationTime,
+                            autoHideDuration: i5.toastDurationTime,
                             autoHide: !0,
                             onClose: v
                         }), window.location.reload(), l()
                     } catch (e) {
                         h({
-                            message: u(at(await (0, tD.default)(e), "Error.Unknown")),
+                            message: u(i3(await (0, tD.default)(e), "Error.Unknown")),
                             anchorOrigin: {
                                 vertical: "bottom",
                                 horizontal: "center"
                             },
-                            autoHideDuration: ae.toastDurationTime,
+                            autoHideDuration: i5.toastDurationTime,
                             autoHide: !0,
                             onClose: v
                         })
@@ -5238,22 +5208,22 @@
                     l()
                 }, [l]),
                 j = !w,
-                E = j ? (t = new Set(iz.ValidTimedOptionsAssetTypes.map(e => ad(e))), n = iU.CLOTHING_ASSET_TYPES.some(e => t.has(e) && !iU.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES.has(e)), s = Array.from(iU.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).some(e => t.has(e)), o = T.showCategorySubtypeDropdowns && (!s || n) ? iU.CLOTHING_ASSET_TYPES.filter(e => t.has(e)) : Array.from(iU.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).filter(e => t.has(e)), {
+                E = j ? (t = new Set(ik.ValidTimedOptionsAssetTypes.map(e => ao(e))), n = iE.CLOTHING_ASSET_TYPES.some(e => t.has(e) && !iE.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES.has(e)), s = Array.from(iE.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).some(e => t.has(e)), o = T.showCategorySubtypeDropdowns && (!s || n) ? iE.CLOTHING_ASSET_TYPES.filter(e => t.has(e)) : Array.from(iE.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).filter(e => t.has(e)), {
                     clothing: o,
-                    makeup: iU.MAKEUP_ASSET_TYPES.filter(e => t.has(e)),
-                    accessories: T.showCategorySubtypeDropdowns ? iU.ACCESSORY_ASSET_TYPES.filter(e => t.has(e)) : []
+                    makeup: iE.MAKEUP_ASSET_TYPES.filter(e => t.has(e)),
+                    accessories: T.showCategorySubtypeDropdowns ? iE.ACCESSORY_ASSET_TYPES.filter(e => t.has(e)) : []
                 }) : void 0;
-            return j ? (0, i.jsx)(au, {
+            return j ? (0, i.jsx)(as, {
                 open: r,
                 onClose: M,
                 categoryFlags: T,
                 assetTypesByCategory: E
-            }) : (0, i.jsxs)(iV.Dialog, {
+            }) : (0, i.jsxs)(iL.Dialog, {
                 open: r,
                 onClose: M,
                 maxWidth: "Small",
                 color: "primaryBrand",
-                children: [(0, i.jsxs)(iH.DialogTitle, {
+                children: [(0, i.jsxs)(iO.DialogTitle, {
                     className: p.dialogTitle,
                     children: [(0, i.jsx)("span", {
                         children: null === g ? u("Action.TimedOptions") : u("Action.Confirm")
@@ -5263,20 +5233,20 @@
                         size: "small",
                         className: p.closeButton,
                         color: "inherit",
-                        children: (0, i.jsx)(iK.CloseIcon, {})
+                        children: (0, i.jsx)(iU.CloseIcon, {})
                     })]
-                }), (0, i.jsx)(iG.DialogContent, {
+                }), (0, i.jsx)(iR.DialogContent, {
                     className: p.dialogContent,
                     children: null === g ? (0, i.jsxs)(i.Fragment, {
-                        children: [(0, i.jsx)(i9.DialogContentText, {
+                        children: [(0, i.jsx)(i4.DialogContentText, {
                             className: p.descriptionText,
                             children: u("Description.BulkUpdateTimedOptions")
-                        }), (0, i.jsxs)(iO.default, {
+                        }), (0, i.jsxs)(i8.default, {
                             flexDirection: "column",
                             classes: {
                                 root: p.buttonContainer
                             },
-                            children: [(0, i.jsx)(iS.Button, {
+                            children: [(0, i.jsx)(iN.Button, {
                                 variant: "contained",
                                 color: "secondary",
                                 onClick: () => {
@@ -5285,7 +5255,7 @@
                                 size: "large",
                                 className: p.actionButton,
                                 children: u("Action.TurnAllOn")
-                            }), (0, i.jsx)(iS.Button, {
+                            }), (0, i.jsx)(iN.Button, {
                                 variant: "contained",
                                 color: "secondary",
                                 onClick: () => {
@@ -5297,7 +5267,7 @@
                             })]
                         })]
                     }) : (0, i.jsxs)(i.Fragment, {
-                        children: [(0, i.jsx)(i9.DialogContentText, {
+                        children: [(0, i.jsx)(i4.DialogContentText, {
                             className: p.descriptionText,
                             children: g ? c("Description.BulkUpdateOnConfirmation", [{
                                 opening: "boldStart",
@@ -5312,19 +5282,19 @@
                                     children: e
                                 })
                             }])
-                        }), (0, i.jsxs)(iO.default, {
+                        }), (0, i.jsxs)(i8.default, {
                             flexDirection: "column",
                             classes: {
                                 root: p.buttonContainer
                             },
-                            children: [(0, i.jsx)(iS.Button, {
+                            children: [(0, i.jsx)(iN.Button, {
                                 variant: "contained",
                                 color: "primaryBrand",
                                 onClick: A,
                                 size: "large",
                                 className: p.actionButton,
                                 children: u("Action.Confirm")
-                            }), (0, i.jsx)(iS.Button, {
+                            }), (0, i.jsx)(iN.Button, {
                                 variant: "contained",
                                 color: "secondary",
                                 onClick: M,
@@ -5337,305 +5307,247 @@
                 })]
             })
         }, [ei.TranslationNamespace.ConfigureItem, ei.TranslationNamespace.Creations]),
-        ap = Object.values(Q.SearchSortParameter),
-        ah = Object.values(iT.EventSortBy),
-        av = ["publishSettings"],
-        af = e => {
-            var t;
+        au = Object.values(Q.SearchSortParameter),
+        ad = Object.values(iT.EventSortBy),
+        ac = ["publishSettings"],
+        am = e => {
             let {
-                menuState: n
+                menuState: t
             } = e, {
-                translate: s
+                translate: n
             } = (0, d.useTranslation)(), {
-                unifiedLogger: o
-            } = (0, iD.useUnifiedLoggerProvider)(), {
-                ready: r,
-                value: l
-            } = (0, u.useFlag)(iR.isAutoPublishPreferencesEnabled), {
-                isFetched: c
-            } = (0, f.useGroups)(), {
-                classes: {
-                    toolbarContainer: p,
-                    sortContainer: h,
-                    timedOptionsButton: v,
-                    timedOptionsButtonDivider: g
-                }
-            } = iq(), [y, T] = (0, a.useState)(!1), [C, w] = (0, a.useState)(!1), [S, A] = (0, a.useState)(0), [M, j] = (0, a.useState)(!1), [E, P] = (0, a.useState)(!1), [k, N] = (0, a.useState)(null);
+                unifiedLogger: s
+            } = (0, iM.useUnifiedLoggerProvider)(), {
+                ready: o,
+                value: r
+            } = (0, u.useFlag)(iA.isAutoPublishPreferencesEnabled), {
+                isFetched: l
+            } = (0, f.useGroups)(), [c, p] = (0, a.useState)(!1), [h, v] = (0, a.useState)(!1), [g, y] = (0, a.useState)(0), [T, C] = (0, a.useState)(!1), [w, S] = (0, a.useState)(!1), [A, M] = (0, a.useState)(!1);
             (0, a.useEffect)(() => {
-                (0, iz.getValidTimedOptionsTypes)().then(() => {
-                    P(!0)
+                (0, ik.getValidTimedOptionsTypes)().then(() => {
+                    S(!0)
                 })
             }, []);
             let {
-                sort: L,
-                setSort: R,
-                sortOrder: O,
-                setSortOrder: D,
-                isArchived: _,
-                setIsArchived: U,
-                isAgeRestrictedCollaboration: B,
-                setIsAgeRestrictedCollaboration: z,
-                isPublicOnly: q,
-                setIsPublicOnly: G,
-                isOnMarketplace: H,
-                setIsOnMarketplace: K
+                sort: j,
+                setSort: E,
+                sortOrder: k,
+                setSortOrder: N,
+                isArchived: L,
+                setIsArchived: R,
+                isAgeRestrictedCollaboration: O,
+                setIsAgeRestrictedCollaboration: D,
+                isPublicOnly: _,
+                setIsPublicOnly: U,
+                isOnMarketplace: B,
+                setIsOnMarketplace: z
             } = (0, eo.default)(), [{
-                filterIndex: W,
-                publishSettings: Y
-            }] = (0, en.useQueryParams)(["filterIndex", "publishSettings"]), J = (0, a.useContext)(F).isResolving, [, X] = (0, en.useQueryParams)(["activeTab", "filterIndex"]), [, Z] = (0, en.useQueryParams)(av), $ = (0, a.useMemo)(() => {
-                let e = I.default.getAssetType(n);
-                return e !== m.Asset.AllCatalogAsset || Number(W) > 0 ? e : x.TAXONOMY_HOST_ASSET
-            }, [n, W]), ee = ($ in iU.AvatarMenuMap || $ === m.Asset.AllCatalogAsset) && l, et = (0, i_.normalizeSingleQueryParam)(Y), ei = !!ee && c && !J && !M && ("true" === et || "1" === et);
+                filterIndex: V,
+                publishSettings: G
+            }] = (0, en.useQueryParams)(["filterIndex", "publishSettings"]), H = (0, a.useContext)(q).isResolving, [, K] = (0, en.useQueryParams)(["activeTab", "filterIndex"]), [, W] = (0, en.useQueryParams)(ac), Y = (0, a.useMemo)(() => {
+                let e = I.default.getAssetType(t);
+                return e !== m.Asset.AllCatalogAsset || Number(V) > 0 ? e : x.TAXONOMY_HOST_ASSET
+            }, [t, V]), J = Y in iE.AvatarMenuMap || Y === m.Asset.AllCatalogAsset, X = J && r, Z = (0, ij.normalizeSingleQueryParam)(G), $ = !!X && l && !H && !T && ("true" === Z || "1" === Z);
             (0, a.useEffect)(() => {
-                r && c && !J && void 0 !== et && (ei || Z({
+                o && l && !H && void 0 !== Z && ($ || W({
                     publishSettings: null
                 }, {
                     skipHistory: !0
                 }))
-            }, [r, J, c, ei, et, Z]);
-            let ea = (0, a.useCallback)(() => {
-                    w(!1), ei && (j(!0), Z({
+            }, [o, H, l, $, Z, W]);
+            let ee = (0, a.useCallback)(() => {
+                    v(!1), $ && (C(!0), W({
                         publishSettings: null
                     }, {
                         skipHistory: !0
                     }))
-                }, [ei, Z]),
+                }, [$, W]),
                 {
-                    canUseTaxonomy: es,
-                    isTaxonomyMode: er
-                } = (0, iv.default)($),
-                el = iy(n, (0, f.useCurrentGroup)()),
+                    canUseTaxonomy: et,
+                    isTaxonomyMode: ei
+                } = (0, iv.default)(Y),
+                ea = iy(t, (0, f.useCurrentGroup)()),
                 {
-                    isSortable: eu,
-                    isArchivable: ed
+                    isSortable: es,
+                    isArchivable: er
                 } = (0, a.useMemo)(() => {
-                    let e = er || null == W ? void 0 : Number(W),
-                        t = I.default.isAssetTypeArchivable($, e);
+                    let e = ei || null == V ? void 0 : Number(V),
+                        t = I.default.isAssetTypeArchivable(Y, e);
                     return {
-                        isSortable: I.default.isAssetTypeSortable($),
-                        isArchivable: t || I.default.isAssetTypeDirectlyArchivable($)
+                        isSortable: I.default.isAssetTypeSortable(Y),
+                        isArchivable: t || I.default.isAssetTypeDirectlyArchivable(Y)
                     }
-                }, [$, W, er]),
-                ec = s("Label.CategorizeByTaxonomy"),
-                em = (0, a.useCallback)(() => {
+                }, [Y, V, ei]),
+                el = n("Label.CategorizeByTaxonomy"),
+                eu = (0, a.useCallback)(() => {
                     var e;
-                    let t = null == (e = el[0]) ? void 0 : e.type;
-                    X({
-                        activeTab: er ? null != t ? t : $ : (0, x.buildTaxonomyActiveTab)(),
+                    let t = null == (e = ea[0]) ? void 0 : e.type;
+                    K({
+                        activeTab: ei ? null != t ? t : Y : (0, x.buildTaxonomyActiveTab)(),
                         filterIndex: 0
                     }, {
                         skipHistory: !0
                     })
-                }, [er, $, el, X]),
-                ep = (0, a.useMemo)(() => !eu && !ed && !es && $ !== m.Asset.MyExperiences && $ !== m.Asset.SharedExperiences, [eu, ed, es, $]),
-                eh = (0, a.useCallback)(e => {
-                    let {
-                        value: t
-                    } = e.target;
-                    if ($ === m.Asset.MyExperiences || $ === m.Asset.SharedExperiences) {
-                        if (!ap.includes(t)) return;
-                        R(e => ({
-                            ...e,
-                            [m.Asset.Place]: t
-                        }))
-                    } else ah.includes(t) && R(e => ({
-                        ...e,
-                        [$]: t
+                }, [ei, Y, ea, K]),
+                ed = (0, a.useMemo)(() => !es && !er && !et && Y !== m.Asset.MyExperiences && Y !== m.Asset.SharedExperiences, [es, er, et, Y]),
+                ec = (0, a.useCallback)(e => {
+                    if (Y === m.Asset.MyExperiences || Y === m.Asset.SharedExperiences) au.includes(e) && E(t => ({
+                        ...t,
+                        [m.Asset.Place]: e
+                    }));
+                    else ad.includes(e) && E(t => ({
+                        ...t,
+                        [Y]: e
                     }))
-                }, [R, $]),
-                ev = (0, a.useCallback)(() => {
-                    D(e => e === V.SortOrder.Asc ? V.SortOrder.Desc : V.SortOrder.Asc)
-                }, [D]),
-                ef = (0, a.useCallback)(() => {
-                    T(!0)
+                }, [E, Y]),
+                em = (0, a.useCallback)(() => {
+                    N(e => e === F.SortOrder.Asc ? F.SortOrder.Desc : F.SortOrder.Asc)
+                }, [N]),
+                ep = (0, a.useCallback)(() => {
+                    p(!0)
                 }, []),
-                ex = (0, a.useCallback)(() => {
-                    let e = !B;
-                    o.logClickEvent({
+                eh = (0, a.useCallback)(() => {
+                    let e = !O;
+                    s.logClickEvent({
                         eventName: t_.default.ImpactedExperiencesFilterClick,
                         parameters: {
                             page: "creations",
                             action: e ? "enable" : "disable",
-                            assetType: $.toString()
+                            assetType: Y.toString()
                         }
-                    }), z(e => !e)
-                }, [o, B, $, z]),
-                eg = $ === m.Asset.MyExperiences || $ === m.Asset.SharedExperiences,
-                ey = (0, a.useMemo)(() => eg ? Object.values(Q.SearchSortParameter).map(e => ({
+                    }), D(e => !e)
+                }, [s, O, Y, D]),
+                ev = Y === m.Asset.MyExperiences || Y === m.Asset.SharedExperiences,
+                ef = (0, a.useMemo)(() => ev ? Object.values(Q.SearchSortParameter).map(e => ({
                     value: e,
                     labelKey: b.universeSortTranslationKeys[e]
                 })) : Object.values(iT.EventSortBy).map(e => ({
                     value: e,
                     labelKey: b.eventSortTranslationKeys[e]
-                })), [eg]),
-                eb = (0, a.useMemo)(() => eg ? L[m.Asset.Place] : (0, iB.getSortForAssetType)($, L), [eg, L, $]),
-                eI = (0, a.useMemo)(() => {
-                    var e, t;
-                    if (!E) return !1;
-                    let i = er || null == W ? void 0 : Number(W);
-                    if (void 0 !== i && iU.AvatarMenuMap[$]) {
-                        let e = iU.AvatarMenuMap[$][i];
-                        if (e) return (0, iF.getIsRentableType)(e.assetType, e.bundleType)
-                    }
-                    return (0, iF.getIsRentableType)(null != (e = null == (t = n.submenuItem) ? void 0 : t.type) ? e : $, void 0)
-                }, [$, W, er, null == (t = n.submenuItem) ? void 0 : t.type, E]);
-            if (ep) return null;
-            let eT = $ === m.Asset.MyExperiences || $ === m.Asset.SharedExperiences || ed || es || $ === m.Asset.MeshPart,
-                eC = $ === m.Asset.MyExperiences || $ === m.Asset.SharedExperiences,
-                ew = $ === m.Asset.Decal || $ === m.Asset.MeshPart,
-                eS = !ee && !eI && !!($ === m.Asset.MyExperiences || eC || ed && $);
-            return (0, i.jsxs)(iO.Flex, {
-                flexDirection: "row",
-                justifyContent: "flex-start",
-                alignItems: "flex-start",
-                flexWrap: "wrap",
-                classes: {
-                    root: p
-                },
-                children: [eT && (0, i.jsxs)(iO.Flex, {
-                    alignItems: "center",
-                    gap: 1,
-                    flexDirection: "row",
-                    children: [eS && (0, i.jsx)(iL.Typography, {
-                        marginRight: "16px",
-                        children: s("Label.ShowPrefix")
-                    }), $ === m.Asset.MyExperiences && (0, i.jsx)(iM.FormControlLabel, {
-                        control: (0, i.jsx)(iN.Switch, {
-                            checked: q,
-                            onChange: () => G(e => !e),
-                            "aria-label": s("Label.Public")
-                        }),
-                        label: s("Label.Public")
-                    }), eC && (0, i.jsx)(iM.FormControlLabel, {
-                        control: (0, i.jsx)(iN.Switch, {
-                            checked: B,
-                            onChange: ex,
-                            "aria-label": s("Label.Impacted")
-                        }),
-                        label: s("Label.Impacted")
-                    }), eI && !ee && (0, i.jsxs)(i.Fragment, {
-                        children: [(0, i.jsx)(iS.Button, {
-                            variant: "contained",
-                            color: "secondary",
-                            onClick: ef,
-                            classes: {
-                                root: v
-                            },
-                            children: s("Action.TimedOptions")
-                        }), (0, i.jsx)(iA.Divider, {
-                            orientation: "vertical",
-                            flexItem: !0,
-                            classes: {
-                                root: g
-                            }
-                        })]
-                    }), ed && $ && (0, i.jsx)(iM.FormControlLabel, {
-                        control: (0, i.jsx)(iN.Switch, {
-                            checked: _,
-                            onChange: () => U(e => !e),
-                            "aria-label": ee ? s("Action.ShowArchived") : s("Label.Archived")
-                        }),
-                        label: ee ? s("Action.ShowArchived") : s("Label.Archived")
-                    }), es && (0, i.jsx)(iM.FormControlLabel, {
-                        control: (0, i.jsx)(iN.Switch, {
-                            checked: er,
-                            onChange: em,
-                            "aria-label": ec
-                        }),
-                        label: ec
-                    }), ee && (0, i.jsxs)(i.Fragment, {
-                        children: [(0, i.jsx)(iA.Divider, {
-                            orientation: "vertical",
-                            flexItem: !0,
-                            classes: {
-                                root: g
-                            }
-                        }), (0, i.jsx)(ir.IconButton, {
-                            "aria-label": s("Label.Settings"),
-                            size: "medium",
-                            color: "secondary",
-                            onClick: e => N(e.currentTarget),
-                            children: (0, i.jsx)(ik.SettingsIcon, {})
-                        }), (0, i.jsxs)(ij.Menu, {
-                            anchorEl: k,
-                            open: null != k,
-                            onClose: () => N(null),
-                            anchorOrigin: {
-                                vertical: "bottom",
-                                horizontal: "right"
-                            },
-                            transformOrigin: {
-                                vertical: "top",
-                                horizontal: "right"
-                            },
-                            className: "margin-top-small",
-                            children: [eI && (0, i.jsx)(iE.MenuItem, {
-                                onClick: () => {
-                                    N(null), ef()
-                                },
-                                children: (0, i.jsx)(iL.Typography, {
-                                    variant: "body1",
-                                    children: s("Action.TimedOptions")
+                })), [ev]),
+                ex = (0, a.useMemo)(() => ev ? j[m.Asset.Place] : (0, iP.getSortForAssetType)(Y, j), [ev, j, Y]),
+                eg = J && w && (ik.ValidTimedOptionsAssetTypes.length > 0 || ik.ValidTimedOptionsBundleTypes.length > 0);
+            if (ed) return null;
+            let ey = Y === m.Asset.MyExperiences || Y === m.Asset.SharedExperiences || er || et || Y === m.Asset.MeshPart,
+                eb = Y === m.Asset.MyExperiences || Y === m.Asset.SharedExperiences,
+                eI = Y === m.Asset.Decal || Y === m.Asset.MeshPart,
+                eT = !!X || eg,
+                eC = !eT && !!(Y === m.Asset.MyExperiences || eb || er && Y);
+            return (0, i.jsxs)("div", {
+                className: "flex flex-row justify-start items-center gap-large [flex-wrap:wrap] padding-left-medium max-large:[flex-grow:1] max-large:justify-between",
+                children: [ey && (0, i.jsxs)("div", {
+                    className: "flex flex-row items-center gap-medium",
+                    children: [eC && (0, i.jsx)("span", {
+                        className: "text-body-large margin-right-[16px]",
+                        children: n("Label.ShowPrefix")
+                    }), Y === m.Asset.MyExperiences && (0, i.jsx)(iS.Toggle, {
+                        size: "Large",
+                        placement: "Start",
+                        label: n("Label.Public"),
+                        isChecked: _,
+                        onCheckedChange: () => U(e => !e)
+                    }), eb && (0, i.jsx)(iS.Toggle, {
+                        size: "Large",
+                        placement: "Start",
+                        label: n("Label.Impacted"),
+                        isChecked: O,
+                        onCheckedChange: eh
+                    }), er && Y && (0, i.jsx)(iS.Toggle, {
+                        size: "Large",
+                        placement: "Start",
+                        label: X ? n("Action.ShowArchived") : n("Label.Archived"),
+                        isChecked: L,
+                        onCheckedChange: () => R(e => !e)
+                    }), et && (0, i.jsx)(iS.Toggle, {
+                        size: "Large",
+                        placement: "Start",
+                        label: el,
+                        isChecked: ei,
+                        onCheckedChange: eu
+                    }), eT && (0, i.jsxs)(i.Fragment, {
+                        children: [(0, i.jsx)("span", {
+                            className: "flex [height:20px] margin-x-[12px]",
+                            children: (0, i.jsx)(iC.Divider, {
+                                orientation: "vertical"
+                            })
+                        }), (0, i.jsxs)(iw.Popover, {
+                            open: A,
+                            onOpenChange: M,
+                            children: [(0, i.jsx)(iw.PopoverTrigger, {
+                                asChild: !0,
+                                children: (0, i.jsx)(P.IconButton, {
+                                    as: "button",
+                                    icon: "icon-filled-gear",
+                                    size: "Medium",
+                                    variant: "Utility",
+                                    isCircular: !0,
+                                    ariaLabel: n("Label.Settings")
                                 })
-                            }), (0, i.jsx)(iE.MenuItem, {
-                                onClick: () => {
-                                    N(null), A(e => e + 1), w(!0)
-                                },
-                                children: (0, i.jsx)(iL.Typography, {
-                                    variant: "body1",
-                                    children: s("Action.StudioPublishSettings")
+                            }), (0, i.jsx)(iw.PopoverContent, {
+                                side: "bottom",
+                                align: "end",
+                                ariaLabel: n("Label.Settings"),
+                                children: (0, i.jsx)(nY.Menu, {
+                                    size: "Medium",
+                                    children: (0, i.jsxs)(nY.MenuSection, {
+                                        children: [eg && (0, i.jsx)(nY.MenuItem, {
+                                            value: "timed-options",
+                                            title: n("Action.TimedOptions"),
+                                            onSelect: () => {
+                                                M(!1), ep()
+                                            }
+                                        }), X && (0, i.jsx)(nY.MenuItem, {
+                                            value: "publish-settings",
+                                            title: n("Action.StudioPublishSettings"),
+                                            onSelect: () => {
+                                                M(!1), y(e => e + 1), v(!0)
+                                            }
+                                        })]
+                                    })
                                 })
                             })]
                         })]
-                    }), ew && (0, i.jsx)(iM.FormControlLabel, {
-                        control: (0, i.jsx)(iN.Switch, {
-                            "aria-label": s("Label.OnCreatorStore"),
-                            checked: H,
-                            onChange: () => K(e => !e)
-                        }),
-                        label: s("Label.OnCreatorStore")
+                    }), eI && (0, i.jsx)(iS.Toggle, {
+                        size: "Large",
+                        placement: "Start",
+                        label: n("Label.OnCreatorStore"),
+                        isChecked: B,
+                        onCheckedChange: () => z(e => !e)
                     })]
-                }), eu && (0, i.jsxs)(iO.Flex, {
-                    flexDirection: "row",
-                    classes: {
-                        root: h
-                    },
-                    alignItems: "center",
-                    flexWrap: "nowrap",
-                    children: [(0, i.jsx)(iP.Select, {
-                        variant: "outlined",
-                        margin: "dense",
-                        size: "small",
-                        label: s("Label.SortBy"),
-                        value: eb,
-                        onChange: eh,
-                        inputProps: {
-                            "aria-label": s("Label.SortBy")
-                        },
-                        children: ey.map(e => (0, i.jsx)(iE.MenuItem, {
-                            value: e.value,
-                            children: s(e.labelKey)
-                        }, e.value))
-                    }), (0, i.jsx)(ir.IconButton, {
-                        "aria-label": s("Heading.SortOrder"),
-                        onClick: ev,
-                        size: "large",
-                        children: O === V.SortOrder.Asc ? (0, i.jsx)(iw.ArrowUpwardIcon, {
-                            color: "secondary"
-                        }) : (0, i.jsx)(iC.ArrowDownwardIcon, {
-                            color: "secondary"
+                }), es && (0, i.jsxs)("div", {
+                    className: "flex flex-row items-center gap-xsmall [flex-wrap:nowrap]",
+                    children: [(0, i.jsx)(nW.Dropdown, {
+                        size: "Medium",
+                        ariaLabel: n("Label.SortBy"),
+                        placeholder: n("Label.SortBy"),
+                        value: ex,
+                        onValueChange: ec,
+                        children: (0, i.jsx)(nY.Menu, {
+                            children: ef.map(e => (0, i.jsx)(nY.MenuItem, {
+                                value: e.value,
+                                title: n("Label.SortByOption", {
+                                    sortOption: n(e.labelKey)
+                                })
+                            }, e.value))
                         })
+                    }), (0, i.jsx)(P.IconButton, {
+                        as: "button",
+                        size: "Medium",
+                        variant: "Utility",
+                        icon: k === F.SortOrder.Asc ? "icon-regular-arrow-wide-up" : "icon-regular-arrow-wide-down",
+                        ariaLabel: n("Heading.SortOrder"),
+                        onClick: em
                     })]
-                }), (0, i.jsx)(am, {
-                    open: y,
-                    onClose: () => T(!1)
-                }), (0, i.jsx)(i7, {
-                    open: C || ei,
-                    onClose: ea
-                }, S)]
+                }), (0, i.jsx)(al, {
+                    open: c,
+                    onClose: () => p(!1)
+                }), (0, i.jsx)(i2, {
+                    open: h || $,
+                    onClose: ee
+                }, g)]
             })
         },
-        ax = e => {
+        ap = e => {
             let {
                 menuState: t,
                 onMenuStateChange: n,
@@ -5647,7 +5559,7 @@
                 children: [t.menuItem.type === m.Asset.TShirt && (0, i.jsx)(is, {
                     data: a
                 }), !r && (0, i.jsx)("div", {
-                    className: "flex width-full padding-bottom-large [align-content:flex-start] [row-gap:12px] justify-between flex-row items-start wrap",
+                    className: "flex width-full padding-bottom-large [align-content:flex-start] [row-gap:12px] justify-between flex-row items-center wrap",
                     children: t.menuItem.type === m.Asset.Moments ? (0, i.jsxs)(i.Fragment, {
                         children: [(0, i.jsx)(it, {}), (0, i.jsx)(n7, {})]
                     }) : (0, i.jsxs)(i.Fragment, {
@@ -5655,28 +5567,28 @@
                             menuState: t,
                             onMenuStateChange: n,
                             group: s
-                        }), (0, i.jsx)(af, {
+                        }), (0, i.jsx)(am, {
                             menuState: t
                         })]
                     })
                 })]
             })
         };
-    var ag = e.i(812077),
-        ay = e.i(71375),
-        ab = e.i(83560),
-        aI = e.i(576069),
-        aT = e.i(134817);
-    let aC = [],
-        aw = new Date(0).toISOString(),
-        aS = e => e.startsWith("Label.AbuseType."),
-        aA = e => {
+    var ah = e.i(812077),
+        av = e.i(71375),
+        af = e.i(83560),
+        ax = e.i(576069),
+        ag = e.i(134817);
+    let ay = [],
+        ab = new Date(0).toISOString(),
+        aI = e => e.startsWith("Label.AbuseType."),
+        aT = e => {
             var t, n;
             return {
                 momentId: e.uid,
                 description: null != (t = e.description) ? t : "",
                 experienceName: "",
-                modifiedAt: null != (n = e.uploadedAt) ? n : aw,
+                modifiedAt: null != (n = e.uploadedAt) ? n : ab,
                 status: ex,
                 moderation: {
                     violationUid: e.uid,
@@ -5688,15 +5600,15 @@
             }
         };
 
-    function aM(e) {
+    function aC(e) {
         return null != e.universeId ? e.universeId : "experienceId" in e && "number" == typeof e.experienceId ? e.experienceId : void 0
     }
-    var aj = e.i(130058),
-        aE = e.i(921378);
-    let aP = (e, t) => {
+    var aw = e.i(11763),
+        aS = e.i(622361);
+    let aA = (e, t) => {
             let {
                 user: n
-            } = (0, q.useAuthentication)(), {
+            } = (0, V.useAuthentication)(), {
                 enabled: i,
                 thumbnailUrl: s,
                 videoUrl: o
@@ -5726,8 +5638,8 @@
                 }
             }, [e, i, l, r]), l) ? l : i ? u : null
         },
-        ak = "block width-full height-full max-w-full max-h-full object-contain",
-        aN = e => {
+        aM = "block width-full height-full max-w-full max-h-full object-contain",
+        aj = e => {
             let {
                 children: t
             } = e;
@@ -5737,15 +5649,15 @@
                 children: t
             })
         },
-        aL = e => {
+        aE = e => {
             let {
                 thumbnailUrl: t,
                 videoUrl: n
             } = e;
-            return n ? (0, i.jsx)(aN, {
+            return n ? (0, i.jsx)(aj, {
                 children: (0, i.jsx)("video", {
                     "aria-label": "Moment video preview",
-                    className: "radius-medium ".concat(ak),
+                    className: "radius-medium ".concat(aM),
                     controls: !0,
                     playsInline: !0,
                     poster: t,
@@ -5754,15 +5666,15 @@
                         kind: "captions"
                     })
                 })
-            }) : t ? (0, i.jsx)(aN, {
+            }) : t ? (0, i.jsx)(aj, {
                 children: (0, i.jsx)("img", {
                     alt: "Moment thumbnail preview",
-                    className: "radius-medium ".concat(ak),
+                    className: "radius-medium ".concat(aM),
                     src: t
                 })
-            }) : (0, i.jsx)(aN, {})
+            }) : (0, i.jsx)(aj, {})
         },
-        aR = (0, d.withTranslation)(e => {
+        aP = (0, d.withTranslation)(e => {
             var t, n, s;
             let {
                 moment: o,
@@ -5782,13 +5694,13 @@
                 var e, t, n, i;
                 let a;
                 return o && ((a = {
-                    id: null != (i = aM(n = o)) ? i : 0,
+                    id: null != (i = aC(n = o)) ? i : 0,
                     name: n.experienceName
                 }).id > 0 || (null != (e = null == (t = a.name) ? void 0 : t.length) ? e : 0) > 0) ? a : void 0
             }), [T, C] = (0, a.useState)(() => {
                 var e;
                 return null != (e = null == o ? void 0 : o.description) ? e : ""
-            }), [w, S] = (0, a.useState)(), A = null != (t = null != w ? w : null == o ? void 0 : o.locale) ? t : y, M = (null == o ? void 0 : o.status) === ef && !0 === o.hasLocalVideo, j = aP((null == o ? void 0 : o.status) === ef ? o.draftId : null, {
+            }), [w, S] = (0, a.useState)(), A = null != (t = null != w ? w : null == o ? void 0 : o.locale) ? t : y, M = (null == o ? void 0 : o.status) === ef && !0 === o.hasLocalVideo, j = aA((null == o ? void 0 : o.status) === ef ? o.draftId : null, {
                 enabled: r && M,
                 thumbnailUrl: null == o ? void 0 : o.thumbnailUrl,
                 videoUrl: null == o ? void 0 : o.videoUrl
@@ -5822,26 +5734,26 @@
                 U = null != p && p === _,
                 B = null != p,
                 z = null != h && h === _,
-                F = o.status === eh,
-                q = o.status === ef,
-                V = q && !U,
-                G = !F && null != c && (q && M || U),
+                q = o.status === eh,
+                V = o.status === ef,
+                F = V && !U,
+                G = !q && null != c && (V && M || U),
                 H = null != m,
                 K = T.length >= 140;
-            return (0, i.jsx)(aj.SheetRoot, {
+            return (0, i.jsx)(aw.SheetRoot, {
                 open: r,
                 onOpenChange: D,
-                children: (0, i.jsxs)(aj.SheetContent, {
+                children: (0, i.jsxs)(aw.SheetContent, {
                     closeLabel: f("Action.Close"),
                     largeScreenVariant: "side",
-                    children: [(0, i.jsx)(aj.SheetTitle, {
+                    children: [(0, i.jsx)(aw.SheetTitle, {
                         children: f("Heading.EditMoment")
-                    }), (0, i.jsxs)(aj.SheetBody, {
+                    }), (0, i.jsxs)(aw.SheetBody, {
                         className: "flex flex-col gap-y-medium padding-top-small padding-bottom-large",
-                        children: [(0, i.jsx)(aL, {
+                        children: [(0, i.jsx)(aE, {
                             thumbnailUrl: null != (n = null == j ? void 0 : j.thumbnailUrl) ? n : o.thumbnailUrl,
                             videoUrl: null != (s = null == j ? void 0 : j.videoUrl) ? s : o.videoUrl
-                        }), V ? (0, i.jsx)(i.Fragment, {
+                        }), F ? (0, i.jsx)(i.Fragment, {
                             children: b ? (0, i.jsx)(n_, {
                                 experience: b,
                                 onChangeExperience: () => I(void 0)
@@ -5859,7 +5771,7 @@
                             })]
                         }) : null, g ? (0, i.jsx)("div", {
                             className: "flex flex-col gap-y-xsmall width-full padding-top-small",
-                            children: V ? (0, i.jsx)(nJ, {
+                            children: F ? (0, i.jsx)(nJ, {
                                 value: A,
                                 onChange: L,
                                 isDisabled: U
@@ -5874,8 +5786,8 @@
                             })
                         }) : null, (0, i.jsx)("div", {
                             className: "flex flex-col gap-y-xsmall width-full padding-top-small",
-                            children: V ? (0, i.jsxs)(i.Fragment, {
-                                children: [(0, i.jsx)(aE.TextArea, {
+                            children: F ? (0, i.jsxs)(i.Fragment, {
+                                children: [(0, i.jsx)(aS.TextArea, {
                                     id: "edit-moment-description-".concat(_),
                                     label: f("MomentsTable.Header.Description"),
                                     rows: 3,
@@ -5901,7 +5813,7 @@
                                 })]
                             })
                         })]
-                    }), (0, i.jsx)(aj.SheetActions, {
+                    }), (0, i.jsx)(aw.SheetActions, {
                         className: "width-full",
                         children: (0, i.jsxs)("div", {
                             className: "flex gap-small width-full",
@@ -5932,20 +5844,20 @@
                 })
             })
         }, [ei.TranslationNamespace.Creations, ei.TranslationNamespace.Controls]);
-    var aO = e.i(927072),
-        aD = e.i(493924);
-    let a_ = e => {
+    var ak = e.i(24286),
+        aN = e.i(493924);
+    let aL = e => {
         let {
             onCreateClick: t
         } = e, {
             translate: n
         } = (0, d.useTranslation)();
-        return (0, i.jsx)(aD.default, {
+        return (0, i.jsx)(aN.default, {
             title: n("Heading.ReachPlayersDirectlyInMoments"),
             size: "large",
             illustration: "videos",
             description: (0, i.jsxs)(i.Fragment, {
-                children: [n("Description.UploadExternalVideosToMoments"), " ", (0, i.jsx)(aO.Link, {
+                children: [n("Description.UploadExternalVideosToMoments"), " ", (0, i.jsx)(ak.Link, {
                     "aria-label": n("Label.LearnMore"),
                     href: ii.MOMENTS_LEARN_MORE_URL,
                     target: "_blank",
@@ -5965,22 +5877,22 @@
             })
         })
     };
-    var aU = e.i(260022),
-        aB = e.i(25505),
-        az = e.i(508019),
-        aF = e.i(125677),
-        aq = e.i(20227),
-        aV = e.i(494601);
-    let aG = "text/plain",
-        aH = async e => {
+    var aR = e.i(260022),
+        aO = e.i(278300),
+        aD = e.i(776569),
+        a_ = e.i(125677),
+        aU = e.i(20227),
+        aB = e.i(494601);
+    let az = "text/plain",
+        aq = async e => {
             if ("u" < typeof ClipboardItem || "function" != typeof navigator.clipboard.write) return e.then(e => navigator.clipboard.writeText(e));
             let t = e.then(e => new Blob([e], {
-                type: aG
+                type: az
             }));
             return t.catch(() => {}), navigator.clipboard.write([new ClipboardItem({
-                [aG]: t
+                [az]: t
             })])
-        }, aK = e => {
+        }, aV = e => {
             let {
                 moment: t
             } = e, n = (() => {
@@ -6019,21 +5931,21 @@
                         momentId: t.momentId,
                         feedItemId: t.feedItemId
                     });
-                    await Promise.all([n, aH(n)]), tY(tB.CopyShareLink, e), (0, ab.toast)({
+                    await Promise.all([n, aq(n)]), tY(tB.CopyShareLink, e), (0, af.toast)({
                         title: m
                     })
                 } catch (t) {
-                    tG(tB.CopyShareLink, t, e), (0, ab.toast)({
+                    tG(tB.CopyShareLink, t, e), (0, af.toast)({
                         title: p
                     })
                 } finally {
                     l.current = !1
                 }
             }, [o, m, p, t]);
-            return n && t.status === eh && t.feedItemId ? (0, i.jsx)(az.Tooltip, {
+            return n && t.status === eh && t.feedItemId ? (0, i.jsx)(aD.Tooltip, {
                 position: "top-center",
                 title: c,
-                children: (0, i.jsx)(az.TooltipTrigger, {
+                children: (0, i.jsx)(aD.TooltipTrigger, {
                     asChild: !0,
                     children: (0, i.jsx)(P.IconButton, {
                         ariaLabel: c,
@@ -6046,12 +5958,12 @@
                     })
                 })
             }) : null
-        }, aW = {
+        }, aF = {
             [eh]: "bg-system-success",
             [ev]: "bg-system-warning",
             [ef]: "bg-surface-300",
             [ex]: "bg-system-alert"
-        }, aY = e => {
+        }, aG = e => {
             let {
                 status: t,
                 label: n
@@ -6060,18 +5972,17 @@
                 className: "inline-flex items-center gap-xsmall",
                 children: [(0, i.jsx)("span", {
                     "aria-hidden": !0,
-                    className: "size-[8px] radius-circle shrink-0 ".concat(aW[t]),
+                    className: "size-[8px] radius-circle shrink-0 ".concat(aF[t]),
                     "data-testid": "moment-status-dot-".concat(t)
                 }), (0, i.jsx)("span", {
                     children: n
                 })]
             })
         };
-    var aJ = e.i(458451),
-        aQ = e.i(984863),
-        aX = e.i(958885),
-        aZ = e.i(302219);
-    let a$ = (0, d.withTranslation)(e => {
+    var aH = e.i(458451),
+        aK = e.i(958885),
+        aW = e.i(302219);
+    let aY = (0, d.withTranslation)(e => {
             let t, {
                     moment: n
                 } = e,
@@ -6080,10 +5991,10 @@
                 } = (0, d.useTranslation)(),
                 {
                     user: o
-                } = (0, aJ.useRobloxAuthentication)(),
+                } = (0, aH.useRobloxAuthentication)(),
                 r = n.status === ef,
                 l = r && !0 === n.hasLocalVideo,
-                u = aP(r ? n.draftId : null, {
+                u = aA(r ? n.draftId : null, {
                     enabled: l,
                     thumbnailUrl: n.thumbnailUrl,
                     videoUrl: n.videoUrl
@@ -6110,13 +6021,13 @@
             }) : null != c ? (0, i.jsx)("div", {
                 className: "radius-small clip size-[48px]",
                 "data-testid": "moment-video-thumbnail-image",
-                children: (0, i.jsx)(aX.Thumbnail2d, {
+                children: (0, i.jsx)(aK.Thumbnail2d, {
                     alt: "",
                     containerClass: "block",
                     imgClassName: "[object-fit:cover]",
-                    returnPolicy: aX.ReturnPolicy.PlaceHolder,
+                    returnPolicy: aK.ReturnPolicy.PlaceHolder,
                     targetId: c,
-                    type: aX.ThumbnailTypes.assetThumbnail
+                    type: aK.ThumbnailTypes.assetThumbnail
                 })
             }) : (0, i.jsx)("div", {
                 "aria-hidden": !0,
@@ -6134,8 +6045,8 @@
             }) : null != c && (g = (0, i.jsx)("div", {
                 "aria-label": h,
                 className: "radius-medium clip max-width-[500px] max-height-[500px] bg-surface-200",
-                children: (0, i.jsx)(aZ.RobloxVideoPlayer, {
-                    cmcdInstanceType: aZ.CmcdInstanceType.CreatorDashboard,
+                children: (0, i.jsx)(aW.RobloxVideoPlayer, {
+                    cmcdInstanceType: aW.CmcdInstanceType.CreatorDashboard,
                     cmcdUserId: null == o ? void 0 : o.id,
                     videoAssetId: String(c),
                     environment: "production",
@@ -6145,10 +6056,10 @@
                     loop: !0,
                     muted: !0
                 })
-            })), v) ? (0, i.jsxs)(aQ.Popover, {
+            })), v) ? (0, i.jsxs)(iw.Popover, {
                 open: m,
                 onOpenChange: p,
-                children: [(0, i.jsx)(aQ.PopoverAnchor, {
+                children: [(0, i.jsx)(iw.PopoverAnchor, {
                     asChild: !0,
                     children: (0, i.jsx)("button", {
                         "aria-label": h,
@@ -6160,7 +6071,7 @@
                         onBlur: x,
                         children: t
                     })
-                }), (0, i.jsx)(aQ.PopoverContent, {
+                }), (0, i.jsx)(iw.PopoverContent, {
                     align: "start",
                     ariaLabel: h,
                     className: "outline-none",
@@ -6169,13 +6080,13 @@
                 })]
             }) : t
         }, [ei.TranslationNamespace.Creations]),
-        a0 = [10, 25, 50],
-        a1 = {
+        aJ = [10, 25, 50],
+        aQ = {
             [eh]: "MomentsTable.NoActiveMoments",
             [ef]: "MomentsTable.NoDraftMoments",
             [ex]: "MomentsTable.NoModeratedMoments"
         },
-        a2 = e => {
+        aX = e => {
             let {
                 moment: t,
                 disabled: n,
@@ -6207,7 +6118,7 @@
                 })]
             })
         },
-        a4 = e => {
+        aZ = e => {
             let t, {
                     moment: n,
                     editLabel: s,
@@ -6242,48 +6153,48 @@
                 A = (0, a.useMemo)(() => {
                     var e;
                     if (!c) return null;
-                    let t = (null != (e = null == C ? void 0 : C.abuseTypeLabelKeys) ? e : []).filter(aS);
+                    let t = (null != (e = null == C ? void 0 : C.abuseTypeLabelKeys) ? e : []).filter(aI);
                     return (t.length > 0 ? t : ["Label.AbuseType.Other"]).map(e => y(ei.TranslationNamespace.NotApproved, e)).join(", ")
                 }, [C, c, y]),
                 M = null != C ? (t = C.violationUid, p ? "".concat(p, "#/v/").concat(encodeURIComponent(t)) : null) : null,
-                j = (0, i.jsx)(aB.TableCell, {
-                    children: (0, i.jsx)(aY, {
+                j = (0, i.jsx)(aO.TableCell, {
+                    children: (0, i.jsx)(aG, {
                         label: h,
                         status: n.status
                     })
                 });
-            return (0, i.jsxs)(aB.TableRow, {
+            return (0, i.jsxs)(aO.TableRow, {
                 isHoverable: !0,
                 "data-testid": "moment-row-".concat(I),
-                children: [(0, i.jsx)(aB.TableCell, {
-                    children: (0, i.jsx)(a$, {
+                children: [(0, i.jsx)(aO.TableCell, {
+                    children: (0, i.jsx)(aY, {
                         moment: n
                     })
                 }), l ? (0, i.jsxs)(i.Fragment, {
-                    children: [(0, i.jsx)(aB.TableCell, {
+                    children: [(0, i.jsx)(aO.TableCell, {
                         children: n.experienceName
-                    }), (0, i.jsx)(aB.TableCell, {
+                    }), (0, i.jsx)(aO.TableCell, {
                         children: n.status === eh ? (0, i.jsx)("span", {
                             "data-testid": "moment-description-".concat(I),
                             children: n.description || "-"
-                        }) : (0, i.jsx)(a2, {
+                        }) : (0, i.jsx)(aX, {
                             moment: n,
                             disabled: null != o && o === I,
                             onBlur: f
                         }, "moment-description-".concat(I, "-").concat(n.modifiedAt))
                     })]
-                }) : null, u ? (0, i.jsx)(aB.TableCell, {
+                }) : null, u ? (0, i.jsx)(aO.TableCell, {
                     children: (0, i.jsx)("span", {
                         "data-testid": "moment-content-language-".concat(I),
                         children: t0(n.locale)
                     })
                 }) : null, c ? (0, i.jsxs)(i.Fragment, {
-                    children: [(0, i.jsx)(aB.TableCell, {
+                    children: [(0, i.jsx)(aO.TableCell, {
                         children: (0, i.jsx)("span", {
                             "data-testid": "moment-description-".concat(I),
                             children: n.description || "-"
                         })
-                    }), (0, i.jsx)(aB.TableCell, {
+                    }), (0, i.jsx)(aO.TableCell, {
                         children: (0, i.jsx)("span", {
                             "data-testid": "moment-upload-time-".concat(I),
                             children: (null == C ? void 0 : C.uploadedAt) != null && ((e, t) => {
@@ -6308,17 +6219,17 @@
                                 return "".concat(o("weekday"), ", ").concat(o("month"), " ").concat(o("day"), ", ").concat(o("hour"), ":").concat(o("minute")).concat(r)
                             })(C.uploadedAt, null != b ? b : d.Locale.English) || "-"
                         })
-                    }), (0, i.jsx)(aB.TableCell, {
+                    }), (0, i.jsx)(aO.TableCell, {
                         children: (0, i.jsx)("span", {
                             "data-testid": "moment-moderation-reason-".concat(I),
                             children: A
                         })
-                    }), j, (0, i.jsx)(aB.TableCell, {
+                    }), j, (0, i.jsx)(aO.TableCell, {
                         align: "end",
-                        children: null != M ? (0, i.jsx)(az.Tooltip, {
+                        children: null != M ? (0, i.jsx)(aD.Tooltip, {
                             position: "top-center",
                             title: m,
-                            children: (0, i.jsx)(az.TooltipTrigger, {
+                            children: (0, i.jsx)(aD.TooltipTrigger, {
                                 asChild: !0,
                                 children: (0, i.jsx)(P.IconButton, {
                                     as: "a",
@@ -6335,16 +6246,16 @@
                         }) : null
                     })]
                 }) : (0, i.jsxs)(i.Fragment, {
-                    children: [j, (0, i.jsx)(aB.TableCell, {
+                    children: [j, (0, i.jsx)(aO.TableCell, {
                         align: "end",
                         children: (0, i.jsxs)("div", {
                             className: "inline-flex items-center gap-xsmall",
-                            children: [(0, i.jsx)(aK, {
+                            children: [(0, i.jsx)(aV, {
                                 moment: n
-                            }), (0, i.jsx)(az.Tooltip, {
+                            }), (0, i.jsx)(aD.Tooltip, {
                                 position: "top-center",
                                 title: s,
-                                children: (0, i.jsx)(az.TooltipTrigger, {
+                                children: (0, i.jsx)(aD.TooltipTrigger, {
                                     asChild: !0,
                                     children: (0, i.jsx)(P.IconButton, {
                                         ariaLabel: s,
@@ -6368,7 +6279,7 @@
                 })]
             })
         },
-        a5 = (0, d.withTranslation)(e => {
+        a$ = (0, d.withTranslation)(e => {
             let {
                 moments: t,
                 onEditMoment: n,
@@ -6387,7 +6298,7 @@
                     gridContainer: v,
                     createButtonContainer: f
                 }
-            } = (0, aV.default)(), {
+            } = (0, aB.default)(), {
                 statusTab: x
             } = nR(), g = nE(), y = (0, a.useCallback)(e => {
                 switch (e) {
@@ -6407,13 +6318,13 @@
                 rowsPerPage: A,
                 onPageChange: M,
                 onRowsPerPageChange: j
-            } = (0, aq.useTablePagination)({
+            } = (0, aU.useTablePagination)({
                 count: w.length,
                 initialRowsPerPage: 10,
                 resetKey: x
             }), {
                 currentPage: E
-            } = (0, aF.useCurrentPage)(w, {
+            } = (0, a_.useCurrentPage)(w, {
                 page: S,
                 rowsPerPage: A,
                 hasNextPage: !!b && u,
@@ -6426,7 +6337,7 @@
                 })
             }, [s]), k = (0, a.useCallback)(e => {
                 M(void 0, e)
-            }, [M]), L = p("Action.Edit"), R = h(ei.TranslationNamespace.OAuth, "Label.OAuthMoreDetails"), O = (0, aU.resolveUrl)("reportAppealsUrl", "production", "global"), D = (0, i.jsx)(aB.TableHeaderCell, {
+            }, [M]), L = p("Action.Edit"), R = h(ei.TranslationNamespace.OAuth, "Label.OAuthMoreDetails"), O = (0, aR.resolveUrl)("reportAppealsUrl", "production", "global"), D = (0, i.jsx)(aO.TableHeaderCell, {
                 children: p("MomentsTable.Header.Status")
             }), _ = 3 + 2 * !!T + +!!C + 3 * !!I;
             return (0, i.jsx)("div", {
@@ -6435,52 +6346,52 @@
                     className: (0, N.clsx)(f, "flex flex-col gap-xlarge width-full self-stretch"),
                     children: (0, i.jsxs)("div", {
                         className: "flex flex-col gap-y-medium width-full",
-                        children: [(0, i.jsxs)(aB.Table, {
+                        children: [(0, i.jsxs)(aO.Table, {
                             className: "width-full",
                             variant: "Framed",
-                            children: [(0, i.jsx)(aB.TableHeader, {
-                                children: (0, i.jsxs)(aB.TableRow, {
-                                    children: [(0, i.jsx)(aB.TableHeaderCell, {
+                            children: [(0, i.jsx)(aO.TableHeader, {
+                                children: (0, i.jsxs)(aO.TableRow, {
+                                    children: [(0, i.jsx)(aO.TableHeaderCell, {
                                         children: p("MomentsTable.Header.Moments")
                                     }), T ? (0, i.jsxs)(i.Fragment, {
-                                        children: [(0, i.jsx)(aB.TableHeaderCell, {
+                                        children: [(0, i.jsx)(aO.TableHeaderCell, {
                                             children: p("MomentsTable.Header.ExperienceName")
-                                        }), (0, i.jsx)(aB.TableHeaderCell, {
+                                        }), (0, i.jsx)(aO.TableHeaderCell, {
                                             children: p("MomentsTable.Header.Description")
                                         })]
-                                    }) : null, C ? (0, i.jsx)(aB.TableHeaderCell, {
+                                    }) : null, C ? (0, i.jsx)(aO.TableHeaderCell, {
                                         children: p("CreateMomentModal.LanguageInput.Label")
                                     }) : null, I ? (0, i.jsxs)(i.Fragment, {
-                                        children: [(0, i.jsx)(aB.TableHeaderCell, {
+                                        children: [(0, i.jsx)(aO.TableHeaderCell, {
                                             children: p("MomentsTable.Header.Description")
-                                        }), (0, i.jsx)(aB.TableHeaderCell, {
+                                        }), (0, i.jsx)(aO.TableHeaderCell, {
                                             children: h(ei.TranslationNamespace.AppealsPortal, "Label.UploadTime")
-                                        }), (0, i.jsx)(aB.TableHeaderCell, {
+                                        }), (0, i.jsx)(aO.TableHeaderCell, {
                                             children: p("TableHeader.Reason")
-                                        }), D, (0, i.jsx)(aB.TableHeaderCell, {
+                                        }), D, (0, i.jsx)(aO.TableHeaderCell, {
                                             align: "end",
                                             children: " "
                                         })]
                                     }) : (0, i.jsxs)(i.Fragment, {
-                                        children: [D, (0, i.jsx)(aB.TableHeaderCell, {
+                                        children: [D, (0, i.jsx)(aO.TableHeaderCell, {
                                             align: "end",
                                             children: " "
                                         })]
                                     })]
                                 })
-                            }), (0, i.jsx)(aB.TableBody, {
-                                children: 0 === w.length ? (0, i.jsx)(aB.TableRow, {
-                                    children: (0, i.jsx)(aB.TableCell, {
+                            }), (0, i.jsx)(aO.TableBody, {
+                                children: 0 === w.length ? (0, i.jsx)(aO.TableRow, {
+                                    children: (0, i.jsx)(aO.TableCell, {
                                         colSpan: _,
                                         align: "center",
                                         className: "padding-y-xxlarge",
                                         children: (0, i.jsx)("span", {
                                             className: "text-body-medium content-muted block padding-y-xxlarge",
                                             "data-testid": "moments-table-empty-filter-message",
-                                            children: p(a1[x])
+                                            children: p(aQ[x])
                                         })
                                     })
-                                }) : E.map(e => (0, i.jsx)(a4, {
+                                }) : E.map(e => (0, i.jsx)(aZ, {
                                     moment: e,
                                     editLabel: L,
                                     publishingDraftId: r,
@@ -6496,12 +6407,12 @@
                                     onPublishMoment: o
                                 }, nP(e)))
                             })]
-                        }), w.length > 0 ? (0, i.jsx)(aB.TablePagination, {
+                        }), w.length > 0 ? (0, i.jsx)(aO.TablePagination, {
                             paginationAriaLabel: "Pagination",
                             page: S,
                             rowsPerPage: A,
                             totalRows: w.length,
-                            rowsPerPageOptions: a0,
+                            rowsPerPageOptions: aJ,
                             onPageChange: k,
                             onRowsPerPageChange: j
                         }) : null]
@@ -6509,7 +6420,7 @@
                 })
             })
         }, [ei.TranslationNamespace.Creations, ei.TranslationNamespace.Controls, ei.TranslationNamespace.NotApproved, ei.TranslationNamespace.AppealsPortal, ei.TranslationNamespace.OAuth]),
-        a8 = (0, d.withTranslation)(e => {
+        a0 = (0, d.withTranslation)(e => {
             let {
                 onRetry: t
             } = e, {
@@ -6535,11 +6446,11 @@
                 })
             })
         }, [ei.TranslationNamespace.Error]);
-    var a3 = e.i(917852);
-    let a6 = () => {
-            window.open(a3.idVerificationActionUrl, "_blank", "noopener,noreferrer")
+    var a1 = e.i(917852);
+    let a2 = () => {
+            window.open(a1.idVerificationActionUrl, "_blank", "noopener,noreferrer")
         },
-        a7 = (0, d.withTranslation)(() => {
+        a4 = (0, d.withTranslation)(() => {
             let {
                 translate: e
             } = (0, d.useTranslation)();
@@ -6549,7 +6460,7 @@
                 severity: "Warning",
                 hasCloseAffordance: !1,
                 primaryActionLabel: e("Label.VerifyId"),
-                onPrimaryAction: a6,
+                onPrimaryAction: a2,
                 "data-testid": "moments-id-verification-banner",
                 children: (0, i.jsxs)("div", {
                     className: "flex flex-col gap-xsmall",
@@ -6563,12 +6474,12 @@
                 })
             })
         }, [ei.TranslationNamespace.Creations]),
-        a9 = () => {
+        a5 = () => {
             var e;
             (() => {
                 let {
                     user: e
-                } = (0, q.useAuthentication)(), t = null == e ? void 0 : e.id;
+                } = (0, V.useAuthentication)(), t = null == e ? void 0 : e.id;
                 (0, a.useEffect)(() => () => {
                     void 0 !== t && (() => {
                         for (let e of eC.keys()) {
@@ -6582,12 +6493,12 @@
                 translate: t
             } = (0, d.useTranslation)(), {
                 user: n
-            } = (0, q.useAuthentication)(), s = null == n ? void 0 : n.id, {
+            } = (0, V.useAuthentication)(), s = null == n ? void 0 : n.id, {
                 data: o,
                 isLoading: r,
                 isError: l,
                 refetch: c
-            } = (0, aI.useCreatorEligibility)(), m = null != (e = null == o ? void 0 : o.creatorEligibility.includes(ag.CreatorEligibilityEnum.IdVerified)) && e, p = r || l || !m, h = !r && !l && !m, v = (0, a.useCallback)(() => {
+            } = (0, ax.useCreatorEligibility)(), m = null != (e = null == o ? void 0 : o.creatorEligibility.includes(ah.CreatorEligibilityEnum.IdVerified)) && e, p = r || l || !m, h = !r && !l && !m, v = (0, a.useCallback)(() => {
                 c()
             }, [c]), [f, x] = (0, a.useState)(!1), [g, y] = (0, a.useState)(null), [b, I] = (0, a.useState)({}), {
                 moments: C,
@@ -6611,7 +6522,7 @@
                     return e && null != t && t
                 })(), {
                     user: o
-                } = (0, q.useAuthentication)(), r = null == o ? void 0 : o.id, {
+                } = (0, V.useAuthentication)(), r = null == o ? void 0 : o.id, {
                     mutateAsync: l,
                     isPending: c,
                     variables: m
@@ -6647,7 +6558,7 @@
             } = function() {
                 let {
                     user: e
-                } = (0, q.useAuthentication)(), t = (0, eH.useQueryClient)(), n = null == e ? void 0 : e.id, i = nj(), {
+                } = (0, V.useAuthentication)(), t = (0, eH.useQueryClient)(), n = null == e ? void 0 : e.id, i = nj(), {
                     mutateAsync: s,
                     isPending: o,
                     variables: r
@@ -6695,8 +6606,8 @@
                 error: U,
                 isPending: B,
                 isFetchingNextPage: z,
-                isFetchNextPageError: F,
-                errorUpdatedAt: V,
+                isFetchNextPageError: q,
+                errorUpdatedAt: F,
                 loadedPageCount: G,
                 refetch: H,
                 serverPageSize: K
@@ -6716,7 +6627,7 @@
                     } = function() {
                         let {
                             user: e
-                        } = (0, q.useAuthentication)(), t = null == e ? void 0 : e.id, n = nj();
+                        } = (0, V.useAuthentication)(), t = null == e ? void 0 : e.id, n = nj();
                         return (0, eW.useInfiniteQuery)({
                             queryKey: nN(t, n),
                             queryFn: null != t ? e => {
@@ -6740,7 +6651,7 @@
                         for (let n of e)
                             for (let e of n.moments) t.set(nP(e), e);
                         return [...t.values()]
-                    }(n.pages) : aC, [n]),
+                    }(n.pages) : ay, [n]),
                     p = null != (e = null == n ? void 0 : n.pages.length) ? e : 0,
                     h = (0, a.useCallback)(() => {
                         r({
@@ -6749,7 +6660,7 @@
                         })
                     }, [r]),
                     v = l && !d;
-                (0, aT.useBackgroundPageLoader)({
+                (0, ag.useBackgroundPageLoader)({
                     hasNextPage: v,
                     fetchNextPage: h,
                     disabled: s
@@ -6779,7 +6690,7 @@
                     enabled: t
                 } = e, {
                     user: n
-                } = (0, q.useAuthentication)(), i = null == n ? void 0 : n.id;
+                } = (0, V.useAuthentication)(), i = null == n ? void 0 : n.id;
                 return (0, eJ.useQuery)({
                     queryKey: ["userViolations", i],
                     queryFn: null != i && t ? () => nv(i) : eK.skipToken,
@@ -6788,7 +6699,7 @@
                 })
             }({
                 enabled: W
-            }), $ = (0, a.useMemo)(() => (null != Y ? Y : []).map(aA), [Y]), ee = (0, a.useCallback)(() => {
+            }), $ = (0, a.useMemo)(() => (null != Y ? Y : []).map(aT), [Y]), ee = (0, a.useCallback)(() => {
                 X()
             }, [X]);
             (0, a.useEffect)(() => {
@@ -6810,14 +6721,14 @@
                 ei = en.length > 0,
                 ea = (0, a.useRef)(0);
             (0, a.useEffect)(() => {
-                !U || B || F || V <= ea.current || (ea.current = V, tG(tB.ListMoments, U, {
+                !U || B || q || F <= ea.current || (ea.current = F, tG(tB.ListMoments, U, {
                     userId: s,
                     pageCount: G
                 }))
-            }, [U, V, F, B, G, s]);
+            }, [U, F, q, B, G, s]);
             let es = (0, a.useRef)(!1);
             (0, a.useEffect)(() => {
-                if (!F || z) {
+                if (!q || z) {
                     es.current = !1;
                     return
                 }
@@ -6825,7 +6736,7 @@
                     userId: s,
                     pageCount: G
                 }))
-            }, [U, F, z, G, s]);
+            }, [U, q, z, G, s]);
             let eo = (0, a.useMemo)(() => {
                     var e;
                     if (!g) return null;
@@ -6842,22 +6753,22 @@
                     H()
                 }, [H]),
                 ed = (0, a.useCallback)(() => {
-                    (0, ab.toast)({
+                    (0, af.toast)({
                         title: t("Message.MomentPublishedError")
                     })
                 }, [t]),
                 ec = (0, a.useCallback)(() => {
-                    (0, ab.toast)({
+                    (0, af.toast)({
                         title: t("Message.MomentUploading")
                     })
                 }, [t]),
                 em = (0, a.useCallback)(() => {
-                    (0, ab.toast)({
+                    (0, af.toast)({
                         title: t("Message.MomentProcessing")
                     })
                 }, [t]),
                 ep = (0, a.useCallback)(() => {
-                    (0, ab.toast)({
+                    (0, af.toast)({
                         title: t("Message.MomentDeletedError")
                     })
                 }, [t]),
@@ -6871,7 +6782,7 @@
                                 momentId: e.momentId,
                                 feedItemId: e.feedItemId
                             },
-                            experienceId: aM(e),
+                            experienceId: aC(e),
                             isLocalMoment: t,
                             userId: s
                         };
@@ -6916,7 +6827,7 @@
                     E.current = !0;
                     let n = {
                         draftId: e,
-                        experienceId: aM(t),
+                        experienceId: aC(t),
                         isLocalMoment: !0,
                         userId: s
                     };
@@ -6932,7 +6843,7 @@
                 ey = (0, a.useCallback)(e => {
                     e.status === ef && eg(e.draftId)
                 }, [eg]);
-            return W && Q ? (0, i.jsx)(ay.default, {
+            return W && Q ? (0, i.jsx)(av.default, {
                 onReload: ee
             }) : W && J ? (0, i.jsx)("div", {
                 className: "flex grow-1 flex-col items-center justify-center self-stretch width-full",
@@ -6943,9 +6854,9 @@
                 })
             }) : !U || N === ef || W || ei ? (!B || W || ei) && (O || W || ei) ? (0, i.jsxs)("div", {
                 className: "flex grow-1 flex-col gap-medium self-stretch width-full",
-                children: [l ? (0, i.jsx)(a8, {
+                children: [l ? (0, i.jsx)(a0, {
                     onRetry: v
-                }) : null, h ? (0, i.jsx)(a7, {}) : null, ei || W ? (0, i.jsx)(a5, {
+                }) : null, h ? (0, i.jsx)(a4, {}) : null, ei || W ? (0, i.jsx)(a$, {
                     moments: en,
                     hasNextPage: D,
                     fetchNextPage: _,
@@ -6957,10 +6868,10 @@
                     isPublishDisabled: p
                 }) : (0, i.jsx)("div", {
                     className: "flex grow-1 flex-col items-center justify-center self-stretch width-full",
-                    children: (0, i.jsx)(a_, {
+                    children: (0, i.jsx)(aL, {
                         onCreateClick: n3
                     })
-                }), (0, i.jsx)(aR, {
+                }), (0, i.jsx)(aP, {
                     moment: eo,
                     open: f,
                     onOpenChange: el,
@@ -6978,20 +6889,20 @@
                     size: "Large",
                     variant: "Indeterminate"
                 })
-            }) : (0, i.jsx)(ay.default, {
+            }) : (0, i.jsx)(av.default, {
                 onReload: eu
             })
         },
-        se = {
+        a8 = {
             width: "100%",
             height: "100%"
         },
-        st = (0, id.makeStyles)()(e => ({
+        a3 = (0, id.makeStyles)()(e => ({
             section: {
-                ...se
+                ...a8
             },
             container: {
-                ...se
+                ...a8
             },
             title: {
                 marginBottom: e.spacing(1),
@@ -7005,90 +6916,90 @@
                 padding: 0
             }
         })),
-        sn = (0, J.default)(() => e.A(202045), {
+        a6 = (0, J.default)(() => e.A(202045), {
             loadableGenerated: {
                 modules: [623728]
             },
             ssr: !1
         }),
-        si = (0, J.default)(() => e.A(378869), {
+        a7 = (0, J.default)(() => e.A(378869), {
             loadableGenerated: {
                 modules: [518808]
             },
             ssr: !1
         }),
-        sa = (0, J.default)(() => e.A(580854), {
+        a9 = (0, J.default)(() => e.A(580854), {
             loadableGenerated: {
                 modules: [427685]
             },
             ssr: !1
         }),
-        ss = (0, J.default)(() => e.A(307640), {
+        se = (0, J.default)(() => e.A(307640), {
             loadableGenerated: {
                 modules: [48220]
             },
             ssr: !1
         }),
-        so = (0, J.default)(() => e.A(114198), {
+        st = (0, J.default)(() => e.A(114198), {
             loadableGenerated: {
                 modules: [595604]
             },
             ssr: !1
         }),
-        sr = (0, J.default)(() => e.A(558217), {
+        sn = (0, J.default)(() => e.A(558217), {
             loadableGenerated: {
                 modules: [333771]
             },
             ssr: !1
         }),
-        sl = (0, J.default)(() => e.A(546234), {
+        si = (0, J.default)(() => e.A(546234), {
             loadableGenerated: {
                 modules: [82873]
             },
             ssr: !1
         }),
-        su = (0, J.default)(() => e.A(85397), {
+        sa = (0, J.default)(() => e.A(85397), {
             loadableGenerated: {
                 modules: [973472]
             },
             ssr: !1
         }),
-        sd = (0, J.default)(() => e.A(890748), {
+        ss = (0, J.default)(() => e.A(890748), {
             loadableGenerated: {
                 modules: [835459]
             },
             ssr: !1
         }),
-        sc = (0, J.default)(() => e.A(68996), {
+        so = (0, J.default)(() => e.A(68996), {
             loadableGenerated: {
                 modules: [565869]
             },
             ssr: !1
         }),
-        sm = (0, J.default)(() => e.A(441969), {
+        sr = (0, J.default)(() => e.A(441969), {
             loadableGenerated: {
                 modules: [415945]
             },
             ssr: !1
         }),
-        sp = (0, J.default)(() => e.A(481709), {
+        sl = (0, J.default)(() => e.A(481709), {
             loadableGenerated: {
                 modules: [947274]
             },
             ssr: !1
         }),
-        sh = (0, J.default)(() => e.A(272047), {
+        su = (0, J.default)(() => e.A(272047), {
             loadableGenerated: {
                 modules: [616027]
             },
             ssr: !1
         });
 
-    function sv(e) {
+    function sd(e) {
         let t = (0, h.readQueryValue)(e);
         return void 0 === t ? m.Asset.MyExperiences : (0, p.isValidEnumValue)(m.Asset, t) ? t : m.Asset.MyExperiences
     }
-    let sf = (0, d.withTranslation)(e => {
+    let sc = (0, d.withTranslation)(e => {
             let {
                 verificationMetadata: t,
                 currentGroup: n,
@@ -7100,12 +7011,12 @@
                 isFetched: c
             } = (0, f.useGroups)(), {
                 isResolving: p
-            } = (0, a.useContext)(F), h = C(), v = (0, ix.default)(), T = (0, ig.default)(), {
+            } = (0, a.useContext)(q), h = C(), v = (0, ix.default)(), T = (0, ig.default)(), {
                 translate: w,
                 ready: S
             } = (0, d.useTranslation)(), A = (0, y.default)(), M = (0, a.useRef)(void 0), j = (0, a.useMemo)(() => [], []), E = (0, x.isTaxonomyActiveTab)(r.activeTab), P = E || (0, x.isRecentsActiveTab)(r.activeTab), k = (0, a.useMemo)(() => {
                 let e = (0, x.isAllAssetTypesActiveTab)(r.activeTab) ? m.Asset.AllCatalogAsset : x.TAXONOMY_HOST_ASSET;
-                return I.default.getMenuState(P ? e : sv(r.activeTab), j)
+                return I.default.getMenuState(P ? e : sd(r.activeTab), j)
             }, [r.activeTab, j, P]);
             (0, a.useEffect)(() => {
                 (0, x.isRecentsActiveTab)(r.activeTab) && l({
@@ -7119,7 +7030,7 @@
                         section: L,
                         container: R
                     }
-                } = st(),
+                } = a3(),
                 O = (0, a.useCallback)(e => {
                     if (k.menuItem === e.menuItem && k.submenuItem === e.submenuItem) return;
                     if ((0, x.shouldOpenTaxonomyView)({
@@ -7137,9 +7048,9 @@
                     })
                 }, [k.menuItem, k.submenuItem, l, A]),
                 D = (0, a.useMemo)(() => {
-                    let e = sv(r.activeTab);
+                    let e = sd(r.activeTab);
                     if (void 0 === h && e === m.Asset.Moments || void 0 === T && e === m.Asset.Showcase) return k;
-                    let t = sv(r.activeTab) === m.Asset.TextDocument;
+                    let t = sd(r.activeTab) === m.Asset.TextDocument;
                     if (void 0 === v && t) return k;
                     let i = I.default.getValidMenuState(N, k, n, void 0, void 0, h, T, v);
                     if (i !== k) {
@@ -7166,24 +7077,24 @@
             let U = _ === m.Asset.MyExperiences || _ === m.Asset.SharedExperiences,
                 B = (0, a.useMemo)(() => null == o ? void 0 : o.has(_), [_, o]),
                 z = (0, g.isDevelopmentItemAsset)(_, v),
-                q = (0, a.useMemo)(() => {
+                V = (0, a.useMemo)(() => {
                     var e, t;
-                    return z ? (0, i.jsx)(sp, {
+                    return z ? (0, i.jsx)(sl, {
                         groupId: null == n ? void 0 : n.id,
                         useTabNavigationSpacing: !1,
                         userId: null == s ? void 0 : s.id
-                    }) : _ === m.Asset.Decal ? (0, i.jsx)(sa, {
+                    }) : _ === m.Asset.Decal ? (0, i.jsx)(a9, {
                         groupId: null == n ? void 0 : n.id
-                    }) : _ === m.Asset.Animation ? (0, i.jsx)(si, {
+                    }) : _ === m.Asset.Animation ? (0, i.jsx)(a7, {
                         groupId: null == n ? void 0 : n.id
-                    }) : _ === m.Asset.Audio || _ === m.Asset.Video ? (0, i.jsx)(ss, {
+                    }) : _ === m.Asset.Audio || _ === m.Asset.Video ? (0, i.jsx)(se, {
                         mediaAssetType: _,
                         groupId: null == n ? void 0 : n.id
-                    }) : _ === m.Asset.Plugin ? (0, i.jsx)(sl, {
+                    }) : _ === m.Asset.Plugin ? (0, i.jsx)(si, {
                         groupId: null == n ? void 0 : n.id
-                    }) : _ === m.Asset.Model ? (0, i.jsx)(sr, {
+                    }) : _ === m.Asset.Model ? (0, i.jsx)(sn, {
                         groupId: null == n ? void 0 : n.id
-                    }) : _ === m.Asset.MeshPart ? (0, i.jsx)(so, {
+                    }) : _ === m.Asset.MeshPart ? (0, i.jsx)(st, {
                         groupId: null == n ? void 0 : n.id
                     }) : _ === m.Asset.TextDocument ? (0, i.jsx)("div", {
                         className: "flex justify-center items-center padding-y-xxlarge",
@@ -7192,22 +7103,22 @@
                             size: "Large",
                             variant: "Indeterminate"
                         })
-                    }) : _ === m.Asset.ShareLink ? (0, i.jsx)(sc, {}) : _ === m.Asset.Moments ? (0, i.jsx)(a9, {}) : _ === m.Asset.AssetPermissionRequests ? (0, i.jsx)(sh, {}) : _ === m.Asset.Showcase ? (0, i.jsx)(su, {
+                    }) : _ === m.Asset.ShareLink ? (0, i.jsx)(so, {}) : _ === m.Asset.Moments ? (0, i.jsx)(a5, {}) : _ === m.Asset.AssetPermissionRequests ? (0, i.jsx)(su, {}) : _ === m.Asset.Showcase ? (0, i.jsx)(sa, {
                         groupId: null == n ? void 0 : n.id
-                    }) : _ === m.Asset.AllCatalogAsset || _ === m.Asset.AvatarLooks || _ === m.Asset.AvatarBackground ? (0, i.jsx)(sn, {
+                    }) : _ === m.Asset.AllCatalogAsset || _ === m.Asset.AvatarLooks || _ === m.Asset.AvatarBackground ? (0, i.jsx)(a6, {
                         assetType: _,
                         groupId: null == n ? void 0 : n.id
-                    }) : _ === m.Asset.Image || _ === m.Asset.Mesh ? (0, i.jsx)(sd, {
+                    }) : _ === m.Asset.Image || _ === m.Asset.Mesh ? (0, i.jsx)(ss, {
                         primitiveAssetType: _,
                         groupId: null == n ? void 0 : n.id
-                    }) : B ? (0, i.jsx)(sn, {
+                    }) : B ? (0, i.jsx)(a6, {
                         assetType: _,
                         groupId: null == n ? void 0 : n.id
-                    }) : (0, i.jsx)(sm, {
+                    }) : (0, i.jsx)(sr, {
                         assetType: _,
                         creatorType: (null == n ? void 0 : n.id) ? Q.SearchCreatorType.Group : Q.SearchCreatorType.User,
                         creatorTargetId: null != (e = null != (t = null == n ? void 0 : n.id) ? t : null == s ? void 0 : s.id) ? e : 0,
-                        isTelemetryReady: c && S && !p && (null == s ? void 0 : s.id) !== void 0 && sv(r.activeTab) === _
+                        isTelemetryReady: c && S && !p && (null == s ? void 0 : s.id) !== void 0 && sd(r.activeTab) === _
                     })
                 }, [_, null == n ? void 0 : n.id, null == s ? void 0 : s.id, B, z, w, c, S, p, r.activeTab]);
             return (0, i.jsxs)(ea.default, {
@@ -7222,21 +7133,21 @@
                         className: R,
                         children: [(0, i.jsx)(ee.AgeVerificationUpsellBanner, {
                             trackingPage: ee.AgeVerificationUpsellPage.Creations
-                        }), !z && (0, i.jsx)(ax, {
+                        }), !z && (0, i.jsx)(ap, {
                             menuState: D,
                             onMenuStateChange: O,
                             verificationMetadata: t,
                             group: n
-                        }), U && (0, i.jsx)(et.default, {}), q]
+                        }), U && (0, i.jsx)(et.default, {}), V]
                     })
                 })]
             })
         }, [ei.TranslationNamespace.AssetTypes, ei.TranslationNamespace.Controls, ei.TranslationNamespace.Creations, ei.TranslationNamespace.Error, ei.TranslationNamespace.Navigation, ei.TranslationNamespace.ShareLinksManagement, ei.TranslationNamespace.ExperienceReleases, ei.TranslationNamespace.Taxonomy]),
-        sx = () => {
+        sm = () => {
             let e = (0, f.useCurrentGroup)(),
                 {
                     user: t
-                } = (0, q.useAuthentication)(),
+                } = (0, V.useAuthentication)(),
                 n = (0, Y.default)(),
                 [s, o] = (0, a.useState)(void 0);
             return (0, a.useEffect)(() => {
@@ -7247,7 +7158,7 @@
                     o(t)
                 })
             }, []), (0, i.jsx)(W, {
-                children: (0, i.jsx)(sf, {
+                children: (0, i.jsx)(sc, {
                     verificationMetadata: n,
                     currentGroup: e,
                     currentUser: t,
@@ -7255,14 +7166,14 @@
                 })
             })
         };
-    var sg = e.i(675330),
-        sy = e.i(177608),
-        sb = e.i(796266);
-    let sI = e => {
+    var sp = e.i(675330),
+        sh = e.i(177608),
+        sv = e.i(796266);
+    let sf = e => {
             let {
                 children: t
             } = e;
-            return (0, i.jsx)(sy.default, {
+            return (0, i.jsx)(sh.default, {
                 title: (0, i.jsx)(z, {}),
                 secondaryRail: (0, i.jsx)(j, {}),
                 secondarySize: "small",
@@ -7272,28 +7183,28 @@
                 })
             })
         },
-        sT = () => {
+        sx = () => {
             let {
                 isResolving: e
-            } = (0, sb.default)(), t = (0, a.useMemo)(() => ({
+            } = (0, sv.default)(), t = (0, a.useMemo)(() => ({
                 isResolving: e
             }), [e]);
             return (0, i.jsx)(r.default, {
-                children: (0, i.jsx)(sg.default, {
+                children: (0, i.jsx)(sp.default, {
                     children: (0, i.jsx)(s.default, {
-                        children: (0, i.jsx)(F.Provider, {
+                        children: (0, i.jsx)(q.Provider, {
                             value: t,
-                            children: (0, i.jsx)(sx, {})
+                            children: (0, i.jsx)(sm, {})
                         })
                     })
                 })
             })
         };
-    sT.getPageLayout = e => (0, i.jsx)(sI, {
+    sx.getPageLayout = e => (0, i.jsx)(sf, {
         children: e
-    }), sT.loggerConfig = {
+    }), sx.loggerConfig = {
         rosId: "3539"
-    }, e.s(["default", 0, sT], 962059)
+    }, e.s(["default", 0, sx], 962059)
 }, 748348, (e, t, n) => {
     let i = "/dashboard/creations";
     (window.__NEXT_P = window.__NEXT_P || []).push([i, () => e.r(962059)]), t.hot && t.hot.dispose(function() {
@@ -7301,5 +7212,5 @@
     })
 }]);
 
-//# debugId=b5bf3e38-5823-124f-2a48-8c03144ae8bb
-//# sourceMappingURL=2d3bfp06lliys.js.map
+//# debugId=c757021d-13f1-9a00-3f05-f8995fd40103
+//# sourceMappingURL=2fvl3dtc21frr.js.map

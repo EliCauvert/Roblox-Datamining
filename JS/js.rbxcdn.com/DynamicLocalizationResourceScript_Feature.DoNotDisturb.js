@@ -2,7 +2,7 @@ var Roblox = Roblox || {};
 Roblox.LangDynamic = Roblox.LangDynamic || {};
 Roblox.LangDynamic["Feature.DoNotDisturb"] = {
     "Label.DoNotDisturb": "Do not disturb",
-    "Description.ParentSide.DoNotDisturb": "Select a daily time window to silence your child's mobile push notifications. Notifications will still be delivered to your child's device.",
+    "Description.ParentSide.DoNotDisturb": "Select a daily time window to stop your child's mobile push and email notifications.",
     "Description.ChildSide.DoNotDisturb": "Select a daily time window to silence mobile push notifications. Notifications will still be delivered to your device.",
     "Label.DoNotDisturb.StartTime": "Start time",
     "Label.DoNotDisturb.EndTime": "End time",
