@@ -7,10 +7,8 @@ local ReactIsModule = require(Parent.ReactIs)
 local Components = Foundation.Components
 local ConstantsModule = require(Foundation.Constants)
 local IconModule = require(Components.Icon)
-local ImageModule = require(Components.Image)
 local _ = require(Components.Types)
 local ViewModule = require(Components.View)
-local FlagsModule = require(Foundation.Utility.Flags)
 local BlendTransparenciesModule = require(Foundation.Utility.blendTransparencies)
 local MapBindableModule = require(Foundation.Utility.mapBindable)
 local UseBindableModule = require(Foundation.Utility.useBindable)
@@ -28,22 +26,15 @@ local config = {
 }
 
 return ReactModule.memo(function(p1)
-	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UsePresentationContextFunction (copy), UseKnobVariantsModule (copy), ColorNamespaceModule (copy), FlagsModule (copy), MapBindableModule (copy), ReactModule (copy), UseBindableModule (copy), ReactIsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), IconModule (copy), BlendTransparenciesModule (copy), ConstantsModule (copy), DashModule (copy), ImageModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UsePresentationContextFunction (copy), UseKnobVariantsModule (copy), ColorNamespaceModule (copy), MapBindableModule (copy), UseBindableModule (copy), ReactModule (copy), ReactIsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), IconModule (copy), BlendTransparenciesModule (copy), ConstantsModule (copy), DashModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
 	local UsePresentationContextResult = UsePresentationContextFunction()
 	local UseKnobVariantsModuleResult = UseKnobVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size, UsePresentationContextResult and UsePresentationContextResult.colorNamespace == ColorNamespaceModule.Inverse)
 	local Style = WithDefaultsModuleResult.style or UseKnobVariantsModuleResult.knob.style
-	local MapBindableModuleResult = if FlagsModule.FoundationKnobRaisedShadow then MapBindableModule(Style, function(p2)
+	local MapBindableModuleResult = MapBindableModule(Style, function(p2)
 		return p2.Transparency or 0
-	end) else nil
-	local UseResult = ReactModule.useCallback(function(p2)
-		-- upvalues: UseTokensModuleResult (copy)
-		return {
-			Color3 = UseTokensModuleResult.Color.Extended.White.White_100.Color3,
-			Transparency = p2.Transparency
-		}
-	end, { UseTokensModuleResult })
+	end)
 	local UseBindableModuleResult = UseBindableModule(if WithDefaultsModuleResult.stroke then WithDefaultsModuleResult.stroke.Transparency else nil)
 	local UseBindableModuleResult1 = UseBindableModule(Style)
 	local UseBindableModuleResult2 = UseBindableModule(UseKnobVariantsModuleResult.knob.style)
@@ -112,7 +103,7 @@ return ReactModule.memo(function(p1)
 			end):getValue(),
 			testId = `{WithDefaultsModuleResult.testId}--circle`
 		}),
-		Shadow = if WithDefaultsModuleResult.hasShadow and not WithDefaultsModuleResult.isDisabled then if FlagsModule.FoundationKnobRaisedShadow then ReactModule.createElement(ViewModule, {
+		Shadow = if WithDefaultsModuleResult.hasShadow and not WithDefaultsModuleResult.isDisabled then ReactModule.createElement(ViewModule, {
 			tag = "position-center-center anchor-center-center radius-circle shadow-raised-100",
 			ZIndex = 3,
 			GroupTransparency = MapBindableModuleResult,
@@ -120,13 +111,6 @@ return ReactModule.memo(function(p1)
 			Visible = MapBindableModule(MapBindableModuleResult, function(p2: number): boolean
 				return p2 < 1
 			end),
-			testId = `{WithDefaultsModuleResult.testId}--shadow`
-		}) else ReactModule.createElement(ImageModule, {
-			Image = "component_assets/dropshadow_28",
-			ZIndex = 3,
-			tag = UseKnobVariantsModuleResult.knobShadow.tag,
-			imageStyle = if ReactIsModule.isBinding(Style) then Style:map(UseResult) else UseResult(Style),
-			Size = UseKnobVariantsModuleResult.knobShadow.size,
 			testId = `{WithDefaultsModuleResult.testId}--shadow`
 		}) else nil
 	})

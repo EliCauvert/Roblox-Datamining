@@ -1,0 +1,1 @@
+﻿return { Static = "Static", Dismissible = "Dismissible" }

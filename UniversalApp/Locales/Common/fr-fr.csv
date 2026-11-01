@@ -928,6 +928,7 @@ CommonUI.Features.Heading.GameDetails,Détails de l'expérience
 CommonUI.Features.Label.About,À propos de
 CommonUI.Features.Label.AboutUs,À propos
 CommonUI.Features.Label.AcceptFriend,Accepter un(e) ami(e)
+CommonUI.Features.Label.Add,Ajouter
 CommonUI.Features.Label.AddConnections,Ajouter des connexions
 CommonUI.Features.Label.AddFriend,Ajouter un(e) ami(e)
 CommonUI.Features.Label.AdjustScreen,Ajuster l'écran
@@ -1868,7 +1869,7 @@ Feature.Avatar.Label.Accessory,Accessoire
 Feature.Avatar.Label.AccessoryAdjustment.Entry.Tooltip,Ajuster la taille de tes accessoires !
 Feature.Avatar.Label.AccessoryAdjustment.Items.Tooltip,Sélectionner l'élément à ajuster
 Feature.Avatar.Label.AccessoryCannotBeAdjustedWarning,L'ajustement n'est pas disponible pour cet item.
-Feature.Avatar.Label.Add,Ajouter
+Feature.Avatar.Label.Add,
 Feature.Avatar.Label.AddEdit,Ajouter/Modifier
 Feature.Avatar.Label.AddManage,Ajouter/Gérer
 Feature.Avatar.Label.AddManage2,
@@ -2806,7 +2807,7 @@ Feature.Build.Notification.Title.NeedInput,Construire a besoin de ton avis
 Feature.Build.Placeholder.DescribeProduct,Décris ce que tu veux vendre
 Feature.Build.Placeholder.DescribeProductUpdate,Décris une mise à jour
 Feature.Build.Placeholder.InternalSpec,internal_code
-Feature.Build.Prompt.CreateDeveloperProduct,"Aide-moi à créer un produit développeur, à l'intégrer au jeu, à vérifier et à publier les modifications, et à le rendre disponible à l'achat."
+Feature.Build.Prompt.CreateDeveloperProduct,"Analyse mon jeu et suggère-moi le meilleur item à vendre pour gagner des Robux. Un achat unique ou un item que les joueurs peuvent acheter plusieurs fois, comme un boost, conviendrait-il mieux à mon jeu ? Explique pourquoi."
 Feature.Build.Title.AdActive,La campagne publicitaire est active
 Feature.Build.Title.AdCampaignDuration,Campagne publicitaire de {durationDays} jours
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} jours
@@ -2926,6 +2927,8 @@ Feature.Catalog.Header.InvalidOutfit,Tenue non valide
 Feature.Catalog.Header.PostAvatar,Publier l'avatar
 Feature.Catalog.Heading.AvailableItems,Items disponibles
 Feature.Catalog.Heading.BuyItem,Acheter article
+Feature.Catalog.Heading.DescriptionLinkGoToMarketplace,Clique pour accéder au Marketplace
+Feature.Catalog.Heading.DescriptionLinkResetSearch,Clique pour réinitialiser ta recherche
 Feature.Catalog.Heading.FreeItemConfirmation,Obtenir élément
 Feature.Catalog.Heading.GoToExperience,Rejoindre une expérience ?
 Feature.Catalog.Heading.HoldingPolicy,Politique de mise en attente
@@ -3001,6 +3004,12 @@ Feature.Catalog.Label.CreatorName,Nom du créateur
 Feature.Catalog.Label.CurrentBalance,Solde actuel:
 Feature.Catalog.Label.CustomizeAvatar,Personnaliser un avatar
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,Tu ne peux pas annuler cette action si tu supprimes.
+Feature.Catalog.Label.DescriptionLinkInvalid,Lien invalide
+Feature.Catalog.Label.DescriptionLinkSearchMarketplace,Rechercher sur le marketplace
+Feature.Catalog.Label.DescriptionLinkViewAsset,Voir le contenu
+Feature.Catalog.Label.DescriptionLinkViewBundle,Voir le lot
+Feature.Catalog.Label.DescriptionLinkViewCommunity,Voir la communauté
+Feature.Catalog.Label.DescriptionLinkViewCommunityStore,Boutique de la communauté
 Feature.Catalog.Label.Details,
 Feature.Catalog.Label.DynamicHeads,
 Feature.Catalog.Label.Emissive,Émissif
@@ -3765,7 +3774,7 @@ Feature.Friends.Text.IsPlaying,y joue
 Feature.Friends.Text.NoConnections,"Tu n'as encore ajouté aucune connexion. Pour commencer, trouve et ajoute des connexions."
 Feature.Friends.Text.NoFriends,"Tu n'as pas encore ajouté d'amis. Pour commencer, trouve et ajoute tes amis sur Roblox."
 Feature.Friends.Title.TrustedFriendsExpiredLink,Lien expiré
-Feature.Friends.Title.TrustedFriendsInvalidLink,Lien invalide
+Feature.Friends.Title.TrustedFriendsInvalidLink,
 Feature.Friends.TrustedConnection.Label.Trusted,
 Feature.Friends.TrustedFriend.AcceptTrustedRequest,Accepter en ami de confiance
 Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,Retirer des amis de confiance
@@ -3933,7 +3942,7 @@ Feature.Groups.Action.NotNow,
 Feature.Groups.Action.RemovePrimary,Enlever la communauté principale
 Feature.Groups.Action.SeeAll,
 Feature.Groups.Action.Unfollow,Ne plus suivre
-Feature.Groups.Action.ViewGroup,Voir la communauté
+Feature.Groups.Action.ViewGroup,
 Feature.Groups.Description.JoinGroupPending,Ta demande d'adhésion est en attente d'examen par la communauté.
 Feature.Groups.Description.NotEligibleToJoin,Ton compte ne peut pas rejoindre cette communauté.
 Feature.Groups.Description.PremiumMaxGroups,Tu as rejoint le nombre maximum de communautés.
@@ -4151,6 +4160,7 @@ Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,Achats e
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,Interaction des utilisateurs
 Feature.Landing.Label.InvitedBy,Invité par {name}
 Feature.Landing.Label.PoweredBy,Géré par
+Feature.Leaderboards.Heading.Leaderboard,Classements
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,Activer
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,Aide les personnes ayant déjà ton numéro de téléphone à t'ajouter en ami sur Roblox.
@@ -4848,7 +4858,9 @@ Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Gratuit avec Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio ne prend pas en charge les achats de serveurs privés.
 Feature.PrivateServers.Description.VipServersNotSupported,Ce jeu ne prend pas en charge les serveurs privés.
+Feature.PrivateServers.Heading.ConfigurePrivateServer,Configurer le Serveur Privé
 Feature.PrivateServers.Label.OwnersServer,Serveur crée par {displayName}
+Feature.PrivateServers.Label.ServerName,Nom du serveur :
 Feature.Profile.Action.AboutThisProfile,À propos de ce profil
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,Accepter un ami
@@ -5324,10 +5336,10 @@ Feature.SplitPane.Tour.Step2.Description,Choisis ton apparence. Passe d'un avata
 Feature.SplitPane.Tour.Step2.Title,Change de look à tout moment
 Feature.SplitPane.Tour.Step3.Description,Masque cet espace quand tu le souhaites pour découvrir de nouveaux jeux. Ton avatar enregistré reste accessible ici.
 Feature.SplitPane.Tour.Step3.Title,Personnalise l'affichage
-Feature.SplitPane.UnsavedChangesDialogBody,"Si tu changes d'avatar maintenant, les modifications apportées risquent d'être perdues. Enregistre-les pour les conserver."
+Feature.SplitPane.UnsavedChangesDialogBody,"Si tu continues, tu perdras ton avatar actuel. Enregistre pour le conserver."
 Feature.SplitPane.UnsavedChangesDialogPrimaryCTA,
-Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,Ne pas enregistrer
-Feature.SplitPane.UnsavedChangesDialogTitle,Enregistrer tes modifications ?
+Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,
+Feature.SplitPane.UnsavedChangesDialogTitle,Enregistrer avant de changer d'avatar ?
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,Ajouter d'autres personnes
 Feature.Squads.Action.ConnectToVoice,Se connecter au chat vocal
@@ -5922,7 +5934,7 @@ Roblox.ReferralRewards.RewardBannerModalTitle,Récompense de parrainage de vos a
 Search.GlobalSearch.Action.LoadMore,
 Search.GlobalSearch.Example.SearchCatalog,Rechercher dans le catalogue
 Search.GlobalSearch.Example.SearchGames,
-Search.GlobalSearch.Example.SearchMarketplace,Rechercher sur le marketplace
+Search.GlobalSearch.Example.SearchMarketplace,
 Search.GlobalSearch.TopResultsLabel,
 Verification.Identity.Action.SkipVoiceChat,Rejoindre sans chat vocal
 Verification.Identity.Heading.LetsChat,Bavardons !

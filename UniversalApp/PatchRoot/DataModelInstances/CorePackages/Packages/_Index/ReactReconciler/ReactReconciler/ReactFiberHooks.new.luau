@@ -213,20 +213,17 @@ local function areHookInputsEqual(BaseState, BaseState1): boolean
 				v6 = i
 			end
 		end
-		local v7: number = v6
-		local v8 = 0
+		local v7 = 0
 		
 		for i1, _ in BaseState1 do
-			if v8 < i1 then
-				v8 = i1
+			if v7 < i1 then
+				v7 = i1
 			end
 		end
-		local v9: number = v8
-		
-		if v7 ~= v9 then
+		if v6 ~= v7 then
 			return false
 		end
-		for i2 = 1, math.min(v9, v7) do
+		for i2 = 1, math.min(v7, v6) do
 			local BaseStateEntry: number = BaseState[i2]
 			local BaseStateEntry1: number = BaseState1[i2]
 			
@@ -462,7 +459,7 @@ function updateReducer(Callback, _, _)
 		local Next = BaseQueue.next
 		local BaseState = Alternate2.baseState
 		local BaseState1: number? = nil
-		local v10 = nil
+		local v8 = nil
 		local Next1 = nil
 		local Next2 = Next
 		repeat
@@ -494,7 +491,7 @@ function updateReducer(Callback, _, _)
 				
 				if Next1 == nil then
 					Next1 = config
-					v10 = Next1
+					v8 = Next1
 					BaseState1 = BaseState
 				else
 					Next1.next = config
@@ -508,7 +505,7 @@ function updateReducer(Callback, _, _)
 		if Next1 == nil then
 			BaseState1 = BaseState
 		else
-			Next1.next = v10
+			Next1.next = v8
 		end
 		local MemoizedState: number = UpdateWorkInProgressHookResult.memoizedState
 		
@@ -600,7 +597,7 @@ function useMutableSource(p2, Source: number, Callback: number, Callback1: numbe
 		-- upvalues: WorkInProgressRoot (copy), Source (copy), Callback (copy)
 		return readFromUnsubcribedMutableSource(WorkInProgressRoot, Source, Callback)
 	end)
-	local v10 = v2
+	local v8 = v2
 	local MemoizedState = p2.memoizedState
 	
 	if MemoizedState.refs == nil then
@@ -674,11 +671,11 @@ function useMutableSource(p2, Source: number, Callback: number, Callback1: numbe
 		end
 		
 		Queue.dispatch = UseStateResult2
-		v10.queue = Queue
-		v10.baseQueue = nil
+		v8.queue = Queue
+		v8.baseQueue = nil
 		UseStateResult = readFromUnsubcribedMutableSource(WorkInProgressRoot, Source, Callback)
-		v10.baseState = UseStateResult
-		v10.memoizedState = v10.baseState
+		v8.baseState = UseStateResult
+		v8.memoizedState = v8.baseState
 	end
 	return UseStateResult
 end
@@ -1334,12 +1331,12 @@ if DEV then
 			v3 = "useCallback"
 			
 			if DEV then
-				local v10: string = v3
+				local v8: string = v3
 				
 				if List == nil then
-					List = { v10 }
+					List = { v8 }
 				else
-					table.insert(List, v10)
+					table.insert(List, v8)
 				end
 			end
 			if DEV and List1 ~= nil then
@@ -1367,12 +1364,12 @@ if DEV then
 			v3 = "useContext"
 			
 			if DEV then
-				local v11: string = v3
+				local v9: string = v3
 				
 				if List == nil then
-					List = { v11 }
+					List = { v9 }
 				else
-					table.insert(List, v11)
+					table.insert(List, v9)
 				end
 			end
 			return ReadContextFunction(p3, p4)
@@ -1382,12 +1379,12 @@ if DEV then
 			v3 = "useEffect"
 			
 			if DEV then
-				local v11: string = v3
+				local v9: string = v3
 				
 				if List == nil then
-					List = { v11 }
+					List = { v9 }
 				else
-					table.insert(List, v11)
+					table.insert(List, v9)
 				end
 			end
 			if DEV and Deps ~= nil then
@@ -1415,12 +1412,12 @@ if DEV then
 			v3 = "useImperativeHandle"
 			
 			if DEV then
-				local v12: string = v3
+				local v10: string = v3
 				
 				if List == nil then
-					List = { v12 }
+					List = { v10 }
 				else
-					table.insert(List, v12)
+					table.insert(List, v10)
 				end
 			end
 			if DEV and List1 ~= nil then
@@ -1448,12 +1445,12 @@ if DEV then
 			v3 = "useLayoutEffect"
 			
 			if DEV then
-				local v13: string = v3
+				local v11: string = v3
 				
 				if List == nil then
-					List = { v13 }
+					List = { v11 }
 				else
-					table.insert(List, v13)
+					table.insert(List, v11)
 				end
 			end
 			if DEV and Deps ~= nil then
@@ -1481,12 +1478,12 @@ if DEV then
 			v3 = "useMemo"
 			
 			if DEV then
-				local v14: string = v3
+				local v12: string = v3
 				
 				if List == nil then
-					List = { v14 }
+					List = { v12 }
 				else
-					table.insert(List, v14)
+					table.insert(List, v12)
 				end
 			end
 			if DEV and List1 ~= nil then
@@ -1526,12 +1523,12 @@ if DEV then
 			v3 = "useReducer"
 			
 			if DEV then
-				local v15: string = v3
+				local v13: string = v3
 				
 				if List == nil then
-					List = { v15 }
+					List = { v13 }
 				else
-					table.insert(List, v15)
+					table.insert(List, v13)
 				end
 			end
 			local Current = ReactCurrentDispatcher.current
@@ -1549,12 +1546,12 @@ if DEV then
 			v3 = "useRef"
 			
 			if DEV then
-				local v15: string = v3
+				local v13: string = v3
 				
 				if List == nil then
-					List = { v15 }
+					List = { v13 }
 				else
-					table.insert(List, v15)
+					table.insert(List, v13)
 				end
 			end
 			return mountRef(p6)
@@ -1564,12 +1561,12 @@ if DEV then
 			v3 = "useBinding"
 			
 			if DEV then
-				local v15: string = v3
+				local v13: string = v3
 				
 				if List == nil then
-					List = { v15 }
+					List = { v13 }
 				else
-					table.insert(List, v15)
+					table.insert(List, v13)
 				end
 			end
 			return mountBinding(p6)
@@ -1579,12 +1576,12 @@ if DEV then
 			v3 = "useState"
 			
 			if DEV then
-				local v15: string = v3
+				local v13: string = v3
 				
 				if List == nil then
-					List = { v15 }
+					List = { v13 }
 				else
-					table.insert(List, v15)
+					table.insert(List, v13)
 				end
 			end
 			local Current = ReactCurrentDispatcher.current
@@ -1602,12 +1599,12 @@ if DEV then
 			v3 = "useDebugValue"
 			
 			if DEV then
-				local v15: string = v3
+				local v13: string = v3
 				
 				if List == nil then
-					List = { v15 }
+					List = { v13 }
 				else
-					table.insert(List, v15)
+					table.insert(List, v13)
 				end
 			end
 			return mountDebugValue(p6, p7)
@@ -1617,12 +1614,12 @@ if DEV then
 			v3 = "useMutableSource"
 			
 			if DEV then
-				local v15: string = v3
+				local v13: string = v3
 				
 				if List == nil then
-					List = { v15 }
+					List = { v13 }
 				else
-					table.insert(List, v15)
+					table.insert(List, v13)
 				end
 			end
 			return mountMutableSource(p6, p7, p8)
@@ -1632,12 +1629,12 @@ if DEV then
 			v3 = "useOpaqueIdentifier"
 			
 			if DEV then
-				local v15: string = v3
+				local v13: string = v3
 				
 				if List == nil then
-					List = { v15 }
+					List = { v13 }
 				else
-					table.insert(List, v15)
+					table.insert(List, v13)
 				end
 			end
 			return mountOpaqueIdentifier()
@@ -2044,12 +2041,12 @@ if DEV then
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			
 			if DEV then
-				local v15: string = v3
+				local v13: string = v3
 				
 				if List == nil then
-					List = { v15 }
+					List = { v13 }
 				else
-					table.insert(List, v15)
+					table.insert(List, v13)
 				end
 			end
 			return mountCallback(p7, p8)
@@ -2060,12 +2057,12 @@ if DEV then
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			
 			if DEV then
-				local v15: string = v3
+				local v13: string = v3
 				
 				if List == nil then
-					List = { v15 }
+					List = { v13 }
 				else
-					table.insert(List, v15)
+					table.insert(List, v13)
 				end
 			end
 			return ReadContextFunction(p7, p8)
@@ -2076,12 +2073,12 @@ if DEV then
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			
 			if DEV then
-				local v15: string = v3
+				local v13: string = v3
 				
 				if List == nil then
-					List = { v15 }
+					List = { v13 }
 				else
-					table.insert(List, v15)
+					table.insert(List, v13)
 				end
 			end
 			return mountEffect(Create, Deps)
@@ -2092,12 +2089,12 @@ if DEV then
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			
 			if DEV then
-				local v15: string = v3
+				local v13: string = v3
 				
 				if List == nil then
-					List = { v15 }
+					List = { v13 }
 				else
-					table.insert(List, v15)
+					table.insert(List, v13)
 				end
 			end
 			return mountImperativeHandle(p7, p8, p9)
@@ -2108,12 +2105,12 @@ if DEV then
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			
 			if DEV then
-				local v15: string = v3
+				local v13: string = v3
 				
 				if List == nil then
-					List = { v15 }
+					List = { v13 }
 				else
-					table.insert(List, v15)
+					table.insert(List, v13)
 				end
 			end
 			return mountLayoutEffect(Create, Deps)
@@ -2124,12 +2121,12 @@ if DEV then
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			
 			if DEV then
-				local v15: string = v3
+				local v13: string = v3
 				
 				if List == nil then
-					List = { v15 }
+					List = { v13 }
 				else
-					table.insert(List, v15)
+					table.insert(List, v13)
 				end
 			end
 			local Current = ReactCurrentDispatcher.current
@@ -2152,12 +2149,12 @@ if DEV then
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			
 			if DEV then
-				local v15: string = v3
+				local v13: string = v3
 				
 				if List == nil then
-					List = { v15 }
+					List = { v13 }
 				else
-					table.insert(List, v15)
+					table.insert(List, v13)
 				end
 			end
 			local Current = ReactCurrentDispatcher.current
@@ -2176,12 +2173,12 @@ if DEV then
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			
 			if DEV then
-				local v15: string = v3
+				local v13: string = v3
 				
 				if List == nil then
-					List = { v15 }
+					List = { v13 }
 				else
-					table.insert(List, v15)
+					table.insert(List, v13)
 				end
 			end
 			return mountRef(p7)
@@ -2192,12 +2189,12 @@ if DEV then
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			
 			if DEV then
-				local v15: string = v3
+				local v13: string = v3
 				
 				if List == nil then
-					List = { v15 }
+					List = { v13 }
 				else
-					table.insert(List, v15)
+					table.insert(List, v13)
 				end
 			end
 			return mountBinding(p7)
@@ -2208,12 +2205,12 @@ if DEV then
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			
 			if DEV then
-				local v15: string = v3
+				local v13: string = v3
 				
 				if List == nil then
-					List = { v15 }
+					List = { v13 }
 				else
-					table.insert(List, v15)
+					table.insert(List, v13)
 				end
 			end
 			local Current = ReactCurrentDispatcher.current
@@ -2232,12 +2229,12 @@ if DEV then
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			
 			if DEV then
-				local v15: string = v3
+				local v13: string = v3
 				
 				if List == nil then
-					List = { v15 }
+					List = { v13 }
 				else
-					table.insert(List, v15)
+					table.insert(List, v13)
 				end
 			end
 			return mountDebugValue(p7, p8)
@@ -2248,12 +2245,12 @@ if DEV then
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			
 			if DEV then
-				local v15: string = v3
+				local v13: string = v3
 				
 				if List == nil then
-					List = { v15 }
+					List = { v13 }
 				else
-					table.insert(List, v15)
+					table.insert(List, v13)
 				end
 			end
 			return mountMutableSource(p7, p8, p9)
@@ -2264,12 +2261,12 @@ if DEV then
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			
 			if DEV then
-				local v15: string = v3
+				local v13: string = v3
 				
 				if List == nil then
-					List = { v15 }
+					List = { v13 }
 				else
-					table.insert(List, v15)
+					table.insert(List, v13)
 				end
 			end
 			return mountOpaqueIdentifier()
@@ -2632,12 +2629,12 @@ function ReactFiberHooksModule.renderWithHooks(p6, p7, Callback, p8, p9, p10)
 	Flag = false
 	
 	if HasNext then
-		local v15 = "unknown"
+		local v13 = "unknown"
 		
 		if CallbackResult and CallbackResult.type then
-			v15 = GetComponentNameFunction(CallbackResult.type) or v15
+			v13 = GetComponentNameFunction(CallbackResult.type) or v13
 		end
-		error(Error1.new("Rendered fewer hooks than expected. This may be caused by an accidental " .. "early return statement. Inside '" .. v15 .. "'"))
+		error(Error1.new("Rendered fewer hooks than expected. This may be caused by an accidental " .. "early return statement. Inside '" .. v13 .. "'"))
 	end
 	return CallbackResult
 end

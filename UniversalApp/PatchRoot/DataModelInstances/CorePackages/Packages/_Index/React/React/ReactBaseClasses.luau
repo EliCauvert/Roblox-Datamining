@@ -50,13 +50,12 @@ local function handleNewLifecycle(p1, p2, p3)
 				Console.warn("%s already defined '%s', but it also defining the deprecated Roact method '%s'. %s should only implement one of these methods, preferably using the non-deprecated name.", ComponentName1, "UNSAFE_componentWillUpdate", p2, ComponentName1)
 			else
 				local ComponentName = p1.__componentName
-				local v1 = p2
 				local Entry = config[p2]
 				
 				if DEV and COMPATWARNINGS then
 					local DebugInfo, DebugInfo2 = debug.info(3, "sln")
 					local Match: string? = string.match(DebugInfo, "%.%u[%.%w]-$")
-					Console.warn("%s is using method '%s', which is no longer supported and should be updated to '%s'\nFile: %s:%s", ComponentName, v1, Entry, if Match then string.gsub(Match, "^%.", "") else DebugInfo, (tostring(DebugInfo2)))
+					Console.warn("%s is using method '%s', which is no longer supported and should be updated to '%s'\nFile: %s:%s", ComponentName, p2, Entry, if Match then string.gsub(Match, "^%.", "") else DebugInfo, (tostring(DebugInfo2)))
 				end
 			end
 		else

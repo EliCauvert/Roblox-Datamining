@@ -21,6 +21,7 @@ local SheetTypeModule = require(script.Parent.SheetType)
 local ChildrenHasFullBleedModule = require(script.Parent.childrenHasFullBleed)
 local UseHardwareInsetsModule = require(script.Parent.useHardwareInsets)
 local UseScreenHeightModule = require(script.Parent.useScreenHeight)
+local BackdropModule = require(Foundation.Components.Backdrop)
 local ImageModule = require(Foundation.Components.Image)
 local ViewModule = require(Foundation.Components.View)
 local UsePreferencesModule = require(Foundation.Providers.Preferences.usePreferences)
@@ -38,7 +39,7 @@ local function _(p1, p2, p3, p4: number)
 end
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
-	-- upvalues: WithDefaultsModule (copy), config (copy), UseOverlayModule (copy), UseTokensModule (copy), UseElevationModule (copy), ElevationLayerModule (copy), UsePreferencesModule (copy), UseScreenHeightModule (copy), ReactModule (copy), FlagsModule (copy), UseHardwareInsetsModule (copy), UseAnimatedBindingFunction (copy), ChildrenHasFullBleedModule (copy), OtterModule (copy), ReactUtilsModule (copy), SheetTypeModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), ReactRobloxModule (copy), TypesModule (copy), DashModule (copy), SheetContextModule (copy), ElevationOwnerScope (copy), ImageModule (copy), SHADOWIMAGE (copy), SHADOWSIZE (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseOverlayModule (copy), UseTokensModule (copy), UseElevationModule (copy), ElevationLayerModule (copy), UsePreferencesModule (copy), UseScreenHeightModule (copy), ReactModule (copy), FlagsModule (copy), UseHardwareInsetsModule (copy), UseAnimatedBindingFunction (copy), ChildrenHasFullBleedModule (copy), OtterModule (copy), ReactUtilsModule (copy), SheetTypeModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), ReactRobloxModule (copy), TypesModule (copy), DashModule (copy), SheetContextModule (copy), ElevationOwnerScope (copy), ImageModule (copy), SHADOWIMAGE (copy), SHADOWSIZE (copy), BackdropModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseOverlayModuleResult = UseOverlayModule()
 	local UseTokensModuleResult = UseTokensModule()
@@ -532,7 +533,16 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 			},
 			imageStyle = UseTokensModuleResult.Color.Extended.Black.Black_10
 		}),
-		Backdrop = ReactModule.createElement(ViewModule, {
+		Backdrop = if FlagsModule.FoundationBottomSheetInternalBackdrop then ReactModule.createElement(BackdropModule, {
+			ZIndex = 1,
+			transparency = UseAnimatedBindingResult,
+			onActivated = function()
+				-- upvalues: UseResult8 (copy)
+				UseResult8()
+			end,
+			Size = UDim2.fromScale(1, 2),
+			testId = `{WithDefaultsModuleResult.testId}--backdrop`
+		}) else ReactModule.createElement(ViewModule, {
 			ZIndex = 1,
 			Size = UDim2.fromScale(1, 2),
 			Position = UDim2.fromScale(0, -0.5),

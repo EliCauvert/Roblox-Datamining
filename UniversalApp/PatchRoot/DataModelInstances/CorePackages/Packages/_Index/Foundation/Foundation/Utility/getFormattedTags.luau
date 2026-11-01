@@ -1,6 +1,10 @@
-﻿local _ = require(script:FindFirstAncestor("Foundation").Components.Types)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local FlagsModule = require(Foundation.Utility.Flags)
+local _ = require(Foundation.Components.Types)
+local DevAssertModule = require(Foundation.Utility.devAssert)
 
 return function(List)
+	-- upvalues: FlagsModule (copy), DevAssertModule (copy)
 	if List ~= nil then
 		if typeof(List) == "table" then
 			local List1 = {}
@@ -15,7 +19,11 @@ return function(List)
 			if typeof(List) == "string" then
 				return List
 			end
-			assert(false, "Invalid argument to useStyleTags. Expected a table or string, got " .. typeof(List))
+			if FlagsModule.FoundationDevOnlyPropAsserts then
+				DevAssertModule(false, "Invalid argument to useStyleTags. Expected a table or string, got " .. typeof(List))
+			else
+				assert(false, "Invalid argument to useStyleTags. Expected a table or string, got " .. typeof(List))
+			end
 		end
 	end
 	return nil

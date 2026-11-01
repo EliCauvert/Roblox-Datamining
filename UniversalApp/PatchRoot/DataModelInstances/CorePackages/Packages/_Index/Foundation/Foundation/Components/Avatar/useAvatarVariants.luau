@@ -12,24 +12,17 @@ local _ = require(Foundation.Components.Types)
 local IndexBindableModule = require(Foundation.Utility.indexBindable)
 
 local function variantsFactory(p1)
-	-- upvalues: FlagsModule (copy), AvatarSizeModule (copy), StatusIndicatorSizeModule (copy), UserPresenceModule (copy), StatusIndicatorShapeModule (copy), StatusIndicatorVariantModule (copy)
+	-- upvalues: AvatarSizeModule (copy), StatusIndicatorSizeModule (copy), FlagsModule (copy), UserPresenceModule (copy), StatusIndicatorShapeModule (copy), StatusIndicatorVariantModule (copy)
 	return {
 		common = {
 			container = { tag = "radius-circle" },
 			avatar = { tag = "size-full radius-circle" },
-			statusIndicatorBackplate = if FlagsModule.FoundationStatusIndicatorMask then nil else {
-				ZIndex = 2,
-				tag = "auto-xy radius-circle bg-surface-0",
-				AnchorPoint = Vector2.new(1, 1),
-				Position = UDim2.fromScale(1, 1),
-				padding = UDim2.fromOffset(p1.Size.Size_150 / 2, p1.Size.Size_150 / 2)
-			},
-			statusIndicatorMask = if FlagsModule.FoundationStatusIndicatorMask then {
+			statusIndicatorMask = {
 				ZIndex = 2,
 				AnchorPoint = Vector2.new(1, 1),
 				Position = UDim2.new(1, -p1.Size.Size_150 / 2, 1, -p1.Size.Size_150 / 2),
 				mask = p1.Color.Surface.Surface_0
-			} else nil
+			}
 		},
 		sizes = {
 			[AvatarSizeModule.XSmall] = {

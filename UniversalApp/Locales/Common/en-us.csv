@@ -932,6 +932,7 @@ CommonUI.Features.Heading.GameDetails,Experience Details
 CommonUI.Features.Label.About,About
 CommonUI.Features.Label.AboutUs,About Us
 CommonUI.Features.Label.AcceptFriend,Accept Friend
+CommonUI.Features.Label.Add,Add
 CommonUI.Features.Label.AddConnections,Add Connections
 CommonUI.Features.Label.AddFriend,Add Friend
 CommonUI.Features.Label.AdjustScreen,Adjust Screen
@@ -1874,7 +1875,7 @@ Feature.Avatar.Label.Accessory,Accessory
 Feature.Avatar.Label.AccessoryAdjustment.Entry.Tooltip,Adjust the fit of your accessories!
 Feature.Avatar.Label.AccessoryAdjustment.Items.Tooltip,Select item to adjust
 Feature.Avatar.Label.AccessoryCannotBeAdjustedWarning,Adjustment is not available for this item..
-Feature.Avatar.Label.Add,Add
+Feature.Avatar.Label.Add,
 Feature.Avatar.Label.AddEdit,Add/Edit
 Feature.Avatar.Label.AddManage,Add/Manage
 Feature.Avatar.Label.AddManage2,
@@ -4166,6 +4167,7 @@ Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,In-Game 
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,Users Interact
 Feature.Landing.Label.InvitedBy,Invited by {name}
 Feature.Landing.Label.PoweredBy,Powered by
+Feature.Leaderboards.Heading.Leaderboard,Leaderboard
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,Turn on
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,Help people who have your phone number add you as a friend on Roblox
@@ -4876,9 +4878,20 @@ Feature.Premium.Message.PleaseTryAgain,Please try again.
 Feature.Premium.Message.SomethingWentWrong,
 Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Free with Plus
+Feature.PrivateServers.Action.Generate,Generate
+Feature.PrivateServers.Description.FriendsAllowed,Anyone on your friends list can join without an invite
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Private server purchases are not supported in Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,This game doesn't support private servers.
+Feature.PrivateServers.Heading.ConfigurePrivateServer,Configure Private Server
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,Anyone with this link can join
+Feature.PrivateServers.Label.FriendsAllowed,Friends allowed
+Feature.PrivateServers.Label.InThisServer,In this server
 Feature.PrivateServers.Label.OwnersServer,{displayName}'s server
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,Generate a private server link
+Feature.PrivateServers.Label.PrivateServerLink,Private server link
+Feature.PrivateServers.Label.SearchPeople,Search people
+Feature.PrivateServers.Label.ServerName,Server Name:
+Feature.PrivateServers.Label.WhoCanJoin,Who can join
 Feature.Profile.Action.AboutThisProfile,About this profile
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,

@@ -99,7 +99,7 @@ function Module.jsonDecode(Text: string)
 	if Match == nil or Match2 == nil or Match3 == nil or Match4 == nil or Match5 == nil or Match6 == nil or Match7 == nil then
 		error("Invalid timestamp provided")
 	end
-	local Nanos = 0
+	local InvalidNanosStringReceivedCouldnTTurnIntoANumber = 0
 	
 	if #Match7 ~= 0 then
 		local Match1: string? = string.match(Match7, "^%.([0-9]+)$")
@@ -107,12 +107,11 @@ function Module.jsonDecode(Text: string)
 		if Match1 == nil then
 			error("Invalid nanoseconds provided in timestamp: `" .. Match7 .. "`")
 		end
-		local InvalidNanosStringReceivedCouldnTTurnIntoANumber = assert(tonumber(Match1), "Invalid nanos string received, couldn't turn into a number")
+		InvalidNanosStringReceivedCouldnTTurnIntoANumber = assert(tonumber(Match1), "Invalid nanos string received, couldn't turn into a number")
 		
 		for i = #Match1 + 1, 9 do
 			InvalidNanosStringReceivedCouldnTTurnIntoANumber += 10 ^ (i - 1)
 		end
-		Nanos = InvalidNanosStringReceivedCouldnTTurnIntoANumber
 	end
 	return Module.new({
 		seconds = os.time({
@@ -123,7 +122,7 @@ function Module.jsonDecode(Text: string)
 			min = assert(tonumber(Match5), "Invalid formatted min"),
 			sec = assert(tonumber(Match6), "Invalid formatted sec")
 		}),
-		nanos = Nanos
+		nanos = InvalidNanosStringReceivedCouldnTTurnIntoANumber
 	})
 end
 

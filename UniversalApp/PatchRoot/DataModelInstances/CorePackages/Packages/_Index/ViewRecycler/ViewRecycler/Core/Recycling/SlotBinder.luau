@@ -127,19 +127,19 @@ return function(p1)
 			table.clear(Tbl1)
 		end
 		local v2: boolean = #List4 > 0 and #List5 > 0
-		for i2, value4 in List5 do
-			local AcquiredEntry = Acquired[i2]
-			value4.view = AcquiredEntry
+		for i, value2 in List5 do
+			local View = Acquired[i]
+			value2.view = View
 			
 			if FFlagViewRecyclerReact08 then
-				value4.assignment = MakeAssignment(value4)
+				value2.assignment = MakeAssignment(value2)
 			else
-				value4.assignment = MakeAssignment(value4.key, value4.value)
+				value2.assignment = MakeAssignment(value2.key, value2.value)
 			end
-			Tbl[value4.key] = value4
+			Tbl[value2.key] = value2
 			
 			if v2 then
-				Tbl3[AcquiredEntry] = true
+				Tbl3[View] = true
 			end
 		end
 		local Updated = Frozen
@@ -147,16 +147,16 @@ return function(p1)
 		if List ~= nil then
 			Updated = table.create(#List)
 			
-			for i, value2 in List do
-				local Entry = Tbl[value2.key]
-				Entry.value = value2.value
+			for i2, value4 in List do
+				local Entry = Tbl[value4.key]
+				Entry.value = value4.value
 				
 				if FFlagViewRecyclerReact08 then
-					Entry.assignment = MakeAssignment(value2)
+					Entry.assignment = MakeAssignment(value4)
 				else
-					Entry.assignment = MakeAssignment(value2.key, value2.value)
+					Entry.assignment = MakeAssignment(value4.key, value4.value)
 				end
-				Updated[i] = Entry
+				Updated[i2] = Entry
 			end
 		end
 		local List1 = Frozen

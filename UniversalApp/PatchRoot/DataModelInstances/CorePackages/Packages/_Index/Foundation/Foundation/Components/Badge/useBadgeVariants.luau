@@ -108,15 +108,9 @@ function variantsFactory(p1)
 				icon = { style = p1.LightMode.Content.Emphasis }
 			},
 			[BadgeVariantModule.Emphasis] = {
-				container = {
-					backgroundStyle = if FlagsModule.FoundationSystemEmphasisNonActions then p1.Color.System.Emphasis else p1.Color.ActionEmphasis.Background
-				},
-				content = {
-					style = if FlagsModule.FoundationSystemEmphasisNonActions then p1.DarkMode.Content.Emphasis else p1.Color.ActionEmphasis.Foreground
-				},
-				icon = {
-					style = if FlagsModule.FoundationSystemEmphasisNonActions then p1.DarkMode.Content.Emphasis else p1.Color.ActionEmphasis.Foreground
-				}
+				container = { backgroundStyle = p1.Color.System.Emphasis },
+				content = { style = p1.DarkMode.Content.Emphasis },
+				icon = { style = p1.DarkMode.Content.Emphasis }
 			}
 		},
 		shapes = {

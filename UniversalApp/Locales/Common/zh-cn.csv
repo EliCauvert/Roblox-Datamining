@@ -911,6 +911,7 @@ CommonUI.Features.Heading.GameDetails,作品详情
 CommonUI.Features.Label.About,简介
 CommonUI.Features.Label.AboutUs,关于我们
 CommonUI.Features.Label.AcceptFriend,接受好友邀请
+CommonUI.Features.Label.Add,添加
 CommonUI.Features.Label.AddConnections,添加好友
 CommonUI.Features.Label.AddFriend,
 CommonUI.Features.Label.AdjustScreen,调整屏幕
@@ -1849,7 +1850,7 @@ Feature.Avatar.Label.Accessory,配饰
 Feature.Avatar.Label.AccessoryAdjustment.Entry.Tooltip,调整你配饰的契合度！
 Feature.Avatar.Label.AccessoryAdjustment.Items.Tooltip,选择要调整的道具
 Feature.Avatar.Label.AccessoryCannotBeAdjustedWarning,此道具无法进行调整。
-Feature.Avatar.Label.Add,添加
+Feature.Avatar.Label.Add,
 Feature.Avatar.Label.AddEdit,添加/编辑
 Feature.Avatar.Label.AddManage,添加/管理
 Feature.Avatar.Label.AddManage2,
@@ -2787,7 +2788,7 @@ Feature.Build.Notification.Title.NeedInput,构建需要你的输入
 Feature.Build.Placeholder.DescribeProduct,描述你想出售的内容
 Feature.Build.Placeholder.DescribeProductUpdate,描述一项更新
 Feature.Build.Placeholder.InternalSpec,内部代码
-Feature.Build.Prompt.CreateDeveloperProduct,帮助我创建开发者产品，将其接入游戏，验证并发布更改，供玩家购买。
+Feature.Build.Prompt.CreateDeveloperProduct,请审核我的游戏，并建议我出售哪种道具最能赚取 Robux。是一次性购买的道具，还是玩家可以反复购买的道具（如加成道具）更适合我的游戏？请说明原因。
 Feature.Build.Title.AdActive,广告活动已启动
 Feature.Build.Title.AdCampaignDuration,{durationDays} 天广告活动
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} 天
@@ -4129,6 +4130,7 @@ Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,游戏�
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,用户互动
 Feature.Landing.Label.InvitedBy,由“{name}”邀请
 Feature.Landing.Label.PoweredBy,技术支持：
+Feature.Leaderboards.Heading.Leaderboard,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,开启
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,允许拥有你手机号码的人在 Roblox 上将你添加为好友
@@ -4825,7 +4827,9 @@ Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Plus 订阅用户免费
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio 中不支持购买私人服务器。
 Feature.PrivateServers.Description.VipServersNotSupported,此游戏不支持私人服务器。
+Feature.PrivateServers.Heading.ConfigurePrivateServer,配置私人服务器
 Feature.PrivateServers.Label.OwnersServer,{displayName}的服务器
+Feature.PrivateServers.Label.ServerName,服务器名称：
 Feature.Profile.Action.AboutThisProfile,关于此个人资料
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -5301,10 +5305,10 @@ Feature.SplitPane.Tour.Step2.Description,选择你想要的形象。在加入游
 Feature.SplitPane.Tour.Step2.Title,随时改变你的造型
 Feature.SplitPane.Tour.Step3.Description,你可以随时隐藏此空间，专注于探索新游戏。你保存的虚拟形象将一直保留在这里。
 Feature.SplitPane.Tour.Step3.Title,选择你想看到的内容
-Feature.SplitPane.UnsavedChangesDialogBody,如果现在切换，你对虚拟形象所做的更改可能会丢失。请保存以保留更改。
+Feature.SplitPane.UnsavedChangesDialogBody,如果继续，你当前的虚拟形象将丢失。请保存以保留虚拟形象。
 Feature.SplitPane.UnsavedChangesDialogPrimaryCTA,
-Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,不保存
-Feature.SplitPane.UnsavedChangesDialogTitle,是否保存更改？
+Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,
+Feature.SplitPane.UnsavedChangesDialogTitle,是否在切换虚拟形象前保存？
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,添加其他人
 Feature.Squads.Action.ConnectToVoice,连接至语音

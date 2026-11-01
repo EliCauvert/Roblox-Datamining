@@ -928,6 +928,7 @@ CommonUI.Features.Heading.GameDetails,Deneyim Ayrıntıları
 CommonUI.Features.Label.About,Hakkında
 CommonUI.Features.Label.AboutUs,Hakkımızda
 CommonUI.Features.Label.AcceptFriend,Arkadaşı Kabul Et
+CommonUI.Features.Label.Add,Ekle
 CommonUI.Features.Label.AddConnections,Bağlantıları ekle
 CommonUI.Features.Label.AddFriend,Arkadaş Ekle
 CommonUI.Features.Label.AdjustScreen,Ekranı Ayarla
@@ -1824,7 +1825,7 @@ Feature.Avatar.Label.Accessory,Aksesuar
 Feature.Avatar.Label.AccessoryAdjustment.Entry.Tooltip,Aksesuarlarının kalıbını ayarla!
 Feature.Avatar.Label.AccessoryAdjustment.Items.Tooltip,Ayarlanacak öğeyi seç
 Feature.Avatar.Label.AccessoryCannotBeAdjustedWarning,Düzenlemeler bu öğe için kullanılamıyor.
-Feature.Avatar.Label.Add,Ekle
+Feature.Avatar.Label.Add,
 Feature.Avatar.Label.AddEdit,Ekle/Düzenle
 Feature.Avatar.Label.AddManage,Ekle/Yönet
 Feature.Avatar.Label.AddManage2,
@@ -2762,7 +2763,7 @@ Feature.Build.Notification.Title.NeedInput,İnşa Et için girdin gerekiyor
 Feature.Build.Placeholder.DescribeProduct,Satmak istediğin şeyi açıkla
 Feature.Build.Placeholder.DescribeProductUpdate,Güncellemeyi tarif et
 Feature.Build.Placeholder.InternalSpec,internal_code
-Feature.Build.Prompt.CreateDeveloperProduct,"Bir geliştirici ürünü oluşturmak, oyuna bağlamak, değişiklikleri doğrulayıp yayınlamak ve satın alınabilir hâle getirmek konusunda bana yardımcı ol."
+Feature.Build.Prompt.CreateDeveloperProduct,Oyunumu incele ve Robux kazanmak için satabileceğim en iyi öğeyi öner. Tek seferlik bir satın alma mı yoksa oyuncuların bir güçlendirme gibi tekrar satın alabileceği bir öğe mi oyunuma daha uygun olur? Nedenini açıkla.
 Feature.Build.Title.AdActive,Reklam kampanyası aktif
 Feature.Build.Title.AdCampaignDuration,{durationDays} günlük reklam kampanyası
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} gün
@@ -4115,6 +4116,7 @@ Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,Oyun İ�
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,Kullanıcılar Etkileşimde
 Feature.Landing.Label.InvitedBy,Davet eden: {name}
 Feature.Landing.Label.PoweredBy,Destekleyen:
+Feature.Leaderboards.Heading.Leaderboard,Liderlik Tablosu
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,Aç
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,Telefon numaranı bilen insanların seni Roblox'ta arkadaş olarak eklemesini kolaylaştır
@@ -4812,7 +4814,9 @@ Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Plus ile ücretsiz
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Özel sunucu satın alma işlemleri Studio'da desteklenmiyor.
 Feature.PrivateServers.Description.VipServersNotSupported,"Bu oyun, özel sunucuları desteklemiyor."
+Feature.PrivateServers.Heading.ConfigurePrivateServer,Özel Sunucuyu Yapılandır
 Feature.PrivateServers.Label.OwnersServer,{displayName} adlı kişinin sunucusu
+Feature.PrivateServers.Label.ServerName,Sunucu Adı:
 Feature.Profile.Action.AboutThisProfile,Bu profil hakkında
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -5288,10 +5292,10 @@ Feature.SplitPane.Tour.Step2.Description,Nasıl görünmek istediğini seç. Bir
 Feature.SplitPane.Tour.Step2.Title,Görünümünü istediğin zaman değiştir
 Feature.SplitPane.Tour.Step3.Description,Yeni oyunlar keşfetmeye odaklanmak için bu alanı istediğin zaman gizleyebilirsin. Kayıtlı avatarın tam burada kalır.
 Feature.SplitPane.Tour.Step3.Title,Ne göreceğini seç
-Feature.SplitPane.UnsavedChangesDialogBody,Şimdi geçiş yaparsan avatar değişikliklerin kaybolabilir. Saklamak için kaydet.
+Feature.SplitPane.UnsavedChangesDialogBody,Devam edersen mevcut avatarın kaybolacak. Avatarı saklamak için kaydet.
 Feature.SplitPane.UnsavedChangesDialogPrimaryCTA,
-Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,Kaydetme
-Feature.SplitPane.UnsavedChangesDialogTitle,Değişikliklerin kaydedilsin mi?
+Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,
+Feature.SplitPane.UnsavedChangesDialogTitle,Avatarları değiştirmeden önce kaydetmek istiyor musun?
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,Başkalarını ekle
 Feature.Squads.Action.ConnectToVoice,Sese bağlan

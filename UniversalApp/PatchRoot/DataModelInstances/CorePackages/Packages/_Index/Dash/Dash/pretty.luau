@@ -132,13 +132,11 @@ local function prettyLines(p1, p2)
 			end
 		end
 	end
-	local Flag1: boolean = Flag
-	
 	if not Multiline then
 		list[#list] = ("%s}"):format(list[#list])
 		
 		return list
-	elseif Flag1 then
+	elseif Flag then
 		list[#list] ..= "}"
 		
 		return list

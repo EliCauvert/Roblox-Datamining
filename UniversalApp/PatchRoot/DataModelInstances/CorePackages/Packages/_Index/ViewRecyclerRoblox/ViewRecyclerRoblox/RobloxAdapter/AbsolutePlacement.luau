@@ -71,11 +71,10 @@ return {
 				local CallbackResult = if IsNotHiddenMatch then Callback() else nil
 				local State2 = Entry.state
 				CanvasItemPlacerModule.place(Key, Geometry, CanvasItemPlacerModule.getGeometry(State2.itemLayout, CanvasPlacement, Configuration, Configuration1 or State2.index == nil, if CallbackResult == nil then 0 else State2.contentStartOffset + CallbackResult, Entry.geometry), PlacerState, IsNotHiddenMatch1)
-				local Entry1 = Entry
-				local EndLimitFrame = Entry1.endLimitFrame
+				local EndLimitFrame = Entry.endLimitFrame
 				
 				if EndLimitFrame ~= nil then
-					Entry1.endLimitFrame = nil
+					Entry.endLimitFrame = nil
 					EndLimitFrame.destroy()
 				end
 				Entry.originOffset = CallbackResult

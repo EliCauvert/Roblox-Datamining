@@ -912,6 +912,7 @@ CommonUI.Features.Heading.GameDetails,Dettagli dell'esperienza
 CommonUI.Features.Label.About,Info
 CommonUI.Features.Label.AboutUs,Su di noi
 CommonUI.Features.Label.AcceptFriend,Accetta amico
+CommonUI.Features.Label.Add,Aggiungi
 CommonUI.Features.Label.AddConnections,Aggiungi contatti
 CommonUI.Features.Label.AddFriend,Aggiungi amico
 CommonUI.Features.Label.AdjustScreen,Regola schermo
@@ -1850,7 +1851,7 @@ Feature.Avatar.Label.Accessory,Accessorio
 Feature.Avatar.Label.AccessoryAdjustment.Entry.Tooltip,Regola la vestibilità dei tuoi accessori!
 Feature.Avatar.Label.AccessoryAdjustment.Items.Tooltip,Seleziona l'elemento da regolare
 Feature.Avatar.Label.AccessoryCannotBeAdjustedWarning,Non è possibile apportare modifiche a questo articolo.
-Feature.Avatar.Label.Add,Aggiungi
+Feature.Avatar.Label.Add,
 Feature.Avatar.Label.AddEdit,Aggiungi/Modifica
 Feature.Avatar.Label.AddManage,Aggiungi/Gestisci
 Feature.Avatar.Label.AddManage2,
@@ -2788,7 +2789,7 @@ Feature.Build.Notification.Title.NeedInput,La creazione ha bisogno del tuo contr
 Feature.Build.Placeholder.DescribeProduct,Descrivi cosa vuoi vendere
 Feature.Build.Placeholder.DescribeProductUpdate,Descrivi un aggiornamento
 Feature.Build.Placeholder.InternalSpec,internal_code
-Feature.Build.Prompt.CreateDeveloperProduct,"Aiutami a creare un Developer Product, a integrarlo nel gioco, a verificare e pubblicare le modifiche e a renderlo disponibile per l'acquisto."
+Feature.Build.Prompt.CreateDeveloperProduct,"Esamina il mio gioco e consigliami l'oggetto migliore da vendere per guadagnare Robux. Sarebbe più adatto un acquisto singolo o un articolo che i giocatori possono comprare più volte, come un potenziamento? Spiega perché."
 Feature.Build.Title.AdActive,La campagna pubblicitaria è attiva
 Feature.Build.Title.AdCampaignDuration,Campagna pubblicitaria di {durationDays} giorni
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} giorni
@@ -2908,6 +2909,8 @@ Feature.Catalog.Header.InvalidOutfit,Outfit non valido
 Feature.Catalog.Header.PostAvatar,
 Feature.Catalog.Heading.AvailableItems,Articoli Disponibili
 Feature.Catalog.Heading.BuyItem,
+Feature.Catalog.Heading.DescriptionLinkGoToMarketplace,Questa operazione ti reindirizzerà al Marketplace
+Feature.Catalog.Heading.DescriptionLinkResetSearch,In questo modo verrà ripristinata la tua ricerca attuale
 Feature.Catalog.Heading.FreeItemConfirmation,Ottieni oggetto
 Feature.Catalog.Heading.GoToExperience,Unisciti all'esperienza?
 Feature.Catalog.Heading.HoldingPolicy,Politica Di Ritenzione
@@ -2983,6 +2986,12 @@ Feature.Catalog.Label.CreatorName,Nome del creatore
 Feature.Catalog.Label.CurrentBalance,Bilancio attuale:
 Feature.Catalog.Label.CustomizeAvatar,Personalizza avatar
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,Non puoi annullare questa azione se elimini un avatar.
+Feature.Catalog.Label.DescriptionLinkInvalid,Collegamento non valido
+Feature.Catalog.Label.DescriptionLinkSearchMarketplace,Ricerca marketplace
+Feature.Catalog.Label.DescriptionLinkViewAsset,Visualizza risorsa
+Feature.Catalog.Label.DescriptionLinkViewBundle,Visualizza Pacchetto
+Feature.Catalog.Label.DescriptionLinkViewCommunity,Visualizza la community
+Feature.Catalog.Label.DescriptionLinkViewCommunityStore,Negozio della Community
 Feature.Catalog.Label.Details,
 Feature.Catalog.Label.DynamicHeads,
 Feature.Catalog.Label.Emissive,Emissivo
@@ -3915,7 +3924,7 @@ Feature.Groups.Action.NotNow,
 Feature.Groups.Action.RemovePrimary,Rimuovi primaria
 Feature.Groups.Action.SeeAll,
 Feature.Groups.Action.Unfollow,Non seguire più
-Feature.Groups.Action.ViewGroup,Visualizza la community
+Feature.Groups.Action.ViewGroup,
 Feature.Groups.Description.JoinGroupPending,La tua richiesta di adesione è in attesa di revisione da parte della community.
 Feature.Groups.Description.NotEligibleToJoin,Il tuo account non può unirsi a questa community.
 Feature.Groups.Description.PremiumMaxGroups,Hai raggiunto il numero massimo di community a cui unirti.
@@ -4133,6 +4142,7 @@ Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,Acquisti
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,Interazione tra utenti
 Feature.Landing.Label.InvitedBy,Persona invitata da {name}
 Feature.Landing.Label.PoweredBy,Offerto da
+Feature.Leaderboards.Heading.Leaderboard,Classifica
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,Aiuta le persone che hanno il tuo numero di telefono ad aggiungerti come amico su Roblox.
@@ -4828,7 +4838,9 @@ Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Gratis con il piano Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Gli acquisti di server privati non sono supportati in Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,Questo gioco non supporta i server privati.
+Feature.PrivateServers.Heading.ConfigurePrivateServer,Configura server privato
 Feature.PrivateServers.Label.OwnersServer,Il server di {displayName}
+Feature.PrivateServers.Label.ServerName,Nome server:
 Feature.Profile.Action.AboutThisProfile,Informazioni su questo profilo
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,Accetta amico/a
@@ -5304,10 +5316,10 @@ Feature.SplitPane.Tour.Step2.Description,Scegli come vuoi apparire. Passa da un 
 Feature.SplitPane.Tour.Step2.Title,Cambia il tuo look in qualsiasi momento
 Feature.SplitPane.Tour.Step3.Description,Nascondi questo spazio in qualsiasi momento per concentrarti sulla scoperta di nuovi giochi. Il tuo avatar salvato rimane proprio qui.
 Feature.SplitPane.Tour.Step3.Title,Scegli cosa vuoi vedere
-Feature.SplitPane.UnsavedChangesDialogBody,"Se cambi ora, le modifiche al tuo avatar potrebbero andare perse. Salva per conservarle."
+Feature.SplitPane.UnsavedChangesDialogBody,"Se continui, il tuo avatar attuale andrà perso. Salva per conservarlo."
 Feature.SplitPane.UnsavedChangesDialogPrimaryCTA,
-Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,Non salvare
-Feature.SplitPane.UnsavedChangesDialogTitle,Vuoi salvare le modifiche?
+Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,
+Feature.SplitPane.UnsavedChangesDialogTitle,Vuoi salvare prima di cambiare avatar?
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,Aggiungi altri
 Feature.Squads.Action.ConnectToVoice,Connettiti alla chat vocale
@@ -5902,7 +5914,7 @@ Roblox.ReferralRewards.RewardBannerModalTitle,Ricompensa per l'invito di un* ami
 Search.GlobalSearch.Action.LoadMore,
 Search.GlobalSearch.Example.SearchCatalog,Cerca nel catalogo
 Search.GlobalSearch.Example.SearchGames,
-Search.GlobalSearch.Example.SearchMarketplace,Ricerca marketplace
+Search.GlobalSearch.Example.SearchMarketplace,
 Search.GlobalSearch.TopResultsLabel,
 Verification.Identity.Action.SkipVoiceChat,Partecipa senza chat vocale
 Verification.Identity.Heading.LetsChat,Chattiamo!

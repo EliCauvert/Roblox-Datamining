@@ -162,10 +162,10 @@ local function v74()
 	return DidWarnAboutReassigningProps
 end
 
-local Callback5 = nil
+local Callback6 = nil
 local getHostSibling = nil
 local Callback = nil
-local Callback6 = nil
+local Callback5 = nil
 local Callback1 = nil
 local Callback3 = nil
 local Callback2 = nil
@@ -947,10 +947,10 @@ local _ = function(p5)
 end
 
 local function getHostParentFiber(p5)
-	-- upvalues: Callback5 (ref), Error1 (copy)
+	-- upvalues: Callback6 (ref), Error1 (copy)
 	local Return = p5.return_
 	while Return ~= nil do
-		if Callback5(Return) then
+		if Callback6(Return) then
 			return Return
 		end
 		Return = Return.return_
@@ -958,19 +958,19 @@ local function getHostParentFiber(p5)
 	error(Error1.new("Expected to find a host parent. This error is likely caused by a bug in React. Please file an issue."))
 end
 
-Callback5 = function(Return): boolean
+Callback6 = function(Return): boolean
 	-- upvalues: HostComponent (copy), HostRoot (copy), HostPortal (copy)
 	return Return.tag == HostComponent or (Return.tag == HostRoot or Return.tag == HostPortal)
 end
 
 getHostSibling = function(Child)
-	-- upvalues: Callback5 (ref), HostComponent (copy), HostText (copy), DehydratedFragment (copy), Placement (copy), HostPortal (copy)
+	-- upvalues: Callback6 (ref), HostComponent (copy), HostText (copy), DehydratedFragment (copy), Placement (copy), HostPortal (copy)
 	local Child1 = Child
 	local Flag = nil
 	while true do
 		Flag = false
 		while Child1.sibling == nil do
-			if Child1.return_ == nil or Callback5(Child1.return_) then
+			if Child1.return_ == nil or Callback6(Child1.return_) then
 				return nil
 			end
 			Child1 = Child1.return_
@@ -997,7 +997,7 @@ getHostSibling = function(Child)
 end
 
 local function commitPlacement(p6)
-	-- upvalues: SupportsMutation (copy), getHostParentFiber (copy), HostComponent (copy), HostRoot (copy), HostPortal (copy), InvariantFunction (copy), ContentReset (copy), ResetTextContentFunction (copy), IsNotSupportsChildOrdering (copy), getHostSibling (ref), Callback6 (ref), Callback (ref)
+	-- upvalues: SupportsMutation (copy), getHostParentFiber (copy), HostComponent (copy), HostRoot (copy), HostPortal (copy), InvariantFunction (copy), ContentReset (copy), ResetTextContentFunction (copy), IsNotSupportsChildOrdering (copy), getHostSibling (ref), Callback5 (ref), Callback (ref)
 	if not SupportsMutation then return end
 	local HostParentFiber = getHostParentFiber(p6)
 	local ContainerInfo = nil
@@ -1023,7 +1023,7 @@ local function commitPlacement(p6)
 	local HostSibling = if IsNotSupportsChildOrdering then nil else getHostSibling(p6)
 	
 	if Flag then
-		Callback6(p6, HostSibling, ContainerInfo)
+		Callback5(p6, HostSibling, ContainerInfo)
 		
 		return
 	else
@@ -1031,8 +1031,8 @@ local function commitPlacement(p6)
 	end
 end
 
-Callback6 = function(Child, p6, ContainerInfo)
-	-- upvalues: HostComponent (copy), HostText (copy), InsertInContainerBeforeFunction (copy), AppendChildToContainerFunction (copy), HostPortal (copy), Callback6 (ref)
+Callback5 = function(Child, p6, ContainerInfo)
+	-- upvalues: HostComponent (copy), HostText (copy), InsertInContainerBeforeFunction (copy), AppendChildToContainerFunction (copy), HostPortal (copy), Callback5 (ref)
 	local Tag = Child.tag
 	
 	if Tag == HostComponent or Tag == HostText then
@@ -1052,10 +1052,10 @@ Callback6 = function(Child, p6, ContainerInfo)
 		local Child1 = Child.child
 		
 		if Child1 ~= nil then
-			Callback6(Child1, p6, ContainerInfo)
+			Callback5(Child1, p6, ContainerInfo)
 			local Sibling = Child1.sibling
 			while Sibling ~= nil do
-				Callback6(Sibling, p6, ContainerInfo)
+				Callback5(Sibling, p6, ContainerInfo)
 				Sibling = Sibling.sibling
 			end
 		end

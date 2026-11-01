@@ -1,6 +1,8 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
 local _ = require(Foundation.Components.Types)
 local IconSizeModule = require(Foundation.Enums.IconSize)
+local FlagsModule = require(Foundation.Utility.Flags)
+local DevAssertModule = require(Foundation.Utility.devAssert)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 
 local function _(p1): boolean
@@ -8,7 +10,7 @@ local function _(p1): boolean
 end
 
 return function(p1, p2, p3)
-	-- upvalues: UseTokensModule (copy), IconSizeModule (copy)
+	-- upvalues: UseTokensModule (copy), IconSizeModule (copy), FlagsModule (copy), DevAssertModule (copy)
 	local UseTokensModuleResult = UseTokensModule()
 	local Config = if p2 then {
 		[IconSizeModule.XSmall] = if p3 then UseTokensModuleResult.Size.Size_400 else UseTokensModuleResult.Size.Size_300,
@@ -33,7 +35,12 @@ return function(p1, p2, p3)
 		XOffset = Config[p1]
 	end
 	if XOffset == nil then
-		error("Invalid icon size: " .. tostring(p1))
+		if FlagsModule.FoundationDevOnlyPropAsserts then
+			DevAssertModule(false, "Invalid icon size: " .. tostring(p1))
+			XOffset = Config[IconSizeModule.Medium]
+		else
+			error("Invalid icon size: " .. tostring(p1))
+		end
 	end
 	return if typeof(XOffset) == "table" then XOffset:map(function(XOffset): UDim2
 		return UDim2.fromOffset(XOffset, XOffset)

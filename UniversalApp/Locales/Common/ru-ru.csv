@@ -504,6 +504,7 @@ CommonUI.Features.Action.Send,
 CommonUI.Features.Heading.GameDetails,Описание плейса
 CommonUI.Features.Label.About,Сведения
 CommonUI.Features.Label.AboutUs,О нас
+CommonUI.Features.Label.Add,Добавить
 CommonUI.Features.Label.AddConnections,Добавить контакты
 CommonUI.Features.Label.AdjustScreen,Настройка экрана
 CommonUI.Features.Label.AppInformation,Информация о приложении
@@ -1022,7 +1023,7 @@ Feature.Avatar.Label.Accessory,Аксессуар
 Feature.Avatar.Label.AccessoryAdjustment.Entry.Tooltip,Отрегулируй аксессуары!
 Feature.Avatar.Label.AccessoryAdjustment.Items.Tooltip,Выберите предмет для настройки
 Feature.Avatar.Label.AccessoryCannotBeAdjustedWarning,Корректировка недоступна для этого предмета..
-Feature.Avatar.Label.Add,Добавить
+Feature.Avatar.Label.Add,
 Feature.Avatar.Label.AllHeads,Все головы
 Feature.Avatar.Label.AnimationFullSet,Полный набор
 Feature.Avatar.Label.AvatarAdjustment,Настройка аватара
@@ -2504,6 +2505,8 @@ Feature.Premium.Heading.ScaryModalTitle,
 Feature.Premium.Message.PleaseTryAgain,Повтори попытку.
 Feature.Premium.Message.SomethingWentWrong,
 Feature.PrivateServers.Action.CreatePrivateServer,
+Feature.PrivateServers.Heading.ConfigurePrivateServer,Настроить частный сервер
+Feature.PrivateServers.Label.ServerName,Название сервера:
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
 Feature.Profile.Action.AllRequestsIgnored,Все запросы проигнорированы

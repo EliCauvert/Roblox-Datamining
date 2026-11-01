@@ -1,5 +1,4 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
-local FlagsModule = require(Foundation.Utility.Flags)
 local IconSizeModule = require(Foundation.Enums.IconSize)
 local InputSizeModule = require(Foundation.Enums.InputSize)
 local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
@@ -7,7 +6,7 @@ local _ = require(Foundation.Providers.Style.Tokens)
 local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
 local function variantsFactory(_)
-	-- upvalues: InputSizeModule (copy), IconSizeModule (copy), FlagsModule (copy)
+	-- upvalues: InputSizeModule (copy), IconSizeModule (copy)
 	return {
 		common = {
 			title = {
@@ -24,9 +23,7 @@ local function variantsFactory(_)
 				icon = { size = IconSizeModule.XSmall }
 			},
 			[InputSizeModule.Small] = {
-				title = {
-					tag = if FlagsModule.FoundationListItemTypographySpacing then "text-title-medium" else "text-title-small"
-				},
+				title = { tag = "text-title-medium" },
 				metadata = { tag = "text-body-small" },
 				description = { tag = "text-body-small" },
 				icon = { size = IconSizeModule.Small }

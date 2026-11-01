@@ -910,6 +910,7 @@ CommonUI.Features.Heading.GameDetails,एक्सपीरिएंस की �
 CommonUI.Features.Label.About,परिचय
 CommonUI.Features.Label.AboutUs,हमारे बारे में जानकारी
 CommonUI.Features.Label.AcceptFriend,फ़्रेंड को स्वीकार करें
+CommonUI.Features.Label.Add,जोड़ें
 CommonUI.Features.Label.AddConnections,कनेक्शंस जोड़ें
 CommonUI.Features.Label.AddFriend,फ़्रेंड जोड़ें
 CommonUI.Features.Label.AdjustScreen,स्क्रीन एडजस्ट करें
@@ -1848,7 +1849,7 @@ Feature.Avatar.Label.Accessory,ऐक्सेसरी
 Feature.Avatar.Label.AccessoryAdjustment.Entry.Tooltip,अपनी ऐक्सेसरीज़ को ज़रूरत के हिसाब से एडजस्ट करें!
 Feature.Avatar.Label.AccessoryAdjustment.Items.Tooltip,एडजस्ट करने के लिए आइटम चुनें
 Feature.Avatar.Label.AccessoryCannotBeAdjustedWarning,इस आइटम के लिए एडजस्टमेंट उपलब्ध नहीं है..
-Feature.Avatar.Label.Add,जोड़ें
+Feature.Avatar.Label.Add,
 Feature.Avatar.Label.AddEdit,जोड़ें/एडिट करें
 Feature.Avatar.Label.AddManage,जोड़ें/मैनेज करें
 Feature.Avatar.Label.AddManage2,
@@ -2786,7 +2787,7 @@ Feature.Build.Notification.Title.NeedInput,बिल्ड के लिए आ�
 Feature.Build.Placeholder.DescribeProduct,बताएँ कि आपको क्या बेचना है
 Feature.Build.Placeholder.DescribeProductUpdate,कोई अपडेट बताएँ
 Feature.Build.Placeholder.InternalSpec,internal_code
-Feature.Build.Prompt.CreateDeveloperProduct,"डेवलपर प्रॉडक्ट बनाने, उसे गेम में जोड़ने, बदलावों को वेरिफ़ाई करके पब्लिश करने और उसे खरीदारी के लिए उपलब्ध कराने में मेरी मदद करें."
+Feature.Build.Prompt.CreateDeveloperProduct,"मेरे गेम का रिव्यू करें और सुझाव दें कि Robux कमाने के लिए मुझे कौन-सा आइटम बेचना चाहिए. क्या एक बार खरीदा जाने वाला आइटम या ऐसा आइटम, जिसे खिलाड़ी बार-बार खरीद सकें, जैसे कि बूस्ट, मेरे गेम के लिए ज़्यादा सही रहेगा? इसके पीछे की वजह भी बताएँ."
 Feature.Build.Title.AdActive,ऐड कैंपेन ऐक्टिव है
 Feature.Build.Title.AdCampaignDuration,{durationDays}-दिन का ऐड कैंपेन
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays}-दिन
@@ -4131,6 +4132,7 @@ Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,इन-�
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,यूज़र्स इंटरैक्ट
 Feature.Landing.Label.InvitedBy,{name} ने इनवाइट किया है
 Feature.Landing.Label.PoweredBy,इसे बनाया है
+Feature.Leaderboards.Heading.Leaderboard,लीडरबोर्ड
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,चालू करें
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,"जिन लोगों के पास आपका फ़ोन नंबर है, उन्हें आपको Roblox पर फ़्रेंड के तौर पर जोड़ने में मदद करें."
@@ -4828,7 +4830,9 @@ Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Plus सब्सक्रिप्शन के साथ फ़्री
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio में प्राइवेट सर्वर नहीं खरीदे जा सकते.
 Feature.PrivateServers.Description.VipServersNotSupported,इस गेम के लिए प्राइवेट सर्वर इस्तेमाल नहीं किए जा सकते.
+Feature.PrivateServers.Heading.ConfigurePrivateServer,प्राइवेट सर्वर कॉन्फ़िगर करें
 Feature.PrivateServers.Label.OwnersServer,{displayName} का सर्वर
+Feature.PrivateServers.Label.ServerName,सर्वर का नाम:
 Feature.Profile.Action.AboutThisProfile,इस प्रोफ़ाइल के बारे में जानकारी
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -5303,10 +5307,10 @@ Feature.SplitPane.Tour.Step2.Description,"चुनें कि आपको �
 Feature.SplitPane.Tour.Step2.Title,अपना लुक कभी भी बदलें
 Feature.SplitPane.Tour.Step3.Description,"नए गेम्स खोजने पर फ़ोकस करने के लिए, इस स्पेस को कभी भी छिपाएँ. आपका सेव किया गया अवतार ठीक यहीं रहेगा."
 Feature.SplitPane.Tour.Step3.Title,चुनें कि आपको क्या देखना है
-Feature.SplitPane.UnsavedChangesDialogBody,"अभी स्विच करने पर, हो सकता है कि आपके अवतार में किए गए बदलाव हट जाएँ. बदलावों को बनाए रखने के लिए उन्हें सेव करें."
+Feature.SplitPane.UnsavedChangesDialogBody,"जारी रखने पर, आपका मौजूदा अवतार हट जाएगा. अवतार को बनाए रखने के लिए उसे सेव करें."
 Feature.SplitPane.UnsavedChangesDialogPrimaryCTA,
-Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,सेव न करें
-Feature.SplitPane.UnsavedChangesDialogTitle,अपने बदलाव सेव करने हैं?
+Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,
+Feature.SplitPane.UnsavedChangesDialogTitle,अवतार बदलने से पहले सेव करना है?
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,दूसरों को जोड़ें
 Feature.Squads.Action.ConnectToVoice,वॉइस से कनेक्ट करें

@@ -15,10 +15,10 @@ local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
 local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local PopoverModule = require(Foundation.Components.Popover)
 local config = {
+	hasArrow = true,
 	testId = "--foundation-tooltip",
 	align = require(Foundation.Enums.PopoverAlign).Start,
-	side = require(Foundation.Enums.PopoverSide).Right,
-	hasArrow = if FlagsModule.FoundationTooltipBeta then true else nil
+	side = require(Foundation.Enums.PopoverSide).Right
 }
 
 local function AnchorWrapper(p1)
@@ -50,7 +50,7 @@ local function AnchorWrapper(p1)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), UseTokensModule (copy), UseScaledValueModule (copy), FlagsModule (copy), ConstantsModule (copy), UserInputService (copy), PopoverModule (copy), AnchorWrapper (copy), WithCommonPropsModule (copy), RadiusModule (copy), ViewModule (copy), TextModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), UseTokensModule (copy), UseScaledValueModule (copy), ConstantsModule (copy), UserInputService (copy), PopoverModule (copy), AnchorWrapper (copy), WithCommonPropsModule (copy), RadiusModule (copy), FlagsModule (copy), ViewModule (copy), TextModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseTokensModuleResult = UseTokensModule()
@@ -83,7 +83,7 @@ return ReactModule.memo(function(p1)
 		Anchor = ReactModule.createElement(AnchorWrapper, WithCommonPropsModule(WithDefaultsModuleResult, { onHover = UseStateResult2 }), WithDefaultsModuleResult.children),
 		Content = ReactModule.createElement(PopoverModule.Content, {
 			selectionGroup = false,
-			hasArrow = if FlagsModule.FoundationTooltipBeta then WithDefaultsModuleResult.hasArrow else false,
+			hasArrow = WithDefaultsModuleResult.hasArrow,
 			align = WithDefaultsModuleResult.align,
 			side = {
 				position = WithDefaultsModuleResult.side,
@@ -96,12 +96,8 @@ return ReactModule.memo(function(p1)
 				UseStateResult2(false)
 			end else nil
 		}, ReactModule.createElement(ViewModule, {
-			tag = {
-				["col gap-xsmall auto-xy"] = true,
-				["padding-x-medium padding-y-small"] = not FlagsModule.FoundationTooltipBeta and WithDefaultsModuleResult.text ~= nil,
-				["padding-x-small padding-y-xsmall"] = not FlagsModule.FoundationTooltipBeta and WithDefaultsModuleResult.text == nil
-			},
-			padding = if FlagsModule.FoundationTooltipBeta then if IsNotTextMatch then {
+			tag = { ["col gap-xsmall auto-xy"] = true },
+			padding = if IsNotTextMatch then {
 				top = UDim.new(0, UseTokensModuleResult.Size.Size_150),
 				bottom = UDim.new(0, UseTokensModuleResult.Size.Size_200),
 				left = UDim.new(0, UseTokensModuleResult.Size.Size_200),
@@ -111,9 +107,9 @@ return ReactModule.memo(function(p1)
 				bottom = UDim.new(0, UseTokensModuleResult.Size.Size_150),
 				left = UDim.new(0, UseTokensModuleResult.Size.Size_150),
 				right = UDim.new(0, UseTokensModuleResult.Size.Size_150)
-			} else nil,
+			},
 			sizeConstraint = {
-				MaxSize = Vector2.new(UseScaledValueModule(if FlagsModule.FoundationTooltipBeta then ConstantsModule.TOOLTIP_MAX_WIDTH else 320), 1e999)
+				MaxSize = Vector2.new(UseScaledValueModule(ConstantsModule.TOOLTIP_MAX_WIDTH), 1e999)
 			}
 		}, {
 			Header = if WithDefaultsModuleResult.title == "" and not WithDefaultsModuleResult.shortcut then nil else ReactModule.createElement(ViewModule, {
@@ -125,9 +121,8 @@ return ReactModule.memo(function(p1)
 					Text = WithDefaultsModuleResult.title,
 					tag = {
 						["shrink auto-xy text-truncate-end content-inverse-emphasis"] = true,
-						["text-title-small"] = not FlagsModule.FoundationTooltipBeta,
-						["text-caption-medium"] = FlagsModule.FoundationTooltipBeta and IsNotTextMatch,
-						["text-body-small"] = FlagsModule.FoundationTooltipBeta and not IsNotTextMatch
+						["text-caption-medium"] = IsNotTextMatch,
+						["text-body-small"] = not IsNotTextMatch
 					},
 					testId = `{WithDefaultsModuleResult.testId}--title`
 				}),

@@ -63,7 +63,7 @@ local function runBackend(p2, ContentIds, BackendConfigs)
 	if not RestrictedUserIds or #RestrictedUserIds == 0 then return end
 	local t = {}
 	
-	for _, restrictedUserId in RestrictedUserIds do
+	for AssetId, restrictedUserId in RestrictedUserIds do
 		t[tonumber(restrictedUserId.id)] = true
 	end
 	for AssetId, contentId in ContentIds do

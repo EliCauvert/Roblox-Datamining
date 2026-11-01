@@ -68,7 +68,7 @@ local function variantsFactory(p1)
 			[InputSizeModule.Medium] = computeProps({
 				containerTag = "size-full-1000 gap-large",
 				radius = p1.Radius.Medium,
-				horizontalPadding = if FlagsModule.FoundationNumberInputBeta then p1.Padding.Medium else p1.Padding.Small,
+				horizontalPadding = p1.Padding.Medium,
 				typography = p1.Typography.BodyMedium,
 				iconSize = IconSizeModule.Small,
 				minContainerHeight = p1.Size.Size_1000,

@@ -5,7 +5,9 @@ local BuilderIconsModule = require(Parent.BuilderIcons)
 local BuilderIconsModuleFont = BuilderIconsModule.Font
 local ImageModule = require(Foundation.Components.Image)
 local TextModule = require(Foundation.Components.Text)
+local FlagsModule = require(Foundation.Utility.Flags)
 local LoggerModule = require(Foundation.Utility.Logger)
+local DevAssertModule = require(Foundation.Utility.devAssert)
 local IsBuilderIconModule = require(Foundation.Utility.isBuilderIcon)
 local MigrateFontSizeModule = require(script.Parent.migrateFontSize)
 local MigrateIconNameModule = require(script.Parent.migrateIconName)
@@ -22,7 +24,7 @@ local config = {
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseTextSizeOffsetModule (copy), MigrateIconNameModule (copy), UseIconSizeModule (copy), IsBuilderIconModule (copy), MigrateFontSizeModule (copy), LoggerModule (copy), ReactModule (copy), ImageModule (copy), WithCommonPropsModule (copy), TextModule (copy), BuilderIconsModuleFont (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseTextSizeOffsetModule (copy), MigrateIconNameModule (copy), UseIconSizeModule (copy), IsBuilderIconModule (copy), FlagsModule (copy), DevAssertModule (copy), MigrateFontSizeModule (copy), LoggerModule (copy), ReactModule (copy), ImageModule (copy), WithCommonPropsModule (copy), TextModule (copy), BuilderIconsModuleFont (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
 	local UseTextSizeOffsetModuleResult: number = UseTextSizeOffsetModule()
@@ -31,18 +33,25 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	local Variant = WithDefaultsModuleResult.variant
 	local Name = WithDefaultsModuleResult.name
 	local Offset = if typeof(UseIconSizeModuleResult) == "table" then nil else UseIconSizeModuleResult.Y.Offset
+	local Flag = false
 	
 	if not IsBuilderIconModule(Name) and MigrateIconNameModuleResult then
 		if typeof(UseIconSizeModuleResult) == "table" then
-			error("Binding size isn't supported when migrating a UIBlox icon, use Builder Icons directly")
+			if FlagsModule.FoundationDevOnlyPropAsserts then
+				DevAssertModule(false, "Binding size isn't supported when migrating a UIBlox icon, use Builder Icons directly")
+			else
+				error("Binding size isn't supported when migrating a UIBlox icon, use Builder Icons directly")
+			end
+		else
+			Variant = MigrateIconNameModuleResult.variant or Variant
+			Name = MigrateIconNameModuleResult.name
+			Offset = MigrateFontSizeModule(Offset, UseTokensModuleResult)
+			Flag = true
 		end
-		Variant = MigrateIconNameModuleResult.variant or Variant
-		Name = MigrateIconNameModuleResult.name
-		Offset = MigrateFontSizeModule(Offset, UseTokensModuleResult)
 	end
 	local Style = WithDefaultsModuleResult.style or UseTokensModuleResult.Color.Content.Default
 	
-	if IsBuilderIconModule(Name) or MigrateIconNameModuleResult then
+	if IsBuilderIconModule(Name) or Flag then
 		return ReactModule.createElement(TextModule, WithCommonPropsModule(WithDefaultsModuleResult, {
 			textStyle = Style,
 			Text = Name,

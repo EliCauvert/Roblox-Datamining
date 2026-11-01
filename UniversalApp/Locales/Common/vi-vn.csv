@@ -928,6 +928,7 @@ CommonUI.Features.Heading.GameDetails,Chi tiết trải nghiệm
 CommonUI.Features.Label.About,Về sản phẩm
 CommonUI.Features.Label.AboutUs,Về chúng tôi
 CommonUI.Features.Label.AcceptFriend,Chấp nhận làm bạn
+CommonUI.Features.Label.Add,Thêm
 CommonUI.Features.Label.AddConnections,Thêm Người quen
 CommonUI.Features.Label.AddFriend,Thêm bạn bè
 CommonUI.Features.Label.AdjustScreen,Điều chỉnh màn hình
@@ -965,7 +966,7 @@ CommonUI.Features.Label.LuobuThirdPartyDataUse,Danh sách chia sẻ bên thứ b
 CommonUI.Features.Label.Me,Tôi
 CommonUI.Features.Label.Messages,Tin nhắn
 CommonUI.Features.Label.Moments,Khoảnh khắc
-CommonUI.Features.Label.More,Thêm
+CommonUI.Features.Label.More,
 CommonUI.Features.Label.MoreEvents,Sớm ra mắt thêm sự kiện!
 CommonUI.Features.Label.Newsroom,Trung tâm tin tức
 CommonUI.Features.Label.OfficialStore,Cửa hàng Chính thức
@@ -2806,7 +2807,7 @@ Feature.Build.Notification.Title.NeedInput,Tính năng Tạo dựng cần bạn 
 Feature.Build.Placeholder.DescribeProduct,Mô tả sản phẩm bạn muốn bán
 Feature.Build.Placeholder.DescribeProductUpdate,Mô tả thông tin trong bản cập nhật
 Feature.Build.Placeholder.InternalSpec,internal_code
-Feature.Build.Prompt.CreateDeveloperProduct,"Giúp tôi tạo một sản phẩm của nhà phát triển, đưa sản phẩm đó vào trò chơi, xác minh và đăng các thay đổi, rồi cho phép người dùng mua sản phẩm đó."
+Feature.Build.Prompt.CreateDeveloperProduct,Hãy xem xét trò chơi của tôi và đề xuất vật phẩm thích hợp nhất để tôi bán nhằm kiếm Robux. Giao dịch mua một lần hay vật phẩm mà người chơi có thể mua nhiều lần (chẳng hạn như vật phẩm tăng cường) sẽ phù hợp hơn với trò chơi của tôi? Vui lòng giải thích lý do.
 Feature.Build.Title.AdActive,Chiến dịch quảng cáo đang hoạt động
 Feature.Build.Title.AdCampaignDuration,Chiến dịch quảng cáo dài {durationDays} ngày
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} ngày
@@ -4159,6 +4160,7 @@ Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,Mua hàn
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,Tương tác với người dùng
 Feature.Landing.Label.InvitedBy,Được {name} mời
 Feature.Landing.Label.PoweredBy,Được cung cấp bởi
+Feature.Leaderboards.Heading.Leaderboard,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,Không phải bây giờ
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,Bật
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,Giúp những người có số điện thoại của bạn có thể thêm bạn làm bạn bè trên Roblox
@@ -4856,7 +4858,9 @@ Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Miễn phí khi có gói Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Không hỗ trợ giao dịch mua máy chủ riêng tư trong Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,Trò chơi này không hỗ trợ máy chủ riêng.
+Feature.PrivateServers.Heading.ConfigurePrivateServer,Điều Chỉnh Máy Chủ Riêng Tư
 Feature.PrivateServers.Label.OwnersServer,Máy chủ của {displayName}
+Feature.PrivateServers.Label.ServerName,Tên Máy Chủ:
 Feature.Profile.Action.AboutThisProfile,Về hồ sơ này
 Feature.Profile.Action.Accept,Chấp Nhận
 Feature.Profile.Action.AcceptFriends,Chấp Nhận Làm Bạn
@@ -5332,10 +5336,10 @@ Feature.SplitPane.Tour.Step2.Description,Chọn diện mạo bạn muốn. Chuy�
 Feature.SplitPane.Tour.Step2.Title,Thay đổi diện mạo bất cứ lúc nào
 Feature.SplitPane.Tour.Step3.Description,Ẩn không gian này bất cứ lúc nào để tập trung khám phá các trò chơi mới. Avatar bạn đã lưu vẫn ở ngay đây.
 Feature.SplitPane.Tour.Step3.Title,Chọn nội dung bạn muốn xem
-Feature.SplitPane.UnsavedChangesDialogBody,"Nếu chuyển đổi bây giờ, những thay đổi đã thực hiện trên avatar của bạn có thể bị mất. Hãy lưu để giữ lại thông tin thay đổi."
+Feature.SplitPane.UnsavedChangesDialogBody,"Nếu tiếp tục, avatar hiện tại của bạn sẽ bị mất. Hãy lưu để giữ lại avatar này."
 Feature.SplitPane.UnsavedChangesDialogPrimaryCTA,
-Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,Không lưu
-Feature.SplitPane.UnsavedChangesDialogTitle,Lưu thông tin đã thay đổi?
+Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,
+Feature.SplitPane.UnsavedChangesDialogTitle,Lưu trước khi chuyển đổi avatar?
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,Thêm người khác
 Feature.Squads.Action.ConnectToVoice,Kết nối với tin nhắn thoại

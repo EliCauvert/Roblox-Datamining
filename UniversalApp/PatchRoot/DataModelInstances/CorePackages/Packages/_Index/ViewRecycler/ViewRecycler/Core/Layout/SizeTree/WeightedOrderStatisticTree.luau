@@ -266,8 +266,8 @@ local function splitByItems(Left, NewItemCount)
 		elseif config == nil then
 			config1 = Left4
 		else
-			local config3 = nil
 			local Right6 = nil
+			local config3 = nil
 			if config.left == nil then
 				local Right5 = config.right
 				config.left = nil
@@ -303,8 +303,8 @@ local function splitByItems(Left, NewItemCount)
 		if Right == nil then
 			return config1, config2
 		end
-		local PopMinimumResult = nil
 		local BalanceResult = nil
+		local PopMinimumResult = nil
 		if Right.left == nil then
 			local Right7 = Right.right
 			Right.left = nil

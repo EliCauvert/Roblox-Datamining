@@ -910,6 +910,7 @@ CommonUI.Features.Heading.GameDetails,تفاصيل التجربة
 CommonUI.Features.Label.About,حول
 CommonUI.Features.Label.AboutUs,نبذة عنا
 CommonUI.Features.Label.AcceptFriend,قبول الصداقة
+CommonUI.Features.Label.Add,إضافة
 CommonUI.Features.Label.AddConnections,إضافة جهات اتصال
 CommonUI.Features.Label.AddFriend,إضافة صديق
 CommonUI.Features.Label.AdjustScreen,ضبط الشاشة
@@ -1804,7 +1805,7 @@ Feature.Avatar.Label.Accessory,أكسسوار
 Feature.Avatar.Label.AccessoryAdjustment.Entry.Tooltip,اضبط مظهر إكسسواراتك.
 Feature.Avatar.Label.AccessoryAdjustment.Items.Tooltip,حدِّد عنصرًا لضبطه
 Feature.Avatar.Label.AccessoryCannotBeAdjustedWarning,التعديل غير متاح لهذا العنصر.
-Feature.Avatar.Label.Add,إضافة
+Feature.Avatar.Label.Add,
 Feature.Avatar.Label.AddEdit,إضافة/تحرير
 Feature.Avatar.Label.AddManage,إضافة/إدارة
 Feature.Avatar.Label.AddManage2,
@@ -2742,7 +2743,7 @@ Feature.Build.Notification.Title.NeedInput,ميزة Build بحاجة إلى إد
 Feature.Build.Placeholder.DescribeProduct,صِف ما تريد بيعه
 Feature.Build.Placeholder.DescribeProductUpdate,صِف تحديثًا
 Feature.Build.Placeholder.InternalSpec,كود داخلي
-Feature.Build.Prompt.CreateDeveloperProduct,ساعدني في إنشاء منتج المطوّر، وربطه باللعبة، والتحقق من التغييرات ونشرها، وجعله متاحًا للشراء.
+Feature.Build.Prompt.CreateDeveloperProduct,راجع لعبتي واقترح أفضل عنصر يمكنني بيعه لكسب عملات Robux. هل يناسب لعبتي الشراء لمرة واحدة أم عنصر يمكن للاعبين شراؤه مرارًا، مثل المعززات؟ وضح السبب.
 Feature.Build.Title.AdActive,الحملة الإعلانية نشطة
 Feature.Build.Title.AdCampaignDuration,حملة إعلانية لمدة {durationDays} من الأيام
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} من الأيام
@@ -4095,6 +4096,7 @@ Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,عملي
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,تفاعل المستخدمين
 Feature.Landing.Label.InvitedBy,مدعو بواسطة {name}
 Feature.Landing.Label.PoweredBy,بدعم من
+Feature.Leaderboards.Heading.Leaderboard,قائمة المشاركين
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,ساعِد الأشخاص الذين لديهم رقم هاتفك على إضافتك كصديق على منصّة Roblox
@@ -4792,7 +4794,9 @@ Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,مجانًا مع Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,عمليات شراء الخوادم الخاصة غير مدعومة في Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,لا تدعم هذه اللعبة الخوادم الخاصة.
+Feature.PrivateServers.Heading.ConfigurePrivateServer,تهيئة الخادم الخاص
 Feature.PrivateServers.Label.OwnersServer,خادم {displayName}
+Feature.PrivateServers.Label.ServerName,اسم الخادم:
 Feature.Profile.Action.AboutThisProfile,حول هذا الملف الشخصي
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -5267,10 +5271,10 @@ Feature.SplitPane.Tour.Step2.Description,اختر كيف تريد أن تكون 
 Feature.SplitPane.Tour.Step2.Title,غيّر إطلالتك في أي وقت
 Feature.SplitPane.Tour.Step3.Description,يمكنك إخفاء هذه المساحة في أي وقت للتركيز على اكتشاف ألعاب جديدة. سيظل الأفاتار المحفوظ لديك هنا.
 Feature.SplitPane.Tour.Step3.Title,اختر ما تريد رؤيته
-Feature.SplitPane.UnsavedChangesDialogBody,إذا قمت بالتبديل الآن، فقد تُفقد التغييرات التي أجريتها على الأفاتار لديك. احفظها للاحتفاظ بها.
+Feature.SplitPane.UnsavedChangesDialogBody,إذا تابعت، فسيتم فقدان الأفاتار الحالي لديك. احفظه للاحتفاظ بالأفاتار.
 Feature.SplitPane.UnsavedChangesDialogPrimaryCTA,
-Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,عدم الحفظ
-Feature.SplitPane.UnsavedChangesDialogTitle,هل تريد حفظ تغييراتك؟
+Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,
+Feature.SplitPane.UnsavedChangesDialogTitle,هل تريد الحفظ قبل تبديل الأفاتارات؟
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,إضافة آخرين
 Feature.Squads.Action.ConnectToVoice,الاتصال بالمحادثة الصوتية

@@ -1,8 +1,5 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
-local Parent = Foundation.Parent
-local ReactModule = require(Parent.React)
-local DashModule = require(Parent.Dash)
-local FlagsModule = require(Foundation.Utility.Flags)
+local ReactModule = require(Foundation.Parent.React)
 local ImageModule = require(Foundation.Components.Image)
 local StatusIndicatorModule = require(Foundation.Components.StatusIndicator)
 local _ = require(Foundation.Components.Types)
@@ -24,7 +21,7 @@ local config = {
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UsePresentationContextFunction (copy), UseAvatarVariantsModule (copy), GetAvatarSizeModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ImageModule (copy), MapBindableModule (copy), GetRbxThumbModule (copy), ThumbnailTypeModule (copy), ThumbnailSizeModule (copy), FlagsModule (copy), StatusIndicatorModule (copy), DashModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UsePresentationContextFunction (copy), UseAvatarVariantsModule (copy), GetAvatarSizeModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ImageModule (copy), MapBindableModule (copy), GetRbxThumbModule (copy), ThumbnailTypeModule (copy), ThumbnailSizeModule (copy), StatusIndicatorModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
 	local UsePresentationContextResult = UsePresentationContextFunction()
@@ -49,7 +46,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 			backgroundStyle = WithDefaultsModuleResult.backgroundStyle,
 			testId = `{WithDefaultsModuleResult.testId}--image`
 		}),
-		Indicator = if UseAvatarVariantsModuleResult.statusIndicator.isVisible then if FlagsModule.FoundationStatusIndicatorMask then ReactModule.createElement(StatusIndicatorModule, {
+		Indicator = if UseAvatarVariantsModuleResult.statusIndicator.isVisible then ReactModule.createElement(StatusIndicatorModule, {
 			testId = `{WithDefaultsModuleResult.testId}--status-indicator`,
 			variant = UseAvatarVariantsModuleResult.statusIndicator.variant,
 			shape = UseAvatarVariantsModuleResult.statusIndicator.shape,
@@ -58,13 +55,6 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 			ZIndex = UseAvatarVariantsModuleResult.statusIndicatorMask.ZIndex,
 			AnchorPoint = UseAvatarVariantsModuleResult.statusIndicatorMask.AnchorPoint,
 			Position = UseAvatarVariantsModuleResult.statusIndicatorMask.Position
-		}) else ReactModule.createElement(ViewModule, DashModule.join(UseAvatarVariantsModuleResult.statusIndicatorBackplate, {
-			testId = `{WithDefaultsModuleResult.testId}--indicator-backplate`
-		}), ReactModule.createElement(StatusIndicatorModule, {
-			testId = `{WithDefaultsModuleResult.testId}--status-indicator`,
-			variant = UseAvatarVariantsModuleResult.statusIndicator.variant,
-			shape = UseAvatarVariantsModuleResult.statusIndicator.shape,
-			size = UseAvatarVariantsModuleResult.statusIndicator.size
-		})) else nil
+		}) else nil
 	})
 end))

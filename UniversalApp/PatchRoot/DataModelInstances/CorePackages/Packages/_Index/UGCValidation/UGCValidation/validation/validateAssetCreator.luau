@@ -28,7 +28,7 @@ end
 
 local function _(Url, AssetIds, RestrictedEntities, p1, UniverseId)
 	-- upvalues: PromiseModule (copy), HttpService (copy), ConstantsModule (copy)
-	return if #AssetIds == 0 then PromiseModule.resolve() else PromiseModule.new(function(Callback, Callback1)
+	return if #AssetIds == 0 then PromiseModule.resolve() else PromiseModule.new(function(Callback1, Callback)
 		-- upvalues: HttpService (upval), AssetIds (copy), RestrictedEntities (copy), UniverseId (copy), Url (copy), ConstantsModule (upval), p1 (copy)
 		HttpService:RequestInternal({
 			Method = "POST",
@@ -43,13 +43,13 @@ local function _(Url, AssetIds, RestrictedEntities, p1, UniverseId)
 				[ConstantsModule.ContentType] = ConstantsModule.ApplicationJson
 			}
 		}):Start(function(p2, p3)
-			-- upvalues: HttpService (upval), Callback (copy), Callback1 (copy)
+			-- upvalues: HttpService (upval), Callback1 (copy), Callback (copy)
 			if p2 and p3.StatusCode == 200 then
-				Callback((HttpService:JSONDecode(p3.Body)))
+				Callback1((HttpService:JSONDecode(p3.Body)))
 				
 				return
 			else
-				Callback1()
+				Callback()
 			end
 		end)
 	end)
@@ -90,7 +90,7 @@ return function(List, p1)
 		table.insert(AssetIds, i1)
 		
 		if UGCValidationCanPublishRequestPageSizeFastInt <= #AssetIds then
-			table.insert(List1, if #AssetIds == 0 then PromiseModule.resolve() else PromiseModule.new(function(Callback, Callback1)
+			table.insert(List1, if #AssetIds == 0 then PromiseModule.resolve() else PromiseModule.new(function(Callback1, Callback)
 				-- upvalues: HttpService (upval), AssetIds (copy), RestrictedUserIds (copy), UniverseId (copy), Text (copy), ConstantsModule (upval), Token (copy)
 				HttpService:RequestInternal({
 					Method = "POST",
@@ -105,13 +105,13 @@ return function(List, p1)
 						[ConstantsModule.ContentType] = ConstantsModule.ApplicationJson
 					}
 				}):Start(function(p2, p3)
-					-- upvalues: HttpService (upval), Callback (copy), Callback1 (copy)
+					-- upvalues: HttpService (upval), Callback1 (copy), Callback (copy)
 					if p2 and p3.StatusCode == 200 then
-						Callback((HttpService:JSONDecode(p3.Body)))
+						Callback1((HttpService:JSONDecode(p3.Body)))
 						
 						return
 					else
-						Callback1()
+						Callback()
 					end
 				end)
 			end))
@@ -119,7 +119,7 @@ return function(List, p1)
 		end
 	end
 	if #AssetIds > 0 then
-		table.insert(List1, if #AssetIds == 0 then PromiseModule.resolve() else PromiseModule.new(function(Callback, Callback1)
+		table.insert(List1, if #AssetIds == 0 then PromiseModule.resolve() else PromiseModule.new(function(Callback1, Callback)
 			-- upvalues: HttpService (upval), AssetIds (copy), RestrictedUserIds (copy), UniverseId (copy), Text (copy), ConstantsModule (upval), Token (copy)
 			HttpService:RequestInternal({
 				Method = "POST",
@@ -134,13 +134,13 @@ return function(List, p1)
 					[ConstantsModule.ContentType] = ConstantsModule.ApplicationJson
 				}
 			}):Start(function(p2, p3)
-				-- upvalues: HttpService (upval), Callback (copy), Callback1 (copy)
+				-- upvalues: HttpService (upval), Callback1 (copy), Callback (copy)
 				if p2 and p3.StatusCode == 200 then
-					Callback((HttpService:JSONDecode(p3.Body)))
+					Callback1((HttpService:JSONDecode(p3.Body)))
 					
 					return
 				else
-					Callback1()
+					Callback()
 				end
 			end)
 		end))

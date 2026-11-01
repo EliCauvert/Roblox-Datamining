@@ -22,6 +22,7 @@ local SheetContextModule = require(script.Parent.SheetContext)
 local TypesModule = require(script.Parent.Types)
 local SheetTypeModule = require(script.Parent.SheetType)
 local ChildrenHasFullBleedModule = require(script.Parent.childrenHasFullBleed)
+local BackdropModule = require(Foundation.Components.Backdrop)
 local CloseAffordanceModule = require(Foundation.Components.CloseAffordance)
 local ImageModule = require(Foundation.Components.Image)
 local ViewModule = require(Foundation.Components.View)
@@ -33,7 +34,7 @@ local SHADOWIMAGE = ConstantsModule.SHADOW_IMAGE
 local SHADOWSIZE = ConstantsModule.SHADOW_SIZE
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: WithDefaultsModule (copy), config (copy), UseOverlayModule (copy), UseTokensModule (copy), UseElevationModule (copy), ElevationLayerModule (copy), UsePreferencesModule (copy), UseScaledValueModule (copy), DIALOGSIZES (copy), ReactModule (copy), UseAnimatedBindingFunction (copy), ChildrenHasFullBleedModule (copy), OtterModule (copy), DashModule (copy), SheetTypeModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), TypesModule (copy), SheetContextModule (copy), ElevationOwnerScope (copy), CloseAffordanceModule (copy), CloseAffordanceVariantModule (copy), FlagsModule (copy), ImageModule (copy), SHADOWIMAGE (copy), SHADOWSIZE (copy), ReactRobloxModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseOverlayModule (copy), UseTokensModule (copy), UseElevationModule (copy), ElevationLayerModule (copy), UsePreferencesModule (copy), UseScaledValueModule (copy), DIALOGSIZES (copy), ReactModule (copy), UseAnimatedBindingFunction (copy), ChildrenHasFullBleedModule (copy), OtterModule (copy), DashModule (copy), SheetTypeModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), TypesModule (copy), SheetContextModule (copy), ElevationOwnerScope (copy), CloseAffordanceModule (copy), CloseAffordanceVariantModule (copy), FlagsModule (copy), ImageModule (copy), SHADOWIMAGE (copy), SHADOWSIZE (copy), ReactRobloxModule (copy), BackdropModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseOverlayModuleResult = UseOverlayModule()
 	local UseTokensModuleResult = UseTokensModule()
@@ -297,7 +298,12 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 					UseBindingResult2((math.min(Frame.AbsoluteSize.Y - UseTokensModuleResult.Margin.Medium * 2, UseScaledValueModuleResult1)))
 				end else nil
 			}, nil),
-			Backdrop = ReactModule.createElement(ViewModule, {
+			Backdrop = if FlagsModule.FoundationCenterSheetInternalBackdrop then ReactModule.createElement(BackdropModule, {
+				ZIndex = 1,
+				transparency = UseAnimatedBindingResult,
+				onActivated = UseResult1,
+				testId = `{WithDefaultsModuleResult.testId}--backdrop`
+			}) else ReactModule.createElement(ViewModule, {
 				ZIndex = 1,
 				Size = UDim2.fromScale(2, 2),
 				Position = UDim2.fromScale(-0.5, -0.5),

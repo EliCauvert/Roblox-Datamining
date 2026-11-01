@@ -928,6 +928,7 @@ CommonUI.Features.Heading.GameDetails,Detail Pengalaman Virtual
 CommonUI.Features.Label.About,Tentang
 CommonUI.Features.Label.AboutUs,Tentang Kami
 CommonUI.Features.Label.AcceptFriend,Terima Teman
+CommonUI.Features.Label.Add,Tambah
 CommonUI.Features.Label.AddConnections,Tambah Koneksi
 CommonUI.Features.Label.AddFriend,Tambahkan Teman
 CommonUI.Features.Label.AdjustScreen,Sesuaikan Layar
@@ -2286,7 +2287,7 @@ Feature.BlockingModal.Action.BlockAndReport,Blokir dan laporkan
 Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,Blokir {DisplayName}?
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Memblokir pengguna ini akan menghapusnya sebagai teman atau pengikut. Dia tidak akan dapat mengirim pesan, permintaan, atau undangan kepadamu.<br /><br />Dia tidak akan diberi tahu bahwa kamu memblokirnya."
-Feature.Build.Action.Add,Tambah
+Feature.Build.Action.Add,
 Feature.Build.Action.AddCustomOption,Tambahkan opsi kustom...
 Feature.Build.Action.AddFriends,Undang teman
 Feature.Build.Action.AddPlaytester,Undang penguji tahap awal
@@ -2806,7 +2807,7 @@ Feature.Build.Notification.Title.NeedInput,Build membutuhkan input darimu
 Feature.Build.Placeholder.DescribeProduct,Deskripsikan apa yang ingin kamu jual
 Feature.Build.Placeholder.DescribeProductUpdate,Deskripsikan perubahan
 Feature.Build.Placeholder.InternalSpec,kode_internal
-Feature.Build.Prompt.CreateDeveloperProduct,"Bantu saya membuat produk developer, menghubungkannya ke game, memverifikasi dan memublikasikan perubahannya, serta membuatnya tersedia untuk dibeli."
+Feature.Build.Prompt.CreateDeveloperProduct,"Review game saya dan sarankan item terbaik yang bisa saya jual untuk memperoleh Robux. Manakah yang lebih cocok untuk game saya: item yang dapat dibeli satu kali atau item yang dapat dibeli pemain lagi, seperti boost? Jelaskan alasannya."
 Feature.Build.Title.AdActive,Kampanye iklan aktif
 Feature.Build.Title.AdCampaignDuration,Kampanye iklan {durationDays} hari
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} hari
@@ -4157,6 +4158,7 @@ Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,Pembelia
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,Pengguna Berinteraksi
 Feature.Landing.Label.InvitedBy,Diundang oleh {name}
 Feature.Landing.Label.PoweredBy,Didukung oleh
+Feature.Leaderboards.Heading.Leaderboard,Papan Peringkat
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,Nyalakan
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,Bantu pengguna yang memiliki nomor ponselmu untuk menambahkanmu sebagai teman di Roblox
@@ -4854,7 +4856,9 @@ Feature.PrivateServers.Action.CreatePrivateServer,Buat Server Pribadi
 Feature.PrivateServers.Action.FreeWithBlackbird,Gratis dengan Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Pembelian server privat tidak didukung di Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,Game ini tidak mendukung server privat.
+Feature.PrivateServers.Heading.ConfigurePrivateServer,Konfigurasi Server Privat
 Feature.PrivateServers.Label.OwnersServer,Server {displayName}
+Feature.PrivateServers.Label.ServerName,Nama Server:
 Feature.Profile.Action.AboutThisProfile,Tentang profil ini
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,Menerima Teman
@@ -5330,10 +5334,10 @@ Feature.SplitPane.Tour.Step2.Description,Pilih penampilan yang kamu inginkan. Be
 Feature.SplitPane.Tour.Step2.Title,Ubah tampilanmu kapan saja
 Feature.SplitPane.Tour.Step3.Description,Sembunyikan ruang ini kapan saja untuk fokus menjelajahi game baru. Avatar yang kamu simpan tetap ada di sini.
 Feature.SplitPane.Tour.Step3.Title,Pilih yang ingin kamu lihat
-Feature.SplitPane.UnsavedChangesDialogBody,"Jika kamu mengganti avatar sekarang, perubahan pada avatarmu mungkin hilang. Simpan untuk mempertahankannya."
+Feature.SplitPane.UnsavedChangesDialogBody,"Jika kamu melanjutkan, avatarmu saat ini akan hilang. Simpan untuk mempertahankan avatar."
 Feature.SplitPane.UnsavedChangesDialogPrimaryCTA,
-Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,Jangan simpan
-Feature.SplitPane.UnsavedChangesDialogTitle,Simpan perubahanmu?
+Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,
+Feature.SplitPane.UnsavedChangesDialogTitle,Simpan sebelum berganti avatar?
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,Tambahkan lainnya
 Feature.Squads.Action.ConnectToVoice,Aktifkan suara

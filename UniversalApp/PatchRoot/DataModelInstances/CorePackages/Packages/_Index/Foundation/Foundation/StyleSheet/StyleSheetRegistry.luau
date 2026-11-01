@@ -1,5 +1,4 @@
-﻿local Foundation = script:FindFirstAncestor("Foundation")
-local Parent = script.Parent.Parent
+﻿local Parent = script.Parent.Parent
 local _ = require(Parent.Enums.ColorMode)
 local DeviceModule = require(Parent.Enums.Device)
 local ThemeNameModule = require(Parent.Enums.ThemeName)
@@ -11,34 +10,24 @@ local GetGeneratedRulesModule = require(Parent.Utility.getGeneratedRules)
 local GetMainGuiModule = require(Parent.Utility.getMainGui)
 local GetOverrideAttributesModule = require(script.Parent.getOverrideAttributes)
 local ScaleValueModule = require(Parent.Utility.scaleValue)
-local HttpService = game:GetService("HttpService")
-local FoundationStyleSheets = Instance.new("Folder")
-
-if FlagsModule.FoundationDontParentToFoundationModule then
-	FoundationStyleSheets.Name = "FoundationStyleSheets" .. HttpService:GenerateGUID(false)
-else
-	FoundationStyleSheets.Name = "FoundationStyleSheets"
-end
-if FlagsModule.FoundationDontParentToFoundationModule then
-	local MainGuiModule = GetMainGuiModule()
-	DevAssertModule(MainGuiModule ~= nil, "MainGui not found")
-	FoundationStyleSheets.Parent = MainGuiModule
-else
-	FoundationStyleSheets.Parent = Foundation
-end
+local Folder = Instance.new("Folder")
+Folder.Name = "FoundationStyleSheets" .. game:GetService("HttpService"):GenerateGUID(false)
+local MainGuiModule = GetMainGuiModule()
+DevAssertModule(MainGuiModule ~= nil, "MainGui not found")
+Folder.Parent = MainGuiModule
 local t = {}
 local t1 = {}
 local Flag = false
 
 local function createStyleSheet(ColorMode, Device, Scale, TokenOverrides, ThemeName)
-	-- upvalues: DeviceModule (copy), ThemeNameModule (copy), FoundationStyleSheets (copy), GetOverrideAttributesModule (copy), GetGeneratedRulesModule (copy)
+	-- upvalues: DeviceModule (copy), ThemeNameModule (copy), Folder (copy), GetOverrideAttributesModule (copy), GetGeneratedRulesModule (copy)
 	local Device1 = Device or DeviceModule.Desktop
 	local Scale1 = Scale or 1
 	local ThemeName1 = ThemeName or ThemeNameModule.Default
 	local StyleSheet = Instance.new("StyleSheet")
 	local Text: string = `{ThemeName1}-`
 	StyleSheet.Name = if TokenOverrides == nil then `{Text}{ColorMode}-{Device1}-{Scale1}` else `{Text}{ColorMode}-{Device1}-{Scale1}-{tostring(TokenOverrides)}`
-	StyleSheet.Parent = FoundationStyleSheets
+	StyleSheet.Parent = Folder
 	
 	return {
 		refCount = 0,

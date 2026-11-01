@@ -4,12 +4,14 @@ local ConstantsModule = require(Foundation.Constants)
 local ImageModule = require(Foundation.Components.Image)
 local _ = require(Foundation.Components.Types)
 local ViewModule = require(Foundation.Components.View)
+local FlagsModule = require(Foundation.Utility.Flags)
+local DevAssertModule = require(Foundation.Utility.devAssert)
 local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local SheetContextModule = require(script:FindFirstAncestor("Sheet").SheetContext)
 local config = { sticky = false, height = UDim.new(1, 0) }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), SheetContextModule (copy), ImageModule (copy), ViewModule (copy), ConstantsModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), SheetContextModule (copy), FlagsModule (copy), DevAssertModule (copy), ImageModule (copy), ViewModule (copy), ConstantsModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseContextResult = ReactModule.useContext(SheetContextModule)
 	local SetFullBleedHeightFunction = UseContextResult.setFullBleedHeight
@@ -20,8 +22,14 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	local TestId = UseContextResult.testId
 	assert(SetFullBleedHeightFunction and (HasHeader and TestId), "SheetFullBleed must be used within a Sheet")
 	ReactModule.useEffect(function()
-		-- upvalues: WithDefaultsModuleResult (copy), HasHeader (copy)
-		assert(not (WithDefaultsModuleResult.sticky and HasHeader:getValue()), "Sheet.FullBleed with sticky=true is unsupported when used with Sheet.Header")
+		-- upvalues: FlagsModule (upval), DevAssertModule (upval), WithDefaultsModuleResult (copy), HasHeader (copy)
+		if FlagsModule.FoundationDevOnlyPropAsserts then
+			DevAssertModule(not (WithDefaultsModuleResult.sticky and HasHeader:getValue()), "Sheet.FullBleed with sticky=true is unsupported when used with Sheet.Header")
+			
+			return
+		else
+			assert(not (WithDefaultsModuleResult.sticky and HasHeader:getValue()), "Sheet.FullBleed with sticky=true is unsupported when used with Sheet.Header")
+		end
 	end, { WithDefaultsModuleResult.sticky, HasHeader })
 	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: SetFullBleedHeightFunction (copy)

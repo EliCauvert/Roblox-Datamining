@@ -86,9 +86,10 @@ return function(Tbl, Text, p1, p2, p3, p4: number, p5)
 				
 				if Size600 <= Offset and Offset <= P13 * 38 then
 					Offset = Size600
-				else
-					Offset = math.round(Offset / Size100) * Size100
+					
+					return Offset
 				end
+				Offset = math.round(Offset / Size100) * Size100
 			end
 			return Offset
 		end)

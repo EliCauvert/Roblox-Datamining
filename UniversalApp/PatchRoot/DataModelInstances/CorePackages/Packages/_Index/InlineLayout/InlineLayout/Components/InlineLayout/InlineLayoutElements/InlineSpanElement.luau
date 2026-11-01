@@ -89,8 +89,6 @@ function InlineSpanElementModule:split(p2, p3)
 	local SplitChildAtIndexResult, SplitChildAtIndexResult2, SplitChildAtIndexResult3 = self:_splitChildAtIndex(SplitPoint, SplitPoint2)
 	
 	if not SplitChildAtIndexResult3 then
-		local SplitChildAtIndexResult1 = SplitChildAtIndexResult
-		local SplitChildAtIndexResult4: string = SplitChildAtIndexResult2
 		local Element: string = self.Elements[SplitPoint]
 		local v1 = nil
 		local Element1 = nil
@@ -100,8 +98,8 @@ function InlineSpanElementModule:split(p2, p3)
 		elseif Element.canForceSplit and p3 then
 			v1, Element1 = Element:split(SplitPoint2, true)
 		else
-			v1 = SplitChildAtIndexResult1
-			Element1 = SplitChildAtIndexResult4
+			v1 = SplitChildAtIndexResult
+			Element1 = SplitChildAtIndexResult2
 		end
 		SplitChildAtIndexResult = v1
 		SplitChildAtIndexResult2 = Element1

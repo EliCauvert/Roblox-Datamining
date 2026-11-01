@@ -122,12 +122,11 @@ repeat
 		
 		if WryContextSlot then break end
 	end
-	local SlotClass = makeSlotClass()
+	WryContextSlot = makeSlotClass()
 	pcall(function()
-		-- upvalues: Array (copy), SlotClass (copy)
-		Array["@wry/context:Slot"] = SlotClass
+		-- upvalues: Array (copy), WryContextSlot (copy)
+		Array["@wry/context:Slot"] = WryContextSlot
 	end)
-	WryContextSlot = SlotClass
 until true
 t.Slot = WryContextSlot
 

@@ -43,7 +43,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	local UseTokensModuleResult = UseTokensModule()
 	local UseListItemVariantsModuleResult = UseListItemVariantsModule(UseTokensModuleResult, Size)
 	local Icon = UseListAccessoryVariantsModule(UseTokensModuleResult, Size, "Icon")
-	local Entry = if FlagsModule.FoundationListItemTypographySpacing then config[Size] else "gap-small"
+	local Entry = config[Size]
 	local HasOnActivated: boolean = typeof(WithDefaultsModuleResult.onActivated) == "table" and WithDefaultsModuleResult.onActivated.onActivated ~= nil
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: HasOnActivated (copy), WithDefaultsModuleResult (copy)
@@ -164,10 +164,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 						}, {
 							TitleContainer = if UseMemoResult4 then ReactModule.createElement(ViewModule, {
 								LayoutOrder = 0,
-								tag = {
-									["col auto-xy"] = true,
-									["gap-xsmall"] = not FlagsModule.FoundationListItemTypographySpacing
-								}
+								tag = { ["col auto-xy"] = true, ["gap-xsmall"] = false }
 							}, {
 								Title = if UseMemoResult4 then ReactModule.createElement(TextModule, {
 									RichText = true,

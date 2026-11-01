@@ -928,6 +928,7 @@ CommonUI.Features.Heading.GameDetails,Experience-Infos
 CommonUI.Features.Label.About,Info
 CommonUI.Features.Label.AboutUs,Über uns
 CommonUI.Features.Label.AcceptFriend,Freund akzeptieren
+CommonUI.Features.Label.Add,Hinzufügen
 CommonUI.Features.Label.AddConnections,Connections hinzufügen
 CommonUI.Features.Label.AddFriend,Freund hinzufügen
 CommonUI.Features.Label.AdjustScreen,Bildschirm anpassen
@@ -1861,7 +1862,7 @@ Feature.Avatar.Label.Accessory,Accessoire
 Feature.Avatar.Label.AccessoryAdjustment.Entry.Tooltip,Passe die Größe deiner Accessoires an!
 Feature.Avatar.Label.AccessoryAdjustment.Items.Tooltip,Artikel zum Anpassen auswählen
 Feature.Avatar.Label.AccessoryCannotBeAdjustedWarning,Für diesen Artikel ist keine Anpassung verfügbar.
-Feature.Avatar.Label.Add,Hinzufügen
+Feature.Avatar.Label.Add,
 Feature.Avatar.Label.AddEdit,Hinzufügen/Bearbeiten
 Feature.Avatar.Label.AddManage,Hinzufügen/Verwalten
 Feature.Avatar.Label.AddManage2,
@@ -2799,7 +2800,7 @@ Feature.Build.Notification.Title.NeedInput,Build benötigt deine Eingabe
 Feature.Build.Placeholder.DescribeProduct,"Beschreibe, was du verkaufen möchtest"
 Feature.Build.Placeholder.DescribeProductUpdate,Beschreibe ein Update
 Feature.Build.Placeholder.InternalSpec,internal_code
-Feature.Build.Prompt.CreateDeveloperProduct,"Hilf mir, ein Entwicklerprodukt zu erstellen, es in das Spiel einzubinden, die Änderungen zu prüfen und zu veröffentlichen und es zum Kauf anzubieten."
+Feature.Build.Prompt.CreateDeveloperProduct,"Überprüfe mein Spiel und schlage mir den besten Artikel vor, den ich verkaufen kann, um Robux zu verdienen. Würde ein einmaliger Kauf oder ein Artikel, den Spieler immer wieder kaufen können, wie z. B. ein Boost, besser zu meinem Spiel passen? Erkläre, warum."
 Feature.Build.Title.AdActive,Werbekampagne ist aktiv
 Feature.Build.Title.AdCampaignDuration,{durationDays}-tägige Werbekampagne
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} Tage
@@ -2919,6 +2920,8 @@ Feature.Catalog.Header.InvalidOutfit,Ungültiges Outfit
 Feature.Catalog.Header.PostAvatar,
 Feature.Catalog.Heading.AvailableItems,Verfügbare Artikel
 Feature.Catalog.Heading.BuyItem,Artikel kaufen
+Feature.Catalog.Heading.DescriptionLinkGoToMarketplace,Damit gelangst du zum Marktplatz
+Feature.Catalog.Heading.DescriptionLinkResetSearch,Dadurch wird deine aktuelle Suche zurückgesetzt
 Feature.Catalog.Heading.FreeItemConfirmation,Artikel holen
 Feature.Catalog.Heading.GoToExperience,Experience beitreten?
 Feature.Catalog.Heading.HoldingPolicy,Halterichtlinie
@@ -2994,6 +2997,12 @@ Feature.Catalog.Label.CreatorName,Creator-Name
 Feature.Catalog.Label.CurrentBalance,Aktuelles Guthaben:
 Feature.Catalog.Label.CustomizeAvatar,Avatar anpassen
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,"Du kannst diese Aktion nicht rückgängig machen, wenn du löschst."
+Feature.Catalog.Label.DescriptionLinkInvalid,Ungültiger Link
+Feature.Catalog.Label.DescriptionLinkSearchMarketplace,
+Feature.Catalog.Label.DescriptionLinkViewAsset,Objekt anzeigen
+Feature.Catalog.Label.DescriptionLinkViewBundle,Bündel anzeigen
+Feature.Catalog.Label.DescriptionLinkViewCommunity,Community anzeigen
+Feature.Catalog.Label.DescriptionLinkViewCommunityStore,Community-Store
 Feature.Catalog.Label.Details,
 Feature.Catalog.Label.DynamicHeads,
 Feature.Catalog.Label.Emissive,Emissiv
@@ -3926,7 +3935,7 @@ Feature.Groups.Action.NotNow,
 Feature.Groups.Action.RemovePrimary,Hauptgruppe entfernen
 Feature.Groups.Action.SeeAll,
 Feature.Groups.Action.Unfollow,Entfolgen
-Feature.Groups.Action.ViewGroup,Community anzeigen
+Feature.Groups.Action.ViewGroup,
 Feature.Groups.Description.JoinGroupPending,Deine Beitrittsanfrage muss noch von der Community überprüft werden.
 Feature.Groups.Description.NotEligibleToJoin,Dein Konto kann dieser Community nicht beitreten.
 Feature.Groups.Description.PremiumMaxGroups,Du bist der maximalen Anzahl an Communitys beigetreten.
@@ -4144,6 +4153,7 @@ Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,Käufe i
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,Benutzer interagieren
 Feature.Landing.Label.InvitedBy,Eingeladen von {name}
 Feature.Landing.Label.PoweredBy,Unterstützt von
+Feature.Leaderboards.Heading.Leaderboard,Bestenliste
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,Einschalten
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,"Hilf Personen, die bereits deine Telefonnummer kennen, dich als Freund auf Roblox hinzuzufügen"
@@ -4841,7 +4851,9 @@ Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Mit Plus-Abo gratis
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Käufe von privaten Servern werden in Studio nicht unterstützt.
 Feature.PrivateServers.Description.VipServersNotSupported,Dieses Spiel unterstützt keine privaten Server.
+Feature.PrivateServers.Heading.ConfigurePrivateServer,Privaten Server konfigurieren
 Feature.PrivateServers.Label.OwnersServer,Server von {displayName}
+Feature.PrivateServers.Label.ServerName,Servername:
 Feature.Profile.Action.AboutThisProfile,Über dieses Profil
 Feature.Profile.Action.Accept,Annehmen
 Feature.Profile.Action.AcceptFriends,
@@ -5265,7 +5277,7 @@ Feature.SocialShare.Description.InviteExpiredError,Der Einladungslink ist abgela
 Feature.SocialShare.Description.InviterNotHereError,"Die Person, die dich eingeladen hat, hat die Experience verlassen. Möchtest du {experienceName} trotzdem beitreten?"
 Feature.SocialShare.Label.Copied,Kopiert
 Feature.SocialShare.Label.CopyLinkToShareWithPeople,"Link kopieren, um ihn mit Personen zu teilen, die du kennst"
-Feature.SocialShare.Label.InvalidLinkError,Ungültiger Link
+Feature.SocialShare.Label.InvalidLinkError,
 Feature.SocialShare.Label.InviteExpiredError,Einladungslink abgelaufen
 Feature.SocialShare.Label.InviterNotHereError,Einlader nicht hier
 Feature.SocialShare.Response.Error,
@@ -5312,10 +5324,10 @@ Feature.SplitPane.Tour.Step2.Description,"Wähle aus, wie du aussehen möchtest.
 Feature.SplitPane.Tour.Step2.Title,Du kannst deinen Look jederzeit ändern
 Feature.SplitPane.Tour.Step3.Description,"Blende diesen Bereich jederzeit aus, um dich darauf zu konzentrieren, neue Spiele zu entdecken. Dein gespeicherter Avatar bleibt genau hier."
 Feature.SplitPane.Tour.Step3.Title,"Wähle aus, was du sehen möchtest"
-Feature.SplitPane.UnsavedChangesDialogBody,"Wenn du jetzt wechselst, gehen deine Avatar-Änderungen möglicherweise verloren. Speichere sie, damit sie übernommen werden."
+Feature.SplitPane.UnsavedChangesDialogBody,"Wenn du fortfährst, geht dein aktueller Avatar verloren. Speichere, um den Avatar zu behalten."
 Feature.SplitPane.UnsavedChangesDialogPrimaryCTA,
-Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,Nicht speichern
-Feature.SplitPane.UnsavedChangesDialogTitle,Deine Änderungen speichern?
+Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,
+Feature.SplitPane.UnsavedChangesDialogTitle,"Speichern, bevor du den Avatar wechselst?"
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,Andere hinzufügen
 Feature.Squads.Action.ConnectToVoice,Mit Sprachfunktion verbinden

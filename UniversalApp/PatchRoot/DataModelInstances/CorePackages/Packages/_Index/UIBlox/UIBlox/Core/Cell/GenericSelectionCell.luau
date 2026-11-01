@@ -47,11 +47,11 @@ local function getIconStyle(p1, Default, p2)
 	return config
 end
 
-local function _(SubtitleTextStyle, Disabled)
+local function _(TextStyle, Disabled)
 	-- upvalues: ControlStateModule (copy)
 	local config = {
-		Color = SubtitleTextStyle.Color,
-		Transparency = SubtitleTextStyle.Transparency
+		Color = TextStyle.Color,
+		Transparency = TextStyle.Transparency
 	}
 	
 	if Disabled == ControlStateModule.Disabled or Disabled == ControlStateModule.Pressed then

@@ -1,0 +1,1 @@
+﻿return { FullBleed = "FullBleed", Inset = "Inset" }

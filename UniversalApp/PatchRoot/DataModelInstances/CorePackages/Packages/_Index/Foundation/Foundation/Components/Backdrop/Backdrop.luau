@@ -12,7 +12,7 @@ local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
 local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local config = {
 	transparency = 0,
-	testId = "--foundation-internal-backdrop",
+	testId = "--foundation-backdrop",
 	Size = UDim2.fromScale(2, 2)
 }
 

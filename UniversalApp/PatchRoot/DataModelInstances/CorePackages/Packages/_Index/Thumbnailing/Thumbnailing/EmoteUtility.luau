@@ -1308,18 +1308,18 @@ local function loadKeyframesForPoseR15(p7, OriginalAnimationAssetId, AnimationAs
 					local AnimationAndIsIdle, _ = getAnimationAndIsIdle(AnimationAssetIdOrUrl)
 					
 					if AnimationAndIsIdle == nil then
-						v5 = nil
 						v4 = nil
+						v5 = nil
 					else
 						assert(AnimationAndIsIdle, "animation is non-nil. Silence type checker.")
-						v5, v260 = getThumbnailKeyframeFromAnimationOrUrl(AnimationAndIsIdle, 0)
+						v4, v260 = getThumbnailKeyframeFromAnimationOrUrl(AnimationAndIsIdle, 0)
 					end
 				else
-					v5 = nil
 					v4 = nil
+					v5 = nil
 				end
-				ThumbnailKeyframe = v5
-				AnimationRigData = v4
+				ThumbnailKeyframe = v4
+				AnimationRigData = v5
 			end
 			if not ThumbnailKeyframe then
 				local DefaultMoodAnimationId = EmoteUtilityModule.FindDefaultMoodAnimationId(p7)

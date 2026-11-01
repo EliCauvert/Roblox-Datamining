@@ -54,7 +54,6 @@ local config1 = {
 	hasControls = false,
 	testId = "--foundation-number-input",
 	variant = require(Foundation.Enums.InputVariant).Standard,
-	controlsVariant = if FlagsModule.FoundationNumberInputBeta then nil else NumberInputControlsVariantModule.Stacked,
 	size = InputSizeModule.Large,
 	formatAsString = function(p1): string
 		return (tostring(p1))
@@ -63,12 +62,11 @@ local config1 = {
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: WithDefaultsModule (copy), config1 (copy), UseTokensModule (copy), UseTextInputVariantsModule (copy), UseNumberInputVariantsModule (copy), FlagsModule (copy), ReactModule (copy), ReactUtilsModule (copy), ScrubBehaviorModule (copy), config (copy), MapBindableModule (copy), GetBindableValueModule (copy), InputSizeModule (copy), UseTextSizeModule (copy), UseIconSizeModule (copy), IsBuilderIconModule (copy), GetMultiLineTextHeightModule (copy), ConstantsModule (copy), OnChangeCallbackReasonModule (copy), NumberInputControlsVariantModule (copy), NumberInputControlsModule (copy), CalculateNumberInputValueFromPositionsModule (copy), ReactIsModule (copy), InputFieldModule (copy), WithCommonPropsModule (copy), GetInputTextSizeModule (copy), InternalTextInputModule (copy), JoinBindablesModule (copy), ViewModule (copy), IconModule (copy), TextModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config1 (copy), UseTokensModule (copy), UseTextInputVariantsModule (copy), UseNumberInputVariantsModule (copy), ReactModule (copy), ReactUtilsModule (copy), ScrubBehaviorModule (copy), config (copy), MapBindableModule (copy), GetBindableValueModule (copy), InputSizeModule (copy), UseTextSizeModule (copy), UseIconSizeModule (copy), IsBuilderIconModule (copy), GetMultiLineTextHeightModule (copy), ConstantsModule (copy), OnChangeCallbackReasonModule (copy), NumberInputControlsVariantModule (copy), NumberInputControlsModule (copy), FlagsModule (copy), CalculateNumberInputValueFromPositionsModule (copy), ReactIsModule (copy), InputFieldModule (copy), WithCommonPropsModule (copy), GetInputTextSizeModule (copy), InternalTextInputModule (copy), JoinBindablesModule (copy), ViewModule (copy), IconModule (copy), TextModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config1)
 	local UseTokensModuleResult = UseTokensModule()
 	local UseTextInputVariantsModuleResult = UseTextInputVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size, WithDefaultsModuleResult.variant)
-	local UseNumberInputVariantsModuleResult = UseNumberInputVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size, if FlagsModule.FoundationNumberInputBeta then nil else WithDefaultsModuleResult.controlsVariant)
-	local Controls = if FlagsModule.FoundationNumberInputBeta then UseNumberInputVariantsModuleResult.controls else nil
+	local Controls = UseNumberInputVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size).controls
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseComposedRefResult = ReactUtilsModule.useComposedRef(UseRefResult, WithDefaultsModuleResult.textBoxRef)
 	local UseRefResult1 = ReactModule.useRef(nil)
@@ -82,7 +80,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	local ControlsVariant = WithDefaultsModuleResult.controlsVariant
 	local On = if WithDefaultsModuleResult.isScrubbable then ScrubBehaviorModule.On else WithDefaultsModuleResult.scrubBehavior
 	local IsNotOnMatch: boolean = On and On ~= ScrubBehaviorModule.Off
-	local Entry = if FlagsModule.FoundationNumberInputBeta then config[On] else nil
+	local Entry = config[On]
 	local UseResult1 = ReactModule.useCallback(function(Value: number): number
 		-- upvalues: WithDefaultsModuleResult (copy)
 		return (math.clamp(Value, WithDefaultsModuleResult.minimum, WithDefaultsModuleResult.maximum))
@@ -173,61 +171,58 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 		WithDefaultsModuleResult.precision
 	})
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(WithDefaultsModuleResult.formatAsString(UseResult3(GetBindableValueModule(WithDefaultsModuleResult.value))))
-	local SmallDelta = if FlagsModule.FoundationNumberInputBeta then if WithDefaultsModuleResult.size == InputSizeModule.XSmall then UseTokensModuleResult.Gap.Small - UseTokensModuleResult.Gap.XSmall / 2 else UseTokensModuleResult.Gap.Small else nil
-	local IsNotPrefixMatch: boolean? = nil
-	local Vector = nil
-	local UseMemoResult4 = nil
+	local SmallDelta = if WithDefaultsModuleResult.size == InputSizeModule.XSmall then UseTokensModuleResult.Gap.Small - UseTokensModuleResult.Gap.XSmall / 2 else UseTokensModuleResult.Gap.Small
+	local IsNotPrefixMatch = nil
+	local UseTextSizeModuleResult = nil
 	local UseMemoResult5 = nil
-	
-	if FlagsModule.FoundationNumberInputBeta then
-		local FontStyle = UseTextInputVariantsModuleResult.textBox.fontStyle
-		local FontSize = FontStyle.FontSize
-		IsNotPrefixMatch = WithDefaultsModuleResult.prefix and WithDefaultsModuleResult.prefix ~= "" or WithDefaultsModuleResult.suffix and WithDefaultsModuleResult.suffix ~= ""
-		Vector = UseTextSizeModule(if WithDefaultsModuleResult.prefix then WithDefaultsModuleResult.prefix .. " " else nil, (ReactModule.useMemo(function()
-			-- upvalues: FontStyle (copy), FontSize (copy)
-			return {
-				Font = FontStyle.Font,
-				FontSize = math.floor(FontSize),
-				LineHeight = FontStyle.LineHeight
-			}
-		end, { FontStyle, FontSize })))
-		local UseIconSizeModuleResult = UseIconSizeModule(UseTextInputVariantsModuleResult.icon.size, IsBuilderIconModule(WithDefaultsModuleResult.leadingIcon))
-		local UseIconSizeModuleResult1 = UseIconSizeModule(UseTextInputVariantsModuleResult.icon.size, IsBuilderIconModule(WithDefaultsModuleResult.trailingIcon))
-		local Offset = if WithDefaultsModuleResult.leadingIcon then UseIconSizeModuleResult.X.Offset else 0
-		local Offset1 = if FlagsModule.FoundationNumberInputBeta and WithDefaultsModuleResult.trailingIcon then UseIconSizeModuleResult1.X.Offset else 0
-		local Small = if WithDefaultsModuleResult.size == InputSizeModule.XSmall then UseTokensModuleResult.Gap.Small elseif WithDefaultsModuleResult.size == InputSizeModule.Small then UseTokensModuleResult.Gap.Medium else UseTokensModuleResult.Gap.Large
-		local Small1 = if WithDefaultsModuleResult.leadingIcon then Small else 0
-		local Small2 = if FlagsModule.FoundationNumberInputBeta and WithDefaultsModuleResult.trailingIcon then Small else 0
-		UseMemoResult5 = ReactModule.useMemo(function()
-			-- upvalues: UseTextInputVariantsModuleResult (copy), Offset (copy), Small1 (copy), Offset1 (copy), Small2 (copy)
-			return {
-				left = UDim.new(0, UseTextInputVariantsModuleResult.container.horizontalPadding.Offset + Offset + Small1),
-				right = UDim.new(0, UseTextInputVariantsModuleResult.container.horizontalPadding.Offset + Offset1 + Small2)
-			}
-		end, {
-			UseTextInputVariantsModuleResult.container.horizontalPadding,
-			Small1,
-			Small2,
-			Offset,
-			Offset1
-		})
-		UseMemoResult4 = ReactModule.useMemo(function()
-			-- upvalues: GetMultiLineTextHeightModule (upval), FontSize (copy), FontStyle (copy), UseTextInputVariantsModuleResult (copy)
-			local RoundedRatio = math.round((UseTextInputVariantsModuleResult.container.minHeight - 2 - GetMultiLineTextHeightModule(FontSize, 1, FontStyle.LineHeight)) * 2) / 2
-			
-			return {
-				top = UDim.new(0, math.floor(RoundedRatio / 2) + 1),
-				bottom = UDim.new(0, math.ceil(RoundedRatio / 2) + 1),
-				left = UDim.new(),
-				right = UDim.new()
-			}
-		end, {
-			UseTextInputVariantsModuleResult.container.minHeight,
-			FontStyle,
-			FontSize
-		})
-	end
-	local Width = if WithDefaultsModuleResult.width then WithDefaultsModuleResult.width elseif FlagsModule.FoundationNumberInputBeta then UDim.new(0, ConstantsModule.DEFAULT_NUMBER_INPUT_WIDTH) else UDim.new(0, UseNumberInputVariantsModuleResult.container.width)
+	local UseMemoResult4 = nil
+	local FontStyle = UseTextInputVariantsModuleResult.textBox.fontStyle
+	local FontSize = FontStyle.FontSize
+	IsNotPrefixMatch = WithDefaultsModuleResult.prefix and WithDefaultsModuleResult.prefix ~= "" or WithDefaultsModuleResult.suffix and WithDefaultsModuleResult.suffix ~= ""
+	UseTextSizeModuleResult = UseTextSizeModule(if WithDefaultsModuleResult.prefix then WithDefaultsModuleResult.prefix .. " " else nil, (ReactModule.useMemo(function()
+		-- upvalues: FontStyle (copy), FontSize (copy)
+		return {
+			Font = FontStyle.Font,
+			FontSize = math.floor(FontSize),
+			LineHeight = FontStyle.LineHeight
+		}
+	end, { FontStyle, FontSize })))
+	local UseIconSizeModuleResult = UseIconSizeModule(UseTextInputVariantsModuleResult.icon.size, IsBuilderIconModule(WithDefaultsModuleResult.leadingIcon))
+	local UseIconSizeModuleResult1 = UseIconSizeModule(UseTextInputVariantsModuleResult.icon.size, IsBuilderIconModule(WithDefaultsModuleResult.trailingIcon))
+	local Offset = if WithDefaultsModuleResult.leadingIcon then UseIconSizeModuleResult.X.Offset else 0
+	local Offset1 = if WithDefaultsModuleResult.trailingIcon then UseIconSizeModuleResult1.X.Offset else 0
+	local Small = if WithDefaultsModuleResult.size == InputSizeModule.XSmall then UseTokensModuleResult.Gap.Small elseif WithDefaultsModuleResult.size == InputSizeModule.Small then UseTokensModuleResult.Gap.Medium else UseTokensModuleResult.Gap.Large
+	local Small1 = if WithDefaultsModuleResult.leadingIcon then Small else 0
+	local Small2 = if WithDefaultsModuleResult.trailingIcon then Small else 0
+	UseMemoResult4 = ReactModule.useMemo(function()
+		-- upvalues: UseTextInputVariantsModuleResult (copy), Offset (copy), Small1 (copy), Offset1 (copy), Small2 (copy)
+		return {
+			left = UDim.new(0, UseTextInputVariantsModuleResult.container.horizontalPadding.Offset + Offset + Small1),
+			right = UDim.new(0, UseTextInputVariantsModuleResult.container.horizontalPadding.Offset + Offset1 + Small2)
+		}
+	end, {
+		UseTextInputVariantsModuleResult.container.horizontalPadding,
+		Small1,
+		Small2,
+		Offset,
+		Offset1
+	})
+	UseMemoResult5 = ReactModule.useMemo(function()
+		-- upvalues: GetMultiLineTextHeightModule (upval), FontSize (copy), FontStyle (copy), UseTextInputVariantsModuleResult (copy)
+		local RoundedRatio = math.round((UseTextInputVariantsModuleResult.container.minHeight - 2 - GetMultiLineTextHeightModule(FontSize, 1, FontStyle.LineHeight)) * 2) / 2
+		
+		return {
+			top = UDim.new(0, math.floor(RoundedRatio / 2) + 1),
+			bottom = UDim.new(0, math.ceil(RoundedRatio / 2) + 1),
+			left = UDim.new(),
+			right = UDim.new()
+		}
+	end, {
+		UseTextInputVariantsModuleResult.container.minHeight,
+		FontStyle,
+		FontSize
+	})
+	local Width = if WithDefaultsModuleResult.width then WithDefaultsModuleResult.width else UDim.new(0, ConstantsModule.DEFAULT_NUMBER_INPUT_WIDTH)
 	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseBindingResult2 (copy), GetBindableValueModule (upval), WithDefaultsModuleResult (copy)
 		UseBindingResult2((tostring(GetBindableValueModule(WithDefaultsModuleResult.value))))
@@ -303,39 +298,20 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 			return
 		end
 	end, { UseMemoResult3, UseMemoResult1, UseResult5 })
-	local IsNotControlsVariantMatch = if FlagsModule.FoundationNumberInputBeta then WithDefaultsModuleResult.hasControls and (ControlsVariant ~= NumberInputControlsVariantModule.None and ControlsVariant ~= NumberInputControlsVariantModule.Stacked) else nil
-	local Element = if FlagsModule.FoundationNumberInputBeta and IsNotControlsVariantMatch then ReactModule.createElement(NumberInputControlsModule, {
+	local IsNotControlsVariantMatch: boolean = WithDefaultsModuleResult.hasControls and (ControlsVariant ~= NumberInputControlsVariantModule.None and ControlsVariant ~= NumberInputControlsVariantModule.Stacked)
+	local Element = if IsNotControlsVariantMatch then ReactModule.createElement(NumberInputControlsModule, {
 		variant = WithDefaultsModuleResult.variant,
-		controlsVariant = if FlagsModule.FoundationNumberInputBeta then nil else ControlsVariant,
 		size = WithDefaultsModuleResult.size,
 		increment = { isDisabled = UseMemoResult2, onClick = UseResult8 },
 		decrement = { isDisabled = UseMemoResult3, onClick = UseResult9 },
 		testId = WithDefaultsModuleResult.testId
-	}) elseif FlagsModule.FoundationNumberInputBeta then nil else ReactModule.createElement(NumberInputControlsModule, {
-		variant = WithDefaultsModuleResult.variant,
-		controlsVariant = if FlagsModule.FoundationNumberInputBeta then nil else ControlsVariant,
-		size = WithDefaultsModuleResult.size,
-		increment = { isDisabled = UseMemoResult2, onClick = UseResult8 },
-		decrement = { isDisabled = UseMemoResult3, onClick = UseResult9 },
-		testId = WithDefaultsModuleResult.testId
-	})
-	local UseMemoResult8 = ReactModule.useMemo(function(): UDim
-		-- upvalues: FlagsModule (upval), IsNotControlsVariantMatch (copy), Controls (copy), SmallDelta (copy), ControlsVariant (copy), NumberInputControlsVariantModule (upval), UseNumberInputVariantsModuleResult (copy), UseTokensModuleResult (copy)
-		if FlagsModule.FoundationNumberInputBeta then
-			if IsNotControlsVariantMatch then
-				return UDim.new(0, Controls.width + SmallDelta)
-			end
-		elseif ControlsVariant == NumberInputControlsVariantModule.Split then
-			return UDim.new(0, 2 * UseNumberInputVariantsModuleResult.splitButton.size + 2 * UseTokensModuleResult.Gap.XSmall)
-		end
-		return UDim.new()
+	}) else nil
+	local UseMemoResult6 = ReactModule.useMemo(function(): UDim
+		-- upvalues: IsNotControlsVariantMatch (copy), Controls (copy), SmallDelta (copy)
+		return if IsNotControlsVariantMatch then UDim.new(0, Controls.width + SmallDelta) else UDim.new()
 	end, {
-		UseTokensModuleResult, ControlsVariant,
-		if FlagsModule.FoundationNumberInputBeta then nil else UseNumberInputVariantsModuleResult.splitButton.size,
-		UseTokensModuleResult.Gap.XSmall,
-		if FlagsModule.FoundationNumberInputBeta then Controls else nil,
-		if FlagsModule.FoundationNumberInputBeta then SmallDelta else nil,
-		if FlagsModule.FoundationNumberInputBeta then IsNotControlsVariantMatch else nil
+		UseTokensModuleResult, ControlsVariant, UseTokensModuleResult.Gap.XSmall,
+		Controls, SmallDelta, IsNotControlsVariantMatch
 	})
 	local UseResult10 = ReactModule.useCallback(function(_, p2)
 		-- upvalues: WithDefaultsModuleResult (copy), UseRefResult2 (copy), UseRefResult1 (copy), GetBindableValueModule (upval)
@@ -353,14 +329,14 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 				WithDefaultsModuleResult.onScrubStarted()
 				UseRefResult2.current = true
 			end
-			UseResult5(CalculateNumberInputValueFromPositionsModule(UseRefResult1.current.value, UseRefResult1.current.position, p2.X, WithDefaultsModuleResult.step, if FlagsModule.FoundationNumberInputBeta then Entry else nil), OnChangeCallbackReasonModule.Drag)
+			UseResult5(CalculateNumberInputValueFromPositionsModule(UseRefResult1.current.value, UseRefResult1.current.position, p2.X, WithDefaultsModuleResult.step, Entry), OnChangeCallbackReasonModule.Drag)
 		end
 	end, {
 		UseResult5,
 		WithDefaultsModuleResult.step,
 		UseResult3,
 		if FlagsModule.FoundationNumberInputScrubCallbackProps then WithDefaultsModuleResult.onScrubStarted else nil,
-		if FlagsModule.FoundationNumberInputBeta then Entry else nil
+		Entry
 	})
 	local UseResult12 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult1 (copy), FlagsModule (upval), WithDefaultsModuleResult (copy), UseRefResult2 (copy)
@@ -390,11 +366,11 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 		Transparency1 = UseTokensModuleResult.Color.Shift.Shift_100.Transparency
 	end
 	local IsMagnitudeBelow: boolean = math.abs(WithDefaultsModuleResult.maximum) < 1e999 and math.abs(WithDefaultsModuleResult.minimum) < 1e999
-	local UseMemoResult6 = nil
+	local UseMemoResult8 = nil
 	local UseMemoResult7 = nil
 	
 	if FlagsModule.FoundationNumberInputScrubbingUsesOffset then
-		UseMemoResult6 = ReactModule.useMemo(function(): NumberSequence
+		UseMemoResult8 = ReactModule.useMemo(function(): NumberSequence
 			-- upvalues: Transparency (ref), Transparency1 (ref)
 			return NumberSequence.new({
 				NumberSequenceKeypoint.new(0, Transparency),
@@ -423,7 +399,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 			IsMagnitudeBelow
 		})
 	else
-		UseMemoResult6 = ReactModule.useMemo(function()
+		UseMemoResult8 = ReactModule.useMemo(function()
 			-- upvalues: MapBindableModule (upval), WithDefaultsModuleResult (copy), UseResult1 (copy), Transparency1 (ref), Transparency (ref)
 			return MapBindableModule(WithDefaultsModuleResult.value, function(p2): NumberSequence
 				-- upvalues: WithDefaultsModuleResult (upval), UseResult1 (upval), Transparency1 (upval), Transparency (upval)
@@ -481,92 +457,90 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 		hint = WithDefaultsModuleResult.hint,
 		textBoxRef = UseComposedRefResult,
 		input = function(Ref)
-			-- upvalues: FlagsModule (upval), IsNotControlsVariantMatch (copy), Element (copy), ControlsVariant (copy), NumberInputControlsVariantModule (upval), ReactModule (upval), InternalTextInputModule (upval), WithDefaultsModuleResult (copy), JoinBindablesModule (upval), UseBindingResult (copy), UseResult (copy), UseResult3 (copy), HasError (copy), UseTextInputVariantsModuleResult (copy), Vector (ref), p1 (copy), UseResult7 (copy), UseResult6 (copy), UseResult4 (copy), IsNotOnMatch (copy), UseResult10 (copy), UseResult11 (copy), UseResult12 (copy), IsMagnitudeBelow (copy), v1 (ref), UseMemoResult6 (ref), UseMemoResult7 (ref), UseTokensModuleResult (copy), ViewModule (upval), IconModule (upval), IsNotPrefixMatch (ref), TextModule (upval), UseMemoResult5 (ref), UseMemoResult4 (ref), Width (copy), UseMemoResult8 (copy), SmallDelta (copy)
-			local Element1 = if FlagsModule.FoundationNumberInputBeta then IsNotControlsVariantMatch and Element else ControlsVariant == NumberInputControlsVariantModule.Split
-			local Element2 = ReactModule.createElement(InternalTextInputModule, {
-				inputRef = WithDefaultsModuleResult.inputRef,
-				text = JoinBindablesModule({
-					text = UseBindingResult,
-					value = WithDefaultsModuleResult.value
-				}, function(p2)
-					-- upvalues: UseResult (upval), WithDefaultsModuleResult (upval), UseResult3 (upval)
-					return if UseResult() then p2.text else WithDefaultsModuleResult.formatAsString(UseResult3(p2.value))
-				end),
-				hasError = HasError,
-				variant = WithDefaultsModuleResult.variant,
-				size = WithDefaultsModuleResult.size,
-				Selectable = WithDefaultsModuleResult.Selectable,
-				NextSelectionUp = WithDefaultsModuleResult.NextSelectionUp,
-				NextSelectionDown = WithDefaultsModuleResult.NextSelectionDown,
-				NextSelectionLeft = WithDefaultsModuleResult.NextSelectionLeft,
-				NextSelectionRight = WithDefaultsModuleResult.NextSelectionRight,
-				horizontalPadding = {
-					left = UseTextInputVariantsModuleResult.container.horizontalPadding,
-					right = if FlagsModule.FoundationNumberInputBeta then UseTextInputVariantsModuleResult.container.horizontalPadding else nil,
-					innerLeft = if FlagsModule.FoundationNumberInputBeta and (Vector and Vector.X > 0) then UDim.new(0, Vector.X) else nil
-				},
-				focusBehavior = p1.focusBehavior,
-				onChanged = UseResult7,
-				onFocusLost = UseResult6,
-				onFocus = UseResult4,
-				onDragStarted = if IsNotOnMatch then UseResult10 else nil,
-				onDrag = if IsNotOnMatch then UseResult11 else nil,
-				onDragEnded = if IsNotOnMatch then UseResult12 else nil,
-				onReturnPressed = WithDefaultsModuleResult.onReturnPressed,
-				ref = Ref,
-				backgroundGradient = if FlagsModule.FoundationNumberInputScrubbingUsesOffset then if IsNotOnMatch and IsMagnitudeBelow then ReactModule.createElement("UIGradient", {
-					Color = ColorSequence.new(v1),
-					Transparency = UseMemoResult6,
-					Offset = UseMemoResult7
-				}) else nil elseif IsNotOnMatch and UseMemoResult6 then ReactModule.createElement("UIGradient", {
-					Rotation = 0,
-					Color = if FlagsModule.FoundationFixColorOnScrubbableNumberInput then ColorSequence.new(v1) else ColorSequence.new(UseTokensModuleResult.Color.Shift.Shift_300.Color3),
-					Transparency = UseMemoResult6
-				}) else nil,
-				trailingElement = if FlagsModule.FoundationNumberInputBeta then if WithDefaultsModuleResult.trailingIcon then ReactModule.createElement(ViewModule, { tag = "row align-y-center size-0-full auto-x" }, ReactModule.createElement(IconModule, {
-					name = WithDefaultsModuleResult.trailingIcon,
-					style = UseTextInputVariantsModuleResult.icon.style,
-					size = UseTextInputVariantsModuleResult.icon.size
-				})) else nil elseif ControlsVariant == NumberInputControlsVariantModule.Stacked then Element else nil,
-				leadingElement = if WithDefaultsModuleResult.leadingIcon then ReactModule.createElement(ViewModule, { tag = "row align-y-center size-0-full auto-x" }, ReactModule.createElement(IconModule, {
-					name = WithDefaultsModuleResult.leadingIcon,
-					style = UseTextInputVariantsModuleResult.icon.style,
-					size = UseTextInputVariantsModuleResult.icon.size
-				})) else nil,
-				isDisabled = WithDefaultsModuleResult.isDisabled,
-				LayoutOrder = if Element1 and FlagsModule.FoundationNumberInputBeta then 0 else nil,
-				testId = `{WithDefaultsModuleResult.testId}--field`
-			})
-			local Element3 = if FlagsModule.FoundationNumberInputBeta and IsNotPrefixMatch then ReactModule.createElement(TextModule, {
-				tag = "text-align-x-left text-align-y-center content-muted",
-				RichText = true,
-				ClipsDescendants = true,
-				fontStyle = UseTextInputVariantsModuleResult.textBox.fontStyle,
-				Size = UDim2.new(1, -(UseMemoResult5.left.Offset + UseMemoResult5.right.Offset), 1, 0),
-				Position = UDim2.fromOffset(UseMemoResult5.left.Offset, 0),
-				Text = UseBindingResult:map(function(p2): string
-					-- upvalues: WithDefaultsModuleResult (upval)
-					return `{if WithDefaultsModuleResult.prefix then WithDefaultsModuleResult.prefix .. " " else ""}<font transparency="1">{p2}</font>{if WithDefaultsModuleResult.suffix then " " .. WithDefaultsModuleResult.suffix else ""}`
-				end),
-				padding = UseMemoResult4,
-				testId = `{WithDefaultsModuleResult.testId}--units`
-			}) else nil
+			-- upvalues: IsNotControlsVariantMatch (copy), Element (copy), ReactModule (upval), InternalTextInputModule (upval), WithDefaultsModuleResult (copy), JoinBindablesModule (upval), UseBindingResult (copy), UseResult (copy), UseResult3 (copy), HasError (copy), UseTextInputVariantsModuleResult (copy), UseTextSizeModuleResult (ref), p1 (copy), UseResult7 (copy), UseResult6 (copy), UseResult4 (copy), IsNotOnMatch (copy), UseResult10 (copy), UseResult11 (copy), UseResult12 (copy), FlagsModule (upval), IsMagnitudeBelow (copy), v1 (ref), UseMemoResult8 (ref), UseMemoResult7 (ref), UseTokensModuleResult (copy), ViewModule (upval), IconModule (upval), IsNotPrefixMatch (ref), TextModule (upval), UseMemoResult4 (ref), UseMemoResult5 (ref), Width (copy), UseMemoResult6 (copy), SmallDelta (copy)
+			local Element1 = IsNotControlsVariantMatch and Element
 			
-			if FlagsModule.FoundationNumberInputBeta then
-				Element2 = ReactModule.createElement(ViewModule, { tag = "size-full-0 auto-y" }, { Input = Element2, Units = Element3 })
-			end
-			return if Element1 or FlagsModule.FoundationNumberInputBeta then ReactModule.createElement(ViewModule, {
-				Size = if FlagsModule.FoundationNumberInputBeta then UDim2.new(Width.Scale - UseMemoResult8.Scale, Width.Offset - UseMemoResult8.Offset, 0, 0) else UDim2.fromOffset(Width.Offset - UseMemoResult8.Offset, 0),
-				tag = if FlagsModule.FoundationNumberInputBeta then "row align-y-center auto-y" else "row align-y-center gap-xsmall auto-y",
-				layout = if FlagsModule.FoundationNumberInputBeta then {
+			return ReactModule.createElement(ViewModule, {
+				tag = "row align-y-center auto-y",
+				Size = UDim2.new(Width.Scale - UseMemoResult6.Scale, Width.Offset - UseMemoResult6.Offset, 0, 0),
+				layout = {
 					FillDirection = Enum.FillDirection.Horizontal,
 					Padding = UDim.new(0, SmallDelta),
 					SortOrder = Enum.SortOrder.LayoutOrder
-				} else nil
+				}
 			}, {
-				InputField = Element2,
+				InputField = ReactModule.createElement(ViewModule, { tag = "size-full-0 auto-y" }, {
+					Input = ReactModule.createElement(InternalTextInputModule, {
+						inputRef = WithDefaultsModuleResult.inputRef,
+						text = JoinBindablesModule({
+							text = UseBindingResult,
+							value = WithDefaultsModuleResult.value
+						}, function(p2)
+							-- upvalues: UseResult (upval), WithDefaultsModuleResult (upval), UseResult3 (upval)
+							return if UseResult() then p2.text else WithDefaultsModuleResult.formatAsString(UseResult3(p2.value))
+						end),
+						hasError = HasError,
+						variant = WithDefaultsModuleResult.variant,
+						size = WithDefaultsModuleResult.size,
+						Selectable = WithDefaultsModuleResult.Selectable,
+						NextSelectionUp = WithDefaultsModuleResult.NextSelectionUp,
+						NextSelectionDown = WithDefaultsModuleResult.NextSelectionDown,
+						NextSelectionLeft = WithDefaultsModuleResult.NextSelectionLeft,
+						NextSelectionRight = WithDefaultsModuleResult.NextSelectionRight,
+						horizontalPadding = {
+							left = UseTextInputVariantsModuleResult.container.horizontalPadding,
+							right = UseTextInputVariantsModuleResult.container.horizontalPadding,
+							innerLeft = if UseTextSizeModuleResult and UseTextSizeModuleResult.X > 0 then UDim.new(0, UseTextSizeModuleResult.X) else nil
+						},
+						focusBehavior = p1.focusBehavior,
+						onChanged = UseResult7,
+						onFocusLost = UseResult6,
+						onFocus = UseResult4,
+						onDragStarted = if IsNotOnMatch then UseResult10 else nil,
+						onDrag = if IsNotOnMatch then UseResult11 else nil,
+						onDragEnded = if IsNotOnMatch then UseResult12 else nil,
+						onReturnPressed = WithDefaultsModuleResult.onReturnPressed,
+						ref = Ref,
+						backgroundGradient = if FlagsModule.FoundationNumberInputScrubbingUsesOffset then if IsNotOnMatch and IsMagnitudeBelow then ReactModule.createElement("UIGradient", {
+							Color = ColorSequence.new(v1),
+							Transparency = UseMemoResult8,
+							Offset = UseMemoResult7
+						}) else nil elseif IsNotOnMatch and UseMemoResult8 then ReactModule.createElement("UIGradient", {
+							Rotation = 0,
+							Color = if FlagsModule.FoundationFixColorOnScrubbableNumberInput then ColorSequence.new(v1) else ColorSequence.new(UseTokensModuleResult.Color.Shift.Shift_300.Color3),
+							Transparency = UseMemoResult8
+						}) else nil,
+						trailingElement = if WithDefaultsModuleResult.trailingIcon then ReactModule.createElement(ViewModule, { tag = "row align-y-center size-0-full auto-x" }, ReactModule.createElement(IconModule, {
+							name = WithDefaultsModuleResult.trailingIcon,
+							style = UseTextInputVariantsModuleResult.icon.style,
+							size = UseTextInputVariantsModuleResult.icon.size
+						})) else nil,
+						leadingElement = if WithDefaultsModuleResult.leadingIcon then ReactModule.createElement(ViewModule, { tag = "row align-y-center size-0-full auto-x" }, ReactModule.createElement(IconModule, {
+							name = WithDefaultsModuleResult.leadingIcon,
+							style = UseTextInputVariantsModuleResult.icon.style,
+							size = UseTextInputVariantsModuleResult.icon.size
+						})) else nil,
+						isDisabled = WithDefaultsModuleResult.isDisabled,
+						LayoutOrder = if Element1 then 0 else nil,
+						testId = `{WithDefaultsModuleResult.testId}--field`
+					}),
+					Units = if IsNotPrefixMatch then ReactModule.createElement(TextModule, {
+						tag = "text-align-x-left text-align-y-center content-muted",
+						RichText = true,
+						ClipsDescendants = true,
+						fontStyle = UseTextInputVariantsModuleResult.textBox.fontStyle,
+						Size = UDim2.new(1, -(UseMemoResult4.left.Offset + UseMemoResult4.right.Offset), 1, 0),
+						Position = UDim2.fromOffset(UseMemoResult4.left.Offset, 0),
+						Text = UseBindingResult:map(function(p2): string
+							-- upvalues: WithDefaultsModuleResult (upval)
+							return `{if WithDefaultsModuleResult.prefix then WithDefaultsModuleResult.prefix .. " " else ""}<font transparency="1">{p2}</font>{if WithDefaultsModuleResult.suffix then " " .. WithDefaultsModuleResult.suffix else ""}`
+						end),
+						padding = UseMemoResult5,
+						testId = `{WithDefaultsModuleResult.testId}--units`
+					}) else nil
+				}),
 				Controls = if Element1 then Element else nil
-			}) else Element2
+			})
 		end
 	}))
 end))

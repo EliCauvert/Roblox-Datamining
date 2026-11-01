@@ -42,18 +42,18 @@ return {
 			end
 		end
 		
-		local function _(p2, p3)
+		local function _(List, p2)
 			-- upvalues: SignalsExperimentalModule (upval)
-			if p2 ~= nil or p3 ~= nil then
+			if List ~= nil or p2 ~= nil then
 				SignalsExperimentalModule.batch(function()
-					-- upvalues: p2 (copy), p3 (copy)
-					if p2 ~= nil then
-						for _, value in p2 do
+					-- upvalues: List (copy), p2 (copy)
+					if List ~= nil then
+						for _, value in List do
 							value.setActive(false)
 						end
 					end
-					if p3 ~= nil then
-						for _, value1 in p3 do
+					if p2 ~= nil then
+						for _, value1 in p2 do
 							value1.setActive(true)
 						end
 					end
@@ -74,14 +74,12 @@ return {
 					table.insert(List, value)
 				end
 			end
-			local List1 = List
-			
-			if List1 ~= nil then
+			if List ~= nil then
 				local v2 = nil
 				SignalsExperimentalModule.batch(function()
-					-- upvalues: List1 (copy), v2 (copy)
-					if List1 ~= nil then
-						for _, value in List1 do
+					-- upvalues: List (copy), v2 (copy)
+					if List ~= nil then
+						for _, value in List do
 							value.setActive(false)
 						end
 					end
@@ -132,19 +130,16 @@ return {
 					end
 				end
 			end
-			local List2 = List1
-			local List3 = List
-			
-			if List2 ~= nil or List3 ~= nil then
+			if List1 ~= nil or List ~= nil then
 				SignalsExperimentalModule.batch(function()
-					-- upvalues: List2 (copy), List3 (copy)
-					if List2 ~= nil then
-						for _, value in List2 do
+					-- upvalues: List1 (copy), List (copy)
+					if List1 ~= nil then
+						for _, value in List1 do
 							value.setActive(false)
 						end
 					end
-					if List3 ~= nil then
-						for _, value1 in List3 do
+					if List ~= nil then
+						for _, value1 in List do
 							value1.setActive(true)
 						end
 					end
@@ -245,14 +240,14 @@ return {
 						
 						if config.active then
 							config.active = false
-							local list = { config }
+							local List = { config }
 							
-							if list == nil then return end
+							if List == nil then return end
 							local v3 = nil
 							SignalsExperimentalModule.batch(function()
-								-- upvalues: list (copy), v3 (copy)
-								if list ~= nil then
-									for _, value in list do
+								-- upvalues: List (copy), v3 (copy)
+								if List ~= nil then
+									for _, value in List do
 										value.setActive(false)
 									end
 								end
@@ -337,14 +332,13 @@ return {
 					end
 				end
 				v1 = nil
-				local List2 = List1
 				
-				if List2 ~= nil then
+				if List1 ~= nil then
 					local v4 = nil
 					SignalsExperimentalModule.batch(function()
-						-- upvalues: List2 (copy), v4 (copy)
-						if List2 ~= nil then
-							for _, value in List2 do
+						-- upvalues: List1 (copy), v4 (copy)
+						if List1 ~= nil then
+							for _, value in List1 do
 								value.setActive(false)
 							end
 						end

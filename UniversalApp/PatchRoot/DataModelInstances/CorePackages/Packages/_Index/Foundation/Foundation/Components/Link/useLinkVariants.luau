@@ -29,6 +29,18 @@ local function variantsFactory(p1)
 			[TextOverflowModule.Wrap] = {
 				container = { tag = "size-full-0 auto-y" },
 				text = { tag = "size-full-0 auto-y text-wrap text-align-x-left" }
+			},
+			[TextOverflowModule.Truncate] = {
+				container = { tag = "size-full-0 auto-y" },
+				text = {
+					tag = "size-full-0 auto-y text-align-x-left text-truncate-end"
+				}
+			},
+			[TextOverflowModule.TruncateSplit] = {
+				container = { tag = "size-full-0 auto-y" },
+				text = {
+					tag = "size-full-0 auto-y text-align-x-left text-truncate-split"
+				}
 			}
 		}
 	}

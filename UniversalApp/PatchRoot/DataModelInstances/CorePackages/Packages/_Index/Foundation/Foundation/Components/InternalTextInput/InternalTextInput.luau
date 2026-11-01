@@ -76,7 +76,7 @@ local MemoResult = ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 end))
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
-	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), GetBindableValueModule (copy), UseTextInputVariantsModule (copy), UseStyleTagsModule (copy), UsePreferredInputModule (copy), GetDisabledStyleModule (copy), InputFocusBehaviorModule (copy), GetMultiLineTextHeightModule (copy), FlagsModule (copy), TruncateTextToCursorModule (copy), UseBindableModule (copy), ReactUtilsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), BlendTransparenciesModule (copy), ConstantsModule (copy), RadiusModule (copy), StateLayerAffordanceModule (copy), ScrollViewModule (copy), MemoResult (copy), MapBindableModule (copy), IconModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), GetBindableValueModule (copy), UseTextInputVariantsModule (copy), UseStyleTagsModule (copy), UsePreferredInputModule (copy), GetDisabledStyleModule (copy), InputFocusBehaviorModule (copy), GetMultiLineTextHeightModule (copy), TruncateTextToCursorModule (copy), UseBindableModule (copy), ReactUtilsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), BlendTransparenciesModule (copy), ConstantsModule (copy), RadiusModule (copy), FlagsModule (copy), StateLayerAffordanceModule (copy), ScrollViewModule (copy), MemoResult (copy), MapBindableModule (copy), IconModule (copy)
 	if p1.Selectable == nil then
 		p1.Selectable = true
 	end
@@ -335,13 +335,13 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 		Container.minHeight, ScaledCeiled, ScaledCeiled1, FontSize, UseMemoResult1,
 		LineHeight
 	})
-	local UseMemoResult3 = if FlagsModule.FoundationNumberInputBeta then ReactModule.useMemo(function()
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsModuleResult (copy)
 		return {
 			left = if WithDefaultsModuleResult.horizontalPadding then WithDefaultsModuleResult.horizontalPadding.innerLeft else nil,
 			right = if WithDefaultsModuleResult.horizontalPadding then WithDefaultsModuleResult.horizontalPadding.innerRight else nil
 		}
-	end, { WithDefaultsModuleResult.horizontalPadding }) else nil
+	end, { WithDefaultsModuleResult.horizontalPadding })
 	local NewOffset = UseMemoResult2.bottom.Offset + UseMemoResult2.top.Offset
 	local _UDim2 = UDim2.new(1, 0, 0, UseMemoResult1 + NewOffset)
 	local UseMemoResult4 = ReactModule.useMemo(function()
@@ -491,7 +491,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 			layout = UseMemoResult4,
 			onCanvasPositionChanged = if IsLargestAbove then UseResult21 else nil,
 			scrollingFrameRef = if IsLargestAbove then UseResult19 else nil,
-			padding = if FlagsModule.FoundationNumberInputBeta then UseMemoResult3 else nil,
+			padding = UseMemoResult3,
 			testId = `{WithDefaultsModuleResult.testId}--textbox-wrapper`
 		}, {
 			TextBox = if UseStateResult1 then nil else ReactModule.createElement(MemoResult, {

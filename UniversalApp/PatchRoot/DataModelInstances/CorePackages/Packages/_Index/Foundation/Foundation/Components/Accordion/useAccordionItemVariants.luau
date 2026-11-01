@@ -1,5 +1,4 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
-local FlagsModule = require(Foundation.Utility.Flags)
 local InputSizeModule = require(Foundation.Enums.InputSize)
 local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
@@ -8,8 +7,8 @@ local _ = require(Foundation.Components.Types)
 local StateLayerAffordanceModule = require(Foundation.Enums.StateLayerAffordance)
 local IconSizeModule = require(Foundation.Enums.IconSize)
 
-local function v9(p1)
-	-- upvalues: StateLayerAffordanceModule (copy), InputSizeModule (copy), IconSizeModule (copy), FlagsModule (copy)
+local function v8(p1)
+	-- upvalues: StateLayerAffordanceModule (copy), InputSizeModule (copy), IconSizeModule (copy)
 	return {
 		common = {
 			container = {
@@ -62,11 +61,6 @@ local function v9(p1)
 			}
 		},
 		isContained = {
-			[false] = {
-				header = {
-					tag = if FlagsModule.FoundationAccordionBeta then "" else "padding-x-xsmall"
-				}
-			},
 			[true] = {
 				header = { tag = "padding-x-medium" },
 				content = { tag = "padding-x-medium" }
@@ -76,8 +70,8 @@ local function v9(p1)
 end
 
 return function(p1, p2, p3)
-	-- upvalues: VariantsContextModule (copy), v9 (copy), ComposeStyleVariantModule (copy)
-	local AccordionItem = VariantsContextModule.useVariants("AccordionItem", v9, p1)
+	-- upvalues: VariantsContextModule (copy), v8 (copy), ComposeStyleVariantModule (copy)
+	local AccordionItem = VariantsContextModule.useVariants("AccordionItem", v8, p1)
 	
 	return ComposeStyleVariantModule(AccordionItem.common, AccordionItem.sizes[p2], AccordionItem.isContained[p3])
 end

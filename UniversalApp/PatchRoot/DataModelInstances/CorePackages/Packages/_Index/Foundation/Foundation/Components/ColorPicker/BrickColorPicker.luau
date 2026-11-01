@@ -1,6 +1,5 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
 local ReactModule = require(Foundation.Parent.React)
-local FlagsModule = require(Foundation.Utility.Flags)
 local ImageModule = require(Foundation.Components.Image)
 local StateLayerAffordanceModule = require(Foundation.Enums.StateLayerAffordance)
 local _ = require(Foundation.Components.Types)
@@ -67,7 +66,7 @@ local function BottomRowSwatches(p1)
 end
 
 return function(p2)
-	-- upvalues: UseTokensModule (copy), ReactModule (copy), BrickColorConstantsModule (copy), calculateGridRadius (copy), ImageModule (copy), FlagsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), StateLayerAffordanceModule (copy), BottomRowSwatches (copy)
+	-- upvalues: UseTokensModule (copy), ReactModule (copy), BrickColorConstantsModule (copy), calculateGridRadius (copy), ImageModule (copy), ViewModule (copy), WithCommonPropsModule (copy), StateLayerAffordanceModule (copy), BottomRowSwatches (copy)
 	local UseTokensModuleResult = UseTokensModule()
 	local Size200 = UseTokensModuleResult.Size.Size_200
 	local Size350 = UseTokensModuleResult.Size.Size_350
@@ -136,7 +135,7 @@ return function(p2)
 		UseTokensModuleResult.Size.Size_100, UseTokensModuleResult.Size.Size_50
 	})
 	local UseResult = ReactModule.useCallback(function(Vector, p3)
-		-- upvalues: UseMemoResult2_1 (copy), ReactModule (upval), ImageModule (upval), Size350 (copy), Size200_1 (copy), Size400 (copy), FlagsModule (upval), UseTokensModuleResult (copy)
+		-- upvalues: UseMemoResult2_1 (copy), ReactModule (upval), ImageModule (upval), Size350 (copy), Size200_1 (copy), Size400 (copy), UseTokensModuleResult (copy)
 		local _UDim2 = UDim2.fromOffset(Vector.x - UseMemoResult2_1.offset.X, Vector.y - UseMemoResult2_1.offset.Y)
 		local t = {}
 		
@@ -147,7 +146,7 @@ return function(p2)
 				Size = UDim2.fromOffset(Size350 + Size200_1, Size400 + Size200_1),
 				Position = _UDim2,
 				AnchorPoint = Vector2.new(0.5, 0.5),
-				imageStyle = if FlagsModule.FoundationSystemEmphasisNonActions then UseTokensModuleResult.Color.System.Emphasis else UseTokensModuleResult.Color.ActionEmphasis.Background
+				imageStyle = UseTokensModuleResult.Color.System.Emphasis
 			})
 		end
 		t.hexagon = ReactModule.createElement(ImageModule, {
@@ -165,7 +164,7 @@ return function(p2)
 		UseMemoResult2_1.offset.Y,
 		Size350,
 		Size400,
-		if FlagsModule.FoundationSystemEmphasisNonActions then UseTokensModuleResult else nil
+		UseTokensModuleResult
 	})
 	
 	return ReactModule.createElement(ViewModule, WithCommonPropsModule(p2, { tag = "col align-x-center gap-small size-full-0 auto-y" }), {
