@@ -96,12 +96,11 @@ local function applyReaction(p3, Restore, Reaction)
 	if Emote then
 		AddedAt = Emote.addedAt
 	else
-		local Largest = 1
+		AddedAt = 1
 		
 		for _, emote in p3.emotes do
-			Largest = math.max(Largest, emote.addedAt + 1)
+			AddedAt = math.max(AddedAt, emote.addedAt + 1)
 		end
-		AddedAt = Largest
 	end
 	config.addedAt = AddedAt
 	Copy[EmoteId] = config

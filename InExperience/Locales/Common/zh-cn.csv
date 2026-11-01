@@ -2503,7 +2503,7 @@ Feature.Build.Notification.Title.NeedInput,构建需要你的输入
 Feature.Build.Placeholder.DescribeProduct,描述你想出售的内容
 Feature.Build.Placeholder.DescribeProductUpdate,描述一项更新
 Feature.Build.Placeholder.InternalSpec,内部代码
-Feature.Build.Prompt.CreateDeveloperProduct,帮助我创建开发者产品，将其接入游戏，验证并发布更改，供玩家购买。
+Feature.Build.Prompt.CreateDeveloperProduct,请审核我的游戏，并建议我出售哪种道具最能赚取 Robux。是一次性购买的道具，还是玩家可以反复购买的道具（如加成道具）更适合我的游戏？请说明原因。
 Feature.Build.Title.AdActive,广告活动已启动
 Feature.Build.Title.AdCampaignDuration,{durationDays} 天广告活动
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} 天
@@ -3694,6 +3694,7 @@ Feature.InExperienceShop.Message.RobuxPurchaseSuccess,你已成功购买 {ROBUX_
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,确定要从你的道具栏中永久删除此道具吗？如果你改变主意，需要通过体验再次获得该道具。
 Feature.Item.Label.DeleteItemUndercase,删除道具
 Feature.Landing.Label.PoweredBy,技术支持：
+Feature.Leaderboards.Heading.Leaderboard,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,允许拥有你手机号码的人在 Roblox 上将你添加为好友
@@ -3986,7 +3987,9 @@ Feature.PrivateServers.Action.CreatePrivateServer,创建私人服务器
 Feature.PrivateServers.Action.FreeWithBlackbird,Plus 订阅用户免费
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio 中不支持购买私人服务器。
 Feature.PrivateServers.Description.VipServersNotSupported,此游戏不支持私人服务器。
+Feature.PrivateServers.Heading.ConfigurePrivateServer,配置私人服务器
 Feature.PrivateServers.Label.OwnersServer,{displayName}的服务器
+Feature.PrivateServers.Label.ServerName,服务器名称：
 Feature.Profile.Action.AboutThisProfile,关于此个人资料
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,

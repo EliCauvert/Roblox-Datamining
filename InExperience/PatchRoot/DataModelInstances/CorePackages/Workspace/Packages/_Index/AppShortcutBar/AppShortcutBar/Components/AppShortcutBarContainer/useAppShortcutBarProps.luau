@@ -26,8 +26,6 @@ local FFlagAXMigrateEquipSlotsInputBindingsToRoactGamepad = SharedFlagsModule.FF
 local FFlagAXMigrateEmoteMenuFromRoactGamepad = SharedFlagsModule.FFlagAXMigrateEmoteMenuFromRoactGamepad
 local FFlagAXMigrateAdjustAccessoryViewToFocusNavigation = SharedFlagsModule.FFlagAXMigrateAdjustAccessoryViewToFocusNavigation
 local FFlagAXMigrateManageOutfitPageInputBindingsToFocusNavigation = SharedFlagsModule.FFlagAXMigrateManageOutfitPageInputBindingsToFocusNavigation
-local FFlagAXMigrateCatalogPageInputBindings = SharedFlagsModule.FFlagAXMigrateCatalogPageInputBindings
-local FFlagAXMigrateLookDetailsPeekViewToFocusNavigation = SharedFlagsModule.FFlagAXMigrateLookDetailsPeekViewToFocusNavigation
 local FFlagLuaAppResponsiveEnginePreferredInput = SharedFlagsModule.FFlagLuaAppResponsiveEnginePreferredInput
 local FFlagLuaAppMediaGalleryGamepadSupport = SharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
 local FFlagEnableStickyShortcutBarOnAllPlatforms = SharedFlagsModule.FFlagEnableStickyShortcutBarOnAllPlatforms
@@ -73,10 +71,8 @@ local List = {
 table.insert(List, FocusNavigationEventNameEnum.Confirm)
 table.insert(List, FocusNavigationEventNameEnum.SelectItem)
 table.insert(List, FocusNavigationEventNameEnum.OpenItemDetailsPage)
+table.insert(List, FocusNavigationEventNameEnum.ToggleTryOnManager)
 
-if FFlagAXMigrateCatalogPageInputBindings then
-	table.insert(List, FocusNavigationEventNameEnum.ToggleTryOnManager)
-end
 if FFlagEnableSplitPane then
 	table.insert(List, FocusNavigationEventNameEnum.CollapseAvatar)
 	table.insert(List, FocusNavigationEventNameEnum.ExpandAvatar)
@@ -134,7 +130,7 @@ local config5 = {
 		[FocusNavigationEventNameEnum.OpenItemDetailsPeekView] = config3[Enum.KeyCode.ButtonY],
 		[FocusNavigationEventNameEnum.CloseItemDetailsPeekView] = config3[Enum.KeyCode.ButtonY],
 		[FocusNavigationEventNameEnum.ToggleTryOn] = config3[Enum.KeyCode.ButtonY],
-		[FocusNavigationEventNameEnum.ToggleTryOnManager] = if FFlagAXMigrateLookDetailsPeekViewToFocusNavigation or FFlagAXMigrateCatalogPageInputBindings then config3[Enum.KeyCode.ButtonY] else nil,
+		[FocusNavigationEventNameEnum.ToggleTryOnManager] = config3[Enum.KeyCode.ButtonY],
 		[FocusNavigationEventNameEnum.RemoveClothingTile] = config3[Enum.KeyCode.ButtonY]
 	},
 	[Enum.KeyCode.ButtonX] = {
@@ -275,7 +271,7 @@ local config7 = {
 	[FocusNavigationEventNameEnum.OpenItemDetailsPrompt] = "Feature.Catalog.Action.Buy",
 	[FocusNavigationEventNameEnum.ToggleTryOn] = "Feature.Catalog.Label.TryOns",
 	[FocusNavigationEventNameEnum.UpdateOutfit] = "Feature.Avatar.Action.Update",
-	[FocusNavigationEventNameEnum.ToggleTryOnManager] = if FFlagAXMigrateLookDetailsPeekViewToFocusNavigation or FFlagAXMigrateCatalogPageInputBindings then "Feature.Catalog.Label.TryOns" else nil,
+	[FocusNavigationEventNameEnum.ToggleTryOnManager] = "Feature.Catalog.Label.TryOns",
 	[FocusNavigationEventNameEnum.SelectClothingTile] = "Feature.Avatar.Action.Select",
 	[FocusNavigationEventNameEnum.MoveClothingTile] = "Feature.Avatar.Title.Move",
 	[FocusNavigationEventNameEnum.RemoveClothingTile] = "Feature.Catalog.Action.Remove",

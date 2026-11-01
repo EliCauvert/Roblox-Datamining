@@ -4,8 +4,10 @@ local AvatarExperienceAnalyticsModule = require(Parent.AvatarExperienceAnalytics
 local AXUnifiedEventFilter = AvatarExperienceAnalyticsModule.AXUnifiedEventFilter
 local UnifiedEventLogEnums = AvatarExperienceAnalyticsModule.UnifiedEventLogEnums
 local SendUnifiedEventLogFunction = AvatarExperienceAnalyticsModule.sendUnifiedEventLog
+local SendPassthroughUnifiedEventLogFunction = AvatarExperienceAnalyticsModule.sendPassthroughUnifiedEventLog
 local UnifiedEventLoggingUtils = AvatarExperienceAnalyticsModule.Utils.UnifiedEventLoggingUtils
 local FFlagAXUnifiedEventCounters = AvatarExperienceAnalyticsModule.Flags.FFlagAXUnifiedEventCounters
+local FFlagAXUnifiedEventStrictPayloads = AvatarExperienceAnalyticsModule.Flags.FFlagAXUnifiedEventStrictPayloads
 local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
 local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local SduiErrors = SduiCoreSystemModule.SduiErrors
@@ -25,7 +27,7 @@ local function _(p1: number, p2: number)
 end
 
 return function(p1, List, p2, AnalyticsData, p3, p4): number
-	-- upvalues: t (copy), SduiLogger (copy), SduiErrors (copy), FindAnalyticsFieldInAncestorsFunction (copy), UnifiedLoggingSurface (copy), MarketplaceUnifiedItemType (copy), FindCollectionItemInstancesModule (copy), MarketplaceUnifiedAction (copy), UnifiedEventLoggingUtils (copy), FFlagAXUnifiedEventCounters (copy), AXUnifiedEventFilter (copy), SendUnifiedEventLogFunction (copy)
+	-- upvalues: t (copy), SduiLogger (copy), SduiErrors (copy), FindAnalyticsFieldInAncestorsFunction (copy), UnifiedLoggingSurface (copy), MarketplaceUnifiedItemType (copy), FindCollectionItemInstancesModule (copy), FFlagAXUnifiedEventStrictPayloads (copy), UnifiedEventLoggingUtils (copy), MarketplaceUnifiedAction (copy), FFlagAXUnifiedEventCounters (copy), AXUnifiedEventFilter (copy), SendPassthroughUnifiedEventLogFunction (copy), SendUnifiedEventLogFunction (copy)
 	if #List == 0 or #(p2 or t) == 0 then
 		SduiLogger.reportError(SduiErrors.SduiErrorType.FailedToLogMarketplaceItemImpressions, {
 			name = "SduiMarketplaceItemImpressionsHandler",
@@ -63,49 +65,81 @@ return function(p1, List, p2, AnalyticsData, p3, p4): number
 	local CollectionItemInstancesModule = FindCollectionItemInstancesModule(p4)
 	local Count = 0
 	
-	for _, value in List do
-		local v1 = p2[value]
+	for _, value1 in List do
+		local v1 = p2[value1]
 		
 		if v1 ~= nil then
-			local NewValue = (p3 or 0) + value
-			local Ceiled = nil
+			local NewValue = (p3 or 0) + value1
+			local GridPositionRow = nil
 			local GridPositionColumn = nil
 			
 			if Number1 and Number1 > 0 then
-				Ceiled = math.ceil(NewValue / Number1)
+				GridPositionRow = math.ceil(NewValue / Number1)
 				GridPositionColumn = (NewValue - 1) % Number1 + 1
 			else
-				Ceiled = 1
+				GridPositionRow = 1
 				GridPositionColumn = NewValue
 			end
-			local config1 = {
-				action = MarketplaceUnifiedAction.ITEM_IMPRESSION,
-				surface = UnifiedLoggingSurfaceEntry,
-				itemType = MarketplaceUnifiedItemTypeEntry,
-				itemId = v1.id,
-				universeId = Number,
-				gridPositionRow = Ceiled,
-				gridPositionColumn = GridPositionColumn
-			}
-			local CollectionItemInstancesModuleEntry = CollectionItemInstancesModule[value]
-			
-			if CollectionItemInstancesModuleEntry then
-				for i, value1 in UnifiedEventLoggingUtils.getScreenSize(CollectionItemInstancesModuleEntry) do
-					config1[i] = value1
+			if FFlagAXUnifiedEventStrictPayloads then
+				local CollectionItemInstancesModuleEntry = CollectionItemInstancesModule[value1]
+				local ScreenSize = if CollectionItemInstancesModuleEntry then UnifiedEventLoggingUtils.getScreenSize(CollectionItemInstancesModuleEntry) else nil
+				local ElementSizeAndPosition = if CollectionItemInstancesModuleEntry then UnifiedEventLoggingUtils.getElementSizeAndPosition(CollectionItemInstancesModuleEntry) else nil
+				local config1 = {
+					action = MarketplaceUnifiedAction.ITEM_IMPRESSION,
+					surface = UnifiedLoggingSurfaceEntry,
+					itemType = MarketplaceUnifiedItemTypeEntry,
+					itemId = v1.id,
+					universeId = Number,
+					gridPositionRow = GridPositionRow,
+					gridPositionColumn = GridPositionColumn,
+					screenSizeWidth = if ScreenSize then ScreenSize.screenSizeWidth else nil,
+					screenSizeHeight = if ScreenSize then ScreenSize.screenSizeHeight else nil,
+					elementSizeWidth = if ElementSizeAndPosition then ElementSizeAndPosition.elementSizeWidth else nil,
+					elementSizeHeight = if ElementSizeAndPosition then ElementSizeAndPosition.elementSizeHeight else nil,
+					elementCoordinatesX = if ElementSizeAndPosition then ElementSizeAndPosition.elementCoordinatesX else nil,
+					elementCoordinatesY = if ElementSizeAndPosition then ElementSizeAndPosition.elementCoordinatesY else nil,
+					elementRelativePositionX = if ElementSizeAndPosition then ElementSizeAndPosition.elementRelativePositionX else nil,
+					elementRelativePositionY = if ElementSizeAndPosition then ElementSizeAndPosition.elementRelativePositionY else nil
+				}
+				local FilterResult = nil
+				
+				if FFlagAXUnifiedEventCounters then
+					FilterResult = AXUnifiedEventFilter.filter(config1)
+				else
+					AXUnifiedEventFilter.filter(config1)
 				end
-				for i1, value2 in UnifiedEventLoggingUtils.getElementSizeAndPosition(CollectionItemInstancesModuleEntry) do
-					config1[i1] = value2
-				end
-			end
-			local FilterResult = nil
-			
-			if FFlagAXUnifiedEventCounters then
-				FilterResult = AXUnifiedEventFilter.filter(config1)
+				SendPassthroughUnifiedEventLogFunction(config1, nil, if FFlagAXUnifiedEventCounters then { filterPassed = FilterResult } else nil)
+				Count += 1
 			else
-				AXUnifiedEventFilter.filter(config1)
+				local config1 = {
+					action = MarketplaceUnifiedAction.ITEM_IMPRESSION,
+					surface = UnifiedLoggingSurfaceEntry,
+					itemType = MarketplaceUnifiedItemTypeEntry,
+					itemId = v1.id,
+					universeId = Number,
+					gridPositionRow = GridPositionRow,
+					gridPositionColumn = GridPositionColumn
+				}
+				local CollectionItemInstancesModuleEntry = CollectionItemInstancesModule[value1]
+				
+				if CollectionItemInstancesModuleEntry then
+					for i, value in UnifiedEventLoggingUtils.getScreenSize(CollectionItemInstancesModuleEntry) do
+						config1[i] = value
+					end
+					for i1, value2 in UnifiedEventLoggingUtils.getElementSizeAndPosition(CollectionItemInstancesModuleEntry) do
+						config1[i1] = value2
+					end
+				end
+				local FilterResult1 = nil
+				
+				if FFlagAXUnifiedEventCounters then
+					FilterResult1 = AXUnifiedEventFilter.filter(config1)
+				else
+					AXUnifiedEventFilter.filter(config1)
+				end
+				SendUnifiedEventLogFunction(config1, nil, if FFlagAXUnifiedEventCounters then { filterPassed = FilterResult1 } else nil)
+				Count += 1
 			end
-			SendUnifiedEventLogFunction(config1, nil, if FFlagAXUnifiedEventCounters then { filterPassed = FilterResult } else nil)
-			Count += 1
 		end
 	end
 	if Count == 0 then

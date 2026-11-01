@@ -274,8 +274,7 @@ local function parse(Segment, p1)
 end
 
 local QueryStringModule = {
-	extract = function(Url): string
-		local Text: string = Url
+	extract = function(Text: string): string
 		local v4: number = Text:find("#")
 		
 		if v4 ~= nil then
@@ -357,13 +356,12 @@ function QueryStringModule.stringifyUrl(p2, p3): string
 	if v6 ~= nil then
 		Segment = Url1:sub(v6)
 	end
-	local Segment1: string = Segment
 	local StringifyResult = QueryStringModule.stringify(Object.assign(ParseResult, p2.query), p3)
 	
 	if StringifyResult then
 		StringifyResult = ("?%s"):format(StringifyResult)
 	end
-	return ("%s%s%s"):format(v5, StringifyResult, Segment1)
+	return ("%s%s%s"):format(v5, StringifyResult, Segment)
 end
 
 return QueryStringModule

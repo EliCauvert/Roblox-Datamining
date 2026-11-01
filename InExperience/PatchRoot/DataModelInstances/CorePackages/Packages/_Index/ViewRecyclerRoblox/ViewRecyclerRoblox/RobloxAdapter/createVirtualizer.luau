@@ -92,12 +92,11 @@ return function(p2)
 	assert(Flag, "createVirtualizer: invalid axis")
 	local Layout = p2.layout
 	assert(not Layout.requiresItemMeasurement() or Layout.stackedSpacing ~= nil, "createVirtualizer: a Layout that requires Item measurement must be a Stacked layout")
-	local t = {}
+	local Tbl = {}
 	local VirtualizerConfigurationKeysModule1 = if FFlagViewRecyclerReact08 then VirtualizerConfigurationKeysModule else Frozen
 	for _, value in VirtualizerConfigurationKeysModule1 do
-		t[value] = p2[value]
+		Tbl[value] = p2[value]
 	end
-	local Tbl = t
 	Flag = false
 	local IsActive = if FFlagViewRecyclerReact08 then p2.active ~= false else nil
 	local Flag1 = false

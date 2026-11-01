@@ -140,6 +140,13 @@ return (require(Parent.PurchasePromptDeps).Rodux.createReducer(config, {
 		
 		return Copy
 	end,
+	[require(PurchasePrompt.Actions.VIPServerCreated).name] = if FFlagLuaAppsEnablePromptVIPServerPurchase then function(Tbl, p1)
+		local Copy = table.clone(Tbl)
+		Copy.vipServerId = p1.vipServerId
+		Copy.vipServerName = p1.vipServerName
+		
+		return Copy
+	end else nil,
 	[require(PurchasePrompt.Actions.CompleteRequest).name] = function(_, _)
 		-- upvalues: config (copy)
 		return config

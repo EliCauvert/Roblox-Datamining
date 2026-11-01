@@ -104,7 +104,7 @@ return function(Frame)
 			required = Frame.required
 		}) else nil
 	}
-	local CreateElementFunction1 = ReactModule.createElement
+	local CreateElementFunction = ReactModule.createElement
 	local v2 = "CanvasGroup"
 	local config3 = {
 		BackgroundTransparency = 1,
@@ -180,7 +180,7 @@ return function(Frame)
 			ImageTransparency = Tokens.Color.Content.Muted.Transparency
 		}) else nil
 	}
-	local CreateElementFunction = ReactModule.createElement
+	local CreateElementFunction1 = ReactModule.createElement
 	local v5 = "TextBox"
 	local Label = { ref = UseRefResult, Text = Frame.text }
 	local Success, Result = pcall(function()
@@ -225,7 +225,7 @@ return function(Frame)
 	Label[ReactModule.Event.Focused] = onFocusGained
 	Label[ReactModule.Event.FocusLost] = onFocusLost
 	Label[ReactModule.Change.Text] = onTextChange
-	config7.TextBox = CreateElementFunction(v5, Label)
+	config7.TextBox = CreateElementFunction1(v5, Label)
 	config7.IconButton = if Frame.iconButton then ReactModule.createElement(ImageSetComponentModule.Button, {
 		BackgroundTransparency = 1,
 		Image = Frame.iconButton,
@@ -238,7 +238,7 @@ return function(Frame)
 	}) else nil
 	config5.BorderFrame = CreateElementFunction2(v4, config6, config7)
 	t.Input = CreateElementFunction4(v3, config4, config5)
-	config2.InputCanvas = CreateElementFunction1(v2, config3, t)
+	config2.InputCanvas = CreateElementFunction(v2, config3, t)
 	config2.HelperText = if Frame.hint then ReactModule.createElement(HelperTextModule, { LayoutOrder = 3, text = Frame.hint, error = Frame.error }) else nil
 	
 	return CreateElementFunction3(v1, config1, config2)

@@ -329,7 +329,7 @@ local function createLocalToolControllers(p2, p3, p4)
 end
 
 return {
-	createLiveAssistantTurn = function(p7, Prompt, Callback3, p8, p9, Callback, Callback1, SendConfiguration, ExpectedSessionId, IsCancelled)
+	createLiveAssistantTurn = function(p7, Prompt, Callback, p8, p9, Callback2, Callback3, SendConfiguration, ExpectedSessionId, IsCancelled)
 		-- upvalues: createLocalToolControllers (copy), StudioAskUserTool (copy), StudioProposePlanTool (copy), StudioClientLogsTool (copy), StudioClientDataModelTools (copy), UnifiedMonetizationToolModule (copy), FFlagBuildExperienceManageDevProductModule (copy), StudioManageDevProductTool (copy), FFlagBuildExperienceManageDevProductModule1 (copy), StudioManageGamePassTool (copy), FFlagBuildExperienceManageDevProductModule2 (copy), StudioManageSubscriptionTool (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), CreatePromptLifecycleTelemetryModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), FFlagBuildExperienceLibrary (copy), resolvePromptFailure (copy), Debug (copy), getPromptFailureTelemetryParameters (copy), LocalizationStringsModule (copy), config1 (copy), FFlagBuildExperienceModelPickerModule (copy), trackPromptActivity (copy)
 		local LocalToolControllers = createLocalToolControllers(p7, p8, p9)
 		local UniverseId = p7.universeId
@@ -365,7 +365,7 @@ return {
 		local Flag = false
 		
 		local function handleReceived(TurnId)
-			-- upvalues: FFlagBuildEventsUpdate1Module (upval), Flag (ref), SendBuildExperienceEventModule (upval), UniverseId (copy), p7 (copy), Callback (copy)
+			-- upvalues: FFlagBuildEventsUpdate1Module (upval), Flag (ref), SendBuildExperienceEventModule (upval), UniverseId (copy), p7 (copy), Callback2 (copy)
 			if FFlagBuildEventsUpdate1Module and not Flag then
 				SendBuildExperienceEventModule("SEND_PROMPT_RECIEVED", {
 					universeId = UniverseId,
@@ -374,19 +374,19 @@ return {
 					turnId = TurnId
 				})
 			end
-			if Callback ~= nil then
-				Callback(TurnId)
+			if Callback2 ~= nil then
+				Callback2(TurnId)
 			end
 		end
 		
 		local SendPromptResult = nil
-		local Callback2: (() -> ())? = nil
+		local Callback1: (() -> ())? = nil
 		
 		local function _(p10)
-			-- upvalues: Callback2 (ref)
-			if Callback2 ~= nil then
-				Callback2()
-				Callback2 = nil
+			-- upvalues: Callback1 (ref)
+			if Callback1 ~= nil then
+				Callback1()
+				Callback1 = nil
 			end
 			p10.finish()
 		end
@@ -409,9 +409,9 @@ return {
 					messageId = MessageId
 				})
 			end,
-			onReceived = if FFlagBuildEventsUpdate1Module or Callback ~= nil then handleReceived else nil,
-			onAccepted = if FFlagBuildExperienceLibrary and Callback1 ~= nil then function()
-				-- upvalues: FFlagBuildEventsUpdate1Module (upval), Flag (ref), SendBuildExperienceEventModule (upval), UniverseId (copy), p7 (copy), Callback1 (copy)
+			onReceived = if FFlagBuildEventsUpdate1Module or Callback2 ~= nil then handleReceived else nil,
+			onAccepted = if FFlagBuildExperienceLibrary and Callback3 ~= nil then function()
+				-- upvalues: FFlagBuildEventsUpdate1Module (upval), Flag (ref), SendBuildExperienceEventModule (upval), UniverseId (copy), p7 (copy), Callback3 (copy)
 				if FFlagBuildEventsUpdate1Module then
 					Flag = true
 					SendBuildExperienceEventModule("SEND_PROMPT_RECIEVED", {
@@ -420,10 +420,10 @@ return {
 						conversationId = p7.getCasSessionId()
 					})
 				end
-				Callback1()
+				Callback3()
 			end else nil,
 			onCompleted = function(p10)
-				-- upvalues: resolvePromptFailure (upval), SendPromptResult (ref), Debug (upval), UniverseId (copy), p7 (copy), getPromptFailureTelemetryParameters (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), PromptLifecycleTelemetryModule (copy), LocalizationStringsModule (upval), config1 (upval), SendBuildExperienceEventModule (upval), Callback2 (ref), Callback3 (copy)
+				-- upvalues: resolvePromptFailure (upval), SendPromptResult (ref), Debug (upval), UniverseId (copy), p7 (copy), getPromptFailureTelemetryParameters (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), PromptLifecycleTelemetryModule (copy), LocalizationStringsModule (upval), config1 (upval), SendBuildExperienceEventModule (upval), Callback1 (ref), Callback (copy)
 				local ResolvePromptFailureResult = resolvePromptFailure(p10, SendPromptResult.getSetupError(false))
 				
 				if ResolvePromptFailureResult == nil then
@@ -498,13 +498,13 @@ return {
 					}, PromptFailureTelemetryParameters)
 				end
 				if FFlagBuildExperiencePromptFailureTelemetry and PromptLifecycleTelemetryModule ~= nil then
-					if Callback2 ~= nil then
-						Callback2()
-						Callback2 = nil
+					if Callback1 ~= nil then
+						Callback1()
+						Callback1 = nil
 					end
 					PromptLifecycleTelemetryModule.finish()
 				end
-				Callback3(ResolvePromptFailureResult)
+				Callback(ResolvePromptFailureResult)
 			end
 		}
 		
@@ -547,12 +547,12 @@ return {
 				return LocalizationStringsModule.CHAT_DEFAULT_FAILURE
 			end,
 			start = function()
-				-- upvalues: FFlagBuildExperiencePromptFailureTelemetry (upval), PromptLifecycleTelemetryModule (copy), Callback2 (ref), trackPromptActivity (upval), SendPromptResult (ref), LocalToolControllers (copy)
+				-- upvalues: FFlagBuildExperiencePromptFailureTelemetry (upval), PromptLifecycleTelemetryModule (copy), Callback1 (ref), trackPromptActivity (upval), SendPromptResult (ref), LocalToolControllers (copy)
 				if FFlagBuildExperiencePromptFailureTelemetry and PromptLifecycleTelemetryModule ~= nil then
 					PromptLifecycleTelemetryModule.start()
 					
-					if Callback2 == nil then
-						Callback2 = trackPromptActivity(SendPromptResult, PromptLifecycleTelemetryModule, LocalToolControllers.getOptimisticLocalTools)
+					if Callback1 == nil then
+						Callback1 = trackPromptActivity(SendPromptResult, PromptLifecycleTelemetryModule, LocalToolControllers.getOptimisticLocalTools)
 					end
 				end
 				SendPromptResult.start()
@@ -564,12 +564,12 @@ return {
 			end,
 			reportUserStop = if FFlagBuildExperiencePromptFailureTelemetry and PromptLifecycleTelemetryModule ~= nil then PromptLifecycleTelemetryModule.reportUserStop else nil,
 			detach = if FFlagBuildExperiencePromptFailureTelemetry and PromptLifecycleTelemetryModule ~= nil then function()
-				-- upvalues: LocalToolControllers (copy), PromptLifecycleTelemetryModule (copy), Callback2 (ref)
+				-- upvalues: LocalToolControllers (copy), PromptLifecycleTelemetryModule (copy), Callback1 (ref)
 				LocalToolControllers.stopPending()
 				
-				if Callback2 ~= nil then
-					Callback2()
-					Callback2 = nil
+				if Callback1 ~= nil then
+					Callback1()
+					Callback1 = nil
 				end
 				PromptLifecycleTelemetryModule.finish()
 			end else LocalToolControllers.stopPending,

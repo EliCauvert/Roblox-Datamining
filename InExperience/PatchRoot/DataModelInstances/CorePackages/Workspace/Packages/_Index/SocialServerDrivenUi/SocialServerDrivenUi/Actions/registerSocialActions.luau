@@ -8,9 +8,10 @@ local FFlagSduiRequestFriendshipActionHandler = require(Parent.SharedFlags).FFla
 local FFlagEditProfileFramesEnabled = require(Parent.SharedFlags).FFlagEditProfileFramesEnabled
 local FFlagAddSDUIEditProfileFramesAction = require(Parent.SharedFlags).FFlagAddSDUIEditProfileFramesAction
 local FFlagAppChatConversationTrustedFriendUpsellBanner = require(Parent.SharedFlags).FFlagAppChatConversationTrustedFriendUpsellBanner
+local FFlagLuaAppExperienceLeaderboardSeeAllEnabled = require(Parent.SharedFlags).FFlagLuaAppExperienceLeaderboardSeeAllEnabled
 
 return function()
-	-- upvalues: SduiActionType (copy), FFlagLuaAppSduiVerificationUpsellActions (copy), SocialServerDrivenUi (copy), FFlagSduiRequestFriendshipActionHandler (copy), FFlagEditProfileFramesEnabled (copy), FFlagAddSDUIEditProfileFramesAction (copy), FFlagAppChatConversationTrustedFriendUpsellBanner (copy), GetSduiActionHandlerRegistryFunction (copy)
+	-- upvalues: SduiActionType (copy), FFlagLuaAppSduiVerificationUpsellActions (copy), SocialServerDrivenUi (copy), FFlagSduiRequestFriendshipActionHandler (copy), FFlagEditProfileFramesEnabled (copy), FFlagAddSDUIEditProfileFramesAction (copy), FFlagAppChatConversationTrustedFriendUpsellBanner (copy), FFlagLuaAppExperienceLeaderboardSeeAllEnabled (copy), GetSduiActionHandlerRegistryFunction (copy)
 	GetSduiActionHandlerRegistryFunction().registerActionHandlerConfigs({
 		[SduiActionType.OpenFacialAgeEstimation] = if FFlagLuaAppSduiVerificationUpsellActions then nil else {
 			lazyHandler = function()
@@ -60,6 +61,12 @@ return function()
 			lazyHandler = function()
 				-- upvalues: SocialServerDrivenUi (upval)
 				return require(SocialServerDrivenUi.Actions.SduiRecordPartyChatConversationUpsellAcknowledgementAction)
+			end
+		} else nil,
+		[SduiActionType.OpenExperienceLeaderboardSeeAll] = if FFlagLuaAppExperienceLeaderboardSeeAllEnabled then {
+			lazyHandler = function()
+				-- upvalues: SocialServerDrivenUi (upval)
+				return require(SocialServerDrivenUi.Actions.SduiOpenExperienceLeaderboardSeeAllAction)
 			end
 		} else nil
 	})

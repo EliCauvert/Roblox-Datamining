@@ -39,16 +39,14 @@ function EventQueueModule:processNextEvent(Origin, p1)
 	end
 	if Queue.nextSequenceNumber == nil then
 		local Events = Queue.events
-		local v2 = nil
+		local NextSequenceNumber = nil
 		
 		if Events then
 			for i, _ in pairs(Events) do
-				v2 = i
+				NextSequenceNumber = i
 				break
 			end
 		end
-		local NextSequenceNumber = v2
-		
 		if NextSequenceNumber ~= nil then
 			LoggerModule:info("EventQueue: sequence for {} at {}", Origin, NextSequenceNumber)
 			Queue.nextSequenceNumber = NextSequenceNumber

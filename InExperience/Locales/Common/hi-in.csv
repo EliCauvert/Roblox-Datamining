@@ -2503,7 +2503,7 @@ Feature.Build.Notification.Title.NeedInput,बिल्ड के लिए आ�
 Feature.Build.Placeholder.DescribeProduct,बताएँ कि आपको क्या बेचना है
 Feature.Build.Placeholder.DescribeProductUpdate,कोई अपडेट बताएँ
 Feature.Build.Placeholder.InternalSpec,internal_code
-Feature.Build.Prompt.CreateDeveloperProduct,"डेवलपर प्रॉडक्ट बनाने, उसे गेम में जोड़ने, बदलावों को वेरिफ़ाई करके पब्लिश करने और उसे खरीदारी के लिए उपलब्ध कराने में मेरी मदद करें."
+Feature.Build.Prompt.CreateDeveloperProduct,"मेरे गेम का रिव्यू करें और सुझाव दें कि Robux कमाने के लिए मुझे कौन-सा आइटम बेचना चाहिए. क्या एक बार खरीदा जाने वाला आइटम या ऐसा आइटम, जिसे खिलाड़ी बार-बार खरीद सकें, जैसे कि बूस्ट, मेरे गेम के लिए ज़्यादा सही रहेगा? इसके पीछे की वजह भी बताएँ."
 Feature.Build.Title.AdActive,ऐड कैंपेन ऐक्टिव है
 Feature.Build.Title.AdCampaignDuration,{durationDays}-दिन का ऐड कैंपेन
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays}-दिन
@@ -3697,6 +3697,7 @@ Feature.InExperienceShop.Message.RobuxPurchaseSuccess,आपने {ROBUX_AMOUNT
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"क्या आपको वाकई अपनी इन्वेंट्री से इस आइटम को हमेशा के लिए डिलीट करना है? अपना फ़ैसला बदलने पर, आपको इसे किसी एक्सपीरिएंस में फिर से हासिल करना होगा."
 Feature.Item.Label.DeleteItemUndercase,आइटम डिलीट करें
 Feature.Landing.Label.PoweredBy,इसे बनाया है
+Feature.Leaderboards.Heading.Leaderboard,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,"जिन लोगों के पास आपका फ़ोन नंबर है, उन्हें आपको Roblox पर फ़्रेंड के तौर पर जोड़ने में मदद करें."
@@ -3990,7 +3991,9 @@ Feature.PrivateServers.Action.CreatePrivateServer,प्राइवेट स�
 Feature.PrivateServers.Action.FreeWithBlackbird,Plus सब्सक्रिप्शन के साथ फ़्री
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio में प्राइवेट सर्वर नहीं खरीदे जा सकते.
 Feature.PrivateServers.Description.VipServersNotSupported,इस गेम के लिए प्राइवेट सर्वर इस्तेमाल नहीं किए जा सकते.
+Feature.PrivateServers.Heading.ConfigurePrivateServer,प्राइवेट सर्वर कॉन्फ़िगर करें
 Feature.PrivateServers.Label.OwnersServer,{displayName} का सर्वर
+Feature.PrivateServers.Label.ServerName,सर्वर का नाम:
 Feature.Profile.Action.AboutThisProfile,इस प्रोफ़ाइल के बारे में जानकारी
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,

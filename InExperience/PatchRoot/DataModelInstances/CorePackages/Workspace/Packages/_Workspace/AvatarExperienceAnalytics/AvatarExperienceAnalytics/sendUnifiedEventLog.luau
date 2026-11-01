@@ -9,17 +9,20 @@ local UnifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogCons
 local UnifiedEventPageStoreModule = require(script.Parent.Store.UnifiedEventPageStore)
 local UnifiedEventCounterAggregatorModule = require(script.Parent.Lib.UnifiedEventCounterAggregator)
 local AXUnifiedEventFilterModule = require(script.Parent.AXUnifiedEventFilter)
+local _ = require(script.Parent.Generated.UnifiedEventTypes)
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXSendUnifiedEventLogWithInstance = AvatarExperienceFlagsModule.FFlagAXSendUnifiedEventLogWithInstance
 local FFlagAXDebugPanelImpressed = AvatarExperienceFlagsModule.FFlagAXDebugPanelImpressed
 local FFlagAXUnifiedEventPageContext = AvatarExperienceFlagsModule.FFlagAXUnifiedEventPageContext
 local FFlagAXUnifiedEventCounters = AvatarExperienceFlagsModule.FFlagAXUnifiedEventCounters
 local FFlagAXUnifiedEventDeviceTier = AvatarExperienceFlagsModule.FFlagAXUnifiedEventDeviceTier
+local FFlagAXUnifiedEventStrictPayloads = AvatarExperienceFlagsModule.FFlagAXUnifiedEventStrictPayloads
+local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
 local AXSendUnifiedEventsInStudio = game:DefineFastFlag("AXSendUnifiedEventsInStudio", false)
 local DeviceMemoryTier = if FFlagAXUnifiedEventDeviceTier then DeviceTier.GetDeviceMemoryTier() else nil
 
 return function(JoinResult, p1, p2)
-	-- upvalues: FFlagAXUnifiedEventPageContext (copy), SessionService (copy), UnifiedEventPageStoreModule (copy), CryoModule (copy), FFlagAXUnifiedEventDeviceTier (copy), DeviceMemoryTier (copy), FFlagAXDebugPanelImpressed (copy), DebugPanelModule (copy), FFlagAXSendUnifiedEventLogWithInstance (copy), UnifiedEventLogConstantsModule (copy), IsRunningInStudioFunction (copy), AXSendUnifiedEventsInStudio (copy), FFlagAXUnifiedEventCounters (copy), AXUnifiedEventFilterModule (copy), UnifiedEventCounterAggregatorModule (copy), AnalyticsServiceModule (copy)
+	-- upvalues: FFlagAXUnifiedEventPageContext (copy), SessionService (copy), UnifiedEventPageStoreModule (copy), CryoModule (copy), FFlagAXUnifiedEventDeviceTier (copy), DeviceMemoryTier (copy), FFlagAXUnifiedEventStrictPayloads (copy), UnifiedLoggingSurface (copy), FFlagAXDebugPanelImpressed (copy), DebugPanelModule (copy), FFlagAXSendUnifiedEventLogWithInstance (copy), UnifiedEventLogConstantsModule (copy), IsRunningInStudioFunction (copy), AXSendUnifiedEventsInStudio (copy), FFlagAXUnifiedEventCounters (copy), AXUnifiedEventFilterModule (copy), UnifiedEventCounterAggregatorModule (copy), AnalyticsServiceModule (copy)
 	if FFlagAXUnifiedEventPageContext then
 		local Level2aSessionTag = SessionService:GetSessionTag("level2a")
 		local PageFields = UnifiedEventPageStoreModule.getPageFields()
@@ -31,6 +34,9 @@ return function(JoinResult, p1, p2)
 	end
 	if FFlagAXUnifiedEventDeviceTier then
 		JoinResult = CryoModule.Dictionary.join({ deviceTier = DeviceMemoryTier or "Unknown" }, JoinResult)
+	end
+	if FFlagAXUnifiedEventStrictPayloads and JoinResult.surface == nil then
+		JoinResult = CryoModule.Dictionary.join(JoinResult, { surface = UnifiedLoggingSurface.UNDEFINED_SURFACE })
 	end
 	if FFlagAXDebugPanelImpressed then
 		DebugPanelModule.AnalyticsFeed.notify({

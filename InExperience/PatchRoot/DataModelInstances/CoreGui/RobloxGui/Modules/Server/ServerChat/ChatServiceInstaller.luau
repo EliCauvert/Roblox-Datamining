@@ -72,7 +72,6 @@ return function()
 	else
 		Archivable = false
 		ChatServiceRunner = LoadScript("ChatServiceRunner", Chat)
-		local Parent = ChatServiceRunner
 		local ChatService = script.Parent:WaitForChild("ChatService")
 		local ChatService1 = Instance.new("ModuleScript")
 		ChatService1.Name = "ChatService"
@@ -82,8 +81,7 @@ return function()
 		else
 			ChatService1.Source = ChatService.Source
 		end
-		ChatService1.Parent = Parent
-		local Parent1 = ChatServiceRunner
+		ChatService1.Parent = ChatServiceRunner
 		local ChatChannel = script.Parent:WaitForChild("ChatChannel")
 		local ChatChannel1 = Instance.new("ModuleScript")
 		ChatChannel1.Name = "ChatChannel"
@@ -93,8 +91,7 @@ return function()
 		else
 			ChatChannel1.Source = ChatChannel.Source
 		end
-		ChatChannel1.Parent = Parent1
-		local Parent2 = ChatServiceRunner
+		ChatChannel1.Parent = ChatServiceRunner
 		local Speaker = script.Parent:WaitForChild("Speaker")
 		local Speaker1 = Instance.new("ModuleScript")
 		Speaker1.Name = "Speaker"
@@ -104,8 +101,7 @@ return function()
 		else
 			Speaker1.Source = Speaker.Source
 		end
-		Speaker1.Parent = Parent2
-		local Parent3 = ChatServiceRunner
+		Speaker1.Parent = ChatServiceRunner
 		local Util = script.Parent:WaitForChild("Util")
 		local Util1 = Instance.new("ModuleScript")
 		Util1.Name = "Util"
@@ -115,7 +111,7 @@ return function()
 		else
 			Util1.Source = Util.Source
 		end
-		Util1.Parent = Parent3
+		Util1.Parent = ChatServiceRunner
 	end
 	local ChatModules = Chat:FindFirstChild("ChatModules")
 	
@@ -147,7 +143,6 @@ return function()
 				end
 			else
 				local Name = Children[i].Name
-				local Folder = ChatModules
 				local Name1 = script.Parent.DefaultChatModules:WaitForChild(Name)
 				local Module = Instance.new("ModuleScript")
 				Module.Name = Name
@@ -157,7 +152,7 @@ return function()
 				else
 					Module.Source = Name1.Source
 				end
-				Module.Parent = Folder
+				Module.Parent = ChatModules
 			end
 		end
 		for _, child in pairs(script.Parent.DefaultChatModules.Utility:GetChildren()) do
@@ -180,9 +175,9 @@ return function()
 		end
 	end
 	if not ServerScriptService:FindFirstChild("ChatServiceRunner") then
-		local Copy = ChatServiceRunner:Clone()
-		Copy.Archivable = false
-		Copy.Parent = ServerScriptService
+		local ChatServiceRunnerClone = ChatServiceRunner:Clone()
+		ChatServiceRunnerClone.Archivable = false
+		ChatServiceRunnerClone.Parent = ServerScriptService
 	end
 	ChatServiceRunner.Archivable = Archivable
 	SendChatAnalyticsModule("LoadServerDefaultChatForkedModules", t)

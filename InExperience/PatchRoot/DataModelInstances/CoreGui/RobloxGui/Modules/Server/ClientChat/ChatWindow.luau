@@ -98,30 +98,27 @@ function Module.CreateGuiObjects(p2, Parent)
 	end
 	
 	local v1 = 3
-	local Frame3 = Frame
-	while Frame3 and not Frame3:IsA("ScreenGui") do
-		Frame3 = Frame3.Parent
+	local Frame1 = Frame
+	while Frame1 and not Frame1:IsA("ScreenGui") do
+		Frame1 = Frame1.Parent
 	end
-	local Frame2 = Frame3
-	
-	if Frame2.AbsoluteSize.X <= 640 then
+	if Frame1.AbsoluteSize.X <= 640 then
 		v1 = 1
-	elseif Frame2.AbsoluteSize.X <= 1024 then
+	elseif Frame1.AbsoluteSize.X <= 1024 then
 		v1 = 2
 	end
-	Frame3 = false
+	local Flag = false
 	
 	local function doCheckSizeBounds()
-		-- upvalues: Frame3 (ref), Frame (copy), PlayerGui (upval), ChatSettingsModule (upval), ChannelsBarParentFrame (copy), ChatBarParentFrame (copy)
-		if Frame3 then return end
-		Frame3 = true
+		-- upvalues: Flag (ref), Frame (copy), PlayerGui (upval), ChatSettingsModule (upval), ChannelsBarParentFrame (copy), ChatBarParentFrame (copy)
+		if Flag then return end
+		Flag = true
 		
 		if not Frame:IsDescendantOf(PlayerGui) then return end
-		local Parent = Frame
-		while Parent and not Parent:IsA("ScreenGui") do
-			Parent = Parent.Parent
+		local Frame1 = Frame
+		while Frame1 and not Frame1:IsA("ScreenGui") do
+			Frame1 = Frame1.Parent
 		end
-		local Frame1 = Parent
 		local MinimumWindowSize = ChatSettingsModule.MinimumWindowSize
 		local MaximumWindowSize = ChatSettingsModule.MaximumWindowSize
 		local NewScale = MinimumWindowSize.X.Scale * Frame1.AbsoluteSize.X + MinimumWindowSize.X.Offset
@@ -142,7 +139,7 @@ function Module.CreateGuiObjects(p2, Parent)
 			Frame.Size += UDim2.new(0, 0, 0, NewScale2 - Y)
 		end
 		Frame.Size = UDim2.new(Frame.AbsoluteSize.X / Frame1.AbsoluteSize.X, 0, Frame.AbsoluteSize.Y / Frame1.AbsoluteSize.Y, 0)
-		Frame3 = false
+		Flag = false
 	end
 	
 	Frame.Changed:connect(function(Property)
@@ -175,14 +172,14 @@ function Module.CreateGuiObjects(p2, Parent)
 		-- upvalues: Frame (copy), ChatSettingsModule (upval)
 		Frame.Draggable = ChatSettingsModule.WindowDraggable
 	end)
-	local Flag = false
+	local Flag1 = false
 	ImageButton.Changed:connect(function(Property)
-		-- upvalues: Frame (copy), Flag (ref), UpdatePositionFromDrag (copy), ImageButton (copy)
+		-- upvalues: Frame (copy), Flag1 (ref), UpdatePositionFromDrag (copy), ImageButton (copy)
 		if Property == "AbsolutePosition" and not Frame.Draggable then
-			if Flag then return end
-			Flag = true
+			if Flag1 then return end
+			Flag1 = true
 			UpdatePositionFromDrag(ImageButton.AbsolutePosition)
-			Flag = false
+			Flag1 = false
 		end
 	end)
 	
@@ -202,9 +199,9 @@ function Module.CreateGuiObjects(p2, Parent)
 		ChannelsBarParentFrame.Active = false
 		ChatChannelParentFrame.Visible = false
 		ChatChannelParentFrame.Active = false
-		local Frame4 = Frame
-		while Frame4 and not Frame4:IsA("ScreenGui") do
-			Frame4 = Frame4.Parent
+		local Frame2 = Frame
+		while Frame2 and not Frame2:IsA("ScreenGui") do
+			Frame2 = Frame2.Parent
 		end
 		local Scale = nil
 		local Offset = nil
@@ -222,9 +219,9 @@ function Module.CreateGuiObjects(p2, Parent)
 		Frame.Size = UDim2.new(Scale, Offset, 0, (if v1 == 1 then v2 or ChatSettingsModule.ChatBarTextSizePhone else v2 or ChatSettingsModule.ChatBarTextSize) + 14 + 10)
 		Frame.Position = ChatSettingsModule.DefaultWindowPosition
 	else
-		local Frame5 = Frame
-		while Frame5 and not Frame5:IsA("ScreenGui") do
-			Frame5 = Frame5.Parent
+		local Frame3 = Frame
+		while Frame3 and not Frame3:IsA("ScreenGui") do
+			Frame3 = Frame3.Parent
 		end
 		if v1 == 1 then
 			Frame.Size = ChatSettingsModule.DefaultWindowSizePhone

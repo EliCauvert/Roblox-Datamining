@@ -176,23 +176,19 @@ local function pruneFeed(Tbl, TopicIdToNumCacheItems)
 							
 							if ContentPool ~= nil then
 								if Content_pools[PoolId1] == nil then
-									local Copy1 = table.clone(ContentPool)
+									local Copy2 = table.clone(ContentPool)
 									local Items = ContentPool.items
 									local Largest = math.max(TopicIdToNumCacheItem.cap - TopicIdToNumCacheItem.count, 0)
-									local t1 = {}
-									local Items1 = nil
+									local Items1 = {}
 									
-									if Items == nil then
-										Items1 = t1
-									else
+									if Items ~= nil then
 										for i1 = 1, math.min(#Items, Largest) do
-											t1[i1] = Items[i1]
+											Items1[i1] = Items[i1]
 										end
-										Items1 = t1
 									end
-									Copy1.items = Items1
-									TopicIdToNumCacheItem.count += #Copy1.items
-									Content_pools[PoolId1] = Copy1
+									Copy2.items = Items1
+									TopicIdToNumCacheItem.count += #Copy2.items
+									Content_pools[PoolId1] = Copy2
 								end
 							else
 								continue
@@ -201,27 +197,23 @@ local function pruneFeed(Tbl, TopicIdToNumCacheItems)
 							for _, value4 in ItemListFieldsResult do
 								local Entry1 = Value[value4]
 								local Largest = math.max(TopicIdToNumCacheItem.cap - TopicIdToNumCacheItem.count, 0)
-								local t2 = {}
-								local t1 = nil
+								local t1 = {}
 								
-								if Entry1 == nil then
-									t1 = t2
-								else
+								if Entry1 ~= nil then
 									for i2 = 1, math.min(#Entry1, Largest) do
-										t2[i2] = Entry1[i2]
+										t1[i2] = Entry1[i2]
 									end
-									t1 = t2
 								end
 								TopicIdToNumCacheItem.count += #t1
 								Copy[value4] = t1
 							end
 						end
-						local Copy2 = table.clone(Entry)
+						local Copy3 = table.clone(Entry)
 						local InputData1 = Entry.input_data
-						local Copy3 = table.clone(InputData1)
-						Copy3.kind = { type = InputData1.kind.type, value = Copy }
-						Copy2.input_data = Copy3
-						Entry_map[value2] = Copy2
+						local Copy4 = table.clone(InputData1)
+						Copy4.kind = { type = InputData1.kind.type, value = Copy }
+						Copy3.input_data = Copy4
+						Entry_map[value2] = Copy3
 					end
 				end
 			end
@@ -230,19 +222,19 @@ local function pruneFeed(Tbl, TopicIdToNumCacheItems)
 	if next(Entry_map) == nil then
 		return nil
 	end
-	local Copy4 = table.clone(Tbl)
-	Copy4.entry_map = Entry_map
+	local Copy1 = table.clone(Tbl)
+	Copy1.entry_map = Entry_map
 	
 	if Tbl.content_pools ~= nil then
-		Copy4.content_pools = Content_pools
+		Copy1.content_pools = Content_pools
 	end
 	if Tbl.entry_order ~= nil then
-		Copy4.entry_order = filterOrder(Tbl.entry_order, Entry_map)
+		Copy1.entry_order = filterOrder(Tbl.entry_order, Entry_map)
 	end
 	if Tbl.entry_order_map ~= nil then
-		Copy4.entry_order_map = filterOrderMap(Tbl.entry_order_map, Entry_map)
+		Copy1.entry_order_map = filterOrderMap(Tbl.entry_order_map, Entry_map)
 	end
-	return Copy4
+	return Copy1
 end
 
 local function pruneHydration(Tbl, p4)

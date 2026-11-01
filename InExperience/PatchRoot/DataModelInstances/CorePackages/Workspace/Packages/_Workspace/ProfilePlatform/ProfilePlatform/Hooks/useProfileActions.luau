@@ -35,6 +35,7 @@ local FFlagProfilePlatformEnableEditAppearanceMenuModule = require(ProfilePlatfo
 local FFlagProfilePlatformEditBackgroundMenuItemModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEditBackgroundMenuItem)
 local FFlagProfilePlatformEnableEditLookModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableEditLook)
 local FFlagJoinabilityCTARefactor = SharedFlagsModule.FFlagJoinabilityCTARefactor
+local FFlagJoinabilityCTAContextCopy = SharedFlagsModule.FFlagJoinabilityCTAContextCopy
 local ProfileActionsModule = require(ProfilePlatform.Components.CTARow.ProfileActions)
 local _ = require(Parent.GenericAbuseReporting.AbuseVector)
 local PresenceModule = require(ProfilePlatform.Rodux.Presence)
@@ -43,7 +44,7 @@ local Text = tostring(DateTime.now().UnixTimestampMillis)
 local config = { skipFetch = true }
 
 return function(ButtonSurface)
-	-- upvalues: UseLocalUserIdFunction (copy), UseDispatchFunction (copy), UseNavigationFunction (copy), UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseShortUrlFunction (copy), UseGetOrGenerateLinkUrlFunction (copy), UseEffectOnceFunction (copy), ReactModule (copy), Text (copy), TextKeysModule (copy), UseLocalizationFunction (copy), EnumsModule (copy), FFlagProfilePlatformAddTC (copy), FFlagProfilePlatformEnableEditAppearanceMenuModule (copy), FFlagProfilePlatformEditBackgroundMenuItemModule (copy), FFlagProfilePlatformEnableEditLookModule (copy), FFlagJoinabilityCTARefactor (copy), FFlagProfilePlatformNewProfileHeader (copy), FFlagEnablePlatformProfileContextualMenuOption (copy), FFlagProfilePlatformEnableCurrencyTransfer (copy), FFlagProfilePlatformEnableTradeItemsModule (copy), FFlagProfilePlatformEnableUserFollowModule (copy), FFlagProfilePlatformPresenceStoreMigrationModule (copy), UseGetPresenceByUserId (copy), config (copy), FFlagProfilePlatformPassPresenceToJoinUserInExperience (copy), UseSelectorFunction (copy), PresenceModule (copy), UseAboutSectionsModule (copy), FFlagProfileAboutDetailsUseSheet (copy), FFlagProfilePlatformRefreshActionsRespectPoliciesModule (copy), UseActionsComponentRequestModule (copy), UseJoinUserInExperienceFunction (copy), UseProfileShareLinkFunction (copy), Contexts (copy), ProfileActionsModule (copy)
+	-- upvalues: UseLocalUserIdFunction (copy), UseDispatchFunction (copy), UseNavigationFunction (copy), UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseShortUrlFunction (copy), UseGetOrGenerateLinkUrlFunction (copy), UseEffectOnceFunction (copy), ReactModule (copy), Text (copy), TextKeysModule (copy), UseLocalizationFunction (copy), EnumsModule (copy), FFlagProfilePlatformAddTC (copy), FFlagProfilePlatformEnableEditAppearanceMenuModule (copy), FFlagProfilePlatformEditBackgroundMenuItemModule (copy), FFlagProfilePlatformEnableEditLookModule (copy), FFlagJoinabilityCTAContextCopy (copy), FFlagJoinabilityCTARefactor (copy), FFlagProfilePlatformNewProfileHeader (copy), FFlagEnablePlatformProfileContextualMenuOption (copy), FFlagProfilePlatformEnableCurrencyTransfer (copy), FFlagProfilePlatformEnableTradeItemsModule (copy), FFlagProfilePlatformEnableUserFollowModule (copy), FFlagProfilePlatformPresenceStoreMigrationModule (copy), UseGetPresenceByUserId (copy), config (copy), FFlagProfilePlatformPassPresenceToJoinUserInExperience (copy), UseSelectorFunction (copy), PresenceModule (copy), UseAboutSectionsModule (copy), FFlagProfileAboutDetailsUseSheet (copy), FFlagProfilePlatformRefreshActionsRespectPoliciesModule (copy), UseActionsComponentRequestModule (copy), UseJoinUserInExperienceFunction (copy), UseProfileShareLinkFunction (copy), Contexts (copy), ProfileActionsModule (copy)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseNavigationResult = UseNavigationFunction()
@@ -80,7 +81,7 @@ return function(ButtonSurface)
 		[EnumsModule.ProfileActions.EditProfile] = TextKeysModule.EditProfile,
 		[EnumsModule.ProfileActions.IgnoreFriendRequest] = TextKeysModule.IgnoreFriendRequest,
 		[EnumsModule.ProfileActions.JoinExperience] = TextKeysModule.Join,
-		[EnumsModule.ProfileActions.PlayExperience] = if FFlagJoinabilityCTARefactor then TextKeysModule.Play else nil,
+		[EnumsModule.ProfileActions.PlayExperience] = if FFlagJoinabilityCTAContextCopy then TextKeysModule.Play elseif FFlagJoinabilityCTARefactor then TextKeysModule.Join else nil,
 		[EnumsModule.ProfileActions.PendingFriendRequest] = TextKeysModule.PendingRequest,
 		[EnumsModule.ProfileActions.QrCode] = TextKeysModule.ToQRCode,
 		[EnumsModule.ProfileActions.Report] = TextKeysModule.Report,

@@ -16,6 +16,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local ShopItemFooterModule = require(InExperienceShop.Components.ShopItemFooter)
 local UseGamePassTrialRedemptionModule = require(InExperienceShop.Hooks.useGamePassTrialRedemption)
 local GetInExperienceShopStoreModule = require(InExperienceShop.Stores.getInExperienceShopStore)
+local ToUnifiedCategoryIdModule = require(InExperienceShop.Analytics.toUnifiedCategoryId)
 local SHOPITEMMEDIAHEIGHTSCALE = require(InExperienceShop.Components.computeShopRowTileWidths).SHOP_ITEM_MEDIA_HEIGHT_SCALE
 local FFlagEnableInExperienceShopUnifiedLoggingModule = require(InExperienceShop.Flags.FFlagEnableInExperienceShopUnifiedLogging)
 local FFlagEnableCategoryLoggingInShopModule = require(InExperienceShop.Flags.FFlagEnableCategoryLoggingInShop)
@@ -59,7 +60,7 @@ local function FreeTrialLabel(Frame)
 end
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), ReactModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), UseGamePassTrialRedemptionModule (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (copy), Parent (copy), InExperienceShop (copy), FFlagEnableCategoryLoggingInShopModule (copy), SessionService (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), FFlagEnableDiscountOnInShopTileModule (copy), FormatPriceModule (copy), View (copy), Image (copy), FFlagFixThumbnailBackgroundInExperienceShopModule (copy), SHOPITEMMEDIAHEIGHTSCALE (copy), TrialBadge (copy), Text (copy), FreeTrialLabel (copy), Icon (copy), ConstantsModule (copy), IconSize (copy), GetIconRichTextFunction (copy), Enums (copy), ShopItemFooterModule (copy)
+	-- upvalues: SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), ReactModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), UseGamePassTrialRedemptionModule (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (copy), Parent (copy), InExperienceShop (copy), ToUnifiedCategoryIdModule (copy), FFlagEnableCategoryLoggingInShopModule (copy), SessionService (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), FFlagEnableDiscountOnInShopTileModule (copy), FormatPriceModule (copy), View (copy), Image (copy), FFlagFixThumbnailBackgroundInExperienceShopModule (copy), SHOPITEMMEDIAHEIGHTSCALE (copy), TrialBadge (copy), Text (copy), FreeTrialLabel (copy), Icon (copy), ConstantsModule (copy), IconSize (copy), GetIconRichTextFunction (copy), Enums (copy), ShopItemFooterModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetInExperienceShopStoreModule)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(function(p1)
@@ -98,19 +99,21 @@ return ReactModule.memo(function(Frame)
 	local Available = if NoUseSignalStateResult1 then "available" elseif UseSignalStateResult3 and not UseSignalStateResult1 then "active" elseif UseSignalStateResult4 then "redeemed" else nil
 	local UseGamePassTrialRedemptionModuleResult = UseGamePassTrialRedemptionModule(Frame.itemId)
 	ReactModule.useEffect(function()
-		-- upvalues: FFlagEnableInExperienceShopUnifiedLoggingModule (upval), Parent (upval), InExperienceShop (upval), Frame (copy), FFlagEnableCategoryLoggingInShopModule (upval), UseRefResult (copy), SessionService (upval)
+		-- upvalues: FFlagEnableInExperienceShopUnifiedLoggingModule (upval), Parent (upval), InExperienceShop (upval), Frame (copy), ToUnifiedCategoryIdModule (upval), FFlagEnableCategoryLoggingInShopModule (upval), UseRefResult (copy), SessionService (upval)
 		if FFlagEnableInExperienceShopUnifiedLoggingModule then
 			task.defer(function()
-				-- upvalues: Parent (upval), InExperienceShop (upval), Frame (upval), FFlagEnableCategoryLoggingInShopModule (upval), UseRefResult (upval), SessionService (upval)
-				local AddUnifiedEventLoggingFunction: (any, any, any) -> () = require(Parent.AvatarExperienceAnalytics).addUnifiedEventLogging
+				-- upvalues: Parent (upval), InExperienceShop (upval), Frame (upval), ToUnifiedCategoryIdModule (upval), FFlagEnableCategoryLoggingInShopModule (upval), UseRefResult (upval), SessionService (upval)
+				local AvatarExperienceAnalyticsModule = require(Parent.AvatarExperienceAnalytics)
+				local AddUnifiedEventLoggingFunction: (any, any, any) -> () = AvatarExperienceAnalyticsModule.addUnifiedEventLogging
 				local ItemType = require(InExperienceShop.Utils.mapShopItemTypeToUnifiedItemType)(Frame.itemType)
 				
 				if ItemType ~= nil then
+					local FFlagAXUnifiedEventStrictPayloads = AvatarExperienceAnalyticsModule.Flags.FFlagAXUnifiedEventStrictPayloads
 					AddUnifiedEventLoggingFunction(UseRefResult, {
 						universeId = if Frame.universeId == nil then game.GameId else tonumber(Frame.universeId),
 						itemId = Frame.itemId,
 						itemType = ItemType,
-						categoryId = Frame.categoryId,
+						categoryId = if FFlagAXUnifiedEventStrictPayloads then ToUnifiedCategoryIdModule(Frame.categoryId) else Frame.categoryId,
 						gridPositionRow = Frame.gridPositionRow,
 						gridPositionColumn = Frame.gridPositionColumn,
 						categoryType = if FFlagEnableCategoryLoggingInShopModule then Frame.categoryType else nil,

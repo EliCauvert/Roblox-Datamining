@@ -1,4 +1,6 @@
 ﻿local Parent = script.Parent
+local SendPassthroughUnifiedEventLogModule = require(script.sendPassthroughUnifiedEventLog)
+local _ = require(script.Generated.UnifiedEventTypes)
 
 return {
 	AnalyticsService = require(script.AnalyticsService),
@@ -8,6 +10,8 @@ return {
 	useUnifiedEventListener = require(script.useUnifiedEventListener),
 	sendUnifiedEventLog = require(script.sendUnifiedEventLog),
 	sendUnifiedEventLogForInstance = require(script.sendUnifiedEventLogForInstance),
+	sendPassthroughUnifiedEventLog = SendPassthroughUnifiedEventLogModule.send,
+	sendPassthroughUnifiedEventLogForInstance = SendPassthroughUnifiedEventLogModule.sendForInstance,
 	logWidgetLoaded = require(script.logWidgetLoaded),
 	flushDeferredWidgetLoaded = require(script.flushDeferredWidgetLoaded),
 	sendUnifiedEventForDeferredAction = require(script.sendUnifiedEventForDeferredAction),
@@ -34,7 +38,8 @@ return {
 		FFlagAllowCustomUnifiedEventFilter = require(script.FFlagAllowCustomUnifiedEventFilter),
 		FFlagAXAvatarEditorServiceTelemetryV2 = require(Parent.AvatarExperienceFlags).FFlagAXAvatarEditorServiceTelemetryV2,
 		FFlagAXDeprecateAvatarEditorServiceTelemetryV1 = require(Parent.AvatarExperienceFlags).FFlagAXDeprecateAvatarEditorServiceTelemetryV1,
-		FFlagAXUnifiedEventCounters = require(Parent.AvatarExperienceFlags).FFlagAXUnifiedEventCounters
+		FFlagAXUnifiedEventCounters = require(Parent.AvatarExperienceFlags).FFlagAXUnifiedEventCounters,
+		FFlagAXUnifiedEventStrictPayloads = require(Parent.AvatarExperienceFlags).FFlagAXUnifiedEventStrictPayloads
 	},
 	reportBackgroundUserActionCounter = require(script.reportBackgroundUserActionCounter),
 	Enums = {
@@ -56,6 +61,10 @@ return {
 		UnifiedEventLoggingUtils = require(script.Utils.UnifiedEventLoggingUtils),
 		aliasSortAndFiltersToLegacyKeys = require(script.Utils.aliasSortAndFiltersToLegacyKeys),
 		getMarketplaceUnifiedItemType = require(script.Utils.getMarketplaceUnifiedItemType),
+		getMarketplaceUnifiedAssetType = require(script.Utils.getMarketplaceUnifiedAssetType),
+		getMarketplaceUnifiedBundleType = require(script.Utils.getMarketplaceUnifiedBundleType),
+		getMarketplaceUnifiedLookType = require(script.Utils.getMarketplaceUnifiedLookType),
+		getWidgetAttributionFields = require(script.Utils.getWidgetAttributionFields),
 		getTimedOptionForItemData = require(script.Utils.getTimedOptionForItemData),
 		getUnifiedEventsForMIS = require(script.Utils.getUnifiedEventsForMIS),
 		getUnifiedLoggingSurface = require(script.Utils.getUnifiedLoggingSurface),

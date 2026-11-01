@@ -129,16 +129,14 @@ local function ChildReconciler(p1)
 		end
 		local Sibling1 = Sibling
 		while Sibling1 ~= nil do
-			local Sibling2 = Sibling1
-			
 			if p1 then
 				local Deletions = p2.deletions
 				
 				if Deletions == nil then
-					p2.deletions = { Sibling2 }
+					p2.deletions = { Sibling1 }
 					p2.flags = bit32.bor(p2.flags, Deletion)
 				else
-					table.insert(Deletions, Sibling2)
+					table.insert(Deletions, Sibling1)
 				end
 			end
 			Sibling1 = Sibling1.sibling
@@ -707,18 +705,14 @@ local function ChildReconciler(p1)
 				Sibling1 = Sibling2
 				break
 			end
-			if p1 and Sibling1 and UpdateSlotResult.alternate == nil then
-				local Sibling3 = Sibling1
+			if p1 and Sibling1 and UpdateSlotResult.alternate == nil and p1 then
+				local Deletions = Return.deletions
 				
-				if p1 then
-					local Deletions = Return.deletions
-					
-					if Deletions == nil then
-						Return.deletions = { Sibling3 }
-						Return.flags = bit32.bor(Return.flags, Deletion)
-					else
-						table.insert(Deletions, Sibling3)
-					end
+				if Deletions == nil then
+					Return.deletions = { Sibling1 }
+					Return.flags = bit32.bor(Return.flags, Deletion)
+				else
+					table.insert(Deletions, Sibling1)
 				end
 			end
 			local v10: number = v9
@@ -753,26 +747,22 @@ local function ChildReconciler(p1)
 			Count += 1
 		end
 		if CountChildren < Count then
-			local Sibling4 = Sibling1
-			
 			if not p1 then
 				return v7
 			end
-			local Sibling5 = Sibling4
-			while Sibling5 ~= nil do
-				local Sibling6 = Sibling5
-				
+			local Sibling3 = Sibling1
+			while Sibling3 ~= nil do
 				if p1 then
 					local Deletions = Return.deletions
 					
 					if Deletions == nil then
-						Return.deletions = { Sibling6 }
+						Return.deletions = { Sibling3 }
 						Return.flags = bit32.bor(Return.flags, Deletion)
 					else
-						table.insert(Deletions, Sibling6)
+						table.insert(Deletions, Sibling3)
 					end
 				end
-				Sibling5 = Sibling5.sibling
+				Sibling3 = Sibling3.sibling
 			end
 			return v7
 		elseif Sibling1 == nil then
@@ -788,13 +778,13 @@ local function ChildReconciler(p1)
 					Child1.index = Count
 					
 					if p1 then
-						local Alternate1 = Child1.alternate
+						local Alternate = Child1.alternate
 						
-						if Alternate1 == nil then
+						if Alternate == nil then
 							Child1.flags = bit32.bor(Child1.flags, Placement)
 							v9 = v11
 						else
-							local Index = Alternate1.index
+							local Index = Alternate.index
 							
 							if Index < v11 then
 								Child1.flags = bit32.bor(Child1.flags, Placement)
@@ -820,7 +810,7 @@ local function ChildReconciler(p1)
 			local MapRemainingChildrenResult = mapRemainingChildren(Return, Sibling1)
 			while Count <= CountChildren do
 				local Child = Children[Count]
-				local UpdateFromMapResult = if v1 and (Child == nil or type(Child) ~= "table" or Child["$$typeof"] == nil) then updateFromMap(MapRemainingChildrenResult, Return, Count, Child, p5) else updateFromMap(MapRemainingChildrenResult, Return, Count, Child, p5, Count)
+				local UpdateFromMapResult = if v1 and (Child == nil or (type(Child) ~= "table" or Child["$$typeof"] == nil)) then updateFromMap(MapRemainingChildrenResult, Return, Count, Child, p5) else updateFromMap(MapRemainingChildrenResult, Return, Count, Child, p5, Count)
 				
 				if UpdateFromMapResult ~= nil then
 					if p1 and UpdateFromMapResult.alternate ~= nil then
@@ -917,18 +907,14 @@ local function ChildReconciler(p1)
 				Sibling1 = Sibling2
 				break
 			end
-			if p1 and Sibling1 and UpdateSlotResult.alternate == nil then
-				local Sibling3 = Sibling1
+			if p1 and Sibling1 and UpdateSlotResult.alternate == nil and p1 then
+				local Deletions = Return.deletions
 				
-				if p1 then
-					local Deletions1 = Return.deletions
-					
-					if Deletions1 == nil then
-						Return.deletions = { Sibling3 }
-						Return.flags = bit32.bor(Return.flags, Deletion)
-					else
-						table.insert(Deletions1, Sibling3)
-					end
+				if Deletions == nil then
+					Return.deletions = { Sibling1 }
+					Return.flags = bit32.bor(Return.flags, Deletion)
+				else
+					table.insert(Deletions, Sibling1)
 				end
 			end
 			local v19: number = v17
@@ -964,26 +950,22 @@ local function ChildReconciler(p1)
 			v18 = CallbackResult.next()
 		end
 		if v18.done then
-			local Sibling4 = Sibling1
-			
 			if not p1 then
 				return v15
 			end
-			local Sibling5 = Sibling4
-			while Sibling5 ~= nil do
-				local Sibling6 = Sibling5
-				
+			local Sibling3 = Sibling1
+			while Sibling3 ~= nil do
 				if p1 then
-					local Deletions2 = Return.deletions
+					local Deletions = Return.deletions
 					
-					if Deletions2 == nil then
-						Return.deletions = { Sibling6 }
+					if Deletions == nil then
+						Return.deletions = { Sibling3 }
 						Return.flags = bit32.bor(Return.flags, Deletion)
 					else
-						table.insert(Deletions2, Sibling6)
+						table.insert(Deletions, Sibling3)
 					end
 				end
-				Sibling5 = Sibling5.sibling
+				Sibling3 = Sibling3.sibling
 			end
 			return v15
 		elseif Sibling1 == nil then
@@ -1029,22 +1011,22 @@ local function ChildReconciler(p1)
 			end
 			return v15
 		else
-			local MapRemainingChildrenResult = nil
+			local v21 = nil
 			while not v18.done do
-				if not MapRemainingChildrenResult then
-					MapRemainingChildrenResult = mapRemainingChildren(Return, Sibling1)
+				if not v21 then
+					v21 = mapRemainingChildren(Return, Sibling1)
 				end
-				local UpdateFromMapResult = updateFromMap(MapRemainingChildrenResult, Return, Count, v18.value, p6, v18.key)
+				local UpdateFromMapResult = updateFromMap(v21, Return, Count, v18.value, p6, v18.key)
 				
 				if UpdateFromMapResult ~= nil then
 					if p1 and UpdateFromMapResult.alternate ~= nil then
 						if UpdateFromMapResult.key == nil then
-							MapRemainingChildrenResult[Count] = nil
+							v21[Count] = nil
 						else
-							MapRemainingChildrenResult[UpdateFromMapResult.key] = nil
+							v21[UpdateFromMapResult.key] = nil
 						end
 					end
-					local v21: number = v17
+					local v22: number = v17
 					UpdateFromMapResult.index = Count
 					
 					if p1 then
@@ -1052,19 +1034,19 @@ local function ChildReconciler(p1)
 						
 						if Alternate == nil then
 							UpdateFromMapResult.flags = bit32.bor(UpdateFromMapResult.flags, Placement)
-							v17 = v21
+							v17 = v22
 						else
 							local Index = Alternate.index
 							
-							if Index < v21 then
+							if Index < v22 then
 								UpdateFromMapResult.flags = bit32.bor(UpdateFromMapResult.flags, Placement)
-								v17 = v21
+								v17 = v22
 							else
 								v17 = Index
 							end
 						end
 					else
-						v17 = v21
+						v17 = v22
 					end
 					if v16 == nil then
 						v15 = UpdateFromMapResult
@@ -1077,7 +1059,7 @@ local function ChildReconciler(p1)
 				v18 = CallbackResult.next()
 			end
 			if p1 then
-				for _, value in MapRemainingChildrenResult do
+				for _, value in v21 do
 					if p1 then
 						local Deletions = Return.deletions
 						
@@ -1098,21 +1080,19 @@ local function ChildReconciler(p1)
 		-- upvalues: HostText (upval), p1 (copy), Deletion (upval), CreateWorkInProgressFunction (upval), ReactFeatureFlags (upval), CreateFiberFromTextFunction (upval)
 		if Sibling == nil or Sibling.tag ~= HostText then
 			if p1 then
-				local Sibling4 = Sibling
-				while Sibling4 ~= nil do
-					local Sibling5 = Sibling4
-					
+				local Sibling3 = Sibling
+				while Sibling3 ~= nil do
 					if p1 then
 						local Deletions = Return_.deletions
 						
 						if Deletions == nil then
-							Return_.deletions = { Sibling5 }
+							Return_.deletions = { Sibling3 }
 							Return_.flags = bit32.bor(Return_.flags, Deletion)
 						else
-							table.insert(Deletions, Sibling5)
+							table.insert(Deletions, Sibling3)
 						end
 					end
-					Sibling4 = Sibling4.sibling
+					Sibling3 = Sibling3.sibling
 				end
 			end
 			local FiberFromText = CreateFiberFromTextFunction(p7, Return_.mode, p8)
@@ -1125,16 +1105,14 @@ local function ChildReconciler(p1)
 			if p1 then
 				local Sibling2 = Sibling1
 				while Sibling2 ~= nil do
-					local Sibling3 = Sibling2
-					
 					if p1 then
 						local Deletions = Return_.deletions
 						
 						if Deletions == nil then
-							Return_.deletions = { Sibling3 }
+							Return_.deletions = { Sibling2 }
 							Return_.flags = bit32.bor(Return_.flags, Deletion)
 						else
-							table.insert(Deletions, Sibling3)
+							table.insert(Deletions, Sibling2)
 						end
 					end
 					Sibling2 = Sibling2.sibling
@@ -1164,24 +1142,22 @@ local function ChildReconciler(p1)
 			if Sibling1.key == Key then
 				if Sibling1.tag == Fragment then
 					if Children.type == REACTFRAGMENTTYPE then
-						local Sibling3 = Sibling1.sibling
+						local Sibling2 = Sibling1.sibling
 						
 						if p1 then
-							local Sibling5 = Sibling3
-							while Sibling5 ~= nil do
-								local Sibling6 = Sibling5
-								
+							local Sibling3 = Sibling2
+							while Sibling3 ~= nil do
 								if p1 then
 									local Deletions = Return_.deletions
 									
 									if Deletions == nil then
-										Return_.deletions = { Sibling6 }
+										Return_.deletions = { Sibling3 }
 										Return_.flags = bit32.bor(Return_.flags, Deletion)
 									else
-										table.insert(Deletions, Sibling6)
+										table.insert(Deletions, Sibling3)
 									end
 								end
-								Sibling5 = Sibling5.sibling
+								Sibling3 = Sibling3.sibling
 							end
 						end
 						local WorkInProgress = CreateWorkInProgressFunction(Sibling1, Children.props.children)
@@ -1203,24 +1179,22 @@ local function ChildReconciler(p1)
 						return WorkInProgress
 					end
 				elseif Sibling1.elementType == Children.type or DEV and IsCompatibleFamilyForHotReloadingFunction(Sibling1, Children) then
-					local Sibling7 = Sibling1.sibling
+					local Sibling4 = Sibling1.sibling
 					
 					if p1 then
-						local Sibling8 = Sibling7
-						while Sibling8 ~= nil do
-							local Sibling9 = Sibling8
-							
+						local Sibling5 = Sibling4
+						while Sibling5 ~= nil do
 							if p1 then
 								local Deletions = Return_.deletions
 								
 								if Deletions == nil then
-									Return_.deletions = { Sibling9 }
+									Return_.deletions = { Sibling5 }
 									Return_.flags = bit32.bor(Return_.flags, Deletion)
 								else
-									table.insert(Deletions, Sibling9)
+									table.insert(Deletions, Sibling5)
 								end
 							end
-							Sibling8 = Sibling8.sibling
+							Sibling5 = Sibling5.sibling
 						end
 					end
 					local WorkInProgress = CreateWorkInProgressFunction(Sibling1, Children.props)
@@ -1250,37 +1224,31 @@ local function ChildReconciler(p1)
 					end
 					return WorkInProgress
 				end
-				local Sibling4 = Sibling1
-				
 				if not p1 then break end
-				local Sibling10 = Sibling4
-				while Sibling10 ~= nil do
-					local Sibling11 = Sibling10
-					
+				local Sibling6 = Sibling1
+				while Sibling6 ~= nil do
 					if p1 then
 						local Deletions = Return_.deletions
 						
 						if Deletions == nil then
-							Return_.deletions = { Sibling11 }
+							Return_.deletions = { Sibling6 }
 							Return_.flags = bit32.bor(Return_.flags, Deletion)
 						else
-							table.insert(Deletions, Sibling11)
+							table.insert(Deletions, Sibling6)
 						end
 					end
-					Sibling10 = Sibling10.sibling
+					Sibling6 = Sibling6.sibling
 				end
 				break
 			end
-			local Sibling2 = Sibling1
-			
 			if p1 then
 				local Deletions = Return_.deletions
 				
 				if Deletions == nil then
-					Return_.deletions = { Sibling2 }
+					Return_.deletions = { Sibling1 }
 					Return_.flags = bit32.bor(Return_.flags, Deletion)
 				else
-					table.insert(Deletions, Sibling2)
+					table.insert(Deletions, Sibling1)
 				end
 			end
 			Sibling1 = Sibling1.sibling
@@ -1306,24 +1274,22 @@ local function ChildReconciler(p1)
 		while Sibling1 ~= nil do
 			if Sibling1.key == Key then
 				if Sibling1.tag == HostPortal and Sibling1.stateNode.containerInfo == Children.containerInfo and Sibling1.stateNode.implementation == Children.implementation then
-					local Sibling4 = Sibling1.sibling
+					local Sibling2 = Sibling1.sibling
 					
 					if p1 then
-						local Sibling5 = Sibling4
-						while Sibling5 ~= nil do
-							local Sibling6 = Sibling5
-							
+						local Sibling3 = Sibling2
+						while Sibling3 ~= nil do
 							if p1 then
 								local Deletions = Return_.deletions
 								
 								if Deletions == nil then
-									Return_.deletions = { Sibling6 }
+									Return_.deletions = { Sibling3 }
 									Return_.flags = bit32.bor(Return_.flags, Deletion)
 								else
-									table.insert(Deletions, Sibling6)
+									table.insert(Deletions, Sibling3)
 								end
 							end
-							Sibling5 = Sibling5.sibling
+							Sibling3 = Sibling3.sibling
 						end
 					end
 					local WorkInProgress = CreateWorkInProgressFunction(Sibling1, Children.children or {})
@@ -1340,38 +1306,32 @@ local function ChildReconciler(p1)
 					
 					return WorkInProgress
 				else
-					local Sibling3 = Sibling1
-					
 					if not p1 then break end
-					local Sibling7 = Sibling3
-					while Sibling7 ~= nil do
-						local Sibling8 = Sibling7
-						
+					local Sibling4 = Sibling1
+					while Sibling4 ~= nil do
 						if p1 then
 							local Deletions = Return_.deletions
 							
 							if Deletions == nil then
-								Return_.deletions = { Sibling8 }
+								Return_.deletions = { Sibling4 }
 								Return_.flags = bit32.bor(Return_.flags, Deletion)
 							else
-								table.insert(Deletions, Sibling8)
+								table.insert(Deletions, Sibling4)
 							end
 						end
-						Sibling7 = Sibling7.sibling
+						Sibling4 = Sibling4.sibling
 					end
 					break
 				end
 			end
-			local Sibling2 = Sibling1
-			
 			if p1 then
 				local Deletions = Return_.deletions
 				
 				if Deletions == nil then
-					Return_.deletions = { Sibling2 }
+					Return_.deletions = { Sibling1 }
 					Return_.flags = bit32.bor(Return_.flags, Deletion)
 				else
-					table.insert(Deletions, Sibling2)
+					table.insert(Deletions, Sibling1)
 				end
 			end
 			Sibling1 = Sibling1.sibling
@@ -1443,16 +1403,14 @@ local function ChildReconciler(p1)
 		end
 		local Sibling1 = Sibling
 		while Sibling1 ~= nil do
-			local Sibling2 = Sibling1
-			
 			if p1 then
 				local Deletions = Return.deletions
 				
 				if Deletions == nil then
-					Return.deletions = { Sibling2 }
+					Return.deletions = { Sibling1 }
 					Return.flags = bit32.bor(Return.flags, Deletion)
 				else
-					table.insert(Deletions, Sibling2)
+					table.insert(Deletions, Sibling1)
 				end
 			end
 			Sibling1 = Sibling1.sibling

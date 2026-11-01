@@ -343,11 +343,9 @@ v1 = (function()
 				Touch.EquipLabel.Position = IsPortrait and UDim2.new(0.5, -60, 0.75, 50) or UDim2.new(0.5, -60, 0.64, 0)
 				Touch.ZoomLabel.Position = IsPortrait and UDim2.new(0, 20, 0.02, 0) or UDim2.new(0.15, -60, 0.02, 0)
 			end
-			local config1 = config
-			
-			if config1 then
+			if config then
 				for i, value in pairs(Touch) do
-					value.Visible = not config1[i]
+					value.Visible = not config[i]
 				end
 			end
 		end

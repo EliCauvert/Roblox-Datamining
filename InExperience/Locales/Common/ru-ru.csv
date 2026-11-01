@@ -2114,6 +2114,8 @@ Feature.PlayerSearchResults.Label.You,Ты
 Feature.PlayerSearchResults.Label.YouAreFollowing,Твои подписки
 Feature.PlayerSearchResults.Label.YouAreFriends,Вы друзья
 Feature.PrivateServers.Action.CreatePrivateServer,Создать частный сервер
+Feature.PrivateServers.Heading.ConfigurePrivateServer,Настроить частный сервер
+Feature.PrivateServers.Label.ServerName,Название сервера:
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
 Feature.Profile.Action.Chat,

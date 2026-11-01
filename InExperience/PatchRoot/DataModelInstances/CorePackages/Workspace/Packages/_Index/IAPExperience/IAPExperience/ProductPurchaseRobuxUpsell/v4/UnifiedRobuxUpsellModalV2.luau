@@ -375,10 +375,10 @@ local function UnifiedRobuxUpsellModalV2(p1)
 		LayoutOrder = 3,
 		tag = "col align-x-center align-y-center gap-medium size-full-0 auto-y padding-x-xsmall padding-bottom-xxlarge padding-top-small"
 	}
-	local config6 = nil
+	local Elements = nil
 	
 	if GetFFlagIAPExperienceEnableMultiDisplayUpsellModule() then
-		local Elements = {}
+		Elements = {}
 		
 		for LayoutOrder, upsellSuggestion in ipairs(p1.upsellSuggestions) do
 			Elements["UpsellPackage" .. tostring(LayoutOrder)] = ReactModule.createElement(UpsellProductDetails, {
@@ -393,9 +393,8 @@ local function UnifiedRobuxUpsellModalV2(p1)
 				badgeType = upsellSuggestion.badgeType
 			})
 		end
-		config6 = Elements
 	else
-		config6 = {
+		Elements = {
 			UpsellPackage1 = ReactModule.createElement(UpsellProductDetails, {
 				layoutOrder = 1,
 				product = p1.upsellSuggestions[1],
@@ -419,7 +418,7 @@ local function UnifiedRobuxUpsellModalV2(p1)
 			}) else nil
 		}
 	end
-	config4.UpsellSuggestions = CreateElementFunction(View, config5, config6)
+	config4.UpsellSuggestions = CreateElementFunction(View, config5, Elements)
 	t.ContentView = CreateElementFunction2(View, config3, config4)
 	config2.DialogContent = CreateElementFunction3(Content, v1, t)
 	config2.DialogActions = if OnRobloxPlusButtonActivated then ReactModule.createElement(ButtonGroup, {

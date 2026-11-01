@@ -185,39 +185,39 @@ return function(p1)
 		UseStateResult2(true)
 	end, {})
 	local UseStateResult1_1 = UseStateResult1 or getQuotaBlockReason(UseSignalStateResult1)
-	local DailyLimitTitle = UseLocalizationResult.buyMoreTitle
-	local DailyLimitDescription = UseLocalizationResult.buyMoreDescription
-	local AdjustLimit = UseLocalizationResult.buyRobux
+	local FreeTrialTitle = UseLocalizationResult.buyMoreTitle
+	local FreeTrialDescription = UseLocalizationResult.buyMoreDescription
+	local FreeTrialAction = UseLocalizationResult.buyRobux
 	local NotNow = UseLocalizationResult.viewUsage
 	local OnBuyMoreRobuxCardPrimaryAction = UseOpenBuyRobuxWebViewModuleResult
 	local OnBuyMoreRobuxCardSecondaryAction = UseResult1
 	
 	if UseStateResult1_1 == "FreeTrialExhausted" then
-		DailyLimitTitle = UseLocalizationResult.freeTrialTitle
-		DailyLimitDescription = UseLocalizationResult.freeTrialDescription
-		AdjustLimit = UseLocalizationResult.freeTrialAction
+		FreeTrialTitle = UseLocalizationResult.freeTrialTitle
+		FreeTrialDescription = UseLocalizationResult.freeTrialDescription
+		FreeTrialAction = UseLocalizationResult.freeTrialAction
 		NotNow = UseLocalizationResult.notNow
 		OnBuyMoreRobuxCardPrimaryAction = UseResult1
 		OnBuyMoreRobuxCardSecondaryAction = UseResult2
 	elseif UseStateResult1_1 == "DailyLimitReached" then
-		DailyLimitTitle = UseLocalizationResult.dailyLimitTitle
-		DailyLimitDescription = UseLocalizationResult.dailyLimitDescription
-		AdjustLimit = UseLocalizationResult.adjustLimit
+		FreeTrialTitle = UseLocalizationResult.dailyLimitTitle
+		FreeTrialDescription = UseLocalizationResult.dailyLimitDescription
+		FreeTrialAction = UseLocalizationResult.adjustLimit
 		NotNow = UseLocalizationResult.notNow
 		OnBuyMoreRobuxCardPrimaryAction = UseResult1
 		OnBuyMoreRobuxCardSecondaryAction = UseResult2
 	elseif UseStateResult1_1 == "InsufficientRobuxBalance" and Value ~= nil then
-		DailyLimitTitle = UseLocalizationResult.insufficientTitle
-		DailyLimitDescription = UseLocalizationResult.insufficientDescription
-		AdjustLimit = UseLocalizationResult.modelBuyRobux
+		FreeTrialTitle = UseLocalizationResult.insufficientTitle
+		FreeTrialDescription = UseLocalizationResult.insufficientDescription
+		FreeTrialAction = UseLocalizationResult.modelBuyRobux
 		NotNow = UseLocalizationResult.notNow
 		OnBuyMoreRobuxCardSecondaryAction = UseResult2
 	end
 	return {
 		showBuyMoreRobuxCard = UseStateResult1_1 ~= nil and (not UseStateResult and p1.onOpenCreatorCreditPage ~= nil),
-		buyMoreRobuxCardTitle = DailyLimitTitle,
-		buyMoreRobuxCardDescription = DailyLimitDescription,
-		buyMoreRobuxCardPrimaryActionText = AdjustLimit,
+		buyMoreRobuxCardTitle = FreeTrialTitle,
+		buyMoreRobuxCardDescription = FreeTrialDescription,
+		buyMoreRobuxCardPrimaryActionText = FreeTrialAction,
 		onBuyMoreRobuxCardPrimaryAction = OnBuyMoreRobuxCardPrimaryAction,
 		buyMoreRobuxCardSecondaryActionText = NotNow,
 		onBuyMoreRobuxCardSecondaryAction = OnBuyMoreRobuxCardSecondaryAction

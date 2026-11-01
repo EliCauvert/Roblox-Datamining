@@ -57,15 +57,14 @@ return function(Frame)
 	local XDelta = X - 4 * (ClampedValue1 - 1)
 	local Smallest = math.min(XDelta / ClampedValue1, XDelta)
 	local _Vector2 = Vector2.new(math.floor(Smallest), (math.floor(Smallest * ClampedValue)))
-	local ItemSize: Vector2 = _Vector2
 	local Largest = nil
 	
 	if YDelta <= 0 then
 		Largest = 0
 	else
-		local Floored = math.floor(YDelta / ItemSize.Y)
+		local Floored = math.floor(YDelta / _Vector2.Y)
 		
-		if YDelta < ItemSize.Y * Floored + (Floored - 1) * 4 then
+		if YDelta < _Vector2.Y * Floored + (Floored - 1) * 4 then
 			Floored -= 1
 		end
 		Largest = math.max(Floored * math.clamp(math.floor(X / 120), 1, 4), 8)
@@ -76,14 +75,13 @@ return function(Frame)
 		local XDeltaDelta = XDelta1 - 4 * (ClampedValue2 - 1)
 		local Smallest1 = math.min(XDeltaDelta / ClampedValue2, XDeltaDelta)
 		_Vector2 = Vector2.new(math.floor(Smallest1), (math.floor(Smallest1 * ClampedValue)))
-		local ItemSize1: Vector2 = _Vector2
 		
 		if YDelta <= 0 then
 			Largest = 0
 		else
-			local Floored = math.floor(YDelta / ItemSize1.Y)
+			local Floored = math.floor(YDelta / _Vector2.Y)
 			
-			if YDelta < ItemSize1.Y * Floored + (Floored - 1) * 4 then
+			if YDelta < _Vector2.Y * Floored + (Floored - 1) * 4 then
 				Floored -= 1
 			end
 			Largest = math.max(Floored * math.clamp(math.floor(XDelta1 / 120), 1, 4), 8)

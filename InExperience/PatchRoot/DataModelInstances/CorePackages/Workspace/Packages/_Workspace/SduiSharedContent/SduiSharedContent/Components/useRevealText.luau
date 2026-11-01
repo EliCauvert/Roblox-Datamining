@@ -44,10 +44,8 @@ local _ = function(List1, List, p2)
 	for i = #p2, 1, -1 do
 		Joined ..= `</{p2[i]}>`
 	end
-	local Joined1: string = Joined
-	
-	if Joined1 ~= List1[#List1] then
-		table.insert(List1, Joined1)
+	if Joined ~= List1[#List1] then
+		table.insert(List1, Joined)
 	end
 end
 
@@ -74,10 +72,8 @@ local function buildRevealTextFrames(Text: string, Delimiter, RichText, RemoveDe
 				for i1 = #List2, 1, -1 do
 					Joined1 ..= `</{List2[i1]}>`
 				end
-				local Joined2: string = Joined1
-				
-				if Joined2 ~= List[#List] then
-					table.insert(List, Joined2)
+				if Joined1 ~= List[#List] then
+					table.insert(List, Joined1)
 				end
 				Flag = false
 			end
@@ -116,10 +112,8 @@ local function buildRevealTextFrames(Text: string, Delimiter, RichText, RemoveDe
 	for i = #List2, 1, -1 do
 		Joined ..= `</{List2[i]}>`
 	end
-	local Joined3: string = Joined
-	
-	if Joined3 ~= List[#List] then
-		table.insert(List, Joined3)
+	if Joined ~= List[#List] then
+		table.insert(List, Joined)
 	end
 	return List
 end

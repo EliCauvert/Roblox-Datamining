@@ -486,24 +486,23 @@ function Module1:_fireStatsTracking(Tbl)
 	if not CountersEnabled and not EventStreamEnabled or not IntervalName then return end
 	if AverageFPS then
 		local Text = "IntervalPerformanceTracker_" .. "AverageFPS" .. "_" .. IntervalName
-		local Copy1 = nil
+		local Copy = nil
 		
 		if IntervalPerformanceTrackerScrollPositionSamples then
-			local Copy = table.clone(Tbl)
+			Copy = table.clone(Tbl)
 			
 			for _, value in list do
 				Copy[value] = nil
 			end
-			Copy1 = Copy
 		else
-			Copy1 = table.clone(Tbl)
+			Copy = table.clone(Tbl)
 		end
-		Copy1.duration = AverageFPS
-		Copy1.averageFps = if AXFixAverageFPSCasing then AverageFPS else nil
+		Copy.duration = AverageFPS
+		Copy.averageFps = if AXFixAverageFPSCasing then AverageFPS else nil
 		SendFPSStatModule({
 			statName = Text,
 			eventStreamName = IntervalName,
-			metaData = Copy1,
+			metaData = Copy,
 			interval = AverageFPS,
 			excludeCounters = not CountersEnabled,
 			excludeEventStream = not EventStreamEnabled
@@ -511,43 +510,37 @@ function Module1:_fireStatsTracking(Tbl)
 	end
 	if FramesCount and CountersEnabled then
 		local Text = "IntervalPerformanceTracker_" .. "FramesCount" .. "_" .. IntervalName
-		local Copy2 = nil
+		local Copy = nil
 		
 		if IntervalPerformanceTrackerScrollPositionSamples then
-			local Copy = table.clone(Tbl)
+			Copy = table.clone(Tbl)
 			
 			for _, value1 in list do
 				Copy[value1] = nil
 			end
-			Copy2 = Copy
 		else
-			Copy2 = table.clone(Tbl)
+			Copy = table.clone(Tbl)
 		end
-		Copy2.duration = FramesCount
-		SendFPSStatModule({
-			statName = Text,
-			metaData = Copy2,
-			interval = FramesCount
-		})
+		Copy.duration = FramesCount
+		SendFPSStatModule({ statName = Text, metaData = Copy, interval = FramesCount })
 	end
 	if LongestFrameTime and Interval._countersEnabled then
 		local Text = "IntervalPerformanceTracker_" .. "LongestFrameTime" .. "_" .. IntervalName
-		local Copy3 = nil
+		local Copy = nil
 		
 		if IntervalPerformanceTrackerScrollPositionSamples then
-			local Copy = table.clone(Tbl)
+			Copy = table.clone(Tbl)
 			
 			for _, value2 in list do
 				Copy[value2] = nil
 			end
-			Copy3 = Copy
 		else
-			Copy3 = table.clone(Tbl)
+			Copy = table.clone(Tbl)
 		end
-		Copy3.duration = LongestFrameTime
+		Copy.duration = LongestFrameTime
 		SendFPSStatModule({
 			statName = Text,
-			metaData = Copy3,
+			metaData = Copy,
 			interval = LongestFrameTime
 		})
 	end

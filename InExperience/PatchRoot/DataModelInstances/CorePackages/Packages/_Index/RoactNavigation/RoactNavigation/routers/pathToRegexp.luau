@@ -11,11 +11,11 @@ local Callback1 = nil
 
 local function lexer(Text: string)
 	local List1 = {}
-	local StartIndex1 = 1
+	local StartIndex2 = 1
 	
 	local function _(p1)
-		-- upvalues: StartIndex1 (ref)
-		StartIndex1 += 1
+		-- upvalues: StartIndex2 (ref)
+		StartIndex2 += 1
 		
 		return p1
 	end
@@ -27,46 +27,46 @@ local function lexer(Text: string)
 	
 	local Length = string.len(Text)
 	local Count = nil
-	while StartIndex1 <= Length do
-		local Segment = string.sub(Text, StartIndex1, StartIndex1)
+	while StartIndex2 <= Length do
+		local Segment = string.sub(Text, StartIndex2, StartIndex2)
 		
 		if Segment == "*" or Segment == "+" or Segment == "?" then
-			local StartIndex: number = StartIndex1
-			StartIndex1 += 1
+			local StartIndex4: number = StartIndex2
+			StartIndex2 += 1
 			table.insert(List1, {
 				type = "MODIFIER",
-				index = StartIndex1,
-				value = string.sub(Text, StartIndex, StartIndex)
+				index = StartIndex2,
+				value = string.sub(Text, StartIndex4, StartIndex4)
 			})
 		elseif Segment == "\\" then
-			local Index: number = StartIndex1
-			StartIndex1 += 1
-			local StartIndex4: number = StartIndex1
-			StartIndex1 += 1
+			local Index: number = StartIndex2
+			StartIndex2 += 1
+			local StartIndex3: number = StartIndex2
+			StartIndex2 += 1
 			table.insert(List1, {
 				type = "ESCAPED_CHAR",
 				index = Index,
-				value = string.sub(Text, StartIndex4, StartIndex4)
+				value = string.sub(Text, StartIndex3, StartIndex3)
 			})
 		elseif Segment == "{" then
-			local StartIndex5: number = StartIndex1
-			StartIndex1 += 1
+			local StartIndex5: number = StartIndex2
+			StartIndex2 += 1
 			table.insert(List1, {
 				type = "OPEN",
-				index = StartIndex1,
+				index = StartIndex2,
 				value = string.sub(Text, StartIndex5, StartIndex5)
 			})
 		elseif Segment == "}" then
-			local StartIndex3: number = StartIndex1
-			StartIndex1 += 1
+			local StartIndex: number = StartIndex2
+			StartIndex2 += 1
 			table.insert(List1, {
 				type = "CLOSE",
-				index = StartIndex1,
-				value = string.sub(Text, StartIndex3, StartIndex3)
+				index = StartIndex2,
+				value = string.sub(Text, StartIndex, StartIndex)
 			})
 		elseif Segment == ":" then
 			local Text1 = ""
-			local NewStartIndex = StartIndex1 + 1
+			local NewStartIndex = StartIndex2 + 1
 			
 			local _ = function(p1)
 				-- upvalues: NewStartIndex (ref)
@@ -78,22 +78,22 @@ local function lexer(Text: string)
 				local ByteValue = string.byte(Text, NewStartIndex)
 				
 				if (ByteValue < 48 or ByteValue > 57) and (ByteValue < 65 or ByteValue > 90) and (ByteValue < 97 or ByteValue > 122) and ByteValue ~= 95 then break end
-				local StartIndex8: number = NewStartIndex
+				local StartIndex1: number = NewStartIndex
 				NewStartIndex += 1
-				Text1 ..= string.sub(Text, StartIndex8, StartIndex8)
+				Text1 ..= string.sub(Text, StartIndex1, StartIndex1)
 			end
 			if Text1 == "" then
-				error((("Missing parameter name at %d"):format(StartIndex1)))
+				error((("Missing parameter name at %d"):format(StartIndex2)))
 			end
-			table.insert(List1, { type = "NAME", index = StartIndex1, value = Text1 })
-			StartIndex1 = NewStartIndex
+			table.insert(List1, { type = "NAME", index = StartIndex2, value = Text1 })
+			StartIndex2 = NewStartIndex
 		elseif Segment == "(" then
 			local Count1 = 1
 			local NewStartIndex = ""
-			Count = StartIndex1 + 1
-			local StartIndex11: number = Count
+			Count = StartIndex2 + 1
+			local StartIndex7: number = Count
 			
-			if string.sub(Text, StartIndex11, StartIndex11) == "?" then
+			if string.sub(Text, StartIndex7, StartIndex7) == "?" then
 				error((("Pattern cannot start with \"?\" at %d"):format(Count)))
 			end
 			local _ = function(p1)
@@ -103,19 +103,19 @@ local function lexer(Text: string)
 				return p1
 			end
 			while Count <= Length do
-				local StartIndex6: number = Count
+				local StartIndex11: number = Count
 				
-				if string.sub(Text, StartIndex6, StartIndex6) == "\\" then
+				if string.sub(Text, StartIndex11, StartIndex11) == "\\" then
+					local StartIndex12: number = Count
+					Count += 1
+					local Segment1 = string.sub(Text, StartIndex12, StartIndex12)
 					local StartIndex13: number = Count
 					Count += 1
-					local Segment1 = string.sub(Text, StartIndex13, StartIndex13)
-					local StartIndex7: number = Count
-					Count += 1
-					NewStartIndex ..= Segment1 .. string.sub(Text, StartIndex7, StartIndex7)
+					NewStartIndex ..= Segment1 .. string.sub(Text, StartIndex13, StartIndex13)
 				end
-				local StartIndex14: number = Count
+				local StartIndex8: number = Count
 				
-				if string.sub(Text, StartIndex14, StartIndex14) == ")" then
+				if string.sub(Text, StartIndex8, StartIndex8) == ")" then
 					Count1 -= 1
 					
 					if Count1 == 0 then
@@ -127,42 +127,42 @@ local function lexer(Text: string)
 					
 					if string.sub(Text, StartIndex10, StartIndex10) == "(" then
 						Count1 += 1
-						local StartIndex2 = Count + 1
+						local StartIndex14 = Count + 1
 						
-						if string.sub(Text, StartIndex2, StartIndex2) ~= "?" then
+						if string.sub(Text, StartIndex14, StartIndex14) ~= "?" then
 							error((("Capturing groups are not allowed at %d"):format(Count)))
 						end
 					end
 				end
-				local StartIndex9: number = Count
+				local StartIndex6: number = Count
 				Count += 1
-				NewStartIndex ..= string.sub(Text, StartIndex9, StartIndex9)
+				NewStartIndex ..= string.sub(Text, StartIndex6, StartIndex6)
 			end
 			if Count1 ~= 0 then
-				error((("Unbalanced pattern at %d"):format(StartIndex1)))
+				error((("Unbalanced pattern at %d"):format(StartIndex2)))
 			end
 			if NewStartIndex == "" then
-				error((("Missing pattern at %d"):format(StartIndex1)))
+				error((("Missing pattern at %d"):format(StartIndex2)))
 			end
 			table.insert(List1, {
 				type = "PATTERN",
-				index = StartIndex1,
+				index = StartIndex2,
 				value = NewStartIndex
 			})
-			StartIndex1 = Count
+			StartIndex2 = Count
 		else
-			local StartIndex12: number = StartIndex1
-			StartIndex1 += 1
+			local StartIndex9: number = StartIndex2
+			StartIndex2 += 1
 			Count = {
 				type = "CHAR",
-				index = StartIndex1,
-				value = string.sub(Text, StartIndex12, StartIndex12)
+				index = StartIndex2,
+				value = string.sub(Text, StartIndex9, StartIndex9)
 			}
 			local NewStartIndex = List1
 			table.insert(NewStartIndex, Count)
 		end
 	end
-	table.insert(List1, { type = "END", value = "", index = StartIndex1 })
+	table.insert(List1, { type = "END", value = "", index = StartIndex2 })
 	
 	return List1
 end
@@ -310,9 +310,8 @@ local PathToRegexpModule = {
 				local Name: number = v2
 				
 				if v2 == nil or v2 == "" then
-					local Count5: number = Count
+					Name = Count
 					Count += 1
-					Name = Count5
 				end
 				local config = {
 					suffix = "",
@@ -323,9 +322,9 @@ local PathToRegexpModule = {
 				local v4 = nil
 				
 				if Count1 <= #LexerResult and LexerResult[Count1].type == "MODIFIER" then
-					local Count6: number = Count1
+					local Count5: number = Count1
 					Count1 += 1
-					v4 = LexerResult[Count6].value
+					v4 = LexerResult[Count5].value
 				else
 					v4 = nil
 				end
@@ -336,9 +335,9 @@ local PathToRegexpModule = {
 				
 				if not v5 then
 					if Count1 <= #LexerResult and LexerResult[Count1].type == "ESCAPED_CHAR" then
-						local Count8: number = Count1
+						local Count7: number = Count1
 						Count1 += 1
-						v5 = LexerResult[Count8].value
+						v5 = LexerResult[Count7].value
 					else
 						v5 = nil
 					end
@@ -352,9 +351,9 @@ local PathToRegexpModule = {
 					end
 					local v6 = nil
 					if Count1 <= #LexerResult and LexerResult[Count1].type == "OPEN" then
-						local Count9: number = Count1
+						local Count8: number = Count1
 						Count1 += 1
-						v6 = LexerResult[Count9].value
+						v6 = LexerResult[Count8].value
 					else
 						v6 = nil
 					end
@@ -363,51 +362,50 @@ local PathToRegexpModule = {
 						local v7 = nil
 						
 						if Count1 <= #LexerResult and LexerResult[Count1].type == "NAME" then
-							local Count10: number = Count1
+							local Count9: number = Count1
 							Count1 += 1
-							v7 = LexerResult[Count10].value
+							v7 = LexerResult[Count9].value
 						else
 							v7 = nil
 						end
-						local V54 = v7 or ""
+						local Name = v7 or ""
 						local v8 = nil
 						
 						if Count1 <= #LexerResult and LexerResult[Count1].type == "PATTERN" then
-							local Count11: number = Count1
+							local Count10: number = Count1
 							Count1 += 1
-							v8 = LexerResult[Count11].value
+							v8 = LexerResult[Count10].value
 						else
 							v8 = nil
 						end
-						local Pattern1 = v8 or ""
+						local V43 = v8 or ""
 						local ConsumeTextResult1: string = consumeText()
 						mustConsume("CLOSE")
 						
-						if V54 == "" and Pattern1 ~= "" then
-							local Count12: number = Count
+						if Name == "" and V43 ~= "" then
+							Name = Count
 							Count += 1
-							V54 = Count12
 						end
-						if V54 ~= "" and V54 ~= 0 and (Pattern1 == nil or Pattern1 == "") then
-							Pattern1 = Formatted
+						if Name ~= "" and Name ~= 0 and (V43 == nil or V43 == "") then
+							V43 = Formatted
 						end
-						local config = {
-							name = V54,
-							pattern = Pattern1,
+						local config1 = {
+							name = Name,
+							pattern = V43,
 							prefix = ConsumeTextResult,
 							suffix = ConsumeTextResult1
 						}
 						local Value = nil
 						
 						if Count1 <= #LexerResult and LexerResult[Count1].type == "MODIFIER" then
-							local Count7: number = Count1
+							local Count6: number = Count1
 							Count1 += 1
-							Value = LexerResult[Count7].value
+							Value = LexerResult[Count6].value
 						else
 							Value = nil
 						end
-						config.modifier = Value or ""
-						table.insert(List, config)
+						config1.modifier = Value or ""
+						table.insert(List, config1)
 					else
 						mustConsume("END")
 					end

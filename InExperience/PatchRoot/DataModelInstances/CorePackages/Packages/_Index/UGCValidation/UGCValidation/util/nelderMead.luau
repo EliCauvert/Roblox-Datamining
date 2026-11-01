@@ -55,14 +55,13 @@ function NelderMeadModule:evaluate()
 				ObjectResult = self.objectFunction(A)
 				ObjectResults[A] = ObjectResult
 			end
-			local ObjectResult1 = ObjectResult
-			local ObjectResult2 = ObjectResults[B]
+			local ObjectResult1 = ObjectResults[B]
 			
-			if not ObjectResult2 then
-				ObjectResult2 = self.objectFunction(B)
-				ObjectResults[B] = ObjectResult2
+			if not ObjectResult1 then
+				ObjectResult1 = self.objectFunction(B)
+				ObjectResults[B] = ObjectResult1
 			end
-			return ObjectResult1 < ObjectResult2
+			return ObjectResult < ObjectResult1
 		end)
 		local SimplexEntry = Simplex[#Simplex]
 		local List = {}
@@ -83,35 +82,34 @@ function NelderMeadModule:evaluate()
 			ObjectResult = self.objectFunction(NewSimplexEntry)
 			ObjectResults[NewSimplexEntry] = ObjectResult
 		end
-		local ObjectResult1 = ObjectResult
 		local SimplexEntry1 = Simplex[1]
-		local ObjectResult2 = ObjectResults[SimplexEntry1]
+		local ObjectResult1 = ObjectResults[SimplexEntry1]
 		
-		if not ObjectResult2 then
-			ObjectResult2 = self.objectFunction(SimplexEntry1)
-			ObjectResults[SimplexEntry1] = ObjectResult2
+		if not ObjectResult1 then
+			ObjectResult1 = self.objectFunction(SimplexEntry1)
+			ObjectResults[SimplexEntry1] = ObjectResult1
 		end
-		if ObjectResult2 < ObjectResult1 then
+		if ObjectResult1 < ObjectResult then
 			local SimplexEntry2 = Simplex[#Simplex - 1]
-			local ObjectResult3 = ObjectResults[SimplexEntry2]
+			local ObjectResult2 = ObjectResults[SimplexEntry2]
 			
-			if not ObjectResult3 then
-				ObjectResult3 = self.objectFunction(SimplexEntry2)
-				ObjectResults[SimplexEntry2] = ObjectResult3
+			if not ObjectResult2 then
+				ObjectResult2 = self.objectFunction(SimplexEntry2)
+				ObjectResults[SimplexEntry2] = ObjectResult2
 			end
-			if ObjectResult1 < ObjectResult3 then
+			if ObjectResult < ObjectResult2 then
 				Simplex[#Simplex] = NewSimplexEntry
 				continue
 			end
 		end
 		local SimplexEntry3 = Simplex[1]
-		local ObjectResult21 = ObjectResults[SimplexEntry3]
+		local ObjectResult3 = ObjectResults[SimplexEntry3]
 		
-		if not ObjectResult21 then
-			ObjectResult21 = self.objectFunction(SimplexEntry3)
-			ObjectResults[SimplexEntry3] = ObjectResult21
+		if not ObjectResult3 then
+			ObjectResult3 = self.objectFunction(SimplexEntry3)
+			ObjectResults[SimplexEntry3] = ObjectResult3
 		end
-		if ObjectResult1 < ObjectResult21 then
+		if ObjectResult < ObjectResult3 then
 			local NewNewSimplexEntry = NewSimplexEntry + NewFloatVectorDelta
 			local ObjectResult4 = ObjectResults[NewNewSimplexEntry]
 			
@@ -119,7 +117,7 @@ function NelderMeadModule:evaluate()
 				ObjectResult4 = self.objectFunction(NewNewSimplexEntry)
 				ObjectResults[NewNewSimplexEntry] = ObjectResult4
 			end
-			if ObjectResult4 < ObjectResult1 then
+			if ObjectResult4 < ObjectResult then
 				Simplex[#Simplex] = NewNewSimplexEntry
 			else
 				Simplex[#Simplex] = NewSimplexEntry
@@ -127,35 +125,33 @@ function NelderMeadModule:evaluate()
 		else
 			local NewSimplexEntry1 = SimplexEntry + NewFloatVectorDelta * 0.5
 			local NewSimplexEntry2 = SimplexEntry + NewFloatVectorDelta * 1.5
-			local ObjectResult3 = ObjectResults[NewSimplexEntry1]
+			local ObjectResult5 = ObjectResults[NewSimplexEntry1]
 			
-			if not ObjectResult3 then
-				ObjectResult3 = self.objectFunction(NewSimplexEntry1)
-				ObjectResults[NewSimplexEntry1] = ObjectResult3
+			if not ObjectResult5 then
+				ObjectResult5 = self.objectFunction(NewSimplexEntry1)
+				ObjectResults[NewSimplexEntry1] = ObjectResult5
 			end
-			local ObjectResult5 = ObjectResult3
-			local ObjectResult4 = ObjectResults[NewSimplexEntry2]
-			
-			if not ObjectResult4 then
-				ObjectResult4 = self.objectFunction(NewSimplexEntry2)
-				ObjectResults[NewSimplexEntry2] = ObjectResult4
-			end
-			local NewSimplexEntry3 = if ObjectResult5 < ObjectResult4 then NewSimplexEntry1 else NewSimplexEntry2
-			local ObjectResult6 = ObjectResults[NewSimplexEntry3]
+			local ObjectResult6 = ObjectResults[NewSimplexEntry2]
 			
 			if not ObjectResult6 then
-				ObjectResult6 = self.objectFunction(NewSimplexEntry3)
-				ObjectResults[NewSimplexEntry3] = ObjectResult6
+				ObjectResult6 = self.objectFunction(NewSimplexEntry2)
+				ObjectResults[NewSimplexEntry2] = ObjectResult6
 			end
-			local ObjectResult51 = ObjectResult6
-			local SimplexEntry4 = Simplex[#Simplex - 1]
-			local ObjectResult7 = ObjectResults[SimplexEntry4]
+			local NewSimplexEntry3 = if ObjectResult5 < ObjectResult6 then NewSimplexEntry1 else NewSimplexEntry2
+			local ObjectResult7 = ObjectResults[NewSimplexEntry3]
 			
 			if not ObjectResult7 then
-				ObjectResult7 = self.objectFunction(SimplexEntry4)
-				ObjectResults[SimplexEntry4] = ObjectResult7
+				ObjectResult7 = self.objectFunction(NewSimplexEntry3)
+				ObjectResults[NewSimplexEntry3] = ObjectResult7
 			end
-			if ObjectResult51 < ObjectResult7 then
+			local SimplexEntry4 = Simplex[#Simplex - 1]
+			local ObjectResult61 = ObjectResults[SimplexEntry4]
+			
+			if not ObjectResult61 then
+				ObjectResult61 = self.objectFunction(SimplexEntry4)
+				ObjectResults[SimplexEntry4] = ObjectResult61
+			end
+			if ObjectResult7 < ObjectResult61 then
 				Simplex[#Simplex] = NewSimplexEntry3
 			else
 				for i1 = 1, #Simplex do

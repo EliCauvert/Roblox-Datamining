@@ -10,93 +10,72 @@ local GetFFlagFixSettingshubImportOrderModule = require(Modules.Flags.GetFFlagFi
 local SettingsHubModule = if GetFFlagFixSettingshubImportOrderModule() then nil else require(Settings.SettingsHub)
 local GetFFlagEnableNewInviteMenuCustomizationModule = require(Modules.Flags.GetFFlagEnableNewInviteMenuCustomization)
 local GetFFlagEnableInvitePromptLoadingStateModule = require(Modules.Flags.GetFFlagEnableInvitePromptLoadingState)
-local GetFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule = require(Modules.Flags.GetFFlagLuaInExperienceCoreScriptsGameInviteUnification)
-local LuaEnableGameInviteModalInvitePromptV2 = game:DefineFastFlag("LuaEnableGameInviteModalInvitePromptV2", false)
-local Diag = require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.Diag
-local EventStream = require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.EventStream
 local GameInviteAnalytics = require(CorePackages.Workspace.Packages.GameInvite).GameInviteAnalytics
-local GameInviteModalManager = nil
-local GetCustomizedInvitePromptTriggerFunction = nil
-local GameInviteConstants = nil
-local GameInviteAnalyticsManager = nil
-
-if GetFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule() then
-	local GameInviteModule = require(CorePackages.Workspace.Packages.GameInvite)
-	GameInviteModalManager = GameInviteModule.GameInviteModalManager
-	GetCustomizedInvitePromptTriggerFunction = GameInviteModule.GetCustomizedInvitePromptTrigger
-	GameInviteConstants = GameInviteModule.GameInviteConstants
-	GameInviteAnalyticsManager = GameInviteModule.GameInviteAnalyticsManager
-end
-local WithAnalyticsResult = require(ShareGame.InviteToGamePrompt).new(CoreGui):withSocialServiceAndLocalPlayer(SocialService, Players.LocalPlayer):withAnalytics((GameInviteAnalytics.new():withEventStream((EventStream.new(RbxAnalyticsService))):withDiag(Diag.new(RbxAnalyticsService)):withButtonName(GameInviteAnalytics.ButtonName.ModalPrompt)))
+local GameInviteModule = require(CorePackages.Workspace.Packages.GameInvite)
+local GameInviteModalManager = GameInviteModule.GameInviteModalManager
+local GetCustomizedInvitePromptTriggerFunction = GameInviteModule.GetCustomizedInvitePromptTrigger
+local GameInviteConstants = GameInviteModule.GameInviteConstants
+local GameInviteAnalyticsManager = GameInviteModule.GameInviteAnalyticsManager
+local WithAnalyticsResult = require(ShareGame.InviteToGamePrompt).new(CoreGui):withSocialServiceAndLocalPlayer(SocialService, Players.LocalPlayer):withAnalytics((GameInviteAnalytics.new():withEventStream((require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.EventStream.new(RbxAnalyticsService))):withDiag(require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.Diag.new(RbxAnalyticsService)):withButtonName(GameInviteAnalytics.ButtonName.ModalPrompt)))
 local ApiGetCanSendAndCanCustomizeInvitesModule = require(ShareGame.Thunks.ApiGetCanSendAndCanCustomizeInvites)
 local GetCustomizedInvitePromptParamsModule = require(ShareGame.getCustomizedInvitePromptParams)
 
-local function _(LocalPlayer)
+local function _(p1)
 	-- upvalues: SocialService (copy)
 	local Success, Result = pcall(function()
-		-- upvalues: SocialService (upval), LocalPlayer (copy)
-		return SocialService:CanSendGameInviteAsync(LocalPlayer)
+		-- upvalues: SocialService (upval), p1 (copy)
+		return SocialService:CanSendGameInviteAsync(p1)
 	end)
 	
 	return Success and Result
 end
 
-SocialService.PromptInviteRequested:Connect(function(LocalPlayer, ExperienceInviteOptions)
-	-- upvalues: GetFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule (copy), LuaEnableGameInviteModalInvitePromptV2 (copy), Players (copy), GetFFlagFixSettingshubImportOrderModule (copy), SettingsHubModule (ref), Settings (copy), SocialService (copy), GameInviteModalManager (ref), GetCustomizedInvitePromptTriggerFunction (ref), GameInviteConstants (ref), GameInviteAnalyticsManager (ref), GetFFlagEnableNewInviteMenuCustomizationModule (copy), GetFFlagEnableInvitePromptLoadingStateModule (copy), WithAnalyticsResult (copy), GetCustomizedInvitePromptParamsModule (copy), ApiGetCanSendAndCanCustomizeInvitesModule (copy)
-	if GetFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule() and LuaEnableGameInviteModalInvitePromptV2 then
-		if LocalPlayer ~= Players.LocalPlayer then return end
-		if GetFFlagFixSettingshubImportOrderModule() then
-			SettingsHubModule = require(Settings.SettingsHub)
-		end
-		if not SettingsHubModule:GetVisibility() then
-			local ExperienceInviteOptions1 = ExperienceInviteOptions or nil
+SocialService.PromptInviteRequested:Connect(function(Player, ExperienceInviteOptions)
+	-- upvalues: Players (copy), GetFFlagFixSettingshubImportOrderModule (copy), SettingsHubModule (ref), Settings (copy), SocialService (copy), GetCustomizedInvitePromptTriggerFunction (copy), GameInviteConstants (copy), GameInviteAnalyticsManager (copy), GameInviteModalManager (copy), GetFFlagEnableNewInviteMenuCustomizationModule (copy), GetFFlagEnableInvitePromptLoadingStateModule (copy), WithAnalyticsResult (copy), GetCustomizedInvitePromptParamsModule (copy), ApiGetCanSendAndCanCustomizeInvitesModule (copy)
+	if Player ~= Players.LocalPlayer then return end
+	if GetFFlagFixSettingshubImportOrderModule() then
+		SettingsHubModule = require(Settings.SettingsHub)
+	end
+	if not SettingsHubModule:GetVisibility() then
+		local ExperienceInviteOptions1 = ExperienceInviteOptions or nil
+		local CustomizedInvitePromptTrigger = GetCustomizedInvitePromptTriggerFunction(ExperienceInviteOptions1)
+		
+		if CustomizedInvitePromptTrigger == GameInviteConstants.Triggers.DeveloperMultiple then
+			GameInviteAnalyticsManager:withButtonName(GameInviteAnalyticsManager.ButtonName.ModalPrompt)
+			GameInviteAnalyticsManager:inputShareGameEntryPoint()
+			GameInviteModalManager:openModal({ trigger = CustomizedInvitePromptTrigger }, ExperienceInviteOptions1)
 			
-			if GameInviteModalManager then
-				local CustomizedInvitePromptTrigger = GetCustomizedInvitePromptTriggerFunction(ExperienceInviteOptions1)
+			return
+		end
+		if GetFFlagEnableNewInviteMenuCustomizationModule() then
+			local FFlagEnableInvitePromptLoadingStateModule = GetFFlagEnableInvitePromptLoadingStateModule()
+			
+			if FFlagEnableInvitePromptLoadingStateModule then
+				WithAnalyticsResult:show({ isLoading = true })
+			end
+			local CustomizedInvitePromptParamsModule = GetCustomizedInvitePromptParamsModule(ExperienceInviteOptions1, ApiGetCanSendAndCanCustomizeInvitesModule)
+			
+			if CustomizedInvitePromptParamsModule then
+				WithAnalyticsResult:show(CustomizedInvitePromptParamsModule)
 				
-				if CustomizedInvitePromptTrigger == GameInviteConstants.Triggers.DeveloperMultiple then
-					GameInviteAnalyticsManager:withButtonName(GameInviteAnalyticsManager.ButtonName.ModalPrompt)
-					GameInviteAnalyticsManager:inputShareGameEntryPoint()
-					GameInviteModalManager:openModal({ trigger = CustomizedInvitePromptTrigger }, ExperienceInviteOptions1)
-					
-					return
-				end
+				return
+			end
+			if FFlagEnableInvitePromptLoadingStateModule then
+				WithAnalyticsResult:hide()
+				
+				return
 			end
 		else
-			if Players and Players.LocalPlayer then
-				SocialService:InvokeGameInvitePromptClosed(Players.LocalPlayer, {})
-			end
-			return
-		end
-	end
-	if GetFFlagEnableNewInviteMenuCustomizationModule() then
-		if LocalPlayer ~= Players.LocalPlayer then return end
-		local FFlagEnableInvitePromptLoadingStateModule = GetFFlagEnableInvitePromptLoadingStateModule()
-		
-		if FFlagEnableInvitePromptLoadingStateModule then
-			WithAnalyticsResult:show({ isLoading = true })
-		end
-		local CustomizedInvitePromptParamsModule = GetCustomizedInvitePromptParamsModule(ExperienceInviteOptions or nil, ApiGetCanSendAndCanCustomizeInvitesModule)
-		
-		if CustomizedInvitePromptParamsModule then
-			WithAnalyticsResult:show(CustomizedInvitePromptParamsModule)
+			local Success, Result = pcall(function()
+				-- upvalues: SocialService (upval), Player (copy)
+				return SocialService:CanSendGameInviteAsync(Player)
+			end)
 			
-			return
-		end
-		if FFlagEnableInvitePromptLoadingStateModule then
-			WithAnalyticsResult:hide()
-			
-			return
-		end
-	elseif LocalPlayer == Players.LocalPlayer then
-		local Success, Result = pcall(function()
-			-- upvalues: SocialService (upval), LocalPlayer (copy)
-			return SocialService:CanSendGameInviteAsync(LocalPlayer)
-		end)
-		
-		if Success and Result then
+			if not Success or not Result then return end
 			WithAnalyticsResult:show()
 		end
+		return
+	elseif Players and Players.LocalPlayer then
+		SocialService:InvokeGameInvitePromptClosed(Players.LocalPlayer, {})
 	end
-	return
 end)

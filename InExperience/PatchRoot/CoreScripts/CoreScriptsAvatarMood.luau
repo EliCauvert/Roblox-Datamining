@@ -616,7 +616,6 @@ local function onAnimatorAdded(Animator)
 		end
 	end
 	if v1 then
-		local v2 = v1
 		local StreamTrackStopped = config.StreamTrackStopped
 		
 		if StoppedConnections[StreamTrackStopped] ~= nil then
@@ -628,7 +627,7 @@ local function onAnimatorAdded(Animator)
 		if AnimationTrack then
 			AnimationTrack.Priority = Core
 		end
-		StoppedConnections[config.StreamTrackStopped] = v2.Stopped:Connect(function()
+		StoppedConnections[config.StreamTrackStopped] = v1.Stopped:Connect(function()
 			-- upvalues: StoppedConnections (upval), Core (upval), AnimationTrack (upval)
 			if StoppedConnections.StreamTrackStopped ~= nil then
 				StoppedConnections.StreamTrackStopped:Disconnect()

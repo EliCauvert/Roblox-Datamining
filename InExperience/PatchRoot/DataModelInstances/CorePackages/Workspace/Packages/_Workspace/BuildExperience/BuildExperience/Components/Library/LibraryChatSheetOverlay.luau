@@ -134,14 +134,13 @@ return function(p4)
 	end
 	local UseRefResult = ReactModule.useRef(SnapPoints)
 	local Current = UseRefResult.current
-	local SnapPoints1 = SnapPoints
 	local Flag = nil
 	
-	if #Current == #SnapPoints1 then
+	if #Current == #SnapPoints then
 		Flag = true
 		
 		for i, value in Current do
-			if SnapPoints1[i] ~= value then
+			if SnapPoints[i] ~= value then
 				Flag = false
 				break
 			end

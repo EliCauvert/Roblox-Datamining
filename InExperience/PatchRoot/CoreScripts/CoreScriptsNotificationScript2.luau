@@ -62,8 +62,8 @@ local CachedPolicyServiceModule = require(CorePackages.Workspace.Packages.Cached
 local ScaledPreferredTransparency = 0.6 * GameSettings.PreferredTransparency
 local XOffset2: number = if IsEnabled then 72 else 48
 local YOffset1: number = if IsEnabled then 145 else 64
-local XOffset: number = if IsEnabled then 450 else 200
-local XOffset1 = XOffset2 / 6
+local XOffset1: number = if IsEnabled then 450 else 200
+local XOffset = XOffset2 / 6
 local YOffset2: number = if IsEnabled then 42 else 18
 local v3: number = if IsEnabled then 84 else 36
 local Negated = -YOffset2
@@ -72,7 +72,7 @@ local YOffset3: number = if IsEnabled then 72 else 28
 local v4: number = if IsEnabled then 144 else 56
 local Size36 = IsEnabled and Enum.FontSize.Size36 or Enum.FontSize.Size14
 local YOffset = YOffset1 / 2
-local Offset = XOffset1 / 2
+local Offset = XOffset / 2
 local Size42_1 = IsEnabled and Enum.FontSize.Size42 or Enum.FontSize.Size18
 local MaxTextSize: number = if IsEnabled then 42 else 18
 local MinTextSize: number = if IsEnabled then 30 else 14
@@ -165,10 +165,10 @@ local function createTextButton(Name, Position)
 	return Button
 end
 
-local _UDim2 = UDim2.new(1, -XOffset - 4, 0.5, 0)
+local _UDim2 = UDim2.new(1, -XOffset1 - 4, 0.5, 0)
 local NotificationFrame = Instance.new("Frame")
 NotificationFrame.Name = "NotificationFrame"
-NotificationFrame.Size = UDim2.new(0, XOffset, 0.42, 0)
+NotificationFrame.Size = UDim2.new(0, XOffset1, 0.42, 0)
 NotificationFrame.Position = _UDim2
 NotificationFrame.BackgroundTransparency = 1
 
@@ -194,16 +194,16 @@ local Object = (function()
 end)()
 local NotificationTitle = Instance.new("TextLabel")
 NotificationTitle.Name = "NotificationTitle"
-NotificationTitle.Size = UDim2.new(1, -XOffset1 * 2, 0, YOffset2)
-NotificationTitle.Position = UDim2.new(0, XOffset1, 0.5, Negated)
+NotificationTitle.Size = UDim2.new(1, -XOffset * 2, 0, YOffset2)
+NotificationTitle.Position = UDim2.new(0, XOffset, 0.5, Negated)
 NotificationTitle.BackgroundTransparency = 1
 NotificationTitle.Font = Enum.Font.SourceSansBold
 NotificationTitle.FontSize = Size42
 NotificationTitle.TextColor3 = Color3.new(0.97, 0.97, 0.97)
 local NotificationText = Instance.new("TextLabel")
 NotificationText.Name = "NotificationText"
-NotificationText.Size = UDim2.new(1, -XOffset1 * 2, 0, YOffset3)
-NotificationText.Position = UDim2.new(0, XOffset1, 0.5, 1)
+NotificationText.Size = UDim2.new(1, -XOffset * 2, 0, YOffset3)
+NotificationText.Position = UDim2.new(0, XOffset, 0.5, 1)
 NotificationText.BackgroundTransparency = 1
 NotificationText.Font = Enum.Font.SourceSans
 NotificationText.FontSize = Size36
@@ -213,7 +213,7 @@ NotificationText.TextYAlignment = Enum.TextYAlignment.Top
 local NotificationImage = Instance.new("ImageLabel")
 NotificationImage.Name = "NotificationImage"
 NotificationImage.Size = UDim2.new(0, XOffset2, 0, XOffset2)
-NotificationImage.Position = UDim2.new(0, XOffset1, 0, 0.5 * (YOffset1 - XOffset2))
+NotificationImage.Position = UDim2.new(0, XOffset, 0, 0.5 * (YOffset1 - XOffset2))
 NotificationImage.BackgroundTransparency = 1
 NotificationImage.Image = ""
 local _UDim21 = UDim2.new(0.5, -180, 0.5, -50)
@@ -270,7 +270,7 @@ local _ = function(p1)
 end
 
 local function createNotification(Text, Text1, Image)
-	-- upvalues: Object (copy), YOffset1 (copy), NotificationTitle (copy), NotificationText (copy), TextService (copy), v3 (copy), NotificationFrame (copy), v4 (copy), XOffset2 (copy), XOffset1 (copy), NotificationImage (copy), GuiService (copy), HttpService (copy)
+	-- upvalues: Object (copy), YOffset1 (copy), NotificationTitle (copy), NotificationText (copy), TextService (copy), v3 (copy), NotificationFrame (copy), v4 (copy), XOffset2 (copy), XOffset (copy), NotificationImage (copy), GuiService (copy), HttpService (copy)
 	local ObjectClone = Object:Clone()
 	ObjectClone.Position = UDim2.new(1, 4, 1, -YOffset1 - 4)
 	local NotificationTitleClone = NotificationTitle:Clone()
@@ -308,14 +308,14 @@ local function createNotification(Text, Text1, Image)
 			ObjectClone.Size += UDim2.new(0, 0, 0, Smallest)
 			break
 		end
-		local NewXOffset = XOffset2 + XOffset1 * 2
+		local NewXOffset = XOffset2 + XOffset * 2
 		local NotificationImageClone = NotificationImage:Clone()
 		NotificationImageClone.Image = Image
 		NotificationImageClone.Parent = ObjectClone
-		NotificationTitleClone.Size = UDim2.new(1, -NewXOffset - XOffset1, 0, NotificationTitleClone.Size.Y.Offset)
+		NotificationTitleClone.Size = UDim2.new(1, -NewXOffset - XOffset, 0, NotificationTitleClone.Size.Y.Offset)
 		NotificationTitleClone.Position = UDim2.new(0, NewXOffset, NotificationTitleClone.Position.Y.Scale, NotificationTitleClone.Position.Y.Offset)
 		NotificationTitleClone.TextXAlignment = Enum.TextXAlignment.Left
-		NotificationTextClone.Size = UDim2.new(1, -NewXOffset - XOffset1, 0, NotificationTextClone.Size.Y.Offset)
+		NotificationTextClone.Size = UDim2.new(1, -NewXOffset - XOffset, 0, NotificationTextClone.Size.Y.Offset)
 		NotificationTextClone.Position = UDim2.new(0, NewXOffset, NotificationTextClone.Position.Y.Scale, NotificationTextClone.Position.Y.Offset)
 		NotificationTextClone.TextXAlignment = Enum.TextXAlignment.Left
 		

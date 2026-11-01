@@ -73,18 +73,14 @@ return {
 					local NamesByUserId = {}
 					
 					for _, value in List do
-						local v2 = t1[value]
-						local Callback = nil
+						local Callback = t1[value]
 						
-						if v2 == nil then
-							local Computed = SignalsModule.createComputed(function(p3)
+						if Callback == nil then
+							Callback = SignalsModule.createComputed(function(p3)
 								-- upvalues: ResolveNameInfosModule (upval), value (copy)
 								return ResolveNameInfosModule({ value }, p3)[value] or { name = nil, username = nil }
 							end, isSameNameInfo)
-							t1[value] = Computed
-							Callback = Computed
-						else
-							Callback = v2
+							t1[value] = Callback
 						end
 						NamesByUserId[value] = Callback(p2)
 					end
@@ -114,10 +110,9 @@ return {
 				for _, value in Callback(p2) do
 					if p1.maxMessages > 0 and p1.maxMessages <= Count then break end
 					local Entry = t[value]
-					local Callback1 = nil
 					
 					if Entry == nil then
-						local Computed = SignalsModule.createComputed(function(p3)
+						Entry = SignalsModule.createComputed(function(p3)
 							-- upvalues: GetConversationMessageStoreModule (upval), value (copy), Frozen (upval), GetReplyQuoteModule (upval), t1 (upval), SignalsModule (upval), ResolveNameInfosModule (upval), isSameNameInfo (upval), BuildMessageEnvelopesModule (upval), GetLocalUserIdModule (upval), FrozenSortTimesModule (upval), p1 (upval)
 							local v1 = GetConversationMessageStoreModule(p3)
 							local Message = v1.getMessage(value, p3)
@@ -142,18 +137,14 @@ return {
 							local NamesByUserId = {}
 							
 							for _, value in List do
-								local v2 = t1[value]
-								local Callback = nil
+								local Callback = t1[value]
 								
-								if v2 == nil then
-									local Computed = SignalsModule.createComputed(function(p4)
+								if Callback == nil then
+									Callback = SignalsModule.createComputed(function(p4)
 										-- upvalues: ResolveNameInfosModule (upval), value (copy)
 										return ResolveNameInfosModule({ value }, p4)[value] or { name = nil, username = nil }
 									end, isSameNameInfo)
-									t1[value] = Computed
-									Callback = Computed
-								else
-									Callback = v2
+									t1[value] = Callback
 								end
 								NamesByUserId[value] = Callback(p3)
 							end
@@ -166,17 +157,14 @@ return {
 								localize = p1.localize
 							})
 						end)
-						t[value] = Computed
-						Callback1 = Computed
-					else
-						Callback1 = Entry
+						t[value] = Entry
 					end
-					local CallbackResult = Callback1(p2)
+					local EntryResult = Entry(p2)
 					
-					if #CallbackResult > 0 then
+					if #EntryResult > 0 then
 						Count += 1
 						
-						for _, value1 in CallbackResult do
+						for _, value1 in EntryResult do
 							table.insert(List, value1)
 						end
 					end

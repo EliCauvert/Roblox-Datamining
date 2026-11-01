@@ -28,7 +28,8 @@ local config = {
 	hasArrow = true,
 	testId = "--foundation-coachmark",
 	align = require(Foundation.Enums.PopoverAlign).Start,
-	side = require(Foundation.Enums.PopoverSide).Right
+	side = require(Foundation.Enums.PopoverSide).Right,
+	actionsFillBehavior = if FlagsModule.FoundationEducationalTooltipRefresh then FillBehaviorModule.Fill else nil
 }
 local config1 = {
 	colorNamespace = require(Foundation.Enums.ColorNamespace).Inverse
@@ -174,6 +175,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 				ButtonGroup = ReactModule.createElement(ButtonGroupModule, {
 					maxButtonCount = 2,
 					buttons = UseMemoResult,
+					fillBehavior = WithDefaultsModuleResult.actionsFillBehavior,
 					orientation = OrientationModule.Horizontal,
 					size = InputSizeModule.Small,
 					testId = `{WithDefaultsModuleResult.testId}--actions`

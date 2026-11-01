@@ -18,7 +18,7 @@ local function matchEmojiTrigger(Text, p1: number)
 	if Length == nil or p1 < 2 or Length + 1 < p1 then
 		return nil
 	end
-	local v1 = 1
+	local ReplaceStart = 1
 	
 	for i = p1 - 1, 1, -1 do
 		local CharAtResult = Utf8RangeModule.charAt(Text, i)
@@ -28,7 +28,7 @@ local function matchEmojiTrigger(Text, p1: number)
 		elseif CharAtResult ~= " " and CharAtResult ~= "\n" then
 			continue
 		else
-			v1 = i + 1
+			ReplaceStart = i + 1
 			break
 		end
 	end
@@ -47,51 +47,44 @@ local function matchEmojiTrigger(Text, p1: number)
 		end
 	end
 	
-	local CharAtResult1 = Utf8RangeModule.charAt(Text, v1)
+	local CharAtResult1 = Utf8RangeModule.charAt(Text, ReplaceStart)
 	
 	if CharAtResult1 == nil then
 		return nil
 	end
-	if CharAtResult1 == ":" then
-		local ReplaceStart: number = v1
+	if CharAtResult1 ~= ":" then
+		local ReplaceStart1: number? = nil
 		
-		if p1 - ReplaceStart < 3 then
-			return nil
-		else
-			local SliceResult = Utf8RangeModule.slice(Text, ReplaceStart, p1 - 1)
-			
-			return if SliceResult == nil then nil else {
-				query = SliceResult,
-				replaceStart = ReplaceStart,
-				replaceFinish = p1 - 1
-			}
-		end
-	else
-		local v2: number? = nil
-		
-		for i1 = p1 - 1, v1, -1 do
+		for i1 = p1 - 1, ReplaceStart, -1 do
 			if Utf8RangeModule.charAt(Text, i1) ~= ":" then
 				continue
 			end
-			v2 = i1
+			ReplaceStart1 = i1
 			break
 		end
-		if v2 == nil then
+		if ReplaceStart1 == nil then
 			return nil
-		end
-		local ReplaceStart: number = v2
-		
-		if p1 - ReplaceStart < 3 then
+		elseif p1 - ReplaceStart1 < 3 then
 			return nil
 		else
-			local SliceResult = Utf8RangeModule.slice(Text, ReplaceStart, p1 - 1)
+			local SliceResult = Utf8RangeModule.slice(Text, ReplaceStart1, p1 - 1)
 			
 			return if SliceResult == nil then nil else {
 				query = SliceResult,
-				replaceStart = ReplaceStart,
+				replaceStart = ReplaceStart1,
 				replaceFinish = p1 - 1
 			}
 		end
+	elseif p1 - ReplaceStart < 3 then
+		return nil
+	else
+		local SliceResult = Utf8RangeModule.slice(Text, ReplaceStart, p1 - 1)
+		
+		return if SliceResult == nil then nil else {
+			query = SliceResult,
+			replaceStart = ReplaceStart,
+			replaceFinish = p1 - 1
+		}
 	end
 end
 

@@ -94,11 +94,10 @@ return function(p1, EventContext, Tbl)
 		Tbl.actionType = "OpenGameDetails"
 	end
 	if FFlagLuaAppGameDetailEventMobileAdsId then
-		local JoinResult = Tbl
 		local MobileAdvertisingIdItem = AppStorageService:GetItem("MobileAdvertisingId")
 		
 		if MobileAdvertisingIdItem and MobileAdvertisingIdItem ~= "" then
-			JoinResult.mobileAdvertisingId = MobileAdvertisingIdItem
+			Tbl.mobileAdvertisingId = MobileAdvertisingIdItem
 		end
 	end
 	if Tbl.analyticsData then

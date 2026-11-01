@@ -239,11 +239,8 @@ end
 local function buildPopulatedMessage(p1, First, p2, p3, p4, Users, LocalUserId, p5)
 	-- upvalues: PopulateMessageWithStateModule (copy), EnumsModule (copy)
 	local PopulateMessageWithStateModuleResult = PopulateMessageWithStateModule({ Users = Users, LocalUserId = LocalUserId }, p1, p1.id, p4, p2, p1.isSending == true, p3)
-	local PopulateMessageWithStateModuleResult1 = nil
 	
-	if First == nil then
-		PopulateMessageWithStateModuleResult1 = PopulateMessageWithStateModuleResult
-	else
+	if First ~= nil then
 		local GroupedMessageVariant = EnumsModule.GroupedMessageVariant
 		
 		if First == GroupedMessageVariant.Single then
@@ -259,43 +256,42 @@ local function buildPopulatedMessage(p1, First, p2, p3, p4, Users, LocalUserId, 
 			PopulateMessageWithStateModuleResult.isNewSender = false
 			PopulateMessageWithStateModuleResult.isLastMessageInMessageGroup = true
 		end
-		PopulateMessageWithStateModuleResult1 = PopulateMessageWithStateModuleResult
 	end
-	PopulateMessageWithStateModuleResult1.stable_key = `{PopulateMessageWithStateModuleResult1.stableKey or PopulateMessageWithStateModuleResult1.messageId}_{p5}`
+	PopulateMessageWithStateModuleResult.stable_key = `{PopulateMessageWithStateModuleResult.stableKey or PopulateMessageWithStateModuleResult.messageId}_{p5}`
 	
-	return PopulateMessageWithStateModuleResult1
+	return PopulateMessageWithStateModuleResult
 end
 
-local function buildMessageRows(LegacyMessage, p1, Row, GroupedVariant, p2, Users, LocalUserId)
+local function buildMessageRows(LegacyMessage, LegacyMessage1, Row, GroupedVariant, p1, Users, LocalUserId)
 	-- upvalues: FilterForLinksWithPolicyModule (copy), buildPopulatedMessage (copy)
 	local FilterForLinksWithPolicyModuleResult = FilterForLinksWithPolicyModule(LegacyMessage)
 	local Buffer = table.create(#FilterForLinksWithPolicyModuleResult)
 	
 	for i, value in FilterForLinksWithPolicyModuleResult do
-		local PopulatedMessage = buildPopulatedMessage(value, if #FilterForLinksWithPolicyModuleResult == 1 then GroupedVariant else nil, Row, FilterForLinksWithPolicyModuleResult[i + 1] or p1, p2, Users, LocalUserId, i)
+		local PopulatedMessage = buildPopulatedMessage(value, if #FilterForLinksWithPolicyModuleResult == 1 then GroupedVariant else nil, Row, FilterForLinksWithPolicyModuleResult[i + 1] or LegacyMessage1, p1, Users, LocalUserId, i)
 		table.insert(Buffer, PopulatedMessage)
 		Row = PopulatedMessage
 	end
 	return Buffer
 end
 
-local function buildMessageItemList(p3, p4, Callback, p5, p6, p7)
+local function buildMessageItemList(p2, p3, Callback, p4, p5, p6)
 	-- upvalues: CryoModule (copy), toLegacyMessage (copy), buildMessageRows (copy)
-	if #p3 == 0 or p5 == nil then
+	if #p2 == 0 or p4 == nil then
 		return {}
 	end
-	local FilterMapResult = CryoModule.List.filterMap(p3, function(p8)
-		-- upvalues: p4 (copy), toLegacyMessage (upval)
-		local v1 = p4[p8]
+	local FilterMapResult = CryoModule.List.filterMap(p2, function(p7)
+		-- upvalues: p3 (copy), toLegacyMessage (upval)
+		local v1 = p3[p7]
 		
-		return if v1 == nil then nil else toLegacyMessage(v1, p4)
+		return if v1 == nil then nil else toLegacyMessage(v1, p3)
 	end)
 	local List = {}
 	local v1 = nil
 	
 	for i = #FilterMapResult, 1, -1 do
 		local FilterMapResultEntry = FilterMapResult[i]
-		local MessageRows = buildMessageRows(FilterMapResultEntry, if i > 1 then FilterMapResult[i - 1] else nil, v1, Callback(FilterMapResultEntry.id), p5, p6, p7)
+		local MessageRows = buildMessageRows(FilterMapResultEntry, if i > 1 then FilterMapResult[i - 1] else nil, v1, Callback(FilterMapResultEntry.id), p4, p5, p6)
 		
 		for _, messageRow in MessageRows do
 			table.insert(List, messageRow)
@@ -314,9 +310,9 @@ local function createIncrementalMessageItemList()
 	local ConversationType = nil
 	local v2 = nil
 	
-	return function(List, p8, Callback, p9, p10, p11)
+	return function(List, p7, Callback, p8, p9, p10)
 		-- upvalues: T (ref), Count (ref), t (ref), Id (ref), ConversationType (ref), v2 (ref), toLegacyMessage (upval), buildMessageRows (upval)
-		if #List == 0 or p9 == nil then
+		if #List == 0 or p8 == nil then
 			T = {}
 			Count = 0
 			
@@ -325,35 +321,35 @@ local function createIncrementalMessageItemList()
 			end
 			return t
 		else
-			if p9.id ~= Id or p9.conversationType ~= ConversationType or p11 ~= v2 then
+			if p8.id ~= Id or p8.conversationType ~= ConversationType or p10 ~= v2 then
 				T = {}
-				Id = p9.id
-				ConversationType = p9.conversationType
-				v2 = p11
+				Id = p8.id
+				ConversationType = p8.conversationType
+				v2 = p10
 			end
 			local List1 = {}
 			
 			for _, value in List do
-				local v3 = p8[value]
+				local v3 = p7[value]
 				
 				if v3 ~= nil then
 					table.insert(List1, v3)
 				end
 			end
-			local function _(p12)
-				-- upvalues: p8 (copy)
-				return if p12.replies_to == nil then nil else p8[p12.replies_to.id]
+			local function _(p11)
+				-- upvalues: p7 (copy)
+				return if p11.replies_to == nil then nil else p7[p11.replies_to.id]
 			end
 			
 			local LegacyMessages = {}
 			
 			local _ = function(Message)
-				-- upvalues: LegacyMessages (copy), T (upval), p8 (copy), toLegacyMessage (upval)
+				-- upvalues: LegacyMessages (copy), T (upval), p7 (copy), toLegacyMessage (upval)
 				local LegacyMessage = LegacyMessages[Message.id]
 				
 				if LegacyMessage == nil then
 					local Entry = T[Message.id]
-					local LegacyMessage1 = if Entry == nil or Entry.message ~= Message then toLegacyMessage(Message, p8) elseif Entry.replyTarget == (if Message.replies_to == nil then nil else p8[Message.replies_to.id]) then Entry.legacyMessage else toLegacyMessage(Message, p8)
+					local LegacyMessage1 = if Entry == nil or Entry.message ~= Message then toLegacyMessage(Message, p7) elseif Entry.replyTarget == (if Message.replies_to == nil then nil else p7[Message.replies_to.id]) then Entry.legacyMessage else toLegacyMessage(Message, p7)
 					LegacyMessages[Message.id] = LegacyMessage1
 					
 					return LegacyMessage1
@@ -371,50 +367,43 @@ local function createIncrementalMessageItemList()
 				local Entry = List1[i]
 				local Entry1 = List1[i + 1]
 				local Entry2 = List1[i - 1]
-				local ReplyTarget = if Entry.replies_to == nil then nil else p8[Entry.replies_to.id]
+				local ReplyTarget = if Entry.replies_to == nil then nil else p7[Entry.replies_to.id]
 				local CallbackResult = Callback(Entry.id)
-				local HasSender: boolean = p10 ~= nil and p10[tostring(Entry.sender_user_id)] ~= nil
-				local IsFetchedOldestMessage: boolean = Entry1 == nil and p9.fetchedOldestMessage == true
+				local HasSender: boolean = p9 ~= nil and p9[tostring(Entry.sender_user_id)] ~= nil
+				local IsFetchedOldestMessage: boolean = Entry1 == nil and p8.fetchedOldestMessage == true
 				local Entry3 = T[Entry.id]
 				
 				if Entry3 == nil or Entry3.message ~= Entry or Entry3.replyTarget ~= ReplyTarget or Entry3.olderMessage ~= Entry1 or Entry3.newerMessage ~= Entry2 or Entry3.groupedVariant ~= CallbackResult or Entry3.hasSender ~= HasSender or Entry3.showsOldestDateTime ~= IsFetchedOldestMessage then
 					Flag = true
 					local LegacyMessage = LegacyMessages[Entry.id]
-					local LegacyMessage1 = nil
 					
 					if LegacyMessage == nil then
 						local Entry4 = T[Entry.id]
-						local LegacyMessage2 = if Entry4 == nil or Entry4.message ~= Entry then toLegacyMessage(Entry, p8) elseif Entry4.replyTarget == (if Entry.replies_to == nil then nil else p8[Entry.replies_to.id]) then Entry4.legacyMessage else toLegacyMessage(Entry, p8)
-						LegacyMessages[Entry.id] = LegacyMessage2
-						LegacyMessage1 = LegacyMessage2
-					else
-						LegacyMessage1 = LegacyMessage
+						LegacyMessage = if Entry4 == nil or Entry4.message ~= Entry then toLegacyMessage(Entry, p7) elseif Entry4.replyTarget == (if Entry.replies_to == nil then nil else p7[Entry.replies_to.id]) then Entry4.legacyMessage else toLegacyMessage(Entry, p7)
+						LegacyMessages[Entry.id] = LegacyMessage
 					end
-					local v4 = nil
+					local LegacyMessage1 = nil
 					if Entry2 == nil then
-						v4 = nil
+						LegacyMessage1 = nil
 					else
-						local LegacyMessage3 = LegacyMessages[Entry2.id]
+						LegacyMessage1 = LegacyMessages[Entry2.id]
 						
-						if LegacyMessage3 == nil then
+						if LegacyMessage1 == nil then
 							local Entry5 = T[Entry2.id]
-							local LegacyMessage4 = if Entry5 == nil or Entry5.message ~= Entry2 then toLegacyMessage(Entry2, p8) elseif Entry5.replyTarget == (if Entry2.replies_to == nil then nil else p8[Entry2.replies_to.id]) then Entry5.legacyMessage else toLegacyMessage(Entry2, p8)
-							LegacyMessages[Entry2.id] = LegacyMessage4
-							v4 = LegacyMessage4
-						else
-							v4 = LegacyMessage3
+							LegacyMessage1 = if Entry5 == nil or Entry5.message ~= Entry2 then toLegacyMessage(Entry2, p7) elseif Entry5.replyTarget == (if Entry2.replies_to == nil then nil else p7[Entry2.replies_to.id]) then Entry5.legacyMessage else toLegacyMessage(Entry2, p7)
+							LegacyMessages[Entry2.id] = LegacyMessage1
 						end
 					end
 					Entry3 = {
 						message = Entry,
 						replyTarget = ReplyTarget,
-						legacyMessage = LegacyMessage1,
+						legacyMessage = LegacyMessage,
 						olderMessage = Entry1,
 						newerMessage = Entry2,
 						groupedVariant = CallbackResult,
 						hasSender = HasSender,
 						showsOldestDateTime = IsFetchedOldestMessage,
-						rows = buildMessageRows(LegacyMessage1, v4, Row, CallbackResult, p9, p10, p11)
+						rows = buildMessageRows(LegacyMessage, LegacyMessage1, Row, CallbackResult, p8, p9, p10)
 					}
 				end
 				t1[Entry.id] = Entry3
@@ -443,8 +432,8 @@ local function createIncrementalMessageItemList()
 	end
 end
 
-local function isSameItemListConversation(p12, p13): boolean
-	return if p12 == nil or p13 == nil then p12 == p13 else p12.id == p13.id and p12.fetchedOldestMessage == p13.fetchedOldestMessage and p12.conversationType == p13.conversationType
+local function isSameItemListConversation(p11, p12): boolean
+	return if p11 == nil or p12 == nil then p11 == p12 else p11.id == p12.id and p11.fetchedOldestMessage == p12.fetchedOldestMessage and p11.conversationType == p12.conversationType
 end
 
 local function isSameUserIdSet(List, List1): boolean
@@ -475,17 +464,17 @@ local function useItemListInputs(ConversationId, Current, Current1, UseMemoResul
 			setConversation = Signal2,
 			getUsers = Signal1,
 			setUsers = Signal2_1,
-			getKnownSenderIds = SignalsModule.createComputed(function(p12)
+			getKnownSenderIds = SignalsModule.createComputed(function(p11)
 				-- upvalues: Signal1 (copy), ConversationId (upval), ConversationMessageStore (upval), ConversationMessageListStore (upval)
 				local t = {}
-				local SignalResult = Signal1(p12)
+				local SignalResult = Signal1(p11)
 				
 				if ConversationId == nil or SignalResult == nil then
 					return t
 				end
-				local MessagesResult = ConversationMessageStore.messages(p12)
+				local MessagesResult = ConversationMessageStore.messages(p11)
 				
-				for _, value in ConversationMessageListStore.getOrderedIds(ConversationId, p12) do
+				for _, value in ConversationMessageListStore.getOrderedIds(ConversationId, p11) do
 					local MessagesResultEntry = MessagesResult[value]
 					local NoMessagesResultEntry = MessagesResultEntry == nil
 					local Text = nil
@@ -519,7 +508,7 @@ local function useItemListInputs(ConversationId, Current, Current1, UseMemoResul
 end
 
 return {
-	useMessageItemList = function(ConversationId, Current, p12, Current1)
+	useMessageItemList = function(ConversationId, Current, p11, Current1)
 		-- upvalues: ReactModule (copy), GetConversationMessageViewModelStoreModule (copy), FFlagAppChatFixMessageItemListStaleRefsModule (copy), useItemListInputs (copy), SignalsModule (copy), FFlagAppChatIncrementalMessageItemListModule (copy), createIncrementalMessageItemList (copy), buildMessageItemList (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), UseSignalStateFunction (copy)
 		local UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: GetConversationMessageViewModelStoreModule (upval)
@@ -534,7 +523,7 @@ return {
 		local UseItemListInputsResult = if FFlagAppChatFixMessageItemListStaleRefsModule then useItemListInputs(ConversationId, Current1, Current, UseMemoResult) else nil
 		
 		return UseSignalStateFunction((ReactModule.useMemo(function()
-			-- upvalues: ConversationId (copy), SignalsModule (upval), FFlagAppChatIncrementalMessageItemListModule (upval), createIncrementalMessageItemList (upval), buildMessageItemList (upval), ConversationMessageListStore (copy), ConversationMessageStore (copy), p12 (copy), UseRefResult (copy), UseRefResult1 (copy), FFlagAppChatFixMessageItemListStaleRefsModule (upval), UseItemListInputsResult (ref), FFlagAppChatPerfTrackingModule (upval), FFlagAppChatMessageTTIMilestonesModule (upval), AppChatPerfTrackerModule (upval), UseMemoResult (copy)
+			-- upvalues: ConversationId (copy), SignalsModule (upval), FFlagAppChatIncrementalMessageItemListModule (upval), createIncrementalMessageItemList (upval), buildMessageItemList (upval), ConversationMessageListStore (copy), ConversationMessageStore (copy), p11 (copy), UseRefResult (copy), UseRefResult1 (copy), FFlagAppChatFixMessageItemListStaleRefsModule (upval), UseItemListInputsResult (ref), FFlagAppChatPerfTrackingModule (upval), FFlagAppChatMessageTTIMilestonesModule (upval), AppChatPerfTrackerModule (upval), UseMemoResult (copy)
 			if ConversationId == nil then
 				return SignalsModule.createComputed(function()
 					return {}
@@ -542,18 +531,18 @@ return {
 			else
 				local IncrementalMessageItemList = if FFlagAppChatIncrementalMessageItemListModule then createIncrementalMessageItemList() else buildMessageItemList
 				
-				return SignalsModule.createComputed(function(p13)
-					-- upvalues: ConversationMessageListStore (upval), ConversationId (upval), ConversationMessageStore (upval), p12 (upval), UseRefResult (upval), UseRefResult1 (upval), FFlagAppChatFixMessageItemListStaleRefsModule (upval), UseItemListInputsResult (upval), FFlagAppChatPerfTrackingModule (upval), FFlagAppChatMessageTTIMilestonesModule (upval), AppChatPerfTrackerModule (upval), IncrementalMessageItemList (copy), UseMemoResult (upval)
-					local OrderedIds = ConversationMessageListStore.getOrderedIds(ConversationId, p13)
-					local MessagesResult = ConversationMessageStore.messages(p13)
-					local Text = tostring(p12 or "")
+				return SignalsModule.createComputed(function(p12)
+					-- upvalues: ConversationMessageListStore (upval), ConversationId (upval), ConversationMessageStore (upval), p11 (upval), UseRefResult (upval), UseRefResult1 (upval), FFlagAppChatFixMessageItemListStaleRefsModule (upval), UseItemListInputsResult (upval), FFlagAppChatPerfTrackingModule (upval), FFlagAppChatMessageTTIMilestonesModule (upval), AppChatPerfTrackerModule (upval), IncrementalMessageItemList (copy), UseMemoResult (upval)
+					local OrderedIds = ConversationMessageListStore.getOrderedIds(ConversationId, p12)
+					local MessagesResult = ConversationMessageStore.messages(p12)
+					local Text = tostring(p11 or "")
 					local Current = UseRefResult.current
 					local Current1 = UseRefResult1.current
 					
 					if FFlagAppChatFixMessageItemListStaleRefsModule then
 						local UseItemListInputsResult1 = UseItemListInputsResult
-						Current = UseItemListInputsResult1.getConversation(p13)
-						UseItemListInputsResult1.getKnownSenderIds(p13)
+						Current = UseItemListInputsResult1.getConversation(p12)
+						UseItemListInputsResult1.getKnownSenderIds(p12)
 						Current1 = UseItemListInputsResult1.getUsers(false)
 					end
 					if Current == nil then
@@ -566,9 +555,9 @@ return {
 						AppChatPerfTrackerModule.trackMilestone(AppChatPerfTrackerModule.Events.ChatConversationTTI, AppChatPerfTrackerModule.Milestone.DataProcessingStarted.Name, config)
 						AppChatPerfTrackerModule.trackSubphase(AppChatPerfTrackerModule.Events.ChatConversationTTI, AppChatPerfTrackerModule.Milestone.DataProcessingStarted.Name, AppChatPerfTrackerModule.Milestone.DataProcessingStarted.Subphase.DataUpdate, config)
 					end
-					local IncrementalMessageItemListResult = IncrementalMessageItemList(OrderedIds, MessagesResult, function(p14)
-						-- upvalues: UseMemoResult (upval), ConversationId (upval), p13 (copy)
-						return UseMemoResult.getGroupedVariant(p14, ConversationId)(p13)
+					local IncrementalMessageItemListResult = IncrementalMessageItemList(OrderedIds, MessagesResult, function(p13)
+						-- upvalues: UseMemoResult (upval), ConversationId (upval), p12 (copy)
+						return UseMemoResult.getGroupedVariant(p13, ConversationId)(p12)
 					end, Current, Current1, Text)
 					
 					if IsActive then
@@ -580,7 +569,7 @@ return {
 				end)
 			end
 		end, {
-			ConversationId, p12, UseMemoResult, ConversationMessageStore,
+			ConversationId, p11, UseMemoResult, ConversationMessageStore,
 			ConversationMessageListStore, UseItemListInputsResult
 		})))
 	end,

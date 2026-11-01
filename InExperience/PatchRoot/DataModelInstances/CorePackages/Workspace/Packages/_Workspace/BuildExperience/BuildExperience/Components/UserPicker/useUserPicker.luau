@@ -164,7 +164,7 @@ return function(p1)
 				-- upvalues: SelectionLimit (copy)
 				local Count = 0
 				
-				for i, value in List do
+				for _, value in List do
 					if value then
 						Count += 1
 					end

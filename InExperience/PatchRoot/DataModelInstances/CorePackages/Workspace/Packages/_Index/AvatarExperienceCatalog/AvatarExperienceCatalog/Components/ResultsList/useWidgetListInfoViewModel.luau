@@ -593,10 +593,9 @@ local function formatWidgetListStateToWidgetListInfoViewModel(p3, Default, Name,
 			local Template = nil
 			if FFlagAXNoCarouselsOnCatalogWithGamepadModule then
 				if detail.template.type == "Carousel" and not IsNotDirectionalMatch then
-					local Copy = table.clone(detail.template)
-					Copy.type = "ItemGroup"
-					Copy.numItemsToShow = nil
-					Template = Copy
+					Template = table.clone(detail.template)
+					Template.type = "ItemGroup"
+					Template.numItemsToShow = nil
 				else
 					Template = detail.template
 				end

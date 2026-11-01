@@ -1,58 +1,38 @@
-﻿local Foundation = script:FindFirstAncestor("Foundation")
-local Parent = script.Parent.Parent.Parent
-local FlagsModule = require(Parent.Utility.Flags)
+﻿local Parent = script.Parent.Parent.Parent
 local LocalizationService = require(Parent.Utility.Wrappers).Services.LocalizationService
 local ConstantsModule = require(script.Parent.Constants)
 local GeneratedTranslationsModule = require(Parent.Generated.Translations.GeneratedTranslations)
-local DevAssertModule: (any, any) -> () = require(Parent.Utility.devAssert)
-local GetMainGuiModule = require(Parent.Utility.getMainGui)
-local Object = nil
-
-if FlagsModule.FoundationDontParentToFoundationModule then
-	local MainGuiModule = GetMainGuiModule()
-	DevAssertModule(MainGuiModule ~= nil, "MainGui not found")
-	Object = MainGuiModule
-else
-	Object = Foundation
-end
+local Parent1 = require(Parent.Utility.getMainGui)()
+require(Parent.Utility.devAssert)(Parent1 ~= nil, "MainGui not found")
 local Text = ConstantsModule.LOCALIZATION_TABLE_NAME .. game:GetService("HttpService"):GenerateGUID(false)
 
-local function createFoundationLocalizationTable(Object)
-	-- upvalues: FlagsModule (copy), Text (copy), GeneratedTranslationsModule (copy), ConstantsModule (copy)
-	if FlagsModule.FoundationDontParentToFoundationModule then
-		local Text1 = Object:FindFirstChild(Text)
-		
-		if Text1 ~= nil and Text1:IsA("LocalizationTable") then
-			Text1:SetEntries(GeneratedTranslationsModule)
-			
-			return Text1
-		end
-	else
-		local LOCALIZATIONTABLENAME = Object:FindFirstChild(ConstantsModule.LOCALIZATION_TABLE_NAME)
-		
-		if LOCALIZATIONTABLENAME ~= nil and LOCALIZATIONTABLENAME:IsA("LocalizationTable") then
-			LOCALIZATIONTABLENAME:SetEntries(GeneratedTranslationsModule)
-			
-			return LOCALIZATIONTABLENAME
-		end
-	end
-	local LocalizationTable = Instance.new("LocalizationTable")
-	LocalizationTable.Name = if FlagsModule.FoundationDontParentToFoundationModule then Text else ConstantsModule.LOCALIZATION_TABLE_NAME
-	LocalizationTable.Archivable = false
-	LocalizationTable.SourceLocaleId = "en-us"
-	LocalizationTable:SetEntries(GeneratedTranslationsModule)
-	LocalizationTable.Parent = Object
+local function createFoundationLocalizationTable(Parent)
+	-- upvalues: Text (copy), GeneratedTranslationsModule (copy)
+	local Text1 = Parent:FindFirstChild(Text)
 	
-	return LocalizationTable
+	if Text1 == nil or not Text1:IsA("LocalizationTable") then
+		local LocalizationTable = Instance.new("LocalizationTable")
+		LocalizationTable.Name = Text
+		LocalizationTable.Archivable = false
+		LocalizationTable.SourceLocaleId = "en-us"
+		LocalizationTable:SetEntries(GeneratedTranslationsModule)
+		LocalizationTable.Parent = Parent
+		
+		return LocalizationTable
+	else
+		Text1:SetEntries(GeneratedTranslationsModule)
+		
+		return Text1
+	end
 end
 
-local FoundationLocalizationTable = createFoundationLocalizationTable(Object)
+local FoundationLocalizationTable = createFoundationLocalizationTable(Parent1)
 local Translators = {}
 
 local function getTranslatorForLocale(RobloxLocaleId)
-	-- upvalues: FoundationLocalizationTable (ref), createFoundationLocalizationTable (copy), Object (ref), Translators (ref), FlagsModule (copy), Text (copy), ConstantsModule (copy)
+	-- upvalues: FoundationLocalizationTable (ref), createFoundationLocalizationTable (copy), Parent1 (copy), Translators (ref), Text (copy)
 	if FoundationLocalizationTable == nil or FoundationLocalizationTable.Parent == nil then
-		FoundationLocalizationTable = createFoundationLocalizationTable(Object)
+		FoundationLocalizationTable = createFoundationLocalizationTable(Parent1)
 		Translators = {}
 	end
 	local Translator = Translators[RobloxLocaleId]
@@ -60,7 +40,7 @@ local function getTranslatorForLocale(RobloxLocaleId)
 	if Translator then
 		return Translator
 	else
-		local Translator1 = if FlagsModule.FoundationDontParentToFoundationModule then Object:FindFirstChild(Text):GetTranslator(RobloxLocaleId) else Object:FindFirstChild(ConstantsModule.LOCALIZATION_TABLE_NAME):GetTranslator(RobloxLocaleId)
+		local Translator1 = Parent1:FindFirstChild(Text):GetTranslator(RobloxLocaleId)
 		Translators[RobloxLocaleId] = Translator1
 		
 		return Translator1

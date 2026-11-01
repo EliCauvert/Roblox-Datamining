@@ -78,9 +78,9 @@ local function mapIntoArray(p1, List, Text, Text1, Callback): number
 				local v3 = IteratorFnResult.next()
 				while not v3.done do
 					local Value = v3.value
-					local Count1: number = Count
+					local Text4: string = if typeof(Value) == "table" and Value ~= nil and Value.key ~= nil then "$" .. string.gsub(string.gsub(tostring(Value.key), "=", "=0"), ":", "=2") else tostring(Count)
 					Count += 1
-					Total += mapIntoArray(Value, List, Text, Text3 .. (if typeof(Value) == "table" and Value ~= nil and Value.key ~= nil then "$" .. string.gsub(string.gsub(tostring(Value.key), "=", "=0"), ":", "=2") else tostring(Count1)), Callback)
+					Total += mapIntoArray(Value, List, Text, Text3 .. Text4, Callback)
 					v3 = IteratorFnResult.next()
 				end
 			end

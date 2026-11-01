@@ -5,6 +5,7 @@ local SendUnifiedEventLogFunction = require(Parent.AvatarExperienceAnalytics).se
 local UnifiedEventCounterAggregator = require(Parent.AvatarExperienceAnalytics).UnifiedEventCounterAggregator
 local AXUnifiedEventFilter = require(Parent.AvatarExperienceAnalytics).AXUnifiedEventFilter
 local FFlagAXUnifiedEventCounters = require(Parent.AvatarExperienceAnalytics).Flags.FFlagAXUnifiedEventCounters
+local FFlagAXUnifiedEventStrictPayloads = require(Parent.AvatarExperienceAnalytics).Flags.FFlagAXUnifiedEventStrictPayloads
 local AvatarScreen = require(Parent.AvatarExperienceNavigation).Enums.AvatarScreen
 local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
 local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
@@ -45,7 +46,7 @@ local function _(p1, Message, PropName)
 end
 
 return function(p1, p2, p3)
-	-- upvalues: SduiActionType (copy), SduiErrorType (copy), UnifiedEventLogEnums (copy), FFlagAXUnifiedEventCounters (copy), config1 (copy), FFlagAXFixHomeAvatarsUnifiedPurchase (copy), FindAnalyticsFieldInAncestorsFunction (copy), config (copy), ImpressionEnums (copy), AXFixHomepageTryOnScreenAnalytics (copy), AppPage (copy), AnalyticsService (copy), UnifiedLoggingSurface (copy), FFlagAXDiscoveryItemPurchaseAttribution (copy), SendUnifiedEventLogFunction (copy), UnifiedEventCounterAggregator (copy), AXUnifiedEventFilter (copy), UnifiedEventLogConstants (copy), AvatarScreen (copy), FFlagAXEnableHomeTryOnComplexView (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
+	-- upvalues: SduiActionType (copy), SduiErrorType (copy), UnifiedEventLogEnums (copy), FFlagAXUnifiedEventCounters (copy), config1 (copy), FFlagAXFixHomeAvatarsUnifiedPurchase (copy), FindAnalyticsFieldInAncestorsFunction (copy), config (copy), ImpressionEnums (copy), AXFixHomepageTryOnScreenAnalytics (copy), AppPage (copy), AnalyticsService (copy), FFlagAXUnifiedEventStrictPayloads (copy), UnifiedLoggingSurface (copy), FFlagAXDiscoveryItemPurchaseAttribution (copy), SendUnifiedEventLogFunction (copy), UnifiedEventCounterAggregator (copy), AXUnifiedEventFilter (copy), UnifiedEventLogConstants (copy), AvatarScreen (copy), FFlagAXEnableHomeTryOnComplexView (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	
 	if ActionParams == nil then
@@ -145,15 +146,15 @@ return function(p1, p2, p3)
 			config4 = {
 				action = UnifiedEventLogEnums.MarketplaceUnifiedAction.ITEM_SELECTED,
 				surface = Entry,
-				itemId = ItemId,
+				itemId = if FFlagAXUnifiedEventStrictPayloads then Text else ItemId,
 				itemType = ASSET
 			}
 			
 			if Config.widgetId ~= nil and (Config.widgetType ~= nil and (Config.widgetItemIds ~= nil and Config.requestId ~= nil)) then
-				config4.widgetId = Config.widgetId
-				config4.widgetType = Config.widgetType
-				config4.widgetItemIds = Config.widgetItemIds
-				config4.requestId = Config.requestId
+				config4.widgetId = if FFlagAXUnifiedEventStrictPayloads then tostring(Config.widgetId) else Config.widgetId
+				config4.widgetType = if FFlagAXUnifiedEventStrictPayloads then tostring(Config.widgetType) else Config.widgetType
+				config4.widgetItemIds = if FFlagAXUnifiedEventStrictPayloads then tostring(Config.widgetItemIds) else Config.widgetItemIds
+				config4.requestId = if FFlagAXUnifiedEventStrictPayloads then tostring(Config.requestId) else Config.requestId
 				config4.uiTreatmentType = UnifiedEventLogEnums.WidgetUiTreatment.ITEM_GROUP
 				config4.widgetItemPrice = Number
 			else

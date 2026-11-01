@@ -22,7 +22,7 @@ return {
 		end
 		
 		return {
-			claim = function(p2, p3): string
+			claim = function(p2, p3)
 				-- upvalues: Callback (copy), Count (upval), Message (copy), Tbl (ref), p1 (copy)
 				local CallbackResult = nil
 				if Callback == nil then
@@ -32,14 +32,13 @@ return {
 					CallbackResult = Callback(p2, p3)
 				end
 				assert(type(CallbackResult) == "string", Message)
-				local RecyclerName: string = CallbackResult
 				
-				if Tbl[RecyclerName] ~= nil then
-					assert(false, `{p1}: duplicate key "{RecyclerName}"`)
+				if Tbl[CallbackResult] ~= nil then
+					assert(false, `{p1}: duplicate key "{CallbackResult}"`)
 				end
-				Tbl[RecyclerName] = true
+				Tbl[CallbackResult] = true
 				
-				return RecyclerName
+				return CallbackResult
 			end,
 			assertPreserved = function(RecyclerName, p2, p3)
 				-- upvalues: Callback (copy), Count (upval), Message (copy), Message1 (copy)
@@ -66,7 +65,7 @@ return {
 				-- upvalues: Tbl (ref)
 				Tbl[Key] = true
 			end,
-			replace = function(Key, p2, p3): string
+			replace = function(RecyclerName, p2, p3)
 				-- upvalues: Callback (copy), Count (upval), Message (copy), Tbl (ref), p1 (copy)
 				local CallbackResult = nil
 				if Callback == nil then
@@ -76,19 +75,18 @@ return {
 					CallbackResult = Callback(p2, p3)
 				end
 				assert(type(CallbackResult) == "string", Message)
-				local Key1: string = CallbackResult
 				
-				if Tbl[Key] == nil then
-					assert(false, `{p1}: cannot replace missing key "{Key}"`)
+				if Tbl[RecyclerName] == nil then
+					assert(false, `{p1}: cannot replace missing key "{RecyclerName}"`)
 				end
-				if Key1 ~= Key and Tbl[Key1] ~= nil then
-					assert(false, `{p1}: duplicate key "{Key1}"`)
+				if CallbackResult ~= RecyclerName and Tbl[CallbackResult] ~= nil then
+					assert(false, `{p1}: duplicate key "{CallbackResult}"`)
 				end
-				if Key1 ~= Key then
-					Tbl[Key] = nil
-					Tbl[Key1] = true
+				if CallbackResult ~= RecyclerName then
+					Tbl[RecyclerName] = nil
+					Tbl[CallbackResult] = true
 				end
-				return Key1
+				return CallbackResult
 			end,
 			rebuild = function(List)
 				-- upvalues: Callback (copy), Count (upval), Message (copy), p1 (copy), Tbl (ref)
@@ -104,13 +102,12 @@ return {
 						CallbackResult = Callback(value, i)
 					end
 					assert(type(CallbackResult) == "string", Message)
-					local RecyclerName: string = CallbackResult
 					
-					if t[RecyclerName] ~= nil then
-						assert(false, `{p1}: duplicate key "{RecyclerName}"`)
+					if t[CallbackResult] ~= nil then
+						assert(false, `{p1}: duplicate key "{CallbackResult}"`)
 					end
-					Buffer[i] = RecyclerName
-					t[RecyclerName] = true
+					Buffer[i] = CallbackResult
+					t[CallbackResult] = true
 				end
 				Tbl = t
 				

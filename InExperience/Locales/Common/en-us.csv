@@ -3724,6 +3724,7 @@ Feature.InExperienceShop.Message.RobuxPurchaseSuccess,You have successfully purc
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Are you sure you want to permanently delete this item from your inventory? If you change your mind, you'll need to earn it again in an experience."
 Feature.Item.Label.DeleteItemUndercase,Delete item
 Feature.Landing.Label.PoweredBy,Powered by
+Feature.Leaderboards.Heading.Leaderboard,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,Turn on
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,Help people who have your phone number add you as a friend on Roblox
@@ -4024,9 +4025,20 @@ Feature.PlayerSearchResults.Label.YouAreFollowing,You are following
 Feature.PlayerSearchResults.Label.YouAreFriends,You are friends
 Feature.PrivateServers.Action.CreatePrivateServer,Create Private Server
 Feature.PrivateServers.Action.FreeWithBlackbird,Free with Plus
+Feature.PrivateServers.Action.Generate,Generate
+Feature.PrivateServers.Description.FriendsAllowed,Anyone on your friends list can join without an invite
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Private server purchases are not supported in Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,This game doesn't support private servers.
+Feature.PrivateServers.Heading.ConfigurePrivateServer,Configure Private Server
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,Anyone with this link can join
+Feature.PrivateServers.Label.FriendsAllowed,Friends allowed
+Feature.PrivateServers.Label.InThisServer,In this server
 Feature.PrivateServers.Label.OwnersServer,{displayName}'s server
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,Generate a private server link
+Feature.PrivateServers.Label.PrivateServerLink,Private server link
+Feature.PrivateServers.Label.SearchPeople,Search people
+Feature.PrivateServers.Label.ServerName,Server Name:
+Feature.PrivateServers.Label.WhoCanJoin,Who can join
 Feature.Profile.Action.AboutThisProfile,About this profile
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4419,7 +4431,7 @@ Feature.SettingsHub.MethodOfAbuse.Other.Title,
 Feature.SettingsHub.MethodOfAbuse.Text.Subtitle,This person typed a mean word in text chat
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Subtitle,This person was screaming at the top of their lungs
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Title,
-Feature.SettingsHub.PageTitle.InThisServer,In this server
+Feature.SettingsHub.PageTitle.InThisServer,
 Feature.SettingsHub.Prompt.AllowAccessToCamera,Allow access to camera?
 Feature.SettingsHub.Prompt.AllowAccessToContacts,Allow access to contacts?
 Feature.SettingsHub.Prompt.AndroidWithDeeplink,<b>1. Select Permission<br />2. Select Microphone<br />3. Allow Roblox to access your Microphone</b>

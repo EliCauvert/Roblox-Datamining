@@ -1,4 +1,6 @@
-﻿local AvatarExperienceFlagsModule = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceFlags)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
+local _ = require(Parent.AvatarExperienceModel)
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXDeferWidgetLoadedUntilMarketplaceEntered = AvatarExperienceFlagsModule.FFlagAXDeferWidgetLoadedUntilMarketplaceEntered
 local FFlagAXLimitWidgetLoadedItemCount = AvatarExperienceFlagsModule.FFlagAXLimitWidgetLoadedItemCount
 local FIntAXWidgetLoadedItemCountLimit = AvatarExperienceFlagsModule.FIntAXWidgetLoadedItemCountLimit

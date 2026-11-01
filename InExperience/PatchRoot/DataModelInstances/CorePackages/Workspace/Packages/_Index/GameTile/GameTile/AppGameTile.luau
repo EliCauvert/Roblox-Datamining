@@ -1002,8 +1002,8 @@ local v1 = RoactRoduxModule.connect(function(p2, p3)
 	end
 	local GameTileLayoutDataModule = GetGameTileLayoutDataModule(PersonalizationEntry, p3.topicId)
 	local GameIconUrl = p3.gameIconUrl
-	local ResolveGameTileThumbnailUriModuleResult1 = nil
 	local ResolveGameTileThumbnailUriModuleResult = nil
+	local ResolveGameTileThumbnailUriModuleResult1 = nil
 	
 	if FFlagLuaAppHomeThumbnailPrefetch then
 		local function _(UseGridTile)

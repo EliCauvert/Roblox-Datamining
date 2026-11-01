@@ -272,7 +272,7 @@ return function(Frame)
 		local CreateElementFunction = ReactModule.createElement
 		local config1 = {
 			CurrentAction = createActivitySummaryActionText(if IsUseReactiveValueResultMatch then ClockBinding:map(function(StartedAt)
-				-- upvalues: Current (copy), AssistantLoading (copy), FFlagBuildExperiencePromptStallMessageModule (upval), v75 (copy), AssistantTakingLonger (copy), ChatConstantsModule (upval), UseContextResult (copy), LocalizationStringsModule (upval), AssistantStillWorking (copy)
+				-- upvalues: Current (copy), AssistantLoading (copy), FFlagBuildExperiencePromptStallMessageModule (upval), v1 (copy), AssistantTakingLonger (copy), ChatConstantsModule (upval), UseContextResult (copy), LocalizationStringsModule (upval), AssistantStillWorking (copy)
 				if not Current.isThinking then
 					return AssistantLoading
 				end
@@ -281,9 +281,9 @@ return function(Frame)
 				end
 				local Largest = math.max(0, StartedAt - Current.startedAt)
 				
-				if FFlagBuildExperiencePromptStallMessageModule and v75 ~= nil and AssistantTakingLonger ~= nil then
-					local LastProgressAt = v75.lastProgressAt or StartedAt
-					v75.lastProgressAt = LastProgressAt
+				if FFlagBuildExperiencePromptStallMessageModule and v1 ~= nil and AssistantTakingLonger ~= nil then
+					local LastProgressAt = v1.lastProgressAt or StartedAt
+					v1.lastProgressAt = LastProgressAt
 					
 					if ChatConstantsModule.PROMPT_STALL_SECONDS <= StartedAt - LastProgressAt then
 						return AssistantTakingLonger
@@ -293,11 +293,9 @@ return function(Frame)
 				local FormatResult = if ChatConstantsModule.ASSISTANT_THINKING_DURATION_SUFFIX_DELAY_SECONDS <= Largest then UseContextResult:Format(LocalizationStringsModule.CHAT_THINKING_SECONDS, { SECONDS = math.max(0, (math.floor(Largest))) }) else AssistantLoading
 				
 				return if math.floor(Largest / ASSISTANTSTATUSSWAPINTERVALSECONDS) % 2 == 0 then FormatResult else AssistantStillWorking
-			end) else TaskCount, 1, Frame.clockBinding, Segment.isWaitingForLocalTool ~= true)
+			end) else LocalizeActivityLabelResult, 1, Frame.clockBinding, Segment.isWaitingForLocalTool ~= true)
 		}
-		local TaskCount = LocalizeActivityLabelResult
 		local ClockBinding = Frame.clockBinding
-		local v3 = v1
 		local AssistantTakingLonger = if FFlagBuildExperiencePromptStallMessageModule and Segment.isWaitingForLocalTool ~= true then UseLocalizationResult.assistantTakingLonger else nil
 		Element = CreateElementFunction(View, { LayoutOrder = 2, tag = "col fill gap-xxsmall auto-y" }, config1)
 	else

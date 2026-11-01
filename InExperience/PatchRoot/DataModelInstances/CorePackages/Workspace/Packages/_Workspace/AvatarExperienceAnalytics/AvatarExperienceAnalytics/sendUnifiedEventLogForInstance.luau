@@ -6,6 +6,7 @@ local UnifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogCons
 local UnifiedEventLoggingUtilsModule = require(AvatarExperienceAnalytics.Utils.UnifiedEventLoggingUtils)
 local SendUnifiedEventLogModule = require(script.Parent.sendUnifiedEventLog)
 local UnifiedEventPageStoreModule = require(script.Parent.Store.UnifiedEventPageStore)
+local _ = require(script.Parent.Generated.UnifiedEventTypes)
 local IsRunningInStudioFunction = require(Parent.AppCommonLib).isRunningInStudio
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXMISEnableMultiShoppingUnifiedEvents = AvatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents

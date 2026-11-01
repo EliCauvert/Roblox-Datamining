@@ -29,16 +29,13 @@ return function(p1)
 		if Entry == nil then
 			Entry = config[UserModel.PresenceType.OFFLINE]
 		end
-		local Entry1 = Entry
-		local Entry2 = if p3 and p3.presence then config[p3.presence] else nil
+		local Entry1 = if p3 and p3.presence then config[p3.presence] else nil
 		
-		if Entry2 == nil then
-			Entry2 = config[UserModel.PresenceType.OFFLINE]
+		if Entry1 == nil then
+			Entry1 = config[UserModel.PresenceType.OFFLINE]
 		end
-		local Entry21 = Entry2
-		
-		if Entry1 ~= Entry21 then
-			return Entry21 < Entry1
+		if Entry ~= Entry1 then
+			return Entry1 < Entry
 		end
 		if p2.presence ~= UserModel.PresenceType.OFFLINE then
 			local LastOnline = p2.lastOnline

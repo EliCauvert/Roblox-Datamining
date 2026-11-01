@@ -510,6 +510,47 @@ local function performVIPServerPurchase(p1, Input)
 	end)
 end
 
+local function patchVIPServer(PermissionsName, Input)
+	-- upvalues: Replaced2 (copy), HttpService (copy), PromiseModule (copy), request (copy)
+	local config = {
+		Method = "PATCH",
+		Url = ("%sv1/vip-servers/%s"):format(Replaced2, PermissionsName),
+		Body = HttpService:JSONEncode(Input),
+		Headers = {
+			["Content-Type"] = "application/json",
+			Accept = "application/json"
+		}
+	}
+	
+	return PromiseModule.new(function(p1, p2)
+		-- upvalues: request (upval), config (copy)
+		request(config, p1, p2)
+	end)
+end
+
+local function updateVIPServer(p1, p2)
+	-- upvalues: patchVIPServer (copy)
+	return patchVIPServer(`{p1}`, p2)
+end
+
+local function updateVIPServerPermissions(p1, p2)
+	-- upvalues: patchVIPServer (copy)
+	return patchVIPServer(`{p1}/permissions`, p2)
+end
+
+local function searchUsers(Input)
+	-- upvalues: Replaced6 (copy), HttpService (copy), PromiseModule (copy), request (copy)
+	local config = {
+		Method = "GET",
+		Url = ("%sv1/users/search?keyword=%s&limit=10"):format(Replaced6, HttpService:UrlEncode(Input))
+	}
+	
+	return PromiseModule.new(function(p1, p2)
+		-- upvalues: request (upval), config (copy)
+		request(config, p1, p2)
+	end)
+end
+
 local function performLookPurchase(p1, Input)
 	-- upvalues: Replaced1 (copy), HttpService (copy), PromiseModule (copy), request (copy)
 	local config = {
@@ -611,7 +652,7 @@ end
 
 return {
 	new = function()
-		-- upvalues: PromiseModule (copy), getABTestGroup (copy), getProductInfo (copy), getPlayerOwns (copy), performPurchase (copy), performPurchaseV2 (copy), GetFFlagEnableCreatorStorePurchasingCutoverModule (copy), performCreatorStorePurchase (copy), loadAssetForEquip (copy), getAccountInfo (copy), getAssetInfo (copy), getBalanceInfo (copy), getBundleDetails (copy), getProductPurchasableDetails (copy), FFlagRefreshPriceOnRetryAfterUpsellModule (copy), getCatalogItemDetails (copy), getResellers (copy), getCreatorStoreProductInfo (copy), getSubscriptionPurchaseInfo (copy), performSubscriptionPurchase (copy), getPurchaseWarning (copy), postPurchaseWarningAcknowledge (copy), checkUserPurchaseSettings (copy), getVngShopUrl (copy), performDevProductEdpPurchase (copy), getExperienceProductInfo (copy), performExperiencePurchase (copy), getUniversePrivateServerSettings (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), performVIPServerPurchase (copy), performLookPurchase (copy), getUnifiedPurchaseFlowUserEligibility (copy), FFlagPurchasePromptFetchCartPricingForLooks (copy), performLookPurchaseBulkPurchase (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), performDeveloperSubscriptionRobuxPurchase (copy), getSubscriptionProductInfo (copy), FFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule (copy), GetLookDetailsV2ProductInfo (copy), postCartPricing (copy), postInGameItemCartPricing (copy)
+		-- upvalues: PromiseModule (copy), getABTestGroup (copy), getProductInfo (copy), getPlayerOwns (copy), performPurchase (copy), performPurchaseV2 (copy), GetFFlagEnableCreatorStorePurchasingCutoverModule (copy), performCreatorStorePurchase (copy), loadAssetForEquip (copy), getAccountInfo (copy), getAssetInfo (copy), getBalanceInfo (copy), getBundleDetails (copy), getProductPurchasableDetails (copy), FFlagRefreshPriceOnRetryAfterUpsellModule (copy), getCatalogItemDetails (copy), getResellers (copy), getCreatorStoreProductInfo (copy), getSubscriptionPurchaseInfo (copy), performSubscriptionPurchase (copy), getPurchaseWarning (copy), postPurchaseWarningAcknowledge (copy), checkUserPurchaseSettings (copy), getVngShopUrl (copy), performDevProductEdpPurchase (copy), getExperienceProductInfo (copy), performExperiencePurchase (copy), getUniversePrivateServerSettings (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), performVIPServerPurchase (copy), updateVIPServer (copy), updateVIPServerPermissions (copy), searchUsers (copy), performLookPurchase (copy), getUnifiedPurchaseFlowUserEligibility (copy), FFlagPurchasePromptFetchCartPricingForLooks (copy), performLookPurchaseBulkPurchase (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), performDeveloperSubscriptionRobuxPurchase (copy), getSubscriptionProductInfo (copy), FFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule (copy), GetLookDetailsV2ProductInfo (copy), postCartPricing (copy), postInGameItemCartPricing (copy)
 		local config = {
 			getABTestGroup = PromiseModule.promisify(getABTestGroup),
 			getProductInfo = PromiseModule.promisify(getProductInfo),
@@ -639,6 +680,9 @@ return {
 			performExperiencePurchase = PromiseModule.promisify(performExperiencePurchase),
 			getUniversePrivateServerSettings = PromiseModule.promisify(getUniversePrivateServerSettings),
 			performVIPServerPurchase = if FFlagLuaAppsEnablePromptVIPServerPurchase then performVIPServerPurchase else nil,
+			updateVIPServer = if FFlagLuaAppsEnablePromptVIPServerPurchase then updateVIPServer else nil,
+			updateVIPServerPermissions = if FFlagLuaAppsEnablePromptVIPServerPurchase then updateVIPServerPermissions else nil,
+			searchUsers = if FFlagLuaAppsEnablePromptVIPServerPurchase then searchUsers else nil,
 			performLookPurchase = PromiseModule.promisify(performLookPurchase),
 			getUnifiedPurchaseFlowUserEligibility = PromiseModule.promisify(getUnifiedPurchaseFlowUserEligibility),
 			performLookPurchaseBulkPurchase = if FFlagPurchasePromptFetchCartPricingForLooks then PromiseModule.promisify(performLookPurchaseBulkPurchase) else nil,

@@ -597,7 +597,7 @@ return function(p1)
 				
 				return
 			end
-			local DisplayNotificationDelay = if UseStateResult7.luaNotifInfo == nil then ConstantsModule.DisplayNotificationDelay elseif UseStateResult6 then 1 / SpringOptions.frequency else 0
+			local DisplayNotificationDelay = if UseStateResult7.luaNotifInfo ~= nil then if UseStateResult6 then 1 / SpringOptions.frequency else 0 else ConstantsModule.DisplayNotificationDelay
 			
 			if UseStateResult10 then
 				task.cancel(UseStateResult10)

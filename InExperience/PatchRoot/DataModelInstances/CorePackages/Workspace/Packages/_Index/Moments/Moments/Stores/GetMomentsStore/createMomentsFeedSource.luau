@@ -245,11 +245,11 @@ return function(Callback, p2)
 							if CommentsByFeedItemId1 == nil then
 								v4 = v5
 							else
-								local V78 = v5 or {}
+								local V77 = v5 or {}
 								for i1, value1 in CommentsByFeedItemId1 do
-									V78[i1] = value1
+									V77[i1] = value1
 								end
-								v4 = V78
+								v4 = V77
 							end
 							if DeepLinkedMomentsForUnavailableDialog.reactionsByMomentId then
 								GetReactionsStoreModule(false).setBatchReactionCounts(DeepLinkedMomentsForUnavailableDialog.reactionsByMomentId)
@@ -257,16 +257,16 @@ return function(Callback, p2)
 							if DeepLinkedMomentsForUnavailableDialog.shareInfoByMomentId then
 								GetShareCountsStoreModule(false).setBatchShareCounts(DeepLinkedMomentsForUnavailableDialog.shareInfoByMomentId)
 							end
-							for _, moment2 in DeepLinkedMomentsForUnavailableDialog.moments do
+							for _, moment1 in DeepLinkedMomentsForUnavailableDialog.moments do
 								local IsFeedItemIdMatch = nil
-								if moment2.momentId == DeepLinkedMomentId then
+								if moment1.momentId == DeepLinkedMomentId then
 									IsFeedItemIdMatch = true
 								else
-									local RecommendationMetadata = moment2.recommendationMetadata
+									local RecommendationMetadata = moment1.recommendationMetadata
 									IsFeedItemIdMatch = RecommendationMetadata ~= nil and RecommendationMetadata.feedItemId == DeepLinkedMomentId
 								end
-								if ShouldShowMomentInFeedModule(moment2) and IsFeedItemIdMatch then
-									table.insert(List, { kind = "moment", moment = moment2 })
+								if ShouldShowMomentInFeedModule(moment1) and IsFeedItemIdMatch then
+									table.insert(List, { kind = "moment", moment = moment1 })
 									Flag = true
 								end
 							end
@@ -312,14 +312,14 @@ return function(Callback, p2)
 					MomentId1 = Entry.targetId
 				end
 			end
-			for _, moment1 in v3.moments do
+			for _, moment2 in v3.moments do
 				Analytics.reportMomentsFeedItemsReceived(RecommendationSource.Trending)
 				
-				if MomentId == nil or moment1.momentId ~= MomentId then
-					if ShouldShowMomentInFeedModule(moment1) then
-						table.insert(List, { kind = "moment", moment = moment1 })
+				if MomentId == nil or moment2.momentId ~= MomentId then
+					if ShouldShowMomentInFeedModule(moment2) then
+						table.insert(List, { kind = "moment", moment = moment2 })
 					else
-						ReportUnavailableFeedItemModule(moment1, RecommendationSource.Trending)
+						ReportUnavailableFeedItemModule(moment2, RecommendationSource.Trending)
 					end
 				end
 			end

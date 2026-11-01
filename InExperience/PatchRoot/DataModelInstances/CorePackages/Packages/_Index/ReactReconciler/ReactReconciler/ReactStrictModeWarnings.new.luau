@@ -159,20 +159,18 @@ if require(Parent.ReactGlobals).__DEV__ then
 			end
 			Return1 = Return1.return_
 		end
-		local v3 = v2
-		
-		if v3 == nil then
+		if v2 == nil then
 			Console.error("Expected to find a StrictMode component in a strict mode tree. This error is likely caused by a bug in React. Please file an issue.")
 			
 			return
 		end
 		if t1[Return.type] then return end
-		local Entry = Tbl6[v3]
+		local Entry = Tbl6[v2]
 		
 		if typeof(Return.type) ~= "function" and (Return.type.contextTypes ~= nil or Return.type.childContextTypes ~= nil or p1 ~= nil and typeof(p1.getChildContext) == "function") then
 			if Entry == nil then
 				Entry = {}
-				Tbl6[v3] = Entry
+				Tbl6[v2] = Entry
 			end
 			table.insert(Entry, Return)
 		end
@@ -189,11 +187,11 @@ if require(Parent.ReactGlobals).__DEV__ then
 				t[GetComponentNameFunction(value1.type) or "Component"] = true
 				t1[value1.type] = true
 			end
-			local v4 = v6(t)
+			local v3 = v6(t)
 			local Success, Result = pcall(function()
-				-- upvalues: SetCurrentFiberFunction (upval), Entry (copy), Console (upval), v4 (copy)
+				-- upvalues: SetCurrentFiberFunction (upval), Entry (copy), Console (upval), v3 (copy)
 				SetCurrentFiberFunction(Entry)
-				Console.error("Legacy context API has been detected within a strict-mode tree.\n\nThe old API will be supported in all 16.x releases, but applications using it should migrate to the new version.\n\nPlease update the following components: %s\n\nLearn more about this warning here: https://reactjs.org/link/legacy-context", v4)
+				Console.error("Legacy context API has been detected within a strict-mode tree.\n\nThe old API will be supported in all 16.x releases, but applications using it should migrate to the new version.\n\nPlease update the following components: %s\n\nLearn more about this warning here: https://reactjs.org/link/legacy-context", v3)
 			end)
 			ResetCurrentFiberFunction()
 			

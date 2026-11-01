@@ -1,0 +1,1 @@
+﻿return game:DefineFastString("ExperienceShopFlagLinkedLayer", "Economy.DevMoney.InExperienceShops.ClientAndFrontend")

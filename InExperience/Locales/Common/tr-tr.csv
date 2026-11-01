@@ -2478,7 +2478,7 @@ Feature.Build.Notification.Title.NeedInput,İnşa Et için girdin gerekiyor
 Feature.Build.Placeholder.DescribeProduct,Satmak istediğin şeyi açıkla
 Feature.Build.Placeholder.DescribeProductUpdate,Güncellemeyi tarif et
 Feature.Build.Placeholder.InternalSpec,internal_code
-Feature.Build.Prompt.CreateDeveloperProduct,"Bir geliştirici ürünü oluşturmak, oyuna bağlamak, değişiklikleri doğrulayıp yayınlamak ve satın alınabilir hâle getirmek konusunda bana yardımcı ol."
+Feature.Build.Prompt.CreateDeveloperProduct,Oyunumu incele ve Robux kazanmak için satabileceğim en iyi öğeyi öner. Tek seferlik bir satın alma mı yoksa oyuncuların bir güçlendirme gibi tekrar satın alabileceği bir öğe mi oyunuma daha uygun olur? Nedenini açıkla.
 Feature.Build.Title.AdActive,Reklam kampanyası aktif
 Feature.Build.Title.AdCampaignDuration,{durationDays} günlük reklam kampanyası
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} gün
@@ -3680,6 +3680,7 @@ Feature.InExperienceShop.Message.RobuxPurchaseSuccess,{ROBUX_AMOUNT} Robux satı
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,Bu öğeyi envanterinden kalıcı olarak silmek istediğine emin misin? Fikrini değiştirirsen öğeyi bir deneyimde tekrar kazanman gerekecek.
 Feature.Item.Label.DeleteItemUndercase,Öğeyi sil
 Feature.Landing.Label.PoweredBy,Destekleyen:
+Feature.Leaderboards.Heading.Leaderboard,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,Telefon numaranı bilen insanların seni Roblox'ta arkadaş olarak eklemesini kolaylaştır
@@ -3973,7 +3974,9 @@ Feature.PrivateServers.Action.CreatePrivateServer,Özel Sunucu Oluştur
 Feature.PrivateServers.Action.FreeWithBlackbird,Plus ile ücretsiz
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Özel sunucu satın alma işlemleri Studio'da desteklenmiyor.
 Feature.PrivateServers.Description.VipServersNotSupported,"Bu oyun, özel sunucuları desteklemiyor."
+Feature.PrivateServers.Heading.ConfigurePrivateServer,Özel Sunucuyu Yapılandır
 Feature.PrivateServers.Label.OwnersServer,{displayName} adlı kişinin sunucusu
+Feature.PrivateServers.Label.ServerName,Sunucu Adı:
 Feature.Profile.Action.AboutThisProfile,Bu profil hakkında
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,

@@ -45,9 +45,8 @@ local function createLoggerTree(Text: string)
 		local NewResult = NewResults[Text1]
 		
 		if not NewResult then
-			local NewResult1 = LumberyakModule.Logger.new(Root1, Text1)
-			NewResults[Text1] = NewResult1
-			NewResult = NewResult1
+			NewResult = LumberyakModule.Logger.new(Root1, Text1)
+			NewResults[Text1] = NewResult
 		end
 		Root1 = NewResult
 	end

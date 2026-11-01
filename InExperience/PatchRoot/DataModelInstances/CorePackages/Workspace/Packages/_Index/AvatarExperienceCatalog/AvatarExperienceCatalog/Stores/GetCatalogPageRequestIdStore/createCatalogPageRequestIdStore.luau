@@ -78,14 +78,13 @@ return function()
 		Guids[Key1] = SignalResultEntry
 		
 		if Keys[Key] == Key1 then
-			local Guid1 = SignalResultEntry
 			local SignalResult = Signal(false)
 			
-			if SignalResult[Key] == Guid1 then
+			if SignalResult[Key] == SignalResultEntry then
 				return SignalResultEntry
 			end
 			local Copy = table.clone(SignalResult)
-			Copy[Key] = Guid1
+			Copy[Key] = SignalResultEntry
 			Signal2(Copy)
 		end
 		return SignalResultEntry

@@ -103,12 +103,10 @@ return function(p1, p2)
 				local LocalTts = nil
 				
 				if FFlagMomentsTTSPendingPreviewPlaybackModule and FFlagMomentsTTSFeedPlaybackModule and IsIncludeLocalTts then
-					local Edits1 = Edits
-					
-					if LocalContent == nil or Edits1 == nil then
+					if LocalContent == nil or Edits == nil then
 						LocalTts = nil
 					else
-						local Tts = Edits1.tts
+						local Tts = Edits.tts
 						LocalTts = if Tts == nil or Tts.text == nil or Tts.text == "" then nil else Tts
 					end
 				else
@@ -172,12 +170,10 @@ return function(p1, p2)
 			local LocalTts = nil
 			
 			if FFlagMomentsTTSPendingPreviewPlaybackModule and FFlagMomentsTTSFeedPlaybackModule and IsIncludeLocalTts then
-				local Edits1 = Edits
-				
-				if LocalContent == nil or Edits1 == nil then
+				if LocalContent == nil or Edits == nil then
 					LocalTts = nil
 				else
-					local Tts = Edits1.tts
+					local Tts = Edits.tts
 					LocalTts = if Tts == nil or Tts.text == nil or Tts.text == "" then nil else Tts
 				end
 			else

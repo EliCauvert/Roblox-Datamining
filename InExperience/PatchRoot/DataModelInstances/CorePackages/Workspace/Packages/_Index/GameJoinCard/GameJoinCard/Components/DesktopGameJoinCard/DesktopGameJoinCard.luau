@@ -25,6 +25,7 @@ local ViewProfileSourceValues = AnalyticsConstantsModule.viewProfileSourceValues
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagBlockEDPClickthrough = SharedFlagsModule.FFlagBlockEDPClickthrough
 local FFlagJoinabilityCTARefactor = SharedFlagsModule.FFlagJoinabilityCTARefactor
+local FFlagJoinabilityCTAContextCopy = SharedFlagsModule.FFlagJoinabilityCTAContextCopy
 local FFlagDesktopGameJoinCardGamepadSupport = SharedFlagsModule.FFlagDesktopGameJoinCardGamepadSupport
 local FFlagConsoleOpenGameJoinCard = SharedFlagsModule.FFlagConsoleOpenGameJoinCard
 local UseGameJoinCardGamepadNavigationFunction = nil
@@ -40,7 +41,7 @@ local _ = require(GameJoinCard.Components.Actions.Types)
 local BuildJoinCardActionsComponentModule = require(GameJoinCard.Components.Actions.buildJoinCardActionsComponent)
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseScaledValueFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), GetBuilderIconForCurrentPlatformFunction (copy), ViewEDPsourceValues (copy), ViewProfileSourceValues (copy), ControlState (copy), FFlagConsoleOpenGameJoinCard (copy), FFlagDesktopGameJoinCardGamepadSupport (copy), UseGameJoinCardGamepadNavigationFunction (ref), UseComposedRefFunction (copy), FFlagJoinabilityCTARefactor (copy), Skeleton (copy), Radius (copy), AssignPrimaryFocusRefFunction (ref), BuildJoinCardActionsComponentModule (copy), Button (copy), View (copy), Image (copy), FFlagBlockEDPClickthrough (copy), StateLayerAffordance (copy), Text (copy), Icon (copy), IconSize (copy), AgeCheckUpsellCTAModule (copy), ButtonVariant (copy), InputSize (copy), FoundationModule (copy)
+	-- upvalues: UseTokensFunction (copy), UseScaledValueFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), GetBuilderIconForCurrentPlatformFunction (copy), ViewEDPsourceValues (copy), ViewProfileSourceValues (copy), ControlState (copy), FFlagConsoleOpenGameJoinCard (copy), FFlagDesktopGameJoinCardGamepadSupport (copy), UseGameJoinCardGamepadNavigationFunction (ref), UseComposedRefFunction (copy), FFlagJoinabilityCTARefactor (copy), Skeleton (copy), Radius (copy), AssignPrimaryFocusRefFunction (ref), BuildJoinCardActionsComponentModule (copy), Button (copy), FFlagJoinabilityCTAContextCopy (copy), View (copy), Image (copy), FFlagBlockEDPClickthrough (copy), StateLayerAffordance (copy), Text (copy), Icon (copy), IconSize (copy), AgeCheckUpsellCTAModule (copy), ButtonVariant (copy), InputSize (copy), FoundationModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseScaledValueResult = UseScaledValueFunction(260)
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -99,7 +100,7 @@ return function(p1)
 				radius = Radius.Medium
 			})
 		else
-			t, v52 = BuildJoinCardActionsComponentModule(PrimaryButtonFocusRef and AssignPrimaryFocusRefFunction(p1.actions, PrimaryButtonFocusRef) or p1.actions, {
+			t, v53 = BuildJoinCardActionsComponentModule(PrimaryButtonFocusRef and AssignPrimaryFocusRefFunction(p1.actions, PrimaryButtonFocusRef) or p1.actions, {
 				playTogether = UseLocalizationResult.playTogether,
 				playTogetherSoon = UseLocalizationResult.playTogetherSoon,
 				differentServer = UseLocalizationResult.differentServer
@@ -123,6 +124,8 @@ return function(p1)
 			end)
 		end
 	end
+	local NoIsConsole: boolean = FFlagJoinabilityCTAContextCopy and not p1.isConsole
+	
 	return ReactModule.createElement(FoundationModule.Popover.Root, { isOpen = p1.isOpen }, {
 		Anchor = ReactModule.createElement(FoundationModule.Popover.Anchor, { anchorRef = p1.anchorRef }),
 		Content = ReactModule.createElement(FoundationModule.Popover.Content, {
@@ -239,7 +242,7 @@ return function(p1)
 						}) else nil
 					})
 				}),
-				CtaContext = if FFlagJoinabilityCTARefactor and v1 ~= nil and not p1.isConsole then ReactModule.createElement(View, {
+				CtaContext = if NoIsConsole and v1 ~= nil then ReactModule.createElement(View, {
 					tag = "col align-x-left items-start gap-xxsmall size-full-0 auto-y",
 					LayoutOrder = 2
 				}, {

@@ -12,7 +12,10 @@ local AvatarExperienceCommonModule = require(Parent.AvatarExperienceCommon)
 local UseSelectorSignalFunction = AvatarExperienceCommonModule.Hooks.useSelectorSignal
 local SelectSearchKeyword = AvatarExperienceCommonModule.State.Selectors.selectSearchKeyword
 local UnifiedEventLoggingUtilsModule = require(AvatarExperienceAnalytics.Utils.UnifiedEventLoggingUtils)
-local FFlagAXUnifiedImpressionsOnThumbnail = require(Parent.AvatarExperienceFlags).FFlagAXUnifiedImpressionsOnThumbnail
+local MapAnalyticsMetadataFieldsModule = require(AvatarExperienceAnalytics.Utils.mapAnalyticsMetadataFields)
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXUnifiedImpressionsOnThumbnail = AvatarExperienceFlagsModule.FFlagAXUnifiedImpressionsOnThumbnail
+local FFlagAXUnifiedEventStrictPayloads = AvatarExperienceFlagsModule.FFlagAXUnifiedEventStrictPayloads
 local UnifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
 
 local function selectAnalyticsMetadata(p1)
@@ -20,13 +23,13 @@ local function selectAnalyticsMetadata(p1)
 end
 
 return function(p1)
-	-- upvalues: UseAvatarRouteFunction (copy), UseSelectorSignalFunction (copy), SelectSearchKeyword (copy), selectAnalyticsMetadata (copy), ReactModule (copy), AvatarScreenProperties (copy), UnifiedEventLoggingUtilsModule (copy), UnifiedEventLogEnumsModule (copy), FFlagAXUnifiedImpressionsOnThumbnail (copy), UnifiedEventLogConstantsModule (copy), UnifiedLoggingSurface (copy), CryoModule (copy), SendUnifiedEventLogForInstanceModule (copy)
+	-- upvalues: UseAvatarRouteFunction (copy), UseSelectorSignalFunction (copy), SelectSearchKeyword (copy), selectAnalyticsMetadata (copy), ReactModule (copy), AvatarScreenProperties (copy), UnifiedEventLoggingUtilsModule (copy), UnifiedEventLogEnumsModule (copy), FFlagAXUnifiedImpressionsOnThumbnail (copy), UnifiedEventLogConstantsModule (copy), UnifiedLoggingSurface (copy), CryoModule (copy), FFlagAXUnifiedEventStrictPayloads (copy), MapAnalyticsMetadataFieldsModule (copy), SendUnifiedEventLogForInstanceModule (copy)
 	local UseAvatarRouteResult = UseAvatarRouteFunction()
 	local UseSelectorSignalResult = UseSelectorSignalFunction(SelectSearchKeyword)
 	local UseSelectorSignalResult1 = UseSelectorSignalFunction(selectAnalyticsMetadata)
 	
 	return ReactModule.useCallback(function(p2)
-		-- upvalues: AvatarScreenProperties (upval), UseAvatarRouteResult (copy), UnifiedEventLoggingUtilsModule (upval), UnifiedEventLogEnumsModule (upval), FFlagAXUnifiedImpressionsOnThumbnail (upval), p1 (copy), UseSelectorSignalResult (copy), UnifiedEventLogConstantsModule (upval), UnifiedLoggingSurface (upval), CryoModule (upval), UseSelectorSignalResult1 (copy), SendUnifiedEventLogForInstanceModule (upval)
+		-- upvalues: AvatarScreenProperties (upval), UseAvatarRouteResult (copy), UnifiedEventLoggingUtilsModule (upval), UnifiedEventLogEnumsModule (upval), FFlagAXUnifiedImpressionsOnThumbnail (upval), p1 (copy), UseSelectorSignalResult (copy), UnifiedEventLogConstantsModule (upval), UnifiedLoggingSurface (upval), CryoModule (upval), FFlagAXUnifiedEventStrictPayloads (upval), MapAnalyticsMetadataFieldsModule (upval), UseSelectorSignalResult1 (copy), SendUnifiedEventLogForInstanceModule (upval)
 		local VisibleInstance = p2.visibleInstance
 		local AvatarScreenProperty = AvatarScreenProperties[UseAvatarRouteResult.opaque.name]
 		local Flag: boolean? = nil
@@ -39,8 +42,27 @@ return function(p1)
 				if attribute == UnifiedEventLogEnumsModule.MarketplaceUnifiedAction.PURCHASE_ATTEMPT or attribute == UnifiedEventLogEnumsModule.MarketplaceUnifiedAction.UI_ELEMENT_CLICK then return end
 			end
 		end
-		if not FFlagAXUnifiedImpressionsOnThumbnail then
-			SendUnifiedEventLogForInstanceModule(VisibleInstance, CryoModule.Dictionary.join(UseSelectorSignalResult1(false), {
+		if FFlagAXUnifiedImpressionsOnThumbnail then
+			local AvatarScreenProperty1 = AvatarScreenProperties[p1 or UseAvatarRouteResult.opaque.name]
+			local config = {
+				action = if Flag then UnifiedEventLogEnumsModule.MarketplaceUnifiedAction.WIDGET_IMPRESSION else UnifiedEventLogEnumsModule.MarketplaceUnifiedAction.ITEM_IMPRESSION,
+				keyword = UseSelectorSignalResult(false)
+			}
+			
+			if VisibleInstance:GetAttribute(UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "surface") == nil then
+				config.surface = if AvatarScreenProperty1 and AvatarScreenProperty1.analyticsData then AvatarScreenProperty1.analyticsData.unifiedLoggingSurface else nil
+			end
+			if (config.surface or VisibleInstance:GetAttribute(UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "surface")) ~= UnifiedLoggingSurface.SEARCH_RESULTS then
+				config.keyword = nil
+			end
+			SendUnifiedEventLogForInstanceModule(VisibleInstance, CryoModule.Dictionary.union(CryoModule.Dictionary.join(if FFlagAXUnifiedEventStrictPayloads then MapAnalyticsMetadataFieldsModule(UseSelectorSignalResult1(false), true) else UseSelectorSignalResult1(false), { selectedItemIndex = CryoModule.None }), config), {
+				includeScreenSize = true,
+				includeElementSizeAndPosition = true
+			})
+			
+			return
+		elseif FFlagAXUnifiedEventStrictPayloads then
+			SendUnifiedEventLogForInstanceModule(VisibleInstance, CryoModule.Dictionary.join(MapAnalyticsMetadataFieldsModule(UseSelectorSignalResult1(false), true), {
 				action = if Flag then UnifiedEventLogEnumsModule.MarketplaceUnifiedAction.WIDGET_IMPRESSION else UnifiedEventLogEnumsModule.MarketplaceUnifiedAction.ITEM_IMPRESSION,
 				surface = if AvatarScreenProperty and AvatarScreenProperty.analyticsData then AvatarScreenProperty.analyticsData.unifiedLoggingSurface else nil,
 				keyword = UseSelectorSignalResult(false)
@@ -50,23 +72,16 @@ return function(p1)
 			})
 			
 			return
+		else
+			SendUnifiedEventLogForInstanceModule(VisibleInstance, CryoModule.Dictionary.join(UseSelectorSignalResult1(false), {
+				action = if Flag then UnifiedEventLogEnumsModule.MarketplaceUnifiedAction.WIDGET_IMPRESSION else UnifiedEventLogEnumsModule.MarketplaceUnifiedAction.ITEM_IMPRESSION,
+				surface = if AvatarScreenProperty and AvatarScreenProperty.analyticsData then AvatarScreenProperty.analyticsData.unifiedLoggingSurface else nil,
+				keyword = UseSelectorSignalResult(false)
+			}), {
+				includeScreenSize = true,
+				includeElementSizeAndPosition = true
+			})
 		end
-		local AvatarScreenProperty1 = AvatarScreenProperties[p1 or UseAvatarRouteResult.opaque.name]
-		local config = {
-			action = if Flag then UnifiedEventLogEnumsModule.MarketplaceUnifiedAction.WIDGET_IMPRESSION else UnifiedEventLogEnumsModule.MarketplaceUnifiedAction.ITEM_IMPRESSION,
-			keyword = UseSelectorSignalResult(false)
-		}
-		
-		if VisibleInstance:GetAttribute(UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "surface") == nil then
-			config.surface = if AvatarScreenProperty1 and AvatarScreenProperty1.analyticsData then AvatarScreenProperty1.analyticsData.unifiedLoggingSurface else nil
-		end
-		if (config.surface or VisibleInstance:GetAttribute(UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "surface")) ~= UnifiedLoggingSurface.SEARCH_RESULTS then
-			config.keyword = nil
-		end
-		SendUnifiedEventLogForInstanceModule(VisibleInstance, CryoModule.Dictionary.union(CryoModule.Dictionary.join(UseSelectorSignalResult1(false), { selectedItemIndex = CryoModule.None }), config), {
-			includeScreenSize = true,
-			includeElementSizeAndPosition = true
-		})
 	end, {
 		UseAvatarRouteResult,
 		UseSelectorSignalResult,

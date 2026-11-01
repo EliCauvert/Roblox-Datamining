@@ -656,7 +656,6 @@ local function createSduiPoolStore(Key)
 					Entry = { get = Signal, set = Signal2 }
 					t1[SectionId] = Entry
 				end
-				local SetFunction: (any) -> () = Entry.set
 				local config = {
 					poolId = PoolId,
 					numberOfRows = value.numberOfRows,
@@ -666,7 +665,7 @@ local function createSduiPoolStore(Key)
 					prevSectionInPoolId = PrevSectionInPoolId
 				}
 				config.prevSectionId = PrevSectionId
-				SetFunction(config)
+				Entry.set(config)
 				PrevSectionId = SectionId
 			end
 		end,

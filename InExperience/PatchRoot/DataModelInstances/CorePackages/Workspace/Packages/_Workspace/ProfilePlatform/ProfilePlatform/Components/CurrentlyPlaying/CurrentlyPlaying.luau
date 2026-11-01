@@ -32,10 +32,10 @@ local ContentProvider = game:GetService("ContentProvider")
 local FFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule = require(ProfilePlatform.Flags.FFlagProfileCurrentlyPlayingEDPFromNameAndThumbnail)
 local FFlagProfileCurrentlyPlayingEDPFromCardModule = require(ProfilePlatform.Flags.FFlagProfileCurrentlyPlayingEDPFromCard)
 local FFlagProfilePlatformImproveGameDetailsAnalytics = require(Parent.SharedFlags).FFlagProfilePlatformImproveGameDetailsAnalytics
-local FFlagJoinabilityCTARefactor = require(Parent.SharedFlags).FFlagJoinabilityCTARefactor
+local FFlagJoinabilityCTAContextCopy = require(Parent.SharedFlags).FFlagJoinabilityCTAContextCopy
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), UseDispatchFunction (copy), FFlagProfileCurrentlyPlayingEDPFromCardModule (copy), FFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule (copy), UseNavigationFunction (copy), UseProfileWrapperContextModule (copy), FFlagProfilePlatformImproveGameDetailsAnalytics (copy), UseRoactServiceFunction (copy), RoactAnalyticsCommonGameEvents (copy), FFlagJoinabilityCTARefactor (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), NetworkingGamesModule (copy), UseSelectorFunction (copy), GetDeepValueModule (copy), AppPage (copy), OpenGameDetailsFunction (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), ContentProvider (copy), HorizontalPageMargin (copy), View (copy), StateLayerAffordance (copy), Image (copy), Skeleton (copy), Radius (copy), Text (copy)
+	-- upvalues: UseTokensFunction (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), UseDispatchFunction (copy), FFlagProfileCurrentlyPlayingEDPFromCardModule (copy), FFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule (copy), UseNavigationFunction (copy), UseProfileWrapperContextModule (copy), FFlagProfilePlatformImproveGameDetailsAnalytics (copy), UseRoactServiceFunction (copy), RoactAnalyticsCommonGameEvents (copy), FFlagJoinabilityCTAContextCopy (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), NetworkingGamesModule (copy), UseSelectorFunction (copy), GetDeepValueModule (copy), AppPage (copy), OpenGameDetailsFunction (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), ContentProvider (copy), HorizontalPageMargin (copy), View (copy), StateLayerAffordance (copy), Image (copy), Skeleton (copy), Radius (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.CurrentlyPlaying)
 	local UseDispatchResult = UseDispatchFunction()
@@ -43,7 +43,7 @@ return function(p1)
 	local UseProfileWrapperContextModuleResult = if FFlagProfileCurrentlyPlayingEDPFromCardModule or FFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule then UseProfileWrapperContextModule() else nil
 	local ProfileId = UseProfileWrapperContextModuleResult and UseProfileWrapperContextModuleResult.profileId
 	local UseRoactServiceResult = if FFlagProfilePlatformImproveGameDetailsAnalytics then UseRoactServiceFunction(RoactAnalyticsCommonGameEvents) else nil
-	local UseLocalizationResult = if FFlagJoinabilityCTARefactor then UseLocalizationFunction({
+	local UseLocalizationResult = if FFlagJoinabilityCTAContextCopy then UseLocalizationFunction({
 		playTogether = TextKeysModule.PlayTogether,
 		playTogetherSoon = TextKeysModule.PlayTogetherSoon
 	}) else nil
@@ -102,7 +102,7 @@ return function(p1)
 	end, { RbxThumb })
 	local AgeRecommendationAgeRecommendationSummaryAgeRecommendationDisplayNameWithHeaderShort = GetDeepValueModule(UseProfileJsonComponentModuleResult, "ageRecommendation.ageRecommendationSummary.ageRecommendation.displayNameWithHeaderShort")
 	local IsNameMatch: boolean = Name == "" or UseStateResult == Enum.AssetFetchStatus.Loading
-	local PlayTogether = if FFlagJoinabilityCTARefactor and not IsNameMatch then if UseProfileJsonComponentModuleResult.joinability == "Joinable" then UseLocalizationResult.playTogether elseif UseProfileJsonComponentModuleResult.joinability == "NotJoinable" then UseLocalizationResult.playTogetherSoon else nil else nil
+	local PlayTogether = if FFlagJoinabilityCTAContextCopy and not IsNameMatch then if UseProfileJsonComponentModuleResult.joinability == "Joinable" then UseLocalizationResult.playTogether elseif UseProfileJsonComponentModuleResult.joinability == "NotJoinable" then UseLocalizationResult.playTogetherSoon else nil else nil
 	
 	return if UniverseId then ReactModule.createElement(HorizontalPageMargin, {
 		backgroundTransparency = 1,

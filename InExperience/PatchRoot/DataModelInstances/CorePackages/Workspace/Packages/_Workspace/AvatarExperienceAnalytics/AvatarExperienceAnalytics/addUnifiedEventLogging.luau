@@ -1,5 +1,6 @@
 ﻿local CollectionService = game:GetService("CollectionService")
 local UnifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
+local _ = require(script.Parent.Generated.UnifiedEventTypes)
 local AvatarExperienceFlagsModule = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceFlags)
 local FFlagAXMISEnableMultiShoppingUnifiedEvents = AvatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents
 local FFlagAXSkipTapDetection = AvatarExperienceFlagsModule.FFlagAXSkipTapDetection

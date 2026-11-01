@@ -281,16 +281,15 @@ local function v76(Frame)
 	end)
 	local MapResult2 = MapResult:map(function(p1)
 		-- upvalues: MessageText (ref), FFlagEnableInExpChatSummaryOnLuaModule (upval), FFlagExpChatPolishSummaryMessageUIModule (upval), SpatialPanelTextSize1 (copy), UseTokensResult (copy), Frame (copy), TextChatMessageChatActionTypeModule (upval), SummaryMessageRichTextModule (upval), FFlagExpChatPresetChatEnabled (upval), IsPresetMessageFunction (upval), GetPresetIconRichTextFunction (upval), PrefixText (copy), ShowTranslationButton (copy), ExpChatTranslationToggleSpacingFix (upval), DuplicateInvisibleTextModule (upval), PrefixTextProperties (copy)
-		local Text: string = MessageText
+		local Text = MessageText
 		
 		if FFlagEnableInExpChatSummaryOnLuaModule then
 			local SpatialPanelTextSize = if FFlagExpChatPolishSummaryMessageUIModule then SpatialPanelTextSize1 else nil
-			local MessageText1 = MessageText or ""
+			Text = MessageText or ""
 			
 			if Frame.message.chatActionType == TextChatMessageChatActionTypeModule.Summary then
-				MessageText1 = SummaryMessageRichTextModule.wrapInSummaryMutedStyle(SummaryMessageRichTextModule.getSummaryIconPrefix(SpatialPanelTextSize) .. " " .. MessageText1, UseTokensResult.Color.Content.Muted.Color3:ToHex(), SpatialPanelTextSize)
+				Text = SummaryMessageRichTextModule.wrapInSummaryMutedStyle(SummaryMessageRichTextModule.getSummaryIconPrefix(SpatialPanelTextSize) .. " " .. Text, UseTokensResult.Color.Content.Muted.Color3:ToHex(), SpatialPanelTextSize)
 			end
-			Text = MessageText1
 		end
 		if FFlagExpChatPresetChatEnabled and IsPresetMessageFunction(Frame.message) then
 			Text ..= ` {GetPresetIconRichTextFunction(SpatialPanelTextSize1)}`
@@ -345,7 +344,7 @@ local function v76(Frame)
 		-- upvalues: FIntExpChatWindowTransparencyRewriteInteractableThresholdModule (upval)
 		return p1 < FIntExpChatWindowTransparencyRewriteInteractableThresholdModule
 	end)) else nil
-	local CreateElementFunction2 = ReactModule.createElement
+	local CreateElementFunction = ReactModule.createElement
 	local v3 = "Frame"
 	local config = {
 		BackgroundTransparency = 1,
@@ -354,7 +353,7 @@ local function v76(Frame)
 		LayoutOrder = Frame.LayoutOrder
 	}
 	local config1 = { UIPadding = UIPadding }
-	local CreateElementFunction1 = ReactModule.createElement
+	local CreateElementFunction2 = ReactModule.createElement
 	local v4 = "Frame"
 	local config2 = {
 		BackgroundTransparency = 1,
@@ -426,7 +425,7 @@ local function v76(Frame)
 	if string.len(PrefixText) == 0 then
 		Element = nil
 	else
-		local CreateElementFunction = ReactModule.createElement
+		local CreateElementFunction1 = ReactModule.createElement
 		local v7 = "Frame"
 		local config3 = {
 			BackgroundTransparency = 1,
@@ -487,11 +486,11 @@ local function v76(Frame)
 			ImageButton = nil
 		end
 		config4.TranslationButton = ImageButton
-		Element = CreateElementFunction(v7, config3, config4)
+		Element = CreateElementFunction1(v7, config3, config4)
 	end
 	t.TextMessageButton = Element
-	config1.TextMessage = CreateElementFunction1(v4, config2, t)
-	local Element1 = CreateElementFunction2(v3, config, config1)
+	config1.TextMessage = CreateElementFunction2(v4, config2, t)
+	local Element1 = CreateElementFunction(v3, config, config1)
 	
 	if FFlagDebugMessageProfilingModule then
 		debug.profileend()

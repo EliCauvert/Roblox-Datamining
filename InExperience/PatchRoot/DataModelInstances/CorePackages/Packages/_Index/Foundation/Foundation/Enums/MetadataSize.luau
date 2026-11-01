@@ -1,0 +1,1 @@
+﻿return { Medium = "Medium", Small = "Small" }

@@ -109,24 +109,23 @@ local function updateDeviceData(Callback)
 	-- upvalues: NewResult (copy), deepClone (copy), writeDeviceData (copy)
 	local WhatsNewEntriesCachedJsonForKey = NewResult:getCachedJsonForKey("WhatsNewEntries")
 	local WhatsNewEntriesCachedJsonForKey1 = if type(WhatsNewEntriesCachedJsonForKey) == "table" then WhatsNewEntriesCachedJsonForKey else nil
-	local config1 = nil
+	local config = nil
 	
 	if WhatsNewEntriesCachedJsonForKey1 then
-		local config = {
+		config = {
 			entries = deepClone(WhatsNewEntriesCachedJsonForKey1.entries)
 		}
 		
 		if type(config.entries) ~= "table" then
 			config.entries = {}
 		end
-		config1 = config
 	else
-		config1 = { entries = {} }
+		config = { entries = {} }
 	end
-	if type(config1.entries) ~= "table" then
-		config1.entries = {}
+	if type(config.entries) ~= "table" then
+		config.entries = {}
 	end
-	local CallbackResult = Callback(config1)
+	local CallbackResult = Callback(config)
 	
 	if CallbackResult == nil then return end
 	if type(CallbackResult.entries) ~= "table" then
@@ -169,14 +168,13 @@ return {
 		if WhatsNewEntriesCachedJsonForKey1 == nil then
 			config = { entries = {} }
 		else
-			local config1 = {
+			config = {
 				entries = deepClone(WhatsNewEntriesCachedJsonForKey1.entries)
 			}
 			
-			if type(config1.entries) ~= "table" then
-				config1.entries = {}
+			if type(config.entries) ~= "table" then
+				config.entries = {}
 			end
-			config = config1
 		end
 		return (toSnapshot(config.entries))
 	end,

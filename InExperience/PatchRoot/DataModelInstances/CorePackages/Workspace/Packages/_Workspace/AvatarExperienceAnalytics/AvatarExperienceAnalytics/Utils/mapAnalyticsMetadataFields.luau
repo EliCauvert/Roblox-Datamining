@@ -1,4 +1,5 @@
-﻿local list = {
+﻿local FFlagAXUnifiedEventStrictPayloads = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceFlags).FFlagAXUnifiedEventStrictPayloads
+local list = {
 	{ protoKey = "sort", aliases = { "sortEnumValue" } },
 	{
 		protoKey = "filterSalesType",
@@ -24,14 +25,17 @@ for _, value in list do
 		t[alias] = true
 	end
 end
-return function(List)
-	-- upvalues: t (copy), list (copy)
+return function(List, p1)
+	-- upvalues: FFlagAXUnifiedEventStrictPayloads (copy), t (copy), list (copy)
 	local t1 = {}
 	
 	if List == nil then
 		return t1
 	end
 	for i, value in List do
+		if FFlagAXUnifiedEventStrictPayloads and p1 and t[i] then
+			t1[i] = value
+		end
 		if not t[i] then
 			t1[i] = value
 		end

@@ -318,26 +318,25 @@ return function(p1)
 			if PendingSubmission == nil or PendingSubmission.text ~= Text then
 				local Guid = HttpService:GenerateGUID(false)
 				local PendingSentinelResult = PendingSentinelFunction(Guid)
-				local Copy = nil
+				local List = nil
 				
 				if PendingSubmission == nil then
-					Copy = table.clone(GetResult.orderedCommentIds)
+					List = table.clone(GetResult.orderedCommentIds)
 				else
 					local OrderedCommentIds = GetResult.orderedCommentIds
 					local PendingSentinelResult1 = PendingSentinelFunction(PendingSubmission.clientRequestId)
-					local List = {}
+					List = {}
 					
 					for _, orderedCommentId in OrderedCommentIds do
 						if orderedCommentId ~= PendingSentinelResult1 then
 							table.insert(List, orderedCommentId)
 						end
 					end
-					Copy = List
 				end
-				table.insert(Copy, 1, PendingSentinelResult)
+				table.insert(List, 1, PendingSentinelResult)
 				config.set({
 					submissionError = nil,
-					orderedCommentIds = Copy,
+					orderedCommentIds = List,
 					channelId = GetResult.channelId,
 					nextCursor = GetResult.nextCursor,
 					hasMore = GetResult.hasMore,

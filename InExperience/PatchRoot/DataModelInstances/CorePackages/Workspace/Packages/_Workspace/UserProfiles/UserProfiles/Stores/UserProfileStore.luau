@@ -149,22 +149,19 @@ local Computed = SignalsModule.createComputed(function(_)
 								for _, profileDetail in ipairs(ProfileDetails) do
 									local Text1 = tostring(profileDetail.userId)
 									local CreateResult = CreateResults[Text1]
-									local CreateResult1 = nil
 									
 									if CreateResult == nil then
 										UserProfileStore:trace("Creating profile: {}", Text1)
-										local NewUserProfileModel = UserProfileModelModule.create(Text1)
-										CreateResults[Text1] = NewUserProfileModel
-										CreateResult1 = NewUserProfileModel
+										CreateResult = UserProfileModelModule.create(Text1)
+										CreateResults[Text1] = CreateResult
 									else
 										UserProfileStore:trace("Found profile: {}", Text1)
-										CreateResult1 = CreateResult
 									end
 									if profileDetail then
 										UserProfileStore:trace("Updating profile: {}", Text1)
-										UserProfileModelModule.update(CreateResult1, profileDetail)
+										UserProfileModelModule.update(CreateResult, profileDetail)
 									end
-									Entry[Text1] = CreateResult1
+									Entry[Text1] = CreateResult
 								end
 							end
 						end
@@ -220,22 +217,20 @@ local Computed = SignalsModule.createComputed(function(_)
 			if Entry1 == nil and Enabled == false then
 				Enabled = true
 			end
-			local Entry2 = Entry1
+			local CreateResult = Entry1
 			
-			if not Entry2 then
-				local CreateResult = CreateResults[userId]
+			if not CreateResult then
+				CreateResult = CreateResults[userId]
 				
 				if CreateResult == nil then
 					UserProfileStore:trace("Creating profile: {}", userId)
-					local NewUserProfileModel = UserProfileModelModule.create(userId)
-					CreateResults[userId] = NewUserProfileModel
-					Entry2 = NewUserProfileModel
+					CreateResult = UserProfileModelModule.create(userId)
+					CreateResults[userId] = CreateResult
 				else
 					UserProfileStore:trace("Found profile: {}", userId)
-					Entry2 = CreateResult
 				end
 			end
-			table.insert(Data, Entry2)
+			table.insert(Data, CreateResult)
 		end
 		if Enabled == false then
 			UserProfileStore:trace("All requested profiles are cached. Calling back early")
@@ -249,13 +244,13 @@ local Computed = SignalsModule.createComputed(function(_)
 		else
 			local config1 = { status = "fetching", data = Data }
 			local Signal1, Signal2 = CreateSignalFunction(config1)
-			local Entry3 = t1[Joined]
+			local Entry2 = t1[Joined]
 			
-			if Entry3 == nil then
-				Entry3 = {}
-				t1[Joined] = Entry3
+			if Entry2 == nil then
+				Entry2 = {}
+				t1[Joined] = Entry2
 			end
-			table.insert(Entry3, {
+			table.insert(Entry2, {
 				userIds = UserIds,
 				getResult = Signal1,
 				setResult = Signal2,
@@ -328,18 +323,15 @@ local Computed = SignalsModule.createComputed(function(_)
 			for i, value in List do
 				local Text = if value.userId == nil then i else tostring(value.userId)
 				local CreateResult = CreateResults[Text]
-				local CreateResult1 = nil
 				
 				if CreateResult == nil then
 					UserProfileStore:trace("Creating profile: {}", Text)
-					local NewUserProfileModel = UserProfileModelModule.create(Text)
-					CreateResults[Text] = NewUserProfileModel
-					CreateResult1 = NewUserProfileModel
+					CreateResult = UserProfileModelModule.create(Text)
+					CreateResults[Text] = CreateResult
 				else
 					UserProfileStore:trace("Found profile: {}", Text)
-					CreateResult1 = CreateResult
 				end
-				UserProfileModelModule.update(CreateResult1, {
+				UserProfileModelModule.update(CreateResult, {
 					names = {
 						username = value.username,
 						displayName = value.displayName

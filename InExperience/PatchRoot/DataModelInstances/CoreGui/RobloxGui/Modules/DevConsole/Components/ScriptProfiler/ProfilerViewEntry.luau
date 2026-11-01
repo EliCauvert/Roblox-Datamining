@@ -277,15 +277,14 @@ function ProfilerViewEntry.render(p2)
 	if not NodeName or #NodeName == 0 then
 		NodeName = Root
 	end
-	local Text: string = NodeName
-	local SourceLocationString = ProfilerUtilModule.getSourceLocationString(Data, Function, Text)
+	local SourceLocationString = ProfilerUtilModule.getSourceLocationString(Data, Function, NodeName)
 	local NativeFlag = GetNativeFlagFunction(Data, Function)
 	
 	if GetPluginFlagFunction(Data, Function) then
-		Text ..= " <plugin>"
+		NodeName ..= " <plugin>"
 	end
 	if NativeFlag then
-		Text ..= " <native>"
+		NodeName ..= " <native>"
 	end
 	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -312,7 +311,7 @@ function ProfilerViewEntry.render(p2)
 			onMouse2Click = p2.onMouse2Click
 		}, {
 			name = RoactModule.createElement(CellLabelModule, {
-				text = Text,
+				text = NodeName,
 				size = UDim2.new(UDim.new(1 - ValueCellWidth * #list, -ScaledDepth), UDim.new(1, 0)),
 				pos = UDim2.new(0, CellPadding + ScaledDepth, 0, 0)
 			}),

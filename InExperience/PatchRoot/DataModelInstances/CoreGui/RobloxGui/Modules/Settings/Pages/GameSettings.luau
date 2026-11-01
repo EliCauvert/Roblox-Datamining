@@ -24,12 +24,12 @@ local NewResult = nil
 NewResult = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
 local GetCamMicPermissionsModule = require(RobloxGui.Modules.Settings.getCamMicPermissions)
 local IsCamEnabledForUserAndPlaceModule = require(RobloxGui.Modules.Settings.isCamEnabledForUserAndPlace)
-local Callback1 = nil
 local Callback = nil
+local Callback1 = nil
 
 if FFlagIEMSettingsGroupsModule then
-	Callback1 = require(RobloxGui.Modules.Settings.Components.renderSettingsHeader)
-	Callback = require(RobloxGui.Modules.Settings.Components.renderSettingsDivider)
+	Callback = require(RobloxGui.Modules.Settings.Components.renderSettingsHeader)
+	Callback1 = require(RobloxGui.Modules.Settings.Components.renderSettingsDivider)
 end
 local RenderMoreSettingsBannerModule = if require(RobloxGui.Modules.Settings.Flags.FFlagEnablePioneerIGMSettingsBanner) and require(CorePackages.Workspace.Packages.PioneerUtils).isPioneerLaunch() then require(RobloxGui.Modules.Settings.Components.renderMoreSettingsBanner) else nil
 local Default = require(CorePackages.Workspace.Packages.PermissionsProtocol).PermissionsProtocol.default
@@ -313,7 +313,7 @@ local function getFirstValueChangerFrame(NewPage)
 end
 
 return ((function()
-	-- upvalues: IGMEnableGFXReset (copy), GfxResetModule (copy), RobloxGui (copy), GetFFlagLazyInitiateExperienceLanguageSwitcherModule (copy), VRService (copy), GameSettings (copy), UtilityModule (copy), SETTINGSMENULAYOUTORDER (copy), GuiService (copy), GetFFlagFixCyclicFullscreenIndexEventModule (copy), GetFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy), RbxAnalyticsService (copy), ConstantsModule (copy), GameBasicSettingsFramerateCapEngineFeature (copy), FramerateCapIOSOptions (copy), Platform (copy), EraseFPSFromDefaultSetting (copy), RobloxTranslatorModule (copy), InGameGraphicsFollowsSavedQuality (copy), SavedQualityFollowerModule (copy), RomarkStartWithGraphicQualityLevelFastInt (copy), config (copy), UpdateVisibilitySettingsCopy (copy), FFlagUpdatePeopleNamesSettingCopyModule (copy), config6 (copy), UserGameSettings (copy), NewResult (ref), UserInputService (copy), CreateFunction (copy), ThemeModule (copy), CenterShiftLockOverride (copy), MicroProfilerReadOnlyInformationLabel (copy), TouchEnabled (copy), IsPlatformMatch1 (copy), IsPlatformMatch (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), LocalPlayer (copy), CoreUtilityModule (copy), config3 (copy), GetFFlagAlwaysShowVRToggleModule (copy), GetAppFeaturePoliciesFunction (copy), config5 (copy), FeatureSettingsHubTouchMovementModeClassicThumbstick (copy), config2 (copy), config1 (copy), Url (copy), HttpService (copy), FeedbackEntryPointImprovedStrictnessCheck (copy), SafetyService (copy), ExperienceStateCaptureService (ref), FeedbackEntryPointButtonSizeAdjustment2 (copy), CoreScriptsFeedbackEntryPointButtonText (copy), DisableFeedbackSoothsayerCheck (copy), NewResult1 (copy), Players (copy), FeatureSettingsHubLanguageSelectionUnavailable (copy), RunService (copy), GetFFlagChatTranslationWaitForIXPModule (copy), IXPServiceWrapper (copy), GetFFlagChatTranslationNewDefaultsModule (copy), FFlagRenameVolumeToMainVolumeModule (copy), GetFFlagEnablePartyVoiceVolumeOnlyWhenInEligiblePartyFunction (copy), Default3 (copy), VoiceVolumeControlsDisableInteractionWhenNoMasterVolume (copy), FFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (copy), CorePackages (copy), ContextActionService (copy), FixDeveloperConsoleButtonSizeAndPositioning (copy), PlayerPermissionsModule (copy), UserFreecamGuiDestabilization (copy), UserShowGuiHideToggles (copy), SoundService (copy), GetFIntVoiceChatDeviceChangeDebounceDelayModule (copy), Default2 (copy), GetFFlagEnableCrossExpVoiceFunction (copy), SignalsModule (copy), GetFIntDebounceAIRephraseSettingDelayModule (copy), TextChatService (copy), ExpChatDebounceRephraseIndexSelection (copy), ThrottleFunctionCallModule (copy), GetFIntDebounceChatSummariesSettingDelayModule (copy), FeatureSettingsHubVideoVideoCamera (copy), GetFFlagVoiceChatUILoggingModule (copy), VideoCaptureService (copy), FeatureSettingsHubVideoSystemDefault (copy), RUUserScalePreferenceAPIEngineFeature (copy), DifferentiateVoiceSelectorSystemAndUser (copy), VoiceSelectorAvailableAfterFae (copy), GetFIntDebounceDisconnectButtonDelayModule (copy), FFlagVoiceRewarmTelemetry (copy), ConstantsModule1 (copy), VoiceSelectorIgnoreFailedStateDisconnect (copy), VoiceConnectSelectorDebounce (copy), DebounceModule (copy), VoiceChatSelectorReconnectFocus2AEGIS2 (copy), DebounceVoiceSelectorIndexChange (copy), DeferProgrammaticChange (copy), HideVoiceChatSelectorForFaeAEGIS2 (copy), IsVoiceFocusedFunction (copy), ObserveIsVoiceFocusedFunction (copy), FFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (copy), VoiceVolumeControlsFixSliderVisibilityOnEligibleGames (copy), VoiceVolumeControlsSuppressInExperienceUiForPartyVoice (copy), GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction (copy), VoiceVolumeControlsEligibility (copy), GetFFlagEnableUniveralVoiceToastsModule (copy), config4 (copy), GetFFlagSelfViewCameraSettingsFunction (copy), IsCamEnabledForUserAndPlaceModule (copy), GetCamMicPermissionsModule (copy), Default (copy), CameraDevicePermissionGrantedSignalModule (copy), IsEnabled (copy), FFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry (copy), HasPartyVoiceVolume (copy), ShowAntiHarassmentSettings (copy), GetFFlagEnablePlayerNamesEnabledSettingModule (copy), PlayerChoiceTranslationSettingInitializerModule (copy), CachedPolicyServiceModule (copy), Inverted1 (copy), FFlagBadgeVisibilitySettingEnabled (copy), FFlagEnableModerateChatRemoteEvent (copy), FFlagAIRephraseSettingEnabled (copy), FFlagChatSummariesSettingEnabled (copy), FFlagExpChatDictation (copy), FFlagExpChatEnableFriendsTab (copy), GetHasGuiHidingPermissionModule (copy), RenderMoreSettingsBannerModule (ref), FFlagIEMSettingsGroupsModule (copy), Callback1 (ref), Callback (ref), Migration (copy), BuilderIconsModule (copy), EnableTFFeedbackModeEntryCheck (copy), GetFFlagEnableLocalesForExperienceLanguageSwitcherModule (copy), ExperienceLanguageSwitcherInitializerModule (copy), getLastValueChangerFrame (copy), FFlagIEMTabFocusNav (copy), getFirstValueChangerFrame (copy), GetFFlagChatTranslationSettingEnabledModule (copy), GetFFlagChatTranslationHoldoutEnabledModule (copy), GetFStringChatTranslationLayerNameModule (copy), TextChatServiceSettingsSavedEngineFeature (copy), GetFFlagChatTranslationForceSettingModule (copy), ChatTranslationOptionsWithChatLanguageSwitcherInitializerModule (copy)
+	-- upvalues: IGMEnableGFXReset (copy), GfxResetModule (copy), RobloxGui (copy), GetFFlagLazyInitiateExperienceLanguageSwitcherModule (copy), VRService (copy), GameSettings (copy), UtilityModule (copy), SETTINGSMENULAYOUTORDER (copy), GuiService (copy), GetFFlagFixCyclicFullscreenIndexEventModule (copy), GetFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy), RbxAnalyticsService (copy), ConstantsModule (copy), GameBasicSettingsFramerateCapEngineFeature (copy), FramerateCapIOSOptions (copy), Platform (copy), EraseFPSFromDefaultSetting (copy), RobloxTranslatorModule (copy), InGameGraphicsFollowsSavedQuality (copy), SavedQualityFollowerModule (copy), RomarkStartWithGraphicQualityLevelFastInt (copy), config (copy), UpdateVisibilitySettingsCopy (copy), FFlagUpdatePeopleNamesSettingCopyModule (copy), config6 (copy), UserGameSettings (copy), NewResult (ref), UserInputService (copy), CreateFunction (copy), ThemeModule (copy), CenterShiftLockOverride (copy), MicroProfilerReadOnlyInformationLabel (copy), TouchEnabled (copy), IsPlatformMatch1 (copy), IsPlatformMatch (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), LocalPlayer (copy), CoreUtilityModule (copy), config3 (copy), GetFFlagAlwaysShowVRToggleModule (copy), GetAppFeaturePoliciesFunction (copy), config5 (copy), FeatureSettingsHubTouchMovementModeClassicThumbstick (copy), config2 (copy), config1 (copy), Url (copy), HttpService (copy), FeedbackEntryPointImprovedStrictnessCheck (copy), SafetyService (copy), ExperienceStateCaptureService (ref), FeedbackEntryPointButtonSizeAdjustment2 (copy), CoreScriptsFeedbackEntryPointButtonText (copy), DisableFeedbackSoothsayerCheck (copy), NewResult1 (copy), Players (copy), FeatureSettingsHubLanguageSelectionUnavailable (copy), RunService (copy), GetFFlagChatTranslationWaitForIXPModule (copy), IXPServiceWrapper (copy), GetFFlagChatTranslationNewDefaultsModule (copy), FFlagRenameVolumeToMainVolumeModule (copy), GetFFlagEnablePartyVoiceVolumeOnlyWhenInEligiblePartyFunction (copy), Default3 (copy), VoiceVolumeControlsDisableInteractionWhenNoMasterVolume (copy), FFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (copy), CorePackages (copy), ContextActionService (copy), FixDeveloperConsoleButtonSizeAndPositioning (copy), PlayerPermissionsModule (copy), UserFreecamGuiDestabilization (copy), UserShowGuiHideToggles (copy), SoundService (copy), GetFIntVoiceChatDeviceChangeDebounceDelayModule (copy), Default2 (copy), GetFFlagEnableCrossExpVoiceFunction (copy), SignalsModule (copy), GetFIntDebounceAIRephraseSettingDelayModule (copy), TextChatService (copy), ExpChatDebounceRephraseIndexSelection (copy), ThrottleFunctionCallModule (copy), GetFIntDebounceChatSummariesSettingDelayModule (copy), FeatureSettingsHubVideoVideoCamera (copy), GetFFlagVoiceChatUILoggingModule (copy), VideoCaptureService (copy), FeatureSettingsHubVideoSystemDefault (copy), RUUserScalePreferenceAPIEngineFeature (copy), DifferentiateVoiceSelectorSystemAndUser (copy), VoiceSelectorAvailableAfterFae (copy), GetFIntDebounceDisconnectButtonDelayModule (copy), FFlagVoiceRewarmTelemetry (copy), ConstantsModule1 (copy), VoiceSelectorIgnoreFailedStateDisconnect (copy), VoiceConnectSelectorDebounce (copy), DebounceModule (copy), VoiceChatSelectorReconnectFocus2AEGIS2 (copy), DebounceVoiceSelectorIndexChange (copy), DeferProgrammaticChange (copy), HideVoiceChatSelectorForFaeAEGIS2 (copy), IsVoiceFocusedFunction (copy), ObserveIsVoiceFocusedFunction (copy), FFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (copy), VoiceVolumeControlsFixSliderVisibilityOnEligibleGames (copy), VoiceVolumeControlsSuppressInExperienceUiForPartyVoice (copy), GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction (copy), VoiceVolumeControlsEligibility (copy), GetFFlagEnableUniveralVoiceToastsModule (copy), config4 (copy), GetFFlagSelfViewCameraSettingsFunction (copy), IsCamEnabledForUserAndPlaceModule (copy), GetCamMicPermissionsModule (copy), Default (copy), CameraDevicePermissionGrantedSignalModule (copy), IsEnabled (copy), FFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry (copy), HasPartyVoiceVolume (copy), ShowAntiHarassmentSettings (copy), GetFFlagEnablePlayerNamesEnabledSettingModule (copy), PlayerChoiceTranslationSettingInitializerModule (copy), CachedPolicyServiceModule (copy), Inverted1 (copy), FFlagBadgeVisibilitySettingEnabled (copy), FFlagEnableModerateChatRemoteEvent (copy), FFlagAIRephraseSettingEnabled (copy), FFlagChatSummariesSettingEnabled (copy), FFlagExpChatDictation (copy), FFlagExpChatEnableFriendsTab (copy), GetHasGuiHidingPermissionModule (copy), RenderMoreSettingsBannerModule (ref), FFlagIEMSettingsGroupsModule (copy), Callback (ref), Callback1 (ref), Migration (copy), BuilderIconsModule (copy), EnableTFFeedbackModeEntryCheck (copy), GetFFlagEnableLocalesForExperienceLanguageSwitcherModule (copy), ExperienceLanguageSwitcherInitializerModule (copy), getLastValueChangerFrame (copy), FFlagIEMTabFocusNav (copy), getFirstValueChangerFrame (copy), GetFFlagChatTranslationSettingEnabledModule (copy), GetFFlagChatTranslationHoldoutEnabledModule (copy), GetFStringChatTranslationLayerNameModule (copy), TextChatServiceSettingsSavedEngineFeature (copy), GetFFlagChatTranslationForceSettingModule (copy), ChatTranslationOptionsWithChatLanguageSwitcherInitializerModule (copy)
 	if IGMEnableGFXReset then
 		GfxResetModule.RunGfxReset()
 	end
@@ -2274,52 +2274,51 @@ return ((function()
 			if not v4 then
 				NewResult1:warning("GameSettings language selector initialization: Failed to get response from Localization API for " .. Text .. " with error message: " .. v5)
 			end
-			local v6: boolean = v4
-			local v7: string = v5
+			local v6: string = v5
 			
-			if v6 then
+			if v4 then
 				RequestInternalResult:Start(function(p8, p9)
-					-- upvalues: HttpService (upval), LanguageCode (upval), LocaleCode (upval), t (upval), NewResult1 (upval), Text1 (upval), v7 (ref), v6 (copy), RequestInternalResult1 (upval), LanguageCodes (upval), Text2 (upval), RequestInternalResult2 (upval), v3 (upval), LanguageCode1 (upval), LanguageCodes2 (upval), Text3 (upval), userExperienceLanguageSettingsCallback (upval), NewPage (upval), UtilityModule (upval), RobloxTranslatorModule (upval), FeatureSettingsHubLanguageSelectionUnavailable (upval), SETTINGSMENULAYOUTORDER (upval)
-					local v8 = false
-					local v9 = nil
+					-- upvalues: HttpService (upval), LanguageCode (upval), LocaleCode (upval), t (upval), NewResult1 (upval), Text1 (upval), v6 (ref), v4 (copy), RequestInternalResult1 (upval), LanguageCodes (upval), Text2 (upval), RequestInternalResult2 (upval), v3 (upval), LanguageCode1 (upval), LanguageCodes2 (upval), Text3 (upval), userExperienceLanguageSettingsCallback (upval), NewPage (upval), UtilityModule (upval), RobloxTranslatorModule (upval), FeatureSettingsHubLanguageSelectionUnavailable (upval), SETTINGSMENULAYOUTORDER (upval)
+					local v7 = false
+					local v8 = nil
 					
 					if p8 then
 						if p9.StatusCode == 401 then
-							v9 = "Experience Source Language Request: Unauthorized"
+							v8 = "Experience Source Language Request: Unauthorized"
 						elseif p9.StatusCode < 200 or p9.StatusCode >= 400 then
-							v9 = "Experience Source Language Status code: " .. p9.StatusCode
+							v8 = "Experience Source Language Status code: " .. p9.StatusCode
 						else
-							v8, v436 = pcall(function()
+							v7, v436 = pcall(function()
 								-- upvalues: HttpService (upval), p9 (copy), LanguageCode (upval), LocaleCode (upval), t (upval)
 								LanguageCode = HttpService:JSONDecode(p9.Body).languageCode
 								LocaleCode = t[LanguageCode].localeCode
 							end)
 						end
 					else
-						v9 = "Experience Source Language Request: Connection error"
+						v8 = "Experience Source Language Request: Connection error"
 					end
-					if not v8 then
-						NewResult1:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. Text1 .. " with error message: " .. v9)
+					if not v7 then
+						NewResult1:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. Text1 .. " with error message: " .. v8)
 					end
-					if v7 == nil then
-						v7 = v9
+					if v6 == nil then
+						v6 = v8
 					end
-					local v10 = v8 and v6
-					local v11: string = v7
+					local v9 = v7 and v4
+					local v10: string = v6
 					
-					if v10 then
+					if v9 then
 						RequestInternalResult1:Start(function(p10, p11)
-							-- upvalues: HttpService (upval), LanguageCodes (upval), NewResult1 (upval), Text2 (upval), v11 (ref), v10 (copy), RequestInternalResult2 (upval), v3 (upval), LanguageCode1 (upval), LanguageCode (upval), LanguageCodes2 (upval), Text3 (upval), userExperienceLanguageSettingsCallback (upval), NewPage (upval), UtilityModule (upval), RobloxTranslatorModule (upval), FeatureSettingsHubLanguageSelectionUnavailable (upval), SETTINGSMENULAYOUTORDER (upval)
-							local v12 = false
-							local v13 = nil
+							-- upvalues: HttpService (upval), LanguageCodes (upval), NewResult1 (upval), Text2 (upval), v10 (ref), v9 (copy), RequestInternalResult2 (upval), v3 (upval), LanguageCode1 (upval), LanguageCode (upval), LanguageCodes2 (upval), Text3 (upval), userExperienceLanguageSettingsCallback (upval), NewPage (upval), UtilityModule (upval), RobloxTranslatorModule (upval), FeatureSettingsHubLanguageSelectionUnavailable (upval), SETTINGSMENULAYOUTORDER (upval)
+							local v11 = false
+							local v12 = nil
 							
 							if p10 then
 								if p11.StatusCode == 401 then
-									v13 = "Experience Supported Language Request: Unauthorized"
+									v12 = "Experience Supported Language Request: Unauthorized"
 								elseif p11.StatusCode < 200 or p11.StatusCode >= 400 then
-									v13 = "Experience Supported Language Request Status code: " .. p11.StatusCode
+									v12 = "Experience Supported Language Request Status code: " .. p11.StatusCode
 								else
-									v12, v431 = pcall(function()
+									v11, v431 = pcall(function()
 										-- upvalues: HttpService (upval), p11 (copy), LanguageCodes (upval)
 										for i, entry in pairs(HttpService:JSONDecode(p11.Body).data) do
 											LanguageCodes[i] = entry.languageCode
@@ -2327,29 +2326,29 @@ return ((function()
 									end)
 								end
 							else
-								v13 = "Experience Supported Language Request: Connection error"
+								v12 = "Experience Supported Language Request: Connection error"
 							end
-							if not v12 then
-								NewResult1:warning("GameSettings language selector initialization: Failed to get response from Localization API for " .. Text2 .. " with error message: " .. v13)
+							if not v11 then
+								NewResult1:warning("GameSettings language selector initialization: Failed to get response from Localization API for " .. Text2 .. " with error message: " .. v12)
 							end
-							if v11 == nil then
-								v11 = v13
+							if v10 == nil then
+								v10 = v12
 							end
-							local v14: string = v11
+							local v13: string = v10
 							
-							if v12 and v10 then
+							if v11 and v9 then
 								RequestInternalResult2:Start(function(p12, p13)
 									-- upvalues: HttpService (upval), v3 (upval), LanguageCode1 (upval), LanguageCode (upval), LanguageCodes2 (upval), NewResult1 (upval), Text3 (upval), userExperienceLanguageSettingsCallback (upval)
-									local v15 = false
-									local v16 = nil
+									local v14 = false
+									local v15 = nil
 									
 									if p12 then
 										if p13.StatusCode == 401 then
-											v16 = "User Experience Language Setting Request: Unauthorized"
+											v15 = "User Experience Language Setting Request: Unauthorized"
 										elseif p13.StatusCode < 200 or p13.StatusCode >= 400 then
-											v16 = "User Experience Language Setting Request Status code: " .. p13.StatusCode
+											v15 = "User Experience Language Setting Request Status code: " .. p13.StatusCode
 										else
-											v15, v427 = pcall(function()
+											v14, v427 = pcall(function()
 												-- upvalues: HttpService (upval), p13 (copy), v3 (upval), LanguageCode1 (upval), LanguageCode (upval), LanguageCodes2 (upval)
 												local UserUniverseLocalizationSettingValue = HttpService:JSONDecode(p13.Body).userUniverseLocalizationSettingValue
 												
@@ -2372,45 +2371,45 @@ return ((function()
 											end)
 										end
 									else
-										v16 = "User Experience Language Setting Request: Connection error"
+										v15 = "User Experience Language Setting Request: Connection error"
 									end
-									if not v15 then
-										NewResult1:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. Text3 .. " with error message: " .. v16)
+									if not v14 then
+										NewResult1:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. Text3 .. " with error message: " .. v15)
 									end
-									userExperienceLanguageSettingsCallback(v15, v16)
+									userExperienceLanguageSettingsCallback(v14, v15)
 								end)
 								
 								return
 							end
-							local v15: string = v14
+							local v14: string = v13
 							
-							if v15 == nil then
-								v15 = "Execution path did not set earliest error to non-nil value."
+							if v14 == nil then
+								v14 = "Execution path did not set earliest error to non-nil value."
 							end
-							NewResult1:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. v15)
+							NewResult1:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. v14)
 							NewPage.LanguageSelectorFrame, NewPage.LanguageSelectorLabel, NewPage.LanguageSelectorMode = UtilityModule:AddNewRow(NewPage, RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.SettingLabel"), "DropDown", { FeatureSettingsHubLanguageSelectionUnavailable }, 1)
 							NewPage.LanguageSelectorMode:SetInteractable(false)
 							NewPage.LanguageSelectorFrame.LayoutOrder = SETTINGSMENULAYOUTORDER.LanguageSelectorFrame
 						end)
 					else
-						local v16: string = v11
+						local v15: string = v10
 						
-						if v16 == nil then
-							v16 = "Execution path did not set earliest error to non-nil value."
+						if v15 == nil then
+							v15 = "Execution path did not set earliest error to non-nil value."
 						end
-						NewResult1:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. v16)
+						NewResult1:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. v15)
 						NewPage.LanguageSelectorFrame, NewPage.LanguageSelectorLabel, NewPage.LanguageSelectorMode = UtilityModule:AddNewRow(NewPage, RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.SettingLabel"), "DropDown", { FeatureSettingsHubLanguageSelectionUnavailable }, 1)
 						NewPage.LanguageSelectorMode:SetInteractable(false)
 						NewPage.LanguageSelectorFrame.LayoutOrder = SETTINGSMENULAYOUTORDER.LanguageSelectorFrame
 					end
 				end)
 			else
-				local v12: string = v7
+				local v11: string = v6
 				
-				if v12 == nil then
-					v12 = "Execution path did not set earliest error to non-nil value."
+				if v11 == nil then
+					v11 = "Execution path did not set earliest error to non-nil value."
 				end
-				NewResult1:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. v12)
+				NewResult1:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. v11)
 				NewPage.LanguageSelectorFrame, NewPage.LanguageSelectorLabel, NewPage.LanguageSelectorMode = UtilityModule:AddNewRow(NewPage, RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.SettingLabel"), "DropDown", { FeatureSettingsHubLanguageSelectionUnavailable }, 1)
 				NewPage.LanguageSelectorMode:SetInteractable(false)
 				NewPage.LanguageSelectorFrame.LayoutOrder = SETTINGSMENULAYOUTORDER.LanguageSelectorFrame
@@ -2577,15 +2576,15 @@ return ((function()
 	
 	local function createCameraInvertedOptions()
 		-- upvalues: GameSettings (upval), NewPage (copy), UtilityModule (upval), SETTINGSMENULAYOUTORDER (upval), t (copy), GetFFlagEnableExplicitSettingsChangeAnalyticsModule (upval), reportSettingsChangeForAnalytics (upval), reportSettingsForAnalytics (upval)
-		local v8 = 1
+		local v7 = 1
 		
 		if pcall(function()
-			-- upvalues: GameSettings (upval), v8 (ref)
+			-- upvalues: GameSettings (upval), v7 (ref)
 			if GameSettings.CameraYInverted == true then
-				v8 = 2
+				v7 = 2
 			end
 		end) ~= false then
-			NewPage.CameraInvertedFrame, _, NewPage.CameraInvertedSelector = UtilityModule:AddNewRow(NewPage, "Camera Inverted", "Selector", { "Off", "On" }, v8)
+			NewPage.CameraInvertedFrame, _, NewPage.CameraInvertedSelector = UtilityModule:AddNewRow(NewPage, "Camera Inverted", "Selector", { "Off", "On" }, v7)
 			NewPage.CameraInvertedFrame.LayoutOrder = SETTINGSMENULAYOUTORDER.CameraInvertedFrame
 			t[NewPage.CameraInvertedFrame] = true
 			NewPage.CameraInvertedSelector.IndexChanged:connect(function(p8)
@@ -2643,9 +2642,9 @@ return ((function()
 		end
 		
 		local _ = function(p8: number): number
-			local v8: number = p8 <= 5 and 0.16 * p8 + 0.2 or 0.6 * p8 - 2
+			local v7: number = p8 <= 5 and 0.16 * p8 + 0.2 or 0.6 * p8 - 2
 			
-			return if v8 <= 0.2 then 0.2 else v8
+			return if v7 <= 0.2 then 0.2 else v7
 		end
 		
 		local MouseSensitivity: number = GameSettings.MouseSensitivity
@@ -2753,9 +2752,9 @@ return ((function()
 		end
 		
 		local _ = function(p8: number): number
-			local v8: number = p8 <= 5 and 0.16 * p8 + 0.2 or 0.6 * p8 - 2
+			local v7: number = p8 <= 5 and 0.16 * p8 + 0.2 or 0.6 * p8 - 2
 			
-			return if v8 <= 0.2 then 0.2 else v8
+			return if v7 <= 0.2 then 0.2 else v7
 		end
 		
 		local GamepadCameraSensitivity: number = GameSettings.GamepadCameraSensitivity
@@ -2764,8 +2763,8 @@ return ((function()
 		NewPage.GamepadSensitivityFrame.LayoutOrder = SETTINGSMENULAYOUTORDER.GamepadSensitivityFrame
 		NewPage.GamepadSensitivitySlider.ValueChanged:connect(function(p8: number)
 			-- upvalues: setCameraSensitivity (upval)
-			local v8: number = p8 <= 5 and 0.16 * p8 + 0.2 or 0.6 * p8 - 2
-			setCameraSensitivity(if v8 <= 0.2 then 0.2 else v8)
+			local v7: number = p8 <= 5 and 0.16 * p8 + 0.2 or 0.6 * p8 - 2
+			setCameraSensitivity(if v7 <= 0.2 then 0.2 else v7)
 		end)
 	end
 	
@@ -2774,7 +2773,7 @@ return ((function()
 		local AdjustButton, AdjustButton2, AdjustButton3 = UtilityModule:MakeStyledButton("AdjustButton", "Adjust", UDim2.new(0, 300, 1, -20), function()
 			-- upvalues: RobloxGui (upval), CorePackages (upval), ContextActionService (upval)
 			local SettingsHubModule = require(RobloxGui.Modules.Settings.SettingsHub)
-			local v8 = require(RobloxGui.Modules.Settings.Components.OverscanWrapper)((require(RobloxGui.Modules.Shell.Components.Overscan10ft.Overscan)))
+			local v7 = require(RobloxGui.Modules.Settings.Components.OverscanWrapper)((require(RobloxGui.Modules.Shell.Components.Overscan10ft.Overscan)))
 			local RoactModule = require(CorePackages.Packages.Roact)
 			local MountResult = nil
 			local config = {
@@ -2791,7 +2790,7 @@ return ((function()
 			}
 			SettingsHubModule:SetVisibility(false, true)
 			ContextActionService:BindCoreAction("RbxStopOverscanMovement", function() end, false, Enum.UserInputType.Gamepad1, Enum.UserInputType.Gamepad2, Enum.UserInputType.Gamepad3, Enum.UserInputType.Gamepad4)
-			MountResult = RoactModule.mount(RoactModule.createElement(v8, config), RobloxGui, (tostring(v8)))
+			MountResult = RoactModule.mount(RoactModule.createElement(v7, config), RobloxGui, (tostring(v7)))
 		end, NewPage)
 		AdjustButton2.Font = ThemeModule.font(Enum.Font.SourceSans)
 		AdjustButton.Position = UDim2.new(1, -400, 0, 12)
@@ -2980,17 +2979,17 @@ return ((function()
 			Guid = NewPageEntry > 0 and NewPageEntry2[NewPageEntry] or nil
 		}
 		NewPage[Text .. "PrevDeviceName"] = NewPage[Text .. "DeviceInfo"].Name
-		local v8 = 0
+		local v7 = 0
 		local FIntVoiceChatDeviceChangeDebounceDelayModule = GetFIntVoiceChatDeviceChangeDebounceDelayModule()
 		NewPage[Text .. "DeviceSelector"].IndexChanged:connect(function(p8)
-			-- upvalues: NewPage (upval), Text (copy), v8 (ref), FIntVoiceChatDeviceChangeDebounceDelayModule (copy), Default2 (upval), SoundService (upval), NewResult1 (upval), GetFFlagEnableCrossExpVoiceFunction (upval), Default3 (upval), reportSettingsChangeForAnalytics (upval)
+			-- upvalues: NewPage (upval), Text (copy), v7 (ref), FIntVoiceChatDeviceChangeDebounceDelayModule (copy), Default2 (upval), SoundService (upval), NewResult1 (upval), GetFFlagEnableCrossExpVoiceFunction (upval), Default3 (upval), reportSettingsChangeForAnalytics (upval)
 			if NewPage[Text .. "DeviceInfo"].Name == NewPage[Text .. "DeviceNames"][p8] and NewPage[Text .. "DeviceInfo"].Guid == NewPage[Text .. "DeviceGuids"][p8] then return end
-			local v9 = v8 + 1
-			v8 = v9
+			local v8 = v7 + 1
+			v7 = v8
 			wait(FIntVoiceChatDeviceChangeDebounceDelayModule)
 			
-			if v9 == v8 then
-				v8 = 0
+			if v8 == v7 then
+				v7 = 0
 				NewPage[Text .. "DeviceInfo"] = {
 					Name = NewPage[Text .. "DeviceNames"][p8],
 					Guid = NewPage[Text .. "DeviceGuids"][p8]
@@ -3056,9 +3055,9 @@ return ((function()
 		end)
 		NewPage.ChatModerationSelector.IndexChanged:connect(function(p8)
 			-- upvalues: ChatModerationStore (copy), reportSettingsChangeForAnalytics (upval)
-			local v8 = p8 == 2
-			ChatModerationStore.setIsSettingEnabled(v8)
-			reportSettingsChangeForAnalytics("moderate_chat", not v8, v8)
+			local v7 = p8 == 2
+			ChatModerationStore.setIsSettingEnabled(v7)
+			reportSettingsChangeForAnalytics("moderate_chat", not v7, v7)
 		end)
 		ChatModerationStore.initialize()
 	end
@@ -3074,32 +3073,32 @@ return ((function()
 		local AIRephraseSettingStore = require(CorePackages.Workspace.Packages.ExpChat).Stores.GetUserChatSettingsStore.getAIRephraseSettingStore(false)
 		local FIntDebounceAIRephraseSettingDelayModule: number = GetFIntDebounceAIRephraseSettingDelayModule()
 		local IsFIntDebounceAIRephraseSettingDelayModuleAbove = FIntDebounceAIRephraseSettingDelayModule > 0
-		local v8: number = if AIRephraseSettingStore.getIsSettingEnabled(false) then 2 else 1
+		local v7: number = if AIRephraseSettingStore.getIsSettingEnabled(false) then 2 else 1
 		NewPage.AIRephraseDisposeEffect = SignalsModule.createEffect(function(p8)
-			-- upvalues: NewPage (upval), AIRephraseSettingStore (copy), v8 (ref)
+			-- upvalues: NewPage (upval), AIRephraseSettingStore (copy), v7 (ref)
 			NewPage.AIRephraseFrame.Visible = AIRephraseSettingStore.getIsSettingVisible(p8)
 			local SelectedIndex: number = if AIRephraseSettingStore.getIsSettingEnabled(p8) then 2 else 1
 			
 			if NewPage.AIRephraseSelector:GetSelectedIndex() ~= SelectedIndex then
-				v8 = SelectedIndex
+				v7 = SelectedIndex
 				NewPage.AIRephraseSelector:SetSelectionIndex(SelectedIndex)
 			end
 		end)
 		
-		local function v538(p8)
-			-- upvalues: v8 (ref), TextChatService (upval), AIRephraseSettingStore (copy), reportSettingsChangeForAnalytics (upval), NewPage (upval)
-			if p8 ~= v8 then
-				local v9 = p8 == 2
+		local function v537(p8)
+			-- upvalues: v7 (ref), TextChatService (upval), AIRephraseSettingStore (copy), reportSettingsChangeForAnalytics (upval), NewPage (upval)
+			if p8 ~= v7 then
+				local v8 = p8 == 2
 				task.spawn(function()
-					-- upvalues: TextChatService (upval), v9 (copy), AIRephraseSettingStore (upval), v8 (upval), p8 (copy), reportSettingsChangeForAnalytics (upval), NewPage (upval)
-					if TextChatService:OnUserChatSettingUpdateAsync("allowAIRephrase", if v9 then "Enabled" else "Disabled") then
-						AIRephraseSettingStore.setIsSettingEnabled(v9)
-						v8 = p8
-						reportSettingsChangeForAnalytics("ai_rephrase", not v9, v9)
+					-- upvalues: TextChatService (upval), v8 (copy), AIRephraseSettingStore (upval), v7 (upval), p8 (copy), reportSettingsChangeForAnalytics (upval), NewPage (upval)
+					if TextChatService:OnUserChatSettingUpdateAsync("allowAIRephrase", if v8 then "Enabled" else "Disabled") then
+						AIRephraseSettingStore.setIsSettingEnabled(v8)
+						v7 = p8
+						reportSettingsChangeForAnalytics("ai_rephrase", not v8, v8)
 						
 						return
 					else
-						NewPage.AIRephraseSelector:SetSelectionIndex(v8)
+						NewPage.AIRephraseSelector:SetSelectionIndex(v7)
 					end
 				end)
 				
@@ -3108,30 +3107,30 @@ return ((function()
 		end
 		
 		if not ExpChatDebounceRephraseIndexSelection then
-			NewPage.AIRephraseSelector.IndexChanged:connect(if IsFIntDebounceAIRephraseSettingDelayModuleAbove then ThrottleFunctionCallModule(FIntDebounceAIRephraseSettingDelayModule, v538) else v538)
+			NewPage.AIRephraseSelector.IndexChanged:connect(if IsFIntDebounceAIRephraseSettingDelayModuleAbove then ThrottleFunctionCallModule(FIntDebounceAIRephraseSettingDelayModule, v537) else v537)
 		elseif IsFIntDebounceAIRephraseSettingDelayModuleAbove then
 			local DelayedThread = nil
 			NewPage.AIRephraseSelector.IndexChanged:connect(function(p8)
-				-- upvalues: DelayedThread (ref), FIntDebounceAIRephraseSettingDelayModule (copy), v8 (ref), TextChatService (upval), AIRephraseSettingStore (copy), reportSettingsChangeForAnalytics (upval), NewPage (upval)
+				-- upvalues: DelayedThread (ref), FIntDebounceAIRephraseSettingDelayModule (copy), v7 (ref), TextChatService (upval), AIRephraseSettingStore (copy), reportSettingsChangeForAnalytics (upval), NewPage (upval)
 				if DelayedThread then
 					task.cancel(DelayedThread)
 				end
 				DelayedThread = task.delay(FIntDebounceAIRephraseSettingDelayModule, function()
-					-- upvalues: DelayedThread (upval), p8 (copy), v8 (upval), TextChatService (upval), AIRephraseSettingStore (upval), reportSettingsChangeForAnalytics (upval), NewPage (upval)
+					-- upvalues: DelayedThread (upval), p8 (copy), v7 (upval), TextChatService (upval), AIRephraseSettingStore (upval), reportSettingsChangeForAnalytics (upval), NewPage (upval)
 					DelayedThread = nil
 					
-					if p8 ~= v8 then
-						local v9 = p8 == 2
+					if p8 ~= v7 then
+						local v8 = p8 == 2
 						task.spawn(function()
-							-- upvalues: TextChatService (upval), v9 (copy), AIRephraseSettingStore (upval), v8 (upval), p8 (copy), reportSettingsChangeForAnalytics (upval), NewPage (upval)
-							if TextChatService:OnUserChatSettingUpdateAsync("allowAIRephrase", if v9 then "Enabled" else "Disabled") then
-								AIRephraseSettingStore.setIsSettingEnabled(v9)
-								v8 = p8
-								reportSettingsChangeForAnalytics("ai_rephrase", not v9, v9)
+							-- upvalues: TextChatService (upval), v8 (copy), AIRephraseSettingStore (upval), v7 (upval), p8 (copy), reportSettingsChangeForAnalytics (upval), NewPage (upval)
+							if TextChatService:OnUserChatSettingUpdateAsync("allowAIRephrase", if v8 then "Enabled" else "Disabled") then
+								AIRephraseSettingStore.setIsSettingEnabled(v8)
+								v7 = p8
+								reportSettingsChangeForAnalytics("ai_rephrase", not v8, v8)
 								
 								return
 							else
-								NewPage.AIRephraseSelector:SetSelectionIndex(v8)
+								NewPage.AIRephraseSelector:SetSelectionIndex(v7)
 							end
 						end)
 						
@@ -3140,7 +3139,7 @@ return ((function()
 				end)
 			end)
 		else
-			NewPage.AIRephraseSelector.IndexChanged:connect(v538)
+			NewPage.AIRephraseSelector.IndexChanged:connect(v537)
 		end
 	end
 	
@@ -3155,32 +3154,32 @@ return ((function()
 		local ChatSummariesSettingStore = require(CorePackages.Workspace.Packages.ExpChat).Stores.GetUserChatSettingsStore.getChatSummariesSettingStore(false)
 		local FIntDebounceChatSummariesSettingDelayModule: number = GetFIntDebounceChatSummariesSettingDelayModule()
 		local IsFIntDebounceChatSummariesSettingDelayModuleAbove = FIntDebounceChatSummariesSettingDelayModule > 0
-		local v8: number = if ChatSummariesSettingStore.getIsSettingEnabled(false) then 2 else 1
+		local v7: number = if ChatSummariesSettingStore.getIsSettingEnabled(false) then 2 else 1
 		NewPage.ChatSummariesDisposeEffect = SignalsModule.createEffect(function(p8)
-			-- upvalues: NewPage (upval), ChatSummariesSettingStore (copy), v8 (ref)
+			-- upvalues: NewPage (upval), ChatSummariesSettingStore (copy), v7 (ref)
 			NewPage.ChatSummariesFrame.Visible = ChatSummariesSettingStore.getIsSettingVisible(p8)
 			local SelectedIndex: number = if ChatSummariesSettingStore.getIsSettingEnabled(p8) then 2 else 1
 			
 			if NewPage.ChatSummariesSelector:GetSelectedIndex() ~= SelectedIndex then
-				v8 = SelectedIndex
+				v7 = SelectedIndex
 				NewPage.ChatSummariesSelector:SetSelectionIndex(SelectedIndex)
 			end
 		end)
 		
-		local function v547(p8)
-			-- upvalues: v8 (ref), TextChatService (upval), ChatSummariesSettingStore (copy), reportSettingsChangeForAnalytics (upval), NewPage (upval)
-			if p8 ~= v8 then
-				local v9 = p8 == 2
+		local function v546(p8)
+			-- upvalues: v7 (ref), TextChatService (upval), ChatSummariesSettingStore (copy), reportSettingsChangeForAnalytics (upval), NewPage (upval)
+			if p8 ~= v7 then
+				local v8 = p8 == 2
 				task.spawn(function()
-					-- upvalues: TextChatService (upval), v9 (copy), ChatSummariesSettingStore (upval), v8 (upval), p8 (copy), reportSettingsChangeForAnalytics (upval), NewPage (upval)
-					if TextChatService:OnUserChatSettingUpdateAsync("AllowThirdPartySummary", if v9 then "Enabled" else "Disabled") then
-						ChatSummariesSettingStore.setIsSettingEnabled(v9)
-						v8 = p8
-						reportSettingsChangeForAnalytics("chat_summaries", not v9, v9)
+					-- upvalues: TextChatService (upval), v8 (copy), ChatSummariesSettingStore (upval), v7 (upval), p8 (copy), reportSettingsChangeForAnalytics (upval), NewPage (upval)
+					if TextChatService:OnUserChatSettingUpdateAsync("AllowThirdPartySummary", if v8 then "Enabled" else "Disabled") then
+						ChatSummariesSettingStore.setIsSettingEnabled(v8)
+						v7 = p8
+						reportSettingsChangeForAnalytics("chat_summaries", not v8, v8)
 						
 						return
 					else
-						NewPage.ChatSummariesSelector:SetSelectionIndex(v8)
+						NewPage.ChatSummariesSelector:SetSelectionIndex(v7)
 					end
 				end)
 				
@@ -3191,26 +3190,26 @@ return ((function()
 		if IsFIntDebounceChatSummariesSettingDelayModuleAbove then
 			local DelayedThread = nil
 			NewPage.ChatSummariesSelector.IndexChanged:connect(function(p8)
-				-- upvalues: DelayedThread (ref), FIntDebounceChatSummariesSettingDelayModule (copy), v8 (ref), TextChatService (upval), ChatSummariesSettingStore (copy), reportSettingsChangeForAnalytics (upval), NewPage (upval)
+				-- upvalues: DelayedThread (ref), FIntDebounceChatSummariesSettingDelayModule (copy), v7 (ref), TextChatService (upval), ChatSummariesSettingStore (copy), reportSettingsChangeForAnalytics (upval), NewPage (upval)
 				if DelayedThread then
 					task.cancel(DelayedThread)
 				end
 				DelayedThread = task.delay(FIntDebounceChatSummariesSettingDelayModule, function()
-					-- upvalues: DelayedThread (upval), p8 (copy), v8 (upval), TextChatService (upval), ChatSummariesSettingStore (upval), reportSettingsChangeForAnalytics (upval), NewPage (upval)
+					-- upvalues: DelayedThread (upval), p8 (copy), v7 (upval), TextChatService (upval), ChatSummariesSettingStore (upval), reportSettingsChangeForAnalytics (upval), NewPage (upval)
 					DelayedThread = nil
 					
-					if p8 ~= v8 then
-						local v9 = p8 == 2
+					if p8 ~= v7 then
+						local v8 = p8 == 2
 						task.spawn(function()
-							-- upvalues: TextChatService (upval), v9 (copy), ChatSummariesSettingStore (upval), v8 (upval), p8 (copy), reportSettingsChangeForAnalytics (upval), NewPage (upval)
-							if TextChatService:OnUserChatSettingUpdateAsync("AllowThirdPartySummary", if v9 then "Enabled" else "Disabled") then
-								ChatSummariesSettingStore.setIsSettingEnabled(v9)
-								v8 = p8
-								reportSettingsChangeForAnalytics("chat_summaries", not v9, v9)
+							-- upvalues: TextChatService (upval), v8 (copy), ChatSummariesSettingStore (upval), v7 (upval), p8 (copy), reportSettingsChangeForAnalytics (upval), NewPage (upval)
+							if TextChatService:OnUserChatSettingUpdateAsync("AllowThirdPartySummary", if v8 then "Enabled" else "Disabled") then
+								ChatSummariesSettingStore.setIsSettingEnabled(v8)
+								v7 = p8
+								reportSettingsChangeForAnalytics("chat_summaries", not v8, v8)
 								
 								return
 							else
-								NewPage.ChatSummariesSelector:SetSelectionIndex(v8)
+								NewPage.ChatSummariesSelector:SetSelectionIndex(v7)
 							end
 						end)
 						
@@ -3219,7 +3218,7 @@ return ((function()
 				end)
 			end)
 		else
-			NewPage.ChatSummariesSelector.IndexChanged:connect(v547)
+			NewPage.ChatSummariesSelector.IndexChanged:connect(v546)
 		end
 	end
 	
@@ -3243,50 +3242,50 @@ return ((function()
 			end
 		end
 		
-		local v8 = "CoreScripts.InGameMenu.GameSettings.VoiceTypingMode"
+		local v7 = "CoreScripts.InGameMenu.GameSettings.VoiceTypingMode"
 		local Success, Result = pcall(function()
-			-- upvalues: NewResult (upval), v8 (copy)
-			return NewResult:Format(v8)
+			-- upvalues: NewResult (upval), v7 (copy)
+			return NewResult:Format(v7)
 		end)
-		local v9 = nil
+		local v8 = nil
 		
 		if Success then
-			v9 = Result
+			v8 = Result
 		else
 			NewResult1:debug("[GameSettings] createVoiceTypingModeSettingOptions missing translation for {}", "CoreScripts.InGameMenu.GameSettings.VoiceTypingMode")
-			v9 = "Voice typing mode"
+			v8 = "Voice typing mode"
 		end
-		local v10 = "Selector"
+		local v9 = "Selector"
 		local t = {}
-		local v11 = "CoreScripts.InGameMenu.GameSettings.VoiceTypingModeStandard"
+		local v10 = "CoreScripts.InGameMenu.GameSettings.VoiceTypingModeStandard"
 		local Success1, Result1 = pcall(function()
-			-- upvalues: NewResult (upval), v11 (copy)
-			return NewResult:Format(v11)
+			-- upvalues: NewResult (upval), v10 (copy)
+			return NewResult:Format(v10)
 		end)
-		local v12 = nil
+		local v11 = nil
 		
 		if Success1 then
-			v12 = Result1
+			v11 = Result1
 		else
 			NewResult1:debug("[GameSettings] createVoiceTypingModeSettingOptions missing translation for {}", "CoreScripts.InGameMenu.GameSettings.VoiceTypingModeStandard")
-			v12 = "Manual Send"
+			v11 = "Manual Send"
 		end
-		local v13 = "CoreScripts.InGameMenu.GameSettings.VoiceTypingModeContinuous"
+		local v12 = "CoreScripts.InGameMenu.GameSettings.VoiceTypingModeContinuous"
 		local Success2, Result2 = pcall(function()
-			-- upvalues: NewResult (upval), v13 (copy)
-			return NewResult:Format(v13)
+			-- upvalues: NewResult (upval), v12 (copy)
+			return NewResult:Format(v12)
 		end)
-		local v14 = nil
+		local v13 = nil
 		
 		if Success2 then
-			v14 = Result2
+			v13 = Result2
 		else
 			NewResult1:debug("[GameSettings] createVoiceTypingModeSettingOptions missing translation for {}", "CoreScripts.InGameMenu.GameSettings.VoiceTypingModeContinuous")
-			v14 = "Auto Send"
+			v13 = "Auto Send"
 		end
-		t[1] = v12
-		t[2] = v14
-		NewPage.VoiceTypingModeFrame, _, NewPage.VoiceTypingModeSelector = UtilityModule:AddNewRow(NewPage, v9, v10, t, 1)
+		t[1] = v11
+		t[2] = v13
+		NewPage.VoiceTypingModeFrame, _, NewPage.VoiceTypingModeSelector = UtilityModule:AddNewRow(NewPage, v8, v9, t, 1)
 		NewPage.VoiceTypingModeFrame.LayoutOrder = SETTINGSMENULAYOUTORDER.VoiceTypingModeFrame
 		local DictationModeSettingStore = require(CorePackages.Workspace.Packages.ExpChat).Stores.GetDictationModeSettingStore(false)
 		NewPage.VoiceTypingModeDisposeEffect = SignalsModule.createEffect(function(p8)
@@ -3487,13 +3486,13 @@ return ((function()
 		local CameraDevices = VideoCaptureService:GetCameraDevices()
 		local List = {}
 		local List1 = {}
-		local v8 = 1
+		local v7 = 1
 		table.insert(List, FeatureSettingsHubVideoSystemDefault)
 		table.insert(List1, "{DefaultDeviceGuid}")
 		
 		for i, cameraDevice in pairs(CameraDevices) do
 			if i == UserGameSettings.DefaultCameraID then
-				v8 = #List + 1
+				v7 = #List + 1
 			end
 			table.insert(List, cameraDevice)
 			table.insert(List1, i)
@@ -3507,7 +3506,7 @@ return ((function()
 		else
 			createCameraDeviceOptions()
 		end
-		NewPage.CameraDeviceSelector:SetSelectionIndex(v8)
+		NewPage.CameraDeviceSelector:SetSelectionIndex(v7)
 	end
 	
 	local DeviceListChangedConnection = nil
@@ -3640,11 +3639,11 @@ return ((function()
 		-- upvalues: VoiceSelectorAvailableAfterFae (upval), NewPage (copy), NewResult (upval), Default2 (upval), UtilityModule (upval), SETTINGSMENULAYOUTORDER (upval), DifferentiateVoiceSelectorSystemAndUser (upval), GetFIntDebounceDisconnectButtonDelayModule (upval), Flag2 (ref), FFlagVoiceRewarmTelemetry (upval), ConstantsModule1 (upval), VoiceSelectorIgnoreFailedStateDisconnect (upval), Flag1 (ref), VoiceConnectSelectorDebounce (upval), DebounceModule (upval), ThrottleFunctionCallModule (upval), VoiceChatSelectorReconnectFocus2AEGIS2 (upval), GuiService (upval), DebounceVoiceSelectorIndexChange (upval), DeferProgrammaticChange (upval)
 		if VoiceSelectorAvailableAfterFae and NewPage.VoiceConnectDisconnectFrame and NewPage.VoiceConnectDisconnectSelector then return end
 		local FeatureGameDetailsLabelVoiceChat = NewResult:Format("Feature.GameDetails.Label.VoiceChat")
-		local v9: number = if Default2:VoiceChatEnded() then 1 else 2
+		local v8: number = if Default2:VoiceChatEnded() then 1 else 2
 		NewPage.VoiceConnectDisconnectFrame, _, NewPage.VoiceConnectDisconnectSelector = UtilityModule:AddNewRow(NewPage, FeatureGameDetailsLabelVoiceChat, "Selector", {
 			NewResult:Format("Feature.SettingsHub.Label.Disconnected"),
 			(NewResult:Format("Feature.SettingsHub.Label.Connected"))
-		}, v9)
+		}, v8)
 		NewPage.VoiceConnectDisconnectFrame.LayoutOrder = SETTINGSMENULAYOUTORDER.VoiceConnectDisconnectSelector
 		local Service = Default2:getService()
 		
@@ -3674,14 +3673,14 @@ return ((function()
 				end
 			end)
 		end
-		local v10: number = v9
+		local v9: number = v8
 		local FIntDebounceDisconnectButtonDelayModule: number = GetFIntDebounceDisconnectButtonDelayModule()
 		local IsFIntDebounceDisconnectButtonDelayModuleAbove = FIntDebounceDisconnectButtonDelayModule > 0
 		
-		local function v615(p8)
-			-- upvalues: v10 (ref), DifferentiateVoiceSelectorSystemAndUser (upval), Flag2 (upval), FFlagVoiceRewarmTelemetry (upval), Default2 (upval), ConstantsModule1 (upval), VoiceSelectorIgnoreFailedStateDisconnect (upval), Flag1 (upval), NewPage (upval)
-			if p8 == v10 then return end
-			v10 = p8
+		local function v614(p8)
+			-- upvalues: v9 (ref), DifferentiateVoiceSelectorSystemAndUser (upval), Flag2 (upval), FFlagVoiceRewarmTelemetry (upval), Default2 (upval), ConstantsModule1 (upval), VoiceSelectorIgnoreFailedStateDisconnect (upval), Flag1 (upval), NewPage (upval)
+			if p8 == v9 then return end
+			v9 = p8
 			
 			if DifferentiateVoiceSelectorSystemAndUser and Flag2 then return end
 			if FFlagVoiceRewarmTelemetry then
@@ -3718,11 +3717,11 @@ return ((function()
 		end
 		
 		if VoiceConnectSelectorDebounce then
-			local DebounceModuleResult = if IsFIntDebounceDisconnectButtonDelayModuleAbove then DebounceModule(v615, FIntDebounceDisconnectButtonDelayModule) else v615
+			local DebounceModuleResult = if IsFIntDebounceDisconnectButtonDelayModuleAbove then DebounceModule(v614, FIntDebounceDisconnectButtonDelayModule) else v614
 			NewPage.VoiceConnectDisconnectSelector.IndexChanged:connect(function(p8)
-				-- upvalues: DifferentiateVoiceSelectorSystemAndUser (upval), Flag2 (upval), v615 (copy), DebounceModuleResult (copy)
+				-- upvalues: DifferentiateVoiceSelectorSystemAndUser (upval), Flag2 (upval), v614 (copy), DebounceModuleResult (copy)
 				if DifferentiateVoiceSelectorSystemAndUser and Flag2 then
-					v615(p8)
+					v614(p8)
 					
 					return
 				else
@@ -3730,7 +3729,7 @@ return ((function()
 				end
 			end)
 		else
-			NewPage.VoiceConnectDisconnectSelector.IndexChanged:connect(if IsFIntDebounceDisconnectButtonDelayModuleAbove then ThrottleFunctionCallModule(FIntDebounceDisconnectButtonDelayModule, v615) else v615)
+			NewPage.VoiceConnectDisconnectSelector.IndexChanged:connect(if IsFIntDebounceDisconnectButtonDelayModuleAbove then ThrottleFunctionCallModule(FIntDebounceDisconnectButtonDelayModule, v614) else v614)
 		end
 		if VoiceChatSelectorReconnectFocus2AEGIS2 then
 			NewPage.VoiceConnectDisconnectFrame.SelectionChanged:Connect(function(_, SelectedCoreObject, p8)
@@ -3841,7 +3840,7 @@ return ((function()
 		}, if GameSettings.VRThirdPersonFollowCamEnabled then 2 else 1)
 		NewPage.VRThirdPersonFixedCamEnabledFrame.LayoutOrder = SETTINGSMENULAYOUTORDER.VRThirdPersonFixedCamEnabledFrame
 		
-		local function v626(VRComfortSetting)
+		local function v625(VRComfortSetting)
 			-- upvalues: NewPage (upval)
 			if VRComfortSetting == Enum.VRComfortSetting.Custom then
 				NewPage.VRVignetteEnabledSelector:SetZIndex(2)
@@ -3869,12 +3868,12 @@ return ((function()
 		end
 		
 		NewPage.VRComfortSettingSelector.IndexChanged:connect(function(p8)
-			-- upvalues: EnumItems (copy), GameSettings (upval), v626 (copy)
+			-- upvalues: EnumItems (copy), GameSettings (upval), v625 (copy)
 			local EnumItem = EnumItems[p8]
 			GameSettings.VRComfortSetting = EnumItem
-			v626(EnumItem)
+			v625(EnumItem)
 		end)
-		v626(GameSettings.VRComfortSetting)
+		v625(GameSettings.VRComfortSetting)
 		NewPage.VRVignetteEnabledSelector.IndexChanged:connect(function(p8)
 			-- upvalues: GameSettings (upval)
 			if GameSettings.VRComfortSetting == Enum.VRComfortSetting.Custom then
@@ -4005,8 +4004,8 @@ return ((function()
 							local Service = Default2:getService()
 							local IsJoinedMatch = (VoiceVolumeControlsFixSliderVisibilityOnEligibleGames and p8 or Service and Service.VoiceChatState) == Enum.VoiceChatState.Joined
 							local UseNewAudioApi = VoiceChatService1 and VoiceChatService1.UseNewAudioApi
-							local v9 = VoiceVolumeControlsSuppressInExperienceUiForPartyVoice and (GetFFlagEnableCrossExpVoiceFunction() and (GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction() and IsVoiceFocusedFunction()))
-							NewPage.VoiceChatVolumeFrame.Visible = VoiceVolumeControlsEligibility.isVoiceChatVolumeSliderVisible(IsJoinedMatch, UseNewAudioApi) and not v9
+							local v8 = VoiceVolumeControlsSuppressInExperienceUiForPartyVoice and (GetFFlagEnableCrossExpVoiceFunction() and (GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction() and IsVoiceFocusedFunction()))
+							NewPage.VoiceChatVolumeFrame.Visible = VoiceVolumeControlsEligibility.isVoiceChatVolumeSliderVisible(IsJoinedMatch, UseNewAudioApi) and not v8
 						end)
 						
 						if not Success then
@@ -4014,15 +4013,15 @@ return ((function()
 						end
 					end
 					
-					local v9 = nil
+					local v8 = nil
 					local Success, Result = pcall(function()
-						-- upvalues: Default2 (upval), VoiceVolumeControlsFixSliderVisibilityOnEligibleGames (upval), v9 (copy), VoiceVolumeControlsSuppressInExperienceUiForPartyVoice (upval), GetFFlagEnableCrossExpVoiceFunction (upval), GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction (upval), IsVoiceFocusedFunction (upval), NewPage (upval), VoiceVolumeControlsEligibility (upval)
+						-- upvalues: Default2 (upval), VoiceVolumeControlsFixSliderVisibilityOnEligibleGames (upval), v8 (copy), VoiceVolumeControlsSuppressInExperienceUiForPartyVoice (upval), GetFFlagEnableCrossExpVoiceFunction (upval), GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction (upval), IsVoiceFocusedFunction (upval), NewPage (upval), VoiceVolumeControlsEligibility (upval)
 						local VoiceChatService1 = game:GetService("VoiceChatService")
 						local Service = Default2:getService()
-						local IsJoinedMatch = (VoiceVolumeControlsFixSliderVisibilityOnEligibleGames and v9 or Service and Service.VoiceChatState) == Enum.VoiceChatState.Joined
+						local IsJoinedMatch = (VoiceVolumeControlsFixSliderVisibilityOnEligibleGames and v8 or Service and Service.VoiceChatState) == Enum.VoiceChatState.Joined
 						local UseNewAudioApi = VoiceChatService1 and VoiceChatService1.UseNewAudioApi
-						local v10 = VoiceVolumeControlsSuppressInExperienceUiForPartyVoice and (GetFFlagEnableCrossExpVoiceFunction() and (GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction() and IsVoiceFocusedFunction()))
-						NewPage.VoiceChatVolumeFrame.Visible = VoiceVolumeControlsEligibility.isVoiceChatVolumeSliderVisible(IsJoinedMatch, UseNewAudioApi) and not v10
+						local v9 = VoiceVolumeControlsSuppressInExperienceUiForPartyVoice and (GetFFlagEnableCrossExpVoiceFunction() and (GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction() and IsVoiceFocusedFunction()))
+						NewPage.VoiceChatVolumeFrame.Visible = VoiceVolumeControlsEligibility.isVoiceChatVolumeSliderVisible(IsJoinedMatch, UseNewAudioApi) and not v9
 					end)
 					
 					if not Success then
@@ -4031,15 +4030,15 @@ return ((function()
 					if VoiceVolumeControlsSuppressInExperienceUiForPartyVoice and GetFFlagEnableCrossExpVoiceFunction() and GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction() then
 						ObserveIsVoiceFocusedFunction(function()
 							-- upvalues: Default2 (upval), VoiceVolumeControlsFixSliderVisibilityOnEligibleGames (upval), VoiceVolumeControlsSuppressInExperienceUiForPartyVoice (upval), GetFFlagEnableCrossExpVoiceFunction (upval), GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction (upval), IsVoiceFocusedFunction (upval), NewPage (upval), VoiceVolumeControlsEligibility (upval), NewResult1 (upval)
-							local v10 = nil
+							local v9 = nil
 							local Success, Result = pcall(function()
-								-- upvalues: Default2 (upval), VoiceVolumeControlsFixSliderVisibilityOnEligibleGames (upval), v10 (copy), VoiceVolumeControlsSuppressInExperienceUiForPartyVoice (upval), GetFFlagEnableCrossExpVoiceFunction (upval), GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction (upval), IsVoiceFocusedFunction (upval), NewPage (upval), VoiceVolumeControlsEligibility (upval)
+								-- upvalues: Default2 (upval), VoiceVolumeControlsFixSliderVisibilityOnEligibleGames (upval), v9 (copy), VoiceVolumeControlsSuppressInExperienceUiForPartyVoice (upval), GetFFlagEnableCrossExpVoiceFunction (upval), GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction (upval), IsVoiceFocusedFunction (upval), NewPage (upval), VoiceVolumeControlsEligibility (upval)
 								local VoiceChatService1 = game:GetService("VoiceChatService")
 								local Service = Default2:getService()
-								local IsJoinedMatch = (VoiceVolumeControlsFixSliderVisibilityOnEligibleGames and v10 or Service and Service.VoiceChatState) == Enum.VoiceChatState.Joined
+								local IsJoinedMatch = (VoiceVolumeControlsFixSliderVisibilityOnEligibleGames and v9 or Service and Service.VoiceChatState) == Enum.VoiceChatState.Joined
 								local UseNewAudioApi = VoiceChatService1 and VoiceChatService1.UseNewAudioApi
-								local v11 = VoiceVolumeControlsSuppressInExperienceUiForPartyVoice and (GetFFlagEnableCrossExpVoiceFunction() and (GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction() and IsVoiceFocusedFunction()))
-								NewPage.VoiceChatVolumeFrame.Visible = VoiceVolumeControlsEligibility.isVoiceChatVolumeSliderVisible(IsJoinedMatch, UseNewAudioApi) and not v11
+								local v10 = VoiceVolumeControlsSuppressInExperienceUiForPartyVoice and (GetFFlagEnableCrossExpVoiceFunction() and (GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction() and IsVoiceFocusedFunction()))
+								NewPage.VoiceChatVolumeFrame.Visible = VoiceVolumeControlsEligibility.isVoiceChatVolumeSliderVisible(IsJoinedMatch, UseNewAudioApi) and not v10
 							end)
 							
 							if not Success then
@@ -4056,8 +4055,8 @@ return ((function()
 								local Service = Default2:getService()
 								local IsJoinedMatch = (VoiceVolumeControlsFixSliderVisibilityOnEligibleGames and p8 or Service and Service.VoiceChatState) == Enum.VoiceChatState.Joined
 								local UseNewAudioApi = VoiceChatService1 and VoiceChatService1.UseNewAudioApi
-								local v10 = VoiceVolumeControlsSuppressInExperienceUiForPartyVoice and (GetFFlagEnableCrossExpVoiceFunction() and (GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction() and IsVoiceFocusedFunction()))
-								NewPage.VoiceChatVolumeFrame.Visible = VoiceVolumeControlsEligibility.isVoiceChatVolumeSliderVisible(IsJoinedMatch, UseNewAudioApi) and not v10
+								local v9 = VoiceVolumeControlsSuppressInExperienceUiForPartyVoice and (GetFFlagEnableCrossExpVoiceFunction() and (GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction() and IsVoiceFocusedFunction()))
+								NewPage.VoiceChatVolumeFrame.Visible = VoiceVolumeControlsEligibility.isVoiceChatVolumeSliderVisible(IsJoinedMatch, UseNewAudioApi) and not v9
 							end)
 							
 							if not Success then
@@ -4070,15 +4069,15 @@ return ((function()
 						if Service then
 							Service.StateChanged:Connect(function()
 								-- upvalues: Default2 (upval), VoiceVolumeControlsFixSliderVisibilityOnEligibleGames (upval), VoiceVolumeControlsSuppressInExperienceUiForPartyVoice (upval), GetFFlagEnableCrossExpVoiceFunction (upval), GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction (upval), IsVoiceFocusedFunction (upval), NewPage (upval), VoiceVolumeControlsEligibility (upval), NewResult1 (upval)
-								local v10 = nil
+								local v9 = nil
 								local Success, Result = pcall(function()
-									-- upvalues: Default2 (upval), VoiceVolumeControlsFixSliderVisibilityOnEligibleGames (upval), v10 (copy), VoiceVolumeControlsSuppressInExperienceUiForPartyVoice (upval), GetFFlagEnableCrossExpVoiceFunction (upval), GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction (upval), IsVoiceFocusedFunction (upval), NewPage (upval), VoiceVolumeControlsEligibility (upval)
+									-- upvalues: Default2 (upval), VoiceVolumeControlsFixSliderVisibilityOnEligibleGames (upval), v9 (copy), VoiceVolumeControlsSuppressInExperienceUiForPartyVoice (upval), GetFFlagEnableCrossExpVoiceFunction (upval), GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction (upval), IsVoiceFocusedFunction (upval), NewPage (upval), VoiceVolumeControlsEligibility (upval)
 									local VoiceChatService1 = game:GetService("VoiceChatService")
 									local Service = Default2:getService()
-									local IsJoinedMatch = (VoiceVolumeControlsFixSliderVisibilityOnEligibleGames and v10 or Service and Service.VoiceChatState) == Enum.VoiceChatState.Joined
+									local IsJoinedMatch = (VoiceVolumeControlsFixSliderVisibilityOnEligibleGames and v9 or Service and Service.VoiceChatState) == Enum.VoiceChatState.Joined
 									local UseNewAudioApi = VoiceChatService1 and VoiceChatService1.UseNewAudioApi
-									local v11 = VoiceVolumeControlsSuppressInExperienceUiForPartyVoice and (GetFFlagEnableCrossExpVoiceFunction() and (GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction() and IsVoiceFocusedFunction()))
-									NewPage.VoiceChatVolumeFrame.Visible = VoiceVolumeControlsEligibility.isVoiceChatVolumeSliderVisible(IsJoinedMatch, UseNewAudioApi) and not v11
+									local v10 = VoiceVolumeControlsSuppressInExperienceUiForPartyVoice and (GetFFlagEnableCrossExpVoiceFunction() and (GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction() and IsVoiceFocusedFunction()))
+									NewPage.VoiceChatVolumeFrame.Visible = VoiceVolumeControlsEligibility.isVoiceChatVolumeSliderVisible(IsJoinedMatch, UseNewAudioApi) and not v10
 								end)
 								
 								if not Success then
@@ -4427,37 +4426,37 @@ return ((function()
 		})
 	end
 	if FFlagIEMSettingsGroupsModule then
-		NewPage.AudioHeader = Callback1({
+		NewPage.AudioHeader = Callback({
 			headerText = "CoreScripts.InGameMenu.GameSettings.AudioHeader",
 			layoutOrder = SETTINGSMENULAYOUTORDER.AudioHeader,
 			parent = NewPage.Page
 		})
-		NewPage.AudioDivider = Callback({
+		NewPage.AudioDivider = Callback1({
 			layoutOrder = SETTINGSMENULAYOUTORDER.AudioDivider,
 			parent = NewPage.Page
 		})
-		NewPage.DisplayHeader = Callback1({
+		NewPage.DisplayHeader = Callback({
 			headerText = "CoreScripts.InGameMenu.GameSettings.DisplayHeader",
 			layoutOrder = SETTINGSMENULAYOUTORDER.DisplayHeader,
 			parent = NewPage.Page
 		})
-		NewPage.DisplayDivider = Callback({
+		NewPage.DisplayDivider = Callback1({
 			layoutOrder = SETTINGSMENULAYOUTORDER.DisplayDivider,
 			parent = NewPage.Page
 		})
 		
 		if not IsSpatialFunction() then
-			NewPage.LanguageHeader = Callback1({
+			NewPage.LanguageHeader = Callback({
 				headerText = "CoreScripts.InGameMenu.GameSettings.LanguageHeader",
 				layoutOrder = SETTINGSMENULAYOUTORDER.LanguageHeader,
 				parent = NewPage.Page
 			})
-			NewPage.LanguageDivider = Callback({
+			NewPage.LanguageDivider = Callback1({
 				layoutOrder = SETTINGSMENULAYOUTORDER.LanguageDivider,
 				parent = NewPage.Page
 			})
 		end
-		NewPage.ViewAndControlsHeader = Callback1({
+		NewPage.ViewAndControlsHeader = Callback({
 			headerText = "CoreScripts.InGameMenu.GameSettings.ViewandControlsHeader",
 			layoutOrder = SETTINGSMENULAYOUTORDER.ViewAndControlsHeader,
 			parent = NewPage.Page

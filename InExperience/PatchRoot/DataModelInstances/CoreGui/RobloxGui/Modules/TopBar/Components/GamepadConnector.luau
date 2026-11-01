@@ -86,19 +86,18 @@ function Module.new()
 		_lastMenuButtonPress = 0,
 		_dismissFocusConnections = {}
 	}
-	local _selectedCoreObject = nil
+	local NewResult = nil
 	
 	if EnabledResult and FFlagEnableConsoleExpControls then
-		local NewObservableValue = ObservableValue.new(GuiService.SelectedCoreObject)
+		NewResult = ObservableValue.new(GuiService.SelectedCoreObject)
 		GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function()
-			-- upvalues: NewObservableValue (copy), GuiService (upval)
-			NewObservableValue:set(GuiService.SelectedCoreObject)
+			-- upvalues: NewResult (copy), GuiService (upval)
+			NewResult:set(GuiService.SelectedCoreObject)
 		end)
-		_selectedCoreObject = NewObservableValue
 	else
-		_selectedCoreObject = nil
+		NewResult = nil
 	end
-	config._selectedCoreObject = _selectedCoreObject
+	config._selectedCoreObject = NewResult
 	config._connections = {}
 	
 	if EnabledResult and FFlagEnableConsoleExpControls then
@@ -190,7 +189,7 @@ function Module:connectToTopbar()
 		if PTFBackButtonAlwaysAsButtonBEngineFeature then
 			ContextActionService:BindCoreAction("ToggleUISelector", self:_bindSelf(self._toggleUiSelector), false, Enum.KeyCode.ButtonB)
 		end
-		local function v58()
+		local function v57()
 			-- upvalues: self (copy), GuiService (upval), FFlagAddTopBarScrimModule (upval), ServiceModule (upval), ConstantsModule (upval)
 			local IsTopBarFocused = self:_isTopBarFocused()
 			GuiService:SetMenuIsOpen(IsTopBarFocused, "TopbarMenu")
@@ -208,8 +207,8 @@ function Module:connectToTopbar()
 			end
 		end
 		
-		table.insert(self._connections, self._chromeFocused:connect(v58))
-		table.insert(self._connections, MenuIconSelectedSignal:connect(v58))
+		table.insert(self._connections, self._chromeFocused:connect(v57))
+		table.insert(self._connections, MenuIconSelectedSignal:connect(v57))
 	end
 end
 

@@ -42,6 +42,7 @@ local MomentsCreateAvatarPosts = game:DefineFastFlag("MomentsCreateAvatarPosts",
 local MomentsRenderAvatarPostsInFeed = game:DefineFastFlag("MomentsRenderAvatarPostsInFeed", false)
 local AppNavBarPerItemThemeOverride2 = game:DefineFastFlag("AppNavBarPerItemThemeOverride2", false)
 local EnableSplitPaneV1 = game:DefineFastFlag("EnableSplitPaneV1", false)
+local AppThemeHalloween2026HomeBackground = game:DefineFastFlag("AppThemeHalloween2026HomeBackground", false)
 local SduiAdvertiseRuntimeSupportSets = game:DefineFastFlag("SduiAdvertiseRuntimeSupportSets", false)
 local HomePageSduiPrefetchEngineFeature = game:DefineFastFlag("EnableHomePageSduiPrefetch", false) and game:GetEngineFeature("HomePageSduiPrefetch")
 local LuaAppSduiHomePageSupport3 = game:DefineFastFlag("LuaAppSduiHomePageSupport3", false)
@@ -109,7 +110,6 @@ return {
 	FFlagEnableMicrosoftStorePaymentsPlatform = require(script.FFlagEnableMicrosoftStorePaymentsPlatform),
 	FFlagEnableMilkyWayPaymentsPlatformV2 = require(script.FFlagEnableMilkyWayPaymentsPlatformV2),
 	FFlagFixOffSaleCurrentlyWearingItemNavigation = require(script.FFlagFixOffSaleCurrentlyWearingItemNavigation),
-	FFlagAXMigrateCatalogPageInputBindings = require(script.FFlagAXMigrateCatalogPageInputBindings),
 	FFlagAXMigrateEquipSlotsInputBindingsToRoactGamepad = require(script.FFlagAXMigrateEquipSlotsInputBindingsToRoactGamepad),
 	FFlagAXLegacyIXPExposureLogging = require(script.FFlagAXLegacyIXPExposureLogging),
 	FFlagAXCloseFilterOnBackgroundTap = require(script.FFlagAXCloseFilterOnBackgroundTap),
@@ -479,6 +479,7 @@ return {
 	FFlagUserListUseSheet = require(script.FFlagUserListUseSheet),
 	FFlagUserListCtaIntegrationEnabled = require(script.FFlagUserListCtaIntegrationEnabled),
 	FFlagJoinabilityCTARefactor = require(script.FFlagJoinabilityCTARefactor),
+	FFlagJoinabilityCTAContextCopy = require(script.FFlagJoinabilityCTAContextCopy),
 	FFlagJoinUserCTAsIxpEnabled = require(script.FFlagJoinUserCTAsIxpEnabled),
 	FStringJoinUserCTAsIxpLayer = require(script.FStringJoinUserCTAsIxpLayer),
 	FFlagUseUserCtaCommonEnums = require(script.FFlagUseUserCtaCommonEnums),
@@ -795,6 +796,7 @@ return {
 	FFlagSduiAddMarketplaceEntityDataHydration = game:DefineFastFlag("SduiAddMarketplaceEntityDataHydration", false),
 	FFlagSduiAddCollectibleItemDataHydration = game:DefineFastFlag("SduiAddCollectibleItemDataHydration", false),
 	FFlagSduiLeaderboardComponent = game:DefineFastFlag("SduiLeaderboardComponent", false),
+	FFlagLuaAppExperienceLeaderboardSeeAllEnabled = game:DefineFastFlag("LuaAppExperienceLeaderboardSeeAllEnabled", false),
 	FFlagMarketplaceCatalogSortTrackLastReceived = game:DefineFastFlag("MarketplaceCatalogSortTrackLastReceived", false),
 	FFlagMarketplaceCatalogCategoryTrackLastReceived = game:DefineFastFlag("MarketplaceCatalogCategoryTrackLastReceived", false),
 	FFlagSduiParseProtoGradientFields = game:DefineFastFlag("SduiParseProtoGradientFields", false),
@@ -1528,7 +1530,8 @@ return {
 	FIntLuaAppSubTabTopPadding = game:DefineFastInt("LuaAppSubTabTopPadding", 0),
 	FFlagEnableScrollAwayContentScrollableFix = require(script.FFlagEnableScrollAwayContentScrollableFix),
 	FFlagAppIaHomeSubTab = require(script.FFlagAppIaHomeSubTab),
-	FFlagAppThemeHalloween2026HomeBackground = game:DefineFastFlag("AppThemeHalloween2026HomeBackground", false),
+	FFlagAppThemeHalloween2026HomeBackground = AppThemeHalloween2026HomeBackground,
+	FFlagAppThemeHalloween2026FriendsBackground = game:DefineFastFlag("AppThemeHalloween2026FriendsBackground", false) and AppThemeHalloween2026HomeBackground,
 	FFlagAppIaHomeSubTabAnalytics = require(script.FFlagAppIaHomeSubTabAnalytics),
 	FFlagAppIaHomeSubTabScrollAwayFull = game:DefineFastFlag("AppIaHomeSubTabScrollAwayFull", false),
 	FFlagSubTabFixMissingProfileWidget = game:DefineFastFlag("SubTabFixMissingProfileWidget", false),
@@ -1539,7 +1542,6 @@ return {
 	FFlagEnableDrawerAnimatingHook = game:DefineFastFlag("EnableDrawerAnimatingHook", false),
 	FFlagEnableArgus = require(script.FFlagEnableArgus),
 	FFlagEnableArgusTab = require(script.FFlagEnableArgusTab),
-	FFlagEnableArgusFlyoutEntry = require(script.FFlagEnableArgusFlyoutEntry),
 	FFlagArgoEnableMoments = require(script.FFlagArgoEnableMoments),
 	FFlagEnableClassicThemeHeaderBackground = game:DefineFastFlag("EnableClassicThemeHeaderBackground", false),
 	FFlagEnableArgusImmersiveNav = game:DefineFastFlag("EnableArgusImmersiveNav", false),

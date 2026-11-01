@@ -546,18 +546,14 @@ return function(p4, Current, p5)
 		
 		return if CurrentEntry == nil then nil else CurrentEntry.renderEntry(p6.item, p7)
 	end, {})
-	local t = {}
-	local Current1 = nil
+	local Current1 = {}
 	
-	if Current == nil then
-		Current1 = t
-	else
+	if Current ~= nil then
 		AssertUniqueSourceIdsModule(Current.sources)
 		
 		for _, source in Current.sources do
-			t[source.id] = source
+			Current1[source.id] = source
 		end
-		Current1 = t
 	end
 	if UseRefResult3.current ~= Current then
 		UseRefResult3.current = Current

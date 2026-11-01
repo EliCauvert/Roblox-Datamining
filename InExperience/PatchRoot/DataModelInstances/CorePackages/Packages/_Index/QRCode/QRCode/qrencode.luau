@@ -1633,43 +1633,40 @@ end
 
 local function calculate_error_correction(Text: string, p11: number)
 	-- upvalues: config2 (copy), get_generator_polynominal_adjusted (copy), config1 (copy), bit_xor (copy)
-	local v8: string? = nil
+	local Numbers: string? = nil
 	
 	if type(Text) == "string" then
-		local Numbers = {}
+		Numbers = {}
 		local _ = string.gsub(Text, "(........)", function(Match)
 			-- upvalues: Numbers (copy)
 			Numbers[#Numbers + 1] = tonumber(Match, 2)
 		end)
-		v8 = Numbers
 	elseif type(Text) == "table" then
-		v8 = Text
+		Numbers = Text
 	else
 		assert(false, "Unknown type for data: %s", (type(Text)))
 	end
-	local CountV79 = #v8
-	local CountVDelta = CountV79 + p11 - 1
+	local CountNumbers = #Numbers
+	local CountNumbersDelta = CountNumbers + p11 - 1
 	local t = {}
 	
-	for i = 1, CountV79 do
-		t[CountVDelta - i + 1] = v8[i]
+	for i = 1, CountNumbers do
+		t[CountNumbersDelta - i + 1] = Numbers[i]
 	end
-	for i1 = 1, CountVDelta - CountV79 do
+	for i1 = 1, CountNumbersDelta - CountNumbers do
 		t[i1] = 0
 	end
 	t[0] = 0
-	local t1 = t
-	local t2 = {}
+	local t1 = {}
 	
-	for i2 = 0, #t1 do
-		t2[i2] = config2[t1[i2]]
+	for i2 = 0, #t do
+		t1[i2] = config2[t[i2]]
 	end
-	local t3 = t2
-	while p11 <= CountVDelta do
-		local Generator_polynominal_adjusted = get_generator_polynominal_adjusted(p11, CountVDelta)
-		local Entry = t3[CountVDelta]
+	while p11 <= CountNumbersDelta do
+		local Generator_polynominal_adjusted = get_generator_polynominal_adjusted(p11, CountNumbersDelta)
+		local Entry = t1[CountNumbersDelta]
 		
-		for i3 = CountVDelta, CountVDelta - p11, -1 do
+		for i3 = CountNumbersDelta, CountNumbersDelta - p11, -1 do
 			if Entry == 256 then
 				Generator_polynominal_adjusted[i3] = 256
 			elseif Generator_polynominal_adjusted[i3] + Entry >= 255 then
@@ -1678,45 +1675,42 @@ local function calculate_error_correction(Text: string, p11: number)
 				Generator_polynominal_adjusted[i3] += Entry
 			end
 		end
-		for i5 = CountVDelta - p11 - 1, 0, -1 do
+		for i5 = CountNumbersDelta - p11 - 1, 0, -1 do
 			Generator_polynominal_adjusted[i5] = 256
+		end
+		local t2 = {}
+		
+		for i6 = 0, #Generator_polynominal_adjusted do
+			t2[i6] = config1[Generator_polynominal_adjusted[i6]]
+		end
+		local t3 = {}
+		
+		for i7 = 0, #t1 do
+			t3[i7] = config1[t1[i7]]
 		end
 		local t4 = {}
 		
-		for i6 = 0, #Generator_polynominal_adjusted do
-			t4[i6] = config1[Generator_polynominal_adjusted[i6]]
+		for i8 = CountNumbersDelta, 0, -1 do
+			t4[i8] = bit_xor(t2[i8], t3[i8])
 		end
-		local t5 = t3
-		local t6 = {}
+		for i9 = CountNumbersDelta, 0, -1 do
+			if i9 < p11 or t4[i9] ~= 0 then break end
+			t4[i9] = nil
+			CountNumbersDelta -= 1
+		end
+		t = t4
+		t1 = {}
 		
-		for i7 = 0, #t5 do
-			t6[i7] = config1[t5[i7]]
+		for i10 = 0, #t do
+			t1[i10] = config2[t[i10]]
 		end
-		local t7 = {}
-		
-		for i8 = CountVDelta, 0, -1 do
-			t7[i8] = bit_xor(t4[i8], t6[i8])
-		end
-		for i9 = CountVDelta, 0, -1 do
-			if i9 < p11 or t7[i9] ~= 0 then break end
-			t7[i9] = nil
-			CountVDelta -= 1
-		end
-		t = t7
-		local t8 = t
-		local t9 = {}
-		
-		for i10 = 0, #t8 do
-			t9[i10] = config2[t8[i10]]
-		end
-		t3 = t9
 	end
-	local t10 = {}
+	local t5 = {}
 	
 	for i4 = #t, 0, -1 do
-		t10[#t10 + 1] = t[i4]
+		t5[#t5 + 1] = t[i4]
 	end
-	return t10
+	return t5
 end
 
 local list2 = {
@@ -2057,21 +2051,21 @@ local function add_position_detection_patterns(Entry)
 end
 
 local function add_timing_pattern(p14)
-	local v9 = 7
-	local v10 = 9
+	local v8 = 7
+	local v9 = 9
 	
-	for i = v10, #p14 - 8 do
+	for i = v9, #p14 - 8 do
 		if math.fmod(i, 2) == 1 then
-			p14[i][v9] = 2
+			p14[i][v8] = 2
 		else
-			p14[i][v9] = -2
+			p14[i][v8] = -2
 		end
 	end
-	for i1 = v10, #p14 - 8 do
+	for i1 = v9, #p14 - 8 do
 		if math.fmod(i1, 2) == 1 then
-			p14[v9][i1] = 2
+			p14[v8][i1] = 2
 		else
-			p14[v9][i1] = -2
+			p14[v8][i1] = -2
 		end
 	end
 end
@@ -2297,12 +2291,12 @@ local function add_typeinfo_to_matrix(Entry, p16, p17)
 		Entry[9][8] = -2
 	end
 	for i1 = 10, 15 do
-		local v11 = 16 - i1
+		local v10 = 16 - i1
 		
 		if string.sub(Entry1, i1, i1) == "1" then
-			Entry[9][v11] = 2
+			Entry[9][v10] = 2
 		else
-			Entry[9][v11] = -2
+			Entry[9][v10] = -2
 		end
 	end
 	for i2 = 1, 6 do
@@ -2348,12 +2342,12 @@ local function add_version_information(p18, p19: number)
 	if p19 < 7 then return end
 	local _ = #p18
 	local Entry: string = list5[p19 - 6]
-	local v12 = #p18 - 10
-	local v13 = 1
+	local v11 = #p18 - 10
+	local v12 = 1
 	
 	for i = 1, #Entry do
-		local NewRemainder = v12 + math.fmod(i - 1, 3)
-		local NewFloored = v13 + math.floor((i - 1) / 3)
+		local NewRemainder = v11 + math.fmod(i - 1, 3)
+		local NewFloored = v12 + math.floor((i - 1) / 3)
 		
 		if string.sub(Entry, i, i) == "1" then
 			p18[NewRemainder][NewFloored] = 2
@@ -2361,12 +2355,12 @@ local function add_version_information(p18, p19: number)
 			p18[NewRemainder][NewFloored] = -2
 		end
 	end
-	local v14 = 1
-	local v15 = #p18 - 10
+	local v13 = 1
+	local v14 = #p18 - 10
 	
 	for i1 = 1, #Entry do
-		local NewFloored = v14 + math.floor((i1 - 1) / 3)
-		local NewRemainder = v15 + math.fmod(i1 - 1, 3)
+		local NewFloored = v13 + math.floor((i1 - 1) / 3)
+		local NewRemainder = v14 + math.fmod(i1 - 1, 3)
 		
 		if string.sub(Entry, i1, i1) == "1" then
 			p18[NewFloored][NewRemainder] = 2
@@ -2379,19 +2373,19 @@ end
 local function prepare_matrix_with_mask(p20: number, p21, p22)
 	-- upvalues: add_position_detection_patterns (copy), add_timing_pattern (copy), add_version_information (copy), add_alignment_pattern (copy), add_typeinfo_to_matrix (copy)
 	local t = {}
-	local v16 = p20 * 4 + 17
+	local v15 = p20 * 4 + 17
 	
-	for i = 1, v16 do
+	for i = 1, v15 do
 		t[i] = {}
 		
-		for i1 = 1, v16 do
+		for i1 = 1, v15 do
 			t[i][i1] = 0
 		end
 	end
 	add_position_detection_patterns(t)
 	add_timing_pattern(t)
 	add_version_information(t, p20)
-	t[9][v16 - 7] = 2
+	t[9][v15 - 7] = 2
 	add_alignment_pattern(t)
 	add_typeinfo_to_matrix(t, p21, p22)
 	
@@ -2399,41 +2393,41 @@ local function prepare_matrix_with_mask(p20: number, p21, p22)
 end
 
 local function get_pixel_with_mask(p23, p24: number, p25: number, Segment): number
-	local v17 = p24 - 1
-	local v18 = p25 - 1
+	local v16 = p24 - 1
+	local v17 = p25 - 1
 	local Flag = false
 	
 	if p23 ~= -1 then
 		if p23 == 0 then
-			if math.fmod(v17 + v18, 2) == 0 then
+			if math.fmod(v16 + v17, 2) == 0 then
 				Flag = true
 			end
 		elseif p23 == 1 then
-			if math.fmod(v18, 2) == 0 then
+			if math.fmod(v17, 2) == 0 then
 				Flag = true
 			end
 		elseif p23 == 2 then
-			if math.fmod(v17, 3) == 0 then
+			if math.fmod(v16, 3) == 0 then
 				Flag = true
 			end
 		elseif p23 == 3 then
-			if math.fmod(v17 + v18, 3) == 0 then
+			if math.fmod(v16 + v17, 3) == 0 then
 				Flag = true
 			end
 		elseif p23 == 4 then
-			if math.fmod(math.floor(v18 / 2) + math.floor(v17 / 3), 2) == 0 then
+			if math.fmod(math.floor(v17 / 2) + math.floor(v16 / 3), 2) == 0 then
 				Flag = true
 			end
 		elseif p23 == 5 then
-			if math.fmod(v17 * v18, 2) + math.fmod(v17 * v18, 3) == 0 then
+			if math.fmod(v16 * v17, 2) + math.fmod(v16 * v17, 3) == 0 then
 				Flag = true
 			end
 		elseif p23 == 6 then
-			if math.fmod(math.fmod(v17 * v18, 2) + math.fmod(v17 * v18, 3), 2) == 0 then
+			if math.fmod(math.fmod(v16 * v17, 2) + math.fmod(v16 * v17, 3), 2) == 0 then
 				Flag = true
 			end
 		elseif p23 == 7 then
-			if math.fmod(math.fmod(v17 * v18, 3) + math.fmod(v17 + v18, 2), 2) == 0 then
+			if math.fmod(math.fmod(v16 * v17, 3) + math.fmod(v16 + v17, 2), 2) == 0 then
 				Flag = true
 			end
 		else
@@ -2446,15 +2440,15 @@ end
 local function get_next_free_positions(p23, p24: number, Count: number, p25: string, p26)
 	local t = {}
 	local Count1 = 1
-	local v17 = "right"
+	local v16 = "right"
 	while Count1 <= #p26 do
-		if v17 == "right" and p23[p24][Count] == 0 then
+		if v16 == "right" and p23[p24][Count] == 0 then
 			t[#t + 1] = { p24, Count }
-			v17 = "left"
+			v16 = "left"
 			Count1 += 1
-		elseif v17 == "left" and p23[p24 - 1][Count] == 0 then
+		elseif v16 == "left" and p23[p24 - 1][Count] == 0 then
 			t[#t + 1] = { p24 - 1, Count }
-			v17 = "right"
+			v16 = "right"
 			Count1 += 1
 			
 			if p25 == "up" then
@@ -2462,7 +2456,7 @@ local function get_next_free_positions(p23, p24: number, Count: number, p25: str
 			else
 				Count += 1
 			end
-		elseif v17 == "right" and p23[p24 - 1][Count] == 0 then
+		elseif v16 == "right" and p23[p24 - 1][Count] == 0 then
 			t[#t + 1] = { p24 - 1, Count }
 			Count1 += 1
 			
@@ -2496,37 +2490,37 @@ end
 local _ = function(p27, Text, p28)
 	-- upvalues: get_next_free_positions (copy), get_pixel_with_mask (copy)
 	size = #p27
-	local v18 = nil
+	local v17 = nil
 	local Count = nil
+	local v18 = nil
 	local v19 = nil
 	local v20 = nil
 	local v21 = nil
-	local v22 = nil
-	local v23 = "up"
-	local v24 = 0
-	v18 = size
+	local v22 = "up"
+	local v23 = 0
+	v17 = size
 	Count = size
 	string.gsub(Text, ".?.?.?.?.?.?.?.?", function(Text: string)
-		-- upvalues: v24 (ref), v19 (ref), v18 (ref), Count (ref), v23 (ref), get_next_free_positions (upval), p27 (copy), p28 (copy), v20 (ref), v21 (ref), v22 (ref), get_pixel_with_mask (upval)
-		v24 += 1
-		v19, v18, Count, v142 = get_next_free_positions(p27, v18, Count, v23, Text, p28)
+		-- upvalues: v23 (ref), v18 (ref), v17 (ref), Count (ref), v22 (ref), get_next_free_positions (upval), p27 (copy), p28 (copy), v19 (ref), v20 (ref), v21 (ref), get_pixel_with_mask (upval)
+		v23 += 1
+		v18, v17, Count, v136 = get_next_free_positions(p27, v17, Count, v22, Text, p28)
 		
 		for i = 1, #Text do
-			v20 = v19[i][1]
-			v21 = v19[i][2]
-			v22 = get_pixel_with_mask(p28, v20, v21, (string.sub(Text, i, i)))
+			v19 = v18[i][1]
+			v20 = v18[i][2]
+			v21 = get_pixel_with_mask(p28, v19, v20, (string.sub(Text, i, i)))
 			
 			if debugging then
-				p27[v20][v21] = v22 * (i + 10)
+				p27[v19][v20] = v21 * (i + 10)
 			else
-				p27[v20][v21] = v22
+				p27[v19][v20] = v21
 			end
 		end
 	end)
 end
 
 local function calculate_penalty(p29): number
-	local v25 = 0
+	local v24 = 0
 	local Count = 0
 	local Count1 = 0
 	local CountP52 = #p29
@@ -2534,47 +2528,47 @@ local function calculate_penalty(p29): number
 	
 	for i = 1, CountP52 do
 		local Count3 = 0
-		local v26: boolean? = nil
+		local v25: boolean? = nil
 		
 		for i1 = 1, CountP52 do
 			if p29[i][i1] > 0 then
 				Count2 += 1
 			end
-			local v27 = p29[i][i1] < 0
+			local v26 = p29[i][i1] < 0
 			
-			if v26 == v27 then
+			if v25 == v26 then
 				Count3 += 1
 			else
 				if Count3 >= 5 then
-					v25 = v25 + Count3 - 2
+					v24 = v24 + Count3 - 2
 				end
 				Count3 = 1
 			end
-			v26 = v27
+			v25 = v26
 		end
 		if Count3 >= 5 then
-			v25 = v25 + Count3 - 2
+			v24 = v24 + Count3 - 2
 		end
 	end
 	for i2 = 1, CountP52 do
 		local Count4 = 0
-		local v28: boolean? = nil
+		local v27: boolean? = nil
 		
 		for i3 = 1, CountP52 do
-			local v29 = p29[i3][i2] < 0
+			local v28 = p29[i3][i2] < 0
 			
-			if v28 == v29 then
+			if v27 == v28 then
 				Count4 += 1
 			else
 				if Count4 >= 5 then
-					v25 = v25 + Count4 - 2
+					v24 = v24 + Count4 - 2
 				end
 				Count4 = 1
 			end
-			v28 = v29
+			v27 = v28
 		end
 		if Count4 >= 5 then
-			v25 = v25 + Count4 - 2
+			v24 = v24 + Count4 - 2
 		end
 	end
 	for i4 = 1, CountP52 do
@@ -2590,37 +2584,37 @@ local function calculate_penalty(p29): number
 			end
 		end
 	end
-	return v25 + Count + Count1 + math.floor((math.abs(Count2 / (CountP52 * CountP52) * 100 - 50))) * 2
+	return v24 + Count + Count1 + math.floor((math.abs(Count2 / (CountP52 * CountP52) * 100 - 50))) * 2
 end
 
 local _ = function(p30, p31, Text, p32)
 	-- upvalues: prepare_matrix_with_mask (copy), get_next_free_positions (copy), get_pixel_with_mask (copy), calculate_penalty (copy)
 	local Prepare_matrix_with_maskResult = prepare_matrix_with_mask(p30, p31, p32)
 	size = #Prepare_matrix_with_maskResult
-	local v30 = nil
+	local v29 = nil
 	local Count = nil
+	local v30 = nil
 	local v31 = nil
 	local v32 = nil
 	local v33 = nil
-	local v34 = nil
-	local v35 = "up"
-	local v36 = 0
-	v30 = size
+	local v34 = "up"
+	local v35 = 0
+	v29 = size
 	Count = size
 	string.gsub(Text, ".?.?.?.?.?.?.?.?", function(Text: string)
-		-- upvalues: v36 (ref), v31 (ref), v30 (ref), Count (ref), v35 (ref), get_next_free_positions (upval), Prepare_matrix_with_maskResult (copy), p32 (copy), v32 (ref), v33 (ref), v34 (ref), get_pixel_with_mask (upval)
-		v36 += 1
-		v31, v30, Count, v164 = get_next_free_positions(Prepare_matrix_with_maskResult, v30, Count, v35, Text, p32)
+		-- upvalues: v35 (ref), v30 (ref), v29 (ref), Count (ref), v34 (ref), get_next_free_positions (upval), Prepare_matrix_with_maskResult (copy), p32 (copy), v31 (ref), v32 (ref), v33 (ref), get_pixel_with_mask (upval)
+		v35 += 1
+		v30, v29, Count, v158 = get_next_free_positions(Prepare_matrix_with_maskResult, v29, Count, v34, Text, p32)
 		
 		for i = 1, #Text do
-			v32 = v31[i][1]
-			v33 = v31[i][2]
-			v34 = get_pixel_with_mask(p32, v32, v33, (string.sub(Text, i, i)))
+			v31 = v30[i][1]
+			v32 = v30[i][2]
+			v33 = get_pixel_with_mask(p32, v31, v32, (string.sub(Text, i, i)))
 			
 			if debugging then
-				Prepare_matrix_with_maskResult[v32][v33] = v34 * (i + 10)
+				Prepare_matrix_with_maskResult[v31][v32] = v33 * (i + 10)
 			else
-				Prepare_matrix_with_maskResult[v32][v33] = v34
+				Prepare_matrix_with_maskResult[v31][v32] = v33
 			end
 		end
 	end)
@@ -2632,31 +2626,31 @@ local function get_matrix_with_lowest_penalty(p33, p34, Text)
 	-- upvalues: prepare_matrix_with_mask (copy), get_next_free_positions (copy), get_pixel_with_mask (copy), calculate_penalty (copy)
 	local Prepare_matrix_with_maskResult = prepare_matrix_with_mask(p33, p34, 0)
 	size = #Prepare_matrix_with_maskResult
-	local v37 = nil
+	local v36 = nil
 	local Count = nil
+	local v37 = nil
 	local v38 = nil
 	local v39 = nil
 	local v40 = nil
-	local v41 = nil
-	local v42 = "up"
-	local v43 = 0
-	v37 = size
+	local v41 = "up"
+	local v42 = 0
+	v36 = size
 	Count = size
-	local v44 = 0
+	local v43 = 0
 	string.gsub(Text, ".?.?.?.?.?.?.?.?", function(Text: string)
-		-- upvalues: v43 (ref), v38 (ref), v37 (ref), Count (ref), v42 (ref), get_next_free_positions (upval), Prepare_matrix_with_maskResult (copy), v44 (copy), v39 (ref), v40 (ref), v41 (ref), get_pixel_with_mask (upval)
-		v43 += 1
-		v38, v37, Count, v175 = get_next_free_positions(Prepare_matrix_with_maskResult, v37, Count, v42, Text, v44)
+		-- upvalues: v42 (ref), v37 (ref), v36 (ref), Count (ref), v41 (ref), get_next_free_positions (upval), Prepare_matrix_with_maskResult (copy), v43 (copy), v38 (ref), v39 (ref), v40 (ref), get_pixel_with_mask (upval)
+		v42 += 1
+		v37, v36, Count, v169 = get_next_free_positions(Prepare_matrix_with_maskResult, v36, Count, v41, Text, v43)
 		
 		for i = 1, #Text do
-			v39 = v38[i][1]
-			v40 = v38[i][2]
-			v41 = get_pixel_with_mask(v44, v39, v40, (string.sub(Text, i, i)))
+			v38 = v37[i][1]
+			v39 = v37[i][2]
+			v40 = get_pixel_with_mask(v43, v38, v39, (string.sub(Text, i, i)))
 			
 			if debugging then
-				Prepare_matrix_with_maskResult[v39][v40] = v41 * (i + 10)
+				Prepare_matrix_with_maskResult[v38][v39] = v40 * (i + 10)
 			else
-				Prepare_matrix_with_maskResult[v39][v40] = v41
+				Prepare_matrix_with_maskResult[v38][v39] = v40
 			end
 		end
 	end)
@@ -2666,30 +2660,30 @@ local function get_matrix_with_lowest_penalty(p33, p34, Text)
 	for i = 1, 7 do
 		local Prepare_matrix_with_maskResult2 = prepare_matrix_with_mask(p33, p34, i)
 		size = #Prepare_matrix_with_maskResult2
-		local v45 = nil
+		local v44 = nil
 		local Count1 = nil
+		local v45 = nil
 		local v46 = nil
 		local v47 = nil
 		local v48 = nil
-		local v49 = nil
-		local v50 = "up"
-		local v51 = 0
-		v45 = size
+		local v49 = "up"
+		local v50 = 0
+		v44 = size
 		Count1 = size
 		string.gsub(Text, ".?.?.?.?.?.?.?.?", function(Text: string)
-			-- upvalues: v51 (ref), v46 (ref), v45 (ref), Count1 (ref), v50 (ref), get_next_free_positions (upval), Prepare_matrix_with_maskResult2 (copy), i (copy), v47 (ref), v48 (ref), v49 (ref), get_pixel_with_mask (upval)
-			v51 += 1
-			v46, v45, Count1, v189 = get_next_free_positions(Prepare_matrix_with_maskResult2, v45, Count1, v50, Text, i)
+			-- upvalues: v50 (ref), v45 (ref), v44 (ref), Count1 (ref), v49 (ref), get_next_free_positions (upval), Prepare_matrix_with_maskResult2 (copy), i (copy), v46 (ref), v47 (ref), v48 (ref), get_pixel_with_mask (upval)
+			v50 += 1
+			v45, v44, Count1, v183 = get_next_free_positions(Prepare_matrix_with_maskResult2, v44, Count1, v49, Text, i)
 			
 			for i = 1, #Text do
-				v47 = v46[i][1]
-				v48 = v46[i][2]
-				v49 = get_pixel_with_mask(i, v47, v48, (string.sub(Text, i, i)))
+				v46 = v45[i][1]
+				v47 = v45[i][2]
+				v48 = get_pixel_with_mask(i, v46, v47, (string.sub(Text, i, i)))
 				
 				if debugging then
-					Prepare_matrix_with_maskResult2[v47][v48] = v49 * (i + 10)
+					Prepare_matrix_with_maskResult2[v46][v47] = v48 * (i + 10)
 				else
-					Prepare_matrix_with_maskResult2[v47][v48] = v49
+					Prepare_matrix_with_maskResult2[v46][v47] = v48
 				end
 			end
 		end)
@@ -2732,21 +2726,21 @@ return {
 	encode_string_ascii = function(Text): string
 		-- upvalues: list1 (copy), binary (copy)
 		local Text1 = ""
+		local v51 = nil
 		local v52 = nil
 		local v53 = nil
-		local v54 = nil
 		string.gsub(Text, "..?", function(Text: string)
-			-- upvalues: v53 (ref), list1 (upval), v54 (ref), v52 (ref), Text1 (ref), binary (upval)
+			-- upvalues: v52 (ref), list1 (upval), v53 (ref), v51 (ref), Text1 (ref), binary (upval)
 			if #Text == 2 then
-				v53 = list1[string.byte((string.sub(Text, 1, 1)))]
-				v54 = list1[string.byte((string.sub(Text, 2, 2)))]
-				v52 = v53 * 45 + v54
-				Text1 ..= binary(v52, 11)
+				v52 = list1[string.byte((string.sub(Text, 1, 1)))]
+				v53 = list1[string.byte((string.sub(Text, 2, 2)))]
+				v51 = v52 * 45 + v53
+				Text1 ..= binary(v51, 11)
 				
 				return
 			else
-				v52 = list1[string.byte(Text)]
-				Text1 ..= binary(v52, 6)
+				v51 = list1[string.byte(Text)]
+				Text1 ..= binary(v51, 6)
 			end
 		end)
 		
@@ -2754,13 +2748,13 @@ return {
 	end,
 	qrcode = function(Text: string, p35, _)
 		-- upvalues: get_version_eclevel (copy), get_length (copy), binary (copy), list1 (copy), encode_string_binary (copy), add_pad_data (copy), arrange_codewords_and_calculate_ec (copy), Remainder (copy), get_matrix_with_lowest_penalty (copy)
-		local v52: number = if string.match(Text, "^[0-9]+$") then 1 elseif string.match(Text, "^[0-9A-Z $%%*./:+-]+$") then 2 else 4
-		local Version_eclevel, Version_eclevel2 = get_version_eclevel(#Text, v52, p35)
-		local v53: number = v52
-		local Text1 = binary(v52, 4) .. get_length(Text, Version_eclevel, v52)
+		local v51: number = if string.match(Text, "^[0-9]+$") then 1 elseif string.match(Text, "^[0-9A-Z $%%*./:+-]+$") then 2 else 4
+		local Version_eclevel, Version_eclevel2 = get_version_eclevel(#Text, v51, p35)
+		local v52: number = v51
+		local Text1 = binary(v51, 4) .. get_length(Text, Version_eclevel, v51)
 		local Text3 = nil
 		
-		if v53 == 1 then
+		if v52 == 1 then
 			local Text2 = ""
 			local Number = nil
 			string.gsub(Text, "..?.?", function(Match)
@@ -2781,27 +2775,27 @@ return {
 				end
 			end)
 			Text3 = Text2
-		elseif v53 == 2 then
+		elseif v52 == 2 then
 			local Text4 = ""
+			local v53 = nil
 			local v54 = nil
 			local v55 = nil
-			local v56 = nil
 			string.gsub(Text, "..?", function(Text: string)
-				-- upvalues: v55 (ref), list1 (upval), v56 (ref), v54 (ref), Text4 (ref), binary (upval)
+				-- upvalues: v54 (ref), list1 (upval), v55 (ref), v53 (ref), Text4 (ref), binary (upval)
 				if #Text == 2 then
-					v55 = list1[string.byte((string.sub(Text, 1, 1)))]
-					v56 = list1[string.byte((string.sub(Text, 2, 2)))]
-					v54 = v55 * 45 + v56
-					Text4 ..= binary(v54, 11)
+					v54 = list1[string.byte((string.sub(Text, 1, 1)))]
+					v55 = list1[string.byte((string.sub(Text, 2, 2)))]
+					v53 = v54 * 45 + v55
+					Text4 ..= binary(v53, 11)
 					
 					return
 				else
-					v54 = list1[string.byte(Text)]
-					Text4 ..= binary(v54, 6)
+					v53 = list1[string.byte(Text)]
+					Text4 ..= binary(v53, 6)
 				end
 			end)
 			Text3 = Text4
-		elseif v53 == 4 then
+		elseif v52 == 4 then
 			Text3 = encode_string_binary(Text)
 		else
 			assert(false, "not implemented yet")
@@ -2825,16 +2819,16 @@ return {
 	get_pixel_with_mask = get_pixel_with_mask,
 	get_version_eclevel_mode_bistringlength = function(Text: string, p35, p36)
 		-- upvalues: get_version_eclevel (copy), get_length (copy), binary (copy)
-		local v52 = nil
+		local v51 = nil
 		if p36 then
 			assert(false, "not implemented")
-			v52 = p36
+			v51 = p36
 		else
-			v52 = if string.match(Text, "^[0-9]+$") then 1 elseif string.match(Text, "^[0-9A-Z $%%*./:+-]+$") then 2 else 4
+			v51 = if string.match(Text, "^[0-9]+$") then 1 elseif string.match(Text, "^[0-9A-Z $%%*./:+-]+$") then 2 else 4
 		end
-		local Version_eclevel, Version_eclevel2 = get_version_eclevel(#Text, v52, p35)
+		local Version_eclevel, Version_eclevel2 = get_version_eclevel(#Text, v51, p35)
 		
-		return Version_eclevel, Version_eclevel2, binary(v52, 4), v52, (get_length(Text, Version_eclevel, v52))
+		return Version_eclevel, Version_eclevel2, binary(v51, 4), v51, (get_length(Text, Version_eclevel, v51))
 	end,
 	remainder = Remainder,
 	arrange_codewords_and_calculate_ec = arrange_codewords_and_calculate_ec,

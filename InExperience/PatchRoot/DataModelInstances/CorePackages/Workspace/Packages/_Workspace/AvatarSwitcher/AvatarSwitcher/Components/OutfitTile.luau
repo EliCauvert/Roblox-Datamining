@@ -13,25 +13,26 @@ local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.U
 local GetAvatarSwitcherStoreModule = require(AvatarSwitcher.Stores.getAvatarSwitcherStore)
 local _ = require(AvatarSwitcher.types)
 local FFlagAvatarSwitcherUseAvatarInventoryEndpoint = require(Parent.AvatarExperienceFlags).FFlagAvatarSwitcherUseAvatarInventoryEndpoint
+local FFlagAXUnifiedEventStrictPayloads = require(Parent.AvatarExperienceFlags).FFlagAXUnifiedEventStrictPayloads
 local FFlagAXBackgroundsInOutfitThumbnails = require(Parent.SharedFlags).FFlagAXBackgroundsInOutfitThumbnails
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: SignalsReactModule (copy), GetAvatarSwitcherStoreModule (copy), ReactModule (copy), UseTokensFunction (copy), AddUnifiedEventLoggingFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), SessionService (copy), SignalsModule (copy), FoundationModule (copy), FFlagAvatarSwitcherUseAvatarInventoryEndpoint (copy), FFlagAXBackgroundsInOutfitThumbnails (copy)
+	-- upvalues: SignalsReactModule (copy), GetAvatarSwitcherStoreModule (copy), ReactModule (copy), UseTokensFunction (copy), AddUnifiedEventLoggingFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), FFlagAXUnifiedEventStrictPayloads (copy), SessionService (copy), SignalsModule (copy), FoundationModule (copy), FFlagAvatarSwitcherUseAvatarInventoryEndpoint (copy), FFlagAXBackgroundsInOutfitThumbnails (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetAvatarSwitcherStoreModule)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseTokensResult = UseTokensFunction()
 	local Id = Frame.outfitInfo.id
 	ReactModule.useEffect(function()
-		-- upvalues: AddUnifiedEventLoggingFunction (upval), UseRefResult (copy), UnifiedEventLogEnums (upval), UnifiedLoggingSurface (upval), Frame (copy), Id (copy), SessionService (upval)
+		-- upvalues: AddUnifiedEventLoggingFunction (upval), UseRefResult (copy), UnifiedEventLogEnums (upval), UnifiedLoggingSurface (upval), Frame (copy), FFlagAXUnifiedEventStrictPayloads (upval), Id (copy), SessionService (upval)
 		task.delay(0, function()
-			-- upvalues: AddUnifiedEventLoggingFunction (upval), UseRefResult (upval), UnifiedEventLogEnums (upval), UnifiedLoggingSurface (upval), Frame (upval), Id (upval), SessionService (upval)
+			-- upvalues: AddUnifiedEventLoggingFunction (upval), UseRefResult (upval), UnifiedEventLogEnums (upval), UnifiedLoggingSurface (upval), Frame (upval), FFlagAXUnifiedEventStrictPayloads (upval), Id (upval), SessionService (upval)
 			AddUnifiedEventLoggingFunction(UseRefResult, {
 				elementName = "OUTFIT_TILE",
 				action = UnifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
 				surface = UnifiedLoggingSurface.IN_EXPERIENCE_AVATAR_SWITCHER,
 				gridPositionRow = Frame.gridPosition.row,
 				gridPositionColumn = Frame.gridPosition.column,
-				itemId = Id
+				itemId = if FFlagAXUnifiedEventStrictPayloads then if Id then tostring(Id) else nil else Id
 			}, { sessionTagName = SessionService:GetSessionTag("level2a") })
 		end)
 	end, { Frame.gridPosition, Id })

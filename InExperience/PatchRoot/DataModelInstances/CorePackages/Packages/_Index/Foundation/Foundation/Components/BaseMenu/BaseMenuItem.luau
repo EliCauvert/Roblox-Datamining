@@ -56,7 +56,7 @@ local function getContainerPadding(Container, IsIsChecked)
 end
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
-	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), BaseMenuContextModule (copy), UseTokensModule (copy), FlagsModule (copy), UseBaseMenuItemVariantsModule (copy), UseMenuItemHoverModule (copy), LoggerModule (copy), UseBindableModule (copy), UseComposedRefFunction (copy), getContainerPadding (copy), ViewModule (copy), IconModule (copy), BuilderIconsModule (copy), BaseMenuItemAccessoryModule (copy), TextModule (copy), WithCommonPropsModule (copy), ConstantsModule (copy), BaseMenuScrollContainerModule (copy), InputSink (copy), PopoverModule (copy), PopoverSideModule (copy), PopoverAlignModule (copy), RadiusModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), BaseMenuContextModule (copy), UseTokensModule (copy), UseBaseMenuItemVariantsModule (copy), UseMenuItemHoverModule (copy), LoggerModule (copy), UseBindableModule (copy), UseComposedRefFunction (copy), getContainerPadding (copy), ViewModule (copy), IconModule (copy), BuilderIconsModule (copy), BaseMenuItemAccessoryModule (copy), TextModule (copy), WithCommonPropsModule (copy), ConstantsModule (copy), BaseMenuScrollContainerModule (copy), InputSink (copy), PopoverModule (copy), PopoverSideModule (copy), PopoverAlignModule (copy), RadiusModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseContextResult = ReactModule.useContext(BaseMenuContextModule)
 	local IsHasLeading = if WithDefaultsModuleResult.menuHasLeading == nil then UseContextResult.hasLeading == true else WithDefaultsModuleResult.menuHasLeading
@@ -70,7 +70,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 	local Config = if Leading == nil then nil elseif type(Leading) == "string" then { iconName = Leading } else Leading
 	local Trailing = WithDefaultsModuleResult.trailing
 	local Config1 = if Trailing == nil then nil elseif type(Trailing) == "string" then { iconName = Trailing } else Trailing
-	local HasMaxHeight: boolean = FlagsModule.FoundationBaseMenuSubmenuMaxHeight and UseContextResult.maxHeight ~= nil
+	local HasMaxHeight = UseContextResult.maxHeight ~= nil
 	local UseBaseMenuItemVariantsModuleResult = UseBaseMenuItemVariantsModule(UseTokensModuleResult, Size, HasMaxHeight)
 	local UseRefResult = ReactModule.useRef(nil)
 	local NoHasChildren: boolean = WithDefaultsModuleResult.isChecked == true and not HasChildren

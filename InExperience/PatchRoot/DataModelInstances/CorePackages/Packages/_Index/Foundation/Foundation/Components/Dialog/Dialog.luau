@@ -5,6 +5,7 @@ local OtterModule = require(Parent.Otter)
 local ReactModule = require(Parent.React)
 local ReactRobloxModule = require(Parent.ReactRoblox)
 local UseAnimatedBindingFunction = require(Parent.ReactOtter).useAnimatedBinding
+local BackdropModule = require(Foundation.Components.Backdrop)
 local CloseAffordanceModule = require(Foundation.Components.CloseAffordance)
 local ConstantsModule = require(Foundation.Constants)
 local ImageModule = require(Foundation.Components.Image)
@@ -37,7 +38,7 @@ local SHADOWIMAGE = ConstantsModule.SHADOW_IMAGE
 local SHADOWSIZE = ConstantsModule.SHADOW_SIZE
 
 local function Dialog(p1)
-	-- upvalues: DashModule (copy), UseDialogVariantsFunction (copy), UseScaledValueModule (copy), ReactModule (copy), UseOverlayModule (copy), UseElevationModule (copy), ElevationLayerModule (copy), UseDialogModule (copy), UseDialogResponsiveSizeModule (copy), UseTokensModule (copy), UsePreferencesModule (copy), UseAnimatedBindingFunction (copy), OtterModule (copy), ViewModule (copy), FlagsModule (copy), ImageModule (copy), SHADOWIMAGE (copy), SHADOWSIZE (copy), WithCommonPropsModule (copy), StateLayerAffordanceModule (copy), TypesModule (copy), CloseAffordanceModule (copy), ElevationOwnerScope (copy), OnCloseCallbackReasonModule (copy), ReactRobloxModule (copy)
+	-- upvalues: DashModule (copy), UseDialogVariantsFunction (copy), UseScaledValueModule (copy), ReactModule (copy), UseOverlayModule (copy), UseElevationModule (copy), ElevationLayerModule (copy), UseDialogModule (copy), UseDialogResponsiveSizeModule (copy), UseTokensModule (copy), UsePreferencesModule (copy), UseAnimatedBindingFunction (copy), OtterModule (copy), ViewModule (copy), FlagsModule (copy), ImageModule (copy), SHADOWIMAGE (copy), SHADOWSIZE (copy), WithCommonPropsModule (copy), StateLayerAffordanceModule (copy), TypesModule (copy), CloseAffordanceModule (copy), ElevationOwnerScope (copy), BackdropModule (copy), OnCloseCallbackReasonModule (copy), ReactRobloxModule (copy)
 	local AssignResult = DashModule.assign({}, p1, { LayoutOrder = 1 })
 	local UseDialogVariantsResult = UseDialogVariantsFunction()
 	local UseScaledValueModuleResult = UseScaledValueModule(UseDialogVariantsResult.inner.maxWidth)
@@ -181,7 +182,22 @@ local function Dialog(p1)
 		ZIndex = UseElevationModuleResult.zIndex,
 		testId = `{AssignResult.testId}--container`
 	}, {
-		Backdrop = if AssignResult.hasBackdrop then ReactModule.createElement(ViewModule, {
+		Backdrop = if AssignResult.hasBackdrop then if FlagsModule.FoundationDialogInternalBackdrop then ReactModule.createElement(BackdropModule, {
+			ZIndex = 2,
+			transparency = if ReducedMotion then nil else UseAnimatedBindingResult,
+			onActivated = function()
+				-- upvalues: AssignResult (copy), UseResult (copy), ReducedMotion (copy), OnCloseCallbackReasonModule (upval)
+				if AssignResult.onClose then
+					if UseResult and not ReducedMotion then
+						UseResult(OnCloseCallbackReasonModule.BackdropClick)
+						
+						return
+					end
+					AssignResult.onClose(OnCloseCallbackReasonModule.BackdropClick)
+				end
+			end,
+			testId = `{AssignResult.testId}--backdrop`
+		}) else ReactModule.createElement(ViewModule, {
 			tag = "position-center-center anchor-center-center",
 			ZIndex = 2,
 			Size = UDim2.fromScale(2, 2),

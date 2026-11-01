@@ -102,7 +102,7 @@ return function()
 		if Flag or IntentsByCommentIdEntry == nil or IntentsByCommentIdEntry.generation ~= Generation then
 			return false
 		end
-		local function v42(p3)
+		local function v41(p3)
 			-- upvalues: IntentsByCommentIdEntry (copy), Status (copy), p2 (copy)
 			local Copy = table.clone(p3.intentsByCommentId)
 			local Copy1 = table.clone(IntentsByCommentIdEntry)
@@ -123,7 +123,7 @@ return function()
 		end
 		
 		if not Flag then
-			Signal2((v42(Signal(false))))
+			Signal2((v41(Signal(false))))
 		end
 		return true
 	end
@@ -225,13 +225,12 @@ return function()
 					desiredEmoteId = DesiredEmoteId
 				}
 				local CountDeltas1 = CountDeltas
-				local DesiredEmoteId1 = EmoteId
 				local t = {}
 				
-				if DesiredEmoteId1 ~= nil and DesiredEmoteId1 ~= DesiredEmoteId then
-					t[DesiredEmoteId1] = -1
+				if EmoteId ~= nil and EmoteId ~= DesiredEmoteId then
+					t[EmoteId] = -1
 				end
-				if DesiredEmoteId ~= nil and DesiredEmoteId ~= DesiredEmoteId1 then
+				if DesiredEmoteId ~= nil and DesiredEmoteId ~= EmoteId then
 					t[DesiredEmoteId] = (t[DesiredEmoteId] or 0) + 1
 				end
 				config.countDeltas = combineDeltas(CountDeltas1, t)
@@ -262,7 +261,7 @@ return function()
 			end
 			local Status = "Pending"
 			
-			local function v92(p3)
+			local function v91(p3)
 				-- upvalues: IntentsByCommentIdEntry (copy), Status (copy), p2 (copy)
 				local Copy = table.clone(p3.intentsByCommentId)
 				local Copy1 = table.clone(IntentsByCommentIdEntry)
@@ -283,7 +282,7 @@ return function()
 			end
 			
 			if not Flag then
-				Signal2((v92(Signal(false))))
+				Signal2((v91(Signal(false))))
 			end
 			return true
 		end,
@@ -296,7 +295,7 @@ return function()
 			end
 			local Status = "Uncertain"
 			
-			local function v95(p3)
+			local function v94(p3)
 				-- upvalues: IntentsByCommentIdEntry (copy), Status (copy), p2 (copy)
 				local Copy = table.clone(p3.intentsByCommentId)
 				local Copy1 = table.clone(IntentsByCommentIdEntry)
@@ -317,7 +316,7 @@ return function()
 			end
 			
 			if not Flag then
-				Signal2((v95(Signal(false))))
+				Signal2((v94(Signal(false))))
 			end
 			return true
 		end,
@@ -330,7 +329,7 @@ return function()
 			end
 			local Status = "LocallyConfirmed"
 			
-			local function v98(p3)
+			local function v97(p3)
 				-- upvalues: IntentsByCommentIdEntry (copy), Status (copy), p2 (copy)
 				local Copy = table.clone(p3.intentsByCommentId)
 				local Copy1 = table.clone(IntentsByCommentIdEntry)
@@ -351,7 +350,7 @@ return function()
 			end
 			
 			if not Flag then
-				Signal2((v98(Signal(false))))
+				Signal2((v97(Signal(false))))
 			end
 			return true
 		end,
@@ -362,7 +361,7 @@ return function()
 			if Flag or IntentsByCommentIdEntry == nil or IntentsByCommentIdEntry.generation ~= Generation then
 				return false
 			end
-			local function v46(p4)
+			local function v45(p4)
 				-- upvalues: IntentsByCommentIdEntry (copy), p3 (copy), p2 (copy)
 				local Copy = table.clone(p4.intentsByCommentId)
 				local Copy1 = table.clone(IntentsByCommentIdEntry)
@@ -391,7 +390,7 @@ return function()
 			end
 			
 			if not Flag then
-				Signal2((v46(Signal(false))))
+				Signal2((v45(Signal(false))))
 			end
 			return true
 		end,
@@ -402,7 +401,7 @@ return function()
 			if Flag or IntentsByCommentIdEntry == nil or IntentsByCommentIdEntry.generation ~= Generation then
 				return false
 			end
-			local function v53(p3)
+			local function v52(p3)
 				-- upvalues: IntentsByCommentIdEntry (copy), p2 (copy), ErrorCode (copy)
 				local Copy = table.clone(p3.intentsByCommentId)
 				
@@ -439,7 +438,7 @@ return function()
 			end
 			
 			if not Flag then
-				Signal2((v53(Signal(false))))
+				Signal2((v52(Signal(false))))
 			end
 			return true
 		end,
@@ -485,7 +484,7 @@ return function()
 			end
 			local Flag1 = false
 			
-			local function v62(p5)
+			local function v61(p5)
 				-- upvalues: p2 (copy), FeedItemId (copy), p4 (copy), p3 (copy), Flag1 (ref)
 				local Copy = table.clone(p5.commentRestrictionsByCommentId)
 				local Entry = Copy[p2]
@@ -544,7 +543,7 @@ return function()
 			end
 			
 			if not Flag then
-				Signal2((v62(Signal(false))))
+				Signal2((v61(Signal(false))))
 			end
 			return Flag1
 		end,
@@ -574,7 +573,7 @@ return function()
 		end,
 		setFeedRestriction = function(p2, p3)
 			-- upvalues: Flag (ref), Signal2 (copy), Signal (copy)
-			local function v77(p4)
+			local function v76(p4)
 				-- upvalues: p3 (copy), p2 (copy)
 				local Copy = table.clone(p4.feedRestrictionsByFeedItemId)
 				
@@ -593,12 +592,12 @@ return function()
 			end
 			
 			if not Flag then
-				Signal2((v77(Signal(false))))
+				Signal2((v76(Signal(false))))
 			end
 		end,
 		setCommentRestriction = function(FeedItemId, p2, ErrorCode, Generation)
 			-- upvalues: Flag (ref), Signal2 (copy), Signal (copy)
-			local function v79(p3)
+			local function v78(p3)
 				-- upvalues: ErrorCode (copy), p2 (copy), FeedItemId (copy), Generation (copy)
 				local Copy = table.clone(p3.commentRestrictionsByCommentId)
 				
@@ -621,7 +620,7 @@ return function()
 			end
 			
 			if not Flag then
-				Signal2((v79(Signal(false))))
+				Signal2((v78(Signal(false))))
 			end
 		end,
 		setCooldownUntilMs = function(p2: number)
@@ -650,7 +649,7 @@ return function()
 		end,
 		clearComment = function(p2)
 			-- upvalues: Flag (ref), Signal2 (copy), Signal (copy)
-			local function v83(p3)
+			local function v82(p3)
 				-- upvalues: p2 (copy)
 				local Copy = table.clone(p3.intentsByCommentId)
 				Copy[p2] = nil
@@ -667,12 +666,12 @@ return function()
 			end
 			
 			if not Flag then
-				Signal2((v83(Signal(false))))
+				Signal2((v82(Signal(false))))
 			end
 		end,
 		clearFeed = function(FeedItemId)
 			-- upvalues: Flag (ref), Signal2 (copy), Signal (copy)
-			local function v86(p2)
+			local function v85(p2)
 				-- upvalues: FeedItemId (copy)
 				local Copy = table.clone(p2.intentsByCommentId)
 				
@@ -700,7 +699,7 @@ return function()
 			end
 			
 			if not Flag then
-				Signal2((v86(Signal(false))))
+				Signal2((v85(Signal(false))))
 			end
 		end,
 		clear = clear,

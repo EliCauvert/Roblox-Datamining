@@ -52,7 +52,6 @@ return function(p1)
 	for _ in pairs(p1.allChannelTabs) do
 		Count += 1
 	end
-	local Count1: number = Count
 	local ScaledScale = ConfigModule.ChatWindowSize.Y.Scale * p1.chatWindowSettings.HeightScale * ConfigModule.ChatWindowMaxWidth
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
@@ -70,7 +69,7 @@ return function(p1)
 	local v3 = nil
 	
 	if FFlagExpChatTabShortcutNav then
-		v2, v50 = ReactModule.useState(nil)
+		v2, v49 = ReactModule.useState(nil)
 	end
 	local UseRefResult1 = if FFlagExpChatTabShortcutNav then ReactModule.useRef({}) else nil
 	local v4 = nil
@@ -80,10 +79,10 @@ return function(p1)
 		v4, Callback = ReactModule.useState(nil)
 	end
 	local UseSignalStateResult2 = UseSignalStateResult or UseStateResult3
-	local IsUseSignalStateResultBelow = UseSignalStateResult2 < Count1 * ConfigModule.ChannelTabsSettings.MinTabWidth
-	local Floored = if IsUseSignalStateResultBelow then math.floor((UseSignalStateResult2 - ConfigModule.ChannelTabsSettings.DropdownIconContainerWidth) / ConfigModule.ChannelTabsSettings.MinTabWidth) else Count1 or math.floor((UseSignalStateResult2 - ConfigModule.ChannelTabsSettings.DropdownIconContainerWidth) / ConfigModule.ChannelTabsSettings.MinTabWidth)
+	local IsUseSignalStateResultBelow = UseSignalStateResult2 < Count * ConfigModule.ChannelTabsSettings.MinTabWidth
+	local Floored: number = if IsUseSignalStateResultBelow then math.floor((UseSignalStateResult2 - ConfigModule.ChannelTabsSettings.DropdownIconContainerWidth) / ConfigModule.ChannelTabsSettings.MinTabWidth) else Count or math.floor((UseSignalStateResult2 - ConfigModule.ChannelTabsSettings.DropdownIconContainerWidth) / ConfigModule.ChannelTabsSettings.MinTabWidth)
 	local XOffset = (UseSignalStateResult2 - (IsUseSignalStateResultBelow and ConfigModule.ChannelTabsSettings.DropdownIconContainerWidth or 0)) / Floored
-	local YOffset = (Count1 - Floored) * 40
+	local YOffset = (Count - Floored) * 40
 	ReactModule.useEffect(function()
 		-- upvalues: FFlagExpChatTabShortcutNav (upval), v1 (upval), p1 (copy)
 		if not FFlagExpChatTabShortcutNav then return end
@@ -224,7 +223,7 @@ return function(p1)
 			textChannel = AllTextChannel,
 			tabType = Type,
 			hasUnreadMessages = allChannelTab.HasUnreadMessages,
-			isDividerVisible = if TabIndex < Floored then TabIndex < Count1 else IsUseSignalStateResultBelow and TabIndex < Count1,
+			isDividerVisible = if TabIndex < Floored then TabIndex < Count else IsUseSignalStateResultBelow and TabIndex < Count,
 			isTabCollapsed = not IsTabIndexBelow,
 			isTabSelected = p1.selectedTabName and p1.selectedTabName == ChannelName,
 			tabIndex = TabIndex,
@@ -278,9 +277,9 @@ return function(p1)
 	local ChannelTabsSettings = p1.channelTabsSettings
 	local BackgroundTransparency = UseInterpolatedClientSettingsModule(ChannelTabsSettings).BackgroundTransparency
 	local BackgroundColor3 = UseInterpolatedClientSettingsModule(ChannelTabsSettings).BackgroundColor3
-	local CreateElementFunction1 = ReactModule.createElement
+	local CreateElementFunction = ReactModule.createElement
 	local v5 = "Frame"
-	local config2 = {
+	local config4 = {
 		Size = UDim2.new(1, 0, 0, ConfigModule.ChannelTabsSettings.HorizontalBarHeight),
 		BackgroundTransparency = 1,
 		Visible = p1.visible,
@@ -306,7 +305,7 @@ return function(p1)
 		end
 	}
 	local BorderTransparency = ConfigModule.ChannelTabsSettings.BorderTransparency
-	local config3 = {
+	local config5 = {
 		HorizontalBar = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
@@ -359,9 +358,9 @@ return function(p1)
 	local DropdownButton = IsUseSignalStateResultBelow
 	
 	if DropdownButton then
-		local CreateElementFunction = ReactModule.createElement
+		local CreateElementFunction1 = ReactModule.createElement
 		local v6 = "Frame"
-		local config4 = {
+		local config2 = {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			AnchorPoint = Vector2.new(1, 0),
@@ -371,7 +370,7 @@ return function(p1)
 		}
 		local v7: number = if UseStateResult then 0.3 else 1
 		local v8 = 0
-		local config41 = {
+		local config3 = {
 			TextButton = ReactModule.createElement("TextButton", {
 				AnchorPoint = Vector2.new(1, 0.5),
 				Position = UDim2.new(1, -ConfigModule.ChannelTabsSettings.DropdownIconPadding / 2, 0.5, -4),
@@ -434,10 +433,10 @@ return function(p1)
 				UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) })
 			})
 		end
-		config41.UnreadDot = Frame
-		DropdownButton = CreateElementFunction(v6, config4, config41)
+		config3.UnreadDot = Frame
+		DropdownButton = CreateElementFunction1(v6, config2, config3)
 	end
-	config3.DropdownButton = DropdownButton
+	config5.DropdownButton = DropdownButton
 	local Frame1 = IsUseSignalStateResultBelow
 	
 	if Frame1 then
@@ -481,7 +480,7 @@ return function(p1)
 			}, config1)
 		})
 	end
-	config3.DropdownMenu = Frame1
+	config5.DropdownMenu = Frame1
 	
-	return CreateElementFunction1(v5, config2, config3)
+	return CreateElementFunction(v5, config4, config5)
 end

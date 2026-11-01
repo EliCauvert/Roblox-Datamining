@@ -374,15 +374,14 @@ return function(p1, p2, p3, p4, Callback)
 			
 			if FFlagBuildExperienceDevProductRecoveryModule and FFlagBuildExperienceMonetizationFailureCausesModule and NoUniverse ~= nil then
 				local Action = p8.input.action
-				local v11 = v6
 				local IsResponseCodeMatch = nil
 				
-				if Result == nil and typeof(v11) == "table" then
-					if v11.retryable == true then
+				if Result == nil and typeof(v6) == "table" then
+					if v6.retryable == true then
 						IsResponseCodeMatch = true
 					else
-						local Cause = v11.cause
-						IsResponseCodeMatch = Action == "create" and (v11.outcome == "failed" and (typeof(Cause) == "table" and Cause.responseCode == 429))
+						local Cause = v6.cause
+						IsResponseCodeMatch = Action == "create" and (v6.outcome == "failed" and (typeof(Cause) == "table" and Cause.responseCode == 429))
 					end
 				else
 					IsResponseCodeMatch = false

@@ -1,13 +1,20 @@
 ﻿local AvatarExperienceAnalytics = script:FindFirstAncestor("AvatarExperienceAnalytics")
+local Parent = AvatarExperienceAnalytics.Parent
+local _ = require(Parent.AvatarExperienceCommon)
+local CryoModule = require(Parent.Cryo)
 local CartIdServiceModule = require(AvatarExperienceAnalytics.Lib.CartIdService)
 local UnifiedEventLogEnumsModule = require(AvatarExperienceAnalytics.UnifiedEventLogEnums)
+local GetMarketplaceUnifiedAssetTypeModule = require(AvatarExperienceAnalytics.Utils.getMarketplaceUnifiedAssetType)
+local GetMarketplaceUnifiedBundleTypeModule = require(AvatarExperienceAnalytics.Utils.getMarketplaceUnifiedBundleType)
+local GetWidgetAttributionFieldsModule = require(AvatarExperienceAnalytics.Utils.getWidgetAttributionFields)
+local FFlagAXUnifiedEventStrictPayloads = require(Parent.AvatarExperienceFlags).FFlagAXUnifiedEventStrictPayloads
 
 local function _(Text): string
 	return "MIS_" .. Text
 end
 
-return function(List, List1, p1, p2, Action)
-	-- upvalues: CartIdServiceModule (copy), UnifiedEventLogEnumsModule (copy)
+return function(List, List1, p1, p2, Action, p3, p4, p5)
+	-- upvalues: CartIdServiceModule (copy), UnifiedEventLogEnumsModule (copy), FFlagAXUnifiedEventStrictPayloads (copy), GetMarketplaceUnifiedAssetTypeModule (copy), GetMarketplaceUnifiedBundleTypeModule (copy), GetWidgetAttributionFieldsModule (copy), CryoModule (copy)
 	local NewPriceInRobux = 0
 	local List2 = {}
 	local List3 = {}
@@ -15,6 +22,7 @@ return function(List, List1, p1, p2, Action)
 	local List4 = {}
 	local List5 = {}
 	local List6 = {}
+	local JoinResults = {}
 	local v1 = nil
 	
 	for _, value in List do
@@ -33,15 +41,23 @@ return function(List, List1, p1, p2, Action)
 					action = Action,
 					itemId = value.itemId,
 					itemType = if value.itemType == "Asset" then UnifiedEventLogEnumsModule.MarketplaceUnifiedItemType.ASSET else UnifiedEventLogEnumsModule.MarketplaceUnifiedItemType.BUNDLE,
-					assetType = if value.itemType == "Asset" then value.itemSubType else nil,
-					bundleType = if value.itemType == "Bundle" then value.itemSubType else nil,
+					surface = if FFlagAXUnifiedEventStrictPayloads then p3 else nil,
+					assetType = if value.itemType == "Asset" then if FFlagAXUnifiedEventStrictPayloads then GetMarketplaceUnifiedAssetTypeModule(value.itemSubType) else value.itemSubType else nil,
+					bundleType = if value.itemType == "Bundle" then if FFlagAXUnifiedEventStrictPayloads then GetMarketplaceUnifiedBundleTypeModule(value.itemSubType) else value.itemSubType else nil,
 					widgetId = if v1.widgetInfo then v1.widgetInfo.widgetId else nil,
 					widgetType = if v1.widgetInfo then v1.widgetInfo.widgetType else nil,
 					widgetItemPrice = if v1.widgetInfo then value.priceInRobux else nil,
 					organicItemPrice = if v1.widgetInfo then nil else value.priceInRobux,
 					status = value.status
 				})
-				continue
+				local WidgetAttributionFieldsModule = if FFlagAXUnifiedEventStrictPayloads then GetWidgetAttributionFieldsModule(v1.widgetInfo) else nil
+				
+				if WidgetAttributionFieldsModule then
+					JoinResults[#List6] = CryoModule.Dictionary.join(WidgetAttributionFieldsModule, {
+						widgetAssetType = if value.itemType == "Asset" then GetMarketplaceUnifiedAssetTypeModule(value.itemSubType) else nil,
+						widgetBundleType = if value.itemType == "Bundle" then GetMarketplaceUnifiedBundleTypeModule(value.itemSubType) else nil
+					})
+				end
 			elseif p2.lookAssetInfos[value.itemId] then
 				table.insert(List4, value.itemId)
 				NewPriceInRobux1 += value.priceInRobux
@@ -58,46 +74,58 @@ return function(List, List1, p1, p2, Action)
 		end
 	end
 	if #List2 > 0 or #List3 > 0 then
-		local Joined2: string = if #List2 > 0 then table.concat(List2, ",") else ""
-		local Joined3: string = if #List3 > 0 then table.concat(List3, ",") else ""
-		local config1 = {
+		local Joined: string = if #List2 > 0 then table.concat(List2, ",") else ""
+		local Joined1: string = if #List3 > 0 then table.concat(List3, ",") else ""
+		local config = {
 			cartId = "MIS_" .. CartIdServiceModule.getCartId(),
 			action = Action,
 			itemId = p1.itemId,
-			itemType = UnifiedEventLogEnumsModule.MarketplaceUnifiedItemType.LOOK
+			itemType = UnifiedEventLogEnumsModule.MarketplaceUnifiedItemType.LOOK,
+			surface = if FFlagAXUnifiedEventStrictPayloads then p3 else nil
 		}
 		
 		if p1.isOrganicLook then
-			config1.organicAssetIds = Joined2
-			config1.organicBundleIds = Joined3
-			config1.organicItemPrice = NewPriceInRobux
+			config.organicAssetIds = Joined
+			config.organicBundleIds = Joined1
+			config.organicItemPrice = NewPriceInRobux
 		else
-			config1.assetIds = Joined2
-			config1.bundleIds = Joined3
-			config1.widgetItemPrice = NewPriceInRobux
+			config.assetIds = Joined
+			config.bundleIds = Joined1
+			config.widgetItemPrice = NewPriceInRobux
 		end
-		table.insert(List6, config1)
+		table.insert(List6, config)
+		local WidgetAttributionFieldsModule = if FFlagAXUnifiedEventStrictPayloads and not p1.isOrganicLook then GetWidgetAttributionFieldsModule(p4) else nil
+		
+		if WidgetAttributionFieldsModule then
+			JoinResults[#List6] = WidgetAttributionFieldsModule
+		end
 	end
 	if #List4 > 0 or #List5 > 0 then
 		local Joined: string = if #List4 > 0 then table.concat(List4, ",") else ""
-		local Joined1: string = if #List5 > 0 then table.concat(List5, ",") else ""
+		local Joined2: string = if #List5 > 0 then table.concat(List5, ",") else ""
 		local config = {
 			cartId = "MIS_" .. CartIdServiceModule.getCartId(),
 			action = Action,
 			itemId = p2.itemId,
-			itemType = UnifiedEventLogEnumsModule.MarketplaceUnifiedItemType.LOOK
+			itemType = UnifiedEventLogEnumsModule.MarketplaceUnifiedItemType.LOOK,
+			surface = if FFlagAXUnifiedEventStrictPayloads then p3 else nil
 		}
 		
 		if p2.isOrganicLook then
 			config.organicAssetIds = Joined
-			config.organicBundleIds = Joined1
+			config.organicBundleIds = Joined2
 			config.organicItemPrice = NewPriceInRobux1
 		else
 			config.assetIds = Joined
-			config.bundleIds = Joined1
+			config.bundleIds = Joined2
 			config.widgetItemPrice = NewPriceInRobux1
 		end
 		table.insert(List6, config)
+		local WidgetAttributionFieldsModule = if FFlagAXUnifiedEventStrictPayloads and not p2.isOrganicLook then GetWidgetAttributionFieldsModule(p5) else nil
+		
+		if WidgetAttributionFieldsModule then
+			JoinResults[#List6] = WidgetAttributionFieldsModule
+		end
 	end
-	return List6
+	return List6, JoinResults
 end

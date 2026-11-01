@@ -84,13 +84,12 @@ return function(p1)
 						continue
 					end
 					local v2 = "%*:%*"
-					local Parent3 = Parent2
 					
-					if self[Parent3] == nil then
+					if self[Parent2] == nil then
 						Count += 1
-						self[Parent3] = `Instance:{Count}`
+						self[Parent2] = `Instance:{Count}`
 					end
-					local FormatResult: string = v2:format(self[Parent3], Kind)
+					local FormatResult: string = v2:format(self[Parent2], Kind)
 					
 					if not t1[FormatResult] then
 						t1[FormatResult] = true

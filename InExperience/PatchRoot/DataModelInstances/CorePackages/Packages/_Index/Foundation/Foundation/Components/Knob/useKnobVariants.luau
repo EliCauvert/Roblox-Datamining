@@ -7,48 +7,55 @@ local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext
 local GetKnobSizeModule = require(script.Parent.getKnobSize)
 local IconSizeModule = require(Foundation.Enums.IconSize)
 
-local function computeProps(p1)
-	local NewOffset = p1.size.X.Offset + p1.shadowPadding * 2
-	
-	return {
-		knob = { size = p1.size, iconSize = p1.iconSize },
-		knobShadow = {
-			size = UDim2.fromOffset(NewOffset, NewOffset),
-			padding = p1.shadowPadding
-		}
-	}
+local function _(p1)
+	return { knob = { size = p1.size, iconSize = p1.iconSize } }
 end
 
 local function variantsFactory(p1)
-	-- upvalues: InputSizeModule (copy), computeProps (copy), IconSizeModule (copy), GetKnobSizeModule (copy)
+	-- upvalues: InputSizeModule (copy), IconSizeModule (copy), GetKnobSizeModule (copy)
+	local XSmall = InputSizeModule.XSmall
+	local config = {
+		iconSize = IconSizeModule.XSmall,
+		size = GetKnobSizeModule(p1, InputSizeModule.XSmall)
+	}
+	local config1 = {
+		knob = { size = config.size, iconSize = config.iconSize }
+	}
+	local Small = InputSizeModule.Small
+	local config2 = {
+		iconSize = IconSizeModule.Small,
+		size = GetKnobSizeModule(p1, InputSizeModule.Small)
+	}
+	local config21 = {
+		knob = { size = config2.size, iconSize = config2.iconSize }
+	}
+	local Medium = InputSizeModule.Medium
+	local config3 = {
+		iconSize = IconSizeModule.Small,
+		size = GetKnobSizeModule(p1, InputSizeModule.Medium)
+	}
+	local config31 = {
+		knob = { size = config3.size, iconSize = config3.iconSize }
+	}
+	local Large = InputSizeModule.Large
+	local config4 = {
+		iconSize = IconSizeModule.Small,
+		size = GetKnobSizeModule(p1, InputSizeModule.Large)
+	}
+	
 	return {
 		common = {
 			knob = {
 				tag = "align-x-center align-y-center position-center-center anchor-center-center auto-xy radius-circle"
-			},
-			knobShadow = { tag = "position-center-center anchor-center-center" }
+			}
 		},
 		sizes = {
-			[InputSizeModule.XSmall] = computeProps({
-				iconSize = IconSizeModule.XSmall,
-				size = GetKnobSizeModule(p1, InputSizeModule.XSmall),
-				shadowPadding = p1.Padding.XXSmall
-			}),
-			[InputSizeModule.Small] = computeProps({
-				iconSize = IconSizeModule.Small,
-				size = GetKnobSizeModule(p1, InputSizeModule.Small),
-				shadowPadding = p1.Padding.XSmall
-			}),
-			[InputSizeModule.Medium] = computeProps({
-				iconSize = IconSizeModule.Small,
-				size = GetKnobSizeModule(p1, InputSizeModule.Medium),
-				shadowPadding = p1.Padding.Small
-			}),
-			[InputSizeModule.Large] = computeProps({
-				iconSize = IconSizeModule.Small,
-				size = GetKnobSizeModule(p1, InputSizeModule.Large),
-				shadowPadding = p1.Padding.Small
-			})
+			[XSmall] = config1,
+			[Small] = config21,
+			[Medium] = config31,
+			[Large] = {
+				knob = { size = config4.size, iconSize = config4.iconSize }
+			}
 		},
 		isInverse = {
 			[false] = {

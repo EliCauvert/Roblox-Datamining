@@ -32,49 +32,48 @@ local _ = function(p2, p3, Key)
 	end
 end
 
-return function(p2, p3)
+return function(Tbl1, p2)
 	-- upvalues: ConversationModule (copy), updateConversationMessages (copy)
-	if p3.conversationType == ConversationModule.Type.ONE_TO_ONE_CONVERSATION then
-		local IdForFakeOneOnOneResult = ConversationModule.IdForFakeOneOnOne(p3.participants)
+	if p2.conversationType == ConversationModule.Type.ONE_TO_ONE_CONVERSATION then
+		local IdForFakeOneOnOneResult = ConversationModule.IdForFakeOneOnOne(p2.participants)
 		
-		if p2[IdForFakeOneOnOneResult] ~= nil and p2[IdForFakeOneOnOneResult] ~= p3 then
-			local Tbl = p2
+		if Tbl1[IdForFakeOneOnOneResult] ~= nil and Tbl1[IdForFakeOneOnOneResult] ~= p2 then
+			local Tbl = Tbl1
 			
 			if Tbl[IdForFakeOneOnOneResult] == nil then
-				p2 = Tbl
+				Tbl1 = Tbl
 			else
 				local Copy = table.clone(Tbl)
 				Copy[IdForFakeOneOnOneResult] = nil
-				p2 = Copy
+				Tbl1 = Copy
 			end
 		end
 	end
-	local Tbl1 = p2
-	local Id = p3.id
+	local Id = p2.id
 	local Tbl2 = nil
 	
-	if Tbl1[Id] == p3 then
+	if Tbl1[Id] == p2 then
 		Tbl2 = Tbl1
 	else
 		local Copy = table.clone(Tbl1)
-		Copy[Id] = p3
+		Copy[Id] = p2
 		Tbl2 = Copy
 	end
-	local v1 = p2[p3.id]
-	local Entry = Tbl2[p3.id]
+	local Entry = Tbl1[p2.id]
+	local Entry1 = Tbl2[p2.id]
 	
-	if Entry and v1 then
-		updateConversationMessages(v1, Entry, "messages")
-		updateConversationMessages(v1, Entry, "sendingMessages")
+	if Entry1 and Entry then
+		updateConversationMessages(Entry, Entry1, "messages")
+		updateConversationMessages(Entry, Entry1, "sendingMessages")
 		
-		if Entry.previousCursor == nil then
-			Entry.previousCursor = v1.previousCursor
+		if Entry1.previousCursor == nil then
+			Entry1.previousCursor = Entry.previousCursor
 		end
-		if Entry.nextCursor == nil then
-			Entry.nextCursor = v1.nextCursor
+		if Entry1.nextCursor == nil then
+			Entry1.nextCursor = Entry.nextCursor
 		end
-		if Entry.fetchedOldestMessage == nil then
-			Entry.fetchedOldestMessage = v1.fetchedOldestMessage
+		if Entry1.fetchedOldestMessage == nil then
+			Entry1.fetchedOldestMessage = Entry.fetchedOldestMessage
 		end
 	end
 	return Tbl2

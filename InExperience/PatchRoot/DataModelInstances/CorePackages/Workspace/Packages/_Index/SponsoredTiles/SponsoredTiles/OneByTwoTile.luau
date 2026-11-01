@@ -522,15 +522,15 @@ return ReactModule.memo(function(p1)
 	local Number: number? = tonumber(p1.logoAspectRatio)
 	local Number1: number = if Number and Number > 0 then Number else 1
 	local LuaAppOneByTwoTileLogoWidthPercentLandscapeRatio1 = if Number1 == 3 then LuaAppOneByTwoTileLogoWidthPercentLandscapeRatio else LuaAppOneByTwoTileLogoWidthPercentSquareRatio
-	local Size800 = nil
-	local TitleMedium = nil
-	local Large = nil
-	local Size500 = nil
 	local HeadingMedium = nil
-	local XSmall = nil
-	local Size1000 = nil
+	local Large = nil
+	local TitleMedium = nil
+	local Size800 = nil
+	local Size500 = nil
 	local BodyMedium = nil
+	local XSmall = nil
 	local Medium = nil
+	local Size1000 = nil
 	
 	if IsUseResponsiveResultMatch then
 		Large = UseTokensResult.Padding.Medium

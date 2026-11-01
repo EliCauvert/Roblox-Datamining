@@ -28,13 +28,13 @@ return function(p1)
 	local t1 = {}
 	local DelayedThread = nil
 	local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
-	local Callback = nil
 	local Callback1 = nil
+	local Callback = nil
 	local Callback3 = nil
 	local Callback2 = nil
 	
 	if FFlagDataHydrationAccountReset then
-		Callback, Callback1 = SignalsModule.createSignal(0)
+		Callback1, Callback = SignalsModule.createSignal(0)
 	end
 	if FFlagBuildExperienceMonetizationMultiKindModule then
 		Callback3, Callback2 = SignalsModule.createSignal(0)
@@ -53,8 +53,8 @@ return function(p1)
 	end
 	
 	local function isCurrentRequest(p2, p3): boolean
-		-- upvalues: Callback (ref), GetLocalPlayerUserIdFunction (upval)
-		return p3 == Callback(false) and p2 == GetLocalPlayerUserIdFunction()
+		-- upvalues: Callback1 (ref), GetLocalPlayerUserIdFunction (upval)
+		return p3 == Callback1(false) and p2 == GetLocalPlayerUserIdFunction()
 	end
 	
 	local _ = function(List)
@@ -80,9 +80,9 @@ return function(p1)
 	end
 	
 	local function handleFailure(Message, PopResult, p3, p4, p5)
-		-- upvalues: FFlagDataHydrationAccountReset (upval), Callback (ref), GetLocalPlayerUserIdFunction (upval), LocalPlayerUserId (ref), filterCurrentIds (copy), p1 (copy), t (ref), Cache (copy), MutationLayerModule (ref)
+		-- upvalues: FFlagDataHydrationAccountReset (upval), Callback1 (ref), GetLocalPlayerUserIdFunction (upval), LocalPlayerUserId (ref), filterCurrentIds (copy), p1 (copy), t (ref), Cache (copy), MutationLayerModule (ref)
 		if FFlagDataHydrationAccountReset then
-			if p4 ~= Callback(false) or p3 ~= GetLocalPlayerUserIdFunction() then return end
+			if p4 ~= Callback1(false) or p3 ~= GetLocalPlayerUserIdFunction() then return end
 		elseif p3 ~= LocalPlayerUserId then return end
 		local FilterCurrentIdsResult = filterCurrentIds(PopResult, p5)
 		
@@ -101,9 +101,9 @@ return function(p1)
 	end
 	
 	local function handleSuccess(List, PopResult, p6, p7, p8)
-		-- upvalues: FFlagDataHydrationAccountReset (upval), Callback (ref), GetLocalPlayerUserIdFunction (upval), LocalPlayerUserId (ref), filterCurrentIds (copy), t1 (copy), t (ref), p1 (copy), Cache (copy), MutationLayerModule (ref), handleFailure (copy)
+		-- upvalues: FFlagDataHydrationAccountReset (upval), Callback1 (ref), GetLocalPlayerUserIdFunction (upval), LocalPlayerUserId (ref), filterCurrentIds (copy), t1 (copy), t (ref), p1 (copy), Cache (copy), MutationLayerModule (ref), handleFailure (copy)
 		if FFlagDataHydrationAccountReset then
-			if p7 ~= Callback(false) or p6 ~= GetLocalPlayerUserIdFunction() then return end
+			if p7 ~= Callback1(false) or p6 ~= GetLocalPlayerUserIdFunction() then return end
 		elseif p6 ~= LocalPlayerUserId then return end
 		local FilterCurrentIdsResult = filterCurrentIds(PopResult, p8)
 		local t2 = {}
@@ -141,12 +141,12 @@ return function(p1)
 	end
 	
 	local function scheduleFetch()
-		-- upvalues: DelayedThread (ref), RequestQueueModule (copy), QueueProcessDelaySec (ref), LocalPlayerUserId (ref), FFlagDataHydrationAccountReset (upval), Callback (ref), RequestBatchSize (ref), t (ref), t1 (copy), Cache (copy), RequestTimeoutSec (copy), p1 (copy), handleFailure (copy), NoSupportsMultiGet (copy), PromiseModule (upval), handleSuccess (copy), scheduleFetch (copy)
+		-- upvalues: DelayedThread (ref), RequestQueueModule (copy), QueueProcessDelaySec (ref), LocalPlayerUserId (ref), FFlagDataHydrationAccountReset (upval), Callback1 (ref), RequestBatchSize (ref), t (ref), t1 (copy), Cache (copy), RequestTimeoutSec (copy), p1 (copy), handleFailure (copy), NoSupportsMultiGet (copy), PromiseModule (upval), handleSuccess (copy), scheduleFetch (copy)
 		if DelayedThread == nil and not RequestQueueModule.isEmpty() then
 			DelayedThread = task.delay(QueueProcessDelaySec, function()
-				-- upvalues: LocalPlayerUserId (upval), FFlagDataHydrationAccountReset (upval), Callback (upval), DelayedThread (upval), RequestQueueModule (upval), RequestBatchSize (upval), t (upval), t1 (upval), Cache (upval), RequestTimeoutSec (upval), p1 (upval), handleFailure (upval), NoSupportsMultiGet (upval), PromiseModule (upval), handleSuccess (upval), scheduleFetch (upval)
+				-- upvalues: LocalPlayerUserId (upval), FFlagDataHydrationAccountReset (upval), Callback1 (upval), DelayedThread (upval), RequestQueueModule (upval), RequestBatchSize (upval), t (upval), t1 (upval), Cache (upval), RequestTimeoutSec (upval), p1 (upval), handleFailure (upval), NoSupportsMultiGet (upval), PromiseModule (upval), handleSuccess (upval), scheduleFetch (upval)
 				local v1 = LocalPlayerUserId
-				local v2 = if FFlagDataHydrationAccountReset then Callback(false) else nil
+				local v2 = if FFlagDataHydrationAccountReset then Callback1(false) else nil
 				DelayedThread = nil
 				
 				if RequestQueueModule.isEmpty() then return end
@@ -235,7 +235,7 @@ return function(p1)
 	end
 	
 	local function getAndFetchItems(p9, p10, p11)
-		-- upvalues: Cache (copy), RequestQueueModule (copy), t (ref), DelayedThread (ref), QueueProcessDelaySec (ref), LocalPlayerUserId (ref), FFlagDataHydrationAccountReset (upval), Callback (ref), RequestBatchSize (ref), t1 (copy), RequestTimeoutSec (copy), p1 (copy), handleFailure (copy), NoSupportsMultiGet (copy), PromiseModule (upval), handleSuccess (copy), scheduleFetch (copy)
+		-- upvalues: Cache (copy), RequestQueueModule (copy), t (ref), DelayedThread (ref), QueueProcessDelaySec (ref), LocalPlayerUserId (ref), FFlagDataHydrationAccountReset (upval), Callback1 (ref), RequestBatchSize (ref), t1 (copy), RequestTimeoutSec (copy), p1 (copy), handleFailure (copy), NoSupportsMultiGet (copy), PromiseModule (upval), handleSuccess (copy), scheduleFetch (copy)
 		local Items, Items2 = Cache.getItems(p9, p10, p11)
 		local t3 = {}
 		local List = {}
@@ -256,9 +256,9 @@ return function(p1)
 				return t3
 			end
 			DelayedThread = task.delay(QueueProcessDelaySec, function()
-				-- upvalues: LocalPlayerUserId (upval), FFlagDataHydrationAccountReset (upval), Callback (upval), DelayedThread (upval), RequestQueueModule (upval), RequestBatchSize (upval), t (upval), t1 (upval), Cache (upval), RequestTimeoutSec (upval), p1 (upval), handleFailure (upval), NoSupportsMultiGet (upval), PromiseModule (upval), handleSuccess (upval), scheduleFetch (upval)
+				-- upvalues: LocalPlayerUserId (upval), FFlagDataHydrationAccountReset (upval), Callback1 (upval), DelayedThread (upval), RequestQueueModule (upval), RequestBatchSize (upval), t (upval), t1 (upval), Cache (upval), RequestTimeoutSec (upval), p1 (upval), handleFailure (upval), NoSupportsMultiGet (upval), PromiseModule (upval), handleSuccess (upval), scheduleFetch (upval)
 				local v3 = LocalPlayerUserId
-				local v4 = if FFlagDataHydrationAccountReset then Callback(false) else nil
+				local v4 = if FFlagDataHydrationAccountReset then Callback1(false) else nil
 				DelayedThread = nil
 				
 				if RequestQueueModule.isEmpty() then return end
@@ -341,7 +341,7 @@ return function(p1)
 	end
 	
 	local function getAndFetchItem(p12, p13, p14)
-		-- upvalues: Cache (copy), RequestQueueModule (copy), t (ref), DelayedThread (ref), QueueProcessDelaySec (ref), LocalPlayerUserId (ref), FFlagDataHydrationAccountReset (upval), Callback (ref), RequestBatchSize (ref), t1 (copy), RequestTimeoutSec (copy), p1 (copy), handleFailure (copy), NoSupportsMultiGet (copy), PromiseModule (upval), handleSuccess (copy), scheduleFetch (copy)
+		-- upvalues: Cache (copy), RequestQueueModule (copy), t (ref), DelayedThread (ref), QueueProcessDelaySec (ref), LocalPlayerUserId (ref), FFlagDataHydrationAccountReset (upval), Callback1 (ref), RequestBatchSize (ref), t1 (copy), RequestTimeoutSec (copy), p1 (copy), handleFailure (copy), NoSupportsMultiGet (copy), PromiseModule (upval), handleSuccess (copy), scheduleFetch (copy)
 		local Item, Item2 = Cache.getItem(p12, p13, p14)
 		
 		if Item2 and not (if RequestQueueModule.hasItem(p12) then true else t[p12] ~= nil) then
@@ -353,9 +353,9 @@ return function(p1)
 				return Item, Item2
 			end
 			DelayedThread = task.delay(QueueProcessDelaySec, function()
-				-- upvalues: LocalPlayerUserId (upval), FFlagDataHydrationAccountReset (upval), Callback (upval), DelayedThread (upval), RequestQueueModule (upval), RequestBatchSize (upval), t (upval), t1 (upval), Cache (upval), RequestTimeoutSec (upval), p1 (upval), handleFailure (upval), NoSupportsMultiGet (upval), PromiseModule (upval), handleSuccess (upval), scheduleFetch (upval)
+				-- upvalues: LocalPlayerUserId (upval), FFlagDataHydrationAccountReset (upval), Callback1 (upval), DelayedThread (upval), RequestQueueModule (upval), RequestBatchSize (upval), t (upval), t1 (upval), Cache (upval), RequestTimeoutSec (upval), p1 (upval), handleFailure (upval), NoSupportsMultiGet (upval), PromiseModule (upval), handleSuccess (upval), scheduleFetch (upval)
 				local v5 = LocalPlayerUserId
-				local v6 = if FFlagDataHydrationAccountReset then Callback(false) else nil
+				local v6 = if FFlagDataHydrationAccountReset then Callback1(false) else nil
 				DelayedThread = nil
 				
 				if RequestQueueModule.isEmpty() then return end
@@ -458,7 +458,7 @@ return function(p1)
 	end
 	
 	local function refetchItem(Key)
-		-- upvalues: t1 (copy), t (ref), Cache (copy), RequestQueueModule (copy), DelayedThread (ref), QueueProcessDelaySec (ref), LocalPlayerUserId (ref), FFlagDataHydrationAccountReset (upval), Callback (ref), RequestBatchSize (ref), RequestTimeoutSec (copy), p1 (copy), handleFailure (copy), NoSupportsMultiGet (copy), PromiseModule (upval), handleSuccess (copy), scheduleFetch (copy)
+		-- upvalues: t1 (copy), t (ref), Cache (copy), RequestQueueModule (copy), DelayedThread (ref), QueueProcessDelaySec (ref), LocalPlayerUserId (ref), FFlagDataHydrationAccountReset (upval), Callback1 (ref), RequestBatchSize (ref), RequestTimeoutSec (copy), p1 (copy), handleFailure (copy), NoSupportsMultiGet (copy), PromiseModule (upval), handleSuccess (copy), scheduleFetch (copy)
 		t1[Key] = (t1[Key] or 0) + 1
 		t[Key] = nil
 		Cache.resetFailedItem(Key)
@@ -468,9 +468,9 @@ return function(p1)
 		end
 		if DelayedThread == nil and not RequestQueueModule.isEmpty() then
 			DelayedThread = task.delay(QueueProcessDelaySec, function()
-				-- upvalues: LocalPlayerUserId (upval), FFlagDataHydrationAccountReset (upval), Callback (upval), DelayedThread (upval), RequestQueueModule (upval), RequestBatchSize (upval), t (upval), t1 (upval), Cache (upval), RequestTimeoutSec (upval), p1 (upval), handleFailure (upval), NoSupportsMultiGet (upval), PromiseModule (upval), handleSuccess (upval), scheduleFetch (upval)
+				-- upvalues: LocalPlayerUserId (upval), FFlagDataHydrationAccountReset (upval), Callback1 (upval), DelayedThread (upval), RequestQueueModule (upval), RequestBatchSize (upval), t (upval), t1 (upval), Cache (upval), RequestTimeoutSec (upval), p1 (upval), handleFailure (upval), NoSupportsMultiGet (upval), PromiseModule (upval), handleSuccess (upval), scheduleFetch (upval)
 				local v7 = LocalPlayerUserId
-				local v8 = if FFlagDataHydrationAccountReset then Callback(false) else nil
+				local v8 = if FFlagDataHydrationAccountReset then Callback1(false) else nil
 				DelayedThread = nil
 				
 				if RequestQueueModule.isEmpty() then return end
@@ -566,9 +566,9 @@ return function(p1)
 	end
 	
 	local function clearResolverState(IsKeepCacheOnAccountReset)
-		-- upvalues: FFlagDataHydrationAccountReset (upval), Callback1 (ref), Callback (ref), DelayedThread (ref), t (ref), RequestQueueModule (copy), MutationLayerModule (ref), p1 (copy), Cache (copy)
+		-- upvalues: FFlagDataHydrationAccountReset (upval), Callback (ref), Callback1 (ref), DelayedThread (ref), t (ref), RequestQueueModule (copy), MutationLayerModule (ref), p1 (copy), Cache (copy)
 		if FFlagDataHydrationAccountReset then
-			Callback1(Callback(false) + 1)
+			Callback(Callback1(false) + 1)
 		end
 		if DelayedThread then
 			task.cancel(DelayedThread)
@@ -665,7 +665,7 @@ return function(p1)
 			Cache.dispose()
 		end,
 		clear = clear,
-		getAccountGeneration = if FFlagDataHydrationAccountReset then Callback else nil,
+		getAccountGeneration = if FFlagDataHydrationAccountReset then Callback1 else nil,
 		getAccountResetGeneration = if FFlagBuildExperienceMonetizationMultiKindModule then Callback3 else nil,
 		isCurrentRequest = if FFlagDataHydrationAccountReset then isCurrentRequest else nil
 	}

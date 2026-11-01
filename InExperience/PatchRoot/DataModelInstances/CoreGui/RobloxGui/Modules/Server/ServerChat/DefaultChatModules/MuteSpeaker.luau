@@ -61,16 +61,15 @@ return function(p1)
 				Segment = Match
 			end
 		end
-		local Segment1: string = Segment
 		local Speaker = p1:GetSpeaker(p2)
 		
 		if Speaker then
 			local UserNameFromChattedName = nil
 			local UserNameFromChattedName2 = nil
 			if ChatSettingsModule.PlayerDisplayNamesEnabled then
-				UserNameFromChattedName, UserNameFromChattedName2 = DisplayNameHelpersModule.getUserNameFromChattedName(Segment1, p2, Speaker:GetNameForDisplay())
+				UserNameFromChattedName, UserNameFromChattedName2 = DisplayNameHelpersModule.getUserNameFromChattedName(Segment, p2, Speaker:GetNameForDisplay())
 			else
-				UserNameFromChattedName, UserNameFromChattedName2 = DisplayNameHelpersModule.getUserNameFromChattedName(Segment1, p2, nil)
+				UserNameFromChattedName, UserNameFromChattedName2 = DisplayNameHelpersModule.getUserNameFromChattedName(Segment, p2, nil)
 			end
 			local Speaker1 = p1:GetSpeaker(UserNameFromChattedName)
 			
@@ -80,12 +79,12 @@ return function(p1)
 				return
 			end
 			if UserNameFromChattedName2 == DisplayNameHelpersModule.CommandErrorCodes.NoMatches then
-				Speaker:SendSystemMessage(ChatLocalizationModule:FormatMessageToSend("GameChat_MuteSpeaker_SpeakerDoesNotExist", string.format("Speaker '%s' does not exist.", (tostring(Segment1))), "RBX_NAME", (tostring(UserNameFromChattedName))), p3, config)
+				Speaker:SendSystemMessage(ChatLocalizationModule:FormatMessageToSend("GameChat_MuteSpeaker_SpeakerDoesNotExist", string.format("Speaker '%s' does not exist.", (tostring(Segment))), "RBX_NAME", (tostring(UserNameFromChattedName))), p3, config)
 				
 				return
 			end
 			if UserNameFromChattedName2 == DisplayNameHelpersModule.CommandErrorCodes.MultipleMatches then
-				local UsersWithDisplayNameString = DisplayNameHelpersModule.getUsersWithDisplayNameString(Segment1, p2)
+				local UsersWithDisplayNameString = DisplayNameHelpersModule.getUsersWithDisplayNameString(Segment, p2)
 				Speaker:SendSystemMessage(ChatLocalizationModule:FormatMessageToSend("InGame.Chat.Response.DisplayNameMultipleMatches", "Warning: The following users have this display name: "), p3, config)
 				Speaker:SendSystemMessage(UsersWithDisplayNameString, p3, config)
 				
@@ -116,16 +115,15 @@ return function(p1)
 				Segment = Match
 			end
 		end
-		local Segment1: string = Segment
 		local Speaker = p1:GetSpeaker(p2)
 		
 		if Speaker then
-			local UserNameFromChattedName = nil
 			local UserNameFromChattedName2 = nil
+			local UserNameFromChattedName = nil
 			if ChatSettingsModule.PlayerDisplayNamesEnabled then
-				UserNameFromChattedName, UserNameFromChattedName2 = DisplayNameHelpersModule.getUserNameFromChattedName(Segment1, p2, Speaker:GetNameForDisplay())
+				UserNameFromChattedName, UserNameFromChattedName2 = DisplayNameHelpersModule.getUserNameFromChattedName(Segment, p2, Speaker:GetNameForDisplay())
 			else
-				UserNameFromChattedName, UserNameFromChattedName2 = DisplayNameHelpersModule.getUserNameFromChattedName(Segment1, p2, nil)
+				UserNameFromChattedName, UserNameFromChattedName2 = DisplayNameHelpersModule.getUserNameFromChattedName(Segment, p2, nil)
 			end
 			local Speaker1 = p1:GetSpeaker(UserNameFromChattedName)
 			
@@ -140,7 +138,7 @@ return function(p1)
 				return
 			end
 			if UserNameFromChattedName2 == DisplayNameHelpersModule.CommandErrorCodes.MultipleMatches then
-				local UsersWithDisplayNameString = DisplayNameHelpersModule.getUsersWithDisplayNameString(Segment1, p2)
+				local UsersWithDisplayNameString = DisplayNameHelpersModule.getUsersWithDisplayNameString(Segment, p2)
 				Speaker:SendSystemMessage(ChatLocalizationModule:FormatMessageToSend("InGame.Chat.Response.DisplayNameMultipleMatches", "Warning: The following users have this display name: "), p3, config)
 				Speaker:SendSystemMessage(UsersWithDisplayNameString, p3, config)
 				

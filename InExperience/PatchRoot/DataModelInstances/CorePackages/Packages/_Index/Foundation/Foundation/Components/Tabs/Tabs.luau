@@ -22,7 +22,7 @@ local config = {
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
-	-- upvalues: UseTokensModule (copy), WithDefaultsModule (copy), config (copy), ReactModule (copy), DashModule (copy), FillBehaviorModule (copy), FlagsModule (copy), UseAnimatedHighlightModule (copy), ViewModule (copy), WithCommonPropsModule (copy), OverflowScrollContainerModule (copy), OverflowScrollContainerModule1 (copy), InputSizeModule (copy), TabItemModule (copy)
+	-- upvalues: UseTokensModule (copy), WithDefaultsModule (copy), config (copy), ReactModule (copy), DashModule (copy), FlagsModule (copy), FillBehaviorModule (copy), UseAnimatedHighlightModule (copy), ViewModule (copy), WithCommonPropsModule (copy), OverflowScrollContainerModule (copy), OverflowScrollContainerModule1 (copy), InputSizeModule (copy), TabItemModule (copy)
 	local UseTokensModuleResult = UseTokensModule()
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(WithDefaultsModuleResult.defaultActiveTabId or DashModule.get(WithDefaultsModuleResult, { 1, "id" }))
@@ -32,7 +32,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 			WithDefaultsModuleResult.onActivated(p3)
 		end
 		UseStateResult2(p3)
-	end)
+	end, if FlagsModule.FoundationTabsStableOnActivated then { WithDefaultsModuleResult.onActivated } else nil)
 	local IsFillBehaviorMatch = WithDefaultsModuleResult.fillBehavior == FillBehaviorModule.Fill
 	local ActiveTabId = WithDefaultsModuleResult.activeTabId or UseStateResult
 	local FindResult = DashModule.find(WithDefaultsModuleResult.tabs, function(p3): boolean

@@ -1,1 +1,1 @@
-﻿return game:DefineFastInt("MaxTrialBadgeImpressions", 5)
+﻿return game:DefineFastInt("MaxTrialBadgeImpressions", 10)

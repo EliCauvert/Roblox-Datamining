@@ -10,6 +10,7 @@ local GetUnifiedEventsForMISFunction = AvatarExperienceAnalyticsModule.Utils.get
 local CartIdService = AvatarExperienceAnalyticsModule.Lib.CartIdService
 local AvatarScreenProperties = require(Parent.AvatarExperienceNavigation).AvatarRoute.AvatarScreenProperties
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXUnifiedEventStrictPayloads = AvatarExperienceFlagsModule.FFlagAXUnifiedEventStrictPayloads
 local FFlagAXMISSaveWearFix = AvatarExperienceFlagsModule.FFlagAXMISSaveWearFix
 local FFlagAXBackgroundsCustomizeHydration = AvatarExperienceFlagsModule.FFlagAXBackgroundsCustomizeHydration
 local ApplyProfileConfigurationFunction = require(Parent.AvatarExperienceRodux).Actions.ApplyProfileConfiguration
@@ -33,9 +34,9 @@ local FFlagSignalsNavP3gAvatarExperience = require(Parent.SharedFlags).FFlagSign
 local GetLegacyNavigationStoreFunction = require(Parent.NavigationRodux).GetLegacyNavigationStore
 
 return if AvatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents then function(Items, EquippableAssets, ReplaceAllEquippedAssets, BodyColor3s, BodyScales, BodyPartColorRangeIds, p2, Callback1, p3, p4, p5, Callback)
-	-- upvalues: FFlagSignalsNavP3gAvatarExperience (copy), GetLegacyNavigationStoreFunction (copy), AvatarScreenProperties (copy), SendUnifiedEventsForMultiItemShoppingFunction (copy), GetUnifiedEventsForMISFunction (copy), UnifiedEventLogEnums (copy), MutedErrorFunction (copy), CartIdService (copy), UnifiedSelectionListStore (copy), FFlagAXMISSaveWearFix (copy), PurchaseItemsSuccessModule (copy), FFlagAXBackgroundsCustomizeHydration (copy), maybeApplyPurchasedBackground (copy)
+	-- upvalues: FFlagSignalsNavP3gAvatarExperience (copy), GetLegacyNavigationStoreFunction (copy), AvatarScreenProperties (copy), GetUnifiedEventsForMISFunction (copy), UnifiedEventLogEnums (copy), FFlagAXUnifiedEventStrictPayloads (copy), SendUnifiedEventsForMultiItemShoppingFunction (copy), MutedErrorFunction (copy), CartIdService (copy), UnifiedSelectionListStore (copy), FFlagAXMISSaveWearFix (copy), PurchaseItemsSuccessModule (copy), FFlagAXBackgroundsCustomizeHydration (copy), maybeApplyPurchasedBackground (copy)
 	return function(p6, _)
-		-- upvalues: FFlagSignalsNavP3gAvatarExperience (upval), GetLegacyNavigationStoreFunction (upval), AvatarScreenProperties (upval), p4 (copy), p5 (copy), SendUnifiedEventsForMultiItemShoppingFunction (upval), GetUnifiedEventsForMISFunction (upval), Items (copy), p2 (copy), UnifiedEventLogEnums (upval), MutedErrorFunction (upval), CartIdService (upval), UnifiedSelectionListStore (upval), FFlagAXMISSaveWearFix (upval), Callback (copy), BodyScales (ref), Callback1 (copy), PurchaseItemsSuccessModule (upval), EquippableAssets (copy), ReplaceAllEquippedAssets (copy), p3 (copy), BodyColor3s (copy), BodyPartColorRangeIds (copy), FFlagAXBackgroundsCustomizeHydration (upval), maybeApplyPurchasedBackground (upval)
+		-- upvalues: FFlagSignalsNavP3gAvatarExperience (upval), GetLegacyNavigationStoreFunction (upval), AvatarScreenProperties (upval), p4 (copy), p5 (copy), GetUnifiedEventsForMISFunction (upval), Items (copy), p2 (copy), UnifiedEventLogEnums (upval), FFlagAXUnifiedEventStrictPayloads (upval), SendUnifiedEventsForMultiItemShoppingFunction (upval), MutedErrorFunction (upval), CartIdService (upval), UnifiedSelectionListStore (upval), FFlagAXMISSaveWearFix (upval), Callback (copy), BodyScales (ref), Callback1 (copy), PurchaseItemsSuccessModule (upval), EquippableAssets (copy), ReplaceAllEquippedAssets (copy), p3 (copy), BodyColor3s (copy), BodyPartColorRangeIds (copy), FFlagAXBackgroundsCustomizeHydration (upval), maybeApplyPurchasedBackground (upval)
 		local State = p6:getState()
 		local RouteName = nil
 		
@@ -49,14 +50,15 @@ return if AvatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents
 		local UnifiedLoggingSurface = if AvatarScreenProperty and AvatarScreenProperty.analyticsData then AvatarScreenProperty.analyticsData.unifiedLoggingSurface else nil
 		
 		if not pcall(function()
-			-- upvalues: p4 (upval), State (copy), p5 (upval), SendUnifiedEventsForMultiItemShoppingFunction (upval), GetUnifiedEventsForMISFunction (upval), Items (upval), p2 (upval), UnifiedEventLogEnums (upval), UnifiedLoggingSurface (copy)
+			-- upvalues: p4 (upval), State (copy), p5 (upval), GetUnifiedEventsForMISFunction (upval), Items (upval), p2 (upval), UnifiedEventLogEnums (upval), FFlagAXUnifiedEventStrictPayloads (upval), UnifiedLoggingSurface (copy), SendUnifiedEventsForMultiItemShoppingFunction (upval)
 			if p4 then
 				p4.isOrganicLook = State.AvatarExperience.AvatarScene.OutfitTryOn.LookAnalyticsInfo == nil
 			end
 			if p5 then
 				p5.isOrganicLook = State.AvatarExperience.AvatarScene.OutfitTryOn.MakeupLookAnalyticsInfo == nil
 			end
-			SendUnifiedEventsForMultiItemShoppingFunction(GetUnifiedEventsForMISFunction(Items, p2, p4, p5, UnifiedEventLogEnums.MarketplaceUnifiedAction.PURCHASE_SUCCESS), UnifiedLoggingSurface)
+			local UnifiedEventsForMIS, UnifiedEventsForMIS2 = GetUnifiedEventsForMISFunction(Items, p2, p4, p5, UnifiedEventLogEnums.MarketplaceUnifiedAction.PURCHASE_SUCCESS, if FFlagAXUnifiedEventStrictPayloads then UnifiedLoggingSurface else nil, if FFlagAXUnifiedEventStrictPayloads then State.AvatarExperience.AvatarScene.OutfitTryOn.LookAnalyticsInfo else nil, if FFlagAXUnifiedEventStrictPayloads then State.AvatarExperience.AvatarScene.OutfitTryOn.MakeupLookAnalyticsInfo else nil)
+			SendUnifiedEventsForMultiItemShoppingFunction(UnifiedEventsForMIS, UnifiedLoggingSurface, if FFlagAXUnifiedEventStrictPayloads then UnifiedEventsForMIS2 else nil)
 		end) then
 			MutedErrorFunction("Failed to send unified events for multi-item shopping purchase success")
 		end

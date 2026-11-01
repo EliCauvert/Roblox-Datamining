@@ -90,28 +90,40 @@ return function(p1, Enabled, p2)
 			
 			local function setVoiceEnabled(VoiceState)
 				-- upvalues: UseStateResult (upval), IsUserIdMatch (copy), config (upval), VOICESTATE (upval), VoiceChatServiceManager (upval), Text (copy), Flag (ref), VoiceChatState (upval), Flag1 (ref), UseStateResult2 (upval)
-				local ERROR = UseStateResult
+				local MUTED = UseStateResult
 				
 				if IsUserIdMatch then
-					ERROR = if config[VoiceState] then config[VoiceState] else VOICESTATE.MUTED
+					MUTED = if config[VoiceState] then config[VoiceState] else VOICESTATE.MUTED
 				else
 					local Participant = VoiceChatServiceManager.participants[Text]
 					
 					if Participant and not Flag then
-						ERROR = if Participant.subscriptionFailed then VOICESTATE.ERROR elseif Participant.subscriptionCompleted then if Participant.isMutedLocally then VOICESTATE.LOCAL_MUTED elseif Participant.isMuted then VOICESTATE.MUTED elseif Participant.isSignalActive then VOICESTATE.TALKING else VOICESTATE.INACTIVE else VOICESTATE.CONNECTING
+						MUTED = VOICESTATE.INACTIVE
+						
+						if Participant.subscriptionFailed then
+							MUTED = VOICESTATE.ERROR
+						elseif Participant.subscriptionCompleted then
+							if Participant.isMutedLocally then
+								MUTED = VOICESTATE.LOCAL_MUTED
+							elseif Participant.isMuted then
+								MUTED = VOICESTATE.MUTED
+							elseif Participant.isSignalActive then
+								MUTED = VOICESTATE.TALKING
+							end
+						else
+							MUTED = VOICESTATE.CONNECTING
+						end
 					end
 				end
 				if VoiceState == VoiceChatState.Failed then
 					if not IsUserIdMatch then
-						ERROR = VOICESTATE.HIDDEN
+						MUTED = VOICESTATE.HIDDEN
 					end
 				elseif VoiceState == VoiceChatState.Joined and not VoiceChatServiceManager.localMuted and IsUserIdMatch then
-					ERROR = if VoiceChatServiceManager.isTalking then VOICESTATE.TALKING elseif VoiceChatServiceManager.localMuted then VOICESTATE.MUTED else VOICESTATE.INACTIVE
+					MUTED = if VoiceChatServiceManager.isTalking then VOICESTATE.TALKING elseif VoiceChatServiceManager.localMuted then VOICESTATE.MUTED else VOICESTATE.INACTIVE
 				end
-				local ERROR1 = ERROR
-				
 				if not Flag1 then
-					UseStateResult2(ERROR1)
+					UseStateResult2(MUTED)
 				end
 			end
 			
@@ -146,10 +158,23 @@ return function(p1, Enabled, p2)
 						local v1 = p3[Text]
 						
 						if v1 and not Flag then
-							local ERROR = if v1.subscriptionFailed then VOICESTATE.ERROR elseif v1.subscriptionCompleted then if v1.isMutedLocally then VOICESTATE.LOCAL_MUTED elseif v1.isMuted then VOICESTATE.MUTED elseif v1.isSignalActive then VOICESTATE.TALKING else VOICESTATE.INACTIVE else VOICESTATE.CONNECTING
+							local INACTIVE = VOICESTATE.INACTIVE
 							
+							if v1.subscriptionFailed then
+								INACTIVE = VOICESTATE.ERROR
+							elseif v1.subscriptionCompleted then
+								if v1.isMutedLocally then
+									INACTIVE = VOICESTATE.LOCAL_MUTED
+								elseif v1.isMuted then
+									INACTIVE = VOICESTATE.MUTED
+								elseif v1.isSignalActive then
+									INACTIVE = VOICESTATE.TALKING
+								end
+							else
+								INACTIVE = VOICESTATE.CONNECTING
+							end
 							if not Flag1 then
-								UseStateResult2(ERROR)
+								UseStateResult2(INACTIVE)
 								
 								return
 							end
@@ -198,10 +223,23 @@ return function(p1, Enabled, p2)
 								local Participant = VoiceChatServiceManager.participants[Text]
 								
 								if Participant then
-									local ERROR = if Participant.subscriptionFailed then VOICESTATE.ERROR elseif Participant.subscriptionCompleted then if Participant.isMutedLocally then VOICESTATE.LOCAL_MUTED elseif Participant.isMuted then VOICESTATE.MUTED elseif Participant.isSignalActive then VOICESTATE.TALKING else VOICESTATE.INACTIVE else VOICESTATE.CONNECTING
+									local INACTIVE = VOICESTATE.INACTIVE
 									
+									if Participant.subscriptionFailed then
+										INACTIVE = VOICESTATE.ERROR
+									elseif Participant.subscriptionCompleted then
+										if Participant.isMutedLocally then
+											INACTIVE = VOICESTATE.LOCAL_MUTED
+										elseif Participant.isMuted then
+											INACTIVE = VOICESTATE.MUTED
+										elseif Participant.isSignalActive then
+											INACTIVE = VOICESTATE.TALKING
+										end
+									else
+										INACTIVE = VOICESTATE.CONNECTING
+									end
 									if not Flag1 then
-										UseStateResult2(ERROR)
+										UseStateResult2(INACTIVE)
 										
 										return
 									end

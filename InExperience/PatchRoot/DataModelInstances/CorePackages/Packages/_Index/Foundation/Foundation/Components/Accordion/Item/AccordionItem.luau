@@ -17,7 +17,6 @@ local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local InputPlacementModule = require(Foundation.Enums.InputPlacement)
 local _ = require(Foundation.Enums.InputSize)
 local _ = require(Foundation.Providers.Style.Tokens)
-local FlagsModule = require(Foundation.Utility.Flags)
 local UseAccordionItemVariantsModule = require(script.Parent.Parent.useAccordionItemVariants)
 local config = { hasDivider = true, isExpanded = false }
 
@@ -29,7 +28,7 @@ local function _(p1)
 end
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UsePreferencesModule (copy), ReactModule (copy), ReactOtterModule (copy), UseAccordionModule (copy), UseAccordionItemVariantsModule (copy), InputPlacementModule (copy), TextModule (copy), ViewModule (copy), WithCommonPropsModule (copy), FlagsModule (copy), IconModule (copy), Icon (copy), DividerModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UsePreferencesModule (copy), ReactModule (copy), ReactOtterModule (copy), UseAccordionModule (copy), UseAccordionItemVariantsModule (copy), InputPlacementModule (copy), TextModule (copy), ViewModule (copy), WithCommonPropsModule (copy), IconModule (copy), Icon (copy), DividerModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
 	local ReducedMotion = UsePreferencesModule().reducedMotion
@@ -148,15 +147,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 			onActivated = OnActivated,
 			testId = `{WithDefaultsModuleResult.testId}--header`
 		}, {
-			Icon = if FlagsModule.FoundationAccordionBeta and Icon1 then ReactModule.createElement(IconModule, {
-				LayoutOrder = LayoutOrder,
-				name = if type(Icon1) == "table" then Icon1.name else Icon1,
-				variant = if type(Icon1) == "table" then Icon1.variant else nil,
-				style = UseAccordionItemVariantsModuleResult.icon.style,
-				size = UseAccordionItemVariantsModuleResult.icon.size,
-				testId = `{WithDefaultsModuleResult.testId}--leading-icon`
-			}) else nil,
-			LeadingIcon = if FlagsModule.FoundationAccordionBeta then nil elseif Icon1 then ReactModule.createElement(IconModule, {
+			Icon = if Icon1 then ReactModule.createElement(IconModule, {
 				LayoutOrder = LayoutOrder,
 				name = if type(Icon1) == "table" then Icon1.name else Icon1,
 				variant = if type(Icon1) == "table" then Icon1.variant else nil,

@@ -493,12 +493,10 @@ if DEV then
 			MemoizedState = MemoizedState.next
 			Count1 -= 1
 		end
-		local MemoizedState1 = MemoizedState
-		
-		if MemoizedState1 ~= nil then
-			local CopyWithSetImplResult = copyWithSetImpl(MemoizedState1.memoizedState, p6, 1, p7)
-			MemoizedState1.memoizedState = CopyWithSetImplResult
-			MemoizedState1.baseState = CopyWithSetImplResult
+		if MemoizedState ~= nil then
+			local CopyWithSetImplResult = copyWithSetImpl(MemoizedState.memoizedState, p6, 1, p7)
+			MemoizedState.memoizedState = CopyWithSetImplResult
+			MemoizedState.baseState = CopyWithSetImplResult
 			p5.memoizedProps = table.clone(p5.memoizedProps)
 			ScheduleUpdateOnFiberFunction(p5, SyncLane, NoTimestamp)
 		end
@@ -512,12 +510,10 @@ if DEV then
 			MemoizedState = MemoizedState.next
 			Count1 -= 1
 		end
-		local MemoizedState1 = MemoizedState
-		
-		if MemoizedState1 ~= nil then
-			local CopyWithDeleteImplResult = copyWithDeleteImpl(MemoizedState1.memoizedState, p9, 0)
-			MemoizedState1.memoizedState = CopyWithDeleteImplResult
-			MemoizedState1.baseState = CopyWithDeleteImplResult
+		if MemoizedState ~= nil then
+			local CopyWithDeleteImplResult = copyWithDeleteImpl(MemoizedState.memoizedState, p9, 0)
+			MemoizedState.memoizedState = CopyWithDeleteImplResult
+			MemoizedState.baseState = CopyWithDeleteImplResult
 			p8.memoizedProps = table.clone(p8.memoizedProps)
 			ScheduleUpdateOnFiberFunction(p8, SyncLane, NoTimestamp)
 		end
@@ -531,12 +527,10 @@ if DEV then
 			MemoizedState = MemoizedState.next
 			Count1 -= 1
 		end
-		local MemoizedState1 = MemoizedState
-		
-		if MemoizedState1 ~= nil then
-			local CopyWithRenameResult = copyWithRename(MemoizedState1.memoizedState, p11, p12)
-			MemoizedState1.memoizedState = CopyWithRenameResult
-			MemoizedState1.baseState = CopyWithRenameResult
+		if MemoizedState ~= nil then
+			local CopyWithRenameResult = copyWithRename(MemoizedState.memoizedState, p11, p12)
+			MemoizedState.memoizedState = CopyWithRenameResult
+			MemoizedState.baseState = CopyWithRenameResult
 			p10.memoizedProps = table.clone(p10.memoizedProps)
 			ScheduleUpdateOnFiberFunction(p10, SyncLane, NoTimestamp)
 		end

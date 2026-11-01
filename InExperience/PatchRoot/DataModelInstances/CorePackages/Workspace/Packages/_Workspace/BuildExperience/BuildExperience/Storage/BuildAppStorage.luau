@@ -925,7 +925,7 @@ local function createBuildAppStorage(AppStorageService, HttpService)
 			if AdUpsell and AdUpsell2 ~= nil and AdUpsell2.dismissedPermanently == true then
 				return true
 			end
-			local Flag = false
+			local Enabled = false
 			
 			if not AdUpsell or AdUpsell2 == nil then
 				local TryReadDataResult, TryReadDataResult2 = tryReadData()
@@ -942,7 +942,7 @@ local function createBuildAppStorage(AppStorageService, HttpService)
 				Copy.scheduler = sanitizeAdUpsellScheduler(Copy.scheduler)
 				v5 = Copy
 				Flag1 = false
-				Flag = true
+				Enabled = true
 			end
 			local Scheduler = v5.scheduler
 			local Text = tostring(UniverseId)
@@ -974,13 +974,12 @@ local function createBuildAppStorage(AppStorageService, HttpService)
 				end
 			end
 			Scheduler.pendingMilestones = PendingMilestones
-			local Flag3: boolean = Flag
 			Count = 0
 			Count += 1
-			Inverted = not persistCachedAdUpsell(Flag3)
+			Inverted = not persistCachedAdUpsell(Enabled)
 			
 			if Inverted then
-				Flag2 = Flag2 or Flag3 == true
+				Flag2 = Flag2 or Enabled == true
 				scheduleAdUpsellWriteRetry()
 			else
 				Count = 0

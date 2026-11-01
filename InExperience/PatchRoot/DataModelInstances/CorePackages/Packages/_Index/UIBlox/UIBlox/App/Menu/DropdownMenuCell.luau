@@ -140,23 +140,21 @@ function DropdownMenuCell.render(p1)
 			if ColorStyle then
 				local IsActivated1 = p1.props.isActivated
 				local HasContent = p1.props.hasContent
-				local ColorFromMap1 = GetColorFromMap(TextStateColorMap, ControlState, p2)
+				ColorStyle = GetColorFromMap(TextStateColorMap, ControlState, p2)
 				
 				if ControlState ~= ControlStateModule.Disabled and ControlState ~= ControlStateModule.Pressed and (IsActivated1 or not HasContent) then
-					ColorFromMap1.Transparency = 0.5 * ColorFromMap1.Transparency + 0.5
+					ColorStyle.Transparency = 0.5 * ColorStyle.Transparency + 0.5
 				end
-				ColorStyle = ColorFromMap1
 			end
-			local ColorFromMap2 = Icon
+			local ColorFromMap1 = Icon
 			
-			if ColorFromMap2 then
+			if ColorFromMap1 then
 				local IsActivated2 = p1.props.isActivated
-				local ColorFromMap3 = GetColorFromMap(IconStateColorMap, ControlState, p2)
+				ColorFromMap1 = GetColorFromMap(IconStateColorMap, ControlState, p2)
 				
 				if ControlState ~= ControlStateModule.Disabled and ControlState ~= ControlStateModule.Pressed and IsActivated2 then
-					ColorFromMap3.Transparency = 0.5 * ColorFromMap3.Transparency + 0.5
+					ColorFromMap1.Transparency = 0.5 * ColorFromMap1.Transparency + 0.5
 				end
-				ColorFromMap2 = ColorFromMap3
 			end
 			local ButtonImage = p1.props.buttonImage
 			local TextFont = if p1.props.enableTokenOverride then p1.props.textFont else p2.Font.Header2
@@ -197,8 +195,8 @@ function DropdownMenuCell.render(p1)
 						LayoutOrder = 2,
 						Size = UDim2.fromOffset(IconSize, IconSize),
 						Image = Icon,
-						ImageColor3 = ColorFromMap2.Color,
-						ImageTransparency = ColorFromMap2.Transparency
+						ImageColor3 = ColorFromMap1.Color,
+						ImageTransparency = ColorFromMap1.Transparency
 					}) or nil
 				})
 			}

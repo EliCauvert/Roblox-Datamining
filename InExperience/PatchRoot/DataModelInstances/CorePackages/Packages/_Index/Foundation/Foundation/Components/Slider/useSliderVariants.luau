@@ -8,7 +8,7 @@ local _ = require(Foundation.Components.Types)
 local FlagsModule = require(Foundation.Utility.Flags)
 
 local function variantsFactory(p1)
-	-- upvalues: SliderVariantModule (copy), FlagsModule (copy), InputSizeModule (copy)
+	-- upvalues: SliderVariantModule (copy), InputSizeModule (copy)
 	return {
 		common = {
 			bar = {
@@ -23,7 +23,7 @@ local function variantsFactory(p1)
 				knob = {
 					hasShadow = true,
 					style = p1.Color.Extended.White.White_100,
-					dragStyle = if FlagsModule.FoundationSystemEmphasisNonActions then p1.Color.System.Emphasis else p1.Color.ActionEmphasis.Background
+					dragStyle = p1.Color.System.Emphasis
 				}
 			},
 			[SliderVariantModule.Standard] = {

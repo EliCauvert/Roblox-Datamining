@@ -8,7 +8,7 @@ local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant
 local IndexBindableModule = require(Foundation.Utility.indexBindable)
 local _ = require(Foundation.Providers.Style.Tokens)
 local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
-local IsDEV = _G.__DEV__ == true
+local DevAssertModule = require(Foundation.Utility.devAssert)
 local _Font = Font.new(require(Foundation.Constants).BUILDER_SANS_FONT_ASSET, Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
 
 function variantsFactory(p1)
@@ -148,15 +148,9 @@ function variantsFactory(p1)
 end
 
 return function(p1, Alert, p2, p3, p4, p5)
-	-- upvalues: IsDEV (copy), StatusIndicatorVariantModule (copy), IndexBindableModule (copy), VariantsContextModule (copy), ComposeStyleVariantModule (copy), FlagsModule (copy)
-	if IsDEV then
-		if Alert == StatusIndicatorVariantModule.Contrast_Experiment then
-			error("Contrast is not a supported StatusIndicator variant.")
-		end
-		if Alert == StatusIndicatorVariantModule.Alert and p2 then
-			error("Alert is not a supported numeric StatusIndicator variant.")
-		end
-	end
+	-- upvalues: DevAssertModule (copy), StatusIndicatorVariantModule (copy), IndexBindableModule (copy), VariantsContextModule (copy), ComposeStyleVariantModule (copy), FlagsModule (copy)
+	DevAssertModule(Alert ~= StatusIndicatorVariantModule.Contrast_Experiment, "Contrast is not a supported StatusIndicator variant.")
+	DevAssertModule(not (Alert == StatusIndicatorVariantModule.Alert and p2), "Alert is not a supported numeric StatusIndicator variant.")
 	local StatusIndicator = VariantsContextModule.useVariants("StatusIndicator", variantsFactory, p1)
 	
 	return ComposeStyleVariantModule(StatusIndicator.common, StatusIndicator.variants[Alert], StatusIndicator.hasValue[p2], StatusIndicator.shape[p3], if FlagsModule.FoundationStatusIndicatorDesignUpdate then if p2 then StatusIndicator.numericSizes[p4] else StatusIndicator.sizes[p4] elseif p2 then {} else StatusIndicator.sizes[p4], if p5 then {

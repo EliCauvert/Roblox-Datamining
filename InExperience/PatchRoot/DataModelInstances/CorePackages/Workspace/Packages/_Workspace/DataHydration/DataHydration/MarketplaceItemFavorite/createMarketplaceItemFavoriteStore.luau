@@ -184,20 +184,18 @@ return function(p1)
 				end
 			end
 			DataResolverModule.setMutation(Key, { isFavorited = NoIsFavorited })
-			local Entry1 = Entry
-			local BaselineCount = Entry1.baselineCount
+			local BaselineCount = Entry.baselineCount
 			
 			if BaselineCount ~= nil and p1.setFavoriteCount ~= nil then
-				p1.setFavoriteCount(Key, (math.max(0, BaselineCount + (if NoIsFavorited == Entry1.baselineFavorited then 0 elseif NoIsFavorited then 1 else -1))))
+				p1.setFavoriteCount(Key, (math.max(0, BaselineCount + (if NoIsFavorited == Entry.baselineFavorited then 0 elseif NoIsFavorited then 1 else -1))))
 			end
 			if not Entry.isWriting then
-				local Entry2 = Entry
 				local DataResult1 = DataCacheModule.getItem(Key).data(false)
 				
-				if Entry2.desired == (if DataResult1 then DataResult1.isFavorited else nil) then
-					finishToggle(Key, Entry2, "success")
+				if Entry.desired == (if DataResult1 then DataResult1.isFavorited else nil) then
+					finishToggle(Key, Entry, "success")
 				else
-					Callback(Key, Entry2)
+					Callback(Key, Entry)
 				end
 			end
 			return true

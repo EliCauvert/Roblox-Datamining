@@ -484,13 +484,13 @@ function Module.InternalPostMessage(p11, p12, Message, p13)
 	p11:InternalAddMessageToHistoryLog(InternalCreateMessageObjectResult)
 	
 	for _, name in pairs(Names) do
-		local Speaker1 = p11.Speakers[name]
+		local Speaker = p11.Speakers[name]
 		
-		if Speaker1 then
-			if Result3_1 and (v1 and (p12:GetPlayer() ~= nil and (Speaker1:GetPlayer() ~= nil and p12:GetPlayer().LocaleId ~= Speaker1:GetPlayer().LocaleId))) then
-				Speaker1:InternalSendFilteredMessageWithTranslatedFilterResult(InternalCreateMessageObjectResult, p11.Name, v1)
+		if Speaker then
+			if Result3_1 and (v1 and (p12:GetPlayer() ~= nil and (Speaker:GetPlayer() ~= nil and p12:GetPlayer().LocaleId ~= Speaker:GetPlayer().LocaleId))) then
+				Speaker:InternalSendFilteredMessageWithTranslatedFilterResult(InternalCreateMessageObjectResult, p11.Name, v1)
 			else
-				Speaker1:InternalSendFilteredMessageWithFilterResult(InternalCreateMessageObjectResult, p11.Name)
+				Speaker:InternalSendFilteredMessageWithFilterResult(InternalCreateMessageObjectResult, p11.Name)
 			end
 		end
 	end
@@ -501,8 +501,8 @@ function Module.InternalPostMessage(p11, p12, Message, p13)
 		if not speaker:IsSpeakerMuted(p12.Name) and p11:CanCommunicate(p12, speaker) then
 			Flag = false
 			
-			for _, value in pairs(Names) do
-				if speaker.Name == value then
+			for _, name1 in pairs(Names) do
+				if speaker.Name == name1 then
 					Flag = true
 					break
 				end
@@ -512,8 +512,8 @@ function Module.InternalPostMessage(p11, p12, Message, p13)
 			end
 		end
 	end
-	for _, value2 in pairs(List) do
-		local Speaker = p11.Speakers[value2]
+	for _, value in pairs(List) do
+		local Speaker = p11.Speakers[value]
 		
 		if Speaker then
 			Speaker:InternalSendFilteredMessageWithFilterResult(InternalCreateMessageObjectResult, p11.Name)

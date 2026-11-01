@@ -17,6 +17,7 @@
 	OpenBadgeDetails = "OpenBadgeDetails",
 	OpenBadgesSeeAll = "OpenBadgesSeeAll",
 	OpenChartsSortDetail = "OpenChartsSortDetail",
+	OpenExperienceLeaderboardSeeAll = "OpenExperienceLeaderboardSeeAll",
 	OpenExperienceStoreSeeAll = "OpenExperienceStoreSeeAll",
 	OpenGameFeedbackForm = "OpenGameFeedbackForm",
 	AiOverviewFeedback = "AiOverviewFeedback",

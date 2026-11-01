@@ -73,29 +73,21 @@ return {
 		-- upvalues: formatByKeyWithFallback (copy), LocalizationService (copy), Translators (copy), GuiService (copy)
 		local RobloxLocaleId = LocalizationService.RobloxLocaleId
 		local Translator = Translators[RobloxLocaleId]
-		local Translator1 = nil
 		
-		if Translator then
-			Translator1 = Translator
-		else
-			local Translator2 = GuiService.UIBloxLocalization:GetTranslator(RobloxLocaleId)
-			Translators[RobloxLocaleId] = Translator2
-			Translator1 = Translator2
+		if not Translator then
+			Translator = GuiService.UIBloxLocalization:GetTranslator(RobloxLocaleId)
+			Translators[RobloxLocaleId] = Translator
 		end
-		return formatByKeyWithFallback(p1, p2, Translator1)
+		return formatByKeyWithFallback(p1, p2, Translator)
 	end,
 	FormatByKeyForLocale = function(_, p1, Key, p2)
 		-- upvalues: formatByKeyWithFallback (copy), Translators (copy), GuiService (copy)
 		local Translator = Translators[Key]
-		local Translator1 = nil
 		
-		if Translator then
-			Translator1 = Translator
-		else
-			local Translator2 = GuiService.UIBloxLocalization:GetTranslator(Key)
-			Translators[Key] = Translator2
-			Translator1 = Translator2
+		if not Translator then
+			Translator = GuiService.UIBloxLocalization:GetTranslator(Key)
+			Translators[Key] = Translator
 		end
-		return formatByKeyWithFallback(p1, p2, Translator1)
+		return formatByKeyWithFallback(p1, p2, Translator)
 	end
 }

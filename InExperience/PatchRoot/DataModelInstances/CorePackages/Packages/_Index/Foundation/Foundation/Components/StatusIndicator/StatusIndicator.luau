@@ -7,11 +7,11 @@ local FlagsModule = require(Foundation.Utility.Flags)
 local TextModule = require(Foundation.Components.Text)
 local _ = require(Foundation.Components.Types)
 local ViewModule = require(Foundation.Components.View)
+local DevAssertModule = require(Foundation.Utility.devAssert)
 local UseStatusIndicatorVariantsModule = require(script.Parent.useStatusIndicatorVariants)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
 local WithDefaultsModule = require(Foundation.Utility.withDefaults)
-local IsDEV = _G.__DEV__ == true
 local StatusIndicatorShapeModule = require(Foundation.Enums.StatusIndicatorShape)
 local ValidNumericVariantsModule = require(script.Parent.ValidNumericVariants)
 local config = {
@@ -23,12 +23,12 @@ local config = {
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: WithDefaultsModule (copy), config (copy), StatusIndicatorShapeModule (copy), IsDEV (copy), ValidNumericVariantsModule (copy), DashModule (copy), UseTokensModule (copy), UseStatusIndicatorVariantsModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), TextModule (copy), ReactIsModule (copy), FlagsModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), StatusIndicatorShapeModule (copy), DevAssertModule (copy), ValidNumericVariantsModule (copy), DashModule (copy), UseTokensModule (copy), UseStatusIndicatorVariantsModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), TextModule (copy), ReactIsModule (copy), FlagsModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local Circle = if WithDefaultsModuleResult.value then StatusIndicatorShapeModule.Circle else WithDefaultsModuleResult.shape
 	
-	if IsDEV and WithDefaultsModuleResult.value ~= nil then
-		assert(ValidNumericVariantsModule[WithDefaultsModuleResult.variant], `{WithDefaultsModuleResult.variant} is not a supported numeric variant. The following are valid numeric variants: {table.concat(DashModule.filter(DashModule.keys(ValidNumericVariantsModule), function(p2, _): boolean
+	if WithDefaultsModuleResult.value ~= nil then
+		DevAssertModule(ValidNumericVariantsModule[WithDefaultsModuleResult.variant], `{WithDefaultsModuleResult.variant} is not a supported numeric variant. The following are valid numeric variants: {table.concat(DashModule.filter(DashModule.keys(ValidNumericVariantsModule), function(p2, _): boolean
 			-- upvalues: ValidNumericVariantsModule (upval)
 			return ValidNumericVariantsModule[p2] == true
 		end), ",")}`)

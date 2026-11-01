@@ -61,18 +61,16 @@ return function()
 	local ExperienceChat = RobloxReplicatedStorage:FindFirstChild("ExperienceChat")
 	
 	if not ExperienceChat then
-		local ExperienceChat1 = Instance.new("Folder")
-		ExperienceChat1.Name = "ExperienceChat"
-		ExperienceChat1.Parent = RobloxReplicatedStorage
-		ExperienceChat = ExperienceChat1
+		ExperienceChat = Instance.new("Folder")
+		ExperienceChat.Name = "ExperienceChat"
+		ExperienceChat.Parent = RobloxReplicatedStorage
 	end
 	local WhisperChat = ExperienceChat:FindFirstChild("WhisperChat")
 	
 	if not WhisperChat then
-		local WhisperChat1 = Instance.new("RemoteFunction")
-		WhisperChat1.Name = "WhisperChat"
-		WhisperChat1.Parent = ExperienceChat
-		WhisperChat = WhisperChat1
+		WhisperChat = Instance.new("RemoteFunction")
+		WhisperChat.Name = "WhisperChat"
+		WhisperChat.Parent = ExperienceChat
 	end
 	if WhisperChat:IsA("RemoteFunction") then
 		function WhisperChat.OnServerInvoke(Player, p1)

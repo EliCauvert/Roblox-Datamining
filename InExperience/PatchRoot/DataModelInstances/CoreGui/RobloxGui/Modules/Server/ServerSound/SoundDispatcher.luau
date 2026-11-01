@@ -28,7 +28,6 @@ if not DefaultServerSoundEvent then
 	DefaultServerSoundEvent.Name = "DefaultServerSoundEvent"
 	DefaultServerSoundEvent.Parent = DefaultSoundEvents
 end
-local RemoteEvent = DefaultServerSoundEvent
 local AddCharacterLoadedEvent = DefaultSoundEvents:FindFirstChild("AddCharacterLoadedEvent")
 
 if not AddCharacterLoadedEvent then
@@ -36,7 +35,6 @@ if not AddCharacterLoadedEvent then
 	AddCharacterLoadedEvent.Name = "AddCharacterLoadedEvent"
 	AddCharacterLoadedEvent.Parent = DefaultSoundEvents
 end
-local RemoteEvent1 = AddCharacterLoadedEvent
 local RemoveCharacterEvent = DefaultSoundEvents:FindFirstChild("RemoveCharacterEvent")
 
 if not RemoveCharacterEvent then
@@ -44,12 +42,10 @@ if not RemoveCharacterEvent then
 	RemoveCharacterEvent.Name = "RemoveCharacterEvent"
 	RemoveCharacterEvent.Parent = DefaultSoundEvents
 end
-local RemoteEvent2 = RemoveCharacterEvent
-
 local function fireDefaultServerSoundEventToClient(Player, p1, p2, p3)
-	-- upvalues: t (copy), RemoteEvent (copy)
+	-- upvalues: t (copy), DefaultServerSoundEvent (copy)
 	if t[Player] then
-		RemoteEvent:FireClient(Player, p1, p2, p3)
+		DefaultServerSoundEvent:FireClient(Player, p1, p2, p3)
 	end
 end
 
@@ -71,7 +67,7 @@ if not SoundDispatcher then
 	SoundDispatcher.Parent = DefaultSoundEvents
 end
 SoundDispatcher.Event:Connect(fireDefaultServerSoundEventToClient)
-RemoteEvent.OnServerEvent:Connect(function() end)
-RemoteEvent1.OnServerEvent:Connect(addCharacterLoaded)
-RemoteEvent2.OnServerEvent:Connect(removeCharacter)
+DefaultServerSoundEvent.OnServerEvent:Connect(function() end)
+AddCharacterLoadedEvent.OnServerEvent:Connect(addCharacterLoaded)
+RemoveCharacterEvent.OnServerEvent:Connect(removeCharacter)
 Players.PlayerRemoving:Connect(removeCharacter)

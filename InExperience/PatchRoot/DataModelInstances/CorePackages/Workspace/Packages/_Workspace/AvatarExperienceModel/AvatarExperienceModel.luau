@@ -6,6 +6,7 @@ local _ = require(script.Types.ItemExperienceData)
 local _ = require(script.Types.AXItemInfo)
 local _ = require(script.Types.AXCollectibleItemInfo)
 local _ = require(script.Types.AXCollectibleInstance)
+local _ = require(script.Types.WidgetContentTypes)
 
 return {
 	Constants = require(script.Constants),

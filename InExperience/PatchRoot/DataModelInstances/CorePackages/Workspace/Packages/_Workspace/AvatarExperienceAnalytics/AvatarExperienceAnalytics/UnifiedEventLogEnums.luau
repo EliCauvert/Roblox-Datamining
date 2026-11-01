@@ -1,18 +1,8 @@
-﻿return {
-	MarketplaceUnifiedAction = {
-		UNDEFINED_ACTION = 0,
-		UI_ELEMENT_CLICK = 1,
-		ITEM_IMPRESSION = 2,
-		ITEM_SELECTED = 3,
-		ITEM_DESELECTED = 4,
-		PURCHASE_ATTEMPT = 5,
-		PURCHASE_SUCCESS = 6,
-		WIDGET_IMPRESSION = 7,
-		WIDGET_LOADED = 8,
-		UI_ELEMENT_IMPRESSION = 9,
-		PAGE_VIEW = 10,
-		PAGE_EXIT = 11
-	},
+﻿local UnifiedEventTypesModule = require(script.Parent.Generated.UnifiedEventTypes)
+
+return {
+	MarketplaceUnifiedAction = UnifiedEventTypesModule.MarketplaceUnifiedAction,
+	MarketplaceUnifiedActionNumbers = UnifiedEventTypesModule.MarketplaceUnifiedActionNumbers,
 	MarketplaceUnifiedItemType = {
 		UNDEFINED_ITEM_TYPE = 0,
 		ASSET = 1,

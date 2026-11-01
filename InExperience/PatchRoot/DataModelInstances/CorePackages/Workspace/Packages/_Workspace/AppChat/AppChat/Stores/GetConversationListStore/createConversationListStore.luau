@@ -97,15 +97,12 @@ return function(p3, p4)
 		if FFlagAppChatAnyServerSideConversationSearchModule then
 			Conversations = excludeSearchIntroduced(Conversations)
 		end
-		local Conversations1 = nil
 		if FFlagAppChatDerivedConversationLatestActivityModule then
 			sortByLatestActivity(Conversations, p4, p5)
-			Conversations1 = Conversations
 		else
 			table.sort(Conversations, compareByServerLastUpdated)
-			Conversations1 = Conversations
 		end
-		local ConversationIdsModule = GetConversationIdsModule(Conversations1)
+		local ConversationIdsModule = GetConversationIdsModule(Conversations)
 		
 		if Signal(p5) ~= true or v1 == nil then
 			v1 = ConversationIdsModule

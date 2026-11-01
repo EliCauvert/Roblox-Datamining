@@ -284,21 +284,19 @@ function self.new(p2)
 		end
 		if typeof(Actual) == "table" and Actual ~= nil and typeof(Expected) == "table" and Expected ~= nil and Array.indexOf(Object.keys(Actual), "stack") ~= -1 and InstanceOfModule(Actual, ErrorModule) and Array.indexOf(Object.keys(Expected), "stack") ~= -1 and InstanceOfModule(Expected, ErrorModule) then
 			local Actual1 = Actual
-			local t = {}
+			Actual = {}
 			
 			for _, value in Object.keys(Actual1) do
-				t[value] = Actual1[value]
+				Actual[value] = Actual1[value]
 			end
-			t.message = Actual1.message
-			Actual = t
+			Actual.message = Actual1.message
 			local Expected1 = Expected
-			local t1 = {}
+			Expected = {}
 			
 			for _, value1 in Object.keys(Expected1) do
-				t1[value1] = Expected1[value1]
+				Expected[value1] = Expected1[value1]
 			end
-			t1.message = Expected1.message
-			Expected = t1
+			Expected.message = Expected1.message
 		end
 		if Operator == "deepStrictEqual" or Operator == "strictEqual" then
 			self1 = setmetatable(ErrorModule.new(createErrDiff(Actual, Expected, Operator)), self)
@@ -326,7 +324,7 @@ function self.new(p2)
 			end
 			self1 = if #List == 1 then setmetatable(ErrorModule.new(("%s%s%s"):format(Entry, if string.len(List[1]) > 5 then "\n\n" else " ", List[1])), self) else setmetatable(ErrorModule.new(("%s\n\n%s\n"):format(Entry, Array.join(List, "\n"))), self)
 		else
-			local Message1 = InspectFunction(Actual, {
+			local InspectResult = InspectFunction(Actual, {
 				compact = false,
 				customInspect = false,
 				depth = 1000,
@@ -336,7 +334,7 @@ function self.new(p2)
 				sorted = true,
 				getters = true
 			})
-			local Text = InspectFunction(Expected, {
+			local InspectResult1 = InspectFunction(Expected, {
 				compact = false,
 				customInspect = false,
 				depth = 1000,
@@ -348,32 +346,32 @@ function self.new(p2)
 			})
 			local Entry1 = config1[tostring(Operator)]
 			
-			if Operator == "notDeepEqual" and Message1 == Text then
-				local Text1: string = ("%s\n\n%s"):format(Entry1, Message1)
+			if Operator == "notDeepEqual" and InspectResult == InspectResult1 then
+				local Text: string = ("%s\n\n%s"):format(Entry1, InspectResult)
 				
-				if string.len(Text1) > 1024 then
-					Text1 = ("%s..."):format(StringModule.slice(Text1, 0, 1021))
+				if string.len(Text) > 1024 then
+					Text = ("%s..."):format(StringModule.slice(Text, 0, 1021))
 				end
-				self1 = setmetatable(ErrorModule.new(Text1), self)
+				self1 = setmetatable(ErrorModule.new(Text), self)
 			else
-				if string.len(Message1) > 512 then
-					Message1 = ("%s..."):format(StringModule.slice(Message1, 0, 509))
+				if string.len(InspectResult) > 512 then
+					InspectResult = ("%s..."):format(StringModule.slice(InspectResult, 0, 509))
 				end
-				if string.len(Text) > 512 then
-					Text = ("%s..."):format(StringModule.slice(Text, 0, 509))
+				if string.len(InspectResult1) > 512 then
+					InspectResult1 = ("%s..."):format(StringModule.slice(InspectResult1, 0, 509))
 				end
 				if Operator == "deepEqual" then
-					Message1 = ("%s\n\n%s\n\nshould loosely deep-equal\n\n"):format(Entry1, Message1)
+					InspectResult = ("%s\n\n%s\n\nshould loosely deep-equal\n\n"):format(Entry1, InspectResult)
 				else
 					local Entry = config1[("%sUnequal"):format((tostring(Operator)))]
 					
 					if BooleanModule.toJSBoolean(Entry) then
-						Message1 = ("%s\n\n%s\n\nshould not loosely deep-equal\n\n"):format(Entry, Message1)
+						InspectResult = ("%s\n\n%s\n\nshould not loosely deep-equal\n\n"):format(Entry, InspectResult)
 					else
-						Text = (" %s %s"):format(tostring(Operator), Text)
+						InspectResult1 = (" %s %s"):format(tostring(Operator), InspectResult1)
 					end
 				end
-				self1 = setmetatable(ErrorModule.new(("%s%s"):format(Message1, Text)), self)
+				self1 = setmetatable(ErrorModule.new(("%s%s"):format(InspectResult, InspectResult1)), self)
 			end
 		end
 	else

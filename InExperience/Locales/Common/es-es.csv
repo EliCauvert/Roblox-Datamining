@@ -2523,7 +2523,7 @@ Feature.Build.Notification.Title.NeedInput,La compilación necesita tu participa
 Feature.Build.Placeholder.DescribeProduct,Describe lo que quieres vender
 Feature.Build.Placeholder.DescribeProductUpdate,Describe una actualización
 Feature.Build.Placeholder.InternalSpec,internal_code
-Feature.Build.Prompt.CreateDeveloperProduct,"Ayúdame a crear un producto de desarrollador, integrarlo en el juego, verificar y publicar los cambios y ponerlo a la venta."
+Feature.Build.Prompt.CreateDeveloperProduct,"Revisa mi juego y sugiere el mejor objeto que pueda vender para ganar Robux. ¿Qué sería más adecuado para mi juego: una compra única o un objeto que los jugadores puedan comprar de nuevo, como un potenciador? Explica por qué."
 Feature.Build.Title.AdActive,La campaña de anuncios está activa
 Feature.Build.Title.AdCampaignDuration,Campaña publicitaria de {durationDays} días
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} días
@@ -2704,6 +2704,8 @@ Feature.Catalog.Header.InvalidOutfit,Atuendo no válido
 Feature.Catalog.Header.PostAvatar,
 Feature.Catalog.Heading.AvailableItems,Objetos disponibles
 Feature.Catalog.Heading.BuyItem,
+Feature.Catalog.Heading.DescriptionLinkGoToMarketplace,Esto te llevará al Mercado
+Feature.Catalog.Heading.DescriptionLinkResetSearch,Esto restablecerá tu búsqueda actual
 Feature.Catalog.Heading.FreeItemConfirmation,Obtener objeto
 Feature.Catalog.Heading.GoToExperience,¿Unirse a la experiencia?
 Feature.Catalog.Heading.HoldingPolicy,Política de retención
@@ -2779,6 +2781,12 @@ Feature.Catalog.Label.CreatorName,Nombre del creador
 Feature.Catalog.Label.CurrentBalance,Saldo actual:
 Feature.Catalog.Label.CustomizeAvatar,Personalizar el avatar
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,No puedes deshacer esta acción si se elimina.
+Feature.Catalog.Label.DescriptionLinkInvalid,El enlace no es válido
+Feature.Catalog.Label.DescriptionLinkSearchMarketplace,Buscar en Mercado
+Feature.Catalog.Label.DescriptionLinkViewAsset,Ver recurso
+Feature.Catalog.Label.DescriptionLinkViewBundle,Ver paquete
+Feature.Catalog.Label.DescriptionLinkViewCommunity,Ver comunidad
+Feature.Catalog.Label.DescriptionLinkViewCommunityStore,Tienda de la comunidad
 Feature.Catalog.Label.Details,
 Feature.Catalog.Label.DynamicHeads,
 Feature.Catalog.Label.Emissive,Emisivo
@@ -3472,7 +3480,7 @@ Feature.Friends.Text.IsPlaying,está jugando
 Feature.Friends.Text.NoConnections,"Aún no has añadido ninguna conexión. Para empezar, busca y añade conexiones."
 Feature.Friends.Text.NoFriends,"Aún no has añadido ninguna amistad. Para empezar, encuentra y añade tus amigos en Roblox."
 Feature.Friends.Title.TrustedFriendsExpiredLink,El enlace venció
-Feature.Friends.Title.TrustedFriendsInvalidLink,El enlace no es válido
+Feature.Friends.Title.TrustedFriendsInvalidLink,
 Feature.Friends.TrustedConnection.Label.Trusted,Confiable
 Feature.Friends.TrustedFriend.AcceptTrustedRequest,Aceptar como amistad de confianza
 Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,Eliminar de amistad de confianza
@@ -3564,7 +3572,7 @@ Feature.Groups.Action.NotNow,
 Feature.Groups.Action.RemovePrimary,Eliminar grupo principal
 Feature.Groups.Action.SeeAll,
 Feature.Groups.Action.Unfollow,Dejar de seguir
-Feature.Groups.Action.ViewGroup,Ver comunidad
+Feature.Groups.Action.ViewGroup,
 Feature.Groups.Description.JoinGroupPending,Tu solicitud de ingreso está pendiente de revisión por parte de la comunidad.
 Feature.Groups.Description.NotEligibleToJoin,Tu cuenta no puede unirse a esta comunidad.
 Feature.Groups.Description.PremiumMaxGroups,Te uniste al número máximo de comunidades.
@@ -3717,6 +3725,7 @@ Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Compraste {ROBUX_AMOUNT} R
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"¿Confirmas que quieres eliminar este objeto de tu inventario para siempre? Si cambias de opinión, tendrás que volver a obtenerlo en una experiencia."
 Feature.Item.Label.DeleteItemUndercase,Eliminar objeto
 Feature.Landing.Label.PoweredBy,Desarrollado por
+Feature.Leaderboards.Heading.Leaderboard,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,Activar
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,Ayuda a las personas que tienen tu número de teléfono a agregarte como amistad en Roblox.
@@ -4010,7 +4019,9 @@ Feature.PrivateServers.Action.CreatePrivateServer,Crear servidor privado
 Feature.PrivateServers.Action.FreeWithBlackbird,Gratis con Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Las compras de servidores privados no son compatibles en Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,Este juego no es compatible con servidores privados.
+Feature.PrivateServers.Heading.ConfigurePrivateServer,Configurar servidor privado
 Feature.PrivateServers.Label.OwnersServer,Servidor de {displayName}
+Feature.PrivateServers.Label.ServerName,Nombre del servidor:
 Feature.Profile.Action.AboutThisProfile,Acerca de este perfil
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,

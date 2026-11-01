@@ -8,6 +8,7 @@ local UnifiedEventLoggingUtilsModule = require(AvatarExperienceAnalytics.Utils.U
 local SendUnifiedEventLogModule = require(script.Parent.sendUnifiedEventLog)
 local SendUnifiedEventLogForInstanceModule = require(script.Parent.sendUnifiedEventLogForInstance)
 local MapAnalyticsMetadataFieldsModule = require(AvatarExperienceAnalytics.Utils.mapAnalyticsMetadataFields)
+local _ = require(script.Parent.Generated.UnifiedEventTypes)
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local UnifiedSelectionListStoreModule = require(script.Parent.Store.UnifiedSelectionListStore)
 local LastDeferredSingleItemStoreModule = require(script.Parent.Store.LastDeferredSingleItemStore)
@@ -15,9 +16,32 @@ local FFlagAXMISEnableMultiShoppingUnifiedEvents = AvatarExperienceFlagsModule.F
 local FFlagAXFixSingleItemPurchaseWidgetLogging = AvatarExperienceFlagsModule.FFlagAXFixSingleItemPurchaseWidgetLogging
 local FFlagAXFixUnifiedPurchaseFieldLanding = AvatarExperienceFlagsModule.FFlagAXFixUnifiedPurchaseFieldLanding
 local FFlagAXFixDeferredItemIdTypeMatch = AvatarExperienceFlagsModule.FFlagAXFixDeferredItemIdTypeMatch
+local FFlagAXUnifiedEventStrictPayloads = AvatarExperienceFlagsModule.FFlagAXUnifiedEventStrictPayloads
 
-return function(p1)
-	-- upvalues: FFlagAXFixUnifiedPurchaseFieldLanding (copy), MapAnalyticsMetadataFieldsModule (copy), FFlagAXMISEnableMultiShoppingUnifiedEvents (copy), UnifiedSelectionListStoreModule (copy), UnifiedEventLogConstantsModule (copy), FFlagAXFixDeferredItemIdTypeMatch (copy), FFlagAXFixSingleItemPurchaseWidgetLogging (copy), UnifiedEventLogEnumsModule (copy), LastDeferredSingleItemStoreModule (copy), UnifiedEventLoggingUtilsModule (copy), SendUnifiedEventLogModule (copy), CryoModule (copy), CollectionService (copy), SendUnifiedEventLogForInstanceModule (copy)
+local function _(p1, p2)
+	-- upvalues: CryoModule (copy)
+	return CryoModule.Dictionary.join(p2 or {}, p1)
+end
+
+local function getUnsetInstanceFields(Object, List)
+	-- upvalues: UnifiedEventLogConstantsModule (copy)
+	local t = {}
+	
+	if List then
+		for i, value in List do
+			t[i] = value
+		end
+	end
+	for i1 in t do
+		if Object:GetAttribute(UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. i1) ~= nil then
+			t[i1] = nil
+		end
+	end
+	return t
+end
+
+return function(p1, p2)
+	-- upvalues: FFlagAXFixUnifiedPurchaseFieldLanding (copy), MapAnalyticsMetadataFieldsModule (copy), FFlagAXMISEnableMultiShoppingUnifiedEvents (copy), UnifiedSelectionListStoreModule (copy), UnifiedEventLogConstantsModule (copy), FFlagAXFixDeferredItemIdTypeMatch (copy), FFlagAXFixSingleItemPurchaseWidgetLogging (copy), UnifiedEventLogEnumsModule (copy), LastDeferredSingleItemStoreModule (copy), UnifiedEventLoggingUtilsModule (copy), CryoModule (copy), SendUnifiedEventLogModule (copy), FFlagAXUnifiedEventStrictPayloads (copy), CollectionService (copy), SendUnifiedEventLogForInstanceModule (copy), getUnsetInstanceFields (copy)
 	if FFlagAXFixUnifiedPurchaseFieldLanding then
 		p1 = MapAnalyticsMetadataFieldsModule(p1)
 	end
@@ -33,7 +57,8 @@ return function(p1)
 			end
 		end
 		if not FFlagAXFixSingleItemPurchaseWidgetLogging or v1 ~= nil then
-			SendUnifiedEventLogModule((CryoModule.Dictionary.join(UnifiedEventLoggingUtilsModule.getFieldsToSendFromInstanceAttributes(v1), p1)))
+			local JoinResult = CryoModule.Dictionary.join(UnifiedEventLoggingUtilsModule.getFieldsToSendFromInstanceAttributes(v1), p1)
+			SendUnifiedEventLogModule(if FFlagAXUnifiedEventStrictPayloads then CryoModule.Dictionary.join(p2 or {}, JoinResult) else JoinResult)
 			
 			return
 		end
@@ -42,24 +67,25 @@ return function(p1)
 			LastDeferredSingleItemStoreModule.clearSnapshot()
 			
 			if Snapshot then
-				SendUnifiedEventLogModule(CryoModule.Dictionary.join(UnifiedEventLoggingUtilsModule.getFieldsToSendFromInstanceAttributes(Snapshot), p1))
+				local JoinResult = CryoModule.Dictionary.join(UnifiedEventLoggingUtilsModule.getFieldsToSendFromInstanceAttributes(Snapshot), p1)
+				SendUnifiedEventLogModule(if FFlagAXUnifiedEventStrictPayloads then CryoModule.Dictionary.join(p2 or {}, JoinResult) else JoinResult)
 				
 				return
 			end
 		end
-		SendUnifiedEventLogModule(p1)
+		SendUnifiedEventLogModule(if FFlagAXUnifiedEventStrictPayloads then CryoModule.Dictionary.join(p2 or {}, p1) else p1)
 		
 		return
 	else
 		local Tagged = CollectionService:GetTagged(UnifiedEventLogConstantsModule.LAST_ACTIVATED_TAG_NAME)
 		
 		if #Tagged <= 0 then
-			SendUnifiedEventLogModule(p1)
+			SendUnifiedEventLogModule(if FFlagAXUnifiedEventStrictPayloads then CryoModule.Dictionary.join(p2 or {}, p1) else p1)
 			
 			return
 		end
 		for _, value1 in Tagged do
-			SendUnifiedEventLogForInstanceModule(value1, p1, {
+			SendUnifiedEventLogForInstanceModule(value1, if FFlagAXUnifiedEventStrictPayloads then CryoModule.Dictionary.join(getUnsetInstanceFields(value1, p2), p1) else p1, {
 				includeScreenSize = true,
 				includeElementSizeAndPosition = true
 			})

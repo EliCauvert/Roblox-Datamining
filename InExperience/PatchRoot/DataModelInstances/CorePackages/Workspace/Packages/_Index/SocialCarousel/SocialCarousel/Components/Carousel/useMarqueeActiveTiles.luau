@@ -118,11 +118,10 @@ return {
 			if ResolveActiveTileIdResult == nil then
 				Current1 = nil
 			else
-				local Id = ResolveActiveTileIdResult
 				Current1 = nil
 				
 				for i, tile in ipairs(Tiles) do
-					if tile.id == Id then
+					if tile.id == ResolveActiveTileIdResult then
 						Current1 = i
 						break
 					end

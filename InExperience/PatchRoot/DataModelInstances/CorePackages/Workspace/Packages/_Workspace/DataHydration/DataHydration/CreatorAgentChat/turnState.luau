@@ -89,34 +89,33 @@ end
 local function appendMessageContent(Tbl, List, Key, p2)
 	local Copy = table.clone(Tbl)
 	local Entry = Copy[Key]
-	local List2 = nil
+	local List1 = nil
 	
 	if Entry == nil then
-		List2 = {}
+		List1 = {}
 	else
-		local List1 = {}
+		List1 = {}
 		
 		for _, value in Entry do
 			table.insert(List1, value)
 		end
-		List2 = List1
 	end
-	table.insert(List2, p2)
-	Copy[Key] = List2
+	table.insert(List1, p2)
+	Copy[Key] = List1
 	
 	for _, value1 in List do
 		if value1 == Key then
 			return Copy, List
 		end
 	end
-	local List3 = {}
+	local List2 = {}
 	
 	for _, value2 in List do
-		table.insert(List3, value2)
+		table.insert(List2, value2)
 	end
-	table.insert(List3, Key)
+	table.insert(List2, Key)
 	
-	return Copy, List3
+	return Copy, List2
 end
 
 local function buildActivityItems(ActivitySlots, ToolCalls)
@@ -431,20 +430,19 @@ local function applyToolCallContentChunk(EmptyTurnState, p7, p8)
 	local NoToolCall = ToolCall == nil
 	local Config = if ToolCall == nil then { toolCallId = ToolCallId } else table.clone(ToolCall)
 	local Content1 = Config.content
-	local Content2 = nil
+	local List = nil
 	
 	if Content1 == nil then
-		Content2 = {}
+		List = {}
 	else
-		local List = {}
+		List = {}
 		
 		for _, value in Content1 do
 			table.insert(List, value)
 		end
-		Content2 = List
 	end
-	table.insert(Content2, Content)
-	Config.content = Content2
+	table.insert(List, Content)
+	Config.content = List
 	local Copy = table.clone(EmptyTurnState.toolCalls)
 	Copy[ToolCallId] = Config
 	EmptyTurnState.toolCalls = Copy

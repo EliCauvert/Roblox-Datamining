@@ -32,17 +32,13 @@ local _ = function(Callback)
 	end
 	local CallbackResult = Callback()
 	local Access = CallbackResult.access
-	local v2 = v1
-	local v3 = nil
+	local AccessResponseEnum = v1
 	
-	if v2 then
-		v3 = v2
-	else
-		local AccessResponseEnum = require(CorePackages.Workspace.Packages.AccountUpgrade.Eligibility).AccessResponseEnum
+	if not AccessResponseEnum then
+		AccessResponseEnum = require(CorePackages.Workspace.Packages.AccountUpgrade.Eligibility).AccessResponseEnum
 		v1 = AccessResponseEnum
-		v3 = AccessResponseEnum
 	end
-	if Access == v3.Denied then
+	if Access == AccessResponseEnum.Denied then
 		self[Callback] = CallbackResult
 	end
 	return CallbackResult
@@ -62,31 +58,23 @@ return function(p1, p2): boolean
 	else
 		local CallbackResult = Callback()
 		local Access = CallbackResult.access
-		local v2 = v1
-		local v3 = nil
+		local AccessResponseEnum = v1
 		
-		if v2 then
-			v3 = v2
-		else
-			local AccessResponseEnum = require(CorePackages.Workspace.Packages.AccountUpgrade.Eligibility).AccessResponseEnum
+		if not AccessResponseEnum then
+			AccessResponseEnum = require(CorePackages.Workspace.Packages.AccountUpgrade.Eligibility).AccessResponseEnum
 			v1 = AccessResponseEnum
-			v3 = AccessResponseEnum
 		end
-		if Access == v3.Denied then
+		if Access == AccessResponseEnum.Denied then
 			self[Callback] = CallbackResult
 		end
 		SelfEntry1 = CallbackResult
 	end
 	local Access1 = SelfEntry1.access
-	local v4 = v1
-	local v5 = nil
+	local AccessResponseEnum1 = v1
 	
-	if v4 then
-		v5 = v4
-	else
-		local AccessResponseEnum = require(CorePackages.Workspace.Packages.AccountUpgrade.Eligibility).AccessResponseEnum
-		v1 = AccessResponseEnum
-		v5 = AccessResponseEnum
+	if not AccessResponseEnum1 then
+		AccessResponseEnum1 = require(CorePackages.Workspace.Packages.AccountUpgrade.Eligibility).AccessResponseEnum
+		v1 = AccessResponseEnum1
 	end
-	return Access1 == v5.Denied
+	return Access1 == AccessResponseEnum1.Denied
 end

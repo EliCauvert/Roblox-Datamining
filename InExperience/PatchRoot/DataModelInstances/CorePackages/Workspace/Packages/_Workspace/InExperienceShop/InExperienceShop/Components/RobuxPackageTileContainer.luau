@@ -23,6 +23,7 @@ local MockUserOwnsGamePassModule = require(InExperienceShop.Mocks.MockUserOwnsGa
 local RobuxPackageTileModule = require(InExperienceShop.Components.RobuxPackageTile)
 local ShopDebugLoggerModule = require(InExperienceShop.Internal.ShopDebugLogger)
 local GetInExperienceShopStoreModule = require(InExperienceShop.Stores.getInExperienceShopStore)
+local ToUnifiedCategoryIdModule = require(InExperienceShop.Analytics.toUnifiedCategoryId)
 local GetRobuxPackageBonusPresentationModule = require(InExperienceShop.Utils.getRobuxPackageBonusPresentation)
 local PromoteBonusRobuxPackageToTopPicksModule = require(InExperienceShop.Api.promoteBonusRobuxPackageToTopPicks)
 local RedeemBonusTokenModule = require(InExperienceShop.Api.redeemBonusToken)
@@ -33,7 +34,7 @@ local function _(p1): boolean
 end
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: ReactModule (copy), SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), PromoteBonusRobuxPackageToTopPicksModule (copy), FFlagEnableBonusJwtInShop (copy), GetRobuxPackageBonusPresentationModule (copy), FFlagHideBonusInShopWhenNotClaimableModule (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (copy), Parent (copy), FFlagEnableCategoryLoggingInShopModule (copy), SessionService (copy), ShopDebugLoggerModule (copy), FFlagShopUseMockUserOwnsGamePassModule (copy), MockUserOwnsGamePassModule (copy), UserOwnsGamePassHttpModule (copy), FIntShopOwnershipFetchMaxAttemptsModule (copy), FFlagRefetchRobuxWidgetAfterPurchaseModule (copy), FFlagSkipPaymentSessionForPlainRobuxModule (copy), FFlagShopListenNativePurchaseFinishedModule (copy), FFlagShopRobuxPurchaseCompletionModalModule (copy), PurchasePromptModule (copy), FFlagEnableShopRobuxBuyTelemetryModule (copy), InExperienceShop (copy), RedeemBonusTokenModule (copy), PromiseModule (copy), GetBlockRobuxTileClickInShopModule (copy), View (copy), RobuxPackageTileModule (copy)
+	-- upvalues: ReactModule (copy), SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), PromoteBonusRobuxPackageToTopPicksModule (copy), FFlagEnableBonusJwtInShop (copy), GetRobuxPackageBonusPresentationModule (copy), FFlagHideBonusInShopWhenNotClaimableModule (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (copy), Parent (copy), ToUnifiedCategoryIdModule (copy), FFlagEnableCategoryLoggingInShopModule (copy), SessionService (copy), ShopDebugLoggerModule (copy), FFlagShopUseMockUserOwnsGamePassModule (copy), MockUserOwnsGamePassModule (copy), UserOwnsGamePassHttpModule (copy), FIntShopOwnershipFetchMaxAttemptsModule (copy), FFlagRefetchRobuxWidgetAfterPurchaseModule (copy), FFlagSkipPaymentSessionForPlainRobuxModule (copy), FFlagShopListenNativePurchaseFinishedModule (copy), FFlagShopRobuxPurchaseCompletionModalModule (copy), PurchasePromptModule (copy), FFlagEnableShopRobuxBuyTelemetryModule (copy), InExperienceShop (copy), RedeemBonusTokenModule (copy), PromiseModule (copy), GetBlockRobuxTileClickInShopModule (copy), View (copy), RobuxPackageTileModule (copy)
 	local Pkg = Frame.pkg
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetInExperienceShopStoreModule)
@@ -83,18 +84,19 @@ return ReactModule.memo(function(Frame)
 	local HasBonusItem = RobuxPackageBonusPresentationModule.hasBonusItem
 	local NoFFlagHideBonusInShopWhenNotClaimableModule: boolean = HasBonusItem and (not FFlagHideBonusInShopWhenNotClaimableModule or (if PaymentSessionId == nil then BonusJwt ~= nil and BonusJwt ~= "" else PaymentSessionId ~= "" or BonusJwt ~= nil and BonusJwt ~= ""))
 	ReactModule.useEffect(function()
-		-- upvalues: FFlagEnableInExperienceShopUnifiedLoggingModule (upval), Parent (upval), Pkg (copy), ProductId (copy), Frame (copy), FFlagEnableCategoryLoggingInShopModule (upval), UseRefResult (copy), SessionService (upval)
+		-- upvalues: FFlagEnableInExperienceShopUnifiedLoggingModule (upval), Parent (upval), Pkg (copy), ProductId (copy), ToUnifiedCategoryIdModule (upval), Frame (copy), FFlagEnableCategoryLoggingInShopModule (upval), UseRefResult (copy), SessionService (upval)
 		if FFlagEnableInExperienceShopUnifiedLoggingModule then
 			task.defer(function()
-				-- upvalues: Parent (upval), Pkg (upval), ProductId (upval), Frame (upval), FFlagEnableCategoryLoggingInShopModule (upval), UseRefResult (upval), SessionService (upval)
+				-- upvalues: Parent (upval), Pkg (upval), ProductId (upval), ToUnifiedCategoryIdModule (upval), Frame (upval), FFlagEnableCategoryLoggingInShopModule (upval), UseRefResult (upval), SessionService (upval)
 				local AvatarExperienceAnalyticsModule = require(Parent.AvatarExperienceAnalytics)
 				local MarketplaceUnifiedItemType = AvatarExperienceAnalyticsModule.UnifiedEventLogEnums.MarketplaceUnifiedItemType
+				local FFlagAXUnifiedEventStrictPayloads = AvatarExperienceAnalyticsModule.Flags.FFlagAXUnifiedEventStrictPayloads
 				local HasBonusItem = Pkg.bonusItem ~= nil
 				AvatarExperienceAnalyticsModule.addUnifiedEventLogging(UseRefResult, {
 					universeId = game.GameId,
-					itemId = if ProductId == nil then Pkg.id else ProductId,
+					itemId = if FFlagAXUnifiedEventStrictPayloads then tostring(if ProductId == nil then Pkg.id else ProductId) elseif ProductId == nil then Pkg.id else ProductId,
 					itemType = if HasBonusItem then MarketplaceUnifiedItemType.ROBUX_WITH_BONUS else MarketplaceUnifiedItemType.ROBUX,
-					categoryId = Frame.categoryId,
+					categoryId = if FFlagAXUnifiedEventStrictPayloads then ToUnifiedCategoryIdModule(Frame.categoryId) else Frame.categoryId,
 					categoryType = Frame.categoryType,
 					gridPositionRow = Frame.gridPositionRow,
 					gridPositionColumn = Frame.gridPositionColumn,

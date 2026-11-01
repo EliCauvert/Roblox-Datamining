@@ -30,9 +30,8 @@ return function(p1)
 	-- upvalues: ScrollAlignmentModule (copy), ReachedThresholdModule (copy), Frozen (copy), TypesModule (copy), FFlagViewRecyclerReact08 (copy)
 	local Layout = p1.layout
 	local Overscan = p1.overscan or 1
-	local Insets1: boolean = Overscan >= 0 and Overscan % 1 == 0
-	assert(Insets1, "Virtualizer: overscan must be a non-negative integer")
-	local Overscan1: number = Overscan
+	local Insets: boolean = Overscan >= 0 and Overscan % 1 == 0
+	assert(Insets, "Virtualizer: overscan must be a non-negative integer")
 	local ContentAlignment = p1.contentAlignment or ScrollAlignmentModule.Start
 	local EndThreshold = p1.endThreshold
 	local Center = ContentAlignment
@@ -42,8 +41,8 @@ return function(p1)
 	if EndThreshold ~= nil then
 		ReachedThresholdModule.validate(EndThreshold, "Virtualizer: end threshold")
 	end
-	local Insets = 0
-	Insets1 = 0
+	Insets = 0
+	local Insets1 = 0
 	ClampedValue = 0
 	local Size = 0
 	local Size1 = 0
@@ -137,10 +136,10 @@ return function(p1)
 			end
 		end,
 		setOverscan = function(p2)
-			-- upvalues: Overscan1 (ref)
+			-- upvalues: Overscan (ref)
 			local P12 = p2 or 1
 			assert(P12 >= 0 and P12 % 1 == 0, "Virtualizer: overscan must be a non-negative integer")
-			Overscan1 = P12
+			Overscan = P12
 		end,
 		setContentAlignment = function(p2): boolean
 			-- upvalues: ScrollAlignmentModule (upval), ContentAlignment (ref), ContentLength (ref), v1 (ref), Layout (ref), Size (ref), Insets (ref), Insets1 (ref)
@@ -190,10 +189,10 @@ return function(p1)
 		end,
 		refresh = refresh,
 		updateRanges = function()
-			-- upvalues: ClampedValue (ref), Size (ref), Insets (ref), v1 (ref), Insets1 (ref), Layout (ref), TypesModule (upval), Frozen (upval), Overscan1 (ref), Frozen1 (ref), Frozen2 (ref)
+			-- upvalues: ClampedValue (ref), Size (ref), Insets (ref), v1 (ref), Insets1 (ref), Layout (ref), TypesModule (upval), Frozen (upval), Overscan (ref), Frozen1 (ref), Frozen2 (ref)
 			local ClampedValueDelta = ClampedValue + Insets - v1
 			local IntersectingIndexRange = Layout.getIntersectingIndexRange(ClampedValueDelta, (math.max(ClampedValueDelta, ClampedValue + Size - Insets1 - v1)))
-			local Frozen3 = if TypesModule.isIndexRangeEmpty(IntersectingIndexRange) then Frozen else Layout.expandIndexRange(IntersectingIndexRange, Overscan1, Overscan1)
+			local Frozen3 = if TypesModule.isIndexRangeEmpty(IntersectingIndexRange) then Frozen else Layout.expandIndexRange(IntersectingIndexRange, Overscan, Overscan)
 			local Frozen4 = Frozen1
 			local Inverted = not (Frozen4.firstIndex == IntersectingIndexRange.firstIndex and Frozen4.lastIndex == IntersectingIndexRange.lastIndex)
 			local Frozen5 = Frozen2

@@ -137,10 +137,8 @@ spawn(function()
 						NewResult = Module.new(Player1)
 						NewResults[Player1] = NewResult
 					end
-					local NewResult1 = NewResult
-					
-					if NewResult1 then
-						NewResult1:setGroupData(value)
+					if NewResult then
+						NewResult:setGroupData(value)
 					end
 				end
 			end
@@ -156,10 +154,8 @@ spawn(function()
 					NewResult = Module.new(Player)
 					NewResults[Player] = NewResult
 				end
-				local NewResult2 = NewResult
-				
-				if NewResult2 then
-					NewResult2:setGroupData(Entry)
+				if NewResult then
+					NewResult:setGroupData(Entry)
 				end
 			end
 		end
@@ -178,10 +174,8 @@ coroutine.wrap(function()
 				NewResult = Module.new(Player)
 				NewResults[Player] = NewResult
 			end
-			local NewResult1 = NewResult
-			
-			if NewResult1 then
-				NewResult1:setCanManage(p4)
+			if NewResult then
+				NewResult:setCanManage(p4)
 			end
 		end
 	end)
@@ -202,10 +196,8 @@ if FFlagInExperienceUserProfileSettingsEnabledModule then
 					NewResult = Module.new(Player)
 					NewResults[Player] = NewResult
 				end
-				local NewResult1 = NewResult
-				
-				if NewResult1 then
-					NewResult1:setProfileSettings(ProfileSettings)
+				if NewResult then
+					NewResult:setProfileSettings(ProfileSettings)
 				end
 				if FFlagEnableVerifiedBadgeStore and ProfileSettings.isInExperienceNameEnabled ~= nil then
 					VerifiedBadgeDisplayStore.get().setBadgeVisibility(Player.UserId, not ProfileSettings.isInExperienceNameEnabled)
@@ -236,10 +228,8 @@ local _ = function(p3)
 			NewResult = Module.new(Player)
 			NewResults[Player] = NewResult
 		end
-		local NewResult1 = NewResult
-		
-		if NewResult1 then
-			local GroupDataAsync = NewResult1:getGroupDataAsync()
+		if NewResult then
+			local GroupDataAsync = NewResult:getGroupDataAsync()
 			
 			if GroupDataAsync and GroupDataAsync[p3] then
 				return true
@@ -262,10 +252,8 @@ local list = {
 			NewResult = Module.new(Player)
 			NewResults[Player] = NewResult
 		end
-		local NewResult1 = NewResult
-		
-		if NewResult1 then
-			local GroupDataAsync = NewResult1:getGroupDataAsync()
+		if NewResult then
+			local GroupDataAsync = NewResult:getGroupDataAsync()
 			
 			if GroupDataAsync and GroupDataAsync[v1] then
 				return true
@@ -281,10 +269,8 @@ local list = {
 			NewResult = Module.new(Player)
 			NewResults[Player] = NewResult
 		end
-		local NewResult1 = NewResult
-		
-		if NewResult1 then
-			local GroupDataAsync = NewResult1:getGroupDataAsync()
+		if NewResult then
+			local GroupDataAsync = NewResult:getGroupDataAsync()
 			
 			if GroupDataAsync and GroupDataAsync[v2] then
 				return true
@@ -300,10 +286,8 @@ local list = {
 			NewResult = Module.new(Player)
 			NewResults[Player] = NewResult
 		end
-		local NewResult1 = NewResult
-		
-		if NewResult1 then
-			local GroupDataAsync = NewResult1:getGroupDataAsync()
+		if NewResult then
+			local GroupDataAsync = NewResult:getGroupDataAsync()
 			
 			if GroupDataAsync and GroupDataAsync[v3] then
 				return true
@@ -319,10 +303,8 @@ local list = {
 			NewResult = Module.new(Player)
 			NewResults[Player] = NewResult
 		end
-		local NewResult1 = NewResult
-		
-		if NewResult1 then
-			local GroupDataAsync = NewResult1:getGroupDataAsync()
+		if NewResult then
+			local GroupDataAsync = NewResult:getGroupDataAsync()
 			
 			if GroupDataAsync and GroupDataAsync[v4] then
 				return true
@@ -358,10 +340,8 @@ local _ = function()
 				NewResult = Module.new(Player)
 				NewResults[Player] = NewResult
 			end
-			local NewResult1 = NewResult
-			
-			if NewResult1 then
-				local GroupDataAsync = NewResult1:getGroupDataAsync()
+			if NewResult then
+				local GroupDataAsync = NewResult:getGroupDataAsync()
 				
 				if GroupDataAsync and GroupDataAsync[v5] then
 					return true
@@ -395,10 +375,8 @@ local function IsPlayerInExperienceNameEnabled(Player)
 		NewResult = Module.new(Player)
 		NewResults[Player] = NewResult
 	end
-	local NewResult1 = NewResult
-	
-	if NewResult1 then
-		local ProfileSettingsAsync = NewResult1:getProfileSettingsAsync()
+	if NewResult then
+		local ProfileSettingsAsync = NewResult:getProfileSettingsAsync()
 		
 		if ProfileSettingsAsync then
 			return ProfileSettingsAsync.isInExperienceNameEnabled
@@ -429,10 +407,8 @@ function t.IsPlayerAdminAsync(Player): boolean
 		NewResult = Module.new(Player)
 		NewResults[Player] = NewResult
 	end
-	local NewResult1 = NewResult
-	
-	if NewResult1 then
-		local GroupDataAsync = NewResult1:getGroupDataAsync()
+	if NewResult then
+		local GroupDataAsync = NewResult:getGroupDataAsync()
 		
 		if GroupDataAsync and GroupDataAsync[v5] then
 			return true
@@ -451,10 +427,8 @@ function t.IsPlayerInternAsync(Player): boolean
 		NewResult = Module.new(Player)
 		NewResults[Player] = NewResult
 	end
-	local NewResult1 = NewResult
-	
-	if NewResult1 then
-		local GroupDataAsync = NewResult1:getGroupDataAsync()
+	if NewResult then
+		local GroupDataAsync = NewResult:getGroupDataAsync()
 		
 		if GroupDataAsync and GroupDataAsync[v6] then
 			return true
@@ -473,10 +447,8 @@ function t.IsPlayerStarAsync(Player): boolean
 		NewResult = Module.new(Player)
 		NewResults[Player] = NewResult
 	end
-	local NewResult1 = NewResult
-	
-	if NewResult1 then
-		local GroupDataAsync = NewResult1:getGroupDataAsync()
+	if NewResult then
+		local GroupDataAsync = NewResult:getGroupDataAsync()
 		
 		if GroupDataAsync and GroupDataAsync[v7] then
 			return true
@@ -506,10 +478,8 @@ if game.CreatorType == Enum.CreatorType.Group then
 			NewResult = Module.new(Player)
 			NewResults[Player] = NewResult
 		end
-		local NewResult1 = NewResult
-		
-		if NewResult1 then
-			local GroupDataAsync = NewResult1:getGroupDataAsync()
+		if NewResult then
+			local GroupDataAsync = NewResult:getGroupDataAsync()
 			
 			if GroupDataAsync and GroupDataAsync[v8] then
 				return true

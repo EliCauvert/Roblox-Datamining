@@ -43,12 +43,13 @@ local FFlagMobileGameJoinCardEDPFromTitleModule = require(GameJoinCard.Flags.FFl
 local FFlagMobileGameJoinCardEDPFromThumbnailModule = require(GameJoinCard.Flags.FFlagMobileGameJoinCardEDPFromThumbnail)
 local MobileGameCardDontShowChatWith = game:DefineFastFlag("MobileGameCardDontShowChatWith", false)
 local FFlagJoinabilityCTARefactor = require(Parent.SharedFlags).FFlagJoinabilityCTARefactor
+local FFlagJoinabilityCTAContextCopy = require(Parent.SharedFlags).FFlagJoinabilityCTAContextCopy
 local _ = require(GameJoinCard.Components.Actions.Types)
 local BuildJoinCardActionsComponentModule = require(GameJoinCard.Components.Actions.buildJoinCardActionsComponent)
 local UserCtaAction = require(Parent.UserCtaCommon).Enums.UserCtaAction
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FFlagMobileGameJoinCardThumbnailModule (copy), FoundationModule (copy), GuiService (copy), FFlagMobileGameJoinCardGamepadSupport (copy), UseGameJoinCardGamepadNavigationFunction (ref), FFlagGameJoinCardOptionalActions (copy), GameJoinCardTTIModule (copy), ViewProfileSourceValues (copy), FFlagMobileGameJoinCardEDPFromThumbnailModule (copy), ViewEDPsourceValues (copy), FFlagMobileGameJoinCardEDPFromTitleModule (copy), FFlagJoinabilityCTARefactor (copy), UserCtaAction (copy), UseJoinCardCtaLoadTimeModule (copy), CtaType (copy), UseLocalizationFunction (copy), Skeleton (copy), AssignPrimaryFocusRefFunction (ref), BuildJoinCardActionsComponentModule (copy), Button (copy), OverlayProvider (copy), Sheet (copy), View (copy), MobileGameJoinCardHideUserAvatar (copy), Image (copy), StateLayerAffordance (copy), MobileGameJoinCardShowExperienceNameOnly (copy), Text (copy), UserTile (copy), LayoutMode (copy), AgeCheckUpsellCTAModule (copy), ButtonVariant (copy), InputSize (copy), MobileGameCardDontShowChatWith (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FFlagMobileGameJoinCardThumbnailModule (copy), FoundationModule (copy), GuiService (copy), FFlagMobileGameJoinCardGamepadSupport (copy), UseGameJoinCardGamepadNavigationFunction (ref), FFlagGameJoinCardOptionalActions (copy), GameJoinCardTTIModule (copy), ViewProfileSourceValues (copy), FFlagMobileGameJoinCardEDPFromThumbnailModule (copy), ViewEDPsourceValues (copy), FFlagMobileGameJoinCardEDPFromTitleModule (copy), FFlagJoinabilityCTARefactor (copy), UserCtaAction (copy), UseJoinCardCtaLoadTimeModule (copy), CtaType (copy), UseLocalizationFunction (copy), Skeleton (copy), AssignPrimaryFocusRefFunction (ref), BuildJoinCardActionsComponentModule (copy), Button (copy), FFlagJoinabilityCTAContextCopy (copy), OverlayProvider (copy), Sheet (copy), View (copy), MobileGameJoinCardHideUserAvatar (copy), Image (copy), StateLayerAffordance (copy), MobileGameJoinCardShowExperienceNameOnly (copy), Text (copy), UserTile (copy), LayoutMode (copy), AgeCheckUpsellCTAModule (copy), ButtonVariant (copy), InputSize (copy), MobileGameCardDontShowChatWith (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local v1 = nil
@@ -83,7 +84,7 @@ return function(p1)
 		end
 	end, {}) else nil
 	local NoUseStateResult: boolean = FFlagMobileGameJoinCardThumbnailModule and (ThumbnailImageUrl ~= nil and not UseStateResult)
-	local NoV42: boolean = if FFlagMobileGameJoinCardThumbnailModule then not UseStateResult and not v1 else not UseStateResult
+	local NoV43: boolean = if FFlagMobileGameJoinCardThumbnailModule then not UseStateResult and not v1 else not UseStateResult
 	ReactModule.useEffect(function()
 		-- upvalues: FFlagGameJoinCardOptionalActions (upval), p1 (copy), GameJoinCardTTIModule (upval)
 		if not FFlagGameJoinCardOptionalActions or not p1.disableAppTelemetry then
@@ -177,7 +178,7 @@ return function(p1)
 				Size = UDim2.new(1, 0, 0, UseTokensResult.Size.Size_600)
 			})
 		else
-			t, v66 = BuildJoinCardActionsComponentModule(PrimaryButtonFocusRef and AssignPrimaryFocusRefFunction(p1.actions, PrimaryButtonFocusRef) or p1.actions, {
+			t, v67 = BuildJoinCardActionsComponentModule(PrimaryButtonFocusRef and AssignPrimaryFocusRefFunction(p1.actions, PrimaryButtonFocusRef) or p1.actions, {
 				playTogether = UseLocalizationResult.playTogether,
 				playTogetherSoon = UseLocalizationResult.playTogetherSoon,
 				differentServer = UseLocalizationResult.differentServer
@@ -250,7 +251,7 @@ return function(p1)
 										ScaleType = Enum.ScaleType.Crop,
 										onLoaded = UseResult1
 									}) else nil,
-									BannerSkeleton = if NoV42 then ReactModule.createElement(Skeleton, { ZIndex = 1, Size = UDim2.fromScale(1, 1) }) else nil
+									BannerSkeleton = if NoV43 then ReactModule.createElement(Skeleton, { ZIndex = 1, Size = UDim2.fromScale(1, 1) }) else nil
 								})
 							})
 						}),
@@ -291,7 +292,7 @@ return function(p1)
 								selectable = (not FFlagGameJoinCardOptionalActions or p1.onViewProfile ~= nil) and nil
 							})
 						}) else nil,
-						CtaContext = if v2 == nil then nil else ReactModule.createElement(View, {
+						CtaContext = if FFlagJoinabilityCTAContextCopy and v2 ~= nil then ReactModule.createElement(View, {
 							tag = "col align-x-center items-center gap-xxsmall size-full-0 auto-y",
 							LayoutOrder = 3
 						}, {
@@ -305,10 +306,10 @@ return function(p1)
 								LayoutOrder = 2,
 								Text = v2.subtitle
 							})
-						}),
+						}) else nil,
 						Buttons = ReactModule.createElement(View, {
 							tag = "col gap-small size-full-0 auto-y",
-							LayoutOrder = if v2 == nil then 3 else 4
+							LayoutOrder = if FFlagJoinabilityCTAContextCopy and v2 ~= nil then 4 else 3
 						}, if FFlagJoinabilityCTARefactor then t else {
 							PrimaryButton = if Flag1 then ReactModule.createElement(AgeCheckUpsellCTAModule, {
 								LayoutOrder = 1,

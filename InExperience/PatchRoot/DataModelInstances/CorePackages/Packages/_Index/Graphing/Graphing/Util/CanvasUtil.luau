@@ -73,13 +73,12 @@ function CanvasUtil.createFunctions(p1, p2, p3, p4, p5, p6)
 		if P3.Direction == TypesModule.DIRECTION_REVERSED then
 			InverseLerpResult = 1 - InverseLerpResult
 		end
-		local InverseLerpResult1: number = InverseLerpResult
-		local InverseLerpResult2 = MathUtilModule.inverseLerp(_Rect1.Min.Y, _Rect1.Max.Y, scaled(Vector.Y, P4))
+		local InverseLerpResult1 = MathUtilModule.inverseLerp(_Rect1.Min.Y, _Rect1.Max.Y, scaled(Vector.Y, P4))
 		
 		if P4.Direction ~= TypesModule.DIRECTION_FORWARD then
-			InverseLerpResult2 = 1 - InverseLerpResult2
+			InverseLerpResult1 = 1 - InverseLerpResult1
 		end
-		return NewFunction(InverseLerpResult1, InverseLerpResult2)
+		return NewFunction(InverseLerpResult, InverseLerpResult1)
 	end
 	
 	local function viewToPlotY(Y: number)
@@ -177,13 +176,12 @@ function CanvasUtil.createFunctions(p1, p2, p3, p4, p5, p6)
 			if P3.Direction == TypesModule.DIRECTION_REVERSED then
 				InverseLerpResult = 1 - InverseLerpResult
 			end
-			local InverseLerpResult1: number = InverseLerpResult
-			local InverseLerpResult2 = MathUtilModule.inverseLerp(_Rect.Min.Y, _Rect.Max.Y, scaled(Vector.Y, P4))
+			local InverseLerpResult1 = MathUtilModule.inverseLerp(_Rect.Min.Y, _Rect.Max.Y, scaled(Vector.Y, P4))
 			
 			if P4.Direction ~= TypesModule.DIRECTION_FORWARD then
-				InverseLerpResult2 = 1 - InverseLerpResult2
+				InverseLerpResult1 = 1 - InverseLerpResult1
 			end
-			return NewFunction(InverseLerpResult1, InverseLerpResult2)
+			return NewFunction(InverseLerpResult, InverseLerpResult1)
 		end,
 		plotToGraphX = function(p7)
 			-- upvalues: MathUtilModule (upval), _Rect (copy), scaled (copy), P3 (ref), TypesModule (upval)

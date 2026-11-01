@@ -9,11 +9,10 @@ local InterventionAnalytics = require(Parent.InterventionShared).InterventionAna
 local UseParsedBadUtterancesFunction = require(Parent.InterventionShared).Hooks.useParsedBadUtterances
 local NewResult = require(Parent.RobloxAppLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
 local FFlagNotApprovedPageIXPExposure = require(Parent.SharedFlags).FFlagNotApprovedPageIXPExposure
-local FFlagScopeBadUtterancePlayerNameToChatDialogsModule = require(Parent.InterventionShared.FFlagScopeBadUtterancePlayerNameToChatDialogs)
 local _ = require(InExperienceIntervention.Utils.Types)
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), FFlagNotApprovedPageIXPExposure (copy), IXPService (copy), AppUserLayers (copy), UseTimeoutInfoBindingFunction (copy), UseParsedBadUtterancesFunction (copy), FFlagScopeBadUtterancePlayerNameToChatDialogsModule (copy), NewResult (copy), GenericInterventionDialog (copy), InterventionAnalytics (copy)
+	-- upvalues: ReactModule (copy), FFlagNotApprovedPageIXPExposure (copy), IXPService (copy), AppUserLayers (copy), UseTimeoutInfoBindingFunction (copy), UseParsedBadUtterancesFunction (copy), NewResult (copy), GenericInterventionDialog (copy), InterventionAnalytics (copy)
 	local ModerationDetail = p1.moderationDetail
 	ReactModule.useEffect(function()
 		-- upvalues: FFlagNotApprovedPageIXPExposure (upval), IXPService (upval), AppUserLayers (upval)
@@ -27,9 +26,7 @@ return ReactModule.memo(function(p1)
 	local ConsequenceTransparencyMessage = ModerationDetail.consequenceTransparencyMessage
 	local InterventionId = ModerationDetail.interventionId
 	local Acknowledgeable = ModerationDetail.acknowledgeable
-	local UseParsedBadUtterancesResult = UseParsedBadUtterancesFunction(ModerationDetail.badUtterances or {}, {
-		shouldAddPlayerName = FFlagScopeBadUtterancePlayerNameToChatDialogsModule
-	})
+	local UseParsedBadUtterancesResult = UseParsedBadUtterancesFunction(ModerationDetail.badUtterances or {}, { shouldAddPlayerName = true })
 	local Joined = table.concat(UseParsedBadUtterancesResult.textItems, "\n")
 	local Joined1 = table.concat(UseParsedBadUtterancesResult.abuseTypes, ", ")
 	

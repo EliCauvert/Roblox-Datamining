@@ -677,8 +677,8 @@ return function(ItemSequence, Predicate)
 							end
 							Balanced.lazy = 0
 						end
-						local Balanced1 = nil
 						local Right4 = nil
+						local Balanced1 = nil
 						if Balanced.left == nil then
 							local Right = Balanced.right
 							Balanced.right = nil
@@ -778,8 +778,8 @@ return function(ItemSequence, Predicate)
 										end
 										SplitResult9.lazy = 0
 									end
-									local Right10 = nil
 									local SplitResult13 = nil
+									local Right10 = nil
 									if SplitResult9.left == nil then
 										local Right = SplitResult9.right
 										SplitResult9.right = nil
@@ -914,8 +914,8 @@ return function(ItemSequence, Predicate)
 										end
 										SplitResult12.lazy = 0
 									end
-									local RemoveFirstResult = nil
 									local BalanceResult = nil
+									local RemoveFirstResult = nil
 									if SplitResult12.left == nil then
 										local Right = SplitResult12.right
 										SplitResult12.right = nil
@@ -996,8 +996,8 @@ return function(ItemSequence, Predicate)
 										end
 										SplitResult2_8.lazy = 0
 									end
-									local Right2 = nil
 									local v2 = nil
+									local Right2 = nil
 									if SplitResult2_8.left == nil then
 										local Right = SplitResult2_8.right
 										SplitResult2_8.right = nil
@@ -1052,8 +1052,8 @@ return function(ItemSequence, Predicate)
 							end
 							SplitResult2_2.lazy = 0
 						end
-						local Right8 = nil
 						local SplitResult6 = nil
+						local Right8 = nil
 						if SplitResult2_2.left == nil then
 							local Right = SplitResult2_2.right
 							SplitResult2_2.right = nil
@@ -1083,23 +1083,22 @@ return function(ItemSequence, Predicate)
 			local Index1 = nil
 			local Left = v1
 			while Left ~= nil do
-				local Node = Left
-				local Lazy = Node.lazy
+				local Lazy = Left.lazy
 				
 				if Lazy ~= 0 then
-					local Left1 = Node.left
+					local Left1 = Left.left
 					
 					if Left1 ~= nil then
 						Left1.index += Lazy
 						Left1.lazy += Lazy
 					end
-					local Right = Node.right
+					local Right = Left.right
 					
 					if Right ~= nil then
 						Right.index += Lazy
 						Right.lazy += Lazy
 					end
-					Node.lazy = 0
+					Left.lazy = 0
 				end
 				if Callback(Left.index) then
 					Index = Left.index

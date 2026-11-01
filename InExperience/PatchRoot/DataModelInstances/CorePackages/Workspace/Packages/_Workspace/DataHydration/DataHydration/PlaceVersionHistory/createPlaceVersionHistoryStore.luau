@@ -65,12 +65,10 @@ return function(p1)
 				Entry = { getIsFetching = Signal, setIsFetching = Signal2 }
 				t[Key] = Entry
 			end
-			local Entry1 = Entry
-			
-			if DataResult == nil or not DataResult.hasMore or DataResult.nextCursor ~= Cursor or Cursor == "" or Entry1.getIsFetching(false) then
+			if DataResult == nil or not DataResult.hasMore or DataResult.nextCursor ~= Cursor or Cursor == "" or Entry.getIsFetching(false) then
 				return ResolveResult
 			else
-				Entry1.setIsFetching(true)
+				Entry.setIsFetching(true)
 				local Promise = FetchPlaceVersionHistoryModule.fetchHistory(Key, config, {
 					cursor = Cursor,
 					pageSize = FetchPlaceVersionHistoryModule.DEFAULT_HISTORY_PAGE_SIZE
@@ -85,8 +83,8 @@ return function(p1)
 					end
 				end)
 				Promise:finally(function()
-					-- upvalues: Entry1 (copy)
-					Entry1.setIsFetching(false)
+					-- upvalues: Entry (copy)
+					Entry.setIsFetching(false)
 				end)
 				
 				return Promise

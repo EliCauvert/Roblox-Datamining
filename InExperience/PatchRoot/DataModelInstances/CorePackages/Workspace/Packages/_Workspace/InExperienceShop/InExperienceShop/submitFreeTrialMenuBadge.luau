@@ -9,13 +9,16 @@ local FIntMaxTrialBadgeImpressionsModule = require(InExperienceShop.Flags.FIntMa
 local FStringTrialBadgeLifecycleKeyModule = require(InExperienceShop.Flags.FStringTrialBadgeLifecycleKey)
 local FIntTrialBadgeCooldownSecondsModule = require(InExperienceShop.Flags.FIntTrialBadgeCooldownSeconds)
 local FFlagTrialNotificationBadgeOnStudioModule = require(InExperienceShop.Flags.FFlagTrialNotificationBadgeOnStudio)
+local FFlagEnableActiveFreeTrialShopMenuBadgeModule = require(InExperienceShop.Flags.FFlagEnableActiveFreeTrialShopMenuBadge)
+local FFlagEnableRedeemedFreeTrialShopMenuBadgeModule = require(InExperienceShop.Flags.FFlagEnableRedeemedFreeTrialShopMenuBadge)
 local _ = require(InExperienceShop.Types)
 local Effect = nil
 local v1 = nil
 local Signal, Signal2 = SignalsModule.createSignal(nil)
 
 local function _(p1): boolean
-	return next(p1.available) ~= nil or next(p1.active) ~= nil
+	-- upvalues: FFlagEnableActiveFreeTrialShopMenuBadgeModule (copy), FFlagEnableRedeemedFreeTrialShopMenuBadgeModule (copy)
+	return next(p1.available) ~= nil or (FFlagEnableActiveFreeTrialShopMenuBadgeModule and next(p1.active) ~= nil or (FFlagEnableRedeemedFreeTrialShopMenuBadgeModule and next(p1.redeemed) ~= nil or false))
 end
 
 local _ = function()
@@ -51,17 +54,17 @@ local _ = function(p1)
 end
 
 local _ = function()
-	-- upvalues: v1 (ref), GetInExperienceShopStoreModule (copy), Effect (ref), SignalsModule (copy), Localization (copy), LocalizationService (copy), Signal2 (copy), NotificationsOrchestratorModule (copy), FFlagTrialNotificationBadgeOnStudioModule (copy), FStringTrialBadgeLifecycleKeyModule (copy), FIntMaxTrialBadgeImpressionsModule (copy), FIntTrialBadgeCooldownSecondsModule (copy), shopMenuBadgeText (copy)
+	-- upvalues: v1 (ref), GetInExperienceShopStoreModule (copy), Effect (ref), SignalsModule (copy), FFlagEnableActiveFreeTrialShopMenuBadgeModule (copy), FFlagEnableRedeemedFreeTrialShopMenuBadgeModule (copy), Localization (copy), LocalizationService (copy), Signal2 (copy), NotificationsOrchestratorModule (copy), FFlagTrialNotificationBadgeOnStudioModule (copy), FStringTrialBadgeLifecycleKeyModule (copy), FIntMaxTrialBadgeImpressionsModule (copy), FIntTrialBadgeCooldownSecondsModule (copy), shopMenuBadgeText (copy)
 	local v2 = v1
 	
 	if v2 == nil then
 		local v3 = false
 		local InExperienceShopStoreModule = GetInExperienceShopStoreModule(false)
 		Effect = SignalsModule.createEffect(function(p1)
-			-- upvalues: InExperienceShopStoreModule (copy), v3 (ref), Localization (upval), LocalizationService (upval), Signal2 (upval), NotificationsOrchestratorModule (upval), FFlagTrialNotificationBadgeOnStudioModule (upval), FStringTrialBadgeLifecycleKeyModule (upval), FIntMaxTrialBadgeImpressionsModule (upval), FIntTrialBadgeCooldownSecondsModule (upval)
+			-- upvalues: InExperienceShopStoreModule (copy), v3 (ref), FFlagEnableActiveFreeTrialShopMenuBadgeModule (upval), FFlagEnableRedeemedFreeTrialShopMenuBadgeModule (upval), Localization (upval), LocalizationService (upval), Signal2 (upval), NotificationsOrchestratorModule (upval), FFlagTrialNotificationBadgeOnStudioModule (upval), FStringTrialBadgeLifecycleKeyModule (upval), FIntMaxTrialBadgeImpressionsModule (upval), FIntTrialBadgeCooldownSecondsModule (upval)
 			local TrialAvailabilities = InExperienceShopStoreModule.getTrialAvailabilities(p1)
 			
-			if not v3 and (next(TrialAvailabilities.available) ~= nil or next(TrialAvailabilities.active) ~= nil) then
+			if not v3 and (next(TrialAvailabilities.available) ~= nil or (FFlagEnableActiveFreeTrialShopMenuBadgeModule and next(TrialAvailabilities.active) ~= nil or (FFlagEnableRedeemedFreeTrialShopMenuBadgeModule and next(TrialAvailabilities.redeemed) ~= nil or false))) then
 				v3 = true
 				Signal2(NotificationsOrchestratorModule.submit({
 					priority = 0,
@@ -132,17 +135,17 @@ return (setmetatable({
 	end
 }, {
 	__call = function(_)
-		-- upvalues: v1 (ref), GetInExperienceShopStoreModule (copy), Effect (ref), SignalsModule (copy), Localization (copy), LocalizationService (copy), Signal2 (copy), NotificationsOrchestratorModule (copy), FFlagTrialNotificationBadgeOnStudioModule (copy), FStringTrialBadgeLifecycleKeyModule (copy), FIntMaxTrialBadgeImpressionsModule (copy), FIntTrialBadgeCooldownSecondsModule (copy), shopMenuBadgeText (copy)
+		-- upvalues: v1 (ref), GetInExperienceShopStoreModule (copy), Effect (ref), SignalsModule (copy), FFlagEnableActiveFreeTrialShopMenuBadgeModule (copy), FFlagEnableRedeemedFreeTrialShopMenuBadgeModule (copy), Localization (copy), LocalizationService (copy), Signal2 (copy), NotificationsOrchestratorModule (copy), FFlagTrialNotificationBadgeOnStudioModule (copy), FStringTrialBadgeLifecycleKeyModule (copy), FIntMaxTrialBadgeImpressionsModule (copy), FIntTrialBadgeCooldownSecondsModule (copy), shopMenuBadgeText (copy)
 		local v2 = v1
 		
 		if v2 == nil then
 			local v3 = false
 			local InExperienceShopStoreModule = GetInExperienceShopStoreModule(false)
 			Effect = SignalsModule.createEffect(function(p1)
-				-- upvalues: InExperienceShopStoreModule (copy), v3 (ref), Localization (upval), LocalizationService (upval), Signal2 (upval), NotificationsOrchestratorModule (upval), FFlagTrialNotificationBadgeOnStudioModule (upval), FStringTrialBadgeLifecycleKeyModule (upval), FIntMaxTrialBadgeImpressionsModule (upval), FIntTrialBadgeCooldownSecondsModule (upval)
+				-- upvalues: InExperienceShopStoreModule (copy), v3 (ref), FFlagEnableActiveFreeTrialShopMenuBadgeModule (upval), FFlagEnableRedeemedFreeTrialShopMenuBadgeModule (upval), Localization (upval), LocalizationService (upval), Signal2 (upval), NotificationsOrchestratorModule (upval), FFlagTrialNotificationBadgeOnStudioModule (upval), FStringTrialBadgeLifecycleKeyModule (upval), FIntMaxTrialBadgeImpressionsModule (upval), FIntTrialBadgeCooldownSecondsModule (upval)
 				local TrialAvailabilities = InExperienceShopStoreModule.getTrialAvailabilities(p1)
 				
-				if not v3 and (next(TrialAvailabilities.available) ~= nil or next(TrialAvailabilities.active) ~= nil) then
+				if not v3 and (next(TrialAvailabilities.available) ~= nil or (FFlagEnableActiveFreeTrialShopMenuBadgeModule and next(TrialAvailabilities.active) ~= nil or (FFlagEnableRedeemedFreeTrialShopMenuBadgeModule and next(TrialAvailabilities.redeemed) ~= nil or false))) then
 					v3 = true
 					Signal2(NotificationsOrchestratorModule.submit({
 						priority = 0,

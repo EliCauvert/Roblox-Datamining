@@ -75,8 +75,8 @@ function ObjectViewport.setupViewportForAsset(p1)
 	if not p1.props.model then return end
 	local Model = p1.props.model:Clone()
 	Model.Parent = p1.worldModelRef:getValue()
-	local V37 = nil
 	local V36 = nil
+	local V37 = nil
 	
 	if Model:IsA("Model") then
 		Model:MoveTo(vector.create(0, 0, 0))

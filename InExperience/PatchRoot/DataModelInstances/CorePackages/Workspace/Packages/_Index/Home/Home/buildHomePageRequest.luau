@@ -1,9 +1,25 @@
-﻿local BuildHomeSystemContextFeaturesModule = require(script:FindFirstAncestor("Home").buildHomeSystemContextFeatures)
+﻿local Home = script:FindFirstAncestor("Home")
+local HttpService = game:GetService("HttpService")
+local BuildHomePromptClientAttributesModule = require(Home.buildHomePromptClientAttributes)
+local BuildHomeSystemContextFeaturesModule = require(Home.buildHomeSystemContextFeatures)
+local FFlagLuaAppSduiHomePromptClientAttributesModule = require(Home.Flags.FFlagLuaAppSduiHomePromptClientAttributes)
+local PromptClientAttributes = if FFlagLuaAppSduiHomePromptClientAttributesModule then "prompt_client_attributes" else nil
 
 local function buildContextualFeatures(p1)
-	-- upvalues: BuildHomeSystemContextFeaturesModule (copy)
+	-- upvalues: BuildHomeSystemContextFeaturesModule (copy), FFlagLuaAppSduiHomePromptClientAttributesModule (copy), BuildHomePromptClientAttributesModule (copy), HttpService (copy), PromptClientAttributes (copy)
 	local HomeSystemContextFeaturesModule = BuildHomeSystemContextFeaturesModule()
 	
+	if FFlagLuaAppSduiHomePromptClientAttributesModule then
+		local HomePromptClientAttributesModule = BuildHomePromptClientAttributesModule()
+		
+		if next(HomePromptClientAttributesModule) ~= nil then
+			local Success, Result = pcall(HttpService.JSONEncode, HttpService, HomePromptClientAttributesModule)
+			
+			if Success and typeof(Result) == "string" then
+				HomeSystemContextFeaturesModule[PromptClientAttributes] = Result
+			end
+		end
+	end
 	if typeof(p1.contextualFeatures) == "table" then
 		for i, contextualFeature in p1.contextualFeatures do
 			if typeof(i) == "string" and contextualFeature ~= nil then

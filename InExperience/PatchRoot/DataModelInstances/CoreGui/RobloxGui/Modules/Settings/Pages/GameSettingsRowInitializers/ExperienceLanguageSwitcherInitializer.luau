@@ -172,7 +172,7 @@ return function(p1, p2, Callback)
 					})
 				})
 				
-				local function userExperienceLanguageSettingsUpdateCallback(p5, Unauthorized)
+				local function userExperienceLanguageSettingsUpdateCallback(p5, StatusCode)
 					-- upvalues: v2 (upval), p4 (copy), LocalPlayer (upval), Locale (upval), Locales (upval), List1 (upval), NewResult (upval), Flag (upval), p1 (upval)
 					if p5 then
 						v2 = p4
@@ -183,7 +183,7 @@ return function(p1, p2, Callback)
 							LocalPlayer:SetExperienceSettingsLocaleId(Locales[List1[p4]])
 						end
 					else
-						NewResult:warning("Request to update user experience language status failed, keeping language toggle disabled for the remainder of the session. Error: " .. Unauthorized)
+						NewResult:warning("Request to update user experience language status failed, keeping language toggle disabled for the remainder of the session. Error: " .. StatusCode)
 						Flag = true
 						p1.LanguageSelectorMode:SetSelectionIndex(v2)
 					end
@@ -224,16 +224,25 @@ return function(p1, p2, Callback)
 					RequestInternalResult:Start(function(p5, p6)
 						-- upvalues: NewResult (upval), Text (copy), userExperienceLanguageSettingsUpdateCallback (copy)
 						local Flag = false
-						local Unauthorized = if p5 and p6 and p6.StatusCode then if p6.StatusCode == 401 then "Unauthorized" elseif p6.StatusCode < 200 or p6.StatusCode >= 400 then p6.StatusCode else nil else "Connection error"
+						local StatusCode = nil
 						
-						if Unauthorized == nil then
+						if p5 and p6 and p6.StatusCode then
+							if p6.StatusCode == 401 then
+								StatusCode = "Unauthorized"
+							elseif p6.StatusCode < 200 or p6.StatusCode >= 400 then
+								StatusCode = p6.StatusCode
+							end
+						else
+							StatusCode = "Connection error"
+						end
+						if StatusCode == nil then
 							NewResult:info("User Experience Language Settings Update Request: " .. "Succeeded with code - " .. p6.StatusCode)
 							Flag = true
 						else
-							Unauthorized = "User Experience Language Settings Update Request: " .. Unauthorized
-							NewResult:warning("GameSettings language selector toggle: Failed to update user experience language status from GameInternationalization API for " .. Text .. " with error message: " .. Unauthorized)
+							StatusCode = "User Experience Language Settings Update Request: " .. StatusCode
+							NewResult:warning("GameSettings language selector toggle: Failed to update user experience language status from GameInternationalization API for " .. Text .. " with error message: " .. StatusCode)
 						end
-						userExperienceLanguageSettingsUpdateCallback(Flag, Unauthorized)
+						userExperienceLanguageSettingsUpdateCallback(Flag, StatusCode)
 					end)
 				end
 			end)
@@ -254,10 +263,19 @@ return function(p1, p2, Callback)
 			RequestInternalResult2:Start(function(p6, p7)
 				-- upvalues: HttpService (upval), v4 (upval), v3 (upval), Locale (upval), Ids (upval), Locales1 (upval), NewResult (upval), Text3 (upval), userExperienceLanguageSettingsCallback (upval)
 				local v5 = false
-				local Unauthorized = if p6 and p7 and p7.StatusCode then if p7.StatusCode == 401 then "Unauthorized" elseif p7.StatusCode < 200 or p7.StatusCode >= 400 then p7.StatusCode else nil else "Connection error"
-				local Text = nil
+				local StatusCode = nil
 				
-				if Unauthorized == nil then
+				if p6 and p7 and p7.StatusCode then
+					if p7.StatusCode == 401 then
+						StatusCode = "Unauthorized"
+					elseif p7.StatusCode < 200 or p7.StatusCode >= 400 then
+						StatusCode = p7.StatusCode
+					end
+				else
+					StatusCode = "Connection error"
+				end
+				local Text = nil
+				if StatusCode == nil then
 					v5, Text = pcall(function()
 						-- upvalues: HttpService (upval), p7 (copy), v4 (upval), v3 (upval), Locale (upval), Ids (upval), Locales1 (upval)
 						local UserUniverseLocalizationSettingValue = HttpService:JSONDecode(p7.Body).userUniverseLocalizationSettingValue
@@ -303,7 +321,7 @@ return function(p1, p2, Callback)
 						end
 					end)
 				else
-					Text = "User Experience Language Setting Get Request: " .. Unauthorized
+					Text = "User Experience Language Setting Get Request: " .. StatusCode
 				end
 				if not v5 then
 					NewResult:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. Text3 .. " with error message: " .. Text)
@@ -328,16 +346,25 @@ return function(p1, p2, Callback)
 			RequestInternalResult:Start(function(p6, p7)
 				-- upvalues: HttpService (upval), Locale (upval), config (upval), NewResult (upval), Text1 (upval), p5 (ref), p4 (copy), RequestInternalResult2 (upval), v4 (upval), v3 (upval), Ids (upval), Locales1 (upval), Text3 (upval), userExperienceLanguageSettingsCallback (upval), createSessionDormantLanguageSwitcherRow (upval)
 				local v5 = false
-				local Unauthorized = if p6 and p7 and p7.StatusCode then if p7.StatusCode == 401 then "Unauthorized" elseif p7.StatusCode < 200 or p7.StatusCode >= 400 then p7.StatusCode else nil else "Connection error"
-				local Text = nil
+				local StatusCode = nil
 				
-				if Unauthorized == nil then
+				if p6 and p7 and p7.StatusCode then
+					if p7.StatusCode == 401 then
+						StatusCode = "Unauthorized"
+					elseif p7.StatusCode < 200 or p7.StatusCode >= 400 then
+						StatusCode = p7.StatusCode
+					end
+				else
+					StatusCode = "Connection error"
+				end
+				local Text = nil
+				if StatusCode == nil then
 					v5, Text = pcall(function()
 						-- upvalues: HttpService (upval), p7 (copy), Locale (upval), config (upval)
 						Locale = config[HttpService:JSONDecode(p7.Body).languageCode]
 					end)
 				else
-					Text = "Experience Source Language Request: " .. Unauthorized
+					Text = "Experience Source Language Request: " .. StatusCode
 				end
 				if not v5 then
 					NewResult:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. Text1 .. " with error message: " .. Text)
@@ -351,10 +378,19 @@ return function(p1, p2, Callback)
 					RequestInternalResult2:Start(function(p8, p9)
 						-- upvalues: HttpService (upval), v4 (upval), v3 (upval), Locale (upval), Ids (upval), Locales1 (upval), NewResult (upval), Text3 (upval), userExperienceLanguageSettingsCallback (upval)
 						local v7 = false
-						local Unauthorized = if p8 and p9 and p9.StatusCode then if p9.StatusCode == 401 then "Unauthorized" elseif p9.StatusCode < 200 or p9.StatusCode >= 400 then p9.StatusCode else nil else "Connection error"
-						local Text = nil
+						local StatusCode = nil
 						
-						if Unauthorized == nil then
+						if p8 and p9 and p9.StatusCode then
+							if p9.StatusCode == 401 then
+								StatusCode = "Unauthorized"
+							elseif p9.StatusCode < 200 or p9.StatusCode >= 400 then
+								StatusCode = p9.StatusCode
+							end
+						else
+							StatusCode = "Connection error"
+						end
+						local Text = nil
+						if StatusCode == nil then
 							v7, Text = pcall(function()
 								-- upvalues: HttpService (upval), p9 (copy), v4 (upval), v3 (upval), Locale (upval), Ids (upval), Locales1 (upval)
 								local UserUniverseLocalizationSettingValue = HttpService:JSONDecode(p9.Body).userUniverseLocalizationSettingValue
@@ -400,7 +436,7 @@ return function(p1, p2, Callback)
 								end
 							end)
 						else
-							Text = "User Experience Language Setting Get Request: " .. Unauthorized
+							Text = "User Experience Language Setting Get Request: " .. StatusCode
 						end
 						if not v7 then
 							NewResult:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. Text3 .. " with error message: " .. Text)
@@ -435,10 +471,19 @@ return function(p1, p2, Callback)
 			RequestInternalResult1:Start(function(p6, p7)
 				-- upvalues: HttpService (upval), t (upval), List (upval), NewResult (upval), Text2 (upval), p5 (ref), p4 (copy), RequestInternalResult (upval), Locale (upval), config (upval), Text1 (upval), RequestInternalResult2 (upval), v4 (upval), v3 (upval), Ids (upval), Locales1 (upval), Text3 (upval), userExperienceLanguageSettingsCallback (upval), createSessionDormantLanguageSwitcherRow (upval)
 				local v5 = false
-				local Unauthorized = if p6 and p7 and p7.StatusCode then if p7.StatusCode == 401 then "Unauthorized" elseif p7.StatusCode < 200 or p7.StatusCode >= 400 then p7.StatusCode else nil else "Connection error"
-				local Text = nil
+				local StatusCode = nil
 				
-				if Unauthorized == nil then
+				if p6 and p7 and p7.StatusCode then
+					if p7.StatusCode == 401 then
+						StatusCode = "Unauthorized"
+					elseif p7.StatusCode < 200 or p7.StatusCode >= 400 then
+						StatusCode = p7.StatusCode
+					end
+				else
+					StatusCode = "Connection error"
+				end
+				local Text = nil
+				if StatusCode == nil then
 					v5, Text = pcall(function()
 						-- upvalues: HttpService (upval), p7 (copy), t (upval), List (upval)
 						local LanguageCodes = {}
@@ -455,7 +500,7 @@ return function(p1, p2, Callback)
 						end
 					end)
 				else
-					Text = "Experience Supported Language Language Request: " .. Unauthorized
+					Text = "Experience Supported Language Language Request: " .. StatusCode
 				end
 				if not v5 then
 					NewResult:warning("GameSettings language selector initialization: Failed to get response from Localization API for " .. Text2 .. " with error message: " .. Text)
@@ -470,16 +515,25 @@ return function(p1, p2, Callback)
 					RequestInternalResult:Start(function(p8, p9)
 						-- upvalues: HttpService (upval), Locale (upval), config (upval), NewResult (upval), Text1 (upval), v7 (ref), v6 (copy), RequestInternalResult2 (upval), v4 (upval), v3 (upval), Ids (upval), Locales1 (upval), Text3 (upval), userExperienceLanguageSettingsCallback (upval), createSessionDormantLanguageSwitcherRow (upval)
 						local v8 = false
-						local Unauthorized = if p8 and p9 and p9.StatusCode then if p9.StatusCode == 401 then "Unauthorized" elseif p9.StatusCode < 200 or p9.StatusCode >= 400 then p9.StatusCode else nil else "Connection error"
-						local Text = nil
+						local StatusCode = nil
 						
-						if Unauthorized == nil then
+						if p8 and p9 and p9.StatusCode then
+							if p9.StatusCode == 401 then
+								StatusCode = "Unauthorized"
+							elseif p9.StatusCode < 200 or p9.StatusCode >= 400 then
+								StatusCode = p9.StatusCode
+							end
+						else
+							StatusCode = "Connection error"
+						end
+						local Text = nil
+						if StatusCode == nil then
 							v8, Text = pcall(function()
 								-- upvalues: HttpService (upval), p9 (copy), Locale (upval), config (upval)
 								Locale = config[HttpService:JSONDecode(p9.Body).languageCode]
 							end)
 						else
-							Text = "Experience Source Language Request: " .. Unauthorized
+							Text = "Experience Source Language Request: " .. StatusCode
 						end
 						if not v8 then
 							NewResult:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. Text1 .. " with error message: " .. Text)
@@ -493,10 +547,19 @@ return function(p1, p2, Callback)
 							RequestInternalResult2:Start(function(p10, p11)
 								-- upvalues: HttpService (upval), v4 (upval), v3 (upval), Locale (upval), Ids (upval), Locales1 (upval), NewResult (upval), Text3 (upval), userExperienceLanguageSettingsCallback (upval)
 								local v10 = false
-								local Unauthorized = if p10 and p11 and p11.StatusCode then if p11.StatusCode == 401 then "Unauthorized" elseif p11.StatusCode < 200 or p11.StatusCode >= 400 then p11.StatusCode else nil else "Connection error"
-								local Text = nil
+								local StatusCode = nil
 								
-								if Unauthorized == nil then
+								if p10 and p11 and p11.StatusCode then
+									if p11.StatusCode == 401 then
+										StatusCode = "Unauthorized"
+									elseif p11.StatusCode < 200 or p11.StatusCode >= 400 then
+										StatusCode = p11.StatusCode
+									end
+								else
+									StatusCode = "Connection error"
+								end
+								local Text = nil
+								if StatusCode == nil then
 									v10, Text = pcall(function()
 										-- upvalues: HttpService (upval), p11 (copy), v4 (upval), v3 (upval), Locale (upval), Ids (upval), Locales1 (upval)
 										local UserUniverseLocalizationSettingValue = HttpService:JSONDecode(p11.Body).userUniverseLocalizationSettingValue
@@ -542,7 +605,7 @@ return function(p1, p2, Callback)
 										end
 									end)
 								else
-									Text = "User Experience Language Setting Get Request: " .. Unauthorized
+									Text = "User Experience Language Setting Get Request: " .. StatusCode
 								end
 								if not v10 then
 									NewResult:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. Text3 .. " with error message: " .. Text)
@@ -584,10 +647,19 @@ return function(p1, p2, Callback)
 	HttpService:RequestInternal({ Method = "GET", Url = Text }):Start(function(p8, p9)
 		-- upvalues: HttpService (upval), config (upval), Ids (copy), t (copy), Locales1 (copy), Locales (copy), NewResult (upval), Text (copy), RequestInternalResult1 (copy), List (copy), Text2 (copy), RequestInternalResult (copy), Locale (ref), Text1 (copy), RequestInternalResult2 (copy), v4 (ref), v3 (copy), Text3 (copy), userExperienceLanguageSettingsCallback (copy), createSessionDormantLanguageSwitcherRow (copy)
 		local v6 = false
-		local Unauthorized = if p8 and p9 and p9.StatusCode then if p9.StatusCode == 401 then "Unauthorized" elseif p9.StatusCode < 200 or p9.StatusCode >= 400 then p9.StatusCode else nil else "Connection error"
-		local Text4 = nil
+		local StatusCode = nil
 		
-		if Unauthorized == nil then
+		if p8 and p9 and p9.StatusCode then
+			if p9.StatusCode == 401 then
+				StatusCode = "Unauthorized"
+			elseif p9.StatusCode < 200 or p9.StatusCode >= 400 then
+				StatusCode = p9.StatusCode
+			end
+		else
+			StatusCode = "Connection error"
+		end
+		local Text4 = nil
+		if StatusCode == nil then
 			v6, Text4 = pcall(function()
 				-- upvalues: HttpService (upval), p9 (copy), config (upval), Ids (upval), t (upval), Locales1 (upval), Locales (upval)
 				for _, entry in pairs(HttpService:JSONDecode(p9.Body).data) do
@@ -613,23 +685,31 @@ return function(p1, p2, Callback)
 				end
 			end)
 		else
-			Text4 = "Locale Information Request: " .. Unauthorized
+			Text4 = "Locale Information Request: " .. StatusCode
 		end
 		if not v6 then
 			NewResult:warning("GameSettings language selector initialization: Failed to get response from Localization API for " .. Text .. " with error message: " .. Text4)
 		end
-		local v7: boolean = v6
 		local Text5: string = Text4
 		
-		if v7 then
+		if v6 then
 			RequestInternalResult1:Start(function(p10, p11)
-				-- upvalues: HttpService (upval), t (upval), List (upval), NewResult (upval), Text2 (upval), Text5 (ref), v7 (copy), RequestInternalResult (upval), Locale (upval), config (upval), Text1 (upval), RequestInternalResult2 (upval), v4 (upval), v3 (upval), Ids (upval), Locales1 (upval), Text3 (upval), userExperienceLanguageSettingsCallback (upval), createSessionDormantLanguageSwitcherRow (upval)
-				local v8 = false
-				local Unauthorized = if p10 and p11 and p11.StatusCode then if p11.StatusCode == 401 then "Unauthorized" elseif p11.StatusCode < 200 or p11.StatusCode >= 400 then p11.StatusCode else nil else "Connection error"
-				local Text = nil
+				-- upvalues: HttpService (upval), t (upval), List (upval), NewResult (upval), Text2 (upval), Text5 (ref), v6 (copy), RequestInternalResult (upval), Locale (upval), config (upval), Text1 (upval), RequestInternalResult2 (upval), v4 (upval), v3 (upval), Ids (upval), Locales1 (upval), Text3 (upval), userExperienceLanguageSettingsCallback (upval), createSessionDormantLanguageSwitcherRow (upval)
+				local v7 = false
+				local StatusCode = nil
 				
-				if Unauthorized == nil then
-					v8, Text = pcall(function()
+				if p10 and p11 and p11.StatusCode then
+					if p11.StatusCode == 401 then
+						StatusCode = "Unauthorized"
+					elseif p11.StatusCode < 200 or p11.StatusCode >= 400 then
+						StatusCode = p11.StatusCode
+					end
+				else
+					StatusCode = "Connection error"
+				end
+				local Text = nil
+				if StatusCode == nil then
+					v7, Text = pcall(function()
 						-- upvalues: HttpService (upval), p11 (copy), t (upval), List (upval)
 						local LanguageCodes = {}
 						
@@ -645,49 +725,67 @@ return function(p1, p2, Callback)
 						end
 					end)
 				else
-					Text = "Experience Supported Language Language Request: " .. Unauthorized
+					Text = "Experience Supported Language Language Request: " .. StatusCode
 				end
-				if not v8 then
+				if not v7 then
 					NewResult:warning("GameSettings language selector initialization: Failed to get response from Localization API for " .. Text2 .. " with error message: " .. Text)
 				end
 				if Text5 == nil then
 					Text5 = Text
 				end
-				local v9 = v8 and v7
-				local v10: string = Text5
+				local v8 = v7 and v6
+				local v9: string = Text5
 				
-				if v9 then
+				if v8 then
 					RequestInternalResult:Start(function(p12, p13)
-						-- upvalues: HttpService (upval), Locale (upval), config (upval), NewResult (upval), Text1 (upval), v10 (ref), v9 (copy), RequestInternalResult2 (upval), v4 (upval), v3 (upval), Ids (upval), Locales1 (upval), Text3 (upval), userExperienceLanguageSettingsCallback (upval), createSessionDormantLanguageSwitcherRow (upval)
-						local v11 = false
-						local Unauthorized = if p12 and p13 and p13.StatusCode then if p13.StatusCode == 401 then "Unauthorized" elseif p13.StatusCode < 200 or p13.StatusCode >= 400 then p13.StatusCode else nil else "Connection error"
-						local Text = nil
+						-- upvalues: HttpService (upval), Locale (upval), config (upval), NewResult (upval), Text1 (upval), v9 (ref), v8 (copy), RequestInternalResult2 (upval), v4 (upval), v3 (upval), Ids (upval), Locales1 (upval), Text3 (upval), userExperienceLanguageSettingsCallback (upval), createSessionDormantLanguageSwitcherRow (upval)
+						local v10 = false
+						local StatusCode = nil
 						
-						if Unauthorized == nil then
-							v11, Text = pcall(function()
+						if p12 and p13 and p13.StatusCode then
+							if p13.StatusCode == 401 then
+								StatusCode = "Unauthorized"
+							elseif p13.StatusCode < 200 or p13.StatusCode >= 400 then
+								StatusCode = p13.StatusCode
+							end
+						else
+							StatusCode = "Connection error"
+						end
+						local Text = nil
+						if StatusCode == nil then
+							v10, Text = pcall(function()
 								-- upvalues: HttpService (upval), p13 (copy), Locale (upval), config (upval)
 								Locale = config[HttpService:JSONDecode(p13.Body).languageCode]
 							end)
 						else
-							Text = "Experience Source Language Request: " .. Unauthorized
+							Text = "Experience Source Language Request: " .. StatusCode
 						end
-						if not v11 then
+						if not v10 then
 							NewResult:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. Text1 .. " with error message: " .. Text)
 						end
-						if v10 == nil then
-							v10 = Text
+						if v9 == nil then
+							v9 = Text
 						end
-						local v12: string = v10
+						local v11: string = v9
 						
-						if v11 and v9 then
+						if v10 and v8 then
 							RequestInternalResult2:Start(function(p14, p15)
 								-- upvalues: HttpService (upval), v4 (upval), v3 (upval), Locale (upval), Ids (upval), Locales1 (upval), NewResult (upval), Text3 (upval), userExperienceLanguageSettingsCallback (upval)
-								local v13 = false
-								local Unauthorized = if p14 and p15 and p15.StatusCode then if p15.StatusCode == 401 then "Unauthorized" elseif p15.StatusCode < 200 or p15.StatusCode >= 400 then p15.StatusCode else nil else "Connection error"
-								local Text = nil
+								local v12 = false
+								local StatusCode = nil
 								
-								if Unauthorized == nil then
-									v13, Text = pcall(function()
+								if p14 and p15 and p15.StatusCode then
+									if p15.StatusCode == 401 then
+										StatusCode = "Unauthorized"
+									elseif p15.StatusCode < 200 or p15.StatusCode >= 400 then
+										StatusCode = p15.StatusCode
+									end
+								else
+									StatusCode = "Connection error"
+								end
+								local Text = nil
+								if StatusCode == nil then
+									v12, Text = pcall(function()
 										-- upvalues: HttpService (upval), p15 (copy), v4 (upval), v3 (upval), Locale (upval), Ids (upval), Locales1 (upval)
 										local UserUniverseLocalizationSettingValue = HttpService:JSONDecode(p15.Body).userUniverseLocalizationSettingValue
 										
@@ -732,31 +830,31 @@ return function(p1, p2, Callback)
 										end
 									end)
 								else
-									Text = "User Experience Language Setting Get Request: " .. Unauthorized
+									Text = "User Experience Language Setting Get Request: " .. StatusCode
 								end
-								if not v13 then
+								if not v12 then
 									NewResult:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. Text3 .. " with error message: " .. Text)
 								end
-								userExperienceLanguageSettingsCallback(v13, Text)
+								userExperienceLanguageSettingsCallback(v12, Text)
 							end)
 							
 							return
 						end
-						local v13: string = v12
+						local v12: string = v11
 						
-						if v13 == nil then
-							v13 = "Execution path did not set earliest error to non-nil value."
+						if v12 == nil then
+							v12 = "Execution path did not set earliest error to non-nil value."
 						end
-						NewResult:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. v13)
+						NewResult:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. v12)
 						createSessionDormantLanguageSwitcherRow()
 					end)
 				else
-					local v11: string = v10
+					local v10: string = v9
 					
-					if v11 == nil then
-						v11 = "Execution path did not set earliest error to non-nil value."
+					if v10 == nil then
+						v10 = "Execution path did not set earliest error to non-nil value."
 					end
-					NewResult:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. v11)
+					NewResult:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. v10)
 					createSessionDormantLanguageSwitcherRow()
 				end
 			end)

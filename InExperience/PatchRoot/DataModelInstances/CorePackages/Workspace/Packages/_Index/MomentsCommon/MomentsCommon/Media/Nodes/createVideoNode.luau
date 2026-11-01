@@ -331,19 +331,18 @@ return {
 					local VideoPlayer = Object
 					
 					if not VideoPlayer then
-						local VideoPlayer1 = Instance.new("VideoPlayer")
-						VideoPlayer1.Name = "VideoPlayer"
-						VideoPlayer1.Looping = false
-						VideoPlayer1.InternalVideoUsage = Enum.InternalVideoUsage.WatchPage
-						VideoPlayer1.VideoContent = Content
+						VideoPlayer = Instance.new("VideoPlayer")
+						VideoPlayer.Name = "VideoPlayer"
+						VideoPlayer.Looping = false
+						VideoPlayer.InternalVideoUsage = Enum.InternalVideoUsage.WatchPage
+						VideoPlayer.VideoContent = Content
 						
 						if FFlagMomentsPreloadVideoPlayerInstanceModule then
 							local SignalResult = Signal(false)
-							VideoPlayer1.TimePosition = if SignalResult == nil then 0 else SignalResult.startTime
+							VideoPlayer.TimePosition = if SignalResult == nil then 0 else SignalResult.startTime
 						end
-						VideoPlayer1.Parent = Parent
-						Object = VideoPlayer1
-						VideoPlayer = VideoPlayer1
+						VideoPlayer.Parent = Parent
+						Object = VideoPlayer
 					end
 					Flag1 = true
 					pcall(function()
@@ -379,19 +378,18 @@ return {
 				local VideoPlayer = Object
 				
 				if not VideoPlayer then
-					local VideoPlayer1 = Instance.new("VideoPlayer")
-					VideoPlayer1.Name = "VideoPlayer"
-					VideoPlayer1.Looping = false
-					VideoPlayer1.InternalVideoUsage = Enum.InternalVideoUsage.WatchPage
-					VideoPlayer1.VideoContent = Content
+					VideoPlayer = Instance.new("VideoPlayer")
+					VideoPlayer.Name = "VideoPlayer"
+					VideoPlayer.Looping = false
+					VideoPlayer.InternalVideoUsage = Enum.InternalVideoUsage.WatchPage
+					VideoPlayer.VideoContent = Content
 					
 					if FFlagMomentsPreloadVideoPlayerInstanceModule then
 						local SignalResult = Signal(false)
-						VideoPlayer1.TimePosition = if SignalResult == nil then 0 else SignalResult.startTime
+						VideoPlayer.TimePosition = if SignalResult == nil then 0 else SignalResult.startTime
 					end
-					VideoPlayer1.Parent = Parent
-					Object = VideoPlayer1
-					VideoPlayer = VideoPlayer1
+					VideoPlayer.Parent = Parent
+					Object = VideoPlayer
 				end
 				local ObserveLoadedResult = ObserveLoaded(VideoPlayer)
 				v1 = ObserveLoadedResult

@@ -15,6 +15,7 @@ local GetFFlagEnableExpJoinMicPermAnalyticsModule = require(Flags.GetFFlagEnable
 local FFlagExpChatDictation = require(Parent.SharedFlags).FFlagExpChatDictation
 local v1 = require(Flags.GetFFlagUseAudioAnalyzerForLocalMetering2)()
 local GetFFlagMicConsumerRegistryModule = require(Flags.GetFFlagMicConsumerRegistry)
+local FFlagMicRegistryIgnoreDefaultVoiceDeviceModule = require(Flags.FFlagMicRegistryIgnoreDefaultVoiceDevice)
 local PERMISSIONSTATE = ConstantsModule.PERMISSION_STATE
 local MINVOICECHATAPIVERSIONLOCALMICACTIVITY = ConstantsModule.MIN_VOICE_CHAT_API_VERSION_LOCAL_MIC_ACTIVITY
 local MicInputManager = {}
@@ -55,6 +56,13 @@ end
 local function _(Object)
 	-- upvalues: CoreGui (copy)
 	return Object:IsDescendantOf(CoreGui)
+end
+
+local _ = function(AudioDeviceInput): boolean
+	-- upvalues: Players (copy), VoiceChatService (copy)
+	local LocalPlayer = Players.LocalPlayer
+	
+	return LocalPlayer ~= nil and (VoiceChatService.EnableDefaultVoice == true and LocalPlayer:FindFirstChildOfClass("AudioDeviceInput") == AudioDeviceInput)
 end
 
 function MicInputManager:SetMicActive(p1, Context)
@@ -499,8 +507,21 @@ function MicInputManager:_isVoiceChatDevice(Device): boolean
 end
 
 function MicInputManager:_isDeveloperDevice(Device): boolean
-	-- upvalues: CoreGui (copy), Players (copy)
-	return not Device:IsDescendantOf(CoreGui) and (not self:_isVoiceChatDevice(Device) and Device.Player == Players.LocalPlayer)
+	-- upvalues: CoreGui (copy), FFlagMicRegistryIgnoreDefaultVoiceDeviceModule (copy), Players (copy), VoiceChatService (copy)
+	if Device:IsDescendantOf(CoreGui) then
+		return false
+	end
+	if self:_isVoiceChatDevice(Device) then
+		return false
+	end
+	if FFlagMicRegistryIgnoreDefaultVoiceDeviceModule then
+		local LocalPlayer = Players.LocalPlayer
+		
+		if LocalPlayer ~= nil and (VoiceChatService.EnableDefaultVoice == true and LocalPlayer:FindFirstChildOfClass("AudioDeviceInput") == Device) then
+			return false
+		end
+	end
+	return Device.Player == Players.LocalPlayer
 end
 
 function MicInputManager:_getDeveloperAudioInstancesFolder()
@@ -546,10 +567,10 @@ function MicInputManager:_unregisterDeveloperDevice(Device)
 end
 
 function MicInputManager:SetupDeveloperDeviceTracking()
-	-- upvalues: GetFFlagMicConsumerRegistryModule (copy), CoreGui (copy), FFlagUseAudioDeviceInputAddedSignal (copy), SoundService (copy)
+	-- upvalues: GetFFlagMicConsumerRegistryModule (copy), CoreGui (copy), FFlagMicRegistryIgnoreDefaultVoiceDeviceModule (copy), FFlagUseAudioDeviceInputAddedSignal (copy), SoundService (copy)
 	if not GetFFlagMicConsumerRegistryModule() then return end
 	local function onDeviceAdded(Device)
-		-- upvalues: self (copy), CoreGui (upval)
+		-- upvalues: self (copy), CoreGui (upval), FFlagMicRegistryIgnoreDefaultVoiceDeviceModule (upval)
 		if self._developerDeviceConnections[Device] then return end
 		if Device:IsDescendantOf(CoreGui) then return end
 		if self:_isDeveloperDevice(Device) then
@@ -567,7 +588,7 @@ function MicInputManager:SetupDeveloperDeviceTracking()
 			end
 		end)))
 		table.insert(List, (Device.AncestryChanged:Connect(function(_, NewParent)
-			-- upvalues: self (upval), Device (copy)
+			-- upvalues: self (upval), Device (copy), FFlagMicRegistryIgnoreDefaultVoiceDeviceModule (upval)
 			if NewParent == nil then
 				self:_unregisterDeveloperDevice(Device)
 				local DeveloperDeviceConnection = self._developerDeviceConnections[Device]
@@ -577,7 +598,16 @@ function MicInputManager:SetupDeveloperDeviceTracking()
 						Connection:Disconnect()
 					end
 					self._developerDeviceConnections[Device] = nil
+					
+					return
 				end
+			elseif FFlagMicRegistryIgnoreDefaultVoiceDeviceModule then
+				if self:_isDeveloperDevice(Device) then
+					self:_registerDeveloperDevice(Device)
+					
+					return
+				end
+				self:_unregisterDeveloperDevice(Device)
 			end
 		end)))
 		self._developerDeviceConnections[Device] = List

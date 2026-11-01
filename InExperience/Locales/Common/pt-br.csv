@@ -2522,7 +2522,7 @@ Feature.Build.Notification.Title.NeedInput,A criação precisa da sua contribui�
 Feature.Build.Placeholder.DescribeProduct,Descreva o que você quer vender
 Feature.Build.Placeholder.DescribeProductUpdate,Descreva uma atualização
 Feature.Build.Placeholder.InternalSpec,internal_code
-Feature.Build.Prompt.CreateDeveloperProduct,"Me ajude a criar um produto de desenvolvedor, conectá-lo ao jogo, verificar e publicar as alterações e disponibilizá-lo para compra."
+Feature.Build.Prompt.CreateDeveloperProduct,"Analise meu jogo e sugira o melhor item para eu vender e ganhar Robux. Uma compra única ou um item que os jogadores podem comprar novamente, como um impulso, combina melhor com o meu jogo? Explique por quê."
 Feature.Build.Title.AdActive,A campanha de anúncios está ativa
 Feature.Build.Title.AdCampaignDuration,Campanha de anúncios de {durationDays} dias
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} dias
@@ -2703,6 +2703,8 @@ Feature.Catalog.Header.InvalidOutfit,Traje inválido
 Feature.Catalog.Header.PostAvatar,
 Feature.Catalog.Heading.AvailableItems,Itens disponíveis
 Feature.Catalog.Heading.BuyItem,
+Feature.Catalog.Heading.DescriptionLinkGoToMarketplace,Isso levará você ao Mercado
+Feature.Catalog.Heading.DescriptionLinkResetSearch,Isso redefinirá sua pesquisa atual
 Feature.Catalog.Heading.FreeItemConfirmation,Obter item
 Feature.Catalog.Heading.GoToExperience,Juntar-se à experiência?
 Feature.Catalog.Heading.HoldingPolicy,Política de retenção
@@ -2778,6 +2780,12 @@ Feature.Catalog.Label.CreatorName,Nome do Criador
 Feature.Catalog.Label.CurrentBalance,Saldo atual:
 Feature.Catalog.Label.CustomizeAvatar,Personalizar avatar
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,Você não poderá desfazer essa ação se excluir.
+Feature.Catalog.Label.DescriptionLinkInvalid,Link inválido
+Feature.Catalog.Label.DescriptionLinkSearchMarketplace,Buscar no Mercado
+Feature.Catalog.Label.DescriptionLinkViewAsset,Ver ativo
+Feature.Catalog.Label.DescriptionLinkViewBundle,Ver pacote
+Feature.Catalog.Label.DescriptionLinkViewCommunity,Ver comunidade
+Feature.Catalog.Label.DescriptionLinkViewCommunityStore,Loja da Comunidade
 Feature.Catalog.Label.Details,
 Feature.Catalog.Label.DynamicHeads,
 Feature.Catalog.Label.Emissive,Emissivo
@@ -3563,7 +3571,7 @@ Feature.Groups.Action.NotNow,
 Feature.Groups.Action.RemovePrimary,Remover principal
 Feature.Groups.Action.SeeAll,
 Feature.Groups.Action.Unfollow,Deixar de seguir
-Feature.Groups.Action.ViewGroup,Ver comunidade
+Feature.Groups.Action.ViewGroup,
 Feature.Groups.Description.JoinGroupPending,Seu pedido para entrar precisa ser avaliado pela comunidade.
 Feature.Groups.Description.NotEligibleToJoin,Sua conta não pode entrar nesta comunidade.
 Feature.Groups.Description.PremiumMaxGroups,Você ingressou no número máximo de comunidades.
@@ -3716,6 +3724,7 @@ Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Você comprou {ROBUX_AMOUN
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Quer mesmo excluir este item do seu inventário para sempre? Se mudar de ideia, você precisará ganhá-lo novamente em uma experiência."
 Feature.Item.Label.DeleteItemUndercase,Excluir item
 Feature.Landing.Label.PoweredBy,Fornecido por
+Feature.Leaderboards.Heading.Leaderboard,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,Ativar
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,Ajude as pessoas que têm seu celular a adicionarem você aos amigos na Roblox
@@ -4010,7 +4019,9 @@ Feature.PrivateServers.Action.CreatePrivateServer,Criar servidor privado
 Feature.PrivateServers.Action.FreeWithBlackbird,Grátis com o Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,As compras de servidores privados não são suportadas no Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,Este jogo não suporta servidores privados.
+Feature.PrivateServers.Heading.ConfigurePrivateServer,Configurar servidor privado
 Feature.PrivateServers.Label.OwnersServer,Servidor de {displayName}
+Feature.PrivateServers.Label.ServerName,Nome do servidor:
 Feature.Profile.Action.AboutThisProfile,Sobre este perfil
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,

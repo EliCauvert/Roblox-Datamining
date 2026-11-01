@@ -114,35 +114,34 @@ local function resolvePath(Text: string, p2)
 	if #SplitPathResult == 0 then
 		return p2.root, ""
 	end
-	local Text2: string = SplitPathResult[1]
-	local Match, Match2 = string.match(Text2, "^(.*)%[(%d+)%]$")
-	local Match1 = Match or Text2
+	local Text1: string = SplitPathResult[1]
+	local Match, Match2 = string.match(Text1, "^(.*)%[(%d+)%]$")
+	local Match1 = Match or Text1
 	local _25 = if Match1 == "%00" then "" else Match1:gsub("%%2E", "."):gsub("%%5B", "["):gsub("%%5D", "]"):gsub("%%25", "%%")
 	local _: number = tonumber(Match2) or 1
 	local Service = p2.getService(_25)
+	local LocalPlayerName = nil
 	
 	if Service == nil then
 		return nil, nil
 	end
-	local Service1 = Service
-	local LocalPlayerName = nil
 	repeat
-		if Service1.Parent ~= nil then
-			for _, value in getChildPathEntries(Service1.Parent) do
-				if value.instance == Service1 then
+		if Service.Parent ~= nil then
+			for _, value in getChildPathEntries(Service.Parent) do
+				if value.instance == Service then
 					LocalPlayerName = value.segment
 					break
 				end
 			end
 		end
-		local Name: string = Service1.Name
+		local Name: string = Service.Name
 		LocalPlayerName = if Name == "" then "%00" else Name:gsub("%%", "%%25"):gsub("%.", "%%2E"):gsub("%[", "%%5B"):gsub("%]", "%%5D")
 	until true
 	local LocalPlayer = nil
 	for i = 2, #SplitPathResult do
-		local Text1: string = SplitPathResult[i]
-		local Match3, Match2_1 = string.match(Text1, "^(.*)%[(%d+)%]$")
-		local Match3_1 = Match3 or Text1
+		local Text2: string = SplitPathResult[i]
+		local Match3, Match2_1 = string.match(Text2, "^(.*)%[(%d+)%]$")
+		local Match3_1 = Match3 or Text2
 		local _251 = if Match3_1 == "%00" then "" else Match3_1:gsub("%%2E", "."):gsub("%%5B", "["):gsub("%%5D", "]"):gsub("%%25", "%%")
 		local Number: number = tonumber(Match2_1) or 1
 		
@@ -174,17 +173,16 @@ local function resolvePath(Text: string, p2)
 			LocalPlayerName = `{LocalPlayerName}.LocalPlayer`
 		else
 			local LocalPlayerName1: string = LocalPlayerName
-			local Service2 = Service
 			local Segment = nil
 			repeat
-				if Service2.Parent == nil then break end
-				for _, value2 in getChildPathEntries(Service2.Parent) do
-					if value2.instance == Service2 then
+				if Service.Parent == nil then break end
+				for _, value2 in getChildPathEntries(Service.Parent) do
+					if value2.instance == Service then
 						Segment = value2.segment
 						break
 					end
 				end
-				local Name: string = Service2.Name
+				local Name: string = Service.Name
 				Segment = if Name == "" then "%00" else Name:gsub("%%", "%%25"):gsub("%.", "%%2E"):gsub("%[", "%%5B"):gsub("%]", "%%5D")
 			until true
 			LocalPlayerName = if LocalPlayerName1 == "" then Segment else `{LocalPlayerName1}.{Segment}`

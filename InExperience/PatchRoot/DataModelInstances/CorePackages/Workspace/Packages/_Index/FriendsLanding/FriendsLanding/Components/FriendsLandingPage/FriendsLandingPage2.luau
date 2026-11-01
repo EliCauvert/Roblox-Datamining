@@ -57,6 +57,8 @@ local FFlagFriendsPageUserListCtaEnabledModule = require(FriendsLanding.Flags.FF
 local FriendsLandingCtaConfigModule = if FFlagFriendsPageUserListCtaEnabledModule then require(FriendsLanding.Common.FriendsLandingCtaConfig) else nil
 local FFlagConnectionManagementChips = require(Parent.SharedFlags).FFlagConnectionManagementChips
 local FFlagCreateConnectionsHub = require(Parent.SharedFlags).FFlagCreateConnectionsHub
+local FFlagAppThemeHalloween2026FriendsBackground = require(Parent.SharedFlags).FFlagAppThemeHalloween2026FriendsBackground
+local UseThemeBackgroundFunction = require(Parent.ThemeBackground).useThemeBackground
 local FFlagFriendsPageAlwaysOpenPPV = require(Parent.SharedFlags).FFlagFriendsPageAlwaysOpenPPV
 local FFlagFriendsPageUserListEnabled = require(Parent.SharedFlags).FFlagFriendsPageUserListEnabled
 local FFlagExtendScrollingFramesBySafeInsets = require(Parent.SharedFlags).FFlagExtendScrollingFramesBySafeInsets
@@ -66,7 +68,7 @@ local FixFriendsLandingRightMargin = game:DefineFastFlag("FixFriendsLandingRight
 local FFlagLuaAppsDefaultSelection = require(Parent.SharedFlags).FFlagLuaAppsDefaultSelection
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FriendsLandingContextModule (copy), FriendsLandingAnalyticsModule (copy), UseNavigationFunction (copy), UseDesignTokensFunction (copy), UseUiModeInfoFunction (copy), FFlagFixScalingOnFriendsLandingModule (copy), UseTokensFunction (copy), UseFocusGuiObjectFunction (copy), GetPageMarginFunction (copy), UseScreenSizeFunction (copy), UiMode (copy), FFlagEnableFriendsLandingFilterChipsOnConsoleModule (copy), FocusNavigationUtilsModule (copy), InputHandlersModule (copy), AppPage (copy), ReactFocusNavigationModule (copy), FocusNavigationEventNameEnum (copy), UseTextSizeOffsetFunction (copy), FFlagConnectionManagementChips (copy), AmpApiProvider (copy), FStringIsUserInTcEligibleCountryAmpFeature (copy), FStringCanAccessTrustedContactsAmpNameSpace (copy), AccessResponseEnum (copy), FFlagFriendsPageAlwaysOpenPPV (copy), ConvertUserPresenceTypeToStringFunction (copy), EnumScreensModule (copy), ButtonClickEventsModule (copy), ConstantsModule (copy), FriendTileModule (copy), DependencyArrayFunction (copy), OnFewestInteractionsSelection (copy), FilterStatesModule (copy), FFlagCreateConnectionsHub (copy), GridMetrics (copy), UseAnimatedScrollToSelectionFunction (copy), FFlagExtendScrollingFramesBySafeInsets (copy), UseSignalStateFunction (copy), DisplayModule (copy), IsFromConnectionsHubModule (copy), FFlagLuaAppsDefaultSelection (copy), UseFocusOnMountFunction (copy), FFlagFriendsPageUserListEnabled (copy), RoactModule (copy), HorizontalPageMargin (copy), FixFriendsLandingRightMargin (copy), RefreshScrollingFrame (copy), FilterByButtonModule (copy), EmptyResultsViewModule (copy), NoFriendsViewModule (copy), UserListLayoutAdaptor (copy), LayoutMode (copy), FFlagFriendsPageUserListCtaEnabledModule (copy), FriendsLandingCtaConfigModule (ref), CollectionGrid (copy), Button (copy), ButtonType (copy)
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FriendsLandingContextModule (copy), FriendsLandingAnalyticsModule (copy), UseNavigationFunction (copy), UseDesignTokensFunction (copy), UseUiModeInfoFunction (copy), FFlagFixScalingOnFriendsLandingModule (copy), UseTokensFunction (copy), UseFocusGuiObjectFunction (copy), GetPageMarginFunction (copy), UseScreenSizeFunction (copy), UiMode (copy), FFlagEnableFriendsLandingFilterChipsOnConsoleModule (copy), FocusNavigationUtilsModule (copy), InputHandlersModule (copy), AppPage (copy), ReactFocusNavigationModule (copy), FocusNavigationEventNameEnum (copy), UseTextSizeOffsetFunction (copy), FFlagConnectionManagementChips (copy), AmpApiProvider (copy), FStringIsUserInTcEligibleCountryAmpFeature (copy), FStringCanAccessTrustedContactsAmpNameSpace (copy), AccessResponseEnum (copy), FFlagFriendsPageAlwaysOpenPPV (copy), ConvertUserPresenceTypeToStringFunction (copy), EnumScreensModule (copy), ButtonClickEventsModule (copy), ConstantsModule (copy), FriendTileModule (copy), DependencyArrayFunction (copy), OnFewestInteractionsSelection (copy), FilterStatesModule (copy), FFlagCreateConnectionsHub (copy), GridMetrics (copy), UseAnimatedScrollToSelectionFunction (copy), FFlagExtendScrollingFramesBySafeInsets (copy), UseSignalStateFunction (copy), DisplayModule (copy), IsFromConnectionsHubModule (copy), FFlagAppThemeHalloween2026FriendsBackground (copy), UseThemeBackgroundFunction (copy), FFlagLuaAppsDefaultSelection (copy), UseFocusOnMountFunction (copy), FFlagFriendsPageUserListEnabled (copy), RoactModule (copy), HorizontalPageMargin (copy), FixFriendsLandingRightMargin (copy), RefreshScrollingFrame (copy), FilterByButtonModule (copy), EmptyResultsViewModule (copy), NoFriendsViewModule (copy), UserListLayoutAdaptor (copy), LayoutMode (copy), FFlagFriendsPageUserListCtaEnabledModule (copy), FriendsLandingCtaConfigModule (ref), CollectionGrid (copy), Button (copy), ButtonType (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		pageError = "CommonUI.Messages.Response.PageError",
 		successText = "Feature.Friends.Action.FriendRemoved",
@@ -249,6 +251,7 @@ return function(p1)
 	local UseAnimatedScrollToSelectionResult, UseAnimatedScrollToSelectionResult2 = UseAnimatedScrollToSelectionFunction(Enum.ScrollingDirection.Y, 0, UseDesignTokensResult.Size.Size_2000, UseDesignTokensResult.LuaApps.App.Page.ScrollAnimationConfig)
 	local UseSignalStateResult = if FFlagExtendScrollingFramesBySafeInsets then UseSignalStateFunction(DisplayModule.GetDisplayStore().getDeviceSafePadding) else nil
 	local IsFromConnectionsHubModule1 = FFlagCreateConnectionsHub and IsFromConnectionsHubModule(UseNavigationResult)
+	local HasUseThemeBackgroundResult: boolean = if FFlagAppThemeHalloween2026FriendsBackground then UseThemeBackgroundFunction() ~= nil else false
 	local UseFocusOnMountResult = if FFlagLuaAppsDefaultSelection then UseFocusOnMountFunction() else nil
 	local UseResult10 = if FFlagFriendsPageUserListEnabled then ReactModule.useCallback(function(CreateRow, User, Index)
 		-- upvalues: ReactModule (upval), FriendTileModule (upval), UseResult1 (copy), PageLoadingTimeReport (copy)
@@ -265,7 +268,7 @@ return function(p1)
 		[RoactModule.Ref] = UseEventResult,
 		Size = UDim2.new(1, 0, 1, 0),
 		BackgroundColor3 = if IsFromConnectionsHubModule1 then nil else UseDesignTokensResult.LuaApps.App.Page.BackgroundColor,
-		BackgroundTransparency = if IsFromConnectionsHubModule1 then 1 else UseDesignTokensResult.LuaApps.App.Page.BackgroundTransparency
+		BackgroundTransparency = if IsFromConnectionsHubModule1 or HasUseThemeBackgroundResult then 1 else UseDesignTokensResult.LuaApps.App.Page.BackgroundTransparency
 	}, {
 		HorizontalPageMargin = ReactModule.createElement(HorizontalPageMargin, { backgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
 			Padding = ReactModule.createElement("UIPadding", {

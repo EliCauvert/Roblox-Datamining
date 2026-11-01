@@ -319,28 +319,26 @@ return {
 			elseif Entry.paused then
 				Entry.paused = false
 				Flag1 = true
-				local Entry2 = Entry
-				Entry2.state = State
+				Entry.state = State
 				
 				if FFlagViewRecyclerReact08 then
-					scheduleRead(Entry2)
+					scheduleRead(Entry)
 					
 					return
 				else
-					Entry2.measurer.scheduleSettle()
+					Entry.measurer.scheduleSettle()
 					
 					return
 				end
 			elseif Entry.state ~= State then
-				local Entry3 = Entry
-				Entry3.state = State
+				Entry.state = State
 				
 				if FFlagViewRecyclerReact08 then
-					scheduleRead(Entry3)
+					scheduleRead(Entry)
 					
 					return
 				end
-				Entry3.measurer.scheduleSettle()
+				Entry.measurer.scheduleSettle()
 			end
 		end
 		

@@ -144,21 +144,17 @@ return {
 		-- upvalues: orderedMessages (copy), IsSystemMessageFunction (copy), messageRow (copy), timestampRow (copy), getGroupBreakReason (copy)
 		local OrderedMessagesResult = orderedMessages(p3)
 		local t = {}
-		local t1 = nil
 		
-		if List == nil then
-			t1 = t
-		else
+		if List ~= nil then
 			for _, value in List do
 				t[value.id] = value
 			end
-			t1 = t
 		end
 		local List1 = {}
 		local v1 = 1
 		
 		local function appendGroup(Count: number)
-			-- upvalues: v1 (ref), OrderedMessagesResult (copy), List1 (copy), t1 (copy), IsSystemMessageFunction (upval), messageRow (upval)
+			-- upvalues: v1 (ref), OrderedMessagesResult (copy), List1 (copy), t (copy), IsSystemMessageFunction (upval), messageRow (upval)
 			local NewCount = Count - v1 + 1
 			
 			for i = 0, NewCount - 1 do
@@ -167,21 +163,21 @@ return {
 				local IsIMatch1 = i == NewCount - 1
 				
 				if IsSystemMessageFunction(OrderedMessagesResultEntry) then
-					local Entry = t1[OrderedMessagesResultEntry.id]
+					local Entry = t[OrderedMessagesResultEntry.id]
 					table.insert(List1, if Entry == nil or Entry.kind ~= "system" or Entry.message ~= OrderedMessagesResultEntry then {
 						kind = "system",
 						id = OrderedMessagesResultEntry.id,
 						message = OrderedMessagesResultEntry
 					} else Entry)
 				else
-					table.insert(List1, (messageRow(t1, OrderedMessagesResultEntry, IsIMatch, IsIMatch1)))
+					table.insert(List1, (messageRow(t, OrderedMessagesResultEntry, IsIMatch, IsIMatch1)))
 				end
 			end
 		end
 		
 		local function _(p6, p7)
-			-- upvalues: List1 (copy), timestampRow (upval), t1 (copy)
-			table.insert(List1, (timestampRow(t1, p6, p7)))
+			-- upvalues: List1 (copy), timestampRow (upval), t (copy)
+			table.insert(List1, (timestampRow(t, p6, p7)))
 		end
 		
 		local OrderedMessagesResultEntry = if #OrderedMessagesResult > 0 and not IsSystemMessageFunction(OrderedMessagesResult[1]) then OrderedMessagesResult[1] else nil
@@ -193,7 +189,7 @@ return {
 				appendGroup(i - 1)
 				
 				if GroupBreakReason == "time" then
-					table.insert(List1, (timestampRow(t1, OrderedMessagesResultEntry1, OrderedMessagesResultEntry)))
+					table.insert(List1, (timestampRow(t, OrderedMessagesResultEntry1, OrderedMessagesResultEntry)))
 				end
 				v1 = i
 			end
@@ -223,24 +219,20 @@ return {
 		-- upvalues: orderedMessages (copy), IsSystemMessageFunction (copy), messageRow (copy)
 		local OrderedMessagesResult = orderedMessages(p6)
 		local t = {}
-		local t2 = nil
 		
-		if List == nil then
-			t2 = t
-		else
+		if List ~= nil then
 			for _, value in List do
 				t[value.id] = value
 			end
-			t2 = t
 		end
 		local List1 = {}
 		
 		for _, Message in OrderedMessagesResult do
 			if IsSystemMessageFunction(Message) then
-				local Entry = t2[Message.id]
+				local Entry = t[Message.id]
 				table.insert(List1, if Entry == nil or Entry.kind ~= "system" or Entry.message ~= Message then { kind = "system", id = Message.id, message = Message } else Entry)
 			else
-				table.insert(List1, (messageRow(t2, Message, true, true)))
+				table.insert(List1, (messageRow(t, Message, true, true)))
 			end
 		end
 		if List == nil or #List ~= #List1 then

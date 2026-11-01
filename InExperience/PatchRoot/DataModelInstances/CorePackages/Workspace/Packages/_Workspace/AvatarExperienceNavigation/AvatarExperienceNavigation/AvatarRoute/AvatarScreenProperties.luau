@@ -115,7 +115,7 @@ local config1 = {
 		}
 	},
 	[AvatarScreenModule.ManageOutfitPage] = {
-		isTransparent = not AvatarExperienceFlagsModule.FFlagAXFixGamepadNavigationOnOutfitManagement,
+		isTransparent = false,
 		analyticsData = {
 			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CUSTOMIZE
 		}

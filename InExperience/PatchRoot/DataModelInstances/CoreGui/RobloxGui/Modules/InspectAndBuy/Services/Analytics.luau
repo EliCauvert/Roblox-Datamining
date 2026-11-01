@@ -16,6 +16,10 @@ local TIMEDOPTIONBYDAYS = require(CorePackages.Workspace.Packages.AvatarExperien
 local AXUnifiedEventFilter = require(CorePackages.Workspace.Packages.AvatarExperienceAnalytics).AXUnifiedEventFilter
 local UnifiedEventCounterAggregator = require(CorePackages.Workspace.Packages.AvatarExperienceAnalytics).UnifiedEventCounterAggregator
 local FFlagAXUnifiedEventCounters = require(CorePackages.Workspace.Packages.AvatarExperienceFlags).FFlagAXUnifiedEventCounters
+local FFlagAXUnifiedEventStrictPayloads = require(CorePackages.Workspace.Packages.AvatarExperienceFlags).FFlagAXUnifiedEventStrictPayloads
+local GetMarketplaceUnifiedItemTypeFunction = require(CorePackages.Workspace.Packages.AvatarExperienceAnalytics).Utils.getMarketplaceUnifiedItemType
+local GetMarketplaceUnifiedAssetTypeFunction = require(CorePackages.Workspace.Packages.AvatarExperienceAnalytics).Utils.getMarketplaceUnifiedAssetType
+local GetMarketplaceUnifiedBundleTypeFunction = require(CorePackages.Workspace.Packages.AvatarExperienceAnalytics).Utils.getMarketplaceUnifiedBundleType
 local AnalyticsModule = {}
 AnalyticsModule.__index = AnalyticsModule
 
@@ -24,7 +28,7 @@ function AnalyticsModule.__tostring(): string
 end
 
 function AnalyticsModule.new(InspecteeUid, Ctx, p1)
-	-- upvalues: AnalyticsModule (copy), EventStreamReporter (copy), Default (copy), Players (copy), FFlagAXEnableInspectAndBuyVersionAnalyticsModule (copy), UnifiedEventLogEnums (copy), TIMEDOPTIONBYDAYS (copy), ItemTypeEnum (copy), UserInputService (copy), HttpService (copy), RunService (copy), RbxAnalyticsService (copy)
+	-- upvalues: AnalyticsModule (copy), EventStreamReporter (copy), Default (copy), Players (copy), FFlagAXEnableInspectAndBuyVersionAnalyticsModule (copy), UnifiedEventLogEnums (copy), FFlagAXUnifiedEventStrictPayloads (copy), GetMarketplaceUnifiedItemTypeFunction (copy), TIMEDOPTIONBYDAYS (copy), ItemTypeEnum (copy), GetMarketplaceUnifiedAssetTypeFunction (copy), GetMarketplaceUnifiedBundleTypeFunction (copy), UserInputService (copy), HttpService (copy), RunService (copy), RbxAnalyticsService (copy)
 	local t = {}
 	setmetatable(t, AnalyticsModule)
 	t.eventStream = EventStreamReporter.new(Default)
@@ -63,28 +67,28 @@ function AnalyticsModule.new(InspecteeUid, Ctx, p1)
 	end
 	
 	function t.reportPurchaseAttemptUnifiedEvent(ItemType, ItemID, p2)
-		-- upvalues: t (copy), UnifiedEventLogEnums (upval), TIMEDOPTIONBYDAYS (upval), ItemTypeEnum (upval)
+		-- upvalues: t (copy), UnifiedEventLogEnums (upval), FFlagAXUnifiedEventStrictPayloads (upval), GetMarketplaceUnifiedItemTypeFunction (upval), TIMEDOPTIONBYDAYS (upval), ItemTypeEnum (upval), GetMarketplaceUnifiedAssetTypeFunction (upval), GetMarketplaceUnifiedBundleTypeFunction (upval)
 		t:reportUnifiedEvent({
 			action = UnifiedEventLogEnums.MarketplaceUnifiedAction.PURCHASE_ATTEMPT,
-			itemId = ItemID,
-			itemType = ItemType,
+			itemId = if FFlagAXUnifiedEventStrictPayloads and ItemID ~= nil then tostring(ItemID) else ItemID,
+			itemType = if FFlagAXUnifiedEventStrictPayloads then GetMarketplaceUnifiedItemTypeFunction(ItemType) else ItemType,
 			organicTimedOption = if p2.timedOptionDays == nil then nil else TIMEDOPTIONBYDAYS[p2.timedOptionDays],
-			assetType = if ItemType == ItemTypeEnum.Asset then p2.itemSubType else nil,
-			bundleType = if ItemType == ItemTypeEnum.Bundle then p2.itemSubType else nil,
+			assetType = if ItemType == ItemTypeEnum.Asset then if FFlagAXUnifiedEventStrictPayloads then GetMarketplaceUnifiedAssetTypeFunction(p2.itemSubType) else p2.itemSubType else nil,
+			bundleType = if ItemType == ItemTypeEnum.Bundle then if FFlagAXUnifiedEventStrictPayloads then GetMarketplaceUnifiedBundleTypeFunction(p2.itemSubType) else p2.itemSubType else nil,
 			organicItemPrice = p2.price or 0
 		})
 		t:report("purchaseAttemptItem", { itemType = ItemType, itemID = ItemID })
 	end
 	
 	function t.reportPurchaseSuccessUnifiedEvent(ItemType, ItemID, p2)
-		-- upvalues: t (copy), UnifiedEventLogEnums (upval), TIMEDOPTIONBYDAYS (upval), ItemTypeEnum (upval)
+		-- upvalues: t (copy), UnifiedEventLogEnums (upval), FFlagAXUnifiedEventStrictPayloads (upval), GetMarketplaceUnifiedItemTypeFunction (upval), TIMEDOPTIONBYDAYS (upval), ItemTypeEnum (upval), GetMarketplaceUnifiedAssetTypeFunction (upval), GetMarketplaceUnifiedBundleTypeFunction (upval)
 		t:reportUnifiedEvent({
 			action = UnifiedEventLogEnums.MarketplaceUnifiedAction.PURCHASE_SUCCESS,
-			itemId = ItemID,
-			itemType = ItemType,
+			itemId = if FFlagAXUnifiedEventStrictPayloads and ItemID ~= nil then tostring(ItemID) else ItemID,
+			itemType = if FFlagAXUnifiedEventStrictPayloads then GetMarketplaceUnifiedItemTypeFunction(ItemType) else ItemType,
 			organicTimedOption = if p2.timedOptionDays == nil then nil else TIMEDOPTIONBYDAYS[p2.timedOptionDays],
-			assetType = if ItemType == ItemTypeEnum.Asset then p2.itemSubType else nil,
-			bundleType = if ItemType == ItemTypeEnum.Bundle then p2.itemSubType else nil,
+			assetType = if ItemType == ItemTypeEnum.Asset then if FFlagAXUnifiedEventStrictPayloads then GetMarketplaceUnifiedAssetTypeFunction(p2.itemSubType) else p2.itemSubType else nil,
+			bundleType = if ItemType == ItemTypeEnum.Bundle then if FFlagAXUnifiedEventStrictPayloads then GetMarketplaceUnifiedBundleTypeFunction(p2.itemSubType) else p2.itemSubType else nil,
 			organicItemPrice = p2.price or 0
 		})
 		t:report("purchaseSuccessItem", { itemType = ItemType, itemID = ItemID })

@@ -587,15 +587,15 @@ local function re_rawfind(Token, Str_arr, Total, Flags, VerbFlags, p10)
 	local Total1 = Total
 	local Total2 = Total
 	local List = {}
-	local Count1 = nil
-	local Flag = nil
-	local Alternation2 = nil
-	local Entry = nil
-	local v7 = nil
 	local Entry1 = nil
+	local v7 = nil
+	local Count1 = nil
+	local Alternation2_1 = nil
+	local Entry = nil
 	local v8 = nil
-	local Amount = nil
 	local v9 = nil
+	local Flag = nil
+	local Amount = nil
 	local v10 = nil
 	local v11 = nil
 	while Count do
@@ -636,26 +636,26 @@ local function re_rawfind(Token, Str_arr, Total, Flags, VerbFlags, p10)
 						"group", Count, Total1, nil, TokenEntry[2], TokenEntry[3], TokenEntry[4]
 					})
 					Count += 1
-					local Alternation1, Alternation2_1 = find_alternation(Token, Count, if TokenEntry[4] == 33 then TokenEntry[5] and 0 else TokenEntry[4] == 61 and (TokenEntry[5] and 0))
+					local Alternation, Alternation2 = find_alternation(Token, Count, if TokenEntry[4] == 33 then TokenEntry[5] and 0 else TokenEntry[4] == 61 and (TokenEntry[5] and 0))
 					
-					if Alternation1 then
-						table.insert(List, 1, { "alternation", Alternation1, Total1 })
+					if Alternation then
+						table.insert(List, 1, { "alternation", Alternation, Total1 })
 					end
-					if Alternation2_1 then
-						Total1 -= Alternation2_1
+					if Alternation2 then
+						Total1 -= Alternation2
 					end
 				elseif TokenEntry1 == 41 and TokenEntry[4] ~= 33 then
 					local Removed = nil
 					if TokenEntry[4] == 33 or TokenEntry[4] == 61 then
 						while true do
-							v8 = nil
+							v9 = nil
 							Removed = table.remove(List, 1)
-							if (Removed[1] ~= "group" or Removed[2] ~= TokenEntry[3]) and (Removed[1] ~= "matchStart" or v8 or TokenEntry[4] ~= 61 or true) then continue end
+							if (Removed[1] ~= "group" or Removed[2] ~= TokenEntry[3]) and (Removed[1] ~= "matchStart" or v9 or TokenEntry[4] ~= 61 or true) then continue end
 							if (TokenEntry[4] == 33 or TokenEntry[4] == 61) and not TokenEntry[5] then
 								Total1 = Removed[3]
 							end
-							if not v8 then break end
-							table.insert(List, 1, v8)
+							if not v9 then break end
+							table.insert(List, 1, v9)
 							break
 						end
 					elseif TokenEntry[4] == 62 then
@@ -724,36 +724,36 @@ local function re_rawfind(Token, Str_arr, Total, Flags, VerbFlags, p10)
 						jmp = Count
 					})
 					Count = TokenEntry[3] + 1
-					local Alternation3, _ = find_alternation(Token, Count)
+					local Alternation1, _ = find_alternation(Token, Count)
 					
-					if Alternation3 then
-						table.insert(List, 1, { "alternation", Alternation3, Total1 })
+					if Alternation1 then
+						table.insert(List, 1, { "alternation", Alternation1, Total1 })
 					end
 				else
-					local Tkn_char_matchResult = nil
+					local IsTotalMatch2 = nil
 					
 					if TokenEntry == "FAIL" then
-						Tkn_char_matchResult = false
+						IsTotalMatch2 = false
 					elseif TokenEntry1 == 41 then
 						repeat
 							local Removed1 = table.remove(List, 1)
 						until Removed1[1] == "group" and Removed1[2] == TokenEntry[3]
 					elseif TokenEntry1 == "quantifier" then
 						if type(TokenEntry[5]) == "table" and TokenEntry[5][1] == 40 then
-							local Alternation4 = find_alternation(Token, Count + 1)
+							local Alternation3 = find_alternation(Token, Count + 1)
 							
-							if Alternation4 then
-								table.insert(List, 1, { "alternation", Alternation4, Total1 })
+							if Alternation3 then
+								table.insert(List, 1, { "alternation", Alternation3, Total1 })
 							end
-							table.insert(List, if Alternation4 then 2 else 1, {
+							table.insert(List, if Alternation3 then 2 else 1, {
 								"group", Count, Total1, nil, TokenEntry[5][2], TokenEntry[5][3], "quantifier",
-								TokenEntry[2], TokenEntry[3], 0, Alternation4, TokenEntry[4]
+								TokenEntry[2], TokenEntry[3], 0, Alternation3, TokenEntry[4]
 							})
 							
 							if TokenEntry[4] == "lazy" and TokenEntry[2] == 0 then
 								Count = TokenEntry[5][3]
 							end
-							Tkn_char_matchResult = true
+							IsTotalMatch2 = true
 						else
 							v10 = nil
 							v11 = nil
@@ -764,18 +764,18 @@ local function re_rawfind(Token, Str_arr, Total, Flags, VerbFlags, p10)
 								Amount = 0
 								local TokenEntry5 = TokenEntry[5][2]
 								
-								for _, value4 in ipairs(List) do
-									if value4[1] == "group" and value4[5] == TokenEntry5 then
-										v10 = value4[3]
-										v11 = value4[4]
+								for _, value3 in ipairs(List) do
+									if value3[1] == "group" and value3[5] == TokenEntry5 then
+										v10 = value3[3]
+										v11 = value3[4]
 										Amount = v11 - v10
 										break
 									end
 								end
 							end
-							local NewTotal = Total1 + TokenEntry[2] * Amount
-							local v12 = 0
-							while v12 < TokenEntry[3] do
+							local Total4 = Total1 + TokenEntry[2] * Amount
+							local Count3 = 0
+							while Count3 < TokenEntry[3] do
 								if IsBackref then
 									if not v10 or not v11 then break end
 									local S: string = Str_arr.s
@@ -787,96 +787,96 @@ local function re_rawfind(Token, Str_arr, Total, Flags, VerbFlags, p10)
 									if Segment ~= string.sub(S1, utf8.offset(S1, Total1), OffsetResult1 and OffsetResult1 - 1) then break end
 								elseif not tkn_char_match(TokenEntry[5], Str_arr, Total1, Flags, VerbFlags) then break end
 								Total1 += Amount
-								v12 += 1
+								Count3 += 1
 							end
-							Tkn_char_matchResult = v12 >= TokenEntry[2]
+							IsTotalMatch2 = Count3 >= TokenEntry[2]
 							
-							if Tkn_char_matchResult and TokenEntry[4] ~= "possessive" then
+							if IsTotalMatch2 and TokenEntry[4] ~= "possessive" then
 								if TokenEntry[4] == "lazy" then
-									local Total4: number = Total1
-									Total1 = NewTotal
-									NewTotal = Total4
+									local Total3: number = Total1
+									Total1 = Total4
+									Total4 = Total3
 								end
 								table.insert(List, 1, {
 									"quantifier",
 									Count,
 									Total1,
-									math.min(NewTotal, Str_arr.n + 1),
+									math.min(Total4, Str_arr.n + 1),
 									(if TokenEntry[4] == "lazy" then 1 else -1) * Amount
 								})
 							end
 						end
 					elseif TokenEntry1 == "backref" then
 						v7 = nil
-						v9 = nil
+						v8 = nil
 						local TokenEntry6 = TokenEntry[2]
 						
-						for _, value3 in ipairs(List) do
-							if value3[1] == "group" and value3[5] == TokenEntry6 then
-								v7 = value3[3]
-								v9 = value3[4]
+						for _, value4 in ipairs(List) do
+							if value4[1] == "group" and value4[5] == TokenEntry6 then
+								v7 = value4[3]
+								v8 = value4[4]
 								break
 							end
 						end
-						if v7 and v9 then
-							local Total3: number = Total1
-							Total1 += v9 - v7
+						if v7 and v8 then
+							local Total5: number = Total1
+							Total1 += v8 - v7
 							local S: string = Str_arr.s
-							local OffsetResult = utf8.offset(S, v9)
+							local OffsetResult = utf8.offset(S, v8)
 							local Segment = string.sub(S, utf8.offset(S, v7), OffsetResult and OffsetResult - 1)
 							local S2: string = Str_arr.s
 							local OffsetResult2 = utf8.offset(S2, Total1)
-							Tkn_char_matchResult = Segment == string.sub(S2, utf8.offset(S2, Total3), OffsetResult2 and OffsetResult2 - 1)
+							IsTotalMatch2 = Segment == string.sub(S2, utf8.offset(S2, Total5), OffsetResult2 and OffsetResult2 - 1)
 						end
 					else
 						local Str_arrEntry = Str_arr[Total1]
 						
 						if TokenEntry1 == 36 or TokenEntry1 == 90 or TokenEntry1 == 122 then
-							Tkn_char_matchResult = Total1 == Str_arr.n + 1 or (TokenEntry1 == 36 and Flags.multiline and is_newline(Str_arr, Total1 + 1, VerbFlags) or TokenEntry1 == 90 and Total1 == Str_arr.n and is_newline(Str_arr, Total1, VerbFlags))
-						elseif TokenEntry1 == 94 or (TokenEntry1 == 65 or TokenEntry1 == 71) then
-							Tkn_char_matchResult = Total1 == 1 or (TokenEntry1 == 94 and Flags.multiline and is_newline(Str_arr, Total1 - 1, VerbFlags) or TokenEntry1 == 71 and Total1 == Total)
+							IsTotalMatch2 = Total1 == Str_arr.n + 1 or (TokenEntry1 == 36 and Flags.multiline and is_newline(Str_arr, Total1 + 1, VerbFlags) or TokenEntry1 == 90 and Total1 == Str_arr.n and is_newline(Str_arr, Total1, VerbFlags))
+						elseif TokenEntry1 == 94 or TokenEntry1 == 65 or TokenEntry1 == 71 then
+							IsTotalMatch2 = Total1 == 1 or (TokenEntry1 == 94 and Flags.multiline and is_newline(Str_arr, Total1 - 1, VerbFlags) or TokenEntry1 == 71 and Total1 == Total)
 						elseif TokenEntry1 == 66 or TokenEntry1 == 98 then
 							local IsTotalMatch = Total1 == 1 or Flags.multiline and is_newline(Str_arr, Total1 - 1, VerbFlags)
 							local IsTotalMatch1 = Total1 == Str_arr.n + 1 or Flags.multiline and is_newline(Str_arr, Total1, VerbFlags)
-							local v13 = if tkn_char_match(TokenEntry[2], Str_arr[Total1 - 1], Flags) then 0 else tkn_char_match(TokenEntry[2], Str_arrEntry, Flags) and 1
+							local v12 = if tkn_char_match(TokenEntry[2], Str_arr[Total1 - 1], Flags) then 0 else tkn_char_match(TokenEntry[2], Str_arrEntry, Flags) and 1
 							
-							if v13 == 0 then
-								Tkn_char_matchResult = IsTotalMatch1 or not tkn_char_match(TokenEntry[2], Str_arrEntry, Flags)
-							elseif v13 then
-								Tkn_char_matchResult = IsTotalMatch or not tkn_char_match(TokenEntry[2], Str_arr[Total1 - 1], Flags)
+							if v12 == 0 then
+								IsTotalMatch2 = IsTotalMatch1 or not tkn_char_match(TokenEntry[2], Str_arrEntry, Flags)
+							elseif v12 then
+								IsTotalMatch2 = IsTotalMatch or not tkn_char_match(TokenEntry[2], Str_arr[Total1 - 1], Flags)
 							end
 							if TokenEntry1 == 66 then
-								Tkn_char_matchResult = not Tkn_char_matchResult
+								IsTotalMatch2 = not IsTotalMatch2
 							end
 						else
-							Tkn_char_matchResult = tkn_char_match(TokenEntry, Str_arr, Total1, Flags, VerbFlags)
+							IsTotalMatch2 = tkn_char_match(TokenEntry, Str_arr, Total1, Flags, VerbFlags)
 							Total1 += 1
 						end
 					end
 					repeat
-						if Tkn_char_matchResult then break end
+						if IsTotalMatch2 then break end
 						while true do
 							Entry = List[1] and List[1][1]
 							Entry1 = List[1]
-							if Entry and (Entry ~= "PRUNE" and Entry ~= "SKIP") then
+							if Entry and Entry ~= "PRUNE" and Entry ~= "SKIP" then
 								if Entry == "alternation" then
 									Count = Entry1[2]
 									Total1 = Entry1[3]
-									local Alternation
-									Alternation, Alternation2 = find_alternation(Token, Count + 1)
+									local Alternation4
+									Alternation4, Alternation2_1 = find_alternation(Token, Count + 1)
 									
-									if Alternation then
-										Entry1[2] = Alternation
+									if Alternation4 then
+										Entry1[2] = Alternation4
 									else
 										table.remove(List, 1)
 									end
-									if not Alternation2 then break end
-									Total1 -= Alternation2
+									if not Alternation2_1 then break end
+									Total1 -= Alternation2_1
 									break
 								end
 								if Entry == "group" then
 									if Entry1[7] == "quantifier" then
-										if Entry1[12] == "greedy" and Entry1[8] <= Entry1[10] or Entry1[12] == "lazy" and (Entry1[10] < Entry1[9] and not Entry1[13]) then
+										if Entry1[12] == "greedy" and Entry1[8] <= Entry1[10] or Entry1[12] == "lazy" and Entry1[10] < Entry1[9] and not Entry1[13] then
 											Count = Entry1[12] == "greedy" and Entry1[6] or Entry1[2]
 											Total1 = Entry1[3]
 											
@@ -946,10 +946,75 @@ local function v35(p11, p12, p13)
 	return (re_rawfind(p11.token, to_str_arr(p12, p13), 1, p11.flags, p11.verb_flags, true))
 end
 
-local v14 = "test"
+local v13 = "test"
 
 function t1.test(...)
-	-- upvalues: self (copy), v14 (copy), t (copy), v35 (copy)
+	-- upvalues: self (copy), v13 (copy), t (copy), v35 (copy)
+	local Selected: number = select("#", ...)
+	
+	if Selected < 1 then
+		error("missing argument #1 (RegEx expected)", 2)
+	elseif Selected < 2 then
+		error("missing argument #2 (string expected)", 2)
+	end
+	local v14, v15, Largest, v16, v17, v18 = ...
+	
+	if self[v14] and self[v14].name == "RegEx" then
+		if v13 == "sub" then
+			if type(Largest) == "number" then
+				Largest ..= ""
+			elseif type(Largest) ~= "string" then
+				error(string.format("invalid argument #3 to 'sub' (string expected, got %s)", (typeof(Largest))), 2)
+			end
+		elseif type(v15) == "number" then
+			v15 ..= ""
+		elseif type(v15) ~= "string" then
+			error(string.format("invalid argument #2 to %q (string expected, got %s)", v13, (typeof(v15))), 2)
+		end
+	else
+		if type(v14) ~= "string" and type(v14) ~= "number" then
+			error(string.format("invalid argument #1 to %q (RegEx expected, got %s)", v13, (typeof(v14))), 2)
+		end
+		v14 = t.fromstring(v14)
+	end
+	if v13 ~= "sub" and v13 ~= "split" then
+		local ValueType = typeof(Largest)
+		
+		if ValueType ~= "nil" then
+			Largest = tonumber(Largest)
+			
+			if Largest then
+				if Largest < 0 then
+					Largest = #v15 + math.floor(Largest + 0.5) + 1
+				else
+					Largest = math.max(math.floor(Largest + 0.5), 1)
+				end
+			else
+				error(string.format("invalid argument #3 to %q (number expected, got %s)", v13, ValueType), 2)
+			end
+		end
+	end
+	local SelfEntry = self[v14]
+	
+	if v13 == "match" or v13 == "matchiter" then
+		v16 = (...)
+	elseif v13 == "sub" then
+		v18 = (...)
+	end
+	return v35(SelfEntry, v15, Largest, v16, v17, v18)
+end
+
+local function v37(p11, Input, p12, Source)
+	-- upvalues: re_rawfind (copy), to_str_arr (copy), new_match (copy)
+	local Re_rawfindResult = re_rawfind(p11.token, to_str_arr(Input, p12), 1, p11.flags, p11.verb_flags, false)
+	
+	return if Re_rawfindResult then new_match(Re_rawfindResult, p11.group_id, Source, Input) else nil
+end
+
+local v14 = "match"
+
+function t1.match(...)
+	-- upvalues: self (copy), v14 (copy), t (copy), v37 (copy)
 	local Selected: number = select("#", ...)
 	
 	if Selected < 1 then
@@ -1001,20 +1066,32 @@ function t1.test(...)
 	elseif v14 == "sub" then
 		v19 = (...)
 	end
-	return v35(SelfEntry, v16, Largest, v17, v18, v19)
+	return v37(SelfEntry, v16, Largest, v17, v18, v19)
 end
 
-local function v37(p11, Input, p12, Source)
-	-- upvalues: re_rawfind (copy), to_str_arr (copy), new_match (copy)
-	local Re_rawfindResult = re_rawfind(p11.token, to_str_arr(Input, p12), 1, p11.flags, p11.verb_flags, false)
+local function v39(p11, p12, p13, Source)
+	-- upvalues: to_str_arr (copy), re_rawfind (copy), new_match (copy)
+	local Str_arr = to_str_arr(p12, p13)
+	local Total = 1
 	
-	return if Re_rawfindResult then new_match(Re_rawfindResult, p11.group_id, Source, Input) else nil
+	return function()
+		-- upvalues: Total (ref), Str_arr (ref), re_rawfind (upval), p11 (copy), new_match (upval), Source (copy)
+		local Re_rawfindResult = Total <= Str_arr.n + 1 and re_rawfind(p11.token, Str_arr, Total, p11.flags, p11.verb_flags, false)
+		
+		if Re_rawfindResult then
+			Total = Re_rawfindResult[0][2] + (if Re_rawfindResult[0][2] <= Re_rawfindResult[0][1] then 1 else 0)
+			
+			return (new_match(Re_rawfindResult, p11.group_id, Source, Str_arr.s))
+		else
+			return nil
+		end
+	end
 end
 
-local v15 = "match"
+local v15 = "matchall"
 
-function t1.match(...)
-	-- upvalues: self (copy), v15 (copy), t (copy), v37 (copy)
+function t1.matchall(...)
+	-- upvalues: self (copy), v15 (copy), t (copy), v39 (copy)
 	local Selected: number = select("#", ...)
 	
 	if Selected < 1 then
@@ -1066,84 +1143,7 @@ function t1.match(...)
 	elseif v15 == "sub" then
 		v20 = (...)
 	end
-	return v37(SelfEntry, v17, Largest, v18, v19, v20)
-end
-
-local function v39(p11, p12, p13, Source)
-	-- upvalues: to_str_arr (copy), re_rawfind (copy), new_match (copy)
-	local Str_arr = to_str_arr(p12, p13)
-	local Total = 1
-	
-	return function()
-		-- upvalues: Total (ref), Str_arr (ref), re_rawfind (upval), p11 (copy), new_match (upval), Source (copy)
-		local Re_rawfindResult = Total <= Str_arr.n + 1 and re_rawfind(p11.token, Str_arr, Total, p11.flags, p11.verb_flags, false)
-		
-		if Re_rawfindResult then
-			Total = Re_rawfindResult[0][2] + (if Re_rawfindResult[0][2] <= Re_rawfindResult[0][1] then 1 else 0)
-			
-			return (new_match(Re_rawfindResult, p11.group_id, Source, Str_arr.s))
-		else
-			return nil
-		end
-	end
-end
-
-local v16 = "matchall"
-
-function t1.matchall(...)
-	-- upvalues: self (copy), v16 (copy), t (copy), v39 (copy)
-	local Selected: number = select("#", ...)
-	
-	if Selected < 1 then
-		error("missing argument #1 (RegEx expected)", 2)
-	elseif Selected < 2 then
-		error("missing argument #2 (string expected)", 2)
-	end
-	local v17, v18, Largest, v19, v20, v21 = ...
-	
-	if self[v17] and self[v17].name == "RegEx" then
-		if v16 == "sub" then
-			if type(Largest) == "number" then
-				Largest ..= ""
-			elseif type(Largest) ~= "string" then
-				error(string.format("invalid argument #3 to 'sub' (string expected, got %s)", (typeof(Largest))), 2)
-			end
-		elseif type(v18) == "number" then
-			v18 ..= ""
-		elseif type(v18) ~= "string" then
-			error(string.format("invalid argument #2 to %q (string expected, got %s)", v16, (typeof(v18))), 2)
-		end
-	else
-		if type(v17) ~= "string" and type(v17) ~= "number" then
-			error(string.format("invalid argument #1 to %q (RegEx expected, got %s)", v16, (typeof(v17))), 2)
-		end
-		v17 = t.fromstring(v17)
-	end
-	if v16 ~= "sub" and v16 ~= "split" then
-		local ValueType = typeof(Largest)
-		
-		if ValueType ~= "nil" then
-			Largest = tonumber(Largest)
-			
-			if Largest then
-				if Largest < 0 then
-					Largest = #v18 + math.floor(Largest + 0.5) + 1
-				else
-					Largest = math.max(math.floor(Largest + 0.5), 1)
-				end
-			else
-				error(string.format("invalid argument #3 to %q (number expected, got %s)", v16, ValueType), 2)
-			end
-		end
-	end
-	local SelfEntry = self[v17]
-	
-	if v16 == "match" or v16 == "matchiter" then
-		v19 = (...)
-	elseif v16 == "sub" then
-		v21 = (...)
-	end
-	return v39(SelfEntry, v18, Largest, v19, v20, v21)
+	return v39(SelfEntry, v17, Largest, v18, v19, v20)
 end
 
 local function insert_tokenized_sub(p11, p12, p13, List)
@@ -1213,19 +1213,19 @@ local function v42(p14, Callback, p15, p16: number?, p17, Source)
 		Callback = to_str_arr(Callback)
 		
 		if not config.l then
-			local v17 = 0
+			local v16 = 0
 			local Buffer = table.create(3)
 			local GroupN = p14.token.group_n
 			local List4 = {}
-			while v17 < Callback.n do
-				local Count3: number = v17
+			while v16 < Callback.n do
+				local Count3: number = v16
 				repeat
 					Count3 += 1
 				until not Callback[Count3] or (Callback[Count3] == 36 or Callback[Count3] == 92) or (Callback[Count3] == 58 or Callback[Count3] == 125) and List4[1]
-				Count1 += Count3 - v17 - 1
+				Count1 += Count3 - v16 - 1
 				
-				if Count3 - v17 > 1 then
-					table.insert(Buffer, table.move(Callback, v17 + 1, Count3 - 1, 1, table.create(Count3 - v17 - 1)))
+				if Count3 - v16 > 1 then
+					table.insert(Buffer, table.move(Callback, v16 + 1, Count3 - 1, 1, table.create(Count3 - v16 - 1)))
 				end
 				if Callback[Count3] == 58 then
 					local Entry = List4[1]
@@ -1315,7 +1315,7 @@ local function v42(p14, Callback, p15, p16: number?, p17, Source)
 								error("malformed substitution pattern", 3)
 							end
 						else
-							local v18 = nil
+							local v17 = nil
 							
 							if Callback[Count3 - 1] == 36 then
 								if CallbackEntry ~= 36 then
@@ -1328,18 +1328,18 @@ local function v42(p14, Callback, p15, p16: number?, p17, Source)
 									end
 								end
 							else
-								v18 = config2[Callback[Count3]]
+								v17 = config2[Callback[Count3]]
 								
-								if type(v18) ~= "number" then
-									v18 = nil
+								if type(v17) ~= "number" then
+									v17 = nil
 								end
 							end
 							local List3 = Buffer[#Buffer]
 							
 							if type(List3) == "table" then
-								table.insert(List3, v18 or Callback[Count3])
+								table.insert(List3, v17 or Callback[Count3])
 							else
-								table.insert(Buffer, { v18 or Callback[Count3] })
+								table.insert(Buffer, { v17 or Callback[Count3] })
 							end
 							Count1 += 1
 						end
@@ -1356,7 +1356,7 @@ local function v42(p14, Callback, p15, p16: number?, p17, Source)
 						end
 					end
 				end
-				v17 = Count3
+				v16 = Count3
 			end
 			if List4[1] then
 				error("malformed substitution pattern", 3)
@@ -1374,7 +1374,7 @@ local function v42(p14, Callback, p15, p16: number?, p17, Source)
 	local Str_arr = to_str_arr(p15)
 	local Count2 = 0
 	local Count = 1
-	local v19 = 0
+	local v18 = 0
 	while Count <= Str_arr.n + Count2 + 1 do
 		local Re_rawfindResult = re_rawfind(p14.token, Str_arr, Count, p14.flags, p14.verb_flags, false)
 		
@@ -1411,8 +1411,8 @@ local function v42(p14, Callback, p15, p16: number?, p17, Source)
 				MoveResult = { n = 0 }
 			end
 		end
-		local v20 = Re_rawfindResult[0][2] - Re_rawfindResult[0][1]
-		local Smallest = math.min(MoveResult.n, v20)
+		local v19 = Re_rawfindResult[0][2] - Re_rawfindResult[0][1]
+		local Smallest = math.min(MoveResult.n, v19)
 		
 		for i1 = 0, Smallest - 1 do
 			Str_arr[Re_rawfindResult[0][1] + i1] = MoveResult[i1 + 1]
@@ -1420,33 +1420,33 @@ local function v42(p14, Callback, p15, p16: number?, p17, Source)
 		local Index = Re_rawfindResult[0][1] + Smallest
 		Count = Re_rawfindResult[0][2]
 		
-		if MoveResult.n < v20 then
-			for _ = 1, v20 - MoveResult.n do
+		if MoveResult.n < v19 then
+			for _ = 1, v19 - MoveResult.n do
 				table.remove(Str_arr, Index)
 				Count2 -= 1
 				Count -= 1
 			end
-		elseif v20 < MoveResult.n then
-			for i4 = 1, MoveResult.n - v20 do
+		elseif v19 < MoveResult.n then
+			for i4 = 1, MoveResult.n - v19 do
 				table.insert(Str_arr, Index + i4 - 1, MoveResult[Smallest + i4])
 				Count2 += 1
 				Count += 1
 			end
 		end
-		if v20 <= 0 then
+		if v19 <= 0 then
 			Count += 1
 		end
-		v19 += 1
+		v18 += 1
 		
-		if p16 < v19 + 1 then break end
+		if p16 < v18 + 1 then break end
 	end
-	return from_str_arr(Str_arr), v19
+	return from_str_arr(Str_arr), v18
 end
 
-local v21 = "sub"
+local v20 = "sub"
 
 function t1.sub(...)
-	-- upvalues: self (copy), v21 (copy), t (copy), v42 (copy)
+	-- upvalues: self (copy), v20 (copy), t (copy), v42 (copy)
 	local Selected: number = select("#", ...)
 	
 	if Selected < 1 then
@@ -1454,27 +1454,27 @@ function t1.sub(...)
 	elseif Selected < 2 then
 		error("missing argument #2 (string expected)", 2)
 	end
-	local v22, v23, Largest, v24, v25, v26 = ...
+	local v21, v22, Largest, v23, v24, v25 = ...
 	
-	if self[v22] and self[v22].name == "RegEx" then
-		if v21 == "sub" then
+	if self[v21] and self[v21].name == "RegEx" then
+		if v20 == "sub" then
 			if type(Largest) == "number" then
 				Largest ..= ""
 			elseif type(Largest) ~= "string" then
 				error(string.format("invalid argument #3 to 'sub' (string expected, got %s)", (typeof(Largest))), 2)
 			end
-		elseif type(v23) == "number" then
-			v23 ..= ""
-		elseif type(v23) ~= "string" then
-			error(string.format("invalid argument #2 to %q (string expected, got %s)", v21, (typeof(v23))), 2)
+		elseif type(v22) == "number" then
+			v22 ..= ""
+		elseif type(v22) ~= "string" then
+			error(string.format("invalid argument #2 to %q (string expected, got %s)", v20, (typeof(v22))), 2)
 		end
 	else
-		if type(v22) ~= "string" and type(v22) ~= "number" then
-			error(string.format("invalid argument #1 to %q (RegEx expected, got %s)", v21, (typeof(v22))), 2)
+		if type(v21) ~= "string" and type(v21) ~= "number" then
+			error(string.format("invalid argument #1 to %q (RegEx expected, got %s)", v20, (typeof(v21))), 2)
 		end
-		v22 = t.fromstring(v22)
+		v21 = t.fromstring(v21)
 	end
-	if v21 ~= "sub" and v21 ~= "split" then
+	if v20 ~= "sub" and v20 ~= "split" then
 		local ValueType = typeof(Largest)
 		
 		if ValueType ~= "nil" then
@@ -1482,23 +1482,23 @@ function t1.sub(...)
 			
 			if Largest then
 				if Largest < 0 then
-					Largest = #v23 + math.floor(Largest + 0.5) + 1
+					Largest = #v22 + math.floor(Largest + 0.5) + 1
 				else
 					Largest = math.max(math.floor(Largest + 0.5), 1)
 				end
 			else
-				error(string.format("invalid argument #3 to %q (number expected, got %s)", v21, ValueType), 2)
+				error(string.format("invalid argument #3 to %q (number expected, got %s)", v20, ValueType), 2)
 			end
 		end
 	end
-	local SelfEntry = self[v22]
+	local SelfEntry = self[v21]
 	
-	if v21 == "match" or v21 == "matchiter" then
-		v24 = (...)
-	elseif v21 == "sub" then
-		v26 = (...)
+	if v20 == "match" or v20 == "matchiter" then
+		v23 = (...)
+	elseif v20 == "sub" then
+		v25 = (...)
 	end
-	return v42(SelfEntry, v23, Largest, v24, v25, v26)
+	return v42(SelfEntry, v22, Largest, v23, v24, v25)
 end
 
 local function v44(p18, p19, p20: number?)
@@ -1518,7 +1518,7 @@ local function v44(p18, p19, p20: number?)
 	local Total = 1
 	local Count = 0
 	local List = {}
-	local v22 = 0
+	local v21 = 0
 	while Total <= Str_arr.n + 1 do
 		Count += 1
 		local Re_rawfindResult = Count <= p20 and re_rawfind(p18.token, Str_arr, Total, p18.flags, p18.verb_flags, false)
@@ -1526,19 +1526,19 @@ local function v44(p18, p19, p20: number?)
 		if not Re_rawfindResult then break end
 		local S: string = Str_arr.s
 		local OffsetResult = utf8.offset(S, Re_rawfindResult[0][1])
-		table.insert(List, (string.sub(S, utf8.offset(S, Total - v22), OffsetResult and OffsetResult - 1)))
-		v22 = if Re_rawfindResult[0][2] <= Re_rawfindResult[0][1] then 1 else 0
-		Total = Re_rawfindResult[0][2] + v22
+		table.insert(List, (string.sub(S, utf8.offset(S, Total - v21), OffsetResult and OffsetResult - 1)))
+		v21 = if Re_rawfindResult[0][2] <= Re_rawfindResult[0][1] then 1 else 0
+		Total = Re_rawfindResult[0][2] + v21
 	end
-	table.insert(List, (string.sub(Str_arr.s, utf8.offset(Str_arr.s, Total - v22))))
+	table.insert(List, (string.sub(Str_arr.s, utf8.offset(Str_arr.s, Total - v21))))
 	
 	return List
 end
 
-local v23 = "split"
+local v22 = "split"
 
 function t1.split(...)
-	-- upvalues: self (copy), v23 (copy), t (copy), v44 (copy)
+	-- upvalues: self (copy), v22 (copy), t (copy), v44 (copy)
 	local Selected: number = select("#", ...)
 	
 	if Selected < 1 then
@@ -1546,27 +1546,27 @@ function t1.split(...)
 	elseif Selected < 2 then
 		error("missing argument #2 (string expected)", 2)
 	end
-	local v24, v25, Largest, v26, v27, v28 = ...
+	local v23, v24, Largest, v25, v26, v27 = ...
 	
-	if self[v24] and self[v24].name == "RegEx" then
-		if v23 == "sub" then
+	if self[v23] and self[v23].name == "RegEx" then
+		if v22 == "sub" then
 			if type(Largest) == "number" then
 				Largest ..= ""
 			elseif type(Largest) ~= "string" then
 				error(string.format("invalid argument #3 to 'sub' (string expected, got %s)", (typeof(Largest))), 2)
 			end
-		elseif type(v25) == "number" then
-			v25 ..= ""
-		elseif type(v25) ~= "string" then
-			error(string.format("invalid argument #2 to %q (string expected, got %s)", v23, (typeof(v25))), 2)
+		elseif type(v24) == "number" then
+			v24 ..= ""
+		elseif type(v24) ~= "string" then
+			error(string.format("invalid argument #2 to %q (string expected, got %s)", v22, (typeof(v24))), 2)
 		end
 	else
-		if type(v24) ~= "string" and type(v24) ~= "number" then
-			error(string.format("invalid argument #1 to %q (RegEx expected, got %s)", v23, (typeof(v24))), 2)
+		if type(v23) ~= "string" and type(v23) ~= "number" then
+			error(string.format("invalid argument #1 to %q (RegEx expected, got %s)", v22, (typeof(v23))), 2)
 		end
-		v24 = t.fromstring(v24)
+		v23 = t.fromstring(v23)
 	end
-	if v23 ~= "sub" and v23 ~= "split" then
+	if v22 ~= "sub" and v22 ~= "split" then
 		local ValueType = typeof(Largest)
 		
 		if ValueType ~= "nil" then
@@ -1574,23 +1574,23 @@ function t1.split(...)
 			
 			if Largest then
 				if Largest < 0 then
-					Largest = #v25 + math.floor(Largest + 0.5) + 1
+					Largest = #v24 + math.floor(Largest + 0.5) + 1
 				else
 					Largest = math.max(math.floor(Largest + 0.5), 1)
 				end
 			else
-				error(string.format("invalid argument #3 to %q (number expected, got %s)", v23, ValueType), 2)
+				error(string.format("invalid argument #3 to %q (number expected, got %s)", v22, ValueType), 2)
 			end
 		end
 	end
-	local SelfEntry = self[v24]
+	local SelfEntry = self[v23]
 	
-	if v23 == "match" or v23 == "matchiter" then
-		v26 = (...)
-	elseif v23 == "sub" then
-		v28 = (...)
+	if v22 == "match" or v22 == "matchiter" then
+		v25 = (...)
+	elseif v22 == "sub" then
+		v27 = (...)
 	end
-	return v44(SelfEntry, v25, Largest, v26, v27, v28)
+	return v44(SelfEntry, v24, Largest, v25, v26, v27)
 end
 
 local _ = function(p21, p22)
@@ -1625,8 +1625,8 @@ local function tokenize_ptn(List, Flags)
 	local Count6 = nil
 	local Entry6 = nil
 	local Count8 = nil
-	local Entry7 = nil
 	local Entry3 = nil
+	local Entry7 = nil
 	local Largest1 = nil
 	local Count5 = nil
 	while Count <= N do
@@ -1761,7 +1761,7 @@ local function tokenize_ptn(List, Flags)
 							if List[Count] ~= 60 and (List[Count - 1] == 80 or List[Count] ~= 39) then
 								return "invalid group structure"
 							end
-							local v24: number = if List[Count] == 39 then 39 else 62
+							local v23: number = if List[Count] == 39 then 39 else 62
 							local NewCount1 = Count + 1
 							Count += 1
 							
@@ -1781,7 +1781,7 @@ local function tokenize_ptn(List, Flags)
 							if not List[Count] then
 								return "unterminated parenthetical"
 							end
-							if List[Count] ~= v24 then
+							if List[Count] ~= v23 then
 								return "invalid character in subpattern"
 							end
 							local S: string = List.s
@@ -1813,15 +1813,15 @@ local function tokenize_ptn(List, Flags)
 				table.insert(List1, Entry)
 			end
 		elseif Entry1 == 41 then
-			local v25 = #List1 + 1
+			local v24 = #List1 + 1
 			Count5 = -1
 			Count6 = 0
 			Largest1 = 0
 			Count8 = 0
 			repeat
-				v25 -= 1
-				Entry7 = List1[v25]
-				local IsTable1 = type(List1[v25]) == "table"
+				v24 -= 1
+				Entry7 = List1[v24]
+				local IsTable1 = type(List1[v24]) == "table"
 				if IsTable1 and Entry7[1] == 40 then
 					Count8 += 1
 					
@@ -1861,16 +1861,16 @@ local function tokenize_ptn(List, Flags)
 						Count6 += 1
 					end
 				end
-			until v25 < 1
-			if v25 < 1 then
+			until v24 < 1
+			if v24 < 1 then
 				return "unmatched ) in regular expression"
 			end
-			local Entry8 = List1[v25]
-			local v26 = #List1 + 1
+			local Entry8 = List1[v24]
+			local v25 = #List1 + 1
 			local config4 = {
 				41,
 				Entry8[2],
-				v25,
+				v24,
 				Entry8[4],
 				Entry8[5],
 				count = Count5
@@ -1879,7 +1879,7 @@ local function tokenize_ptn(List, Flags)
 			if (Entry8[4] == 33 or Entry8[4] == 61) and (Entry8[5] and not Count5) then
 				return "lookbehind assertion is not fixed width"
 			end
-			Entry8[3] = v26
+			Entry8[3] = v25
 			table.insert(List1, config4)
 		elseif Entry1 == 46 then
 			table.insert(List1, list1)
@@ -1933,13 +1933,13 @@ local function tokenize_ptn(List, Flags)
 							Count += 1
 							
 							if List[Count] == 120 then
-								local v27: number? = nil
+								local v26: number? = nil
 								local EntryDelta2 = nil
 								Count += 1
 								
 								if List[Count] and List[Count] >= 48 and List[Count] <= 57 or List[Count] >= 65 and List[Count] <= 70 or List[Count] >= 97 and List[Count] <= 102 then
 									local Entry5 = List[Count]
-									v27 = Entry5 - (if List[Count] >= 65 and List[Count] <= 90 then 55 elseif List[Count] >= 97 and List[Count] <= 122 then 87 else 48)
+									v26 = Entry5 - (if List[Count] >= 65 and List[Count] <= 90 then 55 elseif List[Count] >= 97 and List[Count] <= 122 then 87 else 48)
 									Count += 1
 									
 									if List[Count] and List[Count] >= 48 and List[Count] <= 57 or List[Count] >= 65 and List[Count] <= 70 or List[Count] >= 97 and List[Count] <= 102 then
@@ -1951,26 +1951,26 @@ local function tokenize_ptn(List, Flags)
 								else
 									Count -= 1
 								end
-								Entry4 = v27 and (EntryDelta2 and 16 * v27 + EntryDelta2 or v27) or 0
+								Entry4 = v26 and (EntryDelta2 and 16 * v26 + EntryDelta2 or v26) or 0
 							elseif List[Count] >= 48 and List[Count] <= 55 then
 								local EntryDelta6 = List[Count] - 48
+								local v27: number? = nil
 								local v28: number? = nil
-								local v29: number? = nil
 								Count += 1
 								
 								if List[Count] and List[Count] >= 48 and List[Count] <= 55 then
-									v28 = List[Count] - 48
+									v27 = List[Count] - 48
 									Count += 1
 									
 									if List[Count] and List[Count] >= 48 and List[Count] <= 55 then
-										v29 = List[Count] - 48
+										v28 = List[Count] - 48
 									else
 										Count -= 1
 									end
 								else
 									Count -= 1
 								end
-								Entry4 = v28 and (v29 and 64 * EntryDelta6 + 8 * v28 + v29 or 8 * EntryDelta6 + v28) or EntryDelta6
+								Entry4 = v27 and (v28 and 64 * EntryDelta6 + 8 * v27 + v28 or 8 * EntryDelta6 + v27) or EntryDelta6
 							else
 								Entry4 = config2[List[Count]] or List[Count]
 								
@@ -2164,12 +2164,12 @@ local function tokenize_ptn(List, Flags)
 				
 				if Count1 < Number and Count ~= Count14 then
 					Count = Count14
-					local v30: number? = nil
+					local v29: number? = nil
 					S = nil
 					EntryDelta3 = nil
 					
 					if List[Count] <= 55 then
-						v30 = List[Count] - 48
+						v29 = List[Count] - 48
 						Count += 1
 						
 						if List[Count] and (List[Count] >= 48 and List[Count] <= 55) then
@@ -2185,7 +2185,7 @@ local function tokenize_ptn(List, Flags)
 							Count -= 1
 						end
 					end
-					StartIndex = v30 and (S and (EntryDelta3 and 64 * v30 + 8 * S + EntryDelta3 or 8 * v30 + S) or v30) or List[Count14]
+					StartIndex = v29 and (S and (EntryDelta3 and 64 * v29 + 8 * S + EntryDelta3 or 8 * v29 + S) or v29) or List[Count14]
 					table.insert(List1, StartIndex)
 				else
 					table.insert(List1, { "backref", Number })
@@ -2270,7 +2270,7 @@ local function tokenize_ptn(List, Flags)
 						end
 						table.insert(List1, Number)
 					elseif Entry11 == 120 then
-						local v31: number? = nil
+						local v30: number? = nil
 						local EntryDelta7 = nil
 						Count += 1
 						
@@ -2292,7 +2292,7 @@ local function tokenize_ptn(List, Flags)
 						else
 							if List[Count] and (List[Count] >= 48 and List[Count] <= 57 or (List[Count] >= 65 and List[Count] <= 70 or List[Count] >= 97 and List[Count] <= 102)) then
 								local Entry10 = List[Count]
-								v31 = Entry10 - (if List[Count] >= 65 and List[Count] <= 90 then 55 elseif List[Count] >= 97 and List[Count] <= 122 then 87 else 48)
+								v30 = Entry10 - (if List[Count] >= 65 and List[Count] <= 90 then 55 elseif List[Count] >= 97 and List[Count] <= 122 then 87 else 48)
 								Count += 1
 								
 								if List[Count] and (List[Count] >= 48 and List[Count] <= 57 or (List[Count] >= 65 and List[Count] <= 70 or List[Count] >= 97 and List[Count] <= 102)) then
@@ -2304,7 +2304,7 @@ local function tokenize_ptn(List, Flags)
 							else
 								Count -= 1
 							end
-							table.insert(List1, v31 and (EntryDelta7 and 16 * v31 + EntryDelta7 or v31) or 0)
+							table.insert(List1, v30 and (EntryDelta7 and 16 * v30 + EntryDelta7 or v30) or 0)
 						end
 					else
 						table.insert(List1, config3[Entry11] or config2[Entry11] or Entry11)
@@ -2317,30 +2317,30 @@ local function tokenize_ptn(List, Flags)
 			
 			if Entry1 == 123 then
 				local NewCount = Count + 1
-				local v32: number? = nil
-				while List[Count + 1] and (List[Count + 1] >= 48 and List[Count + 1] <= 57 or List[Count + 1] == 44 and (not v32 and Count + 1 ~= NewCount)) do
+				local v31: number? = nil
+				while List[Count + 1] and (List[Count + 1] >= 48 and List[Count + 1] <= 57 or List[Count + 1] == 44 and (not v31 and Count + 1 ~= NewCount)) do
 					Count += 1
 					
 					if List[Count] == 44 then
-						v32 = Count
+						v31 = Count
 					end
 				end
 				if List[Count + 1] == 125 then
 					Count += 1
 					
-					if v32 then
+					if v31 then
 						local S = List.s
-						local OffsetResult = utf8.offset(S, v32)
+						local OffsetResult = utf8.offset(S, v31)
 						local EndIndex: number = OffsetResult and OffsetResult - 1
 						Number = tonumber((string.sub(S, utf8.offset(S, NewCount), EndIndex)))
 						local Number2 = nil
 						
-						if v32 + 1 == Count then
+						if v31 + 1 == Count then
 							Number2 = 1e999
 						else
 							S = List.s
 							local OffsetResult2 = utf8.offset(S, Count)
-							EndIndex = utf8.offset(S, v32 + 1)
+							EndIndex = utf8.offset(S, v31 + 1)
 							Number2 = tonumber((string.sub(S, EndIndex, OffsetResult2 and OffsetResult2 - 1)))
 						end
 						Number1 = Number2
@@ -2540,15 +2540,15 @@ function t.new(...)
 	if select("#", ...) == 0 then
 		error("missing argument #1 (string expected)", 2)
 	end
-	local Text, v33 = ...
+	local Text, v32 = ...
 	
 	if type(Text) == "number" then
 		Text ..= ""
 	elseif type(Text) ~= "string" then
 		error(string.format("invalid argument #1 (string expected, got %s)", (typeof(Text))), 2)
 	end
-	if type(v33) ~= "string" and type(v33) ~= "number" and v33 ~= nil then
-		error(string.format("invalid argument #2 (string expected, got %s)", (typeof(v33))), 2)
+	if type(v32) ~= "string" and type(v32) ~= "number" and v32 ~= nil then
+		error(string.format("invalid argument #2 (string expected, got %s)", (typeof(v32))), 2)
 	end
 	local config1 = {
 		anchored = false,
@@ -2561,7 +2561,7 @@ function t.new(...)
 	}
 	local List = {}
 	
-	for i in string.gmatch(v33 or "", utf8.charpattern) do
+	for i in string.gmatch(v32 or "", utf8.charpattern) do
 		if config1[config[i]] ~= false then
 			error("invalid regular expression flag " .. i, 3)
 		end
@@ -2649,7 +2649,7 @@ function t.escape(...)
 	if select("#", ...) == 0 then
 		error("missing argument #1 (string expected)", 2)
 	end
-	local Text1, v34, Text = ...
+	local Text1, v33, Text = ...
 	
 	if type(Text1) == "number" then
 		Text1 ..= ""
@@ -2666,7 +2666,7 @@ function t.escape(...)
 	if utf8.len(Text) > 1 or Text:match("^[%a\\]$") then
 		error("delimiter have not be alphanumeric", 2)
 	end
-	return (string.gsub(Text1, "[\0\f\n\r\t]", config7):gsub(string.format("[\\%s#()%%%%*+.?[%%]^{|%s]", if v34 then "%s" else "", (if Text:find("^[%%%]]$") then "%" else "") .. Text), "\\%1"))
+	return (string.gsub(Text1, "[\0\f\n\r\t]", config7):gsub(string.format("[\\%s#()%%%%*+.?[%%]^{|%s]", if v33 then "%s" else "", (if Text:find("^[%%%]]$") then "%" else "") .. Text), "\\%1"))
 end
 
 function t.type(...)

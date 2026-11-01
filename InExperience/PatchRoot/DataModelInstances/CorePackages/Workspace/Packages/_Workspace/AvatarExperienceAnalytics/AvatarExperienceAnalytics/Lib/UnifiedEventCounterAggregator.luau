@@ -1,5 +1,8 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
-local MarketplaceUnifiedAction = require(script.Parent.Parent.UnifiedEventLogEnums).MarketplaceUnifiedAction
+local UnifiedEventLogEnumsModule = require(script.Parent.Parent.UnifiedEventLogEnums)
+local _ = require(script.Parent.Parent.Generated.UnifiedEventTypes)
+local MarketplaceUnifiedAction = UnifiedEventLogEnumsModule.MarketplaceUnifiedAction
+local MarketplaceUnifiedActionNumbers = UnifiedEventLogEnumsModule.MarketplaceUnifiedActionNumbers
 local SendAXCounterV2Module = require(script.Parent.Parent.sendAXCounterV2)
 local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
 local IsRunningInStudioFunction = require(Parent.AppCommonLib).isRunningInStudio
@@ -8,6 +11,7 @@ local FIntAXUnifiedEventCounterImpressionFlushSeconds = AvatarExperienceFlagsMod
 local FIntAXUnifiedEventCounterMaxKeys = AvatarExperienceFlagsModule.FIntAXUnifiedEventCounterMaxKeys
 local FIntAXUnifiedEventCounterIdleSeconds = AvatarExperienceFlagsModule.FIntAXUnifiedEventCounterIdleSeconds
 local FFlagAXUnifiedEventCounterDebugLogs = AvatarExperienceFlagsModule.FFlagAXUnifiedEventCounterDebugLogs
+local FFlagAXUnifiedEventStrictPayloads = AvatarExperienceFlagsModule.FFlagAXUnifiedEventStrictPayloads
 local config = {
 	[MarketplaceUnifiedAction.PURCHASE_ATTEMPT] = true,
 	[MarketplaceUnifiedAction.PURCHASE_SUCCESS] = true
@@ -38,16 +42,16 @@ local Long = newWindow("long", FIntAXUnifiedEventCounterImpressionFlushSeconds, 
 local NavigationOpaquePage = nil
 local t = {}
 
-local function invertEnum(MarketplaceUnifiedAction)
+local function invertEnum(UnifiedLoggingSurface)
 	local t = {}
 	
-	for i, value in MarketplaceUnifiedAction do
+	for i, value in UnifiedLoggingSurface do
 		t[tostring(value)] = tostring(i)
 	end
 	return t
 end
 
-local InvertEnumResult = invertEnum(MarketplaceUnifiedAction)
+local InvertEnumResult = invertEnum(if FFlagAXUnifiedEventStrictPayloads then MarketplaceUnifiedActionNumbers else MarketplaceUnifiedAction)
 local InvertEnumResult1 = invertEnum(UnifiedLoggingSurface)
 
 local function _(p1): string
@@ -67,7 +71,12 @@ local function toElementNameDimension(ElementName): string
 end
 
 local _ = function(p1, p2)
-	if p1 == nil or p1 == "" then
+	-- upvalues: FFlagAXUnifiedEventStrictPayloads (copy)
+	if FFlagAXUnifiedEventStrictPayloads then
+		local Text: string = if p1 == nil then "" else tostring(p1)
+		
+		return if Text == "" then "Unknown" else p2[Text] or Text
+	elseif p1 == nil or p1 == "" then
 		return "Unknown"
 	else
 		local Text = tostring(p1)
@@ -151,8 +160,8 @@ local function flushWindow(Window)
 		local Continued = nil
 		
 		if Window.tracksPhase then
-			t[i] = true
 			Continued = if t[i] then "Continued" else "Initial"
+			t[i] = true
 		else
 			Continued = nil
 		end
@@ -194,7 +203,7 @@ return {
 		flushWindow(Long)
 	end,
 	record = function(Dimensions, p1)
-		-- upvalues: NavigationOpaquePage (ref), t (ref), InvertEnumResult (copy), InvertEnumResult1 (copy), MarketplaceUnifiedAction (copy), toElementNameDimension (copy), config (copy), emit (copy), config1 (copy), Long (copy), Short (copy), bucketKey (copy), FFlagAXUnifiedEventCounterDebugLogs (copy), IsRunningInStudioFunction (copy), describe (copy), FIntAXUnifiedEventCounterMaxKeys (copy), flushWindow (copy), scheduleFlush (copy)
+		-- upvalues: NavigationOpaquePage (ref), t (ref), InvertEnumResult (copy), FFlagAXUnifiedEventStrictPayloads (copy), InvertEnumResult1 (copy), MarketplaceUnifiedAction (copy), toElementNameDimension (copy), config (copy), emit (copy), config1 (copy), Long (copy), Short (copy), bucketKey (copy), FFlagAXUnifiedEventCounterDebugLogs (copy), IsRunningInStudioFunction (copy), describe (copy), FIntAXUnifiedEventCounterMaxKeys (copy), flushWindow (copy), scheduleFlush (copy)
 		local Action = Dimensions.action
 		
 		if Action == nil then return end
@@ -205,25 +214,31 @@ return {
 			t = {}
 		end
 		local Dimensions1 = {}
-		local Action1 = nil
+		local Unknown = nil
 		
-		if Action == nil or Action == "" then
-			Action1 = "Unknown"
+		if FFlagAXUnifiedEventStrictPayloads then
+			local Text: string = if Action == nil then "" else tostring(Action)
+			Unknown = if Text == "" then "Unknown" else InvertEnumResult[Text] or Text
+		elseif Action == nil or Action == "" then
+			Unknown = "Unknown"
 		else
 			local Text = tostring(Action)
-			Action1 = InvertEnumResult[Text] or Text
+			Unknown = InvertEnumResult[Text] or Text
 		end
-		Dimensions1.action = Action1
+		Dimensions1.action = Unknown
 		local Surface = Dimensions.surface
-		local Surface1 = nil
+		local Unknown1 = nil
 		
-		if Surface == nil or Surface == "" then
-			Surface1 = "Unknown"
+		if FFlagAXUnifiedEventStrictPayloads then
+			local Text: string = if Surface == nil then "" else tostring(Surface)
+			Unknown1 = if Text == "" then "Unknown" else InvertEnumResult1[Text] or Text
+		elseif Surface == nil or Surface == "" then
+			Unknown1 = "Unknown"
 		else
 			local Text = tostring(Surface)
-			Surface1 = InvertEnumResult1[Text] or Text
+			Unknown1 = InvertEnumResult1[Text] or Text
 		end
-		Dimensions1.surface = Surface1
+		Dimensions1.surface = Unknown1
 		local NavigationPage = Dimensions.navigationPage
 		Dimensions1.navigationPage = if NavigationPage == nil or NavigationPage == "" then "Unknown" else tostring(NavigationPage)
 		Dimensions1.elementName = if Action == MarketplaceUnifiedAction.UI_ELEMENT_CLICK then toElementNameDimension(Dimensions.elementName) else nil

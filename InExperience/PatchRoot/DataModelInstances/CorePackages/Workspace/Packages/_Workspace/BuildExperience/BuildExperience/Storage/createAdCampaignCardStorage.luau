@@ -278,19 +278,18 @@ return function(p1)
 					Tbl2, v65 = beforeUnsentPreflight(SessionId, ToolCallId, Tbl2)
 				end
 				local config = { isAvailable = true, isPersisted = not v4 }
-				local Record = nil
+				local Copy = nil
 				
 				if Tbl2 == nil then
-					Record = nil
+					Copy = nil
 				else
-					local Copy = table.clone(Tbl2)
+					Copy = table.clone(Tbl2)
 					
 					if Copy.phase == "active" then
 						Copy.phase = "created"
 					end
-					Record = Copy
 				end
-				config.record = Record
+				config.record = Copy
 				
 				return config
 			else

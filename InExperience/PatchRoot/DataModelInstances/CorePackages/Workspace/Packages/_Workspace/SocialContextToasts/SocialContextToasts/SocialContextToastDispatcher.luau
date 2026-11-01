@@ -30,26 +30,26 @@ local Callback = if GetFFlagEnableReferredPlayerJoinRemoteEventFunction() then f
 	return if GetFFlagEnableReferredPlayerJoinRemoteEventForAllFunction() then true else false
 end else nil
 
-local function getNames(ApolloClient, p1)
+local function getNames(ApolloClient, RemoveValueResult)
 	-- upvalues: PromiseModule (copy), FFlagUserProfilePlatformProfile (copy), UserProfilesModule (copy), GetCombinedNameFromIdFunction (copy)
 	local UserIds = {}
 	
-	for i = 1, #p1 do
-		UserIds[i] = tostring(p1[i])
+	for i = 1, #RemoveValueResult do
+		UserIds[i] = tostring(RemoveValueResult[i])
 	end
 	return PromiseModule.new(function(Callback, _)
-		-- upvalues: ApolloClient (copy), FFlagUserProfilePlatformProfile (upval), UserProfilesModule (upval), UserIds (copy), p1 (copy), GetCombinedNameFromIdFunction (upval)
+		-- upvalues: ApolloClient (copy), FFlagUserProfilePlatformProfile (upval), UserProfilesModule (upval), UserIds (copy), RemoveValueResult (copy), GetCombinedNameFromIdFunction (upval)
 		ApolloClient:query({
 			query = if FFlagUserProfilePlatformProfile then UserProfilesModule.Queries.userProfilesBasicNamesByUserIds else UserProfilesModule.Queries.userProfilesAllNamesByUserIds,
 			variables = { userIds = UserIds }
 		}):andThen(function(Result)
-			-- upvalues: p1 (upval), GetCombinedNameFromIdFunction (upval), Callback (copy)
+			-- upvalues: RemoveValueResult (upval), GetCombinedNameFromIdFunction (upval), Callback (copy)
 			local List = {}
 			
-			for i = 1, #p1 do
+			for i = 1, #RemoveValueResult do
 				table.insert(List, {
-					userId = p1[i],
-					name = GetCombinedNameFromIdFunction(Result.data, p1[i])
+					userId = RemoveValueResult[i],
+					name = GetCombinedNameFromIdFunction(Result.data, RemoveValueResult[i])
 				})
 			end
 			Callback(List)
@@ -57,19 +57,19 @@ local function getNames(ApolloClient, p1)
 	end)
 end
 
-local function _(p2, p3, p4)
+local function _(p1, p2, p3)
 	-- upvalues: CryoModule (copy)
-	if p4 then
-		local RemoveValueResult = CryoModule.List.removeValue(p2, p3)
-		table.insert(RemoveValueResult, 1, p3)
+	if p3 then
+		local RemoveValueResult = CryoModule.List.removeValue(p1, p2)
+		table.insert(RemoveValueResult, 1, p2)
 		
 		return RemoveValueResult
 	else
-		return p2
+		return p1
 	end
 end
 
-local function showYouJoinedFriendsToast(Services, Callback, FollowUserId: number, List, p2, UniverseId, PlaceId)
+local function showYouJoinedFriendsToast(Services, Callback, FollowUserId: number, List, p1, UniverseId, PlaceId)
 	-- upvalues: SetToastContentModule (copy), SocialContextToastDiagKeysModule (copy), GetFFlagSocialContextToastEventStreamFunction (copy), SocialContextToastEventsModule (copy), ToastTypesModule (copy), SocialContextToastAnalyticsActionTypesModule (copy), CryoModule (copy), getNames (copy)
 	if #List == 0 then
 		return Callback(SetToastContentModule(nil))
@@ -85,16 +85,9 @@ local function showYouJoinedFriendsToast(Services, Callback, FollowUserId: numbe
 			actionType = SocialContextToastAnalyticsActionTypesModule.Shown
 		})
 	end
-	if FollowUserId > 0 then
-		local List1 = List
-		
-		if p2 then
-			local RemoveValueResult = CryoModule.List.removeValue(List1, FollowUserId)
-			table.insert(RemoveValueResult, 1, FollowUserId)
-			List = RemoveValueResult
-		else
-			List = List1
-		end
+	if FollowUserId > 0 and p1 then
+		List = CryoModule.List.removeValue(List, FollowUserId)
+		table.insert(List, 1, FollowUserId)
 	end
 	return getNames(Services.apolloClient, List):andThen(function(Result)
 		-- upvalues: Callback (copy), SetToastContentModule (upval), ToastTypesModule (upval)
@@ -197,9 +190,9 @@ local function handleFollowedPlayerDisconnected(Services, Callback, JoinerUserId
 					actionType = SocialContextToastAnalyticsActionTypesModule.Shown
 				})
 			end
-			local function closeCallback(p2)
+			local function closeCallback(p1)
 				-- upvalues: Callback (upval), SetConfirmationModalModule (upval), Analytics (upval), SocialContextToastDiagKeysModule (upval), GetFFlagSocialContextToastEventStreamFunction (upval), SocialContextToastEventsModule (upval), Services (upval), JoinerUserId (upval), UniverseId (upval), PlaceId (upval), SocialContextToastAnalyticsActionTypesModule (upval), UserPresence (copy), JoinExperienceFunction (upval)
-				if not p2 then
+				if not p1 then
 					Callback(SetConfirmationModalModule(false))
 					
 					return
@@ -255,9 +248,9 @@ local function handleFollowedPlayerDisconnected(Services, Callback, JoinerUserId
 	end)
 end
 
-function SocialContextToastDispatcher(p2)
+function SocialContextToastDispatcher(p1)
 	-- upvalues: ReactModule (copy), GetFFlagEnableReferredPlayerJoinRemoteEventFunction (copy), UseDispatchFunction (copy), DEPRECATEDFriendsGetFriendStatusesFunction (copy), handleFollowedPlayerDisconnected (copy), showYouJoinedFriendsToast (copy), SocialContextToastDiagKeysModule (copy), GetFFlagSocialContextToastEventStreamFunction (copy), SocialContextToastEventsModule (copy), ToastTypesModule (copy), SocialContextToastAnalyticsActionTypesModule (copy), getNames (copy), SetToastContentModule (copy), FFlagEnablePartyNudgeAfterJoin (copy), UseOneToOnePartyNudgeStartPartyRejectedFunction (copy), GetFIntMaxReferredPlayerJoinToastsFunction (copy), FFlagShowFriendJoinedYouToastForNonReferredJoins (copy), SocialContextToastDelay (copy), Callback (ref)
-	local Services = p2.services
+	local Services = p1.services
 	local Analytics = Services.analytics
 	local PlayersService = Services.playersService
 	local Ref = ReactModule.createRef()
@@ -269,7 +262,7 @@ function SocialContextToastDispatcher(p2)
 	local UseDispatchResult = UseDispatchFunction()
 	
 	local function showToastOnJoin()
-		-- upvalues: PlayersService (copy), DEPRECATEDFriendsGetFriendStatusesFunction (upval), Networking (copy), handleFollowedPlayerDisconnected (upval), Services (copy), UseDispatchResult (copy), p2 (copy), showYouJoinedFriendsToast (upval)
+		-- upvalues: PlayersService (copy), DEPRECATEDFriendsGetFriendStatusesFunction (upval), Networking (copy), handleFollowedPlayerDisconnected (upval), Services (copy), UseDispatchResult (copy), p1 (copy), showYouJoinedFriendsToast (upval)
 		local FollowUserId = PlayersService.LocalPlayer.FollowUserId
 		local Flag = false
 		local Ids = {}
@@ -279,7 +272,7 @@ function SocialContextToastDispatcher(p2)
 			table.insert(List, player.UserId)
 		end
 		DEPRECATEDFriendsGetFriendStatusesFunction(Networking, List):andThen(function(Result)
-			-- upvalues: FollowUserId (copy), Flag (ref), Ids (copy), handleFollowedPlayerDisconnected (upval), Services (upval), UseDispatchResult (upval), p2 (upval), showYouJoinedFriendsToast (upval)
+			-- upvalues: FollowUserId (copy), Flag (ref), Ids (copy), handleFollowedPlayerDisconnected (upval), Services (upval), UseDispatchResult (upval), p1 (upval), showYouJoinedFriendsToast (upval)
 			if not Result or not Result.responseBody or not Result.responseBody.data then return end
 			for _, entry in pairs(Result.responseBody.data) do
 				local Id = entry.id
@@ -291,12 +284,12 @@ function SocialContextToastDispatcher(p2)
 					table.insert(Ids, Id)
 				end
 			end
-			return if FollowUserId > 0 and not Flag then handleFollowedPlayerDisconnected(Services, UseDispatchResult, FollowUserId, Ids, p2.gameId, p2.placeId) else showYouJoinedFriendsToast(Services, UseDispatchResult, FollowUserId, Ids, Flag, p2.gameId, p2.placeId)
+			return if FollowUserId > 0 and not Flag then handleFollowedPlayerDisconnected(Services, UseDispatchResult, FollowUserId, Ids, p1.gameId, p1.placeId) else showYouJoinedFriendsToast(Services, UseDispatchResult, FollowUserId, Ids, Flag, p1.gameId, p1.placeId)
 		end)
 	end
 	
 	local function onPlayerAdded(Player: Player)
-		-- upvalues: PlayersService (copy), Analytics (copy), SocialContextToastDiagKeysModule (upval), GetFFlagSocialContextToastEventStreamFunction (upval), SocialContextToastEventsModule (upval), Services (copy), ToastTypesModule (upval), p2 (copy), SocialContextToastAnalyticsActionTypesModule (upval), getNames (upval), UseDispatchResult (copy), SetToastContentModule (upval)
+		-- upvalues: PlayersService (copy), Analytics (copy), SocialContextToastDiagKeysModule (upval), GetFFlagSocialContextToastEventStreamFunction (upval), SocialContextToastEventsModule (upval), Services (copy), ToastTypesModule (upval), p1 (copy), SocialContextToastAnalyticsActionTypesModule (upval), getNames (upval), UseDispatchResult (copy), SetToastContentModule (upval)
 		local LocalPlayer = PlayersService.LocalPlayer
 		
 		if Player.FollowUserId == LocalPlayer.UserId then
@@ -312,8 +305,8 @@ function SocialContextToastDispatcher(p2)
 					SocialContextToastEventsModule(Services.eventIngest, {
 						toastType = ToastTypesModule.FriendJoinedYou,
 						friendId = tostring(Player.UserId),
-						universeId = p2.gameId,
-						placeId = p2.placeId,
+						universeId = p1.gameId,
+						placeId = p1.placeId,
 						actionType = SocialContextToastAnalyticsActionTypesModule.Shown
 					})
 				end
@@ -335,10 +328,10 @@ function SocialContextToastDispatcher(p2)
 	end
 	
 	if FFlagEnablePartyNudgeAfterJoin then
-		UseOneToOnePartyNudgeStartPartyRejectedFunction(function(p3)
+		UseOneToOnePartyNudgeStartPartyRejectedFunction(function(p2)
 			-- upvalues: PlayersService (copy), onPlayerAdded (copy)
-			if p3 and p3.inviterId then
-				local Player = PlayersService:GetPlayerByUserId(p3.inviterId)
+			if p2 and p2.inviterId then
+				local Player = PlayersService:GetPlayerByUserId(p2.inviterId)
 				
 				if Player then
 					onPlayerAdded(Player)

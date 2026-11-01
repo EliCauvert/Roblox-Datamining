@@ -197,7 +197,7 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 				CaptureDescriptorFields.creationSessionId = CreationSessionId
 				FireAnalyticsEventModule(EventNames.EditingFlowMomentPublished, CaptureDescriptorFields)
 				local Flag = false
-				local v2 = nil
+				local UploadCaptureResult = nil
 				local MomentsUploadPollIntervalSecondsFastInt = game:GetFastInt("MomentsUploadPollIntervalSeconds")
 				local MomentsUploadMaxPollAttemptsFastInt = game:GetFastInt("MomentsUploadMaxPollAttempts")
 				local Result5 = nil
@@ -210,15 +210,15 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 						-- upvalues: P9 (upval), Result3 (copy)
 						return P9:CheckUploadCaptureStatusAsync(Result3)
 					end)
-					local NoFlag: boolean = not Flag or Success4 and Result5 ~= v2
+					local NoFlag: boolean = not Flag or Success4 and Result5 ~= UploadCaptureResult
 					local NoSuccess4: boolean = not Success4 or Result5 ~= Enum.UploadCaptureResult.UploadPending
 					local IsIMatch = i % 6 == 0
 					
 					if Success4 then
 						Flag = true
-						v2 = Result5
+						UploadCaptureResult = Result5
 					end
-					if i == 1 or NoFlag or (NoSuccess4 or IsIMatch) then
+					if i == 1 or NoFlag or NoSuccess4 or IsIMatch then
 						if Success4 then
 							LoggerModule:debug("event=poll localId={} attempt={} pcallSuccess=true status={} assetId={} heartbeat={}", string.gsub(string.gsub(EnumNameFunction(Capture.LocalId) or "nil", "\r", "\\r"), "\n", "\\n"), tostring(i), string.gsub(string.gsub(EnumNameFunction(Result5) or "nil", "\r", "\\r"), "\n", "\\n"), string.gsub(string.gsub(EnumNameFunction(Result3_1) or "nil", "\r", "\\r"), "\n", "\\n"), (tostring(IsIMatch and not NoFlag)))
 						else

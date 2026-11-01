@@ -33,7 +33,6 @@ local LuaAppEnableToastNotificationsCoreScripts4 = game:DefineFastFlag("LuaAppEn
 local DisableLuobuWarningToast = game:DefineFastFlag("DisableLuobuWarningToast", false)
 local FFlagDebugDisableExperienceChatMainModule = require(RobloxGui.Modules.Flags.FFlagDebugDisableExperienceChatMain)
 local GetFFlagVoiceUserAgency3Module = require(RobloxGui.Modules.Flags.GetFFlagVoiceUserAgency3)
-local GetFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule = require(RobloxGui.Modules.Flags.GetFFlagLuaInExperienceCoreScriptsGameInviteUnification)
 local EnableSendCameraAccessAnalytics = game:DefineFastFlag("EnableSendCameraAccessAnalytics", false)
 local EnableExperienceNotificationPrompts2 = game:DefineFastFlag("EnableExperienceNotificationPrompts2", false)
 local EnableCancelSubscriptionAppEngineFeature = game:GetEngineFeature("EnableCancelSubscriptionApp")
@@ -146,17 +145,17 @@ if FFlagLuaAppEnableInExperienceDataModelStreamStarter then
 end
 if game:GetEngineFeature("ProtocolLaunchPrivateChannelUpdateCheckEngineFeature") then
 	local ChannelUpdatePrompt = Modules.ChannelUpdatePrompt
-	local Success1, Result1 = pcall(require, ChannelUpdatePrompt)
-	local Result2 = nil
+	local Success, Result = pcall(require, ChannelUpdatePrompt)
+	local Result1 = nil
 	
-	if Success1 then
-		Result2 = Result1
+	if Success then
+		Result1 = Result
 	else
-		warn("Failure to Start CoreScript module " .. ChannelUpdatePrompt.Name .. ".\n" .. Result1)
-		Result2 = nil
+		warn("Failure to Start CoreScript module " .. ChannelUpdatePrompt.Name .. ".\n" .. Result)
+		Result1 = nil
 	end
-	if Result2 then
-		Result2.init()
+	if Result1 then
+		Result1.init()
 	end
 end
 if not IsViewer and GetFFlagChromeCentralizedConfigurationFunction() then
@@ -248,11 +247,11 @@ ScriptContext:AddCoreScriptLocal("CoreScripts/PerformanceStatsManagerScript", Ro
 ScriptContext:AddCoreScriptLocal("CoreScripts/PlayerRagdoll", RobloxGui)
 coroutine.wrap(safeRequire)(RobloxGui.Modules.ChatSelector)
 coroutine.wrap(safeRequire)(RobloxGui.Modules.PlayerList.PlayerListManager)
-local Success2, Result3 = pcall(function()
+local Success1, Result2 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserRoactBubbleChatBeta")
 end)
 
-if game:GetEngineFeature("EnableBubbleChatFromChatService") or Success2 and Result3 then
+if game:GetEngineFeature("EnableBubbleChatFromChatService") or Success1 and Result2 then
 	ScriptContext:AddCoreScriptLocal("CoreScripts/PlayerBillboards", RobloxGui)
 end
 coroutine.wrap(function()
@@ -291,13 +290,13 @@ ScriptContext:AddCoreScriptLocal("CoreScripts/FriendPlayerPrompt", RobloxGui)
 
 if EnablePromptAgeCheckListener then
 	local PromptAgeCheckHandler = Modules.PromptAgeCheckHandler
-	local Success, Result = pcall(require, PromptAgeCheckHandler)
+	local Success2, Result3 = pcall(require, PromptAgeCheckHandler)
 	local v4 = nil
 	
-	if Success then
-		v4 = Result
+	if Success2 then
+		v4 = Result3
 	else
-		warn("Failure to Start CoreScript module " .. PromptAgeCheckHandler.Name .. ".\n" .. Result)
+		warn("Failure to Start CoreScript module " .. PromptAgeCheckHandler.Name .. ".\n" .. Result3)
 		v4 = nil
 	end
 	if v4 then
@@ -497,9 +496,8 @@ require(CorePackages.Workspace.Packages.SoundManager).SoundManager.init()
 if GetFFlagEnableSocialContextToastFunction() then
 	ScriptContext:AddCoreScriptLocal("CoreScripts/SocialContextToast", RobloxGui)
 end
-if GetFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule() then
-	ScriptContext:AddCoreScriptLocal("CoreScripts/GameInviteModalGUI", script.Parent)
-end
+ScriptContext:AddCoreScriptLocal("CoreScripts/GameInviteModalGUI", script.Parent)
+
 if EnableExperienceNotificationPrompts2 then
 	ScriptContext:AddCoreScriptLocal("CoreScripts/ExperienceNotifications", script.Parent)
 end
@@ -548,10 +546,10 @@ end
 local ReactPerfTrackerModule = require(Modules.Common.ReactPerfTracker)
 
 if ReactPerfTrackerModule then
-	local NewReactPerfTracker = ReactPerfTrackerModule.new()
+	local NewResult = ReactPerfTrackerModule.new()
 	task.delay(5, function()
-		-- upvalues: NewReactPerfTracker (copy)
-		NewReactPerfTracker:start()
+		-- upvalues: NewResult (copy)
+		NewResult:start()
 	end)
 end
 local ReactSchedulingTrackerModule = require(Modules.Common.ReactSchedulingTracker)

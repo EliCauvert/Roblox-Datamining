@@ -33,14 +33,13 @@ return function(p3, p4, Callback, p5): boolean
 	local Count = nil
 	if typeof(p4) == "table" and p4.kind == "rolling" then
 		local v2 = p5 - p4.seconds
-		local Count1 = 0
+		Count = 0
 		
 		for _, value in CallbackResult.shownAt do
 			if v2 <= value then
-				Count1 += 1
+				Count += 1
 			end
 		end
-		Count = Count1
 	else
 		Count = CallbackResult.count
 	end

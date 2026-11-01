@@ -31,9 +31,8 @@ local function useRecyclingToken(List)
 	-- upvalues: ReactModule (copy), RecyclableViewContextModule (copy), SignalsModule (copy)
 	local UseContextResult = ReactModule.useContext(RecyclableViewContextModule)
 	assert(type(UseContextResult) == "table", "Recycling hooks must be called within a Recyclable view")
-	local ItemKeySignal = UseContextResult.itemKeySignal
 	local Buffer = table.create(#(List or {}) + 1)
-	Buffer[1] = ItemKeySignal
+	Buffer[1] = UseContextResult.itemKeySignal
 	
 	if List ~= nil then
 		for _, value in List do

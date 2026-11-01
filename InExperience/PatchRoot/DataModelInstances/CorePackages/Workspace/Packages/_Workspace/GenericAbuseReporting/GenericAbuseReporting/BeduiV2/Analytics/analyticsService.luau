@@ -186,10 +186,10 @@ local function formatErrorDetailForAnalytics(p2, p3, p4)
 		
 		if Number and Number ~= nil then
 			local Text = tostring(Number)
-			local Text9 = if utf8.len(Text) == nil then nil elseif #Text <= 1000 then Text else string.sub(Text, 1, utf8.offset(Text, 0, 1001) - 1)
+			local Text8 = if utf8.len(Text) == nil then nil elseif #Text <= 1000 then Text else string.sub(Text, 1, utf8.offset(Text, 0, 1001) - 1)
 			
-			if Text9 ~= nil then
-				Error_metadata.upstream_service_time_milliseconds = Text9
+			if Text8 ~= nil then
+				Error_metadata.upstream_service_time_milliseconds = Text8
 			end
 		end
 		if next(Error_metadata) == nil then
@@ -215,10 +215,10 @@ local function formatErrorDetailForAnalytics(p2, p3, p4)
 			
 			if CountBody ~= nil then
 				local Text = tostring(CountBody)
-				local Text10 = if utf8.len(Text) == nil then nil elseif #Text <= 1000 then Text else string.sub(Text, 1, utf8.offset(Text, 0, 1001) - 1)
+				local Text9 = if utf8.len(Text) == nil then nil elseif #Text <= 1000 then Text else string.sub(Text, 1, utf8.offset(Text, 0, 1001) - 1)
 				
-				if Text10 ~= nil then
-					Error_metadata.body_size_bytes = Text10
+				if Text9 ~= nil then
+					Error_metadata.body_size_bytes = Text9
 				end
 			end
 		end
@@ -227,10 +227,10 @@ local function formatErrorDetailForAnalytics(p2, p3, p4)
 			
 			if Body ~= nil then
 				local Text = tostring(Body)
-				local Text11 = if utf8.len(Text) == nil then nil elseif #Text <= 1000 then Text else string.sub(Text, 1, utf8.offset(Text, 0, 1001) - 1)
+				local Text10 = if utf8.len(Text) == nil then nil elseif #Text <= 1000 then Text else string.sub(Text, 1, utf8.offset(Text, 0, 1001) - 1)
 				
-				if Text11 ~= nil then
-					Error_metadata.response_body = Text11
+				if Text10 ~= nil then
+					Error_metadata.response_body = Text10
 				end
 			end
 		end
@@ -238,14 +238,12 @@ local function formatErrorDetailForAnalytics(p2, p3, p4)
 	if next(Error_metadata) == nil then
 		Error_metadata.reason = "unknown"
 	end
-	local v4 = v2
-	
-	if v4 ~= nil then
-		local Text = tostring(v4)
-		local Text8 = if utf8.len(Text) == nil then nil elseif #Text <= 1000 then Text else string.sub(Text, 1, utf8.offset(Text, 0, 1001) - 1)
+	if v2 ~= nil then
+		local Text = tostring(v2)
+		local Text11 = if utf8.len(Text) == nil then nil elseif #Text <= 1000 then Text else string.sub(Text, 1, utf8.offset(Text, 0, 1001) - 1)
 		
-		if Text8 ~= nil then
-			Error_metadata.runtime_message = Text8
+		if Text11 ~= nil then
+			Error_metadata.runtime_message = Text11
 		end
 	end
 	local Text = tostring(p2)

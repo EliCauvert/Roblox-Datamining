@@ -53,18 +53,17 @@ local function getAudibilityOf(Object, p1): number
 		return 0
 	end
 	T[Object] = true
-	local Volume = 1
+	local NewAudibilityFor = 1
 	
 	if typeof(Object) == "Instance" then
 		if Object:IsA("AudioPlayer") or Object:IsA("AudioFader") then
-			Volume = Object.Volume
+			NewAudibilityFor = Object.Volume
 		elseif Object:IsA("AudioEmitter") then
-			local NewAudibilityFor = 0
+			NewAudibilityFor = 0
 			
 			for _, interactingListener in Object:GetInteractingListeners() do
 				NewAudibilityFor += interactingListener:GetAudibilityFor(Object)
 			end
-			Volume = NewAudibilityFor
 		elseif Object:IsA("AudioDeviceOutput") then
 			return 1
 		end
@@ -72,7 +71,7 @@ local function getAudibilityOf(Object, p1): number
 	local Total = 0
 	
 	for _, value in getOutputsOf(Object) do
-		Total += Volume * getAudibilityOf(value, T)
+		Total += NewAudibilityFor * getAudibilityOf(value, T)
 	end
 	return Total
 end

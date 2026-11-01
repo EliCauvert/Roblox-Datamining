@@ -2522,7 +2522,7 @@ Feature.Build.Notification.Title.NeedInput,ビルドを続けるには入力が�
 Feature.Build.Placeholder.DescribeProduct,販売したいものについて説明してください
 Feature.Build.Placeholder.DescribeProductUpdate,更新内容を説明してください
 Feature.Build.Placeholder.InternalSpec,internal_code
-Feature.Build.Prompt.CreateDeveloperProduct,開発者製品を作成してゲームに組み込み、変更を検証して公開し、購入できるようにしてください。
+Feature.Build.Prompt.CreateDeveloperProduct,私のゲームを確認して、Robuxを獲得するのに最適な販売アイテムを提案してください。1回限りの購入アイテムと、ブーストのようにプレイヤーが繰り返し購入できるアイテムのどちらが私のゲームに適していますか？理由も説明してください。
 Feature.Build.Title.AdActive,広告キャンペーンは有効になっています
 Feature.Build.Title.AdCampaignDuration,{durationDays}日間の広告キャンペーン
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays}日
@@ -3724,6 +3724,7 @@ Feature.InExperienceShop.Message.RobuxPurchaseSuccess,{ROBUX_AMOUNT} Robuxを購
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,このアイテムを持ち物から永久に削除しますか？もし気が変わった場合は、バーチャル空間で再び獲得する必要があります。
 Feature.Item.Label.DeleteItemUndercase,アイテムを削除
 Feature.Landing.Label.PoweredBy,運営：
+Feature.Leaderboards.Heading.Leaderboard,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,オンにする
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,あなたの電話番号を持っている人に、Roblox上で友達として追加してもらいやすくします
@@ -4016,7 +4017,9 @@ Feature.PrivateServers.Action.CreatePrivateServer,プライベートサーバー
 Feature.PrivateServers.Action.FreeWithBlackbird,Plusで無料
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studioは、プライベートサーバーの購入には対応していません。
 Feature.PrivateServers.Description.VipServersNotSupported,このゲームはプライベートサーバーに対応していません。
+Feature.PrivateServers.Heading.ConfigurePrivateServer,プライベートサーバーの設定
 Feature.PrivateServers.Label.OwnersServer,{displayName}のサーバー
+Feature.PrivateServers.Label.ServerName,サーバー名:
 Feature.Profile.Action.AboutThisProfile,このプロフィールについて
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,友達を承認する

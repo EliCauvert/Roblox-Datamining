@@ -8,16 +8,19 @@ local UnifiedSelectionListStoreModule = require(script.Parent.Store.UnifiedSelec
 local ReportAvatarEventCounterV1Module = require(script.Parent.reportAvatarEventCounterV1)
 local ConstantsModule = require(script.Parent.Constants)
 local UnifiedEventLogEnumsModule = require(AvatarExperienceAnalytics.UnifiedEventLogEnums)
-local FFlagAXFixSearchPurchaseSurface = require(Parent.AvatarExperienceFlags).FFlagAXFixSearchPurchaseSurface
+local _ = require(script.Parent.Generated.UnifiedEventTypes)
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXFixSearchPurchaseSurface = AvatarExperienceFlagsModule.FFlagAXFixSearchPurchaseSurface
+local FFlagAXUnifiedEventStrictPayloads = AvatarExperienceFlagsModule.FFlagAXUnifiedEventStrictPayloads
 
-return function(List, p1)
-	-- upvalues: UnifiedSelectionListStoreModule (copy), UnifiedEventLogConstantsModule (copy), UnifiedEventLoggingUtilsModule (copy), CryoModule (copy), FFlagAXFixSearchPurchaseSurface (copy), UnifiedEventLogEnumsModule (copy), ReportAvatarEventCounterV1Module (copy), ConstantsModule (copy), SendUnifiedEventLogModule (copy)
+return function(List, p1, p2)
+	-- upvalues: UnifiedSelectionListStoreModule (copy), UnifiedEventLogConstantsModule (copy), UnifiedEventLoggingUtilsModule (copy), CryoModule (copy), FFlagAXUnifiedEventStrictPayloads (copy), FFlagAXFixSearchPurchaseSurface (copy), UnifiedEventLogEnumsModule (copy), ReportAvatarEventCounterV1Module (copy), ConstantsModule (copy), SendUnifiedEventLogModule (copy)
 	local SelectionList = UnifiedSelectionListStoreModule.getSelectionList()
 	local Text = UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemId"
 	local Text1 = UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemType"
 	local v1 = nil
 	
-	for _, value in List do
+	for i, value in List do
 		v1 = nil
 		
 		for _, value1 in SelectionList do
@@ -26,11 +29,15 @@ return function(List, p1)
 				break
 			end
 		end
-		local JoinResult = CryoModule.Dictionary.join(UnifiedEventLoggingUtilsModule.getFieldsToSendFromInstanceAttributes(v1), value)
+		local FieldsToSendFromInstanceAttributes = UnifiedEventLoggingUtilsModule.getFieldsToSendFromInstanceAttributes(v1)
+		local JoinResult = CryoModule.Dictionary.join(FieldsToSendFromInstanceAttributes, value)
 		local JoinResult1 = CryoModule.Dictionary.join(JoinResult, {
-			surface = if FFlagAXFixSearchPurchaseSurface and JoinResult.surface ~= nil then JoinResult.surface else p1
+			surface = if FFlagAXUnifiedEventStrictPayloads and FFlagAXFixSearchPurchaseSurface and FieldsToSendFromInstanceAttributes.surface ~= nil then FieldsToSendFromInstanceAttributes.surface elseif FFlagAXFixSearchPurchaseSurface and JoinResult.surface ~= nil then JoinResult.surface else p1
 		})
 		
+		if FFlagAXUnifiedEventStrictPayloads then
+			JoinResult1 = CryoModule.Dictionary.join((if p2 then p2[i] else nil) or {}, JoinResult1)
+		end
 		if JoinResult1.action == UnifiedEventLogEnumsModule.MarketplaceUnifiedAction.PURCHASE_SUCCESS then
 			if JoinResult1.itemType == UnifiedEventLogEnumsModule.MarketplaceUnifiedItemType.ASSET then
 				ReportAvatarEventCounterV1Module(ConstantsModule.AVATAR_EVENT_COUNTER_NAME.AXPurchaseAsset)

@@ -2521,7 +2521,7 @@ Feature.Build.Notification.Title.NeedInput,빌드에 대한 의견 필요
 Feature.Build.Placeholder.DescribeProduct,판매하고자 하는 제품에 대해 설명해 주세요
 Feature.Build.Placeholder.DescribeProductUpdate,업데이트 설명
 Feature.Build.Placeholder.InternalSpec,internal_code
-Feature.Build.Prompt.CreateDeveloperProduct,"개발자 상품을 만들고, 게임에 연결하고, 변경 사항을 확인 및 게시하고, 구매할 수 있도록 도와주세요."
+Feature.Build.Prompt.CreateDeveloperProduct,내 게임을 검토한 뒤 Robux를 받고 판매하기에 가장 적합한 아이템을 추천해 줘. 1회성 구매 아이템이나 부스트처럼 플레이어가 반복적으로 구매할 수 있는 아이템 중 어떤 게 내 게임에 더 적합할까? 그 이유도 설명해 줘.
 Feature.Build.Title.AdActive,광고 캠페인이 활성화되었습니다
 Feature.Build.Title.AdCampaignDuration,{durationDays}일 광고 캠페인
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays}일
@@ -2702,6 +2702,8 @@ Feature.Catalog.Header.InvalidOutfit,유효하지 않은 의상
 Feature.Catalog.Header.PostAvatar,
 Feature.Catalog.Heading.AvailableItems,사용 가능 아이템
 Feature.Catalog.Heading.BuyItem,
+Feature.Catalog.Heading.DescriptionLinkGoToMarketplace,마켓플레이스로 이동합니다.
+Feature.Catalog.Heading.DescriptionLinkResetSearch,계속하면 현재 검색이 초기화됩니다.
 Feature.Catalog.Heading.FreeItemConfirmation,아이템 획득
 Feature.Catalog.Heading.GoToExperience,체험에 참가할까요?
 Feature.Catalog.Heading.HoldingPolicy,보류 정책
@@ -2778,6 +2780,12 @@ Feature.Catalog.Label.CreatorName,크리에이터 이름
 Feature.Catalog.Label.CurrentBalance,현재 잔액:
 Feature.Catalog.Label.CustomizeAvatar,아바타 꾸미기
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,삭제하면 이 액션을 실행 취소할 수 없습니다.
+Feature.Catalog.Label.DescriptionLinkInvalid,유효하지 않은 링크
+Feature.Catalog.Label.DescriptionLinkSearchMarketplace,마켓플레이스 검색
+Feature.Catalog.Label.DescriptionLinkViewAsset,애셋 보기
+Feature.Catalog.Label.DescriptionLinkViewBundle,번들 보기
+Feature.Catalog.Label.DescriptionLinkViewCommunity,커뮤니티 보기
+Feature.Catalog.Label.DescriptionLinkViewCommunityStore,커뮤니티 상점
 Feature.Catalog.Label.Details,
 Feature.Catalog.Label.DynamicHeads,
 Feature.Catalog.Label.Emissive,이미시브
@@ -3563,7 +3571,7 @@ Feature.Groups.Action.NotNow,
 Feature.Groups.Action.RemovePrimary,기본 커뮤니티 설정 해제
 Feature.Groups.Action.SeeAll,
 Feature.Groups.Action.Unfollow,언팔로우
-Feature.Groups.Action.ViewGroup,커뮤니티 보기
+Feature.Groups.Action.ViewGroup,
 Feature.Groups.Description.JoinGroupPending,커뮤니티에서 참가 요청을 검토하고 있습니다.
 Feature.Groups.Description.NotEligibleToJoin,이 커뮤니티에 가입할 수 없는 계정입니다.
 Feature.Groups.Description.PremiumMaxGroups,가입한 커뮤니티 수가 한도에 도달했어요.
@@ -3717,6 +3725,7 @@ Feature.InExperienceShop.Message.RobuxPurchaseSuccess,{ROBUX_AMOUNT} Robux를 �
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,이 아이템을 인벤토리에서 영구적으로 삭제할까요? 마음이 바뀐다면 해당 아이템을 체험에서 다시 획득해야 합니다.
 Feature.Item.Label.DeleteItemUndercase,아이템 삭제
 Feature.Landing.Label.PoweredBy,제공:
+Feature.Leaderboards.Heading.Leaderboard,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,내 전화번호를 알고 있는 사람들이 Roblox에서 나를 친구로 추가할 수 있도록 도와줍니다
@@ -4010,7 +4019,9 @@ Feature.PrivateServers.Action.CreatePrivateServer,비공개 서버 만들기
 Feature.PrivateServers.Action.FreeWithBlackbird,Plus로 무료 이용
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio에서는 비공개 서버 구매가 지원되지 않습니다.
 Feature.PrivateServers.Description.VipServersNotSupported,이 게임은 비공개 서버를 지원하지 않습니다.
+Feature.PrivateServers.Heading.ConfigurePrivateServer,비공개 서버 구성
 Feature.PrivateServers.Label.OwnersServer,{displayName} 님의 서버
+Feature.PrivateServers.Label.ServerName,서버 이름:
 Feature.Profile.Action.AboutThisProfile,프로필 정보
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,

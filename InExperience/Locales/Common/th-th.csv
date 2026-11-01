@@ -2505,7 +2505,7 @@ Feature.Build.Notification.Title.NeedInput,Build ต้องการอิน�
 Feature.Build.Placeholder.DescribeProduct,อธิบายสิ่งที่คุณต้องการขาย
 Feature.Build.Placeholder.DescribeProductUpdate,อธิบายเกี่ยวกับการอัปเดต
 Feature.Build.Placeholder.InternalSpec,internal_code
-Feature.Build.Prompt.CreateDeveloperProduct,ช่วยฉันสร้างผลิตภัณฑ์นักพัฒนา เชื่อมโยงเข้ากับเกม ตรวจสอบและเผยแพร่การเปลี่ยนแปลง และเปิดให้ซื้อ
+Feature.Build.Prompt.CreateDeveloperProduct,ช่วยวิเคราะห์เกมของฉันและแนะนำไอเท็มที่ดีที่สุดที่ควรขายเพื่อหารายได้เป็น Robux หน่อย คิดว่าไอเท็มแบบซื้อครั้งเดียวหรือแบบที่ซื้อซ้ำได้เรื่อยๆ อย่างบูสต์ จะเหมาะกับเกมของฉันมากกว่า ช่วยอธิบายเหตุผลด้วย
 Feature.Build.Title.AdActive,แคมเปญโฆษณาเปิดใช้งานอยู่
 Feature.Build.Title.AdCampaignDuration,แคมเปญโฆษณา {durationDays} วัน
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} วัน
@@ -3707,6 +3707,7 @@ Feature.InExperienceShop.Message.RobuxPurchaseSuccess,คุณซื้อ {ROB
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"คุณแน่ใจหรือไม่ว่าคุณต้องการ ""ลบ"" ไอเท็มนี้ออกจากคลังไอเท็มของคุณอย่างถาวร? หากเปลี่ยนใจ จะต้องทำเพื่อให้ได้รับอีกครั้งในประสบการณ์"
 Feature.Item.Label.DeleteItemUndercase,ลบไอเท็ม
 Feature.Landing.Label.PoweredBy,ดำเนินการโดย
+Feature.Leaderboards.Heading.Leaderboard,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,ช่วยให้ผู้ใช้ที่มีหมายเลขโทรศัพท์ของคุณเพิ่มคุณเป็นเพื่อนใน Roblox ได้
@@ -4000,7 +4001,9 @@ Feature.PrivateServers.Action.CreatePrivateServer,สร้างเซิร์
 Feature.PrivateServers.Action.FreeWithBlackbird,ฟรีเมื่อสมัคร Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio ไม่รองรับการซื้อเซิร์ฟเวอร์ส่วนตัว
 Feature.PrivateServers.Description.VipServersNotSupported,เกมนี้ไม่รองรับเซิร์ฟเวอร์ส่วนตัว
+Feature.PrivateServers.Heading.ConfigurePrivateServer,กำหนดค่าเซิร์ฟเวอร์ส่วนตัว
 Feature.PrivateServers.Label.OwnersServer,เซิร์ฟเวอร์ของ {displayName}
+Feature.PrivateServers.Label.ServerName,ชื่อเซิร์ฟเวอร์:
 Feature.Profile.Action.AboutThisProfile,เกี่ยวกับโปรไฟล์นี้
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,

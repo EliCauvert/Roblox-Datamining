@@ -5,9 +5,11 @@ local SendUnifiedEventLogFunction = AvatarExperienceAnalyticsModule.sendUnifiedE
 local SendAXCounterV2Function = AvatarExperienceAnalyticsModule.sendAXCounterV2
 local ReportAvatarEventCounterV1Function = AvatarExperienceAnalyticsModule.reportAvatarEventCounterV1
 local UnifiedEventLogEnums = AvatarExperienceAnalyticsModule.UnifiedEventLogEnums
+local UnifiedLoggingElementNameEnums = AvatarExperienceAnalyticsModule.Enums.UnifiedLoggingElementNameEnums
 local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
 local Constants = AvatarExperienceAnalyticsModule.Constants
 local FFlagEditProfileImageV2Telemetry = require(Parent.SharedFlags).FFlagEditProfileImageV2Telemetry
+local FFlagAXUnifiedEventStrictPayloads = require(Parent.AvatarExperienceFlags).FFlagAXUnifiedEventStrictPayloads
 local config = {
 	confirm = "R15_UPGRADE_CONFIRM",
 	cancel = "R15_UPGRADE_CANCEL"
@@ -45,11 +47,12 @@ end
 
 return {
 	logPageView = function(p1)
-		-- upvalues: FFlagEditProfileImageV2Telemetry (copy), SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), HttpService (copy), SendAXCounterV2Function (copy)
+		-- upvalues: FFlagEditProfileImageV2Telemetry (copy), SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), FFlagAXUnifiedEventStrictPayloads (copy), UnifiedLoggingElementNameEnums (copy), HttpService (copy), SendAXCounterV2Function (copy)
 		if FFlagEditProfileImageV2Telemetry then
 			SendUnifiedEventLogFunction({
 				action = UnifiedEventLogEnums.MarketplaceUnifiedAction.PAGE_VIEW,
 				surface = UnifiedLoggingSurface.EDIT_PROFILE_IMAGE,
+				elementName = if FFlagAXUnifiedEventStrictPayloads then UnifiedLoggingElementNameEnums.EDIT_PROFILE_IMAGE else nil,
 				elementMetadata = HttpService:JSONEncode({ mode = p1.mode })
 			})
 			SendAXCounterV2Function("EditProfileImagePageView", { mode = p1.mode })

@@ -2522,7 +2522,7 @@ Feature.Build.Notification.Title.NeedInput,Build membutuhkan input darimu
 Feature.Build.Placeholder.DescribeProduct,Deskripsikan apa yang ingin kamu jual
 Feature.Build.Placeholder.DescribeProductUpdate,Deskripsikan perubahan
 Feature.Build.Placeholder.InternalSpec,kode_internal
-Feature.Build.Prompt.CreateDeveloperProduct,"Bantu saya membuat produk developer, menghubungkannya ke game, memverifikasi dan memublikasikan perubahannya, serta membuatnya tersedia untuk dibeli."
+Feature.Build.Prompt.CreateDeveloperProduct,"Review game saya dan sarankan item terbaik yang bisa saya jual untuk memperoleh Robux. Manakah yang lebih cocok untuk game saya: item yang dapat dibeli satu kali atau item yang dapat dibeli pemain lagi, seperti boost? Jelaskan alasannya."
 Feature.Build.Title.AdActive,Kampanye iklan aktif
 Feature.Build.Title.AdCampaignDuration,Kampanye iklan {durationDays} hari
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} hari
@@ -3722,6 +3722,7 @@ Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Kamu telah berhasil membel
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Kamu yakin ingin menghapus item ini dari inventarismu secara permanen? Jika kamu berubah pikiran, kamu harus mendapatkannya lagi di pengalaman virtual."
 Feature.Item.Label.DeleteItemUndercase,Hapus item
 Feature.Landing.Label.PoweredBy,Didukung oleh
+Feature.Leaderboards.Heading.Leaderboard,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,Nyalakan
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,Bantu pengguna yang memiliki nomor ponselmu untuk menambahkanmu sebagai teman di Roblox
@@ -4015,7 +4016,9 @@ Feature.PrivateServers.Action.CreatePrivateServer,Buat Server Pribadi
 Feature.PrivateServers.Action.FreeWithBlackbird,Gratis dengan Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Pembelian server privat tidak didukung di Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,Game ini tidak mendukung server privat.
+Feature.PrivateServers.Heading.ConfigurePrivateServer,Konfigurasi Server Privat
 Feature.PrivateServers.Label.OwnersServer,Server {displayName}
+Feature.PrivateServers.Label.ServerName,Nama Server:
 Feature.Profile.Action.AboutThisProfile,Tentang profil ini
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,Menerima Teman

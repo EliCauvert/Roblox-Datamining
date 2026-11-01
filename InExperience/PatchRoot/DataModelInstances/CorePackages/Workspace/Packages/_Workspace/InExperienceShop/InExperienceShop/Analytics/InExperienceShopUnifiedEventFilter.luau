@@ -22,7 +22,9 @@ local InExperienceShopUnifiedEventFilterModule = {
 	end,
 	hasValidItemType = function(p1): boolean
 		-- upvalues: config1 (copy)
-		return config1[p1.itemType] == true
+		local ItemType = p1.itemType
+		
+		return ItemType ~= nil and config1[ItemType] == true
 	end,
 	hasValidAction = function(p1): boolean
 		-- upvalues: MarketplaceUnifiedAction (copy)
@@ -32,7 +34,9 @@ local InExperienceShopUnifiedEventFilterModule = {
 	end,
 	hasValidSurface = function(p1): boolean
 		-- upvalues: config (copy)
-		return config[p1.surface] == true
+		local Surface = p1.surface
+		
+		return Surface ~= nil and config[Surface] == true
 	end,
 	hasValidSizeAndPosition = function(p1): boolean
 		-- upvalues: MarketplaceUnifiedAction (copy)

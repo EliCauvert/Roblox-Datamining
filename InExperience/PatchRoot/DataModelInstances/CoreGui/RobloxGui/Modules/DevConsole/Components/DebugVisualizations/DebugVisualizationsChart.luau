@@ -108,7 +108,7 @@ local function constructHeader(Sortfunction, XOffset)
 	}, Elements)
 end
 
-local function constructEntry(p1, XOffset, YOffset1, YOffset, LayoutOrder, IsExpanded, Callback, Callback1)
+local function constructEntry(p1, XOffset, YOffset, YOffset1, LayoutOrder, IsExpanded, Callback, Callback1)
 	-- upvalues: t (copy), RoactModule (copy), LineWidth (copy), LineColor (copy), CellLabelModule (copy), List2 (copy), List (copy), SlimDevConsole2 (copy), DropDownModule (copy), CellPadding (copy), EntryFrameHeight (copy), CellCheckboxModule (copy), LearnMoreWidth (copy), BannerButtonModule (copy), BoxButtonModule (copy)
 	local Name = p1.name
 	local SettingInfo = p1.settingInfo
@@ -174,19 +174,19 @@ local function constructEntry(p1, XOffset, YOffset1, YOffset, LayoutOrder, IsExp
 	})
 	local LearnMoreUrl = nil
 	local _UDim2 = nil
-	local HasLearnMoreUrl = nil
+	local v1 = nil
 	
 	if SlimDevConsole2 then
 		LearnMoreUrl = SettingInfo.LearnMoreUrl
-		HasLearnMoreUrl = LearnMoreUrl ~= nil
-		_UDim2 = UDim2.new(0, if LearnMoreUrl == nil then XOffset - CellPadding * 2 else XOffset - LearnMoreWidth - CellPadding * 2, 0, YOffset)
+		v1 = LearnMoreUrl ~= nil
+		_UDim2 = UDim2.new(0, if LearnMoreUrl == nil then XOffset - CellPadding * 2 else XOffset - LearnMoreWidth - CellPadding * 2, 0, YOffset1)
 	else
-		HasLearnMoreUrl = true
+		v1 = true
 		_UDim2 = UDim2.new(0, XOffset - LearnMoreWidth - CellPadding * 2, 0, EntryFrameHeight)
 	end
 	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = UDim2.new(0, XOffset, 0, YOffset1),
+		Size = UDim2.new(0, XOffset, 0, YOffset),
 		LayoutOrder = LayoutOrder
 	}, {
 		Button = RoactModule.createElement(BannerButtonModule, {
@@ -200,7 +200,7 @@ local function constructEntry(p1, XOffset, YOffset1, YOffset, LayoutOrder, IsExp
 			size = _UDim2,
 			text = tostring(SettingInfo.Description)
 		}),
-		LearnMoreButton = IsExpanded and (HasLearnMoreUrl and RoactModule.createElement(BoxButtonModule, {
+		LearnMoreButton = IsExpanded and (v1 and RoactModule.createElement(BoxButtonModule, {
 			text = "Learn More",
 			size = UDim2.new(0, LearnMoreWidth, 0, EntryFrameHeight),
 			pos = UDim2.new(0, XOffset - LearnMoreWidth - CellPadding, 0, EntryFrameHeight + CellPadding),

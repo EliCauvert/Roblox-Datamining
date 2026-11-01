@@ -2521,7 +2521,7 @@ Feature.Build.Notification.Title.NeedInput,組建需要你的輸入
 Feature.Build.Placeholder.DescribeProduct,描述你想要銷售的產品
 Feature.Build.Placeholder.DescribeProductUpdate,描述一項更新
 Feature.Build.Placeholder.InternalSpec,internal_code
-Feature.Build.Prompt.CreateDeveloperProduct,協助我建立開發者產品、將其連接到遊戲中、驗證和發佈變更，並開放購買。
+Feature.Build.Prompt.CreateDeveloperProduct,請審核我的遊戲，並建議我最適合販售哪種物品來賺取 Robux。一次性購買的物品，還是玩家可再次購買的物品（例如加成道具），哪一種更適合我的遊戲？請說明原因。
 Feature.Build.Title.AdActive,廣告活動已生效
 Feature.Build.Title.AdCampaignDuration,為期 {durationDays} 天的廣告活動
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} 天
@@ -2702,6 +2702,8 @@ Feature.Catalog.Header.InvalidOutfit,無效的服裝
 Feature.Catalog.Header.PostAvatar,
 Feature.Catalog.Heading.AvailableItems,可上架道具
 Feature.Catalog.Heading.BuyItem,
+Feature.Catalog.Heading.DescriptionLinkGoToMarketplace,此操作將帶你前往市集
+Feature.Catalog.Heading.DescriptionLinkResetSearch,此動作將會重置你目前的搜尋內容
 Feature.Catalog.Heading.FreeItemConfirmation,取得道具
 Feature.Catalog.Heading.GoToExperience,加入體驗?
 Feature.Catalog.Heading.HoldingPolicy,存放政策
@@ -2777,6 +2779,12 @@ Feature.Catalog.Label.CreatorName,創作者名稱
 Feature.Catalog.Label.CurrentBalance,目前餘額：
 Feature.Catalog.Label.CustomizeAvatar,自訂虛擬人偶
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,若您刪除，您無法復原此動作。
+Feature.Catalog.Label.DescriptionLinkInvalid,無效連結
+Feature.Catalog.Label.DescriptionLinkSearchMarketplace,搜尋市集
+Feature.Catalog.Label.DescriptionLinkViewAsset,檢視素材
+Feature.Catalog.Label.DescriptionLinkViewBundle,檢視組合
+Feature.Catalog.Label.DescriptionLinkViewCommunity,檢視社群
+Feature.Catalog.Label.DescriptionLinkViewCommunityStore,社群商店
 Feature.Catalog.Label.Details,
 Feature.Catalog.Label.DynamicHeads,
 Feature.Catalog.Label.Emissive,發光效果
@@ -3562,7 +3570,7 @@ Feature.Groups.Action.NotNow,
 Feature.Groups.Action.RemovePrimary,解除主要群組
 Feature.Groups.Action.SeeAll,
 Feature.Groups.Action.Unfollow,取消追蹤
-Feature.Groups.Action.ViewGroup,檢視社群
+Feature.Groups.Action.ViewGroup,
 Feature.Groups.Description.JoinGroupPending,正在等待社群審核你的加入請求。
 Feature.Groups.Description.NotEligibleToJoin,你的帳號無法加入此社群。
 Feature.Groups.Description.PremiumMaxGroups,您加入的社群數量已達上限。
@@ -3715,6 +3723,7 @@ Feature.InExperienceShop.Message.RobuxPurchaseSuccess,您已成功購買 {ROBUX_
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,確定要從道具欄永久刪除此道具嗎？若日後改變主意，你必須在體驗中重新取得道具。
 Feature.Item.Label.DeleteItemUndercase,刪除道具
 Feature.Landing.Label.PoweredBy,技術支援：
+Feature.Leaderboards.Heading.Leaderboard,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,允許他人用你的手機號碼在 Roblox 上將你新增為好友
@@ -4008,7 +4017,9 @@ Feature.PrivateServers.Action.CreatePrivateServer,建立私人伺服器
 Feature.PrivateServers.Action.FreeWithBlackbird,透過 Plus 免費使用
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio 不支援購買私人伺服器。
 Feature.PrivateServers.Description.VipServersNotSupported,此遊戲不支援私人伺服器。
+Feature.PrivateServers.Heading.ConfigurePrivateServer,設定私人伺服器
 Feature.PrivateServers.Label.OwnersServer,{displayName} 的伺服器
+Feature.PrivateServers.Label.ServerName,伺服器名稱：
 Feature.Profile.Action.AboutThisProfile,關於此個人檔案
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
