@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "aabfbedb-62f0-bb5b-7571-d60e7bcef44e")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "65af625d-a42a-3467-1115-fb07663aa302")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 736570, t => {
@@ -21920,7 +21920,7 @@
             title: "Label.Impressum"
         }],
         an = {
-            path: "https://www.youtube.com/Roblox",
+            path: "https://www.youtube.com/@RobloxCreators",
             title: "YouTube",
             icon: eF.YouTubeIcon
         },
@@ -22308,7 +22308,8 @@
     let ad = {
             showGermanyOnlyLink: !1
         },
-        ap = (0, i.makeStyles)()(t => ({
+        ap = e$.Locale.German,
+        am = (0, i.makeStyles)()(t => ({
             root: {
                 display: "flex",
                 flexDirection: "column",
@@ -22351,7 +22352,7 @@
                 zIndex: t.zIndex.mobileStepper
             }
         })),
-        am = r.default.forwardRef((t, n) => {
+        ah = r.default.forwardRef((t, n) => {
             let {
                 children: o,
                 stickyContent: a,
@@ -22395,32 +22396,31 @@
                     })
                 })();
                 return (0, r.useMemo)(() => {
-                    let r = ["Documentation", "Assistant"].includes(t),
-                        u = r ? n.creatorSettings : o.accountSettings,
-                        c = r ? "https://www.youtube.com/@RobloxLearn" : an.path;
+                    let r = ["Documentation", "Assistant"].includes(t) ? n.creatorSettings : o.accountSettings,
+                        u = an.path;
                     if (i && s) return {
                         showGermanyOnlyLink: !0,
-                        youTubeLink: c,
-                        settingsLink: u
+                        youTubeLink: u,
+                        settingsLink: r
                     };
                     if (a) return {
-                        settingsLink: u,
-                        youTubeLink: c,
+                        settingsLink: r,
+                        youTubeLink: u,
                         ...a
                     };
                     if (l) {
-                        var d;
-                        let t = null == (d = l.generalExperience) ? void 0 : d.locale;
+                        var c;
+                        let t = null == (c = l.generalExperience) ? void 0 : c.locale;
                         return {
-                            settingsLink: u,
-                            youTubeLink: c,
-                            showGermanyOnlyLink: void 0 !== t && (0, e$.toLocaleCode)(t) === e$.Locale.German
+                            settingsLink: r,
+                            youTubeLink: u,
+                            showGermanyOnlyLink: void 0 !== t && (0, e$.toLocaleCode)(t) === ap
                         }
                     }
                     return {
                         ...ad,
-                        youTubeLink: c,
-                        settingsLink: u
+                        youTubeLink: u,
+                        settingsLink: r
                     }
                 }, [n.creatorSettings, o.accountSettings, t, a, i, s, l])
             }(), {
@@ -22431,7 +22431,7 @@
                     sticky: f,
                     banner: g
                 }
-            } = ap(), {
+            } = am(), {
                 classes: {
                     scroll: y
                 }
@@ -22460,8 +22460,8 @@
                 additionalLinks: c
             }))
         });
-    am.displayName = "PageContent";
-    let ah = (0, i.makeStyles)()(() => ({
+    ah.displayName = "PageContent";
+    let af = (0, i.makeStyles)()(() => ({
             container: {
                 display: "grid",
                 height: "100vh",
@@ -22472,14 +22472,14 @@
                 gridTemplateColumns: "auto 1fr"
             }
         })),
-        af = t => {
+        ag = t => {
             let {
                 children: n
             } = t, {
                 classes: {
                     container: a
                 }
-            } = ah(), i = (0, o.usePathname)(), {
+            } = af(), i = (0, o.usePathname)(), {
                 drawerVariant: l,
                 setPrimaryRailOpen: u,
                 setAllToolsOpen: c
@@ -22492,7 +22492,7 @@
                 }
             }, n)
         },
-        ag = t => {
+        ay = t => {
             let {
                 children: n
             } = t, {
@@ -22506,20 +22506,20 @@
                 robloxSiteDomain: c,
                 currentProduct: s,
                 creatorHubSearchIxpParams: u
-            }, r.default.createElement(a.NavigationSearchProvider, null, r.default.createElement(af, null, r.default.createElement(o ? a.SearchContainerRaw : a.SearchContainer, null), n)))
+            }, r.default.createElement(a.NavigationSearchProvider, null, r.default.createElement(ag, null, r.default.createElement(o ? a.SearchContainerRaw : a.SearchContainer, null), n)))
         },
-        ay = t => {
+        av = t => {
             let {
                 children: n
             } = t;
-            return r.default.createElement(nJ, null, r.default.createElement(t7, null, r.default.createElement(ag, null, n)))
+            return r.default.createElement(nJ, null, r.default.createElement(t7, null, r.default.createElement(ay, null, n)))
         };
 
-    function av(t) {
+    function ab(t) {
         var n;
         return t ? "Forum" === t ? "Heading.DeveloperForum" : null != (n = r2.get(t)) ? n : rF.title : rF.title
     }
-    ay.Header = t => {
+    av.Header = t => {
         let {
             children: n,
             menuItems: o,
@@ -22577,7 +22577,7 @@
             onLogout: i,
             menuItems: o
         }))))
-    }, ay.PageContent = am, ay.Rail = t => {
+    }, av.PageContent = ah, av.Rail = t => {
         let {
             children: n,
             ...o
@@ -22594,7 +22594,7 @@
             ...o
         }, n)
     };
-    let ab = t => {
+    let aC = t => {
             let {
                 navigationDropdownTabs: n,
                 ...o
@@ -22621,8 +22621,8 @@
                 type: (null == n ? void 0 : n.includes(t.key)) ? rL.Dropdown : "Basic"
             }))
         },
-        aC = /^\/docs\/([a-z]{2}-[a-z]{2,3})/,
-        aE = (0, i.makeStyles)()(t => ({
+        aE = /^\/docs\/([a-z]{2}-[a-z]{2,3})/,
+        aw = (0, i.makeStyles)()(t => ({
             button: {
                 paddingTop: "18px",
                 paddingBottom: "18px",
@@ -22643,7 +22643,7 @@
                 color: t.palette.content.muted
             }
         })),
-        aw = t => {
+        aI = t => {
             let {
                 tab: n,
                 focused: o
@@ -22659,9 +22659,9 @@
                     title: I
                 },
                 cx: S
-            } = aE(), x = (0, r.useRef)(null), A = (0, r.useCallback)(() => {
+            } = aw(), x = (0, r.useRef)(null), A = (0, r.useCallback)(() => {
                 c(!1), a(nA(n.key)), setTimeout(() => {
-                    let t, r = (null == (t = window.location.pathname.match(aC)) ? void 0 : t[1]) || "",
+                    let t, r = (null == (t = window.location.pathname.match(aE)) ? void 0 : t[1]) || "",
                         o = n.tabPath ? "".concat(n.href).concat(n.tabPath) : n.href,
                         a = r ? "".concat(o, "/").concat(r) : o;
                     window.open(a, "_self")
@@ -22719,11 +22719,11 @@
                 onKeyDownMenu: M
             }, r.default.createElement(n.dropdownContentComponent)))
         },
-        aI = t => t.split("-").reduce((t, n) => {
+        aS = t => t.split("-").reduce((t, n) => {
             var r;
             return t + (null != (r = n[0]) ? r : "").toUpperCase() + n.slice(1)
         }, ""),
-        aS = (0, i.makeStyles)()({
+        ax = (0, i.makeStyles)()({
             flex: {
                 display: "flex"
             },
@@ -22770,7 +22770,7 @@
                 flexWrap: "nowrap"
             }
         }),
-        ax = (0, r.forwardRef)((t, n) => {
+        aA = (0, r.forwardRef)((t, n) => {
             let {
                 classes: o,
                 flexDirection: a,
@@ -22784,14 +22784,14 @@
                     ...d
                 },
                 cx: p
-            } = aS();
+            } = ax();
             return r.default.createElement("div", {
                 ref: n,
-                className: p(c, null == o ? void 0 : o.root, d["flexDirection".concat(aI(null != a ? a : ""))], d["flexWrap".concat(aI(null != i ? i : ""))], d["alignItems".concat(aI(null != s ? s : ""))], d["justifyContent".concat(aI(null != l ? l : ""))])
+                className: p(c, null == o ? void 0 : o.root, d["flexDirection".concat(aS(null != a ? a : ""))], d["flexWrap".concat(aS(null != i ? i : ""))], d["alignItems".concat(aS(null != s ? s : ""))], d["justifyContent".concat(aS(null != l ? l : ""))])
             }, u)
         });
-    ax.displayName = "Flex";
-    let aA = (0, i.makeStyles)()(t => ({
+    aA.displayName = "Flex";
+    let aT = (0, i.makeStyles)()(t => ({
             drawerPaper: {
                 width: "100%",
                 [t.breakpoints.up("Medium")]: {
@@ -22821,7 +22821,7 @@
                 backgroundColor: t.palette.backdropOverlay
             }
         })),
-        aT = t => {
+        ak = t => {
             let {
                 open: n,
                 className: o,
@@ -22833,7 +22833,7 @@
                     drawerPaperBelowAppBar: s,
                     backdrop: u
                 }
-            } = aA(), {
+            } = aT(), {
                 drawerVariant: c
             } = tS(), d = "belowAppBar" === c;
             return r.default.createElement(g.Drawer, {
@@ -22852,7 +22852,7 @@
                 }
             }, i)
         },
-        ak = (0, i.makeStyles)()(t => ({
+        aD = (0, i.makeStyles)()(t => ({
             root: {
                 width: "100%",
                 height: 60,
@@ -22866,7 +22866,7 @@
                 }
             }
         })),
-        aD = t => {
+        aj = t => {
             let {
                 className: n,
                 children: o
@@ -22875,7 +22875,7 @@
                     root: a
                 },
                 cx: i
-            } = ak();
+            } = aD();
             return r.default.createElement(s.Grid, {
                 className: i(a, n),
                 container: !0,
@@ -22883,12 +22883,12 @@
                 wrap: "nowrap"
             }, o)
         },
-        aj = (0, i.makeStyles)()(t => ({
+        a_ = (0, i.makeStyles)()(t => ({
             heading: {
                 padding: t.spacing(0, 0, 0, .5)
             }
         })),
-        a_ = t => {
+        aL = t => {
             let {
                 header: n,
                 onClickClose: o
@@ -22896,8 +22896,8 @@
                 classes: {
                     heading: a
                 }
-            } = aj();
-            return r.default.createElement(aD, null, r.default.createElement(s.Grid, {
+            } = a_();
+            return r.default.createElement(aj, null, r.default.createElement(s.Grid, {
                 container: !0,
                 alignItems: "center",
                 wrap: "nowrap",
@@ -22921,7 +22921,7 @@
                 size: "large"
             }, r.default.createElement(p.CloseIcon, null)))))
         },
-        aL = (0, i.makeStyles)()(t => ({
+        aF = (0, i.makeStyles)()(t => ({
             drawerContent: {
                 padding: t.spacing(0, 3)
             },
@@ -22932,7 +22932,7 @@
                 padding: t.spacing(0, 3)
             }
         })),
-        aF = t => {
+        aR = t => {
             let {
                 open: n,
                 onClickClose: o,
@@ -22946,18 +22946,18 @@
                     backButtonContainer: p,
                     dividerContainer: m
                 }
-            } = aL(), {
+            } = aF(), {
                 translate: h
-            } = (0, e$.useTranslation)(), f = av(c);
-            return r.default.createElement(aT, {
+            } = (0, e$.useTranslation)(), f = ab(c);
+            return r.default.createElement(ak, {
                 open: n,
                 onClose: o
-            }, r.default.createElement(a_, {
+            }, r.default.createElement(aL, {
                 header: r.default.createElement(rC, {
                     content: f
                 }),
                 onClickClose: o
-            }), r.default.createElement(ax, {
+            }), r.default.createElement(aA, {
                 flexDirection: "row",
                 alignItems: "center",
                 classes: {
@@ -22977,12 +22977,12 @@
                 className: d
             }, i))
         },
-        aR = (0, i.makeStyles)()(t => ({
+        aN = (0, i.makeStyles)()(t => ({
             drawerContent: {
                 padding: t.spacing(2, 3)
             }
         })),
-        aN = t => {
+        aM = t => {
             let {
                 open: n,
                 onClickClose: o,
@@ -22992,11 +22992,11 @@
                 classes: {
                     drawerContent: l
                 }
-            } = aR(), s = av(i);
-            return r.default.createElement(aT, {
+            } = aN(), s = ab(i);
+            return r.default.createElement(ak, {
                 open: n,
                 onClose: o
-            }, r.default.createElement(a_, {
+            }, r.default.createElement(aL, {
                 header: r.default.createElement(rC, {
                     content: s
                 }),
@@ -23005,7 +23005,7 @@
                 className: l
             }, a))
         },
-        aM = (0, i.makeStyles)()(t => ({
+        aB = (0, i.makeStyles)()(t => ({
             listItem: {
                 padding: t.spacing(1.5, 1)
             },
@@ -23036,7 +23036,7 @@
                 minWidth: 40
             }
         })),
-        aB = t => {
+        aP = t => {
             let {
                 open: n,
                 onClickClose: o
@@ -23049,7 +23049,7 @@
                 drawerVariant: d,
                 navigationDropdownTabs: p,
                 sendEvent: m
-            } = tS(), h = ab({
+            } = tS(), h = aC({
                 target: i,
                 environment: a,
                 position: "drawer",
@@ -23062,7 +23062,7 @@
                     listItemNew: g,
                     listItemIcon: y
                 }
-            } = aM(), [v, b] = (0, r.useState)(new Map), C = (0, r.useCallback)(t => {
+            } = aB(), [v, b] = (0, r.useState)(new Map), C = (0, r.useCallback)(t => {
                 m({
                     eventType: "clickNavList",
                     context: "click",
@@ -23076,7 +23076,7 @@
             }, []), w = (0, r.useCallback)(() => {
                 b(new Map), o()
             }, [o]), I = "belowAppBar" === d;
-            return r.default.createElement(aN, {
+            return r.default.createElement(aM, {
                 open: n,
                 onClickClose: w,
                 productKey: "CreatorHub"
@@ -23109,7 +23109,7 @@
                     variant: "largeLabel1"
                 }, r.default.createElement(rC, {
                     content: t.title
-                })))), t.type === rL.Dropdown && t.dropdownContentComponent && r.default.createElement(aF, {
+                })))), t.type === rL.Dropdown && t.dropdownContentComponent && r.default.createElement(aR, {
                     open: n && (v.get(t.key) || !1),
                     onClickBack: () => E(t.key),
                     onClickClose: w,
@@ -23120,13 +23120,13 @@
                 })))
             })))
         },
-        aP = (0, i.makeStyles)()(t => ({
+        aO = (0, i.makeStyles)()(t => ({
             drawerContent: {
                 padding: t.spacing(2, 3),
                 flexGrow: 1
             }
         })),
-        aO = t => {
+        aH = t => {
             let {
                 open: n,
                 onClickClose: o,
@@ -23136,11 +23136,11 @@
                 classes: {
                     drawerContent: l
                 }
-            } = aP();
-            return r.default.createElement(aT, {
+            } = aO();
+            return r.default.createElement(ak, {
                 open: n,
                 onClose: o
-            }, r.default.createElement(aD, null, r.default.createElement(s.Grid, {
+            }, r.default.createElement(aj, null, r.default.createElement(s.Grid, {
                 container: !0,
                 alignItems: "center",
                 wrap: "nowrap",
@@ -23164,7 +23164,7 @@
                 className: l
             }, i))
         },
-        aH = (0, i.makeStyles)()(t => ({
+        aU = (0, i.makeStyles)()(t => ({
             root: {
                 width: "100%",
                 height: 60,
@@ -23217,7 +23217,7 @@
                 }
             }
         })),
-        aU = (0, i.makeStyles)()(t => ({
+        az = (0, i.makeStyles)()(t => ({
             tabs: {
                 padding: "6px 0"
             },
@@ -23244,7 +23244,7 @@
                 }
             }
         }));
-    async function az(t) {
+    async function aV(t) {
         try {
             var n;
             let r = await fetch("".concat(t, "/v1/bundles/creator-hub-store"), {
@@ -23256,9 +23256,9 @@
             return !0
         }
     }
-    var aV = ((nb = aV || {}).disableProducts = "disableProducts", nb.enableLuobu = "enableLuobu", nb.creatorEventsVariant = "creatorEventsVariant", nb.enableAssistant = "enableAssistant", nb.enableNotificationsM2 = "enableNotificationsM2", nb),
-        aq = ((nC = aq || {}).enableTalentHubV2M2 = "enableTalentHubV2M2", nC);
-    let aW = tw.z.object({
+    var aq = ((nb = aq || {}).disableProducts = "disableProducts", nb.enableLuobu = "enableLuobu", nb.creatorEventsVariant = "creatorEventsVariant", nb.enableAssistant = "enableAssistant", nb.enableNotificationsM2 = "enableNotificationsM2", nb),
+        aW = ((nC = aW || {}).enableTalentHubV2M2 = "enableTalentHubV2M2", nC);
+    let aG = tw.z.object({
             enableNotificationsM2: tw.z.boolean().nullable().default(!1),
             enableAssistant: tw.z.boolean().default(!1),
             disableProducts: tw.z.array(tw.z.string()).nullable().default(null),
@@ -23267,7 +23267,7 @@
             enableTalentHubV2M2: tw.z.union([tw.z.boolean(), tw.z.number()]).nullable().default(!1),
             creatorHubSearchIxpParams: tw.z.number().nullable().default(a.DEFAULT_CREATOR_HUB_SEARCH_VERSION)
         }),
-        aG = tw.z.object({
+        aK = tw.z.object({
             disableProducts: tw.z.array(tw.z.string()).default([]),
             enableLuobu: tw.z.boolean().default(!1),
             enableNotificationsM2: tw.z.boolean().default(!1),
@@ -23277,26 +23277,26 @@
             enableTalentHubV2M2: tw.z.union([tw.z.boolean(), tw.z.number()]).default(!1),
             creatorHubSearchIxpParams: tw.z.number().nullable().default(a.DEFAULT_CREATOR_HUB_SEARCH_VERSION)
         }),
-        aK = tw.z.preprocess(t => null != t ? t : void 0, tw.z.boolean().optional()).catch(void 0),
-        aJ = tw.z.preprocess(t => null != t ? t : void 0, tw.z.number().optional()).catch(void 0),
-        aZ = tw.z.preprocess(t => null != t ? t : void 0, tw.z.string().optional()).catch(void 0),
-        aX = tw.z.object({
-            disableProducts: tw.z.preprocess(t => null != t ? t : void 0, tw.z.array(tw.z.string()).optional()).catch(void 0),
-            enableLuobu: aK,
-            enableNotificationsM2: aK,
-            enableAssistant: aK,
-            creatorEventsVariant: aZ,
-            layoutVariant: aZ
-        }).catch({}),
+        aJ = tw.z.preprocess(t => null != t ? t : void 0, tw.z.boolean().optional()).catch(void 0),
+        aZ = tw.z.preprocess(t => null != t ? t : void 0, tw.z.number().optional()).catch(void 0),
+        aX = tw.z.preprocess(t => null != t ? t : void 0, tw.z.string().optional()).catch(void 0),
         aY = tw.z.object({
-            searchVersion: aJ
+            disableProducts: tw.z.preprocess(t => null != t ? t : void 0, tw.z.array(tw.z.string()).optional()).catch(void 0),
+            enableLuobu: aJ,
+            enableNotificationsM2: aJ,
+            enableAssistant: aJ,
+            creatorEventsVariant: aX,
+            layoutVariant: aX
         }).catch({}),
         aQ = tw.z.object({
+            searchVersion: aZ
+        }).catch({}),
+        a$ = tw.z.object({
             enableTalentHubV2M2: tw.z.preprocess(t => null != t ? t : void 0, tw.z.union([tw.z.boolean(), tw.z.number()]).optional()).catch(void 0)
         }).catch({}),
-        a$ = "_navigation_v2",
-        a0 = aW.parse({});
-    async function a1(t, n, r, o) {
+        a0 = "_navigation_v2",
+        a1 = aG.parse({});
+    async function a2(t, n, r, o) {
         let a = tF("product-experimentation-platform", n, r),
             i = Object.values(o).join(","),
             l = "".concat(a, "/v1/projects/1/layers/").concat(t, "/values?parameters=").concat(i),
@@ -23305,19 +23305,19 @@
             });
         return await s.json()
     }
-    async function a2(t, n, r) {
-        let [o, a, i, l] = await Promise.allSettled([a1("CreatorHub.Navigation", t, n, r), a1("CreatorHub.Navigation.User", t, n, r), a1("CreatorHub.CreatorDocumentation.Search.UserId", t, n, {
+    async function a4(t, n, r) {
+        let [o, a, i, l] = await Promise.allSettled([a2("CreatorHub.Navigation", t, n, r), a2("CreatorHub.Navigation.User", t, n, r), a2("CreatorHub.CreatorDocumentation.Search.UserId", t, n, {
             searchVersion: "searchVersion"
-        }), a1("CreatorHub.TalentHub.UserId", t, n, aq)]);
+        }), a2("CreatorHub.TalentHub.UserId", t, n, aW)]);
         return "fulfilled" === o.status && "fulfilled" === a.status && "fulfilled" === i.status && "fulfilled" === l.status ? {
-            ixpParamsValue: aX.parse(o.value),
-            ixpParamsByUserValue: aX.parse(a.value),
-            ixpParamsCreatorHubSearchValue: aY.parse(i.value),
-            ixpParamsTalentHubValue: aQ.parse(l.value)
+            ixpParamsValue: aY.parse(o.value),
+            ixpParamsByUserValue: aY.parse(a.value),
+            ixpParamsCreatorHubSearchValue: aQ.parse(i.value),
+            ixpParamsTalentHubValue: a$.parse(l.value)
         } : null
     }
-    async function a4(t, n) {
-        let r = await a2(t, n, aV);
+    async function a3(t, n) {
+        let r = await a4(t, n, aq);
         if (r) {
             var o, a, i;
             let {
@@ -23326,7 +23326,7 @@
                 ixpParamsCreatorHubSearchValue: l,
                 ixpParamsTalentHubValue: s
             } = r;
-            return aG.parse({
+            return aK.parse({
                 disableProducts: null != (o = t.disableProducts) ? o : n.disableProducts,
                 enableLuobu: t.enableLuobu || n.enableLuobu,
                 enableNotificationsM2: t.enableNotificationsM2 || n.enableNotificationsM2,
@@ -23339,12 +23339,12 @@
         }
         return null
     }
-    let a3 = r.useLayoutEffect,
-        a5 = {
+    let a5 = r.useLayoutEffect,
+        a6 = {
             enabled: !1,
             isFetched: !1
         },
-        a6 = ((0, i.makeStyles)()(t => ({
+        a8 = ((0, i.makeStyles)()(t => ({
             column: {
                 padding: "16px 24px"
             },
@@ -23371,9 +23371,9 @@
                 color: t.palette.text.primary
             }
         })), "navTreeLabel"),
-        a8 = "navTreeContentWithTrailing",
-        a9 = "navTreeExpandOnly",
-        a7 = (0, i.makeStyles)()(t => ({
+        a9 = "navTreeContentWithTrailing",
+        a7 = "navTreeExpandOnly",
+        ie = (0, i.makeStyles)()(t => ({
             root: {
                 display: "flex",
                 flexDirection: "column",
@@ -23382,19 +23382,19 @@
                     paddingTop: 8,
                     marginLeft: 0
                 },
-                ["& .".concat(a6)]: {
+                ["& .".concat(a8)]: {
                     paddingLeft: 12
                 },
-                ["& .".concat(eK.treeItemClasses.groupTransition, " .").concat(a6)]: {
+                ["& .".concat(eK.treeItemClasses.groupTransition, " .").concat(a8)]: {
                     paddingLeft: 24
                 },
-                ["& .".concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(a6)]: {
+                ["& .".concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(a8)]: {
                     paddingLeft: 36
                 },
-                ["& .".concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(a6)]: {
+                ["& .".concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(a8)]: {
                     paddingLeft: 48
                 },
-                ["& .".concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(a6)]: {
+                ["& .".concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(a8)]: {
                     paddingLeft: 60
                 },
                 ["& .".concat(eK.treeItemClasses.content)]: {
@@ -23450,7 +23450,7 @@
                         color: "inherit"
                     }
                 },
-                ["& .".concat(eK.treeItemClasses.content, ".").concat(a8, " .").concat(eK.treeItemClasses.iconContainer, ":not(:empty)")]: {
+                ["& .".concat(eK.treeItemClasses.content, ".").concat(a9, " .").concat(eK.treeItemClasses.iconContainer, ":not(:empty)")]: {
                     paddingLeft: 4
                 },
                 ["& .".concat(eK.treeItemClasses.iconContainer, ":empty")]: {
@@ -23459,13 +23459,13 @@
                     margin: 0,
                     padding: 0
                 },
-                ["&& .".concat(eK.treeItemClasses.content, ".").concat(a9, "[data-focused]:not([data-selected])")]: {
+                ["&& .".concat(eK.treeItemClasses.content, ".").concat(a7, "[data-focused]:not([data-selected])")]: {
                     backgroundColor: "transparent"
                 },
-                ["&& .".concat(eK.treeItemClasses.content, ":hover, && .").concat(eK.treeItemClasses.content, ".").concat(a9, "[data-focused]:not([data-selected]):hover, && .").concat(eK.treeItemClasses.content, "[data-selected], && .").concat(eK.treeItemClasses.content, "[data-selected][data-focused], && .").concat(eK.treeItemClasses.content, "[data-focused]:not(.").concat(a9, ")")]: {
+                ["&& .".concat(eK.treeItemClasses.content, ":hover, && .").concat(eK.treeItemClasses.content, ".").concat(a7, "[data-focused]:not([data-selected]):hover, && .").concat(eK.treeItemClasses.content, "[data-selected], && .").concat(eK.treeItemClasses.content, "[data-selected][data-focused], && .").concat(eK.treeItemClasses.content, "[data-focused]:not(.").concat(a7, ")")]: {
                     backgroundColor: "var(--color-shift-200)"
                 },
-                ["&& .".concat(eK.treeItemClasses.content, ":active:hover, && .").concat(eK.treeItemClasses.content, ".").concat(a9, "[data-focused]:not([data-selected]):active:hover, && .").concat(eK.treeItemClasses.content, "[data-selected]:hover, && .").concat(eK.treeItemClasses.content, "[data-selected][data-focused]:hover, && .").concat(eK.treeItemClasses.content, "[data-focused]:not(.").concat(a9, "):hover")]: {
+                ["&& .".concat(eK.treeItemClasses.content, ":active:hover, && .").concat(eK.treeItemClasses.content, ".").concat(a7, "[data-focused]:not([data-selected]):active:hover, && .").concat(eK.treeItemClasses.content, "[data-selected]:hover, && .").concat(eK.treeItemClasses.content, "[data-selected][data-focused]:hover, && .").concat(eK.treeItemClasses.content, "[data-focused]:not(.").concat(a7, "):hover")]: {
                     backgroundColor: "var(--color-shift-300)"
                 },
                 ["& .".concat(eK.treeItemClasses.label)]: {
@@ -23494,7 +23494,7 @@
                 color: "inherit"
             }
         })),
-        ie = (0, i.makeStyles)()(() => ({
+        it = (0, i.makeStyles)()(() => ({
             link: {
                 fontWeight: "inherit",
                 color: "inherit",
@@ -23600,10 +23600,10 @@
                 }
             }
         })),
-        it = t => {
+        ir = t => {
             ne(t.nativeEvent) && t.stopPropagation()
         },
-        ir = {
+        io = {
             timeout: 100,
             easing: {
                 enter: "ease-out",
@@ -23621,7 +23621,7 @@
                 tab: l,
                 labelText: s
             }
-        } = aU(), {
+        } = az(), {
             currentProduct: u,
             enableAssistant: c
         } = tS();
@@ -23647,10 +23647,10 @@
             component: "a",
             href: rP.href
         })) : null
-    }, "AuthenticationStatusContainer", 0, o9, "CreatorHubLayout", 0, ay, "CurrentProductName", 0, () => {
+    }, "AuthenticationStatusContainer", 0, o9, "CreatorHubLayout", 0, av, "CurrentProductName", 0, () => {
         let {
             currentProduct: t
-        } = tS(), n = av(t);
+        } = tS(), n = ab(t);
         return r.default.createElement(rC, {
             content: n
         })
@@ -23663,7 +23663,7 @@
             compactBreakpoint: s,
             drawerVariant: u = "fullScreen",
             children: c,
-            signalRCrossTab: d = a5,
+            signalRCrossTab: d = a6,
             useStaticTranslations: p = !1,
             enableGroupModeration: h = !1,
             analyticsAssistantChatHref: f,
@@ -23681,12 +23681,12 @@
         (0, r.useEffect)(() => {
             if ("luobu" === i) return;
             let t = !1;
-            return az(tz("guac-v2", i, C)).then(n => {
+            return aV(tz("guac-v2", i, C)).then(n => {
                 t || T(n)
             }), () => {
                 t = !0
             }
-        }, [C, i]), a3(() => {
+        }, [C, i]), a5(() => {
             let {
                 creatorEventsVariant: t,
                 enableAssistant: r,
@@ -23695,7 +23695,7 @@
                 creatorHubSearchIxpParams: l
             } = function(t, n) {
                 var r;
-                let o = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : a0,
+                let o = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : a1,
                     a = null != (r = function(t) {
                         try {
                             let n = window.localStorage.getItem(t);
@@ -23703,14 +23703,14 @@
                         } catch (n) {
                             return console.warn("Error reading localStorage key “".concat(t, "”:"), n), null
                         }
-                    }(a$)) ? r : o;
-                return a4(t, n).then(t => (function(t, n) {
+                    }(a0)) ? r : o;
+                return a3(t, n).then(t => (function(t, n) {
                     try {
                         window.localStorage.setItem(t, JSON.stringify(n))
                     } catch (n) {
                         console.warn("Error setting localStorage key “".concat(t, "”:"), n)
                     }
-                })(a$, null != t ? t : o)), a
+                })(a0, null != t ? t : o)), a
             }(i, n);
             I({
                 ...w,
@@ -23792,7 +23792,7 @@
                 expandIcon: d,
                 collapseIcon: p
             }
-        } = a7(), [m, h] = (0, r.useState)(null != i ? i : []), f = (0, r.useCallback)((t, n) => {
+        } = ie(), [m, h] = (0, r.useState)(null != i ? i : []), f = (0, r.useCallback)((t, n) => {
             o && n.filter(t => !m.includes(t)).forEach(o), a && m.filter(t => !n.includes(t)).forEach(a), h(n)
         }, [m, a, o]), g = (0, r.useCallback)((t, n) => {
             u && t && n && u(t, n)
@@ -23844,14 +23844,14 @@
                 category: I,
                 subheading: S
             }
-        } = ie(), x = "smallLabel2" === u, A = s ? ri(s) : void 0, T = null != p ? p : null == o, k = r.default.Children.count(i) > 0, D = (0, r.useCallback)(t => {
+        } = it(), x = "smallLabel2" === u, A = s ? ri(s) : void 0, T = null != p ? p : null == o, k = r.default.Children.count(i) > 0, D = (0, r.useCallback)(t => {
             let n = t.target instanceof Element ? t.target : null;
             k && (null == n ? void 0 : n.closest(".".concat(eK.treeItemClasses.iconContainer))) || null == m || m(t)
         }, [k, m]), j = r.default.createElement("div", {
             className: f(v, o ? b : void 0, k ? C : void 0)
         }, r.default.createElement(l.Typography, {
             classes: {
-                root: f(a6, E, x ? I : S)
+                root: f(a8, E, x ? I : S)
             },
             variant: u
         }, a), A ? r.default.createElement("span", {
@@ -23860,17 +23860,17 @@
         return o && (j = r.default.createElement(e9.default, {
             className: f(g, k ? y : void 0),
             href: o,
-            onClick: it
+            onClick: ir
         }, j)), r.default.createElement(eX.TreeItem, {
             nodeId: n,
             label: j,
             classes: {
                 ...c,
-                content: f(null == c ? void 0 : c.content, s ? a8 : void 0, T ? a9 : void 0)
+                content: f(null == c ? void 0 : c.content, s ? a9 : void 0, T ? a7 : void 0)
             },
             slotProps: {
                 ...d,
-                groupTransition: ir
+                groupTransition: io
             },
             ...h,
             onClick: D,
@@ -23891,7 +23891,7 @@
                 heading: h
             },
             cx: f
-        } = aH(), {
+        } = aU(), {
             homeDrawerOpen: g,
             productNavigationDrawerOpen: y,
             environment: v,
@@ -23904,14 +23904,14 @@
             sendEvent: x,
             toggleHomeDrawerOpen: A,
             toggleProductNavigationDrawer: T
-        } = tS(), k = (0, r.useMemo)(() => "production" === v ? rR.href : "staging" === v ? rN.href : rM.href, [v]), D = ab({
+        } = tS(), k = (0, r.useMemo)(() => "production" === v ? rR.href : "staging" === v ? rN.href : rM.href, [v]), D = aC({
             target: b,
             environment: v,
             position: "topNav",
             disableProducts: E,
             creatorEventsVariant: w,
             navigationDropdownTabs: I
-        }), j = av(C), _ = C === tW ? tG : C;
+        }), j = ab(C), _ = C === tW ? tG : C;
         (0, r.useEffect)(() => {
             x(nx)
         }, [x]);
@@ -23936,7 +23936,7 @@
                             content: n
                         })
                     });
-                return t.type === rL.Dropdown ? r.default.createElement(aw, {
+                return t.type === rL.Dropdown ? r.default.createElement(aI, {
                     focused: t.key === _,
                     key: t.key,
                     tab: t
@@ -23982,7 +23982,7 @@
             wrap: "nowrap"
         }, n)), o, r.default.createElement(s.Grid, {
             id: "top-navigation-drawer"
-        }, a ? r.default.createElement(aO, {
+        }, a ? r.default.createElement(aH, {
             open: y,
             onClickClose: () => {
                 T(!1)
@@ -23990,7 +23990,7 @@
             onClickBack: () => {
                 A(!0), x(nj)
             }
-        }, a) : null, r.default.createElement(aB, {
+        }, a) : null, r.default.createElement(aP, {
             open: g,
             onClickClose: () => {
                 A(!1)
@@ -26965,10 +26965,10 @@
         }
         static async getDataset(t) {
             let r;
-            if ("titles" === n.default.env.recommendedSearchType) r = nx("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a", "data", "searchRecommendations", "titles", "".concat(t.toLocaleLowerCase(), ".json"));
+            if ("titles" === n.default.env.recommendedSearchType) r = nx("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a", "data", "searchRecommendations", "titles", "".concat(t.toLocaleLowerCase(), ".json"));
             else {
                 if (!nT()) return [];
-                r = nx("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a", "data", "searchRecommendations", "scoredTitles", "".concat(t.toLocaleLowerCase(), ".json"))
+                r = nx("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a", "data", "searchRecommendations", "scoredTitles", "".concat(t.toLocaleLowerCase(), ".json"))
             }
             let o = await fetch(r),
                 a = await o.json();
@@ -32787,5 +32787,5 @@
     }])
 }]);
 
-//# debugId=aabfbedb-62f0-bb5b-7571-d60e7bcef44e
-//# sourceMappingURL=0zi33tw42ttd6.js.map
+//# debugId=65af625d-a42a-3467-1115-fb07663aa302
+//# sourceMappingURL=34do2c3lfu72s.js.map

@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "fe295204-c0a3-f8b6-a8b0-3584777a599d")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "a3764d87-a712-1b88-796e-469adbf4182f")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 174528, e => {
@@ -457,7 +457,7 @@
                     color: "secondary",
                     component: "span",
                     children: [q, (0, t.jsx)("img", {
-                        src: "".concat("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/assets", "/navigation/privacy_icon.png"),
+                        src: "".concat("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/assets", "/navigation/privacy_icon.png"),
                         alt: "",
                         style: {
                             marginLeft: "8px",
@@ -1028,5 +1028,5 @@
     g.displayName = "DialogFooter", e.s(["Dialog", 0, d, "DialogBody", 0, h, "DialogContent", 0, p, "DialogFooter", 0, g, "DialogTitle", 0, f])
 }]);
 
-//# debugId=fe295204-c0a3-f8b6-a8b0-3584777a599d
-//# sourceMappingURL=3xdgoa-asfr-4.js.map
+//# debugId=a3764d87-a712-1b88-796e-469adbf4182f
+//# sourceMappingURL=2_xrc0b6aotod.js.map

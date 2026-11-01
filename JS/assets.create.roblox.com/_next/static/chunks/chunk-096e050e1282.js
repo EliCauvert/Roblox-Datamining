@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "7a99dae7-e31a-b52b-cf0f-f94d885cecc2")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "59f93ce4-42da-9c9d-3671-bb30d040dfa6")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 401263, 884213, e => {
@@ -19,7 +19,7 @@
         n = /({.+?})/g,
         o = /^[a-zA-Z0-9-]+\.(?:capture-loopback\.)?chromatic\.com$/,
         i = /(?:^|\.)robloxlabs\.com$/,
-        c = () => {
+        l = () => {
             let e, t = o.test(window.location.hostname),
                 a = window.location.hostname.includes("localhost"),
                 r = "string" == typeof(e = window.location.hostname) && i.test(e);
@@ -30,7 +30,7 @@
                 preferLoadedTranslations: r
             }
         },
-        l = (e, t) => t.isDangerous ? "[!!".concat(e, "!!]") : e;
+        c = (e, t) => t.isDangerous ? "[!!".concat(e, "!!]") : e;
     var d = e.i(730530);
     e.s(["default", 0, e => {
         let {
@@ -38,21 +38,21 @@
             translate: o,
             translateHTML: i,
             translateWithNamespace: u,
-            translateWithNamespaceHTML: g
-        } = e, m = (0, t.useMemo)(() => ({
+            translateWithNamespaceHTML: f
+        } = e, g = (0, t.useMemo)(() => ({
             ready: a,
             translate: o,
             translateHTML: i,
             translateWithNamespace: u,
-            translateWithNamespaceHTML: g
-        }), [a, o, i, u, g]);
+            translateWithNamespaceHTML: f
+        }), [a, o, i, u, f]);
         return (0, t.useMemo)(() => {
             let e = {
-                ready: m.ready,
-                translate: (0, d.translationFn)(m),
-                translateHTML: (0, d.translateHTMLFn)(m),
-                translateWithNamespace: m.translateWithNamespace,
-                translateWithNamespaceHTML: m.translateWithNamespaceHTML
+                ready: g.ready,
+                translate: (0, d.translationFn)(g),
+                translateHTML: (0, d.translateHTMLFn)(g),
+                translateWithNamespace: g.translateWithNamespace,
+                translateWithNamespaceHTML: g.translateWithNamespaceHTML
             };
             return {
                 ...e,
@@ -62,13 +62,13 @@
                         translate: a
                     } = e;
                     return (e, s, n, o) => {
-                        let i = c();
+                        let i = l();
                         if (!i.isAllowed) return a(n, o);
                         if (i.preferLoadedTranslations && t) {
                             let e = a(n, o);
                             if (e.length > 0) return e
                         }
-                        return r(i.preferLoadedTranslations && !t ? e : l(e, i), o)
+                        return r(i.preferLoadedTranslations && !t ? e : c(e, i), o)
                     }
                 })(e),
                 tPendingHtmlTranslation: (e => {
@@ -76,30 +76,30 @@
                         ready: a,
                         translateHTML: o
                     } = e;
-                    return (e, i, d, u, g) => {
-                        let m = c();
-                        if (!m.isAllowed) return o(d, u, g);
-                        if (m.preferLoadedTranslations && a) {
-                            let e = o(d, u, g);
+                    return (e, i, d, u, f) => {
+                        let g = l();
+                        if (!g.isAllowed) return o(d, u, f);
+                        if (g.preferLoadedTranslations && a) {
+                            let e = o(d, u, f);
                             if ("" !== e) return e
                         }
                         return ((e, a, o) => {
-                            let i, c;
+                            let i, l;
                             if (void 0 === a && void 0 === o) return e;
                             let {
-                                stringArgs: l,
+                                stringArgs: c,
                                 htmlArgs: d
-                            } = (i = {}, c = {}, void 0 === o || Object.entries(o).forEach(e => {
+                            } = (i = {}, l = {}, void 0 === o || Object.entries(o).forEach(e => {
                                 let [t, a] = e;
-                                "string" == typeof a ? i[t] = a : c[t] = a
+                                "string" == typeof a ? i[t] = a : l[t] = a
                             }), {
                                 stringArgs: i,
-                                htmlArgs: c
-                            }), u = r(e, l), g = u.split(n).filter(e => !!e);
-                            if (1 === g.length) return u;
-                            let m = [...g];
+                                htmlArgs: l
+                            }), u = r(e, c), f = u.split(n).filter(e => !!e);
+                            if (1 === f.length) return u;
+                            let g = [...f];
                             if (0 !== Object.keys(d).length) {
-                                let e = g.reduce((e, t, a) => {
+                                let e = f.reduce((e, t, a) => {
                                     let r = s.exec(t);
                                     if (r) {
                                         let t = r[1];
@@ -116,12 +116,12 @@
                                 Object.entries(d).forEach(t => {
                                     let [a, r] = t, s = e[a];
                                     s && s.forEach(e => {
-                                        m[e] = r
+                                        g[e] = r
                                     })
                                 })
                             }
-                            if (!Array.isArray(a) || 0 === a.length) return (0, t.createElement)(t.Fragment, null, ...m);
-                            let p = a.reduce((e, t) => {
+                            if (!Array.isArray(a) || 0 === a.length) return (0, t.createElement)(t.Fragment, null, ...g);
+                            let m = a.reduce((e, t) => {
                                     let {
                                         opening: a,
                                         closing: r,
@@ -134,41 +134,41 @@
                                         }
                                     })
                                 }, {}),
-                                f = [],
-                                h = [],
-                                b = [];
-                            for (let e = m.shift(); void 0 !== e; e = m.shift())
+                                p = [],
+                                b = [],
+                                h = [];
+                            for (let e = g.shift(); void 0 !== e; e = g.shift())
                                 if ("string" == typeof e && s.test(e))
-                                    if (Object.hasOwn(p, e)) h.push(e), b.push(e);
+                                    if (Object.hasOwn(m, e)) b.push(e), h.push(e);
                                     else {
-                                        let a = h.pop();
+                                        let a = b.pop();
                                         if (void 0 !== a) {
                                             let {
                                                 match: r,
                                                 content: s
-                                            } = p[a];
+                                            } = m[a];
                                             if (e !== r) break;
                                             let n = [],
                                                 o = !1;
-                                            for (; b.length > 0 && !o;) {
-                                                let e = b.pop();
+                                            for (; h.length > 0 && !o;) {
+                                                let e = h.pop();
                                                 e === a ? o = !0 : n.unshift(e)
                                             }
                                             let i = s(n.every(e => "string" == typeof e) ? n : (0, t.createElement)(t.Fragment, null, ...n));
-                                            0 === b.length ? f.push(i) : b.push(i)
+                                            0 === h.length ? p.push(i) : h.push(i)
                                         }
                                     }
-                            else 0 === b.length ? f.push(e) : b.push(e);
-                            return (0, t.createElement)(t.Fragment, null, ...f)
-                        })(m.preferLoadedTranslations && !a ? e : l(e, m), u, g)
+                            else 0 === h.length ? p.push(e) : h.push(e);
+                            return (0, t.createElement)(t.Fragment, null, ...p)
+                        })(g.preferLoadedTranslations && !a ? e : c(e, g), u, f)
                     }
                 })(e)
             }
-        }, [m])
+        }, [g])
     }], 401263)
 }, 29929, e => {
     "use strict";
-    var t, a, r, s, n, o, i, c, l, d, u, g, m, p, f, h, b, v = e.i(650502),
+    var t, a, r, s, n, o, i, l, c, d, u, f, g, m, p, b, h, v = e.i(650502),
         x = e.i(864392),
         y = ((t = {}).ShowVrDeviceOption = "showVrDeviceOption", t.ShowIXPClientTest = "showIXPClientTest", t.ShowMemoryStoresDashboard = "showMemoryStoresDashboard", t.ShowAdvancedSettingsPage = "showAdvancedSettingsPage", t.EnableIA = "enableIA", t.EnableSubscriptionActivationTest = "enableSubscriptionActivationTest", t.EnableDevexEarnedRobux = "enableDevexEarnedRobux", t.EnableExperienceGenre = "enableExperienceGenre", t.EnablePlayerFeedbackTranslationsWeb = "EnablePlayerFeedbackTranslationsWeb", t.EnablePlayerFeedbackTranslationRetries = "EnablePlayerFeedbackTranslationRetries", t.EnablePlayerFeedbackDetailedFilter = "enablePlayerFeedbackDetailedFilter", t.EnableEventRequestFeaturing = "enableEventRequestFeaturing", t.EnableCollaboratorsPageV2 = "enableCollaboratorsPageV2", t),
         _ = ((a = {}).EnableRightsManager = "enableRightsManager", a.EnableBulkFiling = "enableBulkFiling", a.EnableOnDemandSearch = "enableOnDemandSearch", a.EnableEditRegistration = "enableEditRegistration", a.EnableImageSearch = "enableImageSearch", a.EnableClaimsAgainstMe = "enableClaimsAgainstMe", a.EnableGenAiOptOut = "enableGenAiOptOut", a.EnableInExperienceIpReporting = "enableInExperienceIpReporting", a.EnableIpContentSearch = "enableIpContentSearch", a.EnableTrademark = "enableTrademark", a),
@@ -179,15 +179,15 @@
         S = ((o = S || {}).mobileVariant = "mobileVariant", o),
         q = q || {},
         P = ((i = {}).ShowEditInStudioButton = "showEditInStudioButton", i.EnableCreationsNavLayout = "enableCreationsIPNavLayout", i),
-        A = ((c = {}).EnableMultiAssetSearch = "enableMultiAssetSearch", c),
-        T = ((l = {}).EnableAudienceReachOnOverview = "enableAudienceReachOnOverviewPage", l.EnableAudienceReachGrowthOpportunitiesBanner = "enableAudienceReachGrowthOpportunitiesBanner", l.EnableAudienceControls = "enableAudienceControls", l.EnableAtRiskAnnotationOnExperiences = "enableAtRiskAnnotationOnExperiences", l.EnableAudiencesReplacement = "enableAudiencesReplacement", l),
+        A = ((l = {}).EnableMultiAssetSearch = "enableMultiAssetSearch", l),
+        T = ((c = {}).EnableAudienceReachOnOverview = "enableAudienceReachOnOverviewPage", c.EnableAudienceReachGrowthOpportunitiesBanner = "enableAudienceReachGrowthOpportunitiesBanner", c.EnableAudienceControls = "enableAudienceControls", c.EnableAtRiskAnnotationOnExperiences = "enableAtRiskAnnotationOnExperiences", c.EnableAudiencesReplacement = "enableAudiencesReplacement", c),
         U = ((d = {}).EnableTalentHubV2 = "enableTalentHubV2", d.EnableTalentHubV2M2 = "enableTalentHubV2M2", d),
         H = ((u = H || {}).EnableExperienceWebhooks = "enableExperienceWebhooks", u),
-        I = ((g = I || {}).GameAppealsEnabled = "gameAppealsEnabled", g),
-        j = ((m = j || {}).EnableExperienceDataTileV2 = "enableExperienceDataTileV2", m),
-        R = ((p = R || {}).EnableChangelogCMS = "enableChangelogCMS", p),
-        L = ((f = {}).CreatorDashboard = "CreatorDashboard", f.CreatorHubHomePage = "CreatorHub.HomePage.UserId", f.CreatorHubHomePageExperienceTile = "CreatorHub.HomePage.ExperienceTile.UserId", f.CreatorHubHomePageOpportunitiesSection = "CreatorHub.HomePage.OpportunitiesSection.UserId", f.CreatorHubLandingPage = "CreatorHub.LandingPage", f.CreatorHubLandingPageUserId = "CreatorHub.LandingPage.UserId", f.CreatorHubNavigation = "CreatorHub.Navigation", f.CreatorHubNavigationUser = "CreatorHub.Navigation.User", f.CreatorHubPublishing = "CreatorHub.Publishing.UserId", f.LicenseManager = "CreatorDashboard.LicenseManager", f.RightsManager = "CreatorDashboard.RightsManager", f.CreatorSuccessOrganizations = "CreatorSuccess.OrganizationsV2", f.CreatorHubDocumentationSearch = "CreatorHub.CreatorDocumentation.Search.UserId", f.CreatorHubCreationsPermission = "CreatorHub.Creations.Permission", f.CreatorHubExperienceWebhooks = "CreatorHub.ExperienceWebhooks.UserId", f.CreatorHubGameAppeals = "CreatorHub.GameAppeals.UserId", f.CreatorHubChangelog = "CreatorHub.Changelog", f.TalentHub = "CreatorHub.TalentHub.UserId", f),
-        O = ((h = O || {}).ShowMemoryStoresDashboard = "showMemoryStoresDashboard", h.EnableSubscriptionActivationTest = "enableSubscriptionActivationTest", h.ShowSecrets = "showSecrets", h.ShowQualitySignalCards = "showQualitySignalCards", h);
+        I = ((f = I || {}).GameAppealsEnabled = "gameAppealsEnabled", f),
+        j = ((g = j || {}).EnableExperienceDataTileV2 = "enableExperienceDataTileV2", g),
+        R = ((m = R || {}).EnableChangelogCMS = "enableChangelogCMS", m),
+        L = ((p = {}).CreatorDashboard = "CreatorDashboard", p.CreatorHubHomePage = "CreatorHub.HomePage.UserId", p.CreatorHubHomePageExperienceTile = "CreatorHub.HomePage.ExperienceTile.UserId", p.CreatorHubHomePageOpportunitiesSection = "CreatorHub.HomePage.OpportunitiesSection.UserId", p.CreatorHubLandingPage = "CreatorHub.LandingPage", p.CreatorHubLandingPageUserId = "CreatorHub.LandingPage.UserId", p.CreatorHubNavigation = "CreatorHub.Navigation", p.CreatorHubNavigationUser = "CreatorHub.Navigation.User", p.CreatorHubPublishing = "CreatorHub.Publishing.UserId", p.LicenseManager = "CreatorDashboard.LicenseManager", p.RightsManager = "CreatorDashboard.RightsManager", p.CreatorSuccessOrganizations = "CreatorSuccess.OrganizationsV2", p.CreatorHubDocumentationSearch = "CreatorHub.CreatorDocumentation.Search.UserId", p.CreatorHubCreationsPermission = "CreatorHub.Creations.Permission", p.CreatorHubExperienceWebhooks = "CreatorHub.ExperienceWebhooks.UserId", p.CreatorHubGameAppeals = "CreatorHub.GameAppeals.UserId", p.CreatorHubChangelog = "CreatorHub.Changelog", p.TalentHub = "CreatorHub.TalentHub.UserId", p),
+        O = ((b = O || {}).ShowMemoryStoresDashboard = "showMemoryStoresDashboard", b.EnableSubscriptionActivationTest = "enableSubscriptionActivationTest", b.ShowSecrets = "showSecrets", b.ShowQualitySignalCards = "showQualitySignalCards", b);
     let G = {
         CreatorDashboard: y,
         "CreatorHub.HomePage.UserId": C,
@@ -200,7 +200,7 @@
         "CreatorDashboard.LicenseManager": k,
         "CreatorDashboard.RightsManager": _,
         "CreatorSuccess.OrganizationsV2": {},
-        "CreatorHub.CreatorDocumentation.Search.UserId": ((b = {}).SearchVersion = "searchVersion", b),
+        "CreatorHub.CreatorDocumentation.Search.UserId": ((h = {}).SearchVersion = "searchVersion", h),
         "CreatorHub.Creations.Permission": T,
         "CreatorHub.ExperienceWebhooks.UserId": H,
         "CreatorHub.GameAppeals.UserId": I,
@@ -237,16 +237,16 @@
         n = e.i(462863),
         o = e.i(343885),
         i = e.i(609794),
-        c = e.i(57561),
-        l = e.i(509747),
+        l = e.i(57561),
+        c = e.i(509747),
         d = e.i(475555),
         u = e.i(538302),
-        g = e.i(387707),
-        m = e.i(262135),
-        p = e.i(240731),
-        f = e.i(956923),
-        h = e.i(84362),
-        b = e.i(214665),
+        f = e.i(387707),
+        g = e.i(262135),
+        m = e.i(240731),
+        p = e.i(956923),
+        b = e.i(84362),
+        h = e.i(214665),
         v = e.i(455506),
         x = e.i(918290),
         y = e.i(716933),
@@ -291,8 +291,8 @@
         en = e.i(780078),
         eo = e.i(756885),
         ei = e.i(260123),
-        ec = e.i(507792),
-        el = e.i(850994);
+        el = e.i(507792),
+        ec = e.i(850994);
     let ed = {
         secrets: {
             light: R.default,
@@ -307,7 +307,7 @@
             dark: Q.default
         },
         experiences: {
-            light: ec.default,
+            light: el.default,
             dark: ei.default
         },
         shareLinks: {
@@ -331,8 +331,8 @@
             dark: V.default
         },
         audio: {
-            light: l.default,
-            dark: c.default
+            light: c.default,
+            dark: l.default
         },
         decals: {
             light: x.default,
@@ -343,7 +343,7 @@
             dark: S.default
         },
         videos: {
-            light: el.default,
+            light: ec.default,
             dark: eo.default
         },
         meshes: {
@@ -359,8 +359,8 @@
             dark: y.default
         },
         noUsers: {
-            light: b.default,
-            dark: h.default
+            light: h.default,
+            dark: b.default
         },
         localization: {
             light: I.default,
@@ -379,8 +379,8 @@
             dark: T.default
         },
         badge: {
-            light: m.default,
-            dark: g.default
+            light: g.default,
+            dark: f.default
         },
         apiKeys: {
             light: i.default,
@@ -399,8 +399,8 @@
             dark: L.default
         },
         barGraph: {
-            light: f.default,
-            dark: p.default
+            light: p.default,
+            dark: m.default
         },
         leaderboard: {
             light: A.default,
@@ -416,8 +416,8 @@
         }
     };
     e.s(["default", 0, ed], 938429);
-    let eu = "".concat("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/assets", "/spot_illustrations"),
-        eg = {
+    let eu = "".concat("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/assets", "/spot_illustrations"),
+        ef = {
             small: {
                 analytics: "".concat(eu, "/small/analytics.svg"),
                 animations: "".concat(eu, "/small/animations.svg"),
@@ -460,8 +460,8 @@
                 emptyExperiments: "".concat(eu, "/large/empty_experiments.svg")
             }
         };
-    e.s(["default", 0, eg], 321623);
-    let em = (0, r.makeStyles)()(() => ({
+    e.s(["default", 0, ef], 321623);
+    let eg = (0, r.makeStyles)()(() => ({
             smallContainer: {
                 margin: "48px 0",
                 padding: "0 24px",
@@ -482,7 +482,7 @@
                 marginBottom: 24
             }
         })),
-        ep = e => {
+        em = e => {
             let {
                 illustration: a,
                 size: r = "large"
@@ -492,7 +492,7 @@
                 darkSrc: s.dark,
                 alt: a
             });
-            let o = a ? eg[r][a] : null;
+            let o = a ? ef[r][a] : null;
             return o && (0, t.jsx)("img", {
                 height: "large" === r ? 240 : 96,
                 width: "large" === r ? 320 : 96,
@@ -500,39 +500,39 @@
                 alt: a
             })
         },
-        ef = e => {
+        ep = e => {
             let {
                 children: r,
                 title: n,
                 description: o,
                 size: i = "large",
-                illustration: c
+                illustration: l
             } = e, {
                 classes: {
-                    smallContainer: l,
+                    smallContainer: c,
                     largeContainer: d,
                     smallText: u,
-                    largeText: g
+                    largeText: f
                 },
-                cx: m
-            } = em();
+                cx: g
+            } = eg();
             return (0, t.jsxs)(s.default, {
                 classes: {
-                    root: m({
-                        [l]: "small" === i,
+                    root: g({
+                        [c]: "small" === i,
                         [d]: "large" === i
                     })
                 },
                 flexDirection: "column",
                 alignItems: "center",
-                children: [(0, t.jsx)(ep, {
-                    illustration: c,
+                children: [(0, t.jsx)(em, {
+                    illustration: l,
                     size: i
                 }), (0, t.jsxs)(s.default, {
                     classes: {
-                        root: m({
+                        root: g({
                             [u]: "small" === i,
-                            [g]: "large" === i
+                            [f]: "large" === i
                         })
                     },
                     flexDirection: "column",
@@ -550,7 +550,7 @@
                 }), r]
             })
         };
-    ef.displayName = "EmptyState", e.s(["EmptyStateIllustration", 0, ep, "default", 0, ef], 493924)
+    ep.displayName = "EmptyState", e.s(["EmptyStateIllustration", 0, em, "default", 0, ep], 493924)
 }, 60373, e => {
     "use strict";
     var t = e.i(416340),
@@ -575,7 +575,7 @@
     e.s(["default", 0, function(e, n) {
         var o;
         let i = null != (o = null == n ? void 0 : n.cacheOnly) && o,
-            [c, l] = (0, t.useState)(() => i ? {
+            [l, c] = (0, t.useState)(() => i ? {
                 params: r(e),
                 status: "success",
                 isFetched: !0
@@ -588,23 +588,23 @@
             i || (async () => {
                 let t = {};
                 try {
-                    l(e => ({
+                    c(e => ({
                         ...e,
                         status: "loading"
-                    })), t = await (0, a.fetchIXPParametersForCurrentUser)(e), l({
+                    })), t = await (0, a.fetchIXPParametersForCurrentUser)(e), c({
                         params: t,
                         isFetched: !0,
                         status: "success"
                     }), s(e, t)
                 } catch (e) {
-                    l(e => ({
+                    c(e => ({
                         ...e,
                         isFetched: !0,
                         status: "error"
                     }))
                 }
             })()
-        }, []), c
+        }, []), l
     }])
 }, 198528, e => {
     "use strict";
@@ -680,21 +680,21 @@
         n = e.i(157310),
         o = e.i(279149),
         i = e.i(602635),
-        c = e.i(814975);
-    let l = (0, e.i(272593).createClientConfiguration)("creator-home-api", "bedev2"),
-        d = new o.UserScreenApi(l),
-        u = new o.GroupsApi(l),
-        g = {
+        l = e.i(814975);
+    let c = (0, e.i(272593).createClientConfiguration)("creator-home-api", "bedev2"),
+        d = new o.UserScreenApi(c),
+        u = new o.GroupsApi(c),
+        f = {
             groupsApi: u,
             userScreenApi: d,
-            creatorHomeContentApi: new o.CreatorHomeContentApi(l),
-            signalsApi: new o.SignalsApi(l)
+            creatorHomeContentApi: new o.CreatorHomeContentApi(c),
+            signalsApi: new o.SignalsApi(c)
         };
-    e.s(["CreatorHomeClient", 0, g], 67262);
-    let m = function() {
+    e.s(["CreatorHomeClient", 0, f], 67262);
+    let g = function() {
         let {
             user: e
-        } = (0, c.useAuthentication)();
+        } = (0, l.useAuthentication)();
         return (0, n.useQuery)({
             queryKey: i.getGroupsQueryKey,
             enabled: !!e,
@@ -702,23 +702,23 @@
                 let e;
                 return e = {
                     surface: o.GroupListSurface.CreatorHub
-                }, g.groupsApi.groupsListGroups(e)
+                }, f.groupsApi.groupsListGroups(e)
             }
         })
     };
-    var p = e.i(809576);
-    let f = (0, a.createContext)(null);
+    var m = e.i(809576);
+    let p = (0, a.createContext)(null);
     e.s(["GroupsProvider", 0, e => {
         let {
             children: n
         } = e, {
             user: o
-        } = (0, r.useRobloxAuthentication)(), i = (0, p.useGroupPermissionFetchers)(), {
-            data: c,
-            isLoading: l,
+        } = (0, r.useRobloxAuthentication)(), i = (0, m.useGroupPermissionFetchers)(), {
+            data: l,
+            isLoading: c,
             refetch: d
-        } = m(), [u, g] = (0, s.useLocalStorage)("creatorHubGroups.".concat(null == o ? void 0 : o.id), null), [h, b] = (0, s.useLocalStorage)("creatorHubGroup.".concat(null == o ? void 0 : o.id), null), [v, x] = (0, s.useLocalStorage)("creatorHubGroupData.".concat(null == o ? void 0 : o.id), {}), y = (0, a.useCallback)(e => {
-            b(e);
+        } = g(), [u, f] = (0, s.useLocalStorage)("creatorHubGroups.".concat(null == o ? void 0 : o.id), null), [b, h] = (0, s.useLocalStorage)("creatorHubGroup.".concat(null == o ? void 0 : o.id), null), [v, x] = (0, s.useLocalStorage)("creatorHubGroupData.".concat(null == o ? void 0 : o.id), {}), y = (0, a.useCallback)(e => {
+            h(e);
             let t = null != e ? e : "user";
             x(e => {
                 let a = {
@@ -737,8 +737,8 @@
                     [t]: a
                 }
             })
-        }, [b, x]), _ = (0, a.useMemo)(() => {
-            if (null == c ? void 0 : c.groups) return null == c ? void 0 : c.groups;
+        }, [h, x]), _ = (0, a.useMemo)(() => {
+            if (null == l ? void 0 : l.groups) return null == l ? void 0 : l.groups;
             if (null === u) return [];
             try {
                 let e = "string" == typeof u ? JSON.parse(u) : u;
@@ -746,34 +746,34 @@
             } catch (e) {
                 return []
             }
-        }, [u, null == c ? void 0 : c.groups]), k = (0, a.useMemo)(() => {
+        }, [u, null == l ? void 0 : l.groups]), k = (0, a.useMemo)(() => {
             var e;
-            return h && null != (e = _.find(e => {
+            return b && null != (e = _.find(e => {
                 let {
                     id: t
                 } = e;
-                return t === h
+                return t === b
             })) ? e : null
-        }, [h, _]), C = null == k ? void 0 : k.id, w = null == o ? void 0 : o.id, {
+        }, [b, _]), C = null == k ? void 0 : k.id, w = null == o ? void 0 : o.id, {
             data: E,
             error: S,
             isPending: q,
             refetch: P
-        } = (0, p.useGroupResolvedPermissionsQuery)(C, w), {
+        } = (0, m.useGroupResolvedPermissionsQuery)(C, w), {
             data: A,
             isPending: T,
             refetch: U
-        } = (0, p.useGroupOwnershipQuery)(C, w), H = (0, a.useCallback)(() => null == C || null == w ? Promise.resolve() : Promise.all([P(), U()]), [U, P, C, w]);
+        } = (0, m.useGroupOwnershipQuery)(C, w), H = (0, a.useCallback)(() => null == C || null == w ? Promise.resolve() : Promise.all([P(), U()]), [U, P, C, w]);
         (0, a.useEffect)(() => {
-            (null == o ? void 0 : o.id) && (null == c ? void 0 : c.groups) && !l && g(null == c ? void 0 : c.groups)
-        }, [null == c ? void 0 : c.groups, _, l, g, null == o ? void 0 : o.id]);
+            (null == o ? void 0 : o.id) && (null == l ? void 0 : l.groups) && !c && f(null == l ? void 0 : l.groups)
+        }, [null == l ? void 0 : l.groups, _, c, f, null == o ? void 0 : o.id]);
         let I = (0, a.useMemo)(() => {
             var e;
             return {
                 groups: _,
                 currentGroup: k,
                 groupData: v,
-                isFetched: !l && !!w,
+                isFetched: !c && !!w,
                 refreshGroups: d,
                 setCurrentGroup: y,
                 ...i,
@@ -783,17 +783,17 @@
                 permissionsError: S,
                 refreshPermissions: H
             }
-        }, [k, v, _, l, T, q, A, i, E, S, d, H, y, w]);
-        return (0, t.jsx)(f.Provider, {
+        }, [k, v, _, c, T, q, A, i, E, S, d, H, y, w]);
+        return (0, t.jsx)(p.Provider, {
             value: I,
             children: n
         })
     }, "useCurrentGroup", 0, () => {
-        let e = (0, a.useContext)(f);
+        let e = (0, a.useContext)(p);
         if (null === e) throw Error("useCurrentGroup must be used within a GroupsProvider");
         return e.currentGroup
     }, "useGroups", 0, () => {
-        let e = (0, a.useContext)(f);
+        let e = (0, a.useContext)(p);
         if (null === e) throw Error("useGroups must be used within a GroupsProvider");
         return e
     }], 745873)
@@ -806,23 +806,23 @@
         n = e.i(458451),
         o = e.i(285666),
         i = e.i(272593);
-    let c = new o.PermissionsV2Api((0, i.createClientConfiguration)("groups", "bedev1"));
-    async function l(e, t, a) {
+    let l = new o.PermissionsV2Api((0, i.createClientConfiguration)("groups", "bedev1"));
+    async function c(e, t, a) {
         var r;
-        return null != (r = (await c.v2GroupsGroupIdEntityTypeEntityIdPermissionsResolvedGet({
+        return null != (r = (await l.v2GroupsGroupIdEntityTypeEntityIdPermissionsResolvedGet({
             groupId: e,
             entityType: t,
             entityId: a
         })).permissions) ? r : {}
     }
     async function d(e) {
-        return l(e, "groups", String(e))
+        return c(e, "groups", String(e))
     }
     async function u(e) {
         let t, a = [];
         do {
             var r, s;
-            let n = await c.v2GroupsGroupIdEntityTypePermissionsResolvedGet({
+            let n = await l.v2GroupsGroupIdEntityTypePermissionsResolvedGet({
                 groupId: e,
                 entityType: "roles",
                 cursor: t
@@ -830,48 +830,48 @@
             a.push(...null != (r = n.data) ? r : []), t = null != (s = n.nextPageCursor) ? s : void 0
         } while (t) return a
     }
-    var g = e.i(156071);
-    let m = new o.PermissionsV2Api((0, i.createClientConfiguration)("groups", "bedev1"));
-    async function p(e) {
+    var f = e.i(156071);
+    let g = new o.PermissionsV2Api((0, i.createClientConfiguration)("groups", "bedev1"));
+    async function m(e) {
         var t;
-        return null != (t = (await m.v2EntityTypeEntityIdPermissionsResolvedGet({
+        return null != (t = (await g.v2EntityTypeEntityIdPermissionsResolvedGet({
             entityType: "universes",
             entityId: String(e)
         })).permissions) ? t : {}
     }
-    var f = e.i(759283);
-    let h = (e, t) => ["groups", e, t, "resolved-permissions"],
-        b = (e, t) => ["groups", e, t, "roles", "resolved-permissions"],
+    var p = e.i(759283);
+    let b = (e, t) => ["groups", e, t, "resolved-permissions"],
+        h = (e, t) => ["groups", e, t, "roles", "resolved-permissions"],
         v = (e, t) => ["universe-resolved-permissions", t, void 0 === e ? e : String(e)];
     e.s(["useGroupOwnershipQuery", 0, function(e, t) {
         return (0, r.useQuery)({
             queryKey: ["groups", e, t, "owner"],
-            queryFn: e && t ? () => g.default.getGroupInfo(e) : a.skipToken
+            queryFn: e && t ? () => f.default.getGroupInfo(e) : a.skipToken
         })
     }, "useGroupPermissionFetchers", 0, function() {
         let {
             user: e
         } = (0, n.useRobloxAuthentication)(), a = (0, s.useQueryClient)(), r = null == e ? void 0 : e.id, o = (0, t.useCallback)(e => a.fetchQuery({
             queryKey: v(e, r),
-            queryFn: () => p(e),
+            queryFn: () => m(e),
             staleTime: 6e4
         }), [a, r]), i = (0, t.useCallback)(e => a.fetchQuery({
-            queryKey: h(e, r),
+            queryKey: b(e, r),
             queryFn: () => d(e),
             staleTime: 6e4
-        }), [a, r]), c = (0, t.useCallback)(e => a.fetchQuery({
-            queryKey: b(e, r),
+        }), [a, r]), l = (0, t.useCallback)(e => a.fetchQuery({
+            queryKey: h(e, r),
             queryFn: () => u(e),
             staleTime: 6e4
         }), [a, r]);
         return (0, t.useMemo)(() => ({
             fetchGroupPermissions: i,
-            fetchRolePermissions: c,
+            fetchRolePermissions: l,
             fetchUniversePermissions: o
-        }), [i, c, o])
+        }), [i, l, o])
     }, "useGroupResolvedPermissionsQuery", 0, function(e, t) {
         return (0, r.useQuery)({
-            queryKey: h(e, t),
+            queryKey: b(e, t),
             queryFn: e && t ? () => d(e) : a.skipToken,
             staleTime: 6e4
         })
@@ -880,7 +880,7 @@
             user: t
         } = (0, n.useRobloxAuthentication)(), s = null == t ? void 0 : t.id;
         return (0, r.useQuery)({
-            queryKey: b(e, s),
+            queryKey: h(e, s),
             queryFn: e && s ? () => u(e) : a.skipToken,
             staleTime: 6e4
         })
@@ -890,130 +890,130 @@
         } = (0, n.useRobloxAuthentication)(), s = null == t ? void 0 : t.id;
         return (0, r.useQuery)({
             queryKey: v(e, s),
-            queryFn: void 0 !== e && e !== f.uninitializedUniverseId ? () => p(e) : a.skipToken,
+            queryFn: void 0 !== e && e !== p.uninitializedUniverseId ? () => m(e) : a.skipToken,
             staleTime: 6e4
         })
     }], 809576)
 }, 127792, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/alert_dark.1spa8ixzmujxs.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/alert_dark.1spa8ixzmujxs.svg")
 }, 858517, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/alert_light.3o6_fob3g_8zu.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/alert_light.3o6_fob3g_8zu.svg")
 }, 343885, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/api_key_dark.1k1v6y4zm3j28.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/api_key_dark.1k1v6y4zm3j28.svg")
 }, 609794, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/api_key_light.06t4q4202-77s.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/api_key_light.06t4q4202-77s.svg")
 }, 57561, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/audio_dark.16razgllw2ska.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/audio_dark.16razgllw2ska.svg")
 }, 509747, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/audio_light.3ra073_18pbj-.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/audio_light.3ra073_18pbj-.svg")
 }, 475555, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/avatar_setup_dark.0orjsl7i089hc.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/avatar_setup_dark.0orjsl7i089hc.svg")
 }, 538302, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/avatar_setup_light.32r86q54d7kuh.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/avatar_setup_light.32r86q54d7kuh.svg")
 }, 387707, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/badge_dark.3m45r-3favo3f.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/badge_dark.3m45r-3favo3f.svg")
 }, 262135, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/badge_light.3fxfvj8ub7utb.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/badge_light.3fxfvj8ub7utb.svg")
 }, 240731, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/bar_graph_dark.01vf9sty52re2.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/bar_graph_dark.01vf9sty52re2.svg")
 }, 956923, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/bar_graph_light.1iiixo_d8ur81.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/bar_graph_light.1iiixo_d8ur81.svg")
 }, 84362, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/collaborators_dark.30gxkwssilacj.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/collaborators_dark.30gxkwssilacj.svg")
 }, 214665, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/collaborators_light.3x7fovqhay1x5.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/collaborators_light.3x7fovqhay1x5.svg")
 }, 455506, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/decals_dark.2jpntsljojhzc.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/decals_dark.2jpntsljojhzc.svg")
 }, 918290, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/decals_light.16_gp3tnuc5p_.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/decals_light.16_gp3tnuc5p_.svg")
 }, 716933, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/envelope_dark.2-ouf9shuihi4.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/envelope_dark.2-ouf9shuihi4.svg")
 }, 347319, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/envelope_light.1me9hqye66z7w.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/envelope_light.1me9hqye66z7w.svg")
 }, 543657, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/event_calendar_dark.3lx4_kse68by8.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/event_calendar_dark.3lx4_kse68by8.svg")
 }, 850412, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/event_calendar_light.1pq-t84d90ty1.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/event_calendar_light.1pq-t84d90ty1.svg")
 }, 103329, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/find_people_dark.220q6_cs04hcq.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/find_people_dark.220q6_cs04hcq.svg")
 }, 692706, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/find_people_light.1gkb3pmwc8s2n.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/find_people_light.1gkb3pmwc8s2n.svg")
 }, 405654, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/image_dark.2giew28wx4z86.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/image_dark.2giew28wx4z86.svg")
 }, 891409, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/image_light.0ouq8tcgpznz7.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/image_light.0ouq8tcgpznz7.svg")
 }, 758060, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/leaderboard_dark.301ypg94lbxpv.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/leaderboard_dark.301ypg94lbxpv.svg")
 }, 710005, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/leaderboard_light.43sjz_ibwkiq_.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/leaderboard_light.43sjz_ibwkiq_.svg")
 }, 495550, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/line_chart_dark.0k7qf3mhepo6s.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/line_chart_dark.0k7qf3mhepo6s.svg")
 }, 320429, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/line_chart_light.049gcvvmai0ax.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/line_chart_light.049gcvvmai0ax.svg")
 }, 106017, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/localization_dark.1ia7wat2mwyfi.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/localization_dark.1ia7wat2mwyfi.svg")
 }, 821978, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/localization_light.2jss_xvx2fuq0.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/localization_light.2jss_xvx2fuq0.svg")
 }, 766389, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/lockSecrets_dark.0na6naigcbnkj.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/lockSecrets_dark.0na6naigcbnkj.svg")
 }, 374717, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/lockSecrets_light.0rzix2i1i13lt.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/lockSecrets_light.0rzix2i1i13lt.svg")
 }, 756733, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/makeup_look_dark.26-5-yn8598c9.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/makeup_look_dark.26-5-yn8598c9.svg")
 }, 251697, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/makeup_look_light.0rc05t5n5al4m.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/makeup_look_light.0rc05t5n5al4m.svg")
 }, 411118, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/managed_pricing_dark.2zdkf2-ctboa2.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/managed_pricing_dark.2zdkf2-ctboa2.svg")
 }, 839596, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/managed_pricing_light.0sioq_hruq1qp.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/managed_pricing_light.0sioq_hruq1qp.svg")
 }, 729733, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/meshes_dark.2tlm50ns1pq5o.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/meshes_dark.2tlm50ns1pq5o.svg")
 }, 66217, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/meshes_light.36wh96flp2o3r.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/meshes_light.36wh96flp2o3r.svg")
 }, 148865, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/models_dark.30suu5lj5-ua5.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/models_dark.30suu5lj5-ua5.svg")
 }, 45512, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/models_light.0kiw6k3ejw-rn.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/models_light.0kiw6k3ejw-rn.svg")
 }, 706478, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/models_plugins_parts_dark.3jp6jislnsqf8.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/models_plugins_parts_dark.3jp6jislnsqf8.svg")
 }, 166181, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/models_plugins_parts_light.2nj1xhv0bfg_u.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/models_plugins_parts_light.2nj1xhv0bfg_u.svg")
 }, 37474, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/notifications_dark.2l_rf34_xo6o8.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/notifications_dark.2l_rf34_xo6o8.svg")
 }, 147189, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/notifications_light.3p-b4rzvwwfmj.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/notifications_light.3p-b4rzvwwfmj.svg")
 }, 105897, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/oauth_dark.42jv8--11_1i0.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/oauth_dark.42jv8--11_1i0.svg")
 }, 123524, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/oauth_light.17vwiebwrn8ox.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/oauth_light.17vwiebwrn8ox.svg")
 }, 752739, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/rights_manager_dark.0m7ca17sdbgim.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/rights_manager_dark.0m7ca17sdbgim.svg")
 }, 331105, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/rights_manager_light.1moaenz1cbft0.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/rights_manager_light.1moaenz1cbft0.svg")
 }, 564908, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/run_dark.1sun4tvxh_arh.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/run_dark.1sun4tvxh_arh.svg")
 }, 663412, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/run_light.29f-3jyw910_v.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/run_light.29f-3jyw910_v.svg")
 }, 215887, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/shareLinks_dark.1l5fwuv6cgzmy.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/shareLinks_dark.1l5fwuv6cgzmy.svg")
 }, 962803, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/shareLinks_light.116igf-ldibmu.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/shareLinks_light.116igf-ldibmu.svg")
 }, 914865, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/signin_dark.1k_gzn1-5q0ca.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/signin_dark.1k_gzn1-5q0ca.svg")
 }, 818392, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/signin_light.1o1-jng_ct0y2.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/signin_light.1o1-jng_ct0y2.svg")
 }, 173034, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/token_dark.2qy4jy9ffjhax.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/token_dark.2qy4jy9ffjhax.svg")
 }, 780078, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/token_light.2xc00j5zp1q8_.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/token_light.2xc00j5zp1q8_.svg")
 }, 756885, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/video_dark.2-gdpodjtsjj3.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/video_dark.2-gdpodjtsjj3.svg")
 }, 260123, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/video_game_dark.0tuxtkttj8gcu.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/video_game_dark.0tuxtkttj8gcu.svg")
 }, 507792, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/video_game_light.3l155817mjupj.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/video_game_light.3l155817mjupj.svg")
 }, 850994, e => {
-    e.q("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/_next/static/media/video_light.1fum3vlxctp7w.svg")
+    e.q("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/_next/static/media/video_light.1fum3vlxctp7w.svg")
 }, 776569, 560130, e => {
     "use strict";
     var t = e.i(197649),
@@ -1045,24 +1045,24 @@
             position: n,
             hasBeak: o = !0,
             title: i,
-            description: c,
-            ariaLabel: l,
+            description: l,
+            ariaLabel: c,
             delayDurationMs: d = 500,
             children: u,
-            open: g,
-            onOpenChange: m,
-            contentClassName: p
-        } = e, [f, h] = n.split("-"), b = null != l ? l : "string" == typeof i && null == c ? i : void 0;
+            open: f,
+            onOpenChange: g,
+            contentClassName: m
+        } = e, [p, b] = n.split("-"), h = null != c ? c : "string" == typeof i && null == l ? i : void 0;
         return a.createElement(s.Provider, {
             delayDuration: d
         }, a.createElement(s.Root, {
-            open: g,
-            onOpenChange: m
+            open: f,
+            onOpenChange: g
         }, u, a.createElement(s.Portal, null, a.createElement(s.Content, {
-            side: f,
-            align: h,
-            "aria-label": b,
-            className: (0, t.default)("foundation-web-portal-zindex bg-inverse-surface-0 padding-y-xsmall padding-x-small radius-small shadow-transient-low", p),
+            side: p,
+            align: b,
+            "aria-label": h,
+            className: (0, t.default)("foundation-web-portal-zindex bg-inverse-surface-0 padding-y-xsmall padding-x-small radius-small shadow-transient-low", m),
             sideOffset: 5
         }, o && a.createElement(s.Arrow, {
             asChild: !0
@@ -1072,9 +1072,9 @@
             className: "flex flex-col text-truncate-split"
         }, a.createElement("div", {
             className: "text-caption-medium content-inverse-default"
-        }, i), c && a.createElement("div", {
+        }, i), l && a.createElement("div", {
             className: "text-body-small padding-top-xsmall content-inverse-default max-width-[calc(var(--size-100)*50)]"
-        }, c))))))
+        }, l))))))
     }, "TooltipTrigger", 0, function(e) {
         let {
             children: t,
@@ -1104,31 +1104,31 @@
         }
     });
     e.s(["default", 0, function(e) {
-        var n, o, i, c, l = e.children,
+        var n, o, i, l, c = e.children,
             d = (0, t.a)(e, ["children"]),
             u = (0, a.useRef)(null),
-            g = (0, a.useState)(!1),
-            m = g[0],
-            p = g[1],
-            f = (0, a.useState)([]),
-            h = f[0],
-            b = f[1],
+            f = (0, a.useState)(!1),
+            g = f[0],
+            m = f[1],
+            p = (0, a.useState)([]),
+            b = p[0],
+            h = p[1],
             v = (0, a.useCallback)(function(e, a) {
                 void 0 === e && (e = {}), void 0 === a && (a = function() {
                     return !0
-                }), b(function(r) {
+                }), h(function(r) {
                     return (0, t.b)((0, t.b)([], r, !0), [{
                         props: e,
                         shouldClose: a
                     }], !1)
                 })
-            }, [b]),
+            }, [h]),
             x = (0, a.useCallback)(function() {
-                p(!1)
-            }, [p]);
+                m(!1)
+            }, [m]);
         (0, a.useEffect)(function() {
-            h.length > 0 && p(!0)
-        }, [h.length]);
+            b.length > 0 && m(!0)
+        }, [b.length]);
         var y = (0, a.useMemo)(function() {
             return {
                 ref: u,
@@ -1138,22 +1138,22 @@
         }, [x, v]);
         return a.default.createElement(a.default.Fragment, null, a.default.createElement(s.Provider, {
             value: y
-        }, l), a.default.createElement(r.S, (0, t._)({}, (null == (n = h[0]) ? void 0 : n.props) || {}, d, {
-            TransitionProps: (0, t._)((0, t._)({}, (null == (i = null == (o = h[0]) ? void 0 : o.props) ? void 0 : i.TransitionProps) || {}), {
+        }, c), a.default.createElement(r.S, (0, t._)({}, (null == (n = b[0]) ? void 0 : n.props) || {}, d, {
+            TransitionProps: (0, t._)((0, t._)({}, (null == (i = null == (o = b[0]) ? void 0 : o.props) ? void 0 : i.TransitionProps) || {}), {
                 onExited: function(e) {
                     var a, r, s, n;
-                    b(function(e) {
+                    h(function(e) {
                         var a = e.slice(1);
                         return (0, t.b)([], a, !0)
-                    }), (null == (r = null == (a = h[0]) ? void 0 : a.props.TransitionProps) ? void 0 : r.onExited) && (null == (n = null == (s = h[0]) ? void 0 : s.props.TransitionProps) || n.onExited(e))
+                    }), (null == (r = null == (a = b[0]) ? void 0 : a.props.TransitionProps) ? void 0 : r.onExited) && (null == (n = null == (s = b[0]) ? void 0 : s.props.TransitionProps) || n.onExited(e))
                 }
             }),
             onClose: function(e, t) {
                 var a, r, s;
-                (null == (a = h[0]) ? void 0 : a.shouldClose(t)) && p(!1), (null == (r = h[0]) ? void 0 : r.props.onClose) && (null == (s = h[0]) || s.props.onClose(e, t))
+                (null == (a = b[0]) ? void 0 : a.shouldClose(t)) && m(!1), (null == (r = b[0]) ? void 0 : r.props.onClose) && (null == (s = b[0]) || s.props.onClose(e, t))
             },
-            open: m
-        }), null == (c = h[0]) ? void 0 : c.props.children))
+            open: g
+        }), null == (l = b[0]) ? void 0 : l.props.children))
     }, "useSnackbar", 0, function() {
         var e = (0, a.useContext)(s);
         return {
@@ -1176,54 +1176,54 @@
         if (null === e) throw Error("useUnifiedLoggerProvider must be used within a UnifiedLoggerProvider");
         return e
     }
-    let c = () => null;
+    let l = () => null;
     e.s(["UnifiedLoggerProvider", 0, e => {
         var i;
         let {
-            children: c,
-            unifiedLogger: l,
+            children: l,
+            unifiedLogger: c,
             pageLoggerConfig: d,
             path: u,
-            url: g,
-            isReady: m = !0
-        } = e, p = null != (i = null == d ? void 0 : d.tags) ? i : s, f = null == d ? void 0 : d.rosId, h = (0, t.useMemo)(() => ({
-            tags: p,
-            rosId: f,
+            url: f,
+            isReady: g = !0
+        } = e, m = null != (i = null == d ? void 0 : d.tags) ? i : s, p = null == d ? void 0 : d.rosId, b = (0, t.useMemo)(() => ({
+            tags: m,
+            rosId: p,
             path: u,
-            url: g,
-            isReady: m
-        }), [p, f, u, g, m]), b = (0, t.useRef)(h), v = (0, t.useRef)(h);
+            url: f,
+            isReady: g
+        }), [m, p, u, f, g]), h = (0, t.useRef)(b), v = (0, t.useRef)(b);
         (0, t.useLayoutEffect)(() => {
-            v.current = h, void 0 === b.current.path && void 0 !== h.path && (b.current = {
-                ...b.current,
-                path: h.path
+            v.current = b, void 0 === h.current.path && void 0 !== b.path && (h.current = {
+                ...h.current,
+                path: b.path
             })
-        }, [h]), (0, t.useLayoutEffect)(() => {
+        }, [b]), (0, t.useLayoutEffect)(() => {
             let e = e => {
                 var t;
                 let r;
                 if (e instanceof a.W && void 0 !== e.pageContext) return;
-                let s = (r = null == (t = e.parameters) ? void 0 : t.metricName, "webvitals" === e.eventType && void 0 !== r && o.has(r)) ? b.current : v.current;
+                let s = (r = null == (t = e.parameters) ? void 0 : t.metricName, "webvitals" === e.eventType && void 0 !== r && o.has(r)) ? h.current : v.current;
                 void 0 !== s.path && (e.parameters = {
                     ...e.parameters,
                     path: s.path
                 }), s.tags.forEach(t => e.addTag(t)), void 0 !== s.rosId && e.addTag("owner: ".concat(s.rosId))
             };
             return n.forEach(t => {
-                l.events.on(t, e)
+                c.events.on(t, e)
             }), () => {
                 n.forEach(t => {
-                    l.events.off(t, e)
+                    c.events.off(t, e)
                 })
             }
-        }, [l]);
+        }, [c]);
         let x = (0, t.useMemo)(() => ({
-            unifiedLogger: l,
-            pageContext: h
-        }), [l, h]);
+            unifiedLogger: c,
+            pageContext: b
+        }), [c, b]);
         return t.default.createElement(r.Provider, {
             value: x
-        }, c)
+        }, l)
     }, "useOptionalUnifiedLoggerProvider", 0, function() {
         return (0, t.useContext)(r)
     }, "usePageSettled", 0, e => {
@@ -1234,7 +1234,7 @@
             path: s,
             url: n,
             isReady: o
-        } = r, l = a.pageSettledTracker, d = (0, t.useSyncExternalStore)(l.subscribe, l.getSnapshot, c);
+        } = r, c = a.pageSettledTracker, d = (0, t.useSyncExternalStore)(c.subscribe, c.getSnapshot, l);
         (0, t.useEffect)(() => {
             if (!d || d.isNavigating || !o || !s || !n || !e || d.url.split(/[?#]/)[0] !== n.split(/[?#]/)[0]) return;
             let t = new URL(s, window.location.origin).pathname,
@@ -1252,5 +1252,5 @@
     }, "useUnifiedLoggerProvider", 0, i])
 }]);
 
-//# debugId=7a99dae7-e31a-b52b-cf0f-f94d885cecc2
-//# sourceMappingURL=0s594esuz8790.js.map
+//# debugId=59f93ce4-42da-9c9d-3671-bb30d040dfa6
+//# sourceMappingURL=1ba21i-elst3u.js.map

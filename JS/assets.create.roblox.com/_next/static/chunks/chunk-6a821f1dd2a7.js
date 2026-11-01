@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "28ab4fd3-df49-a734-b88c-8097353e9a67")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "a20afb3c-62f9-0615-d27a-59e7af6a36b3")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 656350, t => {
@@ -11054,7 +11054,7 @@
         metadata: {
             namespace: "financial-platform",
             name: "ShowDevExWithholdingAmount",
-            defaultValue: 0,
+            defaultValue: 100,
             valueType: "number",
             contextType: "static"
         }
@@ -11521,7 +11521,7 @@
     };
     var cM = t.i(37819),
         c_ = t.i(892173);
-    let cB = "".concat("".concat("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/assets", "/opengraph"), "/global_og_image.png"),
+    let cB = "".concat("".concat("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/assets", "/opengraph"), "/global_og_image.png"),
         cV = (0, oR.withTranslation)(t => {
             let {
                 openGraphMetadata: {
@@ -14580,5 +14580,5 @@
     n.exports = t.r(816657)
 }]);
 
-//# debugId=28ab4fd3-df49-a734-b88c-8097353e9a67
-//# sourceMappingURL=2v1dxmr-rd4sg.js.map
+//# debugId=a20afb3c-62f9-0615-d27a-59e7af6a36b3
+//# sourceMappingURL=3h4rdgtbb71--.js.map

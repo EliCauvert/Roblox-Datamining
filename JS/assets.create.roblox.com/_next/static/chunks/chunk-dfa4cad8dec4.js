@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "4715e7f4-5346-4b16-fbde-40823e941922")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "8962e51f-b4c3-3066-7d1a-cbeb960ae6cd")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 696564, e => {
@@ -484,7 +484,7 @@
     }, "getItemTypeChipIconSrc", 0, function(e, s) {
         let t = e.toLowerCase(),
             n = y.has(t) ? "".concat(t, "accessory") : t;
-        return "".concat("".concat("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/assets", "/unifiedFeeSystem"), "/").concat(s ? "".concat(n, ".svg") : "".concat(n, "_black.svg"))
+        return "".concat("".concat("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/assets", "/unifiedFeeSystem"), "/").concat(s ? "".concat(n, ".svg") : "".concat(n, "_black.svg"))
     }, "getPublishPageUrl", 0, function(e, s) {
         return "/dashboard/creations/".concat(a.itemTypeToPath[e], "/").concat(s, "/publish")
     }, "getTaxonomyDisplayName", 0, function(e, s) {
@@ -832,7 +832,7 @@
                 strokeWidth: p,
                 textClass: m,
                 valueContainerSize: d
-            } = n[r], T = (y - p) / 2, E = 2 * Math.PI * T, B = y / 2, R = Math.min(100, Math.max(0, l)), f = u && void 0 !== d ? d : y, g = "Determinate" === i;
+            } = n[r], T = (y - p) / 2, E = 2 * Math.PI * T, B = y / 2, f = Math.min(100, Math.max(0, l)), R = u && void 0 !== d ? d : y, g = "Determinate" === i;
             return t.default.createElement("div", {
                 ref: a,
                 className: (0, s.default)("foundation-web-progress-circle inline-flex items-center justify-center", o),
@@ -840,10 +840,10 @@
                 "aria-label": A,
                 "aria-valuemin": g ? 0 : void 0,
                 "aria-valuemax": g ? 100 : void 0,
-                "aria-valuenow": g ? R : void 0,
+                "aria-valuenow": g ? f : void 0,
                 style: {
-                    width: f,
-                    height: f
+                    width: R,
+                    height: R
                 },
                 ...c
             }, t.default.createElement("svg", {
@@ -867,7 +867,7 @@
                 fill: "none",
                 strokeWidth: p,
                 strokeDasharray: g ? E : "".concat(.75 * E, " ").concat(.25 * E),
-                strokeDashoffset: g ? E * (1 - R / 100) : 0,
+                strokeDashoffset: g ? E * (1 - f / 100) : 0,
                 strokeLinecap: "round",
                 className: (0, s.default)(!g && "foundation-web-progress-circle-indeterminate"),
                 style: g ? {
@@ -882,7 +882,7 @@
             })), g && u && "Large" === r && t.default.createElement("div", {
                 className: (0, s.default)("absolute content-emphasis flex items-center justify-center", m),
                 "aria-hidden": "true"
-            }, t.default.createElement("span", null, Math.round(R)), t.default.createElement("span", null, "%")))
+            }, t.default.createElement("span", null, Math.round(f)), t.default.createElement("span", null, "%")))
         });
     a.displayName = "ProgressCircle", e.s(["ProgressCircle", 0, a])
 }, 725260, e => {
@@ -941,5 +941,5 @@
     e.s(["DialogContentText", () => s.D])
 }]);
 
-//# debugId=4715e7f4-5346-4b16-fbde-40823e941922
-//# sourceMappingURL=2-0agcr-5lugp.js.map
+//# debugId=8962e51f-b4c3-3066-7d1a-cbeb960ae6cd
+//# sourceMappingURL=29oc2f92vc5sk.js.map

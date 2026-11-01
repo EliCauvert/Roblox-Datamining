@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "e1cd30f1-4719-7cd7-5a81-58a80467ac80")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "9dc44b2e-e9d9-ff4d-9036-8da7ce9abc32")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 239328, e => {
@@ -600,7 +600,7 @@
         g = e.i(917852),
         y = e.i(576069),
         v = e.i(663563);
-    let b = "".concat("https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a/assets", "/home/publish_eligibility_banner.webp"),
+    let b = "".concat("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/assets", "/home/publish_eligibility_banner.webp"),
         A = (0, i.withTranslation)(e => {
             var A;
             let {
@@ -4060,5 +4060,5 @@
     }), e.s(["RadioGroup", 0, C], 893502)
 }]);
 
-//# debugId=e1cd30f1-4719-7cd7-5a81-58a80467ac80
-//# sourceMappingURL=0l_uiah6j-bx8.js.map
+//# debugId=9dc44b2e-e9d9-ff4d-9036-8da7ce9abc32
+//# sourceMappingURL=2kj1vnuzjv1zh.js.map

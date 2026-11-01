@@ -269,6 +269,9 @@ Roblox.LangDynamic["Feature.Home"] = {
     "Experiment.TextFilterEducation.General.Body.Spam.Warning": "We had to change or block some of your messages. Remember: send each message only once.",
     "Experiment.TextFilterEducation.General.Body.Pii.Modified": "To avoid losing access to chat, keep your personal info to yourself.",
     "Experiment.TextFilterEducation.General.Body.Pii.Warning": "We had to change or block some of your messages. Remember: keep your personal info to yourself.",
-    "Experiment.TextFilterEducation.General.Body.Romance.Warning": "We had to change or block some of your messages. Remember: stay away from romance or dating."
+    "Experiment.TextFilterEducation.General.Body.Romance.Warning": "We had to change or block some of your messages. Remember: stay away from romance or dating.",
+    "TextFilterEducation.General.Body.Respect.Warning.V2": "We had to change or block some of your recent messages. Remember: always keep messages respectful.",
+    "TextFilterEducation.General.Body.Spam.Warning.V2": "We had to change or block some of your recent messages. Remember: send each message only once.",
+    "TextFilterEducation.General.Body.Pii.Warning.V2": "We had to change or block some of your recent messages. Remember: keep your personal info to yourself."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Home");

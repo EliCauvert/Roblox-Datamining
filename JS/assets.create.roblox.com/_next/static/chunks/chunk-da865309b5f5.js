@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "afe72d9f-bd55-6da6-4072-aec163d3c474")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "c48f5769-0dec-7f13-f343-78ea4a7d5d51")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 171908, e => {
@@ -4908,12 +4908,12 @@
                             name: "NextjsClientStackFrameNormalization"
                         }
                     })({
-                        assetPrefix: "https://assets.create.roblox.com/693c51491c6d9e57aaf41dc3340c19dd2f0c145a",
+                        assetPrefix: "https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a",
                         basePath: a,
-                        rewriteFramesAssetPrefixPath: "/693c51491c6d9e57aaf41dc3340c19dd2f0c145a",
+                        rewriteFramesAssetPrefixPath: "/f58fdfef2d08293e832c6df19c04db927411e75a",
                         experimentalThirdPartyOriginStackFrames: l
                     })), r),
-                    release: "Hub-693c51491c6d9e57aaf41dc3340c19dd2f0c145a",
+                    release: "Hub-f58fdfef2d08293e832c6df19c04db927411e75a",
                     ...e
                 };
                 ! function(e) {
@@ -5045,7 +5045,7 @@
         }({
             environment: "production",
             enabled: !0,
-            release: "Hub-693c51491c6d9e57aaf41dc3340c19dd2f0c145a",
+            release: "Hub-f58fdfef2d08293e832c6df19c04db927411e75a",
             dsn: "https://2c039001a72b4824851c1b3f71ce1f8f@o293668.ingest.sentry.io/5337301",
             allowUrls: [/https?:\/\/create\.roblox\.com/, /https?:\/\/create\.sitetest1\.robloxlabs\.com/, /https?:\/\/assets\.create\.roblox\.com/, /https?:\/\/assets\.create\.sitetest1\.robloxlabs\.com/],
             ...{
@@ -15158,5 +15158,5 @@
     }(), t.exports = e.r(702554)
 }]);
 
-//# debugId=afe72d9f-bd55-6da6-4072-aec163d3c474
-//# sourceMappingURL=1-qm14v-21gbx.js.map
+//# debugId=c48f5769-0dec-7f13-f343-78ea4a7d5d51
+//# sourceMappingURL=41e_clii9nzuf.js.map
