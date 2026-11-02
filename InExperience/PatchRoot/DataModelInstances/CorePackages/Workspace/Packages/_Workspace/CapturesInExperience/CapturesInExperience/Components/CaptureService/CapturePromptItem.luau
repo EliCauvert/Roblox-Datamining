@@ -1,12 +1,16 @@
-﻿local Parent = script.Parent.Parent.Parent.Parent
-local FoundationModule = require(Parent.Foundation)
-local ReactModule = require(Parent.React)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local CapturesCommonModule = require(Parent1.CapturesCommon)
+local FoundationModule = require(Parent1.Foundation)
+local ReactModule = require(Parent1.React)
 local Checkbox = FoundationModule.Checkbox
 local View = FoundationModule.View
-local GetCropSizeFunction = require(Parent.CapturesCommon).Utils.getCropSize
+local GetCropSizeFunction = CapturesCommonModule.Utils.getCropSize
+local GetFitSizeFunction = CapturesCommonModule.Utils.getFitSize
+local FFlagCapturePromptItemUseFitModule = require(Parent.Flags.FFlagCapturePromptItemUseFit)
 
 return function(p1)
-	-- upvalues: ReactModule (copy), View (copy), FoundationModule (copy), Checkbox (copy), GetCropSizeFunction (copy)
+	-- upvalues: ReactModule (copy), View (copy), FoundationModule (copy), Checkbox (copy), FFlagCapturePromptItemUseFitModule (copy), GetFitSizeFunction (copy), GetCropSizeFunction (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Vector2.new(0, 0))
@@ -59,7 +63,7 @@ return function(p1)
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			ImageContent = p1.content,
 			Position = UDim2.fromScale(0.5, 0.5),
-			ScaleType = Enum.ScaleType.Crop,
+			ScaleType = if FFlagCapturePromptItemUseFitModule then Enum.ScaleType.Fit else Enum.ScaleType.Crop,
 			Size = UDim2.fromScale(1, 1)
 		}),
 		Video = if IsVideoCapture then ReactModule.createElement("VideoFrame", {
@@ -68,7 +72,7 @@ return function(p1)
 			Looped = true,
 			Playing = true,
 			Position = UDim2.fromScale(0.5, 0.5),
-			Size = GetCropSizeFunction(UseStateResult, UseStateResult1),
+			Size = if FFlagCapturePromptItemUseFitModule then GetFitSizeFunction(UseStateResult, UseStateResult1) else GetCropSizeFunction(UseStateResult, UseStateResult1),
 			VideoContent = p1.content,
 			Volume = 0,
 			[ReactModule.Event.Loaded] = UseResult2

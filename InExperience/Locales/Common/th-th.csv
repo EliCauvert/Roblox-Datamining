@@ -2591,7 +2591,7 @@ Feature.Captures.Control.On,
 Feature.Captures.Control.StartRecordingVideo,
 Feature.Captures.Control.StopRecordingVideo,หยุดการบันทึก
 Feature.Captures.Description.AllowPhotoAccessInfo,เพื่อบันทึกภาพที่จับของคุณ Roblox จำเป็นต้องเข้าถึงอัลบั้มล่าสุดบนอุปกรณ์ของคุณ
-Feature.Captures.Description.DiscoverPostWatch,ค้นพบ โพสต์ และชมการเล่นเกม Roblox สุดอลังในโมเมนต์
+Feature.Captures.Description.DiscoverPostWatch,แชร์การเล่นเกมของคุณในโมเมนต์
 Feature.Captures.Description.MomentProcessing,คุณสามารถดูในโมเมนต์ได้เร็วๆ นี้
 Feature.Captures.Description.ShareCTA,แชร์การจับภาพของคุณกับเพื่อน!
 Feature.Captures.Label.CaptureCounts,{numberOfCaptures} รายการ
@@ -2626,7 +2626,7 @@ Feature.Captures.Title.VideoCaptureVoiceChatMutedTooltip,แชทด้วย�
 Feature.Captures.Toast.CaptureSaved,
 Feature.Captures.Toast.CaptureSavedToDevice,บันทึกไปยังอุปกรณ์
 Feature.Captures.Toast.CapturesEnabled,เปิดใช้การจับภาพแล้ว
-Feature.Captures.Toast.CreateMoment2,บันทึกแล้ว! เปลี่ยนให้เป็นโมเมนต์ได้เลย
+Feature.Captures.Toast.CreateMoment2,บันทึกแล้ว! จะสร้างโมเมนต์เลยไหม?
 Feature.Captures.Toast.MomentProcessing,เรากำลังประมวลผลโมเมนต์ของคุณ
 Feature.Captures.Toast.VideoCaptureFailed,บันทึกวิดีโอไม่สำเร็จ
 Feature.Captures.Toast.VideoCaptureInitializationCapturingAlreadyError,การจับภาพวิดีโอยังอยู่ระหว่างดำเนินการ
@@ -3752,9 +3752,15 @@ Feature.Moments.Action.ShowDetails,แสดงรายละเอียด
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,ตัดวิดีโอ
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Action.ViewOtherFeed,ดูฟีดอื่น
+Feature.Moments.Action.ViewRecommended,ดูฟีดแนะนำ
+Feature.Moments.Action.ViewTrending,ดูฟีดมาแรง
 Feature.Moments.Body.EDPMomentIPReportInstructions,หากต้องการรายงานเรื่องการละเมิดทรัพย์สินทางปัญญาในโมเมนต์นี้ โปรดดำเนินการต่อที่หน้ารายละเอียดเกม
 Feature.Moments.Description.CommunityStandards,ดูข้อมูลเพิ่มเติมเกี่ยวกับสิ่งที่คุณพูดได้และพูดไม่ได้ในมาตรฐานชุมชน
 Feature.Moments.Description.EmptyCapturesLibrary,ภาพที่คุณจับไว้จะปรากฏที่นี่
+Feature.Moments.Description.FollowingCaughtUpBody,คุณติดตามโมเมนต์ใหม่ในฟีดนี้หมดแล้ว สลับฟีดเพื่อดูเพิ่มเติม
+Feature.Moments.Description.FollowingEmptyBodyRecommended,เพลิดเพลินกับโมเมนต์จากรายการโปรดหลังจากที่คุณติดตามครีเอเตอร์ 2-3 คน ดูฟีดแนะนำเพื่อค้นหา
+Feature.Moments.Description.FollowingEmptyBodyTrending,เพลิดเพลินกับโมเมนต์จากรายการโปรดหลังจากที่คุณติดตามครีเอเตอร์ 2-3 คน ดูฟีดที่กำลังมาแรงเพื่อค้นหา
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,ข้อความนี้สร้างโดย AI โปรดตรวจสอบก่อนโพสต์ เพราะคุณจะเป็นผู้รับผิดชอบต่อข้อความที่เผยแพร่
 Feature.Moments.Description.HowToCaptureStep1,เข้าร่วมประสบการณ์ที่เปิดใช้งานการจับภาพ แล้วเลือกเมนูแฮมเบอร์เกอร์
 Feature.Moments.Description.HowToCaptureStep2,เปิดใช้งานการควบคุมการจับภาพ
@@ -3813,8 +3819,11 @@ Feature.Moments.Label.FeedEndTitle,ดูหมดแล้ว
 Feature.Moments.Label.FeedFailedToLoad,โหลดฟีดไม่สำเร็จ
 Feature.Moments.Label.FeedFollowing,
 Feature.Moments.Label.FeedMyMoments,โมเมนต์ของฉัน
+Feature.Moments.Label.FeedRecommended,แนะนำ
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.FirstCommentInvite,ยังไม่มีความคิดเห็น มาเป็นคนที่แสดงความคิดเห็นกัน!
+Feature.Moments.Label.FollowingCaughtUpTitle,ดูหมดแล้วในตอนนี้
+Feature.Moments.Label.FollowingEmptyTitle,ติดตามครีเอเตอร์เพื่อดูโมเมนต์
 Feature.Moments.Label.GameJoinConversion,อัตราคอนเวอร์ชันการเข้าร่วมเกม
 Feature.Moments.Label.HowToUseCaptureTitle,วิธีใช้การจับภาพ
 Feature.Moments.Label.LinkCopied,คัดลอกลิงก์แล้ว
@@ -3999,11 +4008,20 @@ Feature.PlayerSearchResults.Label.YouAreFollowing,คุณกำลังติ
 Feature.PlayerSearchResults.Label.YouAreFriends,คุณเป็นเพื่อนกันแล้ว
 Feature.PrivateServers.Action.CreatePrivateServer,สร้างเซิร์ฟเวอร์ส่วนตัว
 Feature.PrivateServers.Action.FreeWithBlackbird,ฟรีเมื่อสมัคร Plus
+Feature.PrivateServers.Action.Generate,
+Feature.PrivateServers.Description.FriendsAllowed,ทุกคนในรายชื่อเพื่อนของคุณสามารถเข้าร่วมได้โดยไม่ต้องมีคำเชิญ
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio ไม่รองรับการซื้อเซิร์ฟเวอร์ส่วนตัว
 Feature.PrivateServers.Description.VipServersNotSupported,เกมนี้ไม่รองรับเซิร์ฟเวอร์ส่วนตัว
 Feature.PrivateServers.Heading.ConfigurePrivateServer,กำหนดค่าเซิร์ฟเวอร์ส่วนตัว
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,ทุกคนที่มีลิงก์นี้สามารถเข้าร่วมได้
+Feature.PrivateServers.Label.FriendsAllowed,อนุญาตเพื่อน
+Feature.PrivateServers.Label.InThisServer,ในเซิร์ฟเวอร์นี้
 Feature.PrivateServers.Label.OwnersServer,เซิร์ฟเวอร์ของ {displayName}
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,สร้างลิงก์ของเซิร์ฟเวอร์ส่วนตัว
+Feature.PrivateServers.Label.PrivateServerLink,ลิงก์ของเซิร์ฟเวอร์ส่วนตัว
+Feature.PrivateServers.Label.SearchPeople,
 Feature.PrivateServers.Label.ServerName,ชื่อเซิร์ฟเวอร์:
+Feature.PrivateServers.Label.WhoCanJoin,ใครเข้าร่วมได้บ้าง
 Feature.Profile.Action.AboutThisProfile,เกี่ยวกับโปรไฟล์นี้
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4392,7 +4410,7 @@ Feature.SettingsHub.MethodOfAbuse.Other.Title,
 Feature.SettingsHub.MethodOfAbuse.Text.Subtitle,ผู้ใช้คนนี้พิมพ์คำที่ไม่เหมาะสมในการแชทด้วยข้อความ
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Subtitle,บุคคลนี้กำลังส่งเสียงดัง
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Title,
-Feature.SettingsHub.PageTitle.InThisServer,ในเซิร์ฟเวอร์นี้
+Feature.SettingsHub.PageTitle.InThisServer,
 Feature.SettingsHub.Prompt.AllowAccessToCamera,อนุญาตให้เข้าถึงกล้องหรือไม่?
 Feature.SettingsHub.Prompt.AllowAccessToContacts,อนุญาตให้เข้าถึงรายชื่อผู้ติดต่อหรือไม่?
 Feature.SettingsHub.Prompt.AndroidWithDeeplink,<b>1. เลือกสิทธิ์<br />2. เลือกไมโครโฟน<br />3. อนุญาตให้ Roblox เข้าถึงไมโครโฟน</b>

@@ -7,7 +7,6 @@ local GetLocalPlayerUserIdFunction = require(DataHydration.DataHydrationUtils).g
 local MergeListsWithoutDuplicatesFunction = require(DataHydration.DataHydrationUtils).mergeListsWithoutDuplicates
 local _ = require(Parent.Signals)
 local LocalUserIdStore = require(Parent.LocalUserIdStore).LocalUserIdStore
-local FFlagEnableGetFriendshipStatus = require(Parent.SharedFlags).FFlagEnableGetFriendshipStatus
 local RequestsModule = require(script.Parent.Requests)
 local _ = require(script.Parent.FriendsRequestsStoreTypes)
 local FriendsStoreModule = require(DataHydration.Friends.FriendsStore)
@@ -77,8 +76,7 @@ local function normalizeGetFriendRequestsResponse(p2)
 end
 
 local function updateFriendshipStatusesForPage(p3)
-	-- upvalues: FFlagEnableGetFriendshipStatus (copy), FriendsStoreModule (copy)
-	if not FFlagEnableGetFriendshipStatus then return end
+	-- upvalues: FriendsStoreModule (copy)
 	local GetResult = FriendsStoreModule.get()
 	
 	for _, request in p3.requests do

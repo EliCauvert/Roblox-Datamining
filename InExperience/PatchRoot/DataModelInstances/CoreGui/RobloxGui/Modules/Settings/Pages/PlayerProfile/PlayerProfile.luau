@@ -21,11 +21,12 @@ local CurrentlyWearingModule = require(CorePackages.Workspace.Packages.ProfilePl
 local GetProfilePlatformModule = require(CorePackages.Workspace.Packages.ProfilePlatform.getProfilePlatform)
 local UseDynamicSizeMarginModule = require(CorePackages.Workspace.Packages.ProfilePlatform.useDynamicSizeMargin)
 local ProfileWrapperContextModule = require(CorePackages.Workspace.Packages.ProfilePlatform.ProfileWrapperContext)
+local FFlagProfilePlatformGracefulVisibilityModule = require(CorePackages.Workspace.Packages.ProfilePlatform.FFlagProfilePlatformGracefulVisibility)
 local AddConnectionButtonModule = require(script.Parent.AddConnectionButton)
 local ProfileHeaderModule = require(script.Parent.ProfileHeader)
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ProfileWrapperContextModule (copy), PeopleServiceModule (copy), Players (copy), SignalsReactModule (copy), UseDeviceOrientationFunction (copy), UseBreakpointXOrLargerFunction (copy), ResponsiveModule (copy), RobloxAppEnumsModule (copy), UseDynamicSizeMarginModule (copy), UseDispatchFunction (copy), GetProfilePlatformModule (copy), EnumsModule (copy), View (copy), IconButton (copy), IconName (copy), Text (copy), ScrollView (copy), Visibility (copy), ProfileHeaderModule (copy), AddConnectionButtonModule (copy), CurrentlyWearingModule (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ProfileWrapperContextModule (copy), PeopleServiceModule (copy), Players (copy), SignalsReactModule (copy), UseDeviceOrientationFunction (copy), UseBreakpointXOrLargerFunction (copy), ResponsiveModule (copy), RobloxAppEnumsModule (copy), UseDynamicSizeMarginModule (copy), UseDispatchFunction (copy), EnumsModule (copy), FFlagProfilePlatformGracefulVisibilityModule (copy), GetProfilePlatformModule (copy), View (copy), IconButton (copy), IconName (copy), Text (copy), ScrollView (copy), Visibility (copy), ProfileHeaderModule (copy), AddConnectionButtonModule (copy), CurrentlyWearingModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseContextResult = ReactModule.useContext(ProfileWrapperContextModule)
 	local ProfileId = UseContextResult.profileId
@@ -45,16 +46,21 @@ return ReactModule.memo(function(p1)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local UseDispatchResult = UseDispatchFunction()
 	ReactModule.useEffect(function()
-		-- upvalues: UseDispatchResult (copy), GetProfilePlatformModule (upval), ProfileId (copy), ProfileType (copy), EnumsModule (upval), UseStateResult2 (copy), UseStateResult2_1 (copy)
+		-- upvalues: EnumsModule (upval), FFlagProfilePlatformGracefulVisibilityModule (upval), UseDispatchResult (copy), GetProfilePlatformModule (upval), ProfileId (copy), ProfileType (copy), UseStateResult2 (copy), UseStateResult2_1 (copy)
+		local Components = {
+			{ component = EnumsModule.Components.CurrentlyWearing },
+			{ component = EnumsModule.Components.UserProfileHeader }
+		}
+		
+		if FFlagProfilePlatformGracefulVisibilityModule then
+			table.insert(Components, { component = EnumsModule.Components.Friends })
+		end
 		UseDispatchResult(GetProfilePlatformModule.API({
 			includeComponentOrdering = false,
-			onlyEssentialComponents = true,
 			profileId = ProfileId,
 			profileType = ProfileType,
-			components = {
-				{ component = EnumsModule.Components.CurrentlyWearing },
-				{ component = EnumsModule.Components.UserProfileHeader }
-			}
+			components = Components,
+			onlyEssentialComponents = not FFlagProfilePlatformGracefulVisibilityModule or nil
 		})):andThen(function(_)
 			-- upvalues: UseStateResult2 (upval), UseStateResult2_1 (upval)
 			UseStateResult2(false)

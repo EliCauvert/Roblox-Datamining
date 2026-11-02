@@ -2607,7 +2607,7 @@ Feature.Captures.Control.On,
 Feature.Captures.Control.StartRecordingVideo,
 Feature.Captures.Control.StopRecordingVideo,停止錄影
 Feature.Captures.Description.AllowPhotoAccessInfo,為了儲存您的擷取內容，Roblox 需要存取您裝置的相機膠卷。
-Feature.Captures.Description.DiscoverPostWatch,在「美好時光」上探索、張貼並觀看精彩的 Roblox 遊戲遊玩。
+Feature.Captures.Description.DiscoverPostWatch,在「美好時光」上分享你的遊戲遊玩
 Feature.Captures.Description.MomentProcessing,很快就能在「美好時光」中查看
 Feature.Captures.Description.ShareCTA,與朋友分享您的截圖！
 Feature.Captures.Label.CaptureCounts,{numberOfCaptures} 個截圖
@@ -2642,7 +2642,7 @@ Feature.Captures.Title.VideoCaptureVoiceChatMutedTooltip,擷取期間語音聊�
 Feature.Captures.Toast.CaptureSaved,已儲存截圖
 Feature.Captures.Toast.CaptureSavedToDevice,儲存到裝置
 Feature.Captures.Toast.CapturesEnabled,已啟用截圖功能
-Feature.Captures.Toast.CreateMoment2,已儲存！將此內容變成「美好時光」。
+Feature.Captures.Toast.CreateMoment2,已儲存！要建立「美好時光」嗎？
 Feature.Captures.Toast.MomentProcessing,我們正在處理你的「美好時光」
 Feature.Captures.Toast.VideoCaptureFailed,無法儲存影片截圖。
 Feature.Captures.Toast.VideoCaptureInitializationCapturingAlreadyError,
@@ -4015,11 +4015,20 @@ Feature.PlayerSearchResults.Label.YouAreFollowing,您在追蹤
 Feature.PlayerSearchResults.Label.YouAreFriends,您們是好友
 Feature.PrivateServers.Action.CreatePrivateServer,建立私人伺服器
 Feature.PrivateServers.Action.FreeWithBlackbird,透過 Plus 免費使用
+Feature.PrivateServers.Action.Generate,生成
+Feature.PrivateServers.Description.FriendsAllowed,好友名單中的任何人無需邀請就能加入
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio 不支援購買私人伺服器。
 Feature.PrivateServers.Description.VipServersNotSupported,此遊戲不支援私人伺服器。
 Feature.PrivateServers.Heading.ConfigurePrivateServer,設定私人伺服器
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,有此連結的人都可以加入
+Feature.PrivateServers.Label.FriendsAllowed,允許好友加入
+Feature.PrivateServers.Label.InThisServer,在此伺服器的玩家
 Feature.PrivateServers.Label.OwnersServer,{displayName} 的伺服器
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,生成私人伺服器連結
+Feature.PrivateServers.Label.PrivateServerLink,私人伺服器連結
+Feature.PrivateServers.Label.SearchPeople,
 Feature.PrivateServers.Label.ServerName,伺服器名稱：
+Feature.PrivateServers.Label.WhoCanJoin,誰可以加入
 Feature.Profile.Action.AboutThisProfile,關於此個人檔案
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,

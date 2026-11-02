@@ -2590,7 +2590,7 @@ Feature.Captures.Control.On,
 Feature.Captures.Control.StartRecordingVideo,
 Feature.Captures.Control.StopRecordingVideo,Opname stoppen
 Feature.Captures.Description.AllowPhotoAccessInfo,Roblox toegang nodig tot de filmrol van je apparaat om opnames op te slaan.
-Feature.Captures.Description.DiscoverPostWatch,"Ontdek, post en bekijk epische Roblox-gameplay op Momenten."
+Feature.Captures.Description.DiscoverPostWatch,Deel je gameplay op Momenten
 Feature.Captures.Description.MomentProcessing,Je kunt het binnenkort bekijken in Momenten
 Feature.Captures.Description.ShareCTA,Deel je opname met vrienden!
 Feature.Captures.Label.CaptureCounts,{numberOfCaptures} opnames
@@ -2625,7 +2625,7 @@ Feature.Captures.Title.VideoCaptureVoiceChatMutedTooltip,Spraakchat gedempt als 
 Feature.Captures.Toast.CaptureSaved,Opname opgeslagen
 Feature.Captures.Toast.CaptureSavedToDevice,Opgeslagen op apparaat
 Feature.Captures.Toast.CapturesEnabled,Opnames ingeschakeld
-Feature.Captures.Toast.CreateMoment2,Opgeslagen! Zet dit om in een Moment.
+Feature.Captures.Toast.CreateMoment2,Opgeslagen! Een Moment maken?
 Feature.Captures.Toast.MomentProcessing,We verwerken je Moment
 Feature.Captures.Toast.VideoCaptureFailed,Video-opname kon niet worden opgeslagen.
 Feature.Captures.Toast.VideoCaptureInitializationCapturingAlreadyError,Er is al een video-opname in uitvoering
@@ -3998,11 +3998,20 @@ Feature.PlayerSearchResults.Label.YouAreFollowing,Je volgt
 Feature.PlayerSearchResults.Label.YouAreFriends,Jullie zijn vrienden
 Feature.PrivateServers.Action.CreatePrivateServer,Privéserver maken
 Feature.PrivateServers.Action.FreeWithBlackbird,Gratis met Plus
+Feature.PrivateServers.Action.Generate,Genereren
+Feature.PrivateServers.Description.FriendsAllowed,Iedereen op je vriendenlijst kan deelnemen zonder uitnodiging
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Aankopen van privéservers worden niet ondersteund in Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,Deze game ondersteunt geen privéservers.
 Feature.PrivateServers.Heading.ConfigurePrivateServer,Privéserver configureren
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,Iedereen met deze link kan deelnemen
+Feature.PrivateServers.Label.FriendsAllowed,Vrienden toestaan
+Feature.PrivateServers.Label.InThisServer,Op deze server
 Feature.PrivateServers.Label.OwnersServer,{displayName}'s server
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,Link naar de privéserver genereren
+Feature.PrivateServers.Label.PrivateServerLink,Link privéserver
+Feature.PrivateServers.Label.SearchPeople,
 Feature.PrivateServers.Label.ServerName,Servernaam:
+Feature.PrivateServers.Label.WhoCanJoin,Wie kan deelnemen
 Feature.Profile.Action.AboutThisProfile,Over dit profiel
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,

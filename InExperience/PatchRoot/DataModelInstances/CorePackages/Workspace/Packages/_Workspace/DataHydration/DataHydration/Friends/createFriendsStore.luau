@@ -9,8 +9,6 @@ local CryoModule = require(Parent.Cryo)
 local SignalsModule = require(Parent.Signals)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local LocalUserIdStore = require(Parent.LocalUserIdStore).LocalUserIdStore
-local FFlagSduiRequestFriendshipAction = SharedFlagsModule.FFlagSduiRequestFriendshipAction
-local FFlagEnableGetFriendshipStatus = SharedFlagsModule.FFlagEnableGetFriendshipStatus
 local FFlagEnableFriendsStoreChallengeInterceptor = SharedFlagsModule.FFlagEnableFriendsStoreChallengeInterceptor
 local FFlagFriendSortedByPresenceSignalsImplementation = SharedFlagsModule.FFlagFriendSortedByPresenceSignalsImplementation
 local FFlagFriendsStoreSortOnlineFriendsByRank = SharedFlagsModule.FFlagFriendsStoreSortOnlineFriendsByRank
@@ -153,7 +151,7 @@ local _ = function(p3)
 end
 
 return function()
-	-- upvalues: PresenceStoreModule (copy), FFlagFriendSortedByPresenceSignalsImplementation (copy), GetLocalPlayerUserIdFunction (copy), CreateDataCacheModule (copy), OnlineFriendsCacheTtlSec (copy), IsFriendsWithCacheTtlSec (copy), AllFriendsCacheTtlSec (copy), FFlagEnableGetFriendshipStatus (copy), FFlagSduiRequestFriendshipAction (copy), FriendshipStatusCacheTtlSec (copy), FFlagFriendsCountDataHydrationMigrationEnabled (copy), FriendsCountCacheTtlSec (copy), LocalUserIdStore (copy), FFlagAddFriendsPageTrustedFriendRequestSection (copy), MergeListsWithoutDuplicatesFunction (copy), mergeListsWithoutDuplicates (copy), NormalizePresenceRawDataModule (copy), PresenceTypeModule (copy), normalizeStoredOnlineFriendRow (copy), normalizePresenceFromOnlineFriendsRow (copy), CreateDataResolverModule (copy), RequestsModule (copy), MapFriendshipStatusToEnumModule (copy), CryoModule (copy), FriendsPageSize (copy), InitialFriendsPageSize (copy), FindFriendsSortModule (copy), normalizeFindFriendsPageResponse (copy), mergeAllFriendsPage (copy), SignalsModule (copy), FFlagFriendsStoreSortOnlineFriendsByRank (copy), DataStatus (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FFlagPresenceRefetchTelemetryEnabledModule (copy)
+	-- upvalues: PresenceStoreModule (copy), FFlagFriendSortedByPresenceSignalsImplementation (copy), GetLocalPlayerUserIdFunction (copy), CreateDataCacheModule (copy), OnlineFriendsCacheTtlSec (copy), IsFriendsWithCacheTtlSec (copy), AllFriendsCacheTtlSec (copy), FriendshipStatusCacheTtlSec (copy), FFlagFriendsCountDataHydrationMigrationEnabled (copy), FriendsCountCacheTtlSec (copy), LocalUserIdStore (copy), FFlagAddFriendsPageTrustedFriendRequestSection (copy), MergeListsWithoutDuplicatesFunction (copy), mergeListsWithoutDuplicates (copy), NormalizePresenceRawDataModule (copy), PresenceTypeModule (copy), normalizeStoredOnlineFriendRow (copy), normalizePresenceFromOnlineFriendsRow (copy), CreateDataResolverModule (copy), RequestsModule (copy), MapFriendshipStatusToEnumModule (copy), CryoModule (copy), FriendsPageSize (copy), InitialFriendsPageSize (copy), FindFriendsSortModule (copy), normalizeFindFriendsPageResponse (copy), mergeAllFriendsPage (copy), SignalsModule (copy), FFlagFriendsStoreSortOnlineFriendsByRank (copy), DataStatus (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FFlagPresenceRefetchTelemetryEnabledModule (copy)
 	local GetResult = PresenceStoreModule.get()
 	local Text = if FFlagFriendSortedByPresenceSignalsImplementation then nil else tostring(GetLocalPlayerUserIdFunction())
 	local DataCacheModule = CreateDataCacheModule(if OnlineFriendsCacheTtlSec and OnlineFriendsCacheTtlSec > 0 then OnlineFriendsCacheTtlSec else 1e999)
@@ -161,7 +159,7 @@ return function()
 	local DataCacheModule1 = CreateDataCacheModule(if IsFriendsWithCacheTtlSec1 and IsFriendsWithCacheTtlSec1 > 0 then IsFriendsWithCacheTtlSec1 else 1e999)
 	local DataCacheModule2 = CreateDataCacheModule(if AllFriendsCacheTtlSec and AllFriendsCacheTtlSec > 0 then AllFriendsCacheTtlSec else 1e999)
 	local Flag = false
-	local DataCacheModule3 = if FFlagEnableGetFriendshipStatus or FFlagSduiRequestFriendshipAction then CreateDataCacheModule(if FriendshipStatusCacheTtlSec and FriendshipStatusCacheTtlSec > 0 then FriendshipStatusCacheTtlSec else 1e999) else nil
+	local DataCacheModule3 = CreateDataCacheModule(if FriendshipStatusCacheTtlSec and FriendshipStatusCacheTtlSec > 0 then FriendshipStatusCacheTtlSec else 1e999)
 	local DataCacheModule4 = if FFlagFriendsCountDataHydrationMigrationEnabled then CreateDataCacheModule(if FriendsCountCacheTtlSec and FriendsCountCacheTtlSec > 0 then FriendsCountCacheTtlSec else 1e999) else nil
 	local Tbl = {}
 	
@@ -195,15 +193,12 @@ return function()
 	end
 	
 	local function UpdateIsFriendsWith(Id, IsFriendMatch)
-		-- upvalues: DataCacheModule1 (copy), appendUserToAllFriends (copy), FFlagEnableGetFriendshipStatus (upval), DataCacheModule3 (copy), GetResult (copy)
+		-- upvalues: DataCacheModule1 (copy), appendUserToAllFriends (copy), DataCacheModule3 (copy), GetResult (copy)
 		DataCacheModule1.replaceItem(Id, IsFriendMatch)
 		
 		if IsFriendMatch then
 			appendUserToAllFriends(Id)
-			
-			if FFlagEnableGetFriendshipStatus then
-				DataCacheModule3.replaceItem(Id, Enum.FriendStatus.Friend)
-			end
+			DataCacheModule3.replaceItem(Id, Enum.FriendStatus.Friend)
 		end
 		if not IsFriendMatch then
 			GetResult.UpdateUserPresence(Id, nil, { isUpdatedRealtime = false })
@@ -211,29 +206,23 @@ return function()
 	end
 	
 	local function _(Id, p3)
-		-- upvalues: GetResult (copy), DataCacheModule1 (copy), appendUserToAllFriends (copy), FFlagEnableGetFriendshipStatus (upval), DataCacheModule3 (copy)
+		-- upvalues: GetResult (copy), DataCacheModule1 (copy), appendUserToAllFriends (copy), DataCacheModule3 (copy)
 		GetResult.UpdateUserPresence(Id, p3, { isUpdatedRealtime = true })
 		DataCacheModule1.replaceItem(Id, true)
 		appendUserToAllFriends(Id)
-		
-		if FFlagEnableGetFriendshipStatus then
-			DataCacheModule3.replaceItem(Id, Enum.FriendStatus.Friend)
-		end
+		DataCacheModule3.replaceItem(Id, Enum.FriendStatus.Friend)
 	end
 	
 	local function updateOfflineFriendDependencies(Id)
-		-- upvalues: GetResult (copy), NormalizePresenceRawDataModule (upval), PresenceTypeModule (upval), DataCacheModule1 (copy), appendUserToAllFriends (copy), FFlagEnableGetFriendshipStatus (upval), DataCacheModule3 (copy)
+		-- upvalues: GetResult (copy), NormalizePresenceRawDataModule (upval), PresenceTypeModule (upval), DataCacheModule1 (copy), appendUserToAllFriends (copy), DataCacheModule3 (copy)
 		GetResult.UpdateUserPresence(Id, GetResult.GetPresenceByUserId(Id, { skipFetch = true }).data(false) or NormalizePresenceRawDataModule({ userPresenceType = PresenceTypeModule.Offline }), { isUpdatedRealtime = true })
 		DataCacheModule1.replaceItem(Id, true)
 		appendUserToAllFriends(Id)
-		
-		if FFlagEnableGetFriendshipStatus then
-			DataCacheModule3.replaceItem(Id, Enum.FriendStatus.Friend)
-		end
+		DataCacheModule3.replaceItem(Id, Enum.FriendStatus.Friend)
 	end
 	
 	local function applyGetOnlineFriendsResponseBody(p3)
-		-- upvalues: normalizeStoredOnlineFriendRow (upval), normalizePresenceFromOnlineFriendsRow (upval), GetResult (copy), DataCacheModule1 (copy), appendUserToAllFriends (copy), FFlagEnableGetFriendshipStatus (upval), DataCacheModule3 (copy)
+		-- upvalues: normalizeStoredOnlineFriendRow (upval), normalizePresenceFromOnlineFriendsRow (upval), GetResult (copy), DataCacheModule1 (copy), appendUserToAllFriends (copy), DataCacheModule3 (copy)
 		local t = {}
 		
 		for _, value in p3 and p3.data or {} do
@@ -247,10 +236,7 @@ return function()
 				GetResult.UpdateUserPresence(Text, NormalizePresenceFromOnlineFriendsRowResult, { isUpdatedRealtime = true })
 				DataCacheModule1.replaceItem(Text, true)
 				appendUserToAllFriends(Text)
-				
-				if FFlagEnableGetFriendshipStatus then
-					DataCacheModule3.replaceItem(Text, Enum.FriendStatus.Friend)
-				end
+				DataCacheModule3.replaceItem(Text, Enum.FriendStatus.Friend)
 			end
 		end
 		return t
@@ -316,7 +302,7 @@ return function()
 		cache = DataCacheModule1,
 		queueProcessDelaySec = game:GetFastInt("FriendsStoreProcessDelaySec"),
 		fetchFn = function(p7)
-			-- upvalues: CryoModule (upval), FFlagFriendSortedByPresenceSignalsImplementation (upval), LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), Text (copy), RequestsModule (upval), MapFriendshipStatusToEnumModule (upval), FFlagEnableGetFriendshipStatus (upval), FFlagSduiRequestFriendshipAction (upval), DataCacheModule3 (copy)
+			-- upvalues: CryoModule (upval), FFlagFriendSortedByPresenceSignalsImplementation (upval), LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), Text (copy), RequestsModule (upval), MapFriendshipStatusToEnumModule (upval), DataCacheModule3 (copy)
 			local KeysResult = CryoModule.Dictionary.keys(p7)
 			local Text1 = nil
 			
@@ -346,10 +332,8 @@ return function()
 				end
 				return t
 			end):andThen(function(Result)
-				-- upvalues: FFlagEnableGetFriendshipStatus (upval), FFlagSduiRequestFriendshipAction (upval), DataCacheModule3 (upval)
-				if FFlagEnableGetFriendshipStatus or FFlagSduiRequestFriendshipAction then
-					DataCacheModule3.replaceItems(Result)
-				end
+				-- upvalues: DataCacheModule3 (upval)
+				DataCacheModule3.replaceItems(Result)
 				local t = {}
 				
 				for i, value in Result do
@@ -359,7 +343,7 @@ return function()
 			end)
 		end
 	})
-	local DataResolverModule2 = if FFlagEnableGetFriendshipStatus or FFlagSduiRequestFriendshipAction then CreateDataResolverModule({
+	local DataResolverModule2 = CreateDataResolverModule({
 		cache = DataCacheModule3,
 		queueProcessDelaySec = game:GetFastInt("FriendsStoreProcessDelaySec"),
 		fetchFn = function(p8)
@@ -404,7 +388,7 @@ return function()
 				return Result
 			end)
 		end
-	}) else nil
+	})
 	local DataResolverModule3 = CreateDataResolverModule({
 		supportsMultiGet = false,
 		replaceItems = true,
@@ -676,28 +660,24 @@ return function()
 			end
 		end,
 		clear = function()
-			-- upvalues: DataResolverModule (copy), DataResolverModule1 (copy), DataResolverModule3 (copy), FFlagEnableGetFriendshipStatus (upval), FFlagSduiRequestFriendshipAction (upval), DataResolverModule2 (copy), FFlagFriendsCountDataHydrationMigrationEnabled (upval), DataResolverModule4 (copy), Tbl (copy)
+			-- upvalues: DataResolverModule (copy), DataResolverModule1 (copy), DataResolverModule3 (copy), DataResolverModule2 (copy), FFlagFriendsCountDataHydrationMigrationEnabled (upval), DataResolverModule4 (copy), Tbl (copy)
 			DataResolverModule.clear()
 			DataResolverModule1.clear()
 			DataResolverModule3.clear()
+			DataResolverModule2.clear()
 			
-			if FFlagEnableGetFriendshipStatus or FFlagSduiRequestFriendshipAction then
-				DataResolverModule2.clear()
-			end
 			if FFlagFriendsCountDataHydrationMigrationEnabled then
 				DataResolverModule4.clear()
 			end
 			table.clear(Tbl)
 		end,
 		dispose = function()
-			-- upvalues: DataResolverModule (copy), DataResolverModule1 (copy), DataResolverModule3 (copy), FFlagEnableGetFriendshipStatus (upval), FFlagSduiRequestFriendshipAction (upval), DataResolverModule2 (copy), FFlagFriendsCountDataHydrationMigrationEnabled (upval), DataResolverModule4 (copy), Tbl (copy)
+			-- upvalues: DataResolverModule (copy), DataResolverModule1 (copy), DataResolverModule3 (copy), DataResolverModule2 (copy), FFlagFriendsCountDataHydrationMigrationEnabled (upval), DataResolverModule4 (copy), Tbl (copy)
 			DataResolverModule.dispose()
 			DataResolverModule1.dispose()
 			DataResolverModule3.dispose()
+			DataResolverModule2.dispose()
 			
-			if FFlagEnableGetFriendshipStatus or FFlagSduiRequestFriendshipAction then
-				DataResolverModule2.dispose()
-			end
 			if FFlagFriendsCountDataHydrationMigrationEnabled then
 				DataResolverModule4.dispose()
 			end
@@ -793,7 +773,7 @@ return function()
 			return t
 		end,
 		_updateFriendsPresences = function(List, p12, _)
-			-- upvalues: normalizeStoredOnlineFriendRow (upval), NormalizePresenceRawDataModule (upval), GetResult (copy), DataCacheModule1 (copy), appendUserToAllFriends (copy), FFlagEnableGetFriendshipStatus (upval), DataCacheModule3 (copy), DataCacheModule (copy), LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval)
+			-- upvalues: normalizeStoredOnlineFriendRow (upval), NormalizePresenceRawDataModule (upval), GetResult (copy), DataCacheModule1 (copy), appendUserToAllFriends (copy), DataCacheModule3 (copy), DataCacheModule (copy), LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval)
 			if not List then return end
 			local P66 = p12 or {}
 			local t = {}
@@ -807,10 +787,7 @@ return function()
 					GetResult.UpdateUserPresence(Text, NormalizePresenceRawDataModule(value), { isUpdatedRealtime = true })
 					DataCacheModule1.replaceItem(Text, true)
 					appendUserToAllFriends(Text)
-					
-					if FFlagEnableGetFriendshipStatus then
-						DataCacheModule3.replaceItem(Text, Enum.FriendStatus.Friend)
-					end
+					DataCacheModule3.replaceItem(Text, Enum.FriendStatus.Friend)
 				end
 			end
 			local UpdateItemFunction: (any, any) -> () = DataCacheModule.updateItem
@@ -826,104 +803,72 @@ return function()
 			UpdateItemFunction(CurrentUserId1, t)
 		end,
 		GetFriendshipStatus = function(p13, p14)
-			-- upvalues: FFlagEnableGetFriendshipStatus (upval), FFlagSduiRequestFriendshipAction (upval), DataResolverModule2 (copy)
-			return if (FFlagEnableGetFriendshipStatus or FFlagSduiRequestFriendshipAction) and p13 ~= "" then if FFlagEnableGetFriendshipStatus and p14 and p14.skipFetch then DataResolverModule2.getCachedItem(p13) else DataResolverModule2.getAndFetchItem(p13) else nil
+			-- upvalues: DataResolverModule2 (copy)
+			return if p13 == "" then nil elseif p14 and p14.skipFetch then DataResolverModule2.getCachedItem(p13) else DataResolverModule2.getAndFetchItem(p13)
 		end,
 		UpdateFriendshipStatus = function(p13, FriendStatus)
-			-- upvalues: FFlagEnableGetFriendshipStatus (upval), FFlagSduiRequestFriendshipAction (upval), DataCacheModule3 (copy), UpdateIsFriendsWith (copy)
-			if FFlagEnableGetFriendshipStatus or FFlagSduiRequestFriendshipAction then
-				DataCacheModule3.replaceItem(p13, FriendStatus)
-				UpdateIsFriendsWith(p13, FriendStatus == Enum.FriendStatus.Friend)
-				
-				return
-			end
+			-- upvalues: DataCacheModule3 (copy), UpdateIsFriendsWith (copy)
+			DataCacheModule3.replaceItem(p13, FriendStatus)
+			UpdateIsFriendsWith(p13, FriendStatus == Enum.FriendStatus.Friend)
 		end,
 		RequestFriendship = function(p13, p14, p15, p16)
-			-- upvalues: FFlagEnableFriendsStoreChallengeInterceptor (upval), FFlagEnableGetFriendshipStatus (upval), RequestsModule (upval), FFlagSduiRequestFriendshipAction (upval), DataCacheModule3 (copy), UpdateIsFriendsWith (copy)
+			-- upvalues: FFlagEnableFriendsStoreChallengeInterceptor (upval), RequestsModule (upval), DataCacheModule3 (copy), UpdateIsFriendsWith (copy)
 			local v1 = if FFlagEnableFriendsStoreChallengeInterceptor then p16 else nil
 			
-			return (if FFlagEnableGetFriendshipStatus and p15 and p15.isContact then RequestsModule.RequestFriendshipFromContactId(p13, v1) else RequestsModule.RequestFriendshipFromUserId(p13, p14, v1)):andThen(function()
-				-- upvalues: p13 (copy), FFlagEnableGetFriendshipStatus (upval), FFlagSduiRequestFriendshipAction (upval), DataCacheModule3 (upval), UpdateIsFriendsWith (upval)
+			return (if p15 and p15.isContact then RequestsModule.RequestFriendshipFromContactId(p13, v1) else RequestsModule.RequestFriendshipFromUserId(p13, p14, v1)):andThen(function()
+				-- upvalues: p13 (copy), DataCacheModule3 (upval), UpdateIsFriendsWith (upval)
 				local FriendRequestSent = Enum.FriendStatus.FriendRequestSent
-				
-				if FFlagEnableGetFriendshipStatus or FFlagSduiRequestFriendshipAction then
-					DataCacheModule3.replaceItem(p13, FriendRequestSent)
-					UpdateIsFriendsWith(p13, FriendRequestSent == Enum.FriendStatus.Friend)
-					
-					return
-				end
+				DataCacheModule3.replaceItem(p13, FriendRequestSent)
+				UpdateIsFriendsWith(p13, FriendRequestSent == Enum.FriendStatus.Friend)
 			end):catch(function(Err)
-				-- upvalues: p13 (copy), FFlagEnableGetFriendshipStatus (upval), FFlagSduiRequestFriendshipAction (upval), DataCacheModule3 (upval), UpdateIsFriendsWith (upval)
-				if (if type(Err) == "table" then Err.firstErrorCode else nil) ~= 5 then
-					error(Err)
-					
-					return
-				end
-				local Friend = Enum.FriendStatus.Friend
-				
-				if FFlagEnableGetFriendshipStatus or FFlagSduiRequestFriendshipAction then
+				-- upvalues: p13 (copy), DataCacheModule3 (upval), UpdateIsFriendsWith (upval)
+				if (if type(Err) == "table" then Err.firstErrorCode else nil) == 5 then
+					local Friend = Enum.FriendStatus.Friend
 					DataCacheModule3.replaceItem(p13, Friend)
 					UpdateIsFriendsWith(p13, Friend == Enum.FriendStatus.Friend)
 					
 					return
+				else
+					error(Err)
 				end
 			end)
 		end,
 		AcceptFriendRequest = function(p13)
-			-- upvalues: RequestsModule (upval), FFlagEnableGetFriendshipStatus (upval), FFlagSduiRequestFriendshipAction (upval), DataCacheModule3 (copy), UpdateIsFriendsWith (copy)
+			-- upvalues: RequestsModule (upval), DataCacheModule3 (copy), UpdateIsFriendsWith (copy)
 			return RequestsModule.AcceptFriendRequestFromUserId(p13):andThen(function()
-				-- upvalues: p13 (copy), FFlagEnableGetFriendshipStatus (upval), FFlagSduiRequestFriendshipAction (upval), DataCacheModule3 (upval), UpdateIsFriendsWith (upval)
+				-- upvalues: p13 (copy), DataCacheModule3 (upval), UpdateIsFriendsWith (upval)
 				local Friend = Enum.FriendStatus.Friend
-				
-				if FFlagEnableGetFriendshipStatus or FFlagSduiRequestFriendshipAction then
-					DataCacheModule3.replaceItem(p13, Friend)
-					UpdateIsFriendsWith(p13, Friend == Enum.FriendStatus.Friend)
-					
-					return
-				end
+				DataCacheModule3.replaceItem(p13, Friend)
+				UpdateIsFriendsWith(p13, Friend == Enum.FriendStatus.Friend)
 			end):catch(function(Err)
-				-- upvalues: p13 (copy), FFlagEnableGetFriendshipStatus (upval), FFlagSduiRequestFriendshipAction (upval), DataCacheModule3 (upval), UpdateIsFriendsWith (upval)
-				if (if type(Err) == "table" then Err.firstErrorCode else nil) ~= 5 then
-					error(Err)
-					
-					return
-				end
-				local Friend = Enum.FriendStatus.Friend
-				
-				if FFlagEnableGetFriendshipStatus or FFlagSduiRequestFriendshipAction then
+				-- upvalues: p13 (copy), DataCacheModule3 (upval), UpdateIsFriendsWith (upval)
+				if (if type(Err) == "table" then Err.firstErrorCode else nil) == 5 then
+					local Friend = Enum.FriendStatus.Friend
 					DataCacheModule3.replaceItem(p13, Friend)
 					UpdateIsFriendsWith(p13, Friend == Enum.FriendStatus.Friend)
 					
 					return
+				else
+					error(Err)
 				end
 			end)
 		end,
 		DeclineFriendRequest = function(p13)
-			-- upvalues: RequestsModule (upval), FFlagEnableGetFriendshipStatus (upval), FFlagSduiRequestFriendshipAction (upval), DataCacheModule3 (copy), UpdateIsFriendsWith (copy)
+			-- upvalues: RequestsModule (upval), DataCacheModule3 (copy), UpdateIsFriendsWith (copy)
 			return RequestsModule.DeclineFriendRequestFromUserId(p13):andThen(function()
-				-- upvalues: p13 (copy), FFlagEnableGetFriendshipStatus (upval), FFlagSduiRequestFriendshipAction (upval), DataCacheModule3 (upval), UpdateIsFriendsWith (upval)
+				-- upvalues: p13 (copy), DataCacheModule3 (upval), UpdateIsFriendsWith (upval)
 				local NotFriend = Enum.FriendStatus.NotFriend
-				
-				if FFlagEnableGetFriendshipStatus or FFlagSduiRequestFriendshipAction then
-					DataCacheModule3.replaceItem(p13, NotFriend)
-					UpdateIsFriendsWith(p13, NotFriend == Enum.FriendStatus.Friend)
-					
-					return
-				end
+				DataCacheModule3.replaceItem(p13, NotFriend)
+				UpdateIsFriendsWith(p13, NotFriend == Enum.FriendStatus.Friend)
 			end)
 		end,
 		Unfriend = function(p13)
-			-- upvalues: RequestsModule (upval), FFlagEnableGetFriendshipStatus (upval), FFlagSduiRequestFriendshipAction (upval), DataCacheModule3 (copy), UpdateIsFriendsWith (copy)
+			-- upvalues: RequestsModule (upval), DataCacheModule3 (copy), UpdateIsFriendsWith (copy)
 			return RequestsModule.UnfriendTargetUserId(p13):andThen(function()
-				-- upvalues: p13 (copy), FFlagEnableGetFriendshipStatus (upval), FFlagSduiRequestFriendshipAction (upval), DataCacheModule3 (upval), UpdateIsFriendsWith (upval)
+				-- upvalues: p13 (copy), DataCacheModule3 (upval), UpdateIsFriendsWith (upval)
 				local NotFriend = Enum.FriendStatus.NotFriend
-				
-				if FFlagEnableGetFriendshipStatus or FFlagSduiRequestFriendshipAction then
-					DataCacheModule3.replaceItem(p13, NotFriend)
-					UpdateIsFriendsWith(p13, NotFriend == Enum.FriendStatus.Friend)
-					
-					return
-				end
+				DataCacheModule3.replaceItem(p13, NotFriend)
+				UpdateIsFriendsWith(p13, NotFriend == Enum.FriendStatus.Friend)
 			end)
 		end
 	}

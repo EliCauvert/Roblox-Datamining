@@ -2608,7 +2608,7 @@ Feature.Captures.Control.On,
 Feature.Captures.Control.StartRecordingVideo,Quay Video
 Feature.Captures.Control.StopRecordingVideo,Dừng Quay
 Feature.Captures.Description.AllowPhotoAccessInfo,"Để lưu ảnh chụp của bạn, Roblox cần bạn cấp quyền truy cập vào thư viện ảnh của thiết bị."
-Feature.Captures.Description.DiscoverPostWatch,"Khám phá, đăng và xem những trải nghiệm chơi Roblox đỉnh cao trên Khoảnh khắc."
+Feature.Captures.Description.DiscoverPostWatch,Chia sẻ trải nghiệm chơi của bạn lên Khoảnh khắc
 Feature.Captures.Description.MomentProcessing,Bạn sẽ sớm xem được nội dung đó trong phần Khoảnh khắc
 Feature.Captures.Description.ShareCTA,Hãy chia sẻ ảnh chụp màn hình/video quay màn hình với bạn bè!
 Feature.Captures.Label.CaptureCounts,{numberOfCaptures} Ảnh chụp/video quay màn hình
@@ -2643,7 +2643,7 @@ Feature.Captures.Title.VideoCaptureVoiceChatMutedTooltip,Trò chuyện sẽ bị
 Feature.Captures.Toast.CaptureSaved,Ảnh Chụp đã lưu
 Feature.Captures.Toast.CaptureSavedToDevice,Đã lưu vào Thiết Bị
 Feature.Captures.Toast.CapturesEnabled,Đã Bật Ảnh chụp/Video quay màn hình
-Feature.Captures.Toast.CreateMoment2,Đã lưu! Hãy biến nội dung này thành một Khoảnh khắc.
+Feature.Captures.Toast.CreateMoment2,Đã lưu! Bạn muốn tạo Khoảnh khắc không?
 Feature.Captures.Toast.MomentProcessing,Chúng tôi đang xử lý Khoảnh khắc của bạn
 Feature.Captures.Toast.VideoCaptureFailed,Không lưu được đoạn ghi video.
 Feature.Captures.Toast.VideoCaptureInitializationCapturingAlreadyError,Một phiên quay video đang diễn ra
@@ -4016,11 +4016,20 @@ Feature.PlayerSearchResults.Label.YouAreFollowing,Bạn đang theo dõi
 Feature.PlayerSearchResults.Label.YouAreFriends,Đã trở thành bạn bè
 Feature.PrivateServers.Action.CreatePrivateServer,Tạo Máy Chủ Riêng Tư
 Feature.PrivateServers.Action.FreeWithBlackbird,Miễn phí khi có gói Plus
+Feature.PrivateServers.Action.Generate,
+Feature.PrivateServers.Description.FriendsAllowed,Bất cứ ai trong danh sách bạn bè của bạn đều có thể tham gia mà không cần lời mời
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Không hỗ trợ giao dịch mua máy chủ riêng tư trong Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,Trò chơi này không hỗ trợ máy chủ riêng.
 Feature.PrivateServers.Heading.ConfigurePrivateServer,Điều Chỉnh Máy Chủ Riêng Tư
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,Bất cứ ai có đường liên kết này đều có thể tham gia
+Feature.PrivateServers.Label.FriendsAllowed,Cho phép bạn bè tham gia
+Feature.PrivateServers.Label.InThisServer,Trong máy chủ này
 Feature.PrivateServers.Label.OwnersServer,Máy chủ của {displayName}
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,Tạo đường liên kết đến máy chủ riêng
+Feature.PrivateServers.Label.PrivateServerLink,Đường liên kết đến máy chủ riêng
+Feature.PrivateServers.Label.SearchPeople,Tìm người
 Feature.PrivateServers.Label.ServerName,Tên Máy Chủ:
+Feature.PrivateServers.Label.WhoCanJoin,Người có thể tham gia
 Feature.Profile.Action.AboutThisProfile,Về hồ sơ này
 Feature.Profile.Action.Accept,Chấp Nhận
 Feature.Profile.Action.AcceptFriends,Chấp Nhận Làm Bạn
@@ -4409,7 +4418,7 @@ Feature.SettingsHub.MethodOfAbuse.Other.Title,
 Feature.SettingsHub.MethodOfAbuse.Text.Subtitle,Người này đã nhập một từ ác ý vào tin nhắn văn bản
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Subtitle,Người này đã la hét rất to
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Title,
-Feature.SettingsHub.PageTitle.InThisServer,Trong máy chủ này
+Feature.SettingsHub.PageTitle.InThisServer,
 Feature.SettingsHub.Prompt.AllowAccessToCamera,Cho phép truy cập camera?
 Feature.SettingsHub.Prompt.AllowAccessToContacts,Cho phép truy cập danh bạ?
 Feature.SettingsHub.Prompt.AndroidWithDeeplink,<b>1. Chọn Quyền<br />2. Chọn Micrô<br />3. Cho phép Roblox truy cập Micrô của bạn</b>

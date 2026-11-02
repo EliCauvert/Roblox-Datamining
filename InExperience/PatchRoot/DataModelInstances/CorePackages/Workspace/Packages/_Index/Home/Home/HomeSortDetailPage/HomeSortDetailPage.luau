@@ -21,13 +21,14 @@ local UseInputDataFunction = SduiSharedUtilitiesModule.useInputData
 local UsePageScopeRefFunction = SduiSharedUtilitiesModule.usePageScopeRef
 local UseUiStatusFunction = SduiSharedUtilitiesModule.useUiStatus
 local FFlagLuaAppSduiHomeSortDetailPageContext = require(Parent.SharedFlags).FFlagLuaAppSduiHomeSortDetailPageContext
+local FFlagAppThemeHalloween2026HomeBackground = require(Parent.SharedFlags).FFlagAppThemeHalloween2026HomeBackground
 
 local function _(p1, p2)
 	return p1[p2] or p1.navigation and p1.navigation.getParam(p2)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: GetHomeSortDetailPageKeyModule (copy), UseInputDataFunction (copy), HomeConstantsModule (copy), UseUiStatusFunction (copy), ReactModule (copy), UsePageScopeRefFunction (copy), SduiSharedUtilitiesModule (copy), HomeSortDetailScopeFieldsModule (copy), SduiSurfaceLoadTimeTracker (copy), HomeSortDetailConstantsModule (copy), LoggingProtocolModule (copy), SortDeeplinkFailureCounter (copy), FetchHomePageModule (copy), UiStatus (copy), BuildHomeSortDetailPageEntryModule (copy), FetchHomeSortDetailModule (copy), RefreshHomePageModule (copy), SduiPageWrapperEntryPoint (copy), FFlagLuaAppSduiHomeSortDetailPageContext (copy), AppPage (copy)
+	-- upvalues: GetHomeSortDetailPageKeyModule (copy), UseInputDataFunction (copy), HomeConstantsModule (copy), UseUiStatusFunction (copy), ReactModule (copy), UsePageScopeRefFunction (copy), SduiSharedUtilitiesModule (copy), HomeSortDetailScopeFieldsModule (copy), SduiSurfaceLoadTimeTracker (copy), HomeSortDetailConstantsModule (copy), LoggingProtocolModule (copy), SortDeeplinkFailureCounter (copy), FetchHomePageModule (copy), UiStatus (copy), BuildHomeSortDetailPageEntryModule (copy), FetchHomeSortDetailModule (copy), RefreshHomePageModule (copy), SduiPageWrapperEntryPoint (copy), FFlagLuaAppSduiHomeSortDetailPageContext (copy), AppPage (copy), FFlagAppThemeHalloween2026HomeBackground (copy)
 	local SortId = p1.sortId or p1.navigation and p1.navigation.getParam("sortId")
 	local SortIndex = p1.sortIndex or p1.navigation and p1.navigation.getParam("sortIndex")
 	local HomeSortDetailPageKeyModule = GetHomeSortDetailPageKeyModule(SortId, SortIndex)
@@ -146,6 +147,7 @@ return ReactModule.memo(function(p1)
 		pageTimer = UseMemoResult,
 		refresh = UseResult1,
 		additionalAnalyticsData = { pageContext = p1.pageContext or AppPage.Home },
-		pageTopPadding = p1.pageTopPadding
+		pageTopPadding = p1.pageTopPadding,
+		backgroundStyle = if FFlagAppThemeHalloween2026HomeBackground then p1.backgroundStyle else nil
 	})
 end)

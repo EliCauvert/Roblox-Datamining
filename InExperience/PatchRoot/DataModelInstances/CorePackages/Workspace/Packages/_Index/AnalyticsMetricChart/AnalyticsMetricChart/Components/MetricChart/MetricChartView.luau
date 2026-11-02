@@ -1,5 +1,5 @@
 ﻿local TextService = game:GetService("TextService")
-local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local Parent = script:FindFirstAncestor("AnalyticsMetricChart").Parent
 local FoundationModule = require(Parent.Foundation)
 local GraphingModule = require(Parent.Graphing)
 local ReactModule = require(Parent.React)

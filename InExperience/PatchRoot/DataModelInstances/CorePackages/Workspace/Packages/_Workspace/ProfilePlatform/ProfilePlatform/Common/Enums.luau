@@ -52,6 +52,7 @@ return {
 		ProfileBackground = "ProfileBackground",
 		Events = "Events",
 		CurrentlyPlaying = "CurrentlyPlaying",
+		Friends = "Friends",
 		Announcements = "Announcements",
 		GroupForumsDiscovery = "ForumsDiscovery",
 		ProfileCompletion = if FFlagEnableProfileCompletion then "ProfileCompletion" else "",

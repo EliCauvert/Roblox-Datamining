@@ -2608,7 +2608,7 @@ Feature.Captures.Control.On,
 Feature.Captures.Control.StartRecordingVideo,Rekam Video
 Feature.Captures.Control.StopRecordingVideo,Berhenti Merekam
 Feature.Captures.Description.AllowPhotoAccessInfo,"Untuk menyimpan media, Roblox harus memiliki akses ke rol kamera perangkatmu."
-Feature.Captures.Description.DiscoverPostWatch,"Jelajahi, posting, dan saksikan gameplay Roblox epik di Moment."
+Feature.Captures.Description.DiscoverPostWatch,Bagikan gameplay-mu di Moment
 Feature.Captures.Description.MomentProcessing,Kamu akan segera dapat melihatnya di Moment
 Feature.Captures.Description.ShareCTA,Bagikan media kamu dengan teman!
 Feature.Captures.Label.CaptureCounts,{numberOfCaptures} Media
@@ -2643,7 +2643,7 @@ Feature.Captures.Title.VideoCaptureVoiceChatMutedTooltip,Chat suara dibisukan se
 Feature.Captures.Toast.CaptureSaved,Media Disimpan
 Feature.Captures.Toast.CaptureSavedToDevice,Disimpan ke Perangkat
 Feature.Captures.Toast.CapturesEnabled,Media Diaktifkan
-Feature.Captures.Toast.CreateMoment2,Tersimpan! Jadikan ini sebagai Moment.
+Feature.Captures.Toast.CreateMoment2,Tersimpan. Buat Moment?
 Feature.Captures.Toast.MomentProcessing,Kami sedang memproses Moment-mu
 Feature.Captures.Toast.VideoCaptureFailed,Rekaman video gagal disimpan.
 Feature.Captures.Toast.VideoCaptureInitializationCapturingAlreadyError,Pengambilan video sudah berlangsung
@@ -4014,11 +4014,20 @@ Feature.PlayerSearchResults.Label.YouAreFollowing,Kamu mengikuti
 Feature.PlayerSearchResults.Label.YouAreFriends,Kalian berteman
 Feature.PrivateServers.Action.CreatePrivateServer,Buat Server Pribadi
 Feature.PrivateServers.Action.FreeWithBlackbird,Gratis dengan Plus
+Feature.PrivateServers.Action.Generate,
+Feature.PrivateServers.Description.FriendsAllowed,Siapa pun di daftar temanmu dapat bergabung tanpa undangan
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Pembelian server privat tidak didukung di Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,Game ini tidak mendukung server privat.
 Feature.PrivateServers.Heading.ConfigurePrivateServer,Konfigurasi Server Privat
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,Siapa pun yang memiliki link ini dapat bergabung
+Feature.PrivateServers.Label.FriendsAllowed,Teman diizinkan
+Feature.PrivateServers.Label.InThisServer,Di server ini
 Feature.PrivateServers.Label.OwnersServer,Server {displayName}
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,Buat link server privat
+Feature.PrivateServers.Label.PrivateServerLink,Link server privat
+Feature.PrivateServers.Label.SearchPeople,Cari pengguna
 Feature.PrivateServers.Label.ServerName,Nama Server:
+Feature.PrivateServers.Label.WhoCanJoin,Siapa saja yang dapat bergabung
 Feature.Profile.Action.AboutThisProfile,Tentang profil ini
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,Menerima Teman
@@ -4407,7 +4416,7 @@ Feature.SettingsHub.MethodOfAbuse.Other.Title,
 Feature.SettingsHub.MethodOfAbuse.Text.Subtitle,Pengguna ini mengetik kata kasar di chat teks
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Subtitle,Pengguna ini berteriak sangat keras
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Title,
-Feature.SettingsHub.PageTitle.InThisServer,Di server ini
+Feature.SettingsHub.PageTitle.InThisServer,
 Feature.SettingsHub.Prompt.AllowAccessToCamera,Izinkan akses ke kamera?
 Feature.SettingsHub.Prompt.AllowAccessToContacts,Izinkan akses ke kontak?
 Feature.SettingsHub.Prompt.AndroidWithDeeplink,<b>1. Pilih Izin<br />2. Pilih Mikrofon<br />3. Izinkan Roblox mengakses Mikrofon Anda</b>

@@ -15,6 +15,7 @@ local ShopWindowLayoutModule = require(Chrome.Integrations.InExperienceShop.Shop
 local ChromeUtilsModule = require(Chrome.ChromeShared.Service.ChromeUtils)
 local SideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement
 local InExperienceShopModule = require(CorePackages.Workspace.Packages.InExperienceShop)
+local FFlagEnableFreeTrialBlueDot = InExperienceShopModule.FFlagEnableFreeTrialBlueDot
 local FFlagEnableShopPrefetch = InExperienceShopModule.FFlagEnableShopPrefetch
 local FFlagHideShopMenuOnFailure = InExperienceShopModule.FFlagHideShopMenuOnFailure
 local FFlagCenterInExperienceShopWindow = InExperienceShopModule.FFlagCenterInExperienceShopWindow
@@ -61,14 +62,14 @@ if FFlagEnableFreeTrialShopMenuBadge then
 		return if CallbackResult == nil then Callback(p1) else CallbackResult
 	end
 	DismissFunction = SubmitFreeTrialMenuBadgeModule.dismiss
-	local Flag1 = false
+	local Flag = false
 	
 	local function reportTrialBadgeSeen()
-		-- upvalues: Flag1 (ref), Callback (copy), FFlagMenuBadgePreferFreeTrialOverOffer (copy), Callback1 (copy), ServiceModule (copy), ConstantsModule (copy), SubmitFreeTrialMenuBadgeModule (copy)
-		if Flag1 or Callback(false) == nil then return end
+		-- upvalues: Flag (ref), Callback (copy), FFlagMenuBadgePreferFreeTrialOverOffer (copy), Callback1 (copy), ServiceModule (copy), ConstantsModule (copy), SubmitFreeTrialMenuBadgeModule (copy)
+		if Flag or Callback(false) == nil then return end
 		if not FFlagMenuBadgePreferFreeTrialOverOffer and Callback1 ~= nil and Callback1(false) ~= nil then return end
 		if ServiceModule:withinCurrentSubmenu(ConstantsModule.IN_EXPERIENCE_SHOP_ID) then
-			Flag1 = true
+			Flag = true
 			SubmitFreeTrialMenuBadgeModule.reportMounted()
 			SubmitFreeTrialMenuBadgeModule.reportViewed()
 			
@@ -77,13 +78,13 @@ if FFlagEnableFreeTrialShopMenuBadge then
 	end
 	
 	ServiceModule:currentSubMenu():connect(function()
-		-- upvalues: ServiceModule (copy), ConstantsModule (copy), Flag1 (ref), reportTrialBadgeSeen (copy)
+		-- upvalues: ServiceModule (copy), ConstantsModule (copy), Flag (ref), reportTrialBadgeSeen (copy)
 		if ServiceModule:withinCurrentSubmenu(ConstantsModule.IN_EXPERIENCE_SHOP_ID) then
 			reportTrialBadgeSeen()
 			
 			return
 		else
-			Flag1 = false
+			Flag = false
 		end
 	end)
 	local _ = SignalsModule.createEffect(function(p1)
@@ -102,14 +103,14 @@ local Config = if FFlagEnableMenuTrailingBadge1 or CustomText ~= nil then {
 	customText = CustomText
 } else nil
 local CoreGuiEnabled = if ShopCoreGuiToggleSupportedEngineFeature then StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.All) or StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.ExperienceShop) else false
-local Flag = true
+local Flag1 = true
 
 local function _()
-	-- upvalues: CoreGuiEnabled (ref), FFlagHideShopMenuOnFailure (copy), Flag (ref), ServiceModule (copy)
+	-- upvalues: CoreGuiEnabled (ref), FFlagHideShopMenuOnFailure (copy), Flag1 (ref), ServiceModule (copy)
 	if CoreGuiEnabled and not FFlagHideShopMenuOnFailure then
 		return ServiceModule.AvailabilitySignal.Available
 	else
-		Flag = false
+		Flag1 = false
 		
 		return ServiceModule.AvailabilitySignal.Unavailable
 	end
@@ -143,7 +144,7 @@ local Unavailable = nil
 if CoreGuiEnabled and not FFlagHideShopMenuOnFailure then
 	Unavailable = ServiceModule.AvailabilitySignal.Available
 else
-	Flag = false
+	Flag1 = false
 	Unavailable = ServiceModule.AvailabilitySignal.Unavailable
 end
 config.initialAvailability = Unavailable
@@ -192,9 +193,9 @@ if FFlagEnableShopPrefetch then
 	
 	if FFlagHideShopMenuOnFailure then
 		task.spawn(PrefetchShopDataOnGameJoinModule, function(p1)
-			-- upvalues: Flag (ref), CoreGuiEnabled (ref), RegisterResult (copy)
+			-- upvalues: Flag1 (ref), CoreGuiEnabled (ref), RegisterResult (copy)
 			if not p1 then return end
-			Flag = true
+			Flag1 = true
 			
 			if CoreGuiEnabled then
 				RegisterResult.availability:available()
@@ -204,11 +205,14 @@ if FFlagEnableShopPrefetch then
 		task.spawn(PrefetchShopDataOnGameJoinModule)
 	end
 end
+if FFlagEnableFreeTrialBlueDot then
+	require(CorePackages.Workspace.Packages.InExperienceShop.submitFreeTrialBlueDot)()
+end
 if EnableOpenShopSignalEngineFeature then
 	MarketplaceService.OpenShopRequested:Connect(function(Player)
-		-- upvalues: Players (copy), FFlagHideShopMenuOnFailure (copy), Flag (ref), ServiceModule (copy), ConstantsModule (copy), DismissFunction (ref), FFlagCenterInExperienceShopWindow (copy), ShopWindowLayoutModule (copy)
+		-- upvalues: Players (copy), FFlagHideShopMenuOnFailure (copy), Flag1 (ref), ServiceModule (copy), ConstantsModule (copy), DismissFunction (ref), FFlagCenterInExperienceShopWindow (copy), ShopWindowLayoutModule (copy)
 		if Player == Players.LocalPlayer then
-			if FFlagHideShopMenuOnFailure and not Flag then return end
+			if FFlagHideShopMenuOnFailure and not Flag1 then return end
 			if not ServiceModule:isWindowOpen(ConstantsModule.IN_EXPERIENCE_SHOP_ID) then
 				if DismissFunction ~= nil and not ServiceModule:isWindowOpen(ConstantsModule.IN_EXPERIENCE_SHOP_ID) then
 					DismissFunction()
@@ -225,8 +229,8 @@ if EnableOpenShopSignalEngineFeature then
 end
 if ShopCoreGuiToggleSupportedEngineFeature then
 	local _ = function()
-		-- upvalues: CoreGuiEnabled (ref), FFlagHideShopMenuOnFailure (copy), Flag (ref), RegisterResult (copy), ServiceModule (copy), ConstantsModule (copy)
-		if CoreGuiEnabled and (not FFlagHideShopMenuOnFailure or Flag) then
+		-- upvalues: CoreGuiEnabled (ref), FFlagHideShopMenuOnFailure (copy), Flag1 (ref), RegisterResult (copy), ServiceModule (copy), ConstantsModule (copy)
+		if CoreGuiEnabled and (not FFlagHideShopMenuOnFailure or Flag1) then
 			RegisterResult.availability:available()
 			
 			return
@@ -238,10 +242,10 @@ if ShopCoreGuiToggleSupportedEngineFeature then
 	end
 	
 	ChromeUtilsModule.setCoreGuiAvailability(RegisterResult, Enum.CoreGuiType.ExperienceShop, function(p1)
-		-- upvalues: CoreGuiEnabled (ref), FFlagHideShopMenuOnFailure (copy), Flag (ref), RegisterResult (copy), ServiceModule (copy), ConstantsModule (copy)
+		-- upvalues: CoreGuiEnabled (ref), FFlagHideShopMenuOnFailure (copy), Flag1 (ref), RegisterResult (copy), ServiceModule (copy), ConstantsModule (copy)
 		CoreGuiEnabled = p1
 		
-		if CoreGuiEnabled and (not FFlagHideShopMenuOnFailure or Flag) then
+		if CoreGuiEnabled and (not FFlagHideShopMenuOnFailure or Flag1) then
 			RegisterResult.availability:available()
 			
 			return

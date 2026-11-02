@@ -5,6 +5,7 @@ local ReactModule = require(Parent.React)
 local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
 local CompositionTags = require(Parent.AppComposition).CompositionTags
 local AppPage = require(Parent.RobloxAppEnums).AppPage
+local FFlagAppThemeHalloween2026HomeBackground = require(Parent.SharedFlags).FFlagAppThemeHalloween2026HomeBackground
 local SduiPageEntryPoint = SduiSharedUtilitiesModule.SduiPageEntryPoint
 local SduiSurfaceLoadTimeTracker = SduiSharedUtilitiesModule.SduiSurfaceLoadTimeTracker
 local GetSduiClientPageScopeFunction = SduiSharedUtilitiesModule.getSduiClientPageScope
@@ -21,7 +22,7 @@ local function _(p1, p2)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), GetSduiClientPageScopeFunction (copy), ChartsConstantsModule (copy), ChartsPageScopeFieldsModule (copy), GetChartsSortDetailPageKeyModule (copy), UsePageScopeRefFunction (copy), ChartsSortDetailScopeFieldsModule (copy), SduiSurfaceLoadTimeTracker (copy), ChartsSortDetailConstantsModule (copy), FetchChartsSortDetailModule (copy), SduiPageEntryPoint (copy), AppPage (copy), CompositionTags (copy)
+	-- upvalues: ReactModule (copy), GetSduiClientPageScopeFunction (copy), ChartsConstantsModule (copy), ChartsPageScopeFieldsModule (copy), GetChartsSortDetailPageKeyModule (copy), UsePageScopeRefFunction (copy), ChartsSortDetailScopeFieldsModule (copy), SduiSurfaceLoadTimeTracker (copy), ChartsSortDetailConstantsModule (copy), FetchChartsSortDetailModule (copy), SduiPageEntryPoint (copy), AppPage (copy), CompositionTags (copy), FFlagAppThemeHalloween2026HomeBackground (copy)
 	local SortId = p1.sortId or p1.navigation and p1.navigation.getParam("sortId")
 	local ChartsSortDetailPageKeyModule = GetChartsSortDetailPageKeyModule(SortId, nil, (ReactModule.useMemo(function()
 		-- upvalues: GetSduiClientPageScopeFunction (upval), ChartsConstantsModule (upval), ChartsPageScopeFieldsModule (upval)
@@ -75,6 +76,8 @@ return ReactModule.memo(function(p1)
 		contentTag = CompositionTags.ContentRegion.Body,
 		stickyContentTag = CompositionTags.ContentRegion.Header,
 		additionalAnalyticsData = UseMemoResult1,
-		pageTopPadding = p1.pageTopPadding
+		pageTopPadding = p1.pageTopPadding,
+		backgroundStyle = if FFlagAppThemeHalloween2026HomeBackground then p1.backgroundStyle else nil,
+		feedBackgroundStyle = if FFlagAppThemeHalloween2026HomeBackground then p1.backgroundStyle else nil
 	})
 end)

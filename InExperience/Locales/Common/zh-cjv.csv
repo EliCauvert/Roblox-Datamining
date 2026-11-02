@@ -2514,7 +2514,7 @@ Feature.Build.Notification.Title.NeedInput,构建需要你的输入
 Feature.Build.Placeholder.DescribeProduct,描述你想出售的内容
 Feature.Build.Placeholder.DescribeProductUpdate,描述一项更新
 Feature.Build.Placeholder.InternalSpec,内部代码
-Feature.Build.Prompt.CreateDeveloperProduct,请审核我的游戏，并建议我出售哪种道具最能赚取 Robux。是一次性购买的道具，还是玩家可以反复购买的道具（如加成道具）更适合我的游戏？请说明原因。
+Feature.Build.Prompt.CreateDeveloperProduct,请查看我的游戏，并建议我出售哪种道具最适合赚取 Robux。是一次性购买的道具，还是玩家可以反复购买的道具（如加成道具）更适合我的游戏？请说明原因。
 Feature.Build.Title.AdActive,广告活动已启动
 Feature.Build.Title.AdCampaignDuration,{durationDays} 天广告活动
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} 天
@@ -2600,7 +2600,7 @@ Feature.Captures.Control.On,
 Feature.Captures.Control.StartRecordingVideo,
 Feature.Captures.Control.StopRecordingVideo,停止录制
 Feature.Captures.Description.AllowPhotoAccessInfo,为了保存你的截屏，Roblox 需要访问你的设备或第三方的相机胶卷。
-Feature.Captures.Description.DiscoverPostWatch,在“精彩瞬间”中探索、发布和观看史诗般的 Roblox 游戏时刻。
+Feature.Captures.Description.DiscoverPostWatch,在“精彩瞬间”中分享你的游戏时刻
 Feature.Captures.Description.MomentProcessing,你很快就能在“精彩瞬间”中看到了
 Feature.Captures.Description.ShareCTA,与好友分享你的截屏！
 Feature.Captures.Label.CaptureCounts,{numberOfCaptures} 张截屏
@@ -2635,7 +2635,7 @@ Feature.Captures.Title.VideoCaptureVoiceChatMutedTooltip,截屏中，语音聊�
 Feature.Captures.Toast.CaptureSaved,截屏已保存
 Feature.Captures.Toast.CaptureSavedToDevice,已保存至设备
 Feature.Captures.Toast.CapturesEnabled,已启用截屏功能
-Feature.Captures.Toast.CreateMoment2,已保存！不妨将此转化为精彩瞬间。
+Feature.Captures.Toast.CreateMoment2,已保存！是否创建精彩瞬间？
 Feature.Captures.Toast.MomentProcessing,我们正在处理你的精彩瞬间
 Feature.Captures.Toast.VideoCaptureFailed,视频截屏无法保存。
 Feature.Captures.Toast.VideoCaptureInitializationCapturingAlreadyError,视频截取已在进行中
@@ -2695,8 +2695,8 @@ Feature.Catalog.Header.InvalidOutfit,穿搭无效
 Feature.Catalog.Header.PostAvatar,
 Feature.Catalog.Heading.AvailableItems,可上架道具
 Feature.Catalog.Heading.BuyItem,
-Feature.Catalog.Heading.DescriptionLinkGoToMarketplace,
-Feature.Catalog.Heading.DescriptionLinkResetSearch,
+Feature.Catalog.Heading.DescriptionLinkGoToMarketplace,将转至商城
+Feature.Catalog.Heading.DescriptionLinkResetSearch,将重置当前搜索
 Feature.Catalog.Heading.FreeItemConfirmation,获取物品
 Feature.Catalog.Heading.GoToExperience,加入体验?
 Feature.Catalog.Heading.HoldingPolicy,存放政策
@@ -2772,12 +2772,12 @@ Feature.Catalog.Label.CreatorName,创作者名称
 Feature.Catalog.Label.CurrentBalance,当前余额：
 Feature.Catalog.Label.CustomizeAvatar,自定义虚拟形象
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,如果你删除此项，你将无法撤销。
-Feature.Catalog.Label.DescriptionLinkInvalid,
-Feature.Catalog.Label.DescriptionLinkSearchMarketplace,
-Feature.Catalog.Label.DescriptionLinkViewAsset,
-Feature.Catalog.Label.DescriptionLinkViewBundle,
-Feature.Catalog.Label.DescriptionLinkViewCommunity,
-Feature.Catalog.Label.DescriptionLinkViewCommunityStore,
+Feature.Catalog.Label.DescriptionLinkInvalid,无效链接
+Feature.Catalog.Label.DescriptionLinkSearchMarketplace,搜索商城
+Feature.Catalog.Label.DescriptionLinkViewAsset,查看素材
+Feature.Catalog.Label.DescriptionLinkViewBundle,查看套装
+Feature.Catalog.Label.DescriptionLinkViewCommunity,查看社区
+Feature.Catalog.Label.DescriptionLinkViewCommunityStore,社区商店
 Feature.Catalog.Label.Details,
 Feature.Catalog.Label.DynamicHeads,
 Feature.Catalog.Label.Emissive,自发光
@@ -3561,7 +3561,7 @@ Feature.Groups.Action.NotNow,
 Feature.Groups.Action.RemovePrimary,移除主要群组
 Feature.Groups.Action.SeeAll,
 Feature.Groups.Action.Unfollow,取消关注
-Feature.Groups.Action.ViewGroup,查看社区
+Feature.Groups.Action.ViewGroup,
 Feature.Groups.Description.JoinGroupPending,你的加入请求正在等待社区审核。
 Feature.Groups.Description.NotEligibleToJoin,你的帐户无法加入此社区。
 Feature.Groups.Description.PremiumMaxGroups,你加入的群组数量已达上限。
@@ -4014,20 +4014,20 @@ Feature.PlayerSearchResults.Label.YouAreFollowing,你正关注
 Feature.PlayerSearchResults.Label.YouAreFriends,你们是好友
 Feature.PrivateServers.Action.CreatePrivateServer,创建私人服务器
 Feature.PrivateServers.Action.FreeWithBlackbird,Plus 订阅用户免费
-Feature.PrivateServers.Action.Generate,
-Feature.PrivateServers.Description.FriendsAllowed,
+Feature.PrivateServers.Action.Generate,生成
+Feature.PrivateServers.Description.FriendsAllowed,你的好友列表中的任何人都无需邀请即可加入
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio 中不支持购买私人服务器。
 Feature.PrivateServers.Description.VipServersNotSupported,此游戏不支持私人服务器。
 Feature.PrivateServers.Heading.ConfigurePrivateServer,配置私人服务器
-Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,
-Feature.PrivateServers.Label.FriendsAllowed,
-Feature.PrivateServers.Label.InThisServer,
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,任何有此链接的人都可以加入
+Feature.PrivateServers.Label.FriendsAllowed,允许好友加入
+Feature.PrivateServers.Label.InThisServer,在此服务器中
 Feature.PrivateServers.Label.OwnersServer,{displayName}的服务器
-Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,
-Feature.PrivateServers.Label.PrivateServerLink,
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,生成私人服务器链接
+Feature.PrivateServers.Label.PrivateServerLink,私人服务器链接
 Feature.PrivateServers.Label.SearchPeople,
 Feature.PrivateServers.Label.ServerName,服务器名称
-Feature.PrivateServers.Label.WhoCanJoin,
+Feature.PrivateServers.Label.WhoCanJoin,谁可以加入
 Feature.Profile.Action.AboutThisProfile,关于此个人资料
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4420,7 +4420,7 @@ Feature.SettingsHub.MethodOfAbuse.Other.Title,
 Feature.SettingsHub.MethodOfAbuse.Text.Subtitle,此人在文字聊天使用恶意字眼
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Subtitle,
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Title,
-Feature.SettingsHub.PageTitle.InThisServer,在此服务器中
+Feature.SettingsHub.PageTitle.InThisServer,
 Feature.SettingsHub.Prompt.AllowAccessToCamera,要允许访问相机吗？
 Feature.SettingsHub.Prompt.AllowAccessToContacts,要允许访问联系人吗？
 Feature.SettingsHub.Prompt.AndroidWithDeeplink,<b>1. 选择权限<br />2. 选择麦克风<br />3. 允许 Roblox 访问你的麦克风</b>

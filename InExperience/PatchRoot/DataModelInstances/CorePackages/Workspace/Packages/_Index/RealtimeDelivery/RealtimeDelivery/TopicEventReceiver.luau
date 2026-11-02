@@ -4,11 +4,25 @@ local HttpClientModule = require(RealtimeDelivery.Parent.HttpClient)
 local UrlBase = require(RealtimeDelivery.Parent.UrlBuilder).UrlBase
 local _ = require(script.Parent.RealtimeTypes)
 local TopicSourceModule = require(script.Parent.TopicSource)
+local Frozen = table.freeze({ maxRetries = 3, firstDelaySeconds = 1 })
+
+local function _(p1: number)
+	-- upvalues: Frozen (copy)
+	return Frozen.firstDelaySeconds * 2 ^ (p1 - 1) * (0.5 + math.random() / 2)
+end
+
+local _ = function(p1)
+	if p1.retryThread then
+		task.cancel(p1.retryThread)
+		p1.retryThread = nil
+	end
+end
+
 local TopicEventReceiverModule = {}
 TopicEventReceiverModule.__index = TopicEventReceiverModule
 local config = { disconnect = function() end }
 
-local function _(Text: string)
+local _ = function(Text: string)
 	if type(Text) == "string" then
 		local Match: string? = string.match(Text, "^([^%.]+)%.")
 		
@@ -96,6 +110,11 @@ function TopicEventReceiverModule:observeTopic(Text: string, Callback, p7)
 		onError = if p7 then p7.onError else nil
 	}
 	table.insert(TrackTokenResult.observers, config1)
+	
+	if TrackTokenResult.retryThread then
+		task.cancel(TrackTokenResult.retryThread)
+		TrackTokenResult.retryThread = nil
+	end
 	self._source:subscribe(TrackTokenResult.token, TrackTokenResult2)
 	
 	return {
@@ -192,6 +211,11 @@ end
 function TopicEventReceiverModule:_resubscribeAll()
 	for _, topic in self._topics do
 		topic.previousToken = nil
+		
+		if topic.retryThread then
+			task.cancel(topic.retryThread)
+			topic.retryThread = nil
+		end
 		self._source:subscribe(topic.token)
 	end
 end
@@ -220,17 +244,26 @@ function TopicEventReceiverModule:_onTokenExpiry(p9, ShouldExchange, p10, p11)
 	CurrentTopic2.previousToken = nil
 	
 	if p10 then
+		if CurrentTopic2.retryThread then
+			task.cancel(CurrentTopic2.retryThread)
+			CurrentTopic2.retryThread = nil
+		end
 		self._source:subscribe(p9)
 		
 		return
-	end
-	if not p11 then
-		self:_endTopic(CurrentTopic, CurrentTopic2, { type = "expired", shouldExchange = ShouldExchange })
-		
-		return
-	end
-	if ShouldExchange then
-		self:_exchange(CurrentTopic, CurrentTopic2)
+	else
+		if not p11 then
+			self:_endTopic(CurrentTopic, CurrentTopic2, { type = "expired", shouldExchange = ShouldExchange })
+			
+			return
+		end
+		if CurrentTopic2.retryThread then
+			task.cancel(CurrentTopic2.retryThread)
+			CurrentTopic2.retryThread = nil
+		end
+		if ShouldExchange then
+			self:_exchange(CurrentTopic, CurrentTopic2)
+		end
 	end
 end
 
@@ -242,13 +275,15 @@ function TopicEventReceiverModule:_exchange(p9, Topic)
 		local Token1 = Result.token
 		
 		if self._topics[p9] ~= Topic or Topic.token ~= Token then return end
-		if type(Token1) == "string" and Token1 ~= Token then
-			Topic.token = Token1
-			Topic.previousToken = Token
-			self._source:subscribe(Token1, Token)
-			
-			return
+		if type(Token1) ~= "string" or Token1 == Token then return end
+		Topic.token = Token1
+		Topic.previousToken = Token
+		
+		if Topic.retryThread then
+			task.cancel(Topic.retryThread)
+			Topic.retryThread = nil
 		end
+		self._source:subscribe(Token1, Token)
 	end):catch(function(Err)
 		-- upvalues: p9 (copy)
 		warn(`TopicEventReceiver: token exchange for {p9} failed: {if type(Err) == "table" then Err.errorMessage else Err}`)
@@ -264,12 +299,41 @@ function TopicEventReceiverModule:_onSubscriptionError(p10, ErrorCode, ShouldRet
 		CurrentTopic2.previousToken = nil
 		
 		return
+	end
+	local config = {
+		type = "error",
+		errorCode = ErrorCode,
+		shouldRetry = ShouldRetry
+	}
+	
+	if not ShouldRetry or not self:_retrySubscribe(CurrentTopic, CurrentTopic2) then
+		self:_endTopic(CurrentTopic, CurrentTopic2, config)
+		
+		return
+	end
+end
+
+function TopicEventReceiverModule._retrySubscribe(p10, p11, Topic): boolean
+	-- upvalues: Frozen (copy)
+	if Topic.retryThread then
+		return true
+	end
+	local RetryAttempts = (Topic.retryAttempts or 0) + 1
+	
+	if Frozen.maxRetries < RetryAttempts then
+		return false
 	else
-		self:_endTopic(CurrentTopic, CurrentTopic2, {
-			type = "error",
-			errorCode = ErrorCode,
-			shouldRetry = ShouldRetry
-		})
+		Topic.retryAttempts = RetryAttempts
+		Topic.retryThread = task.delay(Frozen.firstDelaySeconds * 2 ^ (RetryAttempts - 1) * (0.5 + math.random() / 2), function()
+			-- upvalues: Topic (copy), p10 (copy), p11 (copy)
+			Topic.retryThread = nil
+			
+			if p10._topics[p11] == Topic then
+				p10._source:subscribe(Topic.token)
+			end
+		end)
+		
+		return true
 	end
 end
 

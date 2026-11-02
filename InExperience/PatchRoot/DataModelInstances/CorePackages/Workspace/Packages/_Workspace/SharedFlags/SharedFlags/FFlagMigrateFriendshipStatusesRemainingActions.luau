@@ -1,3 +1,1 @@
-﻿local FFlagEnableGetFriendshipStatusModule = require(script.Parent.FFlagEnableGetFriendshipStatus)
-
-return game:DefineFastFlag("MigrateFriendshipStatusesRemainingActions", false) and FFlagEnableGetFriendshipStatusModule
+﻿return game:DefineFastFlag("MigrateFriendshipStatusesRemainingActions", false)

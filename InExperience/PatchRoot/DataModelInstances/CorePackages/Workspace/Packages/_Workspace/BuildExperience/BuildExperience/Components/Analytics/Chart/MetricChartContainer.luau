@@ -14,7 +14,7 @@ local _ = require(BuildExperience.Analytics.AnalyticsWindow)
 local UseExperienceMetricSeriesModule = require(BuildExperience.Analytics.useExperienceMetricSeries)
 local FFlagBuildAnalyticsCreatorHubWindowFixModule = require(BuildExperience.Flags.FFlagBuildAnalyticsCreatorHubWindowFix)
 local MetricChartModule = require(script.Parent.MetricChart)
-local PLOTHEIGHT = require(script.Parent.chartLayout).PLOT_HEIGHT
+local PLOTHEIGHT = require(Parent.AnalyticsMetricChart).chartLayout.PLOT_HEIGHT
 
 local function MetricChartSkeleton(p1)
 	-- upvalues: ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), PLOTHEIGHT (copy)

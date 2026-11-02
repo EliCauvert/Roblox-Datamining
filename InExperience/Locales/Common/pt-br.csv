@@ -2608,7 +2608,7 @@ Feature.Captures.Control.On,
 Feature.Captures.Control.StartRecordingVideo,
 Feature.Captures.Control.StopRecordingVideo,Parar gravação
 Feature.Captures.Description.AllowPhotoAccessInfo,"Para salvar suas capturas, o aplicativo Roblox precisa acessar a galeria de fotos do seu dispositivo."
-Feature.Captures.Description.DiscoverPostWatch,"Descubra, publique e assista a jogadas épicas do Roblox no Moments."
+Feature.Captures.Description.DiscoverPostWatch,Compartilhe sua jogada nos Momentos
 Feature.Captures.Description.MomentProcessing,Você poderá visualizá-lo nos Momentos em breve
 Feature.Captures.Description.ShareCTA,Compartilhe sua captura com suas amizades!
 Feature.Captures.Label.CaptureCounts,{numberOfCaptures} capturas
@@ -2643,7 +2643,7 @@ Feature.Captures.Title.VideoCaptureVoiceChatMutedTooltip,O chat de voz é silenc
 Feature.Captures.Toast.CaptureSaved,Captura salva
 Feature.Captures.Toast.CaptureSavedToDevice,Salvo no dispositivo
 Feature.Captures.Toast.CapturesEnabled,Capturas ativadas
-Feature.Captures.Toast.CreateMoment2,Salvo! Transforme isso em um Momento.
+Feature.Captures.Toast.CreateMoment2,Salvo! Criar um Momento?
 Feature.Captures.Toast.MomentProcessing,Estamos processando seu Momento
 Feature.Captures.Toast.VideoCaptureFailed,Falha no salvamento da captura de vídeo.
 Feature.Captures.Toast.VideoCaptureInitializationCapturingAlreadyError,Uma captura de vídeo já está em andamento
@@ -4017,11 +4017,20 @@ Feature.PlayerSearchResults.Label.YouAreFollowing,Você está seguindo
 Feature.PlayerSearchResults.Label.YouAreFriends,Amizade formada
 Feature.PrivateServers.Action.CreatePrivateServer,Criar servidor privado
 Feature.PrivateServers.Action.FreeWithBlackbird,Grátis com o Plus
+Feature.PrivateServers.Action.Generate,Gerar
+Feature.PrivateServers.Description.FriendsAllowed,Qualquer pessoa na sua lista de amizades pode entrar sem um convite
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,As compras de servidores privados não são suportadas no Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,Este jogo não suporta servidores privados.
 Feature.PrivateServers.Heading.ConfigurePrivateServer,Configurar servidor privado
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,Qualquer um com este link pode entrar
+Feature.PrivateServers.Label.FriendsAllowed,Amizades permitidas
+Feature.PrivateServers.Label.InThisServer,Neste servidor
 Feature.PrivateServers.Label.OwnersServer,Servidor de {displayName}
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,Gerar um link de servidor privado
+Feature.PrivateServers.Label.PrivateServerLink,Link do servidor privado
+Feature.PrivateServers.Label.SearchPeople,Buscar pessoas
 Feature.PrivateServers.Label.ServerName,Nome do servidor:
+Feature.PrivateServers.Label.WhoCanJoin,Quem pode entrar
 Feature.Profile.Action.AboutThisProfile,Sobre este perfil
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4408,7 +4417,7 @@ Feature.SettingsHub.MethodOfAbuse.Other.Title,
 Feature.SettingsHub.MethodOfAbuse.Text.Subtitle,Esta pessoa digitou uma palavra maldosa no chat de texto
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Subtitle,Esta pessoa estava gritando com toda a força
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Title,
-Feature.SettingsHub.PageTitle.InThisServer,Neste servidor
+Feature.SettingsHub.PageTitle.InThisServer,
 Feature.SettingsHub.Prompt.AllowAccessToCamera,Permitir acesso à câmera?
 Feature.SettingsHub.Prompt.AllowAccessToContacts,Permitir acesso aos contatos?
 Feature.SettingsHub.Prompt.AndroidWithDeeplink,<b>1. Selecione a permissão<br />2. Selecione o microfone<br />3. Permita que o aplicativo Roblox acesse seu microfone</b>

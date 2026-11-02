@@ -2607,7 +2607,7 @@ Feature.Captures.Control.On,
 Feature.Captures.Control.StartRecordingVideo,
 Feature.Captures.Control.StopRecordingVideo,녹화 중지
 Feature.Captures.Description.AllowPhotoAccessInfo,캡처를 저장하려면 Roblox가 기기의 카메라 롤에 액세스할 수 있어야 합니다.
-Feature.Captures.Description.DiscoverPostWatch,"모멘트에서 최고의 Roblox 게임 플레이를 찾아보고, 게시하고, 시청하세요."
+Feature.Captures.Description.DiscoverPostWatch,모멘트에 게임 플레이를 공유하세요
 Feature.Captures.Description.MomentProcessing,곧 모멘트에서 볼 수 있습니다
 Feature.Captures.Description.ShareCTA,캡처를 친구들과 공유하세요!
 Feature.Captures.Label.CaptureCounts,캡처 {numberOfCaptures}장
@@ -2642,7 +2642,7 @@ Feature.Captures.Title.VideoCaptureVoiceChatMutedTooltip,캡처 도중에는 음
 Feature.Captures.Toast.CaptureSaved,캡처 저장 완료
 Feature.Captures.Toast.CaptureSavedToDevice,기기에 저장됨
 Feature.Captures.Toast.CapturesEnabled,캡처가 활성화됨
-Feature.Captures.Toast.CreateMoment2,저장 완료! 이제 모멘트로 전환하세요.
+Feature.Captures.Toast.CreateMoment2,저장 완료! 모멘트를 만들까요?
 Feature.Captures.Toast.MomentProcessing,모멘트를 처리하고 있습니다
 Feature.Captures.Toast.VideoCaptureFailed,동영상 캡처를 저장하지 못했습니다.
 Feature.Captures.Toast.VideoCaptureInitializationCapturingAlreadyError,이미 동영상 캡처를 진행 중입니다
@@ -3770,9 +3770,15 @@ Feature.Moments.Action.ShowDetails,세부 정보 표시
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,동영상 잘라내기
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Action.ViewOtherFeed,다른 피드 보기
+Feature.Moments.Action.ViewRecommended,추천 보기
+Feature.Moments.Action.ViewTrending,인기 게시물 보기
 Feature.Moments.Body.EDPMomentIPReportInstructions,이 모멘트에서 지식재산권 위반을 신고하려면 게임 세부 정보 페이지로 이동하세요.
 Feature.Moments.Description.CommunityStandards,허용되는 표현과 금지되는 표현에 대한 자세한 내용은 커뮤니티 규정을 확인하세요.
 Feature.Moments.Description.EmptyCapturesLibrary,내 캡처가 표시되는 곳입니다.
+Feature.Moments.Description.FollowingCaughtUpBody,이 피드의 새로운 모멘트를 모두 시청하셨습니다. 더 많은 내용을 보려면 피드를 전환하세요.
+Feature.Moments.Description.FollowingEmptyBodyRecommended,몇몇 크리에이터를 팔로우한 후 즐겨찾기에서 모멘트를 확인해 보세요. 추천 콘텐츠에서 몇 가지를 찾아보세요.
+Feature.Moments.Description.FollowingEmptyBodyTrending,몇몇 크리에이터를 팔로우한 후 즐겨찾기에서 모멘트를 확인해 보세요. 인기 콘텐츠에서 몇 가지를 찾아보세요.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI가 생성했습니다. 게시하기 전에 검토하세요. 게시된 내용에 대한 책임은 사용자에게 있습니다.
 Feature.Moments.Description.HowToCaptureStep1,캡처가 활성화된 체험에 참가해서 햄버거 메뉴를 선택합니다.
 Feature.Moments.Description.HowToCaptureStep2,캡처 제어를 활성화합니다.
@@ -3831,8 +3837,11 @@ Feature.Moments.Label.FeedEndTitle,모두 확인했습니다
 Feature.Moments.Label.FeedFailedToLoad,피드를 불러오지 못했습니다.
 Feature.Moments.Label.FeedFollowing,
 Feature.Moments.Label.FeedMyMoments,내 모멘트
+Feature.Moments.Label.FeedRecommended,
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.FirstCommentInvite,아직 코멘트가 없습니다. 가장 먼저 코멘트를 남겨 보세요!
+Feature.Moments.Label.FollowingCaughtUpTitle,지금은 모두 확인했습니다
+Feature.Moments.Label.FollowingEmptyTitle,크리에이터를 팔로우하여 해당 크리에이터의 모멘트를 확인하세요
 Feature.Moments.Label.GameJoinConversion,게임 참가 전환
 Feature.Moments.Label.HowToUseCaptureTitle,캡처 사용 방법
 Feature.Moments.Label.LinkCopied,링크 복사됨
@@ -4017,11 +4026,20 @@ Feature.PlayerSearchResults.Label.YouAreFollowing,내가 현재 팔로잉
 Feature.PlayerSearchResults.Label.YouAreFriends,여러분은 친구예요
 Feature.PrivateServers.Action.CreatePrivateServer,비공개 서버 만들기
 Feature.PrivateServers.Action.FreeWithBlackbird,Plus로 무료 이용
+Feature.PrivateServers.Action.Generate,생성
+Feature.PrivateServers.Description.FriendsAllowed,친구 목록에 있는 사람은 누구나 초대 없이 참가할 수 있습니다.
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio에서는 비공개 서버 구매가 지원되지 않습니다.
 Feature.PrivateServers.Description.VipServersNotSupported,이 게임은 비공개 서버를 지원하지 않습니다.
 Feature.PrivateServers.Heading.ConfigurePrivateServer,비공개 서버 구성
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,링크가 있는 모든 사용자가 참가할 수 있습니다.
+Feature.PrivateServers.Label.FriendsAllowed,허용된 친구
+Feature.PrivateServers.Label.InThisServer,이 서버 내
 Feature.PrivateServers.Label.OwnersServer,{displayName} 님의 서버
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,비공개 서버 링크 생성
+Feature.PrivateServers.Label.PrivateServerLink,비공개 서버 링크
+Feature.PrivateServers.Label.SearchPeople,회원 검색
 Feature.PrivateServers.Label.ServerName,서버 이름:
+Feature.PrivateServers.Label.WhoCanJoin,참여할 수 있는 사람
 Feature.Profile.Action.AboutThisProfile,프로필 정보
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4410,7 +4428,7 @@ Feature.SettingsHub.MethodOfAbuse.Other.Title,
 Feature.SettingsHub.MethodOfAbuse.Text.Subtitle,텍스트 채팅으로 악의적인 단어를 언급함
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Subtitle,목이 터져라 비명을 지르던 사람입니다
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Title,
-Feature.SettingsHub.PageTitle.InThisServer,이 서버 내
+Feature.SettingsHub.PageTitle.InThisServer,
 Feature.SettingsHub.Prompt.AllowAccessToCamera,카메라 액세스를 허용하시겠습니까?
 Feature.SettingsHub.Prompt.AllowAccessToContacts,연락처 액세스를 허용하시겠습니까?
 Feature.SettingsHub.Prompt.AndroidWithDeeplink,<b>1. '권한'을 선택합니다<br />2. '마이크'를 선택합니다<br />3. Roblox에 대한 마이크 접근 권한을 허용합니다</b>

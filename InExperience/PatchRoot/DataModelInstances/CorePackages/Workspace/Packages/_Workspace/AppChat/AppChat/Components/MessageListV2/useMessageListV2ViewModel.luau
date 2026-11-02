@@ -22,6 +22,7 @@ local FFlagAppChatMessageListV2ScrollToStartOnOpenModule = require(AppChat.Flags
 local FFlagAppChatMessageListV2StableRowCallbacksModule = require(AppChat.Flags.FFlagAppChatMessageListV2StableRowCallbacks)
 local FFlagAppChatMessageListV2ScrollParityModule = require(AppChat.Flags.FFlagAppChatMessageListV2ScrollParity)
 local FFlagAppChatMessageListV2FollowIncomingModule = require(AppChat.Flags.FFlagAppChatMessageListV2FollowIncoming)
+local FFlagAppChatMessageListV2ShowBeforeMeasuredModule = require(AppChat.Flags.FFlagAppChatMessageListV2ShowBeforeMeasured)
 local FIntAppChatMessageListV2OverscanRowsModule = require(AppChat.Flags.FIntAppChatMessageListV2OverscanRows)
 local FIntAppChatMessageInitialFetchMinMessagesModule = require(AppChat.Flags.FIntAppChatMessageInitialFetchMinMessages)
 local StartReachedThreshold = {
@@ -123,7 +124,7 @@ local function useStableRowCallbacks(UseRefResult, HasOpenMomentsDeepLink)
 end
 
 return function(Current)
-	-- upvalues: ReactModule (copy), ListItemsModule (copy), EnumMessageTypesModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), SignalsModule (copy), GetConversationMessageViewModelStoreModule (copy), SignalsReactModule (copy), FIntAppChatMessageInitialFetchMinMessagesModule (copy), FIntAppChatInitialMessageFetchLimitModule (copy), FFlagAppChatMessageListV2ScrollParityModule (copy), UseViewportResizeCompensationModule (copy), CreateScrollIntervalTrackerModule (copy), ViewRecyclerModule (copy), FFlagAppChatMessageListV2FollowIncomingModule (copy), FFlagAppChatMessageListV2ScrollToStartOnOpenModule (copy), UseInitialScrollAlignmentModule (copy), UseDelayedScrollToStartModule (copy), UseMessageListLayoutModule (copy), StartReachedThreshold (copy), MessageRowTypesModule (copy), FIntAppChatMessageListV2OverscanRowsModule (copy), FFlagAppChatMessageListV2StableRowCallbacksModule (copy), useStableRowCallbacks (copy), noop (copy), FFlagAppChatConversationLoadingSkeletonModule (copy)
+	-- upvalues: ReactModule (copy), ListItemsModule (copy), EnumMessageTypesModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), SignalsModule (copy), GetConversationMessageViewModelStoreModule (copy), SignalsReactModule (copy), FIntAppChatMessageInitialFetchMinMessagesModule (copy), FIntAppChatInitialMessageFetchLimitModule (copy), FFlagAppChatMessageListV2ScrollParityModule (copy), UseViewportResizeCompensationModule (copy), CreateScrollIntervalTrackerModule (copy), ViewRecyclerModule (copy), FFlagAppChatMessageListV2FollowIncomingModule (copy), FFlagAppChatMessageListV2ScrollToStartOnOpenModule (copy), UseInitialScrollAlignmentModule (copy), UseDelayedScrollToStartModule (copy), UseMessageListLayoutModule (copy), FFlagAppChatMessageListV2ShowBeforeMeasuredModule (copy), StartReachedThreshold (copy), MessageRowTypesModule (copy), FIntAppChatMessageListV2OverscanRowsModule (copy), FFlagAppChatMessageListV2StableRowCallbacksModule (copy), useStableRowCallbacks (copy), noop (copy), FFlagAppChatConversationLoadingSkeletonModule (copy)
 	local UseRefResult = ReactModule.useRef(Current)
 	UseRefResult.current = Current
 	local ConversationId = Current.conversationId
@@ -374,15 +375,16 @@ return function(Current)
 		UseDelayedScrollToStartModule(IsOpenAtStart, IsIsInitialMessageLoading, UseRefResult10)
 	end
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
-	local UseMessageListLayoutModuleResult = UseMessageListLayoutModule((ReactModule.useCallback(function()
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_3 (copy)
 		UseStateResult2_3(true)
-	end, {})))
+	end, {})
+	local UseMessageListLayoutModuleResult = UseMessageListLayoutModule(if FFlagAppChatMessageListV2ShowBeforeMeasuredModule then nil else UseResult4)
 	local UseRefResult18 = ReactModule.useRef(false)
-	local Current4 = UseRefResult18.current or (UseStateResult4 or CountItems == 0)
+	local FFlagAppChatMessageListV2ShowBeforeMeasuredModule1 = FFlagAppChatMessageListV2ShowBeforeMeasuredModule or (UseRefResult18.current or (UseStateResult4 or CountItems == 0))
 	
 	if not IsIsInitialMessageLoading then
-		UseRefResult18.current = Current4
+		UseRefResult18.current = FFlagAppChatMessageListV2ShowBeforeMeasuredModule1
 	end
 	local UseStableRowCallbacksResult = if FFlagAppChatMessageListV2StableRowCallbacksModule then useStableRowCallbacks(UseRefResult, Current.openMomentsDeepLink ~= nil) else Current
 	
@@ -420,7 +422,7 @@ return function(Current)
 			Current.messageHiddenNoticeText, Current.unknownUserText
 		}),
 		listProps = ReactModule.useMemo(function()
-			-- upvalues: ViewRecyclerModule (upval), StartReachedThreshold (upval), Current2 (ref), Items (copy), ListItemsModule (upval), UseMessageListLayoutModuleResult (copy), MessageRowTypesModule (upval), UseRefResult10 (copy), FIntAppChatMessageListV2OverscanRowsModule (upval), HasLoadNext (copy), UseResult (copy), UseResult1 (copy), UseViewportResizeCompensationModuleResult (ref), UseResult2 (copy), UseResult3 (copy), Current4 (copy)
+			-- upvalues: ViewRecyclerModule (upval), StartReachedThreshold (upval), Current2 (ref), Items (copy), ListItemsModule (upval), UseMessageListLayoutModuleResult (copy), MessageRowTypesModule (upval), UseRefResult10 (copy), FIntAppChatMessageListV2OverscanRowsModule (upval), HasLoadNext (copy), UseResult (copy), UseResult1 (copy), UseViewportResizeCompensationModuleResult (ref), UseResult2 (copy), UseResult3 (copy), FFlagAppChatMessageListV2ShowBeforeMeasuredModule1 (copy)
 			local Copy = table.clone(ViewRecyclerModule.ChatPreset.create({ startReachedThreshold = StartReachedThreshold }))
 			Copy.initialScrollAlignment = Current2 or Copy.initialScrollAlignment
 			Copy.data = { items = Items, getItemKey = ListItemsModule.getKey }
@@ -443,17 +445,18 @@ return function(Current)
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				ScrollBarThickness = 0,
-				Visible = Current4
+				Visible = FFlagAppChatMessageListV2ShowBeforeMeasuredModule1
 			}
 			
 			return Copy
 		end, {
-			UseResult3, HasLoadNext, Current2, Current4, Items,
+			UseResult3, HasLoadNext, Current2,
+			FFlagAppChatMessageListV2ShowBeforeMeasuredModule1, Items,
 			UseMessageListLayoutModuleResult, UseResult1, UseResult2, UseResult,
 			UseViewportResizeCompensationModuleResult
 		}),
 		isLoading = IsIsInitialMessageLoading,
-		isListVisible = Current4,
+		isListVisible = FFlagAppChatMessageListV2ShowBeforeMeasuredModule1,
 		showLoadingSkeleton = FFlagAppChatConversationLoadingSkeletonModule
 	}
 end

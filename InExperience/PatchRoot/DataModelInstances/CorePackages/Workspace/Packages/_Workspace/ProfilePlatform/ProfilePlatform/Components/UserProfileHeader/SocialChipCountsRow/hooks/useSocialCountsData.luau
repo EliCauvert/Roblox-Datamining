@@ -5,13 +5,21 @@ local CryoModule = require(Parent.Cryo)
 local LocalizationModule = require(Parent.Localization)
 local EnumsModule = require(ProfilePlatform.Common.Enums)
 local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
+local UseProfileJsonModule = require(ProfilePlatform.Hooks.useProfileJson)
 local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local AbbreviateCountFunction = LocalizationModule.abbreviateCount
 local SocialCountsConfigModule = require(script.Parent.Parent.config.SocialCountsConfig)
+local FFlagProfilePlatformGracefulVisibilityModule = require(ProfilePlatform.Flags.FFlagProfilePlatformGracefulVisibility)
 
 return function(_, p1, p2, MutualFriendIds)
-	-- upvalues: UseProfileJsonComponentModule (copy), EnumsModule (copy), ReactModule (copy), CryoModule (copy), SocialCountsConfigModule (copy), UseLocalizationFunction (copy), AbbreviateCountFunction (copy)
+	-- upvalues: UseProfileJsonComponentModule (copy), EnumsModule (copy), FFlagProfilePlatformGracefulVisibilityModule (copy), UseProfileJsonModule (copy), ReactModule (copy), CryoModule (copy), SocialCountsConfigModule (copy), UseLocalizationFunction (copy), AbbreviateCountFunction (copy)
 	local Counts = UseProfileJsonComponentModule(EnumsModule.Components.UserProfileHeader).counts
+	local HasComponent = true
+	
+	if FFlagProfilePlatformGracefulVisibilityModule then
+		local UseProfileJsonModuleResult = UseProfileJsonModule()
+		HasComponent = UseProfileJsonModuleResult.components ~= nil and UseProfileJsonModuleResult.components[EnumsModule.Components.Friends] ~= nil
+	end
 	local UseLocalizationResult = UseLocalizationFunction((ReactModule.useMemo(function()
 		-- upvalues: CryoModule (upval), SocialCountsConfigModule (upval)
 		return CryoModule.Dictionary.map(SocialCountsConfigModule.RowConfig, function(p3)
@@ -26,7 +34,7 @@ return function(_, p1, p2, MutualFriendIds)
 	end, {})))
 	
 	return ReactModule.useMemo(function()
-		-- upvalues: Counts (copy), SocialCountsConfigModule (upval), UseLocalizationResult (copy), UseLocalizationResult1 (copy), MutualFriendIds (copy), AbbreviateCountFunction (upval), p2 (copy), p1 (copy)
+		-- upvalues: Counts (copy), SocialCountsConfigModule (upval), FFlagProfilePlatformGracefulVisibilityModule (upval), HasComponent (ref), UseLocalizationResult (copy), UseLocalizationResult1 (copy), MutualFriendIds (copy), AbbreviateCountFunction (upval), p2 (copy), p1 (copy)
 		local List = {}
 		
 		for FieldName, count in Counts do
@@ -37,6 +45,9 @@ return function(_, p1, p2, MutualFriendIds)
 				
 				if Count == nil then
 					Count = true
+				end
+				if FFlagProfilePlatformGracefulVisibilityModule and FieldName == "friendsCount" then
+					Count = Count and HasComponent
 				end
 				table.insert(List, {
 					fieldName = FieldName,
@@ -54,6 +65,7 @@ return function(_, p1, p2, MutualFriendIds)
 		
 		return List
 	end, {
-		Counts, UseLocalizationResult, UseLocalizationResult1, p2, p1, MutualFriendIds
+		Counts, UseLocalizationResult, UseLocalizationResult1, p2, p1, MutualFriendIds,
+		HasComponent
 	})
 end

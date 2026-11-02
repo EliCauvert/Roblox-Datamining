@@ -3,5 +3,5 @@
 	FFlagPartyVoiceLogActiveDM = game:DefineFastFlag("PartyVoiceLogActiveDM", false),
 	FFlagFireErrorRCCTimeoutSignal = game:DefineFastFlag("FireErrorRCCTimeoutSignal", false),
 	FFlagEnableCEVForceInitialize = game:DefineFastFlag("EnableCEVForceInitialize", false),
-	FFlagVoiceDebugPartyVoiceToggleEnabled = game:DefineFastFlag("VoiceDebugPartyVoiceToggleEnabled", false)
+	FFlagVoiceDebugConsoleV2 = game:DefineFastFlag("VoiceDebugConsoleV2", false)
 }

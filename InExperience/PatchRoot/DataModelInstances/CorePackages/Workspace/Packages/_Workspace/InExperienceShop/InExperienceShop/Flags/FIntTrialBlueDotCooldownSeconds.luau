@@ -1,0 +1,1 @@
+﻿return game:DefineFastInt("TrialBlueDotCooldownSeconds", 86400)

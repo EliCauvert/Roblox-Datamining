@@ -28,6 +28,7 @@ local AnimatorModule = require(Parent1.Generic.Animator)
 local GetEnableCompensatingScrollingFrameModule = require(Parent1.Flags.getEnableCompensatingScrollingFrame)
 local GetUserInputEventDataModule = require(Parent1.Utility.getUserInputEventData)
 local RobuxPackageModule = require(Parent.RobuxPackage)
+local FFlagBuyRobuxPageFitToViewportModule = require(Parent1.Flags.FFlagBuyRobuxPageFitToViewport)
 local ExtendResult = RoactModule.Component:extend(script.Name)
 local IconsCommonGoldrobux = Images["icons/common/goldrobux"]
 local IconsLogoBlock = Images["icons/logo/block"]
@@ -42,11 +43,25 @@ local list = {
 local IconsNavigationClose = Images["icons/navigation/close"]
 
 function ExtendResult.init(p1)
-	-- upvalues: RoactGamepadModule (copy), RoactModule (copy), GuiService (copy)
+	-- upvalues: RoactGamepadModule (copy), RoactModule (copy), FFlagBuyRobuxPageFitToViewportModule (copy), GuiService (copy)
 	p1.state = { selectedPackage = nil, showMessageBanner = false }
 	p1.buttonRefs = RoactGamepadModule.createRefCache()
 	p1.scrollingFrameRef = RoactModule.createRef()
 	
+	if FFlagBuyRobuxPageFitToViewportModule then
+		p1.packageLayoutRef = RoactModule.createRef()
+		p1.canvasSize, p1.setCanvasSize = RoactModule.createBinding(UDim2.new())
+		
+		function p1.updateCanvasSize()
+			-- upvalues: p1 (copy)
+			local Current = p1.scrollingFrameRef.current
+			local Current1 = p1.packageLayoutRef.current
+			
+			if Current and Current1 and Current.AbsoluteSize.X > 0 then
+				p1.setCanvasSize(UDim2.fromScale(Current1.AbsoluteContentSize.X / Current.AbsoluteSize.X, 0))
+			end
+		end
+	end
 	function p1.getGamepadNextSelectionLeft(LayoutOrder: number)
 		-- upvalues: p1 (copy)
 		return LayoutOrder > 1 and p1.buttonRefs[LayoutOrder - 1] or nil
@@ -77,7 +92,12 @@ function ExtendResult.init(p1)
 end
 
 function ExtendResult.didMount(p1)
+	-- upvalues: FFlagBuyRobuxPageFitToViewportModule (copy)
 	p1.initSelectionChangedListener()
+	
+	if FFlagBuyRobuxPageFitToViewportModule and p1.props.isConsoleSize then
+		p1.updateCanvasSize()
+	end
 end
 
 function ExtendResult.didUpdate(p1, p2, _)
@@ -122,26 +142,45 @@ function ExtendResult.render(p1)
 end
 
 function ExtendResult.movePackageToAttentionArea(p1, Frame: Frame)
-	-- upvalues: GetEnableCompensatingScrollingFrameModule (copy)
+	-- upvalues: GetEnableCompensatingScrollingFrameModule (copy), FFlagBuyRobuxPageFitToViewportModule (copy)
 	if not GetEnableCompensatingScrollingFrameModule() then return end
 	local Current = p1.scrollingFrameRef.current
 	
 	if Current == nil or Frame == nil then return end
 	local X = Current.AbsoluteSize.X
 	local ScaledScale = 48 * p1:getScale()
-	local XDelta = Frame.AbsolutePosition.X - ScaledScale
 	
-	if XDelta < 0 then
-		Current.CanvasPosition = Vector2.new(XDelta, 0)
-		p1:reportScrollingFrameCompensationHappened()
+	if FFlagBuyRobuxPageFitToViewportModule and p1.props.isConsoleSize then
+		local XDelta1 = Frame.AbsolutePosition.X - Current.AbsolutePosition.X - ScaledScale
+		local NewXDelta = XDelta1 + Frame.AbsoluteSize.X + 2 * ScaledScale
+		local X1: number = Current.CanvasPosition.X
 		
+		if XDelta1 < 0 then
+			Current.CanvasPosition = Vector2.new(X1 + XDelta1, 0)
+			p1:reportScrollingFrameCompensationHappened()
+			
+			return
+		end
+		if X < NewXDelta then
+			Current.CanvasPosition = Vector2.new(X1 + NewXDelta - X, 0)
+			p1:reportScrollingFrameCompensationHappened()
+		end
 		return
-	end
-	if X < Frame.AbsolutePosition.X + Frame.AbsoluteSize.X + ScaledScale then
-		Current.CanvasPosition = Vector2.new(XDelta, 0)
-		p1:reportScrollingFrameCompensationHappened()
+	else
+		local XDelta = Frame.AbsolutePosition.X - ScaledScale
 		
-		return
+		if XDelta < 0 then
+			Current.CanvasPosition = Vector2.new(XDelta, 0)
+			p1:reportScrollingFrameCompensationHappened()
+			
+			return
+		end
+		if X < Frame.AbsolutePosition.X + Frame.AbsoluteSize.X + ScaledScale then
+			Current.CanvasPosition = Vector2.new(XDelta, 0)
+			p1:reportScrollingFrameCompensationHappened()
+			
+			return
+		end
 	end
 end
 
@@ -157,31 +196,34 @@ function ExtendResult.reportScrollingFrameCompensationHappened(p1)
 end
 
 function ExtendResult.renderWithLocale(p1, p2, Callback)
-	-- upvalues: WithStyleFunction (copy), RoactModule (copy), RobuxPackageModule (copy), list (copy), FullscreenFrame (copy), ColorMode (copy), ImageSetButton (copy), IconsNavigationClose (copy), CursorKind (copy), AnimatorModule (copy), ImageSetLabel (copy), IconsLogoBlock (copy), FitTextLabel (copy), FitFrameHorizontal (copy), IconsCommonGoldrobux (copy), FormatNumberModule (copy), LocalizationService (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: FFlagBuyRobuxPageFitToViewportModule (copy), WithStyleFunction (copy), RoactModule (copy), RobuxPackageModule (copy), list (copy), ColorMode (copy), ImageSetButton (copy), IconsNavigationClose (copy), CursorKind (copy), AnimatorModule (copy), ImageSetLabel (copy), IconsLogoBlock (copy), FitTextLabel (copy), FitFrameHorizontal (copy), IconsCommonGoldrobux (copy), FormatNumberModule (copy), LocalizationService (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), FullscreenFrame (copy)
 	local Props = p1.props
+	local IsConsoleSize = FFlagBuyRobuxPageFitToViewportModule and Props.isConsoleSize
 	
 	return WithStyleFunction(function(p3)
-		-- upvalues: Props (copy), p1 (copy), RoactModule (upval), RobuxPackageModule (upval), list (upval), FullscreenFrame (upval), ColorMode (upval), ImageSetButton (upval), IconsNavigationClose (upval), Callback (copy), CursorKind (upval), AnimatorModule (upval), ImageSetLabel (upval), IconsLogoBlock (upval), FitTextLabel (upval), p2 (copy), FitFrameHorizontal (upval), IconsCommonGoldrobux (upval), FormatNumberModule (upval), LocalizationService (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+		-- upvalues: Props (copy), p1 (copy), IsConsoleSize (copy), RoactModule (upval), RobuxPackageModule (upval), list (upval), ColorMode (upval), ImageSetButton (upval), IconsNavigationClose (upval), Callback (copy), CursorKind (upval), AnimatorModule (upval), ImageSetLabel (upval), IconsLogoBlock (upval), FitTextLabel (upval), p2 (copy), FitFrameHorizontal (upval), IconsCommonGoldrobux (upval), FormatNumberModule (upval), LocalizationService (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), FullscreenFrame (upval)
 		local Theme = p3.Theme
 		local _Font = p3.Font
 		local HasRobuxPackages = Props.robuxPackages ~= nil
 		local CountRobuxPackages: number = if Props.robuxPackages == nil then 6 else #Props.robuxPackages
 		local ScaledScale = 32 * p1:getScale()
 		local config = {
-			LeadingPadding = RoactModule.createElement("Frame", {
+			LeadingPadding = not IsConsoleSize and RoactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				BackgroundTransparency = 1,
 				LayoutOrder = 0,
 				Size = UDim2.new(0, 80 * p1:getScale(), 0, 1)
 			}),
 			RobuxPackageChildren = RoactModule.createElement("UIListLayout", {
+				[RoactModule.Ref] = if IsConsoleSize then p1.packageLayoutRef else nil,
+				[RoactModule.Change.AbsoluteContentSize] = if IsConsoleSize then p1.updateCanvasSize else nil,
 				HorizontalAlignment = Enum.HorizontalAlignment.Left,
-				VerticalAlignment = Enum.VerticalAlignment.Center,
+				VerticalAlignment = if IsConsoleSize then Enum.VerticalAlignment.Top else Enum.VerticalAlignment.Center,
 				FillDirection = Enum.FillDirection.Horizontal,
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				Padding = UDim.new(0, 16 * p1:getScale())
 			}),
-			TrailingPadding = RoactModule.createElement("Frame", {
+			TrailingPadding = not IsConsoleSize and RoactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				BackgroundTransparency = 1,
 				LayoutOrder = CountRobuxPackages + 1,
@@ -195,6 +237,7 @@ function ExtendResult.renderWithLocale(p1, p2, Callback)
 			local config1 = {
 				layoutOrder = i,
 				scale = p1:getScale(),
+				fitToViewport = if IsConsoleSize then true else nil,
 				selected = p1.state.selectedPackage ~= nil and p1.state.selectedPackage == p1.buttonRefs[i]:getValue(),
 				packageId = if HasRobuxPackages then Props.robuxPackages[i].packageId else tostring(i),
 				robuxAmount = if HasRobuxPackages then Props.robuxPackages[i].robuxAmount else nil,
@@ -229,10 +272,7 @@ function ExtendResult.renderWithLocale(p1, p2, Callback)
 			
 			config[NewI] = CreateElementFunction(RobuxPackageModule, config1)
 		end
-		return RoactModule.createElement(FullscreenFrame, {
-			BackgroundTransparency = 0,
-			BackgroundColor3 = Theme.BackgroundDefault.Color
-		}, {
+		local config2 = {
 			BuyRobuxPageBackground = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 0,
 				ZIndex = 0,
@@ -253,7 +293,7 @@ function ExtendResult.renderWithLocale(p1, p2, Callback)
 				})
 			}),
 			CloseButton = RoactModule.createElement(ImageSetButton, {
-				Position = UDim2.new(0, 48 * p1:getScale(), 0, 48 * p1:getScale()),
+				Position = if IsConsoleSize then UDim2.new(0, 48, 1, -36) else UDim2.new(0, 48 * p1:getScale(), 0, 48 * p1:getScale()),
 				AnchorPoint = Vector2.new(0, 0),
 				Size = UDim2.new(0, 36, 0, 36),
 				Image = IconsNavigationClose,
@@ -309,7 +349,7 @@ function ExtendResult.renderWithLocale(p1, p2, Callback)
 			}),
 			RobuxBalanceFrame = RoactModule.createElement(FitFrameHorizontal, {
 				BackgroundTransparency = 1,
-				Position = UDim2.new(1, -96 * p1:getScale(), 0, 48 * p1:getScale()),
+				Position = if IsConsoleSize then UDim2.new(0.95, 0, 1, -ScaledScale) else UDim2.new(1, -96 * p1:getScale(), 0, 48 * p1:getScale()),
 				AnchorPoint = Vector2.new(1, 0),
 				height = UDim.new(0, ScaledScale),
 				contentPadding = UDim.new(0, 4),
@@ -336,10 +376,15 @@ function ExtendResult.renderWithLocale(p1, p2, Callback)
 			}),
 			BannerFrame = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
-				Position = UDim2.new(0, 96 * p1:getScale(), 0, 146 * p1:getScale()),
+				Position = if IsConsoleSize then nil else UDim2.fromOffset(96 * p1:getScale(), 146 * p1:getScale()),
 				Size = UDim2.new(1, 0, 0, 0),
-				AutomaticSize = Enum.AutomaticSize.Y
+				AutomaticSize = Enum.AutomaticSize.Y,
+				LayoutOrder = if IsConsoleSize then 1 else nil
 			}, {
+				UIPadding = IsConsoleSize and RoactModule.createElement("UIPadding", {
+					PaddingLeft = UDim.new(0.05, 0),
+					PaddingRight = UDim.new(0.05, 0)
+				}),
 				RoactModule.createElement("UIListLayout", {
 					HorizontalAlignment = Enum.HorizontalAlignment.Left,
 					FillDirection = Enum.FillDirection.Vertical,
@@ -359,11 +404,12 @@ function ExtendResult.renderWithLocale(p1, p2, Callback)
 					TextColor3 = if Props.showBackground then Color3.new(255, 255, 255) else Theme.TextEmphasis.Color
 				}),
 				BannerText = RoactModule.createElement("TextLabel", {
-					LayoutOrder = 1,
 					BackgroundTransparency = 1,
+					LayoutOrder = if IsConsoleSize then 2 else 1,
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y,
 					TextXAlignment = Enum.TextXAlignment.Left,
+					TextWrapped = if IsConsoleSize then true else nil,
 					Font = if FoundationFontFaceMigration then nil else _Font.Header1.Font,
 					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.HeadingSmall.Font) else nil,
 					Text = p2.BannerText,
@@ -372,20 +418,71 @@ function ExtendResult.renderWithLocale(p1, p2, Callback)
 				})
 			}),
 			RobuxPackageTilesFrame = RoactModule.createElement("ScrollingFrame", {
-				Position = UDim2.new(0, 0, 0, 310 * p1:getScale()),
-				Size = UDim2.new(1, 0, 0, 615 * p1:getScale()),
+				Position = if IsConsoleSize then nil else UDim2.new(0, 0, 0, 310 * p1:getScale()),
+				Size = if IsConsoleSize then UDim2.fromScale(1, 0.85) else UDim2.new(1, 0, 0, 615 * p1:getScale()),
+				LayoutOrder = if IsConsoleSize then 1 else nil,
 				AutomaticSize = Enum.AutomaticSize.None,
-				CanvasSize = UDim2.new(0, 0, 0, 0),
-				AutomaticCanvasSize = Enum.AutomaticSize.X,
+				CanvasSize = if IsConsoleSize then p1.canvasSize else UDim2.new(0, 0, 0, 0),
+				AutomaticCanvasSize = if IsConsoleSize then Enum.AutomaticSize.None else Enum.AutomaticSize.X,
 				ScrollingEnabled = HasRobuxPackages,
 				ScrollingDirection = Enum.ScrollingDirection.X,
 				ScrollBarImageTransparency = 1,
 				ScrollBarThickness = 0,
 				Selectable = false,
 				BackgroundTransparency = 1,
-				[RoactModule.Ref] = p1.scrollingFrameRef
+				[RoactModule.Ref] = p1.scrollingFrameRef,
+				[RoactModule.Change.AbsoluteSize] = if IsConsoleSize then p1.updateCanvasSize else nil
 			}, config)
-		})
+		}
+		
+		if IsConsoleSize then
+			config2.Content = RoactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
+				BottomPadding = RoactModule.createElement("UIPadding", { PaddingBottom = UDim.new(0.07, 0) }),
+				UIListLayout = RoactModule.createElement("UIListLayout", {
+					FillDirection = Enum.FillDirection.Vertical,
+					SortOrder = Enum.SortOrder.LayoutOrder,
+					Padding = UDim.new(0, 10)
+				}),
+				TopBar = RoactModule.createElement("Frame", {
+					BackgroundTransparency = 1,
+					LayoutOrder = 0,
+					Size = UDim2.fromScale(1, 0.1)
+				}, {
+					CloseButton = config2.CloseButton,
+					RobuxBalanceFrame = config2.RobuxBalanceFrame
+				}),
+				BannerFrame = config2.BannerFrame,
+				RobuxList = RoactModule.createElement("Frame", {
+					LayoutOrder = 3,
+					BackgroundTransparency = 1,
+					Size = UDim2.fromScale(1, 0)
+				}, {
+					UIFlexItem = RoactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }),
+					UIListLayout = RoactModule.createElement("UIListLayout", {
+						FillDirection = Enum.FillDirection.Vertical,
+						SortOrder = Enum.SortOrder.LayoutOrder
+					}),
+					UIPadding = RoactModule.createElement("UIPadding", {
+						PaddingLeft = UDim.new(0.05, 0),
+						PaddingRight = UDim.new(0.05, 0)
+					}),
+					TopPadding = RoactModule.createElement("Frame", {
+						LayoutOrder = 0,
+						BackgroundTransparency = 1,
+						Size = UDim2.fromScale(0, 0.1)
+					}),
+					RobuxPackageTilesFrame = config2.RobuxPackageTilesFrame
+				})
+			})
+			config2.CloseButton = nil
+			config2.RobuxBalanceFrame = nil
+			config2.BannerFrame = nil
+			config2.RobuxPackageTilesFrame = nil
+		end
+		return RoactModule.createElement(FullscreenFrame, {
+			BackgroundTransparency = 0,
+			BackgroundColor3 = Theme.BackgroundDefault.Color
+		}, config2)
 	end)
 end
 

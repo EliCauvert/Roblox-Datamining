@@ -215,7 +215,7 @@ end
 
 function CrossExperienceVoiceManager:getPartyVoiceDebugStats()
 	-- upvalues: FlagsModule (copy), Promise (copy), Communication (copy), CrossExperience (copy)
-	return if FlagsModule.FFlagVoiceDebugPartyVoiceToggleEnabled then Promise.new(function(Callback, Callback1)
+	return if FlagsModule.FFlagVoiceDebugConsoleV2 then Promise.new(function(Callback, Callback1)
 		-- upvalues: Communication (upval), CrossExperience (upval)
 		Communication.execute(CrossExperience.Constants.COMMUNICATIONS.EXECUTE_GET_PARTY_VOICE_DEBUG_STATS, {}, function(p1)
 			-- upvalues: Callback (copy)

@@ -1,4 +1,4 @@
-﻿local _ = require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.CreatorAnalytics)
+﻿local _ = require(script:FindFirstAncestor("AnalyticsMetricChart").Components.MetricChart.MetricChartTypes)
 local config = {
 	minX = 0,
 	maxX = 1,
@@ -48,30 +48,28 @@ local function computeYAxis(Value: number, Largest: number)
 	}
 end
 
-return function(p1)
+return function(Entry)
 	-- upvalues: config (copy), computeYAxis (copy)
-	local DataPoints = if p1 == nil then nil else p1.dataPoints
-	
-	if DataPoints == nil or #DataPoints == 0 then
+	if Entry == nil or #Entry == 0 then
 		return config
 	end
 	local Points = {}
-	local Value = DataPoints[1].value
-	local Value1 = DataPoints[1].value
+	local Value = Entry[1].value
+	local Value1 = Entry[1].value
 	
-	for i, dataPoint in DataPoints do
-		Points[i] = Vector2.new(i - 1, dataPoint.value)
-		Value = math.min(Value, dataPoint.value)
-		Value1 = math.max(Value1, dataPoint.value)
+	for i, value in Entry do
+		Points[i] = Vector2.new(i - 1, value.value)
+		Value = math.min(Value, value.value)
+		Value1 = math.max(Value1, value.value)
 	end
-	local CountDataPoints = #DataPoints
+	local CountEntry = #Entry
 	local YAxis, YAxis2, YAxis3 = computeYAxis(Value, Value1)
 	local ScaledYAxis = (YAxis2 - YAxis) * 0.1
 	
 	return {
 		minX = 0,
 		points = Points,
-		maxX = math.max(CountDataPoints - 1, 1),
+		maxX = math.max(CountEntry - 1, 1),
 		minY = YAxis - ScaledYAxis,
 		maxY = YAxis2 + ScaledYAxis,
 		yTicks = YAxis3

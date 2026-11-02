@@ -18,13 +18,14 @@ local FFlagProfilePlatformEnableCurrencyTransfer = require(Parent.SharedFlags).F
 local FFlagProfilePlatformEnableTradeItemsModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableTradeItems)
 local FFlagEnableProfileCompletion = require(Parent.SharedFlags).FFlagEnableProfileCompletion
 local FFlagProfilePlatformRefreshActionsRespectPoliciesModule = require(ProfilePlatform.Flags.FFlagProfilePlatformRefreshActionsRespectPolicies)
+local FFlagProfilePlatformGracefulVisibilityModule = require(ProfilePlatform.Flags.FFlagProfilePlatformGracefulVisibility)
 local config = {
 	[SocialCommonModule.Enums.ContextualInfoTypes.MutualFriends] = EnumsModule.ContextualTypes.MutualFriends,
 	[SocialCommonModule.Enums.ContextualInfoTypes.Frequents] = EnumsModule.ContextualTypes.PlayedTogether
 }
 
 return function(MutualFriends, p1)
-	-- upvalues: FFlagProfilePlatformEnableVRModule (copy), FFlagProfilePlatformRefreshActionsRespectPoliciesModule (copy), BuildUserActionsComponentModule (copy), GetSupportedActionsForProfileTypeModule (copy), EnumsModule (copy), CryoModule (copy), FFlagProfilePlatformEnableCurrencyTransfer (copy), FFlagProfilePlatformEnableTradeItemsModule (copy), SocialCommonModule (copy), FFlagProfilePlatformEnableSendPlayedTogetherContextToProfilePlatformServiceModule (copy), config (copy), FFlagProfilePlatformEnableFavoriteExperiencesModule (copy), FFlagProfilePlatformEnableInventory (copy), FFlagProfilePlatformEnableStore (copy), FFlagExperiencesOnProfile (copy), FFlagEnableProfileCompletion (copy), FFlagProfilePlatformAddCurrentlyPlayingModule (copy), FFlagProfilePlatformEnableMomentsModule (copy)
+	-- upvalues: FFlagProfilePlatformEnableVRModule (copy), FFlagProfilePlatformRefreshActionsRespectPoliciesModule (copy), BuildUserActionsComponentModule (copy), GetSupportedActionsForProfileTypeModule (copy), EnumsModule (copy), CryoModule (copy), FFlagProfilePlatformEnableCurrencyTransfer (copy), FFlagProfilePlatformEnableTradeItemsModule (copy), SocialCommonModule (copy), FFlagProfilePlatformEnableSendPlayedTogetherContextToProfilePlatformServiceModule (copy), config (copy), FFlagProfilePlatformEnableFavoriteExperiencesModule (copy), FFlagProfilePlatformEnableInventory (copy), FFlagProfilePlatformEnableStore (copy), FFlagExperiencesOnProfile (copy), FFlagEnableProfileCompletion (copy), FFlagProfilePlatformAddCurrentlyPlayingModule (copy), FFlagProfilePlatformGracefulVisibilityModule (copy), FFlagProfilePlatformEnableMomentsModule (copy)
 	local List = nil
 	if FFlagProfilePlatformEnableVRModule then
 		List = {
@@ -88,6 +89,9 @@ return function(MutualFriends, p1)
 	end
 	if FFlagProfilePlatformAddCurrentlyPlayingModule then
 		table.insert(List, { component = EnumsModule.Components.CurrentlyPlaying })
+	end
+	if FFlagProfilePlatformGracefulVisibilityModule then
+		table.insert(List, { component = EnumsModule.Components.Friends })
 	end
 	if FFlagProfilePlatformEnableMomentsModule then
 		table.insert(List, { component = EnumsModule.Components.Moments })

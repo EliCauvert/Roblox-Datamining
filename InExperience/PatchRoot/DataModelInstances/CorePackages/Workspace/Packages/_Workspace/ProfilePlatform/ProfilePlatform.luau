@@ -39,5 +39,6 @@ return {
 	ProfilePlatformTypes = if FFlagMoveInExperienceModeToEditProfile then TypesModule else nil,
 	FFlagProfilePlatformEnableEditAppearanceMenu = require(script.Flags.FFlagProfilePlatformEnableEditAppearanceMenu),
 	FFlagProfilePlatformEditBackgroundMenuItem = require(script.Flags.FFlagProfilePlatformEditBackgroundMenuItem),
-	FFlagProfilePlatformEnableMoments = require(script.Flags.FFlagProfilePlatformEnableMoments)
+	FFlagProfilePlatformEnableMoments = require(script.Flags.FFlagProfilePlatformEnableMoments),
+	FFlagProfilePlatformGracefulVisibility = require(script.Flags.FFlagProfilePlatformGracefulVisibility)
 }

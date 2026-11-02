@@ -2564,7 +2564,7 @@ Feature.Captures.Control.On,
 Feature.Captures.Control.StartRecordingVideo,Video Kaydet
 Feature.Captures.Control.StopRecordingVideo,Kaydı Durdur
 Feature.Captures.Description.AllowPhotoAccessInfo,Yakalamalarını kaydetmek için Roblox'un cihazının kamerasına erişmesi gerekiyor.
-Feature.Captures.Description.DiscoverPostWatch,"Anlar'da destansı Roblox oyunlarını keşfet, paylaş ve izle."
+Feature.Captures.Description.DiscoverPostWatch,Oynanışı Anlar'da paylaş
 Feature.Captures.Description.MomentProcessing,Yakında Anlar'da görüntüleyebilirsin
 Feature.Captures.Description.ShareCTA,Yakalamanı arkadaşlarınla paylaş!
 Feature.Captures.Label.CaptureCounts,{numberOfCaptures} Yakalama
@@ -2599,7 +2599,7 @@ Feature.Captures.Title.VideoCaptureVoiceChatMutedTooltip,"Sesli sohbet, yakalama
 Feature.Captures.Toast.CaptureSaved,Yakalama kaydedildi
 Feature.Captures.Toast.CaptureSavedToDevice,Cihaza Kaydedildi
 Feature.Captures.Toast.CapturesEnabled,Yakalamalar Etkin
-Feature.Captures.Toast.CreateMoment2,Kaydedildi! Bunu bir Ana dönüştür.
+Feature.Captures.Toast.CreateMoment2,Kaydedildi! Bir An oluşturulsun mu?
 Feature.Captures.Toast.MomentProcessing,An'ını işliyoruz
 Feature.Captures.Toast.VideoCaptureFailed,Video yakalama kaydedilemedi.
 Feature.Captures.Toast.VideoCaptureInitializationCapturingAlreadyError,
@@ -3972,11 +3972,20 @@ Feature.PlayerSearchResults.Label.YouAreFollowing,Takip ediyorsun
 Feature.PlayerSearchResults.Label.YouAreFriends,Arkadaşsınız
 Feature.PrivateServers.Action.CreatePrivateServer,Özel Sunucu Oluştur
 Feature.PrivateServers.Action.FreeWithBlackbird,Plus ile ücretsiz
+Feature.PrivateServers.Action.Generate,
+Feature.PrivateServers.Description.FriendsAllowed,Arkadaş listendeki herkes davet edilmeden katılabilir
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Özel sunucu satın alma işlemleri Studio'da desteklenmiyor.
 Feature.PrivateServers.Description.VipServersNotSupported,"Bu oyun, özel sunucuları desteklemiyor."
 Feature.PrivateServers.Heading.ConfigurePrivateServer,Özel Sunucuyu Yapılandır
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,Bu bağlantıya sahip olan herkes katılabilir
+Feature.PrivateServers.Label.FriendsAllowed,İzin verilen arkadaşlar
+Feature.PrivateServers.Label.InThisServer,Bu sunucuda
 Feature.PrivateServers.Label.OwnersServer,{displayName} adlı kişinin sunucusu
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,Özel sunucu bağlantısı oluştur
+Feature.PrivateServers.Label.PrivateServerLink,Özel sunucu bağlantısı
+Feature.PrivateServers.Label.SearchPeople,İnsanları ara
 Feature.PrivateServers.Label.ServerName,Sunucu Adı:
+Feature.PrivateServers.Label.WhoCanJoin,Kimler katılabilir?
 Feature.Profile.Action.AboutThisProfile,Bu profil hakkında
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4365,7 +4374,7 @@ Feature.SettingsHub.MethodOfAbuse.Other.Title,
 Feature.SettingsHub.MethodOfAbuse.Text.Subtitle,Bu kişi metin sohbetinde kötü bir kelime yazdı
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Subtitle,Bu kişi var gücüyle çığlık atıyordu
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Title,
-Feature.SettingsHub.PageTitle.InThisServer,Bu sunucuda
+Feature.SettingsHub.PageTitle.InThisServer,
 Feature.SettingsHub.Prompt.AllowAccessToCamera,Kameraya erişim izni verilsin mi?
 Feature.SettingsHub.Prompt.AllowAccessToContacts,Kişilere erişim izni verilsin mi?
 Feature.SettingsHub.Prompt.AndroidWithDeeplink,<b>1. İzni seç<br />2. Mikrofonu seç<br />Roblox'un Mikrofonuna erişmesine izin ver</b>

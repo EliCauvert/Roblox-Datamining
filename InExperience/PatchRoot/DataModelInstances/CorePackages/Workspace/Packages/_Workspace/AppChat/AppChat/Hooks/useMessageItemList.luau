@@ -16,6 +16,7 @@ local FFlagAppChatMessageTTIMilestonesModule = require(AppChat.Flags.FFlagAppCha
 local FFlagAppChatIncrementalMessageItemListModule = require(AppChat.Flags.FFlagAppChatIncrementalMessageItemList)
 local FFlagAppChatParseMessageTimestampsOnceModule = require(AppChat.Flags.FFlagAppChatParseMessageTimestampsOnce)
 local FFlagAppChatFixMessageItemListStaleRefsModule = require(AppChat.Flags.FFlagAppChatFixMessageItemListStaleRefs)
+local FFlagAppChatMessageItemListCurrentOnSwitchModule = require(AppChat.Flags.FFlagAppChatMessageItemListCurrentOnSwitch)
 local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
 local MessageStatus = EnumsModule.MessageStatus
 local MessageType = EnumsModule.MessageType
@@ -509,7 +510,7 @@ end
 
 return {
 	useMessageItemList = function(ConversationId, Current, p11, Current1)
-		-- upvalues: ReactModule (copy), GetConversationMessageViewModelStoreModule (copy), FFlagAppChatFixMessageItemListStaleRefsModule (copy), useItemListInputs (copy), SignalsModule (copy), FFlagAppChatIncrementalMessageItemListModule (copy), createIncrementalMessageItemList (copy), buildMessageItemList (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), UseSignalStateFunction (copy)
+		-- upvalues: ReactModule (copy), GetConversationMessageViewModelStoreModule (copy), FFlagAppChatFixMessageItemListStaleRefsModule (copy), useItemListInputs (copy), SignalsModule (copy), FFlagAppChatIncrementalMessageItemListModule (copy), createIncrementalMessageItemList (copy), buildMessageItemList (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), FFlagAppChatMessageItemListCurrentOnSwitchModule (copy), UseSignalStateFunction (copy)
 		local UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: GetConversationMessageViewModelStoreModule (upval)
 			return GetConversationMessageViewModelStoreModule(false)
@@ -521,8 +522,7 @@ return {
 		local UseRefResult1 = ReactModule.useRef(Current)
 		UseRefResult1.current = Current
 		local UseItemListInputsResult = if FFlagAppChatFixMessageItemListStaleRefsModule then useItemListInputs(ConversationId, Current1, Current, UseMemoResult) else nil
-		
-		return UseSignalStateFunction((ReactModule.useMemo(function()
+		local UseMemoResult1 = ReactModule.useMemo(function()
 			-- upvalues: ConversationId (copy), SignalsModule (upval), FFlagAppChatIncrementalMessageItemListModule (upval), createIncrementalMessageItemList (upval), buildMessageItemList (upval), ConversationMessageListStore (copy), ConversationMessageStore (copy), p11 (copy), UseRefResult (copy), UseRefResult1 (copy), FFlagAppChatFixMessageItemListStaleRefsModule (upval), UseItemListInputsResult (ref), FFlagAppChatPerfTrackingModule (upval), FFlagAppChatMessageTTIMilestonesModule (upval), AppChatPerfTrackerModule (upval), UseMemoResult (copy)
 			if ConversationId == nil then
 				return SignalsModule.createComputed(function()
@@ -571,7 +571,15 @@ return {
 		end, {
 			ConversationId, p11, UseMemoResult, ConversationMessageStore,
 			ConversationMessageListStore, UseItemListInputsResult
-		})))
+		})
+		
+		if FFlagAppChatMessageItemListCurrentOnSwitchModule then
+			UseSignalStateFunction(UseMemoResult1)
+			
+			return UseMemoResult1(false)
+		else
+			return UseSignalStateFunction(UseMemoResult1)
+		end
 	end,
 	buildMessageItemList = buildMessageItemList,
 	createIncrementalMessageItemList = createIncrementalMessageItemList

@@ -2589,7 +2589,7 @@ Feature.Captures.Control.On,
 Feature.Captures.Control.StartRecordingVideo,
 Feature.Captures.Control.StopRecordingVideo,Stop Registrazione
 Feature.Captures.Description.AllowPhotoAccessInfo,"Per salvare le tue catture, Roblox ha bisogno di accedere al rullino della fotocamera del tuo dispositivo."
-Feature.Captures.Description.DiscoverPostWatch,"Scopri, pubblica e guarda le partite epiche di Roblox su Momento."
+Feature.Captures.Description.DiscoverPostWatch,Condividi la tua partita su Momenti
 Feature.Captures.Description.MomentProcessing,A breve potrai visualizzarlo nella sezione Momenti
 Feature.Captures.Description.ShareCTA,Condividi i tuoi screenshots con gli amici!
 Feature.Captures.Label.CaptureCounts,{numberOfCaptures} Screenshot
@@ -2624,7 +2624,7 @@ Feature.Captures.Title.VideoCaptureVoiceChatMutedTooltip,La chat vocale è disat
 Feature.Captures.Toast.CaptureSaved,Acquisizione salvata
 Feature.Captures.Toast.CaptureSavedToDevice,Salvato sul dispositivo
 Feature.Captures.Toast.CapturesEnabled,Acquisizioni Abilitate
-Feature.Captures.Toast.CreateMoment2,Salvato! Trasformalo in un Momento.
+Feature.Captures.Toast.CreateMoment2,Salvato! Vuoi creare un Momento?
 Feature.Captures.Toast.MomentProcessing,Stiamo elaborando il tuo Momento
 Feature.Captures.Toast.VideoCaptureFailed,Impossibile salvare l'acquisizione video.
 Feature.Captures.Toast.VideoCaptureInitializationCapturingAlreadyError,È già in corso un'acquisizione video
@@ -3750,9 +3750,15 @@ Feature.Moments.Action.ShowDetails,Mostra dettagli
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Ritaglia video
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Action.ViewOtherFeed,Visualizza un altro feed
+Feature.Moments.Action.ViewRecommended,Visualizza i consigliati
+Feature.Moments.Action.ViewTrending,Visualizza i più popolari
 Feature.Moments.Body.EDPMomentIPReportInstructions,"Per segnalare una violazione della proprietà intellettuale in questo Momento, vai alla pagina dei dettagli del gioco."
 Feature.Moments.Description.CommunityStandards,Consulta le norme della community per saperne di più su ciò che ti è permesso dire.
 Feature.Moments.Description.EmptyCapturesLibrary,Qui è dove appariranno le tue acquisizioni.
+Feature.Moments.Description.FollowingCaughtUpBody,Hai visto tutti i nuovi Momenti in questo feed. Cambia feed per visualizzarne altri.
+Feature.Moments.Description.FollowingEmptyBodyRecommended,Goditi i Momenti dei tuoi preferiti dopo aver iniziato a seguire alcuni creatori. Visualizza i contenuti consigliati per trovarli.
+Feature.Moments.Description.FollowingEmptyBodyTrending,Goditi i Momenti dei tuoi preferiti dopo aver iniziato a seguire alcuni creatori. Visualizza i contenuti di tendenza per trovarli.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,Generato dall'IA. Ricontrollalo prima di utilizzarlo: sei responsabile di ciò che viene pubblicato.
 Feature.Moments.Description.HowToCaptureStep1,Partecipa a un'esperienza con le acquisizioni abilitate e seleziona il menu a tre linee
 Feature.Moments.Description.HowToCaptureStep2,Abilita i controlli per l'acquisizione
@@ -3811,8 +3817,11 @@ Feature.Moments.Label.FeedEndTitle,È tutto aggiornato
 Feature.Moments.Label.FeedFailedToLoad,Impossibile caricare il feed
 Feature.Moments.Label.FeedFollowing,
 Feature.Moments.Label.FeedMyMoments,I miei Momenti
+Feature.Moments.Label.FeedRecommended,Opzione consigliata
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.FirstCommentInvite,Ancora nessun commento. Scrivi il primo commento!
+Feature.Moments.Label.FollowingCaughtUpTitle,È tutto aggiornato per ora
+Feature.Moments.Label.FollowingEmptyTitle,Segui i creatori per visualizzare i loro Momenti
 Feature.Moments.Label.GameJoinConversion,Conversione di partecipazione al gioco
 Feature.Moments.Label.HowToUseCaptureTitle,Come usare lo strumento Acquisisci
 Feature.Moments.Label.LinkCopied,Link copiato
@@ -3997,11 +4006,20 @@ Feature.PlayerSearchResults.Label.YouAreFollowing,Stai seguendo
 Feature.PlayerSearchResults.Label.YouAreFriends,Sei amico
 Feature.PrivateServers.Action.CreatePrivateServer,Crea server privato
 Feature.PrivateServers.Action.FreeWithBlackbird,Gratis con il piano Plus
+Feature.PrivateServers.Action.Generate,Genera
+Feature.PrivateServers.Description.FriendsAllowed,Chiunque nella tua lista di amici può unirsi senza un invito
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Gli acquisti di server privati non sono supportati in Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,Questo gioco non supporta i server privati.
 Feature.PrivateServers.Heading.ConfigurePrivateServer,Configura server privato
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,Chiunque con questo link può unirsi
+Feature.PrivateServers.Label.FriendsAllowed,Amici consentiti
+Feature.PrivateServers.Label.InThisServer,In questo server
 Feature.PrivateServers.Label.OwnersServer,Il server di {displayName}
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,Genera un collegamento server privato
+Feature.PrivateServers.Label.PrivateServerLink,Collegamento server privato
+Feature.PrivateServers.Label.SearchPeople,Cerca persone
 Feature.PrivateServers.Label.ServerName,Nome server:
+Feature.PrivateServers.Label.WhoCanJoin,Chi può unirsi
 Feature.Profile.Action.AboutThisProfile,Informazioni su questo profilo
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,Accetta amico/a
@@ -4390,7 +4408,7 @@ Feature.SettingsHub.MethodOfAbuse.Other.Title,
 Feature.SettingsHub.MethodOfAbuse.Text.Subtitle,Questa persona ha scritto una parola pesante nella chat di testo
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Subtitle,Questa persona stava urlando a squarciagola
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Title,
-Feature.SettingsHub.PageTitle.InThisServer,In questo server
+Feature.SettingsHub.PageTitle.InThisServer,
 Feature.SettingsHub.Prompt.AllowAccessToCamera,Consentire l'accesso alla fotocamera?
 Feature.SettingsHub.Prompt.AllowAccessToContacts,Consentire l'accesso ai contatti?
 Feature.SettingsHub.Prompt.AndroidWithDeeplink,<b>1. Seleziona Permesso<br />2. Seleziona Microfono<br />3. Consenti a Roblox di accedere al tuo Microfono</b>

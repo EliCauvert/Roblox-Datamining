@@ -1,0 +1,1 @@
+﻿return game:DefineFastString("RedeemedTrialBlueDotLifecycleKey", "redeemed-free-trial-blue-dot")

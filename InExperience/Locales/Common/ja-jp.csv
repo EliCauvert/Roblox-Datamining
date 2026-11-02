@@ -2608,7 +2608,7 @@ Feature.Captures.Control.On,
 Feature.Captures.Control.StartRecordingVideo,
 Feature.Captures.Control.StopRecordingVideo,録画停止
 Feature.Captures.Description.AllowPhotoAccessInfo,切り抜きを保存するには、Robloxがあなたのデバイスのカメラロールにアクセスする必要があります。
-Feature.Captures.Description.DiscoverPostWatch,モーメントで、最高のRobloxゲームプレイを見つけ、投稿し、視聴しましょう。
+Feature.Captures.Description.DiscoverPostWatch,ゲームプレイをモーメントでシェア
 Feature.Captures.Description.MomentProcessing,まもなくモーメントで表示できるようになります
 Feature.Captures.Description.ShareCTA,友達と切り抜きをシェアしましょう！
 Feature.Captures.Label.CaptureCounts,切り抜き {numberOfCaptures} 件
@@ -2643,7 +2643,7 @@ Feature.Captures.Title.VideoCaptureVoiceChatMutedTooltip,ビデオの切り抜�
 Feature.Captures.Toast.CaptureSaved,切り抜きを保存済み
 Feature.Captures.Toast.CaptureSavedToDevice,デバイスに保存しました
 Feature.Captures.Toast.CapturesEnabled,切り抜き機能オン
-Feature.Captures.Toast.CreateMoment2,保存しました！これをモーメントに変えましょう。
+Feature.Captures.Toast.CreateMoment2,保存しました！モーメントを作成しますか？
 Feature.Captures.Toast.MomentProcessing,モーメントの処理中です
 Feature.Captures.Toast.VideoCaptureFailed,ビデオの切り抜きを保存できませんでした
 Feature.Captures.Toast.VideoCaptureInitializationCapturingAlreadyError,
@@ -3769,9 +3769,15 @@ Feature.Moments.Action.ShowDetails,
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,ビデオをトリミング
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Action.ViewOtherFeed,その他のフィードを表示
+Feature.Moments.Action.ViewRecommended,おすすめを表示
+Feature.Moments.Action.ViewTrending,トレンドを表示
 Feature.Moments.Body.EDPMomentIPReportInstructions,このモーメントにおける知的財産権の侵害を報告するには、ゲームの詳細ページに進んでください。
 Feature.Moments.Description.CommunityStandards,発言できることとできないことの詳細については、コミュニティ基準を確認してください。
 Feature.Moments.Description.EmptyCapturesLibrary,ここに切り抜きが表示されます。
+Feature.Moments.Description.FollowingCaughtUpBody,このフィードの新しいモーメントをすべて視聴しました。さらに見るには、フィードを切りかえてください。
+Feature.Moments.Description.FollowingEmptyBodyRecommended,クリエーターを数人フォローして、お気に入りからモーメントを楽しみましょう。クリエーターを見つけるには、おすすめを表示してください。
+Feature.Moments.Description.FollowingEmptyBodyTrending,クリエーターを数人フォローして、お気に入りからモーメントを楽しみましょう。クリエーターを見つけるには、トレンドを表示してください。
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,AIが生成したものです。投稿前にご確認ください。公開された内容に対する責任はご自身にあります。
 Feature.Moments.Description.HowToCaptureStep1,切り抜きが有効になっているバーチャル空間に参加し、ハンバーガーメニューを選択します
 Feature.Moments.Description.HowToCaptureStep2,切り抜き操作を有効化します
@@ -3830,8 +3836,11 @@ Feature.Moments.Label.FeedEndTitle,新着のモーメントはありません
 Feature.Moments.Label.FeedFailedToLoad,ロードできませんでした
 Feature.Moments.Label.FeedFollowing,
 Feature.Moments.Label.FeedMyMoments,マイモーメント
+Feature.Moments.Label.FeedRecommended,
 Feature.Moments.Label.FeedTrending,トレンド
 Feature.Moments.Label.FirstCommentInvite,まだコメントはありません。最初にコメントしましょう！
+Feature.Moments.Label.FollowingCaughtUpTitle,現在、新着のモーメントはありません
+Feature.Moments.Label.FollowingEmptyTitle,クリエーターをフォローして、そのモーメントを視聴しましょう
 Feature.Moments.Label.GameJoinConversion,ゲーム参加コンバージョン
 Feature.Moments.Label.HowToUseCaptureTitle,切り抜きの使い方
 Feature.Moments.Label.LinkCopied,リンクをコピーしました
@@ -4015,11 +4024,20 @@ Feature.PlayerSearchResults.Label.YouAreFollowing,フォローしています
 Feature.PlayerSearchResults.Label.YouAreFriends,友達になりました
 Feature.PrivateServers.Action.CreatePrivateServer,プライベートサーバーを作成
 Feature.PrivateServers.Action.FreeWithBlackbird,Plusで無料
+Feature.PrivateServers.Action.Generate,生成
+Feature.PrivateServers.Description.FriendsAllowed,友達リストにいる人は誰でも招待なしで参加できます
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studioは、プライベートサーバーの購入には対応していません。
 Feature.PrivateServers.Description.VipServersNotSupported,このゲームはプライベートサーバーに対応していません。
 Feature.PrivateServers.Heading.ConfigurePrivateServer,プライベートサーバーの設定
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,このリンクを持っている人は誰でも参加できます
+Feature.PrivateServers.Label.FriendsAllowed,許可された友達
+Feature.PrivateServers.Label.InThisServer,このサーバー上
 Feature.PrivateServers.Label.OwnersServer,{displayName}のサーバー
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,プライベートサーバーリンクを生成する
+Feature.PrivateServers.Label.PrivateServerLink,プライベートサーバーリンク
+Feature.PrivateServers.Label.SearchPeople,
 Feature.PrivateServers.Label.ServerName,サーバー名:
+Feature.PrivateServers.Label.WhoCanJoin,参加できる人
 Feature.Profile.Action.AboutThisProfile,このプロフィールについて
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,友達を承認する
@@ -4408,7 +4426,7 @@ Feature.SettingsHub.MethodOfAbuse.Other.Title,
 Feature.SettingsHub.MethodOfAbuse.Text.Subtitle,この人はテキストチャットで意地悪な言葉を入力してきました
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Subtitle,この人は絶叫していました
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Title,
-Feature.SettingsHub.PageTitle.InThisServer,このサーバー上
+Feature.SettingsHub.PageTitle.InThisServer,
 Feature.SettingsHub.Prompt.AllowAccessToCamera,カメラへのアクセスを許可しますか？
 Feature.SettingsHub.Prompt.AllowAccessToContacts,連絡先へのアクセスを許可しますか？
 Feature.SettingsHub.Prompt.AndroidWithDeeplink,<b>1. 権限を選択<br />2. マイクを選択<br />3. Robloxがあなたのマイクにアクセスすることを許可</b>

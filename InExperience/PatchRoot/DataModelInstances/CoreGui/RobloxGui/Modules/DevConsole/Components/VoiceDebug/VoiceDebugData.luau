@@ -4,7 +4,6 @@ local VoiceDebugFieldMetaModule = require(script.Parent.VoiceDebugFieldMeta)
 local VoiceDebugSourceModule = require(script.Parent.VoiceDebugSource)
 local VoiceChatService = game:GetService("VoiceChatService")
 local Number: number = tonumber(settings():GetFVariable("NewDevConsoleMaxGraphCount")) or 60
-local GetFFlagVoiceDebugPartyVoiceToggleEnabledModule = require(script.Parent.GetFFlagVoiceDebugPartyVoiceToggleEnabled)
 local Default = require(game:GetService("CorePackages").Workspace.Packages.CrossExperienceVoice).CrossExperienceVoiceManager.default
 local InExperience = VoiceDebugSourceModule.InExperience
 local Party = VoiceDebugSourceModule.Party
@@ -24,7 +23,7 @@ local function computeBitrateKbps(p1, p2, p3: number)
 	return if type(p1) == "number" and type(p2) == "number" and type(p3) == "number" and p3 > 0 then if p1 < p2 then nil else (p1 - p2) * 8 / p3 / 1000 else nil
 end
 
-local function computeSubscriptionBitrates(Subscriptions, PrevSubscriptionBytesBySsrc, p1: number)
+local function computeSubscriptionBitrates(Subscriptions, PrevPartySubscriptionBytesBySsrc, p1: number)
 	local t = {}
 	
 	for i, subscription in Subscriptions do
@@ -32,19 +31,19 @@ local function computeSubscriptionBitrates(Subscriptions, PrevSubscriptionBytesB
 		
 		if type(AudioSsrc) == "number" and AudioSsrc == AudioSsrc and AudioSsrc % 1 == 0 then
 			t[AudioSsrc] = true
-			local PrevSubscriptionBytesBySsrcEntry = PrevSubscriptionBytesBySsrc[AudioSsrc]
+			local PrevPartySubscriptionBytesBySsrcEntry = PrevPartySubscriptionBytesBySsrc[AudioSsrc]
 			local IncomingBytes = subscription.incomingBytes
-			local Bytes = PrevSubscriptionBytesBySsrcEntry ~= nil and PrevSubscriptionBytesBySsrcEntry.userId == subscription.userId and PrevSubscriptionBytesBySsrcEntry.bytes or nil
+			local Bytes = PrevPartySubscriptionBytesBySsrcEntry ~= nil and PrevPartySubscriptionBytesBySsrcEntry.userId == subscription.userId and PrevPartySubscriptionBytesBySsrcEntry.bytes or nil
 			subscription.incomingBitrateKbps = if type(IncomingBytes) == "number" and type(Bytes) == "number" and type(p1) == "number" and p1 > 0 then if IncomingBytes < Bytes then nil else (IncomingBytes - Bytes) * 8 / p1 / 1000 else nil
-			PrevSubscriptionBytesBySsrc[AudioSsrc] = {
+			PrevPartySubscriptionBytesBySsrc[AudioSsrc] = {
 				userId = subscription.userId,
 				bytes = subscription.incomingBytes
 			}
 		end
 	end
-	for i in PrevSubscriptionBytesBySsrc do
+	for i in PrevPartySubscriptionBytesBySsrc do
 		if not t[i] then
-			PrevSubscriptionBytesBySsrc[i] = nil
+			PrevPartySubscriptionBytesBySsrc[i] = nil
 		end
 	end
 end
@@ -130,6 +129,7 @@ function VoiceDebugDataModule.new()
 	t._partyStatsData = {}
 	t._partySeries = {}
 	t._partyConnectivityData = {}
+	t._partySubscriptionsData = {}
 	t._partyRemoteOperationsData = {}
 	t._isPartyActive = false
 	t._partyPollTask = nil
@@ -138,6 +138,7 @@ function VoiceDebugDataModule.new()
 	t._prevPartyJitterBufferEmittedCount = nil
 	t._prevPartyIncomingBytes = nil
 	t._prevPartyOutgoingBytes = nil
+	t._prevPartySubscriptionBytesBySsrc = {}
 	t._prevBytesClock = nil
 	t._prevIncomingBytes = nil
 	t._prevOutgoingBytes = nil
@@ -202,8 +203,9 @@ function VoiceDebugDataModule:setSource(_source)
 	end
 end
 
-function VoiceDebugDataModule:getSubscriptions()
-	return self._subscriptionsData.subscriptions or {}
+function VoiceDebugDataModule.getSubscriptions(p3)
+	-- upvalues: Party (copy)
+	return if p3._source == Party then p3._partySubscriptionsData.subscriptions or {} else p3._subscriptionsData.subscriptions or {}
 end
 
 function VoiceDebugDataModule.getRemoteOperations(p3)
@@ -251,7 +253,7 @@ function VoiceDebugDataModule:_updateSeriesValue(p3, p4, Time)
 end
 
 function VoiceDebugDataModule:start()
-	-- upvalues: VoiceChatService (copy), GetFFlagVoiceDebugConsoleV2Module (copy), decorateRemoteOperationsPayload (copy), computeSubscriptionBitrates (copy), VoiceDebugFieldMetaModule (copy), InExperience (copy), GetFFlagVoiceDebugPartyVoiceToggleEnabledModule (copy)
+	-- upvalues: VoiceChatService (copy), GetFFlagVoiceDebugConsoleV2Module (copy), decorateRemoteOperationsPayload (copy), computeSubscriptionBitrates (copy), VoiceDebugFieldMetaModule (copy), InExperience (copy)
 	if VoiceChatService and not self._statsListenerConnection then
 		self._statsListenerConnection = VoiceChatService.VoiceChatStatsCollected:Connect(function()
 			-- upvalues: self (copy), VoiceChatService (upval), GetFFlagVoiceDebugConsoleV2Module (upval), decorateRemoteOperationsPayload (upval), computeSubscriptionBitrates (upval), VoiceDebugFieldMetaModule (upval), InExperience (upval)
@@ -339,7 +341,7 @@ function VoiceDebugDataModule:start()
 		end)
 		self._isRunning = true
 		
-		if GetFFlagVoiceDebugPartyVoiceToggleEnabledModule() then
+		if GetFFlagVoiceDebugConsoleV2Module() then
 			self:_startPartyPipeline()
 		end
 	end
@@ -408,12 +410,12 @@ function VoiceDebugDataModule:_correctPartyAggregateStats(p3: number)
 end
 
 function VoiceDebugDataModule:_startPartyPipeline()
-	-- upvalues: Default (copy), decorateRemoteOperationsPayload (copy), VoiceDebugFieldMetaModule (copy), Party (copy)
+	-- upvalues: Default (copy), decorateRemoteOperationsPayload (copy), computeSubscriptionBitrates (copy), VoiceDebugFieldMetaModule (copy), Party (copy)
 	if not self._partyPollTask then
 		self._partyPollGeneration += 1
 		local PartyPollGeneration = self._partyPollGeneration
 		self._partyPollTask = task.spawn(function()
-			-- upvalues: self (copy), PartyPollGeneration (copy), Default (upval), decorateRemoteOperationsPayload (upval), VoiceDebugFieldMetaModule (upval), Party (upval)
+			-- upvalues: self (copy), PartyPollGeneration (copy), Default (upval), decorateRemoteOperationsPayload (upval), computeSubscriptionBitrates (upval), VoiceDebugFieldMetaModule (upval), Party (upval)
 			local v1: number? = nil
 			while self._isRunning and PartyPollGeneration == self._partyPollGeneration do
 				local v2 = false
@@ -436,10 +438,12 @@ function VoiceDebugDataModule:_startPartyPipeline()
 						v1 = ClockTime1
 						self._partyStatsData = v4.stats or {}
 						self._partyConnectivityData = v4.connectivity or {}
+						self._partySubscriptionsData = v4.subscriptions or {}
 						local RemoteOperations = v4.remoteOperations or {}
 						self._partyRemoteOperationsData = RemoteOperations.nativeNowSeconds and decorateRemoteOperationsPayload(RemoteOperations) or {}
 						self:_correctPartyJitterBufferDelay()
 						self:_correctPartyAggregateStats(ClockTimeDelta)
+						computeSubscriptionBitrates(self._partySubscriptionsData.subscriptions or {}, self._prevPartySubscriptionBytesBySsrc, ClockTimeDelta)
 						local Timestamp = os.time()
 						
 						for i, value in self._partyStatsData do
@@ -485,6 +489,7 @@ function VoiceDebugDataModule:stop()
 	self._prevPartyIncomingPacketsLost = nil
 	self._prevPartyJitterBufferDelaySeconds = nil
 	self._prevPartyJitterBufferEmittedCount = nil
+	self._prevPartySubscriptionBytesBySsrc = {}
 end
 
 VoiceDebugDataModule._parseCodecFromSdp = parseCodecFromSdp

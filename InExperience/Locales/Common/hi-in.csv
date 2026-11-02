@@ -2589,7 +2589,7 @@ Feature.Captures.Control.On,चालू है
 Feature.Captures.Control.StartRecordingVideo,
 Feature.Captures.Control.StopRecordingVideo,रिकॉर्डिंग रोकें
 Feature.Captures.Description.AllowPhotoAccessInfo,"अपने स्क्रीनशॉट सेव करने के लिए, Roblox को आपके डिवाइस के कैमरा रोल का ऐक्सेस चाहिए."
-Feature.Captures.Description.DiscoverPostWatch,"Moments पर शानदार Roblox गेमप्ले खोजें, पोस्ट करें और देखें."
+Feature.Captures.Description.DiscoverPostWatch,Moments पर अपने गेमप्ले शेयर करें
 Feature.Captures.Description.MomentProcessing,आप इसे जल्द ही Moments में देख सकेंगे
 Feature.Captures.Description.ShareCTA,अपने कैप्चर फ़्रेंड्स के साथ शेयर करें!
 Feature.Captures.Label.CaptureCounts,{numberOfCaptures} कैप्चर
@@ -2624,7 +2624,7 @@ Feature.Captures.Title.VideoCaptureVoiceChatMutedTooltip,कैप्चर क�
 Feature.Captures.Toast.CaptureSaved,स्क्रीनशॉट सेव किया गया
 Feature.Captures.Toast.CaptureSavedToDevice,डिवाइस पर सेव किया गया
 Feature.Captures.Toast.CapturesEnabled,कैप्चर फ़ीचर चालू है
-Feature.Captures.Toast.CreateMoment2,सेव हो गया! इसे Moment में बदलें.
+Feature.Captures.Toast.CreateMoment2,सेव हो गया! कोई Moment क्रिएट करना है?
 Feature.Captures.Toast.MomentProcessing,हम आपके Moment को प्रोसेस कर रहे हैं
 Feature.Captures.Toast.VideoCaptureFailed,वीडियो कैप्चर सेव नहीं किया जा सका.
 Feature.Captures.Toast.VideoCaptureInitializationCapturingAlreadyError,
@@ -2684,6 +2684,8 @@ Feature.Catalog.Header.InvalidOutfit,आउटफ़िट अमान्य �
 Feature.Catalog.Header.PostAvatar,अवतार पोस्ट करें
 Feature.Catalog.Heading.AvailableItems,उपलब्ध आइटम
 Feature.Catalog.Heading.BuyItem,
+Feature.Catalog.Heading.DescriptionLinkGoToMarketplace,यह आपको मार्केटप्लेस पर ले जाएगा
+Feature.Catalog.Heading.DescriptionLinkResetSearch,इससे आपकी मौजूदा सर्च रीसेट हो जाएगी
 Feature.Catalog.Heading.FreeItemConfirmation,आइटम पाएँ
 Feature.Catalog.Heading.GoToExperience,एक्सपीरिएंस जॉइन करना है?
 Feature.Catalog.Heading.HoldingPolicy,होल्डिंग पॉलिसी
@@ -2759,6 +2761,12 @@ Feature.Catalog.Label.CreatorName,क्रिएटर का नाम
 Feature.Catalog.Label.CurrentBalance,मौजूदा बैलेंस:
 Feature.Catalog.Label.CustomizeAvatar,अवतार कस्टमाइज़ करें
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,"अगर आप डिलीट कर दें, तो आप इस ऐक्शन को पहले जैसा नहीं कर सकते."
+Feature.Catalog.Label.DescriptionLinkInvalid,लिंक अमान्य है
+Feature.Catalog.Label.DescriptionLinkSearchMarketplace,मार्केटप्लेस सर्च करें
+Feature.Catalog.Label.DescriptionLinkViewAsset,ऐसेट देखें
+Feature.Catalog.Label.DescriptionLinkViewBundle,बंडल देखें
+Feature.Catalog.Label.DescriptionLinkViewCommunity,कम्यूनिटी देखें
+Feature.Catalog.Label.DescriptionLinkViewCommunityStore,कम्यूनिटी स्टोर
 Feature.Catalog.Label.Details,
 Feature.Catalog.Label.DynamicHeads,
 Feature.Catalog.Label.Emissive,एमिसिव
@@ -3544,7 +3552,7 @@ Feature.Groups.Action.NotNow,
 Feature.Groups.Action.RemovePrimary,प्राइमरी कम्यूनिटी हटाएँ
 Feature.Groups.Action.SeeAll,
 Feature.Groups.Action.Unfollow,अनफ़ॉलो करें
-Feature.Groups.Action.ViewGroup,कम्यूनिटी देखें
+Feature.Groups.Action.ViewGroup,
 Feature.Groups.Description.JoinGroupPending,आपकी जॉइन करने की रिक्वेस्ट को कम्यूनिटी की ओर से रिव्यू किया जाना बाकी है.
 Feature.Groups.Description.NotEligibleToJoin,आपका अकाउंट इस कम्यूनिटी में शामिल नहीं हो सकता.
 Feature.Groups.Description.PremiumMaxGroups,आपने कम्यूनिटी जॉइन करने की लिमिट पूरी कर ली है.
@@ -3989,11 +3997,20 @@ Feature.PlayerSearchResults.Label.YouAreFollowing,आप इन्हें फ�
 Feature.PlayerSearchResults.Label.YouAreFriends,आप फ़्रेंड्स हैं
 Feature.PrivateServers.Action.CreatePrivateServer,प्राइवेट सर्वर क्रिएट करें
 Feature.PrivateServers.Action.FreeWithBlackbird,Plus सब्सक्रिप्शन के साथ फ़्री
+Feature.PrivateServers.Action.Generate,जेनरेट करें
+Feature.PrivateServers.Description.FriendsAllowed,आपके फ़्रेंड्स की लिस्ट में शामिल कोई भी व्यक्ति बिना इनवाइट के जॉइन कर सकता है
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio में प्राइवेट सर्वर नहीं खरीदे जा सकते.
 Feature.PrivateServers.Description.VipServersNotSupported,इस गेम के लिए प्राइवेट सर्वर इस्तेमाल नहीं किए जा सकते.
 Feature.PrivateServers.Heading.ConfigurePrivateServer,प्राइवेट सर्वर कॉन्फ़िगर करें
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,इस लिंक वाला कोई भी व्यक्ति जॉइन कर सकता है
+Feature.PrivateServers.Label.FriendsAllowed,फ़्रेंड्स की परमिशन है
+Feature.PrivateServers.Label.InThisServer,इस सर्वर में
 Feature.PrivateServers.Label.OwnersServer,{displayName} का सर्वर
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,प्राइवेट सर्वर लिंक जेनरेट करें
+Feature.PrivateServers.Label.PrivateServerLink,प्राइवेट सर्वर लिंक
+Feature.PrivateServers.Label.SearchPeople,
 Feature.PrivateServers.Label.ServerName,सर्वर का नाम:
+Feature.PrivateServers.Label.WhoCanJoin,कौन-कौन जॉइन कर सकता है
 Feature.Profile.Action.AboutThisProfile,इस प्रोफ़ाइल के बारे में जानकारी
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4382,7 +4399,7 @@ Feature.SettingsHub.MethodOfAbuse.Other.Title,
 Feature.SettingsHub.MethodOfAbuse.Text.Subtitle,इस व्यक्ति ने टेक्स्ट चैट में कोई अपशब्द टाइप किया था
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Subtitle,यह व्यक्ति बहुत तेज़ आवाज़ में चिल्ला रहा था
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Title,
-Feature.SettingsHub.PageTitle.InThisServer,इस सर्वर में
+Feature.SettingsHub.PageTitle.InThisServer,
 Feature.SettingsHub.Prompt.AllowAccessToCamera,कैमरे का ऐक्सेस देना है?
 Feature.SettingsHub.Prompt.AllowAccessToContacts,कॉन्टैक्ट्स का ऐक्सेस देना है?
 Feature.SettingsHub.Prompt.AndroidWithDeeplink,<b>1. परमिशन चुनें<br />2. माइक्रोफ़ोन चुनें<br />3. Roblox को अपना माइक्रोफ़ोन ऐक्सेस करने की अनुमति दें</b>

@@ -2544,7 +2544,7 @@ Feature.Captures.Control.On,
 Feature.Captures.Control.StartRecordingVideo,
 Feature.Captures.Control.StopRecordingVideo,إيقاف التسجيل
 Feature.Captures.Description.AllowPhotoAccessInfo,يحتاج Roblox إلى الوصول إلى معرض الكاميرا بجهازك لحفظ اللقطات التي تصورها.
-Feature.Captures.Description.DiscoverPostWatch,اكتشف وانشر وشاهد أساليب لعب ملحمية على منصّة Roblox في اللحظات.
+Feature.Captures.Description.DiscoverPostWatch,شارك أسلوب لعبك في اللحظات
 Feature.Captures.Description.MomentProcessing,يمكنك عرضها في اللحظات قريبًا
 Feature.Captures.Description.ShareCTA,شارك لقطاتك مع الأصدقاء!
 Feature.Captures.Label.CaptureCounts,{numberOfCaptures} من اللقطات
@@ -2579,7 +2579,7 @@ Feature.Captures.Title.VideoCaptureVoiceChatMutedTooltip,يتم كتم صوت ا
 Feature.Captures.Toast.CaptureSaved,تم حفظ اللقطة
 Feature.Captures.Toast.CaptureSavedToDevice,تم حفظها على الجهاز
 Feature.Captures.Toast.CapturesEnabled,تمكين اللقطات
-Feature.Captures.Toast.CreateMoment2,تم الحفظ! حوّل هذه اللقطة إلى لحظة رائعة.
+Feature.Captures.Toast.CreateMoment2,تم الحفظ! هل تريد إنشاء لحظة؟
 Feature.Captures.Toast.MomentProcessing,نعمل حاليًا على معالجة لحظتك
 Feature.Captures.Toast.VideoCaptureFailed,تعذَّر حفظ مقطع الفيديو الذي تم التقاطه.
 Feature.Captures.Toast.VideoCaptureInitializationCapturingAlreadyError,جارٍ التقاط فيديو بالفعل
@@ -3952,11 +3952,20 @@ Feature.PlayerSearchResults.Label.YouAreFollowing,أنت تتابع
 Feature.PlayerSearchResults.Label.YouAreFriends,صرت صديقًا
 Feature.PrivateServers.Action.CreatePrivateServer,إنشاء خادم خاص
 Feature.PrivateServers.Action.FreeWithBlackbird,مجانًا مع Plus
+Feature.PrivateServers.Action.Generate,
+Feature.PrivateServers.Description.FriendsAllowed,يمكن لأي شخص في قائمة أصدقائك الانضمام دون دعوة
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,عمليات شراء الخوادم الخاصة غير مدعومة في Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,لا تدعم هذه اللعبة الخوادم الخاصة.
 Feature.PrivateServers.Heading.ConfigurePrivateServer,تهيئة الخادم الخاص
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,يمكن لأي شخص أن ينضم بهذا الرابط
+Feature.PrivateServers.Label.FriendsAllowed,السماح للأصدقاء
+Feature.PrivateServers.Label.InThisServer,في هذا الخادم
 Feature.PrivateServers.Label.OwnersServer,خادم {displayName}
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,إنشاء رابط خادم خاص
+Feature.PrivateServers.Label.PrivateServerLink,رابط الخادم الخاص
+Feature.PrivateServers.Label.SearchPeople,
 Feature.PrivateServers.Label.ServerName,اسم الخادم:
+Feature.PrivateServers.Label.WhoCanJoin,من يمكنه الانضمام
 Feature.Profile.Action.AboutThisProfile,حول هذا الملف الشخصي
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4345,7 +4354,7 @@ Feature.SettingsHub.MethodOfAbuse.Other.Title,
 Feature.SettingsHub.MethodOfAbuse.Text.Subtitle,هذا الشخص كتب في الدردشة عبارة سيئة
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Subtitle,كان هذا الشخص يتحدّث بصوت عالٍ للغاية
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Title,
-Feature.SettingsHub.PageTitle.InThisServer,في هذا الخادم
+Feature.SettingsHub.PageTitle.InThisServer,
 Feature.SettingsHub.Prompt.AllowAccessToCamera,هل تريد السماح بالوصول إلى الكاميرا؟
 Feature.SettingsHub.Prompt.AllowAccessToContacts,هل تريد السماح بالوصول إلى جهات الاتصال؟
 Feature.SettingsHub.Prompt.AndroidWithDeeplink,<b>1. حدد الإذن<br />2. اختر ميكروفون<br />3. السماح لـ Roblox بالوصول إلى ميكروفونك</b>

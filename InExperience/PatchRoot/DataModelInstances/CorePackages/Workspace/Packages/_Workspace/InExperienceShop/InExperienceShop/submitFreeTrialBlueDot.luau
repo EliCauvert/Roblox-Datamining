@@ -5,14 +5,21 @@ local NotificationsOrchestratorModule = require(Parent.NotificationsOrchestrator
 local InExperienceOffersModule = require(Parent.InExperienceOffers)
 local GetInExperienceShopStoreModule = require(InExperienceShop.Stores.getInExperienceShopStore)
 local GetShopGlobalIconStoreModule = require(InExperienceShop.Stores.GetShopGlobalIconStore)
+local FIntMaxTrialBlueDotImpressionsModule = require(InExperienceShop.Flags.FIntMaxTrialBlueDotImpressions)
+local FStringAvailableTrialBlueDotLifecycleKeyModule = require(InExperienceShop.Flags.FStringAvailableTrialBlueDotLifecycleKey)
+local FStringRedeemedTrialBlueDotLifecycleKeyModule = require(InExperienceShop.Flags.FStringRedeemedTrialBlueDotLifecycleKey)
+local FIntTrialBlueDotCooldownSecondsModule = require(InExperienceShop.Flags.FIntTrialBlueDotCooldownSeconds)
 local FFlagEnableExperienceShopGlobalIconModule = require(InExperienceShop.Flags.FFlagEnableExperienceShopGlobalIcon)
 local FFlagTrialNotificationBlueDotOnStudioModule = require(InExperienceShop.Flags.FFlagTrialNotificationBlueDotOnStudio)
+local FFlagEnableRedeemedFreeTrialBlueDotModule = require(InExperienceShop.Flags.FFlagEnableRedeemedFreeTrialBlueDot)
+local HasRedeemedTrialWithinWindowModule = require(InExperienceShop.Utils.hasRedeemedTrialWithinWindow)
 local _ = require(InExperienceShop.Types)
-local MaxTrialBlueDotImpressions = game:DefineFastInt("MaxTrialBlueDotImpressions", 5)
-local TrialBlueDotLifecycleKey = game:DefineFastString("TrialBlueDotLifecycleKey", "free-trial-blue-dot")
-local TrialBlueDotCooldownSeconds = game:DefineFastInt("TrialBlueDotCooldownSeconds", 86400)
 
 local function _(p1)
+	return p1
+end
+
+local _ = function(p1)
 	return p1
 end
 
@@ -22,49 +29,40 @@ local Signal, Signal2 = SignalsModule.createSignal(nil)
 local Handle = nil
 local Handle1 = nil
 
-local _ = function(p1): boolean
-	for _, value in p1.available do
-		if value then
-			return true
-		end
-	end
-	for _, value1 in p1.active do
-		if value1 then
-			return true
-		end
-	end
-	return false
+local _ = function(p1)
+	-- upvalues: FFlagEnableRedeemedFreeTrialBlueDotModule (copy), HasRedeemedTrialWithinWindowModule (copy)
+	return if next(p1.available) == nil then if FFlagEnableRedeemedFreeTrialBlueDotModule and HasRedeemedTrialWithinWindowModule(p1.redeemed) then "redeemed" else nil else "available"
 end
 
-local function chooseSlot(p2)
+local function chooseSlot(p1)
 	-- upvalues: InExperienceOffersModule (copy), FFlagEnableExperienceShopGlobalIconModule (copy), GetShopGlobalIconStoreModule (copy), GetInExperienceShopStoreModule (copy)
-	local IsShopAvailable = InExperienceOffersModule.getOffersStore(false).getIsShopAvailable(p2)
+	local IsShopAvailable = InExperienceOffersModule.getOffersStore(false).getIsShopAvailable(p1)
 	
 	if not FFlagEnableExperienceShopGlobalIconModule then
 		return if IsShopAvailable then "HamburgerBlueDot" else nil
-	elseif GetShopGlobalIconStoreModule(false).getEnabled(p2) then
+	elseif GetShopGlobalIconStoreModule(false).getEnabled(p1) then
 		return "ShopIconBlueDot"
 	else
 		local InExperienceShopStoreModule = GetInExperienceShopStoreModule(false)
 		
-		return if InExperienceShopStoreModule.getLoading(p2) or InExperienceShopStoreModule.getGlobalIconBackendEnabled(p2) then nil elseif IsShopAvailable then "HamburgerBlueDot" else nil
+		return if InExperienceShopStoreModule.getLoading(p1) or InExperienceShopStoreModule.getGlobalIconBackendEnabled(p1) then nil elseif IsShopAvailable then "HamburgerBlueDot" else nil
 	end
 end
 
-local function submitBlueDot(SlotId)
-	-- upvalues: NotificationsOrchestratorModule (copy), TrialBlueDotLifecycleKey (copy), MaxTrialBlueDotImpressions (copy), TrialBlueDotCooldownSeconds (copy), FFlagTrialNotificationBlueDotOnStudioModule (copy)
+local function submitBlueDot(SlotId, Redeemed)
+	-- upvalues: NotificationsOrchestratorModule (copy), FStringRedeemedTrialBlueDotLifecycleKeyModule (copy), FStringAvailableTrialBlueDotLifecycleKeyModule (copy), FIntMaxTrialBlueDotImpressionsModule (copy), FIntTrialBlueDotCooldownSecondsModule (copy), FFlagTrialNotificationBlueDotOnStudioModule (copy)
 	local Lifecycle = NotificationsOrchestratorModule.getSlotConfig(SlotId).lifecycle
 	
 	return NotificationsOrchestratorModule.submit({
 		priority = 0,
 		source = "GamePassFreeTrialBlueDot",
 		slotId = SlotId,
-		lifecycleKey = TrialBlueDotLifecycleKey,
+		lifecycleKey = if Redeemed == "redeemed" then FStringRedeemedTrialBlueDotLifecycleKeyModule else FStringAvailableTrialBlueDotLifecycleKeyModule,
 		lifecyclePolicy = {
 			frequency = {
 				window = "forever",
-				maxImpressions = MaxTrialBlueDotImpressions,
-				cooldownSeconds = TrialBlueDotCooldownSeconds
+				maxImpressions = FIntMaxTrialBlueDotImpressionsModule,
+				cooldownSeconds = FIntTrialBlueDotCooldownSecondsModule
 			},
 			visibility = if Lifecycle == nil then nil else Lifecycle.visibility
 		},
@@ -73,10 +71,10 @@ local function submitBlueDot(SlotId)
 	})
 end
 
-local _ = function(Slot, p2): boolean
+local _ = function(Slot, p1): boolean
 	-- upvalues: Signal (copy), NotificationsOrchestratorModule (copy)
-	local SignalResult = Signal(p2)
-	local v2 = NotificationsOrchestratorModule.getActiveForSlot(Slot)(p2)
+	local SignalResult = Signal(p1)
+	local v2 = NotificationsOrchestratorModule.getActiveForSlot(Slot)(p1)
 	
 	return SignalResult ~= nil and (SignalResult.slotId == Slot and (v2 ~= nil and (v2.payload.slot == Slot and v2.handle == SignalResult.handle)))
 end
@@ -97,30 +95,30 @@ local _ = function()
 	return nil
 end
 
-local function isTrialBlueDotShowing(p2): boolean
+local function isTrialBlueDotShowing(p1): boolean
 	-- upvalues: Signal (copy), NotificationsOrchestratorModule (copy)
-	local SignalResult = Signal(p2)
+	local SignalResult = Signal(p1)
 	
 	if SignalResult == nil then
 		return false
 	else
 		local SlotId = SignalResult.slotId
-		local SignalResult1 = Signal(p2)
-		local v2 = NotificationsOrchestratorModule.getActiveForSlot(SlotId)(p2)
+		local SignalResult1 = Signal(p1)
+		local v2 = NotificationsOrchestratorModule.getActiveForSlot(SlotId)(p1)
 		
 		return SignalResult1 ~= nil and (SignalResult1.slotId == SlotId and (v2 ~= nil and (v2.payload.slot == SlotId and v2.handle == SignalResult1.handle)))
 	end
 end
 
-local _ = function(Slot, p2): boolean
+local _ = function(Slot, p1): boolean
 	-- upvalues: Signal (copy), NotificationsOrchestratorModule (copy)
-	local SignalResult = Signal(p2)
-	local v2 = NotificationsOrchestratorModule.getActiveForSlot(Slot)(p2)
+	local SignalResult = Signal(p1)
+	local v2 = NotificationsOrchestratorModule.getActiveForSlot(Slot)(p1)
 	
 	return SignalResult ~= nil and (SignalResult.slotId == Slot and (v2 ~= nil and (v2.payload.slot == Slot and v2.handle == SignalResult.handle)))
 end
 
-local function report(p2)
+local function report(p1)
 	-- upvalues: Signal (copy), NotificationsOrchestratorModule (copy), Handle (ref), Handle1 (ref)
 	local SignalResult = Signal(false)
 	local SignalResult1 = Signal(false)
@@ -140,57 +138,43 @@ local function report(p2)
 		break
 	until true
 	if SignalResult == nil or Handle2 == nil then return end
-	if p2.type == "mounted" then
+	if p1.type == "mounted" then
 		if Handle == Handle2 then return end
 		Handle = Handle2
-	elseif p2.type == "viewed" then
+	elseif p1.type == "viewed" then
 		if Handle1 == Handle2 then return end
 		Handle1 = Handle2
 	end
-	NotificationsOrchestratorModule.report(SignalResult.slotId, Handle2, p2)
+	NotificationsOrchestratorModule.report(SignalResult.slotId, Handle2, p1)
 end
 
 local Flag = false
 
 local _ = function()
-	-- upvalues: v1 (ref), GetInExperienceShopStoreModule (copy), Effect (ref), SignalsModule (copy), Flag (ref), chooseSlot (copy), Signal2 (copy), submitBlueDot (copy), isTrialBlueDotShowing (copy)
+	-- upvalues: v1 (ref), GetInExperienceShopStoreModule (copy), Effect (ref), SignalsModule (copy), Flag (ref), FFlagEnableRedeemedFreeTrialBlueDotModule (copy), HasRedeemedTrialWithinWindowModule (copy), chooseSlot (copy), Signal2 (copy), submitBlueDot (copy), isTrialBlueDotShowing (copy)
 	local v2 = v1
 	
 	if v2 == nil then
 		local v3 = false
 		local InExperienceShopStoreModule = GetInExperienceShopStoreModule(false)
-		Effect = SignalsModule.createEffect(function(p2)
-			-- upvalues: InExperienceShopStoreModule (copy), Flag (upval), v3 (ref), chooseSlot (upval), Signal2 (upval), submitBlueDot (upval)
-			local TrialAvailabilities = InExperienceShopStoreModule.getTrialAvailabilities(p2)
+		Effect = SignalsModule.createEffect(function(p1)
+			-- upvalues: InExperienceShopStoreModule (copy), Flag (upval), v3 (ref), FFlagEnableRedeemedFreeTrialBlueDotModule (upval), HasRedeemedTrialWithinWindowModule (upval), chooseSlot (upval), Signal2 (upval), submitBlueDot (upval)
+			local TrialAvailabilities = InExperienceShopStoreModule.getTrialAvailabilities(p1)
 			
-			if not Flag and not v3 then
-				local Flag = nil
-				for _, value in TrialAvailabilities.available do
-					if value then
-						Flag = true
-						if Flag then
-							local SlotId = chooseSlot(p2)
-							
-							if SlotId ~= nil then
-								v3 = true
-								Signal2({ slotId = SlotId, handle = submitBlueDot(SlotId) })
-								
-								return
-							end
-							return
-						end
-					else
-						continue
-					end
-				end
-				Flag = false
+			if Flag or v3 then return end
+			local Redeemed = if next(TrialAvailabilities.available) == nil then if FFlagEnableRedeemedFreeTrialBlueDotModule and HasRedeemedTrialWithinWindowModule(TrialAvailabilities.redeemed) then "redeemed" else nil else "available"
+			
+			if Redeemed == nil then return end
+			local SlotId = chooseSlot(p1)
+			
+			if SlotId ~= nil then
+				v3 = true
+				Signal2({
+					slotId = SlotId,
+					handle = submitBlueDot(SlotId, Redeemed)
+				})
 				
-				for _, value1 in TrialAvailabilities.active do
-					if value1 then
-						Flag = true
-						break
-					end
-				end
+				return
 			end
 		end)
 		v1 = isTrialBlueDotShowing
@@ -215,67 +199,53 @@ return (setmetatable({
 		Flag = true
 		report({ type = "dismissed", reason = "activated" })
 	end,
-	isHamburgerBlueDotShowing = function(p2): boolean
+	isHamburgerBlueDotShowing = function(p1): boolean
 		-- upvalues: Signal (copy), NotificationsOrchestratorModule (copy)
-		local SignalResult = Signal(p2)
-		local v4 = NotificationsOrchestratorModule.getActiveForSlot("HamburgerBlueDot")(p2)
+		local SignalResult = Signal(p1)
+		local v2 = NotificationsOrchestratorModule.getActiveForSlot("HamburgerBlueDot")(p1)
 		
-		return SignalResult ~= nil and (SignalResult.slotId == "HamburgerBlueDot" and (v4 ~= nil and (v4.payload.slot == "HamburgerBlueDot" and v4.handle == SignalResult.handle)))
+		return SignalResult ~= nil and (SignalResult.slotId == "HamburgerBlueDot" and (v2 ~= nil and (v2.payload.slot == "HamburgerBlueDot" and v2.handle == SignalResult.handle)))
 	end,
-	isShopIconBlueDotShowing = function(p2): boolean
+	isShopIconBlueDotShowing = function(p1): boolean
 		-- upvalues: Signal (copy), NotificationsOrchestratorModule (copy)
-		local SignalResult = Signal(p2)
-		local v4 = NotificationsOrchestratorModule.getActiveForSlot("ShopIconBlueDot")(p2)
+		local SignalResult = Signal(p1)
+		local v2 = NotificationsOrchestratorModule.getActiveForSlot("ShopIconBlueDot")(p1)
 		
-		return SignalResult ~= nil and (SignalResult.slotId == "ShopIconBlueDot" and (v4 ~= nil and (v4.payload.slot == "ShopIconBlueDot" and v4.handle == SignalResult.handle)))
+		return SignalResult ~= nil and (SignalResult.slotId == "ShopIconBlueDot" and (v2 ~= nil and (v2.payload.slot == "ShopIconBlueDot" and v2.handle == SignalResult.handle)))
 	end
 }, {
 	__call = function(_)
-		-- upvalues: v1 (ref), GetInExperienceShopStoreModule (copy), Effect (ref), SignalsModule (copy), Flag (ref), chooseSlot (copy), Signal2 (copy), submitBlueDot (copy), isTrialBlueDotShowing (copy)
-		local v4 = v1
+		-- upvalues: v1 (ref), GetInExperienceShopStoreModule (copy), Effect (ref), SignalsModule (copy), Flag (ref), FFlagEnableRedeemedFreeTrialBlueDotModule (copy), HasRedeemedTrialWithinWindowModule (copy), chooseSlot (copy), Signal2 (copy), submitBlueDot (copy), isTrialBlueDotShowing (copy)
+		local v2 = v1
 		
-		if v4 == nil then
-			local v5 = false
+		if v2 == nil then
+			local v3 = false
 			local InExperienceShopStoreModule = GetInExperienceShopStoreModule(false)
-			Effect = SignalsModule.createEffect(function(p2)
-				-- upvalues: InExperienceShopStoreModule (copy), Flag (upval), v5 (ref), chooseSlot (upval), Signal2 (upval), submitBlueDot (upval)
-				local TrialAvailabilities = InExperienceShopStoreModule.getTrialAvailabilities(p2)
+			Effect = SignalsModule.createEffect(function(p1)
+				-- upvalues: InExperienceShopStoreModule (copy), Flag (upval), v3 (ref), FFlagEnableRedeemedFreeTrialBlueDotModule (upval), HasRedeemedTrialWithinWindowModule (upval), chooseSlot (upval), Signal2 (upval), submitBlueDot (upval)
+				local TrialAvailabilities = InExperienceShopStoreModule.getTrialAvailabilities(p1)
 				
-				if not Flag and not v5 then
-					local Flag = nil
-					for _, value in TrialAvailabilities.available do
-						if value then
-							Flag = true
-							if Flag then
-								local SlotId = chooseSlot(p2)
-								
-								if SlotId ~= nil then
-									v5 = true
-									Signal2({ slotId = SlotId, handle = submitBlueDot(SlotId) })
-									
-									return
-								end
-								return
-							end
-						else
-							continue
-						end
-					end
-					Flag = false
+				if Flag or v3 then return end
+				local Redeemed = if next(TrialAvailabilities.available) == nil then if FFlagEnableRedeemedFreeTrialBlueDotModule and HasRedeemedTrialWithinWindowModule(TrialAvailabilities.redeemed) then "redeemed" else nil else "available"
+				
+				if Redeemed == nil then return end
+				local SlotId = chooseSlot(p1)
+				
+				if SlotId ~= nil then
+					v3 = true
+					Signal2({
+						slotId = SlotId,
+						handle = submitBlueDot(SlotId, Redeemed)
+					})
 					
-					for _, value1 in TrialAvailabilities.active do
-						if value1 then
-							Flag = true
-							break
-						end
-					end
+					return
 				end
 			end)
 			v1 = isTrialBlueDotShowing
 			
 			return isTrialBlueDotShowing
 		else
-			return v4
+			return v2
 		end
 	end
 }))
