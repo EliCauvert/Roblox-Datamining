@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "a3764d87-a712-1b88-796e-469adbf4182f")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "9c5b8414-e134-3ef2-55db-6505f79a6a49")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 174528, e => {
@@ -119,8 +119,8 @@
             }
         }
     }
-    var y = e.i(968892),
-        b = e.i(973047),
+    var b = e.i(968892),
+        y = e.i(973047),
         w = e.i(79187),
         P = e.i(253738),
         x = e.i(611043),
@@ -229,8 +229,8 @@
                 }) : i(r)
             }, [o, x]);
             return (0, t.jsxs)(t.Fragment, {
-                children: [(0, t.jsxs)(b.DialogBody, {
-                    children: [(0, t.jsx)(b.DialogTitle, {
+                children: [(0, t.jsxs)(y.DialogBody, {
+                    children: [(0, t.jsx)(y.DialogTitle, {
                         className: "text-heading-small",
                         children: s.isGpcDetected ? o(k) || "" : o("Title.NoGpcDetected") || ""
                     }), (0, t.jsx)("div", {
@@ -285,9 +285,9 @@
                             return g ? C(t, w) : c(t, e.tags, e.args)
                         })()
                     })]
-                }), (0, t.jsx)(b.DialogFooter, {
+                }), (0, t.jsx)(y.DialogFooter, {
                     className: "width-full",
-                    children: (0, t.jsx)(y.Button, {
+                    children: (0, t.jsx)(b.Button, {
                         className: "width-full",
                         size: "Large",
                         variant: "Emphasis",
@@ -305,7 +305,7 @@
                 translateHTML: o
             } = (0, w.useTranslation)(), c = (0, w.useLocalization)(), l = (0, n.useCookieConsentContext)().preferences, d = (0, a.useRef)(null), p = (0, a.useRef)(!1), [g, m] = (0, a.useState)(!1), {
                 classes: {
-                    container: y
+                    container: b
                 }
             } = G(), {
                 classes: P
@@ -457,7 +457,7 @@
                     color: "secondary",
                     component: "span",
                     children: [q, (0, t.jsx)("img", {
-                        src: "".concat("https://assets.create.roblox.com/f58fdfef2d08293e832c6df19c04db927411e75a/assets", "/navigation/privacy_icon.png"),
+                        src: "".concat("https://assets.create.roblox.com/4c6d6645455ec456f9d70bff2c4fd661126346b1/assets", "/navigation/privacy_icon.png"),
                         alt: "",
                         style: {
                             marginLeft: "8px",
@@ -471,22 +471,22 @@
             return (0, t.jsxs)(t.Fragment, {
                 children: [r ? L : (0, t.jsx)(C.Grid, {
                     classes: {
-                        root: y
+                        root: b
                     },
                     container: !0,
                     justifyContent: "center",
                     item: !0,
                     children: L
-                }), (0, t.jsx)(b.Dialog, {
+                }), (0, t.jsx)(y.Dialog, {
                     open: g,
                     onOpenChange: O,
                     size: "Small",
                     isModal: !0,
                     hasCloseAffordance: !0,
                     closeLabel: i("Action.Close"),
-                    children: (0, t.jsx)(b.DialogContent, {
-                        children: F ? (0, t.jsxs)(b.DialogBody, {
-                            children: [(0, t.jsx)(b.DialogTitle, {
+                    children: (0, t.jsx)(y.DialogContent, {
+                        children: F ? (0, t.jsxs)(y.DialogBody, {
+                            children: [(0, t.jsx)(y.DialogTitle, {
                                 className: "text-heading-small",
                                 children: i(k) || ""
                             }), (0, t.jsx)("div", {
@@ -958,12 +958,12 @@
             hasCloseAffordance: g,
             closeLabel: m,
             hasDescription: v
-        } = o(), y = (0, a.default)("foundation-web-dialog-overlay padding-medium foundation-web-portal-zindex", f && "bg-common-backdrop", l), b = (0, a.default)("relative radius-large bg-surface-100 stroke-muted stroke-standard foundation-web-dialog-content shadow-transient-high", i);
+        } = o(), b = (0, a.default)("foundation-web-dialog-overlay padding-medium foundation-web-portal-zindex", f && "bg-common-backdrop", l), y = (0, a.default)("relative radius-large bg-surface-100 stroke-muted stroke-standard foundation-web-dialog-content shadow-transient-high", i);
         return n.default.createElement(r.Portal, null, n.default.createElement(r.Overlay, {
-            className: y,
+            className: b,
             style: u
         }, n.default.createElement(r.Content, {
-            className: b,
+            className: y,
             "data-size": h,
             style: c,
             onOpenAutoFocus: d,
@@ -1028,5 +1028,5 @@
     g.displayName = "DialogFooter", e.s(["Dialog", 0, d, "DialogBody", 0, h, "DialogContent", 0, p, "DialogFooter", 0, g, "DialogTitle", 0, f])
 }]);
 
-//# debugId=a3764d87-a712-1b88-796e-469adbf4182f
-//# sourceMappingURL=2_xrc0b6aotod.js.map
+//# debugId=9c5b8414-e134-3ef2-55db-6505f79a6a49
+//# sourceMappingURL=292t1mr2b_257.js.map

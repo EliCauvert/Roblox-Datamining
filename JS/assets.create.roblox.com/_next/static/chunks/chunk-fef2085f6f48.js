@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "48c0f104-8458-6b7c-61cb-bff2d1772997")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "63b047a9-2d57-4616-fb83-d70d4be1963d")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 239328, e => {
@@ -132,20 +132,15 @@
         }),
         l = (0, t.defineFlag)({
             namespace: "content-licensing",
-            name: "isInGameSalesLicensingEnabled",
-            defaultValue: !1
-        }),
-        c = (0, t.defineFlag)({
-            namespace: "content-licensing",
             name: "maxCollectibleItemDetailsRequestCount",
             defaultValue: 30
         }),
-        u = (0, t.defineFlag)({
+        c = (0, t.defineFlag)({
             namespace: "content-licensing",
             name: "isIphEarningsTotalAcrossLicenseTypesEnabled",
             defaultValue: !1
         });
-    e.s(["enableIpPlatformLicenseRecommendations", 0, n, "isAvatarItemLicensingEnabled", 0, o, "isExperiencePreviewEnabled", 0, a, "isIgnoreMatchEnabled", 0, s, "isImageAttachmentEnabledInLicenseApplication", 0, i, "isInGameSalesLicensingEnabled", 0, l, "isIphEarningsTotalAcrossLicenseTypesEnabled", 0, u, "isShowcaseExperiencesEnabled", 0, r, "maxCollectibleItemDetailsRequestCount", 0, c])
+    e.s(["enableIpPlatformLicenseRecommendations", 0, n, "isAvatarItemLicensingEnabled", 0, o, "isExperiencePreviewEnabled", 0, a, "isIgnoreMatchEnabled", 0, s, "isImageAttachmentEnabledInLicenseApplication", 0, i, "isIphEarningsTotalAcrossLicenseTypesEnabled", 0, c, "isShowcaseExperiencesEnabled", 0, r, "maxCollectibleItemDetailsRequestCount", 0, l])
 }, 942100, e => {
     "use strict";
     var t = e.i(157700);
@@ -1681,10 +1676,10 @@
             (0, a.useEffect)(() => {
                 B(), z()
             }, [z, B]);
-            let G = (0, a.useCallback)(() => {
+            let V = (0, a.useCallback)(() => {
                     r(void 0)
                 }, [r]),
-                V = (0, a.useCallback)(async () => {
+                G = (0, a.useCallback)(async () => {
                     if ((null == l ? void 0 : l.organizationId) && (null == l ? void 0 : l.id)) {
                         U(!0);
                         try {
@@ -1744,7 +1739,7 @@
                             variant: "outlined",
                             color: "primary",
                             size: "small",
-                            onClick: G,
+                            onClick: V,
                             disabled: k,
                             children: c("Action.NotNow")
                         }), (0, t.jsxs)(h.Grid, {
@@ -1753,7 +1748,7 @@
                                 variant: "outlined",
                                 color: "primary",
                                 size: "small",
-                                onClick: V,
+                                onClick: G,
                                 disabled: k,
                                 children: c("Action.Decline")
                             }), (0, t.jsx)(d.Button, {
@@ -3758,5 +3753,5 @@
     }])
 }]);
 
-//# debugId=48c0f104-8458-6b7c-61cb-bff2d1772997
-//# sourceMappingURL=1gjiah7mnudpg.js.map
+//# debugId=63b047a9-2d57-4616-fb83-d70d4be1963d
+//# sourceMappingURL=2cw99geze_glh.js.map

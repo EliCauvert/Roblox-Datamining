@@ -240,6 +240,7 @@ Roblox.LangDynamic["Feature.Payment"] = {
     "Label.SomethingWentWrong": "Something went wrong",
     "Description.OrderDetailsError": "There was a problem getting your order details.",
     "Button.TryAgain": "Try again",
+    "Label.SubscribeAndSaveV2": "Auto-reload {robuxIconStart}{robuxIconEnd} {robuxAmount} monthly for {initialPriceStart}{initialPriceEnd} {recurringPriceStart}{recurringPriceEnd} starting next month. Cancel anytime. {subscriptionTermsStart}Subscription terms apply{subscriptionTermsEnd}.",
     "Label.UsersWallet": "{username}'s Wallet",
     "Label.RobloxWallet": "Roblox Wallet",
     "Label.WalletBalance": "Wallet balance",

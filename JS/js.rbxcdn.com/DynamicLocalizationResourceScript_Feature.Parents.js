@@ -408,8 +408,8 @@ Roblox.LangDynamic["Feature.Parents"] = {
     "Description.ChatAcrossAgeGroupsWithoutFilter": "Trusted friends may unlock features like chat across age groups and chat without filters, depending on your child’s region and age. {linkStart}View Details{linkEnd}",
     "Label.Contacts": "Contacts",
     "Action.VerifyViaAgeEstimation": "Verify with camera",
-    "Description.RegionRequiresDifferentVerification": "Your child's account is now in a region that requires a different form of parent verification",
-    "Heading.VerifyAgainToContinue": "Verify your age again to continue",
+    "Description.RegionRequiresDifferentVerification": "Local laws require you to complete one more verification using an alternative method",
+    "Heading.VerifyAgainToContinue": "Verify again to continue",
     "Title.RegionalRequirements": "Regional requirements",
     "Description.RegionalRequirements": "Different regions have different rules for verifying parents. The method you used before isn't accepted where your child's account is now registered.",
     "Description.ExperienceChatPresetDisclaimer": "Note: your child may still be able to use Quick Words, a menu of short phrases, for gameplay coordination.",
@@ -598,6 +598,8 @@ Roblox.LangDynamic["Feature.Parents"] = {
     "Label.RobloxKids": "Roblox Kids",
     "Label.RobloxSelect": "Roblox Select",
     "Label.Roblox": "Roblox",
-    "Label.ContentTierWithAges": "{tierName} • Ages {minAge}-{maxAge}"
+    "Label.ContentTierWithAges": "{tierName} • Ages {minAge}-{maxAge}",
+    "Heading.ODPUpgradeEmailEntrySensitiveConsent": "Create an account to manage this setting",
+    "Action.CreateAccount": "Create account"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Parents");

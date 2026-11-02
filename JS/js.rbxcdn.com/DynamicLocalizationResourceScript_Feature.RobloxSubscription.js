@@ -73,7 +73,7 @@ Roblox.LangDynamic["Feature.RobloxSubscription"] = {
     "Disclosure.BlackbirdTermsAgreement": "By clicking \\u{201C}{ctaText}\\u{201D}, you agree to the <a href=\"{termsUrl}\">Roblox Subscription Terms</a>. You will be automatically charged each month until you cancel.",
     "Description.Benefit.DiscountBaseSubtitle": "Get more from your Robux—starting now",
     "Description.Benefit.DiscountNextSubtitle": "Double your discount and lock it in",
-    "Description.Benefit.RobuxTransfersSubtitle": "May need parental approval",
+    "Description.Benefit.RobuxTransfersSubtitle": "Transfers may need parental approval",
     "Description.Benefit.TradeResellItemsSubtitle": "Build your collection of rare avatars",
     "Description.Benefit.PublishItemsSubtitle": "Reach millions of players on Marketplace",
     "Description.Benefit.PrivateServers": "Free private servers",
@@ -277,6 +277,7 @@ Roblox.LangDynamic["Feature.RobloxSubscription"] = {
     "Description.PendingPlanChangeDialog": "Your subscription will update to {productName} for {price} on {date}. You may cancel this change to keep your current Plus subscription.",
     "Action.CancelPendingPlanChange": "Cancel pending change",
     "Message.CancelPlanChangeFailed": "Something went wrong. Please try again.",
-    "Description.BillingInfoWithFreeTrialOfferV3": "{boldTagStart}{trialPeriodType, select, Week {{trialPeriod, plural, one {{trialPeriod} week} other {{trialPeriod} weeks}}} Month {{trialPeriod, plural, one {{trialPeriod} month} other {{trialPeriod} months}}} Year {{trialPeriod, plural, one {{trialPeriod} year} other {{trialPeriod} years}}} other {{trialPeriod} {trialPeriodType}} } free{boldTagEnd}, then {price} per {periodType, select, Week {{periodCount, plural, one {week} other {{periodCount} weeks}}} Month {{periodCount, plural, one {month} other {{periodCount} months}}} Year {{periodCount, plural, one {year} other {{periodCount} years}}} other {{periodType}} }"
+    "Description.BillingInfoWithFreeTrialOfferV3": "{boldTagStart}{trialPeriodType, select, Week {{trialPeriod, plural, one {{trialPeriod} week} other {{trialPeriod} weeks}}} Month {{trialPeriod, plural, one {{trialPeriod} month} other {{trialPeriod} months}}} Year {{trialPeriod, plural, one {{trialPeriod} year} other {{trialPeriod} years}}} other {{trialPeriod} {trialPeriodType}} } free{boldTagEnd}, then {price} per {periodType, select, Week {{periodCount, plural, one {week} other {{periodCount} weeks}}} Month {{periodCount, plural, one {month} other {{periodCount} months}}} Year {{periodCount, plural, one {year} other {{periodCount} years}}} other {{periodType}} }",
+    "Heading.PlusBenefits": "Plus benefits"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.RobloxSubscription");

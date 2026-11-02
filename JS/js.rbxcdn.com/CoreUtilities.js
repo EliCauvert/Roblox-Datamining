@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "97596b8ae3d2664ff012bedb1a646bcf9f3edeac"
+            id: "a6b0d3639e6ca578eb84b6afd11ca3a29641236b"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "d7d0a7e7-8061-4ad0-9a3e-ad9421d1e132", e._sentryDebugIdIdentifier = "sentry-dbid-d7d0a7e7-8061-4ad0-9a3e-ad9421d1e132")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "32aa7cb2-be9c-429c-bcb0-78350d5fb4ae", e._sentryDebugIdIdentifier = "sentry-dbid-32aa7cb2-be9c-429c-bcb0-78350d5fb4ae")
     } catch (e) {}
 }(),
 function() {
@@ -8799,6 +8799,30 @@ function() {
                         ej(this, "searchParams", void 0), this.searchParams = e
                     }
                     return e = [{
+                        key: "resolveName",
+                        value: function(e, t) {
+                            if ("caseSensitive" === t || this.searchParams.has(e)) return e;
+                            var n = e.toLowerCase(),
+                                r = !0,
+                                o = !1,
+                                a = void 0;
+                            try {
+                                for (var i, u = this.searchParams.keys()[Symbol.iterator](); !(r = (i = u.next()).done); r = !0) {
+                                    var s = i.value;
+                                    if (s.toLowerCase() === n) return s
+                                }
+                            } catch (e) {
+                                o = !0, a = e
+                            } finally {
+                                try {
+                                    r || null == u.return || u.return()
+                                } finally {
+                                    if (o) throw a
+                                }
+                            }
+                            return e
+                        }
+                    }, {
                         key: "size",
                         get: function() {
                             return this.searchParams.size
@@ -8806,17 +8830,26 @@ function() {
                     }, {
                         key: "get",
                         value: function(e) {
-                            return this.searchParams.get(e)
+                            var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : "caseInsensitive";
+                            return this.searchParams.get(this.resolveName(e, t))
                         }
                     }, {
                         key: "getAll",
                         value: function(e) {
-                            return this.searchParams.getAll(e)
+                            var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : "caseInsensitive";
+                            if ("caseSensitive" === t) return this.searchParams.getAll(e);
+                            var n = e.toLowerCase();
+                            return eG(this.searchParams.entries()).filter(function(e) {
+                                return eU(e, 1)[0].toLowerCase() === n
+                            }).map(function(e) {
+                                return eU(e, 2)[1]
+                            })
                         }
                     }, {
                         key: "has",
                         value: function(e, t) {
-                            return this.searchParams.has(e, void 0 === t ? void 0 : eB(t))
+                            var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "caseInsensitive";
+                            return this.searchParams.has(this.resolveName(e, n), void 0 === t ? void 0 : eB(t))
                         }
                     }, {
                         key: "copyAndAppend",
@@ -8833,18 +8866,51 @@ function() {
                     }, {
                         key: "copyAndSet",
                         value: function(e, t) {
-                            var r = eD(this.searchParams);
-                            return r.set(e, eB(t)), n.fromUnique(r)
+                            var r = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "caseInsensitive";
+                            if ("caseSensitive" === r) {
+                                var o = eD(this.searchParams);
+                                return o.set(e, eB(t)), n.fromUnique(o)
+                            }
+                            var a = e.toLowerCase(),
+                                i = [],
+                                u = !1,
+                                s = !0,
+                                c = !1,
+                                l = void 0;
+                            try {
+                                for (var f, d = this.searchParams.entries()[Symbol.iterator](); !(s = (f = d.next()).done); s = !0) {
+                                    var p = eU(f.value, 2),
+                                        h = p[0],
+                                        v = p[1];
+                                    h.toLowerCase() !== a ? i.push([h, v]) : u || (i.push([e, eB(t)]), u = !0)
+                                }
+                            } catch (e) {
+                                c = !0, l = e
+                            } finally {
+                                try {
+                                    s || null == d.return || d.return()
+                                } finally {
+                                    if (c) throw l
+                                }
+                            }
+                            return u || i.push([e, eB(t)]), n.fromUnique(eD(i))
                         }
                     }, {
                         key: "copyAndDelete",
                         value: function(e, t) {
-                            var r = void 0 === t ? void 0 : eB(t);
-                            if (this.searchParams.has(e, r)) {
-                                var o = eD(this.searchParams);
-                                return o.delete(e, r), n.fromUnique(o)
-                            }
-                            return this
+                            var r = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "caseInsensitive",
+                                o = e.toLowerCase(),
+                                a = void 0 === t ? void 0 : eB(t),
+                                i = function(t) {
+                                    var n = eU(t, 2),
+                                        i = n[0],
+                                        u = n[1];
+                                    return ("caseSensitive" === r ? i === e : i.toLowerCase() === o) && (void 0 === a || u === a)
+                                },
+                                u = eG(this.searchParams.entries());
+                            return u.some(i) ? n.fromUnique(eD(u.filter(function(e) {
+                                return !i(e)
+                            }))) : this
                         }
                     }, {
                         key: "toSorted",
@@ -46192,4 +46258,4 @@ function() {
             } catch (e) {}
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected(document.currentScript && document.currentScript.getAttribute("data-bundlename") || "CoreUtilities");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/coreUtilities-3117003a19a1b57e.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/coreUtilities-d7204b08bf1706e9.js.map
