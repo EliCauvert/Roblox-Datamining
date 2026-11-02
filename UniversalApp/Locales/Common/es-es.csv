@@ -277,9 +277,7 @@ Authentication.CrossDevice.Label.EnterCodeTextBox,
 Authentication.CrossDevice.Label.EnterOtherDeviceCode,Ingresa un código de otro dispositivo
 Authentication.CrossDevice.Label.InvalidLocationError,No pudimos hacer coincidir tu ubicación con el dispositivo que intentaba conectarse. Inténtalo de nuevo utilizando la misma red.
 Authentication.CrossDevice.Label.LogginInAs,Iniciando sesión como %s
-Authentication.CrossDevice.Label.LoginInstructions,"En el dispositivo donde iniciaste sesión, ve a:"
 Authentication.CrossDevice.Label.LoginInstructionsV2,Abre tu aplicación de Roblox y ve a:
-Authentication.CrossDevice.Label.LoginLocation,<b>Configuración de la cuenta > Inicio de sesión rápido</b> para ingresar tu código.
 Authentication.CrossDevice.Label.LoginLocationV2,"<b>Página ""Más"" > Inicio de sesión rápido</b> para ingresar tu código."
 Authentication.CrossDevice.Label.NotAvailableOnNetwork,La función no está disponible en esta red. Inténtalo de nuevo más tarde
 Authentication.CrossDevice.Label.OK,

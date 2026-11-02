@@ -276,9 +276,7 @@ Authentication.CrossDevice.Label.EnterCodeTextBox,輸入代碼
 Authentication.CrossDevice.Label.EnterOtherDeviceCode,在另一個裝置上輸入驗證碼
 Authentication.CrossDevice.Label.InvalidLocationError,您的位置無法對應到用來登入的裝置，請使用相同的網路重新嘗試。
 Authentication.CrossDevice.Label.LogginInAs,以 %s 登入
-Authentication.CrossDevice.Label.LoginInstructions,在已登入的裝置上前往：
 Authentication.CrossDevice.Label.LoginInstructionsV2,"開啟 Roblox 應用程式,然後前往:"
-Authentication.CrossDevice.Label.LoginLocation,<b>帳號設定 > 快速登入</b>輸入登入碼。
 Authentication.CrossDevice.Label.LoginLocationV2,<b>更多頁面 > 快速登入</b> 輸入您的代碼。
 Authentication.CrossDevice.Label.NotAvailableOnNetwork,此功能不在此網路開放，請稍後再試
 Authentication.CrossDevice.Label.OK,
@@ -4855,11 +4853,20 @@ Feature.Premium.Message.PleaseTryAgain,請再試一次。
 Feature.Premium.Message.SomethingWentWrong,
 Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,透過 Plus 免費使用
+Feature.PrivateServers.Action.Generate,生成
+Feature.PrivateServers.Description.FriendsAllowed,好友名單中的任何人無需邀請就能加入
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio 不支援購買私人伺服器。
 Feature.PrivateServers.Description.VipServersNotSupported,此遊戲不支援私人伺服器。
 Feature.PrivateServers.Heading.ConfigurePrivateServer,設定私人伺服器
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,有此連結的人都可以加入
+Feature.PrivateServers.Label.FriendsAllowed,允許好友加入
+Feature.PrivateServers.Label.InThisServer,在此伺服器的玩家
 Feature.PrivateServers.Label.OwnersServer,{displayName} 的伺服器
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,生成私人伺服器連結
+Feature.PrivateServers.Label.PrivateServerLink,私人伺服器連結
+Feature.PrivateServers.Label.SearchPeople,
 Feature.PrivateServers.Label.ServerName,伺服器名稱：
+Feature.PrivateServers.Label.WhoCanJoin,誰可以加入
 Feature.Profile.Action.AboutThisProfile,關於此個人檔案
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,

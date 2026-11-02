@@ -126,9 +126,7 @@ Authentication.CrossDevice.Label.DevicePrompt,ВВЕДИ КОД НА УСТРО�
 Authentication.CrossDevice.Label.EnterOtherDeviceCode,Ввести код с другого устройства
 Authentication.CrossDevice.Label.InvalidLocationError,"Не удалось соотнести местоположение с устройством, с которого совершается попытка входа. Повтори попытку, используя ту же сеть."
 Authentication.CrossDevice.Label.LogginInAs,Вход пользователя %s
-Authentication.CrossDevice.Label.LoginInstructions,На устройстве с выполненным входом перейди в
 Authentication.CrossDevice.Label.LoginInstructionsV2,Откройте приложение Roblox и перейди:
-Authentication.CrossDevice.Label.LoginLocation,"<b>«Настройки аккаунта» > «Быстрый вход»</b>, чтобы ввести код."
 Authentication.CrossDevice.Label.LoginLocationV2,"<b>Страница «Ещё» > Быстрый вход</b>, чтобы ввести код."
 Authentication.CrossDevice.Label.NotAvailableOnNetwork,В этой сети функция недоступна. Повтори попытку позже.
 Authentication.CrossDevice.Label.QrCodeError,"Возникла проблема с отображением QR-кода. Обнови эту страницу или следуй инструкциям ниже, чтобы выполнить вход на другом устройстве."

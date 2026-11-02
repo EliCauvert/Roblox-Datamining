@@ -277,9 +277,7 @@ Authentication.CrossDevice.Label.EnterCodeTextBox,
 Authentication.CrossDevice.Label.EnterOtherDeviceCode,Masukkan Kode dari Perangkat Lain
 Authentication.CrossDevice.Label.InvalidLocationError,Kami tidak dapat mencocokkan lokasi kamu dengan perangkat yang mencoba log in. Coba lagi di jaringan yang sama.
 Authentication.CrossDevice.Label.LogginInAs,Log in sebagai %s
-Authentication.CrossDevice.Label.LoginInstructions,"Di perangkat kamu yang sudah log in, buka:"
 Authentication.CrossDevice.Label.LoginInstructionsV2,Buka aplikasi Roblox lalu kunjungi:
-Authentication.CrossDevice.Label.LoginLocation,<b>Pengaturan Akun > Log In Cepat</b> untuk memasukkan kode kamu.
 Authentication.CrossDevice.Label.LoginLocationV2,<b>Lainnya > Log In Cepat</b> untuk memasukkan kodemu.
 Authentication.CrossDevice.Label.NotAvailableOnNetwork,Fitur ini tidak tersedia di jaringan ini. Coba lagi nanti.
 Authentication.CrossDevice.Label.OK,
@@ -4854,11 +4852,20 @@ Feature.Premium.Message.PleaseTryAgain,
 Feature.Premium.Message.SomethingWentWrong,
 Feature.PrivateServers.Action.CreatePrivateServer,Buat Server Pribadi
 Feature.PrivateServers.Action.FreeWithBlackbird,Gratis dengan Plus
+Feature.PrivateServers.Action.Generate,
+Feature.PrivateServers.Description.FriendsAllowed,Siapa pun di daftar temanmu dapat bergabung tanpa undangan
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Pembelian server privat tidak didukung di Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,Game ini tidak mendukung server privat.
 Feature.PrivateServers.Heading.ConfigurePrivateServer,Konfigurasi Server Privat
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,Siapa pun yang memiliki link ini dapat bergabung
+Feature.PrivateServers.Label.FriendsAllowed,Teman diizinkan
+Feature.PrivateServers.Label.InThisServer,Di server ini
 Feature.PrivateServers.Label.OwnersServer,Server {displayName}
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,Buat link server privat
+Feature.PrivateServers.Label.PrivateServerLink,Link server privat
+Feature.PrivateServers.Label.SearchPeople,Cari pengguna
 Feature.PrivateServers.Label.ServerName,Nama Server:
+Feature.PrivateServers.Label.WhoCanJoin,Siapa saja yang dapat bergabung
 Feature.Profile.Action.AboutThisProfile,Tentang profil ini
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,Menerima Teman

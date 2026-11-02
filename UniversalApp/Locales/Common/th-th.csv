@@ -260,9 +260,7 @@ Authentication.CrossDevice.Label.EnterCodeTextBox,
 Authentication.CrossDevice.Label.EnterOtherDeviceCode,กรอกรหัสจากอุปกรณ์อีกเครื่อง
 Authentication.CrossDevice.Label.InvalidLocationError,ตำแหน่งที่ตั้งของคุณไม่ตรงกับอุปกรณ์ที่กำลังพยายามลงชื่อเข้าใช้อยู่ โปรดลองอีกครั้งโดยใช้เครือข่ายเดียวกัน
 Authentication.CrossDevice.Label.LogginInAs,ลงชื่อเข้าใช้ด้วย %s
-Authentication.CrossDevice.Label.LoginInstructions,บนอุปกรณ์ที่คุณลงชื่อเข้าใช้อยู่ โปรดไปที่:
 Authentication.CrossDevice.Label.LoginInstructionsV2,เปิดแอป Roblox ของคุณและไปที่:
-Authentication.CrossDevice.Label.LoginLocation,<b>การตั้งค่าบัญชี > ลงชื่อเข้าใช้ด่วน</b> เพื่อกรอกรหัสของคุณ
 Authentication.CrossDevice.Label.LoginLocationV2,"<b>หน้า ""เพิ่มเติม"" > ลงชื่อเข้าใช้ด่วน</b>เพื่อกรอกรหัสของคุณ"
 Authentication.CrossDevice.Label.NotAvailableOnNetwork,ไม่สามารถใช้คุณสมบัตินี้บนเครือข่ายนี้ได้ โปรดลองอีกครั้งในภายหลัง
 Authentication.CrossDevice.Label.OK,
@@ -4196,9 +4194,15 @@ Feature.Moments.Action.ShowDetails,แสดงรายละเอียด
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,ตัดวิดีโอ
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Action.ViewOtherFeed,ดูฟีดอื่น
+Feature.Moments.Action.ViewRecommended,ดูฟีดแนะนำ
+Feature.Moments.Action.ViewTrending,ดูฟีดมาแรง
 Feature.Moments.Body.EDPMomentIPReportInstructions,หากต้องการรายงานเรื่องการละเมิดทรัพย์สินทางปัญญาในโมเมนต์นี้ โปรดดำเนินการต่อที่หน้ารายละเอียดเกม
 Feature.Moments.Description.CommunityStandards,ดูข้อมูลเพิ่มเติมเกี่ยวกับสิ่งที่คุณพูดได้และพูดไม่ได้ในมาตรฐานชุมชน
 Feature.Moments.Description.EmptyCapturesLibrary,ภาพที่คุณจับไว้จะปรากฏที่นี่
+Feature.Moments.Description.FollowingCaughtUpBody,คุณติดตามโมเมนต์ใหม่ในฟีดนี้หมดแล้ว สลับฟีดเพื่อดูเพิ่มเติม
+Feature.Moments.Description.FollowingEmptyBodyRecommended,เพลิดเพลินกับโมเมนต์จากรายการโปรดหลังจากที่คุณติดตามครีเอเตอร์ 2-3 คน ดูฟีดแนะนำเพื่อค้นหา
+Feature.Moments.Description.FollowingEmptyBodyTrending,เพลิดเพลินกับโมเมนต์จากรายการโปรดหลังจากที่คุณติดตามครีเอเตอร์ 2-3 คน ดูฟีดที่กำลังมาแรงเพื่อค้นหา
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,ข้อความนี้สร้างโดย AI โปรดตรวจสอบก่อนโพสต์ เพราะคุณจะเป็นผู้รับผิดชอบต่อข้อความที่เผยแพร่
 Feature.Moments.Description.HowToCaptureStep1,เข้าร่วมประสบการณ์ที่เปิดใช้งานการจับภาพ แล้วเลือกเมนูแฮมเบอร์เกอร์
 Feature.Moments.Description.HowToCaptureStep2,เปิดใช้งานการควบคุมการจับภาพ
@@ -4256,8 +4260,11 @@ Feature.Moments.Label.FeedEndTitle,ดูหมดแล้ว
 Feature.Moments.Label.FeedFailedToLoad,โหลดฟีดไม่สำเร็จ
 Feature.Moments.Label.FeedFollowing,
 Feature.Moments.Label.FeedMyMoments,โมเมนต์ของฉัน
+Feature.Moments.Label.FeedRecommended,
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.FirstCommentInvite,ยังไม่มีความคิดเห็น มาเป็นคนที่แสดงความคิดเห็นกัน!
+Feature.Moments.Label.FollowingCaughtUpTitle,ดูหมดแล้วในตอนนี้
+Feature.Moments.Label.FollowingEmptyTitle,ติดตามครีเอเตอร์เพื่อดูโมเมนต์
 Feature.Moments.Label.GameJoinConversion,อัตราคอนเวอร์ชันการเข้าร่วมเกม
 Feature.Moments.Label.HowToUseCaptureTitle,วิธีใช้การจับภาพ
 Feature.Moments.Label.LinkCopied,คัดลอกลิงก์แล้ว
@@ -4839,11 +4846,20 @@ Feature.Premium.Message.PleaseTryAgain,
 Feature.Premium.Message.SomethingWentWrong,
 Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,ฟรีเมื่อสมัคร Plus
+Feature.PrivateServers.Action.Generate,
+Feature.PrivateServers.Description.FriendsAllowed,ทุกคนในรายชื่อเพื่อนของคุณสามารถเข้าร่วมได้โดยไม่ต้องมีคำเชิญ
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio ไม่รองรับการซื้อเซิร์ฟเวอร์ส่วนตัว
 Feature.PrivateServers.Description.VipServersNotSupported,เกมนี้ไม่รองรับเซิร์ฟเวอร์ส่วนตัว
 Feature.PrivateServers.Heading.ConfigurePrivateServer,กำหนดค่าเซิร์ฟเวอร์ส่วนตัว
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,ทุกคนที่มีลิงก์นี้สามารถเข้าร่วมได้
+Feature.PrivateServers.Label.FriendsAllowed,อนุญาตเพื่อน
+Feature.PrivateServers.Label.InThisServer,ในเซิร์ฟเวอร์นี้
 Feature.PrivateServers.Label.OwnersServer,เซิร์ฟเวอร์ของ {displayName}
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,สร้างลิงก์ของเซิร์ฟเวอร์ส่วนตัว
+Feature.PrivateServers.Label.PrivateServerLink,ลิงก์ของเซิร์ฟเวอร์ส่วนตัว
+Feature.PrivateServers.Label.SearchPeople,
 Feature.PrivateServers.Label.ServerName,ชื่อเซิร์ฟเวอร์:
+Feature.PrivateServers.Label.WhoCanJoin,ใครเข้าร่วมได้บ้าง
 Feature.Profile.Action.AboutThisProfile,เกี่ยวกับโปรไฟล์นี้
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,

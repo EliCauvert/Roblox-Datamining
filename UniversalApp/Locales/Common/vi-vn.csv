@@ -277,9 +277,7 @@ Authentication.CrossDevice.Label.EnterCodeTextBox,
 Authentication.CrossDevice.Label.EnterOtherDeviceCode,Nhập Mã Từ Thiết Bị Khác
 Authentication.CrossDevice.Label.InvalidLocationError,Chúng tôi không thể liên kết vị trí của bạn với thiết bị đang cố đăng nhập. Vui lòng thử lại trên cùng một mạng.
 Authentication.CrossDevice.Label.LogginInAs,Đăng nhập với tư cách là %s
-Authentication.CrossDevice.Label.LoginInstructions,"Trên thiết bị đã đăng nhập của bạn, đi đến:"
 Authentication.CrossDevice.Label.LoginInstructionsV2,Mở ứng dụng Roblox của bạn và đi đến:
-Authentication.CrossDevice.Label.LoginLocation,<b>Cài Đặt Tài Khoản > Đăng Nhập Nhanh</b> để nhập mã của bạn.
 Authentication.CrossDevice.Label.LoginLocationV2,<b>Trang Xem Thêm > Đăng Nhập Nhanh</b> để nhập mã của bạn.
 Authentication.CrossDevice.Label.NotAvailableOnNetwork,Tính năng này không có sẵn trên mạng này. Vui lòng thử lại sau
 Authentication.CrossDevice.Label.OK,
@@ -4856,11 +4854,20 @@ Feature.Premium.Message.PleaseTryAgain,Vui lòng thử lại.
 Feature.Premium.Message.SomethingWentWrong,
 Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Miễn phí khi có gói Plus
+Feature.PrivateServers.Action.Generate,
+Feature.PrivateServers.Description.FriendsAllowed,Bất cứ ai trong danh sách bạn bè của bạn đều có thể tham gia mà không cần lời mời
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Không hỗ trợ giao dịch mua máy chủ riêng tư trong Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,Trò chơi này không hỗ trợ máy chủ riêng.
 Feature.PrivateServers.Heading.ConfigurePrivateServer,Điều Chỉnh Máy Chủ Riêng Tư
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,Bất cứ ai có đường liên kết này đều có thể tham gia
+Feature.PrivateServers.Label.FriendsAllowed,Cho phép bạn bè tham gia
+Feature.PrivateServers.Label.InThisServer,Trong máy chủ này
 Feature.PrivateServers.Label.OwnersServer,Máy chủ của {displayName}
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,Tạo đường liên kết đến máy chủ riêng
+Feature.PrivateServers.Label.PrivateServerLink,Đường liên kết đến máy chủ riêng
+Feature.PrivateServers.Label.SearchPeople,Tìm người
 Feature.PrivateServers.Label.ServerName,Tên Máy Chủ:
+Feature.PrivateServers.Label.WhoCanJoin,Người có thể tham gia
 Feature.Profile.Action.AboutThisProfile,Về hồ sơ này
 Feature.Profile.Action.Accept,Chấp Nhận
 Feature.Profile.Action.AcceptFriends,Chấp Nhận Làm Bạn

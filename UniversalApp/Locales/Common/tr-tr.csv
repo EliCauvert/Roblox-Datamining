@@ -277,9 +277,7 @@ Authentication.CrossDevice.Label.EnterCodeTextBox,
 Authentication.CrossDevice.Label.EnterOtherDeviceCode,Diğer Cihazdaki Kodu Gir
 Authentication.CrossDevice.Label.InvalidLocationError,"Konumunu, giriş yapmaya çalışan cihazla eşleştiremedik. Lütfen aynı ağ üzerinde tekrar dene."
 Authentication.CrossDevice.Label.LogginInAs,%s olarak giriş yapılıyor
-Authentication.CrossDevice.Label.LoginInstructions,Kodunu giriş yapılmış olan cihazında girmek için:
 Authentication.CrossDevice.Label.LoginInstructionsV2,Roblox uygulamanı aç ve şu seçeneği kullan:
-Authentication.CrossDevice.Label.LoginLocation,<b>Hesap Ayarları > Hızlı Giriş</b> seçeneğine git.
 Authentication.CrossDevice.Label.LoginLocationV2,Kodunu girmek için <b>Daha Fazla Sayfası > Hızlı Giriş</b> seçeneğini kullan.
 Authentication.CrossDevice.Label.NotAvailableOnNetwork,"Bu özellik, bu ağda mevcut değil. Lütfen daha sonra tekrar dene"
 Authentication.CrossDevice.Label.OK,
@@ -4812,11 +4810,20 @@ Feature.Premium.Message.PleaseTryAgain,Lütfen tekrar dene.
 Feature.Premium.Message.SomethingWentWrong,
 Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Plus ile ücretsiz
+Feature.PrivateServers.Action.Generate,
+Feature.PrivateServers.Description.FriendsAllowed,Arkadaş listendeki herkes davet edilmeden katılabilir
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Özel sunucu satın alma işlemleri Studio'da desteklenmiyor.
 Feature.PrivateServers.Description.VipServersNotSupported,"Bu oyun, özel sunucuları desteklemiyor."
 Feature.PrivateServers.Heading.ConfigurePrivateServer,Özel Sunucuyu Yapılandır
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,Bu bağlantıya sahip olan herkes katılabilir
+Feature.PrivateServers.Label.FriendsAllowed,İzin verilen arkadaşlar
+Feature.PrivateServers.Label.InThisServer,Bu sunucuda
 Feature.PrivateServers.Label.OwnersServer,{displayName} adlı kişinin sunucusu
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,Özel sunucu bağlantısı oluştur
+Feature.PrivateServers.Label.PrivateServerLink,Özel sunucu bağlantısı
+Feature.PrivateServers.Label.SearchPeople,İnsanları ara
 Feature.PrivateServers.Label.ServerName,Sunucu Adı:
+Feature.PrivateServers.Label.WhoCanJoin,Kimler katılabilir?
 Feature.Profile.Action.AboutThisProfile,Bu profil hakkında
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,

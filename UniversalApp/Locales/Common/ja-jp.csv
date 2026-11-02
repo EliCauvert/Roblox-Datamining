@@ -277,9 +277,7 @@ Authentication.CrossDevice.Label.EnterCodeTextBox,
 Authentication.CrossDevice.Label.EnterOtherDeviceCode,他のデバイスからコードを入力
 Authentication.CrossDevice.Label.InvalidLocationError,ログインしようとしているデバイスとあなたの場所が一致しませんでした。同じネットワーク上でもう一度お試しください。
 Authentication.CrossDevice.Label.LogginInAs,%sとしてログイン中
-Authentication.CrossDevice.Label.LoginInstructions,ログイン済みのデバイス上で以下へ行く：
 Authentication.CrossDevice.Label.LoginInstructionsV2,Robloxアプリを開き、次へ。
-Authentication.CrossDevice.Label.LoginLocation,コードを入力するには、 <b>アカウント設定 > クイックログイン</b> 。
 Authentication.CrossDevice.Label.LoginLocationV2,コード入力方法：<b>他のページ > クイックログイン</b> 。
 Authentication.CrossDevice.Label.NotAvailableOnNetwork,この機能はこのネットワークでは利用できません。後でもう一度お試しください
 Authentication.CrossDevice.Label.OK,
@@ -4213,9 +4211,15 @@ Feature.Moments.Action.ShowDetails,
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,ビデオをトリミング
 Feature.Moments.Action.TryAgain,もう一度試す
+Feature.Moments.Action.ViewOtherFeed,その他のフィードを表示
+Feature.Moments.Action.ViewRecommended,おすすめを表示
+Feature.Moments.Action.ViewTrending,トレンドを表示
 Feature.Moments.Body.EDPMomentIPReportInstructions,このモーメントにおける知的財産権の侵害を報告するには、ゲームの詳細ページに進んでください。
 Feature.Moments.Description.CommunityStandards,発言できることとできないことの詳細については、コミュニティ基準を確認してください。
 Feature.Moments.Description.EmptyCapturesLibrary,ここに切り抜きが表示されます。
+Feature.Moments.Description.FollowingCaughtUpBody,このフィードの新しいモーメントをすべて視聴しました。さらに見るには、フィードを切りかえてください。
+Feature.Moments.Description.FollowingEmptyBodyRecommended,クリエーターを数人フォローして、お気に入りからモーメントを楽しみましょう。クリエーターを見つけるには、おすすめを表示してください。
+Feature.Moments.Description.FollowingEmptyBodyTrending,クリエーターを数人フォローして、お気に入りからモーメントを楽しみましょう。クリエーターを見つけるには、トレンドを表示してください。
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,AIが生成したものです。投稿前にご確認ください。公開された内容に対する責任はご自身にあります。
 Feature.Moments.Description.HowToCaptureStep1,切り抜きが有効になっているバーチャル空間に参加し、ハンバーガーメニューを選択します
 Feature.Moments.Description.HowToCaptureStep2,切り抜き操作を有効化します
@@ -4273,8 +4277,11 @@ Feature.Moments.Label.FeedEndTitle,新着のモーメントはありません
 Feature.Moments.Label.FeedFailedToLoad,ロードできませんでした
 Feature.Moments.Label.FeedFollowing,
 Feature.Moments.Label.FeedMyMoments,マイモーメント
+Feature.Moments.Label.FeedRecommended,
 Feature.Moments.Label.FeedTrending,トレンド
 Feature.Moments.Label.FirstCommentInvite,まだコメントはありません。最初にコメントしましょう！
+Feature.Moments.Label.FollowingCaughtUpTitle,現在、新着のモーメントはありません
+Feature.Moments.Label.FollowingEmptyTitle,クリエーターをフォローして、そのモーメントを視聴しましょう
 Feature.Moments.Label.GameJoinConversion,ゲーム参加コンバージョン
 Feature.Moments.Label.HowToUseCaptureTitle,切り抜きの使い方
 Feature.Moments.Label.LinkCopied,リンクをコピーしました
@@ -4854,11 +4861,20 @@ Feature.Premium.Message.PleaseTryAgain,もう一度お試しください。
 Feature.Premium.Message.SomethingWentWrong,問題が発生しました
 Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Plusで無料
+Feature.PrivateServers.Action.Generate,生成
+Feature.PrivateServers.Description.FriendsAllowed,友達リストにいる人は誰でも招待なしで参加できます
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studioは、プライベートサーバーの購入には対応していません。
 Feature.PrivateServers.Description.VipServersNotSupported,このゲームはプライベートサーバーに対応していません。
 Feature.PrivateServers.Heading.ConfigurePrivateServer,プライベートサーバーの設定
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,このリンクを持っている人は誰でも参加できます
+Feature.PrivateServers.Label.FriendsAllowed,許可された友達
+Feature.PrivateServers.Label.InThisServer,このサーバー上
 Feature.PrivateServers.Label.OwnersServer,{displayName}のサーバー
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,プライベートサーバーリンクを生成する
+Feature.PrivateServers.Label.PrivateServerLink,プライベートサーバーリンク
+Feature.PrivateServers.Label.SearchPeople,
 Feature.PrivateServers.Label.ServerName,サーバー名:
+Feature.PrivateServers.Label.WhoCanJoin,参加できる人
 Feature.Profile.Action.AboutThisProfile,このプロフィールについて
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,友達を承認する

@@ -277,9 +277,7 @@ Authentication.CrossDevice.Label.EnterCodeTextBox,
 Authentication.CrossDevice.Label.EnterOtherDeviceCode,Code von anderem Gerät eingeben
 Authentication.CrossDevice.Label.InvalidLocationError,"Wir konnten deinen Standort nicht mit dem Gerät vereinbaren, auf dem du versuchst, dich anzumelden. Bitte versuche es erneut innerhalb desselben Netzwerks. "
 Authentication.CrossDevice.Label.LogginInAs,Anmeldung als %s
-Authentication.CrossDevice.Label.LoginInstructions,Gehe auf deinem angemeldeten Gerät zu:
 Authentication.CrossDevice.Label.LoginInstructionsV2,Öffne deine Roblox-App und gehe zu:
-Authentication.CrossDevice.Label.LoginLocation,<b>Kontoeinstellungen > Schnellanmeldung</b> um deinen Code einzugeben.
 Authentication.CrossDevice.Label.LoginLocationV2,"<b>""Mehr""-Seite > Schnellanmeldung,</b> um deinen Code einzugeben."
 Authentication.CrossDevice.Label.NotAvailableOnNetwork,Diese Funktion ist in diesem Netzwerk nicht verfügbar. Bite versuche es später erneut.
 Authentication.CrossDevice.Label.OK,OK
@@ -4849,11 +4847,20 @@ Feature.Premium.Message.PleaseTryAgain,
 Feature.Premium.Message.SomethingWentWrong,
 Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Mit Plus-Abo gratis
+Feature.PrivateServers.Action.Generate,Generieren
+Feature.PrivateServers.Description.FriendsAllowed,Jede Person auf deiner Freundschaftsliste kann ohne Einladung mitmachen
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Käufe von privaten Servern werden in Studio nicht unterstützt.
 Feature.PrivateServers.Description.VipServersNotSupported,Dieses Spiel unterstützt keine privaten Server.
 Feature.PrivateServers.Heading.ConfigurePrivateServer,Privaten Server konfigurieren
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,Alle mit diesem Link können mitmachen
+Feature.PrivateServers.Label.FriendsAllowed,Freunde erlaubt
+Feature.PrivateServers.Label.InThisServer,Auf diesem Server
 Feature.PrivateServers.Label.OwnersServer,Server von {displayName}
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,Privaten Serverlink generieren
+Feature.PrivateServers.Label.PrivateServerLink,Privater Serverlink
+Feature.PrivateServers.Label.SearchPeople,
 Feature.PrivateServers.Label.ServerName,Servername:
+Feature.PrivateServers.Label.WhoCanJoin,Wer kann mitmachen?
 Feature.Profile.Action.AboutThisProfile,Über dieses Profil
 Feature.Profile.Action.Accept,Annehmen
 Feature.Profile.Action.AcceptFriends,

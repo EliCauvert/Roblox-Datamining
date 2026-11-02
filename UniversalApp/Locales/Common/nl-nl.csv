@@ -260,9 +260,7 @@ Authentication.CrossDevice.Label.EnterCodeTextBox,Code invoeren
 Authentication.CrossDevice.Label.EnterOtherDeviceCode,Voer de code vanaf het andere apparaat in
 Authentication.CrossDevice.Label.InvalidLocationError,We konden je locatie niet koppelen aan het apparaat waarop je probeert in te loggen. Probeer het opnieuw op hetzelfde netwerk.
 Authentication.CrossDevice.Label.LogginInAs,Inloggen als %s
-Authentication.CrossDevice.Label.LoginInstructions,Ga op je ingelogde apparaat naar:
 Authentication.CrossDevice.Label.LoginInstructionsV2,Open je Roblox-app en ga naar:
-Authentication.CrossDevice.Label.LoginLocation,<b>Accountinstellingen > Snel inloggen</b> om je code in te voeren.
 Authentication.CrossDevice.Label.LoginLocationV2,<b>Meer-pagina > Snel inloggen</b> om je code in te voeren.
 Authentication.CrossDevice.Label.NotAvailableOnNetwork,Deze functie is niet beschikbaar op dit netwerk. Probeer het later opnieuw.
 Authentication.CrossDevice.Label.OK,
@@ -4838,11 +4836,20 @@ Feature.Premium.Message.PleaseTryAgain,Probeer het opnieuw.
 Feature.Premium.Message.SomethingWentWrong,
 Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Gratis met Plus
+Feature.PrivateServers.Action.Generate,Genereren
+Feature.PrivateServers.Description.FriendsAllowed,Iedereen op je vriendenlijst kan deelnemen zonder uitnodiging
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Aankopen van privéservers worden niet ondersteund in Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,Deze game ondersteunt geen privéservers.
 Feature.PrivateServers.Heading.ConfigurePrivateServer,Privéserver configureren
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,Iedereen met deze link kan deelnemen
+Feature.PrivateServers.Label.FriendsAllowed,Vrienden toestaan
+Feature.PrivateServers.Label.InThisServer,Op deze server
 Feature.PrivateServers.Label.OwnersServer,{displayName}'s server
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,Link naar de privéserver genereren
+Feature.PrivateServers.Label.PrivateServerLink,Link privéserver
+Feature.PrivateServers.Label.SearchPeople,
 Feature.PrivateServers.Label.ServerName,Servernaam:
+Feature.PrivateServers.Label.WhoCanJoin,Wie kan deelnemen
 Feature.Profile.Action.AboutThisProfile,Over dit profiel
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,

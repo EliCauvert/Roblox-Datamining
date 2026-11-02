@@ -260,9 +260,7 @@ Authentication.CrossDevice.Label.EnterCodeTextBox,
 Authentication.CrossDevice.Label.EnterOtherDeviceCode,أدخل الرمز من جهاز آخر
 Authentication.CrossDevice.Label.InvalidLocationError,لم نتمكن من مطابقة موقعك مع الجهاز الذي يحاول تسجيل الدخول. الرجاء المحاولة مرة أخرى على الشبكة ذاتها.
 Authentication.CrossDevice.Label.LogginInAs,تسجيل الدخول كـ %s
-Authentication.CrossDevice.Label.LoginInstructions,على جهازك المسجل عليه الدخول، انتقل إلى:
 Authentication.CrossDevice.Label.LoginInstructionsV2,افتح تطبيق Roblox ثم انتقل إلى:
-Authentication.CrossDevice.Label.LoginLocation,<b>إعدادات الحساب > تسجيل الدخول السريع</b> لإدخال رمزك.
 Authentication.CrossDevice.Label.LoginLocationV2,"<b>صفحة ""المزيد"" > تسجيل دخول سريع</b> لإدخال الكود."
 Authentication.CrossDevice.Label.NotAvailableOnNetwork,هذه الميزة غير متوفرة على هذه الشبكة. الرجاء المحاولة مرة أخرى لاحقًا
 Authentication.CrossDevice.Label.OK,موافق
@@ -4792,11 +4790,20 @@ Feature.Premium.Message.PleaseTryAgain,يُرجى إعادة المحاولة.
 Feature.Premium.Message.SomethingWentWrong,
 Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,مجانًا مع Plus
+Feature.PrivateServers.Action.Generate,
+Feature.PrivateServers.Description.FriendsAllowed,يمكن لأي شخص في قائمة أصدقائك الانضمام دون دعوة
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,عمليات شراء الخوادم الخاصة غير مدعومة في Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,لا تدعم هذه اللعبة الخوادم الخاصة.
 Feature.PrivateServers.Heading.ConfigurePrivateServer,تهيئة الخادم الخاص
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,يمكن لأي شخص أن ينضم بهذا الرابط
+Feature.PrivateServers.Label.FriendsAllowed,السماح للأصدقاء
+Feature.PrivateServers.Label.InThisServer,في هذا الخادم
 Feature.PrivateServers.Label.OwnersServer,خادم {displayName}
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,إنشاء رابط خادم خاص
+Feature.PrivateServers.Label.PrivateServerLink,رابط الخادم الخاص
+Feature.PrivateServers.Label.SearchPeople,
 Feature.PrivateServers.Label.ServerName,اسم الخادم:
+Feature.PrivateServers.Label.WhoCanJoin,من يمكنه الانضمام
 Feature.Profile.Action.AboutThisProfile,حول هذا الملف الشخصي
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,

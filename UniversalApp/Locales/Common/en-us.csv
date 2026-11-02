@@ -278,9 +278,7 @@ Authentication.CrossDevice.Label.EnterCodeTextBox,Enter code
 Authentication.CrossDevice.Label.EnterOtherDeviceCode,Enter Code from Other Device
 Authentication.CrossDevice.Label.InvalidLocationError,We couldn't match your location to the device trying to log in. Please try again on the same network.
 Authentication.CrossDevice.Label.LogginInAs,Logging in as %s
-Authentication.CrossDevice.Label.LoginInstructions,"On your logged in device, go to:"
 Authentication.CrossDevice.Label.LoginInstructionsV2,Open your Roblox app and go to:
-Authentication.CrossDevice.Label.LoginLocation,<b>Account Settings > Quick Log In</b> to enter your code.
 Authentication.CrossDevice.Label.LoginLocationV2,<b>More Page > Quick Sign In</b> to enter your code.
 Authentication.CrossDevice.Label.NotAvailableOnNetwork,This feature is not available on this network. Please try again later
 Authentication.CrossDevice.Label.OK,

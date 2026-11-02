@@ -269,9 +269,7 @@ Authentication.CrossDevice.Label.EnterCodeTextBox,
 Authentication.CrossDevice.Label.EnterOtherDeviceCode,在其他设备上输入验证码
 Authentication.CrossDevice.Label.InvalidLocationError,无法将你的位置与试图登入的设备匹配。请在相同的网络中重试。
 Authentication.CrossDevice.Label.LogginInAs,登录为 %s
-Authentication.CrossDevice.Label.LoginInstructions,在你登录的设备上，前往：
 Authentication.CrossDevice.Label.LoginInstructionsV2,开启 Roblox 应用并前往
-Authentication.CrossDevice.Label.LoginLocation,<b>账户设置 > 快速登录</b>来输入您的登录码。
 Authentication.CrossDevice.Label.LoginLocationV2,<b>更多页面 > 快速登录</b>输入你的验证码。
 Authentication.CrossDevice.Label.NotAvailableOnNetwork,此功能无法在此网络中使用。请稍后再试
 Authentication.CrossDevice.Label.OK,
@@ -2806,7 +2804,7 @@ Feature.Build.Notification.Title.NeedInput,构建需要你的输入
 Feature.Build.Placeholder.DescribeProduct,描述你想出售的内容
 Feature.Build.Placeholder.DescribeProductUpdate,描述一项更新
 Feature.Build.Placeholder.InternalSpec,内部代码
-Feature.Build.Prompt.CreateDeveloperProduct,请审核我的游戏，并建议我出售哪种道具最能赚取 Robux。是一次性购买的道具，还是玩家可以反复购买的道具（如加成道具）更适合我的游戏？请说明原因。
+Feature.Build.Prompt.CreateDeveloperProduct,请查看我的游戏，并建议我出售哪种道具最适合赚取 Robux。是一次性购买的道具，还是玩家可以反复购买的道具（如加成道具）更适合我的游戏？请说明原因。
 Feature.Build.Title.AdActive,广告活动已启动
 Feature.Build.Title.AdCampaignDuration,{durationDays} 天广告活动
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} 天
@@ -2926,8 +2924,8 @@ Feature.Catalog.Header.InvalidOutfit,穿搭无效
 Feature.Catalog.Header.PostAvatar,
 Feature.Catalog.Heading.AvailableItems,可上架道具
 Feature.Catalog.Heading.BuyItem,
-Feature.Catalog.Heading.DescriptionLinkGoToMarketplace,
-Feature.Catalog.Heading.DescriptionLinkResetSearch,
+Feature.Catalog.Heading.DescriptionLinkGoToMarketplace,将转至商城
+Feature.Catalog.Heading.DescriptionLinkResetSearch,将重置当前搜索
 Feature.Catalog.Heading.FreeItemConfirmation,获取物品
 Feature.Catalog.Heading.GoToExperience,加入体验?
 Feature.Catalog.Heading.HoldingPolicy,存放政策
@@ -3003,12 +3001,12 @@ Feature.Catalog.Label.CreatorName,创作者名称
 Feature.Catalog.Label.CurrentBalance,当前余额：
 Feature.Catalog.Label.CustomizeAvatar,自定义虚拟形象
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,如果你删除此项，你将无法撤销。
-Feature.Catalog.Label.DescriptionLinkInvalid,
-Feature.Catalog.Label.DescriptionLinkSearchMarketplace,
-Feature.Catalog.Label.DescriptionLinkViewAsset,
-Feature.Catalog.Label.DescriptionLinkViewBundle,
-Feature.Catalog.Label.DescriptionLinkViewCommunity,
-Feature.Catalog.Label.DescriptionLinkViewCommunityStore,
+Feature.Catalog.Label.DescriptionLinkInvalid,无效链接
+Feature.Catalog.Label.DescriptionLinkSearchMarketplace,搜索商城
+Feature.Catalog.Label.DescriptionLinkViewAsset,查看素材
+Feature.Catalog.Label.DescriptionLinkViewBundle,查看套装
+Feature.Catalog.Label.DescriptionLinkViewCommunity,查看社区
+Feature.Catalog.Label.DescriptionLinkViewCommunityStore,社区商店
 Feature.Catalog.Label.Details,
 Feature.Catalog.Label.DynamicHeads,
 Feature.Catalog.Label.Emissive,自发光
@@ -3939,7 +3937,7 @@ Feature.Groups.Action.NotNow,
 Feature.Groups.Action.RemovePrimary,移除主要群组
 Feature.Groups.Action.SeeAll,
 Feature.Groups.Action.Unfollow,取消关注
-Feature.Groups.Action.ViewGroup,查看社区
+Feature.Groups.Action.ViewGroup,
 Feature.Groups.Description.JoinGroupPending,你的加入请求正在等待社区审核。
 Feature.Groups.Description.NotEligibleToJoin,你的帐户无法加入此社区。
 Feature.Groups.Description.PremiumMaxGroups,你加入的群组数量已达上限。
@@ -4867,20 +4865,20 @@ Feature.Premium.Message.PleaseTryAgain,
 Feature.Premium.Message.SomethingWentWrong,
 Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Plus 订阅用户免费
-Feature.PrivateServers.Action.Generate,
-Feature.PrivateServers.Description.FriendsAllowed,
+Feature.PrivateServers.Action.Generate,生成
+Feature.PrivateServers.Description.FriendsAllowed,你的好友列表中的任何人都无需邀请即可加入
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio 中不支持购买私人服务器。
 Feature.PrivateServers.Description.VipServersNotSupported,此游戏不支持私人服务器。
 Feature.PrivateServers.Heading.ConfigurePrivateServer,配置私人服务器
-Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,
-Feature.PrivateServers.Label.FriendsAllowed,
-Feature.PrivateServers.Label.InThisServer,
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,任何有此链接的人都可以加入
+Feature.PrivateServers.Label.FriendsAllowed,允许好友加入
+Feature.PrivateServers.Label.InThisServer,在此服务器中
 Feature.PrivateServers.Label.OwnersServer,{displayName}的服务器
-Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,
-Feature.PrivateServers.Label.PrivateServerLink,
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,生成私人服务器链接
+Feature.PrivateServers.Label.PrivateServerLink,私人服务器链接
 Feature.PrivateServers.Label.SearchPeople,
 Feature.PrivateServers.Label.ServerName,服务器名称
-Feature.PrivateServers.Label.WhoCanJoin,
+Feature.PrivateServers.Label.WhoCanJoin,谁可以加入
 Feature.Profile.Action.AboutThisProfile,关于此个人资料
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -5309,7 +5307,7 @@ Feature.SocialShare.Description.InviteExpiredError,邀请链接已过期，还�
 Feature.SocialShare.Description.InviterNotHereError,邀请者已离开，还想继续加入“ {experienceName}”吗？
 Feature.SocialShare.Label.Copied,已复制
 Feature.SocialShare.Label.CopyLinkToShareWithPeople,复制链接以分享给你认识的人
-Feature.SocialShare.Label.InvalidLinkError,无效链接
+Feature.SocialShare.Label.InvalidLinkError,
 Feature.SocialShare.Label.InviteExpiredError,邀请链接已过期
 Feature.SocialShare.Label.InviterNotHereError,邀请者不在这里
 Feature.SocialShare.Response.Error,发生错误。
@@ -5955,7 +5953,7 @@ Roblox.ReferralRewards.RewardBannerModalTitle,好友推荐奖励
 Search.GlobalSearch.Action.LoadMore,
 Search.GlobalSearch.Example.SearchCatalog,在商店中搜索
 Search.GlobalSearch.Example.SearchGames,
-Search.GlobalSearch.Example.SearchMarketplace,搜索商城
+Search.GlobalSearch.Example.SearchMarketplace,
 Search.GlobalSearch.TopResultsLabel,
 Verification.Identity.Action.SkipVoiceChat,不使用语音聊天加入
 Verification.Identity.Heading.LetsChat,来聊天吧！

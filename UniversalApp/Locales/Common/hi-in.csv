@@ -260,9 +260,7 @@ Authentication.CrossDevice.Label.EnterCodeTextBox,
 Authentication.CrossDevice.Label.EnterOtherDeviceCode,दूसरे डिवाइस से कोड डालें
 Authentication.CrossDevice.Label.InvalidLocationError,आपकी लोकेशन का डिवाइस से मैच नहीं किया जा सका. उसी नेटवर्क पर फिर से कोशिश करें.
 Authentication.CrossDevice.Label.LogginInAs,%s के तौर पर लॉग इन कर रहे हैं
-Authentication.CrossDevice.Label.LoginInstructions,"अपने लॉग इन किए गए डिवाइस पर, यहाँ जाएँ:"
 Authentication.CrossDevice.Label.LoginInstructionsV2,Roblox ऐप खोलें और यहाँ जाएँ:
-Authentication.CrossDevice.Label.LoginLocation,<b>अकाउंट सेटिंग्स > अपना कोड डालने</b> के लिए क्विक लॉग इन करें.
 Authentication.CrossDevice.Label.LoginLocationV2,"<b> ज़्यादा पेज > अपना कोड डालने के लिए, क्विक साइन-इन करें</b>."
 Authentication.CrossDevice.Label.NotAvailableOnNetwork,"यह फ़ीचर इस नेटवर्क पर उपलब्ध नहीं है. बाद में, फिर से कोशिश करें"
 Authentication.CrossDevice.Label.OK,
@@ -2907,6 +2905,8 @@ Feature.Catalog.Header.InvalidOutfit,आउटफ़िट अमान्य �
 Feature.Catalog.Header.PostAvatar,अवतार पोस्ट करें
 Feature.Catalog.Heading.AvailableItems,उपलब्ध आइटम
 Feature.Catalog.Heading.BuyItem,
+Feature.Catalog.Heading.DescriptionLinkGoToMarketplace,यह आपको मार्केटप्लेस पर ले जाएगा
+Feature.Catalog.Heading.DescriptionLinkResetSearch,इससे आपकी मौजूदा सर्च रीसेट हो जाएगी
 Feature.Catalog.Heading.FreeItemConfirmation,आइटम पाएँ
 Feature.Catalog.Heading.GoToExperience,एक्सपीरिएंस जॉइन करना है?
 Feature.Catalog.Heading.HoldingPolicy,होल्डिंग पॉलिसी
@@ -2982,6 +2982,12 @@ Feature.Catalog.Label.CreatorName,क्रिएटर का नाम
 Feature.Catalog.Label.CurrentBalance,मौजूदा बैलेंस:
 Feature.Catalog.Label.CustomizeAvatar,अवतार कस्टमाइज़ करें
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,"अगर आप डिलीट कर दें, तो आप इस ऐक्शन को पहले जैसा नहीं कर सकते."
+Feature.Catalog.Label.DescriptionLinkInvalid,लिंक अमान्य है
+Feature.Catalog.Label.DescriptionLinkSearchMarketplace,मार्केटप्लेस सर्च करें
+Feature.Catalog.Label.DescriptionLinkViewAsset,ऐसेट देखें
+Feature.Catalog.Label.DescriptionLinkViewBundle,बंडल देखें
+Feature.Catalog.Label.DescriptionLinkViewCommunity,कम्यूनिटी देखें
+Feature.Catalog.Label.DescriptionLinkViewCommunityStore,कम्यूनिटी स्टोर
 Feature.Catalog.Label.Details,
 Feature.Catalog.Label.DynamicHeads,
 Feature.Catalog.Label.Emissive,एमिसिव
@@ -3914,7 +3920,7 @@ Feature.Groups.Action.NotNow,
 Feature.Groups.Action.RemovePrimary,प्राइमरी कम्यूनिटी हटाएँ
 Feature.Groups.Action.SeeAll,
 Feature.Groups.Action.Unfollow,अनफ़ॉलो करें
-Feature.Groups.Action.ViewGroup,कम्यूनिटी देखें
+Feature.Groups.Action.ViewGroup,
 Feature.Groups.Description.JoinGroupPending,आपकी जॉइन करने की रिक्वेस्ट को कम्यूनिटी की ओर से रिव्यू किया जाना बाकी है.
 Feature.Groups.Description.NotEligibleToJoin,आपका अकाउंट इस कम्यूनिटी में शामिल नहीं हो सकता.
 Feature.Groups.Description.PremiumMaxGroups,आपने कम्यूनिटी जॉइन करने की लिमिट पूरी कर ली है.
@@ -4828,11 +4834,20 @@ Feature.Premium.Message.PleaseTryAgain,
 Feature.Premium.Message.SomethingWentWrong,
 Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Plus सब्सक्रिप्शन के साथ फ़्री
+Feature.PrivateServers.Action.Generate,जेनरेट करें
+Feature.PrivateServers.Description.FriendsAllowed,आपके फ़्रेंड्स की लिस्ट में शामिल कोई भी व्यक्ति बिना इनवाइट के जॉइन कर सकता है
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio में प्राइवेट सर्वर नहीं खरीदे जा सकते.
 Feature.PrivateServers.Description.VipServersNotSupported,इस गेम के लिए प्राइवेट सर्वर इस्तेमाल नहीं किए जा सकते.
 Feature.PrivateServers.Heading.ConfigurePrivateServer,प्राइवेट सर्वर कॉन्फ़िगर करें
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,इस लिंक वाला कोई भी व्यक्ति जॉइन कर सकता है
+Feature.PrivateServers.Label.FriendsAllowed,फ़्रेंड्स की परमिशन है
+Feature.PrivateServers.Label.InThisServer,इस सर्वर में
 Feature.PrivateServers.Label.OwnersServer,{displayName} का सर्वर
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,प्राइवेट सर्वर लिंक जेनरेट करें
+Feature.PrivateServers.Label.PrivateServerLink,प्राइवेट सर्वर लिंक
+Feature.PrivateServers.Label.SearchPeople,
 Feature.PrivateServers.Label.ServerName,सर्वर का नाम:
+Feature.PrivateServers.Label.WhoCanJoin,कौन-कौन जॉइन कर सकता है
 Feature.Profile.Action.AboutThisProfile,इस प्रोफ़ाइल के बारे में जानकारी
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -5260,7 +5275,7 @@ Feature.SocialShare.Description.InviteExpiredError,इनवाइट लिं�
 Feature.SocialShare.Description.InviterNotHereError,इनवाइट करने वाले ने एक्सपीरिएंस छोड़ दिया है. क्या आपको अभी भी {experienceName} में शामिल होना है?
 Feature.SocialShare.Label.Copied,कॉपी किया गया
 Feature.SocialShare.Label.CopyLinkToShareWithPeople,"ऐसे लोगों से शेयर करने के लिए लिंक कॉपी करें, जिनसे आप परिचित हैं"
-Feature.SocialShare.Label.InvalidLinkError,लिंक अमान्य है
+Feature.SocialShare.Label.InvalidLinkError,
 Feature.SocialShare.Label.InviteExpiredError,इनवाइट लिंक एक्सपयर हो गया है
 Feature.SocialShare.Label.InviterNotHereError,इनवाइट करने वाला यहाँ नहीं है
 Feature.SocialShare.Response.Error,
@@ -5905,7 +5920,7 @@ Roblox.ReferralRewards.RewardBannerModalTitle,फ़्रेंड रेफ़
 Search.GlobalSearch.Action.LoadMore,
 Search.GlobalSearch.Example.SearchCatalog,कैटलॉग सर्च करें
 Search.GlobalSearch.Example.SearchGames,
-Search.GlobalSearch.Example.SearchMarketplace,मार्केटप्लेस सर्च करें
+Search.GlobalSearch.Example.SearchMarketplace,
 Search.GlobalSearch.TopResultsLabel,
 Verification.Identity.Action.SkipVoiceChat,वॉइस चैट के बिना जॉइन करें
 Verification.Identity.Heading.LetsChat,चलो चैट करते हैं!
