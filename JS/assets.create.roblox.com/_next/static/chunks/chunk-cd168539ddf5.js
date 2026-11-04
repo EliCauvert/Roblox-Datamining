@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "e9b37d14-e2b1-9e4e-80a1-03b509b0117c")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "e852f73a-84b5-b60f-c769-819113bba01f")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 118413, e => {
@@ -137,7 +137,7 @@
         E = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "isJourneyEventsEnabled",
-            defaultValue: !1
+            defaultValue: !0
         }),
         H = (0, a.defineFlag)({
             namespace: "creator-analytics",
@@ -3329,5 +3329,5 @@
     e.s(["HourglassEmptyIcon", () => a.HourglassEmpty])
 }]);
 
-//# debugId=e9b37d14-e2b1-9e4e-80a1-03b509b0117c
-//# sourceMappingURL=3h93j84u-dvur.js.map
+//# debugId=e852f73a-84b5-b60f-c769-819113bba01f
+//# sourceMappingURL=339v0fmp-11tm.js.map

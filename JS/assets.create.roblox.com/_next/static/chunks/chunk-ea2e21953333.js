@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "86ef0901-aa8a-ec95-585f-5f80ce80991d")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "e4a2a542-75cd-41ca-7004-7157ea2b0b43")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 428993, e => {
@@ -239,10 +239,10 @@
         }
     }
 
-    function c(e, n) {
-        var r, i, a, s, l, u, c, f, p;
-        return null == e ? e : {
-            eligibility: (0, t.exists)(e, "eligibility") ? null == (r = e.eligibility) ? r : {
+    function c(e) {
+        var n, r, i, a, s, l, u, c, f, p;
+        return null == (n = e) ? n : {
+            eligibility: (0, t.exists)(n, "eligibility") ? null == (r = n.eligibility) ? r : {
                 authenticatedUserId: (0, t.exists)(r, "authenticatedUserId") ? r.authenticatedUserId : void 0,
                 eligible: (0, t.exists)(r, "eligible") ? null == (i = r.eligible) ? i : {
                     canStartKyc: (0, t.exists)(i, "canStartKyc") ? i.canStartKyc : void 0,
@@ -251,7 +251,7 @@
                 } : void 0,
                 ineligible: (0, t.exists)(r, "ineligible") ? r.ineligible : void 0
             } : void 0,
-            onboardingState: (0, t.exists)(e, "onboardingState") ? null == (a = e.onboardingState) ? a : {
+            onboardingState: (0, t.exists)(n, "onboardingState") ? null == (a = n.onboardingState) ? a : {
                 initiatingUserId: (0, t.exists)(a, "initiatingUserId") ? a.initiatingUserId : void 0,
                 creatorWalletId: (0, t.exists)(a, "creatorWalletId") ? null == (s = a.creatorWalletId) ? s : {
                     userId: (0, t.exists)(s, "userId") ? s.userId : void 0,
@@ -280,7 +280,7 @@
                     updatedTime: (0, t.exists)(p, "updatedTime") ? new Date(p.updatedTime) : void 0
                 } : void 0
             } : void 0,
-            onboardingDraft: (0, t.exists)(e, "onboardingDraft") ? o(e.onboardingDraft) : void 0
+            onboardingDraft: (0, t.exists)(n, "onboardingDraft") ? o(n.onboardingDraft) : void 0
         }
     }
 
@@ -1739,7 +1739,7 @@
     }, "EstimatedArrivalUnavailableReason", 0, {
         Invalid: "ESTIMATED_ARRIVAL_UNAVAILABLE_REASON_INVALID",
         PayoutsPaused: "ESTIMATED_ARRIVAL_UNAVAILABLE_REASON_PAYOUTS_PAUSED"
-    }, "KycPrerequisite", 0, {
+    }, "GetOnboardingStateResponseFromJSON", 0, c, "KycPrerequisite", 0, {
         Invalid: "KYC_PREREQUISITE_INVALID",
         GroupWallet: "KYC_PREREQUISITE_GROUP_WALLET",
         AccountType: "KYC_PREREQUISITE_ACCOUNT_TYPE",
@@ -1976,5 +1976,5 @@
     }])
 }]);
 
-//# debugId=86ef0901-aa8a-ec95-585f-5f80ce80991d
-//# sourceMappingURL=0zr23airdegvw.js.map
+//# debugId=e4a2a542-75cd-41ca-7004-7157ea2b0b43
+//# sourceMappingURL=3861ftvssffsf.js.map

@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "63b047a9-2d57-4616-fb83-d70d4be1963d")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "377fb437-6cbb-8509-1206-829d8c585b5f")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 239328, e => {
@@ -88,15 +88,10 @@
         }),
         o = (0, t.defineFlag)({
             namespace: "content-access-and-inventory",
-            name: "isPricingEligibilityV2Enabled",
-            defaultValue: !1
-        }),
-        l = (0, t.defineFlag)({
-            namespace: "content-access-and-inventory",
             name: "isPublishBeforeExposeEnabled",
             defaultValue: !1
         });
-    e.s(["isAssetAccessRequestsEnabled", 0, n, "isAssetDependenciesViewerEnabled", 0, r, "isAssetPrivacyOptOutSurveyEnabled", 0, a, "isCreatorStoreVideoMultipartUploadEnabled", 0, s, "isModelCustomThumbnailUploadEnabled", 0, i, "isPricingEligibilityV2Enabled", 0, o, "isPublishBeforeExposeEnabled", 0, l])
+    e.s(["isAssetAccessRequestsEnabled", 0, n, "isAssetDependenciesViewerEnabled", 0, r, "isAssetPrivacyOptOutSurveyEnabled", 0, a, "isCreatorStoreVideoMultipartUploadEnabled", 0, s, "isModelCustomThumbnailUploadEnabled", 0, i, "isPublishBeforeExposeEnabled", 0, o])
 }, 165136, e => {
     "use strict";
     var t = e.i(157700);
@@ -127,20 +122,15 @@
         }),
         o = (0, t.defineFlag)({
             namespace: "content-licensing",
-            name: "isAvatarItemLicensingEnabled",
-            defaultValue: !1
-        }),
-        l = (0, t.defineFlag)({
-            namespace: "content-licensing",
             name: "maxCollectibleItemDetailsRequestCount",
             defaultValue: 30
         }),
-        c = (0, t.defineFlag)({
+        l = (0, t.defineFlag)({
             namespace: "content-licensing",
             name: "isIphEarningsTotalAcrossLicenseTypesEnabled",
             defaultValue: !1
         });
-    e.s(["enableIpPlatformLicenseRecommendations", 0, n, "isAvatarItemLicensingEnabled", 0, o, "isExperiencePreviewEnabled", 0, a, "isIgnoreMatchEnabled", 0, s, "isImageAttachmentEnabledInLicenseApplication", 0, i, "isIphEarningsTotalAcrossLicenseTypesEnabled", 0, c, "isShowcaseExperiencesEnabled", 0, r, "maxCollectibleItemDetailsRequestCount", 0, l])
+    e.s(["enableIpPlatformLicenseRecommendations", 0, n, "isExperiencePreviewEnabled", 0, a, "isIgnoreMatchEnabled", 0, s, "isImageAttachmentEnabledInLicenseApplication", 0, i, "isIphEarningsTotalAcrossLicenseTypesEnabled", 0, l, "isShowcaseExperiencesEnabled", 0, r, "maxCollectibleItemDetailsRequestCount", 0, o])
 }, 942100, e => {
     "use strict";
     var t = e.i(157700);
@@ -172,8 +162,13 @@
             namespace: "content-suitability",
             name: "enableProposedIarcQuestionnaire",
             defaultValue: !1
+        }),
+        r = (0, t.defineFlag)({
+            namespace: "content-suitability",
+            name: "enableStudioQuestionnaireV2",
+            defaultValue: !1
         });
-    e.s(["enableProposedIarcQuestionnaire", 0, i, "questionnaireV2Allowlist", 0, a, "questionnaireV2Q1Release", 0, n])
+    e.s(["enableProposedIarcQuestionnaire", 0, i, "enableStudioQuestionnaireV2", 0, r, "questionnaireV2Allowlist", 0, a, "questionnaireV2Q1Release", 0, n])
 }, 9436, e => {
     "use strict";
     var t = e.i(157700);
@@ -214,15 +209,10 @@
         }),
         c = (0, t.defineFlag)({
             namespace: "creator-creations",
-            name: "isMomentsPostCreationEnabled",
-            defaultValue: !1
-        }),
-        u = (0, t.defineFlag)({
-            namespace: "creator-creations",
             name: "isMomentsModeratedTabEnabled",
             defaultValue: !1
         });
-    e.s(["isBadgeDefaultIconEnabled", 0, a, "isMomentsFeedIdEnabled", 0, o, "isMomentsModeratedTabEnabled", 0, u, "isMomentsPostCreationEnabled", 0, c, "isMomentsShareLinkEnabled", 0, l, "isMomentsSitetestUrlParsingEnabled", 0, i, "isMomentsUploadEnabled", 0, n, "isMomentsUploadLanguageSelectEnabled", 0, s, "isTextDocumentEnabled", 0, r])
+    e.s(["isBadgeDefaultIconEnabled", 0, a, "isMomentsFeedIdEnabled", 0, o, "isMomentsModeratedTabEnabled", 0, c, "isMomentsShareLinkEnabled", 0, l, "isMomentsSitetestUrlParsingEnabled", 0, i, "isMomentsUploadEnabled", 0, n, "isMomentsUploadLanguageSelectEnabled", 0, s, "isTextDocumentEnabled", 0, r])
 }, 360894, e => {
     "use strict";
     let t = (0, e.i(157700).defineFlag)({
@@ -461,7 +451,7 @@
             unifiedLogger: w
         } = (0, r.useUnifiedLoggerProvider)(), {
             isHighPriority: S,
-            isEnabled: E
+            isEnabled: A
         } = (0, a.useMemo)(() => {
             let e = f(o.AGE_VERIFICATION_UPSELL_BANNER_START_DATE),
                 t = f(o.AGE_VERIFICATION_UPSELL_BANNER_END_DATE),
@@ -471,11 +461,11 @@
                 isHighPriority: a <= n,
                 isEnabled: e <= n && n < t
             }
-        }, []), A = (0, a.useCallback)(async () => {
+        }, []), E = (0, a.useCallback)(async () => {
             await d(), c(!0)
         }, [c]);
         (0, a.useEffect)(() => {
-            E && y && (null == b ? void 0 : b.id) && (async () => {
+            A && y && (null == b ? void 0 : b.id) && (async () => {
                 let e = !1;
                 try {
                     e = await u()
@@ -511,17 +501,17 @@
                     }
                 })
             })
-        }, [E, y, b, w]);
+        }, [A, y, b, w]);
         let I = (0, a.useMemo)(() => {
-            let e = E && "doNotShow" !== h;
+            let e = A && "doNotShow" !== h;
             return {
                 isBannerVisible: e && !l,
                 isBannerEligible: e,
                 isHighPriority: S,
                 variant: "doNotShow" !== h ? h : "ageVerification",
-                dismissBanner: A
+                dismissBanner: E
             }
-        }, [E, h, l, S, A]);
+        }, [A, h, l, S, E]);
         return (0, t.jsx)(p.Provider, {
             value: I,
             children: s
@@ -1574,12 +1564,18 @@
             i = {};
         return e.id && (i.acknowledgmentId = e.id), a && (i.createdAt = a), n && (i.expiresAt = n), t.decisionEventId && (i.decisionEventId = t.decisionEventId), e.universeId && (i.universeId = e.universeId.toString()), i
     }], 330159), e.s(["default", 0, e => "https://".concat("roblox.com", "/safety-dashboard#/violations/").concat(encodeURIComponent(e))], 641831);
-    let l = (0, e.i(157700).defineFlag)({
-        namespace: "creator-platform",
-        name: "tryOnWebButtonEnabled",
-        defaultValue: !1
-    });
-    e.s(["tryOnWebButtonEnabled", 0, l], 787617)
+    var l = e.i(157700);
+    let c = (0, l.defineFlag)({
+            namespace: "creator-platform",
+            name: "isCreationsNavigationReorderEnabled",
+            defaultValue: !1
+        }),
+        u = (0, l.defineFlag)({
+            namespace: "creator-platform",
+            name: "tryOnWebButtonEnabled",
+            defaultValue: !1
+        });
+    e.s(["isCreationsNavigationReorderEnabled", 0, c, "tryOnWebButtonEnabled", 0, u], 787617)
 }, 719338, 672401, e => {
     "use strict";
     var t = e.i(416340);
@@ -1614,8 +1610,8 @@
         b = e.i(459703),
         w = e.i(156071),
         S = e.i(790806),
-        E = e.i(759283),
-        A = e.i(719338);
+        A = e.i(759283),
+        E = e.i(719338);
     let I = (0, y.makeStyles)()(() => ({
             dialogTitle: {
                 marginBottom: 12
@@ -1638,7 +1634,7 @@
                 translate: c
             } = (0, i.useTranslation)(), {
                 organization: u
-            } = (0, A.default)(), {
+            } = (0, E.default)(), {
                 classes: {
                     dialogTitle: y,
                     dialogContent: C,
@@ -1646,19 +1642,19 @@
                 }
             } = I(), {
                 enqueue: R,
-                close: P
-            } = (0, b.useSnackbar)(), _ = (0, a.useCallback)(e => {
+                close: _
+            } = (0, b.useSnackbar)(), P = (0, a.useCallback)(e => {
                 R({
                     message: e,
                     anchorOrigin: {
                         vertical: "bottom",
                         horizontal: "center"
                     },
-                    autoHideDuration: E.toastDurationTime,
+                    autoHideDuration: A.toastDurationTime,
                     autoHide: !0,
-                    onClose: P
+                    onClose: _
                 })
-            }, [R, P]), [x, O] = (0, a.useState)(), [k, U] = (0, a.useState)(), [N, D] = (0, a.useState)(), [M, L] = (0, a.useState)(), B = (0, a.useCallback)(async () => {
+            }, [R, _]), [x, O] = (0, a.useState)(), [k, U] = (0, a.useState)(), [N, D] = (0, a.useState)(), [M, L] = (0, a.useState)(), B = (0, a.useCallback)(async () => {
                 if (null == l ? void 0 : l.senderUserId) try {
                     let e = await S.default.getUserById(Number.parseInt(l.senderUserId, 10));
                     D(e.name), L(!1)
@@ -1670,16 +1666,16 @@
                     let e = await w.default.getGroupInfo(Number.parseInt(u.groupId, 10));
                     O(null == e ? void 0 : e.name)
                 } catch (e) {
-                    _(c("Error.GroupInformation"))
+                    P(c("Error.GroupInformation"))
                 }
-            }, [null == u ? void 0 : u.groupId, null == u ? void 0 : u.id, _, c]);
+            }, [null == u ? void 0 : u.groupId, null == u ? void 0 : u.id, P, c]);
             (0, a.useEffect)(() => {
                 B(), z()
             }, [z, B]);
-            let V = (0, a.useCallback)(() => {
+            let G = (0, a.useCallback)(() => {
                     r(void 0)
                 }, [r]),
-                G = (0, a.useCallback)(async () => {
+                V = (0, a.useCallback)(async () => {
                     if ((null == l ? void 0 : l.organizationId) && (null == l ? void 0 : l.id)) {
                         U(!0);
                         try {
@@ -1687,11 +1683,11 @@
                                 status: o.InvitationStatusType.Declined
                             }), r(!1)
                         } catch (e) {
-                            _(c("Error.DecliningInvitation")), U(!1)
+                            P(c("Error.DecliningInvitation")), U(!1)
                         }
                     }
-                }, [l.id, l.organizationId, r, _, c]),
-                F = (0, a.useCallback)(async () => {
+                }, [l.id, l.organizationId, r, P, c]),
+                q = (0, a.useCallback)(async () => {
                     if ((null == l ? void 0 : l.organizationId) && (null == l ? void 0 : l.id)) {
                         U(!0);
                         try {
@@ -1699,10 +1695,10 @@
                                 status: o.InvitationStatusType.Accepted
                             }), r(!0)
                         } catch (e) {
-                            _(c("Error.AcceptingInvitation")), U(!1)
+                            P(c("Error.AcceptingInvitation")), U(!1)
                         }
                     }
-                }, [l.id, l.organizationId, r, _, c]);
+                }, [l.id, l.organizationId, r, P, c]);
             return (0, t.jsxs)(p.Dialog, {
                 maxWidth: "Medium",
                 open: n,
@@ -1739,7 +1735,7 @@
                             variant: "outlined",
                             color: "primary",
                             size: "small",
-                            onClick: V,
+                            onClick: G,
                             disabled: k,
                             children: c("Action.NotNow")
                         }), (0, t.jsxs)(h.Grid, {
@@ -1748,14 +1744,14 @@
                                 variant: "outlined",
                                 color: "primary",
                                 size: "small",
-                                onClick: G,
+                                onClick: V,
                                 disabled: k,
                                 children: c("Action.Decline")
                             }), (0, t.jsx)(d.Button, {
                                 variant: "contained",
                                 color: "primaryBrand",
                                 size: "small",
-                                onClick: F,
+                                onClick: q,
                                 loading: k,
                                 children: c("Action.Accept")
                             })]
@@ -1789,12 +1785,12 @@
                     dialogContent: u,
                     dialogActions: y
                 }
-            } = T(), [b, w] = (0, a.useState)(), [E, A] = (0, a.useState)(), I = (0, a.useCallback)(async () => {
+            } = T(), [b, w] = (0, a.useState)(), [A, E] = (0, a.useState)(), I = (0, a.useCallback)(async () => {
                 if (null == s ? void 0 : s.senderUserId) try {
                     let e = await S.default.getUserById(Number.parseInt(s.senderUserId, 10));
-                    w(e.name), A(!1)
+                    w(e.name), E(!1)
                 } catch (e) {
-                    A(!0)
+                    E(!0)
                 }
             }, [s]);
             (0, a.useEffect)(() => {
@@ -1820,11 +1816,11 @@
                         }), (0, t.jsx)(g.Typography, {
                             variant: "body1",
                             children: o ? (0, t.jsx)(t.Fragment, {
-                                children: E ? l("Message.InvitationAcceptedWithoutUsername") : l("Message.InvitationAccepted", {
+                                children: A ? l("Message.InvitationAcceptedWithoutUsername") : l("Message.InvitationAccepted", {
                                     username: null != b ? b : ""
                                 })
                             }) : (0, t.jsx)(t.Fragment, {
-                                children: E ? l("Message.InvitationDeclinedWithoutUsername") : l("Message.InvitationDeclined", {
+                                children: A ? l("Message.InvitationDeclinedWithoutUsername") : l("Message.InvitationDeclined", {
                                     username: null != b ? b : ""
                                 })
                             })
@@ -1846,8 +1842,8 @@
                 })]
             })
         }, [l.TranslationNamespace.Organization]);
-    var P = e.i(582977),
-        _ = e.i(672401);
+    var _ = e.i(582977),
+        P = e.i(672401);
     let x = (0, i.withTranslation)(e => {
         let {
             children: i
@@ -1855,10 +1851,10 @@
             user: d
         } = (0, r.useAuthentication)(), p = (0, u.useCurrentGroup)(), {
             currentItemGroupId: f
-        } = (0, c.default)(), [m, h] = (0, a.useState)(), [g, y] = (0, a.useState)(), [b, w] = (0, a.useState)(!1), [S, E] = (0, a.useState)(!1), [A, I] = (0, a.useState)(), [T, x] = (0, a.useState)(!1), O = null == d ? void 0 : d.id, k = (0, a.useMemo)(() => {
+        } = (0, c.default)(), [m, h] = (0, a.useState)(), [g, y] = (0, a.useState)(), [b, w] = (0, a.useState)(!1), [S, A] = (0, a.useState)(!1), [E, I] = (0, a.useState)(), [T, x] = (0, a.useState)(!1), O = null == d ? void 0 : d.id, k = (0, a.useMemo)(() => {
             var e;
             return null != (e = null == p ? void 0 : p.id) ? e : f
-        }, [p, f]), U = l.query[P.InviteQueryKey], N = l.isReady, D = (0, a.useCallback)(() => {
+        }, [p, f]), U = l.query[_.InviteQueryKey], N = l.isReady, D = (0, a.useCallback)(() => {
             n.default.push("https://create.".concat("roblox.com", "/dashboard/creations"))
         }, []), M = (0, a.useCallback)(async e => {
             if (!O) return void y(null);
@@ -1870,7 +1866,7 @@
             }
         }, [O, D]), L = (0, a.useCallback)(async () => {
             if (N) {
-                E(!0);
+                A(!0);
                 try {
                     if ("string" == typeof U) return void await M(U);
                     if (!k) return void h(null);
@@ -1882,7 +1878,7 @@
                 } catch (e) {
                     h(null), y(null)
                 } finally {
-                    E(!1)
+                    A(!1)
                 }
             }
         }, [k, M, U, N]), B = (0, a.useCallback)(() => {
@@ -1895,12 +1891,12 @@
         }), [m, B, b, S]);
         return (0, a.useEffect)(() => {
             L()
-        }, [L]), (0, t.jsx)(_.default.Provider, {
+        }, [L]), (0, t.jsx)(P.default.Provider, {
             value: z,
             children: (0, t.jsxs)(t.Fragment, {
                 children: [i, g && (0, t.jsxs)(t.Fragment, {
                     children: [(0, t.jsx)(C, {
-                        open: g.invitationStatusType === o.InvitationStatusType.Open && void 0 === A,
+                        open: g.invitationStatusType === o.InvitationStatusType.Open && void 0 === E,
                         onClose: e => {
                             !0 === e ? (I(!0), x(!0)) : !1 === e ? (I(!1), x(!0)) : (D(), y(null))
                         },
@@ -1908,10 +1904,10 @@
                     }), (0, t.jsx)(R, {
                         open: T,
                         onClose: () => {
-                            x(!1), !0 === A && B(), D()
+                            x(!1), !0 === E && B(), D()
                         },
                         invitation: g,
-                        accepted: !0 === A
+                        accepted: !0 === E
                     })]
                 })]
             })
@@ -2721,14 +2717,14 @@
                 primaryActionLinkTarget: b,
                 onPrimaryAction: w,
                 secondaryActionLabel: S,
-                secondaryActionHref: E,
-                secondaryActionLinkTarget: A,
+                secondaryActionHref: A,
+                secondaryActionLinkTarget: E,
                 onSecondaryAction: I,
                 hasCloseAffordance: C = !0,
                 closeLabel: T = "Dismiss alert",
                 onDismiss: R,
-                className: P,
-                style: _,
+                className: _,
+                style: P,
                 ...x
             } = e, O = (0, n.default)("foundation-web-alert-message-"), k = !!g, U = !!S, N = !!(C && R), D = "Feedback" === m && (k || U || N), M = "Warning" === h || "Error" === h ? "alert" : "status", L = null;
             k && (L = U ? o.default.createElement(p, {
@@ -2745,8 +2741,8 @@
             }));
             let B = U ? o.default.createElement(p, {
                 label: S || "",
-                href: E,
-                linkTarget: A,
+                href: A,
+                linkTarget: E,
                 onAction: I,
                 variant: "Utility"
             }) : null;
@@ -2754,7 +2750,7 @@
                 ref: a,
                 role: D ? "region" : M,
                 "aria-labelledby": D ? O : void 0,
-                className: (0, s.default)("foundation-web-alert relative width-full stroke-standard", "System" === m ? "[border-left-width:0] [border-right-width:0]" : "radius-medium", u[h], P),
+                className: (0, s.default)("foundation-web-alert relative width-full stroke-standard", "System" === m ? "[border-left-width:0] [border-right-width:0]" : "radius-medium", u[h], _),
                 ...x
             }, o.default.createElement("div", {
                 "aria-hidden": "true",
@@ -2904,7 +2900,7 @@
             }, l), S = g && a.default.createElement("span", {
                 className: (0, t.default)("content-emphasis flex-shrink-0", n),
                 "aria-hidden": "true"
-            }, c), E = (h || g) && a.default.createElement("div", {
+            }, c), A = (h || g) && a.default.createElement("div", {
                 className: "flex justify-between width-full gap-xsmall"
             }, h ? w : a.default.createElement("span", null), g ? S : a.default.createElement("span", null));
             return a.default.createElement("div", {
@@ -2920,7 +2916,7 @@
                 className: "flex items-center gap-small width-full"
             }, w, b, S) : a.default.createElement("div", {
                 className: "flex flex-col gap-small width-full"
-            }, "Top" === u && E, b, "Bottom" === u && E))
+            }, "Top" === u && A, b, "Bottom" === u && A))
         });
     i.displayName = "ProgressBar", e.s(["ProgressBar", 0, i])
 }, 830655, e => {
@@ -2960,15 +2956,15 @@
                 strokeWidth: f,
                 textClass: m,
                 valueContainerSize: h
-            } = n[s], g = (p - f) / 2, y = 2 * Math.PI * g, b = p / 2, w = Math.min(100, Math.max(0, l)), S = c && void 0 !== h ? h : p, E = "Determinate" === o;
+            } = n[s], g = (p - f) / 2, y = 2 * Math.PI * g, b = p / 2, w = Math.min(100, Math.max(0, l)), S = c && void 0 !== h ? h : p, A = "Determinate" === o;
             return a.default.createElement("div", {
                 ref: i,
                 className: (0, t.default)("foundation-web-progress-circle inline-flex items-center justify-center", r),
                 role: "progressbar",
                 "aria-label": u,
-                "aria-valuemin": E ? 0 : void 0,
-                "aria-valuemax": E ? 100 : void 0,
-                "aria-valuenow": E ? w : void 0,
+                "aria-valuemin": A ? 0 : void 0,
+                "aria-valuemax": A ? 100 : void 0,
+                "aria-valuenow": A ? w : void 0,
                 style: {
                     width: S,
                     height: S
@@ -2994,11 +2990,11 @@
                 r: g,
                 fill: "none",
                 strokeWidth: f,
-                strokeDasharray: E ? y : "".concat(.75 * y, " ").concat(.25 * y),
-                strokeDashoffset: E ? y * (1 - w / 100) : 0,
+                strokeDasharray: A ? y : "".concat(.75 * y, " ").concat(.25 * y),
+                strokeDashoffset: A ? y * (1 - w / 100) : 0,
                 strokeLinecap: "round",
-                className: (0, t.default)(!E && "foundation-web-progress-circle-indeterminate"),
-                style: E ? {
+                className: (0, t.default)(!A && "foundation-web-progress-circle-indeterminate"),
+                style: A ? {
                     stroke: "var(--fui-future-alpha-color-system-progress)",
                     transform: "rotate(-90deg)",
                     transformOrigin: "50% 50%",
@@ -3007,7 +3003,7 @@
                     stroke: "var(--fui-future-alpha-color-system-progress)",
                     transformOrigin: "50% 50%"
                 }
-            })), E && c && "Large" === s && a.default.createElement("div", {
+            })), A && c && "Large" === s && a.default.createElement("div", {
                 className: (0, t.default)("absolute content-emphasis flex items-center justify-center", m),
                 "aria-hidden": "true"
             }, a.default.createElement("span", null, Math.round(w)), a.default.createElement("span", null, "%")))
@@ -3287,8 +3283,8 @@
     var b = e.i(711367),
         w = e.i(772278),
         S = e.i(665564),
-        E = e.i(211089),
-        A = (t = new WeakMap, class extends E.Subscribable {
+        A = e.i(211089),
+        E = (t = new WeakMap, class extends A.Subscribable {
             build(e, t, a) {
                 var n;
                 let i = t.queryKey,
@@ -3370,7 +3366,7 @@
             }
         }),
         I = e.i(436175),
-        C = E,
+        C = A,
         T = (a = new WeakMap, n = new WeakMap, i = new WeakMap, class extends C.Subscribable {
             build(e, t, a) {
                 let n = new I.Mutation({
@@ -3481,14 +3477,14 @@
         var t;
         return null == (t = e.options.scope) ? void 0 : t.id
     }
-    var P = e.i(549772),
-        _ = e.i(841246),
+    var _ = e.i(549772),
+        P = e.i(841246),
         x = e.i(117437),
         O = (r = new WeakMap, s = new WeakMap, o = new WeakMap, l = new WeakMap, c = new WeakMap, u = new WeakMap, d = new WeakMap, p = new WeakMap, class {
             mount() {
-                y(this, u).value++, 1 === (0, f._)(this, u) && ((0, h._)(this, d, P.focusManager.subscribe(async e => {
+                y(this, u).value++, 1 === (0, f._)(this, u) && ((0, h._)(this, d, _.focusManager.subscribe(async e => {
                     e && (await this.resumePausedMutations(), (0, f._)(this, r).onFocus())
-                })), (0, h._)(this, p, _.onlineManager.subscribe(async e => {
+                })), (0, h._)(this, p, P.onlineManager.subscribe(async e => {
                     e && (await this.resumePausedMutations(), (0, f._)(this, r).onOnline())
                 })))
             }
@@ -3625,7 +3621,7 @@
                 return e.behavior = (0, x.infiniteQueryBehavior)(e.pages), this.ensureQueryData(e)
             }
             resumePausedMutations() {
-                return _.onlineManager.isOnline() ? (0, f._)(this, s).resumePausedMutations() : Promise.resolve()
+                return P.onlineManager.isOnline() ? (0, f._)(this, s).resumePausedMutations() : Promise.resolve()
             }
             getQueryCache() {
                 return (0, f._)(this, r)
@@ -3711,7 +3707,7 @@
                 }), (0, m._)(this, p, {
                     writable: !0,
                     value: void 0
-                }), (0, h._)(this, r, e.queryCache || new A), (0, h._)(this, s, e.mutationCache || new T), (0, h._)(this, o, e.defaultOptions || {}), (0, h._)(this, l, new Map), (0, h._)(this, c, new Map), (0, h._)(this, u, 0)
+                }), (0, h._)(this, r, e.queryCache || new E), (0, h._)(this, s, e.mutationCache || new T), (0, h._)(this, o, e.defaultOptions || {}), (0, h._)(this, l, new Map), (0, h._)(this, c, new Map), (0, h._)(this, u, 0)
             }
         });
     e.s(["QueryClient", 0, O], 387125)
@@ -3753,5 +3749,5 @@
     }])
 }]);
 
-//# debugId=63b047a9-2d57-4616-fb83-d70d4be1963d
-//# sourceMappingURL=2cw99geze_glh.js.map
+//# debugId=377fb437-6cbb-8509-1206-829d8c585b5f
+//# sourceMappingURL=3tm8-z9rob4i_.js.map

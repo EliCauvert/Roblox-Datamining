@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "64a1c76e-f401-b587-ae4d-c6d52b22388c")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "2b075c6e-13b5-ebf0-8831-b767b4c95f4e")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 118413, e => {
@@ -137,7 +137,7 @@
         x = (0, t.defineFlag)({
             namespace: "creator-analytics",
             name: "isJourneyEventsEnabled",
-            defaultValue: !1
+            defaultValue: !0
         }),
         R = (0, t.defineFlag)({
             namespace: "creator-analytics",
@@ -1762,5 +1762,5 @@
     }, "useCookieConsentContext", 0, F], 260241)
 }]);
 
-//# debugId=64a1c76e-f401-b587-ae4d-c6d52b22388c
-//# sourceMappingURL=0r2wfzlhy16xs.js.map
+//# debugId=2b075c6e-13b5-ebf0-8831-b767b4c95f4e
+//# sourceMappingURL=0xnob35l16zks.js.map

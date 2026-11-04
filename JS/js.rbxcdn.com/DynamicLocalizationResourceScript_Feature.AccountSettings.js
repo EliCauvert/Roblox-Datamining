@@ -1959,6 +1959,12 @@ Roblox.LangDynamic["Feature.AccountSettings"] = {
     "Description.ProfileVisibilityPreviousUsernames": "Who can see your previous usernames",
     "Description.ProfileVisibilityAbout": "Who can see the About section on your profile",
     "Heading.ProfileVisibility": "Profile visibility",
-    "Feature.AccountSettings.Heading.ContentPersonalization": "Content Personalization"
+    "Feature.AccountSettings.Heading.ContentPersonalization": "Content Personalization",
+    "Label.AlwaysAsk": "Always ask",
+    "Heading.Approvals": "Approvals",
+    "Description.ParentSide.RobuxTransferApprovals": "Choose when you want to approve your child's Robux transfers.",
+    "Description.RobuxTransferApproval.AlwaysAsk": "I want to approve every transfer.",
+    "Label.AlwaysAllowForTrustedFriends": "Always allow for Trusted Friends",
+    "Description.RobuxTransferApproval.TrustedFriends": "I want to allow transfers with trusted friends. You'll still be notified."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.AccountSettings");

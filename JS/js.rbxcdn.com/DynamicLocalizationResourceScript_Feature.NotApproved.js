@@ -426,6 +426,7 @@ Roblox.LangDynamic["Feature.NotApproved"] = {
     "Action.Pending": "Pending",
     "Action.ViewAppealGuidelines": "View appeal guidelines and disclosures",
     "Label.AbuseType.ChildEndangerment.V4": "Child Safety",
-    "Label.AbuseType.AgeInappropriateMetadata": "Age Inappropriate Metadata"
+    "Label.AbuseType.AgeInappropriateMetadata": "Age Inappropriate Metadata",
+    "Label.Sublabel.TCSBypassWarning.Note": "Your experience is not properly integrated with Roblox’s TextChat Service API. Please refer to https://create.roblox.com/docs/chat/guidelines to bring your experience within Terms of Use. \nCommon culprits are Signs, Bulletin Boards, Pet names, License plates, Trading systems, Announcement systems, Admin Tools, Comment Systems, and other free-text inputs. Some admin modules include messaging features that may bypass chat rules. Such features must be changed, removed, or rate limited to 1 update per minute."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.NotApproved");

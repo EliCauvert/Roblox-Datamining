@@ -519,11 +519,6 @@
     opacity: .8
 }
 
-.focus\:outline-focus:focus {
-    outline: var(--stroke-thicker)solid var(--color-selection-start);
-    outline-offset: var(--stroke-thicker)
-}
-
 .focus-visible\:outline-focus:focus-visible {
     outline: var(--stroke-thicker)solid var(--color-selection-start);
     outline-offset: var(--stroke-thicker)

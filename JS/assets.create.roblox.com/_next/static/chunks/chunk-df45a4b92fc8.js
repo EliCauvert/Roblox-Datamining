@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "221199a6-bfcc-e72d-3ad5-a95f4b1468c8")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "4c142a8f-a1d7-9094-efb3-19e96dce62ac")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 517290, e => {
@@ -3942,45 +3942,45 @@
                     })
                 })
             }, n
-        }(t.BaseAPI),
-        ew = function(e) {
-            function n() {
-                return null !== e && e.apply(this, arguments) || this
-            }
-            return i(n, e), n.prototype.settingsGetFlagsRaw = function(e) {
-                return r(this, void 0, void 0, function() {
-                    var n, i, r;
-                    return a(this, function(a) {
-                        switch (a.label) {
-                            case 0:
-                                return n = {}, i = {}, [4, this.request({
-                                    path: "/v1/flags",
-                                    schemaPath: "/v1/flags",
-                                    method: "GET",
-                                    headers: i,
-                                    query: n
-                                }, e)];
-                            case 1:
-                                return r = a.sent(), [2, new t.JSONApiResponse(r)]
-                        }
-                    })
-                })
-            }, n.prototype.settingsGetFlags = function(e) {
-                return r(this, void 0, void 0, function() {
-                    return a(this, function(t) {
-                        switch (t.label) {
-                            case 0:
-                                return [4, this.settingsGetFlagsRaw(e)];
-                            case 1:
-                                return [4, t.sent().value()];
-                            case 2:
-                                return [2, t.sent()]
-                        }
-                    })
-                })
-            }, n
         }(t.BaseAPI);
     (function(e) {
+        function n() {
+            return null !== e && e.apply(this, arguments) || this
+        }
+        i(n, e), n.prototype.settingsGetFlagsRaw = function(e) {
+            return r(this, void 0, void 0, function() {
+                var n, i, r;
+                return a(this, function(a) {
+                    switch (a.label) {
+                        case 0:
+                            return n = {}, i = {}, [4, this.request({
+                                path: "/v1/flags",
+                                schemaPath: "/v1/flags",
+                                method: "GET",
+                                headers: i,
+                                query: n
+                            }, e)];
+                        case 1:
+                            return r = a.sent(), [2, new t.JSONApiResponse(r)]
+                    }
+                })
+            })
+        }, n.prototype.settingsGetFlags = function(e) {
+            return r(this, void 0, void 0, function() {
+                return a(this, function(t) {
+                    switch (t.label) {
+                        case 0:
+                            return [4, this.settingsGetFlagsRaw(e)];
+                        case 1:
+                            return [4, t.sent().value()];
+                        case 2:
+                            return [2, t.sent()]
+                    }
+                })
+            })
+        }
+    })(t.BaseAPI),
+    function(e) {
         function n() {
             return null !== e && e.apply(this, arguments) || this
         }
@@ -4088,7 +4088,7 @@
                 })
             })
         }
-    })(t.BaseAPI), e.s(["AgreementCandidateIndexOfferStatusFilter", 0, {
+    }(t.BaseAPI), e.s(["AgreementCandidateIndexOfferStatusFilter", 0, {
         NoOfferSent: "NoOfferSent",
         HasAgreement: "HasAgreement"
     }, "AgreementCandidateIndexSortBy", 0, {
@@ -4362,7 +4362,7 @@
         DeveloperProduct: "DeveloperProduct",
         Collectible: "Collectible",
         DeveloperSubscription: "DeveloperSubscription"
-    }, "SettingsApi", 0, ew, "UniverseContentMaturity", 0, {
+    }, "UniverseContentMaturity", 0, {
         None: "None",
         Minimal: "Minimal",
         Mild: "Mild",
@@ -4371,5 +4371,5 @@
     }])
 }]);
 
-//# debugId=221199a6-bfcc-e72d-3ad5-a95f4b1468c8
-//# sourceMappingURL=3-bfboc6o2uef.js.map
+//# debugId=4c142a8f-a1d7-9094-efb3-19e96dce62ac
+//# sourceMappingURL=0uwo1st3ox4nc.js.map

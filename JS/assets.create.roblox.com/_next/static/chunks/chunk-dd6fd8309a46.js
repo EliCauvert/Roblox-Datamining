@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "3b2b397e-15de-c7cc-27e1-c5745ce7dcea")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "a8998c35-8793-b532-c89f-b07b9cc378e7")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 730530, e => {
@@ -88,8 +88,8 @@
         o = e.i(260022);
     let n = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/reference/engine/classes/Player#GetJoinData"),
         s = (0, o.resolveUrl)("developerArticleProductsInGamePurchasesUrl", "production", "global"),
-        c = (0, o.resolveUrl)("developerArticleBadgesSpecialGameAwardsUrl", "production", "global"),
-        i = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/monetization/game-passes"),
+        i = (0, o.resolveUrl)("developerArticleBadgesSpecialGameAwardsUrl", "production", "global"),
+        c = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/monetization/game-passes"),
         l = (0, o.resolveUrl)("developerArticleCreateVipServerUrl", "production", "global"),
         d = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/publishing/publish-experiences-and-places#release-to-the-public"),
         u = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/projects/assets/privacy"),
@@ -108,7 +108,7 @@
         L = (0, o.resolveUrl)("advertisingStandardsUrl", "production", "global"),
         E = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/publishing/account-verification"),
         S = "".concat((0, o.getProductionCreatorHubUrl)("global"), "/docs/production/monetization/avatar-creation-token");
-    e.s(["ACCOUNT_VERIFICATION_URL", 0, E, "ASSET_ACCESS_PRIVACY", 0, u, "BADGE_LEARN_MORE_URL", 0, c, "CREATOR_STORE_VERIFICATION_URL", 0, v, "DEVELOPER_PRODUCT_LEARN_MORE_URL", 0, s, "DISTRIBUTE_MODELS", 0, g, "LAUNCH_DATA_LEARN_MORE_URL", 0, n, "MARKETPLACE_POLICY", 0, A, "MOMENTS_LEARN_MORE_URL", 0, "https://about.roblox.com/newsroom/2025/09/roblox-moments-user-generated-discovery", "PASS_LEARN_MORE_URL", 0, i, "PRIVATE_SERVER_LEARN_MORE_URL", 0, l, "PUBLISHING_ADVANCE", 0, h, "RELEASE_EXPERIENCE_TO_PUBLIC_URL", 0, d, "ROBLOX_ADVERTISING_STANDARDS", 0, L, "ROBLOX_COMMUNITY_STANDARDS", 0, y, "ROBLOX_TERMS_OF_USE", 0, P, "SALE_LOCATION_LEARN_MORE_URL", 0, p, "SUBSCRIPTION_LEARN_MORE_PRICING_URL", 0, b, "SUBSCRIPTION_LEARN_MORE_PRODUCT_TYPES_URL", 0, f, "SUBSCRIPTION_LEARN_MORE_URL", 0, m, "SUBSCRIPTION_TERMS_OF_USE", 0, U, "TOKEN_LEARN_MORE_URL", 0, S], 253536);
+    e.s(["ACCOUNT_VERIFICATION_URL", 0, E, "ASSET_ACCESS_PRIVACY", 0, u, "BADGE_LEARN_MORE_URL", 0, i, "CREATOR_STORE_VERIFICATION_URL", 0, v, "DEVELOPER_PRODUCT_LEARN_MORE_URL", 0, s, "DISTRIBUTE_MODELS", 0, g, "LAUNCH_DATA_LEARN_MORE_URL", 0, n, "MARKETPLACE_POLICY", 0, A, "MOMENTS_LEARN_MORE_URL", 0, "https://about.roblox.com/newsroom/2025/09/roblox-moments-user-generated-discovery", "PASS_LEARN_MORE_URL", 0, c, "PRIVATE_SERVER_LEARN_MORE_URL", 0, l, "PUBLISHING_ADVANCE", 0, h, "RELEASE_EXPERIENCE_TO_PUBLIC_URL", 0, d, "ROBLOX_ADVERTISING_STANDARDS", 0, L, "ROBLOX_COMMUNITY_STANDARDS", 0, y, "ROBLOX_TERMS_OF_USE", 0, P, "SALE_LOCATION_LEARN_MORE_URL", 0, p, "SUBSCRIPTION_LEARN_MORE_PRICING_URL", 0, b, "SUBSCRIPTION_LEARN_MORE_PRODUCT_TYPES_URL", 0, f, "SUBSCRIPTION_LEARN_MORE_URL", 0, m, "SUBSCRIPTION_TERMS_OF_USE", 0, U, "TOKEN_LEARN_MORE_URL", 0, S], 253536);
     let C = {
             [t.default.Place]: r.default.Game,
             [t.default.SharedExperiences]: r.default.Game,
@@ -445,9 +445,9 @@
             [r.default.Journey]: null
         },
         B = {
-            [r.default.Badge]: c,
+            [r.default.Badge]: i,
             [r.default.DeveloperProduct]: s,
-            [r.default.GamePass]: i,
+            [r.default.GamePass]: c,
             [r.default.CatalogAsset]: p,
             [r.default.ExperienceSubscription]: m,
             [r.default.AvatarCreationToken]: S,
@@ -485,8 +485,8 @@
             [a.CategoryType.Package]: "",
             [a.CategoryType.SharedPackage]: ""
         },
-        c = (e, a) => "/dashboard/creations/experiences/".concat(e).concat(a ? "/observability" : "", "/server-management"),
-        i = {
+        i = (e, a) => "/dashboard/creations/experiences/".concat(e).concat(a ? "/observability" : "", "/server-management"),
+        c = {
             getUrl: (e, a, t) => {
                 let r = new URLSearchParams({
                     ...e ? {
@@ -504,11 +504,11 @@
             getConfigureItemUrl: (e, a) => {
                 switch (a) {
                     case r.default.Game:
-                        return i.getConfigureExperienceUrl(e);
+                        return c.getConfigureExperienceUrl(e);
                     case r.default.Bundle:
-                        return i.getConfigureBundlePath(e);
+                        return c.getConfigureBundlePath(e);
                     case r.default.CatalogAsset:
-                        return i.getConfigureAvatarItemsUrl(e);
+                        return c.getConfigureAvatarItemsUrl(e);
                     default:
                         throw Error("Unsupported item type ".concat(String(a)))
                 }
@@ -517,7 +517,7 @@
             getConfigureBundlePath: e => "/dashboard/creations/bundle/".concat(e, "/configure"),
             getConfigureExperienceUrl: e => "/dashboard/creations/experiences/".concat(e, "/configure"),
             configureCreatorStoreItemBasePath: "/dashboard/creations/store/",
-            getConfigureCreatorStoreItemUrl: e => "".concat(i.configureCreatorStoreItemBasePath).concat(e, "/configure"),
+            getConfigureCreatorStoreItemUrl: e => "".concat(c.configureCreatorStoreItemBasePath).concat(e, "/configure"),
             getConfigureAvatarItemsUrl: e => "/dashboard/creations/catalog/".concat(e, "/configure"),
             getConfigureDeveloperProductUrl: (e, a) => "/dashboard/creations/experiences/".concat(e, "/developer-products/").concat(a, "/configure"),
             getCreateDeveloperProductUrl: e => "/dashboard/creations/experiences/".concat(e, "/developer-products/create"),
@@ -628,12 +628,12 @@
             getPaymentsUrl: () => "/dashboard/payments",
             getServerManagementUrl: function(e) {
                 let a = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
-                return c(e, a)
+                return i(e, a)
             },
             getServerManagementServersUrl: function(e, a) {
                 let t = arguments.length > 2 && void 0 !== arguments[2] && arguments[2],
                     r = arguments.length > 3 ? arguments[3] : void 0,
-                    o = "".concat(c(e, t), "/").concat(a, "/servers");
+                    o = "".concat(i(e, t), "/").concat(a, "/servers");
                 if (!r || 0 === r.length) return o;
                 let n = new URLSearchParams;
                 return n.set("serverStatus", r.join(",")), "".concat(o, "?").concat(n.toString())
@@ -644,8 +644,8 @@
                     n = arguments.length > 5 ? arguments[5] : void 0,
                     s = new URLSearchParams;
                 (null != o || null != n) && s.set("logRange", "custom"), null != o && s.set("logStart", String(o)), null != n && s.set("logEnd", String(n));
-                let i = s.toString();
-                return "".concat(c(e, r), "/").concat(a, "/servers/").concat(t, "/details").concat(i ? "?".concat(i) : "")
+                let c = s.toString();
+                return "".concat(i(e, r), "/").concat(a, "/servers/").concat(t, "/details").concat(c ? "?".concat(c) : "")
             },
             getClientSessionsUrl: (e, a) => {
                 let t = "/dashboard/creations/experiences/".concat(e, "/observability/client-sessions");
@@ -664,7 +664,7 @@
             if ("" !== s[e]) return "".concat(o, "/").concat(s[e], "?keyword=").concat(encodeURIComponent(a));
             throw Error("Unsupported search asset type ".concat(e))
         }
-    }, "dashboard", 0, i, "developerForum", 0, {
+    }, "dashboard", 0, c, "developerForum", 0, {
         getBaseUrl: () => "https://devforum.roblox.com",
         getCdnBaseUrl: () => "https://doy2mn9upadnk.cloudfront.net",
         getMediaCdnBaseUrl: () => "//d3vcfwomg2mj2z.cloudfront.net",
@@ -743,6 +743,7 @@
         getGenreDefinitionsUrl: () => "".concat(n, "/production/publishing/experience-genres#genre-and-subgenre-descriptions"),
         getExperienceGenresAppealUrl: () => "".concat(n, "/production/publishing/experience-genres#genre-accuracy"),
         getMakeExperiencePublicUrl: () => "".concat(n, "/production/publishing/publish-experiences-and-places#make-experience-public"),
+        getPublishGamesUrl: () => "".concat(n, "/production/publishing/publish-games-and-places#publish-games"),
         getOwnershipTransferUrl: () => "".concat(n, "/projects/experience-ownership-transfer"),
         getStreamingUrl: () => "".concat(n, "/workspace/streaming"),
         getAnimationTransferUrl: () => "".concat(n, "/projects/transferring-animations"),
@@ -788,8 +789,8 @@
         o = e.i(880343),
         n = e.i(197649),
         s = e.i(416340),
-        c = e.i(23342);
-    let i = {
+        i = e.i(23342);
+    let c = {
             Large: 24,
             Medium: 20,
             Small: 16,
@@ -838,8 +839,8 @@
                 "aria-hidden": "true",
                 className: "absolute flex"
             }, s.default.createElement(r.LoadingSpinner, {
-                width: i[h],
-                height: i[h]
+                width: c[h],
+                height: c[h]
             })), s.default.createElement("span", {
                 className: (0, n.default)("flex items-center min-width-0", "Large" === h || "Medium" === h ? "gap-small" : "gap-xsmall", y && "invisible")
             }, A && s.default.createElement(o.Icon, {
@@ -853,7 +854,7 @@
                     as: e,
                     ...a
                 } = P, t = s.default.Children.only(p);
-                return s.default.createElement(c.Slot, {
+                return s.default.createElement(i.Slot, {
                     ref: g,
                     ...a,
                     className: L,
@@ -906,15 +907,15 @@
             let {
                 name: n,
                 size: s = "Medium",
-                className: c,
-                children: i,
+                className: i,
+                children: c,
                 ...l
             } = e;
             return t.default.createElement("span", {
                 ref: o,
                 "aria-hidden": !0,
                 "data-testid": "foundation-web-icon",
-                className: (0, a.default)("grow-0 shrink-0 basis-auto icon", n, r[s], c),
+                className: (0, a.default)("grow-0 shrink-0 basis-auto icon", n, r[s], i),
                 ...l
             })
         });
@@ -960,5 +961,5 @@
     e.s(["disabledOpacity", 0, "opacity-[0.5]"])
 }]);
 
-//# debugId=3b2b397e-15de-c7cc-27e1-c5745ce7dcea
-//# sourceMappingURL=3kuhj7rkljmub.js.map
+//# debugId=a8998c35-8793-b532-c89f-b07b9cc378e7
+//# sourceMappingURL=1uea-322k64e8.js.map

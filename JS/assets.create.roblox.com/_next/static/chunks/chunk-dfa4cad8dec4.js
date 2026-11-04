@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "7f43802f-3cfc-e25e-4e2e-1eceb82c88d9")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "b8b244b9-233b-44ab-89c1-7c7e7e5f679b")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 696564, e => {
@@ -484,7 +484,7 @@
     }, "getItemTypeChipIconSrc", 0, function(e, s) {
         let t = e.toLowerCase(),
             n = y.has(t) ? "".concat(t, "accessory") : t;
-        return "".concat("".concat("https://assets.create.roblox.com/4c6d6645455ec456f9d70bff2c4fd661126346b1/assets", "/unifiedFeeSystem"), "/").concat(s ? "".concat(n, ".svg") : "".concat(n, "_black.svg"))
+        return "".concat("".concat("https://assets.create.roblox.com/e4c82c8700c4522187c5cea8d13dc79b49da1ba1/assets", "/unifiedFeeSystem"), "/").concat(s ? "".concat(n, ".svg") : "".concat(n, "_black.svg"))
     }, "getPublishPageUrl", 0, function(e, s) {
         return "/dashboard/creations/".concat(a.itemTypeToPath[e], "/").concat(s, "/publish")
     }, "getTaxonomyDisplayName", 0, function(e, s) {
@@ -941,5 +941,5 @@
     e.s(["DialogContentText", () => s.D])
 }]);
 
-//# debugId=7f43802f-3cfc-e25e-4e2e-1eceb82c88d9
-//# sourceMappingURL=1eus-qzk7msb9.js.map
+//# debugId=b8b244b9-233b-44ab-89c1-7c7e7e5f679b
+//# sourceMappingURL=0qf1udxvkcp51.js.map

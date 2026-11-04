@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "9c5b8414-e134-3ef2-55db-6505f79a6a49")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "81753f1a-9279-d442-88f2-b153179f729c")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 174528, e => {
@@ -53,7 +53,7 @@
                     cause: t
                 })
             }
-        }, f = async e => {
+        }, g = async e => {
             let t = p(e);
             try {
                 return await t.userSettingsApiGet({
@@ -65,7 +65,7 @@
                     cause: t
                 })
             }
-        }, g = () => !("u" < typeof navigator) && !!navigator.globalPrivacyControl, m = async e => {
+        }, f = () => !("u" < typeof navigator) && !!navigator.globalPrivacyControl, m = async e => {
             var t, a;
             if (e && (null == (a = window.evidon) || null == (t = a.notice) ? void 0 : t.showOptions)) try {
                 window.evidon.notice.showOptions()
@@ -83,7 +83,7 @@
             return Array.from(new Set([...Object.keys(this.currentCookiePreferences), ...Object.keys(this.initialCookiePreferences)])).some(e => this.currentCookiePreferences[e] !== this.initialCookiePreferences[e])
         }
         getGpcState() {
-            let e = g(),
+            let e = f(),
                 t = this.hasCookiePreferencesChanged();
             return {
                 isGpcDetected: e,
@@ -112,7 +112,7 @@
             this.evidonCleanup && (this.evidonCleanup(), this.evidonCleanup = null)
         }
         constructor(e = {}) {
-            (0, r._)(this, "initialGpcState", void 0), (0, r._)(this, "evidonCleanup", null), (0, r._)(this, "initialCookiePreferences", void 0), (0, r._)(this, "currentCookiePreferences", void 0), this.initialGpcState = g(), this.initialCookiePreferences = {
+            (0, r._)(this, "initialGpcState", void 0), (0, r._)(this, "evidonCleanup", null), (0, r._)(this, "initialCookiePreferences", void 0), (0, r._)(this, "currentCookiePreferences", void 0), this.initialGpcState = f(), this.initialCookiePreferences = {
                 ...e
             }, this.currentCookiePreferences = {
                 ...e
@@ -194,7 +194,7 @@
                 modalLinkClass: d
             } = e, {
                 user: p
-            } = (0, I.useAuthentication)(), h = !!p, f = null != (n = null == i ? void 0 : i.isAdsSellShareDataEnabled) && n, g = null != (r = null == i ? void 0 : i.canUserManageAdsSettings) && r, m = (0, a.useCallback)(e => {
+            } = (0, I.useAuthentication)(), h = !!p, g = null != (n = null == i ? void 0 : i.isAdsSellShareDataEnabled) && n, f = null != (r = null == i ? void 0 : i.canUserManageAdsSettings) && r, m = (0, a.useCallback)(e => {
                 window.location.pathname.includes("/my/account") && (e.preventDefault(), window.location.href = u)
             }, [u]), v = (0, a.useCallback)(e => (0, t.jsx)(P.Link, {
                 href: "https://en.help.roblox.com/hc/articles/28943243301780",
@@ -245,23 +245,23 @@
                                     t = {
                                         lineBreak: x
                                     };
-                                return s.isGpcDetected ? f ? c(M, e, t) : c(E, e, t) : c(D, e, t)
+                                return s.isGpcDetected ? g ? c(M, e, t) : c(E, e, t) : c(D, e, t)
                             }
-                            if (!s.isGpcDetected) return g ? C("Body.GpcMissingSettingEligible", w) : c(D, [{
+                            if (!s.isGpcDetected) return f ? C("Body.GpcMissingSettingEligible", w) : c(D, [{
                                 opening: "aTagStart",
                                 closing: "aTagEnd",
                                 content: v
                             }], {
                                 lineBreak: x
                             });
-                            if (f) return g ? C("Body.GpcDetectedSettingEnabledEligible", w) : c(M, [{
+                            if (g) return f ? C("Body.GpcDetectedSettingEnabledEligible", w) : c(M, [{
                                 opening: "aTagStart",
                                 closing: "aTagEnd",
                                 content: v
                             }], {
                                 lineBreak: x
                             });
-                            let e = g ? {
+                            let e = f ? {
                                 tags: [{
                                     opening: "aTagWithHref",
                                     closing: "aTagEnd",
@@ -280,9 +280,9 @@
                                     lineBreak: x
                                 }
                             };
-                            if ("signal-with-changes" === s.scenario) return g ? C(S, w) : c(E, e.tags, e.args);
-                            let t = g ? S : E;
-                            return g ? C(t, w) : c(t, e.tags, e.args)
+                            if ("signal-with-changes" === s.scenario) return f ? C(S, w) : c(E, e.tags, e.args);
+                            let t = f ? S : E;
+                            return f ? C(t, w) : c(t, e.tags, e.args)
                         })()
                     })]
                 }), (0, t.jsx)(y.DialogFooter, {
@@ -303,7 +303,7 @@
             } = e, {
                 translate: i,
                 translateHTML: o
-            } = (0, w.useTranslation)(), c = (0, w.useLocalization)(), l = (0, n.useCookieConsentContext)().preferences, d = (0, a.useRef)(null), p = (0, a.useRef)(!1), [g, m] = (0, a.useState)(!1), {
+            } = (0, w.useTranslation)(), c = (0, w.useLocalization)(), l = (0, n.useCookieConsentContext)().preferences, d = (0, a.useRef)(null), p = (0, a.useRef)(!1), [f, m] = (0, a.useState)(!1), {
                 classes: {
                     container: b
                 }
@@ -332,11 +332,11 @@
             (0, a.useEffect)(() => () => {
                 d.current && d.current.cleanup()
             }, []), (0, a.useEffect)(() => {
-                if (g && !p.current) {
+                if (f && !p.current) {
                     let e = A();
                     d.current = new v(Object.keys(e).length > 0 ? e : l), p.current = !0, S(d.current.getGpcState())
                 }
-            }, [g, l, A]), (0, a.useEffect)(() => {
+            }, [f, l, A]), (0, a.useEffect)(() => {
                 if (d.current) {
                     let e = A(),
                         t = Object.keys(e).length > 0 ? e : l;
@@ -394,7 +394,7 @@
                         }
                         let p = !1;
                         if (o) try {
-                            let e = await f(n);
+                            let e = await g(n);
                             p = "Enabled" === e.allowSellShareData
                         } catch (e) {
                             console.error("Failed to get user settings:", e)
@@ -428,7 +428,7 @@
                     gcTime: 0
                 })
             })({
-                showModal: g,
+                showModal: f,
                 gpcTrackerRef: d,
                 userSettingsApiBaseUrl: (0, a.useMemo)(() => "".concat("https://apis.roblox.com", "/user-settings-api"), []),
                 apiGatewayBaseUrl: (0, a.useMemo)(() => "https://apis.roblox.com", []),
@@ -457,7 +457,7 @@
                     color: "secondary",
                     component: "span",
                     children: [q, (0, t.jsx)("img", {
-                        src: "".concat("https://assets.create.roblox.com/4c6d6645455ec456f9d70bff2c4fd661126346b1/assets", "/navigation/privacy_icon.png"),
+                        src: "".concat("https://assets.create.roblox.com/e4c82c8700c4522187c5cea8d13dc79b49da1ba1/assets", "/navigation/privacy_icon.png"),
                         alt: "",
                         style: {
                             marginLeft: "8px",
@@ -478,7 +478,7 @@
                     item: !0,
                     children: L
                 }), (0, t.jsx)(y.Dialog, {
-                    open: g,
+                    open: f,
                     onOpenChange: O,
                     size: "Small",
                     isModal: !0,
@@ -917,8 +917,8 @@
                 closeLabel: d,
                 hasMarginTop: p = !0,
                 hasMarginBottom: h = !0,
-                hasDescription: f = !1,
-                experimentalDisablePointerEventsStylingOnBody: g = !1
+                hasDescription: g = !1,
+                experimentalDisablePointerEventsStylingOnBody: f = !1
             } = e, m = (0, n.useMemo)(() => ({
                 size: o,
                 isModal: l,
@@ -927,15 +927,15 @@
                 closeLabel: d,
                 hasMarginTop: p,
                 hasMarginBottom: h,
-                hasDescription: f
-            }), [o, l, c, u, d, p, h, f]);
+                hasDescription: g
+            }), [o, l, c, u, d, p, h, g]);
             return (0, n.useEffect)(() => {
-                g && setTimeout(() => {
+                f && setTimeout(() => {
                     Object.assign(document.body.style, {
                         pointerEvents: "unset"
                     })
                 }, 0)
-            }, [g, t]), n.default.createElement(i.Provider, {
+            }, [f, t]), n.default.createElement(i.Provider, {
                 value: m
             }, n.default.createElement(r.Root, {
                 open: t,
@@ -954,11 +954,11 @@
             ...p
         } = e, {
             size: h,
-            isModal: f,
-            hasCloseAffordance: g,
+            isModal: g,
+            hasCloseAffordance: f,
             closeLabel: m,
             hasDescription: v
-        } = o(), b = (0, a.default)("foundation-web-dialog-overlay padding-medium foundation-web-portal-zindex", f && "bg-common-backdrop", l), y = (0, a.default)("relative radius-large bg-surface-100 stroke-muted stroke-standard foundation-web-dialog-content shadow-transient-high", i);
+        } = o(), b = (0, a.default)("foundation-web-dialog-overlay padding-medium foundation-web-portal-zindex", g && "bg-common-backdrop", l), y = (0, a.default)("relative radius-large bg-surface-100 stroke-muted stroke-standard foundation-web-dialog-content shadow-transient-high", i);
         return n.default.createElement(r.Portal, null, n.default.createElement(r.Overlay, {
             className: b,
             style: u
@@ -971,7 +971,7 @@
                 "aria-describedby": void 0
             },
             ...p
-        }, g && n.default.createElement("div", {
+        }, f && n.default.createElement("div", {
             className: "absolute foundation-web-dialog-close-container"
         }, n.default.createElement(r.Close, {
             asChild: !0
@@ -999,7 +999,7 @@
         }, t)
     };
     h.displayName = "DialogBody";
-    let f = e => {
+    let g = e => {
         let {
             children: t,
             className: a,
@@ -1011,8 +1011,8 @@
         }, t);
         return i ? n.default.createElement(s.VisuallyHidden, null, c) : c
     };
-    f.displayName = "DialogTitle";
-    let g = e => {
+    g.displayName = "DialogTitle";
+    let f = e => {
         let {
             children: t,
             className: r,
@@ -1025,8 +1025,8 @@
             ...s
         }, t)
     };
-    g.displayName = "DialogFooter", e.s(["Dialog", 0, d, "DialogBody", 0, h, "DialogContent", 0, p, "DialogFooter", 0, g, "DialogTitle", 0, f])
+    f.displayName = "DialogFooter", e.s(["Dialog", 0, d, "DialogBody", 0, h, "DialogContent", 0, p, "DialogFooter", 0, f, "DialogTitle", 0, g])
 }]);
 
-//# debugId=9c5b8414-e134-3ef2-55db-6505f79a6a49
-//# sourceMappingURL=292t1mr2b_257.js.map
+//# debugId=81753f1a-9279-d442-88f2-b153179f729c
+//# sourceMappingURL=253s9h3x97_57.js.map

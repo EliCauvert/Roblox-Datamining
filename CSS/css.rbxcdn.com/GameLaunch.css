@@ -8,6 +8,12 @@
     overflow: hidden
 }
 
+.thumbnail-2d-container.thumbnail-2d-loading {
+    width: 100%;
+    height: 100%;
+    display: block
+}
+
 .thumbnail-2d-container img {
     display: inline
 }

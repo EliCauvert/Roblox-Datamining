@@ -22,6 +22,19 @@ Roblox.LangDynamic["Feature.DownloadLanding"] = {
     "Action.Download": "Download",
     "Heading.GetTheRobloxApp": "Get the Roblox app",
     "Description.PlayExploreBuildAndMore": "Play, explore, build, and more",
-    "Action.GetTheApp": "Get the app"
+    "Action.GetTheApp": "Get the app",
+    "Action.NextExperience": "Next experience",
+    "Heading.PlayRobloxAnywhere": "Play Roblox anywhere",
+    "Label.FeaturedExperiences": "Featured experiences",
+    "Heading.PlatformMobile": "Mobile",
+    "Heading.PlatformConsole": "Console",
+    "Heading.PlatformDesktop": "Desktop",
+    "Description.PlatformDesktop": "Play on your Windows PC or Mac.",
+    "Description.PlatformMobile": "Play on your phone or tablet.",
+    "Description.PlatformConsole": "Play on PlayStation and Xbox.",
+    "Heading.PlatformVr": "VR",
+    "Description.PlatformVr": "Play in virtual reality on Meta Quest.",
+    "Action.ShowExperience": "Show {experienceName}",
+    "Action.PreviousExperience": "Previous experience"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.DownloadLanding");
