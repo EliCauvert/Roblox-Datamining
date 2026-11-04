@@ -13,9 +13,8 @@ local function getNearestThumbIndex(p1, Entry): number
 	
 	for i = 2, #Entry do
 		local Magnitude1 = math.abs(Entry[i] - p1)
-		local IsEntryBelow: boolean = Entry[i] == Entry[v1] and p1 > Entry[i]
 		
-		if Magnitude1 < Magnitude or IsEntryBelow then
+		if Magnitude1 < Magnitude - 0.000000001 then
 			v1 = i
 			Magnitude = Magnitude1
 		end
@@ -60,21 +59,21 @@ return function(p2)
 			local UseResultResult = UseResult2(p3)
 			
 			if GetInputModeModule(UserInputService:GetLastInputType()) == InputModeModule.Directional or UseResultResult == nil then return end
-			local Fractions = {}
+			local ThumbTrackFractions = {}
 			
-			for i, thumb in p2.thumbs do
-				Fractions[i] = p2.toFraction(thumb.value:getValue())
+			for thumb in p2.thumbs do
+				ThumbTrackFractions[thumb] = p2.getThumbTrackFraction(thumb)
 			end
-			local NearestThumbIndex = getNearestThumbIndex(UseResultResult, Fractions)
+			local NearestThumbIndex = getNearestThumbIndex(UseResultResult, ThumbTrackFractions)
 			UseRefResult.current = NearestThumbIndex
 			UseResult(NearestThumbIndex)
-			p2.seekThumb(NearestThumbIndex, UseResultResult)
+			p2.seekThumbToTrackFraction(NearestThumbIndex, UseResultResult)
 		end, {
 			UseResult2,
 			p2.thumbs,
-			p2.toFraction,
+			p2.getThumbTrackFraction,
 			UseResult,
-			p2.seekThumb
+			p2.seekThumbToTrackFraction
 		}),
 		onTrackDrag = ReactModule.useCallback(function(_, p4)
 			-- upvalues: UseRefResult (copy), UseResult2 (copy), p2 (copy)
@@ -82,11 +81,11 @@ return function(p2)
 			local UseResultResult = UseResult2(p4)
 			
 			if Current ~= nil and UseResultResult ~= nil then
-				p2.seekThumb(Current, UseResultResult)
+				p2.seekThumbToTrackFraction(Current, UseResultResult)
 				
 				return
 			end
-		end, { UseResult2, p2.seekThumb }),
+		end, { UseResult2, p2.seekThumbToTrackFraction }),
 		onTrackDragEnded = ReactModule.useCallback(function()
 			-- upvalues: UseRefResult (copy), UseResult1 (copy)
 			if UseRefResult.current ~= nil then

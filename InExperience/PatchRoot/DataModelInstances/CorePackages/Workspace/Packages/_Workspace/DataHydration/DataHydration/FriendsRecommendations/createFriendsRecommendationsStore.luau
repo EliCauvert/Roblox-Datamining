@@ -9,7 +9,6 @@ local LocalUserIdStore = require(Parent.LocalUserIdStore).LocalUserIdStore
 local RequestsModule = require(script.Parent.Requests)
 local _ = require(script.Parent.FriendsRecommendationsStoreTypes)
 local ContextTypeModule = require(script.Parent.Enums.ContextType)
-local FFlagAddFriendsPageUseSections = require(Parent.SharedFlags).FFlagAddFriendsPageUseSections
 local config = {
 	[ContextTypeModule.None] = true,
 	[ContextTypeModule.MutualFriends] = true,
@@ -52,7 +51,7 @@ local function normalizeRecommendation(p1)
 end
 
 return function()
-	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), RequestsModule (copy), LocalUserIdStore (copy), GetLocalPlayerUserIdFunction (copy), CryoModule (copy), normalizeRecommendation (copy), FFlagAddFriendsPageUseSections (copy)
+	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), RequestsModule (copy), LocalUserIdStore (copy), GetLocalPlayerUserIdFunction (copy), CryoModule (copy), normalizeRecommendation (copy)
 	local DataCacheModule = CreateDataCacheModule()
 	local DataResolverModule = CreateDataResolverModule({
 		supportsMultiGet = false,
@@ -88,11 +87,11 @@ return function()
 	
 	return {
 		getFriendsRecommendations = function(p1, p2)
-			-- upvalues: DataResolverModule (copy), FFlagAddFriendsPageUseSections (upval)
+			-- upvalues: DataResolverModule (copy)
 			if p2 and p2.skipFetch then
 				return DataResolverModule.getCachedItem(p1)
 			end
-			if FFlagAddFriendsPageUseSections and p2 and p2.forceFetch and not DataResolverModule.isRequestInQueueOrInFlight(p1) then
+			if p2 and p2.forceFetch and not DataResolverModule.isRequestInQueueOrInFlight(p1) then
 				DataResolverModule.fetchItem(p1)
 			end
 			return DataResolverModule.getAndFetchItem(p1)

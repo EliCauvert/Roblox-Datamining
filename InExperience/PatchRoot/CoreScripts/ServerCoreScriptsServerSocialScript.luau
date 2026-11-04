@@ -29,7 +29,6 @@ local ProfileSettingsRateLimitWindowSeconds = game:DefineFastInt("ProfileSetting
 local DisableRCCAntiHarrasmentAllowList = game:DefineFastFlag("DisableRCCAntiHarrasmentAllowList", false)
 local ShouldShowFriendJoinedPlayerToastModule = require(RobloxGui.Modules.Server.shouldShowFriendJoinedPlayerToast)
 local GatePrivateServerNudge = game:DefineFastFlag("GatePrivateServerNudge", false)
-local GlobalUserBlockingLuaReadsFromSCMCache = game:DefineFastFlag("GlobalUserBlockingLuaReadsFromSCMCache", false)
 local t = {}
 local config = {
 	Admin = { GroupId = 1200769 },
@@ -212,88 +211,43 @@ local function getPlayerCanManage(Player: Player)
 	NewPlayerCanManageDetails:FireAllClients(Text, Flag)
 end
 
-local _ = function(Player: Player, UserIds)
-	-- upvalues: Url (copy), HttpService (copy), HttpRbxApiService (copy)
-	return pcall(function()
-		-- upvalues: Url (upval), HttpService (upval), UserIds (copy), Player (copy), HttpRbxApiService (upval)
-		return HttpService:JSONDecode((HttpRbxApiService:PostAsyncFullUrl(string.format(Url.APIS_URL .. "user-blocking-api/v1/users/rcc/batch-check-reciprocal-block"), (HttpService:JSONEncode({ userIds = UserIds, requesterUserId = Player.UserId })))))
-	end)
-end
-
 local function sendPlayerBlockList(Player: Player)
-	-- upvalues: GlobalUserBlockingLuaReadsFromSCMCache (copy), Players (copy), UpdateLocalPlayerBlockList (copy), SendPlayerBlockList (copy), Url (copy), HttpService (copy), HttpRbxApiService (copy)
+	-- upvalues: Players (copy), UpdateLocalPlayerBlockList (copy), SendPlayerBlockList (copy)
 	if Player.UserId <= 0 then return end
-	if GlobalUserBlockingLuaReadsFromSCMCache then
-		local function scanAndSendBlockList(p1)
-			-- upvalues: Player (copy), Players (upval), UpdateLocalPlayerBlockList (upval), SendPlayerBlockList (upval)
-			if not Player.Parent then return end
-			local t = {}
-			
-			for _, player in Players:GetPlayers() do
-				if player ~= Player then
-					if Player:HasBlockedPlayer(player.UserId) then
-						t[player.UserId] = true
-					end
-					if p1 and player:HasBlockedPlayer(Player.UserId) then
-						UpdateLocalPlayerBlockList:FireClient(player, Player.UserId, true)
-					end
-				end
-			end
-			SendPlayerBlockList:FireClient(Player, t)
-		end
-		
-		local UserIds = false
-		Player.BlockListChanged:Connect(function()
-			-- upvalues: UserIds (ref), scanAndSendBlockList (copy)
-			if UserIds then
-				scanAndSendBlockList(false)
-				
-				return
-			else
-				scanAndSendBlockList(true)
-				UserIds = true
-			end
-		end)
-		
-		if Player:GetBlockListInitialized() then
-			scanAndSendBlockList(true)
-			UserIds = true
-		end
-		return
-	else
-		local UserIds = {}
-		
-		for _, player in Players:GetPlayers() do
-			if Player ~= player then
-				table.insert(UserIds, player.UserId)
-			end
-		end
-		local Success, Result = pcall(function()
-			-- upvalues: Url (upval), HttpService (upval), UserIds (copy), Player (copy), HttpRbxApiService (upval)
-			return HttpService:JSONDecode((HttpRbxApiService:PostAsyncFullUrl(string.format(Url.APIS_URL .. "user-blocking-api/v1/users/rcc/batch-check-reciprocal-block"), (HttpService:JSONEncode({ userIds = UserIds, requesterUserId = Player.UserId })))))
-		end)
-		local List = {}
+	local function scanAndSendBlockList(p1)
+		-- upvalues: Player (copy), Players (upval), UpdateLocalPlayerBlockList (upval), SendPlayerBlockList (upval)
+		if not Player.Parent then return end
 		local t = {}
 		
-		if Success and Result then
-			for _, user in Result.users do
-				if user.isBlocked then
-					t[user.userId] = true
-					table.insert(List, user.userId)
+		for _, player in Players:GetPlayers() do
+			if player ~= Player then
+				if Player:HasBlockedPlayer(player.UserId) then
+					t[player.UserId] = true
 				end
-				if user.isBlockingViewer then
-					local Player1 = Players:GetPlayerByUserId(user.userId)
-					Player1:UpdatePlayerBlocked(Player.UserId, true)
-					UpdateLocalPlayerBlockList:FireClient(Player1, Player.UserId, true)
+				if p1 and player:HasBlockedPlayer(Player.UserId) then
+					UpdateLocalPlayerBlockList:FireClient(player, Player.UserId, true)
 				end
 			end
 		end
-		Player:AddToBlockList(List)
-		
-		if game:GetFastFlag("EnableSetUserBlocklistInitialized") then
-			Player:SetBlockListInitialized()
-		end
 		SendPlayerBlockList:FireClient(Player, t)
+	end
+	
+	local Flag = false
+	Player.BlockListChanged:Connect(function()
+		-- upvalues: Flag (ref), scanAndSendBlockList (copy)
+		if Flag then
+			scanAndSendBlockList(false)
+			
+			return
+		else
+			scanAndSendBlockList(true)
+			Flag = true
+		end
+	end)
+	
+	if Player:GetBlockListInitialized() then
+		scanAndSendBlockList(true)
+		Flag = true
 	end
 end
 
@@ -312,7 +266,7 @@ local _ = function(Player: Player)
 	end)
 end
 
-local function Callback1(Player: Player)
+local function Callback(Player: Player)
 	-- upvalues: FStringRccInExperienceNameEnabledAllowListModule (copy), DisableRCCAntiHarrasmentAllowList (copy), Url (copy), HttpRbxApiService (copy), HttpService (copy), t3 (copy), SendPlayerProfileSettings (copy)
 	if Player.UserId <= 0 then return end
 	local IsInExperienceNameEnabled = false
@@ -334,12 +288,12 @@ end
 
 if FFlagInExperienceRequestProfileSettingsModule then
 	RequestPlayerProfileSettings.OnServerEvent:Connect(function(Player: Player)
-		-- upvalues: t3 (copy), SendPlayerProfileSettings (copy), Callback1 (copy)
+		-- upvalues: t3 (copy), SendPlayerProfileSettings (copy), Callback (copy)
 		local Text = tostring(Player.UserId)
 		local Entry = t3[Text]
 		
 		if Entry == nil then
-			coroutine.wrap(Callback1)(Player)
+			coroutine.wrap(Callback)(Player)
 			
 			return
 		else
@@ -430,7 +384,7 @@ local function Callback2(Player: Player)
 end
 
 local function onPlayerAdded(Player: Player)
-	-- upvalues: sendPlayerBlockList (copy), NewPlayerGroupDetails (copy), t1 (copy), getPlayerGroupDetails (copy), FFlagInExperienceUserProfileSettingsEnabledModule (copy), sendPlayerAllInExperienceNameEnabled (copy), Callback1 (copy), sendPlayerAllCanManage (copy), getPlayerCanManage (copy), sendCanChatWith (copy), FFlagEnablePartyNudgeAfterJoin (copy), FFlagShowFriendJoinedYouToastForNonReferredJoins (copy), Callback2 (copy)
+	-- upvalues: sendPlayerBlockList (copy), NewPlayerGroupDetails (copy), t1 (copy), getPlayerGroupDetails (copy), FFlagInExperienceUserProfileSettingsEnabledModule (copy), sendPlayerAllInExperienceNameEnabled (copy), Callback (copy), sendPlayerAllCanManage (copy), getPlayerCanManage (copy), sendCanChatWith (copy), FFlagEnablePartyNudgeAfterJoin (copy), FFlagShowFriendJoinedYouToastForNonReferredJoins (copy), Callback2 (copy)
 	coroutine.wrap(sendPlayerBlockList)(Player)
 	NewPlayerGroupDetails:FireClient(Player, t1)
 	
@@ -439,7 +393,7 @@ local function onPlayerAdded(Player: Player)
 	end
 	if FFlagInExperienceUserProfileSettingsEnabledModule then
 		sendPlayerAllInExperienceNameEnabled(Player)
-		coroutine.wrap(Callback1)(Player)
+		coroutine.wrap(Callback)(Player)
 	end
 	sendPlayerAllCanManage(Player)
 	coroutine.wrap(getPlayerCanManage)(Player)
@@ -466,13 +420,13 @@ UpdatePlayerBlockList.OnServerEvent:Connect(function(Player, UserId, Blocked)
 end)
 
 if FFlagBadgeVisibilitySettingEnabled then
-	UpdatePlayerProfileSettings.OnServerEvent:Connect(function(Player, p2)
+	UpdatePlayerProfileSettings.OnServerEvent:Connect(function(Player, p1)
 		-- upvalues: ProfileSettingsSlidingWindowRateLimit (copy), t4 (copy), ProfileSettingsRateLimitWindowSeconds (copy), ProfileSettingsMaxRequestsPerWindow (copy), CurrentTimes (copy), ProfileSettingsRateLimitSeconds (copy), t3 (copy), SendPlayerProfileSettings (copy)
-		if type(p2) ~= "table" then return end
+		if type(p1) ~= "table" then return end
 		local t = {}
 		
-		if type(p2.isInExperienceNameEnabled) ~= "boolean" then return end
-		t.isInExperienceNameEnabled = p2.isInExperienceNameEnabled
+		if type(p1.isInExperienceNameEnabled) ~= "boolean" then return end
+		t.isInExperienceNameEnabled = p1.isInExperienceNameEnabled
 		local Text = tostring(Player.UserId)
 		local CurrentTime = tick()
 		
@@ -501,10 +455,10 @@ if FFlagBadgeVisibilitySettingEnabled then
 	end)
 end
 if FFlagEnableModerateChatRemoteEvent then
-	ModerateChatSettingUpdated.OnServerEvent:Connect(function(Player: Player, p2)
+	ModerateChatSettingUpdated.OnServerEvent:Connect(function(Player: Player, p1)
 		-- upvalues: TextChatService (copy), ModerateChatSettingUpdated (ref)
-		if typeof(p2) == "boolean" and TextChatService:setModerationModeEnabled(Player.UserId, p2) then
-			ModerateChatSettingUpdated:FireClient(Player, p2)
+		if typeof(p1) == "boolean" and TextChatService:setModerationModeEnabled(Player.UserId, p1) then
+			ModerateChatSettingUpdated:FireClient(Player, p1)
 		end
 	end)
 end
@@ -553,10 +507,10 @@ Players.PlayerRemoving:connect(function(Player)
 	end
 end)
 
-local function Callback() end
+local function Callback1() end
 
 for _, RemoteEvent in ipairs(RobloxReplicatedStorage:GetChildren()) do
 	if RemoteEvent:IsA("RemoteEvent") then
-		RemoteEvent.OnServerEvent:Connect(Callback)
+		RemoteEvent.OnServerEvent:Connect(Callback1)
 	end
 end

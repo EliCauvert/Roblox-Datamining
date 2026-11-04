@@ -38,8 +38,19 @@ local function createMockLayout(UseTokensResult, SmallButtonSize: number)
 	}
 end
 
+local function createAbilityControl(Id, AbilityControl)
+	-- upvalues: FoundationModule (copy)
+	return {
+		id = Id,
+		label = if AbilityControl then AbilityControl.label else "InGame.HelpMenu.GenericAction",
+		icon = FoundationModule.Enums.IconName.DiamondSimplified,
+		assetId = if AbilityControl then AbilityControl.actionAssetId else nil,
+		disabled = AbilityControl == nil or AbilityControl.disabled == true
+	}
+end
+
 return function()
-	-- upvalues: UseKeybindsModule (copy), FoundationModule (copy), RobloxAppHooksModule (copy), SignalsReactModule (copy), DisplayModule (copy), ReactModule (copy), ConstantsModule (copy), BindingConfigsModule (copy), createMockLayout (copy), DeviceOrientationMode (copy)
+	-- upvalues: UseKeybindsModule (copy), FoundationModule (copy), RobloxAppHooksModule (copy), SignalsReactModule (copy), DisplayModule (copy), ReactModule (copy), ConstantsModule (copy), BindingConfigsModule (copy), createAbilityControl (copy), createMockLayout (copy), DeviceOrientationMode (copy)
 	local UseKeybindsModuleResult = UseKeybindsModule()
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseDeviceOrientationResult = RobloxAppHooksModule.useDeviceOrientation()
@@ -62,7 +73,7 @@ return function()
 	local Controls = UseKeybindsModuleResult.controls or {}
 	local LeftControls = {}
 	
-	for _, CenterControl in ipairs({
+	for _, AbilityControl in ipairs({
 		{
 			id = "UseTool",
 			icon = ConstantsModule.HELP_PAGE.TOUCH_ICONS.TAP
@@ -80,37 +91,25 @@ return function()
 			icon = ConstantsModule.HELP_PAGE.TOUCH_ICONS.ROTATE
 		}
 	}) do
-		local Control = Controls[CenterControl.id] or BindingConfigsModule.Controls[CenterControl.id]
+		local Control = Controls[AbilityControl.id] or BindingConfigsModule.Controls[AbilityControl.id]
 		
 		if Control then
 			table.insert(LeftControls, {
-				id = CenterControl.id,
+				id = AbilityControl.id,
 				label = Control.label,
-				icon = CenterControl.icon,
+				icon = AbilityControl.icon,
 				disabled = Control.disabled
 			})
 		end
 	end
-	local AbilityAction1 = Controls.AbilityAction1
-	local CenterControl1 = {
-		id = "AbilityAction1",
-		label = if AbilityAction1 then AbilityAction1.label else "InGame.HelpMenu.GenericAction",
-		icon = FoundationModule.Enums.IconName.DiamondSimplified,
-		disabled = AbilityAction1 == nil or AbilityAction1.disabled == true
-	}
+	local AbilityAction1 = createAbilityControl("AbilityAction1", Controls.AbilityAction1)
 	local Slots = {}
 	
 	for i = 2, 7 do
 		local Text = "AbilityAction" .. i
-		local Control = Controls[Text]
-		table.insert(Slots, {
-			id = Text,
-			label = if Control then Control.label else "InGame.HelpMenu.GenericAction",
-			icon = FoundationModule.Enums.IconName.DiamondSimplified,
-			disabled = Control == nil or Control.disabled == true
-		})
+		table.insert(Slots, (createAbilityControl(Text, Controls[Text])))
 	end
-	local List = { CenterControl1 }
+	local List = { AbilityAction1 }
 	
 	for _, slot in ipairs(Slots) do
 		table.insert(List, slot)
@@ -130,7 +129,7 @@ return function()
 		abilitiesAvailable = UseKeybindsModuleResult.abilitiesAvailable == true,
 		leftControls = LeftControls,
 		rightControls = List,
-		centerControl = CenterControl1,
+		centerControl = AbilityAction1,
 		slots = Slots,
 		layout = {
 			columnScale = 1,

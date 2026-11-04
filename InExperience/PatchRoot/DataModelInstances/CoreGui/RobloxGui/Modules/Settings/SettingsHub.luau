@@ -1133,20 +1133,20 @@ local function CreateSettingsHub()
 		
 		if FFlagLocalizeVersionLabels then
 			if RobloxTranslatorModule then
-				local Success2, Result2 = pcall(RobloxTranslatorModule.FormatByKey, RobloxTranslatorModule, "InGame.HelpMenu.Label.ClientVersion")
-				ClientVersion = if Success2 then Result2 else "Client Version: "
+				local Success1, Result1 = pcall(RobloxTranslatorModule.FormatByKey, RobloxTranslatorModule, "InGame.HelpMenu.Label.ClientVersion")
+				ClientVersion = if Success1 then Result1 else "Client Version: "
 			else
 				ClientVersion = "Client Version: "
 			end
 		end
 		local RobloxVersion = RunService:GetRobloxVersion()
-		local Success1, Result1 = pcall(function()
+		local Success, Result = pcall(function()
 			-- upvalues: RunService (upval)
 			return RunService.ClientGitHash
 		end)
 		
-		if Success1 then
-			RobloxVersion = string.format("%s (%.6s)", RobloxVersion, Result1)
+		if Success then
+			RobloxVersion = string.format("%s (%.6s)", RobloxVersion, Result)
 		end
 		config2.ClientVersionLabel = CreateFunction("TextLabel")({
 			Name = "ClientVersionLabel",
@@ -1162,8 +1162,8 @@ local function CreateSettingsHub()
 			TextYAlignment = Enum.TextYAlignment.Center
 		})
 		local ClientVersionLabel = config2.ClientVersionLabel
-		local _UDim2_3 = UDim2.new(0.2, -6, 1, 0)
-		ClientVersionLabel.Size = CoreScriptVersionEnabledEngineFeature and UDim2.new(0, ClientVersionLabel.TextBounds.X + 6, 0, YOffset) or _UDim2_3
+		local _UDim2_4 = UDim2.new(0.2, -6, 1, 0)
+		ClientVersionLabel.Size = CoreScriptVersionEnabledEngineFeature and UDim2.new(0, ClientVersionLabel.TextBounds.X + 6, 0, YOffset) or _UDim2_4
 		config2.ClientVersionLabel.TextScaled = not (CoreScriptVersionEnabledEngineFeature or config2.ClientVersionLabel.TextFits)
 		config2.PlaceVersionLabel = CreateFunction("TextLabel")({
 			Name = "PlaceVersionLabel",
@@ -1232,8 +1232,8 @@ local function CreateSettingsHub()
 				Visible = Inverted
 			})
 			local EnvironmentLabel = config2.EnvironmentLabel
-			local _UDim2_4 = UDim2.new(0.2, -6, 1, 0)
-			EnvironmentLabel.Size = CoreScriptVersionEnabledEngineFeature and UDim2.new(0, EnvironmentLabel.TextBounds.X + 6, 0, YOffset) or _UDim2_4
+			local _UDim2_3 = UDim2.new(0.2, -6, 1, 0)
+			EnvironmentLabel.Size = CoreScriptVersionEnabledEngineFeature and UDim2.new(0, EnvironmentLabel.TextBounds.X + 6, 0, YOffset) or _UDim2_3
 			config2.EnvironmentLabel.TextScaled = not (CoreScriptVersionEnabledEngineFeature or config2.EnvironmentLabel.TextFits)
 		end
 		if game:GetEngineFeature("GetPlaySessionIdEnabled") then
@@ -1254,8 +1254,8 @@ local function CreateSettingsHub()
 					TextYAlignment = Enum.TextYAlignment.Center
 				})
 				local PlaySessionIdLabel = config2.PlaySessionIdLabel
-				local _UDim2_2 = UDim2.new(0.2, -6, 1, 0)
-				PlaySessionIdLabel.Size = CoreScriptVersionEnabledEngineFeature and UDim2.new(0, PlaySessionIdLabel.TextBounds.X + 6, 0, YOffset) or _UDim2_2
+				local _UDim2_5 = UDim2.new(0.2, -6, 1, 0)
+				PlaySessionIdLabel.Size = CoreScriptVersionEnabledEngineFeature and UDim2.new(0, PlaySessionIdLabel.TextBounds.X + 6, 0, YOffset) or _UDim2_5
 				config2.PlaySessionIdLabel.TextScaled = not config2.PlaySessionIdLabel.TextFits
 			end
 		end
@@ -1373,8 +1373,8 @@ local function CreateSettingsHub()
 			
 			if FFlagLocalizeVersionLabels then
 				if RobloxTranslatorModule then
-					local Success, Result = pcall(RobloxTranslatorModule.FormatByKey, RobloxTranslatorModule, "InGame.HelpMenu.Label.ClientCoreScriptVersion")
-					ClientCoreScriptVersion = if Success then Result else "Client CoreScript Version: "
+					local Success2, Result2 = pcall(RobloxTranslatorModule.FormatByKey, RobloxTranslatorModule, "InGame.HelpMenu.Label.ClientCoreScriptVersion")
+					ClientCoreScriptVersion = if Success2 then Result2 else "Client CoreScript Version: "
 				else
 					ClientCoreScriptVersion = "Client CoreScript Version: "
 				end
@@ -1393,8 +1393,8 @@ local function CreateSettingsHub()
 				TextYAlignment = Enum.TextYAlignment.Center
 			})
 			local CoreScriptVersionLabel = config2.CoreScriptVersionLabel
-			local _UDim2_5 = UDim2.new(0.2, -6, 1, 0)
-			CoreScriptVersionLabel.Size = CoreScriptVersionEnabledEngineFeature and UDim2.new(0, CoreScriptVersionLabel.TextBounds.X + 6, 0, YOffset) or _UDim2_5
+			local _UDim2_2 = UDim2.new(0.2, -6, 1, 0)
+			CoreScriptVersionLabel.Size = CoreScriptVersionEnabledEngineFeature and UDim2.new(0, CoreScriptVersionLabel.TextBounds.X + 6, 0, YOffset) or _UDim2_2
 			local VersionContainer = config2.VersionContainer
 			Object:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
 				-- upvalues: VersionContainer (copy), Object (copy), YOffset (upval)
@@ -1775,7 +1775,7 @@ local function CreateSettingsHub()
 			config2.setShowBottomBarSignal(config2.BottomButtonFrame.Visible)
 		end)
 		
-		local function v261(AnalyticsResumeShieldSource)
+		local function v291(AnalyticsResumeShieldSource)
 			-- upvalues: config (upval), Callback2 (upval), config2 (upval), RbxAnalyticsService (upval), ConstantsModule (upval), GuiService (upval)
 			if config.FFlagAddUILessMode then
 				Callback2(false, nil, nil, nil, AnalyticsResumeShieldSource)
@@ -1795,8 +1795,8 @@ local function CreateSettingsHub()
 		
 		if IsSideSheetEnabledModule then
 			config2.PageTitleCloseButton = UtilityModule:MakeStyledImageButton("PageTitleClose", "rbxasset://textures/ui/InspectMenu/x.png", UDim2.new(0, 40, 0, 40), UDim2.new(0, 16, 0, 16), function()
-				-- upvalues: v261 (copy), ConstantsModule (upval)
-				v261(ConstantsModule.AnalyticsResumeXButtonSource)
+				-- upvalues: v291 (copy), ConstantsModule (upval)
+				v291(ConstantsModule.AnalyticsResumeXButtonSource)
 			end, nil, config2, "DefaultButton")
 			config2.PageTitleCloseButton.AnchorPoint = Vector2.new(1, 0.5)
 			config2.PageTitleCloseButton.Position = UDim2.new(1, 0, 0.5, 0)
@@ -1825,13 +1825,13 @@ local function CreateSettingsHub()
 		if config.FFlagEnableSystemScrimInSettingsHub then
 			local SystemScrimSignalStoreResult = require(CorePackages.Workspace.Packages.SystemScrim).SystemScrimSignalStore(false)
 			SystemScrimSignalStoreResult.backgroundScrimActivated.Event:Connect(function()
-				-- upvalues: config (upval), config2 (upval), ConstantsModule (upval), v261 (copy)
+				-- upvalues: config (upval), config2 (upval), ConstantsModule (upval), v291 (copy)
 				if config.FFlagRelocateMobileMenuButtons and config.FIntRelocateMobileMenuButtonsVariant ~= 0 then
 					config2:GetExperienceControlStore().onResume(ConstantsModule.AnalyticsResumeShieldSource)
 					
 					return
 				else
-					v261(ConstantsModule.AnalyticsResumeShieldSource)
+					v291(ConstantsModule.AnalyticsResumeShieldSource)
 				end
 			end)
 			config2.Shield:GetPropertyChangedSignal("Visible"):Connect(function()
@@ -1842,29 +1842,29 @@ local function CreateSettingsHub()
 			end)
 		end
 		config2.Shield.Activated:Connect(function()
-			-- upvalues: config (upval), config2 (upval), ConstantsModule (upval), v261 (copy)
+			-- upvalues: config (upval), config2 (upval), ConstantsModule (upval), v291 (copy)
 			if config.FFlagRelocateMobileMenuButtons and config.FIntRelocateMobileMenuButtonsVariant ~= 0 then
 				config2:GetExperienceControlStore().onResume(ConstantsModule.AnalyticsResumeShieldSource)
 				
 				return
 			else
-				v261(ConstantsModule.AnalyticsResumeShieldSource)
+				v291(ConstantsModule.AnalyticsResumeShieldSource)
 			end
 		end)
 		
 		if config.FFlagSettingsHubIndependentBackgroundVisibility then
 			config2.DarkenBackground.Activated:Connect(function()
-				-- upvalues: config (upval), config2 (upval), ConstantsModule (upval), v261 (copy), InExperienceAppChatModalModule (upval)
+				-- upvalues: config (upval), config2 (upval), ConstantsModule (upval), v291 (copy), InExperienceAppChatModalModule (upval)
 				if config.FFlagRelocateMobileMenuButtons and config.FIntRelocateMobileMenuButtonsVariant ~= 0 then
 					config2:GetExperienceControlStore().onResume(ConstantsModule.AnalyticsResumeShieldSource)
 				else
-					v261(ConstantsModule.AnalyticsResumeShieldSource)
+					v291(ConstantsModule.AnalyticsResumeShieldSource)
 				end
 				InExperienceAppChatModalModule.default:setVisible(false)
 			end)
 		end
 		if not config.FFlagRelocateMobileMenuButtons or config.FIntRelocateMobileMenuButtonsVariant == 0 then
-			local function v294()
+			local function v264()
 				-- upvalues: config (upval), config2 (upval), removeBottomBarBindings (upval), ConstantsModule1 (upval)
 				if config.FFlagPreventHiddenSwitchPage and config2:GetVisibility() == false then return end
 				config2:AddToMenuStack(config2.Pages.CurrentPage)
@@ -1881,12 +1881,12 @@ local function CreateSettingsHub()
 			end
 			
 			if InExperienceCapabilities.canNavigateHome then
-				addBottomBarButtonOld("LeaveGame", "Leave", ImageForKeyCode1, "rbxasset://textures/ui/Settings/Help/LeaveIcon.png", UDim2.new(0.5, if NoFFlagResponsiveUnitsDeprecateTenFoot then -160 else -130, 0.5, -25), v294, {
+				addBottomBarButtonOld("LeaveGame", "Leave", ImageForKeyCode1, "rbxasset://textures/ui/Settings/Help/LeaveIcon.png", UDim2.new(0.5, if NoFFlagResponsiveUnitsDeprecateTenFoot then -160 else -130, 0.5, -25), v264, {
 					Enum.KeyCode.L,
 					if config.FFlagEnableConsoleExpControls and config.ChromeEnabled then nil else Enum.KeyCode.ButtonX
-				}, v294)
+				}, v264)
 			end
-			local function v265()
+			local function v289()
 				-- upvalues: ResetEnabled (upval), config2 (upval), removeBottomBarBindings (upval)
 				if ResetEnabled then
 					config2:AddToMenuStack(config2.Pages.CurrentPage)
@@ -1896,16 +1896,16 @@ local function CreateSettingsHub()
 				end
 			end
 			
-			addBottomBarButtonOld("ResetCharacter", NewLocalization:Format(ConstantsModule.RespawnLocalizedKey), ImageForKeyCode2, "rbxasset://textures/ui/Settings/Help/ResetIcon.png", UDim2.new(0.5, if NoFFlagResponsiveUnitsDeprecateTenFoot then -550 else -400, 0.5, -25), v265, {
+			addBottomBarButtonOld("ResetCharacter", NewLocalization:Format(ConstantsModule.RespawnLocalizedKey), ImageForKeyCode2, "rbxasset://textures/ui/Settings/Help/ResetIcon.png", UDim2.new(0.5, if NoFFlagResponsiveUnitsDeprecateTenFoot then -550 else -400, 0.5, -25), v289, {
 				Enum.KeyCode.R,
 				if config.FFlagEnableConsoleExpControls and config.ChromeEnabled then nil else Enum.KeyCode.ButtonY
-			}, v265)
+			}, v289)
 			addBottomBarButtonOld("Resume", "Resume", if config.FFlagEnableConsoleExpControls then ImageForKeyCode3 else ImageForKeyCode, "rbxasset://textures/ui/Settings/Help/EscapeIcon.png", UDim2.new(0.5, if NoFFlagResponsiveUnitsDeprecateTenFoot then 200 else 140, 0.5, -25), function()
-				-- upvalues: v261 (copy), ConstantsModule (upval)
-				v261(ConstantsModule.AnalyticsResumeButtonSource)
+				-- upvalues: v291 (copy), ConstantsModule (upval)
+				v291(ConstantsModule.AnalyticsResumeButtonSource)
 			end, if config.FFlagEnableConsoleExpControls and config.ChromeEnabled then {} else { Enum.KeyCode.ButtonB, Enum.KeyCode.ButtonStart }, function()
-				-- upvalues: v261 (copy), ConstantsModule (upval)
-				v261(ConstantsModule.AnalyticsResumeGamepadSource)
+				-- upvalues: v291 (copy), ConstantsModule (upval)
+				v291(ConstantsModule.AnalyticsResumeGamepadSource)
 			end)
 		end
 		if config.FFlagAddSwitchTabHintsToIEM then

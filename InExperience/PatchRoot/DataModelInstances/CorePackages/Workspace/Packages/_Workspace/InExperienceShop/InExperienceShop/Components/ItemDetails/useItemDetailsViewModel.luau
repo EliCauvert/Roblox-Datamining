@@ -34,7 +34,7 @@ local function _(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), config (copy), SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), ReactModule (copy), ShopPageType (copy), findSectionForItem (copy), InitiateShopItemPurchaseModule (copy), UseGamePassTrialRedemptionModule (copy), SharedFlagsModule (copy), AbuseVectorModule (copy), UseShopReportOverflowModule (copy), FormatUpdatedDateModule (copy), ConstantsModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), config (copy), SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), ReactModule (copy), findSectionForItem (copy), ShopPageType (copy), InitiateShopItemPurchaseModule (copy), UseGamePassTrialRedemptionModule (copy), SharedFlagsModule (copy), AbuseVectorModule (copy), UseShopReportOverflowModule (copy), FormatUpdatedDateModule (copy), ConstantsModule (copy)
 	local Item = p1.item
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetInExperienceShopStoreModule)
@@ -64,16 +64,15 @@ return function(p1)
 		UseSignalStateResult.fetchGamePassOwnership
 	})
 	local IsOwned = if UseSignalStateResult2 == nil then Item.isOwned else UseSignalStateResult2
-	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: ShopPageType (upval), FFlagCategoryLoggingInShopPurchaseModule (upval), UseSignalStateResult1 (ref), findSectionForItem (upval), Item (copy), InitiateShopItemPurchaseModule (upval)
-		local Category = if ShopPageType then ShopPageType.Category else nil
-		local v1 = nil
+	local UseMemoResult = ReactModule.useMemo(function()
+		-- upvalues: FFlagCategoryLoggingInShopPurchaseModule (upval), UseSignalStateResult1 (ref), findSectionForItem (upval), Item (copy), ShopPageType (upval)
+		local CategoryLocation = nil
 		
 		if FFlagCategoryLoggingInShopPurchaseModule and UseSignalStateResult1 ~= nil then
 			local SectionForItem = findSectionForItem(UseSignalStateResult1, Item.id, Item.itemType)
 			
 			if SectionForItem ~= nil then
-				v1 = {
+				CategoryLocation = {
 					categoryGroup = SectionForItem.categoryGroup,
 					categoryPosition = SectionForItem.id,
 					categoryName = SectionForItem.name,
@@ -81,15 +80,24 @@ return function(p1)
 				}
 			end
 		end
-		if v1 == nil then
-			InitiateShopItemPurchaseModule(Item.id, Item.itemType, Category)
+		return {
+			shopPageType = if ShopPageType then ShopPageType.Category else nil,
+			categoryLocation = CategoryLocation
+		}
+	end, { Item.id, Item.itemType, UseSignalStateResult1 })
+	local UseResult = ReactModule.useCallback(function()
+		-- upvalues: UseMemoResult (copy), InitiateShopItemPurchaseModule (upval), Item (copy)
+		local CategoryLocation = UseMemoResult.categoryLocation
+		
+		if CategoryLocation == nil then
+			InitiateShopItemPurchaseModule(Item.id, Item.itemType, UseMemoResult.shopPageType)
 			
 			return
 		else
-			InitiateShopItemPurchaseModule(Item.id, Item.itemType, Category, v1)
+			InitiateShopItemPurchaseModule(Item.id, Item.itemType, UseMemoResult.shopPageType, CategoryLocation)
 		end
-	end, { Item.id, Item.itemType, UseSignalStateResult1 })
-	local UseGamePassTrialRedemptionModuleResult = UseGamePassTrialRedemptionModule(Item.id)
+	end, { Item.id, Item.itemType, UseMemoResult })
+	local UseGamePassTrialRedemptionModuleResult = UseGamePassTrialRedemptionModule(Item.id, UseMemoResult)
 	local UseShopReportOverflowResult = UseShopReportOverflowModule.useShopReportOverflow({
 		isReportingEnabled = SharedFlagsModule.FFlagEnableReportingFlowForExperienceShop,
 		buildReportSession = ReactModule.useCallback(function()
@@ -103,7 +111,7 @@ return function(p1)
 			}
 		end, { Item.id, Item.itemType })
 	})
-	local UseMemoResult = ReactModule.useMemo(function()
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: FormatUpdatedDateModule (upval), Item (copy)
 		return FormatUpdatedDateModule(Item.updated)
 	end, { Item.updated })
@@ -124,7 +132,7 @@ return function(p1)
 		description = Item.description,
 		creator = Item.creator,
 		categoryLabel = GamePass,
-		updated = UseMemoResult,
+		updated = UseMemoResult1,
 		isCompact = UseStateResult,
 		isOverflowMenuOpen = UseShopReportOverflowResult.isOverflowMenuOpen,
 		isReportingEnabled = UseShopReportOverflowResult.isReportingEnabled,

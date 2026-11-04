@@ -387,8 +387,8 @@ local function evaluateCondition(p9, Condition, p10, p11, p12)
 			-- upvalues: resolveBindingPathValue (upval), p9 (copy), SplitDottedPathModuleResult (copy), p10 (copy), p12 (copy), p11 (copy)
 			return resolveBindingPathValue(p9, SplitDottedPathModuleResult, p10, p12, nil, true, p11)
 		end)
-		local Ready = nil
 		local Number = nil
+		local Ready = nil
 		
 		if Success then
 			Number = Result
@@ -437,17 +437,17 @@ local function evaluateCondition(p9, Condition, p10, p11, p12)
 			return resolveBindingPathValue(p9, SplitDottedPathModuleResult1, p10, p12, nil, true, p11)
 		end)
 		local Result2 = nil
-		local Ready = nil
+		local Ready1 = nil
 		
 		if Success1 then
 			Result2 = Result1
-			Ready = Result3_1
+			Ready1 = Result3_1
 		else
 			Result2 = nil
-			Ready = Result3_1
+			Ready1 = Result3_1
 		end
-		if Ready and Ready ~= DataStatus.Ready then
-			return nil, Ready
+		if Ready1 and Ready1 ~= DataStatus.Ready then
+			return nil, Ready1
 		else
 			return Result2 == nil
 		end
@@ -458,17 +458,17 @@ local function evaluateCondition(p9, Condition, p10, p11, p12)
 			return resolveBindingPathValue(p9, SplitDottedPathModuleResult2, p10, p12, nil, true, p11)
 		end)
 		local Result5 = nil
-		local Ready = nil
+		local Ready3 = nil
 		
 		if Success2 then
 			Result5 = Result4
-			Ready = Result3_2
+			Ready3 = Result3_2
 		else
 			Result5 = nil
-			Ready = Result3_2
+			Ready3 = Result3_2
 		end
-		if Ready and Ready ~= DataStatus.Ready then
-			return nil, Ready
+		if Ready3 and Ready3 ~= DataStatus.Ready then
+			return nil, Ready3
 		else
 			return Result5 ~= nil
 		end
@@ -478,69 +478,69 @@ local function evaluateCondition(p9, Condition, p10, p11, p12)
 			-- upvalues: resolveBindingPathValue (upval), p9 (copy), SplitDottedPathModuleResult3 (copy), p10 (copy), p12 (copy), p11 (copy)
 			return resolveBindingPathValue(p9, SplitDottedPathModuleResult3, p10, p12, nil, true, p11)
 		end)
-		local Result7 = nil
+		local v3 = nil
 		local Ready = nil
 		
 		if Success3 then
-			Result7 = Result6
+			v3 = Result6
 			Ready = Result3_3
 		else
-			Result7 = nil
+			v3 = nil
 			Ready = Result3_3
 		end
 		if Ready and Ready ~= DataStatus.Ready then
 			return nil, Ready
 		else
-			return Result7 == nil or (if type(Result7) == "string" then Result7 == "" else type(Result7) == "table" and next(Result7) == nil)
+			return v3 == nil or (if type(v3) == "string" then v3 == "" else type(v3) == "table" and next(v3) == nil)
 		end
 	elseif Type == "is_not_empty" then
 		local SplitDottedPathModuleResult4 = SplitDottedPathModule(Value.field)
-		local Success4, Result8, Result3_4 = pcall(function()
+		local Success4, Result7, Result3_4 = pcall(function()
 			-- upvalues: resolveBindingPathValue (upval), p9 (copy), SplitDottedPathModuleResult4 (copy), p10 (copy), p12 (copy), p11 (copy)
 			return resolveBindingPathValue(p9, SplitDottedPathModuleResult4, p10, p12, nil, true, p11)
 		end)
-		local Ready = nil
-		local Result9 = nil
+		local Ready2 = nil
+		local v4 = nil
 		
 		if Success4 then
-			Result9 = Result8
-			Ready = Result3_4
+			v4 = Result7
+			Ready2 = Result3_4
 		else
-			Result9 = nil
-			Ready = Result3_4
+			v4 = nil
+			Ready2 = Result3_4
 		end
-		if Ready and Ready ~= DataStatus.Ready then
-			return nil, Ready
+		if Ready2 and Ready2 ~= DataStatus.Ready then
+			return nil, Ready2
 		else
-			return not (Result9 == nil or (if type(Result9) == "string" then Result9 == "" else type(Result9) == "table" and next(Result9) == nil))
+			return not (v4 == nil or (if type(v4) == "string" then v4 == "" else type(v4) == "table" and next(v4) == nil))
 		end
 	else
 		if FFlagSduiDismissPromptPageScope and Type == "contains" then
 			return Callback(Value, getFieldObject)
 		end
 		if Type == "and_condition" then
-			local EvaluateConditionResult1 = nil
-			local EvaluateConditionResult2_1 = nil
+			local EvaluateConditionResult = nil
+			local EvaluateConditionResult2 = nil
 			for _, condition in Value.conditions do
-				EvaluateConditionResult1, EvaluateConditionResult2_1 = evaluateCondition(p9, condition, p10, p11, p12)
+				EvaluateConditionResult, EvaluateConditionResult2 = evaluateCondition(p9, condition, p10, p11, p12)
 				
-				if EvaluateConditionResult2_1 and EvaluateConditionResult2_1 ~= DataStatus.Ready then
-					return EvaluateConditionResult1, EvaluateConditionResult2_1
-				elseif not EvaluateConditionResult1 then
-					return EvaluateConditionResult1
+				if EvaluateConditionResult2 and EvaluateConditionResult2 ~= DataStatus.Ready then
+					return EvaluateConditionResult, EvaluateConditionResult2
+				elseif not EvaluateConditionResult then
+					return EvaluateConditionResult
 				end
 			end
 			return true
 		elseif Type == "or_condition" then
-			local EvaluateConditionResult = nil
-			local EvaluateConditionResult2 = nil
+			local EvaluateConditionResult1 = nil
+			local EvaluateConditionResult2_1 = nil
 			for _, condition1 in Value.conditions do
-				EvaluateConditionResult, EvaluateConditionResult2 = evaluateCondition(p9, condition1, p10, p11, p12)
+				EvaluateConditionResult1, EvaluateConditionResult2_1 = evaluateCondition(p9, condition1, p10, p11, p12)
 				
-				if EvaluateConditionResult2 and EvaluateConditionResult2 ~= DataStatus.Ready then
-					return EvaluateConditionResult, EvaluateConditionResult2
-				elseif EvaluateConditionResult or EvaluateConditionResult == nil then
-					return EvaluateConditionResult, EvaluateConditionResult2
+				if EvaluateConditionResult2_1 and EvaluateConditionResult2_1 ~= DataStatus.Ready then
+					return EvaluateConditionResult1, EvaluateConditionResult2_1
+				elseif EvaluateConditionResult1 or EvaluateConditionResult1 == nil then
+					return EvaluateConditionResult1, EvaluateConditionResult2_1
 				end
 			end
 			return false
@@ -568,7 +568,7 @@ end
 local function resolveTablePropValue(p17, p18, List, p19, _, _, _, _, _)
 	-- upvalues: CryoModule (copy), Frozen1 (copy), DataStatus (copy)
 	local JoinResult = CryoModule.Dictionary.join(p19 or Frozen1, p18 or Frozen1)
-	local v3 = nil
+	local v5 = nil
 	
 	if List then
 		for i, value in List do
@@ -576,11 +576,11 @@ local function resolveTablePropValue(p17, p18, List, p19, _, _, _, _, _)
 			local Status = value(p17).status
 			
 			if Status and Status ~= DataStatus.Ready then
-				v3 = Status
+				v5 = Status
 			end
 		end
 	end
-	return JoinResult, v3
+	return JoinResult, v5
 end
 
 return {

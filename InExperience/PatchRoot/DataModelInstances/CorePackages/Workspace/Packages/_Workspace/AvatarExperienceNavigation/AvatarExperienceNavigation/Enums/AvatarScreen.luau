@@ -104,6 +104,7 @@ return {
 	LooksConfirmationPrompt = "LooksConfirmationPrompt",
 	AccessoryAdjustmentResetPrompt = "AccessoryAdjustmentResetPrompt",
 	AccessoryAdjustmentUnsavedPrompt = "AccessoryAdjustmentUnsavedPrompt",
+	DescriptionLinkSearchPrompt = "DescriptionLinkSearchPrompt",
 	SlotEditorClearAllConfirmationPrompt = "SlotEditorClearAllConfirmationPrompt",
 	SaveAvatarOnLeaveAvatarExperiencePrompt = "SaveAvatarOnLeaveAvatarExperiencePrompt",
 	SlotsAvatarSwitcherFtuxPrompt = "SlotsAvatarSwitcherFtuxPrompt",

@@ -916,9 +916,11 @@ CoreScripts.InGameMenu.GameSettings.SwitchToVRComfortSettings,कस्टम �
 CoreScripts.InGameMenu.GameSettings.UINavToggle,UI नैविगेशन टॉगल
 CoreScripts.InGameMenu.GameSettings.UINavToggleDescription,"UI नेविगेशन मोड में जाने और उससे बाहर निकलने के लिए ""\ की का इस्तेमाल करें"""""""
 CoreScripts.InGameMenu.GameSettings.UIScale,UI स्केल
+CoreScripts.InGameMenu.GameSettings.UIScaleDescription,पूरे Roblox में बटन और मेन्यू का साइज़ एडजस्ट करें.
 CoreScripts.InGameMenu.GameSettings.UIScaleLargest,सबसे बड़ा
 CoreScripts.InGameMenu.GameSettings.UIScaleMode,UI स्केल मोड
 CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,ऑटो
+CoreScripts.InGameMenu.GameSettings.UIScaleModeDescription,यह सेट करें कि पूरे Roblox में UI स्केल कैसे चुना जाए.
 CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,मैन्युअल
 CoreScripts.InGameMenu.GameSettings.UIScaleSmallest,सबसे छोटा
 CoreScripts.InGameMenu.GameSettings.VREnabled,VR मोड
@@ -3681,13 +3683,27 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} बाकी हैं
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsBody,आपको हर गेम में एक बार में सिर्फ़ 1 फ़्री ट्रायल इस्तेमाल करने का मौका मिलेगा. अपना मौजूदा ट्रायल खत्म होने के बाद फिर से कोशिश करें.
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsTitle,एक और फ़्री ट्रायल का मौका है
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedBody,आपको हर पास (Pass) के लिए सिर्फ़ 1 फ़्री ट्रायल इस्तेमाल करने का मौका मिलेगा.
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedTitle,फ़्री ट्रायल का इस्तेमाल पहले ही किया जा चुका है
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedBody,"यह पास (Pass) पहले से ही आपका है, इसलिए आपको फ़्री ट्रायल की ज़रूरत नहीं है."
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedTitle,आपके पास पहले से इसकी ओनरशिप है
+Feature.InExperienceShop.Description.GamePassNotInUniverseBody,
+Feature.InExperienceShop.Description.GamePassNotInUniverseTitle,
+Feature.InExperienceShop.Description.GamePassNotPurchasableBody,यह पास (Pass) अभी बिक्री के लिए उपलब्ध नहीं है.
+Feature.InExperienceShop.Description.GamePassNotPurchasableTitle,अभी बिक्री के लिए उपलब्ध नहीं है
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledBody,इस पास (Pass) के लिए फ़िलहाल कोई फ़्री ट्रायल उपलब्ध नहीं है.
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledTitle,कोई फ़्री ट्रायल उपलब्ध नहीं है
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Robux खरीदने का मतलब है कि आप हमारी {termsLinkStart}उपयोग की शर्तों{termsLinkEnd} से सहमत हैं, जिसमें आर्बिट्रेशन क्लॉज़ और वापसी से जुड़ी पॉलिसी शामिल हैं."
 Feature.InExperienceShop.GamePass,
 Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,बोनस आइटम
+Feature.InExperienceShop.Label.BuyNow,अभी खरीदें
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining} में खत्म हो जाएगा
 Feature.InExperienceShop.Label.FreeTrial,फ़्री ट्रायल
+Feature.InExperienceShop.Label.HaveTrial,आपके पास एक फ़्री ट्रायल है
 Feature.InExperienceShop.Label.NoDescription,कोई विवरण नहीं है
 Feature.InExperienceShop.Label.OfferEndTime,"{offer}, {timeRemaining} में खत्म हो जाएगा"
 Feature.InExperienceShop.Label.PreviewBanner,यह Roblox Studio में आपकी शॉप का प्रीव्यू है. प्लेयर्स को यह प्रीव्यू नहीं दिखता है.
@@ -3701,7 +3717,9 @@ Feature.InExperienceShop.Label.Timer.Second.Plural,{number} सेकंड
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 सेकंड
 Feature.InExperienceShop.Label.Trial,ट्रायल
 Feature.InExperienceShop.Label.Trialed,ट्रायल पूरा हो गया
+Feature.InExperienceShop.Label.TryNow,अभी आज़माएँ
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,आपने {ROBUX_AMOUNT} Robux खरीद लिए हैं
+Feature.InExperienceShop.Tooltip.RecentlyRedeemed,फ़्री ट्रायल पसंद आया?
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"क्या आपको वाकई अपनी इन्वेंट्री से इस आइटम को हमेशा के लिए डिलीट करना है? अपना फ़ैसला बदलने पर, आपको इसे किसी एक्सपीरिएंस में फिर से हासिल करना होगा."
 Feature.Item.Label.DeleteItemUndercase,आइटम डिलीट करें
 Feature.Landing.Label.PoweredBy,इसे बनाया है
@@ -3885,7 +3903,6 @@ Feature.Moments.Title.GenerateTextFeedbackReason,क्या गड़बड़
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,क्या आपको ‘Moment’ क्रिएशन छोड़ना है?
 Feature.Moments.Title.MomentRemoved,Moment हटा दिया गया
-Feature.Moments.Title.PostInsights,पोस्ट के बारे में इनसाइट
 Feature.Moments.Title.ReportPost,पोस्ट की रिपोर्ट करें
 Feature.Moments.Title.UnfollowConfirmationDialog,@{username} को अनफ़ॉलो करना है?
 Feature.Moments.Tooltip.Creation,एक्सपीरिएंस में मौजूद हर कोई आपके मोमेंट देख सकता है.

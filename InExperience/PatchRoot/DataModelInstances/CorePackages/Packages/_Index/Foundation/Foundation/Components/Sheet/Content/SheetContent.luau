@@ -90,6 +90,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Gui, Ref)
 	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(0)
 	local IsSheetTypeMatch = SheetType == SheetTypeModule.Bottom
 	local _UDim = if Gui.isContentFullBleed then nil else UDim.new(0, UseTokensModuleResult.Padding.Small)
+	local NoIsContentFullBleed: boolean = SheetType == SheetTypeModule.Side and not Gui.isContentFullBleed
 	local NoSelectable = Gui.Selectable == nil or Gui.Selectable
 	local Element = ReactModule.createElement(ScrollViewModule, {
 		ZIndex = 1,
@@ -126,7 +127,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Gui, Ref)
 				return UDim.new(0, p1 + BottomPadding + UseTokensModuleResult.Margin.Small)
 			end) else UDim.new(0, UseTokensModuleResult.Padding.Small),
 			left = _UDim,
-			right = _UDim
+			right = if FlagsModule.FoundationSideSheetInternalDrawer and NoIsContentFullBleed then nil else _UDim
 		},
 		ClipsDescendants = not IsSheetTypeMatch or HasHeader,
 		onCanvasPositionChanged = function(ScrollFrame)
@@ -158,9 +159,13 @@ return ReactModule.memo(ReactModule.forwardRef(function(Gui, Ref)
 		end) elseif IsIsReversed then WindowSizeY:map(function(YOffset): UDim2
 			return UDim2.new(1, 0, 0, YOffset)
 		end) else nil,
+		padding = if FlagsModule.FoundationSideSheetInternalDrawer and NoIsContentFullBleed then {
+			left = UDim.new(0, UseTokensModuleResult.Padding.Medium),
+			right = UDim.new(0, UseTokensModuleResult.Padding.Medium + UseTokensModuleResult.Padding.Small)
+		} else nil,
 		tag = {
 			["col align-x-center gap-medium size-full-0 auto-y"] = true,
-			["padding-x-medium"] = not Gui.isContentFullBleed,
+			["padding-x-medium"] = if FlagsModule.FoundationSideSheetInternalDrawer then not Gui.isContentFullBleed and not NoIsContentFullBleed else not Gui.isContentFullBleed,
 			["align-y-bottom"] = IsIsReversed
 		}
 	}, {

@@ -934,9 +934,11 @@ CoreScripts.InGameMenu.GameSettings.SwitchToVRComfortSettings,Cài Đặt Tùy C
 CoreScripts.InGameMenu.GameSettings.UINavToggle,Bật/Tắt Điều Hướng Giao Diện
 CoreScripts.InGameMenu.GameSettings.UINavToggleDescription,"Sử dụng phím ""\ để kích hoạt và thoát chế độ điều hướng Giao Diện"""
 CoreScripts.InGameMenu.GameSettings.UIScale,Tỷ lệ UI
+CoreScripts.InGameMenu.GameSettings.UIScaleDescription,Điều chỉnh kích thước của các nút và menu trên Roblox.
 CoreScripts.InGameMenu.GameSettings.UIScaleLargest,Lớn nhất
 CoreScripts.InGameMenu.GameSettings.UIScaleMode,Chế độ điều chỉnh tỷ lệ UI
 CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,Tự động
+CoreScripts.InGameMenu.GameSettings.UIScaleModeDescription,Thiết lập chế độ điều chỉnh tỷ lệ giao diện (UI) trên Roblox.
 CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,Thủ công
 CoreScripts.InGameMenu.GameSettings.UIScaleSmallest,Nhỏ nhất
 CoreScripts.InGameMenu.GameSettings.VREnabled,Chế Độ VR
@@ -3700,13 +3702,27 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,Còn {time}
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsBody,Bạn chỉ được dùng 1 bản dùng thử miễn phí trong cùng thời điểm cho mỗi trò chơi. Vui lòng thử lại sau khi bản dùng thử hiện tại kết thúc.
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsTitle,Một bản dùng thử miễn phí khác đang hoạt động
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedBody,Mỗi vé chỉ hỗ trợ dùng thử miễn phí 1 lần.
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedTitle,Đã sử dụng bản dùng thử miễn phí
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedBody,Bạn đã sở hữu vé này rồi nên không cần dùng thử miễn phí.
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedTitle,Bạn đã sở hữu món này rồi
+Feature.InExperienceShop.Description.GamePassNotInUniverseBody,
+Feature.InExperienceShop.Description.GamePassNotInUniverseTitle,
+Feature.InExperienceShop.Description.GamePassNotPurchasableBody,Vé này hiện chưa được bán.
+Feature.InExperienceShop.Description.GamePassNotPurchasableTitle,Hiện không bán
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledBody,Vé này hiện không có bản dùng thử miễn phí.
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledTitle,Không có bản dùng thử miễn phí
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Khi mua Robux, bạn đồng ý với {termsLinkStart}Điều khoản sử dụng{termsLinkEnd} của chúng tôi, bao gồm điều khoản trọng tài và chính sách thu hồi."
 Feature.InExperienceShop.GamePass,
 Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,Vật phẩm thưởng
+Feature.InExperienceShop.Label.BuyNow,Mua ngay
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Kết thúc sau {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,Dùng thử miễn phí
+Feature.InExperienceShop.Label.HaveTrial,Bạn có bản dùng thử miễn phí
 Feature.InExperienceShop.Label.NoDescription,Không có mô tả
 Feature.InExperienceShop.Label.OfferEndTime,{offer} sẽ kết thúc sau {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,Đây là bản xem trước Cửa hàng của bạn trong Roblox Studio. Người chơi sẽ không thấy bản xem trước này.
@@ -3720,7 +3736,9 @@ Feature.InExperienceShop.Label.Timer.Second.Plural,{number} giây
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 giây
 Feature.InExperienceShop.Label.Trial,
 Feature.InExperienceShop.Label.Trialed,Đã dùng thử
+Feature.InExperienceShop.Label.TryNow,Thử ngay
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Bạn đã mua thành công {ROBUX_AMOUNT} Robux
+Feature.InExperienceShop.Tooltip.RecentlyRedeemed,Bạn thích bản dùng thử miễn phí chứ?
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Bạn có chắc chắn muốn xóa vĩnh viễn vật phẩm này khỏi kho? Nếu thay đổi ý định, bạn sẽ phải tự kiếm lại vật phẩm này trong một trải nghiệm."
 Feature.Item.Label.DeleteItemUndercase,Xóa vật phẩm
 Feature.Landing.Label.PoweredBy,Được cung cấp bởi
@@ -3904,7 +3922,6 @@ Feature.Moments.Title.GenerateTextFeedbackReason,Đã xảy ra vấn đề gì?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Rời khỏi quá trình tạo Khoảnh khắc?
 Feature.Moments.Title.MomentRemoved,Đã xóa Khoảnh khắc
-Feature.Moments.Title.PostInsights,Thông tin chuyên sâu về bài đăng
 Feature.Moments.Title.ReportPost,Báo cáo bài đăng
 Feature.Moments.Title.UnfollowConfirmationDialog,Hủy theo dõi @{username}?
 Feature.Moments.Tooltip.Creation,Ai trong trải nghiệm cũng có thể xem Khoảnh khắc của bạn.

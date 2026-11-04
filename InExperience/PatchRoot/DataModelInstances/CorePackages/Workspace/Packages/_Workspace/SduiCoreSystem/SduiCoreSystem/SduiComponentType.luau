@@ -63,6 +63,7 @@
 	Icon = "Icon",
 	IconButton = "IconButton",
 	GroupForumPostPreview = "GroupForumPostPreview",
+	GroupSection = "GroupSection",
 	Image = "Image",
 	VerticalListWithImpressions = "VerticalListWithImpressions",
 	InfoTable = "InfoTable",

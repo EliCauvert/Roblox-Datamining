@@ -41,19 +41,16 @@ local config1 = {
 	SelectionBehaviorUp = Enum.SelectionBehavior.Escape,
 	SelectionBehaviorDown = Enum.SelectionBehavior.Escape
 }
+local _Vector2 = Vector2.new(0.5, 0.5)
 
 local function noop() end
 
-local function _(XScale: number, p1): UDim2
-	return if p1 then UDim2.fromScale(0.5, 1 - XScale) else UDim2.fromScale(XScale, 0.5)
-end
-
-local _ = function(X: number, p1): Vector2
-	return if p1 then Vector2.new(0.5, 1 - X) else Vector2.new(X, 0.5)
+local function getFullBounds()
+	return 0, 1
 end
 
 return ReactModule.forwardRef(function(p1, p2)
-	-- upvalues: WithDefaultsModule (copy), config (copy), OrientationModule (copy), UseTokensModule (copy), PresentationContextModule (copy), UseLastInputModeModule (copy), ReactModule (copy), GetKnobSizeModule (copy), UseSliderThumbsModule (copy), UseSliderCaptureModule (copy), UseSliderPointerDragModule (copy), InputModeModule (copy), GetKnobVisibilityModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), CursorTypeModule (copy), SelectionGroup (copy), noop (copy), CursorComponentModule (copy), SliderThumbModule (copy), WithCommonPropsModule (copy), ConstantsModule (copy), config1 (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), OrientationModule (copy), UseTokensModule (copy), PresentationContextModule (copy), UseLastInputModeModule (copy), ReactModule (copy), GetKnobSizeModule (copy), UseSliderThumbsModule (copy), UseSliderCaptureModule (copy), UseSliderPointerDragModule (copy), InputModeModule (copy), GetKnobVisibilityModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), CursorTypeModule (copy), _Vector2 (copy), SelectionGroup (copy), noop (copy), CursorComponentModule (copy), SliderThumbModule (copy), getFullBounds (copy), WithCommonPropsModule (copy), ConstantsModule (copy), config1 (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local IsOrientationMatch = WithDefaultsModuleResult.orientation == OrientationModule.Vertical
 	local UseTokensModuleResult = UseTokensModule()
@@ -65,16 +62,43 @@ return ReactModule.forwardRef(function(p1, p2)
 		return UseRefResult.current
 	end, {})
 	local KnobSizeModule = GetKnobSizeModule(UseTokensModuleResult, WithDefaultsModuleResult.size)
-	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(KnobSizeModule)
-	local UseResult = ReactModule.useCallback(function(Frame: Frame)
-		-- upvalues: UseBindingResult2 (copy)
-		UseBindingResult2(UDim2.fromOffset(Frame.AbsoluteSize.X, Frame.AbsoluteSize.Y))
+	local UseRefResult1 = ReactModule.useRef(Vector2.new(KnobSizeModule.X.Offset, KnobSizeModule.Y.Offset))
+	local UseResult = ReactModule.useCallback(function()
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy)
+		local Current = UseRefResult.current
+		
+		return if Current and Current.AbsoluteSize.X > 0 and Current.AbsoluteSize.Y > 0 then UseRefResult1.current / Current.AbsoluteSize else Vector2.zero
 	end, {})
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.zero)
+	local UseResult1 = ReactModule.useCallback(function()
+		-- upvalues: UseBindingResult2 (copy), UseResult (copy)
+		UseBindingResult2(UseResult())
+	end, { UseResult })
+	local UseResult2 = ReactModule.useCallback(function(Frame)
+		-- upvalues: UseRefResult1 (copy), UseResult1 (copy)
+		UseRefResult1.current = Frame.AbsoluteSize
+		UseResult1()
+	end, { UseResult1 })
+	local UseResult3 = ReactModule.useCallback(function(p3)
+		-- upvalues: UseResult1 (copy), WithDefaultsModuleResult (copy)
+		UseResult1()
+		
+		if WithDefaultsModuleResult.onAbsoluteSizeChanged then
+			WithDefaultsModuleResult.onAbsoluteSizeChanged(p3)
+		end
+	end, {
+		UseResult1,
+		WithDefaultsModuleResult.onAbsoluteSizeChanged
+	})
 	local UseSliderThumbsModuleResult = UseSliderThumbsModule({
 		thumbs = WithDefaultsModuleResult.thumbs,
 		range = WithDefaultsModuleResult.range,
 		step = WithDefaultsModuleResult.step,
-		onValueChanged = WithDefaultsModuleResult.onValueChanged
+		onValueChanged = WithDefaultsModuleResult.onValueChanged,
+		knobScale = UseBindingResult,
+		getKnobScale = UseResult,
+		isVertical = IsOrientationMatch,
+		isContained = WithDefaultsModuleResult.isContained
 	})
 	local UseSliderCaptureModuleResult = UseSliderCaptureModule({
 		thumbs = WithDefaultsModuleResult.thumbs,
@@ -83,15 +107,18 @@ return ReactModule.forwardRef(function(p1, p2)
 		step = WithDefaultsModuleResult.step,
 		isVertical = IsOrientationMatch,
 		isDisabled = WithDefaultsModuleResult.isDisabled,
+		lastInputMode = UseLastInputModeModuleResult,
 		updateThumbValue = UseSliderThumbsModuleResult.updateThumbValue,
-		clampToNeighbors = UseSliderThumbsModuleResult.clampToNeighbors
+		clampToNeighbors = UseSliderThumbsModuleResult.clampToNeighbors,
+		onCaptureStarted = WithDefaultsModuleResult.onDragStarted,
+		onCaptureEnded = WithDefaultsModuleResult.onDragEnded
 	})
 	local UseSliderPointerDragModuleResult = UseSliderPointerDragModule({
 		thumbs = WithDefaultsModuleResult.thumbs,
 		rootRef = UseRefResult,
 		isVertical = IsOrientationMatch,
-		toFraction = UseSliderThumbsModuleResult.toFraction,
-		seekThumb = UseSliderThumbsModuleResult.seekThumb,
+		getThumbTrackFraction = UseSliderThumbsModuleResult.getThumbTrackFraction,
+		seekThumbToTrackFraction = UseSliderThumbsModuleResult.seekThumbToTrackFraction,
 		setActiveIndex = UseSliderCaptureModuleResult.setActiveIndex,
 		onDragStarted = WithDefaultsModuleResult.onDragStarted,
 		onDragEnded = WithDefaultsModuleResult.onDragEnded
@@ -127,18 +154,14 @@ return ReactModule.forwardRef(function(p1, p2)
 				Enabled = not WithDefaultsModuleResult.isDisabled
 			})
 		}),
-		Track = ReactModule.createElement(ReactModule.Fragment, nil, WithDefaultsModuleResult.children),
+		Track = ReactModule.createElement(ReactModule.Fragment, nil, if WithDefaultsModuleResult.renderTrack then WithDefaultsModuleResult.renderTrack(UseSliderThumbsModuleResult.span) else WithDefaultsModuleResult.children),
 		SelectionCursor = if UseSliderCaptureModuleResult.isCaptured then ReactModule.createElement(ViewModule, {
 			ZIndex = 3,
-			Size = UseBindingResult,
-			AnchorPoint = if WithDefaultsModuleResult.isContained then UseSliderThumbsModuleResult.fractions[UseSliderCaptureModuleResult.activeThumbIndex]:map(function(X: number): Vector2
-				-- upvalues: IsOrientationMatch (copy)
-				return if IsOrientationMatch then Vector2.new(0.5, 1 - X) else Vector2.new(X, 0.5)
-			end) else Vector2.new(0.5, 0.5),
-			Position = UseSliderThumbsModuleResult.fractions[UseSliderCaptureModuleResult.activeThumbIndex]:map(function(XScale: number): UDim2
-				-- upvalues: IsOrientationMatch (copy)
-				return if IsOrientationMatch then UDim2.fromScale(0.5, 1 - XScale) else UDim2.fromScale(XScale, 0.5)
+			Size = UseBindingResult:map(function(Vector): UDim2
+				return UDim2.fromScale(Vector.X, Vector.Y)
 			end),
+			AnchorPoint = _Vector2,
+			Position = UseSliderThumbsModuleResult.positions[UseSliderCaptureModuleResult.activeThumbIndex],
 			selection = { Selectable = true },
 			selectionGroup = SelectionGroup,
 			cursor = CursorTypeModule.Invisible,
@@ -159,37 +182,38 @@ return ReactModule.forwardRef(function(p1, p2)
 	for i, thumb in WithDefaultsModuleResult.thumbs do
 		config2[`Thumb{i}`] = ReactModule.createElement(SliderThumbModule, {
 			trackRef = UseRefResult,
-			fraction = UseSliderThumbsModuleResult.fractions[i],
+			fraction = UseSliderThumbsModuleResult.trackFractions[i],
 			isVertical = IsOrientationMatch,
+			AnchorPoint = _Vector2,
+			Position = UseSliderThumbsModuleResult.positions[i],
 			Visible = KnobVisibilityModule,
 			isDisabled = WithDefaultsModuleResult.isDisabled,
 			isDragEnabled = IsNotUseLastInputModeModuleResultMatch,
-			isContained = WithDefaultsModuleResult.isContained,
 			knob = WithDefaultsModuleResult.renderThumb(i, {
 				isVisible = KnobVisibilityModule,
 				isDragging = UseSliderPointerDragModuleResult.draggedIndex == i
 			}),
 			onSeek = function(p3)
 				-- upvalues: UseSliderThumbsModuleResult (copy), i (copy)
-				UseSliderThumbsModuleResult.seekThumb(i, p3)
+				UseSliderThumbsModuleResult.seekThumbToTrackFraction(i, p3)
 			end,
-			getBounds = function()
-				-- upvalues: UseSliderThumbsModuleResult (copy), i (copy)
-				return UseSliderThumbsModuleResult.getThumbBounds(i)
-			end,
+			getBounds = getFullBounds,
 			onDragStarted = function()
 				-- upvalues: UseSliderPointerDragModuleResult (copy), i (copy)
 				UseSliderPointerDragModuleResult.onThumbDragStarted(i)
 			end,
 			onDragEnded = UseSliderPointerDragModuleResult.onThumbDragEnded,
-			onAbsoluteSizeChanged = UseResult,
+			onAbsoluteSizeChanged = UseResult2,
 			testId = thumb.testId
 		})
 	end
-	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+	local WithCommonPropsModuleResult = WithCommonPropsModule(WithDefaultsModuleResult, {
 		Size = _UDim2,
 		GroupTransparency = if WithDefaultsModuleResult.isDisabled then ConstantsModule.DISABLED_TRANSPARENCY else nil,
 		selectionGroup = if UseSliderCaptureModuleResult.isCaptured then SelectionGroup else config1,
 		ref = UseRefResult
-	}), config2)
+	})
+	WithCommonPropsModuleResult.onAbsoluteSizeChanged = UseResult3
+	
+	return ReactModule.createElement(ViewModule, WithCommonPropsModuleResult, config2)
 end)

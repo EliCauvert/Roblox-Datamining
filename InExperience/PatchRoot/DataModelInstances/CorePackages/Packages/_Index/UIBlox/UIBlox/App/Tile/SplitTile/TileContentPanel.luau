@@ -1,8 +1,6 @@
 ﻿local Parent = script.Parent.Parent.Parent.Parent
 local Parent1 = Parent.Parent
-local FoundationModule = require(Parent1.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent1.Foundation).Utility.normalizeFontFace
 local ReactModule = require(Parent1.React)
 local UseStyleModule = require(Parent.Core.Style.useStyle)
 local UseTextSizeOffsetModule = require(Parent.Core.Style.useTextSizeOffset)
@@ -11,7 +9,7 @@ local _ = require(Parent.App.Style.StyleTypes)
 local SetDefaultModule = require(Parent.Utility.setDefault)
 
 return function(p1)
-	-- upvalues: UseStyleModule (copy), UseTextSizeOffsetModule (copy), SetDefaultModule (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseStyleModule (copy), UseTextSizeOffsetModule (copy), SetDefaultModule (copy), ReactModule (copy), NormalizeFontFaceFunction (copy)
 	local UseStyleModuleResult = UseStyleModule()
 	local Settings = UseStyleModuleResult.Settings
 	local UseTextSizeOffsetModuleResult = UseTextSizeOffsetModule()
@@ -20,22 +18,22 @@ return function(p1)
 	local ContentFooter = p1.contentFooter
 	local SetDefaultModuleResult: number = SetDefaultModule(p1.textLineCount, 2)
 	local SetDefaultModuleResult1 = SetDefaultModule(p1.hasSidePadding, true)
-	local Offset3 = nil
-	local Offset2 = nil
 	local Offset1 = nil
 	local Offset = nil
+	local Offset2 = nil
+	local Offset3 = nil
 	
 	if p1.outerPadding == nil or type(p1.outerPadding) == "number" then
 		local SetDefaultModuleResult2 = SetDefaultModule(p1.outerPadding, v1)
+		Offset1 = SetDefaultModuleResult2
 		Offset = SetDefaultModuleResult2
 		Offset2 = SetDefaultModuleResult2
 		Offset3 = SetDefaultModuleResult2
-		Offset1 = SetDefaultModuleResult2
 	else
-		Offset = SetDefaultModule(p1.outerPadding.Left, v1)
-		Offset2 = SetDefaultModule(p1.outerPadding.Right, v1)
-		Offset3 = SetDefaultModule(p1.outerPadding.Top, v1)
-		Offset1 = SetDefaultModule(p1.outerPadding.Bottom, v1)
+		Offset1 = SetDefaultModule(p1.outerPadding.Left, v1)
+		Offset = SetDefaultModule(p1.outerPadding.Right, v1)
+		Offset2 = SetDefaultModule(p1.outerPadding.Top, v1)
+		Offset3 = SetDefaultModule(p1.outerPadding.Bottom, v1)
 	end
 	local SetDefaultModuleResult3 = SetDefaultModule(p1.titlePadding, v1)
 	local PanelHeight = p1.panelHeight
@@ -55,10 +53,10 @@ return function(p1)
 			Padding = UDim.new(0, SetDefaultModuleResult3)
 		}),
 		Padding = ReactModule.createElement("UIPadding", {
-			PaddingLeft = if SetDefaultModuleResult1 then UDim.new(0, Offset) else nil,
-			PaddingRight = if SetDefaultModuleResult1 then UDim.new(0, Offset2) else nil,
-			PaddingTop = UDim.new(0, Offset3),
-			PaddingBottom = UDim.new(0, Offset1)
+			PaddingLeft = if SetDefaultModuleResult1 then UDim.new(0, Offset1) else nil,
+			PaddingRight = if SetDefaultModuleResult1 then UDim.new(0, Offset) else nil,
+			PaddingTop = UDim.new(0, Offset2),
+			PaddingBottom = UDim.new(0, Offset3)
 		}),
 		TitleText = if SetDefaultModuleResult > 0 and ContentTitle and string.len(ContentTitle) > 0 then ReactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
@@ -67,8 +65,7 @@ return function(p1)
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Text = ContentTitle,
-			Font = if FoundationFontFaceMigration then nil else SetDefaultModuleResult4.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(SetDefaultModuleResult4.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(SetDefaultModuleResult4.Font),
 			TextSize = UseStyleModuleResultFont.BaseSize * SetDefaultModuleResult4.RelativeSize,
 			TextTransparency = TextEmphasis.Transparency,
 			TextColor3 = TextEmphasis.Color,

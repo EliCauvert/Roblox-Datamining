@@ -115,6 +115,8 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 							indicator = p3.indicator,
 							key = tostring(p3.id),
 							icon = p3.icon,
+							leading = p3.leading,
+							trailing = p3.trailing,
 							isActive = p3.id == ActiveTabId,
 							onActivated = UseResult,
 							LayoutOrder = LayoutOrder,

@@ -934,9 +934,11 @@ CoreScripts.InGameMenu.GameSettings.SwitchToVRComfortSettings,Ustawienia niestan
 CoreScripts.InGameMenu.GameSettings.UINavToggle,Przełączenie nawigacji po interfejsie użytkownika
 CoreScripts.InGameMenu.GameSettings.UINavToggleDescription,"Użyj klawisza „\”, aby przejść do trybu nawigacji po interfejsie użytkownika lub opuścić ten tryb"
 CoreScripts.InGameMenu.GameSettings.UIScale,Skala interfejsu użytkownika
+CoreScripts.InGameMenu.GameSettings.UIScaleDescription,Dostosuj rozmiar przycisków i menu w całym Robloxie.
 CoreScripts.InGameMenu.GameSettings.UIScaleLargest,Największa
 CoreScripts.InGameMenu.GameSettings.UIScaleMode,Tryb skalowania interfejsu użytkownika
 CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,Automatycznie
+CoreScripts.InGameMenu.GameSettings.UIScaleModeDescription,Ustaw sposób wyboru skali interfejsu użytkownika na Robloxie.
 CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,Ręcznie
 CoreScripts.InGameMenu.GameSettings.UIScaleSmallest,Najmniejsza
 CoreScripts.InGameMenu.GameSettings.VREnabled,Tryb VR
@@ -3700,13 +3702,27 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,pozostało {time}
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsBody,"W każdej grze można w danym momencie korzystać tylko z jednego bezpłatnego okresu próbnego. Spróbuj ponownie, gdy bieżący okres próbny dobiegnie końca."
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsTitle,Aktywny jest inny bezpłatny okres próbny
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedBody,W przypadku każdej przepustki z bezpłatnego okresu próbnego można skorzystać tylko raz.
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedTitle,Bezpłatny okres próbny został już wykorzystany
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedBody,"Masz już tę przepustkę, więc nie potrzebujesz bezpłatnego okresu próbnego."
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedTitle,Już to masz
+Feature.InExperienceShop.Description.GamePassNotInUniverseBody,
+Feature.InExperienceShop.Description.GamePassNotInUniverseTitle,
+Feature.InExperienceShop.Description.GamePassNotPurchasableBody,Ta przepustka nie jest obecnie dostępna w sprzedaży.
+Feature.InExperienceShop.Description.GamePassNotPurchasableTitle,Obecnie nie jest w sprzedaży
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledBody,Obecnie ta przepustka nie oferuje bezpłatnego okresu próbnego.
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledTitle,Brak dostępnego bezpłatnego okresu próbnego
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Kupując Robuxy, akceptujesz nasze {termsLinkStart}Warunki użytkowania{termsLinkEnd}, w tym klauzulę arbitrażową i zasady anulowania."
 Feature.InExperienceShop.GamePass,
 Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,Dodatkowy przedmiot
+Feature.InExperienceShop.Label.BuyNow,Kup teraz
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Kończy się za {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,Bezpłatny okres próbny
+Feature.InExperienceShop.Label.HaveTrial,Masz bezpłatny okres próbny
 Feature.InExperienceShop.Label.NoDescription,Brak opisu
 Feature.InExperienceShop.Label.OfferEndTime,Oferta {offer} kończy się za {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,To jest podgląd Twojego sklepu w Roblox Studio. Gracze nie widzą tego podglądu.
@@ -3720,7 +3736,9 @@ Feature.InExperienceShop.Label.Timer.Second.Plural,{number} sek.
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 sek.
 Feature.InExperienceShop.Label.Trial,Okres próbny
 Feature.InExperienceShop.Label.Trialed,Testowano w okresie próbnym
+Feature.InExperienceShop.Label.TryNow,Wypróbuj teraz
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Liczba kupionych Robuxów: {ROBUX_AMOUNT}
+Feature.InExperienceShop.Tooltip.RecentlyRedeemed,Podobał Ci się bezpłatny okres próbny?
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Czy na pewno chcesz trwale usunąć ten przedmiot ze swojego wyposażenia? Jeżeli zmienisz zdanie, trzeba będzie go ponownie zdobyć w projekcie."
 Feature.Item.Label.DeleteItemUndercase,Usuń przedmiot
 Feature.Landing.Label.PoweredBy,Obsługiwane przez
@@ -3904,7 +3922,6 @@ Feature.Moments.Title.GenerateTextFeedbackReason,Co poszło nie tak?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Wyjść z tworzenia momentu?
 Feature.Moments.Title.MomentRemoved,
-Feature.Moments.Title.PostInsights,Dane analityczne dotyczące postów
 Feature.Moments.Title.ReportPost,Zgłoś posta
 Feature.Moments.Title.UnfollowConfirmationDialog,Przestać obserwować @{username}?
 Feature.Moments.Tooltip.Creation,Wszystkie osoby w tym projekcie mogą wyświetlić Twoje momenty.

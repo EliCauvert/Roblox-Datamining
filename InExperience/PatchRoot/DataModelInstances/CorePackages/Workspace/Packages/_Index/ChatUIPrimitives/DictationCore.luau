@@ -1,0 +1,1 @@
+﻿return script.Parent.Parent.Parent._Index.DictationCore.DictationCore

@@ -934,9 +934,11 @@ CoreScripts.InGameMenu.GameSettings.SwitchToVRComfortSettings,Pengaturan Kustom
 CoreScripts.InGameMenu.GameSettings.UINavToggle,Tombol Navigasi UI
 CoreScripts.InGameMenu.GameSettings.UINavToggleDescription,"Gunakan tombol ""\ untuk masuk dan keluar dari mode navigasi UI"""
 CoreScripts.InGameMenu.GameSettings.UIScale,Skala UI
+CoreScripts.InGameMenu.GameSettings.UIScaleDescription,Sesuaikan ukuran tombol dan menu di Roblox.
 CoreScripts.InGameMenu.GameSettings.UIScaleLargest,Terbesar
 CoreScripts.InGameMenu.GameSettings.UIScaleMode,Mode Skala UI
 CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,Otomatis
+CoreScripts.InGameMenu.GameSettings.UIScaleModeDescription,Atur cara skala UI dipilih di Roblox.
 CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,Manual
 CoreScripts.InGameMenu.GameSettings.UIScaleSmallest,Terkecil
 CoreScripts.InGameMenu.GameSettings.VREnabled,Mode VR
@@ -3698,13 +3700,27 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} lagi
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsBody,Kamu hanya dapat menggunakan 1 uji coba gratis pada satu waktu di setiap game. Coba lagi setelah uji cobamu saat ini berakhir.
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsTitle,Uji coba gratis lainnya aktif
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedBody,Kamu hanya dapat menggunakan 1 uji coba gratis untuk setiap pas.
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedTitle,Uji coba gratis sudah digunakan
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedBody,"Kamu sudah memiliki pas ini, jadi kamu tidak perlu uji coba gratis."
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedTitle,Kamu sudah memiliki ini
+Feature.InExperienceShop.Description.GamePassNotInUniverseBody,
+Feature.InExperienceShop.Description.GamePassNotInUniverseTitle,
+Feature.InExperienceShop.Description.GamePassNotPurchasableBody,Pas ini tidak untuk dijual saat ini.
+Feature.InExperienceShop.Description.GamePassNotPurchasableTitle,Tidak untuk dijual saat ini
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledBody,Pas ini tidak memiliki uji coba gratis saat ini.
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledTitle,Tidak ada uji coba gratis yang tersedia
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Dengan membeli Robux, kamu menyetujui {termsLinkStart}Ketentuan Penggunaan{termsLinkEnd} kami, termasuk klausul arbitrase dan kebijakan pembatalan."
 Feature.InExperienceShop.GamePass,Pas game
 Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,Item bonus
+Feature.InExperienceShop.Label.BuyNow,Beli Sekarang
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Berakhir dalam {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,Uji coba gratis
+Feature.InExperienceShop.Label.HaveTrial,Kamu memiliki uji coba gratis
 Feature.InExperienceShop.Label.NoDescription,Tidak Ada Deskripsi
 Feature.InExperienceShop.Label.OfferEndTime,{offer} berakhir dalam {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,Ini preview Toko-mu di Roblox Studio. Pemain tidak bisa melihat preview ini.
@@ -3718,7 +3734,9 @@ Feature.InExperienceShop.Label.Timer.Second.Plural,{number} detik
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 detik
 Feature.InExperienceShop.Label.Trial,Uji Coba
 Feature.InExperienceShop.Label.Trialed,Sudah dicoba
+Feature.InExperienceShop.Label.TryNow,Coba Sekarang
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Kamu telah berhasil membeli {ROBUX_AMOUNT} Robux
+Feature.InExperienceShop.Tooltip.RecentlyRedeemed,Suka uji coba gratisnya?
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Kamu yakin ingin menghapus item ini dari inventarismu secara permanen? Jika kamu berubah pikiran, kamu harus mendapatkannya lagi di pengalaman virtual."
 Feature.Item.Label.DeleteItemUndercase,Hapus item
 Feature.Landing.Label.PoweredBy,Didukung oleh
@@ -3902,7 +3920,6 @@ Feature.Moments.Title.GenerateTextFeedbackReason,Apa masalahnya?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Keluar dari kreasi Moment?
 Feature.Moments.Title.MomentRemoved,
-Feature.Moments.Title.PostInsights,Insight postingan
 Feature.Moments.Title.ReportPost,Laporkan postingan
 Feature.Moments.Title.UnfollowConfirmationDialog,Berhenti mengikuti @{username}?
 Feature.Moments.Tooltip.Creation,Semua orang di pengalaman virtual dapat melihat Moment-mu.

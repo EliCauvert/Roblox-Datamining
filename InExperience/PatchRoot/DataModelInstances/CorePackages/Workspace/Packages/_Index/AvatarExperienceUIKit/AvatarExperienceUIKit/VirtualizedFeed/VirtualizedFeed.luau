@@ -4,6 +4,7 @@ local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local FFlagAXVirtualizedFeedVerticalPadding = require(Parent.SharedFlags).FFlagAXVirtualizedFeedVerticalPadding
 local FFlagAXSduiFeedBackToTopAndNavClearance = require(Parent.AvatarExperienceFlags).FFlagAXSduiFeedBackToTopAndNavClearance
+local FFlagAXFixVirtualizedFeedUpdateDepthModule = require(script.Parent.FFlagAXFixVirtualizedFeedUpdateDepth)
 local FoundationModule = require(Parent.Foundation)
 local Button = FoundationModule.Button
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
@@ -64,7 +65,7 @@ local _ = function(p1)
 end
 
 return ReactModule.forwardRef(function(Frame, Ref)
-	-- upvalues: FFlagAXVirtualizedFeedVerticalPadding (copy), FFlagVirtualizedFeedFooterWrapperProp (copy), ReactModule (copy), FFlagAXScrollTelemetryIntegration2 (copy), UseFlatListScrollPerformanceTrackerModule (copy), FFlagAXSduiFeedBackToTopAndNavClearance (copy), UserGameSettings (copy), IsFeedContentScrollableModule (copy), VirtualizedFeedBackToTopButton (copy), Loading (copy), IconSize (copy), View (copy), VirtualizedFeedFooterLayout (copy), FlatList (copy), ContentContainerStyle (copy), Style (copy)
+	-- upvalues: FFlagAXVirtualizedFeedVerticalPadding (copy), FFlagVirtualizedFeedFooterWrapperProp (copy), ReactModule (copy), FFlagAXScrollTelemetryIntegration2 (copy), UseFlatListScrollPerformanceTrackerModule (copy), FFlagAXSduiFeedBackToTopAndNavClearance (copy), FFlagAXFixVirtualizedFeedUpdateDepthModule (copy), IsFeedContentScrollableModule (copy), UserGameSettings (copy), VirtualizedFeedBackToTopButton (copy), Loading (copy), IconSize (copy), View (copy), VirtualizedFeedFooterLayout (copy), FlatList (copy), ContentContainerStyle (copy), Style (copy)
 	local HorizontalPadding = Frame.horizontalPadding or 0
 	local VerticalPadding = FFlagAXVirtualizedFeedVerticalPadding and Frame.verticalPadding or 0
 	local NoFFlagVirtualizedFeedFooterWrapperProp: boolean = not FFlagVirtualizedFeedFooterWrapperProp or Frame.shouldWrapFooter ~= false
@@ -95,14 +96,33 @@ return ReactModule.forwardRef(function(Frame, Ref)
 	local v2 = nil
 	local Callback = nil
 	local UseResult1 = nil
+	local Callback1 = nil
 	
-	if FFlagAXSduiFeedBackToTopAndNavClearance then
+	if FFlagAXSduiFeedBackToTopAndNavClearance and not FFlagAXFixVirtualizedFeedUpdateDepthModule then
 		v1, UseStateResult2_1 = ReactModule.useState(0)
 		v2, Callback = ReactModule.useState(0)
 		UseResult1 = ReactModule.useCallback(function(_, p1)
 			-- upvalues: UseStateResult2_1 (ref)
 			UseStateResult2_1(p1)
 		end, {})
+	end
+	if FFlagAXSduiFeedBackToTopAndNavClearance and FFlagAXFixVirtualizedFeedUpdateDepthModule then
+		local UseRefResult1 = ReactModule.useRef(0)
+		local UseRefResult2 = ReactModule.useRef(0)
+		local UseResult3 = ReactModule.useCallback(function()
+			-- upvalues: UseStateResult2 (copy), IsFeedContentScrollableModule (upval), UseRefResult1 (copy), UseRefResult2 (copy), VerticalPadding (copy)
+			UseStateResult2(IsFeedContentScrollableModule(UseRefResult1.current, UseRefResult2.current, VerticalPadding))
+		end, { VerticalPadding })
+		UseResult1 = ReactModule.useCallback(function(_, Current)
+			-- upvalues: UseRefResult1 (copy), UseResult3 (copy)
+			UseRefResult1.current = Current
+			UseResult3()
+		end, { UseResult3 })
+		Callback1 = ReactModule.useCallback(function(Current)
+			-- upvalues: UseRefResult2 (copy), UseResult3 (copy)
+			UseRefResult2.current = Current
+			UseResult3()
+		end, { UseResult3 })
 	end
 	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), UserGameSettings (upval)
@@ -161,7 +181,7 @@ return ReactModule.forwardRef(function(Frame, Ref)
 	local Element = nil
 	
 	if FFlagAXSduiFeedBackToTopAndNavClearance then
-		local IsIsEndOfList: boolean = IsFeedContentScrollableModule(v1 or 0, v2 or 0, VerticalPadding) and Frame.isEndOfList == true
+		local IsIsEndOfList: boolean = (if FFlagAXFixVirtualizedFeedUpdateDepthModule then UseStateResult else IsFeedContentScrollableModule(v1 or 0, v2 or 0, VerticalPadding)) and Frame.isEndOfList == true
 		local ListFooterComponent = if Frame.ListFooterComponent then Frame.ListFooterComponent elseif IsIsEndOfList then ReactModule.createElement(VirtualizedFeedBackToTopButton, { text = Frame.scrollToTopLabel, onActivated = UseResult2 }) elseif Frame.isLoading then ReactModule.createElement(Loading, { size = IconSize.Medium }) else nil
 		local EndOfListBottomPadding = Frame.endOfListBottomPadding or 0
 		local UseMemoResult = ReactModule.useMemo(function()
@@ -226,14 +246,17 @@ return ReactModule.forwardRef(function(Frame, Ref)
 		ClipsDescendants = Frame.clipsDescendants == nil or Frame.clipsDescendants,
 		LayoutOrder = Frame.LayoutOrder,
 		[ReactModule.Change.AbsoluteSize] = ReactModule.useCallback(function(Frame1: Frame)
-			-- upvalues: Frame (copy), FFlagAXSduiFeedBackToTopAndNavClearance (upval), Callback (ref)
+			-- upvalues: Frame (copy), FFlagAXSduiFeedBackToTopAndNavClearance (upval), Callback (ref), FFlagAXFixVirtualizedFeedUpdateDepthModule (upval), Callback1 (ref)
 			if Frame.onContainerWidthChanged then
 				Frame.onContainerWidthChanged(Frame1.AbsoluteSize.X)
 			end
 			if FFlagAXSduiFeedBackToTopAndNavClearance and Callback then
 				Callback(Frame1.AbsoluteSize.Y)
 			end
-		end, { Frame.onContainerWidthChanged }),
+			if FFlagAXFixVirtualizedFeedUpdateDepthModule and Callback1 then
+				Callback1(Frame1.AbsoluteSize.Y)
+			end
+		end, { Frame.onContainerWidthChanged, Callback1 }),
 		ref = Ref
 	}, {
 		UIPadding = if HorizontalPadding > 0 or VerticalPadding > 0 then ReactModule.createElement("UIPadding", {

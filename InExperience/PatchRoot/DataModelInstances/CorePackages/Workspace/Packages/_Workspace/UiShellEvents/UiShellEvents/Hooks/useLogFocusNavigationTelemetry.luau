@@ -6,6 +6,7 @@ local ReactModule = require(Parent.React)
 local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
 local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 local FocusNavigationTelemetryModule = require(UiShellEvents.Analytics.focusNavigationTelemetry)
+local LogFocusNavExitTriggerKey = game:DefineFastFlag("LogFocusNavExitTriggerKey", false)
 
 local function _(Text: string): boolean
 	return string.find(Text, "^HoldTo") ~= nil
@@ -21,7 +22,7 @@ local _ = function(p1, p2, p3): boolean
 end
 
 return function(Page)
-	-- upvalues: FocusNavigationUtilsModule (copy), ReactModule (copy), FocusNavigationTelemetryModule (copy), GuiService (copy), UserInputService (copy), ReactFocusNavigationModule (copy)
+	-- upvalues: FocusNavigationUtilsModule (copy), ReactModule (copy), FocusNavigationTelemetryModule (copy), GuiService (copy), UserInputService (copy), LogFocusNavExitTriggerKey (copy), ReactFocusNavigationModule (copy)
 	local UseLastInputModeResult, UseLastInputModeResult2 = FocusNavigationUtilsModule.useLastInputMode()
 	local UseLastInputResult = FocusNavigationUtilsModule.useLastInputMethod()
 	local UseGamepadCursorEnabledResult = FocusNavigationUtilsModule.useGamepadCursorEnabled()
@@ -35,31 +36,48 @@ return function(Page)
 		end
 	end, { UseLastInputModeResult, UseLastInputResult })
 	ReactModule.useEffect(function()
-		-- upvalues: UseRefResult1 (copy), GuiService (upval), UseLastInputModeResult (copy), UseGamepadCursorEnabledResult (copy), UseLastInputResult (copy), UserInputService (upval), FocusNavigationTelemetryModule (upval), Page (copy), UseLastInputModeResult2 (copy)
+		-- upvalues: UseRefResult1 (copy), GuiService (upval), UseLastInputModeResult (copy), UseGamepadCursorEnabledResult (copy), UseLastInputResult (copy), UserInputService (upval), LogFocusNavExitTriggerKey (upval), UseLastInputModeResult2 (copy), FocusNavigationTelemetryModule (upval), Page (copy)
 		local function logFocusNavEntryExit()
-			-- upvalues: UseRefResult1 (upval), GuiService (upval), UseLastInputModeResult (upval), UseGamepadCursorEnabledResult (upval), UseLastInputResult (upval), UserInputService (upval), FocusNavigationTelemetryModule (upval), Page (upval), UseLastInputModeResult2 (upval)
+			-- upvalues: UseRefResult1 (upval), GuiService (upval), UseLastInputModeResult (upval), UseGamepadCursorEnabledResult (upval), UseLastInputResult (upval), UserInputService (upval), LogFocusNavExitTriggerKey (upval), UseLastInputModeResult2 (upval), FocusNavigationTelemetryModule (upval), Page (upval)
 			local Current = UseRefResult1.current
 			local HasSelectedCoreObject = GuiService.SelectedCoreObject ~= nil
 			local IsFocus: boolean = UseLastInputModeResult == "Focus" or HasSelectedCoreObject and not UseGamepadCursorEnabledResult
 			local Gamepad = if UserInputService.PreferredInput == Enum.PreferredInput.Gamepad then "Gamepad" elseif UseLastInputResult == "None" then nil else UseLastInputResult
 			
 			if IsFocus and Current == nil then
-				UseRefResult1.current = { inputType = Gamepad, startTime = os.clock() }
-				FocusNavigationTelemetryModule.logFocusNavToggled({
-					entry = "enter",
-					input_type = Gamepad,
-					page = Page,
-					keyboard_navigation_trigger = if Gamepad == "Keyboard" and UseLastInputModeResult2 then UseLastInputModeResult2.Name else nil
-				})
-				
-				return
-			end
-			if not IsFocus and Current ~= nil then
+				if LogFocusNavExitTriggerKey then
+					local UseLastInputModeResult1 = if Gamepad == "Keyboard" then UseLastInputModeResult2 else nil
+					UseRefResult1.current = {
+						inputType = Gamepad,
+						startTime = os.clock(),
+						triggerKey = UseLastInputModeResult1
+					}
+					FocusNavigationTelemetryModule.logFocusNavToggled({
+						entry = "enter",
+						input_type = Gamepad,
+						page = Page,
+						keyboard_navigation_trigger = if UseLastInputModeResult1 then UseLastInputModeResult1.Name else nil
+					})
+					
+					return
+				else
+					UseRefResult1.current = { inputType = Gamepad, startTime = os.clock() }
+					FocusNavigationTelemetryModule.logFocusNavToggled({
+						entry = "enter",
+						input_type = Gamepad,
+						page = Page,
+						keyboard_navigation_trigger = if Gamepad == "Keyboard" and UseLastInputModeResult2 then UseLastInputModeResult2.Name else nil
+					})
+					
+					return
+				end
+			elseif not IsFocus and Current ~= nil then
 				UseRefResult1.current = nil
 				FocusNavigationTelemetryModule.logFocusNavToggled({
 					entry = "exit",
 					input_type = Gamepad,
 					page = Page,
+					keyboard_navigation_trigger = if LogFocusNavExitTriggerKey and Current.triggerKey then Current.triggerKey.Name else nil,
 					keyboard_navigation_duration = if Current.inputType == "Keyboard" then math.floor((os.clock() - Current.startTime) * 1000) else nil
 				})
 			end

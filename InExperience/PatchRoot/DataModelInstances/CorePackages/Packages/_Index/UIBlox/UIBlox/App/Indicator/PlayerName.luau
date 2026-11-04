@@ -12,7 +12,6 @@ local Skeleton = FoundationModule.Skeleton
 local UseStyleModule = require(Parent1.Core.Style.useStyle)
 local UIBloxConfigModule = require(Parent1.UIBloxConfig)
 local OpenTypeSupportModule = require(Parent1.Utility.OpenTypeSupport)
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
 local function _(p1)
 	return {
@@ -44,7 +43,7 @@ local _ = function(p1)
 end
 
 local function NameItem(p1)
-	-- upvalues: CryoModule (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), Label (copy), Skeleton (copy), UIBloxConfigModule (copy)
+	-- upvalues: CryoModule (copy), ReactModule (copy), NormalizeFontFaceFunction (copy), Label (copy), Skeleton (copy), UIBloxConfigModule (copy)
 	local IsReversed = p1.isReversed
 	local ItemProps = p1.itemProps
 	local Icon = ItemProps.icon
@@ -87,8 +86,7 @@ local function NameItem(p1)
 			Text = Icon,
 			TextXAlignment = Enum.TextXAlignment.Center,
 			TextYAlignment = Enum.TextYAlignment.Center,
-			Font = if FoundationFontFaceMigration then nil else LabelTypography.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(LabelTypography.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(LabelTypography.Font),
 			TextSize = IconSize,
 			TextColor3 = IconColorStyle.Color3,
 			TextTransparency = if IconColorStyle.Transparency then IconColorStyle.Transparency else 0
@@ -110,8 +108,7 @@ local function NameItem(p1)
 			Text = LabelText,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Center,
-			Font = if FoundationFontFaceMigration then nil else LabelTypography.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(LabelTypography.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(LabelTypography.Font),
 			TextSize = LabelTypography.FontSize,
 			TextColor3 = LabelColorStyle.Color3,
 			TextTransparency = LabelColorStyle.Transparency,

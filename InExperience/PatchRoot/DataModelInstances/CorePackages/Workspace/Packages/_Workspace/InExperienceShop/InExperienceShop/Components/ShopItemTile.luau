@@ -60,7 +60,7 @@ local function FreeTrialLabel(Frame)
 end
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), ReactModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), UseGamePassTrialRedemptionModule (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (copy), Parent (copy), InExperienceShop (copy), ToUnifiedCategoryIdModule (copy), FFlagEnableCategoryLoggingInShopModule (copy), SessionService (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), FFlagEnableDiscountOnInShopTileModule (copy), FormatPriceModule (copy), View (copy), Image (copy), FFlagFixThumbnailBackgroundInExperienceShopModule (copy), SHOPITEMMEDIAHEIGHTSCALE (copy), TrialBadge (copy), Text (copy), FreeTrialLabel (copy), Icon (copy), ConstantsModule (copy), IconSize (copy), GetIconRichTextFunction (copy), Enums (copy), ShopItemFooterModule (copy)
+	-- upvalues: SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), ReactModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (copy), Parent (copy), InExperienceShop (copy), ToUnifiedCategoryIdModule (copy), FFlagEnableCategoryLoggingInShopModule (copy), SessionService (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), UseGamePassTrialRedemptionModule (copy), FFlagEnableDiscountOnInShopTileModule (copy), FormatPriceModule (copy), View (copy), Image (copy), FFlagFixThumbnailBackgroundInExperienceShopModule (copy), SHOPITEMMEDIAHEIGHTSCALE (copy), TrialBadge (copy), Text (copy), FreeTrialLabel (copy), Icon (copy), ConstantsModule (copy), IconSize (copy), GetIconRichTextFunction (copy), Enums (copy), ShopItemFooterModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetInExperienceShopStoreModule)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(function(p1)
@@ -97,7 +97,6 @@ return ReactModule.memo(function(Frame)
 		return Frame.itemType == "GamePass" and Redeemed ~= nil and Redeemed[Frame.itemId] ~= nil
 	end) else false
 	local Available = if NoUseSignalStateResult1 then "available" elseif UseSignalStateResult3 and not UseSignalStateResult1 then "active" elseif UseSignalStateResult4 then "redeemed" else nil
-	local UseGamePassTrialRedemptionModuleResult = UseGamePassTrialRedemptionModule(Frame.itemId)
 	ReactModule.useEffect(function()
 		-- upvalues: FFlagEnableInExperienceShopUnifiedLoggingModule (upval), Parent (upval), InExperienceShop (upval), Frame (copy), ToUnifiedCategoryIdModule (upval), FFlagEnableCategoryLoggingInShopModule (upval), UseRefResult (copy), SessionService (upval)
 		if FFlagEnableInExperienceShopUnifiedLoggingModule then
@@ -144,7 +143,7 @@ return ReactModule.memo(function(Frame)
 			OnItemActivatedFunction(Frame.itemId, ItemType)
 		end
 	end, { Frame.itemId, ItemType, OnItemActivatedFunction })
-	local PurchaseCategoryLocation = nil
+	local CategoryLocation = nil
 	
 	if FFlagCategoryLoggingInShopPurchaseModule then
 		local config = {
@@ -157,9 +156,13 @@ return ReactModule.memo(function(Frame)
 		}
 		
 		if config.categoryGroup ~= nil or config.categoryPosition ~= nil or config.gridPositionRow ~= nil or config.gridPositionColumn ~= nil or config.categoryName ~= nil or config.stableCategoryId ~= nil then
-			PurchaseCategoryLocation = config
+			CategoryLocation = config
 		end
 	end
+	local UseGamePassTrialRedemptionModuleResult = UseGamePassTrialRedemptionModule(Frame.itemId, {
+		shopPageType = Frame.shopPageType,
+		categoryLocation = CategoryLocation
+	})
 	local IsUserBasePriceInRobuxAbove: boolean = FFlagEnableDiscountOnInShopTileModule and (Frame.userBasePriceInRobux ~= nil and (Frame.price ~= nil and Frame.userBasePriceInRobux > Frame.price))
 	local FormatPriceModuleResult = if IsUserBasePriceInRobuxAbove and FormatPriceModule then FormatPriceModule(Frame.userBasePriceInRobux) else nil
 	local FormatPriceModuleResult1 = if IsUserBasePriceInRobuxAbove and FormatPriceModule then FormatPriceModule(Frame.price) else nil
@@ -246,7 +249,7 @@ return ReactModule.memo(function(Frame)
 				onTryActivated = UseGamePassTrialRedemptionModuleResult.onTryActivated,
 				price = Frame.price,
 				shopPageType = Frame.shopPageType,
-				purchaseCategoryLocation = PurchaseCategoryLocation
+				purchaseCategoryLocation = CategoryLocation
 			})
 		})
 	})

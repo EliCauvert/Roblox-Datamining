@@ -28,6 +28,7 @@ local PromptChipsStatusModule = require(BuildExperience.Stores.GetBuildPromptChi
 local _ = require(script.Parent.BuildChatPageView)
 local FFlagBuildExperienceAnswerFormModule = require(BuildExperience.Flags.FFlagBuildExperienceAnswerForm)
 local FFlagBuildEnableFTUXChipsModule = require(BuildExperience.Flags.FFlagBuildEnableFTUXChips)
+local FFlagBuildExperienceFTUXChipConversationIdTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceFTUXChipConversationIdTelemetry)
 local UseCreatorCreditChatUpsellViewModelModule = require(script.Parent.useCreatorCreditChatUpsellViewModel)
 local FFlagBuildExperienceLibrary = require(Parent.SharedFlags).FFlagBuildExperienceLibrary
 local FFlagBuildExperienceAnalytics = require(Parent.SharedFlags).FFlagBuildExperienceAnalytics
@@ -138,7 +139,7 @@ local _ = function(p1, p2)
 end
 
 local function usePromptChipViewModel(p1, Target, NoCanEditOnBuild)
-	-- upvalues: FFlagBuildEnableFTUXChipsModule (copy), FFlagBuildRequestPromptChipsOnEditModule (copy), GetBuildPromptChipsStoreModule (copy), ReactModule (copy), UseBuildPromptChipRequestsModule (copy), SignalsReactModule (copy), PromptChipsStatusModule (copy)
+	-- upvalues: FFlagBuildEnableFTUXChipsModule (copy), FFlagBuildRequestPromptChipsOnEditModule (copy), GetBuildPromptChipsStoreModule (copy), FFlagBuildExperienceFTUXChipConversationIdTelemetryModule (copy), ReactModule (copy), UseBuildPromptChipRequestsModule (copy), SignalsReactModule (copy), PromptChipsStatusModule (copy)
 	local PromptChips = {}
 	local IsPromptChipsLoading = false
 	
@@ -156,21 +157,22 @@ local function usePromptChipViewModel(p1, Target, NoCanEditOnBuild)
 	end
 	local BuildPromptChipsStoreModule = GetBuildPromptChipsStoreModule()
 	local IsActive: boolean = FFlagBuildEnableFTUXChipsModule and (not NoCanEditOnBuild and (p1.isHistoryHydrationComplete and (not p1.isHistoryLoading and #p1.messages == 0)))
+	local CurrentSessionId = if FFlagBuildExperienceFTUXChipConversationIdTelemetryModule then p1.currentSessionId else Target.sessionId
 	local UseBuildPromptChipRequestsModuleResult = UseBuildPromptChipRequestsModule(BuildPromptChipsStoreModule, {
 		isActive = IsActive,
 		sessionKey = `{Target.universeId or 0}:{Target.placeId or 0}:{Target.sessionId or "new"}`,
 		shouldRequestInitialChips = IsActive,
 		telemetryGranularity = ReactModule.useMemo(function()
-			-- upvalues: Target (copy)
+			-- upvalues: Target (copy), CurrentSessionId (copy)
 			return {
 				universeId = Target.universeId,
 				placeId = Target.placeId,
-				conversationId = Target.sessionId
+				conversationId = CurrentSessionId
 			}
 		end, {
 			Target.universeId or 0,
 			Target.placeId or 0,
-			Target.sessionId or ""
+			CurrentSessionId or ""
 		})
 	})
 	local UseRefResult = ReactModule.useRef(nil)

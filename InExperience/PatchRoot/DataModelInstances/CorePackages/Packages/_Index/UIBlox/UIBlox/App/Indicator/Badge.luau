@@ -2,7 +2,6 @@
 local Parent1 = Parent.Parent
 local RoactModule = require(Parent1.Roact)
 local TModule = require(Parent1.t)
-local FoundationFontFaceMigration = require(Parent1.Foundation).Utility.Flags.FoundationFontFaceMigration
 local WithStyleModule = require(Parent.Core.Style.withStyle)
 local GetTextSizeModule = require(Parent.Core.Text.GetTextSize)
 local GetFontFromFontStyleModule = require(Parent.Core.Text.GetFontFromFontStyle)
@@ -33,13 +32,13 @@ Badge.defaultProps = {
 }
 
 function Badge.render(p1)
-	-- upvalues: WithStyleModule (copy), TModule (copy), BadgeStatesModule (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), GetTextSizeModule (copy), BadgeVariantModule (copy), RoactModule (copy), ImageSetComponentModule (copy), ImagesModule (copy), DivideTransparencyModule (copy), ComponentAssetsCircle25 (copy), ComponentAssetsCircle21 (copy), GenericTextLabelModule (copy)
+	-- upvalues: WithStyleModule (copy), TModule (copy), BadgeStatesModule (copy), GetFontFromFontStyleModule (copy), GetTextSizeModule (copy), BadgeVariantModule (copy), RoactModule (copy), ImageSetComponentModule (copy), ImagesModule (copy), DivideTransparencyModule (copy), ComponentAssetsCircle25 (copy), ComponentAssetsCircle21 (copy), GenericTextLabelModule (copy)
 	return WithStyleModule(function(p2)
-		-- upvalues: p1 (copy), TModule (upval), BadgeStatesModule (upval), FoundationFontFaceMigration (upval), GetFontFromFontStyleModule (upval), GetTextSizeModule (upval), BadgeVariantModule (upval), RoactModule (upval), ImageSetComponentModule (upval), ImagesModule (upval), DivideTransparencyModule (upval), ComponentAssetsCircle25 (upval), ComponentAssetsCircle21 (upval), GenericTextLabelModule (upval)
+		-- upvalues: p1 (copy), TModule (upval), BadgeStatesModule (upval), GetFontFromFontStyleModule (upval), GetTextSizeModule (upval), BadgeVariantModule (upval), RoactModule (upval), ImageSetComponentModule (upval), ImagesModule (upval), DivideTransparencyModule (upval), ComponentAssetsCircle25 (upval), ComponentAssetsCircle21 (upval), GenericTextLabelModule (upval)
 		local Theme = p2.Theme
 		local _Font = p2.Font
 		local Text: string = if TModule.number(p1.props.value) and p1.props.value > 99 then if p1.props.value == BadgeStatesModule.isEmpty then "" else "99+" elseif TModule.string(p1.props.value) and utf8.len(utf8.nfcnormalize(p1.props.value)) > 4 then if p1.props.value == BadgeStatesModule.isEmpty then "" else string.sub(p1.props.value, 1, utf8.offset(p1.props.value, 4) - 1) .. "..." elseif p1.props.value == BadgeStatesModule.isEmpty then "" else tostring(p1.props.value)
-		local NewX = GetTextSizeModule(Text, _Font.CaptionBody.RelativeSize * p2.Font.BaseSize, if FoundationFontFaceMigration then GetFontFromFontStyleModule(_Font.CaptionBody) else _Font.CaptionBody.Font, Vector2.new(10000, 10000)).X + 10 + 4
+		local NewX = GetTextSizeModule(Text, _Font.CaptionBody.RelativeSize * p2.Font.BaseSize, GetFontFromFontStyleModule(_Font.CaptionBody), Vector2.new(10000, 10000)).X + 10 + 4
 		
 		if NewX < 24 then
 			NewX = 24

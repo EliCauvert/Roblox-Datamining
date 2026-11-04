@@ -918,9 +918,11 @@ CoreScripts.InGameMenu.GameSettings.SwitchToVRComfortSettings,Aangepaste instell
 CoreScripts.InGameMenu.GameSettings.UINavToggle,UI-navigatieschakelaar
 CoreScripts.InGameMenu.GameSettings.UINavToggleDescription,"Gebruik de toets ""\ om de UI-navigatiemodus te openen en te verlaten"""
 CoreScripts.InGameMenu.GameSettings.UIScale,UI-schaal
+CoreScripts.InGameMenu.GameSettings.UIScaleDescription,De grootte van knoppen en menu's in Roblox aanpassen.
 CoreScripts.InGameMenu.GameSettings.UIScaleLargest,Grootste
 CoreScripts.InGameMenu.GameSettings.UIScaleMode,UI-schaalmodus
 CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,Automatisch
+CoreScripts.InGameMenu.GameSettings.UIScaleModeDescription,Stel in hoe de UI-schaal wordt gekozen op Roblox.
 CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,Handmatig
 CoreScripts.InGameMenu.GameSettings.UIScaleSmallest,Kleinste
 CoreScripts.InGameMenu.GameSettings.VREnabled,VR-modus
@@ -3682,13 +3684,27 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,Nog {time}
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsBody,Je kunt in elke game slechts één gratis proefperiode tegelijk gebruiken. Probeer het opnieuw nadat je huidige proefperiode is afgelopen.
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsTitle,Er is al een andere gratis proefperiode actief
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedBody,Je kunt maar 1 gratis proefperiode per pas gebruiken.
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedTitle,Gratis proefperiode al gebruikt
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedBody,"Je hebt deze pas al, dus je hebt geen gratis proefperiode nodig."
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedTitle,Je hebt dit al
+Feature.InExperienceShop.Description.GamePassNotInUniverseBody,
+Feature.InExperienceShop.Description.GamePassNotInUniverseTitle,
+Feature.InExperienceShop.Description.GamePassNotPurchasableBody,Deze pas is nu niet te koop.
+Feature.InExperienceShop.Description.GamePassNotPurchasableTitle,Nu niet te koop
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledBody,Deze pas heeft nu geen gratis proefperiode.
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledTitle,Geen gratis proefperiode beschikbaar
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Door Robux te kopen, ga je akkoord met onze {termsLinkStart}Gebruiksvoorwaarden{termsLinkEnd}, inclusief de arbitrageclausule en het herroepingsbeleid."
 Feature.InExperienceShop.GamePass,
 Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,Bonusitem
+Feature.InExperienceShop.Label.BuyNow,Nu kopen
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Eindigt over {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,Gratis proefperiode
+Feature.InExperienceShop.Label.HaveTrial,Je hebt een gratis proefperiode
 Feature.InExperienceShop.Label.NoDescription,Geen beschrijving
 Feature.InExperienceShop.Label.OfferEndTime,{offer} eindigt over {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,Dit is een voorbeeld van je winkel in Roblox Studio. Spelers zien dit voorbeeld niet.
@@ -3702,7 +3718,9 @@ Feature.InExperienceShop.Label.Timer.Second.Plural,{number} seconden
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 seconde
 Feature.InExperienceShop.Label.Trial,Proefperiode
 Feature.InExperienceShop.Label.Trialed,Proefperiode voltooid
+Feature.InExperienceShop.Label.TryNow,Nu proberen
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Je hebt met {ROBUX_AMOUNT} Robux gekocht
+Feature.InExperienceShop.Tooltip.RecentlyRedeemed,Vond je de gratis proefperiode leuk?
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Weet je zeker dat je dit item permanent uit je inventaris wilt verwijderen? Als je van gedachten verandert, moet je het opnieuw verdienen in een ervaring."
 Feature.Item.Label.DeleteItemUndercase,Item verwijderen
 Feature.Landing.Label.PoweredBy,Mogelijk gemaakt door
@@ -3886,7 +3904,6 @@ Feature.Moments.Title.GenerateTextFeedbackReason,Wat is er misgegaan?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Moment maken afsluiten?
 Feature.Moments.Title.MomentRemoved,
-Feature.Moments.Title.PostInsights,Postinzichten
 Feature.Moments.Title.ReportPost,Post melden
 Feature.Moments.Title.UnfollowConfirmationDialog,@{username} ontvolgen?
 Feature.Moments.Tooltip.Creation,Iedereen in de ervaring kan je momenten zien.

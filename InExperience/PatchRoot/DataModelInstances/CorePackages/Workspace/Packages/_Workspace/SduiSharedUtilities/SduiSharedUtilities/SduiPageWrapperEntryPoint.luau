@@ -29,11 +29,10 @@ local UseDataUpdatedTimestampModule = require(SduiSharedUtilities.hooks.useDataU
 local UseSduiPageContentModule = require(SduiSharedUtilities.hooks.useSduiPageContent)
 local UsePageEntrySnackbarModule = require(SduiSharedUtilities.usePageEntrySnackbar)
 local FFlagAppPageShellScrollToTopFocus = require(Parent.SharedFlags).FFlagAppPageShellScrollToTopFocus
-local FFlagLuaAppsDefaultSelection = require(Parent.SharedFlags).FFlagLuaAppsDefaultSelection
 local FFlagAppThemeHalloween2026HomeBackground = require(Parent.SharedFlags).FFlagAppThemeHalloween2026HomeBackground
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
-	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), UseComponentConfigModule (copy), UseUiStatusModule (copy), UiStatus (copy), UseLocalAnalyticsDataModule (copy), ReactModule (copy), Signal (copy), UseStatefulRefModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), ReactFocusNavigationModule (copy), UseCloseWithBackButtonFunction (copy), FFlagAppPageShellScrollToTopFocus (copy), UsePageEntrySnackbarModule (copy), UseDataUpdatedTimestampModule (copy), UseCreateClientBindingSduiContextModule (copy), UseSduiPageContentModule (copy), FFlagLuaAppsDefaultSelection (copy), GetSduiComponentWrapperFunction (copy), FoundationModule (copy), Loading (copy), SduiPageErrorStateModule (copy), VisibilityControl (copy), Page (copy), FFlagAppThemeHalloween2026HomeBackground (copy), ReactRobloxModule (copy), Snackbar (copy), CoreGui (copy)
+	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), UseComponentConfigModule (copy), UseUiStatusModule (copy), UiStatus (copy), UseLocalAnalyticsDataModule (copy), ReactModule (copy), Signal (copy), UseStatefulRefModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), ReactFocusNavigationModule (copy), UseCloseWithBackButtonFunction (copy), FFlagAppPageShellScrollToTopFocus (copy), UsePageEntrySnackbarModule (copy), UseDataUpdatedTimestampModule (copy), UseCreateClientBindingSduiContextModule (copy), UseSduiPageContentModule (copy), GetSduiComponentWrapperFunction (copy), FoundationModule (copy), Loading (copy), SduiPageErrorStateModule (copy), VisibilityControl (copy), Page (copy), FFlagAppThemeHalloween2026HomeBackground (copy), ReactRobloxModule (copy), Snackbar (copy), CoreGui (copy)
 	local AppPage = p1.appPage
 	local ConfigKey = p1.configKey or AppPage
 	local SduiPageWrapperEntryPointName: string = `SduiPageWrapperEntryPoint-{ConfigKey}`
@@ -141,7 +140,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 					debugName = SduiPageWrapperEntryPointName,
 					pageTimer = p1.pageTimer,
 					refreshSignal = UseMemoResult,
-					defaultFocusRef = if FFlagAppPageShellScrollToTopFocus and FFlagLuaAppsDefaultSelection then p1.defaultFocusRef else nil
+					defaultFocusRef = if FFlagAppPageShellScrollToTopFocus then p1.defaultFocusRef else nil
 				}),
 				stickyHeaderSlot = UseMemoResult1,
 				composition = p1.composition,

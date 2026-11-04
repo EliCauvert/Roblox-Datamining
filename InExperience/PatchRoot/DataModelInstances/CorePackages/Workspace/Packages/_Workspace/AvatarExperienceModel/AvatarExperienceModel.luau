@@ -9,6 +9,7 @@ local _ = require(script.Types.AXCollectibleInstance)
 local _ = require(script.Types.WidgetContentTypes)
 
 return {
+	["jest.config"] = script["jest.config"],
 	Constants = require(script.Constants),
 	Enums = {
 		AvatarEditorCategories = require(script.Enums.AvatarEditorCategories),
@@ -21,5 +22,8 @@ return {
 		ItemTypeEnum = require(script.Enums.ItemTypeEnum),
 		ItemLicenseType = require(script.Enums.ItemLicenseType),
 		RecommendationsType = require(script.Enums.RecommendationsType)
+	},
+	Stores = {
+		getLayeredClothingLastSavedSortStore = require(script.Stores.LayeredClothingLastSavedSortStore.getLayeredClothingLastSavedSortStore)
 	}
 }

@@ -23,6 +23,7 @@ local FFlagFixInExperienceShopCursorLock = InExperienceShopModule.FFlagFixInExpe
 local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local FFlagEnableMenuTrailingBadge = SharedFlagsModule.FFlagEnableMenuTrailingBadge
 local FFlagExperienceShopNewIconography = InExperienceShopModule.FFlagExperienceShopNewIconography
+local FFlagEnableAnyFreeTrialToolTipModule = require(CorePackages.Workspace.Packages.InExperienceShop.FFlagEnableAnyFreeTrialToolTip)
 local FFlagEnableFreeTrialShopMenuBadge = InExperienceShopModule.FFlagEnableFreeTrialShopMenuBadge
 local FFlagMenuBadgePreferFreeTrialOverOffer = InExperienceShopModule.FFlagMenuBadgePreferFreeTrialOverOffer
 local ShopCoreGuiToggleSupportedEngineFeature = game:GetEngineFeature("ShopCoreGuiToggleSupported")
@@ -204,6 +205,9 @@ if FFlagEnableShopPrefetch then
 	else
 		task.spawn(PrefetchShopDataOnGameJoinModule)
 	end
+end
+if FFlagEnableAnyFreeTrialToolTipModule then
+	require(CorePackages.Workspace.Packages.InExperienceShop.submitFreeTrialTooltips)()
 end
 if FFlagEnableFreeTrialBlueDot then
 	require(CorePackages.Workspace.Packages.InExperienceShop.submitFreeTrialBlueDot)()

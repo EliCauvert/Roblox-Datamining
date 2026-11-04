@@ -11,7 +11,6 @@ local PermissionsProtocol = require(Parent.PermissionsProtocol).PermissionsProto
 local GetFFlagJoinWithoutMicPermissionsFunction = require(Parent.SharedFlags).GetFFlagJoinWithoutMicPermissions
 local GetFFlagLocalMutedNilFixFunction = require(Parent.SharedFlags).GetFFlagLocalMutedNilFix
 local GetFFlagDebugVoiceChatMicPermissionCliBypassModule = require(Flags.GetFFlagDebugVoiceChatMicPermissionCliBypass)
-local GetFFlagEnableExpJoinMicPermAnalyticsModule = require(Flags.GetFFlagEnableExpJoinMicPermAnalytics)
 local FFlagExpChatDictation = require(Parent.SharedFlags).FFlagExpChatDictation
 local v1 = require(Flags.GetFFlagUseAudioAnalyzerForLocalMetering2)()
 local GetFFlagMicConsumerRegistryModule = require(Flags.GetFFlagMicConsumerRegistry)
@@ -215,7 +214,7 @@ function MicInputManager:SetAndSyncActive(p2, Active)
 end
 
 function MicInputManager:RequestMicPermission()
-	-- upvalues: GetFFlagDebugVoiceChatMicPermissionCliBypassModule (copy), PERMISSIONSTATE (copy), PromiseModule (copy), PermissionsProtocol (copy), GetFFlagEnableExpJoinMicPermAnalyticsModule (copy)
+	-- upvalues: GetFFlagDebugVoiceChatMicPermissionCliBypassModule (copy), PERMISSIONSTATE (copy), PromiseModule (copy), PermissionsProtocol (copy)
 	if GetFFlagDebugVoiceChatMicPermissionCliBypassModule() then
 		self.permissionState = PERMISSIONSTATE.LISTEN_AND_TALK
 		
@@ -226,10 +225,9 @@ function MicInputManager:RequestMicPermission()
 		return self.permissionPromise
 	else
 		self.permissionPromise = self.callbacks.requestPermissions({ PermissionsProtocol.Permissions.MICROPHONE_ACCESS }):andThen(function(Result)
-			-- upvalues: GetFFlagEnableExpJoinMicPermAnalyticsModule (upval), self (copy), PromiseModule (upval), PermissionsProtocol (upval)
-			if GetFFlagEnableExpJoinMicPermAnalyticsModule() then
-				self.callbacks.recordExperienceJoinMicPerm(Result)
-			end
+			-- upvalues: self (copy), PromiseModule (upval), PermissionsProtocol (upval)
+			self.callbacks.recordExperienceJoinMicPerm(Result)
+			
 			if Result or Result.status then
 				self.log:debug("Permission status {}", Result.status)
 				local IsStatusMatch = Result.status == PermissionsProtocol.Status.AUTHORIZED

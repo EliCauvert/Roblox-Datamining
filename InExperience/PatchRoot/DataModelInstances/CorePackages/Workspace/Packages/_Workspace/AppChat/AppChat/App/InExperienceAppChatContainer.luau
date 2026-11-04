@@ -41,7 +41,6 @@ local FIntAppChatWideBreakpointMinHeightModule = require(AppChat.Flags.FIntAppCh
 local FIntAppChatWideBreakpointMinWidthModule = require(AppChat.Flags.FIntAppChatWideBreakpointMinWidth)
 local PartyPageCarouselExperimentation = require(Parent.SocialExperiments).PartyPageCarouselExperimentation
 local GetFFlagAppChatEnableRootedNavigationModule = require(AppChat.Flags.getFFlagAppChatEnableRootedNavigation)
-local GetFFlagAppChatRequestedRouteModule = require(AppChat.Flags.getFFlagAppChatRequestedRoute)
 local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
 local GetRootedNavigationStoreModule = require(AppChat.Stores.GetRootedNavigationStore)
 local DomLocatorsModule = require(AppChat.Utils.DomLocators)
@@ -52,7 +51,7 @@ local function _()
 end
 
 return function(p1)
-	-- upvalues: UseDispatchFunction (copy), UseContextFunction (copy), ParentContainerContextModule (copy), UseStateFunction (copy), UseExternalNavigationByScreenModule (copy), UseMemoFunction (copy), Signal (copy), RobloxEventReceiver (copy), NotificationService (copy), ReactModule (copy), ResponsiveModule (copy), FIntAppChatWideBreakpointMinWidthModule (copy), FIntAppChatWideBreakpointMinHeightModule (copy), FFlagAppChatInExpSelectChatMembersMobileHeightModule (copy), UseAppChatIsWideModeModule (copy), GetFFlagAppChatRequestedRouteModule (copy), GetFFlagAppChatEnableRootedNavigationModule (copy), AppChat (copy), UseRefFunction (copy), UseSignalStateFunction (copy), GetRootedNavigationStoreModule (copy), UseEffectFunction (copy), PartyPageCarouselExperimentation (copy), SetFormFactorFunction (copy), FormFactorModule (copy), UseParentContainerExtentsModule (copy), UseCallbackFunction (copy), AppChatInExperienceMountMinLoadingTimeMs (copy), AppChatEntryPointModule (copy), LocalPlayer (copy), ChatPlacementContextModule (copy), Loading (copy), IconSize (copy), IconButton (copy), IconName (copy), ButtonSize (copy), ButtonVariant (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), ChatEventReceiverModule (copy), ChatExternalEventReceiverModule (copy), ContainerModule (copy), FFlagSquadAppChatRTNFix (copy), SquadAppChatEventReceiver (copy)
+	-- upvalues: UseDispatchFunction (copy), UseContextFunction (copy), ParentContainerContextModule (copy), UseStateFunction (copy), UseExternalNavigationByScreenModule (copy), UseMemoFunction (copy), Signal (copy), RobloxEventReceiver (copy), NotificationService (copy), ReactModule (copy), ResponsiveModule (copy), FIntAppChatWideBreakpointMinWidthModule (copy), FIntAppChatWideBreakpointMinHeightModule (copy), FFlagAppChatInExpSelectChatMembersMobileHeightModule (copy), UseAppChatIsWideModeModule (copy), GetFFlagAppChatEnableRootedNavigationModule (copy), AppChat (copy), UseRefFunction (copy), UseSignalStateFunction (copy), GetRootedNavigationStoreModule (copy), UseEffectFunction (copy), PartyPageCarouselExperimentation (copy), SetFormFactorFunction (copy), FormFactorModule (copy), UseParentContainerExtentsModule (copy), UseCallbackFunction (copy), AppChatInExperienceMountMinLoadingTimeMs (copy), AppChatEntryPointModule (copy), LocalPlayer (copy), ChatPlacementContextModule (copy), Loading (copy), IconSize (copy), IconButton (copy), IconName (copy), ButtonSize (copy), ButtonVariant (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), ChatEventReceiverModule (copy), ChatExternalEventReceiverModule (copy), ContainerModule (copy), FFlagSquadAppChatRTNFix (copy), SquadAppChatEventReceiver (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local HideParentContainerFunction = UseContextFunction(ParentContainerContextModule).hideParentContainer
 	local UseStateResult, UseStateResult2 = UseStateFunction(0)
@@ -75,7 +74,6 @@ return function(p1)
 		}
 	}) == "wide"
 	local NoFFlagAppChatInExpSelectChatMembersMobileHeightModule = if FFlagAppChatInExpSelectChatMembersMobileHeightModule or UseOrientationResult ~= ResponsiveModule.Keys.Portrait and IsWide then not FFlagAppChatInExpSelectChatMembersMobileHeightModule or UseAppChatIsWideModeModule(true) else false
-	local FFlagAppChatRequestedRouteModule = GetFFlagAppChatRequestedRouteModule()
 	local FFlagAppChatEnableRootedNavigationModule = GetFFlagAppChatEnableRootedNavigationModule()
 	local IsRooted: boolean = FFlagAppChatEnableRootedNavigationModule and (p1.requestedRoute ~= nil and (p1.requestedRoute.screen == require(AppChat.EnumScreens).ChatDetails and (p1.requestedRoute.params ~= nil and p1.requestedRoute.params.rooted == true)))
 	local UseRefResult1 = UseRefFunction(false)
@@ -132,8 +130,8 @@ return function(p1)
 		chatPlacement = ChatPlacementContextModule.Enum.InExperienceDefault,
 		initialConversationId = p1.initialConversationId,
 		setInitialConversationId = p1.setInitialConversationId,
-		requestedRoute = if FFlagAppChatRequestedRouteModule then p1.requestedRoute else nil,
-		clearRequestedRoute = if FFlagAppChatRequestedRouteModule then p1.clearRequestedRoute else nil,
+		requestedRoute = p1.requestedRoute,
+		clearRequestedRoute = p1.clearRequestedRoute,
 		wideMode = NoFFlagAppChatInExpSelectChatMembersMobileHeightModule1,
 		navigateToRootStack = UseCallbackResult,
 		updateExternalNavigationForScreen = UseExternalNavigationByScreenModuleResult2

@@ -9,7 +9,6 @@ local ClassifyCommunicationChannelsEventModule = require(script.Parent.classifyC
 local ExpChatConversationListAdapterModule = require(script.Parent.Parent.ConversationList.ExpChatConversationListAdapter)
 local GetFriendsChatNavigationStoreModule = require(script.Parent.Parent.Stores.GetFriendsChatNavigationStore)
 local GetFriendsChatRealtimeStoreModule = require(script.Parent.Parent.Stores.GetFriendsChatRealtimeStore)
-local FFlagFriendsChatRefreshListForNewConversationModule = require(script.Parent.Parent.Flags.FFlagFriendsChatRefreshListForNewConversation)
 local FStringDebugFriendsChatConversationIdModule = require(script.Parent.Parent.Flags.FStringDebugFriendsChatConversationId)
 local NewResult = require(Parent.ExpChatShared).Logger:new(script.Name)
 local FriendshipNotificationsModule = require(script.Parent.FriendshipNotifications)
@@ -120,7 +119,7 @@ local _ = function(SelectedConversationId)
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), ExpChatConversationListAdapterModule (copy), NewResult (copy), RealtimeDeliveryModule (copy), ClassifyCommunicationChannelsEventModule (copy), fetchNewerMessagesSafe (copy), GetFriendsChatNavigationStoreModule (copy), fetchConversationDetailsSafe (copy), FFlagFriendsChatRefreshListForNewConversationModule (copy), GetFriendsChatRealtimeStoreModule (copy), FStringDebugFriendsChatConversationIdModule (copy), FriendshipNotificationsModule (copy)
+	-- upvalues: ReactModule (copy), ExpChatConversationListAdapterModule (copy), NewResult (copy), RealtimeDeliveryModule (copy), ClassifyCommunicationChannelsEventModule (copy), fetchNewerMessagesSafe (copy), GetFriendsChatNavigationStoreModule (copy), fetchConversationDetailsSafe (copy), GetFriendsChatRealtimeStoreModule (copy), FStringDebugFriendsChatConversationIdModule (copy), FriendshipNotificationsModule (copy)
 	local OnActiveConversationMessageReceived = p1.onActiveConversationMessageReceived
 	local UseRefResult = ReactModule.useRef(false)
 	local UseRefResult1 = ReactModule.useRef(0)
@@ -164,7 +163,7 @@ return function(p1)
 	end
 	
 	RealtimeDeliveryModule.useRealtimeNamespace("CommunicationChannels", function(p2)
-		-- upvalues: ClassifyCommunicationChannelsEventModule (upval), fetchNewerMessagesSafe (upval), OnActiveConversationMessageReceived (copy), ExpChatConversationListAdapterModule (upval), GetFriendsChatNavigationStoreModule (upval), fetchConversationDetailsSafe (upval), FFlagFriendsChatRefreshListForNewConversationModule (upval), requestConversationListRefresh (copy)
+		-- upvalues: ClassifyCommunicationChannelsEventModule (upval), fetchNewerMessagesSafe (upval), OnActiveConversationMessageReceived (copy), ExpChatConversationListAdapterModule (upval), GetFriendsChatNavigationStoreModule (upval), fetchConversationDetailsSafe (upval), requestConversationListRefresh (copy)
 		local ClassifyCommunicationChannelsEventModuleResult = ClassifyCommunicationChannelsEventModule(p2)
 		local ChannelId = ClassifyCommunicationChannelsEventModuleResult.channelId
 		
@@ -184,7 +183,7 @@ return function(p1)
 				return
 			end
 		elseif ClassifyCommunicationChannelsEventModuleResult.kind == "fetchConversationDetails" then
-			fetchConversationDetailsSafe(ChannelId, FFlagFriendsChatRefreshListForNewConversationModule and (p2.Type == "AddedToChannel" or p2.Type == "ChannelCreated"), requestConversationListRefresh)
+			fetchConversationDetailsSafe(ChannelId, p2.Type == "AddedToChannel" or p2.Type == "ChannelCreated", requestConversationListRefresh)
 		end
 	end, {})
 	RealtimeDeliveryModule.useRealtimeConnectionStateChanged("CommunicationChannels", function(ConnectionState, p2)

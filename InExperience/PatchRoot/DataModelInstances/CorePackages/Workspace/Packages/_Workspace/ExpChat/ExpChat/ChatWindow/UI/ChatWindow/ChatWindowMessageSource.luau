@@ -11,16 +11,15 @@ local FFlagExpChatEnableV2ChatWindowModule = require(ExpChat.Flags.FFlagExpChatE
 local FFlagExpChatRewriteInlineModule = require(ExpChat.Flags.FFlagExpChatRewriteInline)
 local GetFFlagChatWindowUseCallbackOptimizationsModule = require(ExpChat.Flags.getFFlagChatWindowUseCallbackOptimizations)
 local GetFFlagTextChatEnableUniverseChatTabsFunction = require(Parent.ExpChatShared).Flags.GetFFlagTextChatEnableUniverseChatTabs
-local FFlagExpChatDisableNameTapActionInGlobalChatModule = require(ExpChat.Flags.FFlagExpChatDisableNameTapActionInGlobalChat)
 local IsGlobalChatMessageModule = require(ExpChat.isGlobalChatMessage)
 
 return function(p1)
-	-- upvalues: UseStableSignalFunction (copy), ReactModule (copy), FFlagExpChatDisableNameTapActionInGlobalChatModule (copy), IsGlobalChatMessageModule (copy), GetFFlagChatWindowUseCallbackOptimizationsModule (copy), GetMessagesStoreModule (copy), FFlagExpChatEnableV2ChatWindowModule (copy), UseV2MessagePoolModule (copy), FFlagExpChatRewriteInlineModule (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), CreateMessageChildrenModule (copy), ChatWindowModule (copy), Dictionary (copy)
+	-- upvalues: UseStableSignalFunction (copy), ReactModule (copy), IsGlobalChatMessageModule (copy), GetFFlagChatWindowUseCallbackOptimizationsModule (copy), GetMessagesStoreModule (copy), FFlagExpChatEnableV2ChatWindowModule (copy), UseV2MessagePoolModule (copy), FFlagExpChatRewriteInlineModule (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), CreateMessageChildrenModule (copy), ChatWindowModule (copy), Dictionary (copy)
 	local UseStableSignalResult, UseStableSignalResult2 = UseStableSignalFunction({})
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseResult = ReactModule.useCallback(function(p2)
-		-- upvalues: FFlagExpChatDisableNameTapActionInGlobalChatModule (upval), IsGlobalChatMessageModule (upval), p1 (copy)
-		if FFlagExpChatDisableNameTapActionInGlobalChatModule and IsGlobalChatMessageModule(p2) then return end
+		-- upvalues: IsGlobalChatMessageModule (upval), p1 (copy)
+		if IsGlobalChatMessageModule(p2) then return end
 		p1.resetTargetChannel()
 		local Number: number? = tonumber(p2.userId)
 		

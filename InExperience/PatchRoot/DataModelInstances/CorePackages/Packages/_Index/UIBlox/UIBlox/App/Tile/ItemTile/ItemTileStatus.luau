@@ -3,15 +3,13 @@ local Parent1 = Parent.Parent.Parent
 local Parent2 = Parent1.Parent
 local RoactModule = require(Parent2.Roact)
 local TModule = require(Parent2.t)
-local FoundationModule = require(Parent2.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local NormalizeFontFaceFunction = require(Parent2.Foundation).Utility.normalizeFontFace
 local WithStyleModule = require(Parent1.Core.Style.withStyle)
 local GetTextSizeModule = require(Parent1.Core.Text.GetTextSize)
 local GetFontFromFontStyleModule = require(Parent1.Core.Text.GetFontFromFontStyle)
 local ImagesModule = require(Parent1.App.ImageSet.Images)
 local ImageSetComponentModule = require(Parent1.Core.ImageSet.ImageSetComponent)
 local ItemTileEnumsModule = require(Parent.Enum.ItemTileEnums)
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local ItemTileStatus = RoactModule.PureComponent:extend("ItemTileStatus")
 local _Vector2 = Vector2.new(50, 20)
 local _Vector2_1 = Vector2.new(10, 6)
@@ -32,15 +30,15 @@ local function getStyle(Theme, StatusStyle)
 end
 
 function ItemTileStatus.render(p1)
-	-- upvalues: WithStyleModule (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), GetTextSizeModule (copy), _Vector2 (copy), getStyle (copy), RoactModule (copy), ImageSetComponentModule (copy), ImagesModule (copy), _Vector2_1 (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: WithStyleModule (copy), GetFontFromFontStyleModule (copy), GetTextSizeModule (copy), _Vector2 (copy), getStyle (copy), RoactModule (copy), ImageSetComponentModule (copy), ImagesModule (copy), _Vector2_1 (copy), NormalizeFontFaceFunction (copy)
 	return WithStyleModule(function(p2)
-		-- upvalues: p1 (copy), FoundationFontFaceMigration (upval), GetFontFromFontStyleModule (upval), GetTextSizeModule (upval), _Vector2 (upval), getStyle (upval), RoactModule (upval), ImageSetComponentModule (upval), ImagesModule (upval), _Vector2_1 (upval), NormalizeFontFaceFunction (upval)
+		-- upvalues: p1 (copy), GetFontFromFontStyleModule (upval), GetTextSizeModule (upval), _Vector2 (upval), getStyle (upval), RoactModule (upval), ImageSetComponentModule (upval), ImagesModule (upval), _Vector2_1 (upval), NormalizeFontFaceFunction (upval)
 		local Theme = p2.Theme
 		local _Font = p2.Font
 		local Tokens = p2.Tokens
 		local StatusText = p1.props.statusText
 		local StatusStyle = p1.props.statusStyle
-		local FontFromFontStyleModule = if FoundationFontFaceMigration then GetFontFromFontStyleModule(_Font.CaptionHeader) else _Font.CaptionHeader.Font
+		local FontFromFontStyleModule = GetFontFromFontStyleModule(_Font.CaptionHeader)
 		local ScaledBaseSize = _Font.BaseSize * _Font.CaptionHeader.RelativeSize
 		local TextSizeModule = GetTextSizeModule(StatusText, ScaledBaseSize, FontFromFontStyleModule, _Vector2)
 		local Style = getStyle(Theme, StatusStyle)
@@ -57,8 +55,7 @@ function ItemTileStatus.render(p1)
 		}, {
 			Text = RoactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
-				Font = if FoundationFontFaceMigration then nil else FontFromFontStyleModule,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(FontFromFontStyleModule) else nil,
+				FontFace = NormalizeFontFaceFunction(FontFromFontStyleModule),
 				TextSize = ScaledBaseSize,
 				Text = StatusText,
 				TextColor3 = Style.Text.Color,

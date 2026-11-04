@@ -20,6 +20,7 @@ local FFlagBuildExperienceInGameCaptureToChat = SharedFlagsModule.FFlagBuildExpe
 local FFlagMomentsCreationFeatureGate = SharedFlagsModule.FFlagMomentsCreationFeatureGate
 local GetMomentsCapabilitiesFunction = require(Parent1.MomentsCommon).Stores.GetMomentsCapabilities
 local FFlagCreateMomentsToastModule = require(Parent.Flags.FFlagCreateMomentsToast)
+local FFlagMomentsCaptureEndIxpEnabledModule = require(Parent.Flags.FFlagMomentsCaptureEndIxpEnabled)
 local FFlagCapturesInExpMomentsEligibilityRetryModule = require(Parent.Flags.FFlagCapturesInExpMomentsEligibilityRetry)
 local FIntMomentsInExperienceMinCaptureSecondsModule = require(Parent.Flags.FIntMomentsInExperienceMinCaptureSeconds)
 local CaptureTypeModule = require(Parent.Enums.CaptureType)
@@ -40,9 +41,9 @@ local function triggerDefaultToast(p1, EnableShareCaptureCTAResult, CaptureInfo,
 end
 
 return function(p1, _, Callback)
-	-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), TriggerSourceTypeModule (copy), SocialStopwatchModule (copy), EventNamesModule (copy), RetrieveCapturesModule (copy), WaitForFlashOverlayModule (copy), FFlagBuildExperienceInGameCaptureToChat (copy), PendingCaptureToastActionModule (copy), GetCaptureObjectModule (copy), ToastTriggeredModule (copy), CapturesToastTypeModule (copy), CapturesPolicyModule (copy), FFlagCreateMomentsToastModule (copy), FFlagMomentsCreationFeatureGate (copy), GetMomentsCapabilitiesFunction (copy), CaptureServiceEnableXExperiencePostingApisEngineFeature (copy), FIntMomentsInExperienceMinCaptureSecondsModule (copy), triggerDefaultToast (copy), FFlagCapturesInExpMomentsEligibilityRetryModule (copy), CheckMomentsEligibilityModule (copy), ConstantsModule (copy), FetchCapturesFromGalleryModule (copy), FindMatchingCaptureModule (copy)
+	-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), TriggerSourceTypeModule (copy), SocialStopwatchModule (copy), EventNamesModule (copy), RetrieveCapturesModule (copy), WaitForFlashOverlayModule (copy), FFlagBuildExperienceInGameCaptureToChat (copy), PendingCaptureToastActionModule (copy), GetCaptureObjectModule (copy), ToastTriggeredModule (copy), CapturesToastTypeModule (copy), CapturesPolicyModule (copy), FFlagCreateMomentsToastModule (copy), FFlagMomentsCreationFeatureGate (copy), GetMomentsCapabilitiesFunction (copy), CaptureServiceEnableXExperiencePostingApisEngineFeature (copy), FIntMomentsInExperienceMinCaptureSecondsModule (copy), FFlagMomentsCaptureEndIxpEnabledModule (copy), FFlagCapturesInExpMomentsEligibilityRetryModule (copy), CheckMomentsEligibilityModule (copy), triggerDefaultToast (copy), ConstantsModule (copy), FetchCapturesFromGalleryModule (copy), FindMatchingCaptureModule (copy)
 	return function(CaptureInfo, UserSave)
-		-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (upval), CaptureTypeModule (upval), TriggerSourceTypeModule (upval), SocialStopwatchModule (upval), Callback (copy), EventNamesModule (upval), p1 (copy), RetrieveCapturesModule (upval), WaitForFlashOverlayModule (upval), FFlagBuildExperienceInGameCaptureToChat (upval), PendingCaptureToastActionModule (upval), GetCaptureObjectModule (upval), ToastTriggeredModule (upval), CapturesToastTypeModule (upval), CapturesPolicyModule (upval), FFlagCreateMomentsToastModule (upval), FFlagMomentsCreationFeatureGate (upval), GetMomentsCapabilitiesFunction (upval), CaptureServiceEnableXExperiencePostingApisEngineFeature (upval), FIntMomentsInExperienceMinCaptureSecondsModule (upval), triggerDefaultToast (upval), FFlagCapturesInExpMomentsEligibilityRetryModule (upval), CheckMomentsEligibilityModule (upval), ConstantsModule (upval), FetchCapturesFromGalleryModule (upval), FindMatchingCaptureModule (upval)
+		-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (upval), CaptureTypeModule (upval), TriggerSourceTypeModule (upval), SocialStopwatchModule (upval), Callback (copy), EventNamesModule (upval), p1 (copy), RetrieveCapturesModule (upval), WaitForFlashOverlayModule (upval), FFlagBuildExperienceInGameCaptureToChat (upval), PendingCaptureToastActionModule (upval), GetCaptureObjectModule (upval), ToastTriggeredModule (upval), CapturesToastTypeModule (upval), CapturesPolicyModule (upval), FFlagCreateMomentsToastModule (upval), FFlagMomentsCreationFeatureGate (upval), GetMomentsCapabilitiesFunction (upval), CaptureServiceEnableXExperiencePostingApisEngineFeature (upval), FIntMomentsInExperienceMinCaptureSecondsModule (upval), FFlagMomentsCaptureEndIxpEnabledModule (upval), FFlagCapturesInExpMomentsEligibilityRetryModule (upval), CheckMomentsEligibilityModule (upval), triggerDefaultToast (upval), ConstantsModule (upval), FetchCapturesFromGalleryModule (upval), FindMatchingCaptureModule (upval)
 		local IsCaptureTypeMatch: boolean = if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then CaptureInfo.CaptureType == Enum.CaptureType.Video else CaptureInfo.type == CaptureTypeModule.Video
 		
 		if UserSave == TriggerSourceTypeModule.UserSave and not IsCaptureTypeMatch then
@@ -79,6 +80,9 @@ return function(p1, _, Callback)
 			local IsCaptureTypeMatch1: boolean = CaptureObjectModule ~= nil and CaptureObjectModule.CaptureType == Enum.CaptureType.Video
 			local TimeLength = if IsCaptureTypeMatch1 then CaptureObjectModule.TimeLength else nil
 			v1 = CaptureObjectModule ~= nil and (not IsCaptureTypeMatch1 or type(TimeLength) == "number" and FIntMomentsInExperienceMinCaptureSecondsModule <= TimeLength)
+		end
+		if FFlagMomentsCaptureEndIxpEnabledModule and FFlagCapturesInExpMomentsEligibilityRetryModule and not FFlagCreateMomentsToastModule then
+			p1:dispatch((CheckMomentsEligibilityModule(game.GameId)))
 		end
 		if not v1 or GameId == nil then
 			triggerDefaultToast(p1, EnableShareCaptureCTAResult, CaptureInfo, IsCaptureTypeMatch, Callback)

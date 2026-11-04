@@ -1,11 +1,17 @@
-﻿local Parent = script:FindFirstAncestor("SocialTabsPage").Parent
+﻿local SocialTabsPage = script:FindFirstAncestor("SocialTabsPage")
+local Parent = SocialTabsPage.Parent
+local UserListModule = require(Parent.UserList)
 local AppPage = require(Parent.RobloxAppEnums).AppPage
-local CtaSurfaces = require(Parent.UserList).Enums.CtaSurfaces
+local CtaSurfaces = UserListModule.Enums.CtaSurfaces
+local ClientCtaActions = UserListModule.Enums.ClientCtaActions
+local FFlagSocialTabsSelfRowViewCtaModule = require(SocialTabsPage.Flags.FFlagSocialTabsSelfRowViewCta)
 local Tbl = {
 	primaryCtaMinWidth = 64,
 	primaryCtaMaxWidth = 90,
 	friendshipOriginSourceType = require(Parent.FriendsNetworking).Enums.FriendshipOriginSourceType.SocialTabsPage.rawValue(),
-	chatEntryPoint = require(Parent.SocialCommon).Enums.ChatEntryPointNames.SocialTabsPage
+	chatEntryPoint = require(Parent.SocialCommon).Enums.ChatEntryPointNames.SocialTabsPage,
+	clientActions = if require(SocialTabsPage.Flags.FFlagSocialTabsViewOnlyRowCta) then { ClientCtaActions.ViewProfile } else nil,
+	showSelfProfileCta = if FFlagSocialTabsSelfRowViewCtaModule then true else nil
 }
 
 local function _(Subpage)

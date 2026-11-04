@@ -8,10 +8,11 @@ local AvatarSize = FoundationModule.Enums.AvatarSize
 local IconName = FoundationModule.Enums.IconName
 local IconButton = FoundationModule.IconButton
 local InputSize = FoundationModule.Enums.InputSize
+local Text = FoundationModule.Text
 local View = FoundationModule.View
 
 return function(p1)
-	-- upvalues: ReactModule (copy), View (copy), ParticipantAvatarModule (copy), AvatarSize (copy), IconButton (copy), IconName (copy), InputSize (copy)
+	-- upvalues: ReactModule (copy), View (copy), Text (copy), ParticipantAvatarModule (copy), AvatarSize (copy), IconButton (copy), IconName (copy), InputSize (copy)
 	return ReactModule.createElement(View, {
 		tag = "col align-x-center align-y-center gap-small size-full padding-medium stroke-standard stroke-default radius-large clip bg-surface-200"
 	}, {
@@ -21,7 +22,11 @@ return function(p1)
 			ref = p1.onDragInputTarget,
 			Size = UDim2.fromOffset(70, 70)
 		}, {
-			Content = ReactModule.createElement(ParticipantAvatarModule, {
+			Content = if p1.participant.showStatusAnimation then ReactModule.createElement(Text, {
+				tag = "auto-xy text-body-medium text-align-x-center content-default",
+				testId = "friends-calling-pip-ringing",
+				Text = p1.participant.statusText or ""
+			}) elseif p1.participant.userId == 0 then nil else ReactModule.createElement(ParticipantAvatarModule, {
 				ringSize = 70,
 				avatarSize = AvatarSize.XLarge,
 				isDimmed = p1.participant.isDimmed,
@@ -29,7 +34,7 @@ return function(p1)
 				userId = p1.participant.userId
 			})
 		}),
-		Actions = ReactModule.createElement(View, {
+		Actions = if p1.participant.showStatusAnimation then nil else ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "row align-x-center align-y-center gap-xsmall auto-xy padding-xsmall radius-circle bg-over-media-300"
 		}, {

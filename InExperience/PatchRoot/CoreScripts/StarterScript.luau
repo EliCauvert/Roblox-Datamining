@@ -145,17 +145,17 @@ if FFlagLuaAppEnableInExperienceDataModelStreamStarter then
 end
 if game:GetEngineFeature("ProtocolLaunchPrivateChannelUpdateCheckEngineFeature") then
 	local ChannelUpdatePrompt = Modules.ChannelUpdatePrompt
-	local Success, Result = pcall(require, ChannelUpdatePrompt)
-	local Result1 = nil
+	local Success1, Result1 = pcall(require, ChannelUpdatePrompt)
+	local v1 = nil
 	
-	if Success then
-		Result1 = Result
+	if Success1 then
+		v1 = Result1
 	else
-		warn("Failure to Start CoreScript module " .. ChannelUpdatePrompt.Name .. ".\n" .. Result)
-		Result1 = nil
+		warn("Failure to Start CoreScript module " .. ChannelUpdatePrompt.Name .. ".\n" .. Result1)
+		v1 = nil
 	end
-	if Result1 then
-		Result1.init()
+	if v1 then
+		v1.init()
 	end
 end
 if not IsViewer and GetFFlagChromeCentralizedConfigurationFunction() then
@@ -175,16 +175,16 @@ if require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableWhatsNew then
 	coroutine.wrap(safeRequire)(Modules.InGameWhatsNew)
 end
 if require(CorePackages.Workspace.Packages.SharedFlags).FFlagAppNavMyStatsTab then
-	local v1 = coroutine.wrap(safeRequire)(CorePackages.Workspace.Packages.BuildExperiencePlaytestLaunch.BuildModeLaunch)
-	local v2 = coroutine.wrap(safeRequire)(CorePackages.Workspace.Packages.BuildExperience)
-	local HasBuildMode = v2 and (v1 and v1:hasBuildMode())
+	local v2 = coroutine.wrap(safeRequire)(CorePackages.Workspace.Packages.BuildExperiencePlaytestLaunch.BuildModeLaunch)
+	local v3 = coroutine.wrap(safeRequire)(CorePackages.Workspace.Packages.BuildExperience)
+	local HasBuildMode = v3 and (v2 and v2:hasBuildMode())
 	
-	if v2 then
-		v2.mountCreatorAgentResumeToastReceiver(HasBuildMode == true)
+	if v3 then
+		v3.mountCreatorAgentResumeToastReceiver(HasBuildMode == true)
 	end
-	if v2 and HasBuildMode and not IsViewer then
+	if v3 and HasBuildMode and not IsViewer then
 		game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.Chat, false)
-		v2.mountChatSheet(if require(CorePackages.Workspace.Packages.SharedFlags).FFlagBuildExperienceInGameCaptureToChat then {
+		v3.mountChatSheet(if require(CorePackages.Workspace.Packages.SharedFlags).FFlagBuildExperienceInGameCaptureToChat then {
 			takeCapture = function(p1)
 				-- upvalues: RobloxGui (copy)
 				require(RobloxGui.Modules.Captures.CapturesApp).takeCapture(p1)
@@ -193,10 +193,10 @@ if require(CorePackages.Workspace.Packages.SharedFlags).FFlagAppNavMyStatsTab th
 	end
 end
 if FFlagTopBarRefactor then
-	local v3 = coroutine.wrap(safeRequire)(CorePackages.Workspace.Packages.InExperienceOverlay)
+	local v4 = coroutine.wrap(safeRequire)(CorePackages.Workspace.Packages.InExperienceOverlay)
 	
-	if v3 then
-		v3.createOverlay()
+	if v4 then
+		v4.createOverlay()
 	end
 end
 if game:GetEngineFeature("LuobuModerationStatus") then
@@ -247,11 +247,11 @@ ScriptContext:AddCoreScriptLocal("CoreScripts/PerformanceStatsManagerScript", Ro
 ScriptContext:AddCoreScriptLocal("CoreScripts/PlayerRagdoll", RobloxGui)
 coroutine.wrap(safeRequire)(RobloxGui.Modules.ChatSelector)
 coroutine.wrap(safeRequire)(RobloxGui.Modules.PlayerList.PlayerListManager)
-local Success1, Result2 = pcall(function()
+local Success2, Result3 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserRoactBubbleChatBeta")
 end)
 
-if game:GetEngineFeature("EnableBubbleChatFromChatService") or Success1 and Result2 then
+if game:GetEngineFeature("EnableBubbleChatFromChatService") or Success2 and Result3 then
 	ScriptContext:AddCoreScriptLocal("CoreScripts/PlayerBillboards", RobloxGui)
 end
 coroutine.wrap(function()
@@ -290,17 +290,17 @@ ScriptContext:AddCoreScriptLocal("CoreScripts/FriendPlayerPrompt", RobloxGui)
 
 if EnablePromptAgeCheckListener then
 	local PromptAgeCheckHandler = Modules.PromptAgeCheckHandler
-	local Success2, Result3 = pcall(require, PromptAgeCheckHandler)
-	local v4 = nil
+	local Success, Result = pcall(require, PromptAgeCheckHandler)
+	local Result2 = nil
 	
-	if Success2 then
-		v4 = Result3
+	if Success then
+		Result2 = Result
 	else
-		warn("Failure to Start CoreScript module " .. PromptAgeCheckHandler.Name .. ".\n" .. Result3)
-		v4 = nil
+		warn("Failure to Start CoreScript module " .. PromptAgeCheckHandler.Name .. ".\n" .. Result)
+		Result2 = nil
 	end
-	if v4 then
-		v4.init()
+	if Result2 then
+		Result2.init()
 	end
 end
 ScriptContext:AddCoreScriptLocal("CoreScripts/AvatarContextMenu", RobloxGui)
@@ -466,15 +466,15 @@ end)()
 if game:GetEngineFeature("EnableLuaAdPlayer") then
 	local AdPlayer = CorePackages.Workspace.Packages.AdPlayer
 	local Success3, Result4 = pcall(require, AdPlayer)
-	local v5 = nil
+	local Result5 = nil
 	
 	if Success3 then
-		v5 = Result4
+		Result5 = Result4
 	else
 		warn("Failure to Start CoreScript module " .. AdPlayer.Name .. ".\n" .. Result4)
-		v5 = nil
+		Result5 = nil
 	end
-	v5.init()
+	Result5.init()
 end
 if game:GetEngineFeature("EnableVoiceAttention") then
 	ScriptContext:AddCoreScriptLocal("CoreScripts/VoiceAttention", script.Parent)
@@ -546,10 +546,10 @@ end
 local ReactPerfTrackerModule = require(Modules.Common.ReactPerfTracker)
 
 if ReactPerfTrackerModule then
-	local NewResult = ReactPerfTrackerModule.new()
+	local NewReactPerfTracker = ReactPerfTrackerModule.new()
 	task.delay(5, function()
-		-- upvalues: NewResult (copy)
-		NewResult:start()
+		-- upvalues: NewReactPerfTracker (copy)
+		NewReactPerfTracker:start()
 	end)
 end
 local ReactSchedulingTrackerModule = require(Modules.Common.ReactSchedulingTracker)

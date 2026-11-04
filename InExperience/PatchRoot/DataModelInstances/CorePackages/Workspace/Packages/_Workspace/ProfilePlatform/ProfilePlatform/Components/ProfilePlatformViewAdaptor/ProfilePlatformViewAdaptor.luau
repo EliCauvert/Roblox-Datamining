@@ -27,6 +27,9 @@ local ProfileModalViewModule = require(script.Parent.ProfileModalView)
 local ProfileFullViewModule = require(script.Parent.ProfileFullView)
 local ProfilePlatformPageModule = require(ProfilePlatform.Components.ProfilePlatformPage)
 local ProfilePeekViewModule = require(script.Parent.ProfilePeekView)
+local IsPeekViewStateFullyOpenModule = require(ProfilePlatform.Utils.isPeekViewStateFullyOpen)
+local FFlagProfileInspectAvatarSlideIn = require(Parent.SharedFlags).FFlagProfileInspectAvatarSlideIn
+local FFlagProfileInspectAvatarShopChip = require(Parent.SharedFlags).FFlagProfileInspectAvatarShopChip
 local FFlagProfilePlatformNewProfileHeader = require(Parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
 local FFlagSwitchProfileWidthHookToSocialCommon = require(Parent.SharedFlags).FFlagSwitchProfileWidthHookToSocialCommon
 local FFlagEnableMobileGameJoinCard = require(Parent.SharedFlags).FFlagEnableMobileGameJoinCard
@@ -39,7 +42,7 @@ local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local config = { skipFetch = true }
 
 return function(_)
-	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileScrollContextModule (copy), UseScreenSizeFunction (copy), UseTopBarHeightFunction (copy), FFlagEnableMobileGameJoinCard (copy), ReactModule (copy), UseSelectorFunction (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), FFlagEnableSplitPane (copy), SplitPaneModule (copy), UseSignalStateFunction (copy), ProfilePlatformPageModule (copy), ProfileTopBarModule (copy), GetSafeAreaSizeFunction (copy), FFlagProfilePlatformNewProfileHeader (copy), FFlagSwitchProfileWidthHookToSocialCommon (copy), UseProfileCardWidthFunction (copy), UseProfileCardWidthModule (copy), ConstantsModule (copy), FFlagProfilePlatformPresenceStoreMigrationModule (copy), UseEffectOnMountFunction (copy), GetResult (copy), UseGetPresenceByUserId (copy), config (copy), ConvertPresenceEnumModule (copy), PresenceModule (copy), UseDispatchFunction (copy), NetworkingPresenceModule (copy), UseShouldShowContextualInformationModule (copy), UseProfilePeekViewHeightModule (copy), GetPeekViewOpenHeightByProfileTypeModule (copy), ProfileFullViewModule (copy), ProfileModalViewModule (copy), ProfilePeekViewModule (copy)
+	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileScrollContextModule (copy), UseScreenSizeFunction (copy), UseTopBarHeightFunction (copy), FFlagEnableMobileGameJoinCard (copy), ReactModule (copy), UseSelectorFunction (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), FFlagEnableSplitPane (copy), SplitPaneModule (copy), UseSignalStateFunction (copy), ProfilePlatformPageModule (copy), ProfileTopBarModule (copy), GetSafeAreaSizeFunction (copy), FFlagProfilePlatformNewProfileHeader (copy), FFlagSwitchProfileWidthHookToSocialCommon (copy), UseProfileCardWidthFunction (copy), UseProfileCardWidthModule (copy), ConstantsModule (copy), FFlagProfilePlatformPresenceStoreMigrationModule (copy), UseEffectOnMountFunction (copy), GetResult (copy), UseGetPresenceByUserId (copy), config (copy), ConvertPresenceEnumModule (copy), PresenceModule (copy), UseDispatchFunction (copy), NetworkingPresenceModule (copy), UseShouldShowContextualInformationModule (copy), UseProfilePeekViewHeightModule (copy), GetPeekViewOpenHeightByProfileTypeModule (copy), ProfileFullViewModule (copy), ProfileModalViewModule (copy), ProfilePeekViewModule (copy), FFlagProfileInspectAvatarSlideIn (copy), FFlagProfileInspectAvatarShopChip (copy), IsPeekViewStateFullyOpenModule (copy)
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	local UseProfileScrollContextModuleResult = UseProfileScrollContextModule()
 	local ProfileType = UseProfileWrapperContextModuleResult.profileType
@@ -124,12 +127,15 @@ return function(_)
 		navigateBack = UseResult
 	}) else ReactModule.createElement(ProfilePeekViewModule, {
 		bottomDockedContainerHeight = 0,
-		onViewStateChanged = nil,
 		briefViewContentHeight = _UDim,
 		contentSlot = UseResult2(),
 		fullViewContentHeight = UDim.new(1, 0),
 		mountAsFullView = MountAsFullView,
 		onClosed = UseResult1,
+		onViewStateChanged = if FFlagProfileInspectAvatarSlideIn or FFlagProfileInspectAvatarShopChip then function(p1)
+			-- upvalues: UseProfileScrollContextModuleResult (copy), IsPeekViewStateFullyOpenModule (upval)
+			UseProfileScrollContextModuleResult.setIsPeekViewFullyOpen(IsPeekViewStateFullyOpenModule(p1))
+		end else nil,
 		topBarHeight = UseTopBarHeightResult,
 		topBarSlot = UseResult3(),
 		viewWidth = UDim.new(0, SafeAreaSize.X.Offset),

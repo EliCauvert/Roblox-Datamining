@@ -1,0 +1,4 @@
+﻿local FFlagSocialEnableProfileInspectAndBuyModule = require(script.Parent.FFlagSocialEnableProfileInspectAndBuy)
+local FFlagProfileInspectAvatarSpinModule = require(script.Parent.FFlagProfileInspectAvatarSpin)
+
+return game:DefineFastFlag("ProfileInspectAvatarSlideIn", false) and (FFlagProfileInspectAvatarSpinModule and FFlagSocialEnableProfileInspectAndBuyModule)

@@ -40,7 +40,10 @@ local FFlagPPVBackgroundUse2DAsLoadingState = require(Parent.SharedFlags).FFlagP
 local IsGetThrottleFramerateEnabledAvailableEngineFeature = game:DefineFastFlag("PPVBackgroundUnthrottleProfileV2", false) and game:GetEngineFeature("IsGetThrottleFramerateEnabledAvailable")
 local PPVBackgroundUnthrottleRefCount = game:DefineFastFlag("PPVBackgroundUnthrottleRefCount", false)
 local FFlagPPVEnable3DBackground = require(Parent.SharedFlags).FFlagPPVEnable3DBackground
+local FFlagProfileInspectAvatarSlideIn = require(Parent.SharedFlags).FFlagProfileInspectAvatarSlideIn
+local FFlagProfileInspectAvatarShopChip = require(Parent.SharedFlags).FFlagProfileInspectAvatarShopChip
 local AvatarModelPrefetchModule = require(EditProfileBackground.Common.AvatarModelPrefetch)
+local GetCharacterAppearanceInfoAsyncModule = require(EditProfileBackground.Common.getCharacterAppearanceInfoAsync)
 local InsertService = game:GetService("InsertService")
 local Count = 0
 local Enabled = nil
@@ -89,7 +92,7 @@ local function playToolAnimation(Object)
 end
 
 return function(p1)
-	-- upvalues: UseLocalUserIdFunction (copy), UseSelectedThemeFunction (copy), ReactModule (copy), IsGetThrottleFramerateEnabledAvailableEngineFeature (copy), FFlagPPVEnable3DBackground (copy), InsertService (copy), GetDisplayBackgroundIdFunction (copy), _Color3 (copy), _Color3_1 (copy), PPVBackgroundUnthrottleRefCount (copy), Count (ref), Enabled (ref), RunService (copy), releaseUnthrottle (copy), playToolAnimation (copy), PromiseModule (copy), AvatarModelPrefetchModule (copy), CryoModule (copy), ErrorTypes (copy), _CFrame (copy), FFlagProfilePlatformNewProfileHeader (copy), v2 (copy), FFlagProfilePlatformMeTabMobileProfileHero (copy), Radians (copy), MinValue (copy), MaxValue (copy), UserInputService (copy), View (copy), FFlagPPVBackgroundUse2DAsLoadingState (copy), LoadableImage (copy), Loading (copy), IconSize (copy)
+	-- upvalues: UseLocalUserIdFunction (copy), UseSelectedThemeFunction (copy), ReactModule (copy), IsGetThrottleFramerateEnabledAvailableEngineFeature (copy), FFlagPPVEnable3DBackground (copy), InsertService (copy), GetDisplayBackgroundIdFunction (copy), _Color3 (copy), _Color3_1 (copy), PPVBackgroundUnthrottleRefCount (copy), Count (ref), Enabled (ref), RunService (copy), releaseUnthrottle (copy), playToolAnimation (copy), PromiseModule (copy), AvatarModelPrefetchModule (copy), FFlagProfileInspectAvatarSlideIn (copy), FFlagProfileInspectAvatarShopChip (copy), GetCharacterAppearanceInfoAsyncModule (copy), CryoModule (copy), ErrorTypes (copy), _CFrame (copy), FFlagProfilePlatformNewProfileHeader (copy), v2 (copy), FFlagProfilePlatformMeTabMobileProfileHero (copy), Radians (copy), MinValue (copy), MaxValue (copy), UserInputService (copy), View (copy), FFlagPPVBackgroundUse2DAsLoadingState (copy), LoadableImage (copy), Loading (copy), IconSize (copy)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UserId = p1.userId or UseLocalUserIdResult and tonumber(UseLocalUserIdResult)
 	local UseSelectedThemeResult = UseSelectedThemeFunction()
@@ -218,9 +221,9 @@ return function(p1)
 		Weld.C1 = v3
 	end, {})
 	ReactModule.useEffect(function()
-		-- upvalues: UserId (copy), UseStateResult2 (copy), PromiseModule (upval), AvatarModelPrefetchModule (upval), InsertService (upval), CryoModule (upval), p1 (copy), ErrorTypes (upval), UseRefResult1 (copy), _CFrame (upval), UseRefResult3 (copy), UseResult (copy), UseResult1 (copy), FFlagProfilePlatformNewProfileHeader (upval), UseRefResult2 (copy), v2 (upval), FFlagProfilePlatformMeTabMobileProfileHero (upval), Radians (upval), MinValue (upval), MaxValue (upval), IsGetThrottleFramerateEnabledAvailableEngineFeature (upval), UserInputService (upval)
+		-- upvalues: UserId (copy), UseStateResult2 (copy), PromiseModule (upval), AvatarModelPrefetchModule (upval), FFlagProfileInspectAvatarSlideIn (upval), FFlagProfileInspectAvatarShopChip (upval), GetCharacterAppearanceInfoAsyncModule (upval), InsertService (upval), CryoModule (upval), p1 (copy), ErrorTypes (upval), UseRefResult1 (copy), _CFrame (upval), UseRefResult3 (copy), UseResult (copy), UseResult1 (copy), FFlagProfilePlatformNewProfileHeader (upval), UseRefResult2 (copy), v2 (upval), FFlagProfilePlatformMeTabMobileProfileHero (upval), Radians (upval), MinValue (upval), MaxValue (upval), UseRefResult (copy), IsGetThrottleFramerateEnabledAvailableEngineFeature (upval), UserInputService (upval)
 		task.defer(function()
-			-- upvalues: UserId (upval), UseStateResult2 (upval), PromiseModule (upval), AvatarModelPrefetchModule (upval), InsertService (upval), CryoModule (upval), p1 (upval), ErrorTypes (upval), UseRefResult1 (upval), _CFrame (upval), UseRefResult3 (upval), UseResult (upval), UseResult1 (upval), FFlagProfilePlatformNewProfileHeader (upval), UseRefResult2 (upval), v2 (upval), FFlagProfilePlatformMeTabMobileProfileHero (upval), Radians (upval), MinValue (upval), MaxValue (upval), IsGetThrottleFramerateEnabledAvailableEngineFeature (upval), UserInputService (upval)
+			-- upvalues: UserId (upval), UseStateResult2 (upval), PromiseModule (upval), AvatarModelPrefetchModule (upval), FFlagProfileInspectAvatarSlideIn (upval), FFlagProfileInspectAvatarShopChip (upval), GetCharacterAppearanceInfoAsyncModule (upval), InsertService (upval), CryoModule (upval), p1 (upval), ErrorTypes (upval), UseRefResult1 (upval), _CFrame (upval), UseRefResult3 (upval), UseResult (upval), UseResult1 (upval), FFlagProfilePlatformNewProfileHeader (upval), UseRefResult2 (upval), v2 (upval), FFlagProfilePlatformMeTabMobileProfileHero (upval), Radians (upval), MinValue (upval), MaxValue (upval), UseRefResult (upval), IsGetThrottleFramerateEnabledAvailableEngineFeature (upval), UserInputService (upval)
 			if not UserId then return end
 			UseStateResult2(true)
 			local ResolveResult = PromiseModule.resolve(nil)
@@ -228,10 +231,10 @@ return function(p1)
 			local v4, v5 = PromiseModule.all({
 				AvatarModelPrefetchModule.get(UserId),
 				PromiseModule.new(function(Callback: (any) -> ())
-					-- upvalues: UserId (upval), ResolveResult (ref), PromiseModule (upval), InsertService (upval), CryoModule (upval), ResolveResult1 (ref)
+					-- upvalues: FFlagProfileInspectAvatarSlideIn (upval), FFlagProfileInspectAvatarShopChip (upval), GetCharacterAppearanceInfoAsyncModule (upval), UserId (upval), ResolveResult (ref), PromiseModule (upval), InsertService (upval), CryoModule (upval), ResolveResult1 (ref)
 					local Success, Result = pcall(function()
-						-- upvalues: UserId (upval)
-						return game.Players:GetCharacterAppearanceInfoAsync(UserId)
+						-- upvalues: FFlagProfileInspectAvatarSlideIn (upval), FFlagProfileInspectAvatarShopChip (upval), GetCharacterAppearanceInfoAsyncModule (upval), UserId (upval)
+						return if FFlagProfileInspectAvatarSlideIn or FFlagProfileInspectAvatarShopChip then GetCharacterAppearanceInfoAsyncModule(UserId) else game.Players:GetCharacterAppearanceInfoAsync(UserId)
 					end)
 					
 					if Success and Result then
@@ -327,6 +330,18 @@ return function(p1)
 				end
 				UseStateResult2(false)
 				
+				if FFlagProfileInspectAvatarSlideIn or FFlagProfileInspectAvatarShopChip then
+					local OnSceneReadyFunction: (any) -> () = p1.onSceneReady
+					
+					if OnSceneReadyFunction and UseRefResult2.current and UseRefResult.current and UseRefResult1.current then
+						OnSceneReadyFunction({
+							character = Character,
+							camera = UseRefResult2.current,
+							viewportFrame = UseRefResult.current,
+							worldModel = UseRefResult1.current
+						})
+					end
+				end
 				if IsGetThrottleFramerateEnabledAvailableEngineFeature or UserInputService.PreferredInput ~= Enum.PreferredInput.Touch then
 					local Success, _ = pcall(function()
 						-- upvalues: ResolveResult (ref), Character (copy)

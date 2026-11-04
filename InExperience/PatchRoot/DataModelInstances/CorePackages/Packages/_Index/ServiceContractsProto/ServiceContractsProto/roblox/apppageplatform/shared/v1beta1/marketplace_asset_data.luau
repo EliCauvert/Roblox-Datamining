@@ -39,7 +39,8 @@ function Module.new(p1)
 		owned = if p1 == nil or p1.owned == nil then nil else p1.owned,
 		is_purchasable = if p1 == nil or p1.is_purchasable == nil then nil else p1.is_purchasable,
 		variant_attributes = if p1 == nil or p1.variant_attributes == nil then {} else p1.variant_attributes,
-		genres = if p1 == nil or p1.genres == nil then {} else p1.genres
+		genres = if p1 == nil or p1.genres == nil then {} else p1.genres,
+		licensing = if p1 == nil or p1.licensing == nil then nil else p1.licensing
 	}, Module))
 end
 
@@ -193,6 +194,11 @@ function Module:encode()
 			Buf, Count = ProtoModule.writeString(WriteTagResult31, WriteTagResult2_30, genre)
 		end
 	end
+	if self.licensing ~= nil then
+		local EncodeResult = self.licensing:encode()
+		local WriteTagResult33, WriteTagResult2_32 = ProtoModule.writeTag(Buf, Count, 33, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult33, WriteTagResult2_32, EncodeResult, buffer.len(EncodeResult))
+	end
 	local Buf1 = buffer.create(Count)
 	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
@@ -205,140 +211,144 @@ function Module.decode(Buf)
 	local v1 = 0
 	while v1 < buffer.len(Buf) do
 		local Tag, Tag2
-		Tag, Tag2, v76 = ProtoModule.readTag(Buf, v1)
+		Tag, Tag2, v79 = ProtoModule.readTag(Buf, v1)
 		
 		if Tag2 == ProtoModule.wireTypes.varint then
 			if Tag == 4 then
 				local VarInt
-				VarInt, v76 = ProtoModule.readVarInt(Buf, v1)
+				VarInt, v79 = ProtoModule.readVarInt(Buf, v1)
 				NewModule.creator_has_verified_badge = VarInt ~= 0
 			elseif Tag == 6 then
-				NewModule.price, v76 = ProtoModule.readVarIntI64(Buf, v1)
+				NewModule.price, v79 = ProtoModule.readVarIntI64(Buf, v1)
 			elseif Tag == 14 then
 				local VarInt1
-				VarInt1, v76 = ProtoModule.readVarInt(Buf, v1)
+				VarInt1, v79 = ProtoModule.readVarInt(Buf, v1)
 				NewModule.is_high_definition = VarInt1 ~= 0
 			elseif Tag == 15 then
 				local VarInt2
-				VarInt2, v76 = ProtoModule.readVarInt(Buf, v1)
+				VarInt2, v79 = ProtoModule.readVarInt(Buf, v1)
 				NewModule.is_pbr = VarInt2 ~= 0
 			elseif Tag == 16 then
 				local VarInt3
-				VarInt3, v76 = ProtoModule.readVarInt(Buf, v1)
+				VarInt3, v79 = ProtoModule.readVarInt(Buf, v1)
 				NewModule.has_resellers = VarInt3 ~= 0
 			elseif Tag == 17 then
-				NewModule.lowest_price, v76 = ProtoModule.readVarIntI64(Buf, v1)
+				NewModule.lowest_price, v79 = ProtoModule.readVarIntI64(Buf, v1)
 			elseif Tag == 18 then
-				NewModule.lowest_resale_price, v76 = ProtoModule.readVarIntI64(Buf, v1)
+				NewModule.lowest_resale_price, v79 = ProtoModule.readVarIntI64(Buf, v1)
 			elseif Tag == 19 then
-				NewModule.total_quantity, v76 = ProtoModule.readVarIntI64(Buf, v1)
+				NewModule.total_quantity, v79 = ProtoModule.readVarIntI64(Buf, v1)
 			elseif Tag == 20 then
-				NewModule.units_available_for_consumption, v76 = ProtoModule.readVarIntI64(Buf, v1)
+				NewModule.units_available_for_consumption, v79 = ProtoModule.readVarIntI64(Buf, v1)
 			elseif Tag == 21 then
-				NewModule.favorite_count, v76 = ProtoModule.readVarIntI32(Buf, v1)
+				NewModule.favorite_count, v79 = ProtoModule.readVarIntI32(Buf, v1)
 			elseif Tag == 24 then
 				local VarInt4
-				VarInt4, v76 = ProtoModule.readVarInt(Buf, v1)
+				VarInt4, v79 = ProtoModule.readVarInt(Buf, v1)
 				NewModule.is_off_sale = VarInt4 ~= 0
 			elseif Tag == 29 then
 				local VarInt5
-				VarInt5, v76 = ProtoModule.readVarInt(Buf, v1)
+				VarInt5, v79 = ProtoModule.readVarInt(Buf, v1)
 				NewModule.owned = VarInt5 ~= 0
 			elseif Tag == 30 then
 				local VarInt6
-				VarInt6, v76 = ProtoModule.readVarInt(Buf, v1)
+				VarInt6, v79 = ProtoModule.readVarInt(Buf, v1)
 				NewModule.is_purchasable = VarInt6 ~= 0
 			else
 				local _
-				_, v76 = ProtoModule.readVarInt(Buf, v1)
+				_, v79 = ProtoModule.readVarInt(Buf, v1)
 			end
 		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 			if Tag == 1 then
 				local Buffer1
-				Buffer1, v76 = ProtoModule.readBuffer(Buf, v1)
+				Buffer1, v79 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.id = buffer.tostring(Buffer1)
 			elseif Tag == 2 then
 				local Buffer2
-				Buffer2, v76 = ProtoModule.readBuffer(Buf, v1)
+				Buffer2, v79 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.name = buffer.tostring(Buffer2)
 			elseif Tag == 3 then
 				local Buffer3
-				Buffer3, v76 = ProtoModule.readBuffer(Buf, v1)
+				Buffer3, v79 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.creator_name = buffer.tostring(Buffer3)
 			elseif Tag == 5 then
 				local Buffer4
-				Buffer4, v76 = ProtoModule.readBuffer(Buf, v1)
+				Buffer4, v79 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.asset_type = buffer.tostring(Buffer4)
 			elseif Tag == 7 then
 				local Buffer5
-				Buffer5, v76 = ProtoModule.readBuffer(Buf, v1)
+				Buffer5, v79 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.description = buffer.tostring(Buffer5)
 			elseif Tag == 8 then
 				local Buffer6
-				Buffer6, v76 = ProtoModule.readBuffer(Buf, v1)
+				Buffer6, v79 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.creator_id = buffer.tostring(Buffer6)
 			elseif Tag == 9 then
 				local Buffer7
-				Buffer7, v76 = ProtoModule.readBuffer(Buf, v1)
+				Buffer7, v79 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.creator_type = buffer.tostring(Buffer7)
 			elseif Tag == 10 then
 				local Buffer8
-				Buffer8, v76 = ProtoModule.readBuffer(Buf, v1)
+				Buffer8, v79 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.creating_universe_id = buffer.tostring(Buffer8)
 			elseif Tag == 11 then
 				local Buffer9
-				Buffer9, v76 = ProtoModule.readBuffer(Buf, v1)
+				Buffer9, v79 = ProtoModule.readBuffer(Buf, v1)
 				table.insert(NewModule.taxonomy, MarketplaceCatalogItemCommonModule.MarketplaceCatalogTaxonomyNode.decode(Buffer9))
 			elseif Tag == 12 then
 				local Buffer11
-				Buffer11, v76 = ProtoModule.readBuffer(Buf, v1)
+				Buffer11, v79 = ProtoModule.readBuffer(Buf, v1)
 				table.insert(NewModule.render_properties, buffer.tostring(Buffer11))
 			elseif Tag == 13 then
 				local Buffer12
-				Buffer12, v76 = ProtoModule.readBuffer(Buf, v1)
+				Buffer12, v79 = ProtoModule.readBuffer(Buf, v1)
 				table.insert(NewModule.item_restrictions, buffer.tostring(Buffer12))
 			elseif Tag == 22 then
 				local Buffer13
-				Buffer13, v76 = ProtoModule.readBuffer(Buf, v1)
+				Buffer13, v79 = ProtoModule.readBuffer(Buf, v1)
 				table.insert(NewModule.timed_options, MarketplaceCatalogItemCommonModule.MarketplaceCatalogTimedOption.decode(Buffer13))
 			elseif Tag == 23 then
 				local Buffer14
-				Buffer14, v76 = ProtoModule.readBuffer(Buf, v1)
+				Buffer14, v79 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.collectible_item_id = buffer.tostring(Buffer14)
 			elseif Tag == 25 then
 				local Buffer15
-				Buffer15, v76 = ProtoModule.readBuffer(Buf, v1)
+				Buffer15, v79 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.sale_location_type = buffer.tostring(Buffer15)
 			elseif Tag == 26 then
 				local Buffer16
-				Buffer16, v76 = ProtoModule.readBuffer(Buf, v1)
+				Buffer16, v79 = ProtoModule.readBuffer(Buf, v1)
 				table.insert(NewModule.item_status, buffer.tostring(Buffer16))
 			elseif Tag == 27 then
 				local Buffer17
-				Buffer17, v76 = ProtoModule.readBuffer(Buf, v1)
+				Buffer17, v79 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.price_status = buffer.tostring(Buffer17)
 			elseif Tag == 28 then
 				local Buffer18
-				Buffer18, v76 = ProtoModule.readBuffer(Buf, v1)
+				Buffer18, v79 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.product_id = buffer.tostring(Buffer18)
 			elseif Tag == 31 then
 				local Buffer19
-				Buffer19, v76 = ProtoModule.readBuffer(Buf, v1)
+				Buffer19, v79 = ProtoModule.readBuffer(Buf, v1)
 				table.insert(NewModule.variant_attributes, MarketplaceCatalogItemCommonModule.MarketplaceCatalogVariantAttribute.decode(Buffer19))
 			elseif Tag == 32 then
 				local Buffer10
-				Buffer10, v76 = ProtoModule.readBuffer(Buf, v1)
+				Buffer10, v79 = ProtoModule.readBuffer(Buf, v1)
 				table.insert(NewModule.genres, buffer.tostring(Buffer10))
+			elseif Tag == 33 then
+				local Buffer20
+				Buffer20, v79 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.licensing = MarketplaceCatalogItemCommonModule.MarketplaceCatalogItemLicensing.decode(Buffer20)
 			else
 				local VarInt7, VarInt2_1 = ProtoModule.readVarInt(Buf, v1)
 				v1 = VarInt2_1 + VarInt7
 			end
 		elseif Tag2 == ProtoModule.wireTypes.i32 then
 			local _
-			_, v76 = ProtoModule.readFixed32(Buf, v1)
+			_, v79 = ProtoModule.readFixed32(Buf, v1)
 		elseif Tag2 == ProtoModule.wireTypes.i64 then
 			local _
-			_, v76 = ProtoModule.readFixed64(Buf, v1)
+			_, v79 = ProtoModule.readFixed64(Buf, v1)
 		else
 			error("Unsupported wire type: " .. Tag2)
 		end
@@ -479,6 +489,9 @@ function Module:jsonEncode()
 			table.insert(Genres, genre)
 		end
 		t.genres = Genres
+	end
+	if self.licensing ~= nil then
+		t.licensing = self.licensing:jsonEncode()
 	end
 	return t
 end
@@ -717,6 +730,9 @@ function Module:jsonDecode()
 			table.insert(Genres, genre)
 		end
 		NewModule.genres = Genres
+	end
+	if self.licensing ~= nil then
+		NewModule.licensing = MarketplaceCatalogItemCommonModule.MarketplaceCatalogItemLicensing.jsonDecode(self.licensing)
 	end
 	return NewModule
 end

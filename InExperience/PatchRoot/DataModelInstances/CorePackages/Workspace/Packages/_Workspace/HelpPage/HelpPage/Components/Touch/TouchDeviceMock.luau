@@ -15,6 +15,7 @@ return ReactModule.memo(function(p1)
 		local NewCenterButtonPosition = Layout.centerButtonPosition + Layout.slotOffsets[i]
 		Elements[slot.id] = ReactModule.createElement(TouchControlIconModule, {
 			name = slot.icon,
+			assetId = slot.assetId,
 			diameter = Layout.smallButtonSize,
 			disabled = slot.disabled,
 			AnchorPoint = Vector2.new(0.5, 0.5),
@@ -33,6 +34,7 @@ return ReactModule.memo(function(p1)
 	end
 	Elements[p1.centerControl.id] = ReactModule.createElement(TouchControlIconModule, {
 		name = p1.centerControl.icon,
+		assetId = p1.centerControl.assetId,
 		diameter = Layout.centerButtonSize,
 		disabled = p1.centerControl.disabled,
 		AnchorPoint = Vector2.new(0.5, 0.5),

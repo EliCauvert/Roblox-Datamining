@@ -460,21 +460,21 @@ return function(p1)
 				local HttpError = nil
 				
 				if FFlagSduiRequestCountersModule then
-					local Callback4 = Callback9
-					local Callback5 = Callback6
+					local Callback5 = Callback9
+					local Callback4 = Callback6
 					
 					Callback9 = function(JoinResults)
-						-- upvalues: SduiPageAnalyticsModule (upval), RequestConfig (upval), SduiRequestEndpointForCounters (upval), StatusCode (ref), HttpError (ref), Callback4 (copy)
+						-- upvalues: SduiPageAnalyticsModule (upval), RequestConfig (upval), SduiRequestEndpointForCounters (upval), StatusCode (ref), HttpError (ref), Callback5 (copy)
 						SduiPageAnalyticsModule.sendRequestOutcomeCounter(RequestConfig.surfaceKey, SduiRequestEndpointForCounters, "success", StatusCode, HttpError)
 						
-						return Callback4(JoinResults)
+						return Callback5(JoinResults)
 					end
 					
 					Callback6 = function(p3)
-						-- upvalues: SduiPageAnalyticsModule (upval), RequestConfig (upval), SduiRequestEndpointForCounters (upval), StatusCode (ref), HttpError (ref), Callback5 (copy)
+						-- upvalues: SduiPageAnalyticsModule (upval), RequestConfig (upval), SduiRequestEndpointForCounters (upval), StatusCode (ref), HttpError (ref), Callback4 (copy)
 						SduiPageAnalyticsModule.sendRequestOutcomeCounter(RequestConfig.surfaceKey, SduiRequestEndpointForCounters, "failure", StatusCode, HttpError)
 						
-						return Callback5(p3)
+						return Callback4(p3)
 					end
 				end
 				local Callback10 = if FFlagHomeSduiOfflineCache then function(p3, p4)

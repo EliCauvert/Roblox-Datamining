@@ -25,5 +25,6 @@
 	CtaSurfaces = {
 		SocialTabsPage = "SocialTabsPage",
 		FriendsLandingPage = "FriendsLandingPage"
-	}
+	},
+	ClientCtaActions = { ViewProfile = "ViewProfile" }
 }

@@ -5,7 +5,7 @@ local FoundationModule = require(Parent.Foundation)
 local EscapeRichTextModule = require(ChatUIPrimitives.Utils.escapeRichText)
 local FormatInlineIconModule = require(ChatUIPrimitives.Utils.formatInlineIcon)
 local BubbleViewModule = require(script.Parent.Parent.Bubble.BubbleView)
-local SizingModule = require(script.Parent.Parent.Sizing)
+local SizingModule = require(script.Parent.Parent.Parent.Sizing)
 
 return {
 	Bubble = function(Frame)

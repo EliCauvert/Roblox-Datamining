@@ -7,6 +7,7 @@ local FoundationModule = require(Parent.Foundation)
 local FFlagEnableExperienceShopGlobalIconModule = require(InExperienceShop.Flags.FFlagEnableExperienceShopGlobalIcon)
 local FFlagEnableShopIconTelemetryModule = require(InExperienceShop.Flags.FFlagEnableShopIconTelemetry)
 local FFlagOfferNotifyOnGlobalIcon = require(Parent.SharedFlags).FFlagOfferNotifyOnGlobalIcon
+local FFlagEnableAnyFreeTrialToolTipModule = require(InExperienceShop.Flags.FFlagEnableAnyFreeTrialToolTip)
 local ShopGlobalIconAnimGracePeriodMs = game:DefineFastInt("ShopGlobalIconAnimGracePeriodMs", 3000)
 local GetShopGlobalIconStoreModule = require(InExperienceShop.Stores.GetShopGlobalIconStore)
 local FFlagExperienceShopNewIconographyModule = require(InExperienceShop.Flags.FFlagExperienceShopNewIconography)
@@ -32,12 +33,12 @@ else
 	end)
 end
 return function(p1)
-	-- upvalues: FFlagEnableExperienceShopGlobalIconModule (copy), UseTokensFunction (copy), FFlagOfferNotifyOnGlobalIcon (copy), GetShopGlobalIconStoreModule (copy), ReactModule (copy), ShopGlobalIconAnimGracePeriodMs (copy), CurrentTime (ref), TweenService (copy), _TweenInfo (copy), _TweenInfo2 (copy), _TweenInfo3 (copy), _TweenInfo1 (copy), FFlagEnableShopIconTelemetryModule (copy), RunService (copy), Parent (copy), InExperienceShop (copy), FoundationModule (copy), FFlagExperienceShopNewIconographyModule (copy), IconName (copy), IconVariant (copy), v2 (copy), v1 (copy)
+	-- upvalues: FFlagEnableExperienceShopGlobalIconModule (copy), UseTokensFunction (copy), FFlagOfferNotifyOnGlobalIcon (copy), FFlagEnableAnyFreeTrialToolTipModule (copy), GetShopGlobalIconStoreModule (copy), ReactModule (copy), ShopGlobalIconAnimGracePeriodMs (copy), CurrentTime (ref), TweenService (copy), _TweenInfo (copy), _TweenInfo2 (copy), _TweenInfo3 (copy), _TweenInfo1 (copy), FFlagEnableShopIconTelemetryModule (copy), RunService (copy), Parent (copy), InExperienceShop (copy), FoundationModule (copy), FFlagExperienceShopNewIconographyModule (copy), IconName (copy), IconVariant (copy), v2 (copy), v1 (copy)
 	if FFlagEnableExperienceShopGlobalIconModule then
 		local UseTokensResult = UseTokensFunction()
 		local ButtonSize: number = p1.buttonSize
 		local LeftGap = p1.leftGap or 0
-		local SetIconInstance = if FFlagOfferNotifyOnGlobalIcon then GetShopGlobalIconStoreModule(false).setIconInstance else nil
+		local SetIconInstance = if FFlagOfferNotifyOnGlobalIcon or FFlagEnableAnyFreeTrialToolTipModule then GetShopGlobalIconStoreModule(false).setIconInstance else nil
 		local UseStateResult, UseStateResult2 = ReactModule.useState(0)
 		local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
 		local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)

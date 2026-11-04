@@ -16,6 +16,7 @@ local ShopAbuseReportOverlayModule = if SharedFlagsModule.FFlagEnableReportingFl
 local SearchInputContainerModule = require(InExperienceShop.Components.SearchInput.SearchInputContainer)
 local OfferDetailsDialogModule = require(InExperienceShop.Components.OfferDialogs.OfferDetailsDialog)
 local OfferTermsDialogModule = require(InExperienceShop.Components.OfferDialogs.OfferTermsDialog)
+local TrialRedemptionErrorDialogContainerModule = require(InExperienceShop.Components.TrialRedemptionErrorDialog.TrialRedemptionErrorDialogContainer)
 local ShopHomePageContainerModule = require(InExperienceShop.Components.ShopHomePage.ShopHomePageContainer)
 local CategoryPageContainerModule = require(InExperienceShop.Components.CategoryPage.CategoryPageContainer)
 local SearchResultsContainerModule = require(InExperienceShop.Components.SearchResultsPage.SearchResultsContainer)
@@ -30,10 +31,11 @@ local FFlagEnableCreatorEarlyAccessBannerInShopModule = require(InExperienceShop
 local FFlagRemoveBottomPaddingInExperienceShopModule = require(InExperienceShop.Flags.FFlagRemoveBottomPaddingInExperienceShop)
 local FFlagShopBlockClickPassThroughModule = require(InExperienceShop.Flags.FFlagShopBlockClickPassThrough)
 local FFlagShowLargerOfferBannerOnDesktop2Module = require(InExperienceShop.Flags.FFlagShowLargerOfferBannerOnDesktop2)
+local FFlagLuaAppEnableGamePassFreeTrialsModule = require(InExperienceShop.Flags.FFlagLuaAppEnableGamePassFreeTrials)
 local _ = require(InExperienceShop.Hooks.useShopReportOverflow)
 
 return function(p1)
-	-- upvalues: FFlagHideHeaderForBuyRobuxInExperienceShop (copy), FindSectionModule (copy), FFlagShowLargerOfferBannerOnDesktop2Module (copy), IsSubjectToDesktopPoliciesFunction (copy), ReactModule (copy), View (copy), SearchInputContainerModule (copy), TopBarModule (copy), DesktopOfferBannerModule (copy), FFlagRemoveBottomPaddingInExperienceShopModule (copy), FFlagShopBlockClickPassThroughModule (copy), UseTokensFunction (copy), FFlagEnableCreatorEarlyAccessBannerInShopModule (copy), CreatorEarlyAccessBannerModule (copy), Tabs (copy), FillBehavior (copy), SearchResultsContainerModule (copy), ShopHomePageContainerModule (copy), CategoryPageContainerModule (copy), ItemDetailsContainerModule (copy), FFlagShopRobuxPurchaseCompletionModalModule (copy), UnifiedPurchaseCompletionModal (copy), ShopAbuseReportOverlayModule (copy), OfferDialogStateModule (copy), OfferDetailsDialogModule (copy), OfferTermsDialogModule (copy)
+	-- upvalues: FFlagHideHeaderForBuyRobuxInExperienceShop (copy), FindSectionModule (copy), FFlagShowLargerOfferBannerOnDesktop2Module (copy), IsSubjectToDesktopPoliciesFunction (copy), ReactModule (copy), View (copy), SearchInputContainerModule (copy), TopBarModule (copy), DesktopOfferBannerModule (copy), FFlagRemoveBottomPaddingInExperienceShopModule (copy), FFlagShopBlockClickPassThroughModule (copy), UseTokensFunction (copy), FFlagEnableCreatorEarlyAccessBannerInShopModule (copy), CreatorEarlyAccessBannerModule (copy), Tabs (copy), FillBehavior (copy), SearchResultsContainerModule (copy), ShopHomePageContainerModule (copy), CategoryPageContainerModule (copy), ItemDetailsContainerModule (copy), FFlagShopRobuxPurchaseCompletionModalModule (copy), UnifiedPurchaseCompletionModal (copy), ShopAbuseReportOverlayModule (copy), OfferDialogStateModule (copy), OfferDetailsDialogModule (copy), OfferTermsDialogModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), TrialRedemptionErrorDialogContainerModule (copy)
 	local IsSearchOpen = p1.isSearchOpen
 	local NoHideTabs: boolean = not IsSearchOpen and #p1.tabs > 0
 	
@@ -184,6 +186,7 @@ return function(p1)
 		OfferTerms = if p1.offer.offerDialog == OfferDialogStateModule.Terms and (p1.offer.offerModal ~= nil and p1.offer.offerModal.termsAndConditions ~= nil) then ReactModule.createElement(OfferTermsDialogModule, {
 			terms = p1.offer.offerModal.termsAndConditions,
 			onClose = p1.offer.onOfferTermsClose
-		}) else nil
+		}) else nil,
+		TrialRedemptionError = if FFlagLuaAppEnableGamePassFreeTrialsModule then ReactModule.createElement(TrialRedemptionErrorDialogContainerModule) else nil
 	})
 end

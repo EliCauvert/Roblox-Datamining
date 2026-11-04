@@ -11,7 +11,6 @@ local SduiFeedItemModule = require(SduiSharedContent.Components.SduiFeedItem)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagSduiCollectionGridRevealRows = SharedFlagsModule.FFlagSduiCollectionGridRevealRows
 local FFlagAppPageShellScrollToTopFocus = SharedFlagsModule.FFlagAppPageShellScrollToTopFocus
-local FFlagLuaAppsDefaultSelection = SharedFlagsModule.FFlagLuaAppsDefaultSelection
 local FFlagSduiIndividualFeedItemSpacing = SharedFlagsModule.FFlagSduiIndividualFeedItemSpacing
 local FFlagSduiSamePoolFeedItemSpacing = SharedFlagsModule.FFlagSduiSamePoolFeedItemSpacing
 local SduiFeedDebugNameWithImpressionsTag = game:DefineFastFlag("SduiFeedDebugNameWithImpressionsTag", false)
@@ -24,7 +23,7 @@ local function _(p1, p2, p3: number, p4, p5)
 end
 
 return function(p1)
-	-- upvalues: FFlagSduiIndividualFeedItemSpacing (copy), FindAnalyticsFieldFunction (copy), t (copy), SduiBuilder (copy), SduiErrors (copy), GetSduiComponentWrapperFunction (copy), CryoModule (copy), FFlagSduiCollectionGridRevealRows (copy), FFlagAppPageShellScrollToTopFocus (copy), SORTINDEXSELECTIONORDERMULTIPLIER (copy), ReactModule (copy), SduiFeedDebugNameWithImpressionsTag (copy), FFlagSduiSamePoolFeedItemSpacing (copy), SduiFeedItemModule (copy), FFlagLuaAppsDefaultSelection (copy)
+	-- upvalues: FFlagSduiIndividualFeedItemSpacing (copy), FindAnalyticsFieldFunction (copy), t (copy), SduiBuilder (copy), SduiErrors (copy), GetSduiComponentWrapperFunction (copy), CryoModule (copy), FFlagSduiCollectionGridRevealRows (copy), FFlagAppPageShellScrollToTopFocus (copy), SORTINDEXSELECTIONORDERMULTIPLIER (copy), ReactModule (copy), SduiFeedDebugNameWithImpressionsTag (copy), FFlagSduiSamePoolFeedItemSpacing (copy), SduiFeedItemModule (copy)
 	local Elements = {}
 	local SduiContext = p1.sduiContext
 	local StartRow = p1.extraLocalProps and p1.extraLocalProps.startRow
@@ -100,7 +99,7 @@ return function(p1)
 			impressionsTag = p1.impressionsTag,
 			selectionBehaviorLeft = p1.selectionBehaviorLeft,
 			selectionBehaviorRight = p1.selectionBehaviorRight,
-			defaultFocusRef = if FFlagAppPageShellScrollToTopFocus and FFlagLuaAppsDefaultSelection and CollectionPosition == 1 then p1.defaultFocusRef else nil
+			defaultFocusRef = if FFlagAppPageShellScrollToTopFocus and CollectionPosition == 1 then p1.defaultFocusRef else nil
 		}, { Item = Element })
 	end
 	return Elements

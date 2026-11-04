@@ -7,7 +7,7 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local EscapeRichTextModule = require(ChatUIPrimitives.Utils.escapeRichText)
 local FormatInlineIconModule = require(ChatUIPrimitives.Utils.formatInlineIcon)
 local SystemContentModelModule = require(script.Parent.Parent.ContentKinds.System.SystemContentModel)
-local SizingModule = require(script.Parent.Sizing)
+local SizingModule = require(script.Parent.Parent.Sizing)
 local _ = require(script.Parent.groupMessages)
 
 local function systemRichText(ItemSignalResult)

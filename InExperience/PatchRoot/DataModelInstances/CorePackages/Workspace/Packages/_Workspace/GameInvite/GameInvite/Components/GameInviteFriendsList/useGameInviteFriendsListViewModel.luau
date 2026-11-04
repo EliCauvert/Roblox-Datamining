@@ -2,7 +2,7 @@
 local Parent = GameInvite.Parent
 local ReactModule = require(Parent.React)
 local FriendsMenuModule = require(Parent.FriendsMenu)
-local _ = require(Parent.DataHydration)
+local DataHydrationModule = require(Parent.DataHydration)
 local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 local GameInviteConstantsModule = require(GameInvite.GameInviteConstants)
 local _ = require(GameInvite.gameInviteModalType)
@@ -15,6 +15,9 @@ local IsInThisServerModule = require(GameInvite.utils.isInThisServer)
 local IsJoinExpectedModule = require(GameInvite.utils.isJoinExpected)
 local ShouldShowJoinCtaModule = require(GameInvite.utils.shouldShowJoinCta)
 local FFlagGameInviteInExpJoinCtaModule = require(GameInvite.Flags.FFlagGameInviteInExpJoinCta)
+local FFlagGameInviteInExpLivePresenceModule = require(GameInvite.Flags.FFlagGameInviteInExpLivePresence)
+local FFlagGameInviteInExpRefetchOnPresenceEventModule = require(GameInvite.Flags.FFlagGameInviteInExpRefetchOnPresenceEvent)
+local UseRefetchOnlineFriendsOnPresenceEventModule = if FFlagGameInviteInExpRefetchOnPresenceEventModule then require(script.Parent.useRefetchOnlineFriendsOnPresenceEvent) else nil
 local User = require(Parent.UserList).Enums.EntityType.User
 
 local function ignoreRowSelection() end
@@ -52,10 +55,20 @@ local function useJoinCtaConfig(FriendsById, UseContextResult, OnActivated)
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), FriendsMenuModule (copy), GameDetailsContextModule (copy), UseAppPolicyFunction (copy), User (copy), FFlagGameInviteInExpJoinCtaModule (copy), UseGameInviteJoinCardModule (copy), useJoinCtaConfig (copy), GameInviteFriendRowModule (copy), ignoreRowSelection (copy), CanShareGameInviteLinkModule (copy)
+	-- upvalues: ReactModule (copy), FriendsMenuModule (copy), GameDetailsContextModule (copy), UseAppPolicyFunction (copy), FFlagGameInviteInExpLivePresenceModule (copy), DataHydrationModule (copy), User (copy), FFlagGameInviteInExpRefetchOnPresenceEventModule (copy), UseRefetchOnlineFriendsOnPresenceEventModule (copy), FFlagGameInviteInExpJoinCtaModule (copy), UseGameInviteJoinCardModule (copy), useJoinCtaConfig (copy), GameInviteFriendRowModule (copy), ignoreRowSelection (copy), CanShareGameInviteLinkModule (copy)
 	local UseContextResult = ReactModule.useContext(FriendsMenuModule.FriendsListContext)
 	local Friends = UseContextResult.friends
 	local UseContextResult1 = ReactModule.useContext(GameDetailsContextModule)
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2)
+		return p2.getExperienceInviteShareLinkEnabled()
+	end)
+	
+	if FFlagGameInviteInExpLivePresenceModule then
+		ReactModule.useEffect(function()
+			-- upvalues: DataHydrationModule (upval)
+			DataHydrationModule.Friends.FriendsStore.get().RefetchOnlineFriends()
+		end, {})
+	end
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Friends (copy), User (upval)
 		local Entities = {}
@@ -70,6 +83,10 @@ return function(p1)
 		return { entities = Entities, friendsById = FriendsById }
 	end, { Friends })
 	local FriendsById = UseMemoResult.friendsById
+	
+	if FFlagGameInviteInExpRefetchOnPresenceEventModule then
+		UseRefetchOnlineFriendsOnPresenceEventModule(FriendsById)
+	end
 	local UseGameInviteJoinCardModuleResult = if FFlagGameInviteInExpJoinCtaModule then UseGameInviteJoinCardModule() else nil
 	local UseJoinCtaConfigResult = if FFlagGameInviteInExpJoinCtaModule then useJoinCtaConfig(FriendsById, UseContextResult1, UseGameInviteJoinCardModuleResult.open) else nil
 	local FetchMoreFriendsFunction = UseContextResult.fetchMoreFriends
@@ -94,9 +111,7 @@ return function(p1)
 		end, { FriendsById }),
 		onRowSelected = ignoreRowSelection,
 		onEndReached = if FetchMoreFriendsFunction and UseContextResult.searchFriendsString == "" then UseResult else nil,
-		showShareGameInviteLink = CanShareGameInviteLinkModule(game.GameId, UseContextResult1, (UseAppPolicyFunction(function(p2)
-			return p2.getExperienceInviteShareLinkEnabled()
-		end))),
+		showShareGameInviteLink = CanShareGameInviteLinkModule(game.GameId, UseContextResult1, UseAppPolicyResult),
 		ctaConfig = if FFlagGameInviteInExpJoinCtaModule then UseJoinCtaConfigResult else nil,
 		joinCard = if FFlagGameInviteInExpJoinCtaModule and UseJoinCtaConfigResult ~= nil then UseGameInviteJoinCardModuleResult else nil
 	}

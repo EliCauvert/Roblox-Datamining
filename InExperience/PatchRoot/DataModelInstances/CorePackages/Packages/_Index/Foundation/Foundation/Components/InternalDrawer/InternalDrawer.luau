@@ -4,6 +4,8 @@ local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local InternalDrawerOverlayModule = require(script.Parent.InternalDrawerOverlay)
 local _ = require(script.Parent.Types)
 local config = {
+	outerBleed = 0,
+	scrolls = true,
 	testId = "--foundation-internal-drawer",
 	scrollBarVisibility = require(Foundation.Enums.ScrollBarVisibility).None
 }

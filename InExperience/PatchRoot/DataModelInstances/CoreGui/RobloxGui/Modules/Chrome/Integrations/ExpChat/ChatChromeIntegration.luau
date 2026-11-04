@@ -20,7 +20,12 @@ local GamepadUtils = require(CorePackages.Workspace.Packages.InputUi).Gamepad.Ga
 local IsSpatialFunction = require(CorePackages.Workspace.Packages.AppCommonLib).isSpatial
 local Default = require(script.Parent.ChatIconVisibleSignals).default
 local SignalsUtilsModule = require(CorePackages.Workspace.Packages.SignalsUtils)
-local SideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement
+local ReactModule = require(CorePackages.Packages.React)
+local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
+local ChromeModule = require(CorePackages.Workspace.Packages.Chrome)
+local UnibarStyle = ChromeModule.UnibarStyle
+local FFlagTokenizeUnibarConstantsWithStyleProvider = require(Chrome.ChromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
+local SideSheetPlacement = ChromeModule.Enums.SideSheetPlacement
 
 if require(RobloxGui.Modules.Flags.FFlagDebugDisableExperienceChatMain) then
 	return nil
@@ -39,6 +44,9 @@ local FFlagRemoveFriendsChatUnibarEntrypoints = SharedFlagsModule.FFlagRemoveFri
 local FFlagExpChatEnableFriendsTab = SharedFlagsModule.FFlagExpChatEnableFriendsTab
 local FFlagExpChatCanShowFriendsTab = SharedFlagsModule.FFlagExpChatCanShowFriendsTab
 local FFlagExpChatHistoricalMessagesUnibarUnread = SharedFlagsModule.FFlagExpChatHistoricalMessagesUnibarUnread
+local FFlagExpChatContinuousListeningChatIconDot = SharedFlagsModule.FFlagExpChatContinuousListeningChatIconDot
+local RedDotModule = if FFlagExpChatContinuousListeningChatIconDot then require(Chrome.Integrations.RedDot) else nil
+local GetDictationStateStore = if FFlagExpChatContinuousListeningChatIconDot then ExpChatModule.Stores.GetDictationStateStore else nil
 local InExperienceAppChatModalModule = require(CorePackages.Workspace.Packages.AppChat.InExperienceAppChatModal)
 local ChatSelectorModule = require(RobloxGui.Modules.ChatSelector)
 local GetExperienceChatVisualConfigFunction = require(CorePackages.Workspace.Packages.ExpChat).getExperienceChatVisualConfig
@@ -344,10 +352,26 @@ RegisterResult = ServiceModule:register({
 	end else nil,
 	components = {
 		Icon = function(_)
-			-- upvalues: GetExperienceChatVisualConfigFunction (copy), CommonIconModule (copy), NewMappedSignal (copy)
+			-- upvalues: GetExperienceChatVisualConfigFunction (copy), CommonIconModule (copy), NewMappedSignal (copy), FFlagExpChatContinuousListeningChatIconDot (copy), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), SignalsReactModule (copy), GetDictationStateStore (copy), ReactModule (copy), RedDotModule (copy)
 			local ExperienceChatVisualConfig = GetExperienceChatVisualConfigFunction()
+			local CommonIconModuleResult = CommonIconModule(ExperienceChatVisualConfig.icon.off, ExperienceChatVisualConfig.icon.on, NewMappedSignal)
 			
-			return CommonIconModule(ExperienceChatVisualConfig.icon.off, ExperienceChatVisualConfig.icon.on, NewMappedSignal)
+			if FFlagExpChatContinuousListeningChatIconDot then
+				local ICONSIZE = if FFlagTokenizeUnibarConstantsWithStyleProvider then UnibarStyle.use().ICON_SIZE else ConstantsModule.ICON_SIZE
+				
+				return ReactModule.createElement("Frame", {
+					BackgroundTransparency = 1,
+					Size = UDim2.fromOffset(ICONSIZE, ICONSIZE)
+				}, {
+					Icon = CommonIconModuleResult,
+					ListeningDot = ReactModule.createElement(RedDotModule, {
+						position = UDim2.new(1, -7, 1, -7),
+						visible = SignalsReactModule.useSignalState(GetDictationStateStore(false).getIsListening)
+					})
+				})
+			else
+				return CommonIconModuleResult
+			end
 		end
 	}
 })

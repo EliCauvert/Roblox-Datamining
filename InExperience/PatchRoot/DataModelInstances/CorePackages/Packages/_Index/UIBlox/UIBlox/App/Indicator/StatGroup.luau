@@ -3,16 +3,14 @@ local Parent1 = Parent.Parent
 local Core = Parent1.Core
 local Parent2 = Parent1.Parent
 local ReactModule = require(Parent2.React)
-local FoundationModule = require(Parent2.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local NormalizeFontFaceFunction = require(Parent2.Foundation).Utility.normalizeFontFace
 local ImagesModule = require(Parent.ImageSet.Images)
 local ImageSetComponentModule = require(Core.ImageSet.ImageSetComponent)
 local UseStyleModule = require(Core.Style.useStyle)
 local _ = require(Parent.Style.Fonts)
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
 local function renderStatItem(p1, p2, Text, p3)
-	-- upvalues: ReactModule (copy), ImageSetComponentModule (copy), ImagesModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: ReactModule (copy), ImageSetComponentModule (copy), ImagesModule (copy), NormalizeFontFaceFunction (copy)
 	local Tokens = p3.Tokens
 	local _Font = p3.Font
 	local ScaledBaseSize = _Font.BaseSize * _Font.Body.RelativeSize
@@ -43,8 +41,7 @@ local function renderStatItem(p1, p2, Text, p3)
 			Size = UDim2.fromScale(0, 0),
 			AutomaticSize = Enum.AutomaticSize.XY,
 			Text = Text,
-			Font = if FoundationFontFaceMigration then nil else _Font.Body.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(_Font.Body.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(_Font.Body.Font),
 			TextSize = ScaledBaseSize,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Center,

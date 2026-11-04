@@ -71,6 +71,7 @@ local FFlagBuildWithGroupsModule = require(script.Parent.Flags.FFlagBuildWithGro
 local BuildHomeTabsContainerModule = if FFlagBuildExperiencePreviewsTabModule then require(script.Parent.Components.BuildHomeTabs.BuildHomeTabsContainer) else nil
 local FFlagBuildExperienceAnalytics = SharedFlagsModule.FFlagBuildExperienceAnalytics
 local FFlagBuildExperienceHideNavBarOnSubPages = SharedFlagsModule.FFlagBuildExperienceHideNavBarOnSubPages
+local FFlagBuildExperienceChatOpenTelemetryModule = require(script.Parent.Flags.FFlagBuildExperienceChatOpenTelemetry)
 local GetAdsCampaignDeepLinkStoreModule = require(BuildExperience.Stores.GetAdsCampaignDeepLinkStore)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local FFlagBuildAdUpsellModule1 = FFlagBuildAdUpsellModule or FFlagBuildExperienceMonetizationNativeUIModule
@@ -124,11 +125,14 @@ local function useLiveSubagentTaskState(Navigation)
 end
 
 local _ = function(p2)
-	-- upvalues: ReactModule (copy), FFlagBuildExperienceModelPickerModule (copy), PrepareBuildModelSelectionTargetModule (copy), config (copy)
+	-- upvalues: ReactModule (copy), FFlagBuildExperienceModelPickerModule (copy), PrepareBuildModelSelectionTargetModule (copy), FFlagBuildExperienceChatOpenTelemetryModule (copy), SendBuildExperienceEventModule (copy), config (copy)
 	return ReactModule.useCallback(function(Target)
-		-- upvalues: FFlagBuildExperienceModelPickerModule (upval), PrepareBuildModelSelectionTargetModule (upval), p2 (copy), config (upval)
+		-- upvalues: FFlagBuildExperienceModelPickerModule (upval), PrepareBuildModelSelectionTargetModule (upval), FFlagBuildExperienceChatOpenTelemetryModule (upval), SendBuildExperienceEventModule (upval), p2 (copy), config (upval)
 		if FFlagBuildExperienceModelPickerModule then
 			Target = PrepareBuildModelSelectionTargetModule(Target)
+		end
+		if FFlagBuildExperienceChatOpenTelemetryModule then
+			SendBuildExperienceEventModule("CHAT_OPEN", { universeId = Target.universeId, placeId = Target.placeId }, { isNewGame = tostring(Target.isNewGameTarget == true) })
 		end
 		p2.navigate(config.BuildChat, { target = Target })
 	end, { p2 })
@@ -233,7 +237,7 @@ local function BuildSearchResults(p2)
 end
 
 local function BuildSearchScreen(p2)
-	-- upvalues: UseBuildPageLayoutModule (copy), UseNavigationFocusFunction (copy), UseOnScreenKeyboardVisibleModule (copy), GetSearchQueryStoreModule (copy), SignalsReactModule (copy), UseLocalizationFunction (copy), ReactModule (copy), FFlagBuildExperienceModelPickerModule (copy), PrepareBuildModelSelectionTargetModule (copy), config (copy), UseMyCreationsResultsModule (copy), UseScrollPerformanceTrackerModule (copy), ExperienceResultsLoadingSkeletonModule (copy), FullscreenPageWithSafeArea (copy), SearchPageContainerModule (copy), BuildSearchResults (copy)
+	-- upvalues: UseBuildPageLayoutModule (copy), UseNavigationFocusFunction (copy), UseOnScreenKeyboardVisibleModule (copy), GetSearchQueryStoreModule (copy), SignalsReactModule (copy), UseLocalizationFunction (copy), ReactModule (copy), FFlagBuildExperienceModelPickerModule (copy), PrepareBuildModelSelectionTargetModule (copy), FFlagBuildExperienceChatOpenTelemetryModule (copy), SendBuildExperienceEventModule (copy), config (copy), UseMyCreationsResultsModule (copy), UseScrollPerformanceTrackerModule (copy), ExperienceResultsLoadingSkeletonModule (copy), FullscreenPageWithSafeArea (copy), SearchPageContainerModule (copy), BuildSearchResults (copy)
 	local ScreenProps = p2.screenProps or {}
 	local Navigation = p2.navigation
 	local UseBuildPageLayoutModuleResult = UseBuildPageLayoutModule()
@@ -243,9 +247,12 @@ local function BuildSearchScreen(p2)
 	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(SearchQueryStoreParam.getDraftQuery)
 	local UseLocalizationResult = UseLocalizationFunction({ searchbarPlaceholder = "Feature.Build.Label.SearchGames" })
 	local UseResult = ReactModule.useCallback(function(Target)
-		-- upvalues: FFlagBuildExperienceModelPickerModule (upval), PrepareBuildModelSelectionTargetModule (upval), Navigation (copy), config (upval)
+		-- upvalues: FFlagBuildExperienceModelPickerModule (upval), PrepareBuildModelSelectionTargetModule (upval), FFlagBuildExperienceChatOpenTelemetryModule (upval), SendBuildExperienceEventModule (upval), Navigation (copy), config (upval)
 		if FFlagBuildExperienceModelPickerModule then
 			Target = PrepareBuildModelSelectionTargetModule(Target)
+		end
+		if FFlagBuildExperienceChatOpenTelemetryModule then
+			SendBuildExperienceEventModule("CHAT_OPEN", { universeId = Target.universeId, placeId = Target.placeId }, { isNewGame = tostring(Target.isNewGameTarget == true) })
 		end
 		Navigation.navigate(config.BuildChat, { target = Target })
 	end, { Navigation })
@@ -404,7 +411,7 @@ local List = {
 	{
 		[config.BuildHome] = {
 			screen = function(p2)
-				-- upvalues: UseBuildPageLayoutModule (copy), UseNavigationFocusFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), FFlagBuildExperienceModelPickerModule (copy), PrepareBuildModelSelectionTargetModule (copy), config (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), useHomeConfigurationPages (copy), FFlagAppThemeHalloween2026BuildBackgroundModule (copy), UseThemeBackgroundFunction (copy), FFlagBuildAdUpsellModule (copy), GetAdsCampaignDeepLinkStoreModule (copy), SendBuildExperienceEventModule (copy), ResumeBuildChatModule (copy), GetSearchQueryStoreModule (copy), MyCreationsTabModule (copy), FullscreenPageWithSafeArea (copy), View (copy), BuildPageHeaderModule (copy), FFlagBuildExperiencePreviewsTabModule (copy), BuildHomeTabsContainerModule (copy), FFlagBuildPublishNavigationSheetModule (copy), PublishSheetControllerModule (copy)
+				-- upvalues: UseBuildPageLayoutModule (copy), UseNavigationFocusFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), FFlagBuildExperienceModelPickerModule (copy), PrepareBuildModelSelectionTargetModule (copy), FFlagBuildExperienceChatOpenTelemetryModule (copy), SendBuildExperienceEventModule (copy), config (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), useHomeConfigurationPages (copy), FFlagAppThemeHalloween2026BuildBackgroundModule (copy), UseThemeBackgroundFunction (copy), FFlagBuildAdUpsellModule (copy), GetAdsCampaignDeepLinkStoreModule (copy), ResumeBuildChatModule (copy), GetSearchQueryStoreModule (copy), MyCreationsTabModule (copy), FullscreenPageWithSafeArea (copy), View (copy), BuildPageHeaderModule (copy), FFlagBuildExperiencePreviewsTabModule (copy), BuildHomeTabsContainerModule (copy), FFlagBuildPublishNavigationSheetModule (copy), PublishSheetControllerModule (copy)
 				local ScreenProps = p2.screenProps or {}
 				local Navigation = p2.navigation
 				local UseBuildPageLayoutModuleResult = UseBuildPageLayoutModule()
@@ -414,9 +421,12 @@ local List = {
 					fallbackExperienceName = LocalizationStringsModule.BUILD_ASSISTANT_FALLBACK_NAME
 				}).fallbackExperienceName
 				local UseResult = ReactModule.useCallback(function(Target)
-					-- upvalues: FFlagBuildExperienceModelPickerModule (upval), PrepareBuildModelSelectionTargetModule (upval), Navigation (copy), config (upval)
+					-- upvalues: FFlagBuildExperienceModelPickerModule (upval), PrepareBuildModelSelectionTargetModule (upval), FFlagBuildExperienceChatOpenTelemetryModule (upval), SendBuildExperienceEventModule (upval), Navigation (copy), config (upval)
 					if FFlagBuildExperienceModelPickerModule then
 						Target = PrepareBuildModelSelectionTargetModule(Target)
+					end
+					if FFlagBuildExperienceChatOpenTelemetryModule then
+						SendBuildExperienceEventModule("CHAT_OPEN", { universeId = Target.universeId, placeId = Target.placeId }, { isNewGame = tostring(Target.isNewGameTarget == true) })
 					end
 					Navigation.navigate(config.BuildChat, { target = Target })
 				end, { Navigation })

@@ -1,1 +1,1 @@
-﻿return require(script.DisplayBackground)
+﻿return (require(script.DisplayBackground))

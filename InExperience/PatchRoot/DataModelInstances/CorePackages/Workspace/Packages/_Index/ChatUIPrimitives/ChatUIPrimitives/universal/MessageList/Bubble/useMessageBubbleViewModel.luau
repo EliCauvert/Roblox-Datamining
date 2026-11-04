@@ -8,7 +8,7 @@ local IsObservingAuthorModule = require(script.Parent.Parent.isObservingAuthor)
 local ObservingUserContextModule = require(script.Parent.Parent.ObservingUserContext)
 local UseMessageRowContentsModule = require(script.Parent.Parent.useMessageRowContents)
 local GetBubbleCornerRadiiModule = require(script.Parent.getBubbleCornerRadii)
-local SizingModule = require(script.Parent.Parent.Sizing)
+local SizingModule = require(script.Parent.Parent.Parent.Sizing)
 local _ = require(script.Parent.Types)
 
 local function _(p1): string

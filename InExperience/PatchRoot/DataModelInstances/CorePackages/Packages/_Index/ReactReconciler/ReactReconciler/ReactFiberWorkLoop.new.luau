@@ -1557,7 +1557,7 @@ function config1.commitRootImpl(p6, p7)
 			end
 			config1.schedulePendingInteractions(p6, PendingLanes)
 		end
-		if DEV and (EnableDoubleInvokingEffects and not Flag3) then
+		if DEV and EnableDoubleInvokingEffects and not Flag3 then
 			commitDoubleInvokeEffectsInDEV(p6.current, false)
 		end
 		if ReactFeatureFlags.enableSchedulerTracing and not Flag3 then

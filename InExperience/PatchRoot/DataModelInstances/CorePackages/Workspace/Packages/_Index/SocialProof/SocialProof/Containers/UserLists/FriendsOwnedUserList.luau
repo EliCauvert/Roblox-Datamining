@@ -10,6 +10,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local UseNavigationPropsFunction = require(Parent.RobloxAppNavigation).useNavigationProps
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local NavigateBackFunction = require(Parent.NavigationRodux).Thunks.NavigateBack
 local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
@@ -26,7 +27,7 @@ local config1 = {
 }
 
 return function(_)
-	-- upvalues: UseDispatchFunction (copy), UseNavigationPropsFunction (copy), UseEntityConnectionsPaginationModule (copy), EnumsModule (copy), ReactModule (copy), config1 (copy), config (copy), AppPage (copy), ConstantsModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), UseLocalizationFunction (copy), FFlagUserListUseSheet (copy), UserListSheetModule (copy), UserListViewAdaptor (copy)
+	-- upvalues: UseDispatchFunction (copy), UseNavigationPropsFunction (copy), UseEntityConnectionsPaginationModule (copy), EnumsModule (copy), ReactModule (copy), config1 (copy), config (copy), AppPage (copy), ConstantsModule (copy), FFlagUserListUseSheet (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), NavigateDownFunction (copy), UseLocalizationFunction (copy), UserListSheetModule (copy), UserListViewAdaptor (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseNavigationPropsResult = UseNavigationPropsFunction(function(_, p1)
 		return {
@@ -56,7 +57,7 @@ return function(_)
 		UseEntityConnectionsPaginationModuleResult.fetchPage
 	})
 	local UseResult1 = ReactModule.useCallback(function(Detail)
-		-- upvalues: AppPage (upval), ConstantsModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
+		-- upvalues: AppPage (upval), ConstantsModule (upval), FFlagUserListUseSheet (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateBackFunction (upval), NavigateDownFunction (upval)
 		local config = {
 			name = AppPage.ProfilePlatform,
 			detail = Detail,
@@ -66,7 +67,19 @@ return function(_)
 			}
 		}
 		
-		if FFlagSignalsNavP3Dispatch then
+		if FFlagUserListUseSheet then
+			if FFlagSignalsNavP3Dispatch then
+				NavigationCommands.back(true)
+				NavigationCommands.down(NavigationCommands.fromLegacyPage(config), true)
+				
+				return
+			else
+				UseDispatchResult(NavigateBackFunction(true))
+				UseDispatchResult(NavigateDownFunction(config, true))
+				
+				return
+			end
+		elseif FFlagSignalsNavP3Dispatch then
 			NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 			
 			return

@@ -5,14 +5,12 @@ local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local AppChatNetworkingModule = require(Parent.AppChatNetworking)
-local SharedFlagsModule = require(Parent.SharedFlags)
 local _ = require(Parent.AppChat.ConversationChannels)
 local GetConversationMessageListStoreModule = require(Parent.AppChat.GetConversationMessageListStore)
 local GetConversationStoreModule = require(Parent.AppChat.GetConversationStore)
 local FFlagDebugFriendsChatModule = require(script.Parent.Parent.Flags.FFlagDebugFriendsChat)
 local FFlagFriendsChatBubbleMessagesModule = require(script.Parent.Parent.Flags.FFlagFriendsChatBubbleMessages)
-local FFlagFriendsChatConversationListFocusNav = SharedFlagsModule.FFlagFriendsChatConversationListFocusNav
-local FFlagFriendsChatOsaSystemMessage = SharedFlagsModule.FFlagFriendsChatOsaSystemMessage
+local FFlagFriendsChatConversationListFocusNav = require(Parent.SharedFlags).FFlagFriendsChatConversationListFocusNav
 local FStringDebugFriendsChatConversationIdModule = require(script.Parent.Parent.Flags.FStringDebugFriendsChatConversationId)
 local UseInterpolatedClientSettingsModule = require(Parent.ExpChatIntegration.useInterpolatedClientSettings)
 local UseChatWindowSettingsModule = require(Parent.ExpChatIntegration.useChatWindowSettings)
@@ -32,7 +30,7 @@ local LayoutConstantsModule = require(FriendsChat.LayoutConstants)
 local UseFriendsChatConversationTelemetryModule = require(script.Parent.Parent.Telemetry.ChatConversation.useFriendsChatConversationTelemetry)
 
 return function(p1)
-	-- upvalues: UseChatWindowSettingsModule (copy), ReactModule (copy), UseInterpolatedClientSettingsModule (copy), FFlagDebugFriendsChatModule (copy), FStringDebugFriendsChatConversationIdModule (copy), Players (copy), ExpChatConversationListAdapterModule (copy), SignalsModule (copy), FFlagFriendsChatOsaSystemMessage (copy), GetConversationStoreModule (copy), SignalsReactModule (copy), AppChatNetworkingModule (copy), FriendsChatOsaAcknowledgementModule (copy), UseConversationHeaderPropsModule (copy), UseConversationModerationTypeModule (copy), UseFetchNewestMessagePageModule (copy), FFlagFriendsChatBubbleMessagesModule (copy), GetConversationMessageListStoreModule (copy), UseFriendsChatConversationTelemetryModule (copy), UseConversationHeaderFadeLayoutModule (copy), FFlagFriendsChatConversationListFocusNav (copy), UseFocusInputBarOnWindowEnterModule (copy), FriendsChatConversationHeaderBarModule (copy), FriendsChatBubbleMessageListContainerModule (copy), FriendsChatChatWindowSlotModule (copy), ResolveFadeModule (copy), LayoutConstantsModule (copy), FriendsChatInputBarHostModule (copy)
+	-- upvalues: UseChatWindowSettingsModule (copy), ReactModule (copy), UseInterpolatedClientSettingsModule (copy), FFlagDebugFriendsChatModule (copy), FStringDebugFriendsChatConversationIdModule (copy), Players (copy), ExpChatConversationListAdapterModule (copy), SignalsModule (copy), GetConversationStoreModule (copy), SignalsReactModule (copy), AppChatNetworkingModule (copy), FriendsChatOsaAcknowledgementModule (copy), UseConversationHeaderPropsModule (copy), UseConversationModerationTypeModule (copy), UseFetchNewestMessagePageModule (copy), FFlagFriendsChatBubbleMessagesModule (copy), GetConversationMessageListStoreModule (copy), UseFriendsChatConversationTelemetryModule (copy), UseConversationHeaderFadeLayoutModule (copy), FFlagFriendsChatConversationListFocusNav (copy), UseFocusInputBarOnWindowEnterModule (copy), FriendsChatConversationHeaderBarModule (copy), FriendsChatBubbleMessageListContainerModule (copy), FriendsChatChatWindowSlotModule (copy), ResolveFadeModule (copy), LayoutConstantsModule (copy), FriendsChatInputBarHostModule (copy)
 	local UseChatWindowSettingsModuleResult = UseChatWindowSettingsModule()
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseChatWindowSettingsModuleResult (copy)
@@ -54,16 +52,12 @@ return function(p1)
 	local IsFriendPlaceholder = ExpChatConversationListAdapterModule.isFriendPlaceholder(ConversationId)
 	local NoIsFriendPlaceholder: boolean = IsNotConversationIdMatch and not IsFriendPlaceholder
 	local Inverted: boolean = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
-		-- upvalues: SignalsModule (upval), FFlagFriendsChatOsaSystemMessage (upval), GetConversationStoreModule (upval), ConversationId (ref)
+		-- upvalues: SignalsModule (upval), GetConversationStoreModule (upval), ConversationId (ref)
 		return SignalsModule.createComputed(function(p2)
-			-- upvalues: FFlagFriendsChatOsaSystemMessage (upval), GetConversationStoreModule (upval), ConversationId (upval)
-			if FFlagFriendsChatOsaSystemMessage then
-				local Conversation = GetConversationStoreModule(p2).getConversation(ConversationId, p2)
-				
-				return if Conversation then Conversation.osaAcknowledgementStatus else nil
-			else
-				return nil
-			end
+			-- upvalues: GetConversationStoreModule (upval), ConversationId (upval)
+			local Conversation = GetConversationStoreModule(p2).getConversation(ConversationId, p2)
+			
+			return if Conversation then Conversation.osaAcknowledgementStatus else nil
 		end)
 	end, { ConversationId }))) == AppChatNetworkingModule.Constants.OsaAcknowledgementStatusResponse.Unacknowledged and not FriendsChatOsaAcknowledgementModule.hasSubmitted(ConversationId)
 	local UseConversationHeaderPropsModuleResult = UseConversationHeaderPropsModule({

@@ -14,20 +14,7 @@ local Host = {
 	displayOrder = CallPipDisplayOrderModule.InExperience,
 	screenInsets = Enum.ScreenInsets.None
 }
-local Participant = {
-	userId = 0,
-	name = "Name",
-	statusText = "Ringing",
-	isMuted = false,
-	isSpeaking = false,
-	isDimmed = true,
-	showStatusAnimation = true
-}
 ReactRobloxModule.createRoot(FriendsCalling):render(ReactModule.createElement(ReactModule.Fragment, nil, {
-	CallPip = if FFlagFriendsCallingCallPipModule then ReactModule.createElement(CallPipModule, {
-		isMicrophoneMuted = false,
-		host = Host,
-		participant = Participant
-	}) else nil,
+	CallPip = if FFlagFriendsCallingCallPipModule then ReactModule.createElement(CallPipModule, { isMicrophoneMuted = false, host = Host }) else nil,
 	VoiceCallReceivedEventReceiver = ReactModule.createElement(VoiceCallReceivedEventReceiverModule)
 }))

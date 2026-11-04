@@ -2,7 +2,7 @@
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local _ = require(script.Parent.Types)
-local SizingModule = require(script.Parent.Parent.Sizing)
+local SizingModule = require(script.Parent.Parent.Parent.Sizing)
 local IndexBindableFunction = FoundationModule.Utility.indexBindable
 
 return ReactModule.forwardRef(function(Frame, Ref)

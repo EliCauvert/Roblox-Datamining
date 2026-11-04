@@ -3,18 +3,17 @@ local Parent = FriendsCalling.Parent
 local FloatingWindowModule = require(Parent.FloatingWindow)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
-local GetFriendsCallingStoreModule = require(FriendsCalling.Stores.GetFriendsCallingStore)
 local _ = require(FriendsCalling.Components.CallParticipant.CallParticipantCard)
 local CollapsedCallOverlayModule = require(script.Parent.CollapsedCallOverlay)
 local ExpandedCallOverlayModule = require(script.Parent.ExpandedCallOverlay)
 local ResolveGeometryModule = require(script.Parent.resolveGeometry)
+local UseCallPipViewModelModule = require(script.Parent.useCallPipViewModel)
 local ColorMode = FoundationModule.Enums.ColorMode
 local DeviceOrientationMode = require(Parent.RobloxAppEnums).DeviceOrientationMode
 local FoundationProvider = FoundationModule.FoundationProvider
 local UseSelectedThemeFunction = require(Parent.RoactUtils).Hooks.useSelectedTheme
 local UseDeviceInsetsFunction = require(Parent.Responsive).useDeviceInsets
 local UseDeviceOrientationFunction = require(Parent.RobloxAppHooks).useDeviceOrientation
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local _UDim2 = UDim2.fromOffset(120, 160)
 
@@ -55,6 +54,7 @@ local function CallPipSession(p1)
 		behavior = FloatingWindowModule.Behaviors.Contained,
 		boundsInsets = if IsUseStateResultMatch then ResolveGeometryModuleResult.expanded.boundsInsets else ResolveGeometryModuleResult.collapsed.boundsInsets,
 		children = if IsUseStateResultMatch then ReactModule.createElement(ExpandedCallOverlayModule, {
+			connectedAt = p1.connectedAt,
 			participant = p1.participant,
 			hasRoundedCorners = ResolveGeometryModuleResult.expanded.hasRoundedCorners,
 			isMicrophoneMuted = p1.isMicrophoneMuted,
@@ -84,14 +84,15 @@ local function CallPipSession(p1)
 end
 
 local function CallPipWindow(p1)
-	-- upvalues: UseSignalStateFunction (copy), GetFriendsCallingStoreModule (copy), ReactModule (copy), CallPipSession (copy)
-	local UseSignalStateResult = UseSignalStateFunction(GetFriendsCallingStoreModule(false).getWindowView)
+	-- upvalues: UseCallPipViewModelModule (copy), ReactModule (copy), CallPipSession (copy)
+	local UseCallPipViewModelModuleResult = UseCallPipViewModelModule()
 	
 	return ReactModule.createElement(CallPipSession, {
-		key = tostring(UseSignalStateResult.session),
-		enabled = UseSignalStateResult.hasCall,
+		key = tostring(UseCallPipViewModelModuleResult.session),
+		connectedAt = UseCallPipViewModelModuleResult.connectedAt,
+		enabled = UseCallPipViewModelModuleResult.enabled,
 		host = p1.host,
-		participant = p1.participant,
+		participant = UseCallPipViewModelModuleResult.participant,
 		isMicrophoneMuted = p1.isMicrophoneMuted,
 		initialPresentation = p1.initialPresentation
 	})

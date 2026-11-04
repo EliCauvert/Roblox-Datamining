@@ -14,8 +14,6 @@ local FFlagFriendSortedByPresenceSignalsImplementation = SharedFlagsModule.FFlag
 local FFlagFriendsStoreSortOnlineFriendsByRank = SharedFlagsModule.FFlagFriendsStoreSortOnlineFriendsByRank
 local FFlagPresenceRefetchTelemetryEnabledModule = require(DataHydration.Flags.FFlagPresenceRefetchTelemetryEnabled)
 local FFlagAddFriendsPageTrustedFriendRequestSection = require(Parent.SharedFlags).FFlagAddFriendsPageTrustedFriendRequestSection
-local FFlagFriendsChatHasFriendsGate = SharedFlagsModule.FFlagFriendsChatHasFriendsGate
-local FFlagFriendsCountDataHydrationMigrationEnabled = SharedFlagsModule.FFlagFriendsCountDataHydrationMigrationEnabled or FFlagFriendsChatHasFriendsGate
 local RequestsModule = require(DataHydration.Friends.Requests)
 local FindFriendsSortModule = require(DataHydration.Friends.Enums.FindFriendsSort)
 local MapFriendshipStatusToEnumModule = require(DataHydration.Friends.mapFriendshipStatusToEnum)
@@ -151,7 +149,7 @@ local _ = function(p3)
 end
 
 return function()
-	-- upvalues: PresenceStoreModule (copy), FFlagFriendSortedByPresenceSignalsImplementation (copy), GetLocalPlayerUserIdFunction (copy), CreateDataCacheModule (copy), OnlineFriendsCacheTtlSec (copy), IsFriendsWithCacheTtlSec (copy), AllFriendsCacheTtlSec (copy), FriendshipStatusCacheTtlSec (copy), FFlagFriendsCountDataHydrationMigrationEnabled (copy), FriendsCountCacheTtlSec (copy), LocalUserIdStore (copy), FFlagAddFriendsPageTrustedFriendRequestSection (copy), MergeListsWithoutDuplicatesFunction (copy), mergeListsWithoutDuplicates (copy), NormalizePresenceRawDataModule (copy), PresenceTypeModule (copy), normalizeStoredOnlineFriendRow (copy), normalizePresenceFromOnlineFriendsRow (copy), CreateDataResolverModule (copy), RequestsModule (copy), MapFriendshipStatusToEnumModule (copy), CryoModule (copy), FriendsPageSize (copy), InitialFriendsPageSize (copy), FindFriendsSortModule (copy), normalizeFindFriendsPageResponse (copy), mergeAllFriendsPage (copy), SignalsModule (copy), FFlagFriendsStoreSortOnlineFriendsByRank (copy), DataStatus (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FFlagPresenceRefetchTelemetryEnabledModule (copy)
+	-- upvalues: PresenceStoreModule (copy), FFlagFriendSortedByPresenceSignalsImplementation (copy), GetLocalPlayerUserIdFunction (copy), CreateDataCacheModule (copy), OnlineFriendsCacheTtlSec (copy), IsFriendsWithCacheTtlSec (copy), AllFriendsCacheTtlSec (copy), FriendshipStatusCacheTtlSec (copy), FriendsCountCacheTtlSec (copy), LocalUserIdStore (copy), FFlagAddFriendsPageTrustedFriendRequestSection (copy), MergeListsWithoutDuplicatesFunction (copy), mergeListsWithoutDuplicates (copy), NormalizePresenceRawDataModule (copy), PresenceTypeModule (copy), normalizeStoredOnlineFriendRow (copy), normalizePresenceFromOnlineFriendsRow (copy), CreateDataResolverModule (copy), RequestsModule (copy), MapFriendshipStatusToEnumModule (copy), CryoModule (copy), FriendsPageSize (copy), InitialFriendsPageSize (copy), FindFriendsSortModule (copy), normalizeFindFriendsPageResponse (copy), mergeAllFriendsPage (copy), SignalsModule (copy), FFlagFriendsStoreSortOnlineFriendsByRank (copy), DataStatus (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FFlagPresenceRefetchTelemetryEnabledModule (copy)
 	local GetResult = PresenceStoreModule.get()
 	local Text = if FFlagFriendSortedByPresenceSignalsImplementation then nil else tostring(GetLocalPlayerUserIdFunction())
 	local DataCacheModule = CreateDataCacheModule(if OnlineFriendsCacheTtlSec and OnlineFriendsCacheTtlSec > 0 then OnlineFriendsCacheTtlSec else 1e999)
@@ -160,7 +158,7 @@ return function()
 	local DataCacheModule2 = CreateDataCacheModule(if AllFriendsCacheTtlSec and AllFriendsCacheTtlSec > 0 then AllFriendsCacheTtlSec else 1e999)
 	local Flag = false
 	local DataCacheModule3 = CreateDataCacheModule(if FriendshipStatusCacheTtlSec and FriendshipStatusCacheTtlSec > 0 then FriendshipStatusCacheTtlSec else 1e999)
-	local DataCacheModule4 = if FFlagFriendsCountDataHydrationMigrationEnabled then CreateDataCacheModule(if FriendsCountCacheTtlSec and FriendsCountCacheTtlSec > 0 then FriendsCountCacheTtlSec else 1e999) else nil
+	local DataCacheModule4 = CreateDataCacheModule(if FriendsCountCacheTtlSec and FriendsCountCacheTtlSec > 0 then FriendsCountCacheTtlSec else 1e999)
 	local Tbl = {}
 	
 	local function appendUserToAllFriends(Id)
@@ -416,7 +414,7 @@ return function()
 			end)
 		end
 	})
-	local DataResolverModule4 = if FFlagFriendsCountDataHydrationMigrationEnabled then CreateDataResolverModule({
+	local DataResolverModule4 = CreateDataResolverModule({
 		supportsMultiGet = false,
 		replaceItems = true,
 		cache = DataCacheModule4,
@@ -426,7 +424,7 @@ return function()
 				return if Result then Result.count else 0
 			end)
 		end
-	}) else nil
+	})
 	local Computed = SignalsModule.createComputed(function(p11)
 		-- upvalues: LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), DataResolverModule (copy), GetResult (copy), DataResolverModule1 (copy), PresenceTypeModule (upval), FFlagFriendsStoreSortOnlineFriendsByRank (upval)
 		local CurrentUserId = LocalUserIdStore.getCurrentUserId(p11)
@@ -648,39 +646,29 @@ return function()
 		end,
 		UpdateIsFriendsWith = UpdateIsFriendsWith,
 		GetFriendsCountByUserId = function(p12, p13)
-			-- upvalues: FFlagFriendsCountDataHydrationMigrationEnabled (upval), DataResolverModule4 (copy)
-			return if FFlagFriendsCountDataHydrationMigrationEnabled then if p13 and p13.skipFetch then DataResolverModule4.getCachedItem(p12) else DataResolverModule4.getAndFetchItem(p12) else nil
+			-- upvalues: DataResolverModule4 (copy)
+			return if p13 and p13.skipFetch then DataResolverModule4.getCachedItem(p12) else DataResolverModule4.getAndFetchItem(p12)
 		end,
 		RefreshFriendsCountByUserId = function(p12)
-			-- upvalues: FFlagFriendsCountDataHydrationMigrationEnabled (upval), DataResolverModule4 (copy)
-			if FFlagFriendsCountDataHydrationMigrationEnabled then
-				DataResolverModule4.fetchItem(p12)
-				
-				return
-			end
+			-- upvalues: DataResolverModule4 (copy)
+			DataResolverModule4.fetchItem(p12)
 		end,
 		clear = function()
-			-- upvalues: DataResolverModule (copy), DataResolverModule1 (copy), DataResolverModule3 (copy), DataResolverModule2 (copy), FFlagFriendsCountDataHydrationMigrationEnabled (upval), DataResolverModule4 (copy), Tbl (copy)
+			-- upvalues: DataResolverModule (copy), DataResolverModule1 (copy), DataResolverModule3 (copy), DataResolverModule2 (copy), DataResolverModule4 (copy), Tbl (copy)
 			DataResolverModule.clear()
 			DataResolverModule1.clear()
 			DataResolverModule3.clear()
 			DataResolverModule2.clear()
-			
-			if FFlagFriendsCountDataHydrationMigrationEnabled then
-				DataResolverModule4.clear()
-			end
+			DataResolverModule4.clear()
 			table.clear(Tbl)
 		end,
 		dispose = function()
-			-- upvalues: DataResolverModule (copy), DataResolverModule1 (copy), DataResolverModule3 (copy), DataResolverModule2 (copy), FFlagFriendsCountDataHydrationMigrationEnabled (upval), DataResolverModule4 (copy), Tbl (copy)
+			-- upvalues: DataResolverModule (copy), DataResolverModule1 (copy), DataResolverModule3 (copy), DataResolverModule2 (copy), DataResolverModule4 (copy), Tbl (copy)
 			DataResolverModule.dispose()
 			DataResolverModule1.dispose()
 			DataResolverModule3.dispose()
 			DataResolverModule2.dispose()
-			
-			if FFlagFriendsCountDataHydrationMigrationEnabled then
-				DataResolverModule4.dispose()
-			end
+			DataResolverModule4.dispose()
 			table.clear(Tbl)
 		end,
 		_fetchOnlineFriendsAsync = function()

@@ -934,9 +934,11 @@ CoreScripts.InGameMenu.GameSettings.SwitchToVRComfortSettings,Özel Ayarlar
 CoreScripts.InGameMenu.GameSettings.UINavToggle,Kullanıcı Arayüzü Gezinme Tuşu
 CoreScripts.InGameMenu.GameSettings.UINavToggleDescription,"Kullanıcı arayüzü gezinme moduna girmek ve çıkmak için ""\ tuşunu kullan"""
 CoreScripts.InGameMenu.GameSettings.UIScale,Kullanıcı Arayüzü Ölçeklendirmesi
+CoreScripts.InGameMenu.GameSettings.UIScaleDescription,Roblox'ta düğmelerin ve menülerin boyutunu ayarla.
 CoreScripts.InGameMenu.GameSettings.UIScaleLargest,En büyük
 CoreScripts.InGameMenu.GameSettings.UIScaleMode,Kullanıcı Arayüzü Ölçeklendirme Modu
 CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,Otomatik
+CoreScripts.InGameMenu.GameSettings.UIScaleModeDescription,Roblox'ta kullanıcı arayüzü ölçeklendirmesinin nasıl seçileceğini belirle.
 CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,Manuel
 CoreScripts.InGameMenu.GameSettings.UIScaleSmallest,En küçük
 CoreScripts.InGameMenu.GameSettings.VREnabled,VR Modu
@@ -3656,13 +3658,27 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} kaldı
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsBody,Her oyunda bir kerede yalnızca 1 ücretsiz deneme kullanabilirsin. Mevcut denemen sona erdiğinde tekrar dene.
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsTitle,Aktif olan başka bir ücretsiz deneme var
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedBody,Her biletle yalnızca 1 ücretsiz deneme kullanabilirsin.
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedTitle,Ücretsiz deneme zaten kullanıldı
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedBody,"Sende bunun bileti zaten var, ücretsiz denemeye ihtiyacın yok."
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedTitle,Bu sende zaten var
+Feature.InExperienceShop.Description.GamePassNotInUniverseBody,
+Feature.InExperienceShop.Description.GamePassNotInUniverseTitle,
+Feature.InExperienceShop.Description.GamePassNotPurchasableBody,Bu bilet şu anda satışta değil.
+Feature.InExperienceShop.Description.GamePassNotPurchasableTitle,Şu anda satışta değil
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledBody,Bu bilet şu anda ücretsiz deneme içermiyor.
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledTitle,Ücretsiz deneme yok
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,Robux satın alarak tahkim maddesi ve fesih politikası da dâhil olmak üzere {termsLinkStart}Kullanım Koşullarımızı{termsLinkEnd} kabul etmiş olursun.
 Feature.InExperienceShop.GamePass,Oyun bileti
 Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,Bonus öğe
+Feature.InExperienceShop.Label.BuyNow,Şimdi Satın Al
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining} sonra sona erecek
 Feature.InExperienceShop.Label.FreeTrial,Ücretsiz deneme
+Feature.InExperienceShop.Label.HaveTrial,Ücretsiz bir denemen var
 Feature.InExperienceShop.Label.NoDescription,Açıklama Yok
 Feature.InExperienceShop.Label.OfferEndTime,"{offer}, {timeRemaining} sonra sona erecek"
 Feature.InExperienceShop.Label.PreviewBanner,"Bu, Roblox Studio'daki Mağazanın bir ön izlemesidir. Oyuncular bu ön izlemeyi görmez."
@@ -3676,7 +3692,9 @@ Feature.InExperienceShop.Label.Timer.Second.Plural,{number} saniye
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 saniye
 Feature.InExperienceShop.Label.Trial,Deneme süresi
 Feature.InExperienceShop.Label.Trialed,Denendi
+Feature.InExperienceShop.Label.TryNow,Şimdi Dene
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,{ROBUX_AMOUNT} Robux satın aldın
+Feature.InExperienceShop.Tooltip.RecentlyRedeemed,Ücretsiz denemeden memnun musun?
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,Bu öğeyi envanterinden kalıcı olarak silmek istediğine emin misin? Fikrini değiştirirsen öğeyi bir deneyimde tekrar kazanman gerekecek.
 Feature.Item.Label.DeleteItemUndercase,Öğeyi sil
 Feature.Landing.Label.PoweredBy,Destekleyen:
@@ -3860,7 +3878,6 @@ Feature.Moments.Title.GenerateTextFeedbackReason,Ne yanlış gitti?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,An yaratmadan çıkılsın mı?
 Feature.Moments.Title.MomentRemoved,An kaldırıldı
-Feature.Moments.Title.PostInsights,Paylaşım bilgileri
 Feature.Moments.Title.ReportPost,Paylaşımı raporla
 Feature.Moments.Title.UnfollowConfirmationDialog,@{username} takipten çıkılsın mı?
 Feature.Moments.Tooltip.Creation,"Deneyimdeki herkes, Anlarını görüntüleyebilir."

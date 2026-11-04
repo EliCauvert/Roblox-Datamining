@@ -2,16 +2,14 @@
 local ReactModule = require(Parent.React)
 local UseImpressionsTaggerFunction = require(Parent.Impressions).useImpressionsTagger
 local FFlagAppPageShellScrollToTopFocus = require(Parent.SharedFlags).FFlagAppPageShellScrollToTopFocus
-local FFlagLuaAppsDefaultSelection = require(Parent.SharedFlags).FFlagLuaAppsDefaultSelection
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), FFlagAppPageShellScrollToTopFocus (copy), FFlagLuaAppsDefaultSelection (copy), UseImpressionsTaggerFunction (copy)
+	-- upvalues: ReactModule (copy), FFlagAppPageShellScrollToTopFocus (copy), UseImpressionsTaggerFunction (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseResult = if FFlagAppPageShellScrollToTopFocus then ReactModule.useCallback(function(Current)
-		-- upvalues: UseRefResult (copy), FFlagLuaAppsDefaultSelection (upval), p1 (copy)
+		-- upvalues: UseRefResult (copy), p1 (copy)
 		UseRefResult.current = Current
 		
-		if not FFlagLuaAppsDefaultSelection then return end
 		if type(p1.defaultFocusRef) == "function" then
 			p1.defaultFocusRef(Current)
 			
@@ -27,7 +25,7 @@ return ReactModule.memo(function(p1)
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		SelectionGroup = true,
-		ref = if FFlagAppPageShellScrollToTopFocus and FFlagLuaAppsDefaultSelection then UseResult else UseRefResult,
+		ref = if FFlagAppPageShellScrollToTopFocus then UseResult else UseRefResult,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		SelectionBehaviorLeft = p1.selectionBehaviorLeft,

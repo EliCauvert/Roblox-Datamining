@@ -917,9 +917,11 @@ CoreScripts.InGameMenu.GameSettings.SwitchToVRComfortSettings,إعدادات م�
 CoreScripts.InGameMenu.GameSettings.UINavToggle,تبديل وضع التنقل في واجهة المستخدم
 CoreScripts.InGameMenu.GameSettings.UINavToggleDescription,"استخدم المفتاح ""\ للدخول إلى وضع التنقل عبر واجهة المستخدم والخروج منه"""
 CoreScripts.InGameMenu.GameSettings.UIScale,تغيير حجم واجهة المستخدم
+CoreScripts.InGameMenu.GameSettings.UIScaleDescription,اضبط حجم الأزرار والقوائم عبر منصّة Roblox.
 CoreScripts.InGameMenu.GameSettings.UIScaleLargest,الأكبر
 CoreScripts.InGameMenu.GameSettings.UIScaleMode,وضع تغيير حجم واجهة المستخدم
 CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,تلقائي
+CoreScripts.InGameMenu.GameSettings.UIScaleModeDescription,إعداد طريقة اختيار تغيير حجم واجهة المستخدم عبر منصّة Roblox.
 CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,يدوي
 CoreScripts.InGameMenu.GameSettings.UIScaleSmallest,الأصغر
 CoreScripts.InGameMenu.GameSettings.VREnabled,وضع VR
@@ -3636,13 +3638,27 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,تبقى {time}
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsBody,يمكنك استخدام فترة تجريبية مجانية واحدة فقط في كل مرة داخل كل لعبة. حاول مرة أخرى بعد انتهاء فترتك التجريبية الحالية.
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsTitle,هناك فترة تجريبية مجانية أخرى نشطة
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedBody,يمكنك استخدام فترة تجريبية مجانية واحدة فقط لكل تذكرة.
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedTitle,تم استخدام الفترة التجريبية المجانية بالفعل
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedBody,أنت تملك هذه التذكرة بالفعل، لذا لا تحتاج إلى فترة تجريبية مجانية.
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedTitle,أنت تملك هذا بالفعل
+Feature.InExperienceShop.Description.GamePassNotInUniverseBody,
+Feature.InExperienceShop.Description.GamePassNotInUniverseTitle,
+Feature.InExperienceShop.Description.GamePassNotPurchasableBody,هذه التذكرة غير معروضة للبيع في الوقت الحالي.
+Feature.InExperienceShop.Description.GamePassNotPurchasableTitle,ليس للبيع في الوقت الحالي
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledBody,لا تتوفر فترة تجريبية مجانية لهذه التذكرة في الوقت الحالي.
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledTitle,لا توجد أي فترة تجريبية مجانية متاحة
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,بشراء عملات Robux، فإنك توافق على {termsLinkStart}شروط الاستخدام{termsLinkEnd}، بما في ذلك شرط التحكيم وسياسة الإلغاء.
 Feature.InExperienceShop.GamePass,
 Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,عنصر مكافأة
+Feature.InExperienceShop.Label.BuyNow,اشترِ الآن
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,ينتهي خلال {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,فترة تجريبية مجانية
+Feature.InExperienceShop.Label.HaveTrial,لديك فترة تجريبية مجانية
 Feature.InExperienceShop.Label.NoDescription,لا يوجد وصف
 Feature.InExperienceShop.Label.OfferEndTime,ينتهي {offer} خلال {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,هذه معاينة لمتجرك في Roblox Studio. لا يرى اللاعبون هذه المعاينة.
@@ -3656,7 +3672,9 @@ Feature.InExperienceShop.Label.Timer.Second.Plural,{number} من الثواني
 Feature.InExperienceShop.Label.Timer.Second.Singular,ثانية واحدة
 Feature.InExperienceShop.Label.Trial,فترة تجريبية
 Feature.InExperienceShop.Label.Trialed,تمت تجربتها
+Feature.InExperienceShop.Label.TryNow,جرّب الآن
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,لقد اشتريتَ {ROBUX_AMOUNT} من عملات Robux بنجاح
+Feature.InExperienceShop.Tooltip.RecentlyRedeemed,هل أعجبتك الفترة التجريبية المجانية؟
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,هل أنت متأكد من أنك تريد حذف هذا العنصر نهائيًا من المقتنيات؟ إذا غيرت رأيك، فستحتاج إلى أن تربحه مرة أخرى في التجارب.
 Feature.Item.Label.DeleteItemUndercase,حذف العنصر
 Feature.Landing.Label.PoweredBy,بدعم من
@@ -3840,7 +3858,6 @@ Feature.Moments.Title.GenerateTextFeedbackReason,ما الخطأ الذي حدث
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,هل تريد الخروج من إنشاء اللحظة؟
 Feature.Moments.Title.MomentRemoved,تمت إزالة اللحظة
-Feature.Moments.Title.PostInsights,المعلومات التفصيلية للمنشور
 Feature.Moments.Title.ReportPost,الإبلاغ عن المنشور
 Feature.Moments.Title.UnfollowConfirmationDialog,هل تريد إلغاء متابعة @{username}؟
 Feature.Moments.Tooltip.Creation,يمكن للجميع في التجربة عرض لحظاتك.

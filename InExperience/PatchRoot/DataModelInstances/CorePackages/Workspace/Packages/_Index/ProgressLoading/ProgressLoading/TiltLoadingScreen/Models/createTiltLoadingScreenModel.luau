@@ -624,10 +624,10 @@ return function(p1: number, p2, p3)
 					end)
 				end
 				watchUniverseId()
-				local Thread5 = DeferredThread2
+				local Thread6 = DeferredThread2
 				
-				if Thread5 and coroutine.status(Thread5) ~= "dead" then
-					task.cancel(Thread5)
+				if Thread6 and coroutine.status(Thread6) ~= "dead" then
+					task.cancel(Thread6)
 				end
 				DeferredThread2 = task.defer(function()
 					-- upvalues: FetchIsSubjectToChinaPolicies (upval), Flag2 (upval), Signal2_6 (upval)
@@ -640,8 +640,8 @@ return function(p1: number, p2, p3)
 				local v2 = nil
 				
 				if FFlagEnableLuaAppsFollowUserId1 and ExperienceService1.GetFollowUserId then
-					local Success, Result = pcall(ExperienceService1.GetFollowUserId, ExperienceService1)
-					v2 = if Success and type(Result) == "number" then Result else 0
+					local Success1, Result2 = pcall(ExperienceService1.GetFollowUserId, ExperienceService1)
+					v2 = if Success1 and type(Result2) == "number" then Result2 else 0
 				else
 					v2 = 0
 				end
@@ -657,8 +657,8 @@ return function(p1: number, p2, p3)
 				end
 				local v3 = nil
 				if GuiService1.GetUiMessage then
-					local Success1, Result1 = pcall(GuiService1.GetUiMessage, GuiService1)
-					v3 = if Success1 and type(Result1) == "string" then Result1 else ""
+					local Success2, Result3 = pcall(GuiService1.GetUiMessage, GuiService1)
+					v3 = if Success2 and type(Result3) == "string" then Result3 else ""
 				else
 					v3 = ""
 				end
@@ -666,23 +666,23 @@ return function(p1: number, p2, p3)
 				
 				if QueueExperimentation.isInExperiment() then
 					if ExperienceService1.GetPlaceJoinState then
-						local Success2, Result2 = pcall(ExperienceService1.GetPlaceJoinState, ExperienceService1)
+						local Success3, Result4 = pcall(ExperienceService1.GetPlaceJoinState, ExperienceService1)
 						
-						if Success2 and type(Result2) == "string" then
-							Signal2_2(Result2)
+						if Success3 and type(Result4) == "string" then
+							Signal2_2(Result4)
 							
-							if Result2 ~= ConstantsModule.QUEUED_STATE then
+							if Result4 ~= ConstantsModule.QUEUED_STATE then
 								Signal2_3(nil)
 							end
-							if not Flag3 and Result2 == ConstantsModule.QUEUED_STATE and Signal(false) > 0 then
-								local v4 = nil
+							if not Flag3 and Result4 == ConstantsModule.QUEUED_STATE and Signal(false) > 0 then
+								local Result1 = nil
 								if ExperienceService1.GetFollowUserId then
-									local Success3, Result3 = pcall(ExperienceService1.GetFollowUserId, ExperienceService1)
-									v4 = if Success3 and type(Result3) == "number" then Result3 else 0
+									local Success, Result = pcall(ExperienceService1.GetFollowUserId, ExperienceService1)
+									Result1 = if Success and type(Result) == "number" then Result else 0
 								else
-									v4 = 0
+									Result1 = 0
 								end
-								if v4 > 0 and QueueExperimentation.isInExperiment() then
+								if Result1 > 0 and QueueExperimentation.isInExperiment() then
 									Flag3 = true
 									QueueExperimentation.logExposure()
 								end
@@ -696,14 +696,14 @@ return function(p1: number, p2, p3)
 						QueuePositionChangedConnection = ExperienceService1.QueuePositionChanged:Connect(updateQueuePosition)
 					end
 					if QueuePositionEnabledEngineFeature then
-						local v5 = nil
+						local v4 = nil
 						if QueuePositionEnabledEngineFeature and ExperienceService1.GetQueuePosition then
-							local Success4, Result4 = pcall(ExperienceService1.GetQueuePosition, ExperienceService1)
-							v5 = if Success4 and type(Result4) == "number" then Result4 else nil
+							local Success4, Result5 = pcall(ExperienceService1.GetQueuePosition, ExperienceService1)
+							v4 = if Success4 and type(Result5) == "number" then Result5 else nil
 						else
-							v5 = nil
+							v4 = nil
 						end
-						Signal2_3(v5)
+						Signal2_3(v4)
 					end
 				end
 				if Signal(false) <= 0 then
@@ -720,10 +720,10 @@ return function(p1: number, p2, p3)
 						Connection = nil
 						
 						if PlaceId <= 0 then return end
-						local Thread6 = DeferredThread
+						local Thread3 = DeferredThread
 						
-						if Thread6 and coroutine.status(Thread6) ~= "dead" then
-							task.cancel(Thread6)
+						if Thread3 and coroutine.status(Thread3) ~= "dead" then
+							task.cancel(Thread3)
 						end
 						DeferredThread = task.defer(function()
 							-- upvalues: FetchProductInfo (upval), PlaceId (copy), Flag2 (upval), Signal (upval), MarketplaceGetMarketplaceAssetStoreModuleResult (upval)
@@ -747,10 +747,10 @@ return function(p1: number, p2, p3)
 						end)
 						
 						if Signal1(false) > 0 then return end
-						local Thread2 = DeferredThread1
+						local Thread7 = DeferredThread1
 						
-						if Thread2 and coroutine.status(Thread2) ~= "dead" then
-							task.cancel(Thread2)
+						if Thread7 and coroutine.status(Thread7) ~= "dead" then
+							task.cancel(Thread7)
 						end
 						DeferredThread1 = task.defer(function()
 							-- upvalues: FetchUniverseId (upval), PlaceId (copy), Flag2 (upval), Signal (upval), Signal1 (upval), Signal2_1 (upval), Connection1 (upval)
@@ -801,10 +801,10 @@ return function(p1: number, p2, p3)
 					end)
 					
 					if Signal1(false) > 0 then return end
-					local Thread7 = DeferredThread1
+					local Thread5 = DeferredThread1
 					
-					if Thread7 and coroutine.status(Thread7) ~= "dead" then
-						task.cancel(Thread7)
+					if Thread5 and coroutine.status(Thread5) ~= "dead" then
+						task.cancel(Thread5)
 					end
 					DeferredThread1 = task.defer(function()
 						-- upvalues: FetchUniverseId (upval), SignalResult1 (copy), Flag2 (upval), Signal (upval), Signal1 (upval), Signal2_1 (upval), Connection1 (upval)
@@ -840,10 +840,10 @@ return function(p1: number, p2, p3)
 				local SignalResult: number = Signal(false)
 				
 				if SignalResult <= 0 then return end
-				local Thread3 = DeferredThread
+				local Thread2 = DeferredThread
 				
-				if Thread3 and coroutine.status(Thread3) ~= "dead" then
-					task.cancel(Thread3)
+				if Thread2 and coroutine.status(Thread2) ~= "dead" then
+					task.cancel(Thread2)
 				end
 				DeferredThread = task.defer(function()
 					-- upvalues: FetchProductInfo (upval), SignalResult (copy), Flag2 (upval), Signal (upval), MarketplaceGetMarketplaceAssetStoreModuleResult (upval)

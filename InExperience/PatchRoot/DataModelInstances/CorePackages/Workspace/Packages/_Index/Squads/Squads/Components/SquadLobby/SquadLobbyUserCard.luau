@@ -36,14 +36,16 @@ local IconSize = Foundation.Enums.IconSize
 local ImageSetLabel = require(Parent.UIBlox).Core.ImageSet.ImageSetLabel
 local _ = require(Squads.Common.ModelTypes)
 local SquadUserPartyStatusModule = require(Squads.Enums.SquadUserPartyStatus)
+local SquadLobbyUserOverflowMenuContainerModule = require(Squads.Components.SquadLobby.SquadLobbyUserOverflowMenu.SquadLobbyUserOverflowMenuContainer)
 local PartyVoiceActivityIndicatorDebounceMs = game:DefineFastInt("PartyVoiceActivityIndicatorDebounceMs", 100)
 local PartyVoiceActivityIndicatorAnimationMs = game:DefineFastInt("PartyVoiceActivityIndicatorAnimationMs", 100)
 local FFlagEnablePartyVoiceChangersInLua = SharedFlags.FFlagEnablePartyVoiceChangersInLua
 local FFlagEnableBlackbirdCheck = SharedFlags.FFlagEnableBlackbirdCheck
+local FFlagSquadMemberJoinDialogAndOverflowMenuModule = require(Squads.Flags.FFlagSquadMemberJoinDialogAndOverflowMenu)
 local UseIsRobloxSubscriberFunction = UserProfilesModule.Hooks.useIsRobloxSubscriber
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), UseTokensFunction (copy), UseAnimatedTransparencyFunction (copy), PartyVoiceActivityIndicatorAnimationMs (copy), UseIsRobloxSubscriberFunction (copy), FFlagEnableBlackbirdCheck (copy), UserProfilesModule (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), React (copy), FFlagSquadsPresenceStoreMigration (copy), UseGetPresenceByUserId (copy), UseSelectorFunction (copy), PresenceType1 (copy), PresenceType (copy), UseLocalUserIdFunction (copy), GetFFlagEnableCrossExpVoiceFunction (copy), UseIsVoiceConnectedFunction (copy), UseIsMicPermissionsErrorFunction (copy), UseParticipantFunction (copy), UseIsVoiceConnectingFunction (copy), UseIsActiveParticipantFunction (copy), UseIsLocalPlayerPartyVoiceEligibleFunction (copy), UseIsUserPartyVoiceEligibleFunction (copy), UseIsCurrentSquadPartyVoiceEligibleFunction (copy), UseIsParticipantMutedLocallyFunction (copy), UseIsParticipantMutedFunction (copy), UseIsParticipantInOtherAudioContextFunction (copy), FFlagEnablePartyVoiceChangersInLua (copy), CrossExperienceVoiceModule (copy), PartyVoiceActivityIndicatorDebounceMs (copy), SquadUserPartyStatusModule (copy), Foundation (copy), IconSize (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), BuilderIconsModule (copy), UseSquadUserDropdownMenuButtonsModule (copy), ImageSetLabel (copy)
+	-- upvalues: UseLocalizationFunction (copy), UseTokensFunction (copy), UseAnimatedTransparencyFunction (copy), PartyVoiceActivityIndicatorAnimationMs (copy), UseIsRobloxSubscriberFunction (copy), FFlagEnableBlackbirdCheck (copy), UserProfilesModule (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), React (copy), FFlagSquadsPresenceStoreMigration (copy), UseGetPresenceByUserId (copy), UseSelectorFunction (copy), PresenceType1 (copy), PresenceType (copy), UseLocalUserIdFunction (copy), GetFFlagEnableCrossExpVoiceFunction (copy), UseIsVoiceConnectedFunction (copy), UseIsMicPermissionsErrorFunction (copy), UseParticipantFunction (copy), UseIsVoiceConnectingFunction (copy), UseIsActiveParticipantFunction (copy), UseIsLocalPlayerPartyVoiceEligibleFunction (copy), UseIsUserPartyVoiceEligibleFunction (copy), UseIsCurrentSquadPartyVoiceEligibleFunction (copy), UseIsParticipantMutedLocallyFunction (copy), UseIsParticipantMutedFunction (copy), UseIsParticipantInOtherAudioContextFunction (copy), FFlagEnablePartyVoiceChangersInLua (copy), CrossExperienceVoiceModule (copy), PartyVoiceActivityIndicatorDebounceMs (copy), SquadUserPartyStatusModule (copy), Foundation (copy), IconSize (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), BuilderIconsModule (copy), UseSquadUserDropdownMenuButtonsModule (copy), ImageSetLabel (copy), FFlagSquadMemberJoinDialogAndOverflowMenuModule (copy), SquadLobbyUserOverflowMenuContainerModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		connectingText = "Feature.Squads.Label.Connecting",
 		inExperiencePresenceText = "Common.Presence.Label.InExperience",
@@ -312,7 +314,9 @@ return function(p1)
 		UseMemoResult2, UseMemoResult1, SocialName
 	})
 	local v7 = #UseSquadUserDropdownMenuButtonsModule(p1.user.userId, p1.isInExperience) < 1
-	local NoV62: boolean = not IsNumberMatch and not v7
+	local NoV64: boolean = not IsNumberMatch and not v7
+	local OpenSquadVoiceAbuseReport = p1.openSquadVoiceAbuseReport
+	local IsConnecting1 = IsConnecting or (v5 or (p1.user.partyStatus == SquadUserPartyStatusModule.Invited or p1.user.partyStatus == SquadUserPartyStatusModule.NoResponse))
 	local UseResult1 = React.useCallback(function()
 		-- upvalues: p1 (copy)
 		if p1.onActivated then
@@ -325,8 +329,8 @@ return function(p1)
 		Size = p1.size,
 		backgroundStyle = UseTokensResult.Color.Surface.Surface_200,
 		cornerRadius = UDim.new(0, UseTokensResult.Radius.Medium),
-		isDisabled = IsConnecting or (v5 or (p1.user.partyStatus == SquadUserPartyStatusModule.Invited or p1.user.partyStatus == SquadUserPartyStatusModule.NoResponse)),
-		onActivated = if p1.onActivated and NoV62 then UseResult1 else nil,
+		isDisabled = IsConnecting1,
+		onActivated = if p1.onActivated and NoV64 then UseResult1 else nil,
 		testId = if FFlagSquadsEnableFoundationTestIdsModule then SocialName else nil
 	}, {
 		AvatarImage = React.createElement(ImageSetLabel, {
@@ -359,7 +363,7 @@ return function(p1)
 				})
 			}, {})
 		}),
-		InactiveOverlay = if IsConnecting or v2 or v5 or p1.user.partyStatus == SquadUserPartyStatusModule.Invited or p1.user.partyStatus == SquadUserPartyStatusModule.NoResponse then React.createElement(Foundation.View, {
+		InactiveOverlay = if IsConnecting or v2 or (v5 or p1.user.partyStatus == SquadUserPartyStatusModule.Invited or p1.user.partyStatus == SquadUserPartyStatusModule.NoResponse) then React.createElement(Foundation.View, {
 			tag = "size-full radius-medium",
 			backgroundStyle = {
 				Transparency = 0.25,
@@ -389,6 +393,11 @@ return function(p1)
 			Name = UseMemoResult3,
 			Presence = if p1.isBlocked then nil else UseMemoResult4
 		}),
+		OverflowMenu = if FFlagSquadMemberJoinDialogAndOverflowMenuModule and not IsNumberMatch and not IsConnecting1 and OpenSquadVoiceAbuseReport then React.createElement(SquadLobbyUserOverflowMenuContainerModule, {
+			userId = tostring(p1.user.userId),
+			isInExperience = p1.isInExperience,
+			openSquadVoiceAbuseReport = OpenSquadVoiceAbuseReport
+		}) else nil,
 		ActiveBorder = React.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ZIndex = 4,

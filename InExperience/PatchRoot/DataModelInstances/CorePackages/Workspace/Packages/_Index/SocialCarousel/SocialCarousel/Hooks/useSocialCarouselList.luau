@@ -23,7 +23,6 @@ local FIntFriendsCarouselInitialFetchSize = require(Parent.SharedFlags).FIntFrie
 local FFlagEnableRecommendationsForPCGDK = require(Parent.SharedFlags).FFlagEnableRecommendationsForPCGDK
 local FFlagFixIsConsoleCheckForSocialCarousel = require(Parent.SharedFlags).FFlagFixIsConsoleCheckForSocialCarousel
 local PrefetchFriendGameMedia = game:DefineFastFlag("PrefetchFriendGameMedia", false)
-local FFlagFriendsCountDataHydrationMigrationEnabled = require(Parent.SharedFlags).FFlagFriendsCountDataHydrationMigrationEnabled
 local FFlagSocialCarouselStableSelectorsModule = require(SocialCarousel.Flags.FFlagSocialCarouselStableSelectors)
 local Tile = EnumsModule.Tile
 local TileGroup = EnumsModule.TileGroup
@@ -34,7 +33,7 @@ local list = {
 local config = { skipFetch = true }
 
 return function(p1, p2)
-	-- upvalues: list (copy), UseLocalUserIdFunction (copy), UseGetRecommendationsModule (copy), UseFriendsListOrderedByPresenceFunction (copy), FIntFriendsCarouselInitialFetchSize (copy), PrefetchFriendGameMedia (copy), UsePrefetchInGameFriendsMediaFunction (copy), FFlagFixIsConsoleCheckForSocialCarousel (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), FFlagEnableRecommendationsForPCGDK (copy), ThirdPartyUserService (copy), FFlagSocialCarouselShareQREnabled (copy), UseIsSpatialFunction (copy), UseSelectorFunction (copy), FFlagFriendsCountDataHydrationMigrationEnabled (copy), GetDeepValueModule (copy), ConstantsModule (copy), FFlagSocialCarouselStableSelectorsModule (copy), TutilsModule (copy), UseGetFriendsCountByUserIdFunction (copy), config (copy), FIntSocialCarouselShowRecsLimit (copy), ReactModule (copy), TileGroup (copy), Tile (copy), CryoModule (copy), FFlagSocialCarouselShowLoadingSkeletonModule (copy)
+	-- upvalues: list (copy), UseLocalUserIdFunction (copy), UseGetRecommendationsModule (copy), UseFriendsListOrderedByPresenceFunction (copy), FIntFriendsCarouselInitialFetchSize (copy), PrefetchFriendGameMedia (copy), UsePrefetchInGameFriendsMediaFunction (copy), FFlagFixIsConsoleCheckForSocialCarousel (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), FFlagEnableRecommendationsForPCGDK (copy), ThirdPartyUserService (copy), FFlagSocialCarouselShareQREnabled (copy), UseIsSpatialFunction (copy), UseSelectorFunction (copy), GetDeepValueModule (copy), ConstantsModule (copy), FFlagSocialCarouselStableSelectorsModule (copy), TutilsModule (copy), UseGetFriendsCountByUserIdFunction (copy), config (copy), FIntSocialCarouselShowRecsLimit (copy), ReactModule (copy), TileGroup (copy), Tile (copy), CryoModule (copy), FFlagSocialCarouselShowLoadingSkeletonModule (copy)
 	local P1 = p2 or list
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseGetRecommendationsModuleResult = UseGetRecommendationsModule(UseLocalUserIdResult)
@@ -49,13 +48,12 @@ return function(p1, p2)
 	local IsUsePreferredInputResultMatch = if FFlagFixIsConsoleCheckForSocialCarousel then UsePreferredInputFunction() == ResponsiveModule.Input.Directional elseif FFlagEnableRecommendationsForPCGDK and ThirdPartyUserService then ThirdPartyUserService:HaveActiveUser() else UsePreferredInputFunction() == ResponsiveModule.Input.Directional
 	local UseIsSpatialResult = if FFlagSocialCarouselShareQREnabled then UseIsSpatialFunction() else false
 	local UseSelectorResult = UseSelectorFunction(function(p3)
-		-- upvalues: FFlagFriendsCountDataHydrationMigrationEnabled (upval), GetDeepValueModule (upval), p1 (copy), ConstantsModule (upval), UseLocalUserIdResult (copy)
+		-- upvalues: GetDeepValueModule (upval), p1 (copy), ConstantsModule (upval)
 		return {
-			friendCount = if FFlagFriendsCountDataHydrationMigrationEnabled then nil else GetDeepValueModule(p3, string.format("%s.Friends.countsByUserId.%s", p1 or ConstantsModule.RODUX_KEY, UseLocalUserIdResult or "")) or 0,
 			friendRequestCount = GetDeepValueModule(p3, string.format("%s.Friends.requests.receivedCount", p1 or ConstantsModule.RODUX_KEY)) or 0
 		}
 	end, if FFlagSocialCarouselStableSelectorsModule then TutilsModule.shallowEqual else nil)
-	local UseGetFriendsCountByUserIdResult = if FFlagFriendsCountDataHydrationMigrationEnabled then UseGetFriendsCountByUserIdFunction(tostring(UseLocalUserIdResult or ""), config) or 0 else UseSelectorResult.friendCount
+	local UseGetFriendsCountByUserIdResult = UseGetFriendsCountByUserIdFunction(tostring(UseLocalUserIdResult or ""), config) or 0
 	local IsUseGetFriendsCountByUserIdResultBelow: boolean = IsUsePreferredInputResultMatch and UseGetFriendsCountByUserIdResult <= FIntSocialCarouselShowRecsLimit
 	local NoIsUsePreferredInputResultMatch: boolean = UseGetFriendsCountByUserIdResult == 0 and not IsUsePreferredInputResultMatch
 	local NoUseIsSpatialResult: boolean = FFlagSocialCarouselShareQREnabled and (UseGetFriendsCountByUserIdResult == 0 and (not IsUsePreferredInputResultMatch and not UseIsSpatialResult))

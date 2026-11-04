@@ -243,7 +243,7 @@ function ConversationListWithTopBar.render(p1)
 				config.isLoadingPrevious = p1.props.conversationsIsFetching
 				config.oldestConversationIsFetched = p1.props.oldestConversationIsFetched
 			end
-			local ConversationListModule1 = ConversationListModule
+			local ConversationListModule2 = ConversationListModule
 			
 			if FFlagAppChatUseViewRecyclerConversationListModule1 then
 				local v3 = nil
@@ -251,47 +251,47 @@ function ConversationListWithTopBar.render(p1)
 					v3 = v2
 				else
 					Flag1 = true
-					local Success1, Result1 = pcall(function()
+					local Success, Result = pcall(function()
 						return require(script.Parent.ConversationListViewRecycler)
 					end)
 					
-					if Success1 then
-						v2 = Result1
+					if Success then
+						v2 = Result
 					end
 					v3 = v2
 				end
 				if not v3 then
 					v3 = ConversationListModule
 				end
-				ConversationListModule1 = v3
+				ConversationListModule2 = v3
 			elseif FFlagAppChatUseUltimateListConversationListModule1 then
-				local v4 = nil
+				local ConversationListModule1 = nil
 				if Flag then
-					v4 = v1
+					ConversationListModule1 = v1
 				else
 					Flag = true
-					local Success, Result = pcall(function()
+					local Success1, Result1 = pcall(function()
 						return require(script.Parent.ConversationListUltimate)
 					end)
 					
-					if Success then
-						v1 = Result
+					if Success1 then
+						v1 = Result1
 					end
-					v4 = v1
+					ConversationListModule1 = v1
 				end
-				if not v4 then
-					v4 = ConversationListModule
+				if not ConversationListModule1 then
+					ConversationListModule1 = ConversationListModule
 				end
-				ConversationListModule1 = v4
+				ConversationListModule2 = ConversationListModule1
 			end
 			return RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = if FFlagAppChatConsoleFocusFixesModule and not p1.props.isInExperience and (not FFlagEnableStickyShortcutBarOnAllPlatforms or not IsShortcutBarVisible) then UDim2.new(1, 0, 1, p1.props.deviceSafePadding.bottom) else UDim2.new(1, 0, 1, 0)
 			}, {
-				conversationList = if p1.props.isSearchActive and p1.props.isSearchAwaitingResults and #p1.props.itemList == 0 then RoactModule.createElement(SearchLoadingModule, {
+				conversationList = if p1.props.isSearchActive and (p1.props.isSearchAwaitingResults and #p1.props.itemList == 0) then RoactModule.createElement(SearchLoadingModule, {
 					entryHeight = p1.props.entryHeight,
 					topPadding = p1.props.canvasTopPadding
-				}) elseif p1.props.isSearchActive and not p1.props.isSearchAwaitingResults and #p1.props.itemList == 0 and p1.props.oldestConversationIsFetched then RoactModule.createElement(SearchNoResultsModule, { topPadding = p1.props.canvasTopPadding }) else RoactModule.createElement(ConversationListModule1, config)
+				}) elseif p1.props.isSearchActive and not p1.props.isSearchAwaitingResults and #p1.props.itemList == 0 and p1.props.oldestConversationIsFetched then RoactModule.createElement(SearchNoResultsModule, { topPadding = p1.props.canvasTopPadding }) else RoactModule.createElement(ConversationListModule2, config)
 			})
 		end)
 	end)

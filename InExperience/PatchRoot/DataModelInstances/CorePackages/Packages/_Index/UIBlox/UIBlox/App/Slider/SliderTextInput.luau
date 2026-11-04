@@ -2,14 +2,12 @@
 local Parent = script.Parent.Parent.Parent.Parent
 local RoactModule = require(Parent.Roact)
 local TModule = require(Parent.t)
-local FoundationModule = require(Parent.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
 local EventConnection = require(Parent.ReactUtils).EventConnection
 local ImageSetComponentModule = require(Parent.UIBlox.Core.ImageSet.ImageSetComponent)
 local ImagesModule = require(Parent.UIBlox.App.ImageSet.Images)
 local WithStyleModule = require(Parent.UIBlox.Core.Style.withStyle)
 local DivideTransparencyModule = require(Parent.UIBlox.Utility.divideTransparency)
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local SliderTextInput = RoactModule.PureComponent:extend("SliderTextInput")
 SliderTextInput.validateProps = TModule.strictInterface({
 	position = TModule.optional(TModule.union(TModule.UDim2, TModule.table)),
@@ -30,9 +28,9 @@ function SliderTextInput.init(p1)
 end
 
 function SliderTextInput.render(p1)
-	-- upvalues: WithStyleModule (copy), DivideTransparencyModule (copy), RoactModule (copy), ImageSetComponentModule (copy), ImagesModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), EventConnection (copy), UserInputService (copy)
+	-- upvalues: WithStyleModule (copy), DivideTransparencyModule (copy), RoactModule (copy), ImageSetComponentModule (copy), ImagesModule (copy), NormalizeFontFaceFunction (copy), EventConnection (copy), UserInputService (copy)
 	return WithStyleModule(function(p2)
-		-- upvalues: p1 (copy), DivideTransparencyModule (upval), RoactModule (upval), ImageSetComponentModule (upval), ImagesModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), EventConnection (upval), UserInputService (upval)
+		-- upvalues: p1 (copy), DivideTransparencyModule (upval), RoactModule (upval), ImageSetComponentModule (upval), ImagesModule (upval), NormalizeFontFaceFunction (upval), EventConnection (upval), UserInputService (upval)
 		local v1: number = if p1.props.disabled then 2 else 1
 		
 		return RoactModule.createElement(ImageSetComponentModule.Label, {
@@ -60,8 +58,7 @@ function SliderTextInput.render(p1)
 				[RoactModule.Ref] = p1.textBoxRef,
 				BackgroundTransparency = 1,
 				ClearTextOnFocus = false,
-				Font = if FoundationFontFaceMigration then nil else p2.Font.Body.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Font.Body.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(p2.Font.Body.Font),
 				TextSize = p2.Font.Body.RelativeSize * p2.Font.BaseSize,
 				TextColor3 = p2.Theme.TextDefault.Color,
 				TextTransparency = DivideTransparencyModule(p2.Theme.TextDefault.Transparency, v1),

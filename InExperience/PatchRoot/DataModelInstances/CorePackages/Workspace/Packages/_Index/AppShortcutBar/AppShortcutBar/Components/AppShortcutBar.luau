@@ -7,10 +7,11 @@ local UseFocusedTextBoxFunction = require(Parent.FocusNavigationUtils).useFocuse
 local ShortcutBar = require(Parent.UIBlox).App.Navigation.ShortcutBar
 local DisableAppShortcutBarAndroidTV = game:DefineFastFlag("DisableAppShortcutBarAndroidTV", false)
 local FFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled = require(AppShortcutBar1.Flags).FFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled
+local FFlagUnifyShortcutBarUnifiedIXPExposure = require(Parent.SharedFlags).FFlagUnifyShortcutBarUnifiedIXPExposure
 local UseStickyShortcutBarExposureLoggingModule = require(AppShortcutBar1.Hooks.useStickyShortcutBarExposureLogging)
 
 function AppShortcutBar(Frame: Frame)
-	-- upvalues: UseFocusedTextBoxFunction (copy), ResponsiveModule (copy), ReactModule (copy), UserInputService (copy), DisableAppShortcutBarAndroidTV (copy), FFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled (copy), UseStickyShortcutBarExposureLoggingModule (copy), ShortcutBar (copy)
+	-- upvalues: UseFocusedTextBoxFunction (copy), ResponsiveModule (copy), ReactModule (copy), UserInputService (copy), DisableAppShortcutBarAndroidTV (copy), FFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled (copy), FFlagUnifyShortcutBarUnifiedIXPExposure (copy), UseStickyShortcutBarExposureLoggingModule (copy), ShortcutBar (copy)
 	local Position = if Frame.Position then Frame.Position else UDim2.fromScale(0.5, 0)
 	local AnchorPoint = if Frame.AnchorPoint then Frame.AnchorPoint else Vector2.new(0.5, 0)
 	local UseFocusedTextBoxResult = UseFocusedTextBoxFunction()
@@ -35,7 +36,7 @@ function AppShortcutBar(Frame: Frame)
 	local Inverted1: boolean = not ResponsiveModule.useBreakpointXOrSmaller(ResponsiveModule.Keys.Small) and Inverted
 	local Inverted1_1: boolean = #Frame.items > 0 and (not UseFocusedTextBoxResult and (not DisableAppShortcutBarAndroidTV or UseStateResult)) and Inverted1
 	
-	if FFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled then
+	if FFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled and not FFlagUnifyShortcutBarUnifiedIXPExposure then
 		UseStickyShortcutBarExposureLoggingModule(Inverted1_1)
 	end
 	return ReactModule.createElement("Frame", {

@@ -11,7 +11,6 @@ local CompleteMomentUploadModule = require(MomentsCreation.Upload.completeMoment
 local LoggerModule = require(MomentsCreation.Logger)
 local FFlagMomentsTextOverlayV2Redesign = require(Parent.MomentsCommon).Flags.FFlagMomentsTextOverlayV2Redesign
 local GetFFlagMomentsUseUploadPostAsyncFunction = MomentsCommonModule.Flags.GetFFlagMomentsUseUploadPostAsync
-local FFlagMomentsUploadOutcomeTelemetry = MomentsCommonModule.Flags.FFlagMomentsUploadOutcomeTelemetry
 local MomentsPostUploadFailureReasons = game:DefineFastFlag("MomentsPostUploadFailureReasons", false)
 local GetFFlagMomentsUseMomentsServiceForUploadFunction = MomentsCommonModule.Flags.GetFFlagMomentsUseMomentsServiceForUpload
 local MakePostMetadataModule = require(MomentsCreation.Utils.makePostMetadata)
@@ -43,7 +42,7 @@ local _ = function(Tbl)
 end
 
 return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, ToastStore, FeedStore, MyCreationsStore, CreationSessionId, p1, p2)
-	-- upvalues: CaptureService (copy), CaptureServiceUploadUniverseIdOverrideEngineFeature (copy), v1 (copy), NormalizeMomentMetadataModule (copy), LoggerModule (copy), CaptureServiceStartUploadCoreScriptBypassEngineFeature (copy), EnumNameFunction (copy), FFlagMomentsUploadOutcomeTelemetry (copy), MomentsCommonModule (copy), FireAnalyticsEventModule (copy), EventNames (copy), GetFFlagMomentsUseUploadPostAsyncFunction (copy), MakePostMetadataModule (copy), FFlagMomentsTextOverlayV2Redesign (copy), GetFFlagMomentsUseMomentsServiceForUploadFunction (copy), MakeCreationEventFieldsModule (copy), CompleteMomentUploadModule (copy), MomentsPostUploadFailureReasons (copy), MomentsCreation (copy)
+	-- upvalues: CaptureService (copy), CaptureServiceUploadUniverseIdOverrideEngineFeature (copy), v1 (copy), NormalizeMomentMetadataModule (copy), LoggerModule (copy), CaptureServiceStartUploadCoreScriptBypassEngineFeature (copy), EnumNameFunction (copy), MomentsCommonModule (copy), FireAnalyticsEventModule (copy), EventNames (copy), GetFFlagMomentsUseUploadPostAsyncFunction (copy), MakePostMetadataModule (copy), FFlagMomentsTextOverlayV2Redesign (copy), GetFFlagMomentsUseMomentsServiceForUploadFunction (copy), MakeCreationEventFieldsModule (copy), CompleteMomentUploadModule (copy), MomentsPostUploadFailureReasons (copy), MomentsCreation (copy)
 	local P9 = p1 or CaptureService
 	local Tbl1 = nil
 	
@@ -77,15 +76,15 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 	end
 	
 	local _ = function(p3, p4)
-		-- upvalues: FFlagMomentsUploadOutcomeTelemetry (upval), MomentsCommonModule (upval), Capture (copy), CreationSessionId (copy), FireAnalyticsEventModule (upval), EventNames (upval)
-		MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", if FFlagMomentsUploadOutcomeTelemetry then p4 else nil)
+		-- upvalues: MomentsCommonModule (upval), Capture (copy), CreationSessionId (copy), FireAnalyticsEventModule (upval), EventNames (upval)
+		MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", p4)
 		p3.localId = tostring(Capture.LocalId)
 		p3.creationSessionId = CreationSessionId
 		FireAnalyticsEventModule(EventNames.UploadCaptureFailed, p3)
 	end
 	
 	task.spawn(function()
-		-- upvalues: GetFFlagMomentsUseUploadPostAsyncFunction (upval), LoggerModule (upval), Capture (copy), EnumNameFunction (upval), MakePostMetadataModule (upval), FFlagMomentsTextOverlayV2Redesign (upval), Tbl2 (copy), NormalizeMomentMetadataModuleResult (ref), GetFFlagMomentsUseMomentsServiceForUploadFunction (upval), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval), CreationSessionId (copy), p2 (copy), P9 (copy), CompleteMomentUploadModule (upval), UploadStore (copy), ToastStore (copy), FeedStore (copy), MyCreationsStore (copy), Localizations (copy), MomentsPostUploadFailureReasons (upval), MomentsCreation (upval), FFlagMomentsUploadOutcomeTelemetry (upval), MomentsCommonModule (upval), CaptureServiceStartUploadCoreScriptBypassEngineFeature (upval), FeedRegistrationInfo (copy)
+		-- upvalues: GetFFlagMomentsUseUploadPostAsyncFunction (upval), LoggerModule (upval), Capture (copy), EnumNameFunction (upval), MakePostMetadataModule (upval), FFlagMomentsTextOverlayV2Redesign (upval), Tbl2 (copy), NormalizeMomentMetadataModuleResult (ref), GetFFlagMomentsUseMomentsServiceForUploadFunction (upval), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval), CreationSessionId (copy), p2 (copy), P9 (copy), CompleteMomentUploadModule (upval), UploadStore (copy), ToastStore (copy), FeedStore (copy), MyCreationsStore (copy), Localizations (copy), MomentsPostUploadFailureReasons (upval), MomentsCreation (upval), MomentsCommonModule (upval), CaptureServiceStartUploadCoreScriptBypassEngineFeature (upval), FeedRegistrationInfo (copy)
 		if GetFFlagMomentsUseUploadPostAsyncFunction() then
 			LoggerModule:debug("event=path_selected path=post_upload localId={}", (string.gsub(string.gsub(EnumNameFunction(Capture.LocalId) or "nil", "\r", "\\r"), "\n", "\\n")))
 			local PostMetadataModule = MakePostMetadataModule(if FFlagMomentsTextOverlayV2Redesign then Tbl2 else NormalizeMomentMetadataModuleResult, if GetFFlagMomentsUseMomentsServiceForUploadFunction() then Capture else nil)
@@ -129,8 +128,7 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 					error = tostring(Result),
 					captureType = EnumNameFunction(Capture.CaptureType)
 				}
-				local GenericFailure = if MomentsPostUploadFailureReasons then require(MomentsCreation.Upload.classifyPostUploadError)(Result) else "GenericFailure"
-				MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", if FFlagMomentsUploadOutcomeTelemetry then GenericFailure else nil)
+				MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", if MomentsPostUploadFailureReasons then require(MomentsCreation.Upload.classifyPostUploadError)(Result) else "GenericFailure")
 				config.localId = tostring(Capture.LocalId)
 				config.creationSessionId = CreationSessionId
 				FireAnalyticsEventModule(EventNames.UploadCaptureFailed, config)
@@ -161,7 +159,7 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 				}
 				config.status = "StartUploadFailed"
 				config.error = tostring(Result2)
-				MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", if FFlagMomentsUploadOutcomeTelemetry then "StartUploadFailed" else nil)
+				MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", "StartUploadFailed")
 				config.localId = tostring(Capture.LocalId)
 				config.creationSessionId = CreationSessionId
 				FireAnalyticsEventModule(EventNames.UploadCaptureFailed, config)
@@ -186,7 +184,7 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 						error = tostring(Result4),
 						captureType = EnumNameFunction(Capture.CaptureType)
 					}
-					MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", if FFlagMomentsUploadOutcomeTelemetry then "RegistrationFailed" else nil)
+					MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", "RegistrationFailed")
 					config.localId = tostring(Capture.LocalId)
 					config.creationSessionId = CreationSessionId
 					FireAnalyticsEventModule(EventNames.UploadCaptureFailed, config)
@@ -197,7 +195,7 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 				CaptureDescriptorFields.creationSessionId = CreationSessionId
 				FireAnalyticsEventModule(EventNames.EditingFlowMomentPublished, CaptureDescriptorFields)
 				local Flag = false
-				local UploadCaptureResult = nil
+				local v2 = nil
 				local MomentsUploadPollIntervalSecondsFastInt = game:GetFastInt("MomentsUploadPollIntervalSeconds")
 				local MomentsUploadMaxPollAttemptsFastInt = game:GetFastInt("MomentsUploadMaxPollAttempts")
 				local Result5 = nil
@@ -210,13 +208,13 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 						-- upvalues: P9 (upval), Result3 (copy)
 						return P9:CheckUploadCaptureStatusAsync(Result3)
 					end)
-					local NoFlag: boolean = not Flag or Success4 and Result5 ~= UploadCaptureResult
+					local NoFlag: boolean = not Flag or Success4 and Result5 ~= v2
 					local NoSuccess4: boolean = not Success4 or Result5 ~= Enum.UploadCaptureResult.UploadPending
 					local IsIMatch = i % 6 == 0
 					
 					if Success4 then
 						Flag = true
-						UploadCaptureResult = Result5
+						v2 = Result5
 					end
 					if i == 1 or NoFlag or NoSuccess4 or IsIMatch then
 						if Success4 then
@@ -236,7 +234,7 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 							error = tostring(Result5),
 							captureType = EnumNameFunction(Capture.CaptureType)
 						}
-						MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", if FFlagMomentsUploadOutcomeTelemetry then "PollError" else nil)
+						MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", "PollError")
 						config.localId = tostring(Capture.LocalId)
 						config.creationSessionId = CreationSessionId
 						FireAnalyticsEventModule(EventNames.UploadCaptureFailed, config)
@@ -275,8 +273,7 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 							status = EnumNameFunction(Result5),
 							captureType = EnumNameFunction(Capture.CaptureType)
 						}
-						local EnumNameResult = EnumNameFunction(Result5)
-						MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", if FFlagMomentsUploadOutcomeTelemetry then EnumNameResult else nil)
+						MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", (EnumNameFunction(Result5)))
 						config.localId = tostring(Capture.LocalId)
 						config.creationSessionId = CreationSessionId
 						FireAnalyticsEventModule(EventNames.UploadCaptureFailed, config)
@@ -292,8 +289,7 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 							status = EnumNameFunction(Result5),
 							captureType = EnumNameFunction(Capture.CaptureType)
 						}
-						local EnumNameResult = EnumNameFunction(Result5)
-						MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", if FFlagMomentsUploadOutcomeTelemetry then EnumNameResult else nil)
+						MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", (EnumNameFunction(Result5)))
 						config.localId = tostring(Capture.LocalId)
 						config.creationSessionId = CreationSessionId
 						FireAnalyticsEventModule(EventNames.UploadCaptureFailed, config)
@@ -311,7 +307,7 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 					status = "Timeout",
 					captureType = EnumNameFunction(Capture.CaptureType)
 				}
-				MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", if FFlagMomentsUploadOutcomeTelemetry then "Timeout" else nil)
+				MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", "Timeout")
 				config.localId = tostring(Capture.LocalId)
 				config.creationSessionId = CreationSessionId
 				FireAnalyticsEventModule(EventNames.UploadCaptureFailed, config)
@@ -339,8 +335,7 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 					status = EnumNameFunction(Result2),
 					captureType = EnumNameFunction(Capture.CaptureType)
 				}
-				local EnumNameResult = EnumNameFunction(Result2)
-				MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", if FFlagMomentsUploadOutcomeTelemetry then EnumNameResult else nil)
+				MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", (EnumNameFunction(Result2)))
 				config.localId = tostring(Capture.LocalId)
 				config.creationSessionId = CreationSessionId
 				FireAnalyticsEventModule(EventNames.UploadCaptureFailed, config)
@@ -359,7 +354,11 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 				CaptureDescriptorFields.creationSessionId = CreationSessionId
 				FireAnalyticsEventModule(EventNames.EditingFlowMomentPublished, CaptureDescriptorFields)
 			end
-			if not Success1 then
+			if Success1 then
+				MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "success")
+				
+				return
+			else
 				UploadStore.setFailed("GenericFailure")
 				ToastStore.triggerToast({
 					title = Localizations.failedTitle,
@@ -370,14 +369,10 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 					captureType = EnumNameFunction(Capture.CaptureType),
 					status = "GenericFailure"
 				}
-				MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", if FFlagMomentsUploadOutcomeTelemetry then "GenericFailure" else nil)
+				MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", "GenericFailure")
 				config.localId = tostring(Capture.LocalId)
 				config.creationSessionId = CreationSessionId
 				FireAnalyticsEventModule(EventNames.UploadCaptureFailed, config)
-				
-				return
-			elseif FFlagMomentsUploadOutcomeTelemetry then
-				MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "success")
 			end
 		end
 	end)

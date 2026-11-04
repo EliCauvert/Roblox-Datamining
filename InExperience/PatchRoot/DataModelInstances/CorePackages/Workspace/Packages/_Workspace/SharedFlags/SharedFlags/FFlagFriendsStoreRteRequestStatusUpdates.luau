@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("FriendsStoreRteRequestStatusUpdates_v1", false)

@@ -11,6 +11,8 @@ local FFlagGameJoinCardSourceAttribution = require(Parent.SharedFlags).FFlagGame
 local FFlagUserListSurfaceExtensions = require(Parent.SharedFlags).FFlagUserListSurfaceExtensions
 local FFlagUserListCanonicalCtaAnalyticsModule = require(UserList.Flags.FFlagUserListCanonicalCtaAnalytics)
 local FFlagUserListViewCtaAnalyticsModule = require(UserList.Flags.FFlagUserListViewCtaAnalytics)
+local FFlagUserListRowViewCtaModule = require(UserList.Flags.FFlagUserListRowViewCta)
+local MapClientActionsToRowCtaModule = if FFlagUserListRowViewCtaModule then require(UserList.Cta.mapClientActionsToRowCta) else nil
 local ReportCtaActivatedModule = require(UserList.Analytics.reportCtaActivated)
 local ReportViewCtaModule = require(UserList.Analytics.reportViewCta)
 local NavigationCommands = require(Parent.RobloxAppNavigation).NavigationCommands
@@ -32,7 +34,7 @@ local function _(Tbl, p1, OnActivated)
 end
 
 return function(p1, NotReady, p2, Detail, p3, p4, p5)
-	-- upvalues: UseDispatchFunction (copy), UseLocalUserIdFunction (copy), ReactModule (copy), AppPage (copy), FFlagGameJoinCardSourceAttribution (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), EnumsModule (copy), FFlagUserListViewCtaAnalyticsModule (copy), ReportViewCtaModule (copy), ButtonTypes (copy), ButtonVariant (copy), DataStatus (copy), config (copy), MapServerActionsToRowCtaModule (copy), FFlagUserListCanonicalCtaAnalyticsModule (copy), FFlagUserListCtaAnalyticsEnabled (copy), ReportCtaActivatedModule (copy), FFlagUserListSurfaceExtensions (copy)
+	-- upvalues: UseDispatchFunction (copy), UseLocalUserIdFunction (copy), ReactModule (copy), AppPage (copy), FFlagGameJoinCardSourceAttribution (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), EnumsModule (copy), FFlagUserListViewCtaAnalyticsModule (copy), ReportViewCtaModule (copy), ButtonTypes (copy), ButtonVariant (copy), FFlagUserListRowViewCtaModule (copy), MapClientActionsToRowCtaModule (copy), FFlagUserListCanonicalCtaAnalyticsModule (copy), DataStatus (copy), config (copy), MapServerActionsToRowCtaModule (copy), FFlagUserListCtaAnalyticsEnabled (copy), ReportCtaActivatedModule (copy), FFlagUserListSurfaceExtensions (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseResult = ReactModule.useCallback(function(UserId, p6)
@@ -69,7 +71,7 @@ return function(p1, NotReady, p2, Detail, p3, p4, p5)
 	end, { UseDispatchResult, Detail })
 	
 	return ReactModule.useMemo(function()
-		-- upvalues: p3 (copy), Detail (copy), UseLocalUserIdResult (copy), UseResult1 (copy), FFlagUserListViewCtaAnalyticsModule (upval), ReportViewCtaModule (upval), ButtonTypes (upval), ButtonVariant (upval), NotReady (copy), DataStatus (upval), config (upval), MapServerActionsToRowCtaModule (upval), p1 (copy), p2 (copy), FFlagUserListCanonicalCtaAnalyticsModule (upval), p5 (copy), p4 (copy), FFlagUserListCtaAnalyticsEnabled (upval), ReportCtaActivatedModule (upval), FFlagUserListSurfaceExtensions (upval), UseResult (copy), FFlagGameJoinCardSourceAttribution (upval)
+		-- upvalues: p3 (copy), Detail (copy), UseLocalUserIdResult (copy), UseResult1 (copy), FFlagUserListViewCtaAnalyticsModule (upval), ReportViewCtaModule (upval), ButtonTypes (upval), ButtonVariant (upval), FFlagUserListRowViewCtaModule (upval), MapClientActionsToRowCtaModule (upval), p2 (copy), FFlagUserListCanonicalCtaAnalyticsModule (upval), p5 (copy), NotReady (copy), DataStatus (upval), config (upval), MapServerActionsToRowCtaModule (upval), p1 (copy), p4 (copy), FFlagUserListCtaAnalyticsEnabled (upval), ReportCtaActivatedModule (upval), FFlagUserListSurfaceExtensions (upval), UseResult (copy), FFlagGameJoinCardSourceAttribution (upval)
 		if p3 and p3.showSelfProfileCta and Detail == UseLocalUserIdResult then
 			local OnActivated: () -> () = UseResult1
 			
@@ -92,9 +94,17 @@ return function(p1, NotReady, p2, Detail, p3, p4, p5)
 					maxWidth = p3.primaryCtaMaxWidth
 				}
 			}
-		elseif NotReady == nil or NotReady == DataStatus.NotReady then
-			return config
 		else
+			if FFlagUserListRowViewCtaModule then
+				local MapClientActionsToRowCtaModuleResult = MapClientActionsToRowCtaModule(p2, Detail, Detail == UseLocalUserIdResult, p3, if FFlagUserListCanonicalCtaAnalyticsModule then p5 else nil)
+				
+				if MapClientActionsToRowCtaModuleResult ~= nil then
+					return MapClientActionsToRowCtaModuleResult
+				end
+			end
+			if NotReady == nil or NotReady == DataStatus.NotReady then
+				return config
+			end
 			local MapServerActionsToRowCtaModuleResult = MapServerActionsToRowCtaModule(p1, p2, Detail, p3, if FFlagUserListCanonicalCtaAnalyticsModule then p5 else nil)
 			local PrimaryCta = MapServerActionsToRowCtaModuleResult.primaryCta
 			

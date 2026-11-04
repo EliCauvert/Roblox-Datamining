@@ -2,6 +2,7 @@
 local Parent = AppChat.Parent
 local FFlagAppChatFriendsTabIxpEnabledModule = require(AppChat.Flags.FFlagAppChatFriendsTabIxpEnabled)
 local FFlagExpChatEnableFriendsTab = require(Parent.SharedFlags).FFlagExpChatEnableFriendsTab
+local FFlagAppChatUseSignalsForChatSettingsModule = require(AppChat.Flags.FFlagAppChatUseSignalsForChatSettings)
 local GetFriendsChatMetadataStoreModule = require(AppChat.Stores.GetFriendsChatMetadataStore)
 local GetFriendsChatSettingsStoreModule = require(AppChat.Stores.GetFriendsChatSettingsStore)
 local config = {
@@ -16,12 +17,15 @@ local config = {
 }
 
 return function(Callback, _)
-	-- upvalues: FFlagAppChatFriendsTabIxpEnabledModule (copy), FFlagExpChatEnableFriendsTab (copy), config (copy)
+	-- upvalues: FFlagAppChatFriendsTabIxpEnabledModule (copy), FFlagExpChatEnableFriendsTab (copy), FFlagAppChatUseSignalsForChatSettingsModule (copy), config (copy)
 	return function(p1)
-		-- upvalues: Callback (copy), FFlagAppChatFriendsTabIxpEnabledModule (upval), FFlagExpChatEnableFriendsTab (upval), config (upval)
+		-- upvalues: Callback (copy), FFlagAppChatFriendsTabIxpEnabledModule (upval), FFlagExpChatEnableFriendsTab (upval), FFlagAppChatUseSignalsForChatSettingsModule (upval), config (upval)
 		local CallbackResult = Callback(p1)
 		
 		if not FFlagAppChatFriendsTabIxpEnabledModule and not FFlagExpChatEnableFriendsTab then
+			return CallbackResult
+		end
+		if FFlagAppChatUseSignalsForChatSettingsModule then
 			return CallbackResult
 		end
 		local Entry: (any) -> () = config[p1.type]

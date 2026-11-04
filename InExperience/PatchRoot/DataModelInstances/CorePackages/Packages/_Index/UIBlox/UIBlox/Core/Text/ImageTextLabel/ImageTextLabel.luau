@@ -3,7 +3,6 @@ local Parent1 = Parent.Parent
 local RoactModule = require(Parent1.Roact)
 local CryoModule = require(Parent1.Cryo)
 local TModule = require(Parent1.t)
-local FoundationFontFaceMigration = require(Parent1.Foundation).Utility.Flags.FoundationFontFaceMigration
 local ImageSetComponentModule = require(Parent.Core.ImageSet.ImageSetComponent)
 local GenericTextLabelModule = require(Parent.Core.Text.GenericTextLabel.GenericTextLabel)
 local GetTextSizeModule = require(Parent.Core.Text.GetTextSize)
@@ -38,7 +37,7 @@ ImageTextLabel.defaultProps = {
 }
 
 function ImageTextLabel.render(p1)
-	-- upvalues: WithStyleModule (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), GetWrappedTextWithIconModule (copy), GetTextSizeModule (copy), RoactModule (copy), CryoModule (copy), ImageSetComponentModule (copy), GenericTextLabelModule (copy)
+	-- upvalues: WithStyleModule (copy), GetFontFromFontStyleModule (copy), GetWrappedTextWithIconModule (copy), GetTextSizeModule (copy), RoactModule (copy), CryoModule (copy), ImageSetComponentModule (copy), GenericTextLabelModule (copy)
 	local GenericTextLabelProps = p1.props.genericTextLabelProps
 	local ImageProps = p1.props.imageProps
 	local FrameProps = p1.props.frameProps
@@ -49,11 +48,11 @@ function ImageTextLabel.render(p1)
 	local RichText = p1.props.richText
 	
 	return WithStyleModule(function(p2)
-		-- upvalues: GenericTextLabelProps (copy), FoundationFontFaceMigration (upval), GetFontFromFontStyleModule (upval), ImageProps (copy), Text (ref), GetWrappedTextWithIconModule (upval), Padding (copy), GetTextSizeModule (upval), MaxSize (copy), UseMaxHeight (copy), RoactModule (upval), CryoModule (upval), FrameProps (copy), ImageSetComponentModule (upval), GenericTextLabelModule (upval), p1 (copy), RichText (copy)
+		-- upvalues: GenericTextLabelProps (copy), GetFontFromFontStyleModule (upval), ImageProps (copy), Text (ref), GetWrappedTextWithIconModule (upval), Padding (copy), GetTextSizeModule (upval), MaxSize (copy), UseMaxHeight (copy), RoactModule (upval), CryoModule (upval), FrameProps (copy), ImageSetComponentModule (upval), GenericTextLabelModule (upval), p1 (copy), RichText (copy)
 		local FontStyle = GenericTextLabelProps.fontStyle
 		local BaseSize = p2.Font.BaseSize
 		local ScaledBaseSize = if FontStyle.RelativeSize then BaseSize * FontStyle.RelativeSize else FontStyle.FontSize
-		local FontFromFontStyleModule = if FoundationFontFaceMigration then GetFontFromFontStyleModule(FontStyle) else FontStyle.Font
+		local FontFromFontStyleModule = GetFontFromFontStyleModule(FontStyle)
 		
 		if ImageProps then
 			Text = GetWrappedTextWithIconModule(Text, ScaledBaseSize, FontFromFontStyleModule, ImageProps.Size.X.Offset, Padding)

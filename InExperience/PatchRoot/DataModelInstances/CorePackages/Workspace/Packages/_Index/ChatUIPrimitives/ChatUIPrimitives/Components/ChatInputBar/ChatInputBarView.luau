@@ -101,14 +101,15 @@ local function renderLegacy(p1)
 	local Tokens = p1.tokens
 	local Props = p1.props
 	local TextSize = Props.textSize or Tokens.Typography.CaptionMedium.FontSize
-	local NoHasLeadingAction = not p1.shouldReplaceDisabledContent and (not p1.hasLeadingAction or not p1.isEmpty and p1.canChat)
+	local HasPrimary = Props.primary ~= nil
+	local NoHasPrimary: boolean = not p1.shouldReplaceDisabledContent and (if p1.hasLeadingAction then not p1.isEmpty and (p1.canChat and not HasPrimary) else not HasPrimary)
 	local XOffset: number = if p1.showLeadingAction then 36 else 0
-	local NewSendButtonContainerWidth: number = if NoHasLeadingAction then p1.sendButtonContainerWidth + 6 else 0
+	local NewSendButtonContainerWidth: number = if NoHasPrimary or HasPrimary then p1.sendButtonContainerWidth + 6 else 0
 	local MapResult = p1.channelChipWidth:map(function(p2): UDim2
 		-- upvalues: Tokens (copy)
 		return UDim2.new(1, -(p2 + Tokens.Size.Size_200), 0, 0)
 	end)
-	local CreateElementFunction6 = ReactModule.createElement
+	local CreateElementFunction1 = ReactModule.createElement
 	local View = FoundationModule.View
 	local config = {
 		tag = "auto-y",
@@ -119,11 +120,11 @@ local function renderLegacy(p1)
 		Dropdown = renderDropdown(p1),
 		TrayOverlay = p1.trayOverlay
 	}
-	local CreateElementFunction5 = ReactModule.createElement
+	local CreateElementFunction6 = ReactModule.createElement
 	local View1 = FoundationModule.View
 	local config2 = { tag = "auto-y", Size = UDim2.fromScale(1, 0) }
 	local t = {}
-	local CreateElementFunction4 = ReactModule.createElement
+	local CreateElementFunction5 = ReactModule.createElement
 	local View2 = FoundationModule.View
 	local Transparency: number = Tokens.Color.Stroke.Default.Transparency
 	local TransparencyValue = p1.transparencyValue
@@ -160,7 +161,7 @@ local function renderLegacy(p1)
 	if p1.shouldReplaceDisabledContent then
 		TextContainer = nil
 	else
-		local CreateElementFunction = ReactModule.createElement
+		local CreateElementFunction2 = ReactModule.createElement
 		local View3 = FoundationModule.View
 		local config5 = {
 			tag = "auto-y",
@@ -173,13 +174,16 @@ local function renderLegacy(p1)
 				right = UDim.new(0, 10)
 			}
 		}
-		local config6 = { SideChip = renderSideChip(p1) }
+		local config6 = {
+			SideChip = renderSideChip(p1),
+			CenterOverlay = Props.centerOverlay
+		}
 		local DisabledLabel = nil
 		
 		if p1.canChat then
 			DisabledLabel = nil
 		else
-			local CreateElementFunction1 = ReactModule.createElement
+			local CreateElementFunction = ReactModule.createElement
 			local Text = FoundationModule.Text
 			local Label = {
 				tag = "position-top-right anchor-top-right auto-y text-caption-medium text-wrap text-align-x-left text-align-y-top content-muted",
@@ -199,20 +203,20 @@ local function renderLegacy(p1)
 				MapResult1 = TransparencyValue1 * 0.5 + 0.5
 			end
 			Label.TextTransparency = MapResult1
-			DisabledLabel = CreateElementFunction1(Text, Label)
+			DisabledLabel = CreateElementFunction(Text, Label)
 		end
 		config6.DisabledLabel = DisabledLabel
 		local TextBoxContainer = nil
 		
 		if p1.canChat then
-			local CreateElementFunction3 = ReactModule.createElement
+			local CreateElementFunction4 = ReactModule.createElement
 			local View4 = FoundationModule.View
 			local config7 = {
 				tag = "position-top-right anchor-top-right auto-y",
 				Size = MapResult
 			}
 			local t1 = {}
-			local CreateElementFunction2 = ReactModule.createElement
+			local CreateElementFunction3 = ReactModule.createElement
 			local v2 = "TextBox"
 			local Label = {
 				AnchorPoint = Vector2.new(0, 0),
@@ -229,17 +233,22 @@ local function renderLegacy(p1)
 				TextColor3 = p1.textColor,
 				TextSize = TextSize
 			}
-			local TransparencyValue2: number = p1.transparencyValue
 			local MapResult2 = nil
 			
-			if ReactIsModule.isBinding(TransparencyValue2) then
-				local v3 = 0
-				MapResult2 = TransparencyValue2:map(function(p2): number
-					-- upvalues: v3 (copy)
-					return v3 + p2 * (1 - v3)
-				end)
+			if Props.centerOverlay == nil or not Props.centerOverlayTextHidden then
+				local TransparencyValue2: number = p1.transparencyValue
+				
+				if ReactIsModule.isBinding(TransparencyValue2) then
+					local v3 = 0
+					MapResult2 = TransparencyValue2:map(function(p2): number
+						-- upvalues: v3 (copy)
+						return v3 + p2 * (1 - v3)
+					end)
+				else
+					MapResult2 = TransparencyValue2 * 1 + 0
+				end
 			else
-				MapResult2 = TransparencyValue2 * 1 + 0
+				MapResult2 = 1
 			end
 			Label.TextTransparency = MapResult2
 			Label.TextWrapped = true
@@ -254,16 +263,16 @@ local function renderLegacy(p1)
 			Label.ref = p1.textBoxRef
 			Label.SelectionImageObject = Props.selectionImageObject
 			Label.Selectable = Props.selectionImageObject ~= nil or nil
-			t1.TextBox = CreateElementFunction2(v2, Label)
-			TextBoxContainer = CreateElementFunction3(View4, config7, t1)
+			t1.TextBox = CreateElementFunction3(v2, Label)
+			TextBoxContainer = CreateElementFunction4(View4, config7, t1)
 		else
 			TextBoxContainer = nil
 		end
 		config6.TextBoxContainer = TextBoxContainer
-		TextContainer = CreateElementFunction(View3, config5, config6)
+		TextContainer = CreateElementFunction2(View3, config5, config6)
 	end
 	config4.TextContainer = TextContainer
-	config4.SendButtonContainer = if NoHasLeadingAction then ReactModule.createElement("CanvasGroup", {
+	config4.SendButtonContainer = if NoHasPrimary or HasPrimary then ReactModule.createElement("CanvasGroup", {
 		BackgroundTransparency = 1,
 		AnchorPoint = Vector2.new(1, 0),
 		GroupTransparency = p1.transparencyValue,
@@ -274,13 +283,13 @@ local function renderLegacy(p1)
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			VerticalAlignment = Enum.VerticalAlignment.Center
 		}),
-		SendButton = renderSendButton(p1)
+		SendButton = if HasPrimary then Props.primary else renderSendButton(p1)
 	}) else nil
 	config4.DisabledOverlay = renderFallbackDisabledOverlay(p1)
-	t.InputGroup = CreateElementFunction4(View2, config3, config4)
-	config1.Container = CreateElementFunction5(View1, config2, t)
+	t.InputGroup = CreateElementFunction5(View2, config3, config4)
+	config1.Container = CreateElementFunction6(View1, config2, t)
 	
-	return CreateElementFunction6(View, config, config1)
+	return CreateElementFunction1(View, config, config1)
 end
 
 local function renderComposer(p1)
@@ -288,6 +297,7 @@ local function renderComposer(p1)
 	local Tokens = p1.tokens
 	local Props = p1.props
 	local FontSize = Tokens.Typography.BodyMedium.FontSize
+	local HasPrimary = Props.primary ~= nil
 	local NoShouldReplaceDisabledContent = not p1.shouldReplaceDisabledContent
 	local NewSendButtonContainerWidth = p1.sendButtonContainerWidth + 6
 	local MapResult = p1.channelChipWidth:map(function(p2: number): UDim2
@@ -311,7 +321,7 @@ local function renderComposer(p1)
 			Visible = p1.showLeadingAction
 		}, { Action = p1.leadingAddon }) else nil elseif p1.showLeadingAction then ReactModule.createElement(FoundationModule.View, { LayoutOrder = 1, tag = "auto-xy" }, { Action = p1.leadingAddon }) else nil
 	}
-	local CreateElementFunction2 = ReactModule.createElement
+	local CreateElementFunction1 = ReactModule.createElement
 	local View2 = FoundationModule.View
 	local config4 = {
 		LayoutOrder = 2,
@@ -330,7 +340,7 @@ local function renderComposer(p1)
 	if p1.shouldReplaceDisabledContent then
 		TextContainer = nil
 	else
-		local CreateElementFunction1 = ReactModule.createElement
+		local CreateElementFunction2 = ReactModule.createElement
 		local View3 = FoundationModule.View
 		local config6 = {
 			tag = "auto-y",
@@ -345,7 +355,10 @@ local function renderComposer(p1)
 				bottom = UDim.new(0, 10)
 			}
 		}
-		local config7 = { SideChip = renderSideChip(p1) }
+		local config7 = {
+			SideChip = renderSideChip(p1),
+			CenterOverlay = Props.centerOverlay
+		}
 		local DisabledLabel = nil
 		
 		if p1.canChat then
@@ -392,7 +405,7 @@ local function renderComposer(p1)
 				Text = Props.defaultValue or "",
 				TextColor3 = p1.textColor,
 				TextSize = FontSize,
-				TextTransparency = p1.textTransparency,
+				TextTransparency = if Props.centerOverlay == nil or not Props.centerOverlayTextHidden then p1.textTransparency else 1,
 				TextWrapped = false,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Center,
@@ -407,7 +420,7 @@ local function renderComposer(p1)
 				Selectable = Props.selectionImageObject ~= nil or nil
 			})
 		}) else nil
-		TextContainer = CreateElementFunction1(View3, config6, config7)
+		TextContainer = CreateElementFunction2(View3, config6, config7)
 	end
 	config5.TextContainer = TextContainer
 	config5.SendButtonContainer = if NoShouldReplaceDisabledContent then ReactModule.createElement("CanvasGroup", {
@@ -422,10 +435,10 @@ local function renderComposer(p1)
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			VerticalAlignment = Enum.VerticalAlignment.Center
 		}),
-		SendButton = renderSendButton(p1)
+		SendButton = if HasPrimary then Props.primary else renderSendButton(p1)
 	}) else nil
 	config5.DisabledOverlay = renderFallbackDisabledOverlay(p1)
-	config3.InputGroup = CreateElementFunction2(View2, config4, config5)
+	config3.InputGroup = CreateElementFunction1(View2, config4, config5)
 	config1.Container = CreateElementFunction3(View1, config2, config3)
 	
 	return CreateElementFunction4(View, config, config1)

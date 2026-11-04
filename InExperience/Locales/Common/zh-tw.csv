@@ -933,9 +933,11 @@ CoreScripts.InGameMenu.GameSettings.SwitchToVRComfortSettings,自訂設定
 CoreScripts.InGameMenu.GameSettings.UINavToggle,UI 導覽切換
 CoreScripts.InGameMenu.GameSettings.UINavToggleDescription,"使用 ""\ 鍵以進入和退出 UI 導覽模式"""""""
 CoreScripts.InGameMenu.GameSettings.UIScale,使用者介面比例
+CoreScripts.InGameMenu.GameSettings.UIScaleDescription,調整 Roblox 中按鈕和選單的大小。
 CoreScripts.InGameMenu.GameSettings.UIScaleLargest,最大
 CoreScripts.InGameMenu.GameSettings.UIScaleMode,使用者介面縮放模式
 CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,自動
+CoreScripts.InGameMenu.GameSettings.UIScaleModeDescription,設定在 Roblox 中選擇使用者介面比例的方式。
 CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,手動
 CoreScripts.InGameMenu.GameSettings.UIScaleSmallest,最小
 CoreScripts.InGameMenu.GameSettings.VREnabled,VR 模式
@@ -3699,13 +3701,27 @@ Feature.InExperienceIntervention.Label.Player,{username}：{evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,剩下 {time}
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsBody,每款遊戲同時只能有 1 個免費試用。請在目前試用結束後再試一次。
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsTitle,另一項免費試用已生效
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedBody,每個通行證只能免費試用 1 次。
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedTitle,已免費試用
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedBody,你已擁有此通行證，因此不需要免費試用。
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedTitle,你已擁有此項目
+Feature.InExperienceShop.Description.GamePassNotInUniverseBody,
+Feature.InExperienceShop.Description.GamePassNotInUniverseTitle,
+Feature.InExperienceShop.Description.GamePassNotPurchasableBody,此通行證目前未開放購買。
+Feature.InExperienceShop.Description.GamePassNotPurchasableTitle,目前為非賣品
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledBody,此通行證目前無法免費試用。
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledTitle,無法免費試用
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,購買 Robux 即表示您同意我們的{termsLinkStart}使用條款{termsLinkEnd}，包括仲裁條款和撤銷政策。
 Feature.InExperienceShop.GamePass,
 Feature.InExperienceShop.Label.Active,啟用中
 Feature.InExperienceShop.Label.BonusItem,額外獎勵物品
+Feature.InExperienceShop.Label.BuyNow,立即購買
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining}後結束
 Feature.InExperienceShop.Label.FreeTrial,免費試用
+Feature.InExperienceShop.Label.HaveTrial,你有一項免費試用
 Feature.InExperienceShop.Label.NoDescription,無說明
 Feature.InExperienceShop.Label.OfferEndTime,{offer}將於 {timeRemaining}後結束
 Feature.InExperienceShop.Label.PreviewBanner,這是你在 Roblox Studio 中的商店預覽。玩家不會看到此預覽。
@@ -3719,7 +3735,9 @@ Feature.InExperienceShop.Label.Timer.Second.Plural,{number} 秒
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 秒
 Feature.InExperienceShop.Label.Trial,
 Feature.InExperienceShop.Label.Trialed,已試用
+Feature.InExperienceShop.Label.TryNow,立即嘗試
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,您已成功購買 {ROBUX_AMOUNT} Robux
+Feature.InExperienceShop.Tooltip.RecentlyRedeemed,喜歡免費試用嗎？
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,確定要從道具欄永久刪除此道具嗎？若日後改變主意，你必須在體驗中重新取得道具。
 Feature.Item.Label.DeleteItemUndercase,刪除道具
 Feature.Landing.Label.PoweredBy,技術支援：
@@ -3903,7 +3921,6 @@ Feature.Moments.Title.GenerateTextFeedbackReason,發生什麼問題了嗎？
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,要離開「美好時光」建立程序嗎？
 Feature.Moments.Title.MomentRemoved,「美好時光」已移除
-Feature.Moments.Title.PostInsights,貼文洞察分析
 Feature.Moments.Title.ReportPost,檢舉貼文
 Feature.Moments.Title.UnfollowConfirmationDialog,要取消追蹤 @{username} 嗎？
 Feature.Moments.Tooltip.Creation,參與體驗的所有人皆可檢視你的「美好時光」。

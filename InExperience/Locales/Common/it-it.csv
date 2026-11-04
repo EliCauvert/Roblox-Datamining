@@ -917,9 +917,11 @@ CoreScripts.InGameMenu.GameSettings.SwitchToVRComfortSettings,Impostazioni perso
 CoreScripts.InGameMenu.GameSettings.UINavToggle,Attiva/Disattiva Navigazione Interfaccia utente
 CoreScripts.InGameMenu.GameSettings.UINavToggleDescription,"Usa il tasto ""\ per entrare e uscire dalla modalità di navigazione dell'interfaccia utente"""
 CoreScripts.InGameMenu.GameSettings.UIScale,Ridimensionamento interfaccia utente
+CoreScripts.InGameMenu.GameSettings.UIScaleDescription,Regola la dimensione dei pulsanti e dei menu in ogni sezione di Roblox.
 CoreScripts.InGameMenu.GameSettings.UIScaleLargest,Massimo
 CoreScripts.InGameMenu.GameSettings.UIScaleMode,Modalità di ridimensionamento dell'interfaccia utente
 CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,Auto
+CoreScripts.InGameMenu.GameSettings.UIScaleModeDescription,Imposta come viene scelto il ridimensionamento dell'interfaccia utente in ogni sezione di Roblox.
 CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,Manuale
 CoreScripts.InGameMenu.GameSettings.UIScaleSmallest,La più piccola
 CoreScripts.InGameMenu.GameSettings.VREnabled,Modalità VR
@@ -3681,13 +3683,27 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} rimanenti
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsBody,Puoi utilizzare solo 1 prova gratuita alla volta in ogni gioco. Riprova al termine della prova in corso.
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsTitle,È attiva un'altra prova gratuita
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedBody,Puoi utilizzare solo 1 prova gratuita per ogni pass.
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedTitle,Prova gratuita già utilizzata
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedBody,"Possiedi già questo pass, quindi non hai bisogno di una prova gratuita."
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedTitle,Possiedi già questo articolo
+Feature.InExperienceShop.Description.GamePassNotInUniverseBody,
+Feature.InExperienceShop.Description.GamePassNotInUniverseTitle,
+Feature.InExperienceShop.Description.GamePassNotPurchasableBody,Questo pass non è in vendita al momento.
+Feature.InExperienceShop.Description.GamePassNotPurchasableTitle,Non in vendita al momento
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledBody,"Al momento, questo pass non prevede una prova gratuita."
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledTitle,Nessuna prova gratuita disponibile
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Acquistando Robux, accetti i nostri {termsLinkStart}Termini di utilizzo{termsLinkEnd}, inclusa la clausola compromissoria e la politica di revoca."
 Feature.InExperienceShop.GamePass,
 Feature.InExperienceShop.Label.Active,Attivo
 Feature.InExperienceShop.Label.BonusItem,Articolo bonus
+Feature.InExperienceShop.Label.BuyNow,Compra ora
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Termina tra {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,Prova gratuita
+Feature.InExperienceShop.Label.HaveTrial,Hai una prova gratuita
 Feature.InExperienceShop.Label.NoDescription,Nessuna descrizione
 Feature.InExperienceShop.Label.OfferEndTime,{offer} che termina tra {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,Questa è un'anteprima del tuo Negozio in Roblox Studio non visibile ai giocatori.
@@ -3701,7 +3717,9 @@ Feature.InExperienceShop.Label.Timer.Second.Plural,{number} secondi
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 secondo
 Feature.InExperienceShop.Label.Trial,Periodo di prova
 Feature.InExperienceShop.Label.Trialed,Provato
+Feature.InExperienceShop.Label.TryNow,Prova ora
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Hai acquistato {ROBUX_AMOUNT} Robux con successo
+Feature.InExperienceShop.Tooltip.RecentlyRedeemed,Ti è piaciuta la prova gratuita?
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Confermi di voler eliminare definitivamente questo articolo dal tuo inventario? Se cambi idea, dovrai guadagnarlo di nuovo in un'esperienza."
 Feature.Item.Label.DeleteItemUndercase,Elimina articolo
 Feature.Landing.Label.PoweredBy,Offerto da
@@ -3894,7 +3912,6 @@ Feature.Moments.Title.GenerateTextFeedbackReason,Cosa è andato storto?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Vuoi interrompere la creazione del Momento?
 Feature.Moments.Title.MomentRemoved,Momento rimosso
-Feature.Moments.Title.PostInsights,Approfondimenti sui post
 Feature.Moments.Title.ReportPost,Segnala post
 Feature.Moments.Title.UnfollowConfirmationDialog,Non vuoi più seguire @{username}?
 Feature.Moments.Tooltip.Creation,Tutti i partecipanti all'esperienza possono visualizzare i tuoi Momenti.

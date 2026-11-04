@@ -4,7 +4,6 @@ local SignalsModule = require(Parent.Signals)
 local GetConversationMessageListStoreModule = require(Parent.AppChat.GetConversationMessageListStore)
 local GetConversationStoreModule = require(Parent.AppChat.GetConversationStore)
 local UseMessagePoolFunction = require(Parent.ChatUIPrimitives).useMessagePool
-local FFlagFriendsChatOsaSystemMessage = require(Parent.SharedFlags).FFlagFriendsChatOsaSystemMessage
 local UseMessageDisplayStoreModule = require(script.Parent.Parent.Message.MessageDisplayStore.useMessageDisplayStore)
 local FriendsChatTextMessageModule = require(script.Parent.Parent.Message.FriendsChatTextMessage)
 local FriendsChatOsaSystemMessageModule = require(script.Parent.FriendsChatOsaSystemMessage)
@@ -13,7 +12,7 @@ local UseLocalizeModule = require(script.Parent.Parent.Utils.useLocalize)
 local UIListLayout = ReactModule.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder })
 
 return function(p1)
-	-- upvalues: ReactModule (copy), GetConversationMessageListStoreModule (copy), UseLocalizeModule (copy), UseMessageDisplayStoreModule (copy), FriendsChatTextMessageModule (copy), UseMessagePoolFunction (copy), SignalsModule (copy), UIListLayout (copy), FFlagFriendsChatOsaSystemMessage (copy), GetConversationStoreModule (copy), GetOsaParticipantUserIdModule (copy), FriendsChatOsaSystemMessageModule (copy)
+	-- upvalues: ReactModule (copy), GetConversationMessageListStoreModule (copy), UseLocalizeModule (copy), UseMessageDisplayStoreModule (copy), FriendsChatTextMessageModule (copy), UseMessagePoolFunction (copy), SignalsModule (copy), UIListLayout (copy), GetConversationStoreModule (copy), GetOsaParticipantUserIdModule (copy), FriendsChatOsaSystemMessageModule (copy)
 	local ConversationId = p1.conversationId
 	local ShouldReadMessages = p1.shouldReadMessages
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -52,12 +51,12 @@ return function(p1)
 	})
 	
 	return (ReactModule.useMemo(function()
-		-- upvalues: SignalsModule (upval), UseMessagePoolResult (copy), UIListLayout (upval), FFlagFriendsChatOsaSystemMessage (upval), GetConversationStoreModule (upval), ConversationId (copy), GetOsaParticipantUserIdModule (upval), ReactModule (upval), FriendsChatOsaSystemMessageModule (upval), p1 (copy), UseLocalizeModuleResult (copy)
+		-- upvalues: SignalsModule (upval), UseMessagePoolResult (copy), UIListLayout (upval), GetConversationStoreModule (upval), ConversationId (copy), GetOsaParticipantUserIdModule (upval), ReactModule (upval), FriendsChatOsaSystemMessageModule (upval), p1 (copy), UseLocalizeModuleResult (copy)
 		return SignalsModule.createComputed(function(p2)
-			-- upvalues: UseMessagePoolResult (upval), UIListLayout (upval), FFlagFriendsChatOsaSystemMessage (upval), GetConversationStoreModule (upval), ConversationId (upval), GetOsaParticipantUserIdModule (upval), ReactModule (upval), FriendsChatOsaSystemMessageModule (upval), p1 (upval), UseLocalizeModuleResult (upval)
+			-- upvalues: UseMessagePoolResult (upval), UIListLayout (upval), GetConversationStoreModule (upval), ConversationId (upval), GetOsaParticipantUserIdModule (upval), ReactModule (upval), FriendsChatOsaSystemMessageModule (upval), p1 (upval), UseLocalizeModuleResult (upval)
 			local Copy = table.clone(UseMessagePoolResult(p2))
 			Copy["$layout"] = UIListLayout
-			local OsaParticipantUserIdModule = GetOsaParticipantUserIdModule(if FFlagFriendsChatOsaSystemMessage then GetConversationStoreModule(p2).getConversation(ConversationId, p2) else nil)
+			local OsaParticipantUserIdModule = GetOsaParticipantUserIdModule((GetConversationStoreModule(p2).getConversation(ConversationId, p2)))
 			
 			if OsaParticipantUserIdModule then
 				Copy[`osa-system-message-{ConversationId}`] = ReactModule.createElement(FriendsChatOsaSystemMessageModule, {

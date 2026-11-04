@@ -1,9 +1,7 @@
 ﻿local Parent = script.Parent.Parent
 local Parent1 = Parent.Parent
 local Parent2 = Parent1.Parent
-local FoundationModule = require(Parent2.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent2.Foundation).Utility.normalizeFontFace
 local RoactModule = require(Parent2.Roact)
 local CryoModule = require(Parent2.Cryo)
 local TModule = require(Parent2.t)
@@ -67,9 +65,9 @@ function EmptyState.init(p1)
 end
 
 function EmptyState.render(p1)
-	-- upvalues: WithStyleModule (copy), RoactModule (copy), RoactGamepadModule (copy), ImageSetComponentModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), GetFontFromFontStyleModule (copy), GenericTextLabelModule (copy), GetPageMarginModule (copy), ButtonModule (copy)
+	-- upvalues: WithStyleModule (copy), RoactModule (copy), RoactGamepadModule (copy), ImageSetComponentModule (copy), NormalizeFontFaceFunction (copy), GetFontFromFontStyleModule (copy), GenericTextLabelModule (copy), GetPageMarginModule (copy), ButtonModule (copy)
 	return WithStyleModule(function(p2)
-		-- upvalues: RoactModule (upval), RoactGamepadModule (upval), p1 (copy), ImageSetComponentModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), GetFontFromFontStyleModule (upval), GenericTextLabelModule (upval), GetPageMarginModule (upval), ButtonModule (upval)
+		-- upvalues: RoactModule (upval), RoactGamepadModule (upval), p1 (copy), ImageSetComponentModule (upval), NormalizeFontFaceFunction (upval), GetFontFromFontStyleModule (upval), GenericTextLabelModule (upval), GetPageMarginModule (upval), ButtonModule (upval)
 		local CreateElementFunction1 = RoactModule.createElement
 		local Frame = RoactGamepadModule.Focusable.Frame
 		local config = {
@@ -133,8 +131,7 @@ function EmptyState.render(p1)
 					Text = p1.props.titleProps.titleText,
 					TextXAlignment = Enum.TextXAlignment.Center,
 					TextYAlignment = Enum.TextYAlignment.Center,
-					Font = if FoundationFontFaceMigration then nil else p2.Font.Title.Font,
-					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(GetFontFromFontStyleModule(p2.Font.Title)) else nil,
+					FontFace = NormalizeFontFaceFunction(GetFontFromFontStyleModule(p2.Font.Title)),
 					TextSize = p2.Font.Header1.RelativeSize * p2.Font.BaseSize,
 					TextColor3 = p2.Theme.TextEmphasis.Color,
 					TextTransparency = p2.Theme.TextEmphasis.Transparency,

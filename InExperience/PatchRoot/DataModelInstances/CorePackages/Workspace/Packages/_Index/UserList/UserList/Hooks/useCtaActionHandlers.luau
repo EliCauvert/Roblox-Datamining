@@ -2,21 +2,24 @@
 local UserList = script:FindFirstAncestor("UserList")
 local Parent = UserList.Parent
 local ReactModule = require(Parent.React)
+local EnumsModule = require(UserList.Common.Enums)
 local EnteredChatFromEntryPointFunction = require(Parent.SocialCommon).Actions.EnteredChatFromEntryPoint
 local FFlagUserListCtaAnalyticsEnabled = require(Parent.SharedFlags).FFlagUserListCtaAnalyticsEnabled
 local FFlagUserListCanonicalCtaAnalyticsModule = require(UserList.Flags.FFlagUserListCanonicalCtaAnalytics)
 local ReportCtaActivatedModule = require(UserList.Analytics.reportCtaActivated)
 local FFlagSharedChatEntryPointAction = require(Parent.SharedFlags).FFlagSharedChatEntryPointAction
+local FFlagUserListRowViewCtaModule = require(UserList.Flags.FFlagUserListRowViewCta)
+local UseEntitySelectionHandlerModule = require(UserList.Hooks.useEntitySelectionHandler)
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
-local ButtonTypes = require(UserList.Common.Enums).ButtonTypes
+local ButtonTypes = EnumsModule.ButtonTypes
 local TextKeysModule = require(UserList.Common.TextKeys)
 local _ = require(UserList.Common.Types)
 local FriendingActionsModule = require(UserList.Cta.friendingActions)
 local NotificationTypeList = GuiService:GetNotificationTypeList()
 
 return function(p1)
-	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), FFlagSharedChatEntryPointAction (copy), FFlagUserListCtaAnalyticsEnabled (copy), FFlagUserListCanonicalCtaAnalyticsModule (copy), ButtonTypes (copy), ReportCtaActivatedModule (copy), EnteredChatFromEntryPointFunction (copy), GuiService (copy), NotificationTypeList (copy), FriendingActionsModule (copy)
+	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), FFlagSharedChatEntryPointAction (copy), FFlagUserListCtaAnalyticsEnabled (copy), FFlagUserListCanonicalCtaAnalyticsModule (copy), FFlagUserListRowViewCtaModule (copy), UseEntitySelectionHandlerModule (copy), ButtonTypes (copy), ReportCtaActivatedModule (copy), EnteredChatFromEntryPointFunction (copy), GuiService (copy), NotificationTypeList (copy), FriendingActionsModule (copy), EnumsModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseRefResult = ReactModule.useRef({})
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -37,9 +40,13 @@ return function(p1)
 	local ChatEntryPoint = if FFlagSharedChatEntryPointAction and p1 then p1.chatEntryPoint else nil
 	local OnCtaActivated = if FFlagUserListCtaAnalyticsEnabled and p1 then p1.onCtaActivated else nil
 	local Analytics = if FFlagUserListCanonicalCtaAnalyticsModule and p1 then p1.analytics else nil
+	local UseEntitySelectionHandlerModuleResult = if FFlagUserListRowViewCtaModule then UseEntitySelectionHandlerModule(nil, (ReactModule.useMemo(function()
+		-- upvalues: FriendshipOriginSourceType (copy)
+		return { friendshipOriginSourceType = FriendshipOriginSourceType }
+	end, { FriendshipOriginSourceType or false }))) else nil
 	
 	return ReactModule.useMemo(function()
-		-- upvalues: ButtonTypes (upval), FFlagUserListCtaAnalyticsEnabled (upval), OnCtaActivated (ref), FFlagUserListCanonicalCtaAnalyticsModule (upval), ReportCtaActivatedModule (upval), Analytics (ref), FFlagSharedChatEntryPointAction (upval), ChatEntryPoint (ref), UseDispatchResult (copy), EnteredChatFromEntryPointFunction (upval), GuiService (upval), NotificationTypeList (upval), UseRefResult (copy), FriendingActionsModule (upval), FriendshipOriginSourceType (copy), UseLocalizationResult (copy)
+		-- upvalues: ButtonTypes (upval), FFlagUserListCtaAnalyticsEnabled (upval), OnCtaActivated (ref), FFlagUserListCanonicalCtaAnalyticsModule (upval), ReportCtaActivatedModule (upval), Analytics (ref), FFlagSharedChatEntryPointAction (upval), ChatEntryPoint (ref), UseDispatchResult (copy), EnteredChatFromEntryPointFunction (upval), GuiService (upval), NotificationTypeList (upval), UseRefResult (copy), FriendingActionsModule (upval), FriendshipOriginSourceType (copy), UseLocalizationResult (copy), FFlagUserListRowViewCtaModule (upval), UseEntitySelectionHandlerModuleResult (ref), EnumsModule (upval)
 		return {
 			[ButtonTypes.Chat] = function(UserId, p2)
 				-- upvalues: FFlagUserListCtaAnalyticsEnabled (upval), OnCtaActivated (upval), ButtonTypes (upval), FFlagUserListCanonicalCtaAnalyticsModule (upval), ReportCtaActivatedModule (upval), Analytics (upval), FFlagSharedChatEntryPointAction (upval), ChatEntryPoint (upval), UseDispatchResult (upval), EnteredChatFromEntryPointFunction (upval), GuiService (upval), NotificationTypeList (upval)
@@ -114,10 +121,21 @@ return function(p1)
 					-- upvalues: UseRefResult (upval), TargetUserId (copy)
 					UseRefResult.current[TargetUserId] = nil
 				end)
-			end
+			end,
+			[ButtonTypes.View] = if FFlagUserListRowViewCtaModule then function(UserId, p2)
+				-- upvalues: FFlagUserListCtaAnalyticsEnabled (upval), OnCtaActivated (upval), ButtonTypes (upval), FFlagUserListCanonicalCtaAnalyticsModule (upval), ReportCtaActivatedModule (upval), Analytics (upval), UseEntitySelectionHandlerModuleResult (upval), EnumsModule (upval)
+				if FFlagUserListCtaAnalyticsEnabled and OnCtaActivated ~= nil then
+					OnCtaActivated({ buttonType = ButtonTypes.View, userId = UserId })
+				end
+				if FFlagUserListCanonicalCtaAnalyticsModule then
+					ReportCtaActivatedModule(Analytics, ButtonTypes.View, UserId, p2)
+				end
+				UseEntitySelectionHandlerModuleResult(UserId, EnumsModule.EntityType.User)
+			end else nil
 		}
 	end, {
 		UseDispatchResult, UseLocalizationResult, FriendshipOriginSourceType,
-		OnCtaActivated, ChatEntryPoint, Analytics
+		OnCtaActivated, ChatEntryPoint, Analytics,
+		UseEntitySelectionHandlerModuleResult
 	})
 end

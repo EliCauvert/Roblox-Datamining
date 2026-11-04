@@ -13,9 +13,7 @@ local UseLocalizeModule = require(script.Parent.Parent.Utils.useLocalize)
 local _ = require(script.Parent.FriendsChatBubbleMessageListView)
 local FriendsChatOsaSystemMessageModule = require(script.Parent.FriendsChatOsaSystemMessage)
 local GetOsaParticipantUserIdModule = require(script.Parent.getOsaParticipantUserId)
-local FFlagFriendsChatOsaSystemMessage = require(Parent.SharedFlags).FFlagFriendsChatOsaSystemMessage
 local Binding = ReactModule.createBinding(0)
-local config = { hasRecord = false, osaUserId = nil }
 
 local function isSameOsaState(p1, p2): boolean
 	return p1.hasRecord == p2.hasRecord and p1.osaUserId == p2.osaUserId
@@ -38,7 +36,7 @@ local function getTopFadeSequence(Entry): NumberSequence
 end
 
 return function(p1)
-	-- upvalues: UseLocalizeModule (copy), ReactModule (copy), getTopFadeSequence (copy), UseConversationEnvelopesModule (copy), SignalsModule (copy), FFlagFriendsChatOsaSystemMessage (copy), config (copy), GetConversationStoreModule (copy), GetOsaParticipantUserIdModule (copy), isSameOsaState (copy), SignalsReactModule (copy), FriendsChatOsaSystemMessageModule (copy), UseChatPlatformModule (copy), GetLocalUserIdModule (copy), Binding (copy), isBelowHideThreshold (copy), UseChatWindowReportModule (copy)
+	-- upvalues: UseLocalizeModule (copy), ReactModule (copy), getTopFadeSequence (copy), UseConversationEnvelopesModule (copy), SignalsModule (copy), GetConversationStoreModule (copy), GetOsaParticipantUserIdModule (copy), isSameOsaState (copy), SignalsReactModule (copy), FriendsChatOsaSystemMessageModule (copy), UseChatPlatformModule (copy), GetLocalUserIdModule (copy), Binding (copy), isBelowHideThreshold (copy), UseChatWindowReportModule (copy)
 	local UseLocalizeModuleResult = UseLocalizeModule()
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 	local UseResult = ReactModule.useCallback(function(Frame)
@@ -73,24 +71,20 @@ return function(p1)
 		shouldReadMessages = p1.hasConversationId
 	})
 	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
-		-- upvalues: SignalsModule (upval), FFlagFriendsChatOsaSystemMessage (upval), config (upval), GetConversationStoreModule (upval), ConversationId (copy), GetOsaParticipantUserIdModule (upval), isSameOsaState (upval)
+		-- upvalues: SignalsModule (upval), GetConversationStoreModule (upval), ConversationId (copy), GetOsaParticipantUserIdModule (upval), isSameOsaState (upval)
 		return SignalsModule.createComputed(function(p2)
-			-- upvalues: FFlagFriendsChatOsaSystemMessage (upval), config (upval), GetConversationStoreModule (upval), ConversationId (upval), GetOsaParticipantUserIdModule (upval)
-			if FFlagFriendsChatOsaSystemMessage then
-				local Conversation = GetConversationStoreModule(p2).getConversation(ConversationId, p2)
-				
-				return {
-					hasRecord = Conversation ~= nil,
-					osaUserId = GetOsaParticipantUserIdModule(Conversation)
-				}
-			else
-				return config
-			end
+			-- upvalues: GetConversationStoreModule (upval), ConversationId (upval), GetOsaParticipantUserIdModule (upval)
+			local Conversation = GetConversationStoreModule(p2).getConversation(ConversationId, p2)
+			
+			return {
+				hasRecord = Conversation ~= nil,
+				osaUserId = GetOsaParticipantUserIdModule(Conversation)
+			}
 		end, isSameOsaState)
 	end, { ConversationId })))
 	local OsaUserId = UseSignalStateResult.osaUserId
 	local End: string = if OsaUserId == nil or not p1.shouldOpenToOsaSystemMessage then "end" else "start"
-	local IsEnd = (not FFlagFriendsChatOsaSystemMessage or (not p1.isRealConversation or UseSignalStateResult.hasRecord)) and (End == "end" or p1.hasLoadedNewestPage)
+	local IsEnd = (not p1.isRealConversation or UseSignalStateResult.hasRecord) and (End == "end" or p1.hasLoadedNewestPage)
 	local ChatWindowSettings = p1.chatWindowSettings
 	local IsSpatialUIEnabled = p1.isSpatialUIEnabled
 	local UseMemoResult1 = ReactModule.useMemo(function()

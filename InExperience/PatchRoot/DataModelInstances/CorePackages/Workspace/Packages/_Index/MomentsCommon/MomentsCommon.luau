@@ -13,7 +13,6 @@ return {
 		FFlagMomentsFeedMediaLoadAttemptedEvent = require(script.Flags.FFlagMomentsFeedMediaLoadAttemptedEvent),
 		FFlagMomentsVideoPermissionContextFix = require(script.Flags.FFlagMomentsVideoPermissionContextFix),
 		FFlagMomentsEngagementMetricsFeature = require(script.Flags.FFlagMomentsEngagementMetricsFeature),
-		FFlagMomentsUploadOutcomeTelemetry = require(script.Flags.FFlagMomentsUploadOutcomeTelemetry),
 		FFlagMomentTextGenerationFilteredSignal = require(script.Flags.FFlagMomentTextGenerationFilteredSignal),
 		FFlagMomentsCreationBackCta = require(script.Flags.FFlagMomentsCreationBackCta),
 		FFlagMomentsTextOverlayV2Redesign = require(script.Flags.FFlagMomentsTextOverlayV2Redesign),

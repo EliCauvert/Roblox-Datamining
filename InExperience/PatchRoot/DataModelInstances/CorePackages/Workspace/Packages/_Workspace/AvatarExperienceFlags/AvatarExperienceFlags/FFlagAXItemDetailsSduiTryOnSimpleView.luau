@@ -1,0 +1,3 @@
+﻿local FFlagAXItemDetailsSduiBodyActionsModule = require(script.Parent.FFlagAXItemDetailsSduiBodyActions)
+
+return game:DefineFastFlag("AXItemDetailsSduiTryOnSimpleView", false) and FFlagAXItemDetailsSduiBodyActionsModule

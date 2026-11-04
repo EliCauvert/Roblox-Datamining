@@ -15,7 +15,6 @@ local GenericTextLabelModule = require(Core.Text.GenericTextLabel.GenericTextLab
 local ImageSetComponentModule = require(Parent1.Core.ImageSet.ImageSetComponent)
 local Skeleton = FoundationModule.Skeleton
 local Radius = FoundationModule.Enums.Radius
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local GetTextSizeModule = require(Parent1.Core.Text.GetTextSize)
 local GetFontFromFontStyleModule = require(Parent1.Core.Text.GetFontFromFontStyle)
 local Pill = RoactModule.PureComponent:extend("Pill")
@@ -40,9 +39,9 @@ function Pill.init(p1)
 end
 
 function Pill.render(p1)
-	-- upvalues: WithStyleModule (copy), ControlStateModule (copy), GetContentStyleModule (copy), GetIconSizeModule (copy), IconSizeModule (copy), GetTextSizeModule (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), RoactModule (copy), InteractableModule (copy), ImageSetComponentModule (copy), GenericTextLabelModule (copy), Skeleton (copy), Radius (copy)
+	-- upvalues: WithStyleModule (copy), ControlStateModule (copy), GetContentStyleModule (copy), GetIconSizeModule (copy), IconSizeModule (copy), GetTextSizeModule (copy), GetFontFromFontStyleModule (copy), RoactModule (copy), InteractableModule (copy), ImageSetComponentModule (copy), GenericTextLabelModule (copy), Skeleton (copy), Radius (copy)
 	return WithStyleModule(function(p2)
-		-- upvalues: p1 (copy), ControlStateModule (upval), GetContentStyleModule (upval), GetIconSizeModule (upval), IconSizeModule (upval), GetTextSizeModule (upval), FoundationFontFaceMigration (upval), GetFontFromFontStyleModule (upval), RoactModule (upval), InteractableModule (upval), ImageSetComponentModule (upval), GenericTextLabelModule (upval), Skeleton (upval), Radius (upval)
+		-- upvalues: p1 (copy), ControlStateModule (upval), GetContentStyleModule (upval), GetIconSizeModule (upval), IconSizeModule (upval), GetTextSizeModule (upval), GetFontFromFontStyleModule (upval), RoactModule (upval), InteractableModule (upval), ImageSetComponentModule (upval), GenericTextLabelModule (upval), Skeleton (upval), Radius (upval)
 		local _Font = p2.Font
 		local IsSelected = p1.props.isSelected
 		local IsDisabled = p1.props.isDisabled
@@ -66,7 +65,7 @@ function Pill.render(p1)
 		local ContentStyleModule2 = GetContentStyleModule(config1, p1.state.controlState, p2)
 		local IconSizeModule1: number = GetIconSizeModule(IconSizeModule.Small)
 		local ScaledRelativeSize = _Font.CaptionHeader.RelativeSize * _Font.BaseSize
-		local X: number = GetTextSizeModule(Text, ScaledRelativeSize, if FoundationFontFaceMigration then GetFontFromFontStyleModule(_Font.CaptionHeader) else _Font.CaptionHeader.Font, Vector2.new(10000, 10000)).X
+		local X: number = GetTextSizeModule(Text, ScaledRelativeSize, GetFontFromFontStyleModule(_Font.CaptionHeader), Vector2.new(10000, 10000)).X
 		local NewX = X + 24
 		local XOffset = 240 - (28 + IconSizeModule1)
 		

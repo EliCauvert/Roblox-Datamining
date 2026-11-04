@@ -10,10 +10,9 @@ local UserSearchHeaderBarModule = require(UserSearch.Components.UserSearchHeader
 local AnalyticsModule = require(UserSearch.Analytics)
 local EventNames = AnalyticsModule.EventNames
 local UseUserSearchAnalyticsFunction = AnalyticsModule.useUserSearchAnalytics
-local FFlagLuaAppsDefaultSelection = require(Parent.SharedFlags).FFlagLuaAppsDefaultSelection
 
 return function(p1)
-	-- upvalues: UseNavigationFunction (copy), UseStyleFunction (copy), FFlagLuaAppsDefaultSelection (copy), ReactModule (copy), HttpService (copy), UseUserSearchAnalyticsFunction (copy), EventNames (copy), AppPage (copy), FullscreenPageWithSafeArea (copy), UserSearchHeaderBarModule (copy)
+	-- upvalues: UseNavigationFunction (copy), UseStyleFunction (copy), ReactModule (copy), HttpService (copy), UseUserSearchAnalyticsFunction (copy), EventNames (copy), AppPage (copy), FullscreenPageWithSafeArea (copy), UserSearchHeaderBarModule (copy)
 	local RenderUserSearchResultsFunction = p1.renderUserSearchResults
 	local UseNavigationResult = UseNavigationFunction()
 	local UseStyleResult = UseStyleFunction()
@@ -21,21 +20,13 @@ return function(p1)
 	local SearchKeywordParam = UseNavigationResult.getParam("searchKeyword")
 	local ShouldShowUserSearchLandingPageParam = UseNavigationResult.getParam("shouldShowUserSearchLandingPage")
 	local EntryPointParam = UseNavigationResult.getParam("entryPoint")
-	local UseRefResult = nil
-	local UseUserSearchAnalyticsResult = nil
-	
-	if FFlagLuaAppsDefaultSelection then
-		UseRefResult = ReactModule.useRef(HttpService:GenerateGUID(false))
-		UseUserSearchAnalyticsResult = UseUserSearchAnalyticsFunction({
-			currentPage = EntryPointParam,
-			userSearchSessionId = UseRefResult.current
-		})
-	else
-		UseUserSearchAnalyticsResult = UseUserSearchAnalyticsFunction({ currentPage = EntryPointParam })
-		UseRefResult = UseUserSearchAnalyticsResult.getInfoForAllEvents().userSearchSessionId
-	end
+	local UseRefResult = ReactModule.useRef(HttpService:GenerateGUID(false))
+	local UseUserSearchAnalyticsResult = UseUserSearchAnalyticsFunction({
+		currentPage = EntryPointParam,
+		userSearchSessionId = UseRefResult.current
+	})
 	ReactModule.useEffect(function()
-		-- upvalues: ShouldShowUserSearchLandingPageParam (copy), UseUserSearchAnalyticsResult (ref), EventNames (upval)
+		-- upvalues: ShouldShowUserSearchLandingPageParam (copy), UseUserSearchAnalyticsResult (copy), EventNames (upval)
 		if ShouldShowUserSearchLandingPageParam then
 			UseUserSearchAnalyticsResult.fireAnalyticsEvent(EventNames.UserSearchBarOpen)
 		end
@@ -45,18 +36,18 @@ return function(p1)
 		includeStatusBar = true,
 		BackgroundColor3 = UseStyleResult.Theme.BackgroundDefault.Color,
 		BackgroundTransparency = UseStyleResult.Theme.BackgroundDefault.Transparency,
-		buttonRef = if FFlagLuaAppsDefaultSelection then p1.containerRef else nil
+		buttonRef = p1.containerRef
 	}, {
 		UserSearchHeaderBar = ReactModule.createElement(UserSearchHeaderBarModule, {
 			searchKeyword = SearchKeywordParam,
 			focusOnSearchInput = ShouldShowUserSearchLandingPageParam,
 			onSubmitSearch = ReactModule.useCallback(function(Kwd)
-				-- upvalues: UseNavigationResult (copy), AppPage (upval), EntryPointParam (copy), UseUserSearchAnalyticsResult (ref), EventNames (upval)
+				-- upvalues: UseNavigationResult (copy), AppPage (upval), EntryPointParam (copy), UseUserSearchAnalyticsResult (copy), EventNames (upval)
 				UseNavigationResult.replace(AppPage.UserSearch, { searchKeyword = Kwd, entryPoint = EntryPointParam })
 				UseUserSearchAnalyticsResult.fireAnalyticsEvent(EventNames.UserSearchBarSubmit, { kwd = Kwd })
 			end, { EntryPointParam }),
 			onBackClick = ReactModule.useCallback(function()
-				-- upvalues: UseNavigationResult (copy), UseUserSearchAnalyticsResult (ref), EventNames (upval)
+				-- upvalues: UseNavigationResult (copy), UseUserSearchAnalyticsResult (copy), EventNames (upval)
 				UseNavigationResult.pop()
 				UseUserSearchAnalyticsResult.fireAnalyticsEvent(EventNames.UserSearchBarCancel)
 			end, {}),
@@ -68,11 +59,11 @@ return function(p1)
 			Size = UDim2.new(1, 0, 1, -Tokens.Size.Size_1200)
 		}, {
 			UserSearchPage = ReactModule.useMemo(function()
-				-- upvalues: RenderUserSearchResultsFunction (copy), SearchKeywordParam (copy), ShouldShowUserSearchLandingPageParam (copy), FFlagLuaAppsDefaultSelection (upval), UseRefResult (ref)
+				-- upvalues: RenderUserSearchResultsFunction (copy), SearchKeywordParam (copy), ShouldShowUserSearchLandingPageParam (copy), UseRefResult (copy)
 				return RenderUserSearchResultsFunction({
 					searchKeyword = SearchKeywordParam,
 					shouldShowUserSearchLandingPage = ShouldShowUserSearchLandingPageParam,
-					searchUuid = if FFlagLuaAppsDefaultSelection then UseRefResult.current else UseRefResult
+					searchUuid = UseRefResult.current
 				})
 			end, {
 				SearchKeywordParam,

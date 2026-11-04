@@ -69,7 +69,8 @@ return function(p1)
 				layoutOrder = LayoutOrder,
 				onActivated = p1.onUserCardActivated,
 				user = User,
-				isInExperience = p1.isInExperience
+				isInExperience = p1.isInExperience,
+				openSquadVoiceAbuseReport = p1.openSquadVoiceAbuseReport
 			})
 		end
 		
@@ -118,7 +119,8 @@ return function(p1)
 	end, {
 		UseMemoResult, Medium, UseSelectorResult, Number, UseMemoResult3,
 		UseMemoResult2, p1.navigateToHomePage, p1.navigateToSquadInviteFriends,
-		p1.onUserCardActivated, p1.users, UseSquadStateResult
+		p1.onUserCardActivated, p1.openSquadVoiceAbuseReport, p1.users,
+		UseSquadStateResult
 	})
 	UseMemoResult1.UIListLayout = ReactModule.createElement("UIListLayout", {
 		FillDirection = Enum.FillDirection.Vertical,

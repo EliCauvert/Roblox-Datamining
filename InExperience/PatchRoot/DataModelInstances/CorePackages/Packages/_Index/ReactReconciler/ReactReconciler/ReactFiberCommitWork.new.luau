@@ -166,9 +166,9 @@ local Callback6 = nil
 local getHostSibling = nil
 local Callback = nil
 local Callback5 = nil
-local Callback1 = nil
-local Callback3 = nil
 local Callback2 = nil
+local Callback3 = nil
+local Callback1 = nil
 local Callback4 = nil
 local commitNestedUnmounts = nil
 local commitUnmount = nil
@@ -357,7 +357,7 @@ function commitProfilerPassiveEffect(p1, p2)
 end
 
 local function recursivelyCommitLayoutEffects(Child, p1, CaptureCommitPhaseError, SchedulePassiveEffectCallback)
-	-- upvalues: captureCommitPhaseError (ref), schedulePassiveEffectCallback (ref), Profiler (copy), EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), v1 (ref), ReactFeatureFlags (copy), LayoutMask (copy), NoFlags (copy), DEV (copy), Current (copy), SetCurrentFiberFunction (copy), InvokeGuardedCallbackFunction (copy), recursivelyCommitLayoutEffects (copy), HasCaughtErrorFunction (copy), ClearCaughtErrorFunction (copy), ResetCurrentFiberFunction (copy), DescribeError (copy), Update (copy), Callback7 (copy), ReactCurrentFiberModule (copy), Count (ref), YOLO (copy), FunctionComponent (copy), ForwardRef (copy), SimpleMemoComponent (copy), Block (copy), ProfileMode (copy), StartLayoutEffectTimerFunction (copy), commitHookEffectListMount (copy), Layout (copy), HasEffect (copy), RecordLayoutEffectDurationFunction (copy), PassiveMask (copy), ClassComponent (copy), Callback2 (ref), HostRoot (copy), Callback1 (ref), HostComponent (copy), Callback3 (ref), SuspenseComponent (copy), FundamentalComponent (copy), HostPortal (copy), HostText (copy), IncompleteClassComponent (copy), LegacyHiddenComponent (copy), OffscreenComponent (copy), ScopeComponent (copy), SuspenseListComponent (copy), InvariantFunction (copy), Ref (copy)
+	-- upvalues: captureCommitPhaseError (ref), schedulePassiveEffectCallback (ref), Profiler (copy), EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), v1 (ref), ReactFeatureFlags (copy), LayoutMask (copy), NoFlags (copy), DEV (copy), Current (copy), SetCurrentFiberFunction (copy), InvokeGuardedCallbackFunction (copy), recursivelyCommitLayoutEffects (copy), HasCaughtErrorFunction (copy), ClearCaughtErrorFunction (copy), ResetCurrentFiberFunction (copy), DescribeError (copy), Update (copy), Callback7 (copy), ReactCurrentFiberModule (copy), Count (ref), YOLO (copy), FunctionComponent (copy), ForwardRef (copy), SimpleMemoComponent (copy), Block (copy), ProfileMode (copy), StartLayoutEffectTimerFunction (copy), commitHookEffectListMount (copy), Layout (copy), HasEffect (copy), RecordLayoutEffectDurationFunction (copy), PassiveMask (copy), ClassComponent (copy), Callback1 (ref), HostRoot (copy), Callback2 (ref), HostComponent (copy), Callback3 (ref), SuspenseComponent (copy), FundamentalComponent (copy), HostPortal (copy), HostText (copy), IncompleteClassComponent (copy), LegacyHiddenComponent (copy), OffscreenComponent (copy), ScopeComponent (copy), SuspenseListComponent (copy), InvariantFunction (copy), Ref (copy)
 	if CaptureCommitPhaseError ~= nil then
 		captureCommitPhaseError = CaptureCommitPhaseError
 	end
@@ -534,7 +534,7 @@ local function recursivelyCommitLayoutEffects(Child, p1, CaptureCommitPhaseError
 							recursivelyCommitLayoutEffects(Child4, p1, captureCommitPhaseError, schedulePassiveEffectCallback)
 						else
 							Count += 1
-							v6, v146 = xpcall(recursivelyCommitLayoutEffects, DescribeError, Child4, p1, captureCommitPhaseError, schedulePassiveEffectCallback)
+							v6, v148 = xpcall(recursivelyCommitLayoutEffects, DescribeError, Child4, p1, captureCommitPhaseError, schedulePassiveEffectCallback)
 							Count -= 1
 						end
 						if not v6 then
@@ -546,8 +546,8 @@ local function recursivelyCommitLayoutEffects(Child, p1, CaptureCommitPhaseError
 			end
 		end
 		if bit32.band(Flags, (bit32.bor(Update, Callback7))) ~= NoFlags then
-			if Tag == FunctionComponent or (Tag == ForwardRef or Tag == SimpleMemoComponent or Tag == Block) then
-				if EnableProfilerTimer and (EnableProfilerCommitHooks and bit32.band(Child.mode, ProfileMode) ~= 0) then
+			if Tag == FunctionComponent or Tag == ForwardRef or (Tag == SimpleMemoComponent or Tag == Block) then
+				if EnableProfilerTimer and EnableProfilerCommitHooks and bit32.band(Child.mode, ProfileMode) ~= 0 then
 					local Success3, Result3 = xpcall(function()
 						-- upvalues: StartLayoutEffectTimerFunction (upval), commitHookEffectListMount (upval), Layout (upval), HasEffect (upval), Child (copy)
 						StartLayoutEffectTimerFunction()
@@ -565,14 +565,14 @@ local function recursivelyCommitLayoutEffects(Child, p1, CaptureCommitPhaseError
 					schedulePassiveEffectCallback()
 				end
 			elseif Tag == ClassComponent then
-				Callback2(Child)
-			elseif Tag == HostRoot then
 				Callback1(Child)
+			elseif Tag == HostRoot then
+				Callback2(Child)
 			elseif Tag == HostComponent then
 				Callback3(Child)
 			elseif Tag == SuspenseComponent then
 				commitSuspenseHydrationCallbacks(p1, Child)
-			elseif Tag ~= FundamentalComponent and Tag ~= HostPortal and Tag ~= HostText and Tag ~= IncompleteClassComponent and Tag ~= LegacyHiddenComponent and (Tag ~= OffscreenComponent and Tag ~= ScopeComponent and Tag ~= SuspenseListComponent) then
+			elseif Tag ~= FundamentalComponent and Tag ~= HostPortal and Tag ~= HostText and Tag ~= IncompleteClassComponent and Tag ~= LegacyHiddenComponent and Tag ~= OffscreenComponent and Tag ~= ScopeComponent and Tag ~= SuspenseListComponent then
 				InvariantFunction(false, "This unit of work tag should not have side-effects. This error is likely caused by a bug in React. Please file an issue.")
 			end
 		end
@@ -654,7 +654,7 @@ function commitLayoutEffectsForProfiler(p2, p3)
 	end
 end
 
-Callback2 = function(p2)
+Callback1 = function(p2)
 	-- upvalues: Update (copy), DEV (copy), v74 (copy), Console (copy), GetComponentNameFunction (copy), EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), ProfileMode (copy), StartLayoutEffectTimerFunction (copy), DescribeError (copy), RecordLayoutEffectDurationFunction (copy), ResolveDefaultPropsFunction (copy), CommitUpdateQueueFunction (copy)
 	local StateNode = p2.stateNode
 	local Alternate = p2.alternate
@@ -726,7 +726,7 @@ Callback2 = function(p2)
 	end
 end
 
-Callback1 = function(p2)
+Callback2 = function(p2)
 	-- upvalues: HostComponent (copy), GetPublicInstanceFunction (copy), ClassComponent (copy), CommitUpdateQueueFunction (copy)
 	local UpdateQueue = p2.updateQueue
 	

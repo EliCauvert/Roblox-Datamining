@@ -2,7 +2,6 @@
 local Parent = AppChat.Parent
 local AppChatNetworkingModule = require(Parent.AppChatNetworking)
 local RetrievalStatus = require(Parent.Http).Enum.RetrievalStatus
-local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 local ConversationModule = require(AppChat.Models.Conversation)
 local ConversationChannelsModule = require(AppChat.Models.ConversationChannels)
 local ModerationType = require(AppChat.Models.ConversationChannels).ModerationType
@@ -12,7 +11,7 @@ local GetConversationTitleModule = require(AppChat.Conversations.getConversation
 local UseGetConversationFromIdModule = require(AppChat.Hooks.useGetConversationFromId)
 local UseGetConversationHasGroupUpFromIdModule = require(AppChat.Hooks.useGetConversationHasGroupUpFromId)
 local UseIsUserPendingModule = require(AppChat.Hooks.useIsUserPending)
-local GetDeepValueModule = require(AppChat.Utils.getDeepValue)
+local UseChatSettingsRetrievalStatusModule = require(AppChat.Hooks.useChatSettingsRetrievalStatus)
 local FFlagReadAppChatFetchingVariable = require(Parent.SharedFlags).FFlagReadAppChatFetchingVariable
 local FFlagAppChatNavigateBackIfOSAUnacknowledged = require(Parent.SharedFlags).FFlagAppChatNavigateBackIfOSAUnacknowledged
 local ShouldShowOSAForConversationModule = require(AppChat.Utils.shouldShowOSAForConversation)
@@ -76,29 +75,28 @@ return {
 	end,
 	useIsChatEnabled = require(AppChat.Hooks.useIsChatEnabled),
 	useIsLoadingChatSettings = function()
-		-- upvalues: UseSelectorFunction (copy), FFlagReadAppChatFetchingVariable (copy), GetDeepValueModule (copy), RetrievalStatus (copy)
-		return UseSelectorFunction(function(p1)
-			-- upvalues: FFlagReadAppChatFetchingVariable (upval), GetDeepValueModule (upval), RetrievalStatus (upval)
-			return if FFlagReadAppChatFetchingVariable then GetDeepValueModule(p1, "ChatAppReducer.ChatSettings.retrievalStatus") ~= RetrievalStatus.Done else nil
-		end)
+		-- upvalues: UseChatSettingsRetrievalStatusModule (copy), FFlagReadAppChatFetchingVariable (copy), RetrievalStatus (copy)
+		local UseChatSettingsRetrievalStatusModuleResult = UseChatSettingsRetrievalStatusModule()
+		
+		return if FFlagReadAppChatFetchingVariable then UseChatSettingsRetrievalStatusModuleResult ~= RetrievalStatus.Done else nil
 	end,
 	useIsChatUserMessagesEnabled = require(AppChat.Hooks.useIsChatUserMessagesEnabled),
 	shouldShowOSAForConversation = if FFlagAppChatNavigateBackIfOSAUnacknowledged then ShouldShowOSAForConversationModule else nil,
-	showGroupOSADialog = function(ConversationId, Callback1, Callback)
+	showGroupOSADialog = function(ConversationId, Callback, Callback1)
 		-- upvalues: GetOverlayStoreModule (copy), OverlayTypesModule (copy), HttpService (copy)
 		local OverlayStoreModule = GetOverlayStoreModule(false)
 		OverlayStoreModule.showOverlay(OverlayTypesModule.GroupOSADialog, {
 			conversationId = ConversationId,
 			impressionId = HttpService:GenerateGUID(false),
 			onJoin = function()
-				-- upvalues: OverlayStoreModule (copy), Callback1 (copy)
-				OverlayStoreModule.dismissOverlay()
-				Callback1()
-			end,
-			onDecline = function()
 				-- upvalues: OverlayStoreModule (copy), Callback (copy)
 				OverlayStoreModule.dismissOverlay()
 				Callback()
+			end,
+			onDecline = function()
+				-- upvalues: OverlayStoreModule (copy), Callback1 (copy)
+				OverlayStoreModule.dismissOverlay()
+				Callback1()
 			end
 		})
 	end

@@ -22,6 +22,7 @@ return ReactModule.memo(function(p1)
 			testId = "TouchActionText-" .. control.id,
 			icon = ReactModule.createElement(TouchControlIconModule, {
 				name = control.icon,
+				assetId = control.assetId,
 				diameter = UseTokensResult.Size.Size_500,
 				iconDiameter = if IsShowIconBackground then UseTokensResult.Size.Size_300 else UseTokensResult.Size.Size_500,
 				disabled = control.disabled,

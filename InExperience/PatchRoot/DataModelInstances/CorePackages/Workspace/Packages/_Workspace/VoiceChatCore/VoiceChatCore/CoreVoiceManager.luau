@@ -32,7 +32,6 @@ local BlockingUtilityModule = require(Parent1.BlockingUtility)
 local CoreGui = game:GetService("CoreGui")
 local NewResult = require(Parent1.CoreScriptsInitializer).CoreLogger:new(script.Name)
 local StringKeyFixForParticipantsTable = game:DefineFastFlag("StringKeyFixForParticipantsTable", false)
-local ShowJoinVoiceRaceConditionFix = game:DefineFastFlag("ShowJoinVoiceRaceConditionFix", false)
 local ConsoleVoiceIXPEnabled = game:DefineFastFlag("ConsoleVoiceIXPEnabled", false)
 local FFlagExpChatDictation = require(Parent1.SharedFlags).FFlagExpChatDictation
 local ConsoleVoiceIXPLayerName = game:DefineFastString("ConsoleVoiceIXPLayerName", "User.Communication.ConsoleVoice")
@@ -52,7 +51,6 @@ local GetFFlagBatchVoiceParticipantsUpdatesModule = require(Flags.GetFFlagBatchV
 local GetFIntThrottleParticipantsUpdateMsModule = require(Flags.GetFIntThrottleParticipantsUpdateMs)
 local GetFFlagSeamlessVoiceFTUXFunction = require(Parent1.SharedFlags).GetFFlagSeamlessVoiceFTUX
 local GetFFlagEnableFtuxExitOnMuteToggleModule = require(Flags.GetFFlagEnableFtuxExitOnMuteToggle)
-local GetFFlagEnableExpJoinMicPermAnalyticsModule = require(Flags.GetFFlagEnableExpJoinMicPermAnalytics)
 local GetFFlagEnableSeamlessVoiceFeatureModule = require(Flags.GetFFlagEnableSeamlessVoiceFeature)
 local GetFFlagFixGetPlayerByUserIdStringCastModule = require(Flags.GetFFlagFixGetPlayerByUserIdStringCast)
 local FFlagDebugShowAudioDeviceInputDebugger = require(Parent1.SharedFlags).GetFFlagDebugShowAudioDeviceInputDebugger()
@@ -924,7 +922,7 @@ function config1.RawGetPermissions(p4, p5)
 end
 
 function config1:requestMicPermission()
-	-- upvalues: GetFFlagCoreMicManagerRefactorModule (copy), GetFFlagDebugVoiceChatMicPermissionCliBypassModule (copy), PERMISSIONSTATE (copy), PromiseModule (copy), NewResult (copy), PermissionsProtocol (copy), GetFFlagEnableExpJoinMicPermAnalyticsModule (copy), AnalyticsModule (copy)
+	-- upvalues: GetFFlagCoreMicManagerRefactorModule (copy), GetFFlagDebugVoiceChatMicPermissionCliBypassModule (copy), PERMISSIONSTATE (copy), PromiseModule (copy), NewResult (copy), PermissionsProtocol (copy), AnalyticsModule (copy)
 	if GetFFlagCoreMicManagerRefactorModule() then
 		return self.micManager:RequestMicPermission()
 	elseif GetFFlagDebugVoiceChatMicPermissionCliBypassModule() then
@@ -937,10 +935,9 @@ function config1:requestMicPermission()
 		return self.permissionPromise
 	else
 		self.permissionPromise = self.PermissionsService:requestPermissions({ PermissionsProtocol.Permissions.MICROPHONE_ACCESS }):andThen(function(Result)
-			-- upvalues: GetFFlagEnableExpJoinMicPermAnalyticsModule (upval), self (copy), NewResult (upval), AnalyticsModule (upval), PromiseModule (upval), PermissionsProtocol (upval)
-			if GetFFlagEnableExpJoinMicPermAnalyticsModule() then
-				self:RecordExperienceJoinMicPermissionStatus(Result)
-			end
+			-- upvalues: self (copy), NewResult (upval), AnalyticsModule (upval), PromiseModule (upval), PermissionsProtocol (upval)
+			self:RecordExperienceJoinMicPermissionStatus(Result)
+			
 			if Result or Result.status then
 				NewResult:debug("Permission status {}", Result.status)
 				local IsStatusMatch = Result.status == PermissionsProtocol.Status.AUTHORIZED
@@ -1110,13 +1107,9 @@ function config1:UserInInExperienceUpsellTreatment(): boolean
 end
 
 function config1:UserOnlyEligibleForVoice()
-	-- upvalues: ShowJoinVoiceRaceConditionFix (copy)
 	local CommunicationPermissionsResult = self.communicationPermissionsResult
 	
 	if not CommunicationPermissionsResult or not CommunicationPermissionsResult.voiceSettings or not CommunicationPermissionsResult.universePlaceVoiceEnabledSettings then
-		if not ShowJoinVoiceRaceConditionFix then
-			return false
-		end
 		self:FetchVoicePermissions()
 		CommunicationPermissionsResult = self.communicationPermissionsResult
 	end

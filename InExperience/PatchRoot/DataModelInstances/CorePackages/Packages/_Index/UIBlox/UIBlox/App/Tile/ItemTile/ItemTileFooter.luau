@@ -6,7 +6,6 @@ local FoundationModule = require(Parent1.Foundation)
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local WithStyleModule = require(Parent.Core.Style.withStyle)
 local ImagesModule = require(Parent.App.ImageSet.Images)
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local Skeleton = FoundationModule.Skeleton
 local ImageSetComponentModule = require(Parent.Core.ImageSet.ImageSetComponent)
 local ItemTileFooter = RoactModule.PureComponent:extend("ItemTileFooter")
@@ -16,13 +15,13 @@ ItemTileFooter.validateProps = TModule.strictInterface({
 })
 
 function ItemTileFooter.render(p1)
-	-- upvalues: ImagesModule (copy), WithStyleModule (copy), RoactModule (copy), Skeleton (copy), ImageSetComponentModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: ImagesModule (copy), WithStyleModule (copy), RoactModule (copy), Skeleton (copy), ImageSetComponentModule (copy), NormalizeFontFaceFunction (copy)
 	local PriceText = p1.props.priceText
 	local IsOwned = p1.props.isOwned
 	local IconsStatusItemOwned = if IsOwned then ImagesModule["icons/status/item/owned"] else ImagesModule["icons/common/robux_small"]
 	
 	return WithStyleModule(function(p2)
-		-- upvalues: IconsStatusItemOwned (ref), ImagesModule (upval), PriceText (copy), IsOwned (copy), RoactModule (upval), Skeleton (upval), ImageSetComponentModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+		-- upvalues: IconsStatusItemOwned (ref), ImagesModule (upval), PriceText (copy), IsOwned (copy), RoactModule (upval), Skeleton (upval), ImageSetComponentModule (upval), NormalizeFontFaceFunction (upval)
 		local SubHeaderFont = p2.Font.SubHeader1.Font
 		local ScaledBaseSize = p2.Font.BaseSize * p2.Font.SubHeader1.RelativeSize
 		local Theme = p2.Theme
@@ -45,8 +44,7 @@ function ItemTileFooter.render(p1)
 				AnchorPoint = Vector2.new(1, 0),
 				Position = UDim2.new(1, 0, 0, 0),
 				Size = UDim2.new(1, -NewX, 1, 0),
-				Font = if FoundationFontFaceMigration then nil else SubHeaderFont,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(SubHeaderFont) else nil,
+				FontFace = NormalizeFontFaceFunction(SubHeaderFont),
 				TextColor3 = Theme.SecondaryContent.Color,
 				TextTransparency = Theme.SecondaryContent.Transparency,
 				TextSize = ScaledBaseSize,

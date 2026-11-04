@@ -4,7 +4,7 @@ local FoundationModule = require(Parent.Foundation)
 local _ = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(script.Parent.Parent.Parent.Types)
-local SizingModule = require(script.Parent.Parent.Sizing)
+local SizingModule = require(script.Parent.Parent.Parent.Sizing)
 local FlexItem = { ItemLineAlignment = Enum.ItemLineAlignment.Start }
 
 return function(Frame)

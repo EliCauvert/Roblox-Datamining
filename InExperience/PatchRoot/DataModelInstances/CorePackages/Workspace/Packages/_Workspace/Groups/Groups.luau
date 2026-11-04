@@ -10,5 +10,9 @@ return {
 	Hooks = require(v1.Hooks),
 	Navigation = require(v1.Navigation),
 	CommunityListRouting = require(v1.CommunityListRouting),
+	getGroupSidebar = function()
+		-- upvalues: v1 (copy)
+		return require(v1.Common.GroupSidebar)
+	end,
 	["jest.config"] = script["jest.config"]
 }

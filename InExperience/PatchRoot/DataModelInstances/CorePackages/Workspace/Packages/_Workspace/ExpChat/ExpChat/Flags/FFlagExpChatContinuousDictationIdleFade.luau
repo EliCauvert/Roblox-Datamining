@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("ExpChatContinuousDictationIdleFade", false)
+﻿local FFlagExpChatContinuousListeningChatIconDot = require(script:FindFirstAncestor("ExpChat").Parent.SharedFlags).FFlagExpChatContinuousListeningChatIconDot
+
+return game:DefineFastFlag("ExpChatContinuousDictationIdleFade", false) and FFlagExpChatContinuousListeningChatIconDot

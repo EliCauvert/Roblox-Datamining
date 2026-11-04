@@ -7,7 +7,6 @@ local PageContentMode = AppPageShellModule.PageContentMode
 local PageContext = AppPageShellModule.PageContext
 local GetSduiComponentWrapperFunction = require(Parent.SduiCoreSystem).getSduiComponentWrapper
 local FFlagAppPageShellScrollToTopFocus = require(Parent.SharedFlags).FFlagAppPageShellScrollToTopFocus
-local FFlagLuaAppsDefaultSelection = require(Parent.SharedFlags).FFlagLuaAppsDefaultSelection
 local FFlagSduiPageCanvasCollectionLayout = require(Parent.SharedFlags).FFlagSduiPageCanvasCollectionLayout
 local UseComponentConfigModule = require(SduiSharedUtilities.hooks.useComponentConfig)
 local UseComponentLifecycleTimingModule = require(SduiSharedUtilities.hooks.useComponentLifecycleTiming)
@@ -16,7 +15,7 @@ local FFlagDataHydrationAccountReset = require(Parent.SharedFlags).FFlagDataHydr
 local _ = require(SduiSharedUtilities.SduiLoadTimer)
 
 local function SduiPageWholeContent(p1)
-	-- upvalues: ReactModule (copy), PageContext (copy), FFlagAppPageShellScrollToTopFocus (copy), FFlagLuaAppsDefaultSelection (copy), FFlagSduiPageCanvasCollectionLayout (copy), GetSduiComponentWrapperFunction (copy)
+	-- upvalues: ReactModule (copy), PageContext (copy), FFlagAppPageShellScrollToTopFocus (copy), FFlagSduiPageCanvasCollectionLayout (copy), GetSduiComponentWrapperFunction (copy)
 	local UseContextResult = ReactModule.useContext(PageContext)
 	local VerticalScrollingFrameRef = UseContextResult.verticalScrollingFrameRef
 	
@@ -26,27 +25,27 @@ local function SduiPageWholeContent(p1)
 		sduiContext = p1.sduiContext,
 		localAnalyticsData = p1.localAnalyticsData,
 		extraLocalProps = ReactModule.useMemo(function()
-			-- upvalues: VerticalScrollingFrameRef (copy), UseContextResult (copy), p1 (copy), FFlagAppPageShellScrollToTopFocus (upval), FFlagLuaAppsDefaultSelection (upval), FFlagSduiPageCanvasCollectionLayout (upval)
+			-- upvalues: VerticalScrollingFrameRef (copy), UseContextResult (copy), p1 (copy), FFlagAppPageShellScrollToTopFocus (upval), FFlagSduiPageCanvasCollectionLayout (upval)
 			return {
 				scrollToSelectionAnimationManagedByParent = true,
 				scrollingFrameRef = VerticalScrollingFrameRef,
 				verticalScrollingFrameRef = VerticalScrollingFrameRef,
 				scrollViewPositionChangedSignal = UseContextResult.scrollViewPositionChangedSignal,
 				refreshSignal = p1.refreshSignal,
-				defaultFocusRef = if FFlagAppPageShellScrollToTopFocus and FFlagLuaAppsDefaultSelection then p1.defaultFocusRef else nil,
+				defaultFocusRef = if FFlagAppPageShellScrollToTopFocus then p1.defaultFocusRef else nil,
 				disableCollectionLayoutStoreProvider = if FFlagSduiPageCanvasCollectionLayout then true else nil
 			}
 		end, {
 			UseContextResult,
 			p1.refreshSignal,
-			if FFlagAppPageShellScrollToTopFocus and FFlagLuaAppsDefaultSelection then p1.defaultFocusRef else nil,
+			if FFlagAppPageShellScrollToTopFocus then p1.defaultFocusRef else nil,
 			VerticalScrollingFrameRef
 		})
 	})
 end
 
 local function buildWholePageContent(Config, p1)
-	-- upvalues: ReactModule (copy), SduiPageWholeContent (copy), FFlagAppPageShellScrollToTopFocus (copy), FFlagLuaAppsDefaultSelection (copy)
+	-- upvalues: ReactModule (copy), SduiPageWholeContent (copy), FFlagAppPageShellScrollToTopFocus (copy)
 	return {
 		ReactModule.createElement(SduiPageWholeContent, {
 			config = Config,
@@ -54,7 +53,7 @@ local function buildWholePageContent(Config, p1)
 			localAnalyticsData = p1.localAnalyticsData,
 			debugName = p1.debugName,
 			refreshSignal = p1.refreshSignal,
-			defaultFocusRef = if FFlagAppPageShellScrollToTopFocus and FFlagLuaAppsDefaultSelection then p1.defaultFocusRef else nil
+			defaultFocusRef = if FFlagAppPageShellScrollToTopFocus then p1.defaultFocusRef else nil
 		})
 	}
 end

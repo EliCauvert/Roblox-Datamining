@@ -11,6 +11,8 @@ local _ = require(Foundation.Enums.InputFocusBehavior)
 local _ = require(Foundation.Enums.InputSize)
 local _ = require(Foundation.Enums.InputPlacement)
 local _ = require(Foundation.Enums.InputVariant)
+local _ = require(Foundation.Enums.StatusIndicatorShape)
+local _ = require(Foundation.Enums.StatusIndicatorVariant)
 local _ = require(Parent.React)
 
 return {}

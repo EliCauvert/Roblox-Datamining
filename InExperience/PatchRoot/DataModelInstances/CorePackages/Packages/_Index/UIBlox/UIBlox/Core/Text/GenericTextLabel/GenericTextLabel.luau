@@ -1,8 +1,6 @@
 ﻿local Parent = script.Parent.Parent.Parent.Parent
 local Parent1 = Parent.Parent
-local FoundationModule = require(Parent1.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent1.Foundation).Utility.normalizeFontFace
 local RoactModule = require(Parent1.Roact)
 local CryoModule = require(Parent1.Cryo)
 local TModule = require(Parent1.t)
@@ -25,12 +23,12 @@ GenericTextLabel.defaultProps = {
 }
 
 function GenericTextLabel.render(p1)
-	-- upvalues: WithStyleModule (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), GetTextSizeModule (copy), CryoModule (copy), RoactModule (copy), NormalizeFontFaceFunction (copy), UIBloxConfigModule (copy)
+	-- upvalues: WithStyleModule (copy), GetFontFromFontStyleModule (copy), GetTextSizeModule (copy), CryoModule (copy), RoactModule (copy), NormalizeFontFaceFunction (copy), UIBloxConfigModule (copy)
 	local Text = p1.props.Text
 	local FluidSizing = p1.props.fluidSizing
 	
 	return WithStyleModule(function(p2)
-		-- upvalues: p1 (copy), FoundationFontFaceMigration (upval), GetFontFromFontStyleModule (upval), Text (copy), GetTextSizeModule (upval), CryoModule (upval), RoactModule (upval), NormalizeFontFaceFunction (upval), FluidSizing (copy), UIBloxConfigModule (upval)
+		-- upvalues: p1 (copy), GetFontFromFontStyleModule (upval), Text (copy), GetTextSizeModule (upval), CryoModule (upval), RoactModule (upval), NormalizeFontFaceFunction (upval), FluidSizing (copy), UIBloxConfigModule (upval)
 		local FontStyle = p1.props.fontStyle
 		local ColorStyle = p1.props.colorStyle
 		local Color = ColorStyle.Color or ColorStyle.Color3
@@ -39,7 +37,7 @@ function GenericTextLabel.render(p1)
 		local BaseSize = p2.Font.BaseSize
 		local ScaledBaseSize = if FontStyle.RelativeMinSize then BaseSize * FontStyle.RelativeMinSize else FontStyle.FontSize
 		local ScaledBaseSize1 = if FontStyle.RelativeSize then BaseSize * FontStyle.RelativeSize else FontStyle.FontSize
-		local FontFromFontStyleModule = if FoundationFontFaceMigration then GetFontFromFontStyleModule(FontStyle) else FontStyle.Font
+		local FontFromFontStyleModule = GetFontFromFontStyleModule(FontStyle)
 		local Size = p1.props.Size
 		
 		if Size == nil then
@@ -60,8 +58,8 @@ function GenericTextLabel.render(p1)
 			maxSize = CryoModule.None,
 			Size = if p1.props.AutomaticSize == nil or p1.props.AutomaticSize == Enum.AutomaticSize.None then Size else nil,
 			Text = Text,
-			Font = if FoundationFontFaceMigration then CryoModule.None else FontFromFontStyleModule,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(FontFromFontStyleModule) else CryoModule.None,
+			Font = CryoModule.None,
+			FontFace = NormalizeFontFaceFunction(FontFromFontStyleModule),
 			TextSize = p1.props.TextSize or ScaledBaseSize1,
 			AutomaticSize = p1.props.AutomaticSize or nil,
 			TextColor3 = Color,

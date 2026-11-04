@@ -1,3 +1,0 @@
-﻿local FFlagAddFriendsPresenceStoreMigrationModule = require(script.Parent.FFlagAddFriendsPresenceStoreMigration)
-
-return game:DefineFastFlag("AddFriendsPageUseSections_v3", false) and FFlagAddFriendsPresenceStoreMigrationModule

@@ -2,6 +2,7 @@
 local Parent1 = Parent.Parent
 local LuaSocialLibrariesDepsModule = require(Parent1.LuaSocialLibrariesDeps)
 local ContentSharingNetworkingModule = require(Parent1.ContentSharingNetworking)
+local FFlagMomentsCaptureEndIxpEnabledModule = require(Parent.Flags.FFlagMomentsCaptureEndIxpEnabled)
 local HttpRequest = LuaSocialLibrariesDepsModule.httpRequest
 local NewResult = require(Parent1.Lumberyak).Logger.new(nil, require(Parent.Constants).LoggerKey)
 local ConfigResult = LuaSocialLibrariesDepsModule.RoduxNetworking.config({
@@ -20,7 +21,7 @@ local ConfigResult = LuaSocialLibrariesDepsModule.RoduxNetworking.config({
 
 return {
 	RoduxNetworking = ConfigResult,
-	ContentSharingNetworking = if require(Parent.Flags.FFlagCreateMomentsToast) then ContentSharingNetworkingModule.config({ roduxNetworking = ConfigResult }) else nil,
+	ContentSharingNetworking = if require(Parent.Flags.FFlagCreateMomentsToast) or FFlagMomentsCaptureEndIxpEnabledModule then ContentSharingNetworkingModule.config({ roduxNetworking = ConfigResult }) else nil,
 	ShareLinksNetworking = require(Parent1.ShareLinksNetworking).config({ roduxNetworking = ConfigResult }),
 	ShareLinksRodux = require(Parent1.ShareLinksRodux).config({ keyPath = "ShareLinks" })
 }

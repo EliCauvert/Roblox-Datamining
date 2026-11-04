@@ -44,13 +44,13 @@ local function variantsFactory(p1)
 			},
 			[InternalDrawerSideModule.End] = {
 				surface = {
-					tag = "anchor-top-right",
+					tag = "anchor-top-left",
 					anchorScaleX = 1,
 					openOffsetSign = -1,
 					hiddenOffsetSign = 1
 				},
 				innerEdge = { tag = "position-top-left anchor-top-left" },
-				shadow = { tag = "anchor-top-right" }
+				shadow = { tag = "anchor-top-left" }
 			}
 		}
 	}

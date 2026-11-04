@@ -5,7 +5,7 @@ local _ = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(script.Parent.groupMessages)
 local FormatTimestampModule = require(script.Parent.formatTimestamp)
-local SizingModule = require(script.Parent.Sizing)
+local SizingModule = require(script.Parent.Parent.Sizing)
 
 return function(p1)
 	-- upvalues: SignalsReactModule (copy), FormatTimestampModule (copy), SizingModule (copy), FoundationModule (copy), ReactModule (copy)

@@ -53,13 +53,14 @@ local TakeCaptureModule = require(Parent.Thunks.TakeCapture)
 local _ = require(Parent.Types)
 local FFlagCapturesVideoCaptureTriggerHandlerEnabledModule = require(Parent.Flags.FFlagCapturesVideoCaptureTriggerHandlerEnabled)
 local FFlagCreateMomentsToastModule = require(Parent.Flags.FFlagCreateMomentsToast)
+local FFlagMomentsCaptureEndIxpEnabledModule = require(Parent.Flags.FFlagMomentsCaptureEndIxpEnabled)
 local FFlagCapturesInExpReportMomentsCreationUIModule = require(Parent.Flags.FFlagCapturesInExpReportMomentsCreationUI)
 local FIntCapturesCoreGuiEventsPerMyriadModule = require(Parent.Flags.FIntCapturesCoreGuiEventsPerMyriad)
 local SSUIMetaLuaEngineFeature = game:GetEngineFeature("SSUIMetaLua")
 
 return {
 	createApp = function(p1)
-		-- upvalues: DashModule (copy), AnalyticsServiceModule (copy), AppStorageService (copy), CaptureService (copy), LocalizationService (copy), NotificationService (copy), Players (copy), RbxAnalyticsService (copy), RobloxReplicatedStorage (copy), StarterGui (copy), SetupFireEventModule (copy), ConstantsModule (copy), GetLocalUserIdModule (copy), InstallReducerModule (copy), NetworkingModule (copy), ScreenSizeModule (copy), ServerTypeModule (copy), MomentsCreationFlowModule (copy), RoduxModule (copy), RetrieveCapturesModule (copy), FFlagCreateMomentsToastModule (copy), CheckMomentsEligibilityModule (copy), MakeCaptureSavedHandlerModule (copy), FFlagCapturesVideoCaptureTriggerHandlerEnabledModule (copy), MakeVideoCaptureInProgressHandlerModule (copy), GetUserIdsFromStringModule (copy), CapturesActivatedModule (copy), CapturesDeactivatedModule (copy), ServerTypeDetectedModule (copy), MenuClosedModule (copy), MenuOpenedModule (copy), TakeCaptureModule (copy), FIntCapturesCoreGuiEventsPerMyriadModule (copy), EventNamesModule (copy), CapturesCoreGuiEnabledModule (copy), CapturesCoreGuiDisabledModule (copy), Signal (copy), SSUIMetaLuaEngineFeature (copy), FFlagCapturesInExpReportMomentsCreationUIModule (copy), OnViewportSizeChangedFunction (copy), ScreenSizeChangedModule (copy), OnToggleActivationModule (copy), MakeWrapWithProvidersModule (copy), CapturesPolicyModule (copy), RoactModule (copy), FFlagCapturesInExpUseMomentsCreationModule (copy), Parent1 (copy), MomentsCreationFlowClosedModule (copy), ReactModule (copy), CaptureManagerScreenModule (copy), CaptureOverlayModule (copy), CarouselScreenModule (copy), CaptureServicePromptsModule (copy), CapturesCoreUIModule (copy), CapturesPageModule (copy), MomentsCreationFlowScreenModule (copy)
+		-- upvalues: DashModule (copy), AnalyticsServiceModule (copy), AppStorageService (copy), CaptureService (copy), LocalizationService (copy), NotificationService (copy), Players (copy), RbxAnalyticsService (copy), RobloxReplicatedStorage (copy), StarterGui (copy), SetupFireEventModule (copy), ConstantsModule (copy), GetLocalUserIdModule (copy), InstallReducerModule (copy), NetworkingModule (copy), ScreenSizeModule (copy), ServerTypeModule (copy), MomentsCreationFlowModule (copy), RoduxModule (copy), RetrieveCapturesModule (copy), FFlagCreateMomentsToastModule (copy), FFlagMomentsCaptureEndIxpEnabledModule (copy), CheckMomentsEligibilityModule (copy), MakeCaptureSavedHandlerModule (copy), FFlagCapturesVideoCaptureTriggerHandlerEnabledModule (copy), MakeVideoCaptureInProgressHandlerModule (copy), GetUserIdsFromStringModule (copy), CapturesActivatedModule (copy), CapturesDeactivatedModule (copy), ServerTypeDetectedModule (copy), MenuClosedModule (copy), MenuOpenedModule (copy), TakeCaptureModule (copy), FIntCapturesCoreGuiEventsPerMyriadModule (copy), EventNamesModule (copy), CapturesCoreGuiEnabledModule (copy), CapturesCoreGuiDisabledModule (copy), Signal (copy), SSUIMetaLuaEngineFeature (copy), FFlagCapturesInExpReportMomentsCreationUIModule (copy), OnViewportSizeChangedFunction (copy), ScreenSizeChangedModule (copy), OnToggleActivationModule (copy), MakeWrapWithProvidersModule (copy), CapturesPolicyModule (copy), RoactModule (copy), FFlagCapturesInExpUseMomentsCreationModule (copy), Parent1 (copy), MomentsCreationFlowClosedModule (copy), ReactModule (copy), CaptureManagerScreenModule (copy), CaptureOverlayModule (copy), CarouselScreenModule (copy), CaptureServicePromptsModule (copy), CapturesCoreUIModule (copy), CapturesPageModule (copy), MomentsCreationFlowScreenModule (copy)
 		local config = {
 			_momentsCreationFlowDestroyingConnection = nil,
 			_momentsCreationFlowHandle = nil
@@ -99,7 +100,7 @@ return {
 		config._store = RoduxModule.Store.new(RoduxModule.combineReducers(config1), {}, { RoduxModule.thunkMiddleware })
 		config._store:dispatch(RetrieveCapturesModule())
 		
-		if FFlagCreateMomentsToastModule then
+		if FFlagCreateMomentsToastModule or FFlagMomentsCaptureEndIxpEnabledModule then
 			config._store:dispatch(CheckMomentsEligibilityModule(game.GameId))
 		end
 		JoinResult.CaptureService.CaptureSavedInternal:Connect((MakeCaptureSavedHandlerModule(config._store, JoinResult, SetupFireEventModuleResult)))

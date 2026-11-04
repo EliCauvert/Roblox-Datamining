@@ -3628,13 +3628,27 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,Noch {time}
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsBody,"Du kannst in jedem Spiel nur 1 kostenlose Testversion gleichzeitig nutzen. Versuche es erneut, nachdem deine aktuelle Testversion abgelaufen ist."
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsTitle,Eine andere kostenlose Testversion ist aktiv
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedBody,Du kannst für jeden Pass nur einmal eine kostenlose Testversion nutzen.
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedTitle,Kostenlose Testversion bereits verwendet
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedBody,"Du besitzt diesen Pass bereits, daher brauchst du keine kostenlose Testversion."
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedTitle,Du besitzt dies bereits
+Feature.InExperienceShop.Description.GamePassNotInUniverseBody,
+Feature.InExperienceShop.Description.GamePassNotInUniverseTitle,
+Feature.InExperienceShop.Description.GamePassNotPurchasableBody,Dieser Pass steht derzeit nicht zum Verkauf.
+Feature.InExperienceShop.Description.GamePassNotPurchasableTitle,Derzeit nicht zum Verkauf stehend
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledBody,Für diesen Pass gibt es derzeit keine kostenlose Testversion.
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledTitle,Keine kostenlose Testversion verfügbar
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Durch den Kauf von Robux erklärst du dich mit unseren {termsLinkStart}Nutzungsbedingungen{termsLinkEnd}, einschließlich der Schiedsklausel und der Widerrufsbelehrung, einverstanden."
 Feature.InExperienceShop.GamePass,
 Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,Bonusartikel
+Feature.InExperienceShop.Label.BuyNow,Jetzt kaufen
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Endet in {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,Kostenlose Testversion
+Feature.InExperienceShop.Label.HaveTrial,Du hast eine kostenlose Testversion
 Feature.InExperienceShop.Label.NoDescription,Keine Beschreibung
 Feature.InExperienceShop.Label.OfferEndTime,{offer} endet in {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,Dies ist eine Vorschau deines Shops in Roblox Studio. Spieler sehen diese Vorschau nicht.
@@ -3648,7 +3662,9 @@ Feature.InExperienceShop.Label.Timer.Second.Plural,{number} Sekunden
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 Sekunde
 Feature.InExperienceShop.Label.Trial,Testversion
 Feature.InExperienceShop.Label.Trialed,Getestet
+Feature.InExperienceShop.Label.TryNow,Jetzt ausprobieren
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Du hast erfolgreich {ROBUX_AMOUNT} Robux gekauft
+Feature.InExperienceShop.Tooltip.RecentlyRedeemed,Hat dir die kostenlose Testversion gefallen?
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Möchtest du diesen Artikel wirklich dauerhaft aus deinem Inventar löschen? Wenn du deine Meinung änderst, musst du ihn erneut in einer Experience verdienen."
 Feature.Item.Label.DeleteItemUndercase,Artikel löschen
 Feature.Landing.Label.PoweredBy,Unterstützt von
@@ -3832,7 +3848,6 @@ Feature.Moments.Title.GenerateTextFeedbackReason,Was ist schiefgelaufen?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Moment-Kreation verlassen?
 Feature.Moments.Title.MomentRemoved,Moment entfernt
-Feature.Moments.Title.PostInsights,Einblicke in Posts
 Feature.Moments.Title.ReportPost,Post melden
 Feature.Moments.Title.UnfollowConfirmationDialog,@{username} entfolgen?
 Feature.Moments.Tooltip.Creation,Jeder in der Experience kann deine Moments sehen.

@@ -545,7 +545,8 @@ return function(p1)
 							UseStateResult2_5(true)
 						end,
 						navigateToHomePage = p1.navigateToHomePage,
-						navigateToSquadInviteFriends = UseResult7
+						navigateToSquadInviteFriends = UseResult7,
+						openSquadVoiceAbuseReport = p1.openSquadVoiceAbuseReport
 					})
 				}),
 				RegroupRowSpacer = React.createElement(Foundation.View, {
@@ -582,7 +583,8 @@ return function(p1)
 					UseStateResult2_5(true)
 				end,
 				navigateToHomePage = p1.navigateToHomePage,
-				navigateToSquadInviteFriends = UseResult7
+				navigateToSquadInviteFriends = UseResult7,
+				openSquadVoiceAbuseReport = p1.openSquadVoiceAbuseReport
 			})
 		})
 	end, {
@@ -590,7 +592,8 @@ return function(p1)
 		UseResult, p1.navigateToHomePage, NewSQUADLOBBYACTIONBARHEIGHT, UseStateResult,
 		if UseMemoResult2 or v1 then NewXXLarge else nil, UseStateResult4,
 		UseMemoResult2_1, if UseMemoResult2_1 then NewSize else nil,
-		if UseMemoResult2_1 then Number else nil, UseVoiceStatusResult
+		if UseMemoResult2_1 then Number else nil, UseVoiceStatusResult,
+		p1.openSquadVoiceAbuseReport
 	})
 	local UseMemoResult5 = React.useMemo(function()
 		-- upvalues: React (upval), SquadLobbyActionBarModule (upval), UseSquadStateResult (copy), UseGetConversationFromIdResult (copy), p1 (copy), UseResult4 (copy), SquadId (copy)

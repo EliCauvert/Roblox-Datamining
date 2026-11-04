@@ -16,7 +16,9 @@ local FriendsListDefaultPageSize = game:DefineFastInt("FriendsListDefaultPageSiz
 local FFlagFriendSortedByPresenceSignalsImplementation = require(Parent.SharedFlags).FFlagFriendSortedByPresenceSignalsImplementation
 local UsePresenceImpressionEventsModule = require(script.Parent.usePresenceImpressionEvents)
 local UseFriendsListOrderedByIdPresenceImpressionEventsEnabled = game:DefineFastFlag("UseFriendsListOrderedByIdPresenceImpressionEventsEnabled", false)
+local FriendsListStableEmptyOnlineFriends = game:DefineFastFlag("FriendsListStableEmptyOnlineFriends", false)
 local GetResult = DataHydrationModule.Friends.FriendsStore.get()
+local Frozen = table.freeze({})
 
 local function _(p1)
 	-- upvalues: CryoModule (copy), PresenceType (copy)
@@ -28,7 +30,7 @@ local function _(p1)
 	end)
 end
 
-local function v17(MapResult, Friends)
+local function v19(MapResult, Friends)
 	-- upvalues: CryoModule (copy)
 	local Presences = {}
 	
@@ -77,7 +79,7 @@ local function bulkUpdateUserPresences(p3, List)
 end
 
 return function(p4)
-	-- upvalues: FFlagFriendSortedByPresenceSignalsImplementation (copy), UseApolloClientFunction (copy), ReactModule (copy), GetResult (copy), UseSignalStateFunction (copy), FriendsListDefaultPageSize (copy), ApolloFriendsModule (copy), UseQueryFunction (copy), Queries (copy), CryoModule (copy), FriendsCommonPresenceUpdateSignal (copy), bulkUpdateUserPresences (copy), shouldRefetchOnlineFriends (copy), v17 (copy), PresenceType (copy), UseFriendsListOrderedByIdPresenceImpressionEventsEnabled (copy), UsePresenceImpressionEventsModule (copy), DataHydrationModule (copy)
+	-- upvalues: FFlagFriendSortedByPresenceSignalsImplementation (copy), UseApolloClientFunction (copy), ReactModule (copy), GetResult (copy), UseSignalStateFunction (copy), FriendsListDefaultPageSize (copy), ApolloFriendsModule (copy), UseQueryFunction (copy), Queries (copy), CryoModule (copy), FriendsListStableEmptyOnlineFriends (copy), Frozen (copy), FriendsCommonPresenceUpdateSignal (copy), bulkUpdateUserPresences (copy), shouldRefetchOnlineFriends (copy), v19 (copy), PresenceType (copy), UseFriendsListOrderedByIdPresenceImpressionEventsEnabled (copy), UsePresenceImpressionEventsModule (copy), DataHydrationModule (copy)
 	local UseApolloClientResult = if FFlagFriendSortedByPresenceSignalsImplementation then nil else UseApolloClientFunction()
 	local UseMemoResult = if FFlagFriendSortedByPresenceSignalsImplementation then ReactModule.useMemo(function()
 		-- upvalues: GetResult (upval)
@@ -115,7 +117,7 @@ return function(p4)
 	local NextCursor = if FFlagFriendSortedByPresenceSignalsImplementation then UseSignalStateResult1 and UseSignalStateResult1.nextCursor or nil elseif UseQueryResult.data then UseQueryResult.data.allFriendsByUserId.nextCursor else nil
 	local Friends = if FFlagFriendSortedByPresenceSignalsImplementation then UseSignalStateResult1 and UseSignalStateResult1.friends or nil elseif UseQueryResult.data then UseQueryResult.data.allFriendsByUserId.friends else nil
 	local HasMore = FFlagFriendSortedByPresenceSignalsImplementation and (UseSignalStateResult1 and UseSignalStateResult1.hasMore) or nil
-	local UseSignalStateResult3 = if FFlagFriendSortedByPresenceSignalsImplementation then UseSignalStateResult or {} else UseQueryResult1.data and UseQueryResult1.data.onlineFriendsByUserId or {}
+	local UseSignalStateResult3 = if FFlagFriendSortedByPresenceSignalsImplementation then UseSignalStateResult or (if FriendsListStableEmptyOnlineFriends then Frozen else {}) else UseQueryResult1.data and UseQueryResult1.data.onlineFriendsByUserId or {}
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FFlagFriendSortedByPresenceSignalsImplementation (upval), HasMore (copy), NextCursor (copy), UseQueryResult (copy), GetResult (upval), PageSize (copy), UseRefResult1 (copy), UseRefResult (copy)
 		if FFlagFriendSortedByPresenceSignalsImplementation then
@@ -179,8 +181,8 @@ return function(p4)
 		end, {})
 	end
 	local UseMemoResult3, UseMemoResult21 = ReactModule.useMemo(function()
-		-- upvalues: v17 (upval), UseSignalStateResult3 (copy), CryoModule (upval), PresenceType (upval), Friends (copy)
-		return v17(CryoModule.List.map(UseSignalStateResult3, function(p5)
+		-- upvalues: v19 (upval), UseSignalStateResult3 (copy), CryoModule (upval), PresenceType (upval), Friends (copy)
+		return v19(CryoModule.List.map(UseSignalStateResult3, function(p5)
 			-- upvalues: PresenceType (upval), CryoModule (upval)
 			return if p5.presence and p5.presence.userPresenceType == PresenceType.InGame and p5.presence.universeId == "" then CryoModule.Dictionary.join(p5, {
 				presence = CryoModule.Dictionary.join(p5.presence, { userPresenceType = PresenceType.Online })

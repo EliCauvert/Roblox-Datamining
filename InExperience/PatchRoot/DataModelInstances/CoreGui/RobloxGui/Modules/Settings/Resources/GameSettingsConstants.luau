@@ -5,6 +5,7 @@ local GetFFlagEnablePlayerNamesEnabledSettingModule = require(Modules.Settings.F
 local FFlagBadgeVisibilitySettingEnabled = require(CorePackages.Workspace.Packages.SharedFlags).FFlagBadgeVisibilitySettingEnabled
 local FFlagIEMSettingsGroupsModule = require(Modules.Settings.Flags.FFlagIEMSettingsGroups)
 local RUUserScalePreferenceAPIEngineFeature = game:GetEngineFeature("RUUserScalePreferenceAPI")
+local FFlagUIScaleEngineOptions = require(CorePackages.Workspace.Packages.SharedFlags).FFlagUIScaleEngineOptions
 local FFlagAIRephraseSettingEnabled = require(CorePackages.Workspace.Packages.SharedFlags).FFlagAIRephraseSettingEnabled
 local UpdateRephraseSettingUI = game:DefineFastFlag("UpdateRephraseSettingUI", false)
 local FFlagChatSummariesSettingEnabled = require(CorePackages.Workspace.Packages.SharedFlags).FFlagChatSummariesSettingEnabled
@@ -76,8 +77,8 @@ config.FullScreenFrame = 70
 config.GraphicsEnablerFrame = 71
 config.GraphicsQualityFrame = 72
 config.ReducedMotionFrame = 73
-config.PreferredTransparencyFrame = 74
-config.PreferredTextSizeFrame = 75
+config.PreferredTransparencyFrame = if FFlagUIScaleEngineOptions then 77 else 74
+config.PreferredTextSizeFrame = if FFlagUIScaleEngineOptions then 76 else 75
 
 if RUUserScalePreferenceAPIEngineFeature then
 	config.UIScaleModeFrame = 76
@@ -85,6 +86,10 @@ if RUUserScalePreferenceAPIEngineFeature then
 	config.UiNavigationKeyBindEnabledFrame = 78
 else
 	config.UiNavigationKeyBindEnabledFrame = 76
+end
+if FFlagUIScaleEngineOptions then
+	config.UIScaleEngineModeFrame = 74
+	config.UIScaleEngineFrame = 75
 end
 config.PerformanceStatsFrame = 80
 config.MicroProfilerFrame = 81
@@ -144,6 +149,8 @@ if FFlagIEMSettingsGroupsModule then
 		DisplayHeader = NextOrder(),
 		OverscanAdjustButton = NextOrder(),
 		FullScreenFrame = NextOrder(),
+		UIScaleEngineModeFrame = if FFlagUIScaleEngineOptions then NextOrder() else nil,
+		UIScaleEngineFrame = if FFlagUIScaleEngineOptions then NextOrder() else nil,
 		PreferredTransparencyFrame = NextOrder(),
 		PreferredTextSizeFrame = NextOrder(),
 		UIScaleModeFrame = if RUUserScalePreferenceAPIEngineFeature then NextOrder() else nil,
@@ -182,6 +189,12 @@ if FFlagIEMSettingsGroupsModule then
 		FreecamToggleRow = NextOrder(),
 		InformationFrame = NextOrder()
 	}
+	
+	if FFlagUIScaleEngineOptions then
+		local PreferredTextSizeFrame = v1.PreferredTextSizeFrame
+		v1.PreferredTextSizeFrame = v1.PreferredTransparencyFrame
+		v1.PreferredTransparencyFrame = PreferredTextSizeFrame
+	end
 end
 local function _()
 	-- upvalues: FFlagIEMSettingsGroupsModule (copy), v1 (ref), config (copy)

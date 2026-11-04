@@ -5,9 +5,7 @@ local IXPServiceWrapper = require(Parent.IXPServiceWrapper).IXPServiceWrapper
 local ReactModule = require(Parent.React)
 local CryoModule = require(Parent.Cryo)
 local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
-local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 local UseGetFriendsCountByUserIdFunction = require(Parent.FriendsHydrationReact).useGetFriendsCountByUserId
-local GetDeepValueFunction = DependenciesModule.SocialLibraries.Dictionary.getDeepValue
 local GetRbxthumbWithTypeSizeAndOptionsFunction = DependenciesModule.getRbxthumbWithTypeSizeAndOptions
 local UserLibConstants = DependenciesModule.UserLibConstants
 local FriendsLandingPageModule = require(FriendsLanding.Components.FriendsLandingPage)
@@ -22,7 +20,6 @@ local FilterStatesModule = require(FriendsLanding.Friends.filterStates)
 local FFlagFriendsLandingLayerExposureModule = require(FriendsLanding.Flags.FFlagFriendsLandingLayerExposure)
 local AppUserLayers = require(Parent.ExperimentLayers).AppUserLayers
 local FFlagConnectionManagementChips = require(Parent.SharedFlags).FFlagConnectionManagementChips
-local FFlagFriendsCountDataHydrationMigrationEnabled = require(Parent.SharedFlags).FFlagFriendsCountDataHydrationMigrationEnabled
 local FFlagFriendsPageUserListCtaEnabledModule = require(FriendsLanding.Flags.FFlagFriendsPageUserListCtaEnabled)
 local EntityType = if FFlagFriendsPageUserListCtaEnabledModule then require(Parent.UserList).Enums.EntityType else nil
 local FriendsLandingPageSize = game:DefineFastInt("FriendsLandingPageSize", 50)
@@ -35,7 +32,7 @@ local config1 = {
 }
 
 function FriendsLandingContainer(_)
-	-- upvalues: ReactModule (copy), IXPServiceWrapper (copy), AppUserLayers (copy), FFlagFriendsLandingLayerExposureModule (copy), UseLocalUserIdFunction (copy), FFlagFriendsCountDataHydrationMigrationEnabled (copy), UseGetFriendsCountByUserIdFunction (copy), config (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), UseAppPolicyFunction (copy), FriendsLandingContextModule (copy), UseFriendsListOrderedByPresenceFunction (copy), FriendsLandingPageSize (copy), FFlagConnectionManagementChips (copy), UseDecoratedTrustedConnectionsFunction (copy), FilterStatesModule (copy), CryoModule (copy), PresenceType1 (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), UserLibConstants (copy), config1 (copy), PresenceType (copy), FFlagFriendsPageUserListCtaEnabledModule (copy), EntityType (copy), FriendsLandingPageModule (copy)
+	-- upvalues: ReactModule (copy), IXPServiceWrapper (copy), AppUserLayers (copy), FFlagFriendsLandingLayerExposureModule (copy), UseLocalUserIdFunction (copy), UseGetFriendsCountByUserIdFunction (copy), config (copy), UseAppPolicyFunction (copy), FriendsLandingContextModule (copy), UseFriendsListOrderedByPresenceFunction (copy), FriendsLandingPageSize (copy), FFlagConnectionManagementChips (copy), UseDecoratedTrustedConnectionsFunction (copy), FilterStatesModule (copy), CryoModule (copy), PresenceType1 (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), UserLibConstants (copy), config1 (copy), PresenceType (copy), FFlagFriendsPageUserListCtaEnabledModule (copy), EntityType (copy), FriendsLandingPageModule (copy)
 	ReactModule.useEffect(function()
 		-- upvalues: IXPServiceWrapper (upval), AppUserLayers (upval), FFlagFriendsLandingLayerExposureModule (upval)
 		IXPServiceWrapper:LogFlagLinkedUserLayerExposure(AppUserLayers.ConnectionsHubExposureLayer)
@@ -45,6 +42,7 @@ function FriendsLandingContainer(_)
 		end
 	end, {})
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
+	local UseGetFriendsCountByUserIdResult = UseGetFriendsCountByUserIdFunction(if UseLocalUserIdResult then tostring(UseLocalUserIdResult) else nil, config) or 0
 	local UseAppPolicyResult = UseAppPolicyFunction(function(p1)
 		return p1.getShowDisplayName()
 	end)
@@ -104,10 +102,7 @@ function FriendsLandingContainer(_)
 	end, { UseMemoResult })
 	
 	return ReactModule.createElement(FriendsLandingPageModule, {
-		totalFriendCount = if FFlagFriendsCountDataHydrationMigrationEnabled then UseGetFriendsCountByUserIdFunction(if UseLocalUserIdResult then tostring(UseLocalUserIdResult) else nil, config) or 0 else UseSelectorFunction(function(p1)
-			-- upvalues: GetDeepValueFunction (upval), UseLocalUserIdResult (copy)
-			return GetDeepValueFunction(p1, `FriendsLanding.Friends.countsByUserId.{UseLocalUserIdResult}`)
-		end),
+		totalFriendCount = UseGetFriendsCountByUserIdResult,
 		friends = if FFlagConnectionManagementChips then UseMemoResult1 or {} else UseMemoResult1,
 		fetchMoreFriends = if UseFriendsListOrderedByPresenceResult and not UseFriendsListOrderedByPresenceResult.isEndOfList then UseFriendsListOrderedByPresenceResult.fetchMoreFriends else nil,
 		refreshFriends = UseFriendsListOrderedByPresenceResult.refreshFriendsData,

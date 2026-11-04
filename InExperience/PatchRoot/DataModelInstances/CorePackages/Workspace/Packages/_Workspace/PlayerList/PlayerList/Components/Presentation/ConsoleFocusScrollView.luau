@@ -10,7 +10,7 @@ local ScrollView = require(Parent1.Foundation).ScrollView
 local PlayerListVisibilityStoreModule = require(Parent.Common.PlayerListVisibilityStore)
 local PlayerContextualMenuStoreModule = require(Parent.Common.PlayerContextualMenuStore)
 local TeamListViewModule = require(Parent.Components.Presentation.TeamListView)
-local UseGamepadStickScrollModule = require(Parent.Hooks.useGamepadStickScroll)
+local UseGamepadStickScrollFunction = require(Parent1.CoreGuiCommon).Hooks.useGamepadStickScroll
 
 local function _(): boolean
 	-- upvalues: UserInputService (copy)
@@ -18,7 +18,7 @@ local function _(): boolean
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), SignalsReactModule (copy), PlayerListVisibilityStoreModule (copy), PlayerContextualMenuStoreModule (copy), UserInputService (copy), UseGamepadStickScrollModule (copy), GuiService (copy), ContextActionService (copy), TeamListViewModule (copy), ScrollView (copy)
+	-- upvalues: ReactModule (copy), SignalsReactModule (copy), PlayerListVisibilityStoreModule (copy), PlayerContextualMenuStoreModule (copy), UserInputService (copy), UseGamepadStickScrollFunction (copy), GuiService (copy), ContextActionService (copy), TeamListViewModule (copy), ScrollView (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(PlayerListVisibilityStoreModule.getEffectiveVisible)
@@ -26,7 +26,8 @@ return function(p1)
 	local NoHasUseSignalStateResult: boolean = UseSignalStateResult and not HasUseSignalStateResult
 	local AllTeams = p1.allTeams
 	local HasGamepad = if p1.isGamepadOverride == nil then UserInputService:GetLastInputType().Name:find("Gamepad") ~= nil else p1.isGamepadOverride
-	UseGamepadStickScrollModule({
+	UseGamepadStickScrollFunction({
+		actionName = "RbxPlayerListReskinGamepadStickScroll",
 		scrollingFrameRef = UseRefResult1,
 		enabled = NoHasUseSignalStateResult
 	})

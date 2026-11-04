@@ -339,7 +339,7 @@ local config1 = {
 }
 local v7 = nil
 local Config = nil
-local v8 = nil
+local config6 = nil
 local Result2_1 = nil
 local Success1, Result2 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserShowGuiHideToggles")
@@ -435,10 +435,10 @@ local PostEffect, PostEffect2 = (function(ClassName, Callback)
 end)("PostEffect", function(p1): boolean
 	return p1.Name:sub(1, 7) == "Freecam"
 end)
-local v9 = nil
+local v8 = nil
 
 local function doToggleMasterEffects()
-	-- upvalues: Inverted (ref), PostEffect (copy), PostEffect2 (copy), v9 (ref)
+	-- upvalues: Inverted (ref), PostEffect (copy), PostEffect2 (copy), v8 (ref)
 	Inverted = not Inverted
 	
 	if Inverted then
@@ -448,7 +448,7 @@ local function doToggleMasterEffects()
 	end
 	PostEffect2()
 	
-	for _, value in ipairs(v9) do
+	for _, value in ipairs(v8) do
 		local GetResult = value.get()
 		
 		if GetResult then
@@ -460,64 +460,64 @@ end
 local function doToggleDoF()
 	-- upvalues: Result3_1 (ref), Inverted (ref), v1 (ref)
 	if Result3_1 and not Inverted then return end
-	local v10 = v1
+	local v9 = v1
 	
-	if v10 then
-		v10.Enabled = not v10.Enabled
+	if v9 then
+		v9.Enabled = not v9.Enabled
 	end
 end
 
 local function doToggleBloom()
 	-- upvalues: Result3_1 (ref), Inverted (ref), v2 (ref)
 	if Result3_1 and not Inverted then return end
-	local v10 = v2
+	local v9 = v2
 	
-	if v10 then
-		v10.Enabled = not v10.Enabled
+	if v9 then
+		v9.Enabled = not v9.Enabled
 	end
 end
 
 local function doToggleBlur()
 	-- upvalues: Result3_1 (ref), Inverted (ref), v3 (ref)
 	if Result3_1 and not Inverted then return end
-	local v10 = v3
+	local v9 = v3
 	
-	if v10 then
-		v10.Enabled = not v10.Enabled
+	if v9 then
+		v9.Enabled = not v9.Enabled
 	end
 end
 
 local function doToggleColorCorrection()
 	-- upvalues: Result3_1 (ref), Inverted (ref), v4 (ref)
 	if Result3_1 and not Inverted then return end
-	local v10 = v4
+	local v9 = v4
 	
-	if v10 then
-		v10.Enabled = not v10.Enabled
+	if v9 then
+		v9.Enabled = not v9.Enabled
 	end
 end
 
 local function doToggleSunRays()
 	-- upvalues: Result3_1 (ref), Inverted (ref), v5 (ref)
 	if Result3_1 and not Inverted then return end
-	local v10 = v5
+	local v9 = v5
 	
-	if v10 then
-		v10.Enabled = not v10.Enabled
+	if v9 then
+		v9.Enabled = not v9.Enabled
 	end
 end
 
 local function doToggleColorGrading()
 	-- upvalues: Result3_1 (ref), Inverted (ref), v6 (ref)
 	if Result3_1 and not Inverted then return end
-	local v10 = v6
+	local v9 = v6
 	
-	if v10 then
-		v10.Enabled = not v10.Enabled
+	if v9 then
+		v9.Enabled = not v9.Enabled
 	end
 end
 
-v9 = {
+v8 = {
 	{
 		key = "DepthOfField",
 		class = "DepthOfFieldEffect",
@@ -671,7 +671,7 @@ local config3 = { movement = 1, pan = 1, fov = 1, roll = 1 }
 local Flag = false
 local Reset = nil
 local Flag1 = false
-local v10 = 1
+local v9 = 1
 local List1 = {}
 local Flag2 = false
 local Flag3 = false
@@ -1117,11 +1117,11 @@ local _modes = {
 				type = "toggle",
 				name = "Screen GUIs",
 				toggle = function()
-					-- upvalues: Inverted2 (ref), v8 (ref), Freecam (ref)
+					-- upvalues: Inverted2 (ref), config6 (ref), Freecam (ref)
 					Inverted2 = not Inverted2
 					
-					if v8 then
-						for _, value in pairs(v8.getScreenGuis()) do
+					if config6 then
+						for _, value in pairs(config6.getScreenGuis()) do
 							if value.Parent and value ~= Freecam then
 								value.Enabled = Inverted2
 							end
@@ -1159,22 +1159,22 @@ if Result6_1 then
 		_modes[4], _modes[7], _modes[6], _modes[5], _modes[1], _modes[2], _modes[3]
 	}
 end
-local Callback: ((any) -> any)? = nil
-local Callback1: ((any, number, any) -> number)? = nil
+local isDisabled: ((any) -> any)? = nil
+local nextEnabledIndex: ((any, number, any) -> number)? = nil
 
 if Result3_1 then
-	Callback = function(Mode)
+	isDisabled = function(Mode)
 		return Mode.disabled and Mode.disabled()
 	end
 	
-	Callback1 = function(Modes, Index: number, p4): number
-		-- upvalues: Callback (ref)
+	nextEnabledIndex = function(Modes, Index: number, p4): number
+		-- upvalues: isDisabled (ref)
 		local CountModes = #Modes
 		
 		for _ = 1, CountModes do
 			Index = (Index - 1 + p4) % CountModes + 1
 			
-			if not Callback(Modes[Index]) then
+			if not isDisabled(Modes[Index]) then
 				return Index
 			end
 		end
@@ -1182,13 +1182,13 @@ if Result3_1 then
 	end
 end
 local function _()
-	-- upvalues: List1 (ref), _modes (ref), v10 (ref)
+	-- upvalues: List1 (ref), _modes (ref), v9 (ref)
 	if #List1 > 0 then
 		local Entry = List1[#List1]
 		
 		return Entry.modes[Entry.index]
 	else
-		return _modes[v10]
+		return _modes[v9]
 	end
 end
 
@@ -1241,34 +1241,34 @@ local function createAction(InputContext, Fov)
 end
 
 local _ = function(p4, p5, p6)
-	local v11 = nil
-	local v12 = 0
+	local v10 = nil
+	local v11 = 0
 	
 	return function(Value: number)
-		-- upvalues: v11 (ref), p4 (copy), v12 (ref), p5 (copy), p6 (copy)
+		-- upvalues: v10 (ref), p4 (copy), v11 (ref), p5 (copy), p6 (copy)
 		if math.abs(Value) > 0.01 then
 			local ClockTime = os.clock()
 			
-			if v11 == nil or ClockTime - v11 > p4 then
-				v11 = ClockTime
+			if v10 == nil or ClockTime - v10 > p4 then
+				v10 = ClockTime
 			else
-				if p5 <= ClockTime - v12 then
+				if p5 <= ClockTime - v11 then
 					p6()
-					v12 = ClockTime
+					v11 = ClockTime
 				end
-				v11 = nil
+				v10 = nil
 				
 				return
 			end
 		end
 	end, function()
-		-- upvalues: v11 (ref)
-		v11 = nil
+		-- upvalues: v10 (ref)
+		v10 = nil
 	end
 end
 
 ;(function()
-	-- upvalues: config (copy), Result7_1 (ref), StarterPlayer (copy), Humanoid (ref), createAction (copy), t (copy), t1 (copy), Reset (ref), _Vector3_1 (ref), NewModule3 (copy), Flag (ref), Result3_1 (ref), Flag1 (ref), Flag3 (ref), List1 (ref), Callback1 (ref), _modes (ref), v10 (ref), Flag2 (ref), Callback (ref)
+	-- upvalues: config (copy), Result7_1 (ref), StarterPlayer (copy), Humanoid (ref), createAction (copy), t (copy), t1 (copy), Reset (ref), _Vector3_1 (ref), NewModule3 (copy), Flag (ref), Result3_1 (ref), Flag1 (ref), Flag3 (ref), List1 (ref), nextEnabledIndex (ref), _modes (ref), v9 (ref), Flag2 (ref), isDisabled (ref)
 	local Actions = config.Actions
 	local Folder = nil
 	
@@ -1309,34 +1309,34 @@ end
 	local Threshold = config.DoubleTap.Threshold
 	local Debounce = config.DoubleTap.Debounce
 	
-	local function v188()
+	local function v189()
 		-- upvalues: _Vector3_1 (upval), NewModule3 (upval), Flag (upval)
 		_Vector3_1 = Vector3.new(_Vector3_1.x, _Vector3_1.y, 0)
 		NewModule3:Reset(0)
 		Flag = true
 	end
 	
-	local v11 = nil
-	local v12 = 0
+	local v10 = nil
+	local v11 = 0
 	
 	Reset = function()
-		-- upvalues: v11 (ref)
-		v11 = nil
+		-- upvalues: v10 (ref)
+		v10 = nil
 	end
 	
 	detect = function(Value: number)
-		-- upvalues: v11 (ref), Threshold (copy), v12 (ref), Debounce (copy), v188 (copy)
+		-- upvalues: v10 (ref), Threshold (copy), v11 (ref), Debounce (copy), v189 (copy)
 		if math.abs(Value) > 0.01 then
 			local ClockTime = os.clock()
 			
-			if v11 == nil or ClockTime - v11 > Threshold then
-				v11 = ClockTime
+			if v10 == nil or ClockTime - v10 > Threshold then
+				v10 = ClockTime
 			else
-				if Debounce <= ClockTime - v12 then
-					v188()
-					v12 = ClockTime
+				if Debounce <= ClockTime - v11 then
+					v189()
+					v11 = ClockTime
 				end
-				v11 = nil
+				v10 = nil
 				
 				return
 			end
@@ -1355,7 +1355,7 @@ end
 		end
 	end)
 	createAction(FreecamInputContext, Actions.ModeToggle).StateChanged:Connect(function(OldState)
-		-- upvalues: Result3_1 (upval), Flag1 (upval), Flag3 (upval), List1 (upval), Callback1 (upval), _modes (upval), v10 (upval), Flag2 (upval)
+		-- upvalues: Result3_1 (upval), Flag1 (upval), Flag3 (upval), List1 (upval), nextEnabledIndex (upval), _modes (upval), v9 (upval), Flag2 (upval)
 		if not OldState then return end
 		if Result3_1 then
 			if not Flag1 then
@@ -1370,10 +1370,10 @@ end
 			end
 			if #List1 > 0 then
 				local Entry = List1[#List1]
-				local CallbackResult = Callback1(Entry.modes, Entry.index, -1)
+				local NextEnabledIndexResult = nextEnabledIndex(Entry.modes, Entry.index, -1)
 				
-				if CallbackResult < Entry.index then
-					Entry.index = CallbackResult
+				if NextEnabledIndexResult < Entry.index then
+					Entry.index = NextEnabledIndexResult
 					
 					return
 				else
@@ -1382,10 +1382,10 @@ end
 					return
 				end
 			else
-				local CallbackResult1 = Callback1(_modes, v10, -1)
+				local NextEnabledIndexResult1 = nextEnabledIndex(_modes, v9, -1)
 				
-				if CallbackResult1 < v10 then
-					v10 = CallbackResult1
+				if NextEnabledIndexResult1 < v9 then
+					v9 = NextEnabledIndexResult1
 					
 					return
 				else
@@ -1414,7 +1414,7 @@ end
 		end
 	end)
 	createAction(FreecamInputContext, Actions.ModeNext).StateChanged:Connect(function(OldState)
-		-- upvalues: Result3_1 (upval), Flag1 (upval), Flag3 (upval), List1 (upval), Callback1 (upval), v10 (upval), _modes (upval), Flag2 (upval)
+		-- upvalues: Result3_1 (upval), Flag1 (upval), Flag3 (upval), List1 (upval), nextEnabledIndex (upval), v9 (upval), _modes (upval), Flag2 (upval)
 		if not OldState then return end
 		if Result3_1 then
 			if not Flag1 then
@@ -1429,11 +1429,11 @@ end
 			end
 			if #List1 > 0 then
 				local Entry = List1[#List1]
-				Entry.index = Callback1(Entry.modes, Entry.index, 1)
+				Entry.index = nextEnabledIndex(Entry.modes, Entry.index, 1)
 				
 				return
 			else
-				v10 = Callback1(_modes, v10, 1)
+				v9 = nextEnabledIndex(_modes, v9, 1)
 				
 				return
 			end
@@ -1445,7 +1445,7 @@ end
 			
 			return
 		end
-		local Mode = _modes[v10]
+		local Mode = _modes[v9]
 		
 		if Mode.type == "group" then
 			table.insert(List1, { index = 1, modes = Mode.modes, groupName = Mode.name })
@@ -1477,7 +1477,7 @@ end
 	end)
 	local Action1 = createAction(FreecamInputContext, Actions.ModeAxis)
 	Action1.StateChanged:Connect(function(OldState: number)
-		-- upvalues: Flag1 (upval), Result3_1 (upval), List1 (upval), _modes (upval), v10 (upval), Flag3 (upval), Callback (upval), Flag2 (upval)
+		-- upvalues: Flag1 (upval), Result3_1 (upval), List1 (upval), _modes (upval), v9 (upval), Flag3 (upval), isDisabled (upval), Flag2 (upval)
 		if not Flag1 or OldState == 0 then return end
 		if Result3_1 then
 			local Mode = nil
@@ -1485,7 +1485,7 @@ end
 				local Entry = List1[#List1]
 				Mode = Entry.modes[Entry.index]
 			else
-				Mode = _modes[v10]
+				Mode = _modes[v9]
 			end
 			if Flag3 then
 				if Mode.type == "toggle" then
@@ -1515,7 +1515,7 @@ end
 					if Mode.type == "axis" then return end
 				end
 			elseif OldState > 0 then
-				if Callback(Mode) then return end
+				if isDisabled(Mode) then return end
 				if Mode.type == "group" then
 					table.insert(List1, { index = 1, modes = Mode.modes, groupName = Mode.name })
 					
@@ -1551,7 +1551,7 @@ end
 					local Entry = List1[#List1]
 					Mode = Entry.modes[Entry.index]
 				else
-					Mode = _modes[v10]
+					Mode = _modes[v9]
 				end
 				if Mode.type == "group" then
 					table.insert(List1, { index = 1, modes = Mode.modes, groupName = Mode.name })
@@ -1583,12 +1583,12 @@ end
 					return
 				end
 			elseif OldState > 0 then
-				v10 = v10 % #_modes + 1
+				v9 = v9 % #_modes + 1
 				
 				return
 			else
 				if OldState < 0 then
-					v10 = (v10 - 2) % #_modes + 1
+					v9 = (v9 - 2) % #_modes + 1
 				end
 			end
 		end
@@ -1621,7 +1621,7 @@ function t.Roll()
 end
 
 function t.ModeControl(p4)
-	-- upvalues: Flag1 (ref), Result3_1 (ref), Flag3 (ref), List1 (ref), Flag2 (ref), _modes (ref), v10 (ref), t1 (copy), ClampFunction (copy)
+	-- upvalues: Flag1 (ref), Result3_1 (ref), Flag3 (ref), List1 (ref), Flag2 (ref), _modes (ref), v9 (ref), t1 (copy), ClampFunction (copy)
 	if not Flag1 then return end
 	if Result3_1 then
 		if not Flag3 then return end
@@ -1631,7 +1631,7 @@ function t.ModeControl(p4)
 		local Entry = List1[#List1]
 		Mode = Entry.modes[Entry.index]
 	else
-		Mode = _modes[v10]
+		Mode = _modes[v9]
 	end
 	if Mode.type ~= "axis" then return end
 	local ScaledState = t1.ModeAxis:GetState() * Mode.adj * p4
@@ -1671,13 +1671,13 @@ function t.getModeActive()
 end
 
 function t.getModeName()
-	-- upvalues: List1 (ref), _modes (ref), v10 (ref)
+	-- upvalues: List1 (ref), _modes (ref), v9 (ref)
 	local Mode = nil
 	if #List1 > 0 then
 		local Entry = List1[#List1]
 		Mode = Entry.modes[Entry.index]
 	else
-		Mode = _modes[v10]
+		Mode = _modes[v9]
 	end
 	return Mode.name
 end
@@ -1696,13 +1696,13 @@ function t.getModeBreadcrumb(): string
 end
 
 function t.getModeDisplay()
-	-- upvalues: List1 (ref), _modes (ref), v10 (ref), Result5_1 (ref)
+	-- upvalues: List1 (ref), _modes (ref), v9 (ref), Result5_1 (ref)
 	local Mode = nil
 	if #List1 > 0 then
 		local Entry = List1[#List1]
 		Mode = Entry.modes[Entry.index]
 	else
-		Mode = _modes[v10]
+		Mode = _modes[v9]
 	end
 	if Mode.type == "group" then
 		return ""
@@ -1726,8 +1726,8 @@ function t.getModeDisplay()
 end
 
 function t.getModeHint()
-	-- upvalues: _modes (ref), v10 (ref), List1 (ref), Flag2 (ref)
-	local Mode = _modes[v10]
+	-- upvalues: _modes (ref), v9 (ref), List1 (ref), Flag2 (ref)
+	local Mode = _modes[v9]
 	
 	local function _(p4)
 		return if p4 == "axis" then "Hold to adjust" elseif p4 == "toggle" then "Tap to flip" elseif p4 == "cycle" then "Tap to cycle" elseif p4 == "action" then "Tap to fire" elseif p4 == "group" then "Enter" else nil
@@ -1742,7 +1742,7 @@ function t.getModeHint()
 			local Entry1 = List1[#List1]
 			Mode1 = Entry1.modes[Entry1.index]
 		else
-			Mode1 = _modes[v10]
+			Mode1 = _modes[v9]
 		end
 		local Type = Mode1.type
 		local HoldToAdjust = if Type == "axis" then "Hold to adjust" elseif Type == "toggle" then "Tap to flip" elseif Type == "cycle" then "Tap to cycle" elseif Type == "action" then "Tap to fire" elseif Type == "group" then "Enter" else nil
@@ -1764,7 +1764,7 @@ function t.getModeHint()
 		
 		return {
 			nav = "[↑] Close  [↓] " .. (if Type == "group" then "Enter" elseif Type == "toggle" then "Flip" elseif Type == "cycle" then "Cycle" elseif Type == "action" then "Fire" elseif Type == "axis" then "Adjust" else "Select"),
-			action = "[←] " .. _modes[(v10 - 2) % #_modes + 1].name .. "  [→] " .. _modes[v10 % #_modes + 1].name
+			action = "[←] " .. _modes[(v9 - 2) % #_modes + 1].name .. "  [→] " .. _modes[v9 % #_modes + 1].name
 		}
 	end
 end
@@ -1784,8 +1784,8 @@ if Result3_1 then
 	t._modes = _modes
 	
 	function t._getModeIndex()
-		-- upvalues: v10 (ref)
-		return v10
+		-- upvalues: v9 (ref)
+		return v9
 	end
 	
 	function t._isMonitorItemSelected()
@@ -1872,19 +1872,19 @@ local _ = function(p4, Text)
 end
 
 local Config1 = nil
-local T = nil
-local v11 = nil
-local Callback3: ((any) -> ())? = nil
+local t2 = nil
+local v10 = nil
+local v11: ((any) -> ())? = nil
 local v12 = nil
 local v13 = nil
-local Callback2: (() -> ())? = nil
+local v14: (() -> ())? = nil
 
 if Result3_1 then
-	T = {}
-	v11 = 12
+	t2 = {}
+	v10 = 12
 	
-	Callback3 = function(Parent)
-		-- upvalues: T (ref), v11 (ref), Config1 (ref)
+	v11 = function(Parent)
+		-- upvalues: t2 (ref), v10 (ref), Config1 (ref)
 		local FreecamMonitorPanel = Instance.new("Frame")
 		FreecamMonitorPanel.Name = "FreecamMonitorPanel"
 		FreecamMonitorPanel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -1920,9 +1920,9 @@ if Result3_1 then
 		Breadcrumb.LayoutOrder = 0
 		Breadcrumb.Visible = false
 		Breadcrumb.Parent = FreecamMonitorPanel
-		T = {}
+		t2 = {}
 		
-		for i = 1, v11 do
+		for i = 1, v10 do
 			local Frame = Instance.new("Frame")
 			Frame.Name = "Row" .. i
 			Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -1959,7 +1959,7 @@ if Result3_1 then
 			Value.Position = UDim2.new(0.55, 0, 0, 0)
 			Value.Parent = Frame
 			Frame.Parent = FreecamMonitorPanel
-			T[i] = { frame = Frame, nameLabel = Name, valueLabel = Value }
+			t2[i] = { frame = Frame, nameLabel = Name, valueLabel = Value }
 		end
 		local Hint = Instance.new("TextLabel")
 		Hint.Name = "Hint"
@@ -1969,7 +1969,7 @@ if Result3_1 then
 		Hint.TextSize = 12
 		Hint.TextXAlignment = Enum.TextXAlignment.Left
 		Hint.Size = UDim2.new(1, 0, 0, 20)
-		Hint.LayoutOrder = v11 + 1
+		Hint.LayoutOrder = v10 + 1
 		Hint.Parent = FreecamMonitorPanel
 		FreecamMonitorPanel.Parent = Parent
 		Config1 = {
@@ -2006,8 +2006,8 @@ if Result3_1 then
 		return if p4.type == "toggle" then if p4.isEnabled() then Color3.fromRGB(0, 176, 111) else Color3.fromRGB(150, 150, 150) elseif p5 and IsMonitorItemSelected then Color3.new(1, 1, 1) else Color3.fromRGB(180, 180, 180)
 	end
 	
-	Callback2 = function()
-		-- upvalues: Config1 (ref), t (copy), v11 (ref), T (ref), v12 (ref), v13 (ref), Result6_1 (ref)
+	v14 = function()
+		-- upvalues: Config1 (ref), t (copy), v10 (ref), t2 (ref), v12 (ref), v13 (ref), Result6_1 (ref)
 		if not Config1 then return end
 		local Panel = Config1.panel
 		
@@ -2032,10 +2032,10 @@ if Result3_1 then
 		Config1.breadcrumb.Text = ModeBreadcrumb
 		Config1.breadcrumb.Visible = ModeBreadcrumb ~= ""
 		local IsMonitorItemSelected = t._isMonitorItemSelected()
-		local Smallest = math.min(#Modes, v11)
+		local Smallest = math.min(#Modes, v10)
 		
-		for i = 1, v11 do
-			local Entry = T[i]
+		for i = 1, v10 do
+			local Entry = t2[i]
 			
 			if i > Smallest then
 				Entry.frame.Visible = false
@@ -2080,7 +2080,7 @@ if Result3_1 then
 	end
 end
 local function StepFreecam(DeltaTime: number)
-	-- upvalues: t (copy), NewModule (copy), NewModule1 (copy), NewModule2 (copy), NewModule3 (copy), FieldOfView (ref), RadFunction (copy), TanFunction (copy), SqrtFunction (copy), config (copy), ClampFunction (copy), ClockTime (ref), ClockTime1 (ref), _Vector3_1 (ref), _Vector3 (ref), Inverted1 (ref), RootPart (ref), DefaultZoom (ref), DefaultHeight (ref), Result3_1 (ref), Callback2 (ref), v7 (ref), Config (ref), Freecam (ref), List (ref), Index (ref), list1 (copy), CurrentCamera (ref)
+	-- upvalues: t (copy), NewModule (copy), NewModule1 (copy), NewModule2 (copy), NewModule3 (copy), FieldOfView (ref), RadFunction (copy), TanFunction (copy), SqrtFunction (copy), config (copy), ClampFunction (copy), ClockTime (ref), ClockTime1 (ref), _Vector3_1 (ref), _Vector3 (ref), Inverted1 (ref), RootPart (ref), DefaultZoom (ref), DefaultHeight (ref), Result3_1 (ref), v14 (ref), v7 (ref), Config (ref), Freecam (ref), List (ref), Index (ref), list1 (copy), CurrentCamera (ref)
 	t.ModeControl(DeltaTime)
 	local UpdateResult = NewModule:Update(DeltaTime, t.Movement())
 	local UpdateResult1 = NewModule1:Update(DeltaTime, t.Pan())
@@ -2100,9 +2100,9 @@ local function StepFreecam(DeltaTime: number)
 	_Vector3_1 += Vector3.new(ScaledUpdateResult.X, ScaledUpdateResult.Y, UpdateResult3 * config.Roll.Gain * (DeltaTime / SqrtResult))
 	
 	local function _(p4: number): number
-		local v14 = p4 % 6.283185307179586
+		local v15 = p4 % 6.283185307179586
 		
-		return v14 > 3.141592653589793 and v14 - 6.283185307179586 or v14
+		return v15 > 3.141592653589793 and v15 - 6.283185307179586 or v15
 	end
 	
 	local XRemainder = _Vector3_1.x % 6.283185307179586
@@ -2119,7 +2119,7 @@ local function StepFreecam(DeltaTime: number)
 		Focus = CFrame.new(RootPart.Position + Vector3.new(0, DefaultHeight, 0)) * CFrame.fromOrientation(_Vector3_1.x, _Vector3_1.y, _Vector3_1.z) * CFrame.new(0, 0, DefaultZoom)
 	end
 	if Result3_1 then
-		Callback2()
+		v14()
 	elseif v7 and v7.Parent and Config and Freecam and Freecam.Parent then
 		local Mode = Config.mode
 		
@@ -2217,7 +2217,7 @@ local config5 = {
 	BadgesNotificationsActive = true,
 	PointsNotificationsActive = true
 }
-v8 = {
+config6 = {
 	Push = function()
 		-- upvalues: config4 (copy), StarterGui (copy), config5 (copy), LocalPlayer (ref), ScreenGuis (ref), ChildAddedConnection (ref), Inverted2 (ref), FieldOfView1 (ref), CurrentCamera (ref), CameraType (ref), _CFrame (ref), Focus (ref), MouseIconEnabled (ref), UserInputService (copy), Default (ref)
 		for i in pairs(config4) do
@@ -2333,7 +2333,7 @@ local function initializePlayerList()
 end
 
 local function StartFreecam()
-	-- upvalues: initializePlayerList (copy), CurrentCamera (ref), _Vector3_1 (ref), _Vector3 (ref), FieldOfView (ref), NewModule (copy), NewModule1 (copy), NewModule2 (copy), NewModule3 (copy), Freecam (ref), LocalPlayer (ref), Result3_1 (ref), Config1 (ref), Callback3 (ref), v7 (ref), Config (ref), v8 (ref), v9 (ref), config1 (copy), Result4_1 (ref), RunService (copy), StepFreecam (copy), t (copy)
+	-- upvalues: initializePlayerList (copy), CurrentCamera (ref), _Vector3_1 (ref), _Vector3 (ref), FieldOfView (ref), NewModule (copy), NewModule1 (copy), NewModule2 (copy), NewModule3 (copy), Freecam (ref), LocalPlayer (ref), Result3_1 (ref), Config1 (ref), v11 (ref), v7 (ref), Config (ref), config6 (ref), v8 (ref), config1 (copy), Result4_1 (ref), RunService (copy), StepFreecam (copy), t (copy)
 	initializePlayerList()
 	local CurrentCameraCFrame = CurrentCamera.CFrame
 	_Vector3_1 = Vector3.new(CurrentCameraCFrame:toEulerAnglesYXZ())
@@ -2347,7 +2347,7 @@ local function StartFreecam()
 	
 	if Result3_1 then
 		if not Config1 then
-			Callback3(Freecam)
+			v11(Freecam)
 		end
 	elseif not v7 or not v7.Parent then
 		local FreecamCustomGui = Instance.new("Frame")
@@ -2475,7 +2475,7 @@ local function StartFreecam()
 		}
 		FreecamCustomGui.Parent = Freecam
 	end
-	v8.Push()
+	config6.Push()
 	Freecam.Enabled = true
 	
 	local function _(p4, Name)
@@ -2487,7 +2487,7 @@ local function StartFreecam()
 		return NewInstance
 	end
 	
-	for _, value in ipairs(v9) do
+	for _, value in ipairs(v8) do
 		local Entry = config1[value.key]
 		local NewInstance = Instance.new(value.class)
 		NewInstance.Name = "Freecam" .. value.key
@@ -2507,7 +2507,7 @@ local function StartFreecam()
 end
 
 local function StopFreecam()
-	-- upvalues: PlayerAddedConnection (ref), PlayerRemovingConnection (ref), Inverted1 (ref), Index (ref), List (ref), PostEffect2 (copy), Inverted (ref), v9 (ref), config1 (copy), Result3_1 (ref), Config1 (ref), Freecam (ref), Inverted2 (ref), Inverted3 (ref), t (copy), RunService (copy), v8 (ref)
+	-- upvalues: PlayerAddedConnection (ref), PlayerRemovingConnection (ref), Inverted1 (ref), Index (ref), List (ref), PostEffect2 (copy), Inverted (ref), v8 (ref), config1 (copy), Result3_1 (ref), Config1 (ref), Freecam (ref), Inverted2 (ref), Inverted3 (ref), t (copy), RunService (copy), config6 (ref)
 	if PlayerAddedConnection then
 		PlayerAddedConnection:Disconnect()
 		PlayerAddedConnection = nil
@@ -2522,7 +2522,7 @@ local function StopFreecam()
 	PostEffect2()
 	Inverted = false
 	
-	for _, value in ipairs(v9) do
+	for _, value in ipairs(v8) do
 		local GetResult = value.get()
 		
 		if GetResult then
@@ -2546,7 +2546,7 @@ local function StopFreecam()
 	Inverted3 = false
 	t.StopCapture()
 	RunService:UnbindFromRenderStep("Freecam")
-	v8.Pop()
+	config6.Pop()
 end
 
 local Inverted4 = false

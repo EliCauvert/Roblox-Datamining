@@ -21,10 +21,10 @@ local UseSliderDirectionalInputModule = require(script.Parent.useSliderDirection
 local VisibilityModule = require(Foundation.Enums.Visibility)
 local OrientationModule = require(Foundation.Enums.Orientation)
 local SliderTypeModule = require(Foundation.Enums.SliderType)
-local InternalSliderModule = require(Foundation.Components.InternalSlider)
-local SliderThumbModule = require(script.Parent.SliderThumb)
 local ControlStateModule = require(Foundation.Enums.ControlState)
 local CursorTypeModule = require(Foundation.Enums.CursorType)
+local InternalSliderModule = require(Foundation.Components.InternalSlider)
+local SliderThumbModule = require(script.Parent.SliderThumb)
 local StateLayerAffordanceModule = require(Foundation.Enums.StateLayerAffordance)
 local CursorComponentModule = require(Foundation.Providers.Cursor.CursorComponent)
 local FlagsModule = require(Foundation.Utility.Flags)
@@ -149,6 +149,39 @@ return ReactModule.forwardRef(function(p1, Ref)
 				WithDefaultsModuleResult.testId, IsTypeMatch, UseSliderVariantsModuleResult,
 				UseMemoResult
 			}),
+			renderTrack = ReactModule.useCallback(function(p2)
+				-- upvalues: IsTypeMatch (copy), ReactModule (upval), ViewModule (upval), UseSliderVariantsModuleResult (copy), WithDefaultsModuleResult (copy), IsOrientationMatch (copy), UseBindableModuleResult (copy), CalculateSliderValueFractionModule (upval)
+				return ReactModule.createElement(ViewModule, {
+					tag = UseSliderVariantsModuleResult.bar.tag,
+					Size = if IsOrientationMatch then UDim2.new(0, UseSliderVariantsModuleResult.bar.height, 1, 0) else UDim2.new(1, 0, 0, UseSliderVariantsModuleResult.bar.height),
+					testId = `{WithDefaultsModuleResult.testId}--bar`
+				}, {
+					Fill = if IsTypeMatch then ReactModule.createElement(ViewModule, {
+						tag = UseSliderVariantsModuleResult.fill.tag,
+						Position = p2:map(function(p3)
+							return p3.Position
+						end),
+						Size = p2:map(function(p3)
+							return p3.Size
+						end),
+						testId = `{WithDefaultsModuleResult.testId}--fill`
+					}) else ReactModule.createElement(ViewModule, {
+						tag = UseSliderVariantsModuleResult.fill.tag,
+						AnchorPoint = if IsOrientationMatch then Vector2.new(0, 1) else nil,
+						Position = if IsOrientationMatch then UDim2.fromScale(0, 1) else nil,
+						Size = UseBindableModuleResult:map(function(p3): UDim2
+							-- upvalues: CalculateSliderValueFractionModule (upval), WithDefaultsModuleResult (upval), IsOrientationMatch (upval)
+							local SliderValueFractionModule = CalculateSliderValueFractionModule(p3, WithDefaultsModuleResult.range)
+							
+							return if IsOrientationMatch then UDim2.fromScale(1, SliderValueFractionModule) else UDim2.fromScale(SliderValueFractionModule, 1)
+						end),
+						testId = `{WithDefaultsModuleResult.testId}--fill`
+					})
+				})
+			end, {
+				WithDefaultsModuleResult.range, WithDefaultsModuleResult.testId, IsTypeMatch,
+				IsOrientationMatch, UseBindableModuleResult, UseSliderVariantsModuleResult
+			}),
 			range = WithDefaultsModuleResult.range,
 			step = WithDefaultsModuleResult.step,
 			size = WithDefaultsModuleResult.size,
@@ -160,36 +193,6 @@ return ReactModule.forwardRef(function(p1, Ref)
 			onDragStarted = WithDefaultsModuleResult.onDragStarted,
 			onDragEnded = WithDefaultsModuleResult.onDragEnded,
 			ref = Ref
-		}), ReactModule.createElement(ViewModule, {
-			tag = UseSliderVariantsModuleResult.bar.tag,
-			Size = if IsOrientationMatch then UDim2.new(0, UseSliderVariantsModuleResult.bar.height, 1, 0) else UDim2.new(1, 0, 0, UseSliderVariantsModuleResult.bar.height),
-			testId = `{WithDefaultsModuleResult.testId}--bar`
-		}, {
-			Fill = if IsTypeMatch then ReactModule.createElement(ViewModule, {
-				tag = UseSliderVariantsModuleResult.fill.tag,
-				Position = UseBindableModuleResult1:map(function(p2): UDim2
-					-- upvalues: IsOrientationMatch (copy), CalculateSliderValueFractionModule (upval), WithDefaultsModuleResult (copy)
-					return if IsOrientationMatch then UDim2.fromScale(0, 1 - CalculateSliderValueFractionModule(p2.Max, WithDefaultsModuleResult.range)) else UDim2.fromScale(CalculateSliderValueFractionModule(p2.Min, WithDefaultsModuleResult.range), 0)
-				end),
-				Size = UseBindableModuleResult1:map(function(p2): UDim2
-					-- upvalues: CalculateSliderValueFractionModule (upval), WithDefaultsModuleResult (copy), IsOrientationMatch (copy)
-					local SliderValueFractionModuleDelta = CalculateSliderValueFractionModule(p2.Max, WithDefaultsModuleResult.range) - CalculateSliderValueFractionModule(p2.Min, WithDefaultsModuleResult.range)
-					
-					return if IsOrientationMatch then UDim2.fromScale(1, SliderValueFractionModuleDelta) else UDim2.fromScale(SliderValueFractionModuleDelta, 1)
-				end),
-				testId = `{WithDefaultsModuleResult.testId}--fill`
-			}) else ReactModule.createElement(ViewModule, {
-				tag = UseSliderVariantsModuleResult.fill.tag,
-				AnchorPoint = if IsOrientationMatch then Vector2.new(0, 1) else nil,
-				Position = if IsOrientationMatch then UDim2.fromScale(0, 1) else nil,
-				Size = UseBindableModuleResult:map(function(p2): UDim2
-					-- upvalues: CalculateSliderValueFractionModule (upval), WithDefaultsModuleResult (copy), IsOrientationMatch (copy)
-					local SliderValueFractionModule = CalculateSliderValueFractionModule(p2, WithDefaultsModuleResult.range)
-					
-					return if IsOrientationMatch then UDim2.fromScale(1, SliderValueFractionModule) else UDim2.fromScale(SliderValueFractionModule, 1)
-				end),
-				testId = `{WithDefaultsModuleResult.testId}--fill`
-			})
 		}))
 	end
 	local WithDefaultsModuleResult1 = WithDefaultsModule(p1, config)

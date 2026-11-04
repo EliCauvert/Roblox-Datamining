@@ -934,9 +934,11 @@ CoreScripts.InGameMenu.GameSettings.SwitchToVRComfortSettings,カスタム設定
 CoreScripts.InGameMenu.GameSettings.UINavToggle,UI ナビゲーション切りかえ
 CoreScripts.InGameMenu.GameSettings.UINavToggleDescription,【\】キーを使用してUIナビゲーションモードを開始/終了
 CoreScripts.InGameMenu.GameSettings.UIScale,UIスケール
+CoreScripts.InGameMenu.GameSettings.UIScaleDescription,Roblox全体のボタンとメニューのサイズを調整します。
 CoreScripts.InGameMenu.GameSettings.UIScaleLargest,最大
 CoreScripts.InGameMenu.GameSettings.UIScaleMode,UIスケールモード
 CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,自動
+CoreScripts.InGameMenu.GameSettings.UIScaleModeDescription,Roblox全体でのUIスケールの選択方法を設定します。
 CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,手動
 CoreScripts.InGameMenu.GameSettings.UIScaleSmallest,最小
 CoreScripts.InGameMenu.GameSettings.VREnabled,VRモード
@@ -3700,13 +3702,27 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,残り{time}
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsBody,各ゲームで同時に利用できる無料トライアルは1回のみです。現在のトライアル期間が終了してから、もう一度お試しください。
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsTitle,別の無料トライアルが有効です
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedBody,各パスで利用できる無料トライアルは1回のみです。
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedTitle,無料トライアルをすでに使用済みです
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedBody,すでにこのパスをお持ちのため、無料トライアルは必要ありません。
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedTitle,すでにこれを持っています
+Feature.InExperienceShop.Description.GamePassNotInUniverseBody,
+Feature.InExperienceShop.Description.GamePassNotInUniverseTitle,
+Feature.InExperienceShop.Description.GamePassNotPurchasableBody,このパスは現在販売されていません。
+Feature.InExperienceShop.Description.GamePassNotPurchasableTitle,現在販売されていません
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledBody,このパスには現在、無料トライアルがありません。
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledTitle,無料トライアルはありません
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,Robuxを購入すると、仲裁条項と撤回ポリシーを含むRobloxの{termsLinkStart}利用規約{termsLinkEnd}に同意したものとみなされます。
 Feature.InExperienceShop.GamePass,
 Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,ボーナスアイテム
+Feature.InExperienceShop.Label.BuyNow,今すぐ買う
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,あと{timeRemaining}で終了
 Feature.InExperienceShop.Label.FreeTrial,無料トライアル
+Feature.InExperienceShop.Label.HaveTrial,無料トライアルを利用できます
 Feature.InExperienceShop.Label.NoDescription,詳細なし
 Feature.InExperienceShop.Label.OfferEndTime,{offer}はあと{timeRemaining}で終了します
 Feature.InExperienceShop.Label.PreviewBanner,これはRoblox Studioでのショップのプレビューです。プレイヤーにはこのプレビューは表示されません。
@@ -3720,7 +3736,9 @@ Feature.InExperienceShop.Label.Timer.Second.Plural,{number}秒
 Feature.InExperienceShop.Label.Timer.Second.Singular,1秒
 Feature.InExperienceShop.Label.Trial,トライアル
 Feature.InExperienceShop.Label.Trialed,トライアル済み
+Feature.InExperienceShop.Label.TryNow,今すぐ試す
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,{ROBUX_AMOUNT} Robuxを購入できました
+Feature.InExperienceShop.Tooltip.RecentlyRedeemed,無料トライアルはいかがでしたか？
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,このアイテムを持ち物から永久に削除しますか？もし気が変わった場合は、バーチャル空間で再び獲得する必要があります。
 Feature.Item.Label.DeleteItemUndercase,アイテムを削除
 Feature.Landing.Label.PoweredBy,運営：
@@ -3913,7 +3931,6 @@ Feature.Moments.Title.GenerateTextFeedbackReason,何が問題でしたか？
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,モーメント作成を退出しますか？
 Feature.Moments.Title.MomentRemoved,
-Feature.Moments.Title.PostInsights,投稿のインサイト
 Feature.Moments.Title.ReportPost,投稿の規約違反を報告
 Feature.Moments.Title.UnfollowConfirmationDialog,@{username}さんのフォローを解除しますか？
 Feature.Moments.Tooltip.Creation,バーチャル空間内の全員があなたのモーメントを見ることができます。

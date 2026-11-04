@@ -36,19 +36,19 @@ function Module.decode(Buf)
 	local v1 = 0
 	while v1 < buffer.len(Buf) do
 		local Tag, Tag2
-		Tag, Tag2, v14 = ProtoModule.readTag(Buf, v1)
+		Tag, Tag2, v15 = ProtoModule.readTag(Buf, v1)
 		
 		if Tag2 == ProtoModule.wireTypes.varint then
 			local _
-			_, v14 = ProtoModule.readVarInt(Buf, v1)
+			_, v15 = ProtoModule.readVarInt(Buf, v1)
 		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 			if Tag == 1 then
 				local Buffer1
-				Buffer1, v14 = ProtoModule.readBuffer(Buf, v1)
+				Buffer1, v15 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.taxonomy_id = buffer.tostring(Buffer1)
 			elseif Tag == 2 then
 				local Buffer2
-				Buffer2, v14 = ProtoModule.readBuffer(Buf, v1)
+				Buffer2, v15 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.taxonomy_name = buffer.tostring(Buffer2)
 			else
 				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v1)
@@ -56,10 +56,10 @@ function Module.decode(Buf)
 			end
 		elseif Tag2 == ProtoModule.wireTypes.i32 then
 			local _
-			_, v14 = ProtoModule.readFixed32(Buf, v1)
+			_, v15 = ProtoModule.readFixed32(Buf, v1)
 		elseif Tag2 == ProtoModule.wireTypes.i64 then
 			local _
-			_, v14 = ProtoModule.readFixed64(Buf, v1)
+			_, v15 = ProtoModule.readFixed64(Buf, v1)
 		else
 			error("Unsupported wire type: " .. Tag2)
 		end
@@ -145,30 +145,30 @@ function Module1.decode(Buf)
 	local v2 = 0
 	while v2 < buffer.len(Buf) do
 		local Tag, Tag2
-		Tag, Tag2, v35 = ProtoModule.readTag(Buf, v2)
+		Tag, Tag2, v36 = ProtoModule.readTag(Buf, v2)
 		
 		if Tag2 == ProtoModule.wireTypes.varint then
 			if Tag == 1 then
-				NewModule.days, v35 = ProtoModule.readVarIntI32(Buf, v2)
+				NewModule.days, v36 = ProtoModule.readVarIntI32(Buf, v2)
 			elseif Tag == 2 then
-				NewModule.price, v35 = ProtoModule.readVarIntI64(Buf, v2)
+				NewModule.price, v36 = ProtoModule.readVarIntI64(Buf, v2)
 			elseif Tag == 3 then
 				local VarInt
-				VarInt, v35 = ProtoModule.readVarInt(Buf, v2)
+				VarInt, v36 = ProtoModule.readVarInt(Buf, v2)
 				NewModule.selected = VarInt ~= 0
 			else
 				local _
-				_, v35 = ProtoModule.readVarInt(Buf, v2)
+				_, v36 = ProtoModule.readVarInt(Buf, v2)
 			end
 		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 			local VarInt1, VarInt2 = ProtoModule.readVarInt(Buf, v2)
 			v2 = VarInt2 + VarInt1
 		elseif Tag2 == ProtoModule.wireTypes.i32 then
 			local _
-			_, v35 = ProtoModule.readFixed32(Buf, v2)
+			_, v36 = ProtoModule.readFixed32(Buf, v2)
 		elseif Tag2 == ProtoModule.wireTypes.i64 then
 			local _
-			_, v35 = ProtoModule.readFixed64(Buf, v2)
+			_, v36 = ProtoModule.readFixed64(Buf, v2)
 		else
 			error("Unsupported wire type: " .. Tag2)
 		end
@@ -249,19 +249,19 @@ function Module2.decode(Buf)
 	local v3 = 0
 	while v3 < buffer.len(Buf) do
 		local Tag, Tag2
-		Tag, Tag2, v53 = ProtoModule.readTag(Buf, v3)
+		Tag, Tag2, v54 = ProtoModule.readTag(Buf, v3)
 		
 		if Tag2 == ProtoModule.wireTypes.varint then
 			local _
-			_, v53 = ProtoModule.readVarInt(Buf, v3)
+			_, v54 = ProtoModule.readVarInt(Buf, v3)
 		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 			if Tag == 1 then
 				local Buffer1
-				Buffer1, v53 = ProtoModule.readBuffer(Buf, v3)
+				Buffer1, v54 = ProtoModule.readBuffer(Buf, v3)
 				NewModule.name = buffer.tostring(Buffer1)
 			elseif Tag == 2 then
 				local Buffer2
-				Buffer2, v53 = ProtoModule.readBuffer(Buf, v3)
+				Buffer2, v54 = ProtoModule.readBuffer(Buf, v3)
 				NewModule.value = buffer.tostring(Buffer2)
 			else
 				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v3)
@@ -269,10 +269,10 @@ function Module2.decode(Buf)
 			end
 		elseif Tag2 == ProtoModule.wireTypes.i32 then
 			local _
-			_, v53 = ProtoModule.readFixed32(Buf, v3)
+			_, v54 = ProtoModule.readFixed32(Buf, v3)
 		elseif Tag2 == ProtoModule.wireTypes.i64 then
 			local _
-			_, v53 = ProtoModule.readFixed64(Buf, v3)
+			_, v54 = ProtoModule.readFixed64(Buf, v3)
 		else
 			error("Unsupported wire type: " .. Tag2)
 		end
@@ -352,23 +352,23 @@ function Module3.decode(Buf)
 	local v4 = 0
 	while v4 < buffer.len(Buf) do
 		local Tag, Tag2
-		Tag, Tag2, v74 = ProtoModule.readTag(Buf, v4)
+		Tag, Tag2, v75 = ProtoModule.readTag(Buf, v4)
 		
 		if Tag2 == ProtoModule.wireTypes.varint then
 			local _
-			_, v74 = ProtoModule.readVarInt(Buf, v4)
+			_, v75 = ProtoModule.readVarInt(Buf, v4)
 		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 			if Tag == 1 then
 				local Buffer1
-				Buffer1, v74 = ProtoModule.readBuffer(Buf, v4)
+				Buffer1, v75 = ProtoModule.readBuffer(Buf, v4)
 				NewModule.id = buffer.tostring(Buffer1)
 			elseif Tag == 2 then
 				local Buffer2
-				Buffer2, v74 = ProtoModule.readBuffer(Buf, v4)
+				Buffer2, v75 = ProtoModule.readBuffer(Buf, v4)
 				NewModule.asset_type = buffer.tostring(Buffer2)
 			elseif Tag == 3 then
 				local Buffer3
-				Buffer3, v74 = ProtoModule.readBuffer(Buf, v4)
+				Buffer3, v75 = ProtoModule.readBuffer(Buf, v4)
 				NewModule.type = buffer.tostring(Buffer3)
 			else
 				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v4)
@@ -376,10 +376,10 @@ function Module3.decode(Buf)
 			end
 		elseif Tag2 == ProtoModule.wireTypes.i32 then
 			local _
-			_, v74 = ProtoModule.readFixed32(Buf, v4)
+			_, v75 = ProtoModule.readFixed32(Buf, v4)
 		elseif Tag2 == ProtoModule.wireTypes.i64 then
 			local _
-			_, v74 = ProtoModule.readFixed64(Buf, v4)
+			_, v75 = ProtoModule.readFixed64(Buf, v4)
 		else
 			error("Unsupported wire type: " .. Tag2)
 		end
@@ -427,10 +427,163 @@ Module3.descriptor = {
 }
 config.MarketplaceCatalogBundledItem = Module3
 TypeRegistryModule.default:register(config.MarketplaceCatalogBundledItem)
+local Module4 = {}
+Module4.__index = Module4
+
+function Module4.new(p1)
+	-- upvalues: Module4 (copy)
+	return (setmetatable({
+		id = if p1 == nil or p1.id == nil then nil else p1.id,
+		license_type = if p1 == nil or p1.license_type == nil then "" else p1.license_type,
+		badge_asset_id = if p1 == nil or p1.badge_asset_id == nil then nil else p1.badge_asset_id,
+		name = if p1 == nil or p1.name == nil then nil else p1.name,
+		license_display_name = if p1 == nil or p1.license_display_name == nil then nil else p1.license_display_name
+	}, Module4))
+end
+
+function Module4:encode()
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
+	
+	if self.id ~= nil then
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.id)
+	end
+	if self.license_type ~= nil and self.license_type ~= "" then
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.license_type)
+	end
+	if self.badge_asset_id ~= nil then
+		local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult3, WriteTagResult2_2, self.badge_asset_id)
+	end
+	if self.name ~= nil then
+		local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult4, WriteTagResult2_3, self.name)
+	end
+	if self.license_display_name ~= nil then
+		local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, self.license_display_name)
+	end
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
+	
+	return Buf1
+end
+
+function Module4.decode(Buf)
+	-- upvalues: Module4 (copy), ProtoModule (copy)
+	local NewModule = Module4.new()
+	local v5 = 0
+	while v5 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v101 = ProtoModule.readTag(Buf, v5)
+		
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v101 = ProtoModule.readVarInt(Buf, v5)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v101 = ProtoModule.readBuffer(Buf, v5)
+				NewModule.id = buffer.tostring(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v101 = ProtoModule.readBuffer(Buf, v5)
+				NewModule.license_type = buffer.tostring(Buffer2)
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v101 = ProtoModule.readBuffer(Buf, v5)
+				NewModule.badge_asset_id = buffer.tostring(Buffer3)
+			elseif Tag == 4 then
+				local Buffer4
+				Buffer4, v101 = ProtoModule.readBuffer(Buf, v5)
+				NewModule.name = buffer.tostring(Buffer4)
+			elseif Tag == 5 then
+				local Buffer5
+				Buffer5, v101 = ProtoModule.readBuffer(Buf, v5)
+				NewModule.license_display_name = buffer.tostring(Buffer5)
+			else
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v5)
+				v5 = VarInt2 + VarInt
+			end
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v101 = ProtoModule.readFixed32(Buf, v5)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v101 = ProtoModule.readFixed64(Buf, v5)
+		else
+			error("Unsupported wire type: " .. Tag2)
+		end
+	end
+	return NewModule
+end
+
+function Module4:jsonEncode()
+	local t = {}
+	
+	if self.id ~= nil then
+		t.id = self.id
+	end
+	if self.license_type ~= nil and self.license_type ~= "" then
+		t.licenseType = self.license_type
+	end
+	if self.badge_asset_id ~= nil then
+		t.badgeAssetId = self.badge_asset_id
+	end
+	if self.name ~= nil then
+		t.name = self.name
+	end
+	if self.license_display_name ~= nil then
+		t.licenseDisplayName = self.license_display_name
+	end
+	return t
+end
+
+function Module4:jsonDecode()
+	-- upvalues: Module4 (copy)
+	local NewModule = Module4.new()
+	
+	if self.id ~= nil then
+		NewModule.id = self.id
+	end
+	if self.license_type ~= nil then
+		NewModule.license_type = self.license_type
+	end
+	if self.licenseType ~= nil then
+		NewModule.license_type = self.licenseType
+	end
+	if self.badge_asset_id ~= nil then
+		NewModule.badge_asset_id = self.badge_asset_id
+	end
+	if self.badgeAssetId ~= nil then
+		NewModule.badge_asset_id = self.badgeAssetId
+	end
+	if self.name ~= nil then
+		NewModule.name = self.name
+	end
+	if self.license_display_name ~= nil then
+		NewModule.license_display_name = self.license_display_name
+	end
+	if self.licenseDisplayName ~= nil then
+		NewModule.license_display_name = self.licenseDisplayName
+	end
+	return NewModule
+end
+
+Module4.descriptor = {
+	name = "MarketplaceCatalogItemLicensing",
+	fullName = "roblox.apppageplatform.shared.v1beta1.MarketplaceCatalogItemLicensing"
+}
+config.MarketplaceCatalogItemLicensing = Module4
+TypeRegistryModule.default:register(config.MarketplaceCatalogItemLicensing)
 
 return {
 	MarketplaceCatalogTaxonomyNode = config.MarketplaceCatalogTaxonomyNode,
 	MarketplaceCatalogTimedOption = config.MarketplaceCatalogTimedOption,
 	MarketplaceCatalogVariantAttribute = config.MarketplaceCatalogVariantAttribute,
-	MarketplaceCatalogBundledItem = config.MarketplaceCatalogBundledItem
+	MarketplaceCatalogBundledItem = config.MarketplaceCatalogBundledItem,
+	MarketplaceCatalogItemLicensing = config.MarketplaceCatalogItemLicensing
 }

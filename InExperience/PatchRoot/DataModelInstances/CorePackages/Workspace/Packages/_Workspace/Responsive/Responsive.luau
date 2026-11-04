@@ -5,6 +5,7 @@ local ContainerRefModule = require(script.Context.ContainerRef)
 local FindFirstAncestorWithTagModule = require(script.FindFirstAncestorWithTag)
 local UseResponsiveImplModule = require(script.Hooks.useResponsiveImpl)
 local InputModeModule = require(script.InputMode)
+local UIScaleOptionsModule = require(script.UIScaleOptions)
 local HardwareSafeAreaInsetsModule = require(script.HardwareSafeAreaInsets)
 local UseDeviceInsetsModule = require(script.Hooks.useDeviceInsets)
 local GetInputModeStoreModule = require(script.Stores.GetInputModeStore)
@@ -28,6 +29,7 @@ function ResponsiveProvider(p1)
 end
 
 return {
+	UIScaleOptions = UIScaleOptionsModule,
 	HardwareSafeAreaInsets = HardwareSafeAreaInsetsModule,
 	useDeviceInsets = UseDeviceInsetsModule,
 	Keys = StandardBreakpointsModule.Enum,

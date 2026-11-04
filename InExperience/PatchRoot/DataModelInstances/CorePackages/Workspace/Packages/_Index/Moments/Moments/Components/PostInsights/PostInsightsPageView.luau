@@ -1,5 +1,6 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
+local AnalyticsMetricChartModule = require(Parent.AnalyticsMetricChart)
 local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 local FoundationModule = require(Parent.Foundation)
 local InputHandlersModule = require(Parent.InputHandlers)
@@ -146,9 +147,12 @@ local function Metric(Frame)
 end
 
 local function OverviewSection(Frame)
-	-- upvalues: ReactModule (copy), SectionHeading (copy), Metric (copy), View (copy)
+	-- upvalues: ReactModule (copy), SectionHeading (copy), AnalyticsMetricChartModule (copy), Metric (copy), View (copy)
+	local Copy = table.clone(Frame.viewsChart)
+	Copy.layoutOrder = 2
 	local config = {
-		Heading = ReactModule.createElement(SectionHeading, { LayoutOrder = 1, text = Frame.heading })
+		Heading = ReactModule.createElement(SectionHeading, { LayoutOrder = 1, text = Frame.heading }),
+		ViewsChart = ReactModule.createElement(AnalyticsMetricChartModule.MetricChart, Copy)
 	}
 	
 	for i = 1, math.ceil(#Frame.overviewMetrics / 2) do
@@ -168,7 +172,7 @@ local function OverviewSection(Frame)
 		end
 		config[`Row{i}`] = ReactModule.createElement(View, {
 			tag = "row gap-medium size-full-0 auto-y",
-			LayoutOrder = i + 1
+			LayoutOrder = i + 2
 		}, Elements)
 	end
 	return ReactModule.createElement(View, {
@@ -325,6 +329,7 @@ return function(ViewProps)
 						Overview = ReactModule.createElement(OverviewSection, {
 							LayoutOrder = 2,
 							heading = ViewProps.overviewHeading,
+							viewsChart = ViewProps.viewsChart,
 							overviewMetrics = ViewProps.overviewMetrics
 						}),
 						Engagement = ReactModule.createElement(EngagementSection, { LayoutOrder = 3, viewProps = ViewProps })

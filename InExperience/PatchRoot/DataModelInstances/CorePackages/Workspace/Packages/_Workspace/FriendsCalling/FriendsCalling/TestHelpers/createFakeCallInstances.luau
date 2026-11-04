@@ -67,17 +67,21 @@ local function createFakeInstance(ClassName, Tbl)
 	return Copy
 end
 
+local FriendsCallingEndReason = Enum.FriendsCallingEndReason
+local FriendsCallingParticipantStatus = Enum.FriendsCallingParticipantStatus
+local FriendsCallingPhase = Enum.FriendsCallingPhase
+
 return {
 	createFakeCall = function(List)
-		-- upvalues: createFakeInstance (copy)
+		-- upvalues: FriendsCallingPhase (copy), FriendsCallingEndReason (copy), createFakeInstance (copy)
 		local config = {
 			CallId = "call-1",
 			InitiatorUserId = 1,
 			Volume = 1,
 			IsDeafened = false,
 			ConversationId = 0,
-			Phase = { Name = "Active" },
-			EndReason = { Name = "None" }
+			Phase = FriendsCallingPhase.Active,
+			EndReason = FriendsCallingEndReason.None
 		}
 		
 		if List then
@@ -89,13 +93,13 @@ return {
 	end,
 	createFakeInstance = createFakeInstance,
 	createFakeParticipant = function(UserId, List)
-		-- upvalues: createFakeInstance (copy)
+		-- upvalues: FriendsCallingParticipantStatus (copy), createFakeInstance (copy)
 		local config = {
 			Volume = 1,
 			IsLocalMuted = false,
 			IsSpeaking = false,
 			UserId = UserId,
-			Status = { Name = "Joined" },
+			Status = FriendsCallingParticipantStatus.Joined,
 			LeaveReason = { Name = "None" },
 			Error = { Name = "None" }
 		}

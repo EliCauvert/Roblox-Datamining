@@ -2,7 +2,6 @@
 local Parent1 = Parent.Parent
 local ReactModule = require(Parent1.React)
 local CryoModule = require(Parent1.Cryo)
-local FoundationFontFaceMigration = require(Parent1.Foundation).Utility.Flags.FoundationFontFaceMigration
 local _ = require(Parent.App.Style.StyleTypes)
 local _ = require(Parent.Core.Style.Validator.validateFontInfo)
 local _ = require(Parent.Core.Style.Validator.validateColorInfo)
@@ -16,13 +15,13 @@ local GenericTextLabelModule = require(Parent.Core.Text.GenericTextLabel.Generic
 local config = { fluidSizing = false, maxSize = Vector2.new(10000, 10000) }
 
 return function(p1)
-	-- upvalues: CryoModule (copy), config (copy), UseStyleModule (copy), EmojiModule1 (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), GetTextSizeModule (copy), ReactModule (copy), GenericTextLabelModule (copy), EmojiModule (copy)
+	-- upvalues: CryoModule (copy), config (copy), UseStyleModule (copy), EmojiModule1 (copy), GetFontFromFontStyleModule (copy), GetTextSizeModule (copy), ReactModule (copy), GenericTextLabelModule (copy), EmojiModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local IsEnumValue = EmojiModule1.isEnumValue(JoinResult.emoji)
 	local BaseSize = UseStyleModule().Font.BaseSize
 	local ColorStyle = JoinResult.colorStyle
 	local FontStyle = JoinResult.fontStyle
-	local FontFromFontStyleModule = if FoundationFontFaceMigration then GetFontFromFontStyleModule(FontStyle) else FontStyle.Font
+	local FontFromFontStyleModule = GetFontFromFontStyleModule(FontStyle)
 	local ScaledBaseSize = if FontStyle.RelativeSize then BaseSize * FontStyle.RelativeSize else FontStyle.FontSize
 	local MaxSize = JoinResult.maxSize
 	local TextSizeModule = GetTextSizeModule(JoinResult.Text, ScaledBaseSize, FontFromFontStyleModule, MaxSize)

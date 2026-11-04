@@ -14,6 +14,7 @@ local DisallowStickyShortcutBarOnNotLoggedIn = game:DefineFastFlag("DisallowStic
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagUseSignalsForAuthenticationStatus = SharedFlagsModule.FFlagUseSignalsForAuthenticationStatus
 local FFlagEnableStickyShortcutBarOnAllPlatforms = SharedFlagsModule.FFlagEnableStickyShortcutBarOnAllPlatforms
+local FFlagUnifyShortcutBarUnifiedIXPExposure = SharedFlagsModule.FFlagUnifyShortcutBarUnifiedIXPExposure
 local FFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled = require(AppShortcutBar.Flags).FFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled
 local GetAuthenticationStatusStore = if FFlagUseSignalsForAuthenticationStatus then require(Parent.AuthenticationStatus).GetAuthenticationStatusStore else nil
 
@@ -29,7 +30,7 @@ local AppShortcut = require(AppShortcutBar.Components.AppShortcut).AppShortcut
 local UseStickyShortcutBarExposureLoggingModule = require(AppShortcutBar.Hooks.useStickyShortcutBarExposureLogging)
 
 function AppStickyShortcutBar(p1)
-	-- upvalues: GetShortcutBarStatusStoreModule (copy), UseTokensFunction (copy), UseAppShortcutBarHeightFunction (copy), ResponsiveModule (copy), UseFocusedTextBoxFunction (copy), FFlagEnableStickyShortcutBarOnAllPlatforms (copy), UseIsStickyShortcutBarEnabledFunction (copy), UseSignalStateFunction (copy), DisplayModule (copy), DisallowStickyShortcutBarOnNotLoggedIn (copy), FFlagUseSignalsForAuthenticationStatus (copy), GetAuthenticationStatusStore (copy), LoginStatus (copy), UseSelectorFunction (copy), selectUserLoggedIn (copy), FocusNavigationEventNameEnum (copy), ReactModule (copy), FFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled (copy), UseStickyShortcutBarExposureLoggingModule (copy), AppShortcut (copy)
+	-- upvalues: GetShortcutBarStatusStoreModule (copy), UseTokensFunction (copy), UseAppShortcutBarHeightFunction (copy), ResponsiveModule (copy), UseFocusedTextBoxFunction (copy), FFlagEnableStickyShortcutBarOnAllPlatforms (copy), UseIsStickyShortcutBarEnabledFunction (copy), UseSignalStateFunction (copy), DisplayModule (copy), DisallowStickyShortcutBarOnNotLoggedIn (copy), FFlagUseSignalsForAuthenticationStatus (copy), GetAuthenticationStatusStore (copy), LoginStatus (copy), UseSelectorFunction (copy), selectUserLoggedIn (copy), FocusNavigationEventNameEnum (copy), ReactModule (copy), FFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled (copy), FFlagUnifyShortcutBarUnifiedIXPExposure (copy), UseStickyShortcutBarExposureLoggingModule (copy), AppShortcut (copy)
 	local ShortcutBarStatusStoreModule = GetShortcutBarStatusStoreModule(false)
 	local UseTokensResult = UseTokensFunction()
 	local UseAppShortcutBarHeightResult = UseAppShortcutBarHeightFunction()
@@ -53,7 +54,7 @@ function AppStickyShortcutBar(p1)
 		ShortcutBarStatusStoreModule.setShortcutBarVisible(not NoUseIsStickyShortcutBarEnabledResult)
 	end, { NoUseIsStickyShortcutBarEnabledResult })
 	
-	if FFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled then
+	if FFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled and not FFlagUnifyShortcutBarUnifiedIXPExposure then
 		UseStickyShortcutBarExposureLoggingModule(not NoUseIsStickyShortcutBarEnabledResult)
 	end
 	if FFlagEnableStickyShortcutBarOnAllPlatforms then

@@ -3,14 +3,12 @@ local Parent1 = Parent.Parent
 local UIBloxConfigModule = require(Parent.UIBloxConfig)
 local CryoModule = require(Parent1.Cryo)
 local ReactModule = require(Parent1.React)
-local FoundationModule = require(Parent1.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local NormalizeFontFaceFunction = require(Parent1.Foundation).Utility.normalizeFontFace
 local Label = require(Parent.Core.ImageSet.ImageSetComponent).Label
 local GenericTextLabelModule = require(Parent.Core.Text.GenericTextLabel.GenericTextLabel)
 local UseStyleModule = require(Parent.Core.Style.useStyle)
 local _ = require(Parent.App.Style.StyleTypes)
 local _ = require(Parent.App.Style.Fonts)
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local config = {
 	faceGroupCount = 3,
 	maxBadgeDisplayNumber = 99,
@@ -69,7 +67,7 @@ local function renderEmphasisBorder(BadgeBorderWidth: number, p1, p2, NewZIndex)
 end
 
 local function renderBadge(p1, p2, p3)
-	-- upvalues: ReactModule (copy), renderCornerStroke (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), renderEmphasisBorder (copy)
+	-- upvalues: ReactModule (copy), renderCornerStroke (copy), NormalizeFontFaceFunction (copy), renderEmphasisBorder (copy)
 	local Theme = p3.Theme
 	local _Font = p3.Font
 	local BadgeBackgroundColor = p2.badgeBackgroundColor or Theme.BackgroundUIDefault
@@ -108,8 +106,7 @@ local function renderBadge(p1, p2, p3)
 				Text = if p1.maxDisplayNumber < p1.usersCount then tostring(p1.maxDisplayNumber) .. "+" else tostring(p1.usersCount),
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,
-				Font = if FoundationFontFaceMigration then nil else _Font.CaptionHeader.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(_Font.CaptionHeader.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(_Font.CaptionHeader.Font),
 				TextSize = _Font.BaseSize * _Font.CaptionHeader.RelativeSize,
 				TextColor3 = BadgeContentColor.Color,
 				TextTransparency = BadgeContentColor.Transparency,

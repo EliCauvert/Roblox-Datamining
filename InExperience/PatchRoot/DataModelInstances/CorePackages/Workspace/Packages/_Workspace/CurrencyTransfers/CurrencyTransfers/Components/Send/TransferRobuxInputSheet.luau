@@ -38,6 +38,7 @@ local GetFFlagCurrencyTransferFixDesktopInputModule = require(CurrencyTransfers.
 local GetFFlagCurrencyTransferFocusNavigationModule = require(CurrencyTransfers.Flags.GetFFlagCurrencyTransferFocusNavigation)
 local UseTransferSheetFocusModule = require(CurrencyTransfers.Hooks.useTransferSheetFocus)
 local GetFFlagCurrencyTransferUseBackendTransferLimitsModule = require(CurrencyTransfers.Flags.GetFFlagCurrencyTransferUseBackendTransferLimits)
+local FFlagCurrencyTransferHideAmountChipsAboveMaxModule = require(CurrencyTransfers.Flags.FFlagCurrencyTransferHideAmountChipsAboveMax)
 local CurrencyTransferTelemetryModule = require(CurrencyTransfers.Events.CurrencyTransferTelemetry)
 local RobuxTransferFlowEventNameModule = require(CurrencyTransfers.Enums.RobuxTransferFlowEventName)
 local LogCurrencyTransferCounterModule = require(CurrencyTransfers.Utils.logCurrencyTransferCounter)
@@ -45,7 +46,7 @@ local LogRobuxTransferFlowEventModule = require(CurrencyTransfers.Utils.logRobux
 local FormatNumberModule = require(CurrencyTransfers.Utils.formatNumber)
 
 return function(_)
-	-- upvalues: UseLocalizationFunction (copy), TransferLocalizationKeysModule (copy), UseTokensFunction (copy), GetFFlagCurrencyTransferFixDesktopInputModule (copy), UserInputService (copy), UseTransferStoreModule (copy), ReactModule (copy), LogCurrencyTransferCounterModule (copy), CurrencyTransferTelemetryModule (copy), SharedFlagsModule (copy), LogRobuxTransferFlowEventModule (copy), RobuxTransferFlowEventNameModule (copy), SignalsReactModule (copy), GetFFlagCurrencyTransferUseBackendTransferLimitsModule (copy), GetFIntCurrencyTransferMinAmountModule (copy), GetFIntCurrencyTransferMaxAmountModule (copy), SetTransferPromptStateModule (copy), PromptStateModule (copy), ProceedToConfirmModule (copy), UseTextBoxOnChangeRefModule (copy), GetFFlagCurrencyTransferFocusNavigationModule (copy), UseTransferSheetFocusModule (copy), UseAutoFocusTextBoxOnMountModule (copy), GetFFlagCurrencyTransferFlowUIImprovementFixModule (copy), FormatNumberModule (copy), LocalizationService (copy), TransferLocaleFormatModule (copy), UseScaledValueFunction (copy), Sheet (copy), TransferRobuxHeaderModule (copy), View (copy), GetFFlagCurrencyTransferFixTextBoxInputModule (copy), TransferProfileThumbnailModule (copy), RobuxTextModule (copy), Icon (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), Text (copy), TransferAmountOptionChipsModule (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)
+	-- upvalues: UseLocalizationFunction (copy), TransferLocalizationKeysModule (copy), UseTokensFunction (copy), GetFFlagCurrencyTransferFixDesktopInputModule (copy), UserInputService (copy), UseTransferStoreModule (copy), ReactModule (copy), LogCurrencyTransferCounterModule (copy), CurrencyTransferTelemetryModule (copy), SharedFlagsModule (copy), LogRobuxTransferFlowEventModule (copy), RobuxTransferFlowEventNameModule (copy), SignalsReactModule (copy), GetFFlagCurrencyTransferUseBackendTransferLimitsModule (copy), GetFIntCurrencyTransferMinAmountModule (copy), GetFIntCurrencyTransferMaxAmountModule (copy), SetTransferPromptStateModule (copy), PromptStateModule (copy), ProceedToConfirmModule (copy), UseTextBoxOnChangeRefModule (copy), GetFFlagCurrencyTransferFocusNavigationModule (copy), UseTransferSheetFocusModule (copy), UseAutoFocusTextBoxOnMountModule (copy), FFlagCurrencyTransferHideAmountChipsAboveMaxModule (copy), GetFFlagCurrencyTransferFlowUIImprovementFixModule (copy), FormatNumberModule (copy), LocalizationService (copy), TransferLocaleFormatModule (copy), UseScaledValueFunction (copy), Sheet (copy), TransferRobuxHeaderModule (copy), View (copy), GetFFlagCurrencyTransferFixTextBoxInputModule (copy), TransferProfileThumbnailModule (copy), RobuxTextModule (copy), Icon (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), Text (copy), TransferAmountOptionChipsModule (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)
 	local UseLocalizationResult = UseLocalizationFunction(TransferLocalizationKeysModule.Presets.TransferRobuxInputSheet)
 	local UseTokensResult = UseTokensFunction()
 	local NoTouchEnabled: boolean = GetFFlagCurrencyTransferFixDesktopInputModule() and not UserInputService.TouchEnabled
@@ -128,13 +129,26 @@ return function(_)
 		end
 	end, { UseAutoFocusTextBoxOnMountModuleResult })
 	local UseMemoResult = ReactModule.useMemo(function()
-		return {
+		-- upvalues: FFlagCurrencyTransferHideAmountChipsAboveMaxModule (upval), UseSignalStateResult5 (copy)
+		local list = {
 			{ amount = 25, text = "25" },
 			{ amount = 50, text = "50" },
 			{ amount = 100, text = "100" },
 			{ amount = 200, text = "200" }
 		}
-	end, {})
+		
+		if not FFlagCurrencyTransferHideAmountChipsAboveMaxModule then
+			return list
+		end
+		local List = {}
+		
+		for _, value in list do
+			if value.amount <= UseSignalStateResult5 then
+				table.insert(List, value)
+			end
+		end
+		return List
+	end, { UseSignalStateResult5 })
 	local UseResult2 = ReactModule.useCallback(function(p1)
 		-- upvalues: SetSelectedAmountFunction (copy), GetFFlagCurrencyTransferFlowUIImprovementFixModule (upval), UseRefResult (copy)
 		SetSelectedAmountFunction(p1)

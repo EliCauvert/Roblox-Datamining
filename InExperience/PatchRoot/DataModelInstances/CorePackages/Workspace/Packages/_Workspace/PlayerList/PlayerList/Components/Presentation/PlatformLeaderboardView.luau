@@ -10,7 +10,7 @@ local Text = FoundationModule.Text
 local ScrollView = FoundationModule.ScrollView
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local ConstantsModule = require(Parent.Common.Constants)
-local UseGamepadStickScrollModule = require(Parent.Hooks.useGamepadStickScroll)
+local UseGamepadStickScrollFunction = require(Parent1.CoreGuiCommon).Hooks.useGamepadStickScroll
 local UseReportPanelContentHeightModule = require(Parent.Hooks.useReportPanelContentHeight)
 local UsePlatformLeaderboardModule = require(Parent.Hooks.usePlatformLeaderboard)
 local PlatformEntryViewModule = require(Parent.Components.Presentation.PlatformEntryView)
@@ -42,7 +42,7 @@ local _ = function(p1, p2): string
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UsePlatformLeaderboardModule (copy), UseTokensFunction (copy), ConstantsModule (copy), UseReportPanelContentHeightModule (copy), ReactModule (copy), UseGamepadStickScrollModule (copy), SignalMap (copy), Signal (copy), Signal1 (copy), SignalsReactModule (copy), SignalsModule (copy), FFlagPlayerListLocalizeGameTextModule (copy), UseLocalizationFunction (copy), FFlagPlayerListReskinModule (copy), LeaderboardViewChangeTelemetryModule (ref), Parent (copy), Players (copy), ResolveDisplayNameModule (copy), GetPeopleHeaderLabelModule (copy), ServiceUnavailableState (copy), LoadingState (copy), EmptyFriendsState (copy), PlatformEntryViewModule (copy), ScrollView (copy), View (copy), Text (copy)
+	-- upvalues: UsePlatformLeaderboardModule (copy), UseTokensFunction (copy), ConstantsModule (copy), UseReportPanelContentHeightModule (copy), ReactModule (copy), UseGamepadStickScrollFunction (copy), SignalMap (copy), Signal (copy), Signal1 (copy), SignalsReactModule (copy), SignalsModule (copy), FFlagPlayerListLocalizeGameTextModule (copy), UseLocalizationFunction (copy), FFlagPlayerListReskinModule (copy), LeaderboardViewChangeTelemetryModule (ref), Parent (copy), Players (copy), ResolveDisplayNameModule (copy), GetPeopleHeaderLabelModule (copy), ServiceUnavailableState (copy), LoadingState (copy), EmptyFriendsState (copy), PlatformEntryViewModule (copy), ScrollView (copy), View (copy), Text (copy)
 	local Tab = p1.tab
 	local IsFriends = Tab == "Friends"
 	local HasLegacyPanelBackgroundColor = p1.legacyPanelBackgroundColor ~= nil
@@ -60,7 +60,8 @@ return ReactModule.memo(function(p1)
 		UseRefResult.current = Current
 		UseReportPanelContentHeightModuleResult(Current)
 	end, { UseReportPanelContentHeightModuleResult })
-	UseGamepadStickScrollModule({
+	UseGamepadStickScrollFunction({
+		actionName = "RbxPlayerListReskinGamepadStickScroll",
 		scrollingFrameRef = UseRefResult,
 		enabled = not HasLegacyPanelBackgroundColor
 	})

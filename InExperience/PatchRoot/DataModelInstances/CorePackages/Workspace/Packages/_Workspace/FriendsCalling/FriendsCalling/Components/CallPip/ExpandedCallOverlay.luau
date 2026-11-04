@@ -13,8 +13,45 @@ local Text = FoundationModule.Text
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
+local function useElapsedText(ConnectedAt)
+	-- upvalues: ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	ReactModule.useEffect(function()
+		-- upvalues: ConnectedAt (copy), UseStateResult2 (copy)
+		if ConnectedAt == nil then
+			UseStateResult2(nil)
+			
+			return
+		end
+		local Flag = true
+		
+		local function tick()
+			-- upvalues: Flag (ref), ConnectedAt (upval), UseStateResult2 (upval), tick (copy)
+			if Flag then
+				local Largest = math.max(0, (math.floor(os.clock() - ConnectedAt)))
+				UseStateResult2(string.format("%02d:%02d", math.floor(Largest / 60), Largest % 60))
+				task.delay(1, tick)
+				
+				return
+			end
+		end
+		
+		tick()
+		
+		return function()
+			-- upvalues: Flag (ref)
+			Flag = false
+		end
+	end, { ConnectedAt })
+	
+	return UseStateResult
+end
+
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), HeaderBar (copy), IconName (copy), Text (copy), CallParticipantCardModule (copy), IconButton (copy), InputSize (copy), Icon (copy), IconSize (copy)
+	-- upvalues: UseTokensFunction (copy), useElapsedText (copy), ReactModule (copy), View (copy), HeaderBar (copy), IconName (copy), Text (copy), CallParticipantCardModule (copy), IconButton (copy), InputSize (copy), Icon (copy), IconSize (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseElapsedTextResult = useElapsedText(p1.connectedAt)
+	
 	return ReactModule.createElement(View, {
 		padding = { top = UDim.new(0, p1.topPadding) },
 		tag = {
@@ -41,10 +78,19 @@ return function(p1)
 					})
 				}),
 				Content = ReactModule.createElement(HeaderBar.Content, nil, {
-					Title = ReactModule.createElement(Text, {
-						tag = "auto-xy text-title-large content-emphasis",
-						testId = "friends-calling-pip-title",
-						Text = p1.participant.name
+					Titles = ReactModule.createElement(View, { tag = "col align-x-center auto-xy" }, {
+						Title = ReactModule.createElement(Text, {
+							LayoutOrder = 1,
+							tag = "auto-xy text-title-large content-emphasis",
+							testId = "friends-calling-pip-title",
+							Text = p1.participant.name
+						}),
+						Timer = if UseElapsedTextResult == nil then nil else ReactModule.createElement(Text, {
+							LayoutOrder = 2,
+							tag = "auto-xy text-body-medium content-default",
+							testId = "friends-calling-pip-timer",
+							Text = UseElapsedTextResult
+						})
 					})
 				}),
 				Trailing = ReactModule.createElement(HeaderBar.Trailing, nil, {
@@ -107,7 +153,7 @@ return function(p1)
 					Icon = ReactModule.createElement(Icon, {
 						name = IconName.X,
 						size = IconSize.Medium,
-						style = UseTokensFunction().Color.Extended.White.White_100
+						style = UseTokensResult.Color.Extended.White.White_100
 					})
 				})
 			})

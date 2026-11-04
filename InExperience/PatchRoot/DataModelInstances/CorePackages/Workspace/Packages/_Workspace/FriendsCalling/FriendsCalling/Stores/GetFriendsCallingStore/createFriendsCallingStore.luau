@@ -1,9 +1,12 @@
 ﻿local SignalsModule = require(script:FindFirstAncestor("FriendsCalling").Parent.Signals)
+local _ = Enum.FriendsCallingEndReason
+local _ = Enum.FriendsCallingParticipantStatus
+local _ = Enum.FriendsCallingPhase
 
 local function _(Player)
 	return {
 		userId = Player.UserId,
-		status = Player.Status.Name,
+		status = Player.Status,
 		leaveReason = Player.LeaveReason.Name,
 		volume = Player.Volume,
 		isLocalMuted = Player.IsLocalMuted,
@@ -19,7 +22,7 @@ local function readCall(Sound)
 		if FriendsCallingParticipant.ClassName == "FriendsCallingParticipant" then
 			table.insert(Participants, {
 				userId = FriendsCallingParticipant.UserId,
-				status = FriendsCallingParticipant.Status.Name,
+				status = FriendsCallingParticipant.Status,
 				leaveReason = FriendsCallingParticipant.LeaveReason.Name,
 				volume = FriendsCallingParticipant.Volume,
 				isLocalMuted = FriendsCallingParticipant.IsLocalMuted,
@@ -30,9 +33,9 @@ local function readCall(Sound)
 	end
 	return {
 		callId = Sound.CallId,
-		phase = Sound.Phase.Name,
+		phase = Sound.Phase,
 		initiatorUserId = Sound.InitiatorUserId,
-		endReason = Sound.EndReason.Name,
+		endReason = Sound.EndReason,
 		volume = Sound.Volume,
 		isDeafened = Sound.IsDeafened,
 		conversationId = Sound.ConversationId,
@@ -88,11 +91,11 @@ return function(Object)
 			table.insert(List1, (readCall(value.instance)))
 		end
 		local v1 = #List1 > 0
-		local NoV25: boolean = Flag and not v1
+		local NoV28: boolean = Flag and not v1
 		Flag = v1
 		Signal2(List1)
 		
-		if NoV25 then
+		if NoV28 then
 			Count += 1
 			Signal2_1(Count)
 		end

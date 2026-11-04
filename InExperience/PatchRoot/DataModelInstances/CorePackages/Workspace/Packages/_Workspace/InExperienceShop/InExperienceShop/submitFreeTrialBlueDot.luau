@@ -5,15 +5,26 @@ local NotificationsOrchestratorModule = require(Parent.NotificationsOrchestrator
 local InExperienceOffersModule = require(Parent.InExperienceOffers)
 local GetInExperienceShopStoreModule = require(InExperienceShop.Stores.getInExperienceShopStore)
 local GetShopGlobalIconStoreModule = require(InExperienceShop.Stores.GetShopGlobalIconStore)
-local FIntMaxTrialBlueDotImpressionsModule = require(InExperienceShop.Flags.FIntMaxTrialBlueDotImpressions)
-local FStringAvailableTrialBlueDotLifecycleKeyModule = require(InExperienceShop.Flags.FStringAvailableTrialBlueDotLifecycleKey)
-local FStringRedeemedTrialBlueDotLifecycleKeyModule = require(InExperienceShop.Flags.FStringRedeemedTrialBlueDotLifecycleKey)
-local FIntTrialBlueDotCooldownSecondsModule = require(InExperienceShop.Flags.FIntTrialBlueDotCooldownSeconds)
 local FFlagEnableExperienceShopGlobalIconModule = require(InExperienceShop.Flags.FFlagEnableExperienceShopGlobalIcon)
 local FFlagTrialNotificationBlueDotOnStudioModule = require(InExperienceShop.Flags.FFlagTrialNotificationBlueDotOnStudio)
+local FFlagEnableActiveFreeTrialBlueDotModule = require(InExperienceShop.Flags.FFlagEnableActiveFreeTrialBlueDot)
 local FFlagEnableRedeemedFreeTrialBlueDotModule = require(InExperienceShop.Flags.FFlagEnableRedeemedFreeTrialBlueDot)
 local HasRedeemedTrialWithinWindowModule = require(InExperienceShop.Utils.hasRedeemedTrialWithinWindow)
 local _ = require(InExperienceShop.Types)
+local Active = {
+	lifecycleKey = require(InExperienceShop.Flags.FStringRedeemedTrialBlueDotLifecycleKey),
+	maxImpressions = require(InExperienceShop.Flags.FIntMaxRedeemedTrialBlueDotImpressions),
+	cooldownSeconds = require(InExperienceShop.Flags.FIntRedeemedTrialBlueDotCooldownSeconds)
+}
+local config = {
+	available = {
+		lifecycleKey = require(InExperienceShop.Flags.FStringAvailableTrialBlueDotLifecycleKey),
+		maxImpressions = require(InExperienceShop.Flags.FIntMaxTrialBlueDotImpressions),
+		cooldownSeconds = require(InExperienceShop.Flags.FIntTrialBlueDotCooldownSeconds)
+	},
+	active = Active,
+	redeemed = Active
+}
 
 local function _(p1)
 	return p1
@@ -30,8 +41,8 @@ local Handle = nil
 local Handle1 = nil
 
 local _ = function(p1)
-	-- upvalues: FFlagEnableRedeemedFreeTrialBlueDotModule (copy), HasRedeemedTrialWithinWindowModule (copy)
-	return if next(p1.available) == nil then if FFlagEnableRedeemedFreeTrialBlueDotModule and HasRedeemedTrialWithinWindowModule(p1.redeemed) then "redeemed" else nil else "available"
+	-- upvalues: FFlagEnableActiveFreeTrialBlueDotModule (copy), FFlagEnableRedeemedFreeTrialBlueDotModule (copy), HasRedeemedTrialWithinWindowModule (copy)
+	return if next(p1.available) == nil then if FFlagEnableActiveFreeTrialBlueDotModule and next(p1.active) ~= nil then "active" elseif FFlagEnableRedeemedFreeTrialBlueDotModule and HasRedeemedTrialWithinWindowModule(p1.redeemed) then "redeemed" else nil else "available"
 end
 
 local function chooseSlot(p1)
@@ -49,20 +60,21 @@ local function chooseSlot(p1)
 	end
 end
 
-local function submitBlueDot(SlotId, Redeemed)
-	-- upvalues: NotificationsOrchestratorModule (copy), FStringRedeemedTrialBlueDotLifecycleKeyModule (copy), FStringAvailableTrialBlueDotLifecycleKeyModule (copy), FIntMaxTrialBlueDotImpressionsModule (copy), FIntTrialBlueDotCooldownSecondsModule (copy), FFlagTrialNotificationBlueDotOnStudioModule (copy)
+local function submitBlueDot(SlotId, Active)
+	-- upvalues: NotificationsOrchestratorModule (copy), config (copy), FFlagTrialNotificationBlueDotOnStudioModule (copy)
 	local Lifecycle = NotificationsOrchestratorModule.getSlotConfig(SlotId).lifecycle
+	local Entry = config[Active]
 	
 	return NotificationsOrchestratorModule.submit({
 		priority = 0,
 		source = "GamePassFreeTrialBlueDot",
 		slotId = SlotId,
-		lifecycleKey = if Redeemed == "redeemed" then FStringRedeemedTrialBlueDotLifecycleKeyModule else FStringAvailableTrialBlueDotLifecycleKeyModule,
+		lifecycleKey = Entry.lifecycleKey,
 		lifecyclePolicy = {
 			frequency = {
 				window = "forever",
-				maxImpressions = FIntMaxTrialBlueDotImpressionsModule,
-				cooldownSeconds = FIntTrialBlueDotCooldownSecondsModule
+				maxImpressions = Entry.maxImpressions,
+				cooldownSeconds = Entry.cooldownSeconds
 			},
 			visibility = if Lifecycle == nil then nil else Lifecycle.visibility
 		},
@@ -151,28 +163,25 @@ end
 local Flag = false
 
 local _ = function()
-	-- upvalues: v1 (ref), GetInExperienceShopStoreModule (copy), Effect (ref), SignalsModule (copy), Flag (ref), FFlagEnableRedeemedFreeTrialBlueDotModule (copy), HasRedeemedTrialWithinWindowModule (copy), chooseSlot (copy), Signal2 (copy), submitBlueDot (copy), isTrialBlueDotShowing (copy)
+	-- upvalues: v1 (ref), GetInExperienceShopStoreModule (copy), Effect (ref), SignalsModule (copy), Flag (ref), FFlagEnableActiveFreeTrialBlueDotModule (copy), FFlagEnableRedeemedFreeTrialBlueDotModule (copy), HasRedeemedTrialWithinWindowModule (copy), chooseSlot (copy), Signal2 (copy), submitBlueDot (copy), isTrialBlueDotShowing (copy)
 	local v2 = v1
 	
 	if v2 == nil then
 		local v3 = false
 		local InExperienceShopStoreModule = GetInExperienceShopStoreModule(false)
 		Effect = SignalsModule.createEffect(function(p1)
-			-- upvalues: InExperienceShopStoreModule (copy), Flag (upval), v3 (ref), FFlagEnableRedeemedFreeTrialBlueDotModule (upval), HasRedeemedTrialWithinWindowModule (upval), chooseSlot (upval), Signal2 (upval), submitBlueDot (upval)
+			-- upvalues: InExperienceShopStoreModule (copy), Flag (upval), v3 (ref), FFlagEnableActiveFreeTrialBlueDotModule (upval), FFlagEnableRedeemedFreeTrialBlueDotModule (upval), HasRedeemedTrialWithinWindowModule (upval), chooseSlot (upval), Signal2 (upval), submitBlueDot (upval)
 			local TrialAvailabilities = InExperienceShopStoreModule.getTrialAvailabilities(p1)
 			
 			if Flag or v3 then return end
-			local Redeemed = if next(TrialAvailabilities.available) == nil then if FFlagEnableRedeemedFreeTrialBlueDotModule and HasRedeemedTrialWithinWindowModule(TrialAvailabilities.redeemed) then "redeemed" else nil else "available"
+			local Active = if next(TrialAvailabilities.available) == nil then if FFlagEnableActiveFreeTrialBlueDotModule and next(TrialAvailabilities.active) ~= nil then "active" elseif FFlagEnableRedeemedFreeTrialBlueDotModule and HasRedeemedTrialWithinWindowModule(TrialAvailabilities.redeemed) then "redeemed" else nil else "available"
 			
-			if Redeemed == nil then return end
+			if Active == nil then return end
 			local SlotId = chooseSlot(p1)
 			
 			if SlotId ~= nil then
 				v3 = true
-				Signal2({
-					slotId = SlotId,
-					handle = submitBlueDot(SlotId, Redeemed)
-				})
+				Signal2({ slotId = SlotId, handle = submitBlueDot(SlotId, Active) })
 				
 				return
 			end
@@ -215,28 +224,25 @@ return (setmetatable({
 	end
 }, {
 	__call = function(_)
-		-- upvalues: v1 (ref), GetInExperienceShopStoreModule (copy), Effect (ref), SignalsModule (copy), Flag (ref), FFlagEnableRedeemedFreeTrialBlueDotModule (copy), HasRedeemedTrialWithinWindowModule (copy), chooseSlot (copy), Signal2 (copy), submitBlueDot (copy), isTrialBlueDotShowing (copy)
+		-- upvalues: v1 (ref), GetInExperienceShopStoreModule (copy), Effect (ref), SignalsModule (copy), Flag (ref), FFlagEnableActiveFreeTrialBlueDotModule (copy), FFlagEnableRedeemedFreeTrialBlueDotModule (copy), HasRedeemedTrialWithinWindowModule (copy), chooseSlot (copy), Signal2 (copy), submitBlueDot (copy), isTrialBlueDotShowing (copy)
 		local v2 = v1
 		
 		if v2 == nil then
 			local v3 = false
 			local InExperienceShopStoreModule = GetInExperienceShopStoreModule(false)
 			Effect = SignalsModule.createEffect(function(p1)
-				-- upvalues: InExperienceShopStoreModule (copy), Flag (upval), v3 (ref), FFlagEnableRedeemedFreeTrialBlueDotModule (upval), HasRedeemedTrialWithinWindowModule (upval), chooseSlot (upval), Signal2 (upval), submitBlueDot (upval)
+				-- upvalues: InExperienceShopStoreModule (copy), Flag (upval), v3 (ref), FFlagEnableActiveFreeTrialBlueDotModule (upval), FFlagEnableRedeemedFreeTrialBlueDotModule (upval), HasRedeemedTrialWithinWindowModule (upval), chooseSlot (upval), Signal2 (upval), submitBlueDot (upval)
 				local TrialAvailabilities = InExperienceShopStoreModule.getTrialAvailabilities(p1)
 				
 				if Flag or v3 then return end
-				local Redeemed = if next(TrialAvailabilities.available) == nil then if FFlagEnableRedeemedFreeTrialBlueDotModule and HasRedeemedTrialWithinWindowModule(TrialAvailabilities.redeemed) then "redeemed" else nil else "available"
+				local Active = if next(TrialAvailabilities.available) == nil then if FFlagEnableActiveFreeTrialBlueDotModule and next(TrialAvailabilities.active) ~= nil then "active" elseif FFlagEnableRedeemedFreeTrialBlueDotModule and HasRedeemedTrialWithinWindowModule(TrialAvailabilities.redeemed) then "redeemed" else nil else "available"
 				
-				if Redeemed == nil then return end
+				if Active == nil then return end
 				local SlotId = chooseSlot(p1)
 				
 				if SlotId ~= nil then
 					v3 = true
-					Signal2({
-						slotId = SlotId,
-						handle = submitBlueDot(SlotId, Redeemed)
-					})
+					Signal2({ slotId = SlotId, handle = submitBlueDot(SlotId, Active) })
 					
 					return
 				end

@@ -935,9 +935,11 @@ CoreScripts.InGameMenu.GameSettings.SwitchToVRComfortSettings,Custom Settings
 CoreScripts.InGameMenu.GameSettings.UINavToggle,UI Navigation Toggle
 CoreScripts.InGameMenu.GameSettings.UINavToggleDescription,"Use the ""\"" key to enter and exit UI navigation mode"
 CoreScripts.InGameMenu.GameSettings.UIScale,UI Scale
+CoreScripts.InGameMenu.GameSettings.UIScaleDescription,Adjust the size of buttons and menus across Roblox.
 CoreScripts.InGameMenu.GameSettings.UIScaleLargest,Largest
 CoreScripts.InGameMenu.GameSettings.UIScaleMode,UI Scale Mode
 CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,Auto
+CoreScripts.InGameMenu.GameSettings.UIScaleModeDescription,Set how UI scale is chosen across Roblox.
 CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,Manual
 CoreScripts.InGameMenu.GameSettings.UIScaleSmallest,Smallest
 CoreScripts.InGameMenu.GameSettings.VREnabled,VR Mode
@@ -3700,13 +3702,30 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} left
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsBody,You can only use 1 free trial at a time in each game. Try again after your current trial ends.
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsTitle,Another free trial is active
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedBody,You can only use 1 free trial for each pass.
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedTitle,Free trial already used
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedBody,"You already own this pass, so you don’t need a free trial."
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedTitle,You already own this
+Feature.InExperienceShop.Description.GamePassNotInUniverseBody,
+Feature.InExperienceShop.Description.GamePassNotInUniverseTitle,
+Feature.InExperienceShop.Description.GamePassNotPurchasableBody,This pass isn’t for sale right now.
+Feature.InExperienceShop.Description.GamePassNotPurchasableTitle,Not for sale right now
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledBody,This pass doesn’t have a free trial right now.
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledTitle,No free trial available
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"By purchasing Robux, you agree to our {termsLinkStart}Terms of Use{termsLinkEnd}, including the arbitration clause and revocation policy."
 Feature.InExperienceShop.GamePass,Game pass
+Feature.InExperienceShop.GenericTransactionErrorBody,
+Feature.InExperienceShop.GenericTransactionErrorTitle,
 Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,Bonus item
+Feature.InExperienceShop.Label.BuyGamePass,Buy game pass
+Feature.InExperienceShop.Label.BuyNow,Buy Now
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Ends in {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,Free trial
+Feature.InExperienceShop.Label.HaveTrial,Free trial for you
 Feature.InExperienceShop.Label.NoDescription,No Description
 Feature.InExperienceShop.Label.OfferEndTime,{offer} ending in {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,This is a preview of your Shop in Roblox Studio. Players do not see this preview.
@@ -3720,7 +3739,9 @@ Feature.InExperienceShop.Label.Timer.Second.Plural,{number} seconds
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 second
 Feature.InExperienceShop.Label.Trial,Trial
 Feature.InExperienceShop.Label.Trialed,Trialed
+Feature.InExperienceShop.Label.TryNow,Get free trial
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,You have successfully purchased {ROBUX_AMOUNT} Robux
+Feature.InExperienceShop.Tooltip.RecentlyRedeemed,Enjoyed your trial?
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Are you sure you want to permanently delete this item from your inventory? If you change your mind, you'll need to earn it again in an experience."
 Feature.Item.Label.DeleteItemUndercase,Delete item
 Feature.Landing.Label.PoweredBy,Powered by
@@ -3913,7 +3934,6 @@ Feature.Moments.Title.GenerateTextFeedbackReason,What went wrong?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Leave Moment creation?
 Feature.Moments.Title.MomentRemoved,Moment removed
-Feature.Moments.Title.PostInsights,Post insights
 Feature.Moments.Title.ReportPost,Report post
 Feature.Moments.Title.UnfollowConfirmationDialog,Unfollow @{username}?
 Feature.Moments.Tooltip.Creation,Everyone in the experience can view your Moments.
@@ -4310,7 +4330,7 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,{discountPercent}% of
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"By clicking ""Continue,"" you agree to the {linkStart}Roblox Subscription Terms{linkEnd}."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"By clicking ""Try it for free,"" you agree to the {linkStart}Roblox Subscription Terms.{linkEnd} Your free trial will end in 1 month and you will be charged automatically each month and can cancel at any time."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"By clicking ""Try it for free,"" you agree to the {linkStart}Roblox Subscription Terms.{linkEnd} Your free trial will end in {trialDuration} {trialPeriodLabel} and you will be charged automatically each {billingPeriodLabel} and can cancel at any time."
-Feature.RobloxSubscription.Label.FreeTrialText,Get free trial
+Feature.RobloxSubscription.Label.FreeTrialText,
 Feature.RobloxSubscription.Label.New,
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}1 month free,{boldEnd} then {price}/{periodType}"
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,"{boldStart}{trialDuration} {trialPeriodLabel} free,{boldEnd} then {price}/{periodType}"

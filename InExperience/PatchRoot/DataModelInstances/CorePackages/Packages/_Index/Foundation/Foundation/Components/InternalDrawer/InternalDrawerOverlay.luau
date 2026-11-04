@@ -19,10 +19,11 @@ local UseScreenSizeModule = require(Foundation.Components.Sheet.useScreenSize)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local InternalDrawerBackdropModule = require(Foundation.Enums.InternalDrawerBackdrop)
 local InternalDrawerShadowModule = require(Foundation.Enums.InternalDrawerShadow)
+local InternalDrawerSideModule = require(Foundation.Enums.InternalDrawerSide)
 local _ = require(script.Parent.Types)
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: UseOverlayModule (copy), UseTokensModule (copy), UseInternalDrawerVariantsModule (copy), InternalDrawerShadowModule (copy), UsePreferencesModule (copy), UseScreenSizeModule (copy), ReactModule (copy), UseAnimatedBindingFunction (copy), OtterModule (copy), InternalDrawerBackdropModule (copy), OnCloseCallbackReasonModule (copy), ReactRobloxModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), DashModule (copy), ConstantsModule (copy), ElevationOwnerScope (copy), ScrollViewModule (copy), BackdropModule (copy)
+	-- upvalues: UseOverlayModule (copy), UseTokensModule (copy), UseInternalDrawerVariantsModule (copy), InternalDrawerShadowModule (copy), UsePreferencesModule (copy), UseScreenSizeModule (copy), InternalDrawerSideModule (copy), ReactModule (copy), UseAnimatedBindingFunction (copy), OtterModule (copy), InternalDrawerBackdropModule (copy), OnCloseCallbackReasonModule (copy), ReactRobloxModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), DashModule (copy), ConstantsModule (copy), ElevationOwnerScope (copy), ScrollViewModule (copy), BackdropModule (copy)
 	local UseOverlayModuleResult = UseOverlayModule()
 	local UseTokensModuleResult = UseTokensModule()
 	local UseInternalDrawerVariantsModuleResult = UseInternalDrawerVariantsModule(p1.layout, p1.side)
@@ -31,6 +32,8 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	local ReducedMotion = UsePreferencesModule().reducedMotion
 	local Surface = UseInternalDrawerVariantsModuleResult.surface
 	local Smallest = math.min(p1.width, (math.max(UseScreenSizeModule().X - UseTokensModuleResult.Size.Size_1200 - Surface.margin, 0)))
+	local OuterBleed = p1.outerBleed or 0
+	local Config = if OuterBleed > 0 then if p1.side == InternalDrawerSideModule.End then { right = UDim.new(0, OuterBleed) } else { left = UDim.new(0, OuterBleed) } else nil
 	local UseRefResult = ReactModule.useRef(p1.isOpen)
 	UseRefResult.current = p1.isOpen
 	local UseRefResult1 = ReactModule.useRef(true)
@@ -106,10 +109,12 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 			p1.onRequestClose(OnCloseCallbackReasonModule.BackdropClick)
 		end
 	end, { p1.backdrop, p1.onRequestClose })
-	local _UDim2 = UDim2.new(0, Smallest, 1, -Surface.margin * 2)
+	local _UDim2 = UDim2.new(0, Smallest + OuterBleed, 1, -Surface.margin * 2)
 	local MapResult = UseAnimatedBindingResult:map(function(p2: number): UDim2
-		-- upvalues: Smallest (copy), Surface (copy)
-		return UDim2.new(Surface.anchorScaleX, Surface.openOffsetSign * Surface.margin * p2 + Surface.hiddenOffsetSign * ((1 - p2) * Smallest), 0, Surface.margin)
+		-- upvalues: OuterBleed (copy), p1 (copy), InternalDrawerSideModule (upval), Smallest (copy), Surface (copy)
+		local ScaledOuterBleed = (1 - p2) * OuterBleed
+		
+		return UDim2.new(Surface.anchorScaleX, if p1.side == InternalDrawerSideModule.End then -p2 * (Smallest + Surface.margin) + ScaledOuterBleed else Surface.openOffsetSign * Surface.margin * p2 + Surface.hiddenOffsetSign * ((1 - p2) * Smallest + OuterBleed + ScaledOuterBleed), 0, Surface.margin)
 	end)
 	
 	return UseOverlayModuleResult and ReactRobloxModule.createPortal(ReactModule.createElement(ViewModule, {
@@ -130,13 +135,21 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 			ref = Ref,
 			testId = p1.testId
 		}, {
-			Content = ReactModule.createElement(ViewModule, { tag = "col size-full", testId = `{p1.testId}--content` }, ReactModule.createElement(ElevationOwnerScope, { owner = Elevation }, {
+			Content = ReactModule.createElement(ViewModule, {
+				tag = "col size-full",
+				padding = Config,
+				testId = `{p1.testId}--column`
+			}, ReactModule.createElement(ElevationOwnerScope, { owner = Elevation }, {
 				Header = if p1.header == nil then nil else ReactModule.createElement(ViewModule, {
 					LayoutOrder = 1,
 					tag = "col size-full-0 auto-y",
 					testId = `{p1.testId}--header`
 				}, p1.header),
-				Body = ReactModule.createElement(ScrollViewModule, {
+				Body = if p1.scrolls == false then ReactModule.createElement(ViewModule, {
+					LayoutOrder = 2,
+					tag = "fill size-full-0",
+					testId = `{p1.testId}--body`
+				}, p1.children) else ReactModule.createElement(ScrollViewModule, {
 					LayoutOrder = 2,
 					tag = "fill size-full-0",
 					scroll = {

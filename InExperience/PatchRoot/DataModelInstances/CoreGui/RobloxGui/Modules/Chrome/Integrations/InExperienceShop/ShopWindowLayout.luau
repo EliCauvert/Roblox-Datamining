@@ -3,7 +3,7 @@ local GuiService = game:GetService("GuiService")
 local ServiceModule = require(Chrome.Service)
 local ViewportUtilModule = require(Chrome.ChromeShared.Service.ViewportUtil)
 local ConstantsModule = require(Chrome.ChromeShared.Unibar.Constants)
-local FFlagCenterInExperienceShopWindow = require(game:GetService("CorePackages").Workspace.Packages.InExperienceShop).FFlagCenterInExperienceShopWindow
+local FFlagCenterInExperienceShopWindowModule = require(game:GetService("CorePackages").Workspace.Packages.InExperienceShop.FFlagCenterInExperienceShopWindow)
 local Flag = false
 
 local function getCenteredShopWindowPosition(): UDim2
@@ -17,8 +17,8 @@ local function getCenteredShopWindowPosition(): UDim2
 end
 
 local function _()
-	-- upvalues: FFlagCenterInExperienceShopWindow (copy), Flag (ref), ServiceModule (copy), ConstantsModule (copy), getCenteredShopWindowPosition (copy)
-	if FFlagCenterInExperienceShopWindow and not Flag then
+	-- upvalues: FFlagCenterInExperienceShopWindowModule (copy), Flag (ref), ServiceModule (copy), ConstantsModule (copy), getCenteredShopWindowPosition (copy)
+	if FFlagCenterInExperienceShopWindowModule and not Flag then
 		ServiceModule:updateWindowPosition(ConstantsModule.IN_EXPERIENCE_SHOP_ID, getCenteredShopWindowPosition())
 		Flag = true
 		
@@ -31,12 +31,28 @@ return {
 	MAX_WINDOW_HEIGHT = 754,
 	getCenteredShopWindowPosition = getCenteredShopWindowPosition,
 	getStartingWindowPosition = function()
-		-- upvalues: FFlagCenterInExperienceShopWindow (copy), getCenteredShopWindowPosition (copy)
-		return if FFlagCenterInExperienceShopWindow then getCenteredShopWindowPosition() else nil
+		-- upvalues: FFlagCenterInExperienceShopWindowModule (copy), getCenteredShopWindowPosition (copy)
+		return if FFlagCenterInExperienceShopWindowModule then getCenteredShopWindowPosition() else nil
 	end,
 	toggleInExperienceShopWindow = function()
-		-- upvalues: ServiceModule (copy), ConstantsModule (copy), FFlagCenterInExperienceShopWindow (copy), Flag (ref), getCenteredShopWindowPosition (copy)
-		if not ServiceModule:isWindowOpen(ConstantsModule.IN_EXPERIENCE_SHOP_ID) and FFlagCenterInExperienceShopWindow and not Flag then
+		-- upvalues: ServiceModule (copy), ConstantsModule (copy), FFlagCenterInExperienceShopWindowModule (copy), Flag (ref), getCenteredShopWindowPosition (copy)
+		if not ServiceModule:isWindowOpen(ConstantsModule.IN_EXPERIENCE_SHOP_ID) and FFlagCenterInExperienceShopWindowModule and not Flag then
+			ServiceModule:updateWindowPosition(ConstantsModule.IN_EXPERIENCE_SHOP_ID, getCenteredShopWindowPosition())
+			Flag = true
+		end
+		ServiceModule:toggleWindow(ConstantsModule.IN_EXPERIENCE_SHOP_ID)
+	end,
+	openInExperienceShopWindow = function()
+		-- upvalues: ConstantsModule (copy), ServiceModule (copy), FFlagCenterInExperienceShopWindowModule (copy), Flag (ref), getCenteredShopWindowPosition (copy)
+		local INEXPERIENCESHOPID = ConstantsModule.IN_EXPERIENCE_SHOP_ID
+		
+		if ServiceModule:isWindowOpen(INEXPERIENCESHOPID) then return end
+		if ServiceModule:isIntegrationValid(INEXPERIENCESHOPID) then
+			ServiceModule:activate(INEXPERIENCESHOPID)
+			
+			return
+		end
+		if not ServiceModule:isWindowOpen(ConstantsModule.IN_EXPERIENCE_SHOP_ID) and FFlagCenterInExperienceShopWindowModule and not Flag then
 			ServiceModule:updateWindowPosition(ConstantsModule.IN_EXPERIENCE_SHOP_ID, getCenteredShopWindowPosition())
 			Flag = true
 		end

@@ -59,6 +59,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 		AutoButtonColor = if TextButton == "TextButton" then WithDefaultsModuleResult.AutoButtonColor else nil,
 		FontFace = UseMemoResult,
 		LineHeight = if WithDefaultsModuleResult.fontStyle == nil then nil else WithDefaultsModuleResult.fontStyle.LineHeight,
+		OpenTypeFeatures = WithDefaultsModuleResult.OpenTypeFeatures,
 		RichText = WithDefaultsModuleResult.RichText,
 		Text = WithDefaultsModuleResult.Text,
 		TextColor3 = if WithDefaultsModuleResult.textStyle then IndexBindableModule(WithDefaultsModuleResult.textStyle, "Color3") else nil,

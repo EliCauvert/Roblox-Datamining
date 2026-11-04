@@ -5,12 +5,10 @@ local Parent = ExpChat.Parent
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(Parent.Signals)
-local SharedFlagsModule = require(Parent.SharedFlags)
 local ConfigModule = require(ExpChat.Config)
 local AdvanceHistoryScrollModule = require(script.Parent.advanceHistoryScroll)
 local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
-local FFlagExpChatEnableFriendsTab = SharedFlagsModule.FFlagExpChatEnableFriendsTab
-local FFlagFriendsChatOsaSystemMessage = SharedFlagsModule.FFlagFriendsChatOsaSystemMessage
+local FFlagExpChatEnableFriendsTab = require(Parent.SharedFlags).FFlagExpChatEnableFriendsTab
 local GetFFlagExpChatSendWindowScrollEventModule = require(ExpChat.Flags.getFFlagExpChatSendWindowScrollEvent)
 local FFlagExpChatLimitScrollingV2WindowModule = require(ExpChat.Flags.FFlagExpChatLimitScrollingV2Window)
 local FFlagExpChatScrollbarInsetModule = require(ExpChat.Flags.FFlagExpChatScrollbarInset)
@@ -40,10 +38,10 @@ local Callback = require(ExpChat.ChatWindow.Helpers.debounce)(function()
 end, (game:DefineFastInt("ExpChatWindowScrollV3Debounce", 0)))
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseStyleFunction (copy), ReactModule (copy), FFlagFriendsChatOsaSystemMessage (copy), SignalsReactModule (copy), UserInputService (copy), ExpChatPerfTracker (copy), FFlagExpChatPerfTrackerTabName (copy), ExpChatScrollLockThresholdRatio (copy), GetFFlagExpChatSendWindowScrollEventModule (copy), Callback (copy), FFlagExpChatEnableFriendsTab (copy), FFlagExpChatRenderHistoricalMessagesModule (copy), AdvanceHistoryScrollModule (copy), ConfigModule (copy), FFlagExpChatScrollbarInsetModule (copy), FFlagExpChatLimitScrollingV2WindowModule (copy), FFlagExpChatFixWarmMountBottomLockModule (copy)
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), SignalsReactModule (copy), UserInputService (copy), ExpChatPerfTracker (copy), FFlagExpChatPerfTrackerTabName (copy), ExpChatScrollLockThresholdRatio (copy), GetFFlagExpChatSendWindowScrollEventModule (copy), Callback (copy), FFlagExpChatEnableFriendsTab (copy), FFlagExpChatRenderHistoricalMessagesModule (copy), AdvanceHistoryScrollModule (copy), ConfigModule (copy), FFlagExpChatScrollbarInsetModule (copy), FFlagExpChatLimitScrollingV2WindowModule (copy), FFlagExpChatFixWarmMountBottomLockModule (copy)
 	local Theme = UseStyleFunction().Theme
 	local UseRefResult = ReactModule.useRef(nil)
-	local IsScrollToTopOnReset: boolean = FFlagFriendsChatOsaSystemMessage and p1.scrollToTopOnReset == true
+	local IsScrollToTopOnReset = p1.scrollToTopOnReset == true
 	local UseRefResult1 = ReactModule.useRef(not IsScrollToTopOnReset)
 	local UseRefResult2 = ReactModule.useRef(nil)
 	local UseRefResult3 = ReactModule.useRef(false)

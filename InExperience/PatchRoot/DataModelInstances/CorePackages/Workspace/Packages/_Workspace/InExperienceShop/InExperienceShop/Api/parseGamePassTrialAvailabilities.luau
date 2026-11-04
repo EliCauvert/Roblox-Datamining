@@ -30,6 +30,7 @@ return function(List)
 				else
 					local EndTime = value.endTime
 					config.redeemed[Text] = {
+						gamePassId = Text,
 						endTime = if typeof(EndTime) == "string" then DateTime.fromIsoDate(EndTime) else nil
 					}
 				end

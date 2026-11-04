@@ -917,9 +917,11 @@ CoreScripts.InGameMenu.GameSettings.SwitchToVRComfortSettings,การตั้
 CoreScripts.InGameMenu.GameSettings.UINavToggle,เปิด/ปิดการนำทางบน UI
 CoreScripts.InGameMenu.GameSettings.UINavToggleDescription,"ใช้คีย์ ""\ เพื่อเข้าสู่และออกจากโหมดการนำทางบน UI"""
 CoreScripts.InGameMenu.GameSettings.UIScale,การปรับขนาด UI
+CoreScripts.InGameMenu.GameSettings.UIScaleDescription,ปรับขนาดปุ่มและเมนูทั่วทั้ง Roblox
 CoreScripts.InGameMenu.GameSettings.UIScaleLargest,ใหญ่ที่สุด
 CoreScripts.InGameMenu.GameSettings.UIScaleMode,โหมดปรับขนาด UI
 CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,อัตโนมัติ
+CoreScripts.InGameMenu.GameSettings.UIScaleModeDescription,ตั้งค่าวิธีเลือกการปรับขนาด UI ทั่วทั้ง Roblox
 CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,ด้วยตัวเอง
 CoreScripts.InGameMenu.GameSettings.UIScaleSmallest,เล็กที่สุด
 CoreScripts.InGameMenu.GameSettings.VREnabled,โหมด VR
@@ -3683,13 +3685,27 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,เหลืออีก {time}
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsBody,คุณใช้สิทธิ์ทดลองใช้ฟรีได้ครั้งละ 1 สิทธิ์ในแต่ละเกม โปรดลองอีกครั้งหลังจากช่วงทดลองใช้ปัจจุบันสิ้นสุดลง
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsTitle,มีการทดลองใช้ฟรีอื่นอยู่แล้ว
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedBody,บัตรผ่านแต่ละใบใช้สิทธิ์ทดลองใช้ฟรีได้เพียง 1 ครั้ง
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedTitle,ใช้สิทธิ์ทดลองใช้ฟรีไปแล้ว
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedBody,คุณมีบัตรผ่านนี้อยู่แล้ว จึงไม่จำเป็นต้องทดลองใช้ฟรี
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedTitle,คุณมีบัตรผ่านนี้อยู่แล้ว
+Feature.InExperienceShop.Description.GamePassNotInUniverseBody,
+Feature.InExperienceShop.Description.GamePassNotInUniverseTitle,
+Feature.InExperienceShop.Description.GamePassNotPurchasableBody,บัตรผ่านนี้ยังไม่เปิดขายในตอนนี้
+Feature.InExperienceShop.Description.GamePassNotPurchasableTitle,ยังไม่เปิดขายในตอนนี้
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledBody,บัตรผ่านนี้ไม่มีสิทธิ์ทดลองใช้ฟรีในตอนนี้
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledTitle,ไม่มีการทดลองใช้ฟรี
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,เมื่อคุณซื้อ Robux จะถือว่าคุณยอมรับ{termsLinkStart}ข้อกำหนดการใช้งาน{termsLinkEnd} รวมถึงข้อกำหนดการใช้อนุญาโตตุลาการและนโยบายเกี่ยวกับการเพิกถอน
 Feature.InExperienceShop.GamePass,
 Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,ไอเท็มโบนัส
+Feature.InExperienceShop.Label.BuyNow,ซื้อตอนนี้เลย
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,สิ้นสุดใน {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,ทดลองใช้ฟรี
+Feature.InExperienceShop.Label.HaveTrial,คุณมีสิทธิ์ทดลองใช้ฟรี
 Feature.InExperienceShop.Label.NoDescription,
 Feature.InExperienceShop.Label.OfferEndTime,{offer} จะสิ้นสุดใน {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,นี่คือตัวอย่างร้านค้าของคุณใน Roblox Studio ผู้เล่นจะไม่เห็นตัวอย่างนี้
@@ -3703,7 +3719,9 @@ Feature.InExperienceShop.Label.Timer.Second.Plural,{number} วินาที
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 วินาที
 Feature.InExperienceShop.Label.Trial,ทดลองใช้
 Feature.InExperienceShop.Label.Trialed,ทดลองใช้แล้ว
+Feature.InExperienceShop.Label.TryNow,
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,คุณซื้อ {ROBUX_AMOUNT} Robux สำเร็จเรียบร้อยแล้ว
+Feature.InExperienceShop.Tooltip.RecentlyRedeemed,ชอบช่วงทดลองใช้ฟรีไหม?
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"คุณแน่ใจหรือไม่ว่าคุณต้องการ ""ลบ"" ไอเท็มนี้ออกจากคลังไอเท็มของคุณอย่างถาวร? หากเปลี่ยนใจ จะต้องทำเพื่อให้ได้รับอีกครั้งในประสบการณ์"
 Feature.Item.Label.DeleteItemUndercase,ลบไอเท็ม
 Feature.Landing.Label.PoweredBy,ดำเนินการโดย
@@ -3896,7 +3914,6 @@ Feature.Moments.Title.GenerateTextFeedbackReason,มีอะไรผิดพ�
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,ต้องการออกจากการสร้างสรรค์โมเมนต์ใช่ไหม?
 Feature.Moments.Title.MomentRemoved,
-Feature.Moments.Title.PostInsights,ข้อมูลเชิงลึกของโพสต์
 Feature.Moments.Title.ReportPost,รายงานโพสต์
 Feature.Moments.Title.UnfollowConfirmationDialog,เลิกติดตาม @{username} ใช่ไหม?
 Feature.Moments.Tooltip.Creation,ทุกคนในประสบการณ์สามารถดูโมเมนต์ของคุณได้

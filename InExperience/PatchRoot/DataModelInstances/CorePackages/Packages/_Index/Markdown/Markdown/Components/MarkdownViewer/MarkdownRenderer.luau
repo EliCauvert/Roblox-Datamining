@@ -30,14 +30,13 @@ local Highlighter = MarkdownCoreModule.Utils.Highlighter
 local GetNodeTypeConfigModule = require(Parent.Utils.getNodeTypeConfig)
 local IsInlineElementFunction = InlineLayoutModule.Utils.isInlineElement
 local Flags = MarkdownCoreModule.Flags
-local Flags1 = FoundationModule.Utility.Flags
 local FFlagMarkdownTables = Flags.FFlagMarkdownTables or Flags.FFlagMarkdownTagFallbacks
 local BuilderSans = Enum.Font.BuilderSans
 local _UDim2 = UDim2.fromOffset(16, 16)
 local Code = Enum.Font.Code
 local _Font = Font.new("rbxasset://fonts/families/BuilderMono.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
 
-local function v34(p1)
+local function v33(p1)
 	print(`[Default link callback]: URL [{p1}] is clicked`)
 end
 
@@ -490,7 +489,7 @@ if Flags.FFlagMarkdownTagFallbacks then
 	MarkdownRendererModule.defaultRenderers.ACTION = renderText
 end
 function MarkdownRendererModule.render(p5, p6)
-	-- upvalues: MarkdownRendererModule (copy), Flags (copy), NormalizeStyleFontFunction (copy), DashModule (copy), Flags1 (copy), _Font (copy), BuilderSans (copy), Code (copy), _UDim2 (copy), v34 (copy), processChildren (copy), FFlagMarkdownTables (copy), render (copy)
+	-- upvalues: MarkdownRendererModule (copy), Flags (copy), NormalizeStyleFontFunction (copy), DashModule (copy), _Font (copy), BuilderSans (copy), Code (copy), _UDim2 (copy), v33 (copy), processChildren (copy), FFlagMarkdownTables (copy), render (copy)
 	MarkdownRendererModule.renderers = p6.userRenderers
 	local Copy = table.clone(p6.markdownRendererProps or {})
 	local config = nil
@@ -503,7 +502,7 @@ function MarkdownRendererModule.render(p5, p6)
 			Copy.headerStyles = DashModule.map(Copy.headerStyles, NormalizeStyleFontFunction)
 		end
 		local BodyMedium = p6.tokens.Typography.BodyMedium
-		local FontFace = if Flags1.FoundationFontFaceMigration then NormalizeStyleFontFunction({ font = BodyMedium.Font }).fontFace else Font.fromEnum(BodyMedium.Font)
+		local FontFace = NormalizeStyleFontFunction({ font = BodyMedium.Font }).fontFace
 		local FontSize: number = BodyMedium.FontSize
 		config = {
 			textStyles = { textSize = FontSize, fontFace = FontFace },
@@ -542,7 +541,7 @@ function MarkdownRendererModule.render(p5, p6)
 		linkStyles = {
 			linkColor = `#{p6.tokens.Color.Content.Link.Color3:ToHex()}`
 		},
-		linkCallback = p6.linkCallback or v34,
+		linkCallback = p6.linkCallback or v33,
 		colorScheme = p6.colorScheme,
 		processChildren = processChildren
 	}, Copy)

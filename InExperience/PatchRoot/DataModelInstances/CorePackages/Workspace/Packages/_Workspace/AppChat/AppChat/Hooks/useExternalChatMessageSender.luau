@@ -20,11 +20,11 @@ local GetChatModerationStatusDataHydrationModule = require(AppChat.Stores.GetCha
 local _ = require(AppChat.Stores.GetConversationStore)
 local GetConversationSendEligibilityStatusModule = require(AppChat.Utils.getConversationSendEligibilityStatus)
 local GetUserSendEligibilityStatusModule = require(AppChat.Utils.getUserSendEligibilityStatus)
-local GetDeepValue2Module = require(AppChat.Utils.getDeepValue2)
 local NavigateWithOsaGateModule = require(AppChat.Utils.navigateWithOsaGate)
 local UseAppPolicyModule = require(AppChat.Hooks.useAppPolicy)
 local UseIsChatEnabledModule = require(AppChat.Hooks.useIsChatEnabled)
 local UseIsChatUserMessagesEnabledModule = require(AppChat.Hooks.useIsChatUserMessagesEnabled)
+local UseChatSettingsRetrievalStatusModule = require(AppChat.Hooks.useChatSettingsRetrievalStatus)
 local UseIsGroupChatEnabledModule = require(AppChat.Hooks.useIsGroupChatEnabled)
 local IsNavigationAvailableFunction = require(Parent.RobloxAppNavigation).isNavigationAvailable
 local FFlagShareSheetFriendsSort = require(Parent.SharedFlags).FFlagShareSheetFriendsSort
@@ -42,7 +42,7 @@ local _ = function(p1): boolean
 end
 
 return function(p1)
-	-- upvalues: UseDispatchFunction (copy), GetChatModerationStatusDataHydrationModule (copy), UseAppPolicyModule (copy), UseSelectorFunction (copy), GetDeepValue2Module (copy), UseIsChatEnabledModule (copy), UseIsChatUserMessagesEnabledModule (copy), UseIsGroupChatEnabledModule (copy), RetrievalStatus (copy), ReactModule (copy), GetConversationSendEligibilityStatusModule (copy), GetUserSendEligibilityStatusModule (copy), ReceivedConversationModule (copy), PromiseModule (copy), SendTextMessageModule (copy), StatusCodes (copy), AppChatNetworkingModule (copy), NavigateWithOsaGateModule (copy), CreateConversationFromFriendPlaceholderModule (copy), FFlagShareSheetFriendsSort (copy), CreateConversationModule (copy), NavigateIntoChatModule1 (copy), NavigateIntoChatModule (copy), EnumScreensModule (copy), IsNavigationAvailableFunction (copy)
+	-- upvalues: UseDispatchFunction (copy), GetChatModerationStatusDataHydrationModule (copy), UseAppPolicyModule (copy), UseChatSettingsRetrievalStatusModule (copy), UseSelectorFunction (copy), UseIsChatEnabledModule (copy), UseIsChatUserMessagesEnabledModule (copy), UseIsGroupChatEnabledModule (copy), RetrievalStatus (copy), ReactModule (copy), GetConversationSendEligibilityStatusModule (copy), GetUserSendEligibilityStatusModule (copy), ReceivedConversationModule (copy), PromiseModule (copy), SendTextMessageModule (copy), StatusCodes (copy), AppChatNetworkingModule (copy), NavigateWithOsaGateModule (copy), CreateConversationFromFriendPlaceholderModule (copy), FFlagShareSheetFriendsSort (copy), CreateConversationModule (copy), NavigateIntoChatModule1 (copy), NavigateIntoChatModule (copy), EnumScreensModule (copy), IsNavigationAvailableFunction (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local ChatModerationStatusDataHydrationModule = GetChatModerationStatusDataHydrationModule()
 	local UseAppPolicyModuleResult = UseAppPolicyModule(function(p2)
@@ -51,21 +51,18 @@ return function(p1)
 	local UseAppPolicyModuleResult1 = UseAppPolicyModule(function(p2)
 		return p2.getCanSeeChatTerminology()
 	end)
-	local UseSelectorResult = UseSelectorFunction(function(p2)
-		-- upvalues: GetDeepValue2Module (upval)
-		return GetDeepValue2Module(p2, "ChatAppReducer.ChatSettings.retrievalStatus")
-	end)
-	local UseSelectorResult1 = UseSelectorFunction(function(p2): number
+	local UseChatSettingsRetrievalStatusModuleResult = UseChatSettingsRetrievalStatusModule()
+	local UseSelectorResult = UseSelectorFunction(function(p2): number
 		return tonumber(p2.LocalUserId) or 0
 	end)
-	local UseSelectorResult2 = UseSelectorFunction(function(p2): boolean
+	local UseSelectorResult1 = UseSelectorFunction(function(p2): boolean
 		return p2.Navigation ~= nil
 	end)
 	local UseIsChatEnabledModuleResult = UseIsChatEnabledModule()
 	local UseIsChatUserMessagesEnabledModuleResult = UseIsChatUserMessagesEnabledModule()
 	local UseIsGroupChatEnabledModuleResult = UseIsGroupChatEnabledModule()
-	local IsNotUseSelectorResultMatch = UseSelectorResult ~= RetrievalStatus.Done
-	local UseIsChatUserMessagesEnabledModuleResult1 = not IsNotUseSelectorResultMatch and (UseAppPolicyModuleResult and (UseAppPolicyModuleResult1 and (UseIsChatEnabledModuleResult and UseIsChatUserMessagesEnabledModuleResult)))
+	local IsNotUseChatSettingsRetrievalStatusModuleResultMatch = UseChatSettingsRetrievalStatusModuleResult ~= RetrievalStatus.Done
+	local UseIsChatUserMessagesEnabledModuleResult1 = not IsNotUseChatSettingsRetrievalStatusModuleResultMatch and (UseAppPolicyModuleResult and (UseAppPolicyModuleResult1 and (UseIsChatEnabledModuleResult and UseIsChatUserMessagesEnabledModuleResult)))
 	local UseResult = ReactModule.useCallback(function(Conversation, AllowConversationStatusLoading)
 		-- upvalues: GetConversationSendEligibilityStatusModule (upval), UseIsChatUserMessagesEnabledModuleResult1 (copy), UseIsGroupChatEnabledModuleResult (copy), ChatModerationStatusDataHydrationModule (copy)
 		return GetConversationSendEligibilityStatusModule({
@@ -144,7 +141,7 @@ return function(p1)
 		end)
 	end, { UseDispatchResult, UseResult })
 	local UseResult4 = ReactModule.useCallback(function(p2, p3)
-		-- upvalues: UseResult1 (copy), PromiseModule (upval), CreateConversationFromFriendPlaceholderModule (upval), UseSelectorResult1 (copy), FFlagShareSheetFriendsSort (upval), UseResult3 (copy), UseResult (copy), UseDispatchResult (copy), ReceivedConversationModule (upval), SendTextMessageModule (upval), StatusCodes (upval), AppChatNetworkingModule (upval), NavigateWithOsaGateModule (upval)
+		-- upvalues: UseResult1 (copy), PromiseModule (upval), CreateConversationFromFriendPlaceholderModule (upval), UseSelectorResult (copy), FFlagShareSheetFriendsSort (upval), UseResult3 (copy), UseResult (copy), UseDispatchResult (copy), ReceivedConversationModule (upval), SendTextMessageModule (upval), StatusCodes (upval), AppChatNetworkingModule (upval), NavigateWithOsaGateModule (upval)
 		if not UseResult1(p2) then
 			return PromiseModule.resolve({ conversationId = nil, status = "failure" })
 		end
@@ -152,7 +149,7 @@ return function(p1)
 		local ConversationFromFriendPlaceholderModule = nil
 		
 		if IsFriends then
-			ConversationFromFriendPlaceholderModule = CreateConversationFromFriendPlaceholderModule(p2, UseSelectorResult1)
+			ConversationFromFriendPlaceholderModule = CreateConversationFromFriendPlaceholderModule(p2, UseSelectorResult)
 			
 			if ConversationFromFriendPlaceholderModule == nil then
 				return PromiseModule.resolve({ conversationId = nil, status = "failure" })
@@ -210,7 +207,7 @@ return function(p1)
 		UseResult1,
 		UseDispatchResult,
 		UseResult,
-		UseSelectorResult1,
+		UseSelectorResult,
 		UseResult3
 	})
 	local UseResult5 = ReactModule.useCallback(function(p2, p3)
@@ -225,14 +222,14 @@ return function(p1)
 			UseDispatchResult(NavigateIntoChatModule({ screen = EnumScreensModule.ChatLanding, params = {} }))
 		end
 	end, { UseDispatchResult })
-	local IsNavigationAvailable = not p1 and (IsNavigationAvailableFunction() or UseSelectorResult2)
+	local IsNavigationAvailable = not p1 and (IsNavigationAvailableFunction() or UseSelectorResult1)
 	
 	return ReactModule.useMemo(function()
-		-- upvalues: UseIsChatUserMessagesEnabledModuleResult1 (copy), UseIsGroupChatEnabledModuleResult (copy), IsNotUseSelectorResultMatch (copy), UseResult1 (copy), UseResult2 (copy), IsNavigationAvailable (copy), UseResult6 (copy), UseResult4 (copy), UseResult5 (copy)
+		-- upvalues: UseIsChatUserMessagesEnabledModuleResult1 (copy), UseIsGroupChatEnabledModuleResult (copy), IsNotUseChatSettingsRetrievalStatusModuleResultMatch (copy), UseResult1 (copy), UseResult2 (copy), IsNavigationAvailable (copy), UseResult6 (copy), UseResult4 (copy), UseResult5 (copy)
 		return {
 			isAvailable = UseIsChatUserMessagesEnabledModuleResult1,
 			isGroupChatEnabled = UseIsGroupChatEnabledModuleResult,
-			isLoading = IsNotUseSelectorResultMatch,
+			isLoading = IsNotUseChatSettingsRetrievalStatusModuleResultMatch,
 			canSendToConversation = UseResult1,
 			canSendToUser = UseResult2,
 			navigateToChat = if IsNavigationAvailable then UseResult6 else nil,
@@ -241,7 +238,7 @@ return function(p1)
 		}
 	end, {
 		UseIsChatUserMessagesEnabledModuleResult1, UseIsGroupChatEnabledModuleResult,
-		IsNotUseSelectorResultMatch, UseResult1, UseResult2, UseResult6,
-		IsNavigationAvailable, UseResult4, UseResult5
+		IsNotUseChatSettingsRetrievalStatusModuleResultMatch, UseResult1, UseResult2,
+		UseResult6, IsNavigationAvailable, UseResult4, UseResult5
 	})
 end

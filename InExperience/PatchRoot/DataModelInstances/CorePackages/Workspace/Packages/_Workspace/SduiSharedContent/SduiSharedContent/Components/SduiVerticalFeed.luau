@@ -49,7 +49,6 @@ local FFlagLuaAppMediaGalleryGamepadSupport = SharedFlagsModule.FFlagLuaAppMedia
 local FFlagLuaAppOneByTwoHoverIdleAutoplay = SharedFlagsModule.FFlagLuaAppOneByTwoHoverIdleAutoplay
 local FFlagLuaAppSduiSuppressVideoDetectorDuringScroll = SharedFlagsModule.FFlagLuaAppSduiSuppressVideoDetectorDuringScroll
 local FFlagAppPageShellScrollToTopFocus = SharedFlagsModule.FFlagAppPageShellScrollToTopFocus
-local FFlagLuaAppsDefaultSelection = SharedFlagsModule.FFlagLuaAppsDefaultSelection
 local FFlagSduiVerticalFeedScrollTelemetry = SharedFlagsModule.FFlagSduiVerticalFeedScrollTelemetry
 local FFlagSduiIndividualFeedItemSpacing = SharedFlagsModule.FFlagSduiIndividualFeedItemSpacing
 local FFlagSduiSamePoolFeedItemSpacing = SharedFlagsModule.FFlagSduiSamePoolFeedItemSpacing
@@ -130,7 +129,7 @@ local function useProgressiveRowCapWithScroll(FeedItems, InitialNumToRender, Pro
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FFlagLuaAppSduiVideoThumbnail (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), UseTokensFunction (copy), UseNavBarPlacementFunction (copy), AppNavBarModule (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), ReactModule (copy), FFlagSduiVerticalFeedPageShellSupport (copy), FFlagSduiVerticalFeedProgressiveFillOnScroll (copy), AppCommonLibModule (copy), FFlagLuaAppSduiHomeFriendCarousel (copy), FFlagSduiSrpScrollAway (copy), ScrollMovementDirection (copy), FFlagSduiSamePoolFeedItemSpacing (copy), SduiEnableBackToTop (copy), FFlagSduiVerticalFeedScrollTelemetry (copy), CreateScrollIntervalPerformanceTrackerFunction (copy), UseAnimateScrollViewToSelectionFunction (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), UseLastInputModeFunction (copy), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (copy), useProgressiveRowCapWithScroll (copy), SduiVerticalFeedScrollUnderfillDebounceMs (copy), UseProgressiveRowCapModule (copy), UseVerticalScrolledToEndThresholdModule (copy), BackToTopButtonModule (copy), FFlagSduiIndividualFeedItemSpacing (copy), PoolStoreLayoutStoreWiring (copy), SduiFeedImpressionsDetectorModule (copy), BuildSduiFeedChildrenModule (copy), FFlagAppPageShellScrollToTopFocus (copy), DiscoveryTypesModule (copy), FFlagLuaAppsDefaultSelection (copy), SduiFeedContextModule (copy), FFlagSduiPageCanvasCollectionLayout (copy), CollectionLayoutStoreProvider (copy), View (copy), ViewportVideoAutoplaySync (copy), ScrollDetector (copy), SduiStickyHeaderModule (copy), PullToRefreshSpinner (copy)
+	-- upvalues: FFlagLuaAppSduiVideoThumbnail (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), UseTokensFunction (copy), UseNavBarPlacementFunction (copy), AppNavBarModule (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), ReactModule (copy), FFlagSduiVerticalFeedPageShellSupport (copy), FFlagSduiVerticalFeedProgressiveFillOnScroll (copy), AppCommonLibModule (copy), FFlagLuaAppSduiHomeFriendCarousel (copy), FFlagSduiSrpScrollAway (copy), ScrollMovementDirection (copy), FFlagSduiSamePoolFeedItemSpacing (copy), SduiEnableBackToTop (copy), FFlagSduiVerticalFeedScrollTelemetry (copy), CreateScrollIntervalPerformanceTrackerFunction (copy), UseAnimateScrollViewToSelectionFunction (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), UseLastInputModeFunction (copy), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (copy), useProgressiveRowCapWithScroll (copy), SduiVerticalFeedScrollUnderfillDebounceMs (copy), UseProgressiveRowCapModule (copy), UseVerticalScrolledToEndThresholdModule (copy), BackToTopButtonModule (copy), FFlagSduiIndividualFeedItemSpacing (copy), PoolStoreLayoutStoreWiring (copy), SduiFeedImpressionsDetectorModule (copy), BuildSduiFeedChildrenModule (copy), FFlagAppPageShellScrollToTopFocus (copy), DiscoveryTypesModule (copy), SduiFeedContextModule (copy), FFlagSduiPageCanvasCollectionLayout (copy), CollectionLayoutStoreProvider (copy), View (copy), ViewportVideoAutoplaySync (copy), ScrollDetector (copy), SduiStickyHeaderModule (copy), PullToRefreshSpinner (copy)
 	local AnalyticsContext = p1.analyticsContext
 	local SduiContext = p1.sduiContext
 	local VideoPlaybackContext = if FFlagLuaAppSduiVideoThumbnail or FFlagLuaAppOneByTwoHoverIdleAutoplay then SduiContext.videoPlaybackContext else nil
@@ -361,7 +360,7 @@ return ReactModule.memo(function(p1)
 	end
 	UseVerticalScrolledToEndThresholdModule(ScrollingFrameRef, ThresholdFromEnd, if UseProgressiveRowCapWithScrollResult2 then nil else p1.onScrollToEnd)
 	local Element = ReactModule.useMemo(function()
-		-- upvalues: FeedItems (copy), p1 (copy), SduiEnableBackToTop (upval), v2 (ref), ReactModule (upval), BackToTopButtonModule (upval), ScrollingFrameRef (ref), SduiContext (copy), FFlagSduiIndividualFeedItemSpacing (upval), GapBetweenFeedItems (copy), FFlagSduiVerticalFeedProgressiveFillOnScroll (upval), UseRefResult1 (copy), v1 (copy), GapAfterStickyItems (copy), PoolStoreLayoutStoreWiring (upval), ImpressionsTag (copy), SduiFeedImpressionsDetectorModule (upval), UseRefResult2 (copy), BuildSduiFeedChildrenModule (upval), DebugName (copy), SelectionBehaviorLeft (copy), SelectionBehaviorRight (copy), UseMemoResult1 (copy), FFlagAppPageShellScrollToTopFocus (upval), DiscoveryTypesModule (upval), FFlagLuaAppsDefaultSelection (upval), UseProgressiveRowCapWithScrollResult (ref), FFlagSduiSamePoolFeedItemSpacing (upval), SamePoolFeedItemGap (copy)
+		-- upvalues: FeedItems (copy), p1 (copy), SduiEnableBackToTop (upval), v2 (ref), ReactModule (upval), BackToTopButtonModule (upval), ScrollingFrameRef (ref), SduiContext (copy), FFlagSduiIndividualFeedItemSpacing (upval), GapBetweenFeedItems (copy), FFlagSduiVerticalFeedProgressiveFillOnScroll (upval), UseRefResult1 (copy), v1 (copy), GapAfterStickyItems (copy), PoolStoreLayoutStoreWiring (upval), ImpressionsTag (copy), SduiFeedImpressionsDetectorModule (upval), UseRefResult2 (copy), BuildSduiFeedChildrenModule (upval), DebugName (copy), SelectionBehaviorLeft (copy), SelectionBehaviorRight (copy), UseMemoResult1 (copy), FFlagAppPageShellScrollToTopFocus (upval), DiscoveryTypesModule (upval), UseProgressiveRowCapWithScrollResult (ref), FFlagSduiSamePoolFeedItemSpacing (upval), SamePoolFeedItemGap (copy)
 		if FeedItems == nil then
 			return nil
 		end
@@ -429,7 +428,7 @@ return ReactModule.memo(function(p1)
 			selectionBehaviorRight = SelectionBehaviorRight,
 			extraLocalProps = UseMemoResult1,
 			selectionOrderBase = if FFlagAppPageShellScrollToTopFocus then DiscoveryTypesModule.Constants.SORT_SELECTION_ORDER_BASE else nil,
-			defaultFocusRef = if FFlagAppPageShellScrollToTopFocus and FFlagLuaAppsDefaultSelection then p1.defaultFocusRef else nil,
+			defaultFocusRef = if FFlagAppPageShellScrollToTopFocus then p1.defaultFocusRef else nil,
 			maxConfigs = UseProgressiveRowCapWithScrollResult,
 			gapBetweenFeedItems = if FFlagSduiIndividualFeedItemSpacing then GapBetweenFeedItems else nil,
 			gapAfterFirstFeedItem = if FFlagSduiIndividualFeedItemSpacing then p1.gapAfterFirstFeedItem else nil,
@@ -449,7 +448,7 @@ return ReactModule.memo(function(p1)
 		if SduiEnableBackToTop then p1.enableBackToTop else nil,
 		if SduiEnableBackToTop then v2 else nil, ScrollingFrameRef,
 		UseProgressiveRowCapWithScrollResult,
-		if FFlagAppPageShellScrollToTopFocus and FFlagLuaAppsDefaultSelection then p1.defaultFocusRef else nil
+		if FFlagAppPageShellScrollToTopFocus then p1.defaultFocusRef else nil
 	})
 	
 	if UseMemoResult then

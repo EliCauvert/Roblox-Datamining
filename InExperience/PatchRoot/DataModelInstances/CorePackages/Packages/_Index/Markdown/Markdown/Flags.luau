@@ -2,5 +2,6 @@
 
 return {
 	FFlagMarkdownUseRobloxProfileParser = SafeFlagsModule.createGetFFlag("MarkdownUseRobloxProfileParser")(),
-	FFlagMarkdownDefaultRobloxProfile = SafeFlagsModule.createGetFFlag("MarkdownDefaultRobloxProfile")()
+	FFlagMarkdownDefaultRobloxProfile = SafeFlagsModule.createGetFFlag("MarkdownDefaultRobloxProfile")(),
+	FFlagMarkdownFormattingTags = SafeFlagsModule.createGetFFlag("MarkdownFormattingTags")()
 }

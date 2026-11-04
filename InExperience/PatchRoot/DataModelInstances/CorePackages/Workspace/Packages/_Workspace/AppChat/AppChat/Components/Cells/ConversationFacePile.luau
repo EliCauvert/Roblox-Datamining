@@ -5,7 +5,6 @@ local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 local FFlagEnableBlackbirdCheck = require(Parent.SharedFlags).FFlagEnableBlackbirdCheck
 local FFlagUserTileUnfilteredChatIndicator = require(Parent.SharedFlags).FFlagUserTileUnfilteredChatIndicator
-local FFlagAppChatSanitizeConversationTitleRichText = require(Parent.SharedFlags).FFlagAppChatSanitizeConversationTitleRichText
 local EscapeRichFormattingFunction = require(Parent.InlineRichText).escapeRichFormatting
 local UseIsRobloxSubscriberFunction = require(Parent.UserProfiles).Hooks.useIsRobloxSubscriber
 local UserTile = require(Parent.UserTile).UserTile
@@ -40,7 +39,7 @@ local _ = function(p1)
 end
 
 local function ConversationFacePileInner(p1)
-	-- upvalues: UseLocalUserIdFunction (copy), ReactModule (copy), UseSelectorFunction (copy), FFlagAppChatPresenceStoreMigrationModule (copy), SignalsModule (copy), GetResult (copy), PresenceType1 (copy), groupPresenceAggregateEquals (copy), SignalsReactModule (copy), UseFoundationPresenceModule (copy), UserPresence (copy), PresenceType (copy), FFlagEnableBlackbirdCheck (copy), UseIsRobloxSubscriberFunction (copy), UserTile (copy), LayoutMode (copy), FFlagAppChatSanitizeConversationTitleRichText (copy), EscapeRichFormattingFunction (copy), FFlagUserTileUnfilteredChatIndicator (copy)
+	-- upvalues: UseLocalUserIdFunction (copy), ReactModule (copy), UseSelectorFunction (copy), FFlagAppChatPresenceStoreMigrationModule (copy), SignalsModule (copy), GetResult (copy), PresenceType1 (copy), groupPresenceAggregateEquals (copy), SignalsReactModule (copy), UseFoundationPresenceModule (copy), UserPresence (copy), PresenceType (copy), FFlagEnableBlackbirdCheck (copy), UseIsRobloxSubscriberFunction (copy), UserTile (copy), LayoutMode (copy), EscapeRichFormattingFunction (copy), FFlagUserTileUnfilteredChatIndicator (copy)
 	local ConversationId = p1.conversationId
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local LocalUserId = p1.localUserId
@@ -153,8 +152,8 @@ local function ConversationFacePileInner(p1)
 		userId = Entry,
 		facePileSecondUserId = List[2] or nil,
 		layoutMode = LayoutMode.wide,
-		title = if FFlagAppChatSanitizeConversationTitleRichText and p1.titleText then EscapeRichFormattingFunction(p1.titleText) else p1.titleText,
-		subtitle = if FFlagAppChatSanitizeConversationTitleRichText and p1.subtitleText then EscapeRichFormattingFunction(p1.subtitleText) else p1.subtitleText,
+		title = if p1.titleText then EscapeRichFormattingFunction(p1.titleText) else p1.titleText,
+		subtitle = if p1.subtitleText then EscapeRichFormattingFunction(p1.subtitleText) else p1.subtitleText,
 		titleStyle = p1.titleStyle,
 		subtitleStyle = p1.subtitleStyle,
 		userPresenceType = None,

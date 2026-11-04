@@ -15,6 +15,8 @@ local UsePreviousFunction = require(Parent.RoactUtils).Hooks.usePrevious
 local UseIsChatEnabledModule = require(AppChat.Hooks.useIsChatEnabled)
 local ReloadAllMessagesModule = require(AppChat.Conversations.Thunks.reloadAllMessages)
 local GetDeepValue2Module = require(AppChat.Utils.getDeepValue2)
+local GetFriendsChatSettingsStoreModule = require(AppChat.Stores.GetFriendsChatSettingsStore)
+local FFlagAppChatUseSignalsForChatSettingsModule = require(AppChat.Flags.FFlagAppChatUseSignalsForChatSettings)
 local AppChatNetworkingModule = require(Parent.AppChatNetworking)
 local DismissedAllConversationModalsForSequenceModule = require(AppChat.Conversations.Actions.DismissedAllConversationModalsForSequence)
 local UseIsAppChatVisibleModule = require(AppChat.App.Hooks.useIsAppChatVisible)
@@ -24,7 +26,7 @@ local FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace = require(Parent.SharedFl
 local NewResult = require(AppChat.Logger):new(script.Name)
 
 return function(p1)
-	-- upvalues: UseDispatchFunction (copy), UseIsAppLoadedModule (copy), FFlagUseSignalsForAuthenticationStatus (copy), UseSignalStateFunction (copy), GetAuthenticationStatusStore (copy), LoginStatus (copy), UseSelectorFunction (copy), GetFFlagDebugAppChatModule (copy), UseKeybindModule (copy), NewResult (copy), ReactModule (copy), FetchChatMetadataModule (copy), UseIsAppChatVisibleModule (copy), UseIsChatEnabledModule (copy), GetDeepValue2Module (copy), UsePreviousFunction (copy), ReloadAllMessagesModule (copy), RealtimeDeliveryModule (copy), AppChatNetworkingModule (copy), FFlagEnableAEGIS2AppChatConversationBanner (copy), DismissedAllConversationModalsForSequenceModule (copy), FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace (copy)
+	-- upvalues: UseDispatchFunction (copy), UseIsAppLoadedModule (copy), FFlagUseSignalsForAuthenticationStatus (copy), UseSignalStateFunction (copy), GetAuthenticationStatusStore (copy), LoginStatus (copy), UseSelectorFunction (copy), GetFFlagDebugAppChatModule (copy), UseKeybindModule (copy), NewResult (copy), ReactModule (copy), FetchChatMetadataModule (copy), UseIsAppChatVisibleModule (copy), UseIsChatEnabledModule (copy), FFlagAppChatUseSignalsForChatSettingsModule (copy), GetFriendsChatSettingsStoreModule (copy), GetDeepValue2Module (copy), UsePreviousFunction (copy), ReloadAllMessagesModule (copy), RealtimeDeliveryModule (copy), AppChatNetworkingModule (copy), FFlagEnableAEGIS2AppChatConversationBanner (copy), DismissedAllConversationModalsForSequenceModule (copy), FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseIsAppLoadedModuleResult = UseIsAppLoadedModule()
 	local IsUseSignalStateResultMatch = if FFlagUseSignalsForAuthenticationStatus then UseSignalStateFunction(GetAuthenticationStatusStore(false).getStatus) == LoginStatus.LOGGED_IN else UseSelectorFunction(function(p2): boolean
@@ -63,14 +65,14 @@ return function(p1)
 		IsUseSignalStateResultMatch
 	})
 	local UseIsChatEnabledModuleResult = UseIsChatEnabledModule()
-	local UseSelectorResult = UseSelectorFunction(function(p2)
+	local UseSignalStateResult = if FFlagAppChatUseSignalsForChatSettingsModule then UseSignalStateFunction(GetFriendsChatSettingsStoreModule(false).getChatUserMessagesEnabled) else UseSelectorFunction(function(p2)
 		-- upvalues: GetDeepValue2Module (upval)
 		return GetDeepValue2Module(p2, "ChatAppReducer.ChatSettings.chatUserMessagesEnabled")
 	end)
-	local UsePreviousResult = UsePreviousFunction(UseSelectorResult)
+	local UsePreviousResult = UsePreviousFunction(UseSignalStateResult)
 	ReactModule.useEffect(function()
-		-- upvalues: UseIsChatEnabledModuleResult (copy), UsePreviousResult (copy), UseSelectorResult (copy), NewResult (upval), UseDispatchResult (copy), ReloadAllMessagesModule (upval)
-		if UseIsChatEnabledModuleResult and UsePreviousResult ~= nil and UsePreviousResult ~= UseSelectorResult then
+		-- upvalues: UseIsChatEnabledModuleResult (copy), UsePreviousResult (copy), UseSignalStateResult (copy), NewResult (upval), UseDispatchResult (copy), ReloadAllMessagesModule (upval)
+		if UseIsChatEnabledModuleResult and UsePreviousResult ~= nil and UsePreviousResult ~= UseSignalStateResult then
 			NewResult:info("Chat messages eligibility changed, reloading all messages")
 			UseDispatchResult(ReloadAllMessagesModule()):catch(function(Err)
 				-- upvalues: NewResult (upval)
@@ -81,7 +83,7 @@ return function(p1)
 		UseDispatchResult,
 		UseIsChatEnabledModuleResult,
 		UsePreviousResult,
-		UseSelectorResult
+		UseSignalStateResult
 	})
 	RealtimeDeliveryModule.useRealtimeNamespace("UserSettingsChanged", function(p2)
 		-- upvalues: NewResult (upval), UseDispatchResult (copy), ReloadAllMessagesModule (upval), UseResult (copy)
@@ -110,7 +112,7 @@ return function(p1)
 		end
 	end, { UseResult })
 	
-	local function v28(IsInExperience)
+	local function v30(IsInExperience)
 		-- upvalues: UseDispatchResult (copy), AppChatNetworkingModule (upval), NewResult (upval), FFlagEnableAEGIS2AppChatConversationBanner (upval), DismissedAllConversationModalsForSequenceModule (upval)
 		UseDispatchResult(AppChatNetworkingModule.rodux.GetChatLandingModal.API(IsInExperience)):catch(function(Err)
 			-- upvalues: NewResult (upval)
@@ -123,11 +125,11 @@ return function(p1)
 	end
 	
 	RealtimeDeliveryModule.useRealtimeNamespace(FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace, function(_)
-		-- upvalues: NewResult (upval), FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace (upval), UseIsAppLoadedModuleResult (copy), v28 (copy), p1 (copy), UseResult (copy)
+		-- upvalues: NewResult (upval), FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace (upval), UseIsAppLoadedModuleResult (copy), v30 (copy), p1 (copy), UseResult (copy)
 		NewResult:info("Received Realtime: {}", FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace)
 		
 		if UseIsAppLoadedModuleResult then
-			v28(p1.isInExperience)
+			v30(p1.isInExperience)
 			UseResult()
 			
 			return
@@ -139,11 +141,11 @@ return function(p1)
 		UseIsAppChatVisibleModuleResult
 	})
 	RealtimeDeliveryModule.useRealtimeConnectionStateChanged(FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace, function(ConnectionState, p2)
-		-- upvalues: NewResult (upval), FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace (upval), UseIsAppLoadedModuleResult (copy), v28 (copy), p1 (copy), UseResult (copy)
+		-- upvalues: NewResult (upval), FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace (upval), UseIsAppLoadedModuleResult (copy), v30 (copy), p1 (copy), UseResult (copy)
 		NewResult:info("Reconnected to Realtime: {}, hasMissedEvents: {}", FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace, (tostring(p2)))
 		
 		if ConnectionState == Enum.ConnectionState.Connected and p2 and UseIsAppLoadedModuleResult then
-			v28(p1.isInExperience)
+			v30(p1.isInExperience)
 			UseResult()
 			
 			return

@@ -407,8 +407,8 @@ function Module.InternalPostMessage(p11, p12, Message, p13)
 			end
 			local t = {}
 			
-			for i, value1 in pairs(InternalCreateMessageObjectResult) do
-				t[i] = value1
+			for i, value2 in pairs(InternalCreateMessageObjectResult) do
+				t[i] = value2
 			end
 			if Result1 then
 				t.Message = string.rep("_", InternalCreateMessageObjectResult.MessageLengthUtf8 or InternalCreateMessageObjectResult.MessageLength)
@@ -428,7 +428,7 @@ function Module.InternalPostMessage(p11, p12, Message, p13)
 		print("Error posting message: " .. Result)
 	end
 	local PrivateChat = p11.Private and Enum.TextFilterContext.PrivateChat or Enum.TextFilterContext.PublicChat
-	local v1 = nil
+	local FilterResult = nil
 	
 	if Result3_1 then
 		local List = {}
@@ -455,7 +455,7 @@ function Module.InternalPostMessage(p11, p12, Message, p13)
 			InternalCreateMessageObjectResult.IsFilterResult = InternalApplyRobloxFilterAndTranslateResult2
 			
 			if InternalApplyRobloxFilterAndTranslateResult2 then
-				v1 = InternalApplyRobloxFilterAndTranslateResult3
+				FilterResult = InternalApplyRobloxFilterAndTranslateResult3
 			end
 		else
 			if not Result2_1 then
@@ -487,8 +487,8 @@ function Module.InternalPostMessage(p11, p12, Message, p13)
 		local Speaker = p11.Speakers[name]
 		
 		if Speaker then
-			if Result3_1 and (v1 and (p12:GetPlayer() ~= nil and (Speaker:GetPlayer() ~= nil and p12:GetPlayer().LocaleId ~= Speaker:GetPlayer().LocaleId))) then
-				Speaker:InternalSendFilteredMessageWithTranslatedFilterResult(InternalCreateMessageObjectResult, p11.Name, v1)
+			if Result3_1 and (FilterResult and (p12:GetPlayer() ~= nil and (Speaker:GetPlayer() ~= nil and p12:GetPlayer().LocaleId ~= Speaker:GetPlayer().LocaleId))) then
+				Speaker:InternalSendFilteredMessageWithTranslatedFilterResult(InternalCreateMessageObjectResult, p11.Name, FilterResult)
 			else
 				Speaker:InternalSendFilteredMessageWithFilterResult(InternalCreateMessageObjectResult, p11.Name)
 			end
@@ -501,8 +501,8 @@ function Module.InternalPostMessage(p11, p12, Message, p13)
 		if not speaker:IsSpeakerMuted(p12.Name) and p11:CanCommunicate(p12, speaker) then
 			Flag = false
 			
-			for _, name1 in pairs(Names) do
-				if speaker.Name == name1 then
+			for _, value in pairs(Names) do
+				if speaker.Name == value then
 					Flag = true
 					break
 				end
@@ -512,8 +512,8 @@ function Module.InternalPostMessage(p11, p12, Message, p13)
 			end
 		end
 	end
-	for _, value in pairs(List) do
-		local Speaker = p11.Speakers[value]
+	for _, value1 in pairs(List) do
+		local Speaker = p11.Speakers[value1]
 		
 		if Speaker then
 			Speaker:InternalSendFilteredMessageWithFilterResult(InternalCreateMessageObjectResult, p11.Name)

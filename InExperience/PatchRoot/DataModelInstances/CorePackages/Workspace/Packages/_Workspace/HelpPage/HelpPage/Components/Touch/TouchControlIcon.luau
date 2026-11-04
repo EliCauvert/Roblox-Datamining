@@ -6,8 +6,10 @@ return ReactModule.memo(function(Frame: Frame)
 	-- upvalues: FoundationModule (copy), ReactModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local Diameter = if Frame.iconDiameter then Frame.diameter else UseTokensResult.Size.Size_600
-	local IsShowBackground = Frame.showBackground ~= false
-	local Surface100 = if Frame.inverted then UseTokensResult.Color.Surface.Surface_100 else UseTokensResult.Color.Content.Muted
+	local IconDiameter = Frame.iconDiameter or UseTokensResult.Size.Size_400
+	local NoAssetId: boolean = Frame.showBackground ~= false and Frame.assetId == nil
+	local Surface100 = if NoAssetId and not Frame.inverted then UseTokensResult.Color.Surface.Surface_100 else UseTokensResult.Color.Content.Emphasis
+	local Surface100_1 = if Frame.inverted then UseTokensResult.Color.Surface.Surface_100 else UseTokensResult.Color.Content.Muted
 	local v1: number = if Frame.disabled then 0.5 else 1
 	
 	return ReactModule.createElement(FoundationModule.View, {
@@ -17,21 +19,30 @@ return ReactModule.memo(function(Frame: Frame)
 		AnchorPoint = Frame.AnchorPoint,
 		LayoutOrder = Frame.LayoutOrder,
 		tag = {
-			["align-x-center align-y-center radius-circle"] = IsShowBackground,
-			["align-x-center align-y-center"] = not IsShowBackground
+			["align-x-center align-y-center radius-circle"] = NoAssetId,
+			["align-x-center align-y-center"] = not NoAssetId
 		},
-		backgroundStyle = if IsShowBackground then {
-			Color3 = Surface100.Color3,
-			Transparency = 1 - (1 - Surface100.Transparency) * v1
+		backgroundStyle = if NoAssetId then {
+			Color3 = Surface100_1.Color3,
+			Transparency = 1 - (1 - Surface100_1.Transparency) * v1
 		} else UseTokensResult.Color.None,
 		testId = Frame.testId .. "Container"
 	}, {
-		Icon = ReactModule.createElement(FoundationModule.Icon, {
+		Icon = if Frame.assetId == nil then ReactModule.createElement(FoundationModule.Icon, {
 			name = Frame.name,
 			variant = FoundationModule.Enums.IconVariant.Filled,
-			size = Frame.iconDiameter or UseTokensResult.Size.Size_400,
-			style = if IsShowBackground and not Frame.inverted then UseTokensResult.Color.Surface.Surface_100 else UseTokensResult.Color.Content.Emphasis,
+			size = IconDiameter,
+			style = Surface100,
 			testId = Frame.testId
+		}) else ReactModule.createElement("ImageLabel", {
+			Size = UDim2.fromScale(1, 1),
+			AnchorPoint = Vector2.new(0.5, 0.5),
+			Position = UDim2.fromScale(0.5, 0.5),
+			BackgroundTransparency = 1,
+			Image = Frame.assetId,
+			ImageTransparency = 1 - v1,
+			ScaleType = Enum.ScaleType.Fit,
+			[ReactModule.Tag] = "data-testid=" .. Frame.testId
 		})
 	})
 end)

@@ -19,7 +19,9 @@ local SquadButtonSourceEnum = require(Parent.Squads.Enums).SquadButtonSourceEnum
 local SquadComponentAccessWrapperModule = require(Parent.Squads.SquadComponentAccessWrapper)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagFriendsCallingClientGateDEV = SharedFlagsModule.FFlagFriendsCallingClientGate_DEV
+local FFlagFriendsCallingServiceLuaMigration = SharedFlagsModule.FFlagFriendsCallingServiceLuaMigration
 local GetFFlagIsSquadEnabledFunction = SharedFlagsModule.GetFFlagIsSquadEnabled
+local NewResult = require(AppChat.Logger):new(script.Name)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 
 local function noOp()
@@ -27,7 +29,7 @@ local function noOp()
 end
 
 return function(p1)
-	-- upvalues: GetTopBarStoreModule (copy), UseSignalStateFunction (copy), FFlagFriendsCallingClientGateDEV (copy), UseCallButtonEligibilityModule (copy), UseChatPlacementContextFunction (copy), UseLocalizationFunction (copy), AppHeaderBarModule (copy), CreateBackFuncModule (copy), ReactModule (copy), ConversationChannelsModule (copy), GetFFlagIsSquadEnabledFunction (copy), FoundationModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), SquadComponentAccessWrapperModule (copy), SquadJoinButtonModule (copy), EnumScreensModule (copy), SquadButtonSourceEnum (copy), HeaderBarTitleLeftAlignedModule (copy), ChatTopBarBaseModule (copy), noOp (copy)
+	-- upvalues: GetTopBarStoreModule (copy), UseSignalStateFunction (copy), FFlagFriendsCallingClientGateDEV (copy), UseCallButtonEligibilityModule (copy), UseChatPlacementContextFunction (copy), UseLocalizationFunction (copy), AppHeaderBarModule (copy), CreateBackFuncModule (copy), ReactModule (copy), ConversationChannelsModule (copy), FFlagFriendsCallingServiceLuaMigration (copy), NewResult (copy), GetFFlagIsSquadEnabledFunction (copy), FoundationModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), SquadComponentAccessWrapperModule (copy), SquadJoinButtonModule (copy), EnumScreensModule (copy), SquadButtonSourceEnum (copy), HeaderBarTitleLeftAlignedModule (copy), ChatTopBarBaseModule (copy), noOp (copy)
 	local ScreenName = p1.screenName
 	local Navigation = p1.navigation
 	local UseSignalStateResult = UseSignalStateFunction((GetTopBarStoreModule(false).getScreenTopBar(ScreenName)))
@@ -50,17 +52,31 @@ return function(p1)
 	})
 	local BackButton = if BackButtonEnabled then MakeBackButtonFunction(BackFuncModule) else nil
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: FFlagFriendsCallingClientGateDEV (upval), UseCallButtonEligibilityModuleResult (copy), ConversationChannelsModule (upval), ConversationId (copy)
+		-- upvalues: FFlagFriendsCallingClientGateDEV (upval), UseCallButtonEligibilityModuleResult (copy), ConversationChannelsModule (upval), ConversationId (copy), FFlagFriendsCallingServiceLuaMigration (upval), NewResult (upval)
 		if not FFlagFriendsCallingClientGateDEV or UseCallButtonEligibilityModuleResult ~= ConversationChannelsModule.CallButtonEligibility.Eligible then return end
 		if ConversationId then
-			local CallingService = game:GetService("CallingService")
-			task.spawn(function()
-				-- upvalues: CallingService (copy), ConversationId (upval)
-				pcall(function()
-					-- upvalues: CallingService (upval), ConversationId (upval)
-					CallingService:CreateCallAsync({}, ConversationId)
+			if FFlagFriendsCallingServiceLuaMigration then
+				local FriendsCallingService = game:GetService("FriendsCallingService")
+				local Success, Result = pcall(function()
+					-- upvalues: FriendsCallingService (copy), ConversationId (upval)
+					FriendsCallingService:StartCall({ conversationId = ConversationId })
 				end)
-			end)
+				
+				if not Success then
+					NewResult:debug("FriendsCallingService:StartCall failed: {}", Result)
+					
+					return
+				end
+			else
+				local CallingService = game:GetService("CallingService")
+				task.spawn(function()
+					-- upvalues: CallingService (copy), ConversationId (upval)
+					pcall(function()
+						-- upvalues: CallingService (upval), ConversationId (upval)
+						CallingService:CreateCallAsync({}, ConversationId)
+					end)
+				end)
+			end
 		end
 	end, {
 		ConversationId or false,

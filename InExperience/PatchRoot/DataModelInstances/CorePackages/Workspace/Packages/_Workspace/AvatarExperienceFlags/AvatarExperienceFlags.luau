@@ -49,7 +49,10 @@
 	FFlagAXItemDetailsSduiActions = require(script.FFlagAXItemDetailsSduiActions),
 	FFlagAXItemDetailsSduiFavorite = require(script.FFlagAXItemDetailsSduiFavorite),
 	FFlagAXItemDetailsSduiBodyActions = require(script.FFlagAXItemDetailsSduiBodyActions),
+	FFlagAXItemDetailsSduiTryOnSimpleView = require(script.FFlagAXItemDetailsSduiTryOnSimpleView),
+	FFlagAXItemDetailsDescriptionLinks = require(script.FFlagAXItemDetailsDescriptionLinks),
 	FFlagAXItemDetailsMediaHeader = require(script.FFlagAXItemDetailsMediaHeader),
+	FFlagAXItemViewportRestoreParentScrollingOnUnmount = require(script.FFlagAXItemViewportRestoreParentScrollingOnUnmount),
 	FFlagAXAvatarEditorStoresContext = require(script.FFlagAXAvatarEditorStoresContext),
 	FFlagAXItemsViewContentSizeBinding = require(script.FFlagAXItemsViewContentSizeBinding),
 	FFlagAXSlotsPeekViewScrollFix = require(script.FFlagAXSlotsPeekViewScrollFix),
@@ -57,6 +60,7 @@
 	FFlagFixNavigationToCreatorProfileWebviewFromProfile = require(script.FFlagFixNavigationToCreatorProfileWebviewFromProfile),
 	FFlagAXUseSignalsForApplyingLayeredClothing = require(script.FFlagAXUseSignalsForApplyingLayeredClothing),
 	FFlagAXUseSignalsForLayeredClothingCurrentSort = require(script.FFlagAXUseSignalsForLayeredClothingCurrentSort),
+	FFlagAXUseSignalsForLayeredClothingLastSavedSort = require(script.FFlagAXUseSignalsForLayeredClothingLastSavedSort),
 	FFlagAXRevertEquippedAssetsAfterLayeringTryOnMakeup = require(script.FFlagAXRevertEquippedAssetsAfterLayeringTryOnMakeup),
 	FFlagAXLeaveCatalogToAvatarPromptHandleSubcategoryFilters = require(script.FFlagAXLeaveCatalogToAvatarPromptHandleSubcategoryFilters),
 	FFlagAXBringingItBack = require(script.FFlagAXBringingItBack),
@@ -115,7 +119,6 @@
 	FFlagAXHideMenuOnScrollExposureLogging = require(script.FFlagAXHideMenuOnScrollExposureLogging),
 	FFlagAXBlockMakeupEquipR6 = require(script.FFlagAXBlockMakeupEquipR6),
 	FFlagAXFixRecommendedItemCreatorType = require(script.FFlagAXFixRecommendedItemCreatorType),
-	FFlagAXRemoveCatalogCategoryNavKey = require(script.FFlagAXRemoveCatalogCategoryNavKey),
 	FFlagAXFixCatalogRefreshRendering = require(script.FFlagAXFixCatalogRefreshRendering),
 	FFlagAXFixCatalogPageButtonSduiCrash = require(script.FFlagAXFixCatalogPageButtonSduiCrash),
 	FFlagAXSduiCatalogScrollImpressions = require(script.FFlagAXSduiCatalogScrollImpressions),
@@ -433,5 +436,6 @@
 	FFlagAXFixResellersList = require(script.FFlagAXFixResellersList),
 	FFlagAXOutfitSaveSkipUnownedTryOnBackground = require(script.FFlagAXOutfitSaveSkipUnownedTryOnBackground),
 	FFlagAXTryOnAvatarMomentLookAsAvatar = require(script.FFlagAXTryOnAvatarMomentLookAsAvatar),
-	FFlagAXSduiCatalogItemGroupNilIdGuard = require(script.FFlagAXSduiCatalogItemGroupNilIdGuard)
+	FFlagAXSduiCatalogItemGroupNilIdGuard = require(script.FFlagAXSduiCatalogItemGroupNilIdGuard),
+	FFlagAXTryOnBackgroundRespectsSelection = require(script.FFlagAXTryOnBackgroundRespectsSelection)
 }

@@ -4,17 +4,14 @@ local Logger = PolicyProviderModule.Logger
 local ReactModule = require(Parent.React)
 local CryoModule = require(Parent.Cryo)
 local _ = require(script.Parent.PolicyTypes)
-local UniversalAppPolicySkipUnchangedPolicy = game:DefineFastFlag("UniversalAppPolicySkipUnchangedPolicy", false)
+local UniversalAppPolicySkipUnchangedPolicy2 = game:DefineFastFlag("UniversalAppPolicySkipUnchangedPolicy2", false)
 
-local function mapsToSameValues(Callback, Current, Current1): boolean
-	local Packed = table.pack(Callback(Current))
-	local Packed1 = table.pack(Callback(Current1))
-	
-	if Packed.n ~= Packed1.n then
+local function _(p1, p2): boolean
+	if p1.n ~= p2.n then
 		return false
 	end
-	for i = 1, Packed.n do
-		if Packed[i] ~= Packed1[i] then
+	for i = 1, p1.n do
+		if p1[i] ~= p2[i] then
 			return false
 		end
 	end
@@ -31,20 +28,20 @@ local function mergePolicies(ReadResult, PresentationPolicy)
 	return JoinResult
 end
 
-return function(p1)
-	-- upvalues: ReactModule (copy), PolicyProviderModule (copy), mergePolicies (copy), Logger (copy), UniversalAppPolicySkipUnchangedPolicy (copy), mapsToSameValues (copy)
-	assert(p1, "expected getPolicyImpl")
+return function(p3)
+	-- upvalues: ReactModule (copy), PolicyProviderModule (copy), mergePolicies (copy), Logger (copy), UniversalAppPolicySkipUnchangedPolicy2 (copy)
+	assert(p3, "expected getPolicyImpl")
 	
 	return function(Callback)
-		-- upvalues: ReactModule (upval), PolicyProviderModule (upval), mergePolicies (upval), p1 (copy), Logger (upval), UniversalAppPolicySkipUnchangedPolicy (upval), mapsToSameValues (upval)
+		-- upvalues: ReactModule (upval), PolicyProviderModule (upval), mergePolicies (upval), p3 (copy), Logger (upval), UniversalAppPolicySkipUnchangedPolicy2 (upval)
 		local UseContextResult = ReactModule.useContext(PolicyProviderModule.AppPolicyContext)
 		assert(UseContextResult, "Not a descendent of PolicyProvider")
 		local UseStateResult, UseStateResult2 = ReactModule.useState(function()
-			-- upvalues: UseContextResult (copy), mergePolicies (upval), p1 (upval), Logger (upval)
+			-- upvalues: UseContextResult (copy), mergePolicies (upval), p3 (upval), Logger (upval)
 			if UseContextResult.staticExternalPolicy then
 				return (mergePolicies(UseContextResult.staticExternalPolicy, UseContextResult.presentationPolicy))
 			end
-			local ReadResult = p1.read()
+			local ReadResult = p3.read()
 			
 			if ReadResult then
 				return (mergePolicies(ReadResult, UseContextResult.presentationPolicy))
@@ -56,30 +53,50 @@ return function(p1)
 		end)
 		local UseRefResult = nil
 		local UseRefResult1 = nil
+		local UseRefResult2 = nil
 		
-		if UniversalAppPolicySkipUnchangedPolicy then
+		if UniversalAppPolicySkipUnchangedPolicy2 then
 			UseRefResult = ReactModule.useRef(Callback)
 			assert(UseRefResult, "latestMapPolicies")
 			UseRefResult.current = Callback
 			UseRefResult1 = ReactModule.useRef(UseStateResult)
+			UseRefResult2 = ReactModule.useRef(nil)
 		end
 		ReactModule.useEffect(function()
-			-- upvalues: UseContextResult (copy), p1 (upval), Logger (upval), UniversalAppPolicySkipUnchangedPolicy (upval), UseRefResult (ref), UseRefResult1 (ref), mergePolicies (upval), mapsToSameValues (upval), UseStateResult2 (copy)
-			local OnPolicyChangedResult = if UseContextResult.staticExternalPolicy then nil else p1.onPolicyChanged(function(p2)
-				-- upvalues: Logger (upval), UniversalAppPolicySkipUnchangedPolicy (upval), UseRefResult (upval), UseRefResult1 (upval), mergePolicies (upval), UseContextResult (upval), mapsToSameValues (upval), UseStateResult2 (upval)
+			-- upvalues: UseContextResult (copy), p3 (upval), Logger (upval), UniversalAppPolicySkipUnchangedPolicy2 (upval), UseRefResult (ref), UseRefResult1 (ref), UseRefResult2 (ref), mergePolicies (upval), UseStateResult2 (copy)
+			local OnPolicyChangedResult = if UseContextResult.staticExternalPolicy then nil else p3.onPolicyChanged(function(p4)
+				-- upvalues: Logger (upval), UniversalAppPolicySkipUnchangedPolicy2 (upval), UseRefResult (upval), UseRefResult1 (upval), UseRefResult2 (upval), mergePolicies (upval), UseContextResult (upval), UseStateResult2 (upval)
 				Logger:trace("Received policy update")
 				
-				if UniversalAppPolicySkipUnchangedPolicy and UseRefResult and UseRefResult1 then
-					local MergePoliciesResult = mergePolicies(p2, UseContextResult.presentationPolicy)
+				if UniversalAppPolicySkipUnchangedPolicy2 and UseRefResult and UseRefResult1 and UseRefResult2 then
+					local MergePoliciesResult = mergePolicies(p4, UseContextResult.presentationPolicy)
 					UseRefResult1.current = MergePoliciesResult
+					local Current = UseRefResult2.current
 					
-					if not mapsToSameValues(UseRefResult.current, UseRefResult1.current, MergePoliciesResult) then
-						UseStateResult2(MergePoliciesResult)
+					if Current ~= nil then
+						local Packed = table.pack(UseRefResult.current(MergePoliciesResult))
+						local Flag = nil
 						
-						return
+						if Current.n == Packed.n then
+							Flag = true
+							
+							for i = 1, Current.n do
+								if Current[i] == Packed[i] then
+									continue
+								end
+								Flag = false
+								break
+							end
+						else
+							Flag = false
+						end
+						if Flag then return end
 					end
+					UseStateResult2(MergePoliciesResult)
+					
+					return
 				else
-					UseStateResult2((mergePolicies(p2, UseContextResult.presentationPolicy)))
+					UseStateResult2((mergePolicies(p4, UseContextResult.presentationPolicy)))
 				end
 			end)
 			
@@ -91,6 +108,13 @@ return function(p1)
 			end
 		end, { UseContextResult })
 		
-		return if UniversalAppPolicySkipUnchangedPolicy and UseRefResult1 then Callback(UseRefResult1.current) else Callback(UseStateResult)
+		if UniversalAppPolicySkipUnchangedPolicy2 and UseRefResult1 and UseRefResult2 then
+			local Packed = table.pack(Callback(UseRefResult1.current))
+			UseRefResult2.current = Packed
+			
+			return table.unpack(Packed, 1, Packed.n)
+		else
+			return Callback(UseStateResult)
+		end
 	end
 end

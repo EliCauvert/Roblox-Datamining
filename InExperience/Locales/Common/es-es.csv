@@ -935,9 +935,11 @@ CoreScripts.InGameMenu.GameSettings.SwitchToVRComfortSettings,Ajustes personaliz
 CoreScripts.InGameMenu.GameSettings.UINavToggle,Alternar navegación de interfaz
 CoreScripts.InGameMenu.GameSettings.UINavToggleDescription,"Usa la tecla ""\ para ingresar y salir del modo de navegación de la interfaz"""
 CoreScripts.InGameMenu.GameSettings.UIScale,Escala de la interfaz de usuario
+CoreScripts.InGameMenu.GameSettings.UIScaleDescription,Ajusta el tamaño de los botones y los menús en Roblox.
 CoreScripts.InGameMenu.GameSettings.UIScaleLargest,El más grande
 CoreScripts.InGameMenu.GameSettings.UIScaleMode,Modo de escala de la interfaz de usuario
 CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,Autom.
+CoreScripts.InGameMenu.GameSettings.UIScaleModeDescription,Configura cómo se elige la escala de la interfaz de usuario en Roblox.
 CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,Manual
 CoreScripts.InGameMenu.GameSettings.UIScaleSmallest,La más pequeña
 CoreScripts.InGameMenu.GameSettings.VREnabled,Modo RV
@@ -2609,7 +2611,7 @@ Feature.Captures.Control.On,Activada
 Feature.Captures.Control.StartRecordingVideo,
 Feature.Captures.Control.StopRecordingVideo,Detener grabación
 Feature.Captures.Description.AllowPhotoAccessInfo,"Para guardar tus capturas, Roblox necesita acceso a la cámara de tu dispositivo."
-Feature.Captures.Description.DiscoverPostWatch,"Descubre, comparte y mira clips épicos de juego en Roblox en Momentos."
+Feature.Captures.Description.DiscoverPostWatch,Comparte tu experiencia de juego en Momentos
 Feature.Captures.Description.MomentProcessing,Pronto podrás verlo en Momentos
 Feature.Captures.Description.ShareCTA,¡Comparte tu captura con amigos!
 Feature.Captures.Label.CaptureCounts,{numberOfCaptures} capturas
@@ -2644,7 +2646,7 @@ Feature.Captures.Title.VideoCaptureVoiceChatMutedTooltip,Chat de voz silenciado 
 Feature.Captures.Toast.CaptureSaved,Captura guardada
 Feature.Captures.Toast.CaptureSavedToDevice,Guardada en el dispositivo
 Feature.Captures.Toast.CapturesEnabled,Capturas activadas
-Feature.Captures.Toast.CreateMoment2,¡Guardado! Convierte esto en un Momento.
+Feature.Captures.Toast.CreateMoment2,¡Guardado! ¿Quieres crear un Momento?
 Feature.Captures.Toast.MomentProcessing,Estamos procesando tu Momento
 Feature.Captures.Toast.VideoCaptureFailed,No se pudo guardar la captura de video.
 Feature.Captures.Toast.VideoCaptureInitializationCapturingAlreadyError,Una captura de video ya está en curso
@@ -3701,13 +3703,27 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,Quedan {time}
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsBody,Solo puedes usar 1 prueba gratuita a la vez en cada juego. Inténtalo de nuevo una vez que finalice tu periodo de prueba actual.
+Feature.InExperienceShop.Description.ActiveFreeTrialExistsTitle,Hay otra prueba gratuita activa
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedBody,Solo puedes usar 1 prueba gratuita por cada pase.
+Feature.InExperienceShop.Description.FreeTrialAlreadyRedeemedTitle,La prueba gratuita ya se usó
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedBody,"Ya tienes este pase, así que no necesitas una prueba gratuita."
+Feature.InExperienceShop.Description.GamePassAlreadyOwnedTitle,Ya tienes esto
+Feature.InExperienceShop.Description.GamePassNotInUniverseBody,
+Feature.InExperienceShop.Description.GamePassNotInUniverseTitle,
+Feature.InExperienceShop.Description.GamePassNotPurchasableBody,Este pase no está a la venta en este momento.
+Feature.InExperienceShop.Description.GamePassNotPurchasableTitle,Fuera de venta en este momento
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledBody,Este pase no tiene una prueba gratuita en este momento.
+Feature.InExperienceShop.Description.GamePassTrialNotEnabledTitle,No hay prueba gratuita disponible
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Al comprar Robux, aceptas nuestros {termsLinkStart}Términos de uso{termsLinkEnd}, incluida la cláusula de arbitraje y la política de revocación."
 Feature.InExperienceShop.GamePass,
 Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,Artículo extra
+Feature.InExperienceShop.Label.BuyNow,Comprar ahora
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Termina en {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,Prueba gratuita
+Feature.InExperienceShop.Label.HaveTrial,Tienes una prueba gratuita
 Feature.InExperienceShop.Label.NoDescription,Sin descripción
 Feature.InExperienceShop.Label.OfferEndTime,{offer} termina en {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,Esta es la vista previa de tu tienda en Roblox Studio. Los jugadores no pueden verla.
@@ -3721,7 +3737,9 @@ Feature.InExperienceShop.Label.Timer.Second.Plural,
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 segundo
 Feature.InExperienceShop.Label.Trial,Prueba
 Feature.InExperienceShop.Label.Trialed,Probado
+Feature.InExperienceShop.Label.TryNow,Prueba ahora
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Compraste {ROBUX_AMOUNT} Robux correctamente
+Feature.InExperienceShop.Tooltip.RecentlyRedeemed,¿Te gustó la prueba gratuita?
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"¿Confirmas que quieres eliminar este objeto de tu inventario para siempre? Si cambias de opinión, tendrás que volver a obtenerlo en una experiencia."
 Feature.Item.Label.DeleteItemUndercase,Eliminar objeto
 Feature.Landing.Label.PoweredBy,Desarrollado por
@@ -3905,7 +3923,6 @@ Feature.Moments.Title.GenerateTextFeedbackReason,¿Qué salió mal?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,¿Salir de la creación de Momento?
 Feature.Moments.Title.MomentRemoved,
-Feature.Moments.Title.PostInsights,Información de las publicaciones
 Feature.Moments.Title.ReportPost,Reportar publicación
 Feature.Moments.Title.UnfollowConfirmationDialog,¿Dejar de seguir a @{username}?
 Feature.Moments.Tooltip.Creation,Todas las personas que participan en la experiencia pueden ver tus Momentos.
@@ -4017,11 +4034,20 @@ Feature.PlayerSearchResults.Label.YouAreFollowing,Lo sigues
 Feature.PlayerSearchResults.Label.YouAreFriends,Son amigos
 Feature.PrivateServers.Action.CreatePrivateServer,Crear servidor privado
 Feature.PrivateServers.Action.FreeWithBlackbird,Gratis con Plus
+Feature.PrivateServers.Action.Generate,Generar
+Feature.PrivateServers.Description.FriendsAllowed,Cualquier persona de tu lista de amistades puede unirse sin una invitación
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Las compras de servidores privados no son compatibles en Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,Este juego no es compatible con servidores privados.
 Feature.PrivateServers.Heading.ConfigurePrivateServer,Configurar servidor privado
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,Cualquier persona con este enlace puede unirse
+Feature.PrivateServers.Label.FriendsAllowed,Amistades permitidas
+Feature.PrivateServers.Label.InThisServer,En este servidor
 Feature.PrivateServers.Label.OwnersServer,Servidor de {displayName}
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,Generar un enlace al servidor privado
+Feature.PrivateServers.Label.PrivateServerLink,Enlace al servidor privado
+Feature.PrivateServers.Label.SearchPeople,
 Feature.PrivateServers.Label.ServerName,Nombre del servidor:
+Feature.PrivateServers.Label.WhoCanJoin,Quién puede unirse
 Feature.Profile.Action.AboutThisProfile,Acerca de este perfil
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4410,7 +4436,7 @@ Feature.SettingsHub.MethodOfAbuse.Other.Title,
 Feature.SettingsHub.MethodOfAbuse.Text.Subtitle,Esta persona escribió una palabra mezquina en el chat de texto
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Subtitle,Esta persona estaba gritando
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Title,
-Feature.SettingsHub.PageTitle.InThisServer,En este servidor
+Feature.SettingsHub.PageTitle.InThisServer,
 Feature.SettingsHub.Prompt.AllowAccessToCamera,¿Permitir el acceso a la cámara?
 Feature.SettingsHub.Prompt.AllowAccessToContacts,¿Permitir el acceso a los contactos?
 Feature.SettingsHub.Prompt.AndroidWithDeeplink,<b>1. Selecciona Permiso<br />2. Micrófono<br />3. Permite a Roblox acceder a tu micrófono</b>

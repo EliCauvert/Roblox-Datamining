@@ -12,7 +12,7 @@ local config = {
 	[Enum.GuiState.NonInteractable] = ControlStateModule.Disabled
 }
 
-return function(p1, Callback)
+local function useGuiControlState_DEPRECATED(p1, Callback)
 	-- upvalues: ReactModule (copy), ControlStateModule (copy), config (copy), UseForwardRefFunction (copy)
 	local UseRefResult = ReactModule.useRef(false)
 	local UseRefResult1 = ReactModule.useRef(ControlStateModule.Initialize)
@@ -64,3 +64,142 @@ return function(p1, Callback)
 		end
 	end, { UseResult })))
 end
+
+local function _(Callback: (any) -> (), Current)
+	if typeof(Callback) == "function" then
+		Callback(Current)
+		
+		return
+	end
+	if Callback ~= nil then
+		Callback.current = Current
+	end
+end
+
+local _ = function(Current, ControlState)
+	-- upvalues: ControlStateModule (copy)
+	if Current.isSelected then
+		if ControlState == ControlStateModule.Default or ControlState == ControlStateModule.Hover then
+			ControlState = ControlStateModule.Selected
+		elseif ControlState == ControlStateModule.Pressed then
+			ControlState = ControlStateModule.SelectedPressed
+		end
+	end
+	if Current.controlState == ControlState then return end
+	Current.controlState = ControlState
+	
+	if Current.onStateChanged ~= nil then
+		Current.onStateChanged(ControlState)
+	end
+end
+
+local function useGuiControlState(Callback, OnStateChanged)
+	-- upvalues: ReactModule (copy), ControlStateModule (copy), config (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	
+	if UseRefResult.current == nil then
+		UseRefResult.current = {
+			isSelected = false,
+			connections = nil,
+			controlState = ControlStateModule.Initialize,
+			onStateChanged = OnStateChanged
+		}
+	end
+	UseRefResult.current.onStateChanged = OnStateChanged
+	
+	return ReactModule.useCallback(function(Current)
+		-- upvalues: UseRefResult (copy), Callback (copy), config (upval), ControlStateModule (upval)
+		local Current1 = UseRefResult.current
+		
+		if typeof(Callback) == "function" then
+			Callback(Current)
+		elseif Callback ~= nil then
+			Callback.current = Current
+		end
+		local Connections = Current1.connections
+		
+		if Connections ~= nil then
+			for _, connection in Connections do
+				connection:Disconnect()
+			end
+			Current1.connections = nil
+		end
+		if Current == nil then return end
+		local Entry = config[Current.GuiState]
+		
+		if Current1.isSelected then
+			if Entry == ControlStateModule.Default or Entry == ControlStateModule.Hover then
+				Entry = ControlStateModule.Selected
+			elseif Entry == ControlStateModule.Pressed then
+				Entry = ControlStateModule.SelectedPressed
+			end
+		end
+		if Current1.controlState ~= Entry then
+			Current1.controlState = Entry
+			
+			if Current1.onStateChanged ~= nil then
+				Current1.onStateChanged(Entry)
+			end
+		end
+		Current1.connections = {
+			Current:GetPropertyChangedSignal("GuiState"):Connect(function()
+				-- upvalues: Current1 (copy), config (upval), Current (copy), ControlStateModule (upval)
+				local Entry = config[Current.GuiState]
+				
+				if Current1.isSelected then
+					if Entry == ControlStateModule.Default or Entry == ControlStateModule.Hover then
+						Entry = ControlStateModule.Selected
+					elseif Entry == ControlStateModule.Pressed then
+						Entry = ControlStateModule.SelectedPressed
+					end
+				end
+				if Current1.controlState == Entry then return end
+				Current1.controlState = Entry
+				
+				if Current1.onStateChanged ~= nil then
+					Current1.onStateChanged(Entry)
+				end
+			end),
+			Current.SelectionGained:Connect(function()
+				-- upvalues: Current1 (copy), ControlStateModule (upval)
+				Current1.isSelected = true
+				local ControlState = Current1.controlState
+				
+				if Current1.isSelected then
+					if ControlState == ControlStateModule.Default or ControlState == ControlStateModule.Hover then
+						ControlState = ControlStateModule.Selected
+					elseif ControlState == ControlStateModule.Pressed then
+						ControlState = ControlStateModule.SelectedPressed
+					end
+				end
+				if Current1.controlState == ControlState then return end
+				Current1.controlState = ControlState
+				
+				if Current1.onStateChanged ~= nil then
+					Current1.onStateChanged(ControlState)
+				end
+			end),
+			Current.SelectionLost:Connect(function()
+				-- upvalues: Current1 (copy), ControlStateModule (upval)
+				Current1.isSelected = false
+				local ControlState = Current1.controlState
+				
+				if Current1.isSelected then
+					if ControlState == ControlStateModule.Default or ControlState == ControlStateModule.Hover then
+						ControlState = ControlStateModule.Selected
+					elseif ControlState == ControlStateModule.Pressed then
+						ControlState = ControlStateModule.SelectedPressed
+					end
+				end
+				if Current1.controlState == ControlState then return end
+				Current1.controlState = ControlState
+				
+				if Current1.onStateChanged ~= nil then
+					Current1.onStateChanged(ControlState)
+				end
+			end)
+		}
+	end, { Callback })
+end
+
+return if require(Foundation.Utility.Flags).FoundationLightweightGuiControlState then useGuiControlState else useGuiControlState_DEPRECATED

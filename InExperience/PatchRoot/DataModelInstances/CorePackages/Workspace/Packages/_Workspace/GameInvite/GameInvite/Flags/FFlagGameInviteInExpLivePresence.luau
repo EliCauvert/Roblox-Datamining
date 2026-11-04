@@ -1,0 +1,3 @@
+﻿local FFlagGameInviteInExpUserListRendererModule = require(script.Parent.FFlagGameInviteInExpUserListRenderer)
+
+return game:DefineFastFlag("GameInviteInExpLivePresence", false) and FFlagGameInviteInExpUserListRendererModule

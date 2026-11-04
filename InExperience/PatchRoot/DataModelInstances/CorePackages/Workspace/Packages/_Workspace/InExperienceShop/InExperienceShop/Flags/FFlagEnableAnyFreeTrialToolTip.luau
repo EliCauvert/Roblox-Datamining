@@ -1,0 +1,4 @@
+﻿local FFlagEnableActiveFreeTrialTooltipModule = require(script.Parent.FFlagEnableActiveFreeTrialTooltip)
+local FFlagEnableRedeemedFreeTrialTooltipModule = require(script.Parent.FFlagEnableRedeemedFreeTrialTooltip)
+
+return require(script.Parent.FFlagEnableFreeTrialTooltip) or (FFlagEnableActiveFreeTrialTooltipModule or FFlagEnableRedeemedFreeTrialTooltipModule)

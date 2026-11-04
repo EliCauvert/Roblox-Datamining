@@ -19,7 +19,6 @@ local GenericTextLabelModule = require(Core.Text.GenericTextLabel.GenericTextLab
 local ImageSetComponentModule = require(Parent1.Core.ImageSet.ImageSetComponent)
 local Skeleton = FoundationModule.Skeleton
 local Radius = FoundationModule.Enums.Radius
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local GetTextSizeModule = require(Parent1.Core.Text.GetTextSize)
 local GetFontFromFontStyleModule = require(Parent1.Core.Text.GetFontFromFontStyle)
 local config = {
@@ -56,7 +55,7 @@ local config6 = {
 }
 
 local function Pillv2(p1)
-	-- upvalues: CryoModule (copy), config (copy), UseControlStateModule (copy), ReactModule (copy), UseStyleModule (copy), UseSelectionCursorModule (copy), CursorKindModule (copy), config3 (copy), config2 (copy), config5 (copy), config4 (copy), GetContentStyleModule (copy), config1 (copy), config6 (copy), GetIconSizeModule (copy), IconSizeModule (copy), GetTextSizeModule (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), Skeleton (copy), Radius (copy), ControlStateModule (copy), InteractableModule (copy), GenericTextLabelModule (copy), ImageSetComponentModule (copy), ImagesModule (copy)
+	-- upvalues: CryoModule (copy), config (copy), UseControlStateModule (copy), ReactModule (copy), UseStyleModule (copy), UseSelectionCursorModule (copy), CursorKindModule (copy), config3 (copy), config2 (copy), config5 (copy), config4 (copy), GetContentStyleModule (copy), config1 (copy), config6 (copy), GetIconSizeModule (copy), IconSizeModule (copy), GetTextSizeModule (copy), GetFontFromFontStyleModule (copy), Skeleton (copy), Radius (copy), ControlStateModule (copy), InteractableModule (copy), GenericTextLabelModule (copy), ImageSetComponentModule (copy), ImagesModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local Text: string = JoinResult.text
 	local UseControlStateModuleResult, UseControlStateModuleResult2 = UseControlStateModule()
@@ -76,7 +75,7 @@ local function Pillv2(p1)
 	local ContentStyleModule3 = GetContentStyleModule(config6, UseControlStateModuleResult, UseStyleModuleResult)
 	local IconSizeModule1: number = GetIconSizeModule(IconSizeModule.Small)
 	local ScaledRelativeSize = UseStyleModuleResultFont.CaptionHeader.RelativeSize * UseStyleModuleResultFont.BaseSize
-	local X: number = GetTextSizeModule(Text, ScaledRelativeSize, if FoundationFontFaceMigration then GetFontFromFontStyleModule(UseStyleModuleResultFont.CaptionHeader) else UseStyleModuleResultFont.CaptionHeader.Font, Vector2.new(10000, 10000)).X
+	local X: number = GetTextSizeModule(Text, ScaledRelativeSize, GetFontFromFontStyleModule(UseStyleModuleResultFont.CaptionHeader), Vector2.new(10000, 10000)).X
 	local XOffset = X + 24
 	local XOffset1 = 216
 	

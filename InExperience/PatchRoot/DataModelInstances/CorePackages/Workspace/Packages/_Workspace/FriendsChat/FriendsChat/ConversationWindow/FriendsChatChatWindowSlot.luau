@@ -1,12 +1,10 @@
-﻿local Parent = script:FindFirstAncestor("FriendsChat").Parent
-local ReactModule = require(Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("FriendsChat").Parent.React)
 local FriendsChatMessageListModule = require(script.Parent.FriendsChatMessageList)
 local _ = require(script.Parent.useConversationHeaderFadeLayout)
 local UseConversationMessagePoolModule = require(script.Parent.useConversationMessagePool)
-local FFlagFriendsChatOsaSystemMessage = require(Parent.SharedFlags).FFlagFriendsChatOsaSystemMessage
 
 return function(p1)
-	-- upvalues: UseConversationMessagePoolModule (copy), ReactModule (copy), FriendsChatMessageListModule (copy), FFlagFriendsChatOsaSystemMessage (copy)
+	-- upvalues: UseConversationMessagePoolModule (copy), ReactModule (copy), FriendsChatMessageListModule (copy)
 	local FadeLayout = p1.fadeLayout
 	
 	return ReactModule.createElement(FriendsChatMessageListModule, {
@@ -28,7 +26,7 @@ return function(p1)
 		textTransparency = p1.textTransparency,
 		isSpatialUIEnabled = p1.isSpatialUIEnabled,
 		isChannelBarVisible = p1.isChannelBarVisible,
-		scrollToTopOnReset = if FFlagFriendsChatOsaSystemMessage then p1.shouldOpenToOsaSystemMessage else nil,
+		scrollToTopOnReset = p1.shouldOpenToOsaSystemMessage,
 		onHovered = p1.onHovered,
 		onUnhovered = p1.onUnhovered,
 		onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged,

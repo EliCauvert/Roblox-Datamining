@@ -1,9 +1,10 @@
 ﻿local AvatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+local FFlagAXTryOnBackgroundRespectsSelection = require(AvatarExperienceCommon.Parent.AvatarExperienceFlags).FFlagAXTryOnBackgroundRespectsSelection
 local ItemTypeEnum = require(AvatarExperienceCommon.Parent.AvatarExperienceModel).Enums.ItemTypeEnum
 local AvatarBackground = require(AvatarExperienceCommon.Constants).ASSET_TYPE_NAME_TO_ID_STRING.AvatarBackground
 
 return function(p1): number?
-	-- upvalues: ItemTypeEnum (copy), AvatarBackground (copy)
+	-- upvalues: FFlagAXTryOnBackgroundRespectsSelection (copy), ItemTypeEnum (copy), AvatarBackground (copy)
 	local AvatarExperience = p1 and p1.AvatarExperience or p1
 	local AvatarScene = AvatarExperience and AvatarExperience.AvatarScene
 	local TryOnItems = AvatarScene and (AvatarScene.OutfitTryOn and AvatarScene.OutfitTryOn.TryOnItems)
@@ -13,7 +14,7 @@ return function(p1): number?
 	end
 	local Number = nil
 	for _, tryOnItem in TryOnItems do
-		if not tryOnItem.isUnequipped and tryOnItem.itemType == ItemTypeEnum.Asset and tryOnItem.itemSubType == AvatarBackground then
+		if not tryOnItem.isUnequipped and (not FFlagAXTryOnBackgroundRespectsSelection or tryOnItem.selectedInTryOnManager ~= false or tryOnItem.lookId == nil) and (tryOnItem.itemType == ItemTypeEnum.Asset and tryOnItem.itemSubType == AvatarBackground) then
 			Number = tonumber(tryOnItem.itemId)
 			
 			if Number then

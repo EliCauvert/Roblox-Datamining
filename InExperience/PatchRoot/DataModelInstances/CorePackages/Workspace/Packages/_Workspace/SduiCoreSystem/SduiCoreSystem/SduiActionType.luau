@@ -98,6 +98,7 @@
 	PlayWithRewardAd = "PlayWithRewardAd",
 	ShowToast = "ShowToast",
 	JoinCommunity = "JoinCommunity",
+	OpenGroupPane = "OpenGroupPane",
 	ActionSequence = "ActionSequence",
 	SubmitCustomFormResponse = "SubmitCustomFormResponse",
 	RefreshCustomFormResults = "RefreshCustomFormResults"
