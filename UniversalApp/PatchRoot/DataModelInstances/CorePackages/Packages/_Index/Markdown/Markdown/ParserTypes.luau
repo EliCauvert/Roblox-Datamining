@@ -1,6 +1,7 @@
 ﻿local Parent = script.Parent
 local _ = require(Parent.Adapter)
 local _ = require(Parent.Parent.CommonMark)
+local _ = require(Parent.Parsers.FormattingTags.FormattingTag)
 local _ = require(Parent.Parsers.RobloxMarkdown.Mention.Mention)
 local _ = require(Parent.Parsers.RobloxMarkdown.Underline.Underline)
 local _ = require(Parent.Adapter.createParser)
@@ -9,6 +10,8 @@ return {
 	ParserDocument = nil,
 	ParserNode = nil,
 	Mention = nil,
+	FormattingTag = nil,
+	FormattingTagText = nil,
 	Underline = nil,
 	Parser = nil,
 	ParserConfig = nil,

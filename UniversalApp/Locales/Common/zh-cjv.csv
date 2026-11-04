@@ -241,6 +241,7 @@ Authentication.CrossDevice.Action.TryAgain,
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,在你已登录的设备上确认以继续。
 Authentication.CrossDevice.Description.DenyIfNotYou,如果不是你本人，请立即拒绝。
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,在已登录的设备上扫描二维码，或依次前往<b>更多 > 快速登录</b>，然后输入以下代码。
+Authentication.CrossDevice.Description.ScanQrOrEnterCode,在已登录的设备上扫描二维码，或前往<b>“更多”>“快速登录”</b>，然后输入以下验证码。
 Authentication.CrossDevice.Description.SigningInAs,正在以 {identifier} 身份登录
 Authentication.CrossDevice.EnterCodeInstruction,然后输入此验证码
 Authentication.CrossDevice.GoToInstruction,在你的电脑或手机上前往：
@@ -300,6 +301,7 @@ Authentication.Login.Action.EmailOtpWaitTime,{WaitTime} 秒后重新发送验证
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,忘记密码或用户名？
 Authentication.Login.Action.ForgotUsername,忘记用户名？
 Authentication.Login.Action.ForgotUsernameOrPassword,忘记了用户名或密码？
+Authentication.Login.Action.GetCodeByEmail,通过电子邮件获取验证码
 Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,通过电子邮件向我发送一次性验证码
 Authentication.Login.Action.NeedHelp,需要帮助？
@@ -315,11 +317,13 @@ Authentication.Login.Action.SignIn,登录
 Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,使用通行密钥
+Authentication.Login.Action.UsernameAndPassword,用户名和密码
 Authentication.Login.Action.WeChatLogin,微信登录
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,退出 Roblox 以切换为 {platformAccountName} 帐户
 Authentication.Login.Button.UseDifferentRobloxAccount,使用其他 Roblox 帐户
 Authentication.Login.Button.XboxAccountSwitcher,切换 Xbox 帐户
 Authentication.Login.Description.AccountSelectorHelp,你所有的关联帐户都在此列出。
+Authentication.Login.Description.ChooseHowToPlay,选择你的游玩方式
 Authentication.Login.Description.DownloadNewVersion,你的帐户无法使用此版本的 Roblox。请下载正确版本以继续。
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,请输入我们发送至 {email} 的验证码
 Authentication.Login.Description.GetOneTimeCodeHelp,请输入你帐户中已验证的电子邮件来接收一次性验证码。
@@ -332,6 +336,7 @@ Authentication.Login.Description.VerificationCodeSentTo,如果 Roblox 帐户存�
 Authentication.Login.Error.PasskeyOnlyAccount,你的帐户只设置了登录密码。请尝试使用你的通行密钥登录，或恢复你的帐户。
 Authentication.Login.Error.PlatformAccountConnectionFailure,无法验证平台帐户。请稍后重试。
 Authentication.Login.Heading.EnterYourCode,
+Authentication.Login.Heading.GetStarted,开始
 Authentication.Login.Heading.IncompatibleAccounts,帐户不兼容
 Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,登录罗布乐思
@@ -913,7 +918,7 @@ CommonUI.Controls.Label.WednesdayAbbreviated,周三
 CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,未找到结果
 CommonUI.Features.Action.Close,
-CommonUI.Features.Action.Go,开始
+CommonUI.Features.Action.Go,
 CommonUI.Features.Action.LessLowercase,收起
 CommonUI.Features.Action.MoreLowercase,展开
 CommonUI.Features.Action.Send,发送
@@ -1079,6 +1084,9 @@ CoreScripts.InGameMenu.Cancel,
 CoreScripts.InGameMenu.Controls.RobloxMenu,罗布乐思菜单
 CoreScripts.InGameMenu.GameSettings.PartyVoiceVolume,派对语音音量
 CoreScripts.InGameMenu.GameSettings.UINavToggle,界面导航切换
+CoreScripts.InGameMenu.GameSettings.UIScaleMode,用户界面缩放模式
+CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,自动
+CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,手动
 CoreScripts.InGameMenu.GameSettings.Volume,音量
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,邀请好友
@@ -1294,6 +1302,8 @@ Feature.Accessibility.Description.PreferredTextSize,根据你的喜好调整 Rob
 Feature.Accessibility.Description.PreferredTransparency,通过调整某些背景的透明度来提高对比度
 Feature.Accessibility.Description.ReducedMotion,停止或减少动态效果
 Feature.Accessibility.Description.SkyStyle,为主页环境选择天空风格
+Feature.Accessibility.Description.UIScaleMode,设置在整个 Roblox 中如何选择用户界面缩放比例。
+Feature.Accessibility.Description.UIScaleV2,调整 Roblox 中按钮和菜单的大小。
 Feature.Accessibility.Description.UiNavigationKeyBind,使用 {uiNavigationKey} 键进入和退出 UI 导航模式
 Feature.Accessibility.Description.VREnvironmentSetting,选择主屏幕的环境
 Feature.Accessibility.DeviceLevelTheme.Dark,酷炫黑
@@ -1314,6 +1324,7 @@ Feature.Accessibility.Heading.PreferredTextSize,文本大小
 Feature.Accessibility.Heading.PreferredTransparency,背景透明度
 Feature.Accessibility.Heading.ReducedMotion,减少动态
 Feature.Accessibility.Heading.SkyStyle,天空风格
+Feature.Accessibility.Heading.UIScale,用户界面缩放比例
 Feature.Accessibility.Heading.UiNavigationKeyBind,
 Feature.Accessibility.Heading.VREnvironmentSetting,VR 环境
 Feature.Accessibility.Label.AppThemeBadgeNew,新
@@ -1326,6 +1337,7 @@ Feature.Accessibility.PreferredTransparency.Opaque,不透明
 Feature.Accessibility.PreferredTransparency.Transparent,透明
 Feature.Accessibility.SkyStyle.Day,白日
 Feature.Accessibility.SkyStyle.Night,夜晚
+Feature.Accessibility.UIScale.Default,默认 ({scale})
 Feature.Accessibility.VREnvironmentSetting.Dark,
 Feature.Accessibility.VREnvironmentSetting.Light,
 Feature.Accessibility.VREnvironmentSetting.System,

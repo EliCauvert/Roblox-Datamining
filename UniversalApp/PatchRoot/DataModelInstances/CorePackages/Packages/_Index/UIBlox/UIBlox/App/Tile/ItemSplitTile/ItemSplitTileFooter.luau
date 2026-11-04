@@ -7,7 +7,6 @@ local FoundationModule = require(Parent2.Foundation)
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local WithStyleModule = require(Parent1.Core.Style.withStyle)
 local ImagesModule = require(Parent1.App.ImageSet.Images)
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local Skeleton = FoundationModule.Skeleton
 local ImageSetComponentModule = require(Parent1.Core.ImageSet.ImageSetComponent)
 local IconSizeModule = require(Parent.ImageSet.Enum.IconSize)
@@ -20,13 +19,13 @@ ItemSplitTileFooter.validateProps = TModule.strictInterface({
 })
 
 function ItemSplitTileFooter.render(p1)
-	-- upvalues: ImagesModule (copy), WithStyleModule (copy), GetIconSizeUDim2Module (copy), IconSizeModule (copy), RoactModule (copy), Skeleton (copy), ImageSetComponentModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: ImagesModule (copy), WithStyleModule (copy), GetIconSizeUDim2Module (copy), IconSizeModule (copy), RoactModule (copy), Skeleton (copy), ImageSetComponentModule (copy), NormalizeFontFaceFunction (copy)
 	local PriceText = p1.props.priceText
 	local IsOwned = p1.props.isOwned
 	local IconsStatusItemOwned = if IsOwned then ImagesModule["icons/status/item/owned"] else ImagesModule["icons/common/robux_small"]
 	
 	return WithStyleModule(function(p2)
-		-- upvalues: PriceText (copy), IsOwned (copy), GetIconSizeUDim2Module (upval), IconSizeModule (upval), RoactModule (upval), p1 (copy), Skeleton (upval), ImageSetComponentModule (upval), IconsStatusItemOwned (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+		-- upvalues: PriceText (copy), IsOwned (copy), GetIconSizeUDim2Module (upval), IconSizeModule (upval), RoactModule (upval), p1 (copy), Skeleton (upval), ImageSetComponentModule (upval), IconsStatusItemOwned (copy), NormalizeFontFaceFunction (upval)
 		local BodyFont = p2.Font.Body.Font
 		local ScaledBaseSize = p2.Font.BaseSize * p2.Font.Body.RelativeSize
 		local Theme = p2.Theme
@@ -54,8 +53,7 @@ function ItemSplitTileFooter.render(p1)
 				BackgroundTransparency = 1,
 				Position = UDim2.new(0, NewOffset, 0, 0),
 				Size = UDim2.new(1, -NewOffset, 1, 0),
-				Font = if FoundationFontFaceMigration then nil else BodyFont,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(BodyFont) else nil,
+				FontFace = NormalizeFontFaceFunction(BodyFont),
 				TextColor3 = Theme.TextMuted.Color,
 				TextTransparency = Theme.TextMuted.Transparency,
 				TextSize = ScaledBaseSize,

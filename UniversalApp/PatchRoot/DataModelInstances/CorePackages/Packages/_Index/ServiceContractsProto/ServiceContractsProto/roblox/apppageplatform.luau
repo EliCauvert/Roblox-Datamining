@@ -13,6 +13,7 @@ return {
 	groups = require(script.groups.v1beta1),
 	home = require(script.home.v1beta1),
 	marketplacecatalog = require(script.marketplacecatalog.v1beta1),
+	notifications = require(script.notifications.v1beta1),
 	partychat = require(script.partychat.v1beta1),
 	prompts = require(script.prompts.v1beta1),
 	search = require(script.search.v1beta1),

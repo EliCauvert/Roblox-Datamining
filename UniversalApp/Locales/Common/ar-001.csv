@@ -232,6 +232,7 @@ Authentication.CrossDevice.Action.TryAgain,حاول مرة أخرى
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,أكّد على جهازك المُسجّل الدخول إليه للمتابعة.
 Authentication.CrossDevice.Description.DenyIfNotYou,أليس هذا أنت؟ ارفض الطلب على الفور.
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,على جهازك المُسجَّل الدخول إليه، امسح كود الاستجابة السريعة (QR) أو انتقل إلى <b>المزيد > تسجيل الدخول السريع</b> وأدخل الكود أدناه.
+Authentication.CrossDevice.Description.ScanQrOrEnterCode,
 Authentication.CrossDevice.Description.SigningInAs,جارٍ تسجيل الدخول بصفتك {identifier}
 Authentication.CrossDevice.EnterCodeInstruction,ثم أدخل هذا الرمز
 Authentication.CrossDevice.GoToInstruction,على حاسوبك أو هاتفك، انتقل إلى:
@@ -291,6 +292,7 @@ Authentication.Login.Action.EmailOtpWaitTime,إعادة إرسال الكود ف
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,نسيت كلمة المرور أو اسم المستخدم؟
 Authentication.Login.Action.ForgotUsername,هل نسيت اسم المستخدم؟
 Authentication.Login.Action.ForgotUsernameOrPassword,هل نسيت اسم المستخدم أو كلمة المرور؟
+Authentication.Login.Action.GetCodeByEmail,الحصول على الكود عبر البريد الإلكتروني
 Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,إرسال رمز صالح لمرة واحدة عبر البريد إلكتروني
 Authentication.Login.Action.NeedHelp,بحاجة إلى مساعدة؟
@@ -306,11 +308,13 @@ Authentication.Login.Action.SignIn,تسجيل الدخول
 Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,استخدام مفتاح مرور
+Authentication.Login.Action.UsernameAndPassword,اسم المستخدم وكلمة المرور
 Authentication.Login.Action.WeChatLogin,تسجيل دخول عبر WeChat
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,يجب الخروج من منصة Roblox للتبديل إلى الحساب على منصة {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,استخدِم حساب Roblox مختلف
 Authentication.Login.Button.XboxAccountSwitcher,تبديل حساب Xbox
 Authentication.Login.Description.AccountSelectorHelp,كل حساباتك المرتبطة مدرجة هنا.
+Authentication.Login.Description.ChooseHowToPlay,اختر الطريقة التي تريد اللعب بها
 Authentication.Login.Description.DownloadNewVersion,هذا الإصدار من منصّة Roblox غير متاح لحسابك. يُرجى تنزيل الإصدار الصحيح للمتابعة.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,أدخل الرمز الذي أرسلناه للتو إلى: {email}
 Authentication.Login.Description.GetOneTimeCodeHelp,أدخل بريدك الإلكتروني الذي تم التحقق منه في حسابك لتلقي رمز مرة واحدة.
@@ -323,6 +327,7 @@ Authentication.Login.Description.VerificationCodeSentTo,إذا كان هناك �
 Authentication.Login.Error.PasskeyOnlyAccount,تم إعداد حسابك لتسجيل الدخول باستخدام مفتاح مرور فقط. جرِّب تسجيل الدخول باستخدام مفتاح المرور أو استعادة حسابك.
 Authentication.Login.Error.PlatformAccountConnectionFailure,يتعذّر التحقق من حساب المنصة. يُرجى إعادة المحاولة لاحقًا.
 Authentication.Login.Heading.EnterYourCode,
+Authentication.Login.Heading.GetStarted,البدء
 Authentication.Login.Heading.IncompatibleAccounts,حسابات غير متوافقة
 Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,تسجيل الدخول إلى Roblox
@@ -1066,6 +1071,9 @@ CoreScripts.InGameMenu.Cancel,
 CoreScripts.InGameMenu.Controls.RobloxMenu,قائمة Roblox
 CoreScripts.InGameMenu.GameSettings.PartyVoiceVolume,مستوى الصوت في الددرشة الصوتية الجماعية
 CoreScripts.InGameMenu.GameSettings.UINavToggle,تبديل وضع التنقل في واجهة المستخدم
+CoreScripts.InGameMenu.GameSettings.UIScaleMode,وضع تغيير حجم واجهة المستخدم
+CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,تلقائي
+CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,يدوي
 CoreScripts.InGameMenu.GameSettings.Volume,المستوى
 CoreScripts.InGameMenu.Leave,مغادرة
 CoreScripts.InGameMenu.PageTitle.InviteFriends,دعوة أصدقاء
@@ -1236,6 +1244,8 @@ Feature.Accessibility.Description.PreferredTextSize,ضبط حجم النص عب�
 Feature.Accessibility.Description.PreferredTransparency,تحسين التباين بتعديل الشفافية في بعض الخلفيات
 Feature.Accessibility.Description.ReducedMotion,إيقاف أو تقليل تأثيرات الحركة
 Feature.Accessibility.Description.SkyStyle,اختر نمط السماء للبيئة الرئيسية
+Feature.Accessibility.Description.UIScaleMode,إعداد طريقة اختيار تغيير حجم واجهة المستخدم عبر منصّة Roblox.
+Feature.Accessibility.Description.UIScaleV2,اضبط حجم الأزرار والقوائم عبر منصّة Roblox.
 Feature.Accessibility.Description.UiNavigationKeyBind,استخدم مفتاح {uiNavigationKey} للدخول والخروج من وضع التنقل في واجهة المستخدم
 Feature.Accessibility.Description.VREnvironmentSetting,اختر بيئة للشاشة الرئيسية
 Feature.Accessibility.DeviceLevelTheme.Dark,داكن
@@ -1255,6 +1265,7 @@ Feature.Accessibility.Heading.PreferredTextSize,حجم النص
 Feature.Accessibility.Heading.PreferredTransparency,شفافية الخلفية
 Feature.Accessibility.Heading.ReducedMotion,تقليل الحركة
 Feature.Accessibility.Heading.SkyStyle,نمط السماء
+Feature.Accessibility.Heading.UIScale,تغيير حجم واجهة المستخدم
 Feature.Accessibility.Heading.UiNavigationKeyBind,مفتاح تبديل وضع التنقل في واجهة المستخدم
 Feature.Accessibility.Heading.VREnvironmentSetting,بيئة الواقع الافتراضي
 Feature.Accessibility.Label.AppThemeBadgeNew,جديد
@@ -1265,6 +1276,7 @@ Feature.Accessibility.PreferredTransparency.Opaque,مظلم
 Feature.Accessibility.PreferredTransparency.Transparent,شفاف
 Feature.Accessibility.SkyStyle.Day,نهار
 Feature.Accessibility.SkyStyle.Night,ليل
+Feature.Accessibility.UIScale.Default,الافتراضي ({scale})
 Feature.Accessibility.VREnvironmentSetting.Dark,
 Feature.Accessibility.VREnvironmentSetting.Light,
 Feature.Accessibility.VREnvironmentSetting.System,
@@ -5301,7 +5313,7 @@ Feature.Squads.Action.Remove,
 Feature.Squads.Action.Retry,
 Feature.Squads.Action.ScheduleAParty,جدولة فرقة
 Feature.Squads.Action.ScheduleParty,حدّد موعد حفلة
-Feature.Squads.Action.Start,البدء
+Feature.Squads.Action.Start,
 Feature.Squads.Action.Switch,
 Feature.Squads.Action.TapToStartNewParty,اضغط لبدء فرقة جديدة
 Feature.Squads.Action.View,

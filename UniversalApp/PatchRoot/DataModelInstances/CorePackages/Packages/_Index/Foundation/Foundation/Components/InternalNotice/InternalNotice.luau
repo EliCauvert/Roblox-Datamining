@@ -2,10 +2,13 @@
 local ReactModule = require(Foundation.Parent.React)
 local CloseAffordanceModule = require(Foundation.Components.CloseAffordance)
 local CloseAffordanceVariantModule = require(Foundation.Enums.CloseAffordanceVariant)
+local FlagsModule = require(Foundation.Utility.Flags)
 local IconModule = require(Foundation.Components.Icon)
 local InputSizeModule = require(Foundation.Enums.InputSize)
+local LinkModule = require(Foundation.Components.Link)
 local StateLayerAffordanceModule = require(Foundation.Enums.StateLayerAffordance)
 local TextModule = require(Foundation.Components.Text)
+local TextOverflowModule = require(Foundation.Enums.TextOverflow)
 local _ = require(Foundation.Components.Types)
 local ViewModule = require(Foundation.Components.View)
 local EscapeRichTextModule = require(Foundation.Utility.escapeRichText)
@@ -15,7 +18,7 @@ local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: UseTokensModule (copy), ReactModule (copy), UseInternalNoticeLayoutModule (copy), UseInternalNoticeVariantsPropsModule (copy), IconModule (copy), ViewModule (copy), TextModule (copy), EscapeRichTextModule (copy), StateLayerAffordanceModule (copy), CloseAffordanceModule (copy), InputSizeModule (copy), CloseAffordanceVariantModule (copy), WithCommonPropsModule (copy)
+	-- upvalues: UseTokensModule (copy), ReactModule (copy), UseInternalNoticeLayoutModule (copy), UseInternalNoticeVariantsPropsModule (copy), IconModule (copy), ViewModule (copy), TextModule (copy), FlagsModule (copy), LinkModule (copy), TextOverflowModule (copy), EscapeRichTextModule (copy), StateLayerAffordanceModule (copy), CloseAffordanceModule (copy), InputSizeModule (copy), CloseAffordanceVariantModule (copy), WithCommonPropsModule (copy)
 	local TestId = p1.testId or "--foundation-internal-notice"
 	local Size600 = UseTokensModule().Size.Size_600
 	local _UDim2 = UDim2.fromOffset(0, Size600)
@@ -47,7 +50,22 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 		padding = UseInternalNoticeVariantsPropsModuleResult.message.padding,
 		testId = `{TestId}--message`
 	})
-	local Element21 = if p1.link then ReactModule.createElement(TextModule, {
+	local LinkContainer = UseInternalNoticeVariantsPropsModuleResult.linkContainer
+	local Element21 = if p1.link and FlagsModule.FoundationInternalNoticeUseLink then ReactModule.createElement(ViewModule, {
+		tag = if LinkContainer then LinkContainer.tag else nil,
+		padding = UseInternalNoticeVariantsPropsModuleResult.link.padding,
+		LayoutOrder = if IsStacked then 3 else 2,
+		onAbsoluteSizeChanged = UseInternalNoticeLayoutModuleResult.measureInlineLink
+	}, {
+		Link = ReactModule.createElement(LinkModule, {
+			hasUnderline = true,
+			text = p1.link.text,
+			onActivated = p1.link.onActivated,
+			size = UseInternalNoticeVariantsPropsModuleResult.link.size,
+			textOverflow = if IsStacked then if p1.truncation then TextOverflowModule.Truncate else TextOverflowModule.Wrap else TextOverflowModule.None,
+			testId = `{TestId}--link`
+		})
+	}) elseif p1.link then ReactModule.createElement(TextModule, {
 		RichText = true,
 		Text = `<u>{EscapeRichTextModule(p1.link.text)}</u>`,
 		tag = UseInternalNoticeVariantsPropsModuleResult.link.tag,

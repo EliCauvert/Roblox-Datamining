@@ -4,7 +4,6 @@ local Parent2 = Parent1.Parent
 local RoactModule = require(Parent2.Roact)
 local TModule = require(Parent2.t)
 local CryoModule = require(Parent2.Cryo)
-local FoundationFontFaceMigration = require(Parent2.Foundation).Utility.Flags.FoundationFontFaceMigration
 local WithStyleModule = require(Parent1.Core.Style.withStyle)
 local ControllerBarHintModule = require(script.Parent.ControllerBarHint)
 local GetTextSizeModule = require(Parent1.Core.Text.GetTextSize)
@@ -62,14 +61,14 @@ function ControllerBar.getDerivedStateFromProps(p1)
 end
 
 function ControllerBar.calculateHintSize(p1, ControllerBarWidth, p2)
-	-- upvalues: GetTextSizeModule (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy)
+	-- upvalues: GetTextSizeModule (copy), GetFontFromFontStyleModule (copy)
 	local ControllerBarWidthDelta = ControllerBarWidth - p1.state.requiredSpace
 	local ScaledRelativeSize = p2.Header2.RelativeSize * p2.BaseSize
 	local ScaledRelativeMinSize = p2.Header2.RelativeMinSize * p2.BaseSize
-	local X = GetTextSizeModule(p1.state.hintStringsConcat, ScaledRelativeMinSize, if FoundationFontFaceMigration then GetFontFromFontStyleModule(p2.Header2) else p2.Header2.Font, Vector2.new(10000, 10000)).X
+	local X = GetTextSizeModule(p1.state.hintStringsConcat, ScaledRelativeMinSize, GetFontFromFontStyleModule(p2.Header2), Vector2.new(10000, 10000)).X
 	
 	if X <= ControllerBarWidthDelta then
-		local X1 = GetTextSizeModule(p1.state.hintStringsConcat, ScaledRelativeSize, if FoundationFontFaceMigration then GetFontFromFontStyleModule(p2.Header2) else p2.Header2.Font, Vector2.new(10000, 10000)).X
+		local X1 = GetTextSizeModule(p1.state.hintStringsConcat, ScaledRelativeSize, GetFontFromFontStyleModule(p2.Header2), Vector2.new(10000, 10000)).X
 		local ScaledRelativeSizeRatio = (ScaledRelativeSize - ScaledRelativeMinSize) / (X1 - X)
 		
 		return nil, (math.clamp(ControllerBarWidthDelta * ScaledRelativeSizeRatio + (ScaledRelativeSize - ScaledRelativeSizeRatio * X1), ScaledRelativeMinSize, ScaledRelativeSize))

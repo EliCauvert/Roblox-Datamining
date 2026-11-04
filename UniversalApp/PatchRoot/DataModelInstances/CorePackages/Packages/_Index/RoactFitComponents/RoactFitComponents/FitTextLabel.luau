@@ -1,8 +1,6 @@
-﻿local Parent = script.Parent
-local Parent1 = Parent.Parent
-local CryoModule = require(Parent1.Cryo)
-local RoactModule = require(Parent1.Roact)
-local FlagsModule = require(Parent.Flags)
+﻿local Parent = script.Parent.Parent
+local CryoModule = require(Parent.Cryo)
+local RoactModule = require(Parent.Roact)
 local Result1 = nil
 local Success, Result = pcall(function()
 	return game:GetEngineFeature("TextBoundsRoundUp")
@@ -47,28 +45,26 @@ FitTextLabel.defaultProps = {
 }
 
 function FitTextLabel.init(p1)
-	-- upvalues: FlagsModule (copy), RoactModule (copy)
-	if FlagsModule.RoactFitComponentsFontDatatypeSupport then
-		p1.measurementId = 0
-		p1.mounted = false
-	end
+	-- upvalues: RoactModule (copy)
+	p1.measurementId = 0
+	p1.mounted = false
+	
 	if RoactModule.Ref == "ref" then
 		p1.frameRef = p1.props.forwardedRef or RoactModule.createRef()
 	else
 		p1.frameRef = p1.props[RoactModule.Ref] or RoactModule.createRef()
 	end
 	function p1.onResize()
-		-- upvalues: p1 (copy), FlagsModule (upval)
+		-- upvalues: p1 (copy)
 		if not p1.frameRef.current then return end
-		if FlagsModule.RoactFitComponentsFontDatatypeSupport and typeof(p1.props.Font) == "Font" then
+		if typeof(p1.props.Font) == "Font" then
 			p1:__resizeForFont(p1.frameRef.current)
 			
 			return
-		end
-		if FlagsModule.RoactFitComponentsFontDatatypeSupport then
+		else
 			p1.measurementId += 1
+			p1.frameRef.current.Size = p1:__getSize(p1.frameRef.current)
 		end
-		p1.frameRef.current.Size = p1:__getSize(p1.frameRef.current)
 	end
 end
 
@@ -78,10 +74,7 @@ function FitTextLabel.render(p1)
 end
 
 function FitTextLabel.didMount(p1)
-	-- upvalues: FlagsModule (copy)
-	if FlagsModule.RoactFitComponentsFontDatatypeSupport then
-		p1.mounted = true
-	end
+	p1.mounted = true
 	p1.onResize()
 end
 
@@ -90,15 +83,12 @@ function FitTextLabel.didUpdate(p1)
 end
 
 function FitTextLabel.willUnmount(p1)
-	-- upvalues: FlagsModule (copy)
-	if FlagsModule.RoactFitComponentsFontDatatypeSupport then
-		p1.mounted = false
-		p1.measurementId += 1
-	end
+	p1.mounted = false
+	p1.measurementId += 1
 end
 
 function FitTextLabel.__getFilteredProps(p1)
-	-- upvalues: CryoModule (copy), RoactModule (copy), FlagsModule (copy)
+	-- upvalues: CryoModule (copy), RoactModule (copy)
 	local Label = {
 		width = CryoModule.None,
 		maximumWidth = CryoModule.None,
@@ -119,7 +109,7 @@ function FitTextLabel.__getFilteredProps(p1)
 		end
 	}
 	
-	if FlagsModule.RoactFitComponentsFontDatatypeSupport and typeof(p1.props.Font) == "Font" then
+	if typeof(p1.props.Font) == "Font" then
 		Label.Font = CryoModule.None
 		Label.FontFace = p1.props.Font
 	end

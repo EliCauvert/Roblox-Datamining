@@ -3,8 +3,7 @@ local Parent1 = Parent.Parent
 local Parent2 = Parent1.Parent
 local Parent3 = Parent2.Parent
 local ReactModule = require(Parent3.React)
-local FoundationModule = require(Parent3.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local NormalizeFontFaceFunction = require(Parent3.Foundation).Utility.normalizeFontFace
 local InputLabelModule = require(Parent.InputLabel)
 local HelperTextModule = require(Parent.HelperText)
 local ImageSetComponentModule = require(Parent2.Core.ImageSet.ImageSetComponent)
@@ -12,11 +11,10 @@ local _ = require(Parent1.ImageSet.ImagesTypes)
 local UseStyleModule = require(Parent2.Core.Style.useStyle)
 local UseCursorModule = require(Parent2.App.SelectionCursor.useCursor)
 local UIBloxConfigModule = require(Parent2.UIBloxConfig)
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local config = { width = UDim.new(0, 400) }
 
 return function(Frame)
-	-- upvalues: UseStyleModule (copy), ReactModule (copy), UseCursorModule (copy), config (copy), InputLabelModule (copy), ImageSetComponentModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), UIBloxConfigModule (copy), HelperTextModule (copy)
+	-- upvalues: UseStyleModule (copy), ReactModule (copy), UseCursorModule (copy), config (copy), InputLabelModule (copy), ImageSetComponentModule (copy), NormalizeFontFaceFunction (copy), UIBloxConfigModule (copy), HelperTextModule (copy)
 	local Tokens = UseStyleModule().Tokens
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
@@ -104,7 +102,7 @@ return function(Frame)
 			required = Frame.required
 		}) else nil
 	}
-	local CreateElementFunction = ReactModule.createElement
+	local CreateElementFunction1 = ReactModule.createElement
 	local v2 = "CanvasGroup"
 	local config3 = {
 		BackgroundTransparency = 1,
@@ -180,7 +178,7 @@ return function(Frame)
 			ImageTransparency = Tokens.Color.Content.Muted.Transparency
 		}) else nil
 	}
-	local CreateElementFunction1 = ReactModule.createElement
+	local CreateElementFunction = ReactModule.createElement
 	local v5 = "TextBox"
 	local Label = { ref = UseRefResult, Text = Frame.text }
 	local Success, Result = pcall(function()
@@ -197,21 +195,20 @@ return function(Frame)
 	Label.ClearTextOnFocus = false
 	local NewFunction = UDim2.new
 	local v6 = 1
-	local SizeDelta = 0
+	local v7 = 0
 	
 	if Frame.iconLeading then
-		SizeDelta = SizeDelta - Size400 - Tokens.Gap.Small * 2
+		v7 = v7 - Size400 - Tokens.Gap.Small * 2
 	end
 	if Frame.iconButton then
-		SizeDelta = SizeDelta - Size400 - Tokens.Gap.Small * 2
+		v7 = v7 - Size400 - Tokens.Gap.Small * 2
 	end
-	Label.Size = NewFunction(v6, SizeDelta, 1, 0)
+	Label.Size = NewFunction(v6, v7, 1, 0)
 	Label.TextEditable = not Frame.disabled
 	Label.BackgroundTransparency = 1
 	Label.TextXAlignment = Enum.TextXAlignment.Left
 	Label.TextYAlignment = Enum.TextYAlignment.Center
-	Label.Font = if FoundationFontFaceMigration then nil else Tokens.Typography.BodyLarge.Font
-	Label.FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Tokens.Typography.BodyLarge.Font) else nil
+	Label.FontFace = NormalizeFontFaceFunction(Tokens.Typography.BodyLarge.Font)
 	Label.OpenTypeFeatures = if UIBloxConfigModule.enableOpenTypeSupport and Frame.openTypeFeatures then Frame.openTypeFeatures else nil
 	Label.TextSize = Tokens.Typography.BodyLarge.FontSize
 	Label.LineHeight = 1
@@ -225,7 +222,7 @@ return function(Frame)
 	Label[ReactModule.Event.Focused] = onFocusGained
 	Label[ReactModule.Event.FocusLost] = onFocusLost
 	Label[ReactModule.Change.Text] = onTextChange
-	config7.TextBox = CreateElementFunction1(v5, Label)
+	config7.TextBox = CreateElementFunction(v5, Label)
 	config7.IconButton = if Frame.iconButton then ReactModule.createElement(ImageSetComponentModule.Button, {
 		BackgroundTransparency = 1,
 		Image = Frame.iconButton,
@@ -238,7 +235,7 @@ return function(Frame)
 	}) else nil
 	config5.BorderFrame = CreateElementFunction2(v4, config6, config7)
 	t.Input = CreateElementFunction4(v3, config4, config5)
-	config2.InputCanvas = CreateElementFunction(v2, config3, t)
+	config2.InputCanvas = CreateElementFunction1(v2, config3, t)
 	config2.HelperText = if Frame.hint then ReactModule.createElement(HelperTextModule, { LayoutOrder = 3, text = Frame.hint, error = Frame.error }) else nil
 	
 	return CreateElementFunction3(v1, config1, config2)

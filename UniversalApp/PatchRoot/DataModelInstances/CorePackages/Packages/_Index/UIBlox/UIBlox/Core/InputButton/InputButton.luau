@@ -3,15 +3,13 @@ local RoactModule = require(Parent.Roact)
 local TModule = require(Parent.t)
 local CryoModule = require(Parent.Cryo)
 local RoactGamepadModule = require(Parent.RoactGamepad)
-local FoundationModule = require(Parent.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
 local WithStyleModule = require(Parent.UIBlox.Core.Style.withStyle)
 local ImageSetComponentModule = require(Parent.UIBlox.Core.ImageSet.ImageSetComponent)
 local ControllableModule = require(Parent.UIBlox.Core.Control.Controllable)
 local ControlStateModule = require(Parent.UIBlox.Core.Control.Enum.ControlState)
 local FitTextLabel = require(Parent.FitFrame).FitTextLabel
 local FitFrameHorizontal = require(Parent.FitFrame).FitFrameHorizontal
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local InputButton = RoactModule.PureComponent:extend("InputButton")
 InputButton.validateProps = TModule.strictInterface({
 	text = TModule.string,
@@ -81,9 +79,9 @@ function InputButton.init(p1)
 end
 
 function InputButton.render(p1)
-	-- upvalues: WithStyleModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), CryoModule (copy), RoactModule (copy), FitFrameHorizontal (copy), FitTextLabel (copy), RoactGamepadModule (copy), ControllableModule (copy), ImageSetComponentModule (copy)
+	-- upvalues: WithStyleModule (copy), NormalizeFontFaceFunction (copy), CryoModule (copy), RoactModule (copy), FitFrameHorizontal (copy), FitTextLabel (copy), RoactGamepadModule (copy), ControllableModule (copy), ImageSetComponentModule (copy)
 	return WithStyleModule(function(p2)
-		-- upvalues: p1 (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), CryoModule (upval), RoactModule (upval), FitFrameHorizontal (upval), FitTextLabel (upval), RoactGamepadModule (upval), ControllableModule (upval), ImageSetComponentModule (upval)
+		-- upvalues: p1 (copy), NormalizeFontFaceFunction (upval), CryoModule (upval), RoactModule (upval), FitFrameHorizontal (upval), FitTextLabel (upval), RoactGamepadModule (upval), ControllableModule (upval), ImageSetComponentModule (upval)
 		local _Font = p2.Font
 		local BodyFont = _Font.Body.Font
 		local config = {
@@ -93,8 +91,7 @@ function InputButton.render(p1)
 			Text = p1.props.text,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextSize = _Font.Body.RelativeSize * _Font.BaseSize,
-			Font = if FoundationFontFaceMigration then nil else BodyFont,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(BodyFont) else nil,
+			FontFace = NormalizeFontFaceFunction(BodyFont),
 			TextColor3 = p1.props.textColor,
 			TextTransparency = p1.props.transparency
 		}
@@ -115,8 +112,8 @@ function InputButton.render(p1)
 			v1 = FitFrameHorizontal
 			Component = FitTextLabel
 			JoinResult = CryoModule.Dictionary.join(config, {
-				Font = if FoundationFontFaceMigration then NormalizeFontFaceFunction(BodyFont) else nil,
-				FontFace = if FoundationFontFaceMigration then CryoModule.None else nil,
+				Font = NormalizeFontFaceFunction(BodyFont),
+				FontFace = CryoModule.None,
 				width = FitTextLabel.Width.FitToText,
 				onActivated = p1.props.onActivated,
 				[RoactModule.Change.AbsoluteSize] = p1.textAbsoluteSizeChanged

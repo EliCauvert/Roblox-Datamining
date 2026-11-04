@@ -2,6 +2,7 @@
 local BannerContextPresentationModule = require(Foundation.Enums.BannerContextPresentation)
 local BannerContextVariantModule = require(Foundation.Enums.BannerContextVariant)
 local IconSizeModule = require(Foundation.Enums.IconSize)
+local InputSizeModule = require(Foundation.Enums.InputSize)
 local _ = require(Foundation.Components.InternalNotice)
 local _ = require(Foundation.Components.Types)
 local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
@@ -24,7 +25,7 @@ local function affixedContentPadding(p1, Offset)
 end
 
 local function variantsFactory(p1)
-	-- upvalues: BannerContextPresentationModule (copy), IconSizeModule (copy), BannerContextVariantModule (copy), affixedContentPadding (copy)
+	-- upvalues: BannerContextPresentationModule (copy), IconSizeModule (copy), InputSizeModule (copy), BannerContextVariantModule (copy), affixedContentPadding (copy)
 	local Padding = {
 		top = UDim.new(0, (math.round((p1.Size.Size_600 - p1.Typography.BodySmall.FontSize) / 2)))
 	}
@@ -47,13 +48,21 @@ local function variantsFactory(p1)
 				leading = { gap = "gap-small" },
 				icon = { size = IconSizeModule.Small },
 				message = { tag = "text-body-small", padding = Padding },
-				link = { tag = "text-body-small", padding = Padding }
+				link = {
+					tag = "text-body-small",
+					padding = Padding,
+					size = InputSizeModule.Small
+				}
 			},
 			[BannerContextPresentationModule.Affixed] = {
 				leading = { gap = "gap-medium" },
 				icon = { size = IconSizeModule.Medium },
 				message = { tag = "text-body-medium", padding = Padding1 },
-				link = { tag = "text-body-medium", padding = Padding1 }
+				link = {
+					tag = "text-body-medium",
+					padding = Padding1,
+					size = InputSizeModule.Medium
+				}
 			}
 		},
 		variants = {

@@ -249,6 +249,7 @@ Authentication.CrossDevice.Action.TryAgain,Tekrar Dene
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,Devam etmek için giriş yaptığın cihazında onayla.
 Authentication.CrossDevice.Description.DenyIfNotYou,Sen değil misin? Hemen reddet.
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,Giriş yaptığın cihazda QR kodunu okut ya da <b>Daha Fazla > Hızlı giriş</b>'e git ve aşağıdaki kodu gir.
+Authentication.CrossDevice.Description.ScanQrOrEnterCode,
 Authentication.CrossDevice.Description.SigningInAs,{identifier} olarak giriş yapılıyor
 Authentication.CrossDevice.EnterCodeInstruction,sonra bu kodu gir
 Authentication.CrossDevice.GoToInstruction,Bilgisayarından veya telefonundan aşağıdaki adrese git:
@@ -308,6 +309,7 @@ Authentication.Login.Action.EmailOtpWaitTime,Kodu {WaitTime} sn. sonra tekrar g�
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Kullanıcı Adını veya Şifreni mi unuttun?
 Authentication.Login.Action.ForgotUsername,Kullanıcı adını mı unuttun?
 Authentication.Login.Action.ForgotUsernameOrPassword,Kullanıcı adını veya şifreni mi unuttun?
+Authentication.Login.Action.GetCodeByEmail,Kodu e-posta ile al
 Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,Tek Kullanımlık Kodu Bana E-postayla Gönder
 Authentication.Login.Action.NeedHelp,Yardıma mı ihtiyacın var?
@@ -323,11 +325,13 @@ Authentication.Login.Action.SignIn,Giriş Yap
 Authentication.Login.Action.SignInSentenceCase,Giriş yap
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,Geçiş anahtarı kullan
+Authentication.Login.Action.UsernameAndPassword,Kullanıcı adı ve şifre
 Authentication.Login.Action.WeChatLogin,WeChat Girişi
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,{platformAccountName} hesabını değiştirmek için Roblox'tan çıkış yap
 Authentication.Login.Button.UseDifferentRobloxAccount,Farklı bir Roblox hesabı kullan
 Authentication.Login.Button.XboxAccountSwitcher,Xbox hesabını değiştir
 Authentication.Login.Description.AccountSelectorHelp,İlişkilendirilmiş tüm hesapların burada listelenmiştir.
+Authentication.Login.Description.ChooseHowToPlay,Nasıl oynamak istediğini seç
 Authentication.Login.Description.DownloadNewVersion,Roblox'un bu sürümü hesabında kullanılamıyor. Devam etmek için lütfen doğru sürümü indir.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,Az önce {email} adresine gönderdiğimiz kodu gir.
 Authentication.Login.Description.GetOneTimeCodeHelp,Tek kullanımlık kod almak için hesabında doğruladığın e-posta adresini gir.
@@ -340,6 +344,7 @@ Authentication.Login.Description.VerificationCodeSentTo,Bir Roblox hesabı varsa
 Authentication.Login.Error.PasskeyOnlyAccount,Hesabına yalnızca giriş yapmak için bir geçiş anahtarı ayarlanmış. Geçiş anahtarınla giriş yapmayı dene veya hesabını kurtar.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Platform hesabı doğrulanamıyor. Lütfen daha sonra tekrar dene.
 Authentication.Login.Heading.EnterYourCode,Kodunu gir
+Authentication.Login.Heading.GetStarted,Başla
 Authentication.Login.Heading.IncompatibleAccounts,Uyumsuz Hesaplar
 Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,Roblox'a Giriş Yap
@@ -1084,6 +1089,9 @@ CoreScripts.InGameMenu.Cancel,
 CoreScripts.InGameMenu.Controls.RobloxMenu,Roblox menüsü
 CoreScripts.InGameMenu.GameSettings.PartyVoiceVolume,Parti ses seviyesi
 CoreScripts.InGameMenu.GameSettings.UINavToggle,Kullanıcı Arayüzü Gezinme Tuşu
+CoreScripts.InGameMenu.GameSettings.UIScaleMode,Kullanıcı Arayüzü Ölçeklendirme Modu
+CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,Otomatik
+CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,Manuel
 CoreScripts.InGameMenu.GameSettings.Volume,Ses Seviyesi
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Arkadaşları Davet Et
@@ -1256,6 +1264,8 @@ Feature.Accessibility.Description.PreferredTextSize,Tercihlerine göre Roblox ge
 Feature.Accessibility.Description.PreferredTransparency,Bazı arka planlarda şeffaflığı ayarlayarak kontrastı arttır
 Feature.Accessibility.Description.ReducedMotion,Hareket efektlerini durdur veya azalt
 Feature.Accessibility.Description.SkyStyle,Ana sayfa için bir gökyüzü stili seç
+Feature.Accessibility.Description.UIScaleMode,Roblox'ta kullanıcı arayüzü ölçeklendirmesinin nasıl seçileceğini belirle.
+Feature.Accessibility.Description.UIScaleV2,Roblox'ta düğmelerin ve menülerin boyutunu ayarla.
 Feature.Accessibility.Description.UiNavigationKeyBind,Kullanıcı Arayüzü navigasyon moduna girmek ve çıkmak için {uiNavigationKey} tuşunu kullan
 Feature.Accessibility.Description.VREnvironmentSetting,Ana ekran için bir ortam seç
 Feature.Accessibility.DeviceLevelTheme.Dark,Koyu
@@ -1275,6 +1285,7 @@ Feature.Accessibility.Heading.PreferredTextSize,Metin boyutu
 Feature.Accessibility.Heading.PreferredTransparency,Arka plan şeffaflığı
 Feature.Accessibility.Heading.ReducedMotion,Hareketi azalt
 Feature.Accessibility.Heading.SkyStyle,Gökyüzü stili
+Feature.Accessibility.Heading.UIScale,Kullanıcı Arayüzü Ölçeklendirmesi
 Feature.Accessibility.Heading.UiNavigationKeyBind,Kullanıcı arayüzü gezinme değiştirme
 Feature.Accessibility.Heading.VREnvironmentSetting,VR Ortamı
 Feature.Accessibility.Label.AppThemeBadgeNew,Yeni
@@ -1285,6 +1296,7 @@ Feature.Accessibility.PreferredTransparency.Opaque,Opak
 Feature.Accessibility.PreferredTransparency.Transparent,Şeffaf
 Feature.Accessibility.SkyStyle.Day,Gündüz
 Feature.Accessibility.SkyStyle.Night,Gece
+Feature.Accessibility.UIScale.Default,Varsayılan ({scale})
 Feature.Accessibility.VREnvironmentSetting.Dark,
 Feature.Accessibility.VREnvironmentSetting.Light,
 Feature.Accessibility.VREnvironmentSetting.System,
@@ -3582,7 +3594,7 @@ Feature.Friends.Action.FindFriends,
 Feature.Friends.Action.FriendAdded,
 Feature.Friends.Action.FriendRemoved,Arkadaşlıktan Çıkarıldı
 Feature.Friends.Action.FriendRequestSent,Arkadaşlık İsteği Gönderildi
-Feature.Friends.Action.GetStarted,Başla
+Feature.Friends.Action.GetStarted,
 Feature.Friends.Action.GoToAddFriends,Arkadaş Ekle Sayfasına Git
 Feature.Friends.Action.InviteFriends,Rehberindeki kişileri Roblox'ta arkadaş olmaya davet et.
 Feature.Friends.Action.InviteProviderFriends,{provider} Arkadaşını Davet Et

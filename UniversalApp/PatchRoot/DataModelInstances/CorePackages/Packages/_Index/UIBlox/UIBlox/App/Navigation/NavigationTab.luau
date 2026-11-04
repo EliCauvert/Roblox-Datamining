@@ -1,11 +1,9 @@
-﻿local TextService = game:GetService("TextService")
-local Parent = script.Parent.Parent.Parent
+﻿local Parent = script.Parent.Parent.Parent
 local Parent1 = Parent.Parent
 local ReactModule = require(Parent1.React)
 local CryoModule = require(Parent1.Cryo)
 local FoundationModule = require(Parent1.Foundation)
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UIBloxConfigModule = require(Parent.UIBloxConfig)
 local LoggerModule = require(Parent.Logger)
 local ControlStateModule = require(Parent.Core.Control.Enum.ControlState)
@@ -61,7 +59,7 @@ local function NavigationTabTooltip(p1)
 end
 
 return (ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: CryoModule (copy), config (copy), UseStyleModule (copy), UIBloxConfigModule (copy), NavigationTabLayoutModule (copy), ReactModule (copy), LoggerModule (copy), ControlStateModule (copy), FoundationFontFaceMigration (copy), GetTextSizeModule (copy), _Vector2 (copy), TextService (copy), IsBuilderIconFunction (copy), View (copy), Icon (copy), InputSize (copy), Label (copy), StatusIndicator (copy), MigrateBadgeVariantModule (copy), NormalizeFontFaceFunction (copy), StateLayerModule (copy), NavigationTabTooltip (copy)
+	-- upvalues: CryoModule (copy), config (copy), UseStyleModule (copy), UIBloxConfigModule (copy), NavigationTabLayoutModule (copy), ReactModule (copy), LoggerModule (copy), ControlStateModule (copy), GetTextSizeModule (copy), _Vector2 (copy), IsBuilderIconFunction (copy), View (copy), Icon (copy), InputSize (copy), Label (copy), StatusIndicator (copy), MigrateBadgeVariantModule (copy), NormalizeFontFaceFunction (copy), StateLayerModule (copy), NavigationTabTooltip (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local Tokens = UseStyleModule().Tokens
 	local HasWidth: boolean = UIBloxConfigModule.addNavigationTabTooltipAndTruncation and (JoinResult.layout == NavigationTabLayoutModule.Stacked and (JoinResult.width ~= nil or JoinResult.fillWidth == true))
@@ -144,9 +142,9 @@ return (ReactModule.forwardRef(function(p1, Ref)
 		end
 	end
 	local UseMemoResult1 = ReactModule.useMemo(function(): UDim2?
-		-- upvalues: JoinResult (copy), FoundationFontFaceMigration (upval), GetTextSizeModule (upval), FontSize (ref), _Vector2 (upval), TextService (upval)
+		-- upvalues: JoinResult (copy), GetTextSizeModule (upval), FontSize (ref), _Vector2 (upval)
 		if JoinResult.hasLabel and JoinResult.labelText and JoinResult.labelTypography then
-			local TextSizeModule = if FoundationFontFaceMigration then GetTextSizeModule(JoinResult.labelText, FontSize, JoinResult.labelTypography.Font, _Vector2) else TextService:GetTextSize(JoinResult.labelText, FontSize, JoinResult.labelTypography.Font, _Vector2)
+			local TextSizeModule = GetTextSizeModule(JoinResult.labelText, FontSize, JoinResult.labelTypography.Font, _Vector2)
 			
 			return UDim2.new(0, TextSizeModule.X + 2, 0, TextSizeModule.Y + 2)
 		else
@@ -224,8 +222,7 @@ return (ReactModule.forwardRef(function(p1, Ref)
 			TextXAlignment = Enum.TextXAlignment.Center,
 			TextTruncate = if HasWidth then Enum.TextTruncate.AtEnd else nil,
 			Text = JoinResult.labelText,
-			Font = if FoundationFontFaceMigration or JoinResult.labelTypography == nil then nil else JoinResult.labelTypography.Font,
-			FontFace = if FoundationFontFaceMigration and JoinResult.labelTypography then NormalizeFontFaceFunction(JoinResult.labelTypography.Font) else nil,
+			FontFace = if JoinResult.labelTypography then NormalizeFontFaceFunction(JoinResult.labelTypography.Font) else nil,
 			TextSize = if JoinResult.labelTypography then JoinResult.labelTypography.FontSize else nil,
 			LineHeight = if JoinResult.labelTypography then JoinResult.labelTypography.LineHeight else nil,
 			TextColor3 = Emphasis.Color3,
@@ -235,10 +232,10 @@ return (ReactModule.forwardRef(function(p1, Ref)
 		})
 	end
 	local Frame = nil
-	local _UDim: UDim? = nil
+	local CornerRadius: UDim? = nil
 	
 	if JoinResult.layout == NavigationTabLayoutModule.Stacked then
-		_UDim = UDim.new(0, Tokens.Radius.Medium)
+		CornerRadius = UDim.new(0, Tokens.Radius.Medium)
 		local Size1200 = Tokens.Size.Size_1200
 		Frame = ReactModule.createElement("Frame", {
 			AutomaticSize = if HasWidth then Enum.AutomaticSize.Y else Enum.AutomaticSize.XY,
@@ -262,7 +259,7 @@ return (ReactModule.forwardRef(function(p1, Ref)
 			Label = Label1
 		})
 	elseif JoinResult.layout == NavigationTabLayoutModule.Inline then
-		_UDim = UDim.new(0, Tokens.Size.Size_300)
+		CornerRadius = UDim.new(0, Tokens.Size.Size_300)
 		local Press = if JoinResult.isChecked then Tokens.Color.State.Press else { Transparency = 1, Color3 = nil }
 		Frame = ReactModule.createElement("Frame", {
 			AutomaticSize = Enum.AutomaticSize.XY,
@@ -284,7 +281,7 @@ return (ReactModule.forwardRef(function(p1, Ref)
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				Padding = UDim.new(0, Tokens.Size.Size_300)
 			}),
-			UICorner = ReactModule.createElement("UICorner", { CornerRadius = _UDim }),
+			UICorner = ReactModule.createElement("UICorner", { CornerRadius = CornerRadius }),
 			Icon = RenderIconResult,
 			Label = Label1,
 			Badge = if JoinResult.badgeValue == nil then nil else ReactModule.createElement(StatusIndicator, {
@@ -308,7 +305,7 @@ return (ReactModule.forwardRef(function(p1, Ref)
 		StateLayer = ReactModule.createElement(StateLayerModule, {
 			affordance = "Background",
 			zIndex = 10,
-			cornerRadius = _UDim,
+			cornerRadius = CornerRadius,
 			onActivated = JoinResult.onActivated,
 			onStateChanged = if UIBloxConfigModule.addNavigationTabTooltipAndTruncation then UseResult2 else JoinResult.onStateChanged
 		}),

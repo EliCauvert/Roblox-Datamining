@@ -249,6 +249,7 @@ Authentication.CrossDevice.Action.TryAgain,
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,"Aby kontynuować, potwierdź na urządzeniu, na którym się zalogowano."
 Authentication.CrossDevice.Description.DenyIfNotYou,To nie Ty? Odrzuć natychmiast.
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,Na zalogowanym urządzeniu zeskanuj kod QR lub wybierz kolejno <b>Więcej > Szybkie logowanie</b> i wprowadź poniższy kod.
+Authentication.CrossDevice.Description.ScanQrOrEnterCode,Na zalogowanym urządzeniu zeskanuj kod QR lub wybierz <b>Więcej > Szybkie logowanie</b> i wprowadź poniższy kod.
 Authentication.CrossDevice.Description.SigningInAs,Logujesz się jako {identifier}
 Authentication.CrossDevice.EnterCodeInstruction,i wprowadź ten kod
 Authentication.CrossDevice.GoToInstruction,Na komputerze lub telefonie wybierz:
@@ -308,6 +309,7 @@ Authentication.Login.Action.EmailOtpWaitTime,Wyślij kod ponownie za {WaitTime} 
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Nie pamiętasz hasła lub nazwy użytkownika?
 Authentication.Login.Action.ForgotUsername,Nie pamiętasz nazwy użytkownika?
 Authentication.Login.Action.ForgotUsernameOrPassword,Nie pamiętasz nazwy użytkownika lub hasła?
+Authentication.Login.Action.GetCodeByEmail,Otrzymaj kod e-mailem
 Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,Wyślij kod jednorazowy na mój adres e-mail
 Authentication.Login.Action.NeedHelp,Potrzebujesz pomocy?
@@ -323,11 +325,13 @@ Authentication.Login.Action.SignIn,Zaloguj się
 Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,Użyj klucza dostępu
+Authentication.Login.Action.UsernameAndPassword,Nazwa użytkownika i hasło
 Authentication.Login.Action.WeChatLogin,Logowanie – WeChat
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,"Wyjdź z Robloxa, aby przełączyć konto na {platformAccountName}"
 Authentication.Login.Button.UseDifferentRobloxAccount,Użyj innego konta Roblox
 Authentication.Login.Button.XboxAccountSwitcher,Zmień konto Xbox
 Authentication.Login.Description.AccountSelectorHelp,Tutaj widoczne są wszystkie twoje powiązane konta.
+Authentication.Login.Description.ChooseHowToPlay,"Wybierz, jak chcesz grać"
 Authentication.Login.Description.DownloadNewVersion,"Ta wersja Robloxa nie jest dostępna na Twoim koncie. Pobierz odpowiednią wersję, aby kontynuować."
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,"Wprowadź kod, który właśnie wysłaliśmy na adres {email}"
 Authentication.Login.Description.GetOneTimeCodeHelp,"Aby otrzymać kod jednorazowy, wprowadź adres e-mail zweryfikowany na twoim koncie."
@@ -340,6 +344,7 @@ Authentication.Login.Description.VerificationCodeSentTo,"Jeżeli istnieje konto 
 Authentication.Login.Error.PasskeyOnlyAccount,Na Twoim koncie skonfigurowano wyłącznie logowanie za pomocą klucza dostępu. Spróbuj zalogować się za pomocą klucza dostępu lub odzyskaj konto.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Nie można zweryfikować konta na platformie. Spróbuj ponownie później.
 Authentication.Login.Heading.EnterYourCode,
+Authentication.Login.Heading.GetStarted,Rozpocznij
 Authentication.Login.Heading.IncompatibleAccounts,Niezgodne konta
 Authentication.Login.Heading.Login,Logowanie
 Authentication.Login.Heading.LoginRoblox,Zaloguj się na platformie Roblox
@@ -1084,6 +1089,9 @@ CoreScripts.InGameMenu.Cancel,
 CoreScripts.InGameMenu.Controls.RobloxMenu,Menu Robloxa
 CoreScripts.InGameMenu.GameSettings.PartyVoiceVolume,Głośność czatu głosowego w ramach Party
 CoreScripts.InGameMenu.GameSettings.UINavToggle,Przełączenie nawigacji po interfejsie użytkownika
+CoreScripts.InGameMenu.GameSettings.UIScaleMode,Tryb skalowania interfejsu użytkownika
+CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,Automatycznie
+CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,Ręcznie
 CoreScripts.InGameMenu.GameSettings.Volume,Głośność
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Zaproś znajomych
@@ -1300,6 +1308,8 @@ Feature.Accessibility.Description.PreferredTextSize,Dostosuj wielkość tekstu n
 Feature.Accessibility.Description.PreferredTransparency,"Zwiększ kontrast, dostosowując przezroczystość na niektórych tłach"
 Feature.Accessibility.Description.ReducedMotion,Wyłącz lub ogranicz efekty związane z ruchem
 Feature.Accessibility.Description.SkyStyle,Wybierz styl nieba dla środowiska głównego
+Feature.Accessibility.Description.UIScaleMode,Ustaw sposób wyboru skali interfejsu użytkownika na Robloxie.
+Feature.Accessibility.Description.UIScaleV2,Dostosuj rozmiar przycisków i menu w całym Robloxie.
 Feature.Accessibility.Description.UiNavigationKeyBind,"Użyj klawisza {uiNavigationKey}, aby przejść do trybu nawigacji po interfejsie użytkownika"
 Feature.Accessibility.Description.VREnvironmentSetting,Wybierz środowisko dla ekranu głównego
 Feature.Accessibility.DeviceLevelTheme.Dark,Ciemny
@@ -1319,6 +1329,7 @@ Feature.Accessibility.Heading.PreferredTextSize,Rozmiar tekstu
 Feature.Accessibility.Heading.PreferredTransparency,Przezroczystość tła
 Feature.Accessibility.Heading.ReducedMotion,Ogranicz ruch
 Feature.Accessibility.Heading.SkyStyle,Styl nieba
+Feature.Accessibility.Heading.UIScale,Skala interfejsu użytkownika
 Feature.Accessibility.Heading.UiNavigationKeyBind,
 Feature.Accessibility.Heading.VREnvironmentSetting,Środowisko VR
 Feature.Accessibility.Label.AppThemeBadgeNew,Nowość
@@ -1329,6 +1340,7 @@ Feature.Accessibility.PreferredTransparency.Opaque,Nieprzezroczyste
 Feature.Accessibility.PreferredTransparency.Transparent,Przezroczyste
 Feature.Accessibility.SkyStyle.Day,
 Feature.Accessibility.SkyStyle.Night,Noc
+Feature.Accessibility.UIScale.Default,Domyślnie ({scale})
 Feature.Accessibility.VREnvironmentSetting.Dark,
 Feature.Accessibility.VREnvironmentSetting.Light,
 Feature.Accessibility.VREnvironmentSetting.System,
@@ -3626,7 +3638,7 @@ Feature.Friends.Action.FindFriends,
 Feature.Friends.Action.FriendAdded,
 Feature.Friends.Action.FriendRemoved,Znajomy usunięty
 Feature.Friends.Action.FriendRequestSent,Wysłano prośbę o dodanie do znajomych
-Feature.Friends.Action.GetStarted,Rozpocznij
+Feature.Friends.Action.GetStarted,
 Feature.Friends.Action.GoToAddFriends,Przejdź do obszaru Dodaj znajomych
 Feature.Friends.Action.InviteFriends,Zaproś swoje kontakty do znajomych na platformie Roblox.
 Feature.Friends.Action.InviteProviderFriends,Zaproś znajomych z: {provider}

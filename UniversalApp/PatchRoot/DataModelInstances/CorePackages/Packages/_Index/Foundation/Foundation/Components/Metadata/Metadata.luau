@@ -82,6 +82,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 			Text = ReactModule.createElement(TextModule, {
 				LayoutOrder = 3,
 				Text = value.text,
+				OpenTypeFeatures = UseMetadataVariantsModuleResult.text.openTypeFeatures,
 				tag = if Largest > 1 then UseMetadataVariantsModuleResult.wrappedText.tag elseif ClampedValue1 == ClampedValue then UseMetadataVariantsModuleResult.truncatedText.tag else UseMetadataVariantsModuleResult.text.tag,
 				sizeConstraint = if Largest > 1 then { MaxSize = Vector2.new(1e999, MultiLineTextHeightModule) } else nil,
 				testId = `{WithDefaultsModuleResult.testId}--text-{ClampedValue1}`

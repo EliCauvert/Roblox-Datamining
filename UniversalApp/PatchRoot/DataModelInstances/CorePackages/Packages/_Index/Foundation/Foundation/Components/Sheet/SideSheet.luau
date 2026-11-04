@@ -8,6 +8,12 @@ local UseAnimatedBindingFunction = require(Parent.ReactOtter).useAnimatedBinding
 local CloseAffordanceVariantModule = require(Foundation.Enums.CloseAffordanceVariant)
 local ConstantsModule = require(Foundation.Constants)
 local FlagsModule = require(Foundation.Utility.Flags)
+local InternalDrawerModule = require(Foundation.Components.InternalDrawer)
+local InternalDrawerBackdropModule = require(Foundation.Enums.InternalDrawerBackdrop)
+local InternalDrawerLayoutModule = require(Foundation.Enums.InternalDrawerLayout)
+local InternalDrawerShadowModule = require(Foundation.Enums.InternalDrawerShadow)
+local InternalDrawerSideModule = require(Foundation.Enums.InternalDrawerSide)
+local _ = require(Foundation.Enums.OnCloseCallbackReason)
 local StateLayerAffordanceModule = require(Foundation.Enums.StateLayerAffordance)
 local UseOverlayModule = require(Foundation.Providers.Overlay.useOverlay)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
@@ -38,7 +44,105 @@ local config1 = {
 local SHADOWIMAGE = ConstantsModule.SHADOW_IMAGE
 local SHADOWSIZE = ConstantsModule.SHADOW_SIZE
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
+local function DrawerSideSheet(p1, Ref)
+	-- upvalues: WithDefaultsModule (copy), config1 (copy), UseTokensModule (copy), UseElevationModule (copy), ElevationLayerModule (copy), UseScreenSizeModule (copy), UseOverlayModule (copy), UseHardwareInsetsModule (copy), config (copy), ReactModule (copy), ChildrenHasFullBleedModule (copy), DashModule (copy), SheetTypeModule (copy), InternalDrawerModule (copy), InternalDrawerSideModule (copy), InternalDrawerBackdropModule (copy), InternalDrawerLayoutModule (copy), InternalDrawerShadowModule (copy), ViewModule (copy), SheetContextModule (copy), CloseAffordanceModule (copy), CloseAffordanceVariantModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config1)
+	local UseTokensModuleResult = UseTokensModule()
+	local UseElevationModuleResult = UseElevationModule(ElevationLayerModule.Sheet, { stackAboveOwner = false })
+	local UseScreenSizeModuleResult = UseScreenSizeModule()
+	local UseHardwareInsetsModuleResult = UseHardwareInsetsModule((UseOverlayModule()))
+	local IsDisplaySizeMatch = WithDefaultsModuleResult.displaySize == Enum.DisplaySize.Small
+	local Right = if IsDisplaySizeMatch then UseHardwareInsetsModuleResult.right else 0
+	local Entry = config[WithDefaultsModuleResult.size]
+	local ClampedValue = math.clamp(UseScreenSizeModuleResult.X * Entry.TARGET_WIDTH, Entry.MIN * UseTokensModuleResult.Config.UI.Scale, Entry.MAX * UseTokensModuleResult.Config.UI.Scale)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
+	local UseResult = ReactModule.useCallback(function()
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
+	end, {})
+	local UseResult1 = ReactModule.useCallback(function(_)
+		-- upvalues: UseResult (copy)
+		UseResult()
+	end, { UseResult })
+	ReactModule.useImperativeHandle(WithDefaultsModuleResult.sheetRef, function()
+		-- upvalues: UseResult (copy)
+		return { close = UseResult }
+	end, { UseResult })
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(false)
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(false)
+	local ChildrenHasFullBleedModuleResult = ChildrenHasFullBleedModule(WithDefaultsModuleResult.children)
+	local UseBindingResult3, UseBindingResult2_2 = ReactModule.useBinding(0)
+	local UseBindingResult4, UseBindingResult2_3 = ReactModule.useBinding(0)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	
+	return ReactModule.createElement(InternalDrawerModule, {
+		backgroundColor = "bg-surface-100",
+		scrolls = false,
+		elevation = UseElevationModuleResult,
+		isOpen = UseStateResult,
+		onRequestClose = UseResult1,
+		onCloseComplete = WithDefaultsModuleResult.onClose,
+		side = InternalDrawerSideModule.End,
+		backdrop = InternalDrawerBackdropModule.Dismissible,
+		width = ClampedValue,
+		outerBleed = Right,
+		layout = if IsDisplaySizeMatch then InternalDrawerLayoutModule.FullBleed else InternalDrawerLayoutModule.Inset,
+		shadow = InternalDrawerShadowModule.Overlay300,
+		testId = WithDefaultsModuleResult.testId,
+		ref = Ref
+	}, {
+		Content = ReactModule.createElement(ViewModule, { tag = "size-full" }, {
+			Body = ReactModule.createElement(ViewModule, { tag = "col items-center size-full-full clip" }, ReactModule.createElement(SheetContextModule.Provider, {
+				value = ReactModule.useMemo(function()
+					-- upvalues: DashModule (upval), UseBindingResult (copy), UseBindingResult2 (copy), UseBindingResult4 (copy), UseBindingResult2_3 (copy), UseBindingResult1 (copy), UseBindingResult2_1 (copy), ChildrenHasFullBleedModuleResult (copy), UseBindingResult3 (copy), UseBindingResult2_2 (copy), UseResult (copy), IsDisplaySizeMatch (copy), SheetTypeModule (upval), WithDefaultsModuleResult (copy), UseRefResult (copy), UseStateResult1 (copy), UseStateResult2_1 (copy)
+					return {
+						actionsHeight = 0,
+						sheetHeightAvailable = 0,
+						safeAreaPadding = 0,
+						bottomPadding = 0,
+						innerScrollingEnabled = true,
+						setActionsHeight = DashModule.noop,
+						hasActionsDivider = UseBindingResult,
+						setHasActionsDivider = UseBindingResult2,
+						setSheetHeightAvailable = DashModule.noop,
+						innerScrollY = UseBindingResult4,
+						setInnerScrollY = UseBindingResult2_3,
+						hasHeader = UseBindingResult1,
+						setHasHeader = UseBindingResult2_1,
+						hasFullBleed = ChildrenHasFullBleedModuleResult,
+						fullBleedHeight = UseBindingResult3,
+						setFullBleedHeight = UseBindingResult2_2,
+						closeSheet = UseResult,
+						hasRadius = not IsDisplaySizeMatch,
+						sheetType = SheetTypeModule.Side,
+						testId = WithDefaultsModuleResult.testId,
+						closeAffordanceRef = UseRefResult,
+						contentStartRef = UseStateResult1,
+						setContentStartRef = UseStateResult2_1
+					}
+				end, {
+					WithDefaultsModuleResult.testId, UseResult, UseStateResult1, UseRefResult,
+					ChildrenHasFullBleedModuleResult, IsDisplaySizeMatch
+				})
+			}, WithDefaultsModuleResult.children)),
+			CloseAffordance = ReactModule.createElement(CloseAffordanceModule, {
+				onActivated = UseResult,
+				ref = UseRefResult,
+				NextSelectionDown = UseStateResult1,
+				variant = if ChildrenHasFullBleedModuleResult then CloseAffordanceVariantModule.OverMedia else CloseAffordanceVariantModule.Utility,
+				Position = UDim2.new(1, -UseTokensModuleResult.Margin.Small, 0, UseTokensModuleResult.Margin.Small),
+				AnchorPoint = Vector2.new(1, 0),
+				Visible = UseBindingResult1:map(function(p2): boolean
+					return not p2
+				end),
+				testId = `{WithDefaultsModuleResult.testId}--close-affordance`
+			})
+		})
+	})
+end
+
+local function SideSheet(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config1 (copy), UseOverlayModule (copy), UseTokensModule (copy), UseElevationModule (copy), ElevationLayerModule (copy), UsePreferencesModule (copy), UseHardwareInsetsModule (copy), UseScreenSizeModule (copy), config (copy), ReactModule (copy), UseAnimatedBindingFunction (copy), ChildrenHasFullBleedModule (copy), OtterModule (copy), DashModule (copy), SheetTypeModule (copy), ReactRobloxModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), TypesModule (copy), SheetContextModule (copy), ElevationOwnerScope (copy), CloseAffordanceModule (copy), CloseAffordanceVariantModule (copy), ImageModule (copy), SHADOWIMAGE (copy), SHADOWSIZE (copy), FlagsModule (copy), BackdropModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config1)
 	local UseOverlayModuleResult = UseOverlayModule()
@@ -213,4 +317,6 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 			testId = `{WithDefaultsModuleResult.testId}--backdrop`
 		})
 	}), UseOverlayModuleResult)
-end))
+end
+
+return ReactModule.memo(ReactModule.forwardRef(if FlagsModule.FoundationSideSheetInternalDrawer then DrawerSideSheet else SideSheet))

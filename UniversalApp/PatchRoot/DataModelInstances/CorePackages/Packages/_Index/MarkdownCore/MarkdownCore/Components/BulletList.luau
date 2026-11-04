@@ -7,7 +7,6 @@ local FlagsModule = require(script:FindFirstAncestor("MarkdownCore").Flags)
 local View = FoundationModule.View
 local Image = FoundationModule.Image
 local Text = FoundationModule.Text
-local Flags = FoundationModule.Utility.Flags
 local Label = {
 	ItemOffset = 12,
 	MarkerImage = "rbxasset://textures/StudioSharedUI/dot.png",
@@ -30,7 +29,7 @@ local _ = function(p1: string): boolean
 end
 
 return function(Frame)
-	-- upvalues: FoundationModule (copy), Label (copy), FlagsModule (copy), MapFunction (copy), ReactModule (copy), Text (copy), Flags (copy), View (copy), Image (copy), DashModule (copy)
+	-- upvalues: FoundationModule (copy), Label (copy), FlagsModule (copy), MapFunction (copy), ReactModule (copy), Text (copy), View (copy), Image (copy), DashModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local TextWrapped = Frame.TextWrapped
 	local TextTruncate = Frame.TextTruncate
@@ -66,7 +65,7 @@ return function(Frame)
 		Position = Frame.Position,
 		Size = Size
 	}, DashModule.assign(MapFunction(Items, function(ContentElement, LayoutOrder)
-		-- upvalues: ItemIndentation (copy), ListStyle (copy), Label (upval), ReactModule (upval), Text (upval), Flags (upval), _Font (ref), TextSize (ref), _UDim2 (copy), TextColor (ref), TextTruncate (copy), TextWrapped (copy), View (upval), LineHeight (ref), Image (upval)
+		-- upvalues: ItemIndentation (copy), ListStyle (copy), Label (upval), ReactModule (upval), Text (upval), _Font (ref), TextSize (ref), _UDim2 (copy), TextColor (ref), TextTruncate (copy), TextWrapped (copy), View (upval), LineHeight (ref), Image (upval)
 		local MarkerImage = ListStyle.MarkerImage or Label.MarkerImage
 		local UIPadding = nil
 		local Prefix = nil
@@ -76,13 +75,10 @@ return function(Frame)
 			Element = ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				AutomaticSize = Enum.AutomaticSize.XY,
-				Font = if Flags.FoundationFontFaceMigration then nil else _Font,
-				fontStyle = if Flags.FoundationFontFaceMigration then { Font = _Font, FontSize = TextSize } else nil,
+				fontStyle = { Font = _Font, FontSize = TextSize },
 				Size = _UDim2,
 				Text = ContentElement,
-				TextColor = if Flags.FoundationFontFaceMigration then nil else TextColor,
-				textStyle = if Flags.FoundationFontFaceMigration then { Color3 = TextColor } else nil,
-				TextSize = if Flags.FoundationFontFaceMigration then nil else TextSize,
+				textStyle = { Color3 = TextColor },
 				TextTruncate = TextTruncate,
 				TextWrapped = TextWrapped,
 				Padding = ListStyle.Padding or Label.Padding,
@@ -103,8 +99,7 @@ return function(Frame)
 				AutomaticSize = Enum.AutomaticSize.XY,
 				Size = _UDim2_1,
 				textStyle = { Color3 = TextColor },
-				FontStyle = if Flags.FoundationFontFaceMigration then nil else { Font = _Font, FontSize = TextSize },
-				fontStyle = if Flags.FoundationFontFaceMigration then { Font = _Font, FontSize = TextSize } else nil,
+				fontStyle = { Font = _Font, FontSize = TextSize },
 				Text = ContentElement.Text,
 				TextWrapped = TextWrapped,
 				TextTruncate = TextTruncate,

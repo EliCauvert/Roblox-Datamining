@@ -250,6 +250,7 @@ Authentication.CrossDevice.Action.TryAgain,
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,계속하려면 로그인한 기기에서 확인하세요.
 Authentication.CrossDevice.Description.DenyIfNotYou,본인이 아닌가요? 즉시 거부하세요.
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,로그인된 기기에서 QR 코드를 스캔하거나 <b>더 보기 > 빠른 로그인</b>으로 이동하여 아래 코드를 입력하세요.
+Authentication.CrossDevice.Description.ScanQrOrEnterCode,
 Authentication.CrossDevice.Description.SigningInAs,{identifier}(으)로 로그인
 Authentication.CrossDevice.EnterCodeInstruction,그런 다음 이 코드를 입력하세요
 Authentication.CrossDevice.GoToInstruction,컴퓨터나 휴대폰에서 다음으로 이동하세요.
@@ -309,6 +310,7 @@ Authentication.Login.Action.EmailOtpWaitTime,{WaitTime}초 후 코드 다시 보
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,비밀번호 또는 사용자 이름을 잊으셨나요?
 Authentication.Login.Action.ForgotUsername,사용자 이름을 잊어버리셨나요?
 Authentication.Login.Action.ForgotUsernameOrPassword,사용자 이름이나 비밀번호를 잊어버리셨나요?
+Authentication.Login.Action.GetCodeByEmail,
 Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,이메일로 일회용 코드 받기
 Authentication.Login.Action.NeedHelp,도움이 필요하세요?
@@ -324,11 +326,13 @@ Authentication.Login.Action.SignIn,로그인
 Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,패스키 사용
+Authentication.Login.Action.UsernameAndPassword,사용자 이름 및 비밀번호
 Authentication.Login.Action.WeChatLogin,WeChat 로그인
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,{platformAccountName} 계정으로 전환하려면 Roblox를 종료하세요
 Authentication.Login.Button.UseDifferentRobloxAccount,다른 Roblox 계정 사용
 Authentication.Login.Button.XboxAccountSwitcher,Xbox 계정 전환
 Authentication.Login.Description.AccountSelectorHelp,연결된 모든 계정이 여기에 나열됩니다.
+Authentication.Login.Description.ChooseHowToPlay,원하는 플레이 방법을 선택하세요
 Authentication.Login.Description.DownloadNewVersion,회원님의 계정에서는 Roblox의 이 버전을 이용할 수 없습니다. 계속하려면 올바른 버전을 다운로드하세요.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,{email}(으)로 방금 전송된 코드를 입력하세요
 Authentication.Login.Description.GetOneTimeCodeHelp,일회용 코드를 받으려면 계정의 인증된 이메일을 입력하세요.
@@ -341,6 +345,7 @@ Authentication.Login.Description.VerificationCodeSentTo,Roblox 계정이 있는 
 Authentication.Login.Error.PasskeyOnlyAccount,계정에 로그인용 패스키만 설정되어 있습니다. 패스키로 로그인을 시도하거나 계정을 복구하세요.
 Authentication.Login.Error.PlatformAccountConnectionFailure,플랫폼 계정을 인증할 수 없습니다. 나중에 다시 시도하세요.
 Authentication.Login.Heading.EnterYourCode,
+Authentication.Login.Heading.GetStarted,시작하기
 Authentication.Login.Heading.IncompatibleAccounts,계정이 호환되지 않음
 Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,Roblox에 로그인
@@ -1085,6 +1090,9 @@ CoreScripts.InGameMenu.Cancel,
 CoreScripts.InGameMenu.Controls.RobloxMenu,Roblox 메뉴
 CoreScripts.InGameMenu.GameSettings.PartyVoiceVolume,파티 음성 볼륨
 CoreScripts.InGameMenu.GameSettings.UINavToggle,UI 탐색 전환
+CoreScripts.InGameMenu.GameSettings.UIScaleMode,UI 배율 조정 모드
+CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,자동
+CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,수동
 CoreScripts.InGameMenu.GameSettings.Volume,볼륨
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,친구 초대
@@ -1301,6 +1309,8 @@ Feature.Accessibility.Description.PreferredTextSize,Roblox에서 자신의 원�
 Feature.Accessibility.Description.PreferredTransparency,일부 배경의 투명도를 조정해 대비를 개선합니다
 Feature.Accessibility.Description.ReducedMotion,모션 효과를 중지하거나 줄입니다
 Feature.Accessibility.Description.SkyStyle,홈 환경을 위한 하늘 스타일을 선택하세요
+Feature.Accessibility.Description.UIScaleMode,Roblox 전반에서 UI 배율을 선택하는 방법을 설정합니다.
+Feature.Accessibility.Description.UIScaleV2,Roblox 전반에서 버튼과 메뉴의 크기를 조정하세요.
 Feature.Accessibility.Description.UiNavigationKeyBind,{uiNavigationKey} 키를 사용해 UI 탐색 모드 시작 및 종료
 Feature.Accessibility.Description.VREnvironmentSetting,홈 화면 환경을 선택하세요.
 Feature.Accessibility.DeviceLevelTheme.Dark,다크
@@ -1320,6 +1330,7 @@ Feature.Accessibility.Heading.PreferredTextSize,텍스트 크기
 Feature.Accessibility.Heading.PreferredTransparency,배경 투명도
 Feature.Accessibility.Heading.ReducedMotion,모션 감소
 Feature.Accessibility.Heading.SkyStyle,하늘 스타일
+Feature.Accessibility.Heading.UIScale,UI 배율 조정
 Feature.Accessibility.Heading.UiNavigationKeyBind,
 Feature.Accessibility.Heading.VREnvironmentSetting,VR 환경
 Feature.Accessibility.Label.AppThemeBadgeNew,신규
@@ -1330,6 +1341,7 @@ Feature.Accessibility.PreferredTransparency.Opaque,불투명
 Feature.Accessibility.PreferredTransparency.Transparent,투명
 Feature.Accessibility.SkyStyle.Day,낮
 Feature.Accessibility.SkyStyle.Night,밤
+Feature.Accessibility.UIScale.Default,기본값({scale})
 Feature.Accessibility.VREnvironmentSetting.Dark,
 Feature.Accessibility.VREnvironmentSetting.Light,
 Feature.Accessibility.VREnvironmentSetting.System,
@@ -3628,7 +3640,7 @@ Feature.Friends.Action.FindFriends,
 Feature.Friends.Action.FriendAdded,
 Feature.Friends.Action.FriendRemoved,친구가 삭제되었습니다
 Feature.Friends.Action.FriendRequestSent,친구 요청이 전송됨
-Feature.Friends.Action.GetStarted,시작하기
+Feature.Friends.Action.GetStarted,
 Feature.Friends.Action.GoToAddFriends,친구 추가로 이동
 Feature.Friends.Action.InviteFriends,연락처 목록에 있는 사람을 Roblox 친구로 초대하세요.
 Feature.Friends.Action.InviteProviderFriends,{provider} 친구 초대

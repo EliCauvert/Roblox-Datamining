@@ -248,6 +248,7 @@ Authentication.CrossDevice.Action.TryAgain,重新嘗試
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,在已登入的裝置上確認以繼續。
 Authentication.CrossDevice.Description.DenyIfNotYou,不是你本人嗎？請立即拒絕。
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,在已登入的裝置上，掃描 QR 碼，或前往<b>「更多」>「快速登入」</b>，然後輸入下方的代碼。
+Authentication.CrossDevice.Description.ScanQrOrEnterCode,
 Authentication.CrossDevice.Description.SigningInAs,以 {identifier} 的身分登入
 Authentication.CrossDevice.EnterCodeInstruction,然後輸入此代碼
 Authentication.CrossDevice.GoToInstruction,使用您的電腦或手機前往：
@@ -307,6 +308,7 @@ Authentication.Login.Action.EmailOtpWaitTime,{WaitTime} 秒後重新傳送代碼
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,忘記密碼或使用者名稱？
 Authentication.Login.Action.ForgotUsername,忘記使用者名稱了?
 Authentication.Login.Action.ForgotUsernameOrPassword,忘記使用者名稱或密碼了嗎？
+Authentication.Login.Action.GetCodeByEmail,透過電子郵件取得驗證碼
 Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,透過電子郵件給我一次性驗證碼
 Authentication.Login.Action.NeedHelp,需要幫助嗎？
@@ -322,11 +324,13 @@ Authentication.Login.Action.SignIn,登入
 Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,使用密碼金鑰
+Authentication.Login.Action.UsernameAndPassword,使用者名稱和密碼
 Authentication.Login.Action.WeChatLogin,微信登入
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,離開 Roblox 以切換成 {platformAccountName} 帳號
 Authentication.Login.Button.UseDifferentRobloxAccount,使用其他 Roblox 帳號
 Authentication.Login.Button.XboxAccountSwitcher,切換 Xbox 帳號
 Authentication.Login.Description.AccountSelectorHelp,您持有的所有帳號都已在此列出。
+Authentication.Login.Description.ChooseHowToPlay,選擇你想要玩的方式
 Authentication.Login.Description.DownloadNewVersion,你的帳號無法使用此版本的 Roblox。若要繼續，請先下載正確版本。
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,輸入我們剛才發送的驗證碼：{email}
 Authentication.Login.Description.GetOneTimeCodeHelp,輸入帳號上經過驗證的電子郵件地址即可獲得一次性驗證碼。
@@ -339,6 +343,7 @@ Authentication.Login.Description.VerificationCodeSentTo,若已擁有 Roblox 帳�
 Authentication.Login.Error.PasskeyOnlyAccount,您的帳號只有一組密碼金鑰可用於登入。請嘗試使用密碼金鑰登入或恢復帳號。
 Authentication.Login.Error.PlatformAccountConnectionFailure,無法驗證平台帳號，請稍後再試。
 Authentication.Login.Heading.EnterYourCode,
+Authentication.Login.Heading.GetStarted,立即開始
 Authentication.Login.Heading.IncompatibleAccounts,帳號不相容
 Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,登入 Roblox
@@ -1083,6 +1088,9 @@ CoreScripts.InGameMenu.Cancel,
 CoreScripts.InGameMenu.Controls.RobloxMenu,Roblox 選單
 CoreScripts.InGameMenu.GameSettings.PartyVoiceVolume,Party 語音音量
 CoreScripts.InGameMenu.GameSettings.UINavToggle,UI 導覽切換
+CoreScripts.InGameMenu.GameSettings.UIScaleMode,使用者介面縮放模式
+CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,自動
+CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,手動
 CoreScripts.InGameMenu.GameSettings.Volume,音量
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,邀請好友
@@ -1299,6 +1307,8 @@ Feature.Accessibility.Description.PreferredTextSize,根據您的喜好調整 Rob
 Feature.Accessibility.Description.PreferredTransparency,通過調整某些背景的透明度來改善對比度
 Feature.Accessibility.Description.ReducedMotion,停止或減少動態效果
 Feature.Accessibility.Description.SkyStyle,選擇首頁環境的天空風格
+Feature.Accessibility.Description.UIScaleMode,設定在 Roblox 中選擇使用者介面比例的方式。
+Feature.Accessibility.Description.UIScaleV2,調整 Roblox 中按鈕和選單的大小。
 Feature.Accessibility.Description.UiNavigationKeyBind,使用 {uiNavigationKey} 鍵以進入和退出 UI 導航模式
 Feature.Accessibility.Description.VREnvironmentSetting,選擇首頁畫面的環境
 Feature.Accessibility.DeviceLevelTheme.Dark,深色
@@ -1318,6 +1328,7 @@ Feature.Accessibility.Heading.PreferredTextSize,文字大小
 Feature.Accessibility.Heading.PreferredTransparency,背景透明度
 Feature.Accessibility.Heading.ReducedMotion,減少動態效果
 Feature.Accessibility.Heading.SkyStyle,天空風格
+Feature.Accessibility.Heading.UIScale,使用者介面比例
 Feature.Accessibility.Heading.UiNavigationKeyBind,
 Feature.Accessibility.Heading.VREnvironmentSetting,VR 環境
 Feature.Accessibility.Label.AppThemeBadgeNew,全新
@@ -1328,6 +1339,7 @@ Feature.Accessibility.PreferredTransparency.Opaque,不透明
 Feature.Accessibility.PreferredTransparency.Transparent,透明
 Feature.Accessibility.SkyStyle.Day,白天
 Feature.Accessibility.SkyStyle.Night,夜間
+Feature.Accessibility.UIScale.Default,預設 ({scale})
 Feature.Accessibility.VREnvironmentSetting.Dark,
 Feature.Accessibility.VREnvironmentSetting.Light,
 Feature.Accessibility.VREnvironmentSetting.System,
@@ -5633,7 +5645,7 @@ Feature.VirtualEvents.Label.StartsInHours,{number} 小時後
 Feature.VirtualEvents.Label.StartsInMinutes,{number} 分鐘後
 Feature.VirtualEvents.Label.StartsInOneDay,1 天後
 Feature.VirtualEvents.Label.StartsInOneHour,1 小時後
-Feature.VirtualEvents.Label.StartsNow,立即開始
+Feature.VirtualEvents.Label.StartsNow,
 Feature.VirtualEvents.NotNowButton,
 Feature.VirtualEvents.NotifyMe,
 Feature.VirtualEvents.ShareModalBody,複製下方活動連結即可邀請其他人參加活動或在聊天室分享活動。

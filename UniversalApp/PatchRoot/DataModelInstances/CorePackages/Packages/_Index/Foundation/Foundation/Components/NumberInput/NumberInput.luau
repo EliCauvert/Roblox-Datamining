@@ -323,9 +323,17 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 		end
 	end, { WithDefaultsModuleResult.value })
 	local UseResult11 = ReactModule.useCallback(function(_, p2)
-		-- upvalues: UseRefResult1 (copy), FlagsModule (upval), WithDefaultsModuleResult (copy), UseRefResult2 (copy), CalculateNumberInputValueFromPositionsModule (upval), Entry (copy), UseResult5 (copy), OnChangeCallbackReasonModule (upval)
+		-- upvalues: UseRefResult1 (copy), FlagsModule (upval), UseRefResult2 (copy), WithDefaultsModuleResult (copy), CalculateNumberInputValueFromPositionsModule (upval), Entry (copy), UseResult5 (copy), OnChangeCallbackReasonModule (upval)
 		if UseRefResult1.current then
-			if FlagsModule.FoundationNumberInputScrubCallbackProps and WithDefaultsModuleResult.onScrubStarted and not UseRefResult2.current then
+			if FlagsModule.FoundationNumberInputScrubEndedAlone then
+				if not UseRefResult2.current then
+					UseRefResult2.current = true
+					
+					if FlagsModule.FoundationNumberInputScrubCallbackProps and WithDefaultsModuleResult.onScrubStarted then
+						WithDefaultsModuleResult.onScrubStarted()
+					end
+				end
+			elseif FlagsModule.FoundationNumberInputScrubCallbackProps and WithDefaultsModuleResult.onScrubStarted and not UseRefResult2.current then
 				WithDefaultsModuleResult.onScrubStarted()
 				UseRefResult2.current = true
 			end

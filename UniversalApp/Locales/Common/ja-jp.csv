@@ -249,6 +249,7 @@ Authentication.CrossDevice.Action.TryAgain,
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,続けるには、ログイン済みのデバイスで確認してください。
 Authentication.CrossDevice.Description.DenyIfNotYou,ご自身ではありませんか？すぐに却下してください。
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,ログイン済みのデバイスでQRコードをスキャンするか、<b>[その他] > [クイックサインイン]</b>に移動して、以下のコードを入力してください。
+Authentication.CrossDevice.Description.ScanQrOrEnterCode,ログイン済みのデバイスで、QRコードをスキャンするか、<b>[その他] > [クイックサインイン]</b>に移動して、以下のコードを入力してください。
 Authentication.CrossDevice.Description.SigningInAs,{identifier}としてログイン中
 Authentication.CrossDevice.EnterCodeInstruction,このコードを入力
 Authentication.CrossDevice.GoToInstruction,パソコンまたはスマホで次に移動:
@@ -308,6 +309,7 @@ Authentication.Login.Action.EmailOtpWaitTime,あと {WaitTime}秒でコードを
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,パスワード、またはユーザーネームをお忘れですか？
 Authentication.Login.Action.ForgotUsername,ユーザーネームを忘れた場合
 Authentication.Login.Action.ForgotUsernameOrPassword,ユーザーネームまたはパスワードをお忘れですか？
+Authentication.Login.Action.GetCodeByEmail,メールでコードを取得
 Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,ワンタイムコードをメールで送信
 Authentication.Login.Action.NeedHelp,ヘルプが必要ですか？
@@ -323,11 +325,13 @@ Authentication.Login.Action.SignIn,サインイン
 Authentication.Login.Action.SignInSentenceCase,ログイン
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,パスキーを使用
+Authentication.Login.Action.UsernameAndPassword,ユーザーネームとパスワード
 Authentication.Login.Action.WeChatLogin,WeChatログイン
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Robloxから退出して {platformAccountName} のアカウントを切り替え
 Authentication.Login.Button.UseDifferentRobloxAccount,別のRobloxアカウントを使用
 Authentication.Login.Button.XboxAccountSwitcher,Xboxアカウントを切りかえる
 Authentication.Login.Description.AccountSelectorHelp,すべての関連アカウントがここに表示されています。
+Authentication.Login.Description.ChooseHowToPlay,プレイ方法を選択
 Authentication.Login.Description.DownloadNewVersion,このRobloxのバージョンは、お持ちのアカウントではご利用いただけません。続けるには正しいバージョンをダウンロードしてください。
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,{email} に送信されたコードを入力
 Authentication.Login.Description.GetOneTimeCodeHelp,あなたのアカウントで認証済みのメールアドレスを入力し、ワンタイムコード（一回のみ使用可）を受け取ります。
@@ -340,6 +344,7 @@ Authentication.Login.Description.VerificationCodeSentTo,Robloxアカウントが
 Authentication.Login.Error.PasskeyOnlyAccount,アカウントにはログイン用のパスキーが設定されています。パスキーでログインするか、アカウントを回復してください。
 Authentication.Login.Error.PlatformAccountConnectionFailure,プラットフォーム用アカウントを確認できません。後でもう一度お試しください。
 Authentication.Login.Heading.EnterYourCode,
+Authentication.Login.Heading.GetStarted,始める
 Authentication.Login.Heading.IncompatibleAccounts,アカウントに互換性がありません
 Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,ロブロックスにログイン
@@ -1084,6 +1089,9 @@ CoreScripts.InGameMenu.Cancel,
 CoreScripts.InGameMenu.Controls.RobloxMenu,Robloxメニュー
 CoreScripts.InGameMenu.GameSettings.PartyVoiceVolume,パーティボイスの音量
 CoreScripts.InGameMenu.GameSettings.UINavToggle,UI ナビゲーション切りかえ
+CoreScripts.InGameMenu.GameSettings.UIScaleMode,UIスケールモード
+CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,自動
+CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,手動
 CoreScripts.InGameMenu.GameSettings.Volume,音量
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,友達を招待
@@ -1300,6 +1308,8 @@ Feature.Accessibility.Description.PreferredTextSize,Robloxで好みに合わせ�
 Feature.Accessibility.Description.PreferredTransparency,一部の背景の透明度を調整してコントラストを改善
 Feature.Accessibility.Description.ReducedMotion,視差効果を停止または減らす
 Feature.Accessibility.Description.SkyStyle,ホーム環境の空のスタイルを選択
+Feature.Accessibility.Description.UIScaleMode,Roblox全体でのUIスケールの選択方法を設定します。
+Feature.Accessibility.Description.UIScaleV2,Roblox全体のボタンとメニューのサイズを調整します。
 Feature.Accessibility.Description.UiNavigationKeyBind,{uiNavigationKey} キーを使用してUIナビゲーションモードの開始/終了
 Feature.Accessibility.Description.VREnvironmentSetting,ホーム画面の環境を選択
 Feature.Accessibility.DeviceLevelTheme.Dark,ダーク
@@ -1319,6 +1329,7 @@ Feature.Accessibility.Heading.PreferredTextSize,文字サイズ
 Feature.Accessibility.Heading.PreferredTransparency,背景の透明度
 Feature.Accessibility.Heading.ReducedMotion,視差効果を減らす
 Feature.Accessibility.Heading.SkyStyle,空のスタイル
+Feature.Accessibility.Heading.UIScale,UIスケール
 Feature.Accessibility.Heading.UiNavigationKeyBind,
 Feature.Accessibility.Heading.VREnvironmentSetting,VR環境
 Feature.Accessibility.Label.AppThemeBadgeNew,新規
@@ -1329,6 +1340,7 @@ Feature.Accessibility.PreferredTransparency.Opaque,不透明
 Feature.Accessibility.PreferredTransparency.Transparent,透明
 Feature.Accessibility.SkyStyle.Day,昼
 Feature.Accessibility.SkyStyle.Night,夜
+Feature.Accessibility.UIScale.Default,デフォルト（{scale}）
 Feature.Accessibility.VREnvironmentSetting.Dark,
 Feature.Accessibility.VREnvironmentSetting.Light,
 Feature.Accessibility.VREnvironmentSetting.System,
@@ -3626,7 +3638,7 @@ Feature.Friends.Action.FindFriends,
 Feature.Friends.Action.FriendAdded,
 Feature.Friends.Action.FriendRemoved,友達が削除されました
 Feature.Friends.Action.FriendRequestSent,友達リクエストが送信されました
-Feature.Friends.Action.GetStarted,始める
+Feature.Friends.Action.GetStarted,
 Feature.Friends.Action.GoToAddFriends,「友達を追加」へ
 Feature.Friends.Action.InviteFriends,連絡先の人たちをRobloxに友達として招待。
 Feature.Friends.Action.InviteProviderFriends,{provider} の友達を招待する

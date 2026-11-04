@@ -1,8 +1,6 @@
 ﻿local App = script:FindFirstAncestor("App")
 local Parent = App.Parent
-local Parent1 = Parent.Parent
-local ReactModule = require(Parent1.React)
-local FoundationFontFaceMigration = require(Parent1.Foundation).Utility.Flags.FoundationFontFaceMigration
+local ReactModule = require(Parent.Parent.React)
 local _ = require(App.ImageSet.ImagesTypes)
 local IconSizeModule = require(App.ImageSet.Enum.IconSize)
 local GetIconSizeModule = require(App.ImageSet.getIconSize)
@@ -16,29 +14,29 @@ local _ = require(Parent.App.Style.StyleTypes)
 local IconSizeModule1 = GetIconSizeModule(IconSizeModule.Large)
 
 local function _(p1, p2, p3)
-	-- upvalues: FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), GetTextSizeModule (copy)
-	return GetTextSizeModule(p1, p2.RelativeSize * p3.Font.BaseSize, if FoundationFontFaceMigration then GetFontFromFontStyleModule(p2) else p2.Font, (Vector2.new(10000, 10000))).X
+	-- upvalues: GetFontFromFontStyleModule (copy), GetTextSizeModule (copy)
+	return GetTextSizeModule(p1, p2.RelativeSize * p3.Font.BaseSize, GetFontFromFontStyleModule(p2), (Vector2.new(10000, 10000))).X
 end
 
 local _ = function(p1, p2): number
-	-- upvalues: UIBloxConfigModule (copy), GetIconSizeModule (copy), IconSizeModule (copy), IconSizeModule1 (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), GetTextSizeModule (copy)
+	-- upvalues: UIBloxConfigModule (copy), GetIconSizeModule (copy), IconSizeModule (copy), IconSizeModule1 (copy), GetFontFromFontStyleModule (copy), GetTextSizeModule (copy)
 	local Title = p2.Font.Title
 	local CaptionHeader = p2.Font.CaptionHeader
 	
-	return math.max(GetTextSizeModule(p1.countText, Title.RelativeSize * p2.Font.BaseSize, if FoundationFontFaceMigration then GetFontFromFontStyleModule(Title) else Title.Font, (Vector2.new(10000, 10000))).X, GetTextSizeModule(p1.labelText, CaptionHeader.RelativeSize * p2.Font.BaseSize, if FoundationFontFaceMigration then GetFontFromFontStyleModule(CaptionHeader) else CaptionHeader.Font, (Vector2.new(10000, 10000))).X) + (if UIBloxConfigModule.enableScalingForSomeEdpIcons then GetIconSizeModule(IconSizeModule.Large, p2) else IconSizeModule1) + 12
+	return math.max(GetTextSizeModule(p1.countText, Title.RelativeSize * p2.Font.BaseSize, GetFontFromFontStyleModule(Title), (Vector2.new(10000, 10000))).X, GetTextSizeModule(p1.labelText, CaptionHeader.RelativeSize * p2.Font.BaseSize, GetFontFromFontStyleModule(CaptionHeader), (Vector2.new(10000, 10000))).X) + (if UIBloxConfigModule.enableScalingForSomeEdpIcons then GetIconSizeModule(IconSizeModule.Large, p2) else IconSizeModule1) + 12
 end
 
 return function(p1)
-	-- upvalues: UseStyleModule (copy), UIBloxConfigModule (copy), GetIconSizeModule (copy), IconSizeModule (copy), IconSizeModule1 (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), GetTextSizeModule (copy), ReactModule (copy), StatWidgetModule (copy)
+	-- upvalues: UseStyleModule (copy), UIBloxConfigModule (copy), GetIconSizeModule (copy), IconSizeModule (copy), IconSizeModule1 (copy), GetFontFromFontStyleModule (copy), GetTextSizeModule (copy), ReactModule (copy), StatWidgetModule (copy)
 	local UseStyleModuleResult = UseStyleModule()
 	local CountLeft = p1.countLeft
 	local Title = UseStyleModuleResult.Font.Title
 	local CaptionHeader = UseStyleModuleResult.Font.CaptionHeader
-	local NewLargest = math.max(GetTextSizeModule(CountLeft.countText, Title.RelativeSize * UseStyleModuleResult.Font.BaseSize, if FoundationFontFaceMigration then GetFontFromFontStyleModule(Title) else Title.Font, (Vector2.new(10000, 10000))).X, GetTextSizeModule(CountLeft.labelText, CaptionHeader.RelativeSize * UseStyleModuleResult.Font.BaseSize, if FoundationFontFaceMigration then GetFontFromFontStyleModule(CaptionHeader) else CaptionHeader.Font, (Vector2.new(10000, 10000))).X) + (if UIBloxConfigModule.enableScalingForSomeEdpIcons then GetIconSizeModule(IconSizeModule.Large, UseStyleModuleResult) else IconSizeModule1) + 12
+	local NewLargest = math.max(GetTextSizeModule(CountLeft.countText, Title.RelativeSize * UseStyleModuleResult.Font.BaseSize, GetFontFromFontStyleModule(Title), (Vector2.new(10000, 10000))).X, GetTextSizeModule(CountLeft.labelText, CaptionHeader.RelativeSize * UseStyleModuleResult.Font.BaseSize, GetFontFromFontStyleModule(CaptionHeader), (Vector2.new(10000, 10000))).X) + (if UIBloxConfigModule.enableScalingForSomeEdpIcons then GetIconSizeModule(IconSizeModule.Large, UseStyleModuleResult) else IconSizeModule1) + 12
 	local CountRight = p1.countRight
 	local Title1 = UseStyleModuleResult.Font.Title
 	local CaptionHeader1 = UseStyleModuleResult.Font.CaptionHeader
-	local XScale = NewLargest / (NewLargest + (math.max(GetTextSizeModule(CountRight.countText, Title1.RelativeSize * UseStyleModuleResult.Font.BaseSize, if FoundationFontFaceMigration then GetFontFromFontStyleModule(Title1) else Title1.Font, (Vector2.new(10000, 10000))).X, GetTextSizeModule(CountRight.labelText, CaptionHeader1.RelativeSize * UseStyleModuleResult.Font.BaseSize, if FoundationFontFaceMigration then GetFontFromFontStyleModule(CaptionHeader1) else CaptionHeader1.Font, (Vector2.new(10000, 10000))).X) + (if UIBloxConfigModule.enableScalingForSomeEdpIcons then GetIconSizeModule(IconSizeModule.Large, UseStyleModuleResult) else IconSizeModule1) + 12))
+	local XScale = NewLargest / (NewLargest + (math.max(GetTextSizeModule(CountRight.countText, Title1.RelativeSize * UseStyleModuleResult.Font.BaseSize, GetFontFromFontStyleModule(Title1), (Vector2.new(10000, 10000))).X, GetTextSizeModule(CountRight.labelText, CaptionHeader1.RelativeSize * UseStyleModuleResult.Font.BaseSize, GetFontFromFontStyleModule(CaptionHeader1), (Vector2.new(10000, 10000))).X) + (if UIBloxConfigModule.enableScalingForSomeEdpIcons then GetIconSizeModule(IconSizeModule.Large, UseStyleModuleResult) else IconSizeModule1) + 12))
 	local CountLeft1 = p1.countLeft
 	local CountRight1 = p1.countRight
 	

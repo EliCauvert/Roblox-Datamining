@@ -2,7 +2,6 @@
 local Parent1 = Parent.Parent
 local Parent2 = Parent1.Parent
 local Parent3 = Parent2.Parent
-local FoundationFontFaceMigration = require(Parent3.Parent.Foundation).Utility.Flags.FoundationFontFaceMigration
 local _ = require(Parent.Types)
 local ConstantsModule = require(Parent.Constants)
 local _ = require(Parent2.Style.Fonts)
@@ -59,11 +58,11 @@ local function getKeyCodeContent(KeyCode)
 end
 
 local function getWidthFromContent(KeyCodeContent, p1)
-	-- upvalues: FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), GetTextSizeModule (copy), ConstantsModule (copy)
+	-- upvalues: GetFontFromFontStyleModule (copy), GetTextSizeModule (copy), ConstantsModule (copy)
 	if KeyCodeContent.inputType == "keyboard" then
 		if type(KeyCodeContent.content) == "string" then
 			local CaptionBody = p1.CaptionBody
-			local X = GetTextSizeModule(KeyCodeContent.content, p1.BaseSize * CaptionBody.RelativeSize, if FoundationFontFaceMigration then GetFontFromFontStyleModule(CaptionBody) else CaptionBody.Font, Vector2.zero).X
+			local X = GetTextSizeModule(KeyCodeContent.content, p1.BaseSize * CaptionBody.RelativeSize, GetFontFromFontStyleModule(CaptionBody), Vector2.zero).X
 			
 			if ConstantsModule.PREFERRED_WIDTH < X + 2 * ConstantsModule.MIN_SIDE_PADDING then
 				return X + 2 * ConstantsModule.SIDE_PADDING

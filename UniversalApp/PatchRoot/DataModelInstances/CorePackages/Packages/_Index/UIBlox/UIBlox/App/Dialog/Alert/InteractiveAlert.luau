@@ -4,7 +4,6 @@ local Parent2 = Parent1.Parent
 local Parent3 = Parent2.Parent
 local RoactModule = require(Parent3.Roact)
 local TModule = require(Parent3.t)
-local FoundationFontFaceMigration = require(Parent3.Foundation).Utility.Flags.FoundationFontFaceMigration
 local AlertModule = require(Parent.Alert)
 local AlertTypeModule = require(Parent.Enum.AlertType)
 local FitFrameOnAxis = require(Parent3.FitFrame).FitFrameOnAxis
@@ -41,14 +40,14 @@ InteractiveAlert.validateProps = TModule.strictInterface({
 InteractiveAlert.defaultProps = { bottomMargin = 24 }
 
 function InteractiveAlert.render(p1)
-	-- upvalues: WithStyleModule (copy), MinValue (ref), MaxValue (ref), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), RoactModule (copy), FitFrameOnAxis (copy), ImageSetComponentModule (copy), GetTextHeightModule (copy), GenericTextLabelModule (copy), AlertModule (copy), AlertTypeModule (copy)
+	-- upvalues: WithStyleModule (copy), MinValue (ref), MaxValue (ref), GetFontFromFontStyleModule (copy), RoactModule (copy), FitFrameOnAxis (copy), ImageSetComponentModule (copy), GetTextHeightModule (copy), GenericTextLabelModule (copy), AlertModule (copy), AlertTypeModule (copy)
 	return WithStyleModule(function(p2)
-		-- upvalues: MinValue (upval), MaxValue (upval), FoundationFontFaceMigration (upval), GetFontFromFontStyleModule (upval), p1 (copy), RoactModule (upval), FitFrameOnAxis (upval), ImageSetComponentModule (upval), GetTextHeightModule (upval), GenericTextLabelModule (upval), AlertModule (upval), AlertTypeModule (upval)
+		-- upvalues: MinValue (upval), MaxValue (upval), GetFontFromFontStyleModule (upval), p1 (copy), RoactModule (upval), FitFrameOnAxis (upval), ImageSetComponentModule (upval), GetTextHeightModule (upval), GenericTextLabelModule (upval), AlertModule (upval), AlertTypeModule (upval)
 		MinValue = p2.Tokens.Size.Size_400 * 17
 		MaxValue = p2.Tokens.Size.Size_1000 * 10
 		local Theme = p2.Theme
 		local _Font = p2.Font
-		local FontFromFontStyleModule = if FoundationFontFaceMigration then GetFontFromFontStyleModule(_Font.Body) else _Font.Body.Font
+		local FontFromFontStyleModule = GetFontFromFontStyleModule(_Font.Body)
 		local ScaledBaseSize = _Font.BaseSize * _Font.Body.RelativeSize
 		local TitleContent = if p1.props.titleIcon then function()
 			-- upvalues: RoactModule (upval), FitFrameOnAxis (upval), ImageSetComponentModule (upval), p1 (upval), Theme (copy)
@@ -71,18 +70,18 @@ function InteractiveAlert.render(p1)
 		local FooterContent: () -> any = p1.props.footerContent
 		
 		if p1.props.footerText then
-			local ScaledBaseSize1 = if FoundationFontFaceMigration then _Font.BaseSize * _Font.Footer.RelativeSize else nil
-			local TextHeightModule = p1.props.footerText and GetTextHeightModule(p1.props.footerText, if FoundationFontFaceMigration then GetFontFromFontStyleModule(_Font.Footer) else _Font.Footer.Font, _Font.BaseSize * _Font.Footer.RelativeSize, ClampedValueDelta, 100) or 0
+			local ScaledBaseSize1 = _Font.BaseSize * _Font.Footer.RelativeSize
+			local TextHeightModule = p1.props.footerText and GetTextHeightModule(p1.props.footerText, GetFontFromFontStyleModule(_Font.Footer), _Font.BaseSize * _Font.Footer.RelativeSize, ClampedValueDelta, 100) or 0
 			
 			FooterContent = function()
-				-- upvalues: RoactModule (upval), GenericTextLabelModule (upval), Theme (copy), _Font (copy), p1 (upval), FoundationFontFaceMigration (upval), ScaledBaseSize1 (copy), ScaledBaseSize (copy), TextHeightModule (copy)
+				-- upvalues: RoactModule (upval), GenericTextLabelModule (upval), Theme (copy), _Font (copy), p1 (upval), ScaledBaseSize1 (copy), TextHeightModule (copy)
 				return RoactModule.createElement(GenericTextLabelModule, {
 					BackgroundTransparency = 1,
 					LayoutOrder = 4,
 					colorStyle = Theme.TextDefault,
 					fontStyle = _Font.Footer,
 					Text = p1.props.footerText,
-					TextSize = if FoundationFontFaceMigration then ScaledBaseSize1 else ScaledBaseSize,
+					TextSize = ScaledBaseSize1,
 					TextXAlignment = Enum.TextXAlignment.Center,
 					Size = UDim2.new(1, 0, 0, TextHeightModule)
 				})

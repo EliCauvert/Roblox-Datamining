@@ -249,6 +249,7 @@ Authentication.CrossDevice.Action.TryAgain,Tente novamente
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,Confirme no seu dispositivo conectado para continuar.
 Authentication.CrossDevice.Description.DenyIfNotYou,Não foi você? Negue imediatamente.
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,"No dispositivo onde você iniciou a sessão, escaneie o código QR ou vá para <b>Mais > Entrada rápida</b> e insira o código abaixo."
+Authentication.CrossDevice.Description.ScanQrOrEnterCode,
 Authentication.CrossDevice.Description.SigningInAs,Entrando como {identifier}
 Authentication.CrossDevice.EnterCodeInstruction,"em seguida, insira este código"
 Authentication.CrossDevice.GoToInstruction,"No seu computador ou telefone, vá para:"
@@ -308,6 +309,7 @@ Authentication.Login.Action.EmailOtpWaitTime,Reenviar código em {WaitTime}s
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Esqueceu a senha ou nome de usuário?
 Authentication.Login.Action.ForgotUsername,Esqueceu o nome de usuário?
 Authentication.Login.Action.ForgotUsernameOrPassword,Esqueceu o nome de usuário/senha?
+Authentication.Login.Action.GetCodeByEmail,Receber código por e-mail
 Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,Envie-me um código único por e-mail
 Authentication.Login.Action.NeedHelp,Precisa de ajuda?
@@ -323,11 +325,13 @@ Authentication.Login.Action.SignIn,
 Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,Usar chave de acesso
+Authentication.Login.Action.UsernameAndPassword,Nome de usuário e senha
 Authentication.Login.Action.WeChatLogin,Entrar no WeChat
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Saia da Roblox para mudar de conta para {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Use uma conta Roblox diferente
 Authentication.Login.Button.XboxAccountSwitcher,Trocar de conta do Xbox
 Authentication.Login.Description.AccountSelectorHelp,Todas as suas contas associadas estão listadas aqui.
+Authentication.Login.Description.ChooseHowToPlay,Escolha como você quer jogar
 Authentication.Login.Description.DownloadNewVersion,Esta versão do aplicativo Roblox não está disponível para sua conta. Baixe a versão correta para continuar.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,Insira o código enviado para: {email}
 Authentication.Login.Description.GetOneTimeCodeHelp,Digite o e-mail verificado na sua conta para receber um código único.
@@ -340,6 +344,7 @@ Authentication.Login.Description.VerificationCodeSentTo,"Se houver uma conta Rob
 Authentication.Login.Error.PasskeyOnlyAccount,Sua conta só tem uma chave de acesso configurada para entrar. Tente entrar com sua chave de acesso ou recupere sua conta.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Não é possível verificar a conta da plataforma. Tente novamente mais tarde.
 Authentication.Login.Heading.EnterYourCode,Digite seu código
+Authentication.Login.Heading.GetStarted,Comece agora
 Authentication.Login.Heading.IncompatibleAccounts,Contas Incompatíveis
 Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,Entrar na Roblox
@@ -1084,6 +1089,9 @@ CoreScripts.InGameMenu.Cancel,
 CoreScripts.InGameMenu.Controls.RobloxMenu,Menu Roblox
 CoreScripts.InGameMenu.GameSettings.PartyVoiceVolume,Volume de voz da Turma
 CoreScripts.InGameMenu.GameSettings.UINavToggle,Alternar navegação de interface
+CoreScripts.InGameMenu.GameSettings.UIScaleMode,Modo de dimensionamento da interface do usuário
+CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,Automático
+CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,Manual
 CoreScripts.InGameMenu.GameSettings.Volume,Volume
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Convidar amizades
@@ -1300,6 +1308,8 @@ Feature.Accessibility.Description.PreferredTextSize,Ajuste o tamanho do texto na
 Feature.Accessibility.Description.PreferredTransparency,Melhore o contraste ajustando a transparência em alguns planos de fundos
 Feature.Accessibility.Description.ReducedMotion,Parar ou reduzir efeitos de movimento
 Feature.Accessibility.Description.SkyStyle,Escolha um estilo de céu para o ambiente inicial
+Feature.Accessibility.Description.UIScaleMode,Defina como o dimensionamento da interface do usuário é escolhido em toda a Roblox.
+Feature.Accessibility.Description.UIScaleV2,Ajuste o tamanho dos botões e menus em toda a Roblox.
 Feature.Accessibility.Description.UiNavigationKeyBind,Use a tecla {uiNavigationKey} para entrar e sair do modo de navegação da interface
 Feature.Accessibility.Description.VREnvironmentSetting,Escolha um ambiente para a tela inicial
 Feature.Accessibility.DeviceLevelTheme.Dark,Escuro
@@ -1319,6 +1329,7 @@ Feature.Accessibility.Heading.PreferredTextSize,Tamanho do texto
 Feature.Accessibility.Heading.PreferredTransparency,Transparência do plano de fundo
 Feature.Accessibility.Heading.ReducedMotion,Reduzir movimento
 Feature.Accessibility.Heading.SkyStyle,Estilo do céu
+Feature.Accessibility.Heading.UIScale,Dimensionamento da interface do usuário
 Feature.Accessibility.Heading.UiNavigationKeyBind,Liga/Desliga navegação da interface
 Feature.Accessibility.Heading.VREnvironmentSetting,Ambiente de realidade virtual
 Feature.Accessibility.Label.AppThemeBadgeNew,Novidade
@@ -1329,6 +1340,7 @@ Feature.Accessibility.PreferredTransparency.Opaque,Opaco
 Feature.Accessibility.PreferredTransparency.Transparent,Transparente
 Feature.Accessibility.SkyStyle.Day,
 Feature.Accessibility.SkyStyle.Night,Noite
+Feature.Accessibility.UIScale.Default,Padrão ({scale})
 Feature.Accessibility.VREnvironmentSetting.Dark,
 Feature.Accessibility.VREnvironmentSetting.Light,Leve
 Feature.Accessibility.VREnvironmentSetting.System,

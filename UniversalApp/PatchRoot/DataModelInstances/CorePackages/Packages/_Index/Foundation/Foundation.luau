@@ -46,6 +46,7 @@ local Foundation = require(script.Utility.strict)({
 	Media = require(script.Components.Media),
 	Metadata = require(script.Components.Metadata),
 	Menu = require(script.Components.Menu),
+	NavigationBar = require(script.Components.NavigationBar),
 	NumberInput = require(script.Components.NumberInput),
 	OptionSelectorGroup = require(script.Components.OptionSelectorGroup),
 	Pagination = require(script.Components.Pagination),

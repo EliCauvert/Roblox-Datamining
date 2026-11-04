@@ -14,7 +14,10 @@ local function variantsFactory(p1)
 			container = { tag = "row align-y-center auto-xy" },
 			item = { tag = "row align-y-center gap-xsmall auto-xy" },
 			truncatedItem = { tag = "row align-y-center shrink gap-xsmall auto-xy" },
-			text = { tag = "auto-xy content-default" },
+			text = {
+				tag = "auto-xy content-default",
+				openTypeFeatures = "zero, ss03"
+			},
 			truncatedText = {
 				tag = "shrink auto-xy text-truncate-split content-default"
 			},

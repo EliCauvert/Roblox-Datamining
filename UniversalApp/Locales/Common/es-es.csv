@@ -249,6 +249,7 @@ Authentication.CrossDevice.Action.TryAgain,Intentar de nuevo
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,Confirma en el dispositivo donde hayas iniciado sesión para continuar.
 Authentication.CrossDevice.Description.DenyIfNotYou,¿No fuiste tú? Recházalo de inmediato.
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,"En el dispositivo donde iniciaste sesión, escanea el código QR o ve a <b>Más > Inicio de sesión rápido</b> e ingresa el código que aparece a continuación."
+Authentication.CrossDevice.Description.ScanQrOrEnterCode,
 Authentication.CrossDevice.Description.SigningInAs,Iniciando sesión como {identifier}
 Authentication.CrossDevice.EnterCodeInstruction,"luego, ingresa este código"
 Authentication.CrossDevice.GoToInstruction,En tu equipo de escritorio o teléfono ve a:
@@ -308,6 +309,7 @@ Authentication.Login.Action.EmailOtpWaitTime,Reenviar código en {WaitTime} s
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,¿Olvidaste la contraseña o el nombre de usuario?
 Authentication.Login.Action.ForgotUsername,¿Olvidaste el nombre de usuario?
 Authentication.Login.Action.ForgotUsernameOrPassword,¿Olvidaste el nombre de usuario o la contraseña?
+Authentication.Login.Action.GetCodeByEmail,Obtener el código por correo electrónico
 Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,Envíame un código de un solo uso
 Authentication.Login.Action.NeedHelp,¿Necesitas ayuda?
@@ -323,11 +325,13 @@ Authentication.Login.Action.SignIn,Iniciar sesión
 Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,Usar llave de acceso
+Authentication.Login.Action.UsernameAndPassword,Nombre de usuario y contraseña
 Authentication.Login.Action.WeChatLogin,Inicio de sesión de WeChat
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Sal de Roblox para cambiar la cuenta de {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Usar una cuenta Roblox diferente
 Authentication.Login.Button.XboxAccountSwitcher,Cambiar cuenta de Xbox
 Authentication.Login.Description.AccountSelectorHelp,Todas sus cuentas asociadas están enumeradas aquí.
+Authentication.Login.Description.ChooseHowToPlay,Elige cómo quieres jugar
 Authentication.Login.Description.DownloadNewVersion,Esta versión de Roblox no está disponible para tu cuenta. Descarga la versión correcta para continuar.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,Ingresa el código que te acabamos de enviar a {email}
 Authentication.Login.Description.GetOneTimeCodeHelp,Ingresa el correo electrónico verificado en tu cuenta para recibir un código de un solo uso.
@@ -340,6 +344,7 @@ Authentication.Login.Description.VerificationCodeSentTo,"Si existe una cuenta de
 Authentication.Login.Error.PasskeyOnlyAccount,Tu cuenta solo tiene una llave de acceso configurada para iniciar sesión. Intenta iniciar sesión con tu llave o recupera la cuenta.
 Authentication.Login.Error.PlatformAccountConnectionFailure,No se puede verificar la cuenta de la plataforma. Inténtalo de nuevo más tarde.
 Authentication.Login.Heading.EnterYourCode,
+Authentication.Login.Heading.GetStarted,Comenzar
 Authentication.Login.Heading.IncompatibleAccounts,Cuentas incompatibles
 Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,Iniciar sesión en Roblox
@@ -1085,6 +1090,9 @@ CoreScripts.InGameMenu.Cancel,
 CoreScripts.InGameMenu.Controls.RobloxMenu,Menú de Roblox
 CoreScripts.InGameMenu.GameSettings.PartyVoiceVolume,Volumen de la voz de Equipo
 CoreScripts.InGameMenu.GameSettings.UINavToggle,Alternar navegación de interfaz
+CoreScripts.InGameMenu.GameSettings.UIScaleMode,Modo de escala de la interfaz de usuario
+CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,Autom.
+CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,Manual
 CoreScripts.InGameMenu.GameSettings.Volume,Volumen
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Invitar amistades
@@ -1301,6 +1309,8 @@ Feature.Accessibility.Description.PreferredTextSize,Ajusta el tamaño del texto 
 Feature.Accessibility.Description.PreferredTransparency,Mejora el contraste ajustando la transparencia en algunos fondos
 Feature.Accessibility.Description.ReducedMotion,Detener o reducir los efectos de movimiento
 Feature.Accessibility.Description.SkyStyle,Elige un estilo de cielo para el entorno de inicio
+Feature.Accessibility.Description.UIScaleMode,Configura cómo se elige la escala de la interfaz de usuario en Roblox.
+Feature.Accessibility.Description.UIScaleV2,Ajusta el tamaño de los botones y los menús en Roblox.
 Feature.Accessibility.Description.UiNavigationKeyBind,Usa la tecla {uiNavigationKey} para ingresar y salir del modo de navegación de la interfaz de usuario
 Feature.Accessibility.Description.VREnvironmentSetting,Elige un entorno para la pantalla de inicio
 Feature.Accessibility.DeviceLevelTheme.Dark,Oscuro
@@ -1320,6 +1330,7 @@ Feature.Accessibility.Heading.PreferredTextSize,Tamaño del texto
 Feature.Accessibility.Heading.PreferredTransparency,Transparencia del fondo
 Feature.Accessibility.Heading.ReducedMotion,Reducir movimiento
 Feature.Accessibility.Heading.SkyStyle,Estilo de cielo
+Feature.Accessibility.Heading.UIScale,Escala de la interfaz de usuario
 Feature.Accessibility.Heading.UiNavigationKeyBind,Interruptor de navegación de la interfaz
 Feature.Accessibility.Heading.VREnvironmentSetting,Entorno de RV
 Feature.Accessibility.Label.AppThemeBadgeNew,Nuevo
@@ -1330,6 +1341,7 @@ Feature.Accessibility.PreferredTransparency.Opaque,Opaco
 Feature.Accessibility.PreferredTransparency.Transparent,Transparente
 Feature.Accessibility.SkyStyle.Day,
 Feature.Accessibility.SkyStyle.Night,Noche
+Feature.Accessibility.UIScale.Default,Predeterminado ({scale})
 Feature.Accessibility.VREnvironmentSetting.Dark,
 Feature.Accessibility.VREnvironmentSetting.Light,Iluminado
 Feature.Accessibility.VREnvironmentSetting.System,
@@ -4855,11 +4867,20 @@ Feature.Premium.Message.PleaseTryAgain,Intenta de nuevo.
 Feature.Premium.Message.SomethingWentWrong,
 Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Gratis con Plus
+Feature.PrivateServers.Action.Generate,Generar
+Feature.PrivateServers.Description.FriendsAllowed,Cualquier persona de tu lista de amistades puede unirse sin una invitación
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Las compras de servidores privados no son compatibles en Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,Este juego no es compatible con servidores privados.
 Feature.PrivateServers.Heading.ConfigurePrivateServer,Configurar servidor privado
+Feature.PrivateServers.Label.AnyoneWithThisLinkCanJoin,Cualquier persona con este enlace puede unirse
+Feature.PrivateServers.Label.FriendsAllowed,Amistades permitidas
+Feature.PrivateServers.Label.InThisServer,En este servidor
 Feature.PrivateServers.Label.OwnersServer,Servidor de {displayName}
+Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder,Generar un enlace al servidor privado
+Feature.PrivateServers.Label.PrivateServerLink,Enlace al servidor privado
+Feature.PrivateServers.Label.SearchPeople,
 Feature.PrivateServers.Label.ServerName,Nombre del servidor:
+Feature.PrivateServers.Label.WhoCanJoin,Quién puede unirse
 Feature.Profile.Action.AboutThisProfile,Acerca de este perfil
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,

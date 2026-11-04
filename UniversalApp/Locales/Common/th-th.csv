@@ -232,6 +232,7 @@ Authentication.CrossDevice.Action.TryAgain,
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,ยืนยันบนอุปกรณ์ที่คุณลงชื่อเข้าใช้อยู่เพื่อดำเนินการต่อ
 Authentication.CrossDevice.Description.DenyIfNotYou,หากไม่ใช่คุณ ให้ปฏิเสธทันที
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,บนอุปกรณ์ที่คุณลงชื่อเข้าใช้อยู่ ให้สแกนรหัส QR หรือไปที่ <b>เพิ่มเติม > ลงชื่อเข้าใช้ด่วน</b> แล้วกรอกรหัสด้านล่าง
+Authentication.CrossDevice.Description.ScanQrOrEnterCode,
 Authentication.CrossDevice.Description.SigningInAs,กำลังลงชื่อเข้าใช้ด้วย {identifier}
 Authentication.CrossDevice.EnterCodeInstruction,จากนั้นกรอกรหัสนี้
 Authentication.CrossDevice.GoToInstruction,หากใช้งานด้วยคอมพิวเตอร์หรือโทรศัพท์ โปรดไปที่:
@@ -291,6 +292,7 @@ Authentication.Login.Action.EmailOtpWaitTime,ส่งรหัสอีกค�
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,ลืมรหัสผ่านหรือชื่อผู้ใช้ใช่ไหม?
 Authentication.Login.Action.ForgotUsername,ลืมชื่อผู้ใช้ใช่ไหม?
 Authentication.Login.Action.ForgotUsernameOrPassword,ลืมชื่อผู้ใช้หรือรหัสผ่านใช่ไหม?
+Authentication.Login.Action.GetCodeByEmail,รับรหัสทางอีเมล
 Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,ส่งรหัสแบบใช้ครั้งเดียวให้ฉันทางอีเมล
 Authentication.Login.Action.NeedHelp,ต้องการความช่วยเหลือใช่หรือไม่?
@@ -306,11 +308,13 @@ Authentication.Login.Action.SignIn,ลงชื่อเข้าใช้
 Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,ใช้พาสคีย์
+Authentication.Login.Action.UsernameAndPassword,ชื่อผู้ใช้และรหัสผ่าน
 Authentication.Login.Action.WeChatLogin,ลงชื่อเข้าใช้ด้วย WeChat
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,ออกจาก Roblox เพื่อสลับไปใช้บัญชี {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,ใช้บัญชี Roblox บัญชีอื่น
 Authentication.Login.Button.XboxAccountSwitcher,สลับบัญชี Xbox
 Authentication.Login.Description.AccountSelectorHelp,บัญชีที่เกี่ยวข้องทั้งหมดของคุณจะแสดงอยู่ที่นี่
+Authentication.Login.Description.ChooseHowToPlay,เลือกวิธีที่คุณต้องการเล่น
 Authentication.Login.Description.DownloadNewVersion,บัญชีของคุณไม่สามารถใช้ Roblox เวอร์ชันนี้ได้ โปรดดาวน์โหลดเวอร์ชันที่ถูกต้องเพื่อดำเนินการต่อ
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,กรอกรหัสที่เราเพิ่งส่งไปยัง: {email}
 Authentication.Login.Description.GetOneTimeCodeHelp,กรอกอีเมลที่ตรวจสอบยืนยันแล้วในบัญชีของคุณเพื่อรับรหัสแบบใช้ครั้งเดียว
@@ -323,6 +327,7 @@ Authentication.Login.Description.VerificationCodeSentTo,หากมีบัญ
 Authentication.Login.Error.PasskeyOnlyAccount,บัญชีของคุณตั้งค่าให้ลงชื่อเข้าใช้ด้วยพาสคีย์เท่านั้น ลองลงชื่อเข้าใช้ด้วยพาสคีย์หรือกู้คืนบัญชี
 Authentication.Login.Error.PlatformAccountConnectionFailure,ไม่สามารถยืนยันบัญชีแพลตฟอร์มได้ โปรดลองอีกครั้งในภายหลัง
 Authentication.Login.Heading.EnterYourCode,กรอกรหัสของคุณ
+Authentication.Login.Heading.GetStarted,เริ่มใช้งาน
 Authentication.Login.Heading.IncompatibleAccounts,บัญชีที่เข้ากันไม่ได้
 Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,ลงชื่อเข้าใช้ Roblox
@@ -1067,6 +1072,9 @@ CoreScripts.InGameMenu.Cancel,
 CoreScripts.InGameMenu.Controls.RobloxMenu,เมนู Roblox
 CoreScripts.InGameMenu.GameSettings.PartyVoiceVolume,ระดับเสียงใน Party
 CoreScripts.InGameMenu.GameSettings.UINavToggle,เปิด/ปิดการนำทางบน UI
+CoreScripts.InGameMenu.GameSettings.UIScaleMode,โหมดปรับขนาด UI
+CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,อัตโนมัติ
+CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,ด้วยตัวเอง
 CoreScripts.InGameMenu.GameSettings.Volume,ระดับเสียง
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,เชิญเพื่อน
@@ -1283,6 +1291,8 @@ Feature.Accessibility.Description.PreferredTextSize,ปรับขนาดข�
 Feature.Accessibility.Description.PreferredTransparency,ปรับปรุงความคมชัดโดยการปรับความโปร่งใสให้กับบางพื้นหลัง
 Feature.Accessibility.Description.ReducedMotion,หยุดหรือลดเอฟเฟ็กต์การเคลื่อนไหว
 Feature.Accessibility.Description.SkyStyle,เลือกสไตล์ท้องฟ้าสำหรับสภาพแวดล้อมของหน้าจอหลัก
+Feature.Accessibility.Description.UIScaleMode,ตั้งค่าวิธีเลือกการปรับขนาด UI ทั่วทั้ง Roblox
+Feature.Accessibility.Description.UIScaleV2,ปรับขนาดปุ่มและเมนูทั่วทั้ง Roblox
 Feature.Accessibility.Description.UiNavigationKeyBind,ใช้คีย์ {uiNavigationKey} เพื่อเข้าสู่และออกจากโหมดการนำทางบน UI
 Feature.Accessibility.Description.VREnvironmentSetting,เลือกสภาพแวดล้อมสำหรับหน้าจอหลัก
 Feature.Accessibility.DeviceLevelTheme.Dark,มืด
@@ -1302,6 +1312,7 @@ Feature.Accessibility.Heading.PreferredTextSize,ขนาดข้อควา�
 Feature.Accessibility.Heading.PreferredTransparency,ความโปร่งใสของพื้นหลัง
 Feature.Accessibility.Heading.ReducedMotion,ลดการเคลื่อนไหว
 Feature.Accessibility.Heading.SkyStyle,สไตล์ท้องฟ้า
+Feature.Accessibility.Heading.UIScale,การปรับขนาด UI
 Feature.Accessibility.Heading.UiNavigationKeyBind,
 Feature.Accessibility.Heading.VREnvironmentSetting,สภาพแวดล้อม VR
 Feature.Accessibility.Label.AppThemeBadgeNew,ใหม่
@@ -1312,6 +1323,7 @@ Feature.Accessibility.PreferredTransparency.Opaque,ทึบ
 Feature.Accessibility.PreferredTransparency.Transparent,โปร่งใส
 Feature.Accessibility.SkyStyle.Day,กลางวัน
 Feature.Accessibility.SkyStyle.Night,กลางคืน
+Feature.Accessibility.UIScale.Default,ค่าเริ่มต้น ({scale})
 Feature.Accessibility.VREnvironmentSetting.Dark,
 Feature.Accessibility.VREnvironmentSetting.Light,
 Feature.Accessibility.VREnvironmentSetting.System,
@@ -3609,7 +3621,7 @@ Feature.Friends.Action.FindFriends,หาเพื่อน
 Feature.Friends.Action.FriendAdded,
 Feature.Friends.Action.FriendRemoved,ลบเพื่อนแล้ว
 Feature.Friends.Action.FriendRequestSent,ส่งคำขอเป็นเพื่อนแล้ว
-Feature.Friends.Action.GetStarted,เริ่มใช้งาน
+Feature.Friends.Action.GetStarted,
 Feature.Friends.Action.GoToAddFriends,ไปที่เพิ่มเพื่อน
 Feature.Friends.Action.InviteFriends,เชิญคนในรายชื่อผู้ติดต่อเป็นเพื่อนบน Roblox
 Feature.Friends.Action.InviteProviderFriends,เชิญเพื่อนจาก: {provider}

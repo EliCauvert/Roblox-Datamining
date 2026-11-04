@@ -3,13 +3,11 @@ local Parent1 = Parent.Parent.Parent
 local Parent2 = Parent1.Parent
 local Parent3 = Parent2.Parent
 local ReactModule = require(Parent3.React)
-local FoundationModule = require(Parent3.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local NormalizeFontFaceFunction = require(Parent3.Foundation).Utility.normalizeFontFace
 local UseStyleModule = require(Parent2.Core.Style.useStyle)
 local _ = require(Parent1.Style.StyleTypes)
 local _ = require(Parent1.Style.Fonts)
 local FooterFrameModule = require(Parent.FooterFrame)
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
 local function getStyleProps(StyleProps, p1)
 	local StyleProps1 = StyleProps or {}
@@ -24,7 +22,7 @@ local function getStyleProps(StyleProps, p1)
 end
 
 return function(p1)
-	-- upvalues: UseStyleModule (copy), getStyleProps (copy), ReactModule (copy), FooterFrameModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseStyleModule (copy), getStyleProps (copy), ReactModule (copy), FooterFrameModule (copy), NormalizeFontFaceFunction (copy)
 	local UseStyleModuleResult = UseStyleModule()
 	local UseStyleModuleResultFont = UseStyleModuleResult.Font
 	local StyleProps = getStyleProps(p1.styleProps, UseStyleModuleResult)
@@ -42,8 +40,7 @@ return function(p1)
 			Text = p1.text,
 			TextXAlignment = StyleProps.textXAlignment,
 			TextYAlignment = Enum.TextYAlignment.Center,
-			Font = if FoundationFontFaceMigration then nil else TextFont.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(TextFont.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(TextFont.Font),
 			TextSize = UseStyleModuleResultFont.BaseSize * TextFont.RelativeSize,
 			TextColor3 = TextColor.Color,
 			TextTransparency = TextColor.Transparency,

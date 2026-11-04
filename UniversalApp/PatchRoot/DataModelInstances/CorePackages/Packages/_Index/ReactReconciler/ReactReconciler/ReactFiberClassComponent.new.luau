@@ -390,11 +390,11 @@ local function constructClassInstance(p1, Key, p2)
 	end
 	if DEV then
 		if type(Key.getDerivedStateFromProps) == "function" and MemoizedState == UninitializedState then
-			local ComponentName = GetComponentNameFunction(Key) or "Component"
+			local ComponentName1 = GetComponentNameFunction(Key) or "Component"
 			
-			if not v2[ComponentName] then
-				v2[ComponentName] = true
-				Console.error("`%s` uses `getDerivedStateFromProps` but its initial state has not been initialized. This is not recommended. Instead, define the initial state by passing an object to `self:setState` in the `init` method of `%s`. This ensures that `getDerivedStateFromProps` arguments have a consistent shape.", ComponentName, ComponentName)
+			if not v2[ComponentName1] then
+				v2[ComponentName1] = true
+				Console.error("`%s` uses `getDerivedStateFromProps` but its initial state has not been initialized. This is not recommended. Instead, define the initial state by passing an object to `self:setState` in the `init` method of `%s`. This ensures that `getDerivedStateFromProps` arguments have a consistent shape.", ComponentName1, ComponentName1)
 			end
 		end
 		if type(Key.getDerivedStateFromProps) == "function" or type(CtorResult.getSnapshotBeforeUpdate) == "function" then
@@ -417,7 +417,7 @@ local function constructClassInstance(p1, Key, p2)
 			elseif type(CtorResult.UNSAFE_componentWillUpdate) == "function" then
 				v11 = "UNSAFE_componentWillUpdate"
 			end
-			if v9 ~= nil or v10 ~= nil or v11 ~= nil then
+			if v9 ~= nil or (v10 ~= nil or v11 ~= nil) then
 				local ComponentName = GetComponentNameFunction(Key) or "Component"
 				local GetDerivedStateFromProps: string = if type(Key.getDerivedStateFromProps) == "function" then "getDerivedStateFromProps()" else "getSnapshotBeforeUpdate()"
 				local Text: string = if v9 == nil then "" else "\n  " .. tostring(v9)

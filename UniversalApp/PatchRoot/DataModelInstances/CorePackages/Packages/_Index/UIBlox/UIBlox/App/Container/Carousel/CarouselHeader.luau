@@ -3,7 +3,6 @@ local Parent1 = Parent.Parent
 local Parent2 = Parent1.Parent
 local RoactModule = require(Parent2.Roact)
 local TModule = require(Parent2.t)
-local FoundationFontFaceMigration = require(Parent2.Foundation).Utility.Flags.FoundationFontFaceMigration
 local WithStyleModule = require(Parent1.Core.Style.withStyle)
 local GetTextSizeModule = require(Parent1.Core.Text.GetTextSize)
 local GetFontFromFontStyleModule = require(Parent1.Core.Text.GetFontFromFontStyle)
@@ -24,16 +23,16 @@ CarouselHeader.validateProps = TModule.strictInterface({
 CarouselHeader.defaultProps = { headerText = "", carouselMargin = 0 }
 
 function CarouselHeader.render(p1)
-	-- upvalues: WithStyleModule (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), GetTextSizeModule (copy), GetIconSizeModule (copy), IconSizeModule (copy), RoactModule (copy), InteractableModule (copy), GenericTextLabelModule (copy), ImageSetComponentModule (copy), IconsNavigationPushRightSmall (copy)
+	-- upvalues: WithStyleModule (copy), GetFontFromFontStyleModule (copy), GetTextSizeModule (copy), GetIconSizeModule (copy), IconSizeModule (copy), RoactModule (copy), InteractableModule (copy), GenericTextLabelModule (copy), ImageSetComponentModule (copy), IconsNavigationPushRightSmall (copy)
 	local HeaderText = p1.props.headerText
 	local OnSeeAll = p1.props.onSeeAll
 	local LayoutOrder = p1.props.layoutOrder
 	local CarouselMargin = p1.props.carouselMargin
 	
 	return WithStyleModule(function(p2)
-		-- upvalues: FoundationFontFaceMigration (upval), GetFontFromFontStyleModule (upval), GetTextSizeModule (upval), HeaderText (copy), GetIconSizeModule (upval), IconSizeModule (upval), RoactModule (upval), LayoutOrder (copy), InteractableModule (upval), CarouselMargin (copy), OnSeeAll (copy), GenericTextLabelModule (upval), ImageSetComponentModule (upval), IconsNavigationPushRightSmall (upval)
+		-- upvalues: GetFontFromFontStyleModule (upval), GetTextSizeModule (upval), HeaderText (copy), GetIconSizeModule (upval), IconSizeModule (upval), RoactModule (upval), LayoutOrder (copy), InteractableModule (upval), CarouselMargin (copy), OnSeeAll (copy), GenericTextLabelModule (upval), ImageSetComponentModule (upval), IconsNavigationPushRightSmall (upval)
 		local Header1 = p2.Font.Header1
-		local TextSizeModule = GetTextSizeModule(HeaderText, Header1.RelativeSize * p2.Font.BaseSize, if FoundationFontFaceMigration then GetFontFromFontStyleModule(Header1) else Header1.Font, Vector2.new(10000, 10000))
+		local TextSizeModule = GetTextSizeModule(HeaderText, Header1.RelativeSize * p2.Font.BaseSize, GetFontFromFontStyleModule(Header1), Vector2.new(10000, 10000))
 		
 		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,

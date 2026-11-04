@@ -2,41 +2,51 @@
 local _ = require(Markdown.Adapter)
 local CommonMarkModule = require(Markdown.Parent.CommonMark)
 local _ = require(Markdown.Types)
+local CreateParserModule = require(Markdown.Adapter.createParser)
 local Frozen = table.freeze({
+	"Heading",
+	"FencedCodeBlock",
+	"IndentedCodeBlock",
+	"ThematicBreak",
+	"ListBlock"
+})
+local Frozen1 = table.freeze({
+	"Code", "BackslashEscape", "Emphasis", "Link", "Image", "HardLineBreak"
+})
+local Frozen2 = table.freeze(require(Markdown.Parsers.FormattingTags.FormattingTagsExtension).create({ parseTags = true, maxNesting = 32 }))
+local List = {
 	table.freeze(require(script.NoNestedQuote).extension()),
 	table.freeze(CommonMarkModule.Ext.Gfm.Strikethrough.StrikethroughExtension.builder():requireTwoTildes(false):build()),
 	table.freeze(require(script.Underline.UnderlineExtension).create()),
 	table.freeze(require(script.Mention.MentionExtension).create())
-})
-local v1 = require(Markdown.Adapter.createParser)({
-	extensions = Frozen,
+}
+
+if require(Markdown.Flags).FFlagMarkdownFormattingTags then
+	table.insert(List, Frozen2)
+end
+local Frozen3 = table.freeze(List)
+local ParserModule = CreateParserModule({
+	extensions = Frozen3,
 	parserOptions = {
 		linkReferenceDefinitions = false,
 		maxOpenBlockParsers = 32,
 		maxInlineNesting = 32,
-		enabledBlockTypes = table.freeze({
-			"Heading",
-			"FencedCodeBlock",
-			"IndentedCodeBlock",
-			"ThematicBreak",
-			"ListBlock"
-		}),
-		enabledInlineTypes = table.freeze({
-			"Code", "BackslashEscape", "Emphasis", "Link", "Image", "HardLineBreak"
-		})
+		enabledBlockTypes = Frozen,
+		enabledInlineTypes = Frozen1
 	}
 })
-local Frozen1 = table.freeze({ extensions = Frozen })
+local Frozen4 = table.freeze({ extensions = Frozen3 })
 local RobloxMarkdownModule = {
-	parseOptions = v1.parseOptions,
-	renderOptions = Frozen1,
+	parseOptions = ParserModule.parseOptions,
+	renderOptions = Frozen4,
+	formattingTagsExtension = Frozen2,
 	parse = function(p1)
-		-- upvalues: v1 (copy)
-		return v1.parseDocument(p1)
+		-- upvalues: ParserModule (copy)
+		return ParserModule.parseDocument(p1)
 	end,
 	toRendererAst = function(p1, p2)
-		-- upvalues: v1 (copy)
-		return v1.toRendererAst(p1, p2)
+		-- upvalues: ParserModule (copy)
+		return ParserModule.toRendererAst(p1, p2)
 	end
 }
 
@@ -46,8 +56,8 @@ function RobloxMarkdownModule.safeParse(p1)
 end
 
 function RobloxMarkdownModule.renderHtml(p1)
-	-- upvalues: CommonMarkModule (copy), Frozen1 (copy)
-	return CommonMarkModule.renderHtml(p1, Frozen1)
+	-- upvalues: CommonMarkModule (copy), Frozen4 (copy)
+	return CommonMarkModule.renderHtml(p1, Frozen4)
 end
 
 return RobloxMarkdownModule

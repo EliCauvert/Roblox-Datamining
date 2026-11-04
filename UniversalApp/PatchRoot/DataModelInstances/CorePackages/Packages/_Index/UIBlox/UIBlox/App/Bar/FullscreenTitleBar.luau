@@ -1,9 +1,7 @@
 ﻿local Parent = script.Parent.Parent
 local Parent1 = Parent.Parent
 local Parent2 = Parent1.Parent
-local FoundationModule = require(Parent2.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent2.Foundation).Utility.normalizeFontFace
 local RoactModule = require(Parent2.Roact)
 local OtterModule = require(Parent2.Otter)
 local TModule = require(Parent2.t)
@@ -45,9 +43,9 @@ function FullscreenTitleBar.init(p1)
 end
 
 function FullscreenTitleBar.render(p1)
-	-- upvalues: WithStyleModule (copy), LerpModule (copy), RoactModule (copy), ControlStateModule (copy), DivideTransparencyModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), IconButtonModule (copy), ImagesModule (copy), IconSizeModule (copy), GetIconSizeModule (copy), ThreeSectionBarModule (copy)
+	-- upvalues: WithStyleModule (copy), LerpModule (copy), RoactModule (copy), ControlStateModule (copy), DivideTransparencyModule (copy), NormalizeFontFaceFunction (copy), IconButtonModule (copy), ImagesModule (copy), IconSizeModule (copy), GetIconSizeModule (copy), ThreeSectionBarModule (copy)
 	return WithStyleModule(function(p2)
-		-- upvalues: p1 (copy), LerpModule (upval), RoactModule (upval), ControlStateModule (upval), DivideTransparencyModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), IconButtonModule (upval), ImagesModule (upval), IconSizeModule (upval), GetIconSizeModule (upval), ThreeSectionBarModule (upval)
+		-- upvalues: p1 (copy), LerpModule (upval), RoactModule (upval), ControlStateModule (upval), DivideTransparencyModule (upval), NormalizeFontFaceFunction (upval), IconButtonModule (upval), ImagesModule (upval), IconSizeModule (upval), GetIconSizeModule (upval), ThreeSectionBarModule (upval)
 		local Theme = p2.Theme
 		local _Font = p2.Font
 		local BackgroundUIDefault = Theme.BackgroundUIDefault
@@ -113,12 +111,11 @@ function FullscreenTitleBar.render(p1)
 						})
 					end,
 					renderCenter = function()
-						-- upvalues: RoactModule (upval), FoundationFontFaceMigration (upval), Header2 (copy), NormalizeFontFaceFunction (upval), ScaledRelativeSize (copy), p1 (upval), TextEmphasis (copy), MapResult2 (copy)
+						-- upvalues: RoactModule (upval), NormalizeFontFaceFunction (upval), Header2 (copy), ScaledRelativeSize (copy), p1 (upval), TextEmphasis (copy), MapResult2 (copy)
 						return RoactModule.createElement("TextLabel", {
 							BackgroundTransparency = 1,
 							TextWrapped = false,
-							Font = if FoundationFontFaceMigration then nil else Header2.Font,
-							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Header2.Font) else nil,
+							FontFace = NormalizeFontFaceFunction(Header2.Font),
 							Size = UDim2.new(1, 0, 0, ScaledRelativeSize),
 							Text = p1.props.title,
 							TextColor3 = TextEmphasis.Color,

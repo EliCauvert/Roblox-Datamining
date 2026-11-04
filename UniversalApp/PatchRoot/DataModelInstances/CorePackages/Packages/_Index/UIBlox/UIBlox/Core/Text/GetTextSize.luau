@@ -1,19 +1,17 @@
 ﻿local TextService = game:GetService("TextService")
 local Parent = script.Parent.Parent.Parent
-local FoundationModule = require(Parent.Parent.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent.Parent.Foundation).Utility.normalizeFontFace
 local LoggerModule = require(Parent.Logger)
 local GetLegacyFontModule = require(script.Parent.GetLegacyFont)
 local _Vector2 = Vector2.new(2, 2)
 
 return function(Text, Size, p1, Vector, p2)
-	-- upvalues: FoundationFontFaceMigration (copy), GetLegacyFontModule (copy), TextService (copy), NormalizeFontFaceFunction (copy), _Vector2 (copy), LoggerModule (copy)
+	-- upvalues: GetLegacyFontModule (copy), TextService (copy), NormalizeFontFaceFunction (copy), _Vector2 (copy), LoggerModule (copy)
 	local Success, Result, Result3 = pcall(function()
-		-- upvalues: FoundationFontFaceMigration (upval), p2 (copy), GetLegacyFontModule (upval), p1 (copy), Vector (copy), TextService (upval), Text (copy), Size (copy), NormalizeFontFaceFunction (upval)
-		if not FoundationFontFaceMigration or p2 then
+		-- upvalues: p2 (copy), GetLegacyFontModule (upval), p1 (copy), Vector (copy), TextService (upval), Text (copy), Size (copy), NormalizeFontFaceFunction (upval)
+		if p2 then
 			local GetTextBoundsParams = Instance.new("GetTextBoundsParams")
-			GetTextBoundsParams.Font = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1) else Font.fromEnum(p1)
+			GetTextBoundsParams.Font = NormalizeFontFaceFunction(p1)
 			GetTextBoundsParams.Size = Size
 			GetTextBoundsParams.Text = Text
 			GetTextBoundsParams.Width = Vector.X

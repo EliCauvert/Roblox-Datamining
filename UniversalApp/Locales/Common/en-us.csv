@@ -250,6 +250,7 @@ Authentication.CrossDevice.Action.TryAgain,Try Again
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,Confirm on your signed-in device to continue.
 Authentication.CrossDevice.Description.DenyIfNotYou,Not you? Deny immediately.
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,"On your signed-in device, scan the QR code or go to <b>More > Quick sign in</b> and enter the code below."
+Authentication.CrossDevice.Description.ScanQrOrEnterCode,
 Authentication.CrossDevice.Description.SigningInAs,Signing in as {identifier}
 Authentication.CrossDevice.EnterCodeInstruction,then enter this code
 Authentication.CrossDevice.GoToInstruction,On your computer or phone go to:
@@ -309,6 +310,7 @@ Authentication.Login.Action.EmailOtpWaitTime,Resend code in {WaitTime}s
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Forgot Password or Username?
 Authentication.Login.Action.ForgotUsername,Forgot username?
 Authentication.Login.Action.ForgotUsernameOrPassword,Forgot username or password?
+Authentication.Login.Action.GetCodeByEmail,Get code by email
 Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,Email Me a One-Time Code
 Authentication.Login.Action.NeedHelp,Need help?
@@ -324,11 +326,13 @@ Authentication.Login.Action.SignIn,Sign In
 Authentication.Login.Action.SignInSentenceCase,Sign in
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,Use passkey
+Authentication.Login.Action.UsernameAndPassword,Username & password
 Authentication.Login.Action.WeChatLogin,WeChat Login
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Exit Roblox to switch account for {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Use a different Roblox account
 Authentication.Login.Button.XboxAccountSwitcher,Switch Xbox account
 Authentication.Login.Description.AccountSelectorHelp,All of your associated accounts are listed here.
+Authentication.Login.Description.ChooseHowToPlay,Choose how you want to play
 Authentication.Login.Description.DownloadNewVersion,This version of Roblox isn’t available for your account. Please download the correct version to continue.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,Enter the code we just sent to: {email}
 Authentication.Login.Description.GetOneTimeCodeHelp,Enter the email verified on your account to receive a one-time code.
@@ -341,6 +345,7 @@ Authentication.Login.Description.VerificationCodeSentTo,"If a Roblox account exi
 Authentication.Login.Error.PasskeyOnlyAccount,Your account only has a passkey set up for sign-in. Try signing in with your passkey or recover your account.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Cannot verify platform account. Please try again later.
 Authentication.Login.Heading.EnterYourCode,Enter your code
+Authentication.Login.Heading.GetStarted,Get started
 Authentication.Login.Heading.IncompatibleAccounts,Incompatible Accounts
 Authentication.Login.Heading.Login,Login
 Authentication.Login.Heading.LoginRoblox,Login to Roblox
@@ -1088,6 +1093,9 @@ CoreScripts.InGameMenu.Cancel,
 CoreScripts.InGameMenu.Controls.RobloxMenu,Roblox menu
 CoreScripts.InGameMenu.GameSettings.PartyVoiceVolume,Party voice volume
 CoreScripts.InGameMenu.GameSettings.UINavToggle,UI Navigation Toggle
+CoreScripts.InGameMenu.GameSettings.UIScaleMode,UI Scale Mode
+CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,Auto
+CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,Manual
 CoreScripts.InGameMenu.GameSettings.Volume,Volume
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Invite Friends
@@ -1303,6 +1311,8 @@ Feature.Accessibility.Description.PreferredTextSize,Adjust text size across Robl
 Feature.Accessibility.Description.PreferredTransparency,Improve contrast by adjusting transparency on some backgrounds
 Feature.Accessibility.Description.ReducedMotion,Stop or reduce motion effects
 Feature.Accessibility.Description.SkyStyle,Choose a sky style for the home environment
+Feature.Accessibility.Description.UIScaleMode,Set how UI scale is chosen across Roblox.
+Feature.Accessibility.Description.UIScaleV2,Adjust the size of buttons and menus across Roblox.
 Feature.Accessibility.Description.UiNavigationKeyBind,Use the {uiNavigationKey} key to enter and exit UI navigation mode
 Feature.Accessibility.Description.VREnvironmentSetting,Choose an environment for the home screen
 Feature.Accessibility.DeviceLevelTheme.Dark,Dark
@@ -1323,6 +1333,7 @@ Feature.Accessibility.Heading.PreferredTextSize,Text size
 Feature.Accessibility.Heading.PreferredTransparency,Background transparency
 Feature.Accessibility.Heading.ReducedMotion,Reduce motion
 Feature.Accessibility.Heading.SkyStyle,Sky style
+Feature.Accessibility.Heading.UIScale,UI Scale
 Feature.Accessibility.Heading.UiNavigationKeyBind,UI navigation toggle
 Feature.Accessibility.Heading.VREnvironmentSetting,VR Environment
 Feature.Accessibility.Label.AppThemeBadgeNew,New
@@ -1335,6 +1346,7 @@ Feature.Accessibility.PreferredTransparency.Opaque,Opaque
 Feature.Accessibility.PreferredTransparency.Transparent,Transparent
 Feature.Accessibility.SkyStyle.Day,
 Feature.Accessibility.SkyStyle.Night,Night
+Feature.Accessibility.UIScale.Default,Default ({scale})
 Feature.Accessibility.VREnvironmentSetting.Dark,
 Feature.Accessibility.VREnvironmentSetting.Light,
 Feature.Accessibility.VREnvironmentSetting.System,

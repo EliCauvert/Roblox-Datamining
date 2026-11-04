@@ -121,25 +121,25 @@ return function(p1)
 			Acquired = Result.acquired
 		end
 		if Flag1 then
-			for i1 in Tbl1 do
-				Tbl[i1] = nil
+			for i in Tbl1 do
+				Tbl[i] = nil
 			end
 			table.clear(Tbl1)
 		end
 		local v2: boolean = #List4 > 0 and #List5 > 0
-		for i, value2 in List5 do
-			local View = Acquired[i]
-			value2.view = View
+		for i1, value3 in List5 do
+			local AcquiredEntry = Acquired[i1]
+			value3.view = AcquiredEntry
 			
 			if FFlagViewRecyclerReact08 then
-				value2.assignment = MakeAssignment(value2)
+				value3.assignment = MakeAssignment(value3)
 			else
-				value2.assignment = MakeAssignment(value2.key, value2.value)
+				value3.assignment = MakeAssignment(value3.key, value3.value)
 			end
-			Tbl[value2.key] = value2
+			Tbl[value3.key] = value3
 			
 			if v2 then
-				Tbl3[View] = true
+				Tbl3[AcquiredEntry] = true
 			end
 		end
 		local Updated = Frozen
@@ -165,9 +165,9 @@ return function(p1)
 			if v2 then
 				List1 = {}
 				
-				for _, value3 in List4 do
-					if not Tbl3[value3] then
-						table.insert(List1, value3)
+				for _, value2 in List4 do
+					if not Tbl3[value2] then
+						table.insert(List1, value2)
 					end
 				end
 				table.clear(Tbl3)

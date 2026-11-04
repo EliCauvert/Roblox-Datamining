@@ -2,10 +2,8 @@
 local Parent1 = Parent.Parent
 local TranslatorModule = require(Parent.Translations.Translator)
 local ReactModule = require(Parent1.React)
-local FoundationModule = require(Parent1.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local NormalizeFontFaceFunction = require(Parent1.Foundation).Utility.normalizeFontFace
 local UseStyleModule = require(Parent.Core.Style.useStyle)
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
 local function _(InputLabel, None)
 	-- upvalues: ReactModule (copy), TranslatorModule (copy)
@@ -13,7 +11,7 @@ local function _(InputLabel, None)
 end
 
 return function(Frame)
-	-- upvalues: UseStyleModule (copy), ReactModule (copy), TranslatorModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseStyleModule (copy), ReactModule (copy), TranslatorModule (copy), NormalizeFontFaceFunction (copy)
 	local UseStyleModuleResult = UseStyleModule()
 	local BodySmall = UseStyleModuleResult.Tokens.Typography.BodySmall
 	local Default = UseStyleModuleResult.Tokens.Color.Content.Default
@@ -28,8 +26,7 @@ return function(Frame)
 		TextXAlignment = Enum.TextXAlignment.Left,
 		TextYAlignment = Enum.TextYAlignment.Top,
 		TextColor3 = Default.Color3,
-		Font = if FoundationFontFaceMigration then nil else BodySmall.Font,
-		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(BodySmall.Font) else nil,
+		FontFace = NormalizeFontFaceFunction(BodySmall.Font),
 		TextSize = BodySmall.FontSize,
 		LineHeight = BodySmall.LineHeight,
 		Size = UDim2.new(1, 0, 0, 0),

@@ -1,9 +1,7 @@
 ﻿local Parent = script.Parent.Parent
 local Parent1 = Parent.Parent.Parent.Parent
 local CryoModule = require(Parent1.Cryo)
-local FoundationModule = require(Parent1.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent1.Foundation).Utility.normalizeFontFace
 local ConstantsModule = require(Parent.Constants)
 local _ = require(Parent.StyleTypes)
 
@@ -24,49 +22,49 @@ function FontLoaderModule.new(_tokens)
 end
 
 function FontLoaderModule:loadFont(Cartoon)
-	-- upvalues: FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ConstantsModule (copy), CryoModule (copy)
+	-- upvalues: NormalizeFontFaceFunction (copy), ConstantsModule (copy), CryoModule (copy)
 	local Tokens = self._tokens
 	local config = {
 		BaseSize = 20.16,
 		HeadingLarge = {
 			Font = Enum.Font.BuilderSansBold,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Tokens.Typography.HeadingLarge.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(Tokens.Typography.HeadingLarge.Font),
 			RelativeSize = Tokens.Size.Size_700 / 16,
 			RelativeMinSize = Tokens.Size.Size_600 / 16
 		},
 		HeadingSmall = {
 			Font = Enum.Font.BuilderSansBold,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Tokens.Typography.HeadingSmall.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(Tokens.Typography.HeadingSmall.Font),
 			RelativeSize = Tokens.Size.Size_500 / 16,
 			RelativeMinSize = Tokens.Size.Size_400 / 16
 		},
 		TitleLarge = {
 			Font = Enum.Font.BuilderSansBold,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Tokens.Typography.TitleLarge.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(Tokens.Typography.TitleLarge.Font),
 			RelativeSize = Tokens.Size.Size_400 / 16,
 			RelativeMinSize = Tokens.Size.Size_300 / 16
 		},
 		BodyLarge = {
 			Font = Enum.Font.BuilderSans,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Tokens.Typography.BodyLarge.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(Tokens.Typography.BodyLarge.Font),
 			RelativeSize = Tokens.Size.Size_400 / 16,
 			RelativeMinSize = Tokens.Size.Size_300 / 16
 		},
 		CaptionLarge = {
 			Font = Enum.Font.BuilderSansMedium,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Tokens.Typography.CaptionLarge.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(Tokens.Typography.CaptionLarge.Font),
 			RelativeSize = Tokens.Size.Size_300 / 16,
 			RelativeMinSize = Tokens.Size.Size_200 / 16
 		},
 		BodySmall = {
 			Font = Enum.Font.BuilderSans,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Tokens.Typography.BodySmall.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(Tokens.Typography.BodySmall.Font),
 			RelativeSize = Tokens.Size.Size_300 / 16,
 			RelativeMinSize = Tokens.Size.Size_200 / 16
 		},
 		CaptionSmall = {
 			Font = Enum.Font.BuilderSansMedium,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Tokens.Typography.CaptionSmall.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(Tokens.Typography.CaptionSmall.Font),
 			RelativeSize = Tokens.Size.Size_250 / 16,
 			RelativeMinSize = Tokens.Size.Size_200 / 16
 		}
@@ -76,11 +74,8 @@ function FontLoaderModule:loadFont(Cartoon)
 		for _, Label in config do
 			if type(Label) == "table" and Label.Font ~= nil then
 				Label.Font = Cartoon
-				
-				if FoundationFontFaceMigration then
-					local FontFace = Label.FontFace
-					Label.FontFace = if typeof(Cartoon) == "Font" then Cartoon elseif Cartoon == Enum.Font.Cartoon then Font.new(ConstantsModule.ComicNeueFontFamily, FontFace.Weight, FontFace.Style) else Font.fromEnum(Cartoon)
-				end
+				local FontFace = Label.FontFace
+				Label.FontFace = if typeof(Cartoon) == "Font" then Cartoon elseif Cartoon == Enum.Font.Cartoon then Font.new(ConstantsModule.ComicNeueFontFamily, FontFace.Weight, FontFace.Style) else Font.fromEnum(Cartoon)
 			end
 		end
 	end

@@ -249,6 +249,7 @@ Authentication.CrossDevice.Action.TryAgain,
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,Xác nhận trên thiết bị đã đăng nhập để tiếp tục.
 Authentication.CrossDevice.Description.DenyIfNotYou,Không phải bạn? Từ chối ngay.
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,"Trên thiết bị đã đăng nhập, hãy quét mã QR hoặc mở <b>Thêm > Đăng nhập nhanh</b> rồi nhập mã bên dưới."
+Authentication.CrossDevice.Description.ScanQrOrEnterCode,
 Authentication.CrossDevice.Description.SigningInAs,Đang đăng nhập dưới tên {identifier}
 Authentication.CrossDevice.EnterCodeInstruction,sau đó nhập mã này
 Authentication.CrossDevice.GoToInstruction,"Trên máy tính hoặc điện thoại của bạn, đi đến:"
@@ -308,6 +309,7 @@ Authentication.Login.Action.EmailOtpWaitTime,Gửi lại mã sau {WaitTime} giâ
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Bạn quên Mật khẩu hoặc Tên người dùng?
 Authentication.Login.Action.ForgotUsername,Đã quên tên tài khoản?
 Authentication.Login.Action.ForgotUsernameOrPassword,Quên tên tài khoản hoặc mật khẩu?
+Authentication.Login.Action.GetCodeByEmail,Nhận mã qua email
 Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,Gửi mã một lần cho tôi qua email
 Authentication.Login.Action.NeedHelp,Bạn cần trợ giúp?
@@ -323,11 +325,13 @@ Authentication.Login.Action.SignIn,Đăng nhập
 Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,Sử dụng mã xác nhận
+Authentication.Login.Action.UsernameAndPassword,Tên người dùng và mật khẩu
 Authentication.Login.Action.WeChatLogin,Đăng nhập bằng WeChat
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Thoát Roblox để chuyển tài khoản sang {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Sử dụng tài khoản Roblox khác
 Authentication.Login.Button.XboxAccountSwitcher,Đổi tài khoản Xbox
 Authentication.Login.Description.AccountSelectorHelp,Tất cả các tài khoản từng liên kết của bạn được liệt kê ở đây.
+Authentication.Login.Description.ChooseHowToPlay,Chọn cách chơi mong muốn
 Authentication.Login.Description.DownloadNewVersion,Tài khoản của bạn không thể sử dụng phiên bản Roblox này. Vui lòng tải xuống phiên bản phù hợp để tiếp tục.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,Nhập mã chúng tôi vừa gửi đến: {email}
 Authentication.Login.Description.GetOneTimeCodeHelp,Nhập email đã xác minh cho tài khoản của bạn để nhận mã một lần.
@@ -340,6 +344,7 @@ Authentication.Login.Description.VerificationCodeSentTo,"Nếu tài khoản Robl
 Authentication.Login.Error.PasskeyOnlyAccount,Tài khoản của bạn được thiết lập ở chế độ chỉ cho phép đăng nhập bằng khóa bảo mật. Hãy đăng nhập bằng khóa bảo mật hoặc tiến hành khôi phục tài khoản.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Không xác minh được tài khoản trên nền tảng. Vui lòng thử lại sau.
 Authentication.Login.Heading.EnterYourCode,Nhập mã của bạn
+Authentication.Login.Heading.GetStarted,Bắt đầu
 Authentication.Login.Heading.IncompatibleAccounts,Tài khoản không phù hợp
 Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,Đăng nhập vào Roblox
@@ -1084,6 +1089,9 @@ CoreScripts.InGameMenu.Cancel,
 CoreScripts.InGameMenu.Controls.RobloxMenu,Menu Roblox
 CoreScripts.InGameMenu.GameSettings.PartyVoiceVolume,Âm lượng giọng nói trong Party
 CoreScripts.InGameMenu.GameSettings.UINavToggle,Bật/Tắt Điều Hướng Giao Diện
+CoreScripts.InGameMenu.GameSettings.UIScaleMode,Chế độ điều chỉnh tỷ lệ UI
+CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,Tự động
+CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,Thủ công
 CoreScripts.InGameMenu.GameSettings.Volume,Âm Lượng
 CoreScripts.InGameMenu.Leave,Rời Khỏi
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Mời Bạn Bè
@@ -1300,6 +1308,8 @@ Feature.Accessibility.Description.PreferredTextSize,Điều chỉnh cỡ chữ t
 Feature.Accessibility.Description.PreferredTransparency,Cải thiện độ tương phản bằng cách điều chỉnh độ trong suốt trên một số nền
 Feature.Accessibility.Description.ReducedMotion,Dừng hoặc giảm hiệu ứng chuyển động
 Feature.Accessibility.Description.SkyStyle,Chọn phong cách bầu trời cho môi trường trang chủ
+Feature.Accessibility.Description.UIScaleMode,Thiết lập chế độ thu phóng UI trên Roblox.
+Feature.Accessibility.Description.UIScaleV2,Điều chỉnh kích thước của các nút và menu trên Roblox.
 Feature.Accessibility.Description.UiNavigationKeyBind,Sử dụng phím {uiNavigationKey} để kích hoạt và thoát chế độ điều hướng Giao Diện
 Feature.Accessibility.Description.VREnvironmentSetting,Chọn môi trường cho màn hình chính
 Feature.Accessibility.DeviceLevelTheme.Dark,Tối
@@ -1319,6 +1329,7 @@ Feature.Accessibility.Heading.PreferredTextSize,Cỡ văn bản
 Feature.Accessibility.Heading.PreferredTransparency,Độ trong suất của nền
 Feature.Accessibility.Heading.ReducedMotion,Giảm chuyển động
 Feature.Accessibility.Heading.SkyStyle,Phong cách bầu trời
+Feature.Accessibility.Heading.UIScale,Tỷ lệ UI
 Feature.Accessibility.Heading.UiNavigationKeyBind,Bật/tắt nút điều hướng của giao diện người dùng
 Feature.Accessibility.Heading.VREnvironmentSetting,Môi trường VR
 Feature.Accessibility.Label.AppThemeBadgeNew,Mới
@@ -1329,6 +1340,7 @@ Feature.Accessibility.PreferredTransparency.Opaque,Mờ
 Feature.Accessibility.PreferredTransparency.Transparent,Trong Suốt
 Feature.Accessibility.SkyStyle.Day,Ban ngày
 Feature.Accessibility.SkyStyle.Night,Ban đêm
+Feature.Accessibility.UIScale.Default,Mặc định ({scale})
 Feature.Accessibility.VREnvironmentSetting.Dark,
 Feature.Accessibility.VREnvironmentSetting.Light,
 Feature.Accessibility.VREnvironmentSetting.System,

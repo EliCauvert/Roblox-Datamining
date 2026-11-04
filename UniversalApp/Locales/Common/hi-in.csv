@@ -232,6 +232,7 @@ Authentication.CrossDevice.Action.TryAgain,
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,"जारी रखने के लिए, अपने साइन-इन किए हुए डिवाइस पर कन्फ़र्म करें."
 Authentication.CrossDevice.Description.DenyIfNotYou,यह आप नहीं हैं? तुरंत मना करें.
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,"अपने साइन-इन किए हुए डिवाइस पर, QR कोड स्कैन करें या <b>ज़्यादा > क्विक साइन-इन</b> पर जाकर नीचे कोड डालें."
+Authentication.CrossDevice.Description.ScanQrOrEnterCode,
 Authentication.CrossDevice.Description.SigningInAs,{identifier} के तौर पर साइन-इन किया जा रहा है
 Authentication.CrossDevice.EnterCodeInstruction,फिर यह कोड डालें
 Authentication.CrossDevice.GoToInstruction,अपने कंप्यूटर या फ़ोन पर यहाँ जाएँ:
@@ -291,6 +292,7 @@ Authentication.Login.Action.EmailOtpWaitTime,{WaitTime} सेकंड मे�
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,क्या आप पासवर्ड या यूज़रनेम भूल गए हैं?
 Authentication.Login.Action.ForgotUsername,यूज़रनेम भूल गए हैं?
 Authentication.Login.Action.ForgotUsernameOrPassword,यूज़रनेम या पासवर्ड याद नहीं है?
+Authentication.Login.Action.GetCodeByEmail,ईमेल से कोड पाएँ
 Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,मुझे वन-टाइम कोड ईमेल करें
 Authentication.Login.Action.NeedHelp,मदद चाहिए?
@@ -306,11 +308,13 @@ Authentication.Login.Action.SignIn,साइन इन करें
 Authentication.Login.Action.SignInSentenceCase,साइन-इन करें
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,पास-की का इस्तेमाल करें
+Authentication.Login.Action.UsernameAndPassword,यूज़रनेम और पासवर्ड
 Authentication.Login.Action.WeChatLogin,WeChat से लॉग इन करें
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,{platformAccountName} के अकाउंट पर स्विच करने के लिए Roblox से बाहर निकलें
 Authentication.Login.Button.UseDifferentRobloxAccount,किसी दूसरे Roblox अकाउंट का इस्तेमाल करें
 Authentication.Login.Button.XboxAccountSwitcher,Xbox अकाउंट बदलें
 Authentication.Login.Description.AccountSelectorHelp,आपके सभी संबंधित अकाउंट की लिस्ट यहाँ दी गई है.
+Authentication.Login.Description.ChooseHowToPlay,अपने खेलने का तरीका चुनें
 Authentication.Login.Description.DownloadNewVersion,"Roblox का यह वर्ज़न आपके अकाउंट के लिए उपलब्ध नहीं है. जारी रखने के लिए, कृपया सही वर्ज़न डाउनलोड करें."
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,अभी-अभी आपके इस ईमेल पर भेजा गया कोड डालें : {email}
 Authentication.Login.Description.GetOneTimeCodeHelp,"वन-टाइम कोड पाने के लिए, अपना वेरिफ़ाइड ईमेल डालें."
@@ -323,6 +327,7 @@ Authentication.Login.Description.VerificationCodeSentTo,"अगर कोई Rob
 Authentication.Login.Error.PasskeyOnlyAccount,"आपके अकाउंट में साइन-इन करने के लिए सिर्फ़ पास-की सेटअप है. अपने अकाउंट को वापस पाने के लिए, अपनी पास-की से साइन-इन करके देखें."
 Authentication.Login.Error.PlatformAccountConnectionFailure,प्लैटफ़ॉर्म अकाउंट वेरिफ़ाई नहीं किया जा सका. बाद में फिर से कोशिश करें.
 Authentication.Login.Heading.EnterYourCode,अपना कोड डालें :
+Authentication.Login.Heading.GetStarted,शुरू करें
 Authentication.Login.Heading.IncompatibleAccounts,अकाउंट कंपैटिबल नहीं हैं
 Authentication.Login.Heading.Login,लॉग इन करें
 Authentication.Login.Heading.LoginRoblox,Roblox में लॉग इन करें
@@ -1066,6 +1071,9 @@ CoreScripts.InGameMenu.Cancel,
 CoreScripts.InGameMenu.Controls.RobloxMenu,Roblox मेन्यू
 CoreScripts.InGameMenu.GameSettings.PartyVoiceVolume,पार्टी की वॉइस चैट का वॉल्यूम
 CoreScripts.InGameMenu.GameSettings.UINavToggle,UI नैविगेशन टॉगल
+CoreScripts.InGameMenu.GameSettings.UIScaleMode,UI स्केल मोड
+CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,ऑटो
+CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,मैन्युअल
 CoreScripts.InGameMenu.GameSettings.Volume,वॉल्यूम
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,फ़्रेंड्स को इनवाइट करें
@@ -1280,6 +1288,8 @@ Feature.Accessibility.Description.PreferredTextSize,"अपनी प्रा�
 Feature.Accessibility.Description.PreferredTransparency,कुछ बैकग्राउंड पर ट्रांसपेरेंसी एडजस्ट करके कॉन्ट्रास्ट को बेहतर करें
 Feature.Accessibility.Description.ReducedMotion,मोशन इफ़ेक्ट को रोकें या कम करें
 Feature.Accessibility.Description.SkyStyle,होम एनवायरनमेंट के लिए कोई स्काई स्टाइल चुनें
+Feature.Accessibility.Description.UIScaleMode,यह सेट करें कि पूरे Roblox में UI स्केल कैसे चुना जाए.
+Feature.Accessibility.Description.UIScaleV2,पूरे Roblox में बटन और मेन्यू का साइज़ एडजस्ट करें.
 Feature.Accessibility.Description.UiNavigationKeyBind,UI नैविगेशन मोड में जाने और उससे बाहर निकलने के लिए {uiNavigationKey} की (key) का इस्तेमाल करें
 Feature.Accessibility.Description.VREnvironmentSetting,होम स्क्रीन के लिए कोई एनवायरनमेंट चुनें
 Feature.Accessibility.DeviceLevelTheme.Dark,डार्क
@@ -1299,6 +1309,7 @@ Feature.Accessibility.Heading.PreferredTextSize,टेक्स्ट साइ�
 Feature.Accessibility.Heading.PreferredTransparency,बैकग्राउंड ट्रांसपेरेंसी
 Feature.Accessibility.Heading.ReducedMotion,मोशन कम करें
 Feature.Accessibility.Heading.SkyStyle,स्काई स्टाइल
+Feature.Accessibility.Heading.UIScale,UI स्केल
 Feature.Accessibility.Heading.UiNavigationKeyBind,
 Feature.Accessibility.Heading.VREnvironmentSetting,VR एनवायरनमेंट
 Feature.Accessibility.Label.AppThemeBadgeNew,नया
@@ -1309,6 +1320,7 @@ Feature.Accessibility.PreferredTransparency.Opaque,अपारदर्शी
 Feature.Accessibility.PreferredTransparency.Transparent,ट्रांसपेरेंट
 Feature.Accessibility.SkyStyle.Day,
 Feature.Accessibility.SkyStyle.Night,रात
+Feature.Accessibility.UIScale.Default,डिफ़ॉल्ट ({scale})
 Feature.Accessibility.VREnvironmentSetting.Dark,
 Feature.Accessibility.VREnvironmentSetting.Light,
 Feature.Accessibility.VREnvironmentSetting.System,
@@ -3606,7 +3618,7 @@ Feature.Friends.Action.FindFriends,
 Feature.Friends.Action.FriendAdded,फ़्रेंड जोड़ा गया
 Feature.Friends.Action.FriendRemoved,फ़्रेंड को हटाया गया
 Feature.Friends.Action.FriendRequestSent,फ़्रेंड रिक्वेस्ट भेजी गई
-Feature.Friends.Action.GetStarted,शुरू करें
+Feature.Friends.Action.GetStarted,
 Feature.Friends.Action.GoToAddFriends,'फ़्रेंड्स जोड़ें' पर जाएँ
 Feature.Friends.Action.InviteFriends,"Roblox पर फ़्रेंड्स बनने के लिए, कॉन्टैक्ट्स को इनवाइट करें."
 Feature.Friends.Action.InviteProviderFriends,{provider} फ़्रेंड्स को इनवाइट करें

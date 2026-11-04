@@ -232,6 +232,7 @@ Authentication.CrossDevice.Action.TryAgain,
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,Bevestig op je aangemelde apparaat om door te gaan.
 Authentication.CrossDevice.Description.DenyIfNotYou,Ben jij dit niet? Weiger onmiddellijk.
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,Scan op je aangemelde apparaat de QR-code of ga naar <b>Meer > Snel aanmelden</b> en voer de onderstaande code in.
+Authentication.CrossDevice.Description.ScanQrOrEnterCode,
 Authentication.CrossDevice.Description.SigningInAs,Aanmelden als {identifier}
 Authentication.CrossDevice.EnterCodeInstruction,voer vervolgens deze code in
 Authentication.CrossDevice.GoToInstruction,Ga op je computer of telefoon naar:
@@ -291,6 +292,7 @@ Authentication.Login.Action.EmailOtpWaitTime,Code opnieuw verzenden over {WaitTi
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Wachtwoord of gebruikersnaam vergeten?
 Authentication.Login.Action.ForgotUsername,Gebruikersnaam vergeten?
 Authentication.Login.Action.ForgotUsernameOrPassword,Je gebruikersnaam of wachtwoord vergeten?
+Authentication.Login.Action.GetCodeByEmail,Code per e-mail ontvangen
 Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,Stuur me een unieke code per e-mail
 Authentication.Login.Action.NeedHelp,Hulp nodig?
@@ -306,11 +308,13 @@ Authentication.Login.Action.SignIn,Aanmelden
 Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,Toegangssleutel gebruiken
+Authentication.Login.Action.UsernameAndPassword,Gebruikersnaam en wachtwoord
 Authentication.Login.Action.WeChatLogin,Inloggen met WeChat
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Roblox afsluiten om van account te wisselen voor {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Een ander Roblox-account gebruiken
 Authentication.Login.Button.XboxAccountSwitcher,Van Xbox-account wisselen
 Authentication.Login.Description.AccountSelectorHelp,Al je gekoppelde accounts staan hier vermeld.
+Authentication.Login.Description.ChooseHowToPlay,Kies hoe je wilt spelen
 Authentication.Login.Description.DownloadNewVersion,Deze versie van Roblox is niet beschikbaar voor je account. Download de juiste versie om door te gaan.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,Voer de code in die we zojuist hebben gestuurd naar: {email}
 Authentication.Login.Description.GetOneTimeCodeHelp,Voer het e-mailadres in dat is geverifieerd op je account om een unieke code te ontvangen.
@@ -323,6 +327,7 @@ Authentication.Login.Description.VerificationCodeSentTo,"Als er een Roblox-accou
 Authentication.Login.Error.PasskeyOnlyAccount,Voor je account is alleen een toegangssleutel ingesteld om je aan te melden. Probeer je aan te melden met je toegangssleutel of herstel je account.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Kan platformaccount niet verifiëren. Probeer het later opnieuw.
 Authentication.Login.Heading.EnterYourCode,Voer je code in
+Authentication.Login.Heading.GetStarted,Aan de slag
 Authentication.Login.Heading.IncompatibleAccounts,Incompatibele accounts
 Authentication.Login.Heading.Login,Inloggen
 Authentication.Login.Heading.LoginRoblox,Inloggen bij Roblox
@@ -1068,6 +1073,9 @@ CoreScripts.InGameMenu.Cancel,
 CoreScripts.InGameMenu.Controls.RobloxMenu,Roblox-menu
 CoreScripts.InGameMenu.GameSettings.PartyVoiceVolume,Volume van Party Voice
 CoreScripts.InGameMenu.GameSettings.UINavToggle,UI-navigatieschakelaar
+CoreScripts.InGameMenu.GameSettings.UIScaleMode,UI-schaalmodus
+CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,Automatisch
+CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,Handmatig
 CoreScripts.InGameMenu.GameSettings.Volume,Volume
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Vrienden uitnodigen
@@ -1282,6 +1290,8 @@ Feature.Accessibility.Description.PreferredTextSize,Pas de tekstgrootte op Roblo
 Feature.Accessibility.Description.PreferredTransparency,Verbeter het contrast door de transparantie op sommige achtergronden aan te passen
 Feature.Accessibility.Description.ReducedMotion,Bewegingseffecten stoppen of verminderen
 Feature.Accessibility.Description.SkyStyle,Kies een hemelstijl voor de spelomgeving op de startpagina
+Feature.Accessibility.Description.UIScaleMode,Stel in hoe de UI-schaal wordt gekozen op Roblox.
+Feature.Accessibility.Description.UIScaleV2,De grootte van knoppen en menu's in Roblox aanpassen.
 Feature.Accessibility.Description.UiNavigationKeyBind,Gebruik de toets {uiNavigationKey} om de UI-navigatiemodus te openen en te verlaten
 Feature.Accessibility.Description.VREnvironmentSetting,Kies een spelomgeving voor het startscherm
 Feature.Accessibility.DeviceLevelTheme.Dark,Donker
@@ -1301,6 +1311,7 @@ Feature.Accessibility.Heading.PreferredTextSize,Tekstgrootte
 Feature.Accessibility.Heading.PreferredTransparency,Achtergrondtransparantie
 Feature.Accessibility.Heading.ReducedMotion,Beweging verminderen
 Feature.Accessibility.Heading.SkyStyle,Hemelstijl
+Feature.Accessibility.Heading.UIScale,UI-schaal
 Feature.Accessibility.Heading.UiNavigationKeyBind,
 Feature.Accessibility.Heading.VREnvironmentSetting,VR-spelomgeving
 Feature.Accessibility.Label.AppThemeBadgeNew,Nieuw
@@ -1311,6 +1322,7 @@ Feature.Accessibility.PreferredTransparency.Opaque,Ondoorzichtig
 Feature.Accessibility.PreferredTransparency.Transparent,Transparant
 Feature.Accessibility.SkyStyle.Day,
 Feature.Accessibility.SkyStyle.Night,Nacht
+Feature.Accessibility.UIScale.Default,Standaard ({scale})
 Feature.Accessibility.VREnvironmentSetting.Dark,
 Feature.Accessibility.VREnvironmentSetting.Light,
 Feature.Accessibility.VREnvironmentSetting.System,
@@ -3608,7 +3620,7 @@ Feature.Friends.Action.FindFriends,
 Feature.Friends.Action.FriendAdded,
 Feature.Friends.Action.FriendRemoved,Vriend verwijderd
 Feature.Friends.Action.FriendRequestSent,Vriendschapsverzoek verzonden
-Feature.Friends.Action.GetStarted,Aan de slag
+Feature.Friends.Action.GetStarted,
 Feature.Friends.Action.GoToAddFriends,Ga naar Vrienden toevoegen
 Feature.Friends.Action.InviteFriends,Nodig contactpersonen uit om vrienden te zijn op Roblox.
 Feature.Friends.Action.InviteProviderFriends, {provider}-vrienden uitnodigen

@@ -4,8 +4,7 @@ local Core = Parent1.Core
 local Parent2 = Parent1.Parent
 local RoactModule = require(Parent2.Roact)
 local TModule = require(Parent2.t)
-local FoundationModule = require(Parent2.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local NormalizeFontFaceFunction = require(Parent2.Foundation).Utility.normalizeFontFace
 local WithStyleModule = require(Core.Style.withStyle)
 local InteractableModule = require(Core.Control.Interactable)
 local ControlStateModule = require(Core.Control.Enum.ControlState)
@@ -13,7 +12,6 @@ local LoadableImageModule = require(Parent1.App.Loading.LoadableImage)
 local ImagesModule = require(Parent.ImageSet.Images)
 local ImageSetComponentModule = require(Core.ImageSet.ImageSetComponent)
 local ItemSplitTileFooterModule = require(Parent1.App.Tile.ItemSplitTile.ItemSplitTileFooter)
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local _UDim = UDim.new(0, 8)
 local _UDim1 = UDim.new(0, 8)
 local _UDim2 = UDim.new(0, 12)
@@ -115,7 +113,7 @@ function ItemSplitTile.renderTopContent(p1, p2)
 end
 
 function ItemSplitTile.renderBottomContent(p1, p2)
-	-- upvalues: ControlStateModule (copy), _UDim2 (copy), _UDim1 (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ItemSplitTileFooterModule (copy)
+	-- upvalues: ControlStateModule (copy), _UDim2 (copy), _UDim1 (copy), RoactModule (copy), NormalizeFontFaceFunction (copy), ItemSplitTileFooterModule (copy)
 	local ItemName: string = p1.props.itemName
 	local HasBackground = p1.props.hasBackground
 	local _Font = p2.Font
@@ -147,8 +145,7 @@ function ItemSplitTile.renderBottomContent(p1, p2)
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Text = ItemName,
-			Font = if FoundationFontFaceMigration then nil else _Font.Header2.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(_Font.Header2.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(_Font.Header2.Font),
 			TextSize = Ceiled,
 			TextTransparency = TextEmphasis.Transparency,
 			TextColor3 = TextEmphasis.Color,

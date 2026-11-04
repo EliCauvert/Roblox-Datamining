@@ -2,9 +2,7 @@
 local Parent1 = Parent.Parent.Parent
 local Parent2 = Parent1.Parent
 local Parent3 = Parent2.Parent
-local FoundationModule = require(Parent3.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent3.Foundation).Utility.normalizeFontFace
 local ReactModule = require(Parent3.React)
 local LuauPolyfillModule = require(Parent3.LuauPolyfill)
 local _ = require(Parent.Types)
@@ -16,7 +14,7 @@ local ImagesModule = require(Parent1.ImageSet.Images)
 local Label = require(Parent2.Core.ImageSet.ImageSetComponent).Label
 
 return function(Frame: Frame)
-	-- upvalues: UseStyleModule (copy), ConstantsModule (copy), UtilitiesModule (copy), ReactModule (copy), ImagesModule (copy), Label (copy), LuauPolyfillModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), GetFontFromFontStyleModule (copy)
+	-- upvalues: UseStyleModule (copy), ConstantsModule (copy), UtilitiesModule (copy), ReactModule (copy), ImagesModule (copy), Label (copy), LuauPolyfillModule (copy), NormalizeFontFaceFunction (copy), GetFontFromFontStyleModule (copy)
 	local UseStyleModuleResult = UseStyleModule()
 	local ThemeEntry = UseStyleModuleResult.Theme[Frame.iconThemeKey or ConstantsModule.DEFAULT_ICON_THEME]
 	local KeyCodeContent = UtilitiesModule.getKeyCodeContent(Frame.keyCode)
@@ -68,8 +66,7 @@ return function(Frame: Frame)
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,
 				TextSize = ScaledBaseSize,
-				Font = if FoundationFontFaceMigration then nil else CaptionHeader.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(GetFontFromFontStyleModule(CaptionHeader)) else nil,
+				FontFace = NormalizeFontFaceFunction(GetFontFromFontStyleModule(CaptionHeader)),
 				Position = UDim2.fromOffset(0, ConstantsModule.TEXT_CENTER_OFFSET),
 				Size = UDim2.fromScale(1, 1)
 			}, { Icon = Element })

@@ -1,5 +1,6 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
 local _ = require(Foundation.Enums.IconSize)
+local _ = require(Foundation.Enums.InputSize)
 local _ = require(Foundation.Components.Types)
 local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
 local Link = { tag = "text-align-x-left" }
@@ -11,15 +12,17 @@ local config = {
 	message = Link,
 	link = Link
 }
-local Message = { tag = "size-full-0 auto-y" }
+local LinkContainer = { tag = "size-full-0 auto-y" }
 local config1 = {
 	[false] = {
 		message = { tag = "fill auto-y" },
-		link = { tag = "auto-xy" }
+		link = { tag = "auto-xy" },
+		linkContainer = { tag = "auto-xy" }
 	},
 	[true] = {
-		message = Message,
-		link = { tag = Message.tag, padding = {} }
+		message = LinkContainer,
+		link = { tag = LinkContainer.tag, padding = {} },
+		linkContainer = LinkContainer
 	}
 }
 

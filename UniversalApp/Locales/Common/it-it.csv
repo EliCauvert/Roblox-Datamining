@@ -233,6 +233,7 @@ Authentication.CrossDevice.Action.TryAgain,
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,Conferma sul dispositivo con cui hai effettuato l'accesso per continuare.
 Authentication.CrossDevice.Description.DenyIfNotYou,Non sei tu? Nega immediatamente.
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,"Sul dispositivo da cui hai effettuato l'accesso, scansiona il codice QR o vai su <b>Altro > Accesso rapido</b> e inserisci il codice qui sotto."
+Authentication.CrossDevice.Description.ScanQrOrEnterCode,
 Authentication.CrossDevice.Description.SigningInAs,Accesso come {identifier}
 Authentication.CrossDevice.EnterCodeInstruction,quindi inserisci questo codice
 Authentication.CrossDevice.GoToInstruction,Sul tuo computer o telefono vai a:
@@ -292,6 +293,7 @@ Authentication.Login.Action.EmailOtpWaitTime,Invia nuovamente il codice in {Wait
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Hai dimenticato la password o il nome utente?
 Authentication.Login.Action.ForgotUsername,Hai dimenticato il tuo nome utente?
 Authentication.Login.Action.ForgotUsernameOrPassword,Ho dimenticato il nome utente o la password
+Authentication.Login.Action.GetCodeByEmail,Ottieni il codice via email
 Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,Inviami un codice monouso
 Authentication.Login.Action.NeedHelp,Hai bisogno d'aiuto?
@@ -307,11 +309,13 @@ Authentication.Login.Action.SignIn,Accedi
 Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,Usa Passkey
+Authentication.Login.Action.UsernameAndPassword,Nome utente e password
 Authentication.Login.Action.WeChatLogin,Accesso a WeChat
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Esci da Roblox per cambiare l'account {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Usa un altro account Roblox
 Authentication.Login.Button.XboxAccountSwitcher,Cambia account Xbox
 Authentication.Login.Description.AccountSelectorHelp,Tutti i tuoi account associati sono elencati qui.
+Authentication.Login.Description.ChooseHowToPlay,Scegli come vuoi giocare
 Authentication.Login.Description.DownloadNewVersion,Questa versione di Roblox non è disponibile per il tuo account. Scarica la versione corretta per continuare.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,Inserisci il codice che abbiamo appena inviato a {email}
 Authentication.Login.Description.GetOneTimeCodeHelp,Inserisci l'email verificata sul tuo account per ricevere un codice monouso.
@@ -324,6 +328,7 @@ Authentication.Login.Description.VerificationCodeSentTo,"Se esiste un account Ro
 Authentication.Login.Error.PasskeyOnlyAccount,Il tuo account dispone solo di una passkey configurata per l'accesso. Prova ad accedere con la passkey o ripristina l'account.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Impossibile verificare l'account della piattaforma. Riprova più tardi.
 Authentication.Login.Heading.EnterYourCode,
+Authentication.Login.Heading.GetStarted,Inizia
 Authentication.Login.Heading.IncompatibleAccounts,Account incompatibili
 Authentication.Login.Heading.Login,Accesso
 Authentication.Login.Heading.LoginRoblox,Accedi a Roblox
@@ -1068,6 +1073,9 @@ CoreScripts.InGameMenu.Cancel,
 CoreScripts.InGameMenu.Controls.RobloxMenu,Menu Roblox
 CoreScripts.InGameMenu.GameSettings.PartyVoiceVolume,Volume della voce del Party
 CoreScripts.InGameMenu.GameSettings.UINavToggle,Attiva/Disattiva Navigazione Interfaccia utente
+CoreScripts.InGameMenu.GameSettings.UIScaleMode,Modalità di ridimensionamento dell'interfaccia utente
+CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,Auto
+CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,Manuale
 CoreScripts.InGameMenu.GameSettings.Volume,Volume
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Invita amici
@@ -1282,6 +1290,8 @@ Feature.Accessibility.Description.PreferredTextSize,Regola la dimensione del tes
 Feature.Accessibility.Description.PreferredTransparency,Migliora il contrasto regolando la trasparenza su alcuni sfondi
 Feature.Accessibility.Description.ReducedMotion,Ferma o riduci gli effetti del movimento
 Feature.Accessibility.Description.SkyStyle,Scegli uno stile di cielo per l'ambiente Home
+Feature.Accessibility.Description.UIScaleMode,Imposta come viene scelto il ridimensionamento dell'interfaccia utente in ogni sezione di Roblox.
+Feature.Accessibility.Description.UIScaleV2,Regola la dimensione dei pulsanti e dei menu in ogni sezione di Roblox.
 Feature.Accessibility.Description.UiNavigationKeyBind,Usa il {uiNavigationKey} tasto per entrare e uscire dalla modalità di navigazione dell'interfaccia utente
 Feature.Accessibility.Description.VREnvironmentSetting,Scegli un ambiente per la schermata Home
 Feature.Accessibility.DeviceLevelTheme.Dark,Scuro
@@ -1301,6 +1311,7 @@ Feature.Accessibility.Heading.PreferredTextSize,Dimensione del testo
 Feature.Accessibility.Heading.PreferredTransparency,Trasparenza sfondo
 Feature.Accessibility.Heading.ReducedMotion,Riduci movimento
 Feature.Accessibility.Heading.SkyStyle,Stile del cielo
+Feature.Accessibility.Heading.UIScale,Ridimensionamento interfaccia utente
 Feature.Accessibility.Heading.UiNavigationKeyBind,Attiva/Disattiva navigazione interfaccia utente
 Feature.Accessibility.Heading.VREnvironmentSetting,Ambiente VR
 Feature.Accessibility.Label.AppThemeBadgeNew,Novità
@@ -1311,6 +1322,7 @@ Feature.Accessibility.PreferredTransparency.Opaque,Opaco
 Feature.Accessibility.PreferredTransparency.Transparent,Trasparente
 Feature.Accessibility.SkyStyle.Day,
 Feature.Accessibility.SkyStyle.Night,Notte
+Feature.Accessibility.UIScale.Default,Predefinita ({scale})
 Feature.Accessibility.VREnvironmentSetting.Dark,
 Feature.Accessibility.VREnvironmentSetting.Light,
 Feature.Accessibility.VREnvironmentSetting.System,
@@ -5355,7 +5367,7 @@ Feature.Squads.Action.Remove,
 Feature.Squads.Action.Retry,
 Feature.Squads.Action.ScheduleAParty,Pianifica un Party
 Feature.Squads.Action.ScheduleParty,Pianifica Party
-Feature.Squads.Action.Start,Inizia
+Feature.Squads.Action.Start,
 Feature.Squads.Action.Switch,Cambia
 Feature.Squads.Action.TapToStartNewParty,Tocca per iniziare un nuovo Party
 Feature.Squads.Action.View,

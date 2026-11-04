@@ -1,7 +1,5 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
 local ReactModule = require(Foundation.Parent.React)
-local AspectRatioModule = require(Foundation.Components.AspectRatio)
-local CornerRadiusModule = require(Foundation.Components.CornerRadius)
 local TileAspectRatioModule = require(Foundation.Enums.TileAspectRatio)
 local _ = require(Foundation.Components.Types)
 local GetTestIdTagModule = require(Foundation.Utility.getTestIdTag)
@@ -16,7 +14,7 @@ local _UDim2 = UDim2.fromScale(1, 1)
 local _UDim = UDim.new(0, 0)
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: UseTokensModule (copy), config (copy), _UDim2 (copy), _UDim (copy), ReactModule (copy), MapBindableModule (copy), GetTestIdTagModule (copy), CornerRadiusModule (copy), AspectRatioModule (copy)
+	-- upvalues: UseTokensModule (copy), config (copy), _UDim2 (copy), _UDim (copy), ReactModule (copy), MapBindableModule (copy), GetTestIdTagModule (copy)
 	local Entry = config[Frame.aspectRatio]
 	local TileSize = if typeof(Frame.tileSize) == "UDim2" then Frame.tileSize else nil
 	local Offset = if TileSize == nil or TileSize.X.Scale ~= 0 then nil else TileSize.X.Offset
@@ -40,21 +38,17 @@ return ReactModule.memo(function(Frame)
 		end),
 		[ReactModule.Tag] = GetTestIdTagModule(Frame.testId)
 	}, {
-		Corner = ReactModule.createElement(CornerRadiusModule, {
-			testId = `{Frame.testId}--corner`,
-			value = {
-				topLeft = _UDim1,
-				topRight = _UDim1,
-				bottomLeft = _UDim3,
-				bottomRight = _UDim3
-			}
+		Corner = ReactModule.createElement("UICorner", {
+			TopLeftRadius = _UDim1,
+			TopRightRadius = _UDim1,
+			BottomLeftRadius = _UDim3,
+			BottomRightRadius = _UDim3,
+			[ReactModule.Tag] = GetTestIdTagModule(`{Frame.testId}--corner`)
 		}),
-		AspectRatio = if Offset == nil or Frame.maxHeight ~= nil then ReactModule.createElement(AspectRatioModule, {
-			value = {
-				AspectRatio = Entry,
-				AspectType = Enum.AspectType.FitWithinMaxSize,
-				DominantAxis = Enum.DominantAxis.Width
-			}
+		AspectRatio = if Offset == nil or Frame.maxHeight ~= nil then ReactModule.createElement("UIAspectRatioConstraint", {
+			AspectRatio = Entry,
+			AspectType = Enum.AspectType.FitWithinMaxSize,
+			DominantAxis = Enum.DominantAxis.Width
 		}) else nil,
 		Content = Frame.content
 	})

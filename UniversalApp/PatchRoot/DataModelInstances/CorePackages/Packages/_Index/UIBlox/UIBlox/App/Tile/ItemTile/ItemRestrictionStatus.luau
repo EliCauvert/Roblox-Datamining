@@ -3,14 +3,12 @@ local Parent1 = Parent.Parent.Parent
 local Parent2 = Parent1.Parent
 local RoactModule = require(Parent2.Roact)
 local TModule = require(Parent2.t)
-local FoundationModule = require(Parent2.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local NormalizeFontFaceFunction = require(Parent2.Foundation).Utility.normalizeFontFace
 local WithStyleModule = require(Parent1.Core.Style.withStyle)
 local GetTextSizeModule = require(Parent1.Core.Text.GetTextSize)
 local ImagesModule = require(Parent1.App.ImageSet.Images)
 local ImageSetComponentModule = require(Parent1.Core.ImageSet.ImageSetComponent)
 local ItemTileEnumsModule = require(Parent.Enum.ItemTileEnums)
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local ItemRestrictionStatus = RoactModule.PureComponent:extend("ItemRestrictionStatus")
 local _Vector2 = Vector2.new(50, 20)
 local _Vector2_1 = Vector2.new(8, 8)
@@ -38,9 +36,9 @@ local _ = function(p1)
 end
 
 function ItemRestrictionStatus.render(p1)
-	-- upvalues: WithStyleModule (copy), ItemTileEnumsModule (copy), GetTextSizeModule (copy), _Vector2 (copy), ImagesModule (copy), _Vector2_1 (copy), RoactModule (copy), ImageSetComponentModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: WithStyleModule (copy), ItemTileEnumsModule (copy), GetTextSizeModule (copy), _Vector2 (copy), ImagesModule (copy), _Vector2_1 (copy), RoactModule (copy), ImageSetComponentModule (copy), NormalizeFontFaceFunction (copy)
 	return WithStyleModule(function(p2)
-		-- upvalues: p1 (copy), ItemTileEnumsModule (upval), GetTextSizeModule (upval), _Vector2 (upval), ImagesModule (upval), _Vector2_1 (upval), RoactModule (upval), ImageSetComponentModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+		-- upvalues: p1 (copy), ItemTileEnumsModule (upval), GetTextSizeModule (upval), _Vector2 (upval), ImagesModule (upval), _Vector2_1 (upval), RoactModule (upval), ImageSetComponentModule (upval), NormalizeFontFaceFunction (upval)
 		local Theme = p2.Theme
 		local _Font = p2.Font
 		local Tokens = p2.Tokens
@@ -85,8 +83,7 @@ function ItemRestrictionStatus.render(p1)
 			}),
 			Text = RoactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
-				Font = if FoundationFontFaceMigration then nil else CaptionHeaderFont,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(CaptionHeaderFont) else nil,
+				FontFace = NormalizeFontFaceFunction(CaptionHeaderFont),
 				TextSize = ScaledBaseSize,
 				Text = Text1,
 				TextColor3 = Theme.TextMuted.Color,

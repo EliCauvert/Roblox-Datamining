@@ -111,20 +111,20 @@ local function pack(...)
 	return select("#", ...), { ... }
 end
 
-local function packResult(p3, ...)
-	return p3, select("#", ...), { ... }
+local function packResult(Success, ...)
+	return Success, select("#", ...), { ... }
 end
 
 local _ = function(p3)
 	-- upvalues: Module (ref)
 	assert(p3 ~= nil, "traceback is nil")
 	
-	return function(p4)
+	return function(Err)
 		-- upvalues: Module (upval), p3 (copy)
-		return if type(p4) == "table" then p4 else Module.new({
-			error = p4,
+		return if type(Err) == "table" then Err else Module.new({
+			error = Err,
 			kind = Module.Kind.ExecutionError,
-			trace = debug.traceback(tostring(p4), 2),
+			trace = debug.traceback(tostring(Err), 2),
 			context = "Promise created at:\n\n" .. p3
 		})
 	end
@@ -132,15 +132,14 @@ end
 
 local function runExecutor(Source, p3, ...)
 	-- upvalues: packResult (copy), Module (ref)
-	local Callback = xpcall
 	assert(Source ~= nil, "traceback is nil")
 	
-	return packResult(Callback(p3, function(p4)
+	return packResult(xpcall(p3, function(Err)
 		-- upvalues: Module (upval), Source (copy)
-		return if type(p4) == "table" then p4 else Module.new({
-			error = p4,
+		return if type(Err) == "table" then Err else Module.new({
+			error = Err,
 			kind = Module.Kind.ExecutionError,
-			trace = debug.traceback(tostring(p4), 2),
+			trace = debug.traceback(tostring(Err), 2),
 			context = "Promise created at:\n\n" .. Source
 		})
 	end, ...))

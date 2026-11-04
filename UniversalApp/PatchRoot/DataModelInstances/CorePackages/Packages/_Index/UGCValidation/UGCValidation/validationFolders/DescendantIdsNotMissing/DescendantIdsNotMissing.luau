@@ -116,19 +116,19 @@ return {
 			end
 		end
 		if GetFFlagUGCValidateVersionedContentIdsModule() then
-			for AssetId, contentId1 in p2.contentIds do
-				for _, value1 in contentId1 do
-					if value1.version ~= nil then
+			for AssetId, contentId2 in p2.contentIds do
+				for _, value2 in contentId2 do
+					if value2.version ~= nil then
 						local config = {
-							InstanceFullName = value1.instance:GetFullName(),
-							FieldName = value1.fieldName,
-							Version = tostring(value1.version),
+							InstanceFullName = value2.instance:GetFullName(),
+							FieldName = value2.fieldName,
+							Version = tostring(value2.version),
 							AssetId = AssetId
 						}
 						
-						if value1.fieldName == "AnimationId" then
+						if value2.fieldName == "AnimationId" then
 							p1:fail(ErrorSourceStringsModule.Keys.DescendantIdAnimationVersionNotSupported, config)
-						elseif value1.version ~= 1 then
+						elseif value2.version ~= 1 then
 							p1:fail(ErrorSourceStringsModule.Keys.DescendantIdVersionNotSupported, config)
 						end
 					end
@@ -139,28 +139,28 @@ return {
 		
 		if IsValidationEnvMatch or GetFFlagUGCValidateCheckDescendantIdsLoadableModule() then
 			if GetFFlagUGCValidateVersionedContentIdsModule() then
-				for _, value2 in ParseContentIdsModule.getDistinctReferences(p2.contentIds) do
-					local Uri = value2.uri
-					local Success, Result = pcall(function()
+				for _, value1 in ParseContentIdsModule.getDistinctReferences(p2.contentIds) do
+					local Uri = value1.uri
+					local Success1, Result1 = pcall(function()
 						-- upvalues: UGCValidationService (upval), Uri (copy)
 						return UGCValidationService:CanLoadAsset(Uri)
 					end)
 					
-					if not Success or not Result then
-						reportUnloadable(p1, IsValidationEnvMatch, value2.key, value2.entry)
+					if not Success1 or not Result1 then
+						reportUnloadable(p1, IsValidationEnvMatch, value1.key, value1.entry)
 					end
 				end
 				return
 			else
-				for i, contentId2 in p2.contentIds do
+				for i, contentId1 in p2.contentIds do
 					local Text = "rbxassetid://" .. i
-					local Success1, Result1 = pcall(function()
+					local Success, Result = pcall(function()
 						-- upvalues: UGCValidationService (upval), Text (copy)
 						return UGCValidationService:CanLoadAsset(Text)
 					end)
 					
-					if not Success1 or not Result1 then
-						reportUnloadable(p1, IsValidationEnvMatch, i, contentId2[1])
+					if not Success or not Result then
+						reportUnloadable(p1, IsValidationEnvMatch, i, contentId1[1])
 					end
 				end
 			end

@@ -249,6 +249,7 @@ Authentication.CrossDevice.Action.TryAgain,
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,Konfirmasikan di perangkat tempat kamu sedang log in untuk melanjutkan.
 Authentication.CrossDevice.Description.DenyIfNotYou,Bukan kamu? Langsung tolak.
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,"Di perangkat tempat kamu sedang log in, scan kode QR atau buka <b>Lainnya > Log in cepat</b> dan masukkan kode di bawah ini."
+Authentication.CrossDevice.Description.ScanQrOrEnterCode,
 Authentication.CrossDevice.Description.SigningInAs,Log in sebagai {identifier}
 Authentication.CrossDevice.EnterCodeInstruction,lalu masukkan kode ini
 Authentication.CrossDevice.GoToInstruction,"Di komputer atau ponselmu, buka:"
@@ -308,6 +309,7 @@ Authentication.Login.Action.EmailOtpWaitTime,Kirim ulang kode dalam {WaitTime}
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Lupa Password atau Nama Pengguna?
 Authentication.Login.Action.ForgotUsername,Lupa nama pengguna?
 Authentication.Login.Action.ForgotUsernameOrPassword,Lupa nama pengguna atau password?
+Authentication.Login.Action.GetCodeByEmail,Dapatkan kode melalui email
 Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,Kirimi Saya Kode Sekali Pakai
 Authentication.Login.Action.NeedHelp,Butuh bantuan?
@@ -323,11 +325,13 @@ Authentication.Login.Action.SignIn,Log In
 Authentication.Login.Action.SignInSentenceCase,Log in
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,Gunakan Passkey
+Authentication.Login.Action.UsernameAndPassword,Nama pengguna & password
 Authentication.Login.Action.WeChatLogin,Log In WeChat
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Keluar dari Roblox untuk beralih ke akun {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Gunakan akun Roblox lain
 Authentication.Login.Button.XboxAccountSwitcher,Ganti akun Xbox
 Authentication.Login.Description.AccountSelectorHelp,Semua akun terkait kamu ada di sini.
+Authentication.Login.Description.ChooseHowToPlay,Pilih cara bermain yang kamu inginkan
 Authentication.Login.Description.DownloadNewVersion,Versi Roblox ini tidak tersedia untuk akunmu. Download versi yang sesuai untuk melanjutkan.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,Masukkan kode yang baru saja kami kirim ke: {email}
 Authentication.Login.Description.GetOneTimeCodeHelp,Masukkan email terverifikasi di akun kamu untuk menerima kode sekali pakai.
@@ -340,6 +344,7 @@ Authentication.Login.Description.VerificationCodeSentTo,"Jika ada akun Roblox, k
 Authentication.Login.Error.PasskeyOnlyAccount,Akunmu hanya memiliki passkey yang diatur untuk log in. Coba log in dengan passkey atau pulihkan akunmu.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Tidak dapat memverifikasi akun platform. Coba lagi nanti.
 Authentication.Login.Heading.EnterYourCode,Masukkan kodemu
+Authentication.Login.Heading.GetStarted,Memulai
 Authentication.Login.Heading.IncompatibleAccounts,Akun Tidak Kompatibel
 Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,Log in ke Roblox
@@ -980,7 +985,7 @@ CommonUI.Features.Label.Redeem,Redeem Kode
 CommonUI.Features.Label.ReportLogs,Laporkan Log
 CommonUI.Features.Label.ReportLogsSentenceCase,Laporkan log
 CommonUI.Features.Label.Settings,
-CommonUI.Features.Label.Startup,Memulai
+CommonUI.Features.Label.Startup,
 CommonUI.Features.Label.SupportCenter,Riwayat Dukungan Pengalaman Virtual
 CommonUI.Features.Label.TencentNotice,Pemberitahuan
 CommonUI.Features.Label.Terms,Ketentuan
@@ -1084,6 +1089,9 @@ CoreScripts.InGameMenu.Cancel,
 CoreScripts.InGameMenu.Controls.RobloxMenu,Menu Roblox
 CoreScripts.InGameMenu.GameSettings.PartyVoiceVolume,Volume suara Party
 CoreScripts.InGameMenu.GameSettings.UINavToggle,Tombol Navigasi UI
+CoreScripts.InGameMenu.GameSettings.UIScaleMode,Mode Skala UI
+CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,Otomatis
+CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,Manual
 CoreScripts.InGameMenu.GameSettings.Volume,Volume
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Undang Teman
@@ -1300,6 +1308,8 @@ Feature.Accessibility.Description.PreferredTextSize,Sesuaikan ukuran teks di sel
 Feature.Accessibility.Description.PreferredTransparency,Tingkatkan kontras dengan menyesuaikan transparansi di beberapa latar belakang
 Feature.Accessibility.Description.ReducedMotion,Menghentikan atau mengurangi efek gerakan
 Feature.Accessibility.Description.SkyStyle,Pilih gaya langit untuk lingkungan beranda
+Feature.Accessibility.Description.UIScaleMode,Atur cara skala UI dipilih di Roblox.
+Feature.Accessibility.Description.UIScaleV2,Sesuaikan ukuran tombol dan menu di Roblox.
 Feature.Accessibility.Description.UiNavigationKeyBind,Gunakan tombol {uiNavigationKey} untuk masuk dan keluar dari mode navigasi UI
 Feature.Accessibility.Description.VREnvironmentSetting,Pilih lingkungan untuk layar beranda
 Feature.Accessibility.DeviceLevelTheme.Dark,Gelap
@@ -1319,6 +1329,7 @@ Feature.Accessibility.Heading.PreferredTextSize,Ukuran teks
 Feature.Accessibility.Heading.PreferredTransparency,Transparansi latar belakang
 Feature.Accessibility.Heading.ReducedMotion,Kurangi gerakan
 Feature.Accessibility.Heading.SkyStyle,Gaya langit
+Feature.Accessibility.Heading.UIScale,Skala UI
 Feature.Accessibility.Heading.UiNavigationKeyBind,Tombol navigasi UI
 Feature.Accessibility.Heading.VREnvironmentSetting,Lingkungan VR
 Feature.Accessibility.Label.AppThemeBadgeNew,Baru
@@ -1329,6 +1340,7 @@ Feature.Accessibility.PreferredTransparency.Opaque,Buram
 Feature.Accessibility.PreferredTransparency.Transparent,Transparan
 Feature.Accessibility.SkyStyle.Day,Siang
 Feature.Accessibility.SkyStyle.Night,Malam
+Feature.Accessibility.UIScale.Default,Default ({scale})
 Feature.Accessibility.VREnvironmentSetting.Dark,
 Feature.Accessibility.VREnvironmentSetting.Light,
 Feature.Accessibility.VREnvironmentSetting.System,

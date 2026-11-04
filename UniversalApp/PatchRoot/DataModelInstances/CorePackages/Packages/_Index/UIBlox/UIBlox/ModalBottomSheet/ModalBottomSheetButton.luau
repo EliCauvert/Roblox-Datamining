@@ -1,13 +1,11 @@
 ﻿local Parent = script.Parent.Parent.Parent
 local RoactModule = require(Parent.Roact)
 local TModule = require(Parent.t)
-local FoundationModule = require(Parent.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
 local ImagesModule = require(Parent.UIBlox.App.ImageSet.Images)
 local ImageSetComponentModule = require(Parent.UIBlox.Core.ImageSet.ImageSetComponent)
 local WithStyleModule = require(Parent.UIBlox.Core.Style.withStyle)
 local RoundedFrameModule = require(Parent.UIBlox.App.Menu.RoundedFrame)
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local ModalBottomSheetButton = RoactModule.PureComponent:extend("ModalBottomSheetButton")
 local ImageRectSize = ImagesModule["component_assets/circle_17"].ImageRectSize
 local ImageRectOffset = ImagesModule["component_assets/circle_17"].ImageRectOffset
@@ -59,7 +57,7 @@ function ModalBottomSheetButton.init(p1)
 end
 
 function ModalBottomSheetButton.render(p1)
-	-- upvalues: ImageRectSize (copy), ImageRectOffset (copy), _Rect (copy), WithStyleModule (copy), RoactModule (copy), ImagesModule (copy), ImageSetComponentModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), RoundedFrameModule (copy), ScaledImagesResolutionScale2 (copy)
+	-- upvalues: ImageRectSize (copy), ImageRectOffset (copy), _Rect (copy), WithStyleModule (copy), RoactModule (copy), ImagesModule (copy), ImageSetComponentModule (copy), NormalizeFontFaceFunction (copy), RoundedFrameModule (copy), ScaledImagesResolutionScale2 (copy)
 	local HasRoundTop = p1.props.hasRoundTop
 	local HasRoundBottom = p1.props.hasRoundBottom
 	local ImageRectSize1 = nil
@@ -98,7 +96,7 @@ function ModalBottomSheetButton.render(p1)
 		Offset1 = Offset1 + XOffset + Offset
 	end
 	return WithStyleModule(function(p2)
-		-- upvalues: p1 (copy), RoactModule (upval), SliceCenter (ref), ImagesModule (upval), ImageRectSize1 (ref), NewVector (ref), Offset (ref), ImageSetComponentModule (upval), XOffset (copy), Offset1 (ref), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), HasRoundBottom (copy), _UDim2 (ref), RoundedFrameModule (upval), HasRoundTop (copy), ScaledImagesResolutionScale2 (upval)
+		-- upvalues: p1 (copy), RoactModule (upval), SliceCenter (ref), ImagesModule (upval), ImageRectSize1 (ref), NewVector (ref), Offset (ref), ImageSetComponentModule (upval), XOffset (copy), Offset1 (ref), NormalizeFontFaceFunction (upval), HasRoundBottom (copy), _UDim2 (ref), RoundedFrameModule (upval), HasRoundTop (copy), ScaledImagesResolutionScale2 (upval)
 		local Theme = p2.Theme
 		local _Font = p2.Font
 		local Color = Theme.TextEmphasis.Color
@@ -176,8 +174,7 @@ function ModalBottomSheetButton.render(p1)
 						Size = UDim2.new(1, -Offset1, 1, 0),
 						Text = p1.props.text,
 						TextTransparency = Transparency,
-						Font = if FoundationFontFaceMigration then nil else _Font.Header2.Font,
-						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(_Font.Header2.Font) else nil,
+						FontFace = NormalizeFontFaceFunction(_Font.Header2.Font),
 						TextColor3 = Color,
 						TextSize = _Font.Header2.RelativeSize * _Font.BaseSize,
 						TextTruncate = Enum.TextTruncate.AtEnd

@@ -249,6 +249,7 @@ Authentication.CrossDevice.Action.TryAgain,
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,"Bestätige die Anmeldung auf deinem angemeldeten Gerät, um fortzufahren."
 Authentication.CrossDevice.Description.DenyIfNotYou,Warst du das nicht? Lehne sofort ab.
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,Scanne den QR-Code auf deinem angemeldeten Gerät oder gehe zu <b>Mehr > Schnellanmeldung</b> und gib den unten stehenden Code ein.
+Authentication.CrossDevice.Description.ScanQrOrEnterCode,Scanne den QR-Code auf deinem angemeldeten Gerät oder gehe zu <b>Mehr > Schnellanmeldung</b> und gib den untenstehenden Code ein.
 Authentication.CrossDevice.Description.SigningInAs,Anmeldung als {identifier}
 Authentication.CrossDevice.EnterCodeInstruction,und gib dann diesen Code ein
 Authentication.CrossDevice.GoToInstruction,Gehe auf deinem Computer oder Telefon zu:
@@ -308,6 +309,7 @@ Authentication.Login.Action.EmailOtpWaitTime,Code erneut senden in {WaitTime} Se
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Passwort oder Benutzername vergessen?
 Authentication.Login.Action.ForgotUsername,Benutzernamen vergessen?
 Authentication.Login.Action.ForgotUsernameOrPassword,Benutzername oder Passwort vergessen?
+Authentication.Login.Action.GetCodeByEmail,Code per E-Mail erhalten
 Authentication.Login.Action.Google,Google
 Authentication.Login.Action.LogInEmailOneTimeCode,Einmaligen Code per E-Mail senden
 Authentication.Login.Action.NeedHelp,Brauchst du Hilfe?
@@ -323,11 +325,13 @@ Authentication.Login.Action.SignIn,Anmelden
 Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,Passkey nutzen
+Authentication.Login.Action.UsernameAndPassword,Benutzername und Passwort
 Authentication.Login.Action.WeChatLogin,WeChat-Anmeldung
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,"Roblox verlassen, um dich bei einem anderen {platformAccountName}-Konto anzumelden"
 Authentication.Login.Button.UseDifferentRobloxAccount,Ein anderes Roblox-Konto verwenden
 Authentication.Login.Button.XboxAccountSwitcher,Xbox-Konto wechseln
 Authentication.Login.Description.AccountSelectorHelp,Alle deine zugehörigen Konten sind hier aufgeführt.
+Authentication.Login.Description.ChooseHowToPlay,"Wähle aus, wie du spielen möchtest"
 Authentication.Login.Description.DownloadNewVersion,"Diese Version von Roblox ist für dein Konto nicht verfügbar. Bitte lade die richtige Version herunter, um fortzufahren."
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,"Gib den Code ein, den wir gerade an {email} gesendet haben"
 Authentication.Login.Description.GetOneTimeCodeHelp,"Gib die auf deinem Konto verifizierte E-Mail ein, um einen einmaligen Code zu erhalten."
@@ -340,6 +344,7 @@ Authentication.Login.Description.VerificationCodeSentTo,"Wenn das Roblox-Konto e
 Authentication.Login.Error.PasskeyOnlyAccount,"Für dein Konto ist nur ein Passkey für die Anmeldung eingerichtet. Versuche, dich mit deinem Passkey anzumelden, oder stelle dein Konto wieder her."
 Authentication.Login.Error.PlatformAccountConnectionFailure,Das Plattform-Konto kann nicht verifiziert werden. Bitte versuche es später erneut.
 Authentication.Login.Heading.EnterYourCode,Gib deinen Code ein
+Authentication.Login.Heading.GetStarted,Loslegen
 Authentication.Login.Heading.IncompatibleAccounts,Konten nicht kompatibel
 Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,Bei Roblox anmelden
@@ -1293,6 +1298,8 @@ Feature.Accessibility.Description.PreferredTextSize,Passe die Textgröße auf Ro
 Feature.Accessibility.Description.PreferredTransparency,"Verbessert den Kontrast, indem die Transparenz einiger Hintergründe angepasst wird"
 Feature.Accessibility.Description.ReducedMotion,Deaktiviere oder reduziere Bewegungseffekte
 Feature.Accessibility.Description.SkyStyle,Wähle einen Himmelsstil für die Startbildschirm-Umgebung
+Feature.Accessibility.Description.UIScaleMode,"Lege fest, wie die UI-Skalierung auf Roblox ausgewählt wird."
+Feature.Accessibility.Description.UIScaleV2,Passe die Größe von Schaltflächen und Menüs auf Roblox an.
 Feature.Accessibility.Description.UiNavigationKeyBind,"Verwende die {uiNavigationKey}-Taste, um den Navigationsmodus für die Benutzeroberfläche zu betreten oder zu verlassen"
 Feature.Accessibility.Description.VREnvironmentSetting,Wähle eine Umgebung für den Startbildschirm
 Feature.Accessibility.DeviceLevelTheme.Dark,Dunkel
@@ -1312,6 +1319,7 @@ Feature.Accessibility.Heading.PreferredTextSize,Textgröße
 Feature.Accessibility.Heading.PreferredTransparency,Hintergrundtransparenz
 Feature.Accessibility.Heading.ReducedMotion,Bewegung reduzieren
 Feature.Accessibility.Heading.SkyStyle,Himmelsstil
+Feature.Accessibility.Heading.UIScale,UI-Skalierung
 Feature.Accessibility.Heading.UiNavigationKeyBind,UI-Navigationsschalter
 Feature.Accessibility.Heading.VREnvironmentSetting,VR-Umgebung
 Feature.Accessibility.Label.AppThemeBadgeNew,Neu
@@ -1322,6 +1330,7 @@ Feature.Accessibility.PreferredTransparency.Opaque,Undurchsichtig
 Feature.Accessibility.PreferredTransparency.Transparent,Transparent
 Feature.Accessibility.SkyStyle.Day,
 Feature.Accessibility.SkyStyle.Night,Nacht
+Feature.Accessibility.UIScale.Default,Standard ({scale})
 Feature.Accessibility.VREnvironmentSetting.Dark,
 Feature.Accessibility.VREnvironmentSetting.Light,
 Feature.Accessibility.VREnvironmentSetting.System,
@@ -3619,7 +3628,7 @@ Feature.Friends.Action.FindFriends,
 Feature.Friends.Action.FriendAdded,
 Feature.Friends.Action.FriendRemoved,Freund entfernt
 Feature.Friends.Action.FriendRequestSent,Freundschaftsanfrage gesendet
-Feature.Friends.Action.GetStarted,Loslegen
+Feature.Friends.Action.GetStarted,
 Feature.Friends.Action.GoToAddFriends,"Zu ""Freunden hinzufügen"" gehen"
 Feature.Friends.Action.InviteFriends,"Lade Kontakte ein, sich mit dir auf Roblox zu befreunden."
 Feature.Friends.Action.InviteProviderFriends,{provider}-Freunde einladen
