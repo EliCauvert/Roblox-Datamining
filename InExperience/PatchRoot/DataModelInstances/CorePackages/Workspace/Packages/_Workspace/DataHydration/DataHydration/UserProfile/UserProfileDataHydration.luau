@@ -113,6 +113,51 @@ local function fetchNamesWithRetries(Key, p1, Count1)
 	end)
 end
 
+local function getAndFetchUserNames(p1)
+	-- upvalues: Tbl1 (copy), SignalsModule (copy), getNamesStatusCache (copy), Tbl2 (copy), fetchNamesWithRetries (copy), Count (ref), DataHydrationTypesModule (copy), UserProfileStore (ref), Parent (copy)
+	local Text = tostring(p1)
+	local Entry = Tbl1[Text]
+	
+	if Entry == nil then
+		local Computed = SignalsModule.createComputed(function(p2)
+			-- upvalues: getNamesStatusCache (upval), Text (copy), Tbl2 (upval), fetchNamesWithRetries (upval), Count (upval)
+			local Item, Item2 = getNamesStatusCache().getItem(Text)
+			
+			if Item2 and not Tbl2[Text] then
+				fetchNamesWithRetries(Text, 0, Count)
+			end
+			return Item.status(p2)
+		end)
+		local config = {
+			names = SignalsModule.createComputed(function(p2)
+				-- upvalues: Computed (copy), DataHydrationTypesModule (upval), Text (copy), UserProfileStore (upval), Parent (upval)
+				if Computed(p2) ~= DataHydrationTypesModule.DataStatus.Ready then
+					return nil
+				end
+				if not UserProfileStore then
+					UserProfileStore = require(Parent.UserProfiles.Stores).UserProfileStore
+				end
+				local ProfileByUserId = UserProfileStore.get().getProfileByUserId(Text)
+				
+				return if ProfileByUserId == nil then nil else {
+					combinedName = ProfileByUserId.names.getCombinedName(p2),
+					username = ProfileByUserId.names.getUsername(p2)
+				}
+			end),
+			status = Computed
+		}
+		Tbl1[Text] = config
+		
+		return config
+	else
+		return Entry
+	end
+end
+
+local _ = function(p1)
+	return if p1 == "" then nil else p1
+end
+
 return {
 	resolveField = function(_, Entry, p1, p2, _)
 		-- upvalues: getStatusAndFetch (copy), DataHydrationTypesModule (copy), UserProfileStore (ref), Parent (copy), resolveUserProfileField (copy)
@@ -186,44 +231,42 @@ return {
 			return Entry
 		end
 	end,
-	getAndFetchUserNames = function(p1)
-		-- upvalues: Tbl1 (copy), SignalsModule (copy), getNamesStatusCache (copy), Tbl2 (copy), fetchNamesWithRetries (copy), Count (ref), DataHydrationTypesModule (copy), UserProfileStore (ref), Parent (copy)
-		local Text = tostring(p1)
-		local Entry = Tbl1[Text]
+	getAndFetchUserNames = getAndFetchUserNames,
+	getAndFetchUserNamesByUserIds = function(List)
+		-- upvalues: getAndFetchUserNames (copy), SignalsModule (copy), DataHydrationTypesModule (copy)
+		local t = {}
 		
-		if Entry == nil then
-			local Computed = SignalsModule.createComputed(function(p2)
-				-- upvalues: getNamesStatusCache (upval), Text (copy), Tbl2 (upval), fetchNamesWithRetries (upval), Count (upval)
-				local Item, Item2 = getNamesStatusCache().getItem(Text)
-				
-				if Item2 and not Tbl2[Text] then
-					fetchNamesWithRetries(Text, 0, Count)
-				end
-				return Item.status(p2)
-			end)
-			local config = {
-				names = SignalsModule.createComputed(function(p2)
-					-- upvalues: Computed (copy), DataHydrationTypesModule (upval), Text (copy), UserProfileStore (upval), Parent (upval)
-					if Computed(p2) ~= DataHydrationTypesModule.DataStatus.Ready then
-						return nil
-					end
-					if not UserProfileStore then
-						UserProfileStore = require(Parent.UserProfiles.Stores).UserProfileStore
-					end
-					local ProfileByUserId = UserProfileStore.get().getProfileByUserId(Text)
-					
-					return if ProfileByUserId == nil then nil else {
-						combinedName = ProfileByUserId.names.getCombinedName(p2),
-						username = ProfileByUserId.names.getUsername(p2)
-					}
-				end),
-				status = Computed
-			}
-			Tbl1[Text] = config
-			
-			return config
-		else
-			return Entry
+		for _, value in List do
+			if tonumber(value) ~= nil then
+				t[value] = getAndFetchUserNames(value)
+			end
 		end
+		return SignalsModule.createComputed(function(p1)
+			-- upvalues: DataHydrationTypesModule (upval), t (copy)
+			local Ready = DataHydrationTypesModule.DataStatus.Ready
+			local NamesByUserId = {}
+			
+			for i, value in t do
+				local StatusResult = value.status(p1)
+				
+				if StatusResult == DataHydrationTypesModule.DataStatus.NotReady then
+					Ready = DataHydrationTypesModule.DataStatus.NotReady
+				elseif StatusResult == DataHydrationTypesModule.DataStatus.Failed and Ready == DataHydrationTypesModule.DataStatus.Ready then
+					Ready = DataHydrationTypesModule.DataStatus.Failed
+				end
+				local NamesResult = value.names(p1)
+				
+				if NamesResult then
+					local CombinedName = NamesResult.combinedName
+					local CombinedName1 = if CombinedName == "" then nil else CombinedName
+					local Username = NamesResult.username
+					NamesByUserId[i] = {
+						combinedName = CombinedName1,
+						username = if Username == "" then nil else Username
+					}
+				end
+			end
+			return { status = Ready, namesByUserId = NamesByUserId }
+		end)
 	end
 }

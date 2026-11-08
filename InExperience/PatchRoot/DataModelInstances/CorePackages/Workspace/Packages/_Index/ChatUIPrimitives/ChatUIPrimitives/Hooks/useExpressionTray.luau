@@ -5,12 +5,16 @@ local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(ChatUIPrimitives.Components.ExpressionTray.ExpressionTrayView)
 local UseExpressionTrayControllerModule = require(ChatUIPrimitives.Hooks.useExpressionTrayController)
+local UseInExperienceLocalizationModule = require(ChatUIPrimitives.Hooks.useInExperienceLocalization)
 local UseLayoutModeModule = require(ChatUIPrimitives.Hooks.useLayoutMode)
+local WithPresetDisclaimerModule = require(ChatUIPrimitives.PresetChat.withPresetDisclaimer)
 local GetExpressionCooldownStoreFunction = require(ChatUIPrimitives.getExpressionCooldownStore).getExpressionCooldownStore
 local GetDefaultCooldownKeyModule = require(ChatUIPrimitives.getDefaultCooldownKey)
 local ExpressionCatalogStoreModule = require(ChatUIPrimitives.expressionCatalogStore)
 local _ = require(ChatUIPrimitives.createExpressionCatalogResource)
 local _ = require(ChatUIPrimitives.UniversalMessage.Types)
+local FFlagExpChatPresetGroupFooterModule = require(ChatUIPrimitives.Flags.FFlagExpChatPresetGroupFooter)
+local FFlagExpChatExpressionTrayRecoverFromSendErrorModule = require(ChatUIPrimitives.Flags.FFlagExpChatExpressionTrayRecoverFromSendError)
 local PresetChatCooldownLuaMsRatio = game:DefineFastInt("PresetChatCooldownLuaMs", 10000) / 1000
 local Disabled = SignalsModule.createSignal("disabled")
 local Signal = SignalsModule.createSignal({})
@@ -18,15 +22,15 @@ local Signal1 = SignalsModule.createSignal(nil)
 local t = {}
 
 return function(p1)
-	-- upvalues: UseLayoutModeModule (copy), ExpressionCatalogStoreModule (copy), SignalsReactModule (copy), Disabled (copy), Signal (copy), Signal1 (copy), t (copy), GetExpressionCooldownStoreFunction (copy), UseExpressionTrayControllerModule (copy), ReactModule (copy), PresetChatCooldownLuaMsRatio (copy), GetDefaultCooldownKeyModule (copy)
+	-- upvalues: UseLayoutModeModule (copy), ExpressionCatalogStoreModule (copy), SignalsReactModule (copy), Disabled (copy), Signal (copy), Signal1 (copy), t (copy), FFlagExpChatPresetGroupFooterModule (copy), UseInExperienceLocalizationModule (copy), ReactModule (copy), WithPresetDisclaimerModule (copy), GetExpressionCooldownStoreFunction (copy), UseExpressionTrayControllerModule (copy), PresetChatCooldownLuaMsRatio (copy), GetDefaultCooldownKeyModule (copy), FFlagExpChatExpressionTrayRecoverFromSendErrorModule (copy)
 	local UseLayoutModeModuleResult = UseLayoutModeModule()
 	local CatalogResource = if p1 then p1.catalogResource else nil
 	local ExpressionCatalogStoreModule1 = if p1 == nil or CatalogResource ~= nil then nil else ExpressionCatalogStoreModule
 	local UseSignalStateResult = SignalsReactModule.useSignalState(if ExpressionCatalogStoreModule1 == nil then Disabled else ExpressionCatalogStoreModule1.getStatus)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(if ExpressionCatalogStoreModule1 == nil then Signal else ExpressionCatalogStoreModule1.getCategoryGroups)
 	local UseSignalStateResult2 = SignalsReactModule.useSignalState(if CatalogResource == nil then Signal1 else CatalogResource.getCatalog)
-	local Disabled1 = nil
 	local T = nil
+	local Disabled1 = nil
 	
 	if CatalogResource == nil then
 		Disabled1 = UseSignalStateResult
@@ -35,6 +39,13 @@ return function(p1)
 		Disabled1 = if UseSignalStateResult2 == nil then "disabled" else UseSignalStateResult2.status
 		local CategoryGroups = if UseSignalStateResult2 == nil then nil else UseSignalStateResult2.categoryGroups
 		T = if CategoryGroups == nil then t else CategoryGroups
+	end
+	if FFlagExpChatPresetGroupFooterModule then
+		local UseInExperienceLocalizationModuleResult = UseInExperienceLocalizationModule()
+		T = ReactModule.useMemo(function()
+			-- upvalues: WithPresetDisclaimerModule (upval), T (ref), UseInExperienceLocalizationModuleResult (copy)
+			return WithPresetDisclaimerModule(T, UseInExperienceLocalizationModuleResult)
+		end, { T, UseInExperienceLocalizationModuleResult })
 	end
 	local ExpressionCooldownStore = GetExpressionCooldownStoreFunction(if p1 then p1.cooldownScope else nil)
 	local UseSignalStateResult3 = SignalsReactModule.useSignalState(ExpressionCooldownStore.getCooldownEndsAtByKey)
@@ -86,7 +97,7 @@ return function(p1)
 	local SendExpression = if p1 then p1.sendExpression else nil
 	local CooldownDurationSeconds = if p1 and p1.cooldownDurationSeconds ~= nil then p1.cooldownDurationSeconds else PresetChatCooldownLuaMsRatio
 	local UseResult1 = ReactModule.useCallback(function(p2)
-		-- upvalues: SendExpression (copy), GetDefaultCooldownKeyModule (upval), ExpressionCooldownStore (copy), UseRefResult (copy), CooldownDurationSeconds (copy), CloseFunction (copy)
+		-- upvalues: SendExpression (copy), GetDefaultCooldownKeyModule (upval), ExpressionCooldownStore (copy), UseRefResult (copy), CooldownDurationSeconds (copy), CloseFunction (copy), FFlagExpChatExpressionTrayRecoverFromSendErrorModule (upval)
 		if SendExpression == nil then return end
 		local DefaultCooldownKeyModule = GetDefaultCooldownKeyModule(p2)
 		
@@ -103,11 +114,25 @@ return function(p1)
 		end
 		CloseFunction()
 		task.spawn(function()
-			-- upvalues: SendExpression (upval), p2 (copy), UseRefResult (upval), DefaultCooldownKeyModule (copy), ExpressionCooldownStore (upval)
-			UseRefResult.current = false
-			
-			if not SendExpression(p2) and DefaultCooldownKeyModule ~= nil then
-				ExpressionCooldownStore.clearCooldown(DefaultCooldownKeyModule)
+			-- upvalues: FFlagExpChatExpressionTrayRecoverFromSendErrorModule (upval), SendExpression (upval), p2 (copy), UseRefResult (upval), DefaultCooldownKeyModule (copy), ExpressionCooldownStore (upval)
+			if FFlagExpChatExpressionTrayRecoverFromSendErrorModule then
+				local Success, Result = pcall(SendExpression, p2)
+				UseRefResult.current = false
+				
+				if Success and not Result and DefaultCooldownKeyModule ~= nil then
+					ExpressionCooldownStore.clearCooldown(DefaultCooldownKeyModule)
+				end
+				if not Success then
+					error(Result, 0)
+					
+					return
+				end
+			else
+				UseRefResult.current = false
+				
+				if not SendExpression(p2) and DefaultCooldownKeyModule ~= nil then
+					ExpressionCooldownStore.clearCooldown(DefaultCooldownKeyModule)
+				end
 			end
 		end)
 	end, {

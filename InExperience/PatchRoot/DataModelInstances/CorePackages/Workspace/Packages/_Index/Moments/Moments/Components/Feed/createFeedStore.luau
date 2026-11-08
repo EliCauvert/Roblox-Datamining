@@ -10,7 +10,6 @@ local Analytics = MomentsCommonModule.Analytics
 local MomentsSurfaceLoadManager = MomentsCommonModule.Performance.MomentsSurfaceLoadManager
 local _ = require(script.Parent.FeedTypes)
 local CreatePagerStoreModule = require(Moments.Components.VerticalPager.createPagerStore)
-local FFlagMomentsNonInfiniteScrollEndStateFixesModule = require(Moments.Flags.FFlagMomentsNonInfiniteScrollEndStateFixes)
 local FFlagMomentsLoadMoreKeepsPositionModule = require(Moments.Flags.FFlagMomentsLoadMoreKeepsPosition)
 local FFlagMomentsModeratedMomentPageModule = require(Moments.Flags.FFlagMomentsModeratedMomentPage)
 local CreateSignalFunction = SignalsModule.createSignal
@@ -27,7 +26,7 @@ local function _(p1): boolean
 end
 
 return function(p1, Callback, p2, p3)
-	-- upvalues: CreatePagerStoreModule (copy), FFlagMomentsOptimisticProfilePending (copy), CreatePendingFeedOverlayModule (copy), CreateSignalFunction (copy), FFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), Analytics (copy), config1 (copy), config2 (copy), SignalsExperimentalModule (copy), config (copy), MomentsSurfaceLoadManager (copy), FFlagMomentsLoadMoreKeepsPositionModule (copy), FFlagMomentsModeratedMomentPageModule (copy), isTerminalPage (copy), SignalsModule (copy), GetDeletedMomentsStoreModule (copy)
+	-- upvalues: CreatePagerStoreModule (copy), FFlagMomentsOptimisticProfilePending (copy), CreatePendingFeedOverlayModule (copy), CreateSignalFunction (copy), Analytics (copy), config1 (copy), config2 (copy), SignalsExperimentalModule (copy), config (copy), MomentsSurfaceLoadManager (copy), FFlagMomentsLoadMoreKeepsPositionModule (copy), FFlagMomentsModeratedMomentPageModule (copy), isTerminalPage (copy), SignalsModule (copy), GetDeletedMomentsStoreModule (copy)
 	local IsEndsWithCaughtUp = p1.endsWithCaughtUp == true
 	local PagerStoreModule = CreatePagerStoreModule()
 	local PendingFeedOverlayModule = if FFlagMomentsOptimisticProfilePending and p1.getPendingItems ~= nil then CreatePendingFeedOverlayModule() else nil
@@ -47,12 +46,9 @@ return function(p1, Callback, p2, p3)
 	local t = {}
 	local v2 = p3
 	local Signal5, Signal2_4 = CreateSignalFunction(false)
-	local GetCanLoadMoreBeyondLimit = nil
-	local v3 = nil
-	
-	if FFlagMomentsNonInfiniteScrollEndStateFixesModule then
-		GetCanLoadMoreBeyondLimit, v45 = CreateSignalFunction(false)
-	end
+	local Signal2_5 = nil
+	local Signal6
+	Signal6, Signal2_5 = CreateSignalFunction(false)
 	local Tbl = {}
 	
 	local function _()
@@ -156,7 +152,7 @@ return function(p1, Callback, p2, p3)
 	end
 	
 	local function maybeAppendEndState()
-		-- upvalues: v2 (ref), Signal5 (copy), PagerStoreModule (copy), Tbl (copy), FFlagMomentsNonInfiniteScrollEndStateFixesModule (upval), v3 (ref), Signal3 (copy), Signal2_4 (copy), config1 (upval)
+		-- upvalues: v2 (ref), Signal5 (copy), PagerStoreModule (copy), Tbl (copy), Signal2_5 (ref), Signal3 (copy), Signal2_4 (copy), config1 (upval)
 		if v2 == nil or Signal5(false) then return end
 		local Items = PagerStoreModule.getItems(false)
 		local Count = 0
@@ -190,9 +186,7 @@ return function(p1, Callback, p2, p3)
 			end
 			PagerStoreModule.setItems(List)
 		end
-		if FFlagMomentsNonInfiniteScrollEndStateFixesModule then
-			assert(v3, "end-state fixes require the eligibility signal")(Signal3(false) or #Tbl > 0)
-		end
+		assert(Signal2_5, "end-state fixes require the eligibility signal")(Signal3(false) or #Tbl > 0)
 		Signal2_4(true)
 		PagerStoreModule.addItems({ config1 })
 	end
@@ -293,7 +287,7 @@ return function(p1, Callback, p2, p3)
 	end
 	
 	local function runFetch(IsCountMatch, p5)
-		-- upvalues: Flag1 (ref), Signal3 (copy), Count (ref), Flag (ref), Signal2_3 (copy), Analytics (upval), RecommendationSource (copy), Signal2_1 (copy), commitItems (copy), config (upval), PendingFeedOverlayModule (copy), findMomentIndex (copy), p1 (copy), Signal2 (copy), Status (ref), PagerStoreModule (copy), Loading2 (copy), v2 (ref), p3 (copy), Signal2_4 (copy), FFlagMomentsNonInfiniteScrollEndStateFixesModule (upval), v3 (ref), Tbl (copy), p2 (copy), MomentsSurfaceLoadManager (upval), FFlagMomentsLoadMoreKeepsPositionModule (upval), NextCursor (ref), t (ref), dedupeAndTrack (copy), v1 (ref), Signal2_2 (copy), FFlagMomentsModeratedMomentPageModule (upval), IsEndsWithCaughtUp (copy), appendTerminalPage (copy)
+		-- upvalues: Flag1 (ref), Signal3 (copy), Count (ref), Flag (ref), Signal2_3 (copy), Analytics (upval), RecommendationSource (copy), Signal2_1 (copy), commitItems (copy), config (upval), PendingFeedOverlayModule (copy), findMomentIndex (copy), p1 (copy), Signal2 (copy), Status (ref), PagerStoreModule (copy), Loading2 (copy), v2 (ref), p3 (copy), Signal2_4 (copy), Signal2_5 (ref), Tbl (copy), p2 (copy), MomentsSurfaceLoadManager (upval), FFlagMomentsLoadMoreKeepsPositionModule (upval), NextCursor (ref), t (ref), dedupeAndTrack (copy), v1 (ref), Signal2_2 (copy), FFlagMomentsModeratedMomentPageModule (upval), IsEndsWithCaughtUp (copy), appendTerminalPage (copy)
 		if Flag1 then return end
 		if not IsCountMatch and not Signal3(false) then return end
 		Count += 1
@@ -334,10 +328,7 @@ return function(p1, Callback, p2, p3)
 			Loading2(LoadingMore)
 			v2 = p3
 			Signal2_4(false)
-			
-			if FFlagMomentsNonInfiniteScrollEndStateFixesModule then
-				assert(v3, "end-state fixes require the eligibility signal")(false)
-			end
+			assert(Signal2_5, "end-state fixes require the eligibility signal")(false)
 			table.clear(Tbl)
 			
 			if p2 then
@@ -373,7 +364,7 @@ return function(p1, Callback, p2, p3)
 		end
 		local NextCursor1 = if IsCountMatch then nil else NextCursor
 		task.spawn(function()
-			-- upvalues: p1 (upval), NextCursor1 (copy), Flag1 (upval), Count1 (copy), Count (upval), Flag (upval), p2 (upval), IsCountMatch (copy), SessionGeneration (ref), MomentsSurfaceLoadManager (upval), t (upval), dedupeAndTrack (upval), commitItems (upval), PendingFeedOverlayModule (upval), findMomentIndex (upval), Signal2 (upval), PagerStoreModule (upval), NextCursor (upval), v1 (upval), Signal2_2 (upval), Status (upval), Loading2 (upval), Analytics (upval), RecommendationSource (upval), FFlagMomentsModeratedMomentPageModule (upval), FFlagMomentsNonInfiniteScrollEndStateFixesModule (upval), p3 (upval), IsEndsWithCaughtUp (upval), appendTerminalPage (upval), Signal2_1 (upval), Signal2_3 (upval)
+			-- upvalues: p1 (upval), NextCursor1 (copy), Flag1 (upval), Count1 (copy), Count (upval), Flag (upval), p2 (upval), IsCountMatch (copy), SessionGeneration (ref), MomentsSurfaceLoadManager (upval), t (upval), dedupeAndTrack (upval), commitItems (upval), PendingFeedOverlayModule (upval), findMomentIndex (upval), Signal2 (upval), PagerStoreModule (upval), NextCursor (upval), v1 (upval), Signal2_2 (upval), Status (upval), Loading2 (upval), Analytics (upval), RecommendationSource (upval), FFlagMomentsModeratedMomentPageModule (upval), p3 (upval), IsEndsWithCaughtUp (upval), appendTerminalPage (upval), Signal2_1 (upval), Signal2_3 (upval)
 			local Success, Result = pcall(p1.fetchAsync, NextCursor1)
 			
 			if Flag1 or Count1 ~= Count then return end
@@ -395,23 +386,23 @@ return function(p1, Callback, p2, p3)
 					end
 					Signal2_1(if Success then "Malformed feed batch" else tostring(Result))
 					Status = "Failed"
-					local LoadingMore1: string = Status
+					local LoadingMore: string = Status
 					
 					if PendingFeedOverlayModule ~= nil then
-						local Count2 = 0
+						local Count1 = 0
 						
 						for _, value2 in PagerStoreModule.getItems(false) do
 							if value2.kind ~= "skeleton" and (value2.kind ~= "endState" and value2.kind ~= "caughtUp") then
-								Count2 += 1
+								Count1 += 1
 							end
 						end
-						if Count2 > 0 then
-							LoadingMore1 = if Status == "LoadingMore" then "LoadingMore" else "Loaded"
+						if Count1 > 0 then
+							LoadingMore = if Status == "LoadingMore" then "LoadingMore" else "Loaded"
 						elseif Status == "Loaded" then
-							LoadingMore1 = "Empty"
+							LoadingMore = "Empty"
 						end
 					end
-					Loading2(LoadingMore1)
+					Loading2(LoadingMore)
 					Analytics.reportMomentsFeedState("failed", RecommendationSource, if Success then "malformedResponse" else "requestFailed")
 					
 					if IsSessionGenerationMatch then
@@ -448,49 +439,49 @@ return function(p1, Callback, p2, p3)
 					Analytics.reportMomentsFeedLoadMore("failed", RecommendationSource, if Success then "malformedResponse" else "requestFailed")
 				end
 			else
-				local v4 = nil
+				local v3 = nil
 				if IsCountMatch then
 					t = {}
-					v4 = dedupeAndTrack(Result1.items)
-					commitItems(v4)
+					v3 = dedupeAndTrack(Result1.items)
+					commitItems(v3)
 					
 					if PendingFeedOverlayModule ~= nil then
 						Signal2((findMomentIndex(p1.initialMomentId)))
-						local v5 = findMomentIndex(Result1.initialMomentId)
+						local v4 = findMomentIndex(Result1.initialMomentId)
 						
-						if v5 ~= nil then
-							PagerStoreModule.goToItem(v5)
+						if v4 ~= nil then
+							PagerStoreModule.goToItem(v4)
 						end
 					end
 				else
-					v4 = dedupeAndTrack(Result1.items)
+					v3 = dedupeAndTrack(Result1.items)
 					local Copy = table.clone(PagerStoreModule.getItems(false))
 					local Entry = Copy[#Copy]
 					
 					if Entry ~= nil and Entry.kind == "skeleton" then
 						table.remove(Copy)
 					end
-					for _, value in v4 do
+					for _, value in v3 do
 						table.insert(Copy, value)
 					end
 					commitItems(Copy)
 				end
 				NextCursor = Result1.nextCursor
-				v1 = if IsCountMatch or #v4 ~= 0 then 0 else v1 + 1
+				v1 = if IsCountMatch or #v3 ~= 0 then 0 else v1 + 1
 				Signal2_2(Result1.nextCursor ~= nil and v1 < 3)
 				local Empty: string = if PagerStoreModule.getCount(false) == 0 then "Empty" else "Loaded"
 				Status = Empty
 				local LoadingMore: string = Status
 				
 				if PendingFeedOverlayModule ~= nil then
-					local Count1 = 0
+					local Count = 0
 					
 					for _, value1 in PagerStoreModule.getItems(false) do
 						if value1.kind ~= "skeleton" and (value1.kind ~= "endState" and value1.kind ~= "caughtUp") then
-							Count1 += 1
+							Count += 1
 						end
 					end
-					if Count1 > 0 then
+					if Count > 0 then
 						LoadingMore = if Status == "LoadingMore" then "LoadingMore" else "Loaded"
 					elseif Status == "Loaded" then
 						LoadingMore = "Empty"
@@ -515,11 +506,6 @@ return function(p1, Callback, p2, p3)
 				if Result1.onAccepted ~= nil then
 					Result1.onAccepted()
 				end
-				if not FFlagMomentsNonInfiniteScrollEndStateFixesModule then
-					appendTerminalPage()
-					
-					return
-				end
 				if p3 ~= nil or IsEndsWithCaughtUp then
 					appendTerminalPage()
 					
@@ -535,11 +521,9 @@ return function(p1, Callback, p2, p3)
 	end
 	
 	local function loadMore()
-		-- upvalues: PendingFeedOverlayModule (copy), Count (ref), Signal1 (copy), FFlagMomentsNonInfiniteScrollEndStateFixesModule (upval), p3 (copy), Signal5 (copy), Flag (ref), Signal4 (copy), Flag1 (ref), Signal3 (copy), Signal2_3 (copy), Analytics (upval), RecommendationSource (copy), FFlagMomentsLoadMoreKeepsPositionModule (upval), PagerStoreModule (copy), config (upval), Status (ref), isTerminalPage (upval), Loading2 (copy), NextCursor (ref), p1 (copy), p2 (copy), MomentsSurfaceLoadManager (upval), t (ref), dedupeAndTrack (copy), commitItems (copy), findMomentIndex (copy), Signal2 (copy), v1 (ref), Signal2_2 (copy), FFlagMomentsModeratedMomentPageModule (upval), IsEndsWithCaughtUp (copy), appendTerminalPage (copy), Signal2_1 (copy)
+		-- upvalues: PendingFeedOverlayModule (copy), Count (ref), Signal1 (copy), p3 (copy), Signal5 (copy), Flag (ref), Signal4 (copy), Flag1 (ref), Signal3 (copy), Signal2_3 (copy), Analytics (upval), RecommendationSource (copy), FFlagMomentsLoadMoreKeepsPositionModule (upval), PagerStoreModule (copy), config (upval), Status (ref), isTerminalPage (upval), Loading2 (copy), NextCursor (ref), p1 (copy), p2 (copy), MomentsSurfaceLoadManager (upval), t (ref), dedupeAndTrack (copy), commitItems (copy), findMomentIndex (copy), Signal2 (copy), v1 (ref), Signal2_2 (copy), FFlagMomentsModeratedMomentPageModule (upval), IsEndsWithCaughtUp (copy), appendTerminalPage (copy), Signal2_1 (copy)
 		if PendingFeedOverlayModule ~= nil and (Count == 0 or Signal1(false) ~= nil) then return end
-		if FFlagMomentsNonInfiniteScrollEndStateFixesModule then
-			if p3 ~= nil and Signal5(false) then return end
-		elseif Signal5(false) then return end
+		if p3 ~= nil and Signal5(false) then return end
 		if Flag or Signal4(false) then return end
 		if Flag1 then return end
 		if not Signal3(false) then return end
@@ -547,7 +531,7 @@ return function(p1, Callback, p2, p3)
 		local Count1: number = Count
 		Flag = true
 		Signal2_3(false)
-		local v6 = nil
+		local v5 = nil
 		Analytics.reportMomentsFeedLoadMore("attempted", RecommendationSource)
 		PagerStoreModule.addItems({ config })
 		Status = "LoadingMore"
@@ -569,14 +553,14 @@ return function(p1, Callback, p2, p3)
 		end
 		Loading2(LoadingMore)
 		local NextCursor1 = NextCursor
-		local v7 = false
+		local v6 = false
 		task.spawn(function()
-			-- upvalues: p1 (upval), NextCursor1 (copy), Flag1 (upval), Count1 (copy), Count (upval), Flag (upval), p2 (upval), v7 (copy), v6 (ref), MomentsSurfaceLoadManager (upval), t (upval), dedupeAndTrack (upval), commitItems (upval), PendingFeedOverlayModule (upval), findMomentIndex (upval), Signal2 (upval), PagerStoreModule (upval), NextCursor (upval), v1 (upval), Signal2_2 (upval), Status (upval), Loading2 (upval), Analytics (upval), RecommendationSource (upval), FFlagMomentsModeratedMomentPageModule (upval), FFlagMomentsNonInfiniteScrollEndStateFixesModule (upval), p3 (upval), IsEndsWithCaughtUp (upval), appendTerminalPage (upval), Signal2_1 (upval), Signal2_3 (upval)
+			-- upvalues: p1 (upval), NextCursor1 (copy), Flag1 (upval), Count1 (copy), Count (upval), Flag (upval), p2 (upval), v6 (copy), v5 (ref), MomentsSurfaceLoadManager (upval), t (upval), dedupeAndTrack (upval), commitItems (upval), PendingFeedOverlayModule (upval), findMomentIndex (upval), Signal2 (upval), PagerStoreModule (upval), NextCursor (upval), v1 (upval), Signal2_2 (upval), Status (upval), Loading2 (upval), Analytics (upval), RecommendationSource (upval), FFlagMomentsModeratedMomentPageModule (upval), p3 (upval), IsEndsWithCaughtUp (upval), appendTerminalPage (upval), Signal2_1 (upval), Signal2_3 (upval)
 			local Success, Result = pcall(p1.fetchAsync, NextCursor1)
 			
 			if Flag1 or Count1 ~= Count then return end
 			Flag = false
-			local IsSessionGenerationMatch: boolean = p2 and (v7 and (v6 ~= nil and MomentsSurfaceLoadManager.getSessionGeneration() == v6))
+			local IsSessionGenerationMatch: boolean = p2 and (v6 and (v5 ~= nil and MomentsSurfaceLoadManager.getSessionGeneration() == v5))
 			
 			if IsSessionGenerationMatch then
 				MomentsSurfaceLoadManager.primaryDataResponseReceived()
@@ -584,7 +568,7 @@ return function(p1, Callback, p2, p3)
 			local Result1 = if Success and type(Result) == "table" and type(Result.items) == "table" then Result else nil
 			
 			if Result1 == nil then
-				if v7 then
+				if v6 then
 					if PendingFeedOverlayModule == nil then
 						PagerStoreModule.reset()
 					else
@@ -593,23 +577,23 @@ return function(p1, Callback, p2, p3)
 					end
 					Signal2_1(if Success then "Malformed feed batch" else tostring(Result))
 					Status = "Failed"
-					local LoadingMore1: string = Status
+					local LoadingMore: string = Status
 					
 					if PendingFeedOverlayModule ~= nil then
-						local Count2 = 0
+						local Count1 = 0
 						
 						for _, value2 in PagerStoreModule.getItems(false) do
 							if value2.kind ~= "skeleton" and (value2.kind ~= "endState" and value2.kind ~= "caughtUp") then
-								Count2 += 1
+								Count1 += 1
 							end
 						end
-						if Count2 > 0 then
-							LoadingMore1 = if Status == "LoadingMore" then "LoadingMore" else "Loaded"
+						if Count1 > 0 then
+							LoadingMore = if Status == "LoadingMore" then "LoadingMore" else "Loaded"
 						elseif Status == "Loaded" then
-							LoadingMore1 = "Empty"
+							LoadingMore = "Empty"
 						end
 					end
-					Loading2(LoadingMore1)
+					Loading2(LoadingMore)
 					Analytics.reportMomentsFeedState("failed", RecommendationSource, if Success then "malformedResponse" else "requestFailed")
 					
 					if IsSessionGenerationMatch then
@@ -646,49 +630,49 @@ return function(p1, Callback, p2, p3)
 					Analytics.reportMomentsFeedLoadMore("failed", RecommendationSource, if Success then "malformedResponse" else "requestFailed")
 				end
 			else
-				local v8 = nil
-				if v7 then
+				local v7 = nil
+				if v6 then
 					t = {}
-					v8 = dedupeAndTrack(Result1.items)
-					commitItems(v8)
+					v7 = dedupeAndTrack(Result1.items)
+					commitItems(v7)
 					
 					if PendingFeedOverlayModule ~= nil then
 						Signal2((findMomentIndex(p1.initialMomentId)))
-						local v9 = findMomentIndex(Result1.initialMomentId)
+						local v8 = findMomentIndex(Result1.initialMomentId)
 						
-						if v9 ~= nil then
-							PagerStoreModule.goToItem(v9)
+						if v8 ~= nil then
+							PagerStoreModule.goToItem(v8)
 						end
 					end
 				else
-					v8 = dedupeAndTrack(Result1.items)
+					v7 = dedupeAndTrack(Result1.items)
 					local Copy = table.clone(PagerStoreModule.getItems(false))
 					local Entry = Copy[#Copy]
 					
 					if Entry ~= nil and Entry.kind == "skeleton" then
 						table.remove(Copy)
 					end
-					for _, value in v8 do
+					for _, value in v7 do
 						table.insert(Copy, value)
 					end
 					commitItems(Copy)
 				end
 				NextCursor = Result1.nextCursor
-				v1 = if v7 or #v8 ~= 0 then 0 else v1 + 1
+				v1 = if v6 or #v7 ~= 0 then 0 else v1 + 1
 				Signal2_2(Result1.nextCursor ~= nil and v1 < 3)
 				local Empty: string = if PagerStoreModule.getCount(false) == 0 then "Empty" else "Loaded"
 				Status = Empty
 				local LoadingMore: string = Status
 				
 				if PendingFeedOverlayModule ~= nil then
-					local Count1 = 0
+					local Count = 0
 					
 					for _, value1 in PagerStoreModule.getItems(false) do
 						if value1.kind ~= "skeleton" and (value1.kind ~= "endState" and value1.kind ~= "caughtUp") then
-							Count1 += 1
+							Count += 1
 						end
 					end
-					if Count1 > 0 then
+					if Count > 0 then
 						LoadingMore = if Status == "LoadingMore" then "LoadingMore" else "Loaded"
 					elseif Status == "Loaded" then
 						LoadingMore = "Empty"
@@ -696,7 +680,7 @@ return function(p1, Callback, p2, p3)
 				end
 				Loading2(LoadingMore)
 				
-				if v7 then
+				if v6 then
 					Analytics.reportMomentsFeedState(if Empty == "Loaded" then "loaded" else "empty", RecommendationSource, nil)
 				end
 				if IsSessionGenerationMatch then
@@ -713,11 +697,6 @@ return function(p1, Callback, p2, p3)
 				if Result1.onAccepted ~= nil then
 					Result1.onAccepted()
 				end
-				if not FFlagMomentsNonInfiniteScrollEndStateFixesModule then
-					appendTerminalPage()
-					
-					return
-				end
 				if p3 ~= nil or IsEndsWithCaughtUp then
 					appendTerminalPage()
 					
@@ -728,7 +707,7 @@ return function(p1, Callback, p2, p3)
 	end
 	
 	local function loadBeyondLimit()
-		-- upvalues: Flag1 (ref), p3 (copy), Signal5 (copy), Signal3 (copy), Tbl (copy), PagerStoreModule (copy), FFlagMomentsLoadMoreKeepsPositionModule (upval), v2 (ref), Signal2_4 (copy), appendTerminalPage (copy), config (upval), Count (ref), Flag (ref), Signal2_3 (copy), Analytics (upval), RecommendationSource (copy), Status (ref), PendingFeedOverlayModule (copy), isTerminalPage (upval), Loading2 (copy), NextCursor (ref), p1 (copy), p2 (copy), MomentsSurfaceLoadManager (upval), t (ref), dedupeAndTrack (copy), commitItems (copy), findMomentIndex (copy), Signal2 (copy), v1 (ref), Signal2_2 (copy), FFlagMomentsModeratedMomentPageModule (upval), FFlagMomentsNonInfiniteScrollEndStateFixesModule (upval), IsEndsWithCaughtUp (copy), Signal2_1 (copy)
+		-- upvalues: Flag1 (ref), p3 (copy), Signal5 (copy), Signal3 (copy), Tbl (copy), PagerStoreModule (copy), FFlagMomentsLoadMoreKeepsPositionModule (upval), v2 (ref), Signal2_4 (copy), appendTerminalPage (copy), config (upval), Count (ref), Flag (ref), Signal2_3 (copy), Analytics (upval), RecommendationSource (copy), Status (ref), PendingFeedOverlayModule (copy), isTerminalPage (upval), Loading2 (copy), NextCursor (ref), p1 (copy), p2 (copy), MomentsSurfaceLoadManager (upval), t (ref), dedupeAndTrack (copy), commitItems (copy), findMomentIndex (copy), Signal2 (copy), v1 (ref), Signal2_2 (copy), FFlagMomentsModeratedMomentPageModule (upval), IsEndsWithCaughtUp (copy), Signal2_1 (copy)
 		if Flag1 or p3 == nil or not Signal5(false) then return end
 		if not Signal3(false) and #Tbl == 0 then return end
 		local Items = PagerStoreModule.getItems(false)
@@ -819,14 +798,14 @@ return function(p1, Callback, p2, p3)
 		end
 		Loading2(LoadingMore)
 		local NextCursor1 = NextCursor
-		local v10 = false
+		local v9 = false
 		task.spawn(function()
-			-- upvalues: p1 (upval), NextCursor1 (copy), Flag1 (upval), Count3 (copy), Count (upval), Flag (upval), p2 (upval), v10 (copy), SessionGeneration (ref), MomentsSurfaceLoadManager (upval), t (upval), dedupeAndTrack (upval), commitItems (upval), PendingFeedOverlayModule (upval), findMomentIndex (upval), Signal2 (upval), PagerStoreModule (upval), NextCursor (upval), v1 (upval), Signal2_2 (upval), Status (upval), Loading2 (upval), Analytics (upval), RecommendationSource (upval), FFlagMomentsModeratedMomentPageModule (upval), FFlagMomentsNonInfiniteScrollEndStateFixesModule (upval), p3 (upval), IsEndsWithCaughtUp (upval), appendTerminalPage (upval), Signal2_1 (upval), Signal2_3 (upval)
+			-- upvalues: p1 (upval), NextCursor1 (copy), Flag1 (upval), Count3 (copy), Count (upval), Flag (upval), p2 (upval), v9 (copy), SessionGeneration (ref), MomentsSurfaceLoadManager (upval), t (upval), dedupeAndTrack (upval), commitItems (upval), PendingFeedOverlayModule (upval), findMomentIndex (upval), Signal2 (upval), PagerStoreModule (upval), NextCursor (upval), v1 (upval), Signal2_2 (upval), Status (upval), Loading2 (upval), Analytics (upval), RecommendationSource (upval), FFlagMomentsModeratedMomentPageModule (upval), p3 (upval), IsEndsWithCaughtUp (upval), appendTerminalPage (upval), Signal2_1 (upval), Signal2_3 (upval)
 			local Success, Result = pcall(p1.fetchAsync, NextCursor1)
 			
 			if Flag1 or Count3 ~= Count then return end
 			Flag = false
-			local IsSessionGenerationMatch: boolean = p2 and (v10 and (SessionGeneration ~= nil and MomentsSurfaceLoadManager.getSessionGeneration() == SessionGeneration))
+			local IsSessionGenerationMatch: boolean = p2 and (v9 and (SessionGeneration ~= nil and MomentsSurfaceLoadManager.getSessionGeneration() == SessionGeneration))
 			
 			if IsSessionGenerationMatch then
 				MomentsSurfaceLoadManager.primaryDataResponseReceived()
@@ -834,7 +813,7 @@ return function(p1, Callback, p2, p3)
 			local Result1 = if Success and type(Result) == "table" and type(Result.items) == "table" then Result else nil
 			
 			if Result1 == nil then
-				if v10 then
+				if v9 then
 					if PendingFeedOverlayModule == nil then
 						PagerStoreModule.reset()
 					else
@@ -843,23 +822,23 @@ return function(p1, Callback, p2, p3)
 					end
 					Signal2_1(if Success then "Malformed feed batch" else tostring(Result))
 					Status = "Failed"
-					local LoadingMore1: string = Status
+					local LoadingMore: string = Status
 					
 					if PendingFeedOverlayModule ~= nil then
-						local Count2 = 0
+						local Count1 = 0
 						
 						for _, value2 in PagerStoreModule.getItems(false) do
 							if value2.kind ~= "skeleton" and (value2.kind ~= "endState" and value2.kind ~= "caughtUp") then
-								Count2 += 1
+								Count1 += 1
 							end
 						end
-						if Count2 > 0 then
-							LoadingMore1 = if Status == "LoadingMore" then "LoadingMore" else "Loaded"
+						if Count1 > 0 then
+							LoadingMore = if Status == "LoadingMore" then "LoadingMore" else "Loaded"
 						elseif Status == "Loaded" then
-							LoadingMore1 = "Empty"
+							LoadingMore = "Empty"
 						end
 					end
-					Loading2(LoadingMore1)
+					Loading2(LoadingMore)
 					Analytics.reportMomentsFeedState("failed", RecommendationSource, if Success then "malformedResponse" else "requestFailed")
 					
 					if IsSessionGenerationMatch then
@@ -896,49 +875,49 @@ return function(p1, Callback, p2, p3)
 					Analytics.reportMomentsFeedLoadMore("failed", RecommendationSource, if Success then "malformedResponse" else "requestFailed")
 				end
 			else
-				local v11 = nil
-				if v10 then
+				local v10 = nil
+				if v9 then
 					t = {}
-					v11 = dedupeAndTrack(Result1.items)
-					commitItems(v11)
+					v10 = dedupeAndTrack(Result1.items)
+					commitItems(v10)
 					
 					if PendingFeedOverlayModule ~= nil then
 						Signal2((findMomentIndex(p1.initialMomentId)))
-						local v12 = findMomentIndex(Result1.initialMomentId)
+						local v11 = findMomentIndex(Result1.initialMomentId)
 						
-						if v12 ~= nil then
-							PagerStoreModule.goToItem(v12)
+						if v11 ~= nil then
+							PagerStoreModule.goToItem(v11)
 						end
 					end
 				else
-					v11 = dedupeAndTrack(Result1.items)
+					v10 = dedupeAndTrack(Result1.items)
 					local Copy = table.clone(PagerStoreModule.getItems(false))
 					local Entry = Copy[#Copy]
 					
 					if Entry ~= nil and Entry.kind == "skeleton" then
 						table.remove(Copy)
 					end
-					for _, value in v11 do
+					for _, value in v10 do
 						table.insert(Copy, value)
 					end
 					commitItems(Copy)
 				end
 				NextCursor = Result1.nextCursor
-				v1 = if v10 or #v11 ~= 0 then 0 else v1 + 1
+				v1 = if v9 or #v10 ~= 0 then 0 else v1 + 1
 				Signal2_2(Result1.nextCursor ~= nil and v1 < 3)
 				local Empty: string = if PagerStoreModule.getCount(false) == 0 then "Empty" else "Loaded"
 				Status = Empty
 				local LoadingMore: string = Status
 				
 				if PendingFeedOverlayModule ~= nil then
-					local Count1 = 0
+					local Count = 0
 					
 					for _, value1 in PagerStoreModule.getItems(false) do
 						if value1.kind ~= "skeleton" and (value1.kind ~= "endState" and value1.kind ~= "caughtUp") then
-							Count1 += 1
+							Count += 1
 						end
 					end
-					if Count1 > 0 then
+					if Count > 0 then
 						LoadingMore = if Status == "LoadingMore" then "LoadingMore" else "Loaded"
 					elseif Status == "Loaded" then
 						LoadingMore = "Empty"
@@ -946,7 +925,7 @@ return function(p1, Callback, p2, p3)
 				end
 				Loading2(LoadingMore)
 				
-				if v10 then
+				if v9 then
 					Analytics.reportMomentsFeedState(if Empty == "Loaded" then "loaded" else "empty", RecommendationSource, nil)
 				end
 				if IsSessionGenerationMatch then
@@ -962,11 +941,6 @@ return function(p1, Callback, p2, p3)
 				end
 				if Result1.onAccepted ~= nil then
 					Result1.onAccepted()
-				end
-				if not FFlagMomentsNonInfiniteScrollEndStateFixesModule then
-					appendTerminalPage()
-					
-					return
 				end
 				if p3 ~= nil or IsEndsWithCaughtUp then
 					appendTerminalPage()
@@ -1094,7 +1068,7 @@ return function(p1, Callback, p2, p3)
 		getHasMore = Signal3,
 		getLoadMoreFailed = Signal4,
 		getAtScrollLimit = Signal5,
-		getCanLoadMoreBeyondLimit = GetCanLoadMoreBeyondLimit,
+		getCanLoadMoreBeyondLimit = Signal6,
 		loadInitial = loadInitial,
 		loadMore = loadMore,
 		loadBeyondLimit = loadBeyondLimit,

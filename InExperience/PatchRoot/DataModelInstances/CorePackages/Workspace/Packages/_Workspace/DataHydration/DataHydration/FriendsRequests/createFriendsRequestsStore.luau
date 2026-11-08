@@ -7,6 +7,7 @@ local GetLocalPlayerUserIdFunction = require(DataHydration.DataHydrationUtils).g
 local MergeListsWithoutDuplicatesFunction = require(DataHydration.DataHydrationUtils).mergeListsWithoutDuplicates
 local _ = require(Parent.Signals)
 local LocalUserIdStore = require(Parent.LocalUserIdStore).LocalUserIdStore
+local FFlagShowRequestsInCarouselForAllUsers = require(Parent.SharedFlags).FFlagShowRequestsInCarouselForAllUsers
 local RequestsModule = require(script.Parent.Requests)
 local _ = require(script.Parent.FriendsRequestsStoreTypes)
 local FriendsStoreModule = require(DataHydration.Friends.FriendsStore)
@@ -111,7 +112,7 @@ local _ = function(p4)
 end
 
 return function()
-	-- upvalues: CreateDataCacheModule (copy), FriendsRequestsCacheTtlSec (copy), CreateDataResolverModule (copy), RequestsModule (copy), FriendsRequestsPageSize (copy), normalizeGetFriendRequestsResponse (copy), updateFriendshipStatusesForPage (copy), mergeFriendsRequestsPage (copy), LocalUserIdStore (copy), GetLocalPlayerUserIdFunction (copy), DataStatus (copy), FriendsStoreModule (copy)
+	-- upvalues: CreateDataCacheModule (copy), FriendsRequestsCacheTtlSec (copy), CreateDataResolverModule (copy), RequestsModule (copy), FriendsRequestsPageSize (copy), normalizeGetFriendRequestsResponse (copy), updateFriendshipStatusesForPage (copy), mergeFriendsRequestsPage (copy), LocalUserIdStore (copy), GetLocalPlayerUserIdFunction (copy), DataStatus (copy), FFlagShowRequestsInCarouselForAllUsers (copy), FriendsStoreModule (copy)
 	local DataCacheModule = CreateDataCacheModule(if FriendsRequestsCacheTtlSec > 0 then FriendsRequestsCacheTtlSec else 1e999)
 	local DataCacheModule1 = CreateDataCacheModule()
 	local DataCacheModule2 = CreateDataCacheModule()
@@ -300,7 +301,7 @@ return function()
 			end
 		end,
 		appendNewUserId = function(p4)
-			-- upvalues: LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), DataResolverModule (copy), DataCacheModule (copy), FriendsStoreModule (upval)
+			-- upvalues: LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), DataResolverModule (copy), FFlagShowRequestsInCarouselForAllUsers (upval), v1 (ref), Flag (ref), DataCacheModule (copy), FriendsStoreModule (upval)
 			local Text = if p4 == nil then nil else tostring(p4)
 			
 			if not Text then return end
@@ -317,11 +318,28 @@ return function()
 			local config = { isUnseen = true, id = Text }
 			
 			if DataResult == nil then
-				DataCacheModule.replaceItem(CurrentUserId1, {
-					nextPageCursor = nil,
-					hasMore = false,
-					requests = { config }
-				})
+				if FFlagShowRequestsInCarouselForAllUsers then
+					local CurrentUserId2 = LocalUserIdStore.getCurrentUserId(false)
+					local CurrentUserId21 = nil
+					
+					if CurrentUserId2 == "" then
+						local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
+						CurrentUserId21 = if LocalPlayerUserId then tostring(LocalPlayerUserId) else ""
+					else
+						CurrentUserId21 = CurrentUserId2
+					end
+					if not DataResolverModule.isRequestInQueueOrInFlight(CurrentUserId21) then
+						v1 = nil
+						Flag = true
+						DataResolverModule.fetchItem(CurrentUserId21)
+					end
+				else
+					DataCacheModule.replaceItem(CurrentUserId1, {
+						nextPageCursor = nil,
+						hasMore = false,
+						requests = { config }
+					})
+				end
 			else
 				local Requests = { config }
 				

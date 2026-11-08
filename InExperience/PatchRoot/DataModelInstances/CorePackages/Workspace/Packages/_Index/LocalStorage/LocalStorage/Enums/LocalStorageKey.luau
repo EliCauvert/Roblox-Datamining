@@ -36,5 +36,6 @@
 	MeTabBadgeSessionCount = "MeTabBadgeSessionCount",
 	AppFirstLaunchTimestamps = "AppFirstLaunchTimestamps",
 	LuaAppRootUnmountRecord = "LuaAppRootUnmountRecord",
+	LuaAppRootErrorLastAutoRestart = "LuaAppRootErrorLastAutoRestart",
 	FirstTimePurchaseConsentAcknowledged = "FirstTimePurchaseConsentAcknowledged"
 }

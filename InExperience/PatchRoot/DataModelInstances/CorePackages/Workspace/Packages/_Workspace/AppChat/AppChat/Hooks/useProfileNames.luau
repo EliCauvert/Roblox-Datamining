@@ -5,7 +5,9 @@ local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local DataStatus = DataHydrationModule.DataStatus
 local GetAndFetchUserNamesFunction = DataHydrationModule.UserProfile.getAndFetchUserNames
+local GetAndFetchUserNamesByUserIdsFunction = DataHydrationModule.UserProfile.getAndFetchUserNamesByUserIds
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local FFlagHomeFriendNamesUseUserProfileHydration = require(Parent.SharedFlags).FFlagHomeFriendNamesUseUserProfileHydration
 local config = { status = DataStatus.Ready, namesByUserId = {} }
 
 local function _(p1)
@@ -13,13 +15,16 @@ local function _(p1)
 end
 
 return function(p1)
-	-- upvalues: CryoModule (copy), ReactModule (copy), SignalsModule (copy), config (copy), GetAndFetchUserNamesFunction (copy), DataStatus (copy), UseSignalStateFunction (copy)
+	-- upvalues: CryoModule (copy), ReactModule (copy), FFlagHomeFriendNamesUseUserProfileHydration (copy), GetAndFetchUserNamesByUserIdsFunction (copy), SignalsModule (copy), config (copy), GetAndFetchUserNamesFunction (copy), DataStatus (copy), UseSignalStateFunction (copy)
 	local Joined = table.concat(CryoModule.List.filter(p1, function(p2): boolean
 		return tonumber(p2) ~= nil
 	end), ",")
 	
 	return UseSignalStateFunction((ReactModule.useMemo(function()
-		-- upvalues: Joined (copy), SignalsModule (upval), config (upval), GetAndFetchUserNamesFunction (upval), DataStatus (upval)
+		-- upvalues: FFlagHomeFriendNamesUseUserProfileHydration (upval), GetAndFetchUserNamesByUserIdsFunction (upval), Joined (copy), SignalsModule (upval), config (upval), GetAndFetchUserNamesFunction (upval), DataStatus (upval)
+		if FFlagHomeFriendNamesUseUserProfileHydration then
+			return GetAndFetchUserNamesByUserIdsFunction(string.split(Joined, ","))
+		end
 		if Joined == "" then
 			return SignalsModule.createComputed(function()
 				-- upvalues: config (upval)

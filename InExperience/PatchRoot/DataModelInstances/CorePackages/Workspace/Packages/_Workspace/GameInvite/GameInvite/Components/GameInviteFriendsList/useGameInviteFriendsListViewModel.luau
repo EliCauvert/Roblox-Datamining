@@ -87,7 +87,7 @@ return function(p1)
 	if FFlagGameInviteInExpRefetchOnPresenceEventModule then
 		UseRefetchOnlineFriendsOnPresenceEventModule(FriendsById)
 	end
-	local UseGameInviteJoinCardModuleResult = if FFlagGameInviteInExpJoinCtaModule then UseGameInviteJoinCardModule() else nil
+	local UseGameInviteJoinCardModuleResult = if FFlagGameInviteInExpJoinCtaModule then UseGameInviteJoinCardModule(tostring(game.GameId), game.JobId) else nil
 	local UseJoinCtaConfigResult = if FFlagGameInviteInExpJoinCtaModule then useJoinCtaConfig(FriendsById, UseContextResult1, UseGameInviteJoinCardModuleResult.open) else nil
 	local FetchMoreFriendsFunction = UseContextResult.fetchMoreFriends
 	local UseResult = ReactModule.useCallback(function()

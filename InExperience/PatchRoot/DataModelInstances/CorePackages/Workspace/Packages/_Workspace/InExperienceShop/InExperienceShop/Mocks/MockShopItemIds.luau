@@ -227,8 +227,10 @@ local config = {
 		}
 	},
 	metadata = {
+		notificationFreeTrialTopBarChip = "false",
 		inExperienceGlobalIconEnabled = not require(InExperienceShop.Flags.FFlagInExperienceShopExpectStringMetadataValues) or "true"
-	}
+	},
+	notificationSettings = { { name = "FreeTrialTopBarChip", isEnabled = false } }
 }
 
 return {

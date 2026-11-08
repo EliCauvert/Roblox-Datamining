@@ -10,5 +10,6 @@
 	playerTileImpressions = "playerTileImpressions",
 	promptImpressions = "promptImpressions",
 	safetyResourceBannerImpressions = "safetyResourceBannerImpressions",
-	buyRobuxImpressions = "buyRobuxImpressions"
+	buyRobuxImpressions = "buyRobuxImpressions",
+	socialProofTextImpressions = "socialProofTextImpressions"
 }

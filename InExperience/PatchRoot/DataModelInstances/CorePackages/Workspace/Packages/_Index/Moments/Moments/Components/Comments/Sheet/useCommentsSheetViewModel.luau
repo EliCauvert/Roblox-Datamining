@@ -13,13 +13,15 @@ local GetCommentCollectionStoreModule = require(Moments.Components.Comments.GetC
 local GetCommentsPanelStateModule = require(Moments.Components.Comments.Panel.getCommentsPanelState)
 local _ = require(Moments.Components.SheetShim)
 local UseCommentCapabilitiesModule = require(Moments.Components.Comments.useCommentCapabilities)
+local FFlagMomentsCommentsAttachSheetScrollerModule = require(Moments.Flags.FFlagMomentsCommentsAttachSheetScroller)
 local _ = require(script.Parent.CommentsSheetView)
 local GetCommentsSheetStoreModule = require(script.Parent.getCommentsSheetStore)
 local GetCommentsVideoLiftModule = require(script.Parent.getCommentsVideoLift)
+local UseSheetContentScrollingFrameModule = require(script.Parent.useSheetContentScrollingFrame)
 local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
 return function()
-	-- upvalues: GetCommentsSheetStoreModule (copy), SignalsReactModule (copy), MomentsGetMomentsCommentsStoreModule (copy), ReactModule (copy), UseCommentCapabilitiesModule (copy), GetCommentCollectionStoreModule (copy), LocalizationModule (copy), LocalizationService (copy), GetCommentsPanelStateModule (copy), UseLocalizationFunction (copy), FoundationModule (copy), GetCommentsVideoLiftModule (copy), UserInputService (copy)
+	-- upvalues: GetCommentsSheetStoreModule (copy), SignalsReactModule (copy), MomentsGetMomentsCommentsStoreModule (copy), ReactModule (copy), UseCommentCapabilitiesModule (copy), GetCommentCollectionStoreModule (copy), LocalizationModule (copy), LocalizationService (copy), GetCommentsPanelStateModule (copy), FFlagMomentsCommentsAttachSheetScrollerModule (copy), UseSheetContentScrollingFrameModule (copy), UseLocalizationFunction (copy), FoundationModule (copy), GetCommentsVideoLiftModule (copy), UserInputService (copy)
 	local CommentsSheetStoreModule = GetCommentsSheetStoreModule(false)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(CommentsSheetStoreModule.getIsOpen)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(CommentsSheetStoreModule.getFeedItemId)
@@ -57,6 +59,13 @@ return function()
 	local Largest1 = if UseSignalStateResult3 == nil or UseSignalStateResult3.count == nil then Largest else UseSignalStateResult3.count
 	local AbbreviateCountResult = if Largest1 == nil then nil else LocalizationModule.abbreviateCount(Largest1, LocalizationService.RobloxLocaleId)
 	local CommentsPanelStateModule = GetCommentsPanelStateModule(UseSignalStateResult3, UseSignalStateResult4)
+	local HasUseSignalStateResult: boolean = CommentsPanelStateModule.contentState == "list" and UseSignalStateResult1 ~= nil
+	local ScrollingFrame = nil
+	local OnScrollingFrameChanged = nil
+	
+	if FFlagMomentsCommentsAttachSheetScrollerModule then
+		ScrollingFrame, OnScrollingFrameChanged = UseSheetContentScrollingFrameModule(HasUseSignalStateResult)
+	end
 	local Title = UseLocalizationFunction({
 		title = if Largest1 == nil or Largest1 <= 0 or AbbreviateCountResult == nil then "Feature.Moments.Title.Comments" else {
 			if UseSignalStateResult3 == nil or not UseSignalStateResult3.countIsCapped then "Feature.Moments.Title.CommentsWithCount" else "Feature.Moments.Title.CommentsWithCappedCount",
@@ -105,8 +114,9 @@ return function()
 		onClose = CommentsSheetStoreModule.close,
 		onSnapPointChanged = UseResult,
 		onContentInsetChanged = UseResult1,
-		isListDisplayed = CommentsPanelStateModule.contentState == "list" and UseSignalStateResult1 ~= nil,
+		isListDisplayed = HasUseSignalStateResult,
 		scrollingFrameRef = UseRefResult,
+		onScrollingFrameChanged = OnScrollingFrameChanged,
 		actionsRef = UseStateResult2,
 		panelBodyProps = {
 			isOpen = UseSignalStateResult,
@@ -115,6 +125,7 @@ return function()
 			panelState = CommentsPanelStateModule,
 			sessionId = UseSignalStateResult2,
 			scrollingFrameRef = UseRefResult,
+			scrollingFrame = ScrollingFrame,
 			actionsFrame = UseStateResult,
 			onClose = CommentsSheetStoreModule.close
 		},

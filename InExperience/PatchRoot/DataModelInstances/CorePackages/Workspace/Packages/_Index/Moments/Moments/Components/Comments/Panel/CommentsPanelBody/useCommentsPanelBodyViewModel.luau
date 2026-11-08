@@ -4,6 +4,7 @@ local _ = require(Parent.MomentsTypes)
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
 local FFlagMomentsCommentsRevealAfterMeasureModule = require(Moments.Flags.FFlagMomentsCommentsRevealAfterMeasure)
+local FFlagMomentsCommentsAttachSheetScrollerModule = require(Moments.Flags.FFlagMomentsCommentsAttachSheetScroller)
 local GetCommentCollectionStoreModule = require(Moments.Components.Comments.GetCommentCollectionStore)
 local GetCommentsListCoordinatorModule = require(Moments.Components.Comments.List.getCommentsListCoordinator)
 local _ = require(script.Parent.Parent.getCommentsPanelState)
@@ -11,7 +12,7 @@ local _ = require(script.Parent.CommentsPanelBodyView)
 local UseVisibleContentHeightModule = require(script.Parent.useVisibleContentHeight)
 
 return function(p1)
-	-- upvalues: ReactModule (copy), GetCommentCollectionStoreModule (copy), SignalsReactModule (copy), GetCommentsListCoordinatorModule (copy), UseVisibleContentHeightModule (copy), FFlagMomentsCommentsRevealAfterMeasureModule (copy)
+	-- upvalues: ReactModule (copy), GetCommentCollectionStoreModule (copy), SignalsReactModule (copy), GetCommentsListCoordinatorModule (copy), UseVisibleContentHeightModule (copy), FFlagMomentsCommentsRevealAfterMeasureModule (copy), FFlagMomentsCommentsAttachSheetScrollerModule (copy)
 	local FeedItemId = p1.feedItemId
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), FeedItemId (copy)
@@ -68,13 +69,28 @@ return function(p1)
 	local UseVisibleContentHeightModuleResult = UseVisibleContentHeightModule(p1.scrollingFrameRef, p1.actionsFrame)
 	local IsListRevealed = true
 	local UseResult1 = nil
+	local RevealPlaceholdersVisible = nil
 	
 	if FFlagMomentsCommentsRevealAfterMeasureModule then
 		local Text: string = `{FeedItemId or ""}:{p1.sessionId}`
 		local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
 		IsListRevealed = UseStateResult1 == Text
+		local Callback = nil
+		
+		if FFlagMomentsCommentsAttachSheetScrollerModule then
+			RevealPlaceholdersVisible, Callback = ReactModule.useBinding(true)
+			ReactModule.useLayoutEffect(function()
+				-- upvalues: IsListRevealed (ref), Callback (ref)
+				if not IsListRevealed then
+					Callback(true)
+				end
+			end, { IsListRevealed })
+		end
 		UseResult1 = ReactModule.useCallback(function()
-			-- upvalues: UseStateResult2_1 (copy), Text (copy)
+			-- upvalues: Callback (ref), UseStateResult2_1 (copy), Text (copy)
+			if Callback ~= nil then
+				Callback(false)
+			end
 			UseStateResult2_1(Text)
 		end, { Text })
 		local HasFeedItemId: boolean = PanelState.contentState == "list" and FeedItemId ~= nil
@@ -94,6 +110,8 @@ return function(p1)
 		stateMinHeight = UseVisibleContentHeightModuleResult,
 		onRetryInitial = UseResult,
 		isListRevealed = IsListRevealed,
-		onListRevealed = UseResult1
+		onListRevealed = UseResult1,
+		scrollingFrame = if FFlagMomentsCommentsAttachSheetScrollerModule then p1.scrollingFrame else nil,
+		revealPlaceholdersVisible = RevealPlaceholdersVisible
 	}
 end

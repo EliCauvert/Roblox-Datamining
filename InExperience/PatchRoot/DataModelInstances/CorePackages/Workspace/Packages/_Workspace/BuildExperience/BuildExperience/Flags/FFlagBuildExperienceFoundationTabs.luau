@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("BuildExperienceFoundationTabs", false)
+﻿return game:DefineFastFlag("BuildExperienceFoundationTabs2", false)

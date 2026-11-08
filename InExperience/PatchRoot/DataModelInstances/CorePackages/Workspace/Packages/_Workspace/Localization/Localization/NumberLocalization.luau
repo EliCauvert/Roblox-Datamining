@@ -169,7 +169,7 @@ local function findDenominationEntry(Entry, Value: number, RoundToClosest)
 	return Entry1
 end
 
-return {
+local NumberLocalizationModule = {
 	localize = function(p1, p2)
 		-- upvalues: config (copy), LoggerModule (copy), addGroupDelimiters (copy)
 		if p1 == 0 then
@@ -247,6 +247,16 @@ return {
 		local Replaced = string.gsub(Segment1, "0+$", "")
 		
 		return if #Replaced > 0 then v2 .. Segment .. Entry.decimalSeparator .. Replaced else v2 .. Segment
-	end,
-	logger = LoggerModule
+	end
 }
+
+function NumberLocalizationModule.abbreviateDecimal(p1, p2, p3): string
+	-- upvalues: config (copy), findDenominationEntry (copy), RoundingBehaviourModule (copy), NumberLocalizationModule (copy)
+	local DenominationEntry = findDenominationEntry(config[p2] or config["en-us"], p1, RoundingBehaviourModule.RoundToClosest)
+	
+	return NumberLocalizationModule.localizeDecimal(p1 / DenominationEntry[1], p2, p3) .. DenominationEntry[2]
+end
+
+NumberLocalizationModule.logger = LoggerModule
+
+return NumberLocalizationModule

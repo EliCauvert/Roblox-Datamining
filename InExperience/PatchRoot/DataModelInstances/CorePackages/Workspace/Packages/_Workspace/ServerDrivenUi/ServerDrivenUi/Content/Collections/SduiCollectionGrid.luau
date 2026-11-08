@@ -1,5 +1,6 @@
 ﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
 local Parent = ServerDrivenUi.Parent
+local FFlagSduiErrorPaths = require(Parent.SharedFlags).FFlagSduiErrorPaths
 local ReactModule = require(Parent.React)
 local _ = require(Parent.AppCommonLib)
 local CryoModule = require(Parent.Cryo)
@@ -45,7 +46,7 @@ end
 local t = {}
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FFlagLuaAppCompositionAlways (copy), ReactModule (copy), t (copy), FFlagLuaAppLayoutParamsInContext (copy), SignalsReactModule (copy), UseCollectionLayoutParamsFunction (copy), CollectionItemSize (copy), CryoModule (copy), UseCollectionLayoutFunction (copy), FindAnalyticsFieldFunction (copy), SduiBuilder (copy), UseCollectionAnalyticsContextFunction (copy), UseCollectionImpressionsSignalFunction (copy), GetImpressionsTagModule (copy), SduiParseHelpers (copy), SduiErrors (copy), ReportUnifiedLoggingImpressionsFunction (copy), SendLegacyGameImpressionsForSduiModule (copy), UseTokensFunction (copy), FFlagSduiPreferredTextSizeLineBudgets (copy), UsePreferredTextSizeLineBudgetFunction (copy), FFlagSduiFixSearchTelemetry (copy), SduiCollectionAnalyticsBuilder (copy), GetSduiComponentWrapperFunction (copy), SduiCollectionItemModule (copy), FFlagSduiCollectionGridRevealRows (copy), SduiCollectionGridRevealRowsModule (copy), CollectionGrid (copy), WaitForPropWrapper (copy), FrameBoundsImpressionsTracker (copy), ScreenSizeImpressionsTracker (copy)
+	-- upvalues: FFlagLuaAppCompositionAlways (copy), ReactModule (copy), t (copy), FFlagLuaAppLayoutParamsInContext (copy), SignalsReactModule (copy), UseCollectionLayoutParamsFunction (copy), CollectionItemSize (copy), CryoModule (copy), UseCollectionLayoutFunction (copy), FindAnalyticsFieldFunction (copy), SduiBuilder (copy), UseCollectionAnalyticsContextFunction (copy), UseCollectionImpressionsSignalFunction (copy), GetImpressionsTagModule (copy), SduiParseHelpers (copy), SduiErrors (copy), ReportUnifiedLoggingImpressionsFunction (copy), SendLegacyGameImpressionsForSduiModule (copy), UseTokensFunction (copy), FFlagSduiPreferredTextSizeLineBudgets (copy), UsePreferredTextSizeLineBudgetFunction (copy), FFlagSduiFixSearchTelemetry (copy), SduiCollectionAnalyticsBuilder (copy), FFlagSduiErrorPaths (copy), GetSduiComponentWrapperFunction (copy), SduiCollectionItemModule (copy), FFlagSduiCollectionGridRevealRows (copy), SduiCollectionGridRevealRowsModule (copy), CollectionGrid (copy), WaitForPropWrapper (copy), FrameBoundsImpressionsTracker (copy), ScreenSizeImpressionsTracker (copy)
 	local FFlagLuaAppCompositionAlways1 = FFlagLuaAppCompositionAlways or (p1.appCompositionEnabled or p1.sduiContext.appCompositionEnabled)
 	local LayoutOrder = p1.layoutOrder
 	local SduiContext = p1.sduiContext
@@ -155,7 +156,7 @@ return ReactModule.memo(function(p1)
 		}),
 		items = UseMemoResult,
 		renderItem = ReactModule.useCallback(function(ComponentConfig, Index, Size, _)
-			-- upvalues: ReactModule (upval), SduiContext (copy), SduiErrors (upval), ImpressionsTag (copy), FindAnalyticsFieldFunction (upval), t (upval), SduiBuilder (upval), FFlagSduiFixSearchTelemetry (upval), UseRefResult1 (copy), SduiCollectionAnalyticsBuilder (upval), GetSduiComponentWrapperFunction (upval), UseCollectionAnalyticsContextResult (copy), p1 (copy), VerticalGap (copy), SduiCollectionItemModule (upval), Gutter (copy)
+			-- upvalues: ReactModule (upval), SduiContext (copy), SduiErrors (upval), ImpressionsTag (copy), FindAnalyticsFieldFunction (upval), t (upval), SduiBuilder (upval), FFlagSduiFixSearchTelemetry (upval), UseRefResult1 (copy), SduiCollectionAnalyticsBuilder (upval), FFlagSduiErrorPaths (upval), GetSduiComponentWrapperFunction (upval), UseCollectionAnalyticsContextResult (copy), p1 (copy), VerticalGap (copy), SduiCollectionItemModule (upval), Gutter (copy)
 			if ComponentConfig and ComponentConfig.isBlank then
 				return ReactModule.createElement("Frame", { BackgroundTransparency = 1, LayoutOrder = Index }), "blank"
 			end
@@ -186,7 +187,7 @@ return ReactModule.memo(function(p1)
 				topicContentsIndex = ComponentConfig.realIndex,
 				topicDataPosition = if FFlagSduiFixSearchTelemetry then ComponentConfig.realIndex else nil
 			}
-			UseRefResult1.current[Index] = SduiCollectionAnalyticsBuilder.buildAndValidateItemAnalyticsData(SduiContext, ComponentConfig.analyticsData, nil, LocalAnalyticsData, ComponentType)
+			UseRefResult1.current[Index] = SduiCollectionAnalyticsBuilder.buildAndValidateItemAnalyticsData(SduiContext, ComponentConfig.analyticsData, nil, LocalAnalyticsData, ComponentType, nil, if FFlagSduiErrorPaths then ComponentConfig.errorContext else nil)
 			local Element = ReactModule.createElement(GetSduiComponentWrapperFunction(ComponentConfig), {
 				componentConfig = ComponentConfig,
 				sduiContext = SduiContext,
@@ -209,17 +210,17 @@ return ReactModule.memo(function(p1)
 				size = Size,
 				zIndex = -Index
 			}
-			local InnerWrapperSize = nil
+			local _UDim2 = nil
 			
 			if ComponentConfig.spanOverride == nil then
-				InnerWrapperSize = nil
+				_UDim2 = nil
 			else
 				local SpanOverride = ComponentConfig.spanOverride
 				local ColSpan = SpanOverride.colSpan or 1
 				local RowSpan = SpanOverride.rowSpan or 1
-				InnerWrapperSize = UDim2.new(ColSpan, Gutter * (ColSpan - 1), RowSpan, VerticalGap * (RowSpan - 1))
+				_UDim2 = UDim2.new(ColSpan, Gutter * (ColSpan - 1), RowSpan, VerticalGap * (RowSpan - 1))
 			end
-			config.innerWrapperSize = InnerWrapperSize
+			config.innerWrapperSize = _UDim2
 			
 			return CreateElementFunction(SduiCollectionItemModule, config, { Item = Element }), ComponentType or "unknown"
 		end, {

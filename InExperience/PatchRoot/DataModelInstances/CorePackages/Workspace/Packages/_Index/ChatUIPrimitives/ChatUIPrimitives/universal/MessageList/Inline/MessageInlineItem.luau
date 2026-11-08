@@ -1,4 +1,5 @@
-﻿local Parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
+﻿local ChatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
+local Parent = ChatUIPrimitives.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local _ = require(Parent.Signals)
@@ -7,6 +8,8 @@ local _ = require(script.Parent.Parent.groupMessages)
 local IdentityInlineModule = require(script.Parent.Parent.Parent.Identity.IdentityInline)
 local ReplyQuoteModule = require(script.Parent.Parent.Reply.ReplyQuote)
 local UseMessageInlineViewModelModule = require(script.Parent.useMessageInlineViewModel)
+local UseFinishMessageRenderIntervalsModule = require(script.Parent.Parent.useFinishMessageRenderIntervals)
+local FFlagExpChatMessageListScrollParityModule = require(ChatUIPrimitives.Flags.FFlagExpChatMessageListScrollParity)
 local WithMessageContentModule = require(script.Parent.Parent.Parent.ContentKinds.withMessageContent)
 local config = {
 	plainText = WithMessageContentModule(require(script.Parent.Parent.Parent.ContentKinds.PlainText.PlainTextInline), require(script.Parent.Parent.Parent.ContentKinds.PlainText.PlainTextContentModel).getDetail),
@@ -15,8 +18,12 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: UseMessageInlineViewModelModule (copy), CreateNextOrderFunction (copy), config (copy), ReactModule (copy), IdentityInlineModule (copy), FoundationModule (copy), ReplyQuoteModule (copy)
+	-- upvalues: UseMessageInlineViewModelModule (copy), FFlagExpChatMessageListScrollParityModule (copy), UseFinishMessageRenderIntervalsModule (copy), CreateNextOrderFunction (copy), config (copy), ReactModule (copy), IdentityInlineModule (copy), FoundationModule (copy), ReplyQuoteModule (copy)
 	local UseMessageInlineViewModelModuleResult = UseMessageInlineViewModelModule(p1.itemSignal)
+	
+	if FFlagExpChatMessageListScrollParityModule then
+		UseFinishMessageRenderIntervalsModule(p1.itemSignal)
+	end
 	local NextOrder = CreateNextOrderFunction()
 	local Elements = {}
 	

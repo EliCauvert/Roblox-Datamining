@@ -1,12 +1,10 @@
 ﻿local AppShortcutBar = script:FindFirstAncestor("AppShortcutBar")
 local Parent = AppShortcutBar.Parent
-local TextService = game:GetService("TextService")
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local UIBloxModule = require(Parent.UIBlox)
 local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
 local GetTextSizeFunction = require(Parent.Style).GetTextSize
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local Icon = FoundationModule.Icon
@@ -92,7 +90,7 @@ local function useOnShortcutActivated(Item)
 end
 
 function AppShortcut(p2)
-	-- upvalues: UseStyleFunction (copy), UseTokensFunction (copy), KeyLabelUtilities (copy), ReactModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), KeyLabel (copy), IconWithHoldAnimationModule (copy), FFlagShortcutBarPlatformGamepadIcons (copy), Image (copy), Icon (copy), useOnShortcutActivated (copy), Shortcut (copy), StateLayer (copy)
+	-- upvalues: UseStyleFunction (copy), UseTokensFunction (copy), KeyLabelUtilities (copy), ReactModule (copy), GetTextSizeFunction (copy), KeyLabel (copy), IconWithHoldAnimationModule (copy), FFlagShortcutBarPlatformGamepadIcons (copy), Image (copy), Icon (copy), useOnShortcutActivated (copy), Shortcut (copy), StateLayer (copy)
 	local LayoutOrder = p2.layoutOrder
 	local Item = p2.item
 	local UseStyleResult = UseStyleFunction()
@@ -118,11 +116,10 @@ function AppShortcut(p2)
 		SizeRatio1 = UseTokensResult.Size.Size_600
 	end
 	local UseMemoResult = ReactModule.useMemo(function(): UDim2
-		-- upvalues: UseTokensResult (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Item (copy), TextService (upval), SizeRatio (ref)
+		-- upvalues: UseTokensResult (copy), GetTextSizeFunction (upval), Item (copy), SizeRatio (ref)
 		local LabelMedium = UseTokensResult.Typography.LabelMedium
-		local _Vector2 = Vector2.new(1e999, 1e999)
 		
-		return UDim2.new(0, SizeRatio + UseTokensResult.Gap.XSmall + (if FoundationFontFaceMigration then GetTextSizeFunction(Item.text, math.floor(LabelMedium.FontSize), LabelMedium.Font, _Vector2, { addTemporaryPadding = false }) else TextService:GetTextSize(Item.text, math.floor(LabelMedium.FontSize), LabelMedium.Font, _Vector2)).X, 1, 0)
+		return UDim2.new(0, SizeRatio + UseTokensResult.Gap.XSmall + GetTextSizeFunction(Item.text, math.floor(LabelMedium.FontSize), LabelMedium.Font, Vector2.new(1e999, 1e999), { addTemporaryPadding = false }).X, 1, 0)
 	end, { UseTokensResult, SizeRatio, Item.text })
 	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: IsTable (copy), ReactModule (upval), Item (copy), KeyLabel (upval)
@@ -194,8 +191,7 @@ function AppShortcut(p2)
 					Item.hasProgress, Item.progress, Item.icon,
 					if FFlagShortcutBarPlatformGamepadIcons then Item.isPlatformIcon else nil,
 					if FFlagShortcutBarPlatformGamepadIcons then UseTokensResult else nil,
-					SizeRatio, SizeRatio1, IsTable, UseMemoResult1,
-					if FoundationFontFaceMigration then UseTokensResult.Size.Size_900 else nil
+					SizeRatio, SizeRatio1, IsTable, UseMemoResult1, UseTokensResult.Size.Size_900
 				})
 			})
 		}),

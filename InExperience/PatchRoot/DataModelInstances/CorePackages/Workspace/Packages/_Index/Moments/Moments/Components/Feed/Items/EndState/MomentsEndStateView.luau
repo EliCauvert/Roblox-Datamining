@@ -1,9 +1,7 @@
-﻿local Moments = script:FindFirstAncestor("Moments")
-local Parent = Moments.Parent
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
 local FoundationModule = require(Parent.Foundation)
 local MomentsCommonModule = require(Parent.MomentsCommon)
 local ReactModule = require(Parent.React)
-local FFlagMomentsNonInfiniteScrollEndStateFixesModule = require(Moments.Flags.FFlagMomentsNonInfiniteScrollEndStateFixes)
 local Button = FoundationModule.Button
 local Icon = FoundationModule.Icon
 local Text = FoundationModule.Text
@@ -31,12 +29,11 @@ local function _(p1, p2)
 end
 
 return function(Frame)
-	-- upvalues: UseTokensFunction (copy), UseFormFactorFunction (copy), FormFactor (copy), FFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), UseLocalizationFunction (copy), config1 (copy), config (copy), ReactModule (copy), View (copy), Icon (copy), IconSize (copy), Text (copy), Button (copy), FillBehavior (copy), InputSize (copy), ButtonVariant (copy)
+	-- upvalues: UseTokensFunction (copy), UseFormFactorFunction (copy), FormFactor (copy), UseLocalizationFunction (copy), config1 (copy), config (copy), ReactModule (copy), View (copy), Icon (copy), IconSize (copy), Text (copy), Button (copy), FillBehavior (copy), InputSize (copy), ButtonVariant (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsUseFormFactorResultMatch = UseFormFactorFunction() == FormFactor.Wide
 	local IsShowLoadMore = Frame.showLoadMore ~= false
-	local NoIsShowLoadMore: boolean = FFlagMomentsNonInfiniteScrollEndStateFixesModule and not IsShowLoadMore
-	local UseLocalizationResult = UseLocalizationFunction(if NoIsShowLoadMore then config1 else config)
+	local UseLocalizationResult = UseLocalizationFunction(if not IsShowLoadMore then config1 else config)
 	local Title = UseLocalizationResult.title
 	local ThereAreMoreMomentsToWatch = if Title == nil or Title == "" then "There are more Moments to watch" else Title
 	local Description = UseLocalizationResult.description

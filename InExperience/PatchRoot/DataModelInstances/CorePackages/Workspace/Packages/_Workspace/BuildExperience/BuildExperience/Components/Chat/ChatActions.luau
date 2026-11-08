@@ -4,6 +4,7 @@ local _ = require(BuildExperience.Components.ModelPicker.ModelPickerTypes)
 local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPicker)
 local FFlagBuildExperienceChatImageAttachmentsModule = require(BuildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
 local FFlagBuildEnableFTUXChipsModule = require(BuildExperience.Flags.FFlagBuildEnableFTUXChips)
+local FFlagBuildExperienceFTUXChipExhaustedTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceFTUXChipExhaustedTelemetry)
 local IsImageAttachmentSupportedModule = if FFlagBuildExperienceChatImageAttachmentsModule then require(BuildExperience.utils.isImageAttachmentSupported) else nil
 local ReactModule = require(Parent.React)
 local CreateGalleryCaptureSourceModule = if FFlagBuildExperienceChatImageAttachmentsModule then require(Parent.Moments.createGalleryCaptureSource) else nil
@@ -17,7 +18,7 @@ local ChatResourceAttachmentListModule = if FFlagBuildExperienceChatResourceAtta
 local View = require(Parent.Foundation).View
 
 return function(Frame)
-	-- upvalues: FFlagBuildExperienceChatImageAttachmentsModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), FFlagBuildEnableFTUXChipsModule (copy), ReactModule (copy), IsImageAttachmentSupportedModule (copy), CreateGalleryCaptureSourceModule (copy), View (copy), ChatResourceAttachmentListModule (copy), ChatImagePreviewListModule (copy), ChatComposerModule (copy), FFlagBuildExperienceModelPickerModule (copy), PromptChipGroupModule (copy), ChatCaptureGalleryContainerModule (copy)
+	-- upvalues: FFlagBuildExperienceChatImageAttachmentsModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), FFlagBuildEnableFTUXChipsModule (copy), ReactModule (copy), IsImageAttachmentSupportedModule (copy), CreateGalleryCaptureSourceModule (copy), View (copy), ChatResourceAttachmentListModule (copy), ChatImagePreviewListModule (copy), ChatComposerModule (copy), FFlagBuildExperienceModelPickerModule (copy), PromptChipGroupModule (copy), FFlagBuildExperienceFTUXChipExhaustedTelemetryModule (copy), ChatCaptureGalleryContainerModule (copy)
 	local Images = Frame.images or {}
 	local ResourceAttachments = Frame.resourceAttachments or {}
 	local PromptChips = Frame.promptChips or {}
@@ -154,7 +155,8 @@ return function(Frame)
 			LayoutOrder = LayoutOrder + 1,
 			promptChips = PromptChips,
 			isLoading = Frame.isPromptChipsLoading,
-			onActivated = Frame.onPromptChipActivated
+			onActivated = Frame.onPromptChipActivated,
+			onExhausted = if FFlagBuildExperienceFTUXChipExhaustedTelemetryModule then Frame.onPromptChipExhausted else nil
 		}) else nil,
 		Gallery = if FFlagBuildExperienceChatImageAttachmentsModule and (v4 ~= "unmounted" and UseRefResult ~= nil and UseRefResult.current ~= nil) then ReactModule.createElement(ChatCaptureGalleryContainerModule, {
 			maxSelections = 2,

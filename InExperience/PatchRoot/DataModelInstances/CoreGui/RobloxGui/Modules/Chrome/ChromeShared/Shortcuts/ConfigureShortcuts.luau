@@ -31,6 +31,8 @@ local FFlagRemoveLeaveShortcutFromLeaveConfirm = FlagsModule.FFlagRemoveLeaveSho
 local FFlagRemoveRespawnShortcutFromRespawnConfirmation = FlagsModule.FFlagRemoveRespawnShortcutFromRespawnConfirmation
 local ChatSelectorModule = if FFlagEnableConsoleExpControls then require(RobloxGui.Modules.ChatSelector) else nil
 local LeaveGameModule = require(RobloxGui.Modules.Settings.leaveGame)
+local PioneerUtilsModule = require(CorePackages.Workspace.Packages.PioneerUtils)
+local FFlagPioneerLeaveLogsOut = SharedFlagsModule.FFlagPioneerLeaveLogsOut
 local InExperienceSideSheetModule = require(CorePackages.Workspace.Packages.InExperienceSideSheet)
 local GetSideSheetVisibilityFunction = InExperienceSideSheetModule.getSideSheetVisibility
 local ToggleSideSheetFunction = InExperienceSideSheetModule.toggleSideSheet
@@ -38,7 +40,7 @@ local FFlagShowUnibarOnVirtualCursor = SharedFlagsModule.FFlagShowUnibarOnVirtua
 local config = {
 	keyCode = Enum.KeyCode.ButtonX,
 	activated = function()
-		-- upvalues: RobloxGui (copy), FFlagLeaveActionChromeShortcutTelemetryModule (copy), LeaveGameModule (copy), FFlagLeaveChromeShortcutTelemetryModule (copy), FFlagConsoleChatUseChromeFocusUtils (copy), FocusNavigationStore (copy), FFlagRespawnChromeShortcutTelemetryModule (copy)
+		-- upvalues: RobloxGui (copy), FFlagPioneerLeaveLogsOut (copy), PioneerUtilsModule (copy), LeaveGameModule (copy), FFlagLeaveActionChromeShortcutTelemetryModule (copy), FFlagLeaveChromeShortcutTelemetryModule (copy), FFlagConsoleChatUseChromeFocusUtils (copy), FocusNavigationStore (copy), FFlagRespawnChromeShortcutTelemetryModule (copy)
 		local SettingsHubModule = require(RobloxGui.Modules.Settings.SettingsHub)
 		local LeaveGamePage = SettingsHubModule.Instance.LeaveGamePage
 		
@@ -62,6 +64,15 @@ local config = {
 				return
 			end
 		elseif SettingsHubModule.Instance.Pages.CurrentPage == LeaveGamePage then
+			if FFlagPioneerLeaveLogsOut and PioneerUtilsModule.isPioneerLaunch() then
+				LeaveGameModule(false, {
+					inhibitAppRating = true,
+					leaveReason = PioneerUtilsModule.PioneerLeaveReason.Logout,
+					telemetryFields = if FFlagLeaveActionChromeShortcutTelemetryModule then { used_shortcut = true } else nil
+				})
+				
+				return
+			end
 			if FFlagLeaveActionChromeShortcutTelemetryModule then
 				LeaveGameModule(true, { telemetryFields = { used_shortcut = true } })
 				

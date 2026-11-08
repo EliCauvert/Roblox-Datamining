@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("SocialCarouselBuildPresence2", false) and (require(script.Parent.FFlagPresenceLocationType) and require(script.Parent.FFlagGameJoinCardContent))

@@ -1,8 +1,8 @@
 ﻿local CorePackages = game:GetService("CorePackages")
-local GuiService = game:GetService("GuiService")
 local LocalizationService = game:GetService("LocalizationService")
 local ReactModule = require(CorePackages.Packages.React)
 local FoundationModule = require(CorePackages.Packages.Foundation)
+local IsTenFootInterfaceFunction = require(CorePackages.Workspace.Packages.AppCommonLib).isTenFootInterface
 local Localization = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization
 local LocalizationProvider = require(CorePackages.Workspace.Packages.Localization).LocalizationProvider
 local SduiFeatureEntryPoint = require(CorePackages.Workspace.Packages.SduiSharedUtilities).SduiFeatureEntryPoint
@@ -19,8 +19,8 @@ local function _()
 end
 
 local _ = function()
-	-- upvalues: GuiService (copy), FoundationModule (copy)
-	return if GuiService:IsTenFootInterface() then FoundationModule.Enums.Device.Console else FoundationModule.Enums.Device.Desktop
+	-- upvalues: IsTenFootInterfaceFunction (copy), FoundationModule (copy)
+	return if IsTenFootInterfaceFunction() then FoundationModule.Enums.Device.Console else FoundationModule.Enums.Device.Desktop
 end
 
 local _ = function(p1, p2, Child)
@@ -29,7 +29,7 @@ local _ = function(p1, p2, Child)
 end
 
 return ReactModule.memo(ReactModule.forwardRef(function(Frame: Frame, Ref)
-	-- upvalues: ReactModule (copy), SduiFeatureEntryPoint (copy), UniversalAppPolicyModule (copy), SduiInExperienceHostModule (copy), LocalizationProvider (copy), NewResult (ref), Localization (copy), LocalizationService (copy), FoundationModule (copy), GuiService (copy)
+	-- upvalues: ReactModule (copy), SduiFeatureEntryPoint (copy), UniversalAppPolicyModule (copy), SduiInExperienceHostModule (copy), LocalizationProvider (copy), NewResult (ref), Localization (copy), LocalizationService (copy), FoundationModule (copy), IsTenFootInterfaceFunction (copy)
 	local Element = ReactModule.createElement(SduiFeatureEntryPoint, {
 		configKey = Frame.configKey,
 		identifier = Frame.identifier,
@@ -68,7 +68,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Frame: Frame, Ref)
 	if not Frame.disableFoundationProvider then
 		Element1 = ReactModule.createElement(FoundationModule.FoundationProvider, {
 			colorMode = Frame.colorMode or FoundationModule.Enums.ColorMode.Dark,
-			device = Frame.device or (if GuiService:IsTenFootInterface() then FoundationModule.Enums.Device.Console else FoundationModule.Enums.Device.Desktop)
+			device = Frame.device or (if IsTenFootInterfaceFunction() then FoundationModule.Enums.Device.Console else FoundationModule.Enums.Device.Desktop)
 		}, { Child = Element1 })
 	end
 	return Element1

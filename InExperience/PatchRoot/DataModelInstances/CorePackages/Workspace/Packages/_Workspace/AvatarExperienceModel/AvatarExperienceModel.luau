@@ -24,6 +24,7 @@ return {
 		RecommendationsType = require(script.Enums.RecommendationsType)
 	},
 	Stores = {
+		getLayeredClothingEntryPageStore = require(script.Stores.LayeredClothingEntryPageStore.getLayeredClothingEntryPageStore),
 		getLayeredClothingLastSavedSortStore = require(script.Stores.LayeredClothingLastSavedSortStore.getLayeredClothingLastSavedSortStore)
 	}
 }

@@ -30,7 +30,10 @@ return {
 	},
 	Flags = {
 		FFlagExpChatAddressFrame0Flash = require(script.Flags.FFlagExpChatAddressFrame0Flash),
+		FFlagExpChatExpressionPillSelectableOnCooldown = require(script.Flags.FFlagExpChatExpressionPillSelectableOnCooldown),
 		FFlagExpChatExpressionTrayReducedMotion = require(script.Flags.FFlagExpChatExpressionTrayReducedMotion),
+		FFlagExpChatHidePlaceholderUnderOverlay = require(script.Flags.FFlagExpChatHidePlaceholderUnderOverlay),
+		FFlagExpChatMessageListScrollParity = require(script.Flags.FFlagExpChatMessageListScrollParity),
 		FFlagExpChatPerfTrackerTabName = require(script.Flags.FFlagExpChatPerfTrackerTabName),
 		FFlagTCWTranslationSupport = require(script.Flags.FFlagTCWTranslationSupport)
 	}

@@ -20,20 +20,16 @@ local GameInviteModalWindowModule = require(Components.GameInviteModalWindow)
 local GameInviteContentWrapperModule = require(Components.GameInviteContentWrapper)
 local GameInviteConstantsModule = require(GameInvite.GameInviteConstants)
 local ResetUserInviteStatusModule = require(GameInvite.State.Actions.ResetUserInviteStatus)
-local IxpUtilsModule = require(Parent.IxpUtils)
 local VrCompatibilityModule = require(Parent.VrCompatibility)
 local VRReadyWrapper = VrCompatibilityModule.VRReadyWrapper
 local VRConstants = VrCompatibilityModule.VRConstants
-local VRPanelWidthIXP = VrCompatibilityModule.VRPanelWidthIXP
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local NetworkImpl = require(GameInvite.GameInviteDependencies).networkImpl
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagUseSignalsForGameInvitesStatus = SharedFlagsModule.FFlagUseSignalsForGameInvitesStatus
 local GetGameInvitesStatusStore = if FFlagUseSignalsForGameInvitesStatus then require(Parent.NotificationsCommon).GetGameInvitesStatusStore else nil
 local GetFFlagEnableGameInviteModalVRSupportFunction = SharedFlagsModule.GetFFlagEnableGameInviteModalVRSupport
-local GetFFlagVRPanelWidthIXPEnabledFunction = SharedFlagsModule.GetFFlagVRPanelWidthIXPEnabled
 local IsInExperienceUIVREnabled = require(Parent.SharedExperimentDefinition).isInExperienceUIVREnabled
-local FFlagLuaAppForceVrAppPanelWidthRollout = SharedFlagsModule.FFlagLuaAppForceVrAppPanelWidthRollout
 local FFlagEnableInExperienceUIPCVRFix = SharedFlagsModule.FFlagEnableInExperienceUIPCVRFix
 local ResponsiveModule = nil
 local UIManager = nil
@@ -58,9 +54,7 @@ local CustomEventHandlers = {
 }
 
 return function(p1)
-	-- upvalues: FFlagLuaAppForceVrAppPanelWidthRollout (copy), GetFFlagVRPanelWidthIXPEnabledFunction (copy), IxpUtilsModule (copy), VRPanelWidthIXP (copy), ReactModule (copy), RunService (copy), GameInviteConstantsModule (copy), UseDispatchFunction (copy), IsInExperienceUIVREnabled (copy), ResponsiveModule (ref), FFlagEnableInExperienceUIPCVRFix (copy), Callback (ref), FFlagUseSignalsForGameInvitesStatus (copy), GetGameInvitesStatusStore (copy), ResetUserInviteStatusModule (copy), GameInviteModalManagerModule (copy), GuiService (copy), PromiseModule (copy), RobloxReplicatedStorage (copy), GetGameNameAndDescriptionFunction (copy), NetworkImpl (copy), GameInviteModalWindowModule (copy), GameInviteContentWrapperModule (copy), GetFFlagEnableGameInviteModalVRSupportFunction (copy), VRReadyWrapper (copy), VRConstants (copy), GameInviteModalLayoutProviderModule (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigableSurfaceIdentifierEnum (copy), CustomEventHandlers (copy), UIManager (ref), PanelType (ref), ReactRobloxModule (copy)
-	local UseTestVariablesResult = if FFlagLuaAppForceVrAppPanelWidthRollout or not GetFFlagVRPanelWidthIXPEnabledFunction() then nil else IxpUtilsModule.useTestVariables(VRPanelWidthIXP.VrAppPanelWidthMultiplier)
-	local UseTestVariablesResult1 = if FFlagLuaAppForceVrAppPanelWidthRollout or not GetFFlagVRPanelWidthIXPEnabledFunction() then nil else IxpUtilsModule.useTestVariables(VRPanelWidthIXP.VrAppPanelCurvature)
+	-- upvalues: ReactModule (copy), RunService (copy), GameInviteConstantsModule (copy), UseDispatchFunction (copy), IsInExperienceUIVREnabled (copy), ResponsiveModule (ref), FFlagEnableInExperienceUIPCVRFix (copy), Callback (ref), FFlagUseSignalsForGameInvitesStatus (copy), GetGameInvitesStatusStore (copy), ResetUserInviteStatusModule (copy), GameInviteModalManagerModule (copy), GuiService (copy), PromiseModule (copy), RobloxReplicatedStorage (copy), GetGameNameAndDescriptionFunction (copy), NetworkImpl (copy), GameInviteModalWindowModule (copy), GameInviteContentWrapperModule (copy), GetFFlagEnableGameInviteModalVRSupportFunction (copy), VRReadyWrapper (copy), VRConstants (copy), GameInviteModalLayoutProviderModule (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigableSurfaceIdentifierEnum (copy), CustomEventHandlers (copy), UIManager (ref), PanelType (ref), ReactRobloxModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState({})
@@ -170,10 +164,10 @@ return function(p1)
 			},
 			vrProps = {
 				panelName = "GameInviteMenu",
-				partSize = if FFlagLuaAppForceVrAppPanelWidthRollout or not UseTestVariablesResult then VRConstants.MainScreenSize else Vector2.new(VRConstants.MainScreenSize.X * UseTestVariablesResult, VRConstants.MainScreenSize.Y),
-				offset = if FFlagLuaAppForceVrAppPanelWidthRollout or GetFFlagVRPanelWidthIXPEnabledFunction() and UseTestVariablesResult1 == 0 then CFrame.new(VRConstants.MainScreenPosition) * CFrame.fromEulerAnglesXYZ(0, -3.141592653589793, 0) else CFrame.lookAt(VRConstants.MainScreenPosition, VRConstants.DefaultCameraPosition),
-				virtualScreenSize = if FFlagLuaAppForceVrAppPanelWidthRollout or not UseTestVariablesResult then VRConstants.MainScreenResolution else Vector2.new(VRConstants.MainScreenResolution.X * UseTestVariablesResult, VRConstants.MainScreenResolution.Y),
-				curvature = if FFlagLuaAppForceVrAppPanelWidthRollout or not UseTestVariablesResult1 then VRConstants.MainScreenCurvature else UseTestVariablesResult1
+				partSize = VRConstants.MainScreenSize,
+				offset = CFrame.new(VRConstants.MainScreenPosition) * CFrame.fromEulerAnglesXYZ(0, -3.141592653589793, 0),
+				virtualScreenSize = VRConstants.MainScreenResolution,
+				curvature = VRConstants.MainScreenCurvature
 			}
 		}, {
 			GameInviteModalLayoutProvider = ReactModule.createElement(GameInviteModalLayoutProviderModule, { isCoreScript = IsRenderLocationMatch }, {

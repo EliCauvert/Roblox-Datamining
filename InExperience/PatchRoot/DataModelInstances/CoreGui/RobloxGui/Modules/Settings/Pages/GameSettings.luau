@@ -19,18 +19,12 @@ local TextChatService = game:GetService("TextChatService")
 local SafetyService = game:GetService("SafetyService")
 local ExperienceStateCaptureService = if game:GetEngineFeature("CaptureModeEnabled") then game:GetService("ExperienceStateCaptureService") else nil
 local IsInExperienceUIVREnabled = require(CorePackages.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
-local FFlagIEMSettingsGroupsModule = require(RobloxGui.Modules.Settings.Flags.FFlagIEMSettingsGroups)
 local NewResult = nil
 NewResult = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
 local GetCamMicPermissionsModule = require(RobloxGui.Modules.Settings.getCamMicPermissions)
 local IsCamEnabledForUserAndPlaceModule = require(RobloxGui.Modules.Settings.isCamEnabledForUserAndPlace)
-local Callback = nil
-local Callback1 = nil
-
-if FFlagIEMSettingsGroupsModule then
-	Callback = require(RobloxGui.Modules.Settings.Components.renderSettingsHeader)
-	Callback1 = require(RobloxGui.Modules.Settings.Components.renderSettingsDivider)
-end
+local RenderSettingsHeaderModule = require(RobloxGui.Modules.Settings.Components.renderSettingsHeader)
+local RenderSettingsDividerModule = require(RobloxGui.Modules.Settings.Components.renderSettingsDivider)
 local RenderMoreSettingsBannerModule = if require(RobloxGui.Modules.Settings.Flags.FFlagEnablePioneerIGMSettingsBanner) and require(CorePackages.Workspace.Packages.PioneerUtils).isPioneerLaunch() then require(RobloxGui.Modules.Settings.Components.renderMoreSettingsBanner) else nil
 local Default = require(CorePackages.Workspace.Packages.PermissionsProtocol).PermissionsProtocol.default
 local IsVoiceFocusedFunction = require(CorePackages.Workspace.Packages.CrossExperience).Utils.isVoiceFocused
@@ -313,7 +307,7 @@ local function getFirstValueChangerFrame(NewPage)
 end
 
 return ((function()
-	-- upvalues: IGMEnableGFXReset (copy), GfxResetModule (copy), RobloxGui (copy), GetFFlagLazyInitiateExperienceLanguageSwitcherModule (copy), VRService (copy), GameSettings (copy), UtilityModule (copy), SETTINGSMENULAYOUTORDER (copy), GuiService (copy), GetFFlagFixCyclicFullscreenIndexEventModule (copy), GetFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy), RbxAnalyticsService (copy), ConstantsModule (copy), GameBasicSettingsFramerateCapEngineFeature (copy), FramerateCapIOSOptions (copy), Platform (copy), EraseFPSFromDefaultSetting (copy), RobloxTranslatorModule (copy), InGameGraphicsFollowsSavedQuality (copy), SavedQualityFollowerModule (copy), RomarkStartWithGraphicQualityLevelFastInt (copy), config (copy), UpdateVisibilitySettingsCopy (copy), FFlagUpdatePeopleNamesSettingCopyModule (copy), config6 (copy), UserGameSettings (copy), NewResult (ref), UIScaleOptions (copy), UserInputService (copy), CreateFunction (copy), ThemeModule (copy), CenterShiftLockOverride (copy), MicroProfilerReadOnlyInformationLabel (copy), TouchEnabled (copy), IsPlatformMatch1 (copy), IsPlatformMatch (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), LocalPlayer (copy), CoreUtilityModule (copy), config3 (copy), GetFFlagAlwaysShowVRToggleModule (copy), GetAppFeaturePoliciesFunction (copy), config5 (copy), FeatureSettingsHubTouchMovementModeClassicThumbstick (copy), config2 (copy), config1 (copy), Url (copy), HttpService (copy), FeedbackEntryPointImprovedStrictnessCheck (copy), SafetyService (copy), ExperienceStateCaptureService (ref), FeedbackEntryPointButtonSizeAdjustment2 (copy), CoreScriptsFeedbackEntryPointButtonText (copy), DisableFeedbackSoothsayerCheck (copy), NewResult1 (copy), Players (copy), FeatureSettingsHubLanguageSelectionUnavailable (copy), RunService (copy), GetFFlagChatTranslationWaitForIXPModule (copy), IXPServiceWrapper (copy), GetFFlagChatTranslationNewDefaultsModule (copy), FFlagRenameVolumeToMainVolumeModule (copy), GetFFlagEnablePartyVoiceVolumeOnlyWhenInEligiblePartyFunction (copy), Default3 (copy), VoiceVolumeControlsDisableInteractionWhenNoMasterVolume (copy), FFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (copy), CorePackages (copy), ContextActionService (copy), FixDeveloperConsoleButtonSizeAndPositioning (copy), PlayerPermissionsModule (copy), UserFreecamGuiDestabilization (copy), UserShowGuiHideToggles (copy), SoundService (copy), GetFIntVoiceChatDeviceChangeDebounceDelayModule (copy), Default2 (copy), GetFFlagEnableCrossExpVoiceFunction (copy), SignalsModule (copy), GetFIntDebounceAIRephraseSettingDelayModule (copy), TextChatService (copy), ExpChatDebounceRephraseIndexSelection (copy), ThrottleFunctionCallModule (copy), GetFIntDebounceChatSummariesSettingDelayModule (copy), FeatureSettingsHubVideoVideoCamera (copy), GetFFlagVoiceChatUILoggingModule (copy), VideoCaptureService (copy), FeatureSettingsHubVideoSystemDefault (copy), RUUserScalePreferenceAPIEngineFeature (copy), FFlagUIScaleEngineOptions (copy), DifferentiateVoiceSelectorSystemAndUser (copy), VoiceSelectorAvailableAfterFae (copy), GetFIntDebounceDisconnectButtonDelayModule (copy), FFlagVoiceRewarmTelemetry (copy), ConstantsModule1 (copy), VoiceSelectorIgnoreFailedStateDisconnect (copy), VoiceChatSelectorReconnectFocus2AEGIS2 (copy), DebounceVoiceSelectorIndexChange (copy), DeferProgrammaticChange (copy), HideVoiceChatSelectorForFaeAEGIS2 (copy), IsVoiceFocusedFunction (copy), ObserveIsVoiceFocusedFunction (copy), FFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (copy), VoiceVolumeControlsFixSliderVisibilityOnEligibleGames (copy), VoiceVolumeControlsSuppressInExperienceUiForPartyVoice (copy), GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction (copy), VoiceVolumeControlsEligibility (copy), GetFFlagEnableUniveralVoiceToastsModule (copy), config4 (copy), GetFFlagSelfViewCameraSettingsFunction (copy), IsCamEnabledForUserAndPlaceModule (copy), GetCamMicPermissionsModule (copy), Default (copy), CameraDevicePermissionGrantedSignalModule (copy), IsEnabled (copy), FFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry (copy), HasPartyVoiceVolume (copy), ShowAntiHarassmentSettings (copy), GetFFlagEnablePlayerNamesEnabledSettingModule (copy), PlayerChoiceTranslationSettingInitializerModule (copy), CachedPolicyServiceModule (copy), Inverted1 (copy), FFlagBadgeVisibilitySettingEnabled (copy), FFlagEnableModerateChatRemoteEvent (copy), FFlagAIRephraseSettingEnabled (copy), FFlagChatSummariesSettingEnabled (copy), FFlagExpChatDictation (copy), FFlagExpChatEnableFriendsTab (copy), GetHasGuiHidingPermissionModule (copy), RenderMoreSettingsBannerModule (ref), FFlagIEMSettingsGroupsModule (copy), Callback (ref), Callback1 (ref), Migration (copy), BuilderIconsModule (copy), EnableTFFeedbackModeEntryCheck (copy), GetFFlagEnableLocalesForExperienceLanguageSwitcherModule (copy), ExperienceLanguageSwitcherInitializerModule (copy), getLastValueChangerFrame (copy), FFlagIEMTabFocusNav (copy), getFirstValueChangerFrame (copy), GetFFlagChatTranslationSettingEnabledModule (copy), GetFFlagChatTranslationHoldoutEnabledModule (copy), GetFStringChatTranslationLayerNameModule (copy), TextChatServiceSettingsSavedEngineFeature (copy), GetFFlagChatTranslationForceSettingModule (copy), ChatTranslationOptionsWithChatLanguageSwitcherInitializerModule (copy)
+	-- upvalues: IGMEnableGFXReset (copy), GfxResetModule (copy), RobloxGui (copy), GetFFlagLazyInitiateExperienceLanguageSwitcherModule (copy), VRService (copy), GameSettings (copy), UtilityModule (copy), SETTINGSMENULAYOUTORDER (copy), GuiService (copy), GetFFlagFixCyclicFullscreenIndexEventModule (copy), GetFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy), RbxAnalyticsService (copy), ConstantsModule (copy), GameBasicSettingsFramerateCapEngineFeature (copy), FramerateCapIOSOptions (copy), Platform (copy), EraseFPSFromDefaultSetting (copy), RobloxTranslatorModule (copy), InGameGraphicsFollowsSavedQuality (copy), SavedQualityFollowerModule (copy), RomarkStartWithGraphicQualityLevelFastInt (copy), config (copy), UpdateVisibilitySettingsCopy (copy), FFlagUpdatePeopleNamesSettingCopyModule (copy), config6 (copy), UserGameSettings (copy), NewResult (ref), UIScaleOptions (copy), UserInputService (copy), CreateFunction (copy), ThemeModule (copy), CenterShiftLockOverride (copy), MicroProfilerReadOnlyInformationLabel (copy), TouchEnabled (copy), IsPlatformMatch1 (copy), IsPlatformMatch (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), LocalPlayer (copy), CoreUtilityModule (copy), config3 (copy), GetFFlagAlwaysShowVRToggleModule (copy), GetAppFeaturePoliciesFunction (copy), config5 (copy), FeatureSettingsHubTouchMovementModeClassicThumbstick (copy), config2 (copy), config1 (copy), Url (copy), HttpService (copy), FeedbackEntryPointImprovedStrictnessCheck (copy), SafetyService (copy), ExperienceStateCaptureService (ref), FeedbackEntryPointButtonSizeAdjustment2 (copy), CoreScriptsFeedbackEntryPointButtonText (copy), DisableFeedbackSoothsayerCheck (copy), NewResult1 (copy), Players (copy), FeatureSettingsHubLanguageSelectionUnavailable (copy), RunService (copy), GetFFlagChatTranslationWaitForIXPModule (copy), IXPServiceWrapper (copy), GetFFlagChatTranslationNewDefaultsModule (copy), FFlagRenameVolumeToMainVolumeModule (copy), GetFFlagEnablePartyVoiceVolumeOnlyWhenInEligiblePartyFunction (copy), Default3 (copy), VoiceVolumeControlsDisableInteractionWhenNoMasterVolume (copy), FFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (copy), CorePackages (copy), ContextActionService (copy), FixDeveloperConsoleButtonSizeAndPositioning (copy), PlayerPermissionsModule (copy), UserFreecamGuiDestabilization (copy), UserShowGuiHideToggles (copy), SoundService (copy), GetFIntVoiceChatDeviceChangeDebounceDelayModule (copy), Default2 (copy), GetFFlagEnableCrossExpVoiceFunction (copy), SignalsModule (copy), GetFIntDebounceAIRephraseSettingDelayModule (copy), TextChatService (copy), ExpChatDebounceRephraseIndexSelection (copy), ThrottleFunctionCallModule (copy), GetFIntDebounceChatSummariesSettingDelayModule (copy), FeatureSettingsHubVideoVideoCamera (copy), GetFFlagVoiceChatUILoggingModule (copy), VideoCaptureService (copy), FeatureSettingsHubVideoSystemDefault (copy), RUUserScalePreferenceAPIEngineFeature (copy), FFlagUIScaleEngineOptions (copy), DifferentiateVoiceSelectorSystemAndUser (copy), VoiceSelectorAvailableAfterFae (copy), GetFIntDebounceDisconnectButtonDelayModule (copy), FFlagVoiceRewarmTelemetry (copy), ConstantsModule1 (copy), VoiceSelectorIgnoreFailedStateDisconnect (copy), VoiceChatSelectorReconnectFocus2AEGIS2 (copy), DebounceVoiceSelectorIndexChange (copy), DeferProgrammaticChange (copy), HideVoiceChatSelectorForFaeAEGIS2 (copy), IsVoiceFocusedFunction (copy), ObserveIsVoiceFocusedFunction (copy), FFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (copy), VoiceVolumeControlsFixSliderVisibilityOnEligibleGames (copy), VoiceVolumeControlsSuppressInExperienceUiForPartyVoice (copy), GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction (copy), VoiceVolumeControlsEligibility (copy), GetFFlagEnableUniveralVoiceToastsModule (copy), config4 (copy), GetFFlagSelfViewCameraSettingsFunction (copy), IsCamEnabledForUserAndPlaceModule (copy), GetCamMicPermissionsModule (copy), Default (copy), CameraDevicePermissionGrantedSignalModule (copy), IsEnabled (copy), FFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry (copy), HasPartyVoiceVolume (copy), ShowAntiHarassmentSettings (copy), GetFFlagEnablePlayerNamesEnabledSettingModule (copy), PlayerChoiceTranslationSettingInitializerModule (copy), CachedPolicyServiceModule (copy), Inverted1 (copy), FFlagBadgeVisibilitySettingEnabled (copy), FFlagEnableModerateChatRemoteEvent (copy), FFlagAIRephraseSettingEnabled (copy), FFlagChatSummariesSettingEnabled (copy), FFlagExpChatDictation (copy), FFlagExpChatEnableFriendsTab (copy), GetHasGuiHidingPermissionModule (copy), RenderMoreSettingsBannerModule (ref), RenderSettingsHeaderModule (copy), RenderSettingsDividerModule (copy), Migration (copy), BuilderIconsModule (copy), EnableTFFeedbackModeEntryCheck (copy), GetFFlagEnableLocalesForExperienceLanguageSwitcherModule (copy), ExperienceLanguageSwitcherInitializerModule (copy), getLastValueChangerFrame (copy), FFlagIEMTabFocusNav (copy), getFirstValueChangerFrame (copy), GetFFlagChatTranslationSettingEnabledModule (copy), GetFFlagChatTranslationHoldoutEnabledModule (copy), GetFStringChatTranslationLayerNameModule (copy), TextChatServiceSettingsSavedEngineFeature (copy), GetFFlagChatTranslationForceSettingModule (copy), ChatTranslationOptionsWithChatLanguageSwitcherInitializerModule (copy)
 	if IGMEnableGFXReset then
 		GfxResetModule.RunGfxReset()
 	end
@@ -1457,7 +1451,7 @@ return ((function()
 		local t3 = {}
 		local t4 = {}
 		
-		local function v341(_) end
+		local function v342(_) end
 		
 		local _ = function(p1)
 			-- upvalues: NewPage (upval), RegisteredTouchMovementModes (ref)
@@ -1548,7 +1542,7 @@ return ((function()
 				end
 			end
 			
-			v341 = function(p1)
+			v342 = function(p1)
 				-- upvalues: LocalPlayer (upval), NewPage (upval), RegisteredTouchMovementModes (ref)
 				local IsDevTouchMovementModeMatch: boolean = if p1 then LocalPlayer.DevTouchMovementMode == Enum.DevTouchMovementMode.UserChoice else LocalPlayer.DevComputerMovementMode == Enum.DevComputerMovementMode.UserChoice
 				
@@ -1564,7 +1558,7 @@ return ((function()
 			end
 			
 			local function updateMovementModes()
-				-- upvalues: UserInputService (upval), PlayerScripts1 (copy), RegisteredTouchMovementModes (ref), t2 (ref), t3 (ref), t4 (ref), NewPage (upval), RobloxTranslatorModule (upval), ConstantsModule (upval), config5 (upval), FeatureSettingsHubTouchMovementModeClassicThumbstick (upval), GameSettings (upval), setMovementMode (copy), v341 (ref)
+				-- upvalues: UserInputService (upval), PlayerScripts1 (copy), RegisteredTouchMovementModes (ref), t2 (ref), t3 (ref), t4 (ref), NewPage (upval), RobloxTranslatorModule (upval), ConstantsModule (upval), config5 (upval), FeatureSettingsHubTouchMovementModeClassicThumbstick (upval), GameSettings (upval), setMovementMode (copy), v342 (ref)
 				local IsPreferredInputMatch = UserInputService.PreferredInput == Enum.PreferredInput.Touch
 				
 				if PlayerScripts1 then
@@ -1612,7 +1606,7 @@ return ((function()
 						setMovementMode(TouchMovementMode)
 						NewPage.MovementMode:SetSelectionIndex(t2[TouchMovementMode])
 					end
-					v341(IsPreferredInputMatch)
+					v342(IsPreferredInputMatch)
 					
 					return
 				elseif NewPage.MovementMode then
@@ -1691,7 +1685,7 @@ return ((function()
 			end
 		end
 		local function updateUserSettingsMenu(p1)
-			-- upvalues: LocalPlayer (upval), NewPage (upval), v341 (ref), RegisteredTouchMovementModes (ref)
+			-- upvalues: LocalPlayer (upval), NewPage (upval), v342 (ref), RegisteredTouchMovementModes (ref)
 			if p1 == "DevEnableMouseLock" then
 				local NoDevEnableMouseLock = not LocalPlayer.DevEnableMouseLock
 				
@@ -1715,8 +1709,8 @@ return ((function()
 					return
 				end
 				if p1 == "DevComputerMovementMode" then
-					if v341 ~= nil then
-						v341(false)
+					if v342 ~= nil then
+						v342(false)
 						
 						return
 					end
@@ -1734,8 +1728,8 @@ return ((function()
 						return
 					end
 				elseif p1 == "DevTouchMovementMode" then
-					if v341 ~= nil then
-						v341(true)
+					if v342 ~= nil then
+						v342(true)
 						
 						return
 					end
@@ -1841,7 +1835,7 @@ return ((function()
 					elseif p2.StatusCode < 200 or p2.StatusCode >= 400 then
 						v3 = "Roles Api Status code: " .. p2.StatusCode
 					else
-						v2, v409 = pcall(function()
+						v2, v410 = pcall(function()
 							-- upvalues: HttpService (upval), p2 (copy), Flag (ref)
 							for _, role in pairs(HttpService:JSONDecode(p2.Body).roles) do
 								if role == "Soothsayer" then
@@ -2030,7 +2024,7 @@ return ((function()
 						elseif p5.StatusCode < 200 or p5.StatusCode >= 400 then
 							v6 = "User Experience Language Setting Request Status code: " .. p5.StatusCode
 						else
-							v5, v444 = pcall(function()
+							v5, v445 = pcall(function()
 								-- upvalues: HttpService (upval), p5 (copy), v4 (upval), LanguageCode1 (upval), LanguageCode (upval), LanguageCodes2 (upval)
 								local UserUniverseLocalizationSettingValue = HttpService:JSONDecode(p5.Body).userUniverseLocalizationSettingValue
 								
@@ -2088,7 +2082,7 @@ return ((function()
 						elseif p5.StatusCode < 200 or p5.StatusCode >= 400 then
 							v6 = "Experience Supported Language Request Status code: " .. p5.StatusCode
 						else
-							v5, v448 = pcall(function()
+							v5, v449 = pcall(function()
 								-- upvalues: HttpService (upval), p5 (copy), LanguageCodes (upval)
 								for i, entry in pairs(HttpService:JSONDecode(p5.Body).data) do
 									LanguageCodes[i] = entry.languageCode
@@ -2118,7 +2112,7 @@ return ((function()
 								elseif p7.StatusCode < 200 or p7.StatusCode >= 400 then
 									v9 = "User Experience Language Setting Request Status code: " .. p7.StatusCode
 								else
-									v8, v444 = pcall(function()
+									v8, v445 = pcall(function()
 										-- upvalues: HttpService (upval), p7 (copy), v4 (upval), LanguageCode1 (upval), LanguageCode (upval), LanguageCodes2 (upval)
 										local UserUniverseLocalizationSettingValue = HttpService:JSONDecode(p7.Body).userUniverseLocalizationSettingValue
 										
@@ -2188,7 +2182,7 @@ return ((function()
 						elseif p7.StatusCode < 200 or p7.StatusCode >= 400 then
 							v6 = "Experience Source Language Status code: " .. p7.StatusCode
 						else
-							v5, v453 = pcall(function()
+							v5, v454 = pcall(function()
 								-- upvalues: HttpService (upval), p7 (copy), LanguageCode (upval), LocaleCode (upval), t (upval)
 								LanguageCode = HttpService:JSONDecode(p7.Body).languageCode
 								LocaleCode = t[LanguageCode].localeCode
@@ -2218,7 +2212,7 @@ return ((function()
 								elseif p9.StatusCode < 200 or p9.StatusCode >= 400 then
 									v10 = "Experience Supported Language Request Status code: " .. p9.StatusCode
 								else
-									v9, v448 = pcall(function()
+									v9, v449 = pcall(function()
 										-- upvalues: HttpService (upval), p9 (copy), LanguageCodes (upval)
 										for i, entry in pairs(HttpService:JSONDecode(p9.Body).data) do
 											LanguageCodes[i] = entry.languageCode
@@ -2248,7 +2242,7 @@ return ((function()
 										elseif p11.StatusCode < 200 or p11.StatusCode >= 400 then
 											v13 = "User Experience Language Setting Request Status code: " .. p11.StatusCode
 										else
-											v12, v444 = pcall(function()
+											v12, v445 = pcall(function()
 												-- upvalues: HttpService (upval), p11 (copy), v4 (upval), LanguageCode1 (upval), LanguageCode (upval), LanguageCodes2 (upval)
 												local UserUniverseLocalizationSettingValue = HttpService:JSONDecode(p11.Body).userUniverseLocalizationSettingValue
 												
@@ -2327,7 +2321,7 @@ return ((function()
 				elseif p7.StatusCode < 200 or p7.StatusCode >= 400 then
 					v6 = "Locale Code to Language Code Mapping Request Status code: " .. p7.StatusCode
 				else
-					v5, v458 = pcall(function()
+					v5, v459 = pcall(function()
 						-- upvalues: HttpService (upval), p7 (copy), t (upval), LanguageCodes2 (upval), LanguageCodes1 (upval), LocaleId (upval), LanguageCode1 (upval)
 						for _, entry in pairs(HttpService:JSONDecode(p7.Body).data) do
 							local LanguageCode = entry.locale.language.languageCode
@@ -2367,7 +2361,7 @@ return ((function()
 						elseif p9.StatusCode < 200 or p9.StatusCode >= 400 then
 							v9 = "Experience Source Language Status code: " .. p9.StatusCode
 						else
-							v8, v453 = pcall(function()
+							v8, v454 = pcall(function()
 								-- upvalues: HttpService (upval), p9 (copy), LanguageCode (upval), LocaleCode (upval), t (upval)
 								LanguageCode = HttpService:JSONDecode(p9.Body).languageCode
 								LocaleCode = t[LanguageCode].localeCode
@@ -2397,7 +2391,7 @@ return ((function()
 								elseif p11.StatusCode < 200 or p11.StatusCode >= 400 then
 									v13 = "Experience Supported Language Request Status code: " .. p11.StatusCode
 								else
-									v12, v448 = pcall(function()
+									v12, v449 = pcall(function()
 										-- upvalues: HttpService (upval), p11 (copy), LanguageCodes (upval)
 										for i, entry in pairs(HttpService:JSONDecode(p11.Body).data) do
 											LanguageCodes[i] = entry.languageCode
@@ -2427,7 +2421,7 @@ return ((function()
 										elseif p13.StatusCode < 200 or p13.StatusCode >= 400 then
 											v16 = "User Experience Language Setting Request Status code: " .. p13.StatusCode
 										else
-											v15, v444 = pcall(function()
+											v15, v445 = pcall(function()
 												-- upvalues: HttpService (upval), p13 (copy), v4 (upval), LanguageCode1 (upval), LanguageCode (upval), LanguageCodes2 (upval)
 												local UserUniverseLocalizationSettingValue = HttpService:JSONDecode(p13.Body).userUniverseLocalizationSettingValue
 												
@@ -3164,7 +3158,7 @@ return ((function()
 			end
 		end)
 		
-		local function v554(p8)
+		local function v555(p8)
 			-- upvalues: v8 (ref), TextChatService (upval), AIRephraseSettingStore (copy), reportSettingsChangeForAnalytics (upval), NewPage (upval)
 			if p8 ~= v8 then
 				local v9 = p8 == 2
@@ -3186,7 +3180,7 @@ return ((function()
 		end
 		
 		if not ExpChatDebounceRephraseIndexSelection then
-			NewPage.AIRephraseSelector.IndexChanged:connect(if IsFIntDebounceAIRephraseSettingDelayModuleAbove then ThrottleFunctionCallModule(FIntDebounceAIRephraseSettingDelayModule, v554) else v554)
+			NewPage.AIRephraseSelector.IndexChanged:connect(if IsFIntDebounceAIRephraseSettingDelayModuleAbove then ThrottleFunctionCallModule(FIntDebounceAIRephraseSettingDelayModule, v555) else v555)
 		elseif IsFIntDebounceAIRephraseSettingDelayModuleAbove then
 			local DelayedThread = nil
 			NewPage.AIRephraseSelector.IndexChanged:connect(function(p8)
@@ -3218,7 +3212,7 @@ return ((function()
 				end)
 			end)
 		else
-			NewPage.AIRephraseSelector.IndexChanged:connect(v554)
+			NewPage.AIRephraseSelector.IndexChanged:connect(v555)
 		end
 	end
 	
@@ -3245,7 +3239,7 @@ return ((function()
 			end
 		end)
 		
-		local function v563(p8)
+		local function v564(p8)
 			-- upvalues: v8 (ref), TextChatService (upval), ChatSummariesSettingStore (copy), reportSettingsChangeForAnalytics (upval), NewPage (upval)
 			if p8 ~= v8 then
 				local v9 = p8 == 2
@@ -3297,7 +3291,7 @@ return ((function()
 				end)
 			end)
 		else
-			NewPage.ChatSummariesSelector.IndexChanged:connect(v563)
+			NewPage.ChatSummariesSelector.IndexChanged:connect(v564)
 		end
 	end
 	
@@ -3775,7 +3769,7 @@ return ((function()
 		local FIntDebounceDisconnectButtonDelayModule: number = GetFIntDebounceDisconnectButtonDelayModule()
 		local IsFIntDebounceDisconnectButtonDelayModuleAbove = FIntDebounceDisconnectButtonDelayModule > 0
 		
-		local function v632(p8)
+		local function v633(p8)
 			-- upvalues: v10 (ref), DifferentiateVoiceSelectorSystemAndUser (upval), Flag3 (upval), FFlagVoiceRewarmTelemetry (upval), Default2 (upval), ConstantsModule1 (upval), VoiceSelectorIgnoreFailedStateDisconnect (upval), Flag2 (upval), NewPage (upval)
 			if p8 == v10 then return end
 			v10 = p8
@@ -3814,7 +3808,7 @@ return ((function()
 			end
 		end
 		
-		NewPage.VoiceConnectDisconnectSelector.IndexChanged:connect(if IsFIntDebounceDisconnectButtonDelayModuleAbove then ThrottleFunctionCallModule(FIntDebounceDisconnectButtonDelayModule, v632) else v632)
+		NewPage.VoiceConnectDisconnectSelector.IndexChanged:connect(if IsFIntDebounceDisconnectButtonDelayModuleAbove then ThrottleFunctionCallModule(FIntDebounceDisconnectButtonDelayModule, v633) else v633)
 		
 		if VoiceChatSelectorReconnectFocus2AEGIS2 then
 			NewPage.VoiceConnectDisconnectFrame.SelectionChanged:Connect(function(_, SelectedCoreObject, p8)
@@ -3922,7 +3916,7 @@ return ((function()
 		}, if GameSettings.VRThirdPersonFollowCamEnabled then 2 else 1)
 		NewPage.VRThirdPersonFixedCamEnabledFrame.LayoutOrder = SETTINGSMENULAYOUTORDER.VRThirdPersonFixedCamEnabledFrame
 		
-		local function v642(VRComfortSetting)
+		local function v643(VRComfortSetting)
 			-- upvalues: NewPage (upval)
 			if VRComfortSetting == Enum.VRComfortSetting.Custom then
 				NewPage.VRVignetteEnabledSelector:SetZIndex(2)
@@ -3950,12 +3944,12 @@ return ((function()
 		end
 		
 		NewPage.VRComfortSettingSelector.IndexChanged:connect(function(p8)
-			-- upvalues: EnumItems (copy), GameSettings (upval), v642 (copy)
+			-- upvalues: EnumItems (copy), GameSettings (upval), v643 (copy)
 			local EnumItem = EnumItems[p8]
 			GameSettings.VRComfortSetting = EnumItem
-			v642(EnumItem)
+			v643(EnumItem)
 		end)
-		v642(GameSettings.VRComfortSetting)
+		v643(GameSettings.VRComfortSetting)
 		NewPage.VRVignetteEnabledSelector.IndexChanged:connect(function(p8)
 			-- upvalues: GameSettings (upval)
 			if GameSettings.VRComfortSetting == Enum.VRComfortSetting.Custom then
@@ -4046,7 +4040,7 @@ return ((function()
 	NewPage.VoiceChatOptionsEnabled = false
 	local EventConnection = nil
 	local EventConnection1 = nil
-	local Callback2: (() -> ())? = nil
+	local Callback: (() -> ())? = nil
 	
 	if game:GetEngineFeature("VoiceChatSupported") then
 		spawn(function()
@@ -4221,7 +4215,7 @@ return ((function()
 			end
 		end)
 		
-		Callback2 = function()
+		Callback = function()
 			-- upvalues: EventConnection (ref), EventConnection1 (ref)
 			if EventConnection then
 				EventConnection:Disconnect()
@@ -4245,13 +4239,13 @@ return ((function()
 	end
 	
 	if GetFFlagSelfViewCameraSettingsFunction() and (not IsInExperienceUIVREnabled or not IsSpatialFunction()) then
-		local function v243(p8)
+		local function v245(p8)
 			-- upvalues: NewPage (copy)
 			NewPage.VideoOptionsEnabled = p8.hasCameraPermissions
 		end
 		
 		if IsCamEnabledForUserAndPlaceModule() then
-			GetCamMicPermissionsModule(v243, { Default.Permissions.CAMERA_ACCESS }, true)
+			GetCamMicPermissionsModule(v245, { Default.Permissions.CAMERA_ACCESS }, true)
 			
 			if Connection2 then
 				Connection2:disconnect()
@@ -4492,43 +4486,41 @@ return ((function()
 			parent = NewPage.Page
 		})
 	end
-	if FFlagIEMSettingsGroupsModule then
-		NewPage.AudioHeader = Callback({
-			headerText = "CoreScripts.InGameMenu.GameSettings.AudioHeader",
-			layoutOrder = SETTINGSMENULAYOUTORDER.AudioHeader,
+	NewPage.AudioHeader = RenderSettingsHeaderModule({
+		headerText = "CoreScripts.InGameMenu.GameSettings.AudioHeader",
+		layoutOrder = SETTINGSMENULAYOUTORDER.AudioHeader,
+		parent = NewPage.Page
+	})
+	NewPage.AudioDivider = RenderSettingsDividerModule({
+		layoutOrder = SETTINGSMENULAYOUTORDER.AudioDivider,
+		parent = NewPage.Page
+	})
+	NewPage.DisplayHeader = RenderSettingsHeaderModule({
+		headerText = "CoreScripts.InGameMenu.GameSettings.DisplayHeader",
+		layoutOrder = SETTINGSMENULAYOUTORDER.DisplayHeader,
+		parent = NewPage.Page
+	})
+	NewPage.DisplayDivider = RenderSettingsDividerModule({
+		layoutOrder = SETTINGSMENULAYOUTORDER.DisplayDivider,
+		parent = NewPage.Page
+	})
+	
+	if not IsSpatialFunction() then
+		NewPage.LanguageHeader = RenderSettingsHeaderModule({
+			headerText = "CoreScripts.InGameMenu.GameSettings.LanguageHeader",
+			layoutOrder = SETTINGSMENULAYOUTORDER.LanguageHeader,
 			parent = NewPage.Page
 		})
-		NewPage.AudioDivider = Callback1({
-			layoutOrder = SETTINGSMENULAYOUTORDER.AudioDivider,
-			parent = NewPage.Page
-		})
-		NewPage.DisplayHeader = Callback({
-			headerText = "CoreScripts.InGameMenu.GameSettings.DisplayHeader",
-			layoutOrder = SETTINGSMENULAYOUTORDER.DisplayHeader,
-			parent = NewPage.Page
-		})
-		NewPage.DisplayDivider = Callback1({
-			layoutOrder = SETTINGSMENULAYOUTORDER.DisplayDivider,
-			parent = NewPage.Page
-		})
-		
-		if not IsSpatialFunction() then
-			NewPage.LanguageHeader = Callback({
-				headerText = "CoreScripts.InGameMenu.GameSettings.LanguageHeader",
-				layoutOrder = SETTINGSMENULAYOUTORDER.LanguageHeader,
-				parent = NewPage.Page
-			})
-			NewPage.LanguageDivider = Callback1({
-				layoutOrder = SETTINGSMENULAYOUTORDER.LanguageDivider,
-				parent = NewPage.Page
-			})
-		end
-		NewPage.ViewAndControlsHeader = Callback({
-			headerText = "CoreScripts.InGameMenu.GameSettings.ViewandControlsHeader",
-			layoutOrder = SETTINGSMENULAYOUTORDER.ViewAndControlsHeader,
+		NewPage.LanguageDivider = RenderSettingsDividerModule({
+			layoutOrder = SETTINGSMENULAYOUTORDER.LanguageDivider,
 			parent = NewPage.Page
 		})
 	end
+	NewPage.ViewAndControlsHeader = RenderSettingsHeaderModule({
+		headerText = "CoreScripts.InGameMenu.GameSettings.ViewandControlsHeader",
+		layoutOrder = SETTINGSMENULAYOUTORDER.ViewAndControlsHeader,
+		parent = NewPage.Page
+	})
 	NewPage.TabHeader.Name = "GameSettingsTab"
 	local IconsCommonSettings = Migration.uiblox["icons/common/settings"]
 	NewPage.TabHeader.TabLabel.Icon.Text = IconsCommonSettings.name
@@ -4622,7 +4614,7 @@ return ((function()
 	end
 	
 	function NewPage.CloseSettingsPage()
-		-- upvalues: NewPage (copy), IsInExperienceUIVREnabled (upval), IsSpatialFunction (upval), SoundService (upval), DeviceListChangedConnection (ref), RUUserScalePreferenceAPIEngineFeature (upval), HeartbeatConnection (ref), Connection (ref), Connection1 (ref), ScaledCeiled (ref), ScaledFloored (ref), GetFFlagEnableCrossExpVoiceFunction (upval), Callback2 (ref), GetFFlagSelfViewCameraSettingsFunction (upval), VideoCaptureService (upval), DevicesChangedConnection (ref), Connection2 (ref), Default2 (upval), FFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (upval), FFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (upval)
+		-- upvalues: NewPage (copy), IsInExperienceUIVREnabled (upval), IsSpatialFunction (upval), SoundService (upval), DeviceListChangedConnection (ref), RUUserScalePreferenceAPIEngineFeature (upval), HeartbeatConnection (ref), Connection (ref), Connection1 (ref), ScaledCeiled (ref), ScaledFloored (ref), GetFFlagEnableCrossExpVoiceFunction (upval), Callback (ref), GetFFlagSelfViewCameraSettingsFunction (upval), VideoCaptureService (upval), DevicesChangedConnection (ref), Connection2 (ref), Default2 (upval), FFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (upval), FFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (upval)
 		NewPage.PageOpen = false
 		
 		if IsInExperienceUIVREnabled and IsSpatialFunction() then return end
@@ -4645,8 +4637,8 @@ return ((function()
 			ScaledCeiled = nil
 			ScaledFloored = nil
 		end
-		if GetFFlagEnableCrossExpVoiceFunction() and Callback2 then
-			Callback2()
+		if GetFFlagEnableCrossExpVoiceFunction() and Callback then
+			Callback()
 		end
 		if GetFFlagSelfViewCameraSettingsFunction() then
 			if game:GetEngineFeature("VideoCaptureService") and VideoCaptureService.DevicesChanged and DevicesChangedConnection then

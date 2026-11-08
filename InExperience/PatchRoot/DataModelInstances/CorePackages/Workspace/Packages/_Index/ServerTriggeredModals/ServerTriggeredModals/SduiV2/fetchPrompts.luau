@@ -12,6 +12,7 @@ local ParsePageEntriesFromResponseFunction = SduiSharedUtilitiesModule.SduiProto
 local FFlagSduiAllowNoConfigsBuilt = require(Parent.SharedFlags).FFlagSduiAllowNoConfigsBuilt
 local FFlagEdpGameLeavePromptsHandlerEnabled = require(Parent.SharedFlags).FFlagEdpGameLeavePromptsHandlerEnabled
 local FFlagEdpOpenPromptsHandlerEnabled = require(Parent.SharedFlags).FFlagEdpOpenPromptsHandlerEnabled
+local FFlagNotificationStreamPromptsHandlerEnabled = require(Parent.SharedFlags).FFlagNotificationStreamPromptsHandlerEnabled
 local FFlagHomepagePromptsHandlerPassClientAttributes = require(Parent.SharedFlags).FFlagHomepagePromptsHandlerPassClientAttributes
 local FFlagSduiExtendedCapabilitiesPrompts = require(Parent.SharedFlags).FFlagSduiExtendedCapabilitiesPrompts
 local FFlagPushNotificationsUpsellHomePromptsExperiment = require(Parent.SharedFlags).FFlagPushNotificationsUpsellHomePromptsExperiment
@@ -36,7 +37,7 @@ local function getPromptsUrl(EntryPoint, ClientAttributes, List)
 end
 
 return function(p1, p2)
-	-- upvalues: Parent (copy), FFlagSduiExtendedCapabilitiesPrompts (copy), SduiSharedUtilitiesModule (copy), GetSduiApiStoreFunction (copy), SduiResponseType (copy), UrlBuilder (copy), UrlBase (copy), FFlagEdpGameLeavePromptsHandlerEnabled (copy), FFlagEdpOpenPromptsHandlerEnabled (copy), FFlagHomepagePromptsHandlerPassClientAttributes (copy), getPromptsUrl (copy), FFlagPromptsEdpOpenReplaceOnFetch (copy), FFlagSduiAllowNoConfigsBuilt (copy), PromptsEntryPointModule (copy), FFlagPushNotificationsUpsellHomePromptsExperiment (copy), NativePushNotificationPermissionPrompt (copy), FFlagSplitPaneEducationalTour (copy), SplitPaneTourPromptModule (copy), ParsePageEntriesFromResponseFunction (copy)
+	-- upvalues: Parent (copy), FFlagSduiExtendedCapabilitiesPrompts (copy), SduiSharedUtilitiesModule (copy), GetSduiApiStoreFunction (copy), SduiResponseType (copy), UrlBuilder (copy), UrlBase (copy), FFlagEdpGameLeavePromptsHandlerEnabled (copy), FFlagEdpOpenPromptsHandlerEnabled (copy), FFlagHomepagePromptsHandlerPassClientAttributes (copy), FFlagNotificationStreamPromptsHandlerEnabled (copy), PromptsEntryPointModule (copy), getPromptsUrl (copy), FFlagPromptsEdpOpenReplaceOnFetch (copy), FFlagSduiAllowNoConfigsBuilt (copy), FFlagPushNotificationsUpsellHomePromptsExperiment (copy), NativePushNotificationPermissionPrompt (copy), FFlagSplitPaneEducationalTour (copy), SplitPaneTourPromptModule (copy), ParsePageEntriesFromResponseFunction (copy)
 	local ServiceContractsProtoModule = require(Parent.ServiceContractsProto)
 	local GetEligiblePromptsRequest = ServiceContractsProtoModule.apppageplatform.prompts.prompts.GetEligiblePromptsRequest
 	local config = {
@@ -47,7 +48,7 @@ return function(p1, p2)
 	}
 	GetSduiApiStoreFunction().fetchIfNeeded({
 		responseType = SduiResponseType.ProtobufJson,
-		url = if FFlagSduiExtendedCapabilitiesPrompts then UrlBuilder.new({ path = "modals-api/v1/prompts", base = UrlBase.APIS })() elseif FFlagEdpGameLeavePromptsHandlerEnabled or FFlagEdpOpenPromptsHandlerEnabled or FFlagHomepagePromptsHandlerPassClientAttributes then getPromptsUrl(p1.entryPoint, p1.clientAttributes, p1.promptStyles) else getPromptsUrl(p1.entryPoint, nil, p1.promptStyles),
+		url = if FFlagSduiExtendedCapabilitiesPrompts then UrlBuilder.new({ path = "modals-api/v1/prompts", base = UrlBase.APIS })() elseif FFlagEdpGameLeavePromptsHandlerEnabled or FFlagEdpOpenPromptsHandlerEnabled or FFlagHomepagePromptsHandlerPassClientAttributes or FFlagNotificationStreamPromptsHandlerEnabled and p1.entryPoint == PromptsEntryPointModule.NotificationStreamOpen then getPromptsUrl(p1.entryPoint, p1.clientAttributes, p1.promptStyles) else getPromptsUrl(p1.entryPoint, nil, p1.promptStyles),
 		surfaceKey = p1.surfaceKey,
 		configKey = p1.configKey,
 		clearOnEmptyResponse = p1.clearOnEmptyResponse,

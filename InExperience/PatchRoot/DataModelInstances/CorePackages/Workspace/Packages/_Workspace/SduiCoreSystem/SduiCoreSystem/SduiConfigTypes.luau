@@ -1,6 +1,7 @@
 ﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
 local Parent = SduiCoreSystem.Parent
 local TModule = require(Parent.t)
+local _ = require(SduiCoreSystem.SduiErrors)
 local _ = require(SduiCoreSystem.SduiComponentType)
 local UiComponentInterface = {
 	componentType = TModule.string,

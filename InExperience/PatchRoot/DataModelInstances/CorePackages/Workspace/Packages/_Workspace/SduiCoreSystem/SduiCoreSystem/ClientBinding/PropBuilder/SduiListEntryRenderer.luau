@@ -1,5 +1,6 @@
 ﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
 local Parent = SduiCoreSystem.Parent
+local FFlagSduiErrorPaths = require(Parent.SharedFlags).FFlagSduiErrorPaths
 local CryoModule = require(Parent.Cryo)
 local _ = require(Parent.Signals)
 local BuildInputsForNestedComponentModule = require(SduiCoreSystem.ClientBinding.PropBuilder.buildInputsForNestedComponent)
@@ -8,6 +9,7 @@ local _ = require(SduiCoreSystem.ClientBinding.SduiClientBindingTypes)
 local SduiPropUtilsModule = require(SduiCoreSystem.ClientBinding.PropBuilder.SduiPropUtils)
 local SduiLoggerModule = require(SduiCoreSystem.SduiLogger)
 local SduiErrorsModule = require(SduiCoreSystem.SduiErrors)
+local AddSduiErrorContextFieldsModule = require(SduiCoreSystem.addSduiErrorContextFields)
 local _ = require(SduiCoreSystem.SduiComponentType)
 local SduiParseHelpersModule = require(SduiCoreSystem.SduiParseHelpers)
 local _ = require(SduiCoreSystem.ClientBinding.PropBuilder.SduiListEntryNormalizer)
@@ -35,7 +37,7 @@ local function unwrapEntryData(Tbl)
 end
 
 local function fillInputs(p1, Inputs, p2, p3, p4, p5, p6)
-	-- upvalues: BuildInputsForNestedComponentModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), SduiParseHelpersModule (copy)
+	-- upvalues: BuildInputsForNestedComponentModule (copy), SduiParseHelpersModule (copy), FFlagSduiErrorPaths (copy), AddSduiErrorContextFieldsModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy)
 	if Inputs == nil then return end
 	local Success, Result = pcall(function()
 		-- upvalues: BuildInputsForNestedComponentModule (upval), p2 (copy), Inputs (copy), p3 (copy), p4 (copy), p1 (copy), p5 (copy)
@@ -43,33 +45,40 @@ local function fillInputs(p1, Inputs, p2, p3, p4, p5, p6)
 	end)
 	
 	if not Success then
-		SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, {
+		local config = {
 			message = `Failed to build inputs for ComponentList item: {SduiParseHelpersModule.stringifyValue(Result)}`,
 			name = p6.name,
 			componentType = p6.componentType,
 			parserName = p6.parserName
-		}, p6.appPage)
+		}
+		
+		if FFlagSduiErrorPaths then
+			AddSduiErrorContextFieldsModule(config, p6.nodeContext)
+		end
+		SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, config, p6.appPage)
 	end
 end
 
 return {
 	captureErrorContext = function(p7)
+		-- upvalues: FFlagSduiErrorPaths (copy)
 		return {
 			name = p7.debugName,
+			nodeContext = if FFlagSduiErrorPaths then p7.errorContext else nil,
 			componentType = p7.currentComponentType,
 			parserName = p7.currentParserName,
 			appPage = p7.appPage
 		}
 	end,
-	createInputSlicer = function(Callback1, p7, p8, p9, Callback)
+	createInputSlicer = function(Callback, p7, p8, p9, Callback1)
 		-- upvalues: fillInputs (copy), CryoModule (copy), t (copy), unwrapEntryData (copy)
 		local function rawSlice(p10, p11)
-			-- upvalues: Callback1 (copy), fillInputs (upval), p7 (copy), p8 (copy), p9 (copy), CryoModule (upval), t (upval), unwrapEntryData (upval)
+			-- upvalues: Callback (copy), fillInputs (upval), p7 (copy), p8 (copy), p9 (copy), CryoModule (upval), t (upval), unwrapEntryData (upval)
 			if p10.sourceMode == "literal" then
-				return if p11 then Callback1 else function(p12)
-					-- upvalues: fillInputs (upval), p10 (copy), Callback1 (upval), p7 (upval), p8 (upval), p9 (upval)
+				return if p11 then Callback else function(p12)
+					-- upvalues: fillInputs (upval), p10 (copy), Callback (upval), p7 (upval), p8 (upval), p9 (upval)
 					local t = {}
-					fillInputs(t, p10.inputs, Callback1, p7, p12, p8, p9)
+					fillInputs(t, p10.inputs, Callback, p7, p12, p8, p9)
 					
 					return t
 				end
@@ -77,32 +86,32 @@ return {
 				local Item = p10.item
 				
 				return if p11 then function(p12)
-					-- upvalues: CryoModule (upval), Callback1 (upval), Item (copy), t (upval)
-					return CryoModule.Dictionary.join(Callback1(p12), if typeof(Item) == "table" then Item else t)
+					-- upvalues: CryoModule (upval), Callback (upval), Item (copy), t (upval)
+					return CryoModule.Dictionary.join(Callback(p12), if typeof(Item) == "table" then Item else t)
 				end else function(p12)
-					-- upvalues: unwrapEntryData (upval), Item (copy), fillInputs (upval), p10 (copy), Callback1 (upval), p7 (upval), p8 (upval), p9 (upval)
+					-- upvalues: unwrapEntryData (upval), Item (copy), fillInputs (upval), p10 (copy), Callback (upval), p7 (upval), p8 (upval), p9 (upval)
 					local UnwrapEntryDataResult = unwrapEntryData(Item)
-					fillInputs(UnwrapEntryDataResult, p10.inputs, Callback1, p7, p12, p8, p9)
+					fillInputs(UnwrapEntryDataResult, p10.inputs, Callback, p7, p12, p8, p9)
 					
 					return UnwrapEntryDataResult
 				end
 			end
 		end
 		
-		return if Callback == nil then rawSlice else function(p10, p11)
-			-- upvalues: rawSlice (copy), Callback (copy), CryoModule (upval)
+		return if Callback1 == nil then rawSlice else function(p10, p11)
+			-- upvalues: rawSlice (copy), Callback1 (copy), CryoModule (upval)
 			local RawSliceResult = rawSlice(p10, p11)
 			
 			return function(p12)
-				-- upvalues: Callback (upval), p10 (copy), RawSliceResult (copy), CryoModule (upval)
-				local CallbackResult = Callback(p10)
+				-- upvalues: Callback1 (upval), p10 (copy), RawSliceResult (copy), CryoModule (upval)
+				local CallbackResult = Callback1(p10)
 				
 				return if CallbackResult == nil then RawSliceResult(p12) else CryoModule.Dictionary.join(RawSliceResult(p12), CallbackResult)
 			end
 		end
 	end,
 	buildEntryConfigs = function(List, Callback, p7, p8, p9, p10, p11, p12, p13, Callback1)
-		-- upvalues: SduiPropUtilsModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), SduiDeferredItemStubModule (copy), BuildConfigForComponentFunction (copy)
+		-- upvalues: SduiPropUtilsModule (copy), FFlagSduiErrorPaths (copy), AddSduiErrorContextFieldsModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), SduiDeferredItemStubModule (copy), BuildConfigForComponentFunction (copy)
 		local List1 = {}
 		local List2 = {}
 		local HasCallback = Callback1 ~= nil
@@ -124,19 +133,26 @@ return {
 					table.insert(List2, i)
 					continue
 				end
-			elseif value.template == nil then
-				SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, {
+				continue
+			end
+			if value.template == nil then
+				local config = {
 					message = `No template found for ComponentList item (identifier: {value.identifier or tostring(i)})`,
 					name = p9.name,
 					componentType = p9.componentType,
 					parserName = p9.parserName
-				}, p9.appPage)
+				}
+				
+				if FFlagSduiErrorPaths then
+					AddSduiErrorContextFieldsModule(config, p9.nodeContext)
+				end
+				SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, config, p9.appPage)
 			else
 				local CallbackResult = Callback(value, value.isInline)
 				local v2 = if value.isInline then p11 else nil
 				
 				if p13 and (not value.template or (not value.template.kind or (not value.template.kind.value or (not value.template.kind.value.shared or value.template.kind.value.shared.is_component_filtered == nil)))) then
-					local Stub = SduiDeferredItemStubModule.makeStub(value.template, CallbackResult, p8, p10, v2, p9)
+					local Stub = SduiDeferredItemStubModule.makeStub(value.template, CallbackResult, p8, p10, v2, p9, if FFlagSduiErrorPaths then value.robloxComponent else nil, if FFlagSduiErrorPaths then value.identifier else nil)
 					
 					if HasCallback then
 						local CallbackResult1 = Callback1(value, p12)
@@ -151,7 +167,7 @@ return {
 					table.insert(List2, i)
 					continue
 				else
-					local ConfigForComponent = BuildConfigForComponentFunction(value.template, CallbackResult, p8, p10, nil, v2)
+					local ConfigForComponent = BuildConfigForComponentFunction(value.template, CallbackResult, p8, p10, nil, v2, nil, if FFlagSduiErrorPaths then value.robloxComponent else nil, if FFlagSduiErrorPaths then value.identifier else nil)
 					
 					if ConfigForComponent and SduiPropUtilsModule.isComponentVisible(ConfigForComponent, p12) then
 						if HasCallback then

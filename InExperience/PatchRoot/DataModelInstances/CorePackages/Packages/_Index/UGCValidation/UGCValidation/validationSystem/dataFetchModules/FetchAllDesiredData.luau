@@ -47,12 +47,20 @@ function FetchAllDesiredDataModule.storeDesiredData(DATAFETCHFAILUREs, p1)
 			end
 		end
 	end
+	local v1 = nil
+	
 	if p1[SharedDataMember.curveAnimations] then
-		DATAFETCHFAILUREs.curveAnimations = FetchCurveAnimationsModule.getData(RootInstance, DATAFETCHFAILUREs.consumerConfig) or FetchAllDesiredDataModule.DATA_FETCH_FAILURE
+		local Data
+		Data, v21 = FetchCurveAnimationsModule.getData(RootInstance, DATAFETCHFAILUREs.consumerConfig)
+		
+		if not Data then
+			Data = FetchAllDesiredDataModule.DATA_FETCH_FAILURE
+		end
+		DATAFETCHFAILUREs.curveAnimations = Data
 	end
 	if p1[SharedDataMember.curveAnimComputedFrames] then
 		if DATAFETCHFAILUREs.curveAnimations and DATAFETCHFAILUREs.curveAnimations ~= FetchAllDesiredDataModule.DATA_FETCH_FAILURE then
-			DATAFETCHFAILUREs.curveAnimComputedFrames = FetchCurveAnimComputedFramesModule.getData(DATAFETCHFAILUREs.curveAnimations) or FetchAllDesiredDataModule.DATA_FETCH_FAILURE
+			DATAFETCHFAILUREs.curveAnimComputedFrames = FetchCurveAnimComputedFramesModule.getData(DATAFETCHFAILUREs.curveAnimations, v1) or FetchAllDesiredDataModule.DATA_FETCH_FAILURE
 		else
 			DATAFETCHFAILUREs.curveAnimComputedFrames = FetchAllDesiredDataModule.DATA_FETCH_FAILURE
 		end

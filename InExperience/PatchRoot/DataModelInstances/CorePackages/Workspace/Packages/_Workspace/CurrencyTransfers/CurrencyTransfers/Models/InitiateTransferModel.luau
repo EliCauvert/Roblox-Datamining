@@ -1,6 +1,8 @@
 ﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
 local _ = require(CurrencyTransfers.types)
 local TModule = require(CurrencyTransfers.Parent.t)
+local FFlagShowRemainingTransfersForNonPlusModule = require(CurrencyTransfers.Flags.FFlagShowRemainingTransfersForNonPlus)
+local TransferBenefitSourceModule = require(CurrencyTransfers.Enums.TransferBenefitSource)
 local InitiateTransferModelModule = {}
 
 function InitiateTransferModelModule.new(p1)
@@ -44,7 +46,7 @@ function InitiateTransferModelModule.mock(p1)
 end
 
 function InitiateTransferModelModule.format(p1)
-	-- upvalues: InitiateTransferModelModule (copy)
+	-- upvalues: InitiateTransferModelModule (copy), FFlagShowRemainingTransfersForNonPlusModule (copy), TransferBenefitSourceModule (copy)
 	local RobuxTransfer = p1.robuxTransfer
 	local Sender = RobuxTransfer.sender
 	
@@ -79,7 +81,9 @@ function InitiateTransferModelModule.format(p1)
 			mutualFriendsCount = p1.userRelationshipDetail.mutualFriendsCount,
 			userAccountSinceYear = p1.userRelationshipDetail.userAccountSinceYear,
 			areFriends = p1.userRelationshipDetail.areFriends
-		}
+		},
+		transferBenefitSource = if FFlagShowRemainingTransfersForNonPlusModule then TransferBenefitSourceModule.fromValue(p1.benefitSource) else nil,
+		numFreeTransfersRemaining = if FFlagShowRemainingTransfersForNonPlusModule and type(p1.numFreeTransfersRemaining) == "number" then p1.numFreeTransfersRemaining else nil
 	}))
 end
 
@@ -113,7 +117,9 @@ InitiateTransferModelModule.isValid = TModule.strictInterface({
 	}),
 	senderRobuxBalance = TModule.number,
 	minimumTransferAmount = TModule.optional(TModule.number),
-	maximumTransferAmount = TModule.optional(TModule.number)
+	maximumTransferAmount = TModule.optional(TModule.number),
+	transferBenefitSource = TModule.optional(TModule.string),
+	numFreeTransfersRemaining = TModule.optional(TModule.number)
 })
 
 return InitiateTransferModelModule

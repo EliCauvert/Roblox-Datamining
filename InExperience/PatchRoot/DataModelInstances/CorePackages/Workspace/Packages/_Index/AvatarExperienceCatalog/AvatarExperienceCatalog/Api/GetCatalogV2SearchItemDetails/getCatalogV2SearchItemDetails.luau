@@ -9,6 +9,9 @@ local NormalizeCatalogV2SearchItemDetailsModule = require(script.Parent.normaliz
 local ConstantsModule = require(script.Parent.constants)
 local config = { assetTypeIds = true, bundleTypeIds = true }
 
+if require(Parent.AvatarExperienceFlags).FFlagAXCatalogSpecialFeaturesFilter then
+	config.requiredPropertyFilters = true
+end
 local function buildQueryStringWithArrayParams(List): string
 	-- upvalues: config (copy), HttpService (copy)
 	local List1 = {}

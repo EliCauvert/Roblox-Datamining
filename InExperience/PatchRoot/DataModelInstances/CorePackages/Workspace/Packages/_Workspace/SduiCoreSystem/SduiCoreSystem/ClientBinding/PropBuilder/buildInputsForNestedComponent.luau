@@ -1,11 +1,13 @@
 ﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local Parent = SduiCoreSystem.Parent
+local FFlagSduiErrorPaths = require(Parent.SharedFlags).FFlagSduiErrorPaths
 local _ = require(SduiCoreSystem.ClientBinding.SduiClientBindingTypes)
 local SduiPropUtilsModule = require(SduiCoreSystem.ClientBinding.PropBuilder.SduiPropUtils)
 local SplitDottedPathModule = require(SduiCoreSystem.ClientBinding.splitDottedPath)
-local _ = require(SduiCoreSystem.Parent.Signals)
+local _ = require(Parent.Signals)
 
 return function(p1, List, p2, p3, ResolveLocalizedLiteralResults, p4)
-	-- upvalues: SplitDottedPathModule (copy), SduiPropUtilsModule (copy)
+	-- upvalues: SplitDottedPathModule (copy), SduiPropUtilsModule (copy), FFlagSduiErrorPaths (copy)
 	if List then
 		for i, value in List do
 			if value.kind then
@@ -23,7 +25,7 @@ return function(p1, List, p2, p3, ResolveLocalizedLiteralResults, p4)
 					ResolveLocalizedLiteralResults[i] = Value
 				elseif Type == "translation" then
 					if p4 and p4.resolveLocalizedLiteral then
-						ResolveLocalizedLiteralResults[i] = p4.resolveLocalizedLiteral(value.kind.value)
+						ResolveLocalizedLiteralResults[i] = p4.resolveLocalizedLiteral(value.kind.value, if FFlagSduiErrorPaths then p4.errorContext else nil)
 					end
 				elseif Type == "format" then
 					ResolveLocalizedLiteralResults[i] = SduiPropUtilsModule.generateFormatStringPropValue(value.kind.value, p2, p4, p1)(p3 or false).data

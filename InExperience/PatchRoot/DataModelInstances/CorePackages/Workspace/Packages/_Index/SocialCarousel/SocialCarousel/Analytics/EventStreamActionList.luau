@@ -9,6 +9,7 @@ local EventTypes = Enums.EventTypes
 local EventNamesModule = require(script.Parent.EventNames)
 local ConstantsModule = require(SocialCarousel.Common.Constants)
 local FIntSocialCarouselShowRecsLimit = require(SocialCarousel.Flags).FIntSocialCarouselShowRecsLimit
+local FFlagSocialCarouselShareQREnabled = SharedFlagsModule.FFlagSocialCarouselShareQREnabled
 local FFlagLuaAppUserSeenCollectionUnifiedFields = SharedFlagsModule.FFlagLuaAppUserSeenCollectionUnifiedFields
 
 local function Source(p1)
@@ -72,6 +73,20 @@ return {
 			interactionUuid = Source
 		}
 	},
+	[EventNamesModule.AddFriendsTileSeen] = if require(SocialCarousel.Flags.FFlagSocialCarouselLogNewFriendRequestsBadge) then {
+		context = Contexts.HomePage,
+		eventType = EventTypes.AddFriendsTileSeen,
+		formatRulesForAdditionalInfo = {
+			newRequestCount = Source,
+			previousCount = Source,
+			trigger = Source,
+			badgeEnabled = Source,
+			badgeShown = Source,
+			badgeCapped = Source,
+			absolutePosition = Source,
+			source = Source
+		}
+	} else nil,
 	[EventNamesModule.ViewAllFriends] = {
 		context = Contexts.HomePage,
 		eventType = EventTypes.ButtonClick,
@@ -104,7 +119,7 @@ return {
 		additionalInfo = { btn = ConstantsModule.ANALYTICS.BTN_VALUES.START_SQUAD },
 		formatRulesForAdditionalInfo = { absolutePosition = Source, source = Source }
 	},
-	[EventNamesModule.ShareQRPressed] = if SharedFlagsModule.FFlagSocialCarouselShareQREnabled then {
+	[EventNamesModule.ShareQRPressed] = if FFlagSocialCarouselShareQREnabled then {
 		context = Contexts.HomePage,
 		eventType = EventTypes.ButtonClick,
 		additionalInfo = { btn = ConstantsModule.ANALYTICS.BTN_VALUES.SHARE_QR },

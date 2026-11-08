@@ -2,9 +2,7 @@
 local DependenciesModule = require(SocialLibraries.dependencies)
 local Cryo = DependenciesModule.Cryo
 local Roact = DependenciesModule.Roact
-local Text = DependenciesModule.Text
 local CallbackInputBoxModule = require(script.Parent.CallbackInputBox)
-local FoundationFontFaceMigration = DependenciesModule.Foundation.Utility.Flags.FoundationFontFaceMigration
 local GetTextBoundsAsyncFunction = DependenciesModule.Foundation.Utility.getTextBoundsAsync
 local NormalizeFontFaceFunction = DependenciesModule.Foundation.Utility.normalizeFontFace
 local InputBoxWithCharacterCounter = Roact.PureComponent:extend("InputBoxWithCharacterCounter")
@@ -20,7 +18,7 @@ InputBoxWithCharacterCounter.defaultProps = {
 }
 
 function InputBoxWithCharacterCounter.init(p1)
-	-- upvalues: FoundationFontFaceMigration (copy), GetTextBoundsAsyncFunction (copy)
+	-- upvalues: GetTextBoundsAsyncFunction (copy)
 	p1.state = { inputText = p1.props.initialInputText }
 	
 	function p1.textChangedCallback(InputText)
@@ -28,79 +26,61 @@ function InputBoxWithCharacterCounter.init(p1)
 		p1:setState({ inputText = InputText })
 	end
 	
-	if FoundationFontFaceMigration then
-		p1.isMounted = false
-		p1.measurementId = 0
+	p1.isMounted = false
+	p1.measurementId = 0
+	
+	function p1.measureText()
+		-- upvalues: p1 (copy), GetTextBoundsAsyncFunction (upval)
+		local Style = p1.props.style
+		local Text = #p1.state.inputText .. "/" .. p1.props.characterLimit
+		local CaptionSubHeaderFont = Style.Font.CaptionSubHeader.Font
+		local ScaledBaseSize = Style.Font.BaseSize * Style.Font.CaptionSubHeader.RelativeSize
 		
-		function p1.measureText()
-			-- upvalues: p1 (copy), GetTextBoundsAsyncFunction (upval)
-			local Style = p1.props.style
-			local Text = #p1.state.inputText .. "/" .. p1.props.characterLimit
-			local CaptionSubHeaderFont = Style.Font.CaptionSubHeader.Font
-			local ScaledBaseSize = Style.Font.BaseSize * Style.Font.CaptionSubHeader.RelativeSize
-			
-			if p1.measuredText ~= Text or p1.measuredFont ~= CaptionSubHeaderFont or p1.measuredFontSize ~= ScaledBaseSize then
-				p1.measuredText = Text
-				p1.measuredFont = CaptionSubHeaderFont
-				p1.measuredFontSize = ScaledBaseSize
-				p1.measurementId += 1
-				local MeasurementId = p1.measurementId
-				task.spawn(function()
-					-- upvalues: GetTextBoundsAsyncFunction (upval), Text (copy), CaptionSubHeaderFont (copy), ScaledBaseSize (copy), p1 (upval), MeasurementId (copy)
-					local TextBoundsAsync = GetTextBoundsAsyncFunction(Text, CaptionSubHeaderFont, ScaledBaseSize)
-					
-					if p1.isMounted and p1.measurementId == MeasurementId then
-						p1:setState({ textBounds = TextBoundsAsync })
-					end
-				end)
+		if p1.measuredText ~= Text or p1.measuredFont ~= CaptionSubHeaderFont or p1.measuredFontSize ~= ScaledBaseSize then
+			p1.measuredText = Text
+			p1.measuredFont = CaptionSubHeaderFont
+			p1.measuredFontSize = ScaledBaseSize
+			p1.measurementId += 1
+			local MeasurementId = p1.measurementId
+			task.spawn(function()
+				-- upvalues: GetTextBoundsAsyncFunction (upval), Text (copy), CaptionSubHeaderFont (copy), ScaledBaseSize (copy), p1 (upval), MeasurementId (copy)
+				local TextBoundsAsync = GetTextBoundsAsyncFunction(Text, CaptionSubHeaderFont, ScaledBaseSize)
 				
-				return
-			end
+				if p1.isMounted and p1.measurementId == MeasurementId then
+					p1:setState({ textBounds = TextBoundsAsync })
+				end
+			end)
+			
+			return
 		end
 	end
 end
 
 function InputBoxWithCharacterCounter.didMount(p1)
-	-- upvalues: FoundationFontFaceMigration (copy)
-	if FoundationFontFaceMigration then
-		p1.isMounted = true
-		p1.measureText()
-	end
+	p1.isMounted = true
+	p1.measureText()
 end
 
 function InputBoxWithCharacterCounter.didUpdate(p1)
-	-- upvalues: FoundationFontFaceMigration (copy)
-	if FoundationFontFaceMigration then
-		p1.measureText()
-	end
+	p1.measureText()
 end
 
 function InputBoxWithCharacterCounter.willUnmount(p1)
-	-- upvalues: FoundationFontFaceMigration (copy)
-	if FoundationFontFaceMigration then
-		p1.isMounted = false
-		p1.measurementId += 1
-	end
+	p1.isMounted = false
+	p1.measurementId += 1
 end
 
 function InputBoxWithCharacterCounter.render(p1)
-	-- upvalues: FoundationFontFaceMigration (copy), Text (copy), Cryo (copy), Roact (copy), CallbackInputBoxModule (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: Cryo (copy), Roact (copy), CallbackInputBoxModule (copy), NormalizeFontFaceFunction (copy)
 	local Style = p1.props.style
 	local CountInputText = #p1.state.inputText
-	local Text1 = CountInputText .. "/" .. p1.props.characterLimit
+	local Text = CountInputText .. "/" .. p1.props.characterLimit
 	local CaptionSubHeaderFont = Style.Font.CaptionSubHeader.Font
 	local ScaledBaseSize = Style.Font.BaseSize * Style.Font.CaptionSubHeader.RelativeSize
-	local Y = nil
-	
-	if FoundationFontFaceMigration then
-		local TextBounds = p1.state.textBounds or Vector2.new(0, ScaledBaseSize)
-		local _ = TextBounds.X
-		Y = TextBounds.Y
-	else
-		Y = Text.GetTextHeight(Text1, CaptionSubHeaderFont, ScaledBaseSize, (Text.GetTextWidth(Text1, CaptionSubHeaderFont, ScaledBaseSize)))
-	end
+	local Y = (p1.state.textBounds or Vector2.new(0, ScaledBaseSize)).Y
 	local ValidInputTextColor3 = nil
 	local ValidInputTextTransparency = nil
+	
 	if CountInputText <= p1.props.characterLimit then
 		ValidInputTextColor3 = p1.props.validInputTextColor3
 		ValidInputTextTransparency = p1.props.validInputTextTransparency
@@ -144,14 +124,13 @@ function InputBoxWithCharacterCounter.render(p1)
 			characterCountLabel = Roact.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 1, 0),
-				Text = Text1,
+				Text = Text,
 				TextColor3 = ValidInputTextColor3,
 				TextTransparency = ValidInputTextTransparency,
 				TextSize = ScaledBaseSize,
 				TextXAlignment = Enum.TextXAlignment.Right,
 				TextYAlignment = Enum.TextYAlignment.Top,
-				Font = if FoundationFontFaceMigration then nil else CaptionSubHeaderFont,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(CaptionSubHeaderFont) else nil
+				FontFace = NormalizeFontFaceFunction(CaptionSubHeaderFont)
 			})
 		})
 	})

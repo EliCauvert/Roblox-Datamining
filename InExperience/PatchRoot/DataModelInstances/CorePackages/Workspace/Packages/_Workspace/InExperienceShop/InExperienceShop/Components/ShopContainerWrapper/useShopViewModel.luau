@@ -11,6 +11,7 @@ local AbuseVectorModule = require(Parent.GenericAbuseReporting.AbuseVector)
 local UseShopReportOverflowModule = require(InExperienceShop.Hooks.useShopReportOverflow)
 local _ = require(InExperienceShop.Types)
 local GetInExperienceShopStoreModule = require(InExperienceShop.Stores.getInExperienceShopStore)
+local FFlagCloseShopOnTrialRedemptionModule = require(InExperienceShop.Flags.FFlagCloseShopOnTrialRedemption)
 local FFlagShopRobuxPurchaseCompletionModalModule = require(InExperienceShop.Flags.FFlagShopRobuxPurchaseCompletionModal)
 local FormatPriceModule = require(InExperienceShop.Utils.formatPrice)
 local GetFixRobuxTileClickInShopModule = require(InExperienceShop.Flags.GetFixRobuxTileClickInShop)
@@ -32,7 +33,7 @@ end
 local Callback = nil
 
 local function useShopViewModel(p1)
-	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), config (copy), GetFixRobuxTileClickInShopModule (copy), SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), FFlagShopRobuxPurchaseCompletionModalModule (copy), ReactModule (copy), FormatPriceModule (copy), Callback (ref), IsSideSheetEnabledModule (copy), FFlagHideHeaderForBuyRobuxInExperienceShop (copy), ResolveItemForSelectionFunction (copy), ShopItemSelectionModule (copy), ConstantsModule (copy), SharedFlagsModule (copy), AbuseVectorModule (copy), UseShopReportOverflowModule (copy), UseShopOfferChipModule (copy), InExperienceOffersModule (copy)
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), config (copy), GetFixRobuxTileClickInShopModule (copy), SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), FFlagShopRobuxPurchaseCompletionModalModule (copy), ReactModule (copy), FormatPriceModule (copy), FFlagCloseShopOnTrialRedemptionModule (copy), Callback (ref), IsSideSheetEnabledModule (copy), FFlagHideHeaderForBuyRobuxInExperienceShop (copy), ResolveItemForSelectionFunction (copy), ShopItemSelectionModule (copy), ConstantsModule (copy), SharedFlagsModule (copy), AbuseVectorModule (copy), UseShopReportOverflowModule (copy), UseShopOfferChipModule (copy), InExperienceOffersModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local FixRobuxTileClickInShopModule = GetFixRobuxTileClickInShopModule()
@@ -68,6 +69,23 @@ local function useShopViewModel(p1)
 				onClose = UseSignalStateResult.dismissRobuxPurchaseSuccess
 			}
 		end
+	end
+	if FFlagCloseShopOnTrialRedemptionModule then
+		local UseSignalStateResult7 = SignalsReactModule.useSignalState(UseSignalStateResult.getTrialRedeemSuccessCount)
+		local UseSignalStateResult8 = SignalsReactModule.useSignalState(UseSignalStateResult.getNotificationFreeTrialTopBarChip)
+		local UseRefResult = ReactModule.useRef(UseSignalStateResult7)
+		ReactModule.useEffect(function()
+			-- upvalues: UseRefResult (copy), UseSignalStateResult7 (copy), UseSignalStateResult8 (copy), p1 (copy)
+			UseRefResult.current = UseSignalStateResult7
+			
+			if UseRefResult.current < UseSignalStateResult7 and UseSignalStateResult8 then
+				p1.toggleWindow()
+			end
+		end, {
+			UseSignalStateResult7,
+			UseSignalStateResult8,
+			p1.toggleWindow
+		})
 	end
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Callback (upval), UseSignalStateResult1 (copy), UseSignalStateResult2 (copy)

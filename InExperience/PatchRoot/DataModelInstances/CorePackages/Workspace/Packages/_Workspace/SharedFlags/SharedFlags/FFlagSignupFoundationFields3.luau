@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("SignupFoundationFields3", false)

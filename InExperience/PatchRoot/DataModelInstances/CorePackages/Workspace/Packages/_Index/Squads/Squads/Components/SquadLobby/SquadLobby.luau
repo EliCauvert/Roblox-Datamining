@@ -16,6 +16,7 @@ local SquadLobbyLuckyRecommendationRowModule = require(script.Parent.SquadLobbyL
 local SquadLobbyVoiceChatMenuModule = require(script.Parent.SquadLobbyVoiceChatMenu)
 local SquadLobbyBannersModule = require(script.Parent.SquadLobbyBanners)
 local SquadLobbyUserDropdownMenuModule = require(script.Parent.SquadLobbyUserDropdownMenu)
+local SquadLobbyJoinDialogContainerModule = require(script.Parent.SquadLobbyJoinDialog.SquadLobbyJoinDialogContainer)
 local SquadPartySheetActionEnumModule = require(Squads.Enums.SquadPartySheetActionEnum)
 local SquadUserPartyStatusModule = require(Squads.Enums.SquadUserPartyStatus)
 local Cryo = DependenciesModule.Cryo
@@ -72,9 +73,10 @@ local FFlagEnableSquadRegroupExperimentation = SharedFlags.FFlagEnableSquadRegro
 local FFlagEnableSquadRegroupExperimentationSmallScreenFix = SharedFlags.FFlagEnableSquadRegroupExperimentationSmallScreenFix
 local FFlagEnableSquadRegroupServerCapacityCheck = SharedFlags.FFlagEnableSquadRegroupServerCapacityCheck
 local FFlagAppChatShowOSAOnPageEntry = SharedFlags.FFlagAppChatShowOSAOnPageEntry
+local FFlagSquadMemberJoinDialogAndOverflowMenuModule = require(Squads.Flags.FFlagSquadMemberJoinDialogAndOverflowMenu)
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), UseLocalUserIdFunction (copy), UseStyleFunction (copy), UseSquadStateFunction (copy), UseNavigationFunction (copy), React (copy), SquadExternalContractContext (copy), UseVoiceStatusFunction (copy), FFlagEnableSquadTopBannerWideMode (copy), HttpService (copy), RoactNavigationModule (copy), SquadViewFlags (copy), UseCurrentSquadSelectorFunction (copy), UseSelectorFunction (copy), UseStoreFunction (copy), SquadQuickStartExperimentation (copy), FFlagEnablePartyQuickStartButton (copy), SquadPromptType (copy), FFlagMakeCreateOrJoinSquadAThunks (copy), CreateOrJoinSquadFunction (copy), NetworkingSquads (copy), LogInExpCoplayTelemetryModule (copy), SquadCoplayJoin (copy), UseEffectOnceFunction (copy), FFlagAppChatShowOSAOnPageEntry (copy), LoggerModule (copy), Cryo (copy), SquadUserPartyStatusModule (copy), PartyUserInvitedDurationSeconds (copy), PartyInviteeNoResponseDurationSeconds (copy), SetIntervalFunction (copy), ClearIntervalFunction (copy), UsePreviousFunction (copy), UserBlockingNetworking (copy), FFlagSquadsPresenceStoreMigration (copy), NetworkingPresence (copy), ConstantsModule (copy), SignalsModule (copy), GetResult (copy), UseSignalStateFunction (copy), FFlagEnableSquadRegroupServerCapacityCheck (copy), Players (copy), SquadRegroupExperimentation (copy), PresenceType1 (copy), PresenceType (copy), LuckyRecommendationExperimentation (copy), FFlagEnableSquadRegroupExperimentationSmallScreenFix (copy), EnableSquadLobbyBanners (copy), SquadLobbyBannersModule (copy), Foundation (copy), SquadLobbyUserGridModule (copy), EventNamesModule (copy), SquadPartySheetActionEnumModule (copy), SquadLobbyRegroupRowModule (copy), SquadLobbyActionBarModule (copy), SquadLobbyLuckyRecommendationRowModule (copy), StateLayerAffordance (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), SquadLobbyVoiceChatMenuModule (copy), FFlagEnablePartyVoiceChangersInLua (copy), SquadLobbyUserDropdownMenuModule (copy), SquadCoordinationExperienceJoinExperimentation (copy), FFlagEnableSquadRegroupExperimentation (copy), Roact (copy), SquadLobbySessionProvider (copy)
+	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), UseLocalUserIdFunction (copy), UseStyleFunction (copy), UseSquadStateFunction (copy), UseNavigationFunction (copy), React (copy), SquadExternalContractContext (copy), UseVoiceStatusFunction (copy), FFlagEnableSquadTopBannerWideMode (copy), HttpService (copy), RoactNavigationModule (copy), SquadViewFlags (copy), UseCurrentSquadSelectorFunction (copy), UseSelectorFunction (copy), UseStoreFunction (copy), SquadQuickStartExperimentation (copy), FFlagEnablePartyQuickStartButton (copy), SquadPromptType (copy), FFlagMakeCreateOrJoinSquadAThunks (copy), CreateOrJoinSquadFunction (copy), NetworkingSquads (copy), LogInExpCoplayTelemetryModule (copy), SquadCoplayJoin (copy), UseEffectOnceFunction (copy), FFlagAppChatShowOSAOnPageEntry (copy), LoggerModule (copy), Cryo (copy), SquadUserPartyStatusModule (copy), PartyUserInvitedDurationSeconds (copy), PartyInviteeNoResponseDurationSeconds (copy), SetIntervalFunction (copy), ClearIntervalFunction (copy), UsePreviousFunction (copy), UserBlockingNetworking (copy), FFlagSquadsPresenceStoreMigration (copy), NetworkingPresence (copy), ConstantsModule (copy), SignalsModule (copy), GetResult (copy), UseSignalStateFunction (copy), FFlagEnableSquadRegroupServerCapacityCheck (copy), Players (copy), SquadRegroupExperimentation (copy), PresenceType1 (copy), PresenceType (copy), LuckyRecommendationExperimentation (copy), FFlagEnableSquadRegroupExperimentationSmallScreenFix (copy), EnableSquadLobbyBanners (copy), SquadLobbyBannersModule (copy), Foundation (copy), SquadLobbyUserGridModule (copy), EventNamesModule (copy), SquadPartySheetActionEnumModule (copy), SquadLobbyRegroupRowModule (copy), SquadLobbyActionBarModule (copy), SquadLobbyLuckyRecommendationRowModule (copy), StateLayerAffordance (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), SquadLobbyVoiceChatMenuModule (copy), FFlagEnablePartyVoiceChangersInLua (copy), FFlagSquadMemberJoinDialogAndOverflowMenuModule (copy), SquadLobbyJoinDialogContainerModule (copy), SquadLobbyUserDropdownMenuModule (copy), SquadCoordinationExperienceJoinExperimentation (copy), FFlagEnableSquadRegroupExperimentation (copy), Roact (copy), SquadLobbySessionProvider (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDispatchResult = UseDispatchFunction()
 	local Number: number = tonumber(UseLocalUserIdFunction()) or 0
@@ -702,8 +704,17 @@ return function(p1)
 		UseTokensResult
 	})
 	local UseMemoResult9 = React.useMemo(function()
-		-- upvalues: UseStateResult6 (copy), UseStateResult5 (copy), React (upval), SquadLobbyUserDropdownMenuModule (upval), p1 (copy), UseStateResult2_4 (copy), UseStateResult2_5 (copy), UseSelectorResult (copy)
-		return if UseStateResult6 and UseStateResult5 then React.createElement(SquadLobbyUserDropdownMenuModule, {
+		-- upvalues: FFlagSquadMemberJoinDialogAndOverflowMenuModule (upval), UseStateResult6 (copy), UseStateResult5 (copy), React (upval), SquadLobbyJoinDialogContainerModule (upval), p1 (copy), UseStateResult2_4 (copy), UseStateResult2_5 (copy), SquadLobbyUserDropdownMenuModule (upval), UseSelectorResult (copy)
+		return if FFlagSquadMemberJoinDialogAndOverflowMenuModule then if UseStateResult6 and UseStateResult5 then React.createElement(SquadLobbyJoinDialogContainerModule, {
+			userId = UseStateResult5,
+			isInExperience = p1.isInExperience,
+			onClose = function()
+				-- upvalues: UseStateResult2_4 (upval), UseStateResult2_5 (upval)
+				UseStateResult2_4(nil)
+				UseStateResult2_5(false)
+			end,
+			openViewProfile = p1.openViewProfile
+		}) else nil elseif UseStateResult6 and UseStateResult5 then React.createElement(SquadLobbyUserDropdownMenuModule, {
 			userId = UseStateResult5,
 			isInExperience = p1.isInExperience,
 			onDismiss = function()

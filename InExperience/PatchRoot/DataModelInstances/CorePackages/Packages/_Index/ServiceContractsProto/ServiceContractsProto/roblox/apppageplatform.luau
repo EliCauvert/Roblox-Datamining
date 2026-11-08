@@ -3,6 +3,7 @@
 return {
 	badges = require(script.badges.v1beta1),
 	buyrobux = require(script.buyrobux.v1beta1),
+	campaign = require(script.campaign.v1beta1),
 	charts = require(script.charts.v1beta1),
 	communities = require(script.communities.v1beta1),
 	communityprofile = require(script.communityprofile.v1beta1),
@@ -10,6 +11,7 @@ return {
 	experiencedetails = require(script.experiencedetails.v1beta1),
 	experienceevents = require(script.experienceevents.v1beta1),
 	experienceleaderboard = require(script.experienceleaderboard.v1beta1),
+	friendrecommendations = require(script.friendrecommendations.v1beta1),
 	groups = require(script.groups.v1beta1),
 	home = require(script.home.v1beta1),
 	marketplacecatalog = require(script.marketplacecatalog.v1beta1),

@@ -8,6 +8,8 @@ local SignalsModule = require(Parent.Signals)
 local SizingModule = require(script.Parent.Parent.Sizing)
 local BubbleItemFrameModule = require(script.Parent.Bubble.BubbleItemFrame)
 local MessageBubbleItemModule = require(script.Parent.Bubble.MessageBubbleItem)
+local DiscussionItemFrameModule = require(script.Parent.Discussion.DiscussionItemFrame)
+local MessageDiscussionItemModule = require(script.Parent.Discussion.MessageDiscussionItem)
 local InlineItemFrameModule = require(script.Parent.Inline.InlineItemFrame)
 local MessageInlineItemModule = require(script.Parent.Inline.MessageInlineItem)
 local SystemItemModule = require(script.Parent.SystemItem)
@@ -15,10 +17,14 @@ local TimestampItemModule = require(script.Parent.TimestampItem)
 local GroupMessagesModule = require(script.Parent.groupMessages)
 local IsScrollInputModule = require(script.Parent.isScrollInput)
 local ProjectMessageEnvelopeModule = require(script.Parent.projectMessageEnvelope)
+local UseKeepEndOnResizeModule = require(script.Parent.useKeepEndOnResize)
 local UseMessageListLayoutModule = require(script.Parent.useMessageListLayout)
 local UsePropSignalModule = require(ChatUIPrimitives.Hooks.usePropSignal)
+local FFlagExpChatMessageListScrollParityModule = require(ChatUIPrimitives.Flags.FFlagExpChatMessageListScrollParity)
+local FIntExpChatMessageListOverscanRowsModule = require(ChatUIPrimitives.Flags.FIntExpChatMessageListOverscanRows)
 local _ = require(script.Parent.Parent.Types)
 local CreateResult = ViewRecyclerModule.ChatPreset.create()
+local EndReachedThreshold = { viewportFraction = 1 }
 
 local function getRowKey(p1)
 	return p1.id
@@ -51,6 +57,13 @@ local RecyclableView = ViewRecyclerModule.createRecyclableView(function(p1)
 	-- upvalues: ReactModule (copy), HeaderFrame (copy), Component (copy)
 	return ReactModule.createElement(HeaderFrame, {}, {
 		Item = ReactModule.createElement(Component, { itemSignal = p1.itemSignal })
+	})
+end, config)
+local RecyclableView1 = ViewRecyclerModule.createRecyclableView(function()
+	-- upvalues: ReactModule (copy), FoundationModule (copy)
+	return ReactModule.createElement(FoundationModule.View, {
+		tag = "size-full-200",
+		testId = "message-list-end-spacer"
 	})
 end, config)
 local config3 = {
@@ -95,18 +108,28 @@ local config3 = {
 			})
 		end, config),
 		header = RecyclableView,
-		endSpacer = ViewRecyclerModule.createRecyclableView(function()
-			-- upvalues: ReactModule (copy), FoundationModule (copy)
-			return ReactModule.createElement(FoundationModule.View, {
-				tag = "size-full-200",
-				testId = "message-list-end-spacer"
+		endSpacer = RecyclableView1
+	},
+	discussion = {
+		message = ViewRecyclerModule.createRecyclableView(function(p1)
+			-- upvalues: ReactModule (copy), DiscussionItemFrameModule (copy), MessageDiscussionItemModule (copy)
+			return ReactModule.createElement(DiscussionItemFrameModule, {}, {
+				Item = ReactModule.createElement(MessageDiscussionItemModule, { itemSignal = p1.itemSignal })
 			})
-		end, config)
+		end, config),
+		system = ViewRecyclerModule.createRecyclableView(function(p1)
+			-- upvalues: ReactModule (copy), DiscussionItemFrameModule (copy), SystemItemModule (copy)
+			return ReactModule.createElement(DiscussionItemFrameModule, {}, {
+				Item = ReactModule.createElement(SystemItemModule, { itemSignal = p1.itemSignal })
+			})
+		end, config),
+		header = RecyclableView,
+		endSpacer = RecyclableView1
 	}
 }
 
 return function(p1)
-	-- upvalues: ReactModule (copy), SignalsModule (copy), ProjectMessageEnvelopeModule (copy), UsePropSignalModule (copy), GroupMessagesModule (copy), SignalsReactModule (copy), config3 (copy), UseMessageListLayoutModule (copy), SizingModule (copy), IsScrollInputModule (copy), config1 (copy), config2 (copy), getRowKey (copy), CreateResult (copy), ViewRecyclerModule (copy)
+	-- upvalues: ReactModule (copy), SignalsModule (copy), ProjectMessageEnvelopeModule (copy), UsePropSignalModule (copy), GroupMessagesModule (copy), SignalsReactModule (copy), config3 (copy), SizingModule (copy), UseMessageListLayoutModule (copy), IsScrollInputModule (copy), config1 (copy), config2 (copy), getRowKey (copy), FFlagExpChatMessageListScrollParityModule (copy), UseKeepEndOnResizeModule (copy), CreateResult (copy), ViewRecyclerModule (copy), FIntExpChatMessageListOverscanRowsModule (copy), EndReachedThreshold (copy)
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), p1 (copy), ProjectMessageEnvelopeModule (upval)
 		local t = {}
@@ -133,14 +156,15 @@ return function(p1)
 	local UsePropSignalModuleResult = UsePropSignalModule(p1.maxGroupSize)
 	local UsePropSignalModuleResult1 = UsePropSignalModule(p1.maxGroupGapMs)
 	local UsePropSignalModuleResult2 = UsePropSignalModule(p1.groupingEnabled)
+	local IsNotDiscussion = p1.displayMode ~= "discussion"
 	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
-		-- upvalues: SignalsModule (upval), UseMemoResult (copy), UsePropSignalModuleResult2 (copy), GroupMessagesModule (upval), UsePropSignalModuleResult (copy), UsePropSignalModuleResult1 (copy)
+		-- upvalues: SignalsModule (upval), UseMemoResult (copy), UsePropSignalModuleResult2 (copy), GroupMessagesModule (upval), UsePropSignalModuleResult (copy), UsePropSignalModuleResult1 (copy), IsNotDiscussion (copy)
 		local t = {}
 		
 		return SignalsModule.createComputed(function(p2)
-			-- upvalues: UseMemoResult (upval), UsePropSignalModuleResult2 (upval), GroupMessagesModule (upval), t (ref), UsePropSignalModuleResult (upval), UsePropSignalModuleResult1 (upval)
+			-- upvalues: UseMemoResult (upval), UsePropSignalModuleResult2 (upval), GroupMessagesModule (upval), t (ref), UsePropSignalModuleResult (upval), UsePropSignalModuleResult1 (upval), IsNotDiscussion (upval)
 			local UseMemoResultResult = UseMemoResult(p2)
-			local UngroupedRowsResult = if UsePropSignalModuleResult2(p2) == false then GroupMessagesModule.ungroupedRows(UseMemoResultResult, t) else GroupMessagesModule.groupMessages(UseMemoResultResult, UsePropSignalModuleResult(p2), UsePropSignalModuleResult1(p2), t)
+			local UngroupedRowsResult = if UsePropSignalModuleResult2(p2) == false then GroupMessagesModule.ungroupedRows(UseMemoResultResult, t) else GroupMessagesModule.groupMessages(UseMemoResultResult, UsePropSignalModuleResult(p2), UsePropSignalModuleResult1(p2), t, { shouldInsertTimestampRows = IsNotDiscussion })
 			t = UngroupedRowsResult
 			
 			return UngroupedRowsResult
@@ -149,7 +173,8 @@ return function(p1)
 		UseMemoResult,
 		UsePropSignalModuleResult,
 		UsePropSignalModuleResult1,
-		UsePropSignalModuleResult2
+		UsePropSignalModuleResult2,
+		IsNotDiscussion
 	})))
 	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: config3 (upval), p1 (copy)
@@ -165,18 +190,21 @@ return function(p1)
 		end
 		return Entry1
 	end, { p1.displayMode })
-	local UseMessageListLayoutModuleResult = UseMessageListLayoutModule()
 	local UseMeasuredResult = SizingModule.useMeasured()
 	local UseResolvedSizingResult = SizingModule.useResolvedSizing(if UseMeasuredResult then UseMeasuredResult.density else "regular", if UseMeasuredResult then UseMeasuredResult.widthUnits else 1)
+	local UseMessageListLayoutModuleResult = UseMessageListLayoutModule(if p1.displayMode == "discussion" then UseResolvedSizingResult.discussion.estimatedRowHeight else nil)
 	local ScrollBarThickness = UseResolvedSizingResult.list.scrollBarThickness
+	local ScrollBarInset = UseResolvedSizingResult.list.scrollBarInset
+	local ScrollBarColor = UseResolvedSizingResult.list.scrollBarColor
 	local OnUserScrollInputFunction = p1.onUserScrollInput
 	local UseMemoResult1 = ReactModule.useMemo(function()
-		-- upvalues: ScrollBarThickness (copy), OnUserScrollInputFunction (copy), ReactModule (upval), IsScrollInputModule (upval)
+		-- upvalues: ScrollBarThickness (copy), ScrollBarInset (copy), ScrollBarColor (copy), OnUserScrollInputFunction (copy), ReactModule (upval), IsScrollInputModule (upval)
 		local config = {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			ScrollBarThickness = ScrollBarThickness,
-			VerticalScrollBarInset = Enum.ScrollBarInset.ScrollBar
+			VerticalScrollBarInset = ScrollBarInset,
+			ScrollBarImageColor3 = ScrollBarColor
 		}
 		
 		if OnUserScrollInputFunction ~= nil then
@@ -195,9 +223,14 @@ return function(p1)
 			end
 		end
 		return config
-	end, { ScrollBarThickness, OnUserScrollInputFunction })
+	end, {
+		ScrollBarThickness,
+		OnUserScrollInputFunction,
+		ScrollBarInset,
+		ScrollBarColor
+	})
 	local HasHeader = p1.header ~= nil
-	local IsBubble = p1.displayMode == "bubble"
+	local IsBubble: boolean = p1.displayMode == "bubble" or p1.displayMode == "discussion"
 	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: UseSignalStateResult (copy), HasHeader (copy), IsBubble (copy), config1 (upval), config2 (upval), getRowKey (upval)
 		local Copy = if HasHeader or IsBubble then table.clone(UseSignalStateResult) else UseSignalStateResult
@@ -213,8 +246,14 @@ return function(p1)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseRefResult1 = ReactModule.useRef(p1.initialScrollPosition)
+	
+	if FFlagExpChatMessageListScrollParityModule then
+		UseKeepEndOnResizeModule(UseStateResult, UseRefResult)
+	end
+	local OnNearOldestMessage = p1.onNearOldestMessage
+	local OnNearNewestMessage = p1.onNearNewestMessage
 	local UseMemoResult3 = ReactModule.useMemo(function()
-		-- upvalues: CreateResult (upval), UseRefResult1 (copy), ViewRecyclerModule (upval), UseRefResult (copy), UseStateResult2 (copy), UseMemoResult1 (copy), UseMemoResult2 (copy), UseMessageListLayoutModuleResult (copy), UseResult (copy)
+		-- upvalues: CreateResult (upval), UseRefResult1 (copy), ViewRecyclerModule (upval), UseRefResult (copy), UseStateResult2 (copy), UseMemoResult1 (copy), UseMemoResult2 (copy), UseMessageListLayoutModuleResult (copy), UseResult (copy), FIntExpChatMessageListOverscanRowsModule (upval), OnNearOldestMessage (copy), EndReachedThreshold (upval), OnNearNewestMessage (copy)
 		local Copy = table.clone(CreateResult)
 		
 		if UseRefResult1.current == "start" then
@@ -227,13 +266,20 @@ return function(p1)
 		Copy.layout = UseMessageListLayoutModuleResult
 		Copy.axis = ViewRecyclerModule.Axis.Y
 		Copy.itemType = UseResult
+		Copy.overscan = FIntExpChatMessageListOverscanRowsModule
 		
+		if OnNearOldestMessage ~= nil then
+			Copy.onStartReached = OnNearOldestMessage
+			Copy.startReachedThreshold = EndReachedThreshold
+		end
+		if OnNearNewestMessage ~= nil then
+			Copy.onEndReached = OnNearNewestMessage
+			Copy.endReachedThreshold = EndReachedThreshold
+		end
 		return Copy
 	end, {
-		UseMemoResult2,
-		UseMessageListLayoutModuleResult,
-		UseResult,
-		UseMemoResult1
+		UseMemoResult2, UseMessageListLayoutModuleResult, UseResult, UseMemoResult1,
+		OnNearOldestMessage, OnNearNewestMessage
 	})
 	local UseRefResult2 = ReactModule.useRef(false)
 	ReactModule.useEffect(function()

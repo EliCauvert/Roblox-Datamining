@@ -1,9 +1,7 @@
 ﻿local Parent = script:FindFirstAncestor("PhoneUpsell").Parent
 local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
-local FoundationModule = require(Parent.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local TextField = UIBloxModule.App.Input.TextField
@@ -42,7 +40,7 @@ local function getButtonStackProps(Text, OnActivated, IsDisabled, Text1, OnActiv
 end
 
 return function(p1)
-	-- upvalues: UseStyleFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), InteractiveAlert (copy), getButtonStackProps (copy), TextField (copy), GetFFlagAddMorePhoneUpsellEventsFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseStyleFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), InteractiveAlert (copy), getButtonStackProps (copy), TextField (copy), GetFFlagAddMorePhoneUpsellEventsFunction (copy), NormalizeFontFaceFunction (copy)
 	local UseStyleResult = UseStyleFunction()
 	local Tokens = UseStyleResult.Tokens
 	local config = {
@@ -108,7 +106,7 @@ return function(p1)
 		position = p1.isKeyboardShowing and UDim2.new(0.5, 0, 1, -p1.keyboardHeight) or nil,
 		anchorPoint = p1.isKeyboardShowing and Vector2.new(0.5, 1) or nil,
 		middleContent = function()
-			-- upvalues: ReactModule (upval), Tokens (copy), TextField (upval), p1 (copy), IsNotErrorMessageMatch (copy), GetFFlagAddMorePhoneUpsellEventsFunction (upval), FoundationFontFaceMigration (upval), UseStyleResult (copy), NormalizeFontFaceFunction (upval), UseLocalizationResult (copy)
+			-- upvalues: ReactModule (upval), Tokens (copy), TextField (upval), p1 (copy), IsNotErrorMessageMatch (copy), GetFFlagAddMorePhoneUpsellEventsFunction (upval), NormalizeFontFaceFunction (upval), UseStyleResult (copy), UseLocalizationResult (copy)
 			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.Y,
@@ -153,8 +151,7 @@ return function(p1)
 						TextXAlignment = Enum.TextXAlignment.Left,
 						TextYAlignment = Enum.TextYAlignment.Top,
 						TextColor3 = Tokens.Color.System.Alert.Color3,
-						Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
-						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Tokens.Typography.BodyLarge.Font) else nil,
+						FontFace = NormalizeFontFaceFunction(Tokens.Typography.BodyLarge.Font),
 						TextSize = UseStyleResult.Font.BaseSize * UseStyleResult.Font.CaptionSmall.RelativeSize,
 						Size = UDim2.new(1, 0, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y
@@ -168,8 +165,7 @@ return function(p1)
 					TextSize = UseStyleResult.Font.BaseSize * UseStyleResult.Font.CaptionHeader.RelativeSize,
 					TextColor3 = UseStyleResult.Theme.TextDefault.Color,
 					TextTransparency = UseStyleResult.Theme.TextDefault.Transparency,
-					Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
-					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Tokens.Typography.BodyLarge.Font) else nil,
+					FontFace = NormalizeFontFaceFunction(Tokens.Typography.BodyLarge.Font),
 					TextXAlignment = Enum.TextXAlignment.Left,
 					AutomaticSize = Enum.AutomaticSize.Y,
 					Size = UDim2.new(1, 0, 0, 0)

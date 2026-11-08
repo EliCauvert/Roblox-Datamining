@@ -1,5 +1,7 @@
 ﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local _ = require(SduiCoreSystem.Parent.Signals)
+local Parent = SduiCoreSystem.Parent
+local FFlagSduiErrorPaths = require(Parent.SharedFlags).FFlagSduiErrorPaths
+local _ = require(Parent.Signals)
 local PropResultCategory = require(SduiCoreSystem.ClientBinding.SduiClientBindingTypes).PropResultCategory
 local BuildDefaultPropModule = require(SduiCoreSystem.ClientBinding.PropBuilder.buildDefaultProp)
 local _ = require(SduiCoreSystem.SduiBuilderTypes)
@@ -8,11 +10,11 @@ local SduiPropUtilsModule = require(SduiCoreSystem.ClientBinding.PropBuilder.Sdu
 local SduiClientBindingParsersModule = require(SduiCoreSystem.ClientBinding.PropBuilder.SduiClientBindingParsers)
 
 local function buildStringProp(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: SduiClientBindingParsersModule (copy), PropResultCategory (copy), SduiPropUtilsModule (copy), BuildDefaultPropModule (copy), buildStringProp (copy)
+	-- upvalues: SduiClientBindingParsersModule (copy), FFlagSduiErrorPaths (copy), PropResultCategory (copy), SduiPropUtilsModule (copy), BuildDefaultPropModule (copy), buildStringProp (copy)
 	local Callback = p7 or SduiClientBindingParsersModule.parseToString
 	
 	if p1 == "translation" then
-		local ResolveLocalizedLiteralResult = p5.resolveLocalizedLiteral(p2)
+		local ResolveLocalizedLiteralResult = p5.resolveLocalizedLiteral(p2, if FFlagSduiErrorPaths then p5.errorContext else nil)
 		
 		if ResolveLocalizedLiteralResult then
 			return if Callback then Callback(ResolveLocalizedLiteralResult) else ResolveLocalizedLiteralResult, PropResultCategory.Literal

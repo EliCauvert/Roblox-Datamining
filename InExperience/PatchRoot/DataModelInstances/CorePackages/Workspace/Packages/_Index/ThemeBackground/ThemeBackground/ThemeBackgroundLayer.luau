@@ -2,9 +2,10 @@
 local ReactModule = require(Parent.Parent.React)
 local GetThemeBackgroundStoreModule = require(Parent.Stores.GetThemeBackgroundStore)
 local ThemeBackgroundFillModule = require(Parent.ThemeBackgroundFill)
+local ThemeBackgroundClippedFillModule = require(Parent.ThemeBackgroundClippedFill)
 
 return function(p1)
-	-- upvalues: GetThemeBackgroundStoreModule (copy), ReactModule (copy), ThemeBackgroundFillModule (copy)
+	-- upvalues: GetThemeBackgroundStoreModule (copy), ReactModule (copy), ThemeBackgroundClippedFillModule (copy), ThemeBackgroundFillModule (copy)
 	local ThemeBackgroundStoreModule = GetThemeBackgroundStoreModule(false)
 	local Image = p1.image
 	local BaseColor = p1.baseColor
@@ -27,9 +28,17 @@ return function(p1)
 		end
 	end, { ThemeBackgroundStoreModule })
 	local Overscan = p1.overscan or 0
+	local ClipRight = p1.clipRight
 	
 	return ReactModule.createElement(ReactModule.Fragment, nil, {
-		ThemeBackground = if Image then ReactModule.createElement(ThemeBackgroundFillModule, {
+		ThemeBackgroundClip = if Image and ClipRight ~= nil then ReactModule.createElement(ThemeBackgroundClippedFillModule, {
+			image = Image,
+			baseColor = BaseColor,
+			onPageChanged = UseResult,
+			overscan = Overscan,
+			clipRight = ClipRight
+		}) else nil,
+		ThemeBackground = if Image and ClipRight == nil then ReactModule.createElement(ThemeBackgroundFillModule, {
 			image = Image,
 			baseColor = BaseColor,
 			onPageChanged = UseResult,

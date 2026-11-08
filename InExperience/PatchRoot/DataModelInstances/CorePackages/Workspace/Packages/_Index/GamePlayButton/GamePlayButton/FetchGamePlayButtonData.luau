@@ -16,8 +16,56 @@ local ExpirationTimeNamespace = NextDataExpirationTimeRoduxModule.ExpirationTime
 local PlayabilityStatusEnum = require(Parent.DiscoveryTypes).PlayabilityStatusEnum
 local ApiFetchShowAgeVerificationOverlay = require(Parent.VoiceChat).AgeVerificationOverlay.ApiFetchShowAgeVerificationOverlay
 local PromiseModule = require(Parent.Promise)
+local FFlagLuaAppPlayButtonCoalescePlayabilityFetch = require(Parent.SharedFlags).FFlagLuaAppPlayButtonCoalescePlayabilityFetch
 local GetFIntLuaAppThrottleRefreshPlayabilityIntervalSecondsFunction = require(Parent.SharedFlags).GetFIntLuaAppThrottleRefreshPlayabilityIntervalSeconds
 local RunService = game:GetService("RunService")
+local self = setmetatable({}, { __mode = "k" })
+
+local function _(p1, p2): boolean
+	-- upvalues: self (copy)
+	local SelfEntry = self[p1]
+	
+	return SelfEntry ~= nil and SelfEntry[p2] ~= nil
+end
+
+local function startInFlightBatch(Key, Key1)
+	-- upvalues: self (copy)
+	local SelfEntry = self[Key]
+	
+	if SelfEntry == nil then
+		SelfEntry = {}
+		self[Key] = SelfEntry
+	end
+	local SelfEntry1 = SelfEntry[Key1]
+	
+	if SelfEntry1 == nil then
+		SelfEntry1 = { count = 0, hadFailure = false }
+		SelfEntry[Key1] = SelfEntry1
+	end
+	SelfEntry1.count += 1
+end
+
+local _ = function(p1, Key, p2)
+	-- upvalues: self (copy)
+	local SelfEntry = self[p1]
+	local SelfEntry1 = if SelfEntry then SelfEntry[Key] else nil
+	
+	if SelfEntry == nil or SelfEntry1 == nil then
+		return p2
+	end
+	SelfEntry1.count -= 1
+	
+	if not p2 then
+		SelfEntry1.hadFailure = true
+	end
+	if SelfEntry1.count > 0 then
+		return false
+	else
+		SelfEntry[Key] = nil
+		
+		return not SelfEntry1.hadFailure
+	end
+end
 
 local function hasContentMaturity(State, p1): boolean
 	-- upvalues: FFlagMigrateGameInfoToStore (copy), DataHydrationModule (copy), GameInfosReducer (copy)
@@ -36,7 +84,7 @@ local function hasContentMaturity(State, p1): boolean
 	end
 end
 
-local function _(p1, p2, ContextualPlayabilityAgeRecommendationParentalControls): boolean
+local _ = function(p1, p2, ContextualPlayabilityAgeRecommendationParentalControls): boolean
 	-- upvalues: PlayabilityStatusEnum (copy), hasContentMaturity (copy)
 	return ContextualPlayabilityAgeRecommendationParentalControls == PlayabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls and not hasContentMaturity(p1, p2)
 end
@@ -100,9 +148,9 @@ return {
 		return false
 	end,
 	Fetch = function(p1, p2, p3)
-		-- upvalues: NextDataExpirationTimeReducer (copy), ExpirationTimeNamespace (copy), playButtonDataFetchPromises (copy), RunService (copy), PromiseUtilities (copy), GetFIntLuaAppThrottleRefreshPlayabilityIntervalSecondsFunction (copy), SetNextDataExpirationTimeFunction (copy)
+		-- upvalues: NextDataExpirationTimeReducer (copy), ExpirationTimeNamespace (copy), FFlagLuaAppPlayButtonCoalescePlayabilityFetch (copy), self (copy), playButtonDataFetchPromises (copy), RunService (copy), startInFlightBatch (copy), PromiseUtilities (copy), GetFIntLuaAppThrottleRefreshPlayabilityIntervalSecondsFunction (copy), SetNextDataExpirationTimeFunction (copy)
 		return function(p4)
-			-- upvalues: NextDataExpirationTimeReducer (upval), ExpirationTimeNamespace (upval), p2 (copy), playButtonDataFetchPromises (upval), p1 (copy), p3 (copy), RunService (upval), PromiseUtilities (upval), GetFIntLuaAppThrottleRefreshPlayabilityIntervalSecondsFunction (upval), SetNextDataExpirationTimeFunction (upval)
+			-- upvalues: NextDataExpirationTimeReducer (upval), ExpirationTimeNamespace (upval), p2 (copy), FFlagLuaAppPlayButtonCoalescePlayabilityFetch (upval), self (upval), p3 (copy), playButtonDataFetchPromises (upval), p1 (copy), RunService (upval), startInFlightBatch (upval), PromiseUtilities (upval), GetFIntLuaAppThrottleRefreshPlayabilityIntervalSecondsFunction (upval), SetNextDataExpirationTimeFunction (upval)
 			local CurrentTime = tick()
 			local Floored = nil
 			local PersonalizationEntry = p4:getState().Personalization[NextDataExpirationTimeReducer.key][ExpirationTimeNamespace.GameDetailPlayability]
@@ -110,17 +158,57 @@ return {
 			if PersonalizationEntry then
 				Floored = PersonalizationEntry[p2]
 			end
-			local PlayButtonDataFetchPromisesResult = playButtonDataFetchPromises(p1, p4, p2, Floored == nil or Floored < CurrentTime, p3)
+			local NoFloored: boolean = Floored == nil or Floored < CurrentTime
 			
-			if #PlayButtonDataFetchPromisesResult <= 0 then return end
-			return PromiseUtilities.Batch(PlayButtonDataFetchPromisesResult, if _G.__TESTEZ_RUNNING_TEST__ or RunService:IsStudio() then warn else nil):andThen(function(Result)
-				-- upvalues: PromiseUtilities (upval), CurrentTime (ref), Floored (ref), GetFIntLuaAppThrottleRefreshPlayabilityIntervalSecondsFunction (upval), p4 (copy), SetNextDataExpirationTimeFunction (upval), p2 (upval), ExpirationTimeNamespace (upval)
-				if PromiseUtilities.CountResults(Result).failureCount == 0 then
+			if FFlagLuaAppPlayButtonCoalescePlayabilityFetch then
+				local SelfEntry = self[p4]
+				
+				if SelfEntry ~= nil and SelfEntry[p2] ~= nil and not p3 then
+					NoFloored = false
+				end
+			end
+			local PlayButtonDataFetchPromisesResult = playButtonDataFetchPromises(p1, p4, p2, NoFloored, p3)
+			
+			if #PlayButtonDataFetchPromisesResult <= 0 then
+				return nil
+			end
+			local Warn = if _G.__TESTEZ_RUNNING_TEST__ or RunService:IsStudio() then warn else nil
+			
+			if FFlagLuaAppPlayButtonCoalescePlayabilityFetch then
+				startInFlightBatch(p4, p2)
+			end
+			return (PromiseUtilities.Batch(PlayButtonDataFetchPromisesResult, Warn):andThen(function(Result)
+				-- upvalues: PromiseUtilities (upval), FFlagLuaAppPlayButtonCoalescePlayabilityFetch (upval), p4 (copy), p2 (upval), self (upval), CurrentTime (ref), Floored (ref), GetFIntLuaAppThrottleRefreshPlayabilityIntervalSecondsFunction (upval), SetNextDataExpirationTimeFunction (upval), ExpirationTimeNamespace (upval)
+				local FailureCount = PromiseUtilities.CountResults(Result).failureCount
+				local IsFailureCountMatch = FailureCount == 0
+				
+				if FFlagLuaAppPlayButtonCoalescePlayabilityFetch then
+					local IsFailureCountMatch1 = FailureCount == 0
+					local SelfEntry = self[p4]
+					local SelfEntry1 = if SelfEntry then SelfEntry[p2] else nil
+					
+					if SelfEntry == nil or SelfEntry1 == nil then
+						IsFailureCountMatch = IsFailureCountMatch1
+					else
+						SelfEntry1.count -= 1
+						
+						if not IsFailureCountMatch1 then
+							SelfEntry1.hadFailure = true
+						end
+						if SelfEntry1.count > 0 then
+							IsFailureCountMatch = false
+						else
+							SelfEntry[p2] = nil
+							IsFailureCountMatch = not SelfEntry1.hadFailure
+						end
+					end
+				end
+				if IsFailureCountMatch then
 					CurrentTime = tick()
 					Floored = math.floor(CurrentTime + GetFIntLuaAppThrottleRefreshPlayabilityIntervalSecondsFunction())
 					p4:dispatch(SetNextDataExpirationTimeFunction(p2, Floored, ExpirationTimeNamespace.GameDetailPlayability))
 				end
-			end)
+			end))
 		end
 	end
 }

@@ -1,0 +1,9 @@
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local ReactRobloxModule = require(CorePackages.Packages.ReactRoblox)
+local PopLatencyOverlayModule = require(CorePackages.Workspace.Packages.PopLatencyOverlay)
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
+local GameplayPopOverlay = Instance.new("Folder")
+GameplayPopOverlay.Name = "GameplayPopOverlay"
+GameplayPopOverlay.Parent = game:GetService("CoreGui")
+ReactRobloxModule.createRoot(GameplayPopOverlay):render(ReactModule.createElement(if SharedFlagsModule.FFlagEnableGameplayPopLatencyOverlay then PopLatencyOverlayModule.gameplay else PopLatencyOverlayModule.gameplayAdminOnly, { experienceService = game:GetService("ExperienceService") }))

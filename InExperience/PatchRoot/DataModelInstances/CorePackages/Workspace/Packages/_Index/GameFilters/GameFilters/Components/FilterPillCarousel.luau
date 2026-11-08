@@ -12,18 +12,17 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local FilterPillModule = require(GameFilters.Components.FilterPill)
 local FFlagLuaAppUseFrameBoundsImpressions = require(Parent.SharedFlags).FFlagLuaAppUseFrameBoundsImpressions
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local _ = require(GameFilters.FilterCallbackTypes)
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), UseCollectionImpressionsSignalFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), FilterPillModule (copy), CryoModule (copy), VariableItemWidthCarousel (copy), FFlagLuaAppUseFrameBoundsImpressions (copy), FrameBoundsImpressionsTracker (copy), ScreenSizeImpressionsTracker (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), UseCollectionImpressionsSignalFunction (copy), NormalizeFontFaceFunction (copy), FilterPillModule (copy), CryoModule (copy), VariableItemWidthCarousel (copy), FFlagLuaAppUseFrameBoundsImpressions (copy), FrameBoundsImpressionsTracker (copy), ScreenSizeImpressionsTracker (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState({})
 	local UseRefResult = ReactModule.useRef(nil)
 	local Text = "FilterPillCarousel_" .. p1.sortIndex
 	local UseCollectionImpressionsSignalResult, UseCollectionImpressionsSignalResult2 = UseCollectionImpressionsSignalFunction(p1.scrollViewPositionChangedSignal)
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: UseTokensResult (copy), ReactModule (upval), p1 (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+		-- upvalues: UseTokensResult (copy), ReactModule (upval), p1 (copy), NormalizeFontFaceFunction (upval)
 		local BodyMedium = UseTokensResult.Typography.BodyMedium
 		local Muted = UseTokensResult.Color.Content.Muted
 		
@@ -34,8 +33,7 @@ return function(p1)
 			Text = p1.title,
 			Size = UDim2.new(0, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.XY,
-			Font = if FoundationFontFaceMigration then nil else BodyMedium.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(BodyMedium.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(BodyMedium.Font),
 			TextSize = BodyMedium.FontSize,
 			TextTransparency = Muted.Transparency,
 			TextColor3 = Muted.Color3,

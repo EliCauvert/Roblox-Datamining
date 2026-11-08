@@ -15,6 +15,7 @@ local CommentsPanelBodyContainerModule = require(Moments.Components.Comments.Pan
 local SheetShimModule = require(Moments.Components.SheetShim)
 local CommentsSheetSnapPointsModule = require(script.Parent.CommentsSheetSnapPoints)
 local FFlagMomentsCommentsSheetFocusNavigationModule = require(Moments.Flags.FFlagMomentsCommentsSheetFocusNavigation)
+local FFlagMomentsCommentsAttachSheetScrollerModule = require(Moments.Flags.FFlagMomentsCommentsAttachSheetScroller)
 
 local function sizeContentForList(p1)
 	if p1 ~= nil then
@@ -51,7 +52,7 @@ local function useTopSnapPointReporter(Callback)
 end
 
 return function(p1)
-	-- upvalues: useTopSnapPointReporter (copy), UseComposedRefFunction (copy), sizeContentForList (copy), sizeContentToFit (copy), FFlagMomentsCommentsSheetFocusNavigationModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), ReactModule (copy), SheetShimModule (copy), DialogSize (copy), CommentsSheetSnapPointsModule (copy), Sheet (copy), Text (copy), View (copy), CommentsPanelBodyContainerModule (copy), CommentsComposerContainerModule (copy)
+	-- upvalues: useTopSnapPointReporter (copy), UseComposedRefFunction (copy), FFlagMomentsCommentsAttachSheetScrollerModule (copy), sizeContentForList (copy), sizeContentToFit (copy), FFlagMomentsCommentsSheetFocusNavigationModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), ReactModule (copy), SheetShimModule (copy), DialogSize (copy), CommentsSheetSnapPointsModule (copy), Sheet (copy), Text (copy), View (copy), CommentsPanelBodyContainerModule (copy), CommentsComposerContainerModule (copy)
 	return ReactModule.createElement(SheetShimModule.Root, {
 		hideBackdrop = true,
 		testId = "moments-comments-sheet",
@@ -73,13 +74,14 @@ return function(p1)
 			})
 		}),
 		Content = ReactModule.createElement(Sheet.Content, {
-			scrollingFrameRef = UseComposedRefFunction(UseComposedRefFunction(p1.scrollingFrameRef, (useTopSnapPointReporter(p1.onSnapPointChanged))), if p1.isListDisplayed then sizeContentForList else sizeContentToFit)
+			scrollingFrameRef = UseComposedRefFunction(UseComposedRefFunction(p1.scrollingFrameRef, (useTopSnapPointReporter(p1.onSnapPointChanged))), if FFlagMomentsCommentsAttachSheetScrollerModule then p1.onScrollingFrameChanged elseif p1.isListDisplayed then sizeContentForList else sizeContentToFit),
+			isContentFullBleed = if FFlagMomentsCommentsAttachSheetScrollerModule then p1.isListDisplayed else nil
 		}, {
 			ContentSlot = ReactModule.createElement(View, {
 				testId = "moments-comments-content-slot",
 				tag = {
-					["size-full"] = p1.isListDisplayed,
-					["size-full-0 auto-y"] = not p1.isListDisplayed
+					["size-full"] = not FFlagMomentsCommentsAttachSheetScrollerModule and p1.isListDisplayed,
+					["size-full-0 auto-y"] = FFlagMomentsCommentsAttachSheetScrollerModule or not p1.isListDisplayed
 				}
 			}, {
 				PanelBody = ReactModule.createElement(CommentsPanelBodyContainerModule, p1.panelBodyProps)

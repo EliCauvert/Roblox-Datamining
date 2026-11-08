@@ -7,7 +7,8 @@ return {
 		"**/Mocks/**/*.test", "**/Mocks/*.test", "**/Api/**/*.test", "**/Api/*.test",
 		"**/Stores/**/*.test", "**/Stores/*.test", "**/Internal/whenJoinSettles.test",
 		"**/Hooks/useCloseOnCoreMenu.test", "**/initShopGlobalIcon.test",
-		"**/submitFreeTrialMenuBadge.test", "**/submitFreeTrialTooltips.test"
+		"**/submitFreeTrialMenuBadge.test", "**/submitFreeTrialTooltips.test",
+		"**/submitFreeTrialTopBarChip.test"
 	},
 	setupFilesAfterEnv = {
 		JestConfigsModule.setupFiles.UIBloxInitializer,

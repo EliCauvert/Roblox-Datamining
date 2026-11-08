@@ -1,5 +1,7 @@
 ﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
 local Parent = ProfilePlatform.Parent
+local FFlagSocialFollowAttribution = require(Parent.SharedFlags).FFlagSocialFollowAttribution
+local FollowAttributionModule = if FFlagSocialFollowAttribution then require(Parent.SocialCommon.FollowAttribution) else nil
 local ButtonVariant = require(Parent.Foundation).Enums.ButtonVariant
 local SetCurrentToastMessageFunction = require(Parent.ToastRodux).Actions.SetCurrentToastMessage
 local GroupsNetworkingModule = require(ProfilePlatform.Networking.GroupsNetworking)
@@ -16,10 +18,13 @@ local FollowingStore = FollowingModule.FollowingStore
 local FollowingUpdateErrorTypeEnum = FollowingModule.FollowingUpdateErrorTypeEnum
 local CreateChallengeNetworkFunction = require(Parent.GenericChallenges).Middleware.createChallengeNetwork
 
-local function handleUpdateUserFollowStatus(p1, Callback, ToastMessage)
-	-- upvalues: CreateChallengeNetworkFunction (copy), SetCurrentToastMessageFunction (copy), RefreshProfilePlatformActionInfoModule (copy), FollowingUpdateErrorTypeEnum (copy)
+local function handleUpdateUserFollowStatus(p1, Callback, ToastMessage, Callback1)
+	-- upvalues: CreateChallengeNetworkFunction (copy), FFlagSocialFollowAttribution (copy), SetCurrentToastMessageFunction (copy), RefreshProfilePlatformActionInfoModule (copy), FollowingUpdateErrorTypeEnum (copy)
 	return Callback(p1.profileId, CreateChallengeNetworkFunction()):andThen(function()
-		-- upvalues: p1 (copy), SetCurrentToastMessageFunction (upval), ToastMessage (copy), RefreshProfilePlatformActionInfoModule (upval)
+		-- upvalues: FFlagSocialFollowAttribution (upval), Callback1 (copy), p1 (copy), SetCurrentToastMessageFunction (upval), ToastMessage (copy), RefreshProfilePlatformActionInfoModule (upval)
+		if FFlagSocialFollowAttribution and Callback1 then
+			Callback1()
+		end
 		p1.dispatch(SetCurrentToastMessageFunction({ isLocalized = true, toastMessage = ToastMessage }))
 		
 		return p1.dispatch(RefreshProfilePlatformActionInfoModule(p1.profileId, p1.actionsComponentRequest))
@@ -34,16 +39,22 @@ end
 
 return {
 	[EnumsModule.ProfileActions.Follow] = function(p1)
-		-- upvalues: ButtonVariant (copy), EnumsModule (copy), ProfileTypes (copy), FFlagProfilePlatformEnableUserFollowModule (copy), EventNamesModule (copy), handleUpdateUserFollowStatus (copy), FollowingStore (copy), GroupsNetworkingModule (copy), GetProfilePlatformModule (copy), GetAvailableCommunityComponentsModule (copy)
+		-- upvalues: ButtonVariant (copy), EnumsModule (copy), ProfileTypes (copy), FFlagProfilePlatformEnableUserFollowModule (copy), EventNamesModule (copy), handleUpdateUserFollowStatus (copy), FollowingStore (copy), FFlagSocialFollowAttribution (copy), FollowAttributionModule (copy), GroupsNetworkingModule (copy), GetProfilePlatformModule (copy), GetAvailableCommunityComponentsModule (copy)
 		return {
 			variant = ButtonVariant.Standard,
 			text = p1.localized[EnumsModule.ProfileActions.Follow],
 			onActivated = {
 				[ProfileTypes.User] = if FFlagProfilePlatformEnableUserFollowModule then function()
-					-- upvalues: p1 (copy), EventNamesModule (upval), handleUpdateUserFollowStatus (upval), FollowingStore (upval)
+					-- upvalues: p1 (copy), EventNamesModule (upval), handleUpdateUserFollowStatus (upval), FollowingStore (upval), FFlagSocialFollowAttribution (upval), FollowAttributionModule (upval)
 					p1.analytics.fireAnalyticsEvent(EventNamesModule.CTAButtonFollow, { buttonSurface = p1.buttonSurface })
 					
-					return handleUpdateUserFollowStatus(p1, FollowingStore.get().Follow, p1.localized.followedToast)
+					return handleUpdateUserFollowStatus(p1, FollowingStore.get().Follow, p1.localized.followedToast, if FFlagSocialFollowAttribution then function()
+						-- upvalues: FollowAttributionModule (upval), p1 (upval)
+						FollowAttributionModule.reportFollowSuccess({
+							surface = FollowAttributionModule.Surface.Profile,
+							source = p1.profileWrapperContext.sourceInfo.source
+						})
+					end else nil)
 				end else nil,
 				[ProfileTypes.Community] = function()
 					-- upvalues: p1 (copy), EventNamesModule (upval), GroupsNetworkingModule (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval)
@@ -63,8 +74,8 @@ return {
 		}
 	end,
 	[EnumsModule.ProfileActions.Unfollow] = function(p1)
-		-- upvalues: EnumsModule (copy), ProfileTypes (copy), FFlagProfilePlatformEnableUserFollowModule (copy), EventNamesModule (copy), handleUpdateUserFollowStatus (copy), FollowingStore (copy), GroupsNetworkingModule (copy), GetProfilePlatformModule (copy), GetAvailableCommunityComponentsModule (copy)
-		return {
+		-- upvalues: ProfileTypes (copy), EnumsModule (copy), FFlagProfilePlatformEnableUserFollowModule (copy), EventNamesModule (copy), handleUpdateUserFollowStatus (copy), FollowingStore (copy), GroupsNetworkingModule (copy), GetProfilePlatformModule (copy), GetAvailableCommunityComponentsModule (copy)
+		return if p1.profileType == ProfileTypes.Community and p1.viewerOwnsOpenCommunity then nil else {
 			text = p1.localized[EnumsModule.ProfileActions.Unfollow],
 			onActivated = {
 				[ProfileTypes.User] = if FFlagProfilePlatformEnableUserFollowModule then function()

@@ -1,5 +1,6 @@
 ﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
 local Parent = SduiCoreSystem.Parent
+local FFlagSduiErrorPaths = require(Parent.SharedFlags).FFlagSduiErrorPaths
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
@@ -11,6 +12,7 @@ local _ = require(SduiCoreSystem.SduiConfigTypes)
 local _ = require(SduiCoreSystem.SduiComponentType)
 local GetSduiComponentRegistryModule = require(SduiCoreSystem.getSduiComponentRegistry)
 local ValidateInterfaceModule = require(SduiCoreSystem.validateInterface)
+local CreateSduiErrorLoggerModule = require(SduiCoreSystem.createSduiErrorLogger)
 
 local function SduiErrorComponent(_)
 	-- upvalues: ReactModule (copy)
@@ -22,10 +24,24 @@ end
 
 local t = {}
 
-local function buildWrappedComponent(Callback, p1, List)
+local function useComponentSduiContext(p1)
+	-- upvalues: ReactModule (copy), CreateSduiErrorLoggerModule (copy), t (copy)
+	local SduiContext = p1.sduiContext
+	local ErrorContext = p1.componentConfig.errorContext
+	
+	return ReactModule.useMemo(function()
+		-- upvalues: SduiContext (copy), CreateSduiErrorLoggerModule (upval), ErrorContext (copy), t (upval)
+		local Copy = table.clone(SduiContext)
+		Copy.dependencies = table.clone(SduiContext.dependencies)
+		Copy.dependencies.logger = CreateSduiErrorLoggerModule(SduiContext.dependencies.logger, ErrorContext or t)
+		
+		return Copy
+	end, { SduiContext, ErrorContext })
+end
+
+local function buildWrappedComponent(Callback, p1, SduiContext, List)
 	-- upvalues: t (copy), ReactModule (copy), GetSduiComponentRegistryModule (copy), SduiErrorType (copy), SduiErrorComponent (copy), ValidateInterfaceModule (copy)
 	local ComponentType = p1.componentConfig.componentType
-	local SduiContext = p1.sduiContext
 	
 	if p1.localAnalyticsData then
 		p1.componentConfig.analyticsContext.setLocalAnalyticsData(p1.localAnalyticsData)
@@ -46,7 +62,7 @@ local function buildWrappedComponent(Callback, p1, List)
 		end
 	end
 	Copy.componentConfig = p1.componentConfig
-	Copy.sduiContext = p1.sduiContext
+	Copy.sduiContext = SduiContext
 	Copy.debugName = p1.debugName
 	Copy.analyticsContext = p1.componentConfig.analyticsContext
 	local v1 = nil
@@ -61,12 +77,12 @@ local function buildWrappedComponent(Callback, p1, List)
 			end
 		end
 	end
-	local V20 = v1 or p1.componentConfig.nestedComponentConfigs
+	local V25 = v1 or p1.componentConfig.nestedComponentConfigs
 	
-	if V20 then
-		for i3, ComponentConfig in V20 do
+	if V25 then
+		for i3, ComponentConfig in V25 do
 			Copy[i3] = ReactModule.createElement(Callback(ComponentConfig), {
-				sduiContext = p1.sduiContext,
+				sduiContext = SduiContext,
 				componentConfig = ComponentConfig,
 				debugName = `{p1.debugName}.{i3}`
 			})
@@ -84,7 +100,7 @@ local function buildWrappedComponent(Callback, p1, List)
 					
 					for LayoutOrder, entry in Data do
 						Elements[`{nestedComponentConfigListPropSignalName}_{LayoutOrder}_{entry.componentType}`] = ReactModule.createElement(Callback(entry), {
-							sduiContext = p1.sduiContext,
+							sduiContext = SduiContext,
 							componentConfig = entry,
 							extraLocalProps = { layoutOrder = LayoutOrder },
 							debugName = `{p1.debugName}.{nestedComponentConfigListPropSignalName}[{LayoutOrder}]`
@@ -110,14 +126,15 @@ local function buildWrappedComponent(Callback, p1, List)
 end
 
 return function(p2)
-	-- upvalues: ReactModule (copy), buildWrappedComponent (copy), CompareSduiPropsModule (copy), SignalsModule (copy), TutilsModule (copy), SignalsReactModule (copy)
+	-- upvalues: ReactModule (copy), FFlagSduiErrorPaths (copy), useComponentSduiContext (copy), buildWrappedComponent (copy), CompareSduiPropsModule (copy), SignalsModule (copy), TutilsModule (copy), SignalsReactModule (copy)
 	return {
 		SduiClientBindingThinWrapper = ReactModule.memo(function(p3)
-			-- upvalues: buildWrappedComponent (upval), p2 (copy)
-			return buildWrappedComponent(p2, p3)
+			-- upvalues: FFlagSduiErrorPaths (upval), useComponentSduiContext (upval), buildWrappedComponent (upval), p2 (copy)
+			return buildWrappedComponent(p2, p3, if FFlagSduiErrorPaths then useComponentSduiContext(p3) else p3.sduiContext)
 		end, CompareSduiPropsModule),
 		SduiDataBindingWrapper = ReactModule.memo(function(p3)
-			-- upvalues: ReactModule (upval), SignalsModule (upval), TutilsModule (upval), SignalsReactModule (upval), buildWrappedComponent (upval), p2 (copy)
+			-- upvalues: FFlagSduiErrorPaths (upval), useComponentSduiContext (upval), ReactModule (upval), SignalsModule (upval), TutilsModule (upval), SignalsReactModule (upval), buildWrappedComponent (upval), p2 (copy)
+			local UseComponentSduiContextResult = if FFlagSduiErrorPaths then useComponentSduiContext(p3) else p3.sduiContext
 			local PropSignals = p3.componentConfig.propSignals
 			local IsComponentFilteredSignalFunction = p3.componentConfig.isComponentFilteredSignal
 			local ExtraLocalPropSignals = p3.extraLocalPropSignals
@@ -151,7 +168,7 @@ return function(p2)
 				p3.componentConfig.componentType
 			})))
 			
-			return if UseSignalStateResult.__isComponentFiltered == true then nil else buildWrappedComponent(p2, p3, UseSignalStateResult)
+			return if UseSignalStateResult.__isComponentFiltered == true then nil else buildWrappedComponent(p2, p3, UseComponentSduiContextResult, UseSignalStateResult)
 		end, CompareSduiPropsModule)
 	}
 end

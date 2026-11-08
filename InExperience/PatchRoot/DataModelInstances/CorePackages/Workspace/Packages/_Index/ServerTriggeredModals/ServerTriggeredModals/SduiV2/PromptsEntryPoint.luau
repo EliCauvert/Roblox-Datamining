@@ -3,5 +3,6 @@
 	HomepageLaunch = "HomepageLaunch",
 	ChartsLaunch = "ChartsLaunch",
 	ExperienceDetailsPageSessionEnd = "ExperienceDetailsPageSessionEnd",
-	ExperienceDetailsPageOpen = "ExperienceDetailsPageOpen"
+	ExperienceDetailsPageOpen = "ExperienceDetailsPageOpen",
+	NotificationStreamOpen = "NotificationStreamOpen"
 }

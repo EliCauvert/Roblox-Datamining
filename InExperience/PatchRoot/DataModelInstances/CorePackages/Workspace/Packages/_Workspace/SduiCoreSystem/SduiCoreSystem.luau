@@ -5,6 +5,8 @@ local _ = require(script.ClientBinding.SduiPoolStoreTypes)
 return {
 	["jest.config"] = script["jest.config"],
 	executeAction = require(script.executeAction),
+	createSduiErrorLogger = require(script.createSduiErrorLogger),
+	addSduiErrorContextFields = require(script.addSduiErrorContextFields),
 	findAnalyticsField = require(script.findAnalyticsField),
 	findAnalyticsFieldInAncestors = require(script.findAnalyticsFieldInAncestors),
 	getActionTelemetryFieldValue = require(script.getActionTelemetryFieldValue),

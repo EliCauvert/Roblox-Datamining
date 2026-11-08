@@ -54,6 +54,7 @@
 	CloseOnlyInteractiveAlert = "CloseOnlyInteractiveAlert",
 	ConfirmationDialog = "ConfirmationDialog",
 	PlayButtonUpsellDialog = "PlayButtonUpsellDialog",
+	CloudClientOfferSheet = "CloudClientOfferSheet",
 	SquadPrompt = "SquadPrompt",
 	VngComplianceLoadingPopup = "VngComplianceLoadingPopup",
 	KISAPopUpAgreements = "KISAPopUpAgreements",

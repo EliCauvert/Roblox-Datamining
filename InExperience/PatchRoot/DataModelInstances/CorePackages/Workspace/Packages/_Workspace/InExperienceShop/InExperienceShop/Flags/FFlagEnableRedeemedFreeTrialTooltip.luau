@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("EnableRedeemedFreeTrialTooltip", false)
+﻿local FFlagFixFreeTrialTooltipLocalizationModule = require(script.Parent.FFlagFixFreeTrialTooltipLocalization)
+
+return game:DefineFastFlag("EnableRedeemedFreeTrialTooltip", false) and FFlagFixFreeTrialTooltipLocalizationModule

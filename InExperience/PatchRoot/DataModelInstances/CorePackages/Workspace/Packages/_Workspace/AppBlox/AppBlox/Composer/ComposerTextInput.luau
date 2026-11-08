@@ -1,11 +1,10 @@
 ﻿local Foundation = game:GetService("CorePackages").Packages._Index.Foundation.Foundation
 local Parent = Foundation.Parent
-local Parent1 = script:FindFirstAncestor("AppBlox").Parent
 local ReactModule = require(Parent.React)
 local ReactUtilsModule = require(Parent.ReactUtils)
-local FFlagComposerFooter = require(Parent1.SharedFlags).FFlagComposerFooter
+local FFlagComposerFooter = require(script:FindFirstAncestor("AppBlox").Parent.SharedFlags).FFlagComposerFooter
 local ComposerMultiLineCaretFix = game:DefineFastFlag("ComposerMultiLineCaretFix", false)
-local FoundationFontFaceMigration = require(Parent1.Foundation).Utility.Flags.FoundationFontFaceMigration
+local ComposerDraftTextBindingSync = game:DefineFastFlag("ComposerDraftTextBindingSync", false)
 local Components = Foundation.Components
 local IconModule = require(Components.Icon)
 local PaddingModule = require(Components.Padding)
@@ -45,7 +44,7 @@ local config = {
 	variant = InputVariantModule.Standard
 }
 local MemoResult = ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceModule (copy), IsPluginSecurityModule (copy), PaddingModule (copy)
+	-- upvalues: ReactModule (copy), NormalizeFontFaceModule (copy), IsPluginSecurityModule (copy), PaddingModule (copy)
 	local IsBoundsChecker = p1.isBoundsChecker
 	local IsMultiLine = p1.isMultiLine or IsBoundsChecker
 	
@@ -54,8 +53,7 @@ local MemoResult = ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 		Selectable = false,
 		Active = not IsBoundsChecker and nil,
 		Visible = not IsBoundsChecker and nil,
-		Font = if FoundationFontFaceMigration then nil else p1.fontStyle.Font,
-		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceModule(p1.fontStyle.Font) else nil,
+		FontFace = NormalizeFontFaceModule(p1.fontStyle.Font),
 		TextSize = p1.fontStyle.FontSize,
 		LineHeight = p1.fontStyle.LineHeight,
 		TextColor3 = if p1.textStyle then p1.textStyle.Color3 else nil,
@@ -87,7 +85,7 @@ local MemoResult = ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 end))
 
 return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1)
-	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), FFlagComposerFooter (copy), ReactModule (copy), GetBindableValueModule (copy), UseTextInputVariantsModule (copy), InputVariantModule (copy), UseStyleTagsModule (copy), UsePreferredInputModule (copy), UseComposerFocusLockModule (copy), GetDisabledStyleModule (copy), GetMultiLineTextHeightModule (copy), ComposerDebugModule (copy), MeasureTextLineCountModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceModule (copy), ComposerMultiLineCaretFix (copy), InputFocusBehaviorModule (copy), UseComposerKeyboardConnectionsModule (copy), ControlStateModule (copy), RadiusModule (copy), TruncateTextToCursorModule (copy), UseBindableModule (copy), ReactUtilsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), BlendTransparenciesModule (copy), ConstantsModule (copy), StateLayerAffordanceModule (copy), ScrollViewModule (copy), MemoResult (copy), MapBindableModule (copy), IconModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), FFlagComposerFooter (copy), ReactModule (copy), GetBindableValueModule (copy), UseTextInputVariantsModule (copy), InputVariantModule (copy), UseStyleTagsModule (copy), UsePreferredInputModule (copy), UseComposerFocusLockModule (copy), GetDisabledStyleModule (copy), GetMultiLineTextHeightModule (copy), ComposerDebugModule (copy), MeasureTextLineCountModule (copy), NormalizeFontFaceModule (copy), ComposerMultiLineCaretFix (copy), InputFocusBehaviorModule (copy), ComposerDraftTextBindingSync (copy), UseComposerKeyboardConnectionsModule (copy), ControlStateModule (copy), RadiusModule (copy), TruncateTextToCursorModule (copy), UseBindableModule (copy), ReactUtilsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), BlendTransparenciesModule (copy), ConstantsModule (copy), StateLayerAffordanceModule (copy), ScrollViewModule (copy), MemoResult (copy), MapBindableModule (copy), IconModule (copy)
 	local Tbl1 = Tbl
 	
 	if Tbl.Selectable == nil then
@@ -159,13 +157,13 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1)
 		return if Current and Current.AbsoluteSize.X > 0 then Current.AbsoluteSize.X else 0
 	end, {})
 	local UseResult1 = ReactModule.useCallback(function(Text)
-		-- upvalues: MeasureTextLineCountModule (upval), WithDefaultsModuleResult (copy), MultiLineTextHeightModule (copy), UseResult (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceModule (upval), FontStyle (copy), FontSize (copy), ComposerMultiLineCaretFix (upval), UseStateResult2_4 (copy), GetMultiLineTextHeightModule (upval), LineHeight (copy)
+		-- upvalues: MeasureTextLineCountModule (upval), WithDefaultsModuleResult (copy), MultiLineTextHeightModule (copy), UseResult (copy), NormalizeFontFaceModule (upval), FontStyle (copy), FontSize (copy), ComposerMultiLineCaretFix (upval), UseStateResult2_4 (copy), GetMultiLineTextHeightModule (upval), LineHeight (copy)
 		local MeasureTextLineCountModuleResult = MeasureTextLineCountModule({
 			text = Text,
 			maxLines = WithDefaultsModuleResult.maxLines,
 			singleLineHeight = MultiLineTextHeightModule,
 			layoutWidth = UseResult(),
-			font = if FoundationFontFaceMigration then NormalizeFontFaceModule(FontStyle.Font) else FontStyle.Font,
+			font = NormalizeFontFaceModule(FontStyle.Font),
 			fontSize = FontSize
 		})
 		
@@ -317,29 +315,39 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1)
 		UseResult2
 	})
 	local UseResult11 = ReactModule.useCallback(function(p2)
-		-- upvalues: UseRefResult4 (copy), UseRefResult10 (copy), UseRefResult8 (copy), UseRefResult5 (copy), IsLargestAbove (copy), UseRefResult2 (copy), HasMaxLines (copy), UseStateResult2_5 (copy), WithDefaultsModuleResult (copy), UseStateResult2_3 (copy), UseResult1 (copy)
+		-- upvalues: UseRefResult4 (copy), UseRefResult10 (copy), ComposerDraftTextBindingSync (upval), HasMaxLines (copy), UseRefResult5 (copy), UseStateResult2_5 (copy), UseStateResult2_3 (copy), UseResult1 (copy), UseRefResult8 (copy), IsLargestAbove (copy), UseRefResult2 (copy), WithDefaultsModuleResult (copy)
 		if p2 == nil or p2.Parent == nil or UseRefResult4.current ~= "" then return end
-		if UseRefResult10.current then return end
-		local Text = p2.Text
-		
-		if UseRefResult8.current and Text ~= "" then return end
-		if Text == UseRefResult5.current then return end
-		UseRefResult5.current = Text
-		
-		if IsLargestAbove and UseRefResult2.current then
-			UseRefResult2.current.Text = Text
-		end
-		if HasMaxLines then
-			UseStateResult2_5(Text)
-		end
-		if WithDefaultsModuleResult.maxLines then
-			UseStateResult2_3(UseResult1(Text))
-			task.defer(function()
-				-- upvalues: UseStateResult2_3 (upval), UseResult1 (upval), Text (copy)
+		if UseRefResult10.current then
+			local Text = p2.Text
+			
+			if ComposerDraftTextBindingSync and HasMaxLines and Text ~= "" and Text ~= UseRefResult5.current then
+				UseRefResult5.current = Text
+				UseStateResult2_5(Text)
 				UseStateResult2_3(UseResult1(Text))
-			end)
+			end
+			return
+		else
+			local Text1 = p2.Text
+			
+			if UseRefResult8.current and Text1 ~= "" then return end
+			if Text1 == UseRefResult5.current then return end
+			UseRefResult5.current = Text1
+			
+			if IsLargestAbove and UseRefResult2.current then
+				UseRefResult2.current.Text = Text1
+			end
+			if HasMaxLines then
+				UseStateResult2_5(Text1)
+			end
+			if WithDefaultsModuleResult.maxLines then
+				UseStateResult2_3(UseResult1(Text1))
+				task.defer(function()
+					-- upvalues: UseStateResult2_3 (upval), UseResult1 (upval), Text1 (copy)
+					UseStateResult2_3(UseResult1(Text1))
+				end)
+			end
+			WithDefaultsModuleResult.onChanged(Text1)
 		end
-		WithDefaultsModuleResult.onChanged(Text)
 	end, {
 		WithDefaultsModuleResult.onChanged,
 		IsLargestAbove,
@@ -591,12 +599,12 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1)
 	local NoUseStateResult3_1: boolean = IsTextPaddingOnParent and NoUseStateResult3
 	local NoNoUseStateResult3_1: boolean = IsTextPaddingOnParent and not NoUseStateResult3_1
 	local UseMemoResult5 = if IsTextPaddingOnParent then nil else UseMemoResult4
-	local YOffset = if IsTextPaddingOnParent then UseMemoResult else UseMemoResult + NewOffset
+	local YOffset1 = if IsTextPaddingOnParent then UseMemoResult else UseMemoResult + NewOffset
 	local UseStateResult7 = if IsTextPaddingOnParent then UseStateResult5 else UseStateResult5 + NewOffset
-	local Largest2 = if NoUseStateResult3 then math.max(YOffset, UseStateResult7) else YOffset
-	local YOffset1 = if NoNoUseStateResult3_1 then Largest2 + NewOffset else Largest2
+	local Largest2 = if NoUseStateResult3 then math.max(YOffset1, UseStateResult7) else YOffset1
+	local YOffset = if NoNoUseStateResult3_1 then Largest2 + NewOffset else Largest2
 	local _UDim2 = UDim2.new(1, 0, 0, Largest2)
-	local _UDim2_1 = UDim2.new(1, 0, 0, YOffset)
+	local _UDim2_1 = UDim2.new(1, 0, 0, YOffset1)
 	ReactModule.useEffect(function()
 		-- upvalues: WithDefaultsModuleResult (copy), ComposerDebugModule (upval), Largest1 (copy), UseMemoResult2_1 (copy)
 		if WithDefaultsModuleResult.maxLines then
@@ -792,7 +800,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1)
 				scrollingFrameRef = if IsLargestAbove then UseResult25 else nil
 			}, {
 				TextContent = ReactModule.createElement(ViewModule, {
-					Size = if NoUseStateResult3 then UDim2.new(1, 0, 0, YOffset1) else nil,
+					Size = if NoUseStateResult3 then UDim2.new(1, 0, 0, YOffset) else nil,
 					tag = { ["fill size-full"] = not NoUseStateResult3 },
 					padding = if NoNoUseStateResult3_1 then UseMemoResult4 else nil,
 					selection = { Selectable = false },

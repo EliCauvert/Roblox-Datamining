@@ -171,8 +171,8 @@ Common.Presence.Label.Online,ออนไลน์
 Common.Presence.Label.RobloxStudio,Roblox Studio
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,แอนิเมชันยาวเกินไป ({duration} วินาที) แอนิเมชันท่าทางต้องมีความยาวไม่เกิน {maxLength} วินาที
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,แอนิเมชันสั้นเกินไป ({duration} วินาที) แอนิเมชันท่าทางต้องมีความยาวมากกว่า {minLength} วินาที
-Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,การจัดวางชิ้นส่วน Cage {cageName} ไม่ถูกต้อง: {upperPart} ไม่ได้อยู่เหนือ {lowerPart} ในตำแหน่งที่ถูกต้อง
-Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,ชิ้นส่วน {partName} ใน Cage {cageName} มีจุดตัด {actualCount} จุด โดยควรมีประมาณ {expectedCount} จุด ซึ่งอาจบ่งชี้ว่ามีรูปทรงเรขาคณิตในบริเวณดังกล่าวของร่างกายไม่ครบหรือซ้ำกัน
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,การจัดวางชิ้นส่วน Cage {cageName} ไม่ถูกต้อง: {upperPart} ไม่ได้อยู่ในตำแหน่งที่เกี่ยวข้องกับ {lowerPart} อย่างถูกต้อง
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,ชิ้นส่วน {partName} ใน {cageName} มีจุดตัด {actualCount} จุด โดยควรมีประมาณ {expectedCount} จุด ซึ่งอาจบ่งชี้ว่ามีรูปทรงเรขาคณิตในบริเวณดังกล่าวของ Cage ไม่ครบหรือซ้ำกัน
 Common.UGCValidation.ErrorLabel.AQSFail_CageUV,"{cage_name} มีค่า UV ที่ไม่ถูกต้อง ซึ่งไม่ตรงกับแม่แบบ โดยมีค่า UV ที่ไม่ถูกต้อง {incorrect_uv_count} รายการ (ไม่มีการอ้างอิง {unreferenced_vertex_count} รายการ, ไม่ใช่แม่แบบ {non_template_uv_count} รายการ, การแมปซ้ำกัน {duplicate_mapping_count} รายการ) มีจุดตัดที่ไม่ตรงกับแม่แบบ {unmatched_template_count} รายการ โปรดแก้ไขค่า UV ของ Cage ให้ตรงกับแม่แบบ"
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,ร่างกายของคุณมีองค์ประกอบเมชขนาดเล็กที่ไม่เชื่อมต่อกัน (ส่วนย่อยของเมช) โปรดลบรูปทรงที่ลอยอยู่ออกและตรวจสอบให้แน่ใจว่าส่วนต่างๆ ของเมชทั้งหมดเชื่อมต่อกันอย่างถูกต้อง
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,{partName} มีองค์ประกอบที่ไม่เชื่อมต่อกัน {num_disconnected_components} ชิ้น ซึ่งเกินจำนวนสูงสุดที่กำหนดไว้ที่ {max_disconnected_components} ชิ้น
@@ -183,7 +183,7 @@ Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,Cage ของศ�
 Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,จุดยอดของ Outer Cage ที่ปรับแก้แล้วจำนวน {irrelevant_percent}% ไม่ได้ครอบคลุมไอเท็มเสริม โปรดปรับ Cage ให้พอดีกับรูปทรงของไอเท็มเสริมมากขึ้น
 Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,"{cage_name} มีค่า UV ที่ไม่ถูกต้อง โดยมีค่า UV ที่ไม่ถูกต้อง {incorrect_uv_count} รายการ (ไม่มีการอ้างอิง {unreferenced_vertex_count} รายการ, ไม่ตรงกับแม่แบบ {non_template_uv_count} รายการ, แมปซ้ำ {duplicate_mapping_count} รายการ) และมีจุดยอดของแม่แบบที่ไม่ตรงกัน {unmatched_template_count} รายการ"
 Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,{partName} มีสามเหลี่ยมเสื่อมสภาพ {degenerate_triangle_percent}%
-Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,"ศีรษะแบบเคลื่อนไหวมีปัญหาด้านคุณภาพการแสดงสีหน้า ปิดตาซ้าย: {left_eye_close}, ปิดตาขวา: {right_eye_close}, อ้าปาก: {mouth_open}, ดีใจ: {is_happy}, เศร้า: {is_sad}"
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,"ศีรษะแบบเคลื่อนไหวมีปัญหาด้านคุณภาพการแสดงสีหน้า การปิดตาซ้ายบนหน้าจอ (จุดสีแดงที่ด้านซ้ายของศีรษะในปลั๊กอินการแสดงภาพ): {left_eye_close}, การปิดตาขวาบนหน้าจอ (จุดสีน้ำเงินที่ด้านขวาของศีรษะในปลั๊กอินการแสดงภาพ): {right_eye_close}, อ้าปาก (จุดสีเขียวในปลั๊กอินการแสดงภาพ): {mouth_open}, ดีใจ: {is_happy}, เศร้า: {is_sad}"
 Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"การกำหนดค่าข้อต่อผิดปกติ จำนวนข้อต่อทั้งหมด:{joint_number}, ข้อต่อมือซ้าย: {left_hand_joint_number}, ข้อต่อมือขวา: {right_hand_joint_number}"
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,{partName} มีเมชขนาดเล็กที่ไม่เชื่อมต่อกัน {num_small_volume_islands} ส่วนจากองค์ประกอบทั้งหมด {num_disconnected_components} ส่วน โปรดลบรูปทรงที่ลอยอยู่ออก
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,{partName} มีรูปเรขาคณิตที่ไม่ใช่แมนิโฟลด์ โปรดตรวจสอบผิวหน้าที่ไม่อยู่ในระนาบเดียวกัน พื้นผิวที่ตัดกันเอง หรือขอบที่มีผิวหน้าใช้ร่วมกันมากกว่า 2 ด้าน
@@ -192,9 +192,9 @@ Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,จุดยอด�
 Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,ไม่สามารถคำนวณข้อมูลการตรวจสอบความถูกต้องสำหรับ {measureName} ได้ เนื่องจากข้อมูลที่ป้อนไม่ครบถ้วนหรือไม่ถูกต้อง แต่ไม่เป็นการบล็อคการอัปโหลดของคุณ
 Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,พื้นผิว {textureName} มีความซับซ้อนต่ำ จึงอาจมีรายละเอียดหรือความแตกต่างไม่เพียงพอ
 Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,พื้นผิว {textureName} มีความละเอียดต่ำที่ {texture_width}x{texture_height} ลองใช้พื้นผิวที่มีความละเอียดสูงขึ้น
-Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,คุณภาพของทรัพยากร: {partName} มีหน้าสามเหลี่ยมที่ตัดกัน {intersecting_tri_face_percent}% (คะแนน: {score})
+Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,{partName} มีหน้าตัดกันเอง {intersecting_tri_face_percent}% ซึ่งเกินจำนวนที่อนุญาตไว้ที่ {threshold}%
 Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,"{partName} มีจุดยอด UV นอกขอบเขต [0,1] {uv_outside_bound_vert_percent}%"
-Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,คุณภาพของทรัพยากร: {partName} มีจุดตัดที่คล้ายกัน {similar_vertex_percent}% (คะแนน: {score})
+Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,{partName} มีจุดตัดที่คล้ายกัน {similar_vertex_percent}% ซึ่งเกินจำนวนที่อนุญาตไว้ที่ {threshold}%
 Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,ต้องวางจุดเชื่อมต่อไอเท็มเสริม '{AttachmentName}' ใน '{PartName}' ไว้ใกล้ๆ พื้นผิวของเมช ตำแหน่งปัจจุบัน [{CurrentPosition}] อยู่นอกพื้นที่ที่ถูกต้อง โปรดย้ายไปอยู่ใกล้ๆ [{ClosestValidPosition}]
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,Handle นี้ Skin อยู่กับข้อต่อ {jointName} ซึ่งไม่ได้เป็นส่วนหนึ่งของ Schema ที่อนุญาต จะอนุญาตเฉพาะข้อต่อแบบ R15 มาตรฐานและข้อต่อถ่ายโอนการ Skinning เท่านั้น
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,{assetType} ต้องใช้การถ่ายโอนการ Skinning แต่คุณไม่มีข้อต่อ {requiredJointName} ที่จำเป็น
@@ -206,15 +206,44 @@ Common.UGCValidation.ErrorLabel.AccessorySkinning_WeightNotFull,จุดยอ�
 Common.UGCValidation.ErrorLabel.AnimationPack_DuplicateAnimationId,ชุดแพ็คแอนิเมชันมี ID แอนิเมชัน '{animationId}' ซ้ำกัน ซึ่งถูกใช้งานโดยหลายคลิป: {instancePaths} คลิปแอนิเมชันแต่ละคลิปต้องอ้างอิงทรัพยากรแอนิเมชันที่ไม่ซ้ำกัน
 Common.UGCValidation.ErrorLabel.AnimationPack_InvalidR15AnimChildren,ชุดแพ็คแอนิเมชันไม่มีประเภทแอนิเมชันที่ควรมี: {missingAnimationTypes} แต่ละประเภทแอนิเมชันต้องมีโฟลเดอร์ R15Anim 1 โฟลเดอร์ ซึ่งมี StringValue ย่อยตรงตามที่ควรมีเท่านั้น
 Common.UGCValidation.ErrorLabel.Animation_WeightNotPositive,แอนิเมชัน '{animationName}' มีค่าน้ำหนักอยู่ที่ {weight} แต่ต้องมากกว่า 0 โปรดแก้ไขแอนิเมชัน
+Common.UGCValidation.ErrorLabel.AssetBounds_InconsistentScaleType,ทุก MeshParts ในส่วนรองของ AvatarPartScaleType ต้องมีค่าเดียวกัน โปรดยืนยันว่ามีค่าที่ตรงกัน
+Common.UGCValidation.ErrorLabel.AssetBounds_TooLarge,ขนาดของเมช {assetName} และข้อต่อตามแกน {axis} ที่ '{currentSize}' มีขนาดใหญ่กว่าที่กรอบขอบเขตอนุญาตไว้สูงสุดสำหรับขนาดแกน {axis} ที่ '{maxSize}' คุณต้องลดขนาดเมช/ข้อต่อ
+Common.UGCValidation.ErrorLabel.AssetBounds_TooSmall,ขนาดของเมช {assetName} ตามแกน {axis} ที่ '{currentSize}' มีขนาดเล็กกว่าที่กรอบขอบเขตอนุญาตไว้สูงสุดสำหรับขนาดแกน {axis} ที่ '{minSize}' คุณต้องเพิ่มขนาดเมช
+Common.UGCValidation.ErrorLabel.AssetDoesNotExist,ไม่มีทรัพยากร '{AssetId}' ที่ '{InstancePath}' ใช้อ้างอิงหรือไม่สามารถโหลดได้ โปรดเปลี่ยนเป็น ID ทรัพยากรที่ถูกต้อง
+Common.UGCValidation.ErrorLabel.AssetOpacity_BelowThreshold,{AssetName} จาก {ViewName} ไม่ทึบแสงพอ โดยมีค่าความทึบอยู่ที่ {Opacity} แต่ต้องมีมากกว่า {Threshold}
+Common.UGCValidation.ErrorLabel.AssetOpacity_Invisible,มองไม่เห็นเมช '{AssetName}' โดยสิ้นเชิง
+Common.UGCValidation.ErrorLabel.AssetOpacity_MeshLoadFailed,โหลดเมชสำหรับ MeshPart '{PartName}' ไม่สำเร็จ โปรดตรวจสอบให้แน่ใจว่ามีเมชนั้นอยู่แล้วลองอีกครั้ง
+Common.UGCValidation.ErrorLabel.AssetOpacity_NoTriangles,เมช '{AssetName}' ไม่มีรูปสามเหลี่ยม
+Common.UGCValidation.ErrorLabel.AssetOpacity_NonZeroTransparency,ชิ้นส่วน '{PartName}' มีค่าความโปร่งใสที่ไม่ใช่ศูนย์ ความโปร่งใสของชิ้นส่วนควรเป็นศูนย์เสมอ
+Common.UGCValidation.ErrorLabel.AssetOpacity_ZeroSize,เมช '{AssetName}' ไม่ควรมีขนาดเป็นศูนย์
 Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,ไม่พบ {ExpectedClass} ชื่อ {ExpectedName} ที่ต้องการภายใน {ParentPath}
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,อินสแตนซ์ต่อไปนี้ไม่ได้เป็นส่วนหนึ่งของ Schema ที่ได้รับอนุมัติและควรลบออก: {UnexpectedDescendantPaths}
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,แอสเซทที่อัปโหลดควรเป็น {ExpectedClass} แต่กลับเป็น {RootClass}
-Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,แอสเซทที่อัปโหลดควรมีชื่อว่า {ExpectedClass} แต่กลับมีชื่อว่า {RootClass}
+Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,ทรัพยากรที่อัปโหลดควรมีชื่อว่า {ExpectedName} แต่กลับมีชื่อว่า {RootName}
+Common.UGCValidation.ErrorLabel.AttachmentBoundsAssetCalculationFailed,ไม่สามารถคำนวณขอบเขตเมชสำหรับ '{InstancePath}' ได้ก่อนตรวจสอบตำแหน่งจุดเชื่อมต่อ ข้อมูลเมชอาจไม่ครบหรือผิดรูปแบบ โปรดนำเข้าทรัพยากรอีกครั้งแล้วลองใหม่
+Common.UGCValidation.ErrorLabel.AttachmentBoundsCalculationFailed,ไม่สามารถคำนวณขอบเขตสำหรับจุดเชื่อมต่อ '{AttachmentName}' ใน '{PartName}' ได้ ข้อมูลเมชอาจไม่ครบหรือผิดรูปแบบ โปรดนำเข้าทรัพยากรอีกครั้งแล้วลองใหม่
+Common.UGCValidation.ErrorLabel.AttachmentOrientationDeviation,การจัดวางทิศทางของจุดเชื่อมต่อ '{InstancePath}' เบี่ยงเบนจากที่คาดไว้มากเกินไป ทั้งนี้ การจัดวางทิศทางที่แนะนำคือ {ExpectedOrientation} โดยมีค่าเบี่ยงเบนสูงสุดอยู่ที่ {MaxDeviation} องศา
+Common.UGCValidation.ErrorLabel.AttachmentOrientationRigRotated,"ไม่สามารถหมุนจุดเชื่อมต่อ Rig ได้ โปรดตั้งค่าการจัดวางทิศทางของ '{InstancePath}' เป็น (0,0,0)"
+Common.UGCValidation.ErrorLabel.BodyBlocking_ZeroMeshSize,เมชเรนเดอร์สำหรับ {meshName}: {details} โปรดเพิ่มขนาดของเมช
+Common.UGCValidation.ErrorLabel.BodyMesh_LoadFailed,โหลดเมช '{meshName}' ไม่สำเร็จ โปรดตรวจสอบให้แน่ใจว่ามีเมชนั้นอยู่แล้วลองอีกครั้ง
+Common.UGCValidation.ErrorLabel.BodyMesh_SizeMismatch,เมื่อเทียบกับอีกเมช {otherMeshContext} ขนาดของ {meshContext} มีค่ามากกว่าผลต่างสูงสุดที่ {maxDiff} คุณต้องแก้ไขโมเดลเพื่อปรับขนาด
+Common.UGCValidation.ErrorLabel.BodyPartCageDistanceValid_TooFar,พบจุดยอดบนเมช Cage ของ {partName} ซึ่งอยู่ห่างจากเมชเรนเดอร์ที่ใกล้ที่สุด {distance} Stud ทว่าค่าสูงสุดที่อนุญาตคือ {maxDistance} Stud ปรับเมช Cage ให้ตรงกับรูปทรงและขนาดของเมชเรนเดอร์ให้มากขึ้น
+Common.UGCValidation.ErrorLabel.BoundingBox_ValidationFailed,{reason}
+Common.UGCValidation.ErrorLabel.CageMeshDistanceBounded_DistanceTooHigh,ระยะห่างเฉลี่ยระหว่าง Cage ด้านนอกกับเมชสูงเกินไป ({distance}) ปรับระยะ Cage ให้เหมาะกับเมชมากขึ้น
+Common.UGCValidation.ErrorLabel.CageMeshDistanceBounded_MeshOutsideCage,ระยะห่างเฉลี่ยระหว่าง Cage ด้านนอกกับเมชสูงเกินไป ดูเหมือนว่าเมชจะอยู่นอก Cage ด้านนอก
+Common.UGCValidation.ErrorLabel.CageUV_ExtraDuplicateUVs,มีค่า UV {count} รายการใน Cage {cageType} ของ '{partName}' ที่ไม่สอดคล้องกับแม่แบบ โปรดแก้ไขค่า UV ของ Cage นั้น
+Common.UGCValidation.ErrorLabel.CageUV_IncorrectUVCount,Cage ด้านนอกของ '{partName}' ควรมี UV ที่ไม่ซ้ำกัน {requiredUVCount} จุด ทว่ามีอยู่ {actualUVCount} จุด โปรดตรวจสอบให้แน่ใจว่าเมชมี UV ที่ไม่ซ้ำกันครบตามจำนวนที่กำหนด แล้วลองอีกครั้ง
+Common.UGCValidation.ErrorLabel.CageUV_InvalidUVValue,"พบค่า UV ที่ไม่ถูกต้องนอกช่วง [0, 1] สำหรับ '{partName}' คุณต้องแก้ไขแผนที่ UV นั้นเพื่อแก้ปัญหานี้"
+Common.UGCValidation.ErrorLabel.CageUV_RenderMeshBoundsCheckFailed,เรียกใช้การทดสอบเมชเรนเดอร์ภายในกรอบขอบเขตของพื้นที่ที่แก้ไข Cage ด้านนอกไม่สำเร็จ โปรดตรวจสอบให้แน่ใจว่ามีทั้งเมช Cage และเมชเรนเดอร์ แล้วลองอีกครั้ง
+Common.UGCValidation.ErrorLabel.CageUV_RenderMeshOutsideModifiedArea,จุดยอดของเมชเรนเดอร์ตั้งอยู่ในพื้นที่ {allowedArea} ที่แก้ไขของ WrapLayer CageMesh (เมชด้านนอก) เพียง {currentPercent}% ทว่าจำเป็นต้องตั้งอยู่ที่ {requiredPercent}% โปรดย้ายเมชเรนเดอร์ให้อยู่ภายในพื้นที่ที่แก้ไขของ WrapLayer CageMesh (เมชด้านนอก)
+Common.UGCValidation.ErrorLabel.CageUV_TooFewMainModified,WrapLayer CageMesh (เมชด้านนอก) สำหรับ {assetTypeName} ต้องแก้ไข UV ของ Cage ที่ {requiredPercent}% ในส่วน {mainArea} ขณะนี้แก้ไขไว้เพียง {currentPercent}% โปรดย้ายทรัพยากรของคุณไปยังส่วนของร่างกายที่ถูกต้อง
+Common.UGCValidation.ErrorLabel.CageUV_TooManyExcludedModified,UV ของ Cage ที่แก้ไขไป {modifiedPercent}% ใน WrapLayer CageMesh (เมชด้านนอก) อยู่นอกส่วนของร่างกายที่คาดไว้ UV ที่แก้ไขแล้วของ {assetTypeName} ต้องไม่อยู่นอกพื้นที่ {allowedArea} เกิน {maxPercent}% โปรดย้ายทรัพยากรของคุณไปยังส่วนของร่างกายที่ถูกต้อง
+Common.UGCValidation.ErrorLabel.CageUV_ZeroAreaTriangle,ตรวจพบสามเหลี่ยมที่มีพื้นที่เป็นศูนย์ในแผนที่ UV ของ '{partName}' คุณต้องแก้ไขแผนที่ UV นั้นเพื่อแก้ปัญหานี้
+Common.UGCValidation.ErrorLabel.CollisionFidelityWrong,'{InstancePath}' มี CollisionFidelity ไม่ถูกต้อง คาดว่าจะเป็น {ExpectedFidelity}
 Common.UGCValidation.ErrorLabel.ContentNotEditable,{InstanceFullName}.{FieldName} ยังมีเนื้อหาที่แก้ไขได้ที่ยังไม่ได้บันทึก โปรดบันทึกเป็นทรัพยากรก่อนเผยแพร่แล้วลองอีกครั้ง
-Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,ส่วนของร่างกาย '{bodyPartName}' ใน CurveAnimation มีแทร็ก Position (การเคลื่อนที่) ส่วนของร่างกายในแอนิเมชันสามารถเปลี่ยนได้เฉพาะการหมุนเท่านั้น ไม่อนุญาตให้ใช้แทร็ก Position โปรดลบแทร็ก Position ออกจากส่วนของร่างกายนี้
+Common.UGCValidation.ErrorLabel.CoplanarTri_TooMany,ตรวจพบจุดตัดของสามเหลี่ยมที่อยู่บนระนาบเดียวกันในเมชโมเดล '{MeshName}' มากเกินไป เมชสามเหลี่ยม {TriangleCount} รูปจะมีจุดตัดได้สูงสุด {MaxIntersections} จุด โปรดแก้ไขเมชเพื่อลดจำนวนจุดตัดของสามเหลี่ยมที่อยู่บนระนาบเดียวกัน
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,ชิ้นส่วนร่างกาย '{bodyPartName}' ใน CurveAnimation เคลื่อนที่จากตำแหน่งเริ่มต้นเป็นระยะ {distance} Stud แต่ระยะการเลื่อนตำแหน่งสูงสุดที่อนุญาตคือ {maxDistance} Stud โปรดลดการเคลื่อนที่เชิงตำแหน่งของส่วนของร่างกาย
-Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,CurveAnimation มีกระดูก HRD/DRD และส่วนของร่างกาย '{bodyPartName}' มีแทร็ก Position (การเคลื่อนที่) เมื่อมีการใช้กระดูกในแอนิเมชัน จะต้องไม่มีส่วนใดของร่างกายที่เคลื่อนได้ เพื่อป้องกันไม่ให้ข้อต่อแยกออก โปรดลบแทร็ก Position ทั้งหมดออกจากส่วนของร่างกาย
-Common.UGCValidation.ErrorLabel.CurveAnim_BonePositionNotAllowed,กระดูก {boneName} ใน CurveAnimation มีแทร็ก Position (การเคลื่อนที่) กระดูก HRD/DRD สามารถเปลี่ยนได้เฉพาะการหมุนเท่านั้น แทร็ก Position จะทำให้ข้อต่อแยกออกจากกันและไม่อนุญาตให้ใช้ โปรดลบแอนิเมชันตำแหน่งออกจากกระดูกนี้
+Common.UGCValidation.ErrorLabel.CurveAnim_BoneRequiresParent,โฟลเดอร์กระดูก '{boneName}' จำเป็นต้องมี '{parentBoneName}' เพื่อแสดงในแอนิเมชันด้วย
 Common.UGCValidation.ErrorLabel.CurveAnim_BoneTranslationExceedsThreshold,กระดูก '{boneName}' ใน CurveAnimation เคลื่อนที่จากตำแหน่งเริ่มต้นเป็นระยะ {distance} Stud แต่ระยะการเลื่อนตำแหน่งสูงสุดที่อนุญาตคือ {maxDistance} Stud โปรดลดการเคลื่อนที่เชิงตำแหน่งของกระดูก
 Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation มีโฟลเดอร์กระดูก HRD/DRD ซึ่งยังไม่รองรับ โปรดลบโฟลเดอร์ย่อยของกระดูกออกให้หมดก่อนจะอัปโหลด
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,ชิ้นส่วนร่างกายใน CurveAnimation ต้องไม่อยู่ต่ำกว่า HumanoidRootPart {minHeight} Stud หรืออยู่ห่างจาก HumanoidRootPart เกิน {maxDistance} Stud โปรดแก้ไขแอนิเมชัน
@@ -226,27 +255,27 @@ Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,CurveAnimatio
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"โฟลเดอร์ '{boneName}' ใน CurveAnimation ไม่ใช่ชื่อกระดูก HRD/DRD ที่รู้จัก โฟลเดอร์ย่อยของแอนิเมชันต้องเป็นชิ้นส่วนร่างกาย R15 ที่ถูกต้อง หรือชื่อกระดูกที่รู้จัก (เช่น HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase หรือกระดูกนิ้วมือ เช่น LeftHandIndex1)"
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidCurveData,CurveAnimation มี Curve ที่มี Time หรือ Value ไม่ถูกต้อง โปรดแก้ไขแอนิเมชัน
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidInstanceTypes,ลำดับชั้นของ CurveAnimation ต้องประกอบด้วย {allowedTypes} เท่านั้น โปรดลบอินสแตนซ์ประเภทอื่นออกให้หมด
-Common.UGCValidation.ErrorLabel.CurveAnim_InvalidLength,CurveAnimation ต้องมีความยาวระหว่าง {minLength} ถึง {maxLength} วินาที โปรดแก้ไขแอนิเมชัน
+Common.UGCValidation.ErrorLabel.CurveAnim_InvalidLength,CurveAnimation {animationName} ต้องมีความยาวระหว่าง {minLength} ถึง {maxLength} วินาที โปรดแก้ไขแอนิเมชัน
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidMarkerData,CurveAnimation มี MarkerCurve ที่มี Time หรือ Value ไม่ถูกต้อง หรือ Value ยาวเกินไป โปรดแก้ไขแอนิเมชัน
-Common.UGCValidation.ErrorLabel.CurveAnim_InvalidNumericalData,CurveAnimation มี Curve ที่มีข้อมูลตัวเลขไม่ถูกต้อง โปรดแก้ไขแอนิเมชัน
+Common.UGCValidation.ErrorLabel.CurveAnim_InvalidNumericalData,CurveAnimation {animationName} มี Curve ที่มีข้อมูลตัวเลขไม่ถูกต้อง โปรดแก้ไขแอนิเมชัน
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidRigData,AnimationRigData ไม่ผ่านการตรวจสอบความถูกต้องภายใน โปรดเช็คให้แน่ใจว่าตั้งค่า AnimationRigData ถูกต้อง
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidRigDataR15Plus,AnimationRigData ไม่ผ่านการตรวจสอบความถูกต้องภายใน R15+ โปรดเช็คให้แน่ใจว่าตั้งค่า AnimationRigData อย่างถูกต้องสำหรับแอนิเมชันกระดูก
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidTags,CurveAnimation มีแท็กประทับเวลาได้เพียงแท็กเดียวเท่านั้น โปรดลบแท็กอื่นๆ ออกทั้งหมด
-Common.UGCValidation.ErrorLabel.CurveAnim_JointRotationExceeded,ใน CurveAnimation เวลา {time} วินาที ข้อต่อ {bodyPart} มีมุมการหมุนอยู่ที่ {rotation} องศาจากโพสเริ่มต้น ทว่ามุมการหมุนสูงสุดที่อนุญาตคือ {maxRotation} องศา โปรดแก้ไขแอนิเมชัน
+Common.UGCValidation.ErrorLabel.CurveAnim_JointRotationExceeded,ใน CurveAnimation {animationName} เวลา {time} วินาที ข้อต่อ {bodyPart} มีมุมการหมุนอยู่ที่ {rotation} องศาจากโพสเริ่มต้น ทว่ามุมการหมุนสูงสุดที่อนุญาตคือ {maxRotation} องศา โปรดแก้ไขแอนิเมชัน
 Common.UGCValidation.ErrorLabel.CurveAnim_KeysTooClose,CurveAnimation มี Curve {curvePath} ที่มีคีย์บางจุดอยู่ใกล้กันเกินไปในช่วงเวลาสำหรับแอนิเมชันที่รองรับสูงสุด {maxFPS} fps โปรดแก้ไขแอนิเมชัน
 Common.UGCValidation.ErrorLabel.CurveAnim_LoopingNotEnabled,"CurveAnimation ""{animationName}'' ไม่ได้เปิดใช้งาน Loop แอนิเมชันที่อัปโหลดไปยังมาร์เก็ตเพลสต้องวนลูป โปรดเปิดใช้งานคุณสมบัติ Loop"
 Common.UGCValidation.ErrorLabel.CurveAnim_MultipleBodyRoots,CurveAnimation มีโฟลเดอร์รองที่เป็นชิ้นส่วนร่างกายหรือ HumanoidRootPart มากกว่า 1 โฟลเดอร์ โปรดตรวจสอบให้แน่ใจว่ามีโฟลเดอร์รองที่ตั้งชื่อตามส่วนของร่างกายหรือ HumanoidRootPart เพียงโฟลเดอร์เดียวเท่านั้น
 Common.UGCValidation.ErrorLabel.CurveAnim_MultipleRigData,CurveAnimation มี AnimationRigData รองมากกว่า 1 รายการ โปรดตรวจสอบให้แน่ใจว่ามี AnimationRigData รองเพียงรายการเดียวเท่านั้น
 Common.UGCValidation.ErrorLabel.CurveAnim_NegativeKeyTime,CurveAnimation มี Curve {curvePath} ที่มีคีย์ระบุเวลาเป็นค่าติดลบ โปรดแก้ไขแอนิเมชัน
 Common.UGCValidation.ErrorLabel.CurveAnim_NoBodyRoot,CurveAnimation ไม่มีโฟลเดอร์รองที่เป็นชิ้นส่วนร่างกายหรือ HumanoidRootPart เลย โปรดตรวจสอบให้แน่ใจว่ามีโฟลเดอร์รองที่ตั้งชื่อตามส่วนของร่างกายหรือ HumanoidRootPart โดยมีได้เพียงโฟลเดอร์เดียวเท่านั้น
-Common.UGCValidation.ErrorLabel.CurveAnim_NoJointManipulation,CurveAnimation ไม่มีการควบคุมข้อต่อเลย
+Common.UGCValidation.ErrorLabel.CurveAnim_NoJointManipulation,CurveAnimation {animationName} ไม่มีการควบคุมข้อต่อเลย
 Common.UGCValidation.ErrorLabel.CurveAnim_NoRigData,CurveAnimation ไม่มี AnimationRigData รองเลย โปรดตรวจสอบให้แน่ใจว่ามี AnimationRigData รอง โดยมีได้เพียงรายการเดียวเท่านั้น
 Common.UGCValidation.ErrorLabel.CurveAnim_NotCurveAnimation,แอนิเมชันที่อ้างอิงไม่ใช่ CurveAnimation โปรดตรวจสอบให้แน่ใจว่าอัปโหลดแอนิเมชันถูกต้อง
-Common.UGCValidation.ErrorLabel.CurveAnim_PartTooFar,ใน CurveAnimation เวลา {time} วินาที ชิ้นส่วนร่างกาย {bodyPart} อยู่ห่างจาก HumanoidRootPart {distance} Stud ชิ้นส่วนร่างกายต้องไม่อยู่ห่างจาก HumanoidRootPart เกิน {maxDistance} Stud โปรดแก้ไขแอนิเมชัน
-Common.UGCValidation.ErrorLabel.CurveAnim_PartTooLow,ใน CurveAnimation เวลา {time} วินาที ชิ้นส่วนร่างกาย {bodyPart} อยู่สูงจาก HumanoidRootPart {height} Stud ชิ้นส่วนร่างกายต้องไม่อยู่ต่ำกว่า HumanoidRootPart {minHeight} Stud โปรดแก้ไขแอนิเมชัน
-Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,CurveAnimation มีการแยกตำแหน่งของชิ้นส่วนร่างกาย มีเพียง LowerTorso ที่สามารถเปลี่ยนตำแหน่งได้ ชิ้นส่วนร่างกายอื่นๆ ทั้งหมดสามารถเปลี่ยนได้เฉพาะทิศทางเท่านั้น {bodyPart} เคลื่อนที่ห่างจากส่วนหลักมากกว่า {maxMovement} Stud โปรดแก้ไขแอนิเมชัน
-Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,ใน CurveAnimation เวลา {time} วินาที ชิ้นส่วนร่างกาย {bodyPart} หมุนด้วยความเร็ว {speed} องศา/วินาที ทว่าความเร็วสูงสุดที่อนุญาตคือ {maxSpeed} องศา/วินาที โปรดแก้ไขแอนิเมชัน
-Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,ใน CurveAnimation  เวลา {time} วินาที ชิ้นส่วนร่างกาย {bodyPart} เคลื่อนที่ด้วยความเร็ว {speed} Stud/วินาที ทว่าความเร็วสูงสุดที่อนุญาตคือ {maxSpeed} Stud/วินาที โปรดแก้ไขแอนิเมชัน
+Common.UGCValidation.ErrorLabel.CurveAnim_PartTooFar,ใน CurveAnimation {animationName} เวลา {time} วินาที ชิ้นส่วนร่างกาย {bodyPart} อยู่ห่างจาก HumanoidRootPart {distance} Stud ชิ้นส่วนร่างกายต้องไม่อยู่ห่างจาก HumanoidRootPart เกิน {maxDistance} Stud โปรดแก้ไขแอนิเมชัน
+Common.UGCValidation.ErrorLabel.CurveAnim_PartTooLow,ใน CurveAnimation {animationName} เวลา {time} วินาที ชิ้นส่วนร่างกาย {bodyPart} อยู่สูงจาก HumanoidRootPart {height} Stud ชิ้นส่วนร่างกายต้องไม่อยู่ต่ำกว่า HumanoidRootPart {minHeight} Stud โปรดแก้ไขแอนิเมชัน
+Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,CurveAnimation {animationName} มีการแยกตำแหน่งของชิ้นส่วนร่างกาย มีเพียง LowerTorso ที่สามารถเปลี่ยนตำแหน่งได้ ชิ้นส่วนร่างกายอื่นๆ ทั้งหมดสามารถเปลี่ยนได้เฉพาะทิศทางเท่านั้น {bodyPart} เคลื่อนที่ห่างจากส่วนหลักมากกว่า {maxMovement} Stud โปรดแก้ไขแอนิเมชัน
+Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,ใน CurveAnimation {animationName} เวลา {time} วินาที ชิ้นส่วนร่างกาย {bodyPart} หมุนด้วยความเร็ว {speed} องศา/วินาที ทว่าความเร็วสูงสุดที่อนุญาตคือ {maxSpeed} องศา/วินาที โปรดแก้ไขแอนิเมชัน
+Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,ใน CurveAnimation {animationName} เวลา {time} วินาที ชิ้นส่วนร่างกาย {bodyPart} เคลื่อนที่ด้วยความเร็ว {speed} Stud/วินาที ทว่าความเร็วสูงสุดที่อนุญาตคือ {maxSpeed} Stud/วินาที โปรดแก้ไขแอนิเมชัน
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,ชิ้นส่วนร่างกาย {bodyPart} ใน CurveAnimation เคลื่อนที่ระหว่างเฟรมมากกว่า {maxMovement} Stud โปรดแก้ไขแอนิเมชัน
 Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,โครงสร้าง CurveAnimation ไม่ถูกต้อง: {detail} โปรดตรวจสอบให้แน่ใจว่าแอนิเมชันเป็นไปตาม Schema ที่คาดไว้
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation มี descendant {count} รายการ ทว่าจำนวนสูงสุดที่อนุญาตคือ {maxAllowed} รายการ โปรดลดจำนวนลง
@@ -255,12 +284,24 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation ม
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation มี MarkerCurve ที่มี Marker {count} ตัว ทว่าจำนวนสูงสุดที่อนุญาตคือ {maxAllowed} ตัว โปรดแก้ไขแอนิเมชัน
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation มีส่วนรองที่ไม่คาดคิด: {childName}
 Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,{InstanceFullName}.{FieldName} กำหนดให้แอนิเมชัน {AssetId} ใช้เวอร์ชัน {Version} แต่ยังไม่รองรับการกำหนดเวอร์ชันสำหรับแอนิเมชัน โปรดลบ '&version={Version}' แล้วลองอีกครั้ง
+Common.UGCValidation.ErrorLabel.DescendantIdFetchFailed,ดึงผลการกลั่นกรองสำหรับ {InstanceFullName} ไม่สำเร็จ โปรดตรวจสอบให้แน่ใจว่าทรัพยากรทั้งหมดเป็นของผู้ใช้ปัจจุบัน
+Common.UGCValidation.ErrorLabel.DescendantIdMalformed,ไม่สามารถแยกวิเคราะห์ ContentId ใน {InstanceFullName}.{FieldName} ได้ โปรดตรวจสอบให้แน่ใจว่าคุณกำลังใช้ URL และ ID ที่ถูกต้องแล้วลองอีกครั้ง
+Common.UGCValidation.ErrorLabel.DescendantIdMissing,{InstanceFullName}.{FieldName} ต้องไม่เว้นว่าง โปรดตรวจสอบให้แน่ใจว่ามีการกำหนดทรัพยากรที่ถูกต้องแล้วลองอีกครั้ง
+Common.UGCValidation.ErrorLabel.DescendantIdNotApproved,ทรัพยากรไม่ผ่านการกลั่นกรอง: {ModerationMessages}
+Common.UGCValidation.ErrorLabel.DescendantIdNotOwned,ทรัพยากร {AssetId} ({InstanceFullName}.{FieldName}) ไม่ได้เป็นของครีเอเตอร์ที่ได้รับอนุญาต
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,ยังไม่ได้เผยแพร่ทรัพยากร {AssetId} ({InstanceFullName}.{FieldName}) โปรดเผยแพร่แล้วลองอีกครั้ง
-Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,{InstanceFullName}.{FieldName} ใช้ทรัพยากร {AssetId} เวอร์ชัน {Version} แต่ขณะนี้รองรับเฉพาะเวอร์ชัน 1 เท่านั้น โปรดใช้เวอร์ชัน 1 แล้วลองอีกครั้ง
+Common.UGCValidation.ErrorLabel.DescendantIdVersionNotLatest,{InstanceFullName}.{FieldName} ใช้ทรัพยากร {AssetId} เวอร์ชัน {Version} อยู่ แต่ขณะนี้ใช้ได้เฉพาะเวอร์ชัน {LatestVersion} ซึ่งเป็นเวอร์ชันล่าสุดเท่านั้น โปรดใช้เวอร์ชัน {LatestVersion} หรือลบ '&version={Version}' แล้วลองอีกครั้ง
+Common.UGCValidation.ErrorLabel.DescendantIdsTooMany,การอัปโหลดโมเดลมีทรัพยากรรองมากเกินไป (เมช พื้นผิว ฯลฯ) และไม่สามารถประมวลผลตามที่เป็นอยู่ได้ คุณต้องจัดเรียงโมเดลใหม่
+Common.UGCValidation.ErrorLabel.DynHead_ControlsInactive,เมช {headName} ({meshId}) มีการควบคุม FACS ที่ไม่ได้ใช้งานอยู่: {controlList}
+Common.UGCValidation.ErrorLabel.DynHead_ControlsMissing,เมช {headName} ({meshId}) ไม่มีการควบคุม FACS: {controlList}
+Common.UGCValidation.ErrorLabel.DynHead_FacsMissing,ตรวจสอบศีรษะแบบเคลื่อนไหว '{headName}' ไม่สำเร็จ เนื่องจากไม่มีข้อมูล FACS คุณต้องระบุการควบคุม FACS สำหรับท่าทางอย่างน้อย 17 ท่า (ดูเอกสารประกอบ)
+Common.UGCValidation.ErrorLabel.DynHead_JointAccumulatedExceeded,การเคลื่อนไหวใบหน้าของศีรษะสามารถนำมารวมกันเพื่อขยายข้อต่อ {jointName} ให้อยู่ห่างจากศีรษะได้ โปรดแก้ไขการเคลื่อนไหวใบหน้าแล้วลองอีกครั้ง
+Common.UGCValidation.ErrorLabel.DynHead_JointBoundsCheckFailed,ตรวจสอบขอบเขตข้อต่อของการเคลื่อนไหวใบหน้าไม่สำเร็จ โปรดลองอีกครั้งในภายหลัง
+Common.UGCValidation.ErrorLabel.DynHead_JointDirectExceeded,{actionName}การเคลื่อนไหวใบหน้าส่งผลให้ข้อต่อถูกเคลื่อนย้ายออกไปนอกศีรษะอย่างมาก โปรดแก้ไขการเคลื่อนไหวใบหน้าแล้วลองอีกครั้ง
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,ต้องสร้าง Cage ศีรษะแบบเคลื่อนไหวที่ลงในมาร์เก็ตเพลสอย่างเหมาะสม เพื่อให้จุดสูงสุดของดวงตาและปากใน Cage นั้นอยู่ในแนวเดียวกับจุดสูงสุดของเมช โปรดปรับปรุงโครงสร้าง Cage และการจัดตำแหน่งให้ตรงกับเมช
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,ตำแหน่งอ้างอิงตาซ้ายของ Cage ศีรษะแบบเคลื่อนไหวไม่อยู่ในแนวเดียวกับเมช ปรับ Cage สำหรับตาเพื่อให้เมชตาข้างซ้ายอยู่ภายในพื้นที่ Cage ที่ฉาย
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,ตำแหน่งอ้างอิงปากของ Cage ศีรษะแบบเคลื่อนไหวไม่อยู่ในแนวเดียวกับเมช ปรับ Cage สำหรับปากเพื่อให้เมชปากอยู่ภายในพื้นที่ Cage ที่ฉาย
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,ตำแหน่งอ้างอิงตาขวาของ Cage ศีรษะแบบเคลื่อนไหวไม่อยู่ในแนวเดียวกับเมช ปรับ Cage สำหรับตาเพื่อให้เมชตาข้างขวาอยู่ภายในพื้นที่ Cage ที่ฉาย
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,ตาซ้ายบนหน้าจอ (จุดสีแดงที่ด้านซ้ายของศีรษะในปลั๊กอินการแสดงภาพ) มีตำแหน่งอ้างอิงของ Cage ที่ไม่อยู่ในแนวเดียวกับเมช: จุดบางจุดของ Cage อยู่ภายในเมชของศีรษะ (เมชโผล่ผ่าน Cage) หรืออยู่ห่างออกไปด้านนอกมากเกินไป ปรับ Cage บริเวณตาข้างนี้ให้อยู่พอดีกับเมชหรืออยู่นอกเมชเพียงเล็กน้อย
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,ปาก (จุดสีเขียวในปลั๊กอินการแสดงภาพ) มีตำแหน่งอ้างอิงของ Cage ที่ไม่อยู่ในแนวเดียวกับเมช: จุดบางจุดของ Cage อยู่ภายในเมชของศีรษะ (เมชโผล่ผ่าน Cage) หรืออยู่ห่างออกไปด้านนอกมากเกินไป ปรับ Cage บริเวณปากให้อยู่พอดีกับเมชหรืออยู่นอกเมชเพียงเล็กน้อย
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,ตาขวาบนหน้าจอ (จุดสีฟ้าที่ด้านขวาของศีรษะในปลั๊กอินการแสดงภาพ) มีตำแหน่งอ้างอิงของ Cage ที่ไม่อยู่ในแนวเดียวกับเมช: จุดบางจุดของ Cage อยู่ภายในเมชของศีรษะ (เมชโผล่ผ่าน Cage) หรืออยู่ห่างออกไปด้านนอกมากเกินไป ปรับ Cage บริเวณตาข้างนี้ให้อยู่พอดีกับเมชหรืออยู่นอกเมชเพียงเล็กน้อย
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,ตรวจไม่พบท่ายิ้มสำหรับศีรษะแบบเคลื่อนไหว โปรดปรับจุดสังเกต Cage สำหรับปากให้ตรงกับตำแหน่งของปากบนศีรษะ และตรวจสอบให้แน่ใจว่ายิ้มได้
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,ตรวจไม่พบท่าปิดตาข้างซ้ายสำหรับศีรษะแบบเคลื่อนไหว โปรดปรับจุดสังเกต Cage สำหรับตาซ้ายให้ตรงกับตำแหน่งของตาซ้ายบนศีรษะ และตรวจสอบให้แน่ใจว่าปิดตาข้างซ้ายได้
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,ศีรษะแบบเคลื่อนไหวในมาร์เก็ตเพลสไม่มี Cage ศีรษะ โปรดสร้าง Cage สำหรับศีรษะแบบเคลื่อนไหว
@@ -268,9 +309,9 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,ตรวจไม่พ
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,ศีรษะแบบเคลื่อนไหวที่ลงในมาร์เก็ตเพลสต้องมีการเคลื่อนไหว แต่ศีรษะนี้ไม่มีข้อมูล FACS
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,ตรวจไม่พบท่าปิดตาข้างขวาสำหรับศีรษะแบบเคลื่อนไหว โปรดปรับจุดสังเกต Cage สำหรับตาขวาให้ตรงกับตำแหน่งของตาขวาบนศีรษะ และตรวจสอบให้แน่ใจว่าปิดตาข้างขวาได้
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,ตรวจไม่พบท่าหน้าบึ้งสำหรับศีรษะแบบเคลื่อนไหว โปรดปรับจุดสังเกต Cage สำหรับปากให้ตรงกับตำแหน่งของปากบนศีรษะ และตรวจสอบให้แน่ใจว่าทำหน้าบึ้งได้
-Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,พื้นที่การเปล่งแสงสูงกว่าเกณฑ์
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,เมชส่วนร่างกาย '{meshName}' มีการเปล่งแสง {emissivePercentage}% ทว่าส่วนที่ครอบคลุมการเปล่งแสงต้องไม่เกิน {maxEmissivePercentage}% โปรดลดความเข้มหรือส่วนที่ครอบคลุมของมาสก์การเปล่งแสง
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,{meshName} เปล่งแสงมากเกินไป พื้นที่เปล่งแสง × ความเข้มเกินขีดจำกัด (ปัจจุบันอยู่ที่ {emissivePercentage}% และต้องไม่เกิน {maxEmissivePercentage}%) โปรดลดขนาดพื้นที่เปล่งแสงหรือลดค่า EmissiveStrength ลง
-Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,พื้นที่การเปล่งแสงเกินขีดจำกัด
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,เมช '{meshName}' มีพื้นที่ผิวเปล่งแสงถ่วงน้ำหนัก {emissiveArea} ตาราง Stud ซึ่งเกินจำนวนสูงสุดที่กำหนดไว้ที่ {maxEmissiveArea} ตาราง Stud โปรดลดความเข้มหรือส่วนที่ครอบคลุมของมาสก์การเปล่งแสง
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,{assetTypeName} เปล่งแสงมากเกินไป พื้นที่เปล่งแสง × ความเข้มเกินขีดจำกัด (ปัจจุบันอยู่ที่ {emissiveArea} ต้องไม่เกิน {maxEmissiveArea}) โปรดลดขนาดพื้นที่เปล่งแสงหรือลดค่า EmissiveStrength ลง
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedInExperience,ไม่รองรับแผนที่การเปล่งแสงสำหรับไอเท็มที่สร้างในประสบการณ์ โปรดลบ EmissiveMaskContent ออกจาก SurfaceAppearance ทุกรายการ
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedOnDecal,สติกเกอร์ไม่สามารถเปล่งแสงได้ สำหรับ '{InstancePath}' ให้ลบ EmissiveMaskContent ตั้งค่า EmissiveStrength เป็น 1 และตั้งค่า EmissiveTint เป็นสีขาว
@@ -278,19 +319,29 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribut
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,แอนิเมชันที่เผยแพร่ไม่มีมาร์กเกอร์ท่าทาง UGC ที่ถูกต้อง โปรดเผยแพร่แอนิเมชันอีกครั้ง
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,ไม่สามารถคำนวณระยะการขยับชิ้นส่วนสูงสุดจากข้อมูลแอนิเมชันที่เผยแพร่ได้ โปรดเผยแพร่แอนิเมชันอีกครั้ง
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,แอนิเมชันที่เผยแพร่ระบุระยะการขยับชิ้นส่วนสูงสุดไว้ที่ {taggedTranslation} Stud แต่ข้อมูลแอนิเมชันคำนวณได้ {calculatedTranslation} Stud โปรดเผยแพร่แอนิเมชันอีกครั้ง
+Common.UGCValidation.ErrorLabel.ExperienceCreatorNotSupported,"ครีเอเตอร์ประสบการณ์ไม่สามารถสร้างไอเท็มอวาตาร์ได้ CreatorType: {CreatorType}, CreatorId: {CreatorId}"
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,ต้องวางศีรษะให้อยู่เหนือ UpperTorso ศูนย์กลางของศีรษะอยู่ต่ำกว่าส่วนบนของลำตัว ซึ่งบ่งชี้ว่าเมชของศีรษะยุบตัวหรือวางผิดตำแหน่ง
+Common.UGCValidation.ErrorLabel.Extents_ParentBelowPart,ไม่สามารถขยาย{upperPart}ให้ต่ำกว่า{lowerPart}ได้ คุณสามารถปรับวิธีประกอบชิ้นส่วนเข้าด้วยกันได้โดยการเคลื่อนย้าย {attachmentName}
+Common.UGCValidation.ErrorLabel.Extents_PartAboveParent,ไม่สามารถขยาย{lowerPart}ให้สูงกว่า{upperPart}ได้ คุณสามารถปรับวิธีประกอบชิ้นส่วนเข้าด้วยกันได้โดยการเคลื่อนย้าย {attachmentName}
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,คุณสมบัติ InternalOverrideFACSData บน FaceControls ต้องว่างเปล่าเมื่ออัปโหลด
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,ใบหน้าพื้นฐานไม่มีลักษณะดวงตาที่จำเป็นต้องใช้ เพิ่มตาลงในใบหน้าพื้นฐานแล้วลองอีกครั้ง
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,ใบหน้าพื้นฐานไม่มีปากที่จำเป็นต้องใช้ เพิ่มปากลงในใบหน้าพื้นฐานแล้วลองอีกครั้ง
 Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,ตรวจไม่พบท่าดีใจ ปรับ Cage สำหรับปากหรือ FACS สำหรับท่าดีใจ เพื่อให้เมชปากที่ฉายเปลี่ยนรูปร่างตามที่คาดไว้
-Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,ตรวจไม่พบท่าปิดตาข้างซ้าย ปรับ Cage สำหรับตาซ้ายหรือ FACS สำหรับปิดตาข้างซ้าย เพื่อให้เมชตาที่ฉายเปลี่ยนรูปร่างตามที่คาดไว้
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,ตาซ้ายบนหน้าจอ (จุดสีแดงที่ด้านซ้ายของศีรษะในปลั๊กอินการแสดงภาพ) ปิดไม่สนิทพอ ตรวจสอบการควบคุม FACS สำหรับตาขวาและ Cage ที่เกี่ยวข้อง
 Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,ตรวจไม่พบท่าอ้าปาก ปรับ Cage สำหรับปากหรือ FACS สำหรับท่าอ้าปาก เพื่อให้เมชปากที่ฉายเปลี่ยนรูปร่างตามที่คาดไว้
-Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,ตรวจไม่พบท่าปิดตาข้างขวา ปรับ Cage สำหรับตาขวาหรือ FACS สำหรับปิดตาข้างขวา เพื่อให้เมชตาที่ฉายเปลี่ยนรูปร่างตามที่คาดไว้
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,ตาขวาบนหน้าจอ (จุดสีฟ้าที่ด้านขวาของศีรษะในปลั๊กอินการแสดงภาพ) ปิดไม่สนิทพอ ตรวจสอบการควบคุม FACS สำหรับตาซ้ายและ Cage ที่เกี่ยวข้อง
 Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,ตรวจไม่พบท่าเศร้า ปรับ Cage สำหรับปากหรือ FACS สำหรับท่าเศร้า เพื่อให้เมชปากที่ฉายเปลี่ยนรูปร่างตามที่คาดไว้
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,ตรวจพบ FACs ที่ทำให้ศีรษะที่คุณทำให้ใหญ่ขึ้นเป็น {modPercent}% แต่การปรับเปลี่ยนศีรษะนั้นขัดต่อนโยบายของมาร์เก็ตเพลสเกี่ยวกับการเคลื่อนไหวใบหน้า
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,ศีรษะแบบเคลื่อนไหวมีข้อต่อ FACS ได้สูงสุด {maxFacsJointCount} จุด แต่ศีรษะนี้มีข้อต่อ {actualJointCount} จุด โปรดลดจำนวนข้อต่อ FACS แล้วลองอีกครั้ง
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,ตรวจพบ FACs ที่ทำให้ศีรษะที่คุณทำเล็กลงเหลือ {modPercent}% แต่การปรับเปลี่ยนศีรษะนั้นขัดต่อนโยบายของมาร์เก็ตเพลสเกี่ยวกับการเคลื่อนไหวใบหน้า
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,รูปแบบการอัปโหลดไม่ตรงกับโครงสร้างโฟลเดอร์ที่คาดไว้ โปรดลองอีกครั้งหรือรายงานจุดบกพร่อง
+Common.UGCValidation.ErrorLabel.HSRAssetHasChildren,ทรัพยากร WrapLayer HSR มีส่วนรองภายใต้อินสแตนซ์ส่วนหลัก HiddenSurfaceRemovalAsset
+Common.UGCValidation.ErrorLabel.HSRAssetIdInvalidUrl,'{InstancePath}' มี HSRAssetId ที่ระบุ URL ไม่ถูกต้อง
+Common.UGCValidation.ErrorLabel.HSRAssetIdRequired,'{InstancePath}' จำเป็นต้องตั้งค่า HSRAssetId
+Common.UGCValidation.ErrorLabel.HSRAssetInvalidRoot,ทรัพยากร WrapLayer HSR ต้องไม่มีส่วนหลัก HiddenSurfaceRemovalAsset 1 ส่วน
+Common.UGCValidation.ErrorLabel.HSRDataNotReady,ไม่มีข้อมูล HSR สำหรับ '{InstancePath}' โปรดลองอีกครั้ง
+Common.UGCValidation.ErrorLabel.HSRMeshIdValidationError,เกิดข้อผิดพลาดในระหว่างการตรวจสอบ ID เมช HSR สำหรับ '{InstancePath}'
+Common.UGCValidation.ErrorLabel.HSRMeshIdsMismatch,ตรวจพบข้อมูล HSR ที่ไม่ถูกต้องสำหรับ '{InstancePath}' โปรดสร้างทรัพยากรอีกครั้งโดยใช้เครื่องมือทดลองความพอดีของไอเท็มเสริม แล้วลองอีกครั้ง
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,กระดูก {bonePath} อยู่ห่างจาก Meshpart {partName} มากเกินไป โปรดปรับให้อยู่ใกล้ขอบเขตขนาดของ Meshpart มากขึ้น
 Common.UGCValidation.ErrorLabel.HrdBone_TooCloseToParent,กระดูก {bonePath} อยู่ใกล้กับส่วนหลักมากเกินไป โปรดปรับตำแหน่งของกระดูกเล็กน้อย
 Common.UGCValidation.ErrorLabel.HrdBone_TransformNotIdentity,กระดูก {bonePath} มีคุณสมบัติการแปรสภาพ แต่ยังไม่เปิดให้อัปโหลดในมาร์เก็ตเพลส โปรดรีเซ็ตค่าเป็น CFrame ตั้งต้น
@@ -311,6 +362,8 @@ Common.UGCValidation.ErrorLabel.HrdProperties_UncontainedJoint,อินสแ�
 Common.UGCValidation.ErrorLabel.HrdTposePosition,ข้อต่อ {jointName} มีตำแหน่ง TposeAdjustment อยู่นอกขอบเขตที่ยอมรับได้ โปรดลด Offset ให้อยู่ระหว่าง +-({offsetLimit})
 Common.UGCValidation.ErrorLabel.HrdTposeRotation,ข้อต่อ {jointName} มี TposeAdjustment ที่เบี่ยงเบนจากทิศทาง{expectedOrientation}ที่แนะนำมากกว่า {degLimit} องศา
 Common.UGCValidation.ErrorLabel.InstanceTagsFound,อินสแตนซ์ต่อไปนี้มีแท็ก แต่แอสเซทในมาร์เก็ตเพลสจะมีแท็กไม่ได้: {ProblematicDescendantPaths}
+Common.UGCValidation.ErrorLabel.InstanceTreeBannedClass,'{InstancePath}' เป็นของประเภท {ClassName} ซึ่งไม่ได้รับอนุญาตให้ใช้ในทรัพยากรของมาร์เก็ตเพลส
+Common.UGCValidation.ErrorLabel.InstanceTreeBannedName,'{InstancePath}' มีชื่อที่สงวนไว้และไม่สามารถใช้ในทรัพยากรของมาร์เก็ตเพลสได้
 Common.UGCValidation.ErrorLabel.InternalError,ไม่สามารถตรวจสอบเนื้อหาของคุณได้อย่างถูกต้องเนื่องจากข้อผิดพลาดภายใน หากยังคงพบปัญหาอยู่ โปรดส่งรายงานจุดบกพร่อง ValidationJobId: {ValidationJobId}
 Common.UGCValidation.ErrorLabel.JointRotAtt_Moved,{instPath} เป็น jointRotation ที่มีการเคลื่อนไหว แต่การอัปโหลดในมาร์เก็ตเพลสอาจยังไม่มีการปรับเปลี่ยนอินสแตนซ์นี้ โปรดรีเซ็ตตำแหน่งเป็น {expectedPosition}
 Common.UGCValidation.ErrorLabel.JointRotAtt_MultipleAttachments,อินสแตนซ์ {parentPath} ไม่สามารถมี JointRotation ส่วนรองได้เกิน 1 ตัว
@@ -318,7 +371,21 @@ Common.UGCValidation.ErrorLabel.JointRotAtt_Rotated,{instPath} เป็น join
 Common.UGCValidation.ErrorLabel.JointRotAtt_UnrecognizedParent,อินสแตนซ์ {parentPath} มี JointRotation ส่วนรอง แต่ไม่ได้เป็นส่วนหนึ่งของ Schema R15plus ที่ได้รับอนุญาต
 Common.UGCValidation.ErrorLabel.JointRotAtt_WrongInstanceClass,อินสแตนซ์ {instPath} มีชื่อว่า JointRotation แต่ JointRotation ถูกสงวนไว้สำหรับจุดเชื่อมต่อที่เป็นส่วนรองของจุดเชื่อมต่อ
 Common.UGCValidation.ErrorLabel.LCDeformTooLarge,เมื่อสวมใส่กับอวาตาร์ ชุดเสื้อผ้าหลายชั้นของคุณจะเปลี่ยนรูปร่างเกินขนาด {maxSize} ที่ยอมรับได้
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NoHandle,ไอเท็มเสริม '{accessoryName}' ไม่มี Handle จึงตรวจสอบความถูกต้องของเสื้อผ้าซ้อนชั้นที่อยู่นอกขอบเขตไม่ได้
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NoWrapLayer,ไอเท็มเสริม '{accessoryName}' ไม่มี WrapLayer จึงตรวจสอบความถูกต้องของเสื้อผ้าซ้อนชั้นที่อยู่นอกขอบเขตไม่ได้
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NonZeroMaxSize,ไอเท็มเสริมมีค่า MaxSize ที่ไม่ใช่ศูนย์
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NonZeroOffset,ไอเท็มเสริมมีค่า Offset ที่ไม่ใช่ศูนย์
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_OutOfBounds,ตรวจสอบความถูกต้องของเสื้อผ้าซ้อนชั้นสำหรับ '{accessoryName}' ไม่สำเร็จ เมื่อเปลี่ยนรูป เสื้อผ้าซ้อนชั้นจะมีขนาดใหญ่เกินไป
 Common.UGCValidation.ErrorLabel.LeaderVertsNearCageIslands,ขนตามีจุดยอดที่ Skin อยู่กับ RBX_Leader ซึ่งอยู่ห่างจากตำแหน่งอ้างอิง Cage ภายในมากเกินไป โปรดตรวจสอบให้แน่ใจว่าจุดยอดทั้งหมดที่ Skin อยู่กับ RBX_Leader อยู่ในตำแหน่งที่ใกล้กับบริเวณดวงตาของ Cage ภายในมากขึ้น
+Common.UGCValidation.ErrorLabel.LegsSeparated_HipAttachmentOutOfRange,{attachmentPath} มีค่าอยู่ที่ {currentValue} และต้องไม่{comparison} {cutoff} โปรดแก้ไขจุดเชื่อมต่อ
+Common.UGCValidation.ErrorLabel.LegsSeparated_LegsOverlap,ขาซ้อนทับกันไม่เกิน {overlap} Stud ในแกน x โดยค่าสูงสุดสำหรับขาขวาจะอยู่ที่ {leftMax} ส่วนขาซ้ายอยู่ที่ {rightMax} โปรดปรับขาเพื่อลดการซ้อนทับกัน
+Common.UGCValidation.ErrorLabel.MakeupDecal_FailedToLoadTexture,โหลด {fieldName} สำหรับสติกเกอร์ {instanceName} ไม่สำเร็จ โปรดตรวจสอบให้แน่ใจว่ามี TextureContent ที่ถูกต้องอยู่ แล้วลองอีกครั้ง
+Common.UGCValidation.ErrorLabel.MakeupDecal_FailedToLoadTextureData,โหลดข้อมูลพื้นผิวสำหรับ '{fullName}' ไม่สำเร็จ โปรดตรวจสอบให้แน่ใจว่ามีผิวพื้นนั้นอยู่แล้วลองอีกครั้ง
+Common.UGCValidation.ErrorLabel.MakeupDecal_NoColorMap,ไม่พบ ColorMap สำหรับสติกเกอร์ {instanceName} สติกเกอร์แต่งหน้าจำเป็นต้องมี ColorMap ที่ถูกต้อง
+Common.UGCValidation.ErrorLabel.MakeupDecal_TextureTooBig,ความละเอียดของพื้นผิว {sizeX}x{sizeY} px ที่พบใน '{fullName}' มีค่าสูงกว่าขนาดสูงสุดที่รองรับได้ที่ {maxSize}x{maxSize} px สำหรับช่อง '{fieldName}'
+Common.UGCValidation.ErrorLabel.MakeupDecal_UVZoneExcludeViolation,พบพิกเซลทึบแสงใน ColorMap สำหรับ {instanceName} ภายในพื้นที่ UV ที่ถูกจำกัดระหว่าง [{minBound}] ถึง [{maxBound}] สำหรับทรัพยากรประเภท {assetTypeName}
+Common.UGCValidation.ErrorLabel.MakeupDecal_UVZoneIncludeViolation,พื้นที่ทึบแสงของ ColorMap สำหรับ {instanceName} ไม่อยู่ภายในพื้นที่ UV ที่อนุญาตระหว่าง [{minBound}] ถึง [{maxBound}] สำหรับทรัพยากรประเภท {assetTypeName}
+Common.UGCValidation.ErrorLabel.MaterialNotAllowed,อินสแตนซ์ต่อไปนี้มีวัสดุที่ไม่ถูกต้อง: {InstanceNameList} อนุญาตให้ใช้วัสดุเหล่านี้เท่านั้น: {AllowedMaterials}
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceAvatar_CageInsideMesh,Cage ของร่างกายตัดขวางกับเมชของร่างกาย จุดตัดของ Cage ของร่างกาย {negtiveSDFPercent}% อยู่ภายในเมชของร่างกาย
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceAvatar_CageTooFar,Cage ของร่างกายอยู่ห่างจากเมชของร่างกายมากเกินไป ระยะห่างสูงสุดระหว่าง Cage ของร่างกายกับเมชคือ {max_sdf} ซึ่งเกินเกณฑ์ {max_sdf_threshold} ที่อนุญาต
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceHead_CageInsideMesh,Cage ของศีรษะตัดขวางกับเมชของศีรษะ จุดตัดของ Cage ของศีรษะ {negtiveSDFPercent}% อยู่ภายในเมชของศีรษะ
@@ -328,17 +395,61 @@ Common.UGCValidation.ErrorLabel.MeasureCageMeshDistance_CageTooFar,Cage ด้�
 Common.UGCValidation.ErrorLabel.MeasureCageRelevancy,{outer_cage_face_irrelevant_percent}% ของจุดยอด Cage ด้านนอกที่แก้ไขไม่ครอบคลุมไอเท็มเสริม ตรวจสอบให้แน่ใจว่าคุณกำลังย้าย Cage ด้านนอกเฉพาะจุดที่จำเป็นเท่านั้น
 Common.UGCValidation.ErrorLabel.MeasureCageUV,มีค่า UV {incorrect_uv_count} รายการใน Cage {cage_name} ที่ไม่ถูกต้องหรือไม่สอดคล้องกับแม่แบบ โปรดแก้ไขค่า UV ของ Cage
 Common.UGCValidation.ErrorLabel.MeasureMeshOutsideOuterCage,{mesh_outside_outer_cage_percent}% ของจุดตัดของเมชสำหรับไอเท็มเสริมอยู่นอก Cage ด้านนอกของไอเท็มเสริมนั้น ปรับให้ไอเท็มเสริมอยู่ระหว่าง Cage มากขึ้น
+Common.UGCValidation.ErrorLabel.MeshGeometry_ExceedsBounds,"{meshName} มีขนาดใหญ่กว่าขนาดขอบเขตสูงสุดที่อนุญาต โดยขนาดสูงสุดสำหรับประเภท {assetTypeName} คือ [{maxSizeX}, {maxSizeY}, {maxSizeZ}]"
+Common.UGCValidation.ErrorLabel.MeshGeometry_NotCentered,{meshName}.{fieldName} มีข้อมูลเมชที่ไม่ได้อยู่ตรงกลาง โปรดนำเข้าเมชนี้อีกครั้งด้วยเครื่องมือนำเข้า 3 มิติของ Roblox และเช็คให้แน่ใจว่าไม่มีเรขาคณิตที่หลุดออกจากกันในไฟล์ต้นฉบับ
+Common.UGCValidation.ErrorLabel.MeshGeometry_PositionOutOfBounds,ตำแหน่งอยู่นอกขอบเขต
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleAboveMaximum,{meshName} ถูกปรับเพิ่มขนาดขึ้นเป็น {scaleMultiple} เท่าของขนาดเมชเดิม โดยขยายได้สูงสุด {maxScaleMultiple} เท่า โปรดส่งออกหรือนำเข้าเมชใหม่ตามขนาดที่คุณต้องการ แทนที่จะขยายขนาดใน Studio
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleBelowMinimum,{meshName} ถูกปรับลดขนาดลงเหลือ {scalePercent}% ของขนาดเมชเดิม ค่าต่ำสุดคือ {minScalePercent}% โปรดส่งออกหรือนำเข้าเมชใหม่ตามขนาดที่คุณต้องการ แทนที่จะลดขนาดใน Studio
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleNotPositive,{meshName} มีค่าการปรับขนาดเป็นศูนย์หรือติดลบ ใช้ค่าการปรับขนาดที่เป็นบวก หากต้องการสร้างเมชแบบสะท้อน ให้พลิกเมชในซอฟต์แวร์สร้างแบบจำลอง 3 มิติของคุณ แล้วส่งออกใหม่
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooLarge,ค่าการปรับขนาดเมช {meshName} สูงเกินไป
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooSmall,ค่าการปรับขนาดเมชต่ำเกินไป
+Common.UGCValidation.ErrorLabel.MeshGeometry_SurfaceAreaExceeded,พื้นที่ผิวรวมของเมชโมเดล '{meshName}' คือ {surfaceArea} ทว่าต้องไม่เกิน {maxSurfaceArea} คุณต้องลดจำนวนและ/หรือขนาดของสามเหลี่ยมทั้งหมด
+Common.UGCValidation.ErrorLabel.MeshGeometry_TotalTriangleCountExceeded,ความละเอียดของเมชสามเหลี่ยมจำนวน '{triangleCount}' รูปสำหรับ '{assetTypeName}' มีค่าสูงกว่าที่รองรับได้สูงสุดที่ '{maxTriangles}' รูป คุณต้องปรับโทโพโลยีของโมเดลใหม่เพื่อลดจำนวนสามเหลี่ยม
+Common.UGCValidation.ErrorLabel.MeshGeometry_TriangleCountExceeded,ความละเอียดของเมชโมเดล {meshName} จำนวน {triangleCount} รูปมีค่าสูงกว่าที่รองรับได้สูงสุดที่ {maxTriangles} รูป คุณต้องปรับโทโพโลยีของโมเดลใหม่แล้วลองอีกครั้ง
+Common.UGCValidation.ErrorLabel.MeshGeometry_VertexDensityExceeded,ความหนาแน่นของจุดยอดสูงสุดเกินจำนวนที่กำหนด ลดจำนวนจุดยอดที่อยู่ใกล้กันมาก
+Common.UGCValidation.ErrorLabel.MeshGeometry_ZeroAreaTriangle,ตรวจพบสามเหลี่ยมที่มีพื้นที่เป็นศูนย์ในเมชโมเดล {meshName} คุณต้องแก้ไขเมชเพื่อลบสามเหลี่ยมที่มีพื้นที่เป็นศูนย์ออก
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,ขนาดของเมช {partName} ตามแกน {axis} ซึ่งมีขนาด '{currentSize}' Stud ใหญ่กว่าขนาดสูงสุดที่อนุญาตสำหรับแต่ละชิ้นส่วน ซึ่งอยู่ที่ '{maxSize}' โปรดปรับขนาดเมชให้เล็กลง
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,ขนาดของเมช {partName} ตามแกน {axis} ซึ่งมีขนาด '{currentSize}' Stud เล็กกว่าขนาดขั้นต่ำที่อนุญาตสำหรับแต่ละชิ้นส่วน ซึ่งอยู่ที่ '{minSize}' โปรดปรับขนาดเมชให้ใหญ่ขึ้น
+Common.UGCValidation.ErrorLabel.MeshSize_LoadFailed,
+Common.UGCValidation.ErrorLabel.MeshSize_Mismatch,ขนาดเมชที่คำนวณไว้สำหรับ {meshName} ไม่ตรงกับค่าคุณสมบัติ MeshSize
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,ต้องมีจุดเชื่อมต่อ {attName} อยู่เพียง 1 จุดภายใน Descendant {partName}
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}' (หรือ Descendant) มีคุณลักษณะแอตทริบิวต์อยู่ คุณต้องลบแอตทริบิวต์ออกจากรายการต่อไปนี้: {InstanceNameList}
+Common.UGCValidation.ErrorLabel.NoMeshBelowFeet_PartBelowFeet,{partName} ต่ำกว่าระนาบฝ่าเท้า {distance} Stud มีเฉพาะขาเท่านั้นที่สัมผัสพื้นได้ และชิ้นส่วนร่างกายอื่นๆ จะอยู่ต่ำกว่าพื้นได้ไม่เกิน {maxDistance} Stud จึงต้องลดความยาวหรือยก {partName} ขึ้น
+Common.UGCValidation.ErrorLabel.Pose_AngleFromXYPlane,"{assetName} ทำมุม {angle} องศาจากระนาบ X,Y ทว่าต้องไม่เกิน {limit} องศา โปรดตรวจสอบให้แน่ใจว่าตัวละครอยู่ในท่า I, ท่า A หรือท่า T"
+Common.UGCValidation.ErrorLabel.Pose_AngleOnXYPlane,"{assetName} ทำมุม {angle} ของเวกเตอร์ [{xVector}] บนระนาบ X,Y ทว่าต้องอยู่ระหว่าง {minAngle} ถึง {maxAngle} องศา โปรดตรวจสอบให้แน่ใจว่าตัวละครอยู่ในท่า I, ท่า A หรือท่า T"
+Common.UGCValidation.ErrorLabel.Pose_CFrameCalculationFailed,"คำนวณ CFrame ของทรัพยากร {assetName} ไม่สำเร็จ โปรดตรวจสอบให้แน่ใจว่าตัวละครอยู่ในท่า I, ท่า A หรือท่า T และชิ้นส่วนต่างๆ ไม่ได้อยู่ในตำแหน่งเดียวกันหมด"
+Common.UGCValidation.ErrorLabel.Pose_PointingAlongZVector,"{assetName} ชี้ไปตามเวกเตอร์ Z ของโลก โปรดตรวจสอบให้แน่ใจว่าตัวละครอยู่ในท่า I, ท่า A หรือท่า T"
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' มีคุณสมบัติที่ไม่ถูกต้อง: {ProblematicProperties} เกินขีดจำกัดไบต์ที่แสดง (ขีดจำกัด 0 หมายความว่าคุณสมบัติต้องว่างเปล่า) คุณสมบัติอื่นใดมีค่า NaN/Inf หรือเกินขีดจำกัดขนาดเริ่มต้น
+Common.UGCValidation.ErrorLabel.PropertyNotFound,ไม่พบคุณสมบัติ '{PropertyName}' ใน '{InstancePath}'
+Common.UGCValidation.ErrorLabel.PropertyValueInvalid,คุณสมบัติ '{PropertyName}' ใน '{InstancePath}' ไม่ถูกต้อง คาดว่าจะ{ComparisonMethod} {ExpectedValue}
 Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,แอนิเมชันที่เรนเดอร์ไม่มีการแสดงสีหน้าที่จำเป็นต้องใช้อย่างน้อยหนึ่งอย่าง (ปิดตา อ้าปาก ดีใจ เศร้า)
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,ต้องวางจุดเชื่อมต่อ Rig '{AttachmentName}' ใน '{PartName}' ใกล้ขอบเขตข้อต่อที่ชิ้นส่วนร่างกายนี้เชื่อมต่อกับส่วนที่อยู่ติดกัน ตำแหน่งปัจจุบัน [{CurrentPosition}] อยู่ห่างจากระนาบการเชื่อมต่อเกินไป โปรดย้ายไปอยู่ใกล้ๆ [{ClosestValidPosition}]
+Common.UGCValidation.ErrorLabel.SAOpacity_FailedToLoadTexture,โหลดพื้นผิว '{FieldName}' สำหรับ SurfaceAppearance '{FullName}' ไม่สำเร็จ โปรดตรวจสอบให้แน่ใจว่ามีพื้นผิวนั้นอยู่แล้วลองอีกครั้ง
+Common.UGCValidation.ErrorLabel.SAOpacity_InvalidAlphaMode,SurfaceAppearance ({FullName}) มี AlphaMode ที่ไม่ถูกต้อง คาดว่าจะเป็น Enum.AlphaMode.Overlay
+Common.UGCValidation.ErrorLabel.SAOpacity_TextureNotOpaque,พื้นผิว '{FullName}' ไม่ได้ทึบแสงเต็มร้อย โปรดใช้พื้นผิวทึบแสง
+Common.UGCValidation.ErrorLabel.ScaleTypeInvalid,"ค่า AvatarPartScaleType ใน '{ParentName}' ไม่ถูกต้อง ค่าที่ยอมรับได้คือ Classic, ProportionsSlender หรือ ProportionsNormal"
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,หากต้องการอัปโหลดทรัพยากรไปยัง Roblox คุณต้องเลือก 1 อินสแตนซ์และประเภทการอัปโหลดที่เกี่ยวข้อง
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,ทรัพยากรนี้มีขนาดใหญ่เกินกว่าจะอัปโหลด ({sizeBytes} ไบต์เกินขนาดสูงสุดที่กำหนดไว้ที่ {maxSizeBytes} ไบต์) โปรดลดขนาดแล้วลองอีกครั้ง
+Common.UGCValidation.ErrorLabel.SurfaceAppearance_MissingSA,({MeshPartFullName}) มี TextureID ที่ว่างเปล่าและไม่มีอินสแตนซ์ SurfaceAppearance ส่วนรอง คุณต้องกำหนดอย่างน้อย 1 รายการ
+Common.UGCValidation.ErrorLabel.SurfaceAppearance_TextureAndSABothDefined,ต้องกำหนดทั้ง TextureID และ SurfaceAppearance ให้กับ MeshPart ({MeshPartFullName}) หากเผยแพร่ จะใช้เฉพาะ SurfaceAppearance
+Common.UGCValidation.ErrorLabel.TexturePackInvalidURL,'{SurfaceAppearanceName}' มีคุณสมบัติ 'TexturePack' ที่ระบุ URL ไม่ถูกต้อง โปรดแก้ไข URL
+Common.UGCValidation.ErrorLabel.TexturePack_DownloadFailed,ดาวน์โหลด TexturePack สำหรับ SurfaceAppearance '{SurfaceAppearanceName}' ไม่สำเร็จ
+Common.UGCValidation.ErrorLabel.TexturePack_Mismatch,พื้นผิวใน SurfaceAppearance '{SurfaceAppearanceName}' ไม่ตรงกับพื้นผิวใน TexturePack โปรดแก้ไข TexturePack
+Common.UGCValidation.ErrorLabel.TextureSize_FailedToLoad,โหลดข้อมูลพื้นผิวสำหรับ '{FullName}' ไม่สำเร็จ โปรดตรวจสอบให้แน่ใจว่ามีพื้นผิวนั้นอยู่แล้วลองอีกครั้ง
+Common.UGCValidation.ErrorLabel.TextureSize_TooBig,ความละเอียดของพื้นผิว {Width}x{Height} px ที่พบใน '{FullName}' มีค่าสูงกว่าขนาดสูงสุดที่รองรับได้ที่ {MaxSize}x{MaxSize} px สำหรับช่อง '{FieldName}'
+Common.UGCValidation.ErrorLabel.ThumbnailInvalidTarget,ทรัพยากรเป้าหมายสำหรับการสร้างภาพขนาดย่อไม่ถูกต้อง คาดว่าจะเป็น '{ExpectedTarget}'
+Common.UGCValidation.ErrorLabel.ThumbnailOutsideView,ตำแหน่งของทรัพยากร '{InstancePath}' อยู่นอกมุมมองกล้องของภาพขนาดย่อ ย้ายตำแหน่งของทรัพยากรนั้นไปที่กึ่งกลางมุมมองกล้อง
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,Meshpart ของศีรษะมีการเคลื่อนไหวใบหน้าสำหรับ {jointName} ซึ่งไม่สามารถใช้ใน FACs ได้ โปรดตั้งชื่อข้อต่อนี้ใหม่แล้วนำเข้าศีรษะของคุณอีกครั้ง
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,ส่วนของร่างกาย {partName} Skin อยู่กับข้อต่อเสมือน {jointName} ซึ่งไม่ได้เป็นส่วนหนึ่งของ Schema R15plus
+Common.UGCValidation.ErrorLabel.UnsupportedCreatorType,"ไม่รองรับประเภทครีเอเตอร์ CreatorType: {CreatorType}, CreatorId: {CreatorId}"
+Common.UGCValidation.ErrorLabel.VertexColors_NotOpaque,พบสีจุดยอดที่ไม่ถูกต้องในเมชโมเดล '{MeshName}' คุณต้องแก้ไขแผนที่สีให้เป็นสีขาว{TransparencyNote}ทั้งหมด แล้วลองอีกครั้ง
+Common.UGCValidation.ErrorLabel.VerticesNotCoincident_TooManySimilar,{cageName} มีจุดยอดที่อยู่ใกล้กันเกิน {percentage}% โปรดแก้ไขจุดยอดให้มีจุดที่ทับซ้อนกันหรืออยู่ใกล้กันไม่เกิน {threshold}%
+Common.UGCValidation.ErrorLabel.WrapTexture_FailedToLoadCage,โหลด ReferenceCageContent สำหรับ {instanceName} ไม่สำเร็จ
+Common.UGCValidation.ErrorLabel.WrapTexture_FailedToLoadUV,โหลด UV สำหรับ '{instanceName}' ไม่สำเร็จ โปรดตรวจสอบให้แน่ใจว่ามีแผนที่ UV นั้นอยู่แล้วลองอีกครั้ง
+Common.UGCValidation.ErrorLabel.WrapTexture_InvalidMaxBound,{instanceName}.UVMaxBound [{actual}] ต้องไม่ตรงกับ UVMaxBound [{expected}]
+Common.UGCValidation.ErrorLabel.WrapTexture_InvalidMinBound,{instanceName}.UVMinBound [{actual}] ต้องไม่ตรงกับ UVMinBound [{expected}]
+Common.UGCValidation.ErrorLabel.WrapTexture_InvalidUV,พบค่า UV ที่ไม่ถูกต้องสำหรับ Cage ของ '{instanceName}' คุณต้องแก้ไขแผนที่ UV นั้นเพื่อแก้ปัญหานี้
+Common.UGCValidation.ErrorLabel.WrapTexture_NoCage,ไม่ได้ระบุ ReferenceCageContent สำหรับ {instanceName}
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,ไปที่การตั้งค่า
@@ -633,11 +744,6 @@ CoreScripts.CommercePurchasePrompt.ErrorPrompt.Title.DeviceNotSupported,ไม�
 CoreScripts.CommercePurchasePrompt.ProductNotAvailable,ผลิตภัณฑ์นี้ไม่พร้อมใช้งาน
 CoreScripts.CommercePurchasePrompt.SuccessToast.GrantPending,การมอบไอเท็มอวาตาร์ต้องใช้เวลาสักครู่ คุณจะได้รับไอเท็มในไม่ช้า
 CoreScripts.CommercePurchasePrompt.SuccessToast.Granted,มอบไอเท็มอวาตาร์สำเร็จแล้ว!
-CoreScripts.EmoteThumbnailEditor.Action.Cancel,
-CoreScripts.EmoteThumbnailEditor.Action.Update,อัปเดต
-CoreScripts.EmoteThumbnailEditor.Heading.EditThumbnail,แก้ไขภาพขนาดย่อ
-CoreScripts.EmoteThumbnailEditor.Label.Rotation,หมุน
-CoreScripts.EmoteThumbnailEditor.Label.Time,เวลา
 CoreScripts.FTUX.Description.WhiteMenuPlaytestMode,เมนู Roblox สีขาวแสดงว่าคุณกำลังทดลองเล่น โปรดปฏิบัติตามมาตรฐานชุมชนของ Roblox เสมอ
 CoreScripts.FTUX.Description.WhiteMenuPreviewing,เมนู Roblox สีขาวหมายถึงคุณกำลังทดลองเล่นเกมนี้ก่อนที่จะมีการเปิดให้ทุกคนเล่น
 CoreScripts.FTUX.Heading.CheckOutRobloxConnect,Roblox Connect มาใหม่ ดูเลย!
@@ -830,7 +936,7 @@ CoreScripts.InGameMenu.Controls.ResetCameraLabel,เคลื่อนที่ 
 CoreScripts.InGameMenu.Controls.RightArrow,ลูกศรขวา
 CoreScripts.InGameMenu.Controls.RightMouseButton,ปุ่มขวาของเมาส์
 CoreScripts.InGameMenu.Controls.RobloxMenu,เมนู Roblox
-CoreScripts.InGameMenu.Controls.RotateCamera,
+CoreScripts.InGameMenu.Controls.RotateCamera,หมุน
 CoreScripts.InGameMenu.Controls.RotateCameraGamepad,หมุนกล้อง
 CoreScripts.InGameMenu.Controls.Screenshot,ภาพหน้าจอ
 CoreScripts.InGameMenu.Controls.SelectItemLabel,เลือกไอเท็ม
@@ -950,6 +1056,7 @@ CoreScripts.InGameMenu.Ok,
 CoreScripts.InGameMenu.PageTitle.Controls,การควบคุม...
 CoreScripts.InGameMenu.PageTitle.GameSettings,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,เชิญเพื่อน
+CoreScripts.InGameMenu.PageTitle.JoinOrInvite,เข้าร่วมหรือเชิญ
 CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends,เข้าร่วมหรือเชิญเพื่อน
 CoreScripts.InGameMenu.PageTitle.Players,ผู้ใช้
 CoreScripts.InGameMenu.PageTitle.Report,รายงาน
@@ -1167,6 +1274,7 @@ CoreScripts.TextChat.InputBar.Hint.GamepadConnectedConfirm,
 CoreScripts.TextChat.InputBar.Hint.MouseKeyboard,คลิกที่นี่หรือกดที่ {KEY} เพื่อเริ่มแชท
 CoreScripts.TextChat.InputBar.Hint.PrivacySettingsDisabled,การตั้งค่าแชทของคุณทำให้คุณไม่สามารถรับและส่งข้อความได้
 CoreScripts.TextChat.InputBar.Hint.Touch,แตะที่นี่เพื่อแชท
+CoreScripts.TextChat.MessageStatus.Warning.DictationRateLimited,รอสักครู่ก่อนจะส่งอีกข้อความ หยุดการพิมพ์ด้วยเสียงชั่วคราวแล้ว
 CoreScripts.TextChat.MessageStatus.Warning.Floodchecked,คุณจำเป็นต้องรอก่อนที่จะส่งข้อความอื่นต่อ
 CoreScripts.TextChat.MessageStatus.Warning.InvalidPrivacySettings,
 CoreScripts.TextChat.MessageStatus.Warning.MessageTooLong,ข้อความของคุณยาวเกินความยาวสูงสุดที่กำหนดไว้แล้ว
@@ -1413,6 +1521,7 @@ Feature.Avatar.Action.Rename,เปลี่ยนชื่อ
 Feature.Avatar.Action.RenameSet,เปลี่ยนชื่อเซ็ต
 Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,กู้คืนอวาตาร์ที่บันทึกล่าสุด
+Feature.Avatar.Action.Retry,
 Feature.Avatar.Action.Revert,แปลงกลับ
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,
@@ -1433,7 +1542,7 @@ Feature.Avatar.Action.TryOn,ลองสวม
 Feature.Avatar.Action.Unequip,ถอดออก
 Feature.Avatar.Action.Unselect,
 Feature.Avatar.Action.UnslotEmote,นำท่าทางออกจากช่อง
-Feature.Avatar.Action.Update,
+Feature.Avatar.Action.Update,อัปเดต
 Feature.Avatar.Action.UpdateExistingCharacter,อัปเดตตัวละครที่มีอยู่
 Feature.Avatar.Action.UpdateExistingMakeupLook,อัปเดตลุคที่มีอยู่
 Feature.Avatar.Action.UpdateMakeupLook,อัปเดตลุค
@@ -1626,6 +1735,7 @@ Feature.Avatar.Label.FaceMakeup,
 Feature.Avatar.Label.FacialAnimation,การเคลื่อนไหวใบหน้า
 Feature.Avatar.Label.Fall,หล่น
 Feature.Avatar.Label.FallAnimations,แอนิเมชันการหล่น
+Feature.Avatar.Label.FromMarketplace,จากมาร์เก็ตเพลส
 Feature.Avatar.Label.Front,ด้านหน้า
 Feature.Avatar.Label.FullBody,ร่างกายทุกส่วน
 Feature.Avatar.Label.FullMasks,มาสก์เต็มหน้า
@@ -1683,6 +1793,7 @@ Feature.Avatar.Label.Name,
 Feature.Avatar.Label.Neck,คอ
 Feature.Avatar.Label.Newest,ใหม่ล่าสุด
 Feature.Avatar.Label.NoExpiredItems,ไม่มี{itemType}ที่หมดอายุแล้ว
+Feature.Avatar.Label.NoInventorySearchResults,"ไม่มีไอเท็มที่ตรงกับ ""{query}"""
 Feature.Avatar.Label.NoItems,ไม่มี {itemType}
 Feature.Avatar.Label.NoLongerAvailableInCollection,จะไม่มีทรัพยากรนี้อยู่ในคอลเล็กชันนี้อีกต่อไป
 Feature.Avatar.Label.NoSets,ยังไม่มีเซ็ต
@@ -1879,6 +1990,7 @@ Feature.Avatar.Message.UnknownErrorCreatingOutfit,เกิดข้อผิด
 Feature.Avatar.Message.UpdateOutfitSuccess,อัปเดตแล้ว!
 Feature.Avatar.Message.UpdateRequired,จําเป็นต้องอัปเดต หากต้องการดูไอเท็มนี้ โปรดอัปเดต Roblox เป็นเวอร์ชันล่าสุด
 Feature.Avatar.Placeholder.NameYourAvatar,ตั้งชื่ออวาตาร์ของคุณ
+Feature.Avatar.Placeholder.SearchInventory,ค้นหาในคลังไอเท็ม
 Feature.Avatar.Placeholder.WriteAvatarCaption,เขียนคำบรรยายสำหรับอวาตาร์ของคุณ (ไม่บังคับ)
 Feature.Avatar.RevokedItems.BodyText,"ไอเท็ม{category} ""{item}"" ถูกลบออกจากอวาตาร์ที่บันทึกไว้แล้ว เราจึงคืนเงินตามจำนวนที่คุณจ่ายไป{lineBreak}ดูรายละเอียดเพิ่มเติมได้ในกล่องเข้า"
 Feature.Avatar.RevokedItems.BodyTextMultiple,ไอเท็มต่อไปนี้ถูกลบออกจากอวาตาร์ที่บันทึกไว้ เราจึงคืนเงินตามจำนวนเงินที่คุณจ่ายไป{lineBreak}{items}{lineBreak}ดูรายละเอียดเพิ่มเติมได้ในกล่องเข้า
@@ -1969,7 +2081,6 @@ Feature.AvatarSwitcher.Message.SwitchingDeferred,คุณจะเห็นอ�
 Feature.AvatarSwitcher.Message.UnknownSupport,คุณยังสามารถเปลี่ยนอวาตาร์ได้ แต่อาจแสดงไม่ถูกต้องในประสบการณ์นี้
 Feature.AvatarSwitcher.Message.Unsupported,ประสบการณ์นี้ใช้อวาตาร์ที่กำหนดเองและไม่รองรับอวาตาร์ของ Roblox
 Feature.AvatarWorkshop.Action.TryAgain,
-Feature.AvatarWorkshop.Heading.AvatarWorkshop,เวิร์คช็อปอวาตาร์
 Feature.AvatarWorkshop.Message.LoadItemsError,มีบางอย่างผิดปกติขณะโหลดไอเท็มของคุณ
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,ไม่สามารถโหลดไอเท็มเพิ่มเติมได้
 Feature.AvatarWorkshop.Message.NoItemsOwned,คุณยังไม่ได้เป็นเจ้าของไอเท็มไหนในหมวดนี้เลย
@@ -2004,6 +2115,9 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,คัดลอกข้อความ
 Feature.Build.Action.Create,
 Feature.Build.Action.CreateDeveloperProduct,
+Feature.Build.Action.CreateMonetizationDeveloperProduct,สร้างผลิตภัณฑ์นักพัฒนา
+Feature.Build.Action.CreateMonetizationPass,สร้างบัตรผ่าน
+Feature.Build.Action.CreateMonetizationSubscription,สร้างการสมัครสมาชิก
 Feature.Build.Action.CreateNewGame,สร้างเกมใหม่
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
@@ -2115,6 +2229,9 @@ Feature.Build.Analytics.Title.TopDropOffStep,ลดลงมากที่ส�
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,การเยี่ยมชม
 Feature.Build.Content.NewGame,เกมใหม่
+Feature.Build.CreateDeveloperProductDraft,ช่วยฉันสร้างผลิตภัณฑ์นักพัฒนาสำหรับเกมของฉัน
+Feature.Build.CreatePassDraft,ช่วยฉันสร้างบัตรผ่านสำหรับเกมของฉัน
+Feature.Build.CreateSubscriptionDraft,ช่วยฉันสร้างการสมัครสมาชิกสำหรับเกมของฉัน
 Feature.Build.Description.ActivateDeveloperProduct,ลงขายผลิตภัณฑ์นักพัฒนา {PRODUCT_ID}
 Feature.Build.Description.ActivateGamePass,ลงขายบัตรผ่านเกม {PRODUCT_ID}
 Feature.Build.Description.ActivateSubscription,เปิดใช้งานการสมัครสมาชิก {PRODUCT_ID}
@@ -2282,6 +2399,7 @@ Feature.Build.Label.ManagedPricingMixed,ราคาคละกันในผ�
 Feature.Build.Label.MaximizeForGamePlays,เพิ่มจำนวนการเล่นเกมให้สูงสุด
 Feature.Build.Label.ModelUnavailable,โมเดลไม่พร้อมใช้งาน
 Feature.Build.Label.Models3D,โมเดล 3D
+Feature.Build.Label.MonetizationCreateTitle,{NAME} - {PRICE} Robux
 Feature.Build.Label.MyGames,เกมของฉัน
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,ไม่จำกัด
@@ -2807,6 +2925,7 @@ Feature.Catalog.Label.FullBody,
 Feature.Catalog.Label.Gear,
 Feature.Catalog.Label.Get,รับ
 Feature.Catalog.Label.GetPremiumAndPrice,สมัครสมาชิก Premium และซื้อในราคา 
+Feature.Catalog.Label.Glowing,เรืองแสง
 Feature.Catalog.Label.HD,HD
 Feature.Catalog.Label.Hair,
 Feature.Catalog.Label.HeadShape,
@@ -2907,6 +3026,7 @@ Feature.Catalog.Label.SerialNumberColon,หมายเลขซีเรีย�
 Feature.Catalog.Label.ShareToMoments,แชร์ไปยังโมเมนต์
 Feature.Catalog.Label.ShoulderAccessories,ไอเท็มเสริมสำหรับไหล่
 Feature.Catalog.Label.SoldOut,
+Feature.Catalog.Label.SpecialFeatures,คุณสมบัติพิเศษ
 Feature.Catalog.Label.SupportsHeadShapes,รองรับรูปร่างศีรษะ
 Feature.Catalog.Label.TakeOffResaleConfirmation,คุณแน่ใจหรือไม่ว่าคุณต้องการหยุดการขายต่อไอเท็มนี้?
 Feature.Catalog.Label.TimedOptions,ตัวเลือกแบบจำกัดเวลา
@@ -3026,6 +3146,7 @@ Feature.Chat.Action.Delete,
 Feature.Chat.Action.Edit,
 Feature.Chat.Action.GroupOSADoNotJoin,ไม่เข้าร่วม
 Feature.Chat.Action.GroupOSAJoin,
+Feature.Chat.Action.JumpToLatestMessages,ข้ามไปยังข้อความล่าสุด
 Feature.Chat.Action.LearnMore,
 Feature.Chat.Action.Leave,
 Feature.Chat.Action.MuteVoice,
@@ -3319,8 +3440,10 @@ Feature.FaceChat.Subtitle.VideoPerformancePromptDisable,การปิดกล
 Feature.FaceChat.Subtitle.VideoUnsupported,Roblox ไม่สามารถใช้กล้องของคุณเพื่อเคลื่อนไหวอวาตาร์ของคุณ
 Feature.Favorites.Label.Favorite,
 Feature.FlyoutSidePanel.Action.ContinuePlaying,
+Feature.FlyoutSidePanel.Description.SwitchAccountsHere,จากนี้คุณสามารถสลับบัญชีได้ที่นี่
 Feature.FlyoutSidePanel.Label.TooltipBody,โปรไฟล์ เนื้อหา และการตั้งค่าของคุณได้ย้ายไปที่ใหม่แล้ว
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b>ย้ายไปแล้ว
+Feature.FlyoutSidePanel.Title.AccountSwitcherMoved,มีการย้ายตัวสลับบัญชี
 Feature.Friends.Action.AcceptFriend,
 Feature.Friends.Action.AccountDeleted,ลบบัญชีแล้ว
 Feature.Friends.Action.Add,
@@ -3699,13 +3822,16 @@ Feature.InExperienceShop.Description.GamePassTrialNotEnabledBody,บัตรผ
 Feature.InExperienceShop.Description.GamePassTrialNotEnabledTitle,ไม่มีการทดลองใช้ฟรี
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,เมื่อคุณซื้อ Robux จะถือว่าคุณยอมรับ{termsLinkStart}ข้อกำหนดการใช้งาน{termsLinkEnd} รวมถึงข้อกำหนดการใช้อนุญาโตตุลาการและนโยบายเกี่ยวกับการเพิกถอน
 Feature.InExperienceShop.GamePass,
+Feature.InExperienceShop.GenericTransactionErrorBody,
+Feature.InExperienceShop.GenericTransactionErrorTitle,
 Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,ไอเท็มโบนัส
+Feature.InExperienceShop.Label.BuyGamePass,ซื้อบัตรผ่านเกม
 Feature.InExperienceShop.Label.BuyNow,ซื้อตอนนี้เลย
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,สิ้นสุดใน {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,ทดลองใช้ฟรี
-Feature.InExperienceShop.Label.HaveTrial,คุณมีสิทธิ์ทดลองใช้ฟรี
+Feature.InExperienceShop.Label.HaveTrial,การทดลองใช้ฟรีสำหรับคุณ
 Feature.InExperienceShop.Label.NoDescription,
 Feature.InExperienceShop.Label.OfferEndTime,{offer} จะสิ้นสุดใน {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,นี่คือตัวอย่างร้านค้าของคุณใน Roblox Studio ผู้เล่นจะไม่เห็นตัวอย่างนี้
@@ -3718,10 +3844,9 @@ Feature.InExperienceShop.Label.Timer.Minute.Singular,
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} วินาที
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 วินาที
 Feature.InExperienceShop.Label.Trial,ทดลองใช้
-Feature.InExperienceShop.Label.Trialed,ทดลองใช้แล้ว
 Feature.InExperienceShop.Label.TryNow,
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,คุณซื้อ {ROBUX_AMOUNT} Robux สำเร็จเรียบร้อยแล้ว
-Feature.InExperienceShop.Tooltip.RecentlyRedeemed,ชอบช่วงทดลองใช้ฟรีไหม?
+Feature.InExperienceShop.Tooltip.RecentlyRedeemed,ชอบช่วงทดลองใช้ไหม?
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"คุณแน่ใจหรือไม่ว่าคุณต้องการ ""ลบ"" ไอเท็มนี้ออกจากคลังไอเท็มของคุณอย่างถาวร? หากเปลี่ยนใจ จะต้องทำเพื่อให้ได้รับอีกครั้งในประสบการณ์"
 Feature.Item.Label.DeleteItemUndercase,ลบไอเท็ม
 Feature.Landing.Label.PoweredBy,ดำเนินการโดย
@@ -3738,6 +3863,8 @@ Feature.Moments.Action.Analytics,การวิเคราะห์
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
+Feature.Moments.Action.CommentSeeOriginal,ดูต้นฉบับ
+Feature.Moments.Action.CommentSeeTranslation,ดูคำแปล
 Feature.Moments.Action.CommentShowLess,
 Feature.Moments.Action.CommentShowMore,
 Feature.Moments.Action.Continue,
@@ -3777,8 +3904,8 @@ Feature.Moments.Body.EDPMomentIPReportInstructions,หากต้องกา�
 Feature.Moments.Description.CommunityStandards,ดูข้อมูลเพิ่มเติมเกี่ยวกับสิ่งที่คุณพูดได้และพูดไม่ได้ในมาตรฐานชุมชน
 Feature.Moments.Description.EmptyCapturesLibrary,ภาพที่คุณจับไว้จะปรากฏที่นี่
 Feature.Moments.Description.FollowingCaughtUpBody,คุณติดตามโมเมนต์ใหม่ในฟีดนี้หมดแล้ว สลับฟีดเพื่อดูเพิ่มเติม
-Feature.Moments.Description.FollowingEmptyBodyRecommended,เพลิดเพลินกับโมเมนต์จากรายการโปรดหลังจากที่คุณติดตามครีเอเตอร์ 2-3 คน ดูฟีดแนะนำเพื่อค้นหา
-Feature.Moments.Description.FollowingEmptyBodyTrending,เพลิดเพลินกับโมเมนต์จากรายการโปรดหลังจากที่คุณติดตามครีเอเตอร์ 2-3 คน ดูฟีดที่กำลังมาแรงเพื่อค้นหา
+Feature.Moments.Description.FollowingEmptyBodyRecommended,คุณจะเห็นโมเมนต์ของครีเอเตอร์ที่คุณติดตามได้ที่นี่
+Feature.Moments.Description.FollowingEmptyBodyTrending,
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,ข้อความนี้สร้างโดย AI โปรดตรวจสอบก่อนโพสต์ เพราะคุณจะเป็นผู้รับผิดชอบต่อข้อความที่เผยแพร่
 Feature.Moments.Description.HowToCaptureStep1,เข้าร่วมประสบการณ์ที่เปิดใช้งานการจับภาพ แล้วเลือกเมนูแฮมเบอร์เกอร์
 Feature.Moments.Description.HowToCaptureStep2,เปิดใช้งานการควบคุมการจับภาพ
@@ -3841,7 +3968,7 @@ Feature.Moments.Label.FeedRecommended,แนะนำ
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.FirstCommentInvite,ยังไม่มีความคิดเห็น มาเป็นคนที่แสดงความคิดเห็นกัน!
 Feature.Moments.Label.FollowingCaughtUpTitle,ดูหมดแล้วในตอนนี้
-Feature.Moments.Label.FollowingEmptyTitle,ติดตามครีเอเตอร์เพื่อดูโมเมนต์
+Feature.Moments.Label.FollowingEmptyTitle,ติดตามครีเอเตอร์เพื่อดูโมเมนต์ที่นี่
 Feature.Moments.Label.GameJoinConversion,อัตราคอนเวอร์ชันการเข้าร่วมเกม
 Feature.Moments.Label.HowToUseCaptureTitle,วิธีใช้การจับภาพ
 Feature.Moments.Label.LinkCopied,คัดลอกลิงก์แล้ว
@@ -4039,12 +4166,14 @@ Feature.PrivateServers.Label.PrivateServerLink,ลิงก์ของเซิ
 Feature.PrivateServers.Label.SearchPeople,
 Feature.PrivateServers.Label.ServerName,ชื่อเซิร์ฟเวอร์:
 Feature.PrivateServers.Label.WhoCanJoin,ใครเข้าร่วมได้บ้าง
+Feature.PrivateServers.Label.YourPrivateServerIsReadyToJoin,เซิร์ฟเวอร์ส่วนตัวของคุณพร้อมให้เข้าร่วมแล้ว
 Feature.Profile.Action.AboutThisProfile,เกี่ยวกับโปรไฟล์นี้
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
 Feature.Profile.Action.Add,
 Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,คัดลอกลิงก์โปรไฟล์
+Feature.Profile.Action.CreateInBuild,สร้างใน Build
 Feature.Profile.Action.EditAppearance,แก้ไขรูปลักษณ์
 Feature.Profile.Action.EditAvatar,แก้ไขอวาตาร์
 Feature.Profile.Action.EditBackground,แก้ไขพื้นหลัง
@@ -4117,6 +4246,8 @@ Feature.Profile.Label.DisplayNameFailed,ไม่สามารถบันท�
 Feature.Profile.Label.DisplayNameModalCaption,คุณสามารถเปลี่ยนชื่อที่แสดงของคุณได้เพียงหนึ่งครั้งในทุกๆ 7 วัน
 Feature.Profile.Label.DisplayNameTooShort,
 Feature.Profile.Label.EditBackground,
+Feature.Profile.Label.IsMakingGameIn,กำลังสร้างเกมใน
+Feature.Profile.Label.IsMakingGameInBuild,กำลังสร้างเกมใน Build
 Feature.Profile.Label.NoBioYet,ยังไม่ได้ลงประวัติ
 Feature.Profile.Label.NoPreviousName,ไม่มีชื่อเดิม
 Feature.Profile.Label.NoSocialLink,ยังไม่มีลิงก์โซเชียล
@@ -4871,6 +5002,8 @@ Features.Transfers.RobuxTransfer.Action.Send,
 Features.Transfers.RobuxTransfer.Action.TryAgain,
 Features.Transfers.RobuxTransfer.Disclaimer.AgeEstimationTransfer,คุณต้องตรวจสอบอายุหรือได้รับความยินยอมจากผู้ปกครองเพื่อส่ง Robux เมื่อส่งแล้ว คุณจะยกเลิกไม่ได้
 Features.Transfers.RobuxTransfer.Error.ReceiverNotAllowed,@{username} ไม่สามารถรับ Robux ได้ในขณะนี้
+Features.Transfers.RobuxTransfer.FreeTransfersRemaining,คุณเหลือสิทธิ์โอนฟรีอีก {numFreeTransfersRemaining} ครั้ง ส่ง Robux ได้ทันทีโดยไม่มีค่าธรรมเนียม
+Features.Transfers.RobuxTransfer.FreeTransfersRemainingSingular,คุณเหลือสิทธิ์โอนฟรีอีก 1 ครั้ง ส่ง Robux ได้ทันทีโดยไม่มีค่าธรรมเนียม
 Features.Transfers.RobuxTransfer.Heading.SendRobux,ส่ง Robux
 Features.Transfers.RobuxTransfer.Label.JoinedInYear,
 Features.Transfers.RobuxTransfer.Label.MutualConnection,มีเพื่อนร่วมกัน {amount} คน
@@ -4881,6 +5014,7 @@ Features.Transfers.RobuxTransfer.Label.RecipientWillGetInApp,ผู้รับ�
 Features.Transfers.RobuxTransfer.Label.RecipientWillGetInGame,ผู้รับจะได้ {amount} Robux หลังหักค่าธรรมเนียม การโอนในเกมรวมค่าธรรมเนียมครีเอเตอร์ {commissionPercentage}%
 Features.Transfers.RobuxTransfer.SentInstantNoFee,Robux จะถูกส่งทันทีโดยไม่มีค่าธรรมเนียม
 Features.Transfers.RobuxTransfers.Label.SuccessNotification,คุณส่งไป {amount} Robux
+Features.Transfers.Title.FreeTransfersExhausted,คุณใช้สิทธิ์โอนฟรีหมดแล้ว
 Features.Transfers.Title.UpsellSubscription,
 Features.Transfers.Transfer.Block.RequireReceiverFAE,มาตรวจสอบอายุของคุณกัน เพื่อให้รับ Robux ได้
 Features.Transfers.Transfer.Block.RequireSenderFAE,มาตรวจสอบอายุของคุณกัน เพื่อให้ส่ง Robux ได้
@@ -4975,7 +5109,7 @@ IAPExperience.PurchasePrompt.Text.RemainingBalance,หลังการทำ�
 IAPExperience.PurchasePrompt.Text.RemainingBalanceV2,หลังการทำธุรกรรมนี้คุณจะมียอดคงเหลือ {robux}
 IAPExperience.PurchasePrompt.Text.TestPurchase,การดำเนินการนี้เป็นการทดลองซื้อ บัญชีของคุณจะไม่ถูกเรียกเก็บเงิน
 IAPExperience.PurchasePrompt.Title.BuyExperience,ซื้อประสบการณ์
-IAPExperience.PurchasePrompt.Title.BuyGamepass,ซื้อบัตรผ่านเกม
+IAPExperience.PurchasePrompt.Title.BuyGamepass,
 IAPExperience.PurchasePrompt.Title.BuyItem,
 IAPExperience.PurchasePrompt.Title.BuyItemV2,
 IAPExperience.PurchasePrompt.Title.BuyItems,
@@ -5200,11 +5334,13 @@ InGame.HelpMenu.LeftArrow,
 InGame.HelpMenu.Resume,
 InGame.HelpMenu.RightArrow,
 InGame.HelpMenu.UpArrow,
+InGame.InspectMenu.Action.Buy,
 InGame.InspectMenu.Action.Cancel,
 InGame.InspectMenu.Action.Confirm,
 InGame.InspectMenu.Action.Favorite,เพิ่มไปยังรายการโปรด
 InGame.InspectMenu.Action.FromResale,{PRICE} จากการขายต่อ
 InGame.InspectMenu.Action.Go,ไป
+InGame.InspectMenu.Action.Inspect,
 InGame.InspectMenu.Action.LimitReached,มีไอเท็มถึงจำนวนสูงสุดแล้ว
 InGame.InspectMenu.Action.SoldOut,
 InGame.InspectMenu.Action.TakeOff,
@@ -5300,7 +5436,9 @@ Notifications.SquadRegroupPrompt.ToastAction.Join,
 Notifications.SquadRegroupPrompt.ToastLabel.ContinuePlayingTogether,เล่นด้วยกันต่อ
 Notifications.SquadRegroupPrompt.ToastLabel.JoinANewServer,
 Notifications.ToastNotifications.Label.LeaveExperienceConfirmation,คุณแน่ใจหรือไม่ว่าคุณต้องการออกเพื่อเข้าใช้ประสบการณ์อื่น?
+Notifications.ToastNotifications.Label.LeaveServerConfirmation,คุณแน่ใจหรือไม่ว่าคุณต้องการออกเพื่อเข้าเซิร์ฟเวอร์อื่น?
 Notifications.ToastNotifications.Title.LeavingExperience,ออกจากประสบการณ์
+Notifications.ToastNotifications.Title.LeavingServer,กำลังออกจากเซิร์ฟเวอร์
 PlayerFeedbacks.VoteForm.Message.Action.Report,
 PlayerFeedbacks.VoteForm.Message.MaxLengthCharacters,โปรดป้อนข้อมูลไม่เกิน {count} อักขระ
 PlayerFeedbacks.VoteForm.Message.MinLengthCharacters,โปรดป้อนข้อมูลมากกว่า {count} อักขระ

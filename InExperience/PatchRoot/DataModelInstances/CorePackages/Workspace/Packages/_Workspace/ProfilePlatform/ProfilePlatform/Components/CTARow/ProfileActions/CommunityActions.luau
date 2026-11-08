@@ -165,8 +165,8 @@ return {
 		}
 	end,
 	[EnumsModule.ProfileActions.LeaveCommunity] = function(p1)
-		-- upvalues: EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), GroupsNetworkingModule (copy), GetProfilePlatformModule (copy), GetAvailableCommunityComponentsModule (copy)
-		return {
+		-- upvalues: ProfileTypes (copy), EnumsModule (copy), EventNamesModule (copy), GroupsNetworkingModule (copy), GetProfilePlatformModule (copy), GetAvailableCommunityComponentsModule (copy)
+		return if p1.profileType == ProfileTypes.Community and p1.viewerOwnsOpenCommunity then nil else {
 			text = p1.localized[EnumsModule.ProfileActions.LeaveCommunity],
 			onActivated = {
 				[ProfileTypes.Community] = function()

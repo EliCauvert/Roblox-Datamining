@@ -101,8 +101,6 @@ local InstantPlayLauncherModule = require(GameTile.InstantPlayLauncher)
 local InstantPlayButtonModule = require(GameTile.InstantPlayButton)
 local FFlagLuaAppGenreRatingFooter = require(Parent.SharedFlags).FFlagLuaAppGenreRatingFooter
 local FFlagLuaAppGameTileSelectionVideoPlayback = require(Parent.SharedFlags).FFlagLuaAppGameTileSelectionVideoPlayback
-local FFlagLuaAppGateVideoPlaybackOnNavigationFocus = require(Parent.SharedFlags).FFlagLuaAppGateVideoPlaybackOnNavigationFocus
-local FFlagLuaAppSearchResultsPageGameTileVideo = require(Parent.SharedFlags).FFlagLuaAppSearchResultsPageGameTileVideo
 local FFlagLuaAppSuppressVideoDetectorDuringScroll = require(Parent.SharedFlags).FFlagLuaAppSuppressVideoDetectorDuringScroll
 local FFlagLuaAppHomeThumbnailPrefetch = require(Parent.SharedFlags).FFlagLuaAppHomeThumbnailPrefetch
 local FFlagLuaAppHomeMomentVideoFallback = require(Parent.SharedFlags).FFlagLuaAppHomeMomentVideoFallback
@@ -1088,8 +1086,8 @@ end)(AppGameTile)
 if not FFlagLuaAppGameDetailsAttributionFix then
 	v1 = RoactServices.connect({ networking = RoactNetworking })(v1)
 end
-local function v109(p2)
-	-- upvalues: ReactModule (copy), UseTokensFunction (copy), GameHydrationReactModule (copy), UseIsHoveredTileModule (copy), UseUiModeInfoFunction (copy), UiMode (copy), UseValidTileBadgesModule (copy), UseSelectorFunction (copy), FFlagLuaAppMigrateGameTileActiveFriendsHydrationFix (copy), UseHasInGameFriendsModule (copy), FFlagGameTileMigrateOffLegacyPresence (copy), UseGetOnlineFriendsByUniverseId (copy), CryoModule (copy), UseInGameUserIdsModule (copy), FFlagLuaAppGameTileSelectionVideoPlayback (copy), FFlagLuaAppSearchResultsPageGameTileVideo (copy), FFlagLuaAppGateVideoPlaybackOnNavigationFocus (copy), FFlagLuaAppSuppressVideoDetectorDuringScroll (copy), FFlagLuaAppFixHiddenTileVideoCleanup (copy), FFlagLuaAppGameDetailsAttributionFix (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), SponsoredGamesRecordClickFunction (copy), HoverTileCoordinatorModule (copy), VideoEndReasonModule (copy), VideoPlaybackCoordinator (copy), GameCollectionItemTypes (copy), GetFFlagEnableNavigationPerformanceIntervalsFunction (copy), IntervalPerformanceTracker (copy), UseOverflowMenuOpenFunction (copy), UseTriggerFeedbackFunction (copy), FFlagLuaAppContinueSortInstantPlay (copy), Callback (copy), GetAvailableGameTileOverflowMenuItemsModule (copy), FFlagLuaAppEnableReportExperience (copy), UseHasVideoThumbnailSelectorModule (copy), UseTagAsViewportAutoplayCandidateFunction (copy), FFlagLuaAppTileVideoCandidateOnly (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), FFlagLuaAppEdpMediaGalleryVideoPreview (copy), UsePreferredInputFunction (copy), GameVideoPlaybackDetectorModule (copy), ResponsiveModule (copy), FIntLuaAppGameTileVideoDwellTimeInSec (copy), FIntLuaAppGameTileVideoVisiblePercent (copy), FFlagLuaAppUsePrevalidatedVideoGamePlayability (copy), v1 (ref)
+local function v107(p2)
+	-- upvalues: ReactModule (copy), UseTokensFunction (copy), GameHydrationReactModule (copy), UseIsHoveredTileModule (copy), UseUiModeInfoFunction (copy), UiMode (copy), UseValidTileBadgesModule (copy), UseSelectorFunction (copy), FFlagLuaAppMigrateGameTileActiveFriendsHydrationFix (copy), UseHasInGameFriendsModule (copy), FFlagGameTileMigrateOffLegacyPresence (copy), UseGetOnlineFriendsByUniverseId (copy), CryoModule (copy), UseInGameUserIdsModule (copy), FFlagLuaAppGameTileSelectionVideoPlayback (copy), FFlagLuaAppSuppressVideoDetectorDuringScroll (copy), FFlagLuaAppFixHiddenTileVideoCleanup (copy), FFlagLuaAppGameDetailsAttributionFix (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), SponsoredGamesRecordClickFunction (copy), HoverTileCoordinatorModule (copy), VideoEndReasonModule (copy), VideoPlaybackCoordinator (copy), GameCollectionItemTypes (copy), GetFFlagEnableNavigationPerformanceIntervalsFunction (copy), IntervalPerformanceTracker (copy), UseOverflowMenuOpenFunction (copy), UseTriggerFeedbackFunction (copy), FFlagLuaAppContinueSortInstantPlay (copy), Callback (copy), GetAvailableGameTileOverflowMenuItemsModule (copy), FFlagLuaAppEnableReportExperience (copy), UseHasVideoThumbnailSelectorModule (copy), UseTagAsViewportAutoplayCandidateFunction (copy), FFlagLuaAppTileVideoCandidateOnly (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), FFlagLuaAppEdpMediaGalleryVideoPreview (copy), UsePreferredInputFunction (copy), GameVideoPlaybackDetectorModule (copy), ResponsiveModule (copy), FIntLuaAppGameTileVideoDwellTimeInSec (copy), FIntLuaAppGameTileVideoVisiblePercent (copy), FFlagLuaAppUsePrevalidatedVideoGamePlayability (copy), v1 (ref)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseTokensResult = UseTokensFunction()
 	local UseHoverTile = p2.useHoverTile
@@ -1148,20 +1146,14 @@ local function v109(p2)
 			end
 		end, { p2.onSelectionLost })
 	end
-	local IsDisablePlayback: boolean = if FFlagLuaAppSearchResultsPageGameTileVideo then p2.videoPlaybackContext ~= nil and p2.videoPlaybackContext.disablePlayback == true else FFlagLuaAppGateVideoPlaybackOnNavigationFocus and (p2.videoPlaybackContext ~= nil and p2.videoPlaybackContext.disablePlayback == true)
+	local IsDisablePlayback: boolean = p2.videoPlaybackContext ~= nil and p2.videoPlaybackContext.disablePlayback == true
 	local IsDisableDetectors: boolean = FFlagLuaAppSuppressVideoDetectorDuringScroll and (p2.videoPlaybackContext ~= nil and p2.videoPlaybackContext.disableDetectors == true)
-	
-	if FFlagLuaAppFixHiddenTileVideoCleanup or FFlagLuaAppSearchResultsPageGameTileVideo or FFlagLuaAppGateVideoPlaybackOnNavigationFocus then
-		ReactModule.useEffect(function()
-			-- upvalues: FFlagLuaAppFixHiddenTileVideoCleanup (upval), p2 (copy), FFlagLuaAppSearchResultsPageGameTileVideo (upval), FFlagLuaAppGateVideoPlaybackOnNavigationFocus (upval), IsDisablePlayback (copy), UseStateResult2 (copy)
-			if FFlagLuaAppFixHiddenTileVideoCleanup and p2.isHidden or (FFlagLuaAppSearchResultsPageGameTileVideo or FFlagLuaAppGateVideoPlaybackOnNavigationFocus) and IsDisablePlayback then
-				UseStateResult2(false)
-			end
-		end, {
-			p2.isHidden,
-			if FFlagLuaAppSearchResultsPageGameTileVideo or FFlagLuaAppGateVideoPlaybackOnNavigationFocus then IsDisablePlayback else nil
-		})
-	end
+	ReactModule.useEffect(function()
+		-- upvalues: FFlagLuaAppFixHiddenTileVideoCleanup (upval), p2 (copy), IsDisablePlayback (copy), UseStateResult2 (copy)
+		if FFlagLuaAppFixHiddenTileVideoCleanup and p2.isHidden or IsDisablePlayback then
+			UseStateResult2(false)
+		end
+	end, { p2.isHidden, IsDisablePlayback })
 	local v3 = nil
 	local NavigationUniverseId = nil
 	local UseResult2 = nil
@@ -1272,7 +1264,7 @@ local function v109(p2)
 		availableMenuItems = UseMemoResult2,
 		onSelectionGained = if FFlagLuaAppGameTileSelectionVideoPlayback then UseResult else p2.onSelectionGained,
 		onSelectionLost = if FFlagLuaAppGameTileSelectionVideoPlayback then UseResult1 else p2.onSelectionLost,
-		videoPlaybackDetector = if HasPrimaryWideVideoAssetId and not p2.isHidden and (not FFlagLuaAppSuppressVideoDetectorDuringScroll or not IsDisableDetectors) and (not FFlagLuaAppSearchResultsPageGameTileVideo and not FFlagLuaAppGateVideoPlaybackOnNavigationFocus or not IsDisablePlayback) then ReactModule.createElement(GameVideoPlaybackDetectorModule, {
+		videoPlaybackDetector = if HasPrimaryWideVideoAssetId and not p2.isHidden and (not FFlagLuaAppSuppressVideoDetectorDuringScroll or not IsDisableDetectors) then if IsDisablePlayback then nil else ReactModule.createElement(GameVideoPlaybackDetectorModule, {
 			videoKey = Text,
 			itemIndex = p2.index,
 			universeId = p2.entry.universeId,
@@ -1292,4 +1284,4 @@ local function v109(p2)
 	})))
 end
 
-return if FFlagSignalsNavP3fGameDetails then ReactModule.memo(v109) else v109
+return if FFlagSignalsNavP3fGameDetails then ReactModule.memo(v107) else v107

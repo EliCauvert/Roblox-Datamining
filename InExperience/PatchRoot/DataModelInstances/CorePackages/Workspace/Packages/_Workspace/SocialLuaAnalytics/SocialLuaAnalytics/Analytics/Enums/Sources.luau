@@ -5,6 +5,7 @@
 	HomePageFriendsCarousel = "homePageFriendsCarousel",
 	HomePageSelfWidget = "homePageSelfWidget",
 	ChartsPageSelfWidget = "chartsPageSelfWidget",
+	CampaignPageSelfWidget = "campaignPageSelfWidget",
 	MorePageSelfWidget = "morePageSelfWidget",
 	MorePageTile = "morePageTile",
 	ShareLink = "shareLink",

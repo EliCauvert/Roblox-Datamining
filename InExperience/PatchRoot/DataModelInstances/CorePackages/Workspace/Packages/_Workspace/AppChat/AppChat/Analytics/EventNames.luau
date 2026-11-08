@@ -9,6 +9,7 @@
 	ChatLandingUnfilteredThreadsFtuxRendered = "ChatLandingUnfilteredThreadsFtuxRendered",
 	ChatLandingUnfilteredThreadsFtuxDismissed = "ChatLandingUnfilteredThreadsFtuxDismissed",
 	ChatLandingUnfilteredThreadsFtuxLearnMoreClicked = "ChatLandingUnfilteredThreadsFtuxLearnMoreClicked",
+	ConversationScrollToLatestBtnClicked = "ConversationScrollToLatestBtnClicked",
 	ConversationPvUpsellRendered = "ConversationPvUpsellRendered",
 	ConversationPvUpsellLeftGroup = "ConversationPvUpsellLeftGroup",
 	ConversationPvUpsellContinueClicked = "ConversationPvUpsellContinueClicked",

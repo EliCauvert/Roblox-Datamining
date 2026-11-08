@@ -3,10 +3,11 @@ local Parent1 = Parent.Parent
 local React = require(Parent.dependencies).React
 local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
 local GetRecommendationContextualInfoDisplayFunction = require(Parent1.SocialCommon).Utils.getRecommendationContextualInfoDisplay
+local FFlagShowClassmatesOnPYMKModule = require(Parent1.SharedFlags.FFlagShowClassmatesOnPYMK)
 local _ = require(Parent1.UserList)
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), React (copy), GetRecommendationContextualInfoDisplayFunction (copy)
+	-- upvalues: UseLocalizationFunction (copy), FFlagShowClassmatesOnPYMKModule (copy), React (copy), GetRecommendationContextualInfoDisplayFunction (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		singularMutualConnection = "Feature.Friends.Label.OneMutual",
 		frequents = "Feature.Friends.Label.Frequent",
@@ -15,7 +16,8 @@ return function(p1)
 		mutualConnections = {
 			"Feature.Friends.Label.MultipleMutuals",
 			numConnections = p1.recommendation.mutualFriendsCount
-		}
+		},
+		classmates = if FFlagShowClassmatesOnPYMKModule then "Feature.Schools.Label.Classmates" else nil
 	})
 	
 	return React.useMemo(function()

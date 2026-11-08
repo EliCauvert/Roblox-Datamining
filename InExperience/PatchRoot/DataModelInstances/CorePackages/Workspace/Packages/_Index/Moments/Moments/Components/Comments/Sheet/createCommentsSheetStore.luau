@@ -16,6 +16,7 @@ return function()
 	local Signal6, Signal2_5 = SignalsModule.createSignal(false)
 	local v1 = nil
 	local v2 = nil
+	local v3 = nil
 	
 	return {
 		getIsOpen = Signal,
@@ -32,8 +33,12 @@ return function()
 			-- upvalues: Signal1 (copy), Signal3 (copy), v2 (ref)
 			return if Signal1(false) == p1 and Signal3(false) == p2 then v2 else nil
 		end,
-		open = function(p1, p2, p3)
-			-- upvalues: FFlagMomentsComments (upval), v2 (ref), v1 (ref), Signal2_1 (copy), Signal2_2 (copy), Signal3 (copy), Signal2_3 (copy), Signal2_4 (copy), Signal2_5 (copy), Signal2 (copy)
+		getTarget = function(p1, p2)
+			-- upvalues: Signal1 (copy), Signal3 (copy), v3 (ref)
+			return if Signal1(false) == p1 and Signal3(false) == p2 then v3 else nil
+		end,
+		open = function(p1, p2, p3, p4)
+			-- upvalues: FFlagMomentsComments (upval), v2 (ref), v1 (ref), v3 (ref), Signal2_1 (copy), Signal2_2 (copy), Signal3 (copy), Signal2_3 (copy), Signal2_4 (copy), Signal2_5 (copy), Signal2 (copy)
 			if FFlagMomentsComments then
 				if v2 ~= nil then
 					v2.finishView("replaced")
@@ -50,6 +55,7 @@ return function()
 				end
 				v1 = p2
 			end
+			v3 = p4
 			Signal2_1(p1)
 			Signal2_2(Signal3(false) + 1)
 			Signal2_3(true)
@@ -58,18 +64,19 @@ return function()
 			Signal2(true)
 		end,
 		close = function(p1)
-			-- upvalues: FFlagMomentsComments (upval), v2 (ref), v1 (ref), Signal2_5 (copy), Signal2 (copy)
+			-- upvalues: FFlagMomentsComments (upval), v2 (ref), v1 (ref), v3 (ref), Signal2_5 (copy), Signal2 (copy)
 			if FFlagMomentsComments and v2 ~= nil then
 				v2.finishView(p1 or "closed")
 			end
 			if FFlagMomentsComments and v1 ~= nil then
 				v1.finishView()
 			end
+			v3 = nil
 			Signal2_5(false)
 			Signal2(false)
 		end,
 		reset = function()
-			-- upvalues: FFlagMomentsComments (upval), v2 (ref), v1 (ref), Signal2 (copy), Signal2_1 (copy), Signal2_2 (copy), Signal3 (copy), Signal2_3 (copy), Signal2_4 (copy), Signal2_5 (copy)
+			-- upvalues: FFlagMomentsComments (upval), v2 (ref), v1 (ref), v3 (ref), Signal2 (copy), Signal2_1 (copy), Signal2_2 (copy), Signal3 (copy), Signal2_3 (copy), Signal2_4 (copy), Signal2_5 (copy)
 			if FFlagMomentsComments and v2 ~= nil then
 				v2.cancel()
 				v2 = nil
@@ -78,6 +85,7 @@ return function()
 				v1.cancel()
 				v1 = nil
 			end
+			v3 = nil
 			Signal2(false)
 			Signal2_1(nil)
 			Signal2_2(Signal3(false) + 1)

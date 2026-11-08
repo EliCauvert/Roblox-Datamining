@@ -26,6 +26,7 @@ local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptim
 local FFlagMomentsModeratedMomentPageModule = require(Moments.Flags.FFlagMomentsModeratedMomentPage)
 local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
 local FFlagMomentsRenderAvatarPostsInFeed = SharedFlagsModule.FFlagMomentsRenderAvatarPostsInFeed
+local FFlagMomentsCommentDeepLinks = SharedFlagsModule.FFlagMomentsCommentDeepLinks
 local MomentsGetMomentsCommentsStoreModule = if FFlagMomentsComments then require(Parent.DataHydration.MomentsGetMomentsCommentsStore) else nil
 local MomentStatus = require(Parent.MomentsTypes).Enums.MomentStatus
 
@@ -140,7 +141,7 @@ local function loadDeepLinkedMomentsForUnavailableDialog(Callback, DeepLinkedMom
 end
 
 return function(Callback, p2)
-	-- upvalues: MomentsGetMomentsTrendingStoreModule (copy), FFlagMomentsComments (copy), MomentsGetMomentsCommentsStoreModule (copy), GetDeepLinkStoreModule (copy), defaultFetchDeepLinkedMoments (copy), FFlagMomentsOptimisticProfilePending (copy), GetLocalUserIdModule (copy), CreatePendingFeedGetterModule (copy), MomentsGetMomentsUserStoreModule (copy), RecommendationSource (copy), GetReactionsStoreModule (copy), GetShareCountsStoreModule (copy), ShouldShowMomentInFeedModule (copy), loadDeepLinkedMomentsForUnavailableDialog (copy), FFlagMomentsModeratedMomentPageModule (copy), makeUnavailableMomentItem (copy), Analytics (copy), ReportUnavailableFeedItemModule (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), HydrateAvatarMomentFeedItemsModule (copy), MomentsGetPostAssetStoreModule (copy)
+	-- upvalues: MomentsGetMomentsTrendingStoreModule (copy), FFlagMomentsComments (copy), MomentsGetMomentsCommentsStoreModule (copy), GetDeepLinkStoreModule (copy), defaultFetchDeepLinkedMoments (copy), FFlagMomentsOptimisticProfilePending (copy), GetLocalUserIdModule (copy), CreatePendingFeedGetterModule (copy), MomentsGetMomentsUserStoreModule (copy), RecommendationSource (copy), GetReactionsStoreModule (copy), GetShareCountsStoreModule (copy), ShouldShowMomentInFeedModule (copy), FFlagMomentsCommentDeepLinks (copy), loadDeepLinkedMomentsForUnavailableDialog (copy), FFlagMomentsModeratedMomentPageModule (copy), makeUnavailableMomentItem (copy), Analytics (copy), ReportUnavailableFeedItemModule (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), HydrateAvatarMomentFeedItemsModule (copy), MomentsGetPostAssetStoreModule (copy)
 	local P18 = p2 or {}
 	local MomentsGetMomentsTrendingStoreModuleResult = if P18.trendingStore == nil then MomentsGetMomentsTrendingStoreModule(false) else P18.trendingStore
 	local CommentsStore = nil
@@ -170,7 +171,7 @@ return function(Callback, p2)
 		getPendingItems = GetPendingItems,
 		recommendationSource = RecommendationSource.Trending,
 		fetchAsync = function(p3)
-			-- upvalues: CommentsStore (ref), NextCursor (ref), P18 (copy), MomentsGetMomentsTrendingStoreModuleResult (copy), Callback (copy), GetReactionsStoreModule (upval), GetShareCountsStoreModule (upval), DeepLinkStore (copy), ShouldShowMomentInFeedModule (upval), loadDeepLinkedMomentsForUnavailableDialog (upval), FetchDeepLinkedMoments (copy), DeepLinkFetchTimeoutSeconds (copy), FFlagMomentsModeratedMomentPageModule (upval), makeUnavailableMomentItem (upval), FFlagMomentsComments (upval), FFlagMomentsOptimisticProfilePending (upval), Analytics (upval), RecommendationSource (upval), ReportUnavailableFeedItemModule (upval), FFlagMomentsRenderAvatarPostsInFeed (upval), HydrateAvatarMomentFeedItemsModule (upval), MomentsGetPostAssetStoreModule (upval)
+			-- upvalues: CommentsStore (ref), NextCursor (ref), P18 (copy), MomentsGetMomentsTrendingStoreModuleResult (copy), Callback (copy), GetReactionsStoreModule (upval), GetShareCountsStoreModule (upval), DeepLinkStore (copy), ShouldShowMomentInFeedModule (upval), FFlagMomentsCommentDeepLinks (upval), loadDeepLinkedMomentsForUnavailableDialog (upval), FetchDeepLinkedMoments (copy), DeepLinkFetchTimeoutSeconds (copy), FFlagMomentsModeratedMomentPageModule (upval), makeUnavailableMomentItem (upval), FFlagMomentsComments (upval), FFlagMomentsOptimisticProfilePending (upval), Analytics (upval), RecommendationSource (upval), ReportUnavailableFeedItemModule (upval), FFlagMomentsRenderAvatarPostsInFeed (upval), HydrateAvatarMomentFeedItemsModule (upval), MomentsGetPostAssetStoreModule (upval)
 			local OwnerGeneration = if CommentsStore == nil then nil else CommentsStore.getOwnerGeneration(false)
 			local SignalTracker = P18.signalTracker
 			local v2, v3 = MomentsGetMomentsTrendingStoreModuleResult.getTrending(Callback(false), p3 or NextCursor, if SignalTracker then SignalTracker:getSignalsPayload() else nil):await()
@@ -229,27 +230,32 @@ return function(Callback, p2)
 						end
 					end
 					local Flag = false
-					local Inverted = false
+					local v5 = false
+					local FeedItemId = nil
 					
 					if Moment ~= nil and ShouldShowMomentInFeedModule(Moment) then
 						table.insert(List, { kind = "moment", moment = Moment })
 						MomentId = Moment.momentId
 						Flag = true
+						
+						if FFlagMomentsCommentDeepLinks then
+							FeedItemId = Moment.recommendationMetadata.feedItemId
+						end
 					else
 						local DeepLinkedMomentsForUnavailableDialog = loadDeepLinkedMomentsForUnavailableDialog(FetchDeepLinkedMoments, DeepLinkedMomentId, DeepLinkedMomentTargetIdType, DeepLinkFetchTimeoutSeconds)
 						
 						if DeepLinkedMomentsForUnavailableDialog ~= nil then
-							local v5 = v4
+							local v6 = v4
 							local CommentsByFeedItemId1 = DeepLinkedMomentsForUnavailableDialog.commentsByFeedItemId
 							
 							if CommentsByFeedItemId1 == nil then
-								v4 = v5
+								v4 = v6
 							else
-								local V77 = v5 or {}
+								local V79 = v6 or {}
 								for i1, value1 in CommentsByFeedItemId1 do
-									V77[i1] = value1
+									V79[i1] = value1
 								end
-								v4 = V77
+								v4 = V79
 							end
 							if DeepLinkedMomentsForUnavailableDialog.reactionsByMomentId then
 								GetReactionsStoreModule(false).setBatchReactionCounts(DeepLinkedMomentsForUnavailableDialog.reactionsByMomentId)
@@ -268,23 +274,30 @@ return function(Callback, p2)
 								if ShouldShowMomentInFeedModule(moment1) and IsFeedItemIdMatch then
 									table.insert(List, { kind = "moment", moment = moment1 })
 									Flag = true
+									
+									if FFlagMomentsCommentDeepLinks then
+										FeedItemId = moment1.recommendationMetadata.feedItemId
+									end
 								end
 							end
-							Inverted = not Flag
+							v5 = not Flag
 							
-							if FFlagMomentsModeratedMomentPageModule and Inverted then
+							if FFlagMomentsModeratedMomentPageModule and v5 then
 								table.insert(List, (makeUnavailableMomentItem(DeepLinkedMomentId, DeepLinkedMomentsForUnavailableDialog.moments, v3.moments)))
 							end
 						end
 					end
-					if Flag or Inverted then
-						local NoFFlagMomentsModeratedMomentPageModule: boolean = Inverted and not FFlagMomentsModeratedMomentPageModule
+					if Flag or v5 then
+						local NoFFlagMomentsModeratedMomentPageModule: boolean = v5 and not FFlagMomentsModeratedMomentPageModule
 						
 						Callback1 = function()
-							-- upvalues: DeepLinkStore (upval), DeepLinkedMomentId (copy), NoFFlagMomentsModeratedMomentPageModule (copy), P18 (upval)
+							-- upvalues: DeepLinkStore (upval), DeepLinkedMomentId (copy), FFlagMomentsCommentDeepLinks (upval), FeedItemId (copy), NoFFlagMomentsModeratedMomentPageModule (copy), P18 (upval)
 							if DeepLinkStore.getDeepLinkedMomentId(false) == DeepLinkedMomentId then
 								DeepLinkStore.setDeepLinkedMomentId(nil)
 								
+								if FFlagMomentsCommentDeepLinks then
+									DeepLinkStore.resolvePendingCommentsTarget(DeepLinkedMomentId, FeedItemId)
+								end
 								if NoFFlagMomentsModeratedMomentPageModule and P18.onDeepLinkedMomentUnavailable ~= nil then
 									P18.onDeepLinkedMomentUnavailable()
 								end
@@ -295,7 +308,7 @@ return function(Callback, p2)
 			end
 			if FFlagMomentsComments then
 				local CommentsStore1 = CommentsStore
-				Callback1 = if CommentsStore1 == nil or OwnerGeneration == nil or v4 == nil then Callback1 else function()
+				Callback1 = if CommentsStore1 == nil or (OwnerGeneration == nil or v4 == nil) then Callback1 else function()
 					-- upvalues: Callback1 (copy), CommentsStore1 (copy), v4 (copy), OwnerGeneration (copy)
 					if Callback1 ~= nil then
 						Callback1()

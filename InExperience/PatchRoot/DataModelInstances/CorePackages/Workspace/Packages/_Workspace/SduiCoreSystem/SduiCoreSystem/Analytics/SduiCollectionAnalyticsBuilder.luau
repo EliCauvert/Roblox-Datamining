@@ -1,11 +1,13 @@
 ﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
 local Parent = SduiCoreSystem.Parent
+local FFlagSduiErrorPaths = require(Parent.SharedFlags).FFlagSduiErrorPaths
 local CryoModule = require(Parent.Cryo)
 local UnifiedLoggingModule = require(Parent.UnifiedLogging)
 local _ = require(SduiCoreSystem.SduiBuilderTypes)
 local _ = require(SduiCoreSystem.SduiComponentType)
 local _ = require(SduiCoreSystem.SduiConfigTypes)
 local SduiErrorsModule = require(SduiCoreSystem.SduiErrors)
+local AddSduiErrorContextFieldsModule = require(SduiCoreSystem.addSduiErrorContextFields)
 local ValidateInterfaceModule = require(SduiCoreSystem.validateInterface)
 local AnalyticsConstantsModule = require(SduiCoreSystem.Analytics.analyticsConstants)
 local FFlagSduiSkipFeedAnalyticsPosition = require(Parent.SharedFlags).FFlagSduiSkipFeedAnalyticsPosition
@@ -56,8 +58,8 @@ return {
 		end
 		return JoinResult
 	end,
-	buildAndValidateItemAnalyticsData = function(p1, p2, p3, p4, Name, Callback1: (any) -> ())
-		-- upvalues: CryoModule (copy), t (copy), FFlagSduiSkipFeedAnalyticsPosition (copy), Callback (copy), UnifiedLoggingModule (copy), ValidateInterfaceModule (copy), SduiErrorsModule (copy), config (copy)
+	buildAndValidateItemAnalyticsData = function(p1, p2, p3, p4, Name, Callback1: (any) -> (), p5)
+		-- upvalues: CryoModule (copy), t (copy), FFlagSduiSkipFeedAnalyticsPosition (copy), Callback (copy), UnifiedLoggingModule (copy), ValidateInterfaceModule (copy), FFlagSduiErrorPaths (copy), AddSduiErrorContextFieldsModule (copy), SduiErrorsModule (copy), config (copy)
 		local JoinResult = CryoModule.Dictionary.join(p3 or t, p2 or t, p4 or t)
 		
 		if FFlagSduiSkipFeedAnalyticsPosition then
@@ -69,7 +71,12 @@ return {
 			if Callback1 then
 				Callback1(ValidateInterfaceModuleResult2)
 			else
-				p1.dependencies.logger.reportError(SduiErrorsModule.SduiErrorType.InvalidItemAnalyticsData, { name = Name, message = ValidateInterfaceModuleResult2 }, p1.appPage)
+				local config1 = { name = Name, message = ValidateInterfaceModuleResult2 }
+				
+				if FFlagSduiErrorPaths then
+					AddSduiErrorContextFieldsModule(config1, p5)
+				end
+				p1.dependencies.logger.reportError(SduiErrorsModule.SduiErrorType.InvalidItemAnalyticsData, config1, p1.appPage)
 			end
 			JoinResult = CryoModule.Dictionary.join(config, JoinResult)
 		end

@@ -11,6 +11,7 @@
 	HomepageFaeTrialBanner = "HomepageFaeTrialBanner",
 	InGameRobuxUpsell = "InGameRobuxUpsell",
 	SettingsAppThemeUpsell = "SettingsAppThemeUpsell",
+	SettingsAppIconUpsell = "SettingsAppIconUpsell",
 	ProfileFramesUpsell = "ProfileFramesUpsell",
 	AiBackgroundUpsell = "AiBackgroundUpsell",
 	AvatarBackgrounds = "AvatarBackgrounds",

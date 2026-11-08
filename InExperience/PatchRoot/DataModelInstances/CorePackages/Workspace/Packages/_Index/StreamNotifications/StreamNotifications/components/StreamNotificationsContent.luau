@@ -15,6 +15,7 @@ local StreamNotificationBundleWrapperModule = require(Components.StreamNotificat
 local StreamNotificationsContentPageModule = require(Components.StreamNotificationsContentPage)
 local FetchStreamNotificationsContentPageModule = require(StreamNotifications.ContentPage.fetchStreamNotificationsContentPage)
 local UsePushPermissionClientAttributesModule = require(StreamNotifications.ContentPage.usePushPermissionClientAttributes)
+local StreamPromptsBannerSlotModule = require(StreamNotifications.StreamPromptsBannerSlot)
 local ReactModule = require(Parent.React)
 local NotificationsCommonModule = require(Parent.NotificationsCommon)
 local JoinExperienceFunction = NotificationsCommonModule.JoinExperience
@@ -51,6 +52,7 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local GetFStringPCGDKFilteredNotificationTypesFunction = SharedFlagsModule.GetFStringPCGDKFilteredNotificationTypes
 local FFlagStreamNotificationsStandardizeClickEvents = SharedFlagsModule.FFlagStreamNotificationsStandardizeClickEvents
 local FFlagStreamNotificationImpressionLogging = SharedFlagsModule.FFlagStreamNotificationImpressionLogging
+local FFlagNotificationStreamPromptsHandlerEnabled = SharedFlagsModule.FFlagNotificationStreamPromptsHandlerEnabled
 local FrameBoundsImpressionsTracker = require(Parent.Impressions).FrameBoundsImpressionsTracker
 
 local function _(): boolean
@@ -80,7 +82,7 @@ local function createImpressionSignal()
 end
 
 return function(p1)
-	-- upvalues: UseStyleFunction (copy), StreamNotificationDropdownExperimentationModule (copy), UseDispatchFunction (copy), UseClientTriggerEventHandlerModule (copy), ReactModule (copy), EnumStreamNotificationsDisplayStateModule (copy), EnumStreamNotificationsLoadingMoreStateModule (copy), FFlagStreamNotificationImpressionLogging (copy), createImpressionSignal (copy), UserInputService (copy), ConstantsModule (copy), FFlagStreamNotificationsSduiContentPageModule (copy), UsePushPermissionClientAttributesModule (copy), FetchStreamNotificationsContentPageModule (copy), GetStreamNotificationsModule (copy), ConfigResult (copy), SortNotificationsModule (copy), GetFStringPCGDKFilteredNotificationTypesFunction (copy), ThirdPartyUserService (copy), StreamNotificationFixInitialPageFill (copy), CryoModule (copy), NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy), FFlagStreamNotificationsStandardizeClickEvents (copy), ClearUnreadNotificationsModule (copy), PostReportNotificationModule (copy), OpenDynamicAbuseReportModule (copy), AbuseVectorModule (copy), CloseCentralOverlayFunction (copy), LuaAppNewStreamNotificationsLogFix (copy), Type (copy), JoinExperienceFunction (copy), SessionService (copy), ReportEventModule (copy), NewResult (copy), PostNotificationsApiModule (copy), NotificationsCommonModule (copy), MetaActionsMenuModule (copy), Loading (copy), IconSize (copy), StreamNotificationsContentPageModule (copy), StreamNotificationBundleWrapperModule (copy), StreamNotificationAnimationWrapperModule (copy), EmptyNotificationsModule (copy), GuiService (copy), FrameBoundsImpressionsTracker (copy)
+	-- upvalues: UseStyleFunction (copy), StreamNotificationDropdownExperimentationModule (copy), UseDispatchFunction (copy), UseClientTriggerEventHandlerModule (copy), ReactModule (copy), EnumStreamNotificationsDisplayStateModule (copy), EnumStreamNotificationsLoadingMoreStateModule (copy), FFlagStreamNotificationImpressionLogging (copy), createImpressionSignal (copy), UserInputService (copy), ConstantsModule (copy), FFlagStreamNotificationsSduiContentPageModule (copy), FFlagNotificationStreamPromptsHandlerEnabled (copy), UsePushPermissionClientAttributesModule (copy), FetchStreamNotificationsContentPageModule (copy), GetStreamNotificationsModule (copy), ConfigResult (copy), SortNotificationsModule (copy), GetFStringPCGDKFilteredNotificationTypesFunction (copy), ThirdPartyUserService (copy), StreamNotificationFixInitialPageFill (copy), CryoModule (copy), NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy), FFlagStreamNotificationsStandardizeClickEvents (copy), ClearUnreadNotificationsModule (copy), PostReportNotificationModule (copy), OpenDynamicAbuseReportModule (copy), AbuseVectorModule (copy), CloseCentralOverlayFunction (copy), LuaAppNewStreamNotificationsLogFix (copy), Type (copy), JoinExperienceFunction (copy), SessionService (copy), ReportEventModule (copy), NewResult (copy), PostNotificationsApiModule (copy), NotificationsCommonModule (copy), MetaActionsMenuModule (copy), Loading (copy), IconSize (copy), StreamNotificationsContentPageModule (copy), StreamNotificationBundleWrapperModule (copy), StreamNotificationAnimationWrapperModule (copy), EmptyNotificationsModule (copy), StreamPromptsBannerSlotModule (copy), GuiService (copy), FrameBoundsImpressionsTracker (copy)
 	local UseStyleResult = UseStyleFunction()
 	local DropdownEnabled = StreamNotificationDropdownExperimentationModule.getDropdownEnabled()
 	local UseDispatchResult = UseDispatchFunction()
@@ -132,7 +134,7 @@ return function(p1)
 		end
 		return { byNotificationId = ByNotificationId, byIndex = ByIndex }
 	end, { UseStateResult })
-	local UsePushPermissionClientAttributesModuleResult = if FFlagStreamNotificationsSduiContentPageModule then UsePushPermissionClientAttributesModule() else nil
+	local UsePushPermissionClientAttributesModuleResult = if FFlagStreamNotificationsSduiContentPageModule or FFlagNotificationStreamPromptsHandlerEnabled then UsePushPermissionClientAttributesModule() else nil
 	ReactModule.useEffect(function()
 		-- upvalues: Callback (ref)
 		Callback()
@@ -236,7 +238,7 @@ return function(p1)
 		end
 	end
 	
-	local function v73(CurrentState, p2)
+	local function v75(CurrentState, p2)
 		-- upvalues: DropdownEnabled (copy), p1 (copy), PostReportNotificationModule (upval), ConfigResult (upval), Callback1 (ref), UseStateResult2_2 (copy), EnumStreamNotificationsDisplayStateModule (upval), UseDispatchResult (copy), OpenDynamicAbuseReportModule (upval), AbuseVectorModule (upval), CloseCentralOverlayFunction (upval)
 		if DropdownEnabled then
 			p1.displayStream(false)
@@ -322,7 +324,7 @@ return function(p1)
 		end
 	end, { UseMemoResult })
 	local UseResult2 = ReactModule.useCallback(function(p2, p3)
-		-- upvalues: UseStateResult1 (copy), UseStateResult2_1 (copy), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), CryoModule (upval), FFlagStreamNotificationsStandardizeClickEvents (upval), LuaAppNewStreamNotificationsLogFix (upval), ConstantsModule (upval), Type (upval), JoinExperienceFunction (upval), p1 (copy), SessionService (upval), ReportEventModule (upval), NewResult (upval), PostNotificationsApiModule (upval), ConfigResult (upval), Callback1 (ref), Callback2 (ref), UseStateResult2_2 (copy), EnumStreamNotificationsDisplayStateModule (upval), v73 (copy), UseStateResult (copy), UseStateResult2 (copy), UseClientTriggerEventHandlerModuleResult (copy)
+		-- upvalues: UseStateResult1 (copy), UseStateResult2_1 (copy), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), CryoModule (upval), FFlagStreamNotificationsStandardizeClickEvents (upval), LuaAppNewStreamNotificationsLogFix (upval), ConstantsModule (upval), Type (upval), JoinExperienceFunction (upval), p1 (copy), SessionService (upval), ReportEventModule (upval), NewResult (upval), PostNotificationsApiModule (upval), ConfigResult (upval), Callback1 (ref), Callback2 (ref), UseStateResult2_2 (copy), EnumStreamNotificationsDisplayStateModule (upval), v75 (copy), UseStateResult (copy), UseStateResult2 (copy), UseClientTriggerEventHandlerModuleResult (copy)
 		local P18 = p3 or UseStateResult1
 		UseStateResult2_1(P18)
 		NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.click, p2.eventName or "", CryoModule.Dictionary.join(p2.clientEventsPayload or {}, {
@@ -361,7 +363,7 @@ return function(p1)
 						Callback2()
 					elseif action.actionType == Type.ActionTypeEnum.Report then
 						UseStateResult2_2(EnumStreamNotificationsDisplayStateModule.AbuseReport)
-						v73(action.nextState, P18)
+						v75(action.nextState, P18)
 					elseif action.actionType == Type.ActionTypeEnum.Dismiss then
 						local Id = P18.id
 						Callback2()
@@ -560,7 +562,7 @@ return function(p1)
 		UseMemoResult
 	})
 	
-	local function v81(ScrollFrame)
+	local function v83(ScrollFrame)
 		-- upvalues: UseStateResult3 (copy), EnumStreamNotificationsDisplayStateModule (upval), FFlagStreamNotificationImpressionLogging (upval), UseRefResult5 (copy), ConstantsModule (upval), UseRefResult (copy), EnumStreamNotificationsLoadingMoreStateModule (upval), Callback (ref)
 		local Y = ScrollFrame.AbsoluteCanvasSize.Y
 		local Y1 = ScrollFrame.AbsoluteWindowSize.Y
@@ -575,6 +577,37 @@ return function(p1)
 		end
 	end
 	
+	local Frame = if FFlagNotificationStreamPromptsHandlerEnabled then ReactModule.createElement("Frame", {
+		BackgroundTransparency = 1,
+		Size = UDim2.fromScale(1, 1),
+		AutomaticSize = Enum.AutomaticSize.Y
+	}, {
+		Layout = ReactModule.createElement("UIListLayout", {
+			FillDirection = Enum.FillDirection.Vertical,
+			SortOrder = Enum.SortOrder.LayoutOrder,
+			HorizontalAlignment = Enum.HorizontalAlignment.Center
+		}),
+		PromptsBanner = ReactModule.createElement("Frame", {
+			LayoutOrder = 0,
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1, 0, 0, 0),
+			AutomaticSize = Enum.AutomaticSize.Y
+		}, {
+			Banner = ReactModule.createElement(StreamPromptsBannerSlotModule.get(), {
+				clientAttributes = UsePushPermissionClientAttributesModuleResult,
+				bottomPadding = if DropdownEnabled then ConstantsModule.Dropdown.CardGap else ConstantsModule.DefaultPadding
+			})
+		}),
+		Content = ReactModule.createElement("Frame", {
+			LayoutOrder = 1,
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1, 0, 0, 0),
+			AutomaticSize = Enum.AutomaticSize.Y
+		}, {
+			UIFlexItem = ReactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }),
+			Notifications = UseMemoResult2
+		})
+	}) else UseMemoResult2
 	local Y = if UserInputService.BottomBarSize then UserInputService.BottomBarSize.Y else 0
 	local Bottom = if GuiService:GetSafeZoneOffsets() then GuiService:GetSafeZoneOffsets().bottom else 0
 	local Largest: number = if p1.isSmallScreen then math.max(Y, Bottom) else 0
@@ -613,9 +646,9 @@ return function(p1)
 			ElasticBehavior = Enum.ElasticBehavior.Always,
 			ScrollingEnabled = UseStateResult3 == EnumStreamNotificationsDisplayStateModule.Default,
 			ScrollingDirection = Enum.ScrollingDirection.Y,
-			[ReactModule.Change.CanvasPosition] = v81,
+			[ReactModule.Change.CanvasPosition] = v83,
 			Selectable = false
-		}, UseMemoResult2)
+		}, Frame)
 	}) else ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0),
@@ -652,9 +685,9 @@ return function(p1)
 			ElasticBehavior = Enum.ElasticBehavior.Always,
 			ScrollingEnabled = UseStateResult3 == EnumStreamNotificationsDisplayStateModule.Default,
 			ScrollingDirection = Enum.ScrollingDirection.Y,
-			[ReactModule.Change.CanvasPosition] = v81,
+			[ReactModule.Change.CanvasPosition] = v83,
 			Selectable = false
-		}, UseMemoResult2),
+		}, Frame),
 		ImpressionTracker = if FFlagStreamNotificationImpressionLogging then ReactModule.createElement(FrameBoundsImpressionsTracker, {
 			pageContext = nil,
 			impressionsTag = "StreamNotificationImpression",

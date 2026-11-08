@@ -28,6 +28,7 @@
 		Level2a = {
 			Home = "Home",
 			Games = "Games",
+			Campaign = "Campaign",
 			AvatarExperienceRoot = "AvatarExperienceRoot",
 			Chat = "Chat",
 			Moments = "Moments",

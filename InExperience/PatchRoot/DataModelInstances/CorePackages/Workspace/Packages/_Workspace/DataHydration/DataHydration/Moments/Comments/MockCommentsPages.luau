@@ -15,7 +15,8 @@ local list = {
 	},
 	{
 		commentId = "c-5",
-		text = "what settings are you using for this?",
+		text = "¿qué configuración usas para esto?",
+		translatedText = "what settings are you using for this?",
 		ageSeconds = 172800,
 		author = CommentFixturesModule.AUTHORS.sceleratis
 	},
@@ -63,7 +64,8 @@ local list = {
 	},
 	{
 		commentId = "c-12",
-		text = "that recovery was unbelievably clean",
+		text = "あのリカバリーは信じられないほどきれいだった",
+		translatedText = "that recovery was unbelievably clean",
 		ageSeconds = 1728000,
 		author = CommentFixturesModule.AUTHORS.roblox
 	},
@@ -219,6 +221,7 @@ local function page3(FeedItemId, p1)
 			commentId = `{FeedItemId}:{value.commentId}`,
 			feedItemId = FeedItemId,
 			text = value.text,
+			translatedText = value.translatedText,
 			createdAt = DateTime.fromUnixTimestamp((p1 or DateTime.now().UnixTimestamp) - value.ageSeconds):ToIsoDate(),
 			author = value.author
 		}))

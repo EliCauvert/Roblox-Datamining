@@ -111,6 +111,11 @@ local function mapGroup(p2)
 	if type(Name) == "string" then
 		config.name = Name
 	end
+	local FooterText = p2.footerText
+	
+	if type(FooterText) == "string" and FooterText ~= "" then
+		config.footerText = FooterText
+	end
 	return config
 end
 

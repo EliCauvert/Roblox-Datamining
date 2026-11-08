@@ -18,7 +18,6 @@ local FillBehavior = FoundationModule.Enums.FillBehavior
 local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local RobuxTextModule = require(CurrencyTransfers.Components.Generic.RobuxText)
 local TransferRobuxHeaderModule = require(CurrencyTransfers.Components.Generic.TransferRobuxHeader)
@@ -38,7 +37,9 @@ local GetFFlagCurrencyTransferFixDesktopInputModule = require(CurrencyTransfers.
 local GetFFlagCurrencyTransferFocusNavigationModule = require(CurrencyTransfers.Flags.GetFFlagCurrencyTransferFocusNavigation)
 local UseTransferSheetFocusModule = require(CurrencyTransfers.Hooks.useTransferSheetFocus)
 local GetFFlagCurrencyTransferUseBackendTransferLimitsModule = require(CurrencyTransfers.Flags.GetFFlagCurrencyTransferUseBackendTransferLimits)
+local FFlagShowRemainingTransfersForNonPlusModule = require(CurrencyTransfers.Flags.FFlagShowRemainingTransfersForNonPlus)
 local FFlagCurrencyTransferHideAmountChipsAboveMaxModule = require(CurrencyTransfers.Flags.FFlagCurrencyTransferHideAmountChipsAboveMax)
+local TransferBenefitSourceModule = require(CurrencyTransfers.Enums.TransferBenefitSource)
 local CurrencyTransferTelemetryModule = require(CurrencyTransfers.Events.CurrencyTransferTelemetry)
 local RobuxTransferFlowEventNameModule = require(CurrencyTransfers.Enums.RobuxTransferFlowEventName)
 local LogCurrencyTransferCounterModule = require(CurrencyTransfers.Utils.logCurrencyTransferCounter)
@@ -46,7 +47,7 @@ local LogRobuxTransferFlowEventModule = require(CurrencyTransfers.Utils.logRobux
 local FormatNumberModule = require(CurrencyTransfers.Utils.formatNumber)
 
 return function(_)
-	-- upvalues: UseLocalizationFunction (copy), TransferLocalizationKeysModule (copy), UseTokensFunction (copy), GetFFlagCurrencyTransferFixDesktopInputModule (copy), UserInputService (copy), UseTransferStoreModule (copy), ReactModule (copy), LogCurrencyTransferCounterModule (copy), CurrencyTransferTelemetryModule (copy), SharedFlagsModule (copy), LogRobuxTransferFlowEventModule (copy), RobuxTransferFlowEventNameModule (copy), SignalsReactModule (copy), GetFFlagCurrencyTransferUseBackendTransferLimitsModule (copy), GetFIntCurrencyTransferMinAmountModule (copy), GetFIntCurrencyTransferMaxAmountModule (copy), SetTransferPromptStateModule (copy), PromptStateModule (copy), ProceedToConfirmModule (copy), UseTextBoxOnChangeRefModule (copy), GetFFlagCurrencyTransferFocusNavigationModule (copy), UseTransferSheetFocusModule (copy), UseAutoFocusTextBoxOnMountModule (copy), FFlagCurrencyTransferHideAmountChipsAboveMaxModule (copy), GetFFlagCurrencyTransferFlowUIImprovementFixModule (copy), FormatNumberModule (copy), LocalizationService (copy), TransferLocaleFormatModule (copy), UseScaledValueFunction (copy), Sheet (copy), TransferRobuxHeaderModule (copy), View (copy), GetFFlagCurrencyTransferFixTextBoxInputModule (copy), TransferProfileThumbnailModule (copy), RobuxTextModule (copy), Icon (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), Text (copy), TransferAmountOptionChipsModule (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)
+	-- upvalues: UseLocalizationFunction (copy), TransferLocalizationKeysModule (copy), UseTokensFunction (copy), GetFFlagCurrencyTransferFixDesktopInputModule (copy), UserInputService (copy), UseTransferStoreModule (copy), ReactModule (copy), LogCurrencyTransferCounterModule (copy), CurrencyTransferTelemetryModule (copy), SharedFlagsModule (copy), LogRobuxTransferFlowEventModule (copy), RobuxTransferFlowEventNameModule (copy), SignalsReactModule (copy), GetFFlagCurrencyTransferUseBackendTransferLimitsModule (copy), GetFIntCurrencyTransferMinAmountModule (copy), GetFIntCurrencyTransferMaxAmountModule (copy), FFlagShowRemainingTransfersForNonPlusModule (copy), FormatNumberModule (copy), LocalizationService (copy), SetTransferPromptStateModule (copy), PromptStateModule (copy), ProceedToConfirmModule (copy), UseTextBoxOnChangeRefModule (copy), GetFFlagCurrencyTransferFocusNavigationModule (copy), UseTransferSheetFocusModule (copy), UseAutoFocusTextBoxOnMountModule (copy), FFlagCurrencyTransferHideAmountChipsAboveMaxModule (copy), TransferBenefitSourceModule (copy), GetFFlagCurrencyTransferFlowUIImprovementFixModule (copy), TransferLocaleFormatModule (copy), UseScaledValueFunction (copy), Sheet (copy), TransferRobuxHeaderModule (copy), View (copy), GetFFlagCurrencyTransferFixTextBoxInputModule (copy), TransferProfileThumbnailModule (copy), RobuxTextModule (copy), Icon (copy), NormalizeFontFaceFunction (copy), Text (copy), TransferAmountOptionChipsModule (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)
 	local UseLocalizationResult = UseLocalizationFunction(TransferLocalizationKeysModule.Presets.TransferRobuxInputSheet)
 	local UseTokensResult = UseTokensFunction()
 	local NoTouchEnabled: boolean = GetFFlagCurrencyTransferFixDesktopInputModule() and not UserInputService.TouchEnabled
@@ -70,6 +71,16 @@ return function(_)
 	local UseSignalStateResult3 = SignalsReactModule.useSignalState(UseTransferStoreModuleResult.getMaximumTransferAmount)
 	local UseSignalStateResult4 = if GetFFlagCurrencyTransferUseBackendTransferLimitsModule() and UseSignalStateResult2 then UseSignalStateResult2 else GetFIntCurrencyTransferMinAmountModule()
 	local UseSignalStateResult5 = if GetFFlagCurrencyTransferUseBackendTransferLimitsModule() and UseSignalStateResult3 then UseSignalStateResult3 else GetFIntCurrencyTransferMaxAmountModule()
+	local UseSignalStateResult6 = if FFlagShowRemainingTransfersForNonPlusModule then SignalsReactModule.useSignalState(UseTransferStoreModuleResult.getTransferBenefitSource) else nil
+	local UseSignalStateResult7 = if FFlagShowRemainingTransfersForNonPlusModule then SignalsReactModule.useSignalState(UseTransferStoreModuleResult.getNumFreeTransfersRemaining) else nil
+	local FormatNumberModuleResult = if FFlagShowRemainingTransfersForNonPlusModule and UseSignalStateResult7 ~= nil then FormatNumberModule(LocalizationService.RobloxLocaleId, UseSignalStateResult7) else nil
+	local UseLocalizationResult1 = UseLocalizationFunction({
+		FreeTransfersRemaining = if FFlagShowRemainingTransfersForNonPlusModule and FormatNumberModuleResult ~= nil and UseSignalStateResult7 ~= 1 then {
+			"Features.Transfers.RobuxTransfer.FreeTransfersRemaining",
+			numFreeTransfersRemaining = FormatNumberModuleResult
+		} else nil,
+		FreeTransfersRemainingSingular = if FFlagShowRemainingTransfersForNonPlusModule and UseSignalStateResult7 == 1 then "Features.Transfers.RobuxTransfer.FreeTransfersRemainingSingular" else nil
+	})
 	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult (copy), UseSignalStateResult4 (copy), UseSignalStateResult5 (copy), UseStateResult2 (copy)
 		if UseSignalStateResult == 0 or UseSignalStateResult4 <= UseSignalStateResult and UseSignalStateResult <= UseSignalStateResult5 then
@@ -129,7 +140,7 @@ return function(_)
 		end
 	end, { UseAutoFocusTextBoxOnMountModuleResult })
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: FFlagCurrencyTransferHideAmountChipsAboveMaxModule (upval), UseSignalStateResult5 (copy)
+		-- upvalues: FFlagCurrencyTransferHideAmountChipsAboveMaxModule (upval), FFlagShowRemainingTransfersForNonPlusModule (upval), UseSignalStateResult6 (copy), TransferBenefitSourceModule (upval), UseSignalStateResult5 (copy)
 		local list = {
 			{ amount = 25, text = "25" },
 			{ amount = 50, text = "50" },
@@ -137,7 +148,7 @@ return function(_)
 			{ amount = 200, text = "200" }
 		}
 		
-		if not FFlagCurrencyTransferHideAmountChipsAboveMaxModule then
+		if not FFlagCurrencyTransferHideAmountChipsAboveMaxModule and (not FFlagShowRemainingTransfersForNonPlusModule or UseSignalStateResult6 ~= TransferBenefitSourceModule.Free) then
 			return list
 		end
 		local List = {}
@@ -148,7 +159,7 @@ return function(_)
 			end
 		end
 		return List
-	end, { UseSignalStateResult5 })
+	end, { UseSignalStateResult6, UseSignalStateResult5 })
 	local UseResult2 = ReactModule.useCallback(function(p1)
 		-- upvalues: SetSelectedAmountFunction (copy), GetFFlagCurrencyTransferFlowUIImprovementFixModule (upval), UseRefResult (copy)
 		SetSelectedAmountFunction(p1)
@@ -285,8 +296,7 @@ return function(_)
 											LayoutOrder = 2,
 											Text = if UseSignalStateResult and UseSignalStateResult > 0 then tostring(UseSignalStateResult) else "",
 											TextInputType = Enum.TextInputType.Number,
-											Font = if FoundationFontFaceMigration then nil else UseTokensResult.Typography.DisplaySmall.Font,
-											FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.DisplaySmall.Font) else nil,
+											FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.DisplaySmall.Font),
 											TextSize = UseTokensResult.Typography.DisplaySmall.FontSize,
 											TextColor3 = UseTokensResult.Color.Content.Emphasis.Color3,
 											PlaceholderColor3 = UseTokensResult.Color.Content.Emphasis.Color3,
@@ -370,7 +380,7 @@ return function(_)
 				Disclaimer = ReactModule.createElement(Text, {
 					tag = "wrap size-full-0 auto-y text-caption-small text-wrap text-align-x-center",
 					LayoutOrder = 2,
-					Text = UseLocalizationResult.Disclaimer
+					Text = if FFlagShowRemainingTransfersForNonPlusModule and UseSignalStateResult6 == TransferBenefitSourceModule.Free and UseSignalStateResult7 ~= nil then if UseSignalStateResult7 == 1 then UseLocalizationResult1.FreeTransfersRemainingSingular else UseLocalizationResult1.FreeTransfersRemaining else UseLocalizationResult.Disclaimer
 				})
 			})
 		})

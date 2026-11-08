@@ -1,5 +1,7 @@
 ﻿local ProtoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
 local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
+local TimestampModule = require(script.Parent.Parent.Parent.Parent.Parent.google.protobuf.timestamp)
+local _ = require(script.Parent.custom_options)
 local Module = {}
 Module.__index = Module
 
@@ -41,21 +43,21 @@ function Module.decode(Buf)
 	local v1 = 0
 	while v1 < buffer.len(Buf) do
 		local Tag, Tag2
-		Tag, Tag2, v14 = ProtoModule.readTag(Buf, v1)
+		Tag, Tag2, v16 = ProtoModule.readTag(Buf, v1)
 		
 		if Tag2 == ProtoModule.wireTypes.varint then
 			if Tag == 2 then
-				NewModule.amount_in_robux, v14 = ProtoModule.readVarIntI64(Buf, v1)
+				NewModule.amount_in_robux, v16 = ProtoModule.readVarIntI64(Buf, v1)
 			elseif Tag == 3 then
-				NewModule.percent, v14 = ProtoModule.readVarIntI64(Buf, v1)
+				NewModule.percent, v16 = ProtoModule.readVarIntI64(Buf, v1)
 			else
 				local _
-				_, v14 = ProtoModule.readVarInt(Buf, v1)
+				_, v16 = ProtoModule.readVarInt(Buf, v1)
 			end
 		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 			if Tag == 1 then
 				local Buffer1
-				Buffer1, v14 = ProtoModule.readBuffer(Buf, v1)
+				Buffer1, v16 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.type = buffer.tostring(Buffer1)
 			else
 				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v1)
@@ -63,10 +65,10 @@ function Module.decode(Buf)
 			end
 		elseif Tag2 == ProtoModule.wireTypes.i32 then
 			local _
-			_, v14 = ProtoModule.readFixed32(Buf, v1)
+			_, v16 = ProtoModule.readFixed32(Buf, v1)
 		elseif Tag2 == ProtoModule.wireTypes.i64 then
 			local _
-			_, v14 = ProtoModule.readFixed64(Buf, v1)
+			_, v16 = ProtoModule.readFixed64(Buf, v1)
 		else
 			error("Unsupported wire type: " .. Tag2)
 		end
@@ -129,7 +131,13 @@ function Module1.new(p1)
 		display_description = if p1 == nil or p1.display_description == nil then "" else p1.display_description,
 		price_discount_details = if p1 == nil or p1.price_discount_details == nil then {} else p1.price_discount_details,
 		user_base_price_in_robux = if p1 == nil or p1.user_base_price_in_robux == nil then 0 else p1.user_base_price_in_robux,
-		is_discounted = p1 ~= nil and p1.is_discounted ~= nil and p1.is_discounted
+		is_discounted = p1 ~= nil and p1.is_discounted ~= nil and p1.is_discounted,
+		can_configure = p1 ~= nil and p1.can_configure ~= nil and p1.can_configure,
+		created_time = if p1 == nil or p1.created_time == nil then nil else p1.created_time,
+		updated_time = if p1 == nil or p1.updated_time == nil then nil else p1.updated_time,
+		total_up_votes = if p1 == nil or p1.total_up_votes == nil then nil else p1.total_up_votes,
+		total_down_votes = if p1 == nil or p1.total_down_votes == nil then nil else p1.total_down_votes,
+		user_vote = if p1 == nil or p1.user_vote == nil then nil else p1.user_vote
 	}, Module1))
 end
 
@@ -181,6 +189,32 @@ function Module1:encode()
 		local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.varint)
 		Buf, Count = ProtoModule.writeVarInt(WriteTagResult10, WriteTagResult2_9, if self.is_discounted then 1 else 0)
 	end
+	if self.can_configure then
+		local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult11, WriteTagResult2_10, if self.can_configure then 1 else 0)
+	end
+	if self.created_time ~= nil then
+		local EncodeResult = self.created_time:encode()
+		local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult12, WriteTagResult2_11, EncodeResult, buffer.len(EncodeResult))
+	end
+	if self.updated_time ~= nil then
+		local EncodeResult = self.updated_time:encode()
+		local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult13, WriteTagResult2_12, EncodeResult, buffer.len(EncodeResult))
+	end
+	if self.total_up_votes ~= nil then
+		local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult14, WriteTagResult2_13, self.total_up_votes)
+	end
+	if self.total_down_votes ~= nil then
+		local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult15, WriteTagResult2_14, self.total_down_votes)
+	end
+	if self.user_vote ~= nil then
+		local WriteTagResult16, WriteTagResult2_15 = ProtoModule.writeTag(Buf, Count, 16, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult16, WriteTagResult2_15, if self.user_vote then 1 else 0)
+	end
 	local Buf1 = buffer.create(Count)
 	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
@@ -188,61 +222,81 @@ function Module1:encode()
 end
 
 function Module1.decode(Buf)
-	-- upvalues: Module1 (copy), ProtoModule (copy), config (copy)
+	-- upvalues: Module1 (copy), ProtoModule (copy), config (copy), TimestampModule (copy)
 	local NewModule = Module1.new()
 	local v2 = 0
 	while v2 < buffer.len(Buf) do
 		local Tag, Tag2
-		Tag, Tag2, v49 = ProtoModule.readTag(Buf, v2)
+		Tag, Tag2, v65 = ProtoModule.readTag(Buf, v2)
 		
 		if Tag2 == ProtoModule.wireTypes.varint then
 			if Tag == 3 then
-				NewModule.price, v49 = ProtoModule.readVarIntI64(Buf, v2)
+				NewModule.price, v65 = ProtoModule.readVarIntI64(Buf, v2)
 			elseif Tag == 4 then
-				NewModule.product_id, v49 = ProtoModule.readVarIntI64(Buf, v2)
+				NewModule.product_id, v65 = ProtoModule.readVarIntI64(Buf, v2)
 			elseif Tag == 5 then
 				local VarInt
-				VarInt, v49 = ProtoModule.readVarInt(Buf, v2)
+				VarInt, v65 = ProtoModule.readVarInt(Buf, v2)
 				NewModule.is_owned = VarInt ~= 0
 			elseif Tag == 6 then
-				NewModule.display_icon_image_asset_id, v49 = ProtoModule.readVarIntI64(Buf, v2)
+				NewModule.display_icon_image_asset_id, v65 = ProtoModule.readVarIntI64(Buf, v2)
 			elseif Tag == 9 then
-				NewModule.user_base_price_in_robux, v49 = ProtoModule.readVarIntI64(Buf, v2)
+				NewModule.user_base_price_in_robux, v65 = ProtoModule.readVarIntI64(Buf, v2)
 			elseif Tag == 10 then
 				local VarInt1
-				VarInt1, v49 = ProtoModule.readVarInt(Buf, v2)
+				VarInt1, v65 = ProtoModule.readVarInt(Buf, v2)
 				NewModule.is_discounted = VarInt1 ~= 0
+			elseif Tag == 11 then
+				local VarInt2
+				VarInt2, v65 = ProtoModule.readVarInt(Buf, v2)
+				NewModule.can_configure = VarInt2 ~= 0
+			elseif Tag == 14 then
+				NewModule.total_up_votes, v65 = ProtoModule.readVarIntI64(Buf, v2)
+			elseif Tag == 15 then
+				NewModule.total_down_votes, v65 = ProtoModule.readVarIntI64(Buf, v2)
+			elseif Tag == 16 then
+				local VarInt3
+				VarInt3, v65 = ProtoModule.readVarInt(Buf, v2)
+				NewModule.user_vote = VarInt3 ~= 0
 			else
 				local _
-				_, v49 = ProtoModule.readVarInt(Buf, v2)
+				_, v65 = ProtoModule.readVarInt(Buf, v2)
 			end
 		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 			if Tag == 1 then
-				local Buffer1
-				Buffer1, v49 = ProtoModule.readBuffer(Buf, v2)
-				NewModule.id = buffer.tostring(Buffer1)
-			elseif Tag == 2 then
-				local Buffer2
-				Buffer2, v49 = ProtoModule.readBuffer(Buf, v2)
-				NewModule.display_name = buffer.tostring(Buffer2)
-			elseif Tag == 7 then
 				local Buffer3
-				Buffer3, v49 = ProtoModule.readBuffer(Buf, v2)
-				NewModule.display_description = buffer.tostring(Buffer3)
-			elseif Tag == 8 then
+				Buffer3, v65 = ProtoModule.readBuffer(Buf, v2)
+				NewModule.id = buffer.tostring(Buffer3)
+			elseif Tag == 2 then
 				local Buffer4
-				Buffer4, v49 = ProtoModule.readBuffer(Buf, v2)
-				table.insert(NewModule.price_discount_details, config.PriceDiscountDetail.decode(Buffer4))
+				Buffer4, v65 = ProtoModule.readBuffer(Buf, v2)
+				NewModule.display_name = buffer.tostring(Buffer4)
+			elseif Tag == 7 then
+				local Buffer5
+				Buffer5, v65 = ProtoModule.readBuffer(Buf, v2)
+				NewModule.display_description = buffer.tostring(Buffer5)
+			elseif Tag == 8 then
+				local Buffer1
+				Buffer1, v65 = ProtoModule.readBuffer(Buf, v2)
+				table.insert(NewModule.price_discount_details, config.PriceDiscountDetail.decode(Buffer1))
+			elseif Tag == 12 then
+				local Buffer6
+				Buffer6, v65 = ProtoModule.readBuffer(Buf, v2)
+				NewModule.created_time = TimestampModule.Timestamp.decode(Buffer6)
+			elseif Tag == 13 then
+				local Buffer2
+				Buffer2, v65 = ProtoModule.readBuffer(Buf, v2)
+				NewModule.updated_time = TimestampModule.Timestamp.decode(Buffer2)
 			else
-				local VarInt2, VarInt2_1 = ProtoModule.readVarInt(Buf, v2)
-				v2 = VarInt2_1 + VarInt2
+				local VarInt4, VarInt2_1 = ProtoModule.readVarInt(Buf, v2)
+				v2 = VarInt2_1 + VarInt4
 			end
 		elseif Tag2 == ProtoModule.wireTypes.i32 then
 			local _
-			_, v49 = ProtoModule.readFixed32(Buf, v2)
+			_, v65 = ProtoModule.readFixed32(Buf, v2)
 		elseif Tag2 == ProtoModule.wireTypes.i64 then
 			local _
-			_, v49 = ProtoModule.readFixed64(Buf, v2)
+			_, v65 = ProtoModule.readFixed64(Buf, v2)
 		else
 			error("Unsupported wire type: " .. Tag2)
 		end
@@ -288,11 +342,29 @@ function Module1:jsonEncode()
 	if self.is_discounted then
 		t.isDiscounted = self.is_discounted
 	end
+	if self.can_configure then
+		t.canConfigure = self.can_configure
+	end
+	if self.created_time ~= nil then
+		t.createdTime = self.created_time:jsonEncode()
+	end
+	if self.updated_time ~= nil then
+		t.updatedTime = self.updated_time:jsonEncode()
+	end
+	if self.total_up_votes ~= nil then
+		t.totalUpVotes = self.total_up_votes
+	end
+	if self.total_down_votes ~= nil then
+		t.totalDownVotes = self.total_down_votes
+	end
+	if self.user_vote ~= nil then
+		t.userVote = self.user_vote
+	end
 	return t
 end
 
 function Module1:jsonDecode()
-	-- upvalues: Module1 (copy), config (copy)
+	-- upvalues: Module1 (copy), config (copy), TimestampModule (copy)
 	local NewModule = Module1.new()
 	
 	if self.id ~= nil then
@@ -358,6 +430,42 @@ function Module1:jsonDecode()
 	end
 	if self.isDiscounted ~= nil then
 		NewModule.is_discounted = self.isDiscounted
+	end
+	if self.can_configure ~= nil then
+		NewModule.can_configure = self.can_configure
+	end
+	if self.canConfigure ~= nil then
+		NewModule.can_configure = self.canConfigure
+	end
+	if self.created_time ~= nil then
+		NewModule.created_time = TimestampModule.Timestamp.jsonDecode(self.created_time)
+	end
+	if self.createdTime ~= nil then
+		NewModule.created_time = TimestampModule.Timestamp.jsonDecode(self.createdTime)
+	end
+	if self.updated_time ~= nil then
+		NewModule.updated_time = TimestampModule.Timestamp.jsonDecode(self.updated_time)
+	end
+	if self.updatedTime ~= nil then
+		NewModule.updated_time = TimestampModule.Timestamp.jsonDecode(self.updatedTime)
+	end
+	if self.total_up_votes ~= nil then
+		NewModule.total_up_votes = self.total_up_votes
+	end
+	if self.totalUpVotes ~= nil then
+		NewModule.total_up_votes = self.totalUpVotes
+	end
+	if self.total_down_votes ~= nil then
+		NewModule.total_down_votes = self.total_down_votes
+	end
+	if self.totalDownVotes ~= nil then
+		NewModule.total_down_votes = self.totalDownVotes
+	end
+	if self.user_vote ~= nil then
+		NewModule.user_vote = self.user_vote
+	end
+	if self.userVote ~= nil then
+		NewModule.user_vote = self.userVote
 	end
 	return NewModule
 end

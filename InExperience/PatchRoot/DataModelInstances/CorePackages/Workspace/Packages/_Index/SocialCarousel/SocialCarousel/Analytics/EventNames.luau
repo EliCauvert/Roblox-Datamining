@@ -6,5 +6,6 @@
 	UserSeen = "UserSeen",
 	TilesSeenCollection = "TilesSeenCollection",
 	ViewAddFriends = "ViewAddFriends",
-	ViewAllFriends = "ViewAllFriends"
+	ViewAllFriends = "ViewAllFriends",
+	AddFriendsTileSeen = "AddFriendsTileSeen"
 }

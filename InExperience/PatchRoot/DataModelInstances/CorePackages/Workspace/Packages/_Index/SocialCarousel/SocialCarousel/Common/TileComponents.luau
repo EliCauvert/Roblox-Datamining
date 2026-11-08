@@ -34,6 +34,7 @@ end
 return {
 	[Tile.Friend] = renderUserTile,
 	[Tile.Recommendation] = renderUserTile,
+	[Tile.FriendRequest] = renderUserTile,
 	[Tile.AddFriends] = function(_, Index, ItemSize, SelectionOrder, _)
 		-- upvalues: ReactModule (copy), AddFriendsTileModule (copy)
 		return ReactModule.createElement(AddFriendsTileModule, {

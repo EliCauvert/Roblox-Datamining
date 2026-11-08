@@ -40,9 +40,10 @@ local FFlagUseSignalsForSquadExperienceInvite = DependenciesModule.SharedFlags.F
 local GetSquadExperienceInviteStoreFunction = require(Parent.SquadsCore.Stores).GetSquadExperienceInviteStore
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local EventNamesModule = require(Parent.SquadsCore.EventNames)
+local SQUADLOBBYMODALDISPLAYORDER = require(Squads.Common.Constants).SQUAD_LOBBY_MODAL_DISPLAY_ORDER
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), React (copy), SquadExternalContractContext (copy), UseLuckyRecommendationFunction (copy), UseLuckyRecommendationAnalyticsFunction (copy), UseLocalizationFunction (copy), SquadLuckyRecommendationPhase (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy), UseSelectorFunction (copy), FFlagUseSignalsForSquadExperienceInvite (copy), UseSignalStateFunction (copy), GetSquadExperienceInviteStoreFunction (copy), UseIsExperienceInviteRetryBlockedFunction (copy), EventNamesModule (copy), CreateExperienceInviteModule (copy), SquadExperienceInviteSource (copy), SetTimeoutFunction (copy), ClearTimeoutFunction (copy), ReactOtterModule (copy), Text (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), View (copy), Image (copy), Progress (copy), ProgressShape (copy), ProgressSize (copy), OverlayProvider (copy), Dialog (copy), DialogSize (copy), Button (copy), ButtonVariant (copy), Icon (copy), IconSize (copy)
+	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), React (copy), SquadExternalContractContext (copy), UseLuckyRecommendationFunction (copy), UseLuckyRecommendationAnalyticsFunction (copy), UseLocalizationFunction (copy), SquadLuckyRecommendationPhase (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy), UseSelectorFunction (copy), FFlagUseSignalsForSquadExperienceInvite (copy), UseSignalStateFunction (copy), GetSquadExperienceInviteStoreFunction (copy), UseIsExperienceInviteRetryBlockedFunction (copy), EventNamesModule (copy), CreateExperienceInviteModule (copy), SquadExperienceInviteSource (copy), SetTimeoutFunction (copy), ClearTimeoutFunction (copy), ReactOtterModule (copy), Text (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), View (copy), Image (copy), Progress (copy), ProgressShape (copy), ProgressSize (copy), OverlayProvider (copy), SQUADLOBBYMODALDISPLAYORDER (copy), Dialog (copy), DialogSize (copy), Button (copy), ButtonVariant (copy), Icon (copy), IconSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDispatchResult = UseDispatchFunction()
 	local Size300 = UseTokensResult.Size.Size_300
@@ -252,7 +253,7 @@ return function(p1)
 			})
 		})
 	end
-	return (React.createElement(OverlayProvider, { DisplayOrder = 11 }, {
+	return (React.createElement(OverlayProvider, { DisplayOrder = SQUADLOBBYMODALDISPLAYORDER }, {
 		Dialog = React.createElement(Dialog.Root, {
 			onClose = UseResult1,
 			size = DialogSize.Small,

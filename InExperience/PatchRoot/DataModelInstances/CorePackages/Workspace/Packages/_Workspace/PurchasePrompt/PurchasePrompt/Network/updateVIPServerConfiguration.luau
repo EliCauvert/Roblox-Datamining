@@ -31,6 +31,7 @@ return function(p1, p2, p3)
 			return if type(Result) == "table" and type(Result[v1]) == v2 then Result else PromiseModule.reject(PurchaseErrorModule.UnknownFailure)
 		end)
 	}
+	local Name = nil
 	
 	if p3.name ~= nil then
 		local v3 = "name"
@@ -38,7 +39,13 @@ return function(p1, p2, p3)
 		table.insert(List, p1.updateVIPServer(p2, { name = p3.name }):andThen(function(Result)
 			-- upvalues: v3 (copy), ValueType (copy), PromiseModule (upval), PurchaseErrorModule (upval)
 			return if type(Result) == "table" and type(Result[v3]) == ValueType then Result else PromiseModule.reject(PurchaseErrorModule.UnknownFailure)
+		end):andThen(function(Result)
+			-- upvalues: Name (ref)
+			Name = Result.name
 		end))
 	end
-	return PromiseModule.all(List)
+	return PromiseModule.all(List):andThen(function()
+		-- upvalues: Name (ref)
+		return Name
+	end)
 end

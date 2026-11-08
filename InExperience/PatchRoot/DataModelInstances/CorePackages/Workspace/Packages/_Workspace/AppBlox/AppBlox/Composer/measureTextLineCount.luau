@@ -1,12 +1,9 @@
-﻿local AppBlox = script:FindFirstAncestor("AppBlox")
-local StyleModule = require(AppBlox.Parent.Style)
+﻿local StyleModule = require(script:FindFirstAncestor("AppBlox").Parent.Style)
 local GetVisibleLineCountModule = require(script.Parent.getVisibleLineCount)
 local ComposerDebugModule = require(script.Parent.composerDebug)
-local TextService = game:GetService("TextService")
-local FoundationFontFaceMigration = require(AppBlox.Parent.Foundation).Utility.Flags.FoundationFontFaceMigration
 
 return function(p1)
-	-- upvalues: GetVisibleLineCountModule (copy), ComposerDebugModule (copy), FoundationFontFaceMigration (copy), StyleModule (copy), TextService (copy)
+	-- upvalues: GetVisibleLineCountModule (copy), ComposerDebugModule (copy), StyleModule (copy)
 	local VisibleLineCountModule = GetVisibleLineCountModule(p1.text, p1.maxLines)
 	local Count = 1
 	
@@ -35,8 +32,8 @@ return function(p1)
 		return config
 	end
 	if LayoutWidth > 0 then
-		local Y = if FoundationFontFaceMigration then StyleModule.GetTextSize("M", p1.fontSize, p1.font, Vector2.new(LayoutWidth, 100000), { addTemporaryPadding = false }).Y else TextService:GetTextSize("M", p1.fontSize, p1.font, Vector2.new(LayoutWidth, 100000)).Y
-		local Y1: number = (if FoundationFontFaceMigration then StyleModule.GetTextSize(p1.text, p1.fontSize, p1.font, Vector2.new(LayoutWidth, 100000), { addTemporaryPadding = false }) else TextService:GetTextSize(p1.text, p1.fontSize, p1.font, Vector2.new(LayoutWidth, 100000))).Y
+		local Y: number = StyleModule.GetTextSize("M", p1.fontSize, p1.font, Vector2.new(LayoutWidth, 100000), { addTemporaryPadding = false }).Y
+		local Y1: number = StyleModule.GetTextSize(p1.text, p1.fontSize, p1.font, Vector2.new(LayoutWidth, 100000), { addTemporaryPadding = false }).Y
 		ScaledSingleLineHeight = Y1
 		
 		if Y1 > 0 and Y > 0 then

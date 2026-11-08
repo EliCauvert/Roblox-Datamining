@@ -17,5 +17,6 @@
 	getTopSearchResultsFetchName = require(script.getTopSearchResultsFetchName),
 	extractAndStyleRichTextLinks = require(script.extractAndStyleRichTextLinks),
 	getZendeskUrl = require(script.getZendeskUrl),
+	getSearchViewportSize = require(script.getSearchViewportSize),
 	["jest.config"] = script["jest.config"]
 }

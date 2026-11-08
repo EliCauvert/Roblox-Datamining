@@ -1,10 +1,13 @@
 ﻿return table.freeze({
 	CATEGORY = "ExperienceLoading",
-	PAGE = "TiltLoadingScreen",
 	EVENT_NAME = "ExperienceLoadingScreen",
 	Host = table.freeze({
 		InExperience = "InExperience",
 		DeferredJoin = "DeferredJoin"
+	}),
+	Page = table.freeze({
+		TiltLoadingScreen = "TiltLoadingScreen",
+		LoadingScreenView = "LoadingScreenView"
 	}),
 	DismissSource = table.freeze({
 		NormalReady = "NormalReady",

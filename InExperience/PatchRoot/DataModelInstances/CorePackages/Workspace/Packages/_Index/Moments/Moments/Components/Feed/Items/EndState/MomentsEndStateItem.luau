@@ -1,15 +1,13 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
 local ReactModule = require(Parent.React)
-local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
-local FFlagMomentsNonInfiniteScrollEndStateFixesModule = require(Moments.Flags.FFlagMomentsNonInfiniteScrollEndStateFixes)
 local UseFeedFunction = require(Moments.Components.Feed.FeedContext).useFeed
 local MomentsEndStateViewModule = require(script.Parent.MomentsEndStateView)
-local Signal = if FFlagMomentsNonInfiniteScrollEndStateFixesModule then SignalsModule.createSignal(true) else nil
+local Signal = require(Parent.Signals).createSignal(true)
 
 return function(Frame)
-	-- upvalues: UseFeedFunction (copy), FFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), SignalsReactModule (copy), Signal (ref), ReactModule (copy), MomentsEndStateViewModule (copy)
+	-- upvalues: UseFeedFunction (copy), SignalsReactModule (copy), Signal (copy), ReactModule (copy), MomentsEndStateViewModule (copy)
 	local UseFeedResult = UseFeedFunction()
 	local LoadMoreBeyondLimitFunction = UseFeedResult.loadMoreBeyondLimit
 	
@@ -21,6 +19,6 @@ return function(Frame)
 				LoadMoreBeyondLimitFunction()
 			end
 		end, { LoadMoreBeyondLimitFunction }),
-		showLoadMore = not FFlagMomentsNonInfiniteScrollEndStateFixesModule or SignalsReactModule.useSignalState(UseFeedResult.getCanLoadMoreBeyondLimit or Signal)
+		showLoadMore = SignalsReactModule.useSignalState(UseFeedResult.getCanLoadMoreBeyondLimit or Signal)
 	})
 end

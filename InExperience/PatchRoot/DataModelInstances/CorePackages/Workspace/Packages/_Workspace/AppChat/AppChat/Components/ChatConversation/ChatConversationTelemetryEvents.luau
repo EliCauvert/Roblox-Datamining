@@ -36,13 +36,16 @@ return {
 	ScreenExit = TelemetryModule.new({
 		name = "conversationScreenExit",
 		description = "",
-		lastUpdated = { 2026, 1, 27 },
+		lastUpdated = { 2026, 11, 4 },
 		backendsList = {
 			NamedCounterConfigurationAndFormatFunction("AppChat.ChatConversation.Exit", function(p1)
 				return { conversationExitType = p1.conversationExitType }
 			end),
 			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
-				return { conversationExitType = p1.conversationExitType }
+				return {
+					conversationExitType = p1.conversationExitType,
+					loadedMessageCount = p1.loadedMessageCount
+				}
 			end)
 		}
 	}),

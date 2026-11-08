@@ -26,6 +26,7 @@ local UseJoinCardCtaLoadTimeModule = require(script.Parent.Parent.Parent.Analyti
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagMobileGameJoinCardGamepadSupport = SharedFlagsModule.FFlagMobileGameJoinCardGamepadSupport
 local FFlagGameJoinCardOptionalActions = SharedFlagsModule.FFlagGameJoinCardOptionalActions
+local FFlagGameJoinCardContent = SharedFlagsModule.FFlagGameJoinCardContent
 local UseGameJoinCardGamepadNavigationFunction = nil
 local AssignPrimaryFocusRefFunction = nil
 
@@ -49,7 +50,7 @@ local BuildJoinCardActionsComponentModule = require(GameJoinCard.Components.Acti
 local UserCtaAction = require(Parent.UserCtaCommon).Enums.UserCtaAction
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FFlagMobileGameJoinCardThumbnailModule (copy), FoundationModule (copy), GuiService (copy), FFlagMobileGameJoinCardGamepadSupport (copy), UseGameJoinCardGamepadNavigationFunction (ref), FFlagGameJoinCardOptionalActions (copy), GameJoinCardTTIModule (copy), ViewProfileSourceValues (copy), FFlagMobileGameJoinCardEDPFromThumbnailModule (copy), ViewEDPsourceValues (copy), FFlagMobileGameJoinCardEDPFromTitleModule (copy), FFlagJoinabilityCTARefactor (copy), UserCtaAction (copy), UseJoinCardCtaLoadTimeModule (copy), CtaType (copy), UseLocalizationFunction (copy), Skeleton (copy), AssignPrimaryFocusRefFunction (ref), BuildJoinCardActionsComponentModule (copy), Button (copy), FFlagJoinabilityCTAContextCopy (copy), OverlayProvider (copy), Sheet (copy), View (copy), MobileGameJoinCardHideUserAvatar (copy), Image (copy), StateLayerAffordance (copy), MobileGameJoinCardShowExperienceNameOnly (copy), Text (copy), UserTile (copy), LayoutMode (copy), AgeCheckUpsellCTAModule (copy), ButtonVariant (copy), InputSize (copy), MobileGameCardDontShowChatWith (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FFlagMobileGameJoinCardThumbnailModule (copy), FoundationModule (copy), GuiService (copy), FFlagGameJoinCardContent (copy), FFlagMobileGameJoinCardGamepadSupport (copy), UseGameJoinCardGamepadNavigationFunction (ref), FFlagGameJoinCardOptionalActions (copy), GameJoinCardTTIModule (copy), ViewProfileSourceValues (copy), FFlagMobileGameJoinCardEDPFromThumbnailModule (copy), ViewEDPsourceValues (copy), FFlagMobileGameJoinCardEDPFromTitleModule (copy), FFlagJoinabilityCTARefactor (copy), UserCtaAction (copy), UseJoinCardCtaLoadTimeModule (copy), CtaType (copy), UseLocalizationFunction (copy), Skeleton (copy), AssignPrimaryFocusRefFunction (ref), BuildJoinCardActionsComponentModule (copy), Button (copy), FFlagJoinabilityCTAContextCopy (copy), OverlayProvider (copy), Sheet (copy), View (copy), MobileGameJoinCardHideUserAvatar (copy), Image (copy), StateLayerAffordance (copy), MobileGameJoinCardShowExperienceNameOnly (copy), Text (copy), UserTile (copy), LayoutMode (copy), AgeCheckUpsellCTAModule (copy), ButtonVariant (copy), InputSize (copy), MobileGameCardDontShowChatWith (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local v1 = nil
@@ -63,18 +64,20 @@ return function(p1)
 	local NoUseOverlayResult: boolean = not UseOverlayResult or UseOverlayResult.AbsoluteSize.Y < UseOverlayResult.AbsoluteSize.X
 	local Inverted = not (GuiService.ViewportDisplaySize == Enum.DisplaySize.Small and not NoUseOverlayResult)
 	local ThumbnailImageUrl = p1.thumbnailImageUrl
+	local Content = if FFlagGameJoinCardContent then p1.content else nil
 	local UseGameJoinCardGamepadNavigationResult = if FFlagMobileGameJoinCardGamepadSupport then UseGameJoinCardGamepadNavigationFunction(p1.onClose, p1.isNavigationFocused ~= false) else nil
 	local RootRef = if UseGameJoinCardGamepadNavigationResult then UseGameJoinCardGamepadNavigationResult.rootRef else nil
 	local PrimaryButtonFocusRef = if UseGameJoinCardGamepadNavigationResult then UseGameJoinCardGamepadNavigationResult.primaryButtonFocusRef else nil
 	local UseResult = ReactModule.useCallback(function(AssetFetchStatus)
-		-- upvalues: UseStateResult2 (copy), FFlagGameJoinCardOptionalActions (upval), p1 (copy), GameJoinCardTTIModule (upval)
+		-- upvalues: UseStateResult2 (copy), Content (copy), FFlagGameJoinCardOptionalActions (upval), p1 (copy), GameJoinCardTTIModule (upval)
 		if AssetFetchStatus == Enum.AssetFetchStatus.Success then
 			UseStateResult2(true)
 			
-			if FFlagGameJoinCardOptionalActions and p1.disableAppTelemetry then return end
+			if Content ~= nil or FFlagGameJoinCardOptionalActions and p1.disableAppTelemetry then return end
 			GameJoinCardTTIModule.trackBannerLoaded()
 		end
 	end, {
+		Content ~= nil,
 		if FFlagGameJoinCardOptionalActions then p1.disableAppTelemetry else nil
 	})
 	local UseResult1 = if FFlagMobileGameJoinCardThumbnailModule then ReactModule.useCallback(function(AssetFetchStatus)
@@ -84,15 +87,16 @@ return function(p1)
 		end
 	end, {}) else nil
 	local NoUseStateResult: boolean = FFlagMobileGameJoinCardThumbnailModule and (ThumbnailImageUrl ~= nil and not UseStateResult)
-	local NoV43: boolean = if FFlagMobileGameJoinCardThumbnailModule then not UseStateResult and not v1 else not UseStateResult
+	local NoV44: boolean = Content == nil and (if FFlagMobileGameJoinCardThumbnailModule then not UseStateResult and not v1 else not UseStateResult)
 	ReactModule.useEffect(function()
-		-- upvalues: FFlagGameJoinCardOptionalActions (upval), p1 (copy), GameJoinCardTTIModule (upval)
-		if not FFlagGameJoinCardOptionalActions or not p1.disableAppTelemetry then
+		-- upvalues: Content (copy), FFlagGameJoinCardOptionalActions (upval), p1 (copy), GameJoinCardTTIModule (upval)
+		if Content == nil and (not FFlagGameJoinCardOptionalActions or not p1.disableAppTelemetry) then
 			GameJoinCardTTIModule.trackCardMounted()
 			
 			return
 		end
 	end, {
+		Content ~= nil,
 		if FFlagGameJoinCardOptionalActions then p1.disableAppTelemetry else nil
 	})
 	local UseResult2 = ReactModule.useCallback(function()
@@ -145,7 +149,7 @@ return function(p1)
 		isLoading = p1.isLoading or FFlagJoinabilityCTARefactor and p1.areActionsLoading == true,
 		ctaType = if Flag1 then CtaType.AgeCheckUnlock else CtaType.Join,
 		wasCached = p1.wasPlayabilityCached,
-		isDisabled = if FFlagGameJoinCardOptionalActions then p1.disableAppTelemetry else nil
+		isDisabled = Content ~= nil or (if FFlagGameJoinCardOptionalActions then p1.disableAppTelemetry else nil)
 	})
 	local UseLocalizationResult = UseLocalizationFunction({
 		join = "Feature.Profile.Action.JoinGame",
@@ -171,14 +175,14 @@ return function(p1)
 	local t = {}
 	local v2 = nil
 	
-	if FFlagJoinabilityCTARefactor then
+	if FFlagJoinabilityCTARefactor or Content ~= nil then
 		if p1.areActionsLoading then
 			t.ActionsLoading = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 1,
 				Size = UDim2.new(1, 0, 0, UseTokensResult.Size.Size_600)
 			})
 		else
-			t, v67 = BuildJoinCardActionsComponentModule(PrimaryButtonFocusRef and AssignPrimaryFocusRefFunction(p1.actions, PrimaryButtonFocusRef) or p1.actions, {
+			t, v69 = BuildJoinCardActionsComponentModule(PrimaryButtonFocusRef and AssignPrimaryFocusRefFunction(p1.actions, PrimaryButtonFocusRef) or p1.actions, {
 				playTogether = UseLocalizationResult.playTogether,
 				playTogetherSoon = UseLocalizationResult.playTogetherSoon,
 				differentServer = UseLocalizationResult.differentServer
@@ -240,8 +244,8 @@ return function(p1)
 										ScaleType = Enum.ScaleType.Crop,
 										ZIndex = if FFlagMobileGameJoinCardThumbnailModule then 3 else 2,
 										onLoaded = UseResult,
-										onActivated = if FFlagGameJoinCardOptionalActions and p1.onViewExperienceDetails == nil then nil elseif FFlagMobileGameJoinCardEDPFromThumbnailModule and UseStateResult then UseResult4 else nil,
-										stateLayer = if FFlagGameJoinCardOptionalActions and p1.onViewExperienceDetails == nil then nil elseif FFlagMobileGameJoinCardEDPFromThumbnailModule and UseStateResult then { affordance = StateLayerAffordance.None } else nil
+										onActivated = if Content == nil and (not FFlagGameJoinCardOptionalActions or p1.onViewExperienceDetails ~= nil) and (FFlagMobileGameJoinCardEDPFromThumbnailModule and UseStateResult) then UseResult4 else nil,
+										stateLayer = if Content == nil and (not FFlagGameJoinCardOptionalActions or p1.onViewExperienceDetails ~= nil) and (FFlagMobileGameJoinCardEDPFromThumbnailModule and UseStateResult) then { affordance = StateLayerAffordance.None } else nil
 									}),
 									BannerThumbnail = if NoUseStateResult then ReactModule.createElement(Image, {
 										BackgroundTransparency = 1,
@@ -251,28 +255,36 @@ return function(p1)
 										ScaleType = Enum.ScaleType.Crop,
 										onLoaded = UseResult1
 									}) else nil,
-									BannerSkeleton = if NoV43 then ReactModule.createElement(Skeleton, { ZIndex = 1, Size = UDim2.fromScale(1, 1) }) else nil
+									Media = if Content then ReactModule.createElement(View, { tag = "size-full", ZIndex = 4 }, { Content = Content.media }) else nil,
+									BannerSkeleton = if NoV44 then ReactModule.createElement(Skeleton, { ZIndex = 1, Size = UDim2.fromScale(1, 1) }) else nil
 								})
 							})
 						}),
 						UserTileWrapper = if p1.userId then ReactModule.createElement(View, {
 							ZIndex = 2,
 							LayoutOrder = 2,
-							Size = if MobileGameJoinCardShowExperienceNameOnly then UDim2.new(1, 0, 0, ScaledFontSize) elseif MobileGameJoinCardHideUserAvatar then UDim2.new(1, 0, 0, NewScaledFontSize) else UDim2.new(1, 0, 0, YOffset)
+							Size = if MobileGameJoinCardShowExperienceNameOnly or Content ~= nil then UDim2.new(1, 0, 0, if Content == nil then ScaledFontSize else NewScaledFontSize) elseif MobileGameJoinCardHideUserAvatar then UDim2.new(1, 0, 0, NewScaledFontSize) else UDim2.new(1, 0, 0, YOffset)
 						}, {
-							Tile = if MobileGameJoinCardShowExperienceNameOnly then ReactModule.createElement(View, {
-								tag = "row align-x-center align-y-center size-full",
-								onActivated = if FFlagGameJoinCardOptionalActions and p1.onViewExperienceDetails == nil then nil elseif FFlagMobileGameJoinCardEDPFromTitleModule then UseResult5 else nil,
-								stateLayer = if FFlagGameJoinCardOptionalActions and p1.onViewExperienceDetails == nil then nil elseif FFlagMobileGameJoinCardEDPFromTitleModule then { affordance = StateLayerAffordance.None } else nil
+							Tile = if MobileGameJoinCardShowExperienceNameOnly or Content ~= nil then ReactModule.createElement(View, {
+								tag = if Content == nil then "row align-x-center align-y-center size-full" else "col align-x-center align-y-center gap-small size-full",
+								onActivated = if Content == nil and (not FFlagGameJoinCardOptionalActions or p1.onViewExperienceDetails ~= nil) and FFlagMobileGameJoinCardEDPFromTitleModule then UseResult5 else nil,
+								stateLayer = if Content == nil and (not FFlagGameJoinCardOptionalActions or p1.onViewExperienceDetails ~= nil) and FFlagMobileGameJoinCardEDPFromTitleModule then { affordance = StateLayerAffordance.None } else nil
 							}, {
 								ExperienceText = ReactModule.createElement(Text, {
 									tag = "shrink auto-xy text-align-x-center content-emphasis",
 									LayoutOrder = 1,
 									RichText = true,
 									fontStyle = UseTokensResult.Typography.TitleMedium,
-									Text = p1.experienceName,
+									Text = if Content then Content.title else p1.experienceName,
 									TextTruncate = Enum.TextTruncate.AtEnd
-								})
+								}),
+								Subtitle = if Content then ReactModule.createElement(Text, {
+									tag = "shrink auto-xy text-align-x-center content-default",
+									LayoutOrder = 2,
+									fontStyle = UseTokensResult.Typography.BodyMedium,
+									Text = Content.subtitle,
+									TextTruncate = Enum.TextTruncate.AtEnd
+								}) else nil
 							}) elseif MobileGameJoinCardHideUserAvatar then ReactModule.createElement(View, { tag = "col align-x-center align-y-center size-full" }, {
 								CombinedText = ReactModule.createElement(Text, {
 									tag = "shrink auto-xy text-wrap text-align-x-center content-default",
@@ -310,7 +322,7 @@ return function(p1)
 						Buttons = ReactModule.createElement(View, {
 							tag = "col gap-small size-full-0 auto-y",
 							LayoutOrder = if FFlagJoinabilityCTAContextCopy and v2 ~= nil then 4 else 3
-						}, if FFlagJoinabilityCTARefactor then t else {
+						}, if FFlagJoinabilityCTARefactor or Content ~= nil then t else {
 							PrimaryButton = if Flag1 then ReactModule.createElement(AgeCheckUpsellCTAModule, {
 								LayoutOrder = 1,
 								onUnlockPressed = p1.onAgeCheckPressed or function() end,

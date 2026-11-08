@@ -19,7 +19,6 @@ local FFlagBuildExperiencePrivateInvitesModule = require(BuildExperience.Flags.F
 local FFlagEnableBuildAdPromotionModule = require(BuildExperience.Flags.FFlagEnableBuildAdPromotion)
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
-local FFlagBuildExperienceReleaseFocusOnOverflowOpenModule = require(BuildExperience.Flags.FFlagBuildExperienceReleaseFocusOnOverflowOpen)
 local UseGetAdCampaignEligibilityModule = require(BuildExperience.Components.Ads.useGetAdCampaignEligibility)
 local AdCampaignEligibilityUtilsModule = require(BuildExperience.Components.Ads.adCampaignEligibilityUtils)
 local IconButton = FoundationModule.IconButton
@@ -43,7 +42,7 @@ local _ = function(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: UseScaledValueFunction (copy), BuildOverflowMenuWidth (copy), UseOpenWebViewFunction (copy), ReactModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), UseExperienceShareFlowModule (copy), UseSharePublishedExperienceFunction (copy), FFlagEnableBuildAdPromotionModule (copy), UseGetAdCampaignEligibilityModule (copy), AdCampaignEligibilityUtilsModule (copy), UseLocalizationFunction (copy), UseCreatorCreditMenuItemFunction (copy), BadgeVariant (copy), FFlagBuildExperienceReleaseFocusOnOverflowOpenModule (copy), UserInputService (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), DeveloperProducts (copy), LocalizationStringsModule (copy), ReleaseAnyFocusModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), LeaveExperienceModule (copy), VersionHistoryContainerModule (copy), Menu (copy), PopoverSide (copy), InputSize (copy), PopoverAlign (copy), IconButton (copy), ButtonVariant (copy), ExperienceShareOverlaysModule (copy), FriendsOnlyShareDialogModule (copy)
+	-- upvalues: UseScaledValueFunction (copy), BuildOverflowMenuWidth (copy), UseOpenWebViewFunction (copy), ReactModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), UseExperienceShareFlowModule (copy), UseSharePublishedExperienceFunction (copy), FFlagEnableBuildAdPromotionModule (copy), UseGetAdCampaignEligibilityModule (copy), AdCampaignEligibilityUtilsModule (copy), UseLocalizationFunction (copy), UseCreatorCreditMenuItemFunction (copy), BadgeVariant (copy), UserInputService (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), DeveloperProducts (copy), LocalizationStringsModule (copy), ReleaseAnyFocusModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), LeaveExperienceModule (copy), VersionHistoryContainerModule (copy), Menu (copy), PopoverSide (copy), InputSize (copy), PopoverAlign (copy), IconButton (copy), ButtonVariant (copy), ExperienceShareOverlaysModule (copy), FriendsOnlyShareDialogModule (copy)
 	local UseScaledValueResult = UseScaledValueFunction(BuildOverflowMenuWidth)
 	local UseOpenWebViewResult = UseOpenWebViewFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
@@ -252,14 +251,12 @@ return function(p1)
 			size = InputSize.Medium,
 			isDisabled = IsIsDisabled,
 			onActivated = ReactModule.useCallback(function()
-				-- upvalues: IsIsDisabled (copy), FFlagBuildExperienceReleaseFocusOnOverflowOpenModule (upval), UserInputService (upval), UseStateResult2 (copy), p1 (copy)
+				-- upvalues: IsIsDisabled (copy), UserInputService (upval), UseStateResult2 (copy), p1 (copy)
 				if IsIsDisabled then return end
-				if FFlagBuildExperienceReleaseFocusOnOverflowOpenModule then
-					local FocusedTextBox = UserInputService:GetFocusedTextBox()
-					
-					if FocusedTextBox then
-						FocusedTextBox:ReleaseFocus()
-					end
+				local FocusedTextBox = UserInputService:GetFocusedTextBox()
+				
+				if FocusedTextBox then
+					FocusedTextBox:ReleaseFocus()
 				end
 				UseStateResult2(function(p2): boolean
 					return not p2

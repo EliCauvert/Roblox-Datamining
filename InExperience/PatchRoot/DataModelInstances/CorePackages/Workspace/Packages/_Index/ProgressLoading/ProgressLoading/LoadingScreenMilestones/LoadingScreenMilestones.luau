@@ -25,9 +25,10 @@ return {
 		local NormalReady = nil
 		local t = {}
 		local Text = (if p1.host == ConstantsModule.Host.DeferredJoin then "DeferredJoin_" else "") .. (if p1.reducedMotion then "ReducedMotion_" else "") .. (if p1.holdEnabled then "HoldOn" else "HoldOff")
+		local Page = p1.page
 		local MilestoneSessionMetadata = {
 			category = ConstantsModule.CATEGORY,
-			page = ConstantsModule.PAGE,
+			page = Page,
 			subcategory = Text
 		}
 		
@@ -170,8 +171,8 @@ return {
 					v1 = nil
 					local v4 = v2
 					v2 = nil
-					local NoV46 = not v4 or LoadingMilestoneTrackerModule.discardMilestoneTracker(v4)
-					LoadingMilestoneTelemetryModule.countMilestonesOutcome(MilestoneSessionMetadata, if NoV46 then InitializationFailed else Outcome.InstrumentationError)
+					local NoV47 = not v4 or LoadingMilestoneTrackerModule.discardMilestoneTracker(v4)
+					LoadingMilestoneTelemetryModule.countMilestonesOutcome(MilestoneSessionMetadata, if NoV47 then InitializationFailed else Outcome.InstrumentationError)
 					
 					return
 				end
@@ -181,8 +182,8 @@ return {
 		local StartMilestoneTrackerResult = false
 		
 		if TryMilestoneOperationModule(function()
-			-- upvalues: MilestoneSessionMetadata (ref), LoadingMilestoneTelemetryModule (upval), Text (copy), Parent (upval), v2 (ref), StartMilestoneTrackerResult (ref), LoadingMilestoneTrackerModule (upval)
-			MilestoneSessionMetadata = LoadingMilestoneTelemetryModule.getMilestoneSessionMetadata(Text)
+			-- upvalues: MilestoneSessionMetadata (ref), LoadingMilestoneTelemetryModule (upval), Text (copy), Page (copy), Parent (upval), v2 (ref), StartMilestoneTrackerResult (ref), LoadingMilestoneTrackerModule (upval)
+			MilestoneSessionMetadata = LoadingMilestoneTelemetryModule.getMilestoneSessionMetadata(Text, Page)
 			
 			if LoadingMilestoneTelemetryModule.countMilestonesStarted(MilestoneSessionMetadata) then
 				local TimeToInteractiveTracker = require(Parent.TimeToInteractiveTracker).TimeToInteractiveTracker
@@ -199,5 +200,8 @@ return {
 			return nil
 		end
 	end,
-	AbortReason = AbortReason
+	AbortReason = AbortReason,
+	Page = ConstantsModule.Page,
+	Milestone = Milestone,
+	DismissSource = ConstantsModule.DismissSource
 }

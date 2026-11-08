@@ -1,7 +1,6 @@
 ﻿local Parent = script:FindFirstAncestor("AppChat").Parent
 local CryoModule = require(Parent.Cryo)
 local FoundationModule = require(Parent.Foundation)
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
 local UseCountdownBindingFunction = require(Parent.InterventionShared).Hooks.useCountdownBinding
@@ -16,7 +15,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: CryoModule (copy), config (copy), FoundationModule (copy), UseCountdownBindingFunction (copy), ReactModule (copy), Interactable (copy), FoundationFontFaceMigration (copy), ImageSetLabel (copy), Images (copy)
+	-- upvalues: CryoModule (copy), config (copy), FoundationModule (copy), UseCountdownBindingFunction (copy), ReactModule (copy), Interactable (copy), ImageSetLabel (copy), Images (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseCountdownBindingResult = UseCountdownBindingFunction(UnionResult.endTimestamp, UnionResult.defaultCountdownString)
@@ -42,8 +41,7 @@ return function(p1)
 			LayoutOrder = 1,
 			Size = UDim2.new(0, 0, 1, 0),
 			Text = UnionResult.bodyText,
-			Font = if FoundationFontFaceMigration then nil else UnionResult.font,
-			fontStyle = if FoundationFontFaceMigration then CryoModule.Dictionary.join(UseTokensResult.Typography.BodyLarge, { FontSize = UnionResult.contentSize }) else nil,
+			fontStyle = CryoModule.Dictionary.join(UseTokensResult.Typography.BodyLarge, { FontSize = UnionResult.contentSize }),
 			TextSize = UnionResult.contentSize,
 			textStyle = UseTokensResult.Color.System.Alert,
 			TextXAlignment = Enum.TextXAlignment.Left,
@@ -57,8 +55,7 @@ return function(p1)
 			AutomaticSize = Enum.AutomaticSize.X,
 			Size = UDim2.new(0, 0, 1, 0),
 			Text = UseCountdownBindingResult,
-			Font = if FoundationFontFaceMigration then nil else UnionResult.font,
-			fontStyle = if FoundationFontFaceMigration then CryoModule.Dictionary.join(UseTokensResult.Typography.BodyLarge, { FontSize = UnionResult.contentSize }) else nil,
+			fontStyle = CryoModule.Dictionary.join(UseTokensResult.Typography.BodyLarge, { FontSize = UnionResult.contentSize }),
 			TextSize = UnionResult.contentSize,
 			textStyle = UseTokensResult.Color.Content.Emphasis,
 			TextXAlignment = Enum.TextXAlignment.Center,

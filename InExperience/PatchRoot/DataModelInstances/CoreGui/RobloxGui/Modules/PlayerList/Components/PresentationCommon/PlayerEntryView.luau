@@ -21,7 +21,6 @@ local ControlState = FoundationModule.Enums.ControlState
 local View = FoundationModule.View
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local EntryFrameView = PlayerListModule.Presentation.EntryFrameView
 local StatEntryContainerModule = require(Parent1.Parent.Components.Container.StatEntryContainer)
 local CellExtenderModule = require(Parent1.Presentation.CellExtender)
@@ -181,7 +180,7 @@ local MemoResult1 = ReactModule.memo(function(p1)
 end)
 
 return ReactModule.memo(function(p2)
-	-- upvalues: FFlagPlayerListFixLeaderstatsStacking (copy), SignalsReactModule (copy), SignalsModule (copy), ReactModule (copy), FFlagPlayerListUseFocusNavHook (copy), UseFocusGuiObjectFunction (copy), EnabledFunction (copy), UseLayoutValuesFunction (copy), UseStyleFunction (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), Players (copy), Constants (copy), GetFFlagGateLeaderboardPlayerDropdownViaGUACFunction (copy), InExperienceCapabilities (copy), ControlState (copy), config (copy), NormalizeFontFaceFunction (copy), FFlagEnableMobilePlayerListOnConsole (copy), FFlagRemoveNewPlayerListOverlay (copy), FFlagAddNewPlayerListFocusNav (copy), GuiService (copy), FFlagAddNewPlayerListMobileFocusNav (copy), View (copy), MemoResult1 (ref), EntryFrameView (copy), CryoModule (copy)
+	-- upvalues: FFlagPlayerListFixLeaderstatsStacking (copy), SignalsReactModule (copy), SignalsModule (copy), ReactModule (copy), FFlagPlayerListUseFocusNavHook (copy), UseFocusGuiObjectFunction (copy), EnabledFunction (copy), UseLayoutValuesFunction (copy), UseStyleFunction (copy), UseTokensFunction (copy), Players (copy), Constants (copy), GetFFlagGateLeaderboardPlayerDropdownViaGUACFunction (copy), InExperienceCapabilities (copy), ControlState (copy), config (copy), NormalizeFontFaceFunction (copy), FFlagEnableMobilePlayerListOnConsole (copy), FFlagRemoveNewPlayerListOverlay (copy), FFlagAddNewPlayerListFocusNav (copy), GuiService (copy), FFlagAddNewPlayerListMobileFocusNav (copy), View (copy), MemoResult1 (ref), EntryFrameView (copy), CryoModule (copy)
 	local UseSignalStateResult = if FFlagPlayerListFixLeaderstatsStacking then nil else SignalsReactModule.useSignalState(p2.playerData.stats.getCount)
 	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(SignalsModule.createComputed(function(p3): number
 		-- upvalues: p2 (copy)
@@ -203,7 +202,7 @@ return ReactModule.memo(function(p2)
 	local EnabledResult = EnabledFunction()
 	local UseLayoutValuesResult = UseLayoutValuesFunction()
 	local UseStyleResult = UseStyleFunction()
-	local UseTokensResult = if FoundationFontFaceMigration then UseTokensFunction() else nil
+	local UseTokensResult = UseTokensFunction()
 	local Size = if p2.size then p2.size else UDim2.new(1, UseLayoutValuesResult.EntryXOffset, 0, UseLayoutValuesResult.PlayerEntrySizeY)
 	local IsSmallTouchDevice = p2.isSmallTouchDevice
 	local IsTenFoot = UseLayoutValuesResult.IsTenFoot
@@ -308,35 +307,35 @@ return ReactModule.memo(function(p2)
 		UseStyleResult, IsTenFoot
 	})
 	local UseMemoResult5 = ReactModule.useMemo(function()
-		-- upvalues: IsSmallTouchDevice (copy), IsPlayerMatch (copy), UseStyleResult (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), UseTokensResult (copy), FFlagEnableMobilePlayerListOnConsole (upval), UseLayoutValuesResult (copy), IsTenFoot (copy), p2 (copy)
+		-- upvalues: IsSmallTouchDevice (copy), IsPlayerMatch (copy), UseStyleResult (copy), NormalizeFontFaceFunction (upval), UseTokensResult (copy), FFlagEnableMobilePlayerListOnConsole (upval), UseLayoutValuesResult (copy), IsTenFoot (copy), p2 (copy)
 		return if IsSmallTouchDevice then if IsPlayerMatch then {
 			Font = UseStyleResult.Font.CaptionHeader.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.CaptionMedium.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.CaptionMedium.Font),
 			Size = if FFlagEnableMobilePlayerListOnConsole then UseLayoutValuesResult.PlayerNameTextSize else UseStyleResult.Font.CaptionHeader.RelativeSize * UseStyleResult.Font.BaseSize,
 			MinSize = if FFlagEnableMobilePlayerListOnConsole then UseLayoutValuesResult.PlayerNameTextSize else UseStyleResult.Font.Footer.RelativeMinSize * UseStyleResult.Font.BaseSize
 		} else {
 			Font = UseStyleResult.Font.CaptionBody.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.BodySmall.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.BodySmall.Font),
 			Size = if FFlagEnableMobilePlayerListOnConsole then UseLayoutValuesResult.PlayerNameTextSize else UseStyleResult.Font.CaptionBody.RelativeSize * UseStyleResult.Font.BaseSize,
 			MinSize = if FFlagEnableMobilePlayerListOnConsole then UseLayoutValuesResult.PlayerNameTextSize else UseStyleResult.Font.Footer.RelativeMinSize * UseStyleResult.Font.BaseSize
 		} elseif IsTenFoot then if p2.titlePlayerEntry then {
 			Font = UseLayoutValuesResult.TitlePlayerEntryFont,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseLayoutValuesResult.TitlePlayerEntryFont) else nil,
+			FontFace = NormalizeFontFaceFunction(UseLayoutValuesResult.TitlePlayerEntryFont),
 			Size = UseLayoutValuesResult.PlayerNameTextSize,
 			MinSize = UseLayoutValuesResult.PlayerNameTextSize
 		} else {
 			Font = UseLayoutValuesResult.PlayerEntryFont,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseLayoutValuesResult.PlayerEntryFont) else nil,
+			FontFace = NormalizeFontFaceFunction(UseLayoutValuesResult.PlayerEntryFont),
 			Size = UseLayoutValuesResult.PlayerNameTextSize,
 			MinSize = UseLayoutValuesResult.PlayerNameTextSize
 		} elseif IsPlayerMatch then {
 			Font = UseStyleResult.Font.CaptionHeader.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.CaptionMedium.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.CaptionMedium.Font),
 			Size = UseStyleResult.Font.CaptionHeader.RelativeSize * UseStyleResult.Font.BaseSize,
 			MinSize = UseStyleResult.Font.Footer.RelativeMinSize * UseStyleResult.Font.BaseSize
 		} else {
 			Font = UseStyleResult.Font.CaptionBody.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.BodySmall.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.BodySmall.Font),
 			Size = UseStyleResult.Font.CaptionBody.RelativeSize * UseStyleResult.Font.BaseSize,
 			MinSize = UseStyleResult.Font.Footer.RelativeMinSize * UseStyleResult.Font.BaseSize
 		}

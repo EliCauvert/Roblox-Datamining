@@ -1,5 +1,6 @@
 ﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
 local Parent = SduiCoreSystem.Parent
+local FFlagSduiErrorPaths = require(Parent.SharedFlags).FFlagSduiErrorPaths
 local SignalsModule = require(Parent.Signals)
 local TutilsModule = require(Parent.tutils)
 local DataStatus = require(Parent.DataHydration).DataHydrationTypes.DataStatus
@@ -8,13 +9,14 @@ local PropResultCategory = require(SduiCoreSystem.ClientBinding.SduiClientBindin
 local _ = require(SduiCoreSystem.SduiBuilderTypes)
 local SduiPropUtilsModule = require(SduiCoreSystem.ClientBinding.PropBuilder.SduiPropUtils)
 local SduiErrorsModule = require(SduiCoreSystem.SduiErrors)
+local AddSduiErrorContextFieldsModule = require(SduiCoreSystem.addSduiErrorContextFields)
 local SduiLoggerModule = require(SduiCoreSystem.SduiLogger)
 local SduiParseHelpersModule = require(SduiCoreSystem.SduiParseHelpers)
 local _ = require(SduiCoreSystem.SduiComponentType)
 local FFlagSduiArrayMapEmptyWhileHydrationNotReady = require(Parent.SharedFlags).FFlagSduiArrayMapEmptyWhileHydrationNotReady
 
 local function buildRepeatedProp(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: SduiPropUtilsModule (copy), SduiClientBindingBuilderModule (copy), PropResultCategory (copy), SignalsModule (copy), FFlagSduiArrayMapEmptyWhileHydrationNotReady (copy), DataStatus (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), SduiParseHelpersModule (copy), TutilsModule (copy), buildRepeatedProp (copy)
+	-- upvalues: SduiPropUtilsModule (copy), SduiClientBindingBuilderModule (copy), PropResultCategory (copy), SignalsModule (copy), FFlagSduiArrayMapEmptyWhileHydrationNotReady (copy), DataStatus (copy), SduiParseHelpersModule (copy), FFlagSduiErrorPaths (copy), AddSduiErrorContextFieldsModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), TutilsModule (copy), buildRepeatedProp (copy)
 	local CurrentComponentType = p5.currentComponentType
 	local CurrentParserName = p5.currentParserName
 	
@@ -50,7 +52,7 @@ local function buildRepeatedProp(p1, p2, p3, p4, p5, p6, p7)
 				error("buildRepeatedProp array_map: missing field_map")
 			end
 			return SignalsModule.createComputed(function(p8)
-				-- upvalues: SduiPropUtilsModule (upval), Type (copy), Value (copy), p3 (copy), p4 (copy), p5 (copy), FFlagSduiArrayMapEmptyWhileHydrationNotReady (upval), DataStatus (upval), ItemHydrationSpecs (copy), FieldMap (copy), p6 (copy), SduiClientBindingBuilderModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval), SduiParseHelpersModule (upval), CurrentComponentType (copy), CurrentParserName (copy)
+				-- upvalues: SduiPropUtilsModule (upval), Type (copy), Value (copy), p3 (copy), p4 (copy), p5 (copy), FFlagSduiArrayMapEmptyWhileHydrationNotReady (upval), DataStatus (upval), ItemHydrationSpecs (copy), FieldMap (copy), p6 (copy), SduiClientBindingBuilderModule (upval), SduiParseHelpersModule (upval), CurrentComponentType (copy), CurrentParserName (copy), FFlagSduiErrorPaths (upval), AddSduiErrorContextFieldsModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval)
 				local Success, Result = pcall(function()
 					-- upvalues: SduiPropUtilsModule (upval), Type (upval), Value (upval), p8 (copy), p3 (upval), p4 (upval), p5 (upval), FFlagSduiArrayMapEmptyWhileHydrationNotReady (upval), DataStatus (upval), ItemHydrationSpecs (upval), FieldMap (upval), p6 (upval), SduiClientBindingBuilderModule (upval)
 					local ResolveSourceArrayResult, ResolveSourceArrayResult2 = SduiPropUtilsModule.resolveSourceArray(Type, Value, p8, p3, p4, p5)
@@ -66,16 +68,20 @@ local function buildRepeatedProp(p1, p2, p3, p4, p5, p6, p7)
 				
 				if Success then
 					return { data = Result }
-				else
-					SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, {
-						message = `Failed to build array_map: {SduiParseHelpersModule.stringifyValue(Result)}`,
-						name = p5.debugName,
-						componentType = CurrentComponentType,
-						parserName = CurrentParserName
-					}, p5.appPage)
-					
-					return { data = {} }
 				end
+				local config = {
+					message = `Failed to build array_map: {SduiParseHelpersModule.stringifyValue(Result)}`,
+					name = p5.debugName,
+					componentType = CurrentComponentType,
+					parserName = CurrentParserName
+				}
+				
+				if FFlagSduiErrorPaths then
+					AddSduiErrorContextFieldsModule(config, p5.errorContext)
+				end
+				SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, config, p5.appPage)
+				
+				return { data = {} }
 			end, TutilsModule.shallowEqual), PropResultCategory.PropSignal
 		elseif p1 == "conditional" then
 			return SduiPropUtilsModule.generateConditionalPropValue(p2, p3, p5, p6, p4, buildRepeatedProp, p7), PropResultCategory.PropSignal

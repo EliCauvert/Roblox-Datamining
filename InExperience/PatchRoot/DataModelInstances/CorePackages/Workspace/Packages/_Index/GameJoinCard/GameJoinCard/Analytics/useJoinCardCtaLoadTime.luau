@@ -4,9 +4,10 @@ local ReactModule = require(Parent.React)
 local GameJoinCardTTIModule = require(GameJoinCard.Telemetry.GameJoinCardTTI)
 local UseGameJoinCardAnalyticsModule = require(script.Parent.useGameJoinCardAnalytics)
 local FFlagGameJoinCardOptionalActions = require(Parent.SharedFlags).FFlagGameJoinCardOptionalActions
+local FFlagGameJoinCardContent = require(Parent.SharedFlags).FFlagGameJoinCardContent
 
 return function(p1)
-	-- upvalues: ReactModule (copy), FFlagGameJoinCardOptionalActions (copy), GameJoinCardTTIModule (copy), UseGameJoinCardAnalyticsModule (copy)
+	-- upvalues: ReactModule (copy), FFlagGameJoinCardOptionalActions (copy), FFlagGameJoinCardContent (copy), GameJoinCardTTIModule (copy), UseGameJoinCardAnalyticsModule (copy)
 	local UseRefResult = ReactModule.useRef(tick())
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseRefResult2 = ReactModule.useRef(false)
@@ -16,8 +17,8 @@ return function(p1)
 	local UseRefResult5 = ReactModule.useRef(p1.wasCached)
 	UseRefResult5.current = p1.wasCached
 	ReactModule.useEffect(function()
-		-- upvalues: FFlagGameJoinCardOptionalActions (upval), p1 (copy), UseRefResult2 (copy), UseRefResult1 (copy), GameJoinCardTTIModule (upval), UseRefResult3 (copy), UseRefResult (copy), UseGameJoinCardAnalyticsModule (upval), UseRefResult4 (copy), UseRefResult5 (copy)
-		if FFlagGameJoinCardOptionalActions and p1.isDisabled then return end
+		-- upvalues: FFlagGameJoinCardOptionalActions (upval), FFlagGameJoinCardContent (upval), p1 (copy), UseRefResult2 (copy), UseRefResult1 (copy), GameJoinCardTTIModule (upval), UseRefResult3 (copy), UseRefResult (copy), UseGameJoinCardAnalyticsModule (upval), UseRefResult4 (copy), UseRefResult5 (copy)
+		if (FFlagGameJoinCardOptionalActions or FFlagGameJoinCardContent) and p1.isDisabled then return end
 		if not UseRefResult2.current then
 			UseRefResult2.current = true
 			UseRefResult1.current = GameJoinCardTTIModule.consumeMobileCardClickStartMs()
@@ -34,6 +35,6 @@ return function(p1)
 		end
 	end, {
 		p1.isLoading,
-		if FFlagGameJoinCardOptionalActions then p1.isDisabled else nil
+		if FFlagGameJoinCardOptionalActions or FFlagGameJoinCardContent then p1.isDisabled else nil
 	})
 end

@@ -3,6 +3,7 @@ local Parent = CurrencyTransfers.Parent
 local ReactModule = require(Parent.React)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local TransferLocalizationKeysModule = require(CurrencyTransfers.Localization.TransferLocalizationKeys)
+local FFlagCurrencyTransferNoFreeTransfersRemainingUpsellModule = require(CurrencyTransfers.Flags.FFlagCurrencyTransferNoFreeTransfersRemainingUpsell)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseTransferStoreModule = require(CurrencyTransfers.Hooks.useTransferStore)
 local InitiateTransferModule = require(CurrencyTransfers.Actions.Send.initiateTransfer)
@@ -26,16 +27,18 @@ local SurfaceName = RobloxSubscriptionPurchaseAppModule.SurfaceName
 local SurfaceContext = RobloxSubscriptionPurchaseAppModule.SurfaceContext
 
 return function(p1)
-	-- upvalues: UseTransferStoreModule (copy), UseLocalizationFunction (copy), TransferLocalizationKeysModule (copy), TransferOriginationModule (copy), SurfaceContext (copy), SharedFlagsModule (copy), RobloxSubscriptionPurchaseAppModule (copy), SurfaceName (copy), ReactModule (copy), LogCurrencyTransferCounterModule (copy), CurrencyTransferTelemetryModule (copy), LogRobuxTransferFlowEventModule (copy), RobuxTransferFlowEventNameModule (copy), PromptStateModule (copy), GetCounterUserIdModule (copy), InExpAmpWizardController (copy), AccessResponseEnum (copy), TransferRetryOriginModule (copy), AcceptTransferModule (copy), InitiateTransferModule (copy), ProcessTransferModule (copy), TransferDirectionModule (copy), AmpWizardTransferConstantsModule (copy)
+	-- upvalues: UseTransferStoreModule (copy), UseLocalizationFunction (copy), TransferLocalizationKeysModule (copy), TransferOriginationModule (copy), SurfaceContext (copy), FFlagCurrencyTransferNoFreeTransfersRemainingUpsellModule (copy), SharedFlagsModule (copy), RobloxSubscriptionPurchaseAppModule (copy), SurfaceName (copy), ReactModule (copy), LogCurrencyTransferCounterModule (copy), CurrencyTransferTelemetryModule (copy), LogRobuxTransferFlowEventModule (copy), RobuxTransferFlowEventNameModule (copy), PromptStateModule (copy), GetCounterUserIdModule (copy), InExpAmpWizardController (copy), AccessResponseEnum (copy), TransferRetryOriginModule (copy), AcceptTransferModule (copy), InitiateTransferModule (copy), ProcessTransferModule (copy), TransferDirectionModule (copy), AmpWizardTransferConstantsModule (copy)
 	local UseTransferStoreModuleResult = UseTransferStoreModule()
+	local UseLocalizationResult = UseLocalizationFunction(TransferLocalizationKeysModule.Presets.SubscriptionUpsellContainer)
 	local Direction = p1.direction
 	local TriggerOnCloseFunction = UseTransferStoreModuleResult.triggerOnClose
 	local SelectedAmount = UseTransferStoreModuleResult.getSelectedAmount(false)
 	local TransferRetryOrigin = UseTransferStoreModuleResult.getTransferRetryOrigin(false)
+	local FreeTransfersExhausted = UseTransferStoreModuleResult.getFreeTransfersExhausted(false)
 	local TransferClientSessionId = UseTransferStoreModuleResult.getTransferClientSessionId(false)
 	local config = {
 		purchaseUIOptions = {
-			title = UseLocalizationFunction(TransferLocalizationKeysModule.Presets.SubscriptionUpsellContainer).UpsellSubscriptionTitle or ""
+			title = if FFlagCurrencyTransferNoFreeTransfersRemainingUpsellModule and FreeTransfersExhausted then UseLocalizationResult.FreeTransfersExhaustedTitle else UseLocalizationResult.UpsellSubscriptionTitle or ""
 		},
 		surfaceName = SurfaceName.RobuxTransferUpsell,
 		surfaceContext = if UseTransferStoreModuleResult.getTransferOrigination(false) == TransferOriginationModule.InExperience then SurfaceContext.InGame else SurfaceContext.InApp,

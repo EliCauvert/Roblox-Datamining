@@ -1,8 +1,6 @@
 ﻿local Parent = script:FindFirstAncestor("AppBlox").Parent
 local UIBloxModule = require(Parent.UIBlox)
-local FoundationModule = require(Parent.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
 local WithStyleFunction = UIBloxModule.Core.Style.withStyle
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local Images = UIBloxModule.App.ImageSet.Images
@@ -81,7 +79,7 @@ function DetailsPageHeader.renderThumbnail(p1, p2, ThumbnailShadowHeight: number
 end
 
 function DetailsPageHeader.renderDesktopMode(p1, p2)
-	-- upvalues: RoactModule (copy), LuaAppBottomAlignDetailsHeaderInfoFrame (copy), DetailsPageTitleContentModule (copy), ActionBar (copy), FFlagUIBloxEnableActionBarButtonOverride (copy), FFlagUIBloxAddTestIdToActionBar (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: RoactModule (copy), LuaAppBottomAlignDetailsHeaderInfoFrame (copy), DetailsPageTitleContentModule (copy), ActionBar (copy), FFlagUIBloxEnableActionBarButtonOverride (copy), FFlagUIBloxAddTestIdToActionBar (copy), NormalizeFontFaceFunction (copy)
 	local ThumbnailHeight = p1.props.thumbnailHeight
 	local ScaledThumbnailHeight = ThumbnailHeight * (p1.props.thumbnailAspectRatio.X / p1.props.thumbnailAspectRatio.Y)
 	local SideMargin = p1.props.sideMargin or 48
@@ -132,8 +130,7 @@ function DetailsPageHeader.renderDesktopMode(p1, p2)
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextWrapped = true,
 			BackgroundTransparency = 1,
-			Font = if FoundationFontFaceMigration then nil else p2.Tokens.Typography.BodyLarge.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font),
 			TextSize = p2.Tokens.FontSize.FontSize_350,
 			TextColor3 = p2.Tokens.Color.Content.Emphasis.Color3,
 			TextTransparency = p2.Tokens.Color.Content.Emphasis.Transparency,

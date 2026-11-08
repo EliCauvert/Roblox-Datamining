@@ -26,6 +26,7 @@ return {
 	Stores = {
 		createCategoryInventoryStore = require(script.Stores.createCategoryInventoryStore),
 		createSortAndFiltersStore = require(script.Stores.createSortAndFiltersStore),
+		createInventorySearchStore = require(script.Stores.createInventorySearchStore),
 		createAvatarEditorStores = require(script.Stores.createAvatarEditorStores),
 		createSlotBasedEditorStore = require(script.Stores.createSlotBasedEditorStore),
 		createStaleInventoryGrantStore = require(script.Stores.createStaleInventoryGrantStore),
@@ -44,6 +45,7 @@ return {
 		SlotType = require(script.Enums.SlotType)
 	},
 	Constants = require(script.Constants),
+	InventorySearchConstants = require(script.InventorySearchConstants),
 	Utils = {
 		buildStringsToLocalize = require(script.Utils.buildStringsToLocalize),
 		buildSlots = require(script.Utils.buildSlots),
@@ -51,7 +53,9 @@ return {
 		buildBodySlotViewportProps = require(script.Utils.buildBodySlotViewportProps),
 		getRemainingTimeFromExpiration = require(script.Utils.getRemainingTimeFromExpiration),
 		buildSlotCategoryTabItems = require(script.Utils.buildSlotCategoryTabItems),
-		buildSlotCategoryLocalizationKeys = require(script.Utils.buildSlotCategoryLocalizationKeys)
+		buildSlotCategoryLocalizationKeys = require(script.Utils.buildSlotCategoryLocalizationKeys),
+		toSearchableItemCategories = require(script.Utils.toSearchableItemCategories),
+		getInventorySearchKey = require(script.Utils.getInventorySearchKey)
 	},
 	["jest.config"] = script["jest.config"]
 }

@@ -3,6 +3,7 @@ local _ = require(script.Models.WidgetListInfo)
 local _ = require(script.Models.CatalogV2SearchItemDetails)
 local _ = require(script.Components.ResultsList.WidgetListInfoViewModel)
 local _ = require(script.Api.GetFaeStatus.normalizeFaeStatus)
+local AddSpecialFeaturesFilterModule = require(script.Api.GetCatalogV2SearchItemDetails.addSpecialFeaturesFilter)
 local _ = require(script.Stores)
 
 return {
@@ -14,7 +15,8 @@ return {
 		CatalogSearchAXPages = require(script.Api.GetCatalogV2SearchItemDetails.Types.CatalogSearchAXPages),
 		getCatalogCategories = require(script.Api.GetCatalogCategories.getCatalogCategories).getCatalogCategories,
 		getFaeStatus = require(script.Api.GetFaeStatus.getFaeStatus).getFaeStatus,
-		trackSponsoredItemClick = require(script.Api.TrackSponsoredItemClick.trackSponsoredItemClick)
+		trackSponsoredItemClick = require(script.Api.TrackSponsoredItemClick.trackSponsoredItemClick),
+		addSpecialFeaturesFilter = if require(script.Parent.AvatarExperienceFlags).FFlagAXCatalogSpecialFeaturesFilter then AddSpecialFeaturesFilterModule else nil
 	},
 	Components = {
 		CatalogSduiFeedEntryPoint = require(script.Sdui.CatalogSduiFeedEntryPoint),

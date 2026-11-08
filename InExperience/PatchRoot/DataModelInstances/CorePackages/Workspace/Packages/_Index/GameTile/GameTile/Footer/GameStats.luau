@@ -9,9 +9,7 @@ local RoactModule = require(Parent.Roact)
 local Colors = require(Parent.Style).Colors
 local CryoModule = require(Parent.Cryo)
 local UIBloxModule = require(Parent.UIBlox)
-local FoundationModule = require(Parent.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
 local WithStyleFunction = UIBloxModule.Style.withStyle
 local WithTextSizeOffsetFunction = UIBloxModule.Core.Style.withTextSizeOffset
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
@@ -44,14 +42,13 @@ local Callback = if FFlagLuaAppGenreRatingFooter then nil else function(p1: numb
 end
 
 function GameStats.renderSponsored(p1, p2)
-	-- upvalues: RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), SponsoredTooltipHover (copy), TooltipOrientation (copy), GetUserInputIsSelectionOnlyModule (copy), Interactable (copy), WithLocalizationFunction (copy)
+	-- upvalues: RoactModule (copy), NormalizeFontFaceFunction (copy), SponsoredTooltipHover (copy), TooltipOrientation (copy), GetUserInputIsSelectionOnlyModule (copy), Interactable (copy), WithLocalizationFunction (copy)
 	local Theme = p2.Theme
 	local _Font = p2.Font
-	local Body = if p1.props.useLargerFont then _Font.Body else _Font.CaptionHeader
-	local ScaledRelativeSize = Body.RelativeSize * _Font.BaseSize
+	local ScaledRelativeSize = (if p1.props.useLargerFont then _Font.Body else _Font.CaptionHeader).RelativeSize * _Font.BaseSize
 	
 	return WithLocalizationFunction({ sponsoredText = "Feature.GamePage.Label.Sponsored" })(function(p3)
-		-- upvalues: RoactModule (upval), ScaledRelativeSize (copy), Theme (copy), FoundationFontFaceMigration (upval), Body (copy), NormalizeFontFaceFunction (upval), p1 (copy), p2 (copy), SponsoredTooltipHover (upval), TooltipOrientation (upval), GetUserInputIsSelectionOnlyModule (upval), Interactable (upval)
+		-- upvalues: RoactModule (upval), ScaledRelativeSize (copy), Theme (copy), NormalizeFontFaceFunction (upval), p1 (copy), p2 (copy), SponsoredTooltipHover (upval), TooltipOrientation (upval), GetUserInputIsSelectionOnlyModule (upval), Interactable (upval)
 		return RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			Size = UDim2.new(1, 0, 0, (math.ceil(ScaledRelativeSize))),
@@ -85,8 +82,7 @@ function GameStats.renderSponsored(p1, p2)
 						TextSize = ScaledRelativeSize,
 						TextColor3 = Theme.TextEmphasis.Color,
 						TextTransparency = Theme.TextEmphasis.Transparency,
-						Font = if FoundationFontFaceMigration then nil else Body.Font,
-						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(if p1.props.useLargerFont then p2.Tokens.Typography.BodyLarge.Font else p2.Tokens.Typography.CaptionLarge.Font) else nil,
+						FontFace = NormalizeFontFaceFunction(if p1.props.useLargerFont then p2.Tokens.Typography.BodyLarge.Font else p2.Tokens.Typography.CaptionLarge.Font),
 						Text = p3.sponsoredText,
 						AutomaticSize = Enum.AutomaticSize.XY
 					}),
@@ -143,11 +139,10 @@ function GameStats.renderGameStats(p1, p2, Props, p3)
 end
 
 function GameStats:renderFullGameStats(p1, p2, Text, p3)
-	-- upvalues: RoactModule (copy), ImageSetLabel (copy), IconsStatusGamesRatingSmall (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), IconsStatusGamesPeoplePlayingSmall (copy)
+	-- upvalues: RoactModule (copy), ImageSetLabel (copy), IconsStatusGamesRatingSmall (copy), NormalizeFontFaceFunction (copy), IconsStatusGamesPeoplePlayingSmall (copy)
 	local PlayerCountText = if p2.stats.playerCount then p2.playerCountText else nil
 	local Theme = p1.Theme
 	local _Font = p1.Font
-	local CaptionSubHeaderFont = _Font.CaptionSubHeader.Font
 	local ScaledBaseSize = _Font.BaseSize * _Font.CaptionSubHeader.RelativeSize
 	local NewScaledBaseSize = ScaledBaseSize + p1.Tokens.Size.Size_150
 	local Smallest = math.min(math.ceil(ScaledBaseSize) + (p3 or 0), NewScaledBaseSize)
@@ -173,8 +168,7 @@ function GameStats:renderFullGameStats(p1, p2, Text, p3)
 			AnchorPoint = Vector2.new(0, 0.5),
 			Position = UDim2.fromScale(0.15, 0.5),
 			Text = Text,
-			Font = if FoundationFontFaceMigration then nil else CaptionSubHeaderFont,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.CaptionLarge.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(p1.Tokens.Typography.CaptionLarge.Font),
 			TextColor3 = Theme.TextDefault.Color,
 			TextTransparency = Theme.TextDefault.Transparency,
 			TextSize = ScaledBaseSize,
@@ -200,8 +194,7 @@ function GameStats:renderFullGameStats(p1, p2, Text, p3)
 			AnchorPoint = Vector2.new(0, 0.5),
 			Position = UDim2.fromScale(0.65, 0.5),
 			Text = PlayerCountText,
-			Font = if FoundationFontFaceMigration then nil else CaptionSubHeaderFont,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.CaptionLarge.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(p1.Tokens.Typography.CaptionLarge.Font),
 			TextColor3 = Theme.TextDefault.Color,
 			TextTransparency = Theme.TextDefault.Transparency,
 			TextSize = ScaledBaseSize,
@@ -215,9 +208,8 @@ function GameStats:renderFullGameStats(p1, p2, Text, p3)
 end
 
 function GameStats:renderConcurrentUsersPill(p1, Props)
-	-- upvalues: RoactModule (copy), Colors (copy), ImageSetLabel (copy), IconsStatusGamesPeoplePlayingSmall (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: RoactModule (copy), Colors (copy), ImageSetLabel (copy), IconsStatusGamesPeoplePlayingSmall (copy), NormalizeFontFaceFunction (copy)
 	local _Font = p1.Font
-	local FooterFont = _Font.Footer.Font
 	
 	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 0,
@@ -258,8 +250,7 @@ function GameStats:renderConcurrentUsersPill(p1, Props)
 			Size = UDim2.new(0, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.XY,
 			Text = Props.playerCountText,
-			Font = if FoundationFontFaceMigration then nil else FooterFont,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.CaptionSmall.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(p1.Tokens.Typography.CaptionSmall.Font),
 			TextColor3 = Colors.White,
 			TextSize = _Font.BaseSize * _Font.Footer.RelativeSize,
 			TextXAlignment = Enum.TextXAlignment.Left,
@@ -275,7 +266,7 @@ function GameStats.render(p1)
 	if Stats == nil then
 		return nil
 	else
-		local function v42(p2, p3)
+		local function v37(p2, p3)
 			-- upvalues: Stats (copy), p1 (copy)
 			local IsShowSponsoredLabel = Stats.isSponsored and Stats.isShowSponsoredLabel
 			
@@ -283,10 +274,10 @@ function GameStats.render(p1)
 		end
 		
 		return WithTextSizeOffsetFunction(function(p2)
-			-- upvalues: WithStyleFunction (upval), v42 (copy)
+			-- upvalues: WithStyleFunction (upval), v37 (copy)
 			return WithStyleFunction(function(p3)
-				-- upvalues: v42 (upval), p2 (copy)
-				return v42(p3, p2)
+				-- upvalues: v37 (upval), p2 (copy)
+				return v37(p3, p2)
 			end)
 		end)
 	end

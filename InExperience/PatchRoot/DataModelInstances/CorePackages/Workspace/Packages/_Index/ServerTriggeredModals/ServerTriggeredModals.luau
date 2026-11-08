@@ -8,6 +8,7 @@ local FFlagEnableHomepagePromptsForModalsAndBanners = SharedFlagsModule.FFlagEna
 local FFlagPromptsHandlerEnabled = SharedFlagsModule.FFlagPromptsHandlerEnabled
 local FFlagEdpGameLeavePromptsHandlerEnabled = SharedFlagsModule.FFlagEdpGameLeavePromptsHandlerEnabled
 local FFlagEdpOpenPromptsHandlerEnabled = SharedFlagsModule.FFlagEdpOpenPromptsHandlerEnabled
+local FFlagNotificationStreamPromptsHandlerEnabled = SharedFlagsModule.FFlagNotificationStreamPromptsHandlerEnabled
 
 return {
 	["jest.config"] = script["jest.config"],
@@ -24,5 +25,6 @@ return {
 	reportPromptImpression = if FFlagEnableProfileCompletion then require(script.reportPromptImpression) else nil,
 	PromptsHandler = if FFlagPromptsHandlerEnabled then PromptsHandlerModule.PromptsHandler else nil,
 	EdpGameLeavePromptsHandler = if FFlagEdpGameLeavePromptsHandlerEnabled then require(script.SduiV2.EdpGameLeavePromptsHandler) else nil,
-	EdpOpenPromptsHandler = if FFlagEdpOpenPromptsHandlerEnabled then require(script.SduiV2.EdpOpenPromptsHandler) else nil
+	EdpOpenPromptsHandler = if FFlagEdpOpenPromptsHandlerEnabled then require(script.SduiV2.EdpOpenPromptsHandler) else nil,
+	StreamPromptsHandler = if FFlagNotificationStreamPromptsHandlerEnabled then require(script.SduiV2.StreamPromptsHandler) else nil
 }

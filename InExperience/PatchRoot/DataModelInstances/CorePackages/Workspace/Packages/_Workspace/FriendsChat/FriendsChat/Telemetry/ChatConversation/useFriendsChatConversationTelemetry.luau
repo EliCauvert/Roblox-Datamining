@@ -1,12 +1,14 @@
-﻿local Parent = script:FindFirstAncestor("FriendsChat").Parent
+﻿local FriendsChat = script:FindFirstAncestor("FriendsChat")
+local Parent = FriendsChat.Parent
 local ReactModule = require(Parent.React)
 local ChatConversationTelemetryEventsModule = require(Parent.AppChat.ChatConversationTelemetryEvents)
 local ChatConversationTelemetryLayerModule = require(Parent.AppChat.ChatConversationTelemetryLayer)
 local ConversationExitTypeModule = require(Parent.AppChat.ConversationExitType)
 local UseTelemetryModule = require(Parent.AppChat.useTelemetry)
+local FFlagFriendsChatScreenExitLoadedMessageCountModule = require(FriendsChat.Flags.FFlagFriendsChatScreenExitLoadedMessageCount)
 
 return function(p1)
-	-- upvalues: UseTelemetryModule (copy), ChatConversationTelemetryLayerModule (copy), ReactModule (copy), ChatConversationTelemetryEventsModule (copy), ConversationExitTypeModule (copy)
+	-- upvalues: UseTelemetryModule (copy), ChatConversationTelemetryLayerModule (copy), ReactModule (copy), ChatConversationTelemetryEventsModule (copy), ConversationExitTypeModule (copy), FFlagFriendsChatScreenExitLoadedMessageCountModule (copy)
 	local Emit = UseTelemetryModule(ChatConversationTelemetryLayerModule.Context).emit
 	local UseRefResult = ReactModule.useRef(Emit)
 	UseRefResult.current = Emit
@@ -17,11 +19,12 @@ return function(p1)
 		UseRefResult.current(ChatConversationTelemetryEventsModule.ScreenRendered, { loadedMessageCount = UseRefResult1.current() })
 	end, { p1.conversationId })
 	ReactModule.useEffect(function()
-		-- upvalues: UseRefResult (copy), ChatConversationTelemetryEventsModule (upval), ConversationExitTypeModule (upval)
+		-- upvalues: UseRefResult (copy), ChatConversationTelemetryEventsModule (upval), ConversationExitTypeModule (upval), FFlagFriendsChatScreenExitLoadedMessageCountModule (upval), UseRefResult1 (copy)
 		return function()
-			-- upvalues: UseRefResult (upval), ChatConversationTelemetryEventsModule (upval), ConversationExitTypeModule (upval)
+			-- upvalues: UseRefResult (upval), ChatConversationTelemetryEventsModule (upval), ConversationExitTypeModule (upval), FFlagFriendsChatScreenExitLoadedMessageCountModule (upval), UseRefResult1 (upval)
 			UseRefResult.current(ChatConversationTelemetryEventsModule.ScreenExit, {
-				conversationExitType = ConversationExitTypeModule.Default
+				conversationExitType = ConversationExitTypeModule.Default,
+				loadedMessageCount = if FFlagFriendsChatScreenExitLoadedMessageCountModule then UseRefResult1.current() else nil
 			})
 		end
 	end, {})

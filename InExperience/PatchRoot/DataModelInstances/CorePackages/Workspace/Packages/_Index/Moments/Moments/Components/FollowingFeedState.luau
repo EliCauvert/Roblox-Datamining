@@ -51,6 +51,7 @@ return function(Frame)
 	local UseLocalizationResultEntry2 = UseLocalizationResult[EmptyActionRecommended1]
 	
 	return ReactModule.createElement(FeedMessageViewModule, {
+		tilted = true,
 		LayoutOrder = Frame.LayoutOrder,
 		iconName = if IsEmpty then nil else "icons/brands/moments_large",
 		pictogram = if IsEmpty then "pictograms/magnifyglassperson" else nil,

@@ -2,11 +2,12 @@
 local ConstantsModule = require(script.Parent.constants)
 local HistoryPageUtilsModule = require(script.Parent.historyPageUtils)
 local _ = require(script.Parent.sessionDeps)
+local FFlagBuildExperienceHistoryPollTelemetry = require(script:FindFirstAncestor("DataHydration").Parent.SharedFlags).FFlagBuildExperienceHistoryPollTelemetry
 
 return {
 	createHistoryPolling = function(p1, Callback)
-		-- upvalues: HistoryPageUtilsModule (copy), ConstantsModule (copy)
-		local function pollSessionHistory(CasSessionId, AfterSequenceId, Callback2: (any) -> (), Callback1): boolean
+		-- upvalues: HistoryPageUtilsModule (copy), ConstantsModule (copy), FFlagBuildExperienceHistoryPollTelemetry (copy)
+		local function pollSessionHistory(CasSessionId, AfterSequenceId, Callback2: (any, any) -> (), Callback1, PollTrigger, PriorSequenceId): boolean
 			-- upvalues: Callback (copy), p1 (copy), HistoryPageUtilsModule (upval)
 			if Callback1() then
 				return false
@@ -39,25 +40,30 @@ return {
 			local IngestSessionHistoryResult = p1.deps.ingestSessionHistory(CasSessionId, SessionLoadHistory, AfterSequenceId)
 			
 			if Callback2 ~= nil then
+				local Config = if PollTrigger == nil then nil else {
+					pollTrigger = PollTrigger,
+					appliedFromThisPoll = #IngestSessionHistoryResult,
+					priorSequenceId = PriorSequenceId
+				}
 				for _, value in IngestSessionHistoryResult do
-					Callback2(value)
+					Callback2(value, Config)
 				end
 			end
 			return not Callback1() and #IngestSessionHistoryResult > 0
 		end
 		
 		local function startPollingTurnFromHistory(CasSessionId, ActiveTurnHandle, p2)
-			-- upvalues: HistoryPageUtilsModule (upval), ConstantsModule (upval), p1 (copy), pollSessionHistory (copy)
-			local P5 = p2 or {}
-			local ResolveNonNegativeNumberResult = HistoryPageUtilsModule.resolveNonNegativeNumber(P5.rtnIdleFallbackSeconds, ConstantsModule.getRtnIdleFallbackSeconds())
-			local ResolveNonNegativeNumberResult1 = HistoryPageUtilsModule.resolveNonNegativeNumber(P5.rtnSequenceGapFallbackSeconds, ConstantsModule.getRtnSequenceGapFallbackSeconds())
-			local ResolvePositiveNumberResult = HistoryPageUtilsModule.resolvePositiveNumber(P5.pollMinIntervalSeconds, ConstantsModule.getPollMinIntervalSeconds())
-			local ResolvePositiveNumberResult1 = HistoryPageUtilsModule.resolvePositiveNumber(P5.pollMaxIntervalSeconds, ConstantsModule.getPollMaxIntervalSeconds())
+			-- upvalues: HistoryPageUtilsModule (upval), ConstantsModule (upval), p1 (copy), FFlagBuildExperienceHistoryPollTelemetry (upval), pollSessionHistory (copy)
+			local P7 = p2 or {}
+			local ResolveNonNegativeNumberResult = HistoryPageUtilsModule.resolveNonNegativeNumber(P7.rtnIdleFallbackSeconds, ConstantsModule.getRtnIdleFallbackSeconds())
+			local ResolveNonNegativeNumberResult1 = HistoryPageUtilsModule.resolveNonNegativeNumber(P7.rtnSequenceGapFallbackSeconds, ConstantsModule.getRtnSequenceGapFallbackSeconds())
+			local ResolvePositiveNumberResult = HistoryPageUtilsModule.resolvePositiveNumber(P7.pollMinIntervalSeconds, ConstantsModule.getPollMinIntervalSeconds())
+			local ResolvePositiveNumberResult1 = HistoryPageUtilsModule.resolvePositiveNumber(P7.pollMaxIntervalSeconds, ConstantsModule.getPollMaxIntervalSeconds())
 			
 			if ResolvePositiveNumberResult1 < ResolvePositiveNumberResult then
 				ResolvePositiveNumberResult1 = ResolvePositiveNumberResult
 			end
-			local AfterSequenceId = P5.afterSequenceId
+			local AfterSequenceId = P7.afterSequenceId
 			
 			if AfterSequenceId ~= nil and ActiveTurnHandle.setHistoryBoundary ~= nil then
 				ActiveTurnHandle.setHistoryBoundary(AfterSequenceId)
@@ -207,20 +213,20 @@ return {
 			
 			local _ = nil
 			
-			local function v33(Delay)
-				-- upvalues: Flag4 (ref), Count (ref), Flag (ref), ActiveTurnHandle (copy), p1 (upval), CasSessionId (copy), ResolveNonNegativeNumberResult (copy), ClockTime (ref), v33 (ref), Flag2 (ref), Flag1 (ref), Smallest (ref), ResolvePositiveNumberResult (copy), Count2 (ref), Flag3 (ref), Callback (ref)
+			local function v35(Delay)
+				-- upvalues: Flag4 (ref), Count (ref), Flag (ref), ActiveTurnHandle (copy), p1 (upval), CasSessionId (copy), ResolveNonNegativeNumberResult (copy), ClockTime (ref), v35 (ref), Flag2 (ref), Flag1 (ref), Smallest (ref), ResolvePositiveNumberResult (copy), Count2 (ref), Flag3 (ref), Callback (ref)
 				if not Flag4 then
 					Flag4 = true
 					local Count1 = Count
 					task.delay(Delay, function()
-						-- upvalues: Flag4 (upval), Count1 (copy), Count (upval), Flag (upval), ActiveTurnHandle (upval), p1 (upval), CasSessionId (upval), ResolveNonNegativeNumberResult (upval), ClockTime (upval), v33 (upval), Flag2 (upval), Flag1 (upval), Smallest (upval), ResolvePositiveNumberResult (upval), Count2 (upval), Flag3 (upval), Callback (upval)
+						-- upvalues: Flag4 (upval), Count1 (copy), Count (upval), Flag (upval), ActiveTurnHandle (upval), p1 (upval), CasSessionId (upval), ResolveNonNegativeNumberResult (upval), ClockTime (upval), v35 (upval), Flag2 (upval), Flag1 (upval), Smallest (upval), ResolvePositiveNumberResult (upval), Count2 (upval), Flag3 (upval), Callback (upval)
 						Flag4 = false
 						
 						if Count1 ~= Count or (Flag or (ActiveTurnHandle.state(false).isDone or (p1.getCasSessionId() ~= CasSessionId or ActiveTurnHandle.isCurrentOwner ~= nil and not ActiveTurnHandle.isCurrentOwner()))) then return end
 						local ResolveNonNegativeNumberResultDelta = ResolveNonNegativeNumberResult - (os.clock() - ClockTime)
 						
 						if ResolveNonNegativeNumberResultDelta > 0 then
-							v33(ResolveNonNegativeNumberResultDelta)
+							v35(ResolveNonNegativeNumberResultDelta)
 							
 							return
 						end
@@ -257,7 +263,7 @@ return {
 			end
 			
 			local _ = function()
-				-- upvalues: ClockTime (ref), Flag2 (ref), Flag (ref), ActiveTurnHandle (copy), p1 (upval), CasSessionId (copy), Flag1 (ref), Smallest (ref), ResolvePositiveNumberResult (copy), Count2 (ref), Flag3 (ref), Callback (ref), v33 (ref), ResolveNonNegativeNumberResult (copy)
+				-- upvalues: ClockTime (ref), Flag2 (ref), Flag (ref), ActiveTurnHandle (copy), p1 (upval), CasSessionId (copy), Flag1 (ref), Smallest (ref), ResolvePositiveNumberResult (copy), Count2 (ref), Flag3 (ref), Callback (ref), v35 (ref), ResolveNonNegativeNumberResult (copy)
 				ClockTime = os.clock()
 				Flag2 = false
 				
@@ -278,17 +284,25 @@ return {
 					Smallest = ResolvePositiveNumberResult
 					Count2 += 1
 				end
-				v33(ResolveNonNegativeNumberResult)
+				v35(ResolveNonNegativeNumberResult)
 			end
 			
 			Callback = function(Delay)
-				-- upvalues: Count2 (ref), Flag1 (ref), Flag (ref), ActiveTurnHandle (copy), p1 (upval), CasSessionId (copy), pollSessionHistory (upval), AfterSequenceId (copy), P5 (copy), shouldStopPolling (copy), Smallest (ref), ResolvePositiveNumberResult (copy), refreshSequenceGapState (copy), Flag2 (ref), Flag3 (ref), Callback (ref), ResolvePositiveNumberResult1 (ref), ConstantsModule (upval)
+				-- upvalues: Count2 (ref), Flag1 (ref), Flag (ref), ActiveTurnHandle (copy), p1 (upval), CasSessionId (copy), FFlagBuildExperienceHistoryPollTelemetry (upval), Flag2 (ref), Flag3 (ref), pollSessionHistory (upval), AfterSequenceId (copy), P7 (copy), shouldStopPolling (copy), Smallest (ref), ResolvePositiveNumberResult (copy), refreshSequenceGapState (copy), Callback (ref), ResolvePositiveNumberResult1 (ref), ConstantsModule (upval)
 				Count2 += 1
 				local Count: number = Count2
 				task.delay(Delay, function()
-					-- upvalues: Count (copy), Count2 (upval), Flag1 (upval), Flag (upval), ActiveTurnHandle (upval), p1 (upval), CasSessionId (upval), pollSessionHistory (upval), AfterSequenceId (upval), P5 (upval), shouldStopPolling (upval), Smallest (upval), ResolvePositiveNumberResult (upval), refreshSequenceGapState (upval), Flag2 (upval), Flag3 (upval), Callback (upval), ResolvePositiveNumberResult1 (upval), ConstantsModule (upval)
+					-- upvalues: Count (copy), Count2 (upval), Flag1 (upval), Flag (upval), ActiveTurnHandle (upval), p1 (upval), CasSessionId (upval), FFlagBuildExperienceHistoryPollTelemetry (upval), Flag2 (upval), Flag3 (upval), pollSessionHistory (upval), AfterSequenceId (upval), P7 (upval), shouldStopPolling (upval), Smallest (upval), ResolvePositiveNumberResult (upval), refreshSequenceGapState (upval), Callback (upval), ResolvePositiveNumberResult1 (upval), ConstantsModule (upval)
 					if Count ~= Count2 or not Flag1 or (Flag or (ActiveTurnHandle.state(false).isDone or (p1.getCasSessionId() ~= CasSessionId or ActiveTurnHandle.isCurrentOwner ~= nil and not ActiveTurnHandle.isCurrentOwner()))) then return end
-					local PollSessionHistoryResult = pollSessionHistory(CasSessionId, AfterSequenceId, P5.onDroppedChatMessage, shouldStopPolling)
+					local Both: string? = nil
+					local PriorSequenceId = nil
+					
+					if FFlagBuildExperienceHistoryPollTelemetry then
+						Both = if Flag2 and Flag3 then "both" elseif Flag3 then "sequence_gap" else "rtn_idle"
+						local GetLatestProcessedSequenceNumberFunction = ActiveTurnHandle.getLatestProcessedSequenceNumber
+						PriorSequenceId = if GetLatestProcessedSequenceNumberFunction == nil then nil else GetLatestProcessedSequenceNumberFunction()
+					end
+					local PollSessionHistoryResult = pollSessionHistory(CasSessionId, AfterSequenceId, P7.onDroppedChatMessage, shouldStopPolling, Both, PriorSequenceId)
 					
 					if not Flag and (not ActiveTurnHandle.state(false).isDone and (p1.getCasSessionId() == CasSessionId and (ActiveTurnHandle.isCurrentOwner == nil or ActiveTurnHandle.isCurrentOwner()))) then
 						refreshSequenceGapState()
@@ -331,7 +345,7 @@ return {
 			end
 			
 			local OnNotificationResult = ActiveTurnHandle.onNotification(function()
-				-- upvalues: ClockTime (ref), Flag2 (ref), Flag (ref), ActiveTurnHandle (copy), p1 (upval), CasSessionId (copy), Flag1 (ref), Smallest (ref), ResolvePositiveNumberResult (copy), Count2 (ref), Flag3 (ref), Callback (ref), v33 (ref), ResolveNonNegativeNumberResult (copy), refreshSequenceGapState (copy)
+				-- upvalues: ClockTime (ref), Flag2 (ref), Flag (ref), ActiveTurnHandle (copy), p1 (upval), CasSessionId (copy), Flag1 (ref), Smallest (ref), ResolvePositiveNumberResult (copy), Count2 (ref), Flag3 (ref), Callback (ref), v35 (ref), ResolveNonNegativeNumberResult (copy), refreshSequenceGapState (copy)
 				ClockTime = os.clock()
 				Flag2 = false
 				
@@ -352,7 +366,7 @@ return {
 					Smallest = ResolvePositiveNumberResult
 					Count2 += 1
 				end
-				v33(ResolveNonNegativeNumberResult)
+				v35(ResolveNonNegativeNumberResult)
 				refreshSequenceGapState()
 			end)
 			refreshSequenceGapState()
@@ -376,7 +390,7 @@ return {
 				Smallest = ResolvePositiveNumberResult
 				Count2 += 1
 			end
-			v33(ResolveNonNegativeNumberResult)
+			v35(ResolveNonNegativeNumberResult)
 			
 			return function()
 				-- upvalues: Flag (ref), Count (ref), Count1 (ref), Count2 (ref), OnNotificationResult (copy)

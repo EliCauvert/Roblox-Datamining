@@ -28,6 +28,7 @@ local FFlagJoinabilityCTARefactor = SharedFlagsModule.FFlagJoinabilityCTARefacto
 local FFlagJoinabilityCTAContextCopy = SharedFlagsModule.FFlagJoinabilityCTAContextCopy
 local FFlagDesktopGameJoinCardGamepadSupport = SharedFlagsModule.FFlagDesktopGameJoinCardGamepadSupport
 local FFlagConsoleOpenGameJoinCard = SharedFlagsModule.FFlagConsoleOpenGameJoinCard
+local FFlagGameJoinCardContent = SharedFlagsModule.FFlagGameJoinCardContent
 local UseGameJoinCardGamepadNavigationFunction = nil
 local AssignPrimaryFocusRefFunction = nil
 
@@ -41,7 +42,7 @@ local _ = require(GameJoinCard.Components.Actions.Types)
 local BuildJoinCardActionsComponentModule = require(GameJoinCard.Components.Actions.buildJoinCardActionsComponent)
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseScaledValueFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), GetBuilderIconForCurrentPlatformFunction (copy), ViewEDPsourceValues (copy), ViewProfileSourceValues (copy), ControlState (copy), FFlagConsoleOpenGameJoinCard (copy), FFlagDesktopGameJoinCardGamepadSupport (copy), UseGameJoinCardGamepadNavigationFunction (ref), UseComposedRefFunction (copy), FFlagJoinabilityCTARefactor (copy), Skeleton (copy), Radius (copy), AssignPrimaryFocusRefFunction (ref), BuildJoinCardActionsComponentModule (copy), Button (copy), FFlagJoinabilityCTAContextCopy (copy), View (copy), Image (copy), FFlagBlockEDPClickthrough (copy), StateLayerAffordance (copy), Text (copy), Icon (copy), IconSize (copy), AgeCheckUpsellCTAModule (copy), ButtonVariant (copy), InputSize (copy), FoundationModule (copy)
+	-- upvalues: UseTokensFunction (copy), UseScaledValueFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), GetBuilderIconForCurrentPlatformFunction (copy), ViewEDPsourceValues (copy), ViewProfileSourceValues (copy), ControlState (copy), FFlagConsoleOpenGameJoinCard (copy), FFlagDesktopGameJoinCardGamepadSupport (copy), UseGameJoinCardGamepadNavigationFunction (ref), UseComposedRefFunction (copy), FFlagJoinabilityCTARefactor (copy), FFlagGameJoinCardContent (copy), Skeleton (copy), Radius (copy), AssignPrimaryFocusRefFunction (ref), BuildJoinCardActionsComponentModule (copy), Button (copy), FFlagJoinabilityCTAContextCopy (copy), View (copy), Image (copy), FFlagBlockEDPClickthrough (copy), StateLayerAffordance (copy), Text (copy), Icon (copy), IconSize (copy), AgeCheckUpsellCTAModule (copy), ButtonVariant (copy), InputSize (copy), FoundationModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseScaledValueResult = UseScaledValueFunction(260)
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -92,7 +93,7 @@ return function(p1)
 	local t = {}
 	local v1 = nil
 	
-	if FFlagJoinabilityCTARefactor then
+	if FFlagJoinabilityCTARefactor or FFlagGameJoinCardContent and p1.content ~= nil then
 		if p1.areActionsLoading then
 			t.ActionsLoading = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 1,
@@ -100,7 +101,7 @@ return function(p1)
 				radius = Radius.Medium
 			})
 		else
-			t, v53 = BuildJoinCardActionsComponentModule(PrimaryButtonFocusRef and AssignPrimaryFocusRefFunction(p1.actions, PrimaryButtonFocusRef) or p1.actions, {
+			t, v54 = BuildJoinCardActionsComponentModule(PrimaryButtonFocusRef and AssignPrimaryFocusRefFunction(p1.actions, PrimaryButtonFocusRef) or p1.actions, {
 				playTogether = UseLocalizationResult.playTogether,
 				playTogetherSoon = UseLocalizationResult.playTogetherSoon,
 				differentServer = UseLocalizationResult.differentServer
@@ -166,13 +167,14 @@ return function(p1)
 						ClipsDescendants = true,
 						Size = UDim2.fromOffset(Size1500, Size1500)
 					}, {
+						Media = if FFlagGameJoinCardContent and p1.content then p1.content.media else nil,
 						Thumbnail = ReactModule.createElement(Image, {
 							tag = "radius-small",
 							Image = GameIconUrl,
 							Size = UDim2.fromScale(1, 1),
 							ScaleType = Enum.ScaleType.Fit,
-							onActivated = if FFlagBlockEDPClickthrough then nil else UseResult,
-							stateLayer = if FFlagBlockEDPClickthrough or not p1.onViewExperienceDetails then nil else { affordance = StateLayerAffordance.None }
+							onActivated = if FFlagBlockEDPClickthrough or FFlagGameJoinCardContent and p1.content ~= nil then nil else UseResult,
+							stateLayer = if FFlagBlockEDPClickthrough or FFlagGameJoinCardContent and p1.content ~= nil then nil elseif p1.onViewExperienceDetails then { affordance = StateLayerAffordance.None } else nil
 						})
 					}),
 					TextContainer = ReactModule.createElement(View, {
@@ -201,7 +203,7 @@ return function(p1)
 								IsPlaying = ReactModule.createElement(Text, {
 									tag = "shrink-0 auto-xy text-body-medium content-default text-align-x-left",
 									LayoutOrder = 2,
-									Text = UseLocalizationResult.isPlaying
+									Text = if FFlagGameJoinCardContent and p1.content then p1.content.activityText else UseLocalizationResult.isPlaying
 								})
 							}),
 							GameName = if IsLoading then ReactModule.createElement(Skeleton, {
@@ -211,8 +213,8 @@ return function(p1)
 							}) else ReactModule.createElement(View, {
 								tag = "size-full-0 auto-y",
 								LayoutOrder = 2,
-								onActivated = if FFlagBlockEDPClickthrough then nil else UseResult1,
-								stateLayer = if FFlagBlockEDPClickthrough then nil else { affordance = StateLayerAffordance.None }
+								onActivated = if FFlagBlockEDPClickthrough or FFlagGameJoinCardContent and p1.content ~= nil then nil else UseResult1,
+								stateLayer = if FFlagBlockEDPClickthrough or FFlagGameJoinCardContent and p1.content ~= nil then nil else { affordance = StateLayerAffordance.None }
 							}, {
 								Label = ReactModule.createElement(Text, {
 									tag = "size-full-0 auto-y text-title-medium text-no-wrap text-align-x-left text-truncate-split content-emphasis",
@@ -260,7 +262,7 @@ return function(p1)
 				Actions = if p1.isConsole then nil else ReactModule.createElement(View, {
 					tag = "col gap-small size-full-0 auto-y",
 					LayoutOrder = 3
-				}, if FFlagJoinabilityCTARefactor then t else {
+				}, if FFlagJoinabilityCTARefactor or FFlagGameJoinCardContent and p1.content ~= nil then t else {
 					JoinButton = if IsAgeCheckRequired then ReactModule.createElement(AgeCheckUpsellCTAModule, {
 						LayoutOrder = 1,
 						onUnlockPressed = p1.onAgeCheckPressed or function() end,

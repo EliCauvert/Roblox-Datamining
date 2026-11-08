@@ -14,6 +14,7 @@ local Tile = require(SocialCarousel.Common.Enums).Tile
 local ConstantsModule = require(SocialCarousel.Common.Constants)
 local UseSocialCarouselContextModule = require(SocialCarousel.Contexts.useSocialCarouselContext)
 local UseColdStartLayoutReadyModule = require(SocialCarousel.Hooks.useColdStartLayoutReady)
+local UseAddFriendsTileSeenImpressionModule = require(SocialCarousel.Hooks.useAddFriendsTileSeenImpression)
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local UseTilesSeenCollectionModule = require(SocialCarousel.Analytics.useTilesSeenCollection)
 local FFlagSocialCarouselShowLoadingSkeletonModule = require(SocialCarousel.Flags.FFlagSocialCarouselShowLoadingSkeleton)
@@ -26,6 +27,9 @@ local FFlagEnableFlyoutFriendsHeaderFix = SharedFlagsModule.FFlagEnableFlyoutFri
 local FFlagLuaAppCompositionAlways = require(Parent.SharedFlags).FFlagLuaAppCompositionAlways
 local FFlagLuaAppFriendsSortHeaderByPosition = SharedFlagsModule.FFlagLuaAppFriendsSortHeaderByPosition
 local FFlagSocialCarouselInGameTitleMarquee = require(Parent.SharedFlags).FFlagSocialCarouselInGameTitleMarquee
+local FFlagSocialCarouselBuildPresence = SharedFlagsModule.FFlagSocialCarouselBuildPresence
+local FFlagSocialCarouselLogNewFriendRequestsBadgeModule = require(SocialCarousel.Flags.FFlagSocialCarouselLogNewFriendRequestsBadge)
+local FFlagShowRequestsInCarouselForAllUsers = SharedFlagsModule.FFlagShowRequestsInCarouselForAllUsers
 local UseCarouselMarquee = if FFlagSocialCarouselInGameTitleMarquee then require(SocialCarousel.Components.Carousel.useCarouselMarquee).useCarouselMarquee else nil
 
 local function _(Friend, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
@@ -48,8 +52,21 @@ end
 
 local t = {}
 
+local _ = function(List)
+	-- upvalues: Tile (copy)
+	if List == nil then
+		return nil
+	end
+	for i, value in ipairs(List) do
+		if value and value.tileType == Tile.AddFriends then
+			return i
+		end
+	end
+	return nil
+end
+
 return function(p1)
-	-- upvalues: FFlagLuaAppCompositionAlways (copy), FixCarouselTileSizeScaling (copy), UseTokensFunction (copy), UseSocialCarouselContextModule (copy), UseTilesSeenCollectionModule (copy), ReactModule (copy), FFlagSocialCarouselShowLoadingSkeletonModule (copy), ConstantsModule (copy), UseLocalizationFunction (copy), UsePageSideMarginFunction (copy), UseCollectionLayoutParamsFunction (copy), CollectionItemSize (copy), UseCollectionLayoutFunction (copy), FFlagSocialCarouselFixColdStartJitterModule (copy), RobloxAppHooksModule (copy), UseColdStartLayoutReadyModule (copy), FFlagSocialCarouselInGameTitleMarquee (copy), UseCarouselMarquee (ref), Tile (copy), TileComponentsModule (copy), t (copy), CollectionCarousel (copy), FFlagLuaAppFriendsSortHeaderByPosition (copy), FFlagFlyoutHideFriendsHeaderModule (copy), FFlagEnableFlyoutFriendsHeaderFix (copy), FlyoutSidePanelIXP (copy)
+	-- upvalues: FFlagLuaAppCompositionAlways (copy), FixCarouselTileSizeScaling (copy), UseTokensFunction (copy), UseSocialCarouselContextModule (copy), UseTilesSeenCollectionModule (copy), ReactModule (copy), FFlagSocialCarouselShowLoadingSkeletonModule (copy), ConstantsModule (copy), UseLocalizationFunction (copy), UsePageSideMarginFunction (copy), UseCollectionLayoutParamsFunction (copy), CollectionItemSize (copy), UseCollectionLayoutFunction (copy), FFlagSocialCarouselFixColdStartJitterModule (copy), RobloxAppHooksModule (copy), UseColdStartLayoutReadyModule (copy), FFlagSocialCarouselLogNewFriendRequestsBadgeModule (copy), Tile (copy), UseAddFriendsTileSeenImpressionModule (copy), FFlagSocialCarouselInGameTitleMarquee (copy), UseCarouselMarquee (ref), FFlagSocialCarouselBuildPresence (copy), TileComponentsModule (copy), FFlagShowRequestsInCarouselForAllUsers (copy), t (copy), CollectionCarousel (copy), FFlagLuaAppFriendsSortHeaderByPosition (copy), FFlagFlyoutHideFriendsHeaderModule (copy), FFlagEnableFlyoutFriendsHeaderFix (copy), FlyoutSidePanelIXP (copy)
 	local FFlagLuaAppCompositionAlways1 = FFlagLuaAppCompositionAlways or p1.appCompositionEnabled
 	local UseTokensResult = if FixCarouselTileSizeScaling then UseTokensFunction() else nil
 	local UseSocialCarouselContextModuleResult = UseSocialCarouselContextModule()
@@ -84,6 +101,29 @@ return function(p1)
 			-- upvalues: UseStateResult2_1 (copy)
 			UseStateResult2_1(p2)
 		end, {})
+	end
+	local Callback = nil
+	local UseRefResult5 = nil
+	
+	if FFlagSocialCarouselLogNewFriendRequestsBadgeModule then
+		local UseMemoResult = ReactModule.useMemo(function()
+			-- upvalues: UseSocialCarouselContextModuleResult (copy), Tile (upval)
+			local Tiles = UseSocialCarouselContextModuleResult.tiles
+			
+			if Tiles == nil then
+				return nil
+			end
+			for i, tile in ipairs(Tiles) do
+				if tile and tile.tileType == Tile.AddFriends then
+					return i
+				end
+			end
+			return nil
+		end, { UseSocialCarouselContextModuleResult.tiles })
+		UseRefResult5 = ReactModule.useRef(nil)
+		local UseStateResult3
+		UseStateResult3, Callback = ReactModule.useState(nil)
+		UseAddFriendsTileSeenImpressionModule(if UseStateResult3 == nil or UseMemoResult == nil or UseStateResult3.startIndex > UseMemoResult or UseMemoResult > UseStateResult3.endIndex then nil else UseMemoResult)
 	end
 	ReactModule.useEffect(function()
 		-- upvalues: ItemsPerRow1 (copy), UseRefResult3 (copy), UseRefResult2 (copy), UseRefResult4 (copy)
@@ -127,7 +167,7 @@ return function(p1)
 	local ConsoleEnabled = false
 	
 	if FFlagSocialCarouselInGameTitleMarquee then
-		local UseCarouselMarqueeResult = UseCarouselMarquee(UseRefResult, UseSocialCarouselContextModuleResult.tiles, UseSocialCarouselContextModuleResult.openGameJoinCardUserId, {
+		local UseCarouselMarqueeResult = UseCarouselMarquee(UseRefResult, UseSocialCarouselContextModuleResult.tiles, if FFlagSocialCarouselBuildPresence then UseSocialCarouselContextModuleResult.openGameJoinCardUserId or UseSocialCarouselContextModuleResult.openBuildCardUserId else UseSocialCarouselContextModuleResult.openGameJoinCardUserId, {
 			defaultSkeletonCount = 5,
 			appCompositionEnabled = FFlagLuaAppCompositionAlways1,
 			itemsPerRow = ItemsPerRow1,
@@ -151,10 +191,19 @@ return function(p1)
 		DesktopEnabled = UseCarouselMarqueeResult.desktopEnabled
 		ConsoleEnabled = UseCarouselMarqueeResult.consoleEnabled
 	end
-	local UseResult2 = ReactModule.useCallback(function(p2, p3)
-		-- upvalues: UseSocialCarouselContextModuleResult (copy), UseStateResult (copy), UseRefResult (copy), UseRefResult2 (copy), ItemsPerRow1 (copy), UseRefResult1 (copy), UseTilesSeenCollectionModuleResult (copy)
+	local UseResult2 = ReactModule.useCallback(function(StartIndex, EndIndex)
+		-- upvalues: FFlagSocialCarouselLogNewFriendRequestsBadgeModule (upval), Callback (ref), UseRefResult5 (ref), UseSocialCarouselContextModuleResult (copy), UseStateResult (copy), UseRefResult (copy), UseRefResult2 (copy), ItemsPerRow1 (copy), UseRefResult1 (copy), UseTilesSeenCollectionModuleResult (copy)
+		if FFlagSocialCarouselLogNewFriendRequestsBadgeModule and Callback ~= nil and UseRefResult5 ~= nil then
+			local Current = UseRefResult5.current
+			
+			if Current == nil or Current.startIndex ~= StartIndex or Current.endIndex ~= EndIndex then
+				local Current1 = { startIndex = StartIndex, endIndex = EndIndex }
+				UseRefResult5.current = Current1
+				Callback(Current1)
+			end
+		end
 		if UseSocialCarouselContextModuleResult.unifiedLogging then
-			UseSocialCarouselContextModuleResult.unifiedLogging.onCollectionViewabilityChanged(p2, p3)
+			UseSocialCarouselContextModuleResult.unifiedLogging.onCollectionViewabilityChanged(StartIndex, EndIndex)
 		end
 		if UseSocialCarouselContextModuleResult.tiles and UseStateResult and UseRefResult.current and UseRefResult2.current then
 			local AbsoluteSize = UseStateResult.AbsoluteSize
@@ -174,7 +223,9 @@ return function(p1)
 		end
 	end, {
 		p1.onViewableItemsChanged, UseSocialCarouselContextModuleResult.tiles,
-		UseStateResult, UseRefResult, ItemsPerRow1, UseTilesSeenCollectionModuleResult
+		UseSocialCarouselContextModuleResult.unifiedLogging, UseStateResult,
+		UseRefResult, ItemsPerRow1, UseTilesSeenCollectionModuleResult, Callback,
+		UseRefResult5
 	})
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FFlagSocialCarouselShowLoadingSkeletonModule (upval), ItemsPerRow1 (copy), Tile (upval)
@@ -202,9 +253,9 @@ return function(p1)
 			onContainerSizeChanged = if FFlagSocialCarouselFixColdStartJitterModule then UseResult else nil,
 			title = UseLocalizationResult.friendsLabel,
 			items = if FFlagSocialCarouselFixColdStartJitterModule and not IsColdStartLayoutReady then t else UseMemoResult1,
-			renderItem = ReactModule.useCallback(function(p4, p5, p6)
-				-- upvalues: SelectionOrderBase (copy), FFlagSocialCarouselInGameTitleMarquee (upval), ActiveByIndex (ref), IsPaused (ref), MarqueeRunId (ref), OnMarqueeFinished (ref), OnManualMarqueeStart (ref), OnManualMarqueeEnd (ref), HandsOff (ref), DesktopEnabled (ref), ConsoleEnabled (ref), Tile (upval), TileComponentsModule (upval), p1 (copy)
-				local NewSelectionOrderBase = if SelectionOrderBase then SelectionOrderBase + p5 else nil
+			renderItem = ReactModule.useCallback(function(p2, p3, p4)
+				-- upvalues: SelectionOrderBase (copy), FFlagSocialCarouselInGameTitleMarquee (upval), ActiveByIndex (ref), IsPaused (ref), MarqueeRunId (ref), OnMarqueeFinished (ref), OnManualMarqueeStart (ref), OnManualMarqueeEnd (ref), HandsOff (ref), DesktopEnabled (ref), ConsoleEnabled (ref), Tile (upval), TileComponentsModule (upval), FFlagShowRequestsInCarouselForAllUsers (upval), UseRefResult1 (copy), UseTilesSeenCollectionModuleResult (copy), p1 (copy)
+				local NewSelectionOrderBase = if SelectionOrderBase then SelectionOrderBase + p3 else nil
 				local v1: string? = nil
 				local v2 = nil
 				local v3 = nil
@@ -222,16 +273,16 @@ return function(p1)
 					local HandsOff1 = HandsOff
 					local DesktopEnabled1 = DesktopEnabled
 					local ConsoleEnabled1 = ConsoleEnabled
-					local v7 = nil
 					local Paused = nil
+					local v7 = nil
 					local v8 = nil
 					local v9 = nil
 					local v10 = nil
 					local v11 = nil
 					
-					if p4.tileType == Tile.Friend and ActiveByIndex1 ~= nil then
+					if p2.tileType == Tile.Friend and ActiveByIndex1 ~= nil then
 						local DesktopEnabled1_1 = DesktopEnabled1 or ConsoleEnabled1
-						Paused = if ActiveByIndex1[p5] == true then if IsPaused1 then "Paused" else "Playing" else "Idle"
+						Paused = if ActiveByIndex1[p3] == true then if IsPaused1 then "Paused" else "Playing" else "Idle"
 						v9 = if HandsOff1 then OnMarqueeFinished1 else nil
 						v10 = MarqueeRunId1
 						v11 = if DesktopEnabled1_1 then OnManualMarqueeStart1 else nil
@@ -252,14 +303,22 @@ return function(p1)
 					v5 = v7
 					v6 = v8
 				end
-				return TileComponentsModule[p4.tileType](p4, p5, p6, NewSelectionOrderBase, function(p7, p8)
-					-- upvalues: p1 (upval), p4 (copy)
-					if p1.onTileContentChanged then
-						p1.onTileContentChanged(p7, p8, p4)
+				return TileComponentsModule[p2.tileType](p2, p3, p4, NewSelectionOrderBase, function(p5, p6, p7)
+					-- upvalues: FFlagShowRequestsInCarouselForAllUsers (upval), UseRefResult1 (upval), UseTilesSeenCollectionModuleResult (upval), p1 (upval), p2 (copy)
+					if FFlagShowRequestsInCarouselForAllUsers and p7 then
+						local Current = UseRefResult1.current
+						
+						if Current.startIndex <= p6 and p6 <= Current.endIndex then
+							UseTilesSeenCollectionModuleResult.addTileToCollection(p5, p6, p7)
+						end
 					end
-				end, v1, v2, v3, v4, v5, v6), p4.tileType
+					if p1.onTileContentChanged then
+						p1.onTileContentChanged(p5, p6, if FFlagShowRequestsInCarouselForAllUsers and p7 then p7 else p2)
+					end
+				end, v1, v2, v3, v4, v5, v6), p2.tileType
 			end, {
 				SelectionOrderBase, p1.onTileContentChanged,
+				if FFlagShowRequestsInCarouselForAllUsers then UseTilesSeenCollectionModuleResult else nil,
 				if FFlagSocialCarouselInGameTitleMarquee then ActiveByIndex else nil,
 				if FFlagSocialCarouselInGameTitleMarquee then IsPaused else nil,
 				if FFlagSocialCarouselInGameTitleMarquee then OnMarqueeFinished else nil,

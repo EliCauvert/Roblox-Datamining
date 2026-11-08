@@ -14,6 +14,7 @@ local GetFFlagMomentsUseUploadPostAsyncFunction = MomentsCommonModule.Flags.GetF
 local MomentsPostUploadFailureReasons = game:DefineFastFlag("MomentsPostUploadFailureReasons", false)
 local GetFFlagMomentsUseMomentsServiceForUploadFunction = MomentsCommonModule.Flags.GetFFlagMomentsUseMomentsServiceForUpload
 local MakePostMetadataModule = require(MomentsCreation.Utils.makePostMetadata)
+local FFlagMomentsCreationSessionIdModule = require(MomentsCreation.Flags.FFlagMomentsCreationSessionId)
 local EnumNameFunction = MakeCreationEventFieldsModule.enumName
 local v1 = game
 local CaptureServiceUploadUniverseIdOverrideEngineFeature = game:GetEngineFeature("CaptureServiceUploadUniverseIdOverride")
@@ -42,7 +43,7 @@ local _ = function(Tbl)
 end
 
 return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, ToastStore, FeedStore, MyCreationsStore, CreationSessionId, p1, p2)
-	-- upvalues: CaptureService (copy), CaptureServiceUploadUniverseIdOverrideEngineFeature (copy), v1 (copy), NormalizeMomentMetadataModule (copy), LoggerModule (copy), CaptureServiceStartUploadCoreScriptBypassEngineFeature (copy), EnumNameFunction (copy), MomentsCommonModule (copy), FireAnalyticsEventModule (copy), EventNames (copy), GetFFlagMomentsUseUploadPostAsyncFunction (copy), MakePostMetadataModule (copy), FFlagMomentsTextOverlayV2Redesign (copy), GetFFlagMomentsUseMomentsServiceForUploadFunction (copy), MakeCreationEventFieldsModule (copy), CompleteMomentUploadModule (copy), MomentsPostUploadFailureReasons (copy), MomentsCreation (copy)
+	-- upvalues: CaptureService (copy), CaptureServiceUploadUniverseIdOverrideEngineFeature (copy), v1 (copy), NormalizeMomentMetadataModule (copy), LoggerModule (copy), CaptureServiceStartUploadCoreScriptBypassEngineFeature (copy), EnumNameFunction (copy), MomentsCommonModule (copy), FireAnalyticsEventModule (copy), EventNames (copy), GetFFlagMomentsUseUploadPostAsyncFunction (copy), MakePostMetadataModule (copy), FFlagMomentsTextOverlayV2Redesign (copy), GetFFlagMomentsUseMomentsServiceForUploadFunction (copy), MakeCreationEventFieldsModule (copy), CompleteMomentUploadModule (copy), FFlagMomentsCreationSessionIdModule (copy), MomentsPostUploadFailureReasons (copy), MomentsCreation (copy)
 	local P9 = p1 or CaptureService
 	local Tbl1 = nil
 	
@@ -84,10 +85,10 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 	end
 	
 	task.spawn(function()
-		-- upvalues: GetFFlagMomentsUseUploadPostAsyncFunction (upval), LoggerModule (upval), Capture (copy), EnumNameFunction (upval), MakePostMetadataModule (upval), FFlagMomentsTextOverlayV2Redesign (upval), Tbl2 (copy), NormalizeMomentMetadataModuleResult (ref), GetFFlagMomentsUseMomentsServiceForUploadFunction (upval), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval), CreationSessionId (copy), p2 (copy), P9 (copy), CompleteMomentUploadModule (upval), UploadStore (copy), ToastStore (copy), FeedStore (copy), MyCreationsStore (copy), Localizations (copy), MomentsPostUploadFailureReasons (upval), MomentsCreation (upval), MomentsCommonModule (upval), CaptureServiceStartUploadCoreScriptBypassEngineFeature (upval), FeedRegistrationInfo (copy)
+		-- upvalues: GetFFlagMomentsUseUploadPostAsyncFunction (upval), LoggerModule (upval), Capture (copy), EnumNameFunction (upval), MakePostMetadataModule (upval), FFlagMomentsTextOverlayV2Redesign (upval), Tbl2 (copy), NormalizeMomentMetadataModuleResult (ref), GetFFlagMomentsUseMomentsServiceForUploadFunction (upval), CreationSessionId (copy), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval), p2 (copy), P9 (copy), CompleteMomentUploadModule (upval), UploadStore (copy), ToastStore (copy), FeedStore (copy), MyCreationsStore (copy), Localizations (copy), FFlagMomentsCreationSessionIdModule (upval), MomentsPostUploadFailureReasons (upval), MomentsCreation (upval), MomentsCommonModule (upval), CaptureServiceStartUploadCoreScriptBypassEngineFeature (upval), FeedRegistrationInfo (copy)
 		if GetFFlagMomentsUseUploadPostAsyncFunction() then
 			LoggerModule:debug("event=path_selected path=post_upload localId={}", (string.gsub(string.gsub(EnumNameFunction(Capture.LocalId) or "nil", "\r", "\\r"), "\n", "\\n")))
-			local PostMetadataModule = MakePostMetadataModule(if FFlagMomentsTextOverlayV2Redesign then Tbl2 else NormalizeMomentMetadataModuleResult, if GetFFlagMomentsUseMomentsServiceForUploadFunction() then Capture else nil)
+			local PostMetadataModule = MakePostMetadataModule(if FFlagMomentsTextOverlayV2Redesign then Tbl2 else NormalizeMomentMetadataModuleResult, if GetFFlagMomentsUseMomentsServiceForUploadFunction() then Capture else nil, CreationSessionId)
 			local CaptureDescriptorFields = MakeCreationEventFieldsModule.makeCaptureDescriptorFields(Capture)
 			CaptureDescriptorFields.creationSessionId = CreationSessionId
 			FireAnalyticsEventModule(EventNames.EditingFlowMomentPublished, CaptureDescriptorFields)
@@ -105,13 +106,18 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 					myCreationsStore = MyCreationsStore,
 					localizations = Localizations,
 					onPostedToFeed = function()
-						-- upvalues: FireAnalyticsEventModule (upval), EventNames (upval), Result (copy), Capture (upval), EnumNameFunction (upval), CreationSessionId (upval)
-						FireAnalyticsEventModule(EventNames.EditingFlowMomentPostedToFeed, {
+						-- upvalues: Result (copy), Capture (upval), EnumNameFunction (upval), FFlagMomentsCreationSessionIdModule (upval), FireAnalyticsEventModule (upval), EventNames (upval), CreationSessionId (upval)
+						local config = {
 							assetId = tostring(Result.assetId),
 							localId = tostring(Capture.LocalId),
-							captureType = EnumNameFunction(Capture.CaptureType),
-							creationSessionId = CreationSessionId
-						})
+							captureType = EnumNameFunction(Capture.CaptureType)
+						}
+						
+						if FFlagMomentsCreationSessionIdModule and Result.operationId ~= nil and Result.operationId ~= "" then
+							config.correlationId = Result.operationId
+						end
+						config.creationSessionId = CreationSessionId
+						FireAnalyticsEventModule(EventNames.EditingFlowMomentPostedToFeed, config)
 					end
 				})
 				

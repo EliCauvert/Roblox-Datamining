@@ -3,6 +3,7 @@ local Parent = Moments.Parent
 local Players = game:GetService("Players")
 local HttpService = game:GetService("HttpService")
 local MomentsCommonModule = require(Parent.MomentsCommon)
+local MomentsTypesModule = require(Parent.MomentsTypes)
 local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local MomentsCreationModule = require(Parent.MomentsCreation)
@@ -18,11 +19,15 @@ local SetPublishedMomentOnUploadStoreModule = require(Moments.Upload.setPublishe
 local PostLifecycleSubscriptionModule = require(Moments.Upload.postLifecycleSubscription)
 local CreatePublishedPostResolverModule = require(Moments.Upload.createPublishedPostResolver)
 local FFlagMomentsHydratePublishedFeedItemModule = require(Moments.Flags.FFlagMomentsHydratePublishedFeedItem)
+local FFlagMomentsPostFeedbackModule = require(Moments.Flags.FFlagMomentsPostFeedback)
 local FFlagMomentsRefreshOwnMomentsAfterPublish = SharedFlagsModule.FFlagMomentsRefreshOwnMomentsAfterPublish
 local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local FFlagMomentsRefreshProfileOnPostStatus = SharedFlagsModule.FFlagMomentsRefreshProfileOnPostStatus
 local FFlagMomentsResolvePublishedPostFeedItem = SharedFlagsModule.FFlagMomentsResolvePublishedPostFeedItem
+game:DefineFastInt("MomentsPendingMomentTtlSeconds", 300)
 local GetUploadStoreModule = require(Moments.Stores.GetUploadStore)
+local GetPostStatusCardStoreModule = require(Moments.Stores.GetPostStatusCardStore)
+local _ = require(Moments.Stores.GetPostStatusCardStore.createPostStatusCardStore)
 local GetToastStoreModule = require(Moments.Stores.GetToastStore)
 local _ = require(Moments.Stores.GetToastStore.createToastStore)
 local GetLocalUserIdModule = require(Moments.Utils.getLocalUserId)
@@ -48,7 +53,7 @@ local config = {
 	generateOverrideBody = "Feature.Moments.Label.TextGenerateOverrideBody"
 }
 local v1 = require(Parent.MomentsCommon.isStudio)()
-local MomentStatus = require(Parent.MomentsTypes).Enums.MomentStatus
+local MomentStatus = MomentsTypesModule.Enums.MomentStatus
 
 local function makeUploadedMomentItem(AssetId, Sound, Edits, Description, p1: number)
 	-- upvalues: Players (copy), MomentsCreationModule (copy), MomentStatus (copy)
@@ -84,27 +89,45 @@ local function _(Sound, Edits, Description, p1)
 	return UploadedMomentItem
 end
 
-local function setPublishedPostOnUploadStore(p1, p2, p3)
-	-- upvalues: FFlagMomentsOptimisticProfilePending (copy)
-	local ResolveResult = p1.resolve(p3)
+local function isPendingMomentModerated(p1, MomentId): boolean
+	-- upvalues: MomentsGetMomentsUserStoreModule (copy)
+	local PendingUserMoment = MomentsGetMomentsUserStoreModule(false).getPendingUserMoments(false)[p1]
 	
-	if not p1.isCurrent() then return end
-	if FFlagMomentsOptimisticProfilePending and p3 ~= nil then
-		p2.reset()
+	if PendingUserMoment == nil then
+		return false
+	end
+	for _, value in PendingUserMoment do
+		if value.moment.momentId == MomentId then
+			return value.status == "Moderated"
+		end
+	end
+	return false
+end
+
+local function setPublishedPostOnUploadStore(p2, p3, p4, Callback: (any) -> ())
+	-- upvalues: FFlagMomentsOptimisticProfilePending (copy)
+	local ResolveResult = p2.resolve(p4)
+	
+	if Callback ~= nil and ResolveResult ~= nil then
+		Callback(ResolveResult)
+	end
+	if not p2.isCurrent() then return end
+	if FFlagMomentsOptimisticProfilePending and p4 ~= nil then
+		p3.reset()
 		
 		return
 	end
 	if ResolveResult == nil then
-		p2.reset()
+		p3.reset()
 		
 		return
 	else
-		p2.setSuccess(ResolveResult)
+		p3.setSuccess(ResolveResult)
 	end
 end
 
-local function makeUploadStore(UploadStore, Sound: Sound, Edits, Description, ResolvedTimeLength)
-	-- upvalues: FFlagMomentsResolvePublishedPostFeedItem (copy), GetFFlagMomentsUseUploadPostAsyncFunction (copy), CreatePublishedPostResolverModule (copy), FFlagMomentsRefreshProfileOnPostStatus (copy), FFlagMomentsOptimisticProfilePending (copy), PostLifecycleSubscriptionModule (copy), GetLocalUserIdModule (copy), makeUploadedMomentItem (copy), HttpService (copy), MomentStatus (copy), MomentsGetMomentsUserStoreModule (copy), setPublishedPostOnUploadStore (copy), FFlagMomentsHydratePublishedFeedItemModule (copy), SetPublishedMomentOnUploadStoreModule (copy), FFlagMomentsRefreshOwnMomentsAfterPublish (copy), RefreshOwnMomentsAfterPublishModule (copy)
+local function makeUploadStore(UploadStore, Sound: Sound, Edits, Description, ResolvedTimeLength, CreationSessionId)
+	-- upvalues: FFlagMomentsResolvePublishedPostFeedItem (copy), GetFFlagMomentsUseUploadPostAsyncFunction (copy), CreatePublishedPostResolverModule (copy), GetPostStatusCardStoreModule (copy), FFlagMomentsRefreshProfileOnPostStatus (copy), FFlagMomentsOptimisticProfilePending (copy), PostLifecycleSubscriptionModule (copy), GetLocalUserIdModule (copy), makeUploadedMomentItem (copy), HttpService (copy), MomentStatus (copy), MomentsGetMomentsUserStoreModule (copy), FFlagMomentsPostFeedbackModule (copy), isPendingMomentModerated (copy), setPublishedPostOnUploadStore (copy), FFlagMomentsHydratePublishedFeedItemModule (copy), SetPublishedMomentOnUploadStoreModule (copy), FFlagMomentsRefreshOwnMomentsAfterPublish (copy), RefreshOwnMomentsAfterPublishModule (copy)
 	local PublishedPostResolverModule = if FFlagMomentsResolvePublishedPostFeedItem and GetFFlagMomentsUseUploadPostAsyncFunction() then CreatePublishedPostResolverModule({
 		captureType = Sound.CaptureType,
 		description = Description,
@@ -113,10 +136,30 @@ local function makeUploadStore(UploadStore, Sound: Sound, Edits, Description, Re
 	}) else nil
 	local MomentId = nil
 	local v2 = nil
+	local LocalContent = nil
+	local ClockTime = 0
+	
+	local function addPostStatusCard(CardType, PublishedMoment)
+		-- upvalues: MomentId (ref), GetPostStatusCardStoreModule (upval), LocalContent (ref), Sound (copy), CreationSessionId (copy), ClockTime (ref)
+		if MomentId ~= nil then
+			GetPostStatusCardStoreModule(false).add({
+				id = MomentId,
+				cardType = CardType,
+				localContent = LocalContent,
+				publishedMoment = PublishedMoment,
+				captureType = Sound.CaptureType,
+				creationSessionId = CreationSessionId,
+				localId = if Sound.LocalId == nil then nil else tostring(Sound.LocalId),
+				startedAtClock = ClockTime
+			})
+			
+			return
+		end
+	end
 	
 	return {
 		setUploading = if FFlagMomentsRefreshProfileOnPostStatus or PublishedPostResolverModule ~= nil then function()
-			-- upvalues: FFlagMomentsRefreshProfileOnPostStatus (upval), FFlagMomentsOptimisticProfilePending (upval), PublishedPostResolverModule (copy), PostLifecycleSubscriptionModule (upval), UploadStore (copy), MomentId (ref), GetLocalUserIdModule (upval), Sound (copy), Edits (copy), Description (copy), ResolvedTimeLength (copy), makeUploadedMomentItem (upval), HttpService (upval), MomentStatus (upval), v2 (ref), MomentsGetMomentsUserStoreModule (upval)
+			-- upvalues: FFlagMomentsRefreshProfileOnPostStatus (upval), FFlagMomentsOptimisticProfilePending (upval), PublishedPostResolverModule (copy), PostLifecycleSubscriptionModule (upval), UploadStore (copy), MomentId (ref), GetLocalUserIdModule (upval), Sound (copy), Edits (copy), Description (copy), ResolvedTimeLength (copy), makeUploadedMomentItem (upval), HttpService (upval), MomentStatus (upval), v2 (ref), MomentsGetMomentsUserStoreModule (upval), FFlagMomentsPostFeedbackModule (upval), LocalContent (ref), ClockTime (ref)
 			if FFlagMomentsRefreshProfileOnPostStatus or FFlagMomentsOptimisticProfilePending and PublishedPostResolverModule ~= nil then
 				PostLifecycleSubscriptionModule.subscribe()
 			end
@@ -140,20 +183,28 @@ local function makeUploadStore(UploadStore, Sound: Sound, Edits, Description, Re
 					MomentId = UploadedMomentItem.momentId
 					v2 = LocalUserIdModule
 					MomentsGetMomentsUserStoreModule(false).prependPendingUserMoment(LocalUserIdModule, UploadedMomentItem)
+					
+					if FFlagMomentsPostFeedbackModule then
+						LocalContent = UploadedMomentItem.localContent
+						ClockTime = os.clock()
+					end
 				end
 			end
 		end else UploadStore.setUploading,
-		setFailed = if FFlagMomentsOptimisticProfilePending and PublishedPostResolverModule ~= nil then function(p1)
-			-- upvalues: v2 (ref), MomentId (ref), MomentsGetMomentsUserStoreModule (upval), PublishedPostResolverModule (copy), UploadStore (copy)
+		setFailed = if FFlagMomentsOptimisticProfilePending and PublishedPostResolverModule ~= nil then function(p2)
+			-- upvalues: v2 (ref), MomentId (ref), MomentsGetMomentsUserStoreModule (upval), FFlagMomentsPostFeedbackModule (upval), addPostStatusCard (copy), PublishedPostResolverModule (copy), UploadStore (copy)
 			if v2 ~= nil and MomentId ~= nil then
 				MomentsGetMomentsUserStoreModule(false).removePendingUserMoment(v2, MomentId)
 			end
+			if FFlagMomentsPostFeedbackModule then
+				addPostStatusCard("UploadFailed")
+			end
 			if PublishedPostResolverModule.isCurrent() then
-				UploadStore.setFailed(p1)
+				UploadStore.setFailed(p2)
 			end
 		end else UploadStore.setFailed,
 		setSuccess = function(AssetId)
-			-- upvalues: UploadStore (copy), FFlagMomentsOptimisticProfilePending (upval), v2 (ref), MomentId (ref), MomentsGetMomentsUserStoreModule (upval), PublishedPostResolverModule (copy), setPublishedPostOnUploadStore (upval), FFlagMomentsHydratePublishedFeedItemModule (upval), SetPublishedMomentOnUploadStoreModule (upval), makeUploadedMomentItem (upval), Sound (copy), Edits (copy), Description (copy), ResolvedTimeLength (copy), FFlagMomentsRefreshOwnMomentsAfterPublish (upval), RefreshOwnMomentsAfterPublishModule (upval)
+			-- upvalues: UploadStore (copy), FFlagMomentsOptimisticProfilePending (upval), v2 (ref), MomentId (ref), FFlagMomentsPostFeedbackModule (upval), isPendingMomentModerated (upval), MomentsGetMomentsUserStoreModule (upval), PublishedPostResolverModule (copy), setPublishedPostOnUploadStore (upval), addPostStatusCard (copy), FFlagMomentsHydratePublishedFeedItemModule (upval), SetPublishedMomentOnUploadStoreModule (upval), makeUploadedMomentItem (upval), Sound (copy), Edits (copy), Description (copy), ResolvedTimeLength (copy), FFlagMomentsRefreshOwnMomentsAfterPublish (upval), RefreshOwnMomentsAfterPublishModule (upval)
 			if type(AssetId) ~= "number" then
 				UploadStore.setSuccess(AssetId)
 				
@@ -162,15 +213,22 @@ local function makeUploadStore(UploadStore, Sound: Sound, Edits, Description, Re
 			if FFlagMomentsOptimisticProfilePending and v2 ~= nil and MomentId ~= nil then
 				local v3 = v2
 				local MomentId1 = MomentId
-				task.delay(300, function()
-					-- upvalues: MomentsGetMomentsUserStoreModule (upval), v3 (copy), MomentId1 (copy)
-					local MomentsGetMomentsUserStoreModuleResult = MomentsGetMomentsUserStoreModule(false)
-					MomentsGetMomentsUserStoreModuleResult.removePendingUserMoment(v3, MomentId1)
-					MomentsGetMomentsUserStoreModuleResult.invalidateUser(v3)
+				task.delay(game:GetFastInt("MomentsPendingMomentTtlSeconds"), function()
+					-- upvalues: FFlagMomentsPostFeedbackModule (upval), isPendingMomentModerated (upval), v3 (copy), MomentId1 (copy), MomentsGetMomentsUserStoreModule (upval)
+					if not FFlagMomentsPostFeedbackModule or not isPendingMomentModerated(v3, MomentId1) then
+						local MomentsGetMomentsUserStoreModuleResult = MomentsGetMomentsUserStoreModule(false)
+						MomentsGetMomentsUserStoreModuleResult.removePendingUserMoment(v3, MomentId1)
+						MomentsGetMomentsUserStoreModuleResult.invalidateUser(v3)
+						
+						return
+					end
 				end)
 			end
 			if PublishedPostResolverModule ~= nil then
-				task.spawn(setPublishedPostOnUploadStore, PublishedPostResolverModule, UploadStore, MomentId)
+				task.spawn(setPublishedPostOnUploadStore, PublishedPostResolverModule, UploadStore, MomentId, if FFlagMomentsPostFeedbackModule then function(PublishedMoment)
+					-- upvalues: addPostStatusCard (upval)
+					addPostStatusCard("Live", PublishedMoment)
+				end else nil)
 				
 				return
 			end
@@ -188,10 +246,10 @@ local function makeUploadStore(UploadStore, Sound: Sound, Edits, Description, Re
 	}
 end
 
-return function(p1)
+return function(p2)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), GetFFlagEnableMomentTextGenerationFunction (copy), ReactModule (copy), GetUploadStoreModule (copy), GetToastStoreModule (copy), GenerateMomentTextModule (copy), MomentGeneratedTextFeedbackModule (copy), MomentsCreationModule (copy), v1 (copy), PublishMomentWithUploadFunction (copy), makeUploadStore (copy)
-	local OnExit = p1.onExit
-	local CaptureSource = p1.captureSource
+	local OnExit = p2.onExit
+	local CaptureSource = p2.captureSource
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseRefResult = if GetFFlagEnableMomentTextGenerationFunction() then ReactModule.useRef({}) else nil
 	
@@ -201,9 +259,9 @@ return function(p1)
 		local ToastStoreModule = GetToastStoreModule(false)
 		local FFlagEnableMomentTextGeneration = GetFFlagEnableMomentTextGenerationFunction()
 		
-		local function _(p2)
+		local function _(p3)
 			-- upvalues: ToastStoreModule (copy), UseRefResult (upval)
-			local TriggerToastResult = ToastStoreModule.triggerToast(p2)
+			local TriggerToastResult = ToastStoreModule.triggerToast(p3)
 			
 			if UseRefResult ~= nil then
 				table.insert(UseRefResult.current, TriggerToastResult)
@@ -280,13 +338,13 @@ return function(p1)
 				end
 			end else nil,
 			isTextFiltered = MomentsCreationModule.isTextFiltered,
-			createMoment = if v1 then function(_, _, p2, _, _)
-				print(`[moments-creation] dev publish (not uploaded): "{p23}"`)
+			createMoment = if v1 then function(_, _, p3, _, _)
+				print(`[moments-creation] dev publish (not uploaded): "{p29}"`)
 			end else function(Sound, Edits, Description, CreationSessionId, ResolvedTimeLength, CommentsEnabled)
 				-- upvalues: PublishMomentWithUploadFunction (upval), UseLocalizationResult (upval), makeUploadStore (upval), UploadStoreModule (copy), ToastStoreModule (copy)
 				PublishMomentWithUploadFunction(Sound, Edits, Description, {
 					localizations = UseLocalizationResult,
-					uploadStore = makeUploadStore(UploadStoreModule, Sound, Edits, Description, ResolvedTimeLength),
+					uploadStore = makeUploadStore(UploadStoreModule, Sound, Edits, Description, ResolvedTimeLength, CreationSessionId),
 					toastStore = ToastStoreModule,
 					creationSessionId = CreationSessionId,
 					resolvedTimeLength = ResolvedTimeLength,

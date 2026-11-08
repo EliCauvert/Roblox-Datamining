@@ -7,7 +7,6 @@ local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packa
 local FoundationModule = require(CorePackages.Packages.Foundation)
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local WithCursorMigration = if FFlagCoreUiMigrateUIBloxToFoundation then FoundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
 local CursorType = if FFlagCoreUiMigrateUIBloxToFoundation then FoundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
 local Parent = script.Parent.Parent.Parent
@@ -31,43 +30,42 @@ function SearchBox.init(p1)
 end
 
 function SearchBox.renderWithSelectionCursor(p1, Callback)
-	-- upvalues: WithLocalizationModule (copy), WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), Roact (copy), CursorType (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), AssetsModule (copy), ImageSetLabel (copy), NormalizeFontFaceFunction (copy), ThemedTextLabelModule (copy)
+	-- upvalues: WithLocalizationModule (copy), WithFoundationOrUIBloxStyleFunction (copy), Roact (copy), CursorType (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), AssetsModule (copy), ImageSetLabel (copy), NormalizeFontFaceFunction (copy), ThemedTextLabelModule (copy)
 	return WithLocalizationModule({
 		searchPlaceholder = "CoreScripts.InGameMenu.InviteFriends.Search"
 	})(function(p2)
-		-- upvalues: WithFoundationOrUIBloxStyleFunction (upval), FoundationFontFaceMigration (upval), p1 (copy), Roact (upval), Callback (copy), CursorType (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), AssetsModule (upval), ImageSetLabel (upval), NormalizeFontFaceFunction (upval), ThemedTextLabelModule (upval)
-		return WithFoundationOrUIBloxStyleFunction(function(p3)
-			-- upvalues: FoundationFontFaceMigration (upval)
+		-- upvalues: WithFoundationOrUIBloxStyleFunction (upval), p1 (copy), Roact (upval), Callback (copy), CursorType (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), AssetsModule (upval), ImageSetLabel (upval), NormalizeFontFaceFunction (upval), ThemedTextLabelModule (upval)
+		return WithFoundationOrUIBloxStyleFunction(function(Tokens)
 			return {
-				Tokens = if FoundationFontFaceMigration then p3 else nil,
+				Tokens = Tokens,
 				Theme = {
 					TextEmphasis = {
-						Color = p3.Color.Content.Emphasis.Color3,
-						Transparency = p3.Color.Content.Emphasis.Transparency
+						Color = Tokens.Color.Content.Emphasis.Color3,
+						Transparency = Tokens.Color.Content.Emphasis.Transparency
 					},
 					IconEmphasis = {
-						Color = p3.Color.Content.Emphasis.Color3,
-						Transparency = p3.Color.Content.Emphasis.Transparency
+						Color = Tokens.Color.Content.Emphasis.Color3,
+						Transparency = Tokens.Color.Content.Emphasis.Transparency
 					},
 					BackgroundUIContrast = {
-						Color = p3.Color.OverMedia.OverMedia_0.Color3,
-						Transparency = p3.Color.OverMedia.OverMedia_0.Transparency
+						Color = Tokens.Color.OverMedia.OverMedia_0.Color3,
+						Transparency = Tokens.Color.OverMedia.OverMedia_0.Transparency
 					},
 					Divider = {
-						Color = p3.Color.Stroke.Emphasis.Color3,
-						Transparency = p3.Color.Stroke.Emphasis.Transparency
+						Color = Tokens.Color.Stroke.Emphasis.Color3,
+						Transparency = Tokens.Color.Stroke.Emphasis.Transparency
 					}
 				},
 				Font = {
 					BaseSize = 1,
 					Body = {
-						Font = p3.Typography.BodyLarge.Font,
-						RelativeSize = p3.Typography.BodyLarge.FontSize
+						Font = Tokens.Typography.BodyLarge.Font,
+						RelativeSize = Tokens.Typography.BodyLarge.FontSize
 					}
 				}
 			}
 		end, function(p3)
-			-- upvalues: p1 (upval), Roact (upval), Callback (upval), CursorType (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), AssetsModule (upval), ImageSetLabel (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), ThemedTextLabelModule (upval), p2 (copy)
+			-- upvalues: p1 (upval), Roact (upval), Callback (upval), CursorType (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), AssetsModule (upval), ImageSetLabel (upval), NormalizeFontFaceFunction (upval), ThemedTextLabelModule (upval), p2 (copy)
 			local TextEmphasis = p3.Theme.TextEmphasis
 			local Body = p3.Font.Body
 			local IsNotSearchTextMatch = p1.state.searchText ~= ""
@@ -125,8 +123,7 @@ function SearchBox.renderWithSelectionCursor(p1, Callback)
 					TextYAlignment = Enum.TextYAlignment.Center,
 					TextColor3 = TextEmphasis.Color,
 					TextTransparency = TextEmphasis.Transparency,
-					Font = if FoundationFontFaceMigration then nil else Body.Font,
-					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
+					FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font),
 					TextSize = Body.RelativeSize * p3.Font.BaseSize,
 					TextWrapped = false,
 					SelectionImageObject = Callback(CursorType.InputFields),

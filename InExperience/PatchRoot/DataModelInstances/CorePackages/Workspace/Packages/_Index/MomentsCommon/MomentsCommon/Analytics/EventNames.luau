@@ -94,6 +94,7 @@
 	MomentCommentReactButtonClicked = "MomentCommentReactButtonClicked",
 	MomentCommentDeleted = "MomentCommentDeleted",
 	MomentCommentReportClicked = "MomentCommentReportClicked",
+	MomentCommentTranslationToggled = "MomentCommentTranslationToggled",
 	MomentCommentsSettingToggled = "MomentCommentsSettingToggled",
 	MomentViewBegan = "MomentViewBegan",
 	MomentsNavigationEvent = "MomentsNavigationEvent",

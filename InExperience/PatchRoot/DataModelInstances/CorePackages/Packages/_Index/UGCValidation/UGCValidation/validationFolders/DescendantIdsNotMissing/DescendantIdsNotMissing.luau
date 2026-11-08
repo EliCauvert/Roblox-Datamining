@@ -4,7 +4,9 @@ local ConstantsModule = require(Parent.Constants)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 local ParseContentIdsModule = require(Parent.util.ParseContentIds)
 local _ = require(Parent.util.Types)
+local UnpublishedDependenciesModule = require(Parent.util.UnpublishedDependencies)
 local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local GetFFlagUGCValidateAllowAnimationVersionPinsModule = require(Parent.flags.getFFlagUGCValidateAllowAnimationVersionPins)
 local GetFFlagUGCValidateCheckDescendantIdsLoadableModule = require(Parent.flags.getFFlagUGCValidateCheckDescendantIdsLoadable)
 local GetFFlagUGCValidateVersionedContentIdsModule = require(Parent.flags.getFFlagUGCValidateVersionedContentIds)
 
@@ -49,7 +51,7 @@ return {
 	},
 	expectedFailures = {},
 	run = function(p1, p2)
-		-- upvalues: ValidationEnumsModule (copy), ConstantsModule (copy), ErrorSourceStringsModule (copy), GetFFlagUGCValidateVersionedContentIdsModule (copy), GetFFlagUGCValidateCheckDescendantIdsLoadableModule (copy), ParseContentIdsModule (copy), UGCValidationService (copy), reportUnloadable (copy)
+		-- upvalues: ValidationEnumsModule (copy), ConstantsModule (copy), ErrorSourceStringsModule (copy), GetFFlagUGCValidateVersionedContentIdsModule (copy), GetFFlagUGCValidateAllowAnimationVersionPinsModule (copy), UnpublishedDependenciesModule (copy), GetFFlagUGCValidateCheckDescendantIdsLoadableModule (copy), ParseContentIdsModule (copy), UGCValidationService (copy), reportUnloadable (copy)
 		local IsConsumerEnvMatch = p2.consumerConfig.consumerEnv == ValidationEnumsModule.ConsumerEnv.IEC
 		local t = {}
 		
@@ -115,52 +117,70 @@ return {
 				end
 			end
 		end
-		if GetFFlagUGCValidateVersionedContentIdsModule() then
-			for AssetId, contentId2 in p2.contentIds do
-				for _, value2 in contentId2 do
-					if value2.version ~= nil then
+		local IsValidationEnvMatch = p2.consumerConfig.validationEnv == ValidationEnumsModule.ValidationEnv.Backend
+		
+		if GetFFlagUGCValidateVersionedContentIdsModule() and IsValidationEnvMatch then
+			local t1 = {}
+			
+			for AssetId, contentId1 in p2.contentIds do
+				for _, value2 in contentId1 do
+					local Version = value2.version
+					
+					if Version ~= nil then
 						local config = {
 							InstanceFullName = value2.instance:GetFullName(),
 							FieldName = value2.fieldName,
-							Version = tostring(value2.version),
+							Version = tostring(Version),
 							AssetId = AssetId
 						}
 						
-						if value2.fieldName == "AnimationId" then
+						if value2.fieldName == "AnimationId" and not GetFFlagUGCValidateAllowAnimationVersionPinsModule() then
 							p1:fail(ErrorSourceStringsModule.Keys.DescendantIdAnimationVersionNotSupported, config)
-						elseif value2.version ~= 1 then
-							p1:fail(ErrorSourceStringsModule.Keys.DescendantIdVersionNotSupported, config)
+						else
+							local Entry = t1[AssetId]
+							
+							if Entry == nil then
+								local Success2, Result2 = pcall(UnpublishedDependenciesModule.getLatestVersionNumber, AssetId)
+								
+								if not Success2 then
+									p1:fetchError(`Failed to read asset {AssetId}: {Result2}`)
+								end
+								Entry = Result2
+								t1[AssetId] = Result2
+							end
+							if Version ~= Entry then
+								config.LatestVersion = tostring(Entry)
+								p1:fail(ErrorSourceStringsModule.Keys.DescendantIdVersionNotLatest, config)
+							end
 						end
 					end
 				end
 			end
 		end
-		local IsValidationEnvMatch = p2.consumerConfig.validationEnv == ValidationEnumsModule.ValidationEnv.Backend
-		
 		if IsValidationEnvMatch or GetFFlagUGCValidateCheckDescendantIdsLoadableModule() then
 			if GetFFlagUGCValidateVersionedContentIdsModule() then
 				for _, value1 in ParseContentIdsModule.getDistinctReferences(p2.contentIds) do
 					local Uri = value1.uri
-					local Success1, Result1 = pcall(function()
+					local Success, Result = pcall(function()
 						-- upvalues: UGCValidationService (upval), Uri (copy)
 						return UGCValidationService:CanLoadAsset(Uri)
 					end)
 					
-					if not Success1 or not Result1 then
+					if not Success or not Result then
 						reportUnloadable(p1, IsValidationEnvMatch, value1.key, value1.entry)
 					end
 				end
 				return
 			else
-				for i, contentId1 in p2.contentIds do
+				for i, contentId2 in p2.contentIds do
 					local Text = "rbxassetid://" .. i
-					local Success, Result = pcall(function()
+					local Success1, Result1 = pcall(function()
 						-- upvalues: UGCValidationService (upval), Text (copy)
 						return UGCValidationService:CanLoadAsset(Text)
 					end)
 					
-					if not Success or not Result then
-						reportUnloadable(p1, IsValidationEnvMatch, i, contentId1[1])
+					if not Success1 or not Result1 then
+						reportUnloadable(p1, IsValidationEnvMatch, i, contentId2[1])
 					end
 				end
 			end

@@ -381,6 +381,7 @@ return function(p2)
 					promptChips = p2.promptChips,
 					isPromptChipsLoading = p2.isPromptChipsLoading,
 					onPromptChipActivated = p2.onPromptChipActivated,
+					onPromptChipExhausted = p2.onPromptChipExhausted,
 					images = if FFlagBuildExperienceChatImageAttachmentsModule then p2.composerImages else nil,
 					onImagesChanged = if FFlagBuildExperienceChatImageAttachmentsModule then p2.onComposerImagesChanged else nil,
 					onRetryImage = if FFlagBuildExperienceChatImageAttachmentsModule then p2.onRetryComposerImage else nil,
@@ -428,7 +429,7 @@ return function(p2)
 			attemptedOption = p2.agentAdCampaignAttemptedOption,
 			runStartTimeMs = p2.agentAdCampaignRunStartTimeMs
 		}) else nil,
-		AdCampaignCreatedToast = if FFlagBuildAdUpsellModule and p2.isAdCampaignCreatedToastVisible and p2.isAdUpsellVisible then ReactModule.createElement(AdCampaignCreatedToastModule, {
+		AdCampaignCreatedToast = if FFlagBuildAdUpsellModule and (p2.isAdCampaignCreatedToastVisible and p2.isAdUpsellVisible) then ReactModule.createElement(AdCampaignCreatedToastModule, {
 			testId = "AdCampaignCreatedToast",
 			actionText = if p2.onOpenGetUsersPage == nil then nil else UseLocalizationResult.adCampaignCreatedView,
 			onActionActivated = p2.onOpenGetUsersPage,

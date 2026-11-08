@@ -1,0 +1,560 @@
+﻿local ProtoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
+local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
+local t = {}
+local ClientCapabilitiesModule = require(script.Parent.Parent.Parent.shared.v1beta1.client_capabilities)
+local HydrationContentModule = require(script.Parent.Parent.Parent.shared.v1beta1.hydration_content)
+local TemplateEntryModule = require(script.Parent.Parent.Parent.shared.v1beta1.template_entry)
+local PageEntryContentModule = require(script.Parent.Parent.Parent.shared.v1beta1.page_entry_content)
+local Module = {}
+Module.__index = Module
+
+function Module.new(p1)
+	-- upvalues: t (copy), Module (copy)
+	return (setmetatable({
+		item_id = if p1 == nil or p1.item_id == nil then "" else p1.item_id,
+		item_type = if p1 == nil or p1.item_type == nil then assert(t.GameItemType.fromNumber(0), "Enum has no 0 default") else p1.item_type,
+		universe_id = if p1 == nil or p1.universe_id == nil then 0 else p1.universe_id,
+		client_capabilities = if p1 == nil or p1.client_capabilities == nil then nil else p1.client_capabilities
+	}, Module))
+end
+
+function Module:encode()
+	-- upvalues: ProtoModule (copy), t (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
+	
+	if self.item_id ~= nil and self.item_id ~= "" then
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.item_id)
+	end
+	if self.item_type ~= nil and (self.item_type ~= nil and self.item_type ~= 0 or self.item_type ~= t.GameItemType.fromNumber(0)) then
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult1, WriteTagResult2_1, t.GameItemType.toNumber(self.item_type))
+	end
+	if self.universe_id ~= nil and self.universe_id ~= 0 then
+		local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult3, WriteTagResult2_2, self.universe_id)
+	end
+	if self.client_capabilities ~= nil then
+		local EncodeResult = self.client_capabilities:encode()
+		local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
+	end
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
+	
+	return Buf1
+end
+
+function Module.decode(Buf)
+	-- upvalues: Module (copy), ProtoModule (copy), t (copy), ClientCapabilitiesModule (copy)
+	local NewModule = Module.new()
+	local v1 = 0
+	while v1 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v23 = ProtoModule.readTag(Buf, v1)
+		
+		if Tag2 == ProtoModule.wireTypes.varint then
+			if Tag == 2 then
+				local VarIntI32
+				VarIntI32, v23 = ProtoModule.readVarIntI32(Buf, v1)
+				NewModule.item_type = t.GameItemType.fromNumber(VarIntI32) or VarIntI32
+			elseif Tag == 3 then
+				NewModule.universe_id, v23 = ProtoModule.readVarIntI64(Buf, v1)
+			else
+				local _
+				_, v23 = ProtoModule.readVarInt(Buf, v1)
+			end
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v23 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.item_id = buffer.tostring(Buffer1)
+			elseif Tag == 4 then
+				local Buffer2
+				Buffer2, v23 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.client_capabilities = ClientCapabilitiesModule.ClientCapabilities.decode(Buffer2)
+			else
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v1)
+				v1 = VarInt2 + VarInt
+			end
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v23 = ProtoModule.readFixed32(Buf, v1)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v23 = ProtoModule.readFixed64(Buf, v1)
+		else
+			error("Unsupported wire type: " .. Tag2)
+		end
+	end
+	return NewModule
+end
+
+function Module:jsonEncode()
+	-- upvalues: t (copy)
+	local t1 = {}
+	
+	if self.item_id ~= nil and self.item_id ~= "" then
+		t1.itemId = self.item_id
+	end
+	if self.item_type ~= nil and (self.item_type ~= nil and self.item_type ~= 0 or self.item_type ~= t.GameItemType.fromNumber(0)) then
+		t1.itemType = if typeof(self.item_type) == "number" then self.item_type else t.GameItemType.toNumber(self.item_type)
+	end
+	if self.universe_id ~= nil and self.universe_id ~= 0 then
+		t1.universeId = self.universe_id
+	end
+	if self.client_capabilities ~= nil then
+		t1.clientCapabilities = self.client_capabilities:jsonEncode()
+	end
+	return t1
+end
+
+function Module:jsonDecode()
+	-- upvalues: Module (copy), t (copy), ClientCapabilitiesModule (copy)
+	local NewModule = Module.new()
+	
+	if self.item_id ~= nil then
+		NewModule.item_id = self.item_id
+	end
+	if self.itemId ~= nil then
+		NewModule.item_id = self.itemId
+	end
+	if self.item_type ~= nil then
+		NewModule.item_type = (if typeof(self.item_type) == "number" then t.GameItemType.fromNumber(self.item_type) else t.GameItemType.fromName(self.item_type)) or self.item_type
+	end
+	if self.itemType ~= nil then
+		NewModule.item_type = (if typeof(self.itemType) == "number" then t.GameItemType.fromNumber(self.itemType) else t.GameItemType.fromName(self.itemType)) or self.itemType
+	end
+	if self.universe_id ~= nil then
+		NewModule.universe_id = self.universe_id
+	end
+	if self.universeId ~= nil then
+		NewModule.universe_id = self.universeId
+	end
+	if self.client_capabilities ~= nil then
+		NewModule.client_capabilities = ClientCapabilitiesModule.ClientCapabilities.jsonDecode(self.client_capabilities)
+	end
+	if self.clientCapabilities ~= nil then
+		NewModule.client_capabilities = ClientCapabilitiesModule.ClientCapabilities.jsonDecode(self.clientCapabilities)
+	end
+	return NewModule
+end
+
+Module.descriptor = {
+	name = "GameItemDetailsPageRequest",
+	fullName = "roblox.apppageplatform.devstore.v1beta1.GameItemDetailsPageRequest"
+}
+t.GameItemDetailsPageRequest = Module
+TypeRegistryModule.default:register(t.GameItemDetailsPageRequest)
+local Module1 = {}
+Module1.__index = Module1
+
+function Module1.new(p1)
+	-- upvalues: Module1 (copy)
+	return (setmetatable({
+		page_entries = if p1 == nil or p1.page_entries == nil then {} else p1.page_entries,
+		hydration_data = if p1 == nil or p1.hydration_data == nil then nil else p1.hydration_data,
+		templates = if p1 == nil or p1.templates == nil then {} else p1.templates,
+		localized_literals = if p1 == nil or p1.localized_literals == nil then {} else p1.localized_literals
+	}, Module1))
+end
+
+function Module1:encode()
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
+	
+	if self.page_entries ~= nil and #self.page_entries > 0 then
+		for _, pageEntry in self.page_entries do
+			local EncodeResult = pageEntry:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+	end
+	if self.hydration_data ~= nil then
+		local EncodeResult = self.hydration_data:encode()
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+	end
+	if self.templates ~= nil and next(self.templates) ~= nil then
+		for i, template in self.templates do
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult, WriteStringResult2 = ProtoModule.writeString(WriteTagResult3, WriteTagResult2_2, i)
+			local EncodeResult = template:encode()
+			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(WriteStringResult, WriteStringResult2, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult, WriteBufferResult2 = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult5, WriteTagResult2_4, WriteBufferResult, WriteBufferResult2)
+		end
+	end
+	if self.localized_literals ~= nil and next(self.localized_literals) ~= nil then
+		for i1, localizedLiteral in self.localized_literals do
+			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult1, WriteStringResult2_1 = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, i1)
+			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(WriteStringResult1, WriteStringResult2_1, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult3, WriteStringResult2_2 = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, localizedLiteral)
+			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult8, WriteTagResult2_7, WriteStringResult3, WriteStringResult2_2)
+		end
+	end
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
+	
+	return Buf1
+end
+
+function Module1.decode(Buf)
+	-- upvalues: Module1 (copy), ProtoModule (copy), PageEntryContentModule (copy), HydrationContentModule (copy), t (copy), TemplateEntryModule (copy)
+	local NewModule = Module1.new()
+	local v2 = 0
+	while v2 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v66 = ProtoModule.readTag(Buf, v2)
+		
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v66 = ProtoModule.readVarInt(Buf, v2)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v66 = ProtoModule.readBuffer(Buf, v2)
+				table.insert(NewModule.page_entries, PageEntryContentModule.UniversalPageEntry.decode(Buffer1))
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v66 = ProtoModule.readBuffer(Buf, v2)
+				NewModule.hydration_data = HydrationContentModule.HydrationContent.decode(Buffer2)
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v66 = ProtoModule.readBuffer(Buf, v2)
+				local DecodeResult = t.GameItemDetailsPageResponse_TemplatesEntry.decode(Buffer3)
+				local NewResult = TemplateEntryModule.TemplateEntry.new()
+				NewModule.templates[DecodeResult.key or ""] = DecodeResult.value or NewResult
+			elseif Tag == 4 then
+				local Buffer4
+				Buffer4, v66 = ProtoModule.readBuffer(Buf, v2)
+				local DecodeResult = t.GameItemDetailsPageResponse_LocalizedLiteralsEntry.decode(Buffer4)
+				NewModule.localized_literals[DecodeResult.key or ""] = DecodeResult.value or ""
+			else
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v2)
+				v2 = VarInt2 + VarInt
+			end
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v66 = ProtoModule.readFixed32(Buf, v2)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v66 = ProtoModule.readFixed64(Buf, v2)
+		else
+			error("Unsupported wire type: " .. Tag2)
+		end
+	end
+	return NewModule
+end
+
+function Module1:jsonEncode()
+	local t = {}
+	
+	if self.page_entries ~= nil and #self.page_entries > 0 then
+		local PageEntries = {}
+		
+		for _, pageEntry in self.page_entries do
+			table.insert(PageEntries, pageEntry:jsonEncode())
+		end
+		t.pageEntries = PageEntries
+	end
+	if self.hydration_data ~= nil then
+		t.hydrationData = self.hydration_data:jsonEncode()
+	end
+	if self.templates ~= nil and next(self.templates) ~= nil then
+		local Templates = {}
+		
+		for i, template in self.templates do
+			Templates[i] = template:jsonEncode()
+		end
+		t.templates = Templates
+	end
+	if self.localized_literals ~= nil and next(self.localized_literals) ~= nil then
+		local LocalizedLiterals = {}
+		
+		for i1, localizedLiteral in self.localized_literals do
+			LocalizedLiterals[i1] = localizedLiteral
+		end
+		t.localizedLiterals = LocalizedLiterals
+	end
+	return t
+end
+
+function Module1:jsonDecode()
+	-- upvalues: Module1 (copy), PageEntryContentModule (copy), HydrationContentModule (copy), TemplateEntryModule (copy)
+	local NewModule = Module1.new()
+	
+	if self.page_entries ~= nil then
+		local Page_entries = {}
+		
+		for _, pageEntry in self.page_entries do
+			table.insert(Page_entries, PageEntryContentModule.UniversalPageEntry.jsonDecode(pageEntry))
+		end
+		NewModule.page_entries = Page_entries
+	end
+	if self.pageEntries ~= nil then
+		local Page_entries = {}
+		
+		for _, pageEntry1 in self.pageEntries do
+			table.insert(Page_entries, PageEntryContentModule.UniversalPageEntry.jsonDecode(pageEntry1))
+		end
+		NewModule.page_entries = Page_entries
+	end
+	if self.hydration_data ~= nil then
+		NewModule.hydration_data = HydrationContentModule.HydrationContent.jsonDecode(self.hydration_data)
+	end
+	if self.hydrationData ~= nil then
+		NewModule.hydration_data = HydrationContentModule.HydrationContent.jsonDecode(self.hydrationData)
+	end
+	if self.templates ~= nil then
+		local Templates = {}
+		
+		for i, template in self.templates do
+			Templates[i] = TemplateEntryModule.TemplateEntry.jsonDecode(template)
+		end
+		NewModule.templates = Templates
+	end
+	if self.localized_literals ~= nil then
+		local Localized_literals = {}
+		
+		for i1, localizedLiteral in self.localized_literals do
+			Localized_literals[i1] = localizedLiteral
+		end
+		NewModule.localized_literals = Localized_literals
+	end
+	if self.localizedLiterals ~= nil then
+		local Localized_literals = {}
+		
+		for i2, localizedLiteral1 in self.localizedLiterals do
+			Localized_literals[i2] = localizedLiteral1
+		end
+		NewModule.localized_literals = Localized_literals
+	end
+	return NewModule
+end
+
+Module1.descriptor = {
+	name = "GameItemDetailsPageResponse",
+	fullName = "roblox.apppageplatform.devstore.v1beta1.GameItemDetailsPageResponse"
+}
+t.GameItemDetailsPageResponse = Module1
+TypeRegistryModule.default:register(t.GameItemDetailsPageResponse)
+local Module2 = {}
+Module2.__index = Module2
+
+function Module2.new(p1)
+	-- upvalues: Module2 (copy)
+	return (setmetatable({
+		key = if p1 == nil or p1.key == nil then "" else p1.key,
+		value = if p1 == nil or p1.value == nil then nil else p1.value
+	}, Module2))
+end
+
+function Module2:encode()
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
+	
+	if self.key ~= nil and self.key ~= "" then
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.key)
+	end
+	if self.value ~= nil then
+		local EncodeResult = self.value:encode()
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+	end
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
+	
+	return Buf1
+end
+
+function Module2.decode(Buf)
+	-- upvalues: Module2 (copy), ProtoModule (copy), TemplateEntryModule (copy)
+	local NewModule = Module2.new()
+	local v3 = 0
+	while v3 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v99 = ProtoModule.readTag(Buf, v3)
+		
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v99 = ProtoModule.readVarInt(Buf, v3)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v99 = ProtoModule.readBuffer(Buf, v3)
+				NewModule.key = buffer.tostring(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v99 = ProtoModule.readBuffer(Buf, v3)
+				NewModule.value = TemplateEntryModule.TemplateEntry.decode(Buffer2)
+			else
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v3)
+				v3 = VarInt2 + VarInt
+			end
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v99 = ProtoModule.readFixed32(Buf, v3)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v99 = ProtoModule.readFixed64(Buf, v3)
+		else
+			error("Unsupported wire type: " .. Tag2)
+		end
+	end
+	return NewModule
+end
+
+function Module2:jsonEncode()
+	local t = {}
+	
+	if self.key ~= nil and self.key ~= "" then
+		t.key = self.key
+	end
+	if self.value ~= nil then
+		t.value = self.value:jsonEncode()
+	end
+	return t
+end
+
+function Module2:jsonDecode()
+	-- upvalues: Module2 (copy), TemplateEntryModule (copy)
+	local NewModule = Module2.new()
+	
+	if self.key ~= nil then
+		NewModule.key = self.key
+	end
+	if self.value ~= nil then
+		NewModule.value = TemplateEntryModule.TemplateEntry.jsonDecode(self.value)
+	end
+	return NewModule
+end
+
+Module2.descriptor = {
+	name = "GameItemDetailsPageResponse_TemplatesEntry",
+	fullName = "roblox.apppageplatform.devstore.v1beta1.TemplatesEntry"
+}
+t.GameItemDetailsPageResponse_TemplatesEntry = Module2
+TypeRegistryModule.default:register(t.GameItemDetailsPageResponse_TemplatesEntry)
+local Module3 = {}
+Module3.__index = Module3
+
+function Module3.new(p1)
+	-- upvalues: Module3 (copy)
+	return (setmetatable({
+		key = if p1 == nil or p1.key == nil then "" else p1.key,
+		value = if p1 == nil or p1.value == nil then "" else p1.value
+	}, Module3))
+end
+
+function Module3:encode()
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
+	
+	if self.key ~= nil and self.key ~= "" then
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.key)
+	end
+	if self.value ~= nil and self.value ~= "" then
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.value)
+	end
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
+	
+	return Buf1
+end
+
+function Module3.decode(Buf)
+	-- upvalues: Module3 (copy), ProtoModule (copy)
+	local NewModule = Module3.new()
+	local v4 = 0
+	while v4 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v118 = ProtoModule.readTag(Buf, v4)
+		
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v118 = ProtoModule.readVarInt(Buf, v4)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v118 = ProtoModule.readBuffer(Buf, v4)
+				NewModule.key = buffer.tostring(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v118 = ProtoModule.readBuffer(Buf, v4)
+				NewModule.value = buffer.tostring(Buffer2)
+			else
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v4)
+				v4 = VarInt2 + VarInt
+			end
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v118 = ProtoModule.readFixed32(Buf, v4)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v118 = ProtoModule.readFixed64(Buf, v4)
+		else
+			error("Unsupported wire type: " .. Tag2)
+		end
+	end
+	return NewModule
+end
+
+function Module3:jsonEncode()
+	local t = {}
+	
+	if self.key ~= nil and self.key ~= "" then
+		t.key = self.key
+	end
+	if self.value ~= nil and self.value ~= "" then
+		t.value = self.value
+	end
+	return t
+end
+
+function Module3:jsonDecode()
+	-- upvalues: Module3 (copy)
+	local NewModule = Module3.new()
+	
+	if self.key ~= nil then
+		NewModule.key = self.key
+	end
+	if self.value ~= nil then
+		NewModule.value = self.value
+	end
+	return NewModule
+end
+
+Module3.descriptor = {
+	name = "GameItemDetailsPageResponse_LocalizedLiteralsEntry",
+	fullName = "roblox.apppageplatform.devstore.v1beta1.LocalizedLiteralsEntry"
+}
+t.GameItemDetailsPageResponse_LocalizedLiteralsEntry = Module3
+TypeRegistryModule.default:register(t.GameItemDetailsPageResponse_LocalizedLiteralsEntry)
+t.GameItemType = {
+	fromNumber = function(p1)
+		return if p1 == 0 then "GAME_ITEM_TYPE_INVALID" elseif p1 == 1 then "GAME_ITEM_TYPE_GAME_PASS" elseif p1 == 2 then "GAME_ITEM_TYPE_DEVELOPER_PRODUCT" elseif p1 == 3 then "GAME_ITEM_TYPE_SUBSCRIPTION" else nil
+	end,
+	toNumber = function(p1)
+		return if p1 == "GAME_ITEM_TYPE_INVALID" then 0 elseif p1 == "GAME_ITEM_TYPE_GAME_PASS" then 1 elseif p1 == "GAME_ITEM_TYPE_DEVELOPER_PRODUCT" then 2 elseif p1 == "GAME_ITEM_TYPE_SUBSCRIPTION" then 3 else p1
+	end,
+	fromName = function(p1)
+		return if p1 == "GAME_ITEM_TYPE_INVALID" then "GAME_ITEM_TYPE_INVALID" elseif p1 == "GAME_ITEM_TYPE_GAME_PASS" then "GAME_ITEM_TYPE_GAME_PASS" elseif p1 == "GAME_ITEM_TYPE_DEVELOPER_PRODUCT" then "GAME_ITEM_TYPE_DEVELOPER_PRODUCT" elseif p1 == "GAME_ITEM_TYPE_SUBSCRIPTION" then "GAME_ITEM_TYPE_SUBSCRIPTION" else nil
+	end
+}
+
+return {
+	GameItemDetailsPageRequest = t.GameItemDetailsPageRequest,
+	GameItemDetailsPageResponse = t.GameItemDetailsPageResponse,
+	GameItemType = t.GameItemType
+}

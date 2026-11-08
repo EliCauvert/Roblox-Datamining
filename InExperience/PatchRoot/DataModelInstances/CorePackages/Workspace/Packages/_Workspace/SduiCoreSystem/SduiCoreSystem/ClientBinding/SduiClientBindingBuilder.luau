@@ -2,6 +2,7 @@
 local Parent = SduiCoreSystem.Parent
 local SignalsModule = require(Parent.Signals)
 local SduiErrorsModule = require(SduiCoreSystem.SduiErrors)
+local AddSduiErrorContextFieldsModule = require(SduiCoreSystem.addSduiErrorContextFields)
 local SduiLoggerModule = require(SduiCoreSystem.SduiLogger)
 local BuildDataBindingSourcesForTemplateModule = require(SduiCoreSystem.ClientBinding.buildDataBindingSourcesForTemplate)
 local BuildAnalyticsContextForClientBindingModule = require(SduiCoreSystem.ClientBinding.buildAnalyticsContextForClientBinding)
@@ -10,7 +11,9 @@ local SduiComponentTypeModule = require(SduiCoreSystem.SduiComponentType)
 local PropResultCategory = require(SduiCoreSystem.ClientBinding.SduiClientBindingTypes).PropResultCategory
 local ProtoVariableMapperModule = require(SduiCoreSystem.ClientBinding.ProtoVariableMapper)
 local SduiParseHelpersModule = require(SduiCoreSystem.SduiParseHelpers)
-local FFlagSduiExperimentalComponent = require(Parent.SharedFlags).FFlagSduiExperimentalComponent
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagSduiExperimentalComponent = SharedFlagsModule.FFlagSduiExperimentalComponent
+local FFlagSduiErrorPaths = SharedFlagsModule.FFlagSduiErrorPaths
 
 local function buildProp(IsComponentFiltered, Computed, p1, p2, AnalyticsContext, p3)
 	-- upvalues: FFlagSduiExperimentalComponent (copy), buildProp (copy)
@@ -54,7 +57,7 @@ local function buildProp(IsComponentFiltered, Computed, p1, p2, AnalyticsContext
 end
 
 local function buildPropTable(AnalyticsData, Computed, p4, p5, AnalyticsContext)
-	-- upvalues: ProtoVariableMapperModule (copy), buildProp (copy), PropResultCategory (copy), SduiLoggerModule (copy), SduiErrorsModule (copy)
+	-- upvalues: ProtoVariableMapperModule (copy), buildProp (copy), PropResultCategory (copy), FFlagSduiErrorPaths (copy), AddSduiErrorContextFieldsModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy)
 	local t = {}
 	
 	if AnalyticsData == nil then
@@ -68,7 +71,7 @@ local function buildPropTable(AnalyticsData, Computed, p4, p5, AnalyticsContext)
 	for i, Value in AnalyticsData do
 		local MapPropNameResult = ProtoVariableMapperModule.mapPropName(i)
 		local Success, Result = pcall(function()
-			-- upvalues: buildProp (upval), Value (copy), Computed (copy), p4 (copy), p5 (copy), AnalyticsContext (copy), PropResultCategory (upval), T (ref), MapPropNameResult (copy), T1 (ref), T2 (ref), t (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), CurrentComponentType (copy)
+			-- upvalues: buildProp (upval), Value (copy), Computed (copy), p4 (copy), p5 (copy), AnalyticsContext (copy), PropResultCategory (upval), T (ref), MapPropNameResult (copy), T1 (ref), T2 (ref), t (copy), CurrentComponentType (copy), FFlagSduiErrorPaths (upval), AddSduiErrorContextFieldsModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval)
 			local Prop, Prop2, Prop3 = buildProp(Value, Computed, p4, p5, AnalyticsContext)
 			
 			if Prop2 == PropResultCategory.PropSignal then
@@ -99,14 +102,19 @@ local function buildPropTable(AnalyticsData, Computed, p4, p5, AnalyticsContext)
 				return
 			elseif Prop2 == PropResultCategory.Failed then
 				t[MapPropNameResult] = Prop
-				SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, {
+				local config = {
 					message = `ClientBinding - failed to build prop {MapPropNameResult}: {Prop}, {Prop3}`,
 					propName = `{MapPropNameResult}`,
 					name = p5.debugName,
 					componentType = CurrentComponentType,
 					parserName = Value.descriptor.name,
 					value = Value
-				}, p5.appPage)
+				}
+				
+				if FFlagSduiErrorPaths then
+					AddSduiErrorContextFieldsModule(config, p5.errorContext)
+				end
+				SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, config, p5.appPage)
 				
 				return
 			else
@@ -114,29 +122,38 @@ local function buildPropTable(AnalyticsData, Computed, p4, p5, AnalyticsContext)
 					t[MapPropNameResult] = Prop
 					
 					return
-				else
-					SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, {
-						message = `ClientBinding - unexpected propResultCategory: {Prop2}. {MapPropNameResult}: {Prop}, {Prop3}`,
-						propName = `{MapPropNameResult}`,
-						name = p5.debugName,
-						componentType = CurrentComponentType,
-						parserName = Value.descriptor.name,
-						value = Value
-					}, p5.appPage)
-					t[MapPropNameResult] = Prop
 				end
+				local config = {
+					message = `ClientBinding - unexpected propResultCategory: {Prop2}. {MapPropNameResult}: {Prop}, {Prop3}`,
+					propName = `{MapPropNameResult}`,
+					name = p5.debugName,
+					componentType = CurrentComponentType,
+					parserName = Value.descriptor.name,
+					value = Value
+				}
+				
+				if FFlagSduiErrorPaths then
+					AddSduiErrorContextFieldsModule(config, p5.errorContext)
+				end
+				SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, config, p5.appPage)
+				t[MapPropNameResult] = Prop
 			end
 		end)
 		
 		if not Success then
-			SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, {
+			local config = {
 				message = `ClientBinding - failed to build prop {MapPropNameResult}: {Result}. {Result}`,
 				propName = `{MapPropNameResult}`,
 				name = p5.debugName,
 				componentType = CurrentComponentType,
 				parserName = Value.descriptor.name,
 				value = Value
-			}, p5.appPage)
+			}
+			
+			if FFlagSduiErrorPaths then
+				AddSduiErrorContextFieldsModule(config, p5.errorContext)
+			end
+			SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, config, p5.appPage)
 		end
 	end
 	return t, T, T1, T2
@@ -179,92 +196,119 @@ end
 return {
 	buildPropTable = buildPropTable,
 	buildProp = buildProp,
-	buildConfigForComponent = function(p6, Callback, p7, p8, _, p9, p10)
-		-- upvalues: resolveComponentType (copy), SignalsModule (copy), BuildDataBindingSourcesForTemplateModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), SduiParseHelpersModule (copy), config (copy), buildPropTable (copy), BuildAnalyticsContextForClientBindingModule (copy), buildProp (copy), PropResultCategory (copy)
+	buildConfigForComponent = function(p6, Callback, Tbl, p7, _, p8, p9, p10, p11)
+		-- upvalues: resolveComponentType (copy), FFlagSduiErrorPaths (copy), SignalsModule (copy), BuildDataBindingSourcesForTemplateModule (copy), SduiParseHelpersModule (copy), AddSduiErrorContextFieldsModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), config (copy), buildPropTable (copy), BuildAnalyticsContextForClientBindingModule (copy), buildProp (copy), PropResultCategory (copy)
 		if not p6 or not next(p6) then
 			error("Attempt to buildConfigForComponent with nil template")
 		end
 		local Value = p6.kind.value
 		local ResolveComponentTypeResult = resolveComponentType(Value)
-		p7.currentComponentType = ResolveComponentTypeResult
+		local v3 = nil
+		
+		if FFlagSduiErrorPaths then
+			v3 = p9 or {}
+			local ErrorContext = Tbl.errorContext
+			local FullName = if ErrorContext then ErrorContext.fullName else Tbl.appPage
+			local RctPath = if ErrorContext then ErrorContext.rctPath else nil
+			local P19 = p10 or (ResolveComponentTypeResult or p6.kind.type)
+			v3.errorContext = {
+				fullName = if p11 and p11 ~= "" then `{FullName}.{P19}[{p11}]` else `{FullName}.{P19}`,
+				rctPath = if p10 then if RctPath then `{RctPath}.{p10}` else p10 else RctPath,
+				templateId = if p10 then Tbl.getTemplateIdForRCT and Tbl.getTemplateIdForRCT(p10) else ErrorContext and ErrorContext.templateId
+			}
+			Tbl = table.clone(Tbl)
+			Tbl.errorContext = v3.errorContext
+		end
+		Tbl.currentComponentType = ResolveComponentTypeResult
 		local Computed = nil
 		
-		if p9 == nil then
+		if p8 == nil then
 			local Data = Value.shared and Value.shared.data or {}
-			Computed = SignalsModule.createComputed(function(p11)
-				-- upvalues: BuildDataBindingSourcesForTemplateModule (upval), Callback (copy), Data (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), p7 (copy), ResolveComponentTypeResult (copy), SduiParseHelpersModule (upval)
+			Computed = SignalsModule.createComputed(function(p12)
+				-- upvalues: BuildDataBindingSourcesForTemplateModule (upval), Callback (copy), Data (copy), Tbl (ref), ResolveComponentTypeResult (copy), SduiParseHelpersModule (upval), FFlagSduiErrorPaths (upval), AddSduiErrorContextFieldsModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval)
 				local Success, Result = pcall(function()
-					-- upvalues: BuildDataBindingSourcesForTemplateModule (upval), Callback (upval), p11 (copy), Data (upval)
-					return BuildDataBindingSourcesForTemplateModule(Callback(p11), Data)
+					-- upvalues: BuildDataBindingSourcesForTemplateModule (upval), Callback (upval), p12 (copy), Data (upval)
+					return BuildDataBindingSourcesForTemplateModule(Callback(p12), Data)
 				end)
 				
 				if Success then
 					return Result
-				else
-					SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToBuildBindingSources, {
-						name = p7.debugName,
-						componentType = ResolveComponentTypeResult,
-						message = SduiParseHelpersModule.stringifyValue(Result)
-					}, p7.appPage)
-					
-					return {}
 				end
+				local config = {
+					name = Tbl.debugName,
+					componentType = ResolveComponentTypeResult,
+					message = SduiParseHelpersModule.stringifyValue(Result)
+				}
+				
+				if FFlagSduiErrorPaths then
+					AddSduiErrorContextFieldsModule(config, Tbl.errorContext)
+				end
+				SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToBuildBindingSources, config, Tbl.appPage)
+				
+				return {}
 			end)
 		else
-			Computed = p9
+			Computed = p8
 		end
-		local P19 = p10 or {}
-		P19.__processed = true
-		P19.__isClientBinding = true
-		P19.componentType = ResolveComponentTypeResult
-		setmetatable(P19, config)
-		local v3 = nil
+		if not FFlagSduiErrorPaths then
+			v3 = p9 or {}
+		end
+		v3.__processed = true
+		v3.__isClientBinding = true
+		v3.componentType = ResolveComponentTypeResult
+		setmetatable(v3, config)
 		local v4 = nil
+		local v5 = nil
 		
 		if Value.shared and Value.shared.analytics_data then
-			v3, v49 = buildPropTable(Value.shared.analytics_data, Computed, Callback, p7, nil)
+			v4, v59 = buildPropTable(Value.shared.analytics_data, Computed, Callback, Tbl, nil)
 		end
-		P19.analyticsContext = BuildAnalyticsContextForClientBindingModule(v3, v4, p8, p7)
+		v3.analyticsContext = BuildAnalyticsContextForClientBindingModule(v4, v5, p7, Tbl)
 		
 		if Value.props then
 			local PropTable2, PropTable3, PropTable4
-			P19.props, PropTable2, PropTable3, PropTable4 = buildPropTable(Value.props, Computed, Callback, p7, P19.analyticsContext)
+			v3.props, PropTable2, PropTable3, PropTable4 = buildPropTable(Value.props, Computed, Callback, Tbl, v3.analyticsContext)
 			
 			if PropTable2 ~= nil and next(PropTable2) then
-				P19.propSignals = PropTable2
+				v3.propSignals = PropTable2
 			end
 			if PropTable3 ~= nil and next(PropTable3) then
-				P19.nestedComponentConfigs = PropTable3
+				v3.nestedComponentConfigs = PropTable3
 			end
 			if PropTable4 ~= nil and next(PropTable4) then
-				P19.nestedComponentConfigListPropSignalNames = PropTable4
+				v3.nestedComponentConfigListPropSignalNames = PropTable4
 			end
 		end
 		if Value.shared and Value.shared.is_component_filtered then
 			local IsComponentFiltered = Value.shared.is_component_filtered
 			local Success, Result, Result3, Result4 = pcall(function()
-				-- upvalues: buildProp (upval), IsComponentFiltered (copy), Computed (ref), Callback (copy), p7 (copy), P19 (copy)
-				return buildProp(IsComponentFiltered, Computed, Callback, p7, P19.analyticsContext)
+				-- upvalues: buildProp (upval), IsComponentFiltered (copy), Computed (ref), Callback (copy), Tbl (ref), v3 (ref)
+				return buildProp(IsComponentFiltered, Computed, Callback, Tbl, v3.analyticsContext)
 			end)
 			
 			if Success and not Result4 and Result3 ~= PropResultCategory.Failed then
 				if Result3 == PropResultCategory.PropSignal then
-					P19.isComponentFilteredSignal = Result
+					v3.isComponentFilteredSignal = Result
 				elseif Result3 == PropResultCategory.Literal then
-					function P19.isComponentFilteredSignal()
+					function v3.isComponentFilteredSignal()
 						-- upvalues: Result (copy)
 						return { data = Result }
 					end
 				end
 			else
-				SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, {
+				local config1 = {
 					message = `Failed to build is_component_filtered prop: {if Result4 then SduiParseHelpersModule.stringifyValue(Result4) else SduiParseHelpersModule.stringifyValue(Result)}`,
-					name = p7.debugName,
+					name = Tbl.debugName,
 					componentType = ResolveComponentTypeResult,
 					value = SduiParseHelpersModule.stringifyValue(IsComponentFiltered)
-				}, p7.appPage)
+				}
+				
+				if FFlagSduiErrorPaths then
+					AddSduiErrorContextFieldsModule(config1, Tbl.errorContext)
+				end
+				SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, config1, Tbl.appPage)
 			end
 		end
-		return P19
+		return v3
 	end
 }

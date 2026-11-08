@@ -5,27 +5,17 @@ local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
 local TModule = require(CorePackages.Packages.t)
 local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
 local UIBloxModule = require(CorePackages.Packages.UIBlox)
-local FoundationModule = require(CorePackages.Packages.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(CorePackages.Packages.Foundation).Utility.normalizeFontFace
 local WithStyleFunction = UIBloxModule.Style.withStyle
 local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
-local IconButton = UIBloxModule.App.Button.IconButton
 local RoactGamepadModule = require(CorePackages.Packages.RoactGamepad)
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local NameTextBoxModule = require(script.Parent.Common.NameTextBox)
 local AssetDescriptionTextBoxModule = require(script.Parent.AssetDescriptionTextBox)
 local ImagePreviewModule = require(script.Parent.ImagePreview)
 local ObjectViewportModule = require(script.Parent.ObjectViewport)
-local PreviewViewportModule = require(script.Parent.Common.PreviewViewport)
-local EmoteThumbnailViewModule = require(script.Parent.EmoteThumbnailView)
-local EmoteThumbnailEditorModule = require(script.Parent.EmoteThumbnailEditor)
-local EmoteThumbnailParametersModule = require(script.Parent.EmoteThumbnailParameters)
 local CloseOpenPromptModule = require(script.Parent.Parent.Actions.CloseOpenPrompt)
-local Images = UIBloxModule.App.ImageSet.Images
-local IconsActionsPreviewExpand = Images["icons/actions/previewExpand"]
-local IconsActionsEditEdit = Images["icons/actions/edit/edit"]
 local config = {
 	[Enum.AssetType.TShirtAccessory] = true,
 	[Enum.AssetType.ShirtAccessory] = true,
@@ -39,7 +29,6 @@ local config = {
 	[Enum.AssetType.HairAccessory] = true
 }
 local SendConsentDeniedOnCancel = game:DefineFastFlag("SendConsentDeniedOnCancel", false)
-local EnableEmotePublishEngineFeature = game:GetEngineFeature("EnableEmotePublish")
 local EnableImagePublishEngineFeature = game:GetEngineFeature("EnableImagePublish")
 local PublishAssetPromptSingleStep = RoactModule.PureComponent:extend("PublishAssetPromptSingleStep")
 PublishAssetPromptSingleStep.validateProps = TModule.strictInterface({
@@ -57,45 +46,15 @@ function PublishAssetPromptSingleStep.getDefaultText(p1)
 end
 
 function PublishAssetPromptSingleStep.init(p1)
-	-- upvalues: EmoteThumbnailParametersModule (copy), ExperienceAuthService (copy), EnableEmotePublishEngineFeature (copy), RoactModule (copy)
+	-- upvalues: ExperienceAuthService (copy), RoactModule (copy)
 	p1.assetName = p1:getDefaultText()
 	p1.assetDescription = p1:getDefaultText()
 	p1.isNameValid = true
 	p1.isDescriptionValid = true
-	p1:setState({
-		showingThumbnailEditor = false,
-		showingAssetPreview = false,
-		thumbnailParameters = EmoteThumbnailParametersModule.defaultParameters
-	})
 	
 	function p1.closePrompt()
 		-- upvalues: p1 (copy)
 		p1.props.closePrompt()
-	end
-	
-	function p1.openThumbnailEditor()
-		-- upvalues: p1 (copy)
-		p1:setState({ showingThumbnailEditor = true })
-	end
-	
-	function p1.closeThumbnailEditor()
-		-- upvalues: p1 (copy)
-		p1:setState({ showingThumbnailEditor = false })
-	end
-	
-	function p1.openAssetPreview()
-		-- upvalues: p1 (copy)
-		p1:setState({ showingAssetPreview = true })
-	end
-	
-	function p1.closeAssetPreview()
-		-- upvalues: p1 (copy)
-		p1:setState({ showingAssetPreview = false })
-	end
-	
-	function p1.updateThumbnailParameters(ThumbnailParameters)
-		-- upvalues: p1 (copy)
-		p1:setState({ thumbnailParameters = ThumbnailParameters })
 	end
 	
 	function p1.denyAndClose()
@@ -105,18 +64,16 @@ function PublishAssetPromptSingleStep.init(p1)
 	end
 	
 	function p1.confirmAndUpload()
-		-- upvalues: p1 (copy), EnableEmotePublishEngineFeature (upval), EmoteThumbnailParametersModule (upval), ExperienceAuthService (upval)
-		if not p1.isNameValid then return end
-		local config = {
-			assetName = p1.assetName,
-			assetDescription = p1.assetDescription
-		}
-		
-		if EnableEmotePublishEngineFeature and p1.props.assetType == Enum.AssetType.EmoteAnimation then
-			config.emoteThumbnailParameters = EmoteThumbnailParametersModule.encodeAsATable(p1.state.thumbnailParameters)
+		-- upvalues: p1 (copy), ExperienceAuthService (upval)
+		if p1.isNameValid then
+			ExperienceAuthService:ScopeCheckUIComplete(p1.props.guid, p1.props.scopes, Enum.ScopeCheckResult.ConsentAccepted, {
+				assetName = p1.assetName,
+				assetDescription = p1.assetDescription
+			})
+			p1.closePrompt()
+			
+			return
 		end
-		ExperienceAuthService:ScopeCheckUIComplete(p1.props.guid, p1.props.scopes, Enum.ScopeCheckResult.ConsentAccepted, config)
-		p1.closePrompt()
 	end
 	
 	function p1.onAssetNameUpdated(AssetName, p2)
@@ -142,12 +99,10 @@ function PublishAssetPromptSingleStep.init(p1)
 end
 
 function PublishAssetPromptSingleStep.renderMiddle(p1, p2)
-	-- upvalues: WithStyleFunction (copy), EnableEmotePublishEngineFeature (copy), EnableImagePublishEngineFeature (copy), RoactModule (copy), RoactGamepadModule (copy), ImagePreviewModule (copy), ObjectViewportModule (copy), EmoteThumbnailViewModule (copy), IconButton (copy), IconsActionsPreviewExpand (copy), IconsActionsEditEdit (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), NameTextBoxModule (copy), AssetDescriptionTextBoxModule (copy)
+	-- upvalues: WithStyleFunction (copy), EnableImagePublishEngineFeature (copy), RoactModule (copy), RoactGamepadModule (copy), ImagePreviewModule (copy), ObjectViewportModule (copy), NormalizeFontFaceFunction (copy), NameTextBoxModule (copy), AssetDescriptionTextBoxModule (copy)
 	return WithStyleFunction(function(p3)
-		-- upvalues: EnableEmotePublishEngineFeature (upval), p1 (copy), EnableImagePublishEngineFeature (upval), RoactModule (upval), RoactGamepadModule (upval), ImagePreviewModule (upval), ObjectViewportModule (upval), EmoteThumbnailViewModule (upval), IconButton (upval), IconsActionsPreviewExpand (upval), IconsActionsEditEdit (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), p2 (copy), NameTextBoxModule (upval), AssetDescriptionTextBoxModule (upval)
-		local _Font = p3.Font
+		-- upvalues: EnableImagePublishEngineFeature (upval), p1 (copy), RoactModule (upval), RoactGamepadModule (upval), ImagePreviewModule (upval), ObjectViewportModule (upval), NormalizeFontFaceFunction (upval), p2 (copy), NameTextBoxModule (upval), AssetDescriptionTextBoxModule (upval)
 		local Theme = p3.Theme
-		local IsAnimationClip = EnableEmotePublishEngineFeature and (p1.props.assetType == Enum.AssetType.EmoteAnimation and p1.props.assetInstance:IsA("AnimationClip"))
 		local IsDecal = EnableImagePublishEngineFeature and (p1.props.assetType == Enum.AssetType.Image and p1.props.assetInstance:IsA("Decal"))
 		
 		return RoactModule.createElement(RoactGamepadModule.Focusable.Frame, {
@@ -169,34 +124,7 @@ function PublishAssetPromptSingleStep.renderMiddle(p1, p2)
 						autoRotateSeconds = 6,
 						imageContent = p1.props.assetInstance.TextureContent
 					}) else nil,
-					ObjectViewport = if IsAnimationClip or IsDecal then nil else RoactModule.createElement(ObjectViewportModule, { model = p1.props.assetInstance }) or nil,
-					EmoteThumbnailParent = IsAnimationClip and RoactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
-						AspectRatioConstraint = RoactModule.createElement("UIAspectRatioConstraint", {
-							AspectRatio = 1,
-							AspectType = Enum.AspectType.FitWithinMaxSize,
-							DominantAxis = Enum.DominantAxis.Width
-						}),
-						EmoteThumbnailView = RoactModule.createElement(EmoteThumbnailViewModule, {
-							animationClip = p1.props.assetInstance,
-							thumbnailParameters = p1.state.thumbnailParameters
-						}),
-						PreviewButton = RoactModule.createElement(IconButton, {
-							showBackground = true,
-							position = UDim2.new(1, -2, 1, -2),
-							anchorPoint = Vector2.new(1, 1),
-							icon = IconsActionsPreviewExpand,
-							size = UDim2.new(0, 30, 0, 30),
-							onActivated = p1.openAssetPreview
-						}),
-						EditButton = RoactModule.createElement(IconButton, {
-							showBackground = true,
-							position = UDim2.new(0, 2, 1, -2),
-							anchorPoint = Vector2.new(0, 1),
-							icon = IconsActionsEditEdit,
-							size = UDim2.new(0, 30, 0, 30),
-							onActivated = p1.openThumbnailEditor
-						})
-					}) or nil
+					ObjectViewport = if IsDecal then nil else RoactModule.createElement(ObjectViewportModule, { model = p1.props.assetInstance }) or nil
 				}),
 				NameDescriptionFields = RoactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
@@ -208,8 +136,7 @@ function PublishAssetPromptSingleStep.renderMiddle(p1, p2)
 						TextSize = 12,
 						BackgroundTransparency = 1,
 						Size = UDim2.new(1, 0, 0, 15),
-						Font = if FoundationFontFaceMigration then nil else _Font.Body.Font,
-						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
+						FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font),
 						Text = p2.name,
 						TextColor3 = Theme.TextDefault.Color,
 						TextXAlignment = Enum.TextXAlignment.Left
@@ -227,8 +154,7 @@ function PublishAssetPromptSingleStep.renderMiddle(p1, p2)
 						BackgroundTransparency = 1,
 						Size = UDim2.new(1, 0, 0, 15),
 						Position = UDim2.new(0, 0, 0, 60),
-						Font = if FoundationFontFaceMigration then nil else _Font.Body.Font,
-						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
+						FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font),
 						Text = p2.description,
 						TextColor3 = Theme.TextDefault.Color,
 						TextXAlignment = Enum.TextXAlignment.Left
@@ -250,8 +176,7 @@ function PublishAssetPromptSingleStep.renderMiddle(p1, p2)
 				Size = UDim2.new(1, 0, 0, 50),
 				TextYAlignment = Enum.TextYAlignment.Center,
 				Text = p2.disclaimer,
-				Font = if FoundationFontFaceMigration then nil else _Font.Body.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font),
 				TextColor3 = Theme.TextEmphasis.Color,
 				AnchorPoint = Vector2.new(0, 1),
 				Position = UDim2.fromScale(0, 1)
@@ -261,8 +186,8 @@ function PublishAssetPromptSingleStep.renderMiddle(p1, p2)
 end
 
 function PublishAssetPromptSingleStep.renderAlertLocalized(p1, p2)
-	-- upvalues: RoactModule (copy), InteractiveAlert (copy), SendConsentDeniedOnCancel (copy), ButtonType (copy), EnableEmotePublishEngineFeature (copy), EmoteThumbnailEditorModule (copy), PreviewViewportModule (copy)
-	local Element = RoactModule.createElement(InteractiveAlert, {
+	-- upvalues: RoactModule (copy), InteractiveAlert (copy), SendConsentDeniedOnCancel (copy), ButtonType (copy)
+	return (RoactModule.createElement(InteractiveAlert, {
 		isMiddleContentFocusable = true,
 		title = p2.title,
 		buttonStackInfo = {
@@ -293,30 +218,7 @@ function PublishAssetPromptSingleStep.renderAlertLocalized(p1, p2)
 		end,
 		screenSize = p1.props.screenSize,
 		defaultChildRef = p1.props.defaultChildRef
-	})
-	
-	return if EnableEmotePublishEngineFeature then RoactModule.createFragment({
-		Prompt = Element,
-		ThumbnailEditor = p1.state.showingThumbnailEditor and RoactModule.createElement(EmoteThumbnailEditorModule, {
-			animationClip = p1.props.assetInstance,
-			initialThumbnailParameters = p1.state.thumbnailParameters,
-			screenSize = p1.props.screenSize,
-			updateThumbnailCallback = p1.updateThumbnailParameters,
-			closePromptCallback = p1.closeThumbnailEditor
-		}) or nil,
-		PreviewFrame = p1.state.showingAssetPreview and RoactModule.createElement("Frame", {
-			BackgroundTransparency = 0,
-			Size = UDim2.new(0.5, 0, 0.5, 0),
-			BackgroundColor3 = Color3.new(0.2, 0.2, 0.2),
-			AnchorPoint = Vector2.new(0.5, 0.5),
-			Position = UDim2.fromScale(0.5, 0.5)
-		}, {
-			PreviewViewport = RoactModule.createElement(PreviewViewportModule, {
-				asset = p1.props.assetInstance,
-				closePreviewView = p1.closeAssetPreview
-			})
-		}) or nil
-	}) else Element
+	}))
 end
 
 local function _(p1): boolean

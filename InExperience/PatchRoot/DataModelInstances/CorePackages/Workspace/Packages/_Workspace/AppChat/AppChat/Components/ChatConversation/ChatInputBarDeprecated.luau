@@ -2,7 +2,6 @@
 local Parent = AppChat.Parent
 local RoactModule = require(Parent.Roact)
 local Text = require(Parent.AppCommonLib).Text
-local FoundationFontFaceMigration = require(Parent.Foundation).Utility.Flags.FoundationFontFaceMigration
 local GetTextSizeFunction = require(Parent.Style).GetTextSize
 local IsTenFootInterfaceFunction = require(Parent.AppCommonLib).isTenFootInterface
 local UIBloxModule = require(Parent.UIBlox)
@@ -58,7 +57,7 @@ ChatInputBarDeprecated.defaultProps = {
 }
 
 function ChatInputBarDeprecated.init(p1)
-	-- upvalues: RoactModule (copy), UserInputService (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), GetAppFeaturePoliciesFunction (copy), GetFIntAppChatBehaviorCollectionEnabledPercentageModule (copy), Players (copy), IsMessageValidModule (copy), IsKeyCodePressedModule (copy), AppChatUseTextBoxTextOnSend (copy), SendButtonClickActionResultModule (copy), FFlagAppChatOnConsoles (copy), IsTenFootInterfaceFunction (copy)
+	-- upvalues: RoactModule (copy), UserInputService (copy), GetTextSizeFunction (copy), GetAppFeaturePoliciesFunction (copy), GetFIntAppChatBehaviorCollectionEnabledPercentageModule (copy), Players (copy), IsMessageValidModule (copy), IsKeyCodePressedModule (copy), AppChatUseTextBoxTextOnSend (copy), Text (copy), SendButtonClickActionResultModule (copy), FFlagAppChatOnConsoles (copy), IsTenFootInterfaceFunction (copy)
 	p1.isMounted = false
 	p1.state = {
 		showSendChat = false,
@@ -76,8 +75,8 @@ function ChatInputBarDeprecated.init(p1)
 	p1.textChangedFallback = p1.props.textChangedFallback or not UserInputService.KeyboardEnabled
 	
 	function p1.heightOfFourLines(p2, p3, X)
-		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Text (upval)
-		return if FoundationFontFaceMigration then GetTextSizeFunction("A\nB\nC\nD", p3, p2, Vector2.new(X, 10000)).Y else Text.GetTextHeight("A\nB\nC\nD", p2, p3, X)
+		-- upvalues: GetTextSizeFunction (upval)
+		return GetTextSizeFunction("A\nB\nC\nD", p3, p2, Vector2.new(X, 10000)).Y
 	end
 	
 	function p1.isMoreMenuEnabled()
@@ -86,8 +85,8 @@ function ChatInputBarDeprecated.init(p1)
 	end
 	
 	function p1.calculateInputBoxHeight(InputText, BodyLargeFont, ScaledBaseSize, X): number
-		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Text (upval), p1 (copy)
-		local Y = if FoundationFontFaceMigration then GetTextSizeFunction(InputText, ScaledBaseSize, BodyLargeFont, Vector2.new(X, 10000)).Y else Text.GetTextHeight(InputText, BodyLargeFont, ScaledBaseSize, X)
+		-- upvalues: GetTextSizeFunction (upval), p1 (copy)
+		local Y: number = GetTextSizeFunction(InputText, ScaledBaseSize, BodyLargeFont, Vector2.new(X, 10000)).Y
 		local HeightOfFourLinesResult: number = p1.heightOfFourLines(BodyLargeFont, ScaledBaseSize, X)
 		local NewScaledBaseSize: number = if p1.isMoreMenuEnabled() then ScaledBaseSize + math.min(Y, HeightOfFourLinesResult) else ScaledBaseSize + math.min(Y, HeightOfFourLinesResult) + 16
 		
@@ -245,15 +244,15 @@ function ChatInputBarDeprecated.render(p1)
 end
 
 function ChatInputBarDeprecated.renderContent(p1, IsDisabled)
-	-- upvalues: WithStyleFunction (copy), WithChatPagePaddingModule (copy), WithSelectionCursorProviderFunction (copy), FoundationFontFaceMigration (copy), FFlagAppChatOnConsoles (copy), IsVRAppBuildFunction (copy), IsTenFootInterfaceFunction (copy), RoactModule (copy), ImageSetLabel (copy), Images (copy), Interactable (copy), CursorKind (copy), ChatInputBoxDisabledModule (copy), CallbackInputBox (copy), IconSize (copy)
+	-- upvalues: WithStyleFunction (copy), WithChatPagePaddingModule (copy), WithSelectionCursorProviderFunction (copy), FFlagAppChatOnConsoles (copy), IsVRAppBuildFunction (copy), IsTenFootInterfaceFunction (copy), RoactModule (copy), ImageSetLabel (copy), Images (copy), Interactable (copy), CursorKind (copy), ChatInputBoxDisabledModule (copy), CallbackInputBox (copy), IconSize (copy)
 	return WithStyleFunction(function(p2)
-		-- upvalues: WithChatPagePaddingModule (upval), WithSelectionCursorProviderFunction (upval), FoundationFontFaceMigration (upval), FFlagAppChatOnConsoles (upval), IsVRAppBuildFunction (upval), IsTenFootInterfaceFunction (upval), p1 (copy), IsDisabled (copy), RoactModule (upval), ImageSetLabel (upval), Images (upval), Interactable (upval), CursorKind (upval), ChatInputBoxDisabledModule (upval), CallbackInputBox (upval), IconSize (upval)
+		-- upvalues: WithChatPagePaddingModule (upval), WithSelectionCursorProviderFunction (upval), FFlagAppChatOnConsoles (upval), IsVRAppBuildFunction (upval), IsTenFootInterfaceFunction (upval), p1 (copy), IsDisabled (copy), RoactModule (upval), ImageSetLabel (upval), Images (upval), Interactable (upval), CursorKind (upval), ChatInputBoxDisabledModule (upval), CallbackInputBox (upval), IconSize (upval)
 		return WithChatPagePaddingModule(function(p3)
-			-- upvalues: WithSelectionCursorProviderFunction (upval), p2 (copy), FoundationFontFaceMigration (upval), FFlagAppChatOnConsoles (upval), IsVRAppBuildFunction (upval), IsTenFootInterfaceFunction (upval), p1 (upval), IsDisabled (upval), RoactModule (upval), ImageSetLabel (upval), Images (upval), Interactable (upval), CursorKind (upval), ChatInputBoxDisabledModule (upval), CallbackInputBox (upval), IconSize (upval)
+			-- upvalues: WithSelectionCursorProviderFunction (upval), p2 (copy), FFlagAppChatOnConsoles (upval), IsVRAppBuildFunction (upval), IsTenFootInterfaceFunction (upval), p1 (upval), IsDisabled (upval), RoactModule (upval), ImageSetLabel (upval), Images (upval), Interactable (upval), CursorKind (upval), ChatInputBoxDisabledModule (upval), CallbackInputBox (upval), IconSize (upval)
 			return WithSelectionCursorProviderFunction(function(Callback)
-				-- upvalues: p2 (upval), FoundationFontFaceMigration (upval), FFlagAppChatOnConsoles (upval), IsVRAppBuildFunction (upval), IsTenFootInterfaceFunction (upval), p1 (upval), p3 (copy), IsDisabled (upval), RoactModule (upval), ImageSetLabel (upval), Images (upval), Interactable (upval), CursorKind (upval), ChatInputBoxDisabledModule (upval), CallbackInputBox (upval), WithSelectionCursorProviderFunction (upval), IconSize (upval)
+				-- upvalues: p2 (upval), FFlagAppChatOnConsoles (upval), IsVRAppBuildFunction (upval), IsTenFootInterfaceFunction (upval), p1 (upval), p3 (copy), IsDisabled (upval), RoactModule (upval), ImageSetLabel (upval), Images (upval), Interactable (upval), CursorKind (upval), ChatInputBoxDisabledModule (upval), CallbackInputBox (upval), WithSelectionCursorProviderFunction (upval), IconSize (upval)
 				local _Font = p2.Font
-				local BodyLargeFont = if FoundationFontFaceMigration then p2.Tokens.Typography.BodyLarge.Font else _Font.Body.Font
+				local BodyLargeFont = p2.Tokens.Typography.BodyLarge.Font
 				local ScaledBaseSize = _Font.BaseSize * _Font.Body.RelativeSize
 				local IsVRAppBuild = if FFlagAppChatOnConsoles then IsVRAppBuildFunction() or IsTenFootInterfaceFunction() else nil
 				local FrameHeight = p1.state.frameHeight

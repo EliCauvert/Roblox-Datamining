@@ -17,67 +17,94 @@ return function()
 	-- upvalues: GetFFlagMomentsNonInfiniteScrollModule (copy), GetFIntMomentsNonInfiniteScrollLimitModule (copy), CreateComputedFunction (copy), FFlagDebugForceEnableMomentsModule (copy), GetAppPolicyStoreFunction (copy), FFlagMomentsCreationFeatureGate (copy), FFlagMomentsAutoplayAmpPolicy (copy), FFlagMomentsEngagementMetricsFeatureModule (copy), FFlagMomentsReactFeatureGate (copy), FFlagMomentsComments (copy), FFlagMomentsCommentsIxpEnabled (copy)
 	local FFlagMomentsNonInfiniteScrollModule = GetFFlagMomentsNonInfiniteScrollModule()
 	local Largest = math.max(1, GetFIntMomentsNonInfiniteScrollLimitModule())
-	local Computed = CreateComputedFunction(function(p1): boolean
-		-- upvalues: FFlagDebugForceEnableMomentsModule (upval), GetAppPolicyStoreFunction (upval)
-		return if FFlagDebugForceEnableMomentsModule then true else table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), "moments_access") ~= nil
-	end)
-	local Computed1 = CreateComputedFunction(function(p1): boolean
-		-- upvalues: GetAppPolicyStoreFunction (upval)
-		return table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), "influencer_content") ~= nil
-	end)
-	local Computed2 = if FFlagMomentsCreationFeatureGate then CreateComputedFunction(function(p1): boolean
-		-- upvalues: GetAppPolicyStoreFunction (upval)
-		return table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), "moments_creation") ~= nil
-	end) else nil
-	local Computed3 = if FFlagMomentsAutoplayAmpPolicy then CreateComputedFunction(function(p1): boolean
-		-- upvalues: GetAppPolicyStoreFunction (upval)
-		return table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), "auto_play") ~= nil
-	end) else nil
-	local Computed4 = if FFlagMomentsEngagementMetricsFeatureModule then CreateComputedFunction(function(p1): boolean
-		-- upvalues: GetAppPolicyStoreFunction (upval)
-		return table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), "engagement_metrics") ~= nil
-	end) else nil
-	local Computed5 = if FFlagMomentsReactFeatureGate then CreateComputedFunction(function(p1): boolean
-		-- upvalues: GetAppPolicyStoreFunction (upval)
-		return table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), "moments_react") ~= nil
-	end) else nil
 	
 	local function _(Value)
-		-- upvalues: CreateComputedFunction (upval), GetAppPolicyStoreFunction (upval)
+		-- upvalues: CreateComputedFunction (upval), FFlagDebugForceEnableMomentsModule (upval), GetAppPolicyStoreFunction (upval)
 		return CreateComputedFunction(function(p1): boolean
-			-- upvalues: GetAppPolicyStoreFunction (upval), Value (copy)
-			return table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), Value) ~= nil
+			-- upvalues: FFlagDebugForceEnableMomentsModule (upval), GetAppPolicyStoreFunction (upval), Value (copy)
+			return if FFlagDebugForceEnableMomentsModule then true else table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), Value) ~= nil
 		end)
 	end
 	
+	local Value = "moments_access"
+	local Computed = CreateComputedFunction(function(p1): boolean
+		-- upvalues: FFlagDebugForceEnableMomentsModule (upval), GetAppPolicyStoreFunction (upval), Value (copy)
+		return if FFlagDebugForceEnableMomentsModule then true else table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), Value) ~= nil
+	end)
+	local Value1 = "influencer_content"
+	local Computed1 = CreateComputedFunction(function(p1): boolean
+		-- upvalues: FFlagDebugForceEnableMomentsModule (upval), GetAppPolicyStoreFunction (upval), Value1 (copy)
+		return if FFlagDebugForceEnableMomentsModule then true else table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), Value1) ~= nil
+	end)
+	local Computed2 = nil
+	
+	if FFlagMomentsCreationFeatureGate then
+		local Value2 = "moments_creation"
+		Computed2 = CreateComputedFunction(function(p1): boolean
+			-- upvalues: FFlagDebugForceEnableMomentsModule (upval), GetAppPolicyStoreFunction (upval), Value2 (copy)
+			return if FFlagDebugForceEnableMomentsModule then true else table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), Value2) ~= nil
+		end)
+	else
+		Computed2 = nil
+	end
+	local Computed3 = nil
+	if FFlagMomentsAutoplayAmpPolicy then
+		local Value3 = "auto_play"
+		Computed3 = CreateComputedFunction(function(p1): boolean
+			-- upvalues: FFlagDebugForceEnableMomentsModule (upval), GetAppPolicyStoreFunction (upval), Value3 (copy)
+			return if FFlagDebugForceEnableMomentsModule then true else table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), Value3) ~= nil
+		end)
+	else
+		Computed3 = nil
+	end
+	local Computed4 = nil
+	if FFlagMomentsEngagementMetricsFeatureModule then
+		local Value4 = "engagement_metrics"
+		Computed4 = CreateComputedFunction(function(p1): boolean
+			-- upvalues: FFlagDebugForceEnableMomentsModule (upval), GetAppPolicyStoreFunction (upval), Value4 (copy)
+			return if FFlagDebugForceEnableMomentsModule then true else table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), Value4) ~= nil
+		end)
+	else
+		Computed4 = nil
+	end
+	local Computed5 = nil
+	if FFlagMomentsReactFeatureGate then
+		local Value5 = "moments_react"
+		Computed5 = CreateComputedFunction(function(p1): boolean
+			-- upvalues: FFlagDebugForceEnableMomentsModule (upval), GetAppPolicyStoreFunction (upval), Value5 (copy)
+			return if FFlagDebugForceEnableMomentsModule then true else table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), Value5) ~= nil
+		end)
+	else
+		Computed5 = nil
+	end
 	local FFlagMomentsComments1 = FFlagMomentsComments or FFlagMomentsCommentsIxpEnabled
 	local Computed6 = nil
 	
 	if FFlagMomentsComments1 then
-		local Value = "comments_read"
+		local Value6 = "comments_read"
 		Computed6 = CreateComputedFunction(function(p1): boolean
-			-- upvalues: GetAppPolicyStoreFunction (upval), Value (copy)
-			return table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), Value) ~= nil
+			-- upvalues: FFlagDebugForceEnableMomentsModule (upval), GetAppPolicyStoreFunction (upval), Value6 (copy)
+			return if FFlagDebugForceEnableMomentsModule then true else table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), Value6) ~= nil
 		end)
 	else
 		Computed6 = nil
 	end
 	local Computed7 = nil
 	if FFlagMomentsComments1 then
-		local Value1 = "comments_write"
+		local Value7 = "comments_write"
 		Computed7 = CreateComputedFunction(function(p1): boolean
-			-- upvalues: GetAppPolicyStoreFunction (upval), Value1 (copy)
-			return table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), Value1) ~= nil
+			-- upvalues: FFlagDebugForceEnableMomentsModule (upval), GetAppPolicyStoreFunction (upval), Value7 (copy)
+			return if FFlagDebugForceEnableMomentsModule then true else table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), Value7) ~= nil
 		end)
 	else
 		Computed7 = nil
 	end
 	local Computed8 = nil
 	if FFlagMomentsComments1 then
-		local Value2 = "comments_react"
+		local Value8 = "comments_react"
 		Computed8 = CreateComputedFunction(function(p1): boolean
-			-- upvalues: GetAppPolicyStoreFunction (upval), Value2 (copy)
-			return table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), Value2) ~= nil
+			-- upvalues: FFlagDebugForceEnableMomentsModule (upval), GetAppPolicyStoreFunction (upval), Value8 (copy)
+			return if FFlagDebugForceEnableMomentsModule then true else table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), Value8) ~= nil
 		end)
 	else
 		Computed8 = nil
@@ -93,13 +120,15 @@ return function()
 		getCanWriteComments = Computed7,
 		getCanReactToComments = Computed8,
 		getIsInfiniteScrollEnabled = CreateComputedFunction(function(p1): boolean
-			-- upvalues: FFlagMomentsNonInfiniteScrollModule (copy), GetAppPolicyStoreFunction (upval)
-			if FFlagMomentsNonInfiniteScrollModule then
+			-- upvalues: FFlagMomentsNonInfiniteScrollModule (copy), FFlagDebugForceEnableMomentsModule (upval), GetAppPolicyStoreFunction (upval)
+			if not FFlagMomentsNonInfiniteScrollModule then
+				return true
+			elseif FFlagDebugForceEnableMomentsModule then
+				return true
+			else
 				local MomentsFeatureList = GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList()
 				
 				return next(MomentsFeatureList) == nil or table.find(MomentsFeatureList, "infinite_scroll") ~= nil
-			else
-				return true
 			end
 		end),
 		getMaxMomentsBeforeEndState = CreateComputedFunction(function(_)

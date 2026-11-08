@@ -7,7 +7,6 @@ local GetInputModeStoreFunction = ResponsiveModule.GetInputModeStore
 local FoundationModule = require(Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UIBloxModule = require(Parent.UIBlox)
 local CryoModule = require(Parent.Cryo)
 local LoadableImage = UIBloxModule.App.Loading.LoadableImage
@@ -18,6 +17,7 @@ local HoldDetector = require(Parent.HoldToPlay).HoldDetector
 local SduiDefaultTileImageModule = require(script.Parent.SduiDefaultTileImage)
 local UseTileHoldActionModule = require(script.Parent.useTileHoldAction)
 local FFlagSduiTileDisableLegacyHover = require(ServerDrivenUi.Flags).FFlagSduiTileDisableLegacyHover
+local FFlagSduiGameTileEnableHoverInVR = require(Parent.SharedFlags).FFlagSduiGameTileEnableHoverInVR
 local FFlagLuaAppHomePageFirstImageLoadObserver = require(Parent.SharedFlags).FFlagLuaAppHomePageFirstImageLoadObserver
 local FFlagSduiTileThumbnailPadding = require(Parent.SharedFlags).FFlagSduiTileThumbnailPadding
 local FFlagLuaAppSduiVideoThumbnail = require(Parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
@@ -65,7 +65,7 @@ local function maybeLayoutForButton(p1, RightContent, Small, Offset: number, p2)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), ContentProvider (copy), TextSizeModule (copy), UseTokensFunction (copy), GetInputModeStoreFunction (copy), ResponsiveModule (copy), UseTileHoldActionModule (copy), FFlagLuaAppSduiGameTileFeedback (copy), FFlagSduiTileDisableLegacyHover (copy), SduiTileInsetImageModule (copy), FFlagSduiTileThumbnailPadding (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), ImageSetLabel (copy), FFlagLuaAppSduiVideoThumbnail (copy), SduiDefaultTileImageModule (copy), LoadableImage (copy), maybeLayoutForButton (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), CryoModule (copy), t (copy), HoldDetector (copy)
+	-- upvalues: ReactModule (copy), ContentProvider (copy), TextSizeModule (copy), UseTokensFunction (copy), FFlagSduiGameTileEnableHoverInVR (copy), GetInputModeStoreFunction (copy), ResponsiveModule (copy), UseTileHoldActionModule (copy), FFlagLuaAppSduiGameTileFeedback (copy), FFlagSduiTileDisableLegacyHover (copy), SduiTileInsetImageModule (copy), FFlagSduiTileThumbnailPadding (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), ImageSetLabel (copy), FFlagLuaAppSduiVideoThumbnail (copy), SduiDefaultTileImageModule (copy), LoadableImage (copy), maybeLayoutForButton (copy), NormalizeFontFaceFunction (copy), CryoModule (copy), t (copy), HoldDetector (copy)
 	local LayoutOrder = p1.layoutOrder
 	local AnchorPoint = p1.anchorPoint
 	local AutomaticSize = p1.automaticSize
@@ -96,8 +96,8 @@ return ReactModule.memo(function(p1)
 	local HasCtaButtonComponent = p1.ctaButtonComponent ~= nil
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local IsContained = p1.isContained
-	local BackgroundStyle = nil
 	local BackgroundStyleColor3 = nil
+	local BackgroundStyle = nil
 	
 	if p1.backgroundStyle == nil then
 		BackgroundStyle = UseTokensResult.Color.Surface.Surface_100
@@ -110,8 +110,8 @@ return ReactModule.memo(function(p1)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local UseStateResult3 = if p1.isHovered == nil then UseStateResult1 else p1.isHovered
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: GetInputModeStoreFunction (upval), ResponsiveModule (upval), UseStateResult2_1 (copy), p1 (copy)
-		if GetInputModeStoreFunction(false).getLastInputType(false) == ResponsiveModule.Input.Pointer then
+		-- upvalues: FFlagSduiGameTileEnableHoverInVR (upval), GetInputModeStoreFunction (upval), ResponsiveModule (upval), UseStateResult2_1 (copy), p1 (copy)
+		if (if FFlagSduiGameTileEnableHoverInVR then GetInputModeStoreFunction(false).getPreferredInputType(false) else GetInputModeStoreFunction(false).getLastInputType(false)) == ResponsiveModule.Input.Pointer then
 			UseStateResult2_1(true)
 			
 			if p1.onMouseEnter then
@@ -331,8 +331,7 @@ return ReactModule.memo(function(p1)
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 0, Ceiled),
 				Text = p1.titleText,
-				Font = if FoundationFontFaceMigration then nil else TitleFont.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(TitleFont.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(TitleFont.Font),
 				TextSize = TitleFont.FontSize,
 				TextTransparency = Emphasis.Transparency,
 				TextColor3 = Emphasis.Color3,

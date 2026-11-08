@@ -7,12 +7,14 @@ local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local SduiErrors = SduiCoreSystemModule.SduiErrors
 local SduiLogger = SduiCoreSystemModule.SduiLogger
 local FindAnalyticsFieldInAncestorsFunction = SduiCoreSystemModule.findAnalyticsFieldInAncestors
+local GetSduiClientPageScopeFunction = SduiCoreSystemModule.getSduiClientPageScope
+local FFlagSduiErrorPaths = require(Parent.SharedFlags).FFlagSduiErrorPaths
 local SduiMarketplaceItemImpressionsHandlerModule = require(ServerDrivenUi.Impressions.SduiMarketplaceItemImpressionsHandler)
 local MarketplaceUnifiedItemType = require(Parent.AvatarExperienceAnalytics).UnifiedEventLogEnums.MarketplaceUnifiedItemType
 local self = setmetatable({}, { __mode = "k" })
 
 return function(Key, p1, p2, AnalyticsData, p3, p4)
-	-- upvalues: FindAnalyticsFieldInAncestorsFunction (copy), MarketplaceUnifiedItemType (copy), SduiMarketplaceItemImpressionsHandlerModule (copy), SduiLogger (copy), SduiErrors (copy), self (copy), EdpStoreAnalyticsLogger (copy), StoreEnums (copy)
+	-- upvalues: FindAnalyticsFieldInAncestorsFunction (copy), MarketplaceUnifiedItemType (copy), SduiMarketplaceItemImpressionsHandlerModule (copy), SduiLogger (copy), SduiErrors (copy), FFlagSduiErrorPaths (copy), GetSduiClientPageScopeFunction (copy), self (copy), EdpStoreAnalyticsLogger (copy), StoreEnums (copy)
 	if #p1 == 0 then return end
 	local config = { analyticsData = AnalyticsData }
 	local ItemType = FindAnalyticsFieldInAncestorsFunction("itemType", config)
@@ -31,14 +33,20 @@ return function(Key, p1, p2, AnalyticsData, p3, p4)
 		return
 	end
 	local Text = tostring(ExperienceStoreProductType)
-	local SelfEntry = self[Key]
+	local SduiClientPageScope = if FFlagSduiErrorPaths and Key.configKey then GetSduiClientPageScopeFunction(Key.configKey) else nil
+	local DevStoreSectionsFired = if SduiClientPageScope then SduiClientPageScope.get("devStoreSectionsFired") else self[Key]
 	
-	if not SelfEntry then
-		SelfEntry = {}
-		self[Key] = SelfEntry
+	if not DevStoreSectionsFired then
+		DevStoreSectionsFired = {}
+		
+		if SduiClientPageScope then
+			SduiClientPageScope.set("devStoreSectionsFired", DevStoreSectionsFired)
+		else
+			self[Key] = DevStoreSectionsFired
+		end
 	end
-	if not SelfEntry[Text] then
-		SelfEntry[Text] = true
+	if not DevStoreSectionsFired[Text] then
+		DevStoreSectionsFired[Text] = true
 		local EdpLocationType = FindAnalyticsFieldInAncestorsFunction("edpLocationType", config)
 		local UniverseId = FindAnalyticsFieldInAncestorsFunction("universeId", config)
 		EdpStoreAnalyticsLogger.logImpression({

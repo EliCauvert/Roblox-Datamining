@@ -5,6 +5,7 @@ local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local ViewRecyclerModule = require(Parent.ViewRecycler)
 local EnumMessageTypesModule = require(AppChat.Components.ChatConversation.EnumMessageTypes)
+local IsScrolledAwayFromLatestModule = require(AppChat.Components.ChatConversation.ScrollToLatest.isScrolledAwayFromLatest)
 local GetConversationMessageViewModelStoreModule = require(AppChat.Stores.GetConversationMessageViewModelStore)
 local ListItemsModule = require(script.Parent.ListItems)
 local _ = require(script.Parent.MessageListContext)
@@ -17,6 +18,7 @@ local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
 local CreateScrollIntervalTrackerModule = require(AppChat.Telemetry.createScrollIntervalTracker)
 local FFlagAppChatConversationLoadingSkeletonModule = require(AppChat.Flags.FFlagAppChatConversationLoadingSkeleton)
 local FFlagAppChatPerfTrackingModule = require(AppChat.Flags.FFlagAppChatPerfTracking)
+local FFlagAppChatScrollToLatestModule = require(AppChat.Flags.FFlagAppChatScrollToLatest)
 local FIntAppChatInitialMessageFetchLimitModule = require(AppChat.Flags.FIntAppChatInitialMessageFetchLimit)
 local FFlagAppChatMessageListV2ScrollToStartOnOpenModule = require(AppChat.Flags.FFlagAppChatMessageListV2ScrollToStartOnOpen)
 local FFlagAppChatMessageListV2StableRowCallbacksModule = require(AppChat.Flags.FFlagAppChatMessageListV2StableRowCallbacks)
@@ -124,7 +126,7 @@ local function useStableRowCallbacks(UseRefResult, HasOpenMomentsDeepLink)
 end
 
 return function(Current)
-	-- upvalues: ReactModule (copy), ListItemsModule (copy), EnumMessageTypesModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), SignalsModule (copy), GetConversationMessageViewModelStoreModule (copy), SignalsReactModule (copy), FIntAppChatMessageInitialFetchMinMessagesModule (copy), FIntAppChatInitialMessageFetchLimitModule (copy), FFlagAppChatMessageListV2ScrollParityModule (copy), UseViewportResizeCompensationModule (copy), CreateScrollIntervalTrackerModule (copy), ViewRecyclerModule (copy), FFlagAppChatMessageListV2FollowIncomingModule (copy), FFlagAppChatMessageListV2ScrollToStartOnOpenModule (copy), UseInitialScrollAlignmentModule (copy), UseDelayedScrollToStartModule (copy), UseMessageListLayoutModule (copy), FFlagAppChatMessageListV2ShowBeforeMeasuredModule (copy), StartReachedThreshold (copy), MessageRowTypesModule (copy), FIntAppChatMessageListV2OverscanRowsModule (copy), FFlagAppChatMessageListV2StableRowCallbacksModule (copy), useStableRowCallbacks (copy), noop (copy), FFlagAppChatConversationLoadingSkeletonModule (copy)
+	-- upvalues: ReactModule (copy), ListItemsModule (copy), EnumMessageTypesModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), SignalsModule (copy), GetConversationMessageViewModelStoreModule (copy), SignalsReactModule (copy), FIntAppChatMessageInitialFetchMinMessagesModule (copy), FIntAppChatInitialMessageFetchLimitModule (copy), FFlagAppChatMessageListV2ScrollParityModule (copy), UseViewportResizeCompensationModule (copy), CreateScrollIntervalTrackerModule (copy), IsScrolledAwayFromLatestModule (copy), FFlagAppChatScrollToLatestModule (copy), ViewRecyclerModule (copy), FFlagAppChatMessageListV2FollowIncomingModule (copy), FFlagAppChatMessageListV2ScrollToStartOnOpenModule (copy), UseInitialScrollAlignmentModule (copy), UseDelayedScrollToStartModule (copy), UseMessageListLayoutModule (copy), FFlagAppChatMessageListV2ShowBeforeMeasuredModule (copy), StartReachedThreshold (copy), MessageRowTypesModule (copy), FIntAppChatMessageListV2OverscanRowsModule (copy), FFlagAppChatMessageListV2StableRowCallbacksModule (copy), useStableRowCallbacks (copy), noop (copy), FFlagAppChatConversationLoadingSkeletonModule (copy)
 	local UseRefResult = ReactModule.useRef(Current)
 	UseRefResult.current = Current
 	local ConversationId = Current.conversationId
@@ -280,15 +282,54 @@ return function(Current)
 			return nil
 		end
 	end, { UseStateResult1, ConversationId })
-	local UseResult1 = ReactModule.useCallback(function()
-		-- upvalues: UseRefResult11 (copy), UseRefResult10 (copy), UseRefResult4 (copy), UseViewportResizeCompensationModuleResult (ref), UseRefResult1 (copy), UseRefResult (copy)
+	local UseRefResult12 = ReactModule.useRef(false)
+	local UseResult1 = ReactModule.useCallback(function(p2)
+		-- upvalues: UseRefResult (copy), IsScrolledAwayFromLatestModule (upval), UseRefResult12 (copy)
+		local OnScrolledAwayFromLatestChangedFunction: (any) -> () = UseRefResult.current.onScrolledAwayFromLatestChanged
+		
+		if OnScrolledAwayFromLatestChangedFunction == nil then return end
+		local IsScrolledAwayFromLatestModule1 = IsScrolledAwayFromLatestModule(p2.distanceFromEnd, p2.viewportLength)
+		
+		if IsScrolledAwayFromLatestModule1 ~= UseRefResult12.current then
+			UseRefResult12.current = IsScrolledAwayFromLatestModule1
+			OnScrolledAwayFromLatestChangedFunction(IsScrolledAwayFromLatestModule1)
+		end
+	end, {})
+	local ScrollToLatestRef = Current.scrollToLatestRef
+	ReactModule.useEffect(function()
+		-- upvalues: FFlagAppChatScrollToLatestModule (upval), ScrollToLatestRef (copy), UseRefResult10 (copy)
+		if FFlagAppChatScrollToLatestModule and ScrollToLatestRef ~= nil then
+			local function scrollToLatest()
+				-- upvalues: UseRefResult10 (upval)
+				local Current = UseRefResult10.current
+				
+				if Current ~= nil then
+					Current.scrollToEnd()
+				end
+			end
+			
+			ScrollToLatestRef.current = scrollToLatest
+			
+			return function()
+				-- upvalues: ScrollToLatestRef (upval), scrollToLatest (copy)
+				if ScrollToLatestRef.current == scrollToLatest then
+					ScrollToLatestRef.current = nil
+				end
+			end
+		else
+			return nil
+		end
+	end, { ScrollToLatestRef })
+	local UseResult2 = ReactModule.useCallback(function()
+		-- upvalues: UseRefResult11 (copy), UseRefResult10 (copy), UseRefResult4 (copy), UseViewportResizeCompensationModuleResult (ref), UseRefResult1 (copy), UseRefResult (copy), FFlagAppChatScrollToLatestModule (upval), UseResult1 (copy)
 		if UseRefResult11.current ~= nil then
 			UseRefResult11.current.onScrollTick()
 		end
 		local Current = UseRefResult10.current
 		
 		if Current == nil then return end
-		local DistanceFromEnd: number = Current.getScrollState().distanceFromEnd
+		local ScrollState = Current.getScrollState()
+		local DistanceFromEnd: number = ScrollState.distanceFromEnd
 		UseRefResult4.current = DistanceFromEnd
 		
 		if UseViewportResizeCompensationModuleResult ~= nil then
@@ -297,28 +338,49 @@ return function(Current)
 		if DistanceFromEnd < 64 and #UseRefResult1.current.items > 0 then
 			UseRefResult.current.markAsRead()
 		end
+		if FFlagAppChatScrollToLatestModule then
+			UseResult1(ScrollState)
+		end
+	end, { UseViewportResizeCompensationModuleResult })
+	local UseResult3 = ReactModule.useCallback(function()
+		-- upvalues: UseRefResult10 (copy), UseResult1 (copy)
+		local Current = UseRefResult10.current
+		
+		if Current ~= nil then
+			UseResult1(Current.getScrollState())
+		end
+	end, {})
+	local UseResult4 = ReactModule.useCallback(function()
+		-- upvalues: UseViewportResizeCompensationModuleResult (ref), UseResult3 (copy)
+		if UseViewportResizeCompensationModuleResult ~= nil then
+			UseViewportResizeCompensationModuleResult.onContentLengthChanged()
+		end
+		UseResult3()
 	end, { UseViewportResizeCompensationModuleResult })
 	local ReadingMessagesIsEnabled = Current.readingMessagesIsEnabled
-	local UseRefResult12 = ReactModule.useRef(ReadingMessagesIsEnabled)
+	local UseRefResult13 = ReactModule.useRef(ReadingMessagesIsEnabled)
 	ReactModule.useEffect(function()
-		-- upvalues: UseRefResult12 (copy), ReadingMessagesIsEnabled (copy), UseRefResult4 (copy), UseRefResult (copy)
-		local Current = UseRefResult12.current
-		UseRefResult12.current = ReadingMessagesIsEnabled
+		-- upvalues: UseRefResult13 (copy), ReadingMessagesIsEnabled (copy), UseRefResult4 (copy), UseRefResult (copy)
+		local Current = UseRefResult13.current
+		UseRefResult13.current = ReadingMessagesIsEnabled
 		
 		if ReadingMessagesIsEnabled and not Current and UseRefResult4.current < 64 then
 			UseRefResult.current.markAsRead()
 		end
 	end, { ReadingMessagesIsEnabled })
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(0)
-	local UseResult2 = ReactModule.useCallback(function(Vector)
-		-- upvalues: UseStateResult2_2 (copy), UseViewportResizeCompensationModuleResult (ref)
+	local UseResult5 = ReactModule.useCallback(function(Vector)
+		-- upvalues: UseStateResult2_2 (copy), UseViewportResizeCompensationModuleResult (ref), FFlagAppChatScrollToLatestModule (upval), UseResult3 (copy)
 		UseStateResult2_2(Vector.X)
 		
 		if UseViewportResizeCompensationModuleResult ~= nil then
 			UseViewportResizeCompensationModuleResult.onViewportChanged(Vector.Y)
 		end
+		if FFlagAppChatScrollToLatestModule then
+			UseResult3()
+		end
 	end, { UseViewportResizeCompensationModuleResult })
-	local UseResult3 = ReactModule.useCallback(function(p2)
+	local UseResult6 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseViewportResizeCompensationModuleResult (ref), UseStateResult2_1 (copy)
 		if p2 ~= nil then
 			p2.Selectable = false
@@ -329,33 +391,33 @@ return function(Current)
 		UseStateResult2_1(p2)
 	end, { UseViewportResizeCompensationModuleResult })
 	local IsIsInitialMessageLoading: boolean = Current.isInitialMessageLoading == true or HasUseSignalStateResult and (IsOpenAtStart or not UseStateResult)
-	local UseRefResult13 = ReactModule.useRef(nil)
+	local UseRefResult14 = ReactModule.useRef(nil)
 	
-	if UseRefResult13.current == nil and not IsIsInitialMessageLoading then
-		UseRefResult13.current = if IsOpenAtStart then ViewRecyclerModule.ScrollAlignment.Start else ViewRecyclerModule.ScrollAlignment.End
+	if UseRefResult14.current == nil and not IsIsInitialMessageLoading then
+		UseRefResult14.current = if IsOpenAtStart then ViewRecyclerModule.ScrollAlignment.Start else ViewRecyclerModule.ScrollAlignment.End
 	end
-	local Current2 = UseRefResult13.current
-	local UseRefResult14 = ReactModule.useRef(UseMemoResult.byKey)
-	local UseRefResult15 = ReactModule.useRef(false)
-	local UseRefResult16 = ReactModule.useRef(nil)
+	local UseInitialScrollAlignmentModuleResult = UseRefResult14.current
+	local UseRefResult15 = ReactModule.useRef(UseMemoResult.byKey)
+	local UseRefResult16 = ReactModule.useRef(false)
 	local UseRefResult17 = ReactModule.useRef(nil)
+	local UseRefResult18 = ReactModule.useRef(nil)
 	
-	if FFlagAppChatMessageListV2FollowIncomingModule and UseRefResult17.current ~= UseMemoResult then
-		UseRefResult17.current = UseMemoResult
-		local Current3 = UseRefResult10.current
-		UseRefResult16.current = if Current3 == nil then nil else Current3.getScrollState().distanceFromEnd
+	if FFlagAppChatMessageListV2FollowIncomingModule and UseRefResult18.current ~= UseMemoResult then
+		UseRefResult18.current = UseMemoResult
+		local Current2 = UseRefResult10.current
+		UseRefResult17.current = if Current2 == nil then nil else Current2.getScrollState().distanceFromEnd
 	end
 	ReactModule.useEffect(function()
-		-- upvalues: UseRefResult14 (copy), UseMemoResult (copy), UseRefResult15 (copy), IsIsInitialMessageLoading (copy), UseRefResult10 (copy), ListItemsModule (upval), UseRefResult16 (copy), FFlagAppChatMessageListV2FollowIncomingModule (upval)
-		local Current = UseRefResult14.current
-		UseRefResult14.current = UseMemoResult.byKey
-		local Current1 = UseRefResult15.current
-		UseRefResult15.current = not IsIsInitialMessageLoading
+		-- upvalues: UseRefResult15 (copy), UseMemoResult (copy), UseRefResult16 (copy), IsIsInitialMessageLoading (copy), UseRefResult10 (copy), ListItemsModule (upval), UseRefResult17 (copy), FFlagAppChatMessageListV2FollowIncomingModule (upval)
+		local Current = UseRefResult15.current
+		UseRefResult15.current = UseMemoResult.byKey
+		local Current1 = UseRefResult16.current
+		UseRefResult16.current = not IsIsInitialMessageLoading
 		local Item = UseMemoResult.items[#UseMemoResult.items]
 		local Current2 = UseRefResult10.current
 		
 		if Current1 and Current2 ~= nil and Item ~= nil and Current[ListItemsModule.getKey(Item)] == nil then
-			local Current3: number = UseRefResult16.current
+			local Current3: number = UseRefResult17.current
 			
 			if Item.isIncoming ~= true then
 				Current2.scrollToEnd()
@@ -369,22 +431,22 @@ return function(Current)
 	end, { UseMemoResult, IsIsInitialMessageLoading })
 	
 	if FFlagAppChatMessageListV2ScrollToStartOnOpenModule then
-		Current2 = UseInitialScrollAlignmentModule(IsOpenAtStart, IsIsInitialMessageLoading, UseRefResult10, UseStateResult1)
+		UseInitialScrollAlignmentModuleResult = UseInitialScrollAlignmentModule(IsOpenAtStart, IsIsInitialMessageLoading, UseRefResult10, UseStateResult1)
 	end
 	if FFlagAppChatMessageListV2ScrollParityModule then
 		UseDelayedScrollToStartModule(IsOpenAtStart, IsIsInitialMessageLoading, UseRefResult10)
 	end
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
-	local UseResult4 = ReactModule.useCallback(function()
+	local UseResult7 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_3 (copy)
 		UseStateResult2_3(true)
 	end, {})
-	local UseMessageListLayoutModuleResult = UseMessageListLayoutModule(if FFlagAppChatMessageListV2ShowBeforeMeasuredModule then nil else UseResult4)
-	local UseRefResult18 = ReactModule.useRef(false)
-	local FFlagAppChatMessageListV2ShowBeforeMeasuredModule1 = FFlagAppChatMessageListV2ShowBeforeMeasuredModule or (UseRefResult18.current or (UseStateResult4 or CountItems == 0))
+	local UseMessageListLayoutModuleResult = UseMessageListLayoutModule(if FFlagAppChatMessageListV2ShowBeforeMeasuredModule then nil else UseResult7)
+	local UseRefResult19 = ReactModule.useRef(false)
+	local FFlagAppChatMessageListV2ShowBeforeMeasuredModule1 = FFlagAppChatMessageListV2ShowBeforeMeasuredModule or (UseRefResult19.current or (UseStateResult4 or CountItems == 0))
 	
 	if not IsIsInitialMessageLoading then
-		UseRefResult18.current = FFlagAppChatMessageListV2ShowBeforeMeasuredModule1
+		UseRefResult19.current = FFlagAppChatMessageListV2ShowBeforeMeasuredModule1
 	end
 	local UseStableRowCallbacksResult = if FFlagAppChatMessageListV2StableRowCallbacksModule then useStableRowCallbacks(UseRefResult, Current.openMomentsDeepLink ~= nil) else Current
 	
@@ -422,9 +484,9 @@ return function(Current)
 			Current.messageHiddenNoticeText, Current.unknownUserText
 		}),
 		listProps = ReactModule.useMemo(function()
-			-- upvalues: ViewRecyclerModule (upval), StartReachedThreshold (upval), Current2 (ref), Items (copy), ListItemsModule (upval), UseMessageListLayoutModuleResult (copy), MessageRowTypesModule (upval), UseRefResult10 (copy), FIntAppChatMessageListV2OverscanRowsModule (upval), HasLoadNext (copy), UseResult (copy), UseResult1 (copy), UseViewportResizeCompensationModuleResult (ref), UseResult2 (copy), UseResult3 (copy), FFlagAppChatMessageListV2ShowBeforeMeasuredModule1 (copy)
+			-- upvalues: ViewRecyclerModule (upval), StartReachedThreshold (upval), UseInitialScrollAlignmentModuleResult (ref), Items (copy), ListItemsModule (upval), UseMessageListLayoutModuleResult (copy), MessageRowTypesModule (upval), UseRefResult10 (copy), FIntAppChatMessageListV2OverscanRowsModule (upval), HasLoadNext (copy), UseResult (copy), UseResult2 (copy), UseViewportResizeCompensationModuleResult (ref), FFlagAppChatScrollToLatestModule (upval), UseResult4 (copy), UseResult5 (copy), UseResult6 (copy), FFlagAppChatMessageListV2ShowBeforeMeasuredModule1 (copy)
 			local Copy = table.clone(ViewRecyclerModule.ChatPreset.create({ startReachedThreshold = StartReachedThreshold }))
-			Copy.initialScrollAlignment = Current2 or Copy.initialScrollAlignment
+			Copy.initialScrollAlignment = UseInitialScrollAlignmentModuleResult or Copy.initialScrollAlignment
 			Copy.data = { items = Items, getItemKey = ListItemsModule.getKey }
 			Copy.layout = UseMessageListLayoutModuleResult
 			Copy.axis = ViewRecyclerModule.Axis.Y
@@ -433,13 +495,16 @@ return function(Current)
 			Copy.listRef = UseRefResult10
 			Copy.overscan = FIntAppChatMessageListV2OverscanRowsModule
 			Copy.onStartReached = if HasLoadNext then UseResult else nil
-			Copy.onScrollOffsetChanged = UseResult1
+			Copy.onScrollOffsetChanged = UseResult2
 			
 			if UseViewportResizeCompensationModuleResult ~= nil then
 				Copy.onContentLengthChanged = UseViewportResizeCompensationModuleResult.onContentLengthChanged
 			end
-			Copy.onViewportChanged = UseResult2
-			Copy.scrollingFrameRef = UseResult3
+			if FFlagAppChatScrollToLatestModule then
+				Copy.onContentLengthChanged = UseResult4
+			end
+			Copy.onViewportChanged = UseResult5
+			Copy.scrollingFrameRef = UseResult6
 			Copy.scrollingFrameProps = {
 				Name = "MessageList",
 				BackgroundTransparency = 1,
@@ -450,10 +515,10 @@ return function(Current)
 			
 			return Copy
 		end, {
-			UseResult3, HasLoadNext, Current2,
+			UseResult6, HasLoadNext, UseInitialScrollAlignmentModuleResult,
 			FFlagAppChatMessageListV2ShowBeforeMeasuredModule1, Items,
-			UseMessageListLayoutModuleResult, UseResult1, UseResult2, UseResult,
-			UseViewportResizeCompensationModuleResult
+			UseMessageListLayoutModuleResult, UseResult4, UseResult2, UseResult5,
+			UseResult, UseViewportResizeCompensationModuleResult
 		}),
 		isLoading = IsIsInitialMessageLoading,
 		isListVisible = FFlagAppChatMessageListV2ShowBeforeMeasuredModule1,

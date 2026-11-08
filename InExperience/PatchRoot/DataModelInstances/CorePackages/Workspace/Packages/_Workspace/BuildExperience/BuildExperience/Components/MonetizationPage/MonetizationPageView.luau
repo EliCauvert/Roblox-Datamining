@@ -11,6 +11,7 @@ local FFlagBuildExperienceMonetizationNativeUIModule = require(BuildExperience.F
 local FFlagBuildExperienceMonetizationMultiKindModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationMultiKind)
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local FFlagBuildExperienceDeveloperProductContextModule = require(BuildExperience.Flags.FFlagBuildExperienceDeveloperProductContext)
+local FFlagBuildExperienceMonetizationPageFixesModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationPageFixes)
 local Badge = FoundationModule.Badge
 local Button = FoundationModule.Button
 local Dialog = FoundationModule.Dialog
@@ -24,6 +25,7 @@ local TextInput = FoundationModule.TextInput
 local Toggle = FoundationModule.Toggle
 local View = FoundationModule.View
 local Menu = FoundationModule.Menu
+local Skeleton = FoundationModule.Skeleton
 local BadgeShape = FoundationModule.Enums.BadgeShape
 local BadgeSize = FoundationModule.Enums.BadgeSize
 local BadgeVariant = FoundationModule.Enums.BadgeVariant
@@ -33,6 +35,7 @@ local FillBehavior = FoundationModule.Enums.FillBehavior
 local IconName = FoundationModule.Enums.IconName
 local IconSize = FoundationModule.Enums.IconSize
 local InputSize = FoundationModule.Enums.InputSize
+local Radius = FoundationModule.Enums.Radius
 local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local AssetId = if FFlagBuildExperienceMonetizationNativeUIModule then FoundationCloudAssetsModule.Assets["pictograms/robux"].assetId else nil
@@ -486,6 +489,42 @@ local function EmptyKindCard(Frame)
 	})
 end
 
+local function KindLoadingTiles(Frame)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Size2800 = UseTokensResult.Size.Size_2800
+	local Elements = {}
+	
+	for i = 1, 3 do
+		Elements[`tile-{i}`] = ReactModule.createElement(View, {
+			tag = "col gap-small auto-y",
+			LayoutOrder = i,
+			Size = UDim2.fromOffset(Size2800, 0)
+		}, {
+			Media = ReactModule.createElement(Skeleton, {
+				LayoutOrder = 1,
+				Size = UDim2.fromOffset(Size2800, Size2800),
+				radius = Radius.Medium
+			}),
+			Title = ReactModule.createElement(Skeleton, {
+				LayoutOrder = 2,
+				Size = UDim2.new(0.7, 0, 0, UseTokensResult.Size.Size_400),
+				radius = Radius.Small
+			}),
+			Price = ReactModule.createElement(Skeleton, {
+				LayoutOrder = 3,
+				Size = UDim2.new(0.4, 0, 0, UseTokensResult.Size.Size_300),
+				radius = Radius.Small
+			})
+		})
+	end
+	return ReactModule.createElement(View, {
+		tag = "row gap-medium size-full-0 auto-y clip",
+		LayoutOrder = Frame.LayoutOrder,
+		testId = `monetization-section-loading-{Frame.kind}`
+	}, Elements)
+end
+
 local function getKindProducts(Products, Kind)
 	local List = {}
 	
@@ -514,47 +553,116 @@ local function EmptyKindSection(Frame)
 	})
 end
 
-local function GroupedCatalogContent(p1)
-	-- upvalues: getKindProducts (copy), ReactModule (copy), Text (copy), ProductCarousel (copy), View (copy), EmptyKindSection (copy)
+local function KindLoadFailure(Frame)
+	-- upvalues: ReactModule (copy), View (copy), Text (copy), Button (copy), InputSize (copy), ButtonVariant (copy)
+	local OnRetryCatalogSourceFunction = Frame.page.onRetryCatalogSource
+	
+	return ReactModule.createElement(View, {
+		tag = "col gap-small size-full-0 auto-y padding-medium radius-medium bg-surface-100",
+		LayoutOrder = Frame.LayoutOrder,
+		testId = `monetization-catalog-source-{Frame.kind}`
+	}, {
+		Message = ReactModule.createElement(Text, {
+			LayoutOrder = 1,
+			tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
+			Text = Frame.page.labels.loadErrorDescription
+		}),
+		Retry = if OnRetryCatalogSourceFunction == nil then nil else ReactModule.createElement(Button, {
+			LayoutOrder = 2,
+			onActivated = function()
+				-- upvalues: OnRetryCatalogSourceFunction (copy), Frame (copy)
+				OnRetryCatalogSourceFunction(Frame.kind)
+			end,
+			size = InputSize.Medium,
+			text = Frame.page.labels.retry,
+			variant = ButtonVariant.Standard,
+			testId = `monetization-button-retry-{Frame.kind}`
+		})
+	})
+end
+
+local function _(List): boolean
+	for _, value in List do
+		if value.status == "NotReady" then
+			return true
+		end
+	end
+	return false
+end
+
+local _ = function(_, p1, LayoutOrder)
+	-- upvalues: ReactModule (copy), EmptyKindSection (copy)
+	return ReactModule.createElement(EmptyKindSection, {
+		kind = p1.kind,
+		label = p1.label,
+		LayoutOrder = LayoutOrder
+	})
+end
+
+local function GroupedCatalogContent(Page)
+	-- upvalues: FFlagBuildExperienceMonetizationPageFixesModule (copy), getKindProducts (copy), ReactModule (copy), EmptyKindSection (copy), Text (copy), KindLoadingTiles (copy), ProductCarousel (copy), KindLoadFailure (copy), View (copy)
 	local Elements = {}
-	local LayoutOrder = 0
+	local Count = 0
 	local List = {}
 	
-	if p1.catalogSources ~= nil then
-		for _, catalogSource in p1.catalogSources do
-			local Kind = catalogSource.kind
-			local KindProducts = getKindProducts(p1.products, Kind)
+	if Page.catalogSources ~= nil then
+		local Flag: boolean = FFlagBuildExperienceMonetizationPageFixesModule
+		
+		if Flag then
+			Flag = false
 			
-			if #KindProducts ~= 0 then
-				LayoutOrder += 1
+			for _, catalogSource in Page.catalogSources do
+				if catalogSource.status == "NotReady" then
+					Flag = true
+					break
+				end
+			end
+		end
+		for LayoutOrder, catalogSource1 in Page.catalogSources do
+			local Kind = catalogSource1.kind
+			local KindProducts = getKindProducts(Page.products, Kind)
+			local IsNotReady: boolean = FFlagBuildExperienceMonetizationPageFixesModule and (#KindProducts == 0 and catalogSource1.status == "NotReady")
+			local IsFailed: boolean = FFlagBuildExperienceMonetizationPageFixesModule and catalogSource1.status == "Failed"
+			
+			if #KindProducts ~= 0 or IsNotReady or IsFailed then
+				Count += 1
 				Elements[`section-{Kind}`] = ReactModule.createElement(View, {
 					tag = "col gap-medium size-full-0 auto-y",
-					LayoutOrder = LayoutOrder,
+					LayoutOrder = if Flag then LayoutOrder else Count,
 					testId = `monetization-section-{Kind}`
 				}, {
 					Title = ReactModule.createElement(Text, {
 						LayoutOrder = 1,
 						tag = "size-full-0 auto-y text-title-large text-align-x-left content-emphasis",
-						Text = catalogSource.label,
+						Text = catalogSource1.label,
 						testId = `monetization-section-title-{Kind}`
 					}),
-					Products = ReactModule.createElement(ProductCarousel, {
+					Products = if FFlagBuildExperienceMonetizationPageFixesModule and #KindProducts == 0 then if IsNotReady then ReactModule.createElement(KindLoadingTiles, { LayoutOrder = 2, kind = Kind }) else nil else ReactModule.createElement(ProductCarousel, {
 						LayoutOrder = 2,
-						onProductActivated = p1.onProductActivated,
+						onProductActivated = Page.onProductActivated,
 						products = KindProducts,
 						testId = `monetization-section-products-{Kind}`
-					})
+					}),
+					Failure = if IsFailed then ReactModule.createElement(KindLoadFailure, { LayoutOrder = 3, page = Page, kind = Kind }) else nil
 				})
-			elseif catalogSource.status == "Ready" and not catalogSource.isIncomplete then
-				table.insert(List, catalogSource)
+			elseif catalogSource1.status == "Ready" and not catalogSource1.isIncomplete then
+				if Flag then
+					Elements[`empty-section-{Kind}`] = ReactModule.createElement(EmptyKindSection, {
+						kind = catalogSource1.kind,
+						label = catalogSource1.label,
+						LayoutOrder = LayoutOrder
+					})
+				else
+					table.insert(List, catalogSource1)
+				end
 			end
 		end
 		for _, value in List do
-			LayoutOrder += 1
+			Count += 1
 			Elements[`empty-section-{value.kind}`] = ReactModule.createElement(EmptyKindSection, {
 				kind = value.kind,
 				label = value.label,
-				LayoutOrder = LayoutOrder
+				LayoutOrder = Count
 			})
 		end
 	end
@@ -564,20 +672,20 @@ local function GroupedCatalogContent(p1)
 	}, Elements)
 end
 
-local function CatalogContent(p2)
+local function CatalogContent(p1)
 	-- upvalues: FFlagBuildExperienceMonetizationMultiKindModule (copy), ReactModule (copy), GroupedCatalogContent (copy), ProductRow (copy), View (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy)
-	if FFlagBuildExperienceMonetizationMultiKindModule and p2.catalogSources ~= nil and #p2.catalogSources > 0 then
-		return ReactModule.createElement(GroupedCatalogContent, p2)
+	if FFlagBuildExperienceMonetizationMultiKindModule and p1.catalogSources ~= nil and #p1.catalogSources > 0 then
+		return ReactModule.createElement(GroupedCatalogContent, p1)
 	end
 	local Elements = {}
 	local LayoutOrder = 0
 	
-	for i = 1, #p2.products, 3 do
+	for i = 1, #p1.products, 3 do
 		LayoutOrder += 1
 		Elements[`row-{LayoutOrder}`] = ReactModule.createElement(ProductRow, {
 			LayoutOrder = LayoutOrder,
-			onProductActivated = p2.onProductActivated,
-			products = p2.products,
+			onProductActivated = p1.onProductActivated,
+			products = p1.products,
 			startIndex = i
 		})
 	end
@@ -587,7 +695,7 @@ local function CatalogContent(p2)
 	}, Elements)
 end
 
-local function EmptyContent(p3)
+local function EmptyContent(p2)
 	-- upvalues: FFlagBuildExperienceMonetizationNativeUIModule (copy), UseTokensFunction (copy), ReactModule (copy), View (copy), Image (copy), AssetId (copy), Text (copy), ScrollView (copy)
 	local UseTokensResult = if FFlagBuildExperienceMonetizationNativeUIModule then UseTokensFunction() else nil
 	local Scale = if FFlagBuildExperienceMonetizationNativeUIModule then UseTokensResult.Config.UI.Scale else 1
@@ -609,12 +717,12 @@ local function EmptyContent(p3)
 		}, {
 			Title = ReactModule.createElement(Text, {
 				LayoutOrder = 1,
-				Text = p3.emptyTitle,
+				Text = p2.emptyTitle,
 				tag = if FFlagBuildExperienceMonetizationNativeUIModule then "size-full-0 auto-y text-heading-medium text-wrap text-align-x-center content-emphasis" else "size-full-0 auto-y text-title-medium text-wrap text-align-x-center content-emphasis"
 			}),
 			Description = ReactModule.createElement(Text, {
 				LayoutOrder = 2,
-				Text = p3.emptyDescription,
+				Text = p2.emptyDescription,
 				tag = if FFlagBuildExperienceMonetizationNativeUIModule then "size-full-0 auto-y text-body-large text-wrap text-align-x-center content-default" else "size-full-0 auto-y text-body-medium text-wrap text-align-x-center content-default"
 			})
 		})
@@ -631,12 +739,12 @@ local function EmptyContent(p3)
 	}, { Content = Element }) else Element
 end
 
-local function CatalogStatusContent(p3)
+local function CatalogStatusContent(p2)
 	-- upvalues: ReactModule (copy), Text (copy), View (copy), Button (copy), InputSize (copy), ButtonVariant (copy)
-	return if p3.catalogStatus == "NotReady" then ReactModule.createElement(Text, {
+	return if p2.catalogStatus == "NotReady" then ReactModule.createElement(Text, {
 		tag = "size-full-0 auto-y padding-large text-body-medium text-align-x-center content-muted",
 		testId = "monetization-catalog-loading",
-		Text = p3.labels.loading
+		Text = p2.labels.loading
 	}) else ReactModule.createElement(View, {
 		tag = "col align-x-center gap-large size-full-0 auto-y padding-large",
 		testId = "monetization-catalog-error"
@@ -648,25 +756,25 @@ local function CatalogStatusContent(p3)
 			Title = ReactModule.createElement(Text, {
 				LayoutOrder = 1,
 				tag = "size-full-0 auto-y text-title-medium text-wrap text-align-x-center content-emphasis",
-				Text = p3.labels.loadErrorTitle
+				Text = p2.labels.loadErrorTitle
 			}),
 			Description = ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-center content-default",
-				Text = p3.labels.loadErrorDescription
+				Text = p2.labels.loadErrorDescription
 			})
 		}),
 		Retry = ReactModule.createElement(Button, {
 			LayoutOrder = 2,
-			onActivated = p3.onRetryCatalog,
+			onActivated = p2.onRetryCatalog,
 			size = InputSize.Medium,
-			text = p3.labels.retry,
+			text = p2.labels.retry,
 			variant = ButtonVariant.Standard
 		})
 	})
 end
 
-local function CatalogRefreshWarning(p3)
+local function CatalogRefreshWarning(p2)
 	-- upvalues: ReactModule (copy), View (copy), Text (copy), Button (copy), InputSize (copy), ButtonVariant (copy)
 	return ReactModule.createElement(View, {
 		tag = "col align-x-center gap-medium size-full-0 auto-y padding-medium radius-medium bg-surface-100",
@@ -675,22 +783,22 @@ local function CatalogRefreshWarning(p3)
 		Message = ReactModule.createElement(Text, {
 			LayoutOrder = 1,
 			tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-center content-default",
-			Text = p3.labels.loadErrorDescription
+			Text = p2.labels.loadErrorDescription
 		}),
 		Retry = ReactModule.createElement(Button, {
 			LayoutOrder = 2,
-			onActivated = p3.onRetryCatalog,
+			onActivated = p2.onRetryCatalog,
 			size = InputSize.Medium,
-			text = p3.labels.retry,
+			text = p2.labels.retry,
 			variant = ButtonVariant.Standard
 		})
 	})
 end
 
-local function CatalogSourcesStatus(p3)
+local function CatalogSourcesStatus(p2)
 	-- upvalues: ReactModule (copy), View (copy), Text (copy), Button (copy), InputSize (copy), ButtonVariant (copy)
 	local Elements = {}
-	local CatalogSources = p3.catalogSources
+	local CatalogSources = p2.catalogSources
 	
 	if CatalogSources == nil then
 		return nil
@@ -710,16 +818,16 @@ local function CatalogSourcesStatus(p3)
 				Message = ReactModule.createElement(Text, {
 					LayoutOrder = 2,
 					tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
-					Text = if catalogSource.status == "Failed" then p3.labels.loadErrorDescription else p3.labels.loading
+					Text = if catalogSource.status == "Failed" then p2.labels.loadErrorDescription else p2.labels.loading
 				}),
-				Retry = if catalogSource.status == "Failed" and p3.onRetryCatalogSource ~= nil then ReactModule.createElement(Button, {
+				Retry = if catalogSource.status == "Failed" and p2.onRetryCatalogSource ~= nil then ReactModule.createElement(Button, {
 					LayoutOrder = 3,
 					onActivated = function()
-						-- upvalues: p3 (copy), catalogSource (copy)
-						p3.onRetryCatalogSource(catalogSource.kind)
+						-- upvalues: p2 (copy), catalogSource (copy)
+						p2.onRetryCatalogSource(catalogSource.kind)
 					end,
 					size = InputSize.Medium,
-					text = p3.labels.retry,
+					text = p2.labels.retry,
 					variant = ButtonVariant.Standard
 				}) else nil
 			})
@@ -731,10 +839,10 @@ local function CatalogSourcesStatus(p3)
 	}, Elements)
 end
 
-local function DetailContent(p4)
+local function DetailContent(p3)
 	-- upvalues: FFlagBuildExperienceMonetizationNativeUIModule (copy), UseTokensFunction (copy), ReactModule (copy), View (copy), Image (copy), AssetId (copy), Text (copy), FFlagBuildExperienceMonetizationMultiKindModule (copy), Icon (copy), IconName (copy), IconSize (copy), Toggle (copy), InputSize (copy)
 	local Emphasis = if FFlagBuildExperienceMonetizationNativeUIModule then UseTokensFunction().Color.Content.Emphasis else nil
-	local SelectedProduct = p4.selectedProduct
+	local SelectedProduct = p3.selectedProduct
 	
 	return if SelectedProduct == nil then ReactModule.createElement(View, { tag = "size-full", testId = "MonetizationPageView" }) else ReactModule.createElement(View, {
 		tag = "col gap-xxlarge size-full-0 auto-y padding-y-large",
@@ -786,7 +894,7 @@ local function DetailContent(p4)
 						Text = SelectedProduct.price
 					})
 				}),
-				Status = if SelectedProduct.canManage == false and SelectedProduct.saleStatus ~= nil and p4.canChangeSaleStatus ~= true then ReactModule.createElement(Text, {
+				Status = if SelectedProduct.canManage == false and SelectedProduct.saleStatus ~= nil and p3.canChangeSaleStatus ~= true then ReactModule.createElement(Text, {
 					LayoutOrder = 4,
 					tag = "size-full-0 auto-y padding-top-xsmall text-body-medium text-wrap text-align-x-left content-muted",
 					testId = "monetization-detail-sale-status",
@@ -798,7 +906,7 @@ local function DetailContent(p4)
 				tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
 				Text = SelectedProduct.description
 			}),
-			SaleStatus = if p4.canManageProduct or p4.canChangeSaleStatus == true then ReactModule.createElement(View, {
+			SaleStatus = if p3.canManageProduct or p3.canChangeSaleStatus == true then ReactModule.createElement(View, {
 				LayoutOrder = 3,
 				tag = "col gap-small size-full-0 auto-y"
 			}, {
@@ -809,30 +917,30 @@ local function DetailContent(p4)
 					Label = ReactModule.createElement(Text, {
 						LayoutOrder = 1,
 						tag = "fill auto-y text-body-medium text-align-x-left content-default",
-						Text = p4.labels.availableForPurchase
+						Text = p3.labels.availableForPurchase
 					}),
 					Toggle = ReactModule.createElement(Toggle, {
 						LayoutOrder = 2,
 						label = "",
 						testId = "monetization-detail-sale-status",
 						isChecked = SelectedProduct.isForSale == true,
-						isDisabled = p4.isProductDisabled or (p4.isProductSaleStatusPending or p4.isProductManagedPricingPending),
-						onActivated = p4.onProductSaleStatusChanged,
+						isDisabled = p3.isProductDisabled or (p3.isProductSaleStatusPending or p3.isProductManagedPricingPending),
+						onActivated = p3.onProductSaleStatusChanged,
 						size = InputSize.Medium
 					})
 				}),
-				Error = if p4.productSaleStatusError then ReactModule.createElement(Text, {
+				Error = if p3.productSaleStatusError then ReactModule.createElement(Text, {
 					LayoutOrder = 2,
 					tag = "size-full-0 auto-y text-body-small content-alert",
 					testId = "monetization-sale-status-error",
-					Text = p4.productSaleStatusErrorLabel or (if SelectedProduct.priceInRobux == nil then p4.labels.priceRequiredForSale else p4.labels.updateError)
+					Text = p3.productSaleStatusErrorLabel or (if SelectedProduct.priceInRobux == nil then p3.labels.priceRequiredForSale else p3.labels.updateError)
 				}) else nil
 			}) else nil,
-			Pricing = if SelectedProduct.productKind == nil or SelectedProduct.productKind == "DeveloperProduct" or p4.canChangeKindManagedPricing == true then ReactModule.createElement(View, { LayoutOrder = 4, tag = "col size-full-0 auto-y" }, {
+			Pricing = if SelectedProduct.productKind == nil or SelectedProduct.productKind == "DeveloperProduct" or p3.canChangeKindManagedPricing == true then ReactModule.createElement(View, { LayoutOrder = 4, tag = "col size-full-0 auto-y" }, {
 				Title = ReactModule.createElement(Text, {
 					LayoutOrder = 1,
 					tag = "size-full-0 auto-y padding-bottom-small text-heading-small text-align-x-left content-emphasis",
-					Text = p4.labels.pricing
+					Text = p3.labels.pricing
 				}),
 				Regional = ReactModule.createElement(View, {
 					LayoutOrder = 2,
@@ -841,33 +949,33 @@ local function DetailContent(p4)
 					Label = ReactModule.createElement(Text, {
 						LayoutOrder = 1,
 						tag = "fill auto-y text-body-medium text-align-x-left content-default",
-						Text = p4.labels.regionalPricing
+						Text = p3.labels.regionalPricing
 					}),
 					Toggle = ReactModule.createElement(Toggle, {
 						LayoutOrder = 2,
 						label = "",
 						testId = "monetization-detail-managed-pricing",
 						isChecked = SelectedProduct.isManagedPricingEnabled == true,
-						isDisabled = p4.isProductDisabled or (p4.isProductManagedPricingPending or (p4.isProductSaleStatusPending or not p4.canUpdateProductManagedPricing)),
-						onActivated = p4.onProductManagedPricingChanged,
+						isDisabled = p3.isProductDisabled or (p3.isProductManagedPricingPending or (p3.isProductSaleStatusPending or not p3.canUpdateProductManagedPricing)),
+						onActivated = p3.onProductManagedPricingChanged,
 						size = InputSize.Medium
 					})
 				}),
-				UpdateError = if p4.productManagedPricingError then ReactModule.createElement(Text, {
+				UpdateError = if p3.productManagedPricingError then ReactModule.createElement(Text, {
 					LayoutOrder = 3,
 					tag = "size-full-0 auto-y text-body-small content-alert",
 					testId = "monetization-managed-pricing-error",
-					Text = p4.productManagedPricingErrorLabel or (if SelectedProduct.priceInRobux == nil then p4.labels.priceRequiredForSale else p4.labels.updateError)
+					Text = p3.productManagedPricingErrorLabel or (if SelectedProduct.priceInRobux == nil then p3.labels.priceRequiredForSale else p3.labels.updateError)
 				}) else nil
 			}) else nil
 		})
 	})
 end
 
-local function EditContent(p4)
+local function EditContent(p3)
 	-- upvalues: FFlagBuildExperienceMonetizationNativeUIModule (copy), UseTokensFunction (copy), ReactModule (copy), View (copy), Image (copy), AssetId (copy), TextInput (copy), TextArea (copy), Text (copy)
 	local UseTokensResult = if FFlagBuildExperienceMonetizationNativeUIModule then UseTokensFunction() else nil
-	local SelectedProduct = p4.selectedProduct
+	local SelectedProduct = p3.selectedProduct
 	
 	return ReactModule.createElement(View, {
 		tag = "col gap-xlarge size-full-0 auto-y padding-y-large",
@@ -885,114 +993,120 @@ local function EditContent(p4)
 				Size = UDim2.fromOffset(UseTokensResult.Size.Size_3000, UseTokensResult.Size.Size_3000)
 			})
 		}) else nil,
-		Name = if p4.canEditName == false then nil else ReactModule.createElement(TextInput, {
+		Name = if p3.canEditName == false then nil else ReactModule.createElement(TextInput, {
 			LayoutOrder = 1,
 			testId = "monetization-edit-name",
-			isDisabled = p4.isProductEditPending,
-			label = p4.labels.name,
-			onChanged = p4.onEditNameChanged,
-			text = p4.editName,
+			isDisabled = p3.isProductEditPending,
+			label = p3.labels.name,
+			onChanged = p3.onEditNameChanged,
+			text = p3.editName,
 			width = UDim.new(1, 0)
 		}),
 		Description = ReactModule.createElement(TextArea, {
 			LayoutOrder = 2,
 			numLines = 4,
 			testId = "monetization-edit-description",
-			isDisabled = p4.isProductEditPending,
-			label = p4.labels.description,
-			onChanged = p4.onEditDescriptionChanged,
-			text = p4.editDescription,
+			isDisabled = p3.isProductEditPending,
+			label = p3.labels.description,
+			onChanged = p3.onEditDescriptionChanged,
+			text = p3.editDescription,
 			width = UDim.new(1, 0)
 		}),
-		Price = if p4.canEditPrice == false then nil else ReactModule.createElement(TextInput, {
+		Price = if p3.canEditPrice == false then nil else ReactModule.createElement(TextInput, {
 			LayoutOrder = 3,
 			testId = "monetization-edit-price",
-			isDisabled = p4.isProductEditPending,
-			label = p4.labels.price,
-			onChanged = p4.onEditPriceChanged,
-			text = p4.editPrice,
+			isDisabled = p3.isProductEditPending,
+			label = p3.labels.price,
+			onChanged = p3.onEditPriceChanged,
+			text = p3.editPrice,
 			textInputType = Enum.TextInputType.Number,
 			width = UDim.new(1, 0)
 		}),
-		Error = if p4.productEditError == nil then nil else ReactModule.createElement(Text, {
+		Error = if p3.productEditError == nil then nil else ReactModule.createElement(Text, {
 			LayoutOrder = 4,
 			tag = "size-full-0 auto-y text-body-small text-wrap content-alert",
 			testId = "monetization-product-edit-error",
-			Text = p4.productEditError
+			Text = p3.productEditError
 		})
 	})
 end
 
-return function(p4)
-	-- upvalues: FFlagBuildExperienceMonetizationNativeUIModule (copy), ReactModule (copy), ProductActionsMenu (copy), Button (copy), InputSize (copy), ButtonVariant (copy), IconButton (copy), IconName (copy), DetailContent (copy), CatalogSourcesStatus (copy), CatalogStatusContent (copy), EditContent (copy), OptionsContent (copy), EmptyContent (copy), CatalogContent (copy), View (copy), CatalogRefreshWarning (copy), FillBehavior (copy), FFlagBuildExperienceMonetizationMultiKindModule (copy), FFlagBuildCheckGamePermissionsModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), ChatActionsModule (copy), OverflowMenuPageShellModule (copy)
-	local IsDetail = p4.mode == "detail"
-	local IsEdit = p4.mode == "edit"
-	local IsOptions = p4.mode == "options"
-	local v1 = #p4.products > 0
-	local HasCatalogSources = p4.catalogSources ~= nil
+local _ = function(p3, p4): boolean
+	return not p4 and (p3.mode == "empty" or p3.mode == "catalog")
+end
+
+return function(p3)
+	-- upvalues: FFlagBuildExperienceMonetizationPageFixesModule (copy), FFlagBuildExperienceMonetizationMultiKindModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), ReactModule (copy), ProductActionsMenu (copy), Button (copy), InputSize (copy), ButtonVariant (copy), IconButton (copy), IconName (copy), DetailContent (copy), GroupedCatalogContent (copy), CatalogSourcesStatus (copy), CatalogStatusContent (copy), EditContent (copy), OptionsContent (copy), EmptyContent (copy), CatalogContent (copy), View (copy), CatalogRefreshWarning (copy), FillBehavior (copy), FFlagBuildCheckGamePermissionsModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), ChatActionsModule (copy), OverflowMenuPageShellModule (copy)
+	local IsDetail = p3.mode == "detail"
+	local IsEdit = p3.mode == "edit"
+	local IsOptions = p3.mode == "options"
+	local v1 = #p3.products > 0
+	local HasCatalogSources = p3.catalogSources ~= nil
 	local Flag = true
 	
 	if HasCatalogSources then
-		for _, catalogSource in p4.catalogSources do
+		for _, catalogSource in p3.catalogSources do
 			if catalogSource.status ~= "Ready" then
 				Flag = false
 				break
 			end
 		end
 	end
-	local NoV94: boolean = not IsDetail and (not IsEdit and (not IsOptions and (if HasCatalogSources then not Flag and not v1 else p4.catalogStatus ~= "Ready" and not (p4.catalogStatus == "Failed" and v1))))
-	local NoNoV94: boolean = p4.mode == "empty" and not NoV94
-	local V94: boolean = not HasCatalogSources and (not IsDetail and (not IsEdit and (not IsOptions and (p4.catalogStatus == "Failed" and v1))))
-	local Element = if IsDetail and (p4.canManageProduct or p4.canEditKindProduct == true) then if FFlagBuildExperienceMonetizationNativeUIModule then ReactModule.createElement(ProductActionsMenu, {
-		isDisabled = p4.isProductDisabled or (p4.isProductSaleStatusPending or p4.isProductManagedPricingPending),
-		editLabel = p4.labels.edit,
-		onEdit = p4.onOpenProductEdit
+	local NoV108: boolean = not IsDetail and (not IsEdit and (not IsOptions and (if HasCatalogSources then not Flag and not v1 else p3.catalogStatus ~= "Ready" and not (p3.catalogStatus == "Failed" and v1))))
+	local NoNoV108: boolean = p3.mode == "empty" and not NoV108
+	local v2: boolean = FFlagBuildExperienceMonetizationPageFixesModule and (FFlagBuildExperienceMonetizationMultiKindModule and (HasCatalogSources and #p3.catalogSources > 0))
+	local V108: boolean = not HasCatalogSources and (not IsDetail and (not IsEdit and (not IsOptions and (p3.catalogStatus == "Failed" and v1))))
+	local Element = if IsDetail and (p3.canManageProduct or p3.canEditKindProduct == true) then if FFlagBuildExperienceMonetizationNativeUIModule then ReactModule.createElement(ProductActionsMenu, {
+		isDisabled = p3.isProductDisabled or (p3.isProductSaleStatusPending or p3.isProductManagedPricingPending),
+		editLabel = p3.labels.edit,
+		onEdit = p3.onOpenProductEdit
 	}) else ReactModule.createElement(Button, {
 		testId = "monetization-edit-product",
-		isDisabled = p4.isProductDisabled or (p4.isProductSaleStatusPending or p4.isProductManagedPricingPending),
-		onActivated = p4.onOpenProductEdit,
+		isDisabled = p3.isProductDisabled or (p3.isProductSaleStatusPending or p3.isProductManagedPricingPending),
+		onActivated = p3.onOpenProductEdit,
 		size = InputSize.Medium,
-		text = p4.labels.edit,
+		text = p3.labels.edit,
 		variant = ButtonVariant.Standard
-	}) elseif IsDetail or IsEdit or IsOptions or NoV94 or not p4.showOptions then nil else ReactModule.createElement(IconButton, {
+	}) elseif IsDetail or IsEdit or IsOptions or NoV108 or not p3.showOptions then nil else ReactModule.createElement(IconButton, {
 		isCircular = true,
 		testId = "monetization-open-options",
 		icon = if FFlagBuildExperienceMonetizationNativeUIModule then IconName.TwoSwitchesHorizontal else IconName.ThreeSlidersHorizontal,
-		onActivated = p4.onOpenOptions,
+		onActivated = p3.onOpenOptions,
 		size = InputSize.Medium,
 		variant = ButtonVariant.Utility
 	})
-	local CanvasGroup = if p4.isProductDisabled then ReactModule.createElement("CanvasGroup", {
+	local CanvasGroup = if p3.isProductDisabled then ReactModule.createElement("CanvasGroup", {
 		[ReactModule.Tag] = "data-testid=monetization-disabled-detail",
 		AutomaticSize = Enum.AutomaticSize.Y,
 		BackgroundTransparency = 1,
 		GroupTransparency = 0.55,
 		Size = UDim2.new(1, 0, 0, 0)
-	}, { Content = ReactModule.createElement(DetailContent, p4) }) else ReactModule.createElement(DetailContent, p4)
-	local Element1 = if NoV94 then if HasCatalogSources then ReactModule.createElement(CatalogSourcesStatus, p4) else ReactModule.createElement(CatalogStatusContent, p4) elseif IsDetail then CanvasGroup elseif IsEdit then ReactModule.createElement(EditContent, p4) elseif IsOptions then ReactModule.createElement(OptionsContent, p4) elseif p4.mode == "empty" then ReactModule.createElement(EmptyContent, p4) else ReactModule.createElement(CatalogContent, p4)
+	}, { Content = ReactModule.createElement(DetailContent, p3) }) else ReactModule.createElement(DetailContent, p3)
+	local Element1 = if NoV108 then if v2 then ReactModule.createElement(GroupedCatalogContent, p3) elseif HasCatalogSources then ReactModule.createElement(CatalogSourcesStatus, p3) else ReactModule.createElement(CatalogStatusContent, p3) elseif IsDetail then CanvasGroup elseif IsEdit then ReactModule.createElement(EditContent, p3) elseif IsOptions then ReactModule.createElement(OptionsContent, p3) elseif p3.mode == "empty" then ReactModule.createElement(EmptyContent, p3) else ReactModule.createElement(CatalogContent, p3)
 	
-	if HasCatalogSources and not Flag and v1 and not IsDetail and not IsEdit and not IsOptions then
+	if HasCatalogSources and not v2 and not Flag and v1 and not IsDetail and not IsEdit and not IsOptions then
 		Element1 = ReactModule.createElement(View, { tag = "col gap-large size-full-0 auto-y" }, {
-			Status = ReactModule.createElement(CatalogSourcesStatus, p4),
+			Status = ReactModule.createElement(CatalogSourcesStatus, p3),
 			Content = Element1
 		})
 	end
-	if V94 then
+	if V108 then
 		Element1 = ReactModule.createElement(View, { tag = "col gap-medium size-full-0 auto-y" }, {
-			Warning = ReactModule.createElement(CatalogRefreshWarning, p4),
+			Warning = ReactModule.createElement(CatalogRefreshWarning, p3),
 			Content = Element1
 		})
 	end
+	local IsEmpty: boolean = not NoV108 and (p3.mode == "empty" or p3.mode == "catalog")
 	local Element2 = ReactModule.createElement(OverflowMenuPageShellModule, {
 		footerDivider = false,
 		testId = "MonetizationPage",
 		closeIcon = IconName.ChevronLargeLeft,
 		content = Element1,
-		footer = if IsEdit then if FFlagBuildExperienceDeveloperProductContextModule and IsDetail and p4.chatActions ~= nil then ReactModule.createElement(View, {
+		footer = if IsEdit then if FFlagBuildExperienceDeveloperProductContextModule and IsDetail and p3.chatActions ~= nil then ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y padding-y-medium",
 			testId = "monetization-detail-composer"
 		}, {
-			Composer = ReactModule.createElement(ChatActionsModule, p4.chatActions)
+			Composer = ReactModule.createElement(ChatActionsModule, p3.chatActions)
 		}) else ReactModule.createElement(View, {
 			tag = {
 				["row gap-medium size-full-0 auto-y"] = true,
@@ -1003,10 +1117,10 @@ return function(p4)
 				LayoutOrder = 1,
 				testId = "monetization-cancel-product-edit",
 				fillBehavior = FillBehavior.Fill,
-				isDisabled = p4.isProductEditPending,
-				onActivated = p4.onCancelProductEdit,
+				isDisabled = p3.isProductEditPending,
+				onActivated = p3.onCancelProductEdit,
 				size = InputSize.Large,
-				text = p4.labels.cancel,
+				text = p3.labels.cancel,
 				variant = ButtonVariant.Standard,
 				width = UDim.new(0.5, -6)
 			}),
@@ -1014,19 +1128,19 @@ return function(p4)
 				LayoutOrder = 2,
 				testId = "monetization-save-product-edit",
 				fillBehavior = FillBehavior.Fill,
-				isLoading = p4.isProductEditPending,
-				onActivated = p4.onSaveProductEdit,
+				isLoading = p3.isProductEditPending,
+				onActivated = p3.onSaveProductEdit,
 				size = InputSize.Large,
-				text = p4.labels.save,
+				text = p3.labels.save,
 				variant = ButtonVariant.Emphasis,
 				width = UDim.new(0.5, -6)
 			})
-		}) elseif FFlagBuildExperienceDeveloperProductContextModule and IsDetail and p4.chatActions ~= nil then ReactModule.createElement(View, {
+		}) elseif FFlagBuildExperienceDeveloperProductContextModule and IsDetail and p3.chatActions ~= nil then ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y padding-y-medium",
 			testId = "monetization-detail-composer"
 		}, {
-			Composer = ReactModule.createElement(ChatActionsModule, p4.chatActions)
-		}) elseif NoV94 or p4.mode ~= "empty" and p4.mode ~= "catalog" then nil else ReactModule.createElement(View, {
+			Composer = ReactModule.createElement(ChatActionsModule, p3.chatActions)
+		}) elseif IsEmpty then ReactModule.createElement(View, {
 			tag = {
 				["row align-x-center size-full-0 auto-y"] = true,
 				["padding-y-medium"] = FFlagBuildExperienceMonetizationNativeUIModule
@@ -1034,22 +1148,22 @@ return function(p4)
 		}, {
 			Create = ReactModule.createElement(Button, {
 				testId = "monetization-create",
-				isDisabled = if FFlagBuildExperienceMonetizationMultiKindModule or FFlagBuildCheckGamePermissionsModule then not p4.canCreateProduct else nil,
-				onActivated = p4.onOpenCreate,
+				isDisabled = if FFlagBuildExperienceMonetizationMultiKindModule or FFlagBuildCheckGamePermissionsModule then not p3.canCreateProduct else nil,
+				onActivated = p3.onOpenCreate,
 				size = if FFlagBuildExperienceMonetizationNativeUIModule then InputSize.Large else InputSize.Medium,
-				text = p4.labels.emptyCreateProduct,
+				text = p3.labels.emptyCreateProduct,
 				variant = ButtonVariant.Emphasis,
 				width = if FFlagBuildExperienceMonetizationNativeUIModule then UDim.new(1, 0) else UDim.new(0, 240)
 			})
-		}),
-		disableScrolling = FFlagBuildExperienceMonetizationNativeUIModule and NoNoV94,
+		}) else nil,
+		disableScrolling = FFlagBuildExperienceMonetizationNativeUIModule and NoNoV108,
 		headerTrailing = Element,
-		onClose = p4.onClose,
-		title = if IsDetail then if p4.selectedProduct == nil then p4.labels.title else p4.selectedProduct.name elseif IsEdit then p4.labels.editProduct elseif IsOptions then p4.labels.options else p4.labels.title
+		onClose = p3.onClose,
+		title = if IsDetail then if p3.selectedProduct == nil then p3.labels.title else p3.selectedProduct.name elseif IsEdit then p3.labels.editProduct elseif IsOptions then p3.labels.options else p3.labels.title
 	})
 	
 	return if FFlagBuildExperienceDeveloperProductContextModule then ReactModule.createElement(View, {
 		tag = "size-full",
-		padding = { bottom = UDim.new(0, p4.keyboardHeight or 0) }
+		padding = { bottom = UDim.new(0, p3.keyboardHeight or 0) }
 	}, { Page = Element2 }) else Element2
 end

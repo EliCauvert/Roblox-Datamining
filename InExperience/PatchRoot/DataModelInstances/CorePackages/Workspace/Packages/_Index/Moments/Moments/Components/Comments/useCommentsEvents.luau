@@ -17,9 +17,12 @@ local GetCommentsSheetStoreModule = require(script.Parent.Sheet.getCommentsSheet
 local CreateCommentsRecommendationSessionModule = require(script.Parent.createCommentsRecommendationSession)
 local CreateCommentsAnalyticsSessionModule = require(script.Parent.createCommentsAnalyticsSession)
 local UseCommentCapabilitiesModule = require(script.Parent.useCommentCapabilities)
+local _ = require(script.Parent.Sheet.createCommentsSheetStore)
+local FFlagMomentsCommentDeepLinks = require(Parent.SharedFlags).FFlagMomentsCommentDeepLinks
+local GetDeepLinkStoreModule = if FFlagMomentsCommentDeepLinks then require(Moments.Stores.GetDeepLinkStore) else nil
 
 return function(p1, Callback, p2)
-	-- upvalues: UseFeedOptionalFunction (copy), UseRoactServiceFunction (copy), AppAppLifecycleObserverService (copy), GetCommentsSheetStoreModule (copy), ReactModule (copy), SignalsModule (copy), UseCommentCapabilitiesModule (copy), MakeRecommendationAttributionModule (copy), FFlagMomentsRecommendationContentTypeModule (copy), CreateCommentsRecommendationSessionModule (copy), MomentsGetMomentsCommentsStoreModule (copy), MomentsCommonModule (copy), FFlagMomentsCommentsCountAnalyticsModule (copy), MakeCommentCountFieldsModule (copy), CreateCommentsAnalyticsSessionModule (copy)
+	-- upvalues: UseFeedOptionalFunction (copy), UseRoactServiceFunction (copy), AppAppLifecycleObserverService (copy), GetCommentsSheetStoreModule (copy), ReactModule (copy), SignalsModule (copy), UseCommentCapabilitiesModule (copy), MakeRecommendationAttributionModule (copy), FFlagMomentsRecommendationContentTypeModule (copy), CreateCommentsRecommendationSessionModule (copy), MomentsGetMomentsCommentsStoreModule (copy), MomentsCommonModule (copy), FFlagMomentsCommentsCountAnalyticsModule (copy), MakeCommentCountFieldsModule (copy), CreateCommentsAnalyticsSessionModule (copy), FFlagMomentsCommentDeepLinks (copy), GetDeepLinkStoreModule (copy)
 	local UseFeedOptionalResult = UseFeedOptionalFunction()
 	local UseRoactServiceResult = UseRoactServiceFunction(AppAppLifecycleObserverService)
 	local CommentsSheetStoreModule = GetCommentsSheetStoreModule(false)
@@ -103,9 +106,8 @@ return function(p1, Callback, p2)
 		end
 	end, {})
 	local CanRead = UseCommentCapabilitiesModule().canRead
-	
-	return ReactModule.useCallback(function()
-		-- upvalues: p1 (copy), CanRead (copy), MakeRecommendationAttributionModule (upval), FFlagMomentsRecommendationContentTypeModule (upval), p2 (copy), UseFeedOptionalResult (copy), CreateCommentsRecommendationSessionModule (upval), Callback (copy), MomentsGetMomentsCommentsStoreModule (upval), MomentsCommonModule (upval), FFlagMomentsCommentsCountAnalyticsModule (upval), MakeCommentCountFieldsModule (upval), CreateCommentsAnalyticsSessionModule (upval), UseRefResult (copy), UseRefResult1 (copy), CommentsSheetStoreModule (copy)
+	local UseResult = ReactModule.useCallback(function(p3)
+		-- upvalues: p1 (copy), CanRead (copy), MakeRecommendationAttributionModule (upval), FFlagMomentsRecommendationContentTypeModule (upval), p2 (copy), UseFeedOptionalResult (copy), CreateCommentsRecommendationSessionModule (upval), Callback (copy), MomentsGetMomentsCommentsStoreModule (upval), MomentsCommonModule (upval), FFlagMomentsCommentsCountAnalyticsModule (upval), MakeCommentCountFieldsModule (upval), CreateCommentsAnalyticsSessionModule (upval), UseRefResult (copy), UseRefResult1 (copy), CommentsSheetStoreModule (copy), FFlagMomentsCommentDeepLinks (upval)
 		local FeedItemId = if p1 == nil then nil else p1.feedItemId
 		
 		if FeedItemId == nil or FeedItemId == "" or not CanRead then return end
@@ -127,9 +129,55 @@ return function(p1, Callback, p2)
 		end else nil)
 		UseRefResult.current = Current
 		UseRefResult1.current = CommentsAnalyticsSessionModule
-		CommentsSheetStoreModule.open(FeedItemId, Current, CommentsAnalyticsSessionModule)
+		CommentsSheetStoreModule.open(FeedItemId, Current, CommentsAnalyticsSessionModule, if FFlagMomentsCommentDeepLinks then p3 else nil)
 	end, {
 		p1 or false, UseFeedOptionalResult or false, CommentsSheetStoreModule,
 		Callback, FFlagMomentsRecommendationContentTypeModule and p2 or false, CanRead
 	})
+	
+	if FFlagMomentsCommentDeepLinks and GetDeepLinkStoreModule ~= nil then
+		local FeedItemId = if p1 == nil then nil else p1.feedItemId
+		local GetCurrentItem = if UseFeedOptionalResult == nil then nil else UseFeedOptionalResult.getCurrentItem
+		ReactModule.useEffect(function()
+			-- upvalues: IsPlaybackActive (copy), CanRead (copy), GetCurrentItem (copy), FeedItemId (copy), GetDeepLinkStoreModule (upval), SignalsModule (upval), UseResult (copy)
+			if not IsPlaybackActive or not CanRead or GetCurrentItem == nil or FeedItemId == nil or FeedItemId == "" then return end
+			local DeepLinkStoreModule = GetDeepLinkStoreModule()
+			
+			return SignalsModule.createEffect(function(p3)
+				-- upvalues: DeepLinkStoreModule (copy), FeedItemId (upval), GetCurrentItem (upval), UseResult (upval)
+				local PendingCommentsTarget = DeepLinkStoreModule.getPendingCommentsTarget(p3)
+				
+				if PendingCommentsTarget == nil or PendingCommentsTarget.feedItemId ~= FeedItemId then return end
+				local CurrentItem = GetCurrentItem(p3)
+				local FeedItemId1 = nil
+				
+				if CurrentItem == nil or CurrentItem.kind ~= "moment" then
+					if CurrentItem ~= nil and CurrentItem.kind == "avatarMoment" then
+						FeedItemId1 = CurrentItem.moment.recommendationMetadata.feedItemId
+					end
+				else
+					FeedItemId1 = CurrentItem.moment.recommendationMetadata.feedItemId
+				end
+				if FeedItemId1 ~= FeedItemId then return end
+				local TakeCommentsTargetResult = DeepLinkStoreModule.takeCommentsTarget(FeedItemId)
+				
+				if TakeCommentsTargetResult ~= nil then
+					UseResult(TakeCommentsTargetResult)
+				end
+			end)
+		end, {
+			IsPlaybackActive,
+			CanRead,
+			GetCurrentItem or false,
+			FeedItemId or false,
+			UseResult
+		})
+		
+		return ReactModule.useCallback(function()
+			-- upvalues: UseResult (copy)
+			UseResult(nil)
+		end, { UseResult })
+	else
+		return UseResult
+	end
 end

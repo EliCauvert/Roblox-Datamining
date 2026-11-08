@@ -6,15 +6,17 @@ local SetHumanoidDescriptionColorsFromBodyColor3sModule = require(script.Parent.
 local SetMakeupDescriptionsModule = require(script.Parent.setMakeupDescriptions)
 local CreateHumanoidDescriptionAccessoryInfoModule = require(script.Parent.createHumanoidDescriptionAccessoryInfo)
 local IsMakeupAssetTypeModule = require(AvatarExperienceCommon.Utils.isMakeupAssetType)
+local IsSpawnEffectAssetTypeModule = require(AvatarExperienceCommon.Utils.isSpawnEffectAssetType)
 local IsValidAssetTypeForOutfitTypeModule = require(AvatarExperienceCommon.Utils.isValidAssetTypeForOutfitType)
 local ConstantsModule = require(AvatarExperienceCommon.Constants)
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagParseHeadShapeFromAPIResponse = AvatarExperienceFlagsModule.FFlagParseHeadShapeFromAPIResponse
 local FFlagHeadRefinementFacialAnimationToggle = AvatarExperienceFlagsModule.FFlagHeadRefinementFacialAnimationToggle
+local FFlagAXSpawnEffectSaveRoundTrip = AvatarExperienceFlagsModule.FFlagAXSpawnEffectSaveRoundTrip
 local _ = require(AvatarExperienceCommon.Types.CategoryTypes.CategoryTypes)
 
 return function(p1, p2)
-	-- upvalues: IsValidAssetTypeForOutfitTypeModule (copy), ConstantsModule (copy), CreateHumanoidDescriptionAccessoryInfoModule (copy), FFlagParseHeadShapeFromAPIResponse (copy), FFlagHeadRefinementFacialAnimationToggle (copy), IsMakeupAssetTypeModule (copy), MutedErrorFunction (copy), SetMakeupDescriptionsModule (copy), HUMANOIDDESCRIPTIONSCALETONAME (copy), SetHumanoidDescriptionColorsFromBodyColor3sModule (copy)
+	-- upvalues: IsValidAssetTypeForOutfitTypeModule (copy), ConstantsModule (copy), CreateHumanoidDescriptionAccessoryInfoModule (copy), FFlagParseHeadShapeFromAPIResponse (copy), FFlagHeadRefinementFacialAnimationToggle (copy), IsMakeupAssetTypeModule (copy), FFlagAXSpawnEffectSaveRoundTrip (copy), IsSpawnEffectAssetTypeModule (copy), MutedErrorFunction (copy), SetMakeupDescriptionsModule (copy), HUMANOIDDESCRIPTIONSCALETONAME (copy), SetHumanoidDescriptionColorsFromBodyColor3sModule (copy)
 	local HumanoidDescription = Instance.new("HumanoidDescription")
 	local EquippedAssets = p1.AvatarEditor.Character.EquippedAssets
 	local AvatarScales = p1.AvatarEditor.Character.AvatarScales
@@ -69,7 +71,7 @@ return function(p1, p2)
 						else
 							HumanoidDescription[ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROPEntry] = Joined
 						end
-					elseif i ~= ConstantsModule.ASSET_TYPE_NAME_TO_ID_STRING.Gear and not IsMakeupAssetTypeModule(i) then
+					elseif i ~= ConstantsModule.ASSET_TYPE_NAME_TO_ID_STRING.Gear and not IsMakeupAssetTypeModule(i) and (not FFlagAXSpawnEffectSaveRoundTrip or not IsSpawnEffectAssetTypeModule(i)) then
 						MutedErrorFunction(string.format("assetTypeId: %s not recognized as member of humanoidDescription", (tostring(i))))
 					end
 				end

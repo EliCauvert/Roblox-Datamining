@@ -3,12 +3,9 @@ local Parent = AuthCommon.Parent
 local CoreGui = game:GetService("CoreGui")
 local RoactModule = require(Parent.Roact)
 local UIBloxModule = require(Parent.UIBlox)
-local FoundationModule = require(Parent.Foundation)
 local GetTextSizeFunction = require(Parent.Style).GetTextSize
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
 local WithStyleFunction = UIBloxModule.Style.withStyle
-local Text = require(Parent.AppCommonLib).Text
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local GetImageDataFunction = require(Parent.RobloxAppAssets).GetImageData
 local CountryCodeSelectorModule = require(AuthCommon.Components.CountryCodeSelector)
@@ -59,18 +56,21 @@ function PhoneNumberTextBox.init(p1)
 end
 
 function PhoneNumberTextBox.render(p1)
-	-- upvalues: WithStyleFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), RoactModule (copy), ImageSetLabel (copy), GetImageDataFunction (copy), NormalizeFontFaceFunction (copy), CoreGui (copy), CountryCodeSelectorModule (copy)
+	-- upvalues: WithStyleFunction (copy), GetTextSizeFunction (copy), RoactModule (copy), ImageSetLabel (copy), GetImageDataFunction (copy), NormalizeFontFaceFunction (copy), CoreGui (copy), CountryCodeSelectorModule (copy)
 	return WithStyleFunction(function(p2)
-		-- upvalues: p1 (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Text (upval), RoactModule (upval), ImageSetLabel (upval), GetImageDataFunction (upval), NormalizeFontFaceFunction (upval), CoreGui (upval), CountryCodeSelectorModule (upval)
+		-- upvalues: p1 (copy), GetTextSizeFunction (upval), RoactModule (upval), ImageSetLabel (upval), GetImageDataFunction (upval), NormalizeFontFaceFunction (upval), CoreGui (upval), CountryCodeSelectorModule (upval)
 		local Color = p1.props.Color
 		local Color1 = p2.Theme.BackgroundMuted.Color
 		local Transparency = p1.props.Transparency
-		local BodyFont = p2.Font.Body.Font
 		local ScaledBaseSize = p2.Font.BaseSize * p2.Font.Body.RelativeSize
 		local Color2 = p2.Theme.TextDefault.Color
+		local Transparency1 = p2.Theme.TextDefault.Transparency
+		local Color3 = p2.Theme.UIDefault.Color
 		local _ = p1.props.PlaceholderText or ""
+		local Text = p1.props.Text or ""
+		local TextInputTypeOverride = p1.props.TextInputTypeOverride or Enum.TextInputType.Phone
 		local Text1 = " +" .. p1.props.CountryCode.prefix
-		local Largest = math.max(if FoundationFontFaceMigration then GetTextSizeFunction(Text1, ScaledBaseSize, p2.Tokens.Typography.BodyLarge.Font, Vector2.new(10000, 10000)).X + p1.props.InnerPadding * 2 else Text.GetTextWidth(Text1, BodyFont, ScaledBaseSize) + p1.props.InnerPadding * 2, p1.props.CountryCodeSize)
+		local Largest = math.max(GetTextSizeFunction(Text1, ScaledBaseSize, p2.Tokens.Typography.BodyLarge.Font, Vector2.new(10000, 10000)).X + p1.props.InnerPadding * 2, p1.props.CountryCodeSize)
 		
 		return RoactModule.createElement("TextButton", {
 			Size = p1.props.Size,
@@ -104,15 +104,14 @@ function PhoneNumberTextBox.render(p1)
 					ZIndex = 2,
 					Size = UDim2.new(1, -p1.props.InnerPadding * 2, 1, 0),
 					Position = UDim2.new(0, p1.props.InnerPadding, 0, 0),
-					PlaceholderColor3 = p2.Theme.UIDefault.Color,
+					PlaceholderColor3 = Color3,
 					PlaceholderText = p1.props.PlaceholderText,
-					Text = p1.props.Text or "",
+					Text = Text,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextColor3 = Color2,
 					TextSize = ScaledBaseSize,
-					TextInputType = p1.props.TextInputTypeOverride or Enum.TextInputType.Phone,
-					Font = if FoundationFontFaceMigration then nil else BodyFont,
-					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font) else nil,
+					TextInputType = TextInputTypeOverride,
+					FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font),
 					ClearTextOnFocus = false,
 					[RoactModule.Event.Focused] = p1.props.onFocused,
 					[RoactModule.Event.FocusLost] = p1.props.onFocusLost,
@@ -145,12 +144,11 @@ function PhoneNumberTextBox.render(p1)
 					RichText = true,
 					Size = UDim2.new(1, -p1.props.InnerPadding, 1, 0),
 					TextXAlignment = Enum.TextXAlignment.Right,
-					Font = if FoundationFontFaceMigration then nil else BodyFont,
-					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font) else nil,
+					FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font),
 					Text = "<u>" .. Text1 .. "</u>",
 					TextSize = ScaledBaseSize,
 					TextColor3 = Color2,
-					TextTransparency = p2.Theme.TextDefault.Transparency
+					TextTransparency = Transparency1
 				})
 			}),
 			Divider = RoactModule.createElement("Frame", {

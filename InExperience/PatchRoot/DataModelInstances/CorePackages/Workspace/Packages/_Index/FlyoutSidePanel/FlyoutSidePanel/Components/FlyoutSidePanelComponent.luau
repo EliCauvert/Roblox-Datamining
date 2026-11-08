@@ -20,21 +20,17 @@ local FlyoutQuickSigninButtonModule = require(script.Parent.FlyoutQuickSigninBut
 local FlyoutReportLogsModule = require(script.Parent.FlyoutReportLogs)
 local FlyoutSwitchAccountButtonModule = require(script.Parent.FlyoutSwitchAccountButton)
 local FlyoutProfileCardModule = require(script.Parent.FlyoutProfileCard)
+local SwitchAccountTooltipModule = require(script.Parent.SwitchAccountTooltip)
+local UseFlyoutSwitchAccountModule = require(script.Parent.Parent.Hooks.useFlyoutSwitchAccount)
 local UseDismissFlyoutOnPartyTopBannerModule = require(script.Parent.Parent.Hooks.useDismissFlyoutOnPartyTopBanner)
 local UseSetDrawerVisibleFunction = require(Parent.Drawer).Hooks.useSetDrawerVisible
-local FFlagFlyoutTradesEntryExposureLoggingModule = require(script.Parent.Parent.Flags.FFlagFlyoutTradesEntryExposureLogging)
-local FFlagFlyoutProfileEntryExposureLoggingModule = require(script.Parent.Parent.Flags.FFlagFlyoutProfileEntryExposureLogging)
-local FFlagFlyoutTradesEntryImpressionLoggingModule = require(script.Parent.Parent.Flags.FFlagFlyoutTradesEntryImpressionLogging)
 local FFlagFlyoutSidePanelUseSharedProfileCardModule = require(script.Parent.Parent.Flags.FFlagFlyoutSidePanelUseSharedProfileCard)
 local ProfileCard = if FFlagFlyoutSidePanelUseSharedProfileCardModule then require(Parent.ProfileCard).ProfileCard else nil
-local UseFlyoutTradesEntryExposureLoggingModule = require(script.Parent.Parent.Hooks.useFlyoutTradesEntryExposureLogging)
-local UseFlyoutProfileEntryExposureLoggingModule = require(script.Parent.Parent.Hooks.useFlyoutProfileEntryExposureLogging)
-local UseCTAChangeMorePageFlyoutButtonTextExposureLoggingModule = require(script.Parent.Parent.Hooks.useCTAChangeMorePageFlyoutButtonTextExposureLogging)
-local UseFlyoutTradesEntryImpressionLoggingModule = require(script.Parent.Parent.Hooks.useFlyoutTradesEntryImpressionLogging)
+local UseFlyoutSidePanelLoggingModule = require(script.Parent.Parent.Hooks.useFlyoutSidePanelLogging)
+local FlyoutAccountSwitcherIXP = require(Parent.SharedExperimentDefinition).FlyoutAccountSwitcherIXP
 local FlyoutAnalyticsModule = require(script.Parent.Parent.Analytics.FlyoutAnalytics)
 local TermsPrivacyFooterModule = require(script.Parent.TermsPrivacyFooter)
 local SharedFlagsModule = require(Parent.SharedFlags)
-local FFlagEnableMeTabProfile = SharedFlagsModule.FFlagEnableMeTabProfile
 local FFlagEnableBlackbird = SharedFlagsModule.FFlagEnableBlackbird
 local FFlagEnableBlackbirdOnFlyoutMenu = SharedFlagsModule.FFlagEnableBlackbirdOnFlyoutMenu
 local EnableBlackbirdUpsellOnFlyoutMenu = game:DefineFastFlag("EnableBlackbirdUpsellOnFlyoutMenu", false)
@@ -47,13 +43,12 @@ local FFlagFixOverlayTopInsetForDeviceSafeInsets = SharedFlagsModule.FFlagFixOve
 local ShouldUseDeviceSafeInsets = require(Parent.Display).shouldUseDeviceSafeInsets
 local FFlagFlyoutSidePanelUseProfileFrameThumbnail = SharedFlagsModule.FFlagFlyoutSidePanelUseProfileFrameThumbnail
 local FlyoutScaleMenuWidth = game:DefineFastFlag("FlyoutScaleMenuWidth", false)
-local FFlagCTAChangeMorePageFlyoutButtonTextIxpEnabled = SharedFlagsModule.FFlagCTAChangeMorePageFlyoutButtonTextIxpEnabled
 local UseHasRobloxSubscriptionModule = if FFlagEnableBlackbirdCheck then require(script.Parent.Parent.Hooks.useHasRobloxSubscription) else nil
 local UsePlusReferralFlyoutBannerBlindnessModule = if FFlagEnablePlusReferralFlyoutEntry or FFlagEnablePlusReferralRecipientFlyoutEntry then require(script.Parent.Parent.Hooks.usePlusReferralFlyoutBannerBlindness) else nil
 local PlusReferralRecipientFlyoutBannerMaxImpressions = game:DefineFastInt("PlusReferralRecipientFlyoutBannerMaxImpressions", 10)
 local PlusReferralBannerModule = if FFlagEnablePlusReferralFlyoutEntry then require(script.Parent.PlusReferralBanner) else nil
 local PlusReferralRecipientBannerModule = if FFlagEnablePlusReferralRecipientFlyoutEntry then require(script.Parent.PlusReferralRecipientBanner) else nil
-local BlackbirdUpsellBannerModule = if FFlagEnableBlackbird and FFlagEnableBlackbirdOnFlyoutMenu and EnableBlackbirdUpsellOnFlyoutMenu then require(script.Parent.BlackbirdUpsellBanner) else nil
+local BlackbirdUpsellBannerModule = if FFlagEnableBlackbird and (FFlagEnableBlackbirdOnFlyoutMenu and EnableBlackbirdUpsellOnFlyoutMenu) then require(script.Parent.BlackbirdUpsellBanner) else nil
 
 local function selectStatusBarHeight(p1)
 	return p1.TopBar.statusBarHeight or 0
@@ -69,7 +64,7 @@ local function _(p1, p2): number
 end
 
 return ReactModule.memo(function(p1, _)
-	-- upvalues: UseTokensFunction (copy), UseLocalRobuxBalanceFunction (copy), UseSelectorFunction (copy), selectStatusBarHeight (copy), selectGlobalGuiInset (copy), FFlagFixOverlayTopInsetForDeviceSafeInsets (copy), UseDeviceInsetsFunction (copy), ShouldUseDeviceSafeInsets (copy), FFlagEnableFlyoutOnNavRail (copy), UseScreenSizeFunction (copy), FlyoutScaleMenuWidth (copy), ConstantsModule (copy), UseAppPolicyFunction (copy), FFlagEnableBlackbirdCheck (copy), UseHasRobloxSubscriptionModule (copy), FFlagEnablePlusReferralRecipientFlyoutEntry (copy), UsePlusReferralFlyoutBannerBlindnessModule (copy), PlusReferralRecipientFlyoutBannerMaxImpressions (copy), FFlagEnableBlackbird (copy), BlackbirdUpsellBannerModule (copy), FFlagEnablePlusReferralFlyoutEntry (copy), UseFlyoutNavigationItemsModule (copy), CreateNextOrderFunction (copy), UseSetDrawerVisibleFunction (copy), FFlagFlyoutSidePanelUseSharedProfileCardModule (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), FFlagFlyoutTradesEntryExposureLoggingModule (copy), UseFlyoutTradesEntryExposureLoggingModule (copy), FFlagFlyoutProfileEntryExposureLoggingModule (copy), FFlagEnableMeTabProfile (copy), UseFlyoutProfileEntryExposureLoggingModule (copy), FFlagCTAChangeMorePageFlyoutButtonTextIxpEnabled (copy), UseCTAChangeMorePageFlyoutButtonTextExposureLoggingModule (copy), FFlagFlyoutTradesEntryImpressionLoggingModule (copy), UseFlyoutTradesEntryImpressionLoggingModule (copy), ReactModule (copy), FlyoutAnalyticsModule (copy), ProfileCard (copy), FFlagFlyoutSidePanelUseProfileFrameThumbnail (copy), FlyoutProfileCardModule (copy), FFlagEnableFlyoutMenuRobuxCardRefactor (copy), RobuxPillModule (copy), FoundationModule (copy), Divider (copy), PlusReferralBannerModule (copy), PlusReferralRecipientBannerModule (copy), FlyoutNavigationListModule (copy), FlyoutSwitchAccountButtonModule (copy), FlyoutQuickSigninButtonModule (copy), FlyoutReportLogsModule (copy), TermsPrivacyFooterModule (copy), UseDismissFlyoutOnPartyTopBannerModule (copy), DrawerContainer (copy)
+	-- upvalues: UseTokensFunction (copy), UseLocalRobuxBalanceFunction (copy), UseSelectorFunction (copy), selectStatusBarHeight (copy), selectGlobalGuiInset (copy), FFlagFixOverlayTopInsetForDeviceSafeInsets (copy), UseDeviceInsetsFunction (copy), ShouldUseDeviceSafeInsets (copy), FFlagEnableFlyoutOnNavRail (copy), UseScreenSizeFunction (copy), FlyoutScaleMenuWidth (copy), ConstantsModule (copy), UseAppPolicyFunction (copy), FFlagEnableBlackbirdCheck (copy), UseHasRobloxSubscriptionModule (copy), FFlagEnablePlusReferralRecipientFlyoutEntry (copy), UsePlusReferralFlyoutBannerBlindnessModule (copy), PlusReferralRecipientFlyoutBannerMaxImpressions (copy), FFlagEnableBlackbird (copy), BlackbirdUpsellBannerModule (copy), FFlagEnablePlusReferralFlyoutEntry (copy), UseFlyoutNavigationItemsModule (copy), CreateNextOrderFunction (copy), UseSetDrawerVisibleFunction (copy), FFlagFlyoutSidePanelUseSharedProfileCardModule (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), UseFlyoutSidePanelLoggingModule (copy), ReactModule (copy), FlyoutAccountSwitcherIXP (copy), UseFlyoutSwitchAccountModule (copy), FlyoutAnalyticsModule (copy), ProfileCard (copy), FFlagFlyoutSidePanelUseProfileFrameThumbnail (copy), FlyoutProfileCardModule (copy), SwitchAccountTooltipModule (copy), FFlagEnableFlyoutMenuRobuxCardRefactor (copy), RobuxPillModule (copy), FoundationModule (copy), Divider (copy), PlusReferralBannerModule (copy), PlusReferralRecipientBannerModule (copy), FlyoutNavigationListModule (copy), FlyoutSwitchAccountButtonModule (copy), FlyoutQuickSigninButtonModule (copy), FlyoutReportLogsModule (copy), TermsPrivacyFooterModule (copy), UseDismissFlyoutOnPartyTopBannerModule (copy), DrawerContainer (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalRobuxBalanceResult: number = UseLocalRobuxBalanceFunction()
 	local UseSelectorResult = UseSelectorFunction(selectStatusBarHeight)
@@ -126,23 +121,12 @@ return ReactModule.memo(function(p1, _)
 	local NextOrder = CreateNextOrderFunction()
 	local UseSetDrawerVisibleResult = UseSetDrawerVisibleFunction()
 	local UseRoactServiceResult = if FFlagFlyoutSidePanelUseSharedProfileCardModule then UseRoactServiceFunction(AppEventIngestService) else nil
-	
-	if FFlagFlyoutTradesEntryExposureLoggingModule then
-		UseFlyoutTradesEntryExposureLoggingModule()
-	end
-	if FFlagFlyoutProfileEntryExposureLoggingModule and FFlagEnableMeTabProfile then
-		UseFlyoutProfileEntryExposureLoggingModule()
-	end
-	if FFlagCTAChangeMorePageFlyoutButtonTextIxpEnabled then
-		UseCTAChangeMorePageFlyoutButtonTextExposureLoggingModule()
-	end
-	if FFlagFlyoutTradesEntryImpressionLoggingModule then
-		UseFlyoutTradesEntryImpressionLoggingModule(UseFlyoutNavigationItemsModuleResult.myLibraryItems)
-	end
+	UseFlyoutSidePanelLoggingModule(UseFlyoutNavigationItemsModuleResult.myLibraryItems)
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseSetDrawerVisibleResult (copy)
 		UseSetDrawerVisibleResult(false)
 	end, { UseSetDrawerVisibleResult })
+	local UseFlyoutSwitchAccountModuleResult = if FlyoutAccountSwitcherIXP.isUsernameAccountSwitcherEnabled() then UseFlyoutSwitchAccountModule(p1.onSwitchAccountActivated, UseResult) else nil
 	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: FlyoutAnalyticsModule (upval)
 		FlyoutAnalyticsModule.onFlyoutSidePanelClosed(p2)
@@ -179,6 +163,8 @@ return ReactModule.memo(function(p1, _)
 			localUserModel = p1.localUserModel,
 			isRobloxSubscriber = if FFlagEnableBlackbirdCheck then UseHasRobloxSubscriptionModuleResult else nil,
 			onProfileActivated = UseResult2,
+			onSwitchAccountActivated = if FlyoutAccountSwitcherIXP.isUsernameAccountSwitcherEnabled() then UseFlyoutSwitchAccountModuleResult.onActivated else nil,
+			switchAccountAnchorRef = if FlyoutAccountSwitcherIXP.isUsernameAccountSwitcherEnabled() then UseFlyoutSwitchAccountModuleResult.anchorRef else nil,
 			useProfileFrameThumbnail = FFlagFlyoutSidePanelUseProfileFrameThumbnail
 		}) else ReactModule.createElement(FlyoutProfileCardModule, {
 			layoutOrder = NextOrder(),
@@ -187,6 +173,11 @@ return ReactModule.memo(function(p1, _)
 			onProfileActivated = p1.onProfileActivated,
 			closeDrawer = UseResult
 		}),
+		SwitchAccountTooltip = if FlyoutAccountSwitcherIXP.isSwitchAccountTooltipEnabled() then ReactModule.createElement(SwitchAccountTooltipModule, {
+			anchorRef = UseFlyoutSwitchAccountModuleResult.anchorRef,
+			isEligible = p1.onSwitchAccountActivated ~= nil,
+			dismissRef = UseFlyoutSwitchAccountModuleResult.dismissRef
+		}) else nil,
 		RobuxPill = if FFlagEnableFlyoutMenuRobuxCardRefactor or not IsUseLocalRobuxBalanceResultAbove then nil else ReactModule.createElement(RobuxPillModule, {
 			layoutOrder = NextOrder(),
 			openPurchaseRobuxPage = p1.openPurchaseRobuxPage,
@@ -234,10 +225,10 @@ return ReactModule.memo(function(p1, _)
 			closeDrawer = UseResult,
 			buildCreatorWebNavUrl = p1.buildCreatorWebNavUrl
 		}),
-		SwitchAccountButton = if p1.onSwitchAccountActivated then ReactModule.createElement(FlyoutSwitchAccountButtonModule, {
+		SwitchAccountButton = if p1.onSwitchAccountActivated and FlyoutAccountSwitcherIXP.isBottomButtonEnabled() then ReactModule.createElement(FlyoutSwitchAccountButtonModule, {
 			layoutOrder = NextOrder(),
-			onSwitchAccountActivated = p1.onSwitchAccountActivated,
-			closeDrawer = UseResult
+			onSwitchAccountActivated = if FlyoutAccountSwitcherIXP.isUsernameAccountSwitcherEnabled() then UseFlyoutSwitchAccountModuleResult.onActivated else p1.onSwitchAccountActivated,
+			closeDrawer = if FlyoutAccountSwitcherIXP.isUsernameAccountSwitcherEnabled() then nil else UseResult
 		}) else nil,
 		QuickSigninButton = ReactModule.createElement(FlyoutQuickSigninButtonModule, { layoutOrder = NextOrder(), closeDrawer = UseResult }),
 		LogOut = p1.renderLogOut(NextOrder()),

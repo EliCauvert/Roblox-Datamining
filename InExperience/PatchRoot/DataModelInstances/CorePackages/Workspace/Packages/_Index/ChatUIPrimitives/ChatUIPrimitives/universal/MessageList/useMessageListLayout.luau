@@ -16,29 +16,28 @@ local function _(Tbl)
 	return Copy
 end
 
-return function()
-	-- upvalues: ReactModule (copy), ViewRecyclerModule (copy), MessageInlineItemMetricsModule (copy), Frozen (copy)
-	local UseStateResult = ReactModule.useState(function()
-		-- upvalues: ViewRecyclerModule (upval), MessageInlineItemMetricsModule (upval), Frozen (upval)
-		local MeasuredResult = ViewRecyclerModule.Layout.measured({
-			estimatedItemLength = MessageInlineItemMetricsModule.MIN_HEIGHT
-		})
+return function(p1)
+	-- upvalues: MessageInlineItemMetricsModule (copy), ReactModule (copy), ViewRecyclerModule (copy), Frozen (copy)
+	local MINHEIGHT = if p1 == nil then MessageInlineItemMetricsModule.MIN_HEIGHT else p1
+	local UseMemoResult = ReactModule.useMemo(function()
+		-- upvalues: ViewRecyclerModule (upval), MINHEIGHT (copy), Frozen (upval)
+		local MeasuredResult = ViewRecyclerModule.Layout.measured({ estimatedItemLength = MINHEIGHT })
 		local Copy = table.clone(MeasuredResult)
 		
-		function Copy.updateItemMeasurement(p1)
+		function Copy.updateItemMeasurement(p2)
 			-- upvalues: Frozen (upval), MeasuredResult (copy)
-			return if p1.length <= 0 then Frozen else MeasuredResult.updateItemMeasurement(p1)
+			return if p2.length <= 0 then Frozen else MeasuredResult.updateItemMeasurement(p2)
 		end
 		
 		return Copy
-	end)
+	end, { MINHEIGHT })
 	ReactModule.useEffect(function()
-		-- upvalues: UseStateResult (copy)
+		-- upvalues: UseMemoResult (copy)
 		return function()
-			-- upvalues: UseStateResult (upval)
-			UseStateResult.destroy()
+			-- upvalues: UseMemoResult (upval)
+			UseMemoResult.destroy()
 		end
-	end, { UseStateResult })
+	end, { UseMemoResult })
 	
-	return UseStateResult
+	return UseMemoResult
 end

@@ -1,5 +1,7 @@
-﻿local FFlagGameJoinCardAnalyticsCardId = require(script:FindFirstAncestor("GameJoinCard").Parent.SharedFlags).FFlagGameJoinCardAnalyticsCardId
+﻿local GameJoinCard = script:FindFirstAncestor("GameJoinCard")
+local FFlagGameJoinCardAnalyticsCardId = require(GameJoinCard.Parent.SharedFlags).FFlagGameJoinCardAnalyticsCardId
 local _ = require(script.Parent.Types)
+local _ = require(GameJoinCard.Analytics.useGameJoinCardAnalytics)
 
 return function(p1)
 	-- upvalues: FFlagGameJoinCardAnalyticsCardId (copy)

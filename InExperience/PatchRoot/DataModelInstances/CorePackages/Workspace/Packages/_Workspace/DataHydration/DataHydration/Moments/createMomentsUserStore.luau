@@ -190,19 +190,44 @@ return function(p1)
 					end
 				end
 			end
-			if v1 == nil then
+			if v1 == nil or Tbl[v1].status == "Moderated" then
 				return false
 			else
 				local Copy1 = table.clone(Tbl)
-				Copy1[v1] = {
-					moment = Tbl[v1].moment,
-					publishedMoment = PublishedMoment
-				}
+				local Copy2 = table.clone(Tbl[v1])
+				Copy2.publishedMoment = PublishedMoment
+				Copy1[v1] = Copy2
 				Copy[Key] = Copy1
 				Signal2_1(Copy)
 				
 				return true
 			end
+		end,
+		setPendingUserMomentStatus = function(Key, MomentId, Status): boolean
+			-- upvalues: Signal1 (copy), Signal2_1 (copy)
+			local SignalResultEntry = Signal1(false)[Key]
+			
+			if SignalResultEntry == nil then
+				return false
+			end
+			for i, value in SignalResultEntry do
+				if value.moment.momentId == MomentId then
+					if value.publishedMoment == nil and value.status ~= "Moderated" then
+						local Copy = table.clone(Signal1(false))
+						local Copy1 = table.clone(SignalResultEntry)
+						local Copy2 = table.clone(value)
+						Copy2.status = Status
+						Copy1[i] = Copy2
+						Copy[Key] = Copy1
+						Signal2_1(Copy)
+						
+						return true
+					else
+						return false
+					end
+				end
+			end
+			return false
 		end,
 		clear = function()
 			-- upvalues: Signal2_1 (copy), T (ref), AsPromiseResults (ref), TargetUserIds (ref), DataResolverModule (copy)

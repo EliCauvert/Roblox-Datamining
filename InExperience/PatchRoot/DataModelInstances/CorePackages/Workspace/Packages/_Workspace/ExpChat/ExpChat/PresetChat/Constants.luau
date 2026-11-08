@@ -3,6 +3,7 @@
 	LayoutMode = { Tray = "Tray", FlyOut = "FlyOut" },
 	Analytics = {
 		EventTypes = { Click = "click", Show = "show", Dismiss = "dismiss" },
+		ClickActions = { Open = "open", Close = "close" },
 		Components = {
 			PresetTray = "preset_tray",
 			PresetTooltip = "preset_ftux",

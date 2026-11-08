@@ -8,10 +8,13 @@ local EnumsModule = require(UserList.Common.Enums)
 local UseEntitiesModule = require(UserList.Hooks.useEntities)
 local UseEntitySelectionHandlerModule = require(UserList.Hooks.useEntitySelectionHandler)
 local UseRenderEntityModule = require(UserList.Hooks.useRenderEntity)
+local UseFixedRowLayoutModule = require(UserList.Hooks.useFixedRowLayout)
 local FFlagUserListCtaIntegrationEnabled = require(Parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
 local FFlagUserListComposeRenderRowWithCta = require(Parent.SharedFlags).FFlagUserListComposeRenderRowWithCta
 local FFlagUserListSurfaceExtensions = require(Parent.SharedFlags).FFlagUserListSurfaceExtensions
 local FFlagUserListRowSelectionOriginSourceModule = require(UserList.Flags.FFlagUserListRowSelectionOriginSource)
+local FFlagUserListDisableVirtualizationConfigModule = require(UserList.Flags.FFlagUserListDisableVirtualizationConfig)
+local FFlagUserListFixedRowHeightConfig = require(Parent.SharedFlags).FFlagUserListFixedRowHeightConfig
 local CtaModule = if FFlagUserListCtaIntegrationEnabled then require(UserList.Cta) else nil
 local config = {
 	BackgroundTransparency = 1,
@@ -26,7 +29,7 @@ local function keyExtractor(p1, _)
 end
 
 local function VerticalUserList(p1)
-	-- upvalues: UseEntitiesModule (copy), UseEntitySelectionHandlerModule (copy), FFlagUserListRowSelectionOriginSourceModule (copy), ReactModule (copy), UseRenderEntityModule (copy), EnumsModule (copy), FFlagUserListSurfaceExtensions (copy), View (copy), FlatList (copy), keyExtractor (copy), JoinResult (copy), config (copy), ContentContainerStyle (copy)
+	-- upvalues: UseEntitiesModule (copy), UseEntitySelectionHandlerModule (copy), FFlagUserListRowSelectionOriginSourceModule (copy), ReactModule (copy), UseRenderEntityModule (copy), EnumsModule (copy), FFlagUserListSurfaceExtensions (copy), FFlagUserListFixedRowHeightConfig (copy), UseFixedRowLayoutModule (copy), View (copy), FlatList (copy), keyExtractor (copy), FFlagUserListDisableVirtualizationConfigModule (copy), JoinResult (copy), config (copy), ContentContainerStyle (copy)
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
 		if not p1.initialRowCount or p1.initialRowCount >= #p1.entities then
@@ -56,10 +59,14 @@ local function VerticalUserList(p1)
 		layoutMode = EnumsModule.LayoutMode.Vertical,
 		firstRowRef = if FFlagUserListSurfaceExtensions then p1.firstRowRef else nil
 	})
+	local UseFixedRowLayoutModuleResult = if FFlagUserListFixedRowHeightConfig then UseFixedRowLayoutModule(p1.configs ~= nil and p1.configs.fixedRowHeight == true, if p1.ListHeaderComponent then true else false) else nil
 	local UseResult = ReactModule.useCallback(function(p2)
-		-- upvalues: UseRenderEntityModuleResult (copy)
-		return UseRenderEntityModuleResult(p2.item, p2.index)
-	end, { UseRenderEntityModuleResult })
+		-- upvalues: UseRenderEntityModuleResult (copy), FFlagUserListFixedRowHeightConfig (upval), UseFixedRowLayoutModuleResult (copy)
+		return UseRenderEntityModuleResult(p2.item, p2.index, if FFlagUserListFixedRowHeightConfig and UseFixedRowLayoutModuleResult then UseFixedRowLayoutModuleResult.itemSize else nil)
+	end, {
+		UseRenderEntityModuleResult,
+		if FFlagUserListFixedRowHeightConfig then UseFixedRowLayoutModuleResult else nil
+	})
 	
 	return if #p1.entities == 0 then nil elseif p1.isScrollEnabled then ReactModule.createElement(View, { tag = "size-full-0 fill", LayoutOrder = p1.layoutOrder }, {
 		List = ReactModule.createElement(FlatList, {
@@ -69,10 +76,15 @@ local function VerticalUserList(p1)
 			data = UseMemoResult1,
 			renderItem = UseResult,
 			keyExtractor = keyExtractor,
+			disableVirtualization = if FFlagUserListDisableVirtualizationConfigModule and p1.configs and p1.configs.disableVirtualization then true else nil,
+			getItemLayout = if FFlagUserListFixedRowHeightConfig and UseFixedRowLayoutModuleResult then UseFixedRowLayoutModuleResult.getItemLayout else nil,
 			onEndReached = if FFlagUserListSurfaceExtensions then p1.onEndReached else nil,
 			style = if FFlagUserListSurfaceExtensions and p1.configs and p1.configs.disableRowActivation then JoinResult else config,
 			contentContainerStyle = ContentContainerStyle,
-			ListHeaderComponent = p1.ListHeaderComponent,
+			ListHeaderComponent = if FFlagUserListFixedRowHeightConfig and UseFixedRowLayoutModuleResult and p1.ListHeaderComponent then ReactModule.createElement(View, {
+				tag = "size-full-0 auto-y",
+				onAbsoluteSizeChanged = UseFixedRowLayoutModuleResult.onHeaderSizeChanged
+			}, { Header = p1.ListHeaderComponent }) else p1.ListHeaderComponent,
 			ListFooterComponent = p1.ListFooterComponent
 		})
 	}) else ReactModule.createElement(View, {

@@ -8,7 +8,6 @@ local DialogSize = FoundationModule.Enums.DialogSize
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
 local AppLinking = require(Parent.RoactServiceTags).AppLinking
@@ -20,7 +19,7 @@ local ExtractAndStyleRichTextLinksFunction = require(Parent.DiscoveryUtils).extr
 local FFlagEnablePlayButtonWizardVPCPrologueModule = require(GamePlayButton.Flags.FFlagEnablePlayButtonWizardVPCPrologue)
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), UseRoactServiceFunction (copy), AppLinking (copy), ReactModule (copy), ExtractAndStyleRichTextLinksFunction (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), CloseCentralOverlayFunction (copy), Dialog (copy), DialogSize (copy), FFlagEnablePlayButtonWizardVPCPrologueModule (copy), PlayButtonUpsellBodyModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ButtonVariant (copy)
+	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), UseRoactServiceFunction (copy), AppLinking (copy), ReactModule (copy), ExtractAndStyleRichTextLinksFunction (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), CloseCentralOverlayFunction (copy), Dialog (copy), DialogSize (copy), FFlagEnablePlayButtonWizardVPCPrologueModule (copy), PlayButtonUpsellBodyModule (copy), NormalizeFontFaceFunction (copy), ButtonVariant (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseRoactServiceResult = UseRoactServiceFunction(AppLinking)
@@ -68,8 +67,7 @@ return function(p1)
 				Size = UDim2.new(1, 0, 0, 0),
 				Text = UseMemoResult.styledText,
 				TextSize = UseTokensResult.Typography.BodyLarge.FontSize,
-				Font = if FoundationFontFaceMigration then nil else UseTokensResult.Typography.BodyLarge.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.BodyLarge.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.BodyLarge.Font),
 				TextWrapped = true,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Center,

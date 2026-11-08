@@ -19,11 +19,14 @@ local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlag
 local FFlagBuildExperienceMonetizationProductEditingModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationProductEditing)
 local FFlagBuildExperienceMonetizationManageKindsModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationManageKinds)
 local FFlagBuildExperienceMonetizationKindRegionalPricingModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationKindRegionalPricing)
+local FFlagBuildExperienceDeveloperProductContextModule1 = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationPageFixes) and FFlagBuildExperienceDeveloperProductContextModule
 local FFlagBuildExperienceRemoveDevProductPriceCap = require(Parent.SharedFlags).FFlagBuildExperienceRemoveDevProductPriceCap
 local _ = require(script.Parent.MonetizationPageView)
 local GetProductKindCapabilitiesModule = require(script.Parent.getProductKindCapabilities)
 local t = {}
 local Creator = if FFlagBuildExperienceDeveloperProductContextModule then UrlBuilder.fromString("apis:developer-products/v2/universes/{universeId}/developer-products/{productId}/creator") else nil
+local Creator1 = if FFlagBuildExperienceDeveloperProductContextModule1 then UrlBuilder.fromString("apis:game-passes/v1/universes/{universeId}/game-passes/{productId}/creator") else nil
+local ProductId = if FFlagBuildExperienceDeveloperProductContextModule1 then UrlBuilder.fromString("apis:experience-subscriptions/v1/experiences/{universeId}/experience-subscriptions/{productId}") else nil
 local FFlagBuildExperienceDevProductModerationReadbackModule = require(BuildExperience.Flags.FFlagBuildExperienceDevProductModerationReadback)
 local WasDeveloperProductTextModeratedModule = require(BuildExperience.utils.wasDeveloperProductTextModerated)
 
@@ -124,6 +127,24 @@ end
 
 local _ = function(p1): boolean
 	return p1 ~= nil and (if p1.productKind == nil then p1.canManage ~= false else p1.productKind == "DeveloperProduct" and p1.canManage ~= false)
+end
+
+local _ = function(p1): boolean
+	-- upvalues: FFlagBuildExperienceDeveloperProductContextModule1 (copy)
+	return FFlagBuildExperienceDeveloperProductContextModule1 and (p1 ~= nil and (p1.productKind == "GamePass" or p1.productKind == "Subscription"))
+end
+
+local _ = function(p1): boolean
+	-- upvalues: FFlagBuildExperienceDeveloperProductContextModule1 (copy)
+	return p1 ~= nil and (if p1.productKind == nil then p1.canManage ~= false else p1.productKind == "DeveloperProduct" and p1.canManage ~= false) or FFlagBuildExperienceDeveloperProductContextModule1 and (p1 ~= nil and (p1.productKind == "GamePass" or p1.productKind == "Subscription"))
+end
+
+local function productResourceUrl(UniverseId, p1)
+	-- upvalues: FFlagBuildExperienceDeveloperProductContextModule1 (copy), Creator1 (copy), ProductId (copy), Creator (copy)
+	local config = { universeId = UniverseId, productId = p1.id }
+	local IsGamePass: boolean = FFlagBuildExperienceDeveloperProductContextModule1 and (p1 ~= nil and (p1.productKind == "GamePass" or p1.productKind == "Subscription"))
+	
+	return if IsGamePass then if p1.productKind == "GamePass" then Creator1(config) else ProductId(config) else Creator(config)
 end
 
 local _ = function(p1)
@@ -859,7 +880,7 @@ local function useMonetizationLocalization()
 end
 
 return function(p3)
-	-- upvalues: useMonetizationLocalization (copy), t (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), FFlagBuildExperienceMonetizationProductEditingModule (copy), ReactModule (copy), config1 (copy), useOptionsState (copy), FFlagBuildExperienceMonetizationMultiKindModule (copy), noop (copy), applyProductOverrides (copy), config (copy), useManageProductState (copy), SendBuildExperienceEventModule (copy), clearReadBackOverrides (copy), FFlagBuildExperienceMonetizationManageKindsModule (copy), GetProductKindCapabilitiesModule (copy), FFlagBuildExperienceMonetizationKindRegionalPricingModule (copy), FormatErrorModule (copy), resolveProductEditSubmit (copy), validateProductEdit (copy), applyProductEditResult (copy), FFlagBuildCheckGamePermissionsModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), UseOnScreenKeyboardHeightModule (copy), GetBuildPromptDraftStoreModule (copy), Creator (copy), getRegionalPricingViewState (copy), getKindEditState (copy)
+	-- upvalues: useMonetizationLocalization (copy), t (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), FFlagBuildExperienceMonetizationProductEditingModule (copy), ReactModule (copy), config1 (copy), useOptionsState (copy), FFlagBuildExperienceMonetizationMultiKindModule (copy), noop (copy), applyProductOverrides (copy), config (copy), useManageProductState (copy), SendBuildExperienceEventModule (copy), clearReadBackOverrides (copy), FFlagBuildExperienceMonetizationManageKindsModule (copy), GetProductKindCapabilitiesModule (copy), FFlagBuildExperienceMonetizationKindRegionalPricingModule (copy), FormatErrorModule (copy), resolveProductEditSubmit (copy), validateProductEdit (copy), applyProductEditResult (copy), FFlagBuildCheckGamePermissionsModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), UseOnScreenKeyboardHeightModule (copy), GetBuildPromptDraftStoreModule (copy), productResourceUrl (copy), FFlagBuildExperienceDeveloperProductContextModule1 (copy), getRegionalPricingViewState (copy), getKindEditState (copy)
 	local UseMonetizationLocalizationResult = useMonetizationLocalization()
 	local Products = p3.products or t
 	local InitialMode = if FFlagBuildExperienceMonetizationNativeUIModule or p3.initialMode ~= "options" then p3.initialMode else nil
@@ -899,13 +920,13 @@ return function(p3)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(InitialMode or Catalog)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Product)
 	local v5 = nil
-	local Callback1 = noop
-	local t1 = {}
 	local Callback = noop
+	local t1 = {}
+	local Callback1 = noop
 	
 	if FFlagBuildExperienceMonetizationMultiKindModule then
-		v5, Callback1 = ReactModule.useState(if Product == nil then nil else Product.identity or Product.id)
-		t1, Callback = ReactModule.useState({})
+		v5, Callback = ReactModule.useState(if Product == nil then nil else Product.identity or Product.id)
+		t1, Callback1 = ReactModule.useState({})
 	end
 	local v6 = nil
 	if FFlagBuildExperienceMonetizationMultiKindModule then
@@ -947,13 +968,13 @@ return function(p3)
 	local EditPrice = UseManageProductStateResult.editPrice
 	local SetEditPriceFunction = UseManageProductStateResult.setEditPrice
 	ReactModule.useLayoutEffect(function()
-		-- upvalues: UseRefResult1 (copy), UseStateResult2 (copy), InitialMode (copy), Catalog (copy), FFlagBuildExperienceMonetizationMultiKindModule (upval), Callback1 (ref), Product (copy), Callback (ref), UseStateResult2_1 (copy), UseStateResult2_2 (copy), UseStateResult2_3 (copy), FFlagBuildExperienceMonetizationProductEditingModule (upval), SelectedProductIdRef (copy), SetIsProductSaleStatusPendingFunction (copy), SetProductSaleStatusErrorFunction (copy), SetIsProductEditPendingFunction (copy), SetProductEditErrorFunction (copy), SetEditNameFunction (copy), SetEditDescriptionFunction (copy), SetEditPriceFunction (copy)
+		-- upvalues: UseRefResult1 (copy), UseStateResult2 (copy), InitialMode (copy), Catalog (copy), FFlagBuildExperienceMonetizationMultiKindModule (upval), Callback (ref), Product (copy), Callback1 (ref), UseStateResult2_1 (copy), UseStateResult2_2 (copy), UseStateResult2_3 (copy), FFlagBuildExperienceMonetizationProductEditingModule (upval), SelectedProductIdRef (copy), SetIsProductSaleStatusPendingFunction (copy), SetProductSaleStatusErrorFunction (copy), SetIsProductEditPendingFunction (copy), SetProductEditErrorFunction (copy), SetEditNameFunction (copy), SetEditDescriptionFunction (copy), SetEditPriceFunction (copy)
 		UseRefResult1.current = nil
 		UseStateResult2(InitialMode or Catalog)
 		
 		if FFlagBuildExperienceMonetizationMultiKindModule then
-			Callback1(if Product == nil then nil else Product.identity or Product.id)
-			Callback({})
+			Callback(if Product == nil then nil else Product.identity or Product.id)
+			Callback1({})
 		else
 			UseStateResult2_1(Product)
 		end
@@ -991,7 +1012,7 @@ return function(p3)
 	
 	if FFlagBuildExperienceMonetizationMultiKindModule then
 		ReactModule.useEffect(function()
-			-- upvalues: v5 (ref), Products (copy), SelectedProductIdRef (copy), Callback1 (ref), UseStateResult2 (copy), Catalog (copy), clearReadBackOverrides (upval), t1 (ref), Callback (ref)
+			-- upvalues: v5 (ref), Products (copy), SelectedProductIdRef (copy), Callback (ref), UseStateResult2 (copy), Catalog (copy), clearReadBackOverrides (upval), t1 (ref), Callback1 (ref)
 			if v5 ~= nil then
 				local Identity = v5
 				local v7 = nil
@@ -1010,15 +1031,15 @@ return function(p3)
 				end
 				if v7 == nil then
 					SelectedProductIdRef.current = nil
-					Callback1(nil)
+					Callback(nil)
 					UseStateResult2(Catalog)
 				end
 			end
-			clearReadBackOverrides(Products, t1, Callback)
+			clearReadBackOverrides(Products, t1, Callback1)
 		end, { Catalog, t1, Products, v5 })
 	end
-	local UseResult3 = ReactModule.useCallback(function()
-		-- upvalues: UseMemoResult (copy), UseStateResult (copy), SendBuildExperienceEventModule (upval), FFlagBuildExperienceMonetizationProductEditingModule (upval), IsProductEditPending (copy), UseRefResult1 (copy), SetProductEditErrorFunction (copy), UseStateResult2 (copy), SelectedProductIdRef (copy), FFlagBuildExperienceMonetizationMultiKindModule (upval), Callback1 (ref), UseStateResult2_1 (copy), Catalog (copy), FFlagBuildExperienceMonetizationNativeUIModule (upval), InitialMode (copy), p3 (copy)
+	local UseResult = ReactModule.useCallback(function()
+		-- upvalues: UseMemoResult (copy), UseStateResult (copy), SendBuildExperienceEventModule (upval), FFlagBuildExperienceMonetizationProductEditingModule (upval), IsProductEditPending (copy), UseRefResult1 (copy), SetProductEditErrorFunction (copy), UseStateResult2 (copy), SelectedProductIdRef (copy), FFlagBuildExperienceMonetizationMultiKindModule (upval), Callback (ref), UseStateResult2_1 (copy), Catalog (copy), FFlagBuildExperienceMonetizationNativeUIModule (upval), InitialMode (copy), p3 (copy)
 		local config = { mode = tostring(UseStateResult) }
 		
 		if config == nil then
@@ -1032,7 +1053,7 @@ return function(p3)
 					SelectedProductIdRef.current = nil
 				end
 				if FFlagBuildExperienceMonetizationMultiKindModule then
-					Callback1(nil)
+					Callback(nil)
 				else
 					UseStateResult2_1(nil)
 				end
@@ -1061,8 +1082,8 @@ return function(p3)
 		UseStateResult, InitialMode, p3.onClose, UseMemoResult,
 		SetProductEditErrorFunction
 	})
-	local UseResult4 = ReactModule.useCallback(function(Identity)
-		-- upvalues: Products (copy), FFlagBuildExperienceMonetizationMultiKindModule (upval), UseMemoResult (copy), SendBuildExperienceEventModule (upval), FFlagBuildExperienceMonetizationProductEditingModule (upval), UseStateResult2_3 (copy), SetProductSaleStatusErrorFunction (copy), SetProductEditErrorFunction (copy), SelectedProductIdRef (copy), Callback1 (ref), UseStateResult2_1 (copy), UseStateResult2 (copy)
+	local UseResult1 = ReactModule.useCallback(function(Identity)
+		-- upvalues: Products (copy), FFlagBuildExperienceMonetizationMultiKindModule (upval), UseMemoResult (copy), SendBuildExperienceEventModule (upval), FFlagBuildExperienceMonetizationProductEditingModule (upval), UseStateResult2_3 (copy), SetProductSaleStatusErrorFunction (copy), SetProductEditErrorFunction (copy), SelectedProductIdRef (copy), Callback (ref), UseStateResult2_1 (copy), UseStateResult2 (copy)
 		for _, product in Products do
 			if (product.identity or product.id) == Identity then
 				local config = { productId = product.id }
@@ -1084,7 +1105,7 @@ return function(p3)
 					SelectedProductIdRef.current = product.identity or product.id
 				end
 				if FFlagBuildExperienceMonetizationMultiKindModule then
-					Callback1(Identity)
+					Callback(Identity)
 				else
 					UseStateResult2_1(product)
 				end
@@ -1098,12 +1119,12 @@ return function(p3)
 		SetProductSaleStatusErrorFunction,
 		UseMemoResult
 	})
-	local UseResult5 = if FFlagBuildExperienceMonetizationNativeUIModule then ReactModule.useCallback(function()
+	local UseResult2 = if FFlagBuildExperienceMonetizationNativeUIModule then ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2("options")
 	end, {}) else function() end
-	local UseResult6 = ReactModule.useCallback(function(IsManagedPricingEnabled)
-		-- upvalues: ApplyProductOverridesResult (copy), p3 (copy), FFlagBuildExperienceMonetizationManageKindsModule (upval), GetProductKindCapabilitiesModule (upval), FFlagBuildExperienceMonetizationKindRegionalPricingModule (upval), UseRefResult (copy), UseMemoResult1 (copy), UseRefResult1 (copy), NoFFlagBuildExperienceMonetizationMultiKindModule (copy), UseStateResult3 (copy), FFlagBuildExperienceMonetizationProductEditingModule (upval), IsProductSaleStatusPending (copy), FFlagBuildExperienceMonetizationNativeUIModule (upval), UseStateResult2_3 (copy), UseMemoResult (copy), SendBuildExperienceEventModule (upval), FFlagBuildExperienceMonetizationMultiKindModule (upval), Callback (ref), UseStateResult2_1 (copy), UseStateResult2_2 (copy), FormatErrorModule (upval), SelectedProductIdRef (copy)
+	local UseResult3 = ReactModule.useCallback(function(IsManagedPricingEnabled)
+		-- upvalues: ApplyProductOverridesResult (copy), p3 (copy), FFlagBuildExperienceMonetizationManageKindsModule (upval), GetProductKindCapabilitiesModule (upval), FFlagBuildExperienceMonetizationKindRegionalPricingModule (upval), UseRefResult (copy), UseMemoResult1 (copy), UseRefResult1 (copy), NoFFlagBuildExperienceMonetizationMultiKindModule (copy), UseStateResult3 (copy), FFlagBuildExperienceMonetizationProductEditingModule (upval), IsProductSaleStatusPending (copy), FFlagBuildExperienceMonetizationNativeUIModule (upval), UseStateResult2_3 (copy), UseMemoResult (copy), SendBuildExperienceEventModule (upval), FFlagBuildExperienceMonetizationMultiKindModule (upval), Callback1 (ref), UseStateResult2_1 (copy), UseStateResult2_2 (copy), FormatErrorModule (upval), SelectedProductIdRef (copy)
 		local Number = if ApplyProductOverridesResult == nil then nil else tonumber(ApplyProductOverridesResult.id)
 		local OnUpdateProductManagedPricingFunction = p3.onUpdateProductManagedPricing
 		local ProductKindCapabilitiesModule = if FFlagBuildExperienceMonetizationManageKindsModule then GetProductKindCapabilitiesModule(if ApplyProductOverridesResult == nil then nil else ApplyProductOverridesResult.productKind) else nil
@@ -1135,7 +1156,7 @@ return function(p3)
 		
 		if FFlagBuildExperienceMonetizationMultiKindModule then
 			local v7 = "managedPricing"
-			Callback(function(Tbl)
+			Callback1(function(Tbl)
 				-- upvalues: Copy (copy), v7 (copy)
 				local Identity = Copy.identity or Copy.id
 				local Copy = table.clone(Tbl[Identity] or {})
@@ -1167,7 +1188,7 @@ return function(p3)
 				SendBuildExperienceEventModule("MONETIZATION_PRODUCT_UPDATE_SUCCESS", UseMemoResult, config)
 			end
 		end):catch(function(Err)
-			-- upvalues: UseRefResult (upval), UseMemoResult1 (upval), UseRefResult1 (upval), Current (copy), ApplyProductOverridesResult (copy), FFlagBuildExperienceMonetizationNativeUIModule (upval), FormatErrorModule (upval), FFlagBuildExperienceMonetizationMultiKindModule (upval), Callback (upval), UseMemoResult (upval), ProductKind (copy), SendBuildExperienceEventModule (upval), FFlagBuildExperienceMonetizationProductEditingModule (upval), SelectedProductIdRef (upval), UseStateResult2_1 (upval), UseStateResult2_3 (upval)
+			-- upvalues: UseRefResult (upval), UseMemoResult1 (upval), UseRefResult1 (upval), Current (copy), ApplyProductOverridesResult (copy), FFlagBuildExperienceMonetizationNativeUIModule (upval), FormatErrorModule (upval), FFlagBuildExperienceMonetizationMultiKindModule (upval), Callback1 (upval), UseMemoResult (upval), ProductKind (copy), SendBuildExperienceEventModule (upval), FFlagBuildExperienceMonetizationProductEditingModule (upval), SelectedProductIdRef (upval), UseStateResult2_1 (upval), UseStateResult2_3 (upval)
 			if UseRefResult.current ~= UseMemoResult1 or UseRefResult1.current ~= Current then return end
 			if FFlagBuildExperienceMonetizationNativeUIModule then
 				warn(`[{ApplyProductOverridesResult.productKind or "DeveloperProduct"}] action=managed_pricing productId={ApplyProductOverridesResult.id} failed={string.sub(string.gsub(FormatErrorModule(Err), "[\r\n]+", " "), 1, 200)}`)
@@ -1175,7 +1196,7 @@ return function(p3)
 			if FFlagBuildExperienceMonetizationMultiKindModule then
 				local Identity = ApplyProductOverridesResult.identity or ApplyProductOverridesResult.id
 				local v8 = "managedPricing"
-				Callback(function(Tbl)
+				Callback1(function(Tbl)
 					-- upvalues: Identity (copy), v8 (copy)
 					if (Tbl[Identity] or {})[v8] == nil then
 						return Tbl
@@ -1221,8 +1242,8 @@ return function(p3)
 		p3.onUpdateProductManagedPricing, ApplyProductOverridesResult, UseMemoResult,
 		UseMemoResult1, p3.onUpdateProductKindManagedPricing or false
 	})
-	local UseResult7 = ReactModule.useCallback(function(IsForSale)
-		-- upvalues: ApplyProductOverridesResult (copy), p3 (copy), FFlagBuildExperienceMonetizationManageKindsModule (upval), GetProductKindCapabilitiesModule (upval), FFlagBuildExperienceMonetizationProductEditingModule (upval), UseRefResult (copy), UseMemoResult1 (copy), UseRefResult1 (copy), NoFFlagBuildExperienceMonetizationMultiKindModule (copy), IsProductSaleStatusPending (copy), UseStateResult3 (copy), FFlagBuildExperienceMonetizationNativeUIModule (upval), SetProductSaleStatusErrorFunction (copy), UseMemoResult (copy), SendBuildExperienceEventModule (upval), FFlagBuildExperienceMonetizationMultiKindModule (upval), Callback (ref), UseStateResult2_1 (copy), SetIsProductSaleStatusPendingFunction (copy), FormatErrorModule (upval), SelectedProductIdRef (copy)
+	local UseResult4 = ReactModule.useCallback(function(IsForSale)
+		-- upvalues: ApplyProductOverridesResult (copy), p3 (copy), FFlagBuildExperienceMonetizationManageKindsModule (upval), GetProductKindCapabilitiesModule (upval), FFlagBuildExperienceMonetizationProductEditingModule (upval), UseRefResult (copy), UseMemoResult1 (copy), UseRefResult1 (copy), NoFFlagBuildExperienceMonetizationMultiKindModule (copy), IsProductSaleStatusPending (copy), UseStateResult3 (copy), FFlagBuildExperienceMonetizationNativeUIModule (upval), SetProductSaleStatusErrorFunction (copy), UseMemoResult (copy), SendBuildExperienceEventModule (upval), FFlagBuildExperienceMonetizationMultiKindModule (upval), Callback1 (ref), UseStateResult2_1 (copy), SetIsProductSaleStatusPendingFunction (copy), FormatErrorModule (upval), SelectedProductIdRef (copy)
 		local Number = if ApplyProductOverridesResult == nil then nil else tonumber(ApplyProductOverridesResult.id)
 		local OnUpdateProductSaleStatusFunction = p3.onUpdateProductSaleStatus
 		local ProductKindCapabilitiesModule = if FFlagBuildExperienceMonetizationManageKindsModule then GetProductKindCapabilitiesModule(if ApplyProductOverridesResult == nil then nil else ApplyProductOverridesResult.productKind) else nil
@@ -1253,7 +1274,7 @@ return function(p3)
 		
 		if FFlagBuildExperienceMonetizationMultiKindModule then
 			local v7 = "saleStatus"
-			Callback(function(Tbl)
+			Callback1(function(Tbl)
 				-- upvalues: Copy (copy), v7 (copy)
 				local Identity = Copy.identity or Copy.id
 				local Copy = table.clone(Tbl[Identity] or {})
@@ -1285,7 +1306,7 @@ return function(p3)
 				SendBuildExperienceEventModule("MONETIZATION_PRODUCT_UPDATE_SUCCESS", UseMemoResult, config)
 			end
 		end):catch(function(Err)
-			-- upvalues: UseRefResult (upval), UseMemoResult1 (upval), UseRefResult1 (upval), Current (copy), ApplyProductOverridesResult (copy), FFlagBuildExperienceMonetizationNativeUIModule (upval), FormatErrorModule (upval), FFlagBuildExperienceMonetizationMultiKindModule (upval), Callback (upval), UseMemoResult (upval), ProductKind (copy), SendBuildExperienceEventModule (upval), SelectedProductIdRef (upval), UseStateResult2_1 (upval), SetProductSaleStatusErrorFunction (upval)
+			-- upvalues: UseRefResult (upval), UseMemoResult1 (upval), UseRefResult1 (upval), Current (copy), ApplyProductOverridesResult (copy), FFlagBuildExperienceMonetizationNativeUIModule (upval), FormatErrorModule (upval), FFlagBuildExperienceMonetizationMultiKindModule (upval), Callback1 (upval), UseMemoResult (upval), ProductKind (copy), SendBuildExperienceEventModule (upval), SelectedProductIdRef (upval), UseStateResult2_1 (upval), SetProductSaleStatusErrorFunction (upval)
 			if UseRefResult.current ~= UseMemoResult1 or UseRefResult1.current ~= Current then return end
 			if FFlagBuildExperienceMonetizationNativeUIModule then
 				warn(`[{ApplyProductOverridesResult.productKind or "DeveloperProduct"}] action=sale_status productId={ApplyProductOverridesResult.id} failed={string.sub(string.gsub(FormatErrorModule(Err), "[\r\n]+", " "), 1, 200)}`)
@@ -1293,7 +1314,7 @@ return function(p3)
 			if FFlagBuildExperienceMonetizationMultiKindModule then
 				local Identity = ApplyProductOverridesResult.identity or ApplyProductOverridesResult.id
 				local v8 = "saleStatus"
-				Callback(function(Tbl)
+				Callback1(function(Tbl)
 					-- upvalues: Identity (copy), v8 (copy)
 					if (Tbl[Identity] or {})[v8] == nil then
 						return Tbl
@@ -1341,7 +1362,7 @@ return function(p3)
 		p3.onUpdateProductKindSaleStatus or false
 	})
 	local OnUpdateProductKind = p3.onUpdateProductKind or false
-	local UseResult8 = ReactModule.useCallback(function()
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: ApplyProductOverridesResult (copy), FFlagBuildExperienceMonetizationProductEditingModule (upval), p3 (copy), FFlagBuildExperienceMonetizationManageKindsModule (upval), GetProductKindCapabilitiesModule (upval), NoFFlagBuildExperienceMonetizationMultiKindModule (copy), UseMemoResult (copy), SendBuildExperienceEventModule (upval), SetEditNameFunction (copy), SetEditDescriptionFunction (copy), SetEditPriceFunction (copy), SetProductEditErrorFunction (copy), UseStateResult2 (copy)
 		if not FFlagBuildExperienceMonetizationProductEditingModule or ApplyProductOverridesResult == nil or ((ApplyProductOverridesResult == nil or not (if ApplyProductOverridesResult.productKind == nil then ApplyProductOverridesResult.canManage ~= false else ApplyProductOverridesResult.productKind == "DeveloperProduct" and ApplyProductOverridesResult.canManage ~= false)) and (not FFlagBuildExperienceMonetizationProductEditingModule or (if FFlagBuildExperienceMonetizationManageKindsModule then GetProductKindCapabilitiesModule(if ApplyProductOverridesResult == nil then nil else ApplyProductOverridesResult.productKind) else nil) == nil) or p3.onUpdateProductKind == nil and (FFlagBuildExperienceMonetizationProductEditingModule and (if FFlagBuildExperienceMonetizationManageKindsModule then GetProductKindCapabilitiesModule(if ApplyProductOverridesResult == nil then nil else ApplyProductOverridesResult.productKind) else nil) ~= nil) or not NoFFlagBuildExperienceMonetizationMultiKindModule) or ApplyProductOverridesResult ~= nil and (ApplyProductOverridesResult.isArchived == true or (ApplyProductOverridesResult.isImmutable == true or ApplyProductOverridesResult.isInActivePriceOptimizationExperiment == true)) then return end
 		local config = { productId = ApplyProductOverridesResult.id }
@@ -1364,22 +1385,22 @@ return function(p3)
 		ApplyProductOverridesResult, SetEditDescriptionFunction, SetEditNameFunction,
 		SetEditPriceFunction, SetProductEditErrorFunction, UseMemoResult
 	})
-	local UseResult9 = ReactModule.useCallback(function(p4)
+	local UseResult6 = ReactModule.useCallback(function(p4)
 		-- upvalues: SetEditNameFunction (copy), SetProductEditErrorFunction (copy)
 		SetEditNameFunction(p4)
 		SetProductEditErrorFunction(nil)
 	end, {})
-	local UseResult10 = ReactModule.useCallback(function(p4)
+	local UseResult7 = ReactModule.useCallback(function(p4)
 		-- upvalues: SetEditDescriptionFunction (copy), SetProductEditErrorFunction (copy)
 		SetEditDescriptionFunction(p4)
 		SetProductEditErrorFunction(nil)
 	end, {})
-	local UseResult11 = ReactModule.useCallback(function(p4)
+	local UseResult8 = ReactModule.useCallback(function(p4)
 		-- upvalues: SetEditPriceFunction (copy), SetProductEditErrorFunction (copy)
 		SetEditPriceFunction(p4)
 		SetProductEditErrorFunction(nil)
 	end, {})
-	local UseResult12 = ReactModule.useCallback(function()
+	local UseResult9 = ReactModule.useCallback(function()
 		-- upvalues: IsProductEditPending (copy), UseRefResult1 (copy), ApplyProductOverridesResult (copy), UseMemoResult (copy), SendBuildExperienceEventModule (upval), SetProductEditErrorFunction (copy), UseStateResult2 (copy)
 		if IsProductEditPending or UseRefResult1.current ~= nil then return end
 		local Config = if ApplyProductOverridesResult == nil then nil else { productId = ApplyProductOverridesResult.id }
@@ -1396,8 +1417,8 @@ return function(p3)
 		ApplyProductOverridesResult,
 		UseMemoResult
 	})
-	local UseResult13 = ReactModule.useCallback(function()
-		-- upvalues: ApplyProductOverridesResult (copy), resolveProductEditSubmit (upval), p3 (copy), FFlagBuildExperienceMonetizationProductEditingModule (upval), UseRefResult (copy), UseMemoResult1 (copy), UseRefResult1 (copy), FFlagBuildExperienceMonetizationManageKindsModule (upval), GetProductKindCapabilitiesModule (upval), NoFFlagBuildExperienceMonetizationMultiKindModule (copy), IsProductEditPending (copy), UseMemoResult (copy), SendBuildExperienceEventModule (upval), EditName (copy), validateProductEdit (upval), EditDescription (copy), EditPrice (copy), UseMonetizationLocalizationResult (copy), SetProductEditErrorFunction (copy), SetIsProductEditPendingFunction (copy), applyProductEditResult (upval), FFlagBuildExperienceMonetizationMultiKindModule (upval), Callback (ref), UseStateResult2_1 (copy), UseStateResult2_3 (copy), SetProductSaleStatusErrorFunction (copy), SelectedProductIdRef (copy), UseStateResult2 (copy), FFlagBuildExperienceMonetizationNativeUIModule (upval), FormatErrorModule (upval)
+	local UseResult10 = ReactModule.useCallback(function()
+		-- upvalues: ApplyProductOverridesResult (copy), resolveProductEditSubmit (upval), p3 (copy), FFlagBuildExperienceMonetizationProductEditingModule (upval), UseRefResult (copy), UseMemoResult1 (copy), UseRefResult1 (copy), FFlagBuildExperienceMonetizationManageKindsModule (upval), GetProductKindCapabilitiesModule (upval), NoFFlagBuildExperienceMonetizationMultiKindModule (copy), IsProductEditPending (copy), UseMemoResult (copy), SendBuildExperienceEventModule (upval), EditName (copy), validateProductEdit (upval), EditDescription (copy), EditPrice (copy), UseMonetizationLocalizationResult (copy), SetProductEditErrorFunction (copy), SetIsProductEditPendingFunction (copy), applyProductEditResult (upval), FFlagBuildExperienceMonetizationMultiKindModule (upval), Callback1 (ref), UseStateResult2_1 (copy), UseStateResult2_3 (copy), SetProductSaleStatusErrorFunction (copy), SelectedProductIdRef (copy), UseStateResult2 (copy), FFlagBuildExperienceMonetizationNativeUIModule (upval), FormatErrorModule (upval)
 		local ResolveProductEditSubmitResult = if ApplyProductOverridesResult == nil then nil else resolveProductEditSubmit(p3, ApplyProductOverridesResult)
 		
 		if not FFlagBuildExperienceMonetizationProductEditingModule or UseRefResult.current ~= UseMemoResult1 or UseRefResult1.current ~= nil or ApplyProductOverridesResult == nil or ((ApplyProductOverridesResult == nil or not (if ApplyProductOverridesResult.productKind == nil then ApplyProductOverridesResult.canManage ~= false else ApplyProductOverridesResult.productKind == "DeveloperProduct" and ApplyProductOverridesResult.canManage ~= false)) and (not FFlagBuildExperienceMonetizationProductEditingModule or (if FFlagBuildExperienceMonetizationManageKindsModule then GetProductKindCapabilitiesModule(if ApplyProductOverridesResult == nil then nil else ApplyProductOverridesResult.productKind) else nil) == nil) or not NoFFlagBuildExperienceMonetizationMultiKindModule or ResolveProductEditSubmitResult == nil or IsProductEditPending) then return end
@@ -1426,7 +1447,7 @@ return function(p3)
 				description = EditDescription,
 				priceInRobux = ValidateProductEditResult2
 			}):andThen(function(Result)
-				-- upvalues: UseRefResult (upval), UseMemoResult1 (upval), UseRefResult1 (upval), Current (copy), Tbl (copy), UseMemoResult (upval), SendBuildExperienceEventModule (upval), applyProductEditResult (upval), ApplyProductOverridesResult (copy), Match (copy), EditDescription (upval), ValidateProductEditResult2 (copy), FFlagBuildExperienceMonetizationMultiKindModule (upval), Callback (upval), UseStateResult2_1 (upval), UseStateResult2_3 (upval), SetProductSaleStatusErrorFunction (upval), SetProductEditErrorFunction (upval), UseMonetizationLocalizationResult (upval), SelectedProductIdRef (upval), UseStateResult2 (upval)
+				-- upvalues: UseRefResult (upval), UseMemoResult1 (upval), UseRefResult1 (upval), Current (copy), Tbl (copy), UseMemoResult (upval), SendBuildExperienceEventModule (upval), applyProductEditResult (upval), ApplyProductOverridesResult (copy), Match (copy), EditDescription (upval), ValidateProductEditResult2 (copy), FFlagBuildExperienceMonetizationMultiKindModule (upval), Callback1 (upval), UseStateResult2_1 (upval), UseStateResult2_3 (upval), SetProductSaleStatusErrorFunction (upval), SetProductEditErrorFunction (upval), UseMonetizationLocalizationResult (upval), SelectedProductIdRef (upval), UseStateResult2 (upval)
 				if UseRefResult.current ~= UseMemoResult1 or UseRefResult1.current ~= Current then return end
 				local Copy = table.clone(Tbl)
 				Copy.action = "product_details"
@@ -1440,7 +1461,7 @@ return function(p3)
 				
 				if FFlagBuildExperienceMonetizationMultiKindModule then
 					local v7 = "details"
-					Callback(function(Tbl)
+					Callback1(function(Tbl)
 						-- upvalues: ApplyProductEditResultResult (copy), v7 (copy)
 						local Identity = ApplyProductEditResultResult.identity or ApplyProductEditResultResult.id
 						local Copy = table.clone(Tbl[Identity] or {})
@@ -1523,8 +1544,8 @@ return function(p3)
 			if ApplyProductOverridesResult == nil then "" else ApplyProductOverridesResult.id,
 			UseBindingResult2
 		})
-		local UseResult14 = ReactModule.useCallback(function(): boolean
-			-- upvalues: UseBindingResult (copy), UseStateResult (copy), ApplyProductOverridesResult (copy), p3 (copy), GetBuildPromptDraftStoreModule (upval), Creator (upval), UseBindingResult2 (copy), UseRefResult2 (copy), OnComposerActivated (copy)
+		local UseResult11 = ReactModule.useCallback(function(): boolean
+			-- upvalues: UseBindingResult (copy), UseStateResult (copy), ApplyProductOverridesResult (copy), p3 (copy), GetBuildPromptDraftStoreModule (upval), productResourceUrl (upval), UseBindingResult2 (copy), UseRefResult2 (copy), OnComposerActivated (copy)
 			local Match: string = string.match(UseBindingResult:getValue(), "^%s*(.-)%s*$") or ""
 			
 			if Match == "" or UseStateResult ~= "detail" or ApplyProductOverridesResult == nil or p3.universeId == nil then
@@ -1540,10 +1561,7 @@ return function(p3)
 						type = "resource_link",
 						mimeType = "application/json",
 						name = ApplyProductOverridesResult.name,
-						uri = Creator({
-							universeId = p3.universeId,
-							productId = ApplyProductOverridesResult.id
-						})
+						uri = productResourceUrl(p3.universeId, ApplyProductOverridesResult)
 					}
 				}
 			})
@@ -1559,7 +1577,7 @@ return function(p3)
 			UseBindingResult, OnComposerActivated, UseStateResult, p3.sessionId,
 			p3.universeId, ApplyProductOverridesResult, UseBindingResult2
 		})
-		ChatActions = if UseStateResult == "detail" and ApplyProductOverridesResult ~= nil and (ApplyProductOverridesResult ~= nil and (if ApplyProductOverridesResult.productKind == nil then ApplyProductOverridesResult.canManage ~= false else ApplyProductOverridesResult.productKind == "DeveloperProduct" and ApplyProductOverridesResult.canManage ~= false) and p3.universeId ~= nil) then {
+		ChatActions = if UseStateResult == "detail" and ApplyProductOverridesResult ~= nil and ((ApplyProductOverridesResult ~= nil and (if ApplyProductOverridesResult.productKind == nil then ApplyProductOverridesResult.canManage ~= false else ApplyProductOverridesResult.productKind == "DeveloperProduct" and ApplyProductOverridesResult.canManage ~= false) or FFlagBuildExperienceDeveloperProductContextModule1 and (ApplyProductOverridesResult ~= nil and (ApplyProductOverridesResult.productKind == "GamePass" or ApplyProductOverridesResult.productKind == "Subscription"))) and p3.universeId ~= nil) then {
 			isAssistantResponding = false,
 			canSendWhileResponding = false,
 			allowImageAttachments = false,
@@ -1568,12 +1586,12 @@ return function(p3)
 			onComposerChanged = UseBindingResult2,
 			placeholder = UseMonetizationLocalizationResult.composerPlaceholder,
 			textBoxRef = UseRefResult2,
-			onSend = UseResult14,
+			onSend = UseResult11,
 			onStop = function() end,
 			isReadOnly = not IsCanEditOnBuild
 		} else nil
 	end
-	local UseResult = ReactModule.useCallback(function()
+	local UseResult12 = ReactModule.useCallback(function()
 		-- upvalues: IsPermissionCanMonetize (ref), UseMemoResult (copy), SendBuildExperienceEventModule (upval), p3 (copy), GetBuildPromptDraftStoreModule (upval), UseMonetizationLocalizationResult (copy), OnComposerActivated (copy)
 		if not IsPermissionCanMonetize then return end
 		SendBuildExperienceEventModule("MONETIZATION_CREATE_CLICK", UseMemoResult)
@@ -1595,7 +1613,7 @@ return function(p3)
 		IsPermissionCanMonetize, p3.onCreateProduct, p3.sessionId, p3.universeId,
 		UseMemoResult
 	})
-	local UseResult1 = ReactModule.useCallback(function()
+	local UseResult13 = ReactModule.useCallback(function()
 		-- upvalues: UseMemoResult (copy), SendBuildExperienceEventModule (upval), p3 (copy)
 		SendBuildExperienceEventModule("MONETIZATION_RETRY_CLICK", UseMemoResult)
 		
@@ -1603,7 +1621,7 @@ return function(p3)
 			p3.onRetryCatalog()
 		end
 	end, { p3.onRetryCatalog, UseMemoResult })
-	local UseResult2 = if FFlagBuildExperienceMonetizationMultiKindModule then ReactModule.useCallback(function(p4)
+	local UseResult14 = if FFlagBuildExperienceMonetizationMultiKindModule then ReactModule.useCallback(function(p4)
 		-- upvalues: UseMemoResult (copy), SendBuildExperienceEventModule (upval), p3 (copy)
 		local config = { catalogKind = tostring(p4) }
 		
@@ -1662,7 +1680,7 @@ return function(p3)
 	config2.productManagedPricingError = UseStateResult4
 	config2.productManagedPricingErrorLabel = RegionalPricingViewState.errorLabel
 	config2.productSaleStatusError = ProductSaleStatusError ~= false
-	config2.productSaleStatusErrorLabel = if FFlagBuildExperienceMonetizationManageKindsModule and (ProductSaleStatusError and ProductKindCapabilitiesModule ~= nil) then if ProductKindCapabilitiesModule.priceRequiredForSale and PriceInRobux == nil then UseMonetizationLocalizationResult.kindPriceRequiredForSale else UseMonetizationLocalizationResult.updateError else nil
+	config2.productSaleStatusErrorLabel = if FFlagBuildExperienceMonetizationManageKindsModule and ProductSaleStatusError and ProductKindCapabilitiesModule ~= nil then if ProductKindCapabilitiesModule.priceRequiredForSale and PriceInRobux == nil then UseMonetizationLocalizationResult.kindPriceRequiredForSale else UseMonetizationLocalizationResult.updateError else nil
 	config2.productEditError = ProductEditError
 	config2.editName = EditName
 	config2.editDescription = EditDescription
@@ -1670,25 +1688,25 @@ return function(p3)
 	config2.catalogStatus = p3.catalogStatus or "Ready"
 	config2.emptyTitle = UseMonetizationLocalizationResult.emptyTitle
 	config2.emptyDescription = UseMonetizationLocalizationResult.emptyDescription
-	config2.onClose = UseResult3
-	config2.onOpenCreate = UseResult
-	config2.onOpenOptions = UseResult5
+	config2.onClose = UseResult
+	config2.onOpenCreate = UseResult12
+	config2.onOpenOptions = UseResult2
 	config2.onManagedPricingChanged = UseOptionsStateResult.onManagedPricingChanged
 	config2.onShopButtonChanged = UseOptionsStateResult.onShopButtonChanged
 	config2.onConfirmManagedPricing = UseOptionsStateResult.onConfirmManagedPricing
 	config2.onCancelManagedPricing = UseOptionsStateResult.onCancelManagedPricing
 	config2.onRetryOptions = UseOptionsStateResult.onRetry
-	config2.onProductActivated = UseResult4
-	config2.onProductManagedPricingChanged = UseResult6
-	config2.onProductSaleStatusChanged = UseResult7
-	config2.onOpenProductEdit = UseResult8
-	config2.onEditNameChanged = UseResult9
-	config2.onEditDescriptionChanged = UseResult10
-	config2.onEditPriceChanged = UseResult11
-	config2.onCancelProductEdit = UseResult12
-	config2.onSaveProductEdit = UseResult13
-	config2.onRetryCatalog = UseResult1
-	config2.onRetryCatalogSource = UseResult2
+	config2.onProductActivated = UseResult1
+	config2.onProductManagedPricingChanged = UseResult3
+	config2.onProductSaleStatusChanged = UseResult4
+	config2.onOpenProductEdit = UseResult5
+	config2.onEditNameChanged = UseResult6
+	config2.onEditDescriptionChanged = UseResult7
+	config2.onEditPriceChanged = UseResult8
+	config2.onCancelProductEdit = UseResult9
+	config2.onSaveProductEdit = UseResult10
+	config2.onRetryCatalog = UseResult13
+	config2.onRetryCatalogSource = UseResult14
 	config2.labels = {
 		title = UseMonetizationLocalizationResult.title,
 		options = UseOptionsStateResult.labels.options,

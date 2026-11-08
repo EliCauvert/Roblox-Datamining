@@ -140,8 +140,9 @@ local _ = function(p2, List)
 end
 
 return {
-	groupMessages = function(p3, p4, p5, List)
+	groupMessages = function(p3, p4, p5, List, p6)
 		-- upvalues: orderedMessages (copy), IsSystemMessageFunction (copy), messageRow (copy), timestampRow (copy), getGroupBreakReason (copy)
+		local v1: boolean = p6 == nil or p6.shouldInsertTimestampRows ~= false
 		local OrderedMessagesResult = orderedMessages(p3)
 		local t = {}
 		
@@ -151,14 +152,14 @@ return {
 			end
 		end
 		local List1 = {}
-		local v1 = 1
+		local v2 = 1
 		
 		local function appendGroup(Count: number)
-			-- upvalues: v1 (ref), OrderedMessagesResult (copy), List1 (copy), t (copy), IsSystemMessageFunction (upval), messageRow (upval)
-			local NewCount = Count - v1 + 1
+			-- upvalues: v2 (ref), OrderedMessagesResult (copy), List1 (copy), t (copy), IsSystemMessageFunction (upval), messageRow (upval)
+			local NewCount = Count - v2 + 1
 			
 			for i = 0, NewCount - 1 do
-				local OrderedMessagesResultEntry = OrderedMessagesResult[v1 + i]
+				local OrderedMessagesResultEntry = OrderedMessagesResult[v2 + i]
 				local IsIMatch = i == 0
 				local IsIMatch1 = i == NewCount - 1
 				
@@ -175,23 +176,23 @@ return {
 			end
 		end
 		
-		local function _(p6, p7)
+		local function _(p7, p8)
 			-- upvalues: List1 (copy), timestampRow (upval), t (copy)
-			table.insert(List1, (timestampRow(t, p6, p7)))
+			table.insert(List1, (timestampRow(t, p7, p8)))
 		end
 		
 		local OrderedMessagesResultEntry = if #OrderedMessagesResult > 0 and not IsSystemMessageFunction(OrderedMessagesResult[1]) then OrderedMessagesResult[1] else nil
 		for i = 2, #OrderedMessagesResult do
 			local OrderedMessagesResultEntry1 = OrderedMessagesResult[i]
-			local GroupBreakReason = getGroupBreakReason(OrderedMessagesResult[i - 1], OrderedMessagesResultEntry, OrderedMessagesResultEntry1, i - v1, p4, p5)
+			local GroupBreakReason = getGroupBreakReason(OrderedMessagesResult[i - 1], OrderedMessagesResultEntry, OrderedMessagesResultEntry1, i - v2, p4, p5)
 			
 			if GroupBreakReason ~= nil then
 				appendGroup(i - 1)
 				
-				if GroupBreakReason == "time" then
+				if GroupBreakReason == "time" and v1 then
 					table.insert(List1, (timestampRow(t, OrderedMessagesResultEntry1, OrderedMessagesResultEntry)))
 				end
-				v1 = i
+				v2 = i
 			end
 			if not IsSystemMessageFunction(OrderedMessagesResultEntry1) then
 				OrderedMessagesResultEntry = OrderedMessagesResultEntry1
@@ -215,9 +216,9 @@ return {
 		end
 		return List2
 	end,
-	ungroupedRows = function(p6, List)
+	ungroupedRows = function(p7, List)
 		-- upvalues: orderedMessages (copy), IsSystemMessageFunction (copy), messageRow (copy)
-		local OrderedMessagesResult = orderedMessages(p6)
+		local OrderedMessagesResult = orderedMessages(p7)
 		local t = {}
 		
 		if List ~= nil then

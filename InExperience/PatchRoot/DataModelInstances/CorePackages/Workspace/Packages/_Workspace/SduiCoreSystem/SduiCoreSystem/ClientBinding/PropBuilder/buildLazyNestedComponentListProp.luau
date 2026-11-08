@@ -1,5 +1,6 @@
 ﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
 local Parent = SduiCoreSystem.Parent
+local FFlagSduiErrorPaths = require(Parent.SharedFlags).FFlagSduiErrorPaths
 local CryoModule = require(Parent.Cryo)
 local _ = require(Parent.ServiceContractsProto)
 local SignalsModule = require(Parent.Signals)
@@ -13,23 +14,35 @@ local SduiPropUtilsModule = require(SduiCoreSystem.ClientBinding.PropBuilder.Sdu
 local SplitDottedPathModule = require(SduiCoreSystem.ClientBinding.splitDottedPath)
 local SduiLoggerModule = require(SduiCoreSystem.SduiLogger)
 local SduiErrorsModule = require(SduiCoreSystem.SduiErrors)
+local AddSduiErrorContextFieldsModule = require(SduiCoreSystem.addSduiErrorContextFields)
 local SduiParseHelpersModule = require(SduiCoreSystem.SduiParseHelpers)
 local _ = require(SduiCoreSystem.SduiComponentType)
 local t = {}
 
-local function buildItemList(ResolveTemplateFromDataResult, List, Inputs, Callback, p1, p2, PropSignal, p3, p4, Enabled)
-	-- upvalues: SduiPropUtilsModule (copy), SignalsModule (copy), CryoModule (copy), t (copy), BuildInputsForNestedComponentModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), SduiParseHelpersModule (copy), BuildConfigForComponentFunction (copy)
+local function buildItemList(ResolveTemplateFromDataResult, List, Inputs, Callback, p1, p2, PropSignal, p3, p4, Enabled, RobloxComponent)
+	-- upvalues: FFlagSduiErrorPaths (copy), SduiPropUtilsModule (copy), SignalsModule (copy), CryoModule (copy), t (copy), BuildInputsForNestedComponentModule (copy), SduiParseHelpersModule (copy), AddSduiErrorContextFieldsModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), BuildConfigForComponentFunction (copy)
 	local List1 = {}
 	
 	for i, value in List do
 		local Flag = nil
+		local RobloxComponent1 = if FFlagSduiErrorPaths then RobloxComponent else nil
 		local InlineComponent = nil
 		
 		if value and value.inline_component ~= nil then
 			InlineComponent = value.inline_component
 			Flag = true
+			
+			if FFlagSduiErrorPaths then
+				RobloxComponent1 = nil
+			end
 		elseif value and value.roblox_component and value.roblox_component ~= "" then
-			InlineComponent = p1.getTemplateForRobloxComponent(value.roblox_component) or ResolveTemplateFromDataResult
+			if FFlagSduiErrorPaths then
+				local TemplateForRobloxComponent = p1.getTemplateForRobloxComponent(value.roblox_component)
+				RobloxComponent1 = if TemplateForRobloxComponent then value.roblox_component else RobloxComponent
+				InlineComponent = TemplateForRobloxComponent or ResolveTemplateFromDataResult
+			else
+				InlineComponent = p1.getTemplateForRobloxComponent(value.roblox_component) or ResolveTemplateFromDataResult
+			end
 			Flag = false
 		else
 			InlineComponent = ResolveTemplateFromDataResult
@@ -43,7 +56,7 @@ local function buildItemList(ResolveTemplateFromDataResult, List, Inputs, Callba
 			end
 		else
 			local ConfigForComponent = BuildConfigForComponentFunction(InlineComponent, SignalsModule.createComputed(function(p5)
-				-- upvalues: Flag (ref), CryoModule (upval), Callback (copy), value (copy), t (upval), Inputs (copy), BuildInputsForNestedComponentModule (upval), p3 (copy), p1 (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), SduiParseHelpersModule (upval)
+				-- upvalues: Flag (ref), CryoModule (upval), Callback (copy), value (copy), t (upval), Inputs (copy), BuildInputsForNestedComponentModule (upval), p3 (copy), p1 (copy), SduiParseHelpersModule (upval), FFlagSduiErrorPaths (upval), AddSduiErrorContextFieldsModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval)
 				if Flag then
 					return CryoModule.Dictionary.join(Callback(p5), value or t)
 				end
@@ -57,18 +70,23 @@ local function buildItemList(ResolveTemplateFromDataResult, List, Inputs, Callba
 					end)
 					
 					if not Success then
-						SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, {
+						local config = {
 							message = `Failed to build inputs for nested component in list: {SduiParseHelpersModule.stringifyValue(Result)}`,
 							name = p1.debugName,
 							componentType = p1.currentComponentType,
 							parserName = p1.currentParserName
-						}, p1.appPage)
+						}
+						
+						if FFlagSduiErrorPaths then
+							AddSduiErrorContextFieldsModule(config, p1.errorContext)
+						end
+						SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, config, p1.appPage)
 					end
 				else
 					Copy = value
 				end
 				return Copy
-			end), p1, p2, nil, if Flag then p3 else nil)
+			end), p1, p2, nil, if Flag then p3 else nil, nil, if FFlagSduiErrorPaths then RobloxComponent1 else nil, if FFlagSduiErrorPaths and typeof(value) == "table" then value.identifier else nil)
 			
 			if ConfigForComponent and SduiPropUtilsModule.isComponentVisible(ConfigForComponent, p4) then
 				table.insert(List1, ConfigForComponent)
@@ -79,7 +97,7 @@ local function buildItemList(ResolveTemplateFromDataResult, List, Inputs, Callba
 end
 
 local function buildOrderedTemplateDataList(p5, p6, Callback, p7, p8)
-	-- upvalues: SplitDottedPathModule (copy), SignalsModule (copy), SduiPropUtilsModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), BuildInputsForNestedComponentModule (copy), BuildConfigForComponentFunction (copy), SduiParseHelpersModule (copy), PropResultCategory (copy)
+	-- upvalues: SplitDottedPathModule (copy), SignalsModule (copy), SduiPropUtilsModule (copy), FFlagSduiErrorPaths (copy), AddSduiErrorContextFieldsModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), BuildInputsForNestedComponentModule (copy), BuildConfigForComponentFunction (copy), SduiParseHelpersModule (copy), PropResultCategory (copy)
 	local EntryMapPath = p5.entry_map_path
 	local EntryOrder = p5.entry_order
 	local TemplateDataMap = p5.template_data_map
@@ -95,9 +113,9 @@ local function buildOrderedTemplateDataList(p5, p6, Callback, p7, p8)
 	local SplitDottedPathModuleResult1 = if Kind and Kind.type == "binding_path" then SplitDottedPathModule(Kind.value) else nil
 	
 	return SignalsModule.createComputed(function(p9)
-		-- upvalues: SplitDottedPathModuleResult1 (copy), SduiPropUtilsModule (upval), p6 (copy), Callback (copy), p7 (copy), Kind (copy), SplitDottedPathModuleResult (copy), TemplateDataMap (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), SignalsModule (upval), BuildInputsForNestedComponentModule (upval), BuildConfigForComponentFunction (upval), p8 (copy), SduiParseHelpersModule (upval)
+		-- upvalues: SplitDottedPathModuleResult1 (copy), SduiPropUtilsModule (upval), p6 (copy), Callback (copy), p7 (copy), Kind (copy), SplitDottedPathModuleResult (copy), TemplateDataMap (copy), FFlagSduiErrorPaths (upval), AddSduiErrorContextFieldsModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval), SignalsModule (upval), BuildInputsForNestedComponentModule (upval), BuildConfigForComponentFunction (upval), p8 (copy), SduiParseHelpersModule (upval)
 		local Success, Result = pcall(function()
-			-- upvalues: SplitDottedPathModuleResult1 (upval), SduiPropUtilsModule (upval), p9 (copy), p6 (upval), Callback (upval), p7 (upval), Kind (upval), SplitDottedPathModuleResult (upval), TemplateDataMap (upval), SduiLoggerModule (upval), SduiErrorsModule (upval), SignalsModule (upval), BuildInputsForNestedComponentModule (upval), BuildConfigForComponentFunction (upval), p8 (upval), SduiParseHelpersModule (upval)
+			-- upvalues: SplitDottedPathModuleResult1 (upval), SduiPropUtilsModule (upval), p9 (copy), p6 (upval), Callback (upval), p7 (upval), Kind (upval), SplitDottedPathModuleResult (upval), TemplateDataMap (upval), FFlagSduiErrorPaths (upval), AddSduiErrorContextFieldsModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval), SignalsModule (upval), BuildInputsForNestedComponentModule (upval), BuildConfigForComponentFunction (upval), p8 (upval), SduiParseHelpersModule (upval)
 			local Items = nil
 			
 			if SplitDottedPathModuleResult1 then
@@ -121,15 +139,20 @@ local function buildOrderedTemplateDataList(p5, p6, Callback, p7, p8)
 					local RobloxComponent = if ResolveBindingPathValueResultEntry and ResolveBindingPathValueResultEntry.roblox_component and ResolveBindingPathValueResultEntry.roblox_component ~= "" then ResolveBindingPathValueResultEntry.roblox_component elseif TemplateData and TemplateData.roblox_component then TemplateData.roblox_component else nil
 					
 					if RobloxComponent == nil and InlineComponent == nil then
-						SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.UnknownTemplateDataIdentifier, {
+						local config = {
 							message = `No roblox_component or inline_component for identifier "{Identifier}" in ordered_template_data (not in template_data_map or feed entry)`,
 							name = p7.debugName,
 							componentType = p7.currentComponentType,
 							parserName = p7.currentParserName
-						}, p7.appPage)
+						}
+						
+						if FFlagSduiErrorPaths then
+							AddSduiErrorContextFieldsModule(config, p7.errorContext)
+						end
+						SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.UnknownTemplateDataIdentifier, config, p7.appPage)
 					else
 						local Success, Result = pcall(function()
-							-- upvalues: SduiPropUtilsModule (upval), RobloxComponent (copy), InlineComponent (copy), p7 (upval), TemplateData (copy), SignalsModule (upval), Callback (upval), BuildInputsForNestedComponentModule (upval), p6 (upval), ResolveBindingPathValueResultEntry (copy), BuildConfigForComponentFunction (upval), p8 (upval)
+							-- upvalues: SduiPropUtilsModule (upval), RobloxComponent (copy), InlineComponent (copy), p7 (upval), TemplateData (copy), SignalsModule (upval), Callback (upval), BuildInputsForNestedComponentModule (upval), p6 (upval), ResolveBindingPathValueResultEntry (copy), BuildConfigForComponentFunction (upval), p8 (upval), FFlagSduiErrorPaths (upval), Identifier (copy)
 							local HasInlineComponent = InlineComponent ~= nil
 							local Inputs = if TemplateData then TemplateData.inputs else nil
 							
@@ -155,16 +178,21 @@ local function buildOrderedTemplateDataList(p5, p6, Callback, p7, p8)
 									end
 								end
 								return Copy
-							end), p7, p8, nil, if HasInlineComponent then p6 else nil)
+							end), p7, p8, nil, if HasInlineComponent then p6 else nil, nil, if FFlagSduiErrorPaths and not HasInlineComponent then RobloxComponent else nil, if FFlagSduiErrorPaths then Identifier else nil)
 						end)
 						
 						if not Success then
-							SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, {
+							local config = {
 								message = `Failed to build ordered_template_data entry for identifier {Identifier}: {SduiParseHelpersModule.stringifyValue(Result)}`,
 								name = p7.debugName,
 								componentType = p7.currentComponentType,
 								parserName = p7.currentParserName
-							}, p7.appPage)
+							}
+							
+							if FFlagSduiErrorPaths then
+								AddSduiErrorContextFieldsModule(config, p7.errorContext)
+							end
+							SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, config, p7.appPage)
 						elseif Result and SduiPropUtilsModule.isComponentVisible(Result, p9) then
 							table.insert(List, Result)
 						end
@@ -176,21 +204,25 @@ local function buildOrderedTemplateDataList(p5, p6, Callback, p7, p8)
 		
 		if Success then
 			return { data = Result }
-		else
-			SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, {
-				message = `Failed to build ordered_template_data component list: {SduiParseHelpersModule.stringifyValue(Result)}`,
-				name = p7.debugName,
-				componentType = p7.currentComponentType,
-				parserName = p7.currentParserName
-			}, p7.appPage)
-			
-			return { data = {} }
 		end
+		local config = {
+			message = `Failed to build ordered_template_data component list: {SduiParseHelpersModule.stringifyValue(Result)}`,
+			name = p7.debugName,
+			componentType = p7.currentComponentType,
+			parserName = p7.currentParserName
+		}
+		
+		if FFlagSduiErrorPaths then
+			AddSduiErrorContextFieldsModule(config, p7.errorContext)
+		end
+		SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, config, p7.appPage)
+		
+		return { data = {} }
 	end), PropResultCategory.PropSignal
 end
 
 local function buildLazyNestedComponentListProp(p10, p11, p12, p13, p14, p15)
-	-- upvalues: SduiPropUtilsModule (copy), buildItemList (copy), PropResultCategory (copy), SignalsModule (copy), BuildInputsForNestedComponentModule (copy), SduiParseHelpersModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), BuildConfigForComponentFunction (copy), buildOrderedTemplateDataList (copy), buildLazyNestedComponentListProp (copy), BuildComponentListModule (copy)
+	-- upvalues: SduiPropUtilsModule (copy), buildItemList (copy), FFlagSduiErrorPaths (copy), PropResultCategory (copy), SignalsModule (copy), BuildInputsForNestedComponentModule (copy), SduiParseHelpersModule (copy), AddSduiErrorContextFieldsModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), BuildConfigForComponentFunction (copy), buildOrderedTemplateDataList (copy), buildLazyNestedComponentListProp (copy), BuildComponentListModule (copy)
 	local CurrentComponentType = p14.currentComponentType
 	local CurrentParserName = p14.currentParserName
 	
@@ -205,8 +237,8 @@ local function buildLazyNestedComponentListProp(p10, p11, p12, p13, p14, p15)
 		local PropSignal = nil
 		
 		return SduiPropUtilsModule.generateDynamicBindingPropValue(BindingPath, p12, p14, p13, function(p16, p17)
-			-- upvalues: PropSignal (ref), buildItemList (upval), ResolveTemplateFromDataResult (copy), p11 (copy), p13 (copy), p14 (copy), p15 (copy), p12 (copy), HasInlineComponent (copy)
-			PropSignal = buildItemList(ResolveTemplateFromDataResult, p16, p11.inputs, p13, p14, p15, PropSignal, p12, p17, HasInlineComponent)
+			-- upvalues: PropSignal (ref), buildItemList (upval), ResolveTemplateFromDataResult (copy), p11 (copy), p13 (copy), p14 (copy), p15 (copy), p12 (copy), HasInlineComponent (copy), FFlagSduiErrorPaths (upval)
+			PropSignal = buildItemList(ResolveTemplateFromDataResult, p16, p11.inputs, p13, p14, p15, PropSignal, p12, p17, HasInlineComponent, if FFlagSduiErrorPaths and not HasInlineComponent then p11.roblox_component else nil)
 			
 			return PropSignal
 		end), PropResultCategory.PropSignal
@@ -225,16 +257,16 @@ local function buildLazyNestedComponentListProp(p10, p11, p12, p13, p14, p15)
 		PropSignal = PropSignal.PropSignal
 		
 		return SignalsModule.createComputed(function(p16)
-			-- upvalues: Items (copy), SduiPropUtilsModule (upval), p14 (copy), p13 (copy), SignalsModule (upval), BuildInputsForNestedComponentModule (upval), p12 (copy), SduiParseHelpersModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval), CurrentComponentType (copy), CurrentParserName (copy), BuildConfigForComponentFunction (upval), p15 (copy)
+			-- upvalues: Items (copy), SduiPropUtilsModule (upval), p14 (copy), p13 (copy), SignalsModule (upval), BuildInputsForNestedComponentModule (upval), p12 (copy), SduiParseHelpersModule (upval), CurrentComponentType (copy), CurrentParserName (copy), FFlagSduiErrorPaths (upval), AddSduiErrorContextFieldsModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval), BuildConfigForComponentFunction (upval), p15 (copy)
 			local Success, Result = pcall(function()
-				-- upvalues: Items (upval), SduiPropUtilsModule (upval), p14 (upval), p13 (upval), SignalsModule (upval), BuildInputsForNestedComponentModule (upval), p12 (upval), SduiParseHelpersModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval), CurrentComponentType (upval), CurrentParserName (upval), BuildConfigForComponentFunction (upval), p15 (upval), p16 (copy)
+				-- upvalues: Items (upval), SduiPropUtilsModule (upval), p14 (upval), p13 (upval), SignalsModule (upval), BuildInputsForNestedComponentModule (upval), p12 (upval), SduiParseHelpersModule (upval), CurrentComponentType (upval), CurrentParserName (upval), FFlagSduiErrorPaths (upval), AddSduiErrorContextFieldsModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval), BuildConfigForComponentFunction (upval), p15 (upval), p16 (copy)
 				local List = {}
 				
 				for _, item in Items do
 					local HasInlineComponent = item.inline_component ~= nil
 					local Inputs = item.inputs
 					local ConfigForComponent = BuildConfigForComponentFunction(SduiPropUtilsModule.resolveTemplateFromData(item, p14), if HasInlineComponent then p13 else SignalsModule.createComputed(function(p17)
-						-- upvalues: Inputs (copy), BuildInputsForNestedComponentModule (upval), p13 (upval), p12 (upval), p14 (upval), SduiParseHelpersModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval), CurrentComponentType (upval), CurrentParserName (upval)
+						-- upvalues: Inputs (copy), BuildInputsForNestedComponentModule (upval), p13 (upval), p12 (upval), p14 (upval), SduiParseHelpersModule (upval), CurrentComponentType (upval), CurrentParserName (upval), FFlagSduiErrorPaths (upval), AddSduiErrorContextFieldsModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval)
 						local t = {}
 						
 						if Inputs then
@@ -244,16 +276,21 @@ local function buildLazyNestedComponentListProp(p10, p11, p12, p13, p14, p15)
 							end)
 							
 							if not Success then
-								SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, {
+								local config = {
 									message = `Failed to build inputs for nested component in item_list: {SduiParseHelpersModule.stringifyValue(Result)}`,
 									name = p14.debugName,
 									componentType = CurrentComponentType,
 									parserName = CurrentParserName
-								}, p14.appPage)
+								}
+								
+								if FFlagSduiErrorPaths then
+									AddSduiErrorContextFieldsModule(config, p14.errorContext)
+								end
+								SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, config, p14.appPage)
 							end
 						end
 						return t
-					end), p14, p15, nil, if HasInlineComponent then p12 else nil)
+					end), p14, p15, nil, if HasInlineComponent then p12 else nil, nil, if FFlagSduiErrorPaths and not HasInlineComponent then item.roblox_component else nil)
 					
 					if ConfigForComponent and SduiPropUtilsModule.isComponentVisible(ConfigForComponent, p16) then
 						table.insert(List, ConfigForComponent)
@@ -264,16 +301,20 @@ local function buildLazyNestedComponentListProp(p10, p11, p12, p13, p14, p15)
 			
 			if Success then
 				return { data = Result }
-			else
-				SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, {
-					message = `Failed to build item_list component list: {SduiParseHelpersModule.stringifyValue(Result)}`,
-					name = p14.debugName,
-					componentType = CurrentComponentType,
-					parserName = CurrentParserName
-				}, p14.appPage)
-				
-				return { data = {} }
 			end
+			local config = {
+				message = `Failed to build item_list component list: {SduiParseHelpersModule.stringifyValue(Result)}`,
+				name = p14.debugName,
+				componentType = CurrentComponentType,
+				parserName = CurrentParserName
+			}
+			
+			if FFlagSduiErrorPaths then
+				AddSduiErrorContextFieldsModule(config, p14.errorContext)
+			end
+			SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, config, p14.appPage)
+			
+			return { data = {} }
 		end), PropSignal
 	elseif p10 == "ordered_template_data" then
 		local PropSignal = p13

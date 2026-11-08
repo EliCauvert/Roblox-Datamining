@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("LuaAppsEnablePromptVIPServerPurchase5", false) and game:GetEngineFeature("EnablePromptVIPServerPurchase")
+﻿return game:DefineFastFlag("LuaAppsEnablePromptVIPServerPurchase7", false) and game:GetEngineFeature("EnablePromptVIPServerPurchase")

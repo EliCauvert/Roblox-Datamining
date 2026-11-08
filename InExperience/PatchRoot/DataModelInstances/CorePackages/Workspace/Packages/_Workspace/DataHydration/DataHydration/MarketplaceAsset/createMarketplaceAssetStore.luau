@@ -6,6 +6,7 @@ local CreateDataCacheModule = require(DataHydration.createDataCache)
 local _ = require(DataHydration.DataHydrationTypes)
 local _ = require(script.Parent.MarketplaceAssetStoreTypes)
 local CreateDataResolverModule = require(DataHydration.createDataResolver)
+local FFlagMarketplaceAssetStoreKeepOnAccountResetModule = require(DataHydration.Flags.FFlagMarketplaceAssetStoreKeepOnAccountReset)
 
 local function normalizeTaxonomy(Taxonomy)
 	if not Taxonomy then
@@ -35,14 +36,15 @@ local function _(Tbl)
 end
 
 return function()
-	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), PromiseModule (copy), normalizeTaxonomy (copy)
-	local DataCacheModule = CreateDataCacheModule()
+	-- upvalues: CreateDataCacheModule (copy), FFlagMarketplaceAssetStoreKeepOnAccountResetModule (copy), CreateDataResolverModule (copy), PromiseModule (copy), normalizeTaxonomy (copy)
+	local DataCacheModule = CreateDataCacheModule(nil, nil, if FFlagMarketplaceAssetStoreKeepOnAccountResetModule then { observeLocalUser = false } else nil)
 	local DataResolverModule = CreateDataResolverModule({
 		cache = DataCacheModule,
 		fetchFn = function(_)
 			-- upvalues: PromiseModule (upval)
 			return PromiseModule.resolve({})
-		end
+		end,
+		keepCacheOnAccountReset = if FFlagMarketplaceAssetStoreKeepOnAccountResetModule then true else nil
 	})
 	
 	return {

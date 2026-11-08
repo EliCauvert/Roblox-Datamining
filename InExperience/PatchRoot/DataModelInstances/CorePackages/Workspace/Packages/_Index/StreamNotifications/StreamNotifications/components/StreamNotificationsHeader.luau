@@ -9,7 +9,6 @@ local FoundationModule = require(Parent.Foundation)
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local IconButton = UIBloxModule.App.Button.IconButton
 local IconSize = UIBloxModule.App.ImageSet.Enum.IconSize
 local UserInputService = game:GetService("UserInputService")
@@ -26,13 +25,11 @@ local function _(p1, p2: number): number
 end
 
 return function(p1)
-	-- upvalues: UseStyleFunction (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), NormalizeFontFaceFunction (copy), UserInputService (copy), UseLocalizationFunction (copy), ConstantsModule (copy), StreamNotificationDropdownExperimentationModule (copy), FFlagStreamNotificationUXSettingsHeader (copy), UseDispatchFunction (copy), StreamNotificationSettingsExperimentationModule (copy), StreamNotificationSettingsActivationModule (copy), ReactModule (copy), IconButton (copy), IconSize (copy), NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy)
+	-- upvalues: UseStyleFunction (copy), UseTokensFunction (copy), NormalizeFontFaceFunction (copy), UserInputService (copy), UseLocalizationFunction (copy), ConstantsModule (copy), StreamNotificationDropdownExperimentationModule (copy), FFlagStreamNotificationUXSettingsHeader (copy), UseDispatchFunction (copy), StreamNotificationSettingsExperimentationModule (copy), StreamNotificationSettingsActivationModule (copy), ReactModule (copy), IconButton (copy), IconSize (copy), NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy)
 	local UseStyleResult = UseStyleFunction()
-	local UseTokensResult = if FoundationFontFaceMigration then UseTokensFunction() else nil
-	local UseStyleResultFont = UseStyleResult.Font
-	local HeaderFont = if FoundationFontFaceMigration then nil else UseStyleResultFont.Header1.Font
-	local NormalizeFontFaceResult = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.HeadingSmall.Font) else nil
-	local FontSize = if FoundationFontFaceMigration then UseTokensResult.Typography.HeadingSmall.FontSize else UseStyleResultFont.BaseSize * UseStyleResultFont.Header1.RelativeSize
+	local UseTokensResult = UseTokensFunction()
+	local NormalizeFontFaceResult = NormalizeFontFaceFunction(UseTokensResult.Typography.HeadingSmall.Font)
+	local FontSize = UseTokensResult.Typography.HeadingSmall.FontSize
 	local Y = if UserInputService.StatusBarSize and p1.isSmallScreen then UserInputService.StatusBarSize.Y else 0
 	local UseLocalizationResult = UseLocalizationFunction({ headerText = ConstantsModule.Text.HeaderKey })
 	local DropdownEnabled = StreamNotificationDropdownExperimentationModule.getDropdownEnabled()
@@ -56,7 +53,6 @@ return function(p1)
 			HeaderText = ReactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				Text = UseLocalizationResult and UseLocalizationResult.headerText,
-				Font = HeaderFont,
 				FontFace = NormalizeFontFaceResult,
 				TextSize = FontSize,
 				TextColor3 = UseStyleResult.Theme.TextEmphasis.Color,
@@ -102,7 +98,6 @@ return function(p1)
 				HeaderText = ReactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					Text = UseLocalizationResult and UseLocalizationResult.headerText,
-					Font = HeaderFont,
 					FontFace = NormalizeFontFaceResult,
 					TextSize = FontSize,
 					TextColor3 = UseStyleResult.Theme.TextEmphasis.Color,

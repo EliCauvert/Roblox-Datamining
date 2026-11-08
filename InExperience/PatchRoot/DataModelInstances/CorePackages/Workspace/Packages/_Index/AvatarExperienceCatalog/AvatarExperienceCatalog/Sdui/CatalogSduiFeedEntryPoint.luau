@@ -8,14 +8,13 @@ local MarketplaceFeedSkeletonModule = require(AvatarExperienceCatalog.Components
 local CATALOGRESULTSHORIZONTALMARGIN = require(AvatarExperienceCatalog.Constants).CATALOG_RESULTS_HORIZONTAL_MARGIN
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXMarketplaceLoadingSkeleton = AvatarExperienceFlagsModule.FFlagAXMarketplaceLoadingSkeleton
-local FFlagAXSduiCatalogScrollImpressions = AvatarExperienceFlagsModule.FFlagAXSduiCatalogScrollImpressions
 local FFlagAXSduiFeedPublishesBreakpoint = AvatarExperienceFlagsModule.FFlagAXSduiFeedPublishesBreakpoint
 local FFlagAXMarketplaceBreakpointMismatchCounter = AvatarExperienceFlagsModule.FFlagAXMarketplaceBreakpointMismatchCounter
 local FFlagAXSduiFeedMaintainScrollOnSeeAll = AvatarExperienceFlagsModule.FFlagAXSduiFeedMaintainScrollOnSeeAll
 local FFlagAXScrollTelemetryIntegration2 = require(Parent.SharedFlags).FFlagAXScrollTelemetryIntegration2
 
 return ReactModule.forwardRef(function(Frame, Ref)
-	-- upvalues: FFlagAXMarketplaceLoadingSkeleton (copy), ReactModule (copy), MarketplaceFeedSkeletonModule (copy), CatalogSduiEntryPointModule (copy), GetCatalogPageIdentifierModule (copy), FFlagAXSduiCatalogScrollImpressions (copy), FFlagAXSduiFeedPublishesBreakpoint (copy), FFlagAXMarketplaceBreakpointMismatchCounter (copy), CATALOGRESULTSHORIZONTALMARGIN (copy), FFlagAXSduiFeedMaintainScrollOnSeeAll (copy), FFlagAXScrollTelemetryIntegration2 (copy)
+	-- upvalues: FFlagAXMarketplaceLoadingSkeleton (copy), ReactModule (copy), MarketplaceFeedSkeletonModule (copy), CatalogSduiEntryPointModule (copy), GetCatalogPageIdentifierModule (copy), FFlagAXSduiFeedPublishesBreakpoint (copy), FFlagAXMarketplaceBreakpointMismatchCounter (copy), CATALOGRESULTSHORIZONTALMARGIN (copy), FFlagAXSduiFeedMaintainScrollOnSeeAll (copy), FFlagAXScrollTelemetryIntegration2 (copy)
 	return ReactModule.createElement(CatalogSduiEntryPointModule, {
 		context = Frame.context,
 		identifier = GetCatalogPageIdentifierModule(Frame.context),
@@ -23,8 +22,8 @@ return ReactModule.forwardRef(function(Frame, Ref)
 		AutomaticSize = Frame.AutomaticSize,
 		Position = Frame.Position,
 		loadingSlot = if FFlagAXMarketplaceLoadingSkeleton then ReactModule.createElement(MarketplaceFeedSkeletonModule) else nil,
-		onScroll = if FFlagAXSduiCatalogScrollImpressions then Frame.onScroll else nil,
-		requestImpressionsSignal = if FFlagAXSduiCatalogScrollImpressions then Frame.requestImpressionsSignal else nil,
+		onScroll = Frame.onScroll,
+		requestImpressionsSignal = Frame.requestImpressionsSignal,
 		breakpointOptions = if FFlagAXSduiFeedPublishesBreakpoint or FFlagAXMarketplaceBreakpointMismatchCounter then {
 			horizontalInset = if FFlagAXSduiFeedPublishesBreakpoint then CATALOGRESULTSHORIZONTALMARGIN * 2 else nil,
 			publishToStore = if FFlagAXSduiFeedPublishesBreakpoint then true else nil,

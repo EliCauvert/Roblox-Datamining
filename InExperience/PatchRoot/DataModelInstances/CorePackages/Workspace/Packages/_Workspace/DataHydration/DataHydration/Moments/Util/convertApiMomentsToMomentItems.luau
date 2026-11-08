@@ -271,6 +271,9 @@ local function convertApiMomentToMomentItem(p2)
 	config.recommendationMetadata = { feedItemId = FeedItemId, tracingId = p2.feedSessionId }
 	config.status = Deleted
 	
+	if type(p2.feedCreatedTime) == "string" and p2.feedCreatedTime ~= "" then
+		config.createdAt = p2.feedCreatedTime
+	end
 	if FFlagMomentsComments or FFlagMomentsCommentsIxpEnabled then
 		local ConvertApiMomentCommentsModuleResult = ConvertApiMomentCommentsModule(p2.comments)
 		

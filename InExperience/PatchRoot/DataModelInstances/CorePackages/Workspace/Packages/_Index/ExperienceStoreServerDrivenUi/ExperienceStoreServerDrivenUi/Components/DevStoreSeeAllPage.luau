@@ -6,6 +6,8 @@ local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local SduiLoadTimer = SduiSharedUtilitiesModule.SduiLoadTimer
 local SduiPageEntryPoint = SduiSharedUtilitiesModule.SduiPageEntryPoint
+local GetSduiClientPageScopeFunction = SduiSharedUtilitiesModule.getSduiClientPageScope
+local FFlagSduiErrorPaths = require(Parent.SharedFlags).FFlagSduiErrorPaths
 local CompositionTags = require(Parent.AppComposition).CompositionTags
 local FFlagSplitPaneDevStoreSeeAllSupportRegion = require(Parent.SharedFlags).FFlagSplitPaneDevStoreSeeAllSupportRegion
 local PaneHostContext = if FFlagSplitPaneDevStoreSeeAllSupportRegion then require(Parent.SplitPane).PaneHostContext else nil
@@ -17,7 +19,7 @@ local function _(p1, p2)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: GetDevStoreSeeAllPageKeyModule (copy), UseLocalizationFunction (copy), FFlagSplitPaneDevStoreSeeAllSupportRegion (copy), ReactModule (copy), PaneHostContext (copy), SduiLoadTimer (copy), FetchDevStoreSeeAllPageIfNeededModule (copy), SduiPageEntryPoint (copy), CompositionTags (copy)
+	-- upvalues: GetDevStoreSeeAllPageKeyModule (copy), UseLocalizationFunction (copy), FFlagSplitPaneDevStoreSeeAllSupportRegion (copy), ReactModule (copy), PaneHostContext (copy), SduiLoadTimer (copy), FFlagSduiErrorPaths (copy), GetSduiClientPageScopeFunction (copy), FetchDevStoreSeeAllPageIfNeededModule (copy), SduiPageEntryPoint (copy), CompositionTags (copy)
 	local UniverseId = p1.universeId or p1.navigation and p1.navigation.getParam("universeId")
 	local DevStoreSeeAllPageKeyModule = GetDevStoreSeeAllPageKeyModule(UniverseId)
 	local UseLocalizationResult = UseLocalizationFunction({ pageTitle = "Feature.GameDetails.Label.Store" })
@@ -27,6 +29,20 @@ return ReactModule.memo(function(p1)
 		-- upvalues: PageTimer (copy), SduiLoadTimer (upval)
 		return PageTimer or SduiLoadTimer.createLoadTimer("DevStoreSeeAll")
 	end, { DevStoreSeeAllPageKeyModule, PageTimer })
+	
+	if FFlagSduiErrorPaths then
+		ReactModule.useMemo(function()
+			-- upvalues: UniverseId (copy), GetSduiClientPageScopeFunction (upval), DevStoreSeeAllPageKeyModule (copy)
+			if UniverseId then
+				local SduiClientPageScope = GetSduiClientPageScopeFunction(DevStoreSeeAllPageKeyModule)
+				SduiClientPageScope.set("devStoreSectionsFired", {})
+				
+				return SduiClientPageScope
+			else
+				return nil
+			end
+		end, { DevStoreSeeAllPageKeyModule, UseMemoResult, UniverseId })
+	end
 	ReactModule.useEffect(function()
 		-- upvalues: UniverseId (copy), FetchDevStoreSeeAllPageIfNeededModule (upval), UseMemoResult (copy)
 		if UniverseId then

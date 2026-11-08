@@ -1,5 +1,6 @@
 ﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
 local Parent = ServerDrivenUi.Parent
+local FFlagSduiErrorPaths = require(Parent.SharedFlags).FFlagSduiErrorPaths
 local _ = require(Parent.AppCommonLib)
 local CryoModule = require(Parent.Cryo)
 local ReactModule = require(Parent.React)
@@ -20,7 +21,7 @@ local GetSduiComponentWrapperFunction = SduiCoreSystemModule.getSduiComponentWra
 local t = {}
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), CryoModule (copy), t (copy), FindAnalyticsFieldFunction (copy), SduiBuilder (copy), SduiCollectionAnalyticsBuilder (copy), GetImpressionsTagModule (copy), ImpressionsTagUtility (copy), ReportUnifiedLoggingImpressionsFunction (copy), SduiParsers (copy), SendGameImpressions (copy), GetSduiComponentWrapperFunction (copy), ScreenSizeImpressionsTracker (copy), WaitForPropWrapper (copy)
+	-- upvalues: ReactModule (copy), CryoModule (copy), t (copy), FindAnalyticsFieldFunction (copy), SduiBuilder (copy), SduiCollectionAnalyticsBuilder (copy), GetImpressionsTagModule (copy), ImpressionsTagUtility (copy), ReportUnifiedLoggingImpressionsFunction (copy), SduiParsers (copy), SendGameImpressions (copy), FFlagSduiErrorPaths (copy), GetSduiComponentWrapperFunction (copy), ScreenSizeImpressionsTracker (copy), WaitForPropWrapper (copy)
 	local LayoutOrder = p1.layoutOrder
 	local AnchorPoint = p1.anchorPoint
 	local AutomaticSize = p1.automaticSize
@@ -78,7 +79,7 @@ return ReactModule.memo(function(p1)
 			BackgroundTransparency = 1,
 			[ReactModule.Tag] = "data-testid=--sdui-single-item-collection"
 		}, (ReactModule.useMemo(function()
-			-- upvalues: p1 (copy), ReactModule (upval), UseMemoResult (copy), FindAnalyticsFieldFunction (upval), t (upval), SduiBuilder (upval), SduiContext (copy), UseRefResult1 (copy), SduiCollectionAnalyticsBuilder (upval), GetSduiComponentWrapperFunction (upval)
+			-- upvalues: p1 (copy), ReactModule (upval), UseMemoResult (copy), FindAnalyticsFieldFunction (upval), t (upval), SduiBuilder (upval), SduiContext (copy), UseRefResult1 (copy), SduiCollectionAnalyticsBuilder (upval), FFlagSduiErrorPaths (upval), GetSduiComponentWrapperFunction (upval)
 			local CloneElementResults = {}
 			
 			if p1.children then
@@ -92,7 +93,7 @@ return ReactModule.memo(function(p1)
 				local ComponentType = FindAnalyticsFieldFunction("componentType", p1.item.analyticsData or t) or SduiBuilder.getComponentType(p1.componentConfig, SduiContext)
 				local SingleItemCollectionName: string = `SingleItemCollection_{ComponentType}`
 				local LocalAnalyticsData = { itemPosition = 1, itemComponentType = ComponentType }
-				UseRefResult1.current[1] = SduiCollectionAnalyticsBuilder.buildAndValidateItemAnalyticsData(SduiContext, p1.item.analyticsData, nil, LocalAnalyticsData, ComponentType)
+				UseRefResult1.current[1] = SduiCollectionAnalyticsBuilder.buildAndValidateItemAnalyticsData(SduiContext, p1.item.analyticsData, nil, LocalAnalyticsData, ComponentType, nil, if FFlagSduiErrorPaths then p1.item.errorContext else nil)
 				CloneElementResults[SingleItemCollectionName] = ReactModule.createElement(GetSduiComponentWrapperFunction(p1.item), {
 					componentConfig = p1.item,
 					sduiContext = SduiContext,

@@ -25,7 +25,7 @@ local function postAvatarMoment(p3, OutfitId, Edits, Description, p4, CommentsEn
 		description = Description,
 		edits = Edits,
 		commentsEnabled = CommentsEnabled
-	})
+	}, nil, p4)
 	PostMetadataModule.media = {
 		{
 			avatar = {

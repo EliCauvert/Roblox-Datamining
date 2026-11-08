@@ -6,11 +6,12 @@ local GetSupportedActionsForProfileTypeModule = require(ProfilePlatform.Hooks.ge
 local FFlagAddSocialLinksToCommunityProfile = require(Parent.SharedFlags).FFlagAddSocialLinksToCommunityProfile
 local FFlagAddCommunityLockedToCommunityProfile = require(Parent.SharedFlags).FFlagAddCommunityLockedToCommunityProfile
 local FFlagAddEventsToCommunityProfileModule = require(ProfilePlatform.Flags.FFlagAddEventsToCommunityProfile)
+local FFlagHideLeaveFromOpenCommunityOwnerModule = require(ProfilePlatform.Flags.FFlagHideLeaveFromOpenCommunityOwner)
 local FFlagGroupAnnouncementsSdui = require(Parent.SharedFlags).FFlagGroupAnnouncementsSdui
 local FFlagGroupForumsDiscoverySdui = require(Parent.SharedFlags).FFlagGroupForumsDiscoverySdui
 
 return function()
-	-- upvalues: EnumsModule (copy), GetSupportedActionsForProfileTypeModule (copy), FFlagAddSocialLinksToCommunityProfile (copy), FFlagAddCommunityLockedToCommunityProfile (copy), FFlagAddEventsToCommunityProfileModule (copy), FFlagGroupAnnouncementsSdui (copy), FFlagGroupForumsDiscoverySdui (copy)
+	-- upvalues: EnumsModule (copy), GetSupportedActionsForProfileTypeModule (copy), FFlagAddSocialLinksToCommunityProfile (copy), FFlagAddCommunityLockedToCommunityProfile (copy), FFlagHideLeaveFromOpenCommunityOwnerModule (copy), FFlagAddEventsToCommunityProfileModule (copy), FFlagGroupAnnouncementsSdui (copy), FFlagGroupForumsDiscoverySdui (copy)
 	local List = {
 		{
 			component = EnumsModule.Components.CommunityProfileHeader
@@ -32,6 +33,9 @@ return function()
 	end
 	if FFlagAddCommunityLockedToCommunityProfile then
 		table.insert(List, { component = EnumsModule.Components.CommunityLocked })
+	end
+	if FFlagHideLeaveFromOpenCommunityOwnerModule then
+		table.insert(List, { component = EnumsModule.Components.CommunityDeactivated })
 	end
 	if FFlagAddEventsToCommunityProfileModule then
 		table.insert(List, { component = EnumsModule.Components.Events })

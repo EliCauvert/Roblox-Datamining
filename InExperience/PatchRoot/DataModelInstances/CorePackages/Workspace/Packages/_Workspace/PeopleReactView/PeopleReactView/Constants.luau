@@ -23,6 +23,7 @@ return {
 		CORE_BUTTONS = {
 			LOCALIZED_STRINGS = {
 				INVITE_FRIENDS = "CoreScripts.InGameMenu.PageTitle.InviteFriends",
+				JOIN_OR_INVITE = "CoreScripts.InGameMenu.PageTitle.JoinOrInvite",
 				MUTE_ALL = "Feature.SettingsHub.Action.MuteAll",
 				UNMUTE_ALL = "Feature.SettingsHub.Action.UnmuteAll",
 				MUTE_SELF = "CoreScripts.InGameMenu.QuickActions.MuteSelf",

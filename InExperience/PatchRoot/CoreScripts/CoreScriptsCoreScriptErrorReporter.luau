@@ -8,6 +8,7 @@ local RunService = game:GetService("RunService")
 local ScriptContext = game:GetService("ScriptContext")
 local UserInputService = game:GetService("UserInputService")
 local CoreScriptErrorReporterUseErrorHandler = game:DefineFastFlag("CoreScriptErrorReporterUseErrorHandler", false)
+local CoreScriptErrorCounterIgnoreReporterSampling = game:DefineFastFlag("CoreScriptErrorCounterIgnoreReporterSampling", false)
 local RobloxGui = CoreGui.RobloxGui
 local RateLimiterModule = require(RobloxGui.Modules.ErrorReporting.RateLimiter)
 local PiiFilterModule = require(RobloxGui.Modules.ErrorReporting.PiiFilter)
@@ -44,7 +45,7 @@ end
 local IsRandomValueBelow: boolean = not game:GetFastFlag("DisableCorescriptBacktraceReporting") and (game:GetFastString("CoreScriptBacktraceErrorUploadToken") ~= "" and math.random(1, 100) <= math.clamp(game:GetFastInt("CoreScriptBacktraceErrorReportPercentage"), 0, 100))
 local IsRandomValueBelow1: boolean = CoreScriptErrorReporterUseErrorHandler and (CoreScriptSentryDsn ~= "" and math.random(1, 100) <= math.clamp(CoreScriptSentryRolloutPercentage, 0, 100))
 
-if CoreScriptErrorReporterUseErrorHandler and (IsRandomValueBelow or IsRandomValueBelow1) then
+if CoreScriptErrorReporterUseErrorHandler and (IsRandomValueBelow or IsRandomValueBelow1 or CoreScriptErrorCounterIgnoreReporterSampling) then
 	local CoreScriptReportProcessorModule, CoreScriptReportProcessorModule2 = CreateCoreScriptReportProcessorModule()
 	local NewPiiFilter = PiiFilterModule.new({
 		eraseTimeout = game:GetFastInt("CoreScriptBacktracePIIFilterEraseTimeoutSeconds")
@@ -79,13 +80,16 @@ if CoreScriptErrorReporterUseErrorHandler and (IsRandomValueBelow or IsRandomVal
 		rateLimiter = NewRateLimiter,
 		reporters = List,
 		onErrorReported = function()
-			-- upvalues: Default (copy), LuaCoreScriptsErrorV2CounterConfigModule (copy), NewSessionWithErrorReporter (copy)
+			-- upvalues: Default (copy), LuaCoreScriptsErrorV2CounterConfigModule (copy), List (copy), NewSessionWithErrorReporter (copy)
 			Default:logRobloxTelemetryCounter(LuaCoreScriptsErrorV2CounterConfigModule, 1)
-			NewSessionWithErrorReporter:reportEvent(1, nil, "ERROR")
+			
+			if #List > 0 then
+				NewSessionWithErrorReporter:reportEvent(1, nil, "ERROR")
+			end
 		end
 	})
 	
-	if #List > 0 then
+	if #List > 0 or CoreScriptErrorCounterIgnoreReporterSampling then
 		ScriptContext.ErrorDetailed:Connect(function(...)
 			-- upvalues: CoreScriptErrorHandlerModule (copy)
 			local Success, Result = pcall(CoreScriptErrorHandlerModule, ...)
@@ -95,7 +99,9 @@ if CoreScriptErrorReporterUseErrorHandler and (IsRandomValueBelow or IsRandomVal
 			end
 		end)
 	end
-	CoreScriptReportProcessorModule2.ServerVersion = RobloxReplicatedStorage:WaitForChild("GetServerVersion", 1e999):InvokeServer()
+	if IsRandomValueBelow or IsRandomValueBelow1 then
+		CoreScriptReportProcessorModule2.ServerVersion = RobloxReplicatedStorage:WaitForChild("GetServerVersion", 1e999):InvokeServer()
+	end
 end
 if IsRandomValueBelow and not CoreScriptErrorReporterUseErrorHandler then
 	local config = {

@@ -26,7 +26,8 @@ local config = {
 	LOCALE_URL = string.format("https://locale.%s", Segment),
 	ROLES_URL = string.format("https://users.%s", Segment),
 	CATALOG_URL = string.format("https://catalog.%s", Segment),
-	CREATE_URL = string.format("https://create.%s", Segment)
+	CREATE_URL = string.format("https://create.%s", Segment),
+	DEVELOP_URL = string.format("https://develop.%s", Segment)
 }
 setmetatable(UrlModule, {
 	__newindex = function(_, _, _) end,

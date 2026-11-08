@@ -13,7 +13,7 @@ local config = { Dark = ColorMode.Dark, Light = ColorMode.Light }
 return {
 	name = "Moments",
 	roact = ReactModule,
-	reactRoblox = require(Parent.Dev.ReactRoblox),
+	reactRoblox = require(Parent.ReactRoblox),
 	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), Localization (copy), LocalizationService (copy), LocalizationProvider (copy), FoundationProvider (copy), config (copy), ColorMode (copy), Device (copy)
 		return function(p2)

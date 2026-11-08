@@ -2,6 +2,7 @@
 local Parent = SocialCarousel.Parent
 local ReactModule = require(Parent.React)
 local SharedFlagsModule = require(Parent.SharedFlags)
+local GetFriendStatusFromTileTypeModule = require(SocialCarousel.Analytics.getFriendStatusFromTileType)
 local UseSocialCarouselAnalyticsModule = require(SocialCarousel.Analytics.useSocialCarouselAnalytics)
 local Tile = require(SocialCarousel.Common.Enums).Tile
 local BuildUserSeenCollectionPayloadFunction = require(Parent.SocialLuaAnalytics).Analytics.buildUserSeenCollectionPayload
@@ -9,9 +10,10 @@ local UseBatchedImpressionsFunction = require(Parent.Impressions).useBatchedImpr
 local FIntUserSeenCollectionBatchTimeMs = SharedFlagsModule.FIntUserSeenCollectionBatchTimeMs
 local FFlagLuaAppPYMKSendUserSeenCollection = SharedFlagsModule.FFlagLuaAppPYMKSendUserSeenCollection
 local FFlagLuaAppUserSeenCollectionUnifiedFields = SharedFlagsModule.FFlagLuaAppUserSeenCollectionUnifiedFields
+local FFlagShowRequestsInCarouselForAllUsers = SharedFlagsModule.FFlagShowRequestsInCarouselForAllUsers
 
 return function()
-	-- upvalues: UseSocialCarouselAnalyticsModule (copy), FFlagLuaAppPYMKSendUserSeenCollection (copy), ReactModule (copy), Tile (copy), BuildUserSeenCollectionPayloadFunction (copy), UseBatchedImpressionsFunction (copy), FIntUserSeenCollectionBatchTimeMs (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (copy)
+	-- upvalues: UseSocialCarouselAnalyticsModule (copy), FFlagLuaAppPYMKSendUserSeenCollection (copy), ReactModule (copy), GetFriendStatusFromTileTypeModule (copy), Tile (copy), BuildUserSeenCollectionPayloadFunction (copy), UseBatchedImpressionsFunction (copy), FIntUserSeenCollectionBatchTimeMs (copy), FFlagShowRequestsInCarouselForAllUsers (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (copy)
 	local UseSocialCarouselAnalyticsModuleResult = UseSocialCarouselAnalyticsModule()
 	
 	if FFlagLuaAppPYMKSendUserSeenCollection then
@@ -27,12 +29,12 @@ return function()
 		local UseBatchedImpressionsResult = UseBatchedImpressionsFunction({
 			batchTimeMs = FIntUserSeenCollectionBatchTimeMs,
 			mapItem = ReactModule.useCallback(function(UserId, Index, p1)
-				-- upvalues: Tile (upval)
+				-- upvalues: GetFriendStatusFromTileTypeModule (upval), Tile (upval)
 				return {
 					userId = UserId,
 					index = Index,
 					presence = if p1 and p1.presence then p1.presence.userPresenceType else "Offline",
-					friendStatus = if p1 and p1.tileType == Tile.Friend then "Friend" else "NotFriend",
+					friendStatus = GetFriendStatusFromTileTypeModule(p1 and p1.tileType).Name,
 					recommendationContextType = if p1 and p1.recommendationContextType then p1.recommendationContextType else "None",
 					recommendationRank = if p1 and p1.recommendationRank then p1.recommendationRank else -1,
 					isRecommendation = p1 and p1.tileType == Tile.Recommendation,
@@ -41,20 +43,26 @@ return function()
 			end, {}),
 			onFlush = if TilesSeenCollectionFunction then UseResult else nil
 		})
+		local UseResult1 = ReactModule.useCallback(function(p1, p2, p3)
+			-- upvalues: FFlagShowRequestsInCarouselForAllUsers (upval), Tile (upval), UseBatchedImpressionsResult (copy)
+			if not FFlagShowRequestsInCarouselForAllUsers or not p3 or p3.tileType ~= Tile.FriendRequest or p3.presence then
+				UseBatchedImpressionsResult.addImpression(p1, p2, p3)
+				
+				return
+			end
+		end, { UseBatchedImpressionsResult.addImpression })
 		
 		return ReactModule.useMemo(function()
-			-- upvalues: UseBatchedImpressionsResult (copy)
-			return {
-				addTileToCollection = UseBatchedImpressionsResult.addImpression
-			}
-		end, { UseBatchedImpressionsResult.addImpression })
+			-- upvalues: UseResult1 (copy)
+			return { addTileToCollection = UseResult1 }
+		end, { UseResult1 })
 	else
 		local UseRefResult = ReactModule.useRef({})
 		local UseRefResult1 = ReactModule.useRef(nil)
 		local UseRefResult2 = ReactModule.useRef({})
 		local UseRefResult3 = ReactModule.useRef({})
 		local UseRefResult4 = ReactModule.useRef(0)
-		local UseResult = ReactModule.useCallback(function()
+		local UseResult1 = ReactModule.useCallback(function()
 			-- upvalues: UseRefResult (copy), UseRefResult2 (copy), UseSocialCarouselAnalyticsModuleResult (copy), UseRefResult4 (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (upval), BuildUserSeenCollectionPayloadFunction (upval), UseRefResult3 (copy)
 			local Current = UseRefResult.current
 			
@@ -99,15 +107,16 @@ return function()
 			UseRefResult.current = {}
 			UseRefResult3.current = {}
 		end, { UseSocialCarouselAnalyticsModuleResult })
-		local UseResult1 = ReactModule.useCallback(function(UserId, Index, p1)
-			-- upvalues: UseRefResult2 (copy), UseRefResult3 (copy), UseRefResult (copy), Tile (upval), UseRefResult1 (copy), FIntUserSeenCollectionBatchTimeMs (upval), UseResult (copy)
+		local UseResult2 = ReactModule.useCallback(function(UserId, Index, p1)
+			-- upvalues: UseRefResult2 (copy), UseRefResult3 (copy), FFlagShowRequestsInCarouselForAllUsers (upval), Tile (upval), UseRefResult (copy), GetFriendStatusFromTileTypeModule (upval), UseRefResult1 (copy), FIntUserSeenCollectionBatchTimeMs (upval), UseResult1 (copy)
 			if not UserId or not Index or UseRefResult2.current[UserId] or UseRefResult3.current[UserId] then return end
+			if FFlagShowRequestsInCarouselForAllUsers and p1 and p1.tileType == Tile.FriendRequest and not p1.presence then return end
 			UseRefResult3.current[UserId] = true
 			table.insert(UseRefResult.current, {
 				userId = UserId,
 				index = Index,
 				presence = if p1 and p1.presence then p1.presence.userPresenceType else "Offline",
-				friendStatus = if p1 and p1.tileType == Tile.Friend then "Friend" else "NotFriend",
+				friendStatus = GetFriendStatusFromTileTypeModule(p1 and p1.tileType).Name,
 				recommendationContextType = if p1 and p1.recommendationContextType then p1.recommendationContextType else "None",
 				recommendationRank = if p1 and p1.recommendationRank then p1.recommendationRank else -1,
 				isRecommendation = p1 and p1.tileType == Tile.Recommendation,
@@ -117,20 +126,20 @@ return function()
 			if UseRefResult1.current then
 				pcall(task.cancel, UseRefResult1.current)
 			end
-			UseRefResult1.current = task.delay(FIntUserSeenCollectionBatchTimeMs * 0.001, UseResult)
-		end, { UseResult })
+			UseRefResult1.current = task.delay(FIntUserSeenCollectionBatchTimeMs * 0.001, UseResult1)
+		end, { UseResult1 })
 		ReactModule.useEffect(function()
-			-- upvalues: UseRefResult1 (copy), UseResult (copy)
+			-- upvalues: UseRefResult1 (copy), UseResult1 (copy)
 			return function()
-				-- upvalues: UseRefResult1 (upval), UseResult (upval)
+				-- upvalues: UseRefResult1 (upval), UseResult1 (upval)
 				if UseRefResult1.current then
 					pcall(task.cancel, UseRefResult1.current)
 				end
 				UseRefResult1.current = nil
-				UseResult()
+				UseResult1()
 			end
 		end, {})
 		
-		return { addTileToCollection = UseResult1 }
+		return { addTileToCollection = UseResult2 }
 	end
 end

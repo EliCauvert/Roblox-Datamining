@@ -11,6 +11,10 @@ local SduiParsers = SduiCoreSystemModule.SduiParsers
 local UserProfilesModule = require(Parent.UserProfiles)
 local UseUserProfilesFetchFunction = UserProfilesModule.Hooks.useUserProfilesFetch
 local SduiInGameFriendsDataModule = require(ServerDrivenUi.DataStore.SduiInGameFriendsData)
+local DataHydrationModule = require(Parent.DataHydration)
+local _ = require(Parent.DataHydration.UserProfile)
+local GetAndFetchUserNamesByUserIdsFunction = DataHydrationModule.UserProfile.getAndFetchUserNamesByUserIds
+local FFlagHomeFriendNamesUseUserProfileHydration = require(Parent.SharedFlags).FFlagHomeFriendNamesUseUserProfileHydration
 
 local function _(p1, p2)
 	local UserIds = {}
@@ -34,6 +38,28 @@ local function alphabeticalSort(A, B): boolean
 	return if A.displayName then not B.displayName or A.displayName:lower() < B.displayName:lower() else false
 end
 
+local function getSortedFriendNames(UseMemoResult, UseSignalStateResult)
+	-- upvalues: DataHydrationModule (copy), alphabeticalSort (copy)
+	local List = {}
+	
+	if UseSignalStateResult.status == DataHydrationModule.DataStatus.NotReady then
+		return List
+	end
+	for _, UserId in UseMemoResult do
+		local NamesByUserIdEntry = UseSignalStateResult.namesByUserId[tostring(UserId)]
+		
+		if NamesByUserIdEntry then
+			table.insert(List, {
+				userId = UserId,
+				displayName = NamesByUserIdEntry.combinedName
+			})
+		end
+	end
+	table.sort(List, alphabeticalSort)
+	
+	return List
+end
+
 local function getSortedFriendDisplayNames(UseMemoResult, p3)
 	-- upvalues: UserProfilesModule (copy), alphabeticalSort (copy)
 	if not UseMemoResult or not p3 or not p3.data then
@@ -53,7 +79,7 @@ local function getSortedFriendDisplayNames(UseMemoResult, p3)
 end
 
 return ReactModule.memo(function(p4)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), SduiParsers (copy), SduiActionType (copy), UseLocalizationFunction (copy), SduiInGameFriendsDataModule (copy), SignalsReactModule (copy), UseUserProfilesFetchFunction (copy), UserProfilesModule (copy), getSortedFriendDisplayNames (copy), getDisplayText (copy), SduiTileFooterModule (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), SduiParsers (copy), SduiActionType (copy), UseLocalizationFunction (copy), SduiInGameFriendsDataModule (copy), SignalsReactModule (copy), FFlagHomeFriendNamesUseUserProfileHydration (copy), UseUserProfilesFetchFunction (copy), UserProfilesModule (copy), GetAndFetchUserNamesByUserIdsFunction (copy), getSortedFriendNames (copy), getSortedFriendDisplayNames (copy), getDisplayText (copy), SduiTileFooterModule (copy)
 	local LayoutOrder = p4.layoutOrder
 	local AnchorPoint = p4.anchorPoint
 	local AutomaticSize = p4.automaticSize
@@ -95,15 +121,28 @@ return ReactModule.memo(function(p4)
 		end
 		return List
 	end, { UseSignalStateResult, p4.universeId })
-	local UseUserProfilesFetchResult = UseUserProfilesFetchFunction({
+	local UseUserProfilesFetchResult = if FFlagHomeFriendNamesUseUserProfileHydration then nil else UseUserProfilesFetchFunction({
 		userIds = UseMemoResult,
 		query = UserProfilesModule.Queries.userProfilesCombinedNameByUserIds,
 		skip = #UseMemoResult == 0
 	})
+	local UseSignalStateResult1 = nil
+	
+	if FFlagHomeFriendNamesUseUserProfileHydration then
+		local Joined = table.concat(UseMemoResult, ",")
+		UseSignalStateResult1 = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
+			-- upvalues: GetAndFetchUserNamesByUserIdsFunction (upval), Joined (copy)
+			return GetAndFetchUserNamesByUserIdsFunction(string.split(Joined, ","))
+		end, { Joined })))
+	end
 	local UseMemoResult1 = ReactModule.useMemo(function()
-		-- upvalues: getSortedFriendDisplayNames (upval), UseMemoResult (copy), UseUserProfilesFetchResult (copy)
-		return (getSortedFriendDisplayNames(UseMemoResult, UseUserProfilesFetchResult))
-	end, { UseMemoResult, UseUserProfilesFetchResult })
+		-- upvalues: UseSignalStateResult1 (ref), getSortedFriendNames (upval), UseMemoResult (copy), getSortedFriendDisplayNames (upval), UseUserProfilesFetchResult (copy)
+		return if UseSignalStateResult1 then getSortedFriendNames(UseMemoResult, UseSignalStateResult1) else getSortedFriendDisplayNames(UseMemoResult, UseUserProfilesFetchResult)
+	end, {
+		UseMemoResult,
+		UseUserProfilesFetchResult,
+		UseSignalStateResult1
+	})
 	local Smallest = math.min(p4.maxAvatars or 3, #UseMemoResult1)
 	local DisplayText = getDisplayText(UseMemoResult1, UseLocalizationResult.separator, Smallest)
 	local UserIds = {}

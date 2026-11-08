@@ -6,15 +6,17 @@ local DictationState = require(DictationCore.Dictation.useDictation).DictationSt
 local DictationModeModule = require(DictationCore.Dictation.DictationMode)
 local DictationInputModeModule = require(DictationCore.Dictation.DictationInputMode)
 local DictationAffordancesModule = require(script.Parent.DictationAffordances)
+local CountdownRingModule = require(script.Parent.CountdownRing)
 local StopCountdownButtonModule = require(script.Parent.StopCountdownButton)
 local UseLongPressModule = require(script.Parent.useLongPress)
+local FFlagDictationMicKeepsFocusModule = require(DictationCore.Flags.FFlagDictationMicKeepsFocus)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local Signal = require(Parent.Signals).createSignal(false)
 
 local function noop() end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: DictationInputModeModule (copy), DictationModeModule (copy), UseSignalStateFunction (copy), Signal (copy), ReactModule (copy), DictationState (copy), UseLongPressModule (copy), DictationAffordancesModule (copy), FoundationModule (copy), StopCountdownButtonModule (copy), noop (copy)
+	-- upvalues: DictationInputModeModule (copy), DictationModeModule (copy), UseSignalStateFunction (copy), Signal (copy), ReactModule (copy), DictationState (copy), UseLongPressModule (copy), DictationAffordancesModule (copy), FoundationModule (copy), FFlagDictationMicKeepsFocusModule (copy), StopCountdownButtonModule (copy), noop (copy), CountdownRingModule (copy)
 	local GetDictationStateFunction = p1.getDictationState
 	local OnStartFunction = p1.onStart
 	local OnStopFunction = p1.onStop
@@ -67,30 +69,29 @@ return ReactModule.memo(function(p1)
 	})
 	local UseLongPressOverlay = DeriveMicSendButtonResult.useLongPressOverlay
 	
-	if config.isRecording then
-		return ReactModule.createElement(StopCountdownButtonModule, {
-			countdownProgress = p1.countdownProgress,
-			onActivated = OnStopFunction
-		})
-	else
+	if FFlagDictationMicKeepsFocusModule or not config.isRecording then
+		local IsRecording = FFlagDictationMicKeepsFocusModule and config.isRecording
+		local CountdownProgress = p1.countdownProgress
 		local Element = ReactModule.createElement(FoundationModule.IconButton, {
 			isCircular = true,
-			icon = DeriveMicSendButtonResult.icon,
+			icon = if IsRecording then FoundationModule.Enums.IconName.StopSmall else DeriveMicSendButtonResult.icon,
 			size = p1.size or FoundationModule.Enums.InputSize.Small,
-			variant = DeriveMicSendButtonResult.variant,
+			variant = if IsRecording then FoundationModule.Enums.ButtonVariant.Utility else DeriveMicSendButtonResult.variant,
+			testId = p1.testId,
 			isDisabled = DeriveMicSendButtonResult.isDisabled,
 			Selectable = not UseLongPressOverlay and nil,
 			onActivated = if UseLongPressOverlay then noop else DeriveMicSendButtonResult.onActivated or noop,
 			tag = p1.tag
 		})
 		
-		return if UseLongPressModuleResult == nil then Element else ReactModule.createElement("Frame", {
+		return if FFlagDictationMicKeepsFocusModule or UseLongPressModuleResult ~= nil then ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.XY,
 			Size = UDim2.new()
 		}, {
+			Progress = if IsRecording and CountdownProgress ~= nil then ReactModule.createElement(CountdownRingModule, { countdownProgress = CountdownProgress }) else nil,
 			Button = Element,
-			HoldTarget = if UseLongPressOverlay then ReactModule.createElement("TextButton", {
+			HoldTarget = if UseLongPressOverlay and UseLongPressModuleResult ~= nil then ReactModule.createElement("TextButton", {
 				Active = true,
 				BackgroundTransparency = 1,
 				Size = UDim2.fromScale(1, 1),
@@ -101,6 +102,11 @@ return ReactModule.memo(function(p1)
 				[ReactModule.Event.InputBegan] = UseLongPressModuleResult[ReactModule.Event.InputBegan],
 				[ReactModule.Event.InputEnded] = UseLongPressModuleResult[ReactModule.Event.InputEnded]
 			}) else nil
+		}) else Element
+	else
+		return ReactModule.createElement(StopCountdownButtonModule, {
+			countdownProgress = p1.countdownProgress,
+			onActivated = OnStopFunction
 		})
 	end
 end)

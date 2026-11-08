@@ -1,17 +1,16 @@
-﻿local TextService = game:GetService("TextService")
-local FriendsChat = script:FindFirstAncestor("FriendsChat")
+﻿local FriendsChat = script:FindFirstAncestor("FriendsChat")
 local Parent = FriendsChat.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local GetTextBoundsAsyncFunction = FoundationModule.Utility.getTextBoundsAsync
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local GetMessageTextSizeFunction = require(Parent.ChatUIPrimitives).Utils.getMessageTextSize
 local UseFinishChatWindowMessageRenderIntervalsFunction = require(Parent.ChatUIPrimitives).Hooks.useFinishChatWindowMessageRenderIntervals
 local _ = require(script.Parent.MessageDisplayStore.useMessageDisplayStore)
 local FFlagFriendsChatMessageSendPerfTrackingModule = require(FriendsChat.Flags.FFlagFriendsChatMessageSendPerfTracking)
+local FFlagFriendsChatLazyMountMessageSkeletonModule = require(FriendsChat.Flags.FFlagFriendsChatLazyMountMessageSkeleton)
 
 local function _(p1: number, p2): number
 	return p1 + p2 * (1 - p1)
@@ -21,12 +20,15 @@ local _ = function(p1): boolean
 	return p1 ~= nil and p1.displayStyle == "system"
 end
 
+local _ = function(p1): boolean
+	return p1 ~= nil and (p1.skeletonWidth == "prefix" or p1.skeletonWidth == "full")
+end
+
 return ReactModule.memo(function(p1)
-	-- upvalues: FoundationModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), GetMessageTextSizeFunction (copy), ReactModule (copy), SignalsModule (copy), SignalsReactModule (copy), FFlagFriendsChatMessageSendPerfTrackingModule (copy), UseFinishChatWindowMessageRenderIntervalsFunction (copy), GetTextBoundsAsyncFunction (copy), TextService (copy)
+	-- upvalues: FoundationModule (copy), NormalizeFontFaceFunction (copy), GetMessageTextSizeFunction (copy), ReactModule (copy), SignalsModule (copy), SignalsReactModule (copy), FFlagFriendsChatMessageSendPerfTrackingModule (copy), UseFinishChatWindowMessageRenderIntervalsFunction (copy), GetTextBoundsAsyncFunction (copy), FFlagFriendsChatLazyMountMessageSkeletonModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local ChatWindowSettings = p1.chatWindowSettings
-	local FontFace = (if ChatWindowSettings then ChatWindowSettings.FontFace else nil) or UseTokensResult.Typography.BodySmall.Font
-	local NormalizeFontFaceResult = if FoundationFontFaceMigration then NormalizeFontFaceFunction(FontFace) elseif typeof(FontFace) == "Font" then FontFace else Font.fromEnum(FontFace)
+	local NormalizeFontFaceResult = NormalizeFontFaceFunction((if ChatWindowSettings then ChatWindowSettings.FontFace else nil) or UseTokensResult.Typography.BodySmall.Font)
 	local _Font = Font.new(NormalizeFontFaceResult.Family, Enum.FontWeight.SemiBold, NormalizeFontFaceResult.Style)
 	local MessageTextSize = GetMessageTextSizeFunction(ChatWindowSettings, p1.isSpatialUIEnabled) or UseTokensResult.Typography.BodySmall.FontSize
 	local Largest = math.max(1, MessageTextSize - 2)
@@ -42,7 +44,7 @@ return ReactModule.memo(function(p1)
 		-- upvalues: Largest (copy), Localize (copy)
 		return { systemTextSize = Largest, localize = Localize }
 	end, { Largest, Localize })
-	local UseSignalBindingResult = SignalsReactModule.useSignalBinding((ReactModule.useMemo(function()
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), GetDisplayFromIdFunction (copy), GetDisplayIdFunction (copy), UseMemoResult (copy)
 		return SignalsModule.createComputed(function(p2)
 			-- upvalues: GetDisplayFromIdFunction (upval), GetDisplayIdFunction (upval), UseMemoResult (upval)
@@ -52,7 +54,8 @@ return ReactModule.memo(function(p1)
 		GetDisplayIdFunction,
 		GetDisplayFromIdFunction,
 		UseMemoResult
-	})))
+	})
+	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(UseMemoResult1)
 	local UseSignalBindingResult1 = SignalsReactModule.useSignalBinding(p1.getLayoutOrder)
 	local GetMessageIdFromDisplayIdFunction = p1.getMessageIdFromDisplayId
 	local UseFinishChatWindowMessageRenderIntervalsResult = UseFinishChatWindowMessageRenderIntervalsFunction((ReactModule.useCallback(function()
@@ -75,45 +78,26 @@ return ReactModule.memo(function(p1)
 			UseFinishChatWindowMessageRenderIntervalsResult()
 		end
 	end, { UseFinishChatWindowMessageRenderIntervalsResult })
-	local UseMemoResult1 = ReactModule.useMemo(function(): UDim2
+	local UseMemoResult2 = ReactModule.useMemo(function(): UDim2
 		-- upvalues: MessageTextSize (copy)
 		return UDim2.fromOffset(math.floor(MessageTextSize * 3 / 2), MessageTextSize)
 	end, { MessageTextSize })
-	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UseMemoResult1)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UseMemoResult2)
 	ReactModule.useEffect(function()
-		-- upvalues: UseBindingResult2 (copy), UseMemoResult1 (copy)
-		UseBindingResult2(UseMemoResult1)
-	end, { UseMemoResult1 })
+		-- upvalues: UseBindingResult2 (copy), UseMemoResult2 (copy)
+		UseBindingResult2(UseMemoResult2)
+	end, { UseMemoResult2 })
 	ReactModule.useEffect(function()
-		-- upvalues: FoundationFontFaceMigration (upval), GetTextBoundsAsyncFunction (upval), NormalizeFontFaceResult (copy), MessageTextSize (copy), UseBindingResult2 (copy), TextService (upval)
+		-- upvalues: GetTextBoundsAsyncFunction (upval), NormalizeFontFaceResult (copy), MessageTextSize (copy), UseBindingResult2 (copy)
 		local Flag = false
 		task.spawn(function()
-			-- upvalues: FoundationFontFaceMigration (upval), GetTextBoundsAsyncFunction (upval), NormalizeFontFaceResult (upval), MessageTextSize (upval), Flag (ref), UseBindingResult2 (upval), TextService (upval)
-			if FoundationFontFaceMigration then
-				local Vector = GetTextBoundsAsyncFunction("          ", NormalizeFontFaceResult, MessageTextSize)
+			-- upvalues: GetTextBoundsAsyncFunction (upval), NormalizeFontFaceResult (upval), MessageTextSize (upval), Flag (ref), UseBindingResult2 (upval)
+			local Vector = GetTextBoundsAsyncFunction("          ", NormalizeFontFaceResult, MessageTextSize)
+			
+			if not Flag and Vector ~= nil then
+				UseBindingResult2(UDim2.fromOffset(Vector.X, Vector.Y))
 				
-				if not Flag and Vector ~= nil then
-					UseBindingResult2(UDim2.fromOffset(Vector.X, Vector.Y))
-					
-					return
-				end
 				return
-			else
-				local GetTextBoundsParams = Instance.new("GetTextBoundsParams")
-				GetTextBoundsParams.Text = "          "
-				GetTextBoundsParams.Font = NormalizeFontFaceResult
-				GetTextBoundsParams.Size = MessageTextSize
-				GetTextBoundsParams.Width = 1e999
-				local Success, Result = pcall(function()
-					-- upvalues: TextService (upval), GetTextBoundsParams (copy)
-					return TextService:GetTextBoundsAsync(GetTextBoundsParams)
-				end)
-				
-				if not Flag and Success and Result ~= nil then
-					UseBindingResult2(UDim2.fromOffset(Result.X, Result.Y))
-					
-					return
-				end
 			end
 		end)
 		
@@ -142,6 +126,35 @@ return ReactModule.memo(function(p1)
 		-- upvalues: TextStrokeTransparency (copy)
 		return TextStrokeTransparency + p2 * (1 - TextStrokeTransparency)
 	end)
+	local MapResult2 = ReactModule.joinBindings({
+		display = UseSignalBindingResult,
+		textTransparency = TextTransparency
+	}):map(function(p2): boolean
+		if p2.textTransparency >= 0.9 then
+			return false
+		else
+			local Display = p2.display
+			
+			return Display ~= nil and (Display.skeletonWidth == "prefix" or Display.skeletonWidth == "full")
+		end
+	end)
+	local MapResult3 = ReactModule.joinBindings({
+		display = UseSignalBindingResult,
+		placeholder = UseBindingResult
+	}):map(function(p2)
+		local Display = p2.display
+		
+		return if Display == nil or Display.skeletonWidth ~= "full" then p2.placeholder else UDim2.new(1, 0, 0, p2.placeholder.Y.Offset)
+	end)
+	local NoFFlagFriendsChatLazyMountMessageSkeletonModule = not FFlagFriendsChatLazyMountMessageSkeletonModule or SignalsReactModule.useSignalState((ReactModule.useMemo(function()
+		-- upvalues: SignalsModule (upval), UseMemoResult1 (copy)
+		return SignalsModule.createComputed(function(p2): boolean
+			-- upvalues: UseMemoResult1 (upval)
+			local UseMemoResultResult = UseMemoResult1(p2)
+			
+			return UseMemoResultResult ~= nil and (UseMemoResultResult.skeletonWidth == "prefix" or UseMemoResultResult.skeletonWidth == "full")
+		end)
+	end, { UseMemoResult1 })))
 	
 	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -185,29 +198,11 @@ return ReactModule.memo(function(p1)
 				Transparency = MapResult1
 			})
 		}),
-		skeleton = ReactModule.createElement(FoundationModule.Skeleton, {
-			Size = ReactModule.joinBindings({
-				display = UseSignalBindingResult,
-				placeholder = UseBindingResult
-			}):map(function(p2)
-				local Display = p2.display
-				
-				return if Display == nil or Display.skeletonWidth ~= "full" then p2.placeholder else UDim2.new(1, 0, 0, p2.placeholder.Y.Offset)
-			end),
+		skeleton = if NoFFlagFriendsChatLazyMountMessageSkeletonModule then ReactModule.createElement(FoundationModule.Skeleton, {
+			Size = MapResult3,
 			Position = UDim2.fromOffset(0, 0),
 			AnchorPoint = Vector2.new(0, 0),
-			Visible = ReactModule.joinBindings({
-				display = UseSignalBindingResult,
-				textTransparency = TextTransparency
-			}):map(function(p2): boolean
-				if p2.textTransparency >= 0.9 then
-					return false
-				else
-					local Display = p2.display
-					
-					return Display ~= nil and (Display.skeletonWidth == "prefix" or Display.skeletonWidth == "full")
-				end
-			end)
-		})
+			Visible = MapResult2
+		}) else nil
 	})
 end)

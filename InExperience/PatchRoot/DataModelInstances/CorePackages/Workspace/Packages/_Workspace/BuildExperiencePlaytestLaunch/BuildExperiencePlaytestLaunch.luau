@@ -1,4 +1,7 @@
 ﻿return {
+	canViewBuild = require(script.canViewBuild),
+	goToBuild = require(script.goToBuild),
+	openDeepLink = require(script.openDeepLink),
 	teamCreateUtils = require(script.teamCreateUtils),
 	BuildModeLaunch = require(script.BuildModeLaunch),
 	GetPlaytestLoadingStore = require(script.GetPlaytestLoadingStore),

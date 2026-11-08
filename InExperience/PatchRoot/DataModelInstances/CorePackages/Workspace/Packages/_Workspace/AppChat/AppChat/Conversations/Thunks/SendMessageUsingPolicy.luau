@@ -1,6 +1,7 @@
 ﻿local AppChat = script:FindFirstAncestor("AppChat")
 local Parent = AppChat.Parent
 local RequestTimeDiag = require(Parent.Analytics).RequestTimeDiag
+local FFlagDisableLegacyReportToDiagModule = require(Parent.SharedFlags.FFlagDisableLegacyReportToDiag)
 local ConstantsModule = require(AppChat.Constants)
 local PromiseModule = require(Parent.Promise)
 local StatusCodes = require(Parent.Http).StatusCodes
@@ -27,8 +28,8 @@ local function invokeSendMessage(p1, p2)
 end
 
 return function(p1, _)
-	-- upvalues: RequestTimeDiag (copy), ConstantsModule (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), invokeSendMessage (copy), StatusCodes (copy), ResponseStatus (copy), PromiseModule (copy)
-	local NewResult = RequestTimeDiag:new(ConstantsModule.PerformanceMeasurement.LUA_CHAT_SEND_MESSAGE)
+	-- upvalues: FFlagDisableLegacyReportToDiagModule (copy), RequestTimeDiag (copy), ConstantsModule (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), invokeSendMessage (copy), StatusCodes (copy), ResponseStatus (copy), PromiseModule (copy)
+	local NewResult = if FFlagDisableLegacyReportToDiagModule then nil else RequestTimeDiag:new(ConstantsModule.PerformanceMeasurement.LUA_CHAT_SEND_MESSAGE)
 	
 	return function(p2)
 		-- upvalues: p1 (copy), FFlagAppChatPerfTrackingModule (upval), FFlagAppChatMessageTTIMilestonesModule (upval), AppChatPerfTrackerModule (upval), invokeSendMessage (upval), NewResult (copy), StatusCodes (upval), ResponseStatus (upval), PromiseModule (upval)
@@ -42,8 +43,9 @@ return function(p1, _)
 		end
 		return invokeSendMessage(p1, p2):andThen(function(Result)
 			-- upvalues: NewResult (upval), StatusCodes (upval), ResponseStatus (upval), PromiseModule (upval)
-			NewResult:report()
-			
+			if NewResult then
+				NewResult:report()
+			end
 			return if Result and Result.responseBody and Result.responseCode == StatusCodes.OK and Result.responseBody.messages and #Result.responseBody.messages ~= 0 and (not Result.responseBody.messages[1].status or Result.responseBody.messages[1].status == "" or Result.responseBody.messages[1].status == ResponseStatus.SUCCESS) then Result else PromiseModule.reject(Result)
 		end):andThen(function(Result)
 			-- upvalues: p1 (upval), p2 (copy)

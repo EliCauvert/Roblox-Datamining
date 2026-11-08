@@ -6,6 +6,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local SharedFlagsModule = require(Parent.SharedFlags)
 local AbuseVectorModule = require(Parent.GenericAbuseReporting.AbuseVector)
 local FFlagLuaAppEnableGamePassFreeTrialsModule = require(InExperienceShop.Flags.FFlagLuaAppEnableGamePassFreeTrials)
+local FFlagEnableGamePassTrialUnifiedLoggingModule = require(InExperienceShop.Flags.FFlagEnableGamePassTrialUnifiedLogging)
 local InitiateShopItemPurchaseModule = require(InExperienceShop.initiateShopItemPurchase)
 local FFlagCategoryLoggingInShopPurchaseModule = require(InExperienceShop.Flags.FFlagCategoryLoggingInShopPurchase)
 local FormatUpdatedDateModule = require(InExperienceShop.Utils.formatUpdatedDate)
@@ -34,7 +35,7 @@ local function _(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), config (copy), SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), ReactModule (copy), findSectionForItem (copy), ShopPageType (copy), InitiateShopItemPurchaseModule (copy), UseGamePassTrialRedemptionModule (copy), SharedFlagsModule (copy), AbuseVectorModule (copy), UseShopReportOverflowModule (copy), FormatUpdatedDateModule (copy), ConstantsModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), config (copy), SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), ReactModule (copy), findSectionForItem (copy), ShopPageType (copy), FFlagEnableGamePassTrialUnifiedLoggingModule (copy), InitiateShopItemPurchaseModule (copy), UseGamePassTrialRedemptionModule (copy), InExperienceShop (copy), SharedFlagsModule (copy), AbuseVectorModule (copy), UseShopReportOverflowModule (copy), FormatUpdatedDateModule (copy), ConstantsModule (copy)
 	local Item = p1.item
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetInExperienceShopStoreModule)
@@ -65,7 +66,7 @@ return function(p1)
 	})
 	local IsOwned = if UseSignalStateResult2 == nil then Item.isOwned else UseSignalStateResult2
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: FFlagCategoryLoggingInShopPurchaseModule (upval), UseSignalStateResult1 (ref), findSectionForItem (upval), Item (copy), ShopPageType (upval)
+		-- upvalues: FFlagCategoryLoggingInShopPurchaseModule (upval), UseSignalStateResult1 (ref), findSectionForItem (upval), Item (copy), ShopPageType (upval), FFlagEnableGamePassTrialUnifiedLoggingModule (upval), UseSignalStateResult3 (copy), IsOwned (copy)
 		local CategoryLocation = nil
 		
 		if FFlagCategoryLoggingInShopPurchaseModule and UseSignalStateResult1 ~= nil then
@@ -82,9 +83,16 @@ return function(p1)
 		end
 		return {
 			shopPageType = if ShopPageType then ShopPageType.Category else nil,
-			categoryLocation = CategoryLocation
+			categoryLocation = CategoryLocation,
+			trialStatus = if FFlagEnableGamePassTrialUnifiedLoggingModule and Item.itemType == "GamePass" then if UseSignalStateResult3 and IsOwned ~= true then "available" else "unavailable" else nil
 		}
-	end, { Item.id, Item.itemType, UseSignalStateResult1 })
+	end, {
+		Item.id,
+		Item.itemType,
+		UseSignalStateResult1,
+		if FFlagEnableGamePassTrialUnifiedLoggingModule then UseSignalStateResult3 else nil,
+		if FFlagEnableGamePassTrialUnifiedLoggingModule then IsOwned else nil
+	})
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseMemoResult (copy), InitiateShopItemPurchaseModule (upval), Item (copy)
 		local CategoryLocation = UseMemoResult.categoryLocation
@@ -98,6 +106,33 @@ return function(p1)
 		end
 	end, { Item.id, Item.itemType, UseMemoResult })
 	local UseGamePassTrialRedemptionModuleResult = UseGamePassTrialRedemptionModule(Item.id, UseMemoResult)
+	
+	if FFlagEnableGamePassTrialUnifiedLoggingModule then
+		local UseRefResult = ReactModule.useRef(nil)
+		ReactModule.useEffect(function()
+			-- upvalues: Item (copy), UseSignalStateResult3 (copy), UseSignalStateResult2 (copy), UseRefResult (copy), InExperienceShop (upval), UseMemoResult (copy)
+			if Item.itemType ~= "GamePass" or not UseSignalStateResult3 or UseSignalStateResult2 ~= false then return end
+			if UseRefResult.current ~= Item.id then
+				UseRefResult.current = Item.id
+				local SendGamePassTrialUnifiedEventModule = require(InExperienceShop.Analytics.sendGamePassTrialUnifiedEvent)
+				SendGamePassTrialUnifiedEventModule.send({
+					action = SendGamePassTrialUnifiedEventModule.impressionAction,
+					elementName = SendGamePassTrialUnifiedEventModule.trialElement,
+					itemId = Item.id,
+					shopPageType = UseMemoResult.shopPageType,
+					trialStatus = UseMemoResult.trialStatus
+				})
+				
+				return
+			end
+		end, {
+			Item.id,
+			Item.itemType,
+			UseSignalStateResult3,
+			UseSignalStateResult2,
+			UseMemoResult
+		})
+	end
 	local UseShopReportOverflowResult = UseShopReportOverflowModule.useShopReportOverflow({
 		isReportingEnabled = SharedFlagsModule.FFlagEnableReportingFlowForExperienceShop,
 		buildReportSession = ReactModule.useCallback(function()

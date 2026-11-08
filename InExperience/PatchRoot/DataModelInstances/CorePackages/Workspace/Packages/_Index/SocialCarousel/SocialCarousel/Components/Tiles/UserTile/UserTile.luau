@@ -13,6 +13,8 @@ local MarqueePlayStatus = require(SocialCarousel.Common.Enums).MarqueePlayStatus
 local FFlagFriendsCarouselProfileFrameEnabledModule = require(SocialCarousel.Flags.FFlagFriendsCarouselProfileFrameEnabled)
 local FFlagSocialCarouselShowPlusBadgeModule = require(SocialCarousel.Flags.FFlagSocialCarouselShowPlusBadge)
 local FFlagSocialCarouselInGameTitleMarquee = require(Parent.SharedFlags).FFlagSocialCarouselInGameTitleMarquee
+local FFlagShowRequestsInCarouselForAllUsers = require(Parent.SharedFlags).FFlagShowRequestsInCarouselForAllUsers
+local FFlagSocialCarouselBuildPresence = require(Parent.SharedFlags).FFlagSocialCarouselBuildPresence
 local MarqueeTextModule = if FFlagSocialCarouselInGameTitleMarquee then require(SocialCarousel.Components.MarqueeText.MarqueeText) else nil
 
 local function UserTileMarqueeListener(p1)
@@ -92,7 +94,7 @@ local function UserTileMarqueeListener(p1)
 end
 
 return function(p2)
-	-- upvalues: UseTokensFunction (copy), FoundationModule (copy), ConvertToFoundationPresenceEnumFunction (copy), FFlagSocialCarouselInGameTitleMarquee (copy), PresenceTypes (copy), MarqueeTextModule (ref), ReactModule (copy), MarqueePlayStatus (copy), View (copy), UserTileMarqueeListener (copy), UserTile (copy), LayoutMode (copy), FFlagFriendsCarouselProfileFrameEnabledModule (copy), FFlagSocialCarouselShowPlusBadgeModule (copy)
+	-- upvalues: UseTokensFunction (copy), FoundationModule (copy), ConvertToFoundationPresenceEnumFunction (copy), FFlagSocialCarouselInGameTitleMarquee (copy), PresenceTypes (copy), MarqueeTextModule (ref), ReactModule (copy), MarqueePlayStatus (copy), View (copy), UserTileMarqueeListener (copy), UserTile (copy), LayoutMode (copy), FFlagSocialCarouselBuildPresence (copy), FFlagShowRequestsInCarouselForAllUsers (copy), FFlagFriendsCarouselProfileFrameEnabledModule (copy), FFlagSocialCarouselShowPlusBadgeModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local None = if p2.item.presence == nil then FoundationModule.Enums.UserPresence.None else FoundationModule.Enums.UserPresence[ConvertToFoundationPresenceEnumFunction(p2.item.presence.userPresenceType)]
 	local ContextualText = p2.contextualText
@@ -110,6 +112,7 @@ return function(p2)
 				fontStyle = UseTokensResult.Typography.LabelSmall,
 				maxLoops = if OnMarqueeFinishedFunction == nil then nil else 1,
 				runId = p2.marqueeRunId,
+				holdForNextLoop = OnMarqueeFinishedFunction ~= nil,
 				requiresOverflow = p2.onManualMarqueeStart ~= nil,
 				onFinished = if OnMarqueeFinishedFunction == nil then nil else function()
 					-- upvalues: OnMarqueeFinishedFunction (copy), p2 (copy)
@@ -139,9 +142,13 @@ return function(p2)
 			subtitle = ContextualText,
 			titleStyle = UseTokensResult.Typography.TitleSmall,
 			subtitleStyle = UseTokensResult.Typography.LabelSmall,
+			contextualInfo = if FFlagSocialCarouselBuildPresence then p2.contextualInfo else nil,
+			contextualInfoIcon = if FFlagSocialCarouselBuildPresence then p2.contextualInfoIcon else nil,
+			contextualInfoStyle = if FFlagSocialCarouselBuildPresence then UseTokensResult.Typography.LabelSmall else nil,
 			userPresenceType = None,
 			onActivated = p2.onActivated,
 			titleIcon = p2.titleIcon,
+			overlayIcon = if FFlagShowRequestsInCarouselForAllUsers then p2.overlayIcon else nil,
 			includeProfileFrame = FFlagFriendsCarouselProfileFrameEnabledModule,
 			isRobloxSubscriber = if FFlagSocialCarouselShowPlusBadgeModule then p2.isRobloxSubscriber else nil
 		})

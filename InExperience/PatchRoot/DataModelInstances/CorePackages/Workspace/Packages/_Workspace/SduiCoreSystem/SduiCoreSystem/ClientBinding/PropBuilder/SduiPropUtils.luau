@@ -1,5 +1,6 @@
 ﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
 local Parent = SduiCoreSystem.Parent
+local FFlagSduiErrorPaths = require(Parent.SharedFlags).FFlagSduiErrorPaths
 local _ = require(Parent.ServiceContractsProto)
 local SignalsModule = require(Parent.Signals)
 local CryoModule = require(Parent.Cryo)
@@ -10,6 +11,7 @@ local SplitDottedPathModule = require(SduiCoreSystem.ClientBinding.splitDottedPa
 local BuildDataBindingSourcesForTemplateModule = require(SduiCoreSystem.ClientBinding.buildDataBindingSourcesForTemplate)
 local SduiDataBindingContentTypeModule = require(SduiCoreSystem.ClientBinding.SduiDataBindingContentType)
 local SduiErrorsModule = require(SduiCoreSystem.SduiErrors)
+local AddSduiErrorContextFieldsModule = require(SduiCoreSystem.addSduiErrorContextFields)
 local SduiLoggerModule = require(SduiCoreSystem.SduiLogger)
 local _ = require(SduiCoreSystem.SduiBuilderTypes)
 local GetSduiTokensStoreModule = require(SduiCoreSystem.ClientBinding.getSduiTokensStore)
@@ -74,7 +76,7 @@ local function generateStaticPropValue(p4, Callback)
 end
 
 local function generateDynamicBindingPropValue(Value, p4, p5, p6, p7, p8)
-	-- upvalues: SplitDottedPathModule (copy), SignalsModule (copy), resolveBindingPathValue (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), SduiParseHelpersModule (copy), Frozen (copy), TutilsModule (copy)
+	-- upvalues: SplitDottedPathModule (copy), SignalsModule (copy), resolveBindingPathValue (copy), SduiParseHelpersModule (copy), FFlagSduiErrorPaths (copy), AddSduiErrorContextFieldsModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), Frozen (copy), TutilsModule (copy)
 	local CurrentComponentType = p5.currentComponentType
 	local CurrentParserName = p5.currentParserName
 	local SplitDottedPathModuleResult = SplitDottedPathModule(Value)
@@ -83,7 +85,7 @@ local function generateDynamicBindingPropValue(Value, p4, p5, p6, p7, p8)
 		error(`Invalid bindingPath: {Value}`)
 	end
 	return SignalsModule.createComputed(function(p9)
-		-- upvalues: resolveBindingPathValue (upval), SplitDottedPathModuleResult (copy), p4 (copy), p6 (copy), p7 (copy), p8 (copy), p5 (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), Value (copy), SduiParseHelpersModule (upval), CurrentComponentType (copy), CurrentParserName (copy), Frozen (upval)
+		-- upvalues: resolveBindingPathValue (upval), SplitDottedPathModuleResult (copy), p4 (copy), p6 (copy), p7 (copy), p8 (copy), p5 (copy), Value (copy), SduiParseHelpersModule (upval), CurrentComponentType (copy), CurrentParserName (copy), FFlagSduiErrorPaths (upval), AddSduiErrorContextFieldsModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval), Frozen (upval)
 		local Success, Result, Result3 = pcall(function()
 			-- upvalues: resolveBindingPathValue (upval), p9 (copy), SplitDottedPathModuleResult (upval), p4 (upval), p6 (upval), p7 (upval), p8 (upval), p5 (upval)
 			local ResolveBindingPathValueResult, ResolveBindingPathValueResult2 = resolveBindingPathValue(p9, SplitDottedPathModuleResult, p4, p6, p7, p8, p5)
@@ -93,47 +95,57 @@ local function generateDynamicBindingPropValue(Value, p4, p5, p6, p7, p8)
 		
 		if Success then
 			return { data = Result, status = Result3 }
-		else
-			SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToComputeDynamicBinding, {
-				value = Value,
-				message = SduiParseHelpersModule.stringifyValue(Result),
-				name = p5.debugName,
-				componentType = CurrentComponentType,
-				parserName = CurrentParserName
-			}, p5.appPage)
-			
-			return Frozen
 		end
+		local config = {
+			value = Value,
+			message = SduiParseHelpersModule.stringifyValue(Result),
+			name = p5.debugName,
+			componentType = CurrentComponentType,
+			parserName = CurrentParserName
+		}
+		
+		if FFlagSduiErrorPaths then
+			AddSduiErrorContextFieldsModule(config, p5.errorContext)
+		end
+		SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToComputeDynamicBinding, config, p5.appPage)
+		
+		return Frozen
 	end, TutilsModule.shallowEqual)
 end
 
 local function generateTokenBindingPropValue(p4, p5, Callback)
-	-- upvalues: SplitDottedPathModule (copy), SignalsModule (copy), GetSduiTokensStoreModule (copy), TryGetPathFromDataModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), Frozen (copy), DataStatus (copy), TutilsModule (copy)
+	-- upvalues: SplitDottedPathModule (copy), SignalsModule (copy), GetSduiTokensStoreModule (copy), TryGetPathFromDataModule (copy), FFlagSduiErrorPaths (copy), AddSduiErrorContextFieldsModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), Frozen (copy), DataStatus (copy), TutilsModule (copy)
 	local CurrentComponentType = p5.currentComponentType
 	local CurrentParserName = p5.currentParserName
 	local SplitDottedPathModuleResult = SplitDottedPathModule(p4)
 	
 	return SignalsModule.createComputed(function(p6)
-		-- upvalues: GetSduiTokensStoreModule (upval), p5 (copy), TryGetPathFromDataModule (upval), SplitDottedPathModuleResult (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), CurrentComponentType (copy), CurrentParserName (copy), Frozen (upval), Callback (copy), DataStatus (upval)
+		-- upvalues: GetSduiTokensStoreModule (upval), p5 (copy), TryGetPathFromDataModule (upval), SplitDottedPathModuleResult (copy), CurrentComponentType (copy), CurrentParserName (copy), FFlagSduiErrorPaths (upval), AddSduiErrorContextFieldsModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval), Frozen (upval), Callback (copy), DataStatus (upval)
 		local TryGetPathFromDataModuleResult, TryGetPathFromDataModuleResult2 = TryGetPathFromDataModule(GetSduiTokensStoreModule().getTokens(p6, p5.appPage), SplitDottedPathModuleResult)
 		
-		if not TryGetPathFromDataModuleResult then
-			SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.TokenBindingFailed, {
+		if TryGetPathFromDataModuleResult then
+			if Callback then
+				TryGetPathFromDataModuleResult2 = Callback(TryGetPathFromDataModuleResult2)
+			end
+			return {
+				data = TryGetPathFromDataModuleResult2,
+				status = DataStatus.Ready
+			}
+		else
+			local config = {
 				message = `Could not find token with tokenPath {table.concat(SplitDottedPathModuleResult, ".")}`,
 				name = p5.debugName,
 				componentType = CurrentComponentType,
 				parserName = CurrentParserName
-			}, p5.appPage)
+			}
+			
+			if FFlagSduiErrorPaths then
+				AddSduiErrorContextFieldsModule(config, p5.errorContext)
+			end
+			SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.TokenBindingFailed, config, p5.appPage)
 			
 			return Frozen
 		end
-		if Callback then
-			TryGetPathFromDataModuleResult2 = Callback(TryGetPathFromDataModuleResult2)
-		end
-		return {
-			data = TryGetPathFromDataModuleResult2,
-			status = DataStatus.Ready
-		}
 	end, TutilsModule.shallowEqual)
 end
 
@@ -145,7 +157,7 @@ local function _(Text: string, Text1, p4): string
 end
 
 local function generateFormatStringPropValue(p4, p5, p6, p7, Callback)
-	-- upvalues: ApplyFormatArgFormatterFunction (copy), Frozen (copy), generateDynamicBindingPropValue (copy), SignalsModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), TutilsModule (copy)
+	-- upvalues: FFlagSduiErrorPaths (copy), ApplyFormatArgFormatterFunction (copy), Frozen (copy), generateDynamicBindingPropValue (copy), SignalsModule (copy), AddSduiErrorContextFieldsModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), TutilsModule (copy)
 	local CurrentComponentType = p6.currentComponentType
 	local CurrentParserName = p6.currentParserName
 	
@@ -155,7 +167,7 @@ local function generateFormatStringPropValue(p4, p5, p6, p7, Callback)
 	local Str = p4.str
 	
 	if (not Str or Str == "") and p4.translation then
-		Str = p6.resolveLocalizedLiteral(p4.translation)
+		Str = p6.resolveLocalizedLiteral(p4.translation, if FFlagSduiErrorPaths then p6.errorContext else nil)
 	end
 	if not Str or Str == "" then
 		error("No format string for prop")
@@ -172,7 +184,7 @@ local function generateFormatStringPropValue(p4, p5, p6, p7, Callback)
 		
 		if Type == "literal" then
 			if arg.formatter then
-				local ApplyFormatArgFormatterResult = ApplyFormatArgFormatterFunction(Value, arg.formatter, p6.appPage)
+				local ApplyFormatArgFormatterResult = ApplyFormatArgFormatterFunction(Value, arg.formatter, p6.appPage, if FFlagSduiErrorPaths then p6.errorContext else nil)
 				
 				if ApplyFormatArgFormatterResult == nil then
 					return function()
@@ -202,7 +214,7 @@ local function generateFormatStringPropValue(p4, p5, p6, p7, Callback)
 		end
 	end
 	return SignalsModule.createComputed(function(p8)
-		-- upvalues: Str (ref), t (copy), Formatters (copy), ApplyFormatArgFormatterFunction (upval), p6 (copy), Frozen (upval), Callback (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), CurrentComponentType (copy), CurrentParserName (copy)
+		-- upvalues: Str (ref), t (copy), Formatters (copy), ApplyFormatArgFormatterFunction (upval), p6 (copy), FFlagSduiErrorPaths (upval), Frozen (upval), Callback (copy), CurrentComponentType (copy), CurrentParserName (copy), AddSduiErrorContextFieldsModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval)
 		local Text = Str
 		local Status = nil
 		
@@ -217,7 +229,7 @@ local function generateFormatStringPropValue(p4, p5, p6, p7, Callback)
 			local Formatter = if Formatters then Formatters[i] else nil
 			
 			if Formatter then
-				local ApplyFormatArgFormatterResult = ApplyFormatArgFormatterFunction(Data, Formatter, p6.appPage)
+				local ApplyFormatArgFormatterResult = ApplyFormatArgFormatterFunction(Data, Formatter, p6.appPage, if FFlagSduiErrorPaths then p6.errorContext else nil)
 				
 				if ApplyFormatArgFormatterResult == nil then
 					return Frozen
@@ -249,17 +261,21 @@ local function generateFormatStringPropValue(p4, p5, p6, p7, Callback)
 		
 		if Success then
 			return { data = Result }
-		else
-			SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, {
-				value = Text,
-				message = `Parser in formatString for str {Str}`,
-				name = p6.debugName,
-				componentType = CurrentComponentType,
-				parserName = CurrentParserName
-			}, p6.appPage)
-			
-			return Frozen
 		end
+		local config = {
+			value = Text,
+			message = `Parser in formatString for str {Str}`,
+			name = p6.debugName,
+			componentType = CurrentComponentType,
+			parserName = CurrentParserName
+		}
+		
+		if FFlagSduiErrorPaths then
+			AddSduiErrorContextFieldsModule(config, p6.errorContext)
+		end
+		SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, config, p6.appPage)
+		
+		return Frozen
 	end, TutilsModule.shallowEqual)
 end
 
@@ -499,8 +515,8 @@ local function evaluateCondition(p9, Condition, p10, p11, p12)
 			-- upvalues: resolveBindingPathValue (upval), p9 (copy), SplitDottedPathModuleResult4 (copy), p10 (copy), p12 (copy), p11 (copy)
 			return resolveBindingPathValue(p9, SplitDottedPathModuleResult4, p10, p12, nil, true, p11)
 		end)
-		local Ready2 = nil
 		local v4 = nil
+		local Ready2 = nil
 		
 		if Success4 then
 			v4 = Result7
@@ -589,13 +605,13 @@ return {
 	generateTokenBindingPropValue = generateTokenBindingPropValue,
 	generateFormatStringPropValue = generateFormatStringPropValue,
 	generateConditionalPropValue = function(p20, p21, p22, p23, p24, Callback, p25, IsNestedComponentConfig)
-		-- upvalues: SignalsModule (copy), selectConditionalOption (copy), PropResultCategory (copy), DataStatus (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), SduiParseHelpersModule (copy), Frozen (copy), TutilsModule (copy)
+		-- upvalues: SignalsModule (copy), selectConditionalOption (copy), PropResultCategory (copy), DataStatus (copy), SduiParseHelpersModule (copy), FFlagSduiErrorPaths (copy), AddSduiErrorContextFieldsModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), Frozen (copy), TutilsModule (copy)
 		local CurrentComponentType = p22.currentComponentType
 		local CurrentParserName = p22.currentParserName
 		local Options = p20.options
 		
 		return SignalsModule.createComputed(function(p26)
-			-- upvalues: selectConditionalOption (upval), Options (copy), p21 (copy), p22 (copy), p24 (copy), Callback (copy), p23 (copy), p25 (copy), PropResultCategory (upval), DataStatus (upval), IsNestedComponentConfig (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), SduiParseHelpersModule (upval), CurrentComponentType (copy), CurrentParserName (copy), Frozen (upval)
+			-- upvalues: selectConditionalOption (upval), Options (copy), p21 (copy), p22 (copy), p24 (copy), Callback (copy), p23 (copy), p25 (copy), PropResultCategory (upval), DataStatus (upval), IsNestedComponentConfig (copy), SduiParseHelpersModule (upval), CurrentComponentType (copy), CurrentParserName (copy), FFlagSduiErrorPaths (upval), AddSduiErrorContextFieldsModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval), Frozen (upval)
 			local Success, Result, Result3 = pcall(function()
 				-- upvalues: selectConditionalOption (upval), p26 (copy), Options (upval), p21 (upval), p22 (upval), p24 (upval), Callback (upval), p23 (upval), p25 (upval), PropResultCategory (upval), DataStatus (upval)
 				local SelectConditionalOptionResult, SelectConditionalOptionResult2 = selectConditionalOption(p26, Options, p21, p22, p24)
@@ -622,26 +638,30 @@ return {
 					status = Result3,
 					isNestedComponentConfig = IsNestedComponentConfig
 				}
-			else
-				SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToEvaluateConditionalProp, {
-					message = SduiParseHelpersModule.stringifyValue(Result),
-					name = p22.debugName,
-					componentType = CurrentComponentType,
-					parserName = CurrentParserName
-				}, p22.appPage)
-				
-				return Frozen
 			end
+			local config = {
+				message = SduiParseHelpersModule.stringifyValue(Result),
+				name = p22.debugName,
+				componentType = CurrentComponentType,
+				parserName = CurrentParserName
+			}
+			
+			if FFlagSduiErrorPaths then
+				AddSduiErrorContextFieldsModule(config, p22.errorContext)
+			end
+			SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToEvaluateConditionalProp, config, p22.appPage)
+			
+			return Frozen
 		end, TutilsModule.shallowEqual)
 	end,
 	generateTablePropSignalValue = function(p20, p21, p22, p23, p24, Callback, Callback1)
-		-- upvalues: SignalsModule (copy), resolveTablePropValue (copy), SduiParseHelpersModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), Frozen (copy), TutilsModule (copy)
+		-- upvalues: SignalsModule (copy), resolveTablePropValue (copy), SduiParseHelpersModule (copy), FFlagSduiErrorPaths (copy), AddSduiErrorContextFieldsModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), Frozen (copy), TutilsModule (copy)
 		local CurrentComponentType = p22.currentComponentType
 		local CurrentParserName = p22.currentParserName
 		local CallbackResult, CallbackResult2, CallbackResult3 = Callback(p20, p21, p24, p22, p23)
 		
 		return SignalsModule.createComputed(function(p25)
-			-- upvalues: resolveTablePropValue (upval), CallbackResult (copy), CallbackResult2 (copy), CallbackResult3 (copy), p21 (copy), p22 (copy), p23 (copy), p24 (copy), Callback (copy), Callback1 (copy), SduiParseHelpersModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval), CurrentComponentType (copy), CurrentParserName (copy), Frozen (upval)
+			-- upvalues: resolveTablePropValue (upval), CallbackResult (copy), CallbackResult2 (copy), CallbackResult3 (copy), p21 (copy), p22 (copy), p23 (copy), p24 (copy), Callback (copy), Callback1 (copy), SduiParseHelpersModule (upval), CurrentComponentType (copy), CurrentParserName (copy), FFlagSduiErrorPaths (upval), AddSduiErrorContextFieldsModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval), Frozen (upval)
 			local Success, Result, Result3 = pcall(function()
 				-- upvalues: resolveTablePropValue (upval), p25 (copy), CallbackResult (upval), CallbackResult2 (upval), CallbackResult3 (upval), p21 (upval), p22 (upval), p23 (upval), p24 (upval), Callback (upval)
 				local ResolveTablePropValueResult, ResolveTablePropValueResult2 = resolveTablePropValue(p25, CallbackResult, CallbackResult2, CallbackResult3, p21, p22, p23, p24, Callback)
@@ -649,36 +669,48 @@ return {
 				return ResolveTablePropValueResult, ResolveTablePropValueResult2
 			end)
 			
-			if not Success then
-				SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, {
+			if Success then
+				if Callback1 and Result ~= nil then
+					local Success1, Result1 = pcall(function()
+						-- upvalues: Callback1 (upval), Result (ref)
+						return Callback1(Result)
+					end)
+					
+					if Success1 then
+						Result = Result1
+					else
+						local config1 = {
+							value = SduiParseHelpersModule.stringifyValue(Result),
+							message = `Failed to apply propParser to table prop {SduiParseHelpersModule.stringifyValue(Result1)}`,
+							name = p22.debugName,
+							componentType = CurrentComponentType,
+							parserName = CurrentParserName
+						}
+						
+						if FFlagSduiErrorPaths then
+							AddSduiErrorContextFieldsModule(config1, p22.errorContext)
+						end
+						SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, config1, p22.appPage)
+						
+						return Frozen
+					end
+				end
+				return { data = Result, status = Result3 }
+			else
+				local config = {
 					message = SduiParseHelpersModule.stringifyValue(Result),
 					name = p22.debugName,
 					componentType = CurrentComponentType,
 					parserName = CurrentParserName
-				}, p22.appPage)
+				}
+				
+				if FFlagSduiErrorPaths then
+					AddSduiErrorContextFieldsModule(config, p22.errorContext)
+				end
+				SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, config, p22.appPage)
 				
 				return Frozen
 			end
-			if Callback1 and Result ~= nil then
-				local Success1, Result1 = pcall(function()
-					-- upvalues: Callback1 (upval), Result (ref)
-					return Callback1(Result)
-				end)
-				
-				if not Success1 then
-					SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, {
-						value = SduiParseHelpersModule.stringifyValue(Result),
-						message = `Failed to apply propParser to table prop {SduiParseHelpersModule.stringifyValue(Result1)}`,
-						name = p22.debugName,
-						componentType = CurrentComponentType,
-						parserName = CurrentParserName
-					}, p22.appPage)
-					
-					return Frozen
-				end
-				Result = Result1
-			end
-			return { data = Result, status = Result3 }
 		end, TutilsModule.shallowEqual)
 	end,
 	selectConditionalOption = selectConditionalOption,
@@ -703,18 +735,18 @@ return {
 		for _, value in List do
 			local DataBindingSourcesForTemplateModule = BuildDataBindingSourcesForTemplateModule(value, p20)
 			
-			local function v162()
+			local function v170()
 				-- upvalues: DataBindingSourcesForTemplateModule (copy)
 				return DataBindingSourcesForTemplateModule
 			end
 			
-			local function v163()
+			local function v171()
 				-- upvalues: value (copy)
 				return value
 			end
 			
-			local CallbackResult, CallbackResult2 = Callback(p21, v162, v163, p22, p23)
-			table.insert(List1, (resolveTablePropValue(p24, CallbackResult, CallbackResult2, nil, v162, p22, p23, v163, nil)))
+			local CallbackResult, CallbackResult2 = Callback(p21, v170, v171, p22, p23)
+			table.insert(List1, (resolveTablePropValue(p24, CallbackResult, CallbackResult2, nil, v170, p22, p23, v171, nil)))
 		end
 		return List1
 	end,

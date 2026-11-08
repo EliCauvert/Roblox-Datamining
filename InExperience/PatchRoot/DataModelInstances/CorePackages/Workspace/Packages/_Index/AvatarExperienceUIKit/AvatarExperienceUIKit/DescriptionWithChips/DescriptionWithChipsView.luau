@@ -9,41 +9,23 @@ local Icon = FoundationModule.Icon
 local IconName = FoundationModule.Enums.IconName
 local IconSize = FoundationModule.Enums.IconSize
 local Skeleton = FoundationModule.Skeleton
-local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NumberSequence1 = NumberSequence.new(1, 0)
-local Selection = { Selectable = false }
 local StateLayer = {
 	affordance = FoundationModule.Enums.StateLayerAffordance.None
 }
-local _Vector2 = Vector2.new(0.5, 0)
-
-local function getChevronGeometry(p1)
-	return {
-		hitPosition = UDim2.fromOffset(0, -p1.Size.Size_600),
-		hitSize = UDim2.new(1, 0, 0, p1.Size.Size_900),
-		iconPosition = UDim2.fromScale(0.5, 0)
-	}
-end
+local _Vector2 = Vector2.new(0.5, 0.5)
+local _UDim2 = UDim2.fromScale(0.5, 0.5)
 
 return ReactModule.forwardRef(function(Frame: Frame, Ref)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), getChevronGeometry (copy), View (copy), DescriptionTextBlockModule (copy), Skeleton (copy), IconName (copy), DescriptionCollapseFrameModule (copy), NumberSequence1 (copy), Selection (copy), StateLayer (copy), Icon (copy), _Vector2 (copy), IconSize (copy)
-	local UseTokensResult = UseTokensFunction()
-	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: getChevronGeometry (upval), UseTokensResult (copy)
-		return (getChevronGeometry(UseTokensResult))
-	end, { UseTokensResult })
+	-- upvalues: ReactModule (copy), View (copy), DescriptionTextBlockModule (copy), Skeleton (copy), IconName (copy), DescriptionCollapseFrameModule (copy), NumberSequence1 (copy), StateLayer (copy), Icon (copy), _Vector2 (copy), _UDim2 (copy), IconSize (copy)
 	local PaddingTop = Frame.paddingTop
-	local UseMemoResult1 = ReactModule.useMemo(function()
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: PaddingTop (copy)
 		return { top = UDim.new(0, PaddingTop) }
 	end, { PaddingTop })
 	local CanExpand = Frame.canExpand
-	local UseMemoResult2 = ReactModule.useMemo(function()
-		-- upvalues: CanExpand (copy)
-		return { Selectable = CanExpand }
-	end, { CanExpand })
 	local FadeColor = Frame.fadeColor
-	local UseMemoResult3 = ReactModule.useMemo(function()
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: FadeColor (copy)
 		return { Transparency = 0, Color3 = FadeColor }
 	end, { FadeColor })
@@ -54,7 +36,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref)
 	end, { OnContentHeightChangedFunction })
 	local Blocks = Frame.blocks
 	local RenderLinkFunction = Frame.renderLink
-	local UseMemoResult4 = ReactModule.useMemo(function()
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: Blocks (copy), ReactModule (upval), View (upval), RenderLinkFunction (copy), DescriptionTextBlockModule (upval)
 		local Elements = {}
 		
@@ -72,7 +54,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref)
 		return ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y",
 			testId = "--item-description-loading",
-			padding = UseMemoResult1,
+			padding = UseMemoResult,
 			LayoutOrder = Frame.LayoutOrder,
 			ref = Ref
 		}, {
@@ -87,10 +69,9 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref)
 		return ReactModule.createElement(View, {
 			tag = "col gap-small size-full-0 auto-y",
 			testId = "--item-description",
-			padding = UseMemoResult1,
-			selection = UseMemoResult2,
+			padding = UseMemoResult,
 			LayoutOrder = Frame.LayoutOrder,
-			ref = Ref
+			ref = if CanExpand then nil else Ref
 		}, {
 			Expandable = ReactModule.createElement(DescriptionCollapseFrameModule, {
 				LayoutOrder = 1,
@@ -101,38 +82,31 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref)
 				Content = ReactModule.createElement(View, {
 					tag = "col gap-small size-full-0 auto-y",
 					onAbsoluteSizeChanged = UseResult
-				}, UseMemoResult4),
+				}, UseMemoResult2),
 				Fade = if NoIsExpanded then ReactModule.createElement(View, {
 					tag = "position-bottom-left anchor-bottom-left size-full-800",
 					ZIndex = 2,
 					testId = "--item-description-fade",
-					backgroundStyle = UseMemoResult3
+					backgroundStyle = UseMemoResult1
 				}, {
 					Gradient = ReactModule.createElement("UIGradient", { Rotation = 90, Transparency = NumberSequence1 })
 				}) else nil
 			}),
-			ChevronRow = if CanExpand then ReactModule.createElement(View, {
-				tag = "size-full-250",
+			Chevron = if CanExpand then ReactModule.createElement(View, {
+				tag = "size-full-900",
 				LayoutOrder = 2,
-				ZIndex = 0,
-				testId = "--item-description-expand-row"
+				testId = "--item-description-expand",
+				onActivated = Frame.onToggleExpanded,
+				stateLayer = StateLayer,
+				ref = Ref
 			}, {
-				Chevron = ReactModule.createElement(View, {
-					testId = "--item-description-expand",
-					Position = UseMemoResult.hitPosition,
-					Size = UseMemoResult.hitSize,
-					onActivated = Frame.onToggleExpanded,
-					selection = Selection,
-					stateLayer = StateLayer
-				}, {
-					Arrow = ReactModule.createElement(Icon, {
-						testId = "--item-description-expand-icon",
-						AnchorPoint = _Vector2,
-						Position = UseMemoResult.iconPosition,
-						name = ChevronLargeUp,
-						size = IconSize.Large,
-						style = Frame.chevronStyle
-					})
+				Arrow = ReactModule.createElement(Icon, {
+					testId = "--item-description-expand-icon",
+					AnchorPoint = _Vector2,
+					Position = _UDim2,
+					name = ChevronLargeUp,
+					size = IconSize.Large,
+					style = Frame.chevronStyle
 				})
 			}) else nil
 		})

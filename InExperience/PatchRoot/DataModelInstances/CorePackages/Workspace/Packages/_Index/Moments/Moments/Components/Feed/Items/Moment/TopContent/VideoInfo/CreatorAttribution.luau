@@ -6,6 +6,9 @@ local _ = require(Parent.ReactFocusNavigation)
 local SignalsReactModule = require(Parent.SignalsReact)
 local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 local InputHandlersModule = require(Parent.InputHandlers)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagSocialFollowAttribution = SharedFlagsModule.FFlagSocialFollowAttribution
+local FollowAttributionModule = if FFlagSocialFollowAttribution then require(Parent.SocialCommon.FollowAttribution) else nil
 local Analytics = require(Parent.MomentsCommon).Analytics
 local FireAnalyticsEventFunction = Analytics.fireAnalyticsEvent
 local EventNames = Analytics.EventNames
@@ -31,7 +34,7 @@ local UseFocusRootFunction = FocusNavigationUtilsModule.useFocusRoot
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseUsernameModule = require(Moments.Hooks.useUsername)
 local UseCreatorVerifiedModule = require(Moments.Hooks.useCreatorVerified)
-local FFlagMomentsCreatorFollow = require(Parent.SharedFlags).FFlagMomentsCreatorFollow
+local FFlagMomentsCreatorFollow = SharedFlagsModule.FFlagMomentsCreatorFollow
 local FFlagMomentsFlushDwellBeforeNavigationModule = require(Moments.Flags.FFlagMomentsFlushDwellBeforeNavigation)
 local NavigationDestinationTypeModule = require(Moments.Enums.NavigationDestinationType)
 local FFlagMomentsNavigationEventModule = require(Moments.Flags.FFlagMomentsNavigationEvent)
@@ -173,7 +176,7 @@ local function UnfollowConfirmationDialog(p1)
 end
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: UseTokensFunction (copy), MomentContextModule (copy), FFlagMomentsCreatorFollow (copy), UseLocalizationFunction (copy), config1 (copy), ReactModule (copy), FollowingStore (copy), SignalsReactModule (copy), ReactOtterModule (copy), UseUsernameModule (copy), UseCreatorVerifiedModule (copy), UseMomentsHostFunction (copy), FFlagMomentsFlushDwellBeforeNavigationModule (copy), FeedContextModule (copy), MakeFeedActionFieldsModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), FFlagMomentsNavigationEventModule (copy), NavigationDestinationTypeModule (copy), Character (copy), MomentsCreatorFollow (ref), Parent (copy), GetToastStoreModule (copy), SignalActionTypeModule (copy), FollowingUpdateErrorTypeEnum (copy), View (copy), StateLayerAffordance (copy), ControlState (copy), ImageWithSkeletonModule (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), Radius (copy), GetColorStyleWithTransparencyModule (copy), config (copy), Text (copy), Skeleton (copy), _Vector2 (copy), GetLocalUserIdModule (copy), Loading (copy), IconSize (copy), UnfollowConfirmationDialog (copy)
+	-- upvalues: UseTokensFunction (copy), MomentContextModule (copy), FFlagMomentsCreatorFollow (copy), UseLocalizationFunction (copy), config1 (copy), ReactModule (copy), FollowingStore (copy), SignalsReactModule (copy), ReactOtterModule (copy), UseUsernameModule (copy), UseCreatorVerifiedModule (copy), UseMomentsHostFunction (copy), FFlagMomentsFlushDwellBeforeNavigationModule (copy), FeedContextModule (copy), MakeFeedActionFieldsModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), FFlagMomentsNavigationEventModule (copy), NavigationDestinationTypeModule (copy), Character (copy), MomentsCreatorFollow (ref), Parent (copy), GetToastStoreModule (copy), FFlagSocialFollowAttribution (copy), FollowAttributionModule (copy), SignalActionTypeModule (copy), FollowingUpdateErrorTypeEnum (copy), View (copy), StateLayerAffordance (copy), ControlState (copy), ImageWithSkeletonModule (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), Radius (copy), GetColorStyleWithTransparencyModule (copy), config (copy), Text (copy), Skeleton (copy), _Vector2 (copy), GetLocalUserIdModule (copy), Loading (copy), IconSize (copy), UnfollowConfirmationDialog (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseMomentResult = MomentContextModule.useMoment()
 	local Data = UseMomentResult.store.getData(false)
@@ -183,8 +186,8 @@ return ReactModule.memo(function(Frame)
 	local v2 = nil
 	local v3 = nil
 	local v4 = nil
-	local Callback = nil
 	local Callback1 = nil
+	local Callback = nil
 	local Callback2 = nil
 	local UseRefResult = nil
 	
@@ -196,8 +199,8 @@ return ReactModule.memo(function(Frame)
 		end, { Data.creatorId })
 		IsUseSignalStateResult = SignalsReactModule.useSignalState(UseMemoResult.data) == true
 		IsNotReady = SignalsReactModule.useSignalState(UseMemoResult.status) == "NotReady"
-		v2, Callback = ReactModule.useState(false)
-		v4, Callback1 = ReactModule.useState(nil)
+		v2, Callback1 = ReactModule.useState(false)
+		v4, Callback = ReactModule.useState(nil)
 		v3, Callback2 = ReactModule.useState(false)
 		UseRefResult = ReactModule.useRef(false)
 	end
@@ -243,12 +246,12 @@ return ReactModule.memo(function(Frame)
 	local Size800 = UseTokensResult.Size.Size_800
 	local Text1 = if UseUsernameModuleResult and UseCreatorVerifiedModuleResult then `{UseUsernameModuleResult} {Character}` else UseUsernameModuleResult
 	local UseResult1 = if FFlagMomentsCreatorFollow then ReactModule.useCallback(function(p1)
-		-- upvalues: UseRefResult (ref), v1 (ref), Callback1 (ref), Callback (ref), MomentsCreatorFollow (upval), Parent (upval), Data (copy), FollowingStore (upval), GetToastStoreModule (upval), UseFeedOptionalResult (ref), SignalActionTypeModule (upval), FollowingUpdateErrorTypeEnum (upval)
+		-- upvalues: UseRefResult (ref), v1 (ref), Callback (ref), Callback1 (ref), MomentsCreatorFollow (upval), Parent (upval), Data (copy), FollowingStore (upval), GetToastStoreModule (upval), FFlagSocialFollowAttribution (upval), FollowAttributionModule (upval), UseFeedOptionalResult (ref), SignalActionTypeModule (upval), FollowingUpdateErrorTypeEnum (upval)
 		if UseRefResult.current then return end
 		local v5 = v1
 		UseRefResult.current = true
-		Callback1(p1)
-		Callback(true)
+		Callback(p1)
+		Callback1(true)
 		
 		if MomentsCreatorFollow == nil then
 			MomentsCreatorFollow = require(Parent.Loggers).Logger:new("Moments.CreatorFollow")
@@ -306,10 +309,17 @@ return ReactModule.memo(function(Frame)
 		
 		if Success then
 			return Result:andThen(function()
-				-- upvalues: UseRefResult (upval), Callback1 (upval), Callback (upval), Data (upval), UseFeedOptionalResult (upval), p1 (copy), SignalActionTypeModule (upval), MomentsCreatorFollow (upval), Parent (upval), v5 (copy), GetToastStoreModule (upval)
+				-- upvalues: UseRefResult (upval), Callback (upval), Callback1 (upval), FFlagSocialFollowAttribution (upval), p1 (copy), FollowAttributionModule (upval), Data (upval), UseFeedOptionalResult (upval), SignalActionTypeModule (upval), MomentsCreatorFollow (upval), Parent (upval), v5 (copy), GetToastStoreModule (upval)
 				UseRefResult.current = false
-				Callback1(nil)
-				Callback(false)
+				Callback(nil)
+				Callback1(false)
+				
+				if FFlagSocialFollowAttribution and p1 then
+					FollowAttributionModule.reportFollowSuccess({
+						surface = FollowAttributionModule.Surface.Moments,
+						source = FollowAttributionModule.Source.MomentsFeed
+					})
+				end
 				local FeedItemId = Data.feedItemId
 				
 				if UseFeedOptionalResult ~= nil and FeedItemId ~= nil and FeedItemId ~= "" then
@@ -334,10 +344,10 @@ return ReactModule.memo(function(Frame)
 					title = if p1 then v5.followed else v5.unfollowed
 				})
 			end, function(p2)
-				-- upvalues: UseRefResult (upval), Callback1 (upval), Callback (upval), MomentsCreatorFollow (upval), Parent (upval), Data (upval), FollowingUpdateErrorTypeEnum (upval), v5 (copy), GetToastStoreModule (upval)
+				-- upvalues: UseRefResult (upval), Callback (upval), Callback1 (upval), MomentsCreatorFollow (upval), Parent (upval), Data (upval), FollowingUpdateErrorTypeEnum (upval), v5 (copy), GetToastStoreModule (upval)
 				UseRefResult.current = false
-				Callback1(nil)
-				Callback(false)
+				Callback(nil)
+				Callback1(false)
 				local Text: string = if type(p2) == "table" and p2.errorType ~= nil then tostring(p2.errorType) else "Unknown"
 				local Text1: string = if type(p2) == "table" and p2.responseCode ~= nil then tostring(p2.responseCode) else "Unknown"
 				
@@ -352,8 +362,8 @@ return ReactModule.memo(function(Frame)
 			end)
 		end
 		UseRefResult.current = false
-		Callback1(nil)
-		Callback(false)
+		Callback(nil)
+		Callback1(false)
 		
 		if MomentsCreatorFollow == nil then
 			MomentsCreatorFollow = require(Parent.Loggers).Logger:new("Moments.CreatorFollow")

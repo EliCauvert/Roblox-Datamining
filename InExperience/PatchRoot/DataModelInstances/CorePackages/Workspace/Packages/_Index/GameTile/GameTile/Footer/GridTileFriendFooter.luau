@@ -11,29 +11,58 @@ local UseTextSizeOffsetFunction = UIBloxModule.Core.Style.useTextSizeOffset
 local CoPlayFooter = UIBloxModule.App.Tile.ExperienceTileMetadata.CoPlayFooter
 local UserProfilesModule = require(Parent.UserProfiles)
 local UseUserProfilesFetchFunction = UserProfilesModule.Hooks.useUserProfilesFetch
+local DataHydrationModule = require(Parent.DataHydration)
+local GetAndFetchUserNamesByUserIdsFunction = DataHydrationModule.UserProfile.getAndFetchUserNamesByUserIds
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local SortFriendsByPresenceAndRecencyFactoryModule = require(GameTile.sortFriendsByPresenceAndRecencyFactory)
 local FFlagLuaAppMigrateGameTileActiveFriendsHydrationFix = require(Parent.SharedFlags).FFlagLuaAppMigrateGameTileActiveFriendsHydrationFix
+local FFlagHomeFriendNamesUseUserProfileHydration = require(Parent.SharedFlags).FFlagHomeFriendNamesUseUserProfileHydration
 
-local function useFetchSortedDisplayNames(UserIds)
-	-- upvalues: UseUserProfilesFetchFunction (copy), UserProfilesModule (copy), SortFriendsByPresenceAndRecencyFactoryModule (copy)
-	local List = {}
-	local UseUserProfilesFetchResult = UseUserProfilesFetchFunction({
-		userIds = UserIds,
-		query = UserProfilesModule.Queries.userProfilesCombinedNameByUserIds,
-		skip = not UserIds or #UserIds == 0
-	})
+local function useFetchSortedDisplayNames(List)
+	-- upvalues: FFlagHomeFriendNamesUseUserProfileHydration (copy), ReactModule (copy), GetAndFetchUserNamesByUserIdsFunction (copy), UseSignalStateFunction (copy), DataHydrationModule (copy), SortFriendsByPresenceAndRecencyFactoryModule (copy), UseUserProfilesFetchFunction (copy), UserProfilesModule (copy)
+	local List1 = {}
 	
-	if UseUserProfilesFetchResult and UseUserProfilesFetchResult.data and UserIds then
-		for _, userId in UserIds do
-			table.insert(List, {
-				userId = userId,
-				displayName = UserProfilesModule.Selectors.getCombinedNameFromId(UseUserProfilesFetchResult.data, userId)
-			})
+	if FFlagHomeFriendNamesUseUserProfileHydration then
+		local Joined = table.concat(List, ",")
+		local UseSignalStateResult = UseSignalStateFunction((ReactModule.useMemo(function()
+			-- upvalues: GetAndFetchUserNamesByUserIdsFunction (upval), Joined (copy)
+			return GetAndFetchUserNamesByUserIdsFunction(string.split(Joined, ","))
+		end, { Joined })))
+		
+		if UseSignalStateResult.status ~= DataHydrationModule.DataStatus.NotReady then
+			for _, UserId in List do
+				local NamesByUserIdEntry = UseSignalStateResult.namesByUserId[UserId]
+				
+				if NamesByUserIdEntry then
+					table.insert(List1, {
+						userId = UserId,
+						displayName = NamesByUserIdEntry.combinedName
+					})
+				end
+			end
 		end
+		table.sort(List1, SortFriendsByPresenceAndRecencyFactoryModule("displayName"))
+		
+		return List1
+	else
+		local UseUserProfilesFetchResult = UseUserProfilesFetchFunction({
+			userIds = List,
+			query = UserProfilesModule.Queries.userProfilesCombinedNameByUserIds,
+			skip = not List or #List == 0
+		})
+		
+		if UseUserProfilesFetchResult and UseUserProfilesFetchResult.data and List then
+			for _, UserId1 in List do
+				table.insert(List1, {
+					userId = UserId1,
+					displayName = UserProfilesModule.Selectors.getCombinedNameFromId(UseUserProfilesFetchResult.data, UserId1)
+				})
+			end
+		end
+		table.sort(List1, SortFriendsByPresenceAndRecencyFactoryModule("displayName"))
+		
+		return List1
 	end
-	table.sort(List, SortFriendsByPresenceAndRecencyFactoryModule("displayName"))
-	
-	return List
 end
 
 return {
@@ -52,7 +81,7 @@ return {
 		end
 		if FFlagLuaAppMigrateGameTileActiveFriendsHydrationFix then
 			local UseFetchSortedDisplayNamesResult = useFetchSortedDisplayNames(p1.friendUserIds or {})
-			local CreateElementFunction2 = ReactModule.createElement
+			local CreateElementFunction1 = ReactModule.createElement
 			local v1 = "TextButton"
 			local config = {
 				Size = UDim2.new(1, 0, 0, Size.Size_500 + UseTextSizeOffsetResult),
@@ -90,7 +119,7 @@ return {
 			}
 			t.OnlineFriends = CreateElementFunction(CoPlayFooter, config1)
 			
-			return (CreateElementFunction2(v1, config, t))
+			return (CreateElementFunction1(v1, config, t))
 		else
 			local CreateElementFunction3 = ReactModule.createElement
 			local v2 = "Frame"
@@ -99,7 +128,7 @@ return {
 				Size = UDim2.new(1, 0, 0, Size.Size_500 + UseTextSizeOffsetResult)
 			}
 			local t1 = {}
-			local CreateElementFunction1 = ReactModule.createElement
+			local CreateElementFunction2 = ReactModule.createElement
 			local config3 = { faceGroupCount = 2 }
 			local Friends = p1.friends or {}
 			local Users1 = {}
@@ -125,7 +154,7 @@ return {
 				badgeBackgroundColor = { Transparency = 0, Color = Colors.Smoke },
 				badgeContentColor = { Transparency = 0, Color = Colors.White }
 			}
-			t1.OnlineFriends = CreateElementFunction1(CoPlayFooter, config3)
+			t1.OnlineFriends = CreateElementFunction2(CoPlayFooter, config3)
 			
 			return CreateElementFunction3(v2, config2, t1)
 		end

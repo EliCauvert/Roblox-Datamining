@@ -6,5 +6,7 @@
 	ModalEventConstants = require(script.Analytics.ModalEventConstants),
 	PushUpsellEventConfig = require(script.Analytics.RobloxTelemetryConfigs.PushUpsellEventName),
 	requestPushNotificationPermission = require(script.requestPushNotificationPermission),
-	NativePushNotificationPermissionPrompt = require(script.NativePushNotificationPermissionPrompt)
+	NativePushNotificationPermissionPrompt = require(script.NativePushNotificationPermissionPrompt),
+	PushPermissionClientAttributes = require(script.PushPermissionClientAttributes.buildPushPermissionClientAttributes),
+	usePushPermissionClientAttributes = require(script.PushPermissionClientAttributes.usePushPermissionClientAttributes)
 }

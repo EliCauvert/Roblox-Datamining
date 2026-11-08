@@ -1,10 +1,11 @@
 ﻿local Parent = script:FindFirstAncestor("SocialServerDrivenUi").Parent
 local _ = require(Parent.PYMKCarousel)
 local ContextType = require(Parent.DataHydration.FriendsRecommendations).Enums.ContextType
-local RecommendationType = require(Parent.HomeStore).FriendRecommendations.RecommendationType
+local FFlagShowClassmatesOnPYMKModule = require(Parent.SharedFlags.FFlagShowClassmatesOnPYMK)
+local RecommendationType = require(Parent.RecommendationsStore).FriendRecommendations.RecommendationType
 
 return function(List, p1)
-	-- upvalues: RecommendationType (copy), ContextType (copy)
+	-- upvalues: RecommendationType (copy), ContextType (copy), FFlagShowClassmatesOnPYMKModule (copy)
 	local List1 = {}
 	
 	for _, value in List do
@@ -16,7 +17,7 @@ return function(List, p1)
 				table.insert(List1, {
 					id = value.id,
 					rank = value.rank,
-					contextType = if v1.contextType == ContextType.MutualFriends and MutualFriendsCount > 0 then ContextType.MutualFriends elseif v1.contextType == ContextType.Frequents then ContextType.Frequents else ContextType.None,
+					contextType = if v1.contextType == ContextType.MutualFriends and MutualFriendsCount > 0 then ContextType.MutualFriends elseif v1.contextType == ContextType.Frequents then ContextType.Frequents elseif FFlagShowClassmatesOnPYMKModule and v1.contextType == ContextType.Classmates then ContextType.Classmates else ContextType.None,
 					mutualFriendsCount = MutualFriendsCount,
 					hasIncomingFriendRequest = value.hasPendingFriendRequest
 				})

@@ -1,5 +1,6 @@
 ﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
 local Parent = ServerDrivenUi.Parent
+local FFlagSduiErrorPaths = require(Parent.SharedFlags).FFlagSduiErrorPaths
 local ReactModule = require(Parent.React)
 local _ = require(Parent.AppCommonLib)
 local CryoModule = require(Parent.Cryo)
@@ -26,6 +27,7 @@ local ReportUnifiedLoggingImpressionsFunction = SduiCoreSystemModule.reportUnifi
 local SduiBuilder = SduiCoreSystemModule.SduiBuilder
 local SduiCollectionAnalyticsBuilder = SduiCoreSystemModule.SduiCollectionAnalyticsBuilder
 local SduiErrors = SduiCoreSystemModule.SduiErrors
+local AddSduiErrorContextFieldsFunction = SduiCoreSystemModule.addSduiErrorContextFields
 local SduiCollectionItemModule = require(ServerDrivenUi.Content.Collections.SduiCollectionItem)
 local SduiParseHelpers = SduiCoreSystemModule.SduiParseHelpers
 local GetSduiComponentWrapperFunction = SduiCoreSystemModule.getSduiComponentWrapper
@@ -45,7 +47,7 @@ local FFlagSduiPreferredTextSizeLineBudgets = SharedFlagsModule.FFlagSduiPreferr
 local t = {}
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FFlagLuaAppCompositionAlways (copy), FFlagLuaAppSduiVideoThumbnail (copy), ReactModule (copy), CryoModule (copy), FFlagLuaAppLayoutParamsInContext (copy), SignalsReactModule (copy), UseCollectionLayoutParamsFunction (copy), CollectionItemSize (copy), FindAnalyticsFieldFunction (copy), t (copy), SduiBuilder (copy), UseCollectionAnalyticsContextFunction (copy), UseCollectionImpressionsSignalFunction (copy), FFlagSduiCarouselUseNestedImpressionsFeedContext (copy), GetImpressionsTagModule (copy), SduiParseHelpers (copy), SduiErrors (copy), ReportUnifiedLoggingImpressionsFunction (copy), SendLegacyGameImpressionsForSduiModule (copy), UseTokensFunction (copy), FFlagSduiPreferredTextSizeLineBudgets (copy), UsePreferredTextSizeLineBudgetFunction (copy), ItemHeightModeModule (copy), UseUniformItemHeightModule (copy), SduiCollectionAnalyticsBuilder (copy), GetSduiComponentWrapperFunction (copy), SduiCollectionItemModule (copy), HoverTileCoordinator (copy), UseScrollTelemetryCallbackModule (copy), CollectionCarousel (copy), SduiFeedContext (copy), WaitForPropWrapper (copy), FFlagLuaAppUseFrameBoundsImpressions (copy), FrameBoundsImpressionsTracker (copy), FFlagLuaAppRespectClipAncestorImpressions (copy), ScreenSizeImpressionsTracker (copy), ScrollDetector (copy)
+	-- upvalues: FFlagLuaAppCompositionAlways (copy), FFlagLuaAppSduiVideoThumbnail (copy), ReactModule (copy), CryoModule (copy), FFlagLuaAppLayoutParamsInContext (copy), SignalsReactModule (copy), UseCollectionLayoutParamsFunction (copy), CollectionItemSize (copy), FindAnalyticsFieldFunction (copy), t (copy), SduiBuilder (copy), UseCollectionAnalyticsContextFunction (copy), UseCollectionImpressionsSignalFunction (copy), FFlagSduiCarouselUseNestedImpressionsFeedContext (copy), GetImpressionsTagModule (copy), SduiParseHelpers (copy), SduiErrors (copy), ReportUnifiedLoggingImpressionsFunction (copy), SendLegacyGameImpressionsForSduiModule (copy), UseTokensFunction (copy), FFlagSduiPreferredTextSizeLineBudgets (copy), UsePreferredTextSizeLineBudgetFunction (copy), ItemHeightModeModule (copy), UseUniformItemHeightModule (copy), FFlagSduiErrorPaths (copy), AddSduiErrorContextFieldsFunction (copy), SduiCollectionAnalyticsBuilder (copy), GetSduiComponentWrapperFunction (copy), SduiCollectionItemModule (copy), HoverTileCoordinator (copy), UseScrollTelemetryCallbackModule (copy), CollectionCarousel (copy), SduiFeedContext (copy), WaitForPropWrapper (copy), FFlagLuaAppUseFrameBoundsImpressions (copy), FrameBoundsImpressionsTracker (copy), FFlagLuaAppRespectClipAncestorImpressions (copy), ScreenSizeImpressionsTracker (copy), ScrollDetector (copy)
 	local FFlagLuaAppCompositionAlways1 = FFlagLuaAppCompositionAlways or (p1.appCompositionEnabled or p1.sduiContext.appCompositionEnabled)
 	local LayoutOrder = p1.layoutOrder
 	local SduiContext = p1.sduiContext
@@ -196,7 +198,7 @@ return ReactModule.memo(function(p1)
 		}),
 		items = UseMemoResult,
 		renderItem = ReactModule.useCallback(function(ComponentConfig, Index, Size, _)
-			-- upvalues: SduiContext (copy), SduiErrors (upval), ImpressionsTagModule (copy), ReactModule (upval), FindAnalyticsFieldFunction (upval), t (upval), SduiBuilder (upval), UseRefResult1 (copy), SduiCollectionAnalyticsBuilder (upval), GetSduiComponentWrapperFunction (upval), UseCollectionAnalyticsContextResult (copy), p1 (copy), IsItemHeightModeMatch (copy), HasMeasuredMaxHeight (copy), SduiCollectionItemModule (upval), v1 (copy), OnItemSizeChanged (copy), UseUniformItemHeightModuleResult (copy)
+			-- upvalues: SduiContext (copy), SduiErrors (upval), ImpressionsTagModule (copy), ReactModule (upval), FindAnalyticsFieldFunction (upval), t (upval), SduiBuilder (upval), FFlagSduiErrorPaths (upval), AddSduiErrorContextFieldsFunction (upval), UseRefResult1 (copy), SduiCollectionAnalyticsBuilder (upval), GetSduiComponentWrapperFunction (upval), UseCollectionAnalyticsContextResult (copy), p1 (copy), IsItemHeightModeMatch (copy), HasMeasuredMaxHeight (copy), SduiCollectionItemModule (upval), v1 (copy), OnItemSizeChanged (copy), UseUniformItemHeightModuleResult (copy)
 			if not ComponentConfig then
 				SduiContext.dependencies.logger.reportError(SduiErrors.SduiErrorType.NilItem, {
 					componentType = "CollectionCarousel",
@@ -214,7 +216,7 @@ return ReactModule.memo(function(p1)
 					itemComponentType = ComponentType,
 					componentType = ComponentType
 				}
-				UseRefResult1.current[Index] = SduiCollectionAnalyticsBuilder.buildAndValidateItemAnalyticsData(SduiContext, ComponentConfig.analyticsData, nil, LocalAnalyticsData, ComponentType)
+				UseRefResult1.current[Index] = SduiCollectionAnalyticsBuilder.buildAndValidateItemAnalyticsData(SduiContext, ComponentConfig.analyticsData, nil, LocalAnalyticsData, ComponentType, nil, if FFlagSduiErrorPaths then ComponentConfig.errorContext else nil)
 				
 				return ReactModule.createElement(SduiCollectionItemModule, {
 					index = Index,
@@ -239,15 +241,19 @@ return ReactModule.memo(function(p1)
 						localAnalyticsData = LocalAnalyticsData
 					})
 				}), ComponentType or "unknown"
-			else
-				SduiContext.dependencies.logger.reportError(SduiErrors.SduiErrorType.NilComponentType, {
-					componentType = "CollectionCarousel",
-					name = ImpressionsTagModule,
-					message = `Nil componentType in CollectionCarousel.renderItem at index {Index}`
-				}, SduiContext.appPage)
-				
-				return ReactModule.createElement(ReactModule.Fragment), "nil"
 			end
+			local config = {
+				componentType = "CollectionCarousel",
+				name = ImpressionsTagModule,
+				message = `Nil componentType in CollectionCarousel.renderItem at index {Index}`
+			}
+			
+			if FFlagSduiErrorPaths then
+				AddSduiErrorContextFieldsFunction(config, ComponentConfig.errorContext)
+			end
+			SduiContext.dependencies.logger.reportError(SduiErrors.SduiErrorType.NilComponentType, config, SduiContext.appPage)
+			
+			return ReactModule.createElement(ReactModule.Fragment), "nil"
 		end, {
 			SduiContext, p1.analyticsContext, p1.scrollViewPositionChangedSignal,
 			p1.verticalScrollingFrameRef, UseCollectionAnalyticsContextResult, v1,

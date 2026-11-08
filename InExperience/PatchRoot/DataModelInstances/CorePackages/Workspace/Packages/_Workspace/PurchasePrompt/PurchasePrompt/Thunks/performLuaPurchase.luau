@@ -197,7 +197,7 @@ return function()
 			
 			return PerformVIPServerPurchaseModule(v1, ProductPayload.universeId, config2):andThen(function(Result)
 				-- upvalues: config2 (copy), p1 (copy), VIPServerCreatedModule (upval), CompletePurchaseModule (upval), PromiseModule (upval)
-				p1:dispatch(VIPServerCreatedModule(Result.vipServerId, if type(Result.name) == "string" then Result.name else config2.name))
+				p1:dispatch(VIPServerCreatedModule(Result.vipServerId, if type(Result.name) == "string" then Result.name else config2.name, if type(Result.accessCode) == "string" then Result.accessCode else nil))
 				p1:dispatch(CompletePurchaseModule(Result))
 				
 				return PromiseModule.resolve(Result)

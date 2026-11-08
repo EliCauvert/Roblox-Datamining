@@ -8,7 +8,6 @@ local FoundationModule = require(Parent2.Foundation)
 local IconSize = FoundationModule.Enums.IconSize
 local Loading = FoundationModule.Loading
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local WithStyleFunction = require(Parent2.UIBlox).Core.Style.withStyle
 local MultiTextLocalizerModule = require(Parent1.Locale.MultiTextLocalizer)
 local LoadingOverlayStateModule = require(Parent.LoadingOverlayState)
@@ -60,13 +59,13 @@ function ExtendResult.render(p1)
 end
 
 function ExtendResult.renderAlert(p1, p2)
-	-- upvalues: LoadingOverlayStateModule (copy), WithStyleFunction (copy), RoactModule (copy), Loading (copy), IconSize (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: LoadingOverlayStateModule (copy), WithStyleFunction (copy), RoactModule (copy), Loading (copy), IconSize (copy), NormalizeFontFaceFunction (copy)
 	local Props = p1.props
 	local HasLoadingState: boolean = Props.loadingState ~= LoadingOverlayStateModule.None and Props.loadingState ~= nil
 	local LoadingMessage = p1:getLoadingMessage(p2, Props.loadingState)
 	
 	return WithStyleFunction(function(p3)
-		-- upvalues: RoactModule (upval), p1 (copy), Props (copy), HasLoadingState (copy), Loading (upval), IconSize (upval), LoadingMessage (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+		-- upvalues: RoactModule (upval), p1 (copy), Props (copy), HasLoadingState (copy), Loading (upval), IconSize (upval), LoadingMessage (copy), NormalizeFontFaceFunction (upval)
 		local Theme = p3.Theme
 		local _Font = p3.Font
 		
@@ -112,8 +111,7 @@ function ExtendResult.renderAlert(p1, p2)
 					BackgroundTransparency = 1,
 					TextWrapped = true,
 					AutomaticSize = Enum.AutomaticSize.XY,
-					Font = if FoundationFontFaceMigration then nil else _Font.Body.Font,
-					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
+					FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font),
 					Text = LoadingMessage,
 					TextSize = _Font.BaseSize * _Font.Body.RelativeSize,
 					TextColor3 = Theme.TextDefault.Color,

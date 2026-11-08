@@ -1,4 +1,5 @@
 ﻿local AnalyticsConstantsModule = require(script.Analytics.AnalyticsConstants)
+local FFlagSocialCarouselBuildPresence = require(script.Parent.SharedFlags).FFlagSocialCarouselBuildPresence
 
 return {
 	Analytics = {
@@ -6,6 +7,8 @@ return {
 		Constants = AnalyticsConstantsModule,
 		useGameJoinCardAnalytics = require(script.Analytics.useGameJoinCardAnalytics)
 	},
+	BuildJoinCardPopover = if FFlagSocialCarouselBuildPresence then require(script.Components.BuildJoinCard.BuildJoinCardPopoverContainer) else nil,
+	BuildJoinCardSheet = if FFlagSocialCarouselBuildPresence then require(script.Components.BuildJoinCard.BuildJoinCardSheetContainer) else nil,
 	DesktopGameJoinCard = require(script.Components.DesktopGameJoinCard.DesktopGameJoinCard),
 	DesktopGameJoinCardContainer = require(script.Components.DesktopGameJoinCard.DesktopGameJoinCardContainer),
 	GamepadJoinFocusBehavior = require(script.Components.DesktopGameJoinCard.GamepadJoinFocusBehavior),

@@ -1,10 +1,8 @@
 ﻿local VerifiedBadges = script:FindFirstAncestor("VerifiedBadges")
 local CryoModule = require(VerifiedBadges.Parent.Cryo)
-local FoundationModule = require(VerifiedBadges.Parent.Foundation)
 local ReactModule = require(VerifiedBadges.Parent.React)
 local ReactRobloxModule = require(VerifiedBadges.Parent.ReactRoblox)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(VerifiedBadges.Parent.Foundation).Utility.normalizeFontFace
 local config = {
 	anchorPoint = Vector2.new(),
 	position = UDim2.new(),
@@ -16,7 +14,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), ReactRobloxModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), ReactRobloxModule (copy), NormalizeFontFaceFunction (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	
 	if JoinResult.children then
@@ -64,8 +62,7 @@ return function(p1)
 				LayoutOrder = 2,
 				BackgroundTransparency = 1,
 				Text = JoinResult.emoji,
-				Font = if FoundationFontFaceMigration then nil else JoinResult.font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(JoinResult.font) else nil,
+				FontFace = NormalizeFontFaceFunction(JoinResult.font),
 				TextColor3 = JoinResult.color,
 				TextSize = UseStateResult,
 				TextYAlignment = Enum.TextYAlignment.Center,

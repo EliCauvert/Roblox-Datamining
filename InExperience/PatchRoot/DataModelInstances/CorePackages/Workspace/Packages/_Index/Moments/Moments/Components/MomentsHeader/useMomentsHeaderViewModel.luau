@@ -57,6 +57,8 @@ return function(p1, p2, ShowHamburger)
 		FtuxTooltipText = UseLocalizationResult.text
 	end
 	local FeedTypeChips = nil
+	local ShowMyMomentsButton = false
+	local Size200 = 0
 	
 	if FFlagMomentsFollowingFeedModule then
 		local UseLocalizationResult = UseLocalizationFunction(config1)
@@ -85,6 +87,11 @@ return function(p1, p2, ShowHamburger)
 					end
 				}
 			}
+			ShowMyMomentsButton = true
+			
+			if p1.variant == "base" then
+				Size200 = UseTokensResult.Size.Size_200
+			end
 		end
 	end
 	local OnFtuxTooltipDismissed = p1.onFtuxTooltipDismissed or noop
@@ -122,7 +129,7 @@ return function(p1, p2, ShowHamburger)
 	local Margin: number = UseCompositionLayoutResult.margin
 	local HeaderPadding = {
 		left = UDim.new(0, (math.max(UseDeviceInsetsResult.left, Margin))),
-		right = UDim.new(0, (math.max(UseDeviceInsetsResult.right, Margin))),
+		right = UDim.new(0, (math.max(UseDeviceInsetsResult.right, Margin - Size200))),
 		top = UDim.new(0, UseStatusBarHeightResult)
 	}
 	local NewTop = UseDeviceInsetsResult.top + UseTokensResult.Size.Size_2000 + UseTokensResult.Size.Size_1600
@@ -149,6 +156,7 @@ return function(p1, p2, ShowHamburger)
 		showHamburger = ShowHamburger,
 		showCreateButton = p1.onCreatePressed ~= nil,
 		showNavigationMenu = p1.onNavigateToTrending ~= nil and p1.onNavigateToMyMoments ~= nil,
+		showMyMomentsButton = ShowMyMomentsButton,
 		headerHeight = Size1400,
 		headerPadding = HeaderPadding,
 		titleTextStyle = UseTokensResult.Color.Content.Emphasis,

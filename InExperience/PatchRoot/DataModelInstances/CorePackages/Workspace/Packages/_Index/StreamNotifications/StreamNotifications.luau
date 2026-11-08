@@ -2,5 +2,6 @@
 	["jest.config"] = script["jest.config"],
 	StreamNotifications = require(script.StreamNotifications),
 	StreamNotificationsBellIcon = require(script.StreamNotificationsBellIcon),
-	StreamNotificationStore = require(script.StreamNotificationStore)
+	StreamNotificationStore = require(script.StreamNotificationStore),
+	StreamPromptsBannerSlot = require(script.StreamPromptsBannerSlot)
 }

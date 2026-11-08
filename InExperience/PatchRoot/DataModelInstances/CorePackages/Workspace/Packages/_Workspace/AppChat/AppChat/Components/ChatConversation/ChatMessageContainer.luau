@@ -1,6 +1,5 @@
 ﻿local IXPService = game:GetService("IXPService")
 local UserInputService = game:GetService("UserInputService")
-local TextService = game:GetService("TextService")
 local AppChat = script:FindFirstAncestor("AppChat")
 local Parent = AppChat.Parent
 local SetTimeoutFunction = require(Parent.LuauPolyfill).setTimeout
@@ -16,7 +15,6 @@ local EnumScreensModule = require(AppChat.EnumScreens)
 local CryoModule = require(Parent.Cryo)
 local FoundationModule = require(Parent.Foundation)
 local Skeleton = FoundationModule.Skeleton
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local GetTextSizeFunction = require(Parent.Style).GetTextSize
 local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
@@ -106,7 +104,7 @@ local config = {
 local TextButton: string = if GetFFlagDebugAppChatModule() then "TextButton" else "Frame"
 
 function ChatMessageContainer(p1)
-	-- upvalues: CryoModule (copy), config (copy), MessageModelModule (copy), ReactModule (copy), FFlagAppChatConsoleFocusFixesModule (copy), UseStyleFunction (copy), UseChatPagePaddingModule (copy), FoundationModule (copy), AppChatUseSymmetricSwipe (copy), SwipeDirectionModule (copy), _UDim2 (copy), _UDim2_1 (copy), AppChatReplyIconSwipeOffset (copy), _Vector2 (copy), _Vector2_1 (copy), FFlagAppChatMessageModelOnDemandModule (copy), ChatConversationTelemetryLayerModule (copy), CreateTelemetryEmitterModule (copy), UseTelemetryModule (copy), UseTriggerFeedbackFunction (copy), UseDescendantSelectedFunction (copy), ReactFocusNavigationModule (copy), GlobalLongPressSignalModule (copy), MessageFtuxTooltipDismissSignal (copy), MessageFtuxTooltipVariant (copy), ChatConversationTelemetryEventsModule (copy), UseNavigationFunction (copy), UseGetConversationFromIdModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), GetReplyingToStoreModule (copy), ShouldReadMessageListFromSignalsStore (copy), GetConversationMessageViewModelStoreModule (copy), UseReplyingToMessageDispatchModule (copy), UseLocalUserIdFunction (copy), HapticFeedbackContext (copy), HapticFeedbackType (copy), UseSwipeGestureModule (copy), EnumScreensModule (copy), SetTimeoutFunction (copy), AppChatMessageLongPressDistanceThreshold (copy), UserInputService (copy), FFlagAppChatEnableMessageContextMenuModule (copy), ChatMessageContainerConstantsModule (copy), OptionsEnumModule (copy), ConversationModule (copy), GetReplyLabelDescriptorModule (copy), FFlagAppChatUseUserProfileHydrationModule (copy), UseProfileNamesModule (copy), UserProfilesModule (copy), GetCombinedNameFromProfileNamesModule (copy), DataStatus (copy), UseLocalizationFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), GetFFlagDebugAppChatModule (copy), OptionsModule (copy), FFlagAppChatAlignAvatarToMessageGroupBottomModule (copy), UserTile (copy), LayoutMode (copy), UserPresence (copy), NormalizeFontFaceFunction (copy), Skeleton (copy), MessageFtuxTooltip (copy), AppChatEnableRepliesUIIxpEnabled2 (copy), IXPService (copy), AppChatEnableRepliesUIIxpLayer1 (copy), TextButton (copy), SystemMessageModule (copy), NoticeTextModule (copy)
+	-- upvalues: CryoModule (copy), config (copy), MessageModelModule (copy), ReactModule (copy), FFlagAppChatConsoleFocusFixesModule (copy), UseStyleFunction (copy), UseChatPagePaddingModule (copy), FoundationModule (copy), AppChatUseSymmetricSwipe (copy), SwipeDirectionModule (copy), _UDim2 (copy), _UDim2_1 (copy), AppChatReplyIconSwipeOffset (copy), _Vector2 (copy), _Vector2_1 (copy), FFlagAppChatMessageModelOnDemandModule (copy), ChatConversationTelemetryLayerModule (copy), CreateTelemetryEmitterModule (copy), UseTelemetryModule (copy), UseTriggerFeedbackFunction (copy), UseDescendantSelectedFunction (copy), ReactFocusNavigationModule (copy), GlobalLongPressSignalModule (copy), MessageFtuxTooltipDismissSignal (copy), MessageFtuxTooltipVariant (copy), ChatConversationTelemetryEventsModule (copy), UseNavigationFunction (copy), UseGetConversationFromIdModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), GetReplyingToStoreModule (copy), ShouldReadMessageListFromSignalsStore (copy), GetConversationMessageViewModelStoreModule (copy), UseReplyingToMessageDispatchModule (copy), UseLocalUserIdFunction (copy), HapticFeedbackContext (copy), HapticFeedbackType (copy), UseSwipeGestureModule (copy), EnumScreensModule (copy), SetTimeoutFunction (copy), AppChatMessageLongPressDistanceThreshold (copy), UserInputService (copy), FFlagAppChatEnableMessageContextMenuModule (copy), ChatMessageContainerConstantsModule (copy), OptionsEnumModule (copy), ConversationModule (copy), GetReplyLabelDescriptorModule (copy), FFlagAppChatUseUserProfileHydrationModule (copy), UseProfileNamesModule (copy), UserProfilesModule (copy), GetCombinedNameFromProfileNamesModule (copy), DataStatus (copy), UseLocalizationFunction (copy), GetTextSizeFunction (copy), GetFFlagDebugAppChatModule (copy), OptionsModule (copy), FFlagAppChatAlignAvatarToMessageGroupBottomModule (copy), UserTile (copy), LayoutMode (copy), UserPresence (copy), NormalizeFontFaceFunction (copy), Skeleton (copy), MessageFtuxTooltip (copy), AppChatEnableRepliesUIIxpEnabled2 (copy), IXPService (copy), AppChatEnableRepliesUIIxpLayer1 (copy), TextButton (copy), SystemMessageModule (copy), NoticeTextModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local IsVisibilityMatch: boolean = if JoinResult.visibility then JoinResult.visibility == MessageModelModule.VisibilityTypes.Hidden else false
 	local UseResult = ReactModule.useCallback(function()
@@ -175,7 +173,7 @@ function ChatMessageContainer(p1)
 	local v2 = nil
 	
 	if FFlagAppChatConsoleFocusFixesModule then
-		v1, v119 = UseDescendantSelectedFunction()
+		v1, v117 = UseDescendantSelectedFunction()
 	end
 	local UseResult3 = nil
 	
@@ -471,9 +469,8 @@ function ChatMessageContainer(p1)
 	end
 	local DisplayName = UseLocalizationFunction(if SenderTargetId then { displayName = CombinedNameFromId1 } else {}).displayName or CombinedNameFromId1
 	local UseResult1 = ReactModule.useCallback(function(): UDim2
-		-- upvalues: JoinResult (copy), ChatMessageContainerConstantsModule (upval), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), DisplayName (ref), UseStyleResult (copy), UseTokensResult (copy), TextService (upval)
-		local _Vector2 = Vector2.new(math.max(1, JoinResult.messageMaxWidth - ChatMessageContainerConstantsModule.TAIL_WIDTH), 1e999)
-		local TextSize = if FoundationFontFaceMigration then GetTextSizeFunction(DisplayName, UseStyleResult.Font.BaseSize * UseStyleResult.Font.Footer.RelativeSize, UseTokensResult.Typography.CaptionSmall.Font, _Vector2, { addTemporaryPadding = false }) else TextService:GetTextSize(DisplayName, UseStyleResult.Font.BaseSize * UseStyleResult.Font.Footer.RelativeSize, UseStyleResult.Font.Footer.Font, _Vector2)
+		-- upvalues: JoinResult (copy), ChatMessageContainerConstantsModule (upval), GetTextSizeFunction (upval), DisplayName (ref), UseStyleResult (copy), UseTokensResult (copy)
+		local TextSize = GetTextSizeFunction(DisplayName, UseStyleResult.Font.BaseSize * UseStyleResult.Font.Footer.RelativeSize, UseTokensResult.Typography.CaptionSmall.Font, Vector2.new(math.max(1, JoinResult.messageMaxWidth - ChatMessageContainerConstantsModule.TAIL_WIDTH), 1e999), { addTemporaryPadding = false })
 		
 		return UDim2.new(0, TextSize.X, 0, TextSize.Y)
 	end, {
@@ -481,7 +478,7 @@ function ChatMessageContainer(p1)
 		UseStyleResult.Font.Footer.Font,
 		JoinResult.messageMaxWidth - ChatMessageContainerConstantsModule.TAIL_WIDTH,
 		DisplayName,
-		if FoundationFontFaceMigration then UseTokensResult.Typography.CaptionSmall.Font else nil
+		UseTokensResult.Typography.CaptionSmall.Font
 	})
 	local NewMessageTypePaddingOffset = if JoinResult.showDateTime then 0 else (if JoinResult.isNewSender or SenderTargetId then ChatMessageContainerConstantsModule.CHAT_MESSAGE_MAX_SPACE else ChatMessageContainerConstantsModule.CHAT_MESSAGE_MIN_SPACE) + JoinResult.messageTypePaddingOffset
 	local Left = UseChatPagePaddingModuleResult.left
@@ -532,7 +529,7 @@ function ChatMessageContainer(p1)
 	end) else nil
 	
 	local function renderMessage()
-		-- upvalues: ReactModule (upval), MapResult1 (copy), UseResult10 (ref), UseResult11 (ref), NewMessageTypePaddingOffset (ref), JoinResult (copy), Left (copy), NewLeft (copy), UseChatPagePaddingModuleResult (copy), Left1 (copy), FoundationModule (upval), FFlagAppChatAlignAvatarToMessageGroupBottomModule (upval), UserTile (upval), LayoutMode (upval), UserPresence (upval), UseResult (copy), UseTokensResult (copy), ShouldShowName (copy), ChatMessageContainerConstantsModule (upval), IsIncoming (copy), SenderTargetId (copy), Flag (ref), FoundationFontFaceMigration (upval), UseStyleResult (copy), NormalizeFontFaceFunction (upval), UseResult1 (copy), DisplayName (ref), Skeleton (upval), FFlagAppChatConsoleFocusFixesModule (upval), IsVisibilityMatch (copy), v2 (ref), UseResult3 (ref), UseResult8 (ref), UseResult9 (ref), UseResult12 (ref), UseResult13 (ref), UseStateResult3 (ref), UseMemoResult2 (ref), UseRefResult1 (copy), UseRefResult (copy), MessageFtuxTooltip (upval), MessageFtuxTooltipVariant (upval), UseMemoResult (copy), MapResult2 (copy), MapResult (copy)
+		-- upvalues: ReactModule (upval), MapResult1 (copy), UseResult10 (ref), UseResult11 (ref), NewMessageTypePaddingOffset (ref), JoinResult (copy), Left (copy), NewLeft (copy), UseChatPagePaddingModuleResult (copy), Left1 (copy), FoundationModule (upval), FFlagAppChatAlignAvatarToMessageGroupBottomModule (upval), UserTile (upval), LayoutMode (upval), UserPresence (upval), UseResult (copy), UseTokensResult (copy), ShouldShowName (copy), ChatMessageContainerConstantsModule (upval), IsIncoming (copy), SenderTargetId (copy), Flag (ref), NormalizeFontFaceFunction (upval), UseResult1 (copy), DisplayName (ref), UseStyleResult (copy), Skeleton (upval), FFlagAppChatConsoleFocusFixesModule (upval), IsVisibilityMatch (copy), v2 (ref), UseResult3 (ref), UseResult8 (ref), UseResult9 (ref), UseResult12 (ref), UseResult13 (ref), UseStateResult3 (ref), UseMemoResult2 (ref), UseRefResult1 (copy), UseRefResult (copy), MessageFtuxTooltip (upval), MessageFtuxTooltipVariant (upval), UseMemoResult (copy), MapResult2 (copy), MapResult (copy)
 		local Frame = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
@@ -599,8 +596,7 @@ function ChatMessageContainer(p1)
 					DisplayName = if Flag then nil else ReactModule.createElement("TextLabel", {
 						BackgroundTransparency = 1,
 						BorderSizePixel = 0,
-						Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Footer.Font,
-						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.CaptionSmall.Font) else nil,
+						FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.CaptionSmall.Font),
 						Size = UseResult1(),
 						AnchorPoint = if IsIncoming then Vector2.new(0, 0) else Vector2.new(1, 0),
 						Position = if IsIncoming then UDim2.fromScale(0, 0) else UDim2.fromScale(1, 0),

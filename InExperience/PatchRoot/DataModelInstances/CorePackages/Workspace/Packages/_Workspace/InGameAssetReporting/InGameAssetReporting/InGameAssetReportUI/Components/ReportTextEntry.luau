@@ -1,14 +1,11 @@
 ﻿local Parent = script:FindFirstAncestor("InGameAssetReporting").Parent
 local ReactModule = require(Parent.React)
-local FoundationModule = require(Parent.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
 local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
 
 return function(p1)
-	-- upvalues: UseStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), NormalizeFontFaceFunction (copy)
 	local UseStyleResult = UseStyleFunction()
-	local BodyFont = UseStyleResult.Font.Body.Font
 	local Theme = UseStyleResult.Theme
 	
 	return ReactModule.createElement("Frame", {
@@ -30,8 +27,7 @@ return function(p1)
 			AnchorPoint = Vector2.new(0, 0),
 			BackgroundColor3 = Theme.BackgroundDefault.Color,
 			PlaceholderText = p1.placeholderText,
-			Font = if FoundationFontFaceMigration then nil else BodyFont,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
 			Text = p1.text,
 			TextSize = UseStyleResult.Font.BaseSize,
 			TextColor3 = Theme.TextDefault.Color,

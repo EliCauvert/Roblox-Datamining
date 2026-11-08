@@ -4,18 +4,15 @@ local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local ShareSheetItemContainerModule = require(script.Parent.ShareSheetItemContainer)
-local ShareSheetRowModule = require(script.Parent.ShareSheetRow)
-local FFlagShareSheetFriendsSort = require(Parent.SharedFlags).FFlagShareSheetFriendsSort
 local _ = require(ShareSheet.Recipients.RecipientSource)
 local ShareSheetTelemetryModule = require(ShareSheet.telemetry.ShareSheetTelemetry)
 local CopyLinkModule = require(ShareSheet.copyLink)
 local ShareLinkModule = require(ShareSheet.shareLink)
 local IconName = FoundationModule.Enums.IconName
 local View = FoundationModule.View
-local FFlagShareSheetPeoplePickerEnabledModule = require(ShareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
 
-return function(Frame: Frame)
-	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), CopyLinkModule (copy), ShareSheetTelemetryModule (copy), FFlagShareSheetFriendsSort (copy), ShareLinkModule (copy), ShareSheetItemContainerModule (copy), IconName (copy), FFlagShareSheetPeoplePickerEnabledModule (copy), View (copy), ShareSheetRowModule (copy)
+return function(p1)
+	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), CopyLinkModule (copy), ShareSheetTelemetryModule (copy), ShareLinkModule (copy), ShareSheetItemContainerModule (copy), IconName (copy), View (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -37,37 +34,32 @@ return function(Frame: Frame)
 		end)
 	end, {})
 	local UseResult1 = ReactModule.useCallback(function()
-		-- upvalues: CopyLinkModule (upval), Frame (copy), UseResult (copy), ShareSheetTelemetryModule (upval), FFlagShareSheetFriendsSort (upval)
-		CopyLinkModule({ context = Frame.context, url = Frame.url })
+		-- upvalues: CopyLinkModule (upval), p1 (copy), UseResult (copy), ShareSheetTelemetryModule (upval)
+		CopyLinkModule({ context = p1.context, url = p1.url })
 		UseResult()
 		ShareSheetTelemetryModule.logInteraction({
-			context = Frame.context,
-			recipientSource = if FFlagShareSheetFriendsSort then Frame.recipientSource else nil,
-			telemetryId = Frame.telemetryId or "",
+			context = p1.context,
+			recipientSource = p1.recipientSource,
+			telemetryId = p1.telemetryId or "",
 			interactionType = ShareSheetTelemetryModule.InteractionType.CopyLink
 		})
 	end, {
-		Frame.context,
-		Frame.recipientSource,
-		Frame.telemetryId,
-		Frame.url,
+		p1.context,
+		p1.recipientSource,
+		p1.telemetryId,
+		p1.url,
 		UseResult
 	})
 	local UseResult2 = ReactModule.useCallback(function()
-		-- upvalues: ShareLinkModule (upval), Frame (copy), ShareSheetTelemetryModule (upval), FFlagShareSheetFriendsSort (upval)
-		ShareLinkModule({ context = Frame.context, url = Frame.url })
+		-- upvalues: ShareLinkModule (upval), p1 (copy), ShareSheetTelemetryModule (upval)
+		ShareLinkModule({ context = p1.context, url = p1.url })
 		ShareSheetTelemetryModule.logInteraction({
-			context = Frame.context,
-			recipientSource = if FFlagShareSheetFriendsSort then Frame.recipientSource else nil,
-			telemetryId = Frame.telemetryId or "",
+			context = p1.context,
+			recipientSource = p1.recipientSource,
+			telemetryId = p1.telemetryId or "",
 			interactionType = ShareSheetTelemetryModule.InteractionType.NativeShare
 		})
-	end, {
-		Frame.context,
-		Frame.recipientSource,
-		Frame.telemetryId,
-		Frame.url
-	})
+	end, { p1.context, p1.recipientSource, p1.telemetryId, p1.url })
 	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy)
 		return function()
@@ -77,7 +69,8 @@ return function(Frame: Frame)
 			end
 		end
 	end, {})
-	local config = {
+	
+	return ReactModule.createElement(View, { tag = "row gap-medium size-full-0 auto-y" }, {
 		CopyLink = ReactModule.createElement(ShareSheetItemContainerModule, {
 			LayoutOrder = 1,
 			icon = if UseStateResult then IconName.Check else IconName.ChainLink,
@@ -85,16 +78,11 @@ return function(Frame: Frame)
 			onActivated = UseResult1,
 			shouldAnimate = UseStateResult
 		}),
-		Share = if Frame.canShare then ReactModule.createElement(ShareSheetItemContainerModule, {
+		Share = if p1.canShare then ReactModule.createElement(ShareSheetItemContainerModule, {
 			LayoutOrder = 2,
 			icon = IconName.ArrowUpFromLandscapeRectangle,
 			label = UseLocalizationResult.share,
 			onActivated = UseResult2
 		}) else nil
-	}
-	
-	return if FFlagShareSheetPeoplePickerEnabledModule then ReactModule.createElement(View, {
-		tag = "row gap-medium size-full-0 auto-y",
-		LayoutOrder = Frame.LayoutOrder
-	}, config) else ReactModule.createElement(ShareSheetRowModule, { LayoutOrder = Frame.LayoutOrder }, config)
+	})
 end

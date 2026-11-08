@@ -42,10 +42,10 @@ local Counters = {
 	},
 	Ended = {
 		eventName = "ExpChatDictationEnded",
-		description = "A dictation recording session ended. Session-level only; continuous auto-chunk stops are excluded. customFields: mode, reason (user_manual/time_up/auto_pause).",
+		description = "A dictation recording session ended. Session-level only; continuous auto-chunk stops are excluded. customFields: mode, reason (user_manual/time_up/auto_pause/safety_intervention/rate_limited).",
 		links = "",
 		backends = { "RobloxTelemetryCounter" },
-		lastUpdated = { 2026, 9, 9 }
+		lastUpdated = { 2026, 11, 2 }
 	},
 	VadStop = {
 		eventName = "ExpChatDictationVadStop",
@@ -117,7 +117,8 @@ return {
 		TimeUp = "time_up",
 		AutoPause = "auto_pause",
 		AutoChunk = "auto_chunk",
-		SafetyIntervention = "safety_intervention"
+		SafetyIntervention = "safety_intervention",
+		RateLimited = "rate_limited"
 	},
 	PermissionStatuses = {
 		Granted = "granted",

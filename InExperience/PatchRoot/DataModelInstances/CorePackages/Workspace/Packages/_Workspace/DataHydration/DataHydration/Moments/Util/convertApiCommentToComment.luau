@@ -42,6 +42,7 @@ return function(p1)
 		feedItemId = p1.feedItemId,
 		author = { userId = p1.authorUserId },
 		text = p1.text,
+		translatedText = if type(p1.translatedText) == "string" and p1.translatedText ~= "" and p1.translatedText ~= p1.text then p1.translatedText else nil,
 		createdAt = p1.createdAt,
 		isAuthoredByViewer = p1.isAuthoredByViewer == true,
 		reactions = if p1.reactions == nil then nil else decodeReactions(p1.reactions)

@@ -24,7 +24,6 @@ local FFlagLuaAppOneByTwoHoverIdleAutoplay = require(Parent.SharedFlags).FFlagLu
 local FFlagLuaAppSduiSuppressVideoDetectorDuringScroll = require(Parent.SharedFlags).FFlagLuaAppSduiSuppressVideoDetectorDuringScroll
 local FFlagSduiDismissPromptPageScope = require(Parent.SharedFlags).FFlagSduiDismissPromptPageScope
 local FFlagAppPageShellScrollToTopFocus = require(Parent.SharedFlags).FFlagAppPageShellScrollToTopFocus
-local FFlagLuaAppsDefaultSelection = require(Parent.SharedFlags).FFlagLuaAppsDefaultSelection
 local FFlagHomePageRefetchOnDataHydrationAccountReset = require(Parent.SharedFlags).FFlagHomePageRefetchOnDataHydrationAccountReset
 local FFlagLuaAppSduiHomeSponsoredAdViewabilityModule = require(Home.Flags.FFlagLuaAppSduiHomeSponsoredAdViewability)
 local FFlagAppThemeHalloween2026HomeBackground = require(Parent.SharedFlags).FFlagAppThemeHalloween2026HomeBackground
@@ -41,7 +40,7 @@ local function getCommittedHomeSessionId(p1)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: HomeConstantsModule (copy), FFlagLuaAppAddHomeExtraTopPadding (copy), UseEntrySurfacingFunction (copy), FFlagSduiDismissPromptPageScope (copy), UsePageScopeRefFunction (copy), ReactModule (copy), SduiSharedUtilitiesModule (copy), AppPage (copy), FFlagHomePageRefetchOnDataHydrationAccountReset (copy), FetchHomePageModule (copy), Home (copy), UseHomeCollectionLayoutSyncModule (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), ResponsiveModule (copy), VideoUtilsModule (copy), FFlagLuaAppSduiVideoThumbnail (copy), FFlagLuaAppSduiHomeSponsoredAdViewabilityModule (copy), SignalsReactModule (copy), getCommittedHomeSessionId (copy), UseSponsoredAdViewabilityDetectorFunction (copy), AppLifecycleObserverService (copy), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (copy), ExperienceService (copy), SduiPageWrapperEntryPoint (copy), RefreshHomePageModule (copy), FFlagAppPageShellScrollToTopFocus (copy), FFlagLuaAppsDefaultSelection (copy), FFlagAppThemeHalloween2026HomeBackground (copy)
+	-- upvalues: HomeConstantsModule (copy), FFlagLuaAppAddHomeExtraTopPadding (copy), UseEntrySurfacingFunction (copy), FFlagSduiDismissPromptPageScope (copy), UsePageScopeRefFunction (copy), ReactModule (copy), SduiSharedUtilitiesModule (copy), AppPage (copy), FFlagHomePageRefetchOnDataHydrationAccountReset (copy), FetchHomePageModule (copy), Home (copy), UseHomeCollectionLayoutSyncModule (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), ResponsiveModule (copy), VideoUtilsModule (copy), FFlagLuaAppSduiVideoThumbnail (copy), FFlagLuaAppSduiHomeSponsoredAdViewabilityModule (copy), SignalsReactModule (copy), getCommittedHomeSessionId (copy), UseSponsoredAdViewabilityDetectorFunction (copy), AppLifecycleObserverService (copy), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (copy), ExperienceService (copy), SduiPageWrapperEntryPoint (copy), RefreshHomePageModule (copy), FFlagAppPageShellScrollToTopFocus (copy), FFlagAppThemeHalloween2026HomeBackground (copy)
 	local ConfigKey = HomeConstantsModule.ConfigKey
 	local v1 = nil
 	
@@ -87,7 +86,7 @@ return ReactModule.memo(function(p1)
 	
 	if FFlagLuaAppSduiHomeSponsoredAdViewabilityModule then
 		local UseStateResult
-		UseStateResult, v38 = ReactModule.useState(nil)
+		UseStateResult, v37 = ReactModule.useState(nil)
 		UseSponsoredAdViewabilityDetectorFunction(UseStateResult, SignalsReactModule.useSignalState(getCommittedHomeSessionId), AppLifecycleObserverService)
 	end
 	if FFlagLuaAppSduiSuppressVideoDetectorDuringScroll then
@@ -136,7 +135,7 @@ return ReactModule.memo(function(p1)
 		scrollAway = p1.scrollAway,
 		videoPlaybackContext = if FFlagLuaAppSduiVideoThumbnail or FFlagLuaAppOneByTwoHoverIdleAutoplay then UseFeedVideoPlaybackContextResult else nil,
 		handleBackButton = not FFlagAppPageShellScrollToTopFocus and nil,
-		defaultFocusRef = if FFlagAppPageShellScrollToTopFocus and FFlagLuaAppsDefaultSelection then p1.defaultFocusRef else nil,
+		defaultFocusRef = if FFlagAppPageShellScrollToTopFocus then p1.defaultFocusRef else nil,
 		backgroundStyle = if FFlagAppThemeHalloween2026HomeBackground then p1.backgroundStyle else nil,
 		stickyBackgroundStyle = if FFlagAppThemeHalloween2026HomeBackground then p1.stickyBackgroundStyle else nil
 	})

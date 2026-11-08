@@ -4,6 +4,7 @@ local _ = require(Parent.MomentsTypes)
 local GetFFlagMomentsTTSAudioOverlayModule = require(MomentsCreation.Flags.GetFFlagMomentsTTSAudioOverlay)
 local FFlagMomentsTextOverlayV2Redesign = require(Parent.MomentsCommon).Flags.FFlagMomentsTextOverlayV2Redesign
 local FFlagMomentsCommentsCreatorControlModule = require(MomentsCreation.Flags.FFlagMomentsCommentsCreatorControl)
+local FFlagMomentsCreationSessionIdModule = require(MomentsCreation.Flags.FFlagMomentsCreationSessionId)
 
 local function _(p1)
 	return if typeof(p1) == "EnumItem" then p1.Name else p1
@@ -52,10 +53,13 @@ local function convertTextOverlay(p1)
 	}
 end
 
-return function(p1, Capture)
-	-- upvalues: FFlagMomentsCommentsCreatorControlModule (copy), convertTextOverlay (copy), GetFFlagMomentsTTSAudioOverlayModule (copy), FFlagMomentsTextOverlayV2Redesign (copy)
+return function(p1, Capture, CreationSessionId)
+	-- upvalues: FFlagMomentsCreationSessionIdModule (copy), FFlagMomentsCommentsCreatorControlModule (copy), convertTextOverlay (copy), GetFFlagMomentsTTSAudioOverlayModule (copy), FFlagMomentsTextOverlayV2Redesign (copy)
 	local config = { caption = p1.description }
 	
+	if FFlagMomentsCreationSessionIdModule and CreationSessionId ~= nil and CreationSessionId ~= "" then
+		config.creationSessionId = CreationSessionId
+	end
 	if FFlagMomentsCommentsCreatorControlModule and p1.commentsEnabled == false then
 		config.commentsEnabled = false
 	end

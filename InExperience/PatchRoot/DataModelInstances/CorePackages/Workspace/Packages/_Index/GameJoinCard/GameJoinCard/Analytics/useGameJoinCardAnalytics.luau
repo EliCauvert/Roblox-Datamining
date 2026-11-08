@@ -2,7 +2,9 @@
 local TelemetryService = game:GetService("TelemetryService")
 local Parent = script:FindFirstAncestor("GameJoinCard").Parent
 local LoggingProtocolModule = require(Parent.LoggingProtocol)
-local FFlagGameJoinCardAnalyticsCardId = require(Parent.SharedFlags).FFlagGameJoinCardAnalyticsCardId
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagGameJoinCardAnalyticsCardId = SharedFlagsModule.FFlagGameJoinCardAnalyticsCardId
+local FFlagSocialCarouselBuildPresence = SharedFlagsModule.FFlagSocialCarouselBuildPresence
 local AgeCheckUpsellOutcome = require(script.Parent.AnalyticsConstants).AgeCheckUpsellOutcome
 local GameJoinCardAnalyticsThrottleHundredthsPercent = game:DefineFastInt("GameJoinCardAnalyticsThrottleHundredthsPercent", 10000)
 local config = {
@@ -51,7 +53,7 @@ local function _(p1)
 end
 
 local function buildGameJoinCardCommonFields(p1)
-	-- upvalues: Players (copy), FFlagGameJoinCardAnalyticsCardId (copy)
+	-- upvalues: Players (copy), FFlagGameJoinCardAnalyticsCardId (copy), FFlagSocialCarouselBuildPresence (copy)
 	local t = {}
 	local LocalPlayer = Players.LocalPlayer
 	
@@ -76,6 +78,9 @@ local function buildGameJoinCardCommonFields(p1)
 	end
 	if FFlagGameJoinCardAnalyticsCardId and p1.joinGameCardId and p1.joinGameCardId ~= "" then
 		t.joinGameCardId = p1.joinGameCardId
+	end
+	if FFlagSocialCarouselBuildPresence and p1.cardType ~= nil then
+		t.cardType = p1.cardType
 	end
 	return t
 end

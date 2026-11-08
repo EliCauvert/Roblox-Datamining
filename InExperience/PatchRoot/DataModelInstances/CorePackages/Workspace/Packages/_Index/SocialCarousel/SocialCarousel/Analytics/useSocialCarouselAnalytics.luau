@@ -6,16 +6,17 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local UseSocialCarouselContextModule = require(SocialCarousel.Contexts.useSocialCarouselContext)
 local InitializeSocialCarouselAnalyticsModule = require(SocialCarousel.Analytics.initializeSocialCarouselAnalytics)
 local EventNamesModule = require(SocialCarousel.Analytics.EventNames)
-local Tile = require(SocialCarousel.Common.Enums).Tile
+local GetFriendStatusFromTileTypeModule = require(SocialCarousel.Analytics.getFriendStatusFromTileType)
 local _ = require(SocialCarousel.Common.Types)
 local RetrievalStatus = require(Parent.UIBlox).App.Loading.Enum.RetrievalStatus
 local FFlagSocialCarouselEnableUserSeenEvents = require(SocialCarousel.Flags).FFlagSocialCarouselEnableUserSeenEvents
+local FFlagSocialCarouselLogNewFriendRequestsBadgeModule = require(SocialCarousel.Flags.FFlagSocialCarouselLogNewFriendRequestsBadge)
 local FFlagSocialCarouselShareQREnabled = SharedFlagsModule.FFlagSocialCarouselShareQREnabled
 local FFlagLuaAppUserSeenCollectionUnifiedFields = SharedFlagsModule.FFlagLuaAppUserSeenCollectionUnifiedFields
 local RepeatValueFunction = require(Parent.SocialLuaAnalytics).Analytics.Formatters.repeatValue
 
 return function()
-	-- upvalues: UseSocialCarouselContextModule (copy), ReactModule (copy), InitializeSocialCarouselAnalyticsModule (copy), EventNamesModule (copy), Tile (copy), HttpService (copy), FFlagSocialCarouselEnableUserSeenEvents (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (copy), RepeatValueFunction (copy), FFlagSocialCarouselShareQREnabled (copy), RetrievalStatus (copy)
+	-- upvalues: UseSocialCarouselContextModule (copy), ReactModule (copy), InitializeSocialCarouselAnalyticsModule (copy), EventNamesModule (copy), GetFriendStatusFromTileTypeModule (copy), HttpService (copy), FFlagSocialCarouselEnableUserSeenEvents (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (copy), RepeatValueFunction (copy), FFlagSocialCarouselShareQREnabled (copy), FFlagSocialCarouselLogNewFriendRequestsBadgeModule (copy), RetrievalStatus (copy)
 	local UseSocialCarouselContextModuleResult = UseSocialCarouselContextModule()
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseSocialCarouselContextModuleResult (copy), InitializeSocialCarouselAnalyticsModule (upval)
@@ -33,12 +34,12 @@ return function()
 	end, { UseSocialCarouselContextModuleResult.sortAnalyticsData })
 	local Source = UseSocialCarouselContextModuleResult.source or ""
 	local UseResult = if FFlagSocialCarouselEnableUserSeenEvents then ReactModule.useCallback(function(p1, p2)
-		-- upvalues: UseMemoResult (copy), EventNamesModule (upval), Tile (upval), Source (copy)
+		-- upvalues: UseMemoResult (copy), EventNamesModule (upval), GetFriendStatusFromTileTypeModule (upval), Source (copy)
 		UseMemoResult.fireAnalyticsEvent(EventNamesModule.UserSeen, {
 			userId = p1.id,
 			presence = if p1.presence then p1.presence.userPresenceType else "Offline",
 			absolutePosition = p2.absolutePosition,
-			friendStatus = if p1.tileType == Tile.Friend then Enum.FriendStatus.Friend else Enum.FriendStatus.NotFriend,
+			friendStatus = GetFriendStatusFromTileTypeModule(p1.tileType),
 			recommendationContextType = p1.contextType,
 			recommendationRank = if p1.contextType then p1.rank else nil,
 			isRecommendation = if p1.contextType then true else false,
@@ -50,16 +51,29 @@ return function()
 		-- upvalues: UseMemoResult (copy), EventNamesModule (upval), Source (copy)
 		UseMemoResult.fireAnalyticsEvent(EventNamesModule.ShareQRPressed, { absolutePosition = AbsolutePosition, source = Source })
 	end, { Source, UseMemoResult }) else nil
+	local UseResult2 = if FFlagSocialCarouselLogNewFriendRequestsBadgeModule then ReactModule.useCallback(function(p1)
+		-- upvalues: UseMemoResult (copy), EventNamesModule (upval), Source (copy)
+		UseMemoResult.fireAnalyticsEvent(EventNamesModule.AddFriendsTileSeen, {
+			newRequestCount = p1.newRequestCount,
+			previousCount = p1.previousCount,
+			trigger = p1.trigger,
+			badgeEnabled = p1.badgeEnabled,
+			badgeShown = p1.badgeShown,
+			badgeCapped = p1.badgeCapped,
+			absolutePosition = p1.absolutePosition,
+			source = Source
+		})
+	end, { Source, UseMemoResult }) else nil
 	
 	return {
 		userPressed = ReactModule.useCallback(function(p1, p2)
-			-- upvalues: UseMemoResult (copy), EventNamesModule (upval), Tile (upval), Source (copy), HttpService (upval)
+			-- upvalues: UseMemoResult (copy), EventNamesModule (upval), GetFriendStatusFromTileTypeModule (upval), Source (copy), HttpService (upval)
 			UseMemoResult.fireAnalyticsEvent(EventNamesModule.UserPressed, {
 				presence = if p1.presence then p1.presence.userPresenceType else "Offline",
 				absolutePosition = p2.absolutePosition,
 				positionInRow = p2.absolutePosition,
 				friendId = p1.id,
-				friendStatus = if p1.tileType == Tile.Friend then Enum.FriendStatus.Friend else Enum.FriendStatus.NotFriend,
+				friendStatus = GetFriendStatusFromTileTypeModule(p1.tileType),
 				recommendationContextType = p1.contextType,
 				recommendationRank = p1.rank,
 				isRecommendation = if p1.contextType then true else false,
@@ -118,6 +132,7 @@ return function()
 			Source,
 			UseMemoResult
 		}),
+		addFriendsTileSeen = if FFlagSocialCarouselLogNewFriendRequestsBadgeModule then UseResult2 else nil,
 		friendsHeaderPressed = ReactModule.useCallback(function()
 			-- upvalues: UseMemoResult (copy), EventNamesModule (upval), UseSocialCarouselContextModuleResult (copy), Source (copy)
 			UseMemoResult.fireAnalyticsEvent(EventNamesModule.ViewAllFriends, {

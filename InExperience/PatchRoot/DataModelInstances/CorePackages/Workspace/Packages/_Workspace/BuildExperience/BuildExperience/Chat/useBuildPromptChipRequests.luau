@@ -3,11 +3,12 @@ local ReactModule = require(BuildExperience.Parent.React)
 local _ = require(BuildExperience.Chat.chatTypes)
 local _ = require(BuildExperience.Stores.GetBuildPromptChipsStore)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
+local FFlagBuildExperienceFTUXChipExhaustedTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceFTUXChipExhaustedTelemetry)
 local PROMPTCHIPSSTATUS = require(BuildExperience.Stores.GetBuildPromptChipsStore.promptChipsStatus).PROMPT_CHIPS_STATUS
 local FIntBuildPromptChipEditDebounceMsModuleRatio = require(BuildExperience.Flags.FIntBuildPromptChipEditDebounceMs) / 1000
 
 return function(p1, p2)
-	-- upvalues: ReactModule (copy), SendBuildExperienceEventModule (copy), PROMPTCHIPSSTATUS (copy), FIntBuildPromptChipEditDebounceMsModuleRatio (copy)
+	-- upvalues: ReactModule (copy), SendBuildExperienceEventModule (copy), PROMPTCHIPSSTATUS (copy), FIntBuildPromptChipEditDebounceMsModuleRatio (copy), FFlagBuildExperienceFTUXChipExhaustedTelemetryModule (copy)
 	local IsActive = p2.isActive
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
@@ -125,6 +126,12 @@ return function(p1, p2)
 				
 				return
 			end
-		end, { IsActive, UseResult1, UseResult, TelemetryGranularity })
+		end, { IsActive, UseResult1, UseResult, TelemetryGranularity }),
+		onChipExhausted = if FFlagBuildExperienceFTUXChipExhaustedTelemetryModule then ReactModule.useCallback(function()
+			-- upvalues: IsActive (copy), SendBuildExperienceEventModule (upval), TelemetryGranularity (copy)
+			if IsActive then
+				SendBuildExperienceEventModule("CHIP_EXHAUSTED", TelemetryGranularity)
+			end
+		end, { IsActive, TelemetryGranularity }) else nil
 	}
 end

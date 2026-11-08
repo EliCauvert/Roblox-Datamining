@@ -8,6 +8,7 @@ local UserInputService = game:GetService("UserInputService")
 local ReactModule = require(Parent.React)
 local RoactModule = require(Parent.Roact)
 local ExternalEventConnection = require(Parent.RoactUtils).ExternalEventConnection
+local MockableProxyServicesModule = require(Parent.MockableProxyServices)
 local VerifiedBadgesModule = require(Parent.VerifiedBadges)
 local WithStyleFunction = require(Parent.UIBlox).Style.withStyle
 local ResponsiveModule = require(Parent.Responsive)
@@ -16,7 +17,6 @@ local IconSize = FoundationModule.Enums.IconSize
 local Loading = FoundationModule.Loading
 local FoundationProvider = FoundationModule.FoundationProvider
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local LocalizationProvider = require(Parent.Localization).LocalizationProvider
 local AutoTranslateBadgeModule = require(ProgressLoading.Components.AutoTranslateBadge)
 local LoadingScreenTelemetryModule = require(ProgressLoading.LoadingScreenTelemetry)
@@ -25,7 +25,10 @@ local ServerStatusModule = require(ProgressLoading.Components.ServerStatus)
 local ServerStatusWithCountdownModule = require(ProgressLoading.Components.ServerStatusWithCountdown)
 local NewResult = require(Parent.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
 local QueueExperimentation = require(Parent.SocialExperiments).QueueExperimentation
-local v1: number = if require(Parent.SharedFlags).FFlagIncreaseLoadingScreenOrder then 8 else 7
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagLoadingScreenControlMilestones = SharedFlagsModule.FFlagLoadingScreenControlMilestones
+local ConstantsModule = require(ProgressLoading.LoadingScreenMilestones.Constants)
+local v1: number = if SharedFlagsModule.FFlagIncreaseLoadingScreenOrder then 8 else 7
 local _Vector2 = Vector2.new(768, 432)
 local _Color3 = Color3.fromRGB(101, 102, 104)
 local config = {
@@ -274,12 +277,12 @@ end
 local LoadingScreenView = RoactModule.Component:extend("LoadingScreenView")
 
 function LoadingScreenView.playAnimation(p1, AnimationFunction, p2, Callback)
-	-- upvalues: RunService (copy)
+	-- upvalues: MockableProxyServicesModule (copy)
 	p1.animationStartTime = tick()
 	p1.animationFunction = AnimationFunction
 	
 	if not p1.renderSteppedConnection then
-		p1.renderSteppedConnection = RunService.RenderStepped:Connect(function()
+		p1.renderSteppedConnection = MockableProxyServicesModule.RunService.RenderStepped:Connect(function()
 			-- upvalues: p1 (copy), p2 (copy), Callback (copy)
 			p1.animationFunction(tick() - p1.animationStartTime, p2, p1.updateBindings, function()
 				-- upvalues: p1 (upval), Callback (upval)
@@ -453,7 +456,7 @@ function LoadingScreenView.renderPlaceIcon(p1, p2)
 end
 
 function LoadingScreenView.renderInfoFrame(p1, p2)
-	-- upvalues: VerifiedBadgesModule (copy), list (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), IsPlatformMatch (copy)
+	-- upvalues: VerifiedBadgesModule (copy), list (copy), RoactModule (copy), NormalizeFontFaceFunction (copy), IsPlatformMatch (copy)
 	local ProductInfo = p1.props.productInfo
 	local Name = ProductInfo and ProductInfo.Name or ""
 	local Name1 = ProductInfo and ProductInfo.Creator.Name or ""
@@ -501,8 +504,7 @@ function LoadingScreenView.renderInfoFrame(p1, p2)
 				Size = UDim2.fromScale(0.8, 0),
 				AnchorPoint = Vector2.new(0.5, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Font = if FoundationFontFaceMigration then nil else p2.Font.Title.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.HeadingLarge.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.HeadingLarge.Font),
 				TextSize = p1.bindings.placeTextSize,
 				TextColor3 = p2.Theme.TextEmphasis.Color,
 				Text = Name,
@@ -523,8 +525,7 @@ function LoadingScreenView.renderInfoFrame(p1, p2)
 				Size = UDim2.fromScale(0.6, 0),
 				AnchorPoint = Vector2.new(0.5, 1),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Font = if FoundationFontFaceMigration then nil else p2.Font.CaptionBody.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodySmall.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.BodySmall.Font),
 				TextSize = p1.bindings.creatorTextSize,
 				TextColor3 = p2.Theme.TextDefault.Color,
 				Text = Name1,
@@ -631,7 +632,7 @@ function LoadingScreenView.renderCloseBtn(p1, _)
 end
 
 function LoadingScreenView.renderServerFrame(p1, p2)
-	-- upvalues: IsTenFootInterface (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), NewResult (copy), CoreGui (copy)
+	-- upvalues: IsTenFootInterface (copy), RoactModule (copy), NormalizeFontFaceFunction (copy), NewResult (copy), CoreGui (copy)
 	local TextSize: number = if IsTenFootInterface then 16 else 12
 	local TextSize1: number = if IsTenFootInterface then 16 else 12
 	
@@ -653,8 +654,7 @@ function LoadingScreenView.renderServerFrame(p1, p2)
 			ZIndex = 2,
 			Size = UDim2.new(1, 0, 0, 2 * TextSize1),
 			Position = UDim2.new(0, 0, 1, -4 * TextSize - 2 * TextSize1),
-			Font = if FoundationFontFaceMigration then nil else p2.Font.Footer.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.CaptionSmall.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.CaptionSmall.Font),
 			TextSize = TextSize1,
 			TextColor3 = p2.Theme.TextDefault.Color,
 			Text = NewResult:Format("Authentication.Login.WeChat.AntiAddictionText"),
@@ -666,8 +666,7 @@ function LoadingScreenView.renderServerFrame(p1, p2)
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 4 * TextSize),
 			Position = UDim2.new(0, 0, 1, -2 * TextSize),
-			Font = if FoundationFontFaceMigration then nil else p2.Font.Footer.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.CaptionSmall.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.CaptionSmall.Font),
 			TextSize = TextSize,
 			TextWrapped = true,
 			TextScaled = false,
@@ -684,7 +683,7 @@ function LoadingScreenView.renderServerFrame(p1, p2)
 end
 
 function LoadingScreenView.renderGamepadCancelBtn(p1, p2)
-	-- upvalues: ResponsiveModule (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), NewResult (copy)
+	-- upvalues: ResponsiveModule (copy), RoactModule (copy), NormalizeFontFaceFunction (copy), NewResult (copy)
 	return p1.props.preferredInputRef.current == ResponsiveModule.Input.Directional and (not p1.state.gamepadCancelPressed and RoactModule.createElement("Frame", {
 		Name = "GamepadCancelFrame",
 		BackgroundTransparency = 1,
@@ -712,8 +711,7 @@ function LoadingScreenView.renderGamepadCancelBtn(p1, p2)
 			ZIndex = 2,
 			LayoutOrder = 1,
 			Size = UDim2.fromScale(1, 1),
-			Font = if FoundationFontFaceMigration then nil else p2.Font.SubHeader1.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.TitleLarge.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.TitleLarge.Font),
 			TextColor3 = p2.Theme.TextEmphasis.Color,
 			Text = NewResult:Format("CoreScripts.TopBar.Back"),
 			TextXAlignment = Enum.TextXAlignment.Left,
@@ -926,7 +924,7 @@ end
 function LoadingScreenView:willUpdate(_, _) end
 
 function LoadingScreenView.maybeStartFadeOut(p1)
-	-- upvalues: IsTenFootInterface (copy), ContextActionService (copy), config1 (copy)
+	-- upvalues: IsTenFootInterface (copy), ContextActionService (copy), config1 (copy), FFlagLoadingScreenControlMilestones (copy), ConstantsModule (copy)
 	if p1.props.shouldStartFadeOut and not p1.fadeOutTriggered then
 		p1.fadeOutTriggered = true
 		
@@ -934,13 +932,16 @@ function LoadingScreenView.maybeStartFadeOut(p1)
 			ContextActionService:UnbindCoreAction("CancelGameLoad")
 		end
 		task.spawn(function()
-			-- upvalues: p1 (copy), config1 (upval)
+			-- upvalues: p1 (copy), config1 (upval), FFlagLoadingScreenControlMilestones (upval), ConstantsModule (upval)
 			while not p1.fadeinComplete do
 				wait()
 			end
 			p1:stopAnimation()
 			p1:playAnimation(config1.FadeOut, {}, function()
-				-- upvalues: p1 (upval)
+				-- upvalues: FFlagLoadingScreenControlMilestones (upval), p1 (upval), ConstantsModule (upval)
+				if FFlagLoadingScreenControlMilestones and p1.props.milestones then
+					p1.props.milestones.record(ConstantsModule.Milestone.ScreenHidden)
+				end
 				p1:setState({ visible = false })
 			end)
 		end)
@@ -952,7 +953,10 @@ function LoadingScreenView.didUpdate(p2, _, _)
 end
 
 function LoadingScreenView.didMount(p2)
-	-- upvalues: RunService (copy), config1 (copy)
+	-- upvalues: FFlagLoadingScreenControlMilestones (copy), ConstantsModule (copy), RunService (copy), config1 (copy)
+	if FFlagLoadingScreenControlMilestones and p2.props.milestones then
+		p2.props.milestones.record(ConstantsModule.Milestone.ScreenVisible)
+	end
 	if p2.props.manageRobloxGuiFocus then
 		RunService:SetRobloxGuiFocused(true)
 	end
@@ -964,7 +968,10 @@ function LoadingScreenView.didMount(p2)
 end
 
 function LoadingScreenView.willUnmount(p2)
-	-- upvalues: ContextActionService (copy), RunService (copy), InputBeganConnection (ref), UserInputService (copy), GuiService (copy)
+	-- upvalues: FFlagLoadingScreenControlMilestones (copy), ConstantsModule (copy), ContextActionService (copy), RunService (copy), InputBeganConnection (ref), UserInputService (copy), GuiService (copy)
+	if FFlagLoadingScreenControlMilestones and p2.props.milestones then
+		p2.props.milestones.abort(ConstantsModule.AbortReason.Unmounted)
+	end
 	ContextActionService:UnbindCoreAction("CancelGameLoad")
 	
 	if p2.props.manageRobloxGuiFocus then

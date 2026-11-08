@@ -2,11 +2,8 @@
 local Parent = AuthCommon.Parent
 local RoactModule = require(Parent.Roact)
 local Immutable = require(Parent.AppCommonLib).Immutable
-local Text = require(Parent.AppCommonLib).Text
 local GetTextSizeFunction = require(Parent.Style).GetTextSize
-local FoundationModule = require(Parent.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
 local FitChildrenModule = require(AuthCommon.Components.FitChildren)
 local FitTextLabel = RoactModule.PureComponent:extend("FitTextLabel")
 FitTextLabel.defaultProps = {
@@ -15,33 +12,33 @@ FitTextLabel.defaultProps = {
 }
 
 function FitTextLabel.init(p1)
-	-- upvalues: FitChildrenModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy)
+	-- upvalues: FitChildrenModule (copy), GetTextSizeFunction (copy)
 	function p1.onRef(Ref)
 		-- upvalues: p1 (copy)
 		p1.ref = Ref
 	end
 	
 	function p1.resize(Label)
-		-- upvalues: p1 (copy), FitChildrenModule (upval), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Text (upval)
+		-- upvalues: p1 (copy), FitChildrenModule (upval), GetTextSizeFunction (upval)
 		local FitAxis = p1.props.fitAxis
 		local MaxWidth = p1.props.maxWidth
 		
 		if FitAxis ~= FitChildrenModule.FitAxis.Width and FitAxis ~= FitChildrenModule.FitAxis.Both then
 			p1:setState({
 				width = Label.Size.Width,
-				height = UDim.new(0, if FoundationFontFaceMigration then GetTextSizeFunction(Label.Text, Label.TextSize, Label.FontFace, Vector2.new(Label.AbsoluteSize.X, 10000)).Y else Text.GetTextHeight(Label.Text, Label.Font, Label.TextSize, Label.AbsoluteSize.X))
+				height = UDim.new(0, GetTextSizeFunction(Label.Text, Label.TextSize, Label.FontFace, Vector2.new(Label.AbsoluteSize.X, 10000)).Y)
 			})
 			
 			return
 		end
-		local _UDim = UDim.new(0, if FoundationFontFaceMigration then GetTextSizeFunction(Label.Text, Label.TextSize, Label.FontFace, Vector2.new(10000, 10000)).X else Text.GetTextWidth(Label.Text, Label.Font, Label.TextSize))
+		local _UDim = UDim.new(0, GetTextSizeFunction(Label.Text, Label.TextSize, Label.FontFace, Vector2.new(10000, 10000)).X)
 		local _UDim1 = nil
 		
 		if MaxWidth == nil or MaxWidth >= _UDim.Offset then
 			_UDim1 = FitAxis == FitChildrenModule.FitAxis.Both and UDim.new(0, Label.TextSize) or Label.Size.Height
 		else
 			_UDim = UDim.new(0, MaxWidth)
-			_UDim1 = UDim.new(0, if FoundationFontFaceMigration then GetTextSizeFunction(Label.Text, Label.TextSize, Label.FontFace, Vector2.new(_UDim.Offset, 10000)).Y else Text.GetTextHeight(Label.Text, Label.Font, Label.TextSize, _UDim.Offset))
+			_UDim1 = UDim.new(0, GetTextSizeFunction(Label.Text, Label.TextSize, Label.FontFace, Vector2.new(_UDim.Offset, 10000)).Y)
 		end
 		p1:setState({ width = _UDim, height = _UDim1 })
 	end
@@ -50,16 +47,16 @@ function FitTextLabel.init(p1)
 end
 
 function FitTextLabel.render(p1)
-	-- upvalues: FitChildrenModule (copy), FoundationFontFaceMigration (copy), Immutable (copy), RoactModule (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: FitChildrenModule (copy), Immutable (copy), RoactModule (copy), NormalizeFontFaceFunction (copy)
 	local FitAxis = p1.props.fitAxis or FitChildrenModule.FitAxis.Height
-	local FitAxis1 = if FoundationFontFaceMigration then Immutable.RemoveFromDictionary(p1.props, "fitAxis", "maxWidth", "Font", "FontFace") else Immutable.RemoveFromDictionary(p1.props, "fitAxis", "maxWidth")
+	local FitAxis1 = Immutable.RemoveFromDictionary(p1.props, "fitAxis", "maxWidth", "Font", "FontFace")
 	local Width = p1.state.width
 	local Height = p1.state.height
 	
 	if Width and Height then
 		FitAxis1 = Immutable.JoinDictionaries(FitAxis1, { Size = UDim2.new(Width, Height) })
 	end
-	return if FoundationFontFaceMigration then RoactModule.createElement("TextLabel", Immutable.JoinDictionaries(FitAxis1, {
+	return RoactModule.createElement("TextLabel", Immutable.JoinDictionaries(FitAxis1, {
 		FontFace = if p1.props.FontFace or p1.props.Font then NormalizeFontFaceFunction(p1.props.FontFace or p1.props.Font) else nil
 	}, {
 		[RoactModule.Ref] = p1.onRef,
@@ -67,11 +64,6 @@ function FitTextLabel.render(p1)
 		[RoactModule.Change.TextSize] = p1.resize,
 		[RoactModule.Change.AbsoluteSize] = FitAxis == FitChildrenModule.FitAxis.Height and p1.resize or nil,
 		[RoactModule.Change.FontFace] = p1.resize
-	})) else RoactModule.createElement("TextLabel", Immutable.JoinDictionaries(FitAxis1, {
-		[RoactModule.Ref] = p1.onRef,
-		[RoactModule.Change.Text] = p1.resize,
-		[RoactModule.Change.TextSize] = p1.resize,
-		[RoactModule.Change.AbsoluteSize] = FitAxis == FitChildrenModule.FitAxis.Height and p1.resize or nil
 	}))
 end
 

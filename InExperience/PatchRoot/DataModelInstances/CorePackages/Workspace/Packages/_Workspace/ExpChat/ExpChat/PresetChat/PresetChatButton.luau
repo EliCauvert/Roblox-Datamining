@@ -1,4 +1,5 @@
-﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+﻿local HttpService = game:GetService("HttpService")
+local ExpChat = script:FindFirstAncestor("ExpChat")
 local Parent = ExpChat.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
@@ -15,11 +16,12 @@ local SetIsPresetTrayOpenModule = require(script.Parent.Thunks.setIsPresetTrayOp
 local FFlagExpChatUseUnifiedTooltipStore = ExpChatSharedModule.Flags.FFlagExpChatUseUnifiedTooltipStore
 local FFlagExpChatCenterMobilePresetButtonModule = require(ExpChat.Flags.FFlagExpChatCenterMobilePresetButton)
 local FFlagExpChatPresetFullWidthButtonFixesModule = require(ExpChat.Flags.FFlagExpChatPresetFullWidthButtonFixes)
+local FFlagExpChatPresetEntryPointClickActionModule = require(ExpChat.Flags.FFlagExpChatPresetEntryPointClickAction)
 local FFlagExpChatPresetChatCircleFaceEmojiEntryPointRolloutEnabledModule = require(ExpChat.Flags.FFlagExpChatPresetChatCircleFaceEmojiEntryPointRolloutEnabled)
 local ExpChatPresetChatEmojiTabExperimentation = require(Parent.SocialExperiments).ExpChatPresetChatEmojiTabExperimentation
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), FFlagExpChatPresetFullWidthButtonFixesModule (copy), LocalizationModule (copy), GetPresetChatStoreModule (copy), SignalsReactModule (copy), FFlagExpChatPresetChatCircleFaceEmojiEntryPointRolloutEnabledModule (copy), HasPresetEmojiModule (copy), ExpChatPresetChatEmojiTabExperimentation (copy), FFlagExpChatUseUnifiedTooltipStore (copy), GetChatTooltipStoreModule (copy), SetIsPresetTrayOpenModule (copy), ExpChatSharedModule (copy), ConstantsModule (copy), FoundationModule (copy), ConfigModule (copy), PresetChatTooltipModule (copy), FFlagExpChatCenterMobilePresetButtonModule (copy)
+	-- upvalues: ReactModule (copy), FFlagExpChatPresetFullWidthButtonFixesModule (copy), LocalizationModule (copy), GetPresetChatStoreModule (copy), SignalsReactModule (copy), FFlagExpChatPresetChatCircleFaceEmojiEntryPointRolloutEnabledModule (copy), HasPresetEmojiModule (copy), ExpChatPresetChatEmojiTabExperimentation (copy), FFlagExpChatUseUnifiedTooltipStore (copy), GetChatTooltipStoreModule (copy), SetIsPresetTrayOpenModule (copy), ExpChatSharedModule (copy), ConstantsModule (copy), FFlagExpChatPresetEntryPointClickActionModule (copy), HttpService (copy), FoundationModule (copy), ConfigModule (copy), PresetChatTooltipModule (copy), FFlagExpChatCenterMobilePresetButtonModule (copy)
 	local UseRefResult = ReactModule.useRef(false)
 	local UseRefResult1 = if FFlagExpChatPresetFullWidthButtonFixesModule then ReactModule.useRef(nil) else nil
 	local UseRefResult2 = if FFlagExpChatPresetFullWidthButtonFixesModule then ReactModule.useRef(nil) else nil
@@ -41,7 +43,7 @@ return ReactModule.memo(function(p1)
 		IsEmojiIconEnabled = ExpChatPresetChatEmojiTabExperimentation.getIsEmojiIconEnabled()
 	end
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: FFlagExpChatUseUnifiedTooltipStore (upval), GetChatTooltipStoreModule (upval), UseRefResult (copy), SetIsPresetTrayOpenModule (upval), PresetChatStoreModule (copy), ExpChatSharedModule (upval), ConstantsModule (upval)
+		-- upvalues: FFlagExpChatUseUnifiedTooltipStore (upval), GetChatTooltipStoreModule (upval), UseRefResult (copy), PresetChatStoreModule (copy), SetIsPresetTrayOpenModule (upval), ExpChatSharedModule (upval), ConstantsModule (upval), FFlagExpChatPresetEntryPointClickActionModule (upval), HttpService (upval)
 		if FFlagExpChatUseUnifiedTooltipStore then
 			local ChatTooltipStoreModule = GetChatTooltipStoreModule(false)
 			
@@ -51,10 +53,14 @@ return ReactModule.memo(function(p1)
 			end
 			ChatTooltipStoreModule.setIsDismissed("PresetChatTooltip", true)
 		end
-		SetIsPresetTrayOpenModule(PresetChatStoreModule, not PresetChatStoreModule.getIsTrayOpen(false))
+		local IsTrayOpen = PresetChatStoreModule.getIsTrayOpen(false)
+		SetIsPresetTrayOpenModule(PresetChatStoreModule, not IsTrayOpen)
 		ExpChatSharedModule.Analytics:TelemetryLogEvent(ExpChatSharedModule.Analytics.ExpChatPresetActionConfig, {
 			event_type = ConstantsModule.Analytics.EventTypes.Click,
-			component = ConstantsModule.Analytics.Components.PresetEntryPointButton
+			component = ConstantsModule.Analytics.Components.PresetEntryPointButton,
+			extra_json = if FFlagExpChatPresetEntryPointClickActionModule then HttpService:JSONEncode({
+				click_action = if IsTrayOpen then ConstantsModule.Analytics.ClickActions.Close else ConstantsModule.Analytics.ClickActions.Open
+			}) else nil
 		}, ExpChatSharedModule.Analytics.DefaultStandardizedFields)
 	end, { PresetChatStoreModule })
 	local Element = ReactModule.createElement(PresetChatTooltipModule, {

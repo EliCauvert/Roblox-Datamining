@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXItemDetailsDescriptionLinks_DEV", false)
+﻿return game:DefineFastFlag("AXItemDetailsDescriptionLinks", false)

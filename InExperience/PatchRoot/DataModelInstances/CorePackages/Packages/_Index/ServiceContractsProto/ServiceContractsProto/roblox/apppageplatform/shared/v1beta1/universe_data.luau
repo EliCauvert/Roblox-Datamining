@@ -37,7 +37,9 @@ function Module.new(p1)
 		creation_source = if p1 == nil or p1.creation_source == nil then nil else p1.creation_source,
 		promotional_text = if p1 == nil or p1.promotional_text == nil then nil else p1.promotional_text,
 		moment_video_asset_id = if p1 == nil or p1.moment_video_asset_id == nil then nil else p1.moment_video_asset_id,
-		is_community_licensed = if p1 == nil or p1.is_community_licensed == nil then nil else p1.is_community_licensed
+		is_community_licensed = if p1 == nil or p1.is_community_licensed == nil then nil else p1.is_community_licensed,
+		summary = if p1 == nil or p1.summary == nil then nil else p1.summary,
+		tags = if p1 == nil or p1.tags == nil then {} else p1.tags
 	}, Module))
 end
 
@@ -170,6 +172,16 @@ function Module:encode()
 		local WriteTagResult31, WriteTagResult2_30 = ProtoModule.writeTag(Buf, Count, 31, ProtoModule.wireTypes.varint)
 		Buf, Count = ProtoModule.writeVarInt(WriteTagResult31, WriteTagResult2_30, if self.is_community_licensed then 1 else 0)
 	end
+	if self.summary ~= nil then
+		local WriteTagResult32, WriteTagResult2_31 = ProtoModule.writeTag(Buf, Count, 32, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult32, WriteTagResult2_31, self.summary)
+	end
+	if self.tags ~= nil and #self.tags > 0 then
+		for _, tag in self.tags do
+			local WriteTagResult33, WriteTagResult2_32 = ProtoModule.writeTag(Buf, Count, 33, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult33, WriteTagResult2_32, tag)
+		end
+	end
 	local Buf1 = buffer.create(Count)
 	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
@@ -182,124 +194,132 @@ function Module.decode(Buf)
 	local v1 = 0
 	while v1 < buffer.len(Buf) do
 		local Tag, Tag2
-		Tag, Tag2, v70 = ProtoModule.readTag(Buf, v1)
+		Tag, Tag2, v74 = ProtoModule.readTag(Buf, v1)
 		
 		if Tag2 == ProtoModule.wireTypes.varint then
 			if Tag == 1 then
-				NewModule.id, v70 = ProtoModule.readVarIntI64(Buf, v1)
+				NewModule.id, v74 = ProtoModule.readVarIntI64(Buf, v1)
 			elseif Tag == 4 then
-				NewModule.root_place_id, v70 = ProtoModule.readVarIntI64(Buf, v1)
+				NewModule.root_place_id, v74 = ProtoModule.readVarIntI64(Buf, v1)
 			elseif Tag == 6 then
-				NewModule.creator_id, v70 = ProtoModule.readVarIntI64(Buf, v1)
+				NewModule.creator_id, v74 = ProtoModule.readVarIntI64(Buf, v1)
 			elseif Tag == 7 then
-				NewModule.player_count, v70 = ProtoModule.readVarIntI64(Buf, v1)
+				NewModule.player_count, v74 = ProtoModule.readVarIntI64(Buf, v1)
 			elseif Tag == 8 then
-				NewModule.total_up_votes, v70 = ProtoModule.readVarIntI64(Buf, v1)
+				NewModule.total_up_votes, v74 = ProtoModule.readVarIntI64(Buf, v1)
 			elseif Tag == 9 then
-				NewModule.total_down_votes, v70 = ProtoModule.readVarIntI64(Buf, v1)
+				NewModule.total_down_votes, v74 = ProtoModule.readVarIntI64(Buf, v1)
 			elseif Tag == 10 then
 				local VarInt
-				VarInt, v70 = ProtoModule.readVarInt(Buf, v1)
+				VarInt, v74 = ProtoModule.readVarInt(Buf, v1)
 				NewModule.is_voice_supported = VarInt ~= 0
 			elseif Tag == 11 then
 				local VarInt1
-				VarInt1, v70 = ProtoModule.readVarInt(Buf, v1)
+				VarInt1, v74 = ProtoModule.readVarInt(Buf, v1)
 				NewModule.is_camera_supported = VarInt1 ~= 0
 			elseif Tag == 15 then
-				NewModule.maximum_server_size, v70 = ProtoModule.readVarIntI64(Buf, v1)
+				NewModule.maximum_server_size, v74 = ProtoModule.readVarIntI64(Buf, v1)
 			elseif Tag == 18 then
-				NewModule.favorite_count, v70 = ProtoModule.readVarIntI64(Buf, v1)
+				NewModule.favorite_count, v74 = ProtoModule.readVarIntI64(Buf, v1)
 			elseif Tag == 19 then
-				NewModule.total_visits, v70 = ProtoModule.readVarIntI64(Buf, v1)
+				NewModule.total_visits, v74 = ProtoModule.readVarIntI64(Buf, v1)
 			elseif Tag == 21 then
-				NewModule.game_minimum_age, v70 = ProtoModule.readVarIntI32(Buf, v1)
+				NewModule.game_minimum_age, v74 = ProtoModule.readVarIntI32(Buf, v1)
 			elseif Tag == 24 then
 				local VarInt2
-				VarInt2, v70 = ProtoModule.readVarInt(Buf, v1)
+				VarInt2, v74 = ProtoModule.readVarInt(Buf, v1)
 				NewModule.is_officially_licensed = VarInt2 ~= 0
 			elseif Tag == 27 then
-				NewModule.preview_video_id, v70 = ProtoModule.readVarIntI64(Buf, v1)
+				NewModule.preview_video_id, v74 = ProtoModule.readVarIntI64(Buf, v1)
 			elseif Tag == 30 then
-				NewModule.moment_video_asset_id, v70 = ProtoModule.readVarIntI64(Buf, v1)
+				NewModule.moment_video_asset_id, v74 = ProtoModule.readVarIntI64(Buf, v1)
 			elseif Tag == 31 then
 				local VarInt3
-				VarInt3, v70 = ProtoModule.readVarInt(Buf, v1)
+				VarInt3, v74 = ProtoModule.readVarInt(Buf, v1)
 				NewModule.is_community_licensed = VarInt3 ~= 0
 			else
 				local _
-				_, v70 = ProtoModule.readVarInt(Buf, v1)
+				_, v74 = ProtoModule.readVarInt(Buf, v1)
 			end
 		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 			if Tag == 2 then
 				local Buffer1
-				Buffer1, v70 = ProtoModule.readBuffer(Buf, v1)
+				Buffer1, v74 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.name = buffer.tostring(Buffer1)
 			elseif Tag == 3 then
 				local Buffer2
-				Buffer2, v70 = ProtoModule.readBuffer(Buf, v1)
+				Buffer2, v74 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.description = buffer.tostring(Buffer2)
 			elseif Tag == 5 then
 				local Buffer3
-				Buffer3, v70 = ProtoModule.readBuffer(Buf, v1)
+				Buffer3, v74 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.creator_type = buffer.tostring(Buffer3)
 			elseif Tag == 12 then
 				local Buffer4
-				Buffer4, v70 = ProtoModule.readBuffer(Buf, v1)
+				Buffer4, v74 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.localized_fiat_price = buffer.tostring(Buffer4)
 			elseif Tag == 13 then
 				local Buffer5
-				Buffer5, v70 = ProtoModule.readBuffer(Buf, v1)
+				Buffer5, v74 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.genre_l1 = buffer.tostring(Buffer5)
 			elseif Tag == 14 then
 				local Buffer6
-				Buffer6, v70 = ProtoModule.readBuffer(Buf, v1)
+				Buffer6, v74 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.genre_l2 = buffer.tostring(Buffer6)
 			elseif Tag == 16 then
 				local Buffer7
-				Buffer7, v70 = ProtoModule.readBuffer(Buf, v1)
+				Buffer7, v74 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.created_date = buffer.tostring(Buffer7)
 			elseif Tag == 17 then
 				local Buffer8
-				Buffer8, v70 = ProtoModule.readBuffer(Buf, v1)
+				Buffer8, v74 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.updated_date = buffer.tostring(Buffer8)
 			elseif Tag == 20 then
 				local Buffer9
-				Buffer9, v70 = ProtoModule.readBuffer(Buf, v1)
+				Buffer9, v74 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.canonical_url_path = buffer.tostring(Buffer9)
 			elseif Tag == 22 then
 				local Buffer10
-				Buffer10, v70 = ProtoModule.readBuffer(Buf, v1)
+				Buffer10, v74 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.game_age_display_name = buffer.tostring(Buffer10)
 			elseif Tag == 23 then
 				local Buffer11
-				Buffer11, v70 = ProtoModule.readBuffer(Buf, v1)
+				Buffer11, v74 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.content_maturity = buffer.tostring(Buffer11)
 			elseif Tag == 25 then
 				local Buffer12
-				Buffer12, v70 = ProtoModule.readBuffer(Buf, v1)
+				Buffer12, v74 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.refund_policy_text = buffer.tostring(Buffer12)
 			elseif Tag == 26 then
 				local Buffer13
-				Buffer13, v70 = ProtoModule.readBuffer(Buf, v1)
+				Buffer13, v74 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.refund_article_id = buffer.tostring(Buffer13)
 			elseif Tag == 28 then
 				local Buffer14
-				Buffer14, v70 = ProtoModule.readBuffer(Buf, v1)
+				Buffer14, v74 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.creation_source = buffer.tostring(Buffer14)
 			elseif Tag == 29 then
 				local Buffer15
-				Buffer15, v70 = ProtoModule.readBuffer(Buf, v1)
+				Buffer15, v74 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.promotional_text = buffer.tostring(Buffer15)
+			elseif Tag == 32 then
+				local Buffer16
+				Buffer16, v74 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.summary = buffer.tostring(Buffer16)
+			elseif Tag == 33 then
+				local Buffer17
+				Buffer17, v74 = ProtoModule.readBuffer(Buf, v1)
+				table.insert(NewModule.tags, buffer.tostring(Buffer17))
 			else
 				local VarInt4, VarInt2_1 = ProtoModule.readVarInt(Buf, v1)
 				v1 = VarInt2_1 + VarInt4
 			end
 		elseif Tag2 == ProtoModule.wireTypes.i32 then
 			local _
-			_, v70 = ProtoModule.readFixed32(Buf, v1)
+			_, v74 = ProtoModule.readFixed32(Buf, v1)
 		elseif Tag2 == ProtoModule.wireTypes.i64 then
 			local _
-			_, v70 = ProtoModule.readFixed64(Buf, v1)
+			_, v74 = ProtoModule.readFixed64(Buf, v1)
 		else
 			error("Unsupported wire type: " .. Tag2)
 		end
@@ -402,6 +422,17 @@ function Module:jsonEncode()
 	end
 	if self.is_community_licensed ~= nil then
 		t.isCommunityLicensed = self.is_community_licensed
+	end
+	if self.summary ~= nil then
+		t.summary = self.summary
+	end
+	if self.tags ~= nil and #self.tags > 0 then
+		local Tags = {}
+		
+		for _, tag in self.tags do
+			table.insert(Tags, tag)
+		end
+		t.tags = Tags
 	end
 	return t
 end
@@ -586,6 +617,17 @@ function Module:jsonDecode()
 	end
 	if self.isCommunityLicensed ~= nil then
 		NewModule.is_community_licensed = self.isCommunityLicensed
+	end
+	if self.summary ~= nil then
+		NewModule.summary = self.summary
+	end
+	if self.tags ~= nil then
+		local Tags = {}
+		
+		for _, tag in self.tags do
+			table.insert(Tags, tag)
+		end
+		NewModule.tags = Tags
 	end
 	return NewModule
 end

@@ -17,7 +17,9 @@ local FFlagShowSwitchServerButton = SharedFlagsModule.FFlagShowSwitchServerButto
 local FFlagHidePeoplePageInviteFriends = SharedFlagsModule.FFlagHidePeoplePageInviteFriends
 local FFlagAddInviteFriendsIntegration = SharedFlagsModule.FFlagAddInviteFriendsIntegration
 local FFlagPeopleTabUseSwitchServerModule = require(PeopleReactView.Flags.FFlagPeopleTabUseSwitchServerModule)
+local FFlagGameInviteInExpJoinOrInviteLabelModule = require(Parent.GameInvite.FFlagGameInviteInExpJoinOrInviteLabel)
 local IsSideSheetEnabledModule = require(Parent.InExperienceSideSheetUtils.isSideSheetEnabled)
+local IsPlatformInviteUIEnabledModule = require(Parent.GameInvite.isPlatformInviteUIEnabled)
 local ConstantsModule = require(PeopleReactView.Constants)
 local STANDARDSERVER = require(Parent.CoreScriptsCommon).Constants.STANDARD_SERVER
 local Constants = SwitchServerModule.Constants
@@ -36,7 +38,7 @@ local function _()
 end
 
 return function(p1, p2)
-	-- upvalues: FFlagShowSwitchServerButton (copy), FFlagPeopleTabUseSwitchServerModule (copy), ReactModule (copy), SignalsModule (copy), RunService (copy), RobloxReplicatedStorage (copy), UseSignalStateFunction (copy), GetSwitchServerStoreFunction (copy), UseLocalizationFunction (copy), ConstantsModule (copy), Constants (copy), PeopleServiceModule (copy), UseSignalBindingFunction (copy), FFlagHidePeoplePageInviteFriends (copy), FFlagAddInviteFriendsIntegration (copy), IsSideSheetEnabledModule (copy), GetFFlagNewPeoplePageIconsFunction (copy), Players (copy), STANDARDSERVER (copy), FFlagEnablePeoplePageButtonOnMount (copy), Flag (ref), SwitchServerTelemetry (copy)
+	-- upvalues: FFlagShowSwitchServerButton (copy), FFlagPeopleTabUseSwitchServerModule (copy), ReactModule (copy), SignalsModule (copy), RunService (copy), RobloxReplicatedStorage (copy), UseSignalStateFunction (copy), GetSwitchServerStoreFunction (copy), UseLocalizationFunction (copy), ConstantsModule (copy), FFlagGameInviteInExpJoinOrInviteLabelModule (copy), Constants (copy), PeopleServiceModule (copy), UseSignalBindingFunction (copy), FFlagHidePeoplePageInviteFriends (copy), FFlagAddInviteFriendsIntegration (copy), IsSideSheetEnabledModule (copy), IsPlatformInviteUIEnabledModule (copy), GetFFlagNewPeoplePageIconsFunction (copy), Players (copy), STANDARDSERVER (copy), FFlagEnablePeoplePageButtonOnMount (copy), Flag (ref), SwitchServerTelemetry (copy)
 	local UseMemoResult = if FFlagShowSwitchServerButton and not FFlagPeopleTabUseSwitchServerModule then ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), RunService (upval), RobloxReplicatedStorage (upval)
 		local Signal, Signal2 = SignalsModule.createSignal(nil)
@@ -61,6 +63,7 @@ return function(p1, p2)
 	local UseSignalStateResult1 = if FFlagShowSwitchServerButton and FFlagPeopleTabUseSwitchServerModule then UseSignalStateFunction(GetSwitchServerStoreFunction(false).shouldEnableSwitchServer) else false
 	local UseLocalizationResult = UseLocalizationFunction({
 		inviteFriends = ConstantsModule.PEOPLEPAGE.CORE_BUTTONS.LOCALIZED_STRINGS.INVITE_FRIENDS,
+		joinOrInvite = if FFlagGameInviteInExpJoinOrInviteLabelModule then ConstantsModule.PEOPLEPAGE.CORE_BUTTONS.LOCALIZED_STRINGS.JOIN_OR_INVITE else nil,
 		muteAll = ConstantsModule.PEOPLEPAGE.CORE_BUTTONS.LOCALIZED_STRINGS.MUTE_ALL,
 		unmuteAll = ConstantsModule.PEOPLEPAGE.CORE_BUTTONS.LOCALIZED_STRINGS.UNMUTE_ALL,
 		switchServer = Constants.BUTTON.LABEL,
@@ -98,14 +101,14 @@ return function(p1, p2)
 	end)
 	
 	return (ReactModule.useMemo(function()
-		-- upvalues: FFlagHidePeoplePageInviteFriends (upval), FFlagAddInviteFriendsIntegration (upval), IsSideSheetEnabledModule (upval), UseLocalizationResult (copy), GetFFlagNewPeoplePageIconsFunction (upval), ConstantsModule (upval), RunService (upval), Players (upval), SettingsHubService (copy), PeopleAnalyticsManagerService (copy), MapResult (copy), AllPlayersMuted (copy), UseSignalStateResult2 (copy), UseSignalBindingResult (copy), PeopleVoiceChatStoreService (copy), FFlagShowSwitchServerButton (upval), Constants (upval), FFlagPeopleTabUseSwitchServerModule (upval), UseSignalStateResult1 (copy), UseSignalStateResult (copy), STANDARDSERVER (upval), p2 (copy), FFlagEnablePeoplePageButtonOnMount (upval), Flag (upval), SwitchServerTelemetry (upval), MapResult1 (copy), LocalMuted (copy), p1 (copy), UseSignalBindingResult1 (copy)
+		-- upvalues: FFlagHidePeoplePageInviteFriends (upval), FFlagAddInviteFriendsIntegration (upval), IsSideSheetEnabledModule (upval), FFlagGameInviteInExpJoinOrInviteLabelModule (upval), IsPlatformInviteUIEnabledModule (upval), UseLocalizationResult (copy), GetFFlagNewPeoplePageIconsFunction (upval), ConstantsModule (upval), RunService (upval), Players (upval), SettingsHubService (copy), PeopleAnalyticsManagerService (copy), MapResult (copy), AllPlayersMuted (copy), UseSignalStateResult2 (copy), UseSignalBindingResult (copy), PeopleVoiceChatStoreService (copy), FFlagShowSwitchServerButton (upval), Constants (upval), FFlagPeopleTabUseSwitchServerModule (upval), UseSignalStateResult1 (copy), UseSignalStateResult (copy), STANDARDSERVER (upval), p2 (copy), FFlagEnablePeoplePageButtonOnMount (upval), Flag (upval), SwitchServerTelemetry (upval), MapResult1 (copy), LocalMuted (copy), p1 (copy), UseSignalBindingResult1 (copy)
 		local List = {}
 		
 		if not FFlagHidePeoplePageInviteFriends or not FFlagAddInviteFriendsIntegration or not IsSideSheetEnabledModule then
 			table.insert(List, {
 				id = "inviteFriends",
 				layoutOrder = 1,
-				text = UseLocalizationResult.inviteFriends,
+				text = if FFlagGameInviteInExpJoinOrInviteLabelModule and not IsPlatformInviteUIEnabledModule() then UseLocalizationResult.joinOrInvite else UseLocalizationResult.inviteFriends,
 				onIcon = if GetFFlagNewPeoplePageIconsFunction() then ConstantsModule.PEOPLEPAGE.CORE_BUTTONS.ICON.INVITE_FRIENDS_NEW else ConstantsModule.PEOPLEPAGE.CORE_BUTTONS.ICON.INVITE_FRIENDS_LEGACY,
 				isNewIcon = GetFFlagNewPeoplePageIconsFunction(),
 				shouldShow = function(): boolean

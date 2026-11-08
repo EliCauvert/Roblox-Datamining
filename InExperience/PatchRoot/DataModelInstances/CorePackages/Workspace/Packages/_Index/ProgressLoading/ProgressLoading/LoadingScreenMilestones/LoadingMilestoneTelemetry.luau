@@ -55,11 +55,11 @@ return {
 			}, { customFields = Copy }, Value)
 		end)
 	end,
-	getMilestoneSessionMetadata = function(Subcategory)
+	getMilestoneSessionMetadata = function(Subcategory, Page)
 		-- upvalues: ConstantsModule (copy), RunService (copy), UserInputService (copy)
 		return {
 			category = ConstantsModule.CATEGORY,
-			page = ConstantsModule.PAGE,
+			page = Page,
 			subcategory = Subcategory,
 			AppVersion = RunService:GetRobloxVersion(),
 			CoreScriptVersion = RunService:GetCoreScriptVersion(),
@@ -71,11 +71,11 @@ return {
 		return TryMilestoneOperationModule(function()
 			-- upvalues: TelemetryService (upval), ConstantsModule (upval), CustomFields (copy)
 			TelemetryService:LogCounter({
-				description = "Instrumented Tilt loading screens, before tracker initialization.",
+				description = "Instrumented loading screens, before tracker initialization.",
 				links = "https://roblox.atlassian.net/wiki/x/AAPROQE",
 				eventName = ConstantsModule.EVENT_NAME .. "_MilestonesStarted",
 				backends = { "RobloxTelemetryCounter" },
-				lastUpdated = { 2026, 9, 28 }
+				lastUpdated = { 2026, 11, 2 }
 			}, { customFields = CustomFields }, 1)
 		end)
 	end,
@@ -86,11 +86,11 @@ return {
 			local Copy = table.clone(Tbl)
 			Copy.outcome = Outcome
 			TelemetryService:LogCounter({
-				description = "Terminal outcomes of instrumented Tilt loading screens, independent of TTI sampling.",
+				description = "Terminal outcomes of instrumented loading screens, independent of TTI sampling.",
 				links = "https://roblox.atlassian.net/wiki/x/AAPROQE",
 				eventName = ConstantsModule.EVENT_NAME .. "_MilestonesOutcome",
 				backends = { "RobloxTelemetryCounter" },
-				lastUpdated = { 2026, 9, 28 }
+				lastUpdated = { 2026, 11, 2 }
 			}, { customFields = Copy }, 1)
 		end)
 	end

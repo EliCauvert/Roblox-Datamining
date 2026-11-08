@@ -6,9 +6,7 @@ local IXPServiceWrapper = require(Parent1.IXPServiceWrapper).IXPServiceWrapper
 local ReactModule = require(Parent1.React)
 local RoactUtilsModule = require(Parent1.RoactUtils)
 local UIBloxModule = require(Parent1.UIBlox)
-local FoundationModule = require(Parent1.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent1.Foundation).Utility.normalizeFontFace
 local Images = UIBloxModule.App.ImageSet.Images
 local ImageSetButton = UIBloxModule.Core.ImageSet.ImageSetButton
 local Signal = require(Parent1.AppCommonLib).Signal
@@ -55,7 +53,7 @@ local function getTitle(p1): string
 end
 
 return function(_)
-	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseStyleFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseRefFunction (copy), Signal (copy), UseStateFunction (copy), UseScreenSizeFunction (copy), UseEffectOnceFunction (copy), IXPServiceWrapper (copy), FStringSocialCaptureTakenIXPLayer (copy), UseEffectFunction (copy), ToastTriggeredModule (copy), CapturesToastTypeModule (copy), UseCallbackFunction (copy), EventNamesModule (copy), CarouselClosedModule (copy), DeleteCaptureModule (copy), ContextActionService (copy), getTitle (copy), ReactModule (copy), FFlagUseMediaPlayerInCarousel (copy), ImageSetButton (copy), Images (copy), _UDim2 (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), CapturesCarouselModule (copy), CarouselCTAContainerModule (copy), DeleteWarningModalModule (copy), PermissionModalModule (copy), ToastContainerModule (copy)
+	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseStyleFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseRefFunction (copy), Signal (copy), UseStateFunction (copy), UseScreenSizeFunction (copy), UseEffectOnceFunction (copy), IXPServiceWrapper (copy), FStringSocialCaptureTakenIXPLayer (copy), UseEffectFunction (copy), ToastTriggeredModule (copy), CapturesToastTypeModule (copy), UseCallbackFunction (copy), EventNamesModule (copy), CarouselClosedModule (copy), DeleteCaptureModule (copy), ContextActionService (copy), getTitle (copy), ReactModule (copy), FFlagUseMediaPlayerInCarousel (copy), ImageSetButton (copy), Images (copy), _UDim2 (copy), NormalizeFontFaceFunction (copy), CapturesCarouselModule (copy), CarouselCTAContainerModule (copy), DeleteWarningModalModule (copy), PermissionModalModule (copy), ToastContainerModule (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseStyleResult = UseStyleFunction()
@@ -183,8 +181,7 @@ return function(_)
 						ZIndex = 1,
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						AutomaticSize = Enum.AutomaticSize.X,
-						Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Header2.Font,
-						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.TitleLarge.Font) else nil,
+						FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.TitleLarge.Font),
 						Position = UDim2.new(0.5, 0, 0.5, 2),
 						Size = UDim2.fromScale(0, 1),
 						Text = Title,
@@ -208,8 +205,7 @@ return function(_)
 						ZIndex = 2,
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						AutomaticSize = Enum.AutomaticSize.X,
-						Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Header2.Font,
-						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.TitleLarge.Font) else nil,
+						FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.TitleLarge.Font),
 						Position = UDim2.fromScale(0.5, 0.5),
 						Size = UDim2.fromScale(0, 1),
 						Text = Title,

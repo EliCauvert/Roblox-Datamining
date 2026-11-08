@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("FriendsCalling").Parent.Loggers).Logger:new("FriendsCalling")

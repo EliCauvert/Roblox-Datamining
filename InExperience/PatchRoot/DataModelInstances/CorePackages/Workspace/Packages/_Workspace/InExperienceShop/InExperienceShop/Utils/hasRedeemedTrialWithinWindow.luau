@@ -9,12 +9,8 @@ return function(List): boolean
 	for _, value in List do
 		local EndTime = value.endTime
 		
-		if EndTime ~= nil then
-			local UnixTimestampDelta = EndTime.UnixTimestamp - UnixTimestamp
-			
-			if UnixTimestampDelta >= 0 and UnixTimestampDelta < FIntRedeemedTrialBlueDotMaxSecondsUntilEndModule then
-				return true
-			end
+		if EndTime ~= nil and UnixTimestamp < EndTime.UnixTimestamp + FIntRedeemedTrialBlueDotMaxSecondsUntilEndModule then
+			return true
 		end
 	end
 	return false

@@ -3,13 +3,35 @@ local CryoModule = require(Parent.Cryo)
 local LaunchGameFunction = require(Parent.GameLaunch).LaunchGame
 local FFlagDeferInExperienceRbxmDownload = require(Parent.SharedFlags).FFlagDeferInExperienceRbxmDownload
 local FFlagLuaAppFixLaunchGameSourceParam = require(Parent.SharedFlags).FFlagLuaAppFixLaunchGameSourceParam
+local FFlagSduiLaunchExperienceCheckPlayabilityBeforeLaunch = require(Parent.SharedFlags).FFlagSduiLaunchExperienceCheckPlayabilityBeforeLaunch
 local SduiReportGamePlayIntentFunction = require(Parent.SduiSharedContent).sduiReportGamePlayIntent
+local LaunchUnlessNotPlayableFunction = require(Parent.GamePlayButton).LaunchUnlessNotPlayable
 local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiActionType = SduiCoreSystemModule.SduiActionType
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
-local LaunchExperience = SduiCoreSystemModule.SduiActionType.LaunchExperience
+local ExecuteActionFunction = SduiCoreSystemModule.executeAction
+local LaunchExperience = SduiActionType.LaunchExperience
+
+local function launchExperience(PlaceId, UniverseId, LaunchSource, ExperienceJoinData, AnalyticsContext, SduiContext)
+	-- upvalues: SduiReportGamePlayIntentFunction (copy), FFlagLuaAppFixLaunchGameSourceParam (copy), LaunchGameFunction (copy)
+	SduiReportGamePlayIntentFunction({
+		sduiContext = SduiContext,
+		analyticsContext = AnalyticsContext,
+		universeId = tostring(UniverseId or ""),
+		placeId = PlaceId
+	})
+	
+	if FFlagLuaAppFixLaunchGameSourceParam then
+		LaunchGameFunction(PlaceId, nil, ExperienceJoinData, nil, LaunchSource)
+		
+		return
+	else
+		LaunchGameFunction(PlaceId, LaunchSource, ExperienceJoinData, nil)
+	end
+end
 
 return function(p1, AnalyticsContext, SduiContext, _)
-	-- upvalues: SduiErrorType (copy), LaunchExperience (copy), FFlagDeferInExperienceRbxmDownload (copy), CryoModule (copy), SduiReportGamePlayIntentFunction (copy), FFlagLuaAppFixLaunchGameSourceParam (copy), LaunchGameFunction (copy)
+	-- upvalues: SduiErrorType (copy), LaunchExperience (copy), FFlagDeferInExperienceRbxmDownload (copy), CryoModule (copy), FFlagSduiLaunchExperienceCheckPlayabilityBeforeLaunch (copy), launchExperience (copy), SduiActionType (copy), ExecuteActionFunction (copy), LaunchUnlessNotPlayableFunction (copy), SduiReportGamePlayIntentFunction (copy), FFlagLuaAppFixLaunchGameSourceParam (copy), LaunchGameFunction (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	
 	if ActionParams == nil then
@@ -39,18 +61,57 @@ return function(p1, AnalyticsContext, SduiContext, _)
 	if FFlagDeferInExperienceRbxmDownload then
 		ExperienceJoinData = CryoModule.Dictionary.join(ExperienceJoinData or {}, { universeId = UniverseId })
 	end
-	SduiReportGamePlayIntentFunction({
-		sduiContext = SduiContext,
-		analyticsContext = AnalyticsContext,
-		universeId = tostring(UniverseId or ""),
-		placeId = PlaceId
-	})
-	
-	if FFlagLuaAppFixLaunchGameSourceParam then
-		LaunchGameFunction(PlaceId, nil, ExperienceJoinData, nil, LaunchSource)
+	if not FFlagSduiLaunchExperienceCheckPlayabilityBeforeLaunch then
+		SduiReportGamePlayIntentFunction({
+			sduiContext = SduiContext,
+			analyticsContext = AnalyticsContext,
+			universeId = tostring(UniverseId or ""),
+			placeId = PlaceId
+		})
 		
-		return
+		if FFlagLuaAppFixLaunchGameSourceParam then
+			LaunchGameFunction(PlaceId, nil, ExperienceJoinData, nil, LaunchSource)
+		else
+			LaunchGameFunction(PlaceId, LaunchSource, ExperienceJoinData, nil)
+		end
+	elseif ActionParams.checkPlayabilityBeforeLaunch == true then
+		local function launch()
+			-- upvalues: launchExperience (upval), PlaceId (copy), UniverseId (copy), LaunchSource (copy), ExperienceJoinData (ref), AnalyticsContext (copy), SduiContext (copy)
+			launchExperience(PlaceId, UniverseId, LaunchSource, ExperienceJoinData, AnalyticsContext, SduiContext)
+		end
+		
+		if UniverseId == nil then
+			SduiContext.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
+				message = "Missing universeId for checkPlayabilityBeforeLaunch",
+				propName = "universeId",
+				name = LaunchExperience
+			}, SduiContext.appPage)
+			launchExperience(PlaceId, UniverseId, LaunchSource, ExperienceJoinData, AnalyticsContext, SduiContext)
+			
+			return
+		end
+		local Dependencies = SduiContext.dependencies
+		
+		if Dependencies.networking == nil then
+			Dependencies.logger.reportError(SduiErrorType.GetNilDependencies, {
+				message = "checkPlayabilityBeforeLaunch requires networking dependency",
+				name = LaunchExperience
+			}, SduiContext.appPage)
+			launchExperience(PlaceId, UniverseId, LaunchSource, ExperienceJoinData, AnalyticsContext, SduiContext)
+			
+			return
+		else
+			Dependencies.dispatch(LaunchUnlessNotPlayableFunction(Dependencies.networking, tostring(UniverseId), launch, function()
+				-- upvalues: SduiActionType (upval), ActionParams (copy), ExecuteActionFunction (upval), AnalyticsContext (copy), SduiContext (copy)
+				ExecuteActionFunction({
+					actionType = SduiActionType.OpenGameDetails,
+					actionParams = ActionParams
+				}, AnalyticsContext, SduiContext)
+			end))
+			
+			return
+		end
 	else
-		LaunchGameFunction(PlaceId, LaunchSource, ExperienceJoinData, nil)
+		launchExperience(PlaceId, UniverseId, LaunchSource, ExperienceJoinData, AnalyticsContext, SduiContext)
 	end
 end

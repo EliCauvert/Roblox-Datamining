@@ -4,9 +4,10 @@ local Parent = ChatUIPrimitives.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local _ = require(ChatUIPrimitives.UniversalMessage.Types)
+local FFlagExpChatExpressionPillSelectableOnCooldownModule = require(ChatUIPrimitives.Flags.FFlagExpChatExpressionPillSelectableOnCooldown)
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FoundationModule (copy), ReactModule (copy), TweenService (copy)
+	-- upvalues: FoundationModule (copy), ReactModule (copy), FFlagExpChatExpressionPillSelectableOnCooldownModule (copy), TweenService (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local Circle = UseTokensResult.Radius.Circle
 	local CooldownEndsAt = p1.cooldownEndsAt
@@ -24,6 +25,14 @@ return ReactModule.memo(function(p1)
 		-- upvalues: p1 (copy)
 		p1.onActivated(p1.content)
 	end, { p1.onActivated, p1.content })
+	local UseResult2 = if FFlagExpChatExpressionPillSelectableOnCooldownModule then ReactModule.useCallback(function()
+		-- upvalues: CooldownEndsAt (copy), UseResult1 (copy)
+		if CooldownEndsAt == nil or os.clock() >= CooldownEndsAt then
+			UseResult1()
+			
+			return
+		end
+	end, { CooldownEndsAt, UseResult1 }) else UseResult1
 	ReactModule.useEffect(function()
 		-- upvalues: CooldownEndsAt (copy), UseStateResult (copy), UseRefResult (copy), CooldownDurationSeconds (copy), TweenService (upval)
 		if CooldownEndsAt == nil or UseStateResult == nil then return end
@@ -49,8 +58,8 @@ return ReactModule.memo(function(p1)
 		onAbsoluteSizeChanged = UseResult,
 		LayoutOrder = p1.layoutOrder or 0,
 		backgroundStyle = UseTokensResult.Color.ActionStandard.Background,
-		onActivated = UseResult1,
-		isDisabled = IsClockTimeBelow,
+		onActivated = UseResult2,
+		isDisabled = not FFlagExpChatExpressionPillSelectableOnCooldownModule and IsClockTimeBelow,
 		cursor = {
 			radius = UDim.new(0, Circle),
 			offset = math.floor(UseTokensResult.Stroke.Thicker) * 2,

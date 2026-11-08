@@ -59,6 +59,7 @@ return function(p1)
 		onMessageCanvasPositionChanged = UseResult2,
 		headerHeight = UseBindingResult,
 		headerLayoutPadding = UseMemoResult,
+		headerVisibleHeight = UseMemoResult1,
 		contentTopPadding = UseMemoResult2,
 		messageFadeSequence = UseMemoResult3,
 		headerInteractable = UseMemoResult4

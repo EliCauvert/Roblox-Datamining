@@ -1,10 +1,12 @@
 ﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
 local Parent = SduiCoreSystem.Parent
+local FFlagSduiErrorPaths = require(Parent.SharedFlags).FFlagSduiErrorPaths
 local CryoModule = require(Parent.Cryo)
 local _ = require(Parent.Signals)
 local _ = require(Parent.UnifiedLogging)
 local _ = require(SduiCoreSystem.SduiBuilderTypes)
 local SduiErrorsModule = require(SduiCoreSystem.SduiErrors)
+local AddSduiErrorContextFieldsModule = require(SduiCoreSystem.addSduiErrorContextFields)
 local SduiLoggerModule = require(SduiCoreSystem.SduiLogger)
 local _ = require(SduiCoreSystem.ClientBinding.SduiClientBindingTypes)
 local _ = require(SduiCoreSystem.SduiComponentType)
@@ -16,13 +18,13 @@ local config = {
 }
 
 return function(p1, p2, p3, p4)
-	-- upvalues: t (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), CryoModule (copy), config (copy)
+	-- upvalues: t (copy), FFlagSduiErrorPaths (copy), AddSduiErrorContextFieldsModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), CryoModule (copy), config (copy)
 	local CurrentComponentType = p4.currentComponentType
 	local CurrentParserName = p4.currentParserName
 	local LocalAnalyticsData = nil
 	local config1 = {
 		getAnalyticsDataSnapshot = function()
-			-- upvalues: p1 (copy), t (upval), p2 (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), p4 (copy), CurrentComponentType (copy), CurrentParserName (copy), LocalAnalyticsData (ref), CryoModule (upval)
+			-- upvalues: p1 (copy), t (upval), p2 (copy), p4 (copy), CurrentComponentType (copy), CurrentParserName (copy), FFlagSduiErrorPaths (upval), AddSduiErrorContextFieldsModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval), LocalAnalyticsData (ref), CryoModule (upval)
 			local Copy = table.clone(p1 or t)
 			
 			if p2 then
@@ -32,13 +34,18 @@ return function(p1, p2, p3, p4)
 						Copy[i] = value(false).data
 					end
 				end, function(Err)
-					-- upvalues: SduiLoggerModule (upval), SduiErrorsModule (upval), p4 (upval), CurrentComponentType (upval), CurrentParserName (upval)
-					SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToComputeAnalyticsData, {
+					-- upvalues: p4 (upval), CurrentComponentType (upval), CurrentParserName (upval), FFlagSduiErrorPaths (upval), AddSduiErrorContextFieldsModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval)
+					local config = {
 						message = Err,
 						name = p4.debugName,
 						componentType = CurrentComponentType,
 						parserName = CurrentParserName
-					}, p4.appPage)
+					}
+					
+					if FFlagSduiErrorPaths then
+						AddSduiErrorContextFieldsModule(config, p4.errorContext)
+					end
+					SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToComputeAnalyticsData, config, p4.appPage)
 				end)
 			end
 			return if LocalAnalyticsData then CryoModule.Dictionary.join(Copy, LocalAnalyticsData) else Copy

@@ -7,13 +7,15 @@ local GetCommentsFailureReasonModule = require(Moments.Analytics.getCommentsFail
 local MomentsCommentsModule = require(Parent.DataHydration.MomentsComments)
 local _ = require(Parent.DataHydration.MomentsStoreTypes)
 local _ = require(Parent.MomentsTypes)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local SignalsModule = require(Parent.Signals)
 local SignalsExperimentalModule = require(Parent.SignalsExperimental)
 local _ = require(Moments.Components.Comments.GetCommentCollectionStore.createCommentCollectionStore)
 local _ = require(Moments.Components.Comments.GetCommentSessionFiltersStore.createCommentSessionFiltersStore)
-local FFlagMomentsComments = require(Parent.SharedFlags).FFlagMomentsComments
+local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
 local FFlagMomentsCommentActionsRealtimeModule = require(Moments.Flags.FFlagMomentsCommentActionsRealtime)
 local FFlagMomentsCommentsCountAnalyticsModule = require(Moments.Flags.FFlagMomentsCommentsCountAnalytics)
+local FFlagMomentsCommentDeepLinks = SharedFlagsModule.FFlagMomentsCommentDeepLinks
 local _ = require(Moments.Stores.GetCommentReactionsStore.createCommentReactionsStore)
 local LoadStatus = require(Moments.Components.Comments.GetCommentCollectionStore.CommentCollectionTypes).LoadStatus
 local list = { 250, 500 }
@@ -195,12 +197,13 @@ end
 local function noOp() end
 
 return function(p1)
-	-- upvalues: MomentsCommentsModule (copy), defaultSchedule (copy), defaultReadStatusCode (copy), defaultReadRetryAfter (copy), SignalsModule (copy), parseHttpDateMs (copy), LoadStatus (copy), SignalsExperimentalModule (copy), config (copy), config2 (copy), FFlagMomentsCommentActionsRealtimeModule (copy), observeRequest (copy), GetCommentsFailureReasonModule (copy), list (copy), FFlagMomentsComments (copy), EventNames (copy), FFlagMomentsCommentsCountAnalyticsModule (copy), config1 (copy), rejectReactionMutation (copy), noOp (copy)
+	-- upvalues: MomentsCommentsModule (copy), defaultSchedule (copy), defaultReadStatusCode (copy), defaultReadRetryAfter (copy), SignalsModule (copy), parseHttpDateMs (copy), LoadStatus (copy), SignalsExperimentalModule (copy), config (copy), config2 (copy), FFlagMomentsCommentActionsRealtimeModule (copy), observeRequest (copy), GetCommentsFailureReasonModule (copy), list (copy), FFlagMomentsComments (copy), EventNames (copy), FFlagMomentsCommentsCountAnalyticsModule (copy), FFlagMomentsCommentDeepLinks (copy), config1 (copy), rejectReactionMutation (copy), noOp (copy)
 	local CollectionStore = p1.collectionStore
 	local CommentsStore = p1.commentsStore
 	local ReactionStore = p1.reactionStore
 	local CatalogStore = p1.catalogStore
 	local FetchPage = p1.fetchPage or MomentsCommentsModule.fetchMomentComments
+	local FetchComment = p1.fetchComment or MomentsCommentsModule.fetchMomentComment
 	local PostComment = p1.postComment or MomentsCommentsModule.postMomentComment
 	local PutReaction = p1.putReaction or MomentsCommentsModule.putMomentCommentReaction
 	local DeleteReaction = p1.deleteReaction or MomentsCommentsModule.deleteMomentCommentReaction
@@ -233,6 +236,13 @@ return function(p1)
 		
 		if ActivePageRequest ~= nil then
 			ActivePageRequest.cancel()
+		end
+		local ActivePinnedRequest = p2.activePinnedRequest
+		p2.activePinnedRequest = nil
+		
+		if ActivePinnedRequest ~= nil then
+			p2.hasRequestedPinnedComment = false
+			ActivePinnedRequest.cancel()
 		end
 	end
 	
@@ -474,6 +484,13 @@ return function(p1)
 		if ActivePageRequest ~= nil then
 			ActivePageRequest.cancel()
 		end
+		local ActivePinnedRequest = v3.activePinnedRequest
+		v3.activePinnedRequest = nil
+		
+		if ActivePinnedRequest ~= nil then
+			v3.hasRequestedPinnedComment = false
+			ActivePinnedRequest.cancel()
+		end
 		CollectionStore.failLoad(FeedItemId, if CollectionStore.getState(FeedItemId)(false).initialLoadStatus == LoadStatus.Success then "more" else "initial", RateLimited)
 	end
 	
@@ -633,8 +650,8 @@ return function(p1)
 	
 	local _ = nil
 	
-	local function v103(p2)
-		-- upvalues: Flag (ref), t (copy), CommentsStore (copy), ReactionStore (copy), rollbackReaction (copy), NowMs (copy), Schedule (copy), v103 (ref), t1 (copy), FeedItemIds (copy), ReadRetryAfter (copy), PutReaction (copy), DeleteReaction (copy), p1 (copy), FFlagMomentsCommentActionsRealtimeModule (upval), observeRequest (upval), commitProjectedReaction (copy), ReadStatusCode (copy), MomentsCommentsModule (upval), GetCommentsFailureReasonModule (upval), setReactionCooldown (copy), list (upval), applyTerminalFailure (copy)
+	local function v106(p2)
+		-- upvalues: Flag (ref), t (copy), CommentsStore (copy), ReactionStore (copy), rollbackReaction (copy), NowMs (copy), Schedule (copy), v106 (ref), t1 (copy), FeedItemIds (copy), ReadRetryAfter (copy), PutReaction (copy), DeleteReaction (copy), p1 (copy), FFlagMomentsCommentActionsRealtimeModule (upval), observeRequest (upval), commitProjectedReaction (copy), ReadStatusCode (copy), MomentsCommentsModule (upval), GetCommentsFailureReasonModule (upval), setReactionCooldown (copy), list (upval), applyTerminalFailure (copy)
 		if Flag or t[p2.commentId] ~= p2 or CommentsStore.getOwnerGeneration(false) ~= p2.ownerGeneration or ReactionStore.getIntent(p2.commentId, false) == nil then return end
 		if not p2.syncIsUncertain and p2.desiredEmoteId == p2.syncedEmoteId then
 			t[p2.commentId] = nil
@@ -651,9 +668,9 @@ return function(p1)
 			
 			if NowMsResult - p2.startedAtMs + CooldownUntilMsDelta <= 2000 then
 				p2.cancelRetry = Schedule(CooldownUntilMsDelta, function()
-					-- upvalues: p2 (copy), v103 (upval)
+					-- upvalues: p2 (copy), v106 (upval)
 					p2.cancelRetry = nil
-					v103(p2)
+					v106(p2)
 				end)
 				
 				return
@@ -745,7 +762,7 @@ return function(p1)
 					end
 				end
 				p2.cancelRequest = observeRequest(v4, function(p3)
-					-- upvalues: Flag (upval), t (upval), p2 (copy), CommentsStore (upval), FFlagMomentsCommentActionsRealtimeModule (upval), Verb (copy), DesiredEmoteId (copy), Generation2 (copy), commitProjectedReaction (upval), t1 (upval), Schedule (upval), ReactionStore (upval), FeedItemIds (upval), v103 (upval), ReadStatusCode (upval), StatusCode (ref), MomentsCommentsModule (upval), GetCommentsFailureReasonModule (upval), rollbackReaction (upval), setReactionCooldown (upval), v3 (ref), list (upval), NowMs (upval), applyTerminalFailure (upval)
+					-- upvalues: Flag (upval), t (upval), p2 (copy), CommentsStore (upval), FFlagMomentsCommentActionsRealtimeModule (upval), Verb (copy), DesiredEmoteId (copy), Generation2 (copy), commitProjectedReaction (upval), t1 (upval), Schedule (upval), ReactionStore (upval), FeedItemIds (upval), v106 (upval), ReadStatusCode (upval), StatusCode (ref), MomentsCommentsModule (upval), GetCommentsFailureReasonModule (upval), rollbackReaction (upval), setReactionCooldown (upval), v3 (ref), list (upval), NowMs (upval), applyTerminalFailure (upval)
 					if Flag or t[p2.commentId] ~= p2 or CommentsStore.getOwnerGeneration(false) ~= p2.ownerGeneration then return end
 					p2.cancelRequest = nil
 					
@@ -809,7 +826,7 @@ return function(p1)
 									return
 								end
 							elseif p2.readyToCommit then
-								v103(p2)
+								v106(p2)
 							end
 							return
 						end
@@ -855,11 +872,11 @@ return function(p1)
 							
 							if p2.attempt <= 2 and Entry ~= nil and NowMs() - p2.startedAtMs + Entry <= 2000 then
 								p2.cancelRetry = Schedule(Entry, function()
-									-- upvalues: p2 (upval), t (upval), CommentsStore (upval), v103 (upval)
+									-- upvalues: p2 (upval), t (upval), CommentsStore (upval), v106 (upval)
 									p2.cancelRetry = nil
 									
 									if t[p2.commentId] == p2 and CommentsStore.getOwnerGeneration(false) == p2.ownerGeneration then
-										v103(p2)
+										v106(p2)
 									end
 								end)
 								
@@ -887,7 +904,7 @@ return function(p1)
 							
 							return
 						elseif p2.readyToCommit then
-							v103(p2)
+							v106(p2)
 						end
 					end
 				end)
@@ -896,7 +913,7 @@ return function(p1)
 	end
 	
 	local function scheduleReactionCommit(p2)
-		-- upvalues: ReactionDebounceMs (copy), v103 (ref), Schedule (copy), Flag (ref), t (copy)
+		-- upvalues: ReactionDebounceMs (copy), v106 (ref), Schedule (copy), Flag (ref), t (copy)
 		if p2.cancelDebounce ~= nil then
 			p2.cancelDebounce()
 			p2.cancelDebounce = nil
@@ -905,14 +922,14 @@ return function(p1)
 		
 		if ReactionDebounceMs > 0 then
 			p2.cancelDebounce = Schedule(ReactionDebounceMs, function()
-				-- upvalues: p2 (copy), Flag (upval), t (upval), v103 (upval)
+				-- upvalues: p2 (copy), Flag (upval), t (upval), v106 (upval)
 				p2.cancelDebounce = nil
 				
 				if Flag or t[p2.commentId] ~= p2 then return end
 				p2.readyToCommit = true
 				
 				if p2.cancelRequest == nil and p2.cancelRetry == nil then
-					v103(p2)
+					v106(p2)
 				end
 			end)
 			
@@ -921,7 +938,7 @@ return function(p1)
 		p2.readyToCommit = true
 		
 		if p2.cancelRequest == nil and p2.cancelRetry == nil then
-			v103(p2)
+			v106(p2)
 		end
 	end
 	
@@ -1085,8 +1102,48 @@ return function(p1)
 		return Buffer
 	end
 	
+	local function requestPinnedComment(p2, FeedItemId, SessionId)
+		-- upvalues: p1 (copy), CommentsStore (copy), ReactionStore (copy), FetchComment (copy), observeRequest (upval), Flag (ref), v1 (ref), SessionFilters (copy), commentsForUpsert (copy), cancelReactionRequest (copy), t1 (copy), FeedItemIds (copy), CollectionStore (copy)
+		if p2.hasRequestedPinnedComment or p1.getPinnedCommentId == nil then return end
+		p2.hasRequestedPinnedComment = true
+		local PinnedCommentId = p1.getPinnedCommentId(FeedItemId, SessionId)
+		
+		if PinnedCommentId ~= nil and PinnedCommentId ~= "" then
+			local OwnerGeneration = CommentsStore.getOwnerGeneration(false)
+			local Generation = ReactionStore.getGeneration(false)
+			local ActivePinnedRequest = { cancel = function() end }
+			p2.activePinnedRequest = ActivePinnedRequest
+			ActivePinnedRequest.cancel = observeRequest(FetchComment(FeedItemId, PinnedCommentId, p1.network), function(p3)
+				-- upvalues: p2 (copy), FeedItemId (copy), SessionId (copy), OwnerGeneration (copy), Flag (upval), v1 (upval), CommentsStore (upval), ActivePinnedRequest (copy), PinnedCommentId (copy), SessionFilters (upval), commentsForUpsert (upval), Generation (copy), ReactionStore (upval), cancelReactionRequest (upval), t1 (upval), FeedItemIds (upval), CollectionStore (upval)
+				if Flag or (v1 ~= p2 or (p2.feedItemId ~= FeedItemId or (p2.sessionId ~= SessionId or (p2.ownerGeneration ~= OwnerGeneration or CommentsStore.getOwnerGeneration(false) ~= OwnerGeneration)))) or p2.activePinnedRequest ~= ActivePinnedRequest then return end
+				p2.activePinnedRequest = nil
+				local Result = if p3.status == "succeeded" then p3.result else nil
+				
+				if Result == nil or Result.commentId ~= PinnedCommentId or Result.feedItemId ~= FeedItemId or Result.status ~= "Active" then return end
+				local UserId = if Result.author == nil then nil else Result.author.userId
+				
+				if SessionFilters ~= nil and (SessionFilters.isCommentSessionHidden(PinnedCommentId) or UserId ~= nil and SessionFilters.isAuthorRecentlyBlocked(UserId)) then return end
+				CommentsStore.upsertComments(commentsForUpsert({ Result }, Generation), OwnerGeneration)
+				
+				if ReactionStore.reconcile(FeedItemId, PinnedCommentId, Result.reactions, Generation) then
+					cancelReactionRequest(PinnedCommentId)
+					local Entry: () -> () = t1[PinnedCommentId]
+					t1[PinnedCommentId] = nil
+					
+					if Entry ~= nil then
+						Entry()
+					end
+					FeedItemIds[PinnedCommentId] = nil
+				end
+				CollectionStore.setPinnedComment(FeedItemId, PinnedCommentId)
+			end)
+			
+			return
+		end
+	end
+	
 	Callback2 = function(FeedItemId, SessionId, p2, NextCursor): boolean
-		-- upvalues: v1 (ref), Flag (ref), CommentsStore (copy), FFlagMomentsComments (upval), ReactionStore (copy), failInvalidContinuation (copy), CollectionStore (copy), p1 (copy), EventNames (upval), FetchPage (copy), observeRequest (upval), FFlagMomentsCommentsCountAnalyticsModule (upval), GetCommentsFailureReasonModule (upval), MomentsCommentsModule (upval), ReadStatusCode (copy), commentsForUpsert (copy), cancelReactionRequest (copy), t1 (copy), FeedItemIds (copy), continueAfterMerge (copy), clearReactionsForFeed (copy), Callback2 (ref)
+		-- upvalues: v1 (ref), Flag (ref), CommentsStore (copy), FFlagMomentsComments (upval), ReactionStore (copy), failInvalidContinuation (copy), CollectionStore (copy), p1 (copy), EventNames (upval), FetchPage (copy), observeRequest (upval), FFlagMomentsCommentsCountAnalyticsModule (upval), GetCommentsFailureReasonModule (upval), MomentsCommentsModule (upval), ReadStatusCode (copy), commentsForUpsert (copy), cancelReactionRequest (copy), t1 (copy), FeedItemIds (copy), continueAfterMerge (copy), clearReactionsForFeed (copy), Callback2 (ref), FFlagMomentsCommentDeepLinks (upval), requestPinnedComment (copy)
 		local v4 = v1
 		local v5 = if Flag or v4 == nil or v4.feedItemId ~= FeedItemId or v4.sessionId ~= SessionId or v4.ownerGeneration ~= CommentsStore.getOwnerGeneration(false) or v4.refCount == 0 then nil else v4
 		
@@ -1195,14 +1252,18 @@ return function(p1)
 		end)
 		
 		if not Flag and (v1 == v5 and (v5.feedItemId == FeedItemId and (v5.sessionId == SessionId and (v5.ownerGeneration == OwnerGeneration and CommentsStore.getOwnerGeneration(false) == OwnerGeneration)))) then
+			if FFlagMomentsCommentDeepLinks and p2 == "initial" then
+				requestPinnedComment(v5, FeedItemId, SessionId)
+			end
 			return true
+		else
+			if v5.activePageRequest == ActivePageRequest then
+				v5.activePageRequest = nil
+			end
+			ActivePageRequest.cancel()
+			
+			return false
 		end
-		if v5.activePageRequest == ActivePageRequest then
-			v5.activePageRequest = nil
-		end
-		ActivePageRequest.cancel()
-		
-		return false
 	end
 	
 	local function revokeViewerWrite(FeedItemId, OwnerGeneration)
@@ -1437,6 +1498,13 @@ return function(p1)
 			if ActivePageRequest ~= nil then
 				ActivePageRequest.cancel()
 			end
+			local ActivePinnedRequest = v6.activePinnedRequest
+			v6.activePinnedRequest = nil
+			
+			if ActivePinnedRequest ~= nil then
+				v6.hasRequestedPinnedComment = false
+				ActivePinnedRequest.cancel()
+			end
 		end
 		cancelActivePost(p3)
 		
@@ -1482,6 +1550,13 @@ return function(p1)
 		if ActivePageRequest ~= nil then
 			ActivePageRequest.cancel()
 		end
+		local ActivePinnedRequest = v7.activePinnedRequest
+		v7.activePinnedRequest = nil
+		
+		if ActivePinnedRequest ~= nil then
+			v7.hasRequestedPinnedComment = false
+			ActivePinnedRequest.cancel()
+		end
 		table.clear(v7.requestedCursors)
 		CollectionStore.resetListSession(FeedItemId)
 		
@@ -1526,6 +1601,13 @@ return function(p1)
 			
 			if ActivePageRequest ~= nil then
 				ActivePageRequest.cancel()
+			end
+			local ActivePinnedRequest = v6.activePinnedRequest
+			v6.activePinnedRequest = nil
+			
+			if ActivePinnedRequest ~= nil then
+				v6.hasRequestedPinnedComment = false
+				ActivePinnedRequest.cancel()
 			end
 		end
 		local ActivePageRequest1 = v2
@@ -1587,6 +1669,13 @@ return function(p1)
 					if ActivePageRequest ~= nil then
 						ActivePageRequest.cancel()
 					end
+					local ActivePinnedRequest = v8.activePinnedRequest
+					v8.activePinnedRequest = nil
+					
+					if ActivePinnedRequest ~= nil then
+						v8.hasRequestedPinnedComment = false
+						ActivePinnedRequest.cancel()
+					end
 				end
 				cancelActivePost(IsOwnerGenerationMatch)
 				
@@ -1597,6 +1686,8 @@ return function(p1)
 				v7 = {
 					refCount = 0,
 					activePageRequest = nil,
+					activePinnedRequest = nil,
+					hasRequestedPinnedComment = false,
 					initialLoadType = "initial",
 					feedItemId = FeedItemId,
 					sessionId = SessionId,
@@ -1626,6 +1717,13 @@ return function(p1)
 					
 					if ActivePageRequest ~= nil then
 						ActivePageRequest.cancel()
+					end
+					local ActivePinnedRequest = v9.activePinnedRequest
+					v9.activePinnedRequest = nil
+					
+					if ActivePinnedRequest ~= nil then
+						v9.hasRequestedPinnedComment = false
+						ActivePinnedRequest.cancel()
 					end
 				end
 			end
@@ -1747,19 +1845,19 @@ return function(p1)
 		ensureReactionPresent = if FFlagMomentsComments then ensureReactionPresent else rejectReactionMutation,
 		ensureReactionAbsent = if FFlagMomentsComments then ensureReactionAbsent else rejectReactionMutation,
 		clearReactionState = if FFlagMomentsComments then clearReactionState else noOp,
-		deleteComment = function(FeedItemId, Key, Callback1, Callback2): boolean
+		deleteComment = function(FeedItemId, Key, Callback1, Callback): boolean
 			-- upvalues: Flag (ref), T (ref), CommentsStore (copy), FFlagMomentsComments (upval), p1 (copy), v1 (ref), FFlagMomentsCommentActionsRealtimeModule (upval), DeleteComment (copy), observeRequest (upval), MomentsCommentsModule (upval), ReadStatusCode (copy), GetCommentsFailureReasonModule (upval), removeDeletedComment (copy)
 			if Flag or T[Key] ~= nil then
 				return false
 			end
 			local OwnerGeneration = CommentsStore.getOwnerGeneration(false)
-			local Callback = nil
+			local Callback2 = nil
 			
 			if FFlagMomentsComments and p1.getCommentDeletedCallback ~= nil then
 				local v7 = v1
 				
 				if v7 ~= nil and v7.feedItemId == FeedItemId then
-					Callback = p1.getCommentDeletedCallback(FeedItemId, v7.sessionId)
+					Callback2 = p1.getCommentDeletedCallback(FeedItemId, v7.sessionId)
 				end
 			end
 			local AnalyticsSession = nil
@@ -1776,7 +1874,7 @@ return function(p1)
 			local config = { cancel = function() end }
 			T[Key] = config
 			config.cancel = observeRequest(DeleteCommentResult, function(p4)
-				-- upvalues: T (upval), Key (copy), config (copy), Flag (upval), CommentsStore (upval), OwnerGeneration (copy), MomentsCommentsModule (upval), ReadStatusCode (upval), FFlagMomentsCommentActionsRealtimeModule (upval), AnalyticsSession (ref), GetCommentsFailureReasonModule (upval), removeDeletedComment (upval), FeedItemId (copy), FFlagMomentsComments (upval), Callback2 (copy), Callback1 (copy), Callback (ref)
+				-- upvalues: T (upval), Key (copy), config (copy), Flag (upval), CommentsStore (upval), OwnerGeneration (copy), MomentsCommentsModule (upval), ReadStatusCode (upval), FFlagMomentsCommentActionsRealtimeModule (upval), AnalyticsSession (ref), GetCommentsFailureReasonModule (upval), removeDeletedComment (upval), FeedItemId (copy), FFlagMomentsComments (upval), Callback (copy), Callback1 (copy), Callback2 (ref)
 				if T[Key] ~= config then return end
 				T[Key] = nil
 				
@@ -1800,14 +1898,14 @@ return function(p1)
 				if p4.status == "succeeded" or IsStatusCodeMatch then
 					removeDeletedComment(FeedItemId, Key, OwnerGeneration)
 					
-					if FFlagMomentsComments and p4.status == "succeeded" and Callback2 ~= nil then
-						Callback2()
+					if FFlagMomentsComments and p4.status == "succeeded" and Callback ~= nil then
+						Callback()
 					end
 				elseif Callback1 ~= nil then
 					Callback1()
 				end
-				if FFlagMomentsComments and p4.status == "succeeded" and Callback ~= nil then
-					Callback()
+				if FFlagMomentsComments and p4.status == "succeeded" and Callback2 ~= nil then
+					Callback2()
 				end
 			end)
 			
@@ -1841,13 +1939,20 @@ return function(p1)
 						break
 					end
 				end
-				if not Flag2 then return end
-			end
-			CollectionStore.removeCommentIdsByAuthor(p4, UserId, resolveCommentAuthor)
-			local v8 = v1
-			
-			if v8 ~= nil and #CollectionStore.getState(p4)(false).orderedCommentIds == 0 then
-				loadMore(p4, v8.sessionId)
+				if not Flag2 then
+					if v7.pinnedCommentId ~= nil then
+						local DataResult = CommentsStore.getCachedComment(v7.pinnedCommentId).data(false)
+						
+						if (if DataResult == nil or DataResult.author == nil then nil else DataResult.author.userId) == UserId then
+							CollectionStore.removeCommentIdsByAuthor(p4, UserId, resolveCommentAuthor)
+							local v8 = v1
+							
+							if v8 ~= nil and #CollectionStore.getState(p4)(false).orderedCommentIds == 0 then
+								loadMore(p4, v8.sessionId)
+							end
+						end
+					end
+				end
 			end
 		end,
 		restoreCommentsByAuthor = function(FeedItemId, p5)
@@ -1881,6 +1986,13 @@ return function(p1)
 				
 				if ActivePageRequest ~= nil then
 					ActivePageRequest.cancel()
+				end
+				local ActivePinnedRequest = v9.activePinnedRequest
+				v9.activePinnedRequest = nil
+				
+				if ActivePinnedRequest ~= nil then
+					v9.hasRequestedPinnedComment = false
+					ActivePinnedRequest.cancel()
 				end
 			end
 			local ActivePageRequest1 = v2

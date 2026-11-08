@@ -7,11 +7,10 @@ local Badge = FoundationModule.Badge
 local Text = FoundationModule.Text
 local ReactModule = require(Parent.React)
 local FFlagLuaAppChartsFilterOptionTextTag = require(Parent.SharedFlags).FFlagLuaAppChartsFilterOptionTextTag
-local LuaAppWrapChartsFilterOptionLabels = game:DefineFastFlag("LuaAppWrapChartsFilterOptionLabels", false)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
 return function(Frame: Frame)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FFlagLuaAppChartsFilterOptionTextTag (copy), RadioGroup (copy), View (copy), Text (copy), LuaAppWrapChartsFilterOptionLabels (copy), Badge (copy), FoundationModule (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FFlagLuaAppChartsFilterOptionTextTag (copy), RadioGroup (copy), View (copy), Text (copy), Badge (copy), FoundationModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local XXLarge = UseTokensResult.Padding.XXLarge
 	local config = {
@@ -43,7 +42,7 @@ return function(Frame: Frame)
 					LayoutOrder = 1,
 					tag = {
 						["auto-xy content-default gui-object-defaults size-0 text-color-defaults text-defaults text-size-defaults text-title-medium text-truncate-split text-align-x-left text-align-y-center shrink"] = true,
-						["text-wrap"] = LuaAppWrapChartsFilterOptionLabels
+						["text-wrap"] = true
 					},
 					Text = option.optionDisplayName,
 					textStyle = if Frame.selectedOptionId == option.optionId then UseTokensResult.Color.Content.Emphasis else UseTokensResult.Color.Content.Default

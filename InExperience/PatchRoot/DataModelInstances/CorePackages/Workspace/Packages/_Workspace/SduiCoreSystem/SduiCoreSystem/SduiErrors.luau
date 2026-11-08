@@ -34,6 +34,7 @@ return {
 		FailedToLogGameImpressions = "FailedToLogGameImpressions",
 		FailedToLogImpressions = "FailedToLogImpressions",
 		FailedToLogSocialLinksImpressions = "FailedToLogSocialLinksImpressions",
+		FailedToLogSocialProofTextImpressions = "FailedToLogSocialProofTextImpressions",
 		FailedToLogVirtualEventImpressions = "FailedToLogVirtualEventImpressions",
 		FailedToLogExperienceStoreImpressions = "FailedToLogExperienceStoreImpressions",
 		FailedToLogMarketplaceItemImpressions = "FailedToLogMarketplaceItemImpressions",

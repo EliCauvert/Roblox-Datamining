@@ -17,7 +17,6 @@ local FFlagLuaAppEnableNxMRoduxApportioning = require(Parent.SharedFlags).FFlagL
 local FFlagSduiCollectionGridRevealRows = require(Parent.SharedFlags).FFlagSduiCollectionGridRevealRows
 local FFlagSduiSkipFeedAnalyticsPosition = require(Parent.SharedFlags).FFlagSduiSkipFeedAnalyticsPosition
 local FFlagSduiPerSectionPoolSizing = require(Parent.SharedFlags).FFlagSduiPerSectionPoolSizing
-local FFlagSduiVerticalFeedProgressiveFillOnScroll = require(Parent.SharedFlags).FFlagSduiVerticalFeedProgressiveFillOnScroll
 local FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui = require(Parent.SharedFlags).FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui
 local Frozen = table.freeze({})
 
@@ -72,7 +71,7 @@ local function _(p1, p2, p3)
 end
 
 local function createSduiPoolStore(Key)
-	-- upvalues: FFlagSduiCollectionGridRevealRows (copy), SignalsModule (copy), sectionConfigsEqual (copy), GetMainCollectionLayoutStoreFunction (copy), FFlagSduiPerSectionPoolSizing (copy), Frozen (copy), EMPTYCELLS (copy), MakePoolGetSpanConfigFunction (copy), ProcessOneGridFunction (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), LayoutToCellsFunction (copy), FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), SduiParseHelpersModule (copy), logSkipped (copy), FFlagSduiSkipFeedAnalyticsPosition (copy), CellsEqual (copy), FFlagSduiVerticalFeedProgressiveFillOnScroll (copy)
+	-- upvalues: FFlagSduiCollectionGridRevealRows (copy), SignalsModule (copy), sectionConfigsEqual (copy), GetMainCollectionLayoutStoreFunction (copy), FFlagSduiPerSectionPoolSizing (copy), Frozen (copy), EMPTYCELLS (copy), MakePoolGetSpanConfigFunction (copy), ProcessOneGridFunction (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), LayoutToCellsFunction (copy), FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), SduiParseHelpersModule (copy), logSkipped (copy), FFlagSduiSkipFeedAnalyticsPosition (copy), CellsEqual (copy)
 	local t = {}
 	local t1 = {}
 	local T = if FFlagSduiCollectionGridRevealRows then {} else nil
@@ -121,13 +120,13 @@ local function createSduiPoolStore(Key)
 	end else nil
 	local _ = nil
 	
-	local function v44(Key1)
-		-- upvalues: t2 (copy), SignalsModule (upval), t1 (copy), sectionConfigsEqual (upval), t (copy), Signal (copy), GetMainCollectionLayoutStoreFunction (upval), FFlagSduiPerSectionPoolSizing (upval), Frozen (upval), v44 (ref), EMPTYCELLS (upval), MakePoolGetSpanConfigFunction (upval), ProcessOneGridFunction (upval), FFlagLuaAppEnableNxMRoduxApportioning (upval), LayoutToCellsFunction (upval), FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui (upval), v1 (ref), SduiLoggerModule (upval), SduiErrorsModule (upval), SduiParseHelpersModule (upval), Key (copy), logSkipped (upval)
+	local function v43(Key1)
+		-- upvalues: t2 (copy), SignalsModule (upval), t1 (copy), sectionConfigsEqual (upval), t (copy), Signal (copy), GetMainCollectionLayoutStoreFunction (upval), FFlagSduiPerSectionPoolSizing (upval), Frozen (upval), v43 (ref), EMPTYCELLS (upval), MakePoolGetSpanConfigFunction (upval), ProcessOneGridFunction (upval), FFlagLuaAppEnableNxMRoduxApportioning (upval), LayoutToCellsFunction (upval), FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui (upval), v1 (ref), SduiLoggerModule (upval), SduiErrorsModule (upval), SduiParseHelpersModule (upval), Key (copy), logSkipped (upval)
 		local Entry = t2[Key1]
 		
 		if Entry == nil then
 			local Computed = SignalsModule.createComputed(function(p1)
-				-- upvalues: Key1 (copy), t1 (upval), SignalsModule (upval), sectionConfigsEqual (upval), t (upval), Signal (upval), GetMainCollectionLayoutStoreFunction (upval), FFlagSduiPerSectionPoolSizing (upval), Frozen (upval), v44 (upval), EMPTYCELLS (upval), MakePoolGetSpanConfigFunction (upval), ProcessOneGridFunction (upval), FFlagLuaAppEnableNxMRoduxApportioning (upval), LayoutToCellsFunction (upval), FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui (upval), v1 (upval), SduiLoggerModule (upval), SduiErrorsModule (upval), SduiParseHelpersModule (upval), Key (upval), logSkipped (upval)
+				-- upvalues: Key1 (copy), t1 (upval), SignalsModule (upval), sectionConfigsEqual (upval), t (upval), Signal (upval), GetMainCollectionLayoutStoreFunction (upval), FFlagSduiPerSectionPoolSizing (upval), Frozen (upval), v43 (upval), EMPTYCELLS (upval), MakePoolGetSpanConfigFunction (upval), ProcessOneGridFunction (upval), FFlagLuaAppEnableNxMRoduxApportioning (upval), LayoutToCellsFunction (upval), FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui (upval), v1 (upval), SduiLoggerModule (upval), SduiErrorsModule (upval), SduiParseHelpersModule (upval), Key (upval), logSkipped (upval)
 				local Entry = t1[Key1]
 				
 				if Entry == nil then
@@ -183,7 +182,7 @@ local function createSduiPoolStore(Key)
 				local PendingSpanTiles = Frozen
 				
 				if GetResult.prevSectionInPoolId ~= nil then
-					local v3 = v44(GetResult.prevSectionInPoolId)(p1)
+					local v3 = v43(GetResult.prevSectionInPoolId)(p1)
 					
 					if v3 == nil then
 						return nil
@@ -313,53 +312,19 @@ local function createSduiPoolStore(Key)
 		end
 	end
 	
-	local function getRowCountComputed(Key)
-		-- upvalues: t3 (copy), SignalsModule (upval), t1 (copy), sectionConfigsEqual (upval), v44 (ref)
-		local Entry = t3[Key]
-		
-		if Entry == nil then
-			local Computed = SignalsModule.createComputed(function(p2)
-				-- upvalues: Key (copy), t1 (upval), SignalsModule (upval), sectionConfigsEqual (upval), v44 (upval)
-				local v4 = t1[Key]
-				
-				if v4 == nil then
-					local Signal, Signal2 = SignalsModule.createSignal(nil, sectionConfigsEqual)
-					v4 = { get = Signal, set = Signal2 }
-					t1[Key] = v4
-				end
-				local GetResult = v4.get(p2)
-				
-				if GetResult == nil then
-					return 0
-				elseif GetResult.poolId == nil or GetResult.numberOfRows > 0 then
-					return GetResult.numberOfRows
-				else
-					local v5 = v44(Key)(p2)
-					
-					return if v5 == nil then 0 else v5.actualRowCount
-				end
-			end)
-			t3[Key] = Computed
-			
-			return Computed
-		else
-			return Entry
-		end
-	end
-	
 	local _ = function(Key)
-		-- upvalues: T1 (copy), SignalsModule (upval), t3 (copy), t1 (copy), sectionConfigsEqual (upval), v44 (ref), Callback (ref)
+		-- upvalues: T1 (copy), SignalsModule (upval), t3 (copy), t1 (copy), sectionConfigsEqual (upval), v43 (ref), Callback (ref)
 		local Entry = T1[Key]
 		
 		if Entry == nil then
 			local Computed = SignalsModule.createComputed(function(p2): number
-				-- upvalues: Key (copy), t3 (upval), SignalsModule (upval), t1 (upval), sectionConfigsEqual (upval), v44 (upval), Callback (upval)
+				-- upvalues: Key (copy), t3 (upval), SignalsModule (upval), t1 (upval), sectionConfigsEqual (upval), v43 (upval), Callback (upval)
 				local v4 = t3[Key]
 				local Callback = nil
 				
 				if v4 == nil then
 					local Computed = SignalsModule.createComputed(function(p3)
-						-- upvalues: Key (copy), t1 (upval), SignalsModule (upval), sectionConfigsEqual (upval), v44 (upval)
+						-- upvalues: Key (copy), t1 (upval), SignalsModule (upval), sectionConfigsEqual (upval), v43 (upval)
 						local v5 = t1[Key]
 						
 						if v5 == nil then
@@ -374,7 +339,7 @@ local function createSduiPoolStore(Key)
 						elseif GetResult.poolId == nil or GetResult.numberOfRows > 0 then
 							return GetResult.numberOfRows
 						else
-							local v6 = v44(Key)(p3)
+							local v6 = v43(Key)(p3)
 							
 							return if v6 == nil then 0 else v6.actualRowCount
 						end
@@ -400,12 +365,12 @@ local function createSduiPoolStore(Key)
 	local _ = nil
 	
 	local function GetSectionStartRow(Key)
-		-- upvalues: t4 (copy), SignalsModule (upval), t1 (copy), sectionConfigsEqual (upval), GetSectionStartRow (ref), FFlagSduiSkipFeedAnalyticsPosition (upval), FFlagSduiCollectionGridRevealRows (upval), T1 (copy), t3 (copy), v44 (ref), Callback (ref)
+		-- upvalues: t4 (copy), SignalsModule (upval), t1 (copy), sectionConfigsEqual (upval), GetSectionStartRow (ref), FFlagSduiSkipFeedAnalyticsPosition (upval), FFlagSduiCollectionGridRevealRows (upval), T1 (copy), t3 (copy), v43 (ref), Callback (ref)
 		local Entry = t4[Key]
 		
 		if Entry == nil then
 			local Computed = SignalsModule.createComputed(function(p2): number
-				-- upvalues: Key (copy), t1 (upval), SignalsModule (upval), sectionConfigsEqual (upval), GetSectionStartRow (upval), FFlagSduiSkipFeedAnalyticsPosition (upval), FFlagSduiCollectionGridRevealRows (upval), T1 (upval), t3 (upval), v44 (upval), Callback (upval)
+				-- upvalues: Key (copy), t1 (upval), SignalsModule (upval), sectionConfigsEqual (upval), GetSectionStartRow (upval), FFlagSduiSkipFeedAnalyticsPosition (upval), FFlagSduiCollectionGridRevealRows (upval), T1 (upval), t3 (upval), v43 (upval), Callback (upval)
 				local Entry = t1[Key]
 				
 				if Entry == nil then
@@ -444,13 +409,13 @@ local function createSduiPoolStore(Key)
 					
 					if Entry2 == nil then
 						local Computed = SignalsModule.createComputed(function(p3): number
-							-- upvalues: PrevSectionId (copy), t3 (upval), SignalsModule (upval), t1 (upval), sectionConfigsEqual (upval), v44 (upval), Callback (upval)
+							-- upvalues: PrevSectionId (copy), t3 (upval), SignalsModule (upval), t1 (upval), sectionConfigsEqual (upval), v43 (upval), Callback (upval)
 							local v6 = t3[PrevSectionId]
 							local Callback = nil
 							
 							if v6 == nil then
 								local Computed = SignalsModule.createComputed(function(p4)
-									-- upvalues: PrevSectionId (copy), t1 (upval), SignalsModule (upval), sectionConfigsEqual (upval), v44 (upval)
+									-- upvalues: PrevSectionId (copy), t1 (upval), SignalsModule (upval), sectionConfigsEqual (upval), v43 (upval)
 									local v7 = t1[PrevSectionId]
 									
 									if v7 == nil then
@@ -465,7 +430,7 @@ local function createSduiPoolStore(Key)
 									elseif GetResult.poolId == nil or GetResult.numberOfRows > 0 then
 										return GetResult.numberOfRows
 									else
-										local v8 = v44(PrevSectionId)(p4)
+										local v8 = v43(PrevSectionId)(p4)
 										
 										return if v8 == nil then 0 else v8.actualRowCount
 									end
@@ -493,7 +458,7 @@ local function createSduiPoolStore(Key)
 					
 					if Entry1 == nil then
 						local Computed = SignalsModule.createComputed(function(p3)
-							-- upvalues: PrevSectionId1 (copy), t1 (upval), SignalsModule (upval), sectionConfigsEqual (upval), v44 (upval)
+							-- upvalues: PrevSectionId1 (copy), t1 (upval), SignalsModule (upval), sectionConfigsEqual (upval), v43 (upval)
 							local v6 = t1[PrevSectionId1]
 							
 							if v6 == nil then
@@ -508,7 +473,7 @@ local function createSduiPoolStore(Key)
 							elseif GetResult.poolId == nil or GetResult.numberOfRows > 0 then
 								return GetResult.numberOfRows
 							else
-								local v7 = v44(PrevSectionId1)(p3)
+								local v7 = v43(PrevSectionId1)(p3)
 								
 								return if v7 == nil then 0 else v7.actualRowCount
 							end
@@ -532,9 +497,9 @@ local function createSduiPoolStore(Key)
 	
 	return {
 		getSectionInfo = function(Key)
-			-- upvalues: SignalsModule (upval), t1 (copy), sectionConfigsEqual (upval), t5 (copy), v44 (ref), EMPTYCELLS (upval), CellsEqual (upval), GetSectionStartRow (ref), t3 (copy)
+			-- upvalues: SignalsModule (upval), t1 (copy), sectionConfigsEqual (upval), t5 (copy), v43 (ref), EMPTYCELLS (upval), CellsEqual (upval), GetSectionStartRow (ref), t3 (copy)
 			return SignalsModule.createComputed(function(p2)
-				-- upvalues: Key (copy), t1 (upval), SignalsModule (upval), sectionConfigsEqual (upval), t5 (upval), v44 (upval), EMPTYCELLS (upval), CellsEqual (upval), GetSectionStartRow (upval), t3 (upval)
+				-- upvalues: Key (copy), t1 (upval), SignalsModule (upval), sectionConfigsEqual (upval), t5 (upval), v43 (upval), EMPTYCELLS (upval), CellsEqual (upval), GetSectionStartRow (upval), t3 (upval)
 				local Entry = t1[Key]
 				
 				if Entry == nil then
@@ -551,8 +516,8 @@ local function createSduiPoolStore(Key)
 				
 				if Entry1 == nil then
 					local Computed = SignalsModule.createComputed(function(p3)
-						-- upvalues: v44 (upval), Key (copy), EMPTYCELLS (upval)
-						local v4 = v44(Key)(p3)
+						-- upvalues: v43 (upval), Key (copy), EMPTYCELLS (upval)
+						local v4 = v43(Key)(p3)
 						
 						return if v4 == nil then EMPTYCELLS else v4.cells
 					end, CellsEqual)
@@ -568,7 +533,7 @@ local function createSduiPoolStore(Key)
 				
 				if Entry2 == nil then
 					local Computed = SignalsModule.createComputed(function(p3)
-						-- upvalues: Key (copy), t1 (upval), SignalsModule (upval), sectionConfigsEqual (upval), v44 (upval)
+						-- upvalues: Key (copy), t1 (upval), SignalsModule (upval), sectionConfigsEqual (upval), v43 (upval)
 						local v4 = t1[Key]
 						
 						if v4 == nil then
@@ -583,7 +548,7 @@ local function createSduiPoolStore(Key)
 						elseif GetResult.poolId == nil or GetResult.numberOfRows > 0 then
 							return GetResult.numberOfRows
 						else
-							local v5 = v44(Key)(p3)
+							local v5 = v43(Key)(p3)
 							
 							return if v5 == nil then 0 else v5.actualRowCount
 						end
@@ -599,15 +564,47 @@ local function createSduiPoolStore(Key)
 			end)
 		end,
 		getSectionStartRow = GetSectionStartRow,
-		getSectionRowCount = if FFlagSduiVerticalFeedProgressiveFillOnScroll then getRowCountComputed else nil,
+		getSectionRowCount = function(Key)
+			-- upvalues: t3 (copy), SignalsModule (upval), t1 (copy), sectionConfigsEqual (upval), v43 (ref)
+			local Entry = t3[Key]
+			
+			if Entry == nil then
+				local Computed = SignalsModule.createComputed(function(p2)
+					-- upvalues: Key (copy), t1 (upval), SignalsModule (upval), sectionConfigsEqual (upval), v43 (upval)
+					local v4 = t1[Key]
+					
+					if v4 == nil then
+						local Signal, Signal2 = SignalsModule.createSignal(nil, sectionConfigsEqual)
+						v4 = { get = Signal, set = Signal2 }
+						t1[Key] = v4
+					end
+					local GetResult = v4.get(p2)
+					
+					if GetResult == nil then
+						return 0
+					elseif GetResult.poolId == nil or GetResult.numberOfRows > 0 then
+						return GetResult.numberOfRows
+					else
+						local v5 = v43(Key)(p2)
+						
+						return if v5 == nil then 0 else v5.actualRowCount
+					end
+				end)
+				t3[Key] = Computed
+				
+				return Computed
+			else
+				return Entry
+			end
+		end,
 		getSectionCells = function(Key)
-			-- upvalues: t5 (copy), SignalsModule (upval), v44 (ref), EMPTYCELLS (upval), CellsEqual (upval)
+			-- upvalues: t5 (copy), SignalsModule (upval), v43 (ref), EMPTYCELLS (upval), CellsEqual (upval)
 			local Entry = t5[Key]
 			
 			if Entry == nil then
 				local Computed = SignalsModule.createComputed(function(p2)
-					-- upvalues: v44 (upval), Key (copy), EMPTYCELLS (upval)
-					local v4 = v44(Key)(p2)
+					-- upvalues: v43 (upval), Key (copy), EMPTYCELLS (upval)
+					local v4 = v43(Key)(p2)
 					
 					return if v4 == nil then EMPTYCELLS else v4.cells
 				end, CellsEqual)

@@ -16,7 +16,7 @@ local FFlagAddStatusIndicatorToBaseRow = require(Parent.SharedFlags).FFlagAddSta
 local FFlagUserListSurfaceExtensions = require(Parent.SharedFlags).FFlagUserListSurfaceExtensions
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseUserDataValuesModule (copy), FFlagEnableBlackbirdCheck (copy), UseIsRobloxSubscriberFunction (copy), FFlagFixUserRowCombinedName (copy), FFlagUserListUsernameFallbackConfig (copy), FoundationModule (copy), ConvertToFoundationPresenceEnumFunction (copy), ReactModule (copy), BaseRowModule (copy), FFlagAddStatusIndicatorToBaseRow (copy), FFlagUserListCtaIntegrationEnabled (copy), EnumsModule (copy), FFlagUserListSurfaceExtensions (copy)
+	-- upvalues: UseUserDataValuesModule (copy), FFlagEnableBlackbirdCheck (copy), UseIsRobloxSubscriberFunction (copy), FFlagFixUserRowCombinedName (copy), FFlagUserListUsernameFallbackConfig (copy), FoundationModule (copy), ConvertToFoundationPresenceEnumFunction (copy), ReactModule (copy), BaseRowModule (copy), FFlagAddStatusIndicatorToBaseRow (copy), FFlagUserListCtaIntegrationEnabled (copy), FFlagUserListSurfaceExtensions (copy), EnumsModule (copy)
 	local UseUserDataValuesModuleResult = UseUserDataValuesModule(p1.entityId)
 	local UseIsRobloxSubscriberResult = if FFlagEnableBlackbirdCheck then UseIsRobloxSubscriberFunction(if p1.entityId then p1.entityId else nil) else nil
 	local NoConfigs = not p1.configs or p1.configs.showSubtitle == nil or p1.configs.showSubtitle
@@ -41,7 +41,7 @@ return ReactModule.memo(function(p1)
 		ctaLoading = if FFlagUserListCtaIntegrationEnabled then p1.ctaLoading else nil,
 		trailingContent = p1.trailingContent,
 		layoutOrder = p1.layoutOrder,
-		trustedConnectionIndicatorEnabled = p1.layoutMode == EnumsModule.RowLayoutMode.Wide,
+		trustedConnectionIndicatorEnabled = (not FFlagUserListSurfaceExtensions or not p1.configs or p1.configs.showTrustedFriendIndicator ~= false) and p1.layoutMode == EnumsModule.RowLayoutMode.Wide,
 		isRobloxSubscriber = if FFlagEnableBlackbirdCheck then UseIsRobloxSubscriberResult else nil,
 		disableRowActivation = if FFlagUserListSurfaceExtensions and p1.configs then p1.configs.disableRowActivation else nil
 	})

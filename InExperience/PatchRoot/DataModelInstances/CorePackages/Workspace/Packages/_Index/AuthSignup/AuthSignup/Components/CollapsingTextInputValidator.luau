@@ -31,6 +31,7 @@ local EnableAndroidPasswordSuggestionEngineFeature = game:GetEngineFeature("Enab
 local GetFFlagEnableAuditForSinglePageSignUpFunction = SharedFlagsModule.GetFFlagEnableAuditForSinglePageSignUp
 local GetFFlagAuthCollapsingValidatorFoundationInputFunction = SharedFlagsModule.GetFFlagAuthCollapsingValidatorFoundationInput
 local FFlagAuthValidatorStyleOverrides = SharedFlagsModule.FFlagAuthValidatorStyleOverrides
+local FFlagAuthValidatorRebindTextBoxRef = SharedFlagsModule.FFlagAuthValidatorRebindTextBoxRef
 
 local function _(p1, State)
 	-- upvalues: FFlagSignUpTrackFailedRequest (copy), InputValidity (copy)
@@ -40,7 +41,7 @@ end
 CollapsingTextInputValidator.defaultProps = { prerequisiteMet = true, captureFocusOnTapStart = true }
 
 function CollapsingTextInputValidator.init(p1)
-	-- upvalues: InputValidity (copy), RoactModule (copy), FFlagAuthValidatorStyleOverrides (copy), GetFFlagLuaAppEnable10ftSignUpViewFunction (copy), FFlagSignUpTrackFailedRequest (copy), WithStyleFunction (copy), EnableAndroidPasswordSuggestionEngineFeature (copy), PasswordBox (copy), GenericTextBox (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), GetFFlagLuaAppEnableOpenTypeSignUpPageFixFunction (copy), OpenTypeSupport (copy), TextInput (copy)
+	-- upvalues: InputValidity (copy), RoactModule (copy), FFlagAuthValidatorRebindTextBoxRef (copy), FFlagAuthValidatorStyleOverrides (copy), GetFFlagLuaAppEnable10ftSignUpViewFunction (copy), FFlagSignUpTrackFailedRequest (copy), WithStyleFunction (copy), EnableAndroidPasswordSuggestionEngineFeature (copy), PasswordBox (copy), GenericTextBox (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), GetFFlagLuaAppEnableOpenTypeSignUpPageFixFunction (copy), OpenTypeSupport (copy), TextInput (copy)
 	p1.state = {
 		inputTextToValidate = "",
 		validatedInputText = "",
@@ -58,6 +59,9 @@ function CollapsingTextInputValidator.init(p1)
 		p1.foundationTextBoxRef = RoactModule.createRef()
 		p1.foundationProxyText = p1.props.prefilledText or ""
 		p1.foundationTextBoxProxy = nil
+	end
+	if FFlagAuthValidatorRebindTextBoxRef and p1.foundationTextBoxRef == nil then
+		p1.foundationTextBoxRef = RoactModule.createRef()
 	end
 	function p1.getFrameRef()
 		-- upvalues: p1 (copy)
@@ -441,9 +445,17 @@ function CollapsingTextInputValidator.didMount(p1)
 end
 
 function CollapsingTextInputValidator.didUpdate(p1, p2, State)
-	-- upvalues: FFlagSignUpTrackFailedRequest (copy), InputValidity (copy), OtterModule (copy)
+	-- upvalues: FFlagAuthValidatorRebindTextBoxRef (copy), FFlagSignUpTrackFailedRequest (copy), InputValidity (copy), OtterModule (copy)
 	if p1:isUsingFoundationTextInput() and p2.prefilledText ~= p1.props.prefilledText then
 		p1.foundationTextInputChangedCallback(p1.props.prefilledText or "")
+	end
+	if FFlagAuthValidatorRebindTextBoxRef and p2.useFoundationTextInput ~= p1.props.useFoundationTextInput then
+		if p1:isUsingFoundationTextInput() then
+			p1.bindFoundationTextBoxProxy()
+		else
+			p1.foundationTextBoxProxy = nil
+			p1.foundationProxyText = nil
+		end
 	end
 	local TextBoxFocused = p1.state.textBoxFocused
 	local IssueSummaryHeight = p1.state.issueSummaryHeight
@@ -512,7 +524,7 @@ function CollapsingTextInputValidator.willUnmount(p1)
 end
 
 function CollapsingTextInputValidator.render(p1)
-	-- upvalues: AuthStatefulRoundCornerBorder (copy), FFlagAuthValidatorStyleOverrides (copy), WithStyleFunction (copy), GetFFlagLuaAppEnable10ftSignUpViewFunction (copy), WithLocalizationFunction (copy), RoactModule (copy), FitChildren (copy), InputLabel (copy), FormatBoldRichTextFunction (copy), FitTextLabel (copy), Loading (copy), IconSize (copy), GetFFlagEnableAuditForSinglePageSignUpFunction (copy), RegisterAuditContent (copy), GetFFlagEnableAuthStatefulTextInputUpdatesFunction (copy), IssueTracker (copy), FFlagSignUpTrackFailedRequest (copy)
+	-- upvalues: AuthStatefulRoundCornerBorder (copy), FFlagAuthValidatorRebindTextBoxRef (copy), FFlagAuthValidatorStyleOverrides (copy), WithStyleFunction (copy), GetFFlagLuaAppEnable10ftSignUpViewFunction (copy), WithLocalizationFunction (copy), RoactModule (copy), FitChildren (copy), InputLabel (copy), FormatBoldRichTextFunction (copy), FitTextLabel (copy), Loading (copy), IconSize (copy), GetFFlagEnableAuditForSinglePageSignUpFunction (copy), RegisterAuditContent (copy), GetFFlagEnableAuthStatefulTextInputUpdatesFunction (copy), IssueTracker (copy), FFlagSignUpTrackFailedRequest (copy)
 	local LayoutOrder = p1.props.layoutOrder
 	local TitleTextKey = p1.props.titleTextKey
 	local SummaryErrorTextKey = p1.props.summaryErrorTextKey
@@ -526,6 +538,10 @@ function CollapsingTextInputValidator.render(p1)
 	end
 	local Error = if p1.isInErrorState() then AuthStatefulRoundCornerBorder.BorderState.Error elseif p1.state.textBoxFocused then AuthStatefulRoundCornerBorder.BorderState.Focused elseif p1.state.textBoxHover then AuthStatefulRoundCornerBorder.BorderState.Hover else AuthStatefulRoundCornerBorder.BorderState.Default
 	local IsUsingFoundationTextInput = p1:isUsingFoundationTextInput()
+	
+	if FFlagAuthValidatorRebindTextBoxRef and IsUsingFoundationTextInput and p1.foundationProxyText == nil then
+		p1.foundationProxyText = p1.state.inputTextToValidate
+	end
 	local PaddingTopOverride = nil
 	local UseTrailingPadding = nil
 	local ColorContentOverride = nil

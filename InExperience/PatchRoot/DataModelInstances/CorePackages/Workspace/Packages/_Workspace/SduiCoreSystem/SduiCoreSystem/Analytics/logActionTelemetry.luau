@@ -1,4 +1,5 @@
 ﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local FFlagSduiErrorPaths = require(SduiCoreSystem.Parent.SharedFlags).FFlagSduiErrorPaths
 local _ = require(SduiCoreSystem.SduiBuilderTypes)
 local _ = require(SduiCoreSystem.SduiConfigTypes)
 local SduiErrorsModule = require(SduiCoreSystem.SduiErrors)
@@ -7,14 +8,14 @@ local GetSduiTelemetryHandlerNameRegistryModule = require(SduiCoreSystem.getSdui
 local ReportUnifiedLoggingActionModule = require(SduiCoreSystem.Analytics.reportUnifiedLoggingAction)
 
 return function(p1, p2, p3, p4, p5)
-	-- upvalues: GetSduiTelemetryHandlerNameRegistryModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), ReportUnifiedLoggingActionModule (copy)
+	-- upvalues: GetSduiTelemetryHandlerNameRegistryModule (copy), FFlagSduiErrorPaths (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), ReportUnifiedLoggingActionModule (copy)
 	if p1 and p1 ~= "" then
 		local TelemetryHandler: (any, any, any) -> () = GetSduiTelemetryHandlerNameRegistryModule().getTelemetryHandler(p1)
 		
 		if TelemetryHandler then
 			TelemetryHandler(p3, p4, p5)
 		else
-			SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.InvalidActionParams, {
+			(FFlagSduiErrorPaths and (p5.dependencies and p5.dependencies.logger) or SduiLoggerModule).reportError(SduiErrorsModule.SduiErrorType.InvalidActionParams, {
 				message = `Unknown telemetry handler name: {p1}`,
 				name = p3.actionType
 			}, p5.appPage)
@@ -24,7 +25,7 @@ return function(p1, p2, p3, p4, p5)
 	end
 	if not p2.skipUnifiedLogging and not p3.skipUnifiedLogging then
 		if p4 == nil then
-			SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.NilAnalyticsContext, {
+			(FFlagSduiErrorPaths and (p5.dependencies and p5.dependencies.logger) or SduiLoggerModule).reportError(SduiErrorsModule.SduiErrorType.NilAnalyticsContext, {
 				message = `Could not reportUnifiedLoggingAction. Missing analyticsContext {p3.actionType}`,
 				name = p3.actionType
 			}, p5.appPage)

@@ -1,9 +1,11 @@
 ﻿local SocialCommon = script:FindFirstAncestor("SocialCommon")
-local UseLocalizationFunction = require(SocialCommon.Parent.Localization).Hooks.useLocalization
+local Parent = SocialCommon.Parent
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local GetRecommendationContextualInfoDisplayModule = require(SocialCommon.Utils.getRecommendationContextualInfoDisplay)
+local FFlagShowClassmatesOnPYMKModule = require(Parent.SharedFlags.FFlagShowClassmatesOnPYMK)
 
 return function(Recommendation)
-	-- upvalues: UseLocalizationFunction (copy), GetRecommendationContextualInfoDisplayModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), FFlagShowClassmatesOnPYMKModule (copy), GetRecommendationContextualInfoDisplayModule (copy)
 	return GetRecommendationContextualInfoDisplayModule({
 		recommendation = Recommendation,
 		localized = UseLocalizationFunction({
@@ -14,7 +16,8 @@ return function(Recommendation)
 			mutualConnections = {
 				"Feature.Friends.Label.MutualFriendsTitle",
 				numConnections = Recommendation.mutualFriendsCount
-			}
+			},
+			classmates = if FFlagShowClassmatesOnPYMKModule then "Feature.Schools.Label.Classmates" else nil
 		})
 	})
 end

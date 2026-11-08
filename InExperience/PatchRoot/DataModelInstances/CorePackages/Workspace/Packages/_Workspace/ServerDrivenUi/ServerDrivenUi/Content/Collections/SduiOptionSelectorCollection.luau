@@ -13,9 +13,10 @@ local FFlagSduiOptionSelectorHeaderComponent = require(Parent.SharedFlags).FFlag
 local FFlagSduiChartsSortDetailGenreFilter = require(Parent.SharedFlags).FFlagSduiChartsSortDetailGenreFilter
 local FFlagSduiOptionSelectorAnchorTag = require(Parent.SharedFlags).FFlagSduiOptionSelectorAnchorTag
 local LuaAppNilCheckOptionItemConfigs = game:DefineFastFlag("LuaAppNilCheckOptionItemConfigs", false)
+local FFlagSduiOptionSelectorSkipSelectedRefresh = require(Parent.SharedFlags).FFlagSduiOptionSelectorSkipSelectedRefresh
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), SduiErrorType (copy), SduiComponentType (copy), FFlagSduiChartsSortDetailGenreFilter (copy), LuaAppNilCheckOptionItemConfigs (copy), FFlagSduiOptionSelectorAnchorTag (copy), CryoModule (copy), SduiVariableItemWidthCarouselModule (copy), FFlagSduiOptionImpressionsEventName (copy), FFlagSduiOptionSelectorHeaderComponent (copy), SduiPlaceholderWrapper (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), SduiErrorType (copy), SduiComponentType (copy), FFlagSduiOptionSelectorSkipSelectedRefresh (copy), FFlagSduiChartsSortDetailGenreFilter (copy), LuaAppNilCheckOptionItemConfigs (copy), FFlagSduiOptionSelectorAnchorTag (copy), CryoModule (copy), SduiVariableItemWidthCarouselModule (copy), FFlagSduiOptionImpressionsEventName (copy), FFlagSduiOptionSelectorHeaderComponent (copy), SduiPlaceholderWrapper (copy)
 	local SduiContext = p1.sduiContext
 	local UseTokensResult = UseTokensFunction()
 	local PaddingBetweenOptionSelectorAndCollection = p1.paddingBetweenOptionSelectorAndCollection or UseTokensResult.Size.Size_400
@@ -27,7 +28,7 @@ return ReactModule.memo(function(p1)
 		UseStateResult2(nil)
 	end, { p1.selectedOption })
 	local UseResult = ReactModule.useCallback(function(SelectedOption)
-		-- upvalues: SduiContext (copy), SduiErrorType (upval), SduiComponentType (upval), UseStateResult (copy), FFlagSduiChartsSortDetailGenreFilter (upval), UseStateResult2 (copy), UseRefResult (copy), p1 (copy)
+		-- upvalues: SduiContext (copy), SduiErrorType (upval), SduiComponentType (upval), FFlagSduiOptionSelectorSkipSelectedRefresh (upval), UseStateResult1 (copy), UseStateResult (copy), FFlagSduiChartsSortDetailGenreFilter (upval), UseStateResult2 (copy), UseRefResult (copy), p1 (copy)
 		if typeof(SelectedOption) ~= "string" or SelectedOption == "" then
 			SduiContext.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 				propName = "optionId",
@@ -37,7 +38,7 @@ return ReactModule.memo(function(p1)
 			
 			return
 		end
-		if UseStateResult == SelectedOption then return end
+		if (if FFlagSduiOptionSelectorSkipSelectedRefresh then UseStateResult1 else UseStateResult) == SelectedOption then return end
 		local Current = nil
 		
 		if not FFlagSduiChartsSortDetailGenreFilter then
@@ -73,8 +74,9 @@ return ReactModule.memo(function(p1)
 	end, {
 		p1.onOptionActivated,
 		SduiContext,
-		UseStateResult,
-		UseRefResult
+		if FFlagSduiOptionSelectorSkipSelectedRefresh then nil else UseStateResult,
+		UseRefResult,
+		if FFlagSduiOptionSelectorSkipSelectedRefresh then UseStateResult1 else nil
 	})
 	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: LuaAppNilCheckOptionItemConfigs (upval), p1 (copy), SduiContext (copy), SduiErrorType (upval), SduiComponentType (upval), FFlagSduiOptionSelectorAnchorTag (upval), CryoModule (upval), UseStateResult1 (copy), UseResult (copy)

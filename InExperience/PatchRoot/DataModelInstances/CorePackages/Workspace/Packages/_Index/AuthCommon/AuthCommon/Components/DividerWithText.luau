@@ -1,14 +1,11 @@
 ﻿local Parent = script:FindFirstAncestor("AuthCommon").Parent
 local ReactModule = require(Parent.React)
-local TextService = game:GetService("TextService")
 local GetTextSizeFunction = require(Parent.Style).GetTextSize
-local FoundationModule = require(Parent.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
 
 return function(p1)
-	-- upvalues: FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), ReactModule (copy), NormalizeFontFaceFunction (copy)
-	local X = if FoundationFontFaceMigration then GetTextSizeFunction(p1.text, p1.fontSize, p1.font, Vector2.new(1e999, p1.fontSize), { addTemporaryPadding = false }).X else TextService:GetTextSize(p1.text, p1.fontSize, p1.font, Vector2.new(1e999, p1.fontSize)).X
+	-- upvalues: GetTextSizeFunction (copy), ReactModule (copy), NormalizeFontFaceFunction (copy)
+	local X: number = GetTextSizeFunction(p1.text, p1.fontSize, p1.font, Vector2.new(1e999, p1.fontSize), { addTemporaryPadding = false }).X
 	
 	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -29,8 +26,7 @@ return function(p1)
 		Position = UDim2.new(0.5, 0, 0.5, 0),
 		Text = p1.text,
 		TextSize = p1.fontSize,
-		Font = if FoundationFontFaceMigration then nil else p1.font,
-		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.font) else nil,
+		FontFace = NormalizeFontFaceFunction(p1.font),
 		TextXAlignment = Enum.TextXAlignment.Center,
 		TextYAlignment = Enum.TextYAlignment.Center,
 		TextTransparency = p1.transparency,

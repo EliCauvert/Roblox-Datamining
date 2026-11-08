@@ -188,8 +188,8 @@ Common.Presence.Label.Online,Çevrimiçi
 Common.Presence.Label.RobloxStudio,Roblox Studio
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,Animasyon çok uzun ({duration} saniye). İfade animasyonları en fazla {maxLength} saniye uzunluğunda olmalıdır.
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,Animasyon çok kısa ({duration} saniye). İfade animasyonları {minLength} saniyeden uzun olmalıdır.
-Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,"{cageName} için kafes parçası yerleştirme ihlali: {upperPart}, {lowerPart} üzerinde doğru konumlandırılmamış."
-Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,"{cageName} kafesindeki {partName} kafes parçası {actualCount} köşeli; oysa yaklaşık {expectedCount} köşe bekleniyordu. Bu durum, söz konusu vücut bölgesinde eksik veya yinelenen geometri olduğunu gösterebilir."
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,"{cageName} için kafes parçası yerleştirme ihlali: {upperPart}, {lowerPart} parçasına göre doğru konumlandırılmamış."
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,"{cageName} kafesindeki {partName} kafes parçası {actualCount} köşeli; oysa yaklaşık {expectedCount} köşe bekleniyordu. Bu durum, söz konusu kafes bölgesinde eksik veya yinelenen geometri olduğunu gösterebilir."
 Common.UGCValidation.ErrorLabel.AQSFail_CageUV,"{cage_name}, şablonla eşleşmeyen yanlış UV değerleri içeriyor. {incorrect_uv_count} yanlış UV ({unreferenced_vertex_count} referanssız, {non_template_uv_count} şablon dışı, {duplicate_mapping_count} yinelenen eşleme), {unmatched_template_count} eşleşmeyen şablon köşesi. Lütfen kafes UV'sini şablonla eşleşecek şekilde düzelt."
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,Vücudun küçük bağlantısız mesh bileşenleri (mesh adaları) içeriyor. Lütfen serbest geometriyi kaldır ve tüm mesh parçalarının düzgün şekilde bağlanmasını sağla.
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,"{partName}, {num_disconnected_components} bağlantısız bileşene sahip ve bu sayı {max_disconnected_components} olan üst sınırı aşıyor."
@@ -200,7 +200,7 @@ Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,"Kafa kafesi, kafa 
 Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,Değiştirilen dış kafes köşelerinin yüzde {irrelevant_percent} kadarı aksesuarı kapsamıyor. Lütfen kafesi aksesuarın şekline daha iyi uyacak şekilde ayarla.
 Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,"{cage_name}, yanlış UV değerleri içeriyor. {incorrect_uv_count} yanlış UV ({unreferenced_vertex_count} referanssız, {non_template_uv_count} şablon dışı, {duplicate_mapping_count} yinelenen eşleme), {unmatched_template_count} eşleşmeyen şablon köşesi."
 Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,{partName} için bozuk üçgen oranı yüzde {degenerate_triangle_percent}.
-Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,"Dinamik kafada ifade kalitesi sorunları var. Sol göz kapalı: {left_eye_close}, sağ göz kapalı: {right_eye_close}, ağız açık: {mouth_open}, mutlu: {is_happy}, üzgün: {is_sad}."
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,"Dinamik kafada ifade kalitesi sorunları var. Ekranda sol göz (Görselleştirme Eklentisinde kafanın sol tarafındaki kırmızı noktalar) kapalı: {left_eye_close}, ekranda sağ göz (Görselleştirme Eklentisinde kafanın sağ tarafındaki mavi noktalar) kapalı: {right_eye_close}, ağız açık (Görselleştirme Eklentisindeki yeşil noktalar): {mouth_open}, mutlu: {is_happy}, üzgün: {is_sad}."
 Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"Beklenmeyen eklem yapılandırması. Toplam eklem sayısı: {joint_number}, sol el eklemleri: {left_hand_joint_number}, sağ el eklemleri: {right_hand_joint_number}."
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,"{partName}, toplam {num_disconnected_components} bileşen içinde {num_small_volume_islands} küçük bağlantısız mesh adasına sahip. Lütfen serbest geometriyi kaldır."
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,"{partName} çok katlı olmayan geometri içeriyor. Lütfen düzlemsel olmayan yüzleri, kendi kendini kesen yüzeyleri veya ikiden fazla yüz tarafından paylaşılan kenarları kontrol et."
@@ -209,9 +209,9 @@ Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,"Mesh köşelerinin
 Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,"Giriş verileri eksik veya geçersiz olduğundan {measureName} için doğrulama verileri hesaplanamadı. Bu, yükleme işlemini engellemez."
 Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,{textureName} dokusu düşük karmaşıklığa sahip. Dokuda yeterli ayrıntı veya çeşitlilik olmayabilir.
 Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,{textureName} dokusu düşük bir çözünürlüğe ({texture_width}x{texture_height}) sahip. Daha yüksek çözünürlüklü bir doku kullanmayı düşün.
-Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,Varlık kalitesi: {partName} için kesişen üçgen yüzü oranı yüzde {intersecting_tri_face_percent} (skor: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,"{partName} için kendi kendini kesen yüz oranı yüzde {intersecting_tri_face_percent} ve bu, yüzde {threshold} olan izin verilen oranı aşıyor."
 Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,"{partName} için [0,1] sınır değerleri dışındaki UV köşesi oranı yüzde {uv_outside_bound_vert_percent}."
-Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,Varlık kalitesi: {partName} için benzer köşe oranı yüzde {similar_vertex_percent} (skor: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,"{partName} için benzer köşe oranı yüzde {similar_vertex_percent} ve bu, yüzde {threshold} olan izin verilen oranı aşıyor."
 Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,"""{PartName}"" içindeki ""{AttachmentName}"" aksesuar eklentisi, mesh yüzeyine yakın yerleştirilmelidir. Mevcut konum [{CurrentPosition}], geçerli bölgenin dışında. [{ClosestValidPosition}] konumuna yaklaştır."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,"Tutamak, izin verilen şemada olmayan {jointName} eklemine giydirildi. Yalnızca standart R15 eklemlerine ve soyma aktarımı eklemlerine izin verilir."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,"{assetType}, soyma aktarımı kullanmalıdır fakat gerekli olan {requiredJointName} eklemi eksik."
@@ -223,15 +223,44 @@ Common.UGCValidation.ErrorLabel.AccessorySkinning_WeightNotFull,Aktarım eklemle
 Common.UGCValidation.ErrorLabel.AnimationPack_DuplicateAnimationId,"Animasyon paketi seti, birden fazla klip tarafından kullanılan ve yinelenen ""{animationId}"" animasyon kimliğini içeriyor: {instancePaths}. Her animasyon klibi benzersiz bir animasyon varlığına dayanmalıdır."
 Common.UGCValidation.ErrorLabel.AnimationPack_InvalidR15AnimChildren,"Animasyon paketi setinde beklenen animasyon tipleri ({missingAnimationTypes}) eksik. Her animasyon tipinde, tam olarak beklenen StringValue alt öğelerini içeren bir R15Anim Klasörü olmalıdır."
 Common.UGCValidation.ErrorLabel.Animation_WeightNotPositive,"""{animationName}"" animasyonunun Ağırlık değeri {weight}, ancak Ağırlık 0'dan büyük olmalıdır. Lütfen animasyonu düzelt."
+Common.UGCValidation.ErrorLabel.AssetBounds_InconsistentScaleType,Tüm Mesh Parçaların AvatarPartScaleType alt öğelerinde aynı değere sahip olması gerekir. Lütfen değerlerin eşleştiğini doğrula.
+Common.UGCValidation.ErrorLabel.AssetBounds_TooLarge,"{assetName} mesh'lerinin ve eklemlerinin {axis} ekseninde ""{currentSize}"" olan boyutu, sınırlayıcı kutu için {axis} ekseninde izin verilen maksimum boyut olan ""{maxSize}"" değerinden büyüktür. Mesh'leri/eklemleri küçültmen gerekiyor"
+Common.UGCValidation.ErrorLabel.AssetBounds_TooSmall,"{assetName} mesh'lerinin {axis} ekseninde ""{currentSize}"" olan boyutu, sınırlayıcı kutu için {axis} ekseninde izin verilen minimum boyut olan ""{minSize}"" değerinden küçüktür. Mesh'leri büyütmen gerekiyor."
+Common.UGCValidation.ErrorLabel.AssetDoesNotExist,"""{InstancePath}"" tarafından atıfta bulunulan ""{AssetId}"" varlığı mevcut değil veya yüklenemiyor. Bunu geçerli bir varlık kimliği ile değiştir."
+Common.UGCValidation.ErrorLabel.AssetOpacity_BelowThreshold,"{AssetName}, {ViewName} açısından yeterince opak değil. Saydamlık {Opacity} ancak {Threshold} değerinin üzerinde olmalı."
+Common.UGCValidation.ErrorLabel.AssetOpacity_Invisible,"""{AssetName}"" için mesh hiç görünmüyor."
+Common.UGCValidation.ErrorLabel.AssetOpacity_MeshLoadFailed,"""{PartName}"" Mesh Parçası için mesh yüklenemedi. Mesh'in mevcut olduğundan emin ol ve tekrar dene."
+Common.UGCValidation.ErrorLabel.AssetOpacity_NoTriangles,"""{AssetName}"" için mesh'in üçgeni yok."
+Common.UGCValidation.ErrorLabel.AssetOpacity_NonZeroTransparency,"""{PartName}"" parçasının şeffaflığı sıfır değil. Parça şeffaflığı her zaman tam olarak sıfır olmalıdır."
+Common.UGCValidation.ErrorLabel.AssetOpacity_ZeroSize,"""{AssetName}"" için olan mesh'ler sıfır boyutta olmamalıdır."
 Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,{ParentPath} içinde adı {ExpectedName} olan gerekli {ExpectedClass} bulunamadı
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,Aşağıdaki durumlar onaylanmış şemanın bir parçası değildir ve kaldırılmalıdır: {UnexpectedDescendantPaths}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,Yüklenen varlık bir {ExpectedClass} olmalıdır ancak yüklemeye çalıştığın varlığın türü {RootClass}.
-Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,Yüklenen varlığın adı {ExpectedClass} olmalıdır ancak yüklemeye çalıştığın varlığın adı {RootClass}.
+Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,Yüklenen varlığın adı {ExpectedName} olmalıdır ancak yüklemeye çalıştığın varlığın adı {RootName}.
+Common.UGCValidation.ErrorLabel.AttachmentBoundsAssetCalculationFailed,"Eklenti konumları kontrol edilmeden önce ""{InstancePath}"" için mesh sınırları hesaplanamadı. Mesh verileri eksik veya hatalı olabilir; lütfen varlığı yeniden içe aktarıp tekrar dene."
+Common.UGCValidation.ErrorLabel.AttachmentBoundsCalculationFailed,"""{PartName}"" içindeki ""{AttachmentName}"" eklentisi için sınırlar hesaplanamadı. Mesh verileri eksik veya hatalı olabilir; lütfen varlığı yeniden içe aktarıp tekrar dene."
+Common.UGCValidation.ErrorLabel.AttachmentOrientationDeviation,"""{InstancePath}"" eklentisinin yönelimi, beklenen değerden çok fazla sapıyor. Tavsiye edilen yön {ExpectedOrientation}, maksimum sapma {MaxDeviation} derecedir."
+Common.UGCValidation.ErrorLabel.AttachmentOrientationRigRotated,"Düzenek eklentileri döndürülemiyor. Lütfen ""{InstancePath}"" yönünü (0,0,0) olarak ayarla."
+Common.UGCValidation.ErrorLabel.BodyBlocking_ZeroMeshSize,{meshName} için mesh'i görsele dönüştür: {details}. Mesh'in boyutunu artır.
+Common.UGCValidation.ErrorLabel.BodyMesh_LoadFailed,"""{meshName}"" için mesh yüklenemedi. Mesh'in mevcut olduğundan emin ol ve tekrar dene."
+Common.UGCValidation.ErrorLabel.BodyMesh_SizeMismatch,"{meshContext}, diğer {otherMeshContext} mesh'ine kıyasla boyut olarak maksimum fark olan {maxDiff} değerinden daha fazla. Boyutunu ayarlamak için modeli düzenlemen gerekiyor"
+Common.UGCValidation.ErrorLabel.BodyPartCageDistanceValid_TooFar,"{partName} parçasının kafes mesh'inde, en yakın görsele dönüştürme mesh'inden {distance} birim kare uzakta olan bir köşe bulundu. En fazla {maxDistance} birim kare olabilir. Kafes mesh'inin, görsele dönüştürme mesh'inin şekline ve boyutuna daha yakın olmasını sağla."
+Common.UGCValidation.ErrorLabel.BoundingBox_ValidationFailed,{reason}
+Common.UGCValidation.ErrorLabel.CageMeshDistanceBounded_DistanceTooHigh,"Dış kafes ile mesh arasındaki ortalama mesafe çok fazla ({distance}). Kafesi, mesh'e daha uygun olacak şekilde ayarla."
+Common.UGCValidation.ErrorLabel.CageMeshDistanceBounded_MeshOutsideCage,"Dış kafes ile mesh arasındaki ortalama mesafe çok fazla. Mesh, dış kafesin dışında gibi görünüyor."
+Common.UGCValidation.ErrorLabel.CageUV_ExtraDuplicateUVs,"""{partName}"" parçasının {cageType} kafesindeki {count} UV değeri şablona ait değil. Lütfen kafes UV'sini düzelt."
+Common.UGCValidation.ErrorLabel.CageUV_IncorrectUVCount,"""{partName}"" dış kafesinde {requiredUVCount} benzersiz UV olması gerekirken {actualUVCount} tane var. Lütfen mesh'in gerekli sayıda benzersiz UV'ye sahip olduğundan emin ol ve tekrar dene."
+Common.UGCValidation.ErrorLabel.CageUV_InvalidUVValue,"""{partName}"" için [0, 1] aralığının dışında geçersiz UV değeri bulundu. Bu sorunu çözmek için UV haritasını düzenlemen gerekiyor."
+Common.UGCValidation.ErrorLabel.CageUV_RenderMeshBoundsCheckFailed,Dış kafesin değiştirilen alanının sınırlayıcı kutusu içinde görsele dönüştürme mesh'i testi yürütülemedi. Hem kafes mesh'lerinin hem de görsele dönüştürme mesh'inin mevcut olduğundan emin ol ve tekrar dene.
+Common.UGCValidation.ErrorLabel.CageUV_RenderMeshOutsideModifiedArea,"Görsele dönüştürme mesh'i köşelerinin yalnızca yüzde {currentPercent} kadarı WrapLayer CageMesh'in (dış mesh) değiştirilen {allowedArea} alanında bulunuyor. Yüzde {requiredPercent} gerekli. Görsele dönüştürme mesh'ini, WrapLayer CageMesh'in (dış mesh) değiştirilen alanının içine gelecek şekilde taşı."
+Common.UGCValidation.ErrorLabel.CageUV_TooFewMainModified,"Bir {assetTypeName} için WrapLayer CageMesh'i (dış mesh), {mainArea} alanındaki kafes UV'lerinin yüzde {requiredPercent} kadarını değiştirmelidir. Şu anda yalnızca {currentPercent} oranında değişiklik yapılmıştır. Varlığını vücudun doğru bölgesine taşı."
+Common.UGCValidation.ErrorLabel.CageUV_TooManyExcludedModified,WrapLayer CageMesh'teki (dış mesh) değiştirilen kafes UV'lerinin yüzde {modifiedPercent} kadarı vücudun beklenen bölgesinin dışında. Bir {assetTypeName} için değiştirilen UV'lerin en fazla yüzde {maxPercent} kadarı {allowedArea} alanının dışında olabilir. Varlığını vücudun doğru alanına taşı.
+Common.UGCValidation.ErrorLabel.CageUV_ZeroAreaTriangle,"""{partName}"" parçasının UV haritasında sıfır alanlı üçgen algılandı. Bu sorunu çözmek için UV haritasını düzenlemen gerekiyor."
+Common.UGCValidation.ErrorLabel.CollisionFidelityWrong,"""{InstancePath}"" yanlış CollisionFidelity'ye sahip. {ExpectedFidelity} olması bekleniyordu."
 Common.UGCValidation.ErrorLabel.ContentNotEditable,{InstanceFullName}.{FieldName} hâlâ kaydedilmemiş düzenlenebilir içerik barındırıyor. Yayınlamadan önce varlık olarak kaydedip tekrar dene.
-Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,"CurveAnimation'daki ""{bodyPartName}"" vücut parçası bir Pozisyon (çeviri) izine sahip. Animasyon vücut parçaları yalnızca döndürülebilir; pozisyon izlerine izin verilmez. Lütfen bu vücut parçasından Pozisyon izini kaldır."
+Common.UGCValidation.ErrorLabel.CoplanarTri_TooMany,"""{MeshName}"" model mesh'inde kesişen çok fazla eş düzlemli üçgen algılandı. {TriangleCount} üçgen mesh'te en fazla {MaxIntersections} kesişim olabilir. Eş düzlemli üçgen kesişimlerinin sayısını azaltmak için mesh'ini düzenle."
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,"CurveAnimation'daki ""{bodyPartName}"" vücut parçası, başlangıç konumundan {distance} birim kare hareket ediyor. En fazla {maxDistance} birim karelik öteleme hareketine izin verilir. Lütfen vücut parçasının pozisyonel hareketini azalt."
-Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"CurveAnimation, HRD/DRD kemikleri içeriyor ve ""{bodyPartName}"" vücut parçası bir Pozisyon (çeviri) izine sahip. Animasyonda herhangi bir kemik olduğunda, eklem ayrılmasını önlemek için hiçbir vücut parçası çevrilemez. Lütfen tüm Pozisyon izlerini vücut parçalarından kaldır."
-Common.UGCValidation.ErrorLabel.CurveAnim_BonePositionNotAllowed,CurveAnimation'daki {boneName} kemiği bir Pozisyon (çeviri) izine sahip. HRD/DRD kemikleri yalnızca döndürülebilir; pozisyon izleri eklem ayrılmasına neden olur ve bunlara izin verilmez. Lütfen bu kemikten konum animasyonunu kaldır.
+Common.UGCValidation.ErrorLabel.CurveAnim_BoneRequiresParent,"""{boneName}"" kemik klasörü için animasyonda ayrıca ""{parentBoneName}"" bulunması gerekir."
 Common.UGCValidation.ErrorLabel.CurveAnim_BoneTranslationExceedsThreshold,"CurveAnimation'daki ""{boneName}"" kemiği, başlangıç konumundan {distance} birim kare hareket ediyor. En fazla {maxDistance} birim karelik öteleme hareketine izin verilir. Lütfen kemiğin pozisyonel hareketini azalt."
 Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation henüz desteklenmeyen HRD/DRD kemik klasörleri içeriyor. Lütfen yüklemeden önce tüm kemik alt klasörlerini kaldır.
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,"CurveAnimation'daki vücut parçaları, HumanoidRootPart'tan en fazla {minHeight} birim kare aşağıda veya en fazla {maxDistance} birim kare uzakta olmalıdır. Lütfen animasyonu düzelt."
@@ -243,27 +272,27 @@ Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,"CurveAnimati
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"CurveAnimation'daki ""{boneName}"" klasörü tanınan bir HRD/DRD kemik adı değil. Animasyon alt klasörleri ya geçerli R15 vücut parçaları ya da tanınan kemik adları olmalıdır (ör. HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase ya da LeftHandIndex1 gibi parmak kemikleri)."
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidCurveData,"CurveAnimation, geçersiz Zaman veya Değere sahip Eğriler içeriyor. Lütfen animasyonu düzelt."
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidInstanceTypes,CurveAnimation hiyerarşisi yalnızca {allowedTypes} içerebilir. Lütfen diğer tüm Durum tiplerini kaldır.
-Common.UGCValidation.ErrorLabel.CurveAnim_InvalidLength,"CurveAnimation'ın uzunluğu, {minLength} ila {maxLength} saniye olmalıdır. Lütfen animasyonu düzelt."
+Common.UGCValidation.ErrorLabel.CurveAnim_InvalidLength,{animationName} Eğri Animasyonunun uzunluğu {minLength} ile {maxLength} saniye arasında olmalıdır. Lütfen animasyonu düzelt.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidMarkerData,"CurveAnimation, geçersiz Zaman veya Değere sahip MarkerCurve'ler içeriyor ya da Değer çok uzun. Lütfen animasyonu düzelt."
-Common.UGCValidation.ErrorLabel.CurveAnim_InvalidNumericalData,"CurveAnimation, geçersiz sayısal verilere sahip Eğriler içeriyor. Lütfen animasyonu düzelt."
+Common.UGCValidation.ErrorLabel.CurveAnim_InvalidNumericalData,"{animationName} Eğri Animasyonu, geçersiz sayısal verilere sahip Eğriler içeriyor. Lütfen animasyonu düzelt."
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidRigData,AnimationRigData dâhilî doğrulamada başarısız oldu. Lütfen AnimationRigData'nın doğru şekilde ayarlanıp ayarlanmadığını kontrol et.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidRigDataR15Plus,AnimationRigData R15+ dâhilî doğrulamada başarısız oldu. Kemik animasyonları için lütfen AnimationRigData'nın doğru şekilde ayarlanıp ayarlanmadığını kontrol et.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidTags,CurveAnimation yalnızca tek bir zaman damgası etiketi içerebilir. Lütfen diğer tüm etiketleri kaldır.
-Common.UGCValidation.ErrorLabel.CurveAnim_JointRotationExceeded,"CurveAnimation'da zaman olarak {time}. saniyede, {bodyPart} eklemi dinlenme pozisyonundan {rotation} derecelik bir dönüş açısına sahip. En fazla {maxRotation} dereceye izin verilir. Lütfen animasyonu düzelt."
+Common.UGCValidation.ErrorLabel.CurveAnim_JointRotationExceeded,"{animationName} Eğri Animasyonunda zaman olarak {time}. saniyede, {bodyPart} eklemi dinlenme pozisyonundan {rotation} derecelik bir dönüş açısına sahip. En fazla {maxRotation} dereceye izin verilir. Lütfen animasyonu düzelt."
 Common.UGCValidation.ErrorLabel.CurveAnim_KeysTooClose,"CurveAnimation, maksimum {maxFPS} fps'lik animasyon için zaman açısından birbirine çok yakın anahtarlara sahip {curvePath} Eğrisini içeriyor. Lütfen animasyonu düzelt."
 Common.UGCValidation.ErrorLabel.CurveAnim_LoopingNotEnabled,CurveAnimation '{animationName}' için Döngü etkinleştirilmemiş. Pazar yerine yüklenen animasyonlar döngüsel olmalıdır. Lütfen Döngü özelliğini etkinleştir.
 Common.UGCValidation.ErrorLabel.CurveAnim_MultipleBodyRoots,CurveAnimation birden fazla vücut parçası veya HumanoidRootPart alt öğesi içeriyor. Lütfen bir vücut parçası veya HumanoidRootPart adı içeren yalnızca bir alt öğe olmasına dikkat et.
 Common.UGCValidation.ErrorLabel.CurveAnim_MultipleRigData,CurveAnimation birden fazla AnimationRigData alt öğesi içeriyor. Lütfen yalnızca bir AnimationRigData alt öğesi bulunmasına dikkat et.
 Common.UGCValidation.ErrorLabel.CurveAnim_NegativeKeyTime,"CurveAnimation, negatif zamana sahip bir anahtar içeren {curvePath} Eğrisini içeriyor. Lütfen animasyonu düzelt."
 Common.UGCValidation.ErrorLabel.CurveAnim_NoBodyRoot,"CurveAnimation, sıfır adet vücut parçası veya HumanoidRootPart alt öğesi içeriyor. Lütfen bir vücut parçası veya HumanoidRootPart adında bir (ve yalnızca tek) alt öğe olmasına dikkat et."
-Common.UGCValidation.ErrorLabel.CurveAnim_NoJointManipulation,CurveAnimation herhangi bir eklem manipülasyonu içermiyor.
+Common.UGCValidation.ErrorLabel.CurveAnim_NoJointManipulation,{animationName} Eğri Animasyonu herhangi bir eklem manipülasyonu içermiyor.
 Common.UGCValidation.ErrorLabel.CurveAnim_NoRigData,CurveAnimation sıfır adet AnimationRigData alt öğesi içeriyor. Lütfen bir (yalnızca bir) AnimationRigData alt öğesi bulunmasına dikkat et.
 Common.UGCValidation.ErrorLabel.CurveAnim_NotCurveAnimation,Başvurulan animasyon bir CurveAnimation değil. Lütfen animasyonun doğru şekilde yüklenip yüklenmediğini kontrol et.
-Common.UGCValidation.ErrorLabel.CurveAnim_PartTooFar,"CurveAnimation'da zaman olarak {time}. saniyede, {bodyPart} vücut parçası HumanoidRootPart'tan {distance} birim kare uzakta bulunuyor. Vücut parçaları HumanoidRootPart'tan en fazla {maxDistance} birim kare uzakta olabilir. Lütfen animasyonu düzelt."
-Common.UGCValidation.ErrorLabel.CurveAnim_PartTooLow,"CurveAnimation'da zaman olarak {time}. saniyede, {bodyPart} vücut parçası HumanoidRootPart'tan {height} birim kare farklı bir yükseklikte bulunuyor. Vücut parçalarının yüksekliği HumanoidRootPart'tan en fazla {minHeight} birim kare daha aşağıda olabilir. Lütfen animasyonu düzelt."
-Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,"CurveAnimation, vücut parçalarının pozisyonel olarak ayrılmasını içeriyor. Yalnızca LowerTorso pozisyonunu değiştirebilir. Diğer tüm vücut parçaları yalnızca yönlerini değiştirebilir. {bodyPart}, üst öğesinden {maxMovement} birim kareden fazla uzaklaşıyor. Lütfen animasyonu düzelt."
-Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,"CurveAnimation'da {time}. saniyede, {bodyPart} vücut parçası saniyede {speed} derece dönüş hızıyla hareket ediyor. Saniyede en fazla {maxSpeed} derece dönüş hızıyla hareket edilebilir. Lütfen animasyonu düzelt."
-Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,"CurveAnimation'da zaman olarak {time}. saniyede, {bodyPart} vücut parçası saniyede {speed} birim kare hızla hareket ediyor. Saniyede maksimum hız {maxSpeed} birim karedir. Lütfen animasyonu düzelt."
+Common.UGCValidation.ErrorLabel.CurveAnim_PartTooFar,"{animationName} Eğri Animasyonunda zaman olarak {time}. saniyede, {bodyPart} vücut parçası HumanoidRootPart'tan {distance} birim kare uzakta bulunuyor. Vücut parçaları HumanoidRootPart'tan en fazla {maxDistance} birim kare uzakta olabilir. Lütfen animasyonu düzelt."
+Common.UGCValidation.ErrorLabel.CurveAnim_PartTooLow,"{animationName} Eğri Animasyonunda zaman olarak {time}. saniyede, {bodyPart} vücut parçası HumanoidRootPart'tan {height} birim kare farklı bir yükseklikte bulunuyor. Vücut parçalarının yüksekliği HumanoidRootPart'tan en fazla {minHeight} birim kare daha aşağıda olabilir. Lütfen animasyonu düzelt."
+Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,"{animationName} Eğri Animasyonu, vücut parçalarının pozisyonel olarak ayrılmasını içeriyor. Yalnızca LowerTorso pozisyonunu değiştirebilir. Diğer tüm vücut parçaları yalnızca yönlerini değiştirebilir. {bodyPart}, üst öğesinden {maxMovement} birim kareden fazla uzaklaşıyor. Lütfen animasyonu düzelt."
+Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,"{animationName} Eğri Animasyonunda {time}. saniyede, {bodyPart} vücut parçası saniyede {speed} derece dönüş hızıyla hareket ediyor. Saniyede en fazla {maxSpeed} derece dönüş hızıyla hareket edilebilir. Lütfen animasyonu düzelt."
+Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,"{animationName} Eğri Animasyonunda zaman olarak {time}. saniyede, {bodyPart} vücut parçası saniyede {speed} birim kare hızla hareket ediyor. Saniyede maksimum hız {maxSpeed} birim karedir. Lütfen animasyonu düzelt."
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,"CurveAnimation'daki {bodyPart} vücut parçası, kareler arasında {maxMovement} birim kareden fazla hareket ediyor. Lütfen animasyonu düzelt."
 Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,CurveAnimation yapısı geçersiz: {detail}. Lütfen animasyonun beklenen şemayı takip edip etmediğini kontrol et.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation'ın {count} alt öğesi var. En fazla {maxAllowed} alt öğeye izin verilir. Lütfen alt öğe sayısını azalt.
@@ -272,12 +301,24 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,"CurveAnimation, {
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,"CurveAnimation, {count} İşaretçili bir MarkerCurve içeriyor. MarkerCurve başına maksimum {maxAllowed} işaretçi olabilir. Lütfen animasyonu düzelt."
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation beklenmedik bir alt öğe içeriyor: {childName}
 Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,"{InstanceFullName}.{FieldName} {AssetId} animasyonunu {Version} versiyonuna sabitliyor ancak animasyonlar henüz bir versiyona sabitlenemez. ""&version={Version}"" ifadesini kaldırıp tekrar dene."
+Common.UGCValidation.ErrorLabel.DescendantIdFetchFailed,{InstanceFullName} için moderasyon sonuçları getirilemedi. Tüm varlıkların geçerli kullanıcıya ait olduğundan emin ol.
+Common.UGCValidation.ErrorLabel.DescendantIdMalformed,{InstanceFullName}.{FieldName} içindeki ContentId ayrıştırılamadı. Geçerli bir kimliğe sahip geçerli bir URL kullandığından emin ol ve tekrar dene.
+Common.UGCValidation.ErrorLabel.DescendantIdMissing,{InstanceFullName}.{FieldName} boş olamaz. Geçerli bir varlığın atandığından emin ol ve tekrar dene.
+Common.UGCValidation.ErrorLabel.DescendantIdNotApproved,Varlık denetimden geçemedi: {ModerationMessages}
+Common.UGCValidation.ErrorLabel.DescendantIdNotOwned,{AssetId} kimlikli varlık ({InstanceFullName}.{FieldName}) yetkili bir yaratıcıya ait değil.
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,{AssetId} kimlikli varlık ({InstanceFullName}.{FieldName}) yayınlanmadı. Yayınla ve tekrar dene.
-Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,{InstanceFullName}.{FieldName} {AssetId} varlığının {Version} versiyonunu kullanıyor ancak şu anda yalnızca versiyon 1 destekleniyor. Versiyon 1'i kullanıp tekrar dene.
+Common.UGCValidation.ErrorLabel.DescendantIdVersionNotLatest,"{InstanceFullName}.{FieldName}, {AssetId} varlığının {Version} versiyonunu kullanıyor ancak şu anda yalnızca en son versiyonu olan {LatestVersion} kullanılabilir. {LatestVersion} versiyonunu kullan veya ""&version={Version}"" ifadesini kaldırıp tekrar dene."
+Common.UGCValidation.ErrorLabel.DescendantIdsTooMany,"Model yüklemesi çok fazla alt varlık (Mesh'ler, Dokular vb.) içeriyor ve olduğu gibi işlenemiyor. Modeli yeniden düzenlemen gerekiyor."
+Common.UGCValidation.ErrorLabel.DynHead_ControlsInactive,{headName} mesh'inde ({meshId}) aktif olmayan Yüz Hareketi Kodlama Sistemi (FACS) denetimleri var: {controlList}
+Common.UGCValidation.ErrorLabel.DynHead_ControlsMissing,{headName} mesh'inde ({meshId}) Yüz Hareketi Kodlama Sistemi (FACS) denetimleri eksik: {controlList}
+Common.UGCValidation.ErrorLabel.DynHead_FacsMissing,"Yüz Hareketi Kodlama Sistemi (FACS) bilgilerinin eksik olması nedeniyle ""{headName}"" dinamik kafası doğrulanamadı. En az 17 poz için FACS denetimleri sağlaman gerekiyor (belgelere göz at)."
+Common.UGCValidation.ErrorLabel.DynHead_JointAccumulatedExceeded,"Kafa yüz animasyonları, {jointName} eklemini kafanın çok dışına uzatacak şekilde birleştirilebilir. Lütfen yüz animasyonlarını düzenle ve tekrar dene."
+Common.UGCValidation.ErrorLabel.DynHead_JointBoundsCheckFailed,"Yüz animasyonu eklem sınırları doğrulanamadı, lütfen daha sonra tekrar dene."
+Common.UGCValidation.ErrorLabel.DynHead_JointDirectExceeded,"{actionName} kafa yüz animasyonu, eklemlerin büyük ölçüde kafanın dışına taşınmasına neden oluyor. Lütfen yüz animasyonlarını düzenle ve tekrar dene."
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,"Pazar yerindeki Dinamik Kafalar, kafes üzerindeki gözler ve ağız köşeleri mesh köşeleriyle hizalanacak şekilde düzgünce kafeslenmelidir. Lütfen kafeslemeni ve mesh ile hizalamasını iyileştir."
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,"Dinamik Kafa kafesinin sol göz işaretleri mesh ile doğru hizalanmamış. Göz kafesini, sol göze ait mesh yansıtılan kafes alanının içine yer alacak şekilde ayarla."
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,"Dinamik Kafa kafesinin ağız işaretleri mesh ile doğru hizalanmamış. Ağız kafesini, ağza ait mesh yansıtılan kafes alanının içine yer alacak şekilde ayarla."
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,"Dinamik Kafa kafesinin sağ göz işaretleri mesh ile doğru hizalanmamış. Göz kafesini, sağ göze ait mesh yansıtılan kafes alanının içine yer alacak şekilde ayarla."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,"Ekranda görünen sol gözün (Görselleştirme Eklentisinde kafanın sol tarafındaki kırmızı noktalar) kafes işaretleri mesh ile doğru hizalanmamış: Bazı kafes noktaları kafa mesh'inin içinde (mesh kafesten dışarı çıkıyor) veya mesh'in çok dışında. İlgili kafesi, bu gözün etrafındaki mesh üzerinde veya hemen dışında olacak şekilde ayarla."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,"Ağzın (Görselleştirme Eklentisindeki yeşil noktalar) kafes işaretleri mesh ile doğru hizalanmamış: Bazı kafes noktaları kafa mesh'inin içinde (mesh kafesten dışarı çıkıyor) veya mesh'in çok dışında. Ağız kafesini, ağzın etrafındaki mesh üzerinde veya hemen dışında olacak şekilde ayarla."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,"Ekranda görünen sağ gözün (Görselleştirme Eklentisinde kafanın sağ tarafındaki mavi noktalar) kafes işaretleri mesh ile doğru hizalanmamış: Bazı kafes noktaları kafa mesh'inin içinde (mesh kafesten dışarı çıkıyor) veya mesh'in çok dışında. İlgili kafesi, bu gözün etrafındaki mesh üzerinde veya hemen dışında olacak şekilde ayarla."
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Dinamik Kafa için gülümseme ifadesi algılanamıyor. Kafada ağzın bulunduğu yerle eşleşmesi için lütfen ağzın kafes işaretlerini ayarla ve gülümseme ifadesini gösterebildiğinden emin ol.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,Dinamik Kafa için sol göz kapalı ifadesi algılanamıyor. Kafada sol gözün bulunduğu yerle eşleşmesi için lütfen sol gözün kafes işaretlerini ayarla ve gözün kapatılabildiğinden emin ol.
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,Pazar yerindeki Dinamik Kafalarda Kafa Kafesi bulunmuyor. Lütfen Dinamik Kafa için Kafa Kafesi oluştur.
@@ -285,9 +326,9 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,Dinamik Kafa için ağı
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,Pazar yerindeki Dinamik Kafalar animasyonlu olmalıdır ancak bu kafanın Yüz Hareketi Kodlama Sistemi (FACS) verileri yok.
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,Dinamik Kafa için sağ göz kapalı ifadesi algılanamıyor. Kafada sağ gözün bulunduğu yerle eşleşmesi için lütfen sağ gözün kafes işaretlerini ayarla ve gözün kapatılabildiğinden emin ol.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,Dinamik Kafa için kaş çatma ifadesi algılanamıyor. Kafada ağzın bulunduğu yerle eşleşmesi için lütfen ağzın kafes işaretlerini ayarla ve kaş çatma ifadesini gösterebildiğinden emin ol.
-Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Yayıcı Alan Eşiğin Üzerinde.
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,"""{meshName}"" vücut parçası mesh'i için yayıcılık oranı yüzde {emissivePercentage}. Yayıcılık kapsamı en fazla yüzde {maxEmissivePercentage} olabilir. Lütfen yayıcı maskesi yoğunluğunu veya kapsamını azalt."
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} çok Yayıcı. Yayıcı alan × yoğunluk sınırı aşıyor (şu anda yüzde {emissivePercentage}, yüzde {maxEmissivePercentage} veya daha az olmalıdır). Parlayan alanı küçült veya Yayıcı Gücünü düşür."
-Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Yayıcı Alan Aşıldı.
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,"""{meshName}"" mesh'i, {emissiveArea} kare birimlik ağırlıklı yayıcı yüzey alanına sahip ve bu, {maxEmissiveArea} kare birimlik üst sınırı aşıyor. Lütfen yayıcı maskesi yoğunluğunu veya kapsamını azalt."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} çok Yayıcı. Yayıcı alan × yoğunluk sınırı aşıyor (şu anda {emissiveArea}, {maxEmissiveArea} veya daha az olmalıdır). Parlayan alanı küçült veya Yayıcı Gücünü düşür."
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedInExperience,Deneyimlerde oluşturulan öğeler için yayıcı haritalar desteklenmiyor. Her SurfaceAppearance'tan EmissiveMaskContent'i kaldır.
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedOnDecal,"Çıkartmalar yayıcı olamaz. ""{InstancePath}"" üzerinde EmissiveMaskContent'i kaldır, EmissiveStrength'i 1 ve EmissiveTint'i beyaz olarak ayarla."
@@ -295,19 +336,29 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribut
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Yayınlanan animasyonda geçerli bir kullanıcı tarafından oluşturulmuş içerik (KTOİ) ifade işaretleyicisi eksik. Lütfen animasyonu yeniden yayınla.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Yayınlanan animasyon verilerinden maksimum parça ötelemesi hesaplanamadı. Lütfen animasyonu yeniden yayınla.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"Yayınlanan animasyon, maksimum {taggedTranslation} birim karelik parça ötelemesi belirtiyor, ancak animasyon verileri {calculatedTranslation} birim kare olarak hesaplanıyor. Lütfen animasyonu yeniden yayınla."
+Common.UGCValidation.ErrorLabel.ExperienceCreatorNotSupported,"Deneyim yaratıcıları avatar öğeleri oluşturamaz. CreatorType: {CreatorType}, CreatorId: {CreatorId}."
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"Kafa, Üst Gövdenin üzerine yerleştirilmelidir. Kafa merkezi, gövdenin üst kısmının altında. Bu, kafa mesh'inin çöktüğünü veya yanlış yerleştirildiğini gösterir."
+Common.UGCValidation.ErrorLabel.Extents_ParentBelowPart,"{upperPart}, {lowerPart} parçasının altına uzatılamaz. Parçaların birleştirilme şeklini, {attachmentName} eklentisini hareket ettirerek ayarlayabilirsin."
+Common.UGCValidation.ErrorLabel.Extents_PartAboveParent,"{lowerPart}, {upperPart} parçasının üzerine uzatılamaz. Parçaların birleştirilme şeklini, {attachmentName} eklentisini hareket ettirerek ayarlayabilirsin."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,FaceControls'taki InternalOverrideFACSData özelliği yükleme sırasında boş olmalıdır.
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,Temel yüzde gerekli göz özellikleri eksik. Temel yüze göz ekleyip tekrar dene.
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,Temel yüzde gerekli olan ağız eksik. Temel yüze bir ağız ekleyerek tekrar dene.
 Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,"Mutluluk ifadesi algılanamıyor. Ağız kafesini veya mutlu ifade Yüz Hareketi Kodlama Sistemini (FACS), ağız için yansıtılan mesh beklendiği gibi deforme olacak şekilde ayarla."
-Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,"Sol göz kapalı ifadesi algılanamıyor. Sol göz kafesini veya sol göz kapalı Yüz Hareketi Kodlama Sistemini (FACS), göz için yansıtılan mesh beklendiği gibi deforme olacak şekilde ayarla."
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,Ekranda sol göz (Görselleştirme Eklentisinde kafanın sol tarafındaki kırmızı noktalar) yeterince kapanmıyor. Sağ göz Yüz Hareketi Kodlama Sistemi (FACS) denetimlerini ve ilgili kafesi kontrol et.
 Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,"Ağız açık ifadesi algılanamıyor. Ağız kafesini veya ağız açık Yüz Hareketi Kodlama Sistemini (FACS), ağız için yansıtılan mesh beklendiği gibi deforme olacak şekilde ayarla."
-Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,"Sağ göz kapalı ifadesi algılanamıyor. Sağ göz kafesini veya sağ göz kapalı Yüz Hareketi Kodlama Sistemini (FACS), göz için yansıtılan mesh beklendiği gibi deforme olacak şekilde ayarla."
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,Ekranda sağ göz (Görselleştirme Eklentisinde kafanın sağ tarafındaki mavi noktalar) yeterince kapanmıyor. Sol göz Yüz Hareketi Kodlama Sistemi (FACS) denetimlerini ve ilgili kafesi kontrol et.
 Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,"Üzüntü ifadesi algılanamıyor. Ağız kafesini veya üzgün ifade Yüz Hareketi Kodlama Sistemini (FACS), ağız için yansıtılan mesh beklendiği gibi deforme olacak şekilde ayarla."
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Yüz Hareketi Kodlama Sistemi'nin (FAC) başını {modPercent}% oranında büyüttüğü tespit edildi oysa başı değiştirmek, yüz animasyonları için pazar yeri politikasına aykırıdır."
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,Dinamik kafalarda en fazla {maxFacsJointCount} Yüz Hareketi Kodlama Sistemi (FACS) eklemi olabilir ancak bu kafada {actualJointCount} eklem var. Lütfen FACS eklemi sayısını azaltıp tekrar dene.
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"Yüz Hareketi Kodlama Sistemi'nin (FAC) başını {modPercent}% oranında küçülttüğü tespit edildi oysa başı değiştirmek, yüz animasyonları için pazar yeri politikasına aykırıdır."
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,Yükleme formatı beklenen klasör yapısıyla eşleşmiyor. Lütfen tekrar dene veya bir hata raporu gönder.
+Common.UGCValidation.ErrorLabel.HSRAssetHasChildren,"WrapLayer HSR varlığı, HiddenSurfaceRemovalAsset kök Durumu altında alt öğelere sahip."
+Common.UGCValidation.ErrorLabel.HSRAssetIdInvalidUrl,"""{InstancePath}"" geçersiz bir URL'ye sahip bir HSRAssetId içeriyor."
+Common.UGCValidation.ErrorLabel.HSRAssetIdRequired,"""{InstancePath}"" için bir HSRAssetId ayarlanması gerekir."
+Common.UGCValidation.ErrorLabel.HSRAssetInvalidRoot,WrapLayer HSR varlığında tam olarak 1 HiddenSurfaceRemovalAsset kökü yok.
+Common.UGCValidation.ErrorLabel.HSRDataNotReady,"""{InstancePath}"" için HSR verileri eksik. Lütfen tekrar dene."
+Common.UGCValidation.ErrorLabel.HSRMeshIdValidationError,"""{InstancePath}"" için HSR Mesh Kimlikleri doğrulanırken bir sorun oluştu."
+Common.UGCValidation.ErrorLabel.HSRMeshIdsMismatch,"""{InstancePath}"" için geçersiz HSR verileri algılandı. Lütfen Aksesuar Giydirme Aracını kullanarak varlığı yeniden oluştur ve tekrar dene."
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,{bonePath} kemiği {partName} mesh parçanın çok dışında kalıyor; kemiği lütfen mesh parça boyut sınırına yaklaştır.
 Common.UGCValidation.ErrorLabel.HrdBone_TooCloseToParent,"{bonePath} kemiği, üst öğesine çok yakın. Kemiğin pozisyonunu hafifçe ayarla."
 Common.UGCValidation.ErrorLabel.HrdBone_TransformNotIdentity,{bonePath} kemiği dönüşüm özelliği taşıyor olmakla birlikte pazar yerine yüklenenlerde bu özellik henüz etkinleştirilmemiş. Kemiği lütfen kimlik CFrame değerine sıfırla.
@@ -328,6 +379,8 @@ Common.UGCValidation.ErrorLabel.HrdProperties_UncontainedJoint,"HRD özelliği {
 Common.UGCValidation.ErrorLabel.HrdTposePosition,"{jointName} ekleminin TposeAdjustment pozisyonu, kabul edilebilir sınırların dışında. Lütfen sapmayı +-({offsetLimit}) aralığına gelecek şekilde azalt."
 Common.UGCValidation.ErrorLabel.HrdTposeRotation,"{jointName} ekleminin TposeAdjustment değeri, önerilen {expectedOrientation} yöneliminden {degLimit} dereceden fazla sapıyor."
 Common.UGCValidation.ErrorLabel.InstanceTagsFound,Aşağıdaki örneklerin etiketleri vardır ancak pazar yeri varlıklarının etiketi olamaz: {ProblematicDescendantPaths}
+Common.UGCValidation.ErrorLabel.InstanceTreeBannedClass,"""{InstancePath}"", {ClassName} tipinde ancak pazar yeri varlıklarında bu tipe izin verilmiyor."
+Common.UGCValidation.ErrorLabel.InstanceTreeBannedName,"""{InstancePath}"", ayrılmış bir ada sahip olduğundan pazar yeri varlıklarında kullanılamaz."
 Common.UGCValidation.ErrorLabel.InternalError,Dâhilî bir hata nedeniyle varlığın düzgün bir şekilde doğrulanamadı. Bu sorun devam ederse lütfen bir hata raporu oluştur. ValidationJobId: {ValidationJobId}
 Common.UGCValidation.ErrorLabel.JointRotAtt_Moved,"{instPath}, taşınmış bir jointRotation olmakla birlikte pazar yerine yüklenenler henüz bu durum için ayarlanmış olmayabilir. Lütfen konumu {expectedPosition} olarak sıfırla."
 Common.UGCValidation.ErrorLabel.JointRotAtt_MultipleAttachments,{parentPath} durumunda en fazla 1 tane JointRotation alt öğesi olabilir.
@@ -335,7 +388,21 @@ Common.UGCValidation.ErrorLabel.JointRotAtt_Rotated,"{instPath}, döndürülmü�
 Common.UGCValidation.ErrorLabel.JointRotAtt_UnrecognizedParent,"{parentPath} durumunun bir JointRotation alt öğesi var ancak bu, izin verilen R15plus şemasının bir parçası değil."
 Common.UGCValidation.ErrorLabel.JointRotAtt_WrongInstanceClass,"{instPath} durumu JointRotation olarak adlandırılmış ancak JointRotation, bir eklentinin alt öğesi olan eklentiler için ayrılmıştır."
 Common.UGCValidation.ErrorLabel.LCDeformTooLarge,"Üst Üste Giyilen Kıyafetleriniz, bir avatara yerleştirildiğinde kabul edilebilir {maxSize} boyutunun ötesinde deforme oluyor."
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NoHandle,"""{accessoryName}"" aksesuarının bir İşleyicisi yok. Sınırların dışındaki üst üste giyilen kıyafetler doğrulanamıyor."
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NoWrapLayer,"""{accessoryName}"" aksesuarının bir WrapLayer'ı yok. Sınırların dışındaki üst üste giyilen kıyafetler doğrulanamıyor."
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NonZeroMaxSize,Aksesuarın MaxSize değeri sıfır değil.
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NonZeroOffset,Aksesuarın Ofset değeri sıfır değil.
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_OutOfBounds,"""{accessoryName}"" için üst üste giyilen kıyafetler doğrulanamadı. Deforme olduğunda üst üste giyilen kıyafetler çok büyük hâle gelir."
 Common.UGCValidation.ErrorLabel.LeaderVertsNearCageIslands,"Kirpikte, RBX_Leader'a bağlanmış köşeler iç kafesteki göz işaretlerinden çok uzakta. RBX_Leader'a giydirilmiş tüm köşelerin iç kafesin göz bölgesine daha yakın konumlandırılmasına dikkat et."
+Common.UGCValidation.ErrorLabel.LegsSeparated_HipAttachmentOutOfRange,"{attachmentPath}, {currentValue} değerine sahip ve {comparison} {cutoff} olamaz. Lütfen Eklentiyi düzelt."
+Common.UGCValidation.ErrorLabel.LegsSeparated_LegsOverlap,Bacaklar x ekseni üzerinde {overlap} birim kare kadar üst üste biniyor. Sol bacak maksimum {leftMax} olabilir. Sağ bacak maksimum {rightMax} olabilir. Lütfen bacakları üst üste binmeyi azaltacak şekilde ayarla.
+Common.UGCValidation.ErrorLabel.MakeupDecal_FailedToLoadTexture,{instanceName} Çıkartması için {fieldName} yüklenemedi. TextureContent'in mevcut ve geçerli olduğundan emin olup tekrar dene.
+Common.UGCValidation.ErrorLabel.MakeupDecal_FailedToLoadTextureData,"""{fullName}"" için doku verileri yüklenemedi. Dokunun mevcut olduğundan emin ol ve tekrar dene."
+Common.UGCValidation.ErrorLabel.MakeupDecal_NoColorMap,{instanceName} Çıkartması için ColorMap bulunamadı. Makyaj Çıkartmalarının geçerli bir Renk Haritasına sahip olması gerekir.
+Common.UGCValidation.ErrorLabel.MakeupDecal_TextureTooBig,"""{fullName}"" içinde bulunan {sizeX}x{sizeY} piksellik doku çözünürlüğü, ""{fieldName}"" alanı için desteklenen {maxSize}x{maxSize} piksellik maksimum boyut değerinden daha yüksek."
+Common.UGCValidation.ErrorLabel.MakeupDecal_UVZoneExcludeViolation,"{instanceName} için Renk Haritasındaki opak pikseller, {assetTypeName} varlık tipi için [{minBound}]-[{maxBound}] değerlerindeki kısıtlı UV alanında bulundu."
+Common.UGCValidation.ErrorLabel.MakeupDecal_UVZoneIncludeViolation,"{instanceName} için ColorMap'in opak alanı, {assetTypeName} varlık tipi için izin verilen [{minBound}]-[{maxBound}] değerlerindeki UV alanına denk gelmiyor."
+Common.UGCValidation.ErrorLabel.MaterialNotAllowed,Şu durumlarda geçersiz bir malzeme var: {InstanceNameList}. Yalnızca şu malzemelere izin verilir: {AllowedMaterials}.
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceAvatar_CageInsideMesh,"Vücut kafesi, vücut mesh'iyle kesişiyor. Vücut kafesi köşelerinin yüzde {negtiveSDFPercent} kadarı vücut mesh'inin içinde yer alıyor."
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceAvatar_CageTooFar,"Kafa kafesi, gövde mesh'ine çok uzak. Gövde kafesi ile mesh arasındaki maksimum mesafe {max_sdf} olup izin verilen {max_sdf_threshold} eşiğinin üzerinde."
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceHead_CageInsideMesh,"Kafa kafesi, kafa mesh'iyle kesişiyor. Kafa kafesi köşelerinin yüzde {negtiveSDFPercent} kadarı kafa mesh'inin içinde."
@@ -345,17 +412,61 @@ Common.UGCValidation.ErrorLabel.MeasureCageMeshDistance_CageTooFar,"Dış kafes,
 Common.UGCValidation.ErrorLabel.MeasureCageRelevancy,Değiştirilen dış kafes köşelerinin yüzde {outer_cage_face_irrelevant_percent} kadarı aksesuarı kapsamıyor. Dış kafesi yalnızca gerektiğinde hareket ettirmeye dikkat et.
 Common.UGCValidation.ErrorLabel.MeasureCageUV,{cage_name} kafesindeki {incorrect_uv_count} UV değeri yanlış veya şabloba ait değil. Lütfen kafes UV'sini düzelt.
 Common.UGCValidation.ErrorLabel.MeasureMeshOutsideOuterCage,Aksesuara ait ağ köşelerinin yüzde {mesh_outside_outer_cage_percent} kadarı dış kafesinin dışında. Aksesuarın daha büyük bir kısmının kafesler arasına yerleştirilmesi için ayarlamalar yap.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ExceedsBounds,"{meshName}, izin verilen maksimum sınırlayıcı boyuttan daha büyük bir boyuta sahip. {assetTypeName} tipi için boyut maksimum [{maxSizeX}, {maxSizeY}, {maxSizeZ}] olabilir."
+Common.UGCValidation.ErrorLabel.MeshGeometry_NotCentered,{meshName}.{fieldName} ortalanmamış mesh verilerine sahip. Lütfen bu mesh'i Roblox 3 boyutlu içe aktarıcı ile yeniden içe aktar ve kaynak dosyada serbest geometri bulunmadığından emin ol.
+Common.UGCValidation.ErrorLabel.MeshGeometry_PositionOutOfBounds,Konum sınırların dışında.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleAboveMaximum,"{meshName}, orijinal mesh boyutuna göre {scaleMultiple} kat büyütüldü. Maksimum {maxScaleMultiple} kat olabilir. Mesh'i Studio'da büyütmek yerine ihtiyacın olan boyutta yeniden dışa aktar veya yeniden içe aktar."
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleBelowMinimum,"{meshName}, orijinal mesh boyutuna göre yüzde {scalePercent} oranında küçültüldü. Minimum değer yüzde {minScalePercent} olabilir. Mesh'i Studio'da küçültmek yerine ihtiyacın olan boyutta yeniden dışa aktar veya yeniden içe aktar."
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleNotPositive,{meshName} sıfır veya negatif bir ölçeğe sahip. Pozitif ölçek değerleri kullan. Bir mesh'i yansıtmak için 3 boyutlu modelleme yazılımında ters çevir ve yeniden dışa aktar.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooLarge,{meshName} mesh ölçeği çok büyük.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooSmall,Mesh ölçeği çok küçük.
+Common.UGCValidation.ErrorLabel.MeshGeometry_SurfaceAreaExceeded,"""{meshName}"" model mesh'inin toplam yüzey alanı {surfaceArea} ancak en fazla {maxSurfaceArea} olabilir. Tüm üçgenlerin sayısını ve/veya boyutunu azaltman gerekiyor."
+Common.UGCValidation.ErrorLabel.MeshGeometry_TotalTriangleCountExceeded,"""{assetTypeName}"" için ""{triangleCount}"" olan mesh çözünürlüğü, desteklenen maksimum ""{maxTriangles}"" üçgenden daha yüksek. Üçgen sayısını azaltmak için modelinin topolojisini yeniden oluşturman gerekiyor."
+Common.UGCValidation.ErrorLabel.MeshGeometry_TriangleCountExceeded,"{meshName} model mesh'inin {triangleCount} olan çözünürlüğü, desteklenen maksimum {maxTriangles} değerinden yüksek. Modelinin topolojisini yeniden oluşturman ve tekrar denemen gerekiyor."
+Common.UGCValidation.ErrorLabel.MeshGeometry_VertexDensityExceeded,Maksimum köşe yoğunluğu aşıldı. Birbirine çok yakın olan köşelerin sayısını azalt.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ZeroAreaTriangle,{meshName} model mesh'inde sıfır alanlı üçgen algılandı. Sıfır alanlı üçgenleri kaldırmak için mesh'i düzenlemen gerekiyor.
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,"{partName} mesh'inin {axis} ekseninde ""{currentSize}"" birim kare olan boyutu, izin verilen maksimum tekil parça boyutu olan ""{maxSize}"" birim kareden büyüktür. Mesh'i ölçeklendir."
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"{partName} mesh'inin {axis} ekseninde ""{currentSize}"" birim kare olan boyutu, izin verilen minimum tekil parça boyutu olan ""{minSize}"" birim kareden küçüktür. Mesh'i ölçeklendir."
+Common.UGCValidation.ErrorLabel.MeshSize_LoadFailed,
+Common.UGCValidation.ErrorLabel.MeshSize_Mismatch,"{meshName} için hesaplanan mesh boyutu, MeshSize özellik değeriyle eşleşmiyor"
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,{attName} eklentisinin {partName} alt öğeleri içinde tam bir kez bulunması gerekir.
 Common.UGCValidation.ErrorLabel.NoAttributes,"""{RootInstanceName}"" (veya alt öğeleri) Öznitelikler içeriyor. Öznitelikleri şunlardan kaldırman gerekir: {InstanceNameList}"
+Common.UGCValidation.ErrorLabel.NoMeshBelowFeet_PartBelowFeet,"{partName}, ayakların alt kısmından itibaren {distance} birim kare uzanıyor. Yalnızca bacaklar yere değebilir ve diğer vücut parçaları en fazla {maxDistance} birim kare aşağıya inebilir. {partName} kısaltılmalı veya yükseltilmeli."
+Common.UGCValidation.ErrorLabel.Pose_AngleFromXYPlane,"{assetName} X,Y düzlemine göre {angle} derecelik bir açıda; {limit} derece içinde olmalıdır. Karakterin I pozunda, A pozunda veya T pozunda olduğundan emin ol."
+Common.UGCValidation.ErrorLabel.Pose_AngleOnXYPlane,"{assetName} X,Y düzlemindeki [{xVector}] vektörüne göre {angle}derecelik bir açıda; {minAngle} ile {maxAngle} derece arasında olmalıdır. Karakterin I pozunda, A pozunda veya T pozunda olduğundan emin ol."
+Common.UGCValidation.ErrorLabel.Pose_CFrameCalculationFailed,"{assetName} varlığının CFrame'i hesaplanamadı. Karakterin I pozunda, A pozunda veya T pozunda olduğundan ve parçaların hepsinin aynı konumda olmadığından emin ol."
+Common.UGCValidation.ErrorLabel.Pose_PointingAlongZVector,"{assetName}, dünya Z vektörü boyunca uzanıyor. Karakterin I pozunda, A pozunda veya T pozunda olduğundan emin ol."
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,"{ClassName} ""{InstancePath}"" geçersiz özelliklere sahip: {ProblematicProperties}. Gösterilen bayt sınırı aşıldı (0 sınırı, özelliğin boş olması gerektiği anlamına gelir); diğer tüm özellikler NaN/Inf değerleri içeriyor veya varsayılan boyut sınırını aşıyor."
+Common.UGCValidation.ErrorLabel.PropertyNotFound,"""{InstancePath}"" üzerinde ""{PropertyName}"" özelliği bulunamadı."
+Common.UGCValidation.ErrorLabel.PropertyValueInvalid,"""{InstancePath}"" üzerindeki ""{PropertyName}"" özelliği geçersiz. {ComparisonMethod} {ExpectedValue} olması bekleniyordu."
 Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,"Görsele dönüştürülen animasyonda gerekli yüz ifadelerinden en az biri (göz kapalı, ağız açık, mutlu, üzgün) eksik."
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,"""{PartName}"" içindeki ""{AttachmentName}"" düzenek eklentisi, bu vücut parçasının bitişik bir parçaya bağlandığı eklem sınırının yakınına yerleştirilmelidir. Mevcut konum [{CurrentPosition}], bağlantı düzleminden çok uzak. [{ClosestValidPosition}] konumuna yaklaştır."
+Common.UGCValidation.ErrorLabel.SAOpacity_FailedToLoadTexture,"""{FullName}"" SurfaceAppearance için ""{FieldName}"" dokusu yüklenemedi. Dokunun mevcut olduğundan emin ol ve tekrar dene."
+Common.UGCValidation.ErrorLabel.SAOpacity_InvalidAlphaMode,SurfaceAppearance ({FullName}) geçersiz bir AlphaMode içeriyor. Enum.AlphaMode.Overlay bekleniyordu.
+Common.UGCValidation.ErrorLabel.SAOpacity_TextureNotOpaque,"""{FullName}"" dokusu tamamen opak değil. Lütfen opak bir doku kullan."
+Common.UGCValidation.ErrorLabel.ScaleTypeInvalid,"""{ParentName}"" içindeki AvatarPartScaleType değeri geçersiz. Kabul edilen değerler Classic, ProportionsSlender veya ProportionsNormal'dır."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,Roblox'a varlık yüklemek için tam olarak 1 durum ve ilişkili yükleme türünü seçmelisin.
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,"Bu varlık yüklenemeyecek kadar büyük ({sizeBytes} bayt, oysa üst sınır {maxSizeBytes} bayt). Lütfen küçültüp tekrar dene."
+Common.UGCValidation.ErrorLabel.SurfaceAppearance_MissingSA,({MeshPartFullName}) parçasının TextureID'si boş ve alt SurfaceAppearance durumu yok. Bunlardan en az birini tanımlaman gerekir.
+Common.UGCValidation.ErrorLabel.SurfaceAppearance_TextureAndSABothDefined,Mesh Parça ({MeshPartFullName}) için hem TextureID hem de SurfaceAppearance tanımlanmış. Yayınlama işlemi yalnızca SurfaceAppearance'ı kullanacaktır.
+Common.UGCValidation.ErrorLabel.TexturePackInvalidURL,"""{SurfaceAppearanceName}"" geçersiz bir URL'ye sahip bir ""TexturePack"" özelliği içeriyor. Lütfen URL'yi düzelt."
+Common.UGCValidation.ErrorLabel.TexturePack_DownloadFailed,"""{SurfaceAppearanceName}"" SurfaceAppearance için TexturePack indirilemedi."
+Common.UGCValidation.ErrorLabel.TexturePack_Mismatch,"""{SurfaceAppearanceName}"" SurfaceAppearance'daki dokular, TexturePack'indeki dokularla eşleşmiyor. Lütfen TexturePack'i düzelt."
+Common.UGCValidation.ErrorLabel.TextureSize_FailedToLoad,"""{FullName}"" için doku verileri yüklenemedi. Dokunun mevcut olduğundan emin ol ve tekrar dene."
+Common.UGCValidation.ErrorLabel.TextureSize_TooBig,"""{FullName}"" içinde bulunan {Width}x{Height} piksellik doku çözünürlüğü, ""{FieldName}"" alanı için desteklenen {MaxSize}x{MaxSize} piksellik maksimum boyut değerinden daha yüksek."
+Common.UGCValidation.ErrorLabel.ThumbnailInvalidTarget,"Küçük resim oluşturma için hedef varlık geçersiz. ""{ExpectedTarget}"" olması bekleniyordu."
+Common.UGCValidation.ErrorLabel.ThumbnailOutsideView,"""{InstancePath}"" varlığı, küçük resim kamera görünümünün dışında konumlandırılmış. Varlığı kamera görünümünün ortasına yeniden konumlandır."
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"Kafa mesh parçası, {jointName} için Yüz Hareketi Kodlama Sistemi'nde (FACS) kullanılamayan yüz animasyonlarına sahip. Lütfen bu eklemi yeniden adlandır, ardından kafanı tekrar içe aktar."
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,"{partName} vücut parçası, R15plus şemasının bir parçası olmayan {jointName} sanal eklemine giydirildi."
+Common.UGCValidation.ErrorLabel.UnsupportedCreatorType,"Desteklenmeyen yaratıcı türü. CreatorType: {CreatorType}, CreatorId: {CreatorId}."
+Common.UGCValidation.ErrorLabel.VertexColors_NotOpaque,"""{MeshName}"" mesh modelinde geçersiz köşe rengi bulundu. Renk haritasını tamamen beyaz {TransparencyNote} olacak şekilde düzenlemen ve tekrar denemen gerekiyor."
+Common.UGCValidation.ErrorLabel.VerticesNotCoincident_TooManySimilar,"{cageName} içindeki köşelerin yüzde {percentage} kadarı birbirine çok yakın. Lütfen köşeleri, en fazla yüzde {threshold} oranında çakışacak veya birbirine yakın olacak şekilde düzenle."
+Common.UGCValidation.ErrorLabel.WrapTexture_FailedToLoadCage,{instanceName} için ReferenceCageContent yüklenemedi.
+Common.UGCValidation.ErrorLabel.WrapTexture_FailedToLoadUV,"""{instanceName}"" için UV'ler yüklenemedi. UV haritasının mevcut olduğundan emin ol ve tekrar dene."
+Common.UGCValidation.ErrorLabel.WrapTexture_InvalidMaxBound,"{instanceName}.UVMaxBound [{actual}], UVMaxBound için gerekli [{expected}] değeriyle eşleşmiyor."
+Common.UGCValidation.ErrorLabel.WrapTexture_InvalidMinBound,"{instanceName}.UVMinBound [{actual}], UVMinBound için gerekli [{expected}] değeriyle eşleşmiyor."
+Common.UGCValidation.ErrorLabel.WrapTexture_InvalidUV,"""{instanceName}"" durumunun kafesi için geçersiz UV değeri bulundu. Bu sorunu çözmek için UV haritasını düzenlemen gerekiyor."
+Common.UGCValidation.ErrorLabel.WrapTexture_NoCage,{instanceName} için ReferenceCageContent sağlanmadı.
 Common.VerifiedParentalConsent.Action.Cancel,İptal
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,Ayarlara git
@@ -650,11 +761,6 @@ CoreScripts.CommercePurchasePrompt.ErrorPrompt.Title.DeviceNotSupported,Cihaz de
 CoreScripts.CommercePurchasePrompt.ProductNotAvailable,Ürün mevcut değil
 CoreScripts.CommercePurchasePrompt.SuccessToast.GrantPending,Avatar öğesinin ulaştırılması biraz zaman alıyor. Öğe kısa bir süre içinde verilecek.
 CoreScripts.CommercePurchasePrompt.SuccessToast.Granted,Avatar öğesi başarıyla verildi!
-CoreScripts.EmoteThumbnailEditor.Action.Cancel,
-CoreScripts.EmoteThumbnailEditor.Action.Update,Güncelle
-CoreScripts.EmoteThumbnailEditor.Heading.EditThumbnail,Küçük resmi düzenle
-CoreScripts.EmoteThumbnailEditor.Label.Rotation,Döndürme
-CoreScripts.EmoteThumbnailEditor.Label.Time,Zaman
 CoreScripts.FTUX.Description.WhiteMenuPlaytestMode,"Beyaz Roblox menüsü, oynanış testinde olduğunu gösterir. Her zaman Roblox Topluluk Standartları'na uy."
 CoreScripts.FTUX.Description.WhiteMenuPreviewing,"Beyaz Roblox menüsü, bu oyunu herkese sunulmadan önce ön izlediğin anlamına gelir."
 CoreScripts.FTUX.Heading.CheckOutRobloxConnect,Yeni: Roblox Connect'i dene!
@@ -967,6 +1073,7 @@ CoreScripts.InGameMenu.Ok,
 CoreScripts.InGameMenu.PageTitle.Controls,Kontroller...
 CoreScripts.InGameMenu.PageTitle.GameSettings,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Arkadaşları Davet Et
+CoreScripts.InGameMenu.PageTitle.JoinOrInvite,Katıl veya Davet Et
 CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends,Arkadaşlara Katıl veya Arkadaşları Davet Et
 CoreScripts.InGameMenu.PageTitle.Players,Kişiler
 CoreScripts.InGameMenu.PageTitle.Report,Bildir
@@ -1184,6 +1291,7 @@ CoreScripts.TextChat.InputBar.Hint.GamepadConnectedConfirm,
 CoreScripts.TextChat.InputBar.Hint.MouseKeyboard,Sohbet etmek için buraya tıkla veya {KEY} tuşuna bas
 CoreScripts.TextChat.InputBar.Hint.PrivacySettingsDisabled,"Sohbet ayarların, mesajı göndermeni ve almanı engelliyor."
 CoreScripts.TextChat.InputBar.Hint.Touch,Sohbet etmek için buraya dokun
+CoreScripts.TextChat.MessageStatus.Warning.DictationRateLimited,Başka bir mesaj göndermeden önce bekle. Sesli yazma duraklatıldı.
 CoreScripts.TextChat.MessageStatus.Warning.Floodchecked,Başka bir mesaj göndermeden önce beklemelisin.
 CoreScripts.TextChat.MessageStatus.Warning.InvalidPrivacySettings,
 CoreScripts.TextChat.MessageStatus.Warning.MessageTooLong,"Mesajın, maksimum mesaj uzunluğunu aşıyor."
@@ -1386,6 +1494,7 @@ Feature.Avatar.Action.Rename,Yeniden Adlandır
 Feature.Avatar.Action.RenameSet,Seti yeniden adlandır
 Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,Son kaydedilen avatarı geri yükle
+Feature.Avatar.Action.Retry,
 Feature.Avatar.Action.Revert,Geri Döndür
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,
@@ -1406,7 +1515,7 @@ Feature.Avatar.Action.TryOn,Üstüne Dene
 Feature.Avatar.Action.Unequip,Donanmayı bırak
 Feature.Avatar.Action.Unselect,
 Feature.Avatar.Action.UnslotEmote,İfadeyi Yuvadan Kaldır
-Feature.Avatar.Action.Update,
+Feature.Avatar.Action.Update,Güncelle
 Feature.Avatar.Action.UpdateExistingCharacter,Mevcut karakteri güncelle
 Feature.Avatar.Action.UpdateExistingMakeupLook,Mevcut görünümü güncelle
 Feature.Avatar.Action.UpdateMakeupLook,Görünümü güncelle
@@ -1599,6 +1708,7 @@ Feature.Avatar.Label.FaceMakeup,
 Feature.Avatar.Label.FacialAnimation,Yüz Animasyonu
 Feature.Avatar.Label.Fall,Düşme
 Feature.Avatar.Label.FallAnimations,Düşme Animasyonları
+Feature.Avatar.Label.FromMarketplace,Pazar Yeri'nden
 Feature.Avatar.Label.Front,Ön Taraf
 Feature.Avatar.Label.FullBody,Tüm Vücut
 Feature.Avatar.Label.FullMasks,Tam Maskeler
@@ -1656,6 +1766,7 @@ Feature.Avatar.Label.Name,
 Feature.Avatar.Label.Neck,Boyun
 Feature.Avatar.Label.Newest,En yeni
 Feature.Avatar.Label.NoExpiredItems,Süresi dolmuş {itemType} yok
+Feature.Avatar.Label.NoInventorySearchResults,"""{query}"" ile eşleşen hiçbir öğe yok"
 Feature.Avatar.Label.NoItems,{itemType} yok
 Feature.Avatar.Label.NoLongerAvailableInCollection,Artık bu koleksiyonda bulunmayacaklar
 Feature.Avatar.Label.NoSets,Henüz set yok
@@ -1852,6 +1963,7 @@ Feature.Avatar.Message.UnknownErrorCreatingOutfit,Bilinmeyen bir hata oluştu. K
 Feature.Avatar.Message.UpdateOutfitSuccess,Güncellendi!
 Feature.Avatar.Message.UpdateRequired,Güncelleme gerekli. Bu öğeyi görüntülemek için lütfen Roblox'u en son sürüme güncelle.
 Feature.Avatar.Placeholder.NameYourAvatar,Avatarına bir ad ver
+Feature.Avatar.Placeholder.SearchInventory,Envanterde ara
 Feature.Avatar.Placeholder.WriteAvatarCaption,Avatarın için bir açıklama yaz (İsteğe Bağlı)
 Feature.Avatar.RevokedItems.BodyText,"{category} ""{item}"" öğesi bu kayıtlı avatardan kaldırıldı, bu nedenle ödediğin ilk tutarı iade ettik.{lineBreak}Daha fazla ayrıntı için gelen kutunu görüntüle."
 Feature.Avatar.RevokedItems.BodyTextMultiple,"Aşağıdaki öğeler bu kayıtlı avatardan kaldırıldı, bu nedenle ödediğin ilk tutarı iade ettik.{lineBreak}{items}{lineBreak}Daha fazla ayrıntı için gelen kutunu görüntüle."
@@ -1942,7 +2054,6 @@ Feature.AvatarSwitcher.Message.SwitchingDeferred,Bu avatarı bir dahaki sıfırl
 Feature.AvatarSwitcher.Message.UnknownSupport,Avatarını yine de değiştirebilirsin ancak bu deneyimde doğru şekilde görünmeyebilir.
 Feature.AvatarSwitcher.Message.Unsupported,Bu deneyim özel bir avatar kullanıyor ve Roblox avatarlarını desteklemiyor.
 Feature.AvatarWorkshop.Action.TryAgain,
-Feature.AvatarWorkshop.Heading.AvatarWorkshop,Avatar Atölyesi
 Feature.AvatarWorkshop.Message.LoadItemsError,Öğelerin yüklenirken bir şeyler ters gitti.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,Daha fazla öğe yüklenemedi.
 Feature.AvatarWorkshop.Message.NoItemsOwned,Burada henüz hiçbir öğen yok.
@@ -1977,6 +2088,9 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,Metni kopyala
 Feature.Build.Action.Create,
 Feature.Build.Action.CreateDeveloperProduct,
+Feature.Build.Action.CreateMonetizationDeveloperProduct,Bir geliştirici ürünü oluştur
+Feature.Build.Action.CreateMonetizationPass,Bir bilet oluştur
+Feature.Build.Action.CreateMonetizationSubscription,Bir abonelik oluştur
 Feature.Build.Action.CreateNewGame,Yeni oyun oluştur
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
@@ -2088,6 +2202,9 @@ Feature.Build.Analytics.Title.TopDropOffStep,En büyük düşüş
 Feature.Build.Analytics.Title.TotalPlaytime,Toplam oynama süresi
 Feature.Build.Analytics.Visits,Ziyaretler
 Feature.Build.Content.NewGame,Yeni oyun
+Feature.Build.CreateDeveloperProductDraft,Oyunum için bir geliştirici ürünü oluşturmama yardımcı ol.
+Feature.Build.CreatePassDraft,Oyunum için bir bilet oluşturmama yardımcı ol.
+Feature.Build.CreateSubscriptionDraft,Oyunum için bir abonelik oluşturmama yardımcı ol.
 Feature.Build.Description.ActivateDeveloperProduct,Geliştirici ürününü ({PRODUCT_ID}) satışa çıkar.
 Feature.Build.Description.ActivateGamePass,{PRODUCT_ID} kimlikli Oyun Biletini satışa çıkar.
 Feature.Build.Description.ActivateSubscription,{PRODUCT_ID} kimlikli aboneliği etkinleştir.
@@ -2255,6 +2372,7 @@ Feature.Build.Label.ManagedPricingMixed,Mevcut ürünler arasında karışık
 Feature.Build.Label.MaximizeForGamePlays,Oyun oynama sayısını en üst düzeye çıkar
 Feature.Build.Label.ModelUnavailable,Model kullanılamıyor
 Feature.Build.Label.Models3D,3 Boyutlu Modeller
+Feature.Build.Label.MonetizationCreateTitle,{NAME} - {PRICE} Robux
 Feature.Build.Label.MyGames,Oyunlarım
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,Sınır yok
@@ -2780,6 +2898,7 @@ Feature.Catalog.Label.FullBody,
 Feature.Catalog.Label.Gear,
 Feature.Catalog.Label.Get,Al
 Feature.Catalog.Label.GetPremiumAndPrice,Premium alarak şu fiyata satın al 
+Feature.Catalog.Label.Glowing,Parlayan
 Feature.Catalog.Label.HD,HD
 Feature.Catalog.Label.Hair,
 Feature.Catalog.Label.HeadShape,
@@ -2880,6 +2999,7 @@ Feature.Catalog.Label.SerialNumberColon,Seri Numarası:
 Feature.Catalog.Label.ShareToMoments,Anlar'da Paylaş
 Feature.Catalog.Label.ShoulderAccessories,Omuz Aksesuarları
 Feature.Catalog.Label.SoldOut,
+Feature.Catalog.Label.SpecialFeatures,Özel Özellikler
 Feature.Catalog.Label.SupportsHeadShapes,Kafa Şekillerini Destekler
 Feature.Catalog.Label.TakeOffResaleConfirmation,Bu öğeyi yeniden satışa sunmayı bırakmak istediğine emin misin?
 Feature.Catalog.Label.TimedOptions,Zamanlanmış Seçenekler
@@ -2999,6 +3119,7 @@ Feature.Chat.Action.Delete,
 Feature.Chat.Action.Edit,
 Feature.Chat.Action.GroupOSADoNotJoin,Katılma
 Feature.Chat.Action.GroupOSAJoin,
+Feature.Chat.Action.JumpToLatestMessages,En son mesajlara git
 Feature.Chat.Action.LearnMore,
 Feature.Chat.Action.Leave,
 Feature.Chat.Action.MuteVoice,Sesi sustur
@@ -3292,8 +3413,10 @@ Feature.FaceChat.Subtitle.VideoPerformancePromptDisable,Kameranı kapatmak deney
 Feature.FaceChat.Subtitle.VideoUnsupported,"Roblox, avatarını canlandırmak için kameranı kullanamıyor."
 Feature.Favorites.Label.Favorite,Favorile
 Feature.FlyoutSidePanel.Action.ContinuePlaying,Oynamaya Devam Et
+Feature.FlyoutSidePanel.Description.SwitchAccountsHere,Artık buradan hesap değiştirebilirsin.
 Feature.FlyoutSidePanel.Label.TooltipBody,"Profilin, içeriğin ve ayarların yeni bir konuma taşındı."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> taşındı
+Feature.FlyoutSidePanel.Title.AccountSwitcherMoved,Hesap değiştirici taşındı
 Feature.Friends.Action.AcceptFriend,Arkadaşı kabul et
 Feature.Friends.Action.AccountDeleted,Hesap silindi
 Feature.Friends.Action.Add,
@@ -3672,13 +3795,16 @@ Feature.InExperienceShop.Description.GamePassTrialNotEnabledBody,Bu bilet şu an
 Feature.InExperienceShop.Description.GamePassTrialNotEnabledTitle,Ücretsiz deneme yok
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,Robux satın alarak tahkim maddesi ve fesih politikası da dâhil olmak üzere {termsLinkStart}Kullanım Koşullarımızı{termsLinkEnd} kabul etmiş olursun.
 Feature.InExperienceShop.GamePass,Oyun bileti
+Feature.InExperienceShop.GenericTransactionErrorBody,
+Feature.InExperienceShop.GenericTransactionErrorTitle,
 Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,Bonus öğe
+Feature.InExperienceShop.Label.BuyGamePass,Oyun bileti satın al
 Feature.InExperienceShop.Label.BuyNow,Şimdi Satın Al
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining} sonra sona erecek
 Feature.InExperienceShop.Label.FreeTrial,Ücretsiz deneme
-Feature.InExperienceShop.Label.HaveTrial,Ücretsiz bir denemen var
+Feature.InExperienceShop.Label.HaveTrial,Senin için ücretsiz deneme
 Feature.InExperienceShop.Label.NoDescription,Açıklama Yok
 Feature.InExperienceShop.Label.OfferEndTime,"{offer}, {timeRemaining} sonra sona erecek"
 Feature.InExperienceShop.Label.PreviewBanner,"Bu, Roblox Studio'daki Mağazanın bir ön izlemesidir. Oyuncular bu ön izlemeyi görmez."
@@ -3691,10 +3817,9 @@ Feature.InExperienceShop.Label.Timer.Minute.Singular,1 dakika
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} saniye
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 saniye
 Feature.InExperienceShop.Label.Trial,Deneme süresi
-Feature.InExperienceShop.Label.Trialed,Denendi
-Feature.InExperienceShop.Label.TryNow,Şimdi Dene
+Feature.InExperienceShop.Label.TryNow,Ücretsiz denemeden yararlan
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,{ROBUX_AMOUNT} Robux satın aldın
-Feature.InExperienceShop.Tooltip.RecentlyRedeemed,Ücretsiz denemeden memnun musun?
+Feature.InExperienceShop.Tooltip.RecentlyRedeemed,Denemeden memnun kaldın mı?
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,Bu öğeyi envanterinden kalıcı olarak silmek istediğine emin misin? Fikrini değiştirirsen öğeyi bir deneyimde tekrar kazanman gerekecek.
 Feature.Item.Label.DeleteItemUndercase,Öğeyi sil
 Feature.Landing.Label.PoweredBy,Destekleyen:
@@ -3711,6 +3836,8 @@ Feature.Moments.Action.Analytics,Analiz
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
+Feature.Moments.Action.CommentSeeOriginal,Orijinalini gör
+Feature.Moments.Action.CommentSeeTranslation,Çeviriyi gör
 Feature.Moments.Action.CommentShowLess,Daha az göster
 Feature.Moments.Action.CommentShowMore,Daha fazla göster
 Feature.Moments.Action.Continue,
@@ -3743,9 +3870,15 @@ Feature.Moments.Action.ShowDetails,Ayrıntıları göster
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Videoyu Kırp
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Action.ViewOtherFeed,Diğer sayfayı görüntüle
+Feature.Moments.Action.ViewRecommended,Tavsiye Edilenleri Görüntüle
+Feature.Moments.Action.ViewTrending,Popüler Olanları Görüntüle
 Feature.Moments.Body.EDPMomentIPReportInstructions,Bu Anda bir fikrî mülkiyet ihlalini raporlamak için oyun detayları sayfasına devam et.
 Feature.Moments.Description.CommunityStandards,Ne söyleyip söyleyemeyeceğin hakkında daha fazla bilgi için Topluluk Standartlarını kontrol et.
 Feature.Moments.Description.EmptyCapturesLibrary,Yakalamaların burada görünecektir.
+Feature.Moments.Description.FollowingCaughtUpBody,Bu sayfadaki tüm yeni Anları izledin. Daha fazlasını görüntülemek için sayfa değiştir.
+Feature.Moments.Description.FollowingEmptyBodyRecommended,Takip ettiğin yaratıcıların Anlarını burada göreceksin.
+Feature.Moments.Description.FollowingEmptyBodyTrending,
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,Yapay zekâ tarafından oluşturuldu. Yayınlamadan önce gözden geçir; yayınlananlardan sen sorumlusun.
 Feature.Moments.Description.HowToCaptureStep1,Yakalamaların etkin olduğu bir Deneyime katıl ve hamburger menüsünü seç
 Feature.Moments.Description.HowToCaptureStep2,Yakalama denetimlerini etkinleştir
@@ -3804,8 +3937,11 @@ Feature.Moments.Label.FeedEndTitle,Yeni bir şey yok
 Feature.Moments.Label.FeedFailedToLoad,Sayfa yüklenemedi
 Feature.Moments.Label.FeedFollowing,
 Feature.Moments.Label.FeedMyMoments,Anlarım
+Feature.Moments.Label.FeedRecommended,Tavsiye Edilen
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.FirstCommentInvite,Henüz yorum yok. İlk yorumu yapan sen ol!
+Feature.Moments.Label.FollowingCaughtUpTitle,Şimdilik yeni bir şey yok
+Feature.Moments.Label.FollowingEmptyTitle,Yaratıcıların Anlarını burada görüntülemek için onları takip et
 Feature.Moments.Label.GameJoinConversion,Oyuna katılma dönüşümü
 Feature.Moments.Label.HowToUseCaptureTitle,Yakalama nasıl kullanılır?
 Feature.Moments.Label.LinkCopied,Bağlantı kopyalandı
@@ -4003,12 +4139,14 @@ Feature.PrivateServers.Label.PrivateServerLink,Özel sunucu bağlantısı
 Feature.PrivateServers.Label.SearchPeople,İnsanları ara
 Feature.PrivateServers.Label.ServerName,Sunucu Adı:
 Feature.PrivateServers.Label.WhoCanJoin,Kimler katılabilir?
+Feature.PrivateServers.Label.YourPrivateServerIsReadyToJoin,Özel sunucuna katılmaya hazırsın
 Feature.Profile.Action.AboutThisProfile,Bu profil hakkında
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
 Feature.Profile.Action.Add,
 Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,Profil Bağlantısını Kopyala
+Feature.Profile.Action.CreateInBuild,İnşa Et'te oluştur
 Feature.Profile.Action.EditAppearance,Görünümü düzenle
 Feature.Profile.Action.EditAvatar,Avatarı düzenle
 Feature.Profile.Action.EditBackground,Arka planı düzenle
@@ -4081,6 +4219,8 @@ Feature.Profile.Label.DisplayNameFailed,Görünen ad kaydedilemiyor. Tekrar dene
 Feature.Profile.Label.DisplayNameModalCaption,Görünen adın yalnızca 7 günde bir kez değiştirilebilir.
 Feature.Profile.Label.DisplayNameTooShort,Görünen ad en az 3 karakterden oluşmalı.
 Feature.Profile.Label.EditBackground,
+Feature.Profile.Label.IsMakingGameIn,şurada bir oyun oluşturuyor:
+Feature.Profile.Label.IsMakingGameInBuild,İnşa Et'te bir oyun oluşturuyor
 Feature.Profile.Label.NoBioYet,Henüz biyografi yok
 Feature.Profile.Label.NoPreviousName,Önceki ad yok
 Feature.Profile.Label.NoSocialLink,Henüz sosyal bağlantı yok
@@ -4835,6 +4975,8 @@ Features.Transfers.RobuxTransfer.Action.Send,
 Features.Transfers.RobuxTransfer.Action.TryAgain,
 Features.Transfers.RobuxTransfer.Disclaimer.AgeEstimationTransfer,Robux göndermek için yaş kontrolünden geçmen veya ebeveyninden izin alman gerekiyor. Gönderdikten sonra işlemi iptal edemezsin.
 Features.Transfers.RobuxTransfer.Error.ReceiverNotAllowed,@{username} şu anda Robux alamıyor.
+Features.Transfers.RobuxTransfer.FreeTransfersRemaining,{numFreeTransfersRemaining} ücretsiz transfer hakkın kaldı. Robux ücretsiz olarak anında gönderilir.
+Features.Transfers.RobuxTransfer.FreeTransfersRemainingSingular,1 ücretsiz transferin kaldı. Robux ücretsiz olarak anında gönderilir.
 Features.Transfers.RobuxTransfer.Heading.SendRobux,Robux Gönder
 Features.Transfers.RobuxTransfer.Label.JoinedInYear,{year} yılında katıldı
 Features.Transfers.RobuxTransfer.Label.MutualConnection,{amount} ortak Arkadaş
@@ -4845,6 +4987,7 @@ Features.Transfers.RobuxTransfer.Label.RecipientWillGetInApp,Alıcı {amount} Ro
 Features.Transfers.RobuxTransfer.Label.RecipientWillGetInGame,"Alıcı, ücretler düşüldükten sonra {amount} Robux alacak. Oyun içi transferlere yüzde % {commissionPercentage}oranında yaratıcı ücreti dâhildir."
 Features.Transfers.RobuxTransfer.SentInstantNoFee,Robux ücretsiz olarak anında gönderilir
 Features.Transfers.RobuxTransfers.Label.SuccessNotification,{amount} Robux gönderdin
+Features.Transfers.Title.FreeTransfersExhausted,Ücretsiz transfer haklarını tükettin
 Features.Transfers.Title.UpsellSubscription,
 Features.Transfers.Transfer.Block.RequireReceiverFAE,Robux kabul edebilmen için yaşını kontrol edelim
 Features.Transfers.Transfer.Block.RequireSenderFAE,Robux gönderebilmen için yaşını kontrol edelim
@@ -5164,11 +5307,13 @@ InGame.HelpMenu.LeftArrow,Sol Ok Tuşu
 InGame.HelpMenu.Resume,
 InGame.HelpMenu.RightArrow,Sağ Ok Tuşu
 InGame.HelpMenu.UpArrow,Yukarı Ok Tuşu
+InGame.InspectMenu.Action.Buy,
 InGame.InspectMenu.Action.Cancel,
 InGame.InspectMenu.Action.Confirm,
 InGame.InspectMenu.Action.Favorite,
 InGame.InspectMenu.Action.FromResale,Yeniden Satıştan {PRICE}
 InGame.InspectMenu.Action.Go,Git
+InGame.InspectMenu.Action.Inspect,İncele
 InGame.InspectMenu.Action.LimitReached,Öğe Sınırına Ulaşıldı
 InGame.InspectMenu.Action.SoldOut,
 InGame.InspectMenu.Action.TakeOff,
@@ -5264,7 +5409,9 @@ Notifications.SquadRegroupPrompt.ToastAction.Join,
 Notifications.SquadRegroupPrompt.ToastLabel.ContinuePlayingTogether,Birlikte oynamaya devam et
 Notifications.SquadRegroupPrompt.ToastLabel.JoinANewServer,Yeni bir sunucuya katıl
 Notifications.ToastNotifications.Label.LeaveExperienceConfirmation,Bu deneyimden ayrılıp başka bir deneyime katılmak istediğine emin misin?
+Notifications.ToastNotifications.Label.LeaveServerConfirmation,Bu sunucudan ayrılıp başka bir sunucuya katılmak istediğine emin misin?
 Notifications.ToastNotifications.Title.LeavingExperience,Deneyimden Ayrılıyorsun
+Notifications.ToastNotifications.Title.LeavingServer,Sunucudan Ayrılıyor
 PlayerFeedbacks.VoteForm.Message.Action.Report,
 PlayerFeedbacks.VoteForm.Message.MaxLengthCharacters,{count} karakterden az olmalı.
 PlayerFeedbacks.VoteForm.Message.MinLengthCharacters,{count} karakterden fazla olmalı.

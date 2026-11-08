@@ -40,9 +40,12 @@ return function(Frame)
 	local UseRefResult1 = ReactModule.useRef(false)
 	local TravelDistanceResult: number = MarqueeTextMotionModule.travelDistance(UseStateResult, UseStateResult1)
 	local OverflowsResult = MarqueeTextMotionModule.overflows(UseStateResult, UseStateResult1)
-	local IsNotRequiresOverflow = PlayStatus ~= MarqueePlayStatus.Idle and (not ReducedMotion and (not UseStateResult3 and (TravelDistanceResult > 0 and (Frame.requiresOverflow ~= true or OverflowsResult))))
-	local IsPlayStatusMatch: boolean = IsNotRequiresOverflow and PlayStatus == MarqueePlayStatus.Playing
-	local OverflowsResult1 = not IsNotRequiresOverflow and OverflowsResult
+	local IsNotRequiresOverflow = PlayStatus ~= MarqueePlayStatus.Idle and (not ReducedMotion and (TravelDistanceResult > 0 and (Frame.requiresOverflow ~= true or OverflowsResult)))
+	local NoUseStateResult3: boolean = IsNotRequiresOverflow and not UseStateResult3
+	local IsHoldForNextLoop: boolean = IsNotRequiresOverflow and (UseStateResult3 and Frame.holdForNextLoop == true)
+	local IsPlayStatusMatch: boolean = NoUseStateResult3 and PlayStatus == MarqueePlayStatus.Playing
+	local NoUseStateResult3_1: boolean = NoUseStateResult3 or IsHoldForNextLoop
+	local OverflowsResult1 = not NoUseStateResult3_1 and OverflowsResult
 	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseBindingResult2 (copy), UseStateResult2_2 (copy)
 		UseRefResult.current = 0
@@ -91,8 +94,8 @@ return function(Frame)
 	end, { IsPlayStatusMatch, Heartbeat, UseResult })
 	local IsDirectionMatch = Direction == Enum.TextDirection.RightToLeft
 	local MapResult = UseBindingResult:map(function(p1): UDim2
-		-- upvalues: IsNotRequiresOverflow (copy), MarqueeTextMotionModule (upval), Direction (copy), IsDirectionMatch (copy)
-		if IsNotRequiresOverflow then
+		-- upvalues: NoUseStateResult3_1 (copy), MarqueeTextMotionModule (upval), Direction (copy), IsDirectionMatch (copy)
+		if NoUseStateResult3_1 then
 			local SignedOffsetResult = MarqueeTextMotionModule.signedOffset(p1, Direction)
 			
 			return if IsDirectionMatch then UDim2.new(1, SignedOffsetResult, 0, 0) else UDim2.fromOffset(SignedOffsetResult, 0)
@@ -120,7 +123,7 @@ return function(Frame)
 				UseStateResult2(Frame.AbsoluteSize.X)
 			end
 		}),
-		Content = if IsNotRequiresOverflow then ReactModule.createElement(View, {
+		Content = if NoUseStateResult3_1 then ReactModule.createElement(View, {
 			tag = "auto-y no-clip",
 			Size = UDim2.fromOffset(TravelDistanceResult + UseStateResult, 0),
 			AnchorPoint = if IsDirectionMatch then Vector2.new(1, 0) else Vector2.new(0, 0),

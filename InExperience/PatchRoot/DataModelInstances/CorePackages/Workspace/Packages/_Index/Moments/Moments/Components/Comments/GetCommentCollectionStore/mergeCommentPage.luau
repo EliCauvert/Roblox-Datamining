@@ -22,6 +22,12 @@ return function(p1)
 			t[stickyPostedCommentId] = true
 		end
 	end
+	local PinnedCommentId = p1.pinnedCommentId
+	
+	if PinnedCommentId ~= nil and not t[PinnedCommentId] and Filters.sessionHiddenCommentIds[PinnedCommentId] ~= true then
+		table.insert(List, PinnedCommentId)
+		t[PinnedCommentId] = true
+	end
 	if not p1.replace then
 		for _, existingId in p1.existingIds do
 			if not t[existingId] then

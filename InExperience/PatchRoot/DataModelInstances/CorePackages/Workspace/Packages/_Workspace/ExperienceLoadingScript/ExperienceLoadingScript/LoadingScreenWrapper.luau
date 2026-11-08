@@ -7,10 +7,13 @@ local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
 local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 local ResponsiveModule = require(Parent.Responsive)
 local LoggingProtocolModule = require(Parent.LoggingProtocol)
+local Game1 = require(Parent.MockableProxyServices).game
 local GetGameProductInfoModule = require(ExperienceLoadingScript.Thunks.GetGameProductInfo)
 local GetIsSubjectToChinaPoliciesModule = require(ExperienceLoadingScript.Thunks.GetIsSubjectToChinaPolicies)
 local GetUniverseIdModule = require(ExperienceLoadingScript.Thunks.GetUniverseId)
 local GetFFlagReportFirstExperienceCancelledModule = require(ExperienceLoadingScript.Flags.GetFFlagReportFirstExperienceCancelled)
+local FFlagLoadingScreenControlMilestones = require(Parent.SharedFlags).FFlagLoadingScreenControlMilestones
+local LoadingScreenMilestonesModule = require(Parent.ProgressLoading.LoadingScreenMilestones)
 local QueueExperimentation = require(Parent.SocialExperiments).QueueExperimentation
 local ProgressLoadingModule = require(Parent.ProgressLoading)
 local LoadingScreenView = ProgressLoadingModule.LoadingScreenView
@@ -18,7 +21,7 @@ local PlaceLauncherState = ProgressLoadingModule.PlaceLauncherState
 local CreateNetworking = ProgressLoadingModule.createNetworking
 
 return function(p1)
-	-- upvalues: UseSelectorFunction (copy), UseDispatchFunction (copy), ReactModule (copy), ResponsiveModule (copy), GetUniverseIdModule (copy), CreateNetworking (copy), GetGameProductInfoModule (copy), GetIsSubjectToChinaPoliciesModule (copy), QueueExperimentation (copy), ExperienceService (copy), PlaceLauncherState (copy), LoadingScreenView (copy), GetFFlagReportFirstExperienceCancelledModule (copy), LoggingProtocolModule (copy)
+	-- upvalues: UseSelectorFunction (copy), UseDispatchFunction (copy), ReactModule (copy), ResponsiveModule (copy), GetUniverseIdModule (copy), CreateNetworking (copy), GetGameProductInfoModule (copy), GetIsSubjectToChinaPoliciesModule (copy), QueueExperimentation (copy), ExperienceService (copy), PlaceLauncherState (copy), LoadingScreenView (copy), FFlagLoadingScreenControlMilestones (copy), LoadingScreenMilestonesModule (copy), GetFFlagReportFirstExperienceCancelledModule (copy), LoggingProtocolModule (copy), Game1 (copy)
 	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: p1 (copy)
 		return p2.gameIds and p2.gameIds.placeId or p1.placeId
@@ -83,16 +86,24 @@ return function(p1)
 		isSubjectToChinaPolicies = UseSelectorResult3,
 		preferredInputRef = UseRefResult,
 		shouldStartFadeOut = UseStateResult,
+		milestones = if FFlagLoadingScreenControlMilestones then p1.milestones else nil,
 		onCloseButtonActivated = function()
-			-- upvalues: GetFFlagReportFirstExperienceCancelledModule (upval), LoggingProtocolModule (upval)
+			-- upvalues: FFlagLoadingScreenControlMilestones (upval), p1 (copy), LoadingScreenMilestonesModule (upval), GetFFlagReportFirstExperienceCancelledModule (upval), LoggingProtocolModule (upval), Game1 (upval)
+			if FFlagLoadingScreenControlMilestones and p1.milestones then
+				p1.milestones.abort(LoadingScreenMilestonesModule.AbortReason.Cancelled)
+			end
 			if GetFFlagReportFirstExperienceCancelledModule then
 				LoggingProtocolModule.default:logEventOnce("first_experience_cancelled")
 			end
-			game:Shutdown()
+			Game1:Shutdown()
 		end,
 		onGamepadCancel = function()
-			if not game:IsLoaded() then
-				game:Shutdown()
+			-- upvalues: Game1 (upval), FFlagLoadingScreenControlMilestones (upval), p1 (copy), LoadingScreenMilestonesModule (upval)
+			if not Game1:IsLoaded() then
+				if FFlagLoadingScreenControlMilestones and p1.milestones then
+					p1.milestones.abort(LoadingScreenMilestonesModule.AbortReason.Cancelled)
+				end
+				Game1:Shutdown()
 			end
 		end
 	})

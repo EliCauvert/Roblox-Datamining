@@ -1,10 +1,12 @@
 ﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
 local Parent = SduiCoreSystem.Parent
+local FFlagSduiErrorPaths = require(Parent.SharedFlags).FFlagSduiErrorPaths
 local SignalsModule = require(Parent.Signals)
 local _ = require(SduiCoreSystem.SduiBuilderTypes)
 local SduiPropUtilsModule = require(SduiCoreSystem.ClientBinding.PropBuilder.SduiPropUtils)
 local SduiLoggerModule = require(SduiCoreSystem.SduiLogger)
 local SduiErrorsModule = require(SduiCoreSystem.SduiErrors)
+local AddSduiErrorContextFieldsModule = require(SduiCoreSystem.addSduiErrorContextFields)
 local SduiParseHelpersModule = require(SduiCoreSystem.SduiParseHelpers)
 local SduiListEntryNormalizerModule = require(SduiCoreSystem.ClientBinding.PropBuilder.SduiListEntryNormalizer)
 local SduiListEntrySorterModule = require(SduiCoreSystem.ClientBinding.PropBuilder.SduiListEntrySorter)
@@ -64,7 +66,7 @@ local function buildItemsFromEntries(NormalizeBoundDataResult, OrderedIdentifier
 end
 
 return function(_, p7, p8, Callback1, p9, p10)
-	-- upvalues: SduiLoggerModule (copy), SduiErrorsModule (copy), PropResultCategory (copy), SduiListEntryRendererModule (copy), SduiPoolEntryHelpersModule (copy), SduiPropUtilsModule (copy), SduiListEntryNormalizerModule (copy), buildItemsFromEntries (copy), FFlagSduiComponentListReuseByEntryIndexModule (copy), SduiParseHelpersModule (copy), SignalsModule (copy)
+	-- upvalues: FFlagSduiErrorPaths (copy), AddSduiErrorContextFieldsModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), PropResultCategory (copy), SduiListEntryRendererModule (copy), SduiPoolEntryHelpersModule (copy), SduiPropUtilsModule (copy), SduiListEntryNormalizerModule (copy), buildItemsFromEntries (copy), FFlagSduiComponentListReuseByEntryIndexModule (copy), SduiParseHelpersModule (copy), SignalsModule (copy)
 	local Source = p7 and p7.source
 	local DefaultItem = p7 and p7.default_item
 	local OrderedIdentifiers = p7 and p7.ordered_identifiers
@@ -72,159 +74,178 @@ return function(_, p7, p8, Callback1, p9, p10)
 	local DeferItemBuild = p7 and p7.defer_item_build
 	
 	if Source == nil then
-		SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, {
+		local config = {
 			message = "ComponentList missing source",
 			name = p9.debugName,
 			componentType = p9.currentComponentType,
 			parserName = p9.currentParserName
-		}, p9.appPage)
+		}
+		
+		if FFlagSduiErrorPaths then
+			AddSduiErrorContextFieldsModule(config, p9.errorContext)
+		end
+		SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, config, p9.appPage)
 		
 		return function()
 			return { data = {} }
 		end, PropResultCategory.PropSignal
-	end
-	local Type = Source.type
-	local Value = Source.value
-	local CaptureErrorContextResult = SduiListEntryRendererModule.captureErrorContext(p9)
-	local PoolConfig = p7 and p7.pool_config
-	local ResolvePoolDataGetterResult = SduiPoolEntryHelpersModule.resolvePoolDataGetter(PoolConfig and PoolConfig.pool_path, p8, p9, Callback1)
-	local PoolEntryConfigs = SduiPoolEntryHelpersModule.buildPoolEntryConfigs(PoolConfig)
-	
-	if Type == "binding_path" then
-		local CreateComputed = nil
+	else
+		local Type = Source.type
+		local Value = Source.value
+		local CaptureErrorContextResult = SduiListEntryRendererModule.captureErrorContext(p9)
+		local PoolConfig = p7 and p7.pool_config
+		local ResolvePoolDataGetterResult = SduiPoolEntryHelpersModule.resolvePoolDataGetter(PoolConfig and PoolConfig.pool_path, p8, p9, Callback1)
+		local PoolEntryConfigs = SduiPoolEntryHelpersModule.buildPoolEntryConfigs(PoolConfig)
 		
-		return SduiPropUtilsModule.generateDynamicBindingPropValue(Value, p8, p9, Callback1, function(p11, p12)
-			-- upvalues: SduiListEntryNormalizerModule (upval), DefaultItem (copy), ItemOverrides (copy), p9 (copy), buildItemsFromEntries (upval), OrderedIdentifiers (copy), CreateComputed (ref), Callback1 (copy), p8 (copy), CaptureErrorContextResult (copy), p10 (copy), DeferItemBuild (copy), ResolvePoolDataGetterResult (copy), PoolEntryConfigs (copy), FFlagSduiComponentListReuseByEntryIndexModule (upval)
-			local ItemsFromEntries, ItemsFromEntries2 = buildItemsFromEntries(SduiListEntryNormalizerModule.normalizeBoundData(p11, DefaultItem, ItemOverrides, p9), OrderedIdentifiers, CreateComputed, Callback1, p8, p9, CaptureErrorContextResult, p10, p12, DeferItemBuild, ResolvePoolDataGetterResult, PoolEntryConfigs)
+		if Type == "binding_path" then
+			local CreateComputed = nil
 			
-			if not FFlagSduiComponentListReuseByEntryIndexModule then
-				CreateComputed = ItemsFromEntries
+			return SduiPropUtilsModule.generateDynamicBindingPropValue(Value, p8, p9, Callback1, function(p11, p12)
+				-- upvalues: SduiListEntryNormalizerModule (upval), DefaultItem (copy), ItemOverrides (copy), p9 (copy), buildItemsFromEntries (upval), OrderedIdentifiers (copy), CreateComputed (ref), Callback1 (copy), p8 (copy), CaptureErrorContextResult (copy), p10 (copy), DeferItemBuild (copy), ResolvePoolDataGetterResult (copy), PoolEntryConfigs (copy), FFlagSduiComponentListReuseByEntryIndexModule (upval)
+				local ItemsFromEntries, ItemsFromEntries2 = buildItemsFromEntries(SduiListEntryNormalizerModule.normalizeBoundData(p11, DefaultItem, ItemOverrides, p9), OrderedIdentifiers, CreateComputed, Callback1, p8, p9, CaptureErrorContextResult, p10, p12, DeferItemBuild, ResolvePoolDataGetterResult, PoolEntryConfigs)
+				
+				if not FFlagSduiComponentListReuseByEntryIndexModule then
+					CreateComputed = ItemsFromEntries
+					
+					return ItemsFromEntries
+				end
+				local t = {}
+				
+				for i, value in ItemsFromEntries2 do
+					t[value] = ItemsFromEntries[i]
+				end
+				CreateComputed = t
 				
 				return ItemsFromEntries
-			end
-			local t = {}
+			end), PropResultCategory.PropSignal
+		elseif Type == "literal" then
+			local CreateComputed = Value and Value.items
 			
-			for i, value in ItemsFromEntries2 do
-				t[value] = ItemsFromEntries[i]
-			end
-			CreateComputed = t
-			
-			return ItemsFromEntries
-		end), PropResultCategory.PropSignal
-	elseif Type == "literal" then
-		local CreateComputed = Value and Value.items
-		
-		if CreateComputed == nil then
-			return function()
-				return { data = {} }
-			end, PropResultCategory.PropSignal
-		else
-			return function(p13)
-				-- upvalues: SduiListEntryNormalizerModule (upval), CreateComputed (copy), DefaultItem (copy), p9 (copy), buildItemsFromEntries (upval), OrderedIdentifiers (copy), Callback1 (copy), p8 (copy), CaptureErrorContextResult (copy), p10 (copy), DeferItemBuild (copy), ResolvePoolDataGetterResult (copy), PoolEntryConfigs (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), SduiParseHelpersModule (upval)
-				local Success, Result = pcall(function()
-					-- upvalues: SduiListEntryNormalizerModule (upval), CreateComputed (upval), DefaultItem (upval), p9 (upval), buildItemsFromEntries (upval), OrderedIdentifiers (upval), Callback1 (upval), p8 (upval), CaptureErrorContextResult (upval), p10 (upval), p13 (copy), DeferItemBuild (upval), ResolvePoolDataGetterResult (upval), PoolEntryConfigs (upval)
-					return (buildItemsFromEntries(SduiListEntryNormalizerModule.normalizeLiteralItems(CreateComputed, DefaultItem, p9), OrderedIdentifiers, nil, Callback1, p8, p9, CaptureErrorContextResult, p10, p13, DeferItemBuild, ResolvePoolDataGetterResult, PoolEntryConfigs))
-				end)
-				
-				if Success then
-					return { data = Result }
-				else
-					SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, {
+			if CreateComputed == nil then
+				return function()
+					return { data = {} }
+				end, PropResultCategory.PropSignal
+			else
+				return function(p13)
+					-- upvalues: SduiListEntryNormalizerModule (upval), CreateComputed (copy), DefaultItem (copy), p9 (copy), buildItemsFromEntries (upval), OrderedIdentifiers (copy), Callback1 (copy), p8 (copy), CaptureErrorContextResult (copy), p10 (copy), DeferItemBuild (copy), ResolvePoolDataGetterResult (copy), PoolEntryConfigs (copy), SduiParseHelpersModule (upval), FFlagSduiErrorPaths (upval), AddSduiErrorContextFieldsModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval)
+					local Success, Result = pcall(function()
+						-- upvalues: SduiListEntryNormalizerModule (upval), CreateComputed (upval), DefaultItem (upval), p9 (upval), buildItemsFromEntries (upval), OrderedIdentifiers (upval), Callback1 (upval), p8 (upval), CaptureErrorContextResult (upval), p10 (upval), p13 (copy), DeferItemBuild (upval), ResolvePoolDataGetterResult (upval), PoolEntryConfigs (upval)
+						return (buildItemsFromEntries(SduiListEntryNormalizerModule.normalizeLiteralItems(CreateComputed, DefaultItem, p9), OrderedIdentifiers, nil, Callback1, p8, p9, CaptureErrorContextResult, p10, p13, DeferItemBuild, ResolvePoolDataGetterResult, PoolEntryConfigs))
+					end)
+					
+					if Success then
+						return { data = Result }
+					end
+					local config = {
 						message = `Failed to build ComponentList from literal source: {SduiParseHelpersModule.stringifyValue(Result)}`,
 						name = CaptureErrorContextResult.name,
 						componentType = CaptureErrorContextResult.componentType,
 						parserName = CaptureErrorContextResult.parserName
-					}, CaptureErrorContextResult.appPage)
+					}
+					
+					if FFlagSduiErrorPaths then
+						AddSduiErrorContextFieldsModule(config, CaptureErrorContextResult.nodeContext)
+					end
+					SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, config, CaptureErrorContextResult.appPage)
 					
 					return { data = {} }
-				end
-			end, PropResultCategory.PropSignal
-		end
-	elseif Type ~= "pool" then
-		local CreateComputed: (any) -> () = error
-		CreateComputed(`Unknown ComponentList source kind: {Type}`)
-		
-		return
-	else
-		local CreateComputed = SignalsModule
-		CreateComputed = CreateComputed.createComputed
-		CreateComputed = CreateComputed(function(p13)
-			-- upvalues: Callback1 (copy), SduiListEntryNormalizerModule (upval), DefaultItem (copy), ItemOverrides (copy), p9 (copy), buildItemsFromEntries (upval), OrderedIdentifiers (copy), p8 (copy), CaptureErrorContextResult (copy), p10 (copy), DeferItemBuild (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), SduiParseHelpersModule (upval)
-			local Success, Result = pcall(function()
-				-- upvalues: Callback1 (upval), p13 (copy), SduiListEntryNormalizerModule (upval), DefaultItem (upval), ItemOverrides (upval), p9 (upval), buildItemsFromEntries (upval), OrderedIdentifiers (upval), p8 (upval), CaptureErrorContextResult (upval), p10 (upval), DeferItemBuild (upval), SduiLoggerModule (upval), SduiErrorsModule (upval)
-				local Section = (Callback1(p13) or {})._section
-				
-				if typeof(Section) ~= "table" then
-					return {}
-				end
-				local CellsFunction = Section.cells
-				
-				if typeof(CellsFunction) ~= "function" then
-					return {}
-				end
-				local CellsResult = CellsFunction(p13)
-				
-				if #CellsResult == 0 then
-					return {}
-				end
-				local Items = {}
-				local Buffer = table.create(#CellsResult, 0)
-				
-				for i, value in CellsResult do
-					if value.item ~= nil then
-						table.insert(Items, value.item)
-						Buffer[i] = #Items
-					end
-				end
-				local ItemsFromEntries, ItemsFromEntries2 = buildItemsFromEntries(SduiListEntryNormalizerModule.normalizeBoundData(Items, DefaultItem, ItemOverrides, p9), OrderedIdentifiers, nil, Callback1, p8, p9, CaptureErrorContextResult, p10, p13, DeferItemBuild, nil, nil)
-				
-				if #ItemsFromEntries ~= #Items then
-					SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, {
-						message = `Pool-backed ComponentList dropped {#Items - #ItemsFromEntries} of {#Items} items;` .. " pool templates must resolve to valid templates and must not use is_component_filtered",
-						name = CaptureErrorContextResult.name,
-						componentType = CaptureErrorContextResult.componentType,
-						parserName = CaptureErrorContextResult.parserName
-					}, CaptureErrorContextResult.appPage)
-				end
-				local t = {}
-				
-				for i1, value1 in ItemsFromEntries2 do
-					t[value1] = ItemsFromEntries[i1]
-				end
-				local List = {}
-				
-				for i2, value2 in CellsResult do
-					local BufferEntry = Buffer[i2]
+				end, PropResultCategory.PropSignal
+			end
+		elseif Type ~= "pool" then
+			local CreateComputed: (any) -> () = error
+			CreateComputed(`Unknown ComponentList source kind: {Type}`)
+			
+			return
+		else
+			local CreateComputed = SignalsModule
+			CreateComputed = CreateComputed.createComputed
+			CreateComputed = CreateComputed(function(p13)
+				-- upvalues: Callback1 (copy), SduiListEntryNormalizerModule (upval), DefaultItem (copy), ItemOverrides (copy), p9 (copy), buildItemsFromEntries (upval), OrderedIdentifiers (copy), p8 (copy), CaptureErrorContextResult (copy), p10 (copy), DeferItemBuild (copy), FFlagSduiErrorPaths (upval), AddSduiErrorContextFieldsModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval), SduiParseHelpersModule (upval)
+				local Success, Result = pcall(function()
+					-- upvalues: Callback1 (upval), p13 (copy), SduiListEntryNormalizerModule (upval), DefaultItem (upval), ItemOverrides (upval), p9 (upval), buildItemsFromEntries (upval), OrderedIdentifiers (upval), p8 (upval), CaptureErrorContextResult (upval), p10 (upval), DeferItemBuild (upval), FFlagSduiErrorPaths (upval), AddSduiErrorContextFieldsModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval)
+					local Section = (Callback1(p13) or {})._section
 					
-					if BufferEntry == 0 then
-						table.insert(List, { isBlank = true })
-					else
-						local Entry = t[BufferEntry]
-						
-						if Entry ~= nil then
-							Entry.realIndex = value2.realIndex
-							Entry.spanOverride = value2.spanOverride
-							table.insert(List, Entry)
+					if typeof(Section) ~= "table" then
+						return {}
+					end
+					local CellsFunction = Section.cells
+					
+					if typeof(CellsFunction) ~= "function" then
+						return {}
+					end
+					local CellsResult = CellsFunction(p13)
+					
+					if #CellsResult == 0 then
+						return {}
+					end
+					local Items = {}
+					local Buffer = table.create(#CellsResult, 0)
+					
+					for i, value in CellsResult do
+						if value.item ~= nil then
+							table.insert(Items, value.item)
+							Buffer[i] = #Items
 						end
 					end
+					local ItemsFromEntries, ItemsFromEntries2 = buildItemsFromEntries(SduiListEntryNormalizerModule.normalizeBoundData(Items, DefaultItem, ItemOverrides, p9), OrderedIdentifiers, nil, Callback1, p8, p9, CaptureErrorContextResult, p10, p13, DeferItemBuild, nil, nil)
+					
+					if #ItemsFromEntries ~= #Items then
+						local config = {
+							message = `Pool-backed ComponentList dropped {#Items - #ItemsFromEntries} of {#Items} items;` .. " pool templates must resolve to valid templates and must not use is_component_filtered",
+							name = CaptureErrorContextResult.name,
+							componentType = CaptureErrorContextResult.componentType,
+							parserName = CaptureErrorContextResult.parserName
+						}
+						
+						if FFlagSduiErrorPaths then
+							AddSduiErrorContextFieldsModule(config, CaptureErrorContextResult.nodeContext)
+						end
+						SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, config, CaptureErrorContextResult.appPage)
+					end
+					local t = {}
+					
+					for i1, value1 in ItemsFromEntries2 do
+						t[value1] = ItemsFromEntries[i1]
+					end
+					local List = {}
+					
+					for i2, value2 in CellsResult do
+						local BufferEntry = Buffer[i2]
+						
+						if BufferEntry == 0 then
+							table.insert(List, { isBlank = true })
+						else
+							local Entry = t[BufferEntry]
+							
+							if Entry ~= nil then
+								Entry.realIndex = value2.realIndex
+								Entry.spanOverride = value2.spanOverride
+								table.insert(List, Entry)
+							end
+						end
+					end
+					return List
+				end)
+				
+				if Success then
+					return { data = Result }
 				end
-				return List
-			end)
-			
-			if Success then
-				return { data = Result }
-			else
-				SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, {
+				local config = {
 					message = `Failed to build ComponentList from pool source: {SduiParseHelpersModule.stringifyValue(Result)}`,
 					name = CaptureErrorContextResult.name,
 					componentType = CaptureErrorContextResult.componentType,
 					parserName = CaptureErrorContextResult.parserName
-				}, CaptureErrorContextResult.appPage)
+				}
+				
+				if FFlagSduiErrorPaths then
+					AddSduiErrorContextFieldsModule(config, CaptureErrorContextResult.nodeContext)
+				end
+				SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, config, CaptureErrorContextResult.appPage)
 				
 				return { data = {} }
-			end
-		end)
-		
-		return CreateComputed, PropResultCategory.PropSignal
+			end)
+			
+			return CreateComputed, PropResultCategory.PropSignal
+		end
 	end
 end

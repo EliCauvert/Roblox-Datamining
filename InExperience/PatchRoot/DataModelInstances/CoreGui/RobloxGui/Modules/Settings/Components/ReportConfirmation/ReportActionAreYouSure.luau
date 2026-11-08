@@ -2,9 +2,7 @@
 local RoactModule = require(CorePackages.Packages.Roact)
 local TModule = require(CorePackages.Packages.t)
 local UIBloxModule = require(CorePackages.Packages.UIBlox)
-local FoundationModule = require(CorePackages.Packages.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(CorePackages.Packages.Foundation).Utility.normalizeFontFace
 local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local TextButton = UIBloxModule.App.Button.TextButton
 local ReportActionSelection = RoactModule.PureComponent:extend("ReportActionSelection")
@@ -67,35 +65,34 @@ function ReportActionSelection.init(DefaultProps)
 end
 
 function ReportActionSelection.render(DefaultProps)
-	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), RoactModule (copy), NormalizeFontFaceFunction (copy), TextButton (copy), UIBloxModule (copy)
-	return WithFoundationOrUIBloxStyleFunction(function(p1)
-		-- upvalues: FoundationFontFaceMigration (upval)
+	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), RoactModule (copy), NormalizeFontFaceFunction (copy), TextButton (copy), UIBloxModule (copy)
+	return WithFoundationOrUIBloxStyleFunction(function(Tokens)
 		return {
-			Tokens = if FoundationFontFaceMigration then p1 else nil,
+			Tokens = Tokens,
 			Theme = {
 				SystemPrimaryContent = {
-					Color = p1.Color.ActionSubEmphasis.Foreground.Color3,
-					Transparency = p1.Color.ActionSubEmphasis.Foreground.Transparency
+					Color = Tokens.Color.ActionSubEmphasis.Foreground.Color3,
+					Transparency = Tokens.Color.ActionSubEmphasis.Foreground.Transparency
 				},
 				TextEmphasis = {
-					Color = p1.Color.Content.Emphasis.Color3,
-					Transparency = p1.Color.Content.Emphasis.Transparency
+					Color = Tokens.Color.Content.Emphasis.Color3,
+					Transparency = Tokens.Color.Content.Emphasis.Transparency
 				}
 			},
 			Font = {
 				BaseSize = 1,
 				CaptionHeader = {
-					Font = p1.Typography.CaptionLarge.Font,
-					RelativeSize = p1.Typography.CaptionLarge.FontSize
+					Font = Tokens.Typography.CaptionLarge.Font,
+					RelativeSize = Tokens.Typography.CaptionLarge.FontSize
 				},
 				Header1 = {
-					Font = p1.Typography.HeadingSmall.Font,
-					RelativeSize = p1.Typography.HeadingSmall.FontSize
+					Font = Tokens.Typography.HeadingSmall.Font,
+					RelativeSize = Tokens.Typography.HeadingSmall.FontSize
 				}
 			}
 		}
 	end, function(p1)
-		-- upvalues: RoactModule (upval), DefaultProps (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), TextButton (upval), UIBloxModule (upval)
+		-- upvalues: RoactModule (upval), DefaultProps (copy), NormalizeFontFaceFunction (upval), TextButton (upval), UIBloxModule (upval)
 		local BaseSize = p1.Font.BaseSize
 		
 		return RoactModule.createElement("Frame", {
@@ -120,8 +117,7 @@ function ReportActionSelection.render(DefaultProps)
 				TextColor3 = p1.Theme.TextEmphasis.Color,
 				TextTransparency = p1.Theme.TextEmphasis.Transparency,
 				TextSize = p1.Font.Header1.RelativeSize * BaseSize,
-				Font = if FoundationFontFaceMigration then nil else p1.Font.Header1.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.HeadingSmall.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(p1.Tokens.Typography.HeadingSmall.Font),
 				AutomaticSize = Enum.AutomaticSize.XY
 			}),
 			subtitle = RoactModule.createElement("TextLabel", {
@@ -133,8 +129,7 @@ function ReportActionSelection.render(DefaultProps)
 				TextColor3 = p1.Theme.TextEmphasis.Color,
 				TextTransparency = p1.Theme.TextEmphasis.Transparency,
 				TextSize = p1.Font.CaptionHeader.RelativeSize * BaseSize,
-				Font = if FoundationFontFaceMigration then nil else p1.Font.CaptionHeader.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.CaptionLarge.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(p1.Tokens.Typography.CaptionLarge.Font),
 				AutomaticSize = Enum.AutomaticSize.Y
 			}),
 			spacer = RoactModule.createElement("Frame", {

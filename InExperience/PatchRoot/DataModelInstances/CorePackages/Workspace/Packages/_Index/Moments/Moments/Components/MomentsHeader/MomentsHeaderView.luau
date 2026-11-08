@@ -15,6 +15,7 @@ local ChipVariant = FoundationModule.Enums.ChipVariant
 local InputSize = FoundationModule.Enums.InputSize
 local PlusLarge = BuilderIconsModule.Icon.PlusLarge
 local ChevronLargeLeft = BuilderIconsModule.Icon.ChevronLargeLeft
+local CirclePerson = BuilderIconsModule.Icon.CirclePerson
 local GradientBackdrop = require(Parent.MomentsCommon).Components.GradientBackdrop
 local FlyoutLeftHeader = require(Parent.FlyoutSidePanel).Components.FlyoutLeftHeader
 local FlyoutSidePanelIXP = require(Parent.SharedExperimentDefinition).FlyoutSidePanelIXP
@@ -62,7 +63,7 @@ local function renderAction(p1, Icon, OnActivated, LayoutOrder)
 end
 
 return function(p1)
-	-- upvalues: renderAction (copy), ChevronLargeLeft (copy), PlusLarge (copy), ReactModule (copy), IconButton (copy), ButtonVariant (copy), InputSize (copy), NavigationMenuModule (copy), View (copy), renderFeedTypeChips (copy), FlyoutSidePanelIXP (copy), FlyoutLeftHeader (copy), Text (copy), FFlagMomentsCreationFeatureGate (copy), FoundationModule (copy), FFlagMomentsFtuxTooltipCreateCopyModule (copy), Coachmark (copy), HeaderBar (copy), GradientBackdrop (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), ShouldUseDeviceSafeInsets (copy), ConstantsModule (copy)
+	-- upvalues: renderAction (copy), ChevronLargeLeft (copy), PlusLarge (copy), ReactModule (copy), IconButton (copy), ButtonVariant (copy), InputSize (copy), NavigationMenuModule (copy), View (copy), renderFeedTypeChips (copy), FlyoutSidePanelIXP (copy), FlyoutLeftHeader (copy), Text (copy), FFlagMomentsCreationFeatureGate (copy), FoundationModule (copy), FFlagMomentsFtuxTooltipCreateCopyModule (copy), Coachmark (copy), CirclePerson (copy), HeaderBar (copy), GradientBackdrop (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), ShouldUseDeviceSafeInsets (copy), ConstantsModule (copy)
 	local RenderLeft: (() -> any)? = nil
 	local RenderRight: (() -> any)? = nil
 	local FeedTypeChips = nil
@@ -154,10 +155,20 @@ return function(p1)
 				}, Element1) else ReactModule.createElement(View, { LayoutOrder = 1, tag = "auto-xy" }, { Action = Element1 })
 			end
 			RenderRight = function()
-				-- upvalues: ReactModule (upval), View (upval), Element (ref), NavigationMenuModule (upval), ButtonVariant (upval), p1 (copy)
+				-- upvalues: ReactModule (upval), View (upval), Element (ref), p1 (copy), CirclePerson (upval), IconButton (upval), ButtonVariant (upval), InputSize (upval), NavigationMenuModule (upval)
 				return ReactModule.createElement(View, { tag = "row align-y-center gap-xsmall auto-xy" }, {
 					CreateMomentButton = Element,
-					NavigationMenu = ReactModule.createElement(NavigationMenuModule, {
+					MyMomentsButton = if p1.showMyMomentsButton then ReactModule.createElement(IconButton, {
+						LayoutOrder = 2,
+						isCircular = true,
+						Selectable = true,
+						testId = "--moments-header--actions--my-moments",
+						icon = CirclePerson,
+						onActivated = p1.onNavigateToMyMoments,
+						variant = ButtonVariant.Utility,
+						size = InputSize.Medium
+					}) else nil,
+					NavigationMenu = if p1.showMyMomentsButton then nil else ReactModule.createElement(NavigationMenuModule, {
 						layoutOrder = 2,
 						buttonTestId = "--moments-header--actions--more",
 						buttonVariant = ButtonVariant.Utility,

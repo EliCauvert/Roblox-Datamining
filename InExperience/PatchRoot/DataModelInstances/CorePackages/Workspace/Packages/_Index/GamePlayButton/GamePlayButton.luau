@@ -19,5 +19,6 @@ return {
 	usePlayButtonContextualMessage = require(script.usePlayButtonContextualMessage),
 	PlayButtonContextualMessageImpressionsDetector = require(script.PlayButtonContextualMessageImpressionsDetector),
 	usePlayButtonLaunchGame = if require(script.Parent.SharedFlags).FFlagEnablePlayWithRewardComponent then require(script.PlayButtonLaunchChecks.usePlayButtonLaunchGame) else nil,
+	LaunchUnlessNotPlayable = require(script.LaunchUnlessNotPlayable),
 	["jest.config"] = script["jest.config"]
 }

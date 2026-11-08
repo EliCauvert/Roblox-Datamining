@@ -2,14 +2,15 @@
 local NumberLocalization = require(BuildExperience.Parent.Localization).NumberLocalization
 local AnalyticsUnitModule = require(BuildExperience.Analytics.AnalyticsUnit)
 local RoundToDecimalsModule = require(BuildExperience.Analytics.roundToDecimals)
+local FFlagBuildAnalyticsTwoDecimalPlacesModule = require(BuildExperience.Flags.FFlagBuildAnalyticsTwoDecimalPlaces)
 
 local function formatNumber(p1, p2, p3)
-	-- upvalues: NumberLocalization (copy)
-	return if p2 == "Regular" then NumberLocalization.localizeDecimal(p1, p3, 2) else NumberLocalization.abbreviate(p1, p3)
+	-- upvalues: NumberLocalization (copy), FFlagBuildAnalyticsTwoDecimalPlacesModule (copy)
+	return if p2 == "Regular" then NumberLocalization.localizeDecimal(p1, p3, 2) elseif FFlagBuildAnalyticsTwoDecimalPlacesModule then NumberLocalization.abbreviateDecimal(p1, p3, 2) else NumberLocalization.abbreviate(p1, p3)
 end
 
 return function(p1: number, Minutes, p2, p3)
-	-- upvalues: AnalyticsUnitModule (copy), NumberLocalization (copy), formatNumber (copy), RoundToDecimalsModule (copy)
+	-- upvalues: AnalyticsUnitModule (copy), NumberLocalization (copy), formatNumber (copy), RoundToDecimalsModule (copy), FFlagBuildAnalyticsTwoDecimalPlacesModule (copy)
 	if Minutes == AnalyticsUnitModule.Minutes then
 		return NumberLocalization.localizeDecimal(p1, p3, 2)
 	elseif Minutes == AnalyticsUnitModule.Percent then
@@ -17,7 +18,7 @@ return function(p1: number, Minutes, p2, p3)
 	elseif Minutes == AnalyticsUnitModule.Temporal then
 		local Value = p1 / 60
 		
-		return if math.abs(Value) < 1 then NumberLocalization.localizeDecimal(RoundToDecimalsModule(Value, 2), p3, 2) else formatNumber(RoundToDecimalsModule(Value, 1), p2, p3)
+		return if math.abs(Value) < 1 then NumberLocalization.localizeDecimal(RoundToDecimalsModule(Value, 2), p3, 2) else formatNumber(RoundToDecimalsModule(Value, if FFlagBuildAnalyticsTwoDecimalPlacesModule then 2 else 1), p2, p3)
 	else
 		return formatNumber(p1, p2, p3)
 	end

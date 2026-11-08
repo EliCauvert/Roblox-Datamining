@@ -188,8 +188,8 @@ Common.Presence.Label.Online,온라인
 Common.Presence.Label.RobloxStudio,Roblox Studio
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,애니메이션이 너무 깁니다({duration}초). 이모티콘 애니메이션은 {maxLength}초 이하여야 합니다.
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,애니메이션이 너무 짧습니다({duration}초). 이모티콘 애니메이션은 {minLength}초 이상이어야 합니다.
-Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,{cageName}의 케이지 파트 배치 위반: {upperPart}이(가) {lowerPart} 위에 올바르게 배치되지 않았습니다.
-Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,"{cageName}의 {partName} 케이지 파트에는 {actualCount}개의 버텍스가 있으며, 약 {expectedCount}개의 버텍스가 있어야 합니다. 즉, 해당 신체 영역에 지오메트리가 누락되었거나 중복되었을 수 있습니다."
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,{cageName}의 케이지 파트 배치 위반: {upperPart}이(가) {lowerPart}의 상대적인 위치에 올바르게 배치되지 않았습니다.
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,"{cageName}의 {partName} 케이지 파트에는 {actualCount}개의 버텍스가 있으며, 약 {expectedCount}개의 버텍스가 있어야 합니다. 즉, 해당 케이지 영역에 지오메트리가 누락되었거나 중복되었을 수 있습니다."
 Common.UGCValidation.ErrorLabel.AQSFail_CageUV,"{cage_name}에는 템플릿과 일치하지 않는 잘못된 UV 값이 있습니다. 잘못된 UV {incorrect_uv_count}개(미참조 {unreferenced_vertex_count}개, 템플릿 외 {non_template_uv_count}개, 중복 매핑 {duplicate_mapping_count}개), 일치하지 않는 템플릿 버텍스 {unmatched_template_count}개가 있습니다. 템플릿과 일치하도록 케이지 UV를 수정하세요."
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,신체에 분리된 작은 메시 구성 요소(메시 분리 영역)가 있습니다. 플로팅 지오메트리를 제거하고 모든 메시 부품이 올바르게 연결되었는지 확인하세요.
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,"{partName}에는 분리 영역이 {num_disconnected_components}개 존재하며, 이는 최대치인 {max_disconnected_components}을(를) 초과합니다."
@@ -200,7 +200,7 @@ Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,"헤드 케이지�
 Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,수정된 외부 케이지 버텍스의 {irrelevant_percent}%가 장신구를 포함하지 않습니다. 장신구 모양에 더 잘 맞도록 케이지를 조정하세요.
 Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,"{cage_name}에 잘못된 UV 값이 있습니다. 잘못된 UV {incorrect_uv_count}개(미참조 {unreferenced_vertex_count}개, 템플릿 외 {non_template_uv_count}개, 중복 매핑 {duplicate_mapping_count}개), 일치하지 않는 템플릿 버텍스 {unmatched_template_count}개가 있습니다."
 Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,{partName}에는 퇴화 삼각형이 {degenerate_triangle_percent}% 존재합니다.
-Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,"다이내믹 헤드에 표정 품질 문제가 있습니다. 왼쪽 눈 감기: {left_eye_close}, 오른쪽 눈 감기: {right_eye_close}, 입 벌리기: {mouth_open}, 행복: {is_happy}, 슬픔: {is_sad}."
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,"다이내믹 헤드에 표정 품질 문제가 있습니다. 화면의 왼쪽 눈(시각화 플러그인에서 머리 왼쪽의 빨간색 점) 감기: {left_eye_close}, 화면의 오른쪽 눈(시각화 플러그인에서 머리 오른쪽의 파란색 점) 감기: {right_eye_close}, 입 벌리기(시각화 플러그인에서 녹색 점): {mouth_open}, 행복: {is_happy}, 슬픔: {is_sad}."
 Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"예상치 못한 조인트 구성입니다. 총 조인트 수: {joint_number}, 왼손 조인트 수: {left_hand_joint_number}, 오른손 조인트 수: {right_hand_joint_number}."
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,{partName}에 총 {num_disconnected_components}개의 구성 요소 중 {num_small_volume_islands}개의 소형 메시 분리 영역이 존재합니다. 플로팅 지오메트리를 제거하세요.
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,"{partName}에 비다양체 지오메트리가 있습니다. 비평면 면, 자기 교차면 또는 두 개 이상의 면이 공유하는 모서리가 있는지 확인하세요."
@@ -209,9 +209,9 @@ Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,메시 버텍스의
 Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,입력 데이터가 불완전하거나 유효하지 않아 {measureName}의 검증 데이터를 계산할 수 없습니다. 이로 인해 업로드가 차단되지는 않습니다.
 Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,텍스처 {textureName}의 복잡도가 낮습니다. 텍스처에 세부 사항이나 변화가 충분하지 않을 수 있습니다.
 Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,텍스처 {textureName}의 해상도가 {texture_width}x{texture_height}로 낮습니다. 해상도가 더 높은 텍스처를 사용하는 것이 좋습니다.
-Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,애셋 품질: {partName}에는 교차하는 삼각형 면이 {intersecting_tri_face_percent}% 존재합니다(점수: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,"{partName}에 존재하는 자기 교차 면이 {intersecting_tri_face_percent}%로, 허용치인 {threshold}%를 초과합니다."
 Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,"{partName}에는 [0,1] 경계 밖에 있는 UV 버텍스가 {uv_outside_bound_vert_percent}% 존재합니다."
-Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,애셋 품질: {partName}에는 유사한 버텍스가 {similar_vertex_percent}% 존재합니다(점수: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,"{partName}에 존재하는 유사한 버텍스가 {similar_vertex_percent}%로, 허용치인 {threshold}%를 초과합니다."
 Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,'{AttachmentName}'의 액세서리 부착물 '{PartName}'은(는) 메쉬 표면 근처에 배치해야 합니다. 현재 위치 [{CurrentPosition}]이(가) 유효 영역을 벗어났습니다. [{ClosestValidPosition}]에 더 가깝게 이동하세요.
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,핸들에 허용되는 스키마에 포함되지 않는 조인트 {jointName}에 대한 스킨이 적용되어 있습니다. 표준 R15 조인트와 스키닝 전달 조인트만 허용됩니다.
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,"{assetType}에서는 스키닝 전달을 사용해야 하지만, 필요한 조인트 {requiredJointName}이(가) 없습니다."
@@ -223,15 +223,44 @@ Common.UGCValidation.ErrorLabel.AccessorySkinning_WeightNotFull,조인트를 전
 Common.UGCValidation.ErrorLabel.AnimationPack_DuplicateAnimationId,애니메이션 팩 번들에 여러 클립에서 사용되는 중복 애니메이션 ID '{animationId}'이(가) 포함되어 있습니다: {instancePaths}. 각 애니메이션 클립은 고유한 애니메이션 자산을 참조해야 합니다.
 Common.UGCValidation.ErrorLabel.AnimationPack_InvalidR15AnimChildren,애니메이션 팩 번들에 예상되는 애니메이션 유형이 없습니다: {missingAnimationTypes}. 각 애니메이션 유형에는 예상되는 StringValue 하위 항목을 정확히 포함하는 R15Anim 폴더가 하나 있어야 합니다.
 Common.UGCValidation.ErrorLabel.Animation_WeightNotPositive,애니메이션 '{animationName}'의 가중치 값이 {weight}입니다. 가중치는 0보다 커야 합니다. 애니메이션을 수정하세요.
+Common.UGCValidation.ErrorLabel.AssetBounds_InconsistentScaleType,모든 메시 파트는 AvatarPartScaleType 하위 항목의 값이 동일해야 합니다. 값이 일치하는지 확인하세요.
+Common.UGCValidation.ErrorLabel.AssetBounds_TooLarge,"{assetName} 메시와 조인트의 {axis}축 크기가 '{currentSize}'로, 허용되는 최대 경계 상자 {axis}축 크기인 '{maxSize}'보다 큽니다. 메시/조인트를 축소해야 합니다."
+Common.UGCValidation.ErrorLabel.AssetBounds_TooSmall,"{assetName} 메시의 {axis}축 크기가 '{currentSize}'로, 허용되는 최소 경계 상자 {axis}축 크기인 '{minSize}'보다 작습니다. 메시를 확대해야 합니다."
+Common.UGCValidation.ErrorLabel.AssetDoesNotExist,'{InstancePath}'에서 참조하는 '{AssetId}' 애셋이 존재하지 않거나 불러올 수 없습니다. 유효한 애셋 ID로 교체하세요.
+Common.UGCValidation.ErrorLabel.AssetOpacity_BelowThreshold,"{AssetName}이(가) {ViewName}에서 불투명도가 충분하지 않습니다. 현재 불투명도는 {Opacity}이며, {Threshold} 이상이어야 합니다."
+Common.UGCValidation.ErrorLabel.AssetOpacity_Invisible,'{AssetName}'에 대한 메시가 완전히 보이지 않습니다.
+Common.UGCValidation.ErrorLabel.AssetOpacity_MeshLoadFailed,메시 파트 '{PartName}'의 메시를 불러오지 못했습니다. 메시가 있는지 확인하고 다시 시도하세요.
+Common.UGCValidation.ErrorLabel.AssetOpacity_NoTriangles,'{AssetName}' 메시에 삼각형이 없습니다.
+Common.UGCValidation.ErrorLabel.AssetOpacity_NonZeroTransparency,'{PartName}' 파트의 투명도가 0이 아닙니다. 파트 투명도는 항상 정확히 0이어야 합니다.
+Common.UGCValidation.ErrorLabel.AssetOpacity_ZeroSize,'{AssetName}'의 메시 크기는 0이 아니어야 합니다.
 Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,필요한 {ExpectedClass}의 {ExpectedName}을(를) {ParentPath} 내에서 찾지 못했습니다
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,다음 인스턴스는 승인된 스키마의 일부가 아니며 제거되어야 합니다: {UnexpectedDescendantPaths}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,업로드할 애셋 조건은 {ExpectedClass}인 반면 현재 애셋은 {RootClass}입니다.
-Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,"업로드할 애셋의 이름이 {ExpectedClass}여(이어)야 하지만, 현재 애셋의 이름은 {RootClass}입니다."
+Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,"업로드할 애셋의 이름이 {ExpectedName}이(가) 되어야 하지만, 현재 애셋의 이름은 {RootName}입니다."
+Common.UGCValidation.ErrorLabel.AttachmentBoundsAssetCalculationFailed,부착물 위치를 확인하기 전에 '{InstancePath}'에 대한 메시 경계를 계산할 수 없습니다. 메시 데이터가 누락되었거나 형식이 잘못되었을 수 있습니다. 애셋을 다시 가져온 후 다시 시도하세요.
+Common.UGCValidation.ErrorLabel.AttachmentBoundsCalculationFailed,'{AttachmentName}'의 부착물 '{PartName}'에 대한 경계를 계산할 수 없습니다. 메시 데이터가 누락되었거나 형식이 잘못되었을 수 있습니다. 애셋을 다시 가져온 후 다시 시도하세요.
+Common.UGCValidation.ErrorLabel.AttachmentOrientationDeviation,"부착물 '{InstancePath}'의 방향이 예상에서 너무 많이 벗어났습니다. 권장 방향은 {ExpectedOrientation}이며, 최대 편차는 {MaxDeviation}도입니다."
+Common.UGCValidation.ErrorLabel.AttachmentOrientationRigRotated,"리그 첨부 파일을 회전할 수 없습니다. '{InstancePath}'의 방향을 (0,0,0)으로 설정하세요."
+Common.UGCValidation.ErrorLabel.BodyBlocking_ZeroMeshSize,{meshName} 메시 렌더링: {details}. 메시 크기를 늘리세요.
+Common.UGCValidation.ErrorLabel.BodyMesh_LoadFailed,'{meshName}' 메시를 불러오지 못했습니다. 메시가 있는지 확인하고 다시 시도하세요.
+Common.UGCValidation.ErrorLabel.BodyMesh_SizeMismatch,{meshContext}이(가) 다른 메시 {otherMeshContext}개와 비교했을 때 크기 차이가 최대값({maxDiff})을 초과합니다. 모델을 편집하여 크기를 조정해야 합니다.
+Common.UGCValidation.ErrorLabel.BodyPartCageDistanceValid_TooFar,{partName}의 케이지 메시에서 가장 가까운 렌더 메시와 {distance}개 스터드만 떨어진 버텍스가 발견되었습니다. 최대 {maxDistance}개 스터드만 떨어져 있을 수 있습니다. 케이지 메시가 렌더링 메시의 모양과 크기에 더 가깝게 일치하도록 조정하세요.
+Common.UGCValidation.ErrorLabel.BoundingBox_ValidationFailed,{reason}
+Common.UGCValidation.ErrorLabel.CageMeshDistanceBounded_DistanceTooHigh,외부 케이지와 메시 사이의 평균 거리가 너무 큽니다({distance}). 메시에 더 잘 맞도록 케이지를 조정하세요.
+Common.UGCValidation.ErrorLabel.CageMeshDistanceBounded_MeshOutsideCage,외부 케이지와 메시 사이의 평균 거리가 너무 멉니다. 메시가 외부 케이지 밖에 있는 것 같습니다.
+Common.UGCValidation.ErrorLabel.CageUV_ExtraDuplicateUVs,'{partName}'의 {cageType} 케이지에 템플릿에 속하지 않는 UV 값이 {count}개 있습니다. 케이지 UV를 수정하세요.
+Common.UGCValidation.ErrorLabel.CageUV_IncorrectUVCount,"'{partName}' 외부 케이지에는 고유한 UV가 {requiredUVCount}개 있어야 하지만, 현재 {actualUVCount}개가 있습니다. 메시에 필요한 개수의 고유 UV가 있는지 확인하고 다시 시도하세요."
+Common.UGCValidation.ErrorLabel.CageUV_InvalidUVValue,"'{partName}'에 대해 [0, 1] 범위를 벗어난 유효하지 않은 UV 값이 발견되었습니다. 이 문제를 해결하려면 UV 맵을 편집해야 합니다."
+Common.UGCValidation.ErrorLabel.CageUV_RenderMeshBoundsCheckFailed,외부 케이지 수정 영역의 경계 상자 내에서 렌더링 메시 테스트를 실행하지 못했습니다. 케이지 메시와 렌더 메시가 모두 있는지 확인하고 다시 시도하세요.
+Common.UGCValidation.ErrorLabel.CageUV_RenderMeshOutsideModifiedArea,렌더링 메시 버텍스의 {currentPercent}%만 WrapLayer CageMesh(외부 메시)의 수정된 {allowedArea} 영역에 있습니다. {requiredPercent}%가 필요합니다. 렌더링 메시를 WrapLayer CageMesh(외부 메시)의 수정된 영역 내로 이동하세요.
+Common.UGCValidation.ErrorLabel.CageUV_TooFewMainModified,{assetTypeName}의 WrapLayer CageMesh(외부 메시)는 {mainArea} 영역에서 케이지 UV의 {requiredPercent}%를 수정해야 합니다. 현재 {currentPercent}%만 수정되었습니다. 애셋을 신체의 올바른 영역으로 이동하세요.
+Common.UGCValidation.ErrorLabel.CageUV_TooManyExcludedModified,WrapLayer CageMesh(외부 메시)에서 수정된 케이지 UV의 {modifiedPercent}%가 예상되는 신체 영역 밖에 있습니다. {assetTypeName}의 경우 수정된 UV의 {maxPercent}%를 초과하는 부분이 {allowedArea} 영역 밖에 있을 수 없습니다. 애셋을 신체의 올바른 영역으로 이동하세요.
+Common.UGCValidation.ErrorLabel.CageUV_ZeroAreaTriangle,'{partName}'의 UV 맵에서 면적이 0인 삼각형이 감지되었습니다. 이 문제를 해결하려면 UV 맵을 편집해야 합니다.
+Common.UGCValidation.ErrorLabel.CollisionFidelityWrong,'{InstancePath}'의 CollisionFidelity가 올바르지 않습니다. {ExpectedFidelity}이(가) 되어야 합니다.
 Common.UGCValidation.ErrorLabel.ContentNotEditable,{InstanceFullName}.{FieldName}에는 아직 저장되지 않은 편집 가능한 콘텐츠가 있습니다. 게시하기 전에 애셋으로 저장한 후 다시 시도하세요.
-Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,CurveAnimation의 신체 부위 '{bodyPartName}'에 위치(이동) 트랙이 있습니다. 애니메이션 신체 부위는 회전만 가능합니다. 위치 트랙은 허용되지 않습니다. 이 신체 부위에서 위치 트랙을 제거하세요.
+Common.UGCValidation.ErrorLabel.CoplanarTri_TooMany,모델 메시 '{MeshName}'에서 교차하는 동일 평면상의 삼각형이 너무 많이 감지되었습니다. {TriangleCount} 삼각형 메시에서 교차점의 최대 개수는 {MaxIntersections}개입니다. 메시를 편집하여 동일 평면 상의 삼각형 교차 개수를 줄이세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,CurveAnimation의 신체 부위 '{bodyPartName}'이(가) 시작 위치에서 {distance} 스터드 만큼 움직입니다. 허용되는 최대 이동 거리는 {maxDistance} 스터드 입니다. 신체 부위의 위치 이동을 줄이세요.
-Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"CurveAnimation에 HRD/DRD 뼈대가 포함되어 있으며 신체 부위 '{bodyPartName}'에 위치(이동) 트랙이 있습니다. 애니메이션에 뼈대가 있는 경우, 관절 분리를 방지하기 위해 신체 부위를 이동할 수 없습니다. 신체 부위에서 모든 위치 트랙을 제거하세요."
-Common.UGCValidation.ErrorLabel.CurveAnim_BonePositionNotAllowed,CurveAnimation의 {boneName} 뼈대에는 위치(이동) 트랙이 있습니다. HRD/DRD 뼈대는 회전만 가능합니다. 위치 트랙은 관절 분리를 유발하므로 허용되지 않습니다. 이 뼈대에서 위치 애니메이션을 제거하세요.
+Common.UGCValidation.ErrorLabel.CurveAnim_BoneRequiresParent,뼈대 폴더 '{boneName}'에는 애니메이션에 '{parentBoneName}'도 포함되어 있어야 합니다.
 Common.UGCValidation.ErrorLabel.CurveAnim_BoneTranslationExceedsThreshold,CurveAnimation의 뼈대 '{boneName}'이(가) 시작 위치에서 {distance} 스터드 만큼 움직입니다. 허용되는 최대 이동 거리는 {maxDistance} 스터드 입니다. 뼈대의 위치 이동을 줄이세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation에는 아직 지원되지 않는 HRD/DRD 뼈대 폴더가 포함되어 있습니다. 업로드하기 전에 모든 뼈대 하위 폴더를 제거하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,CurveAnimation의 신체 부위는 HumanoidRootPart에서 {minHeight}스터드보다 낮거나 {maxDistance}스터드 이상 떨어져 있으면 안 됩니다. 애니메이션을 수정하세요.
@@ -243,27 +272,27 @@ Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,CurveAnimatio
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"CurveAnimation의 '{boneName}' 폴더는 인식되는 HRD/DRD 뼈대 이름이 아닙니다. 애니메이션 하위 폴더는 유효한 R15 신체 부위이거나 인식되는 뼈대 이름(예: HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase 또는 LeftHandIndex1과 같은 손가락 뼈대)이어야 합니다."
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidCurveData,CurveAnimation에 '시간' 또는 '값'이 유효하지 않은 Curve가 있습니다. 애니메이션을 수정하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidInstanceTypes,CurveAnimation 계층 구조에는 {allowedTypes}만 포함할 수 있습니다. 다른 인스턴스 유형은 모두 제거하세요.
-Common.UGCValidation.ErrorLabel.CurveAnim_InvalidLength,CurveAnimation의 길이는 {minLength}~{maxLength}초여야 합니다. 애니메이션을 수정하세요.
+Common.UGCValidation.ErrorLabel.CurveAnim_InvalidLength,곡선 애니메이션 {animationName}의 길이는 {minLength}~{maxLength}초여야 합니다. 애니메이션을 수정하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidMarkerData,CurveAnimation에 '시간' 또는 '값'이 유효하지 않거나 '값'이 너무 긴 MarkerCurve가 포함되어 있습니다. 애니메이션을 수정하세요.
-Common.UGCValidation.ErrorLabel.CurveAnim_InvalidNumericalData,CurveAnimation에 수치 데이터가 유효하지 않은 Curve가 있습니다. 애니메이션을 수정하세요.
+Common.UGCValidation.ErrorLabel.CurveAnim_InvalidNumericalData,곡선 애니메이션 {animationName}에 수치 데이터가 유효하지 않은 곡선이 있습니다. 애니메이션을 수정하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidRigData,AnimationRigData 내부 유효성을 확인하는 데 실패했습니다. AnimationRigData가 올바르게 설정되었는지 확인하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidRigDataR15Plus,AnimationRigData R15+ 내부 유효성을 확인하는 데 실패했습니다. 뼈대 애니메이션에 대해 AnimationRigData가 올바르게 설정되었는지 확인하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidTags,CurveAnimation에는 타임스탬프 태그를 하나만 포함할 수 있습니다. 다른 모든 태그를 제거하세요.
-Common.UGCValidation.ErrorLabel.CurveAnim_JointRotationExceeded,CurveAnimation의 시간이 {time}초일 때 관절({bodyPart})의 회전 각도가 휴식 자세에서 {rotation}도입니다. 최대 허용 각도는 {maxRotation}도입니다. 애니메이션을 수정하세요.
+Common.UGCValidation.ErrorLabel.CurveAnim_JointRotationExceeded,곡선 애니메이션 {animationName}의 시간이 {time}초일 때 {bodyPart} 조인트의 회전 각도가 휴식 자세에서 {rotation}도입니다. 최대 허용 각도는 {maxRotation}도입니다. 애니메이션을 수정하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_KeysTooClose,최대 {maxFPS}FPS 애니메이션을 기준으로 CurveAnimation의 Curve({curvePath})에 있는 키 프레임 간격이 너무 가깝습니다. 애니메이션을 수정하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_LoopingNotEnabled,CurveAnimation '{animationName}'에 루프가 활성화되어 있지 않습니다. 마켓플레이스에 업로드되는 애니메이션은 루프가 되어야 합니다. 루프 속성을 활성화하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_MultipleBodyRoots,CurveAnimation에 2개 이상의 신체 부위 또는 HumanoidRootPart 자식 폴더가 포함되어 있습니다. 신체 부위 또는 HumanoidRootPart의 이름을 가진 자식 폴더는 1개만 있어야 합니다.
 Common.UGCValidation.ErrorLabel.CurveAnim_MultipleRigData,CurveAnimation에 2개 이상의 AnimationRigData 자식 항목이 포함되어 있습니다. AnimationRigData 자식 항목 1개만 있어야 합니다.
 Common.UGCValidation.ErrorLabel.CurveAnim_NegativeKeyTime,CurveAnimation의 Curve({curvePath})에 시간 값이 음수인 키 프레임이 있습니다. 애니메이션을 수정하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_NoBodyRoot,CurveAnimation에 신체 부위 또는 HumanoidRootPart 자식 폴더가 없습니다. 신체 부위 또는 HumanoidRootPart의 이름을 가진 자식 폴더는 1개만 있어야 합니다.
-Common.UGCValidation.ErrorLabel.CurveAnim_NoJointManipulation,CurveAnimation에 관절 조작이 포함되어 있지 않습니다.
+Common.UGCValidation.ErrorLabel.CurveAnim_NoJointManipulation,곡선 애니메이션 {animationName}에 조인트 조작이 포함되어 있지 않습니다.
 Common.UGCValidation.ErrorLabel.CurveAnim_NoRigData,CurveAnimation에 AnimationRigData 자식 항목이 없습니다. AnimationRigData 자식 항목은 1개만 있어야 합니다.
 Common.UGCValidation.ErrorLabel.CurveAnim_NotCurveAnimation,참조된 애니메이션은 CurveAnimation이 아닙니다. 애니메이션이 올바르게 업로드되었는지 확인하세요.
-Common.UGCValidation.ErrorLabel.CurveAnim_PartTooFar,CurveAnimation의 시간이 {time}초일 때 신체 부위({bodyPart})가 HumanoidRootPart에서 {distance}스터드만큼 떨어져 있습니다. 신체 부위는 HumanoidRootPart에서 {maxDistance}스터드 이상 떨어져 있으면 안 됩니다. 애니메이션을 수정하세요.
-Common.UGCValidation.ErrorLabel.CurveAnim_PartTooLow,CurveAnimation의 시간이 {time}초일 때 신체 부위({bodyPart})가 HumanoidRootPart에서 {height}스터드만큼 떨어진 높이에 있습니다. 신체 부위는 HumanoidRootPart에서 {minHeight}스터드보다 낮으면 안 됩니다. 애니메이션을 수정하세요.
-Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,"CurveAnimation에 신체 부위가 위치상 분리되어 있습니다. LowerTorso만 위치를 변경할 수 있으며, 그 외 모든 신체 부위는 방향만 변경할 수 있습니다. {bodyPart} 신체 부위가 부모 부위에서 {maxMovement}스터드 이상 떨어져 있습니다. 애니메이션을 수정하세요."
-Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,CurveAnimation의 시간이 {time}초일 때 신체 부위({bodyPart})가 초당 {speed}의 회전 속도로 움직이고 있습니다. 초당 최대 회전 속도는 {maxSpeed}입니다. 애니메이션을 수정하세요.
-Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,CurveAnimation의 시간이 {time}초일 때 신체 부위({bodyPart})가 초당 {speed}의 스터드 속도로 움직이고 있습니다. 초당 최대 스터드 속도는 {maxSpeed}입니다. 애니메이션을 수정하세요.
+Common.UGCValidation.ErrorLabel.CurveAnim_PartTooFar,곡선 애니메이션 {animationName}의 시간이 {time}초일 때 {bodyPart} 신체 부위가 HumanoidRootPart에서 {distance}스터드만큼 떨어져 있습니다. 신체 부위는 HumanoidRootPart에서 {maxDistance}스터드를 초과하여 떨어지지 않아야 합니다. 애니메이션을 수정하세요.
+Common.UGCValidation.ErrorLabel.CurveAnim_PartTooLow,곡선 애니메이션 {animationName}의 시간이 {time}초일 때 {bodyPart} 신체 부위가 HumanoidRootPart에서 {height}스터드만큼 떨어진 높이에 있습니다. 신체 부위는 HumanoidRootPart에서 {minHeight}스터드보다 낮으면 안 됩니다. 애니메이션을 수정하세요.
+Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,"곡선 애니메이션 {animationName}에 신체 부위가 위치상 분리되어 있습니다. LowerTorso만 위치를 변경할 수 있으며, 그 외 모든 신체 부위는 방향만 변경할 수 있습니다. {bodyPart} 신체 부위가 부모 부위에서 {maxMovement}스터드 이상 떨어져 있습니다. 애니메이션을 수정하세요."
+Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,곡선 애니메이션 {animationName}의 시간이 {time}초일 때 {bodyPart} 신체 부위가 초당 {speed}도의 회전 속도로 움직이고 있습니다. 초당 최대 회전 속도는 {maxSpeed}도입니다. 애니메이션을 수정하세요.
+Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,곡선 애니메이션 {animationName}의 시간이 {time}초일 때 {bodyPart} 신체 부위가 초당 {speed}스터드의 속도로 움직이고 있습니다. 초당 최대 스터드 속도는 {maxSpeed}입니다. 애니메이션을 수정하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,CurveAnimation의 신체 부위( {bodyPart})가 프레임 간에 {maxMovement} 이상의 스터드 속도로 움직입니다. 애니메이션을 수정하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,CurveAnimation 구조가 유효하지 않습니다. {detail}. 애니메이션이 예상 스키마를 따르는지 확인하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation에 {count}개의 하위 항목이 있습니다. 최대 허용 개수는 {maxAllowed}개이니 하위 항목 개수를 줄이세요.
@@ -272,12 +301,24 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation에 
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation에 마커 {count}개가 포함된 MarkerCurve가 있습니다. MarkerCurve당 최대 개수는 {maxAllowed}개입니다. 애니메이션을 수정하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation에 예상치 못한 자식 항목({childName})이 포함되어 있습니다.
 Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,"{InstanceFullName}.{FieldName}이(가) 애니메이션 {AssetId}을(를) {Version}버전에 고정하지만, 아직 애니메이션을 버전에 고정할 수 없습니다. '&version={Version}'을(를) 제거하고 다시 시도하세요."
+Common.UGCValidation.ErrorLabel.DescendantIdFetchFailed,{InstanceFullName}에 대한 검토 결과를 가져오지 못했습니다. 모든 애셋이 현재 사용자의 소유인지 확인하세요.
+Common.UGCValidation.ErrorLabel.DescendantIdMalformed,{InstanceFullName}.{FieldName}에서 ContentId를 구문 분석할 수 없습니다. 유효한 ID가 포함된 유효한 URL을 사용하고 있는지 확인한 후 다시 시도하세요.
+Common.UGCValidation.ErrorLabel.DescendantIdMissing,{InstanceFullName}.{FieldName}은(는) 비워 둘 수 없습니다. 유효한 애셋이 할당되었는지 확인하고 다시 시도하세요.
+Common.UGCValidation.ErrorLabel.DescendantIdNotApproved,다음 애셋이 검토를 통과하지 못했습니다: {ModerationMessages}
+Common.UGCValidation.ErrorLabel.DescendantIdNotOwned,애셋 {AssetId}({InstanceFullName}.{FieldName})을(를) 승인된 크리에이터가 소유하고 있지 않습니다.
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,애셋 {AssetId}({InstanceFullName}.{FieldName})이 게시되지 않았습니다. 애셋을 게시하고 다시 시도하세요.
-Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,"{InstanceFullName}.{FieldName}은(는) 애셋 {AssetId}의 {Version}버전을 사용하지만, 현재는 버전 1만 지원됩니다. 버전 1을 사용하고 다시 시도하세요."
+Common.UGCValidation.ErrorLabel.DescendantIdVersionNotLatest,"{InstanceFullName}.{FieldName}은(는) 애셋 {AssetId}의 {Version}버전을 사용하지만, 현재는 최신 버전인 {LatestVersion}만 사용할 수 있습니다. {LatestVersion}버전을 사용하거나 '&version={Version}'을(를) 제거한 후 다시 시도하세요."
+Common.UGCValidation.ErrorLabel.DescendantIdsTooMany,"업로드하려는 모델에 하위 애셋(메시, 텍스처 등)이 너무 많아 그대로 처리할 수 없습니다. 모델을 재정렬해야 합니다."
+Common.UGCValidation.ErrorLabel.DynHead_ControlsInactive,{headName} 메시({meshId})에 비활성 FACS 컨트롤이 있습니다: {controlList}
+Common.UGCValidation.ErrorLabel.DynHead_ControlsMissing,{headName} 메시({meshId})에 FACS 컨트롤이 없습니다: {controlList}
+Common.UGCValidation.ErrorLabel.DynHead_FacsMissing,FACS 정보가 없어 다이내믹 헤드 '{headName}'에 대한 유효성 검사에 실패했습니다. 최소 17개 포즈에 대한 FACS 컨트롤을 제공해야 합니다(문서 참조).
+Common.UGCValidation.ErrorLabel.DynHead_JointAccumulatedExceeded,머리 얼굴 애니메이션을 조합하여 {jointName} 조인트를 머리 밖으로 멀리 확장할 수 있습니다. 얼굴 애니메이션을 편집하고 다시 시도하세요.
+Common.UGCValidation.ErrorLabel.DynHead_JointBoundsCheckFailed,얼굴 애니메이션 조인트 경계를 검증하지 못했습니다. 나중에 다시 시도하세요.
+Common.UGCValidation.ErrorLabel.DynHead_JointDirectExceeded,{actionName} 머리 얼굴 애니메이션으로 인해 조인트가 머리 밖으로 상당히 이동합니다. 얼굴 애니메이션을 편집하고 다시 시도하세요.
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,마켓플레이스의 다이내믹 헤드는 케이징을 적절히 처리하여 케이지의 눈과 입 정점이 메시 정점과 일치해야 합니다. 케이징과 메시의 정렬을 개선하세요.
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,다이내믹 헤드 케이지의 왼쪽 눈 랜드마크가 메시와 정렬되지 않았습니다. 왼쪽 눈 메시가 투영된 케이지 영역 내에 오도록 눈 케이지를 조정하세요.
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,다이내믹 헤드 케이지의 입 랜드마크가 메시와 정렬되지 않았습니다. 입 메시가 투영된 케이지 영역 내에 오도록 입 케이지를 조정하세요.
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,다이내믹 헤드 케이지의 오른쪽 눈 랜드마크가 메시와 정렬되지 않았습니다. 오른쪽 눈 메시가 투영된 케이지 영역 내에 오도록 눈 케이지를 조정하세요.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,화면의 왼쪽 눈(시각화 플러그인에서 머리 왼쪽의 빨간색 점)의 케이지 랜드마크가 메시와 정렬되지 않았습니다. 일부 케이지 포인트가 머리 메시 내부에 있거나(메시가 케이지를 뚫고 나옴) 너무 멀리 떨어져 있습니다. 해당 케이지가 이 눈 주변의 메시 위에 있거나 바로 바깥쪽에 오도록 조정하세요.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,입(시각화 플러그인에서 녹색 점)의 케이지 랜드마크가 메시와 정렬되지 않았습니다. 일부 케이지 포인트가 머리 메시 내부에 있거나(메시가 케이지를 뚫고 나옴) 너무 멀리 떨어져 있습니다. 입 케이지가 입 주변의 메시 위에 있거나 바로 바깥쪽에 오도록 조정하세요.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,화면의 오른쪽 눈(시각화 플러그인에서 머리 오른쪽의 파란색 점)의 케이지 랜드마크가 메시와 정렬되지 않았습니다. 일부 케이지 포인트가 머리 메시 내부에 있거나(메시가 케이지를 뚫고 나옴) 너무 멀리 떨어져 있습니다. 해당 케이지가 이 눈 주변의 메시 위에 있거나 바로 바깥쪽에 오도록 조정하세요.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,다이내믹 헤드의 미소 표정을 감지할 수 없습니다. 입의 케이지 랜드마크를 조정하여 머리에서 입이 있는 위치와 일치시키고 미소 표정을 지을 수 있는지 확인하세요.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,다이내믹 헤드의 왼쪽 눈 감기 표정을 감지할 수 없습니다. 왼쪽 눈의 케이지 랜드마크를 조정하여 머리의 왼쪽 눈과 일치시키고 감을 수 있는지 확인하세요.
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,마켓플레이스의 다이내믹 헤드에 헤드 케이지가 없습니다. 다이내믹 헤드용 헤드 케이지를 만드세요.
@@ -285,9 +326,9 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,다이내믹 헤드의 �
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"마켓플레이스의 다이내믹 헤드는 애니메이션화되어 있어야 하지만, 이 헤드에는 FACS 데이터가 없습니다."
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,다이내믹 헤드의 오른쪽 눈 감기 표정을 감지할 수 없습니다. 오른쪽 눈의 케이지 랜드마크를 조정하여 머리의 오른쪽 눈과 일치시키고 감을 수 있는지 확인하세요.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,다이내믹 헤드의 찡그린 표정을 감지할 수 없습니다. 입의 케이지 랜드마크를 조정하여 머리에서 입이 있는 위치와 일치시키고 찡그린 표정을 지을 수 있는지 확인하세요.
-Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,이미시브 영역이 기준값을 초과했습니다.
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,신체 부위 메시 '{meshName}'의 이미시브가 {emissivePercentage}%입니다. 이미시브 범위는 {maxEmissivePercentage}%를 초과해서는 안 됩니다. 이미시브 마스크 강도 또는 범위를 줄여 주세요.
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} 의 발광도가 너무 높습니다. 발광 영역 × 강도가 한도를 초과합니다(현재 {emissivePercentage}%, {maxEmissivePercentage}% 이하여야 함). 발광 영역을 줄이거나 발광 강도를 낮추세요."
-Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,이미시브 영역이 초과되었습니다.
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,"메시 '{meshName}'의 가중 이미시브 표면적이 {emissiveArea}제곱스터드로, 최대치인 {maxEmissiveArea}제곱스터드를 초과합니다. 이미시브 마스크 강도 또는 범위를 줄여 주세요."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} 의 발광도가 너무 높습니다. 발광 영역 × 강도가 한도를 초과합니다(현재 {emissiveArea}, {maxEmissiveArea} 이하여야 함). 발광 영역을 줄이거나 발광 강도를 낮추세요."
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedInExperience,체험에서 생성된 아이템은 빛 발산 맵을 지원하지 않습니다. 모든 SurfaceAppearance에서 EmissiveMaskContent를 제거하세요.
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedOnDecal,"데칼은 빛을 발산할 수 없습니다. '{InstancePath}'에서 EmissiveMaskContent를 제거하고, EmissiveStrength를 1로 설정하고, EmissiveTint를 흰색으로 설정하세요."
@@ -295,19 +336,29 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribut
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,게시된 애니메이션에 유효한 UGC 감정 표현 마커가 없습니다. 애니메이션을 다시 게시하세요.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,게시된 애니메이션 데이터에서 최대 부위 이동 거리를 계산할 수 없습니다. 애니메이션을 다시 게시하세요.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"게시된 애니메이션은 최대 부위 이동 거리를 {taggedTranslation} 스터드로 지정했지만, 애니메이션 데이터에서는 {calculatedTranslation} 스터드로 계산됩니다. 애니메이션을 다시 게시하세요."
+Common.UGCValidation.ErrorLabel.ExperienceCreatorNotSupported,"체험 크리에이터는 아바타 아이템을 만들 수 없습니다. 크리에이터 유형: {CreatorType}, 크리에이터 ID: {CreatorId}."
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"머리는 UpperTorso 위에 배치해야 합니다. 머리 중심이 몸통 상단 아래에 있어, 헤드 메시가 접혔거나 잘못 배치되었음을 나타냅니다."
+Common.UGCValidation.ErrorLabel.Extents_ParentBelowPart,{upperPart}은(는) {lowerPart} 아래로 확장될 수 없습니다. {attachmentName}을(를) 이동하여 파트가 결합되는 방식을 조정할 수 있습니다. 
+Common.UGCValidation.ErrorLabel.Extents_PartAboveParent,{lowerPart}은(는) {upperPart} 위로 확장될 수 없습니다. {attachmentName}을(를) 이동하여 파트가 결합되는 방식을 조정할 수 있습니다.
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,FaceControls의 InternalOverrideFACSData 속성은 업로드 시 비워두어야 합니다.
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,기본 얼굴에 필수 눈 특징이 없습니다. 기본 얼굴에 눈을 추가하고 다시 시도하세요.
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,기본 얼굴에 필수 입이 없습니다. 기본 얼굴에 입을 추가하고 다시 시도하세요.
 Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,행복한 표정을 감지할 수 없습니다. 투사된 입 메쉬가 예상대로 변형되도록 입 케이지 또는 행복한 표정 FACS를 조정하세요.
-Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,왼쪽 눈 감기 표정을 감지할 수 없습니다. 투사된 눈 메쉬가 예상대로 변형되도록 왼쪽 눈 케이지 또는 왼쪽 눈 감기 FACS를 조정하세요.
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,화면의 왼쪽 눈(시각화 플러그인에서 머리 왼쪽의 빨간색 점)이 충분히 감기지 않습니다. 오른쪽 눈 FACS 컨트롤과 해당 케이지를 확인하세요.
 Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,입을 벌린 표정을 감지할 수 없습니다. 투사된 입 메쉬가 예상대로 변형되도록 입 케이지 또는 입 벌림 FACS를 조정하세요.
-Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,오른쪽 눈 감기 표정을 감지할 수 없습니다. 투사된 눈 메쉬가 예상대로 변형되도록 오른쪽 눈 케이지 또는 오른쪽 눈 감기 FACS를 조정하세요.
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,화면의 오른쪽 눈(시각화 플러그인에서 머리 오른쪽의 파란색 점)이 충분히 감기지 않습니다. 왼쪽 눈 FACS 컨트롤과 해당 케이지를 확인하세요.
 Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,슬픈 표정을 감지할 수 없습니다. 투사된 입 메쉬가 예상대로 변형되도록 입 케이지 또는 슬픈 표정 FACS를 조정하세요.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,FACS(표정 코딩 시스템)이 사용자의 머리가 {modPercent}% 확대된 것을 감지했습니다. 머리를 변경하는 것은 얼굴 애니메이션에 대한 마켓플레이스 정책에 위배됩니다.
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"다이내믹 헤드에는 최대 {maxFacsJointCount}개의 FACS 조인트를 포함할 수 있지만, 이 헤드에는 {actualJointCount}개가 있습니다. FACS 조인트 개수를 줄이고 다시 시도하세요."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,FACS(표정 코딩 시스템)이 사용자의 머리가 {modPercent}% 축소된 것을 감지했습니다. 머리를 변경하는 것은 얼굴 애니메이션에 대한 마켓플레이스 정책에 위배됩니다.
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,업로드 형식이 예상 폴더 구조와 일치하지 않습니다. 다시 시도하거나 버그 신고를 제출하세요.
+Common.UGCValidation.ErrorLabel.HSRAssetHasChildren,WrapLayer HSR 애셋에 HiddenSurfaceRemovalAsset 루트 인스턴스 아래에 있는 자식 항목이 있습니다.
+Common.UGCValidation.ErrorLabel.HSRAssetIdInvalidUrl,'{InstancePath}'에 유효하지 않은 URL이 포함된 HSRAssetId가 있습니다.
+Common.UGCValidation.ErrorLabel.HSRAssetIdRequired,'{InstancePath}'에는 HSRAssetId를 설정해야 합니다.
+Common.UGCValidation.ErrorLabel.HSRAssetInvalidRoot,WrapLayer HSR 애셋의 HiddenSurfaceRemovalAsset 루트가 정확히 1개가 아닙니다.
+Common.UGCValidation.ErrorLabel.HSRDataNotReady,'{InstancePath}'에 대한 HSR 데이터가 누락되었습니다. 다시 시도하세요.
+Common.UGCValidation.ErrorLabel.HSRMeshIdValidationError,'{InstancePath}'의 HSR 메시 ID를 인증하던 중 오류가 발생했습니다.
+Common.UGCValidation.ErrorLabel.HSRMeshIdsMismatch,'{InstancePath}'에서 유효하지 않은 HSR 데이터가 감지되었습니다. 장신구 조정 도구를 사용하여 애셋을 다시 생성한 후 다시 시도하세요.
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,뼈대 {bonePath}이(가) 메시 파트 {partName}에서 너무 멀리 떨어져 있습니다. 뼈대를 메시 파트 크기 경계에 더 가깝게 배치하세요.
 Common.UGCValidation.ErrorLabel.HrdBone_TooCloseToParent,뼈대 {bonePath}이(가) 상위 뼈대에 너무 가깝습니다. 뼈대 위치를 약간 조정하세요.
 Common.UGCValidation.ErrorLabel.HrdBone_TransformNotIdentity,"뼈대 {bonePath}에는 변형 속성이 있지만, 마켓플레이스 업로드에서는 아직 이 속성이 활성화되지 않았습니다. 이를 Identity CFrame으로 재설정하세요."
@@ -328,6 +379,8 @@ Common.UGCValidation.ErrorLabel.HrdProperties_UncontainedJoint,"HRD 속성 {join
 Common.UGCValidation.ErrorLabel.HrdTposePosition,조인트 {jointName}에 허용 범위를 벗어난 TposeAdjustment 위치가 있습니다. 오프셋을 +-({offsetLimit}) 사이로 줄여 주세요.
 Common.UGCValidation.ErrorLabel.HrdTposeRotation,조인트 {jointName}에 권장 방향({expectedOrientation})에서 {degLimit}도 이상 벗어난 TposeAdjustment가 있습니다.
 Common.UGCValidation.ErrorLabel.InstanceTagsFound,"다음 인스턴스는 태그가 있지만, 마켓플레이스 애셋은 태그를 사용할 수 없습니다: {ProblematicDescendantPaths}"
+Common.UGCValidation.ErrorLabel.InstanceTreeBannedClass,'{InstancePath}'은(는) 마켓플레이스 애셋에서 허용되지 않는 {ClassName} 유형입니다.
+Common.UGCValidation.ErrorLabel.InstanceTreeBannedName,'{InstancePath}'이(가) 마켓플레이스 애셋에서 사용할 수 없는 예약된 이름을 사용하고 있습니다.
 Common.UGCValidation.ErrorLabel.InternalError,내부 오류로 인해 자산을 제대로 검증할 수 없습니다. 문제가 지속되면 버그 신고를 작성하세요. ValidationJobId: {ValidationJobId}
 Common.UGCValidation.ErrorLabel.JointRotAtt_Moved,"{instPath}은(는) 이동된 jointRotation이지만, 마켓플레이스 업로드에서는 아직 이 인스턴스를 조정하지 못할 수 있습니다. 위치를 {expectedPosition}(으)로 재설정하세요."
 Common.UGCValidation.ErrorLabel.JointRotAtt_MultipleAttachments,인스턴스 {parentPath}에는 JointRotation 자식 항목을 2개 이상 포함할 수 없습니다.
@@ -335,7 +388,21 @@ Common.UGCValidation.ErrorLabel.JointRotAtt_Rotated,"{instPath}은(는) 회전�
 Common.UGCValidation.ErrorLabel.JointRotAtt_UnrecognizedParent,"인스턴스 {parentPath}에는 JointRotation 자식 항목이 있지만, 이는 허용되는 R15plus 스키마에 포함되지 않습니다."
 Common.UGCValidation.ErrorLabel.JointRotAtt_WrongInstanceClass,인스턴스 {instPath}의 이름이 JointRotation으로 되어 있습니다. 하지만 이 이름은 연결부의 자식 항목 연결부용으로만 사용하도록 예약된 이름입니다.
 Common.UGCValidation.ErrorLabel.LCDeformTooLarge,아바타에 레이어드 의상을 입히면 허용되는 크기({maxSize})를 초과하여 변형됩니다.
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NoHandle,'{accessoryName}' 장신구에 핸들이 없습니다. 범위를 벗어난 레이어드 의상은 유효성 검사를 할 수 없습니다.
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NoWrapLayer,'{accessoryName}' 장신구에 WrapLayer가 없습니다. 범위를 벗어난 레이어드 의상은 유효성 검사를 할 수 없습니다.
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NonZeroMaxSize,장신구의 MaxSize가 0이 아닙니다.
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NonZeroOffset,장신구의 Offset이 0이 아닙니다.
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_OutOfBounds,'{accessoryName}'에 대한 레이어드 복장 유효성 검사에 실패했습니다. 변형될 경우 레이어드 의상이 너무 커집니다.
 Common.UGCValidation.ErrorLabel.LeaderVertsNearCageIslands,속눈썹의 버텍스 중 RBX_Leader에 스킨된 항목이 내부 케이지의 눈 랜드마크에서 너무 멀리 떨어져 있습니다. RBX_Leader에 스킨된 모든 버텍스가 내부 케이지의 눈 영역에 더 가깝게 위치하도록 하세요
+Common.UGCValidation.ErrorLabel.LegsSeparated_HipAttachmentOutOfRange,{attachmentPath}이(가) {currentValue}이며 {comparison} {cutoff}일 수 없습니다. 첨부 파일을 수정하세요.
+Common.UGCValidation.ErrorLabel.LegsSeparated_LegsOverlap,"다리가 X축에서 {overlap}개 스터드만큼 겹칩니다. 왼쪽 다리의 최대값은 {leftMax}이고, 오른쪽 다리의 최대값은 {rightMax}입니다. 다리가 겹치지 않도록 조정하세요."
+Common.UGCValidation.ErrorLabel.MakeupDecal_FailedToLoadTexture,데칼 {instanceName}의 {fieldName}을(를) 불러오지 못했습니다. TextureContent가 있고 유효한지 확인한 후 다시 시도하세요.
+Common.UGCValidation.ErrorLabel.MakeupDecal_FailedToLoadTextureData,'{fullName}'의 텍스처 데이터를 불러오지 못했습니다. 텍스처가 있는지 확인하고 다시 시도하세요.
+Common.UGCValidation.ErrorLabel.MakeupDecal_NoColorMap,{instanceName} 데칼에 대한 ColorMap을 찾을 수 없습니다. 메이크업 데칼에는 유효한 컬러맵이 있어야 합니다.
+Common.UGCValidation.ErrorLabel.MakeupDecal_TextureTooBig,'{fullName}'에서 찾은 텍스처 해상도 {sizeX}x{sizeY}픽셀이 '{fieldName}' 필드에 대해 지원되는 최대 크기인 {maxSize} x{maxSize}픽셀보다 큽니다.
+Common.UGCValidation.ErrorLabel.MakeupDecal_UVZoneExcludeViolation,{instanceName}의 ColorMap의 불투명 픽셀이 애셋 유형 {assetTypeName}의 제한된 UV 범위인 [{minBound}] 및 [{maxBound}] 내에서 발견되었습니다.
+Common.UGCValidation.ErrorLabel.MakeupDecal_UVZoneIncludeViolation,{instanceName}의 ColorMap의 불투명 영역이 애셋 유형 {assetTypeName}의 혀용된 UV 범위인 [{minBound}] 및 [{maxBound}] 내에 존재하지 않습니다.
+Common.UGCValidation.ErrorLabel.MaterialNotAllowed,다음 인스턴스에 유효하지 않은 재질이 있습니다: {InstanceNameList}. 다음 재질만 허용됩니다: {AllowedMaterials}.
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceAvatar_CageInsideMesh,바디 케이지가 바디 메시와 교차합니다. 바디 케이지 정점의 {negtiveSDFPercent}%가 바디 메시 내부에 있습니다.
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceAvatar_CageTooFar,"헤드 케이지가 헤드 메시에서 너무 멀리 떨어져 있습니다. 헤드 케이지와 메시 사이의 최대 거리가 {max_sdf}이며, 이는 허용 한도 {max_sdf_threshold}을(를) 초과합니다"
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceHead_CageInsideMesh,헤드 케이지가 헤드 메시와 교차합니다. 헤드 케이지 정점의 {negtiveSDFPercent}%가 헤드 메시 내부에 있습니다.
@@ -345,17 +412,61 @@ Common.UGCValidation.ErrorLabel.MeasureCageMeshDistance_CageTooFar,"외부 케�
 Common.UGCValidation.ErrorLabel.MeasureCageRelevancy,수정된 외부 케이지 정점의 {outer_cage_face_irrelevant_percent}%가 장신구를 포함하지 않습니다. 반드시 필요한 경우에만 외부 케이지를 움직이세요.
 Common.UGCValidation.ErrorLabel.MeasureCageUV,{cage_name} 케이지 내에 올바르지 않거나 템플릿에 속하지 않는 UV 값이 {incorrect_uv_count}개 있습니다. 케이지 UV를 수정하세요.
 Common.UGCValidation.ErrorLabel.MeasureMeshOutsideOuterCage,장신구의 메시 정점 중 {mesh_outside_outer_cage_percent}%가 외부 케이지 외부에 있습니다. 장신구의 더 많은 부분이 케이지 사이에 위치하도록 조정하세요.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ExceedsBounds,"{meshName}의 크기가 허용되는 최대 경계 크기보다 큽니다. {assetTypeName}의 최대 크기는 [{maxSizeX}, {maxSizeY}, {maxSizeZ}]입니다."
+Common.UGCValidation.ErrorLabel.MeshGeometry_NotCentered,"{meshName}.{fieldName}에 중앙 정렬되지 않은 메시 데이터가 있습니다. Roblox 3D 가져오기 도구를 사용하여 이 메시를 다시 가져오고, 소스 파일에 느슨한 지오메트리가 없는지 확인하세요."
+Common.UGCValidation.ErrorLabel.MeshGeometry_PositionOutOfBounds,위치가 범위를 벗어났습니다.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleAboveMaximum,{meshName}이(가) 원래 메시 크기의 {scaleMultiple}배로 확대되었습니다. 최대값은 {maxScaleMultiple}배입니다. Studio에서 메시 크기를 키우는 대신 필요한 크기로 메시를 다시 내보내거나 다시 가져오세요.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleBelowMinimum,{meshName}이(가) 원래 메시 크기의 {scalePercent}%로 축소되었습니다. 최소값은 {minScalePercent}%입니다. Studio에서 메시 크기를 줄이는 대신 필요한 크기로 메시를 다시 내보내거나 다시 가져오세요.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleNotPositive,{meshName}의 배율이 0이거나 음수입니다. 스케일 값을 양수로 사용하세요. 메시를 미러링하려면 3D 모델링 소프트웨어에서 메시를 뒤집은 후 다시 내보내세요.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooLarge,{meshName} 메시 크기가 너무 큽니다.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooSmall,메시 배율이 너무 작습니다.
+Common.UGCValidation.ErrorLabel.MeshGeometry_SurfaceAreaExceeded,"모델 메시 '{meshName}'의 총 표면적은 {surfaceArea}이며, {maxSurfaceArea}보다 클 수 없습니다. 모든 삼각형의 개수 및/또는 크기를 줄여야 합니다."
+Common.UGCValidation.ErrorLabel.MeshGeometry_TotalTriangleCountExceeded,'{assetTypeName}'의 '{triangleCount}' 메시 해상도가 지원되는 삼각형 최대 수인 '{maxTriangles}'보다 큽니다. 삼각형 수를 줄이려면 모델을 리토폴로자이즈해야 합니다.
+Common.UGCValidation.ErrorLabel.MeshGeometry_TriangleCountExceeded,"모델 메시 {meshName} 해상도가 {triangleCount}(으)로, 지원되는 최대 값({maxTriangles})보다 큽니다. 모델을 리토폴로자이즈한 후 다시 시도해야 합니다."
+Common.UGCValidation.ErrorLabel.MeshGeometry_VertexDensityExceeded,최대 버텍스 밀도를 초과했습니다. 서로 매우 가까운 버텍스의 수를 줄이세요.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ZeroAreaTriangle,모델 메시 {meshName}에서 면적이 0인 삼각형이 감지되었습니다. 면적이 0인 삼각형을 제거하려면 메시를 편집해야 합니다.
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,"{partName} 메시의 {axis}축 크기가 '{currentSize}' 스터드로, 허용되는 최대 개별 부품 크기인 '{maxSize}' 스터드보다 큽니다. 메시 크기를 줄이세요."
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"{partName} 메시의 {axis}축 크기가 '{currentSize}' 스터드로, 허용되는 최소 개별 부품 크기인 '{minSize}' 스터드보다 작습니다. 메시 크기를 늘리세요."
+Common.UGCValidation.ErrorLabel.MeshSize_LoadFailed,
+Common.UGCValidation.ErrorLabel.MeshSize_Mismatch,{meshName}에 대해 계산된 메시 크기가 MeshSize 속성 값과 일치하지 않습니다.
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,첨부 파일({attName})은 {partName} 하위 항목에 정확히 한 번만 존재해야 합니다.
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}'(또는 하위 항목)에 속성이 포함되어 있습니다. 다음({InstanceNameList})에서 속성을 제거해야 합니다.
+Common.UGCValidation.ErrorLabel.NoMeshBelowFeet_PartBelowFeet,"{partName}은(는) 발바닥 아래로 {distance}개 스터드만큼 돌출되어 있습니다. 다리만 바닥에 닿을 수 있으며, 다른 신체 부위는 바닥 아래로 최대 {maxDistance}개 스터드까지만 내려갈 수 있습니다. {partName}의 길이를 줄이거나 위로 올리세요."
+Common.UGCValidation.ErrorLabel.Pose_AngleFromXYPlane,"{assetName}이(가) X,Y 평면과 {angle}도의 각도를 이루고 있습니다. 각도는 {limit}도 이내여야 합니다. 캐릭터가 I자 포즈, A자 포즈 또는 T자 포즈인지 확인하세요."
+Common.UGCValidation.ErrorLabel.Pose_AngleOnXYPlane,"{assetName}이(가) X,Y 평면에서 [{xVector}] 벡터와 {angle}도의 각도를 이루고 있습니다. 각도는 {minAngle}~{maxAngle}도 사이여야 합니다. 캐릭터가 I자 포즈, A자 포즈 또는 T자 포즈인지 확인하세요."
+Common.UGCValidation.ErrorLabel.Pose_CFrameCalculationFailed,"{assetName} 애셋 CFrame을 계산하지 못했습니다. 캐릭터가 I 포즈, A 포즈 또는 T 포즈를 취하고 있으며, 모든 파트가 동일한 위치에 있지 않은지 확인하세요."
+Common.UGCValidation.ErrorLabel.Pose_PointingAlongZVector,"{assetName}의 방향이 월드 Z 벡터를 따르고 있습니다. 캐릭터가 I자 포즈, A자 포즈 또는 T자 포즈인지 확인하세요."
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}'에 유효하지 않은 속성({ProblematicProperties})이 있습니다. 표시된 바이트 제한을 초과했습니다(제한이 0이면 속성이 비어 있어야 함). 다른 속성에는 NaN/Inf 값이 포함되어 있거나 기본 크기 제한을 초과합니다.
+Common.UGCValidation.ErrorLabel.PropertyNotFound,'{InstancePath}'에서 '{PropertyName}' 속성을 찾지 못했습니다.
+Common.UGCValidation.ErrorLabel.PropertyValueInvalid,'{InstancePath}'의 '{PropertyName}' 속성이 유효하지 않습니다. {ComparisonMethod} {ExpectedValue}이(가) 되어야 합니다.
 Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,"렌더링된 애니메이션에 하나 이상의 필수 표정(눈 감기, 입 벌리기, 행복, 슬픔)이 없습니다."
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,'{AttachmentName}'의 리그 부착물 '{PartName}'은(는) 이 신체 부위가 인접 부위에 연결되는 조인트 경계 근처에 배치해야 합니다. 현재 위치 [{CurrentPosition}]가 연결 평면에서 너무 멀리 떨어져 있습니다. [{ClosestValidPosition}]에 더 가깝게 이동하세요.
+Common.UGCValidation.ErrorLabel.SAOpacity_FailedToLoadTexture,SurfaceAppearance '{FullName}'의 '{FieldName}' 텍스처를 불러오지 못했습니다. 텍스처가 있는지 확인하고 다시 시도하세요.
+Common.UGCValidation.ErrorLabel.SAOpacity_InvalidAlphaMode,SurfaceAppearance({FullName})의 AlphaMode가 유효하지 않습니다. 예상되는 항목은 Enum.AlphaMode.Overlay입니다.
+Common.UGCValidation.ErrorLabel.SAOpacity_TextureNotOpaque,'{FullName}' 텍스처가 완전히 불투명하지 않습니다. 불투명 텍스처를 사용하세요.
+Common.UGCValidation.ErrorLabel.ScaleTypeInvalid,"'{ParentName}'의 AvatarPartScaleType 값이 유효하지 않습니다. 허용되는 값은 Classic, ProportionsSlender 또는 ProportionsNormal입니다."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,Roblox에 애셋을 업로드하려면 정확히 1개의 인스턴스와 관련된 업로드 유형을 선택해야 합니다.
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,이 애셋은 너무 커서 업로드할 수 없습니다({sizeBytes}바이트가 최대치인 {maxSizeBytes}바이트를 초과합니다). 크기를 줄이고 다시 시도해 주세요.
+Common.UGCValidation.ErrorLabel.SurfaceAppearance_MissingSA,({MeshPartFullName})의 TextureID가 비어 있으며 하위 SurfaceAppearance 인스턴스가 없습니다. 그중 하나 이상을 정의해야 합니다.
+Common.UGCValidation.ErrorLabel.SurfaceAppearance_TextureAndSABothDefined,메시 파트({MeshPartFullName})에 대해 TextureID와 SurfaceAppearance가 모두 정의되어 있습니다. 게시 시 SurfaceAppearance만 사용됩니다.
+Common.UGCValidation.ErrorLabel.TexturePackInvalidURL,'{SurfaceAppearanceName}'에 유효하지 않은 URL이 포함된 'TexturePack' 속성이 있습니다. 해당 URL을 수정하세요.
+Common.UGCValidation.ErrorLabel.TexturePack_DownloadFailed,SurfaceAppearance '{SurfaceAppearanceName}'의 TexturePack을 다운로드하지 못했습니다.
+Common.UGCValidation.ErrorLabel.TexturePack_Mismatch,SurfaceAppearance '{SurfaceAppearanceName}'의 텍스처가 해당 TexturePack의 텍스처와 일치하지 않습니다. TexturePack을 수정하세요.
+Common.UGCValidation.ErrorLabel.TextureSize_FailedToLoad,'{FullName}'의 텍스처 데이터를 불러오지 못했습니다. 텍스처가 있는지 확인하고 다시 시도하세요.
+Common.UGCValidation.ErrorLabel.TextureSize_TooBig,'{FullName}'에서 찾은 텍스처 해상도 {Width}x{Height}픽셀이 '{FieldName}' 필드에 대해 지원되는 최대 크기인 {MaxSize}x{MaxSize}픽셀보다 큽니다.
+Common.UGCValidation.ErrorLabel.ThumbnailInvalidTarget,섬네일 생성에 대한 대상 애셋이 유효하지 않습니다. '{ExpectedTarget}'이(가) 되어야 합니다.
+Common.UGCValidation.ErrorLabel.ThumbnailOutsideView,'{InstancePath}' 애셋이 썸네일 카메라 뷰 밖에 위치해 있습니다. 카메라 뷰의 중앙에 에셋을 다시 배치하세요.
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"머리 메쉬 파트에 {jointName}의 얼굴 애니메이션이 있으며, 이는 FACS(표정 코딩 시스템)에서 사용할 수 없습니다. 이 조인트의 이름을 변경한 후 머리를 다시 가져오세요."
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,바디 파트 {partName}에는 R15plus 스키마에 포함되지 않는 가상 조인트 {jointName}에 대한 스킨이 적용되어 있습니다.
+Common.UGCValidation.ErrorLabel.UnsupportedCreatorType,"지원되지 않는 크리에이터 유형입니다. 크리에이터 유형: {CreatorType}, 크리에이터 ID: {CreatorId}."
+Common.UGCValidation.ErrorLabel.VertexColors_NotOpaque,메시 모델 '{MeshName}'에서 유효하지 않은 버텍스 색상이 발견되었습니다. 색상 맵을 모두 흰색({TransparencyNote})으로 편집한 후 다시 시도해야 합니다.
+Common.UGCValidation.ErrorLabel.VerticesNotCoincident_TooManySimilar,{cageName} 에는 서로 너무 가까운 버텍스가 {percentage}%개 있습니다. 버텍스 중 최대 {threshold}%가 서로 겹치거나 가까워지도록 편집하세요.
+Common.UGCValidation.ErrorLabel.WrapTexture_FailedToLoadCage,{instanceName}의 ReferenceCageContent를 불러오지 못했습니다.
+Common.UGCValidation.ErrorLabel.WrapTexture_FailedToLoadUV,'{instanceName}'에 대한 UV를 불러오지 못했습니다. UV 맵이 있는지 확인하고 다시 시도하세요.
+Common.UGCValidation.ErrorLabel.WrapTexture_InvalidMaxBound,{instanceName}.UVMaxBound [{actual}]가 필요한 UVMaxBound [{expected}]와 일치하지 않습니다.
+Common.UGCValidation.ErrorLabel.WrapTexture_InvalidMinBound,{instanceName}.UVMinBound [{actual}]가 필요한 UVMinBound [{expected}]와 일치하지 않습니다.
+Common.UGCValidation.ErrorLabel.WrapTexture_InvalidUV,'{instanceName}'의 케이지에서 유효하지 않은 UV 값이 발견되었습니다. 문제를 해결하려면 UV 맵을 편집해야 합니다.
+Common.UGCValidation.ErrorLabel.WrapTexture_NoCage,{instanceName}에 대한 ReferenceCageContent가 제공되지 않았습니다.
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,설정으로 이동
@@ -649,11 +760,6 @@ CoreScripts.CommercePurchasePrompt.ErrorPrompt.Title.DeviceNotSupported,지원�
 CoreScripts.CommercePurchasePrompt.ProductNotAvailable,제품 이용 불가
 CoreScripts.CommercePurchasePrompt.SuccessToast.GrantPending,아바타에 아이템을 전달하는 데 시간이 걸립니다. 곧 완료됩니다.
 CoreScripts.CommercePurchasePrompt.SuccessToast.Granted,아바타에 아이템 전달 완료!
-CoreScripts.EmoteThumbnailEditor.Action.Cancel,
-CoreScripts.EmoteThumbnailEditor.Action.Update,업데이트
-CoreScripts.EmoteThumbnailEditor.Heading.EditThumbnail,섬네일 편집
-CoreScripts.EmoteThumbnailEditor.Label.Rotation,회전
-CoreScripts.EmoteThumbnailEditor.Label.Time,시간
 CoreScripts.FTUX.Description.WhiteMenuPlaytestMode,흰색 Roblox 메뉴는 플레이테스트 중임을 나타냅니다. 항상 Roblox 커뮤니티 규정을 준수하세요.
 CoreScripts.FTUX.Description.WhiteMenuPreviewing,흰색 Roblox 메뉴는 이 게임이 모두에게 공개되기 전에 미리 플레이하고 있음을 의미합니다.
 CoreScripts.FTUX.Heading.CheckOutRobloxConnect,신규: Roblox Connect를 이용해 보세요!
@@ -846,7 +952,7 @@ CoreScripts.InGameMenu.Controls.ResetCameraLabel,카메라 이동 / 재설정
 CoreScripts.InGameMenu.Controls.RightArrow,오른쪽 화살표
 CoreScripts.InGameMenu.Controls.RightMouseButton,마우스 오른쪽 버튼
 CoreScripts.InGameMenu.Controls.RobloxMenu,Roblox 메뉴
-CoreScripts.InGameMenu.Controls.RotateCamera,
+CoreScripts.InGameMenu.Controls.RotateCamera,회전
 CoreScripts.InGameMenu.Controls.RotateCameraGamepad,카메라 회전
 CoreScripts.InGameMenu.Controls.Screenshot,스크린샷
 CoreScripts.InGameMenu.Controls.SelectItemLabel,아이템 선택
@@ -966,6 +1072,7 @@ CoreScripts.InGameMenu.Ok,
 CoreScripts.InGameMenu.PageTitle.Controls,컨트롤...
 CoreScripts.InGameMenu.PageTitle.GameSettings,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,친구 초대
+CoreScripts.InGameMenu.PageTitle.JoinOrInvite,참가 또는 초대
 CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends,친구들에게 합류하거나 친구 초대
 CoreScripts.InGameMenu.PageTitle.Players,회원
 CoreScripts.InGameMenu.PageTitle.Report,신고
@@ -1183,6 +1290,7 @@ CoreScripts.TextChat.InputBar.Hint.GamepadConnectedConfirm,
 CoreScripts.TextChat.InputBar.Hint.MouseKeyboard,여기를 클릭하거나 {KEY} 키를 누른 후 채팅을 시작하세요
 CoreScripts.TextChat.InputBar.Hint.PrivacySettingsDisabled,채팅 설정으로 인해 메시지를 보내고 받을 수 없습니다.
 CoreScripts.TextChat.InputBar.Hint.Touch,여기를 클릭한 후 내용을 입력하세요
+CoreScripts.TextChat.MessageStatus.Warning.DictationRateLimited,다음 메시지를 보내기 전에 잠시 기다리세요. 음성 입력이 일시 중지되었습니다.
 CoreScripts.TextChat.MessageStatus.Warning.Floodchecked,잠시 기다린 후 또 다른 메시지를 보낼 수 있습니다.
 CoreScripts.TextChat.MessageStatus.Warning.InvalidPrivacySettings,
 CoreScripts.TextChat.MessageStatus.Warning.MessageTooLong,메시지 길이 한도를 초과했습니다.
@@ -1429,6 +1537,7 @@ Feature.Avatar.Action.Rename,이름 변경
 Feature.Avatar.Action.RenameSet,세트 이름 변경
 Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,마지막으로 저장한 아바타 복원
+Feature.Avatar.Action.Retry,
 Feature.Avatar.Action.Revert,되돌리기
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,
@@ -1449,7 +1558,7 @@ Feature.Avatar.Action.TryOn,장착해 보기
 Feature.Avatar.Action.Unequip,장착 해제
 Feature.Avatar.Action.Unselect,선택 해제
 Feature.Avatar.Action.UnslotEmote,슬롯에서 감정 표현 제거
-Feature.Avatar.Action.Update,
+Feature.Avatar.Action.Update,업데이트
 Feature.Avatar.Action.UpdateExistingCharacter,기존 캐릭터 업데이트
 Feature.Avatar.Action.UpdateExistingMakeupLook,기존 룩 업데이트
 Feature.Avatar.Action.UpdateMakeupLook,룩 업데이트
@@ -1493,7 +1602,7 @@ Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,
 Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,배경 {count}개 남음
 Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,
 Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,시간
 Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,분
 Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,재설정까지 남은 시간:
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,배경을 설명해 주세요...
@@ -1642,6 +1751,7 @@ Feature.Avatar.Label.FaceMakeup,
 Feature.Avatar.Label.FacialAnimation,얼굴 애니메이션
 Feature.Avatar.Label.Fall,낙하
 Feature.Avatar.Label.FallAnimations,낙하 애니메이션
+Feature.Avatar.Label.FromMarketplace,마켓플레이스에서
 Feature.Avatar.Label.Front,전면
 Feature.Avatar.Label.FullBody,전신
 Feature.Avatar.Label.FullMasks,전면 마스크
@@ -1699,6 +1809,7 @@ Feature.Avatar.Label.Name,
 Feature.Avatar.Label.Neck,
 Feature.Avatar.Label.Newest,최신
 Feature.Avatar.Label.NoExpiredItems,만료된 {itemType} 없음
+Feature.Avatar.Label.NoInventorySearchResults,'{query}'과(와) 일치하는 아이템이 없습니다.
 Feature.Avatar.Label.NoItems,{itemType} 없음
 Feature.Avatar.Label.NoLongerAvailableInCollection,이 컬렉션에서 더 이상 사용할 수 없게 됩니다
 Feature.Avatar.Label.NoSets,아직 세트 없음
@@ -1895,6 +2006,7 @@ Feature.Avatar.Message.UnknownErrorCreatingOutfit,알 수 없는 오류가 발�
 Feature.Avatar.Message.UpdateOutfitSuccess,업데이트 완료!
 Feature.Avatar.Message.UpdateRequired,업데이트가 필요합니다. 이 아이템을 확인하려면 Roblox를 최신 버전으로 업데이트하세요.
 Feature.Avatar.Placeholder.NameYourAvatar,아바타 이름을 지으세요
+Feature.Avatar.Placeholder.SearchInventory,인벤토리 검색
 Feature.Avatar.Placeholder.WriteAvatarCaption,아바타 캡션을 작성하세요(선택 사항)
 Feature.Avatar.RevokedItems.BodyText,"{category} 아이템 ""{item}""이(가) 이 저장된 아바타에서 제거되었으므로, 지불한 기본가를 환불해 드리겠습니다.{lineBreak}자세한 내용은 수신함을 확인하세요."
 Feature.Avatar.RevokedItems.BodyTextMultiple,"다음 아이템이 저장된 아바타에서 제거되었으므로, 지불한 기본가를 환불해 드리겠습니다.{lineBreak}{items}{lineBreak}자세한 내용은 받은 수신함을 확인하세요."
@@ -1985,7 +2097,6 @@ Feature.AvatarSwitcher.Message.SwitchingDeferred,다음 리스폰 또는 체험 
 Feature.AvatarSwitcher.Message.UnknownSupport,아바타를 변경할 수 있지만 이 체험에서는 올바르게 표시되지 않을 수 있습니다.
 Feature.AvatarSwitcher.Message.Unsupported,이 체험은 커스텀 아바타를 사용하며 Roblox 아바타를 지원하지 않습니다.
 Feature.AvatarWorkshop.Action.TryAgain,
-Feature.AvatarWorkshop.Heading.AvatarWorkshop,아바타 워크숍
 Feature.AvatarWorkshop.Message.LoadItemsError,아이템을 불러오던 중 문제가 발생했습니다.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,아이템을 더 불러올 수 없습니다.
 Feature.AvatarWorkshop.Message.NoItemsOwned,아직 여기에 보유한 아이템이 없습니다.
@@ -2020,6 +2131,9 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,텍스트 복사
 Feature.Build.Action.Create,
 Feature.Build.Action.CreateDeveloperProduct,
+Feature.Build.Action.CreateMonetizationDeveloperProduct,개발자 상품 만들기
+Feature.Build.Action.CreateMonetizationPass,패스 만들기
+Feature.Build.Action.CreateMonetizationSubscription,구독 만들기
 Feature.Build.Action.CreateNewGame,새 게임 만들기
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
@@ -2131,6 +2245,9 @@ Feature.Build.Analytics.Title.TopDropOffStep,최대 이탈률
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,방문 수
 Feature.Build.Content.NewGame,새 게임
+Feature.Build.CreateDeveloperProductDraft,내 게임을 위한 개발자 상품을 만드는 걸 도와줘.
+Feature.Build.CreatePassDraft,내 게임을 위한 패스를 만드는 걸 도와줘.
+Feature.Build.CreateSubscriptionDraft,내 게임을 위한 구독을 만드는 걸 도와줘.
 Feature.Build.Description.ActivateDeveloperProduct,개발자 상품 {PRODUCT_ID}을(를) 판매하세요.
 Feature.Build.Description.ActivateGamePass,게임 패스 {PRODUCT_ID}을(를) 판매하세요.
 Feature.Build.Description.ActivateSubscription,구독({PRODUCT_ID})을 활성화하세요.
@@ -2298,6 +2415,7 @@ Feature.Build.Label.ManagedPricingMixed,현재 상품 전체에 혼합
 Feature.Build.Label.MaximizeForGamePlays,게임 플레이 횟수 극대화
 Feature.Build.Label.ModelUnavailable,모델 이용 불가
 Feature.Build.Label.Models3D,3D 모델
+Feature.Build.Label.MonetizationCreateTitle,{NAME} - {PRICE} Robux
 Feature.Build.Label.MyGames,내 게임
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,한도 없음
@@ -2824,6 +2942,7 @@ Feature.Catalog.Label.FullBody,
 Feature.Catalog.Label.Gear,
 Feature.Catalog.Label.Get,획득
 Feature.Catalog.Label.GetPremiumAndPrice,Premium 가입 시 적용되는 할인 가격:
+Feature.Catalog.Label.Glowing,빛남
 Feature.Catalog.Label.HD,HD
 Feature.Catalog.Label.Hair,
 Feature.Catalog.Label.HeadShape,
@@ -2924,6 +3043,7 @@ Feature.Catalog.Label.SerialNumberColon,일련 번호:
 Feature.Catalog.Label.ShareToMoments,모멘트에 공유
 Feature.Catalog.Label.ShoulderAccessories,어깨 장신구
 Feature.Catalog.Label.SoldOut,
+Feature.Catalog.Label.SpecialFeatures,특별 기능
 Feature.Catalog.Label.SupportsHeadShapes,머리 모양 지원
 Feature.Catalog.Label.TakeOffResaleConfirmation,아이템 재판매를 정말 중지할까요?
 Feature.Catalog.Label.TimedOptions,기간 한정 옵션
@@ -3043,6 +3163,7 @@ Feature.Chat.Action.Delete,
 Feature.Chat.Action.Edit,
 Feature.Chat.Action.GroupOSADoNotJoin,거절하기
 Feature.Chat.Action.GroupOSAJoin,참가하기
+Feature.Chat.Action.JumpToLatestMessages,최신 메시지로 이동
 Feature.Chat.Action.LearnMore,자세한 정보
 Feature.Chat.Action.Leave,
 Feature.Chat.Action.MuteVoice,
@@ -3336,8 +3457,10 @@ Feature.FaceChat.Subtitle.VideoPerformancePromptDisable,카메라를 끄면 체�
 Feature.FaceChat.Subtitle.VideoUnsupported,Roblox에서 카메라로 아바타를 애니메이션화할 수 없습니다.
 Feature.Favorites.Label.Favorite,
 Feature.FlyoutSidePanel.Action.ContinuePlaying,
+Feature.FlyoutSidePanel.Description.SwitchAccountsHere,이제 여기에서 계정을 전환할 수 있습니다.
 Feature.FlyoutSidePanel.Label.TooltipBody,"프로필, 콘텐츠 및 설정이 새 위치로 옮겨졌습니다."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> 옮겨짐
+Feature.FlyoutSidePanel.Title.AccountSwitcherMoved,계정 전환기 위치 변경됨
 Feature.Friends.Action.AcceptFriend,
 Feature.Friends.Action.AccountDeleted,계정이 삭제됨
 Feature.Friends.Action.Add,
@@ -3717,13 +3840,16 @@ Feature.InExperienceShop.Description.GamePassTrialNotEnabledBody,현재 이 패�
 Feature.InExperienceShop.Description.GamePassTrialNotEnabledTitle,이용 가능한 무료 체험 없음
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,Robux를 구매하면 중재 조항 및 취소 정책을 비롯한 {termsLinkStart}이용 약관{termsLinkEnd}에 동의하는 것으로 간주됩니다.
 Feature.InExperienceShop.GamePass,
+Feature.InExperienceShop.GenericTransactionErrorBody,
+Feature.InExperienceShop.GenericTransactionErrorTitle,오류가 발생했습니다
 Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,보너스 아이템
+Feature.InExperienceShop.Label.BuyGamePass,게임 패스 구매하기
 Feature.InExperienceShop.Label.BuyNow,지금 구매
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining} 후 종료
 Feature.InExperienceShop.Label.FreeTrial,무료 체험
-Feature.InExperienceShop.Label.HaveTrial,무료 체험을 이용하고 계십니다
+Feature.InExperienceShop.Label.HaveTrial,회원님을 위한 무료 체험
 Feature.InExperienceShop.Label.NoDescription,설명 없음
 Feature.InExperienceShop.Label.OfferEndTime,{offer} {timeRemaining} 후 종료
 Feature.InExperienceShop.Label.PreviewBanner,Roblox Studio 내 회원님의 상점 미리 보기입니다. 플레이어에게는 이 미리 보기가 표시되지 않습니다.
@@ -3736,10 +3862,9 @@ Feature.InExperienceShop.Label.Timer.Minute.Singular,
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number}초
 Feature.InExperienceShop.Label.Timer.Second.Singular,1초
 Feature.InExperienceShop.Label.Trial,
-Feature.InExperienceShop.Label.Trialed,무료 체험 완료
-Feature.InExperienceShop.Label.TryNow,지금 시도하기
+Feature.InExperienceShop.Label.TryNow,무료 체험하기
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,{ROBUX_AMOUNT} Robux를 구매하셨습니다.
-Feature.InExperienceShop.Tooltip.RecentlyRedeemed,무료 체험이 마음에 드셨나요?
+Feature.InExperienceShop.Tooltip.RecentlyRedeemed,체험은 즐거우셨나요?
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,이 아이템을 인벤토리에서 영구적으로 삭제할까요? 마음이 바뀐다면 해당 아이템을 체험에서 다시 획득해야 합니다.
 Feature.Item.Label.DeleteItemUndercase,아이템 삭제
 Feature.Landing.Label.PoweredBy,제공:
@@ -3756,6 +3881,8 @@ Feature.Moments.Action.Analytics,애널리틱스
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
+Feature.Moments.Action.CommentSeeOriginal,원본 보기
+Feature.Moments.Action.CommentSeeTranslation,번역 보기
 Feature.Moments.Action.CommentShowLess,
 Feature.Moments.Action.CommentShowMore,
 Feature.Moments.Action.Continue,
@@ -3795,8 +3922,8 @@ Feature.Moments.Body.EDPMomentIPReportInstructions,이 모멘트에서 지식재
 Feature.Moments.Description.CommunityStandards,허용되는 표현과 금지되는 표현에 대한 자세한 내용은 커뮤니티 규정을 확인하세요.
 Feature.Moments.Description.EmptyCapturesLibrary,내 캡처가 표시되는 곳입니다.
 Feature.Moments.Description.FollowingCaughtUpBody,이 피드의 새로운 모멘트를 모두 시청하셨습니다. 더 많은 내용을 보려면 피드를 전환하세요.
-Feature.Moments.Description.FollowingEmptyBodyRecommended,몇몇 크리에이터를 팔로우한 후 즐겨찾기에서 모멘트를 확인해 보세요. 추천 콘텐츠에서 몇 가지를 찾아보세요.
-Feature.Moments.Description.FollowingEmptyBodyTrending,몇몇 크리에이터를 팔로우한 후 즐겨찾기에서 모멘트를 확인해 보세요. 인기 콘텐츠에서 몇 가지를 찾아보세요.
+Feature.Moments.Description.FollowingEmptyBodyRecommended,여기에서 팔로우하는 크리에이터의 모멘트를 확인할 수 있습니다.
+Feature.Moments.Description.FollowingEmptyBodyTrending,
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI가 생성했습니다. 게시하기 전에 검토하세요. 게시된 내용에 대한 책임은 사용자에게 있습니다.
 Feature.Moments.Description.HowToCaptureStep1,캡처가 활성화된 체험에 참가해서 햄버거 메뉴를 선택합니다.
 Feature.Moments.Description.HowToCaptureStep2,캡처 제어를 활성화합니다.
@@ -3859,7 +3986,7 @@ Feature.Moments.Label.FeedRecommended,
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.FirstCommentInvite,아직 코멘트가 없습니다. 가장 먼저 코멘트를 남겨 보세요!
 Feature.Moments.Label.FollowingCaughtUpTitle,지금은 모두 확인했습니다
-Feature.Moments.Label.FollowingEmptyTitle,크리에이터를 팔로우하여 해당 크리에이터의 모멘트를 확인하세요
+Feature.Moments.Label.FollowingEmptyTitle,크리에이터를 팔로우하여 여기에서 해당 크리에이터의 모멘트를 확인하세요
 Feature.Moments.Label.GameJoinConversion,게임 참가 전환
 Feature.Moments.Label.HowToUseCaptureTitle,캡처 사용 방법
 Feature.Moments.Label.LinkCopied,링크 복사됨
@@ -4057,12 +4184,14 @@ Feature.PrivateServers.Label.PrivateServerLink,비공개 서버 링크
 Feature.PrivateServers.Label.SearchPeople,회원 검색
 Feature.PrivateServers.Label.ServerName,서버 이름:
 Feature.PrivateServers.Label.WhoCanJoin,참여할 수 있는 사람
+Feature.PrivateServers.Label.YourPrivateServerIsReadyToJoin,비공개 서버에 참가할 준비가 되었습니다
 Feature.Profile.Action.AboutThisProfile,프로필 정보
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
 Feature.Profile.Action.Add,
 Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,프로필 링크 복사
+Feature.Profile.Action.CreateInBuild,빌드에서 만들기
 Feature.Profile.Action.EditAppearance,모습 편집
 Feature.Profile.Action.EditAvatar,아바타 수정
 Feature.Profile.Action.EditBackground,배경 편집
@@ -4135,6 +4264,8 @@ Feature.Profile.Label.DisplayNameFailed,표시 이름을 저장할 수 없습니
 Feature.Profile.Label.DisplayNameModalCaption,표시 이름은 7일에 한 번만 변경할 수 있습니다.
 Feature.Profile.Label.DisplayNameTooShort,표시 이름의 길이는 최소 3자 이상이어야 합니다.
 Feature.Profile.Label.EditBackground,
+Feature.Profile.Label.IsMakingGameIn,님이 다음에서 게임을 만들고 있습니다:
+Feature.Profile.Label.IsMakingGameInBuild,위 사용자가 빌드에서 게임을 만드는 중입니다.
 Feature.Profile.Label.NoBioYet,아직 소개가 없습니다
 Feature.Profile.Label.NoPreviousName,이전 이름 없음
 Feature.Profile.Label.NoSocialLink,아직 소셜 링크 없음
@@ -4324,7 +4455,7 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,{periodIndex}{periodT
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,'계속하기'를 클릭하면 {linkStart}Roblox 구독 약관{linkEnd}에 동의하는 것으로 간주됩니다.
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"'무료 체험'을 클릭하면 {linkStart}Roblox 구독 약관{linkEnd}에 동의하는 것으로 간주됩니다. 무료 체험 기간은 1개월 후 종료되며, 매월 자동으로 요금이 청구됩니다. 언제든지 구독을 취소하실 수 있습니다."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"'무료 체험'을 클릭하면 {linkStart}Roblox 구독 약관{linkEnd}에 동의하는 것으로 간주됩니다. 무료 체험 기간은 {trialDuration}{trialPeriodLabel} 후 종료되며, {billingPeriodLabel}마다 자동으로 요금이 청구됩니다. 구독은 언제든지 취소하실 수 있습니다."
-Feature.RobloxSubscription.Label.FreeTrialText,무료 체험하기
+Feature.RobloxSubscription.Label.FreeTrialText,
 Feature.RobloxSubscription.Label.New,
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,{boldStart}1개월 무료 이용{boldEnd} 후 {price}/{periodType}
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,{boldStart}{trialDuration}{trialPeriodLabel} 무료 이용{boldEnd} 후 {price}/{periodType}
@@ -4333,7 +4464,7 @@ Feature.RobloxSubscription.Label.months,
 Feature.RobloxSubscription.Message.AlreadySubscribed,이미 Plus를 이용하고 있습니다. 이 링크는 신규 회원을 위한 것입니다. 내 링크를 공유하여 친구를 초대하고 보상을 받으세요.
 Feature.RobloxSubscription.Title.AgeCheckTrial,Plus 1주일 무료 구독하기
 Feature.RobloxSubscription.Title.AlreadySubscribed,좋은 소식
-Feature.RobloxSubscription.Title.GenericError,오류가 발생했습니다
+Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Roblox Plus 구독하기
 Feature.RobloxSubscription.Title.UnsupportedPlatform,여기에서는 Roblox Plus를 이용할 수 없습니다
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,다른 사람보다 먼저 이벤트에 참가할 수 있습니다.
@@ -4889,6 +5020,8 @@ Features.Transfers.RobuxTransfer.Action.Send,
 Features.Transfers.RobuxTransfer.Action.TryAgain,
 Features.Transfers.RobuxTransfer.Disclaimer.AgeEstimationTransfer,Robux를 보내려면 나이 확인 또는 보호자 동의가 필요합니다. Robux는 한 번 보내면 취소할 수 없습니다.
 Features.Transfers.RobuxTransfer.Error.ReceiverNotAllowed,현재 @{username} 님은 Robux를 받을 수 없습니다.
+Features.Transfers.RobuxTransfer.FreeTransfersRemaining,남은 무료 전송 횟수는 {numFreeTransfersRemaining}회입니다. Robux는 수수료 없이 즉시 전송됩니다.
+Features.Transfers.RobuxTransfer.FreeTransfersRemainingSingular,남은 무료 전송 횟수는 1회입니다. Robux는 수수료 없이 즉시 전송됩니다.
 Features.Transfers.RobuxTransfer.Heading.SendRobux,Robux 보내기
 Features.Transfers.RobuxTransfer.Label.JoinedInYear,
 Features.Transfers.RobuxTransfer.Label.MutualConnection,서로 아는 친구 {amount}명
@@ -4899,6 +5032,7 @@ Features.Transfers.RobuxTransfer.Label.RecipientWillGetInApp,수신자는 {amoun
 Features.Transfers.RobuxTransfer.Label.RecipientWillGetInGame,수신자는 수수료를 제외하고 {amount} Robux를 받게 됩니다. 게임 내 이전에는 {commissionPercentage}%의 크리에이터 수수료가 포함됩니다.
 Features.Transfers.RobuxTransfer.SentInstantNoFee,Robux는 수수료 없이 즉시 보내집니다.
 Features.Transfers.RobuxTransfers.Label.SuccessNotification,{amount} Robux를 선물했습니다
+Features.Transfers.Title.FreeTransfersExhausted,무료 전송 횟수를 모두 사용하셨습니다.
 Features.Transfers.Title.UpsellSubscription,Roblox Plus 구독
 Features.Transfers.Transfer.Block.RequireReceiverFAE,Robux를 받을 수 있도록 나이를 확인하겠습니다.
 Features.Transfers.Transfer.Block.RequireSenderFAE,Robux를 보낼 수 있도록 나이를 확인하겠습니다.
@@ -5218,11 +5352,13 @@ InGame.HelpMenu.LeftArrow,
 InGame.HelpMenu.Resume,
 InGame.HelpMenu.RightArrow,
 InGame.HelpMenu.UpArrow,
+InGame.InspectMenu.Action.Buy,
 InGame.InspectMenu.Action.Cancel,
 InGame.InspectMenu.Action.Confirm,
 InGame.InspectMenu.Action.Favorite,
 InGame.InspectMenu.Action.FromResale,재판매 {PRICE}
 InGame.InspectMenu.Action.Go,
+InGame.InspectMenu.Action.Inspect,
 InGame.InspectMenu.Action.LimitReached,아이템 한도 도달
 InGame.InspectMenu.Action.SoldOut,
 InGame.InspectMenu.Action.TakeOff,
@@ -5318,7 +5454,9 @@ Notifications.SquadRegroupPrompt.ToastAction.Join,
 Notifications.SquadRegroupPrompt.ToastLabel.ContinuePlayingTogether,계속 함께 플레이하기
 Notifications.SquadRegroupPrompt.ToastLabel.JoinANewServer,
 Notifications.ToastNotifications.Label.LeaveExperienceConfirmation,이곳에서 정말 나간 후 다른 체험에 참가할까요?
+Notifications.ToastNotifications.Label.LeaveServerConfirmation,정말 여기를 나가서 다른 서버에 참가할까요?
 Notifications.ToastNotifications.Title.LeavingExperience,체험을 나가는 중
+Notifications.ToastNotifications.Title.LeavingServer,서버를 나가는 중
 PlayerFeedbacks.VoteForm.Message.Action.Report,
 PlayerFeedbacks.VoteForm.Message.MaxLengthCharacters,{count}자 미만이어야 합니다.
 PlayerFeedbacks.VoteForm.Message.MinLengthCharacters,{count}자를 넘어야 합니다.

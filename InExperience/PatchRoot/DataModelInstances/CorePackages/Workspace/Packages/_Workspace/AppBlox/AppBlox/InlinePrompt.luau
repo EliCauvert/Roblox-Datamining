@@ -5,7 +5,6 @@ local CryoModule = require(Parent.Cryo)
 local ResponsiveModule = require(Parent.Responsive)
 local FoundationModule = require(Parent.Foundation)
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local Core = UIBloxModule.Core
 local App = UIBloxModule.App
 local UseStyleFunction = Core.Style.useStyle
@@ -19,7 +18,7 @@ local GetIconSizeFunction = App.ImageSet.getIconSize
 local IconsNavigationClose = App.ImageSet.Images["icons/navigation/close"]
 
 return function(p1)
-	-- upvalues: FFlagSduiComponentsUseFoundationTokens (copy), UseTokensFunction (copy), UseStyleFunction (copy), GetIconSizeFunction (copy), IconSize (copy), ReactModule (copy), ResponsiveModule (copy), ImageSetLabel (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), Button (copy), CryoModule (copy), IconButton (copy), IconsNavigationClose (copy)
+	-- upvalues: FFlagSduiComponentsUseFoundationTokens (copy), UseTokensFunction (copy), UseStyleFunction (copy), GetIconSizeFunction (copy), IconSize (copy), ReactModule (copy), ResponsiveModule (copy), ImageSetLabel (copy), NormalizeFontFaceFunction (copy), Button (copy), CryoModule (copy), IconButton (copy), IconsNavigationClose (copy)
 	local UseTokensResult = if FFlagSduiComponentsUseFoundationTokens then UseTokensFunction() else UseStyleFunction().Tokens
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseBreakpointXOrSmallerResult = ResponsiveModule.useBreakpointXOrSmaller(ResponsiveModule.Keys.Small)
@@ -103,8 +102,7 @@ return function(p1)
 							TextColor3 = UseTokensResult.Color.Content.Emphasis.Color3,
 							TextTransparency = UseTokensResult.Color.Content.Emphasis.Transparency,
 							TextSize = UseTokensResult.Typography.CaptionLarge.FontSize,
-							Font = if FoundationFontFaceMigration then nil else UseTokensResult.Typography.CaptionLarge.Font,
-							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.CaptionLarge.Font) else nil,
+							FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.CaptionLarge.Font),
 							TextXAlignment = Enum.TextXAlignment.Left,
 							Size = UDim2.new(1, 0, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y,
@@ -120,8 +118,7 @@ return function(p1)
 							TextColor3 = UseTokensResult.Color.Content.Default.Color3,
 							TextTransparency = UseTokensResult.Color.Content.Default.Transparency,
 							TextSize = UseTokensResult.Typography.BodySmall.FontSize,
-							Font = if FoundationFontFaceMigration then nil else UseTokensResult.Typography.BodySmall.Font,
-							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.BodySmall.Font) else nil,
+							FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.BodySmall.Font),
 							TextXAlignment = Enum.TextXAlignment.Left,
 							Size = UDim2.new(1, 0, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y

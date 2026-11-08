@@ -5,29 +5,34 @@ local ShallowEqualFunction = require(Parent.Dash).shallowEqual
 local CommentCollectionTypesModule = require(Moments.Components.Comments.GetCommentCollectionStore.CommentCollectionTypes)
 local _ = require(script.Parent.CommentRowTypes)
 
-local function reusePreviousRows(List, List1)
+local function reusePreviousRows(PreviousRows, List)
 	-- upvalues: ShallowEqualFunction (copy)
 	local t = {}
 	
-	for _, value in List do
-		t[value.key] = value
+	for _, previousRow in PreviousRows do
+		t[previousRow.key] = previousRow
 	end
-	local v1 = #List1 == #List
-	for i, value1 in List1 do
-		local Entry = t[value1.key]
+	local v1 = #List == #PreviousRows
+	for i, value in List do
+		local Entry = t[value.key]
 		
-		if Entry ~= nil and ShallowEqualFunction(Entry, value1) then
-			List1[i] = Entry
+		if Entry ~= nil and ShallowEqualFunction(Entry, value) then
+			List[i] = Entry
 		end
-		v1 = v1 and List1[i] == List[i]
+		v1 = v1 and List[i] == PreviousRows[i]
 	end
-	return if v1 then List else List1
+	return if v1 then PreviousRows else List
 end
 
-return function(p1, Callback, p2, p3)
+return function(p1)
 	-- upvalues: CommentCollectionTypesModule (copy), reusePreviousRows (copy)
-	local Buffer = table.create(#p1.orderedCommentIds + (if p1.pendingSubmission == nil then 0 else 1))
-	local PendingSubmission = p1.pendingSubmission
+	local State = p1.state
+	local ResolveCommentFunction = p1.resolveComment
+	local PreviousRows = p1.previousRows
+	local ExpandedCommentIds = p1.expandedCommentIds
+	local Translation = p1.translation
+	local Buffer = table.create(#State.orderedCommentIds + (if State.pendingSubmission == nil then 0 else 1))
+	local PendingSubmission = State.pendingSubmission
 	
 	if PendingSubmission ~= nil then
 		table.insert(Buffer, {
@@ -37,18 +42,31 @@ return function(p1, Callback, p2, p3)
 			status = PendingSubmission.status
 		})
 	end
-	for _, orderedCommentId in p1.orderedCommentIds do
+	for _, orderedCommentId in State.orderedCommentIds do
 		if not CommentCollectionTypesModule.isPendingSentinel(orderedCommentId) then
-			local CallbackResult = Callback(orderedCommentId)
+			local ResolveCommentResult = ResolveCommentFunction(orderedCommentId)
+			local Text = if ResolveCommentResult == nil then "" else ResolveCommentResult.text or ""
+			local TranslatedText = if ResolveCommentResult == nil then nil else ResolveCommentResult.translatedText
+			local TranslationState: string? = nil
+			
+			if Translation ~= nil and TranslatedText ~= nil then
+				if Translation.toggledCommentIds[orderedCommentId] == true == Translation.showsTranslationByDefault then
+					TranslationState = "Original"
+				else
+					TranslationState = "Translated"
+					Text = TranslatedText
+				end
+			end
 			table.insert(Buffer, {
 				type = "comment",
 				key = `comment:{orderedCommentId}`,
 				commentId = orderedCommentId,
-				text = if CallbackResult == nil then "" else CallbackResult.text or "",
-				createdAt = if CallbackResult == nil then "" else CallbackResult.createdAt,
-				isExpanded = p3 ~= nil and p3[orderedCommentId] == true
+				text = Text,
+				createdAt = if ResolveCommentResult == nil then "" else ResolveCommentResult.createdAt,
+				isExpanded = ExpandedCommentIds ~= nil and ExpandedCommentIds[orderedCommentId] == true,
+				translationState = TranslationState
 			})
 		end
 	end
-	return if p2 == nil then Buffer else reusePreviousRows(p2, Buffer)
+	return if PreviousRows == nil then Buffer else reusePreviousRows(PreviousRows, Buffer)
 end

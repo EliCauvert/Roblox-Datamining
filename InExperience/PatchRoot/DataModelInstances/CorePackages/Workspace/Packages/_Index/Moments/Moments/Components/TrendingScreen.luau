@@ -266,8 +266,19 @@ return function(p1)
 			OpenOwnMomentsFunction()
 		end
 	end, { OpenOwnMomentsFunction, UseResult2 })
+	local UseResult7 = ReactModule.useCallback(function(Trending)
+		-- upvalues: MomentsFeedTypeModule (upval), UseResult5 (copy), UseFeedSelectionModuleResult (copy)
+		if Trending == MomentsFeedTypeModule.Trending then
+			UseResult5()
+			
+			return
+		end
+		if UseFeedSelectionModuleResult ~= nil then
+			UseFeedSelectionModuleResult.select(Trending)
+		end
+	end, { UseResult5, UseFeedSelectionModuleResult })
 	local UseMemoResult31 = ReactModule.useMemo(function()
-		-- upvalues: ReactModule (upval), TopBarModule (upval), UseStateResult (copy), UseFeedPlaybackActiveModuleResult (copy), FFlagMomentsCreationFeatureGate (upval), IsCreationEnabled (copy), PlatformIntegrationEnabled (copy), UseResult3 (copy), UseResult4 (copy), UseResult5 (copy), UseResult6 (copy), UseFeedSelectionModuleResult (copy)
+		-- upvalues: ReactModule (upval), TopBarModule (upval), UseStateResult (copy), UseFeedPlaybackActiveModuleResult (copy), FFlagMomentsCreationFeatureGate (upval), IsCreationEnabled (copy), PlatformIntegrationEnabled (copy), UseResult3 (copy), UseResult4 (copy), UseResult5 (copy), UseResult6 (copy), UseFeedSelectionModuleResult (copy), UseResult7 (copy)
 		return ReactModule.createElement(TopBarModule, {
 			isBaseScreen = true,
 			showTopScrim = true,
@@ -278,13 +289,13 @@ return function(p1)
 			onNavigateToTrending = UseResult5,
 			onNavigateToMyMoments = UseResult6,
 			selectedFeedType = if UseFeedSelectionModuleResult == nil then nil else UseFeedSelectionModuleResult.selected,
-			onFeedTypeSelected = if UseFeedSelectionModuleResult == nil then nil else UseFeedSelectionModuleResult.select
+			onFeedTypeSelected = if UseFeedSelectionModuleResult == nil then nil else UseResult7
 		})
 	end, {
 		UseStateResult, UseFeedPlaybackActiveModuleResult,
 		if FFlagMomentsCreationFeatureGate then IsCreationEnabled else false,
 		PlatformIntegrationEnabled, UseResult3, UseResult4, UseResult5, UseResult6,
-		UseFeedSelectionModuleResult
+		UseResult7, UseFeedSelectionModuleResult
 	})
 	local YOffset = 0
 	

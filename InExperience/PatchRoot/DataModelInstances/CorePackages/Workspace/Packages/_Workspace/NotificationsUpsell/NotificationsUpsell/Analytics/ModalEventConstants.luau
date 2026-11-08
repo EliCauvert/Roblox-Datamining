@@ -8,16 +8,19 @@
 	BackendFailed = "BackendFailed",
 	RequestFailed = "RequestFailed",
 	RequestSuccess = "RequestSuccess",
+	SettingsOpened = "settingsOpened",
 	Cancel = "cancel",
 	Confirm = "confirm",
 	ModalContext = "uenUpsellModal",
 	ModalContextPushEduUpsell = "pushEduUpsell",
 	ModalContextSysUpsell = "pushSysUpsell",
+	ModalContextSettingsUpsell = "pushSettingsUpsell",
 	OptInEventName = "experienceNotificationClientPromptOptInEvent",
 	OptInPushEventName = "pushNotificationClientPromptOptInEvent",
 	OptInPushUpsellEventName = "pushUpsellNotificationClientEvent",
 	ActionType = "actionType",
 	Button = "btn",
 	UniverseId = "universeId",
-	EntryPoint = "entryPoint"
+	EntryPoint = "entryPoint",
+	SettingsResult = "settingsResult"
 }

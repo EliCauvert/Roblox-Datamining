@@ -13,7 +13,6 @@ local Icon = FoundationModule.Icon
 local IconSize = FoundationModule.Enums.IconSize
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local WithLocalizationModule = require(script.Parent.Parent.Localization.withLocalization)
 local SearchBar = Roact.PureComponent:extend("SearchBar")
 SearchBar.validateProps = T.interface({
@@ -109,39 +108,35 @@ function SearchBar.focus(p1)
 end
 
 function SearchBar.render(p1)
-	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), WithLocalizationModule (copy), Roact (copy), UserInputService (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Icon (copy), IconSize (copy), ImageSetLabel (copy), Images (copy), NormalizeFontFaceFunction (copy)
-	return WithFoundationOrUIBloxStyleFunction(function(p2)
-		-- upvalues: FoundationFontFaceMigration (upval)
+	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), WithLocalizationModule (copy), Roact (copy), UserInputService (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Icon (copy), IconSize (copy), ImageSetLabel (copy), Images (copy), NormalizeFontFaceFunction (copy)
+	return WithFoundationOrUIBloxStyleFunction(function(Tokens)
 		return {
-			Tokens = if FoundationFontFaceMigration then p2 else nil,
+			Tokens = Tokens,
 			Theme = {
 				TextEmphasis = {
-					Color = p2.Color.Content.Emphasis.Color3,
-					Transparency = p2.Color.Content.Emphasis.Transparency
+					Color = Tokens.Color.Content.Emphasis.Color3,
+					Transparency = Tokens.Color.Content.Emphasis.Transparency
 				},
 				TextDefault = {
-					Color = p2.Color.Content.Default.Color3,
-					Transparency = p2.Color.Content.Default.Transparency
+					Color = Tokens.Color.Content.Default.Color3,
+					Transparency = Tokens.Color.Content.Default.Transparency
 				}
 			},
 			Font = {
 				BaseSize = 1,
 				Body = {
-					Font = p2.Typography.BodyLarge.Font,
-					RelativeSize = p2.Typography.BodyLarge.FontSize
+					Font = Tokens.Typography.BodyLarge.Font,
+					RelativeSize = Tokens.Typography.BodyLarge.FontSize
 				}
 			}
 		}
 	end, function(p2)
-		-- upvalues: WithLocalizationModule (upval), p1 (copy), Roact (upval), UserInputService (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Icon (upval), IconSize (upval), ImageSetLabel (upval), Images (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+		-- upvalues: WithLocalizationModule (upval), p1 (copy), Roact (upval), UserInputService (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Icon (upval), IconSize (upval), ImageSetLabel (upval), Images (upval), NormalizeFontFaceFunction (upval)
 		return WithLocalizationModule({
 			search = "CoreScripts.InGameMenu.InviteFriends.Search",
 			cancel = "CoreScripts.InGameMenu.Cancel"
 		})(function(p3)
-			-- upvalues: p2 (copy), p1 (upval), Roact (upval), UserInputService (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Icon (upval), IconSize (upval), ImageSetLabel (upval), Images (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
-			local Body = p2.Font.Body
-			local Body1 = p2.Font.Body
-			
+			-- upvalues: p2 (copy), p1 (upval), Roact (upval), UserInputService (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Icon (upval), IconSize (upval), ImageSetLabel (upval), Images (upval), NormalizeFontFaceFunction (upval)
 			return Roact.createElement("CanvasGroup", {
 				BackgroundTransparency = 1,
 				GroupTransparency = 0.5,
@@ -196,11 +191,10 @@ function SearchBar.render(p1)
 							LayoutOrder = 2,
 							BackgroundTransparency = 1,
 							Size = UDim2.new(1, -28, 0, 20),
-							Font = if FoundationFontFaceMigration then nil else Body1.Font,
-							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font) else nil,
+							FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font),
 							Text = p1.props.text or "",
 							TextInputType = if UserInputService:GetPlatform() == Enum.Platform.Android then Enum.TextInputType.PasswordShown else Enum.TextInputType.NoSuggestions,
-							TextSize = p2.Font.BaseSize * Body1.RelativeSize,
+							TextSize = p2.Font.BaseSize * p2.Font.Body.RelativeSize,
 							TextColor3 = p2.Theme.TextEmphasis.Color,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							PlaceholderText = p3.search,
@@ -219,9 +213,8 @@ function SearchBar.render(p1)
 					LayoutOrder = 2,
 					BackgroundTransparency = 1,
 					Size = UDim2.fromOffset(57, 20),
-					Font = if FoundationFontFaceMigration then nil else Body.Font,
-					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font) else nil,
-					TextSize = p2.Font.BaseSize * Body.RelativeSize,
+					FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font),
+					TextSize = p2.Font.BaseSize * p2.Font.Body.RelativeSize,
 					Text = p3.cancel,
 					TextColor3 = p2.Theme.TextEmphasis.Color,
 					[Roact.Event.Activated] = p1.searchCancel

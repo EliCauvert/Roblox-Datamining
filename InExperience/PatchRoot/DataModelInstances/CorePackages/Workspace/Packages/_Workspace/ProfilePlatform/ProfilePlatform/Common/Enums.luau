@@ -49,6 +49,7 @@ return {
 		ContactProfileHeader = "ContactProfileHeader",
 		ContactDescription = "ContactDescription",
 		CommunityLocked = "CommunityLocked",
+		CommunityDeactivated = "CommunityDeactivated",
 		ProfileBackground = "ProfileBackground",
 		Events = "Events",
 		CurrentlyPlaying = "CurrentlyPlaying",

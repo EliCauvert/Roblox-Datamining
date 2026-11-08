@@ -68,13 +68,13 @@ return function(Frame)
 	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: IsPicker (copy), IsSelected (copy), Frame (copy), InternalTesting (copy)
 		if IsPicker and IsSelected and not Frame.isDisabled and InternalTesting and InternalTesting.previewHash ~= nil and InternalTesting.previewHash ~= "" then
-			InternalTesting.onSaveSpec(nil)
+			InternalTesting.onSaveSpec(nil, InternalTesting.previewSpecName)
 		end
 	end, { IsPicker, IsSelected, Frame.isDisabled, InternalTesting })
-	local UseResult3 = ReactModule.useCallback(function(p1)
+	local UseResult3 = ReactModule.useCallback(function(p1, p2)
 		-- upvalues: IsSelected1 (copy), Frame (copy), InternalTesting (copy)
 		if IsSelected1 and not Frame.isDisabled and InternalTesting then
-			InternalTesting.onSaveSpec(p1)
+			InternalTesting.onSaveSpec(p1, p2)
 		end
 	end, { IsSelected1, Frame.isDisabled, InternalTesting })
 	local UseResult4 = ReactModule.useCallback(function()
@@ -157,6 +157,7 @@ return function(Frame)
 		internalTesting = if InternalTesting then {
 			isSelected = IsSelected,
 			previewHash = InternalTesting.previewHash,
+			previewSpecName = InternalTesting.previewSpecName,
 			onSelect = UseResult,
 			onSaveSpec = UseResult3,
 			onOpenSpec = UseResult1,

@@ -5,7 +5,6 @@ local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 local FoundationModule = require(Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseTextSizeOffsetFunction = require(Parent.UIBlox).Core.Style.useTextSizeOffset
 local GetGameTileMetadataFontModule = require(GameTile.Footer.getGameTileMetadataFont)
 
@@ -14,7 +13,7 @@ local function _(p1, p2)
 end
 
 return function(Frame: Frame)
-	-- upvalues: UseDesignTokensFunction (copy), UseTextSizeOffsetFunction (copy), UseTokensFunction (copy), GetGameTileMetadataFontModule (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseDesignTokensFunction (copy), UseTextSizeOffsetFunction (copy), UseTokensFunction (copy), GetGameTileMetadataFontModule (copy), ReactModule (copy), NormalizeFontFaceFunction (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local UseTextSizeOffsetResult = UseTextSizeOffsetFunction()
 	local UseTokensResult = UseTokensFunction()
@@ -38,8 +37,7 @@ return function(Frame: Frame)
 			Position = UDim2.new(0, 0, 0.5, 0),
 			AnchorPoint = Vector2.new(0, 0.5),
 			TextSize = GameTileMetadataFontModule.FontSize,
-			Font = if FoundationFontFaceMigration then nil else GameTileMetadataFontModule.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(GameTileMetadataFontModule.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(GameTileMetadataFontModule.Font),
 			TextTransparency = Default.Transparency,
 			TextColor3 = Default.Color3,
 			TextWrapped = Frame.TextWrapped or false,

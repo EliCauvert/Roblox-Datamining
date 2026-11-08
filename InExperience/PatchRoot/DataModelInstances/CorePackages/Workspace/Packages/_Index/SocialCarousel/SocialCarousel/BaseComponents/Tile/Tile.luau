@@ -1,9 +1,7 @@
-﻿local TextService = game:GetService("TextService")
-local SocialCarousel = script:FindFirstAncestor("SocialCarousel")
+﻿local SocialCarousel = script:FindFirstAncestor("SocialCarousel")
 local Parent = SocialCarousel.Parent
 local FoundationModule = require(Parent.Foundation)
 local GetTextSizeFunction = require(Parent.Style).GetTextSize
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local ReactModule = require(Parent.React)
 local Enums = FoundationModule.Enums
 local Image = FoundationModule.Image
@@ -22,15 +20,15 @@ local FFlagSocialCarouselRemoveStrokeForAddFriendsModule = require(SocialCarouse
 local FIntSocalCarouselMaxNewRequestsCountModule = require(SocialCarousel.Flags.FIntSocalCarouselMaxNewRequestsCount)
 
 return function(p1)
-	-- upvalues: ReactModule (copy), UseTokensFunction (copy), FFlagSocialCarouselShowLoadingSkeletonModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), View (copy), Image (copy), Enums (copy), Text (copy), StatusIndicator (copy), StatusIndicatorVariant (copy), FIntSocalCarouselMaxNewRequestsCountModule (copy), FFlagSocialCarouselUnselectableSkeletonModule (copy), Skeleton (copy), Radius (copy), FFlagSocialCarouselRemoveStrokeForAddFriendsModule (copy), Icon (copy), IconSize (copy)
+	-- upvalues: ReactModule (copy), UseTokensFunction (copy), FFlagSocialCarouselShowLoadingSkeletonModule (copy), GetTextSizeFunction (copy), View (copy), Image (copy), Enums (copy), Text (copy), StatusIndicator (copy), StatusIndicatorVariant (copy), FIntSocalCarouselMaxNewRequestsCountModule (copy), FFlagSocialCarouselUnselectableSkeletonModule (copy), Skeleton (copy), Radius (copy), FFlagSocialCarouselRemoveStrokeForAddFriendsModule (copy), Icon (copy), IconSize (copy)
 	local TileRef = p1.tileRef or ReactModule.useRef(nil)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local TitleSmall = UseTokensResult.Typography.TitleSmall
 	local IsLoading = FFlagSocialCarouselShowLoadingSkeletonModule and p1.isLoading
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: p1 (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), TitleSmall (copy), TextService (upval)
-		return if p1.title then if FoundationFontFaceMigration then GetTextSizeFunction(p1.title, TitleSmall.FontSize, TitleSmall.Font, Vector2.new(500, 500), { addTemporaryPadding = false }) else TextService:GetTextSize(p1.title, TitleSmall.FontSize, TitleSmall.Font, Vector2.new(500, 500)) else Vector2.new(0, 0)
+		-- upvalues: p1 (copy), GetTextSizeFunction (upval), TitleSmall (copy)
+		return if p1.title then GetTextSizeFunction(p1.title, TitleSmall.FontSize, TitleSmall.Font, Vector2.new(500, 500), { addTemporaryPadding = false }) else Vector2.new(0, 0)
 	end, { p1.title })
 	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), ReactModule (upval), View (upval), Image (upval)

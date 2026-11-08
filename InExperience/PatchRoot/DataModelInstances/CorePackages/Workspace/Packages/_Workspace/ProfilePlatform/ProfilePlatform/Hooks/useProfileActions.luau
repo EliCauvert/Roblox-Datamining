@@ -16,6 +16,8 @@ local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
 local UseAboutSectionsModule = require(ProfilePlatform.Hooks.useAboutSections)
 local UseActionsComponentRequestModule = require(ProfilePlatform.Hooks.useActionsComponentRequest)
 local UseProfileAnalyticsContextModule = require(ProfilePlatform.Contexts.useProfileAnalyticsContext)
+local UseProfileJsonModule = require(ProfilePlatform.Hooks.useProfileJson)
+local ViewerOwnsOpenCommunityModule = require(ProfilePlatform.Utils.viewerOwnsOpenCommunity)
 local EnumsModule = require(ProfilePlatform.Common.Enums)
 local UseProfileShareLinkFunction = ProfileShareLinksModule.Hooks.useProfileShareLink
 local UseShortUrlFunction = ProfileShareLinksModule.Hooks.useShortUrl
@@ -34,6 +36,7 @@ local FFlagProfilePlatformEnableTradeItemsModule = require(ProfilePlatform.Flags
 local FFlagProfilePlatformEnableEditAppearanceMenuModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableEditAppearanceMenu)
 local FFlagProfilePlatformEditBackgroundMenuItemModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEditBackgroundMenuItem)
 local FFlagProfilePlatformEnableEditLookModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableEditLook)
+local FFlagHideLeaveFromOpenCommunityOwnerModule = require(ProfilePlatform.Flags.FFlagHideLeaveFromOpenCommunityOwner)
 local FFlagJoinabilityCTARefactor = SharedFlagsModule.FFlagJoinabilityCTARefactor
 local FFlagJoinabilityCTAContextCopy = SharedFlagsModule.FFlagJoinabilityCTAContextCopy
 local ProfileActionsModule = require(ProfilePlatform.Components.CTARow.ProfileActions)
@@ -44,7 +47,7 @@ local Text = tostring(DateTime.now().UnixTimestampMillis)
 local config = { skipFetch = true }
 
 return function(ButtonSurface)
-	-- upvalues: UseLocalUserIdFunction (copy), UseDispatchFunction (copy), UseNavigationFunction (copy), UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseShortUrlFunction (copy), UseGetOrGenerateLinkUrlFunction (copy), UseEffectOnceFunction (copy), ReactModule (copy), Text (copy), TextKeysModule (copy), UseLocalizationFunction (copy), EnumsModule (copy), FFlagProfilePlatformAddTC (copy), FFlagProfilePlatformEnableEditAppearanceMenuModule (copy), FFlagProfilePlatformEditBackgroundMenuItemModule (copy), FFlagProfilePlatformEnableEditLookModule (copy), FFlagJoinabilityCTAContextCopy (copy), FFlagJoinabilityCTARefactor (copy), FFlagProfilePlatformNewProfileHeader (copy), FFlagEnablePlatformProfileContextualMenuOption (copy), FFlagProfilePlatformEnableCurrencyTransfer (copy), FFlagProfilePlatformEnableTradeItemsModule (copy), FFlagProfilePlatformEnableUserFollowModule (copy), FFlagProfilePlatformPresenceStoreMigrationModule (copy), UseGetPresenceByUserId (copy), config (copy), FFlagProfilePlatformPassPresenceToJoinUserInExperience (copy), UseSelectorFunction (copy), PresenceModule (copy), UseAboutSectionsModule (copy), FFlagProfileAboutDetailsUseSheet (copy), FFlagProfilePlatformRefreshActionsRespectPoliciesModule (copy), UseActionsComponentRequestModule (copy), UseJoinUserInExperienceFunction (copy), UseProfileShareLinkFunction (copy), Contexts (copy), ProfileActionsModule (copy)
+	-- upvalues: UseLocalUserIdFunction (copy), UseDispatchFunction (copy), UseNavigationFunction (copy), UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseShortUrlFunction (copy), UseGetOrGenerateLinkUrlFunction (copy), UseEffectOnceFunction (copy), ReactModule (copy), Text (copy), TextKeysModule (copy), UseLocalizationFunction (copy), EnumsModule (copy), FFlagProfilePlatformAddTC (copy), FFlagProfilePlatformEnableEditAppearanceMenuModule (copy), FFlagProfilePlatformEditBackgroundMenuItemModule (copy), FFlagProfilePlatformEnableEditLookModule (copy), FFlagJoinabilityCTAContextCopy (copy), FFlagJoinabilityCTARefactor (copy), FFlagProfilePlatformNewProfileHeader (copy), FFlagEnablePlatformProfileContextualMenuOption (copy), FFlagProfilePlatformEnableCurrencyTransfer (copy), FFlagProfilePlatformEnableTradeItemsModule (copy), FFlagProfilePlatformEnableUserFollowModule (copy), FFlagProfilePlatformPresenceStoreMigrationModule (copy), UseGetPresenceByUserId (copy), config (copy), FFlagProfilePlatformPassPresenceToJoinUserInExperience (copy), UseSelectorFunction (copy), PresenceModule (copy), UseAboutSectionsModule (copy), FFlagProfileAboutDetailsUseSheet (copy), FFlagProfilePlatformRefreshActionsRespectPoliciesModule (copy), UseActionsComponentRequestModule (copy), FFlagHideLeaveFromOpenCommunityOwnerModule (copy), UseProfileJsonModule (copy), ViewerOwnsOpenCommunityModule (copy), UseJoinUserInExperienceFunction (copy), UseProfileShareLinkFunction (copy), Contexts (copy), ProfileActionsModule (copy)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseNavigationResult = UseNavigationFunction()
@@ -152,6 +155,8 @@ return function(ButtonSurface)
 		ProfileName = if FFlagProfileAboutDetailsUseSheet then UseAboutSectionsModuleResult.profileName else nil
 	end
 	local UseActionsComponentRequestModuleResult = if FFlagProfilePlatformRefreshActionsRespectPoliciesModule then UseActionsComponentRequestModule() else nil
+	local UseProfileJsonModuleResult = if FFlagHideLeaveFromOpenCommunityOwnerModule then UseProfileJsonModule() else nil
+	local ViewerOwnsOpenCommunityModuleResult = if FFlagHideLeaveFromOpenCommunityOwnerModule and ProfileType == EnumsModule.ProfileTypes.Community then ViewerOwnsOpenCommunityModule(UseProfileJsonModuleResult, UseLocalUserIdResult) else false
 	local UseJoinUserInExperienceResult = UseJoinUserInExperienceFunction(ProfileId, {
 		isHomePageCarousel = UseProfileWrapperContextModuleResult.sourceInfo.source == EnumsModule.Sources.HomepageFriendsCarousel,
 		homepageCarouselAbsolutePosition = UseProfileWrapperContextModuleResult.sourceInfo.homepageCarouselAbsolutePosition,
@@ -179,7 +184,8 @@ return function(ButtonSurface)
 		PROFILE_SHARE_LINK_URL = UseMemoResult,
 		aboutSections = if FFlagProfilePlatformNewProfileHeader then AboutSections else nil,
 		aboutProfileName = if FFlagProfileAboutDetailsUseSheet then ProfileName else nil,
-		actionsComponentRequest = if FFlagProfilePlatformRefreshActionsRespectPoliciesModule then UseActionsComponentRequestModuleResult else nil
+		actionsComponentRequest = if FFlagProfilePlatformRefreshActionsRespectPoliciesModule then UseActionsComponentRequestModuleResult else nil,
+		viewerOwnsOpenCommunity = ViewerOwnsOpenCommunityModuleResult
 	}
 	
 	return (ReactModule.useMemo(function()
@@ -208,6 +214,7 @@ return function(ButtonSurface)
 		if FFlagProfilePlatformEnableEditAppearanceMenuModule then EditEmotes else nil,
 		if FFlagProfilePlatformEnableEditAppearanceMenuModule then SwitchAvatar else nil,
 		UseMemoResult, UseJoinUserInExperienceResult.isInExperience, config1,
-		if FFlagProfilePlatformRefreshActionsRespectPoliciesModule then UseActionsComponentRequestModuleResult else nil
+		if FFlagProfilePlatformRefreshActionsRespectPoliciesModule then UseActionsComponentRequestModuleResult else nil,
+		ViewerOwnsOpenCommunityModuleResult
 	}))
 end

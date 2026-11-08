@@ -4,9 +4,11 @@ local HttpService = game:GetService("HttpService")
 local MomentsCommonModule = require(Parent.MomentsCommon)
 local ReactModule = require(Parent.React)
 local RoactNavigationModule = require(Parent.RoactNavigation)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local RobloxAppEventsModule = require(Parent.RobloxAppEvents)
 local GetDeepLinkStoreModule = require(Moments.Stores.GetDeepLinkStore)
+local _ = require(Moments.Stores.GetDeepLinkStore.createDeepLinkStore)
 local CreateMomentsStoreModule = require(Moments.Stores.GetMomentsStore.createMomentsStore)
 local GetImmersiveChromeStoreModule = require(Moments.Stores.GetImmersiveChromeStore)
 local FFlagMomentsEmojiSetsApiModule = require(Moments.Flags.FFlagMomentsEmojiSetsApi)
@@ -30,7 +32,8 @@ local MomentsSurfaceLoadManager = MomentsCommonModule.Performance.MomentsSurface
 local UseMomentsGatingFunction = MomentsCommonModule.Hooks.useMomentsGating
 local CanRenderNativeMomentsFunction = MomentsCommonModule.canRenderNativeMoments
 local MomentsSessionHeartbeats = {}
-local FFlagMomentsAvatarLookTryOn = require(Parent.SharedFlags).FFlagMomentsAvatarLookTryOn
+local FFlagMomentsAvatarLookTryOn = SharedFlagsModule.FFlagMomentsAvatarLookTryOn
+local FFlagMomentsCommentDeepLinks = SharedFlagsModule.FFlagMomentsCommentDeepLinks
 local ShareLinkTargetIdType = require(Parent.MomentsTypes).Enums.ShareLinkTargetIdType
 local GetActiveRoutesFunction = require(Parent.Navigation).getActiveRoutes
 
@@ -124,8 +127,82 @@ local function getDeepLinkedMomentTargetIdTypeFromParams(Params)
 	return if PostId1 == nil then getTargetIdTypeFromLaunchData(Params.launchData) elseif Params.targetIdType == ShareLinkTargetIdType.FeedItemId then ShareLinkTargetIdType.FeedItemId else nil
 end
 
+local function getCommentsTargetFromTable(ExtraProps)
+	if type(ExtraProps) == "table" then
+		local CommentId = if type(ExtraProps.commentId) == "string" and ExtraProps.commentId ~= "" then ExtraProps.commentId else nil
+		
+		return if CommentId == nil and ExtraProps.openComments ~= true then nil else { commentId = CommentId }
+	else
+		return nil
+	end
+end
+
+local _ = function(p1)
+	-- upvalues: HttpService (copy), getCommentsTargetFromTable (copy)
+	if type(p1) == "string" and p1 ~= "" then
+		local Success, Result = pcall(function()
+			-- upvalues: HttpService (upval), p1 (copy)
+			return HttpService:JSONDecode(p1)
+		end)
+		
+		return if Success then getCommentsTargetFromTable(Result) else nil
+	else
+		return nil
+	end
+end
+
+local function getDeepLinkedCommentsTargetFromParams(Params)
+	-- upvalues: getCommentsTargetFromTable (copy), getMomentIdFromLaunchData (copy), HttpService (copy)
+	if type(Params) ~= "table" then
+		return nil
+	end
+	local ExtraProps = Params.extraProps
+	
+	if type(ExtraProps) == "table" then
+		local PostId = ExtraProps.postId
+		
+		if (if type(PostId) == "string" and PostId ~= "" then PostId elseif type(PostId) == "number" then tostring(PostId) else nil) ~= nil then
+			return (getCommentsTargetFromTable(ExtraProps))
+		elseif getMomentIdFromLaunchData(ExtraProps.launchData) ~= nil then
+			local LaunchData = ExtraProps.launchData
+			
+			if type(LaunchData) == "string" and LaunchData ~= "" then
+				local Success, Result = pcall(function()
+					-- upvalues: HttpService (upval), LaunchData (copy)
+					return HttpService:JSONDecode(LaunchData)
+				end)
+				
+				return if Success then getCommentsTargetFromTable(Result) else nil
+			else
+				return nil
+			end
+		end
+	end
+	local PostId = Params.postId
+	
+	if (if type(PostId) == "string" and PostId ~= "" then PostId elseif type(PostId) == "number" then tostring(PostId) else nil) ~= nil then
+		return (getCommentsTargetFromTable(Params))
+	end
+	local LaunchData1 = Params.launchData
+	
+	if type(LaunchData1) == "string" and LaunchData1 ~= "" then
+		local Success1, Result1 = pcall(function()
+			-- upvalues: HttpService (upval), LaunchData1 (copy)
+			return HttpService:JSONDecode(LaunchData1)
+		end)
+		
+		return if Success1 then getCommentsTargetFromTable(Result1) else nil
+	else
+		return nil
+	end
+end
+
+local _ = function(p1): string
+	return if p1 == nil then "" else `:comments:{p1.commentId or ""}`
+end
+
 local function getDeepLinkRequestFromNavigationParams(DangerouslyGetParentResult, p1)
-	-- upvalues: getDeepLinkedMomentIdFromParams (copy), getDeepLinkedMomentTargetIdTypeFromParams (copy)
+	-- upvalues: FFlagMomentsCommentDeepLinks (copy), getDeepLinkedMomentIdFromParams (copy), getDeepLinkedMomentTargetIdTypeFromParams (copy), getDeepLinkedCommentsTargetFromParams (copy)
 	if not DangerouslyGetParentResult or not DangerouslyGetParentResult.getParam then
 		return nil
 	end
@@ -133,7 +210,9 @@ local function getDeepLinkRequestFromNavigationParams(DangerouslyGetParentResult
 		extraProps = DangerouslyGetParentResult.getParam("extraProps"),
 		postId = DangerouslyGetParentResult.getParam("postId"),
 		targetIdType = DangerouslyGetParentResult.getParam("targetIdType"),
-		launchData = DangerouslyGetParentResult.getParam("launchData")
+		launchData = DangerouslyGetParentResult.getParam("launchData"),
+		commentId = if FFlagMomentsCommentDeepLinks then DangerouslyGetParentResult.getParam("commentId") else nil,
+		openComments = if FFlagMomentsCommentDeepLinks then DangerouslyGetParentResult.getParam("openComments") else nil
 	}
 	local DeepLinkedMomentIdFromParams = getDeepLinkedMomentIdFromParams(config)
 	
@@ -141,17 +220,19 @@ local function getDeepLinkRequestFromNavigationParams(DangerouslyGetParentResult
 		return nil
 	else
 		local DeepLinkedMomentTargetIdTypeFromParams = getDeepLinkedMomentTargetIdTypeFromParams(config)
+		local DeepLinkedCommentsTargetFromParams = if FFlagMomentsCommentDeepLinks then getDeepLinkedCommentsTargetFromParams(config) else nil
 		
 		return {
 			momentId = DeepLinkedMomentIdFromParams,
 			targetIdType = DeepLinkedMomentTargetIdTypeFromParams,
-			key = `{p1}:params:{tostring(config.extraProps)}:{tostring(config.postId)}:{tostring(config.launchData)}:{DeepLinkedMomentIdFromParams}:{tostring(DeepLinkedMomentTargetIdTypeFromParams)}`
+			commentsTarget = DeepLinkedCommentsTargetFromParams,
+			key = `{p1}:params:{tostring(config.extraProps)}:{tostring(config.postId)}:{tostring(config.launchData)}:{DeepLinkedMomentIdFromParams}:{tostring(DeepLinkedMomentTargetIdTypeFromParams)}{if DeepLinkedCommentsTargetFromParams == nil then "" else `:comments:{DeepLinkedCommentsTargetFromParams.commentId or ""}`}`
 		}
 	end
 end
 
-local function getDeepLinkRequestFromNavigationState(State, p1)
-	-- upvalues: GetActiveRoutesFunction (copy), getDeepLinkedMomentIdFromParams (copy), getDeepLinkedMomentTargetIdTypeFromParams (copy)
+local function getDeepLinkRequestFromNavigationState(State, p2)
+	-- upvalues: GetActiveRoutesFunction (copy), getDeepLinkedMomentIdFromParams (copy), getDeepLinkedMomentTargetIdTypeFromParams (copy), FFlagMomentsCommentDeepLinks (copy), getDeepLinkedCommentsTargetFromParams (copy)
 	local ActiveRoutes = GetActiveRoutesFunction(State)
 	local ActiveRoute = nil
 	local DeepLinkedMomentIdFromParams = nil
@@ -162,11 +243,13 @@ local function getDeepLinkRequestFromNavigationState(State, p1)
 		
 		if DeepLinkedMomentIdFromParams ~= nil then
 			local DeepLinkedMomentTargetIdTypeFromParams = getDeepLinkedMomentTargetIdTypeFromParams(ActiveRoute.params)
+			local DeepLinkedCommentsTargetFromParams = if FFlagMomentsCommentDeepLinks then getDeepLinkedCommentsTargetFromParams(ActiveRoute.params) else nil
 			
 			return {
 				momentId = DeepLinkedMomentIdFromParams,
 				targetIdType = DeepLinkedMomentTargetIdTypeFromParams,
-				key = `{p1}:state:{tostring(ActiveRoute.key)}:{tostring(ActiveRoute.params)}:{DeepLinkedMomentIdFromParams}:{tostring(DeepLinkedMomentTargetIdTypeFromParams)}`
+				commentsTarget = DeepLinkedCommentsTargetFromParams,
+				key = `{p2}:state:{tostring(ActiveRoute.key)}:{tostring(ActiveRoute.params)}:{DeepLinkedMomentIdFromParams}:{tostring(DeepLinkedMomentTargetIdTypeFromParams)}{if DeepLinkedCommentsTargetFromParams == nil then "" else `:comments:{DeepLinkedCommentsTargetFromParams.commentId or ""}`}`
 			}
 		end
 	end
@@ -192,12 +275,12 @@ local function getDeepLinkRequest(Navigation)
 	return nil
 end
 
-local _ = function(p2, p3, p4)
-	p2.setDeepLinkedMoment(p3, p4)
+local _ = function(p3, p4, p5, p6)
+	p3.setDeepLinkedMoment(p4, p5, p6)
 end
 
 local function MomentsTabEntry(Current)
-	-- upvalues: ReactModule (copy), CreateMomentsStoreModule (copy), UseResetTeleportingOnGameLeaveModule (copy), getDeepLinkRequest (copy), GetDeepLinkStoreModule (copy), RobloxAppEventsModule (copy), AppPage (copy), ConsumeEntrySourceModule (copy), LogMomentsLayerExposureFunction (copy), FStringMomentsExperienceJoinActionTextIxpLayerModule (copy), Moments (copy), FFlagMomentsEmojiSetsApiModule (copy), MomentsGetMomentsReactionsStoreModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Analytics (copy), MomentsSessionHeartbeats (copy), SessionManager (copy), FunnelEventNames (copy), FireFunnelAnalyticsEventFunction (copy), MomentsSurfaceLoadManager (copy), GetExperienceDetailsSheetStoreModule (copy), GetImmersiveChromeStoreModule (copy), RoactNavigationModule (copy), UseMomentsTabIsVisibleModule (copy), FFlagMomentsAvatarLookTryOn (copy), UseMomentsGatingFunction (copy), CanRenderNativeMomentsFunction (copy), MomentsHostShellModule (copy), InnerNavigatorModule (copy)
+	-- upvalues: ReactModule (copy), CreateMomentsStoreModule (copy), UseResetTeleportingOnGameLeaveModule (copy), getDeepLinkRequest (copy), GetDeepLinkStoreModule (copy), FFlagMomentsCommentDeepLinks (copy), RobloxAppEventsModule (copy), AppPage (copy), ConsumeEntrySourceModule (copy), LogMomentsLayerExposureFunction (copy), FStringMomentsExperienceJoinActionTextIxpLayerModule (copy), Moments (copy), FFlagMomentsEmojiSetsApiModule (copy), MomentsGetMomentsReactionsStoreModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Analytics (copy), MomentsSessionHeartbeats (copy), SessionManager (copy), FunnelEventNames (copy), FireFunnelAnalyticsEventFunction (copy), MomentsSurfaceLoadManager (copy), GetExperienceDetailsSheetStoreModule (copy), GetImmersiveChromeStoreModule (copy), RoactNavigationModule (copy), UseMomentsTabIsVisibleModule (copy), FFlagMomentsAvatarLookTryOn (copy), UseMomentsGatingFunction (copy), CanRenderNativeMomentsFunction (copy), MomentsHostShellModule (copy), InnerNavigatorModule (copy)
 	local UseRefResult = ReactModule.useRef(Current)
 	UseRefResult.current = Current
 	local UseRefResult1 = ReactModule.useRef(false)
@@ -215,7 +298,7 @@ local function MomentsTabEntry(Current)
 	local Key = if DeepLinkRequest == nil then nil else DeepLinkRequest.key
 	
 	if MomentId ~= nil and UseRefResult4.current ~= Key then
-		GetDeepLinkStoreModule().setDeepLinkedMoment(MomentId, if DeepLinkRequest == nil then nil else DeepLinkRequest.targetIdType)
+		GetDeepLinkStoreModule().setDeepLinkedMoment(MomentId, if DeepLinkRequest == nil then nil else DeepLinkRequest.targetIdType, if FFlagMomentsCommentDeepLinks and DeepLinkRequest ~= nil then DeepLinkRequest.commentsTarget else nil)
 		UseRefResult4.current = Key
 	end
 	ReactModule.useEffect(function()
@@ -288,19 +371,19 @@ local function MomentsTabEntry(Current)
 		end
 	end, {})
 	ReactModule.useEffect(function()
-		-- upvalues: Current (copy), UseResult (copy), UseResult2 (copy), UseResult1 (copy), RoactNavigationModule (upval), getDeepLinkRequest (upval), UseRefResult4 (copy), GetDeepLinkStoreModule (upval), RobloxAppEventsModule (upval), AppPage (upval)
+		-- upvalues: Current (copy), UseResult (copy), UseResult2 (copy), UseResult1 (copy), RoactNavigationModule (upval), getDeepLinkRequest (upval), UseRefResult4 (copy), GetDeepLinkStoreModule (upval), FFlagMomentsCommentDeepLinks (upval), RobloxAppEventsModule (upval), AppPage (upval)
 		local Navigation = Current.navigation
 		
 		if Navigation and Navigation.addListener then
 			UseResult()
 			UseResult2()
 			local AddListenerResult = Navigation.addListener(RoactNavigationModule.Events.DidFocus, function()
-				-- upvalues: getDeepLinkRequest (upval), Navigation (copy), UseRefResult4 (upval), GetDeepLinkStoreModule (upval), RobloxAppEventsModule (upval), AppPage (upval), UseResult (upval), UseResult2 (upval)
+				-- upvalues: getDeepLinkRequest (upval), Navigation (copy), UseRefResult4 (upval), GetDeepLinkStoreModule (upval), FFlagMomentsCommentDeepLinks (upval), RobloxAppEventsModule (upval), AppPage (upval), UseResult (upval), UseResult2 (upval)
 				local DeepLinkRequest = getDeepLinkRequest(Navigation)
 				local IsCurrentMatch: boolean = DeepLinkRequest ~= nil and UseRefResult4.current == DeepLinkRequest.key
 				
 				if DeepLinkRequest ~= nil and not IsCurrentMatch then
-					GetDeepLinkStoreModule().setDeepLinkedMoment(DeepLinkRequest.momentId, DeepLinkRequest.targetIdType)
+					GetDeepLinkStoreModule().setDeepLinkedMoment(DeepLinkRequest.momentId, DeepLinkRequest.targetIdType, if FFlagMomentsCommentDeepLinks then DeepLinkRequest.commentsTarget else nil)
 					UseRefResult4.current = DeepLinkRequest.key
 					RobloxAppEventsModule.ReloadPage:fire(AppPage.Moments)
 				end
@@ -341,10 +424,10 @@ local function MomentsTabEntry(Current)
 		local OpenOwnMomentsFunction = Current.openOwnMoments
 		
 		return {
-			openProfile = if OpenProfileFunction then function(p2)
+			openProfile = if OpenProfileFunction then function(p3)
 				-- upvalues: GetImmersiveChromeStoreModule (upval), OpenProfileFunction (copy)
 				GetImmersiveChromeStoreModule(false).setOverlayCovering(true)
-				OpenProfileFunction(p2)
+				OpenProfileFunction(p3)
 			end else nil,
 			openOwnMoments = if OpenOwnMomentsFunction then function()
 				-- upvalues: GetImmersiveChromeStoreModule (upval), OpenOwnMomentsFunction (copy)
@@ -375,9 +458,9 @@ end
 
 local MomentsTabEntryScreen = ReactModule.Component:extend("MomentsTabEntryScreen")
 
-function MomentsTabEntryScreen.render(p2)
+function MomentsTabEntryScreen.render(p3)
 	-- upvalues: ReactModule (copy), MomentsTabEntry (copy)
-	return ReactModule.createElement(MomentsTabEntry, p2.props)
+	return ReactModule.createElement(MomentsTabEntry, p3.props)
 end
 
 MomentsTabEntryScreen.router = InnerNavigatorModule.router

@@ -1,9 +1,12 @@
-﻿local Parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
+﻿local ChatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
+local Parent = ChatUIPrimitives.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local _ = require(Parent.Signals)
 local CreateNextOrderFunction = require(Parent.ReactUtils).createNextOrder
 local _ = require(script.Parent.Parent.groupMessages)
+local FFlagExpChatMessageAvatarAdornmentModule = require(ChatUIPrimitives.Flags.FFlagExpChatMessageAvatarAdornment)
+local MessageAvatarModule = require(script.Parent.Parent.Parent.Adornments.MessageAvatar)
 local BubbleAvatarModule = require(script.Parent.BubbleAvatar)
 local SizingModule = require(script.Parent.Parent.Parent.Sizing)
 local BubbleStyleContextModule = require(script.Parent.BubbleStyleContext)
@@ -12,6 +15,8 @@ local BubbleViewModule = require(script.Parent.BubbleView)
 local ReplyQuoteModule = require(script.Parent.Parent.Reply.ReplyQuote)
 local GetBubbleToneModule = require(script.Parent.getBubbleTone)
 local UseMessageBubbleViewModelModule = require(script.Parent.useMessageBubbleViewModel)
+local UseFinishMessageRenderIntervalsModule = require(script.Parent.Parent.useFinishMessageRenderIntervals)
+local FFlagExpChatMessageListScrollParityModule = require(ChatUIPrimitives.Flags.FFlagExpChatMessageListScrollParity)
 local WithMessageContentModule = require(script.Parent.Parent.Parent.ContentKinds.withMessageContent)
 local config = {
 	plainText = WithMessageContentModule(require(script.Parent.Parent.Parent.ContentKinds.PlainText.PlainTextBubble), require(script.Parent.Parent.Parent.ContentKinds.PlainText.PlainTextContentModel).getDetail),
@@ -20,10 +25,15 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: UseMessageBubbleViewModelModule (copy), FoundationModule (copy), SizingModule (copy), CreateNextOrderFunction (copy), ReactModule (copy), GetBubbleToneModule (copy), config (copy), ReplyQuoteModule (copy), BubbleUsernameModule (copy), BubbleViewModule (copy), BubbleAvatarModule (copy), BubbleStyleContextModule (copy)
+	-- upvalues: UseMessageBubbleViewModelModule (copy), FFlagExpChatMessageListScrollParityModule (copy), UseFinishMessageRenderIntervalsModule (copy), FoundationModule (copy), SizingModule (copy), CreateNextOrderFunction (copy), ReactModule (copy), GetBubbleToneModule (copy), config (copy), ReplyQuoteModule (copy), BubbleUsernameModule (copy), BubbleViewModule (copy), FFlagExpChatMessageAvatarAdornmentModule (copy), MessageAvatarModule (copy), BubbleAvatarModule (copy), BubbleStyleContextModule (copy)
 	local UseMessageBubbleViewModelModuleResult = UseMessageBubbleViewModelModule(p1.itemSignal)
+	
+	if FFlagExpChatMessageListScrollParityModule then
+		UseFinishMessageRenderIntervalsModule(p1.itemSignal)
+	end
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
-	local IsCompact = SizingModule.useSizing().density == "compact"
+	local UseSizingResult = SizingModule.useSizing()
+	local IsCompact = UseSizingResult.density == "compact"
 	local NextOrder = CreateNextOrderFunction()
 	local IsSending = UseMessageBubbleViewModelModuleResult.deliveryState == "sending"
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -80,12 +90,22 @@ return function(p1)
 	local t1 = {}
 	
 	if not UseMessageBubbleViewModelModuleResult.isObservingUser then
-		t1.Avatar = ReactModule.createElement(BubbleAvatarModule, {
-			testId = "bubble-avatar",
-			getIdentity = UseMessageBubbleViewModelModuleResult.getIdentity,
-			visible = UseMessageBubbleViewModelModuleResult.showAvatar,
-			LayoutOrder = NextOrder()
-		})
+		if FFlagExpChatMessageAvatarAdornmentModule then
+			t1.Avatar = ReactModule.createElement(MessageAvatarModule, {
+				testId = "bubble-avatar",
+				getIdentity = UseMessageBubbleViewModelModuleResult.getIdentity,
+				visible = UseMessageBubbleViewModelModuleResult.showAvatar,
+				sizeTag = UseSizingResult.avatar.tag,
+				LayoutOrder = NextOrder()
+			})
+		else
+			t1.Avatar = ReactModule.createElement(BubbleAvatarModule, {
+				testId = "bubble-avatar",
+				getIdentity = UseMessageBubbleViewModelModuleResult.getIdentity,
+				visible = UseMessageBubbleViewModelModuleResult.showAvatar,
+				LayoutOrder = NextOrder()
+			})
+		end
 	end
 	t1.Stack = ReactModule.createElement(FoundationModule.View, {
 		tag = {

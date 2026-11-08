@@ -5,6 +5,7 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagEdpGameLeavePromptsHandlerEnabled = SharedFlagsModule.FFlagEdpGameLeavePromptsHandlerEnabled
 local FFlagEdpOpenPromptsHandlerEnabled = SharedFlagsModule.FFlagEdpOpenPromptsHandlerEnabled
 local FFlagLuaAppEnableSduiHomePage = SharedFlagsModule.FFlagLuaAppEnableSduiHomePage
+local FFlagNotificationStreamPromptsHandlerEnabled = SharedFlagsModule.FFlagNotificationStreamPromptsHandlerEnabled
 local config = {
 	[PromptsEntryPointModule.HomepageLaunch] = if game:DefineFastFlag("LuaAppPromptsHomepageConfigName", false) or FFlagLuaAppEnableSduiHomePage then {
 		surfaceKey = "Prompts",
@@ -34,6 +35,11 @@ local config = {
 		surfaceKey = "ExperienceDetailsOpenPrompts",
 		appPage = AppPage.ExperienceDetail,
 		configKey = "Prompts" .. PromptsEntryPointModule.ExperienceDetailsPageOpen
+	} else nil,
+	[PromptsEntryPointModule.NotificationStreamOpen] = if FFlagNotificationStreamPromptsHandlerEnabled then {
+		surfaceKey = "NotificationStreamPrompts",
+		appPage = AppPage.Notifications,
+		configKey = "Prompts" .. PromptsEntryPointModule.NotificationStreamOpen
 	} else nil
 }
 

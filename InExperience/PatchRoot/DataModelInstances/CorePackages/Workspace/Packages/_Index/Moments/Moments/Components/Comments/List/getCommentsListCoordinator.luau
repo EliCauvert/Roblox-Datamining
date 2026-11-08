@@ -2,17 +2,25 @@
 local Parent = Moments.Parent
 local MomentsCommentsModule = require(Parent.DataHydration.MomentsComments)
 local MomentsGetMomentsCommentsStoreModule = require(Parent.DataHydration.MomentsGetMomentsCommentsStore)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local MomentsGetMomentsReactionsStoreModule = require(Parent.DataHydration.MomentsGetMomentsReactionsStore)
 local GetCommentCollectionStoreModule = require(Moments.Components.Comments.GetCommentCollectionStore)
 local GetCommentSessionFiltersStoreModule = require(Moments.Components.Comments.GetCommentSessionFiltersStore)
 local GetCommentReactionsStoreModule = require(Moments.Stores.GetCommentReactionsStore)
 local CreateCommentsListCoordinatorModule = require(script.Parent.createCommentsListCoordinator)
-local FFlagMomentsComments = require(Parent.SharedFlags).FFlagMomentsComments
+local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
+local FFlagMomentsCommentDeepLinks = SharedFlagsModule.FFlagMomentsCommentDeepLinks
 
 local function getCommentPostedCallback(p1, p2)
 	local RecommendationSession = require(script.Parent.Parent.Sheet.getCommentsSheetStore)(false).getRecommendationSession(p1, p2)
 	
 	return if RecommendationSession == nil then nil else RecommendationSession.logComment
+end
+
+local function getPinnedCommentId(p1, p2)
+	local Target = require(script.Parent.Parent.Sheet.getCommentsSheetStore)(false).getTarget(p1, p2)
+	
+	return if Target == nil then nil else Target.commentId
 end
 
 local function getCommentDeletedCallback(p1, p2)
@@ -22,7 +30,7 @@ local function getCommentDeletedCallback(p1, p2)
 end
 
 return require(Parent.Signals).createComputed(function(_)
-	-- upvalues: MomentsGetMomentsCommentsStoreModule (copy), CreateCommentsListCoordinatorModule (copy), GetCommentCollectionStoreModule (copy), FFlagMomentsComments (copy), GetCommentReactionsStoreModule (copy), MomentsGetMomentsReactionsStoreModule (copy), GetCommentSessionFiltersStoreModule (copy), MomentsCommentsModule (copy), getCommentPostedCallback (copy), getCommentDeletedCallback (copy)
+	-- upvalues: MomentsGetMomentsCommentsStoreModule (copy), CreateCommentsListCoordinatorModule (copy), GetCommentCollectionStoreModule (copy), FFlagMomentsComments (copy), GetCommentReactionsStoreModule (copy), MomentsGetMomentsReactionsStoreModule (copy), GetCommentSessionFiltersStoreModule (copy), MomentsCommentsModule (copy), getCommentPostedCallback (copy), getCommentDeletedCallback (copy), FFlagMomentsCommentDeepLinks (copy), getPinnedCommentId (copy)
 	return CreateCommentsListCoordinatorModule({
 		collectionStore = GetCommentCollectionStoreModule(false),
 		commentsStore = MomentsGetMomentsCommentsStoreModule(false),
@@ -34,6 +42,7 @@ return require(Parent.Signals).createComputed(function(_)
 		getAnalyticsSession = if FFlagMomentsComments then function(p1, p2)
 			return require(script.Parent.Parent.Sheet.getCommentsSheetStore)(false).getAnalyticsSession(p1, p2)
 		end else nil,
-		getCommentDeletedCallback = if FFlagMomentsComments then getCommentDeletedCallback else nil
+		getCommentDeletedCallback = if FFlagMomentsComments then getCommentDeletedCallback else nil,
+		getPinnedCommentId = if FFlagMomentsCommentDeepLinks then getPinnedCommentId else nil
 	})
 end)

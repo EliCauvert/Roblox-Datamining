@@ -2,5 +2,6 @@
 	None = "None",
 	MutualFriends = "MutualFriends",
 	Frequents = "Frequents",
-	Contacts = "Contacts"
+	Contacts = "Contacts",
+	Classmates = "Classmates"
 })

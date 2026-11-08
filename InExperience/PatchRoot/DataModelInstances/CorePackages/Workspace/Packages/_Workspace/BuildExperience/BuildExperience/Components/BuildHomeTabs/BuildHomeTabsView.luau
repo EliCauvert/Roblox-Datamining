@@ -3,6 +3,7 @@ local Parent = BuildExperience.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local FFlagBuildExperienceFoundationTabsModule = require(BuildExperience.Flags.FFlagBuildExperienceFoundationTabs)
+local FFlagSubTabSizeSmall = require(Parent.SharedFlags).FFlagSubTabSizeSmall
 local BuildTabStripModule = require(BuildExperience.Components.BuildTabStrip.BuildTabStrip)
 local _ = require(script.Parent.useBuildHomeTabsViewModel)
 local View = FoundationModule.View
@@ -14,7 +15,7 @@ local function _(p1, p2, p3)
 end
 
 return function(Frame)
-	-- upvalues: CreateNextOrderFunction (copy), ReactModule (copy), View (copy), FFlagBuildExperienceFoundationTabsModule (copy), FoundationModule (copy), BuildTabStripModule (copy), BUILDHOMETAB (copy)
+	-- upvalues: CreateNextOrderFunction (copy), ReactModule (copy), View (copy), FFlagBuildExperienceFoundationTabsModule (copy), FoundationModule (copy), FFlagSubTabSizeSmall (copy), BuildTabStripModule (copy), BUILDHOMETAB (copy)
 	local TabOrder = Frame.tabOrder
 	local PageOffset = Frame.pageOffset
 	local NextOrder = CreateNextOrderFunction()
@@ -34,7 +35,8 @@ return function(Frame)
 					activeTabId = Frame.activeTab,
 					onActivated = Frame.onTabActivated,
 					tabs = Frame.tabs,
-					size = FoundationModule.Enums.InputSize.Medium
+					size = if FFlagSubTabSizeSmall then FoundationModule.Enums.InputSize.Small else FoundationModule.Enums.InputSize.Medium,
+					fillBehavior = Frame.tabsFillBehavior
 				}) else ReactModule.createElement(BuildTabStripModule, {
 					testId = "BuildHomeTabs.Tabs",
 					activeTabId = Frame.activeTab,

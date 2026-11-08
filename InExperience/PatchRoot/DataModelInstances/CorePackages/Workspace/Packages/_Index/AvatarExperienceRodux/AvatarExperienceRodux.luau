@@ -5,6 +5,7 @@ local _ = require(script.Types.OutfitTryOn)
 local _ = require(script.Types.BodyColors)
 local _ = require(script.Types.HydratedWidgetData)
 local _ = require(script.Types.AXCommonState)
+local SetSpecialFeaturesFilterModule = require(script.Actions.SetSpecialFeaturesFilter)
 
 return {
 	Actions = {
@@ -26,6 +27,7 @@ return {
 		SetAnimationPreview = require(script.Actions.SetAnimationPreview),
 		SetAvatarSceneRoute = require(script.Actions.SetAvatarSceneRoute),
 		SetBackgroundPreview = require(script.Actions.SetBackgroundPreview),
+		SetSpawnEffectPreview = require(script.Actions.SetSpawnEffectPreview),
 		SetEquippedInTryOnManager = require(script.Actions.SetEquippedInTryOnManager),
 		SetFullView = require(script.Actions.SetFullView),
 		SetItemDetailsPeekViewState = require(script.Actions.SetItemDetailsPeekViewState),
@@ -45,7 +47,8 @@ return {
 		ToggleTryOn = require(script.Actions.ToggleTryOn),
 		TryOnColorUpdated = require(script.Actions.TryOnColorUpdated),
 		TryOnClassicHeadShape = require(script.Actions.TryOnClassicHeadShape),
-		TryOnLooksOutfit = require(script.Actions.TryOnLooksOutfit)
+		TryOnLooksOutfit = require(script.Actions.TryOnLooksOutfit),
+		SetSpecialFeaturesFilter = if require(script.Parent.AvatarExperienceFlags).FFlagAXCatalogSpecialFeaturesFilter then SetSpecialFeaturesFilterModule else nil
 	},
 	Reducers = {
 		CurrentCharacter = require(script.Reducers.CurrentCharacter),

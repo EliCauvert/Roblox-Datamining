@@ -24,6 +24,7 @@ local FFlagCategoryLoggingInShopPurchaseModule = require(InExperienceShop.Flags.
 local FFlagFixThumbnailBackgroundInExperienceShopModule = require(InExperienceShop.Flags.FFlagFixThumbnailBackgroundInExperienceShop)
 local FFlagEnableDiscountOnInShopTileModule = require(InExperienceShop.Flags.FFlagEnableDiscountOnInShopTile)
 local FFlagLuaAppEnableGamePassFreeTrialsModule = require(InExperienceShop.Flags.FFlagLuaAppEnableGamePassFreeTrials)
+local FFlagEnableGamePassTrialUnifiedLoggingModule = require(InExperienceShop.Flags.FFlagEnableGamePassTrialUnifiedLogging)
 local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
 local FormatPriceModule = if FFlagEnableDiscountOnInShopTileModule then require(InExperienceShop.Utils.formatPrice) else nil
 local _ = require(InExperienceShop.Types)
@@ -32,7 +33,7 @@ local config = {
 	freeTrial = "Feature.InExperienceShop.Label.FreeTrial",
 	trial = "Feature.InExperienceShop.Label.Trial",
 	active = "Feature.InExperienceShop.Label.Active",
-	trialed = "Feature.InExperienceShop.Label.Trialed"
+	keepIt = "Feature.InExperienceShop.Label.KeepIt"
 }
 
 local function TrialBadge(p1)
@@ -42,7 +43,7 @@ local function TrialBadge(p1)
 	
 	return ReactModule.createElement(Badge, {
 		testId = "ShopItemTile-TrialBadge",
-		text = if p1.freeTrialStatus == "active" then UseLocalizationResult.active elseif p1.freeTrialStatus == "redeemed" then UseLocalizationResult.trialed else UseLocalizationResult.trial,
+		text = if p1.freeTrialStatus == "active" then UseLocalizationResult.active elseif p1.freeTrialStatus == "redeemed" then UseLocalizationResult.keepIt else UseLocalizationResult.trial,
 		variant = if p1.freeTrialStatus == "active" then Enums.BadgeVariant.Emphasis else Enums.BadgeVariant.OverMedia,
 		size = Enums.BadgeSize.Small,
 		Position = UDim2.fromOffset(UseTokensResult.Gap.Small, UseTokensResult.Gap.Small)
@@ -59,8 +60,8 @@ local function FreeTrialLabel(Frame)
 	})
 end
 
-return ReactModule.memo(function(Frame)
-	-- upvalues: SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), ReactModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (copy), Parent (copy), InExperienceShop (copy), ToUnifiedCategoryIdModule (copy), FFlagEnableCategoryLoggingInShopModule (copy), SessionService (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), UseGamePassTrialRedemptionModule (copy), FFlagEnableDiscountOnInShopTileModule (copy), FormatPriceModule (copy), View (copy), Image (copy), FFlagFixThumbnailBackgroundInExperienceShopModule (copy), SHOPITEMMEDIAHEIGHTSCALE (copy), TrialBadge (copy), Text (copy), FreeTrialLabel (copy), Icon (copy), ConstantsModule (copy), IconSize (copy), GetIconRichTextFunction (copy), Enums (copy), ShopItemFooterModule (copy)
+return ReactModule.memo(function(Frame: Frame)
+	-- upvalues: SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), ReactModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), FFlagEnableGamePassTrialUnifiedLoggingModule (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (copy), Parent (copy), InExperienceShop (copy), ToUnifiedCategoryIdModule (copy), FFlagEnableCategoryLoggingInShopModule (copy), SessionService (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), UseGamePassTrialRedemptionModule (copy), FFlagEnableDiscountOnInShopTileModule (copy), FormatPriceModule (copy), View (copy), SHOPITEMMEDIAHEIGHTSCALE (copy), Image (copy), FFlagFixThumbnailBackgroundInExperienceShopModule (copy), TrialBadge (copy), Text (copy), FreeTrialLabel (copy), Icon (copy), ConstantsModule (copy), IconSize (copy), GetIconRichTextFunction (copy), Enums (copy), ShopItemFooterModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetInExperienceShopStoreModule)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(function(p1)
@@ -97,32 +98,56 @@ return ReactModule.memo(function(Frame)
 		return Frame.itemType == "GamePass" and Redeemed ~= nil and Redeemed[Frame.itemId] ~= nil
 	end) else false
 	local Available = if NoUseSignalStateResult1 then "available" elseif UseSignalStateResult3 and not UseSignalStateResult1 then "active" elseif UseSignalStateResult4 then "redeemed" else nil
+	local Available1 = if FFlagEnableGamePassTrialUnifiedLoggingModule and Frame.itemType == "GamePass" then if Available == "available" then "available" elseif Available == "active" then "Active" elseif Available == "redeemed" then "Redeemed" else "unavailable" else nil
+	local UseSignalStateResult5 = if FFlagEnableGamePassTrialUnifiedLoggingModule then SignalsReactModule.useSignalState(function(p1)
+		-- upvalues: UseSignalStateResult (copy), Frame (copy)
+		local TrialAvailabilityPhase = UseSignalStateResult.getTrialAvailabilityPhase(p1)
+		
+		return if Frame.itemType == "GamePass" then TrialAvailabilityPhase else "settled"
+	end) else "settled"
+	local Config = if Available1 == nil then nil else {
+		shopPageType = Frame.shopPageType,
+		universeId = if Frame.universeId == nil then nil else tonumber(Frame.universeId),
+		trialStatus = Available1
+	}
 	ReactModule.useEffect(function()
-		-- upvalues: FFlagEnableInExperienceShopUnifiedLoggingModule (upval), Parent (upval), InExperienceShop (upval), Frame (copy), ToUnifiedCategoryIdModule (upval), FFlagEnableCategoryLoggingInShopModule (upval), UseRefResult (copy), SessionService (upval)
-		if FFlagEnableInExperienceShopUnifiedLoggingModule then
+		-- upvalues: FFlagEnableInExperienceShopUnifiedLoggingModule (upval), FFlagEnableGamePassTrialUnifiedLoggingModule (upval), Frame (copy), UseSignalStateResult5 (copy), Parent (upval), InExperienceShop (upval), ToUnifiedCategoryIdModule (upval), FFlagEnableCategoryLoggingInShopModule (upval), Available1 (copy), UseRefResult (copy), SessionService (upval)
+		if not FFlagEnableInExperienceShopUnifiedLoggingModule then return end
+		if not FFlagEnableGamePassTrialUnifiedLoggingModule or Frame.itemType ~= "GamePass" or UseSignalStateResult5 == "settled" then
 			task.defer(function()
-				-- upvalues: Parent (upval), InExperienceShop (upval), Frame (upval), ToUnifiedCategoryIdModule (upval), FFlagEnableCategoryLoggingInShopModule (upval), UseRefResult (upval), SessionService (upval)
+				-- upvalues: Parent (upval), InExperienceShop (upval), Frame (upval), ToUnifiedCategoryIdModule (upval), FFlagEnableCategoryLoggingInShopModule (upval), FFlagEnableGamePassTrialUnifiedLoggingModule (upval), Available1 (upval), UseRefResult (upval), SessionService (upval)
 				local AvatarExperienceAnalyticsModule = require(Parent.AvatarExperienceAnalytics)
 				local AddUnifiedEventLoggingFunction: (any, any, any) -> () = AvatarExperienceAnalyticsModule.addUnifiedEventLogging
 				local ItemType = require(InExperienceShop.Utils.mapShopItemTypeToUnifiedItemType)(Frame.itemType)
 				
-				if ItemType ~= nil then
-					local FFlagAXUnifiedEventStrictPayloads = AvatarExperienceAnalyticsModule.Flags.FFlagAXUnifiedEventStrictPayloads
-					AddUnifiedEventLoggingFunction(UseRefResult, {
-						universeId = if Frame.universeId == nil then game.GameId else tonumber(Frame.universeId),
-						itemId = Frame.itemId,
-						itemType = ItemType,
-						categoryId = if FFlagAXUnifiedEventStrictPayloads then ToUnifiedCategoryIdModule(Frame.categoryId) else Frame.categoryId,
-						gridPositionRow = Frame.gridPositionRow,
-						gridPositionColumn = Frame.gridPositionColumn,
-						categoryType = if FFlagEnableCategoryLoggingInShopModule then Frame.categoryType else nil,
-						stableCategoryId = if FFlagEnableCategoryLoggingInShopModule then Frame.stableCategoryId else nil,
-						categoryGroup = if FFlagEnableCategoryLoggingInShopModule then Frame.categoryGroup else nil,
-						categoryName = if FFlagEnableCategoryLoggingInShopModule then Frame.categoryName else nil
-					}, { sessionTagName = SessionService:GetSessionTag("level2a") })
+				if ItemType == nil then return end
+				local FFlagAXUnifiedEventStrictPayloads = AvatarExperienceAnalyticsModule.Flags.FFlagAXUnifiedEventStrictPayloads
+				local config = {
+					universeId = if Frame.universeId == nil then game.GameId else tonumber(Frame.universeId),
+					itemId = Frame.itemId,
+					itemType = ItemType,
+					categoryId = if FFlagAXUnifiedEventStrictPayloads then ToUnifiedCategoryIdModule(Frame.categoryId) else Frame.categoryId,
+					gridPositionRow = Frame.gridPositionRow,
+					gridPositionColumn = Frame.gridPositionColumn,
+					categoryType = if FFlagEnableCategoryLoggingInShopModule then Frame.categoryType else nil,
+					stableCategoryId = if FFlagEnableCategoryLoggingInShopModule then Frame.stableCategoryId else nil,
+					categoryGroup = if FFlagEnableCategoryLoggingInShopModule then Frame.categoryGroup else nil,
+					categoryName = if FFlagEnableCategoryLoggingInShopModule then Frame.categoryName else nil
+				}
+				
+				if FFlagEnableGamePassTrialUnifiedLoggingModule and Frame.itemType == "GamePass" then
+					config.trialStatus = Available1
+					local TryButtonTrialBadgeFreeTrialText = if Available1 == "available" then "try_button,trial_badge,free_trial_text" elseif Available1 == "Redeemed" then if Frame.price == nil then "trialed_badge" else "trialed_badge,price" elseif Available1 == "Active" then if Frame.price == nil then "active_badge" else "active_badge,price" else nil
 					
-					return
+					if TryButtonTrialBadgeFreeTrialText == nil then
+						if UseRefResult.current ~= nil then
+							UseRefResult.current:SetAttribute(AvatarExperienceAnalyticsModule.UnifiedEventLogConstants.ATTRIBUTE_PREFIX .. "elementMetadata", nil)
+						end
+					else
+						config.elementMetadata = game:GetService("HttpService"):JSONEncode({ elementsShown = TryButtonTrialBadgeFreeTrialText })
+					end
 				end
+				AddUnifiedEventLoggingFunction(UseRefResult, config, { sessionTagName = SessionService:GetSessionTag("level2a") })
 			end)
 			
 			return
@@ -133,7 +158,10 @@ return ReactModule.memo(function(Frame)
 		if FFlagEnableCategoryLoggingInShopModule then Frame.categoryType else nil,
 		if FFlagEnableCategoryLoggingInShopModule then Frame.stableCategoryId else nil,
 		if FFlagEnableCategoryLoggingInShopModule then Frame.categoryGroup else nil,
-		if FFlagEnableCategoryLoggingInShopModule then Frame.categoryName else nil
+		if FFlagEnableCategoryLoggingInShopModule then Frame.categoryName else nil,
+		if FFlagEnableGamePassTrialUnifiedLoggingModule then UseSignalStateResult5 else nil,
+		if FFlagEnableGamePassTrialUnifiedLoggingModule then Available1 else nil,
+		if FFlagEnableGamePassTrialUnifiedLoggingModule then Frame.price else nil
 	})
 	local OnItemActivatedFunction = Frame.onItemActivated
 	local ItemType = Frame.itemType
@@ -161,13 +189,46 @@ return ReactModule.memo(function(Frame)
 	end
 	local UseGamePassTrialRedemptionModuleResult = UseGamePassTrialRedemptionModule(Frame.itemId, {
 		shopPageType = Frame.shopPageType,
-		categoryLocation = CategoryLocation
+		categoryLocation = CategoryLocation,
+		universeId = if Config == nil then nil else Config.universeId,
+		trialStatus = if Config == nil then nil else Config.trialStatus
 	})
 	local IsUserBasePriceInRobuxAbove: boolean = FFlagEnableDiscountOnInShopTileModule and (Frame.userBasePriceInRobux ~= nil and (Frame.price ~= nil and Frame.userBasePriceInRobux > Frame.price))
 	local FormatPriceModuleResult = if IsUserBasePriceInRobuxAbove and FormatPriceModule then FormatPriceModule(Frame.userBasePriceInRobux) else nil
 	local FormatPriceModuleResult1 = if IsUserBasePriceInRobuxAbove and FormatPriceModule then FormatPriceModule(Frame.price) else nil
 	
-	return ReactModule.createElement(View, {
+	return if FFlagEnableGamePassTrialUnifiedLoggingModule and Frame.itemType == "GamePass" and UseSignalStateResult5 ~= "settled" then ReactModule.createElement(View, {
+		tag = "col fill size-full-0 auto-y radius-medium clip bg-shift-200",
+		testId = "ShopItemTile-TrialLoading",
+		LayoutOrder = Frame.LayoutOrder
+	}, {
+		Media = ReactModule.createElement(View, {
+			tag = "radius-medium bg-shift-200",
+			LayoutOrder = 1,
+			Size = UDim2.fromScale(1, SHOPITEMMEDIAHEIGHTSCALE),
+			SizeConstraint = Enum.SizeConstraint.RelativeXX
+		}),
+		TileContent = ReactModule.createElement(View, {
+			tag = "col gap-medium size-full-0 auto-y padding-medium",
+			LayoutOrder = 2
+		}, {
+			Title = ReactModule.createElement(View, {
+				tag = "radius-small bg-shift-200",
+				LayoutOrder = 1,
+				Size = UDim2.new(1, 0, 0, 16)
+			}),
+			Price = ReactModule.createElement(View, {
+				tag = "radius-small bg-shift-200",
+				LayoutOrder = 2,
+				Size = UDim2.new(0.4, 0, 0, 12)
+			}),
+			Button = ReactModule.createElement(View, {
+				tag = "radius-small bg-shift-200",
+				LayoutOrder = 3,
+				Size = UDim2.new(1, 0, 0, 28)
+			})
+		})
+	}) else ReactModule.createElement(View, {
 		tag = "col fill size-full-0 auto-y radius-medium clip bg-shift-200",
 		LayoutOrder = Frame.LayoutOrder,
 		onActivated = if OnItemActivatedFunction then UseResult else nil,

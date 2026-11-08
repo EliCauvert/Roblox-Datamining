@@ -1,8 +1,11 @@
 ﻿local FriendsCalling = script:FindFirstAncestor("FriendsCalling")
 local Parent = FriendsCalling.Parent
+local CallingService = game:GetService("CallingService")
+local FriendsCallingService = game:GetService("FriendsCallingService")
 local FloatingWindowModule = require(Parent.FloatingWindow)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local FFlagFriendsCallingServiceLuaMigrationModule = require(Parent.SharedFlags.FFlagFriendsCallingServiceLuaMigration)
 local _ = require(FriendsCalling.Components.CallParticipant.CallParticipantCard)
 local CollapsedCallOverlayModule = require(script.Parent.CollapsedCallOverlay)
 local ExpandedCallOverlayModule = require(script.Parent.ExpandedCallOverlay)
@@ -22,7 +25,7 @@ local function noop() end
 local Frozen = table.freeze({ Compact = "Compact", Expanded = "Expanded" })
 
 local function CallPipSession(p1)
-	-- upvalues: UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseDeviceOrientationFunction (copy), DeviceOrientationMode (copy), ReactModule (copy), Frozen (copy), ResolveGeometryModule (copy), ExpandedCallOverlayModule (copy), noop (copy), CollapsedCallOverlayModule (copy), FloatingWindowModule (copy), _UDim2 (copy)
+	-- upvalues: UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseDeviceOrientationFunction (copy), DeviceOrientationMode (copy), ReactModule (copy), Frozen (copy), FFlagFriendsCallingServiceLuaMigrationModule (copy), FriendsCallingService (copy), CallingService (copy), ResolveGeometryModule (copy), ExpandedCallOverlayModule (copy), noop (copy), CollapsedCallOverlayModule (copy), FloatingWindowModule (copy), _UDim2 (copy)
 	local Host = p1.host
 	local UseTokensResult = UseTokensFunction()
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
@@ -41,6 +44,18 @@ local function CallPipSession(p1)
 		-- upvalues: UseStateResult2 (copy), Frozen (upval)
 		UseStateResult2(Frozen.Compact)
 	end, {})
+	local UseResult3 = ReactModule.useCallback(function()
+		-- upvalues: p1 (copy), FFlagFriendsCallingServiceLuaMigrationModule (upval), FriendsCallingService (upval), CallingService (upval)
+		local CallId = p1.callId or ""
+		
+		if FFlagFriendsCallingServiceLuaMigrationModule then
+			FriendsCallingService:EndCall(CallId, "LuaEndAction")
+			
+			return
+		else
+			CallingService:EndCall(CallId, "LuaEndAction")
+		end
+	end, { p1.callId })
 	local IsUseStateResultMatch = UseStateResult == Frozen.Expanded
 	local ResolveGeometryModuleResult = ResolveGeometryModule({
 		deviceInsets = UseDeviceInsetsResult,
@@ -60,7 +75,7 @@ local function CallPipSession(p1)
 			isMicrophoneMuted = p1.isMicrophoneMuted,
 			onCollapse = UseResult2,
 			onDragInputTarget = UseResult,
-			onEndCall = noop,
+			onEndCall = UseResult3,
 			onOpenChat = noop,
 			onToggleConversationAudio = noop,
 			onToggleMicrophone = noop,
@@ -89,6 +104,7 @@ local function CallPipWindow(p1)
 	
 	return ReactModule.createElement(CallPipSession, {
 		key = tostring(UseCallPipViewModelModuleResult.session),
+		callId = UseCallPipViewModelModuleResult.callId,
 		connectedAt = UseCallPipViewModelModuleResult.connectedAt,
 		enabled = UseCallPipViewModelModuleResult.enabled,
 		host = p1.host,

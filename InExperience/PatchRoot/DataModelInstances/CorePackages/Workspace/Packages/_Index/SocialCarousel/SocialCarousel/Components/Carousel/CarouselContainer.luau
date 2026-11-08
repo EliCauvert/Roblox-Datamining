@@ -10,15 +10,24 @@ local AppPage = require(Parent.RobloxAppEnums).AppPage
 local UseNavigationFunction = require(Parent.Navigation).useNavigation
 local FFlagCreateConnectionsHub = require(Parent.SharedFlags).FFlagCreateConnectionsHub
 local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local FFlagShowRequestsInCarouselForAllUsers = require(Parent.SharedFlags).FFlagShowRequestsInCarouselForAllUsers
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
 return function(p1)
-	-- upvalues: UseSocialCarouselAnalyticsModule (copy), UseTilesSeenCollectionModule (copy), UseDispatchFunction (copy), UseNavigationFunction (copy), ReactModule (copy), FFlagCreateConnectionsHub (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), CarouselModule (copy)
+	-- upvalues: UseSocialCarouselAnalyticsModule (copy), UseTilesSeenCollectionModule (copy), UseDispatchFunction (copy), UseNavigationFunction (copy), ReactModule (copy), FFlagCreateConnectionsHub (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), CarouselModule (copy), FFlagShowRequestsInCarouselForAllUsers (copy)
 	local UseSocialCarouselAnalyticsModuleResult = UseSocialCarouselAnalyticsModule()
 	local UseTilesSeenCollectionModuleResult = UseTilesSeenCollectionModule()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseNavigationResult = UseNavigationFunction()
 	local UseRefResult = ReactModule.useRef({ startIndex = 1, endIndex = 1 })
+	local UseResult = ReactModule.useCallback(function(p2, p3, p4)
+		-- upvalues: UseRefResult (copy), UseTilesSeenCollectionModuleResult (copy)
+		local Current = UseRefResult.current
+		
+		if Current.startIndex <= p3 and p3 <= Current.endIndex then
+			UseTilesSeenCollectionModuleResult.addTileToCollection(p2, p3, p4)
+		end
+	end, { UseTilesSeenCollectionModuleResult })
 	
 	return ReactModule.createElement(CarouselModule, {
 		onActivateHeader = ReactModule.useCallback(function()
@@ -38,14 +47,7 @@ return function(p1)
 				UseDispatchResult(NavigateDownFunction({ name = AppPage.ViewFriends }))
 			end
 		end, { UseDispatchResult, UseNavigationResult }),
-		onTileContentChanged = ReactModule.useCallback(function(p2, p3, p4)
-			-- upvalues: UseRefResult (copy), UseTilesSeenCollectionModuleResult (copy)
-			local Current = UseRefResult.current
-			
-			if Current.startIndex <= p3 and p3 <= Current.endIndex then
-				UseTilesSeenCollectionModuleResult.addTileToCollection(p2, p3, p4)
-			end
-		end, { UseTilesSeenCollectionModuleResult }),
+		onTileContentChanged = if FFlagShowRequestsInCarouselForAllUsers then nil else UseResult,
 		appCompositionEnabled = p1.appCompositionEnabled
 	})
 end

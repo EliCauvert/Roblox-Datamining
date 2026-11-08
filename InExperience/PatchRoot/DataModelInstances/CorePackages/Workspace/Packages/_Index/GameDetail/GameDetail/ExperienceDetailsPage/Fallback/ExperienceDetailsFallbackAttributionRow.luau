@@ -14,7 +14,9 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local PlayButton = require(Parent.GamePlayButton).PlayButton
 local UseImageLoadFadeModule = require(script.Parent.Parent.useImageLoadFade)
 local ResponsiveModule = require(Parent.Responsive)
+local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
 local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagLuaAppEdpFallbackPrimaryActivation = SharedFlagsModule.FFlagLuaAppEdpFallbackPrimaryActivation
 local FFlagLuaAppMediaGalleryGamepadSupport = SharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
 local FFlagLuaAppLaunchWhenLoadingEdp = SharedFlagsModule.FFlagLuaAppLaunchWhenLoadingEdp
 local FFlagLuaAppSduiEdpFallbackAttributionFromCache = SharedFlagsModule.FFlagLuaAppSduiEdpFallbackAttributionFromCache
@@ -43,10 +45,14 @@ local function VerifiedBadgeIcon()
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), ResponsiveModule (copy), EdpFallbackIconSize (copy), FFlagSduiScalePlayButtonAndImageSizes (copy), UseImageLoadFadeModule (copy), ReactModule (copy), View (copy), Image (copy), Skeleton (copy), Text (copy), Radius (copy), VerifiedBadgeIcon (copy), FFlagLuaAppSduiEdpFallbackAttributionFromCache (copy), PlayButton (copy), ButtonSize (copy), EdpFallbackActionBarPlayButtonWidth (copy), FFlagLuaAppLaunchWhenLoadingEdp (copy), FFlagEnableGameJoinEarlyAccess (copy)
+	-- upvalues: UseTokensFunction (copy), FFlagLuaAppEdpFallbackPrimaryActivation (copy), ReactModule (copy), SduiSharedUtilitiesModule (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), ResponsiveModule (copy), EdpFallbackIconSize (copy), FFlagSduiScalePlayButtonAndImageSizes (copy), UseImageLoadFadeModule (copy), View (copy), Image (copy), Skeleton (copy), Text (copy), Radius (copy), VerifiedBadgeIcon (copy), FFlagLuaAppSduiEdpFallbackAttributionFromCache (copy), PlayButton (copy), ButtonSize (copy), EdpFallbackActionBarPlayButtonWidth (copy), FFlagLuaAppLaunchWhenLoadingEdp (copy), FFlagEnableGameJoinEarlyAccess (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsSmallScreen = p1.isSmallScreen
 	local IsIsLoading = p1.isLoading == true
+	local UseResult = if FFlagLuaAppEdpFallbackPrimaryActivation then ReactModule.useCallback(function(p2)
+		-- upvalues: SduiSharedUtilitiesModule (upval)
+		return SduiSharedUtilitiesModule.getSduiFocusActivationStore().register(SduiSharedUtilitiesModule.SduiFocusTags.PrimaryAction, p2)
+	end, {}) else nil
 	local IsUseLastInputResultMatch: boolean = if FFlagLuaAppMediaGalleryGamepadSupport then ResponsiveModule.useLastInput() == ResponsiveModule.Input.Directional else false
 	local Size1400 = if IsSmallScreen then UseTokensResult.Size.Size_1400 elseif FFlagLuaAppMediaGalleryGamepadSupport and IsUseLastInputResultMatch and EdpFallbackIconSize > 0 then if FFlagSduiScalePlayButtonAndImageSizes then EdpFallbackIconSize * UseTokensResult.Config.UI.Scale else EdpFallbackIconSize else UseTokensResult.Size.Size_2500 * 2
 	local v1: number = if IsSmallScreen then 150 elseif FFlagSduiScalePlayButtonAndImageSizes and Size1400 > 256 then 512 else 256
@@ -173,6 +179,7 @@ return ReactModule.memo(function(p1)
 					buttonSize = ButtonSize.Large,
 					width = UDim.new(0, if FFlagSduiScalePlayButtonAndImageSizes then EdpFallbackActionBarPlayButtonWidth * UseTokensResult.Config.UI.Scale else EdpFallbackActionBarPlayButtonWidth),
 					launchWhenLoading = if FFlagLuaAppLaunchWhenLoadingEdp then true else nil,
+					onRegisterActivation = if FFlagLuaAppEdpFallbackPrimaryActivation then UseResult else nil,
 					enableEarlyAccessPlusTooltip = if FFlagEnableGameJoinEarlyAccess then true else nil
 				}),
 				OverflowSkeleton1 = if IsIsLoading then ReactModule.createElement(Skeleton, {

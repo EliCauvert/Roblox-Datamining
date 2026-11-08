@@ -1,4 +1,5 @@
-﻿local TelemetryService = game:GetService("TelemetryService")
+﻿local HttpService = game:GetService("HttpService")
+local TelemetryService = game:GetService("TelemetryService")
 local UnifiedLogging = script:FindFirstAncestor("UnifiedLogging")
 local Parent = UnifiedLogging.Parent
 local CryoModule = require(Parent.Cryo)
@@ -12,6 +13,7 @@ local FFlagItemImpressionsAddGameMetadata = require(Parent.SharedFlags).FFlagIte
 local FFlagEnableTopSongsSort = require(Parent.SharedFlags).FFlagEnableTopSongsSort
 local FFlagLuaAppMigrateItemEventsTelemetryService = require(Parent.SharedFlags).FFlagLuaAppMigrateItemEventsTelemetryService
 local FFlagLuaAppItemEventsTelemetryServiceShadowTraffic = require(Parent.SharedFlags).FFlagLuaAppItemEventsTelemetryServiceShadowTraffic
+local FFlagLuaAppItemImpressionsInteractionUuidModule = require(script.Parent.FFlagLuaAppItemImpressionsInteractionUuid)
 local LuaAppItemImpressionsEventThrottlingHundredthsPercent = game:DefineFastInt("LuaAppItemImpressionsEventThrottlingHundredthsPercent", 10000)
 local LuaAppItemImpressionsShadowThrottlingHundredthsPercent = game:DefineFastInt("LuaAppItemImpressionsShadowThrottlingHundredthsPercent", 10000)
 local Config = if FFlagLuaAppMigrateItemEventsTelemetryService then {
@@ -41,6 +43,7 @@ local config = {
 	collectionPosition = TModule.number,
 	totalNumberOfItems = TModule.number,
 	contentType = TModule.string,
+	interactionUuid = if FFlagLuaAppItemImpressionsInteractionUuidModule then TModule.optional(TModule.string) else nil,
 	itemIds = TModule.string,
 	itemPositions = TModule.string,
 	rowNumbers = TModule.optional(TModule.string),
@@ -70,7 +73,10 @@ local config1 = {
 }
 
 return function(p1, EventContext, p2, Tbl)
-	-- upvalues: config1 (copy), IntersectionResult1 (ref), DiscoveryEventErrorLogger (copy), FFlagLuaAppMigrateItemEventsTelemetryService (copy), TelemetryService (copy), Config (ref), GetPlatformTargetFunction (copy), FFlagLuaAppItemEventsTelemetryServiceShadowTraffic (copy), Config1 (ref)
+	-- upvalues: FFlagLuaAppItemImpressionsInteractionUuidModule (copy), HttpService (copy), config1 (copy), IntersectionResult1 (ref), DiscoveryEventErrorLogger (copy), FFlagLuaAppMigrateItemEventsTelemetryService (copy), TelemetryService (copy), Config (ref), GetPlatformTargetFunction (copy), FFlagLuaAppItemEventsTelemetryServiceShadowTraffic (copy), Config1 (ref)
+	if FFlagLuaAppItemImpressionsInteractionUuidModule and not Tbl.interactionUuid then
+		Tbl.interactionUuid = HttpService:GenerateGUID(false)
+	end
 	local Entry = config1[p2] or IntersectionResult1
 	
 	if Entry then

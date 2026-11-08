@@ -19,6 +19,7 @@ local ChatCardPriorityModule = require(BuildExperience.Components.Chat.ChatCardE
 local UseChatCardEmphasisModule = require(BuildExperience.Components.Chat.ChatCardEmphasis.useChatCardEmphasis)
 local FFlagBuildExperienceChatCardEmphasisModule = require(BuildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
 local FFlagBuildExperienceMonetizationFailureCausesModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationFailureCauses)
+local FFlagBuildExperienceMonetizationCardFixesModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationCardFixes)
 local Button = FoundationModule.Button
 local Image = FoundationModule.Image
 local Sheet = FoundationModule.Sheet
@@ -91,6 +92,26 @@ local function formatSummary(p1, AGENTDEVPRODUCTDESCRIPTION, p2)
 	return p1:Format(AGENTDEVPRODUCTDESCRIPTION, p2)
 end
 
+local _ = function(p1)
+	-- upvalues: NumberLocalization (copy), LocalizationService (copy)
+	return NumberLocalization.localize(tostring(p1), LocalizationService.RobloxLocaleId)
+end
+
+local function kindText(p1, p2)
+	-- upvalues: formatSummary (copy), LocalizationStringsModule (copy), config1 (copy), config (copy)
+	return formatSummary(p2, LocalizationStringsModule.AGENT_SUBSCRIPTION_PRODUCT_TYPE, {
+		PRODUCT_TYPE = p2:Format((if p1.itemKind == nil then config else config1[p1.itemKind] or config).title, {})
+	})
+end
+
+local _ = function(p1, p2, p3, p4)
+	-- upvalues: formatSummary (copy), LocalizationStringsModule (copy), NumberLocalization (copy), LocalizationService (copy)
+	return formatSummary(p2, LocalizationStringsModule.AGENT_MONETIZATION_CREATE_TITLE, {
+		NAME = p1.name or p3,
+		PRICE = if p1.priceInRobux == nil then p4 else NumberLocalization.localize(tostring(p1.priceInRobux), LocalizationService.RobloxLocaleId)
+	})
+end
+
 local function appendSubscriptionProductType(List, p1, p2)
 	-- upvalues: config2 (copy), formatSummary (copy), LocalizationStringsModule (copy)
 	if p1.itemKind ~= "subscription" or p1.productType == nil then return end
@@ -104,7 +125,7 @@ local function appendSubscriptionProductType(List, p1, p2)
 end
 
 local function devProductSummaryText(p1, UseContextResult, DefaultName, UnavailablePrice)
-	-- upvalues: NumberLocalization (copy), LocalizationService (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), formatSummary (copy), LocalizationStringsModule (copy)
+	-- upvalues: NumberLocalization (copy), LocalizationService (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), LocalizationStringsModule (copy), FFlagBuildExperienceMonetizationCardFixesModule (copy), kindText (copy), formatSummary (copy)
 	local Action = p1.action
 	
 	if Action == "create" then
@@ -112,7 +133,9 @@ local function devProductSummaryText(p1, UseContextResult, DefaultName, Unavaila
 		local UnavailablePrice1 = if p1.priceInRobux == nil then UnavailablePrice else NumberLocalization.localize(tostring(p1.priceInRobux), LocalizationService.RobloxLocaleId)
 		
 		if FFlagBuildExperienceMonetizationNativeUIModule then
-			return formatSummary(UseContextResult, LocalizationStringsModule.AGENT_DEV_PRODUCT_PRICE, { PRICE = UnavailablePrice1 })
+			local FormatResult = UseContextResult:Format(LocalizationStringsModule.AGENT_DEV_PRODUCT_PRICE, { PRICE = UnavailablePrice1 })
+			
+			return if FFlagBuildExperienceMonetizationCardFixesModule then `{FormatResult}\n{kindText(p1, UseContextResult)}` else FormatResult
 		end
 		local List = {
 			formatSummary(UseContextResult, LocalizationStringsModule.AGENT_DEV_PRODUCT_CREATE, { NAME = Name, PRICE = UnavailablePrice1 })
@@ -146,7 +169,7 @@ local function devProductSummaryText(p1, UseContextResult, DefaultName, Unavaila
 end
 
 local function itemSummaryText(p1, UseContextResult, DefaultName, UnavailablePrice)
-	-- upvalues: config1 (copy), config (copy), NumberLocalization (copy), LocalizationService (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), formatSummary (copy), LocalizationStringsModule (copy), appendSubscriptionProductType (copy)
+	-- upvalues: config1 (copy), config (copy), NumberLocalization (copy), LocalizationService (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), formatSummary (copy), LocalizationStringsModule (copy), FFlagBuildExperienceMonetizationCardFixesModule (copy), kindText (copy), appendSubscriptionProductType (copy)
 	local Action = p1.action
 	local Config = if p1.itemKind == nil then config else config1[p1.itemKind] or config
 	
@@ -158,6 +181,10 @@ local function itemSummaryText(p1, UseContextResult, DefaultName, UnavailablePri
 		} else {
 			formatSummary(UseContextResult, Config.create, { NAME = Name, PRICE = UnavailablePrice1 })
 		}
+		
+		if FFlagBuildExperienceMonetizationCardFixesModule and FFlagBuildExperienceMonetizationNativeUIModule then
+			table.insert(List, kindText(p1, UseContextResult))
+		end
 		appendSubscriptionProductType(List, p1, UseContextResult)
 		
 		if FFlagBuildExperienceMonetizationNativeUIModule then
@@ -198,7 +225,7 @@ local _ = function(p1, p2, p3, p4)
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), LocalizationRoactContext (copy), UseLocalizationFunction (copy), config1 (copy), config (copy), LocalizationStringsModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), FFlagBuildExperienceDevProductRecoveryModule (copy), FFlagBuildExperienceMonetizationFailureCausesModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), UseChatCardEmphasisModule (copy), ChatCardPriorityModule (copy), Sheet (copy), Text (copy), View (copy), Image (copy), AssetId (ref), FFlagCreatorAgentChatMonetizationToolHelpersModule (copy), devProductSummaryText (copy), itemSummaryText (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), AgentCardActionsModule (copy), AgentCardModule (copy)
+	-- upvalues: ReactModule (copy), LocalizationRoactContext (copy), UseLocalizationFunction (copy), config1 (copy), config (copy), LocalizationStringsModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), FFlagBuildExperienceDevProductRecoveryModule (copy), FFlagBuildExperienceMonetizationFailureCausesModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), UseChatCardEmphasisModule (copy), ChatCardPriorityModule (copy), Sheet (copy), Text (copy), View (copy), Image (copy), AssetId (ref), FFlagCreatorAgentChatMonetizationToolHelpersModule (copy), devProductSummaryText (copy), itemSummaryText (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), AgentCardActionsModule (copy), FFlagBuildExperienceMonetizationCardFixesModule (copy), AgentCardModule (copy), NumberLocalization (copy), LocalizationService (copy)
 	local UseContextResult = ReactModule.useContext(LocalizationRoactContext)
 	local UseLocalizationResult = UseLocalizationFunction({
 		title = (if p1.itemKind == nil then config else config1[p1.itemKind] or config).title,
@@ -258,7 +285,7 @@ return function(p1)
 			snapPoints = { 0.5, 1 },
 			testId = `{TestId}-preview`
 		}, {
-			Header = ReactModule.createElement(Sheet.Header, { hasCloseAffordance = true }, {
+			Header = ReactModule.createElement(Sheet.Header, nil, {
 				Title = ReactModule.createElement(Text, {
 					tag = "size-full-0 auto-y text-title-large text-wrap text-align-x-left content-emphasis",
 					Text = p1.name or UseLocalizationResult.defaultName
@@ -282,7 +309,8 @@ return function(p1)
 					Price = ReactModule.createElement(Text, {
 						LayoutOrder = 2,
 						tag = "size-full-0 auto-y text-body-large text-wrap text-align-x-left content-emphasis",
-						Text = if FFlagCreatorAgentChatMonetizationToolHelpersModule or p1.itemKind ~= nil then itemSummaryText(p1, UseContextResult, DefaultName, UnavailablePrice) else devProductSummaryText(p1, UseContextResult, DefaultName, UnavailablePrice)
+						Text = if FFlagCreatorAgentChatMonetizationToolHelpersModule or p1.itemKind ~= nil then itemSummaryText(p1, UseContextResult, DefaultName, UnavailablePrice) else devProductSummaryText(p1, UseContextResult, DefaultName, UnavailablePrice),
+						testId = `{TestId}-preview-summary`
 					}),
 					Description = ReactModule.createElement(Text, {
 						LayoutOrder = 3,
@@ -356,17 +384,38 @@ return function(p1)
 			testId = `{TestId}-reject-button`
 		})
 	})
-	local DefaultName = UseLocalizationResult.defaultName
-	local UnavailablePrice = UseLocalizationResult.unavailablePrice
+	local IsCreate1: boolean = FFlagBuildExperienceMonetizationCardFixesModule and (FFlagBuildExperienceMonetizationNativeUIModule and IsCreate)
+	local CreateElementFunction = ReactModule.createElement
+	local t = {}
+	local Name = nil
 	
-	return ReactModule.createElement(AgentCardModule, {
-		title = if IsCreate then p1.name or UseLocalizationResult.defaultName else UseLocalizationResult.title,
-		fitToContent = if IsCreate then true else nil,
-		textContent = if FFlagCreatorAgentChatMonetizationToolHelpersModule or p1.itemKind ~= nil then itemSummaryText(p1, UseContextResult, DefaultName, UnavailablePrice) else devProductSummaryText(p1, UseContextResult, DefaultName, UnavailablePrice),
-		layoutOrder = p1.layoutOrder,
-		testId = TestId,
-		footer = if FFlagBuildExperienceDevProductRecoveryModule then Element1 else nil
-	}, {
+	if IsCreate1 then
+		local DefaultName = UseLocalizationResult.defaultName
+		local UnavailablePrice = UseLocalizationResult.unavailablePrice
+		Name = UseContextResult:Format(LocalizationStringsModule.AGENT_MONETIZATION_CREATE_TITLE, {
+			NAME = p1.name or DefaultName,
+			PRICE = if p1.priceInRobux == nil then UnavailablePrice else NumberLocalization.localize(tostring(p1.priceInRobux), LocalizationService.RobloxLocaleId)
+		})
+	else
+		Name = if IsCreate then p1.name or UseLocalizationResult.defaultName else UseLocalizationResult.title
+	end
+	t.title = Name
+	t.fitToContent = if IsCreate or FFlagBuildExperienceMonetizationCardFixesModule then true else nil
+	local ItemSummaryTextResult = nil
+	
+	if IsCreate1 then
+		ItemSummaryTextResult = p1.description or ""
+	else
+		local DefaultName = UseLocalizationResult.defaultName
+		local UnavailablePrice = UseLocalizationResult.unavailablePrice
+		ItemSummaryTextResult = if FFlagCreatorAgentChatMonetizationToolHelpersModule or p1.itemKind ~= nil then itemSummaryText(p1, UseContextResult, DefaultName, UnavailablePrice) else devProductSummaryText(p1, UseContextResult, DefaultName, UnavailablePrice)
+	end
+	t.textContent = ItemSummaryTextResult
+	t.layoutOrder = p1.layoutOrder
+	t.testId = TestId
+	t.footer = if FFlagBuildExperienceDevProductRecoveryModule then Element1 else nil
+	
+	return CreateElementFunction(AgentCardModule, t, {
 		Preview = Element,
 		ImagePreview = if IsCreate or p1.imageAssetId == nil then nil else ReactModule.createElement(Image, {
 			LayoutOrder = 3,
@@ -375,7 +424,7 @@ return function(p1)
 			ScaleType = Enum.ScaleType.Fit,
 			testId = `{TestId}-image-preview`
 		}),
-		Error = if FFlagBuildExperienceDevProductRecoveryModule and (p1.hasError and not IsIsPending) then ReactModule.createElement(Text, {
+		Error = if FFlagBuildExperienceDevProductRecoveryModule and p1.hasError and not IsIsPending then ReactModule.createElement(Text, {
 			LayoutOrder = 4,
 			tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-alert",
 			Text = (if p1.errorCause == nil then nil else UseLocalizationResult[p1.errorCause]) or UseLocalizationResult.error,

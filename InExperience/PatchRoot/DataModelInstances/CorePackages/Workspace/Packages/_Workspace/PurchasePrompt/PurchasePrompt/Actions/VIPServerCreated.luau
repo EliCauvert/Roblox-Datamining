@@ -1,1 +1,1 @@
-﻿return require(script.Parent.makeActionCreator)(script.Name, "vipServerId", "vipServerName")
+﻿return require(script.Parent.makeActionCreator)(script.Name, "vipServerId", "vipServerName", "vipServerAccessCode")

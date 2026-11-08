@@ -5,6 +5,8 @@ return require(SocialCarousel.Parent.React).createContext({
 	hideCarouselHeader = false,
 	openGameJoinCardUserId = nil,
 	setOpenGameJoinCardUserId = nil,
+	openBuildCardUserId = nil,
+	setOpenBuildCardUserId = nil,
 	unifiedLogging = nil,
 	sortAnalyticsData = nil,
 	friendRequestCount = 0,

@@ -16,6 +16,7 @@ local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptim
 local FFlagMomentsRenderAvatarPostsInFeed = SharedFlagsModule.FFlagMomentsRenderAvatarPostsInFeed
 local FFlagMomentsFeedMediaLoadAttemptedEvent = MomentsCommonModule.Flags.FFlagMomentsFeedMediaLoadAttemptedEvent
 local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
+local FFlagMomentsCommentDeepLinks = SharedFlagsModule.FFlagMomentsCommentDeepLinks
 local GetCommentsSheetStoreModule = if FFlagMomentsComments then require(Moments.Components.Comments.Sheet.getCommentsSheetStore) else nil
 local FFlagMomentsCreatorAnalyticsModule = require(Moments.Flags.FFlagMomentsCreatorAnalytics)
 local GetPostInsightsPageStoreModule = if FFlagMomentsCreatorAnalyticsModule then require(Moments.Components.PostInsights.getPostInsightsPageStore) else nil
@@ -35,7 +36,6 @@ local UseMomentsSessionFunction = require(Moments.Stores.GetMomentsStore.Moments
 local FFlagMomentsDeleteSnackbarModule = require(Moments.Flags.FFlagMomentsDeleteSnackbar)
 local FFlagMomentsFixDeleteToastCopyModule = require(Moments.Flags.FFlagMomentsFixDeleteToastCopy)
 local GetFFlagMomentsNonInfiniteScrollFunction = MomentsCommonModule.Flags.GetFFlagMomentsNonInfiniteScroll
-local FFlagMomentsNonInfiniteScrollEndStateFixesModule = require(Moments.Flags.FFlagMomentsNonInfiniteScrollEndStateFixes)
 local GetToastStoreModule = require(Moments.Stores.GetToastStore)
 local GetDeletedMomentsStoreModule = require(Moments.Stores.GetDeletedMomentsStore)
 local DeleteMomentModule = require(Moments.Moderation.deleteMoment)
@@ -121,7 +121,7 @@ local _ = function()
 end
 
 return function(Frame: Frame)
-	-- upvalues: NoopTelemetry (copy), FFlagMomentsComments (copy), GetCommentsSheetStoreModule (copy), SignalsReactModule (copy), FFlagMomentsCreatorAnalyticsModule (copy), GetPostInsightsPageStoreModule (copy), GetImmersiveChromeStoreModule (copy), UseLocalizationFunction (copy), config (copy), UseMomentsSessionFunction (copy), GetToastStoreModule (copy), ReactModule (copy), GetFeedScrollLimitModule (copy), FFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), GetFFlagMomentsNonInfiniteScrollFunction (copy), GetMomentsCapabilitiesFunction (copy), CreateFeedStoreModule (copy), feedItemDedupeKey (copy), FFlagMomentsCommentsCloseOnFeedJumpModule (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), SignalsModule (copy), FFlagMomentsNavigationEventModule (copy), UseMomentsHostFunction (copy), LogMomentViewBeganModule (copy), FFlagMomentsImpressionPrimaryEntityModule (copy), Moments (copy), FireAnalyticsEventFunction (copy), EventNames (copy), LogFeedEndStateReachedModule (copy), UseFeedTelemetryModule (copy), feedItemAttribution (copy), FFlagMomentsOptimisticProfilePending (copy), MomentsSurfaceLoadManager (copy), FeedItemRegistryModule (copy), DeleteMomentModule (copy), MomentsFeed (ref), Parent (copy), FFlagMomentsRemoveDeletedFromProfile (copy), GetDeletedMomentsStoreModule (copy), MakeFeedActionFieldsModule (copy), FFlagMomentsDeleteSnackbarModule (copy), FFlagMomentsFixDeleteToastCopyModule (copy), makeMediaLoadEventFields (copy), Analytics (copy), FFlagMomentsFeedMediaLoadAttemptedEvent (copy), FeedContext (copy), VerticalPager (copy), renderFeedItem (copy), feedItemKey (copy), FeedStateViewModule (copy), FeedNavigationBarModule (copy), ImmersiveChromeControllerModule (copy), SwipeLatencyTrackerModule (copy), DeletionConfirmationDialogModule (copy), MomentMediaCoordinatorProviderModule (copy), SurfaceReadyTrackerModule (copy)
+	-- upvalues: NoopTelemetry (copy), FFlagMomentsComments (copy), GetCommentsSheetStoreModule (copy), SignalsReactModule (copy), FFlagMomentsCreatorAnalyticsModule (copy), GetPostInsightsPageStoreModule (copy), GetImmersiveChromeStoreModule (copy), UseLocalizationFunction (copy), config (copy), UseMomentsSessionFunction (copy), GetToastStoreModule (copy), ReactModule (copy), GetFeedScrollLimitModule (copy), GetFFlagMomentsNonInfiniteScrollFunction (copy), GetMomentsCapabilitiesFunction (copy), CreateFeedStoreModule (copy), feedItemDedupeKey (copy), FFlagMomentsCommentsCloseOnFeedJumpModule (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), SignalsModule (copy), FFlagMomentsNavigationEventModule (copy), UseMomentsHostFunction (copy), LogMomentViewBeganModule (copy), FFlagMomentsImpressionPrimaryEntityModule (copy), Moments (copy), FireAnalyticsEventFunction (copy), EventNames (copy), LogFeedEndStateReachedModule (copy), UseFeedTelemetryModule (copy), feedItemAttribution (copy), FFlagMomentsOptimisticProfilePending (copy), MomentsSurfaceLoadManager (copy), FeedItemRegistryModule (copy), DeleteMomentModule (copy), MomentsFeed (ref), Parent (copy), FFlagMomentsRemoveDeletedFromProfile (copy), GetDeletedMomentsStoreModule (copy), MakeFeedActionFieldsModule (copy), FFlagMomentsDeleteSnackbarModule (copy), FFlagMomentsFixDeleteToastCopyModule (copy), makeMediaLoadEventFields (copy), Analytics (copy), FFlagMomentsFeedMediaLoadAttemptedEvent (copy), FFlagMomentsCommentDeepLinks (copy), FeedContext (copy), VerticalPager (copy), renderFeedItem (copy), feedItemKey (copy), FeedStateViewModule (copy), FeedNavigationBarModule (copy), ImmersiveChromeControllerModule (copy), SwipeLatencyTrackerModule (copy), DeletionConfirmationDialogModule (copy), MomentMediaCoordinatorProviderModule (copy), SurfaceReadyTrackerModule (copy)
 	local Source = Frame.source
 	local NoActive = Frame.active == nil or Frame.active
 	local NoActive1 = if Frame.playbackActive == nil then NoActive else Frame.playbackActive
@@ -152,8 +152,8 @@ return function(Frame: Frame)
 	local ToastStoreModule = GetToastStoreModule(false)
 	local UseSignalStateResult3 = SignalsReactModule.useSignalState(UseMomentsSessionResult.getPendingDeletion)
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: GetFeedScrollLimitModule (upval), FFlagMomentsNonInfiniteScrollEndStateFixesModule (upval), GetFFlagMomentsNonInfiniteScrollFunction (upval), GetMomentsCapabilitiesFunction (upval), CreateFeedStoreModule (upval), Source (copy), feedItemDedupeKey (upval), IsTrackSurfaceLoad (copy)
-		return CreateFeedStoreModule(Source, feedItemDedupeKey, IsTrackSurfaceLoad, (GetFeedScrollLimitModule(FFlagMomentsNonInfiniteScrollEndStateFixesModule, GetFFlagMomentsNonInfiniteScrollFunction(), function()
+		-- upvalues: GetFeedScrollLimitModule (upval), GetFFlagMomentsNonInfiniteScrollFunction (upval), GetMomentsCapabilitiesFunction (upval), CreateFeedStoreModule (upval), Source (copy), feedItemDedupeKey (upval), IsTrackSurfaceLoad (copy)
+		return CreateFeedStoreModule(Source, feedItemDedupeKey, IsTrackSurfaceLoad, (GetFeedScrollLimitModule(true, GetFFlagMomentsNonInfiniteScrollFunction(), function()
 			-- upvalues: GetMomentsCapabilitiesFunction (upval)
 			return GetMomentsCapabilitiesFunction(false)
 		end)))
@@ -553,12 +553,13 @@ return function(Frame: Frame)
 	local IsLoaded: boolean = NoShowNavigationBar and (UseSignalStateResult4 == "Loaded" or UseSignalStateResult4 == "LoadingMore")
 	local Element = ReactModule.createElement(FeedContext.Provider, {
 		value = ReactModule.useMemo(function()
-			-- upvalues: UseMemoResult (copy), NoActive (copy), NoActive1 (copy), FFlagMomentsRenderAvatarPostsInFeed (upval), Source (copy), Telemetry (copy), UseFeedTelemetryModuleResult (copy), ImmersiveChromeStoreModule (copy), UseResult7 (copy), UseResult5 (copy), FFlagMomentsNonInfiniteScrollEndStateFixesModule (upval), GetFFlagMomentsNonInfiniteScrollFunction (upval), Frame (copy)
+			-- upvalues: UseMemoResult (copy), NoActive (copy), NoActive1 (copy), FFlagMomentsRenderAvatarPostsInFeed (upval), FFlagMomentsCommentDeepLinks (upval), Source (copy), Telemetry (copy), UseFeedTelemetryModuleResult (copy), ImmersiveChromeStoreModule (copy), UseResult7 (copy), UseResult5 (copy), GetFFlagMomentsNonInfiniteScrollFunction (upval), Frame (copy)
 			return {
 				getStatus = UseMemoResult.getStatus,
 				isActiveFeed = NoActive,
 				isPlaybackActive = NoActive1,
 				getCurrentIndex = if FFlagMomentsRenderAvatarPostsInFeed then UseMemoResult.pager.getCurrentIndex else nil,
+				getCurrentItem = if FFlagMomentsCommentDeepLinks then UseMemoResult.pager.getCurrentItem else nil,
 				recommendationSource = Source.recommendationSource,
 				logAction = function(p3, p4, p5)
 					-- upvalues: Telemetry (upval)
@@ -569,8 +570,8 @@ return function(Frame: Frame)
 				revealChrome = ImmersiveChromeStoreModule.revealChrome,
 				removeCurrentItem = UseResult7,
 				scrollToNext = UseResult5,
-				loadMoreBeyondLimit = if FFlagMomentsNonInfiniteScrollEndStateFixesModule then if GetFFlagMomentsNonInfiniteScrollFunction() then UseMemoResult.loadBeyondLimit else nil else UseMemoResult.loadBeyondLimit,
-				getCanLoadMoreBeyondLimit = if FFlagMomentsNonInfiniteScrollEndStateFixesModule then UseMemoResult.getCanLoadMoreBeyondLimit else nil,
+				loadMoreBeyondLimit = if GetFFlagMomentsNonInfiniteScrollFunction() then UseMemoResult.loadBeyondLimit else nil,
+				getCanLoadMoreBeyondLimit = UseMemoResult.getCanLoadMoreBeyondLimit,
 				caughtUpState = Frame.caughtUpState
 			}
 		end, {

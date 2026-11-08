@@ -5,10 +5,7 @@ local ReactModule = require(Parent.React)
 local RoactModule = require(Parent.Roact)
 local UIBloxModule = require(Parent.UIBlox)
 local StyleModule = require(Parent.Style)
-local FoundationModule = require(Parent.Foundation)
-local Text = require(Parent.AppCommonLib).Text
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
@@ -56,7 +53,7 @@ local function getButtonStackProps(Text, OnActivated, IsDisabled, Text1, OnActiv
 end
 
 return function(p1)
-	-- upvalues: MergePropsModule (copy), config (copy), FFlagInExperienceAddPhoneViewNewCopy (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), StyleModule (copy), _Vector2 (copy), Text (copy), UseExternalEventFunction (copy), UserInputService (copy), RoactModule (copy), CountryCodeButtonModule (copy), GetFFlagAddMorePhoneUpsellEventsFunction (copy), TextField (copy), NormalizeFontFaceFunction (copy), InteractiveAlert (copy), getButtonStackProps (copy), CountryCodeDropdownContainer (copy)
+	-- upvalues: MergePropsModule (copy), config (copy), FFlagInExperienceAddPhoneViewNewCopy (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), StyleModule (copy), _Vector2 (copy), UseExternalEventFunction (copy), UserInputService (copy), RoactModule (copy), CountryCodeButtonModule (copy), GetFFlagAddMorePhoneUpsellEventsFunction (copy), TextField (copy), NormalizeFontFaceFunction (copy), InteractiveAlert (copy), getButtonStackProps (copy), CountryCodeDropdownContainer (copy)
 	local MergePropsModuleResult = MergePropsModule(config, p1)
 	local Config = if FFlagInExperienceAddPhoneViewNewCopy then {
 		phoneNumberKey = "Feature.VerificationUpsell.Label.PhoneNumber",
@@ -96,7 +93,7 @@ return function(p1)
 	local Size1200: number = Tokens.Size.Size_1200
 	local Prefix = MergePropsModuleResult.countryCode.prefix
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local Largest = math.max((if FoundationFontFaceMigration then StyleModule.GetTextSize(Prefix, FontSize, BodyLargeFont, _Vector2).X else Text.GetTextWidth(Prefix, BodyLargeFont, FontSize)) + 24, Size1200)
+	local Largest = math.max(StyleModule.GetTextSize(Prefix, FontSize, BodyLargeFont, _Vector2).X + 24, Size1200)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(300)
 	
 	local function OnAbsoluteSizeChanged(Frame)
@@ -203,8 +200,7 @@ return function(p1)
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Top,
 			TextColor3 = Tokens.Color.System.Alert.Color3,
-			Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Tokens.Typography.BodyLarge.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(Tokens.Typography.BodyLarge.Font),
 			TextSize = BaseSize * UseStyleResult.Font.CaptionSmall.RelativeSize,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
@@ -226,7 +222,7 @@ return function(p1)
 			onAbsoluteSizeChanged = OnAbsoluteSizeChanged,
 			onCloseClicked = MergePropsModuleResult.onClose,
 			middleContent = if FFlagInExperienceAddPhoneViewNewCopy then function()
-				-- upvalues: ReactModule (upval), Tokens (copy), UseLocalizationResult (copy), BaseSize (copy), UseStyleResult (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), Frame (copy), RelativeSize (copy)
+				-- upvalues: ReactModule (upval), Tokens (copy), UseLocalizationResult (copy), BaseSize (copy), UseStyleResult (copy), NormalizeFontFaceFunction (upval), Frame (copy), RelativeSize (copy)
 				return ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					AutomaticSize = Enum.AutomaticSize.Y,
@@ -250,8 +246,7 @@ return function(p1)
 							TextSize = BaseSize,
 							TextColor3 = UseStyleResult.Theme.TextEmphasis.Color,
 							TextTransparency = UseStyleResult.Theme.TextEmphasis.Transparency,
-							Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
-							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Tokens.Typography.BodyLarge.Font) else nil,
+							FontFace = NormalizeFontFaceFunction(Tokens.Typography.BodyLarge.Font),
 							TextXAlignment = Enum.TextXAlignment.Left,
 							Size = UDim2.new(1, 0, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y
@@ -265,8 +260,7 @@ return function(p1)
 							TextSize = BaseSize * RelativeSize,
 							TextColor3 = UseStyleResult.Theme.TextEmphasis.Color,
 							TextTransparency = UseStyleResult.Theme.TextEmphasis.Transparency,
-							Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
-							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Tokens.Typography.BodyLarge.Font) else nil,
+							FontFace = NormalizeFontFaceFunction(Tokens.Typography.BodyLarge.Font),
 							TextXAlignment = Enum.TextXAlignment.Left,
 							Size = UDim2.new(1, 0, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y
@@ -279,8 +273,7 @@ return function(p1)
 							TextSize = BaseSize * RelativeSize,
 							TextColor3 = UseStyleResult.Theme.TextEmphasis.Color,
 							TextTransparency = UseStyleResult.Theme.TextEmphasis.Transparency,
-							Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
-							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Tokens.Typography.BodyLarge.Font) else nil,
+							FontFace = NormalizeFontFaceFunction(Tokens.Typography.BodyLarge.Font),
 							TextXAlignment = Enum.TextXAlignment.Left,
 							Size = UDim2.new(1, 0, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y
@@ -288,7 +281,7 @@ return function(p1)
 					})
 				})
 			end else function()
-				-- upvalues: ReactModule (upval), Tokens (copy), Frame (copy), UseLocalizationResult (copy), BaseSize (copy), RelativeSize (copy), UseStyleResult (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+				-- upvalues: ReactModule (upval), Tokens (copy), Frame (copy), UseLocalizationResult (copy), BaseSize (copy), RelativeSize (copy), UseStyleResult (copy), NormalizeFontFaceFunction (upval)
 				return ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					AutomaticSize = Enum.AutomaticSize.Y,
@@ -313,8 +306,7 @@ return function(p1)
 							TextSize = BaseSize * RelativeSize,
 							TextColor3 = UseStyleResult.Theme.TextEmphasis.Color,
 							TextTransparency = UseStyleResult.Theme.TextEmphasis.Transparency,
-							Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
-							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Tokens.Typography.BodyLarge.Font) else nil,
+							FontFace = NormalizeFontFaceFunction(Tokens.Typography.BodyLarge.Font),
 							TextXAlignment = Enum.TextXAlignment.Left,
 							Size = UDim2.new(1, 0, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y

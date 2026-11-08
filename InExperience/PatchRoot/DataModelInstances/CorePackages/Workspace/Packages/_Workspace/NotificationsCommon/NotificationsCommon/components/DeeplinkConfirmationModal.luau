@@ -7,9 +7,10 @@ local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 local EnableToastNotificationsDeeplinkConfirmationModalHeightFix = game:DefineFastFlag("EnableToastNotificationsDeeplinkConfirmationModalHeightFix", false)
 local RobloxTranslatorModule = require(Parent.RobloxTranslator)
+local FFlagGameInviteInExpJoinCta3 = require(Parent.SharedFlags).FFlagGameInviteInExpJoinCta3
 
 return function(p1)
-	-- upvalues: ReactModule (copy), RobloxTranslatorModule (copy), EnableToastNotificationsDeeplinkConfirmationModalHeightFix (copy), GuiService (copy), ReactRobloxModule (copy), InteractiveAlert (copy), ButtonType (copy)
+	-- upvalues: ReactModule (copy), RobloxTranslatorModule (copy), FFlagGameInviteInExpJoinCta3 (copy), EnableToastNotificationsDeeplinkConfirmationModalHeightFix (copy), GuiService (copy), ReactRobloxModule (copy), InteractiveAlert (copy), ButtonType (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(800, 600))
 	
 	return ReactModule.createElement("Frame", {
@@ -25,8 +26,8 @@ return function(p1)
 	}, {
 		Alert = ReactModule.createElement(InteractiveAlert, {
 			screenSize = UseStateResult,
-			title = RobloxTranslatorModule:FormatByKey("Notifications.ToastNotifications.Title.LeavingExperience"),
-			bodyText = RobloxTranslatorModule:FormatByKey("Notifications.ToastNotifications.Label.LeaveExperienceConfirmation"),
+			title = RobloxTranslatorModule:FormatByKey(FFlagGameInviteInExpJoinCta3 and p1.titleKey or "Notifications.ToastNotifications.Title.LeavingExperience"),
+			bodyText = RobloxTranslatorModule:FormatByKey(FFlagGameInviteInExpJoinCta3 and p1.bodyKey or "Notifications.ToastNotifications.Label.LeaveExperienceConfirmation"),
 			buttonStackInfo = {
 				buttons = {
 					{

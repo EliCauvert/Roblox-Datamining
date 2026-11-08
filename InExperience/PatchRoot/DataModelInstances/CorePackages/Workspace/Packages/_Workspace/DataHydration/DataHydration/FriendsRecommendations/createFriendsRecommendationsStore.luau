@@ -16,6 +16,9 @@ local config = {
 	[ContextTypeModule.Contacts] = true
 }
 
+if require(Parent.SharedFlags.FFlagShowClassmatesOnPYMK) then
+	config[ContextTypeModule.Classmates] = true
+end
 local function _()
 	-- upvalues: LocalUserIdStore (copy), GetLocalPlayerUserIdFunction (copy)
 	local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)

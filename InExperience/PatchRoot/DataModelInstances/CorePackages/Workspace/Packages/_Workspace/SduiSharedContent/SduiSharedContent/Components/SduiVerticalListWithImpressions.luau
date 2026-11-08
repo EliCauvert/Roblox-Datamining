@@ -1,4 +1,5 @@
 ﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local FFlagSduiErrorPaths = require(Parent.SharedFlags).FFlagSduiErrorPaths
 local ReactModule = require(Parent.React)
 local _ = require(Parent.AppCommonLib)
 local ImpressionsModule = require(Parent.Impressions)
@@ -12,6 +13,7 @@ local ReportUnifiedLoggingImpressionsFunction = SduiCoreSystemModule.reportUnifi
 local SduiBuilder = SduiCoreSystemModule.SduiBuilder
 local SduiCollectionAnalyticsBuilder = SduiCoreSystemModule.SduiCollectionAnalyticsBuilder
 local SduiErrors = SduiCoreSystemModule.SduiErrors
+local AddSduiErrorContextFieldsFunction = SduiCoreSystemModule.addSduiErrorContextFields
 local SduiFeedContextModule = require(script.Parent.SduiFeedContext)
 local SduiViewModule = require(script.Parent.SduiView)
 local UseCollectionAnalyticsContextModule = require(script.Parent.useCollectionAnalyticsContext)
@@ -92,7 +94,7 @@ local function resolveImpressionsTag(p1, ComponentType, RouteName, Name, Index, 
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: Frozen (copy), ReactModule (copy), SduiFeedContextModule (copy), FFlagSduiCarouselUseNestedImpressionsFeedContext (copy), FindAnalyticsFieldFunction (copy), SduiBuilder (copy), UseCollectionAnalyticsContextModule (copy), resolveImpressionsTag (copy), SduiParseHelpers (copy), SduiErrors (copy), ReportUnifiedLoggingImpressionsFunction (copy), SduiCollectionAnalyticsBuilder (copy), ImpressionTaggedSduiItem (copy), GetSduiComponentWrapperFunction (copy), SduiViewModule (copy), FrameBoundsImpressionsTracker (copy), FFlagLuaAppRespectClipAncestorImpressions (copy)
+	-- upvalues: Frozen (copy), ReactModule (copy), SduiFeedContextModule (copy), FFlagSduiCarouselUseNestedImpressionsFeedContext (copy), FindAnalyticsFieldFunction (copy), SduiBuilder (copy), UseCollectionAnalyticsContextModule (copy), resolveImpressionsTag (copy), SduiParseHelpers (copy), SduiErrors (copy), ReportUnifiedLoggingImpressionsFunction (copy), FFlagSduiErrorPaths (copy), AddSduiErrorContextFieldsFunction (copy), SduiCollectionAnalyticsBuilder (copy), ImpressionTaggedSduiItem (copy), GetSduiComponentWrapperFunction (copy), SduiViewModule (copy), FrameBoundsImpressionsTracker (copy), FFlagLuaAppRespectClipAncestorImpressions (copy)
 	local SduiContext = p1.sduiContext
 	local Items = p1.items or Frozen
 	local CountItems = #Items
@@ -127,7 +129,7 @@ return ReactModule.memo(function(p1)
 		p1.skipItemImpressionsLog
 	})
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: Items (copy), SduiContext (copy), SduiErrors (upval), ComponentType (copy), ResolveImpressionsTagResult (copy), FindAnalyticsFieldFunction (upval), Frozen (upval), SduiBuilder (upval), SduiCollectionAnalyticsBuilder (upval), ReactModule (upval), ImpressionTaggedSduiItem (upval), p1 (copy), UseCollectionAnalyticsContextModuleResult (copy), ScrollViewPositionChangedSignal (copy), VerticalScrollingFrameRef (copy), UseRefResult1 (copy)
+		-- upvalues: Items (copy), SduiContext (copy), SduiErrors (upval), ComponentType (copy), ResolveImpressionsTagResult (copy), FindAnalyticsFieldFunction (upval), Frozen (upval), SduiBuilder (upval), FFlagSduiErrorPaths (upval), AddSduiErrorContextFieldsFunction (upval), SduiCollectionAnalyticsBuilder (upval), ReactModule (upval), ImpressionTaggedSduiItem (upval), p1 (copy), UseCollectionAnalyticsContextModuleResult (copy), ScrollViewPositionChangedSignal (copy), VerticalScrollingFrameRef (copy), UseRefResult1 (copy)
 		local Elements = {}
 		local Current = {}
 		
@@ -148,7 +150,7 @@ return ReactModule.memo(function(p1)
 					itemComponentType = ComponentType1,
 					componentType = ComponentType1
 				}
-				Current[Index] = SduiCollectionAnalyticsBuilder.buildAndValidateItemAnalyticsData(SduiContext, item.analyticsData, nil, LocalAnalyticsData, ComponentType1)
+				Current[Index] = SduiCollectionAnalyticsBuilder.buildAndValidateItemAnalyticsData(SduiContext, item.analyticsData, nil, LocalAnalyticsData, ComponentType1, nil, if FFlagSduiErrorPaths then item.errorContext else nil)
 				Elements[`Item_{Index}`] = ReactModule.createElement(ImpressionTaggedSduiItem, {
 					item = item,
 					index = Index,
@@ -161,11 +163,16 @@ return ReactModule.memo(function(p1)
 					verticalScrollingFrameRef = VerticalScrollingFrameRef
 				})
 			else
-				SduiContext.dependencies.logger.reportError(SduiErrors.SduiErrorType.NilComponentType, {
+				local config = {
 					componentType = ComponentType,
 					name = ResolveImpressionsTagResult,
 					message = `Nil componentType in SduiVerticalListWithImpressions at index {Index}`
-				}, SduiContext.appPage)
+				}
+				
+				if FFlagSduiErrorPaths then
+					AddSduiErrorContextFieldsFunction(config, item.errorContext)
+				end
+				SduiContext.dependencies.logger.reportError(SduiErrors.SduiErrorType.NilComponentType, config, SduiContext.appPage)
 			end
 		end
 		UseRefResult1.current = Current

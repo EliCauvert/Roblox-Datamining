@@ -12,8 +12,10 @@
 		ViewExperienceDetailsFromThumbnail = 5,
 		Chat = 6,
 		AgeCheckUnlock = 7,
-		PlayExperience = 8
+		PlayExperience = 8,
+		CreateInBuild = 9
 	},
+	JoinCardType = { Build = 2 },
 	GameJoinCardSurface = { Desktop = "desktop", Mobile = "mobile" },
 	CtaType = {
 		Join = "Join",

@@ -2,6 +2,7 @@
 local Parent = GameJoinCard.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local UserCtaAction = require(Parent.UserCtaCommon).Enums.UserCtaAction
 local Text = FoundationModule.Text
 local View = FoundationModule.View
@@ -10,13 +11,15 @@ local InputSize = FoundationModule.Enums.InputSize
 local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local AppPage = require(Parent.RobloxAppEnums).AppPage
-local FFlagEnableSplitPane = require(Parent.SharedFlags).FFlagEnableSplitPane
+local FFlagEnableSplitPane = SharedFlagsModule.FFlagEnableSplitPane
+local FFlagSocialCarouselBuildPresence = SharedFlagsModule.FFlagSocialCarouselBuildPresence
 local AnalyticsConstantsModule = require(GameJoinCard.Analytics.AnalyticsConstants)
 local GameJoinCardButtonAction = AnalyticsConstantsModule.GameJoinCardButtonAction
 local ViewProfileSourceValues = AnalyticsConstantsModule.viewProfileSourceValues
 local UseGameJoinCardAnalyticsModule = require(GameJoinCard.Analytics.useGameJoinCardAnalytics)
 local _ = require(script.Parent.Types)
 local GetTelemetryFieldsModule = require(script.Parent.getTelemetryFields)
+local ViewProfileLinkModule = require(script.Parent.ViewProfileLink)
 
 local function ViewProfileLink(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ControlState (copy), View (copy), StateLayerAffordance (copy), Text (copy)
@@ -45,15 +48,15 @@ end
 
 return {
 	[UserCtaAction.ViewProfile] = function(p1)
-		-- upvalues: UserCtaAction (copy), InputSize (copy), ReactModule (copy), ViewProfileLink (copy), ViewProfileSourceValues (copy), GetTelemetryFieldsModule (copy), UseGameJoinCardAnalyticsModule (copy), GameJoinCardButtonAction (copy), FFlagEnableSplitPane (copy), AppPage (copy)
+		-- upvalues: UserCtaAction (copy), InputSize (copy), ReactModule (copy), FFlagSocialCarouselBuildPresence (copy), ViewProfileLinkModule (copy), ViewProfileLink (copy), ViewProfileSourceValues (copy), GetTelemetryFieldsModule (copy), UseGameJoinCardAnalyticsModule (copy), GameJoinCardButtonAction (copy), FFlagEnableSplitPane (copy), AppPage (copy)
 		return {
 			id = UserCtaAction.ViewProfile,
 			inputSize = InputSize.Medium,
 			width = UDim.new(1, 0),
 			text = p1.localized[UserCtaAction.ViewProfile],
 			render = function(p2, LayoutOrder)
-				-- upvalues: ReactModule (upval), ViewProfileLink (upval), ViewProfileSourceValues (upval)
-				return ReactModule.createElement(ViewProfileLink, {
+				-- upvalues: ReactModule (upval), FFlagSocialCarouselBuildPresence (upval), ViewProfileLinkModule (upval), ViewProfileLink (upval), ViewProfileSourceValues (upval)
+				return ReactModule.createElement(if FFlagSocialCarouselBuildPresence then ViewProfileLinkModule else ViewProfileLink, {
 					text = p2.text,
 					onActivated = function()
 						-- upvalues: p2 (copy), ViewProfileSourceValues (upval)

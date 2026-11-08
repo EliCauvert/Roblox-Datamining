@@ -48,5 +48,6 @@
 	TradeItems = "TradeItems",
 	ContextualOverflow = "ContextualOverflow",
 	UnlockChat = "UnlockChat",
-	UnlockExperience = "UnlockExperience"
+	UnlockExperience = "UnlockExperience",
+	GoToBuild = "GoToBuild"
 }

@@ -1,16 +1,18 @@
 ﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local FFlagSduiErrorPaths = require(Parent.SharedFlags).FFlagSduiErrorPaths
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local GetSduiComponentWrapperFunction = SduiCoreSystemModule.getSduiComponentWrapper
 local SduiBuilder = SduiCoreSystemModule.SduiBuilder
 local SduiErrors = SduiCoreSystemModule.SduiErrors
+local AddSduiErrorContextFieldsFunction = SduiCoreSystemModule.addSduiErrorContextFields
 local List = FoundationModule.List
 local InputSize = FoundationModule.Enums.InputSize
 local Frozen = table.freeze({})
 
 return ReactModule.memo(function(p1)
-	-- upvalues: Frozen (copy), SduiBuilder (copy), SduiErrors (copy), GetSduiComponentWrapperFunction (copy), ReactModule (copy), List (copy), InputSize (copy)
+	-- upvalues: Frozen (copy), SduiBuilder (copy), FFlagSduiErrorPaths (copy), AddSduiErrorContextFieldsFunction (copy), SduiErrors (copy), GetSduiComponentWrapperFunction (copy), ReactModule (copy), List (copy), InputSize (copy)
 	local Elements = {}
 	
 	for LayoutOrder, ComponentConfig in p1.items or Frozen do
@@ -30,10 +32,15 @@ return ReactModule.memo(function(p1)
 				}
 			})
 		else
-			p1.sduiContext.dependencies.logger.reportError(SduiErrors.SduiErrorType.NilComponentType, {
+			local config = {
 				name = p1.debugName,
 				message = `Nil componentType in SduiListRoot at index {LayoutOrder}`
-			}, p1.sduiContext.appPage)
+			}
+			
+			if FFlagSduiErrorPaths then
+				AddSduiErrorContextFieldsFunction(config, ComponentConfig.errorContext)
+			end
+			p1.sduiContext.dependencies.logger.reportError(SduiErrors.SduiErrorType.NilComponentType, config, p1.sduiContext.appPage)
 		end
 	end
 	return ReactModule.createElement(List.Root, {

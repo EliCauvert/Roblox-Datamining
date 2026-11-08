@@ -188,8 +188,8 @@ Common.Presence.Label.Online,Online
 Common.Presence.Label.RobloxStudio,Roblox Studio
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,Animasi terlalu panjang ({duration} detik). Animasi emote harus berdurasi maksimal {maxLength} detik.
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,Animasi terlalu pendek ({duration} detik). Animasi emote harus berdurasi lebih dari {minLength} detik.
-Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,Pelanggaran penempatan bagian cage di {cageName}: {upperPart} tidak diposisikan dengan benar di atas {lowerPart}.
-Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,"Bagian cage {partName} di {cageName} memiliki {actualCount} vertex, seharusnya sekitar {expectedCount}. Hal ini dapat mengindikasikan adanya geometri yang hilang atau terduplikasi di area tubuh tersebut."
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,Pelanggaran penempatan bagian cage di {cageName}: {upperPart} tidak diposisikan dengan benar terhadap {lowerPart}.
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,"Bagian cage {partName} di {cageName} memiliki {actualCount} titik puncak, seharusnya sekitar {expectedCount}. Hal ini dapat mengindikasikan adanya geometri yang hilang atau terduplikasi di area cage tersebut."
 Common.UGCValidation.ErrorLabel.AQSFail_CageUV,"{cage_name} memiliki nilai UV yang salah dan tidak sesuai dengan templat. Terdapat {incorrect_uv_count} UV yang salah ({unreferenced_vertex_count} verteks tanpa referensi, {non_template_uv_count} UV yang bukan dari templat, {duplicate_mapping_count} pemetaan duplikat), {unmatched_template_count} vertex templat yang tidak sesuai. Perbaiki UV cage agar sesuai dengan templat."
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,Tubuhmu berisi komponen mesh kecil yang terputus (mesh island). Hapus geometri yang mengambang dan pastikan semua bagian mesh tersambung dengan benar.
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,"{partName} memiliki {num_disconnected_components} komponen yang terputus, yang melebihi batas maksimum {max_disconnected_components}."
@@ -209,9 +209,9 @@ Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,{mesh_outside_outer
 Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,Data validasi untuk {measureName} tidak dapat dihitung karena data input tidak lengkap atau tidak valid. Ini tidak memblokir upload-mu.
 Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,Tekstur {textureName} memiliki kompleksitas rendah. Tekstur mungkin tidak memiliki detail atau variasi yang memadai.
 Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,"Tekstur {textureName} memiliki resolusi rendah, yaitu {texture_width}x{texture_height}. Pertimbangkan untuk menggunakan tekstur dengan resolusi yang lebih tinggi."
-Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,Kualitas aset: {partName} memiliki {intersecting_tri_face_percent}% permukaan segitiga yang berpotongan (skor: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,"{partName} memiliki {intersecting_tri_face_percent}% permukaan yang saling berpotongan, yang melebihi {threshold}% yang diizinkan."
 Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,"{partName} memiliki {uv_outside_bound_vert_percent}% verteks UV di luar batas [0,1]."
-Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,Kualitas aset: {partName} memiliki {similar_vertex_percent}% verteks yang serupa (skor: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,"{partName} memiliki {similar_vertex_percent}% titik puncak yang serupa, yang melebihi {threshold}% yang diizinkan."
 Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,Sambungan aksesori '{AttachmentName}' di '{PartName}' harus ditempatkan dekat dengan permukaan mesh. Posisi saat ini [{CurrentPosition}] berada di luar wilayah yang valid. Pindahkan lebih dekat ke [{ClosestValidPosition}].
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,"Handel terikat ke sendi {jointName}, yang bukan bagian dari skema yang diizinkan. Hanya sendi R15 standar dan sendi transfer skinning yang diizinkan."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,"{assetType} harus menggunakan transfer skinning, tetapi kamu tidak memiliki sendi yang diperlukan {requiredJointName}."
@@ -223,15 +223,44 @@ Common.UGCValidation.ErrorLabel.AccessorySkinning_WeightNotFull,Verteks yang ter
 Common.UGCValidation.ErrorLabel.AnimationPack_DuplicateAnimationId,Bundel paket animasi berisi ID animasi duplikat '{animationId}' yang digunakan oleh beberapa klip: {instancePaths}. Setiap klip animasi harus merujuk ke aset animasi yang unik.
 Common.UGCValidation.ErrorLabel.AnimationPack_InvalidR15AnimChildren,Bundel paket animasi tidak memiliki tipe animasi yang diharapkan: {missingAnimationTypes}. Setiap tipe animasi harus memiliki 1 Folder R15Anim yang tepat berisi children StringValue yang diharapkan.
 Common.UGCValidation.ErrorLabel.Animation_WeightNotPositive,"Animasi '{animationName}' memiliki nilai Bobot {weight}, tetapi Bobot harus lebih besar dari 0. Perbaiki animasi."
+Common.UGCValidation.ErrorLabel.AssetBounds_InconsistentScaleType,Semua MeshPart harus memiliki nilai yang sama di child AvatarPartScaleType-nya. Verifikasi bahwa semua nilainya cocok.
+Common.UGCValidation.ErrorLabel.AssetBounds_TooLarge,"Ukuran mesh dan sendi {assetName} pada sumbu {axis} sebesar '{currentSize}' lebih besar dari ukuran maksimum bounding box {axis}, yaitu '{maxSize}'. Kamu perlu memperkecil ukuran mesh/sendi."
+Common.UGCValidation.ErrorLabel.AssetBounds_TooSmall,"Ukuran mesh {assetName} pada sumbu {axis} sebesar '{currentSize}' lebih kecil dari ukuran maksimum bounding box {axis}, yaitu '{minSize}'. Kamu perlu memperbesar ukuran mesh."
+Common.UGCValidation.ErrorLabel.AssetDoesNotExist,Aset '{AssetId}' yang dirujuk oleh '{InstancePath}' tidak ada atau tidak dapat di-load. Ganti dengan ID aset yang valid.
+Common.UGCValidation.ErrorLabel.AssetOpacity_BelowThreshold,{AssetName} tidak cukup buram dari {ViewName}. Opasitasnya adalah {Opacity} tetapi harus di atas {Threshold}.
+Common.UGCValidation.ErrorLabel.AssetOpacity_Invisible,Mesh untuk '{AssetName}' sama sekali tidak terlihat.
+Common.UGCValidation.ErrorLabel.AssetOpacity_MeshLoadFailed,"Gagal me-load mesh untuk MeshPart '{PartName}'. Pastikan mesh ada, lalu coba lagi."
+Common.UGCValidation.ErrorLabel.AssetOpacity_NoTriangles,Mesh untuk '{AssetName}' tidak memiliki segitiga.
+Common.UGCValidation.ErrorLabel.AssetOpacity_NonZeroTransparency,Bagian '{PartName}' memiliki transparansi yang bukan nol. Transparansi bagian harus selalu tepat nol.
+Common.UGCValidation.ErrorLabel.AssetOpacity_ZeroSize,Mesh untuk '{AssetName}' tidak boleh berukuran nol.
 Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,Tidak dapat menemukan {ExpectedClass} yang diperlukan bernama {ExpectedName} di dalam {ParentPath}
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,Instance berikut bukan bagian dari skema yang disetujui dan harus dihapus: {UnexpectedDescendantPaths}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,"Aset yang di-upload seharusnya berupa {ExpectedClass}, tetapi terdeteksi sebagai {RootClass}."
-Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,"Aset yang di-upload seharusnya diberi nama {ExpectedClass}, tetapi saat ini bernama {RootClass}."
+Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,"Aset yang di-upload seharusnya diberi nama {ExpectedName}, tetapi saat ini bernama {RootName}."
+Common.UGCValidation.ErrorLabel.AttachmentBoundsAssetCalculationFailed,Tidak dapat menghitung batas mesh untuk '{InstancePath}' sebelum memeriksa posisi sambungan. Data mesh mungkin hilang atau rusak; impor ulang aset lalu coba lagi.
+Common.UGCValidation.ErrorLabel.AttachmentBoundsCalculationFailed,Tidak dapat menghitung batas untuk sambungan '{AttachmentName}' di '{PartName}'. Data mesh mungkin hilang atau rusak; impor ulang aset lalu coba lagi.
+Common.UGCValidation.ErrorLabel.AttachmentOrientationDeviation,"Orientasi sambungan '{InstancePath}' menyimpang terlalu jauh dari yang diharapkan. Orientasi yang direkomendasikan adalah {ExpectedOrientation}, deviasi maksimum adalah {MaxDeviation} derajat."
+Common.UGCValidation.ErrorLabel.AttachmentOrientationRigRotated,"Lampiran rig tidak dapat diputar. Atur orientasi '{InstancePath}' ke (0,0,0)."
+Common.UGCValidation.ErrorLabel.BodyBlocking_ZeroMeshSize,Mesh render untuk {meshName}: {details}. Perbesar ukuran mesh.
+Common.UGCValidation.ErrorLabel.BodyMesh_LoadFailed,"Mesh untuk '{meshName}' gagal di-load. Pastikan mesh ada, lalu coba lagi."
+Common.UGCValidation.ErrorLabel.BodyMesh_SizeMismatch,Perbedaan ukuran {meshContext} dengan mesh lainnya {otherMeshContext} melebihi nilai maksimum {maxDiff}. Kamu perlu mengedit model untuk menyesuaikan ukurannya.
+Common.UGCValidation.ErrorLabel.BodyPartCageDistanceValid_TooFar,Ditemukan titik puncak pada mesh cage {partName} yang berjarak {distance} kotak dari mesh render terdekat. Batas maksimumnya adalah {maxDistance} kotak. Buat mesh cage lebih mendekati bentuk dan ukuran mesh render.
+Common.UGCValidation.ErrorLabel.BoundingBox_ValidationFailed,{reason}
+Common.UGCValidation.ErrorLabel.CageMeshDistanceBounded_DistanceTooHigh,Jarak rata-rata antara cage luar dan mesh terlalu jauh ({distance}). Sesuaikan cage agar lebih pas dengan mesh.
+Common.UGCValidation.ErrorLabel.CageMeshDistanceBounded_MeshOutsideCage,Jarak rata-rata antara cage luar dan mesh terlalu jauh. Mesh tampaknya berada di luar cage luar.
+Common.UGCValidation.ErrorLabel.CageUV_ExtraDuplicateUVs,Ada {count} nilai UV di cage {cageType} '{partName}' yang tidak sesuai dengan templat. Perbaiki UV cage.
+Common.UGCValidation.ErrorLabel.CageUV_IncorrectUVCount,"Cage luar '{partName}' memiliki {actualUVCount} UV unik, tapi jumlah yang diperlukan adalah {requiredUVCount}. Pastikan mesh memiliki jumlah UV unik yang diperlukan, lalu coba lagi."
+Common.UGCValidation.ErrorLabel.CageUV_InvalidUVValue,"Ditemukan nilai UV yang tidak valid di luar rentang [0, 1] untuk '{partName}'. Kamu harus mengedit peta UV untuk memperbaiki masalah ini."
+Common.UGCValidation.ErrorLabel.CageUV_RenderMeshBoundsCheckFailed,"Gagal menjalankan pengujian mesh render di dalam bounding box pada area cage luar yang dimodifikasi. Pastikan mesh cage dan mesh render ada, lalu coba lagi."
+Common.UGCValidation.ErrorLabel.CageUV_RenderMeshOutsideModifiedArea,Hanya {currentPercent}% dari titik puncak mesh render berada di area{allowedArea} yang dimodifikasi dari WrapLayer CageMesh (mesh luar). Yang diperlukan adalah {requiredPercent}%. Pindahkan mesh render agar berada di dalam area yang dimodifikasi dari WrapLayer CageMesh (mesh luar).
+Common.UGCValidation.ErrorLabel.CageUV_TooFewMainModified,WrapLayer CageMesh (mesh luar) untuk {assetTypeName} harus memodifikasi {requiredPercent}% dari UV cage di area {mainArea}. Saat ini hanya {currentPercent}% yang dimodifikasi. Pindahkan asetmu ke area tubuh yang benar.
+Common.UGCValidation.ErrorLabel.CageUV_TooManyExcludedModified,"{modifiedPercent}% dari UV cage yang dimodifikasi di WrapLayer CageMesh (mesh luar) berada di luar area tubuh yang diharapkan. Untuk {assetTypeName}, tidak lebih dari {maxPercent}% UV yang dimodifikasi dapat berada di luar area {allowedArea}. Pindahkan asetmu ke area tubuh yang benar."
+Common.UGCValidation.ErrorLabel.CageUV_ZeroAreaTriangle,Terdeteksi segitiga dengan area nol di peta UV '{partName}'. Kamu harus mengedit peta UV untuk memperbaiki masalah ini.
+Common.UGCValidation.ErrorLabel.CollisionFidelityWrong,'{InstancePath}' memiliki CollisionFidelity yang salah. Seharusnya {ExpectedFidelity}.
 Common.UGCValidation.ErrorLabel.ContentNotEditable,"{InstanceFullName}.{FieldName} masih memiliki konten yang dapat diedit dan belum disimpan. Simpan sebagai aset sebelum memublikasikannya, lalu coba lagi."
-Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,Bagian tubuh '{bodyPartName}' di CurveAnimation memiliki track Posisi (translasi). Bagian tubuh animasi hanya boleh diputar; track posisi tidak diizinkan. Hapus track Posisi dari bagian tubuh ini.
+Common.UGCValidation.ErrorLabel.CoplanarTri_TooMany,Terdeteksi terlalu banyak segitiga koplanar yang berpotongan di mesh model '{MeshName}'. Maksimumnya adalah {MaxIntersections} titik potong dalam {TriangleCount} mesh segitiga. Edit mesh-mu untuk mengurangi jumlah perpotongan segitiga koplanar.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,Bagian tubuh '{bodyPartName}' dalam CurveAnimation bergerak {distance} kotak dari posisi awalnya. Translasi maksimum yang diizinkan adalah {maxDistance} kotak. Kurangi pergerakan posisi bagian tubuh tersebut.
-Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"CurveAnimation berisi tulang HRD/DRD dan bagian tubuh '{bodyPartName}' memiliki track Posisi (translasi). Jika ada tulang dalam animasi, tidak ada bagian tubuh yang boleh melakukan translasi untuk mencegah pemisahan sendi. Hapus semua track Posisi dari bagian tubuh."
-Common.UGCValidation.ErrorLabel.CurveAnim_BonePositionNotAllowed,Tulang {boneName} di CurveAnimation memiliki track Posisi (translasi). Tulang HRD/DRD hanya boleh diputar; track posisi menyebabkan pemisahan sendi dan tidak diizinkan. Hapus animasi posisi dari tulang ini.
+Common.UGCValidation.ErrorLabel.CurveAnim_BoneRequiresParent,Folder tulang '{boneName}' memerlukan '{parentBoneName}' juga ada dalam animasi.
 Common.UGCValidation.ErrorLabel.CurveAnim_BoneTranslationExceedsThreshold,Tulang '{boneName}' dalam CurveAnimation bergerak {distance} kotak dari posisi awalnya. Translasi maksimum yang diizinkan adalah {maxDistance} kotak. Kurangi pergerakan posisi tulang tersebut.
 Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation berisi folder tulang HRD/DRD yang belum didukung. Hapus semua subfolder tulang sebelum meng-upload.
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,Bagian tubuh dalam CurveAnimation tidak boleh lebih rendah dari {minHeight} kotak atau berjarak lebih dari {maxDistance} kotak dari HumanoidRootPart. Perbaiki animasi.
@@ -243,27 +272,27 @@ Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,CurveAnimatio
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"Folder '{boneName}' di CurveAnimation bukan nama tulang HRD/DRD yang dikenali. Subfolder animasi harus berupa bagian tubuh R15 yang valid atau nama tulang yang dikenali (misalnya HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase, atau tulang jari seperti LeftHandIndex1)."
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidCurveData,CurveAnimation berisi Curve dengan Waktu atau Nilai yang tidak valid. Perbaiki animasi.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidInstanceTypes,Hierarki CurveAnimation hanya dapat berisi {allowedTypes}. Hapus tipe Instance lainnya.
-Common.UGCValidation.ErrorLabel.CurveAnim_InvalidLength,CurveAnimation harus berdurasi antara {minLength} dan {maxLength} detik. Perbaiki animasi.
+Common.UGCValidation.ErrorLabel.CurveAnim_InvalidLength,CurveAnimation {animationName} harus berdurasi antara {minLength} dan {maxLength} detik. Perbaiki animasi.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidMarkerData,"CurveAnimation berisi MarkerCurve dengan Waktu atau Nilai yang tidak valid, atau Nilai terlalu panjang. Perbaiki animasi."
-Common.UGCValidation.ErrorLabel.CurveAnim_InvalidNumericalData,CurveAnimation berisi Curve dengan data numerik yang tidak valid. Perbaiki animasi.
+Common.UGCValidation.ErrorLabel.CurveAnim_InvalidNumericalData,CurveAnimation {animationName} berisi Kurva dengan data numerik yang tidak valid. Perbaiki animasi.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidRigData,AnimationRigData gagal dalam validasi internal. Pastikan AnimationRigData diatur dengan benar.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidRigDataR15Plus,AnimationRigData gagal dalam validasi internal R15+. Pastikan AnimationRigData diatur dengan benar untuk aminasi tulang.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidTags,CurveAnimation hanya dapat berisi 1 tag timestamp. Hapus semua tag lainnya.
-Common.UGCValidation.ErrorLabel.CurveAnim_JointRotationExceeded,"Dalam CurveAnimation pada waktu {time} detik, sendi {bodyPart} memiliki sudut rotasi {rotation} derajat dari pose istirahat. Maksimum yang diizinkan adalah {maxRotation} derajat. Perbaiki animasi."
+Common.UGCValidation.ErrorLabel.CurveAnim_JointRotationExceeded,"Dalam CurveAnimation {animationName} pada detik ke-{time}, sendi {bodyPart} memiliki sudut rotasi {rotation} derajat dari pose istirahat. Maksimum yang diizinkan adalah {maxRotation} derajat. Perbaiki animasi."
 Common.UGCValidation.ErrorLabel.CurveAnim_KeysTooClose,CurveAnimation berisi Curve {curvePath} dengan key yang jarak waktunya terlalu dekat untuk animasi dengan kecepatan maksimum {maxFPS} fps. Perbaiki animasi.
 Common.UGCValidation.ErrorLabel.CurveAnim_LoopingNotEnabled,CurveAnimation '{animationName}' tidak mengaktifkan Loop. Animasi yang di-upload ke marketplace harus berputar. Aktifkan properti Loop.
 Common.UGCValidation.ErrorLabel.CurveAnim_MultipleBodyRoots,CurveAnimation berisi lebih dari 1 Folder child bagian tubuh atau HumanoidRootPart. Pastikan hanya ada 1 Folder child yang diberi nama sesuai dengan bagian tubuh atau HumanoidRootPart.
 Common.UGCValidation.ErrorLabel.CurveAnim_MultipleRigData,CurveAnimation berisi lebih dari 1 child AnimationRigData. Pastikan hanya ada 1 child AnimationRigData.
 Common.UGCValidation.ErrorLabel.CurveAnim_NegativeKeyTime,CurveAnimation berisi Curve {curvePath} dengan key yang memiliki waktu negatif. Perbaiki animasi.
 Common.UGCValidation.ErrorLabel.CurveAnim_NoBodyRoot,CurveAnimation tidak berisi Folder child bagian tubuh atau HumanoidRootPart. Pastikan ada 1 (dan hanya 1) Folder child yang diberi nama sesuai dengan bagian tubuh atau HumanoidRootPart.
-Common.UGCValidation.ErrorLabel.CurveAnim_NoJointManipulation,CurveAnimation tidak berisi manipulasi sendi.
+Common.UGCValidation.ErrorLabel.CurveAnim_NoJointManipulation,CurveAnimation {animationName} tidak berisi manipulasi sendi.
 Common.UGCValidation.ErrorLabel.CurveAnim_NoRigData,CurveAnimation tidak berisi child AnimationRigData. Pastikan ada 1 (dan hanya 1) child AnimationRigData.
 Common.UGCValidation.ErrorLabel.CurveAnim_NotCurveAnimation,Animasi yang dirujuk bukan CurveAnimation. Pastikan animasi di-upload dengan benar.
-Common.UGCValidation.ErrorLabel.CurveAnim_PartTooFar,"Dalam CurveAnimation pada waktu {time} detik, bagian tubuh {bodyPart} berjarak {distance} kotak dari HumanoidRootPart. Bagian tubuh tidak boleh berjarak lebih dari {maxDistance} kotak dari HumanoidRootPart. Perbaiki animasi."
-Common.UGCValidation.ErrorLabel.CurveAnim_PartTooLow,"Dalam CurveAnimation pada waktu {time} detik, bagian tubuh {bodyPart} berada pada ketinggian {height} kotak dari HumanoidRootPart. Bagian tubuh tidak boleh lebih rendah dari {minHeight} kotak dari HumanoidRootPart. Perbaiki animasi."
-Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,CurveAnimation berisi pemisahan posisi bagian tubuh. Hanya LowerTorso yang dapat berubah posisi. Semua bagian tubuh lainnya hanya dapat berubah orientasi. {bodyPart} bergerak lebih dari {maxMovement} kotak dari parent-nya. Perbaiki animasi.
-Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,"Dalam CurveAnimation pada waktu {time} detik, bagian tubuh {bodyPart} bergerak dengan kecepatan rotasi {speed} derajat/detik. Kecepatan maksimumnya adalah {maxSpeed} derajat/detik. Perbaiki animasi."
-Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,"Dalam CurveAnimation pada waktu {time} detik, bagian tubuh {bodyPart} bergerak dengan kecepatan {speed} kotak/detik. Kecepatan maksimumnya adalah {maxSpeed} kotak/detik. Perbaiki animasi."
+Common.UGCValidation.ErrorLabel.CurveAnim_PartTooFar,"Dalam CurveAnimation {animationName} pada detik ke-{time}, bagian tubuh {bodyPart} berjarak {distance} kotak dari HumanoidRootPart. Bagian tubuh tidak boleh berjarak lebih dari {maxDistance} kotak dari HumanoidRootPart. Perbaiki animasi."
+Common.UGCValidation.ErrorLabel.CurveAnim_PartTooLow,"Dalam CurveAnimation {animationName} pada detik ke-{time}, bagian tubuh {bodyPart} berada pada ketinggian {height} kotak dari HumanoidRootPart. Bagian tubuh tidak boleh lebih rendah dari {minHeight} kotak dari HumanoidRootPart. Perbaiki animasi."
+Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,CurveAnimation {animationName} berisi pemisahan posisi bagian tubuh. Hanya LowerTorso yang dapat berubah posisi. Semua bagian tubuh lainnya hanya dapat berubah orientasi. {bodyPart} bergerak lebih dari {maxMovement} kotak dari parent-nya. Perbaiki animasi.
+Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,"Dalam CurveAnimation {animationName} pada detik ke-{time}, bagian tubuh {bodyPart} bergerak dengan kecepatan rotasi {speed} derajat/detik. Kecepatan maksimumnya adalah {maxSpeed} derajat/detik. Perbaiki animasi."
+Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,"Dalam CurveAnimation {animationName} pada detik ke-{time}, bagian tubuh {bodyPart} bergerak dengan kecepatan {speed} kotak/detik. Kecepatan maksimumnya adalah {maxSpeed} kotak/detik. Perbaiki animasi."
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,Bagian tubuh {bodyPart} dalam CurveAnimation bergerak lebih dari {maxMovement} kotak antarframe. Perbaiki animasi.
 Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,Struktur CurveAnimation tidak valid: {detail}. Pastikan animasi mengikuti skema yang diharapkan.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation memiliki {count} descendant. Jumlah maksimum yang diizinkan adalah {maxAllowed}. Kurangi jumlah descendant.
@@ -272,8 +301,20 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation ber
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation berisi MarkerCurve dengan {count} Marker. Jumlah maksimum yang diizinkan per MarkerCurve adalah {maxAllowed}. Perbaiki animasi.
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation berisi child yang tidak diharapkan: {childName}
 Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,"{InstanceFullName}.{FieldName} mengepin animasi {AssetId} ke versi {Version}, tetapi animasi belum dapat di-pin ke suatu versi. Hapus '&version={Version}', lalu coba lagi."
+Common.UGCValidation.ErrorLabel.DescendantIdFetchFailed,Gagal mengambil hasil moderasi untuk {InstanceFullName}. Pastikan semua aset dimiliki oleh pengguna saat ini.
+Common.UGCValidation.ErrorLabel.DescendantIdMalformed,"Tidak dapat mengurai ContentId di {InstanceFullName}.{FieldName}. Pastikan kamu menggunakan URL yang valid dengan ID yang valid, lalu coba lagi."
+Common.UGCValidation.ErrorLabel.DescendantIdMissing,"{InstanceFullName}.{FieldName} tidak boleh kosong. Pastikan aset yang valid telah ditetapkan, lalu coba lagi."
+Common.UGCValidation.ErrorLabel.DescendantIdNotApproved,Aset gagal lolos moderasi: {ModerationMessages}
+Common.UGCValidation.ErrorLabel.DescendantIdNotOwned,Aset {AssetId} ({InstanceFullName}.{FieldName}) bukan milik kreator yang berwenang.
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,"Aset {AssetId} ({InstanceFullName}.{FieldName}) tidak dipublikasikan. Publikasikan, lalu coba lagi."
-Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,"{InstanceFullName}.{FieldName} menggunakan versi {Version} dari aset {AssetId}, tetapi saat ini hanya versi 1 yang didukung. Gunakan versi 1 lalu coba lagi."
+Common.UGCValidation.ErrorLabel.DescendantIdVersionNotLatest,"{InstanceFullName}.{FieldName} menggunakan versi {Version} dari aset {AssetId}, tetapi saat ini yang dapat digunakan hanya versi terbarunya, {LatestVersion}. Gunakan versi {LatestVersion} atau hapus '&version={Version}', lalu coba lagi."
+Common.UGCValidation.ErrorLabel.DescendantIdsTooMany,"Model yang di-upload memiliki terlalu banyak aset turunan (Mesh, Tekstur, dll.) dan tidak dapat diproses apa adanya. Kamu harus menyusun ulang model."
+Common.UGCValidation.ErrorLabel.DynHead_ControlsInactive,Mesh {headName} ({meshId}) memiliki kontrol FACS yang tidak aktif: {controlList}
+Common.UGCValidation.ErrorLabel.DynHead_ControlsMissing,Mesh {headName} ({meshId}) tidak memiliki kontrol FACS: {controlList}
+Common.UGCValidation.ErrorLabel.DynHead_FacsMissing,Validasi untuk kepala dinamis '{headName}' gagal karena tidak ada informasi FACS. Kamu perlu memberikan kontrol FACS untuk setidaknya 17 pose (lihat dokumentasi).
+Common.UGCValidation.ErrorLabel.DynHead_JointAccumulatedExceeded,Animasi wajah kepala dapat digabungkan untuk memperpanjang sendi {jointName} jauh di luar kepala. Edit animasi wajah lalu coba lagi.
+Common.UGCValidation.ErrorLabel.DynHead_JointBoundsCheckFailed,Gagal memvalidasi batas sendi animasi wajah. Coba lagi nanti.
+Common.UGCValidation.ErrorLabel.DynHead_JointDirectExceeded,Animasi wajah kepala {actionName} menyebabkan sendi berpindah jauh di luar kepala. Edit animasi wajah lalu coba lagi.
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,Kepala Dinamis di marketplace harus dikurung dengan benar sehingga titik lengkung mata dan mulut pada cage sejajar dengan titik lengkung mesh. Tingkatkan kurungan (caging) dan keselarasan dengan mesh.
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,Titik penanda mata kiri pada cage Kepala Dinamis tidak sejajar dengan mesh. Sesuaikan cage mata agar mesh mata kiri ada di dalam area cage yang diproyeksikan.
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,Titik penanda mulut pada cage Kepala Dinamis tidak sejajar dengan mesh. Sesuaikan cage mulut agar mesh mulut ada di dalam area cage yang diproyeksikan.
@@ -285,9 +326,9 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,Tidak dapat mendeteksi e
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"Kepala Dinamis di marketplace harus dianimasikan, tetapi kepala ini tidak memiliki data FACS."
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,Tidak dapat mendeteksi ekspresi mata kanan tertutup untuk Kepala Dinamis. Sesuaikan titik acuan cage untuk mata kanan agar sesuai dengan posisi mata kanan di kepala dan pastikan mata tersebut dapat ditutup.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,Tidak dapat mendeteksi ekspresi cemberut untuk Kepala Dinamis. Sesuaikan titik acuan cage untuk mulut agar sesuai dengan posisi mulut di kepala dan pastikan mulut dapat menunjukkan ekspresi cemberut.
-Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Area Emisif di Atas Ambang Batas.
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Mesh bagian tubuh '{meshName}' bersifat {emissivePercentage}% emisif. Cakupan emisif tidak boleh melebihi {maxEmissivePercentage}%. Kurangi intensitas atau cakupan lapisan emisif.
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} terlalu Emisif. Luas area Emisif × intensitas melebihi batas (saat ini {emissivePercentage}%, maksimal {maxEmissivePercentage}%). Perkecil area bercahaya atau turunkan EmissiveStrength-nya."
-Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Area Emisif Terlampaui.
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,"Mesh '{meshName}' memiliki area permukaan emisif tertimbang seluas {emissiveArea} kotak persegi, yang melebihi batas maksimum {maxEmissiveArea} kotak persegi. Kurangi intensitas atau cakupan lapisan emisif."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} terlalu Emisif. Luas area Emisif × intensitas melebihi batas (saat ini {emissiveArea}, maksimal {maxEmissiveArea}). Perkecil area bercahaya atau turunkan EmissiveStrength-nya."
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedInExperience,Peta emisif tidak didukung untuk item yang dibuat di pengalaman virtual. Hapus EmissiveMaskContent dari setiap SurfaceAppearance.
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedOnDecal,"Stiker tidak boleh bersifat emisif. Pada '{InstancePath}', hapus EmissiveMaskContent, atur EmissiveStrength menjadi 1, dan atur EmissiveTint menjadi putih."
@@ -295,7 +336,10 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribut
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Animasi yang dipublikasikan tidak memiliki penanda emote UGC yang valid. Publikasikan ulang animasi.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Translasi maksimum bagian tidak dapat dihitung dari data animasi yang dipublikasikan. Publikasikan ulang animasi.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"Animasi yang dipublikasikan menetapkan translasi maksimum bagian sebesar {taggedTranslation} kotak, tetapi hasil perhitungan data animasinya adalah {calculatedTranslation} kotak. Publikasikan ulang animasi."
+Common.UGCValidation.ErrorLabel.ExperienceCreatorNotSupported,"Kreator pengalaman virtual tidak dapat membuat item avatar. CreatorType: {CreatorType}, CreatorId: {CreatorId}."
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"Kepala harus ditempatkan di atas UpperTorso. Titik tengah kepala berada di bawah bagian atas badan, yang menunjukkan bahwa mesh kepala menciut atau salah tempat."
+Common.UGCValidation.ErrorLabel.Extents_ParentBelowPart,{upperPart} tidak dapat diperpanjang di bawah {lowerPart}. Kamu dapat menyesuaikan susunan bagian-bagiannya dengan memindahkan {attachmentName}
+Common.UGCValidation.ErrorLabel.Extents_PartAboveParent,{lowerPart} tidak dapat diperpanjang di atas {upperPart}. Kamu dapat menyesuaikan susunan bagian-bagiannya dengan memindahkan {attachmentName}
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,Properti InternalOverrideFACSData pada FaceControls harus kosong saat proses upload.
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,"Wajah dasar tidak memiliki fitur mata yang diperlukan. Tambahkan mata ke wajah dasar, lalu coba lagi."
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,"Wajah dasar tidak memiliki fitur mulut yang diperlukan. Tambahkan mulut ke wajah dasar, lalu coba lagi."
@@ -308,6 +352,13 @@ Common.UGCValidation.ErrorLabel.FacsExpandsHead,"FAC terdeteksi memperbesar kepa
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Kepala dinamis dapat memiliki maksimal {maxFacsJointCount} sendi FACS, tetapi kepala ini memiliki {actualJointCount}. Kurangi jumlah sendi FACS, lalu coba lagi."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"FAC terdeteksi memperkecil kepala Anda menjadi {modPercent}%, tetapi mengubah kepala bertentangan dengan kebijakan marketplace untuk animasi wajah."
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,Format upload tidak cocok dengan struktur folder yang diharapkan. Coba lagi atau ajukan laporan bug.
+Common.UGCValidation.ErrorLabel.HSRAssetHasChildren,Aset WrapLayer HSR memiliki child di bawah Instance root HiddenSurfaceRemovalAsset.
+Common.UGCValidation.ErrorLabel.HSRAssetIdInvalidUrl,'{InstancePath}' memiliki HSRAssetId dengan URL yang tidak valid.
+Common.UGCValidation.ErrorLabel.HSRAssetIdRequired,'{InstancePath}' memerlukan HSRAssetId untuk diatur.
+Common.UGCValidation.ErrorLabel.HSRAssetInvalidRoot,Aset WrapLayer HSR tidak memiliki tepat 1 root HiddenSurfaceRemovalAsset.
+Common.UGCValidation.ErrorLabel.HSRDataNotReady,Data HSR untuk '{InstancePath}' tidak ada. Coba lagi.
+Common.UGCValidation.ErrorLabel.HSRMeshIdValidationError,Terjadi kesalahan saat memvalidasi ID Mesh HSR untuk '{InstancePath}'.
+Common.UGCValidation.ErrorLabel.HSRMeshIdsMismatch,"Data HSR yang tidak valid terdeteksi untuk '{InstancePath}'. Buat ulang aset menggunakan Alat Pemasangan Aksesori, lalu coba lagi."
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,"Tulang {bonePath} terlalu jauh di luar meshpart {partName}, posisikan lebih dekat dengan batas ukuran meshpart."
 Common.UGCValidation.ErrorLabel.HrdBone_TooCloseToParent,Tulang {bonePath} terlalu dekat dengan parent-nya. Sesuaikan sedikit posisi tulang.
 Common.UGCValidation.ErrorLabel.HrdBone_TransformNotIdentity,"Tulang {bonePath} memiliki properti transformasi, tetapi properti ini belum diaktifkan untuk proses upload ke marketplace. Reset ke CFrame identitas."
@@ -328,6 +379,8 @@ Common.UGCValidation.ErrorLabel.HrdProperties_UncontainedJoint,"Properti HRD {jo
 Common.UGCValidation.ErrorLabel.HrdTposePosition,Sendi {jointName} memiliki posisi TposeAdjustment di luar batas yang diizinkan. Kurangi offset agar berada dalam rentang +-({offsetLimit}).
 Common.UGCValidation.ErrorLabel.HrdTposeRotation,"Sendi {jointName} memiliki TposeAdjustment yang menyimpang lebih dari {degLimit} derajat dari orientasi yang direkomendasikan, yaitu {expectedOrientation}."
 Common.UGCValidation.ErrorLabel.InstanceTagsFound,"Instance berikut memiliki tag, tetapi aset marketplace tidak boleh memiliki tag apa pun: {ProblematicDescendantPaths}"
+Common.UGCValidation.ErrorLabel.InstanceTreeBannedClass,'{InstancePath}' merupakan tipe {ClassName} dan tidak diizinkan dalam aset marketplace.
+Common.UGCValidation.ErrorLabel.InstanceTreeBannedName,'{InstancePath}' memiliki nama yang sudah dipesan dan tidak dapat digunakan dalam aset marketplace.
 Common.UGCValidation.ErrorLabel.InternalError,"Aset Anda tidak dapat divalidasi dengan benar karena kesalahan internal. Jika masalah ini berlanjut, buat laporan bug. ValidationJobId: {ValidationJobId}"
 Common.UGCValidation.ErrorLabel.JointRotAtt_Moved,"{instPath} adalah jointRotation yang dipindah, tetapi proses upload marketplace mungkin belum menyesuaikan instance ini. Reset orientasi ke {expectedPosition}."
 Common.UGCValidation.ErrorLabel.JointRotAtt_MultipleAttachments,Instance {parentPath} tidak dapat memiliki lebih dari 1 child JointRotation.
@@ -335,7 +388,21 @@ Common.UGCValidation.ErrorLabel.JointRotAtt_Rotated,"{instPath} adalah jointRota
 Common.UGCValidation.ErrorLabel.JointRotAtt_UnrecognizedParent,"Instance {parentPath} memiliki child JointRotation, tetapi ini bukan bagian dari skema R15plus yang diizinkan."
 Common.UGCValidation.ErrorLabel.JointRotAtt_WrongInstanceClass,"Instance {instPath} bernama JointRotation, tetapi JointRotation khusus untuk sambungan yang merupakan child dari suatu sambungan."
 Common.UGCValidation.ErrorLabel.LCDeformTooLarge,Pakaian berlapismu berubah bentuk melebihi ukuran yang diizinkan {maxSize} saat dipakaikan pada avatar.
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NoHandle,Aksesori '{accessoryName}' tidak memiliki Handle. Tidak dapat memvalidasi apakah pakaian berlapis melewati batas.
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NoWrapLayer,Aksesori '{accessoryName}' tidak memiliki WrapLayer. Tidak dapat memvalidasi apakah pakaian berlapis melewati batas.
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NonZeroMaxSize,Aksesori memiliki MaxSize yang bukan nol.
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NonZeroOffset,Aksesori memiliki Offset yang bukan nol.
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_OutOfBounds,"Validasi pakaian berlapis gagal untuk '{accessoryName}'. Saat mengalami deformasi, pakaian berlapis menjadi terlalu besar."
 Common.UGCValidation.ErrorLabel.LeaderVertsNearCageIslands,Bulu mata memiliki verteks yang terikat ke RBX_Leader yang terlalu jauh dari titik acuan mata pada cage bagian dalam. Pastikan semua verteks yang terikat ke RBX_Leader berada lebih dekat dengan area mata pada cage bagian dalam
+Common.UGCValidation.ErrorLabel.LegsSeparated_HipAttachmentOutOfRange,{attachmentPath} adalah {currentValue} dan tidak dapat menjadi {comparison} {cutoff}. Perbaiki Sambungan.
+Common.UGCValidation.ErrorLabel.LegsSeparated_LegsOverlap,Kaki bertumpuk sejauh {overlap} kotak pada sumbu x. {leftMax} adalah batas maksimum kaki kiri. {rightMax} adalah batas maksimum kaki kanan. Sesuaikan kaki untuk mengurangi tumpang tindih.
+Common.UGCValidation.ErrorLabel.MakeupDecal_FailedToLoadTexture,"Gagal me-load {fieldName} untuk Stiker {instanceName}. Pastikan TextureContent ada dan valid, lalu coba lagi."
+Common.UGCValidation.ErrorLabel.MakeupDecal_FailedToLoadTextureData,"Gagal me-load data tekstur untuk '{fullName}'. Pastikan tekstur ada, lalu coba lagi."
+Common.UGCValidation.ErrorLabel.MakeupDecal_NoColorMap,Tidak ditemukan ColorMap untuk Stiker {instanceName}. Stiker Riasan harus memiliki ColorMap yang valid.
+Common.UGCValidation.ErrorLabel.MakeupDecal_TextureTooBig,Resolusi tekstur {sizeX}x{sizeY} px yang ditemukan di '{fullName}' lebih tinggi daripada nilai ukuran maksimum yang didukung sebesar {maxSize}x{maxSize} px untuk bidang '{fieldName}'.
+Common.UGCValidation.ErrorLabel.MakeupDecal_UVZoneExcludeViolation,Piksel buram di ColorMap untuk {instanceName} ditemukan di dalam area UV terbatas [{minBound}] dan [{maxBound}] untuk tipe aset {assetTypeName}.
+Common.UGCValidation.ErrorLabel.MakeupDecal_UVZoneIncludeViolation,Area buram ColorMap untuk {instanceName} tidak berada di dalam area UV yang diizinkan [{minBound}] dan [{maxBound}] untuk tipe aset {assetTypeName}.
+Common.UGCValidation.ErrorLabel.MaterialNotAllowed,Instance berikut memiliki material yang tidak valid: {InstanceNameList}. Hanya material berikut yang diizinkan: {AllowedMaterials}.
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceAvatar_CageInsideMesh,Cage tubuh berpotongan dengan mesh tubuh. {negtiveSDFPercent}% dari verteks cage tubuh berada di dalam mesh tubuh.
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceAvatar_CageTooFar,"Cage tubuh terlalu jauh dari mesh tubuh. Jarak maksimal antara cage tubuh dan mesh adalah {max_sdf}, yang melebihi batas yang diizinkan {max_sdf_threshold}"
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceHead_CageInsideMesh,Cage kepala berpotongan dengan mesh kepala. {negtiveSDFPercent}% dari verteks cage kepala berada di dalam mesh kepala.
@@ -345,17 +412,56 @@ Common.UGCValidation.ErrorLabel.MeasureCageMeshDistance_CageTooFar,"Cage luar te
 Common.UGCValidation.ErrorLabel.MeasureCageRelevancy,{outer_cage_face_irrelevant_percent}% verteks cage luar yang dimodifikasi tidak mencakup aksesori. Pastikan kamu memindahkan cage luar jika diperlukan saja.
 Common.UGCValidation.ErrorLabel.MeasureCageUV,Ada nilai UV {incorrect_uv_count} di cage {cage_name} yang salah atau tidak sesuai dengan templat. Perbaiki UV cage.
 Common.UGCValidation.ErrorLabel.MeasureMeshOutsideOuterCage,{mesh_outside_outer_cage_percent}% verteks mesh untuk aksesori berada di luar cage luarnya. Lakukan penyesuaian agar lebih banyak aksesori berada di antara kedua cage.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ExceedsBounds,"{meshName} memiliki ukuran yang lebih besar daripada ukuran batas maksimum yang diizinkan. Ukuran maksimum untuk tipe {assetTypeName} adalah [{maxSizeX}, {maxSizeY}, {maxSizeZ}]."
+Common.UGCValidation.ErrorLabel.MeshGeometry_NotCentered,"{meshName}.{fieldName} memiliki data mesh yang tidak berada di tengah. Impor ulang mesh ini dengan pengimpor 3D Roblox, dan pastikan tidak ada geometri yang lepas di file sumber."
+Common.UGCValidation.ErrorLabel.MeshGeometry_PositionOutOfBounds,Posisi berada di luar batas.
+Common.UGCValidation.ErrorLabel.MeshGeometry_SurfaceAreaExceeded,"Total luas permukaan mesh model '{meshName}' adalah {surfaceArea}, tidak boleh lebih besar dari {maxSurfaceArea}. Kamu harus mengurangi jumlah dan/atau ukuran semua segitiga."
+Common.UGCValidation.ErrorLabel.MeshGeometry_TotalTriangleCountExceeded,"Resolusi mesh '{triangleCount}' untuk '{assetTypeName}' lebih tinggi daripada jumlah maksimum segitiga yang didukung, '{maxTriangles}'. Kamu harus melakukan retopologisasi pada modelmu untuk mengurangi jumlah segitiga."
+Common.UGCValidation.ErrorLabel.MeshGeometry_TriangleCountExceeded,"Resolusi mesh model {meshName}, yaitu {triangleCount}, lebih tinggi daripada jumlah maksimum yang didukung, {maxTriangles}. Kamu harus melakukan retopologisasi pada modelmu untuk mengurangi jumlah segitiga."
+Common.UGCValidation.ErrorLabel.MeshGeometry_VertexDensityExceeded,Kepadatan titik puncak maksimum telah terlampaui. Kurangi jumlah titik puncak yang berdekatan satu sama lain.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ZeroAreaTriangle,Terdeteksi segitiga dengan area nol di mesh model {meshName}. Kamu harus mengedit mesh untuk menghilangkan segitiga dengan area nol.
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,Ukuran mesh {partName} pada sumbu {axis} sebesar '{currentSize}' kotak lebih besar dari ukuran maksimum yang diizinkan untuk setiap bagian yaitu '{maxSize}' kotak. Perkecil mesh.
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,Ukuran mesh {partName} pada sumbu {axis} sebesar '{currentSize}' kotak lebih kecil dari ukuran minimum yang diizinkan untuk setiap bagian yaitu '{minSize}' kotak. Perbesar mesh.
+Common.UGCValidation.ErrorLabel.MeshSize_LoadFailed,
+Common.UGCValidation.ErrorLabel.MeshSize_Mismatch,Ukuran mesh yang dihitung untuk {meshName} tidak cocok dengan nilai properti MeshSize
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,Sambungan {attName} harus ada tepat 1 kali di dalam {partName} descendant.
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}' (atau descendant-nya) berisi Atribut. Kamu perlu menghapus Atribut dari daftar berikut: {InstanceNameList}
+Common.UGCValidation.ErrorLabel.NoMeshBelowFeet_PartBelowFeet,{partName} memanjang sejauh {distance} kotak ke bawah kaki. Hanya kaki yang boleh mencapai tanah sedangkan bagian tubuh lainnya hanya boleh memanjang sejauh {maxDistance} kotak di bawahnya. Pendekkan atau naikkan {partName}.
+Common.UGCValidation.ErrorLabel.Pose_AngleFromXYPlane,"{assetName} harus berada dalam rentang sudut {limit} derajat dari bidang X,Y tapi kini berada di sudut {angle} derajat. Pastikan karakter membentuk pose I, pose A, atau pose T."
+Common.UGCValidation.ErrorLabel.Pose_AngleOnXYPlane,"{assetName} berada di sudut {angle} dari vektor [{xVector}] pada bidang X,Y, tetapi harus berada di antara {minAngle} dan {maxAngle} derajat. Pastikan karakter membentuk pose I, pose A, atau pose T."
+Common.UGCValidation.ErrorLabel.Pose_CFrameCalculationFailed,"Gagal menghitung CFrame aset {assetName}. Pastikan karakter membentuk pose I, pose A, atau pose T, dan bagian-bagiannya tidak dalam posisi yang sama."
+Common.UGCValidation.ErrorLabel.Pose_PointingAlongZVector,"{assetName} menunjuk sepanjang vektor Z dunia. Pastikan karakter membentuk pose I, pose A, atau pose T."
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' memiliki properti yang tidak valid: {ProblematicProperties}. Batas byte yang ditampilkan terlampaui (batas 0 berarti properti harus kosong); properti lain berisi nilai NaN/Inf atau melebihi batas ukuran defaultnya.
+Common.UGCValidation.ErrorLabel.PropertyNotFound,Properti '{PropertyName}' tidak ditemukan di '{InstancePath}'.
+Common.UGCValidation.ErrorLabel.PropertyValueInvalid,Properti '{PropertyName}' pada '{InstancePath}' tidak valid. Seharusnya {ComparisonMethod} {ExpectedValue}.
 Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,"Animasi yang dirender tidak memiliki satu atau beberapa ekspresi wajah yang diperlukan (mata terpejam, mulut menganga, senang, sedih)."
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,Sambungan rig '{AttachmentName}' di '{PartName}' harus ditempatkan di dekat batas sendi tempat bagian tubuh ini terhubung ke bagian yang berdekatan. Posisi saat ini [{CurrentPosition}] terlalu jauh dari bidang sambungan. Pindahkan lebih dekat ke [{ClosestValidPosition}].
+Common.UGCValidation.ErrorLabel.SAOpacity_FailedToLoadTexture,"Gagal me-load tekstur '{FieldName}' untuk SurfaceAppearance '{FullName}'. Pastikan tekstur ada, lalu coba lagi."
+Common.UGCValidation.ErrorLabel.SAOpacity_InvalidAlphaMode,SurfaceAppearance ({FullName}) memiliki AlphaMode yang tidak valid. Yang diharapkan Enum.AlphaMode.Overlay.
+Common.UGCValidation.ErrorLabel.SAOpacity_TextureNotOpaque,Tekstur '{FullName}' tidak sepenuhnya buram. Gunakan tekstur buram.
+Common.UGCValidation.ErrorLabel.ScaleTypeInvalid,"Nilai AvatarPartScaleType di '{ParentName}' tidak valid. Nilai yang diterima adalah Classic, ProportionsSlender, atau ProportionsNormal."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Untuk meng-upload aset ke Roblox, kamu harus memilih persis 1 kejadian dan tipe upload yang terhubung."
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,"Aset ini terlalu besar untuk di-upload ({sizeBytes} byte melebihi batas maksimum {maxSizeBytes} byte). Kecilkan ukurannya, lalu coba lagi."
+Common.UGCValidation.ErrorLabel.SurfaceAppearance_MissingSA,({MeshPartFullName}) memiliki TextureID yang kosong dan tidak ada instance child SurfaceAppearance. Kamu harus menentukan setidaknya salah satunya.
+Common.UGCValidation.ErrorLabel.SurfaceAppearance_TextureAndSABothDefined,TextureID dan SurfaceAppearance keduanya ditetapkan untuk MeshPart ({MeshPartFullName}). Memublikasikannya hanya akan menggunakan SurfaceAppearance.
+Common.UGCValidation.ErrorLabel.TexturePackInvalidURL,'{SurfaceAppearanceName}' memiliki properti 'TexturePack' dengan URL yang tidak valid. Perbaiki URL.
+Common.UGCValidation.ErrorLabel.TexturePack_DownloadFailed,Gagal men-download TexturePack untuk SurfaceAppearance '{SurfaceAppearanceName}'.
+Common.UGCValidation.ErrorLabel.TexturePack_Mismatch,Tekstur di SurfaceAppearance '{SurfaceAppearanceName}' tidak cocok dengan yang ada di TexturePack-nya. Perbaiki TexturePack.
+Common.UGCValidation.ErrorLabel.TextureSize_FailedToLoad,"Gagal me-load data tekstur untuk '{FullName}'. Pastikan tekstur ada, lalu coba lagi."
+Common.UGCValidation.ErrorLabel.TextureSize_TooBig,"Resolusi tekstur {Width}x{Height} px yang ditemukan di '{FullName}' lebih tinggi dari ukuran maksimum yang didukung, yaitu {MaxSize}x{MaxSize} px untuk bidang '{FieldName}'."
+Common.UGCValidation.ErrorLabel.ThumbnailInvalidTarget,Aset target tidak valid untuk pembuatan thumbnail. Seharusnya '{ExpectedTarget}'.
+Common.UGCValidation.ErrorLabel.ThumbnailOutsideView,Aset '{InstancePath}' diposisikan di luar tampilan kamera thumbnail. Posisikan kembali aset di tengah tampilan kamera.
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"Meshpart kepala memiliki animasi wajah untuk {jointName}, yang tidak dapat digunakan di FACS. Ganti nama sendi ini, lalu impor ulang kepalamu."
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,"Bagian tubuh {partName} terikat ke sendi virtual {jointName}, yang bukan bagian dari skema R15plus."
+Common.UGCValidation.ErrorLabel.UnsupportedCreatorType,"Tipe kreator tidak didukung. CreatorType: {CreatorType}, CreatorId: {CreatorId}."
+Common.UGCValidation.ErrorLabel.VertexColors_NotOpaque,Warna titik puncak yang tidak valid ditemukan di model mesh '{MeshName}'. Kamu harus mengedit peta warna agar semuanya menjadi putih {TransparencyNote} dan mencoba lagi.
+Common.UGCValidation.ErrorLabel.VerticesNotCoincident_TooManySimilar,{cageName} memiliki {percentage}% titik puncak yang terlalu berdekatan satu sama lain. Edit titik puncak agar paling banyak {threshold}% yang berimpit atau berdekatan satu sama lain.
+Common.UGCValidation.ErrorLabel.WrapTexture_FailedToLoadCage,Gagal me-load ReferenceCageContent untuk {instanceName}.
+Common.UGCValidation.ErrorLabel.WrapTexture_FailedToLoadUV,"Gagal me-load UV untuk '{instanceName}'. Pastikan peta UV ada, lalu coba lagi."
+Common.UGCValidation.ErrorLabel.WrapTexture_InvalidMaxBound,"{instanceName}.UVMaxBound [{actual}] tidak cocok dengan UVMaxBound yang diperlukan, yaitu [{expected}]."
+Common.UGCValidation.ErrorLabel.WrapTexture_InvalidMinBound,"{instanceName}.UVMinBound [{actual}] tidak cocok dengan UVMinBound yang diperlukan, yaitu [{expected}]."
+Common.UGCValidation.ErrorLabel.WrapTexture_InvalidUV,Ditemukan nilai UV yang tidak valid untuk cage '{instanceName}'. Kamu harus mengedit peta UV untuk memperbaiki masalah ini.
+Common.UGCValidation.ErrorLabel.WrapTexture_NoCage,Tidak ada ReferenceCageContent yang diberikan untuk {instanceName}.
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,Buka Pengaturan
@@ -650,11 +756,6 @@ CoreScripts.CommercePurchasePrompt.ErrorPrompt.Title.DeviceNotSupported,Perangka
 CoreScripts.CommercePurchasePrompt.ProductNotAvailable,Produk tidak tersedia
 CoreScripts.CommercePurchasePrompt.SuccessToast.GrantPending,"Item avatar akan segera diberikan, tetapi memerlukan waktu pemrosesan."
 CoreScripts.CommercePurchasePrompt.SuccessToast.Granted,Item avatar berhasil diberikan!
-CoreScripts.EmoteThumbnailEditor.Action.Cancel,
-CoreScripts.EmoteThumbnailEditor.Action.Update,Update
-CoreScripts.EmoteThumbnailEditor.Heading.EditThumbnail,Edit thumbnail
-CoreScripts.EmoteThumbnailEditor.Label.Rotation,Rotasi
-CoreScripts.EmoteThumbnailEditor.Label.Time,Waktu
 CoreScripts.FTUX.Description.WhiteMenuPlaytestMode,Menu Roblox berwarna putih menunjukkan bahwa kamu sedang melakukan playtest. Selalu patuhi Standar Komunitas Roblox.
 CoreScripts.FTUX.Description.WhiteMenuPreviewing,Menu Roblox berwarna putih berarti kamu sedang melihat pratinjau game ini sebelum dirilis untuk semua pengguna.
 CoreScripts.FTUX.Heading.CheckOutRobloxConnect,Baru: Cek Roblox Connect!
@@ -1184,6 +1285,7 @@ CoreScripts.TextChat.InputBar.Hint.GamepadConnectedConfirm,
 CoreScripts.TextChat.InputBar.Hint.MouseKeyboard,"Untuk chat, klik di sini atau tekan tombol {KEY}"
 CoreScripts.TextChat.InputBar.Hint.PrivacySettingsDisabled,Pengaturan chat-mu mencegahmu mengirim dan menerima pesan.
 CoreScripts.TextChat.InputBar.Hint.Touch,Ketuk di sini untuk chat
+CoreScripts.TextChat.MessageStatus.Warning.DictationRateLimited,Tunggu sebelum mengirim pesan lain. Pengetikan suara dijeda.
 CoreScripts.TextChat.MessageStatus.Warning.Floodchecked,Kamu harus menunggu sebelum mengirim pesan lain.
 CoreScripts.TextChat.MessageStatus.Warning.InvalidPrivacySettings,
 CoreScripts.TextChat.MessageStatus.Warning.MessageTooLong,Pesan kamu melebihi panjang maksimal.
@@ -1430,6 +1532,7 @@ Feature.Avatar.Action.Rename,Ubah Nama
 Feature.Avatar.Action.RenameSet,Ganti nama set
 Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,Pulihkan avatar terakhir yang disimpan
+Feature.Avatar.Action.Retry,Coba lagi
 Feature.Avatar.Action.Revert,Kembalikan
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,
@@ -1450,7 +1553,7 @@ Feature.Avatar.Action.TryOn,
 Feature.Avatar.Action.Unequip,Lepas
 Feature.Avatar.Action.Unselect,Hapus Pilihan
 Feature.Avatar.Action.UnslotEmote,Keluarkan Emote dari Slot
-Feature.Avatar.Action.Update,
+Feature.Avatar.Action.Update,Update
 Feature.Avatar.Action.UpdateExistingCharacter,Update karakter yang sudah ada
 Feature.Avatar.Action.UpdateExistingMakeupLook,Update tampilan yang sudah ada
 Feature.Avatar.Action.UpdateMakeupLook,Update tampilan
@@ -1643,6 +1746,7 @@ Feature.Avatar.Label.FaceMakeup,
 Feature.Avatar.Label.FacialAnimation,Animasi Wajah
 Feature.Avatar.Label.Fall,Jatuh
 Feature.Avatar.Label.FallAnimations,Animasi Jatuh
+Feature.Avatar.Label.FromMarketplace,Dari Marketplace
 Feature.Avatar.Label.Front,Depan
 Feature.Avatar.Label.FullBody,Seluruh Tubuh
 Feature.Avatar.Label.FullMasks,Masker Penuh
@@ -1700,6 +1804,7 @@ Feature.Avatar.Label.Name,
 Feature.Avatar.Label.Neck,Leher
 Feature.Avatar.Label.Newest,Terbaru
 Feature.Avatar.Label.NoExpiredItems,Tidak Ada {itemType} yang Kedaluwarsa
+Feature.Avatar.Label.NoInventorySearchResults,"Tidak ada item yang cocok dengan ""{query}"""
 Feature.Avatar.Label.NoItems,Tidak ada {itemType}
 Feature.Avatar.Label.NoLongerAvailableInCollection,Aset ini tidak akan lagi tersedia di koleksi ini
 Feature.Avatar.Label.NoSets,Belum ada set
@@ -1896,6 +2001,7 @@ Feature.Avatar.Message.UnknownErrorCreatingOutfit,Terjadi kesalahan yang tidak d
 Feature.Avatar.Message.UpdateOutfitSuccess,Telah di-update
 Feature.Avatar.Message.UpdateRequired,"Update Diperlukan. Untuk melihat item ini, update Roblox ke versi terbaru."
 Feature.Avatar.Placeholder.NameYourAvatar,Beri nama Avatarmu
+Feature.Avatar.Placeholder.SearchInventory,Cari inventaris
 Feature.Avatar.Placeholder.WriteAvatarCaption,Beri keterangan untuk Avatarmu (Opsional)
 Feature.Avatar.RevokedItems.BodyText,"Item {category} ""{item}"" telah dihapus dari avatar tersimpan ini, jadi kami mengembalikan jumlah awal yang kamu bayarkan.{lineBreak}Periksa inbox-mu untuk detail selengkapnya."
 Feature.Avatar.RevokedItems.BodyTextMultiple,"Item berikut telah dihapus dari avatar tersimpan ini, jadi kami mengembalikan jumlah awal yang kamu bayarkan.{lineBreak}{items}{lineBreak}Periksa inbox-mu untuk detail selengkapnya."
@@ -1985,8 +2091,7 @@ Feature.AvatarSwitcher.Message.SelectAvatar,Pilih avatar
 Feature.AvatarSwitcher.Message.SwitchingDeferred,"Kamu akan melihat avatar ini setelah respawn berikutnya, atau saat kamu bergabung ke pengalaman virtual. Kamu dapat beralih ke avatar yang berbeda kapan saja."
 Feature.AvatarSwitcher.Message.UnknownSupport,"Kamu masih bisa mengganti avatar, tetapi avatar itu mungkin tidak akan ditampilkan dengan benar di pengalaman virtual ini."
 Feature.AvatarSwitcher.Message.Unsupported,Pengalaman virtual ini menggunakan avatar kustom dan tidak mendukung avatar Roblox.
-Feature.AvatarWorkshop.Action.TryAgain,Coba lagi
-Feature.AvatarWorkshop.Heading.AvatarWorkshop,Workshop Avatar
+Feature.AvatarWorkshop.Action.TryAgain,
 Feature.AvatarWorkshop.Message.LoadItemsError,Terjadi kesalahan saat me-load item-mu.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,Tidak dapat me-load item lainnya.
 Feature.AvatarWorkshop.Message.NoItemsOwned,Kamu belum memiliki item apa pun di sini.
@@ -2021,6 +2126,9 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,Salin teks
 Feature.Build.Action.Create,
 Feature.Build.Action.CreateDeveloperProduct,
+Feature.Build.Action.CreateMonetizationDeveloperProduct,Buat produk developer
+Feature.Build.Action.CreateMonetizationPass,Buat pas
+Feature.Build.Action.CreateMonetizationSubscription,Buat subscription
 Feature.Build.Action.CreateNewGame,Buat game baru
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
@@ -2132,6 +2240,9 @@ Feature.Build.Analytics.Title.TopDropOffStep,Dropoff terbesar
 Feature.Build.Analytics.Title.TotalPlaytime,Total waktu main
 Feature.Build.Analytics.Visits,Kunjungan
 Feature.Build.Content.NewGame,Game baru
+Feature.Build.CreateDeveloperProductDraft,Tolong buat produk developer untuk game saya.
+Feature.Build.CreatePassDraft,Tolong buat pas untuk game saya.
+Feature.Build.CreateSubscriptionDraft,Tolong buat subscription untuk game saya.
 Feature.Build.Description.ActivateDeveloperProduct,Jual produk developer {PRODUCT_ID}.
 Feature.Build.Description.ActivateGamePass,Jual Pas Game {PRODUCT_ID}.
 Feature.Build.Description.ActivateSubscription,Aktifkan subscription {PRODUCT_ID}.
@@ -2824,6 +2935,7 @@ Feature.Catalog.Label.FullBody,
 Feature.Catalog.Label.Gear,
 Feature.Catalog.Label.Get,Dapatkan
 Feature.Catalog.Label.GetPremiumAndPrice,Dapatkan Premium dan beli seharga 
+Feature.Catalog.Label.Glowing,Bercahaya
 Feature.Catalog.Label.HD,HD
 Feature.Catalog.Label.Hair,
 Feature.Catalog.Label.HeadShape,
@@ -2924,6 +3036,7 @@ Feature.Catalog.Label.SerialNumberColon,Nomor Serial:
 Feature.Catalog.Label.ShareToMoments,Bagikan ke Moment
 Feature.Catalog.Label.ShoulderAccessories,Aksesori Bahu
 Feature.Catalog.Label.SoldOut,
+Feature.Catalog.Label.SpecialFeatures,Fitur Khusus
 Feature.Catalog.Label.SupportsHeadShapes,Mendukung Bentuk Kepala
 Feature.Catalog.Label.TakeOffResaleConfirmation,Kamu yakin ingin berhenti menawarkan item ini dari penjualan kembali?
 Feature.Catalog.Label.TimedOptions,Opsi Berbatas Waktu
@@ -3043,6 +3156,7 @@ Feature.Chat.Action.Delete,
 Feature.Chat.Action.Edit,
 Feature.Chat.Action.GroupOSADoNotJoin,Jangan Bergabung
 Feature.Chat.Action.GroupOSAJoin,
+Feature.Chat.Action.JumpToLatestMessages,Langsung ke pesan terbaru
 Feature.Chat.Action.LearnMore,
 Feature.Chat.Action.Leave,
 Feature.Chat.Action.MuteVoice,Bisukan suara
@@ -3334,8 +3448,10 @@ Feature.FaceChat.Subtitle.VideoPerformancePromptDisable,Mematikan kamera dapat m
 Feature.FaceChat.Subtitle.VideoUnsupported,Roblox tidak dapat menggunakan kamera perangkat kamu untuk menganimasi Avatarmu.
 Feature.Favorites.Label.Favorite,
 Feature.FlyoutSidePanel.Action.ContinuePlaying,
+Feature.FlyoutSidePanel.Description.SwitchAccountsHere,Sekarang kamu bisa beralih akun di sini.
 Feature.FlyoutSidePanel.Label.TooltipBody,"Profil, konten, dan pengaturanmu telah dipindahkan ke lokasi baru."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> telah dipindahkan
+Feature.FlyoutSidePanel.Title.AccountSwitcherMoved,Pengalih akun dipindahkan
 Feature.Friends.Action.AcceptFriend,Terima teman
 Feature.Friends.Action.AccountDeleted,Akun dihapus
 Feature.Friends.Action.Add,
@@ -3714,13 +3830,16 @@ Feature.InExperienceShop.Description.GamePassTrialNotEnabledBody,Pas ini tidak m
 Feature.InExperienceShop.Description.GamePassTrialNotEnabledTitle,Tidak ada uji coba gratis yang tersedia
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Dengan membeli Robux, kamu menyetujui {termsLinkStart}Ketentuan Penggunaan{termsLinkEnd} kami, termasuk klausul arbitrase dan kebijakan pembatalan."
 Feature.InExperienceShop.GamePass,Pas game
+Feature.InExperienceShop.GenericTransactionErrorBody,
+Feature.InExperienceShop.GenericTransactionErrorTitle,
 Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,Item bonus
+Feature.InExperienceShop.Label.BuyGamePass,Beli pas game
 Feature.InExperienceShop.Label.BuyNow,Beli Sekarang
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Berakhir dalam {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,Uji coba gratis
-Feature.InExperienceShop.Label.HaveTrial,Kamu memiliki uji coba gratis
+Feature.InExperienceShop.Label.HaveTrial,Uji coba gratis untukmu
 Feature.InExperienceShop.Label.NoDescription,Tidak Ada Deskripsi
 Feature.InExperienceShop.Label.OfferEndTime,{offer} berakhir dalam {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,Ini preview Toko-mu di Roblox Studio. Pemain tidak bisa melihat preview ini.
@@ -3733,10 +3852,9 @@ Feature.InExperienceShop.Label.Timer.Minute.Singular,1 menit
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} detik
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 detik
 Feature.InExperienceShop.Label.Trial,Uji Coba
-Feature.InExperienceShop.Label.Trialed,Sudah dicoba
-Feature.InExperienceShop.Label.TryNow,Coba Sekarang
+Feature.InExperienceShop.Label.TryNow,Dapatkan uji coba gratis
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Kamu telah berhasil membeli {ROBUX_AMOUNT} Robux
-Feature.InExperienceShop.Tooltip.RecentlyRedeemed,Suka uji coba gratisnya?
+Feature.InExperienceShop.Tooltip.RecentlyRedeemed,Suka uji cobamu?
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Kamu yakin ingin menghapus item ini dari inventarismu secara permanen? Jika kamu berubah pikiran, kamu harus mendapatkannya lagi di pengalaman virtual."
 Feature.Item.Label.DeleteItemUndercase,Hapus item
 Feature.Landing.Label.PoweredBy,Didukung oleh
@@ -3753,6 +3871,8 @@ Feature.Moments.Action.Analytics,Analitik
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
+Feature.Moments.Action.CommentSeeOriginal,Lihat versi asli
+Feature.Moments.Action.CommentSeeTranslation,Lihat terjemahan
 Feature.Moments.Action.CommentShowLess,Tampilkan lebih sedikit
 Feature.Moments.Action.CommentShowMore,Tampilkan lebih banyak
 Feature.Moments.Action.Continue,
@@ -3785,9 +3905,15 @@ Feature.Moments.Action.ShowDetails,Tampilkan detail
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Potong Video
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Action.ViewOtherFeed,Lihat feed lainnya
+Feature.Moments.Action.ViewRecommended,Lihat yang Direkomendasikan
+Feature.Moments.Action.ViewTrending,Lihat yang Sedang Tren
 Feature.Moments.Body.EDPMomentIPReportInstructions,"Untuk melaporkan pelanggaran IP di Momen ini, lanjutkan ke halaman detail game."
 Feature.Moments.Description.CommunityStandards,Periksa Standar Komunitas untuk melihat informasi selengkapnya tentang hal yang boleh dan tidak boleh kamu katakan.
 Feature.Moments.Description.EmptyCapturesLibrary,Mediamu akan muncul di sini.
+Feature.Moments.Description.FollowingCaughtUpBody,Kamu sudah menonton semua Moment baru di feed ini. Beralih feed untuk melihat lebih banyak.
+Feature.Moments.Description.FollowingEmptyBodyRecommended,Kamu akan melihat Moment dari kreator yang kamu ikuti di sini.
+Feature.Moments.Description.FollowingEmptyBodyTrending,
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,Buatan AI. Review sebelum memosting. Kamu bertanggung jawab atas apa yang dipublikasikan.
 Feature.Moments.Description.HowToCaptureStep1,"Aktifkan Media, gabung ke Pengalaman Virtual, dan pilih menu hamburger"
 Feature.Moments.Description.HowToCaptureStep2,Aktifkan kendali Media
@@ -3846,8 +3972,11 @@ Feature.Moments.Label.FeedEndTitle,Tidak ada permintaan pending
 Feature.Moments.Label.FeedFailedToLoad,Feed gagal di-load
 Feature.Moments.Label.FeedFollowing,
 Feature.Moments.Label.FeedMyMoments,Moment Saya
+Feature.Moments.Label.FeedRecommended,Direkomendasikan
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.FirstCommentInvite,Belum ada komentar. Jadilah yang pertama berkomentar.
+Feature.Moments.Label.FollowingCaughtUpTitle,Kamu sudah melihat semua Moment baru
+Feature.Moments.Label.FollowingEmptyTitle,Ikuti kreator untuk melihat Moment mereka di sini
 Feature.Moments.Label.GameJoinConversion,Konversi gabung ke game
 Feature.Moments.Label.HowToUseCaptureTitle,Cara menggunakan Media
 Feature.Moments.Label.LinkCopied,Link disalin
@@ -4045,12 +4174,14 @@ Feature.PrivateServers.Label.PrivateServerLink,Link server privat
 Feature.PrivateServers.Label.SearchPeople,Cari pengguna
 Feature.PrivateServers.Label.ServerName,Nama Server:
 Feature.PrivateServers.Label.WhoCanJoin,Siapa saja yang dapat bergabung
+Feature.PrivateServers.Label.YourPrivateServerIsReadyToJoin,Server privatmu siap untuk bergabung
 Feature.Profile.Action.AboutThisProfile,Tentang profil ini
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,Menerima Teman
 Feature.Profile.Action.Add,
 Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,Salin Tautan Profil
+Feature.Profile.Action.CreateInBuild,Buat di Build
 Feature.Profile.Action.EditAppearance,Edit penampilan
 Feature.Profile.Action.EditAvatar,Edit avatar
 Feature.Profile.Action.EditBackground,Edit latar belakang
@@ -4123,6 +4254,8 @@ Feature.Profile.Label.DisplayNameFailed,Nama display tidak dapat disimpan. Coba 
 Feature.Profile.Label.DisplayNameModalCaption,Nama display kamu hanya dapat diubah satu kali dalam 7 hari.
 Feature.Profile.Label.DisplayNameTooShort,Nama display harus terdiri dari minimum 3 karakter.
 Feature.Profile.Label.EditBackground,Edit Latar Belakang
+Feature.Profile.Label.IsMakingGameIn,sedang membuat game di
+Feature.Profile.Label.IsMakingGameInBuild,sedang membuat game di Build
 Feature.Profile.Label.NoBioYet,Belum ada bio
 Feature.Profile.Label.NoPreviousName,Tidak ada nama sebelumnya
 Feature.Profile.Label.NoSocialLink,Belum ada link media sosial
@@ -4312,7 +4445,7 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,Diskon {discountPerce
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"Dengan mengklik ""Lanjutkan"", kamu menyetujui {linkStart}Ketentuan Subscription Roblox{linkEnd}."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"Dengan mengklik ""Coba gratis"", kamu menyetujui {linkStart}Ketentuan Subscription Roblox.{linkEnd} Uji coba gratis kamu akan berakhir dalam 1 bulan, dan biaya akan otomatis dibebankan setiap bulan. Kamu bisa membatalkannya kapan saja."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"Dengan mengeklik ""Coba gratis"", kamu menyetujui {linkStart}Ketentuan Subscription Roblox.{linkEnd} Uji coba gratis kamu akan berakhir dalam {trialDuration} {trialPeriodLabel} dan biaya akan otomatis dibebankan setiap {billingPeriodLabel}. Kamu bisa membatalkannya kapan saja."
-Feature.RobloxSubscription.Label.FreeTrialText,Dapatkan uji coba gratis
+Feature.RobloxSubscription.Label.FreeTrialText,
 Feature.RobloxSubscription.Label.New,
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}Gratis 1 bulan,{boldEnd} lalu {price}/{periodType}"
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,"{boldStart}{trialDuration} {trialPeriodLabel} gratis,{boldEnd} lalu {price}/{periodType}"
@@ -4877,6 +5010,8 @@ Features.Transfers.RobuxTransfer.Action.Send,
 Features.Transfers.RobuxTransfer.Action.TryAgain,
 Features.Transfers.RobuxTransfer.Disclaimer.AgeEstimationTransfer,"Kamu harus melakukan pemeriksaan usia atau mendapatkan persetujuan orang tua untuk mengirim Robux. Setelah terkirim, kamu tidak bisa membatalkan."
 Features.Transfers.RobuxTransfer.Error.ReceiverNotAllowed,@{username} tidak dapat menerima Robux saat ini.
+Features.Transfers.RobuxTransfer.FreeTransfersRemaining,Kamu masih punya {numFreeTransfersRemaining} transfer gratis. Robux dikirim secara instan tanpa biaya.
+Features.Transfers.RobuxTransfer.FreeTransfersRemainingSingular,Kamu masih punya 1 transfer gratis. Robux dikirim secara instan tanpa biaya.
 Features.Transfers.RobuxTransfer.Heading.SendRobux,Kirim Robux
 Features.Transfers.RobuxTransfer.Label.JoinedInYear,
 Features.Transfers.RobuxTransfer.Label.MutualConnection,{amount} Teman bersama
@@ -4887,6 +5022,7 @@ Features.Transfers.RobuxTransfer.Label.RecipientWillGetInApp,Penerima akan menda
 Features.Transfers.RobuxTransfer.Label.RecipientWillGetInGame,Penerima akan mendapatkan {amount} Robux setelah dipotong biaya. Transfer dalam game mencakup biaya kreator sebesar {commissionPercentage}%.
 Features.Transfers.RobuxTransfer.SentInstantNoFee,Robux dikirim secara instan tanpa biaya
 Features.Transfers.RobuxTransfers.Label.SuccessNotification,Kamu mengirim {amount} Robux
+Features.Transfers.Title.FreeTransfersExhausted,Kamu sudah menggunakan semua transfer gratismu
 Features.Transfers.Title.UpsellSubscription,
 Features.Transfers.Transfer.Block.RequireReceiverFAE,Kami perlu memeriksa usia Anda sebelum Anda dapat menerima Robux
 Features.Transfers.Transfer.Block.RequireSenderFAE,Kami perlu memeriksa usiamu sebelum kamu bisa mengirim Robux
@@ -5206,11 +5342,13 @@ InGame.HelpMenu.LeftArrow,Panah Kiri
 InGame.HelpMenu.Resume,
 InGame.HelpMenu.RightArrow,Panah Kanan
 InGame.HelpMenu.UpArrow,Panah Atas
+InGame.InspectMenu.Action.Buy,
 InGame.InspectMenu.Action.Cancel,
 InGame.InspectMenu.Action.Confirm,
 InGame.InspectMenu.Action.Favorite,Jadikan Favorit
 InGame.InspectMenu.Action.FromResale,{PRICE} dari Penjualan Kembali
 InGame.InspectMenu.Action.Go,Pergi
+InGame.InspectMenu.Action.Inspect,Cek
 InGame.InspectMenu.Action.LimitReached,Batas Jumlah Item Tercapai
 InGame.InspectMenu.Action.SoldOut,
 InGame.InspectMenu.Action.TakeOff,Lepaskan

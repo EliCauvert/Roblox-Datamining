@@ -7,6 +7,7 @@ return {
 	getData = function(p1, p2)
 		-- upvalues: GetAllInstancesIsAModule (copy), GetFFlagUGCValidateCurveAnimSingleRootModule (copy)
 		local List = {}
+		local Animations = {}
 		
 		for _, Animation in GetAllInstancesIsAModule(p1, "Animation") do
 			local AnimationId = Animation.AnimationId
@@ -16,6 +17,7 @@ return {
 				
 				if PreloadedCurveAnimation then
 					table.insert(List, PreloadedCurveAnimation)
+					table.insert(Animations, Animation)
 					continue
 				end
 				local Success, Result = pcall(function()
@@ -30,15 +32,17 @@ return {
 					for _, CurveAnimation in Result do
 						if CurveAnimation:IsA("CurveAnimation") then
 							table.insert(List, CurveAnimation)
+							table.insert(Animations, Animation)
 						end
 					end
 				elseif #Result ~= 1 or not Result[1]:IsA("CurveAnimation") then
 					return nil
 				else
 					table.insert(List, Result[1])
+					table.insert(Animations, Animation)
 				end
 			end
 		end
-		return List
+		return List, Animations
 	end
 }

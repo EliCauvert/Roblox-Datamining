@@ -1,5 +1,6 @@
 ﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
 local Parent = ServerDrivenUi.Parent
+local FFlagSduiErrorPaths = require(Parent.SharedFlags).FFlagSduiErrorPaths
 local ReactModule = require(Parent.React)
 local _ = require(Parent.AppCommonLib)
 local SignalsReactModule = require(Parent.SignalsReact)
@@ -36,7 +37,7 @@ local FFlagSduiOptionSelectorAnchorTag = SharedFlagsModule.FFlagSduiOptionSelect
 local t = {}
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FFlagLuaAppCompositionAlways (copy), t (copy), UseTokensFunction (copy), ReactModule (copy), FFlagLuaAppLayoutParamsInContext (copy), SignalsReactModule (copy), UseCollectionLayoutParamsFunction (copy), FindAnalyticsFieldFunction (copy), SduiBuilder (copy), SduiComponentType (copy), UseCollectionAnalyticsContextFunction (copy), UseCollectionImpressionsSignalFunction (copy), GetImpressionsTagModule (copy), SduiParseHelpers (copy), SduiErrors (copy), ReportUnifiedLoggingImpressionsFunction (copy), UseScrollTelemetryCallbackModule (copy), SduiCollectionAnalyticsBuilder (copy), GetSduiComponentWrapperFunction (copy), SduiCollectionItemModule (copy), FFlagSduiOptionSelectorAnchorTag (copy), VariableItemWidthCarousel (copy), FFlagSduiOptionSelectorHeaderComponent (copy), WaitForPropWrapper (copy), FFlagLuaAppUseFrameBoundsImpressions (copy), FrameBoundsImpressionsTracker (copy), ScreenSizeImpressionsTracker (copy), FFlagLuaAppRespectClipAncestorImpressions (copy), ScrollDetector (copy)
+	-- upvalues: FFlagLuaAppCompositionAlways (copy), t (copy), UseTokensFunction (copy), ReactModule (copy), FFlagLuaAppLayoutParamsInContext (copy), SignalsReactModule (copy), UseCollectionLayoutParamsFunction (copy), FindAnalyticsFieldFunction (copy), SduiBuilder (copy), SduiComponentType (copy), UseCollectionAnalyticsContextFunction (copy), UseCollectionImpressionsSignalFunction (copy), GetImpressionsTagModule (copy), SduiParseHelpers (copy), SduiErrors (copy), ReportUnifiedLoggingImpressionsFunction (copy), UseScrollTelemetryCallbackModule (copy), SduiCollectionAnalyticsBuilder (copy), FFlagSduiErrorPaths (copy), GetSduiComponentWrapperFunction (copy), SduiCollectionItemModule (copy), FFlagSduiOptionSelectorAnchorTag (copy), VariableItemWidthCarousel (copy), FFlagSduiOptionSelectorHeaderComponent (copy), WaitForPropWrapper (copy), FFlagLuaAppUseFrameBoundsImpressions (copy), FrameBoundsImpressionsTracker (copy), ScreenSizeImpressionsTracker (copy), FFlagLuaAppRespectClipAncestorImpressions (copy), ScrollDetector (copy)
 	local SduiContext = p1.sduiContext
 	local FFlagLuaAppCompositionAlways1 = FFlagLuaAppCompositionAlways or (p1.appCompositionEnabled or SduiContext.appCompositionEnabled)
 	local Items = p1.items or t
@@ -97,7 +98,7 @@ return ReactModule.memo(function(p1)
 			itemPadding = ItemPadding,
 			onCanvasPositionChanged = UseCollectionImpressionsSignalResult2,
 			renderItem = ReactModule.useCallback(function(ComponentConfig, Index)
-				-- upvalues: SduiContext (copy), SduiErrors (upval), ImpressionsTagModule (copy), ReactModule (upval), FindAnalyticsFieldFunction (upval), t (upval), SduiBuilder (upval), UseRefResult (copy), SduiCollectionAnalyticsBuilder (upval), GetSduiComponentWrapperFunction (upval), UseCollectionAnalyticsContextResult (copy), p1 (copy), SduiCollectionItemModule (upval), ItemHeight (copy), UseResult (copy), FFlagSduiOptionSelectorAnchorTag (upval)
+				-- upvalues: SduiContext (copy), SduiErrors (upval), ImpressionsTagModule (copy), ReactModule (upval), FindAnalyticsFieldFunction (upval), t (upval), SduiBuilder (upval), UseRefResult (copy), SduiCollectionAnalyticsBuilder (upval), FFlagSduiErrorPaths (upval), GetSduiComponentWrapperFunction (upval), UseCollectionAnalyticsContextResult (copy), p1 (copy), SduiCollectionItemModule (upval), ItemHeight (copy), UseResult (copy), FFlagSduiOptionSelectorAnchorTag (upval)
 				if not ComponentConfig then
 					SduiContext.dependencies.logger.reportError(SduiErrors.SduiErrorType.NilItem, {
 						componentType = "VariableItemWidthCarousel",
@@ -115,7 +116,7 @@ return ReactModule.memo(function(p1)
 						itemComponentType = ComponentType,
 						componentType = ComponentType
 					}
-					UseRefResult.current[Index] = SduiCollectionAnalyticsBuilder.buildAndValidateItemAnalyticsData(SduiContext, ComponentConfig.analyticsData, nil, LocalAnalyticsData, ComponentType)
+					UseRefResult.current[Index] = SduiCollectionAnalyticsBuilder.buildAndValidateItemAnalyticsData(SduiContext, ComponentConfig.analyticsData, nil, LocalAnalyticsData, ComponentType, nil, if FFlagSduiErrorPaths then ComponentConfig.errorContext else nil)
 					
 					return ReactModule.createElement(SduiCollectionItemModule, {
 						index = Index,

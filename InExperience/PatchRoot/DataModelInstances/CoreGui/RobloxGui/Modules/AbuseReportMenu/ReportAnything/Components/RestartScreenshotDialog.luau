@@ -1,8 +1,6 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local UIBloxModule = require(CorePackages.Packages.UIBlox)
-local FoundationModule = require(CorePackages.Packages.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(CorePackages.Packages.Foundation).Utility.normalizeFontFace
 local ReactModule = require(CorePackages.Packages.React)
 local ButtonStack = UIBloxModule.App.Button.ButtonStack
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
@@ -12,22 +10,22 @@ local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTra
 local DividerModule = require(script.Parent.Parent.Components.Divider)
 
 return function(p1)
-	-- upvalues: UseStyleFunction (copy), ReactModule (copy), HeaderBar (copy), RobloxTranslatorModule (copy), DividerModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ButtonStack (copy), ButtonType (copy)
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), HeaderBar (copy), RobloxTranslatorModule (copy), DividerModule (copy), NormalizeFontFaceFunction (copy), ButtonStack (copy), ButtonType (copy)
 	local UseStyleResult = UseStyleFunction()
 	local Theme = UseStyleResult.Theme
 	local UseStyleResultFont = UseStyleResult.Font
 	local YOffset2 = 48
-	local YOffset1 = 180
-	local YOffset = 50
+	local YOffset = 180
+	local YOffset1 = 50
 	
 	if p1.isSmallPortraitMode then
 		YOffset2 = 84
-		YOffset1 = 260
-		YOffset = 100
+		YOffset = 260
+		YOffset1 = 100
 	end
 	return ReactModule.createElement("Frame", {
 		ZIndex = 5,
-		Size = UDim2.new(0, if p1.isSmallPortraitMode then 343 else 480, 0, YOffset1),
+		Size = UDim2.new(0, if p1.isSmallPortraitMode then 343 else 480, 0, YOffset),
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		Position = UDim2.new(0.5, 0, 0.5, 0),
 		BackgroundColor3 = Color3.fromHex("#4F545F")
@@ -65,13 +63,12 @@ return function(p1)
 					TextWrapped = true,
 					BackgroundTransparency = 1,
 					Text = RobloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Message.RetakeScene"),
-					Font = if FoundationFontFaceMigration then nil else UseStyleResultFont.Body.Font,
-					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
+					FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
 					TextColor3 = Theme.TextEmphasis.Color,
 					TextTransparency = Theme.TextEmphasis.Transparency,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Top,
-					Size = UDim2.new(1, 0, 0, YOffset)
+					Size = UDim2.new(1, 0, 0, YOffset1)
 				})
 			})
 		}),

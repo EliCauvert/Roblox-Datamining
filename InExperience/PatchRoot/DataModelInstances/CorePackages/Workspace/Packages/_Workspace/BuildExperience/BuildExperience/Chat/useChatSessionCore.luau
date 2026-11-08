@@ -305,7 +305,7 @@ return function(p1)
 			-- upvalues: InternalTesting (ref)
 			if InternalTesting ~= nil then
 				InternalTesting.onSelect()
-				InternalTesting.onSaveSpec(p2)
+				InternalTesting.onSaveSpec(p2, InternalTesting.previewSpecName)
 			end
 		end
 	elseif IsEnabled then
@@ -1718,7 +1718,7 @@ return function(p1)
 		end
 		local UseRefResult = UseRefResult6
 		local Callback: (any) -> () = Callback4
-		Attempt = Attempt or BeginBuildModelSendModule(if UseBuildModelSessionModuleResult == nil then nil else UseBuildModelSessionModuleResult.entry, CreatorCreditModule.getCreatorCreditStore(false), CreatorAgentChatModule.experimentOverride.getPromptExperiment(CreatorAgentChatModule.experimentOverride.getKey(p3.getCasSessionId()) or v4), IsEnabled and (v4 ~= nil and CreatorAgentChatModule.experimentOverride.getInternalSelection(CreatorAgentChatModule.experimentOverride.getKey(p3.getCasSessionId()) or v4, false).isSelected))
+		Attempt = Attempt or BeginBuildModelSendModule(if UseBuildModelSessionModuleResult == nil then nil else UseBuildModelSessionModuleResult.entry, CreatorCreditModule.getCreatorCreditStore(false), CreatorAgentChatModule.experimentOverride.getPromptExperiment(CreatorAgentChatModule.experimentOverride.getKey(p3.getCasSessionId()) or v4), if IsEnabled and v4 ~= nil then CreatorAgentChatModule.experimentOverride.getInternalSelection(CreatorAgentChatModule.experimentOverride.getKey(p3.getCasSessionId()) or v4, false) else nil)
 		
 		if Attempt ~= nil then
 			local Attempt1 = Attempt
@@ -2051,8 +2051,8 @@ return function(p1)
 			return false
 		end
 		if FFlagBuildExperienceChatImageAttachmentsModule then
-			for _, value1 in Current do
-				if value1.uri == nil or value1.uploadStatus == "uploading" or value1.uploadStatus == "failed" then
+			for _, value in Current do
+				if value.uri == nil or value.uploadStatus == "uploading" or value.uploadStatus == "failed" then
 					return false
 				end
 			end
@@ -2103,7 +2103,7 @@ return function(p1)
 			
 			if FFlagBuildExperienceModelPickerModule then
 				UseResult4(nil)
-				Attempt = BeginBuildModelSendModule(if UseBuildModelSessionModuleResult == nil then nil else UseBuildModelSessionModuleResult.entry, CreatorCreditModule.getCreatorCreditStore(false), CreatorAgentChatModule.experimentOverride.getPromptExperiment(CreatorAgentChatModule.experimentOverride.getKey(if UseMemoResult == nil then nil else UseMemoResult.getCasSessionId()) or v4), IsEnabled and (v4 ~= nil and CreatorAgentChatModule.experimentOverride.getInternalSelection(CreatorAgentChatModule.experimentOverride.getKey(if UseMemoResult == nil then nil else UseMemoResult.getCasSessionId()) or v4, false).isSelected))
+				Attempt = BeginBuildModelSendModule(if UseBuildModelSessionModuleResult == nil then nil else UseBuildModelSessionModuleResult.entry, CreatorCreditModule.getCreatorCreditStore(false), CreatorAgentChatModule.experimentOverride.getPromptExperiment(CreatorAgentChatModule.experimentOverride.getKey(if UseMemoResult == nil then nil else UseMemoResult.getCasSessionId()) or v4), if IsEnabled and v4 ~= nil then CreatorAgentChatModule.experimentOverride.getInternalSelection(CreatorAgentChatModule.experimentOverride.getKey(if UseMemoResult == nil then nil else UseMemoResult.getCasSessionId()) or v4, false) else nil)
 				
 				if Attempt == nil then
 					return false
@@ -2150,43 +2150,43 @@ return function(p1)
 				
 				return true
 			end
-			local List = {}
+			local List1 = {}
 			
 			if Replaced ~= "" then
-				table.insert(List, { type = "text", text = Replaced })
+				table.insert(List1, { type = "text", text = Replaced })
 			end
-			for _, value in Current1 do
-				if value.type == "resource_link" then
-					table.insert(List, {
-						type = value.type,
-						uri = value.uri,
-						name = value.name,
-						mimeType = value.mimeType
+			for _, value1 in Current1 do
+				if value1.type == "resource_link" then
+					table.insert(List1, {
+						type = value1.type,
+						uri = value1.uri,
+						name = value1.name,
+						mimeType = value1.mimeType
 					})
 				else
-					table.insert(List, {
-						type = value.type,
+					table.insert(List1, {
+						type = value1.type,
 						resource = {
 							blob = nil,
-							uri = value.resource.uri,
-							text = value.resource.text,
-							mimeType = value.resource.mimeType
+							uri = value1.resource.uri,
+							text = value1.resource.text,
+							mimeType = value1.resource.mimeType
 						}
 					})
 				end
 			end
-			local List1 = {}
+			local List = {}
 			
 			for _, value2 in Current do
 				local Uri = value2.uri
-				table.insert(List, { type = "image", uri = Uri })
-				table.insert(List1, {
+				table.insert(List1, { type = "image", uri = Uri })
+				table.insert(List, {
 					uploadStatus = "uploaded",
 					capture = value2.capture,
 					uri = Uri
 				})
 			end
-			startPrompt(List, List1)
+			startPrompt(List1, List)
 			
 			return true
 		end

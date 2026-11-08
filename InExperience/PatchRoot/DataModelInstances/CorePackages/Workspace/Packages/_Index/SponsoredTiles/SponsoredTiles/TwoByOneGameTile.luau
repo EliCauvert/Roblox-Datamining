@@ -45,7 +45,6 @@ local GameCollectionItemTypes = require(Parent.DiscoveryTypes).GameCollectionIte
 local UseValidTileBadgesFunction = GameTileModule.useValidTileBadges
 local UseTagAsViewportAutoplayCandidateFunction = require(Parent.VideoUtils).useTagAsViewportAutoplayCandidate
 local UseTagAsSponsoredAdViewabilityCandidateFunction = require(Parent.SponsoredAdViewability).useTagAsSponsoredAdViewabilityCandidate
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local FFlagLuaAppSponsoredTileBadgeContentPaddingModule = require(SponsoredTiles.Flags.FFlagLuaAppSponsoredTileBadgeContentPadding)
 local LuaAppTwoByOneTileSmallScreenBreakpoint = game:DefineFastInt("LuaAppTwoByOneTileSmallScreenBreakpoint", 600)
 local FFlagLuaAppHomePageFirstImageLoadObserver = SharedFlagsModule.FFlagLuaAppHomePageFirstImageLoadObserver
@@ -89,7 +88,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: UseNavigateToGameDetailsFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), AppSessionService (copy), UseLocalizationFunction (copy), config (copy), UseTokensFunction (copy), ResponsiveModule (copy), LuaAppTwoByOneTileSmallScreenBreakpoint (copy), ButtonSize (copy), ReactModule (copy), GetTextSizeFunction (copy), LuaAppTwoByOneTileLogoHeightPercentLandscapeRatio (copy), LuaAppTwoByOneTileLogoHeightPercentSquareRatio (copy), UseValidTileBadgesFunction (copy), UseTriggerFeedbackFunction (copy), UseOverflowMenuOpenFunction (copy), UseIsHoveredTileFunction (copy), FFlagLuaAppSduiSponsoredTwoByOneTile (copy), SponsoredGamesRecordClickFunction (copy), GameCollectionItemTypes (copy), TwoByOneGameTileTelemetry (copy), GetAvailableGameTileOverflowMenuItemsFunction (copy), FFlagLuaAppEnableReportExperience (copy), TileLongPress (copy), GetOverflowMenuSignalStoreFunction (copy), SetGamePlaySessionFunction (copy), SessionType (copy), HoverTileCoordinator (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy), UsePlayButtonStateFunction (copy), UseOnPlayButtonCallbackFunction (copy), FFlagMigrateGameInfoToStore (copy), UseSelectorFunction (copy), GameInfosReducer (copy), FFlagLuaAppHomeThumbnailPrefetch (copy), ResolveGameTileThumbnailUri (copy), FormatExperienceThumbnailFunction (copy), GetGameTileLayoutDataFunction (copy), ItemLayoutDataParsingUtils (copy), ImpressionsTagUtility (copy), UseTagAsViewportAutoplayCandidateFunction (copy), FFlagLuaAppTileVideoCandidateOnly (copy), UseTagAsSponsoredAdViewabilityCandidateFunction (copy), HiddenTileContent (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), LuaAppTwoByOneTileGradientWidthPercentRatio (copy), _Color3 (copy), LuaAppTwoByOneTileGradientStartOpacityPercentRatio (copy), LuaAppTwoByOneTileGradientEndOpacityPercentRatio (copy), _Color3_1 (copy), GameTileThumbnailBadges (copy), FFlagLuaAppSponsoredTileBadgeContentPaddingModule (copy), Image (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), PlayButton (copy), SpanTileOverflowMenuModule (copy)
+	-- upvalues: UseNavigateToGameDetailsFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), AppSessionService (copy), UseLocalizationFunction (copy), config (copy), UseTokensFunction (copy), ResponsiveModule (copy), LuaAppTwoByOneTileSmallScreenBreakpoint (copy), ButtonSize (copy), ReactModule (copy), GetTextSizeFunction (copy), LuaAppTwoByOneTileLogoHeightPercentLandscapeRatio (copy), LuaAppTwoByOneTileLogoHeightPercentSquareRatio (copy), UseValidTileBadgesFunction (copy), UseTriggerFeedbackFunction (copy), UseOverflowMenuOpenFunction (copy), UseIsHoveredTileFunction (copy), FFlagLuaAppSduiSponsoredTwoByOneTile (copy), SponsoredGamesRecordClickFunction (copy), GameCollectionItemTypes (copy), TwoByOneGameTileTelemetry (copy), GetAvailableGameTileOverflowMenuItemsFunction (copy), FFlagLuaAppEnableReportExperience (copy), TileLongPress (copy), GetOverflowMenuSignalStoreFunction (copy), SetGamePlaySessionFunction (copy), SessionType (copy), HoverTileCoordinator (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy), UsePlayButtonStateFunction (copy), UseOnPlayButtonCallbackFunction (copy), FFlagMigrateGameInfoToStore (copy), UseSelectorFunction (copy), GameInfosReducer (copy), FFlagLuaAppHomeThumbnailPrefetch (copy), ResolveGameTileThumbnailUri (copy), FormatExperienceThumbnailFunction (copy), GetGameTileLayoutDataFunction (copy), ItemLayoutDataParsingUtils (copy), ImpressionsTagUtility (copy), UseTagAsViewportAutoplayCandidateFunction (copy), FFlagLuaAppTileVideoCandidateOnly (copy), UseTagAsSponsoredAdViewabilityCandidateFunction (copy), HiddenTileContent (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), LuaAppTwoByOneTileGradientWidthPercentRatio (copy), _Color3 (copy), LuaAppTwoByOneTileGradientStartOpacityPercentRatio (copy), LuaAppTwoByOneTileGradientEndOpacityPercentRatio (copy), _Color3_1 (copy), GameTileThumbnailBadges (copy), FFlagLuaAppSponsoredTileBadgeContentPaddingModule (copy), Image (copy), NormalizeFontFaceFunction (copy), PlayButton (copy), SpanTileOverflowMenuModule (copy)
 	local UseNavigateToGameDetailsResult = UseNavigateToGameDetailsFunction()
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(AppSessionService)
@@ -102,13 +101,13 @@ return function(p1)
 	local UseTokensResult = UseTokensFunction()
 	local _UDim = UDim.new(0, UseTokensResult.Radius.Medium)
 	local TitleSmall = nil
-	local Medium1 = nil
+	local XXSmall = nil
 	local Medium = nil
+	local Small = nil
+	local Medium1 = nil
 	local TitleLarge = nil
 	local BodySmall = nil
 	local CaptionSmall = nil
-	local Small = nil
-	local XXSmall = nil
 	local Size800 = nil
 	
 	if ResponsiveModule.useResponsive({
@@ -517,8 +516,7 @@ return function(p1)
 						Size = UDim2.new(1, 0, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y,
 						Text = p1.headline or "",
-						Font = if FoundationFontFaceMigration then nil else TitleLarge.Font,
-						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(TitleLarge.Font) else nil,
+						FontFace = NormalizeFontFaceFunction(TitleLarge.Font),
 						TextSize = TitleLarge.FontSize,
 						TextColor3 = _Color3,
 						TextXAlignment = Enum.TextXAlignment.Left,
@@ -531,8 +529,7 @@ return function(p1)
 						Size = UDim2.new(1, 0, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y,
 						Text = p1.subtitle or "",
-						Font = if FoundationFontFaceMigration then nil else BodySmall.Font,
-						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(BodySmall.Font) else nil,
+						FontFace = NormalizeFontFaceFunction(BodySmall.Font),
 						TextSize = BodySmall.FontSize,
 						TextColor3 = _Color3,
 						TextXAlignment = Enum.TextXAlignment.Left,
@@ -569,8 +566,7 @@ return function(p1)
 					BackgroundTransparency = Transparency,
 					Text = CtaText,
 					TextColor3 = UseTokensResult.LightMode.ActionOverMedia.Foreground.Color3,
-					Font = if FoundationFontFaceMigration then nil else TitleSmall.Font,
-					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(TitleSmall.Font) else nil,
+					FontFace = NormalizeFontFaceFunction(TitleSmall.Font),
 					TextSize = TitleSmall.FontSize,
 					[ReactModule.Event.Activated] = UseResult8
 				}, {
@@ -584,8 +580,7 @@ return function(p1)
 					Size = UDim2.new(0, 0, 0, CaptionSmall.FontSize * CaptionSmall.LineHeight),
 					Text = AgeRatingLabel,
 					TextSize = CaptionSmall.FontSize,
-					Font = if FoundationFontFaceMigration then nil else CaptionSmall.Font,
-					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(CaptionSmall.Font) else nil,
+					FontFace = NormalizeFontFaceFunction(CaptionSmall.Font),
 					TextColor3 = UseTokensResult.Color.Extended.Gray.Gray_400.Color3,
 					TextXAlignment = Enum.TextXAlignment.Right,
 					TextTruncate = Enum.TextTruncate.SplitWord,

@@ -10,6 +10,7 @@ local _ = require(Parent.ReactFocusNavigation)
 local HeaderBar = FoundationModule.HeaderBar
 local Icon = FoundationModule.Icon
 local ScrollView = FoundationModule.ScrollView
+local Skeleton = FoundationModule.Skeleton
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 local IconName = FoundationModule.Enums.IconName
@@ -54,9 +55,13 @@ local function InteractionCounts(Frame)
 	
 	for LayoutOrder, interactionCount in Frame.interactionCounts do
 		Elements[interactionCount.key] = ReactModule.createElement(View, {
-			tag = "col align-x-center gap-xsmall auto-y padding-y-small",
 			LayoutOrder = LayoutOrder,
-			Size = UDim2.fromOffset(52, 0)
+			Size = if Frame.isWide then nil else UDim2.fromOffset(52, 0),
+			tag = {
+				["col align-x-center gap-xsmall padding-y-small"] = true,
+				["auto-xy"] = Frame.isWide,
+				["auto-y"] = not Frame.isWide
+			}
 		}, {
 			Icon = ReactModule.createElement(Icon, {
 				LayoutOrder = 1,
@@ -75,15 +80,15 @@ local function InteractionCounts(Frame)
 	return ReactModule.createElement(View, {
 		LayoutOrder = Frame.LayoutOrder,
 		tag = {
-			["row gap-small"] = true,
-			["auto-xy"] = Frame.isWide,
-			["align-x-center size-full-0 auto-y"] = not Frame.isWide
+			row = true,
+			["gap-xxlarge auto-xy"] = Frame.isWide,
+			["align-x-center gap-small size-full-0 auto-y"] = not Frame.isWide
 		}
 	}, Elements)
 end
 
 local function Summary(Frame: Frame)
-	-- upvalues: ReactModule (copy), View (copy), Thumbnail (copy), Text (copy), InteractionCounts (copy)
+	-- upvalues: ReactModule (copy), View (copy), Thumbnail (copy), InteractionCounts (copy), Text (copy)
 	local ViewProps = Frame.viewProps
 	
 	return if Frame.isWide then ReactModule.createElement(View, {
@@ -91,15 +96,24 @@ local function Summary(Frame: Frame)
 		LayoutOrder = Frame.LayoutOrder
 	}, {
 		Thumbnail = ReactModule.createElement(Thumbnail, { LayoutOrder = 1, mediaItem = ViewProps.mediaItem }),
-		Details = ReactModule.createElement(View, { LayoutOrder = 2, tag = "col fill gap-small auto-y" }, {
+		Details = ReactModule.createElement(View, {
+			LayoutOrder = 2,
+			tag = "col align-x-left fill gap-small auto-y"
+		}, {
 			Caption = if ViewProps.caption == nil then nil else ReactModule.createElement(Text, {
 				LayoutOrder = 1,
 				tag = "size-full-0 auto-y text-title-large text-align-x-left text-truncate-end content-emphasis",
 				testId = "post-insights-caption",
 				Text = ViewProps.caption
 			}),
-			Counts = ReactModule.createElement(InteractionCounts, {
+			PostedOn = if ViewProps.postedOnText == nil then nil else ReactModule.createElement(Text, {
 				LayoutOrder = 2,
+				tag = "size-full-0 auto-y text-body-medium text-align-x-left content-default",
+				testId = "post-insights-posted-on",
+				Text = ViewProps.postedOnText
+			}),
+			Counts = ReactModule.createElement(InteractionCounts, {
+				LayoutOrder = 3,
 				isWide = true,
 				interactionCounts = ViewProps.interactionCounts
 			})
@@ -146,13 +160,29 @@ local function Metric(Frame)
 	})
 end
 
+local function ViewsChartSkeleton(Frame)
+	-- upvalues: ReactModule (copy), View (copy), Skeleton (copy), AnalyticsMetricChartModule (copy)
+	return ReactModule.createElement(View, {
+		tag = "col gap-small size-full-0 auto-y",
+		testId = "post-insights-views-chart-skeleton",
+		LayoutOrder = Frame.LayoutOrder
+	}, {
+		Title = ReactModule.createElement(Skeleton, { LayoutOrder = 1, Size = UDim2.new(0.4, 0, 0, 22) }),
+		Value = ReactModule.createElement(Skeleton, { LayoutOrder = 2, Size = UDim2.new(0.25, 0, 0, 32) }),
+		Plot = ReactModule.createElement(Skeleton, {
+			LayoutOrder = 3,
+			Size = UDim2.new(1, 0, 0, AnalyticsMetricChartModule.chartLayout.PLOT_HEIGHT)
+		})
+	})
+end
+
 local function OverviewSection(Frame)
-	-- upvalues: ReactModule (copy), SectionHeading (copy), AnalyticsMetricChartModule (copy), Metric (copy), View (copy)
+	-- upvalues: ReactModule (copy), SectionHeading (copy), ViewsChartSkeleton (copy), AnalyticsMetricChartModule (copy), Metric (copy), View (copy)
 	local Copy = table.clone(Frame.viewsChart)
 	Copy.layoutOrder = 2
 	local config = {
 		Heading = ReactModule.createElement(SectionHeading, { LayoutOrder = 1, text = Frame.heading }),
-		ViewsChart = ReactModule.createElement(AnalyticsMetricChartModule.MetricChart, Copy)
+		ViewsChart = if Frame.isViewsChartLoading then ReactModule.createElement(ViewsChartSkeleton, { LayoutOrder = 2 }) else ReactModule.createElement(AnalyticsMetricChartModule.MetricChart, Copy)
 	}
 	
 	for i = 1, math.ceil(#Frame.overviewMetrics / 2) do
@@ -330,6 +360,7 @@ return function(ViewProps)
 							LayoutOrder = 2,
 							heading = ViewProps.overviewHeading,
 							viewsChart = ViewProps.viewsChart,
+							isViewsChartLoading = ViewProps.isViewsChartLoading,
 							overviewMetrics = ViewProps.overviewMetrics
 						}),
 						Engagement = ReactModule.createElement(EngagementSection, { LayoutOrder = 3, viewProps = ViewProps })

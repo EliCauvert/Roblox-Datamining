@@ -35,6 +35,7 @@ local function defaultState(PendingSubmission, StickyPostedCommentIds)
 		nextCursor = nil,
 		hasMore = false,
 		errorCode = nil,
+		pinnedCommentId = nil,
 		submissionError = nil,
 		orderedCommentIds = specialOrderedIds(PendingSubmission, Tbl),
 		initialLoadStatus = LoadStatus.Idle,
@@ -114,6 +115,7 @@ return function(p1)
 			replace = Replace,
 			pendingSentinel = if PendingSubmission == nil then nil else PendingSentinelFunction(PendingSubmission.clientRequestId),
 			stickyPostedCommentIds = StickyPostedCommentIds,
+			pinnedCommentId = GetResult.pinnedCommentId,
 			visibleIdsBeforeReconciliation = VisibleIdsBeforeReconciliation,
 			hasMore = p3.hasMore
 		})
@@ -127,6 +129,7 @@ return function(p1)
 			loadMoreStatus = if Replace then LoadStatus.Idle else LoadStatus.Success,
 			pendingSubmission = GetResult.pendingSubmission,
 			stickyPostedCommentIds = StickyPostedCommentIds,
+			pinnedCommentId = GetResult.pinnedCommentId,
 			submissionError = GetResult.submissionError
 		})
 		
@@ -243,6 +246,7 @@ return function(p1)
 				loadMoreStatus = LoadStatus.Idle,
 				pendingSubmission = GetResult.pendingSubmission,
 				stickyPostedCommentIds = GetResult.stickyPostedCommentIds,
+				pinnedCommentId = GetResult.pinnedCommentId,
 				submissionError = GetResult.submissionError
 			})
 		end,
@@ -261,6 +265,7 @@ return function(p1)
 				loadMoreStatus = GetResult.loadMoreStatus,
 				pendingSubmission = GetResult.pendingSubmission,
 				stickyPostedCommentIds = GetResult.stickyPostedCommentIds,
+				pinnedCommentId = GetResult.pinnedCommentId,
 				submissionError = GetResult.submissionError
 			})
 		end,
@@ -283,6 +288,7 @@ return function(p1)
 				errorCode = GetResult.errorCode,
 				pendingSubmission = GetResult.pendingSubmission,
 				stickyPostedCommentIds = GetResult.stickyPostedCommentIds,
+				pinnedCommentId = GetResult.pinnedCommentId,
 				submissionError = GetResult.submissionError
 			})
 		end,
@@ -305,6 +311,7 @@ return function(p1)
 				errorCode = ErrorCode,
 				pendingSubmission = GetResult.pendingSubmission,
 				stickyPostedCommentIds = GetResult.stickyPostedCommentIds,
+				pinnedCommentId = GetResult.pinnedCommentId,
 				submissionError = GetResult.submissionError
 			})
 		end,
@@ -344,7 +351,8 @@ return function(p1)
 					loadMoreStatus = GetResult.loadMoreStatus,
 					errorCode = GetResult.errorCode,
 					pendingSubmission = { status = "Sending", clientRequestId = Guid, text = Text },
-					stickyPostedCommentIds = GetResult.stickyPostedCommentIds
+					stickyPostedCommentIds = GetResult.stickyPostedCommentIds,
+					pinnedCommentId = GetResult.pinnedCommentId
 				})
 				
 				return Guid
@@ -360,7 +368,8 @@ return function(p1)
 						loadMoreStatus = GetResult.loadMoreStatus,
 						errorCode = GetResult.errorCode,
 						pendingSubmission = PendingSubmission,
-						stickyPostedCommentIds = GetResult.stickyPostedCommentIds
+						stickyPostedCommentIds = GetResult.stickyPostedCommentIds,
+						pinnedCommentId = GetResult.pinnedCommentId
 					})
 				end
 				return PendingSubmission.clientRequestId
@@ -388,6 +397,7 @@ return function(p1)
 						text = PendingSubmission.text
 					},
 					stickyPostedCommentIds = GetResult.stickyPostedCommentIds,
+					pinnedCommentId = GetResult.pinnedCommentId,
 					submissionError = GetResult.submissionError
 				})
 				
@@ -416,6 +426,7 @@ return function(p1)
 						text = PendingSubmission.text
 					},
 					stickyPostedCommentIds = GetResult.stickyPostedCommentIds,
+					pinnedCommentId = GetResult.pinnedCommentId,
 					submissionError = GetResult.submissionError
 				})
 				
@@ -451,6 +462,7 @@ return function(p1)
 				end
 			end
 			config1.stickyPostedCommentIds = StickyPostedCommentIds
+			config1.pinnedCommentId = GetResult.pinnedCommentId
 			SetFunction(config1)
 		end,
 		rejectPendingSubmission = function(p11, ErrorCode)
@@ -481,6 +493,7 @@ return function(p1)
 			config1.loadMoreStatus = GetResult.loadMoreStatus
 			config1.errorCode = GetResult.errorCode
 			config1.stickyPostedCommentIds = GetResult.stickyPostedCommentIds
+			config1.pinnedCommentId = GetResult.pinnedCommentId
 			config1.submissionError = Config
 			SetFunction(config1)
 		end,
@@ -501,7 +514,8 @@ return function(p1)
 					loadMoreStatus = GetResult.loadMoreStatus,
 					errorCode = GetResult.errorCode,
 					pendingSubmission = GetResult.pendingSubmission,
-					stickyPostedCommentIds = GetResult.stickyPostedCommentIds
+					stickyPostedCommentIds = GetResult.stickyPostedCommentIds,
+					pinnedCommentId = GetResult.pinnedCommentId
 				})
 				
 				return
@@ -511,7 +525,7 @@ return function(p1)
 			-- upvalues: Signal (copy), config (copy)
 			return if Signal(false) == p12 then config.get(false).pendingSubmission else nil
 		end,
-		removeCommentId = function(p12, p13)
+		removeCommentId = function(p12, PinnedCommentId)
 			-- upvalues: Flag (ref), Signal (copy), config (copy)
 			assert(not Flag, "Comment collection store is disposed")
 			assert(Signal(false) == p12, "Comment feed must be selected before mutation")
@@ -521,7 +535,7 @@ return function(p1)
 			local OrderedCommentIds = {}
 			
 			for _, orderedCommentId in GetResult.orderedCommentIds do
-				if orderedCommentId ~= p13 then
+				if orderedCommentId ~= PinnedCommentId then
 					table.insert(OrderedCommentIds, orderedCommentId)
 				end
 			end
@@ -536,30 +550,31 @@ return function(p1)
 			local StickyPostedCommentIds = {}
 			
 			for _, stickyPostedCommentId in GetResult.stickyPostedCommentIds do
-				if stickyPostedCommentId ~= p13 then
+				if stickyPostedCommentId ~= PinnedCommentId then
 					table.insert(StickyPostedCommentIds, stickyPostedCommentId)
 				end
 			end
 			t.stickyPostedCommentIds = StickyPostedCommentIds
+			t.pinnedCommentId = if GetResult.pinnedCommentId == PinnedCommentId then nil else GetResult.pinnedCommentId
 			t.submissionError = GetResult.submissionError
 			SetFunction(t)
 		end,
-		removeCommentIdsByAuthor = function(p14, p15, Callback)
+		removeCommentIdsByAuthor = function(p13, p14, Callback)
 			-- upvalues: Flag (ref), Signal (copy), config (copy)
 			assert(not Flag, "Comment collection store is disposed")
-			assert(Signal(false) == p14, "Comment feed must be selected before mutation")
+			assert(Signal(false) == p13, "Comment feed must be selected before mutation")
 			local GetResult = config.get(false)
 			local OrderedCommentIds = {}
 			
 			for _, orderedCommentId in GetResult.orderedCommentIds do
-				if Callback(orderedCommentId) ~= p15 then
+				if Callback(orderedCommentId) ~= p14 then
 					table.insert(OrderedCommentIds, orderedCommentId)
 				end
 			end
 			local StickyPostedCommentIds = {}
 			
 			for _, stickyPostedCommentId in GetResult.stickyPostedCommentIds do
-				if Callback(stickyPostedCommentId) ~= p15 then
+				if Callback(stickyPostedCommentId) ~= p14 then
 					table.insert(StickyPostedCommentIds, stickyPostedCommentId)
 				end
 			end
@@ -573,6 +588,55 @@ return function(p1)
 				errorCode = GetResult.errorCode,
 				pendingSubmission = GetResult.pendingSubmission,
 				stickyPostedCommentIds = StickyPostedCommentIds,
+				pinnedCommentId = if GetResult.pinnedCommentId == nil or Callback(GetResult.pinnedCommentId) ~= p14 then GetResult.pinnedCommentId else nil,
+				submissionError = GetResult.submissionError
+			})
+		end,
+		setPinnedComment = function(p15, PinnedCommentId)
+			-- upvalues: Flag (ref), Signal (copy), config (copy), LoadStatus (upval), PendingSentinelFunction (upval)
+			assert(not Flag, "Comment collection store is disposed")
+			assert(Signal(false) == p15, "Comment feed must be selected before mutation")
+			local GetResult = config.get(false)
+			local OrderedCommentIds = GetResult.orderedCommentIds
+			
+			if GetResult.initialLoadStatus == LoadStatus.Success then
+				local t = {}
+				local PendingSubmission = GetResult.pendingSubmission
+				local PendingSentinelResult = if PendingSubmission == nil then nil else PendingSentinelFunction(PendingSubmission.clientRequestId)
+				
+				if PendingSentinelResult ~= nil then
+					t[PendingSentinelResult] = true
+				end
+				for _, stickyPostedCommentId in GetResult.stickyPostedCommentIds do
+					t[stickyPostedCommentId] = true
+				end
+				OrderedCommentIds = {}
+				local Flag1 = false
+				
+				for _, orderedCommentId in GetResult.orderedCommentIds do
+					if not Flag1 and not t[orderedCommentId] then
+						table.insert(OrderedCommentIds, PinnedCommentId)
+						Flag1 = true
+					end
+					if orderedCommentId ~= PinnedCommentId then
+						table.insert(OrderedCommentIds, orderedCommentId)
+					end
+				end
+				if not Flag1 then
+					table.insert(OrderedCommentIds, PinnedCommentId)
+				end
+			end
+			config.set({
+				orderedCommentIds = OrderedCommentIds,
+				channelId = GetResult.channelId,
+				nextCursor = GetResult.nextCursor,
+				hasMore = GetResult.hasMore,
+				initialLoadStatus = GetResult.initialLoadStatus,
+				loadMoreStatus = GetResult.loadMoreStatus,
+				errorCode = GetResult.errorCode,
+				pendingSubmission = GetResult.pendingSubmission,
+				stickyPostedCommentIds = GetResult.stickyPostedCommentIds,
+				pinnedCommentId = PinnedCommentId,
 				submissionError = GetResult.submissionError
 			})
 		end

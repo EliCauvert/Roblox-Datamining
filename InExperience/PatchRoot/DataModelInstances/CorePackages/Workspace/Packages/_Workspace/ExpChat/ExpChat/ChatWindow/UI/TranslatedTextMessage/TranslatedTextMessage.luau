@@ -66,6 +66,7 @@ local FIntExpChatVisibleARButtonPaddingModule = require(Flags.FIntExpChatVisible
 local FIntExpChatDefaultARButtonPaddingModule = require(Flags.FIntExpChatDefaultARButtonPadding)
 local FFlagExpChatTopBannerForPresetChatAccessModule = require(Flags.FFlagExpChatTopBannerForPresetChatAccess)
 local FFlagExpChatFixLocalUserVerifiedBadgeModule = require(Flags.FFlagExpChatFixLocalUserVerifiedBadge)
+local FFlagExpChatUnconditionalCombinedNameHookModule = require(Flags.FFlagExpChatUnconditionalCombinedNameHook)
 local ExpChatSharedModule = require(Parent1.ExpChatShared)
 local FFlagExpChatPresetChatEnabled = ExpChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
 local GetFFlagTextChatEnableUniverseChatTabsFunction = ExpChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
@@ -78,13 +79,23 @@ function appendVerifiedBadge(Text: string): string
 	return string.gsub(Text, ":(%S-)$", ConfigModule.VERIFIED_EMOJI .. ":%1")
 end
 
-local function v69(Message)
-	-- upvalues: UserProfileStore (copy), SignalsReactModule (copy)
-	local Entry = UserProfileStore.get().fetchNamesByUserIds({ (tostring(Message.userId)) })(false).data[1]
+local function getNilName(_)
+	return nil
+end
+
+local function v71(Message)
+	-- upvalues: getNilName (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), IsExperienceChatUserProfileApiEnabledModule (copy), UserProfileStore (copy), SignalsReactModule (copy)
+	local GetDisplayName = getNilName
+	local GetInExperienceCombinedName = getNilName
 	
+	if (not GetFFlagTextChatEnableUniverseChatTabsFunction() or Message.textChannel ~= nil) and IsExperienceChatUserProfileApiEnabledModule() and Message.userId then
+		local Entry = UserProfileStore.get().fetchNamesByUserIds({ (tostring(Message.userId)) })(false).data[1]
+		GetDisplayName = Entry.names.getDisplayName
+		GetInExperienceCombinedName = Entry.names.getInExperienceCombinedName
+	end
 	return {
-		displayName = SignalsReactModule.useSignalBinding(Entry.names.getDisplayName),
-		inExperienceCombinedName = SignalsReactModule.useSignalBinding(Entry.names.getInExperienceCombinedName)
+		displayName = SignalsReactModule.useSignalBinding(GetDisplayName),
+		inExperienceCombinedName = SignalsReactModule.useSignalBinding(GetInExperienceCombinedName)
 	}
 end
 
@@ -121,7 +132,7 @@ end
 local function appendTrustedIndicator(Text: string, TrustedLabelText, p1, TextSize: number, UseTokensResult): string
 	local Transparency: number = UseTokensResult.Color.Shift.Shift_300.Transparency
 	local Transparency1: number = UseTokensResult.Color.Content.Emphasis.Transparency
-	local MarkName: string = `{`{`{`{`<mark color='#{UseTokensResult.Color.Shift.Shift_300.Color3:ToHex()}' transparency='{Transparency + p11 * (1 - Transparency)}'>`}<font transparency='1' weight='{600}' size='{TextSize - 4}'><stroke transparency='1'>_`}<font color='#{UseTokensResult.Color.Content.Emphasis.Color3:ToHex()}' transparency='{Transparency1 + p11 * (1 - Transparency1)}'>{TrustedLabelText}</font>`}_</stroke></font>`}</mark>`
+	local MarkName: string = `{`{`{`{`<mark color='#{UseTokensResult.Color.Shift.Shift_300.Color3:ToHex()}' transparency='{Transparency + p12 * (1 - Transparency)}'>`}<font transparency='1' weight='{600}' size='{TextSize - 4}'><stroke transparency='1'>_`}<font color='#{UseTokensResult.Color.Content.Emphasis.Color3:ToHex()}' transparency='{Transparency1 + p12 * (1 - Transparency1)}'>{TrustedLabelText}</font>`}_</stroke></font>`}</mark>`
 	
 	return if string.find(Text, ":([%S:]-)$") then string.gsub(Text, ":([%S:]-)$", ` {MarkName} :%1`) else `{Text} {MarkName}`
 end
@@ -130,16 +141,16 @@ local GetResult = DataHydrationModule.TrustedConnections.TrustedConnectionsStore
 
 local _ = function(p1, p2, p3, p4)
 	-- upvalues: TextChatMessageChatActionTypeModule (copy), SummaryMessageRichTextModule (copy)
-	local P15 = p2 or ""
+	local P16 = p2 or ""
 	
 	if p3.chatActionType == TextChatMessageChatActionTypeModule.Summary then
-		P15 = SummaryMessageRichTextModule.wrapInSummaryMutedStyle(SummaryMessageRichTextModule.getSummaryIconPrefix(p4) .. " " .. P15, p1.Color.Content.Muted.Color3:ToHex(), p4)
+		P16 = SummaryMessageRichTextModule.wrapInSummaryMutedStyle(SummaryMessageRichTextModule.getSummaryIconPrefix(p4) .. " " .. P16, p1.Color.Content.Muted.Color3:ToHex(), p4)
 	end
-	return P15
+	return P16
 end
 
-local function v76(Frame)
-	-- upvalues: FFlagDebugMessageProfilingModule (copy), ReactModule (copy), ExpChatPerfTracker (copy), LocalizationModule (copy), FFlagExpChatGlobalTabDefaultModule (copy), FFlagExpChatRewriteInlineModule (copy), FStringInExpChatRewriteLabelKeyModule (copy), FoundationModule (copy), GetMessageSettingsModule (copy), IsChatWindowEnlargeEnabledModule (copy), GetMessageEffectsModule (copy), ApplyChatWindowMessageEffectsModule (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), IsExperienceChatUserProfileApiEnabledModule (copy), v69 (copy), GetFFlagExpChatExcludeFOMORendersModule (copy), SignalsModule (copy), Players (copy), GetResult (copy), SignalsReactModule (copy), EngineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (copy), FFlagExpChatUseChannelTabsStore (copy), UseStoreFunction (copy), GetFFlagExpChatUseUpdatedMessageRenderedModule (copy), ShouldSendHighFrequencyTelemetryModule (copy), v1 (copy), FFlagExpChatReportHistoricalRenders (copy), ShouldReportMessageRenderModule (copy), GetChannelTabsStoreModule (copy), EngineFeatureTextChatReportEmojiTelemetryEnabledModule (copy), GetChatWindowMessageEffectsModule (copy), TextChatService (copy), GetChatWindowPrefixOffsetModule (copy), FFlagExpChatMessageEffectChatWindowEnlargeLineHeightModule (copy), GetChatWindowMessageLineHeightModule (copy), appendTrustedIndicator (copy), FFlagEnableInExpChatSummaryOnLuaModule (copy), FFlagExpChatPolishSummaryMessageUIModule (copy), TextChatMessageChatActionTypeModule (copy), SummaryMessageRichTextModule (copy), FFlagExpChatPresetChatEnabled (copy), IsPresetMessageFunction (copy), GetPresetIconRichTextFunction (copy), ExpChatTranslationToggleSpacingFix (copy), DuplicateInvisibleTextModule (copy), UseCursorFunction (copy), FFlagExpChatMessageEffectChatWindowEnlargePaddingModule (copy), MessageEffectModule (copy), FIntExpChatMessageEffectChatWindowEnlargePaddingPixelsModule (copy), FFlagEnableInExpChatRewriteModule (copy), FFlagExpChatTopBannerForPresetChatAccessModule (copy), UseIsARButtonVisibleModule (copy), FIntExpChatVisibleARButtonPaddingModule (copy), FIntExpChatDefaultARButtonPaddingModule (copy), GetChatStatusStoreModule (copy), ShowChatEnabledUIModule (copy), IsChatRegionLockedModule (copy), FIntExpChatWindowTransparencyRewriteInteractableThresholdModule (copy)
+local function v78(Frame)
+	-- upvalues: FFlagDebugMessageProfilingModule (copy), ReactModule (copy), ExpChatPerfTracker (copy), LocalizationModule (copy), FFlagExpChatGlobalTabDefaultModule (copy), FFlagExpChatRewriteInlineModule (copy), FStringInExpChatRewriteLabelKeyModule (copy), FoundationModule (copy), GetMessageSettingsModule (copy), IsChatWindowEnlargeEnabledModule (copy), GetMessageEffectsModule (copy), ApplyChatWindowMessageEffectsModule (copy), FFlagExpChatUnconditionalCombinedNameHookModule (copy), v71 (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), IsExperienceChatUserProfileApiEnabledModule (copy), GetFFlagExpChatExcludeFOMORendersModule (copy), SignalsModule (copy), Players (copy), GetResult (copy), SignalsReactModule (copy), EngineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (copy), FFlagExpChatUseChannelTabsStore (copy), UseStoreFunction (copy), GetFFlagExpChatUseUpdatedMessageRenderedModule (copy), ShouldSendHighFrequencyTelemetryModule (copy), v1 (copy), FFlagExpChatReportHistoricalRenders (copy), ShouldReportMessageRenderModule (copy), GetChannelTabsStoreModule (copy), EngineFeatureTextChatReportEmojiTelemetryEnabledModule (copy), GetChatWindowMessageEffectsModule (copy), TextChatService (copy), GetChatWindowPrefixOffsetModule (copy), FFlagExpChatMessageEffectChatWindowEnlargeLineHeightModule (copy), GetChatWindowMessageLineHeightModule (copy), appendTrustedIndicator (copy), FFlagEnableInExpChatSummaryOnLuaModule (copy), FFlagExpChatPolishSummaryMessageUIModule (copy), TextChatMessageChatActionTypeModule (copy), SummaryMessageRichTextModule (copy), FFlagExpChatPresetChatEnabled (copy), IsPresetMessageFunction (copy), GetPresetIconRichTextFunction (copy), ExpChatTranslationToggleSpacingFix (copy), DuplicateInvisibleTextModule (copy), UseCursorFunction (copy), FFlagExpChatMessageEffectChatWindowEnlargePaddingModule (copy), MessageEffectModule (copy), FIntExpChatMessageEffectChatWindowEnlargePaddingPixelsModule (copy), FFlagEnableInExpChatRewriteModule (copy), FFlagExpChatTopBannerForPresetChatAccessModule (copy), UseIsARButtonVisibleModule (copy), FIntExpChatVisibleARButtonPaddingModule (copy), FIntExpChatDefaultARButtonPaddingModule (copy), GetChatStatusStoreModule (copy), ShowChatEnabledUIModule (copy), IsChatRegionLockedModule (copy), FIntExpChatWindowTransparencyRewriteInteractableThresholdModule (copy)
 	if FFlagDebugMessageProfilingModule then
 		debug.profilebegin("TranslatedTextMessage")
 	end
@@ -171,13 +182,15 @@ local function v76(Frame)
 	local PrefixText = MessageSettingsModule.prefixText or ""
 	local v2 = nil
 	
-	if GetFFlagTextChatEnableUniverseChatTabsFunction() and Frame.message.textChannel == nil then
+	if FFlagExpChatUnconditionalCombinedNameHookModule then
+		v2 = v71(Frame.message)
+	elseif GetFFlagTextChatEnableUniverseChatTabsFunction() and Frame.message.textChannel == nil then
 		v2 = nil
 	elseif IsExperienceChatUserProfileApiEnabledModule() and Frame.message.userId then
 		if FFlagDebugMessageProfilingModule then
 			debug.profilebegin("useCombinedName")
 		end
-		v2 = v69(Frame.message)
+		v2 = v71(Frame.message)
 		
 		if FFlagDebugMessageProfilingModule then
 			debug.profileend()
@@ -344,7 +357,7 @@ local function v76(Frame)
 		-- upvalues: FIntExpChatWindowTransparencyRewriteInteractableThresholdModule (upval)
 		return p1 < FIntExpChatWindowTransparencyRewriteInteractableThresholdModule
 	end)) else nil
-	local CreateElementFunction = ReactModule.createElement
+	local CreateElementFunction2 = ReactModule.createElement
 	local v3 = "Frame"
 	local config = {
 		BackgroundTransparency = 1,
@@ -353,7 +366,7 @@ local function v76(Frame)
 		LayoutOrder = Frame.LayoutOrder
 	}
 	local config1 = { UIPadding = UIPadding }
-	local CreateElementFunction2 = ReactModule.createElement
+	local CreateElementFunction1 = ReactModule.createElement
 	local v4 = "Frame"
 	local config2 = {
 		BackgroundTransparency = 1,
@@ -425,7 +438,7 @@ local function v76(Frame)
 	if string.len(PrefixText) == 0 then
 		Element = nil
 	else
-		local CreateElementFunction1 = ReactModule.createElement
+		local CreateElementFunction = ReactModule.createElement
 		local v7 = "Frame"
 		local config3 = {
 			BackgroundTransparency = 1,
@@ -486,11 +499,11 @@ local function v76(Frame)
 			ImageButton = nil
 		end
 		config4.TranslationButton = ImageButton
-		Element = CreateElementFunction1(v7, config3, config4)
+		Element = CreateElementFunction(v7, config3, config4)
 	end
 	t.TextMessageButton = Element
-	config1.TextMessage = CreateElementFunction2(v4, config2, t)
-	local Element1 = CreateElementFunction(v3, config, config1)
+	config1.TextMessage = CreateElementFunction1(v4, config2, t)
+	local Element1 = CreateElementFunction2(v3, config, config1)
 	
 	if FFlagDebugMessageProfilingModule then
 		debug.profileend()
@@ -499,7 +512,7 @@ local function v76(Frame)
 end
 
 local function TranslatedTextMessageWithToggle(_)
-	-- upvalues: RoactRoduxModule (copy), GetMessagesStoreModule (copy), v76 (copy)
+	-- upvalues: RoactRoduxModule (copy), GetMessagesStoreModule (copy), v78 (copy)
 	return RoactRoduxModule.connect(function() end, function(_)
 		-- upvalues: GetMessagesStoreModule (upval)
 		return {
@@ -508,7 +521,7 @@ local function TranslatedTextMessageWithToggle(_)
 				GetMessagesStoreModule(false).toggleMessageTranslation(NoUseTranslation, MessageId)
 			end
 		}
-	end)(v76)
+	end)(v78)
 end
 
 local function RewriteLabelWithButton(Frame)
@@ -561,7 +574,7 @@ local function RewriteLabelWithButton(Frame)
 end
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: GetMessageSettingsModule (copy), FFlagEnableInExpChatRewriteModule (copy), FFlagExpChatPresetChatEnabled (copy), FFlagExpChatTopBannerForPresetChatAccessModule (copy), UseIsARButtonVisibleModule (copy), FIntExpChatVisibleARButtonPaddingModule (copy), FIntExpChatDefaultARButtonPaddingModule (copy), GetChatStatusStoreModule (copy), SignalsReactModule (copy), ShowChatEnabledUIModule (copy), IsChatRegionLockedModule (copy), LocalizationModule (copy), FStringInExpChatRewriteReasonKeyModule (copy), FoundationModule (copy), ReactModule (copy), FFlagExpChatRewriteToggleAnalyticsModule (copy), ExpChatSharedModule (copy), FFlagExpChatRewriteInlineIxpEnabledModule (copy), IXPService (copy), FStringExpChatRewriteInlineIxpLayerModule (copy), FFlagExpChatRewriteInlineModule (copy), Dictionary (copy), TranslatedTextMessageWithToggle (copy), v76 (copy), RewriteLabelWithButton (copy)
+	-- upvalues: GetMessageSettingsModule (copy), FFlagEnableInExpChatRewriteModule (copy), FFlagExpChatPresetChatEnabled (copy), FFlagExpChatTopBannerForPresetChatAccessModule (copy), UseIsARButtonVisibleModule (copy), FIntExpChatVisibleARButtonPaddingModule (copy), FIntExpChatDefaultARButtonPaddingModule (copy), GetChatStatusStoreModule (copy), SignalsReactModule (copy), ShowChatEnabledUIModule (copy), IsChatRegionLockedModule (copy), LocalizationModule (copy), FStringInExpChatRewriteReasonKeyModule (copy), FoundationModule (copy), ReactModule (copy), FFlagExpChatRewriteToggleAnalyticsModule (copy), ExpChatSharedModule (copy), FFlagExpChatRewriteInlineIxpEnabledModule (copy), IXPService (copy), FStringExpChatRewriteInlineIxpLayerModule (copy), FFlagExpChatRewriteInlineModule (copy), Dictionary (copy), TranslatedTextMessageWithToggle (copy), v78 (copy), RewriteLabelWithButton (copy)
 	local MessageSettingsModule = GetMessageSettingsModule(Frame.message, Frame.chatWindowSettings)
 	local ShowTranslationButton = Frame.showTranslationButton
 	local UseTokensResult = nil
@@ -628,7 +641,7 @@ return ReactModule.memo(function(Frame)
 	elseif FFlagEnableInExpChatRewriteModule and WasRewritten then
 		JoinResult = Dictionary.join(JoinResult, { LayoutOrder = 1 })
 	end
-	local Element = if ShowTranslationButton then ReactModule.createElement(TranslatedTextMessageWithToggle, JoinResult) else ReactModule.createElement(v76, JoinResult)
+	local Element = if ShowTranslationButton then ReactModule.createElement(TranslatedTextMessageWithToggle, JoinResult) else ReactModule.createElement(v78, JoinResult)
 	local Element1 = nil
 	
 	if FFlagEnableInExpChatRewriteModule and WasRewritten then

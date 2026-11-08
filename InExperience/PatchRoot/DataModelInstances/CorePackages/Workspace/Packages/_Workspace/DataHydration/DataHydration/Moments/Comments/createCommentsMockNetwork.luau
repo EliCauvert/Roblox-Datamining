@@ -67,6 +67,7 @@ local function toApiComment(Comment)
 		feedItemId = Comment.feedItemId,
 		authorUserId = if Comment.author == nil then nil else Comment.author.userId,
 		text = Comment.text,
+		translatedText = Comment.translatedText,
 		createdAt = Comment.createdAt,
 		isAuthoredByViewer = Comment.isAuthoredByViewer,
 		reactions = Comment.reactions
@@ -138,6 +139,31 @@ return function(p2)
 			Entry[comment.commentId] = comment
 		end
 	end
+	local function findComment(Match, Match1)
+		-- upvalues: t1 (copy), t2 (copy), MockCommentsPagesModule (upval), UnixTimestamp (copy)
+		if t1[`{Match}:{Match1}`] then
+			return nil
+		end
+		local Entry = t2[Match]
+		local Entry1 = if Entry == nil or t1[`{Match}:{Match1}`] then nil else Entry[Match1]
+		
+		if Entry1 ~= nil then
+			return Entry1
+		end
+		for _, value in {
+			"",
+			MockCommentsPagesModule.EMPTY_HAS_MORE_CURSOR,
+			MockCommentsPagesModule.PAGE_3_CURSOR
+		} do
+			for _, comment in MockCommentsPagesModule.pageForCursor(Match, value, UnixTimestamp).comments do
+				if comment.commentId == Match1 then
+					return comment
+				end
+			end
+		end
+		return nil
+	end
+	
 	local function pageWithMutations(Match, Cursor, PageForCursorResult)
 		-- upvalues: t (copy), t1 (copy), t2 (copy), toApiComment (upval), t3 (copy), P9 (copy), cloneReactions (upval)
 		local List = {}
@@ -303,21 +329,56 @@ return function(p2)
 			{
 				pattern = "/comments",
 				respond = function(p4)
-					-- upvalues: parseQuery (upval), MockCommentsPagesModule (upval), UnixTimestamp (copy), pageWithMutations (copy), HttpService (upval), decodeBody (upval), P9 (copy), CommentFixturesModule (upval), Comments (copy), toApiComment (upval), t (copy), t2 (copy), t1 (copy)
+					-- upvalues: findComment (copy), HttpService (upval), t2 (copy), toApiComment (upval), t3 (copy), P9 (copy), cloneReactions (upval), parseQuery (upval), MockCommentsPagesModule (upval), UnixTimestamp (copy), pageWithMutations (copy), decodeBody (upval), CommentFixturesModule (upval), Comments (copy), t (copy), t1 (copy)
 					local Method = p4.method
 					
 					if Method == "GET" then
 						local Match: string = string.match(p4.url, "/moments/([^/]+)/comments") or "feed-1"
-						local ParseQueryResult = parseQuery(p4.url)
-						local PageWithMutationsResult = pageWithMutations(Match, ParseQueryResult.cursor, (MockCommentsPagesModule.pageForCursor(Match, ParseQueryResult.cursor, UnixTimestamp)))
+						local Match1: string? = string.match(p4.url, "/comments/([^/?]+)$")
 						
+						if Match1 == nil then
+							local ParseQueryResult = parseQuery(p4.url)
+							local PageWithMutationsResult = pageWithMutations(Match, ParseQueryResult.cursor, (MockCommentsPagesModule.pageForCursor(Match, ParseQueryResult.cursor, UnixTimestamp)))
+							
+							return {
+								statusCode = 200,
+								headers = nil,
+								responseBody = if PageWithMutationsResult == nil then nil else HttpService:JSONEncode(PageWithMutationsResult)
+							}
+						end
+						local Comment = findComment(Match, Match1)
+						
+						if Comment == nil then
+							local config = {
+								errorCode = "CommentNotFound",
+								message = "comment was not found for the requested moment"
+							}
+							
+							return {
+								statusCode = 404,
+								headers = nil,
+								responseBody = if config == nil then nil else HttpService:JSONEncode(config)
+							}
+						end
+						local Entry = t2[Comment.feedItemId]
+						
+						if Entry == nil then
+							Entry = {}
+							t2[Comment.feedItemId] = Entry
+						end
+						Entry[Comment.commentId] = Comment
+						local ApiComment = toApiComment(Comment)
+						local Entry1 = t3[`{Match}:{Match1}`] or (P9.reactionProjectionsByCommentId or {})[Match1]
+						
+						if Entry1 ~= nil then
+							ApiComment.reactions = cloneReactions(Entry1)
+						end
 						return {
 							statusCode = 200,
 							headers = nil,
-							responseBody = if PageWithMutationsResult == nil then nil else HttpService:JSONEncode(PageWithMutationsResult)
+							responseBody = if ApiComment == nil then nil else HttpService:JSONEncode(ApiComment)
 						}
-					end
-					if Method == "POST" then
+					elseif Method == "POST" then
 						local DecodeBodyResult = decodeBody(p4.body)
 						local ClientRequestId = DecodeBodyResult.clientRequestId
 						local Match: string = string.match(p4.url, "/moments/([^/]+)/comments") or "feed-1"
@@ -368,9 +429,9 @@ return function(p2)
 						if Text ~= nil then
 							Comments[Text] = Comment
 						end
-						local Entry1 = t[Match] or {}
-						table.insert(Entry1, 1, Comment)
-						t[Match] = Entry1
+						local Entry = t[Match] or {}
+						table.insert(Entry, 1, Comment)
+						t[Match] = Entry
 						local Entry2 = t2[Comment.feedItemId]
 						
 						if Entry2 == nil then
@@ -409,10 +470,10 @@ return function(p2)
 								responseBody = if config == nil then nil else HttpService:JSONEncode(config)
 							}
 						end
-						local Match1: string = string.match(p4.url, "/moments/([^/]+)/comments") or "feed-1"
-						local Match2: string? = string.match(p4.url, "/comments/([^/?]+)$")
+						local Match2: string = string.match(p4.url, "/moments/([^/]+)/comments") or "feed-1"
+						local Match3: string? = string.match(p4.url, "/comments/([^/?]+)$")
 						
-						if Match2 == nil then
+						if Match3 == nil then
 							local config = {
 								errorCode = "CommentsUnavailable",
 								message = "invalid author-comment DELETE path"
@@ -424,11 +485,11 @@ return function(p2)
 								responseBody = if config == nil then nil else HttpService:JSONEncode(config)
 							}
 						end
-						t1[`{Match1}:{Match2}`] = true
-						local Entry = t2[Match1]
+						t1[`{Match2}:{Match3}`] = true
+						local Entry = t2[Match2]
 						
 						if Entry ~= nil then
-							Entry[Match2] = nil
+							Entry[Match3] = nil
 						end
 						return { statusCode = 204, responseBody = nil }
 					end

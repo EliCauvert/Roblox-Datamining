@@ -10,17 +10,20 @@ local _ = require(script.Parent.Parent.Rows.CommentRowTypes)
 local CommentsReadOnlyNoticeViewModule = require(Moments.Components.Comments.Panel.CommentsReadOnlyNoticeView)
 local PendingCommentRowViewModule = require(script.Parent.Parent.Rows.PendingCommentRowView)
 local _ = require(Moments.Components.Comments.GetCommentCollectionStore.CommentCollectionTypes)
+local FFlagMomentsCommentsAttachSheetScrollerModule = require(Moments.Flags.FFlagMomentsCommentsAttachSheetScroller)
 local UseCommentsListRowFunction = require(script.Parent.CommentsListRowContext).useCommentsListRow
+local SizeFull0AutoYPaddingXMedium: string = if FFlagMomentsCommentsAttachSheetScrollerModule then "size-full-0 auto-y padding-x-medium" else "size-full-0 auto-y padding-x-small"
+local SizeFull0AutoYPaddingXXlarge: string = if FFlagMomentsCommentsAttachSheetScrollerModule then "size-full-0 auto-y padding-x-xlarge" else "size-full-0 auto-y padding-x-large"
 local config = {
 	readiness = ViewRecyclerModule.RecyclableViewReadiness.ReadyOnCommit
 }
 local Frozen = table.freeze({
 	comment = ViewRecyclerModule.createRecyclableView(function(p1)
-		-- upvalues: SignalsReactModule (copy), UseCommentsListRowFunction (copy), ReactModule (copy), FoundationModule (copy), CommentRowContainerModule (copy)
+		-- upvalues: SignalsReactModule (copy), UseCommentsListRowFunction (copy), ReactModule (copy), FoundationModule (copy), SizeFull0AutoYPaddingXMedium (copy), CommentRowContainerModule (copy)
 		local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
 		local UseCommentsListRowResult = UseCommentsListRowFunction()
 		
-		return if UseSignalStateResult.type == "comment" then ReactModule.createElement(FoundationModule.View, { tag = "size-full-0 auto-y padding-x-small" }, {
+		return if UseSignalStateResult.type == "comment" then ReactModule.createElement(FoundationModule.View, { tag = SizeFull0AutoYPaddingXMedium }, {
 			Row = ReactModule.createElement(CommentRowContainerModule, {
 				feedItemId = UseCommentsListRowResult.feedItemId,
 				commentId = UseSignalStateResult.commentId,
@@ -38,19 +41,21 @@ local Frozen = table.freeze({
 				onBlockCommentAuthor = UseCommentsListRowResult.onBlockCommentAuthor,
 				onDeleteComment = UseCommentsListRowResult.onDeleteComment,
 				isExpanded = UseSignalStateResult.isExpanded,
-				onToggleExpanded = UseCommentsListRowResult.onToggleCommentExpanded
+				onToggleExpanded = UseCommentsListRowResult.onToggleCommentExpanded,
+				translationState = UseSignalStateResult.translationState,
+				onToggleTranslation = UseCommentsListRowResult.onToggleCommentTranslation
 			})
 		}) else nil
 	end, config),
 	pending = ViewRecyclerModule.createRecyclableView(function(p1)
-		-- upvalues: SignalsReactModule (copy), UseCommentsListRowFunction (copy), ReactModule (copy), FoundationModule (copy), PendingCommentRowViewModule (copy)
+		-- upvalues: SignalsReactModule (copy), UseCommentsListRowFunction (copy), ReactModule (copy), FoundationModule (copy), SizeFull0AutoYPaddingXMedium (copy), PendingCommentRowViewModule (copy)
 		local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
 		local UseCommentsListRowResult = UseCommentsListRowFunction()
 		
 		if UseSignalStateResult.type == "pending" then
 			local IsOutcomeUnknown = UseSignalStateResult.status == "OutcomeUnknown"
 			
-			return ReactModule.createElement(FoundationModule.View, { tag = "size-full-0 auto-y padding-x-small" }, {
+			return ReactModule.createElement(FoundationModule.View, { tag = SizeFull0AutoYPaddingXMedium }, {
 				Row = ReactModule.createElement(PendingCommentRowViewModule, {
 					rowKey = UseSignalStateResult.key,
 					text = UseSignalStateResult.text,
@@ -66,11 +71,11 @@ local Frozen = table.freeze({
 		end
 	end, config),
 	loadMore = ViewRecyclerModule.createRecyclableView(function(p1)
-		-- upvalues: SignalsReactModule (copy), UseCommentsListRowFunction (copy), ReactModule (copy), FoundationModule (copy), CommentsListFooterViewModule (copy)
+		-- upvalues: SignalsReactModule (copy), UseCommentsListRowFunction (copy), ReactModule (copy), FoundationModule (copy), SizeFull0AutoYPaddingXXlarge (copy), CommentsListFooterViewModule (copy)
 		local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
 		local UseCommentsListRowResult = UseCommentsListRowFunction()
 		
-		return if UseSignalStateResult.type == "loadMore" then ReactModule.createElement(FoundationModule.View, { tag = "size-full-0 auto-y padding-x-large" }, {
+		return if UseSignalStateResult.type == "loadMore" then ReactModule.createElement(FoundationModule.View, { tag = SizeFull0AutoYPaddingXXlarge }, {
 			Footer = ReactModule.createElement(CommentsListFooterViewModule, {
 				status = UseSignalStateResult.status,
 				onRetry = UseCommentsListRowResult.onRetryLoadMore
@@ -78,8 +83,8 @@ local Frozen = table.freeze({
 		}) else nil
 	end),
 	readOnlyNotice = ViewRecyclerModule.createRecyclableView(function(_)
-		-- upvalues: ReactModule (copy), FoundationModule (copy), CommentsReadOnlyNoticeViewModule (copy)
-		return ReactModule.createElement(FoundationModule.View, { tag = "size-full-0 auto-y padding-x-large" }, {
+		-- upvalues: ReactModule (copy), FoundationModule (copy), SizeFull0AutoYPaddingXXlarge (copy), CommentsReadOnlyNoticeViewModule (copy)
+		return ReactModule.createElement(FoundationModule.View, { tag = SizeFull0AutoYPaddingXXlarge }, {
 			Notice = ReactModule.createElement(CommentsReadOnlyNoticeViewModule)
 		})
 	end)

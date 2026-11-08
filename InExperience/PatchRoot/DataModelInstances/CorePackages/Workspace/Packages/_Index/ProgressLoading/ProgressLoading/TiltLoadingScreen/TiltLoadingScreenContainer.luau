@@ -15,6 +15,7 @@ local FFlagEnableTiltLoadingScreen = require(Parent.SharedFlags).FFlagEnableTilt
 local FFlagIncreaseLoadingScreenOrder = require(Parent.SharedFlags).FFlagIncreaseLoadingScreenOrder
 local FFlagTiltLoadingScreenConsoleHints = require(Parent.SharedFlags).FFlagTiltLoadingScreenConsoleHints
 local FFlagTiltLoadingScreenEnterExitHold = require(Parent.SharedFlags).FFlagTiltLoadingScreenEnterExitHold
+local FFlagTiltLoadingScreenDismissOnLoaded = require(Parent.SharedFlags).FFlagTiltLoadingScreenDismissOnLoaded
 local IsPioneerLaunchFunction = require(Parent.PioneerUtils).isPioneerLaunch
 local ContextActionService = game:GetService("ContextActionService")
 local LocalizationService = game:GetService("LocalizationService")
@@ -22,7 +23,7 @@ local UserGameSettings = UserSettings():GetService("UserGameSettings")
 local _ = require(script.Parent.Types)
 
 return function(p1)
-	-- upvalues: FFlagEnableTiltLoadingScreen (copy), UseExperienceLoadingLifecycleModule (copy), UseDeferredLoadingLifecycleModule (copy), UserGameSettings (copy), ReactModule (copy), FFlagTiltLoadingScreenConsoleHints (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), GetBuilderIconForKeycodeFunction (copy), UseDeviceInsetsFunction (copy), InExperienceLocalesModule (copy), LocalizationService (copy), IsPioneerLaunchFunction (copy), ContextActionService (copy), FFlagIncreaseLoadingScreenOrder (copy), ConstantsModule (copy), FoundationModule (copy), LocalizationModule (copy), TiltLoadingScreenContentModule (copy), FFlagTiltLoadingScreenEnterExitHold (copy)
+	-- upvalues: FFlagEnableTiltLoadingScreen (copy), UseExperienceLoadingLifecycleModule (copy), UseDeferredLoadingLifecycleModule (copy), UserGameSettings (copy), ReactModule (copy), FFlagTiltLoadingScreenConsoleHints (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), GetBuilderIconForKeycodeFunction (copy), UseDeviceInsetsFunction (copy), InExperienceLocalesModule (copy), LocalizationService (copy), FFlagTiltLoadingScreenDismissOnLoaded (copy), IsPioneerLaunchFunction (copy), ContextActionService (copy), FFlagIncreaseLoadingScreenOrder (copy), ConstantsModule (copy), FoundationModule (copy), LocalizationModule (copy), TiltLoadingScreenContentModule (copy), FFlagTiltLoadingScreenEnterExitHold (copy)
 	if FFlagEnableTiltLoadingScreen then
 		local HasDeferredJoin = p1.deferredJoin ~= nil
 		local UseExperienceLoadingLifecycleModuleResult = UseExperienceLoadingLifecycleModule(not HasDeferredJoin, p1.milestones, p1.onDismissComplete)
@@ -38,8 +39,10 @@ return function(p1)
 			-- upvalues: InExperienceLocalesModule (upval), LocalizationService (upval)
 			return InExperienceLocalesModule.Localization.new(LocalizationService.RobloxLocaleId)
 		end, {})
+		local NoFFlagTiltLoadingScreenDismissOnLoaded = not FFlagTiltLoadingScreenDismissOnLoaded or UseExperienceLoadingLifecycleModuleResult.isVisible
 		ReactModule.useEffect(function()
-			-- upvalues: IsPioneerLaunchFunction (upval), p1 (copy), ContextActionService (upval), UseRefResult (copy)
+			-- upvalues: NoFFlagTiltLoadingScreenDismissOnLoaded (ref), IsPioneerLaunchFunction (upval), p1 (copy), ContextActionService (upval), UseRefResult (copy)
+			if not NoFFlagTiltLoadingScreenDismissOnLoaded then return end
 			if IsPioneerLaunchFunction() then return end
 			local ContextActionService1 = p1.contextActionService or ContextActionService
 			local Flag = false
@@ -63,7 +66,10 @@ return function(p1)
 				-- upvalues: ContextActionService1 (copy)
 				ContextActionService1:UnbindCoreAction("CancelGameLoad")
 			end
-		end, { p1.contextActionService })
+		end, {
+			p1.contextActionService,
+			NoFFlagTiltLoadingScreenDismissOnLoaded
+		})
 		local UseMemoResult1 = ReactModule.useMemo(function()
 			-- upvalues: ReducedMotion (copy)
 			return { reducedMotion = ReducedMotion }

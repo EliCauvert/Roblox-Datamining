@@ -14,6 +14,7 @@ local FFlagFriendSortedByPresenceSignalsImplementation = SharedFlagsModule.FFlag
 local FFlagFriendsStoreSortOnlineFriendsByRank = SharedFlagsModule.FFlagFriendsStoreSortOnlineFriendsByRank
 local FFlagPresenceRefetchTelemetryEnabledModule = require(DataHydration.Flags.FFlagPresenceRefetchTelemetryEnabled)
 local FFlagAddFriendsPageTrustedFriendRequestSection = require(Parent.SharedFlags).FFlagAddFriendsPageTrustedFriendRequestSection
+local FFlagPresenceLocationType = SharedFlagsModule.FFlagPresenceLocationType
 local RequestsModule = require(DataHydration.Friends.Requests)
 local FindFriendsSortModule = require(DataHydration.Friends.Enums.FindFriendsSort)
 local MapFriendshipStatusToEnumModule = require(DataHydration.Friends.mapFriendshipStatusToEnum)
@@ -52,7 +53,7 @@ local function normalizeStoredOnlineFriendRow(p1)
 end
 
 local function normalizePresenceFromOnlineFriendsRow(p1)
-	-- upvalues: NormalizePresenceRawDataModule (copy)
+	-- upvalues: FFlagPresenceLocationType (copy), NormalizePresenceRawDataModule (copy)
 	if p1 and type(p1) == "table" and p1.id ~= nil then
 		local UserPresence = p1.userPresence
 		
@@ -63,7 +64,8 @@ local function normalizePresenceFromOnlineFriendsRow(p1)
 			gameId = UserPresence.gameInstanceId,
 			placeId = UserPresence.placeId,
 			rootPlaceId = UserPresence.rootPlaceId,
-			universeId = UserPresence.universeId
+			universeId = UserPresence.universeId,
+			locationType = if FFlagPresenceLocationType then UserPresence.UserLocationType else nil
 		}, p1.id) else nil
 	else
 		return nil
@@ -763,7 +765,7 @@ return function()
 		_updateFriendsPresences = function(List, p12, _)
 			-- upvalues: normalizeStoredOnlineFriendRow (upval), NormalizePresenceRawDataModule (upval), GetResult (copy), DataCacheModule1 (copy), appendUserToAllFriends (copy), DataCacheModule3 (copy), DataCacheModule (copy), LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval)
 			if not List then return end
-			local P66 = p12 or {}
+			local P67 = p12 or {}
 			local t = {}
 			
 			for _, value in pairs(List) do
@@ -771,7 +773,7 @@ return function()
 				local Text = if UserId then tostring(UserId) else nil
 				
 				if Text then
-					t[Text] = normalizeStoredOnlineFriendRow({ id = Text, sortScore = P66[Text] })
+					t[Text] = normalizeStoredOnlineFriendRow({ id = Text, sortScore = P67[Text] })
 					GetResult.UpdateUserPresence(Text, NormalizePresenceRawDataModule(value), { isUpdatedRealtime = true })
 					DataCacheModule1.replaceItem(Text, true)
 					appendUserToAllFriends(Text)
@@ -798,6 +800,14 @@ return function()
 			-- upvalues: DataCacheModule3 (copy), UpdateIsFriendsWith (copy)
 			DataCacheModule3.replaceItem(p13, FriendStatus)
 			UpdateIsFriendsWith(p13, FriendStatus == Enum.FriendStatus.Friend)
+		end,
+		RefetchFriendshipStatus = function(p13)
+			-- upvalues: DataResolverModule2 (copy)
+			if p13 ~= "" then
+				DataResolverModule2.fetchItem(p13)
+				
+				return
+			end
 		end,
 		RequestFriendship = function(p13, p14, p15, p16)
 			-- upvalues: FFlagEnableFriendsStoreChallengeInterceptor (upval), RequestsModule (upval), DataCacheModule3 (copy), UpdateIsFriendsWith (copy)

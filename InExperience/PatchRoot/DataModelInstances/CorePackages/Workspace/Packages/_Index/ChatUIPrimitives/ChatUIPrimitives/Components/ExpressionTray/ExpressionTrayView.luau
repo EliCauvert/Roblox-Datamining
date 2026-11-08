@@ -96,12 +96,14 @@ local function buildContent(p1, DefaultFocusRef)
 			})
 		end
 	end
-	if p1.footerText then
+	local FooterText = if v1 and v1.footerText then v1.footerText else p1.footerText
+	
+	if FooterText then
 		Elements.Footer = ReactModule.createElement(FoundationModule.Text, {
 			TextWrapped = true,
 			tag = "size-full-0 auto-y text-body-small text-align-x-left content-muted",
 			LayoutOrder = NextOrder(),
-			Text = p1.footerText,
+			Text = FooterText,
 			selection = if p1.focusNavEnabled == true then { Selectable = true } else nil
 		})
 	end

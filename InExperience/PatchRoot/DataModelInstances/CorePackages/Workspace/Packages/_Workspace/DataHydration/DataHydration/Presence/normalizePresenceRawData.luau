@@ -1,4 +1,5 @@
-﻿local PresenceTypeModule = require(script.Parent.Enums.PresenceType)
+﻿local FFlagPresenceLocationType = require(script:FindFirstAncestor("DataHydration").Parent.SharedFlags).FFlagPresenceLocationType
+local PresenceTypeModule = require(script.Parent.Enums.PresenceType)
 local config = {
 	[0] = PresenceTypeModule.Offline,
 	[1] = PresenceTypeModule.Online,
@@ -16,7 +17,7 @@ local function mapRawPresenceTypeToEnum(UserPresenceType)
 end
 
 return function(p1, p2)
-	-- upvalues: mapRawPresenceTypeToEnum (copy)
+	-- upvalues: mapRawPresenceTypeToEnum (copy), FFlagPresenceLocationType (copy)
 	local UserId = p1 and p1.userId or p2
 	
 	if p1 and type(p1) == "table" and UserId then
@@ -38,7 +39,8 @@ return function(p1, p2)
 			gameId = Text1,
 			placeId = Text2,
 			rootPlaceId = Text3,
-			universeId = if UniverseId == nil then "" else tostring(UniverseId)
+			universeId = if UniverseId == nil then "" else tostring(UniverseId),
+			locationType = if FFlagPresenceLocationType then p1.locationType else nil
 		}
 	else
 		return nil

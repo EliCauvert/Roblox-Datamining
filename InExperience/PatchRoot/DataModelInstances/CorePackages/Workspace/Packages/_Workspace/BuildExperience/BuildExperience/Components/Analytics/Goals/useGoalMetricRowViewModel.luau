@@ -8,6 +8,7 @@ local _ = require(BuildExperience.Analytics.Goals.GoalTypes)
 local UseGoalMetricSummaryModule = require(BuildExperience.Analytics.Goals.useGoalMetricSummary)
 local AnalyticsUnitModule = require(BuildExperience.Analytics.AnalyticsUnit)
 local FormatStatNumberModule = require(BuildExperience.Analytics.formatStatNumber)
+local FFlagBuildAnalyticsTwoDecimalPlacesModule = require(BuildExperience.Flags.FFlagBuildAnalyticsTwoDecimalPlaces)
 local MetricValueRoundsToZeroModule = require(BuildExperience.Analytics.metricValueRoundsToZero)
 local RoundToDecimalsModule = require(BuildExperience.Analytics.roundToDecimals)
 local ScaleValueToUnitModule = require(BuildExperience.Analytics.scaleValueToUnit)
@@ -43,7 +44,7 @@ local function getBreakdownValueText(Summary, p1)
 end
 
 local function getNumberDelta(Summary, p1)
-	-- upvalues: LocalizationService (copy), MetricValueRoundsToZeroModule (copy), ScaleValueToUnitModule (copy), AnalyticsUnitModule (copy), RoundToDecimalsModule (copy)
+	-- upvalues: LocalizationService (copy), MetricValueRoundsToZeroModule (copy), ScaleValueToUnitModule (copy), AnalyticsUnitModule (copy), FFlagBuildAnalyticsTwoDecimalPlacesModule (copy), RoundToDecimalsModule (copy)
 	local RobloxLocaleId = LocalizationService.RobloxLocaleId
 	local PriorValue = p1.priorValue
 	local TrendPct: number = p1.trendPct
@@ -53,7 +54,7 @@ local function getNumberDelta(Summary, p1)
 	elseif MetricValueRoundsToZeroModule(ScaleValueToUnitModule(PriorValue, Summary.format.unit), Summary.format.unit, nil, RobloxLocaleId) or MetricValueRoundsToZeroModule(TrendPct, AnalyticsUnitModule.Percent, nil, RobloxLocaleId) then
 		return nil
 	else
-		local RoundToDecimalsModuleResultRatio = RoundToDecimalsModule(math.abs(TrendPct) * 100, 1) / 100
+		local RoundToDecimalsModuleResultRatio = RoundToDecimalsModule(math.abs(TrendPct) * 100, if FFlagBuildAnalyticsTwoDecimalPlacesModule then 2 else 1) / 100
 		
 		return if RoundToDecimalsModuleResultRatio == 0 then nil else {
 			magnitude = RoundToDecimalsModuleResultRatio,

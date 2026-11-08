@@ -1,7 +1,9 @@
-﻿local Parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
+﻿local ChatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
+local Parent = ChatUIPrimitives.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local ResponsiveModule = require(Parent.Responsive)
+local FFlagExpChatMessageListScrollParityModule = require(ChatUIPrimitives.Flags.FFlagExpChatMessageListScrollParity)
 local Keys = ResponsiveModule.Keys
 local GetMinWidthForFunction = ResponsiveModule.BreakpointConfig.getMinWidthFor
 local list = {
@@ -32,7 +34,12 @@ local function _(FontStyle)
 	}
 end
 
+local _ = function(FontStyle): number
+	return (math.round(FontStyle.FontSize * FontStyle.LineHeight))
+end
+
 local function resolve(Density, p1, UseTokensResult)
+	-- upvalues: FFlagExpChatMessageListScrollParityModule (copy)
 	local IsCompact = Density == "compact"
 	local Small = if IsCompact then UseTokensResult.Padding.Small else UseTokensResult.Padding.Medium
 	local ScaledSize = UseTokensResult.Size.Size_3000 * (if IsCompact then 2 else p1)
@@ -45,6 +52,18 @@ local function resolve(Density, p1, UseTokensResult)
 	}
 	local Size100: number = UseTokensResult.Size.Size_100
 	local BodySmall = if IsCompact then UseTokensResult.Typography.BodySmall else UseTokensResult.Typography.BodyLarge
+	local CaptionSmall1 = if IsCompact then UseTokensResult.Typography.CaptionSmall else UseTokensResult.Typography.CaptionLarge
+	local config = {
+		Font = CaptionSmall1.Font,
+		FontSize = CaptionSmall1.FontSize,
+		LineHeight = CaptionSmall1.LineHeight
+	}
+	local BodyLarge = UseTokensResult.Typography.BodyLarge
+	local config1 = {
+		Font = BodyLarge.Font,
+		FontSize = BodyLarge.FontSize,
+		LineHeight = BodyLarge.LineHeight
+	}
 	
 	return {
 		density = Density,
@@ -105,7 +124,23 @@ local function resolve(Density, p1, UseTokensResult)
 				["padding-right-medium text-align-x-right text-caption-medium"] = not IsCompact
 			}
 		},
-		list = { scrollBarThickness = if IsCompact then 4 else 12 }
+		discussion = {
+			columnTag = "col grow size-0 auto-y gap-xsmall",
+			topLineTag = "row align-y-center size-full-0 auto-y gap-xsmall",
+			frameTag = if IsCompact then "col size-full-0 auto-y padding-x-small" else "col size-full-0 auto-y padding-x-medium",
+			headRowTag = if IsCompact then "row align-x-left align-y-top size-full-0 auto-y gap-small padding-top-medium" else "row align-x-left align-y-top size-full-0 auto-y gap-medium padding-top-large",
+			continuationRowTag = if IsCompact then "row align-x-left align-y-top size-full-0 auto-y gap-small padding-top-xxsmall" else "row align-x-left align-y-top size-full-0 auto-y gap-medium padding-top-xxsmall",
+			gutterTag = if IsCompact then "size-600-0" else "size-800-0",
+			avatarTag = if IsCompact then "size-600-600" else "size-800-800",
+			nameTag = if IsCompact then "auto-xy text-align-x-left text-caption-small content-default" else "auto-xy text-align-x-left text-caption-large content-default",
+			timestampTag = if IsCompact then "auto-xy padding-x-xsmall text-caption-small content-muted" else "auto-xy padding-x-xsmall text-body-small content-muted",
+			estimatedRowHeight = (if IsCompact then UseTokensResult.Padding.Medium else UseTokensResult.Padding.Large) + math.round(config.FontSize * config.LineHeight) + UseTokensResult.Gap.XSmall + math.round(config1.FontSize * config1.LineHeight)
+		},
+		list = {
+			scrollBarThickness = if IsCompact then if FFlagExpChatMessageListScrollParityModule then 8 else 4 else 12,
+			scrollBarInset = if FFlagExpChatMessageListScrollParityModule then Enum.ScrollBarInset.Always else Enum.ScrollBarInset.ScrollBar,
+			scrollBarColor = if FFlagExpChatMessageListScrollParityModule then UseTokensResult.Color.Shift.Shift_400.Color3 else nil
+		}
 	}
 end
 

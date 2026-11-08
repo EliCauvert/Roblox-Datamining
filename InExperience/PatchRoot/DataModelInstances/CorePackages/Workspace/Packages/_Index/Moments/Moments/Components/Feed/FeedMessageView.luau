@@ -16,38 +16,8 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FormFactor = MomentsCommonModule.Enums.FormFactor
 
 local function renderGraphic(Frame, ImageStyle)
-	-- upvalues: FoundationCloudAssetsModule (copy), ReactModule (copy), Image (copy), View (copy), Icon (copy), IconSize (copy)
-	if Frame.pictogram == nil then
-		local IconName = Frame.iconName
-		
-		return if IconName == nil then nil else ReactModule.createElement(View, {
-			LayoutOrder = 1,
-			tag = "size-full-0",
-			Size = UDim2.new(1, 0, 0, 180)
-		}, {
-			Cluster = ReactModule.createElement(View, {
-				tag = "position-center-center anchor-center-center",
-				Size = UDim2.fromOffset(94, 94)
-			}, {
-				TiltFrame = ReactModule.createElement(View, {
-					tag = "position-center-center anchor-center-center stroke-standard stroke-default radius-large",
-					Rotation = -15,
-					testId = "--moments-feed-message--tilt-frame",
-					ZIndex = 1,
-					Size = UDim2.fromOffset(115, 115)
-				}),
-				Glyph = ReactModule.createElement(Icon, {
-					testId = "--moments-feed-message--icon",
-					ZIndex = 2,
-					AnchorPoint = Vector2.new(0.5, 0.5),
-					Position = UDim2.fromScale(0.5, 0.5),
-					name = IconName,
-					size = Frame.iconSize or IconSize.Large,
-					style = ImageStyle
-				})
-			})
-		})
-	else
+	-- upvalues: FoundationCloudAssetsModule (copy), ReactModule (copy), Image (copy), Icon (copy), IconSize (copy), View (copy)
+	if Frame.pictogram ~= nil then
 		local Asset = FoundationCloudAssetsModule.Assets[Frame.pictogram]
 		
 		return ReactModule.createElement(Image, {
@@ -58,6 +28,41 @@ local function renderGraphic(Frame, ImageStyle)
 			aspectRatio = Asset.size.X / Asset.size.Y,
 			imageStyle = ImageStyle,
 			Size = UDim2.new(1, 0, 0, 199)
+		})
+	end
+	local IconName = Frame.iconName
+	
+	if IconName == nil then
+		return nil
+	else
+		local Element = ReactModule.createElement(Icon, {
+			testId = "--moments-feed-message--icon",
+			ZIndex = 2,
+			AnchorPoint = Vector2.new(0.5, 0.5),
+			Position = UDim2.fromScale(0.5, 0.5),
+			name = IconName,
+			size = Frame.iconSize or IconSize.Large,
+			style = ImageStyle
+		})
+		
+		return ReactModule.createElement(View, {
+			LayoutOrder = 1,
+			tag = "size-full-0",
+			Size = UDim2.new(1, 0, 0, if Frame.tilted then 180 else 140)
+		}, {
+			Cluster = if Frame.tilted then ReactModule.createElement(View, {
+				tag = "position-center-center anchor-center-center",
+				Size = UDim2.fromOffset(94, 94)
+			}, {
+				TiltFrame = ReactModule.createElement(View, {
+					tag = "position-center-center anchor-center-center stroke-standard stroke-default radius-large",
+					Rotation = -15,
+					testId = "--moments-feed-message--tilt-frame",
+					ZIndex = 1,
+					Size = UDim2.fromOffset(115, 115)
+				}),
+				Glyph = Element
+			}) else Element
 		})
 	end
 end

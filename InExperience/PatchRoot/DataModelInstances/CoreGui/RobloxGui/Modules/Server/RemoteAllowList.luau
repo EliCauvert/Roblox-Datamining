@@ -1,10 +1,11 @@
 ﻿local SharedFlagsModule = require(game:GetService("CorePackages").Workspace.Packages.SharedFlags)
 local FFlagEnableModerateChatRemoteEvent = SharedFlagsModule.FFlagEnableModerateChatRemoteEvent
 local FFlagPlatformLeaderboardRccEnabled = SharedFlagsModule.FFlagPlatformLeaderboardRccEnabled
+local FFlagLuaAppsEnablePromptVIPServerPurchase = SharedFlagsModule.FFlagLuaAppsEnablePromptVIPServerPurchase
 local RemoteAllowListAddExpChatFeatureValueChanged = game:DefineFastFlag("RemoteAllowListAddExpChatFeatureValueChanged", false)
 
 return function()
-	-- upvalues: FFlagEnableModerateChatRemoteEvent (copy), RemoteAllowListAddExpChatFeatureValueChanged (copy), FFlagPlatformLeaderboardRccEnabled (copy)
+	-- upvalues: FFlagEnableModerateChatRemoteEvent (copy), RemoteAllowListAddExpChatFeatureValueChanged (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), FFlagPlatformLeaderboardRccEnabled (copy)
 	assert(game:FindService("NetworkServer") ~= nil)
 	local NetworkServer = game:GetService("NetworkServer")
 	local List = {}
@@ -39,6 +40,10 @@ return function()
 	table.insert(List, "ReplicateDeviceCameraCFrame")
 	table.insert(List, "ReferredPlayerJoin")
 	table.insert(List, "BuildExperiencePlaytestTeleport")
+	
+	if FFlagLuaAppsEnablePromptVIPServerPurchase then
+		table.insert(List, "TeleportToPurchasedVIPServer")
+	end
 	table.insert(List, "SetUserActive")
 	table.insert(List, "AvatarGesturesVRPlayer")
 	

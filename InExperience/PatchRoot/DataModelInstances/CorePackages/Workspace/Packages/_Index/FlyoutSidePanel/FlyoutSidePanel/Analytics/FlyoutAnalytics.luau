@@ -50,6 +50,14 @@ local config5 = {
 	throttlingPercentage = game:DefineFastInt("FlyoutContentItemImpressionEventThrottleHunderedthsPercent", 10000),
 	lastUpdated = { 2026, 9, 3 }
 }
+local config6 = {
+	eventName = "coreui_flyout_switch_account_click",
+	description = "Flyout switch account click",
+	links = "",
+	backends = { "EventIngest" },
+	throttlingPercentage = game:DefineFastInt("FlyoutSwitchAccountClickEventThrottleHunderedthsPercent", 10000),
+	lastUpdated = { 2026, 11, 5 }
+}
 
 local function _(p1)
 	-- upvalues: FlyoutContentSettingsModule (copy)
@@ -105,6 +113,10 @@ return {
 	onFlyoutContentItemImpressed = function(p1)
 		-- upvalues: logEventHelper (copy), config5 (copy)
 		logEventHelper(config5, "flyout_item_impression", p1)
+	end,
+	onFlyoutSwitchAccountClicked = function(p1)
+		-- upvalues: logEventHelper (copy), config6 (copy)
+		logEventHelper(config6, "flyout_switch_account_click", p1)
 	end,
 	sendMoreLegacyAndFlyoutItemClickEvent = function(p1, p2, LocalUserId, Url)
 		-- upvalues: FlyoutContentSettingsModule (copy), logEventHelper (copy), config4 (copy), config1 (copy)

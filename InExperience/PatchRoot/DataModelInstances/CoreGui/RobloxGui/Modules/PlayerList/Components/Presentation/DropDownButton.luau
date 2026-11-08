@@ -10,7 +10,6 @@ local IconSize = FoundationModule.Enums.IconSize
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local Parent = script.Parent.Parent
 local WithLayoutValuesFunction = require(Parent.Connection.LayoutValues).WithLayoutValues
 local IconButtonModule = require(Parent.PresentationCommon.IconButton)
@@ -73,54 +72,53 @@ function DropDownButton.getColorBackgroundAnimation(p1, p2)
 end
 
 function DropDownButton.render(p1)
-	-- upvalues: WithLayoutValuesFunction (copy), WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), EnabledFunction (copy), Colors (copy), FFlagAllowDisplayingFoundationIconsForDropdownModule (copy), IconName (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), IconSize (copy), RoactModule (copy), FoundationModule (copy), IconVariant (copy), ImageSetLabel (copy), NormalizeFontFaceFunction (copy), IconButtonModule (copy), Images (copy)
+	-- upvalues: WithLayoutValuesFunction (copy), WithFoundationOrUIBloxStyleFunction (copy), EnabledFunction (copy), Colors (copy), FFlagAllowDisplayingFoundationIconsForDropdownModule (copy), IconName (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), IconSize (copy), RoactModule (copy), FoundationModule (copy), IconVariant (copy), ImageSetLabel (copy), NormalizeFontFaceFunction (copy), IconButtonModule (copy), Images (copy)
 	return WithLayoutValuesFunction(function(p2)
-		-- upvalues: WithFoundationOrUIBloxStyleFunction (upval), FoundationFontFaceMigration (upval), EnabledFunction (upval), p1 (copy), Colors (upval), FFlagAllowDisplayingFoundationIconsForDropdownModule (upval), IconName (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), IconSize (upval), RoactModule (upval), FoundationModule (upval), IconVariant (upval), ImageSetLabel (upval), NormalizeFontFaceFunction (upval), IconButtonModule (upval), Images (upval)
-		return WithFoundationOrUIBloxStyleFunction(function(p3, p4)
-			-- upvalues: FoundationFontFaceMigration (upval)
+		-- upvalues: WithFoundationOrUIBloxStyleFunction (upval), EnabledFunction (upval), p1 (copy), Colors (upval), FFlagAllowDisplayingFoundationIconsForDropdownModule (upval), IconName (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), IconSize (upval), RoactModule (upval), FoundationModule (upval), IconVariant (upval), ImageSetLabel (upval), NormalizeFontFaceFunction (upval), IconButtonModule (upval), Images (upval)
+		return WithFoundationOrUIBloxStyleFunction(function(Tokens, p3)
 			return {
-				Tokens = if FoundationFontFaceMigration then p3 else nil,
+				Tokens = Tokens,
 				Theme = {
 					BackgroundContrast = {
-						Color = p3.Color.Surface.Surface_100.Color3,
-						Transparency = p3.Color.Surface.Surface_100.Transparency
+						Color = Tokens.Color.Surface.Surface_100.Color3,
+						Transparency = Tokens.Color.Surface.Surface_100.Transparency
 					},
 					BackgroundOnHover = {
-						Color = p3.Color.State.Hover.Color3,
-						Transparency = p3.Color.State.Hover.Transparency
+						Color = Tokens.Color.State.Hover.Color3,
+						Transparency = Tokens.Color.State.Hover.Transparency
 					},
 					BackgroundOnPress = {
-						Color = p3.Color.State.Press.Color3,
-						Transparency = p3.Color.State.Press.Transparency
+						Color = Tokens.Color.State.Press.Color3,
+						Transparency = Tokens.Color.State.Press.Transparency
 					},
 					BackgroundUIContrast = {
-						Color = p3.Color.OverMedia.OverMedia_0.Color3,
-						Transparency = p3.Color.OverMedia.OverMedia_0.Transparency
+						Color = Tokens.Color.OverMedia.OverMedia_0.Color3,
+						Transparency = Tokens.Color.OverMedia.OverMedia_0.Transparency
 					},
 					Divider = {
-						Color = p3.Color.Stroke.Emphasis.Color3,
-						Transparency = p3.Color.Stroke.Emphasis.Transparency
+						Color = Tokens.Color.Stroke.Emphasis.Color3,
+						Transparency = Tokens.Color.Stroke.Emphasis.Transparency
 					},
 					IconEmphasis = {
-						Color = p3.Color.Content.Emphasis.Color3,
-						Transparency = p3.Color.Content.Emphasis.Transparency
+						Color = Tokens.Color.Content.Emphasis.Color3,
+						Transparency = Tokens.Color.Content.Emphasis.Transparency
 					},
 					TextEmphasis = {
-						Color = p3.Color.Content.Emphasis.Color3,
-						Transparency = p3.Color.Content.Emphasis.Transparency
+						Color = Tokens.Color.Content.Emphasis.Color3,
+						Transparency = Tokens.Color.Content.Emphasis.Transparency
 					}
 				},
 				Font = {
 					BaseSize = 1,
 					Header2 = {
-						Font = p3.Typography.TitleLarge.Font,
-						RelativeSize = p3.Typography.TitleLarge.FontSize
+						Font = Tokens.Typography.TitleLarge.Font,
+						RelativeSize = Tokens.Typography.TitleLarge.FontSize
 					}
 				},
-				Settings = { PreferredTransparency = p4.preferredTransparency }
+				Settings = { PreferredTransparency = p3.preferredTransparency }
 			}
 		end, function(p3)
-			-- upvalues: EnabledFunction (upval), p2 (copy), p1 (upval), Colors (upval), FFlagAllowDisplayingFoundationIconsForDropdownModule (upval), IconName (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), IconSize (upval), RoactModule (upval), FoundationModule (upval), IconVariant (upval), ImageSetLabel (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), IconButtonModule (upval), Images (upval)
+			-- upvalues: EnabledFunction (upval), p2 (copy), p1 (upval), Colors (upval), FFlagAllowDisplayingFoundationIconsForDropdownModule (upval), IconName (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), IconSize (upval), RoactModule (upval), FoundationModule (upval), IconVariant (upval), ImageSetLabel (upval), NormalizeFontFaceFunction (upval), IconButtonModule (upval), Images (upval)
 			local config = {
 				Color = if EnabledFunction() then p3.Theme.BackgroundUIContrast.Color else p3.Theme.BackgroundContrast.Color,
 				Transparency = p2.OverrideBackgroundTransparency * p3.Settings.PreferredTransparency
@@ -279,8 +277,7 @@ function DropDownButton.render(p1)
 						BackgroundTransparency = 1,
 						Size = UDim2.new(1, -NewDropDownPadding, 1, 0),
 						Text = p1.props.text,
-						Font = if FoundationFontFaceMigration then nil else p3.Font.Header2.Font,
-						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.TitleLarge.Font) else nil,
+						FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.TitleLarge.Font),
 						TextSize = p3.Font.BaseSize * p3.Font.Header2.RelativeSize,
 						TextColor3 = p3.Theme.TextEmphasis.Color,
 						TextTransparency = p3.Theme.TextEmphasis.Transparency,

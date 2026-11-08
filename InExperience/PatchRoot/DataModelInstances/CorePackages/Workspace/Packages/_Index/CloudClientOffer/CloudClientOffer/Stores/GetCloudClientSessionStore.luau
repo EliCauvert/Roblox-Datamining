@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("CloudClientOffer").Parent.Signals).createComputed((require(script.createCloudClientSessionStore)))

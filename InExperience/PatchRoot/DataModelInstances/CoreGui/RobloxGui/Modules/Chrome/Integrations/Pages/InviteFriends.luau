@@ -3,6 +3,8 @@ local CorePackages = game:GetService("CorePackages")
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local GameInviteModalManager = require(CorePackages.Workspace.Packages.GameInvite).GameInviteModalManager
+local FFlagGameInviteInExpJoinOrInviteLabelModule = require(CorePackages.Workspace.Packages.GameInvite.FFlagGameInviteInExpJoinOrInviteLabel)
+local IsPlatformInviteUIEnabledModule = require(CorePackages.Workspace.Packages.GameInvite.isPlatformInviteUIEnabled)
 local ServiceModule = require(Chrome.Service)
 local CommonIconModule = require(Chrome.Integrations.CommonIcon)
 local SideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement
@@ -22,10 +24,12 @@ local function _(): boolean
 	return not RunService:IsStudio() and (Players.LocalPlayer ~= nil and Players.LocalPlayer.UserId > 0)
 end
 
-local config = {
+local IsUserIdAbove: boolean = not RunService:IsStudio() and (Players.LocalPlayer ~= nil and Players.LocalPlayer.UserId > 0)
+
+return ServiceModule:register({
 	id = "invite_friends",
-	label = "CoreScripts.InGameMenu.PageTitle.InviteFriends",
 	initialAvailability = if IsUserIdAbove then ServiceModule.AvailabilitySignal.Available else ServiceModule.AvailabilitySignal.Unavailable,
+	label = if FFlagGameInviteInExpJoinOrInviteLabelModule and not IsPlatformInviteUIEnabledModule() then "CoreScripts.InGameMenu.PageTitle.JoinOrInvite" else "CoreScripts.InGameMenu.PageTitle.InviteFriends",
 	sideSheetPlacement = SideSheetPlacement.AboveFold,
 	activated = InGameMenuIntegrationUtilsModule.toggleInviteFriendsPage,
 	isActivated = NewResult1,
@@ -35,7 +39,4 @@ local config = {
 			return CommonIconModule("PersonArrowFromBottomRight", nil, NewResult1)
 		end
 	}
-}
-local IsUserIdAbove: boolean = not RunService:IsStudio() and (Players.LocalPlayer ~= nil and Players.LocalPlayer.UserId > 0)
-
-return ServiceModule:register(config)
+})

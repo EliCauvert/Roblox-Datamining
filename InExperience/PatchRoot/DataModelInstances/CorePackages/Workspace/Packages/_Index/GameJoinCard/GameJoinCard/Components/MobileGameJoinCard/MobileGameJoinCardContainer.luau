@@ -24,6 +24,7 @@ local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
 local RoactUtilsModule = require(Parent.RoactUtils)
 local UseNavigationFunction = require(Parent.Navigation).useNavigation
 local UseNavigationFocusFunction = require(Parent.Navigation).useNavigationFocus
+local UsePlayerNameModule = require(GameJoinCard.Hooks.usePlayerName)
 local UseQueryFunction = require(Parent.ApolloClient).useQuery
 local ApolloLocalStateModule = require(Parent.ApolloLocalState)
 local Players = game:GetService("Players")
@@ -34,6 +35,7 @@ local EnteredChatFromEntryPointFunction = SocialCommonModule.Actions.EnteredChat
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagSocialCarouselUseProfileStore = SharedFlagsModule.FFlagSocialCarouselUseProfileStore
 local FFlagUserProfilePlatformProfile = SharedFlagsModule.FFlagUserProfilePlatformProfile
+local FFlagSocialCarouselBuildPresence = SharedFlagsModule.FFlagSocialCarouselBuildPresence
 local FFlagFriendSortedByPresenceSignalsImplementation = SharedFlagsModule.FFlagFriendSortedByPresenceSignalsImplementation
 local FFlagEnableSplitPane = SharedFlagsModule.FFlagEnableSplitPane
 local FFlagGameJoinCardAnalyticsCardId = SharedFlagsModule.FFlagGameJoinCardAnalyticsCardId
@@ -89,7 +91,7 @@ local config = {
 local config1 = { skipFetch = true }
 
 return function()
-	-- upvalues: FFlagMobileGameJoinCardEDPFromTitleModule (copy), FFlagMobileGameJoinCardEDPFromThumbnailModule (copy), FFlagGameJoinCardChatEntryPointModule (copy), FFlagJoinabilityCTARefactor (copy), UseDispatchFunction (copy), UseNavigationFunction (copy), FFlagMobileGameJoinCardGamepadSupport (copy), UseNavigationFocusFunction (copy), FFlagGameJoinCardSourceAttribution (copy), ReactModule (copy), FFlagGameJoinCardAnalyticsCardId (copy), HttpService (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), AppGuiService (copy), AppSessionService (copy), UseAppPolicyFunction (copy), Players (copy), FFlagFriendSortedByPresenceSignalsImplementation (copy), SignalsModule (copy), GetResult1 (copy), FFlagProfileCTAHydratePresenceFromMetadataModule (copy), config1 (copy), SignalsReactModule (copy), UseQueryFunction (copy), ApolloLocalStateModule (copy), FFlagJoinUserCTAsIxpEnabled (copy), IXPServiceWrapper (copy), FStringJoinUserCTAsIxpLayer (copy), UseGameJoinCardAnalyticsModule (copy), FFlagSocialCarouselUseProfileStore (copy), GetResult (copy), UserProfilesModule (copy), FFlagUserProfilePlatformProfile (copy), UseExperienceBannerImageFunction (copy), FFlagMobileGameJoinCardThumbnailModule (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), GameJoinCardTelemetryModule (copy), UseAgeCheckCompletionLoggerFunction (copy), UseJoinUserInExperienceFunction (copy), config (copy), UseJoinUserActionsModule (copy), UseLocalizationFunction (copy), ActionsModule (copy), UseLogActionsResolveTimeModule (copy), GameJoinCardSurface (copy), UseAgeCheckPressLoggerFunction (copy), DataStatus (copy), ContainsActionModule (copy), UserCtaAction (copy), GameJoinCardButtonAction (copy), GamePlayIntentFunction (copy), PeopleListInHomePage (copy), DependencyArrayFunction (copy), FFlagEnableSplitPane (copy), AppPage (copy), ViewProfileSourceValues (copy), SetGamePlaySessionFunction (copy), SessionType (copy), GameDetailReferralFunction (copy), OpenGameDetailsFunction (copy), ViewEDPsourceValues (copy), EnteredChatFromEntryPointFunction (copy), ChatEntryPointNames (copy), NotificationType (copy), MobileGameJoinCardModule (copy)
+	-- upvalues: FFlagMobileGameJoinCardEDPFromTitleModule (copy), FFlagMobileGameJoinCardEDPFromThumbnailModule (copy), FFlagGameJoinCardChatEntryPointModule (copy), FFlagJoinabilityCTARefactor (copy), UseDispatchFunction (copy), UseNavigationFunction (copy), FFlagMobileGameJoinCardGamepadSupport (copy), UseNavigationFocusFunction (copy), FFlagGameJoinCardSourceAttribution (copy), ReactModule (copy), FFlagGameJoinCardAnalyticsCardId (copy), HttpService (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), AppGuiService (copy), AppSessionService (copy), UseAppPolicyFunction (copy), Players (copy), FFlagFriendSortedByPresenceSignalsImplementation (copy), SignalsModule (copy), GetResult1 (copy), FFlagProfileCTAHydratePresenceFromMetadataModule (copy), config1 (copy), SignalsReactModule (copy), UseQueryFunction (copy), ApolloLocalStateModule (copy), FFlagJoinUserCTAsIxpEnabled (copy), IXPServiceWrapper (copy), FStringJoinUserCTAsIxpLayer (copy), UseGameJoinCardAnalyticsModule (copy), FFlagSocialCarouselBuildPresence (copy), UsePlayerNameModule (copy), FFlagSocialCarouselUseProfileStore (copy), GetResult (copy), UserProfilesModule (copy), FFlagUserProfilePlatformProfile (copy), UseExperienceBannerImageFunction (copy), FFlagMobileGameJoinCardThumbnailModule (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), GameJoinCardTelemetryModule (copy), UseAgeCheckCompletionLoggerFunction (copy), UseJoinUserInExperienceFunction (copy), config (copy), UseJoinUserActionsModule (copy), UseLocalizationFunction (copy), ActionsModule (copy), UseLogActionsResolveTimeModule (copy), GameJoinCardSurface (copy), UseAgeCheckPressLoggerFunction (copy), DataStatus (copy), ContainsActionModule (copy), UserCtaAction (copy), GameJoinCardButtonAction (copy), GamePlayIntentFunction (copy), PeopleListInHomePage (copy), DependencyArrayFunction (copy), FFlagEnableSplitPane (copy), AppPage (copy), ViewProfileSourceValues (copy), SetGamePlaySessionFunction (copy), SessionType (copy), GameDetailReferralFunction (copy), OpenGameDetailsFunction (copy), ViewEDPsourceValues (copy), EnteredChatFromEntryPointFunction (copy), ChatEntryPointNames (copy), NotificationType (copy), MobileGameJoinCardModule (copy)
 	local UseDispatchResult = if FFlagMobileGameJoinCardEDPFromTitleModule or FFlagMobileGameJoinCardEDPFromThumbnailModule or FFlagGameJoinCardChatEntryPointModule or FFlagJoinabilityCTARefactor then UseDispatchFunction() else nil
 	local UseNavigationResult = UseNavigationFunction()
 	local UseNavigationFocusResult = if FFlagMobileGameJoinCardGamepadSupport then UseNavigationFocusFunction() else nil
@@ -170,14 +172,16 @@ return function()
 			joinGameCardId = if FFlagGameJoinCardAnalyticsCardId then UseMemoResult else nil
 		})
 	end, {})
-	local UseSignalStateResult1 = nil
+	local UsePlayerNameModuleResult = nil
 	
-	if FFlagSocialCarouselUseProfileStore then
+	if FFlagSocialCarouselBuildPresence then
+		UsePlayerNameModuleResult = UsePlayerNameModule(UserIdParam)
+	elseif FFlagSocialCarouselUseProfileStore then
 		local UseMemoResult1 = ReactModule.useMemo(function()
 			-- upvalues: GetResult (upval), UserIdParam (copy)
 			return GetResult.fetchNamesByUserIds({ UserIdParam })
 		end, { UserIdParam })
-		UseSignalStateResult1 = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
+		UsePlayerNameModuleResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 			-- upvalues: SignalsModule (upval), UseMemoResult1 (copy)
 			return SignalsModule.createComputed(function(p1)
 				-- upvalues: UseMemoResult1 (upval)
@@ -192,7 +196,7 @@ return function()
 			userIds = { UserIdParam },
 			query = if FFlagUserProfilePlatformProfile then UserProfilesModule.Queries.userProfilesCombinedNameByUserIds else UserProfilesModule.Queries.userProfilesCombinedAndPlatformByUserIds
 		})
-		UseSignalStateResult1 = ReactModule.useMemo(function()
+		UsePlayerNameModuleResult = ReactModule.useMemo(function()
 			-- upvalues: UseUserProfilesFetchResult (copy), UserProfilesModule (upval), UserIdParam (copy)
 			return UseUserProfilesFetchResult.data and UserProfilesModule.Selectors.getCombinedNameFromId(UseUserProfilesFetchResult.data, UserIdParam) or ""
 		end, { UseUserProfilesFetchResult.data, UserIdParam })
@@ -423,7 +427,7 @@ return function()
 		userId = UserIdParam,
 		universeId = UniverseId,
 		homepageCarouselAbsolutePosition = HomepageCarouselAbsolutePositionParam,
-		playerName = UseSignalStateResult1,
+		playerName = UsePlayerNameModuleResult,
 		experienceName = ExperienceName,
 		bannerImageUrl = UseExperienceBannerImageResult.url,
 		thumbnailImageUrl = RbxThumb,

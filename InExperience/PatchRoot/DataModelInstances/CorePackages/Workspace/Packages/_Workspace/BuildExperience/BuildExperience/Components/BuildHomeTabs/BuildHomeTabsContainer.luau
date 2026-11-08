@@ -1,11 +1,15 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
-local ReactModule = require(BuildExperience.Parent.React)
+local Parent = BuildExperience.Parent
+local _ = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local FFlagBuildExperienceFoundationTabsModule = require(BuildExperience.Flags.FFlagBuildExperienceFoundationTabs)
 local BuildHomeTabsViewModule = require(script.Parent.BuildHomeTabsView)
 local _ = require(BuildExperience.Stores.GetSearchQueryStore.createSearchQueryStore)
 local GamesFilterModule = require(BuildExperience.Stores.GetMyCreationsFilterStore.GamesFilter)
 local GetPreviewsFilterStoreModule = require(BuildExperience.Stores.GetPreviewsFilterStore)
 local MyCreationsFilterContainerModule = require(BuildExperience.Components.MyCreationsFilter.MyCreationsFilterContainer)
 local PreviewsTabViewModule = require(BuildExperience.Components.PreviewsTab.PreviewsTabView)
+local UseBuildHomeTabsFillBehaviorModule = require(script.Parent.useBuildHomeTabsFillBehavior)
 local UseBuildHomeTabsViewModelModule = require(script.Parent.useBuildHomeTabsViewModel)
 local UsePreviewResultsModule = require(BuildExperience.Components.PreviewsTab.usePreviewResults)
 local UsePreviewsTabViewModelModule = require(BuildExperience.Components.PreviewsTab.usePreviewsTabViewModel)
@@ -17,7 +21,7 @@ local Options = {
 local DefaultFilter = { games = GamesFilterModule.SharedGames }
 
 return function(Frame)
-	-- upvalues: GetPreviewsFilterStoreModule (copy), UsePreviewResultsModule (copy), UseBuildHomeTabsViewModelModule (copy), UsePreviewsTabViewModelModule (copy), ReactModule (copy), BuildHomeTabsViewModule (copy), PreviewsTabViewModule (copy), MyCreationsFilterContainerModule (copy), DefaultFilter (copy), Options (copy)
+	-- upvalues: GetPreviewsFilterStoreModule (copy), UsePreviewResultsModule (copy), UseBuildHomeTabsViewModelModule (copy), FFlagBuildExperienceFoundationTabsModule (copy), UseBuildHomeTabsFillBehaviorModule (copy), UsePreviewsTabViewModelModule (copy), ReactModule (copy), BuildHomeTabsViewModule (copy), PreviewsTabViewModule (copy), MyCreationsFilterContainerModule (copy), DefaultFilter (copy), Options (copy)
 	local CreatorGroupsStore = Frame.creatorGroupsStore
 	local PreviewsFilterStore = Frame.previewsFilterStore or GetPreviewsFilterStoreModule()
 	local UsePreviewResultsModuleResult = UsePreviewResultsModule({
@@ -40,6 +44,7 @@ return function(Frame)
 		onTabActivated = UseBuildHomeTabsViewModelModuleResult.onTabActivated,
 		pageOffset = UseBuildHomeTabsViewModelModuleResult.pageOffset,
 		tabOrder = UseBuildHomeTabsViewModelModuleResult.tabOrder,
+		tabsFillBehavior = if FFlagBuildExperienceFoundationTabsModule then UseBuildHomeTabsFillBehaviorModule() else nil,
 		gamesContent = Frame.gamesContent,
 		previewsContent = ReactModule.createElement(PreviewsTabViewModule, {
 			rows = UsePreviewsTabViewModelModuleResult.rows,

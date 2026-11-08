@@ -37,6 +37,7 @@ return function(p1, Object, Current)
 		if FFlagLoadingScreenMilestones then
 			StartResult = LoadingScreenMilestonesModule.start({
 				holdEnabled = false,
+				page = ConstantsModule.Page.TiltLoadingScreen,
 				host = ConstantsModule.Host.DeferredJoin,
 				reducedMotion = UserGameSettings.ReducedMotion
 			})

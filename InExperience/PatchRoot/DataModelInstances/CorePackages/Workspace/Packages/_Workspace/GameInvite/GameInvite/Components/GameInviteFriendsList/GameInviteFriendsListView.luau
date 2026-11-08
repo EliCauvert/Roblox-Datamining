@@ -7,7 +7,12 @@ local FFlagGameInviteInExpJoinCtaModule = require(GameInvite.Flags.FFlagGameInvi
 local _ = require(script.Parent.useGameInviteJoinCard)
 local VerticalUserList = require(Parent.UserList).VerticalUserList.VerticalUserList
 local FriendsMenuShareGameInviteLink = require(Parent.FriendsMenu).FriendsMenuShareGameInviteLink
-local Configs = { disableRowActivation = true }
+local Configs = {
+	disableRowActivation = true,
+	showTrustedFriendIndicator = false,
+	disableVirtualization = true,
+	fixedRowHeight = if require(Parent.SharedFlags).FFlagUserListFixedRowHeightConfig then true else nil
+}
 
 local function GameInviteJoinCardPortal(p1)
 	-- upvalues: FoundationModule (copy), ReactRobloxModule (copy), ReactModule (copy)

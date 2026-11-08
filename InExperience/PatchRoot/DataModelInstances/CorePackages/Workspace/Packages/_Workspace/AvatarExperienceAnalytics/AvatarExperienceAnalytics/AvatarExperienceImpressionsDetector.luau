@@ -5,7 +5,6 @@ local TModule = require(Parent.t)
 local FFlagUseNavigationSelectors = require(Parent.SharedFlags).FFlagUseNavigationSelectors
 local Selectors = require(Parent.NavigationRodux).Selectors
 local FFlagSignalsNavP3gAvatarExperience = require(Parent.SharedFlags).FFlagSignalsNavP3gAvatarExperience
-local FFlagAXSduiCatalogScrollImpressions = require(Parent.AvatarExperienceFlags).FFlagAXSduiCatalogScrollImpressions
 local ReactModule = require(Parent.React)
 local CryoModule = require(Parent.Cryo)
 local UseSignalState = require(Parent.SignalsReact).useSignalState
@@ -47,7 +46,7 @@ function AvatarExperienceImpressionsDetector.init(p1)
 end
 
 function AvatarExperienceImpressionsDetector._isInstanceVisible(p1, Frame: Frame): boolean
-	-- upvalues: ArgCheckModule (copy), FFlagAXSduiCatalogScrollImpressions (copy)
+	-- upvalues: ArgCheckModule (copy)
 	if not Frame then
 		return false
 	end
@@ -65,7 +64,7 @@ function AvatarExperienceImpressionsDetector._isInstanceVisible(p1, Frame: Frame
 	
 	if ScaledMaxDelta.X <= 0 or ScaledMaxDelta.Y <= 0 then
 		return false
-	elseif FFlagAXSduiCatalogScrollImpressions and (Frame.AbsoluteSize.X <= 0 or Frame.AbsoluteSize.Y <= 0) then
+	elseif Frame.AbsoluteSize.X <= 0 or Frame.AbsoluteSize.Y <= 0 then
 		return false
 	else
 		local AbsolutePosition = Frame.AbsolutePosition

@@ -22,6 +22,8 @@ else
 	local PlaceLauncherState = ProgressLoadingModule.PlaceLauncherState
 	local VerifiedBadgesModule = require(Parent.VerifiedBadges)
 	local LoggingProtocolModule = require(Parent.LoggingProtocol)
+	local FFlagLoadingScreenControlMilestones = require(Parent.SharedFlags).FFlagLoadingScreenControlMilestones
+	local LoadingScreenMilestonesModule = require(Parent.ProgressLoading.LoadingScreenMilestones)
 	local WithStyleFunction = require(Parent.UIBlox).Style.withStyle
 	local ResponsiveModule = require(Parent.Responsive)
 	local FoundationModule = require(Parent.Foundation)
@@ -29,7 +31,6 @@ else
 	local Loading = FoundationModule.Loading
 	local FoundationProvider = FoundationModule.FoundationProvider
 	local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-	local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 	local LocalizationProvider = require(Parent.Localization).LocalizationProvider
 	local AutoTranslateBadge = ProgressLoadingModule.AutoTranslateBadge
 	local LoadingScreenTelemetryModule = require(Parent.ProgressLoading.LoadingScreenTelemetry)
@@ -468,7 +469,7 @@ else
 	end
 	
 	function LoadingScreen.renderInfoFrame(p1, p2)
-		-- upvalues: VerifiedBadgesModule (copy), list (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), IsPlatformMatch (copy)
+		-- upvalues: VerifiedBadgesModule (copy), list (copy), RoactModule (copy), NormalizeFontFaceFunction (copy), IsPlatformMatch (copy)
 		local ProductInfo = p1.props.productInfo
 		local Name = ProductInfo and ProductInfo.Name or ""
 		local Name1 = ProductInfo and ProductInfo.Creator.Name or ""
@@ -516,8 +517,7 @@ else
 					Size = UDim2.fromScale(0.8, 0),
 					AnchorPoint = Vector2.new(0.5, 0),
 					AutomaticSize = Enum.AutomaticSize.Y,
-					Font = if FoundationFontFaceMigration then nil else p2.Font.Title.Font,
-					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.HeadingLarge.Font) else nil,
+					FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.HeadingLarge.Font),
 					TextSize = p1.bindings.placeTextSize,
 					TextColor3 = p2.Theme.TextEmphasis.Color,
 					Text = Name,
@@ -538,8 +538,7 @@ else
 					Size = UDim2.fromScale(0.6, 0),
 					AnchorPoint = Vector2.new(0.5, 1),
 					AutomaticSize = Enum.AutomaticSize.Y,
-					Font = if FoundationFontFaceMigration then nil else p2.Font.CaptionBody.Font,
-					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodySmall.Font) else nil,
+					FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.BodySmall.Font),
 					TextSize = p1.bindings.creatorTextSize,
 					TextColor3 = p2.Theme.TextDefault.Color,
 					Text = Name1,
@@ -623,7 +622,7 @@ else
 	end
 	
 	function LoadingScreen.renderCloseBtn(p1, _)
-		-- upvalues: ResponsiveModule (copy), RoactModule (copy), GetFFlagReportFirstExperienceCancelledModule (copy), LoggingProtocolModule (copy)
+		-- upvalues: ResponsiveModule (copy), RoactModule (copy), FFlagLoadingScreenControlMilestones (copy), LoadingScreenMilestonesModule (copy), GetFFlagReportFirstExperienceCancelledModule (copy), LoggingProtocolModule (copy)
 		if p1.props.preferredInputRef.current ~= ResponsiveModule.Input.Directional and not p1.state.showCloseBtn and tick() - p1.startTime > 5 then
 			p1:setState({ showCloseBtn = true })
 		end
@@ -637,7 +636,10 @@ else
 			Active = false,
 			ZIndex = 10,
 			[RoactModule.Event.MouseButton1Click] = function()
-				-- upvalues: GetFFlagReportFirstExperienceCancelledModule (upval), LoggingProtocolModule (upval)
+				-- upvalues: FFlagLoadingScreenControlMilestones (upval), p1 (copy), LoadingScreenMilestonesModule (upval), GetFFlagReportFirstExperienceCancelledModule (upval), LoggingProtocolModule (upval)
+				if FFlagLoadingScreenControlMilestones and p1.props.milestones then
+					p1.props.milestones.abort(LoadingScreenMilestonesModule.AbortReason.Cancelled)
+				end
 				if GetFFlagReportFirstExperienceCancelledModule then
 					LoggingProtocolModule.default:logEventOnce("first_experience_cancelled")
 				end
@@ -647,7 +649,7 @@ else
 	end
 	
 	function LoadingScreen.renderServerFrame(p1, p2)
-		-- upvalues: IsTenFootInterface (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), NewResult (copy), CoreGui (copy)
+		-- upvalues: IsTenFootInterface (copy), RoactModule (copy), NormalizeFontFaceFunction (copy), NewResult (copy), CoreGui (copy)
 		local TextSize: number = if IsTenFootInterface then 16 else 12
 		local TextSize1: number = if IsTenFootInterface then 16 else 12
 		
@@ -669,8 +671,7 @@ else
 				ZIndex = 2,
 				Size = UDim2.new(1, 0, 0, 2 * TextSize1),
 				Position = UDim2.new(0, 0, 1, -4 * TextSize - 2 * TextSize1),
-				Font = if FoundationFontFaceMigration then nil else p2.Font.Footer.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.CaptionSmall.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.CaptionSmall.Font),
 				TextSize = TextSize1,
 				TextColor3 = p2.Theme.TextDefault.Color,
 				Text = NewResult:Format("Authentication.Login.WeChat.AntiAddictionText"),
@@ -682,8 +683,7 @@ else
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 0, 4 * TextSize),
 				Position = UDim2.new(0, 0, 1, -2 * TextSize),
-				Font = if FoundationFontFaceMigration then nil else p2.Font.Footer.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.CaptionSmall.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.CaptionSmall.Font),
 				TextSize = TextSize,
 				TextWrapped = true,
 				TextScaled = false,
@@ -700,7 +700,7 @@ else
 	end
 	
 	function LoadingScreen.renderGamepadCancelBtn(p1, p2)
-		-- upvalues: ResponsiveModule (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), NewResult (copy)
+		-- upvalues: ResponsiveModule (copy), RoactModule (copy), NormalizeFontFaceFunction (copy), NewResult (copy)
 		return p1.props.preferredInputRef.current == ResponsiveModule.Input.Directional and (not p1.state.gamepadCancelPressed and RoactModule.createElement("Frame", {
 			Name = "GamepadCancelFrame",
 			BackgroundTransparency = 1,
@@ -728,8 +728,7 @@ else
 				ZIndex = 2,
 				LayoutOrder = 1,
 				Size = UDim2.fromScale(1, 1),
-				Font = if FoundationFontFaceMigration then nil else p2.Font.SubHeader1.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.TitleLarge.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.TitleLarge.Font),
 				TextColor3 = p2.Theme.TextEmphasis.Color,
 				Text = NewResult:Format("CoreScripts.TopBar.Back"),
 				TextXAlignment = Enum.TextXAlignment.Left,
@@ -746,7 +745,7 @@ else
 	end
 	
 	function LoadingScreen.init(p1)
-		-- upvalues: _Vector2 (copy), IsTenFootInterface (copy), QueueExperimentation (copy), ContextActionService (copy), config1 (copy), RoactModule (copy), list (copy), IsPlatformMatch (copy), GuiService (copy)
+		-- upvalues: _Vector2 (copy), IsTenFootInterface (copy), QueueExperimentation (copy), ContextActionService (copy), config1 (copy), FFlagLoadingScreenControlMilestones (copy), LoadingScreenMilestonesModule (copy), RoactModule (copy), list (copy), IsPlatformMatch (copy), GuiService (copy)
 		p1.thumbnailMoveSpd = 0.05
 		p1.fadeinComplete = false
 		p1.isPortrait = false
@@ -775,7 +774,7 @@ else
 		end
 		
 		game.Loaded:Connect(function()
-			-- upvalues: IsTenFootInterface (upval), ContextActionService (upval), p1 (copy), config1 (upval)
+			-- upvalues: IsTenFootInterface (upval), ContextActionService (upval), p1 (copy), config1 (upval), FFlagLoadingScreenControlMilestones (upval), LoadingScreenMilestonesModule (upval)
 			if IsTenFootInterface then
 				ContextActionService:UnbindCoreAction("CancelGameLoad")
 			end
@@ -784,7 +783,10 @@ else
 			end
 			p1:stopAnimation()
 			p1:playAnimation(config1.FadeOut, {}, function()
-				-- upvalues: p1 (upval)
+				-- upvalues: FFlagLoadingScreenControlMilestones (upval), p1 (upval), LoadingScreenMilestonesModule (upval)
+				if FFlagLoadingScreenControlMilestones and p1.props.milestones then
+					p1.props.milestones.record(LoadingScreenMilestonesModule.Milestone.ScreenHidden)
+				end
 				p1:setState({ visible = false })
 			end)
 		end)
@@ -877,7 +879,7 @@ else
 		end)
 		local Flag = false
 		ContextActionService:BindCoreAction("CancelGameLoad", function(_, UserInputState, _)
-			-- upvalues: Flag (ref), p1 (copy), ContextActionService (upval)
+			-- upvalues: Flag (ref), p1 (copy), ContextActionService (upval), FFlagLoadingScreenControlMilestones (upval), LoadingScreenMilestonesModule (upval)
 			if UserInputState == Enum.UserInputState.Begin then
 				Flag = true
 				
@@ -889,6 +891,9 @@ else
 				ContextActionService:UnbindCoreAction("CancelGameLoad")
 				
 				if not game:IsLoaded() then
+					if FFlagLoadingScreenControlMilestones and p1.props.milestones then
+						p1.props.milestones.abort(LoadingScreenMilestonesModule.AbortReason.Cancelled)
+					end
 					game:Shutdown()
 				end
 			end
@@ -955,7 +960,10 @@ else
 	function LoadingScreen:willUpdate(_, _) end
 	
 	function LoadingScreen.didMount(p2)
-		-- upvalues: RunService (copy), config1 (copy), QueueExperimentation (copy), ExperienceService (copy), PlaceLauncherState (copy)
+		-- upvalues: FFlagLoadingScreenControlMilestones (copy), LoadingScreenMilestonesModule (copy), RunService (copy), config1 (copy), QueueExperimentation (copy), ExperienceService (copy), PlaceLauncherState (copy)
+		if FFlagLoadingScreenControlMilestones and p2.props.milestones then
+			p2.props.milestones.record(LoadingScreenMilestonesModule.Milestone.ScreenVisible)
+		end
 		RunService:SetRobloxGuiFocused(true)
 		p2.props.fetchUniverseId(p2.props.placeId)
 		p2.props.fetchGameProductInfo(p2.props.placeId)
@@ -981,7 +989,10 @@ else
 	end
 	
 	function LoadingScreen.willUnmount(p2)
-		-- upvalues: ContextActionService (copy), RunService (copy), InputBeganConnection (ref), UserInputService (copy), GuiService (copy), QueueExperimentation (copy)
+		-- upvalues: FFlagLoadingScreenControlMilestones (copy), LoadingScreenMilestonesModule (copy), ContextActionService (copy), RunService (copy), InputBeganConnection (ref), UserInputService (copy), GuiService (copy), QueueExperimentation (copy)
+		if FFlagLoadingScreenControlMilestones and p2.props.milestones then
+			p2.props.milestones.abort(LoadingScreenMilestonesModule.AbortReason.Unmounted)
+		end
 		ContextActionService:UnbindCoreAction("CancelGameLoad")
 		RunService:SetRobloxGuiFocused(false)
 		

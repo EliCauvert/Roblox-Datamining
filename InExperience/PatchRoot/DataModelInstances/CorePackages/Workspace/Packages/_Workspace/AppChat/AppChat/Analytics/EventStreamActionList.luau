@@ -64,6 +64,15 @@ return {
 		eventType = EventTypes.ChatLandingUnfilteredThreadsFtuxLearnMoreClicked,
 		additionalInfo = { locale = LocalizationService.RobloxLocaleId }
 	},
+	[EventNamesModule.ConversationScrollToLatestBtnClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationScrollToLatestBtnClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = {
+			conversationId = DashModule.identity,
+			messageListVersion = DashModule.identity
+		}
+	},
 	[EventNamesModule.NewConversationCreated] = {
 		context = Contexts.PlatformChat,
 		eventType = EventTypes.NewConversationCreated,

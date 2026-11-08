@@ -8,7 +8,6 @@ local UIBlox = DependenciesModule.UIBlox
 local Foundation = DependenciesModule.Foundation
 local Checkbox = Foundation.Checkbox
 local NormalizeFontFaceFunction = Foundation.Utility.normalizeFontFace
-local FoundationFontFaceMigration = Foundation.Utility.Flags.FoundationFontFaceMigration
 local UseLocalizationFunction = DependenciesModule.Hooks.useLocalization
 local DiscoverabilityUpsellNonPrefillDiscoverableUserIdsWhitelistModule = require(Parent.Flags.DiscoverabilityUpsellNonPrefillDiscoverableUserIdsWhitelist)
 local UseStyleFunction = UIBlox.Core.Style.useStyle
@@ -26,7 +25,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: Players (copy), DiscoverabilityUpsellNonPrefillDiscoverableUserIdsWhitelistModule (copy), React (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), EventNamesModule (copy), config (copy), ImageSetLabel (copy), Images (copy), IconSize (copy), Checkbox (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), StyledTextLabel (copy), RadioButtonList (copy), PartialPageModal (copy), ButtonType (copy)
+	-- upvalues: Players (copy), DiscoverabilityUpsellNonPrefillDiscoverableUserIdsWhitelistModule (copy), React (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), EventNamesModule (copy), config (copy), ImageSetLabel (copy), Images (copy), IconSize (copy), Checkbox (copy), NormalizeFontFaceFunction (copy), StyledTextLabel (copy), RadioButtonList (copy), PartialPageModal (copy), ButtonType (copy)
 	local PrefillDiscoverabilitySetting = (not Players.LocalPlayer or not DiscoverabilityUpsellNonPrefillDiscoverableUserIdsWhitelistModule.isWhitelistedUserId(Players.LocalPlayer.UserId)) and p1.prefillDiscoverabilitySetting
 	local UseStateResult, UseStateResult2 = React.useState(if PrefillDiscoverabilitySetting then 1 else nil)
 	local UseStyleResult = UseStyleFunction()
@@ -56,11 +55,11 @@ return function(p1)
 		p1.onActivated(config[tostring(UseStateResult)])
 	end
 	local Color = nil
+	local InfoTextPrefillDiscoverable = nil
 	local TitleTextPrefillDiscoverable = nil
 	local Element = nil
 	local Offset = nil
 	local Frame = nil
-	local InfoTextPrefillDiscoverable = nil
 	
 	if PrefillDiscoverabilitySetting then
 		local function OnActivated2()
@@ -106,8 +105,7 @@ return function(p1)
 			CheckboxLabel = React.createElement("TextButton", {
 				AutomaticSize = Enum.AutomaticSize.Y,
 				BackgroundTransparency = 1,
-				Font = if FoundationFontFaceMigration then nil else UseStyleResultFont.Body.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
 				Size = UDim2.fromScale(1, 0),
 				Text = UseLocalizationResult.optInTextPrefillDiscoverable,
 				TextColor3 = Theme.TextDefault.Color,
@@ -210,8 +208,7 @@ return function(p1)
 			LearnMore = React.createElement("TextButton", {
 				AutomaticSize = Enum.AutomaticSize.Y,
 				BackgroundTransparency = 1,
-				Font = if FoundationFontFaceMigration then nil else UseStyleResultFont.CaptionBody.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodySmall.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodySmall.Font),
 				Size = UDim2.fromScale(1, 0),
 				Text = UseLocalizationResult.learnMoreText,
 				TextColor3 = Color,

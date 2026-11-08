@@ -12,9 +12,9 @@ local GetFFlagEnableReferredPlayerJoinRemoteEventFunction = require(CorePackages
 local DebugLogExpchatMigration = game:DefineFastFlag("DebugLogExpchatMigration", false)
 local FFlagAXEnableInspectAndBuyBulkPurchase = require(CorePackages.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndBuyBulkPurchase
 local FFlagPlatformLeaderboardRccEnabled = require(CorePackages.Workspace.Packages.SharedFlags).FFlagPlatformLeaderboardRccEnabled
+local FFlagLuaAppsEnablePromptVIPServerPurchase = require(CorePackages.Workspace.Packages.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 local DebugServerPlatformLeaderboardDevMock = game:DefineFastFlag("DebugServerPlatformLeaderboardDevMock", false)
 local EmoteSkinningDisableEnabled = game:DefineFastFlag("EmoteSkinningDisableEnabled", false)
-local ExpChatRemoveServerTenFootCheck = game:DefineFastFlag("ExpChatRemoveServerTenFootCheck", false)
 local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui", 1e999)
 assert(RobloxGui ~= nil, "RobloxGui should exist")
 local ServerUtilModule = require(RobloxGui.Modules.Server.ServerUtil)
@@ -74,10 +74,11 @@ end
 if GetFFlagDisplayServerChannelFunction() then
 	GetServerChannel.OnServerInvoke = getServerChannel
 end
-if (function(): boolean
-	-- upvalues: ExpChatRemoveServerTenFootCheck (copy)
-	return if ExpChatRemoveServerTenFootCheck then game:GetService("Chat").LoadDefaultChat and game:GetService("TextChatService").ChatVersion == Enum.ChatVersion.LegacyChatService else game:GetService("Chat").LoadDefaultChat and (game:GetService("TextChatService").ChatVersion == Enum.ChatVersion.LegacyChatService and not game:GetService("GuiService"):IsTenFootInterface())
-end)() then
+local function _(): boolean
+	return game:GetService("Chat").LoadDefaultChat and game:GetService("TextChatService").ChatVersion == Enum.ChatVersion.LegacyChatService
+end
+
+if game:GetService("Chat").LoadDefaultChat and game:GetService("TextChatService").ChatVersion == Enum.ChatVersion.LegacyChatService then
 	require(game:GetService("CoreGui").RobloxGui.Modules.Server.ClientChat.ChatWindowInstaller)()
 	require(game:GetService("CoreGui").RobloxGui.Modules.Server.ServerChat.ChatServiceInstaller)()
 else
@@ -111,6 +112,10 @@ if game:DefineFastFlag("VersionedFlags_Dev", false) then
 	ScriptContext:AddCoreScriptLocal("ServerCoreScripts/VersionedFlagTest", script.Parent)
 end
 ScriptContext:AddCoreScriptLocal("ServerCoreScripts/ServerBuildExperiencePlaytestTeleport", script.Parent)
+
+if FFlagLuaAppsEnablePromptVIPServerPurchase then
+	ScriptContext:AddCoreScriptLocal("ServerCoreScripts/ServerVIPServerTeleport", script.Parent)
+end
 local FStringRoCaptchaUniverseIdsModule = require(RobloxGui.Modules.Common.Flags.FStringRoCaptchaUniverseIds)
 
 if game:DefineFastFlag("RoCaptchaServerHandlerEnabled", false) and FStringRoCaptchaUniverseIdsModule ~= "" then

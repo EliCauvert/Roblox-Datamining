@@ -29,6 +29,7 @@ local _ = require(script.Parent.BuildChatPageView)
 local FFlagBuildExperienceAnswerFormModule = require(BuildExperience.Flags.FFlagBuildExperienceAnswerForm)
 local FFlagBuildEnableFTUXChipsModule = require(BuildExperience.Flags.FFlagBuildEnableFTUXChips)
 local FFlagBuildExperienceFTUXChipConversationIdTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceFTUXChipConversationIdTelemetry)
+local FFlagBuildExperienceFTUXChipExhaustedTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceFTUXChipExhaustedTelemetry)
 local UseCreatorCreditChatUpsellViewModelModule = require(script.Parent.useCreatorCreditChatUpsellViewModel)
 local FFlagBuildExperienceLibrary = require(Parent.SharedFlags).FFlagBuildExperienceLibrary
 local FFlagBuildExperienceAnalytics = require(Parent.SharedFlags).FFlagBuildExperienceAnalytics
@@ -139,12 +140,13 @@ local _ = function(p1, p2)
 end
 
 local function usePromptChipViewModel(p1, Target, NoCanEditOnBuild)
-	-- upvalues: FFlagBuildEnableFTUXChipsModule (copy), FFlagBuildRequestPromptChipsOnEditModule (copy), GetBuildPromptChipsStoreModule (copy), FFlagBuildExperienceFTUXChipConversationIdTelemetryModule (copy), ReactModule (copy), UseBuildPromptChipRequestsModule (copy), SignalsReactModule (copy), PromptChipsStatusModule (copy)
+	-- upvalues: FFlagBuildEnableFTUXChipsModule (copy), FFlagBuildRequestPromptChipsOnEditModule (copy), GetBuildPromptChipsStoreModule (copy), FFlagBuildExperienceFTUXChipConversationIdTelemetryModule (copy), ReactModule (copy), UseBuildPromptChipRequestsModule (copy), SignalsReactModule (copy), PromptChipsStatusModule (copy), FFlagBuildExperienceFTUXChipExhaustedTelemetryModule (copy)
 	local PromptChips = {}
 	local IsPromptChipsLoading = false
 	
 	local function OnPromptChipActivated() end
 	
+	local OnPromptChipExhausted = nil
 	local SetComposerText = p1.setComposerText
 	
 	if not FFlagBuildEnableFTUXChipsModule and not FFlagBuildRequestPromptChipsOnEditModule then
@@ -152,6 +154,7 @@ local function usePromptChipViewModel(p1, Target, NoCanEditOnBuild)
 			promptChips = PromptChips,
 			isPromptChipsLoading = IsPromptChipsLoading,
 			onPromptChipActivated = OnPromptChipActivated,
+			onPromptChipExhausted = OnPromptChipExhausted,
 			onComposerChanged = SetComposerText
 		}
 	end
@@ -198,6 +201,10 @@ local function usePromptChipViewModel(p1, Target, NoCanEditOnBuild)
 			UseBuildPromptChipRequestsModuleResult,
 			UseRefResult
 		})
+		
+		if FFlagBuildExperienceFTUXChipExhaustedTelemetryModule then
+			OnPromptChipExhausted = UseBuildPromptChipRequestsModuleResult.onChipExhausted
+		end
 	end
 	if FFlagBuildRequestPromptChipsOnEditModule then
 		SetComposerText = ReactModule.useCallback(function(Current)
@@ -222,6 +229,7 @@ local function usePromptChipViewModel(p1, Target, NoCanEditOnBuild)
 		promptChips = PromptChips,
 		isPromptChipsLoading = IsPromptChipsLoading,
 		onPromptChipActivated = OnPromptChipActivated,
+		onPromptChipExhausted = OnPromptChipExhausted,
 		onComposerChanged = SetComposerText
 	}
 end
@@ -435,6 +443,7 @@ return function(p1)
 	local PromptChips = UsePromptChipViewModelResult.promptChips
 	local IsPromptChipsLoading = UsePromptChipViewModelResult.isPromptChipsLoading
 	local OnPromptChipActivated = UsePromptChipViewModelResult.onPromptChipActivated
+	local OnPromptChipExhausted = UsePromptChipViewModelResult.onPromptChipExhausted
 	local OnComposerChanged = UsePromptChipViewModelResult.onComposerChanged
 	local UseBuildModelSelectionModuleResult = if FFlagBuildExperienceModelPickerModule then UseBuildModelSelectionModule(p1.target.universeId, p1.target.modelSelectionDraftId, p1.modelPicker, UseChatSessionCoreModuleResult.modelSessionModels, UseChatSessionCoreModuleResult.hasPreparedModelSession, UseChatSessionCoreModuleResult.internalTesting) else nil
 	
@@ -575,7 +584,7 @@ return function(p1)
 	end, { UseResult9, p1.onOpenGetUsersPage }) else nil
 	local UseResult13 = if p1.onOpenGetUsersPage == nil then nil else UseResult12
 	local UseCreatorCreditChatUpsellViewModelModuleResult = UseCreatorCreditChatUpsellViewModelModule({
-		namedTier = if FFlagBuildExperienceModelPickerModule and (UseBuildModelSelectionModuleResult and UseBuildModelSelectionModuleResult.selectedId == "advanced" and (not UseBuildModelSelectionModuleResult.internalTesting or not UseBuildModelSelectionModuleResult.internalTesting.isSelected)) then "advanced" else nil,
+		namedTier = if FFlagBuildExperienceModelPickerModule and UseBuildModelSelectionModuleResult and UseBuildModelSelectionModuleResult.selectedId == "advanced" and (not UseBuildModelSelectionModuleResult.internalTesting or not UseBuildModelSelectionModuleResult.internalTesting.isSelected) then "advanced" else nil,
 		onOpenCreatorCreditPage = UseResult11,
 		outOfCreditsPromptFailureCount = if FFlagBuildExperienceModelPickerModule then if UseChatSessionCoreModuleResult.fundingFailure then UseChatSessionCoreModuleResult.fundingFailure.count else nil else UseStateResult11.count,
 		outOfCreditsPromptFailureReason = if FFlagBuildExperienceModelPickerModule then if UseChatSessionCoreModuleResult.fundingFailure then UseChatSessionCoreModuleResult.fundingFailure.reason else nil else UseStateResult11.reason,
@@ -761,6 +770,7 @@ return function(p1)
 		promptChips = PromptChips,
 		isPromptChipsLoading = IsPromptChipsLoading,
 		onPromptChipActivated = OnPromptChipActivated,
+		onPromptChipExhausted = OnPromptChipExhausted,
 		composerImages = UseChatSessionCoreModuleResult.composerImages,
 		onComposerImagesChanged = UseChatSessionCoreModuleResult.setComposerImages,
 		onRetryComposerImage = UseChatSessionCoreModuleResult.retryComposerImage,
