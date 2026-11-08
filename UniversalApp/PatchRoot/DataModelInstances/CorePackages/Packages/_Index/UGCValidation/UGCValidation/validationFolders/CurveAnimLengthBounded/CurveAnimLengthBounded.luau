@@ -20,16 +20,29 @@ CurveAnimLengthBoundedModule.prereqTests = {
 	ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function CurveAnimLengthBoundedModule.run(p1, p2)
+local function validateCurveAnimClip(p1, p2)
 	-- upvalues: GetFStringUGCValidateCurveAnimationMinLengthModule (copy), GetFStringUGCValidationMaxAnimationLengthModule (copy), ErrorSourceStringsModule (copy)
-	local AnimLength = p2.curveAnimComputedFrames.animLength
+	local FullName = p2.animation and p2.animation:GetFullName()
+	local AnimLength = p2.animLength
 	local AsNumberResult = GetFStringUGCValidateCurveAnimationMinLengthModule.asNumber()
 	
 	if AnimLength <= AsNumberResult or GetFStringUGCValidationMaxAnimationLengthModule.asNumber() < AnimLength then
-		p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_InvalidLength, {
+		local config = {
 			minLength = tostring(AsNumberResult),
 			maxLength = GetFStringUGCValidationMaxAnimationLengthModule.asString()
-		})
+		}
+		
+		if FullName then
+			config.animationName = FullName
+		end
+		p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_InvalidLength, config, p2.animation)
+	end
+end
+
+function CurveAnimLengthBoundedModule.run(p1, p2)
+	-- upvalues: validateCurveAnimClip (copy)
+	for _, curveAnimComputedFrame in p2.curveAnimComputedFrames do
+		validateCurveAnimClip(p1, curveAnimComputedFrame)
 	end
 end
 

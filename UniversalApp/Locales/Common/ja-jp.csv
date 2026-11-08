@@ -674,8 +674,8 @@ Common.Presence.Label.Online,オンライン
 Common.Presence.Label.RobloxStudio,Roblox Studio
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,アニメーションが長すぎます（{duration}秒）。リアクションアニメーションは{maxLength}秒以下にしてください。
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,アニメーションが短すぎます（{duration}秒）。リアクションアニメーションは{minLength}秒より長くしてください。
-Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,{cageName}のケージパーツ配置違反：{upperPart}が{lowerPart}の上に正しく配置されていません。
-Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,{cageName}内のケージパーツ「{partName}」には頂点が{actualCount}個ありますが、約{expectedCount}個ほどに設定してください。これは、そのボディ領域にジオメトリの欠落または重複があることを示している可能性があります。
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,{cageName}のケージパーツ配置違反：{upperPart}が{lowerPart}に対して正しく配置されていません。
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,{cageName}内のケージパーツ「{partName}」には頂点が{actualCount}個ありますが、予想される数は約{expectedCount}個です。これは、そのケージ領域にジオメトリの欠落または重複があることを示している可能性があります。
 Common.UGCValidation.ErrorLabel.AQSFail_CageUV,{cage_name}のUV値がテンプレートと一致していません。不適切なUVが{incorrect_uv_count}個（未参照{unreferenced_vertex_count}個、テンプレート非対応{non_template_uv_count}個、重複マッピング{duplicate_mapping_count}個）あり、テンプレートの頂点と不一致のものが{unmatched_template_count}個あります。ケージのUVを修正して、テンプレートと一致させてください。
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,ボディには、小さな分離したメッシュコンポーネント（メッシュアイランド）が含まれています。フローティングジオメトリを削除し、すべてのメッシュパーツが適切に接続されていることを確認してください。
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,{partName}には、{num_disconnected_components}個の分離したコンポーネントがあり、上限の{max_disconnected_components}個を超えています。
@@ -695,9 +695,9 @@ Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,メッシュの頂�
 Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,{measureName}の検証データは、入力データが不完全または無効であったため、計算できませんでした。これはアップロードを妨げるものではありません。
 Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,テクスチャ{textureName}の複雑度が低くなっています。テクスチャのディテールやバリエーションが不足している可能性があります。
 Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,テクスチャ{textureName}の解像度が低くなっています（{texture_width}x{texture_height}）。より高解像度のテクスチャの使用を検討してください。
-Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,アセット品質：{partName}には、交差している三角形の面が{intersecting_tri_face_percent}%含まれています（スコア：{score}）。
+Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,{partName}には{intersecting_tri_face_percent}%の自己交差面があり、これは許容される{threshold}%を超えています。
 Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,"{partName}には、[0,1]の境界外のUV頂点が{uv_outside_bound_vert_percent}%含まれています。"
-Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,アセット品質：{partName}には、近接頂点が{similar_vertex_percent}%含まれています（スコア：{score}）。
+Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,{partName}には{similar_vertex_percent}%の近接頂点があり、これは許容される{threshold}%を超えています。
 Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,「{PartName}」のアクセサリアタッチメント「{AttachmentName}」は、メッシュの表面の近くに配置する必要があります。現在の位置[{CurrentPosition}]は有効な領域外です。[{ClosestValidPosition}]に近づけてください。
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,Handle（ハンドル）が、許可されているスキーマに含まれていないジョイント{jointName}にスキニングされています。許可されているのは、標準のR15ジョイントとスキニング転送ジョイントのみです。
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,{assetType}はスキニング転送を使用する必要がありますが、必要なジョイント{requiredJointName}が不足しています。
@@ -709,15 +709,44 @@ Common.UGCValidation.ErrorLabel.AccessorySkinning_WeightNotFull,転送ジョイ�
 Common.UGCValidation.ErrorLabel.AnimationPack_DuplicateAnimationId,アニメーションパックのバンドルに、複数のクリップ（{instancePaths}）で使用されている重複したアニメーションID「{animationId}」が含まれています。各アニメーションクリップは、一意のアニメーションアセットを参照する必要があります。
 Common.UGCValidation.ErrorLabel.AnimationPack_InvalidR15AnimChildren,アニメーションパックバンドルに、必要なアニメーションタイプ「{missingAnimationTypes}」が不足しています。各アニメーションタイプにはR15Animフォルダが1つ備わり、その中には必要なStringValueの子要素が正確に含まれていなければなりません。
 Common.UGCValidation.ErrorLabel.Animation_WeightNotPositive,アニメーション「{animationName}」のウェイトの値が{weight}になっていますが、ウェイトは0より大きい必要があります。アニメーションを修正してください。
+Common.UGCValidation.ErrorLabel.AssetBounds_InconsistentScaleType,すべてのMeshPartは、子要素のAvatarPartScaleTypeで同じ値を持っている必要があります。値が一致していることを確認してください。
+Common.UGCValidation.ErrorLabel.AssetBounds_TooLarge,{assetName}メッシュとジョイントの{axis}軸サイズ「{currentSize}」が、許可されている最大バウンディングボックスの{axis}軸サイズ「{maxSize}」を超えています。メッシュ/ジョイントを縮小してください
+Common.UGCValidation.ErrorLabel.AssetBounds_TooSmall,{assetName}メッシュの{axis}軸サイズ「{currentSize}」が、許可されている最小バウンディングボックスの{axis}軸サイズ「{minSize}」を下回っています。メッシュを拡大してください。
+Common.UGCValidation.ErrorLabel.AssetDoesNotExist,「{InstancePath}」が参照するアセット「{AssetId}」が存在しないか、読み込めません。有効なアセットIDに置き換えてください。
+Common.UGCValidation.ErrorLabel.AssetOpacity_BelowThreshold,{AssetName}は、{ViewName}から見て不透明度が不足しています。現在、不透明度は{Opacity}ですが、{Threshold}を超える必要があります。
+Common.UGCValidation.ErrorLabel.AssetOpacity_Invisible,「{AssetName}」のメッシュは完全に不可視になっています。
+Common.UGCValidation.ErrorLabel.AssetOpacity_MeshLoadFailed,MeshPart「{PartName}」のメッシュを読み込めませんでした。メッシュが存在することを確認してから、もう一度お試しください。
+Common.UGCValidation.ErrorLabel.AssetOpacity_NoTriangles,「{AssetName}」のメッシュに三角形が含まれていません。
+Common.UGCValidation.ErrorLabel.AssetOpacity_NonZeroTransparency,パーツ「{PartName}」の透明度がゼロ以外の値になっています。パーツの透明度は常に正確にゼロでなければなりません。
+Common.UGCValidation.ErrorLabel.AssetOpacity_ZeroSize,「{AssetName}」のメッシュのサイズをゼロにすることはできません。
 Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,{ParentPath}内で必要な{ExpectedClass}クラス「{ExpectedName}」が見つかりません。
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,以下のインスタンスは承認済みスキーマの一部ではないため、削除する必要があります: {UnexpectedDescendantPaths}
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,アップロードされたアセットは{ExpectedClass}であるべきですが、{RootClass}です。
-Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,アップロードされたアセットの名前は{ExpectedClass}であるべきですが、{RootClass}となっています。
+Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,アップロードされたアセットの名前は{ExpectedName}であるべきですが、{RootName}となっています。
+Common.UGCValidation.ErrorLabel.AttachmentBoundsAssetCalculationFailed,アタッチメントの位置を確認する前に、「{InstancePath}」のメッシュ境界を計算できませんでした。メッシュデータが欠損しているか、形式が正しくない可能性があります。アセットを再インポートして、もう一度お試しください。
+Common.UGCValidation.ErrorLabel.AttachmentBoundsCalculationFailed,「{PartName}」内のアタッチメント「{AttachmentName}」の境界を計算できませんでした。メッシュデータが欠損しているか、形式が正しくない可能性があります。アセットを再インポートして、もう一度お試しください。
+Common.UGCValidation.ErrorLabel.AttachmentOrientationDeviation,アタッチメント「{InstancePath}」の向きが、想定から大きく逸脱しています。推奨される向きは{ExpectedOrientation}で、最大許容誤差は{MaxDeviation}度です。
+Common.UGCValidation.ErrorLabel.AttachmentOrientationRigRotated,"リグのアタッチメントは回転できません。「{InstancePath}」の向きを（0,0,0）に設定してください。"
+Common.UGCValidation.ErrorLabel.BodyBlocking_ZeroMeshSize,{meshName}のレンダリングメッシュ：{details}。メッシュのサイズを大きくしてください。
+Common.UGCValidation.ErrorLabel.BodyMesh_LoadFailed,「{meshName}」のメッシュを読み込めませんでした。メッシュが存在することを確認してから、もう一度お試しください。
+Common.UGCValidation.ErrorLabel.BodyMesh_SizeMismatch,{meshContext}のサイズが、他のメッシュ{otherMeshContext}と比べて最大許容差{maxDiff}を超えています。モデルを編集してサイズを調整してください
+Common.UGCValidation.ErrorLabel.BodyPartCageDistanceValid_TooFar,{partName}のケージメッシュ上に、最も近いレンダリングメッシュから{distance}マス離れた頂点が見つかりました。上限は{maxDistance}マスです。ケージメッシュがレンダリングメッシュの形状とサイズにより一致するように調整してください。
+Common.UGCValidation.ErrorLabel.BoundingBox_ValidationFailed,{reason}
+Common.UGCValidation.ErrorLabel.CageMeshDistanceBounded_DistanceTooHigh,外側ケージとメッシュの間の平均距離が長すぎます（{distance}）。メッシュによりフィットするようにケージを調整してください。
+Common.UGCValidation.ErrorLabel.CageMeshDistanceBounded_MeshOutsideCage,外側ケージとメッシュの間の平均距離が長すぎます。メッシュがアウターケージの外側にはみ出している可能性があります。
+Common.UGCValidation.ErrorLabel.CageUV_ExtraDuplicateUVs,「{partName}」の{cageType}ケージ内に、テンプレートに属さないUV値が{count}個あります。ケージのUVを修正してください。
+Common.UGCValidation.ErrorLabel.CageUV_IncorrectUVCount,「{partName}」の外側ケージには{requiredUVCount}個のユニークUVが必要ですが、{actualUVCount}個しかありません。メッシュに必要な数のユニークUVが含まれていることを確認してから、もう一度お試しください。
+Common.UGCValidation.ErrorLabel.CageUV_InvalidUVValue,"「{partName}」の[0, 1]の範囲外に無効なUV値が見つかりました。この問題を解決するには、UVマップを編集してください。"
+Common.UGCValidation.ErrorLabel.CageUV_RenderMeshBoundsCheckFailed,外側のケージの修正領域のバウンディングボックス内で、レンダリングメッシュのテストを実行できませんでした。両方のケージメッシュとレンダリングメッシュが存在することを確認してから、もう一度お試しください。
+Common.UGCValidation.ErrorLabel.CageUV_RenderMeshOutsideModifiedArea,レンダリングメッシュの頂点のうち、WrapLayerケージメッシュ（外側メッシュ）の修正済み{allowedArea}領域内にあるのは{currentPercent}%のみです。{requiredPercent}%が必要です。レンダリングメッシュを、WrapLayerケージメッシュ（外側メッシュ）の修正済みエリア内に移動させてください。
+Common.UGCValidation.ErrorLabel.CageUV_TooFewMainModified,{assetTypeName}のWrapLayerケージメッシュ（外側メッシュ）は、{mainArea}エリアのケージUVの{requiredPercent}%を修正する必要があります。現在、{currentPercent}%のみが変更されています。アセットをボディの正しい位置に移動してください。
+Common.UGCValidation.ErrorLabel.CageUV_TooManyExcludedModified,WrapLayerケージメッシュ（外側メッシュ）の修正済みケージUVのうち、{modifiedPercent}%がボディの想定領域外にあります。{assetTypeName}の場合、修正されたUVの{maxPercent}%を超えて{allowedArea}エリア外にあることはできません。アセットをボディの正しい位置に移動してください。
+Common.UGCValidation.ErrorLabel.CageUV_ZeroAreaTriangle,「{partName}」のUVマップに面積ゼロの三角形が検出されました。この問題を解決するには、UVマップを編集してください。
+Common.UGCValidation.ErrorLabel.CollisionFidelityWrong,「{InstancePath}」のCollisionFidelityが正しくありません。{ExpectedFidelity}の値である必要があります。
 Common.UGCValidation.ErrorLabel.ContentNotEditable,{InstanceFullName}.{FieldName}には、未保存の編集可能なコンテンツがまだ含まれています。公開する前にアセットとして保存してから、もう一度お試しください。
-Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,CurveAnimationのボディパーツ「{bodyPartName}」には、位置（変位）トラックが含まれています。アニメーションのボディパーツは回転のみ可能です。位置トラックは使用できません。このボディパーツから位置トラックを削除してください。
+Common.UGCValidation.ErrorLabel.CoplanarTri_TooMany,モデルメッシュ「{MeshName}」で交差する同平面上の三角形が多すぎることが検出されました。{TriangleCount}の三角形メッシュにおける交差の最大数は{MaxIntersections}交差です。メッシュを編集して、同一平面上の三角形の交差数を減らしてください。
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,CurveAnimationのボディパーツ「{bodyPartName}」は、開始位置から{distance}マス移動します。最大許容変位は{maxDistance}マスです。ボディパーツの位置移動を減らしてください。
-Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,CurveAnimationにはHRD/DRDの骨格が含まれ、ボディパーツ「{bodyPartName}」に位置（変位）トラックがあります。アニメーションに骨格が存在する場合、関節の分離を防ぐため、ボディパーツは移動できません。ボディパーツからすべての位置トラックを削除してください。
-Common.UGCValidation.ErrorLabel.CurveAnim_BonePositionNotAllowed,CurveAnimationの骨格「{boneName}」には、位置（変位）トラックが含まれています。HRD/DRDの骨格は回転のみ可能です。位置トラックは関節の分離を引き起こすため、使用できません。この骨格から位置アニメーションを削除してください。
+Common.UGCValidation.ErrorLabel.CurveAnim_BoneRequiresParent,骨格フォルダ「{boneName}」には、「{parentBoneName}」もアニメーションに存在する必要があります。
 Common.UGCValidation.ErrorLabel.CurveAnim_BoneTranslationExceedsThreshold,CurveAnimationのボーン「{boneName}」は、開始位置から{distance}マス移動します。最大許容変位は{maxDistance}マスです。ボーンの位置移動を減らしてください。
 Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimationには、まだ対応外のHRD/DRD骨格フォルダが含まれています。アップロードする前に、すべての骨格のサブフォルダを削除してください。
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,CurveAnimation内のボディパーツは、HumanoidRootPartから{minHeight}マスより下、または{maxDistance}マスより遠くには配置できません。アニメーションを修正してください。
@@ -729,27 +758,27 @@ Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,CurveAnimatio
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,CurveAnimationのフォルダ「{boneName}」は、認識されているHRD/DRDの骨格名ではありません。アニメーションのサブフォルダは、有効なR15ボディパーツまたは認識されている骨格名（HeadBase、Spine、Chest、LeftClavicle、RightClavicle、LeftToeBase、RightToeBase、またはLeftHandIndex1などの指の骨格）である必要があります。
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidCurveData,CurveAnimationに、時間または値が無効なCurveが含まれています。アニメーションを修正してください。
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidInstanceTypes,CurveAnimation階層に含めることができるのは、{allowedTypes}のみです。他のインスタンスタイプはすべて削除してください。
-Common.UGCValidation.ErrorLabel.CurveAnim_InvalidLength,CurveAnimationは、{minLength}～{maxLength}秒の長さでなければなりません。アニメーションを修正してください。
+Common.UGCValidation.ErrorLabel.CurveAnim_InvalidLength,カーブアニメーション「{animationName}」の長さは、{minLength}～{maxLength}秒の間でなければなりません。アニメーションを修正してください。
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidMarkerData,CurveAnimationに、無効な時間または値のあるMarkerCurveが含まれているか、値が長すぎます。アニメーションを修正してください。
-Common.UGCValidation.ErrorLabel.CurveAnim_InvalidNumericalData,CurveAnimationに、無効な数値データがあるCurveが含まれています。アニメーションを修正してください。
+Common.UGCValidation.ErrorLabel.CurveAnim_InvalidNumericalData,カーブアニメーション「{animationName}」には、無効な数値データを持つカーブが含まれています。アニメーションを修正してください。
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidRigData,AnimationRigDataの内部検証ができませんでした。AnimationRigDataが正しく設定されていることを確認してください。
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidRigDataR15Plus,AnimationRigDataのR15+の内部検証ができませんでした。AnimationRigDataが骨格アニメーション用に正しく設定されていることを確認してください。
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidTags,CurveAnimationに含められるタイムスタンプタグは1件のみです。他のタグはすべて削除してください。
-Common.UGCValidation.ErrorLabel.CurveAnim_JointRotationExceeded,CurveAnimationでは、{time}秒目の時点で、ジョイント「{bodyPart}」の回転角度が静止ポーズから{rotation}度になっています。最大許容値は{maxRotation}度です。アニメーションを修正してください。
+Common.UGCValidation.ErrorLabel.CurveAnim_JointRotationExceeded,カーブアニメーション「{animationName}」では、{time}秒目の時点で、ジョイント「{bodyPart}」の回転角度が静止ポーズから{rotation}度になっています。最大許容値は{maxRotation}度です。アニメーションを修正してください。
 Common.UGCValidation.ErrorLabel.CurveAnim_KeysTooClose,CurveAnimationに、最大{maxFPS}fpsのアニメーションに対して時間が近すぎるキーがあるCurve（{curvePath}）が含まれています。アニメーションを修正してください。
 Common.UGCValidation.ErrorLabel.CurveAnim_LoopingNotEnabled,CurveAnimation '{animationName}'のループが有効化されていません。マーケットプレイスにアップロードされるアニメーションはループする必要があります。ループプロパティを有効化してください。
 Common.UGCValidation.ErrorLabel.CurveAnim_MultipleBodyRoots,CurveAnimationに、複数のボディパーツまたはHumanoidRootPartフォルダの子が含まれています。ボディパーツまたはHumanoidRootPartを基にして名付けられた子フォルダは1件のみにしてください。
 Common.UGCValidation.ErrorLabel.CurveAnim_MultipleRigData,CurveAnimationに、複数のAnimationRigDataの子が含まれています。AnimationRigDataの子は1件のみにしてください。
 Common.UGCValidation.ErrorLabel.CurveAnim_NegativeKeyTime,CurveAnimationに、時間が負の値のキーがあるCurve（{curvePath}）が含まれています。アニメーションを修正してください。
 Common.UGCValidation.ErrorLabel.CurveAnim_NoBodyRoot,CurveAnimationに、ボディパーツまたはHumanoidRootPartフォルダの子要素が1件も含まれていません。ボディパーツまたはHumanoidRootPartを基にして名付けられた子フォルダが1件のみ存在するようにしてください。
-Common.UGCValidation.ErrorLabel.CurveAnim_NoJointManipulation,CurveAnimationに、ジョイントの操作が含まれていません。
+Common.UGCValidation.ErrorLabel.CurveAnim_NoJointManipulation,カーブアニメーション「{animationName}」には、ジョイントの操作が含まれていません。
 Common.UGCValidation.ErrorLabel.CurveAnim_NoRigData,CurveAnimationに、AnimationRigDataの子が1件も含まれていません。AnimationRigDataの子が1件のみ存在するようにしてください。
 Common.UGCValidation.ErrorLabel.CurveAnim_NotCurveAnimation,参照されているアニメーションはCurveAnimationではありません。アニメーションが正しくアップロードされていることを確認してください。
-Common.UGCValidation.ErrorLabel.CurveAnim_PartTooFar,CurveAnimationでは、{time}秒目の時点で、ボディパーツ「{bodyPart}」がHumanoidRootPartから{distance}マスの位置にあります。ボディパーツは、HumanoidRootPartから{maxDistance}マスより遠くには配置できません。アニメーションを修正してください。
-Common.UGCValidation.ErrorLabel.CurveAnim_PartTooLow,CurveAnimationでは、{time}秒目の時点で、ボディパーツ「{bodyPart}」がHumanoidRootPartから高さ{height}マスの位置にあります。ボディパーツは、HumanoidRootPartから{minHeight}マスより下には配置できません。アニメーションを修正してください。
-Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,CurveAnimationに、ボディパーツが位置的に分離している部分が含まれます。位置を変更できるのはLowerTorsoのみです。その他のすべてのボディパーツは、向きのみを変更できます。「{bodyPart}」は、親から{maxMovement}マスより多く移動します。アニメーションを修正してください。
-Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,CurveAnimationでは、{time}秒目の時点で、ボディパーツ「{bodyPart}」が{speed}度/秒の速度で回転しています。最大速度は{maxSpeed}度/秒です。アニメーションを修正してください。
-Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,CurveAnimationでは、{time}秒目の時点で、ボディパーツ「{bodyPart}」が{speed}マス/秒の速度で移動しています。最大速度は{maxSpeed}マス/秒です。アニメーションを修正してください。
+Common.UGCValidation.ErrorLabel.CurveAnim_PartTooFar,カーブアニメーション「{animationName}」では、{time}秒目の時点で、ボディパーツ「{bodyPart}」がHumanoidRootPartから{distance}マスの位置にあります。ボディパーツは、HumanoidRootPartから{maxDistance}マスより遠くには配置できません。アニメーションを修正してください。
+Common.UGCValidation.ErrorLabel.CurveAnim_PartTooLow,カーブアニメーション「{animationName}」では、{time}秒目の時点で、ボディパーツ「{bodyPart}」がHumanoidRootPartから高さ{height}マスの位置にあります。ボディパーツは、HumanoidRootPartから{minHeight}マスより下には配置できません。アニメーションを修正してください。
+Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,カーブアニメーション「{animationName}」には、ボディパーツが位置的に分離している部分が含まれています。位置を変更できるのはLowerTorsoのみです。その他のすべてのボディパーツは、向きのみを変更できます。「{bodyPart}」は、親パーツから{maxMovement}マスより多く移動しています。アニメーションを修正してください。
+Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,カーブアニメーション「{animationName}」では、{time}秒目の時点で、ボディパーツ「{bodyPart}」が{speed}度/秒の速度で回転しています。最大速度は{maxSpeed}度/秒です。アニメーションを修正してください。
+Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,カーブアニメーション「{animationName}」では、{time}秒目の時点で、ボディパーツ「{bodyPart}」が{speed}マス/秒の速度で移動しています。最大速度は{maxSpeed}マス/秒です。アニメーションを修正してください。
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,CurveAnimation内のボディパーツ「{bodyPart}」は、フレーム間で{maxMovement}マスより多く移動します。アニメーションを修正してください。
 Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,CurveAnimation構造が無効です：{detail}。アニメーションが想定されるスキーマに従っていることを確認してください。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimationには子孫が{count}件あります。最大許容数は{maxAllowed}件です。子孫の数を減らしてください。
@@ -758,8 +787,20 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimationに�
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimationに、マーカーが{count}件あるMarkerCurveが含まれています。MarkerCurveあたりのマーカーの最大数は{maxAllowed}件です。アニメーションを修正してください。
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimationに、予期しない子が含まれています：{childName}
 Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,{InstanceFullName}.{FieldName}はアニメーション{AssetId}をバージョン{Version}にピン留めしますが、このバージョンにピン留めすることはまだできません。「&version={Version}」を削除して、もう一度お試しください。
+Common.UGCValidation.ErrorLabel.DescendantIdFetchFailed,{InstanceFullName}のモデレーション結果を取得できませんでした。すべてのアセットを現在のユーザーが所有していることを確認してください。
+Common.UGCValidation.ErrorLabel.DescendantIdMalformed,{InstanceFullName}.{FieldName}のContentIdを解析できませんでした。有効なIDを含む有効なURLを使用していることを確認してから、もう一度お試しください。
+Common.UGCValidation.ErrorLabel.DescendantIdMissing,{InstanceFullName}.{FieldName}は空白にできません。有効なアセットが割り当てられていることを確認してから、もう一度お試しください。
+Common.UGCValidation.ErrorLabel.DescendantIdNotApproved,アセットが内容審査をクリアできませんでした：{ModerationMessages}
+Common.UGCValidation.ErrorLabel.DescendantIdNotOwned,アセット{AssetId}（{InstanceFullName}.{FieldName}）の所有者は、承認されたクリエーターではありません。
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,アセット{AssetId}（{InstanceFullName}.{FieldName}）は公開されていません。公開してから、もう一度お試しください。
-Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,{InstanceFullName}.{FieldName}はアセット{AssetId}のバージョン{Version}を使用していますが、現在対応しているのはバージョン1のみです。バージョン1を使用して、もう一度お試しください。
+Common.UGCValidation.ErrorLabel.DescendantIdVersionNotLatest,{InstanceFullName}.{FieldName}はアセット{AssetId}のバージョン{Version}を使用していますが、現在は最新バージョンの{LatestVersion}のみ使用できます。バージョン{LatestVersion}を使用するか、「&version={Version}」を削除してから、もう一度お試しください。
+Common.UGCValidation.ErrorLabel.DescendantIdsTooMany,アップロードするモデルに子アセット（メッシュ、テクスチャなど）が多すぎるため、そのままでは処理できません。モデルを再編成する必要があります。
+Common.UGCValidation.ErrorLabel.DynHead_ControlsInactive,{headName}メッシュ（{meshId}）に非アクティブなFACS（表情コーディングシステム）操作があります：{controlList}
+Common.UGCValidation.ErrorLabel.DynHead_ControlsMissing,{headName}メッシュ（{meshId}）にFACS（表情コーディングシステム）操作がありません：{controlList}
+Common.UGCValidation.ErrorLabel.DynHead_FacsMissing,FACS情報がないため、動く頭「{headName}」の検証に失敗しました。少なくとも17のポーズに対してFACSコントロールを提供する必要があります（ドキュメントを参照）。
+Common.UGCValidation.ErrorLabel.DynHead_JointAccumulatedExceeded,頭部の表情アニメーションを組み合わせることで、ジョイント「{jointName}」を頭部の遥か外側に拡張できます。表情アニメーションを編集してから、もう一度お試しください。
+Common.UGCValidation.ErrorLabel.DynHead_JointBoundsCheckFailed,表情アニメーションのジョイント境界を検証できませんでした。後でもう一度お試しください。
+Common.UGCValidation.ErrorLabel.DynHead_JointDirectExceeded,頭部の表情アニメーション「{actionName}」により、ジョイントが頭部の遥か外側に大幅に移動します。表情アニメーションを編集してから、もう一度お試しください。
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,マーケットプレイスの「動く頭」は、ケージの目と口の頂点がメッシュの頂点と一致するように、適切に合わせる必要があります。ケージとメッシュとの位置合わせを改善してください。
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,動く頭のケージの左目のランドマークがメッシュとずれています。左目のメッシュが投影されたケージエリア内に入るように、目のケージを調整してください。
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,動く頭のケージの口のランドマークがメッシュとずれています。口のメッシュが投影されたケージエリア内に入るように、口のケージを調整してください。
@@ -771,9 +812,9 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,動く頭の口を開い
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,マーケットプレイス上の「動く頭」はアニメ化されている必要がありますが、この頭にはFACSデータがありません。
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,動く頭の右目を閉じた表情を検出できません。右目のケージのランドマークを調整して、頭の右目の位置に合わせ、閉じられるようにしてください。
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,動く頭のしかめっ面の表情を検出できません。口のケージのランドマークを調整して、頭の口の位置に合わせ、しかめっ面の表情ができるようにしてください。
-Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,エミッシブエリアがしきい値を超えています。
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,ボディパーツメッシュ「{meshName}」は{emissivePercentage}%発光しています。エミッシブの発光範囲は{maxEmissivePercentage}%を超えてはなりません。エミッシブマスクの強度または発光範囲を小さくしてください。
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,{meshName}の発光が強すぎます。エミッシブエリア×強度が上限を超えています（現在{emissivePercentage}%ですが、{maxEmissivePercentage}%以下でなければなりません）。光るエリアを縮小するか、EmissiveStrengthを下げてください。
-Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,エミッシブエリアの面積が上限を超えています。
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,メッシュ「{meshName}」の加重エミッシブ表面積は{emissiveArea}平方マスで、これは最大許容値の{maxEmissiveArea}平方マスを超えています。エミッシブマスクの強度または発光範囲を小さくしてください。
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,{emissiveArea}の発光が強すぎます。エミッシブエリア×強度が上限を超えています（現在{assetTypeName}ですが、{maxEmissiveArea}以下でなければなりません）。光るエリアを縮小するか、EmissiveStrengthを下げてください。
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedInExperience,エミッシブマップは、バーチャル空間内で作成されたアイテムには対応していません。すべてのSurfaceAppearanceからEmissiveMaskContentを削除してください。
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedOnDecal,デカールを発光させることはできません。「{InstancePath}」でEmissiveMaskContentを削除し、EmissiveStrengthを1に、EmissiveTintを白に設定してください。
@@ -781,7 +822,10 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribut
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,公開されたアニメーションには有効なUGCリアクションマーカーがありません。アニメーションを再公開してください。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,公開されたアニメーションデータからパーツの最大移動量を計算できませんでした。アニメーションを再公開してください。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,公開されたアニメーションでは、パーツの最大移動量が{taggedTranslation}マスに指定されていますが、アニメーションデータでは{calculatedTranslation}マスと計算されています。アニメーションを再公開してください。
+Common.UGCValidation.ErrorLabel.ExperienceCreatorNotSupported,バーチャル空間クリエーターはアバターアイテムを作成できません。クリエータータイプ：{CreatorType}、クリエーターID：{CreatorId}。
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,頭はUpperTorsoの上に配置する必要があります。現在、頭の中心が胴体の最上部より下に位置しています。これは、頭のメッシュが折りたたまれているか、配置が正しくないことを示しています。
+Common.UGCValidation.ErrorLabel.Extents_ParentBelowPart,{upperPart}は{lowerPart}を下回るように拡張できません。{attachmentName}を移動して、パーツの組み合わせ方を調整してください。
+Common.UGCValidation.ErrorLabel.Extents_PartAboveParent,{lowerPart}は{upperPart}を超えて拡張できません。{attachmentName}を移動して、パーツの組み合わせ方を調整してください。
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,アップロード時、FaceControlsのInternalOverrideFACSDataプロパティは空にする必要があります。
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,ベースの顔に必須の目の機能がありません。ベースの顔に目を追加してから、もう一度お試しください。
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,ベースの顔に必須の口がありません。ベースの顔に口を追加してから、もう一度お試しください。
@@ -794,6 +838,13 @@ Common.UGCValidation.ErrorLabel.FacsExpandsHead,頭部を{modPercent}%に拡大�
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,「動く頭」には最大{maxFacsJointCount}個のFACS（表情コーディングシステム）ジョイントを含めることができますが、この頭には{actualJointCount}個含まれています。FACSジョイントの数を減らしてから、もう一度お試しください。
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,頭部を{modPercent}%に縮小するFACS（表情コーディングシステム）が検出されましたが、頭部の変更は表情アニメーションに関するマーケットプレイスのポリシーに違反します。
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,アップロード形式が期待されるフォルダ構造と一致しません。再度お試しいただくか、バグ報告を提出してください。
+Common.UGCValidation.ErrorLabel.HSRAssetHasChildren,WrapLayer HSRアセットには、HiddenSurfaceRemovalAssetルートインスタンスの下に子があります。
+Common.UGCValidation.ErrorLabel.HSRAssetIdInvalidUrl,「{InstancePath}」には、無効なURLのHSRAssetIdがあります。
+Common.UGCValidation.ErrorLabel.HSRAssetIdRequired,「{InstancePath}」にはHSRAssetIdを設定する必要があります。
+Common.UGCValidation.ErrorLabel.HSRAssetInvalidRoot,WrapLayer HSRアセットには、HiddenSurfaceRemovalAssetルートが正確に1つだけ必要です。
+Common.UGCValidation.ErrorLabel.HSRDataNotReady,「{InstancePath}」のHSRデータがありません。もう一度お試しください。
+Common.UGCValidation.ErrorLabel.HSRMeshIdValidationError,「{InstancePath}」のHSRメッシュIDの検証中にエラーが発生しました。
+Common.UGCValidation.ErrorLabel.HSRMeshIdsMismatch,「{InstancePath}」に無効なHSRデータが検出されました。アクセサリ装着ツールを使用してアセットを再生成してから、もう一度お試しください。
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,骨「{bonePath}」がメッシュパーツ「{partName}」から離れすぎています。メッシュパーツのサイズ境界に近づけてください。
 Common.UGCValidation.ErrorLabel.HrdBone_TooCloseToParent,ボーン{bonePath}が親に近すぎます。ボーンの位置を少し調整してください。
 Common.UGCValidation.ErrorLabel.HrdBone_TransformNotIdentity,骨「{bonePath}」には変換プロパティが存在しますが、これはまだマーケットプレイスへのアップロードが有効化されていません。これをIdentity CFrameにリセットしてください。
@@ -814,6 +865,8 @@ Common.UGCValidation.ErrorLabel.HrdProperties_UncontainedJoint,HRDプロパテ�
 Common.UGCValidation.ErrorLabel.HrdTposePosition,ジョイント{jointName}のTposeAdjustmentの位置が許容範囲外です。オフセットを±({offsetLimit})の範囲内に収まるように減らしてください。
 Common.UGCValidation.ErrorLabel.HrdTposeRotation,ジョイント{jointName}のTposeAdjustmentが、推奨される方向の{expectedOrientation}から{degLimit}度以上ずれます。
 Common.UGCValidation.ErrorLabel.InstanceTagsFound,以下のインスタンスにはタグが付与されていますが、マーケットプレイスのアセットにはタグを付与できません: {ProblematicDescendantPaths}
+Common.UGCValidation.ErrorLabel.InstanceTreeBannedClass,「{InstancePath}」はタイプが{ClassName}で、マーケットプレイスのアセットでは許可されていません。
+Common.UGCValidation.ErrorLabel.InstanceTreeBannedName,「{InstancePath}」の名前は予約済みであり、マーケットプレイスのアセットでは使用できません。
 Common.UGCValidation.ErrorLabel.InternalError,内部エラーが発生したため、アセットを正しく検証できませんでした。この問題が続く場合は、バグレポートを作成してください。ValidationJobId：{ValidationJobId}
 Common.UGCValidation.ErrorLabel.JointRotAtt_Moved,{instPath}は移動されたjointRotationですが、マーケットプレイスへのアップロードではまだこのインスタンスが調整されない可能性があります。位置を{expectedPosition}にリセットしてください。
 Common.UGCValidation.ErrorLabel.JointRotAtt_MultipleAttachments,インスタンス「{parentPath}」には、JointRotationの子要素を2つ以上含めることはできません。
@@ -821,7 +874,21 @@ Common.UGCValidation.ErrorLabel.JointRotAtt_Rotated,{instPath}は回転したjoi
 Common.UGCValidation.ErrorLabel.JointRotAtt_UnrecognizedParent,インスタンス「{parentPath}」にはJointRotationの子要素が存在しますが、これは許可されているR15plusスキーマの一部ではありません。
 Common.UGCValidation.ErrorLabel.JointRotAtt_WrongInstanceClass,インスタンス「{instPath}」はJointRotationと名付けられていますが、JointRotationはアタッチメントの子であるアタッチメント専用です。
 Common.UGCValidation.ErrorLabel.LCDeformTooLarge,アバターに着せたとき、許容サイズ{maxSize}を超えて重ね着した服が変形します。
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NoHandle,アクセサリ「{accessoryName}」にはハンドルがありません。範囲外の重ね着した衣装を検証できません。
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NoWrapLayer,アクセサリ「{accessoryName}」にはWrapLayerがありません。範囲外の重ね着した衣装を検証できません。
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NonZeroMaxSize,アクセサリのMaxSizeがゼロ以外の値になっています。
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NonZeroOffset,アクセサリのOffsetがゼロ以外の値になっています。
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_OutOfBounds,「{accessoryName}」の重ね着の検証に失敗しました。変形すると、重ね着の衣装が大きくなりすぎます。
 Common.UGCValidation.ErrorLabel.LeaderVertsNearCageIslands,まつ毛にRBX_Leaderにスキニングされた頂点があり、これらの頂点が内側のケージの目のランドマークから遠すぎます。RBX_Leaderにスキニングされたすべての頂点を、必ず内側のケージの目の領域の近くに配置してください
+Common.UGCValidation.ErrorLabel.LegsSeparated_HipAttachmentOutOfRange,{attachmentPath}は{currentValue}であり、{comparison} {cutoff}にすることはできません。アタッチメントを修正してください。
+Common.UGCValidation.ErrorLabel.LegsSeparated_LegsOverlap,脚がX軸上で{overlap}マス重なっています。{leftMax}が左脚の上限です。{rightMax}が右脚の上限です。足を調整して重なりを減らしてください。
+Common.UGCValidation.ErrorLabel.MakeupDecal_FailedToLoadTexture,デカール{instanceName}の{fieldName}を読み込めませんでした。TextureContentが存在し、有効であることを確認してから、もう一度お試しください。
+Common.UGCValidation.ErrorLabel.MakeupDecal_FailedToLoadTextureData,「{fullName}」のテクスチャデータを読み込めませんでした。テクスチャが存在することを確認してから、もう一度お試しください。
+Common.UGCValidation.ErrorLabel.MakeupDecal_NoColorMap,デカール{instanceName}のColorMapが見つかりません。メイクアップデカールには、有効なColorMapが必要です。
+Common.UGCValidation.ErrorLabel.MakeupDecal_TextureTooBig,「{fullName}」で見つかったテクスチャの解像度{sizeY}x{sizeX}pxは、「{fieldName}」フィールドでサポートされている最大値{maxSize}x{maxSize}pxを超えています。
+Common.UGCValidation.ErrorLabel.MakeupDecal_UVZoneExcludeViolation,{instanceName}のカラーマップの不透明ピクセルが、アセットタイプ{assetTypeName}に対する制限されたUV領域[{minBound}]および[{maxBound}]内で検出されました。
+Common.UGCValidation.ErrorLabel.MakeupDecal_UVZoneIncludeViolation,{instanceName}のカラーマップの不透明領域は、アセットタイプ{assetTypeName}に対する許容UV領域[{minBound}]および[{maxBound}]内にありません。
+Common.UGCValidation.ErrorLabel.MaterialNotAllowed,以下のインスタンスに無効なマテリアルがあります：{InstanceNameList}。次のマテリアルのみが許可されています：{AllowedMaterials}。
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceAvatar_CageInsideMesh,身体ケージが身体メッシュと交差しています。身体ケージの頂点の{negtiveSDFPercent}%が身体メッシュ内にあります。
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceAvatar_CageTooFar,ケージが頭部メッシュから離れすぎています。頭部ケージとメッシュの間の最大距離は{max_sdf}であり、許容されるしきい値{max_sdf_threshold}を超えています。
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceHead_CageInsideMesh,頭部ケージが頭部メッシュと交差しています。頭部ケージの頂点の {negtiveSDFPercent}%が頭部メッシュ内にあります。
@@ -831,17 +898,56 @@ Common.UGCValidation.ErrorLabel.MeasureCageMeshDistance_CageTooFar,アウター�
 Common.UGCValidation.ErrorLabel.MeasureCageRelevancy,修正されたアウターケージの頂点の{outer_cage_face_irrelevant_percent}%がアクセサリに対応していません。アウターケージは必要な場合にのみ動かすようにしてください。
 Common.UGCValidation.ErrorLabel.MeasureCageUV,{cage_name}のケージに、正しくないかテンプレートに属さないUV値が{incorrect_uv_count}個あります。ケージのUVを修正してください。
 Common.UGCValidation.ErrorLabel.MeasureMeshOutsideOuterCage,アクセサリのメッシュの頂点の{mesh_outside_outer_cage_percent}%が、アウターケージの外側にあります。アクセサリのより多くの部分がケージの間に配置されるように調整してください。
+Common.UGCValidation.ErrorLabel.MeshGeometry_ExceedsBounds,{meshName}のサイズが、許可されている最大バウンディングサイズを超えています。タイプ{assetTypeName}の最大サイズは、[{maxSizeX}、{maxSizeY}、{maxSizeZ}]です。
+Common.UGCValidation.ErrorLabel.MeshGeometry_NotCentered,{meshName}.{fieldName}には、中央に配置されていないメッシュデータがあります。このメッシュをRoblox 3Dインポーターで再度インポートし、ソースファイルにゆるいジオメトリがないことを確認してください。
+Common.UGCValidation.ErrorLabel.MeshGeometry_PositionOutOfBounds,位置が範囲外です。
+Common.UGCValidation.ErrorLabel.MeshGeometry_SurfaceAreaExceeded,モデルメッシュ「{meshName}」の総表面積は{surfaceArea}です。{maxSurfaceArea}を超えることはできません。すべての三角形の数および/またはサイズを減らす必要があります。
+Common.UGCValidation.ErrorLabel.MeshGeometry_TotalTriangleCountExceeded,「{assetTypeName}」の「{triangleCount}」のメッシュ解像度が、サポートされている最大三角形数「{maxTriangles}」を超えています。三角形の数を減らすには、モデルのトポロジーを再構成する必要があります。
+Common.UGCValidation.ErrorLabel.MeshGeometry_TriangleCountExceeded,モデルメッシュ{meshName}の解像度{triangleCount}が、サポートされている最大値{maxTriangles}を超えています。モデルのトポロジーを再構成してから、もう一度お試しください。
+Common.UGCValidation.ErrorLabel.MeshGeometry_VertexDensityExceeded,頂点密度の上限を超えています。互いに非常に近い位置にある頂点の数を減らしてください。
+Common.UGCValidation.ErrorLabel.MeshGeometry_ZeroAreaTriangle,モデルメッシュ{meshName}に面積ゼロの三角形が検出されました。面積ゼロの三角形を削除するには、メッシュを編集する必要があります。
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,{partName}メッシュの{axis}軸サイズの{currentSize}スタッドが、許可されている個々のパーツの最大サイズ{maxSize}スタッドを超えています。メッシュを縮小してください。
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,{partName}メッシュ{axis}軸サイズの{currentSize}スタッドが、個々のパーツの最小許容サイズ{minSize}スタッドより小さくなっています。メッシュを拡大してください。
+Common.UGCValidation.ErrorLabel.MeshSize_LoadFailed,
+Common.UGCValidation.ErrorLabel.MeshSize_Mismatch,{meshName}の計算されたメッシュサイズが、MeshSizeプロパティの値と一致しません
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,アタッチメント{attName}は、{partName}の子孫要素内に正確に1回だけ存在する必要があります。
 Common.UGCValidation.ErrorLabel.NoAttributes,「{RootInstanceName}」（またはその子孫）に属性が含まれています。「{InstanceNameList}」から属性を削除する必要があります。
+Common.UGCValidation.ErrorLabel.NoMeshBelowFeet_PartBelowFeet,{partName}は足の裏から下方向に{distance}マス伸びています。足のみが地面に届くことができ、その他のボディパーツは、そこから下方向に最大{maxDistance}マスまで伸びることができます。{partName}を短くするか、位置を高くしてください。
+Common.UGCValidation.ErrorLabel.Pose_AngleFromXYPlane,{assetName}はX-Y平面から{angle}度の角度にあります。角度は{limit}度以内である必要があります。キャラクターがIポーズ、Aポーズ、またはTポーズになっていることを確認してください。
+Common.UGCValidation.ErrorLabel.Pose_AngleOnXYPlane,{assetName}はX-Y平面上の[{xVector}]ベクトルの{angle}度の角度にあります。角度は{minAngle}～{maxAngle}度の範囲内である必要があります。キャラクターがIポーズ、Aポーズ、またはTポーズになっていることを確認してください。
+Common.UGCValidation.ErrorLabel.Pose_CFrameCalculationFailed,{assetName}アセットのCFrameを算出できませんでした。キャラクターがIポーズ、Aポーズ、またはTポーズになっており、すべてのパーツが同じ位置にないことを確認してください。
+Common.UGCValidation.ErrorLabel.Pose_PointingAlongZVector,{assetName}はワールドのZベクトルに沿って向きを変えています。キャラクターがIポーズ、Aポーズ、またはTポーズになっていることを確認してください。
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName}「{InstancePath}」に無効なプロパティがあります：{ProblematicProperties}。表示されているバイト数の上限を超えています（上限が0の場合、そのプロパティは空である必要があります）。それ以外のプロパティにはNaN/Inf値が含まれているか、デフォルトのサイズ上限を超えています。
+Common.UGCValidation.ErrorLabel.PropertyNotFound,プロパティ「{PropertyName}」が「{InstancePath}」に見つかりませんでした。
+Common.UGCValidation.ErrorLabel.PropertyValueInvalid,「{InstancePath}」のプロパティ「{PropertyName}」が無効です。{ComparisonMethod} {ExpectedValue}の値である必要があります。
 Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,レンダリングされたアニメーションに、必須の表情（目を閉じた表情、口を開けた表情、喜びの表情、悲しみの表情）の一部または全部がありません。
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,「{PartName}」のリグアタッチメント「{AttachmentName}」は、このボディパーツの隣接パーツに接続するジョイント境界の近くに配置する必要があります。現在の位置[{CurrentPosition}]は接続面から離れすぎています。[{ClosestValidPosition}]に近づけてください。
+Common.UGCValidation.ErrorLabel.SAOpacity_FailedToLoadTexture,SurfaceAppearance「{FullName}」のテクスチャ「{FieldName}」を読み込めませんでした。テクスチャが存在することを確認してから、もう一度お試しください。
+Common.UGCValidation.ErrorLabel.SAOpacity_InvalidAlphaMode,SurfaceAppearance（{FullName}）のAlphaModeが無効です。Enum.AlphaMode.Overlayである必要があります。
+Common.UGCValidation.ErrorLabel.SAOpacity_TextureNotOpaque,テクスチャ「{FullName}」は完全に不透明ではありません。不透明なテクスチャを使用してください。
+Common.UGCValidation.ErrorLabel.ScaleTypeInvalid,「{ParentName}」のAvatarPartScaleTypeの値が無効です。有効な値は、Classic、ProportionsSlender、またはProportionsNormalです。
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,Robloxにアセットをアップロードするには、必ず1件のインスタンスと関連したアップロードタイプを選択する必要があります。
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,このアセットは大きすぎるためアップロードできません（{sizeBytes}バイト。上限は{maxSizeBytes}バイトです）。サイズを小さくしてから、もう一度お試しください。
+Common.UGCValidation.ErrorLabel.SurfaceAppearance_MissingSA,（{MeshPartFullName}）のTextureIDが空で、子SurfaceAppearanceインスタンスがありません。そのうち少なくとも1つを定義する必要があります。
+Common.UGCValidation.ErrorLabel.SurfaceAppearance_TextureAndSABothDefined,TextureIDとSurfaceAppearanceの両方がMeshPart（{MeshPartFullName}）に定義されています。公開時にはSurfaceAppearanceのみが使用されます。
+Common.UGCValidation.ErrorLabel.TexturePackInvalidURL,「{SurfaceAppearanceName}」には、無効なURLの「TexturePack」プロパティがあります。URLを修正してください。
+Common.UGCValidation.ErrorLabel.TexturePack_DownloadFailed,SurfaceAppearance「{SurfaceAppearanceName}」のTexturePackをダウンロードできませんでした。
+Common.UGCValidation.ErrorLabel.TexturePack_Mismatch,SurfaceAppearance「{SurfaceAppearanceName}」のテクスチャが、そのTexturePackのテクスチャと一致しません。テクスチャパックを修正してください。
+Common.UGCValidation.ErrorLabel.TextureSize_FailedToLoad,「{FullName}」のテクスチャデータを読み込めませんでした。テクスチャが存在することを確認してから、もう一度お試しください。
+Common.UGCValidation.ErrorLabel.TextureSize_TooBig,「{FullName}」で見つかったテクスチャの解像度{Width}x{Height}pxは、「{FieldName}」フィールドでサポートされている最大値{MaxSize}x{MaxSize}pxを超えています。
+Common.UGCValidation.ErrorLabel.ThumbnailInvalidTarget,サムネイル生成の対象アセットが無効です。「{ExpectedTarget}」である必要があります。
+Common.UGCValidation.ErrorLabel.ThumbnailOutsideView,アセット「{InstancePath}」がサムネイルカメラビューの外側に配置されています。アセットをカメラビューの中央に配置し直してください。
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,頭部のメッシュパーツには、{jointName}の表情アニメーションが含まれていますが、これはFACS（表情コーディングシステム）では使用できません。このジョイントの名前を変更してから、頭部を再度インポートしてください。
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,ボディパーツ{partName}が、R15plusスキーマに含まれていない仮想ジョイント{jointName}にスキニングされています。
+Common.UGCValidation.ErrorLabel.UnsupportedCreatorType,サポートされていないクリエータータイプです。クリエータータイプ：{CreatorType}、クリエーターID：{CreatorId}。
+Common.UGCValidation.ErrorLabel.VertexColors_NotOpaque,メッシュモデル「{MeshName}」に無効な頂点色が見つかりました。カラーマップをすべて白の{TransparencyNote}に編集してから、もう一度お試しください。
+Common.UGCValidation.ErrorLabel.VerticesNotCoincident_TooManySimilar,{cageName}には、互いに近すぎる頂点が{percentage}%あります。頂点を編集して、重なっているか互いに近い頂点の割合が最大{threshold}%になるようにしてください。
+Common.UGCValidation.ErrorLabel.WrapTexture_FailedToLoadCage,{instanceName}のReferenceCageContentを読み込めませんでした。
+Common.UGCValidation.ErrorLabel.WrapTexture_FailedToLoadUV,「{instanceName}」のUVを読み込めませんでした。UVマップが存在することを確認してから、もう一度お試しください。
+Common.UGCValidation.ErrorLabel.WrapTexture_InvalidMaxBound,{instanceName}.UVMaxBound[{actual}]が、必要なUVMaxBoundの[{expected}]と一致しません。
+Common.UGCValidation.ErrorLabel.WrapTexture_InvalidMinBound,{instanceName}.UVMinBound[{actual}]が、必要なUVMinBoundの[{expected}]と一致しません。
+Common.UGCValidation.ErrorLabel.WrapTexture_InvalidUV,「{instanceName}」のケージに無効なUV値が見つかりました。この問題を解決するには、UVマップを編集してください。
+Common.UGCValidation.ErrorLabel.WrapTexture_NoCage,{instanceName}のReferenceCageContentが提供されていません。
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,[設定] へ
@@ -1191,6 +1297,7 @@ CoreScripts.TextChat.InputBar.Hint.GamepadConnectedConfirm,
 CoreScripts.TextChat.InputBar.Hint.MouseKeyboard,ここをクリックするか {KEY} を押してチャット
 CoreScripts.TextChat.InputBar.Hint.PrivacySettingsDisabled,メッセージの送受信ができないチャット設定になっています。
 CoreScripts.TextChat.InputBar.Hint.Touch,ここをタップしてチャットする
+CoreScripts.TextChat.MessageStatus.Warning.DictationRateLimited,少し待ってから次のメッセージを送ってください。音声入力が一時停止されています。
 CoreScripts.TextChat.MessageStatus.Warning.Floodchecked,少し待ってから次のメッセージを送ってください。
 CoreScripts.TextChat.MessageStatus.Warning.InvalidPrivacySettings,
 CoreScripts.TextChat.MessageStatus.Warning.MessageTooLong,メッセージが最大文字数を超えています。
@@ -1617,6 +1724,7 @@ Feature.AppealsPortal.Label.Location,
 Feature.AppealsPortal.Label.LookDescription,シェア済みアバターの詳細
 Feature.AppealsPortal.Label.LookId,共有済みアバターID
 Feature.AppealsPortal.Label.LookName,共有済みアバター名
+Feature.AppealsPortal.Label.MomentDescription,モーメントの詳細
 Feature.AppealsPortal.Label.PlaceIDPrompt,プレース IDは何ですか？
 Feature.AppealsPortal.Label.PlaceId,プレース ID
 Feature.AppealsPortal.Label.PlaceName,プレース名
@@ -1737,6 +1845,7 @@ Feature.Avatar.Action.Rename,名前を変更する
 Feature.Avatar.Action.RenameSet,セット名を変更
 Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,前回のアバターを復元
+Feature.Avatar.Action.Retry,
 Feature.Avatar.Action.Revert,元に戻す
 Feature.Avatar.Action.Rotate,回転
 Feature.Avatar.Action.Save,
@@ -1950,6 +2059,7 @@ Feature.Avatar.Label.FaceMakeup,
 Feature.Avatar.Label.FacialAnimation,表情アニメーション
 Feature.Avatar.Label.Fall,落下
 Feature.Avatar.Label.FallAnimations,落下アニメ
+Feature.Avatar.Label.FromMarketplace,マーケットプレイスから
 Feature.Avatar.Label.Front,正面
 Feature.Avatar.Label.FullBody,全身
 Feature.Avatar.Label.FullMasks,フルマスク
@@ -2007,6 +2117,7 @@ Feature.Avatar.Label.Name,
 Feature.Avatar.Label.Neck,首
 Feature.Avatar.Label.Newest,最新
 Feature.Avatar.Label.NoExpiredItems,有効期限切れの{itemType}なし
+Feature.Avatar.Label.NoInventorySearchResults,「{query}」に一致するアイテムはありません
 Feature.Avatar.Label.NoItems,{itemType} がありません
 Feature.Avatar.Label.NoLongerAvailableInCollection,このコレクションではもう利用できません
 Feature.Avatar.Label.NoSets,まだセットがありません
@@ -2071,6 +2182,8 @@ Feature.Avatar.Label.Shoes,靴
 Feature.Avatar.Label.Shorts,短パン
 Feature.Avatar.Label.Shoulder,肩
 Feature.Avatar.Label.Skin,スキン
+Feature.Avatar.Label.Spawn,スポーン
+Feature.Avatar.Label.SpawnEffects,スポーン効果
 Feature.Avatar.Label.Sweater,セーター
 Feature.Avatar.Label.Sweaters,
 Feature.Avatar.Label.Swim,泳ぐ
@@ -2203,6 +2316,7 @@ Feature.Avatar.Message.UnknownErrorCreatingOutfit,不明なエラーが発生し
 Feature.Avatar.Message.UpdateOutfitSuccess,更新済み！
 Feature.Avatar.Message.UpdateRequired,アップデートが必要です。このアイテムを表示するには、Robloxを最新バージョンにアップデートしてください。
 Feature.Avatar.Placeholder.NameYourAvatar,アバターに名前をつける
+Feature.Avatar.Placeholder.SearchInventory,持ち物をサーチ
 Feature.Avatar.Placeholder.WriteAvatarCaption,アバターの説明文を書く（任意）
 Feature.Avatar.RevokedItems.BodyText,{category}のアイテム「{item}」は、保存されたアバターから削除されました。そのため購入時に支払った金額が返金されました。{lineBreak}詳細は受信トレイをご確認ください。
 Feature.Avatar.RevokedItems.BodyTextMultiple,以下のアイテムは、保存されたアバターから削除されました。そのため購入時に支払った金額が返金されました。{lineBreak}{items}{lineBreak}詳細は受信トレイをご確認ください。
@@ -2314,6 +2428,9 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,テキストをコピー
 Feature.Build.Action.Create,
 Feature.Build.Action.CreateDeveloperProduct,
+Feature.Build.Action.CreateMonetizationDeveloperProduct,開発者製品を作成
+Feature.Build.Action.CreateMonetizationPass,パスを作成
+Feature.Build.Action.CreateMonetizationSubscription,定期購入を作成
 Feature.Build.Action.CreateNewGame,新しいゲームを作成
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
@@ -2425,6 +2542,9 @@ Feature.Build.Analytics.Title.TopDropOffStep,最大離脱数
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,訪問数
 Feature.Build.Content.NewGame,新規のゲーム
+Feature.Build.CreateDeveloperProductDraft,ゲームの開発者製品を作成するのを手伝ってください。
+Feature.Build.CreatePassDraft,ゲームのパスを作成するのを手伝ってください。
+Feature.Build.CreateSubscriptionDraft,ゲームの定期購入を作成するのを手伝ってください。
 Feature.Build.Description.ActivateDeveloperProduct,開発者製品{PRODUCT_ID}の販売を開始してください。
 Feature.Build.Description.ActivateGamePass,{PRODUCT_ID}のゲームパスの販売を開始します。
 Feature.Build.Description.ActivateSubscription,{PRODUCT_ID}の定期購入を有効化します。
@@ -3056,6 +3176,7 @@ Feature.Catalog.Label.FullBody,
 Feature.Catalog.Label.Gear,
 Feature.Catalog.Label.Get,ゲットする
 Feature.Catalog.Label.GetPremiumAndPrice,プレミアム会員になって以下の価格で購入： 
+Feature.Catalog.Label.Glowing,光る
 Feature.Catalog.Label.HD,HD
 Feature.Catalog.Label.Hair,
 Feature.Catalog.Label.HeadShape,
@@ -3156,6 +3277,7 @@ Feature.Catalog.Label.SerialNumberColon,シリアル番号:
 Feature.Catalog.Label.ShareToMoments,モーメントにシェア
 Feature.Catalog.Label.ShoulderAccessories,肩用アクセサリ
 Feature.Catalog.Label.SoldOut,
+Feature.Catalog.Label.SpecialFeatures,特別機能
 Feature.Catalog.Label.SupportsHeadShapes,頭の形をサポート
 Feature.Catalog.Label.TakeOffResaleConfirmation,このアイテムの再販売を中止しますか？
 Feature.Catalog.Label.TimedOptions,時間制オプション
@@ -3275,6 +3397,7 @@ Feature.Chat.Action.Delete,
 Feature.Chat.Action.Edit,
 Feature.Chat.Action.GroupOSADoNotJoin,参加しない
 Feature.Chat.Action.GroupOSAJoin,
+Feature.Chat.Action.JumpToLatestMessages,最新のメッセージに移動
 Feature.Chat.Action.LearnMore,
 Feature.Chat.Action.Leave,
 Feature.Chat.Action.MuteVoice,音声をミュート
@@ -3626,8 +3749,10 @@ Feature.FaceChat.Subtitle.UnableToAccessCamera,カメラを使用してアバタ
 Feature.Favorites.Label.Favorite,
 Feature.Favorites.Label.Favorited,お気に入りに登録済み
 Feature.FlyoutSidePanel.Action.ContinuePlaying,
+Feature.FlyoutSidePanel.Description.SwitchAccountsHere,こちらでアカウントを切り替えられるようになりました。
 Feature.FlyoutSidePanel.Label.TooltipBody,プロフィール、コンテンツ、設定が新しい場所に移動しました。
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b>は移動しました
+Feature.FlyoutSidePanel.Title.AccountSwitcherMoved,アカウント切り替えボタンが移動しました
 Feature.Friends.Action.AcceptFriend,
 Feature.Friends.Action.AccountDeleted,アカウントが削除されました
 Feature.Friends.Action.Add,
@@ -4089,6 +4214,9 @@ Feature.Home.Heading.JoinYourFriends,友達と一緒に参加
 Feature.Home.HeadingFriends,友達（{friendCount} 人）
 Feature.Home.Label.HappeningNow,開催中
 Feature.Home.PeopleList.ChatWith,{username} さんとチャット
+Feature.Home.TextFilterEducation.General.Body.Pii.Warning.V2,最近のメッセージの一部を変更またはブロックしました。個人情報は送信しないでください。
+Feature.Home.TextFilterEducation.General.Body.Respect.Warning.V2,最近のメッセージの一部を変更またはブロックしました。今後は相手を尊重したメッセージを送信してください。
+Feature.Home.TextFilterEducation.General.Body.Spam.Warning.V2,最近のメッセージの一部を変更またはブロックしました。同じメッセージは1回だけ送信してください。
 Feature.InAppBugReporting.Message.AppVersion,ビルド: {value}
 Feature.InAppBugReporting.Message.CommentEmptyError,詳細は空欄にできません。
 Feature.InAppBugReporting.Message.CommentLabel,チケットの詳細
@@ -4191,6 +4319,8 @@ Feature.Moments.Action.Analytics,解析
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
+Feature.Moments.Action.CommentSeeOriginal,原文を表示
+Feature.Moments.Action.CommentSeeTranslation,翻訳を表示
 Feature.Moments.Action.CommentShowLess,折りたたむ
 Feature.Moments.Action.CommentShowMore,
 Feature.Moments.Action.Continue,
@@ -4230,8 +4360,8 @@ Feature.Moments.Body.EDPMomentIPReportInstructions,このモーメントにお�
 Feature.Moments.Description.CommunityStandards,発言できることとできないことの詳細については、コミュニティ基準を確認してください。
 Feature.Moments.Description.EmptyCapturesLibrary,ここに切り抜きが表示されます。
 Feature.Moments.Description.FollowingCaughtUpBody,このフィードの新しいモーメントをすべて視聴しました。さらに見るには、フィードを切りかえてください。
-Feature.Moments.Description.FollowingEmptyBodyRecommended,クリエーターを数人フォローして、お気に入りからモーメントを楽しみましょう。クリエーターを見つけるには、おすすめを表示してください。
-Feature.Moments.Description.FollowingEmptyBodyTrending,クリエーターを数人フォローして、お気に入りからモーメントを楽しみましょう。クリエーターを見つけるには、トレンドを表示してください。
+Feature.Moments.Description.FollowingEmptyBodyRecommended,ここに、フォローしているクリエーターのモーメントが表示されます。
+Feature.Moments.Description.FollowingEmptyBodyTrending,
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,AIが生成したものです。投稿前にご確認ください。公開された内容に対する責任はご自身にあります。
 Feature.Moments.Description.HowToCaptureStep1,切り抜きが有効になっているバーチャル空間に参加し、ハンバーガーメニューを選択します
 Feature.Moments.Description.HowToCaptureStep2,切り抜き操作を有効化します
@@ -4293,7 +4423,7 @@ Feature.Moments.Label.FeedRecommended,
 Feature.Moments.Label.FeedTrending,トレンド
 Feature.Moments.Label.FirstCommentInvite,まだコメントはありません。最初にコメントしましょう！
 Feature.Moments.Label.FollowingCaughtUpTitle,現在、新着のモーメントはありません
-Feature.Moments.Label.FollowingEmptyTitle,クリエーターをフォローして、そのモーメントを視聴しましょう
+Feature.Moments.Label.FollowingEmptyTitle,クリエーターをフォローして、そのモーメントをここで視聴しましょう
 Feature.Moments.Label.GameJoinConversion,ゲーム参加コンバージョン
 Feature.Moments.Label.HowToUseCaptureTitle,切り抜きの使い方
 Feature.Moments.Label.LinkCopied,リンクをコピーしました
@@ -4366,7 +4496,6 @@ Feature.Moments.Title.GenerateTextFeedbackReason,何が問題でしたか？
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,モーメント作成を退出しますか？
 Feature.Moments.Title.MomentRemoved,
-Feature.Moments.Title.PostInsights,投稿のインサイト
 Feature.Moments.Title.ReportPost,投稿の規約違反を報告
 Feature.Moments.Title.UnfollowConfirmationDialog,@{username}さんのフォローを解除しますか？
 Feature.Moments.Tooltip.PostInsightsBody,視聴回数、視聴時間、モーメントに対するオーディエンスの反応を確認できます。
@@ -4651,6 +4780,9 @@ Feature.NotApproved.Label.LatestActivity,当社が審査した最新アクティ
 Feature.NotApproved.Label.LoadingImage,画像を読み込み中
 Feature.NotApproved.Label.LogoutProgress,ログアウト中
 Feature.NotApproved.Label.MenuContent,メニューの内容
+Feature.NotApproved.Label.MessageToUser.AltConsequence.Reset,"このアカウントは、Robloxのコミュニティ基準に重大な違反をしてアクセス停止となったアカウント（ユーザー名は@{account}にリセット済み）に紐づけられています。この違反について異議を申し立てられるのは、アクセス停止となったアカウントのみです。
+
+アカウントの紐づけが誤っている場合は、このアカウントで「違反と異議申し立て」から異議申し立てを行ってください。"
 Feature.NotApproved.Label.MessageToUser.AltConsequence.V2,このアカウントは、コミュニティ基準に重大な違反があったため停止されたアカウントに紐づけられています。違反については、停止されたアカウントを使用して異議申し立てを行うことができます。
 Feature.NotApproved.Label.MessageToUser.AltConsequence.V3,"このアカウントは、コミュニティ基準に重大な違反があったためアクセスが停止されたアカウント（@{account}）に紐づけられています。違反については、停止されたアカウントのみが異議申し立てを行うことができます。
 
@@ -4887,6 +5019,7 @@ Feature.PrivateServers.Label.PrivateServerLink,プライベートサーバーリ
 Feature.PrivateServers.Label.SearchPeople,
 Feature.PrivateServers.Label.ServerName,サーバー名:
 Feature.PrivateServers.Label.WhoCanJoin,参加できる人
+Feature.PrivateServers.Label.YourPrivateServerIsReadyToJoin,プライベートサーバーに参加できるようになりました
 Feature.Profile.Action.AboutThisProfile,このプロフィールについて
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,友達を承認する
@@ -4894,6 +5027,7 @@ Feature.Profile.Action.Add,
 Feature.Profile.Action.AllRequestsIgnored,リクエストをすべて無視しました
 Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,プロフィールのリンクをコピー
+Feature.Profile.Action.CreateInBuild,ビルドで作成
 Feature.Profile.Action.EditAppearance,外見を編集
 Feature.Profile.Action.EditAvatar,アバターを編集
 Feature.Profile.Action.EditBackground,背景を編集
@@ -4966,6 +5100,8 @@ Feature.Profile.Label.DisplayNameFailed,表示名は保存できません。も�
 Feature.Profile.Label.DisplayNameModalCaption,表示名は7日に1回しか変更できません。
 Feature.Profile.Label.DisplayNameTooShort,表示名は少なくとも3文字以上にしてください。
 Feature.Profile.Label.EditBackground,
+Feature.Profile.Label.IsMakingGameIn,さんがでゲームを制作中です
+Feature.Profile.Label.IsMakingGameInBuild,さんがビルドでゲームを制作中です
 Feature.Profile.Label.NoBioYet,説明文がありません
 Feature.Profile.Label.NoPreviousName,古い名前がありません
 Feature.Profile.Label.NoSocialLink,まだSNSリンクがありません
@@ -5307,6 +5443,8 @@ Feature.SettingsHub.Prompt.NeedCameraAccess,カメラへのアクセスが必要
 Feature.SettingsHub.Prompt.NeedContactsAccess,連絡先へのアクセスが必要です
 Feature.SettingsHub.Prompt.RestartOnMicAccessChange,マイクへのアクセス設定の変更を適用するにはアプリを再起動する必要があります。
 Feature.SettingsHub.Prompt.Subtitle.AllowMicrophoneAccess,ボイスチャットを開始するにはRobloxがマイクにアクセスできるようにしてください。
+Feature.SocialContextToast.Message.InvitationConfirmation,招待状を送信しました
+Feature.SocialContextToast.Message.InvitationFailure,招待状の送信中に問題が発生しました
 Feature.SocialShare.Action.CopyLink,
 Feature.SocialShare.Action.Redirect,リダイレクト中...
 Feature.SocialShare.Action.Share,
@@ -5696,6 +5834,8 @@ Features.Transfers.RobuxTransfer.Action.Send,
 Features.Transfers.RobuxTransfer.Action.TryAgain,
 Features.Transfers.RobuxTransfer.Disclaimer.AgeEstimationTransfer,Robuxを送信するには年齢チェックが必要です。一度送信すると、キャンセルすることはできません。
 Features.Transfers.RobuxTransfer.Error.ReceiverNotAllowed,現在、@{username}さんはRobuxを受け取れません。
+Features.Transfers.RobuxTransfer.FreeTransfersRemaining,あと{numFreeTransfersRemaining}回、無料で送金できます。Robuxは手数料なしで即座に送信されます。
+Features.Transfers.RobuxTransfer.FreeTransfersRemainingSingular,あと1回、無料で送金できます。Robuxは手数料なしで即座に送信されます。
 Features.Transfers.RobuxTransfer.Heading.SendRobux,Robuxを送信
 Features.Transfers.RobuxTransfer.Label.JoinedInYear,{year}年に利用開始
 Features.Transfers.RobuxTransfer.Label.MutualConnection,共通の友達{amount}人
@@ -5706,6 +5846,7 @@ Features.Transfers.RobuxTransfer.Label.RecipientWillGetInApp,受信者には、{
 Features.Transfers.RobuxTransfer.Label.RecipientWillGetInGame,受信者には、手数料を差し引いた{amount}Robuxが届きます。ゲーム内送信には、{commissionPercentage}%のクリエーター手数料が含まれます。
 Features.Transfers.RobuxTransfer.SentInstantNoFee,Robuxは手数料なしで即座に送信されます
 Features.Transfers.RobuxTransfers.Label.SuccessNotification,{amount}Robuxを送信しました
+Features.Transfers.Title.FreeTransfersExhausted,無料の送金回数を使い切りました
 Features.Transfers.Title.UpsellSubscription,
 Features.Transfers.Transfer.Block.RequireReceiverFAE,Robuxを受け取ることができるように、年齢を確認しましょう。
 Features.Transfers.Transfer.Block.RequireSenderFAE,Robuxを送れるように年齢確認をしましょう
@@ -5872,8 +6013,10 @@ InGame.EmotesMenu.ErrorMessageAnimationPlaying,この動作中はリアクショ
 InGame.EmotesMenu.ErrorMessageNotSupported,ここではリアクションは使えません。
 InGame.EmotesMenu.ErrorMessageSwitchToR15,リアクションを表示するにはR15アバターに切り替えてください。
 InGame.EmotesMenu.ErrorMessageTemporarilyUnavailable,今はリアクションを使えません。
+InGame.InspectMenu.Action.Buy,
 InGame.InspectMenu.Action.Cancel,
 InGame.InspectMenu.Action.Confirm,
+InGame.InspectMenu.Action.Inspect,
 InGame.InspectMenu.Action.LimitReached,アイテム数が上限に達しました
 InGame.InspectMenu.Action.SoldOut,
 InGame.InspectMenu.Action.TryOn,つける
@@ -5935,7 +6078,9 @@ Notifications.SquadRegroupPrompt.ToastAction.Join,
 Notifications.SquadRegroupPrompt.ToastLabel.ContinuePlayingTogether,一緒にプレイを続ける
 Notifications.SquadRegroupPrompt.ToastLabel.JoinANewServer,新しいサーバーに参加しよう
 Notifications.ToastNotifications.Label.LeaveExperienceConfirmation,退出してから新しいセッションに参加しますか？
+Notifications.ToastNotifications.Label.LeaveServerConfirmation,退出して別のサーバーに参加しますか？
 Notifications.ToastNotifications.Title.LeavingExperience,バーチャル空間から退出中
+Notifications.ToastNotifications.Title.LeavingServer,サーバーから退出中
 PlayerFeedbacks.VoteForm.Message.Action.Report,
 PlayerFeedbacks.VoteForm.Message.MaxLengthCharacters,{count} 文字未満にしてください。
 PlayerFeedbacks.VoteForm.Message.MinLengthCharacters,{count} 文字以上にしてください。

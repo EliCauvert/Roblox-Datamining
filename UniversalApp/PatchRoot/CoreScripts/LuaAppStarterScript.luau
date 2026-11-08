@@ -2,7 +2,7 @@
 local DebugInfo = debug.info(1, "s")
 
 if DebugInfo and type(DebugInfo) == "string" then
-	_G.LUAUFORGE_SENTRY_DEBUG_IDS[DebugInfo] = "2f8270c2-4143-5a1a-bcbf-683c30125946"
+	_G.LUAUFORGE_SENTRY_DEBUG_IDS[DebugInfo] = "7b0e8c3d-1bed-5787-ada9-f13f0435e64f"
 end
 local _ = _G.LUAUFORGE_SENTRY_DEBUG_IDS
 _G.ENVIRONMENT = "PRODUCTION"

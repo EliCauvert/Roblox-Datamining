@@ -657,8 +657,8 @@ Common.Presence.Label.Online,Online
 Common.Presence.Label.RobloxStudio,Roblox Studio
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,De animatie is te lang ({duration} seconden). Emote-animaties mogen maximaal {maxLength} seconden duren.
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,De animatie is te kort ({duration} seconden). Emote-animaties moeten langer zijn dan {minLength} seconden.
-Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,Schending van de plaatsing van het kooideel in {cageName}: {upperPart} is niet correct geplaatst boven {lowerPart}.
-Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,"Kooideel {partName} in {cageName} heeft {actualCount} vertices, terwijl er ongeveer {expectedCount} worden verwacht. Dit kan wijzen op ontbrekende of gedupliceerde geometrie in dat lichaamsgebied."
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,Schending van de plaatsing van het cage part in {cageName}: {upperPart} is niet correct geplaatst boven {lowerPart}.
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,"Cage part {partName} in {cageName} heeft {actualCount} hoekpunten, terwijl er ongeveer {expectedCount} worden verwacht. Dit kan wijzen op ontbrekende of gedupliceerde geometrie in dat cage-gebied."
 Common.UGCValidation.ErrorLabel.AQSFail_CageUV,"De {cage_name} heeft onjuiste UV-waarden die niet overeenkomen met het sjabloon. {incorrect_uv_count} onjuiste UV's ({unreferenced_vertex_count} zonder referentie, {non_template_uv_count} niet-sjabloon, {duplicate_mapping_count} dubbele toewijzingen), {unmatched_template_count} niet-overeenkomende sjabloonvertices. Corrigeer de kooi-UV, zodat deze overeenkomt met het sjabloon."
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,Je lichaam bevat kleine niet-verbonden mesh-componenten (mesheilanden). Verwijder de zwevende geometrie en zorg ervoor dat alle mesh-onderdelen goed zijn verbonden.
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,"{partName} heeft {num_disconnected_components} niet-verbonden componenten, wat het maximum van {max_disconnected_components} overschrijdt."
@@ -669,7 +669,7 @@ Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,"De hoofdkooi volgt
 Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,"{irrelevant_percent}% van de gewijzigde hoekpunten van de buitenste kooi bedekken het accessoire niet. Pas de kooi aan, zodat deze beter past bij de vorm van het accessoire."
 Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,"De {cage_name} heeft onjuiste UV-waarden. {incorrect_uv_count} onjuiste UV's ({unreferenced_vertex_count} zonder referentie, {non_template_uv_count} niet-sjabloon, {duplicate_mapping_count} dubbele toewijzingen), {unmatched_template_count} niet-overeenkomende sjabloonvertices."
 Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,{partName} heeft {degenerate_triangle_percent}% onjuiste driehoeken.
-Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,"Het Dynamische hoofd heeft problemen met de kwaliteit van de uitdrukkingen. Linkeroog gesloten: {left_eye_close}, rechteroog gesloten: {right_eye_close}, mond open: {mouth_open}, blij: {is_happy}, verdrietig: {is_sad}."
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,"Het dynamische hoofd heeft problemen met de kwaliteit van de uitdrukkingen. Linkeroog op het scherm (rode stippen aan de linkerkant van het hoofd in de Visualisatie-plugin) gesloten: {left_eye_close}, rechteroog op het scherm (blauwe stippen aan de rechterkant van het hoofd in de Visualisatie-plugin) gesloten: {right_eye_close}, mond open (groene stippen in de Visualisatie-plugin): {mouth_open}, blij: {is_happy}, verdrietig: {is_sad}."
 Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"Onverwachte gewricht-configuratie. Totaal aantal gewrichten: {joint_number}, gewrichten linkerhand: {left_hand_joint_number}, gewrichten rechterhand: {right_hand_joint_number}."
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,{partName} heeft {num_small_volume_islands} kleine niet-verbonden mesheilanden van de {num_disconnected_components} componenten in totaal. Verwijder de zwevende geometrie.
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,"{partName} heeft een niet-manifoldgeometrie. Controleer op niet-vlakke vlakken, zelfsnijdende oppervlakken of randen die door meer dan twee vlakken worden gedeeld."
@@ -678,9 +678,9 @@ Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,{mesh_outside_outer
 Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,De validatiegegevens voor {measureName} kon niet worden berekend omdat de invoergegevens onvolledig of ongeldig waren. Dit blokkeert je upload niet.
 Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,Textuur {textureName} heeft een lage complexiteit. De textuur heeft mogelijk onvoldoende detail of variatie.
 Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,Textuur {textureName} heeft een lage resolutie van {texture_width}x{texture_height}. Overweeg om een textuur met een hogere resolutie te gebruiken.
-Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,Assetkwaliteit: {partName} heeft {intersecting_tri_face_percent}% kruisende driehoekige faces (score: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,"{partName} heeft {intersecting_tri_face_percent}% zelfsnijdende vlakken, wat het toegestane percentage van {threshold}% overschrijdt."
 Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,"{partName} heeft {uv_outside_bound_vert_percent}% UV-hoekpunten buiten de grenzen [0,1]."
-Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,Assetkwaliteit: {partName} heeft {similar_vertex_percent}% vergelijkbare hoekpunten (score: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,"{partName} heeft {similar_vertex_percent}% vergelijkbare hoekpunten, wat het toegestane percentage van {threshold}% overschrijdt."
 Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,Accessoirebevestiging '{AttachmentName}' in '{PartName}' moet dicht bij het oppervlak van het mesh worden geplaatst. De huidige positie [{CurrentPosition}] bevindt zich buiten het geldige gebied. Verplaats het dichter bij [{ClosestValidPosition}].
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,"Handle is geskinned naar joint{jointName}, die geen deel uitmaakt van het toegestane schema. Alleen standaard R15-joints en skinning-overdrachtsjoints zijn toegestaan."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,"{assetType} moet skinning-overdracht gebruiken, maar je mist de vereiste joint {requiredJointName}."
@@ -692,15 +692,44 @@ Common.UGCValidation.ErrorLabel.AccessorySkinning_WeightNotFull,Hoekpunten die z
 Common.UGCValidation.ErrorLabel.AnimationPack_DuplicateAnimationId,De animatiebundel bevat een dubbele animatie-ID '{animationId}' die door meerdere clips wordt gebruikt: {instancePaths}. Elke animatieclip moet naar een uniek animatie-item verwijzen.
 Common.UGCValidation.ErrorLabel.AnimationPack_InvalidR15AnimChildren,In de animatiepakketbundel ontbreekt (ontbreken) het (de) verwachte animatietype(s): {missingAnimationTypes}. Elk animatietype moet één R15Anim-map hebben die precies de verwachte StringValue-child-items bevat.
 Common.UGCValidation.ErrorLabel.Animation_WeightNotPositive,"Animatie '{animationName}' heeft een gewichtswaarde van {weight}, maar het gewicht moet groter zijn dan 0. Corrigeer de animatie."
+Common.UGCValidation.ErrorLabel.AssetBounds_InconsistentScaleType,Alle MeshParts moeten dezelfde waarde hebben in hun AvatarPartScaleType-onderdeel. Controleer of de waarden overeenkomen.
+Common.UGCValidation.ErrorLabel.AssetBounds_TooLarge,"De {axis}-asgrootte '{currentSize}' van de meshes en gewrichten van  is groter {assetName} dan de maximaal toegestane {axis}-asgrootte van het begrenzingsvak, '{maxSize}'. Je moet de meshes/gewrichten verkleinen."
+Common.UGCValidation.ErrorLabel.AssetBounds_TooSmall,"De {axis}-asgrootte '{currentSize}' van de meshes van is kleiner{assetName} dan de minimaal toegestane {axis}-asgrootte van het begrenzingsvak, '{minSize}'. Je moet de meshes vergroten."
+Common.UGCValidation.ErrorLabel.AssetDoesNotExist,Asset '{AssetId}' waarnaar wordt verwezen door '{InstancePath}' bestaat niet of kan niet worden geladen. Vervang deze door een geldige asset-ID.
+Common.UGCValidation.ErrorLabel.AssetOpacity_BelowThreshold,"{AssetName} is niet ondoorzichtig genoeg vanaf de {ViewName}. De ondoorzichtigheid is {Opacity}, maar moet hoger zijn dan {Threshold}."
+Common.UGCValidation.ErrorLabel.AssetOpacity_Invisible,Mesh voor '{AssetName}' is volledig onzichtbaar.
+Common.UGCValidation.ErrorLabel.AssetOpacity_MeshLoadFailed,Laden van mesh voor MeshPart '{PartName}' mislukt. Controleer of de mesh bestaat en probeer het opnieuw.
+Common.UGCValidation.ErrorLabel.AssetOpacity_NoTriangles,Mesh voor '{AssetName}' heeft geen driehoeken.
+Common.UGCValidation.ErrorLabel.AssetOpacity_NonZeroTransparency,Onderdeel '{PartName}' heeft een transparantie die niet nul is. De transparantie van een onderdeel moet altijd precies nul zijn.
+Common.UGCValidation.ErrorLabel.AssetOpacity_ZeroSize,Meshes voor '{AssetName}' mogen geen nulgrootte hebben.
 Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,Kan vereiste {ExpectedClass} met de naam {ExpectedName} niet vinden in {ParentPath}
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,De volgende instanties maken geen deel uit van het goedgekeurde schema en moeten worden verwijderd: {UnexpectedDescendantPaths}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,"Geüpload item moet een {ExpectedClass} zijn, maar is een {RootClass}."
-Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,"Geüpload item moet de naam {ExpectedClass} hebben, maar heeft in plaats daarvan de naam {RootClass}."
+Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,"Geüpload asset moet de naam {ExpectedName} hebben, maar heeft in plaats daarvan de naam {RootName}."
+Common.UGCValidation.ErrorLabel.AttachmentBoundsAssetCalculationFailed,Kan de mesh-grenzen voor '{InstancePath}' niet berekenen voordat de posities van de bevestigingen worden gecontroleerd. De mesh-gegevens ontbreken mogelijk of zijn onjuist opgemaakt. Importeer het asset opnieuw en probeer het nog eens.
+Common.UGCValidation.ErrorLabel.AttachmentBoundsCalculationFailed,Kan de grenzen voor bevestiging '{AttachmentName}' in '{PartName}' niet berekenen. De mesh-gegevens ontbreken mogelijk of zijn onjuist opgemaakt. Importeer het asset opnieuw en probeer het nog eens.
+Common.UGCValidation.ErrorLabel.AttachmentOrientationDeviation,"De oriëntatie van bevestiging '{InstancePath}' wijkt te veel af van de verwachting. De aanbevolen oriëntatie is {ExpectedOrientation}, de maximale afwijking is {MaxDeviation} graden."
+Common.UGCValidation.ErrorLabel.AttachmentOrientationRigRotated,"Rig-bevestigingen kunnen niet worden gedraaid. Stel de oriëntatie van '{InstancePath}' in op (0,0,0)."
+Common.UGCValidation.ErrorLabel.BodyBlocking_ZeroMeshSize,Rendermesh voor {meshName}: {details}. Vergroot de grootte van de mesh.
+Common.UGCValidation.ErrorLabel.BodyMesh_LoadFailed,Mesh voor '{meshName}' kon niet worden geladen. Controleer of de mesh bestaat en probeer het opnieuw.
+Common.UGCValidation.ErrorLabel.BodyMesh_SizeMismatch,{meshContext} is meer dan het maximale verschil van {maxDiff} in grootte in vergelijking met de andere mesh {otherMeshContext}. Je moet het model bewerken om de afmetingen ervan aan te passen.
+Common.UGCValidation.ErrorLabel.BodyPartCageDistanceValid_TooFar,Er is een hoekpunt gevonden op de cage mesh van {partName} dat {distance} studs verwijderd is van het dichtstbijzijnde rendermesh. Het maximum is {maxDistance} studs. Zorg ervoor dat de cage mesh beter overeenkomt met de vorm en grootte van de rendermesh.
+Common.UGCValidation.ErrorLabel.BoundingBox_ValidationFailed,{reason}
+Common.UGCValidation.ErrorLabel.CageMeshDistanceBounded_DistanceTooHigh,"De gemiddelde afstand tussen de buitenste cage en de mesh is te groot ({distance}). Pas de cage aan, zodat deze beter past bij de mesh."
+Common.UGCValidation.ErrorLabel.CageMeshDistanceBounded_MeshOutsideCage,De gemiddelde afstand tussen de buitenste cage en de mesh is te groot. De mesh lijkt zich buiten de buitenste cage te bevinden.
+Common.UGCValidation.ErrorLabel.CageUV_ExtraDuplicateUVs,Er zijn {count} UV-waarden in cage {cageType} van '{partName}' die niet bij het sjabloon horen. Corrigeer de cage-UV.
+Common.UGCValidation.ErrorLabel.CageUV_IncorrectUVCount,"De buitenste cage '{partName}' zou {requiredUVCount} unieke UV's moeten hebben, maar heeft er {actualUVCount}. Controleer of de mesh het vereiste aantal unieke UV's heeft en probeer het opnieuw."
+Common.UGCValidation.ErrorLabel.CageUV_InvalidUVValue,"Ongeldige UV-waarde gevonden buiten het bereik [0, 1] voor '{partName}'. Je moet de UV-kaart bewerken om dit probleem op te lossen."
+Common.UGCValidation.ErrorLabel.CageUV_RenderMeshBoundsCheckFailed,Uitvoeren van test van rendermesh binnen begrenzingsvak van gewijzigd gebied van buitenste cage mislukt. Controleer of zowel de cage meshes als de rendermesh bestaan en probeer het opnieuw.
+Common.UGCValidation.ErrorLabel.CageUV_RenderMeshOutsideModifiedArea,Slechts {currentPercent}% van de hoekpunten van de rendermesh bevinden zich in het gewijzigde {allowedArea}-gebied van de WrapLayer CageMesh (buitenste mesh). {requiredPercent}% is vereist. Verplaats de rendermesh zodat deze binnen het gewijzigde gebied van de WrapLayer CageMesh (buitenste mesh) valt.
+Common.UGCValidation.ErrorLabel.CageUV_TooFewMainModified,De WrapLayer CageMesh (buitenste mesh) voor een {assetTypeName} moet {requiredPercent}% van de cage-UV’s in het {mainArea}-gebied wijzigen. Momenteel is slechts {currentPercent}% gewijzigd. Verplaats je asset naar het juiste gebied van het lichaam.
+Common.UGCValidation.ErrorLabel.CageUV_TooManyExcludedModified,{modifiedPercent}% van de gewijzigde cage-UV’s in de WrapLayer CageMesh (buitenste mesh) bevinden zich buiten het verwachte gebied van het lichaam. Voor een {assetTypeName} mag niet meer dan {maxPercent}% van de gewijzigde UV’s zich buiten het {allowedArea}-gebied bevinden. Verplaats je asset naar het juiste gebied van het lichaam.
+Common.UGCValidation.ErrorLabel.CageUV_ZeroAreaTriangle,Driehoek met oppervlakte nul gedetecteerd in UV-kaart van '{partName}'. Je moet de UV-kaart bewerken om dit probleem op te lossen.
+Common.UGCValidation.ErrorLabel.CollisionFidelityWrong,'{InstancePath}' heeft een onjuiste CollisionFidelity. Er werd verwacht dat het {ExpectedFidelity} zou zijn.
 Common.UGCValidation.ErrorLabel.ContentNotEditable,{InstanceFullName}. {FieldName} bevat nog steeds niet-opgeslagen bewerkbare content. Sla deze op als een asset voordat je publiceert en probeer het opnieuw.
-Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,Lichaamsdeel '{bodyPartName}' in CurveAnimation heeft een Positie-track (translatie). Lichaamsdelen in animatie mogen alleen worden geroteerd; positie-tracks zijn niet toegestaan. Verwijder de Positie-track van dit lichaamsdeel.
+Common.UGCValidation.ErrorLabel.CoplanarTri_TooMany,Er zijn te veel coplanaire driehoeken gedetecteerd die elkaar kruisen in modelmesh '{MeshName}'. Het maximum is {MaxIntersections} intersecties in een {TriangleCount} driehoeksmesh. Bewerk je mesh om het aantal snijpunten van coplanaire driehoeken te verminderen.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,Lichaamsdeel '{bodyPartName}' in CurveAnimation beweegt {distance} studs vanaf de startpositie. De maximaal toegestane translatie is {maxDistance} studs. Verminder de positieverplaatsing van het lichaamsdeel.
-Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"CurveAnimation bevat HRD/DRD-botten en lichaamsdeel '{bodyPartName}' heeft een Position-track (translatie). Wanneer er botten aanwezig zijn in de animatie, mogen er geen lichaamsdelen translateren om joint-scheiding te voorkomen. Verwijder alle Positie-tracks van lichaamsdelen."
-Common.UGCValidation.ErrorLabel.CurveAnim_BonePositionNotAllowed,Bot {boneName} in CurveAnimation heeft een positie-track (translatie). HRD/DRD-botten mogen alleen worden geroteerd; positie-tracks veroorzaken joint-scheiding en zijn niet toegestaan. Verwijder de positie-animatie van dit bot.
+Common.UGCValidation.ErrorLabel.CurveAnim_BoneRequiresParent,Bottenmap '{boneName}' vereist dat '{parentBoneName}' ook in de animatie aanwezig is.
 Common.UGCValidation.ErrorLabel.CurveAnim_BoneTranslationExceedsThreshold,Bot '{boneName}' in CurveAnimation beweegt {distance} studs vanaf de startpositie. De maximaal toegestane translatie is {maxDistance} studs. Verminder de positieverplaatsing van het bot.
 Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation bevat HRD/DRD-botmappen die nog niet worden ondersteund. Verwijder alle botsubmappen voordat je gaat uploaden.
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,Lichaamsdelen in een CurveAnimation mogen niet lager zijn dan {minHeight} studs of meer dan {maxDistance} studs van het HumanoidRootPart verwijderd zijn. Corrigeer de animatie.
@@ -712,27 +741,27 @@ Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,CurveAnimatio
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"Map '{boneName}' in CurveAnimation is geen herkende HRD/DRD-botnaam. Submappen van animaties moeten geldige R15-lichaamsdelen of herkende botnamen zijn (bijv. HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase of vingerbotten zoals LeftHandIndex1)."
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidCurveData,CurveAnimation bevat Curves met ongeldige tijd of waarde. Corrigeer de animatie.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidInstanceTypes,CurveAnimation-hiërarchie mag alleen {allowedTypes} bevatten. Verwijder alle andere instantietypes.
-Common.UGCValidation.ErrorLabel.CurveAnim_InvalidLength,CurveAnimation moet tussen {minLength} en {maxLength} seconden lang zijn. Corrigeer de animatie.
+Common.UGCValidation.ErrorLabel.CurveAnim_InvalidLength,CurveAnimation {animationName} moet tussen {minLength} en {maxLength} seconden lang zijn. Corrigeer de animatie.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidMarkerData,"CurveAnimation bevat MarkerCurves met een ongeldige tijd of waarde, of de waarde is te lang. Corrigeer de animatie."
-Common.UGCValidation.ErrorLabel.CurveAnim_InvalidNumericalData,CurveAnimation bevat Curves met ongeldige numerieke gegevens. Corrigeer de animatie.
+Common.UGCValidation.ErrorLabel.CurveAnim_InvalidNumericalData,CurveAnimation {animationName} bevat Curves met ongeldige numerieke gegevens. Corrigeer de animatie.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidRigData,AnimationRigData is niet geslaagd voor de interne validatie. Zorg ervoor dat de AnimationRigData correct is ingesteld.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidRigDataR15Plus,AnimationRigData is niet geslaagd voor de interne R15+-validatie. Zorg ervoor dat de AnimationRigData correct is ingesteld voor botanimaties.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidTags,CurveAnimation mag slechts één tijdstempeltag bevatten. Verwijder alle andere tags.
-Common.UGCValidation.ErrorLabel.CurveAnim_JointRotationExceeded,In CurveAnimation op tijd {time} seconden heeft joint {bodyPart} een rotatiehoek van {rotation} graden ten opzichte van de rusthouding. De maximaal toegestane hoek is {maxRotation} graden. Corrigeer de animatie.
+Common.UGCValidation.ErrorLabel.CurveAnim_JointRotationExceeded,In CurveAnimation {animationName} op {time} seconden heeft gewricht {bodyPart} een rotatiehoek van {rotation} graden ten opzichte van de rusthouding. De maximaal toegestane hoek is {maxRotation} graden. Corrigeer de animatie.
 Common.UGCValidation.ErrorLabel.CurveAnim_KeysTooClose,CurveAnimation bevat Curve {curvePath} met sleutels die te dicht bij elkaar in de tijd liggen voor een animatie van maximaal {maxFPS} fps. Corrigeer de animatie.
 Common.UGCValidation.ErrorLabel.CurveAnim_LoopingNotEnabled,"Voor CurveAnimation '{animationName}' is Loop niet ingeschakeld. Animaties die naar de marktplaats worden geüpload, moeten in een loop staan. Schakel de property Loop in."
 Common.UGCValidation.ErrorLabel.CurveAnim_MultipleBodyRoots,CurveAnimation bevat meer dan één lichaamsdeel of HumanoidRootPart-map-child-items. Zorg ervoor dat er slechts één child-map is vernoemd naar een lichaamsdeel of HumanoidRootPart.
 Common.UGCValidation.ErrorLabel.CurveAnim_MultipleRigData,CurveAnimation bevat meer dan één AnimationRigData-child-items. Zorg ervoor dat er slechts één AnimationRigData-child is.
 Common.UGCValidation.ErrorLabel.CurveAnim_NegativeKeyTime,CurveAnimation bevat Curve {curvePath} met een sleutel die een negatieve tijd heeft. Corrigeer de animatie.
 Common.UGCValidation.ErrorLabel.CurveAnim_NoBodyRoot,CurveAnimation bevat nul lichaamsdelen of HumanoidRootPart-map-child-items. Zorg ervoor dat er één (en slechts één) child-map is vernoemd naar een lichaamsdeel of HumanoidRootPart.
-Common.UGCValidation.ErrorLabel.CurveAnim_NoJointManipulation,CurveAnimation bevat geen gewrichtsmanipulatie.
+Common.UGCValidation.ErrorLabel.CurveAnim_NoJointManipulation,CurveAnimation {animationName} bevat geen gewrichtsmanipulatie.
 Common.UGCValidation.ErrorLabel.CurveAnim_NoRigData,CurveAnimation bevat nul AnimationRigData-child-items. Zorg ervoor dat er één (en slechts één) AnimationRigData-child is.
 Common.UGCValidation.ErrorLabel.CurveAnim_NotCurveAnimation,De Animatie waarnaar wordt verwezen is geen CurveAnimation. Zorg ervoor dat de animatie correct is geüpload.
-Common.UGCValidation.ErrorLabel.CurveAnim_PartTooFar,In CurveAnimation op tijd {time} seconden bevindt lichaamsdeel {bodyPart} zich op {distance} studs van het HumanoidRootPart. Lichaamsdelen mogen niet meer dan {maxDistance} studs van het HumanoidRootPart verwijderd zijn. Corrigeer de animatie.
-Common.UGCValidation.ErrorLabel.CurveAnim_PartTooLow,In CurveAnimation op tijd {time} seconden bevindt lichaamsdeel {bodyPart}zich op een hoogte van {height} studs van het HumanoidRootPart. Lichaamsdelen mogen niet lager zijn dan {minHeight} studs van het HumanoidRootPart. Corrigeer de animatie.
-Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,CurveAnimation bevat positionele scheiding van lichaamsdelen. Alleen LowerTorso kan van positie veranderen. Alle andere lichaamsdelen kunnen alleen hun oriëntatie veranderen. {bodyPart} beweegt meer dan {maxMovement} studs van zijn parent. Corrigeer de animatie.
-Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,In CurveAnimation op tijd {time} seconden beweegt lichaamsdeel {bodyPart} met een rotatiesnelheid van {speed} graden/seconde. {maxSpeed} is de maximale snelheid in graden/seconde. Corrigeer de animatie.
-Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,In CurveAnimation op tijd {time} seconden beweegt lichaamsdeel {bodyPart} met een snelheid van {speed} studs/seconde. {maxSpeed} is de maximale snelheid in studs/seconde. Corrigeer de animatie.
+Common.UGCValidation.ErrorLabel.CurveAnim_PartTooFar,In CurveAnimation {animationName} op {time} seconden bevindt lichaamsdeel {bodyPart} zich op {distance} studs van het HumanoidRootPart. Lichaamsdelen mogen niet meer dan {maxDistance} studs van het HumanoidRootPart verwijderd zijn. Corrigeer de animatie.
+Common.UGCValidation.ErrorLabel.CurveAnim_PartTooLow,In CurveAnimation {animationName} op {time} seconden bevindt lichaamsdeel {bodyPart} zich op een hoogte van {height} studs van het HumanoidRootPart. Lichaamsdelen mogen niet lager zijn dan {minHeight} studs van het HumanoidRootPart. Corrigeer de animatie.
+Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,CurveAnimation {animationName} bevat positionele scheiding van lichaamsdelen. Alleen LowerTorso kan van positie veranderen. Alle andere lichaamsdelen kunnen alleen hun oriëntatie veranderen. {bodyPart} beweegt meer dan {maxMovement} studs van zijn parent. Corrigeer de animatie.
+Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,In CurveAnimation {animationName} op {time} seconden beweegt lichaamsdeel {bodyPart} met een rotatiesnelheid van {speed} graden/seconde. {maxSpeed} is de maximale snelheid in graden/seconde. Corrigeer de animatie.
+Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,In CurveAnimation {animationName} op {time} seconden beweegt lichaamsdeel {bodyPart} met een snelheid van {speed} studs/seconde. {maxSpeed} is de maximale snelheid in studs/seconde. Corrigeer de animatie.
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,Lichaamsdeel {bodyPart} in CurveAnimation beweegt meer dan {maxMovement} studs tussen frames. Corrigeer de animatie.
 Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,De CurveAnimation-structuur is ongeldig: {detail}. Zorg ervoor dat de animatie het verwachte schema volgt.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation heeft {count} descendants. Het maximaal toegestane aantal is {maxAllowed}. Verminder het aantal descendants.
@@ -741,12 +770,24 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation bev
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation bevat een MarkerCurve met {count} markers. {maxAllowed} is het maximum per MarkerCurve. Corrigeer de animatie.
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation bevat een onverwacht child: {childName}
 Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,"{InstanceFullName}.{FieldName} zet animatie {AssetId} vast op versie {Version}, maar animaties kunnen nog niet op een versie worden vastgezet. Verwijder '&version={Version}' en probeer het opnieuw."
+Common.UGCValidation.ErrorLabel.DescendantIdFetchFailed,Kan moderatieresultaten voor {InstanceFullName} niet ophalen. Zorg ervoor dat alle assets eigendom zijn van de huidige gebruiker.
+Common.UGCValidation.ErrorLabel.DescendantIdMalformed,Kan ContentId niet parseren in {InstanceFullName}.{FieldName}. Zorg ervoor dat je een geldige URL met een geldige ID gebruikt en probeer het opnieuw.
+Common.UGCValidation.ErrorLabel.DescendantIdMissing,{InstanceFullName}.{FieldName} mag niet leeg zijn. Zorg ervoor dat er een geldig asset is toegewezen en probeer het opnieuw.
+Common.UGCValidation.ErrorLabel.DescendantIdNotApproved,Asset(s) is/zijn niet goedgekeurd door de moderatie: {ModerationMessages}
+Common.UGCValidation.ErrorLabel.DescendantIdNotOwned,Asset {AssetId} ({InstanceFullName}.{FieldName}) is geen eigendom van een geautoriseerde creator.
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,Asset {AssetId} ({InstanceFullName}.{FieldName}) is niet gepubliceerd. Publiceer de asset en probeer het opnieuw.
-Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,"{InstanceFullName}.{FieldName} gebruikt versie {Version} van asset {AssetId}, maar alleen versie 1 wordt momenteel ondersteund. Gebruik versie 1 en probeer het opnieuw."
+Common.UGCValidation.ErrorLabel.DescendantIdVersionNotLatest,"{InstanceFullName}.{FieldName} gebruikt versie {Version} van asset {AssetId}, maar alleen de meest recente versie, {LatestVersion}, kan momenteel worden gebruikt. Gebruik versie {LatestVersion} of verwijder '&version={Version}' en probeer het opnieuw."
+Common.UGCValidation.ErrorLabel.DescendantIdsTooMany,"De upload van het model heeft te veel onderliggende assets (meshes, texturen, etc.) en kan niet in deze staat worden verwerkt. Je moet het model opnieuw rangschikken."
+Common.UGCValidation.ErrorLabel.DynHead_ControlsInactive,{headName} mesh ({meshId}) heeft inactieve FACS-besturingselementen: {controlList}
+Common.UGCValidation.ErrorLabel.DynHead_ControlsMissing,{headName} mesh ({meshId}) mist FACS-besturingselementen: {controlList}
+Common.UGCValidation.ErrorLabel.DynHead_FacsMissing,Validatie voor dynamisch hoofd '{headName}' is mislukt vanwege ontbrekende FACS-informatie. Je moet FACS-besturingselementen opgeven voor ten minste 17 poses (zie documentatie).
+Common.UGCValidation.ErrorLabel.DynHead_JointAccumulatedExceeded,Gezichtsanimaties van het hoofd kunnen worden gecombineerd om het gewricht {jointName} ver buiten het hoofd uit te breiden. Bewerk je gezichtsanimaties en probeer het opnieuw.
+Common.UGCValidation.ErrorLabel.DynHead_JointBoundsCheckFailed,Kan de gewrichtsgrenzen van gezichtsanimatie niet valideren. Probeer het later opnieuw.
+Common.UGCValidation.ErrorLabel.DynHead_JointDirectExceeded,Gezichtsanimatie van het hoofd {actionName} resulteert erin dat gewrichten aanzienlijk buiten het hoofd worden verplaatst. Bewerk je gezichtsanimaties en probeer het opnieuw.
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,"Dynamische hoofden op de marktplaats moeten de juiste cage hebben, zodat de oog- en mondhoekpunten op de cage overeenkomen met de mesh-hoekpunten. Verbeter je cage en de uitlijning ervan met de mesh."
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,De landmarks van het linkeroog in de cage voor het dynamische hoofd zijn niet goed uitgelijnd met de mesh. Pas de oogcage aan zodat de mesh van het linkeroog binnen het geprojecteerde gebied van de cage valt.
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,De landmarks van de mond in de cage voor het dynamische hoofd zijn niet goed uitgelijnd met de mesh. Pas de mondcage aan zodat de mondmesh binnen het geprojecteerde cagegebied valt.
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,"De landmarks van het rechteroog in de cage voor het dynamische hoofd zijn niet goed uitgelijnd met de mesh. Pas de oogcage aan, zodat de mesh van het rechteroog binnen het geprojecteerde cagegebied valt."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,"De landmarks van de kooi van het linkeroog op het scherm (rode stippen aan de linkerkant van het hoofd in de visualisatie-plugin) zijn niet goed uitgelijnd met de mesh: sommige kooipunten bevinden zich binnen de hoofdmesh (de mesh steekt door de kooi heen) of te ver daarbuiten. Pas de bijbehorende kooi aan, zodat deze op of net buiten de mesh rond dit oog ligt."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,"De landmarks van de kooi van de mond (groene stippen in de visualisatie-plugin) zijn niet goed uitgelijnd met de mesh: sommige kooipunten bevinden zich binnen de hoofdmesh (de mesh steekt door de kooi heen) of te ver daarbuiten. Pas de mondkooi aan, zodat deze op of net buiten de mesh rond de mond ligt."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,"De landmarks van de kooi van het rechteroog op het scherm (blauwe stippen aan de rechterkant van het hoofd in de visualisatie-plugin) zijn niet goed uitgelijnd met de mesh: sommige kooipunten bevinden zich binnen de hoofdmesh (de mesh steekt door de kooi heen) of te ver daarbuiten. Pas de bijbehorende kooi aan, zodat deze op of net buiten de mesh rond dit oog ligt."
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Kan de glimlachuitdrukking van het Dynamische hoofd niet detecteren. Pas de cage-landmarks voor de mond aan zodat ze overeenkomen met de positie van de mond op het hoofd en zorg dat deze een glimlachuitdrukking kan weergeven.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,Kan de uitdrukking voor het sluiten van het linkeroog van het Dynamische hoofd niet detecteren. Pas de cage-landmarks voor het linkeroog aan zodat ze overeenkomen met de positie van het linkeroog op het hoofd en zorg dat het oog kan worden gesloten.
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,Dynamische hoofden op de marktplaats hebben geen hoofdcages. Maak een hoofdcage voor het dynamische hoofd.
@@ -754,9 +795,9 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,Kan de uitdrukking voor 
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"Dynamische hoofden op de marktplaats moeten geanimeerd zijn, maar dit hoofd heeft geen FACS-gegevens."
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,Kan de uitdrukking voor het sluiten van het rechteroog van het Dynamische hoofd niet detecteren. Pas de cage-landmarks voor het rechteroog aan zodat ze overeenkomen met de positie van het rechteroog op het hoofd en zorg dat het oog kan worden gesloten.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,Kan de fronsuitdrukking van het Dynamische hoofd niet detecteren. Pas de cage-landmarks voor de mond aan zodat ze overeenkomen met de positie van de mond op het hoofd en zorg dat de fronsuitdrukking kan worden getoond.
-Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Emissief gebied boven de drempel.
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Lichaamsdeelmesh '{meshName}' is {emissivePercentage}% emissief. De emissieve dekking mag niet hoger zijn dan {maxEmissivePercentage}%. Verminder de intensiteit of dekking van het emissiemasker.
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} straalt te veel. Het stralende gebied × de intensiteit overschrijdt de limiet (momenteel {emissivePercentage}%, moet {maxEmissivePercentage}% of minder zijn). Verklein het stralende gebied of verlaag de EmissiveStrength."
-Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Emissief gebied overschreden.
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,"Mesh '{meshName}' heeft een gewogen emissief oppervlak van {emissiveArea} vierkante studs, wat het maximum van {maxEmissiveArea} vierkante studs overschrijdt. Verminder de intensiteit of dekking van het emissiemasker."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} straalt te veel. Het stralende gebied × de intensiteit overschrijdt de limiet (momenteel {emissiveArea}, moet {maxEmissiveArea} of minder zijn). Verklein het stralende gebied of verlaag de EmissiveStrength."
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedInExperience,Emissieve maps worden niet ondersteund voor items die in ervaringen zijn gemaakt. Verwijder EmissiveMaskContent uit elke SurfaceAppearance.
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedOnDecal,"Stickers kunnen niet emissief zijn. Verwijder op '{InstancePath}' EmissiveMaskContent, stel EmissiveStrength in op 1 en stel EmissiveTint in op wit."
@@ -764,19 +805,29 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribut
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Er ontbreekt een geldige UGC-emotemarker in de gepubliceerde animatie. Publiceer de animatie opnieuw.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,De maximale translatie van het onderdeel kon niet worden berekend op basis van de gepubliceerde animatiegegevens. Publiceer de animatie opnieuw.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"De gepubliceerde animatie geeft een maximale translatie van het onderdeel van {taggedTranslation} studs aan, maar de animatiegegevens berekenen {calculatedTranslation} studs. Publiceer de animatie opnieuw."
+Common.UGCValidation.ErrorLabel.ExperienceCreatorNotSupported,"Makers van ervaringen kunnen geen avataritems maken. CreatorType: {CreatorType}, CreatorId: {CreatorId}."
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"Het hoofd moet boven UpperTorso worden geplaatst. Het middelpunt van het hoofd bevindt zich onder de bovenkant van de romp, wat aangeeft dat de hoofdmesh is ingeklapt of verkeerd is geplaatst."
+Common.UGCValidation.ErrorLabel.Extents_ParentBelowPart,{upperPart} kan niet onder {lowerPart} uitsteken. Je kunt aanpassen hoe de onderdelen in elkaar zitten door {attachmentName} te verplaatsen.
+Common.UGCValidation.ErrorLabel.Extents_PartAboveParent,{lowerPart} kan niet uitsteken boven {upperPart}. Je kunt aanpassen hoe de onderdelen in elkaar worden gezet door {attachmentName} te verplaatsen.
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,De eigenschap InternalOverrideFACSData op FaceControls moet leeg zijn bij het uploaden.
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,Op het basisgezicht ontbreken de vereiste oogkenmerken. Voeg ogen toe aan het basisgezicht en probeer het opnieuw.
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,Op het basisgezicht ontbreekt een vereiste mond. Voeg een mond toe aan het basisgezicht en probeer het opnieuw.
 Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,"Kan geen blije expressie detecteren. Pas de mondcage of de FACS voor een blije uitdrukking aan, zodat het geprojecteerde mondmesh vervormt zoals verwacht."
-Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,"Kan de uitdrukking voor het sluiten van het linkeroog niet detecteren. Pas de cage van het linkeroog of de FACS voor het sluiten van het linkeroog aan, zodat het geprojecteerde oogmesh vervormt zoals verwacht."
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,Het linkeroog op het scherm (rode stippen aan de linkerkant van het hoofd in de Visualisatie-plugin) sluit niet voldoende. Controleer de FACS-besturingselementen van het rechteroog en de bijbehorende kooi.
 Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,"Kan de uitdrukking voor het openen van de mond niet detecteren. Pas de mondcage of de FACS voor een open mond aan, zodat het geprojecteerde mondmesh vervormt zoals verwacht."
-Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,"Kan de uitdrukking voor het sluiten van het rechteroog niet detecteren. Pas de cage van het rechteroog of de FACS voor het sluiten van het rechteroog aan, zodat het geprojecteerde oogmesh vervormt zoals verwacht."
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,Het rechteroog op het scherm (blauwe stippen aan de rechterkant van het hoofd in de Visualisatie-plugin) sluit niet voldoende. Controleer de FACS-besturingselementen van het linkeroog en de bijbehorende kooi.
 Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,"Kan geen verdrietige expressie detecteren. Pas de mondcage of de FACS voor een verdrietige uitdrukking aan, zodat het geprojecteerde mondmesh vervormt zoals verwacht."
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Er is gedetecteerd dat FACS je hoofd vergroot tot {modPercent}%, maar het wijzigen van het hoofd is in strijd met het marktplaatsbeleid voor gezichtsanimaties."
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Dynamische hoofden mogen maximaal {maxFacsJointCount} FACS-joints hebben, maar dit hoofd heeft er {actualJointCount}. Verminder het aantal FACS-joints en probeer het opnieuw."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"Er is gedetecteerd dat FACS je hoofd verkleint tot {modPercent}%, maar het wijzigen van het hoofd is in strijd met het marktplaatsbeleid voor gezichtsanimaties."
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,Het uploadformaat komt niet overeen met de verwachte mappenstructuur. Probeer het opnieuw of dien een bugrapport in.
+Common.UGCValidation.ErrorLabel.HSRAssetHasChildren,WrapLayer HSR-asset heeft onderliggende items onder de hoofdinstantie HiddenSurfaceRemovalAsset.
+Common.UGCValidation.ErrorLabel.HSRAssetIdInvalidUrl,'{InstancePath}' heeft een HSRAssetId met een ongeldige URL.
+Common.UGCValidation.ErrorLabel.HSRAssetIdRequired,'{InstancePath}' vereist dat een HSRAssetId wordt ingesteld.
+Common.UGCValidation.ErrorLabel.HSRAssetInvalidRoot,WrapLayer HSR-asset heeft niet precies 1 HiddenSurfaceRemovalAsset-root.
+Common.UGCValidation.ErrorLabel.HSRDataNotReady,Ontbrekende HSR-gegevens voor '{InstancePath}'. Probeer het opnieuw.
+Common.UGCValidation.ErrorLabel.HSRMeshIdValidationError,Er is een fout opgetreden bij het valideren van HSR-mesh-id's voor '{InstancePath}'.
+Common.UGCValidation.ErrorLabel.HSRMeshIdsMismatch,Ongeldige HSR-gegevens gedetecteerd voor '{InstancePath}'. Genereer het asset opnieuw met de tool voor het passen van accessoires en probeer het nog eens.
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,"Bot {bonePath} is te ver buiten het mesh-onderdeel {partName}, plaats het dichter bij de grens van de mesh-onderdeelgrootte."
 Common.UGCValidation.ErrorLabel.HrdBone_TooCloseToParent,Bot {bonePath} is te dicht bij zijn parent. Pas de positie van het bot enigszins aan.
 Common.UGCValidation.ErrorLabel.HrdBone_TransformNotIdentity,"Bot {bonePath} heeft een transform-property, maar deze is nog niet ingeschakeld voor marktplaatsuploads. Stel deze opnieuw in op de identiteit CFrame."
@@ -797,6 +848,8 @@ Common.UGCValidation.ErrorLabel.HrdProperties_UncontainedJoint,"HRD-property {jo
 Common.UGCValidation.ErrorLabel.HrdTposePosition,Joint {jointName} heeft een TposeAdjustment-positie buiten de aanvaardbare grenzen. Verminder de offset zodat deze binnen +-({offsetLimit}) valt.
 Common.UGCValidation.ErrorLabel.HrdTposeRotation,Joint {jointName} heeft een TposeAdjustment die meer dan {degLimit} graden afwijkt van de aanbevolen oriëntatie {expectedOrientation}.
 Common.UGCValidation.ErrorLabel.InstanceTagsFound,"De volgende instanties hebben tags, maar marktplaats-items mogen geen tags hebben: {ProblematicDescendantPaths}"
+Common.UGCValidation.ErrorLabel.InstanceTreeBannedClass,'{InstancePath}' is van het type {ClassName} dat niet is toegestaan in marktplaats-assets.
+Common.UGCValidation.ErrorLabel.InstanceTreeBannedName,'{InstancePath}' heeft een naam die gereserveerd is en niet kan worden gebruikt in marktplaats-assets.
 Common.UGCValidation.ErrorLabel.InternalError,"Je asset kon niet correct worden gevalideerd vanwege een interne fout. Als dit probleem zich blijft voordoen, maak dan een bugrapport aan. ValidationJobId: {ValidationJobId}"
 Common.UGCValidation.ErrorLabel.JointRotAtt_Moved,"{instPath} is een verplaatste jointRotation, maar marktplaatsuploads passen deze instantie mogelijk nog niet aan. Stel de positie opnieuw in op {expectedPosition}."
 Common.UGCValidation.ErrorLabel.JointRotAtt_MultipleAttachments,Instantie {parentPath} mag niet meer dan 1 JointRotation-kind hebben.
@@ -804,7 +857,21 @@ Common.UGCValidation.ErrorLabel.JointRotAtt_Rotated,"{instPath} is een geroteerd
 Common.UGCValidation.ErrorLabel.JointRotAtt_UnrecognizedParent,"Instantie {parentPath} heeft een JointRotation-kind, maar dit maakt geen deel uit van het toegestane R15plus-schema."
 Common.UGCValidation.ErrorLabel.JointRotAtt_WrongInstanceClass,"Instantie {instPath} heet JointRotation, maar JointRotation is gereserveerd voor bijlagen die ondergeschikt zijn aan een bijlage."
 Common.UGCValidation.ErrorLabel.LCDeformTooLarge,Je kleding in laagjes vervormt meer dan de aanvaardbare grootte van {maxSize} wanneer deze op een avatar wordt geplaatst.
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NoHandle,Accessoire '{accessoryName}' heeft geen Handle. Kan gelaagde kleding buiten het bereik niet valideren.
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NoWrapLayer,Accessoire '{accessoryName}' heeft geen WrapLayer. Kan gelaagde kleding buiten het bereik niet valideren.
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NonZeroMaxSize,Accessoire heeft een MaxSize die niet nul is.
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NonZeroOffset,Accessoire heeft een verschuiving die niet nul is.
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_OutOfBounds,"Validatie van kleding in laagjes is mislukt voor '{accessoryName}'. Wanneer gelaagde kleding wordt vervormd, wordt deze te groot."
 Common.UGCValidation.ErrorLabel.LeaderVertsNearCageIslands,Wimper heeft hoekpunten die zijn geskinned naar RBX_Leader en die te ver verwijderd zijn van de oogpunten op de binnencage. Zorg ervoor dat alle hoekpunten die zijn geskinned naar RBX_Leader dichter bij het ooggebied van de binnencage zijn gepositioneerd
+Common.UGCValidation.ErrorLabel.LegsSeparated_HipAttachmentOutOfRange,{attachmentPath} is {currentValue} en kan niet {comparison} {cutoff} zijn. Corrigeer de bevestiging.
+Common.UGCValidation.ErrorLabel.LegsSeparated_LegsOverlap,De benen overlappen elkaar met {overlap} studs op de x-as. {leftMax} is het maximum voor het linkerbeen. {rightMax} is het maximum voor het rechterbeen. Pas de benen aan om de overlapping te verminderen.
+Common.UGCValidation.ErrorLabel.MakeupDecal_FailedToLoadTexture,Laden van {fieldName} voor decal {instanceName} is mislukt. Controleer of TextureContent bestaat en geldig is en probeer het opnieuw.
+Common.UGCValidation.ErrorLabel.MakeupDecal_FailedToLoadTextureData,Laden van textuurgegevens voor '{fullName}' mislukt. Controleer of de textuur bestaat en probeer het opnieuw.
+Common.UGCValidation.ErrorLabel.MakeupDecal_NoColorMap,Geen ColorMap gevonden voor decal {instanceName}. Make-updecals moeten een geldige ColorMap hebben.
+Common.UGCValidation.ErrorLabel.MakeupDecal_TextureTooBig,De textuurresolutie {sizeX}x{sizeY} px die is gevonden in '{fullName}' is hoger dan de maximaal ondersteunde waarde van {maxSize}x{maxSize} px voor veld '{fieldName}'.
+Common.UGCValidation.ErrorLabel.MakeupDecal_UVZoneExcludeViolation,Ondoorzichtige pixels in de ColorMap voor {instanceName} werden gevonden binnen een beperkt UV-gebied van [{minBound}] en [{maxBound}] voor het assettype {assetTypeName}.
+Common.UGCValidation.ErrorLabel.MakeupDecal_UVZoneIncludeViolation,Het ondoorzichtige gebied van de ColorMap voor {instanceName} valt niet binnen het toegestane UV-gebied van [{minBound}] en [{maxBound}] voor het assettype {assetTypeName}.
+Common.UGCValidation.ErrorLabel.MaterialNotAllowed,De volgende instanties hebben een ongeldig materiaal: {InstanceNameList}. Alleen deze materialen zijn toegestaan: {AllowedMaterials}.
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceAvatar_CageInsideMesh,Lichaamscage kruist met de lichaamsmesh. {negtiveSDFPercent}% van de hoekpunten van de lichaamscage bevinden zich binnen de lichaamsmesh.
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceAvatar_CageTooFar,"De body cage bevindt zich te ver van de body mesh. De maximale afstand tussen de body cage en de mesh is {max_sdf}. Dit ligt boven de toegestane drempelwaarde van {max_sdf_threshold}.
 "
@@ -815,17 +882,61 @@ Common.UGCValidation.ErrorLabel.MeasureCageMeshDistance_CageTooFar,"De buitenste
 Common.UGCValidation.ErrorLabel.MeasureCageRelevancy,{outer_cage_face_irrelevant_percent}% van de gewijzigde hoekpunten van de buitenste cage bedekken het accessoire niet. Zorg ervoor dat je de buitenste cage alleen verplaatst waar dat nodig is.
 Common.UGCValidation.ErrorLabel.MeasureCageUV,Er zijn {incorrect_uv_count} UV-waarden in cage {cage_name} die onjuist zijn of niet bij het sjabloon horen. Corrigeer de cage-UV.
 Common.UGCValidation.ErrorLabel.MeasureMeshOutsideOuterCage,{mesh_outside_outer_cage_percent}% van de mesh-hoekpunten voor het accessoire bevinden zich buiten de buitenste cage. Voer aanpassingen uit om meer van het accessoire tussen de cages te plaatsen.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ExceedsBounds,"{meshName} heeft een grotere afmeting dan de maximaal toegestane begrenzingsafmeting. De maximale grootte voor type {assetTypeName} is [{maxSizeX}, {maxSizeY}, {maxSizeZ}]."
+Common.UGCValidation.ErrorLabel.MeshGeometry_NotCentered,{meshName}.{fieldName} heeft meshgegevens die niet gecentreerd zijn. Importeer deze mesh opnieuw met de Roblox 3D-importer en zorg ervoor dat er geen losse geometrie in het bronbestand zit.
+Common.UGCValidation.ErrorLabel.MeshGeometry_PositionOutOfBounds,De positie ligt buiten de grenzen.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleAboveMaximum,{meshName} is vergroot tot {scaleMultiple} keer de oorspronkelijke meshgrootte. Het maximum is {maxScaleMultiple} keer. Exporteer of importeer de mesh opnieuw op de gewenste grootte in plaats van deze in Studio te vergroten.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleBelowMinimum,{meshName} is verkleind tot {scalePercent}% van de oorspronkelijke meshgrootte. Het minimum is {minScalePercent}%. Exporteer of importeer de mesh opnieuw op de gewenste grootte in plaats van deze in Studio te verkleinen.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleNotPositive,"{meshName} heeft een schaal van nul of een negatieve schaal. Gebruik positieve schaalwaarden. Om een mesh te spiegelen, draai je deze om in je 3D-modelleringssoftware en exporteer je deze opnieuw."
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooLarge,De schaal van mesh {meshName} is te groot.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooSmall,De schaal van de mesh is te klein.
+Common.UGCValidation.ErrorLabel.MeshGeometry_SurfaceAreaExceeded,"De totale oppervlakte van modelmesh '{meshName}' is {surfaceArea}, deze mag niet groter zijn dan {maxSurfaceArea}. Je moet het aantal en/of de grootte van alle driehoeken verminderen."
+Common.UGCValidation.ErrorLabel.MeshGeometry_TotalTriangleCountExceeded,De meshresolutie van '{triangleCount}' voor '{assetTypeName}' is hoger dan het maximaal ondersteunde aantal driehoeken '{maxTriangles}'. Je moet de topologie van je model opnieuw bepalen om het aantal driehoeken te verminderen.
+Common.UGCValidation.ErrorLabel.MeshGeometry_TriangleCountExceeded,De resolutie van modelmesh {meshName} van {triangleCount} is hoger dan de maximaal ondersteunde waarde van {maxTriangles}. Je moet de topologie van je model opnieuw bepalen en het opnieuw proberen.
+Common.UGCValidation.ErrorLabel.MeshGeometry_VertexDensityExceeded,De maximale hoekpuntdichtheid is overschreden. Verminder het aantal hoekpunten dat zeer dicht bij elkaar ligt.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ZeroAreaTriangle,Driehoek met oppervlakte nul gedetecteerd in modelmesh {meshName}. Je moet de mesh bewerken om driehoeken met oppervlakte nul te verwijderen.
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,{partName} -mesh {axis} asgrootte van '{currentSize}'-studs is groter dan de maximaal toegestane individuele onderdeelgrootte van '{maxSize}'-studs. Verklein de mesh.
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,{partName}-mesh {axis} asgrootte  van '{currentSize}'-studs is kleiner dan de minimaal toegestane individuele onderdeelgrootte van '{minSize}'-studs. Vergroot de mesh.
+Common.UGCValidation.ErrorLabel.MeshSize_LoadFailed,
+Common.UGCValidation.ErrorLabel.MeshSize_Mismatch,De berekende meshgrootte voor {meshName} komt niet overeen met de waarde van de property MeshSize
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,Bijlage {attName} moet precies één keer bestaan binnen {partName}-descendants.
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}' (of de descendants ervan) bevatten attributen. Je moet attributen verwijderen uit het volgende: {InstanceNameList}
+Common.UGCValidation.ErrorLabel.NoMeshBelowFeet_PartBelowFeet,{partName} komt tot {distance} studs onder de onderkant van de voeten uit. Alleen de benen mogen de grond raken en andere lichaamsdelen mogen maximaal {maxDistance} studs onder de grond uitkomen. Maak {partName} korter of plaats het hoger.
+Common.UGCValidation.ErrorLabel.Pose_AngleFromXYPlane,"{assetName} staat onder een hoek van {angle} graden ten opzichte van het X,Y-vlak, het moet binnen {limit} graden liggen. Zorg ervoor dat het personage in een I-pose, A-pose of T-pose staat."
+Common.UGCValidation.ErrorLabel.Pose_AngleOnXYPlane,"{assetName} staat onder een hoek van {angle} ten opzichte van de [{xVector}]-vector op het X,Y-vlak. Deze hoek moet tussen {minAngle} en {maxAngle} graden liggen. Zorg ervoor dat het personage in een I-pose, A-pose of T-pose staat."
+Common.UGCValidation.ErrorLabel.Pose_CFrameCalculationFailed,"Kan CFrame van asset {assetName} niet berekenen. Zorg ervoor dat het personage in een I-pose, A-pose of T-pose staat en dat de onderdelen niet allemaal in dezelfde positie staan."
+Common.UGCValidation.ErrorLabel.Pose_PointingAlongZVector,"{assetName} wijst langs de wereld-Z-vector. Zorg ervoor dat het personage in een I-pose, A-pose of T-pose staat."
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' heeft ongeldige eigenschappen: {ProblematicProperties}. Een weergegeven bytelimiet is overschreden (een limiet van 0 betekent dat de eigenschap leeg moet zijn); elke andere eigenschap bevat NaN/Inf-waarden of overschrijdt de standaardafmetingslimiet.
+Common.UGCValidation.ErrorLabel.PropertyNotFound,Eigenschap '{PropertyName}' is niet gevonden op '{InstancePath}'.
+Common.UGCValidation.ErrorLabel.PropertyValueInvalid,Eigenschap '{PropertyName}' op '{InstancePath}' is ongeldig. Er werd verwacht dat het {ComparisonMethod} {ExpectedValue} zou zijn.
 Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,"Er ontbreken een of meer vereiste gezichtsuitdrukkingen (oog gesloten, mond open, blij, verdrietig) in de weergegeven animatie."
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,Rig-bevestiging '{AttachmentName}' in '{PartName}' moet worden geplaatst nabij de gewrichtsgrens waar dit lichaamsdeel verbonden is met een aangrenzend deel. De huidige positie [{CurrentPosition}] bevindt zich te ver van het verbindingsvlak. Verplaats het dichter bij [{ClosestValidPosition}].
+Common.UGCValidation.ErrorLabel.SAOpacity_FailedToLoadTexture,Laden van textuurgegevens '{FieldName}' voor SurfaceAppearance '{FullName}' is mislukt. Controleer of de textuur bestaat en probeer het opnieuw.
+Common.UGCValidation.ErrorLabel.SAOpacity_InvalidAlphaMode,SurfaceAppearance ({FullName}) heeft een ongeldige AlphaMode. Verwacht Enum.AlphaMode.Overlay.
+Common.UGCValidation.ErrorLabel.SAOpacity_TextureNotOpaque,Textuur '{FullName}' is niet volledig ondoorzichtig. Gebruik een ondoorzichtige textuur.
+Common.UGCValidation.ErrorLabel.ScaleTypeInvalid,"De waarde AvatarPartScaleType in '{ParentName}' is ongeldig. Geaccepteerde waarden zijn Classic, ProportionsSlender of ProportionsNormal."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Om een asset naar Roblox te uploaden, moet je precies 1 instantie en het bijbehorende uploadtype selecteren."
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,Dit asset is te groot om te uploaden ({sizeBytes} bytes overschrijdt het maximum van {maxSizeBytes} bytes). Verklein deze en probeer het opnieuw.
+Common.UGCValidation.ErrorLabel.SurfaceAppearance_MissingSA,({MeshPartFullName}) heeft een lege TextureID en geen onderliggende SurfaceAppearance-instantie. Je moet er ten minste één definiëren.
+Common.UGCValidation.ErrorLabel.SurfaceAppearance_TextureAndSABothDefined,TextureID en SurfaceAppearance zijn beide gedefinieerd voor MeshPart ({MeshPartFullName}). Bij het publiceren wordt alleen SurfaceAppearance gebruikt.
+Common.UGCValidation.ErrorLabel.TexturePackInvalidURL,'{SurfaceAppearanceName}' heeft een 'TexturePack'-property met een ongeldige URL. Corrigeer de URL.
+Common.UGCValidation.ErrorLabel.TexturePack_DownloadFailed,Kan TexturePack voor SurfaceAppearance '{SurfaceAppearanceName}' niet downloaden.
+Common.UGCValidation.ErrorLabel.TexturePack_Mismatch,De texturen in SurfaceAppearance '{SurfaceAppearanceName}' komen niet overeen met die in het bijbehorende TexturePack. Corrigeer het TexturePack.
+Common.UGCValidation.ErrorLabel.TextureSize_FailedToLoad,Laden van textuurgegevens voor '{FullName}' is mislukt. Controleer of de textuur bestaat en probeer het opnieuw.
+Common.UGCValidation.ErrorLabel.TextureSize_TooBig,De textuurresolutie {Width}x{Height} px die is gevonden in '{FullName}' is hoger dan de maximaal ondersteunde waarde van {MaxSize}x{MaxSize} px voor veld '{FieldName}'.
+Common.UGCValidation.ErrorLabel.ThumbnailInvalidTarget,Ongeldig doel-asset voor het genereren van miniaturen. Er werd verwacht dat het '{ExpectedTarget}' zou zijn.
+Common.UGCValidation.ErrorLabel.ThumbnailOutsideView,Asset '{InstancePath}' bevindt zich buiten het camerabeeld van de miniatuurafbeelding. Plaats het item opnieuw in het midden van het camerabeeld.
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"Het mesh-onderdeel van het hoofd heeft gezichtsanimaties voor {jointName}, die niet in FACS kunnen worden gebruikt. Geef deze joint een andere naam en importeer je hoofd opnieuw."
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,"Lichaamsdeel {partName} is geskinned naar virtuele joint {jointName}, die geen deel uitmaakt van het R15plus-schema."
+Common.UGCValidation.ErrorLabel.UnsupportedCreatorType,"Niet-ondersteund creatortype. CreatorType: {CreatorType}, CreatorId: {CreatorId}."
+Common.UGCValidation.ErrorLabel.VertexColors_NotOpaque,Ongeldige hoekpuntkleur gevonden in meshmodel '{MeshName}'. Je moet de kleurenkaart bewerken zodat deze volledig wit is {TransparencyNote} en het opnieuw proberen.
+Common.UGCValidation.ErrorLabel.VerticesNotCoincident_TooManySimilar,{cageName} heeft {percentage}% van de hoekpunten die te dicht bij elkaar liggen. Bewerk de hoekpunten zodat er maximaal {threshold}% samenvallen of dicht bij elkaar liggen.
+Common.UGCValidation.ErrorLabel.WrapTexture_FailedToLoadCage,Laden van ReferenceCageContent voor {instanceName} is mislukt.
+Common.UGCValidation.ErrorLabel.WrapTexture_FailedToLoadUV,Laden van UV's voor '{instanceName}' is mislukt. Controleer of de UV-kaart bestaat en probeer het opnieuw.
+Common.UGCValidation.ErrorLabel.WrapTexture_InvalidMaxBound,{instanceName}.UVMaxBound [{actual}] komt niet overeen met de vereiste UVMaxBound van [{expected}].
+Common.UGCValidation.ErrorLabel.WrapTexture_InvalidMinBound,{instanceName}.UVMinBound [{actual}] komt niet overeen met de vereiste UVMinBound van [{expected}].
+Common.UGCValidation.ErrorLabel.WrapTexture_InvalidUV,Ongeldige UV-waarde gevonden voor cage van '{instanceName}'. Je moet de UV-kaart bewerken om dit probleem op te lossen.
+Common.UGCValidation.ErrorLabel.WrapTexture_NoCage,Geen ReferenceCageContent verstrekt voor {instanceName}.
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,Ga naar Instellingen
@@ -1173,6 +1284,7 @@ CoreScripts.TextChat.InputBar.Hint.GamepadConnectedConfirm,
 CoreScripts.TextChat.InputBar.Hint.MouseKeyboard,Klik hier of druk op de {KEY}-toets om te chatten
 CoreScripts.TextChat.InputBar.Hint.PrivacySettingsDisabled,Je chat-instellingen voorkomen dat je berichten kunt verzenden en ontvangen.
 CoreScripts.TextChat.InputBar.Hint.Touch,Tik hier om te chatten
+CoreScripts.TextChat.MessageStatus.Warning.DictationRateLimited,Wacht voordat je nog een bericht verzendt. Spraakgestuurd typen is gepauzeerd.
 CoreScripts.TextChat.MessageStatus.Warning.Floodchecked,Je moet wachten voordat je een ander bericht kunt verzenden.
 CoreScripts.TextChat.MessageStatus.Warning.InvalidPrivacySettings,
 CoreScripts.TextChat.MessageStatus.Warning.MessageTooLong,Je bericht overschrijdt de maximale berichtlengte.
@@ -1719,6 +1831,7 @@ Feature.Avatar.Action.Rename,Hernoemen
 Feature.Avatar.Action.RenameSet,Set hernoemen
 Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,Laatst opgeslagen avatar herstellen
+Feature.Avatar.Action.Retry,
 Feature.Avatar.Action.Revert,Terugzetten
 Feature.Avatar.Action.Rotate,Roteren
 Feature.Avatar.Action.Save,
@@ -1932,6 +2045,7 @@ Feature.Avatar.Label.FaceMakeup,
 Feature.Avatar.Label.FacialAnimation,Facial Animation
 Feature.Avatar.Label.Fall,Vallen
 Feature.Avatar.Label.FallAnimations,Valanimaties
+Feature.Avatar.Label.FromMarketplace,Van de Marktplaats
 Feature.Avatar.Label.Front,Voorzijde
 Feature.Avatar.Label.FullBody,Volledig lichaam
 Feature.Avatar.Label.FullMasks,Volledige maskers
@@ -1989,6 +2103,7 @@ Feature.Avatar.Label.Name,
 Feature.Avatar.Label.Neck,Nek
 Feature.Avatar.Label.Newest,Nieuwste
 Feature.Avatar.Label.NoExpiredItems,Geen verlopen {itemType}
+Feature.Avatar.Label.NoInventorySearchResults,Geen items komen overeen met '{query}'
 Feature.Avatar.Label.NoItems,Geen {itemType}
 Feature.Avatar.Label.NoLongerAvailableInCollection,Het is dan niet meer beschikbaar in deze verzameling
 Feature.Avatar.Label.NoSets,Nog geen sets
@@ -2185,6 +2300,7 @@ Feature.Avatar.Message.UnknownErrorCreatingOutfit,Er is een onbekende fout opget
 Feature.Avatar.Message.UpdateOutfitSuccess,Bijgewerkt!
 Feature.Avatar.Message.UpdateRequired,Update vereist. Update Roblox naar de nieuwste versie om dit item te kunnen bekijken.
 Feature.Avatar.Placeholder.NameYourAvatar,Geef je avatar een naam
+Feature.Avatar.Placeholder.SearchInventory,In inventaris zoeken
 Feature.Avatar.Placeholder.WriteAvatarCaption,Schrijf een bijschrift voor je avatar (optioneel)
 Feature.Avatar.RevokedItems.BodyText,"{category} item '{item}' is verwijderd uit deze opgeslagen avatar, dus we hebben het oorspronkelijke bedrag dat je hebt betaald, terugbetaald.{lineBreak}Bekijk je inbox voor meer informatie."
 Feature.Avatar.RevokedItems.BodyTextMultiple,"De volgende items zijn verwijderd uit deze opgeslagen avatar, dus we hebben het oorspronkelijke bedrag dat je hebt betaald, terugbetaald.{lineBreak}{items}{lineBreak}Bekijk je inbox voor meer informatie."
@@ -2296,6 +2412,9 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,Tekst kopiëren
 Feature.Build.Action.Create,
 Feature.Build.Action.CreateDeveloperProduct,
+Feature.Build.Action.CreateMonetizationDeveloperProduct,Een ontwikkelaarsproduct maken
+Feature.Build.Action.CreateMonetizationPass,Een pass maken
+Feature.Build.Action.CreateMonetizationSubscription,Een abonnement maken
 Feature.Build.Action.CreateNewGame,Nieuwe game maken
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
@@ -2407,6 +2526,9 @@ Feature.Build.Analytics.Title.TopDropOffStep,Grootste verlies
 Feature.Build.Analytics.Title.TotalPlaytime,Totale speeltijd
 Feature.Build.Analytics.Visits,Bezoeken
 Feature.Build.Content.NewGame,Nieuw spel
+Feature.Build.CreateDeveloperProductDraft,Help me een ontwikkelaarsproduct te maken voor mijn spel.
+Feature.Build.CreatePassDraft,Help me een pas te maken voor mijn game.
+Feature.Build.CreateSubscriptionDraft,Help me een abonnement te maken voor mijn game.
 Feature.Build.Description.ActivateDeveloperProduct,Zet ontwikkelaarsproduct {PRODUCT_ID} in de uitverkoop.
 Feature.Build.Description.ActivateGamePass,Game Pass {PRODUCT_ID} te koop zetten.
 Feature.Build.Description.ActivateSubscription,Abonnement {PRODUCT_ID} activeren.
@@ -2574,6 +2696,7 @@ Feature.Build.Label.ManagedPricingMixed,Gemengd over huidige producten
 Feature.Build.Label.MaximizeForGamePlays,Speelsessies van het spel maximaliseren
 Feature.Build.Label.ModelUnavailable,Model niet beschikbaar
 Feature.Build.Label.Models3D,3D-modellen
+Feature.Build.Label.MonetizationCreateTitle,{NAME} - {PRICE} Robux
 Feature.Build.Label.MyGames,Mijn games
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,Geen limiet
@@ -3038,6 +3161,7 @@ Feature.Catalog.Label.FullBody,
 Feature.Catalog.Label.Gear,
 Feature.Catalog.Label.Get,Krijgen
 Feature.Catalog.Label.GetPremiumAndPrice,Neem Premium en koop voor 
+Feature.Catalog.Label.Glowing,Gloeiend
 Feature.Catalog.Label.HD,HD
 Feature.Catalog.Label.Hair,
 Feature.Catalog.Label.HeadShape,Vorm van het hoofd
@@ -3138,6 +3262,7 @@ Feature.Catalog.Label.SerialNumberColon,Serienummer:
 Feature.Catalog.Label.ShareToMoments,Deel naar Momenten
 Feature.Catalog.Label.ShoulderAccessories,Accessoires voor schouders
 Feature.Catalog.Label.SoldOut,
+Feature.Catalog.Label.SpecialFeatures,Speciale kenmerken
 Feature.Catalog.Label.SupportsHeadShapes,Ondersteunt aanpassing van de hoofdvorm
 Feature.Catalog.Label.TakeOffResaleConfirmation,Weet je zeker dat dit item niet meer wilt aanbieden voor doorverkoop?
 Feature.Catalog.Label.TimedOptions,Getimede opties
@@ -3257,6 +3382,7 @@ Feature.Chat.Action.Delete,
 Feature.Chat.Action.Edit,
 Feature.Chat.Action.GroupOSADoNotJoin,Niet deelnemen
 Feature.Chat.Action.GroupOSAJoin,
+Feature.Chat.Action.JumpToLatestMessages,Ga naar de meest recente berichten
 Feature.Chat.Action.LearnMore,
 Feature.Chat.Action.Leave,
 Feature.Chat.Action.MuteVoice,Stem dempen
@@ -4071,6 +4197,9 @@ Feature.Home.Heading.JoinYourFriends,Sluit je aan bij je vrienden
 Feature.Home.HeadingFriends,Vrienden ({friendCount})
 Feature.Home.Label.HappeningNow,Nu gaande
 Feature.Home.PeopleList.ChatWith,Chat met {username}
+Feature.Home.TextFilterEducation.General.Body.Pii.Warning.V2,We moesten een aantal van je recente berichten wijzigen of blokkeren. Vergeet niet: houd je persoonlijke gegevens voor jezelf.
+Feature.Home.TextFilterEducation.General.Body.Respect.Warning.V2,We moesten een aantal van je recente berichten wijzigen of blokkeren. Vergeet niet: zorg er altijd voor dat je berichten respectvol zijn.
+Feature.Home.TextFilterEducation.General.Body.Spam.Warning.V2,We moesten een aantal van je recente berichten wijzigen of blokkeren. Vergeet niet: stuur elk bericht maar één keer.
 Feature.InAppBugReporting.Message.AppVersion,Build: {value}
 Feature.InAppBugReporting.Message.CommentEmptyError,De details mogen niet leeg zijn
 Feature.InAppBugReporting.Message.CommentLabel,Beschrijving van ticket
@@ -4173,6 +4302,8 @@ Feature.Moments.Action.Analytics,Analytics
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
+Feature.Moments.Action.CommentSeeOriginal,Origineel bekijken
+Feature.Moments.Action.CommentSeeTranslation,Vertaling bekijken
 Feature.Moments.Action.CommentShowLess,Minder weergeven
 Feature.Moments.Action.CommentShowMore,
 Feature.Moments.Action.Continue,
@@ -4205,9 +4336,15 @@ Feature.Moments.Action.ShowDetails,Details weergeven
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Video inkorten
 Feature.Moments.Action.TryAgain,Nog een keer proberen
+Feature.Moments.Action.ViewOtherFeed,Andere feed bekijken
+Feature.Moments.Action.ViewRecommended,Aanbevolen momenten bekijken
+Feature.Moments.Action.ViewTrending,Populaire momenten bekijken
 Feature.Moments.Body.EDPMomentIPReportInstructions,Ga naar de detailpagina van de game om een IP-overtreding in dit Moment te melden.
 Feature.Moments.Description.CommunityStandards,Lees de Communityrichtlijnen voor meer informatie over wat je wel en niet mag zeggen.
 Feature.Moments.Description.EmptyCapturesLibrary,Hier komen je opnames te staan.
+Feature.Moments.Description.FollowingCaughtUpBody,Je hebt alle nieuwe momenten in deze feed bekeken. Wissel van feed om er meer te bekijken.
+Feature.Moments.Description.FollowingEmptyBodyRecommended,Je ziet hier momenten van creators die je volgt.
+Feature.Moments.Description.FollowingEmptyBodyTrending,
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,Door AI gegenereerd. Controleer voordat je plaatst — jij bent verantwoordelijk voor wat er wordt gepubliceerd.
 Feature.Moments.Description.HowToCaptureStep1,"Doe mee aan een ervaring terwijl opnames zijn ingeschakeld, en selecteer het hamburgermenu"
 Feature.Moments.Description.HowToCaptureStep2,Schakel de besturing voor opnames in
@@ -4265,8 +4402,11 @@ Feature.Moments.Label.FeedEndTitle,Je bent weer helemaal bij
 Feature.Moments.Label.FeedFailedToLoad,Feed kon niet worden geladen
 Feature.Moments.Label.FeedFollowing,
 Feature.Moments.Label.FeedMyMoments,Mijn momenten
+Feature.Moments.Label.FeedRecommended,
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.FirstCommentInvite,Nog geen reacties. Reageer als eerste!
+Feature.Moments.Label.FollowingCaughtUpTitle,Je bent voorlopig weer bij
+Feature.Moments.Label.FollowingEmptyTitle,Volg creators om hun momenten te bekijken
 Feature.Moments.Label.GameJoinConversion,Conversie naar deelname aan game
 Feature.Moments.Label.HowToUseCaptureTitle,Zo gebruik je een opname
 Feature.Moments.Label.LinkCopied,Link gekopieerd
@@ -4339,7 +4479,6 @@ Feature.Moments.Title.GenerateTextFeedbackReason,Wat is er misgegaan?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Moment maken afsluiten?
 Feature.Moments.Title.MomentRemoved,
-Feature.Moments.Title.PostInsights,Postinzichten
 Feature.Moments.Title.ReportPost,Post melden
 Feature.Moments.Title.UnfollowConfirmationDialog,@{username} ontvolgen?
 Feature.Moments.Tooltip.PostInsightsBody,"Bekijk het aantal weergaven, de kijktijd en hoe het Moment bij je doelgroep is overgekomen."
@@ -4862,6 +5001,7 @@ Feature.PrivateServers.Label.PrivateServerLink,Link privéserver
 Feature.PrivateServers.Label.SearchPeople,
 Feature.PrivateServers.Label.ServerName,Servernaam:
 Feature.PrivateServers.Label.WhoCanJoin,Wie kan deelnemen
+Feature.PrivateServers.Label.YourPrivateServerIsReadyToJoin,Je kunt nu deelnemen aan je privéserver
 Feature.Profile.Action.AboutThisProfile,Over dit profiel
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4869,6 +5009,7 @@ Feature.Profile.Action.Add,
 Feature.Profile.Action.AllRequestsIgnored,Alle verzoeken genegeerd
 Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,Profiellink kopiëren
+Feature.Profile.Action.CreateInBuild,Maken in Bouwen
 Feature.Profile.Action.EditAppearance,Uiterlijk bewerken
 Feature.Profile.Action.EditAvatar,Avatar bewerken
 Feature.Profile.Action.EditBackground,Achtergrond bewerken
@@ -4941,6 +5082,8 @@ Feature.Profile.Label.DisplayNameFailed,De schermnaam kan niet worden opgeslagen
 Feature.Profile.Label.DisplayNameModalCaption,Je schermnaam kan slechts één keer per zeven dagen worden gewijzigd.
 Feature.Profile.Label.DisplayNameTooShort,Schermnaam moet ten minste 3 tekens bevatten.
 Feature.Profile.Label.EditBackground,
+Feature.Profile.Label.IsMakingGameIn,is een game aan het maken in
+Feature.Profile.Label.IsMakingGameInBuild,is een game aan het maken in Bouwen
 Feature.Profile.Label.NoBioYet,Nog geen biografie
 Feature.Profile.Label.NoPreviousName,Geen vorige namen
 Feature.Profile.Label.NoSocialLink,Nog geen sociale links
@@ -5282,6 +5425,8 @@ Feature.SettingsHub.Prompt.NeedCameraAccess,Toegang tot camera nodig
 Feature.SettingsHub.Prompt.NeedContactsAccess,Toegang tot contactpersonen nodig
 Feature.SettingsHub.Prompt.RestartOnMicAccessChange,Je moet de app opnieuw opstarten om de toegangswijzigingen voor je microfoon toe te passen.
 Feature.SettingsHub.Prompt.Subtitle.AllowMicrophoneAccess,Geef Roblox toegang tot je microfoon om spraakchat met anderen te gebruiken.
+Feature.SocialContextToast.Message.InvitationConfirmation,Uitnodiging verzonden
+Feature.SocialContextToast.Message.InvitationFailure,Problemen bij het verzenden van uitnodigingen
 Feature.SocialShare.Action.CopyLink,
 Feature.SocialShare.Action.Redirect,Wordt doorgestuurd...
 Feature.SocialShare.Action.Share,
@@ -5671,6 +5816,8 @@ Features.Transfers.RobuxTransfer.Action.Send,
 Features.Transfers.RobuxTransfer.Action.TryAgain,
 Features.Transfers.RobuxTransfer.Disclaimer.AgeEstimationTransfer,"Je hebt een leeftijdscontrole of ouderlijke toestemming nodig om Robux te sturen. Zodra je ze hebt verzonden, kun je ze niet meer annuleren."
 Features.Transfers.RobuxTransfer.Error.ReceiverNotAllowed,@{username} kan op dit moment geen Robux ontvangen.
+Features.Transfers.RobuxTransfer.FreeTransfersRemaining,Je hebt nog {numFreeTransfersRemaining} gratis overdrachten over. Robux wordt direct en kosteloos verzonden.
+Features.Transfers.RobuxTransfer.FreeTransfersRemainingSingular,Je hebt nog 1 gratis overdracht over. Robux wordt direct en kosteloos verzonden.
 Features.Transfers.RobuxTransfer.Heading.SendRobux,Robux sturen
 Features.Transfers.RobuxTransfer.Label.JoinedInYear,
 Features.Transfers.RobuxTransfer.Label.MutualConnection,{amount} gemeenschappelijke vrienden
@@ -5681,6 +5828,7 @@ Features.Transfers.RobuxTransfer.Label.RecipientWillGetInApp,De ontvanger krijgt
 Features.Transfers.RobuxTransfer.Label.RecipientWillGetInGame,De ontvanger krijgt {amount} Robux na aftrek van kosten. Overdrachten in de game zijn inclusief {commissionPercentage}% vergoeding voor de creator.
 Features.Transfers.RobuxTransfer.SentInstantNoFee,Robux wordt direct en kosteloos verzonden
 Features.Transfers.RobuxTransfers.Label.SuccessNotification,Je hebt {amount} Robux gestuurd
+Features.Transfers.Title.FreeTransfersExhausted,Je hebt je gratis overdrachten opgebruikt
 Features.Transfers.Title.UpsellSubscription,
 Features.Transfers.Transfer.Block.RequireReceiverFAE,"Laten we je leeftijd controleren, zodat je Robux kunt accepteren"
 Features.Transfers.Transfer.Block.RequireSenderFAE,"Laten we je leeftijd controleren, zodat je Robux kunt sturen"
@@ -5847,8 +5995,10 @@ InGame.EmotesMenu.ErrorMessageAnimationPlaying,Je kunt tijdens deze actie geen e
 InGame.EmotesMenu.ErrorMessageNotSupported,Je kunt hier geen emotes gebruiken.
 InGame.EmotesMenu.ErrorMessageSwitchToR15,Schakel over naar je R15-avatar om een emote af te spelen.
 InGame.EmotesMenu.ErrorMessageTemporarilyUnavailable,Je kunt nu geen emotes gebruiken.
+InGame.InspectMenu.Action.Buy,
 InGame.InspectMenu.Action.Cancel,
 InGame.InspectMenu.Action.Confirm,
+InGame.InspectMenu.Action.Inspect,Inspecteren
 InGame.InspectMenu.Action.LimitReached,Itemlimiet bereikt
 InGame.InspectMenu.Action.SoldOut,
 InGame.InspectMenu.Action.TryOn,
@@ -5910,7 +6060,9 @@ Notifications.SquadRegroupPrompt.ToastAction.Join,
 Notifications.SquadRegroupPrompt.ToastLabel.ContinuePlayingTogether,Doorgaan met samen spelen
 Notifications.SquadRegroupPrompt.ToastLabel.JoinANewServer,Verbinding maken met een nieuwe server
 Notifications.ToastNotifications.Label.LeaveExperienceConfirmation,Weet je zeker dat je wilt afsluiten en deelnemen aan een andere ervaring?
+Notifications.ToastNotifications.Label.LeaveServerConfirmation,Weet je zeker dat je deze server wilt verlaten en aan een andere server wilt deelnemen?
 Notifications.ToastNotifications.Title.LeavingExperience,Ervaring verlaten
+Notifications.ToastNotifications.Title.LeavingServer,Server verlaten
 PlayerFeedbacks.VoteForm.Message.Action.Report,
 PlayerFeedbacks.VoteForm.Message.MaxLengthCharacters,Gebruik minder dan {count} tekens.
 PlayerFeedbacks.VoteForm.Message.MinLengthCharacters,Gebruik meer dan {count} tekens.

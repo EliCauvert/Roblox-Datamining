@@ -8,7 +8,6 @@ local GetEngineFeatureEngineUGCValidationReportScriptTimeModule = require(Parent
 local GetEngineFeatureEngineUGCValidationIECTelemetryModule = require(Parent.flags.getEngineFeatureEngineUGCValidationIECTelemetry)
 local GetEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule = require(Parent.flags.getEngineFeatureEngineUGCValidateFACSJointTransformsWithinBounds)
 local GetEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(Parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
-local GetFFlagUGCValidationEyebrowEyelashSupportModule = require(Parent.flags.getFFlagUGCValidationEyebrowEyelashSupport)
 
 local function joinTables(...)
 	local t = {}
@@ -21,7 +20,7 @@ local function joinTables(...)
 	return t
 end
 
-local AnalyticsModule = {
+local config = {
 	ErrorType = {
 		resetPhysicsData_FailedToLoadMesh = "resetPhysicsData_FailedToLoadMesh",
 		validateAccurateBoundingBox = "validateAccurateBoundingBox",
@@ -62,18 +61,10 @@ local AnalyticsModule = {
 		validateLimbsAndTorso_FolderInfoMismatch = "validateLimbsAndTorso_FolderInfoMismatch",
 		validateLimbsAndTorso_R6FolderHasChildren = "validateLimbsAndTorso_R6FolderHasChildren",
 		validateLimbsAndTorso_TopLevelFolders = "validateLimbsAndTorso_TopLevelFolders",
-		validateMeshBounds_FailedToExecute = "validateMeshBounds_FailedToExecute",
-		validateMeshBounds_FailedToLoadMesh = "validateMeshBounds_FailedToLoadMesh",
-		validateMeshBounds_TooLarge = "validateMeshBounds_TooLarge",
 		validateMeshPartAccessory_DoubleSided = "validateMeshPartAccessory_DoubleSided",
 		validateMeshPartAccessory_FailedToLoadMesh = "validateMeshPartAccessory_FailedToLoadMesh",
 		validateMeshPartAccessory_NoMeshId = "validateMeshPartAccessory_NoMeshId",
 		validateMeshPartBodyPart_ValidateWithSchema = "validateMeshPartBodyPart_ValidateWithSchema",
-		validateMeshTriangles_FailedToExecute = "validateMeshTriangles_FailedToExecute",
-		validateMeshTriangles_FailedToLoadMesh = "validateMeshTriangles_FailedToLoadMesh",
-		validateMeshTriangles_TooManyTriangles = "validateMeshTriangles_TooManyTriangles",
-		validateMeshVertexColors_FailedToLoadMesh = "validateMeshVertexColors_FailedToLoadMesh",
-		validateMeshVertexColors_NonNeutralVertexColors = "validateMeshVertexColors_NonNeutralVertexColors",
 		validatePackage_FailedToParse = "validatePackage_FailedToParse",
 		validateSingleInstance_MultipleInstances = "validateSingleInstance_MultipleInstances",
 		validateSingleInstance_ZeroInstances = "validateSingleInstance_ZeroInstances",
@@ -81,17 +72,11 @@ local AnalyticsModule = {
 		validateTags = "validateTags",
 		validateThumbnailConfiguration_InvalidTarget = "validateThumbnailConfiguration_InvalidTarget",
 		validateThumbnailConfiguration_OutsideView = "validateThumbnailConfiguration_OutsideView",
-		validateVertexDensity_FailedToExecute = "validateVertexDensity_FailedToExecute",
-		validateVertexDensity_MaxDensityExceeded = "validateVertexDensity_MaxDensityExceeded",
 		validateDynamicHeadMeshPartFormat_ValidateDynamicHeadMeshControls = "validateDynamicHeadMeshPartFormat_ValidateDynamicHeadMeshControls",
 		validateRenderMeshInsideOuterCageMesh_FailedToExecute = "validateRenderMeshInsideOuterCageMesh_FailedToExecute",
 		validateRenderMeshInsideOuterCageMesh_MaxOutsideCageMeshExceeded = "validateRenderMeshInsideOuterCageMesh_MaxOutsideCageMeshExceeded",
 		validateLayeredClothingAccessory_CageOriginOutOfBounds = "validateLayeredClothingAccessory_CageOriginOutOfBounds",
 		validateBodyPart_CageOriginOutOfBounds = "validateBodyPart_CageOriginOutOfBounds",
-		validateTotalSurfaceArea_FailedToExecute = "validateTotalSurfaceArea_FailedToExecute",
-		validateTotalSurfaceArea_maxTotalSurfaceAreaExceeded = "validateTotalSurfaceArea_maxTotalSurfaceAreaExceeded",
-		validateCoplanarIntersection_FailedToExecute = "validateCoplanarIntersection_FailedToExecute",
-		validateCoplanarIntersection_CoplanarIntersection = "validateCoplanarIntersection_CoplanarIntersection",
 		validateExcludedModifiedCageUVs_FailedToExecute = "validateExcludedModifiedCageUVs_FailedToExecute",
 		validateExcludedModifiedCageUVs_UnexpectedUVValue = "validateExcludedModifiedCageUVs_UnexpectedUVValue",
 		validateMainModifiedCageUVs_FailedToExecute = "validateMainModifiedCageUVs_FailedToExecute",
@@ -109,71 +94,64 @@ local AnalyticsModule = {
 		validateBodyAttPosRelativeToParent_ParentBelowPart = "validateBodyAttPosRelativeToParent_ParentBelowPart",
 		validateBodyBlockingTests_ZeroMeshSize = "validateBodyBlockingTests_ZeroMeshSize",
 		validateFullBody_ZeroMeshSize = "validateFullBody_ZeroMeshSize",
-		validateMeshBounds_Shifted = "validateMeshBounds_Shifted",
 		validateDeformedLayeredClothingInRenderBounds_FailedToExecute = "validateDeformedLayeredClothingInRenderBounds_FailedToExecute",
 		validateDeformedLayeredClothingInRenderBounds_ClothingOutOfBounds = "validateDeformedLayeredClothingInRenderBounds_ClothingOutOfBounds"
 	}
 }
+config.ErrorType.validateMeshSizeProperty_FailedToLoadMesh = "validateMeshSizeProperty_FailedToLoadMesh"
+config.ErrorType.validateMeshSizeProperty_Mismatch = "validateMeshSizeProperty_Mismatch"
+config.ErrorType.validateBodyPartVertsSkinnedToR15_FailedToFetchSkinning = "validateBodyPartVertsSkinnedToR15_FailedToFetchSkinning"
+config.ErrorType.validateBodyPartVertsSkinnedToR15_BodyIsSkinnedToFakeJoints = "validateBodyPartVertsSkinnedToR15_BodyIsSkinnedToFakeJoints"
+config.ErrorType.validateSkinningTransfer_FailedToExecute = "validateSkinningTransfer_FailedToExecute"
+config.ErrorType.validateSkinningTransfer_BodyPartsWithSpecialJoints = "validateSkinningTransfer_BodyPartsWithSpecialJoints"
+config.ErrorType.validateSkinningTransfer_SkinningTransferOverride = "validateSkinningTransfer_SkinningTransferOverride"
+config.ErrorType.validateSkinningTransfer_Weights = "validateSkinningTransfer_Weights"
 
-if require(Parent.flags.getFFlagUGCValidateTexturePack)() then
-	AnalyticsModule.ErrorType.validateTexturePack_InvalidTexturePackURL = "validateTexturePack_InvalidTexturePackURL"
-	AnalyticsModule.ErrorType.validateTexturePack_FailedToDownloadTexturePack = "validateTexturePack_FailedToDownloadTexturePack"
-	AnalyticsModule.ErrorType.validateTexturePack_TexturePackMismatch = "validateTexturePack_TexturePackMismatch"
-end
-AnalyticsModule.ErrorType.validateMeshSizeProperty_FailedToLoadMesh = "validateMeshSizeProperty_FailedToLoadMesh"
-AnalyticsModule.ErrorType.validateMeshSizeProperty_Mismatch = "validateMeshSizeProperty_Mismatch"
-AnalyticsModule.ErrorType.validateBodyPartVertsSkinnedToR15_FailedToFetchSkinning = "validateBodyPartVertsSkinnedToR15_FailedToFetchSkinning"
-AnalyticsModule.ErrorType.validateBodyPartVertsSkinnedToR15_BodyIsSkinnedToFakeJoints = "validateBodyPartVertsSkinnedToR15_BodyIsSkinnedToFakeJoints"
-AnalyticsModule.ErrorType.validateSkinningTransfer_FailedToExecute = "validateSkinningTransfer_FailedToExecute"
-AnalyticsModule.ErrorType.validateSkinningTransfer_BodyPartsWithSpecialJoints = "validateSkinningTransfer_BodyPartsWithSpecialJoints"
-AnalyticsModule.ErrorType.validateSkinningTransfer_SkinningTransferOverride = "validateSkinningTransfer_SkinningTransferOverride"
-AnalyticsModule.ErrorType.validateSkinningTransfer_Weights = "validateSkinningTransfer_Weights"
-
-if GetFFlagUGCValidationEyebrowEyelashSupportModule() then
-	AnalyticsModule.ErrorType.validateSkinningTransfer_RequiredAssetTypes = "validateSkinningTransfer_RequiredAssetTypes"
+if require(Parent.flags.getFFlagUGCValidationEyebrowEyelashSupport)() then
+	config.ErrorType.validateSkinningTransfer_RequiredAssetTypes = "validateSkinningTransfer_RequiredAssetTypes"
 end
 if GetEngineFeatureEngineUGCValidatePropertiesSensibleModule() then
-	AnalyticsModule.ErrorType.validatePropertiesSensible_IncorrectPropertiesFound = "validatePropertiesSensible_IncorrectPropertiesFound"
+	config.ErrorType.validatePropertiesSensible_IncorrectPropertiesFound = "validatePropertiesSensible_IncorrectPropertiesFound"
 end
-AnalyticsModule.ErrorType.validateHSR_FileDataInvalid = "validateHSR_FileDataInvalid"
-AnalyticsModule.ErrorType.validataHSR_HSRMeshIdsMismatch = "validataHSR_HSRMeshIdsMismatch"
+config.ErrorType.validateHSR_FileDataInvalid = "validateHSR_FileDataInvalid"
+config.ErrorType.validataHSR_HSRMeshIdsMismatch = "validataHSR_HSRMeshIdsMismatch"
 
 if GetEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule() then
-	AnalyticsModule.ErrorType.validateFACSJointTransformsWithinBounds_Error = "validateFACSJointTransformsWithinBounds_Error"
-	AnalyticsModule.ErrorType.validateFACSJointTransformsWithinBounds_OOB = "validateFACSJointTransformsWithinBounds_OOB"
+	config.ErrorType.validateFACSJointTransformsWithinBounds_Error = "validateFACSJointTransformsWithinBounds_Error"
+	config.ErrorType.validateFACSJointTransformsWithinBounds_OOB = "validateFACSJointTransformsWithinBounds_OOB"
 end
-setmetatable(AnalyticsModule.ErrorType, {
+setmetatable(config.ErrorType, {
 	__index = function(_, p1): string
 		return `UNREGISTERED_{p1}`
 	end
 })
-AnalyticsModule.metadata = {}
+config.metadata = {}
 
-function AnalyticsModule.setMetadata(List)
-	-- upvalues: AnalyticsModule (copy)
+function config.setMetadata(List)
+	-- upvalues: config (copy)
 	local Metadata = {}
 	
 	for i, value in List do
 		Metadata[i] = tostring(value)
 	end
-	AnalyticsModule.metadata = Metadata
+	config.metadata = Metadata
 end
 
-function AnalyticsModule.shouldReportIECTelemetry(p1)
+function config.shouldReportIECTelemetry(p1)
 	-- upvalues: GetEngineFeatureEngineUGCValidationIECTelemetryModule (copy), RunService (copy)
 	return if GetEngineFeatureEngineUGCValidationIECTelemetryModule() and p1 then not RunService:IsStudio() and p1.allowEditableInstances and p1.isServer else false
 end
 
-function AnalyticsModule.reportCounter(Success, ValidationType, p1)
-	-- upvalues: AnalyticsModule (copy), UGCValidationService (copy)
-	if AnalyticsModule.shouldReportIECTelemetry(p1) then
+function config.reportCounter(Success, ValidationType, p1)
+	-- upvalues: config (copy), UGCValidationService (copy)
+	if config.shouldReportIECTelemetry(p1) then
 		UGCValidationService:ReportUGCValidationCounter(Success, ValidationType)
 	end
 end
 
-function AnalyticsModule.reportFailure(ErrorType, p1, p2)
-	-- upvalues: RunService (copy), joinTables (copy), AnalyticsModule (copy), RbxAnalyticsService (copy), StudioService (copy), UGCValidationService (copy)
-	RbxAnalyticsService:SendEventDeferred(if RunService:IsStudio() then "studio" else "rcc", "ugcValidation", "failure", (joinTables(AnalyticsModule.metadata, p1 or {}, {
+function config.reportFailure(ErrorType, p1, p2)
+	-- upvalues: RunService (copy), joinTables (copy), config (copy), RbxAnalyticsService (copy), StudioService (copy), UGCValidationService (copy)
+	RbxAnalyticsService:SendEventDeferred(if RunService:IsStudio() then "studio" else "rcc", "ugcValidation", "failure", (joinTables(config.metadata, p1 or {}, {
 		errorType = ErrorType,
 		studioSid = RbxAnalyticsService:GetSessionId(),
 		clientId = RbxAnalyticsService:GetClientId(),
@@ -181,14 +159,14 @@ function AnalyticsModule.reportFailure(ErrorType, p1, p2)
 		userId = if StudioService then StudioService:GetUserId() else 0
 	})))
 	
-	if AnalyticsModule.shouldReportIECTelemetry(p2) then
+	if config.shouldReportIECTelemetry(p2) then
 		UGCValidationService:ReportUGCValidationFailureTelemetry(ErrorType)
 	end
 end
 
-function AnalyticsModule.reportThumbnailing(Time, p1)
-	-- upvalues: RunService (copy), joinTables (copy), AnalyticsModule (copy), RbxAnalyticsService (copy), StudioService (copy)
-	RbxAnalyticsService:SendEventDeferred(if RunService:IsStudio() then "studio" else "rcc", "ugcValidation", "thumbnailing", (joinTables(AnalyticsModule.metadata, p1 or {}, {
+function config.reportThumbnailing(Time, p1)
+	-- upvalues: RunService (copy), joinTables (copy), config (copy), RbxAnalyticsService (copy), StudioService (copy)
+	RbxAnalyticsService:SendEventDeferred(if RunService:IsStudio() then "studio" else "rcc", "ugcValidation", "thumbnailing", (joinTables(config.metadata, p1 or {}, {
 		time = Time,
 		studioSid = RbxAnalyticsService:GetSessionId(),
 		clientId = RbxAnalyticsService:GetClientId(),
@@ -197,7 +175,7 @@ function AnalyticsModule.reportThumbnailing(Time, p1)
 	})))
 end
 
-function AnalyticsModule.recordScriptTime(Key, p1, p2)
+function config.recordScriptTime(Key, p1, p2)
 	-- upvalues: GetEngineFeatureEngineUGCValidationReportScriptTimeModule (copy)
 	if not GetEngineFeatureEngineUGCValidationReportScriptTimeModule() then return end
 	if not p2.scriptTimes then
@@ -211,14 +189,14 @@ function AnalyticsModule.recordScriptTime(Key, p1, p2)
 	ScriptTimes[Key] += tick() - p1
 end
 
-function AnalyticsModule.reportScriptTimes(p1)
-	-- upvalues: GetEngineFeatureEngineUGCValidationReportScriptTimeModule (copy), RunService (copy), AnalyticsModule (copy), UGCValidationService (copy)
+function config.reportScriptTimes(p1)
+	-- upvalues: GetEngineFeatureEngineUGCValidationReportScriptTimeModule (copy), RunService (copy), config (copy), UGCValidationService (copy)
 	if not GetEngineFeatureEngineUGCValidationReportScriptTimeModule() then return end
 	if p1.isServer and not RunService:IsStudio() and p1.scriptTimes then
-		assert(AnalyticsModule.metadata, "Metadata is never nil")
-		local Entrypoint = AnalyticsModule.metadata.entrypoint
+		assert(config.metadata, "Metadata is never nil")
+		local Entrypoint = config.metadata.entrypoint
 		UGCValidationService:ReportUGCValidationTelemetry(if p1.assetTypeEnum then p1.assetTypeEnum.Name elseif Entrypoint and type(Entrypoint) == "string" and #Entrypoint > 0 then Entrypoint else "FullBody", p1.scriptTimes)
 	end
 end
 
-return AnalyticsModule
+return config

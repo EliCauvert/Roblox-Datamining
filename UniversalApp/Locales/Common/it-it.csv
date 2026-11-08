@@ -658,8 +658,8 @@ Common.Presence.Label.Online,In linea
 Common.Presence.Label.RobloxStudio,Roblox Studio
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,L'animazione è troppo lunga ({duration} secondi). Le animazioni delle emote devono durare al massimo {maxLength} secondi.
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,L'animazione è troppo breve ({duration} secondi). Le animazioni delle emote devono durare più di {minLength} secondi.
-Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,Violazione del posizionamento della parte della gabbia in {cageName}: {upperPart} è posizionato correttamente sopra {lowerPart}.
-Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,"La parte della gabbia {partName} in {cageName} ha {actualCount} vertici, mentre il numero previsto è di circa {expectedCount}. Ciò potrebbe indicare una geometria mancante o duplicata in quella regione del corpo."
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,Violazione del posizionamento della parte della gabbia in {cageName}: {upperPart} non è posizionato correttamente rispetto a {lowerPart}.
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,"La parte della gabbia {partName} in {cageName} ha {actualCount} vertici, mentre il numero previsto è di circa {expectedCount}. Ciò potrebbe indicare una geometria mancante o duplicata in quella regione della gabbia."
 Common.UGCValidation.ErrorLabel.AQSFail_CageUV,"{cage_name} presenta valori UV non corretti che non corrispondono al modello. {incorrect_uv_count} UV non corretti ({unreferenced_vertex_count} senza riferimento, {non_template_uv_count} non appartenenti al modello, {duplicate_mapping_count} mappature duplicate), {unmatched_template_count} vertici del modello non corrispondenti. Correggi gli UV della gabbia in modo che corrispondano al modello."
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,Il tuo corpo contiene piccoli componenti di mesh disconnessi (isole di mesh). Rimuovi la geometria fluttuante e assicurati che tutte le parti di mesh siano collegate correttamente.
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,"{partName} ha {num_disconnected_components} componenti disconnessi, il che supera il massimo di {max_disconnected_components}."
@@ -670,7 +670,7 @@ Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,La gabbia della tes
 Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,{irrelevant_percent}% dei vertici modificati della gabbia esterna non copre l'accessorio. Regola la gabbia in modo che si adatti meglio alla forma dell'accessorio.
 Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,"{cage_name} presenta valori UV non corretti. {incorrect_uv_count} UV non corretti ({unreferenced_vertex_count} senza riferimento, {non_template_uv_count} non appartenenti al modello, {duplicate_mapping_count} mappature duplicate), {unmatched_template_count} vertici del modello non corrispondenti."
 Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,{partName} ha un {degenerate_triangle_percent}% di triangoli degenerati.
-Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,"La testa dinamica presenta problemi di qualità dell'espressione. Occhio sinistro chiuso: {left_eye_close}, occhio destro chiuso: {right_eye_close}, bocca aperta: {mouth_open}, felice: {is_happy}, triste: {is_sad}."
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,"La testa dinamica presenta problemi di qualità dell'espressione. Occhio sinistro sullo schermo (punti rossi sul lato sinistro della testa nel plugin di visualizzazione) chiuso: {left_eye_close}, occhio destro sullo schermo (punti blu sul lato destro della testa nel plugin di visualizzazione) chiuso: {right_eye_close}, bocca aperta (punti verdi nel plugin di visualizzazione): {mouth_open}, felice: {is_happy}, triste: {is_sad}."
 Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"Configurazione delle articolazioni imprevista. Articolazioni totali: {joint_number}, articolazioni della mano sinistra: {left_hand_joint_number}, articolazioni della mano destra: {right_hand_joint_number}."
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,{partName} presenta {num_small_volume_islands} piccole isole di mesh disconnesse su un totale di {num_disconnected_components} componenti. Rimuovi la geometria galleggiante.
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,"{partName} ha una geometria non manifold. Controlla la presenza di facce non planari, superfici autointersecanti o bordi condivisi da più di due facce."
@@ -679,9 +679,9 @@ Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,Un {mesh_outside_ou
 Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,I dati di convalida per {measureName} non sono stati calcolati perché i dati inseriti erano incompleti o non validi. Questo non ha alcun impatto sul caricamento.
 Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,La texture {textureName} ha una complessità bassa e potrebbe non avere dettagli o variazioni sufficienti.
 Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,La texture {textureName} ha una risoluzione bassa di {texture_width}x{texture_height}. Valuta la possibilità di utilizzarne una con una risoluzione più elevata.
-Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,Qualità della risorsa: {partName} ha un {intersecting_tri_face_percent}% di facce triangolari intersecanti (punteggio: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,"{partName} ha il {intersecting_tri_face_percent}% di facce autointersecanti, il che supera il {threshold}% consentito."
 Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,"{partName} ha un {uv_outside_bound_vert_percent}% di vertici UV al di fuori dei limiti [0,1]."
-Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,Qualità della risorsa: {partName} ha un {similar_vertex_percent}% di vertici simili (punteggio: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,"{partName} ha il {similar_vertex_percent}% di vertici simili, il che supera il {threshold}% consentito."
 Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,"L'allegato dell'accessorio ""{AttachmentName}"" in ""{PartName}"" dovrebbe essere posizionato vicino alla superficie della mesh. La posizione corrente [{CurrentPosition}] è al di fuori dell'area valida. Spostalo più vicino a [{ClosestValidPosition}]."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,"La manopola è associata all'articolazione {jointName}, che non fa parte dello schema consentito. Sono consentite solo le articolazioni R15 standard e le articolazioni per il trasferimento tramite appiattimento."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,"{assetType} deve utilizzare il trasferimento tramite appiattimento, ma manca l'articolazione necessaria, {requiredJointName}."
@@ -693,15 +693,44 @@ Common.UGCValidation.ErrorLabel.AccessorySkinning_WeightNotFull,I vertici associ
 Common.UGCValidation.ErrorLabel.AnimationPack_DuplicateAnimationId,"Il pacchetto di animazione contiene un ID animazione duplicato ""{animationId}"" utilizzato da più clip: {instancePaths}. Ogni clip di animazione deve fare riferimento a una risorsa di animazione univoca."
 Common.UGCValidation.ErrorLabel.AnimationPack_InvalidR15AnimChildren,Nel pacchetto di animazione mancano i tipi di animazione previsti: {missingAnimationTypes}. Ogni tipo di animazione deve avere una cartella R15Anim contenente esattamente i suoi elementi secondari StringValue previsti.
 Common.UGCValidation.ErrorLabel.Animation_WeightNotPositive,"L'animazione ""{animationName}"" ha un valore Weight di {weight}, ma Weight deve essere maggiore di 0. Correggi l'animazione."
+Common.UGCValidation.ErrorLabel.AssetBounds_InconsistentScaleType,Tutte le MeshPart devono avere lo stesso valore nel loro elemento figlio AvatarPartScaleType. Verifica che i valori corrispondano.
+Common.UGCValidation.ErrorLabel.AssetBounds_TooLarge,"In {assetName} la dimensione dell'asse {axis} delle mesh e delle articolazioni (""{currentSize}"") è superiore alla dimensione massima consentita dell'asse {axis} del riquadro di delimitazione (""{maxSize}""). È necessario ridurre le dimensioni delle mesh/dei giunti"
+Common.UGCValidation.ErrorLabel.AssetBounds_TooSmall,"In {assetName} la dimensione dell'asse {axis} delle mesh (""{currentSize}"") è inferiore alla dimensione minima consentita dell'asse {axis} del riquadro di delimitazione (""{minSize}""). È necessario aumentare le dimensioni delle mesh."
+Common.UGCValidation.ErrorLabel.AssetDoesNotExist,"La risorsa ""{AssetId}"" a cui fa riferimento ""{InstancePath}"" non esiste o non è caricabile. Sostituirlo con un ID asset valido."
+Common.UGCValidation.ErrorLabel.AssetOpacity_BelowThreshold,{AssetName} non è abbastanza opaco rispetto a {ViewName}. L'opacità è {Opacity} ma deve essere superiore a {Threshold}.
+Common.UGCValidation.ErrorLabel.AssetOpacity_Invisible,"La mesh per ""{AssetName}"" è completamente invisibile."
+Common.UGCValidation.ErrorLabel.AssetOpacity_MeshLoadFailed,"Impossibile caricare la mesh per MeshPart ""{PartName}"". Assicurati che la mesh esista e riprova."
+Common.UGCValidation.ErrorLabel.AssetOpacity_NoTriangles,"La mesh per ""{AssetName}"" non contiene triangoli."
+Common.UGCValidation.ErrorLabel.AssetOpacity_NonZeroTransparency,"La parte ""{PartName}"" ha una trasparenza diversa da zero. La trasparenza della parte dovrebbe essere sempre esattamente pari a zero."
+Common.UGCValidation.ErrorLabel.AssetOpacity_ZeroSize,"Le mesh per ""{AssetName}"" non devono avere dimensione pari a zero."
 Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,Impossibile trovare il file {ExpectedClass} chiamato {ExpectedName} all'interno di {ParentPath}
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,Le seguenti istanze non fanno parte dello schema approvato e devono essere rimosse: {UnexpectedDescendantPaths}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,La risorsa caricata dovrebbe essere {ExpectedClass} ma è {RootClass}.
-Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,La risorsa caricata dovrebbe essere denominata {ExpectedClass} ma è invece denominata {RootClass}.
+Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,"La risorsa caricata dovrebbe essere denominata {ExpectedName}, invece è denominata {RootName}."
+Common.UGCValidation.ErrorLabel.AttachmentBoundsAssetCalculationFailed,"Impossibile calcolare i limiti della mesh per ""{InstancePath}"" prima di verificare le posizioni degli allegati. I dati della mesh potrebbero essere mancanti o non validi. Reimporta la risorsa e riprova."
+Common.UGCValidation.ErrorLabel.AttachmentBoundsCalculationFailed,"Impossibile calcolare i limiti per l'allegato ""{AttachmentName}"" in ""{PartName}"". I dati della mesh potrebbero essere mancanti o non validi. Reimporta la risorsa e riprova."
+Common.UGCValidation.ErrorLabel.AttachmentOrientationDeviation,"L'orientamento dell'allegato ""{InstancePath}"" si discosta troppo da quello previsto. L'orientamento consigliato è {ExpectedOrientation}, la deviazione massima è di {MaxDeviation} gradi."
+Common.UGCValidation.ErrorLabel.AttachmentOrientationRigRotated,"Gli allegati del rig non possono essere ruotati. Impostare l'orientamento di ""{InstancePath}"" su (0,0,0)."
+Common.UGCValidation.ErrorLabel.BodyBlocking_ZeroMeshSize,Rendering della mesh per {meshName}: {details}. Aumenta la dimensione della mesh.
+Common.UGCValidation.ErrorLabel.BodyMesh_LoadFailed,"Impossibile caricare la mesh per ""{meshName}"". Assicurati che la mesh esista e riprova."
+Common.UGCValidation.ErrorLabel.BodyMesh_SizeMismatch,{meshContext} presenta una differenza di dimensioni superiore al valore massimo di {maxDiff} rispetto all'altra mesh {otherMeshContext}. Devi modificare il modello per regolarne le dimensioni
+Common.UGCValidation.ErrorLabel.BodyPartCageDistanceValid_TooFar,È stato trovato un vertice sulla mesh cage di {partName} che si trova a {distance} stud di distanza dalla mesh di rendering più vicina. Il numero massimo di stud è {maxDistance}. Fai in modo che la mesh della gabbia corrisponda più esattamente alla forma e alle dimensioni della mesh di rendering.
+Common.UGCValidation.ErrorLabel.BoundingBox_ValidationFailed,{reason}
+Common.UGCValidation.ErrorLabel.CageMeshDistanceBounded_DistanceTooHigh,La distanza media tra la gabbia esterna e la mesh è troppo elevata ({distance}). Regola la gabbia in modo che si adatti meglio alla mesh.
+Common.UGCValidation.ErrorLabel.CageMeshDistanceBounded_MeshOutsideCage,La distanza media tra la gabbia esterna e la mesh è troppo elevata. La mesh sembra trovarsi al di fuori della gabbia esterna.
+Common.UGCValidation.ErrorLabel.CageUV_ExtraDuplicateUVs,"Sono presenti {count} valori UV non appartenenti al modello nella {cageType} gabbia di ""{partName}"". Correggi gli UV della gabbia."
+Common.UGCValidation.ErrorLabel.CageUV_IncorrectUVCount,"La gabbia esterna ""{partName}"" dovrebbe avere {requiredUVCount} UV univoci, ma ne ha {actualUVCount}. Assicurati che la mesh abbia il numero richiesto di UV univoci e riprova."
+Common.UGCValidation.ErrorLabel.CageUV_InvalidUVValue,"Trovato valore UV non valido al di fuori dell'intervallo [0, 1] per ""{partName}"". Per risolvere il problema, devi modificare la mappa UV."
+Common.UGCValidation.ErrorLabel.CageUV_RenderMeshBoundsCheckFailed,Impossibile eseguire il test della mesh di rendering all'interno del riquadro di delimitazione dell'area modificata della gabbia esterna. Assicurati che esistano sia le mesh del cage sia la mesh di rendering e riprova.
+Common.UGCValidation.ErrorLabel.CageUV_RenderMeshOutsideModifiedArea,Solo un {currentPercent}% dei vertici della mesh di rendering si trova nell'area modificata {allowedArea} della CageMesh del WrapLayer (mesh esterna). È richiesto un {requiredPercent}%. Sposta la mesh di rendering in modo che rientri nell'area modificata della CageMesh del WrapLayer (mesh esterna).
+Common.UGCValidation.ErrorLabel.CageUV_TooFewMainModified,La CageMesh del WrapLayer (mesh esterna) per un {assetTypeName} deve modificare il {requiredPercent}% degli UV della gabbia nell'area {mainArea}. Attualmente solo il {currentPercent}% è modificato. Sposta la tua risorsa nell'area corretta del corpo.
+Common.UGCValidation.ErrorLabel.CageUV_TooManyExcludedModified,Il {modifiedPercent}% degli UV della gabbia modificati nella CageMesh del WrapLayer (mesh esterna) si trova al di fuori dell'area prevista del corpo. Per un {assetTypeName} non più del {maxPercent}% degli UV modificati può trovarsi al di fuori dell'area {allowedArea}. Sposta la tua risorsa nell'area corretta del corpo.
+Common.UGCValidation.ErrorLabel.CageUV_ZeroAreaTriangle,"Rilevato triangolo di area nulla nella mappa UV di ""{partName}"". Per risolvere il problema, devi modificare la mappa UV."
+Common.UGCValidation.ErrorLabel.CollisionFidelityWrong,"""{InstancePath}"" ha un valore CollisionFidelity errato. Il valore previsto è {ExpectedFidelity}."
 Common.UGCValidation.ErrorLabel.ContentNotEditable,{InstanceFullName}.{FieldName} contiene ancora contenuti modificabili non salvati. Salvali come risorsa prima di pubblicare e riprova.
-Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,La parte del corpo {bodyPartName} in CurveAnimation ha una traccia di posizione (traslazione). Le parti del corpo dell'animazione possono essere solo ruotate; le tracce di posizione non sono consentite. Rimuovi la traccia di posizione da questa parte del corpo.
+Common.UGCValidation.ErrorLabel.CoplanarTri_TooMany,"Rilevati troppi triangoli complanari che si intersecano nella mesh del modello ""{MeshName}"". Il massimo è {MaxIntersections} intersezioni in una mesh triangolare {TriangleCount}. Modifica la mesh per ridurre il numero di intersezioni di triangoli complanari."
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,"In CurveAnimation, la parte del corpo {bodyPartName} si sposta di {distance} stud dalla sua posizione iniziale. La traslazione massima consentita è di {maxDistance} stud. Riduci il movimento di posizione della parte del corpo."
-Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"CurveAnimation contiene ossa HRD/DRD e la parte del corpo {bodyPartName} ha una traccia di posizione (traslazione). Quando nell'animazione sono presenti ossa, nessuna parte del corpo può traslare per evitare la separazione delle articolazioni. Rimuovi tutte le tracce di posizione dalle parti del corpo."
-Common.UGCValidation.ErrorLabel.CurveAnim_BonePositionNotAllowed,L'osso {boneName} in CurveAnimation ha una traccia di posizione (traslazione). Le ossa HRD/DRD possono essere solo ruotate; le tracce di posizione causano la separazione delle articolazioni e non sono consentite. Rimuovi l'animazione di posizione da questo osso.
+Common.UGCValidation.ErrorLabel.CurveAnim_BoneRequiresParent,"La cartella delle ossa ""{boneName}"" richiede che anche ""{parentBoneName}"" sia presente nell'animazione."
 Common.UGCValidation.ErrorLabel.CurveAnim_BoneTranslationExceedsThreshold,"In CurveAnimation, l'osso {boneName} si sposta di {distance} stud dalla sua posizione iniziale. La traslazione massima consentita è di {maxDistance} stud. Riduci il movimento di posizione dell'osso."
 Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation contiene cartelle di ossa HRD/DRD che non sono ancora supportate. Rimuovi tutte le sottocartelle di ossa prima di caricare.
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,"In CurveAnimation, le parti del corpo non possono trovarsi a un'altezza inferiore a {minHeight} stud o superiore a {maxDistance} stud dalla HumanoidRootPart. Correggi l'animazione."
@@ -713,27 +742,27 @@ Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,"La gerarchia
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"La cartella {boneName} in CurveAnimation non ha il nome di un osso HRD/DRD riconosciuto. Il nome delle sottocartelle di animazione deve essere una parte del corpo R15 valida o un osso riconosciuto (ad esempio, HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase oppure un osso delle dita come LeftHandIndex1)."
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidCurveData,CurveAnimation contiene Curve con Time o Value non validi. Correggi l'animazione.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidInstanceTypes,La gerarchia di CurveAnimation può contenere solo {allowedTypes}. Rimuovi eventuali altri tipi di istanza.
-Common.UGCValidation.ErrorLabel.CurveAnim_InvalidLength,CurveAnimation deve avere una durata compresa tra {minLength} e {maxLength} secondi. Correggi l'animazione.
+Common.UGCValidation.ErrorLabel.CurveAnim_InvalidLength,Curve Animation {animationName} deve avere una durata compresa tra {minLength} e {maxLength} secondi. Correggi l'animazione.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidMarkerData,"CurveAnimation contiene MarkerCurves con elementi Time o Value non validi, oppure Value è troppo lungo. Correggi l'animazione."
-Common.UGCValidation.ErrorLabel.CurveAnim_InvalidNumericalData,CurveAnimation contiene Curve con dati numerici non validi. Correggi l'animazione.
+Common.UGCValidation.ErrorLabel.CurveAnim_InvalidNumericalData,Curve Animation {animationName} contiene Curve con dati numerici non validi. Correggi l'animazione.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidRigData,L'elemento AnimationRigData non ha superato la convalida interna. Assicurati che sia configurato correttamente.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidRigDataR15Plus,L'elemento AnimationRigData non ha superato la convalida interna R15+. Assicurati che sia configurato correttamente per le animazioni delle ossa.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidTags,CurveAnimation può contenere solo un singolo tag di timestamp. Rimuovi tutti gli altri tag.
-Common.UGCValidation.ErrorLabel.CurveAnim_JointRotationExceeded,"In CurveAnimation, al tempo di {time} secondi, l'articolazione {bodyPart} ha un angolo di rotazione di {rotation} gradi rispetto alla posizione di riposo. Il limite massimo consentito è di {maxRotation} gradi. Correggi l'animazione."
+Common.UGCValidation.ErrorLabel.CurveAnim_JointRotationExceeded,"In Curve Animation {animationName}, al tempo di {time} secondi, l'articolazione {bodyPart} ha un angolo di rotazione di {rotation} gradi rispetto alla posizione di riposo. Il limite massimo consentito è di {maxRotation} gradi. Correggi l'animazione."
 Common.UGCValidation.ErrorLabel.CurveAnim_KeysTooClose,CurveAnimation contiene la Curve {curvePath} con chiavi troppo ravvicinate nel tempo per un'animazione con un massimo di {maxFPS} fps. Correggi l'animazione.
 Common.UGCValidation.ErrorLabel.CurveAnim_LoopingNotEnabled,"CurveAnimation ""{animationName}"" non ha Loop abilitato. Le animazioni caricate sul marketplace devono essere in loop. Abilita la proprietà Loop."
 Common.UGCValidation.ErrorLabel.CurveAnim_MultipleBodyRoots,CurveAnimation contiene più di una cartella child (Folder) denominata come una parte del corpo o HumanoidRootPart. Rimuovi i duplicati e assicurati di lasciarne soltanto una.
 Common.UGCValidation.ErrorLabel.CurveAnim_MultipleRigData,CurveAnimation contiene più di un elemento child AnimationRigData. Elimina i duplicati e lasciane soltanto uno.
 Common.UGCValidation.ErrorLabel.CurveAnim_NegativeKeyTime,La Curve {curvePath} in CurveAnimation contiene una chiave con un Time negativo. Correggi l'animazione.
 Common.UGCValidation.ErrorLabel.CurveAnim_NoBodyRoot,CurveAnimation non contiene alcuna cartella child (Folder) denominata come una parte del corpo o HumanoidRootPart. Assicurati di includerne una (ma una soltanto).
-Common.UGCValidation.ErrorLabel.CurveAnim_NoJointManipulation,CurveAnimation non contiene alcuna manipolazione delle articolazioni.
+Common.UGCValidation.ErrorLabel.CurveAnim_NoJointManipulation,Curve Animation {animationName} non contiene alcuna manipolazione delle articolazioni.
 Common.UGCValidation.ErrorLabel.CurveAnim_NoRigData,CurveAnimation non contiene alcun elemento child AnimationRigData. Inseriscine uno (ma soltanto uno).
 Common.UGCValidation.ErrorLabel.CurveAnim_NotCurveAnimation,L'animazione a cui si fa riferimento non è una CurveAnimation. Assicurati che sia stata caricata correttamente.
-Common.UGCValidation.ErrorLabel.CurveAnim_PartTooFar,"In CurveAnimation, al tempo di {time} secondi, la parte del corpo {bodyPart} si trova a {distance} stud dalla HumanoidRootPart, mentre quella massima consentita è di {maxDistance}. Correggi l'animazione."
-Common.UGCValidation.ErrorLabel.CurveAnim_PartTooLow,"In CurveAnimation, al tempo di {time} secondi, la parte del corpo {bodyPart} si trova a un'altezza di {height} stud dalla HumanoidRootPart, mentre quella minima consentita è di {minHeight}. Correggi l'animazione."
-Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,CurveAnimation contiene una separazione posizionale delle parti del corpo. Solo LowerTorso può cambiare posizione. Tutte le altre parti del corpo possono cambiare solo il loro orientamento. {bodyPart} si sposta di più di {maxMovement} stud dalla sua origine. Correggi l'animazione.
-Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,"In CurveAnimation, al tempo di {time} secondi, la parte del corpo {bodyPart} si muove a una velocità di rotazione di {speed} gradi/secondo, mentre il limite massimo consentito è di {maxSpeed} gradi/secondo. Correggi l'animazione."
-Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,"In CurveAnimation, al tempo di {time} secondi, la parte del corpo {bodyPart} si muove a una velocità di {speed} stud/secondo, mentre il limite massimo è di {maxSpeed} stud/secondo. Correggi l'animazione."
+Common.UGCValidation.ErrorLabel.CurveAnim_PartTooFar,"In Curve Animation {animationName}, al tempo di {time} secondi, la parte del corpo {bodyPart} si trova a {distance} stud dalla HumanoidRootPart. Le parti del corpo non possono trovarsi a più di {maxDistance} stud dalla HumanoidRootPart. Correggi l'animazione."
+Common.UGCValidation.ErrorLabel.CurveAnim_PartTooLow,"In Curve Animation {animationName}, al tempo di {time} secondi, la parte del corpo {bodyPart} si trova a un'altezza di {height} stud dalla HumanoidRootPart. Le parti del corpo non possono trovarsi a un'altezza inferiore a {minHeight} stud dalla HumanoidRootPart. Correggi l'animazione."
+Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,Curve Animation {animationName} contiene una separazione posizionale delle parti del corpo. Solo LowerTorso può cambiare posizione. Tutte le altre parti del corpo possono cambiare solo il loro orientamento. {bodyPart} si sposta di più di {maxMovement} stud dalla sua origine. Correggi l'animazione.
+Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,"In Curve Animation {animationName}, al tempo di {time} secondi, la parte del corpo {bodyPart} si muove a una velocità di rotazione di {speed} gradi/secondo, mentre il limite massimo consentito è di {maxSpeed} gradi/secondo. Correggi l'animazione."
+Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,"In Curve Animation {animationName}, al tempo di {time} secondi, la parte del corpo {bodyPart} si muove a una velocità di {speed} stud/secondo, mentre il limite massimo è di {maxSpeed} stud/secondo. Correggi l'animazione."
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,"In CurveAnimation, la parte del corpo {bodyPart} si sposta di più di {maxMovement} stud tra un fotogramma e l'altro. Correggi l'animazione."
 Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,La struttura CurveAnimation non è valida: {detail}. Assicurati che l'animazione segua lo schema previsto.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation ha {count} discendenti. Riducili per rispettare il limite consentito ({maxAllowed}).
@@ -742,12 +771,24 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation con
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation contiene una MarkerCurve con {count} Marker. La quantità massima consentita è di {maxAllowed}. Correggi l'animazione.
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation contiene un elemento child imprevisto: {childName}
 Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,"{InstanceFullName}.{FieldName} fissa l'animazione {AssetId} alla versione {Version}, tuttavia le animazioni non possono ancora essere fissate a una versione. Rimuovi ""&version={Version}"" e riprova."
+Common.UGCValidation.ErrorLabel.DescendantIdFetchFailed,Impossibile recuperare i risultati della moderazione per {InstanceFullName}. Assicurati che tutte le risorse siano di proprietà dell'utente corrente.
+Common.UGCValidation.ErrorLabel.DescendantIdMalformed,Impossibile analizzare ContentId in {InstanceFullName}.{FieldName}. Assicurati di utilizzare un URL valido con un ID valido e riprova.
+Common.UGCValidation.ErrorLabel.DescendantIdMissing,{InstanceFullName}.{FieldName} non può essere vuoto. Assicurati che sia assegnata una risorsa valida e riprova.
+Common.UGCValidation.ErrorLabel.DescendantIdNotApproved,La/e risorsa/e non ha/hanno superato la moderazione: {ModerationMessages}
+Common.UGCValidation.ErrorLabel.DescendantIdNotOwned,La risorsa {AssetId} ({InstanceFullName}.{FieldName}) non è di proprietà di un creator autorizzato.
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,La risorsa {AssetId} ({InstanceFullName}.{FieldName}) non è pubblicata. Pubblicala e riprova.
-Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,"{InstanceFullName}.{FieldName} utilizza la versione {Version} della risorsa {AssetId}, ma al momento è supportata solo la versione 1. Utilizza quest'ultima e riprova."
+Common.UGCValidation.ErrorLabel.DescendantIdVersionNotLatest,"{InstanceFullName}.{FieldName} utilizza la versione {Version} della risorsa {AssetId}, ma al momento è possibile utilizzare solo la sua versione più recente, {LatestVersion}. Utilizza la versione {LatestVersion} o rimuovi ""&version={Version}"" e riprova."
+Common.UGCValidation.ErrorLabel.DescendantIdsTooMany,"Il caricamento del modello contiene troppe risorse secondarie (mesh, texture, ecc.) e non può essere elaborato così com'è. Devi riorganizzare il modello."
+Common.UGCValidation.ErrorLabel.DynHead_ControlsInactive,La mesh {headName} ({meshId}) ha controlli FACS inattivi: {controlList}
+Common.UGCValidation.ErrorLabel.DynHead_ControlsMissing,Alla mesh {headName} ({meshId}) mancano i controlli FACS: {controlList}
+Common.UGCValidation.ErrorLabel.DynHead_FacsMissing,"Convalida della testa dinamica ""{headName}"" non riuscita a causa della mancanza di informazioni FACS. È necessario fornire i controlli FACS per almeno 17 pose (consultare la documentazione)."
+Common.UGCValidation.ErrorLabel.DynHead_JointAccumulatedExceeded,Le animazioni facciali della testa possono essere combinate per estendere l'articolazione {jointName} molto al di fuori della testa. Modifica le animazioni facciali e riprova.
+Common.UGCValidation.ErrorLabel.DynHead_JointBoundsCheckFailed,Impossibile convalidare i limiti delle articolazioni dell'animazione facciale. Riprova più tardi.
+Common.UGCValidation.ErrorLabel.DynHead_JointDirectExceeded,L'animazione facciale della testa {actionName} comporta lo spostamento delle articolazioni in misura considerevole al di fuori della testa. Modifica le animazioni facciali e riprova.
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,Le teste dinamiche nel marketplace devono essere adeguatamente incorniciate in modo che i vertici degli occhi e della bocca all'interno della gabbia siano allineati con quelli della mesh. Migliora l'incorniciatura e il suo allineamento con la mesh.
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,I punti di riferimento dell'occhio sinistro della gabbia della testa dinamica non sono allineati con la mesh. Regola la gabbia dell'occhio in modo che la mesh dell'occhio sinistro rientri nell'area della gabbia proiettata.
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,I punti di riferimento della bocca della gabbia della testa dinamica non sono allineati con la mesh. Regola la gabbia della bocca in modo che la mesh della bocca rientri nell'area della gabbia proiettata.
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,I punti di riferimento dell'occhio destro della gabbia della testa dinamica non sono allineati con la mesh. Regola la gabbia dell'occhio in modo che la mesh dell'occhio destro rientri nell'area della gabbia proiettata.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,L'occhio sinistro sullo schermo (punti rossi sul lato sinistro della testa nel plugin di visualizzazione) presenta punti di riferimento della gabbia non allineati con la mesh: alcuni punti della gabbia si trovano all'interno della mesh della testa (la mesh sporge attraverso la gabbia) o troppo al di fuori di essa. Regola la gabbia corrispondente in modo che si trovi sulla mesh o appena al di fuori di essa intorno a questo occhio.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,La bocca (punti verdi nel plugin di visualizzazione) presenta punti di riferimento della gabbia non allineati con la mesh: alcuni punti della gabbia si trovano all'interno della mesh della testa (la mesh sporge attraverso la gabbia) o troppo al di fuori di essa. Regola la gabbia della bocca in modo che si trovi sulla mesh o appena al di fuori di essa intorno alla bocca.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,L'occhio destro sullo schermo (punti blu sul lato destro della testa nel plugin di visualizzazione) presenta punti di riferimento della gabbia non allineati con la mesh: alcuni punti della gabbia si trovano all'interno della mesh della testa (la mesh sporge attraverso la gabbia) o troppo al di fuori di essa. Regola la gabbia corrispondente in modo che si trovi sulla mesh o appena al di fuori di essa intorno a questo occhio.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Impossibile rilevare il sorriso della testa dinamica. Regola i punti di riferimento della gabbia per la bocca in modo che corrispondano a dove si trova la bocca sulla testa e assicurati che possa mostrare il sorriso.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,Impossibile rilevare se l'occhio sinistro della testa dinamica sia chiuso o meno. Regola i punti di riferimento della gabbia per l'occhio sinistro in modo che corrispondano a dove si trova l'occhio sinistro sulla testa e assicurati che possa essere chiuso.
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,Le teste dinamiche sul marketplace sono prive di gabbie. Crea una gabbia per la testa dinamica.
@@ -755,9 +796,9 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,Impossibile rilevare se 
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"Le teste dinamiche sul marketplace devono essere animate, ma questa testa non dispone di alcun dato del sistema di codifica facciale."
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,Impossibile rilevare se l'occhio destro della testa dinamica sia chiuso o meno. Regola i punti di riferimento della gabbia per l'occhio destro in modo che corrispondano a dove si trova l'occhio destro sulla testa e assicurati che possa essere chiuso.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,Impossibile rilevare l'espressione accigliata della testa dinamica. Regola i punti di riferimento della gabbia per la bocca in modo che corrispondano a dove si trova la bocca sulla testa e assicurati che possa mostrare tale espressione.
-Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Area emissiva al di sopra della soglia.
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,"La mesh della parte del corpo ""{meshName}"" è emissiva al {emissivePercentage}%. La copertura emissiva non deve superare il {maxEmissivePercentage}%. Riduci l'intensità o la copertura della maschera emissiva."
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} è troppo emissivo. L'area emissiva moltiplicata per l'intensità supera il limite (attualmente un {emissivePercentage}%, mentre deve essere pari o inferiore a un {maxEmissivePercentage}%). Riduci l'area luminosa o abbassa il valore di EmissiveStrength."
-Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Area emissiva superata.
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,"La mesh ""{meshName}"" ha un'area di superficie emissiva ponderata di {emissiveArea} stud quadrati, che supera il massimo di {maxEmissiveArea} stud quadrati. Riduci l'intensità o la copertura della maschera emissiva."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} è troppo emissivo. L'area emissiva moltiplicata per l'intensità supera il limite (attualmente {emissiveArea}, mentre deve essere pari o inferiore a {maxEmissiveArea}). Riduci l'area luminosa o abbassa il valore di EmissiveStrength."
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedInExperience,Le mappe emissive non sono supportate per gli elementi creati nelle esperienze. Rimuovi EmissiveMaskContent da ogni SurfaceAppearance.
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedOnDecal,"Le decalcomanie non possono essere emissive. Su ""{InstancePath}"", rimuovi EmissiveMaskContent, imposta EmissiveStrength su 1 e EmissiveTint su bianco."
@@ -765,19 +806,29 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribut
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Nell'animazione pubblicata manca un indicatore di emote UGC valido. Ripubblica l'animazione.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Non è stato possibile calcolare la traslazione massima della parte dai dati dell'animazione pubblicata. Ripubblica l'animazione.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"L'animazione pubblicata indica una traslazione massima della parte di {taggedTranslation} stud, ma i suoi dati di animazione calcolano {calculatedTranslation} stud. Ripubblica l'animazione."
+Common.UGCValidation.ErrorLabel.ExperienceCreatorNotSupported,"I creatori di esperienze non possono creare articoli avatar. Tipo di creatore: {CreatorType}, ID creatore: {CreatorId}."
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"La testa deve essere posizionata sopra UpperTorso. Il centro della testa si trova al di sotto della parte superiore del busto, il che indica che la mesh della testa è collassata o posizionata in modo errato."
+Common.UGCValidation.ErrorLabel.Extents_ParentBelowPart,{upperPart} non può estendersi al di sotto di {lowerPart}. Puoi regolare il modo in cui le parti sono assemblate spostando {attachmentName}
+Common.UGCValidation.ErrorLabel.Extents_PartAboveParent,{lowerPart} non può estendersi oltre {upperPart}. Puoi regolare il modo in cui le parti sono assemblate spostando {attachmentName}
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,La proprietà InternalOverrideFACSData su FaceControls deve essere vuota al momento del caricamento.
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,Al viso di base mancano gli elementi obbligatori degli occhi. Aggiungi gli occhi al viso di base e riprova.
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,Al viso di base manca una bocca obbligatoria. Aggiungila e riprova.
 Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,Impossibile rilevare l'espressione di felicità. Regola la gabbia della bocca o il FACS dell'espressione di felicità in modo che la mesh della bocca proiettata si deformi come previsto.
-Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,Impossibile rilevare l'espressione con l'occhio sinistro chiuso. Regola la gabbia dell'occhio sinistro o il FACS di chiusura in modo che la mesh dell'occhio proiettata si deformi come previsto.
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,L'occhio sinistro sullo schermo (punti rossi sul lato sinistro della testa nel plugin di visualizzazione) non si chiude abbastanza. Controlla i controlli FACS dell'occhio destro e la gabbia corrispondente.
 Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,Impossibile rilevare l'espressione di bocca aperta. Regola la gabbia della bocca o il FACS della bocca aperta in modo che la mesh della bocca proiettata si deformi come previsto.
-Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,Impossibile rilevare l'espressione con l'occhio destro chiuso. Regola la gabbia dell'occhio destro o il FACS di chiusura in modo che la mesh dell'occhio proiettata si deformi come previsto.
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,L'occhio destro sullo schermo (punti blu sul lato destro della testa nel plugin di visualizzazione) non si chiude abbastanza. Controlla i controlli FACS dell'occhio sinistro e la gabbia corrispondente.
 Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,Impossibile rilevare l'espressione di tristezza. Regola la gabbia della bocca o il FACS dell'espressione di tristezza in modo che la mesh della bocca proiettata si deformi come previsto.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"È stato rilevato che FACs ha espanso la testa del {modPercent}%, ma l'alterazione della testa è contraria alle norme del marketplace per le animazioni facciali."
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Le teste dinamiche possono avere al massimo {maxFacsJointCount} articolazioni del sistema di codifica facciale, ma questa testa ne ha {actualJointCount}. Riduci il numero di articolazioni del sistema di codifica facciale e riprova."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"È stato rilevato che FACs ha ridotto la testa del {modPercent}%, ma l'alterazione della testa è contraria alle norme del marketplace per le animazioni facciali."
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,Il formato caricato non corrisponde alla struttura di cartelle prevista. Riprova o invia una segnalazione di bug.
+Common.UGCValidation.ErrorLabel.HSRAssetHasChildren,La risorsa WrapLayer HSR contiene elementi child sotto l'istanza radice HiddenSurfaceRemovalAsset.
+Common.UGCValidation.ErrorLabel.HSRAssetIdInvalidUrl,"""{InstancePath}"" ha un HSRAssetId con un URL non valido."
+Common.UGCValidation.ErrorLabel.HSRAssetIdRequired,"""{InstancePath}"" richiede l'impostazione di un HSRAssetId."
+Common.UGCValidation.ErrorLabel.HSRAssetInvalidRoot,L'asset WrapLayer HSR non ha esattamente 1 radice HiddenSurfaceRemovalAsset.
+Common.UGCValidation.ErrorLabel.HSRDataNotReady,"Dati HSR mancanti per ""{InstancePath}"". Riprova."
+Common.UGCValidation.ErrorLabel.HSRMeshIdValidationError,"Si è verificato un errore durante la convalida degli ID mesh HSR per ""{InstancePath}""."
+Common.UGCValidation.ErrorLabel.HSRMeshIdsMismatch,"Rilevati dati HSR non validi per ""{InstancePath}"". Rigenera la risorsa utilizzando lo strumento di montaggio degli accessori e riprova."
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,L'osso {bonePath} è troppo lontano e al di fuori dalla MeshPart {partName}. Spostalo più vicino al limite dimensionale della MeshPart.
 Common.UGCValidation.ErrorLabel.HrdBone_TooCloseToParent,L'osso {bonePath} è troppo vicino all'origine. Regola leggermente la posizione.
 Common.UGCValidation.ErrorLabel.HrdBone_TransformNotIdentity,L'osso {bonePath} ha una proprietà di trasformazione che non è ancora abilitata per i caricamenti sul marketplace. Ti preghiamo di reimpostarla sul CFrame di identità.
@@ -798,6 +849,8 @@ Common.UGCValidation.ErrorLabel.HrdProperties_UncontainedJoint,"La proprietà HR
 Common.UGCValidation.ErrorLabel.HrdTposePosition,L'articolazione {jointName} ha una posizione TposeAdjustment al di fuori dei limiti accettabili. Riduci il dislocamento in modo che rientri nell'intervallo di +-({offsetLimit}).
 Common.UGCValidation.ErrorLabel.HrdTposeRotation,L'articolazione {jointName} ha un TposeAdjustment che devia di più di {degLimit} gradi rispetto all'orientamento consigliato di {expectedOrientation}.
 Common.UGCValidation.ErrorLabel.InstanceTagsFound,"Le seguenti istanze hanno dei tag, ma le risorse del marketplace non possono avere tag: {ProblematicDescendantPaths} "
+Common.UGCValidation.ErrorLabel.InstanceTreeBannedClass,"""{InstancePath}"" è di tipo {ClassName}, che non è consentito nelle risorse del marketplace."
+Common.UGCValidation.ErrorLabel.InstanceTreeBannedName,"""{InstancePath}"" ha un nome riservato e non può essere utilizzato nelle risorse del Marketplace."
 Common.UGCValidation.ErrorLabel.InternalError,"La tua risorsa non può essere convalidata correttamente a causa di un errore interno. Se il problema persiste, crea una segnalazione di bug. ValidationJobId: {ValidationJobId}"
 Common.UGCValidation.ErrorLabel.JointRotAtt_Moved,"{instPath} è una jointRotation spostata, ma i caricamenti del marketplace potrebbero non regolare ancora questa istanza. Reimposta la posizione a {expectedPosition}."
 Common.UGCValidation.ErrorLabel.JointRotAtt_MultipleAttachments,L'istanza {parentPath} non può avere più di 1 elemento figlio di tipo JointRotation.
@@ -805,7 +858,21 @@ Common.UGCValidation.ErrorLabel.JointRotAtt_Rotated,"{instPath} è una jointRota
 Common.UGCValidation.ErrorLabel.JointRotAtt_UnrecognizedParent,"L'istanza {parentPath} ha un elemento figlio di tipo JointRotation, ma questo non fa parte dello schema R15plus consentito."
 Common.UGCValidation.ErrorLabel.JointRotAtt_WrongInstanceClass,"L'istanza {instPath} si chiama JointRotation, ma quest'ultima è riservata agli allegati che sono a loro volta elementi figli di un allegato."
 Common.UGCValidation.ErrorLabel.LCDeformTooLarge,"Quando viene applicato a un avatar, il tuo abbigliamento a strati si deforma superando la dimensione accettabile di {maxSize}."
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NoHandle,"L'accessorio ""{accessoryName}"" non ha un Handle. Impossibile convalidare gli indumenti a strati fuori dai limiti."
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NoWrapLayer,"L'accessorio ""{accessoryName}"" non ha un WrapLayer. Impossibile convalidare gli indumenti a strati fuori dai limiti."
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NonZeroMaxSize,L'accessorio ha un valore MaxSize diverso da zero.
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NonZeroOffset,L'accessorio ha un offset diverso da zero.
+Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_OutOfBounds,"Convalida dell'abbigliamento a strati non riuscita per ""{accessoryName}"". Quando viene deformato, l'abbigliamento a strati diventa troppo grande."
 Common.UGCValidation.ErrorLabel.LeaderVertsNearCageIslands,Le ciglia presentano vertici associati a RBX_Leader che sono troppo lontani dai punti di riferimento degli occhi sulla gabbia interna. Assicurati che tutti i vertici associati a RBX_Leader siano posizionati più vicino all'area degli occhi della gabbia interna.
+Common.UGCValidation.ErrorLabel.LegsSeparated_HipAttachmentOutOfRange,{attachmentPath} è {currentValue} e non può essere {comparison} {cutoff}. Correggi l'attachment.
+Common.UGCValidation.ErrorLabel.LegsSeparated_LegsOverlap,Le gambe si sovrappongono di {overlap} stud sull'asse x. {leftMax} è il valore massimo della gamba sinistra. {rightMax} è il valore massimo della gamba destra. Regola le gambe per ridurre la sovrapposizione.
+Common.UGCValidation.ErrorLabel.MakeupDecal_FailedToLoadTexture,Impossibile caricare {fieldName} per la decalcomania {instanceName}. Assicurati che TextureContent esista e sia valido e riprova.
+Common.UGCValidation.ErrorLabel.MakeupDecal_FailedToLoadTextureData,"Impossibile caricare i dati della texture per ""{fullName}"". Assicurati che la texture esista e riprova."
+Common.UGCValidation.ErrorLabel.MakeupDecal_NoColorMap,Nessuna ColorMap trovata per la decalcomania {instanceName}. Le decalcomanie per il trucco devono avere una ColorMap valida.
+Common.UGCValidation.ErrorLabel.MakeupDecal_TextureTooBig,"La risoluzione della texture {sizeX}x{sizeY} px rilevata in ""{fullName}"" è superiore al valore massimo supportato di {maxSize}x{maxSize} px per il campo {fieldName}""."
+Common.UGCValidation.ErrorLabel.MakeupDecal_UVZoneExcludeViolation,Sono stati trovati pixel opachi nella ColorMap per {instanceName} all'interno di un'area UV con restrizioni di [{minBound}] e [{maxBound}] per il tipo di risorsa {assetTypeName}.
+Common.UGCValidation.ErrorLabel.MakeupDecal_UVZoneIncludeViolation,L'area opaca della ColorMap per {instanceName} non rientra nell'area UV consentita di [{minBound}] e [{maxBound}] per il tipo di risorsa {assetTypeName}.
+Common.UGCValidation.ErrorLabel.MaterialNotAllowed,Le seguenti istanze hanno un materiale non valido: {InstanceNameList}. Sono consentiti solo questi materiali: {AllowedMaterials}.
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceAvatar_CageInsideMesh,La gabbia del corpo si interseca con la mesh del corpo. {negtiveSDFPercent}% dei suoi vertici si trova all'interno della mesh.
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceAvatar_CageTooFar,"La gabbia del corpo è troppo lontana dalla mesh. La distanza massima tra le due è {max_sdf}, un valore superiore alla soglia consentita di {max_sdf_threshold}"
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceHead_CageInsideMesh,La gabbia della testa si interseca con la mesh della testa. {negtiveSDFPercent}% dei suoi vertici si trova all'interno della mesh.
@@ -815,17 +882,61 @@ Common.UGCValidation.ErrorLabel.MeasureCageMeshDistance_CageTooFar,"La gabbia es
 Common.UGCValidation.ErrorLabel.MeasureCageRelevancy,{outer_cage_face_irrelevant_percent}% dei vertici modificati della gabbia esterna non copre l'accessorio. Assicurati di spostare la gabbia esterna solo dove necessario.
 Common.UGCValidation.ErrorLabel.MeasureCageUV,"Sono presenti {incorrect_uv_count} valori UV non corretti o non appartenenti al modello nella gabbia {cage_name}, correggili."
 Common.UGCValidation.ErrorLabel.MeasureMeshOutsideOuterCage,{mesh_outside_outer_cage_percent}% dei vertici della mesh dell'accessorio si trovano al di fuori della sua gabbia esterna. Effettua delle modifiche per far sì che una parte maggiore dell'accessorio si trovi tra le gabbie.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ExceedsBounds,"{meshName} ha dimensioni superiori a quelle massime consentite per il riquadro di delimitazione. La dimensione massima per il tipo {assetTypeName} è [{maxSizeX}, {maxSizeY}, {maxSizeZ}]."
+Common.UGCValidation.ErrorLabel.MeshGeometry_NotCentered,{meshName}.{fieldName} ha dati della mesh non centrati. Reimporta questa mesh con l'importatore 3D di Roblox e assicurati che non ci siano geometrie non vincolate nel file di origine.
+Common.UGCValidation.ErrorLabel.MeshGeometry_PositionOutOfBounds,La posizione è al di fuori dei limiti.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleAboveMaximum,{meshName} è ingrandito fino a {scaleMultiple} volte la sua dimensione di mesh originale. Il massimo è {maxScaleMultiple} volte. Riesporta o reimporta la mesh nella dimensione desiderata anziché ingrandirla in Studio.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleBelowMinimum,{meshName} è ridimensionato al {scalePercent}% della sua dimensione di mesh originale. Il valore minimo è {minScalePercent}%. Riesporta o reimporta la mesh nella dimensione desiderata anziché ridurla in Studio.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleNotPositive,"{meshName} ha una scala pari a zero o negativa. Usa valori di scala positivi. Per creare una copia speculare di una mesh, capovolgila nel tuo software di modellazione 3D ed esportala di nuovo."
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooLarge,La scala della mesh {meshName} è troppo grande.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooSmall,La scala della mesh è troppo piccola.
+Common.UGCValidation.ErrorLabel.MeshGeometry_SurfaceAreaExceeded,"L'area di superficie totale della mesh del modello ""{meshName}"" è {surfaceArea}, non può essere superiore a {maxSurfaceArea}. È necessario ridurre il numero e/o le dimensioni di tutti i triangoli."
+Common.UGCValidation.ErrorLabel.MeshGeometry_TotalTriangleCountExceeded,"La risoluzione della mesh di ""{triangleCount}"" per ""{assetTypeName}"" è superiore al numero massimo di triangoli supportato ""{maxTriangles}"". Devi eseguire la retopologia del modello per ridurre il numero di triangoli."
+Common.UGCValidation.ErrorLabel.MeshGeometry_TriangleCountExceeded,La risoluzione della mesh del modello {meshName} di {triangleCount} è superiore al valore massimo supportato di {maxTriangles}. Devi eseguire nuovamente la topologia del modello e riprovare.
+Common.UGCValidation.ErrorLabel.MeshGeometry_VertexDensityExceeded,La densità massima dei vertici è stata superata. Riduci il numero di vertici molto vicini tra loro.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ZeroAreaTriangle,Rilevato triangolo di area nulla nella mesh del modello {meshName}. Devi modificare la mesh per rimuovere i triangoli di area nulla.
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,"La dimensione dell'asse {partName} della mesh {axis} ""{currentSize}"" stud è superiore alla dimensione massima consentita per le singole parti di ""{maxSize}"" stud. Riduci la mesh."
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"La dimensione dell'asse {axis} della mesh {partName} (""{currentSize}"" stud) è inferiore alla dimensione minima consentita per le singole parti di ""{minSize}"" stud. Ingrandisci la mesh."
+Common.UGCValidation.ErrorLabel.MeshSize_LoadFailed,
+Common.UGCValidation.ErrorLabel.MeshSize_Mismatch,La dimensione della mesh calcolata per {meshName} non corrisponde al valore della proprietà MeshSize
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,L'allegato {attName} deve esistere esattamente una volta all'interno dei discendenti di {partName}.
 Common.UGCValidation.ErrorLabel.NoAttributes,"""{RootInstanceName}"" (o i suoi discendenti) contengono attributi. È necessario rimuovere questi ultimi da quanto segue: {InstanceNameList}"
+Common.UGCValidation.ErrorLabel.NoMeshBelowFeet_PartBelowFeet,{partName} si estende per {distance} stud sotto la parte inferiore dei piedi. Solo le gambe possono toccare terra e le altre parti del corpo possono scendere al massimo di {maxDistance} stud sotto di essa. Accorcia o alza {partName}.
+Common.UGCValidation.ErrorLabel.Pose_AngleFromXYPlane,"{assetName} si trova a un angolo di {angle} gradi rispetto al piano X,Y; deve essere compreso entro {limit} gradi. Assicurati che il personaggio sia in posizione a I, a A o a T."
+Common.UGCValidation.ErrorLabel.Pose_AngleOnXYPlane,"{assetName} forma un angolo di {angle} con il vettore [{xVector}] sul piano X,Y; deve essere compreso tra {minAngle} e {maxAngle} gradi. Assicurati che il personaggio sia in posizione a I, a A o a T."
+Common.UGCValidation.ErrorLabel.Pose_CFrameCalculationFailed,"Impossibile calcolare il CFrame dell'asset {assetName}. Assicurati che il personaggio sia in posizione a I, a A o a T e che le parti non siano tutte nella stessa posizione."
+Common.UGCValidation.ErrorLabel.Pose_PointingAlongZVector,"{assetName} punta lungo il vettore Z del mondo. Assicurati che il personaggio sia in posizione a I, a A o a T."
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' ha proprietà non valide: {ProblematicProperties}. È stato superato un limite di byte mostrato (un limite di 0 significa che la proprietà deve essere vuota); qualsiasi altra proprietà contiene valori NaN/Inf o supera il suo limite di dimensione predefinito.
+Common.UGCValidation.ErrorLabel.PropertyNotFound,"La proprietà ""{PropertyName}"" non è stata trovata su ""{InstancePath}""."
+Common.UGCValidation.ErrorLabel.PropertyValueInvalid,"La proprietà ""{PropertyName}"" su ""{InstancePath}"" non è valida. Il valore previsto è {ComparisonMethod} {ExpectedValue}."
 Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,"Nell'animazione renderizzata mancano una o più espressioni facciali richieste (occhio chiuso, bocca aperta, felice, triste)."
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,"L'allegato del rig ""{AttachmentName}"" in ""{PartName}"" dovrebbe essere posizionato vicino al punto di articolazione dove questa parte del corpo si unisce a quella adiacente. La posizione corrente [{CurrentPosition}] è troppo lontana dal piano di connessione. Spostalo più vicino a [{ClosestValidPosition}]."
+Common.UGCValidation.ErrorLabel.SAOpacity_FailedToLoadTexture,"Impossibile caricare la texture ""{FieldName}"" per SurfaceAppearance ""{FullName}"". Assicurati che la texture esista e riprova."
+Common.UGCValidation.ErrorLabel.SAOpacity_InvalidAlphaMode,SurfaceAppearance ({FullName}) ha un AlphaMode non valido. Previsto Enum.AlphaMode.Overlay.
+Common.UGCValidation.ErrorLabel.SAOpacity_TextureNotOpaque,"La texture ""{FullName}"" non è completamente opaca. Utilizza una trama opaca."
+Common.UGCValidation.ErrorLabel.ScaleTypeInvalid,"Il valore AvatarPartScaleType in ""{ParentName}"" non è valido. I valori accettati sono Classic, ProportionsSlender o ProportionsNormal."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Per caricare una risorsa su Roblox, devi selezionare esattamente 1 istanza e il tipo di caricamento associato."
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,Questa risorsa è troppo grande per essere caricata ({sizeBytes} byte superano il massimo di {maxSizeBytes} byte). Riduci le sue dimensioni e riprova.
+Common.UGCValidation.ErrorLabel.SurfaceAppearance_MissingSA,({MeshPartFullName}) ha un TextureID vuoto e nessuna istanza SurfaceAppearance secondaria. Devi definire almeno uno di questi elementi.
+Common.UGCValidation.ErrorLabel.SurfaceAppearance_TextureAndSABothDefined,TextureID e SurfaceAppearance sono entrambi definiti per MeshPart ({MeshPartFullName}). La pubblicazione utilizzerà solo SurfaceAppearance.
+Common.UGCValidation.ErrorLabel.TexturePackInvalidURL,"""{SurfaceAppearanceName}"" ha una proprietà ""TexturePack"" con un URL non valido. Correggi l'URL."
+Common.UGCValidation.ErrorLabel.TexturePack_DownloadFailed,"Impossibile scaricare TexturePack per SurfaceAppearance ""{SurfaceAppearanceName}""."
+Common.UGCValidation.ErrorLabel.TexturePack_Mismatch,"Le texture in SurfaceAppearance ""{SurfaceAppearanceName}"" non corrispondono a quelle nel relativo TexturePack. Correggi il PacchettoTexture."
+Common.UGCValidation.ErrorLabel.TextureSize_FailedToLoad,"Impossibile caricare i dati della texture per ""{FullName}"". Assicurati che la texture esista e riprova."
+Common.UGCValidation.ErrorLabel.TextureSize_TooBig,"La risoluzione della texture {Width}x{Height} px rilevata in ""{FullName}"" è superiore al valore massimo supportato di {MaxSize}x{MaxSize} px per il campo ""{FieldName}""."
+Common.UGCValidation.ErrorLabel.ThumbnailInvalidTarget,"Risorsa di destinazione non valida per la generazione della miniatura. Il valore previsto è ""{ExpectedTarget}""."
+Common.UGCValidation.ErrorLabel.ThumbnailOutsideView,"La risorsa ""{InstancePath}"" è posizionata al di fuori della visuale della videocamera per le miniature. Riposiziona la risorsa al centro della visualizzazione della telecamera."
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"La meshpart del capo contiene animazioni facciali per {jointName}, che non possono essere utilizzate nei FACS. Rinomina questa articolazione e poi importa nuovamente il capo."
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,"La parte del corpo {partName} è associata all'articolazione virtuale {jointName}, che non fa parte dello schema R15plus."
+Common.UGCValidation.ErrorLabel.UnsupportedCreatorType,"Tipo di creatore non supportato. Tipo di creatore: {CreatorType}, ID creatore: {CreatorId}."
+Common.UGCValidation.ErrorLabel.VertexColors_NotOpaque,"Colore del vertice non valido trovato nel modello mesh ""{MeshName}"". Devi modificare la mappa dei colori in modo che sia tutta bianca {TransparencyNote} e riprovare."
+Common.UGCValidation.ErrorLabel.VerticesNotCoincident_TooManySimilar,{cageName} ha un {percentage}% di vertici troppo vicini tra loro. Modifica i vertici in modo che al massimo il {threshold}% sia coincidente o vicino agli altri.
+Common.UGCValidation.ErrorLabel.WrapTexture_FailedToLoadCage,Impossibile caricare ReferenceCageContent per {instanceName}.
+Common.UGCValidation.ErrorLabel.WrapTexture_FailedToLoadUV,"Impossibile caricare le UV per ""{instanceName}"". Assicurati che la mappa UV esista e riprova."
+Common.UGCValidation.ErrorLabel.WrapTexture_InvalidMaxBound,{instanceName}.UVMaxBound [{actual}] non corrisponde al valore UVMaxBound richiesto di [{expected}].
+Common.UGCValidation.ErrorLabel.WrapTexture_InvalidMinBound,{instanceName}.UVMinBound [{actual}] non corrisponde al valore UVMinBound richiesto di [{expected}].
+Common.UGCValidation.ErrorLabel.WrapTexture_InvalidUV,"Trovato valore UV non valido per la gabbia di ""{instanceName}"". Per risolvere il problema, devi modificare la mappa UV."
+Common.UGCValidation.ErrorLabel.WrapTexture_NoCage,Nessun ReferenceCageContent fornito per {instanceName}.
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,Vai alle Impostazioni
@@ -1173,6 +1284,7 @@ CoreScripts.TextChat.InputBar.Hint.GamepadConnectedConfirm,
 CoreScripts.TextChat.InputBar.Hint.MouseKeyboard,Per chattare clicca qui o premi {KEY} chiave
 CoreScripts.TextChat.InputBar.Hint.PrivacySettingsDisabled,Le impostazioni della chat ti impediscono di inviare e ricevere messaggi.
 CoreScripts.TextChat.InputBar.Hint.Touch,Tocca qui per chattare
+CoreScripts.TextChat.MessageStatus.Warning.DictationRateLimited,Aspetta prima di inviare un altro messaggio. La digitazione vocale è in pausa.
 CoreScripts.TextChat.MessageStatus.Warning.Floodchecked,Devi aspettare prima di inviare un altro messaggio.
 CoreScripts.TextChat.MessageStatus.Warning.InvalidPrivacySettings,
 CoreScripts.TextChat.MessageStatus.Warning.MessageTooLong,Il tuo messaggio supera la lunghezza massima consentita.
@@ -1719,6 +1831,7 @@ Feature.Avatar.Action.Rename,Rinomina
 Feature.Avatar.Action.RenameSet,Rinomina set
 Feature.Avatar.Action.Reset,Ripristina
 Feature.Avatar.Action.RestoreLastSaved,Ripristina l'ultimo avatar salvato
+Feature.Avatar.Action.Retry,
 Feature.Avatar.Action.Revert,
 Feature.Avatar.Action.Rotate,Ruota
 Feature.Avatar.Action.Save,
@@ -1932,6 +2045,7 @@ Feature.Avatar.Label.FaceMakeup,Viso
 Feature.Avatar.Label.FacialAnimation,Animazione facciale
 Feature.Avatar.Label.Fall,Cadi
 Feature.Avatar.Label.FallAnimations,Animazioni caduta
+Feature.Avatar.Label.FromMarketplace,Dal Marketplace
 Feature.Avatar.Label.Front,Fronte
 Feature.Avatar.Label.FullBody,Corpo intero
 Feature.Avatar.Label.FullMasks,Maschere integrali
@@ -1989,6 +2103,7 @@ Feature.Avatar.Label.Name,
 Feature.Avatar.Label.Neck,Collo
 Feature.Avatar.Label.Newest,Il più recente
 Feature.Avatar.Label.NoExpiredItems,Nessun articolo {itemType} scaduto
+Feature.Avatar.Label.NoInventorySearchResults,"Nessun articolo corrisponde a ""{query}"""
 Feature.Avatar.Label.NoItems,No {itemType}
 Feature.Avatar.Label.NoLongerAvailableInCollection,Non saranno più disponibili in questa raccolta
 Feature.Avatar.Label.NoSets,Ancora nessun set
@@ -2185,6 +2300,7 @@ Feature.Avatar.Message.UnknownErrorCreatingOutfit,Si è verificato un errore sco
 Feature.Avatar.Message.UpdateOutfitSuccess,Aggiornato!
 Feature.Avatar.Message.UpdateRequired,"Aggiornamento richiesto. Per visualizzare questo articolo, aggiorna Roblox all'ultima versione."
 Feature.Avatar.Placeholder.NameYourAvatar,Dai un nome al tuo avatar
+Feature.Avatar.Placeholder.SearchInventory,Cerca nell'inventario
 Feature.Avatar.Placeholder.WriteAvatarCaption,Scrivi una didascalia per il tuo avatar (opzionale)
 Feature.Avatar.RevokedItems.BodyText,"L'articolo ""{item}"" della categoria {category} è stato rimosso da questo avatar salvato, quindi ti abbiamo rimborsato l'importo originale che avevi pagato.{lineBreak}Controlla la posta in arrivo per maggiori dettagli."
 Feature.Avatar.RevokedItems.BodyTextMultiple,"I seguenti articoli sono stati rimossi da questo avatar salvato, quindi ti abbiamo rimborsato l'importo originale che avevi pagato.{lineBreak}{items}{lineBreak}Controlla la posta in arrivo per maggiori dettagli."
@@ -2296,6 +2412,9 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,Copia testo
 Feature.Build.Action.Create,
 Feature.Build.Action.CreateDeveloperProduct,
+Feature.Build.Action.CreateMonetizationDeveloperProduct,Crea un Developer Product
+Feature.Build.Action.CreateMonetizationPass,Crea un pass
+Feature.Build.Action.CreateMonetizationSubscription,Crea un abbonamento
 Feature.Build.Action.CreateNewGame,Crea nuovo gioco
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,Ignora
@@ -2407,6 +2526,9 @@ Feature.Build.Analytics.Title.TopDropOffStep,Calo maggiore
 Feature.Build.Analytics.Title.TotalPlaytime,Tempo di gioco totale
 Feature.Build.Analytics.Visits,Visite
 Feature.Build.Content.NewGame,Nuovo gioco
+Feature.Build.CreateDeveloperProductDraft,Aiutami a creare un Developer Product per il mio gioco.
+Feature.Build.CreatePassDraft,Aiutami a creare un pass per il mio gioco.
+Feature.Build.CreateSubscriptionDraft,Aiutami a creare un abbonamento per il mio gioco.
 Feature.Build.Description.ActivateDeveloperProduct,Metti in vendita il Developer Product {PRODUCT_ID}.
 Feature.Build.Description.ActivateGamePass,Metti in vendita il pass di gioco {PRODUCT_ID}.
 Feature.Build.Description.ActivateSubscription,Attiva l'abbonamento {PRODUCT_ID}.
@@ -2574,6 +2696,7 @@ Feature.Build.Label.ManagedPricingMixed,Misti tra i prodotti attuali
 Feature.Build.Label.MaximizeForGamePlays,Massimizza per le partite giocate
 Feature.Build.Label.ModelUnavailable,Modello non disponibile
 Feature.Build.Label.Models3D,Modelli 3D
+Feature.Build.Label.MonetizationCreateTitle,{NAME} - {PRICE} Robux
 Feature.Build.Label.MyGames,I miei giochi
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,Senza limiti
@@ -3038,6 +3161,7 @@ Feature.Catalog.Label.FullBody,
 Feature.Catalog.Label.Gear,
 Feature.Catalog.Label.Get,Ottieni
 Feature.Catalog.Label.GetPremiumAndPrice,Ottieni Premium e compra per 
+Feature.Catalog.Label.Glowing,Luminoso
 Feature.Catalog.Label.HD,HD
 Feature.Catalog.Label.Hair,
 Feature.Catalog.Label.HeadShape,
@@ -3138,6 +3262,7 @@ Feature.Catalog.Label.SerialNumberColon,Numero Seriale:
 Feature.Catalog.Label.ShareToMoments,Condividi su Momenti
 Feature.Catalog.Label.ShoulderAccessories,Accessori spalla
 Feature.Catalog.Label.SoldOut,
+Feature.Catalog.Label.SpecialFeatures,Funzionalità speciali
 Feature.Catalog.Label.SupportsHeadShapes,Supporta le forme della testa
 Feature.Catalog.Label.TakeOffResaleConfirmation,Sei sicuro di voler smettere di offrire questo articolo per la rivendita?
 Feature.Catalog.Label.TimedOptions,Opzioni a tempo
@@ -3257,6 +3382,7 @@ Feature.Chat.Action.Delete,
 Feature.Chat.Action.Edit,
 Feature.Chat.Action.GroupOSADoNotJoin,Non unirti
 Feature.Chat.Action.GroupOSAJoin,
+Feature.Chat.Action.JumpToLatestMessages,Vai agli ultimi messaggi
 Feature.Chat.Action.LearnMore,
 Feature.Chat.Action.Leave,Abbandona
 Feature.Chat.Action.MuteVoice,Silenzia il microfono
@@ -4071,6 +4197,9 @@ Feature.Home.Heading.JoinYourFriends,Unisciti ai tuoi amici
 Feature.Home.HeadingFriends,Amici ({friendCount})
 Feature.Home.Label.HappeningNow,Sta accadendo ora
 Feature.Home.PeopleList.ChatWith,Chatta con {username}
+Feature.Home.TextFilterEducation.General.Body.Pii.Warning.V2,Abbiamo dovuto modificare o bloccare alcuni dei tuoi messaggi recenti. Ricorda: non condividere le tue informazioni personali.
+Feature.Home.TextFilterEducation.General.Body.Respect.Warning.V2,Abbiamo dovuto modificare o bloccare alcuni dei tuoi messaggi recenti. Ricorda: mantieni sempre un tono rispettoso nelle tue comunicazioni.
+Feature.Home.TextFilterEducation.General.Body.Spam.Warning.V2,Abbiamo dovuto modificare o bloccare alcuni dei tuoi messaggi recenti. Ricorda: invia ogni messaggio una sola volta.
 Feature.InAppBugReporting.Message.AppVersion,Versione: {value}
 Feature.InAppBugReporting.Message.CommentEmptyError,I dettagli non possono essere vuoti
 Feature.InAppBugReporting.Message.CommentLabel,Descrizione del ticket
@@ -4173,6 +4302,8 @@ Feature.Moments.Action.Analytics,Analitiche
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
+Feature.Moments.Action.CommentSeeOriginal,Visualizza originale
+Feature.Moments.Action.CommentSeeTranslation,Visualizza traduzione
 Feature.Moments.Action.CommentShowLess,Mostra di meno
 Feature.Moments.Action.CommentShowMore,
 Feature.Moments.Action.Continue,
@@ -4212,8 +4343,8 @@ Feature.Moments.Body.EDPMomentIPReportInstructions,"Per segnalare una violazione
 Feature.Moments.Description.CommunityStandards,Consulta le norme della community per saperne di più su ciò che ti è permesso dire.
 Feature.Moments.Description.EmptyCapturesLibrary,Qui è dove appariranno le tue acquisizioni.
 Feature.Moments.Description.FollowingCaughtUpBody,Hai visto tutti i nuovi Momenti in questo feed. Cambia feed per visualizzarne altri.
-Feature.Moments.Description.FollowingEmptyBodyRecommended,Goditi i Momenti dei tuoi preferiti dopo aver iniziato a seguire alcuni creatori. Visualizza i contenuti consigliati per trovarli.
-Feature.Moments.Description.FollowingEmptyBodyTrending,Goditi i Momenti dei tuoi preferiti dopo aver iniziato a seguire alcuni creatori. Visualizza i contenuti di tendenza per trovarli.
+Feature.Moments.Description.FollowingEmptyBodyRecommended,Qui vedrai i Momenti dei creatori che segui.
+Feature.Moments.Description.FollowingEmptyBodyTrending,
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,Generato dall'IA. Ricontrollalo prima di utilizzarlo: sei responsabile di ciò che viene pubblicato.
 Feature.Moments.Description.HowToCaptureStep1,Partecipa a un'esperienza con le acquisizioni abilitate e seleziona il menu a tre linee
 Feature.Moments.Description.HowToCaptureStep2,Abilita i controlli per l'acquisizione
@@ -4275,7 +4406,7 @@ Feature.Moments.Label.FeedRecommended,Opzione consigliata
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.FirstCommentInvite,Ancora nessun commento. Scrivi il primo commento!
 Feature.Moments.Label.FollowingCaughtUpTitle,È tutto aggiornato per ora
-Feature.Moments.Label.FollowingEmptyTitle,Segui i creatori per visualizzare i loro Momenti
+Feature.Moments.Label.FollowingEmptyTitle,Segui i creatori per visualizzare i loro Momenti qui
 Feature.Moments.Label.GameJoinConversion,Conversione di partecipazione al gioco
 Feature.Moments.Label.HowToUseCaptureTitle,Come usare lo strumento Acquisisci
 Feature.Moments.Label.LinkCopied,Link copiato
@@ -4348,7 +4479,6 @@ Feature.Moments.Title.GenerateTextFeedbackReason,Cosa è andato storto?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Vuoi interrompere la creazione del Momento?
 Feature.Moments.Title.MomentRemoved,Momento rimosso
-Feature.Moments.Title.PostInsights,Approfondimenti sui post
 Feature.Moments.Title.ReportPost,Segnala post
 Feature.Moments.Title.UnfollowConfirmationDialog,Non vuoi più seguire @{username}?
 Feature.Moments.Tooltip.PostInsightsBody,"Controlla le visualizzazioni, il tempo di visione e l'accoglienza del Momento da parte del tuo pubblico."
@@ -4869,6 +4999,7 @@ Feature.PrivateServers.Label.PrivateServerLink,Collegamento server privato
 Feature.PrivateServers.Label.SearchPeople,
 Feature.PrivateServers.Label.ServerName,Nome server:
 Feature.PrivateServers.Label.WhoCanJoin,Chi può unirsi
+Feature.PrivateServers.Label.YourPrivateServerIsReadyToJoin,Puoi unirti al tuo server privato
 Feature.Profile.Action.AboutThisProfile,Informazioni su questo profilo
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,Accetta amico/a
@@ -4876,6 +5007,7 @@ Feature.Profile.Action.Add,
 Feature.Profile.Action.AllRequestsIgnored,Tutte le richieste ignorate
 Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,Copia il link del profilo
+Feature.Profile.Action.CreateInBuild,Crea in Build
 Feature.Profile.Action.EditAppearance,Modifica aspetto
 Feature.Profile.Action.EditAvatar,Modifica avatar
 Feature.Profile.Action.EditBackground,Modifica sfondo
@@ -4948,6 +5080,8 @@ Feature.Profile.Label.DisplayNameFailed,Il nome visualizzato non può essere sal
 Feature.Profile.Label.DisplayNameModalCaption,Il tuo nome visualizzato può essere cambiato solo una volta ogni 7 giorni.
 Feature.Profile.Label.DisplayNameTooShort,
 Feature.Profile.Label.EditBackground,
+Feature.Profile.Label.IsMakingGameIn,sta creando un gioco in
+Feature.Profile.Label.IsMakingGameInBuild,sta creando un gioco in Build
 Feature.Profile.Label.NoBioYet,Ancora nessuna biografia
 Feature.Profile.Label.NoPreviousName,Nessun nome precedente
 Feature.Profile.Label.NoSocialLink,Ancora nessun collegamento social
@@ -5289,6 +5423,8 @@ Feature.SettingsHub.Prompt.NeedCameraAccess,È necessario l'accesso alla videooc
 Feature.SettingsHub.Prompt.NeedContactsAccess,È necessario l'accesso ai contatti
 Feature.SettingsHub.Prompt.RestartOnMicAccessChange,È necessario riavviare l'app per rendere effettive le modifiche di accesso al microfono.
 Feature.SettingsHub.Prompt.Subtitle.AllowMicrophoneAccess,"Per chattare vocalmente con altri, consenti a Roblox di accedere al tuo microfono."
+Feature.SocialContextToast.Message.InvitationConfirmation,Invito inviato
+Feature.SocialContextToast.Message.InvitationFailure,Problemi nell'invio degli inviti
 Feature.SocialShare.Action.CopyLink,
 Feature.SocialShare.Action.Redirect,Reindirizzamento...
 Feature.SocialShare.Action.Share,
@@ -5678,6 +5814,8 @@ Features.Transfers.RobuxTransfer.Action.Send,
 Features.Transfers.RobuxTransfer.Action.TryAgain,
 Features.Transfers.RobuxTransfer.Disclaimer.AgeEstimationTransfer,"Per poter inviare Robux devi completare la verifica dell'età oppure ottenere il consenso dei genitori. Una volta inviati, non potrai recuperarli."
 Features.Transfers.RobuxTransfer.Error.ReceiverNotAllowed,@{username} non può ricevere Robux al momento.
+Features.Transfers.RobuxTransfer.FreeTransfersRemaining,Hai ancora {numFreeTransfersRemaining} trasferimenti gratuiti. I Robux vengono inviati immediatamente e gratuitamente.
+Features.Transfers.RobuxTransfer.FreeTransfersRemainingSingular,Hai ancora 1 trasferimento gratuito. I Robux vengono inviati immediatamente e gratuitamente.
 Features.Transfers.RobuxTransfer.Heading.SendRobux,Invia Robux
 Features.Transfers.RobuxTransfer.Label.JoinedInYear,
 Features.Transfers.RobuxTransfer.Label.MutualConnection,{amount} amici in comune
@@ -5688,6 +5826,7 @@ Features.Transfers.RobuxTransfer.Label.RecipientWillGetInApp,Il destinatario ric
 Features.Transfers.RobuxTransfer.Label.RecipientWillGetInGame,Il destinatario riceverà {amount} Robux al netto delle commissioni. I trasferimenti all'interno del gioco includono una commissione del {commissionPercentage}% per il creator.
 Features.Transfers.RobuxTransfer.SentInstantNoFee,I Robux vengono inviati immediatamente senza commissioni
 Features.Transfers.RobuxTransfers.Label.SuccessNotification,Hai inviato {amount} Robux
+Features.Transfers.Title.FreeTransfersExhausted,Hai esaurito i tuoi trasferimenti gratuiti
 Features.Transfers.Title.UpsellSubscription,
 Features.Transfers.Transfer.Block.RequireReceiverFAE,Verifichiamo la tua età in modo che tu possa accettare Robux
 Features.Transfers.Transfer.Block.RequireSenderFAE,Verifica la tua età per inviare Robux
@@ -5854,8 +5993,10 @@ InGame.EmotesMenu.ErrorMessageAnimationPlaying,Non puoi giocare Emote durante qu
 InGame.EmotesMenu.ErrorMessageNotSupported,Qui non puoi usare le emoticon.
 InGame.EmotesMenu.ErrorMessageSwitchToR15,Passa al tuo avatar R15 per giocare a Emote.
 InGame.EmotesMenu.ErrorMessageTemporarilyUnavailable,Adesso non puoi usare le emoticon.
+InGame.InspectMenu.Action.Buy,
 InGame.InspectMenu.Action.Cancel,
 InGame.InspectMenu.Action.Confirm,
+InGame.InspectMenu.Action.Inspect,Esamina
 InGame.InspectMenu.Action.LimitReached,Limite dell'oggetto raggiunto
 InGame.InspectMenu.Action.SoldOut,
 InGame.InspectMenu.Action.TryOn,
@@ -5917,7 +6058,9 @@ Notifications.SquadRegroupPrompt.ToastAction.Join,
 Notifications.SquadRegroupPrompt.ToastLabel.ContinuePlayingTogether,Continua a giocare insieme
 Notifications.SquadRegroupPrompt.ToastLabel.JoinANewServer,
 Notifications.ToastNotifications.Label.LeaveExperienceConfirmation,Sei sicuro di voler lasciare e unirti ad un'altra esperienza?
+Notifications.ToastNotifications.Label.LeaveServerConfirmation,Vuoi davvero lasciare e unirti a un altro server?
 Notifications.ToastNotifications.Title.LeavingExperience,Uscendo dall'esperienza
+Notifications.ToastNotifications.Title.LeavingServer,Uscita dal server
 PlayerFeedbacks.VoteForm.Message.Action.Report,
 PlayerFeedbacks.VoteForm.Message.MaxLengthCharacters,Usa meno di {count} caratteri.
 PlayerFeedbacks.VoteForm.Message.MinLengthCharacters,Usa più di {count} caratteri.

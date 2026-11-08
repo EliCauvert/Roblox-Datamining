@@ -4,14 +4,23 @@ local GetFFlagUGCValidateDescendantIdsPublishedModule = require(Parent.flags.get
 local HttpRbxApiService = game:GetService("HttpRbxApiService")
 local HttpService = game:GetService("HttpService")
 local Url: string = `https://apis.{require(Parent.util.APIUtil).getBaseDomain()}assets/rcc/v1/assets/`
-
-return {
-	getVersion = function(Text, p1)
+local UnpublishedDependenciesModule = {
+	getLatestVersionNumber = function(Text)
 		-- upvalues: HttpService (copy), HttpRbxApiService (copy), Url (copy)
-		return HttpService:JSONDecode(HttpRbxApiService:GetAsyncFullUrl(`{Url}{Text}/versions/{p1 or HttpService:JSONDecode(HttpRbxApiService:GetAsyncFullUrl(Url .. Text)).revisionId}`))
-	end,
-	shouldReturnOnLoadFailure = function(p1): boolean
-		-- upvalues: GetFFlagUGCValidateDescendantIdsPublishedModule (copy)
-		return GetFFlagUGCValidateDescendantIdsPublishedModule() and (p1.universeId == nil and p1.token == nil and not p1.allowEditableInstances)
+		local RevisionId = HttpService:JSONDecode(HttpRbxApiService:GetAsyncFullUrl(Url .. Text)).revisionId
+		
+		return assert(tonumber(RevisionId), `Unexpected revisionId {RevisionId}`)
 	end
 }
+
+function UnpublishedDependenciesModule.getVersion(p1, p2)
+	-- upvalues: UnpublishedDependenciesModule (copy), HttpService (copy), HttpRbxApiService (copy), Url (copy)
+	return HttpService:JSONDecode(HttpRbxApiService:GetAsyncFullUrl(`{Url}{p1}/versions/{p2 or UnpublishedDependenciesModule.getLatestVersionNumber(p1)}`))
+end
+
+function UnpublishedDependenciesModule.shouldReturnOnLoadFailure(p1): boolean
+	-- upvalues: GetFFlagUGCValidateDescendantIdsPublishedModule (copy)
+	return GetFFlagUGCValidateDescendantIdsPublishedModule() and (p1.universeId == nil and p1.token == nil and not p1.allowEditableInstances)
+end
+
+return UnpublishedDependenciesModule
