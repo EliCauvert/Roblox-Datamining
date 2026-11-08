@@ -626,6 +626,12 @@
     overflow: hidden
 }
 
+.thumbnail-2d-container.thumbnail-2d-loading {
+    width: 100%;
+    height: 100%;
+    display: block
+}
+
 .thumbnail-2d-container img {
     display: inline
 }
@@ -2975,59 +2981,6 @@ button.btn-common-play-game-unplayable-lg {
     margin-right: 3px
 }
 
-.content .friends-carousel-tile:hover {
-    text-decoration: underline
-}
-
-.content .friends-carousel-tile-label {
-    -ms-flex-pack: center;
-    justify-content: center;
-    width: 100%;
-    margin-top: 5px;
-    display: -ms-flexbox;
-    display: flex
-}
-
-.content .friends-carousel-tile-name {
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -ms-flex-align: center;
-    align-items: center;
-    gap: 2px;
-    max-width: 96px;
-    font-size: .8em;
-    display: -ms-flexbox;
-    display: flex
-}
-
-.content .friends-carousel-display-name {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    min-width: 0;
-    overflow: hidden
-}
-
-.content .friends-carousel-tile-sublabel {
-    -ms-flex-pack: center;
-    justify-content: center;
-    width: 100%;
-    margin-top: 2px;
-    display: -ms-flexbox;
-    display: flex
-}
-
-.content .friends-carousel-tile-experience {
-    font-size: .6em
-}
-
-.dark-theme .friends-carousel-tile-experience {
-    color: #b8b8b8
-}
-
-.light-theme .friends-carousel-tile-experience {
-    color: #737373
-}
-
 #friend-tile-button {
     background: 0 0;
     border: none
@@ -3108,10 +3061,6 @@ button.btn-common-play-game-unplayable-lg {
     background-color: transparent;
     border: 0;
     padding: 0
-}
-
-.friend-tile-content:hover {
-    text-decoration: underline
 }
 
 .friend-tile-game-card,

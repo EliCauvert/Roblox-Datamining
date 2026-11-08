@@ -1,0 +1,28 @@
+.AudienceReachGrowthOpportunitiesBanner-module__vYyLma__heroBanner {
+    min-height: 160px;
+    overflow: hidden
+}
+
+.AudienceReachGrowthOpportunitiesBanner-module__vYyLma__heroCoverImage {
+    object-fit: cover;
+    object-position: left center
+}
+
+.AudienceReachGrowthOpportunitiesBanner-module__vYyLma__heroTextContent {
+    z-index: 1;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    width: 100%;
+    min-width: 0;
+    max-width: 600px
+}
+
+.AudienceReachGrowthOpportunitiesBanner-module__vYyLma__buttonRow {
+    flex-wrap: wrap
+}
+
+.VideoOnboarding-module__XGQula__videoPlaceholder {
+    background: #000
+}
+
+/*# sourceMappingURL=13boc1al929kx.css.map*/

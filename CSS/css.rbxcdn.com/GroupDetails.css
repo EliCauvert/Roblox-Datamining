@@ -2631,13 +2631,6 @@ ul.hlist.game-cards {
     }
 }
 
-@media(min-width:768px)and (max-width:1688px) {
-    .wrap.has-groups-list-sidebar .rbx-left-col.nav-show {
-        box-shadow: 152px 0 0 0 var(--color-over-media-100);
-        border-right: 1px solid var(--color-shift-200)
-    }
-}
-
 .wrap.has-groups-list-sidebar .content {
     margin: 0;
     max-width: none
@@ -2682,11 +2675,7 @@ ul.hlist.game-cards {
     background: transparent !important
 }
 
-.wrap.has-groups-list-sidebar.no-gutter-ads.logged-in:not(.left-nav-new-width) .container-main:not(.in-app) .content {
-    margin-left: calc(var(--sidebar-reserved-width) + var(--left-nav-reserved-width))
-}
-
-.wrap.has-groups-list-sidebar.no-gutter-ads.logged-in.left-nav-new-width .container-main:not(.in-app) .content {
+.wrap.has-groups-list-sidebar.no-gutter-ads.logged-in .container-main:not(.in-app) .content {
     margin-left: var(--sidebar-reserved-width)
 }
 

@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "88c7201723b4193ce4ea5d78b21969cbabb0b910"
+            id: "cae3e2e21bbbac6f2fd6bcb92699e379bb1b787e"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "8e8c8b7d-de37-49dd-b90d-aac0433710b9", e._sentryDebugIdIdentifier = "sentry-dbid-8e8c8b7d-de37-49dd-b90d-aac0433710b9")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "ae27229f-4f51-44cd-86d6-5923d3b53f9e", e._sentryDebugIdIdentifier = "sentry-dbid-ae27229f-4f51-44cd-86d6-5923d3b53f9e")
     } catch (e) {}
 }(),
 function() {
@@ -47713,8 +47713,8 @@ function() {
                 hd = function(e) {
                     return "/parental-requests?requestType=UpdateUserSetting&source=SettingsPage&consentId=".concat(e, "&redirectUrl=").concat(encodeURIComponent(window.location.href))
                 },
-                hf = function(e, t) {
-                    return "/parental-requests?requestType=UpdateUserSetting&source=SettingsPage&childUserId=".concat(e).concat(t ? "&target=".concat(encodeURIComponent(t)) : "", "&redirectUrl=").concat(encodeURIComponent(window.location.href))
+                hf = function(e, t, n) {
+                    return "/parental-requests?requestType=".concat(t, "&source=SettingsPage&childUserId=").concat(e).concat(n ? "&target=".concat(encodeURIComponent(n)) : "", "&redirectUrl=").concat(encodeURIComponent(window.location.href))
                 },
                 hp = function(e) {
                     var t = new URLSearchParams({
@@ -49402,34 +49402,40 @@ function() {
                                 },
                                 onQueryStarted: function(e, t) {
                                     return my(function(e, t) {
-                                        var n, r;
-                                        return mg(this, function(i) {
-                                            switch (i.label) {
+                                        var n, r, i;
+                                        return mg(this, function(a) {
+                                            switch (a.label) {
                                                 case 0:
-                                                    return n = t.dispatch, [4, t.queryFulfilled];
+                                                    n = t.dispatch, r = t.queryFulfilled, a.label = 1;
                                                 case 1:
-                                                    return i.sent(), r = e.details.universeId, e.details.experienceManagementAction === y_.Unblock ? n(mx.util.updateQueryData("getBlockedExperiences", {
+                                                    return a.trys.push([1, 3, , 4]), [4, r];
+                                                case 2:
+                                                    return a.sent(), [3, 4];
+                                                case 3:
+                                                    return a.sent(), [2];
+                                                case 4:
+                                                    return i = e.details.universeId, e.details.experienceManagementAction === y_.Unblock ? n(mx.util.updateQueryData("getBlockedExperiences", {
                                                         targetUserId: e.childUserId
                                                     }, function(e) {
-                                                        if (r) return e ? mm(mv({}, e), {
+                                                        if (i) return e ? mm(mv({}, e), {
                                                             blockedExperiences: null == e ? void 0 : e.blockedExperiences.filter(function(e) {
-                                                                return (null == e ? void 0 : e.universeId) !== r
+                                                                return (null == e ? void 0 : e.universeId) !== i
                                                             })
                                                         }) : e;
                                                         return e
-                                                    })) : e.details.experienceManagementAction === y_.Block ? r && n(mx.util.updateQueryData("getBlockedExperiences", {
+                                                    })) : e.details.experienceManagementAction === y_.Block ? i && n(mx.util.updateQueryData("getBlockedExperiences", {
                                                         targetUserId: e.childUserId
                                                     }, function(e) {
                                                         e.blockedExperiences.push({
-                                                            universeId: r,
+                                                            universeId: i,
                                                             actorType: vD.Parent
                                                         })
                                                     })) : e.details.experienceManagementAction === y_.RevokeApproval && n(mx.util.updateQueryData("getApprovedExperiences", {
                                                         targetUserId: e.childUserId
                                                     }, function(e) {
-                                                        if (r) return e ? mm(mv({}, e), {
+                                                        if (i) return e ? mm(mv({}, e), {
                                                             approvedExperiences: e.approvedExperiences.filter(function(e) {
-                                                                return e.universeId !== r
+                                                                return e.universeId !== i
                                                             })
                                                         }) : e;
                                                         return e
@@ -49440,7 +49446,7 @@ function() {
                                 },
                                 transformErrorResponse: function(e, t, n) {
                                     var r = e.data.code;
-                                    return r === f3.ParentNotVerified && (window.location.href = hf(n.childUserId)), r
+                                    return r === f3.ParentNotVerified && (window.location.href = hf(n.childUserId, n.consentType)), r
                                 },
                                 invalidatesTags: function(e, t, n) {
                                     return mb(mG(n.childUserId, yj.Pending)).concat([{
@@ -49970,13 +49976,19 @@ function() {
                                 },
                                 onQueryStarted: function(e, t) {
                                     return mD(function(e, t) {
-                                        var n;
-                                        return mV(this, function(r) {
-                                            switch (r.label) {
+                                        var n, r;
+                                        return mV(this, function(i) {
+                                            switch (i.label) {
                                                 case 0:
-                                                    return n = t.dispatch, [4, t.queryFulfilled];
+                                                    n = t.dispatch, r = t.queryFulfilled, i.label = 1;
                                                 case 1:
-                                                    return r.sent(), e.details.friendManagementAction === y_.Block ? (n(mY.util.updateQueryData("getChildFriends", {
+                                                    return i.trys.push([1, 3, , 4]), [4, r];
+                                                case 2:
+                                                    return i.sent(), [3, 4];
+                                                case 3:
+                                                    return i.sent(), [2];
+                                                case 4:
+                                                    return e.details.friendManagementAction === y_.Block ? (n(mY.util.updateQueryData("getChildFriends", {
                                                         userId: e.childUserId,
                                                         userSort: yN.FriendScore,
                                                         findFriendsType: yM.Friends
@@ -50018,7 +50030,7 @@ function() {
                                 },
                                 transformErrorResponse: function(e, t, n) {
                                     var r = e.data.code;
-                                    return r === f3.ParentNotVerified && (window.location.href = hf(n.childUserId)), r
+                                    return r === f3.ParentNotVerified && (window.location.href = hf(n.childUserId, n.consentType)), r
                                 },
                                 invalidatesTags: function(e, t, n) {
                                     return mU(mG(n.childUserId, yj.Pending))
@@ -59407,7 +59419,7 @@ function() {
                 },
                 Eu = function(e, t, n) {
                     var r, i = null == e || null == (r = e.data) ? void 0 : r.code;
-                    return i === El.ParentNotVerified && t ? (window.location.href = hf(t, n), null) : i === El.SettingsUpdateInheritanceViolation ? pm.parentalConsents.settingsUpdateInheritanceViolationError : d0
+                    return i === El.ParentNotVerified && t ? (window.location.href = hf(t, yC.UpdateUserSetting, n), null) : i === El.SettingsUpdateInheritanceViolation ? pm.parentalConsents.settingsUpdateInheritanceViolationError : d0
                 };
 
             function Ec(e, t) {
@@ -78823,17 +78835,17 @@ function() {
                             size: "Medium",
                             variant: "Indeterminate"
                         })
-                    }) : r && (null == t ? void 0 : t.notificationSettingsRedesignEnabled) ? (0, B.jsx)(Ub, {}) : (eur(), (0, B.jsx)("div", {
+                    }) : r && (null == t ? void 0 : t.notificationSettingsRedesignEnabled) ? (0, B.jsx)(Ub, {}) : (eui(), (0, B.jsx)("div", {
                         id: US
                     }))
                 },
                 UP = function() {
-                    return eut(), (0, B.jsx)("div", {
+                    return eun(), (0, B.jsx)("div", {
                         id: Uw
                     })
                 },
                 UE = function() {
-                    return eue(), (0, B.jsx)("div", {
+                    return eut(), (0, B.jsx)("div", {
                         id: Ug
                     })
                 },
@@ -81296,7 +81308,7 @@ function() {
                     })
                 },
                 WS = function() {
-                    return eun(), (0, B.jsx)("div", {
+                    return eur(), (0, B.jsx)("div", {
                         id: Ux
                     })
                 },
@@ -86925,26 +86937,29 @@ function() {
                         p = QE(bC(null == a ? void 0 : a.childUserId), 1)[0],
                         h = QE(En(null == a ? void 0 : a.childUserId), 1)[0],
                         y = QE(mZ(), 1)[0],
-                        v = [Pl.CombinedName],
-                        m = PG([(null == a || null == (n = a.consentData) ? void 0 : n.friendUserId) || (null == a || null == (r = a.consentData) ? void 0 : r.targetUserId) || 0], v).data,
-                        b = (0, z.useMemo)(function() {
+                        v = QE((0, z.useState)(null), 2),
+                        m = v[0],
+                        b = v[1],
+                        g = [Pl.CombinedName],
+                        S = PG([(null == a || null == (n = a.consentData) ? void 0 : n.friendUserId) || (null == a || null == (r = a.consentData) ? void 0 : r.targetUserId) || 0], g).data,
+                        w = (0, z.useMemo)(function() {
                             var e, t, n, r, i, o, l, s;
-                            return (null == a || null == (e = a.consentData) ? void 0 : e.friendUserId) ? null != (n = null == m || null == (i = m[a.consentData.friendUserId]) || null == (r = i.names) ? void 0 : r.combinedName) ? n : a.consentData.friendUserId : (null == a || null == (t = a.consentData) ? void 0 : t.targetUserId) ? null != (o = null == m || null == (s = m[a.consentData.targetUserId]) || null == (l = s.names) ? void 0 : l.combinedName) ? o : a.consentData.targetUserId : ""
-                        }, [a, m]),
-                        g = (0, z.useMemo)(function() {
+                            return (null == a || null == (e = a.consentData) ? void 0 : e.friendUserId) ? null != (n = null == S || null == (i = S[a.consentData.friendUserId]) || null == (r = i.names) ? void 0 : r.combinedName) ? n : a.consentData.friendUserId : (null == a || null == (t = a.consentData) ? void 0 : t.targetUserId) ? null != (o = null == S || null == (s = S[a.consentData.targetUserId]) || null == (l = s.names) ? void 0 : l.combinedName) ? o : a.consentData.targetUserId : ""
+                        }, [a, S]),
+                        x = (0, z.useMemo)(function() {
                             return vu(a)
                         }, [a]),
-                        S = (0, z.useMemo)(function() {
+                        O = (0, z.useMemo)(function() {
                             return fZ.uuidService.generateRandomUuid()
                         }, []),
-                        w = (0, z.useMemo)(function() {
+                        P = (0, z.useMemo)(function() {
                             var e, t, n, r, u, c, d;
-                            return ((null == a ? void 0 : a.consentType) === yC.UpdateUserSetting && (r = P0(g, null != (u = i.canSeeChatTerminology) && u)), (null == a ? void 0 : a.consentType) === yC.UpdateBirthdate && (r = PX.birthday), (null == a ? void 0 : a.consentType) === yC.LiftPunishment && (null == a || null == (e = a.consentData) ? void 0 : e.punishmentType) === yT.Chargeback && (r = PX.chargebackUnlock), (null == a ? void 0 : a.consentType) === yC.ManageFriend) ? s(PX.unblockUser, {
-                                displayName: b
+                            return ((null == a ? void 0 : a.consentType) === yC.UpdateUserSetting && (r = P0(x, null != (u = i.canSeeChatTerminology) && u)), (null == a ? void 0 : a.consentType) === yC.UpdateBirthdate && (r = PX.birthday), (null == a ? void 0 : a.consentType) === yC.LiftPunishment && (null == a || null == (e = a.consentData) ? void 0 : e.punishmentType) === yT.Chargeback && (r = PX.chargebackUnlock), (null == a ? void 0 : a.consentType) === yC.ManageFriend) ? s(PX.unblockUser, {
+                                displayName: w
                             }) : (null == a ? void 0 : a.consentType) === yC.ManageExperience ? s(PX.unblockExperience, {
                                 experienceName: o
                             }) : (null == a ? void 0 : a.consentType) === yC.AddTrustedConnection ? s(PX.addTrustedConnection, {
-                                displayName: b
+                                displayName: w
                             }) : (null == a ? void 0 : a.consentType) === yC.ReceiveTransfer && (null == a || null == (t = a.consentData) ? void 0 : t.transferType) === yR.Robux ? s(PX.receiveRobuxTransfer, {
                                 username: (null == l ? void 0 : l.sender.targetDisplayName) || "",
                                 amount: (null != (c = null == l ? void 0 : l.transferAmount) ? c : 0) - (null != (d = null == l ? void 0 : l.transferTransactionFeeAmount) ? d : 0)
@@ -86952,8 +86967,8 @@ function() {
                                 username: (null == l ? void 0 : l.recipient.targetDisplayName) || "",
                                 amount: (null == l ? void 0 : l.transferAmount) || 0
                             }) : ((null == a ? void 0 : a.consentType) === yC.LiftRestriction && (r = PX.liftPlatformAccessRestriction), r) ? s(r) : void 0
-                        }, [a, g, b, o, l, i.canSeeChatTerminology]),
-                        x = function(e, t) {
+                        }, [a, x, w, o, l, i.canSeeChatTerminology]),
+                        E = function(e, t) {
                             var n = null == (r = mr[e]) ? void 0 : r.call(mr);
                             if (n) {
                                 var r, i, a = null == (i = n.find(function(e) {
@@ -86963,21 +86978,21 @@ function() {
                             }
                             return P6(t, s)
                         },
-                        O = function() {
+                        A = function() {
                             switch (null == a ? void 0 : a.consentType) {
                                 case yC.UpdateBirthdate:
                                     return SZ.formatBirthdateFromISO(i.birthDate);
                                 case yC.UpdateUserSetting:
-                                    if (g) {
-                                        var e, t = null == (e = QP({}, p, h)[g]) ? void 0 : e.currentValue;
-                                        return x(g, t)
+                                    if (x) {
+                                        var e, t = null == (e = QP({}, p, h)[x]) ? void 0 : e.currentValue;
+                                        return E(x, t)
                                     }
                                     return "";
                                 default:
                                     return ""
                             }
                         },
-                        P = function() {
+                        C = function() {
                             switch (null == a ? void 0 : a.consentType) {
                                 case yC.UpdateBirthdate:
                                     var e;
@@ -86986,67 +87001,67 @@ function() {
                                     var t = vu(a),
                                         n = vc(a);
                                     if (!t) return "";
-                                    return x(t, n);
+                                    return E(t, n);
                                 default:
                                     return ""
                             }
                         },
-                        E = QE(function() {
+                        j = QE(function() {
                             var e, t;
-                            if (!a || !w) return [void 0, void 0];
+                            if (!a || !P) return [void 0, void 0];
                             if (a.consentType === yC.LiftPunishment && (null == a || null == (e = a.consentData) ? void 0 : e.punishmentType) === yT.Chargeback || a.consentType === yC.ManageFriend || a.consentType === yC.ManageExperience || a.consentType === yC.AddTrustedConnection || a.consentType === yC.ReceiveTransfer || a.consentType === yC.SendTransfer || a.consentType === yC.LiftRestriction && (null == a || null == (t = a.consentData) ? void 0 : t.restrictionType) === yD.PlatformAccess) return [f.consentCenterAllowActionConsentName, {
-                                actionName: "<b>".concat(w, "</b>")
+                                actionName: "<b>".concat(P, "</b>")
                             }];
-                            switch (g) {
+                            switch (x) {
                                 case h5.monthlySpendLimit:
                                 case h5.dailyScreenTimeLimit:
                                 case h5.robuxTransferLimits:
                                     return [f.consentCenterUpdateSettingNoValueConsentName, {
-                                        settingName: "<b>".concat(w, "</b>")
+                                        settingName: "<b>".concat(P, "</b>")
                                     }];
                                 case h5.enablePurchases:
                                 case h5.allowFacialAgeEstimation:
                                     return [f.consentCenterAllowActionConsentName, {
-                                        actionName: "<b>".concat(w, "</b>")
+                                        actionName: "<b>".concat(P, "</b>")
                                     }];
                                 default:
-                                    var n = O(),
-                                        r = P();
+                                    var n = A(),
+                                        r = C();
                                     if (!n || !r) return [void 0, void 0];
                                     return [f.consentCenterUpdateSettingWithValueConsentName, {
-                                        settingName: "<b>".concat(w, "</b>"),
+                                        settingName: "<b>".concat(P, "</b>"),
                                         currentValue: n,
                                         proposedValue: "<b>".concat(r, "</b>")
                                     }]
                             }
                         }(), 2),
-                        A = E[0],
-                        C = E[1],
-                        j = QE(q.LegallySensitiveContentService.useLegallySensitiveContentAndActions(null != A ? A : "", f.legallySensitiveConsentSurfaceName, null != C ? C : void 0), 2),
                         k = j[0],
                         T = j[1],
-                        I = function() {
+                        I = QE(q.LegallySensitiveContentService.useLegallySensitiveContentAndActions(null != k ? k : "", f.legallySensitiveConsentSurfaceName, null != T ? T : void 0), 2),
+                        _ = I[0],
+                        R = I[1],
+                        D = function() {
                             var e;
-                            if (a && w && k) return (0, B.jsx)("span", {
+                            if (a && P && _) return (0, B.jsx)("span", {
                                 dangerouslySetInnerHTML: {
-                                    __html: null != (e = k.wordsOfConsent.text) ? e : ""
+                                    __html: null != (e = _.wordsOfConsent.text) ? e : ""
                                 }
                             })
                         },
-                        _ = function(e) {
+                        N = function(e) {
                             var t, n = e === yI.Approve;
                             switch (null == a ? void 0 : a.consentType) {
                                 case yC.LiftPunishment:
                                     if ((null == a || null == (t = a.consentData) ? void 0 : t.punishmentType) === yT.Chargeback) return n ? s(d.childAccountUnlocked) : s(d.childAccountUnlockDenied);
                                     break;
                                 case yC.UpdateUserSetting:
-                                    if (g === h5.enablePurchases) return n ? s(d.childPurchasesApproved) : s(d.childPurchasesDenied);
+                                    if (x === h5.enablePurchases) return n ? s(d.childPurchasesApproved) : s(d.childPurchasesDenied);
                                     break;
                                 case yC.ManageFriend:
                                     return n ? s(d.userUnblockApproved, {
-                                        displayName: b
+                                        displayName: w
                                     }) : s(d.userUnblockDenied, {
-                                        displayName: b
+                                        displayName: w
                                     });
                                 case yC.ManageExperience:
                                     return n ? s(d.experienceUnblockApproved, {
@@ -87056,24 +87071,24 @@ function() {
                                     });
                                 case yC.AddTrustedConnection:
                                     return n ? s(d.trustedConnectionAddApproved, {
-                                        displayName: b
+                                        displayName: w
                                     }) : s(d.trustedConnectionAddDenied, {
-                                        displayName: b
+                                        displayName: w
                                     })
                             }
-                            return w ? n ? s(d.childSettingUpdated, {
-                                settingName: w
+                            return P ? n ? s(d.childSettingUpdated, {
+                                settingName: P
                             }) : s(d.childSettingNotUpdated, {
-                                settingName: w
+                                settingName: P
                             }) : n ? s(d.childRequestApproved) : s(d.childRequestDenied)
                         },
-                        R = function(e) {
+                        M = function(e) {
                             return QO(function() {
                                 var t, n, r, i;
                                 return QA(this, function(o) {
                                     switch (o.label) {
                                         case 0:
-                                            n = null == T || null == (t = T.getBase64EncodedAuditHeader) ? void 0 : t.call(T), o.label = 1;
+                                            b(e), n = null == R || null == (t = R.getBase64EncodedAuditHeader) ? void 0 : t.call(R), o.label = 1;
                                         case 1:
                                             return o.trys.push([1, 3, , 4]), [4, y(QP({
                                                 consentId: a.id,
@@ -87083,32 +87098,35 @@ function() {
                                                 auditDataHeader: n
                                             } : {})).unwrap()];
                                         case 2:
-                                            return o.sent(), u.success(_(e)), [3, 4];
+                                            return o.sent(), u.success(N(e)), [3, 4];
                                         case 3:
-                                            return (null == (r = o.sent()) || null == (i = r.data) ? void 0 : i.code) === El.ParentNotVerified ? window.location.href = hd(a.id) : u.warning(s(d0)), [3, 4];
+                                            if ((null == (r = o.sent()) || null == (i = r.data) ? void 0 : i.code) === El.ParentNotVerified) return window.location.href = hd(a.id), [2];
+                                            return u.warning(s(d0)), [3, 4];
                                         case 4:
-                                            return [2]
+                                            return b(null), [2]
                                     }
                                 })
                             })()
                         },
-                        D = fS(y2(i.userId));
-                    return I() ? (0, B.jsxs)("div", {
+                        L = fS(y2(i.userId));
+                    return D() ? (0, B.jsxs)("div", {
                         className: "consent-card section-content",
                         children: [(0, B.jsx)("div", {
                             className: "font-header-2",
-                            children: I()
+                            children: D()
                         }), (0, B.jsxs)("div", {
                             className: "btn-container",
                             children: [(0, B.jsx)(eY.Button, {
                                 variant: eY.Button.variants.secondary,
                                 size: eY.Button.sizes.medium,
+                                isDisabled: null !== m,
+                                isLoading: m === yI.Deny,
                                 onClick: function() {
                                     return QO(function() {
                                         return QA(this, function(e) {
                                             switch (e.label) {
                                                 case 0:
-                                                    return [4, R(yI.Deny)];
+                                                    return [4, M(yI.Deny)];
                                                 case 1:
                                                     return e.sent(), [2]
                                             }
@@ -87119,26 +87137,26 @@ function() {
                             }), (t = function() {
                                 var e, t, n, r, i, o, l;
                                 if ((null == a ? void 0 : a.consentType) === yC.AddTrustedConnection) return {
-                                    url: (e = a.id, "/parental-requests?requestType=AddTrustedConnection&sessionId=".concat(S, "&analyticsSessionId=").concat(S, "&consentId=").concat(e, "&redirectUrl=").concat(encodeURIComponent(window.location.href))),
+                                    url: (e = a.id, "/parental-requests?requestType=AddTrustedConnection&analyticsSessionId=".concat(O, "&consentId=").concat(e, "&redirectUrl=").concat(encodeURIComponent(window.location.href))),
                                     isExternal: !0,
                                     label: s(fl)
                                 };
                                 if ((null == a ? void 0 : a.consentType) === yC.UpdateUserSetting) {
-                                    switch (g) {
+                                    switch (x) {
                                         case h5.enablePurchases:
-                                            t = null == D || null == (r = D.childSettingCategoryPages) || null == (n = r[pd.Spending]) ? void 0 : n.path;
+                                            t = null == L || null == (r = L.childSettingCategoryPages) || null == (n = r[pd.Spending]) ? void 0 : n.path;
                                             break;
                                         case h5.monthlySpendLimit:
-                                            t = null == D || null == (i = D.spendingPages[pu.MonthlySpendingLimit]) ? void 0 : i.path;
+                                            t = null == L || null == (i = L.spendingPages[pu.MonthlySpendingLimit]) ? void 0 : i.path;
                                             break;
                                         case h5.monthlySpendLimitNotificationType:
-                                            t = null == D || null == (o = D.spendingPages[pu.SpendNotifications]) ? void 0 : o.path;
+                                            t = null == L || null == (o = L.spendingPages[pu.SpendNotifications]) ? void 0 : o.path;
                                             break;
                                         case h5.dailyScreenTimeLimit:
-                                            t = null == D ? void 0 : D.screenTimeManagementPage.path;
+                                            t = null == L ? void 0 : L.screenTimeManagementPage.path;
                                             break;
                                         case h5.robuxTransferLimits:
-                                            t = null == D || null == (l = D.robuxPages[pc.TransferLimits]) ? void 0 : l.path
+                                            t = null == L || null == (l = L.robuxPages[pc.TransferLimits]) ? void 0 : l.path
                                     }
                                     if (t) return {
                                         url: t,
@@ -87156,12 +87174,14 @@ function() {
                             }) : (0, B.jsx)(eY.Button, {
                                 variant: eY.Button.variants.secondary,
                                 size: eY.Button.sizes.medium,
+                                isDisabled: null !== m,
+                                isLoading: m === yI.Approve,
                                 onClick: function() {
                                     return QO(function() {
                                         return QA(this, function(e) {
                                             switch (e.label) {
                                                 case 0:
-                                                    return [4, R(yI.Approve)];
+                                                    return [4, M(yI.Approve)];
                                                 case 1:
                                                     return e.sent(), [2]
                                             }
@@ -110919,7 +110939,9 @@ function() {
                     ROBUX_SEND_TRANSFERS: "RobuxSendTransfers",
                     ROBUX_PENDING_TRANSFERS: "RobuxPendingTransfers",
                     REDEEM_CREDIT_FOOTER: "RedeemCreditFooter",
-                    REDEEM_CREDIT_GET_PLUS_MODAL: "RedeemCreditGetPlusModal"
+                    REDEEM_CREDIT_GET_PLUS_MODAL: "RedeemCreditGetPlusModal",
+                    IOS_PURCHASE_RESTART_ALERT: "IosPurchaseRestartAlert",
+                    NATIVE_PURCHASE_HANDOFF_MISSED: "NativePurchaseHandoffMissed"
                 },
                 eor = {
                     VIEW_SHOWN: "ViewShown",
@@ -111261,7 +111283,20 @@ function() {
                     writable: !0
                 }) : e[t] = n, e
             }
-            var eok = function() {
+
+            function eok(e) {
+                for (var t = 1; t < arguments.length; t++) {
+                    var n = null != arguments[t] ? arguments[t] : {},
+                        r = Object.keys(n);
+                    "function" == typeof Object.getOwnPropertySymbols && (r = r.concat(Object.getOwnPropertySymbols(n).filter(function(e) {
+                        return Object.getOwnPropertyDescriptor(n, e).enumerable
+                    }))), r.forEach(function(t) {
+                        eoj(e, t, n[t])
+                    })
+                }
+                return e
+            }
+            var eoT = function() {
                     for (var e = arguments.length, t = Array(e), n = 0; n < e; n++) t[n] = arguments[n];
                     var r = !0,
                         i = !1,
@@ -111282,11 +111317,11 @@ function() {
                     }
                     return ""
                 },
-                eoT = "__rbxPaymentsFlowUuid",
-                eoI = function(e) {
+                eoI = "__rbxPaymentsFlowUuid",
+                eo_ = function(e) {
                     if (null != e && "type" in e && "string" == typeof e.type) return e.type
                 },
-                eo_ = [{
+                eoR = [{
                     web: eot.WEB_ROBUX_PURCHASE,
                     webview: eot.WEBVIEW_ROBUX_PURCHASE,
                     mobileWeb: eot.MOBILE_WEB_ROBUX_PURCHASE
@@ -111299,15 +111334,15 @@ function() {
                     webview: eot.WEBVIEW_ROBLOX_PLUS_PURCHASE,
                     mobileWeb: eot.MOBILE_WEB_ROBLOX_PLUS_PURCHASE
                 }],
-                eoR = new ea4(new ea2({
+                eoD = new ea4(new ea2({
                     baseUrl: "https://ecsv2.".concat(St().domain, "/www")
                 })),
-                eoD = new(function() {
+                eoN = new(function() {
                     var e, t;
 
                     function n() {
                         if (!(this instanceof n)) throw TypeError("Cannot call a class as a function");
-                        eoj(this, "purchaseFlowUuid", ""), eoj(this, "triggerContext", void 0), eoj(this, "ENUM_TRIGGERING_CONTEXT", eot), eoj(this, "ENUM_VIEW_NAME", eon), eoj(this, "ENUM_PURCHASE_EVENT_TYPE", eor), eoj(this, "ENUM_VIEW_MESSAGE", eoi), eoj(this, "ENUM_PURCHASE_STATUS", eoa), eoj(this, "ENUM_CUSTOM_EVENT", eod), eoj(this, "eventMetadata", {}), eof() && this.loadOrStartPaymentFlow()
+                        eoj(this, "purchaseFlowUuid", ""), eoj(this, "triggerContext", void 0), eoj(this, "ENUM_TRIGGERING_CONTEXT", eot), eoj(this, "ENUM_VIEW_NAME", eon), eoj(this, "ENUM_PURCHASE_EVENT_TYPE", eor), eoj(this, "ENUM_VIEW_MESSAGE", eoi), eoj(this, "ENUM_PURCHASE_STATUS", eoa), eoj(this, "ENUM_CUSTOM_EVENT", eod), eoj(this, "eventMetadata", {}), eoj(this, "webStack", void 0), eof() && this.loadOrStartPaymentFlow()
                     }
                     return e = [{
                         key: "loadOrStartPaymentFlow",
@@ -111331,6 +111366,11 @@ function() {
                         key: "setPaymentFlowUuid",
                         value: function(e) {
                             this.purchaseFlowUuid = e, this.publishSharedFlowUuid(), this.writePaymentFlowContextIntoCookie()
+                        }
+                    }, {
+                        key: "setWebStack",
+                        value: function(e) {
+                            eof() && (this.webStack = e)
                         }
                     }, {
                         key: "startRobuxUpsellFlow",
@@ -111383,18 +111423,7 @@ function() {
                                 var u = n.reclassifyPlatformTriggeringContext({
                                     triggerContext: t
                                 });
-                                if (this.eventMetadata = function(e) {
-                                        for (var t = 1; t < arguments.length; t++) {
-                                            var n = null != arguments[t] ? arguments[t] : {},
-                                                r = Object.keys(n);
-                                            "function" == typeof Object.getOwnPropertySymbols && (r = r.concat(Object.getOwnPropertySymbols(n).filter(function(e) {
-                                                return Object.getOwnPropertyDescriptor(n, e).enumerable
-                                            }))), r.forEach(function(t) {
-                                                eoj(e, t, n[t])
-                                            })
-                                        }
-                                        return e
-                                    }({}, this.eventMetadata, void 0 === l ? {} : l), !i && !a && !o) return void eox("UserPaymentFlowWrongUsageOfMethod");
+                                if (this.eventMetadata = eok({}, this.eventMetadata, void 0 === l ? {} : l), !i && !a && !o) return void eox("UserPaymentFlowWrongUsageOfMethod");
                                 this.adoptSharedTriggerContext(), !this.triggerContext && (this.triggerContext = u, this.writePaymentFlowContextIntoCookie(), r && eow("UserPaymentFlowMidPurchaseStepTriggeredWithoutCtx")), this.sendEvent({
                                     eventName: "UserPurchaseFlow",
                                     viewName: i,
@@ -111439,15 +111468,15 @@ function() {
                     }, {
                         key: "adoptSharedFlowUuid",
                         value: function() {
-                            if (null != HK && eoT in HK) {
-                                var e = HK[eoT];
+                            if (null != HK && eoI in HK) {
+                                var e = HK[eoI];
                                 "string" == typeof e && "" !== e && (this.purchaseFlowUuid = e)
                             }
                         }
                     }, {
                         key: "publishSharedFlowUuid",
                         value: function() {
-                            null != HK && this.purchaseFlowUuid && Object.assign(HK, eoj({}, eoT, this.purchaseFlowUuid))
+                            null != HK && this.purchaseFlowUuid && Object.assign(HK, eoj({}, eoI, this.purchaseFlowUuid))
                         }
                     }, {
                         key: "writePaymentFlowContextIntoCookie",
@@ -111467,8 +111496,10 @@ function() {
                                 var l = n.getReferralUrl(),
                                     s = n.extractView(l),
                                     u = n.extractView(HK.location.href),
-                                    c = JSON.stringify(this.eventMetadata);
-                                eoR.sendEventViaImg({
+                                    c = JSON.stringify(eok({}, this.eventMetadata, void 0 === this.webStack ? {} : {
+                                        webStack: this.webStack
+                                    }));
+                                eoD.sendEventViaImg({
                                     target: "www",
                                     localTime: new Date,
                                     eventType: t,
@@ -111494,7 +111525,7 @@ function() {
                                 var e = HG.referrer,
                                     t = e && new URL(e).hostname.endsWith(St().domain),
                                     n = HK.performance.getEntriesByType("navigation")[0],
-                                    r = eoI(n);
+                                    r = eo_(n);
                                 if (!t && "back_forward" !== r && "reload" !== r) return;
                                 var i = eom.loadFromCookie();
                                 i && (i.purchaseFlowUuid && (this.purchaseFlowUuid = i.purchaseFlowUuid), i.triggeringContext && (this.triggerContext = i.triggeringContext))
@@ -111531,7 +111562,7 @@ function() {
                             var e;
                             if (null == HG) return "";
                             try {
-                                return eok(HG.referrer, null == HK || null == (e = HK.frames.top) ? void 0 : e.document.referrer)
+                                return eoT(HG.referrer, null == HK || null == (e = HK.frames.top) ? void 0 : e.document.referrer)
                             } catch (e) {
                                 return HG.referrer
                             }
@@ -111553,7 +111584,7 @@ function() {
                                 a = !1,
                                 o = void 0;
                             try {
-                                for (var l, s = eo_[Symbol.iterator](); !(i = (l = s.next()).done); i = !0) {
+                                for (var l, s = eoR[Symbol.iterator](); !(i = (l = s.next()).done); i = !0) {
                                     var u = l.value,
                                         c = u.web,
                                         d = u.webview,
@@ -111580,13 +111611,13 @@ function() {
                     configurable: !0,
                     writable: !0
                 }) : e[eoO] = !0, e)), 1))) {
-                var eoN = function() {
-                    eoE(eoD), (null == HG ? void 0 : HG.getElementById("display-price-container")) == null && eoA(eoD)
+                var eoM = function() {
+                    eoE(eoN), (null == HG ? void 0 : HG.getElementById("display-price-container")) == null && eoA(eoN)
                 };
-                "loading" === HG.readyState ? HG.addEventListener("DOMContentLoaded", eoN) : eoN()
+                "loading" === HG.readyState ? HG.addEventListener("DOMContentLoaded", eoM) : eoM()
             }
 
-            function eoM(e, t, n, r, i, a, o) {
+            function eoL(e, t, n, r, i, a, o) {
                 try {
                     var l = e[a](o),
                         s = l.value
@@ -111597,7 +111628,7 @@ function() {
                 l.done ? t(s) : Promise.resolve(s).then(r, i)
             }
 
-            function eoL(e) {
+            function eoU(e) {
                 return function() {
                     var t = this,
                         n = arguments;
@@ -111605,18 +111636,18 @@ function() {
                         var a = e.apply(t, n);
 
                         function o(e) {
-                            eoM(a, r, i, o, l, "next", e)
+                            eoL(a, r, i, o, l, "next", e)
                         }
 
                         function l(e) {
-                            eoM(a, r, i, o, l, "throw", e)
+                            eoL(a, r, i, o, l, "throw", e)
                         }
                         o(void 0)
                     })
                 }
             }
 
-            function eoU(e, t) {
+            function eoF(e, t) {
                 var n, r, i, a = {
                         label: 0,
                         sent: function() {
@@ -111697,13 +111728,13 @@ function() {
                 }
             }
 
-            function eoF(e, t) {
+            function eoV(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function eoV(e, t, n, r, i, a, o) {
+            function eoB(e, t, n, r, i, a, o) {
                 try {
                     var l = e[a](o),
                         s = l.value
@@ -111714,7 +111745,7 @@ function() {
                 l.done ? t(s) : Promise.resolve(s).then(r, i)
             }
 
-            function eoB(e, t) {
+            function eoq(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -111738,18 +111769,18 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return eoF(e, t);
+                        if ("string" == typeof e) return eoV(e, t);
                         var n = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n) return Array.from(n);
-                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return eoF(e, t)
+                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return eoV(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
-            var eoq = "paymentSession-".concat(null != (T = null == (I = erE()) ? void 0 : I.id) ? T : "loggedout");
+            var eoz = "paymentSession-".concat(null != (T = null == (I = erE()) ? void 0 : I.id) ? T : "loggedout");
 
-            function eoz(e, t, n) {
+            function eoW(e, t, n) {
                 return t in e ? Object.defineProperty(e, t, {
                     value: n,
                     enumerable: !0,
@@ -111757,33 +111788,33 @@ function() {
                     writable: !0
                 }) : e[t] = n, e
             }
-            eoz(_ = {}, eiw.toLowerCase(), eiw), eoz(_, "robloxplus", eiw), eoz(_, eiS.toLowerCase(), eiS), eoz(R = {}, eip, "Weekly"), eoz(R, eih, "Monthly"), eoz(R, eiy, "Yearly"), eoz(D = {}, eip, "Label.DurationTitleWeekly"), eoz(D, eih, "Label.DurationTitle"), eoz(D, eiy, "Label.DurationTitleYearly"), eoz(N = {}, eip, {
+            eoW(_ = {}, eiw.toLowerCase(), eiw), eoW(_, "robloxplus", eiw), eoW(_, eiS.toLowerCase(), eiS), eoW(R = {}, eip, "Weekly"), eoW(R, eih, "Monthly"), eoW(R, eiy, "Yearly"), eoW(D = {}, eip, "Label.DurationTitleWeekly"), eoW(D, eih, "Label.DurationTitle"), eoW(D, eiy, "Label.DurationTitleYearly"), eoW(N = {}, eip, {
                 singular: "Label.SubscriptionPeriodWeek",
                 plural: "Label.SubscriptionPeriodWeeks"
-            }), eoz(N, eih, {
+            }), eoW(N, eih, {
                 singular: "Label.SubscriptionPeriodMonth",
                 plural: "Label.SubscriptionPeriodMonths"
-            }), eoz(N, eiy, {
+            }), eoW(N, eiy, {
                 singular: "Label.SubscriptionPeriodYear",
                 plural: "Label.SubscriptionPeriodYears"
             });
-            var eoW = (eoz(M = {}, eip, {
+            var eoK = (eoW(M = {}, eip, {
                 singular: "label.week",
                 plural: "label.weeks"
-            }), eoz(M, eih, {
+            }), eoW(M, eih, {
                 singular: "Label.month",
                 plural: "Label.months"
-            }), eoz(M, eiy, {
+            }), eoW(M, eiy, {
                 singular: "label.year",
                 plural: "label.years"
             }), M);
 
-            function eoK(e, t) {
-                var n, r = null != (n = eoW[e]) ? n : eoW.Month;
+            function eoG(e, t) {
+                var n, r = null != (n = eoK[e]) ? n : eoK.Month;
                 return 1 === t ? r.singular : r.plural
             }
 
-            function eoG(e, t) {
+            function eoH(e, t) {
                 var n = null == e ? void 0 : e.freeTrialOffer;
                 if (!n) return null;
                 var r = n.duration,
@@ -111791,39 +111822,39 @@ function() {
                 return i !== eip && i !== eih && i !== eiy || !Number.isFinite(r) || r <= 0 ? null : {
                     trialDuration: r,
                     trialPeriodType: i,
-                    trialPeriodKey: eoK(i, r),
-                    billingPeriodKey: eoK(t, 1)
+                    trialPeriodKey: eoG(i, r),
+                    billingPeriodKey: eoG(t, 1)
                 }
             }
 
-            function eoH(e, t) {
+            function eoQ(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function eoQ(e) {
+            function eoY(e) {
                 return function(e) {
-                    if (Array.isArray(e)) return eoH(e)
+                    if (Array.isArray(e)) return eoQ(e)
                 }(e) || function(e) {
                     if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
-                }(e) || eoY(e) || function() {
+                }(e) || eoX(e) || function() {
                     throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
 
-            function eoY(e, t) {
+            function eoX(e, t) {
                 if (e) {
-                    if ("string" == typeof e) return eoH(e, t);
+                    if ("string" == typeof e) return eoQ(e, t);
                     var n = Object.prototype.toString.call(e).slice(8, -1);
                     if ("Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n) return Array.from(n);
-                    if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return eoH(e, t)
+                    if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return eoQ(e, t)
                 }
             }
-            eoz(L = {}, eiu.toLowerCase(), eiu), eoz(L, eic.toLowerCase(), eic), eoz(L, eid.toLowerCase(), eid), eoz(U = {}, eiu, "Stripe"), eoz(U, eic, eim), eoz(U, eid, eim), eoz(U, "RobloxCredit", "CreditBalance"), eoQ(["ar-001", "de-de", "en-us", "es-es", "fr-fr", "hi-in", "id-id", "it-it", "ja-jp", "ko-kr", "nl-nl", "pl-pl", "pt-br", "th-th", "tr-tr", "vi-vn", "zh-cn", "zh-tw"]).concat(eoQ(["bg-bg", "bn-bd", "bs-ba", "cs-cz", "da-dk", "el-gr", "en-gb", "es-mx", "et-ee", "fi-fi", "fil-ph", "fr-ca", "hr-hr", "hu-hu", "ka-ge", "kk-kz", "km-kh", "lt-lt", "lv-lv", "ms-my", "my-mm", "nb-no", "pt-pt", "ro-ro", "ru-ru", "si-lk", "sk-sk", "sl-sl", "sq-al", "sr-rs", "sv-se", "uk-ua"]));
-            var eoX = eoQ(["ar_001", "de_de", "en_us", "es_es", "fr_fr", "hi_in", "id_id", "it_it", "ja_jp", "ko_kr", "nl_nl", "pl_pl", "pt_br", "th_th", "tr_tr", "vi_vn", "zh_cn", "zh_tw"]).concat(eoQ(["bg_bg", "bn_bd", "bs_ba", "cs_cz", "da_dk", "el_gr", "en_gb", "es_mx", "et_ee", "fi_fi", "fil_ph", "fr_ca", "hr_hr", "hu_hu", "ka_ge", "kk_kz", "km_kh", "lt_lt", "lv_lv", "ms_my", "my_mm", "nb_no", "pt_pt", "ro_ro", "ru_ru", "si_lk", "sk_sk", "sl_sl", "sq_al", "sr_rs", "sv_se", "uk_ua"])),
-                eo$ = eoQ(["ar-001", "de-DE", "en-US", "es-ES", "fr-FR", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "nl-NL", "pl-PL", "pt-BR", "th-TH", "tr-TR", "vi-VN", "zh-CN", "zh-TW"]).concat(eoQ(["bg-BG", "bn-BD", "bs-BA", "cs-CZ", "da-DK", "el-GR", "en-GB", "es-MX", "et-EE", "fi-FI", "fil-PH", "fr-CA", "hr-HR", "hu-HU", "ka-GE", "kk-KZ", "km-KH", "lt-LT", "lv-LV", "ms-MY", "my-MM", "nb-NO", "pt-PT", "ro-RO", "ru-RU", "si-LK", "sk-SK", "sl-SL", "sq-AL", "sr-RS", "sv-SE", "uk-UA"])),
-                eoJ = function(e) {
+            eoW(L = {}, eiu.toLowerCase(), eiu), eoW(L, eic.toLowerCase(), eic), eoW(L, eid.toLowerCase(), eid), eoW(U = {}, eiu, "Stripe"), eoW(U, eic, eim), eoW(U, eid, eim), eoW(U, "RobloxCredit", "CreditBalance"), eoY(["ar-001", "de-de", "en-us", "es-es", "fr-fr", "hi-in", "id-id", "it-it", "ja-jp", "ko-kr", "nl-nl", "pl-pl", "pt-br", "th-th", "tr-tr", "vi-vn", "zh-cn", "zh-tw"]).concat(eoY(["bg-bg", "bn-bd", "bs-ba", "cs-cz", "da-dk", "el-gr", "en-gb", "es-mx", "et-ee", "fi-fi", "fil-ph", "fr-ca", "hr-hr", "hu-hu", "ka-ge", "kk-kz", "km-kh", "lt-lt", "lv-lv", "ms-my", "my-mm", "nb-no", "pt-pt", "ro-ro", "ru-ru", "si-lk", "sk-sk", "sl-sl", "sq-al", "sr-rs", "sv-se", "uk-ua"]));
+            var eo$ = eoY(["ar_001", "de_de", "en_us", "es_es", "fr_fr", "hi_in", "id_id", "it_it", "ja_jp", "ko_kr", "nl_nl", "pl_pl", "pt_br", "th_th", "tr_tr", "vi_vn", "zh_cn", "zh_tw"]).concat(eoY(["bg_bg", "bn_bd", "bs_ba", "cs_cz", "da_dk", "el_gr", "en_gb", "es_mx", "et_ee", "fi_fi", "fil_ph", "fr_ca", "hr_hr", "hu_hu", "ka_ge", "kk_kz", "km_kh", "lt_lt", "lv_lv", "ms_my", "my_mm", "nb_no", "pt_pt", "ro_ro", "ru_ru", "si_lk", "sk_sk", "sl_sl", "sq_al", "sr_rs", "sv_se", "uk_ua"])),
+                eoJ = eoY(["ar-001", "de-DE", "en-US", "es-ES", "fr-FR", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "nl-NL", "pl-PL", "pt-BR", "th-TH", "tr-TR", "vi-VN", "zh-CN", "zh-TW"]).concat(eoY(["bg-BG", "bn-BD", "bs-BA", "cs-CZ", "da-DK", "el-GR", "en-GB", "es-MX", "et-EE", "fi-FI", "fil-PH", "fr-CA", "hr-HR", "hu-HU", "ka-GE", "kk-KZ", "km-KH", "lt-LT", "lv-LV", "ms-MY", "my-MM", "nb-NO", "pt-PT", "ro-RO", "ru-RU", "si-LK", "sk-SK", "sl-SL", "sq-AL", "sr-RS", "sv-SE", "uk-UA"])),
+                eoZ = function(e) {
                     var t, n = function(e) {
                             if (Array.isArray(e)) return e
                         }(t = e.split("-")) || function(e) {
@@ -111845,7 +111876,7 @@ function() {
                                 }
                                 return i
                             }
-                        }(t) || eoY(t, 2) || function() {
+                        }(t) || eoX(t, 2) || function() {
                             throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                         }(),
                         r = n[0],
@@ -111853,41 +111884,41 @@ function() {
                     return "".concat(r, "-").concat(null == i ? void 0 : i.toUpperCase())
                 };
 
-            function eoZ(e, t) {
+            function eo0(e, t) {
                 return null != t && "u" > typeof Symbol && t[Symbol.hasInstance] ? !!t[Symbol.hasInstance](e) : e instanceof t
             }
 
-            function eo0() {
+            function eo1() {
                 var e, t;
                 return null != (e = null != (t = function() {
                     if (!("u" < typeof document)) {
                         var e = document.documentElement.lang;
-                        if (e) return (0, ea9.arrayIncludes)(eo$, e) ? e.toLowerCase() : void 0
+                        if (e) return (0, ea9.arrayIncludes)(eoJ, e) ? e.toLowerCase() : void 0
                     }
                 }()) ? t : function() {
                     if ("u" < typeof document) return;
                     var e = document.querySelector('meta[name="locale-data"]');
-                    if (eoZ(e, HTMLMetaElement)) {
+                    if (eo0(e, HTMLMetaElement)) {
                         var t = e.dataset.languageCode;
-                        if (t && (0, ea9.arrayIncludes)(eoX, t)) return t.replace("_", "-")
+                        if (t && (0, ea9.arrayIncludes)(eo$, t)) return t.replace("_", "-")
                     }
                 }()) ? e : "en-us"
             }
 
-            function eo1(e) {
-                var t = null != e ? e : eo0();
+            function eo2(e) {
+                var t = null != e ? e : eo1();
                 return (0, z.useMemo)(function() {
                     return {
                         dateTime: function(e, n) {
                             try {
-                                return new Intl.DateTimeFormat(eoJ(t), n).format(eoZ(e, Date) ? e : new Date(e))
+                                return new Intl.DateTimeFormat(eoZ(t), n).format(eo0(e, Date) ? e : new Date(e))
                             } catch (e) {
                                 return ""
                             }
                         },
                         number: function(e, n) {
                             try {
-                                return new Intl.NumberFormat(eoJ(t), n).format(e)
+                                return new Intl.NumberFormat(eoZ(t), n).format(e)
                             } catch (t) {
                                 return String(e)
                             }
@@ -111895,8 +111926,8 @@ function() {
                     }
                 }, [t])
             }
-            eoQ(["ar", "de", "es", "fr", "hi", "id", "it", "ja", "ko", "nl", "pl", "pt", "th", "tr", "vi"]).concat(eoQ(["ar-001", "de-de", "es-es", "fr-fr", "hi-in", "id-id", "it-it", "ja-jp", "ko-kr", "nl-nl", "pl-pl", "pt-br", "th-th", "tr-tr", "vi-vn"]));
-            var eo2 = function(e) {
+            eoY(["ar", "de", "es", "fr", "hi", "id", "it", "ja", "ko", "nl", "pl", "pt", "th", "tr", "vi"]).concat(eoY(["ar-001", "de-de", "es-es", "fr-fr", "hi-in", "id-id", "it-it", "ja-jp", "ko-kr", "nl-nl", "pl-pl", "pt-br", "th-th", "tr-tr", "vi-vn"]));
+            var eo3 = function(e) {
                     var t = e.iconName,
                         n = e.label;
                     return (0, B.jsxs)("div", {
@@ -111910,12 +111941,12 @@ function() {
                         })]
                     })
                 },
-                eo3 = function(e) {
+                eo4 = function(e) {
                     var t, n = e.featureConfig,
                         r = e.currencySubscriptionBenefit,
                         i = e.freeTrialOffer,
                         a = (0, K.useTranslation)().translate,
-                        o = eo1(),
+                        o = eo2(),
                         l = (null == i || null == (t = i.freeTrialOffer) ? void 0 : t.periodType) === eip ? 60 + 7 * i.freeTrialOffer.duration : 60,
                         s = (0, z.useMemo)(function() {
                             var e;
@@ -111933,45 +111964,45 @@ function() {
                         }, [n]);
                     return (0, B.jsxs)("div", {
                         className: "gap-y-xlarge flex flex-col",
-                        children: [s && (u ? (0, B.jsx)(eo2, {
+                        children: [s && (u ? (0, B.jsx)(eo3, {
                             iconName: "icon-regular-tag",
                             label: a("Description.Benefit.DiscountV3", {
                                 trialUnlockDays: o.number(l)
                             })
-                        }) : (0, B.jsx)(eo2, {
+                        }) : (0, B.jsx)(eo3, {
                             iconName: "icon-regular-tag",
                             label: a("Description.Benefit.DiscountBase", {
                                 discountPercent: o.number(.01 * s.discountPercent, {
                                     style: "percent"
                                 })
                             })
-                        })), (0, B.jsx)(eo2, {
+                        })), (0, B.jsx)(eo3, {
                             iconName: "icon-regular-paint-brush",
                             label: a("Description.Benefit.Customize")
-                        }), (0, B.jsx)(eo2, {
+                        }), (0, B.jsx)(eo3, {
                             iconName: "icon-regular-controller",
                             label: a("Label.BlackbirdPSDiscount")
-                        }), r && r.entitledAmountMicrosPerGrantingPeriod > 0 && (0, B.jsx)(eo2, {
+                        }), r && r.entitledAmountMicrosPerGrantingPeriod > 0 && (0, B.jsx)(eo3, {
                             iconName: "icon-regular-robux",
                             label: a("Description.Benefit.RobuxStipend", {
                                 amount: o.number(Math.round(r.entitledAmountMicrosPerGrantingPeriod / 1e6)),
                                 periodType: r.grantingPeriodType
                             })
-                        }), n.isRobuxTransferEnabled && (0, B.jsx)(eo2, {
+                        }), n.isRobuxTransferEnabled && (0, B.jsx)(eo3, {
                             iconName: "icon-regular-robux",
                             label: a("Description.Benefit.RobuxTransfers")
-                        }), n.isTradingEnabled && (0, B.jsx)(eo2, {
+                        }), n.isTradingEnabled && (0, B.jsx)(eo3, {
                             iconName: "icon-regular-hand-two-arrows-horizontal",
                             label: a("Description.Benefit.TradeResellItems")
-                        }), n.isUgcPublishingEnabled && (0, B.jsx)(eo2, {
+                        }), n.isUgcPublishingEnabled && (0, B.jsx)(eo3, {
                             iconName: "icon-regular-arrow-up-from-landscape-rectangle",
                             label: a("Description.Benefit.PublishItems")
                         })]
                     })
                 },
-                eo4 = window.Roblox["core-scripts"].format.string,
-                eo6 = function(e, t) {
-                    var n = eo1();
+                eo6 = window.Roblox["core-scripts"].format.string,
+                eo5 = function(e, t) {
+                    var n = eo2();
                     return (0, z.useMemo)(function() {
                         var r = e.units + 1e-9 * e.nanos;
                         return n.number(r, function(e) {
@@ -111997,34 +112028,34 @@ function() {
                         }, t))
                     }, [n, e, t])
                 },
-                eo5 = function(e) {
+                eo8 = function(e) {
                     var t = e.eligibleOffers,
                         n = e.price,
                         r = e.periodType,
                         i = (0, K.useTranslation)().translate,
-                        a = eo6(n),
+                        a = eo5(n),
                         o = i("Description.BillingInfo", {
-                            price: "<span class='text-heading-medium'>".concat((0, eo4.escapeHtml)(a), "</span>"),
+                            price: "<span class='text-heading-medium'>".concat((0, eo6.escapeHtml)(a), "</span>"),
                             periodType: r
                         }),
                         l = null == t ? void 0 : t.find(function(e) {
                             return "FreeTrial" === e.offerType
                         }),
                         s = null != l,
-                        u = eoG(l, r),
+                        u = eoH(l, r),
                         c = u ? i("Label.RobloxPlusPriceRowV3", {
                             boldStart: "<b>",
                             boldEnd: "</b>",
                             trialDuration: u.trialDuration,
                             trialPeriodLabel: i(u.trialPeriodKey),
-                            price: (0, eo4.escapeHtml)(a),
+                            price: (0, eo6.escapeHtml)(a),
                             periodType: r
                         }) : i("Description.BillingInfoWithFreeTrialOffer", {
                             boldTagStart: "<b>",
                             boldTagEnd: "</b>",
                             trialPeriod: 1,
                             trialPeriodType: r,
-                            price: (0, eo4.escapeHtml)(a),
+                            price: (0, eo6.escapeHtml)(a),
                             periodType: r
                         });
                     return (0, B.jsx)("span", {
@@ -112035,12 +112066,12 @@ function() {
                     })
                 };
 
-            function eo8(e, t) {
+            function eo7(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
-            var eo7 = function(e) {
+            var eo9 = function(e) {
                     var t, n = e.productType,
                         r = e.productId,
                         i = e.deviceMeta,
@@ -112081,10 +112112,10 @@ function() {
                             }
                         }(t) || function(e) {
                             if (e) {
-                                if ("string" == typeof e) return eo8(e, 2);
+                                if ("string" == typeof e) return eo7(e, 2);
                                 var t = Object.prototype.toString.call(e).slice(8, -1);
                                 if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return eo8(e, 2)
+                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return eo7(e, 2)
                             }
                         }(t) || function() {
                             throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -112151,14 +112182,14 @@ function() {
                         children: v
                     })
                 },
-                eo9 = eoD.ENUM_TRIGGERING_CONTEXT,
-                ele = function(e) {
+                ele = eoN.ENUM_TRIGGERING_CONTEXT,
+                elt = function(e) {
                     var t, n, r, i, a = e.subscriptionProductInfo,
                         o = e.deviceMeta,
                         l = e.redirectUrl,
                         s = e.assetType,
                         u = e.triggeringContext,
-                        c = void 0 === u ? eo9.WEB_PRIVATE_SERVER_PLUS_UPSELL : u,
+                        c = void 0 === u ? ele.WEB_PRIVATE_SERVER_PLUS_UPSELL : u,
                         d = e.onSubscribeClick,
                         f = e.onMobilePurchaseInitiated,
                         p = e.isLoading,
@@ -112173,10 +112204,10 @@ function() {
                             var e = arguments.length > 0 && void 0 !== arguments[0] && arguments[0];
                             return function() {
                                 var e, t = arguments.length > 0 && void 0 !== arguments[0] && arguments[0],
-                                    n = eoB((0, z.useState)(t ? void 0 : null != (e = eir(eoq)) ? e : void 0), 2),
+                                    n = eoq((0, z.useState)(t ? void 0 : null != (e = eir(eoz)) ? e : void 0), 2),
                                     r = n[0],
                                     i = n[1],
-                                    a = eoB((0, z.useState)(!1), 2),
+                                    a = eoq((0, z.useState)(!1), 2),
                                     o = a[0],
                                     l = a[1],
                                     s = (0, z.useCallback)(function(e) {
@@ -112266,8 +112297,8 @@ function() {
                                                 switch (r.label) {
                                                     case 0:
                                                         if (!e) return [3, 2];
-                                                        return [4, eoL(function() {
-                                                            return eoU(this, function(t) {
+                                                        return [4, eoU(function() {
+                                                            return eoF(this, function(t) {
                                                                 return [2, H1({
                                                                     method: "GET",
                                                                     url: "".concat(Se.EnvironmentUrls.apiGatewayUrl, "/payments-gateway/v1/payment-sessions/").concat(e),
@@ -112285,13 +112316,13 @@ function() {
                                                     case 1:
                                                         return n = r.sent(), [3, 4];
                                                     case 2:
-                                                        return [4, eoL(function() {
-                                                            return eoU(this, function(e) {
+                                                        return [4, eoU(function() {
+                                                            return eoF(this, function(e) {
                                                                 return [2, H1({
                                                                     method: "POST",
                                                                     url: "".concat(Se.EnvironmentUrls.apiGatewayUrl, "/payments-gateway/v1/payment-sessions"),
                                                                     data: {
-                                                                        paymentFlowId: eoD.getPaymentFlowUuid()
+                                                                        paymentFlowId: eoN.getPaymentFlowUuid()
                                                                     },
                                                                     config: {
                                                                         withCredentials: !0
@@ -112308,7 +112339,7 @@ function() {
                                                         n = r.sent(), r.label = 4;
                                                     case 4:
                                                         if (!(t = n)) return [2];
-                                                        return eii(eoq, t.paymentSession), i(t.paymentSession), [2]
+                                                        return eii(eoz, t.paymentSession), i(t.paymentSession), [2]
                                                 }
                                             })
                                         }, function() {
@@ -112318,11 +112349,11 @@ function() {
                                                 var a = t.apply(e, n);
 
                                                 function o(e) {
-                                                    eoV(a, r, i, o, l, "next", e)
+                                                    eoB(a, r, i, o, l, "next", e)
                                                 }
 
                                                 function l(e) {
-                                                    eoV(a, r, i, o, l, "throw", e)
+                                                    eoB(a, r, i, o, l, "throw", e)
                                                 }
                                                 o(void 0)
                                             })
@@ -112356,19 +112387,19 @@ function() {
                             })
                         }, [C]),
                         T = null != k,
-                        I = eo6(A),
+                        I = eo5(A),
                         _ = (0, z.useMemo)(function() {
-                            return T ? eoD.ENUM_VIEW_MESSAGE.ROBLOX_PLUS_FREE_TRIAL : eoD.ENUM_VIEW_MESSAGE.ROBLOX_PLUS_SUBSCRIBE
+                            return T ? eoN.ENUM_VIEW_MESSAGE.ROBLOX_PLUS_FREE_TRIAL : eoN.ENUM_VIEW_MESSAGE.ROBLOX_PLUS_SUBSCRIBE
                         }, [T]),
                         R = (0, z.useRef)(!1);
                     (0, z.useEffect)(function() {
-                        !R.current && w && (R.current = !0, s && eoD.startRobloxPlusUpsellFlow({
+                        !R.current && w && (R.current = !0, s && eoN.startRobloxPlusUpsellFlow({
                             assetType: s
-                        }), eoD.sendUserPurchaseFlowEvent({
+                        }), eoN.sendUserPurchaseFlowEvent({
                             triggerContext: c,
                             isMidPurchaseStep: !1,
-                            viewName: eoD.ENUM_VIEW_NAME.ROBLOX_PLUS_UPSELL_BANNER,
-                            purchaseEventType: eoD.ENUM_PURCHASE_EVENT_TYPE.VIEW_SHOWN,
+                            viewName: eoN.ENUM_VIEW_NAME.ROBLOX_PLUS_UPSELL_BANNER,
+                            purchaseEventType: eoN.ENUM_PURCHASE_EVENT_TYPE.VIEW_SHOWN,
                             viewMessage: _,
                             eventMetadata: w ? {
                                 paymentSessionId: w
@@ -112376,18 +112407,18 @@ function() {
                         }))
                     }, [w, s, c, _]);
                     var D = (0, z.useCallback)(function() {
-                            eoD.sendUserPurchaseFlowEvent({
+                            eoN.sendUserPurchaseFlowEvent({
                                 triggerContext: c,
                                 isMidPurchaseStep: !1,
-                                viewName: eoD.ENUM_VIEW_NAME.ROBLOX_PLUS_UPSELL_BANNER,
-                                purchaseEventType: eoD.ENUM_PURCHASE_EVENT_TYPE.USER_INPUT,
+                                viewName: eoN.ENUM_VIEW_NAME.ROBLOX_PLUS_UPSELL_BANNER,
+                                purchaseEventType: eoN.ENUM_PURCHASE_EVENT_TYPE.USER_INPUT,
                                 viewMessage: _,
                                 eventMetadata: w ? {
                                     paymentSessionId: w
                                 } : {}
                             }), null == d || d()
                         }, [c, _, d, w]),
-                        N = eoG(k, E),
+                        N = eoH(k, E),
                         M = T && null != N,
                         L = (0, z.useMemo)(function() {
                             var e, t = null == k || null == (e = k.freeTrialOffer) ? void 0 : e.estimatedTrialEndDate;
@@ -112414,7 +112445,7 @@ function() {
                             price: I,
                             periodType: E
                         }) : S(T ? "Action.TryItForFree" : "Action.Subscribe"),
-                        V = (0, B.jsx)(eo7, {
+                        V = (0, B.jsx)(eo9, {
                             className: h ? "width-full" : void 0,
                             deviceMeta: o,
                             isLoading: p,
@@ -112440,7 +112471,7 @@ function() {
                                 }), null != y ? y : S("Title.GetBlackbird")]
                             }), (void 0 === b || b) && (0, B.jsx)("div", {
                                 className: "margin-top-small",
-                                children: (0, B.jsx)(eo5, {
+                                children: (0, B.jsx)(eo8, {
                                     eligibleOffers: C,
                                     periodType: E,
                                     price: A
@@ -112452,7 +112483,7 @@ function() {
                         }), (0, B.jsx)(eaI, {
                             children: (0, B.jsxs)("div", {
                                 className: "padding-large gap-y-xlarge flex flex-col",
-                                children: [j && (0, B.jsx)(eo3, {
+                                children: [j && (0, B.jsx)(eo4, {
                                     featureConfig: (t = function(e) {
                                         for (var t = 1; t < arguments.length; t++) {
                                             var n = null != arguments[t] ? arguments[t] : {},
@@ -112509,7 +112540,7 @@ function() {
                     })
                 };
 
-            function elt(e) {
+            function eln(e) {
                 var t = e.open,
                     n = e.onOpenChange,
                     r = eiF(void 0, {
@@ -112519,7 +112550,7 @@ function() {
                 return (0, B.jsx)(HN, {
                     open: t,
                     onOpenChange: n,
-                    children: t && r && i && (0, B.jsx)(ele, {
+                    children: t && r && i && (0, B.jsx)(elt, {
                         subscriptionProductInfo: r,
                         deviceMeta: i,
                         triggeringContext: ei9().ENUM_TRIGGERING_CONTEXT.WEB_APP_THEME_PLUS_UPSELL,
@@ -112528,13 +112559,13 @@ function() {
                 })
             }
 
-            function eln(e, t) {
+            function elr(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function elr(e, t) {
+            function eli(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -112558,16 +112589,16 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return eln(e, t);
+                        if ("string" == typeof e) return elr(e, t);
                         var n = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n) return Array.from(n);
-                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return eln(e, t)
+                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return elr(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
-            var eli = function(e) {
+            var ela = function(e) {
                     var t = e.selectedTheme,
                         n = e.themes,
                         r = e.disabled,
@@ -112584,7 +112615,7 @@ function() {
                         })
                     })
                 },
-                ela = function(e) {
+                elo = function(e) {
                     var t, n = e.theme,
                         r = e.setTheme,
                         i = e.themes,
@@ -112592,13 +112623,13 @@ function() {
                         o = e.isPlus,
                         l = e.isEligible,
                         s = (0, K.useTranslation)().translate,
-                        u = elr(bx(), 2),
+                        u = eli(bx(), 2),
                         c = u[0],
                         d = u[1].isLoading,
-                        f = elr((0, z.useState)(null != (t = null == n ? void 0 : n.category) ? t : "dynamic"), 2),
+                        f = eli((0, z.useState)(null != (t = null == n ? void 0 : n.category) ? t : "dynamic"), 2),
                         p = f[0],
                         h = f[1],
-                        y = elr((0, z.useState)(!1), 2),
+                        y = eli((0, z.useState)(!1), 2),
                         v = y[0],
                         m = y[1],
                         b = eiF(void 0, {
@@ -112679,7 +112710,7 @@ function() {
                                 className: "text-body-small content-muted margin-none",
                                 children: s("Description.DeviceAppThemeExclusive")
                             })]
-                        }), (0, B.jsx)(eli, {
+                        }), (0, B.jsx)(ela, {
                             themes: w,
                             selectedTheme: n,
                             disabled: d,
@@ -112726,12 +112757,12 @@ function() {
                                         }
                                     }, e.id)
                                 })
-                            }), (0, B.jsx)(eli, {
+                            }), (0, B.jsx)(ela, {
                                 themes: E,
                                 selectedTheme: n,
                                 disabled: d,
                                 onSelect: A
-                            }), l && (0, B.jsx)(elt, {
+                            }), l && (0, B.jsx)(eln, {
                                 open: v,
                                 onOpenChange: m
                             })]
@@ -112739,7 +112770,7 @@ function() {
                     })
                 };
 
-            function elo(e) {
+            function ell(e) {
                 var t = e.theme,
                     n = e.setTheme,
                     r = e.themes,
@@ -112747,7 +112778,7 @@ function() {
                     a = pr().data,
                     o = (null == a ? void 0 : a.appThemesAccess) === eiV.Enabled,
                     l = (null == a ? void 0 : a.appThemesAccess) === eiV.Eligible;
-                return null != a && (o || l) ? (0, B.jsx)(ela, {
+                return null != a && (o || l) ? (0, B.jsx)(elo, {
                     theme: t,
                     setTheme: n,
                     themes: r,
@@ -112756,20 +112787,20 @@ function() {
                     isEligible: l
                 }) : null
             }
-            var ell = window.Roblox["core-scripts"]["color-mode"],
-                els = {
+            var els = window.Roblox["core-scripts"]["color-mode"],
+                elu = {
                     system: "Label.SystemTheme",
                     light: "Label.LightTheme",
                     dark: "Label.DarkTheme"
                 };
 
-            function elu(e, t) {
+            function elc(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function elc(e, t) {
+            function eld(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -112793,28 +112824,28 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return elu(e, t);
+                        if ("string" == typeof e) return elc(e, t);
                         var n = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n) return Array.from(n);
-                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return elu(e, t)
+                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return elc(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
-            var eld = "app-theme-mode-heading";
+            var elf = "app-theme-mode-heading";
 
-            function elf(e) {
+            function elp(e) {
                 var t = e.disabled,
                     n = (0, K.useTranslation)().translate,
-                    r = elc((0, z.useState)((0, ell.getColorMode)()), 2),
+                    r = eld((0, z.useState)((0, els.getColorMode)()), 2),
                     i = r[0],
                     a = r[1],
                     o = (0, z.useMemo)(function() {
                         return (0, B.jsx)(sA, {
                             children: (0, B.jsx)(sC, {
-                                children: Object.entries(els).map(function(e) {
-                                    var t = elc(e, 2),
+                                children: Object.entries(elu).map(function(e) {
+                                    var t = eld(e, 2),
                                         r = t[0],
                                         i = t[1];
                                     return (0, B.jsx)(sj, {
@@ -112827,7 +112858,7 @@ function() {
                     }, [n]);
                 return (0, z.useEffect)(function() {
                     var e = new MutationObserver(function() {
-                        a((0, ell.getColorMode)())
+                        a((0, els.getColorMode)())
                     });
                     return e.observe(document.body, {
                             attributeFilter: ["class"]
@@ -112840,7 +112871,7 @@ function() {
                     children: [(0, B.jsxs)("div", {
                         className: "fill basis-0 flex flex-col gap-xsmall",
                         children: [(0, B.jsx)("h3", {
-                            id: eld,
+                            id: elf,
                             className: "text-title-large content-emphasis padding-none",
                             children: n("Heading.AppThemeMode")
                         }), (0, B.jsx)("p", {
@@ -112853,22 +112884,22 @@ function() {
                         placeholder: "",
                         className: "fill basis-0",
                         isDisabled: t,
-                        ariaLabelledBy: eld,
+                        ariaLabelledBy: elf,
                         onValueChange: function(e) {
-                            (0, ea9.arrayIncludes)(ell.colorModes, e) && ((0, ell.setColorMode)(e), a((0, ell.getColorMode)()))
+                            (0, ea9.arrayIncludes)(els.colorModes, e) && ((0, els.setColorMode)(e), a((0, els.getColorMode)()))
                         },
                         children: o
                     })]
                 })
             }
 
-            function elp(e, t) {
+            function elh(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function elh() {
+            function ely() {
                 var e, t, n = (0, K.useTranslation)().translate,
                     r = (void 0 === j && (j = erb()), j),
                     i = erE(),
@@ -112900,10 +112931,10 @@ function() {
                         }
                     }(e) || function(e) {
                         if (e) {
-                            if ("string" == typeof e) return elp(e, 2);
+                            if ("string" == typeof e) return elh(e, 2);
                             var t = Object.prototype.toString.call(e).slice(8, -1);
                             if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return elp(e, 2)
+                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return elh(e, 2)
                         }
                     }(e) || function() {
                         throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -112918,9 +112949,9 @@ function() {
                             className: "text-heading-medium content-emphasis margin-none",
                             children: n(s_)
                         })
-                    }), (0, B.jsx)(elf, {
+                    }), (0, B.jsx)(elp, {
                         disabled: (null == u ? void 0 : u.key) === "halloween-2026"
-                    }), (0, B.jsx)(elo, {
+                    }), (0, B.jsx)(ell, {
                         theme: u,
                         setTheme: c,
                         themes: o,
@@ -112929,12 +112960,12 @@ function() {
                 })
             }
 
-            function ely(e, t) {
+            function elv(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
-            var elv = function() {
+            var elm = function() {
                     var e, t = function(e) {
                             if (Array.isArray(e)) return e
                         }(e = En()) || function(e) {
@@ -112958,10 +112989,10 @@ function() {
                             }
                         }(e) || function(e) {
                             if (e) {
-                                if ("string" == typeof e) return ely(e, 2);
+                                if ("string" == typeof e) return elv(e, 2);
                                 var t = Object.prototype.toString.call(e).slice(8, -1);
                                 if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return ely(e, 2)
+                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return elv(e, 2)
                             }
                         }(e) || function() {
                             throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -112987,7 +113018,7 @@ function() {
                         }
                     }, [n, a, r, u]), (0, B.jsx)(W().Fragment, {})
                 },
-                elm = function() {
+                elb = function() {
                     var e = Ob(),
                         t = e.faeAvailable,
                         n = e.idvAvailable,
@@ -113002,7 +113033,7 @@ function() {
                         A7(sD.idVerification) && (n && o(), A5())
                     }, [n, l]), null
                 },
-                elb = function() {
+                elg = function() {
                     var e = (0, z.useRef)(!1),
                         t = WQ(),
                         n = m1(),
@@ -113013,18 +113044,18 @@ function() {
                         e.current || !A7(sD.addParent) || i || (e.current = !0, !a && (null == r ? void 0 : r.canAddParent) && t(), sV(sD.addParent), A5())
                     }, [r, i, a, t]), (0, B.jsx)(W().Fragment, {})
                 },
-                elg = function() {
+                elS = function() {
                     return (0, B.jsxs)(W().Fragment, {
-                        children: [(0, B.jsx)(elv, {}), (0, B.jsx)(elm, {}), (0, B.jsx)(elb, {})]
+                        children: [(0, B.jsx)(elm, {}), (0, B.jsx)(elb, {}), (0, B.jsx)(elg, {})]
                     })
                 },
-                elS = window.EventTracker,
-                elw = [sk.Notifications, sk.Billing, sk.Subscriptions, sk.ParentalControls, sk.AppPermissions, sk.ManageRecommendations],
-                elx = function(e) {
+                elw = window.EventTracker,
+                elx = [sk.Notifications, sk.Billing, sk.Subscriptions, sk.ParentalControls, sk.AppPermissions, sk.ManageRecommendations],
+                elO = function(e) {
                     var t = [];
                     return e.displayReactNotificationsTab || t.push(sk.Notifications), e.displaySubscriptionsTab || t.push(sk.Subscriptions), e.displayParentalControlTab || t.push(sk.ParentalControls), e.displayAppPermissionsTab || t.push(sk.AppPermissions), e.displayManageRecommendationsTab || t.push(sk.ManageRecommendations), t
                 },
-                elO = function() {
+                elP = function() {
                     var e = pr().data;
                     return (null == e ? void 0 : e.displayManageRecommendationsTab) ? (0, B.jsx)("section", {
                         className: "settings-container-v2",
@@ -113037,13 +113068,13 @@ function() {
                     }) : null
                 };
 
-            function elP(e, t) {
+            function elE(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function elE(e, t, n, r, i, a, o) {
+            function elA(e, t, n, r, i, a, o) {
                 try {
                     var l = e[a](o),
                         s = l.value
@@ -113054,7 +113085,7 @@ function() {
                 l.done ? t(s) : Promise.resolve(s).then(r, i)
             }
 
-            function elA(e) {
+            function elC(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var n = null != arguments[t] ? arguments[t] : {},
                         r = Object.keys(n);
@@ -113073,7 +113104,7 @@ function() {
                 return e
             }
 
-            function elC(e, t) {
+            function elj(e, t) {
                 return t = null != t ? t : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : (function(e) {
                     var t = Object.keys(e);
                     if (Object.getOwnPropertySymbols) {
@@ -113086,7 +113117,7 @@ function() {
                 }), e
             }
 
-            function elj(e, t) {
+            function elk(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -113110,16 +113141,16 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return elP(e, t);
+                        if ("string" == typeof e) return elE(e, t);
                         var n = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n) return Array.from(n);
-                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return elP(e, t)
+                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return elE(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
-            var elk = function() {
+            var elT = function() {
                     var e, t = (0, eQ.useTranslation)().translate,
                         n = eH().snackbarService,
                         r = pr(),
@@ -113136,16 +113167,16 @@ function() {
                         h = p.data,
                         y = p.status,
                         v = p.refetch,
-                        m = elj((0, z.useState)(!1), 2),
+                        m = elk((0, z.useState)(!1), 2),
                         b = m[0],
                         g = m[1],
-                        S = elj((0, z.useState)(0), 2),
+                        S = elk((0, z.useState)(0), 2),
                         w = S[0],
                         x = S[1],
-                        O = elj((0, z.useState)([]), 2),
+                        O = elk((0, z.useState)([]), 2),
                         P = O[0],
                         E = O[1],
-                        A = elj((0, z.useState)([{
+                        A = elk((0, z.useState)([{
                             id: sk.Info,
                             path: "/".concat(sk.Info),
                             title: sT,
@@ -113224,7 +113255,7 @@ function() {
                             isDefault: !1,
                             name: sk.BrowserPreferences,
                             show: !(null == (e = eX.deviceMeta.getDeviceMeta()) ? void 0 : e.isInApp),
-                            content: (0, B.jsx)(elh, {})
+                            content: (0, B.jsx)(ely, {})
                         }, {
                             id: sk.ManageRecommendations,
                             path: "/".concat(sk.ManageRecommendations),
@@ -113233,14 +113264,14 @@ function() {
                             isDefault: !1,
                             name: sk.ManageRecommendations,
                             show: !0,
-                            content: (0, B.jsx)(elO, {})
+                            content: (0, B.jsx)(elP, {})
                         }]), 2),
                         C = A[0],
                         j = A[1],
-                        k = elj((0, z.useState)(window.location.hash.split("/")[1]), 2),
+                        k = elk((0, z.useState)(window.location.hash.split("/")[1]), 2),
                         T = k[0],
                         I = k[1],
-                        _ = elj((0, z.useState)([]), 2),
+                        _ = elk((0, z.useState)([]), 2),
                         R = _[0],
                         D = _[1],
                         N = (0, B.jsx)("div", {
@@ -113264,7 +113295,7 @@ function() {
                                 })
                             })
                         }),
-                        M = elj((0, z.useState)(sU()), 2),
+                        M = elk((0, z.useState)(sU()), 2),
                         L = M[0],
                         U = M[1];
                     (0, z.useEffect)(function() {
@@ -113286,7 +113317,7 @@ function() {
                         V = function(e) {
                             j(function(t) {
                                 return t.map(function(t) {
-                                    return t.id === e ? elC(elA({}, t), {
+                                    return t.id === e ? elj(elC({}, t), {
                                         hideInNav: !1
                                     }) : t
                                 })
@@ -113295,7 +113326,7 @@ function() {
                         q = function(e, t) {
                             j(function(n) {
                                 return n.map(function(n) {
-                                    return n.id === e ? elC(elA({}, n), {
+                                    return n.id === e ? elj(elC({}, n), {
                                         title: t
                                     }) : n
                                 })
@@ -113303,10 +113334,10 @@ function() {
                         };
                     (0, z.useEffect)(function() {
                         var e, r = a === e$.QueryStatus.rejected || a === e$.QueryStatus.fulfilled && !i;
-                        r && F(elw), s !== e$.QueryStatus.rejected && (s !== e$.QueryStatus.fulfilled || l) ? f !== e$.QueryStatus.rejected && (f !== e$.QueryStatus.fulfilled || d) ? y !== e$.QueryStatus.rejected && (y !== e$.QueryStatus.fulfilled || h) ? r && (e = erv) : e = ery : e = erh : e = erp, e && (n.warning(t(d0)), x(w + 1), null == elS || elS.fireEvent("".concat("UserSettingsApi", "_").concat(e)), w > 2 && g(!0))
+                        r && F(elx), s !== e$.QueryStatus.rejected && (s !== e$.QueryStatus.fulfilled || l) ? f !== e$.QueryStatus.rejected && (f !== e$.QueryStatus.fulfilled || d) ? y !== e$.QueryStatus.rejected && (y !== e$.QueryStatus.fulfilled || h) ? r && (e = erv) : e = ery : e = erh : e = erp, e && (n.warning(t(d0)), x(w + 1), null == elw || elw.fireEvent("".concat("UserSettingsApi", "_").concat(e)), w > 2 && g(!0))
                     }, [s, f, a, y]), (0, z.useEffect)(function() {
                         if (i) {
-                            var e, t = elx(i);
+                            var e, t = elO(i);
                             t.length > 0 && F(t), i.displayManageRecommendationsTab && V(sk.ManageRecommendations), i.renamePaymentsToSpendingTab && q(sk.Billing, "Heading.Tab.Spending"), i.renamePrivacyToPrivacyContentRestrictionsTab && q(sk.Privacy, "Heading.Tab.PrivacyContentRestrictions")
                         }(null == (e = eX.deviceMeta.getDeviceMeta()) ? void 0 : e.isInApp) && F([sk.BrowserPreferences])
                     }, [i]), (0, z.useEffect)(function() {
@@ -113443,11 +113474,11 @@ function() {
                                 var a = e.apply(t, n);
 
                                 function o(e) {
-                                    elE(a, r, i, o, l, "next", e)
+                                    elA(a, r, i, o, l, "next", e)
                                 }
 
                                 function l(e) {
-                                    elE(a, r, i, o, l, "throw", e)
+                                    elA(a, r, i, o, l, "throw", e)
                                 }
                                 o(void 0)
                             })
@@ -113469,10 +113500,10 @@ function() {
                                 className: "settings-left-navigation",
                                 children: P
                             })]
-                        }), (0, B.jsx)(elg, {})]
+                        }), (0, B.jsx)(elS, {})]
                     })
                 },
-                elT = function() {
+                elI = function() {
                     var e = (0, K.useTranslation)().translate;
                     return (0, z.useLayoutEffect)(function() {
                         return xr.setEnabled(!0),
@@ -113481,13 +113512,13 @@ function() {
                             }
                     }, []), (0, B.jsx)(eG, {
                         translatedCloseLabel: e(d1),
-                        children: (0, B.jsx)(elk, {})
+                        children: (0, B.jsx)(elT, {})
                     })
                 },
-                elI = window.Roblox["core-scripts"].endpoints,
-                el_ = ["Feature.DownloadLanding", "Common.VisitGame"];
+                el_ = window.Roblox["core-scripts"].endpoints,
+                elR = ["Feature.DownloadLanding", "Common.VisitGame"];
 
-            function elR(e, t, n) {
+            function elD(e, t, n) {
                 return t in e ? Object.defineProperty(e, t, {
                     value: n,
                     enumerable: !0,
@@ -113495,13 +113526,13 @@ function() {
                     writable: !0
                 }) : e[t] = n, e
             }
-            var elD = {
+            var elN = {
                 downloadPageHeader: "Heading.DownloadPage",
                 appStoreLinksHeader: "Heading.AppStoreLinks",
                 windowsDownloadLabel: "Action.DownloadWindowsApp",
-                windowsDownloadLink: (0, elI.getAbsoluteUrl)("/download/client?os=win"),
+                windowsDownloadLink: (0, el_.getAbsoluteUrl)("/download/client?os=win"),
                 macDownloadLabel: "Action.DownloadMacApp",
-                macDownloadLink: (0, elI.getAbsoluteUrl)("/download/client?os=mac"),
+                macDownloadLink: (0, el_.getAbsoluteUrl)("/download/client?os=mac"),
                 androidAppDownloadLabel: "Action.DownloadAndroidApp",
                 amazonStoreLink: "Link.AmazonStoreRobloxApp",
                 googlePlayStoreLink: "Link.GooglePlayStoreRobloxApp",
@@ -113514,37 +113545,37 @@ function() {
                 mobileAppDownloadOptionHeading: "Heading.MobileAppDownloadOption",
                 mobileAppQrCodeLabel: "Label.MobileAppQrCode"
             };
-            elR(F = {}, 2, {
-                href: elD.windowsDownloadLink,
-                title: elD.windowsDownloadLabel,
+            elD(F = {}, 2, {
+                href: elN.windowsDownloadLink,
+                title: elN.windowsDownloadLabel,
                 name: "windows",
                 icon: "icon-filled-microsoft",
                 legacyIcon: "icon-logo-win",
                 isDirectDownload: !0
-            }), elR(F, 4, {
-                href: elD.macDownloadLink,
-                title: elD.macDownloadLabel,
+            }), elD(F, 4, {
+                href: elN.macDownloadLink,
+                title: elN.macDownloadLabel,
                 name: "mac",
                 icon: "icon-filled-apple",
                 legacyIcon: "icon-logo-apple",
                 isDirectDownload: !0
-            }), elR(F, 7, {
-                href: elD.amazonStoreLink,
-                title: elD.androidAppDownloadLabel,
+            }), elD(F, 7, {
+                href: elN.amazonStoreLink,
+                title: elN.androidAppDownloadLabel,
                 name: "amazonStore",
                 icon: "icon-filled-amazon",
                 legacyIcon: "icon-logo-android",
                 isDirectDownload: !1
-            }), elR(F, 6, {
-                href: elD.googlePlayStoreLink,
-                title: elD.androidAppDownloadLabel,
+            }), elD(F, 6, {
+                href: elN.googlePlayStoreLink,
+                title: elN.androidAppDownloadLabel,
                 name: "android",
                 icon: "icon-filled-android",
                 legacyIcon: "icon-logo-android",
                 isDirectDownload: !1
-            }), elR(F, 5, {
-                href: elD.appleAppStoreLink,
-                title: elD.iOSDownloadLabel,
+            }), elD(F, 5, {
+                href: elN.appleAppStoreLink,
+                title: elN.iOSDownloadLabel,
                 name: "iOS",
                 icon: "icon-filled-apple",
                 legacyIcon: "icon-logo-apple",
@@ -113553,22 +113584,22 @@ function() {
                 return new RegExp(e.replace(/\{.*?\}/g, "([^/]+)"))
             });
 
-            function elN(e, t, n, r) {
+            function elM(e, t, n, r) {
                 var i = null == r || "number" == typeof r || "boolean" == typeof r ? r : n(r),
                     a = t.get(i);
                 return void 0 === a && (a = e.call(this, r), t.set(i, a)), a
             }
 
-            function elM(e, t, n) {
+            function elL(e, t, n) {
                 var r = Array.prototype.slice.call(arguments, 3),
                     i = n(r),
                     a = t.get(i);
                 return void 0 === a && (a = e.apply(this, r), t.set(i, a)), a
             }
-            var elL = function() {
+            var elU = function() {
                     return JSON.stringify(arguments)
                 },
-                elU = function() {
+                elF = function() {
                     var e;
 
                     function t() {
@@ -113593,52 +113624,52 @@ function() {
                             }
                         }(t.prototype, e), t
                 }(),
-                elF = {
+                elV = {
                     create: function() {
-                        return new elU
+                        return new elF
                     }
                 },
-                elV = {
+                elB = {
                     variadic: function(e, t) {
                         var n, r;
-                        return n = t.cache.create(), r = t.serializer, elM.bind(this, e, n, r)
+                        return n = t.cache.create(), r = t.serializer, elL.bind(this, e, n, r)
                     },
                     monadic: function(e, t) {
                         var n, r;
-                        return n = t.cache.create(), r = t.serializer, elN.bind(this, e, n, r)
+                        return n = t.cache.create(), r = t.serializer, elM.bind(this, e, n, r)
                     }
                 };
 
-            function elB(e, t) {
+            function elq(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function elq(e, t, n) {
-                return (elq = elG() ? Reflect.construct : function(e, t, n) {
+            function elz(e, t, n) {
+                return (elz = elH() ? Reflect.construct : function(e, t, n) {
                     var r = [null];
                     r.push.apply(r, t);
                     var i = new(Function.bind.apply(e, r));
-                    return n && elW(i, n.prototype), i
+                    return n && elK(i, n.prototype), i
                 }).apply(null, arguments)
             }
 
-            function elz(e) {
-                return (elz = Object.setPrototypeOf ? Object.getPrototypeOf : function(e) {
+            function elW(e) {
+                return (elW = Object.setPrototypeOf ? Object.getPrototypeOf : function(e) {
                     return e.__proto__ || Object.getPrototypeOf(e)
                 })(e)
             }
 
-            function elW(e, t) {
-                return (elW = Object.setPrototypeOf || function(e, t) {
+            function elK(e, t) {
+                return (elK = Object.setPrototypeOf || function(e, t) {
                     return e.__proto__ = t, e
                 })(e, t)
             }
 
-            function elK(e) {
+            function elG(e) {
                 var t = "function" == typeof Map ? new Map : void 0;
-                return (elK = function(e) {
+                return (elG = function(e) {
                     if (null === e || -1 === Function.toString.call(e).indexOf("[native code]")) return e;
                     if ("function" != typeof e) throw TypeError("Super expression must either be null or a function");
                     if (void 0 !== t) {
@@ -113647,7 +113678,7 @@ function() {
                     }
 
                     function n() {
-                        return elq(e, arguments, elz(this).constructor)
+                        return elz(e, arguments, elW(this).constructor)
                     }
                     return n.prototype = Object.create(e.prototype, {
                         constructor: {
@@ -113656,22 +113687,22 @@ function() {
                             writable: !0,
                             configurable: !0
                         }
-                    }), elW(n, e)
+                    }), elK(n, e)
                 })(e)
             }
 
-            function elG() {
+            function elH() {
                 try {
                     var e = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}))
                 } catch (e) {}
-                return (elG = function() {
+                return (elH = function() {
                     return !!e
                 })()
             }
-            elK(Error);
-            var elH = ((y = elH || {}).MISSING_MESSAGE = "MISSING_MESSAGE", y.MISSING_FORMAT = "MISSING_FORMAT", y.ENVIRONMENT_FALLBACK = "ENVIRONMENT_FALLBACK", y.INSUFFICIENT_PATH = "INSUFFICIENT_PATH", y.INVALID_MESSAGE = "INVALID_MESSAGE", y.INVALID_KEY = "INVALID_KEY", y.FORMATTING_ERROR = "FORMATTING_ERROR", y);
+            elG(Error);
+            var elQ = ((y = elQ || {}).MISSING_MESSAGE = "MISSING_MESSAGE", y.MISSING_FORMAT = "MISSING_FORMAT", y.ENVIRONMENT_FALLBACK = "ENVIRONMENT_FALLBACK", y.INSUFFICIENT_PATH = "INSUFFICIENT_PATH", y.INVALID_MESSAGE = "INVALID_MESSAGE", y.INVALID_KEY = "INVALID_KEY", y.FORMATTING_ERROR = "FORMATTING_ERROR", y);
 
-            function elQ(e, t) {
+            function elY(e, t) {
                 return function(e, t) {
                     var n, r, i;
                     return r = (n = {
@@ -113687,9 +113718,9 @@ function() {
                                 }
                             }
                         },
-                        strategy: elV.variadic
-                    }).cache ? n.cache : elF, i = n && n.serializer ? n.serializer : elL, (n && n.strategy ? n.strategy : function(e, t) {
-                        var n, r, i = 1 === e.length ? elN : elM;
+                        strategy: elB.variadic
+                    }).cache ? n.cache : elV, i = n && n.serializer ? n.serializer : elU, (n && n.strategy ? n.strategy : function(e, t) {
+                        var n, r, i = 1 === e.length ? elM : elL;
                         return n = t.cache.create(), r = t.serializer, i.bind(this, e, n, r)
                     })(e, {
                         cache: r,
@@ -113697,16 +113728,16 @@ function() {
                     })
                 }(function() {
                     for (var t = arguments.length, n = Array(t), r = 0; r < t; r++) n[r] = arguments[r];
-                    return elq(e, function(e) {
-                        if (Array.isArray(e)) return elB(e)
+                    return elz(e, function(e) {
+                        if (Array.isArray(e)) return elq(e)
                     }(n) || function(e) {
                         if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
                     }(n) || function(e) {
                         if (e) {
-                            if ("string" == typeof e) return elB(e, void 0);
+                            if ("string" == typeof e) return elq(e, void 0);
                             var t = Object.prototype.toString.call(e).slice(8, -1);
                             if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return elB(e, void 0)
+                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return elq(e, void 0)
                         }
                     }(n) || function() {
                         throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -113714,19 +113745,19 @@ function() {
                 }, t)
             }
 
-            function elY(e) {
+            function elX(e) {
                 return function() {
                     for (var e = arguments.length, t = Array(e), n = 0; n < e; n++) t[n] = arguments[n];
                     return t.filter(Boolean).join(".")
                 }(e.namespace, e.key)
             }
 
-            function elX(e) {
+            function el$(e) {
                 console.error(e)
             }
-            var el$ = (0, z.createContext)(void 0);
+            var elJ = (0, z.createContext)(void 0);
 
-            function elJ(e) {
+            function elZ(e) {
                 var t = e.children,
                     n = e.formats,
                     r = e.getMessageFallback,
@@ -113735,7 +113766,7 @@ function() {
                     o = e.now,
                     l = e.onError,
                     s = e.timeZone,
-                    u = (0, z.useContext)(el$),
+                    u = (0, z.useContext)(elJ),
                     c = (0, z.useMemo)(function() {
                         return (null == u ? void 0 : u.cache) || {
                             dateTime: {},
@@ -113749,12 +113780,12 @@ function() {
                     }, [i, null == u ? void 0 : u.cache]),
                     d = (0, z.useMemo)(function() {
                         return (null == u ? void 0 : u.formatters) || {
-                            getDateTimeFormat: elQ(Intl.DateTimeFormat, c.dateTime),
-                            getNumberFormat: elQ(Intl.NumberFormat, c.number),
-                            getPluralRules: elQ(Intl.PluralRules, c.pluralRules),
-                            getRelativeTimeFormat: elQ(Intl.RelativeTimeFormat, c.relativeTime),
-                            getListFormat: elQ(Intl.ListFormat, c.list),
-                            getDisplayNames: elQ(Intl.DisplayNames, c.displayNames)
+                            getDateTimeFormat: elY(Intl.DateTimeFormat, c.dateTime),
+                            getNumberFormat: elY(Intl.NumberFormat, c.number),
+                            getPluralRules: elY(Intl.PluralRules, c.pluralRules),
+                            getRelativeTimeFormat: elY(Intl.RelativeTimeFormat, c.relativeTime),
+                            getListFormat: elY(Intl.ListFormat, c.list),
+                            getDisplayNames: elY(Intl.DisplayNames, c.displayNames)
                         }
                     }, [c, null == u ? void 0 : u.formatters]),
                     f = (0, z.useMemo)(function() {
@@ -113820,8 +113851,8 @@ function() {
                         }(e, ["formats", "getMessageFallback", "messages", "onError"])), v = v = {
                             formats: t || void 0,
                             messages: p || void 0,
-                            onError: h || elX,
-                            getMessageFallback: f || elY
+                            onError: h || el$,
+                            getMessageFallback: f || elX
                         }, Object.getOwnPropertyDescriptors ? Object.defineProperties(y, Object.getOwnPropertyDescriptors(v)) : (function(e) {
                             var t = Object.keys(e);
                             if (Object.getOwnPropertySymbols) {
@@ -113845,26 +113876,26 @@ function() {
                             Object.defineProperty(m, e, Object.getOwnPropertyDescriptor(b, e))
                         }), m
                     }, [c, n, d, r, i, a, o, l, u, s]);
-                return (0, B.jsx)(el$.Provider, {
+                return (0, B.jsx)(elJ.Provider, {
                     value: f,
                     children: t
                 })
             }
-            var elZ = function(e) {
+            var el0 = function(e) {
                 return e.replaceAll(".", ":")
             };
 
-            function el0(e, t) {
+            function el1(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
-            var el1 = function() {
+            var el2 = function() {
                     if ("u" < typeof window) return {};
                     var e = window.Roblox;
                     return null != e ? e : {}
                 },
-                el2 = function(e) {
+                el3 = function(e) {
                     return Object.fromEntries(Object.entries(null != e ? e : {}).flatMap(function(e) {
                         var t = function(e) {
                                 if (Array.isArray(e)) return e
@@ -113889,10 +113920,10 @@ function() {
                                 }
                             }(e) || function(e) {
                                 if (e) {
-                                    if ("string" == typeof e) return el0(e, 2);
+                                    if ("string" == typeof e) return el1(e, 2);
                                     var t = Object.prototype.toString.call(e).slice(8, -1);
                                     if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                    if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return el0(e, 2)
+                                    if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return el1(e, 2)
                                 }
                             }(e) || function() {
                                 throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -113900,17 +113931,17 @@ function() {
                             n = t[0],
                             r = t[1];
                         return null == r ? [] : [
-                            [elZ(n), r]
+                            [el0(n), r]
                         ]
                     }))
                 },
-                el3 = function(e) {
-                    var t = el1(),
+                el4 = function(e) {
+                    var t = el2(),
                         n = t.Lang,
                         r = t.LangDynamic,
                         i = t.LangDynamicDefault;
                     return Object.fromEntries(e.map(function(e) {
-                        return [elZ(e), function(e) {
+                        return [el0(e), function(e) {
                             for (var t = 1; t < arguments.length; t++) {
                                 var n = null != arguments[t] ? arguments[t] : {},
                                     r = Object.keys(n);
@@ -113927,25 +113958,25 @@ function() {
                                 })
                             }
                             return e
-                        }({}, el2(null == i ? void 0 : i[e]), el2(null == n ? void 0 : n[e]), el2(null == r ? void 0 : r[e]))]
+                        }({}, el3(null == i ? void 0 : i[e]), el3(null == n ? void 0 : n[e]), el3(null == r ? void 0 : r[e]))]
                     }))
                 },
-                el4 = function(e) {
+                el6 = function(e) {
                     var t = e.namespaces,
                         n = e.locale,
                         r = e.children,
                         i = t.join(","),
                         a = (0, z.useMemo)(function() {
-                            return el3(t)
+                            return el4(t)
                         }, [i]);
-                    return (0, B.jsx)(elJ, {
-                        locale: null != n ? n : eo0(),
+                    return (0, B.jsx)(elZ, {
+                        locale: null != n ? n : eo1(),
                         messages: a,
                         children: r
                     })
                 };
 
-            function el6(e, t, n) {
+            function el5(e, t, n) {
                 return t in e ? Object.defineProperty(e, t, {
                     value: n,
                     enumerable: !0,
@@ -113953,25 +113984,25 @@ function() {
                     writable: !0
                 }) : e[t] = n, e
             }
-            var el5 = (0, sX.configureStore)({
-                    reducer: (el6(V = {}, f7.reducerPath, f7.reducer), el6(V, vk.name, vk.reducer), el6(V, y1.name, y1.reducer), V),
+            var el8 = (0, sX.configureStore)({
+                    reducer: (el5(V = {}, f7.reducerPath, f7.reducer), el5(V, vk.name, vk.reducer), el5(V, y1.name, y1.reducer), V),
                     middleware: function(e) {
                         return e().concat(f7.middleware)
                     }
                 }),
-                el8 = function(e) {
+                el7 = function(e) {
                     var t = e.children;
                     return (0, B.jsx)(fO, {
-                        store: el5,
+                        store: el8,
                         children: t
                     })
                 },
-                el7 = {
+                el9 = {
                     common: ["CommonUI.Controls", "CommonUI.Features", "Feature.Parents", "Feature.Friends", "Feature.DisplayName", "Feature.Screentime", "Feature.DoNotDisturb", "AccountIdentity.AgeCheck", "Feature.SocialLinks", "Amp.Upsell", "Amp.FAEUpsell", "Feature.Accessibility", "Feature.RobloxSubscription", "Feature.ProfileBadges", "Authentication.LinkedAccounts", "Authentication.Login", "Feature.Trades"],
                     feature: "Feature.AccountSettings"
                 };
 
-            function el9(e, t, n, r, i, a, o) {
+            function ese(e, t, n, r, i, a, o) {
                 try {
                     var l = e[a](o),
                         s = l.value
@@ -113981,8 +114012,8 @@ function() {
                 }
                 l.done ? t(s) : Promise.resolve(s).then(r, i)
             }
-            var ese = "".concat(q.EnvironmentUrls.apiGatewayUrl, "/account-management-api/graphql"),
-                est = new jI.Environment({
+            var est = "".concat(q.EnvironmentUrls.apiGatewayUrl, "/account-management-api/graphql"),
+                esn = new jI.Environment({
                     network: jI.Network.create(function(e, t) {
                         var n;
                         return (n = function() {
@@ -114071,7 +114102,7 @@ function() {
                                     case 0:
                                         if (!e.id) return [3, 2];
                                         return n = {
-                                            url: "".concat(ese, "/").concat(e.name, "/").concat(e.id),
+                                            url: "".concat(est, "/").concat(e.name, "/").concat(e.id),
                                             withCredentials: !0
                                         }, [4, k4.get(n, {
                                             variables: JSON.stringify(t)
@@ -114081,7 +114112,7 @@ function() {
                                         return [2, i.sent().data];
                                     case 2:
                                         return r = {
-                                            url: ese,
+                                            url: est,
                                             withCredentials: !0
                                         }, [4, k4.post(r, {
                                             query: e.text,
@@ -114096,11 +114127,11 @@ function() {
                                 var a = n.apply(e, t);
 
                                 function o(e) {
-                                    el9(a, r, i, o, l, "next", e)
+                                    ese(a, r, i, o, l, "next", e)
                                 }
 
                                 function l(e) {
-                                    el9(a, r, i, o, l, "throw", e)
+                                    ese(a, r, i, o, l, "throw", e)
                                 }
                                 o(void 0)
                             })
@@ -114108,15 +114139,15 @@ function() {
                     }),
                     store: new jI.Store(new jI.RecordSource)
                 }),
-                esn = function(e) {
+                esr = function(e) {
                     var t = e.children;
-                    return (0, B.jsx)(el8, {
+                    return (0, B.jsx)(el7, {
                         children: (0, B.jsx)(jT.RelayEnvironmentProvider, {
-                            environment: est,
+                            environment: esn,
                             children: (0, B.jsx)(eQ.TranslationProvider, {
-                                config: el7,
-                                children: (0, B.jsx)(el4, {
-                                    namespaces: el_,
+                                config: el9,
+                                children: (0, B.jsx)(el6, {
+                                    namespaces: elR,
                                     children: t
                                 })
                             })
@@ -114124,10 +114155,10 @@ function() {
                     })
                 };
 
-            function esr(e, t) {
+            function esi(e, t) {
                 return null != t && "u" > typeof Symbol && t[Symbol.hasInstance] ? !!t[Symbol.hasInstance](e) : e instanceof t
             }
-            var esi = function() {
+            var esa = function() {
                     if ("u" > typeof Map) return Map;
 
                     function e(e, t) {
@@ -114169,16 +114200,16 @@ function() {
                         }
                     }, t
                 }(),
-                esa = "u" > typeof window && "u" > typeof document && window.document === document,
-                eso = void 0 !== n.g && n.g.Math === Math ? n.g : "u" > typeof self && self.Math === Math ? self : "u" > typeof window && window.Math === Math ? window : Function("return this")(),
-                esl = "function" == typeof requestAnimationFrame ? requestAnimationFrame.bind(eso) : function(e) {
+                eso = "u" > typeof window && "u" > typeof document && window.document === document,
+                esl = void 0 !== n.g && n.g.Math === Math ? n.g : "u" > typeof self && self.Math === Math ? self : "u" > typeof window && window.Math === Math ? window : Function("return this")(),
+                ess = "function" == typeof requestAnimationFrame ? requestAnimationFrame.bind(esl) : function(e) {
                     return setTimeout(function() {
                         return e(Date.now())
                     }, 1e3 / 60)
                 },
-                ess = ["top", "right", "bottom", "left", "width", "height", "size", "weight"],
-                esu = "u" > typeof MutationObserver,
-                esc = function() {
+                esu = ["top", "right", "bottom", "left", "width", "height", "size", "weight"],
+                esc = "u" > typeof MutationObserver,
+                esd = function() {
                     function e() {
                         this.connected_ = !1, this.mutationEventsAdded_ = !1, this.mutationsObserver_ = null, this.observers_ = [], this.onTransitionEnd_ = this.onTransitionEnd_.bind(this), this.refresh = function(e) {
                             var t = !1,
@@ -114190,7 +114221,7 @@ function() {
                             }
 
                             function a() {
-                                esl(i)
+                                ess(i)
                             }
 
                             function o() {
@@ -114220,25 +114251,25 @@ function() {
                             return e.broadcastActive()
                         }), e.length > 0
                     }, e.prototype.connect_ = function() {
-                        esa && !this.connected_ && (document.addEventListener("transitionend", this.onTransitionEnd_), window.addEventListener("resize", this.refresh), esu ? (this.mutationsObserver_ = new MutationObserver(this.refresh), this.mutationsObserver_.observe(document, {
+                        eso && !this.connected_ && (document.addEventListener("transitionend", this.onTransitionEnd_), window.addEventListener("resize", this.refresh), esc ? (this.mutationsObserver_ = new MutationObserver(this.refresh), this.mutationsObserver_.observe(document, {
                             attributes: !0,
                             childList: !0,
                             characterData: !0,
                             subtree: !0
                         })) : (document.addEventListener("DOMSubtreeModified", this.refresh), this.mutationEventsAdded_ = !0), this.connected_ = !0)
                     }, e.prototype.disconnect_ = function() {
-                        esa && this.connected_ && (document.removeEventListener("transitionend", this.onTransitionEnd_), window.removeEventListener("resize", this.refresh), this.mutationsObserver_ && this.mutationsObserver_.disconnect(), this.mutationEventsAdded_ && document.removeEventListener("DOMSubtreeModified", this.refresh), this.mutationsObserver_ = null, this.mutationEventsAdded_ = !1, this.connected_ = !1)
+                        eso && this.connected_ && (document.removeEventListener("transitionend", this.onTransitionEnd_), window.removeEventListener("resize", this.refresh), this.mutationsObserver_ && this.mutationsObserver_.disconnect(), this.mutationEventsAdded_ && document.removeEventListener("DOMSubtreeModified", this.refresh), this.mutationsObserver_ = null, this.mutationEventsAdded_ = !1, this.connected_ = !1)
                     }, e.prototype.onTransitionEnd_ = function(e) {
                         var t = e.propertyName,
                             n = void 0 === t ? "" : t;
-                        ess.some(function(e) {
+                        esu.some(function(e) {
                             return !!~n.indexOf(e)
                         }) && this.refresh()
                     }, e.getInstance = function() {
                         return this.instance_ || (this.instance_ = new e), this.instance_
                     }, e.instance_ = null, e
                 }(),
-                esd = function(e, t) {
+                esf = function(e, t) {
                     for (var n = 0, r = Object.keys(t); n < r.length; n++) {
                         var i = r[n];
                         Object.defineProperty(e, i, {
@@ -114250,28 +114281,28 @@ function() {
                     }
                     return e
                 },
-                esf = function(e) {
-                    return e && e.ownerDocument && e.ownerDocument.defaultView || eso
+                esp = function(e) {
+                    return e && e.ownerDocument && e.ownerDocument.defaultView || esl
                 },
-                esp = esm(0, 0, 0, 0);
+                esh = esb(0, 0, 0, 0);
 
-            function esh(e) {
+            function esy(e) {
                 return parseFloat(e) || 0
             }
 
-            function esy(e) {
+            function esv(e) {
                 for (var t = [], n = 1; n < arguments.length; n++) t[n - 1] = arguments[n];
                 return t.reduce(function(t, n) {
-                    return t + esh(e["border-" + n + "-width"])
+                    return t + esy(e["border-" + n + "-width"])
                 }, 0)
             }
-            var esv = "u" > typeof SVGGraphicsElement ? function(e) {
-                return esr(e, esf(e).SVGGraphicsElement)
+            var esm = "u" > typeof SVGGraphicsElement ? function(e) {
+                return esi(e, esp(e).SVGGraphicsElement)
             } : function(e) {
-                return esr(e, esf(e).SVGElement) && "function" == typeof e.getBBox
+                return esi(e, esp(e).SVGElement) && "function" == typeof e.getBBox
             };
 
-            function esm(e, t, n, r) {
+            function esb(e, t, n, r) {
                 return {
                     x: e,
                     y: t,
@@ -114279,40 +114310,40 @@ function() {
                     height: r
                 }
             }
-            var esb = function() {
+            var esg = function() {
                     function e(e) {
-                        this.broadcastWidth = 0, this.broadcastHeight = 0, this.contentRect_ = esm(0, 0, 0, 0), this.target = e
+                        this.broadcastWidth = 0, this.broadcastHeight = 0, this.contentRect_ = esb(0, 0, 0, 0), this.target = e
                     }
                     return e.prototype.isActive = function() {
                         var e = function(e) {
-                            if (!esa) return esp;
-                            if (esv(e)) {
+                            if (!eso) return esh;
+                            if (esm(e)) {
                                 var t;
-                                return esm(0, 0, (t = e.getBBox()).width, t.height)
+                                return esb(0, 0, (t = e.getBBox()).width, t.height)
                             }
                             return function(e) {
                                 var t, n = e.clientWidth,
                                     r = e.clientHeight;
-                                if (!n && !r) return esp;
-                                var i = esf(e).getComputedStyle(e),
+                                if (!n && !r) return esh;
+                                var i = esp(e).getComputedStyle(e),
                                     a = function(e) {
                                         for (var t = {}, n = 0, r = ["top", "right", "bottom", "left"]; n < r.length; n++) {
                                             var i = r[n],
                                                 a = e["padding-" + i];
-                                            t[i] = esh(a)
+                                            t[i] = esy(a)
                                         }
                                         return t
                                     }(i),
                                     o = a.left + a.right,
                                     l = a.top + a.bottom,
-                                    s = esh(i.width),
-                                    u = esh(i.height);
-                                if ("border-box" === i.boxSizing && (Math.round(s + o) !== n && (s -= esy(i, "left", "right") + o), Math.round(u + l) !== r && (u -= esy(i, "top", "bottom") + l)), (t = e) !== esf(t).document.documentElement) {
+                                    s = esy(i.width),
+                                    u = esy(i.height);
+                                if ("border-box" === i.boxSizing && (Math.round(s + o) !== n && (s -= esv(i, "left", "right") + o), Math.round(u + l) !== r && (u -= esv(i, "top", "bottom") + l)), (t = e) !== esp(t).document.documentElement) {
                                     var c = Math.round(s + o) - n,
                                         d = Math.round(u + l) - r;
                                     1 !== Math.abs(c) && (s -= c), 1 !== Math.abs(d) && (u -= d)
                                 }
-                                return esm(a.left, a.top, s, u)
+                                return esb(a.left, a.top, s, u)
                             }(e)
                         }(this.target);
                         return this.contentRect_ = e, e.width !== this.broadcastWidth || e.height !== this.broadcastHeight
@@ -114321,8 +114352,8 @@ function() {
                         return this.broadcastWidth = e.width, this.broadcastHeight = e.height, e
                     }, e
                 }(),
-                esg = function(e, t) {
-                    var n, r, i, a, o, l = (n = t.x, r = t.y, i = t.width, a = t.height, esd(o = Object.create(("u" > typeof DOMRectReadOnly ? DOMRectReadOnly : Object).prototype), {
+                esS = function(e, t) {
+                    var n, r, i, a, o, l = (n = t.x, r = t.y, i = t.width, a = t.height, esf(o = Object.create(("u" > typeof DOMRectReadOnly ? DOMRectReadOnly : Object).prototype), {
                         x: n,
                         y: r,
                         width: i,
@@ -114332,27 +114363,27 @@ function() {
                         bottom: a + r,
                         left: n
                     }), o);
-                    esd(this, {
+                    esf(this, {
                         target: e,
                         contentRect: l
                     })
                 },
-                esS = function() {
+                esw = function() {
                     function e(e, t, n) {
-                        if (this.activeObservations_ = [], this.observations_ = new esi, "function" != typeof e) throw TypeError("The callback provided as parameter 1 is not a function.");
+                        if (this.activeObservations_ = [], this.observations_ = new esa, "function" != typeof e) throw TypeError("The callback provided as parameter 1 is not a function.");
                         this.callback_ = e, this.controller_ = t, this.callbackCtx_ = n
                     }
                     return e.prototype.observe = function(e) {
                         if (!arguments.length) throw TypeError("1 argument required, but only 0 present.");
-                        if (!("u" < typeof Element) && esr(Element, Object)) {
-                            if (!esr(e, esf(e).Element)) throw TypeError('parameter 1 is not of type "Element".');
+                        if (!("u" < typeof Element) && esi(Element, Object)) {
+                            if (!esi(e, esp(e).Element)) throw TypeError('parameter 1 is not of type "Element".');
                             var t = this.observations_;
-                            t.has(e) || (t.set(e, new esb(e)), this.controller_.addObserver(this), this.controller_.refresh())
+                            t.has(e) || (t.set(e, new esg(e)), this.controller_.addObserver(this), this.controller_.refresh())
                         }
                     }, e.prototype.unobserve = function(e) {
                         if (!arguments.length) throw TypeError("1 argument required, but only 0 present.");
-                        if (!("u" < typeof Element) && esr(Element, Object)) {
-                            if (!esr(e, esf(e).Element)) throw TypeError('parameter 1 is not of type "Element".');
+                        if (!("u" < typeof Element) && esi(Element, Object)) {
+                            if (!esi(e, esp(e).Element)) throw TypeError('parameter 1 is not of type "Element".');
                             var t = this.observations_;
                             t.has(e) && (t.delete(e), t.size || this.controller_.removeObserver(this))
                         }
@@ -114367,7 +114398,7 @@ function() {
                         if (this.hasActive()) {
                             var e = this.callbackCtx_,
                                 t = this.activeObservations_.map(function(e) {
-                                    return new esg(e.target, e.broadcastRect())
+                                    return new esS(e.target, e.broadcastRect())
                                 });
                             this.callback_.call(e, t, e), this.clearActive()
                         }
@@ -114377,22 +114408,22 @@ function() {
                         return this.activeObservations_.length > 0
                     }, e
                 }(),
-                esw = "u" > typeof WeakMap ? new WeakMap : new esi,
-                esx = function e(t) {
-                    if (!esr(this, e)) throw TypeError("Cannot call a class as a function.");
+                esx = "u" > typeof WeakMap ? new WeakMap : new esa,
+                esO = function e(t) {
+                    if (!esi(this, e)) throw TypeError("Cannot call a class as a function.");
                     if (!arguments.length) throw TypeError("1 argument required, but only 0 present.");
-                    var n = new esS(t, esc.getInstance(), this);
-                    esw.set(this, n)
+                    var n = new esw(t, esd.getInstance(), this);
+                    esx.set(this, n)
                 };
             ["observe", "unobserve", "disconnect"].forEach(function(e) {
-                esx.prototype[e] = function() {
+                esO.prototype[e] = function() {
                     var t;
-                    return (t = esw.get(this))[e].apply(t, arguments)
+                    return (t = esx.get(this))[e].apply(t, arguments)
                 }
             });
-            var esO = void 0 !== eso.ResizeObserver ? eso.ResizeObserver : esx,
-                esP = ((v = esP || {}).RenderApp = "RenderApp", v.RedirectedToLogin = "RedirectedToLogin", v.ShowSwitchAccountModal = "ShowSwitchAccountModal", v.ShowExpiredSwitchAccountModal = "ShowExpiredSwitchAccountModal", v),
-                esE = {
+            var esP = void 0 !== esl.ResizeObserver ? esl.ResizeObserver : esO,
+                esE = ((v = esE || {}).RenderApp = "RenderApp", v.RedirectedToLogin = "RedirectedToLogin", v.ShowSwitchAccountModal = "ShowSwitchAccountModal", v.ShowExpiredSwitchAccountModal = "ShowExpiredSwitchAccountModal", v),
+                esA = {
                     title: "Header.SwitchAccount",
                     expiredBody: "Description.SignOutSignIn",
                     emailPreferencesBody: "Description.SwitchAccountEmailPreferences",
@@ -114402,7 +114433,7 @@ function() {
                     neutralBtnText: "Action.Cancel"
                 };
 
-            function esA(e, t, n, r, i, a, o) {
+            function esC(e, t, n, r, i, a, o) {
                 try {
                     var l = e[a](o),
                         s = l.value
@@ -114413,7 +114444,7 @@ function() {
                 l.done ? t(s) : Promise.resolve(s).then(r, i)
             }
 
-            function esC(e) {
+            function esj(e) {
                 return function() {
                     var t = this,
                         n = arguments;
@@ -114421,18 +114452,18 @@ function() {
                         var a = e.apply(t, n);
 
                         function o(e) {
-                            esA(a, r, i, o, l, "next", e)
+                            esC(a, r, i, o, l, "next", e)
                         }
 
                         function l(e) {
-                            esA(a, r, i, o, l, "throw", e)
+                            esC(a, r, i, o, l, "throw", e)
                         }
                         o(void 0)
                     })
                 }
             }
 
-            function esj(e, t) {
+            function esk(e, t) {
                 var n, r, i, a = {
                         label: 0,
                         sent: function() {
@@ -114512,45 +114543,45 @@ function() {
                     }
                 }
             }
-            var esk = ((m = {}).PasswordlessSignup = "passwordlessSignup", m.VpcMagicLink = "vpcMagicLink", m),
-                esT = ((b = {}).Signup = "signup", b.ParentalRequests = "parentalRequests", b.AccountSettings = "accountSettings", b.Login = "login", b),
-                esI = ((g = {}).Opened = "opened", g.Success = "success", g.Expired = "expired", g.ExpiredAlreadyLoggedIn = "expiredAlreadyLoggedIn", g),
-                es_ = "(?:/[a-z]{2}(?:-[a-z0-9]+)?)?",
-                esR = RegExp("^".concat(es_, "/parental-requests/?$"), "i"),
-                esD = RegExp("^".concat(es_, "/my/account/?$"), "i"),
-                esN = RegExp("^".concat(es_, "/CreateAccount/?$"), "i"),
-                esM = function(e) {
+            var esT = ((m = {}).PasswordlessSignup = "passwordlessSignup", m.VpcMagicLink = "vpcMagicLink", m),
+                esI = ((b = {}).Signup = "signup", b.ParentalRequests = "parentalRequests", b.AccountSettings = "accountSettings", b.Login = "login", b),
+                es_ = ((g = {}).Opened = "opened", g.Success = "success", g.Expired = "expired", g.ExpiredAlreadyLoggedIn = "expiredAlreadyLoggedIn", g),
+                esR = "(?:/[a-z]{2}(?:-[a-z0-9]+)?)?",
+                esD = RegExp("^".concat(esR, "/parental-requests/?$"), "i"),
+                esN = RegExp("^".concat(esR, "/my/account/?$"), "i"),
+                esM = RegExp("^".concat(esR, "/CreateAccount/?$"), "i"),
+                esL = function(e) {
                     try {
                         t = new URL(e, "https://www.roblox.com")
                     } catch (e) {
                         return "unknown"
                     }
                     var t, n = t.searchParams;
-                    if (esR.test(t.pathname)) {
+                    if (esD.test(t.pathname)) {
                         if ("odpUpgrade" === n.get("flowType")) return "odpUpgrade";
                         var r = n.has("linkRequestId"),
                             i = n.has("consentId");
                         return r && i ? "vpcLinkAndConsent" : r ? "vpcLink" : i ? "vpcConsent" : "unknown"
                     }
-                    if (esD.test(t.pathname)) {
+                    if (esN.test(t.pathname)) {
                         var a = n.get("target");
                         return "viewActivity" === a ? "weeklyDigestViewActivity" : "emailPreferences" === a ? "weeklyDigestUnsubscribe" : "unknown"
                     }
-                    return esN.test(t.pathname) ? "LinkToChild" === n.get("requestType") ? "vpcLink" : "vpcLinkAndConsent" : "unknown"
+                    return esM.test(t.pathname) ? "LinkToChild" === n.get("requestType") ? "vpcLink" : "vpcLinkAndConsent" : "unknown"
                 },
-                esL = function(e) {
+                esU = function(e) {
                     var t = e.token,
                         n = e.tokenType,
                         r = e.metricsType,
                         i = e.surface,
                         a = e.result;
-                    return esC(function() {
+                    return esj(function() {
                         var e;
-                        return esj(this, function(o) {
+                        return esk(this, function(o) {
                             switch (o.label) {
                                 case 0:
-                                    return o.trys.push([0, 2, , 3]), [4, esC(function() {
-                                        return esj(this, function(e) {
+                                    return o.trys.push([0, 2, , 3]), [4, esj(function() {
+                                        return esk(this, function(e) {
                                             switch (e.label) {
                                                 case 0:
                                                     return [4, globalThis.crypto.subtle.digest("SHA-256", new TextEncoder().encode(t))];
@@ -114578,10 +114609,10 @@ function() {
                         })
                     })()
                 },
-                esU = ((S = esU || {}).UserLoggedIn = "UserLoggedIn", S.WrongUserLoggedIn = "WrongUserLoggedIn", S.TokenInvalid = "TokenInvalid", S),
-                esF = ((w = esF || {}).EmailPreferences = "emailPreferences", w.ViewActivity = "viewActivity", w);
+                esF = ((S = esF || {}).UserLoggedIn = "UserLoggedIn", S.WrongUserLoggedIn = "WrongUserLoggedIn", S.TokenInvalid = "TokenInvalid", S),
+                esV = ((w = esV || {}).EmailPreferences = "emailPreferences", w.ViewActivity = "viewActivity", w);
 
-            function esV(e, t, n, r, i, a, o) {
+            function esB(e, t, n, r, i, a, o) {
                 try {
                     var l = e[a](o),
                         s = l.value
@@ -114592,7 +114623,7 @@ function() {
                 l.done ? t(s) : Promise.resolve(s).then(r, i)
             }
 
-            function esB(e) {
+            function esq(e) {
                 return function() {
                     var t = this,
                         n = arguments;
@@ -114600,18 +114631,18 @@ function() {
                         var a = e.apply(t, n);
 
                         function o(e) {
-                            esV(a, r, i, o, l, "next", e)
+                            esB(a, r, i, o, l, "next", e)
                         }
 
                         function l(e) {
-                            esV(a, r, i, o, l, "throw", e)
+                            esB(a, r, i, o, l, "throw", e)
                         }
                         o(void 0)
                     })
                 }
             }
 
-            function esq(e, t, n) {
+            function esz(e, t, n) {
                 return t in e ? Object.defineProperty(e, t, {
                     value: n,
                     enumerable: !0,
@@ -114620,7 +114651,7 @@ function() {
                 }) : e[t] = n, e
             }
 
-            function esz(e, t) {
+            function esW(e, t) {
                 var n, r, i, a = {
                         label: 0,
                         sent: function() {
@@ -114700,102 +114731,102 @@ function() {
                     }
                 }
             }
-            var esW = "magicLinkToken",
-                esK = /\/LinkedChildDetails-(\d+)(?:\/|$)/,
-                esG = new Set(Object.values(esF)),
-                esH = function() {
-                    var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : window.location;
-                    return new URLSearchParams(e.search).get(esW)
-                },
+            var esK = "magicLinkToken",
+                esG = /\/LinkedChildDetails-(\d+)(?:\/|$)/,
+                esH = new Set(Object.values(esV)),
                 esQ = function() {
+                    var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : window.location;
+                    return new URLSearchParams(e.search).get(esK)
+                },
+                esY = function() {
                     var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : window.location,
                         t = new URLSearchParams(e.search).get("target");
-                    if (t && esG.has(t)) return t
+                    if (t && esH.has(t)) return t
                 },
-                esY = function(e) {
+                esX = function(e) {
                     var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : window.location;
-                    if ("expired" === e) return esE.expiredBody;
-                    switch (esQ(t)) {
-                        case esF.EmailPreferences:
-                            return esE.emailPreferencesBody;
-                        case esF.ViewActivity:
-                            return esE.viewActivityBody;
+                    if ("expired" === e) return esA.expiredBody;
+                    switch (esY(t)) {
+                        case esV.EmailPreferences:
+                            return esA.emailPreferencesBody;
+                        case esV.ViewActivity:
+                            return esA.viewActivityBody;
                         default:
-                            return esE.continueBody
+                            return esA.continueBody
                     }
                 },
-                esX = function() {
+                es$ = function() {
                     var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : window.location,
-                        t = esK.exec(e.hash);
+                        t = esG.exec(e.hash);
                     if (t) {
                         var n = Number(t[1]);
                         return Number.isSafeInteger(n) ? n : void 0
                     }
                 },
-                es$ = function(e) {
+                esJ = function(e) {
                     var t = new URLSearchParams(e.search);
-                    t.delete(esW);
+                    t.delete(esK);
                     var n = t.toString();
                     return "".concat(e.pathname).concat(n ? "?".concat(n) : "").concat(e.hash)
                 },
-                esJ = function(e) {
+                esZ = function(e) {
                     var t = new URLSearchParams(e.search);
-                    t.delete(esW);
+                    t.delete(esK);
                     var n = t.toString();
                     return "".concat(e.pathname).concat(n ? "?".concat(n) : "")
                 },
-                esZ = function(e) {
-                    var t, n, r = esH(e);
+                es0 = function(e) {
+                    var t, n, r = esQ(e);
                     if (r) {
-                        var i = new URLSearchParams((esq(n = {}, esW, r), esq(n, "returnUrl", esJ(e)), n));
+                        var i = new URLSearchParams((esz(n = {}, esK, r), esz(n, "returnUrl", esZ(e)), n));
                         return "".concat(pY, "?").concat(i.toString()).concat(null != (t = e.hash) ? t : "")
                     }
                 },
-                es0 = function(e) {
+                es1 = function(e) {
                     var t, n = new URLSearchParams({
-                        returnUrl: esJ(e)
+                        returnUrl: esZ(e)
                     });
                     return "".concat(pY, "?").concat(n.toString()).concat(null != (t = e.hash) ? t : "")
                 },
-                es1 = function() {
+                es2 = function() {
                     if (eX.authenticatedUser.isAuthenticated) return !0;
                     var e, t = null == (e = window.Roblox) ? void 0 : e.CurrentUser;
                     if (null == t ? void 0 : t.isAuthenticated) return !0;
                     var n = (null != t ? t : {}).userId;
                     return null != n && "0" !== n
                 },
-                es2 = function() {
+                es3 = function() {
                     var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : window.location;
-                    window.history.replaceState(null, "", es$(e))
+                    window.history.replaceState(null, "", esJ(e))
                 },
-                es3 = function(e, t, n) {
-                    return esL({
+                es4 = function(e, t, n) {
+                    return esU({
                         token: e,
-                        tokenType: esk.VpcMagicLink,
-                        metricsType: esM("".concat(n.pathname).concat(n.search)),
-                        surface: esT.AccountSettings,
+                        tokenType: esT.VpcMagicLink,
+                        metricsType: esL("".concat(n.pathname).concat(n.search)),
+                        surface: esI.AccountSettings,
                         result: t
                     })
                 },
-                es4 = function() {
+                es6 = function() {
                     var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : window.location;
-                    return esB(function() {
+                    return esq(function() {
                         var t, n, r, i;
-                        return esz(this, function(a) {
+                        return esW(this, function(a) {
                             var o, l;
                             switch (a.label) {
                                 case 0:
-                                    if (!(t = esH(e))) return [2, esP.RenderApp];
-                                    return [4, es3(t, esI.Opened, e)];
+                                    if (!(t = esQ(e))) return [2, esE.RenderApp];
+                                    return [4, es4(t, es_.Opened, e)];
                                 case 1:
-                                    if (a.sent(), !es1()) {
-                                        if (n = esZ(e)) return window.location.href = n, [2, esP.RedirectedToLogin];
-                                        return [2, esP.RenderApp]
+                                    if (a.sent(), !es2()) {
+                                        if (n = es0(e)) return window.location.href = n, [2, esE.RedirectedToLogin];
+                                        return [2, esE.RenderApp]
                                     }
                                     a.label = 2;
                                 case 2:
-                                    return a.trys.push([2, 4, , 5]), [4, (o = t, esB(function() {
-                                        return esz(this, function(e) {
+                                    return a.trys.push([2, 4, , 5]), [4, (o = t, esq(function() {
+                                        return esW(this, function(e) {
                                             switch (e.label) {
                                                 case 0:
                                                     return [4, fZ.httpService.post({
@@ -114813,27 +114844,27 @@ function() {
                                     return r = a.sent(), [3, 5];
                                 case 4:
                                 case 7:
-                                    return a.sent(), es2(e), [2, esP.RenderApp];
+                                    return a.sent(), es3(e), [2, esE.RenderApp];
                                 case 5:
                                     switch (r) {
-                                        case esU.UserLoggedIn:
+                                        case esF.UserLoggedIn:
                                             return [3, 6];
-                                        case esU.WrongUserLoggedIn:
+                                        case esF.WrongUserLoggedIn:
                                             return [3, 8];
-                                        case esU.TokenInvalid:
+                                        case esF.TokenInvalid:
                                             return [3, 9]
                                     }
                                     return [3, 16];
                                 case 6:
-                                    return [4, es3(t, esI.Success, e)];
+                                    return [4, es4(t, es_.Success, e)];
                                 case 8:
-                                    return [2, esP.ShowSwitchAccountModal];
+                                    return [2, esE.ShowSwitchAccountModal];
                                 case 9:
-                                    if (void 0 === (i = esX(e))) return [3, 15];
+                                    if (void 0 === (i = es$(e))) return [3, 15];
                                     a.label = 10;
                                 case 10:
-                                    return a.trys.push([10, 14, , 15]), [4, (l = i, esB(function() {
-                                        return esz(this, function(e) {
+                                    return a.trys.push([10, 14, , 15]), [4, (l = i, esq(function() {
+                                        return esW(this, function(e) {
                                             switch (e.label) {
                                                 case 0:
                                                     return [4, fZ.httpService.get({
@@ -114849,17 +114880,17 @@ function() {
                                     })())];
                                 case 11:
                                     if (!a.sent()) return [3, 13];
-                                    return [4, es3(t, esI.ExpiredAlreadyLoggedIn, e)];
+                                    return [4, es4(t, es_.ExpiredAlreadyLoggedIn, e)];
                                 case 12:
-                                    return a.sent(), es2(e), [2, esP.RenderApp];
+                                    return a.sent(), es3(e), [2, esE.RenderApp];
                                 case 13:
                                     return [3, 15];
                                 case 14:
                                     return a.sent(), [3, 15];
                                 case 15:
-                                    return es3(t, esI.Expired, e), [2, esP.ShowExpiredSwitchAccountModal];
+                                    return es4(t, es_.Expired, e), [2, esE.ShowExpiredSwitchAccountModal];
                                 case 16:
-                                    return es2(e), [2, esP.RenderApp];
+                                    return es3(e), [2, esE.RenderApp];
                                 case 17:
                                     return [2]
                             }
@@ -114867,35 +114898,35 @@ function() {
                     })()
                 };
 
-            function es6(e, t) {
+            function es5(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
-            var es5 = function(e) {
+            var es8 = function(e) {
                     var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : window.location;
-                    return "expired" === e ? es0(t) : esZ(t)
+                    return "expired" === e ? es1(t) : es0(t)
                 },
-                es8 = function(e) {
+                es7 = function(e) {
                     var t, n = e.variant,
                         r = function() {
-                            window.location.replace(es$(window.location))
+                            window.location.replace(esJ(window.location))
                         },
                         i = function(e) {
                             if (Array.isArray(e)) return e
                         }(t = pk({
-                            titleResourceId: esE.title,
-                            bodyResourceId: esY(n),
-                            actionButtonTextResourceId: esE.actionBtnText,
-                            neutralButtonTextResourceId: esE.neutralBtnText,
+                            titleResourceId: esA.title,
+                            bodyResourceId: esX(n),
+                            actionButtonTextResourceId: esA.actionBtnText,
+                            neutralButtonTextResourceId: esA.neutralBtnText,
                             size: "sm",
                             closeable: !1,
                             shouldCloseModalOnActionButton: !1,
                             onAction: function() {
-                                var e = es5(n, window.location);
-                                e ? esB(function() {
+                                var e = es8(n, window.location);
+                                e ? esq(function() {
                                     var e, t, n, r;
-                                    return esz(this, function(i) {
+                                    return esW(this, function(i) {
                                         switch (i.label) {
                                             case 0:
                                                 if (!(n = null != (e = null === q.AccountSwitcherService || void 0 === q.AccountSwitcherService || null == (t = q.AccountSwitcherService.getStoredAccountSwitcherBlob) ? void 0 : t.call(q.AccountSwitcherService)) ? e : "").trim()) return [3, 2];
@@ -114942,10 +114973,10 @@ function() {
                             }
                         }(t) || function(e) {
                             if (e) {
-                                if ("string" == typeof e) return es6(e, 2);
+                                if ("string" == typeof e) return es5(e, 2);
                                 var t = Object.prototype.toString.call(e).slice(8, -1);
                                 if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return es6(e, 2)
+                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return es5(e, 2)
                             }
                         }(t) || function() {
                             throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -114956,44 +114987,44 @@ function() {
                         o.open()
                     }, [o]), a
                 };
-            "u" > typeof window && !window.ResizeObserver && (window.ResizeObserver = esO);
-            var es7 = function(e) {
-                    (0, eQ.renderWithErrorBoundary)((0, B.jsx)(esn, {
+            "u" > typeof window && !window.ResizeObserver && (window.ResizeObserver = esP);
+            var es9 = function(e) {
+                    (0, eQ.renderWithErrorBoundary)((0, B.jsx)(esr, {
                         children: e
                     }), document.getElementById("react-user-account-base"))
                 },
-                es9 = function() {
-                    esH() ? es4().then(function(e) {
-                        if (e !== esP.RedirectedToLogin) {
-                            if (e === esP.ShowSwitchAccountModal) return void es7((0, B.jsx)(es8, {
+                eue = function() {
+                    esQ() ? es6().then(function(e) {
+                        if (e !== esE.RedirectedToLogin) {
+                            if (e === esE.ShowSwitchAccountModal) return void es9((0, B.jsx)(es7, {
                                 variant: "valid"
                             }));
-                            if (e === esP.ShowExpiredSwitchAccountModal) return void es7((0, B.jsx)(es8, {
+                            if (e === esE.ShowExpiredSwitchAccountModal) return void es9((0, B.jsx)(es7, {
                                 variant: "expired"
                             }));
-                            es7((0, B.jsx)(elT, {}))
+                            es9((0, B.jsx)(elI, {}))
                         }
                     }).catch(function() {
-                        es7((0, B.jsx)(elT, {}))
-                    }) : es7((0, B.jsx)(elT, {}))
-                },
-                eue = function() {
-                    document.getElementById(Ug) ? q.SecurityTab.renderComponent(Ug) : window.requestAnimationFrame(eue)
+                        es9((0, B.jsx)(elI, {}))
+                    }) : es9((0, B.jsx)(elI, {}))
                 },
                 eut = function() {
-                    document.getElementById(Uw) ? q.PaymentSetting.renderComponent(Uw) : window.requestAnimationFrame(eut)
+                    document.getElementById(Ug) ? q.SecurityTab.renderComponent(Ug) : window.requestAnimationFrame(eut)
                 },
                 eun = function() {
-                    document.getElementById(Ux) ? q.SubscriptionManagement.renderComponent(Ux) : window.requestAnimationFrame(eun)
+                    document.getElementById(Uw) ? q.PaymentSetting.renderComponent(Uw) : window.requestAnimationFrame(eun)
                 },
                 eur = function() {
-                    var e = document.getElementById(US);
-                    e ? q.NotificationPreferencesService.renderNotificationPreferences(e) : window.requestAnimationFrame(eur)
+                    document.getElementById(Ux) ? q.SubscriptionManagement.renderComponent(Ux) : window.requestAnimationFrame(eur)
                 },
-                eui = window.Roblox["core-scripts"].util.ready;
-            n.n(eui)()(function() {
-                es9()
+                eui = function() {
+                    var e = document.getElementById(US);
+                    e ? q.NotificationPreferencesService.renderNotificationPreferences(e) : window.requestAnimationFrame(eui)
+                },
+                eua = window.Roblox["core-scripts"].util.ready;
+            n.n(eua)()(function() {
+                eue()
             })
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected(document.currentScript && document.currentScript.getAttribute("data-bundlename") || "UserSettings");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/userSettings-1daf4fd5e671b020.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/userSettings-49494a8265573546.js.map

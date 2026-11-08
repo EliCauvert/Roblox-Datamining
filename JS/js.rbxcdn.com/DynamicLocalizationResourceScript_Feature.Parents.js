@@ -595,11 +595,19 @@ Roblox.LangDynamic["Feature.Parents"] = {
     "Heading.ConversationalRequest.SpendNotifications": "Update notifications about your child's spending?",
     "Heading.ConversationalRequest.RevokeExperienceApproval": "Remove this game from your child’s list of allowed games?",
     "Description.ConversationalRequest.RevokeExperienceApproval": "Your child won't be able to play it unless its content maturity rating is now considered right for their age.",
+    "Action.EditBirthday": "Edit",
+    "Heading.ReviewChildBirthday": "Review your child’s birthday before approving their request",
+    "Description.ReviewChildBirthday": "This helps us show them the right content for their age.",
+    "Heading.UpdateBirthday": "Update birthday",
     "Label.RobloxKids": "Roblox Kids",
     "Label.RobloxSelect": "Roblox Select",
     "Label.Roblox": "Roblox",
     "Label.ContentTierWithAges": "{tierName} • Ages {minAge}-{maxAge}",
     "Heading.ODPUpgradeEmailEntrySensitiveConsent": "Create an account to manage this setting",
-    "Action.CreateAccount": "Create account"
+    "Action.CreateAccount": "Create account",
+    "Description.RobuxTransferApprovalAlwaysAsk": "Approve every transfer.",
+    "Heading.ConversationalRequest.RobuxTransferApprovalMode": "Would you like to allow transfers with Trusted Friends?",
+    "Description.ConversationalRequest.RobuxTransferApprovalMode": "Your child requested to allow transfers with trusted friends. You'll still be notified.",
+    "Description.RobuxTransferApprovalTrustedFriends": "Allow transfers with trusted friends without asking. You'll still be notified."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Parents");

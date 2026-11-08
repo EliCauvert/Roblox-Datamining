@@ -1965,6 +1965,20 @@ Roblox.LangDynamic["Feature.AccountSettings"] = {
     "Description.ParentSide.RobuxTransferApprovals": "Choose when you want to approve your child's Robux transfers.",
     "Description.RobuxTransferApproval.AlwaysAsk": "I want to approve every transfer.",
     "Label.AlwaysAllowForTrustedFriends": "Always allow for Trusted Friends",
-    "Description.RobuxTransferApproval.TrustedFriends": "I want to allow transfers with trusted friends. You'll still be notified."
+    "Description.RobuxTransferApproval.TrustedFriends": "I want to allow transfers with trusted friends. You'll still be notified.",
+    "Label.UniverseAnalyticsDashboard": "Game Analytics Dashboard",
+    "Label.ParentApprovesEachRequest": "Your parent approves each request",
+    "Label.ParentAllowedTrustedFriendsTransfers": "Your parent allowed transfers with Trusted Friends",
+    "Action.Label.AskYourParent": "Ask your parent",
+    "Description.AskParentToChangeApprovalSetting": "Ask your parent to change this setting.",
+    "Label.ApprovalRequestPending": "Request pending",
+    "Description.AskedParentsToChangeApprovalSetting": "You asked your parents to change this setting.",
+    "Heading.TransferApprovals": "Transfer approvals",
+    "Label.ApprovalNeededForEveryone": "Approval needed for everyone",
+    "Label.NoApprovalNeededForTrustedFriends": "No approval needed for trusted friends",
+    "Description.ParentApprovesEachTransfer": "Your parent approves each transfer",
+    "Description.ParentApprovesEveryRobuxTransfer": "Your parent approves every Robux transfer",
+    "Description.AskForParentPermission": "Ask for parent permission",
+    "Action.AskParent": "Ask parent"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.AccountSettings");

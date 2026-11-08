@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "f0057bc8-f33d-958f-533d-6315462479dd")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "66912ba4-578e-f94d-8862-84d9250a13cd")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 730530, e => {
@@ -86,7 +86,7 @@
     e.s(["default", 0, t])
 }, 759283, 253536, e => {
     "use strict";
-    var a = e.i(958885),
+    var a = e.i(572676),
         t = e.i(307529),
         l = e.i(251622),
         s = e.i(260022);
@@ -94,8 +94,8 @@
         o = (0, s.resolveUrl)("developerArticleProductsInGamePurchasesUrl", "production", "global"),
         d = (0, s.resolveUrl)("developerArticleBadgesSpecialGameAwardsUrl", "production", "global"),
         n = "".concat((0, s.getProductionCreatorHubUrl)("global"), "/docs/production/monetization/game-passes"),
-        i = (0, s.resolveUrl)("developerArticleCreateVipServerUrl", "production", "global"),
-        u = "".concat((0, s.getProductionCreatorHubUrl)("global"), "/docs/production/publishing/publish-experiences-and-places#release-to-the-public"),
+        u = (0, s.resolveUrl)("developerArticleCreateVipServerUrl", "production", "global"),
+        i = "".concat((0, s.getProductionCreatorHubUrl)("global"), "/docs/production/publishing/publish-experiences-and-places#release-to-the-public"),
         c = "".concat((0, s.getProductionCreatorHubUrl)("global"), "/docs/projects/assets/privacy"),
         f = "".concat((0, s.getProductionCreatorHubUrl)("global"), "/docs/parts/models#distribute-models"),
         m = "".concat((0, s.getProductionCreatorHubUrl)("global"), "/docs/art/marketplace/publishing-to-marketplace#sale-location"),
@@ -112,7 +112,7 @@
         P = (0, s.resolveUrl)("advertisingStandardsUrl", "production", "global"),
         T = "".concat((0, s.getProductionCreatorHubUrl)("global"), "/docs/production/publishing/account-verification"),
         S = "".concat((0, s.getProductionCreatorHubUrl)("global"), "/docs/production/monetization/avatar-creation-token");
-    e.s(["ACCOUNT_VERIFICATION_URL", 0, T, "ASSET_ACCESS_PRIVACY", 0, c, "BADGE_LEARN_MORE_URL", 0, d, "CREATOR_STORE_VERIFICATION_URL", 0, v, "DEVELOPER_PRODUCT_LEARN_MORE_URL", 0, o, "DISTRIBUTE_MODELS", 0, f, "LAUNCH_DATA_LEARN_MORE_URL", 0, r, "MARKETPLACE_POLICY", 0, y, "MOMENTS_LEARN_MORE_URL", 0, "https://about.roblox.com/newsroom/2025/09/roblox-moments-user-generated-discovery", "PASS_LEARN_MORE_URL", 0, n, "PRIVATE_SERVER_LEARN_MORE_URL", 0, i, "PUBLISHING_ADVANCE", 0, L, "RELEASE_EXPERIENCE_TO_PUBLIC_URL", 0, u, "ROBLOX_ADVERTISING_STANDARDS", 0, P, "ROBLOX_COMMUNITY_STANDARDS", 0, p, "ROBLOX_TERMS_OF_USE", 0, h, "SALE_LOCATION_LEARN_MORE_URL", 0, m, "SUBSCRIPTION_LEARN_MORE_PRICING_URL", 0, g, "SUBSCRIPTION_LEARN_MORE_PRODUCT_TYPES_URL", 0, A, "SUBSCRIPTION_LEARN_MORE_URL", 0, b, "SUBSCRIPTION_TERMS_OF_USE", 0, E, "TOKEN_LEARN_MORE_URL", 0, S], 253536);
+    e.s(["ACCOUNT_VERIFICATION_URL", 0, T, "ASSET_ACCESS_PRIVACY", 0, c, "BADGE_LEARN_MORE_URL", 0, d, "CREATOR_STORE_VERIFICATION_URL", 0, v, "DEVELOPER_PRODUCT_LEARN_MORE_URL", 0, o, "DISTRIBUTE_MODELS", 0, f, "LAUNCH_DATA_LEARN_MORE_URL", 0, r, "MARKETPLACE_POLICY", 0, y, "MOMENTS_LEARN_MORE_URL", 0, "https://about.roblox.com/newsroom/2025/09/roblox-moments-user-generated-discovery", "PASS_LEARN_MORE_URL", 0, n, "PRIVATE_SERVER_LEARN_MORE_URL", 0, u, "PUBLISHING_ADVANCE", 0, L, "RELEASE_EXPERIENCE_TO_PUBLIC_URL", 0, i, "ROBLOX_ADVERTISING_STANDARDS", 0, P, "ROBLOX_COMMUNITY_STANDARDS", 0, p, "ROBLOX_TERMS_OF_USE", 0, h, "SALE_LOCATION_LEARN_MORE_URL", 0, m, "SUBSCRIPTION_LEARN_MORE_PRICING_URL", 0, g, "SUBSCRIPTION_LEARN_MORE_PRODUCT_TYPES_URL", 0, A, "SUBSCRIPTION_LEARN_MORE_URL", 0, b, "SUBSCRIPTION_TERMS_OF_USE", 0, E, "TOKEN_LEARN_MORE_URL", 0, S], 253536);
     let C = {
             [t.default.Place]: l.default.Game,
             [t.default.SharedExperiences]: l.default.Game,
@@ -186,7 +186,8 @@
             [l.default.Environment]: "environments",
             [l.default.Look]: "look",
             [l.default.Alert]: "alerts",
-            [l.default.Journey]: "analytics/journeys"
+            [l.default.Journey]: "analytics/journeys",
+            [l.default.DataCapture]: "data-captures"
         },
         k = {
             [l.default.Game]: a.ThumbnailTypes.gameIcon,
@@ -208,6 +209,7 @@
             [l.default.Environment]: a.ThumbnailTypes.universeThumbnail,
             [l.default.Alert]: a.ThumbnailTypes.universeThumbnail,
             [l.default.Journey]: a.ThumbnailTypes.universeThumbnail,
+            [l.default.DataCapture]: a.ThumbnailTypes.universeThumbnail,
             [l.default.Look]: a.ThumbnailTypes.assetThumbnail
         },
         M = {
@@ -230,9 +232,10 @@
             [l.default.Environment]: a.ReturnPolicy.AutoGenerated,
             [l.default.Look]: a.ReturnPolicy.AutoGenerated,
             [l.default.Alert]: a.ReturnPolicy.AutoGenerated,
-            [l.default.Journey]: a.ReturnPolicy.AutoGenerated
+            [l.default.Journey]: a.ReturnPolicy.AutoGenerated,
+            [l.default.DataCapture]: a.ReturnPolicy.AutoGenerated
         },
-        G = {
+        D = {
             [t.default.Place]: "Label.Games",
             [t.default.MyExperiences]: "Label.Games",
             [t.default.SharedExperiences]: "Label.Games",
@@ -285,7 +288,7 @@
             [t.default.TextDocument]: "Label.TextDocuments",
             [t.default.AssetPermissionRequests]: "Label.Requests"
         },
-        D = {
+        G = {
             [t.default.Place]: "Label.Games",
             [t.default.MyExperiences]: "Label.Games",
             [t.default.SharedExperiences]: "Label.Games",
@@ -358,7 +361,8 @@
             [l.default.Environment]: "Label.Environments",
             [l.default.Look]: "Label.Looks",
             [l.default.Alert]: "Heading.Alerts",
-            [l.default.Journey]: "Heading.Journeys"
+            [l.default.Journey]: "Heading.Journeys",
+            [l.default.DataCapture]: "Heading.DataCaptures"
         },
         U = {
             [l.default.Game]: "Label.Game",
@@ -380,7 +384,8 @@
             [l.default.Environment]: "Label.Environment",
             [l.default.Look]: "Label.Looks",
             [l.default.Alert]: "Heading.Alert",
-            [l.default.Journey]: "Heading.Journey"
+            [l.default.Journey]: "Heading.Journey",
+            [l.default.DataCapture]: "Heading.DataCapture"
         },
         w = {
             [l.default.Game]: "Heading.Game",
@@ -402,7 +407,8 @@
             [l.default.Environment]: "Heading.Environment",
             [l.default.Look]: "Heading.Looks",
             [l.default.Alert]: "Heading.Alert",
-            [l.default.Journey]: "Heading.Journey"
+            [l.default.Journey]: "Heading.Journey",
+            [l.default.DataCapture]: "Heading.DataCapture"
         },
         x = {
             [l.default.Game]: null,
@@ -424,9 +430,10 @@
             [l.default.Environment]: "environments/create",
             [l.default.Look]: "looks/create",
             [l.default.Alert]: "alerts/create",
-            [l.default.Journey]: "analytics/journeys/create"
+            [l.default.Journey]: "analytics/journeys/create",
+            [l.default.DataCapture]: "observability/data-captures/create"
         },
-        _ = {
+        H = {
             [l.default.Game]: null,
             [l.default.CatalogAsset]: null,
             [l.default.Bundle]: null,
@@ -446,9 +453,10 @@
             [l.default.Environment]: null,
             [l.default.Look]: null,
             [l.default.Alert]: null,
-            [l.default.Journey]: null
+            [l.default.Journey]: null,
+            [l.default.DataCapture]: null
         },
-        H = {
+        _ = {
             [l.default.Badge]: d,
             [l.default.DeveloperProduct]: o,
             [l.default.GamePass]: n,
@@ -457,7 +465,7 @@
             [l.default.AvatarCreationToken]: S,
             [l.default.Look]: void 0
         };
-    e.s(["AllSettlePromiseFailed", 0, "rejected", "AllSettlePromiseSuccess", 0, "fulfilled", "assetFullNameKeys", 0, G, "assetTypeToItemType", 0, C, "assetTypeToSingularNameKeys", 0, D, "itemFullNameKeys", 0, N, "itemTypeToCreatePath", 0, x, "itemTypeToLearnMoreUrl", 0, H, "itemTypeToNameKeys", 0, U, "itemTypeToPath", 0, R, "itemTypeToReorderPath", 0, _, "itemTypeToReturnPolicyType", 0, M, "itemTypeToSingularNameKeys", 0, w, "itemTypeToThumbnailType", 0, k, "toastDurationTime", 0, 3e3, "uninitializedUniverseId", 0, -1], 759283)
+    e.s(["AllSettlePromiseFailed", 0, "rejected", "AllSettlePromiseSuccess", 0, "fulfilled", "assetFullNameKeys", 0, D, "assetTypeToItemType", 0, C, "assetTypeToSingularNameKeys", 0, G, "itemFullNameKeys", 0, N, "itemTypeToCreatePath", 0, x, "itemTypeToLearnMoreUrl", 0, _, "itemTypeToNameKeys", 0, U, "itemTypeToPath", 0, R, "itemTypeToReorderPath", 0, H, "itemTypeToReturnPolicyType", 0, M, "itemTypeToSingularNameKeys", 0, w, "itemTypeToThumbnailType", 0, k, "toastDurationTime", 0, 3e3, "uninitializedUniverseId", 0, -1], 759283)
 }, 307529, e => {
     "use strict";
     var a, t = ((a = t || {}).Place = "Place", a.MyExperiences = "MyExperiences", a.SharedExperiences = "SharedExperiences", a.TShirt = "TShirt", a.Shirt = "Shirt", a.Pants = "Pants", a.Hat = "Hat", a.HairAccessory = "HairAccessory", a.FaceAccessory = "FaceAccessory", a.NeckAccessory = "NeckAccessory", a.ShoulderAccessory = "ShoulderAccessory", a.FrontAccessory = "FrontAccessory", a.BackAccessory = "BackAccessory", a.WaistAccessory = "WaistAccessory", a.TShirtAccessory = "TShirtAccessory", a.ShirtAccessory = "ShirtAccessory", a.PantsAccessory = "PantsAccessory", a.JacketAccessory = "JacketAccessory", a.SweaterAccessory = "SweaterAccessory", a.ShortsAccessory = "ShortsAccessory", a.DressSkirtAccessory = "DressSkirtAccessory", a.EyebrowAccessory = "EyebrowAccessory", a.EyelashAccessory = "EyelashAccessory", a.FaceMakeup = "FaceMakeup", a.LipMakeup = "LipMakeup", a.EyeMakeup = "EyeMakeup", a.AvatarBackground = "AvatarBackground", a.AvatarLooks = "AvatarLooks", a.Showcase = "Showcase", a.Decal = "Decal", a.Image = "Image", a.Audio = "Audio", a.Model = "Model", a.Mesh = "Mesh", a.MeshPart = "MeshPart", a.Plugin = "Plugin", a.EmoteAnimation = "EmoteAnimation", a.Animation = "Animation", a.Video = "Video", a.TextDocument = "TextDocument", a.Event = "Event", a.UpcomingEvent = "UpcomingEvent", a.DraftEvent = "DraftEvent", a.PastEvent = "PastEvent", a.FontFamily = "FontFamily", a.ShareLink = "ShareLink", a.Moments = "Moments", a.StorePreviewVideo = "StorePreviewVideo", a.GamePreviewVideo = "GamePreviewVideo", a.AllCatalogAsset = "All", a.AssetPermissionRequests = "AssetPermissionRequests", a);
@@ -468,7 +476,7 @@
     e.s(["default", 0, t])
 }, 251622, e => {
     "use strict";
-    var a, t = ((a = t || {}).Game = "Game", a.Bundle = "Bundle", a.CatalogAsset = "CatalogAsset", a.LibraryAsset = "LibraryAsset", a.GamePass = "Pass", a.Badge = "Badge", a.DeveloperProduct = "DeveloperProduct", a.TranslatorGame = "TranslatorGame", a.Places = "Places", a.CreatedPlaces = "CreatedPlaces", a.Event = "Event", a.Notifications = "Notifications", a.ExperienceSubscription = "Subscription", a.Advanced = "Advanced", a.AvatarCreationToken = "AvatarCreationToken", a.ReferralRewards = "ReferralRewards", a.Environment = "Environment", a.Look = "Look", a.Alert = "Alert", a.Journey = "Journey", a);
+    var a, t = ((a = t || {}).Game = "Game", a.Bundle = "Bundle", a.CatalogAsset = "CatalogAsset", a.LibraryAsset = "LibraryAsset", a.GamePass = "Pass", a.Badge = "Badge", a.DeveloperProduct = "DeveloperProduct", a.TranslatorGame = "TranslatorGame", a.Places = "Places", a.CreatedPlaces = "CreatedPlaces", a.Event = "Event", a.Notifications = "Notifications", a.ExperienceSubscription = "Subscription", a.Advanced = "Advanced", a.AvatarCreationToken = "AvatarCreationToken", a.ReferralRewards = "ReferralRewards", a.Environment = "Environment", a.Look = "Look", a.Alert = "Alert", a.Journey = "Journey", a.DataCapture = "DataCapture", a);
     let l = Object.values(t);
     e.s(["default", 0, t, "isItem", 0, e => l.includes(e)])
 }, 968892, e => {
@@ -486,13 +494,13 @@
             Small: 16,
             XSmall: 12
         },
-        i = {
+        u = {
             Large: ["radius-medium", "text-label-large", "height-1200", "padding-x-medium"],
             Medium: ["radius-medium", "text-label-medium", "height-1000", "padding-x-medium"],
             Small: ["radius-medium", "text-label-small", "height-800", "padding-x-small"],
             XSmall: ["radius-small", "text-label-small", "height-600", "padding-x-small"]
         },
-        u = {
+        i = {
             Emphasis: ["bg-action-emphasis", "content-action-emphasis"],
             Standard: ["bg-action-standard", "content-action-standard"],
             SoftEmphasis: ["bg-action-soft-emphasis", "content-action-soft-emphasis"],
@@ -522,7 +530,7 @@
                 variant: v = "Emphasis",
                 asChild: E,
                 ...h
-            } = e, P = (0, r.default)("foundation-web-button", g ? t.disabledOpacity : [a.interactable, "cursor-pointer"], "relative flex items-center justify-center stroke-none padding-y-none select-none", i[L], g ? c[v] : u[v], b), T = {
+            } = e, P = (0, r.default)("foundation-web-button", g ? t.disabledOpacity : [a.interactable, "cursor-pointer"], "relative flex items-center justify-center stroke-none padding-y-none select-none", u[L], g ? c[v] : i[v], b), T = {
                 textDecoration: "none",
                 ...A
             }, S = e => o.default.createElement(o.default.Fragment, null, o.default.createElement(a.StateLayer, null), p && o.default.createElement("div", {
@@ -607,12 +615,12 @@
             Medium: "padding-x-xlarge",
             Large: "padding-x-xlarge"
         },
-        i = {
+        u = {
             Small: "padding-top-large",
             Medium: "padding-top-xlarge",
             Large: "padding-top-xlarge"
         },
-        u = {
+        i = {
             Small: "padding-bottom-large",
             Medium: "padding-bottom-xlarge",
             Large: "padding-bottom-xlarge"
@@ -624,8 +632,8 @@
                 children: r,
                 size: d,
                 type: n = "Default",
-                isModal: i,
-                hasCloseAffordance: u,
+                isModal: u,
+                hasCloseAffordance: i,
                 closeLabel: c,
                 hasMarginTop: f = !0,
                 hasMarginBottom: m = !0,
@@ -633,14 +641,14 @@
                 experimentalDisablePointerEventsStylingOnBody: A = !1
             } = e, g = (0, l.useMemo)(() => ({
                 size: d,
-                isModal: i,
+                isModal: u,
                 type: n,
-                hasCloseAffordance: u,
+                hasCloseAffordance: i,
                 closeLabel: c,
                 hasMarginTop: f,
                 hasMarginBottom: m,
                 hasDescription: b
-            }), [d, i, n, u, c, f, m, b]);
+            }), [d, u, n, i, c, f, m, b]);
             return (0, l.useEffect)(() => {
                 A && setTimeout(() => {
                     Object.assign(document.body.style, {
@@ -660,8 +668,8 @@
             children: r,
             className: o,
             style: n,
-            overlayClassName: i,
-            overlayStyle: u,
+            overlayClassName: u,
+            overlayStyle: i,
             onOpenAutoFocus: c,
             ...f
         } = e, {
@@ -670,10 +678,10 @@
             hasCloseAffordance: A,
             closeLabel: g,
             hasDescription: p
-        } = d(), y = (0, t.default)("foundation-web-dialog-overlay padding-medium foundation-web-portal-zindex", b && "bg-common-backdrop", i), L = (0, t.default)("relative radius-large bg-surface-100 stroke-muted stroke-standard foundation-web-dialog-content shadow-transient-high", o);
+        } = d(), y = (0, t.default)("foundation-web-dialog-overlay padding-medium foundation-web-portal-zindex", b && "bg-common-backdrop", u), L = (0, t.default)("relative radius-large bg-surface-100 stroke-muted stroke-standard foundation-web-dialog-content shadow-transient-high", o);
         return l.default.createElement(s.Portal, null, l.default.createElement(s.Overlay, {
             className: y,
-            style: u
+            style: i
         }, l.default.createElement(s.Content, {
             className: L,
             "data-size": m,
@@ -716,7 +724,7 @@
             size: o,
             hasMarginTop: c,
             hasMarginBottom: f
-        } = d(), m = (0, t.default)(n[o], c && i[o], f && u[o], s);
+        } = d(), m = (0, t.default)(n[o], c && u[o], f && i[o], s);
         return l.default.createElement("div", {
             className: m,
             ...r
@@ -743,9 +751,9 @@
             ...r
         } = e, {
             size: o
-        } = d(), i = (0, t.default)(n[o], u[o], s);
+        } = d(), u = (0, t.default)(n[o], i[o], s);
         return l.default.createElement("div", {
-            className: i,
+            className: u,
             ...r
         }, a)
     };
@@ -768,14 +776,14 @@
                 size: o = "Medium",
                 className: d,
                 children: n,
-                ...i
+                ...u
             } = e;
             return t.default.createElement("span", {
                 ref: s,
                 "aria-hidden": !0,
                 "data-testid": "foundation-web-icon",
                 className: (0, a.default)("grow-0 shrink-0 basis-auto icon", r, l[o], d),
-                ...i
+                ...u
             })
         });
     s.displayName = "Icon", e.s(["Icon", 0, s])
@@ -798,13 +806,13 @@
         let {
             variant: d,
             size: n,
-            isCircular: i,
-            className: u,
+            isCircular: u,
+            className: i,
             ...c
         } = e;
         return s.default.createElement("button", {
             type: "button",
-            className: (0, l.default)("foundation-web-close-affordance flex stroke-none bg-none cursor-pointer", a.interactable, o[d], r[n], i && "radius-circle", u),
+            className: (0, l.default)("foundation-web-close-affordance flex stroke-none bg-none cursor-pointer", a.interactable, o[d], r[n], u && "radius-circle", i),
             ...c
         }, s.default.createElement(a.StateLayer, null), s.default.createElement(t.Icon, {
             name: "icon-regular-x",
@@ -852,5 +860,5 @@
     e.s(["disabledOpacity", 0, "opacity-[0.5]"])
 }]);
 
-//# debugId=f0057bc8-f33d-958f-533d-6315462479dd
-//# sourceMappingURL=12atgxcgebhei.js.map
+//# debugId=66912ba4-578e-f94d-8862-84d9250a13cd
+//# sourceMappingURL=0q9r7866362j2.js.map

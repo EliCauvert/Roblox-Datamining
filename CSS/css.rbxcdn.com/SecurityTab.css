@@ -824,6 +824,10 @@
     --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M22.7071 14.2929C23.0976 14.6834 23.0976 15.3166 22.7071 15.7071L16.7071 21.7071C16.3166 22.0976 15.6834 22.0976 15.2929 21.7071L9.29289 15.7071C8.90237 15.3166 8.90237 14.6834 9.29289 14.2929C9.68342 13.9024 10.3166 13.9024 10.7071 14.2929L15 18.5858L15 5C15 4.44772 15.4477 4 16 4C16.5523 4 17 4.44772 17 5L17 18.5858L21.2929 14.2929C21.6834 13.9024 22.3166 13.9024 22.7071 14.2929Z' fill='black'/%3E %3Cpath d='M4 27C4 26.4477 4.44772 26 5 26H27C27.5523 26 28 26.4477 28 27C28 27.5523 27.5523 28 27 28H5C4.44772 28 4 27.5523 4 27Z' fill='black'/%3E%3C/svg%3E")
 }
 
+.icon-regular-check {
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M23.7071 10.2929C24.0976 10.6834 24.0976 11.3166 23.7071 11.7071L13.7071 21.7071C13.3166 22.0976 12.6834 22.0976 12.2929 21.7071L8.29289 17.7071C7.90237 17.3166 7.90237 16.6834 8.29289 16.2929C8.68342 15.9024 9.31658 15.9024 9.70711 16.2929L13 19.5858L22.2929 10.2929C22.6834 9.90237 23.3166 9.90237 23.7071 10.2929Z' fill='black'/%3E%3C/svg%3E")
+}
+
 .icon-regular-chevron-large-left {
     --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M9.29289 16.7071C8.90237 16.3166 8.90237 15.6834 9.29289 15.2929L19.2929 5.29289C19.6834 4.90237 20.3166 4.90237 20.7071 5.29289C21.0976 5.68342 21.0976 6.31658 20.7071 6.70711L11.4142 16L20.7071 25.2929C21.0976 25.6834 21.0976 26.3166 20.7071 26.7071C20.3166 27.0976 19.6834 27.0976 19.2929 26.7071L9.29289 16.7071Z' fill='black'/%3E%3C/svg%3E")
 }
@@ -1187,8 +1191,34 @@
     --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M23.5 14.5C24.3284 14.5 25 15.1716 25 16C25 16.8284 24.3284 17.5 23.5 17.5C13.0512 17.5 19.8215 17.5 8.5 17.5C7.67157 17.5 7 16.8284 7 16C7 15.1716 7.67157 14.5 8.5 14.5C19.1461 14.5 11.9213 14.5 23.5 14.5Z' fill='black'/%3E%3C/svg%3E")
 }
 
+@media (max-width:767px) {
+    .max-\[767px\]\:\!height-800 {
+        height: var(--size-800) !important
+    }
+}
+
 .\[\&\>\*\:nth-child\(even\)\]\:bg-surface-300>:nth-child(2n) {
     background-color: var(--color-surface-300)
+}
+
+.\[\&_input\:\:placeholder\]\:text-body-large input::-webkit-input-placeholder {
+    font: var(--typography-body-large-font);
+    letter-spacing: var(--typography-body-large-letter-spacing)
+}
+
+.\[\&_input\:\:placeholder\]\:text-body-large input::-ms-input-placeholder {
+    font: var(--typography-body-large-font);
+    letter-spacing: var(--typography-body-large-letter-spacing)
+}
+
+.\[\&_input\:\:placeholder\]\:text-body-large input::placeholder {
+    font: var(--typography-body-large-font);
+    letter-spacing: var(--typography-body-large-letter-spacing)
+}
+
+.\[\&_input\]\:text-body-large input {
+    font: var(--typography-body-large-font);
+    letter-spacing: var(--typography-body-large-letter-spacing)
 }
 
 .\[\&_input\]\:bg-action-utility input {

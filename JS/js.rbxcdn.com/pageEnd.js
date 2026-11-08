@@ -1,5 +1,5 @@
-; // bundle: pageEnd___84bdf1545879acc935e2412f01a2add0_m
-; // files: ~/Generated/js/Roblox_TranslationResources_Common_PresenceResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_LoginResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_OneTimePasscodeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_CaptchaResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_MessagesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ForceAuthenticatorResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ForceTwoStepVerificationResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ProofOfWorkChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ReauthenticationResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_RostileChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_SecurityQuestionsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_PrivateAccessTokenChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_DeviceIntegrityChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_VerificationUpsellResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AccountSettingsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_AccountSwitchResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_ControlsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_RecommendationsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ProfileBadgesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_FeaturesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Common_AlertsAndOptionsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Common_VisitGameResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_DownloadLandingResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ShopDialogResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Purchasing_RedeemGameCardResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_NotApprovedResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_PasskeyResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_TrackingResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AccountSecurityPromptResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_IdVerificationResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AgeVerificationUpsellResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ParentsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_FriendsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Verification_IdentityResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Common_AssetTypesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Purchasing_PurchaseDialogResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_TradesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Notifications_NotificationStreamResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_PlayerSearchResultsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ReportAbuseResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_PremiumResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ItemResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ItemModelResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ChatResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AppealsPortalResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_GameLaunchGuestModeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_UserAgreementsResources_en_us_standard.js
+; // bundle: pageEnd___82c34a31e92fd76d4bed4f40a3f23d4e_m
+; // files: ~/Generated/js/Roblox_TranslationResources_Common_PresenceResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_LoginResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_OneTimePasscodeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_ControlsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_CaptchaResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_MessagesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ForceAuthenticatorResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ForceTwoStepVerificationResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ProofOfWorkChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ReauthenticationResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_RostileChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_SecurityQuestionsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_PrivateAccessTokenChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_DeviceIntegrityChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_VerificationUpsellResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AccountSettingsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_AccountSwitchResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_RecommendationsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ProfileBadgesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_FeaturesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Common_AlertsAndOptionsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Common_VisitGameResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_DownloadLandingResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ShopDialogResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Purchasing_RedeemGameCardResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_NotApprovedResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_PasskeyResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_TrackingResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AccountSecurityPromptResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_IdVerificationResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AgeVerificationUpsellResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ParentsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_FriendsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Verification_IdentityResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Common_AssetTypesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Purchasing_PurchaseDialogResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_TradesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Notifications_NotificationStreamResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_PlayerSearchResultsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ReportAbuseResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_PremiumResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ItemResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ItemModelResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ChatResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AppealsPortalResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_GameLaunchGuestModeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_UserAgreementsResources_en_us_standard.js
 
 ; // ~/Generated/js/Roblox_TranslationResources_Common_PresenceResources_en_us_standard.js
 var Roblox = Roblox || {};
@@ -222,6 +222,86 @@ Roblox.Lang['Authentication.OneTimePasscode'] = {
     "Response.Under13NotAllowed": "Only users 13 and older can log in with a one-time code."
 };
 Roblox.Lang['OneTimePasscodeResources'] = Roblox.Lang['Authentication.OneTimePasscode'];
+
+; // ~/Generated/js/Roblox_TranslationResources_CommonUI_ControlsResources_en_us_standard.js
+var Roblox = Roblox || {};
+Roblox.Lang = Roblox.Lang || {};
+Roblox.Lang['CommonUI.Controls'] = {
+    "Action.Accept": "Accept",
+    "Action.AcceptAll": "Accept All",
+    "Action.Agree": "Agree",
+    "Action.Allow": "Allow",
+    "Action.Approve": "Approve",
+    "Action.Back": "Back",
+    "Action.BuyRobux": "Buy Robux",
+    "Action.Cancel": "Cancel",
+    "Action.Close": "Close",
+    "Action.Collapse": "Collapse",
+    "Action.Confirm": "Confirm",
+    "Action.Continue": "Continue",
+    "Action.Decline": "Decline",
+    "Action.DeclineAll": "Decline All",
+    "Action.Delete": "Delete",
+    "Action.Deny": "Deny",
+    "Action.Disable": "Disable",
+    "Action.Discard": "Discard",
+    "Action.Distribute": "Distribute",
+    "Action.Done": "Done",
+    "Action.Enable": "Enable",
+    "Action.GotIt": "Got It",
+    "Action.IgnoreAll": "Ignore All",
+    "Action.Next": "Next",
+    "Action.No": "No",
+    "Action.OK": "OK",
+    "Action.Open": "Open",
+    "Action.Refresh": "Refresh",
+    "Action.Remove": "Remove",
+    "Action.Save": "Save",
+    "Action.Search": "Search",
+    "Action.SeeAll": "See All",
+    "Action.SeeLess": "See Less",
+    "Action.SeeMore": "See More",
+    "Action.Select": "Select",
+    "Action.Show": "Show",
+    "Action.Stop": "Stop",
+    "Action.Submit": "Submit",
+    "Action.SwitchAccount": "Switch Account",
+    "Action.Yes": "Yes",
+    "Birthdaypicker.Label.Date": "Date",
+    "Description.UnsavedChange": "You have unsaved changes. Do you want to proceed?",
+    "Label.April": "April",
+    "Label.AprilAbbreviated": "Apr",
+    "Label.August": "August",
+    "Label.AugustAbbreviated": "Aug",
+    "Label.CurrentPage": "Page {currentPage}",
+    "Label.Day": "Day",
+    "Label.December": "December",
+    "Label.DecemberAbbreviated": "Dec",
+    "Label.February": "February",
+    "Label.FebruaryAbbreviated": "Feb",
+    "Label.January": "January",
+    "Label.JanuaryAbbreviated": "Jan",
+    "Label.July": "July",
+    "Label.June": "June",
+    "Label.March": "March",
+    "Label.MarchAbbreviated": "Mar",
+    "Label.May": "May",
+    "Label.Month": "Month",
+    "Label.Name": "Name",
+    "Label.Next": "Next",
+    "Label.November": "November",
+    "Label.NovemberAbbreviated": "Nov",
+    "Label.October": "October",
+    "Label.OctoberAbbreviated": "Oct",
+    "Label.Previous": "Previous",
+    "Label.September": "September",
+    "Label.SeptemberAbbreviated": "Sept",
+    "Label.Summary": "Summary",
+    "Label.UnsavedChanges": "Unsaved Changes",
+    "Label.Week": "Week",
+    "Label.Year": "Year"
+};
+Roblox.Lang['ControlsResources'] = Roblox.Lang['CommonUI.Controls'];
 
 ; // ~/Generated/js/Roblox_TranslationResources_Authentication_CaptchaResources_en_us_standard.js
 var Roblox = Roblox || {};
@@ -662,86 +742,6 @@ Roblox.Lang['Authentication.AccountSwitch'] = {
     "Label.LoggedOutAddOrSwitchAccount": "Switch to another account, or add a new account."
 };
 Roblox.Lang['AccountSwitchResources'] = Roblox.Lang['Authentication.AccountSwitch'];
-
-; // ~/Generated/js/Roblox_TranslationResources_CommonUI_ControlsResources_en_us_standard.js
-var Roblox = Roblox || {};
-Roblox.Lang = Roblox.Lang || {};
-Roblox.Lang['CommonUI.Controls'] = {
-    "Action.Accept": "Accept",
-    "Action.AcceptAll": "Accept All",
-    "Action.Agree": "Agree",
-    "Action.Allow": "Allow",
-    "Action.Approve": "Approve",
-    "Action.Back": "Back",
-    "Action.BuyRobux": "Buy Robux",
-    "Action.Cancel": "Cancel",
-    "Action.Close": "Close",
-    "Action.Collapse": "Collapse",
-    "Action.Confirm": "Confirm",
-    "Action.Continue": "Continue",
-    "Action.Decline": "Decline",
-    "Action.DeclineAll": "Decline All",
-    "Action.Delete": "Delete",
-    "Action.Deny": "Deny",
-    "Action.Disable": "Disable",
-    "Action.Discard": "Discard",
-    "Action.Distribute": "Distribute",
-    "Action.Done": "Done",
-    "Action.Enable": "Enable",
-    "Action.GotIt": "Got It",
-    "Action.IgnoreAll": "Ignore All",
-    "Action.Next": "Next",
-    "Action.No": "No",
-    "Action.OK": "OK",
-    "Action.Open": "Open",
-    "Action.Refresh": "Refresh",
-    "Action.Remove": "Remove",
-    "Action.Save": "Save",
-    "Action.Search": "Search",
-    "Action.SeeAll": "See All",
-    "Action.SeeLess": "See Less",
-    "Action.SeeMore": "See More",
-    "Action.Select": "Select",
-    "Action.Show": "Show",
-    "Action.Stop": "Stop",
-    "Action.Submit": "Submit",
-    "Action.SwitchAccount": "Switch Account",
-    "Action.Yes": "Yes",
-    "Birthdaypicker.Label.Date": "Date",
-    "Description.UnsavedChange": "You have unsaved changes. Do you want to proceed?",
-    "Label.April": "April",
-    "Label.AprilAbbreviated": "Apr",
-    "Label.August": "August",
-    "Label.AugustAbbreviated": "Aug",
-    "Label.CurrentPage": "Page {currentPage}",
-    "Label.Day": "Day",
-    "Label.December": "December",
-    "Label.DecemberAbbreviated": "Dec",
-    "Label.February": "February",
-    "Label.FebruaryAbbreviated": "Feb",
-    "Label.January": "January",
-    "Label.JanuaryAbbreviated": "Jan",
-    "Label.July": "July",
-    "Label.June": "June",
-    "Label.March": "March",
-    "Label.MarchAbbreviated": "Mar",
-    "Label.May": "May",
-    "Label.Month": "Month",
-    "Label.Name": "Name",
-    "Label.Next": "Next",
-    "Label.November": "November",
-    "Label.NovemberAbbreviated": "Nov",
-    "Label.October": "October",
-    "Label.OctoberAbbreviated": "Oct",
-    "Label.Previous": "Previous",
-    "Label.September": "September",
-    "Label.SeptemberAbbreviated": "Sept",
-    "Label.Summary": "Summary",
-    "Label.UnsavedChanges": "Unsaved Changes",
-    "Label.Week": "Week",
-    "Label.Year": "Year"
-};
-Roblox.Lang['ControlsResources'] = Roblox.Lang['CommonUI.Controls'];
 
 ; // ~/Generated/js/Roblox_TranslationResources_Feature_RecommendationsResources_en_us_standard.js
 var Roblox = Roblox || {};

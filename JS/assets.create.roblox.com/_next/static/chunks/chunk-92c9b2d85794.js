@@ -3,13 +3,13 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "8b9ce57d-8beb-2370-6f3f-fe26aaeceda5")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "62d4667e-f147-d28f-494f-54f087002ec4")
     } catch (e) {}
 }();
-(globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 773057, 882625, 919456, 324562, 368851, 269780, 858832, 570006, e => {
+(globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 773057, 432242, 474875, 324562, 368851, 269780, 858832, 570006, e => {
     "use strict";
     var t, s, r, n, i, a, o, u, d = e.i(721281),
-        v = e.i(677753),
+        v = e.i(601362),
         c = function(e, t) {
             return (c = Object.setPrototypeOf || ({
                 __proto__: []
@@ -3912,7 +3912,7 @@
         NUMBER_25: 25,
         NUMBER_50: 50,
         NUMBER_100: 100
-    }, "V1UserUniversesGetSortOrderEnum", 0, el], 882625);
+    }, "V1UserUniversesGetSortOrderEnum", 0, el], 432242);
 
     function ep(e, t) {
         return null == e ? e : {
@@ -4621,7 +4621,7 @@
         Activate: "Activate",
         Update: "Update",
         Deactivate: "Deactivate"
-    }, "UniverseSettingsApi", 0, eS, "UniversesApi", 0, eG], 919456);
+    }, "UniverseSettingsApi", 0, eS, "UniversesApi", 0, eG], 474875);
     var ex = e.i(213067),
         eC = e.i(272593),
         eE = e.i(227987),
@@ -5065,5 +5065,5 @@
     e.s(["default", 0, ek], 773057)
 }]);
 
-//# debugId=8b9ce57d-8beb-2370-6f3f-fe26aaeceda5
-//# sourceMappingURL=0plbuq5pjlcpa.js.map
+//# debugId=62d4667e-f147-d28f-494f-54f087002ec4
+//# sourceMappingURL=0mvyuzuh9-ozy.js.map

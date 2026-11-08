@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "1861767b-813b-521f-50c5-2c5beedbc276")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "c991897c-0f13-4ea8-d038-52dc802bf88a")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 962059, e => {
@@ -14,7 +14,7 @@
         o = e.i(384621),
         r = e.i(138726),
         l = e.i(589624),
-        u = e.i(944672),
+        u = e.i(426408),
         d = e.i(79187),
         c = e.i(134731),
         m = e.i(671376),
@@ -299,7 +299,7 @@
         };
     var Y = e.i(668091),
         J = e.i(507742),
-        Q = e.i(9618),
+        Q = e.i(994466),
         X = e.i(37819),
         Z = e.i(830655),
         $ = e.i(537683),
@@ -307,25 +307,26 @@
         et = e.i(896852),
         en = e.i(780880),
         ei = e.i(881670),
-        ea = e.i(845592),
-        es = e.i(339544),
-        eo = e.i(475642),
-        er = e.i(968892),
-        el = e.i(826246),
-        eu = e.i(973047),
-        ed = e.i(211388);
-    let ec = "CreatorHub.MomentsCreations.local",
-        em = e => "".concat(ec, ".").concat(e),
-        ep = "".concat(ec, ".__inactive__"),
-        eh = "active",
-        ev = "pending",
-        ef = "draft",
-        ex = "moderated",
-        eg = [eh, ef],
-        ey = [eh, ex, ef],
-        eb = e => new Date(e.modifiedAt).getTime(),
-        eT = "momentMedia",
-        eI = async e => {
+        ea = e.i(57798),
+        es = e.i(845592),
+        eo = e.i(339544),
+        er = e.i(475642),
+        el = e.i(968892),
+        eu = e.i(826246),
+        ed = e.i(973047),
+        ec = e.i(211388);
+    let em = "CreatorHub.MomentsCreations.local",
+        ep = e => "".concat(em, ".").concat(e),
+        eh = "".concat(em, ".__inactive__"),
+        ev = "active",
+        ef = "pending",
+        ex = "draft",
+        eg = "moderated",
+        ey = [ev, ex],
+        eb = [ev, eg, ex],
+        eT = e => new Date(e.modifiedAt).getTime(),
+        eI = "momentMedia",
+        eC = async e => {
             let t = URL.createObjectURL(e),
                 n = document.createElement("video");
             try {
@@ -354,12 +355,12 @@
             } finally {
                 URL.revokeObjectURL(t), n.removeAttribute("src"), n.load()
             }
-        }, eC = new Map, ew = (e, t) => "".concat(e, ":").concat(t), eS = (e, t, n) => new Promise((t, n) => {
+        }, ew = new Map, eS = (e, t) => "".concat(e, ":").concat(t), eA = (e, t, n) => new Promise((t, n) => {
             if ("u" < typeof indexedDB) return void n(Error("IndexedDB is unavailable"));
             let i = indexedDB.open("".concat("CreatorHub.MomentsVideoMedia", ".").concat(e), 1);
             i.addEventListener("upgradeneeded", () => {
                 let e = i.result;
-                e.objectStoreNames.contains(eT) || e.createObjectStore(eT, {
+                e.objectStoreNames.contains(eI) || e.createObjectStore(eI, {
                     keyPath: "momentId"
                 })
             }), i.addEventListener("success", () => t(i.result)), i.addEventListener("error", () => {
@@ -367,17 +368,17 @@
                 return n(null != (e = i.error) ? e : Error("Failed to open IndexedDB"))
             })
         }).then(e => new Promise((i, a) => {
-            let s = n(e.transaction(eT, t).objectStore(eT));
+            let s = n(e.transaction(eI, t).objectStore(eI));
             s.addEventListener("success", () => i(s.result)), s.addEventListener("error", () => {
                 var e;
                 return a(null != (e = s.error) ? e : Error("IndexedDB request failed"))
             })
-        })), eA = e => "object" == typeof e && null !== e && "momentId" in e && "string" == typeof e.momentId && "videoBlob" in e && e.videoBlob instanceof Blob && "thumbnailBlob" in e && e.thumbnailBlob instanceof Blob && "updatedAt" in e && "string" == typeof e.updatedAt, eM = (e, t) => {
-            let n = ew(e, t),
-                i = eC.get(n);
-            i && (URL.revokeObjectURL(i.thumbnailUrl), URL.revokeObjectURL(i.videoUrl), eC.delete(n))
-        }, ej = async (e, t, n) => {
-            let i = await eI(n),
+        })), eM = e => "object" == typeof e && null !== e && "momentId" in e && "string" == typeof e.momentId && "videoBlob" in e && e.videoBlob instanceof Blob && "thumbnailBlob" in e && e.thumbnailBlob instanceof Blob && "updatedAt" in e && "string" == typeof e.updatedAt, ej = (e, t) => {
+            let n = eS(e, t),
+                i = ew.get(n);
+            i && (URL.revokeObjectURL(i.thumbnailUrl), URL.revokeObjectURL(i.videoUrl), ew.delete(n))
+        }, eE = async (e, t, n) => {
+            let i = await eC(n),
                 a = {
                     momentId: t,
                     videoBlob: n,
@@ -385,35 +386,35 @@
                     fileName: n.name,
                     updatedAt: new Date().toISOString()
                 };
-            eM(e, t), await eS(e, "readwrite", e => e.put(a))
-        }, eE = new Set(["QuotaExceededError", "NS_ERROR_DOM_QUOTA_REACHED"]), ek = e => !!(e instanceof DOMException && eE.has(e.name)) || e instanceof Error && e.message.toLowerCase().includes("quota"), eP = async (e, t, n, i) => {
+            ej(e, t), await eA(e, "readwrite", e => e.put(a))
+        }, ek = new Set(["QuotaExceededError", "NS_ERROR_DOM_QUOTA_REACHED"]), eP = e => !!(e instanceof DOMException && ek.has(e.name)) || e instanceof Error && e.message.toLowerCase().includes("quota"), eN = async (e, t, n, i) => {
             let a = [],
                 s = async () => {
-                    await ej(e, t, n)
+                    await eE(e, t, n)
                 };
             try {
                 return await s(), {
                     evictedMediaDraftIds: a
                 }
             } catch (e) {
-                if (!ek(e)) throw e
+                if (!eP(e)) throw e
             }
-            for (let n of [...i.filter(e => e.draftId !== t && !1 !== e.hasLocalVideo)].sort((e, t) => eb(e) - eb(t))) {
-                await eR(e, [n.draftId]), a.includes(n.draftId) || a.push(n.draftId);
+            for (let n of [...i.filter(e => e.draftId !== t && !1 !== e.hasLocalVideo)].sort((e, t) => eT(e) - eT(t))) {
+                await eO(e, [n.draftId]), a.includes(n.draftId) || a.push(n.draftId);
                 try {
                     return await s(), {
                         evictedMediaDraftIds: a
                     }
                 } catch (e) {
-                    if (!ek(e)) throw e
+                    if (!eP(e)) throw e
                 }
             }
             throw Error("Failed to store moment video locally")
         };
-    async function eN(e, t) {
+    async function eL(e, t) {
         var n, i;
-        let a, s = await eS(e, "readonly", e => e.get(t));
-        if (!eA(s)) return null;
+        let a, s = await eA(e, "readonly", e => e.get(t));
+        if (!eM(s)) return null;
         let {
             videoBlob: o
         } = s;
@@ -421,68 +422,68 @@
             type: o.type || "video/mp4"
         })
     }
-    let eL = async (e, t) => {
-        let n = ew(e, t),
-            i = eC.get(n);
+    let eR = async (e, t) => {
+        let n = eS(e, t),
+            i = ew.get(n);
         if (i) return i;
-        let a = await eS(e, "readonly", e => e.get(t));
-        if (!eA(a)) return null;
+        let a = await eA(e, "readonly", e => e.get(t));
+        if (!eM(a)) return null;
         let s = {
             thumbnailUrl: URL.createObjectURL(a.thumbnailBlob),
             videoUrl: URL.createObjectURL(a.videoBlob)
         };
-        return eC.set(n, s), s
-    }, eR = async (e, t) => {
+        return ew.set(n, s), s
+    }, eO = async (e, t) => {
         0 !== t.length && await Promise.all(t.map(async t => {
-            eM(e, t), await eS(e, "readwrite", e => e.delete(t))
+            ej(e, t), await eA(e, "readwrite", e => e.delete(t))
         }))
-    }, eO = {
+    }, eD = {
         version: "1",
         moments: []
-    }, eD = e => "object" == typeof e && null !== e && !Array.isArray(e), e_ = e => eD(e) && "1" === e.version && Array.isArray(e.moments) ? e.moments : [], eU = e => "string" == typeof e ? e : void 0, eB = e => "number" == typeof e && Number.isFinite(e) ? e : void 0, ez = new Set(Object.values(d.Locale)), eq = e => e_(e).map(e => (e => {
+    }, e_ = e => "object" == typeof e && null !== e && !Array.isArray(e), eU = e => e_(e) && "1" === e.version && Array.isArray(e.moments) ? e.moments : [], eB = e => "string" == typeof e ? e : void 0, ez = e => "number" == typeof e && Number.isFinite(e) ? e : void 0, eq = new Set(Object.values(d.Locale)), eV = e => eU(e).map(e => (e => {
         var t, n, i, a, s, o;
         let r;
-        if (!eD(e)) return null;
-        let l = null != (t = eU(e.draftId)) ? t : eU(e.id);
-        return null == l || "" === l || e.status !== ef ? null : {
+        if (!e_(e)) return null;
+        let l = null != (t = eB(e.draftId)) ? t : eB(e.id);
+        return null == l || "" === l || e.status !== ex ? null : {
             draftId: l,
-            status: ef,
-            experienceId: null != (n = eB(e.experienceId)) ? n : 0,
-            rootPlaceId: eB(e.rootPlaceId),
-            experienceName: null != (i = eU(e.experienceName)) ? i : "",
-            description: null != (a = eU(e.description)) ? a : "",
-            modifiedAt: null != (s = eU(e.modifiedAt)) ? s : new Date(0).toISOString(),
-            assetId: eB(e.assetId),
-            thumbnailUrl: eU(e.thumbnailUrl),
-            videoUrl: eU(e.videoUrl),
-            universeId: eB(e.universeId),
-            locale: "string" == typeof(r = o = e.locale) && ez.has(r) ? o : void 0,
+            status: ex,
+            experienceId: null != (n = ez(e.experienceId)) ? n : 0,
+            rootPlaceId: ez(e.rootPlaceId),
+            experienceName: null != (i = eB(e.experienceName)) ? i : "",
+            description: null != (a = eB(e.description)) ? a : "",
+            modifiedAt: null != (s = eB(e.modifiedAt)) ? s : new Date(0).toISOString(),
+            assetId: ez(e.assetId),
+            thumbnailUrl: eB(e.thumbnailUrl),
+            videoUrl: eB(e.videoUrl),
+            universeId: ez(e.universeId),
+            locale: "string" == typeof(r = o = e.locale) && eq.has(r) ? o : void 0,
             ..."boolean" == typeof e.hasLocalVideo ? {
                 hasLocalVideo: e.hasLocalVideo
             } : {}
         }
-    })(e)).filter(e => null != e), eV = e => {
+    })(e)).filter(e => null != e), eF = e => {
         if (!e) return [];
         try {
             let t = JSON.parse(e);
-            return eq(t)
+            return eV(t)
         } catch (e) {
             return []
         }
-    }, eF = e => ({
+    }, eG = e => ({
         version: "1",
         moments: e
-    }), eG = () => {
+    }), eH = () => {
         let {
             user: e
-        } = (0, V.useAuthentication)(), t = null == e ? void 0 : e.id, n = null != t, i = n ? em(t) : ep, [s, o] = (0, G.useLocalStorage)(i, eO), r = (0, a.useMemo)(() => n ? eq(s) : [], [n, s]);
+        } = (0, V.useAuthentication)(), t = null == e ? void 0 : e.id, n = null != t, i = n ? ep(t) : eh, [s, o] = (0, G.useLocalStorage)(i, eD), r = (0, a.useMemo)(() => n ? eV(s) : [], [n, s]);
         (0, a.useEffect)(() => {
             if (!n || null == t) return;
-            let e = e_(s).filter(e => eD(e) && e.status !== ef).map(e => {
+            let e = eU(s).filter(e => e_(e) && e.status !== ex).map(e => {
                 var t, n;
-                return eD(e) && null != (t = null != (n = eU(e.draftId)) ? n : eU(e.id)) ? t : ""
+                return e_(e) && null != (t = null != (n = eB(e.draftId)) ? n : eB(e.id)) ? t : ""
             }).filter(e => "" !== e);
-            0 !== e.length && (o(eF(r)), eR(t, e))
+            0 !== e.length && (o(eG(r)), eO(t, e))
         }, [n, r, s, o, t]);
         let l = (0, a.useCallback)((e, a) => {
                 var s, r, l;
@@ -493,15 +494,15 @@
                 let {
                     moments: u,
                     evictedMediaDraftIds: d
-                } = (l = eV(window.localStorage.getItem(i)), {
+                } = (l = eF(window.localStorage.getItem(i)), {
                     moments: [...e.map(e => {
                         var t;
                         return {
                             ...e,
-                            status: ef,
+                            status: ex,
                             hasLocalVideo: null == (t = e.hasLocalVideo) || t
                         }
-                    }), ...l].sort((e, t) => eb(t) - eb(e)),
+                    }), ...l].sort((e, t) => eT(t) - eT(e)),
                     evictedMediaDraftIds: []
                 }), c = ((e, t) => {
                     if (0 === t.length) return [...e];
@@ -511,7 +512,7 @@
                         hasLocalVideo: !1
                     } : e)
                 })(u, null != (s = null == a ? void 0 : a.storageEvictedMediaDraftIds) ? s : []), m = [...new Set([...null != (r = null == a ? void 0 : a.storageEvictedMediaDraftIds) ? r : [], ...d])];
-                return o(eF(c)), m.length > 0 && eR(t, m), {
+                return o(eG(c)), m.length > 0 && eO(t, m), {
                     moments: c,
                     evictedMediaDraftIds: m
                 }
@@ -529,12 +530,12 @@
                         modifiedAt: new Date().toISOString()
                     }, a
                 })(r, e, i);
-                return a ? (o(eF(a)), a) : null
+                return a ? (o(eG(a)), a) : null
             }, [n, r, o, t]),
             c = (0, a.useCallback)(e => {
                 if (!n || null == t) return null;
                 let i = -1 === r.findIndex(t => t.draftId === e) ? null : r.filter(t => t.draftId !== e);
-                return i ? (o(eF(i)), eR(t, [e]), i) : null
+                return i ? (o(eG(i)), eO(t, [e]), i) : null
             }, [n, r, o, t]),
             m = (0, a.useCallback)(e => {
                 if (!n || null == t) return null;
@@ -547,7 +548,7 @@
                 if (!i) return null;
                 let a = new Set(e),
                     s = r.filter(e => a.has(e.draftId)).map(e => e.draftId);
-                return o(eF(i)), eR(t, s), i
+                return o(eG(i)), eO(t, s), i
             }, [n, r, o, t]);
         return {
             moments: r,
@@ -558,14 +559,14 @@
             removeMoments: m
         }
     };
-    var eH = e.i(795621),
-        eK = e.i(711367),
-        eW = e.i(630986),
-        eY = e.i(182012),
-        eJ = e.i(157310),
-        eQ = e.i(677753),
-        eX = function(e, t) {
-            return (eX = Object.setPrototypeOf || ({
+    var eK = e.i(795621),
+        eW = e.i(711367),
+        eY = e.i(630986),
+        eJ = e.i(182012),
+        eQ = e.i(157310),
+        eX = e.i(601362),
+        eZ = function(e, t) {
+            return (eZ = Object.setPrototypeOf || ({
                 __proto__: []
             }) instanceof Array && function(e, t) {
                 e.__proto__ = t
@@ -574,16 +575,16 @@
             })(e, t)
         };
 
-    function eZ(e, t) {
+    function e$(e, t) {
         if ("function" != typeof t && null !== t) throw TypeError("Class extends value " + String(t) + " is not a constructor or null");
 
         function n() {
             this.constructor = e
         }
-        eX(e, t), e.prototype = null === t ? Object.create(t) : (n.prototype = t.prototype, new n)
+        eZ(e, t), e.prototype = null === t ? Object.create(t) : (n.prototype = t.prototype, new n)
     }
 
-    function e$(e, t, n, i) {
+    function e0(e, t, n, i) {
         return new(n || (n = Promise))(function(a, s) {
             function o(e) {
                 try {
@@ -611,7 +612,7 @@
         })
     }
 
-    function e0(e, t) {
+    function e1(e, t) {
         var n, i, a, s = {
                 label: 0,
                 sent: function() {
@@ -683,22 +684,22 @@
         }
     }
 
-    function e1(e) {
+    function e2(e) {
         if (void 0 !== e) return null === e ? null : {
             chunkNum: e.chunkNum,
             eTag: e.eTag
         }
     }
 
-    function e2(e) {
+    function e4(e) {
         if (void 0 !== e) return null === e ? null : {
             role: e.role,
             operationId: e.operationId,
-            parts: void 0 === e.parts ? void 0 : null === e.parts ? null : e.parts.map(e1)
+            parts: void 0 === e.parts ? void 0 : null === e.parts ? null : e.parts.map(e2)
         }
     }
 
-    function e4(e) {
+    function e5(e) {
         if (void 0 !== e) return null === e ? null : {
             encryptedCreationContext: e.encryptedCreationContext,
             file: function(e) {
@@ -714,7 +715,7 @@
         }
     }
 
-    function e5(e) {
+    function e6(e) {
         if (void 0 !== e) return null === e ? null : {
             startTime: e.startTime,
             endTime: e.endTime
@@ -739,7 +740,7 @@
         }
     }
 
-    function e6(e) {
+    function e3(e) {
         if (void 0 !== e) return null === e ? null : {
             text: e.text,
             voiceId: e.voiceId,
@@ -749,7 +750,7 @@
         }
     }
 
-    function e3(e) {
+    function e7(e) {
         if (void 0 !== e) return null === e ? null : {
             assetId: e.assetId,
             text: e.text,
@@ -762,26 +763,26 @@
     }
     "function" == typeof SuppressedError && SuppressedError;
 
-    function e7(e, t) {
+    function e9(e, t) {
         return null == e ? e : {
-            assetId: (0, eQ.exists)(e, "assetId") ? e.assetId : void 0,
-            startTime: (0, eQ.exists)(e, "startTime") ? e.startTime : void 0
-        }
-    }
-
-    function e9(e) {
-        var t;
-        return null == (t = e) ? t : {
-            position: (0, eQ.exists)(t, "position") ? t.position : void 0,
-            rotation: (0, eQ.exists)(t, "rotation") ? t.rotation : void 0,
-            stickerSize: (0, eQ.exists)(t, "stickerSize") ? t.stickerSize : void 0,
-            scale: (0, eQ.exists)(t, "scale") ? t.scale : void 0,
-            stickerURI: (0, eQ.exists)(t, "stickerURI") ? t.stickerURI : void 0,
-            zIndex: (0, eQ.exists)(t, "zIndex") ? t.zIndex : void 0
+            assetId: (0, eX.exists)(e, "assetId") ? e.assetId : void 0,
+            startTime: (0, eX.exists)(e, "startTime") ? e.startTime : void 0
         }
     }
 
     function te(e) {
+        var t;
+        return null == (t = e) ? t : {
+            position: (0, eX.exists)(t, "position") ? t.position : void 0,
+            rotation: (0, eX.exists)(t, "rotation") ? t.rotation : void 0,
+            stickerSize: (0, eX.exists)(t, "stickerSize") ? t.stickerSize : void 0,
+            scale: (0, eX.exists)(t, "scale") ? t.scale : void 0,
+            stickerURI: (0, eX.exists)(t, "stickerURI") ? t.stickerURI : void 0,
+            zIndex: (0, eX.exists)(t, "zIndex") ? t.zIndex : void 0
+        }
+    }
+
+    function tt(e) {
         if (void 0 !== e) return null === e ? null : {
             position: e.position,
             rotation: e.rotation,
@@ -792,24 +793,24 @@
         }
     }
 
-    function tt(e) {
+    function tn(e) {
         var t, n;
         return null == (t = e) ? t : {
-            position: (0, eQ.exists)(t, "position") ? t.position : void 0,
-            rotation: (0, eQ.exists)(t, "rotation") ? t.rotation : void 0,
-            scale: (0, eQ.exists)(t, "scale") ? t.scale : void 0,
-            text: (0, eQ.exists)(t, "text") ? t.text : void 0,
-            textOverlayStyle: (0, eQ.exists)(t, "textOverlayStyle") ? null == (n = t.textOverlayStyle) ? n : {
-                font: (0, eQ.exists)(n, "font") ? n.font : void 0,
-                fontColor: (0, eQ.exists)(n, "fontColor") ? n.fontColor : void 0,
-                fontSize: (0, eQ.exists)(n, "fontSize") ? n.fontSize : void 0,
-                textXAlignment: (0, eQ.exists)(n, "textXAlignment") ? n.textXAlignment : void 0
+            position: (0, eX.exists)(t, "position") ? t.position : void 0,
+            rotation: (0, eX.exists)(t, "rotation") ? t.rotation : void 0,
+            scale: (0, eX.exists)(t, "scale") ? t.scale : void 0,
+            text: (0, eX.exists)(t, "text") ? t.text : void 0,
+            textOverlayStyle: (0, eX.exists)(t, "textOverlayStyle") ? null == (n = t.textOverlayStyle) ? n : {
+                font: (0, eX.exists)(n, "font") ? n.font : void 0,
+                fontColor: (0, eX.exists)(n, "fontColor") ? n.fontColor : void 0,
+                fontSize: (0, eX.exists)(n, "fontSize") ? n.fontSize : void 0,
+                textXAlignment: (0, eX.exists)(n, "textXAlignment") ? n.textXAlignment : void 0
             } : void 0,
-            zIndex: (0, eQ.exists)(t, "zIndex") ? t.zIndex : void 0
+            zIndex: (0, eX.exists)(t, "zIndex") ? t.zIndex : void 0
         }
     }
 
-    function tn(e) {
+    function ti(e) {
         if (void 0 !== e) return null === e ? null : {
             position: e.position,
             rotation: e.rotation,
@@ -827,16 +828,16 @@
         }
     }
 
-    function ti(e) {
+    function ta(e) {
         var t;
         return null == (t = e) ? t : {
-            assetId: (0, eQ.exists)(t, "assetId") ? t.assetId : void 0,
-            startTime: (0, eQ.exists)(t, "startTime") ? t.startTime : void 0,
-            assetAccessContext: (0, eQ.exists)(t, "assetAccessContext") ? t.assetAccessContext : void 0
+            assetId: (0, eX.exists)(t, "assetId") ? t.assetId : void 0,
+            startTime: (0, eX.exists)(t, "startTime") ? t.startTime : void 0,
+            assetAccessContext: (0, eX.exists)(t, "assetAccessContext") ? t.assetAccessContext : void 0
         }
     }
 
-    function ta(e) {
+    function ts(e) {
         if (void 0 !== e) return null === e ? null : {
             assetId: e.assetId,
             startTime: e.startTime,
@@ -844,204 +845,204 @@
         }
     }
 
-    function ts(e) {
-        var t;
-        return null == (t = e) ? t : {
-            httpVerb: (0, eQ.exists)(t, "httpVerb") ? t.httpVerb : void 0,
-            url: (0, eQ.exists)(t, "url") ? t.url : void 0,
-            chunkNum: (0, eQ.exists)(t, "chunkNum") ? t.chunkNum : void 0,
-            contentStart: (0, eQ.exists)(t, "contentStart") ? t.contentStart : void 0,
-            contentLength: (0, eQ.exists)(t, "contentLength") ? t.contentLength : void 0,
-            expirationTimeMs: (0, eQ.exists)(t, "expirationTimeMs") ? t.expirationTimeMs : void 0
-        }
-    }
-
     function to(e) {
         var t;
         return null == (t = e) ? t : {
-            role: (0, eQ.exists)(t, "role") ? t.role : void 0,
-            operationId: (0, eQ.exists)(t, "operationId") ? t.operationId : void 0,
-            operationPath: (0, eQ.exists)(t, "operationPath") ? t.operationPath : void 0,
-            uploadUrls: (0, eQ.exists)(t, "uploadUrls") ? null === t.uploadUrls ? null : t.uploadUrls.map(ts) : void 0
+            httpVerb: (0, eX.exists)(t, "httpVerb") ? t.httpVerb : void 0,
+            url: (0, eX.exists)(t, "url") ? t.url : void 0,
+            chunkNum: (0, eX.exists)(t, "chunkNum") ? t.chunkNum : void 0,
+            contentStart: (0, eX.exists)(t, "contentStart") ? t.contentStart : void 0,
+            contentLength: (0, eX.exists)(t, "contentLength") ? t.contentLength : void 0,
+            expirationTimeMs: (0, eX.exists)(t, "expirationTimeMs") ? t.expirationTimeMs : void 0
         }
     }
 
-    function tr(e, t) {
-        var n, i, a;
-        return null == e ? e : {
-            assetId: (0, eQ.exists)(e, "assetId") ? e.assetId : void 0,
-            assetAccessContext: (0, eQ.exists)(e, "assetAccessContext") ? e.assetAccessContext : void 0,
-            assetTotalDuration: (0, eQ.exists)(e, "assetTotalDuration") ? e.assetTotalDuration : void 0,
-            caption: (0, eQ.exists)(e, "caption") ? e.caption : void 0,
-            videoContentLanguage: (0, eQ.exists)(e, "videoContentLanguage") ? e.videoContentLanguage : void 0,
-            partnerUploadType: (0, eQ.exists)(e, "partnerUploadType") ? e.partnerUploadType : void 0,
-            captureType: (0, eQ.exists)(e, "captureType") ? e.captureType : void 0,
-            editsType: (0, eQ.exists)(e, "editsType") ? e.editsType : void 0,
-            videoCaptureEdits: (0, eQ.exists)(e, "videoCaptureEdits") ? null == (n = e.videoCaptureEdits) ? n : {
-                trim: (0, eQ.exists)(n, "trim") ? null == (i = n.trim) ? i : {
-                    startTime: (0, eQ.exists)(i, "startTime") ? i.startTime : void 0,
-                    endTime: (0, eQ.exists)(i, "endTime") ? i.endTime : void 0
-                } : void 0,
-                music: (0, eQ.exists)(n, "music") ? e7(n.music) : void 0,
-                textOverlays: (0, eQ.exists)(n, "textOverlays") ? null === n.textOverlays ? null : n.textOverlays.map(tt) : void 0,
-                stickerOverlays: (0, eQ.exists)(n, "stickerOverlays") ? null === n.stickerOverlays ? null : n.stickerOverlays.map(e9) : void 0,
-                ttsAudios: (0, eQ.exists)(n, "ttsAudios") ? null === n.ttsAudios ? null : n.ttsAudios.map(ti) : void 0
-            } : void 0,
-            screenshotCaptureEdits: (0, eQ.exists)(e, "screenshotCaptureEdits") ? null == (a = e.screenshotCaptureEdits) ? a : {
-                music: (0, eQ.exists)(a, "music") ? e7(a.music) : void 0,
-                textOverlays: (0, eQ.exists)(a, "textOverlays") ? null === a.textOverlays ? null : a.textOverlays.map(tt) : void 0,
-                ttsAudios: (0, eQ.exists)(a, "ttsAudios") ? null === a.ttsAudios ? null : a.ttsAudios.map(ti) : void 0
-            } : void 0
+    function tr(e) {
+        var t;
+        return null == (t = e) ? t : {
+            role: (0, eX.exists)(t, "role") ? t.role : void 0,
+            operationId: (0, eX.exists)(t, "operationId") ? t.operationId : void 0,
+            operationPath: (0, eX.exists)(t, "operationPath") ? t.operationPath : void 0,
+            uploadUrls: (0, eX.exists)(t, "uploadUrls") ? null === t.uploadUrls ? null : t.uploadUrls.map(to) : void 0
         }
     }
 
     function tl(e, t) {
-        var n;
+        var n, i, a;
         return null == e ? e : {
-            status: (0, eQ.exists)(e, "status") ? e.status : void 0,
-            result: (0, eQ.exists)(e, "result") ? null == (n = e.result) ? n : {
-                assetId: (0, eQ.exists)(n, "assetId") ? n.assetId : void 0,
-                isApproved: (0, eQ.exists)(n, "isApproved") ? n.isApproved : void 0,
-                operationError: (0, eQ.exists)(n, "operationError") ? n.operationError : void 0
+            assetId: (0, eX.exists)(e, "assetId") ? e.assetId : void 0,
+            assetAccessContext: (0, eX.exists)(e, "assetAccessContext") ? e.assetAccessContext : void 0,
+            assetTotalDuration: (0, eX.exists)(e, "assetTotalDuration") ? e.assetTotalDuration : void 0,
+            caption: (0, eX.exists)(e, "caption") ? e.caption : void 0,
+            videoContentLanguage: (0, eX.exists)(e, "videoContentLanguage") ? e.videoContentLanguage : void 0,
+            partnerUploadType: (0, eX.exists)(e, "partnerUploadType") ? e.partnerUploadType : void 0,
+            captureType: (0, eX.exists)(e, "captureType") ? e.captureType : void 0,
+            editsType: (0, eX.exists)(e, "editsType") ? e.editsType : void 0,
+            videoCaptureEdits: (0, eX.exists)(e, "videoCaptureEdits") ? null == (n = e.videoCaptureEdits) ? n : {
+                trim: (0, eX.exists)(n, "trim") ? null == (i = n.trim) ? i : {
+                    startTime: (0, eX.exists)(i, "startTime") ? i.startTime : void 0,
+                    endTime: (0, eX.exists)(i, "endTime") ? i.endTime : void 0
+                } : void 0,
+                music: (0, eX.exists)(n, "music") ? e9(n.music) : void 0,
+                textOverlays: (0, eX.exists)(n, "textOverlays") ? null === n.textOverlays ? null : n.textOverlays.map(tn) : void 0,
+                stickerOverlays: (0, eX.exists)(n, "stickerOverlays") ? null === n.stickerOverlays ? null : n.stickerOverlays.map(te) : void 0,
+                ttsAudios: (0, eX.exists)(n, "ttsAudios") ? null === n.ttsAudios ? null : n.ttsAudios.map(ta) : void 0
+            } : void 0,
+            screenshotCaptureEdits: (0, eX.exists)(e, "screenshotCaptureEdits") ? null == (a = e.screenshotCaptureEdits) ? a : {
+                music: (0, eX.exists)(a, "music") ? e9(a.music) : void 0,
+                textOverlays: (0, eX.exists)(a, "textOverlays") ? null === a.textOverlays ? null : a.textOverlays.map(tn) : void 0,
+                ttsAudios: (0, eX.exists)(a, "ttsAudios") ? null === a.ttsAudios ? null : a.ttsAudios.map(ta) : void 0
             } : void 0
         }
     }
 
-    function tu(e) {
-        var t;
-        return null == (t = e) ? t : {
-            role: (0, eQ.exists)(t, "role") ? t.role : void 0,
-            operationId: (0, eQ.exists)(t, "operationId") ? t.operationId : void 0,
-            operationPath: (0, eQ.exists)(t, "operationPath") ? t.operationPath : void 0,
-            done: (0, eQ.exists)(t, "done") ? t.done : void 0
+    function tu(e, t) {
+        var n;
+        return null == e ? e : {
+            status: (0, eX.exists)(e, "status") ? e.status : void 0,
+            result: (0, eX.exists)(e, "result") ? null == (n = e.result) ? n : {
+                assetId: (0, eX.exists)(n, "assetId") ? n.assetId : void 0,
+                isApproved: (0, eX.exists)(n, "isApproved") ? n.isApproved : void 0,
+                operationError: (0, eX.exists)(n, "operationError") ? n.operationError : void 0
+            } : void 0
         }
     }
 
-    function td(e, t) {
-        return null == e ? e : {
-            generationToken: (0, eQ.exists)(e, "generationToken") ? e.generationToken : void 0
+    function td(e) {
+        var t;
+        return null == (t = e) ? t : {
+            role: (0, eX.exists)(t, "role") ? t.role : void 0,
+            operationId: (0, eX.exists)(t, "operationId") ? t.operationId : void 0,
+            operationPath: (0, eX.exists)(t, "operationPath") ? t.operationPath : void 0,
+            done: (0, eX.exists)(t, "done") ? t.done : void 0
         }
     }
 
     function tc(e, t) {
         return null == e ? e : {
-            count: (0, eQ.exists)(e, "count") ? e.count : void 0,
-            countIsCapped: (0, eQ.exists)(e, "countIsCapped") ? e.countIsCapped : void 0,
-            creatorEnabled: (0, eQ.exists)(e, "creatorEnabled") ? e.creatorEnabled : void 0,
-            viewerCanRead: (0, eQ.exists)(e, "viewerCanRead") ? e.viewerCanRead : void 0,
-            viewerCanWrite: (0, eQ.exists)(e, "viewerCanWrite") ? e.viewerCanWrite : void 0
+            generationToken: (0, eX.exists)(e, "generationToken") ? e.generationToken : void 0
         }
     }
 
     function tm(e, t) {
         return null == e ? e : {
-            type: (0, eQ.exists)(e, "type") ? e.type : void 0,
-            id: (0, eQ.exists)(e, "id") ? e.id : void 0
+            count: (0, eX.exists)(e, "count") ? e.count : void 0,
+            countIsCapped: (0, eX.exists)(e, "countIsCapped") ? e.countIsCapped : void 0,
+            creatorEnabled: (0, eX.exists)(e, "creatorEnabled") ? e.creatorEnabled : void 0,
+            viewerCanRead: (0, eX.exists)(e, "viewerCanRead") ? e.viewerCanRead : void 0,
+            viewerCanWrite: (0, eX.exists)(e, "viewerCanWrite") ? e.viewerCanWrite : void 0
         }
     }
 
     function tp(e, t) {
         return null == e ? e : {
-            counts: (0, eQ.exists)(e, "counts") ? e.counts : void 0,
-            userReaction: (0, eQ.exists)(e, "userReaction") ? e.userReaction : void 0
+            type: (0, eX.exists)(e, "type") ? e.type : void 0,
+            id: (0, eX.exists)(e, "id") ? e.id : void 0
         }
     }
 
     function th(e, t) {
         return null == e ? e : {
-            shareCount: (0, eQ.exists)(e, "shareCount") ? e.shareCount : void 0
+            counts: (0, eX.exists)(e, "counts") ? e.counts : void 0,
+            userReaction: (0, eX.exists)(e, "userReaction") ? e.userReaction : void 0
         }
     }
 
     function tv(e, t) {
+        return null == e ? e : {
+            shareCount: (0, eX.exists)(e, "shareCount") ? e.shareCount : void 0
+        }
+    }
+
+    function tf(e, t) {
         var n;
         return null == e ? e : {
-            type: (0, eQ.exists)(e, "type") ? e.type : void 0,
-            experienceCta: (0, eQ.exists)(e, "experienceCta") ? null == (n = e.experienceCta) ? n : {
-                experienceId: (0, eQ.exists)(n, "experienceId") ? n.experienceId : void 0,
-                placeId: (0, eQ.exists)(n, "placeId") ? n.placeId : void 0
+            type: (0, eX.exists)(e, "type") ? e.type : void 0,
+            experienceCta: (0, eX.exists)(e, "experienceCta") ? null == (n = e.experienceCta) ? n : {
+                experienceId: (0, eX.exists)(n, "experienceId") ? n.experienceId : void 0,
+                placeId: (0, eX.exists)(n, "placeId") ? n.placeId : void 0
             } : void 0
         }
     }
 
-    function tf(e) {
+    function tx(e) {
         var t;
         return null == (t = e) ? t : {
-            feedSessionId: (0, eQ.exists)(t, "feedSessionId") ? t.feedSessionId : void 0,
-            entityId: (0, eQ.exists)(t, "entityId") ? t.entityId : void 0,
-            entityType: (0, eQ.exists)(t, "entityType") ? t.entityType : void 0,
-            id: (0, eQ.exists)(t, "id") ? t.id : void 0,
-            feedItemId: (0, eQ.exists)(t, "feedItemId") ? t.feedItemId : void 0,
-            channelId: (0, eQ.exists)(t, "channelId") ? t.channelId : void 0,
-            type: (0, eQ.exists)(t, "type") ? t.type : void 0,
-            captionedAssetMoment: (0, eQ.exists)(t, "captionedAssetMoment") ? tr(t.captionedAssetMoment) : void 0,
-            primaryCta: (0, eQ.exists)(t, "primaryCta") ? tv(t.primaryCta) : void 0,
-            owner: (0, eQ.exists)(t, "owner") ? tm(t.owner) : void 0,
-            visibilityStatus: (0, eQ.exists)(t, "visibilityStatus") ? t.visibilityStatus : void 0,
-            reactions: (0, eQ.exists)(t, "reactions") ? tp(t.reactions) : void 0,
-            comments: (0, eQ.exists)(t, "comments") ? tc(t.comments) : void 0,
-            stats: (0, eQ.exists)(t, "stats") ? th(t.stats) : void 0
-        }
-    }
-
-    function tx(e, t) {
-        return null == e ? e : {
-            feedItems: (0, eQ.exists)(e, "feedItems") ? e.feedItems : void 0,
-            loaded: (0, eQ.exists)(e, "loaded") ? e.loaded : void 0,
-            failed: (0, eQ.exists)(e, "failed") ? e.failed : void 0,
-            moderated: (0, eQ.exists)(e, "moderated") ? e.moderated : void 0
+            feedSessionId: (0, eX.exists)(t, "feedSessionId") ? t.feedSessionId : void 0,
+            entityId: (0, eX.exists)(t, "entityId") ? t.entityId : void 0,
+            entityType: (0, eX.exists)(t, "entityType") ? t.entityType : void 0,
+            id: (0, eX.exists)(t, "id") ? t.id : void 0,
+            feedItemId: (0, eX.exists)(t, "feedItemId") ? t.feedItemId : void 0,
+            channelId: (0, eX.exists)(t, "channelId") ? t.channelId : void 0,
+            type: (0, eX.exists)(t, "type") ? t.type : void 0,
+            captionedAssetMoment: (0, eX.exists)(t, "captionedAssetMoment") ? tl(t.captionedAssetMoment) : void 0,
+            primaryCta: (0, eX.exists)(t, "primaryCta") ? tf(t.primaryCta) : void 0,
+            owner: (0, eX.exists)(t, "owner") ? tp(t.owner) : void 0,
+            visibilityStatus: (0, eX.exists)(t, "visibilityStatus") ? t.visibilityStatus : void 0,
+            reactions: (0, eX.exists)(t, "reactions") ? th(t.reactions) : void 0,
+            comments: (0, eX.exists)(t, "comments") ? tm(t.comments) : void 0,
+            stats: (0, eX.exists)(t, "stats") ? tv(t.stats) : void 0
         }
     }
 
     function tg(e, t) {
         return null == e ? e : {
-            items: (0, eQ.exists)(e, "items") ? null === e.items ? null : e.items.map(tf) : void 0,
-            paginationContext: (0, eQ.exists)(e, "paginationContext") ? e.paginationContext : void 0,
-            metadata: (0, eQ.exists)(e, "metadata") ? tx(e.metadata) : void 0
+            feedItems: (0, eX.exists)(e, "feedItems") ? e.feedItems : void 0,
+            loaded: (0, eX.exists)(e, "loaded") ? e.loaded : void 0,
+            failed: (0, eX.exists)(e, "failed") ? e.failed : void 0,
+            moderated: (0, eX.exists)(e, "moderated") ? e.moderated : void 0
         }
     }
 
-    function ty(e) {
-        var t;
-        return null == (t = e) ? t : {
-            id: (0, eQ.exists)(t, "id") ? t.id : void 0,
-            feedItemId: (0, eQ.exists)(t, "feedItemId") ? t.feedItemId : void 0,
-            channelId: (0, eQ.exists)(t, "channelId") ? t.channelId : void 0,
-            type: (0, eQ.exists)(t, "type") ? t.type : void 0,
-            captionedAssetMoment: (0, eQ.exists)(t, "captionedAssetMoment") ? tr(t.captionedAssetMoment) : void 0,
-            primaryCta: (0, eQ.exists)(t, "primaryCta") ? tv(t.primaryCta) : void 0,
-            owner: (0, eQ.exists)(t, "owner") ? tm(t.owner) : void 0,
-            visibilityStatus: (0, eQ.exists)(t, "visibilityStatus") ? t.visibilityStatus : void 0,
-            reactions: (0, eQ.exists)(t, "reactions") ? tp(t.reactions) : void 0,
-            comments: (0, eQ.exists)(t, "comments") ? tc(t.comments) : void 0,
-            stats: (0, eQ.exists)(t, "stats") ? th(t.stats) : void 0
+    function ty(e, t) {
+        return null == e ? e : {
+            items: (0, eX.exists)(e, "items") ? null === e.items ? null : e.items.map(tx) : void 0,
+            paginationContext: (0, eX.exists)(e, "paginationContext") ? e.paginationContext : void 0,
+            metadata: (0, eX.exists)(e, "metadata") ? tg(e.metadata) : void 0
         }
     }
 
     function tb(e) {
         var t;
         return null == (t = e) ? t : {
-            startSeconds: (0, eQ.exists)(t, "startSeconds") ? t.startSeconds : void 0,
-            endSeconds: (0, eQ.exists)(t, "endSeconds") ? t.endSeconds : void 0,
-            text: (0, eQ.exists)(t, "text") ? t.text : void 0
+            id: (0, eX.exists)(t, "id") ? t.id : void 0,
+            feedItemId: (0, eX.exists)(t, "feedItemId") ? t.feedItemId : void 0,
+            channelId: (0, eX.exists)(t, "channelId") ? t.channelId : void 0,
+            type: (0, eX.exists)(t, "type") ? t.type : void 0,
+            captionedAssetMoment: (0, eX.exists)(t, "captionedAssetMoment") ? tl(t.captionedAssetMoment) : void 0,
+            primaryCta: (0, eX.exists)(t, "primaryCta") ? tf(t.primaryCta) : void 0,
+            owner: (0, eX.exists)(t, "owner") ? tp(t.owner) : void 0,
+            visibilityStatus: (0, eX.exists)(t, "visibilityStatus") ? t.visibilityStatus : void 0,
+            reactions: (0, eX.exists)(t, "reactions") ? th(t.reactions) : void 0,
+            comments: (0, eX.exists)(t, "comments") ? tm(t.comments) : void 0,
+            stats: (0, eX.exists)(t, "stats") ? tv(t.stats) : void 0
         }
     }
 
-    function tT(e, t) {
+    function tT(e) {
+        var t;
+        return null == (t = e) ? t : {
+            startSeconds: (0, eX.exists)(t, "startSeconds") ? t.startSeconds : void 0,
+            endSeconds: (0, eX.exists)(t, "endSeconds") ? t.endSeconds : void 0,
+            text: (0, eX.exists)(t, "text") ? t.text : void 0
+        }
+    }
+
+    function tI(e, t) {
         return null == e ? e : {
-            signingAlgorithmVersion: (0, eQ.exists)(e, "signingAlgorithmVersion") ? e.signingAlgorithmVersion : void 0,
-            signature: (0, eQ.exists)(e, "signature") ? e.signature : void 0
+            signingAlgorithmVersion: (0, eX.exists)(e, "signingAlgorithmVersion") ? e.signingAlgorithmVersion : void 0,
+            signature: (0, eX.exists)(e, "signature") ? e.signature : void 0
         }
     }
-    var tI = eQ.BaseAPI;
+    var tC = eX.BaseAPI;
 
-    function tC() {
-        return null !== tI && tI.apply(this, arguments) || this
+    function tw() {
+        return null !== tC && tC.apply(this, arguments) || this
     }
-    eZ(tC, tI), tC.prototype.backfillTriggerB1Raw = function(e, t) {
-        return e$(this, void 0, void 0, function() {
+    e$(tw, tC), tw.prototype.backfillTriggerB1Raw = function(e, t) {
+        return e0(this, void 0, void 0, function() {
             var n, i, a;
-            return e0(this, function(s) {
+            return e1(this, function(s) {
                 switch (s.label) {
                     case 0:
                         return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -1058,13 +1059,13 @@
                             }(e.backfillTriggerB1Request)
                         }, t)];
                     case 1:
-                        return a = s.sent(), [2, new eQ.VoidApiResponse(a)]
+                        return a = s.sent(), [2, new eX.VoidApiResponse(a)]
                 }
             })
         })
-    }, tC.prototype.backfillTriggerB1 = function() {
-        return e$(this, arguments, void 0, function(e, t) {
-            return void 0 === e && (e = {}), e0(this, function(n) {
+    }, tw.prototype.backfillTriggerB1 = function() {
+        return e0(this, arguments, void 0, function(e, t) {
+            return void 0 === e && (e = {}), e1(this, function(n) {
                 switch (n.label) {
                     case 0:
                         return [4, this.backfillTriggerB1Raw(e, t)];
@@ -1074,14 +1075,14 @@
             })
         })
     };
-    var tw = function(e) {
+    var tS = function(e) {
             function t() {
                 return null !== e && e.apply(this, arguments) || this
             }
-            return eZ(t, e), t.prototype.contentCapturesBatchCheckExperienceUploadabilityRaw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+            return e$(t, e), t.prototype.contentCapturesBatchCheckExperienceUploadabilityRaw = function(e, t) {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e0(this, function(s) {
+                    return e1(this, function(s) {
                         switch (s.label) {
                             case 0:
                                 return n = {}, void 0 !== e.contentType && (n.contentType = e.contentType), void 0 !== e.experienceIds && (n.experienceIds = e.experienceIds), void 0 !== e.allowExternalExperiences && (n.allowExternalExperiences = e.allowExternalExperiences), i = {}, [4, this.request({
@@ -1092,13 +1093,13 @@
                                     query: n
                                 }, t)];
                             case 1:
-                                return a = s.sent(), [2, new eQ.VoidApiResponse(a)]
+                                return a = s.sent(), [2, new eX.VoidApiResponse(a)]
                         }
                     })
                 })
             }, t.prototype.contentCapturesBatchCheckExperienceUploadability = function() {
-                return e$(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e0(this, function(n) {
+                return e0(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.contentCapturesBatchCheckExperienceUploadabilityRaw(e, t)];
@@ -1108,9 +1109,9 @@
                     })
                 })
             }, t.prototype.contentCapturesCheckMomentsEligibilityRaw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e0(this, function(s) {
+                    return e1(this, function(s) {
                         switch (s.label) {
                             case 0:
                                 return n = {}, void 0 !== e.experienceId && (n.experienceId = e.experienceId), void 0 !== e.contentType && (n.contentType = e.contentType), i = {}, [4, this.request({
@@ -1121,17 +1122,17 @@
                                     query: n
                                 }, t)];
                             case 1:
-                                return a = s.sent(), [2, new eQ.JSONApiResponse(a, function(e) {
+                                return a = s.sent(), [2, new eX.JSONApiResponse(a, function(e) {
                                     return null == e ? e : {
-                                        isEligible: (0, eQ.exists)(e, "isEligible") ? e.isEligible : void 0
+                                        isEligible: (0, eX.exists)(e, "isEligible") ? e.isEligible : void 0
                                     }
                                 })]
                         }
                     })
                 })
             }, t.prototype.contentCapturesCheckMomentsEligibility = function() {
-                return e$(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e0(this, function(n) {
+                return e0(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.contentCapturesCheckMomentsEligibilityRaw(e, t)];
@@ -1143,9 +1144,9 @@
                     })
                 })
             }, t.prototype.contentCapturesCheckUploadStatusRaw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e0(this, function(s) {
+                    return e1(this, function(s) {
                         switch (s.label) {
                             case 0:
                                 return n = {}, void 0 !== e.token && (n.token = e.token), i = {}, [4, this.request({
@@ -1156,15 +1157,15 @@
                                     query: n
                                 }, t)];
                             case 1:
-                                return a = s.sent(), [2, new eQ.JSONApiResponse(a, function(e) {
-                                    return tl(e)
+                                return a = s.sent(), [2, new eX.JSONApiResponse(a, function(e) {
+                                    return tu(e)
                                 })]
                         }
                     })
                 })
             }, t.prototype.contentCapturesCheckUploadStatus = function() {
-                return e$(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e0(this, function(n) {
+                return e0(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.contentCapturesCheckUploadStatusRaw(e, t)];
@@ -1176,9 +1177,9 @@
                     })
                 })
             }, t.prototype.contentCapturesCheckUploadStatusRccRaw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e0(this, function(s) {
+                    return e1(this, function(s) {
                         switch (s.label) {
                             case 0:
                                 return n = {}, void 0 !== e.token && (n.token = e.token), i = {}, [4, this.request({
@@ -1189,15 +1190,15 @@
                                     query: n
                                 }, t)];
                             case 1:
-                                return a = s.sent(), [2, new eQ.JSONApiResponse(a, function(e) {
-                                    return tl(e)
+                                return a = s.sent(), [2, new eX.JSONApiResponse(a, function(e) {
+                                    return tu(e)
                                 })]
                         }
                     })
                 })
             }, t.prototype.contentCapturesCheckUploadStatusRcc = function() {
-                return e$(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e0(this, function(n) {
+                return e0(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.contentCapturesCheckUploadStatusRccRaw(e, t)];
@@ -1209,12 +1210,12 @@
                     })
                 })
             }, t.prototype.contentCapturesCreateInfluencerMomentFromVideoRaw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a, s;
-                    return e0(this, function(o) {
+                    return e1(this, function(o) {
                         switch (o.label) {
                             case 0:
-                                return n = {}, i = {}, a = (0, eQ.canConsumeForm)([{
+                                return n = {}, i = {}, a = (0, eX.canConsumeForm)([{
                                     contentType: "multipart/form-data"
                                 }]) ? new FormData : new URLSearchParams, e.files && e.files.forEach(function(e) {
                                     a.append("files", e)
@@ -1227,17 +1228,17 @@
                                     body: a
                                 }, t)];
                             case 1:
-                                return s = o.sent(), [2, new eQ.JSONApiResponse(s, function(e) {
+                                return s = o.sent(), [2, new eX.JSONApiResponse(s, function(e) {
                                     return null == e ? e : {
-                                        operationId: (0, eQ.exists)(e, "operationId") ? e.operationId : void 0
+                                        operationId: (0, eX.exists)(e, "operationId") ? e.operationId : void 0
                                     }
                                 })]
                         }
                     })
                 })
             }, t.prototype.contentCapturesCreateInfluencerMomentFromVideo = function() {
-                return e$(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e0(this, function(n) {
+                return e0(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.contentCapturesCreateInfluencerMomentFromVideoRaw(e, t)];
@@ -1249,9 +1250,9 @@
                     })
                 })
             }, t.prototype.contentCapturesGrantExperiencePermissionsRaw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e0(this, function(s) {
+                    return e1(this, function(s) {
                         switch (s.label) {
                             case 0:
                                 return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -1268,13 +1269,13 @@
                                     }(e.contentCapturesGrantExperiencePermissionsRequest)
                                 }, t)];
                             case 1:
-                                return a = s.sent(), [2, new eQ.VoidApiResponse(a)]
+                                return a = s.sent(), [2, new eX.VoidApiResponse(a)]
                         }
                     })
                 })
             }, t.prototype.contentCapturesGrantExperiencePermissions = function() {
-                return e$(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e0(this, function(n) {
+                return e0(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.contentCapturesGrantExperiencePermissionsRaw(e, t)];
@@ -1284,9 +1285,9 @@
                     })
                 })
             }, t.prototype.contentCapturesSignContentAndMetadataRaw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e0(this, function(s) {
+                    return e1(this, function(s) {
                         switch (s.label) {
                             case 0:
                                 return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -1306,15 +1307,15 @@
                                     }(e.contentCapturesSignContentAndMetadataRequest)
                                 }, t)];
                             case 1:
-                                return a = s.sent(), [2, new eQ.JSONApiResponse(a, function(e) {
-                                    return tT(e)
+                                return a = s.sent(), [2, new eX.JSONApiResponse(a, function(e) {
+                                    return tI(e)
                                 })]
                         }
                     })
                 })
             }, t.prototype.contentCapturesSignContentAndMetadata = function() {
-                return e$(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e0(this, function(n) {
+                return e0(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.contentCapturesSignContentAndMetadataRaw(e, t)];
@@ -1326,12 +1327,12 @@
                     })
                 })
             }, t.prototype.contentCapturesSignFileAndMetadataInternalRaw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a, s;
-                    return e0(this, function(o) {
+                    return e1(this, function(o) {
                         switch (o.label) {
                             case 0:
-                                return n = {}, i = {}, a = (0, eQ.canConsumeForm)([{
+                                return n = {}, i = {}, a = (0, eX.canConsumeForm)([{
                                     contentType: "multipart/form-data"
                                 }]) ? new FormData : new URLSearchParams, e.files && e.files.forEach(function(e) {
                                     a.append("files", e)
@@ -1344,15 +1345,15 @@
                                     body: a
                                 }, t)];
                             case 1:
-                                return s = o.sent(), [2, new eQ.JSONApiResponse(s, function(e) {
-                                    return tT(e)
+                                return s = o.sent(), [2, new eX.JSONApiResponse(s, function(e) {
+                                    return tI(e)
                                 })]
                         }
                     })
                 })
             }, t.prototype.contentCapturesSignFileAndMetadataInternal = function() {
-                return e$(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e0(this, function(n) {
+                return e0(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.contentCapturesSignFileAndMetadataInternalRaw(e, t)];
@@ -1364,9 +1365,9 @@
                     })
                 })
             }, t.prototype.contentCapturesUploadCaptureWithAssetRaw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e0(this, function(s) {
+                    return e1(this, function(s) {
                         switch (s.label) {
                             case 0:
                                 return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -1404,16 +1405,16 @@
                                                                             endTime: e.endTime
                                                                         }
                                                                     }(e.trim),
-                                                                    textOverlays: void 0 === e.textOverlays ? void 0 : null === e.textOverlays ? null : e.textOverlays.map(tn),
-                                                                    stickerOverlays: void 0 === e.stickerOverlays ? void 0 : null === e.stickerOverlays ? null : e.stickerOverlays.map(te),
-                                                                    ttsAudios: void 0 === e.ttsAudios ? void 0 : null === e.ttsAudios ? null : e.ttsAudios.map(ta)
+                                                                    textOverlays: void 0 === e.textOverlays ? void 0 : null === e.textOverlays ? null : e.textOverlays.map(ti),
+                                                                    stickerOverlays: void 0 === e.stickerOverlays ? void 0 : null === e.stickerOverlays ? null : e.stickerOverlays.map(tt),
+                                                                    ttsAudios: void 0 === e.ttsAudios ? void 0 : null === e.ttsAudios ? null : e.ttsAudios.map(ts)
                                                                 }
                                                             }(e.edits)
                                                         }
                                                     }(e.metadata),
                                                     feedRegistrationInfo: function(e) {
                                                         if (void 0 !== e) return null === e ? null : {
-                                                            attributes: void 0 === e.attributes ? void 0 : null === e.attributes ? null : e.attributes.map(e3),
+                                                            attributes: void 0 === e.attributes ? void 0 : null === e.attributes ? null : e.attributes.map(e7),
                                                             contentType: e.contentType,
                                                             customTags: e.customTags,
                                                             duration: e.duration
@@ -1425,13 +1426,13 @@
                                     }(e.contentCapturesUploadCaptureWithAssetRequest)
                                 }, t)];
                             case 1:
-                                return a = s.sent(), [2, new eQ.VoidApiResponse(a)]
+                                return a = s.sent(), [2, new eX.VoidApiResponse(a)]
                         }
                     })
                 })
             }, t.prototype.contentCapturesUploadCaptureWithAsset = function() {
-                return e$(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e0(this, function(n) {
+                return e0(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.contentCapturesUploadCaptureWithAssetRaw(e, t)];
@@ -1441,15 +1442,15 @@
                     })
                 })
             }, t
-        }(eQ.BaseAPI),
-        tS = (function(e) {
+        }(eX.BaseAPI),
+        tA = (function(e) {
             function t() {
                 return null !== e && e.apply(this, arguments) || this
             }
-            eZ(t, e), t.prototype.moderationApplyModerationDecisionRaw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+            e$(t, e), t.prototype.moderationApplyModerationDecisionRaw = function(e, t) {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e0(this, function(s) {
+                    return e1(this, function(s) {
                         switch (s.label) {
                             case 0:
                                 return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
@@ -1471,13 +1472,13 @@
                                     }(e.moderationApplyModerationDecisionRequest)
                                 }, t)];
                             case 1:
-                                return a = s.sent(), [2, new eQ.VoidApiResponse(a)]
+                                return a = s.sent(), [2, new eX.VoidApiResponse(a)]
                         }
                     })
                 })
             }, t.prototype.moderationApplyModerationDecision = function() {
-                return e$(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e0(this, function(n) {
+                return e0(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.moderationApplyModerationDecisionRaw(e, t)];
@@ -1487,12 +1488,12 @@
                     })
                 })
             }, t.prototype.moderationReportMomentRaw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e0(this, function(s) {
+                    return e1(this, function(s) {
                         switch (s.label) {
                             case 0:
-                                if (null === e.momentId || void 0 === e.momentId) throw new eQ.RequiredError("momentId", "Required parameter requestParameters.momentId was null or undefined when calling moderationReportMoment.");
+                                if (null === e.momentId || void 0 === e.momentId) throw new eX.RequiredError("momentId", "Required parameter requestParameters.momentId was null or undefined when calling moderationReportMoment.");
                                 return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
                                     path: "/v1/moderate/report/{momentId}".replace("{".concat("momentId", "}"), encodeURIComponent(String(e.momentId))),
                                     schemaPath: "/v1/moderate/report/{momentId}",
@@ -1508,13 +1509,13 @@
                                     }(e.moderationReportMomentRequest)
                                 }, t)];
                             case 1:
-                                return a = s.sent(), [2, new eQ.VoidApiResponse(a)]
+                                return a = s.sent(), [2, new eX.VoidApiResponse(a)]
                         }
                     })
                 })
             }, t.prototype.moderationReportMoment = function(e, t) {
-                return e$(this, void 0, void 0, function() {
-                    return e0(this, function(n) {
+                return e0(this, void 0, void 0, function() {
+                    return e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.moderationReportMomentRaw(e, t)];
@@ -1524,14 +1525,14 @@
                     })
                 })
             }
-        }(eQ.BaseAPI), function(e) {
+        }(eX.BaseAPI), function(e) {
             function t() {
                 return null !== e && e.apply(this, arguments) || this
             }
-            eZ(t, e), t.prototype.momentTextGenerationCreateMomentVideoUploadUrlRaw = function(e) {
-                return e$(this, void 0, void 0, function() {
+            e$(t, e), t.prototype.momentTextGenerationCreateMomentVideoUploadUrlRaw = function(e) {
+                return e0(this, void 0, void 0, function() {
                     var t, n, i;
-                    return e0(this, function(a) {
+                    return e1(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 return t = {}, n = {}, [4, this.request({
@@ -1542,18 +1543,18 @@
                                     query: t
                                 }, e)];
                             case 1:
-                                return i = a.sent(), [2, new eQ.JSONApiResponse(i, function(e) {
+                                return i = a.sent(), [2, new eX.JSONApiResponse(i, function(e) {
                                     return null == e ? e : {
-                                        uploadUrl: (0, eQ.exists)(e, "uploadUrl") ? e.uploadUrl : void 0,
-                                        videoObjectKey: (0, eQ.exists)(e, "videoObjectKey") ? e.videoObjectKey : void 0
+                                        uploadUrl: (0, eX.exists)(e, "uploadUrl") ? e.uploadUrl : void 0,
+                                        videoObjectKey: (0, eX.exists)(e, "videoObjectKey") ? e.videoObjectKey : void 0
                                     }
                                 })]
                         }
                     })
                 })
             }, t.prototype.momentTextGenerationCreateMomentVideoUploadUrl = function(e) {
-                return e$(this, void 0, void 0, function() {
-                    return e0(this, function(t) {
+                return e0(this, void 0, void 0, function() {
+                    return e1(this, function(t) {
                         switch (t.label) {
                             case 0:
                                 return [4, this.momentTextGenerationCreateMomentVideoUploadUrlRaw(e)];
@@ -1565,9 +1566,9 @@
                     })
                 })
             }, t.prototype.momentTextGenerationGenerateMomentTextRaw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e0(this, function(s) {
+                    return e1(this, function(s) {
                         switch (s.label) {
                             case 0:
                                 return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -1590,15 +1591,15 @@
                                     }(e.momentTextGenerationGenerateMomentTextRequest)
                                 }, t)];
                             case 1:
-                                return a = s.sent(), [2, new eQ.JSONApiResponse(a, function(e) {
-                                    return td(e)
+                                return a = s.sent(), [2, new eX.JSONApiResponse(a, function(e) {
+                                    return tc(e)
                                 })]
                         }
                     })
                 })
             }, t.prototype.momentTextGenerationGenerateMomentText = function() {
-                return e$(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e0(this, function(n) {
+                return e0(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.momentTextGenerationGenerateMomentTextRaw(e, t)];
@@ -1610,9 +1611,9 @@
                     })
                 })
             }, t.prototype.momentTextGenerationGenerateMomentTextWithVideoRaw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e0(this, function(s) {
+                    return e1(this, function(s) {
                         switch (s.label) {
                             case 0:
                                 return n = {}, void 0 !== e.captureType && (n.captureType = e.captureType), i = {}, [4, this.request({
@@ -1623,15 +1624,15 @@
                                     query: n
                                 }, t)];
                             case 1:
-                                return a = s.sent(), [2, new eQ.JSONApiResponse(a, function(e) {
-                                    return td(e)
+                                return a = s.sent(), [2, new eX.JSONApiResponse(a, function(e) {
+                                    return tc(e)
                                 })]
                         }
                     })
                 })
             }, t.prototype.momentTextGenerationGenerateMomentTextWithVideo = function() {
-                return e$(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e0(this, function(n) {
+                return e0(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.momentTextGenerationGenerateMomentTextWithVideoRaw(e, t)];
@@ -1643,9 +1644,9 @@
                     })
                 })
             }, t.prototype.momentTextGenerationGetMomentTextGenerationStatusRaw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e0(this, function(s) {
+                    return e1(this, function(s) {
                         switch (s.label) {
                             case 0:
                                 return n = {}, void 0 !== e.token && (n.token = e.token), i = {}, [4, this.request({
@@ -1656,15 +1657,15 @@
                                     query: n
                                 }, t)];
                             case 1:
-                                return a = s.sent(), [2, new eQ.JSONApiResponse(a, function(e) {
+                                return a = s.sent(), [2, new eX.JSONApiResponse(a, function(e) {
                                     var t;
                                     return null == e ? e : {
-                                        status: (0, eQ.exists)(e, "status") ? e.status : void 0,
-                                        result: (0, eQ.exists)(e, "result") ? null == (t = e.result) ? t : {
-                                            summary: (0, eQ.exists)(t, "summary") ? t.summary : void 0,
-                                            description: (0, eQ.exists)(t, "description") ? t.description : void 0,
-                                            error: (0, eQ.exists)(t, "error") ? t.error : void 0,
-                                            segments: (0, eQ.exists)(t, "segments") ? null === t.segments ? null : t.segments.map(tb) : void 0
+                                        status: (0, eX.exists)(e, "status") ? e.status : void 0,
+                                        result: (0, eX.exists)(e, "result") ? null == (t = e.result) ? t : {
+                                            summary: (0, eX.exists)(t, "summary") ? t.summary : void 0,
+                                            description: (0, eX.exists)(t, "description") ? t.description : void 0,
+                                            error: (0, eX.exists)(t, "error") ? t.error : void 0,
+                                            segments: (0, eX.exists)(t, "segments") ? null === t.segments ? null : t.segments.map(tT) : void 0
                                         } : void 0
                                     }
                                 })]
@@ -1672,8 +1673,8 @@
                     })
                 })
             }, t.prototype.momentTextGenerationGetMomentTextGenerationStatus = function() {
-                return e$(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e0(this, function(n) {
+                return e0(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.momentTextGenerationGetMomentTextGenerationStatusRaw(e, t)];
@@ -1685,9 +1686,9 @@
                     })
                 })
             }, t.prototype.momentTextGenerationSubmitMomentGeneratedTextFeedbackRaw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e0(this, function(s) {
+                    return e1(this, function(s) {
                         switch (s.label) {
                             case 0:
                                 return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -1704,13 +1705,13 @@
                                     }(e.momentTextGenerationSubmitMomentGeneratedTextFeedbackRequest)
                                 }, t)];
                             case 1:
-                                return a = s.sent(), [2, new eQ.VoidApiResponse(a)]
+                                return a = s.sent(), [2, new eX.VoidApiResponse(a)]
                         }
                     })
                 })
             }, t.prototype.momentTextGenerationSubmitMomentGeneratedTextFeedback = function() {
-                return e$(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e0(this, function(n) {
+                return e0(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.momentTextGenerationSubmitMomentGeneratedTextFeedbackRaw(e, t)];
@@ -1720,14 +1721,14 @@
                     })
                 })
             }
-        }(eQ.BaseAPI), function(e) {
+        }(eX.BaseAPI), function(e) {
             function t() {
                 return null !== e && e.apply(this, arguments) || this
             }
-            return eZ(t, e), t.prototype.momentsCleanUserDataRaw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+            return e$(t, e), t.prototype.momentsCleanUserDataRaw = function(e, t) {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e0(this, function(s) {
+                    return e1(this, function(s) {
                         switch (s.label) {
                             case 0:
                                 return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -1751,15 +1752,15 @@
                                     }(e.momentsCleanUserDataRequest)
                                 }, t)];
                             case 1:
-                                return a = s.sent(), [2, new eQ.JSONApiResponse(a, function(e) {
+                                return a = s.sent(), [2, new eX.JSONApiResponse(a, function(e) {
                                     var t;
                                     return null == e ? e : {
-                                        notificationId: (0, eQ.exists)(e, "NotificationId") ? e.NotificationId : void 0,
-                                        eventType: (0, eQ.exists)(e, "EventType") ? e.EventType : void 0,
-                                        eventTime: (0, eQ.exists)(e, "EventTime") ? new Date(e.EventTime) : void 0,
-                                        eventPayload: (0, eQ.exists)(e, "EventPayload") ? null == (t = e.EventPayload) ? t : {
-                                            userId: (0, eQ.exists)(t, "UserId") ? t.UserId : void 0,
-                                            gameIds: (0, eQ.exists)(t, "GameIds") ? t.GameIds : void 0
+                                        notificationId: (0, eX.exists)(e, "NotificationId") ? e.NotificationId : void 0,
+                                        eventType: (0, eX.exists)(e, "EventType") ? e.EventType : void 0,
+                                        eventTime: (0, eX.exists)(e, "EventTime") ? new Date(e.EventTime) : void 0,
+                                        eventPayload: (0, eX.exists)(e, "EventPayload") ? null == (t = e.EventPayload) ? t : {
+                                            userId: (0, eX.exists)(t, "UserId") ? t.UserId : void 0,
+                                            gameIds: (0, eX.exists)(t, "GameIds") ? t.GameIds : void 0
                                         } : void 0
                                     }
                                 })]
@@ -1767,8 +1768,8 @@
                     })
                 })
             }, t.prototype.momentsCleanUserData = function() {
-                return e$(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e0(this, function(n) {
+                return e0(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.momentsCleanUserDataRaw(e, t)];
@@ -1780,12 +1781,12 @@
                     })
                 })
             }, t.prototype.momentsDeleteMomentRaw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e0(this, function(s) {
+                    return e1(this, function(s) {
                         switch (s.label) {
                             case 0:
-                                if (null === e.momentId || void 0 === e.momentId) throw new eQ.RequiredError("momentId", "Required parameter requestParameters.momentId was null or undefined when calling momentsDeleteMoment.");
+                                if (null === e.momentId || void 0 === e.momentId) throw new eX.RequiredError("momentId", "Required parameter requestParameters.momentId was null or undefined when calling momentsDeleteMoment.");
                                 return n = {}, i = {}, [4, this.request({
                                     path: "/v2/moments/{momentId}".replace("{".concat("momentId", "}"), encodeURIComponent(String(e.momentId))),
                                     schemaPath: "/v2/moments/{momentId}",
@@ -1794,13 +1795,13 @@
                                     query: n
                                 }, t)];
                             case 1:
-                                return a = s.sent(), [2, new eQ.VoidApiResponse(a)]
+                                return a = s.sent(), [2, new eX.VoidApiResponse(a)]
                         }
                     })
                 })
             }, t.prototype.momentsDeleteMoment = function(e, t) {
-                return e$(this, void 0, void 0, function() {
-                    return e0(this, function(n) {
+                return e0(this, void 0, void 0, function() {
+                    return e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.momentsDeleteMomentRaw(e, t)];
@@ -1810,12 +1811,12 @@
                     })
                 })
             }, t.prototype.momentsDeleteMomentByFeedItemRaw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e0(this, function(s) {
+                    return e1(this, function(s) {
                         switch (s.label) {
                             case 0:
-                                if (null === e.feedItemId || void 0 === e.feedItemId) throw new eQ.RequiredError("feedItemId", "Required parameter requestParameters.feedItemId was null or undefined when calling momentsDeleteMomentByFeedItem.");
+                                if (null === e.feedItemId || void 0 === e.feedItemId) throw new eX.RequiredError("feedItemId", "Required parameter requestParameters.feedItemId was null or undefined when calling momentsDeleteMomentByFeedItem.");
                                 return n = {}, i = {}, [4, this.request({
                                     path: "/v2/moments/by-feed-item/{feedItemId}".replace("{".concat("feedItemId", "}"), encodeURIComponent(String(e.feedItemId))),
                                     schemaPath: "/v2/moments/by-feed-item/{feedItemId}",
@@ -1824,13 +1825,13 @@
                                     query: n
                                 }, t)];
                             case 1:
-                                return a = s.sent(), [2, new eQ.VoidApiResponse(a)]
+                                return a = s.sent(), [2, new eX.VoidApiResponse(a)]
                         }
                     })
                 })
             }, t.prototype.momentsDeleteMomentByFeedItem = function(e, t) {
-                return e$(this, void 0, void 0, function() {
-                    return e0(this, function(n) {
+                return e0(this, void 0, void 0, function() {
+                    return e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.momentsDeleteMomentByFeedItemRaw(e, t)];
@@ -1840,9 +1841,9 @@
                     })
                 })
             }, t.prototype.momentsGetMomentRecommendationsRaw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e0(this, function(s) {
+                    return e1(this, function(s) {
                         switch (s.label) {
                             case 0:
                                 return n = {}, void 0 !== e.paginationContext && (n.PaginationContext = e.paginationContext), void 0 !== e.locationId && (n.LocationId = e.locationId), void 0 !== e.count && (n.Count = e.count), void 0 !== e.signals && (n.Signals = e.signals), i = {}, [4, this.request({
@@ -1853,15 +1854,15 @@
                                     query: n
                                 }, t)];
                             case 1:
-                                return a = s.sent(), [2, new eQ.JSONApiResponse(a, function(e) {
-                                    return tg(e)
+                                return a = s.sent(), [2, new eX.JSONApiResponse(a, function(e) {
+                                    return ty(e)
                                 })]
                         }
                     })
                 })
             }, t.prototype.momentsGetMomentRecommendations = function() {
-                return e$(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e0(this, function(n) {
+                return e0(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.momentsGetMomentRecommendationsRaw(e, t)];
@@ -1873,9 +1874,9 @@
                     })
                 })
             }, t.prototype.momentsGetMomentsRaw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e0(this, function(s) {
+                    return e1(this, function(s) {
                         switch (s.label) {
                             case 0:
                                 return n = {}, e.ids && (n.Ids = e.ids), void 0 !== e.type && (n.type = e.type), i = {}, [4, this.request({
@@ -1886,19 +1887,19 @@
                                     query: n
                                 }, t)];
                             case 1:
-                                return a = s.sent(), [2, new eQ.JSONApiResponse(a, function(e) {
+                                return a = s.sent(), [2, new eX.JSONApiResponse(a, function(e) {
                                     return null == e ? e : {
-                                        items: (0, eQ.exists)(e, "items") ? null === e.items ? null : e.items.map(ty) : void 0,
-                                        failedMomentIds: (0, eQ.exists)(e, "failedMomentIds") ? e.failedMomentIds : void 0,
-                                        moderatedMomentIds: (0, eQ.exists)(e, "moderatedMomentIds") ? e.moderatedMomentIds : void 0
+                                        items: (0, eX.exists)(e, "items") ? null === e.items ? null : e.items.map(tb) : void 0,
+                                        failedMomentIds: (0, eX.exists)(e, "failedMomentIds") ? e.failedMomentIds : void 0,
+                                        moderatedMomentIds: (0, eX.exists)(e, "moderatedMomentIds") ? e.moderatedMomentIds : void 0
                                     }
                                 })]
                         }
                     })
                 })
             }, t.prototype.momentsGetMoments = function() {
-                return e$(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e0(this, function(n) {
+                return e0(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.momentsGetMomentsRaw(e, t)];
@@ -1910,9 +1911,9 @@
                     })
                 })
             }, t.prototype.momentsGetUsersMomentsRaw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e0(this, function(s) {
+                    return e1(this, function(s) {
                         switch (s.label) {
                             case 0:
                                 return n = {}, void 0 !== e.targetUserId && (n.TargetUserId = e.targetUserId), void 0 !== e.paginationContext && (n.PaginationContext = e.paginationContext), void 0 !== e.count && (n.Count = e.count), e.filterBy && (n.FilterBy = e.filterBy), i = {}, [4, this.request({
@@ -1923,21 +1924,21 @@
                                     query: n
                                 }, t)];
                             case 1:
-                                return a = s.sent(), [2, new eQ.JSONApiResponse(a, function(e) {
+                                return a = s.sent(), [2, new eX.JSONApiResponse(a, function(e) {
                                     return null == e ? e : {
-                                        items: (0, eQ.exists)(e, "items") ? null === e.items ? null : e.items.map(ty) : void 0,
-                                        failedMomentIds: (0, eQ.exists)(e, "failedMomentIds") ? e.failedMomentIds : void 0,
-                                        moderatedMomentIds: (0, eQ.exists)(e, "moderatedMomentIds") ? e.moderatedMomentIds : void 0,
-                                        paginationContext: (0, eQ.exists)(e, "paginationContext") ? e.paginationContext : void 0,
-                                        metadata: (0, eQ.exists)(e, "metadata") ? tx(e.metadata) : void 0
+                                        items: (0, eX.exists)(e, "items") ? null === e.items ? null : e.items.map(tb) : void 0,
+                                        failedMomentIds: (0, eX.exists)(e, "failedMomentIds") ? e.failedMomentIds : void 0,
+                                        moderatedMomentIds: (0, eX.exists)(e, "moderatedMomentIds") ? e.moderatedMomentIds : void 0,
+                                        paginationContext: (0, eX.exists)(e, "paginationContext") ? e.paginationContext : void 0,
+                                        metadata: (0, eX.exists)(e, "metadata") ? tg(e.metadata) : void 0
                                     }
                                 })]
                         }
                     })
                 })
             }, t.prototype.momentsGetUsersMoments = function() {
-                return e$(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e0(this, function(n) {
+                return e0(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.momentsGetUsersMomentsRaw(e, t)];
@@ -1949,9 +1950,9 @@
                     })
                 })
             }, t.prototype.momentsReactToFeedItemRaw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e0(this, function(s) {
+                    return e1(this, function(s) {
                         switch (s.label) {
                             case 0:
                                 return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -1971,13 +1972,13 @@
                                     }(e.momentsReactToFeedItemRequest)
                                 }, t)];
                             case 1:
-                                return a = s.sent(), [2, new eQ.VoidApiResponse(a)]
+                                return a = s.sent(), [2, new eX.VoidApiResponse(a)]
                         }
                     })
                 })
             }, t.prototype.momentsReactToFeedItem = function() {
-                return e$(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e0(this, function(n) {
+                return e0(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.momentsReactToFeedItemRaw(e, t)];
@@ -1987,9 +1988,9 @@
                     })
                 })
             }, t.prototype.momentsReactToFeedItemV2Raw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e0(this, function(s) {
+                    return e1(this, function(s) {
                         switch (s.label) {
                             case 0:
                                 return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -2008,13 +2009,13 @@
                                     }(e.momentsReactToFeedItemV2Request)
                                 }, t)];
                             case 1:
-                                return a = s.sent(), [2, new eQ.VoidApiResponse(a)]
+                                return a = s.sent(), [2, new eX.VoidApiResponse(a)]
                         }
                     })
                 })
             }, t.prototype.momentsReactToFeedItemV2 = function() {
-                return e$(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e0(this, function(n) {
+                return e0(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.momentsReactToFeedItemV2Raw(e, t)];
@@ -2024,9 +2025,9 @@
                     })
                 })
             }, t.prototype.momentsSearchMomentsRaw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e0(this, function(s) {
+                    return e1(this, function(s) {
                         switch (s.label) {
                             case 0:
                                 return n = {}, void 0 !== e.q && (n.q = e.q), void 0 !== e.paginationContext && (n.paginationContext = e.paginationContext), void 0 !== e.locationId && (n.locationId = e.locationId), void 0 !== e.count && (n.count = e.count), i = {}, [4, this.request({
@@ -2037,15 +2038,15 @@
                                     query: n
                                 }, t)];
                             case 1:
-                                return a = s.sent(), [2, new eQ.JSONApiResponse(a, function(e) {
-                                    return tg(e)
+                                return a = s.sent(), [2, new eX.JSONApiResponse(a, function(e) {
+                                    return ty(e)
                                 })]
                         }
                     })
                 })
             }, t.prototype.momentsSearchMoments = function() {
-                return e$(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e0(this, function(n) {
+                return e0(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.momentsSearchMomentsRaw(e, t)];
@@ -2057,9 +2058,9 @@
                     })
                 })
             }, t.prototype.momentsTestSuppressOwnedFeedItemsRaw = function(e) {
-                return e$(this, void 0, void 0, function() {
+                return e0(this, void 0, void 0, function() {
                     var t, n, i;
-                    return e0(this, function(a) {
+                    return e1(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 return t = {}, n = {}, [4, this.request({
@@ -2070,13 +2071,13 @@
                                     query: t
                                 }, e)];
                             case 1:
-                                return i = a.sent(), [2, new eQ.VoidApiResponse(i)]
+                                return i = a.sent(), [2, new eX.VoidApiResponse(i)]
                         }
                     })
                 })
             }, t.prototype.momentsTestSuppressOwnedFeedItems = function(e) {
-                return e$(this, void 0, void 0, function() {
-                    return e0(this, function(t) {
+                return e0(this, void 0, void 0, function() {
+                    return e1(this, function(t) {
                         switch (t.label) {
                             case 0:
                                 return [4, this.momentsTestSuppressOwnedFeedItemsRaw(e)];
@@ -2086,15 +2087,15 @@
                     })
                 })
             }, t
-        }(eQ.BaseAPI)),
-        tA = function(e) {
+        }(eX.BaseAPI)),
+        tM = function(e) {
             function t() {
                 return null !== e && e.apply(this, arguments) || this
             }
-            return eZ(t, e), t.prototype.postsCompletePostRaw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+            return e$(t, e), t.prototype.postsCompletePostRaw = function(e, t) {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e0(this, function(s) {
+                    return e1(this, function(s) {
                         switch (s.label) {
                             case 0:
                                 return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -2105,22 +2106,22 @@
                                     query: n,
                                     body: function(e) {
                                         if (void 0 !== e) return null === e ? null : {
-                                            uploads: void 0 === e.uploads ? void 0 : null === e.uploads ? null : e.uploads.map(e2)
+                                            uploads: void 0 === e.uploads ? void 0 : null === e.uploads ? null : e.uploads.map(e4)
                                         }
                                     }(e.postsCompletePostRequest)
                                 }, t)];
                             case 1:
-                                return a = s.sent(), [2, new eQ.JSONApiResponse(a, function(e) {
+                                return a = s.sent(), [2, new eX.JSONApiResponse(a, function(e) {
                                     return null == e ? e : {
-                                        uploads: (0, eQ.exists)(e, "uploads") ? null === e.uploads ? null : e.uploads.map(tu) : void 0
+                                        uploads: (0, eX.exists)(e, "uploads") ? null === e.uploads ? null : e.uploads.map(td) : void 0
                                     }
                                 })]
                         }
                     })
                 })
             }, t.prototype.postsCompletePost = function() {
-                return e$(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e0(this, function(n) {
+                return e0(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.postsCompletePostRaw(e, t)];
@@ -2132,9 +2133,9 @@
                     })
                 })
             }, t.prototype.postsCreatePostRaw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e0(this, function(s) {
+                    return e1(this, function(s) {
                         switch (s.label) {
                             case 0:
                                 return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -2166,50 +2167,50 @@
                                                         }
                                                     }(e.music),
                                                     textOverlays: void 0 === e.textOverlays ? void 0 : null === e.textOverlays ? null : e.textOverlays.map(e8),
-                                                    textToSpeech: void 0 === e.textToSpeech ? void 0 : null === e.textToSpeech ? null : e.textToSpeech.map(e6),
+                                                    textToSpeech: void 0 === e.textToSpeech ? void 0 : null === e.textToSpeech ? null : e.textToSpeech.map(e3),
                                                     contentLanguage: e.contentLanguage
                                                 }
                                             }(e.common),
                                             videoPost: function(e) {
                                                 if (void 0 !== e) return null === e ? null : {
-                                                    video: e4(e.video),
+                                                    video: e5(e.video),
                                                     durationSeconds: e.durationSeconds,
-                                                    trim: e5(e.trim)
+                                                    trim: e6(e.trim)
                                                 }
                                             }(e.videoPost),
                                             screenshotPost: function(e) {
                                                 if (void 0 !== e) return null === e ? null : {
-                                                    screenshot: e4(e.screenshot),
+                                                    screenshot: e5(e.screenshot),
                                                     widthPixels: e.widthPixels,
                                                     heightPixels: e.heightPixels
                                                 }
                                             }(e.screenshotPost),
                                             influencerVideoPost: function(e) {
                                                 if (void 0 !== e) return null === e ? null : {
-                                                    video: e4(e.video),
+                                                    video: e5(e.video),
                                                     durationSeconds: e.durationSeconds,
-                                                    trim: e5(e.trim)
+                                                    trim: e6(e.trim)
                                                 }
                                             }(e.influencerVideoPost)
                                         }
                                     }(e.postsCreatePostRequest)
                                 }, t)];
                             case 1:
-                                return a = s.sent(), [2, new eQ.JSONApiResponse(a, function(e) {
+                                return a = s.sent(), [2, new eX.JSONApiResponse(a, function(e) {
                                     var t;
                                     return null == e ? e : {
-                                        post: (0, eQ.exists)(e, "post") ? null == (t = e.post) ? t : {
-                                            operationId: (0, eQ.exists)(t, "operationId") ? t.operationId : void 0
+                                        post: (0, eX.exists)(e, "post") ? null == (t = e.post) ? t : {
+                                            operationId: (0, eX.exists)(t, "operationId") ? t.operationId : void 0
                                         } : void 0,
-                                        uploads: (0, eQ.exists)(e, "uploads") ? null === e.uploads ? null : e.uploads.map(to) : void 0
+                                        uploads: (0, eX.exists)(e, "uploads") ? null === e.uploads ? null : e.uploads.map(tr) : void 0
                                     }
                                 })]
                         }
                     })
                 })
             }, t.prototype.postsCreatePost = function() {
-                return e$(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e0(this, function(n) {
+                return e0(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.postsCreatePostRaw(e, t)];
@@ -2221,12 +2222,12 @@
                     })
                 })
             }, t.prototype.postsGetPostOperationStatusRaw = function(e, t) {
-                return e$(this, void 0, void 0, function() {
+                return e0(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e0(this, function(s) {
+                    return e1(this, function(s) {
                         switch (s.label) {
                             case 0:
-                                if (null === e.operationId || void 0 === e.operationId) throw new eQ.RequiredError("operationId", "Required parameter requestParameters.operationId was null or undefined when calling postsGetPostOperationStatus.");
+                                if (null === e.operationId || void 0 === e.operationId) throw new eX.RequiredError("operationId", "Required parameter requestParameters.operationId was null or undefined when calling postsGetPostOperationStatus.");
                                 return n = {}, i = {}, [4, this.request({
                                     path: "/v1/operations/{operationId}".replace("{".concat("operationId", "}"), encodeURIComponent(String(e.operationId))),
                                     schemaPath: "/v1/operations/{operationId}",
@@ -2235,18 +2236,18 @@
                                     query: n
                                 }, t)];
                             case 1:
-                                return a = s.sent(), [2, new eQ.JSONApiResponse(a, function(e) {
+                                return a = s.sent(), [2, new eX.JSONApiResponse(a, function(e) {
                                     return null == e ? e : {
-                                        path: (0, eQ.exists)(e, "path") ? e.path : void 0,
-                                        done: (0, eQ.exists)(e, "done") ? e.done : void 0
+                                        path: (0, eX.exists)(e, "path") ? e.path : void 0,
+                                        done: (0, eX.exists)(e, "done") ? e.done : void 0
                                     }
                                 })]
                         }
                     })
                 })
             }, t.prototype.postsGetPostOperationStatus = function(e, t) {
-                return e$(this, void 0, void 0, function() {
-                    return e0(this, function(n) {
+                return e0(this, void 0, void 0, function() {
+                    return e1(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.postsGetPostOperationStatusRaw(e, t)];
@@ -2258,16 +2259,16 @@
                     })
                 })
             }, t
-        }(eQ.BaseAPI),
-        tM = eQ.BaseAPI;
+        }(eX.BaseAPI),
+        tj = eX.BaseAPI;
 
-    function tj() {
-        return null !== tM && tM.apply(this, arguments) || this
+    function tE() {
+        return null !== tj && tj.apply(this, arguments) || this
     }
-    eZ(tj, tM), tj.prototype.testSeedCreatePostAssetRaw = function(e, t) {
-        return e$(this, void 0, void 0, function() {
+    e$(tE, tj), tE.prototype.testSeedCreatePostAssetRaw = function(e, t) {
+        return e0(this, void 0, void 0, function() {
             var n, i, a;
-            return e0(this, function(s) {
+            return e1(this, function(s) {
                 switch (s.label) {
                     case 0:
                         return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -2291,13 +2292,13 @@
                             }(e.testSeedCreatePostAssetRequest)
                         }, t)];
                     case 1:
-                        return a = s.sent(), [2, new eQ.VoidApiResponse(a)]
+                        return a = s.sent(), [2, new eX.VoidApiResponse(a)]
                 }
             })
         })
-    }, tj.prototype.testSeedCreatePostAsset = function() {
-        return e$(this, arguments, void 0, function(e, t) {
-            return void 0 === e && (e = {}), e0(this, function(n) {
+    }, tE.prototype.testSeedCreatePostAsset = function() {
+        return e0(this, arguments, void 0, function(e, t) {
+            return void 0 === e && (e = {}), e1(this, function(n) {
                 switch (n.label) {
                     case 0:
                         return [4, this.testSeedCreatePostAssetRaw(e, t)];
@@ -2306,10 +2307,10 @@
                 }
             })
         })
-    }, tj.prototype.testSeedInspectPostRaw = function(e, t) {
-        return e$(this, void 0, void 0, function() {
+    }, tE.prototype.testSeedInspectPostRaw = function(e, t) {
+        return e0(this, void 0, void 0, function() {
             var n, i, a;
-            return e0(this, function(s) {
+            return e1(this, function(s) {
                 switch (s.label) {
                     case 0:
                         return n = {}, void 0 !== e.id && (n.id = e.id), void 0 !== e.type && (n.type = e.type), i = {}, [4, this.request({
@@ -2320,13 +2321,13 @@
                             query: n
                         }, t)];
                     case 1:
-                        return a = s.sent(), [2, new eQ.VoidApiResponse(a)]
+                        return a = s.sent(), [2, new eX.VoidApiResponse(a)]
                 }
             })
         })
-    }, tj.prototype.testSeedInspectPost = function() {
-        return e$(this, arguments, void 0, function(e, t) {
-            return void 0 === e && (e = {}), e0(this, function(n) {
+    }, tE.prototype.testSeedInspectPost = function() {
+        return e0(this, arguments, void 0, function(e, t) {
+            return void 0 === e && (e = {}), e1(this, function(n) {
                 switch (n.label) {
                     case 0:
                         return [4, this.testSeedInspectPostRaw(e, t)];
@@ -2335,10 +2336,10 @@
                 }
             })
         })
-    }, tj.prototype.testSeedListUserMomentsRaw = function(e) {
-        return e$(this, void 0, void 0, function() {
+    }, tE.prototype.testSeedListUserMomentsRaw = function(e) {
+        return e0(this, void 0, void 0, function() {
             var t, n, i;
-            return e0(this, function(a) {
+            return e1(this, function(a) {
                 switch (a.label) {
                     case 0:
                         return t = {}, n = {}, [4, this.request({
@@ -2349,13 +2350,13 @@
                             query: t
                         }, e)];
                     case 1:
-                        return i = a.sent(), [2, new eQ.VoidApiResponse(i)]
+                        return i = a.sent(), [2, new eX.VoidApiResponse(i)]
                 }
             })
         })
-    }, tj.prototype.testSeedListUserMoments = function(e) {
-        return e$(this, void 0, void 0, function() {
-            return e0(this, function(t) {
+    }, tE.prototype.testSeedListUserMoments = function(e) {
+        return e0(this, void 0, void 0, function() {
+            return e1(this, function(t) {
                 switch (t.label) {
                     case 0:
                         return [4, this.testSeedListUserMomentsRaw(e)];
@@ -2364,10 +2365,10 @@
                 }
             })
         })
-    }, tj.prototype.testSeedMomentToPostRaw = function(e, t) {
-        return e$(this, void 0, void 0, function() {
+    }, tE.prototype.testSeedMomentToPostRaw = function(e, t) {
+        return e0(this, void 0, void 0, function() {
             var n, i, a;
-            return e0(this, function(s) {
+            return e1(this, function(s) {
                 switch (s.label) {
                     case 0:
                         return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -2385,13 +2386,13 @@
                             }(e.testSeedMomentToPostRequest)
                         }, t)];
                     case 1:
-                        return a = s.sent(), [2, new eQ.VoidApiResponse(a)]
+                        return a = s.sent(), [2, new eX.VoidApiResponse(a)]
                 }
             })
         })
-    }, tj.prototype.testSeedMomentToPost = function() {
-        return e$(this, arguments, void 0, function(e, t) {
-            return void 0 === e && (e = {}), e0(this, function(n) {
+    }, tE.prototype.testSeedMomentToPost = function() {
+        return e0(this, arguments, void 0, function(e, t) {
+            return void 0 === e && (e = {}), e1(this, function(n) {
                 switch (n.label) {
                     case 0:
                         return [4, this.testSeedMomentToPostRaw(e, t)];
@@ -2400,10 +2401,10 @@
                 }
             })
         })
-    }, tj.prototype.testSeedSeedBatchRaw = function(e, t) {
-        return e$(this, void 0, void 0, function() {
+    }, tE.prototype.testSeedSeedBatchRaw = function(e, t) {
+        return e0(this, void 0, void 0, function() {
             var n, i, a;
-            return e0(this, function(s) {
+            return e1(this, function(s) {
                 switch (s.label) {
                     case 0:
                         return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -2420,13 +2421,13 @@
                             }(e.testSeedSeedBatchRequest)
                         }, t)];
                     case 1:
-                        return a = s.sent(), [2, new eQ.VoidApiResponse(a)]
+                        return a = s.sent(), [2, new eX.VoidApiResponse(a)]
                 }
             })
         })
-    }, tj.prototype.testSeedSeedBatch = function() {
-        return e$(this, arguments, void 0, function(e, t) {
-            return void 0 === e && (e = {}), e0(this, function(n) {
+    }, tE.prototype.testSeedSeedBatch = function() {
+        return e0(this, arguments, void 0, function(e, t) {
+            return void 0 === e && (e = {}), e1(this, function(n) {
                 switch (n.label) {
                     case 0:
                         return [4, this.testSeedSeedBatchRaw(e, t)];
@@ -2435,10 +2436,10 @@
                 }
             })
         })
-    }, tj.prototype.testSeedSeedMomentRaw = function(e, t) {
-        return e$(this, void 0, void 0, function() {
+    }, tE.prototype.testSeedSeedMomentRaw = function(e, t) {
+        return e0(this, void 0, void 0, function() {
             var n, i, a;
-            return e0(this, function(s) {
+            return e1(this, function(s) {
                 switch (s.label) {
                     case 0:
                         return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -2456,13 +2457,13 @@
                             }(e.testSeedSeedMomentRequest)
                         }, t)];
                     case 1:
-                        return a = s.sent(), [2, new eQ.VoidApiResponse(a)]
+                        return a = s.sent(), [2, new eX.VoidApiResponse(a)]
                 }
             })
         })
-    }, tj.prototype.testSeedSeedMoment = function() {
-        return e$(this, arguments, void 0, function(e, t) {
-            return void 0 === e && (e = {}), e0(this, function(n) {
+    }, tE.prototype.testSeedSeedMoment = function() {
+        return e0(this, arguments, void 0, function(e, t) {
+            return void 0 === e && (e = {}), e1(this, function(n) {
                 switch (n.label) {
                     case 0:
                         return [4, this.testSeedSeedMomentRaw(e, t)];
@@ -2471,10 +2472,10 @@
                 }
             })
         })
-    }, tj.prototype.testSeedWirePostRaw = function(e, t) {
-        return e$(this, void 0, void 0, function() {
+    }, tE.prototype.testSeedWirePostRaw = function(e, t) {
+        return e0(this, void 0, void 0, function() {
             var n, i, a;
-            return e0(this, function(s) {
+            return e1(this, function(s) {
                 switch (s.label) {
                     case 0:
                         return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -2492,13 +2493,13 @@
                             }(e.testSeedWirePostRequest)
                         }, t)];
                     case 1:
-                        return a = s.sent(), [2, new eQ.VoidApiResponse(a)]
+                        return a = s.sent(), [2, new eX.VoidApiResponse(a)]
                 }
             })
         })
-    }, tj.prototype.testSeedWirePost = function() {
-        return e$(this, arguments, void 0, function(e, t) {
-            return void 0 === e && (e = {}), e0(this, function(n) {
+    }, tE.prototype.testSeedWirePost = function() {
+        return e0(this, arguments, void 0, function(e, t) {
+            return void 0 === e && (e = {}), e1(this, function(n) {
                 switch (n.label) {
                     case 0:
                         return [4, this.testSeedWirePostRaw(e, t)];
@@ -2508,30 +2509,30 @@
             })
         })
     };
-    var tE = e.i(272593);
-    let tk = (0, tE.createClientConfiguration)("content-captures-api", "bedev2"),
-        tP = new tw(tk),
-        tN = new tS(tk),
-        tL = new tA(tk),
-        tR = Object.assign(tP, {
-            momentsGetUsersMoments: e => tN.momentsGetUsersMoments(e),
-            momentsDeleteMoment: e => tN.momentsDeleteMoment(e),
-            momentsDeleteMomentByFeedItem: e => tN.momentsDeleteMomentByFeedItem(e),
-            postsCreatePost: e => tL.postsCreatePost(e),
-            postsCompletePost: e => tL.postsCompletePost(e)
+    var tk = e.i(272593);
+    let tP = (0, tk.createClientConfiguration)("content-captures-api", "bedev2"),
+        tN = new tS(tP),
+        tL = new tA(tP),
+        tR = new tM(tP),
+        tO = Object.assign(tN, {
+            momentsGetUsersMoments: e => tL.momentsGetUsersMoments(e),
+            momentsDeleteMoment: e => tL.momentsDeleteMoment(e),
+            momentsDeleteMomentByFeedItem: e => tL.momentsDeleteMomentByFeedItem(e),
+            postsCreatePost: e => tR.postsCreatePost(e),
+            postsCompletePost: e => tR.postsCompletePost(e)
         });
-    var tO = e.i(773057),
-        tD = e.i(227987),
-        t_ = e.i(889311),
-        tU = e.i(215955),
-        tB = ((t = {}).ListMoments = "listMoments", t.FetchNextPage = "fetchNextPage", t.UploadVideo = "uploadVideo", t.ValidateVideo = "validateVideo", t.PersistLocalVideo = "persistLocalVideo", t.PublishMoment = "publishMoment", t.DeleteMoment = "deleteMoment", t.ResolveExperience = "resolveExperience", t.LoadLocalVideoMedia = "loadLocalVideoMedia", t.EnrichExperienceNames = "enrichExperienceNames", t.CopyShareLink = "copyShareLink", t.ListViolations = "listViolations", t);
-    let tz = (e, t) => {
+    var tD = e.i(773057),
+        t_ = e.i(227987),
+        tU = e.i(889311),
+        tB = e.i(215955),
+        tz = ((t = {}).ListMoments = "listMoments", t.FetchNextPage = "fetchNextPage", t.UploadVideo = "uploadVideo", t.ValidateVideo = "validateVideo", t.PersistLocalVideo = "persistLocalVideo", t.PublishMoment = "publishMoment", t.DeleteMoment = "deleteMoment", t.ResolveExperience = "resolveExperience", t.LoadLocalVideoMedia = "loadLocalVideoMedia", t.EnrichExperienceNames = "enrichExperienceNames", t.CopyShareLink = "copyShareLink", t.ListViolations = "listViolations", t);
+    let tq = (e, t) => {
             let n;
             return null != t.momentId && (e.momentId = t.momentId), null != t.feedItemId && (e.feedItemId = t.feedItemId), null != t.draftId && (e.draftId = t.draftId), null != t.experienceId && (e.experienceId = String(t.experienceId)), null != t.placeId && (e.placeId = String(t.placeId)), null != t.fileCount && (e.fileCount = String(t.fileCount)), null != t.fileSize && (e.fileSize = String(t.fileSize)), null != t.fileType && t.fileType.length > 0 && (e.fileType = t.fileType), null != t.locale && t.locale.length > 0 && (e.locale = t.locale), null != t.inputValue && t.inputValue.length > 0 && (e.inputValue = (n = t.inputValue).length <= 200 ? n : n.slice(0, 200)), null != t.idType && (e.idType = t.idType), null != t.matchedId && (e.matchedId = String(t.matchedId)), null != t.userId && (e.userId = String(t.userId)), null != t.pageCount && (e.pageCount = String(t.pageCount)), null != t.momentCount && (e.momentCount = String(t.momentCount)), null != t.persistedVideoCount && (e.persistedVideoCount = String(t.persistedVideoCount)), null != t.isLocalMoment && (e.isLocalMoment = String(t.isLocalMoment)), null != t.universeIdCount && (e.universeIdCount = String(t.universeIdCount)), e
         },
-        tq = async (e, t) => {
+        tV = async (e, t) => {
             var n;
-            let i = await (0, tD.default)(e),
+            let i = await (0, t_.default)(e),
                 a = e instanceof Error ? e.message : "string" == typeof e ? e : "Unknown error";
             return i ? {
                 reason: null != (n = null != t ? t : i.message) ? n : a,
@@ -2540,11 +2541,11 @@
             } : {
                 reason: null != t ? t : a
             }
-        }, tV = function(e, t) {
+        }, tF = function(e, t) {
             let n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {};
             return {
-                eventName: t_.default.MomentsCreationsError,
-                parameters: tz({
+                eventName: tU.default.MomentsCreationsError,
+                parameters: tq({
                     operation: e,
                     reason: t.reason,
                     ...null != t.httpStatus ? {
@@ -2555,58 +2556,58 @@
                     } : {}
                 }, n)
             }
-        }, tF = async function(e, t) {
+        }, tG = async function(e, t) {
             let n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {},
-                i = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : tU.default,
-                a = await tq(t, n.reason);
-            i.logErrorEvent(tV(e, a, n))
-        }, tG = function(e, t) {
+                i = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : tB.default,
+                a = await tV(t, n.reason);
+            i.logErrorEvent(tF(e, a, n))
+        }, tH = function(e, t) {
             let n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {},
-                i = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : tU.default;
-            tF(e, t, n, i)
-        }, tH = function(e) {
-            let t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
-            return {
-                eventName: t_.default.MomentsCreationsAttempt,
-                parameters: tz({
-                    operation: e
-                }, t)
-            }
+                i = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : tB.default;
+            tG(e, t, n, i)
         }, tK = function(e) {
             let t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
             return {
-                eventName: t_.default.MomentsCreationsSuccess,
-                parameters: tz({
+                eventName: tU.default.MomentsCreationsAttempt,
+                parameters: tq({
                     operation: e
                 }, t)
             }
         }, tW = function(e) {
-            let t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
-                n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : tU.default;
-            n.logClickEvent(tH(e, t))
+            let t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
+            return {
+                eventName: tU.default.MomentsCreationsSuccess,
+                parameters: tq({
+                    operation: e
+                }, t)
+            }
         }, tY = function(e) {
             let t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
-                n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : tU.default;
-            n.logImpressionEvent(tK(e, t))
+                n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : tB.default;
+            n.logClickEvent(tK(e, t))
+        }, tJ = function(e) {
+            let t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
+                n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : tB.default;
+            n.logImpressionEvent(tW(e, t))
         };
-    var tJ = e.i(773595);
-    let tQ = tJ.availableDocsLocales,
-        tX = new Set(tQ),
-        tZ = e => {
+    var tQ = e.i(773595);
+    let tX = tQ.availableDocsLocales,
+        tZ = new Set(tX),
+        t$ = e => {
             let t = e === d.Locale.SimplifiedChineseJV ? d.Locale.SimplifiedChinese : e;
-            return null != t && tX.has(t) ? t : d.Locale.English
+            return null != t && tZ.has(t) ? t : d.Locale.English
         },
-        t$ = e => null != e ? (0, d.toLocaleNativeName)(e) : "-",
-        t0 = {
-            active: eh,
-            captionedassetmoment: eh,
-            live: eh,
-            moderated: ex,
-            pending: ev,
-            published: eh
+        t0 = e => null != e ? (0, d.toLocaleNativeName)(e) : "-",
+        t1 = {
+            active: ev,
+            captionedassetmoment: ev,
+            live: ev,
+            moderated: eg,
+            pending: ef,
+            published: ev
         },
-        t1 = new Date(0).toISOString(),
-        t2 = function(e) {
+        t2 = new Date(0).toISOString(),
+        t4 = function(e) {
             var t, n, i, a, s, o, r;
             let l = arguments.length > 1 && void 0 !== arguments[1] && arguments[1],
                 u = null != (t = e.id) ? t : void 0,
@@ -2618,7 +2619,7 @@
             let p = e.captionedAssetMoment,
                 h = null == (r = e.primaryCta) || null == (o = r.experienceCta) ? void 0 : o.experienceId,
                 v = (e => {
-                    if (null != e && "" !== e) return tJ.StringLocaleMap.get(e.toLowerCase())
+                    if (null != e && "" !== e) return tQ.StringLocaleMap.get(e.toLowerCase())
                 })(null == p ? void 0 : p.videoContentLanguage);
             return {
                 momentId: u,
@@ -2626,13 +2627,13 @@
                 assetId: null == p ? void 0 : p.assetId,
                 description: null != (a = null == p ? void 0 : p.caption) ? a : "",
                 experienceName: "",
-                modifiedAt: t1,
+                modifiedAt: t2,
                 status: (e => {
-                    if (!e) return eh;
-                    let t = t0[e.toLowerCase()];
+                    if (!e) return ev;
+                    let t = t1[e.toLowerCase()];
                     if (t) return t;
                     let n = e.toLowerCase();
-                    return n.includes("pending") ? ev : (n.includes("active") || n.includes("publish") || n.includes("live"), eh)
+                    return n.includes("pending") ? ef : (n.includes("active") || n.includes("publish") || n.includes("live"), ev)
                 })(e.type),
                 universeId: h,
                 ...null != v ? {
@@ -2640,12 +2641,12 @@
                 } : {}
             }
         },
-        t4 = function(e) {
+        t5 = function(e) {
             var t;
             let n = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
-            return (null != (t = e.items) ? t : []).map(e => t2(e, n)).filter(e => null != e)
+            return (null != (t = e.items) ? t : []).map(e => t4(e, n)).filter(e => null != e)
         },
-        t5 = async (e, t) => tR.momentsGetUsersMoments({
+        t6 = async (e, t) => tO.momentsGetUsersMoments({
             targetUserId: e,
             paginationContext: null == t ? void 0 : t.paginationContext,
             count: 25
@@ -2653,12 +2654,12 @@
             let t = [...new Set(e.map(e => e.universeId).filter(e => null != e && e > 0))];
             if (0 === t.length) return e;
             try {
-                tW(tB.EnrichExperienceNames, {
+                tY(tz.EnrichExperienceNames, {
                     universeIdCount: t.length
                 });
                 let {
                     data: n = []
-                } = await tO.default.getUniversesDetails(t), i = new Map(n.filter(e => null != e.id && "string" == typeof e.name && e.name.length > 0).map(e => [e.id, e.name])), a = e.map(e => {
+                } = await tD.default.getUniversesDetails(t), i = new Map(n.filter(e => null != e.id && "string" == typeof e.name && e.name.length > 0).map(e => [e.id, e.name])), a = e.map(e => {
                     var t;
                     let n = null != e.universeId && null != (t = i.get(e.universeId)) ? t : "";
                     return n === e.experienceName ? e : {
@@ -2666,25 +2667,25 @@
                         experienceName: n
                     }
                 });
-                return tY(tB.EnrichExperienceNames, {
+                return tJ(tz.EnrichExperienceNames, {
                     universeIdCount: t.length
                 }), a
             } catch (n) {
-                return tG(tB.EnrichExperienceNames, n, {
+                return tH(tz.EnrichExperienceNames, n, {
                     universeIdCount: t.length
                 }), e
             }
-        }, t6 = async function(e, t) {
+        }, t3 = async function(e, t) {
             var n, i;
             let a = arguments.length > 2 && void 0 !== arguments[2] && arguments[2],
-                s = (null == t ? void 0 : t.paginationContext) != null ? tB.FetchNextPage : tB.ListMoments;
-            tW(s, {
+                s = (null == t ? void 0 : t.paginationContext) != null ? tz.FetchNextPage : tz.ListMoments;
+            tY(s, {
                 userId: e
             });
-            let o = await t5(e, t),
-                r = t4(o, a),
+            let o = await t6(e, t),
+                r = t5(o, a),
                 l = await t8(r);
-            return tY(s, {
+            return tJ(s, {
                 userId: e,
                 pageCount: null != (n = null == t ? void 0 : t.pageNumber) ? n : 1,
                 momentCount: l.length
@@ -2692,7 +2693,7 @@
                 moments: l,
                 paginationContext: null != (i = o.paginationContext) ? i : void 0
             }
-        }, t3 = async e => {
+        }, t7 = async e => {
             let {
                 experienceId: t,
                 experienceName: n,
@@ -2710,13 +2711,13 @@
                 experienceName: n,
                 description: "",
                 modifiedAt: new Date().toISOString(),
-                status: ef,
+                status: ex,
                 ...null != a ? {
                     locale: a
                 } : {}
             }
         };
-    async function t7(e) {
+    async function t9(e) {
         let {
             feedItemId: t,
             momentId: n,
@@ -2724,19 +2725,19 @@
         } = e;
         if (i) {
             if (null == t || "" === t) throw Error("Moment feed item id is required before deleting");
-            await tR.momentsDeleteMomentByFeedItem({
+            await tO.momentsDeleteMomentByFeedItem({
                 feedItemId: t
             });
             return
         }
         if (null == n || "" === n) throw Error("Moment id is required before deleting");
-        await tR.momentsDeleteMoment({
+        await tO.momentsDeleteMoment({
             momentId: n
         })
     }
-    var t9 = e.i(721281),
-        ne = function(e, t) {
-            return (ne = Object.setPrototypeOf || ({
+    var ne = e.i(721281),
+        nt = function(e, t) {
+            return (nt = Object.setPrototypeOf || ({
                 __proto__: []
             }) instanceof Array && function(e, t) {
                 e.__proto__ = t
@@ -2744,15 +2745,15 @@
                 for (var n in t) Object.prototype.hasOwnProperty.call(t, n) && (e[n] = t[n])
             })(e, t)
         },
-        nt = function() {
-            return (nt = Object.assign || function(e) {
+        nn = function() {
+            return (nn = Object.assign || function(e) {
                 for (var t, n = 1, i = arguments.length; n < i; n++)
                     for (var a in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, a) && (e[a] = t[a]);
                 return e
             }).apply(this, arguments)
         };
 
-    function nn(e, t, n, i) {
+    function ni(e, t, n, i) {
         return new(n || (n = Promise))(function(a, s) {
             function o(e) {
                 try {
@@ -2780,7 +2781,7 @@
         })
     }
 
-    function ni(e, t) {
+    function na(e, t) {
         var n, i, a, s = {
                 label: 0,
                 sent: function() {
@@ -2852,12 +2853,12 @@
         }
     }
 
-    function na(e) {
+    function ns(e) {
         return e
     }
     "function" == typeof SuppressedError && SuppressedError;
 
-    function ns(e) {
+    function no(e) {
         var t;
         return null == (t = e) ? t : {
             uid: t.uid,
@@ -2866,12 +2867,12 @@
             name: t.name,
             state: t.state,
             abuse_type_keys: t.abuse_type_keys,
-            decision_time: (0, eQ.exists)(t, "decision_time") ? new Date(t.decision_time) : void 0,
+            decision_time: (0, eX.exists)(t, "decision_time") ? new Date(t.decision_time) : void 0,
             message: t.message
         }
     }
 
-    function no(e) {
+    function nr(e) {
         var t, n, i;
         return null == (t = e) ? t : {
             uid: t.uid,
@@ -2879,60 +2880,60 @@
             update_time: new Date(t.update_time),
             name: t.name,
             user: t.user,
-            content: (0, eQ.exists)(t, "content") ? function(e) {
+            content: (0, eX.exists)(t, "content") ? function(e) {
                 var t, n, i, a, s, o;
                 if (null == e) return e;
                 switch (e.content_type) {
                     case "CONTENT_TYPE_ASSET":
-                        return nt(nt({}, null == (t = e) ? t : {
+                        return nn(nn({}, null == (t = e) ? t : {
                             content_type: t.content_type,
                             asset_id: t.asset_id,
                             name: t.name,
-                            display_name: (0, eQ.exists)(t, "display_name") ? t.display_name : void 0,
-                            description: (0, eQ.exists)(t, "description") ? t.description : void 0,
+                            display_name: (0, eX.exists)(t, "display_name") ? t.display_name : void 0,
+                            description: (0, eX.exists)(t, "description") ? t.description : void 0,
                             asset_type: t.asset_type
                         }), {
                             content_type: "CONTENT_TYPE_ASSET"
                         });
                     case "CONTENT_TYPE_AVATAR":
-                        return nt(nt({}, null == (n = e) ? n : {
+                        return nn(nn({}, null == (n = e) ? n : {
                             content_type: n.content_type
                         }), {
                             content_type: "CONTENT_TYPE_AVATAR"
                         });
                     case "CONTENT_TYPE_BUNDLE":
-                        return nt(nt({}, null == (i = e) ? i : {
+                        return nn(nn({}, null == (i = e) ? i : {
                             content_type: i.content_type,
                             bundle_id: i.bundle_id,
                             name: i.name,
-                            display_name: (0, eQ.exists)(i, "display_name") ? i.display_name : void 0,
-                            description: (0, eQ.exists)(i, "description") ? i.description : void 0,
+                            display_name: (0, eX.exists)(i, "display_name") ? i.display_name : void 0,
+                            description: (0, eX.exists)(i, "description") ? i.description : void 0,
                             bundle_type: i.bundle_type
                         }), {
                             content_type: "CONTENT_TYPE_BUNDLE"
                         });
                     case "CONTENT_TYPE_CHAT":
-                        return nt(nt({}, null == (a = e) ? a : {
+                        return nn(nn({}, null == (a = e) ? a : {
                             content_type: a.content_type,
                             chatlines: a.chatlines,
                             review_time: a.review_time,
                             is_in_app_chat: a.is_in_app_chat,
-                            experience_name: (0, eQ.exists)(a, "experience_name") ? a.experience_name : void 0,
+                            experience_name: (0, eX.exists)(a, "experience_name") ? a.experience_name : void 0,
                             username: a.username
                         }), {
                             content_type: "CONTENT_TYPE_CHAT"
                         });
                     case "CONTENT_TYPE_LOOK":
-                        return nt(nt({}, null == (s = e) ? s : {
+                        return nn(nn({}, null == (s = e) ? s : {
                             content_type: s.content_type,
                             id: s.id,
-                            name: (0, eQ.exists)(s, "name") ? s.name : void 0,
-                            description: (0, eQ.exists)(s, "description") ? s.description : void 0
+                            name: (0, eX.exists)(s, "name") ? s.name : void 0,
+                            description: (0, eX.exists)(s, "description") ? s.description : void 0
                         }), {
                             content_type: "CONTENT_TYPE_LOOK"
                         });
                     case "CONTENT_TYPE_USER_PROFILE":
-                        return nt(nt({}, null == (o = e) ? o : {
+                        return nn(nn({}, null == (o = e) ? o : {
                             content_type: o.content_type
                         }), {
                             content_type: "CONTENT_TYPE_USER_PROFILE"
@@ -2945,22 +2946,22 @@
             appeal_by_time: new Date(t.appeal_by_time),
             remaining_appeal_attempts: t.remaining_appeal_attempts,
             state: t.state,
-            appeals: t.appeals.map(ns),
-            allowed_appeal_types: t.allowed_appeal_types.map(na),
-            evidence: (0, eQ.exists)(t, "evidence") ? null == (n = t.evidence) ? n : {
+            appeals: t.appeals.map(no),
+            allowed_appeal_types: t.allowed_appeal_types.map(ns),
+            evidence: (0, eX.exists)(t, "evidence") ? null == (n = t.evidence) ? n : {
                 type: n.type,
-                elements: (0, eQ.exists)(n, "elements") ? n.elements : void 0,
-                elementsObj: (0, eQ.exists)(n, "elementsObj") ? n.elementsObj : void 0,
+                elements: (0, eX.exists)(n, "elements") ? n.elements : void 0,
+                elementsObj: (0, eX.exists)(n, "elementsObj") ? n.elementsObj : void 0,
                 display_meta: null == (i = n.display_meta) ? i : {
-                    lowercase_key: (0, eQ.exists)(i, "lowercase_key") ? i.lowercase_key : void 0,
-                    capitalized_key: (0, eQ.exists)(i, "capitalized_key") ? i.capitalized_key : void 0,
-                    icon: (0, eQ.exists)(i, "icon") ? i.icon : void 0
+                    lowercase_key: (0, eX.exists)(i, "lowercase_key") ? i.lowercase_key : void 0,
+                    capitalized_key: (0, eX.exists)(i, "capitalized_key") ? i.capitalized_key : void 0,
+                    icon: (0, eX.exists)(i, "icon") ? i.icon : void 0
                 }
             } : void 0,
-            user_note: (0, eQ.exists)(t, "user_note") ? t.user_note : void 0
+            user_note: (0, eX.exists)(t, "user_note") ? t.user_note : void 0
         }
     }
-    var nr = function(e) {
+    var nl = function(e) {
         function t() {
             return null !== e && e.apply(this, arguments) || this
         }
@@ -2970,14 +2971,14 @@
             function n() {
                 this.constructor = e
             }
-            ne(e, t), e.prototype = null === t ? Object.create(t) : (n.prototype = t.prototype, new n)
+            nt(e, t), e.prototype = null === t ? Object.create(t) : (n.prototype = t.prototype, new n)
         }(t, e), t.prototype.listViolationsRaw = function(e, t) {
-            return nn(this, void 0, void 0, function() {
+            return ni(this, void 0, void 0, function() {
                 var n, i, a;
-                return ni(this, function(s) {
+                return na(this, function(s) {
                     switch (s.label) {
                         case 0:
-                            if (null === e.userId || void 0 === e.userId) throw new eQ.RequiredError("userId", "Required parameter requestParameters.userId was null or undefined when calling listViolations.");
+                            if (null === e.userId || void 0 === e.userId) throw new eX.RequiredError("userId", "Required parameter requestParameters.userId was null or undefined when calling listViolations.");
                             return n = {}, void 0 !== e.pageSize && (n.page_size = e.pageSize), void 0 !== e.pageToken && (n.page_token = e.pageToken), i = {}, [4, this.request({
                                 path: "/v1/users/{user_id}/violations".replace("{".concat("user_id", "}"), encodeURIComponent(String(e.userId))),
                                 schemaPath: "/v1/users/{user_id}/violations",
@@ -2986,18 +2987,18 @@
                                 query: n
                             }, t)];
                         case 1:
-                            return a = s.sent(), [2, new eQ.JSONApiResponse(a, function(e) {
+                            return a = s.sent(), [2, new eX.JSONApiResponse(a, function(e) {
                                 return null == e ? e : {
-                                    violations: e.violations.map(no),
-                                    next_page_token: (0, eQ.exists)(e, "next_page_token") ? e.next_page_token : void 0
+                                    violations: e.violations.map(nr),
+                                    next_page_token: (0, eX.exists)(e, "next_page_token") ? e.next_page_token : void 0
                                 }
                             })]
                     }
                 })
             })
         }, t.prototype.listViolations = function(e, t) {
-            return nn(this, void 0, void 0, function() {
-                return ni(this, function(n) {
+            return ni(this, void 0, void 0, function() {
+                return na(this, function(n) {
                     switch (n.label) {
                         case 0:
                             return [4, this.listViolationsRaw(e, t)];
@@ -3009,69 +3010,69 @@
                 })
             })
         }, t
-    }(eQ.BaseAPI);
-    let nl = new class {
+    }(eX.BaseAPI);
+    let nu = new class {
             listViolationsRaw(e) {
                 return this.violationsApi.listViolationsRaw(e)
             }
             constructor() {
-                (0, t9._)(this, "violationsApi", void 0), this.violationsApi = new nr((0, tE.createClientConfiguration)("moderation-appeal-service", "bedev2"))
+                (0, ne._)(this, "violationsApi", void 0), this.violationsApi = new nl((0, tk.createClientConfiguration)("moderation-appeal-service", "bedev2"))
             }
         },
-        nu = e => "object" == typeof e && null !== e && !Array.isArray(e),
-        nd = function(e) {
+        nd = e => "object" == typeof e && null !== e && !Array.isArray(e),
+        nc = function(e) {
             for (var t = arguments.length, n = Array(t > 1 ? t - 1 : 0), i = 1; i < t; i++) n[i - 1] = arguments[i];
             for (let t of n) {
                 let n = e[t];
                 if ("string" == typeof n && "" !== n) return n
             }
         },
-        nc = function(e) {
+        nm = function(e) {
             for (var t = arguments.length, n = Array(t > 1 ? t - 1 : 0), i = 1; i < t; i++) n[i - 1] = arguments[i];
             for (let t of n) {
                 let n = e[t];
-                if (nu(n)) return n
+                if (nd(n)) return n
             }
         },
-        nm = e => {
-            var t;
-            if (!nu(e)) return !1;
-            let n = null != (t = nc(e, "evidence")) ? t : {},
-                i = nc(n, "display_meta", "displayMeta");
-            return null != i && ("Label.Type.Post" === nd(i, "capitalized_key", "capitalizedKey") || "Label.TypeLower.Post" === nd(i, "lowercase_key", "lowercaseKey"))
-        },
         np = e => {
+            var t;
+            if (!nd(e)) return !1;
+            let n = null != (t = nm(e, "evidence")) ? t : {},
+                i = nm(n, "display_meta", "displayMeta");
+            return null != i && ("Label.Type.Post" === nc(i, "capitalized_key", "capitalizedKey") || "Label.TypeLower.Post" === nc(i, "lowercase_key", "lowercaseKey"))
+        },
+        nh = e => {
             var t, n;
-            if (!nu(e)) return null;
-            let i = nd(e, "uid");
+            if (!nd(e)) return null;
+            let i = nc(e, "uid");
             if (null == i) return null;
             let a = null != (t = (e => {
-                    let t = nd(e, "create_time", "createTime");
+                    let t = nc(e, "create_time", "createTime");
                     if (null == t) return;
                     let n = new Date(t).getTime();
                     return Number.isNaN(n) ? void 0 : new Date(n).toISOString()
                 })(e)) ? t : (e => {
                     var t;
-                    let n = null == (t = nc(e, "evidence")) ? void 0 : t.elements;
+                    let n = null == (t = nm(e, "evidence")) ? void 0 : t.elements;
                     if (Array.isArray(n)) {
                         for (let e of n)
-                            if (nu(e) && "Label.UploadTime" === e.labelKey && "number" == typeof e.unix && Number.isFinite(e.unix) && e.unix > 0) return new Date(1e3 * e.unix).toISOString()
+                            if (nd(e) && "Label.UploadTime" === e.labelKey && "number" == typeof e.unix && Number.isFinite(e.unix) && e.unix > 0) return new Date(1e3 * e.unix).toISOString()
                     }
                 })(e),
                 s = (e => {
                     var t, n, i;
-                    let a = null == (t = nc(e, "evidence")) ? void 0 : t.elements;
+                    let a = null == (t = nm(e, "evidence")) ? void 0 : t.elements;
                     if (Array.isArray(a)) {
                         for (let e of a)
-                            if (nu(e) && "Label.MomentDescription" === e.labelKey) {
-                                let t = null != (n = null == (i = nd(e, "text")) ? void 0 : i.trim()) ? n : "";
+                            if (nd(e) && "Label.MomentDescription" === e.labelKey) {
+                                let t = null != (n = null == (i = nc(e, "text")) ? void 0 : i.trim()) ? n : "";
                                 return t.length > 0 ? t : void 0
                             }
                     }
                 })(e);
             return {
                 uid: i,
-                abuseTypeLabelKeys: Object.values(null != (n = nc(e, "abuse_type_keys", "abuseTypeKeys")) ? n : {}).filter(e => "string" == typeof e && "" !== e),
+                abuseTypeLabelKeys: Object.values(null != (n = nm(e, "abuse_type_keys", "abuseTypeKeys")) ? n : {}).filter(e => "string" == typeof e && "" !== e),
                 ...null != a ? {
                     uploadedAt: a
                 } : {},
@@ -3080,27 +3081,27 @@
                 } : {}
             }
         },
-        nh = async e => {
+        nv = async e => {
             let t, n = [];
             for (let i = 0; i < 20; i += 1) {
-                let i = await nl.listViolationsRaw({
+                let i = await nu.listViolationsRaw({
                         userId: String(e),
                         pageSize: 10,
                         pageToken: t
                     }),
                     a = await i.raw.json();
-                if (!nu(a)) break;
+                if (!nd(a)) break;
                 for (let e of Array.isArray(a.violations) ? a.violations : []) {
-                    if (!nm(e)) continue;
-                    let t = np(e);
+                    if (!np(e)) continue;
+                    let t = nh(e);
                     null != t && n.push(t)
                 }
-                if (null == (t = nd(a, "next_page_token", "nextPageToken"))) break
+                if (null == (t = nc(a, "next_page_token", "nextPageToken"))) break
             }
             return n
         };
-    var nv = e.i(408068);
-    async function nf(e) {
+    var nf = e.i(408068);
+    async function nx(e) {
         let t = URL.createObjectURL(e),
             n = document.createElement("video");
         try {
@@ -3120,16 +3121,16 @@
             URL.revokeObjectURL(t), n.removeAttribute("src"), n.load()
         }
     }
-    let nx = "influencerVideo";
-    async function ng(e) {
-        let t = nv.md5.create();
+    let ng = "influencerVideo";
+    async function ny(e) {
+        let t = nf.md5.create();
         for (let n = 0; n < e.size; n += 5242880) {
             let i = Math.min(n + 5242880, e.size);
             t.update(await e.slice(n, i).arrayBuffer())
         }
         return t.hex()
     }
-    async function ny(e, t) {
+    async function nb(e, t) {
         let n = [];
         for (let [s, o] of e.entries()) {
             var i, a;
@@ -3153,7 +3154,7 @@
         }
         return n
     }
-    async function nb(e) {
+    async function nT(e) {
         var t, n, i, a, s, o;
         let {
             moment: r,
@@ -3161,10 +3162,10 @@
             displayName: u,
             uiLocale: d,
             sendVideoContentLanguage: c = !0
-        } = e, m = await nf(l), p = await ng(l), h = {
+        } = e, m = await nx(l), p = await ny(l), h = {
             caption: r.description,
             ...c ? {
-                contentLanguage: (null != (o = r.locale) ? o : tZ(d)).toLowerCase()
+                contentLanguage: (null != (o = r.locale) ? o : t$(d)).toLowerCase()
             } : {},
             primaryCta: {
                 experience: {
@@ -3172,7 +3173,7 @@
                     placeId: r.rootPlaceId
                 }
             }
-        }, v = await tR.postsCreatePost({
+        }, v = await tO.postsCreatePost({
             postsCreatePostRequest: {
                 common: h,
                 influencerVideoPost: {
@@ -3196,15 +3197,15 @@
             }
         }), f = null == (i = v.post) ? void 0 : i.operationId;
         if (null == f || "" === f) throw Error("Publish operation id is missing from the response");
-        let x = null != (t = null == (a = v.uploads) ? void 0 : a.find(e => e.role === nx)) ? t : null == (s = v.uploads) ? void 0 : s[0];
+        let x = null != (t = null == (a = v.uploads) ? void 0 : a.find(e => e.role === ng)) ? t : null == (s = v.uploads) ? void 0 : s[0];
         if (!(null == x ? void 0 : x.operationId)) throw Error("Create post response is missing the video upload target");
         let g = null != (n = x.uploadUrls) ? n : [];
         if (0 === g.length) throw Error("Create post response did not return any upload URLs");
-        let y = await ny(g, l);
-        return await tR.postsCompletePost({
+        let y = await nb(g, l);
+        return await tO.postsCompletePost({
             postsCompletePostRequest: {
                 uploads: [{
-                    role: nx,
+                    role: ng,
                     operationId: x.operationId,
                     parts: y
                 }]
@@ -3213,21 +3214,21 @@
             operationId: f
         }
     }
-    async function nT(e) {
+    async function nI(e) {
         if (!e.moment.experienceId) throw Error("Moment experience is required before publishing");
         if (0 === e.file.size) throw Error("Moment video file must not be empty");
-        return nb(e)
+        return nT(e)
     }
-    var nI = eQ;
-    let nC = "/v2/get-or-create-static";
-    class nw extends nI.BaseAPI {
+    var nC = eX;
+    let nw = "/v2/get-or-create-static";
+    class nS extends nC.BaseAPI {
         async createStaticLink(e) {
             let t;
             if ("" === e.feedItemId) throw Error("Moment feed item id is required before creating a share link");
             let n = await this.request({
                     method: "POST",
-                    path: nC,
-                    schemaPath: nC,
+                    path: nw,
+                    schemaPath: nw,
                     headers: {
                         "Content-Type": "application/json"
                     },
@@ -3242,7 +3243,7 @@
                         })
                     }
                 }),
-                i = await new nI.JSONApiResponse(n).value();
+                i = await new nC.JSONApiResponse(n).value();
             if ("string" != typeof i.link || 0 === i.link.length) throw Error("Moments share-link response did not contain a link");
             try {
                 t = new URL(i.link)
@@ -3253,75 +3254,75 @@
             return i.link
         }
     }
-    let nS = new nw((0, tE.createClientConfiguration)("deeplinks", "bedev2")),
-        nA = () => {
+    let nA = new nS((0, tk.createClientConfiguration)("deeplinks", "bedev2")),
+        nM = () => {
             let {
                 ready: e,
                 value: t
             } = (0, u.useFlag)(I.isMomentsFeedIdEnabled);
             return e && null != t && t
         },
-        nM = () => {
+        nj = () => {
             let {
                 ready: e,
                 value: t
             } = (0, u.useFlag)(I.isMomentsUploadLanguageSelectEnabled);
             return e && null != t && t
         },
-        nj = e => {
+        nE = e => {
             var t, n;
-            return e.status === ef ? e.draftId : null != (t = null != (n = e.feedItemId) ? n : e.momentId) ? t : ""
+            return e.status === ex ? e.draftId : null != (t = null != (n = e.feedItemId) ? n : e.momentId) ? t : ""
         },
-        nE = e => ["momentsCreations", e],
-        nk = function(e) {
+        nk = e => ["momentsCreations", e],
+        nP = function(e) {
             let t = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
-            return [...nE(e), t]
+            return [...nk(e), t]
         },
-        nP = () => {
+        nN = () => {
             let {
                 ready: e,
                 value: t
             } = (0, u.useFlag)(I.isMomentsModeratedTabEnabled);
             return e && null != t && t
         },
-        nN = () => {
+        nL = () => {
             let e, t, [{
                     momentStatus: n
                 }, i] = (0, en.useQueryParams)(["momentStatus"]),
-                s = (0, eH.useQueryClient)(),
+                s = (0, eK.useQueryClient)(),
                 {
                     user: o
                 } = (0, V.useAuthentication)(),
-                r = nP() ? ey : eg;
+                r = nN() ? eb : ey;
             return {
-                statusTab: (e = null == n ? void 0 : Array.isArray(n) ? n[0] : n, (t = r.find(t => t === e)) || ef),
+                statusTab: (e = null == n ? void 0 : Array.isArray(n) ? n[0] : n, (t = r.find(t => t === e)) || ex),
                 statusTabs: r,
                 setStatusTab: (0, a.useCallback)(e => {
                     i({
                         momentStatus: e
-                    }), e === eh && s.invalidateQueries({
-                        queryKey: nE(null == o ? void 0 : o.id)
+                    }), e === ev && s.invalidateQueries({
+                        queryKey: nk(null == o ? void 0 : o.id)
                     })
                 }, [s, i, null == o ? void 0 : o.id])
             }
         },
-        nL = async (e, t, n, i) => {
+        nR = async (e, t, n, i) => {
             let a = {
                 draftId: t,
                 fileSize: n.size,
                 fileType: n.type
             };
-            tW(tB.PersistLocalVideo, a);
+            tY(tz.PersistLocalVideo, a);
             try {
                 let s, o, {
                     evictedMediaDraftIds: r
-                } = await eP(e, t, n, (s = eV(window.localStorage.getItem(em(e))), o = new Set(i.map(e => e.draftId)), [...i, ...s.filter(e => !o.has(e.draftId))]));
-                return tY(tB.PersistLocalVideo, a), {
+                } = await eN(e, t, n, (s = eF(window.localStorage.getItem(ep(e))), o = new Set(i.map(e => e.draftId)), [...i, ...s.filter(e => !o.has(e.draftId))]));
+                return tJ(tz.PersistLocalVideo, a), {
                     hasLocalVideo: !0,
                     storageEvictedMediaDraftIds: r
                 }
             } catch (e) {
-                return tG(tB.PersistLocalVideo, e, {
+                return tH(tz.PersistLocalVideo, e, {
                     draftId: t,
                     fileSize: n.size,
                     fileType: n.type
@@ -3331,8 +3332,8 @@
                 }
             }
         };
-    var nR = e.i(137785);
-    let nO = (0, d.withTranslation)(e => {
+    var nO = e.i(137785);
+    let nD = (0, d.withTranslation)(e => {
         let {
             experience: t,
             hideTitle: n = !1,
@@ -3347,7 +3348,7 @@
                 children: [(0, i.jsx)("span", {
                     className: "text-body-small content-muted",
                     children: s("CreateMomentModal.Preview.Title")
-                }), a && (0, i.jsx)(er.Button, {
+                }), a && (0, i.jsx)(el.Button, {
                     variant: "Link",
                     size: "Small",
                     onClick: a,
@@ -3355,7 +3356,7 @@
                 })]
             }), (0, i.jsx)("div", {
                 className: "padding-medium radius-medium bg-surface-200 width-full",
-                children: (0, i.jsx)(nR.default, {
+                children: (0, i.jsx)(nO.default, {
                     disableLink: !0,
                     target: t,
                     targetType: "Experience",
@@ -3364,21 +3365,21 @@
             })]
         })
     }, [ei.TranslationNamespace.Creations]);
-    var nD = e.i(756199),
-        n_ = e.i(392782);
-    let nU = "UniverseId",
-        nB = "PlaceId",
-        nz = /(?:https?:\/\/)?create\.roblox\.com\/dashboard\/creations\/experiences\/(\d+)/,
-        nq = /(?:https?:\/\/)?(?:www\.)?roblox\.com(?:\/[A-Za-z]{2}(?:-[A-Za-z0-9]{2,3})?)?\/games\/(\d+)/,
-        nV = /^\d+$/,
-        nF = [{
+    var n_ = e.i(756199),
+        nU = e.i(392782);
+    let nB = "UniverseId",
+        nz = "PlaceId",
+        nq = /(?:https?:\/\/)?create\.roblox\.com\/dashboard\/creations\/experiences\/(\d+)/,
+        nV = /(?:https?:\/\/)?(?:www\.)?roblox\.com(?:\/[A-Za-z]{2}(?:-[A-Za-z0-9]{2,3})?)?\/games\/(\d+)/,
+        nF = /^\d+$/,
+        nG = [{
             regex: /(?:https?:\/\/)?create\.sitetest\d\.robloxlabs\.com\/dashboard\/creations\/experiences\/(\d+)/,
-            idType: nU
+            idType: nB
         }, {
             regex: /(?:https?:\/\/)?(?:www\.)?sitetest\d\.robloxlabs\.com(?:\/[A-Za-z]{2}(?:-[A-Za-z0-9]{2,3})?)?\/games\/(\d+)/,
-            idType: nB
+            idType: nz
         }],
-        nG = (0, d.withTranslation)(e => {
+        nH = (0, d.withTranslation)(e => {
             let {
                 onExperienceResolved: t,
                 isDisabled: n = !1
@@ -3388,14 +3389,14 @@
                 ready: o,
                 value: r
             } = (0, u.useFlag)(I.isMomentsSitetestUrlParsingEnabled), [l, c] = (0, a.useState)(""), [m, p] = (0, a.useState)(!1), [h, v] = (0, a.useState)(), f = (0, a.useMemo)(() => [{
-                regex: nz,
-                idType: nU
-            }, {
                 regex: nq,
                 idType: nB
-            }, ...o && null != r && r ? nF : [], {
+            }, {
                 regex: nV,
-                idType: nU
+                idType: nz
+            }, ...o && null != r && r ? nG : [], {
+                regex: nF,
+                idType: nB
             }], [r, o]), x = (0, a.useMemo)(() => l.trim().length > 0 && f.some(e => {
                 let {
                     regex: t
@@ -3411,20 +3412,20 @@
                         return t.test(u)
                     });
                 if (!d) return;
-                let m = d.idType === nU && nV.test(u) ? Number(u) : Number(null == (e = d.regex.exec(u)) ? void 0 : e[1]);
+                let m = d.idType === nB && nF.test(u) ? Number(u) : Number(null == (e = d.regex.exec(u)) ? void 0 : e[1]);
                 if (!m || !Number.isFinite(m)) return;
                 let h = {
                     inputValue: u,
                     idType: d.idType,
                     matchedId: m
                 };
-                p(!0), v(void 0), tW(tB.ResolveExperience, h);
+                p(!0), v(void 0), tY(tz.ResolveExperience, h);
                 try {
                     let e;
-                    if (d.idType === nB) {
-                        let t = null == (r = (await n_.default.multigetPlaceDetails([m]))[0]) ? void 0 : r.universeId;
+                    if (d.idType === nz) {
+                        let t = null == (r = (await nU.default.multigetPlaceDetails([m]))[0]) ? void 0 : r.universeId;
                         if (!t) {
-                            tG(tB.ResolveExperience, "Experience not found", {
+                            tH(tz.ResolveExperience, "Experience not found", {
                                 ...h,
                                 placeId: m,
                                 reason: "ExperienceNotFound"
@@ -3433,9 +3434,9 @@
                         }
                         e = t
                     } else e = m;
-                    let l = null == (o = (await n_.default.getDetails([e])).data) ? void 0 : o[0];
+                    let l = null == (o = (await nU.default.getDetails([e])).data) ? void 0 : o[0];
                     if (!(null == l ? void 0 : l.id)) {
-                        tG(tB.ResolveExperience, "Experience not found", {
+                        tH(tz.ResolveExperience, "Experience not found", {
                             ...h,
                             experienceId: e,
                             reason: "ExperienceNotFound"
@@ -3447,16 +3448,16 @@
                         name: null != (n = l.name) ? n : void 0,
                         description: null != (i = l.description) ? i : void 0,
                         rootPlaceId: null != (a = l.rootPlaceId) ? a : void 0
-                    }), tY(tB.ResolveExperience, {
+                    }), tJ(tz.ResolveExperience, {
                         ...h,
                         experienceId: l.id,
-                        placeId: d.idType === nB ? m : void 0
+                        placeId: d.idType === nz ? m : void 0
                     }), c("")
                 } catch (e) {
-                    tG(tB.ResolveExperience, e, {
+                    tH(tz.ResolveExperience, e, {
                         ...h,
-                        placeId: d.idType === nB ? m : void 0,
-                        experienceId: d.idType === nU ? m : void 0
+                        placeId: d.idType === nz ? m : void 0,
+                        experienceId: d.idType === nB ? m : void 0
                     }), v(s("Error.ExperienceNotFound"))
                 } finally {
                     p(!1)
@@ -3468,7 +3469,7 @@
                 className: "flex flex-row gap-x-medium items-end width-full",
                 children: [(0, i.jsx)("div", {
                     className: "grow-1 min-width-0",
-                    children: (0, i.jsx)(nD.TextInput, {
+                    children: (0, i.jsx)(n_.TextInput, {
                         label: s("CreateMomentModal.ExperienceInput.Label"),
                         placeholder: s("CreateMomentModal.ExperienceInput.Placeholder"),
                         value: l,
@@ -3481,7 +3482,7 @@
                         isDisabled: n || m,
                         size: "Medium"
                     })
-                }), (0, i.jsx)(er.Button, {
+                }), (0, i.jsx)(el.Button, {
                     variant: "Emphasis",
                     size: "Medium",
                     className: h ? "margin-bottom-[22px]" : void 0,
@@ -3494,9 +3495,9 @@
                 })]
             })
         }, [ei.TranslationNamespace.Creations, ei.TranslationNamespace.Controls]);
-    var nH = e.i(222298),
-        nK = e.i(732749);
-    let nW = (0, d.withTranslation)(e => {
+    var nK = e.i(222298),
+        nW = e.i(732749);
+    let nY = (0, d.withTranslation)(e => {
         let {
             value: t,
             onChange: n,
@@ -3504,12 +3505,12 @@
         } = e, {
             translate: o
         } = (0, d.useTranslation)(), r = o("CreateMomentModal.LanguageInput.Label"), l = o("CreateMomentModal.LanguageInput.Placeholder"), u = (0, a.useCallback)(e => {
-            tX.has(e) && n(e)
+            tZ.has(e) && n(e)
         }, [n]);
         return (0, i.jsx)("div", {
             className: "width-full",
             "data-testid": "moments-language-select",
-            children: (0, i.jsx)(nH.Dropdown, {
+            children: (0, i.jsx)(nK.Dropdown, {
                 className: "width-full [&_.content-system-alert]:text-caption-medium",
                 size: "Medium",
                 label: r,
@@ -3518,9 +3519,9 @@
                 value: t,
                 isDisabled: s,
                 onValueChange: u,
-                children: (0, i.jsx)(nK.Menu, {
-                    children: (0, i.jsx)(nK.MenuSection, {
-                        children: tQ.map(e => (0, i.jsx)(nK.MenuItem, {
+                children: (0, i.jsx)(nW.Menu, {
+                    children: (0, i.jsx)(nW.MenuSection, {
+                        children: tX.map(e => (0, i.jsx)(nW.MenuItem, {
                             value: e,
                             title: (0, d.toLocaleNativeName)(e),
                             trailing: t === e && (0, i.jsx)(E.Icon, {
@@ -3533,16 +3534,16 @@
             })
         })
     }, [ei.TranslationNamespace.Creations]);
-    var nY = e.i(321211);
-    let nJ = ["mp4", "mov"],
-        nQ = ["video/mp4", "video/quicktime"];
-    var nX = ((n = {}).FileTooBig = "FileTooBig", n.FileWrongType = "FileWrongType", n.DurationExceeded = "DurationExceeded", n.ResolutionExceeded = "ResolutionExceeded", n.MetadataUnavailable = "MetadataUnavailable", n);
-    let nZ = e => {
+    var nJ = e.i(321211);
+    let nQ = ["mp4", "mov"],
+        nX = ["video/mp4", "video/quicktime"];
+    var nZ = ((n = {}).FileTooBig = "FileTooBig", n.FileWrongType = "FileWrongType", n.DurationExceeded = "DurationExceeded", n.ResolutionExceeded = "ResolutionExceeded", n.MetadataUnavailable = "MetadataUnavailable", n);
+    let n$ = e => {
             var t, n;
             let i;
-            return e.size > 0xc800000 ? "FileTooBig" : null != (i = null == (n = (t = e).name.split(".").pop()) ? void 0 : n.toLowerCase()) && nJ.some(e => e === i) && ("" === t.type || nQ.includes(t.type)) ? null : "FileWrongType"
+            return e.size > 0xc800000 ? "FileTooBig" : null != (i = null == (n = (t = e).name.split(".").pop()) ? void 0 : n.toLowerCase()) && nQ.some(e => e === i) && ("" === t.type || nX.includes(t.type)) ? null : "FileWrongType"
         },
-        n$ = async e => {
+        n0 = async e => {
             try {
                 let t = await new Promise((t, n) => {
                     let i = document.createElement("video");
@@ -3575,11 +3576,11 @@
             } catch (e) {
                 return "MetadataUnavailable"
             }
-        }, n0 = async e => {
+        }, n1 = async e => {
             let t = [],
                 n = [];
             for (let i of e) {
-                let e = nZ(i);
+                let e = n$(i);
                 if (null != e) {
                     n.push({
                         file: i,
@@ -3587,7 +3588,7 @@
                     });
                     continue
                 }
-                let a = await n$(i);
+                let a = await n0(i);
                 if (null != a) {
                     n.push({
                         file: i,
@@ -3601,7 +3602,7 @@
                 validFiles: t,
                 errors: n
             }
-        }, n1 = nJ.map(e => e.toUpperCase()).join("/"), n2 = (0, d.withTranslation)(e => {
+        }, n2 = nQ.map(e => e.toUpperCase()).join("/"), n4 = (0, d.withTranslation)(e => {
             let {
                 hasSelectedExperience: t,
                 hasSelectedLanguage: n,
@@ -3623,13 +3624,13 @@
                             let {
                                 validFiles: e,
                                 errors: t
-                            } = await n0(s);
+                            } = await n1(s);
                             if (t.length > 0) {
                                 for (let {
                                         file: e,
                                         reason: n
                                     }
-                                    of t) tG(tB.ValidateVideo, n, {
+                                    of t) tH(tz.ValidateVideo, n, {
                                     fileSize: e.size,
                                     fileType: e.type,
                                     reason: n
@@ -3641,24 +3642,24 @@
                                     return t
                                 }), [...new Set(a)].map(e => ((e, t) => {
                                     switch (t) {
-                                        case nX.FileTooBig:
+                                        case nZ.FileTooBig:
                                             return e("CreateMomentModal.Error.FileTooBigMegabytes", {
                                                 maxFileSizeMB: new Intl.NumberFormat().format(200)
                                             });
-                                        case nX.FileWrongType:
+                                        case nZ.FileWrongType:
                                             return e("CreateMomentModal.Error.FileWrongType", {
-                                                formats: n1
+                                                formats: n2
                                             });
-                                        case nX.DurationExceeded:
+                                        case nZ.DurationExceeded:
                                             return e("CreateMomentModal.Error.DurationExceeded", {
                                                 maxDurationMinutes: String(5)
                                             });
-                                        case nX.ResolutionExceeded:
+                                        case nZ.ResolutionExceeded:
                                             return e("CreateMomentModal.Error.ResolutionExceeded", {
                                                 maxWidth: String(4096),
                                                 maxHeight: String(2160)
                                             });
-                                        case nX.MetadataUnavailable:
+                                        case nZ.MetadataUnavailable:
                                             return e("CreateMomentModal.Error.MetadataUnavailable");
                                         default:
                                             throw Error("Unhandled Moments video reject reason: ".concat(String(t)))
@@ -3680,7 +3681,7 @@
                 A = !g || o || c;
             return (0, i.jsx)("div", {
                 className: "flex flex-col gap-y-small width-full",
-                children: (0, i.jsx)(nY.default, {
+                children: (0, i.jsx)(nJ.default, {
                     accept: "video/mp4,video/quicktime,.mp4,.mov",
                     multiple: !0,
                     size: 0xc800000,
@@ -3695,7 +3696,7 @@
                         onDragOver: a,
                         onDragLeave: r,
                         className: "flex flex-col items-center justify-center gap-y-small padding-xlarge radius-medium stroke-standard width-full min-height-250 ".concat(f ? "bg-shift-200" : "bg-surface-100"),
-                        children: [(0, i.jsx)(er.Button, {
+                        children: [(0, i.jsx)(el.Button, {
                             variant: "Standard",
                             size: "Medium",
                             type: "button",
@@ -3720,20 +3721,20 @@
                     })
                 })
             })
-        }, [ei.TranslationNamespace.Creations]), n4 = (0, d.withTranslation)(e => {
+        }, [ei.TranslationNamespace.Creations]), n5 = (0, d.withTranslation)(e => {
             let {
                 open: t,
                 onOpenChange: n,
                 onMomentUploaded: s
             } = e, {
                 addMoments: o
-            } = eG(), {
+            } = eH(), {
                 setStatusTab: r
-            } = nN(), l = nM(), {
+            } = nL(), l = nj(), {
                 translate: u
             } = (0, d.useTranslation)(), {
                 locale: c
-            } = (0, d.useLocalization)(), m = tZ(c), [p, h] = (0, a.useState)(), [v, f] = (0, a.useState)(), x = null != v ? v : m, [g, y] = (0, a.useState)([]), [b, T] = (0, a.useState)([]), I = (0, a.useRef)(0), {
+            } = (0, d.useLocalization)(), m = t$(c), [p, h] = (0, a.useState)(), [v, f] = (0, a.useState)(), x = null != v ? v : m, [g, y] = (0, a.useState)([]), [b, T] = (0, a.useState)([]), I = (0, a.useRef)(0), {
                 uploadVideos: C,
                 isUploading: w
             } = (() => {
@@ -3751,7 +3752,7 @@
                         n(!0), s(0);
                         try {
                             var l;
-                            let e = await t3({
+                            let e = await t7({
                                     experienceId: i.id,
                                     experienceName: null != (l = i.name) ? l : "",
                                     rootPlaceId: i.rootPlaceId,
@@ -3763,7 +3764,7 @@
                                 }),
                                 {
                                     hasLocalVideo: t
-                                } = await nL(r, e.draftId, o, []);
+                                } = await nR(r, e.draftId, o, []);
                             return {
                                 ...e,
                                 hasLocalVideo: t
@@ -3789,7 +3790,7 @@
                                 t = [];
                             for (let n of o) {
                                 var l;
-                                let o = await t3({
+                                let o = await t7({
                                         experienceId: i.id,
                                         experienceName: null != (l = i.name) ? l : "",
                                         rootPlaceId: i.rootPlaceId,
@@ -3802,7 +3803,7 @@
                                     {
                                         hasLocalVideo: u,
                                         storageEvictedMediaDraftIds: d
-                                    } = await nL(r, o.draftId, n, e);
+                                    } = await nR(r, o.draftId, n, e);
                                 t.push(...d), e.push({
                                     ...o,
                                     hasLocalVideo: u
@@ -3839,7 +3840,7 @@
                 var t, n, i;
                 if (0 === e.length || (null == p ? void 0 : p.id) == null || l && null == x || w) return void y(e);
                 let a = I.current + 1;
-                I.current = a, y(e), tW(tB.UploadVideo, {
+                I.current = a, y(e), tY(tz.UploadVideo, {
                     experienceId: p.id,
                     fileCount: e.length,
                     fileSize: e.reduce((e, t) => e + t.size, 0),
@@ -3864,7 +3865,7 @@
                         s(e)
                     }) : o(t, {
                         storageEvictedMediaDraftIds: i
-                    }), tY(tB.UploadVideo, {
+                    }), tJ(tz.UploadVideo, {
                         experienceId: p.id,
                         fileCount: t.length,
                         persistedVideoCount: t.filter(e => e.hasLocalVideo).length,
@@ -3873,10 +3874,10 @@
                         ...l ? {
                             locale: x
                         } : {}
-                    }), r(ef), A()
+                    }), r(ex), A()
                 } catch (t) {
                     if (I.current !== a) return;
-                    tG(tB.UploadVideo, t, {
+                    tH(tz.UploadVideo, t, {
                         experienceId: p.id,
                         fileCount: e.length,
                         fileSize: e.reduce((e, t) => e + t.size, 0),
@@ -3887,23 +3888,23 @@
                     }), y([])
                 }
             }, [o, A, l, w, s, p, x, r, C]), R = u("CreateMomentModal.Title"), O = b[0], D = b.length > 1 ? b.slice(1).join(" ") : void 0;
-            return (0, i.jsx)(eu.Dialog, {
+            return (0, i.jsx)(ed.Dialog, {
                 open: t,
                 onOpenChange: k,
                 size: "Large",
                 isModal: !0,
                 hasCloseAffordance: !0,
                 closeLabel: u("Action.Close"),
-                children: (0, i.jsx)(eu.DialogContent, {
+                children: (0, i.jsx)(ed.DialogContent, {
                     className: "flex flex-col min-width-0 width-[min(720px,95vw)] !max-width-[min(720px,95vw)]",
-                    children: (0, i.jsxs)(eu.DialogBody, {
+                    children: (0, i.jsxs)(ed.DialogBody, {
                         className: "flex flex-col gap-y-medium",
-                        children: [(0, i.jsx)(eu.DialogTitle, {
+                        children: [(0, i.jsx)(ed.DialogTitle, {
                             className: "text-heading-small content-emphasis margin-none",
                             children: R
                         }), null != O ? (0, i.jsx)("div", {
                             className: "width-full margin-top-small padding-bottom-small",
-                            children: (0, i.jsx)(el.Alert, {
+                            children: (0, i.jsx)(eu.Alert, {
                                 className: "width-full",
                                 variant: "Feedback",
                                 severity: "Error",
@@ -3922,17 +3923,17 @@
                                     }) : null]
                                 })
                             })
-                        }) : null, p ? (0, i.jsx)(nO, {
+                        }) : null, p ? (0, i.jsx)(nD, {
                             experience: p,
                             onChangeExperience: E
-                        }) : (0, i.jsx)(nG, {
+                        }) : (0, i.jsx)(nH, {
                             onExperienceResolved: M,
                             isDisabled: w
-                        }), l ? (0, i.jsx)(nW, {
+                        }), l ? (0, i.jsx)(nY, {
                             value: x,
                             onChange: j,
                             isDisabled: w
-                        }) : null, (0, i.jsx)(n2, {
+                        }) : null, (0, i.jsx)(n4, {
                             hasSelectedExperience: (null == p ? void 0 : p.id) != null,
                             hasSelectedLanguage: !l || null != x,
                             selectedFiles: g,
@@ -3945,24 +3946,24 @@
             })
         }, [ei.TranslationNamespace.Creations, ei.TranslationNamespace.Controls]);
 
-    function n5() {
+    function n6() {
         let e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
-        (0, ed.openDialog)({
-            component: n4,
+        (0, ec.openDialog)({
+            component: n5,
             props: e,
             options: {
                 mode: "standalone"
             }
         })
     }
-    let n8 = () => n5(),
-        n6 = () => {
+    let n8 = () => n6(),
+        n3 = () => {
             let {
                 translate: e
             } = (0, d.useTranslation)();
             return (0, i.jsx)("div", {
                 className: "flex max-width-full relative max-large:padding-top-[24px]",
-                children: (0, i.jsx)(er.Button, {
+                children: (0, i.jsx)(el.Button, {
                     variant: "Emphasis",
                     size: "Large",
                     type: "button",
@@ -3971,10 +3972,10 @@
                 })
             })
         };
-    var n3 = e.i(420028);
-    let n7 = e => {
+    var n7 = e.i(420028);
+    let n9 = e => {
             let {
-                tabs: t = eg,
+                tabs: t = ey,
                 selected: n,
                 onChange: a,
                 labels: s,
@@ -3985,7 +3986,7 @@
                 "data-testid": "moments-status-filter-pills",
                 role: "radiogroup",
                 "aria-label": o,
-                children: t.map(e => (0, i.jsx)(n3.Chip, {
+                children: t.map(e => (0, i.jsx)(n7.Chip, {
                     "data-testid": "moments-status-pill-".concat(e),
                     isChecked: n === e,
                     size: "Medium",
@@ -3996,21 +3997,21 @@
                 }, e))
             })
         },
-        n9 = () => {
+        ie = () => {
             let {
                 translate: e
             } = (0, d.useTranslation)(), {
                 statusTab: t,
                 statusTabs: n,
                 setStatusTab: s
-            } = nN(), o = (0, a.useMemo)(() => ({
-                [eh]: e("MomentsTable.Pills.Active"),
-                [ef]: e("MomentsTable.Pills.Draft"),
-                [ex]: e("MomentsTable.Pills.Moderated")
+            } = nL(), o = (0, a.useMemo)(() => ({
+                [ev]: e("MomentsTable.Pills.Active"),
+                [ex]: e("MomentsTable.Pills.Draft"),
+                [eg]: e("MomentsTable.Pills.Moderated")
             }), [e]);
             return (0, i.jsx)("div", {
                 className: "flex max-width-full relative max-large:padding-top-[24px]",
-                children: (0, i.jsx)(n7, {
+                children: (0, i.jsx)(n9, {
                     groupLabel: e("MomentsTable.Header.Status"),
                     tabs: n,
                     labels: o,
@@ -4019,9 +4020,9 @@
                 })
             })
         };
-    var ie = e.i(253536),
-        it = e.i(418564);
-    let ii = e => {
+    var it = e.i(253536),
+        ii = e.i(418564);
+    let ia = e => {
         var t, n, a;
         let {
             data: s
@@ -4031,26 +4032,26 @@
         if (!r) return null;
         let l = null != (t = null == s || null == (a = s.creationAccessMetadata) ? void 0 : a.daysToUnblock) ? t : 0,
             u = r && -1 === l;
-        return (0, i.jsx)(it.default, {
+        return (0, i.jsx)(ii.default, {
             alertTitle: u ? o("Heading.PermanentlyCreationBanned") : o("Heading.TemporaryCreationBanned", {
                 days: l.toString()
             }),
             alertDescription: o(u ? "Description.PermanentlyCreationBanned" : "Description.TemporaryCreationBanned"),
             severity: "warning",
-            externalLink: ie.MARKETPLACE_POLICY,
+            externalLink: it.MARKETPLACE_POLICY,
             linkLabel: o("Label.MarketplacePolicy"),
             allowCloseDialog: !1
         })
     };
-    var ia = e.i(416504),
-        is = e.i(401631),
-        io = e.i(940685),
-        ir = e.i(95063),
-        il = e.i(695763),
-        iu = e.i(756568),
-        id = e.i(131385),
-        ic = e.i(643093);
-    let im = () => {
+    var is = e.i(416504),
+        io = e.i(401631),
+        ir = e.i(940685),
+        il = e.i(95063),
+        iu = e.i(695763),
+        id = e.i(756568),
+        ic = e.i(131385),
+        im = e.i(643093);
+    let ip = () => {
         let {
             translate: e
         } = (0, d.useTranslation)(), [{
@@ -4058,7 +4059,7 @@
         }, n] = (0, en.useQueryParams)(["activeTab", "filterIndex"]), {
             l1Options: s,
             activeL1Key: o
-        } = (0, id.default)(!0), r = (0, x.isAllAssetTypesActiveTab)(t), l = (0, x.isAvatarLooksActiveTab)(t), u = (0, a.useCallback)(e => {
+        } = (0, ic.default)(!0), r = (0, x.isAllAssetTypesActiveTab)(t), l = (0, x.isAvatarLooksActiveTab)(t), u = (0, a.useCallback)(e => {
             e && n({
                 activeTab: (0, x.buildTaxonomyActiveTab)(e),
                 filterIndex: 0
@@ -4077,7 +4078,7 @@
         return 0 !== s.length || r ? (0, i.jsxs)("fieldset", {
             className: "flex wrap items-center gap-small stroke-none margin-none padding-none [min-inline-size:auto]",
             "aria-label": p,
-            children: [(0, i.jsx)(n3.Chip, {
+            children: [(0, i.jsx)(n7.Chip, {
                 text: e("Label.Avatars"),
                 size: "Medium",
                 variant: "Standard",
@@ -4085,14 +4086,14 @@
                 onCheckedChange: m
             }), s.map(t => {
                 var n;
-                return (0, i.jsx)(n3.Chip, {
-                    text: (0, ic.taxonomyOptionLabel)(t, e),
+                return (0, i.jsx)(n7.Chip, {
+                    text: (0, im.taxonomyOptionLabel)(t, e),
                     size: "Medium",
                     variant: "Standard",
                     isChecked: t.taxonomyKey === o,
                     onCheckedChange: () => u(t.taxonomyKey)
                 }, null != (n = t.taxonomyKey) ? n : t.nameKey)
-            }), (0, i.jsx)(n3.Chip, {
+            }), (0, i.jsx)(n7.Chip, {
                 text: e("Label.AllAssetTypes"),
                 size: "Medium",
                 variant: "Standard",
@@ -4101,16 +4102,16 @@
             })]
         }) : null
     };
-    var ip = e.i(638016),
-        ih = e.i(348558),
-        iv = e.i(100226);
-    let ix = (e, t) => {
+    var ih = e.i(638016),
+        iv = e.i(348558),
+        ix = e.i(100226);
+    let ig = (e, t) => {
             let n = C(),
-                i = (0, iv.default)(),
-                s = (0, ih.default)(),
+                i = (0, ix.default)(),
+                s = (0, iv.default)(),
                 {
                     data: o
-                } = (0, eJ.useQuery)({
+                } = (0, eQ.useQuery)({
                     queryKey: ["avatar-items-entry-point-asset-types"],
                     queryFn: b.getAvatarItemsEntryPointAssetTypes,
                     staleTime: 3e5
@@ -4120,7 +4121,7 @@
                 return null != (a = null == (r = e.menuItem.submenuItems) ? void 0 : r.filter(a => T.default.isMenuItemEnabled(a, t, "Label.AvatarItems" === e.menuItem.nameKey ? null == o ? void 0 : o.has(a.type) : void 0, o, n, i, s))) ? a : []
             }, [e.menuItem.submenuItems, e.menuItem.nameKey, t, o, n, i, s])
         },
-        ig = (0, il.makeStyles)()(e => ({
+        iy = (0, iu.makeStyles)()(e => ({
             subMenuContainer: {
                 maxWidth: "100%",
                 position: "relative",
@@ -4153,7 +4154,7 @@
                 marginRight: 8
             }
         })),
-        iy = e => {
+        ib = e => {
             let {
                 menuState: t,
                 onMenuStateChange: n,
@@ -4167,11 +4168,11 @@
                     chip: c
                 },
                 cx: m
-            } = ig(), p = (0, a.useRef)(null), {
+            } = iy(), p = (0, a.useRef)(null), {
                 translate: h
             } = (0, d.useTranslation)(), [v, f] = (0, a.useState)(0), [x, g] = (0, a.useState)(0), [y, b] = (0, a.useState)(0), {
                 isTaxonomyMode: I
-            } = (0, ip.default)(T.default.getAssetType(t)), C = ix(t, s), w = (0, a.useMemo)(() => v <= 0, [v]), S = (0, a.useMemo)(() => v + y >= x, [v, x, y]), A = () => {
+            } = (0, ih.default)(T.default.getAssetType(t)), C = ig(t, s), w = (0, a.useMemo)(() => v <= 0, [v]), S = (0, a.useMemo)(() => v + y >= x, [v, x, y]), A = () => {
                 var e, t, n;
                 let i = null == p ? void 0 : p.current;
                 f(null != (e = null == i ? void 0 : i.scrollLeft) ? e : 0), g(null != (t = null == i ? void 0 : i.scrollWidth) ? t : 0), b(null != (n = null == i ? void 0 : i.offsetWidth) ? n : 0)
@@ -4182,13 +4183,13 @@
                 return e && (e.addEventListener("scroll", A), t.observe(e)), () => {
                     e && (e.removeEventListener("scroll", A), t.unobserve(e))
                 }
-            }, []), I) ? (0, i.jsx)(im, {}) : (0, i.jsxs)(iu.Flex, {
+            }, []), I) ? (0, i.jsx)(ip, {}) : (0, i.jsxs)(id.Flex, {
                 classes: {
                     root: o
                 },
                 children: [!w && (0, i.jsx)("div", {
                     className: l,
-                    children: (0, i.jsx)(is.IconButton, {
+                    children: (0, i.jsx)(io.IconButton, {
                         onClick: () => {
                             var e;
                             null == (e = p.current) || e.scrollBy({
@@ -4198,7 +4199,7 @@
                         },
                         color: "secondary",
                         "aria-label": "back",
-                        children: (0, i.jsx)(io.NavigateBeforeIcon, {
+                        children: (0, i.jsx)(ir.NavigateBeforeIcon, {
                             fontSize: "small"
                         })
                     })
@@ -4207,7 +4208,7 @@
                     className: m(r, "flex max-medium:wrap max-medium:gap-y-small"),
                     children: null == C ? void 0 : C.map(e => {
                         let a = t.submenuItem === e;
-                        return (0, i.jsx)(ia.Chip, {
+                        return (0, i.jsx)(is.Chip, {
                             classes: {
                                 root: c
                             },
@@ -4227,7 +4228,7 @@
                     })
                 }), !S && (0, i.jsx)("div", {
                     className: u,
-                    children: (0, i.jsx)(is.IconButton, {
+                    children: (0, i.jsx)(io.IconButton, {
                         onClick: () => {
                             var e;
                             null == (e = p.current) || e.scrollBy({
@@ -4237,53 +4238,53 @@
                         },
                         color: "secondary",
                         "aria-label": "next",
-                        children: (0, i.jsx)(ir.NavigateNextIcon, {
+                        children: (0, i.jsx)(il.NavigateNextIcon, {
                             fontSize: "small"
                         })
                     })
                 })]
             })
         };
-    var ib = e.i(54842),
-        iT = e.i(960916),
-        iI = e.i(610932),
-        iC = e.i(246602),
-        iw = e.i(239328),
-        iS = e.i(823062),
-        iA = e.i(198528),
-        iM = e.i(949599),
-        ij = e.i(704443),
-        iE = e.i(696564),
-        ik = e.i(848427),
-        iP = e.i(547710),
-        iN = e.i(319266),
-        iL = e.i(157852),
-        iR = e.i(484541),
-        iO = e.i(485681),
-        iD = e.i(930669),
-        i_ = e.i(230553),
-        iU = e.i(525861),
-        iB = e.i(893502),
-        iz = e.i(695073),
-        iq = e.i(205357),
-        iV = e.i(46591),
-        iF = e.i(611043),
-        iG = e.i(459703),
-        iH = e.i(913893),
-        iK = e.i(185915);
+    var iT = e.i(3974),
+        iI = e.i(960916),
+        iC = e.i(610932),
+        iw = e.i(246602),
+        iS = e.i(239328),
+        iA = e.i(823062),
+        iM = e.i(198528),
+        ij = e.i(949599),
+        iE = e.i(704443),
+        ik = e.i(696564),
+        iP = e.i(848427),
+        iN = e.i(547710),
+        iL = e.i(319266),
+        iR = e.i(157852),
+        iO = e.i(484541),
+        iD = e.i(485681),
+        i_ = e.i(930669),
+        iU = e.i(230553),
+        iB = e.i(525861),
+        iz = e.i(893502),
+        iq = e.i(695073),
+        iV = e.i(205357),
+        iF = e.i(46591),
+        iG = e.i(611043),
+        iH = e.i(459703),
+        iK = e.i(913893),
+        iW = e.i(185915);
 
-    function iW(e) {
+    function iY(e) {
         if (void 0 === e.id || void 0 === e.autoPublishEnabled) throw Error("Publishing preferences response was malformed");
         return e
     }
-    async function iY(e) {
-        return iW(await iH.default.getPublishingPreferences(e))
-    }
     async function iJ(e) {
-        return iW(await iH.default.createPublishingPreferences(e))
+        return iY(await iK.default.getPublishingPreferences(e))
     }
-    var iQ = e.i(812141);
-    let iX = e => {
+    async function iQ(e) {
+        return iY(await iK.default.createPublishingPreferences(e))
+    }
+    var iX = e.i(812141);
+    let iZ = e => {
         let {
             label: t,
             children: n,
@@ -4297,18 +4298,18 @@
                     className: "text-label-large ".concat(null != s ? s : ""),
                     children: t
                 }), n]
-            }), (0, i.jsx)(iR.Divider, {})]
+            }), (0, i.jsx)(iO.Divider, {})]
         })
     };
 
-    function iZ(e) {
+    function i$(e) {
         return 4 === e || 2 === e
     }
 
-    function i$(e, t, n) {
+    function i0(e, t, n) {
         return e && t && "all" === n ? 1 : e && t && "specific" === n ? 4 : e && !t ? 3 : !e && t ? 2 : 0
     }
-    let i0 = e => {
+    let i1 = e => {
         var t;
         let {
             open: n,
@@ -4317,13 +4318,13 @@
             translate: o
         } = (0, d.useTranslation)(), {
             enqueue: r
-        } = (0, iG.useSnackbar)(), {
+        } = (0, iH.useSnackbar)(), {
             user: l
         } = (0, V.useAuthentication)(), u = (0, f.useCurrentGroup)(), c = null == u ? void 0 : u.id, {
             data: m
-        } = (0, iQ.default)(iH.default), p = null != (t = null == m ? void 0 : m.maxCollectiblePrice) ? t : iE.DefaultMaxCollectiblePrice, [h, v] = (0, a.useState)(!0), [x, g] = (0, a.useState)(!1), [y, b] = (0, a.useState)(!1), [T, I] = (0, a.useState)(""), [C, w] = (0, a.useState)(""), [S, A] = (0, a.useState)(!0), [M, j] = (0, a.useState)(!0), [E, k] = (0, a.useState)(!0), [P, N] = (0, a.useState)("all"), [L, R] = (0, a.useState)(""), [O, D] = (0, a.useState)(!1);
+        } = (0, iX.default)(iK.default), p = null != (t = null == m ? void 0 : m.maxCollectiblePrice) ? t : ik.DefaultMaxCollectiblePrice, [h, v] = (0, a.useState)(!0), [x, g] = (0, a.useState)(!1), [y, b] = (0, a.useState)(!1), [T, I] = (0, a.useState)(""), [C, w] = (0, a.useState)(""), [S, A] = (0, a.useState)(!0), [M, j] = (0, a.useState)(!0), [E, k] = (0, a.useState)(!0), [P, N] = (0, a.useState)("all"), [L, R] = (0, a.useState)(""), [O, D] = (0, a.useState)(!1);
         (0, a.useEffect)(() => {
-            n && iY(c).then(e => {
+            n && iJ(c).then(e => {
                 I(String(e.priceOffset)), w(e.priceInRobux > 0 ? String(e.priceInRobux) : ""), A(e.enableRegionalPricing), b(e.isRentalOptIn);
                 let t = function(e) {
                     switch (e) {
@@ -4348,7 +4349,7 @@
                 j(t.sellInMarketplace), k(t.sellInExperiences), N(t.experienceLocationMode), e.places.length > 0 && R(e.places.join(","))
             }).catch(e => {
                 var t;
-                (null == (t = (0, iK.default)(e)) ? void 0 : t.status) !== 404 && (D(!0), r({
+                (null == (t = (0, iW.default)(e)) ? void 0 : t.status) !== 404 && (D(!0), r({
                     message: o("Message.ErrorProcessingRequest"),
                     autoHide: !0,
                     autoHideDuration: 3e3,
@@ -4363,9 +4364,9 @@
                 if (null == l ? void 0 : l.id) {
                     g(!0);
                     try {
-                        let e = i$(M, E, P),
-                            t = iZ(e) ? L.split(",").filter(Boolean).map(e => Number(e)) : [];
-                        await iJ({
+                        let e = i0(M, E, P),
+                            t = i$(e) ? L.split(",").filter(Boolean).map(e => Number(e)) : [];
+                        await iQ({
                             creatorUserId: l.id,
                             creatorGroupId: c,
                             publishingType: 2,
@@ -4387,7 +4388,7 @@
                             }
                         }), s()
                     } catch (t) {
-                        let e = await (0, tD.default)(t);
+                        let e = await (0, t_.default)(t);
                         r({
                             message: o((null == e ? void 0 : e.code) === 9 ? "Message.UserMissingGroupPermissions" : "Message.PublishingUnsuccessful"),
                             autoHide: !0,
@@ -4421,8 +4422,8 @@
                     R(t)
                 }
             }, []),
-            F = h || x || O || !M && !E || "" === T || "" === C || 0 >= Number(C) || iZ(i$(M, E, P)) && 0 === L.split(",").filter(Boolean).length;
-        return (0, i.jsxs)(iP.Dialog, {
+            F = h || x || O || !M && !E || "" === T || "" === C || 0 >= Number(C) || i$(i0(M, E, P)) && 0 === L.split(",").filter(Boolean).length;
+        return (0, i.jsxs)(iN.Dialog, {
             open: n,
             onClose: s,
             maxWidth: "Medium",
@@ -4430,41 +4431,41 @@
             PaperProps: {
                 className: "[width:580px]"
             },
-            children: [(0, i.jsx)(iL.DialogTitle, {
+            children: [(0, i.jsx)(iR.DialogTitle, {
                 className: "padding-bottom-none",
                 children: (0, i.jsxs)("div", {
                     className: "flex justify-between items-start",
                     children: [(0, i.jsx)("span", {
                         className: "text-heading-small",
                         children: o("Heading.StudioPublishSettings")
-                    }), (0, i.jsx)(is.IconButton, {
+                    }), (0, i.jsx)(io.IconButton, {
                         "aria-label": "Close",
                         onClick: s,
                         size: "small",
                         color: "inherit",
-                        children: (0, i.jsx)(iD.CloseIcon, {})
+                        children: (0, i.jsx)(i_.CloseIcon, {})
                     })]
                 })
-            }), (0, i.jsxs)(iN.DialogContent, {
+            }), (0, i.jsxs)(iL.DialogContent, {
                 className: "padding-top-small",
-                children: [(0, i.jsx)(iF.Typography, {
+                children: [(0, i.jsx)(iG.Typography, {
                     variant: "body2",
                     className: "[opacity:0.7] padding-bottom-medium",
                     children: o("Description.StudioPublishSettingsSubtitle")
-                }), (0, i.jsx)(iX, {
+                }), (0, i.jsx)(iZ, {
                     label: o("Label.Availability"),
                     children: (0, i.jsx)("span", {
                         className: "text-label-large [margin-left:12px]",
                         children: o("Label.NonLimited")
                     })
-                }), (0, i.jsx)(iX, {
+                }), (0, i.jsx)(iZ, {
                     label: o("Label.TimedOption"),
-                    children: (0, i.jsx)(iz.Switch, {
+                    children: (0, i.jsx)(iq.Switch, {
                         checked: y,
                         onChange: () => b(e => !e),
                         "aria-label": "Timed Option"
                     })
-                }), (0, i.jsx)(iX, {
+                }), (0, i.jsx)(iZ, {
                     label: o("Label.PriceConfigurations"),
                     className: "grid [grid-template-columns:175px_1fr] padding-y-large gap-xsmall",
                     labelClassName: "padding-top-small",
@@ -4472,7 +4473,7 @@
                         className: "flex flex-col [flex:1] gap-xsmall",
                         children: [(0, i.jsxs)("div", {
                             className: "flex items-center gap-xsmall",
-                            children: [(0, i.jsx)(iq.TextField, {
+                            children: [(0, i.jsx)(iV.TextField, {
                                 id: "price-offset",
                                 label: "",
                                 placeholder: o("Placeholder.AmountAbovePriceFloor"),
@@ -4481,17 +4482,17 @@
                                 value: T,
                                 onChange: B,
                                 fullWidth: !0
-                            }), (0, i.jsx)(iV.Tooltip, {
+                            }), (0, i.jsx)(iF.Tooltip, {
                                 title: o("Tooltip.AmountAbovePriceFloor"),
-                                children: (0, i.jsx)(is.IconButton, {
+                                children: (0, i.jsx)(io.IconButton, {
                                     "aria-label": "price offset info",
                                     size: "small",
-                                    children: (0, i.jsx)(i_.InfoOutlinedIcon, {})
+                                    children: (0, i.jsx)(iU.InfoOutlinedIcon, {})
                                 })
                             })]
                         }), (0, i.jsxs)("div", {
                             className: "flex items-center gap-xsmall",
-                            children: [(0, i.jsx)(iq.TextField, {
+                            children: [(0, i.jsx)(iV.TextField, {
                                 id: "price-floor-minimum",
                                 label: "",
                                 placeholder: o("Placeholder.DoNotPriceBelow"),
@@ -4500,26 +4501,26 @@
                                 value: C,
                                 onChange: z,
                                 fullWidth: !0
-                            }), (0, i.jsx)(iV.Tooltip, {
+                            }), (0, i.jsx)(iF.Tooltip, {
                                 title: o("Tooltip.MinimumPriceFloor"),
-                                children: (0, i.jsx)(is.IconButton, {
+                                children: (0, i.jsx)(io.IconButton, {
                                     "aria-label": "minimum price info",
                                     size: "small",
-                                    children: (0, i.jsx)(i_.InfoOutlinedIcon, {})
+                                    children: (0, i.jsx)(iU.InfoOutlinedIcon, {})
                                 })
                             })]
                         })]
                     })
-                }), (0, i.jsx)(iX, {
+                }), (0, i.jsx)(iZ, {
                     label: o("Label.RegionalPricing"),
-                    children: (0, i.jsx)(iz.Switch, {
+                    children: (0, i.jsx)(iq.Switch, {
                         checked: S,
                         onChange: () => A(e => !e),
                         "aria-label": "Regional Pricing"
                     })
-                }), (0, i.jsx)(iX, {
+                }), (0, i.jsx)(iZ, {
                     label: o("Label.SellInMarketplace"),
-                    children: (0, i.jsx)(iz.Switch, {
+                    children: (0, i.jsx)(iq.Switch, {
                         checked: M,
                         onChange: () => {
                             let e = !M;
@@ -4527,22 +4528,22 @@
                         },
                         "aria-label": "Sell in Marketplace"
                     })
-                }), (0, i.jsx)(iX, {
+                }), (0, i.jsx)(iZ, {
                     label: o("Label.SellInExperiences"),
-                    children: (0, i.jsx)(iz.Switch, {
+                    children: (0, i.jsx)(iq.Switch, {
                         checked: E,
                         onChange: () => k(e => !e),
                         "aria-label": "Sell in experiences"
                     })
                 }), E && (0, i.jsxs)(i.Fragment, {
-                    children: [(0, i.jsx)(iR.Divider, {}), (0, i.jsxs)("div", {
+                    children: [(0, i.jsx)(iO.Divider, {}), (0, i.jsxs)("div", {
                         className: "padding-y-large",
                         children: [(0, i.jsxs)("div", {
                             className: "grid [grid-template-columns:175px_1fr] items-center",
                             children: [(0, i.jsx)("span", {
                                 className: "text-label-large",
                                 children: o("Label.ExperienceLocations")
-                            }), (0, i.jsxs)(iB.RadioGroup, {
+                            }), (0, i.jsxs)(iz.RadioGroup, {
                                 row: !0,
                                 value: P,
                                 onChange: e => {
@@ -4550,18 +4551,18 @@
                                     ("all" === t || "specific" === t) && N(t)
                                 },
                                 className: "flex flex-row no-wrap gap-xsmall [margin-left:12px]",
-                                children: [(0, i.jsx)(iO.FormControlLabel, {
+                                children: [(0, i.jsx)(iD.FormControlLabel, {
                                     value: "all",
                                     disabled: !M,
-                                    control: (0, i.jsx)(iU.Radio, {
+                                    control: (0, i.jsx)(iB.Radio, {
                                         "aria-label": o("Label.AllGames"),
                                         size: "small"
                                     }),
                                     label: o("Label.AllGames"),
                                     className: "margin-right-medium"
-                                }), (0, i.jsx)(iO.FormControlLabel, {
+                                }), (0, i.jsx)(iD.FormControlLabel, {
                                     value: "specific",
-                                    control: (0, i.jsx)(iU.Radio, {
+                                    control: (0, i.jsx)(iB.Radio, {
                                         "aria-label": o("Label.SpecificExperiences"),
                                         size: "small"
                                     }),
@@ -4570,7 +4571,7 @@
                             })]
                         }), "specific" === P && (0, i.jsxs)("div", {
                             className: "[margin-left:187px] [margin-top:10px]",
-                            children: [(0, i.jsx)(iq.TextField, {
+                            children: [(0, i.jsx)(iV.TextField, {
                                 id: "place-ids",
                                 label: "",
                                 placeholder: o("Placeholder.EnterExperienceIDs"),
@@ -4579,7 +4580,7 @@
                                 value: L,
                                 onChange: q,
                                 fullWidth: !0
-                            }), (0, i.jsxs)(iF.Typography, {
+                            }), (0, i.jsxs)(iG.Typography, {
                                 variant: "caption",
                                 className: "[opacity:0.6] block [margin-top:4px]",
                                 children: [L ? L.split(",").filter(Boolean).length : 0, "/", 5, " ", o("Label.ExperiencesCount")]
@@ -4589,7 +4590,7 @@
                 })]
             }), (0, i.jsxs)("div", {
                 className: "flex padding-x-large padding-y-medium gap-small",
-                children: [(0, i.jsx)(ik.Button, {
+                children: [(0, i.jsx)(iP.Button, {
                     variant: "contained",
                     color: "primaryBrand",
                     onClick: U,
@@ -4597,7 +4598,7 @@
                     size: "large",
                     className: "[flex:1] radius-medium",
                     children: o("Action.Save")
-                }), (0, i.jsx)(ik.Button, {
+                }), (0, i.jsx)(iP.Button, {
                     variant: "contained",
                     color: "secondary",
                     onClick: s,
@@ -4608,10 +4609,10 @@
             })]
         })
     };
-    var i1 = e.i(464508),
-        i2 = e.i(759283),
-        i4 = e.i(776344);
-    let i5 = (e, t) => {
+    var i2 = e.i(464508),
+        i4 = e.i(759283),
+        i5 = e.i(776344);
+    let i6 = (e, t) => {
         switch (null == e ? void 0 : e.code) {
             case void 0:
             default:
@@ -4675,9 +4676,9 @@
         }
     };
     var i8 = e.i(202289),
-        i6 = e.i(912359),
-        i3 = e.i(418162);
-    let i7 = (0, il.makeStyles)()(e => ({
+        i3 = e.i(912359),
+        i7 = e.i(418162);
+    let i9 = (0, iu.makeStyles)()(e => ({
             dialogPaper: {
                 minWidth: 376,
                 maxWidth: 480
@@ -4755,9 +4756,9 @@
                 minWidth: 0
             }
         })),
-        i9 = ["makeup", "clothing", "accessories"],
-        ae = ["clothing", "makeup"],
-        at = {
+        ae = ["makeup", "clothing", "accessories"],
+        at = ["clothing", "makeup"],
+        an = {
             makeup: {
                 all: "Label.AllMakeup",
                 short: "Label.Makeup"
@@ -4772,10 +4773,10 @@
             }
         };
 
-    function an(e) {
-        return e ? at.clothing.all : "Label.ClothingOnlyTShirtsPantsSweaters"
+    function ai(e) {
+        return e ? an.clothing.all : "Label.ClothingOnlyTShirtsPantsSweaters"
     }
-    let ai = (0, d.withTranslation)(e => {
+    let aa = (0, d.withTranslation)(e => {
         let t, {
                 open: n,
                 onClose: s,
@@ -4788,14 +4789,14 @@
             {
                 classes: u,
                 cx: c
-            } = i7(),
+            } = i9(),
             {
                 enqueue: m,
                 close: p
-            } = (0, iG.useSnackbar)(),
+            } = (0, iH.useSnackbar)(),
             h = (0, f.useCurrentGroup)(),
             v = !1 !== o.showCategorySubtypeDropdowns,
-            x = (0, a.useMemo)(() => v ? i9 : ae, [v]),
+            x = (0, a.useMemo)(() => v ? ae : at, [v]),
             [g, y] = (0, a.useState)({
                 clothing: !1,
                 makeup: !1,
@@ -4860,24 +4861,24 @@
                 if (!r || null === A) return void s();
                 let e = x.flatMap(e => E[e] ? j[e].filter(e => b[e]) : []);
                 try {
-                    await iH.default.bulkUpdateCollectible(F.uuidService.generateRandomUuid(), null == h ? void 0 : h.id, e.map(e => (0, i3.translateAssetType)(e)), "enable" === A), m({
+                    await iK.default.bulkUpdateCollectible(F.uuidService.generateRandomUuid(), null == h ? void 0 : h.id, e.map(e => (0, i7.translateAssetType)(e)), "enable" === A), m({
                         message: l("Message.TimedOptionSettingsApplied"),
                         anchorOrigin: {
                             vertical: "bottom",
                             horizontal: "center"
                         },
-                        autoHideDuration: i2.toastDurationTime,
+                        autoHideDuration: i4.toastDurationTime,
                         autoHide: !0,
                         onClose: p
                     }), window.location.reload(), s()
                 } catch (e) {
                     m({
-                        message: l(i5(await (0, tD.default)(e), "Error.Unknown")),
+                        message: l(i6(await (0, t_.default)(e), "Error.Unknown")),
                         anchorOrigin: {
                             vertical: "bottom",
                             horizontal: "center"
                         },
-                        autoHideDuration: i2.toastDurationTime,
+                        autoHideDuration: i4.toastDurationTime,
                         autoHide: !0,
                         onClose: p
                     })
@@ -4892,17 +4893,17 @@
                 if (0 === t.length) return null;
                 let n = t.filter(e => b[e]);
                 if (0 === n.length) return null;
-                if (n.length === t.length) return l("clothing" === e ? an(v) : at[e].all);
-                let i = l(at[e].short),
-                    a = n.map(e => l(i2.assetFullNameKeys[e])).join(", ");
+                if (n.length === t.length) return l("clothing" === e ? ai(v) : an[e].all);
+                let i = l(an[e].short),
+                    a = n.map(e => l(i4.assetFullNameKeys[e])).join(", ");
                 return "".concat(i, " (").concat(a, ")")
             }).filter(e => null !== e), [b, j, E, v, l, x]),
             D = (0, a.useMemo)(() => x.some(e => E[e] && j[e].some(e => b[e])), [b, j, E, x]),
             _ = (0, i.jsxs)(i.Fragment, {
-                children: [(0, i.jsx)(i1.DialogContentText, {
+                children: [(0, i.jsx)(i2.DialogContentText, {
                     className: u.descriptionText,
                     children: l("Description.BulkUpdateAllTimedOptions")
-                }), (0, i.jsx)(i4.default, {
+                }), (0, i.jsx)(i5.default, {
                     flexDirection: "column",
                     classes: {
                         root: u.checkboxList
@@ -4912,11 +4913,11 @@
                         if (!E[e]) return null;
                         let n = g[e],
                             s = "timed-options-bulk-".concat(e, "-subtypes"),
-                            o = l("clothing" === e ? an(v) : at[e].all);
+                            o = l("clothing" === e ? ai(v) : an[e].all);
                         return (0, i.jsxs)(a.default.Fragment, {
                             children: [(0, i.jsxs)("div", {
                                 className: u.categoryRow,
-                                children: [v ? (0, i.jsx)(is.IconButton, {
+                                children: [v ? (0, i.jsx)(io.IconButton, {
                                     type: "button",
                                     size: "small",
                                     className: u.expandToggle,
@@ -4930,7 +4931,7 @@
                                         categoryName: o
                                     }),
                                     color: "inherit",
-                                    children: (0, i.jsx)(i6.ChevronRightIcon, {
+                                    children: (0, i.jsx)(i3.ChevronRightIcon, {
                                         className: c(n ? u.expandToggleExpanded : u.expandToggleCollapsed)
                                     })
                                 }) : null, (0, i.jsx)(i8.Checkbox, {
@@ -4963,7 +4964,7 @@
                                 id: s,
                                 className: u.subtypeIndent,
                                 children: t.map(e => (0, i.jsx)(i8.Checkbox, {
-                                    label: l(i2.assetFullNameKeys[e]),
+                                    label: l(i4.assetFullNameKeys[e]),
                                     size: "Small",
                                     placement: "Start",
                                     isChecked: b[e],
@@ -4977,12 +4978,12 @@
                             }) : null]
                         }, e)
                     })(e))
-                }), (0, i.jsxs)(i4.default, {
+                }), (0, i.jsxs)(i5.default, {
                     flexDirection: "row",
                     classes: {
                         root: u.buttonContainer
                     },
-                    children: [(0, i.jsx)(ik.Button, {
+                    children: [(0, i.jsx)(iP.Button, {
                         variant: "contained",
                         color: "secondary",
                         onClick: P,
@@ -4990,7 +4991,7 @@
                         className: u.actionButton,
                         disabled: !D,
                         children: l("Action.Enable")
-                    }), (0, i.jsx)(ik.Button, {
+                    }), (0, i.jsx)(iP.Button, {
                         variant: "contained",
                         color: "secondary",
                         onClick: N,
@@ -5002,7 +5003,7 @@
                 })]
             });
         return w && (t = "enable" === A ? "Description.ThisWillEnableTimedOptionsFor" : "Description.ThisWillDisableTimedOptionsFor", _ = (0, i.jsxs)(i.Fragment, {
-            children: [(0, i.jsx)(i1.DialogContentText, {
+            children: [(0, i.jsx)(i2.DialogContentText, {
                 className: u.descriptionText,
                 children: l(t)
             }), O.length > 0 && (0, i.jsx)("ul", {
@@ -5010,22 +5011,22 @@
                 children: O.map(e => (0, i.jsx)("li", {
                     children: e
                 }, e))
-            }), (0, i.jsx)(i1.DialogContentText, {
+            }), (0, i.jsx)(i2.DialogContentText, {
                 className: u.descriptionText,
                 children: l("Description.ThisWillAlsoReplaceAnyItemLevelSettings")
-            }), (0, i.jsxs)(i4.default, {
+            }), (0, i.jsxs)(i5.default, {
                 flexDirection: "row",
                 classes: {
                     root: u.buttonContainer
                 },
-                children: [(0, i.jsx)(ik.Button, {
+                children: [(0, i.jsx)(iP.Button, {
                     variant: "contained",
                     color: "primaryBrand",
                     onClick: L,
                     size: "medium",
                     className: u.actionButton,
                     children: l("Action.Confirm")
-                }), (0, i.jsx)(ik.Button, {
+                }), (0, i.jsx)(iP.Button, {
                     variant: "contained",
                     color: "secondary",
                     onClick: R,
@@ -5034,7 +5035,7 @@
                     children: l("Action.Cancel")
                 })]
             })]
-        })), (0, i.jsxs)(iP.Dialog, {
+        })), (0, i.jsxs)(iN.Dialog, {
             open: n,
             onClose: k,
             maxWidth: "Small",
@@ -5042,30 +5043,30 @@
             classes: {
                 paper: u.dialogPaper
             },
-            children: [(0, i.jsxs)(iL.DialogTitle, {
+            children: [(0, i.jsxs)(iR.DialogTitle, {
                 className: u.dialogTitle,
                 children: [(0, i.jsx)("span", {
                     className: u.dialogTitleText,
                     children: w ? l("Title.ConfirmOption") : l("Action.TimedOptions")
-                }), !w && (0, i.jsx)(is.IconButton, {
+                }), !w && (0, i.jsx)(io.IconButton, {
                     "aria-label": "Close",
                     onClick: k,
                     size: "small",
                     className: u.closeButton,
                     color: "inherit",
-                    children: (0, i.jsx)(iD.CloseIcon, {})
+                    children: (0, i.jsx)(i_.CloseIcon, {})
                 })]
-            }), (0, i.jsx)(iN.DialogContent, {
+            }), (0, i.jsx)(iL.DialogContent, {
                 className: u.dialogContent,
                 children: _
             })]
         })
     }, [ei.TranslationNamespace.ConfigureItem, ei.TranslationNamespace.Creations, ei.TranslationNamespace.AssetTypes]);
 
-    function aa(e) {
+    function as(e) {
         return "Tshirt" === e ? m.Asset.TShirt : "TshirtAccessory" === e ? m.Asset.TShirtAccessory : e
     }
-    let as = (0, il.makeStyles)()(e => ({
+    let ao = (0, iu.makeStyles)()(e => ({
             dialogContent: {
                 padding: e.spacing(3),
                 minWidth: 300
@@ -5089,7 +5090,7 @@
                 marginLeft: "auto"
             }
         })),
-        ao = (0, d.withTranslation)(e => {
+        ar = (0, d.withTranslation)(e => {
             let t, n, s, o, {
                     open: r,
                     onClose: l
@@ -5100,11 +5101,11 @@
                 } = (0, d.useTranslation)(),
                 {
                     classes: p
-                } = as(),
+                } = ao(),
                 {
                     enqueue: h,
                     close: v
-                } = (0, iG.useSnackbar)(),
+                } = (0, iH.useSnackbar)(),
                 x = (0, f.useCurrentGroup)(),
                 [g, y] = (0, a.useState)(null),
                 [b, T] = (0, a.useState)(() => F.uuidService.generateRandomUuid()),
@@ -5116,9 +5117,9 @@
                 }),
                 [w, S] = (0, a.useState)(!1);
             (0, a.useEffect)(() => {
-                r ? (y(null), T(F.uuidService.generateRandomUuid()), (0, iE.getValidTimedOptionsTypes)().then(() => {
-                    let e = new Set(iE.ValidTimedOptionsAssetTypes.map(e => aa(e))),
-                        t = 3 === e.size && Array.from(iM.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).every(t => e.has(t));
+                r ? (y(null), T(F.uuidService.generateRandomUuid()), (0, ik.getValidTimedOptionsTypes)().then(() => {
+                    let e = new Set(ik.ValidTimedOptionsAssetTypes.map(e => as(e))),
+                        t = 3 === e.size && Array.from(ij.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).every(t => e.has(t));
                     if (S(t), t) C({
                         showClothing: !1,
                         showMakeup: !1,
@@ -5126,10 +5127,10 @@
                         showCategorySubtypeDropdowns: !0
                     });
                     else {
-                        let t = [...e].every(e => iM.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES.has(e) || iM.MAKEUP_ASSET_TYPES.includes(e)),
+                        let t = [...e].every(e => ij.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES.has(e) || ij.MAKEUP_ASSET_TYPES.includes(e)),
                             n = e.has(m.Asset.EyeMakeup),
-                            i = iM.CLOTHING_ASSET_TYPES.some(t => e.has(t) && !iM.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES.has(t)),
-                            a = Array.from(iM.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).some(t => e.has(t));
+                            i = ij.CLOTHING_ASSET_TYPES.some(t => e.has(t) && !ij.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES.has(t)),
+                            a = Array.from(ij.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).some(t => e.has(t));
                         C({
                             showClothing: i || a,
                             showMakeup: n,
@@ -5141,24 +5142,24 @@
             }, [r]);
             let A = (0, a.useCallback)(async () => {
                     try {
-                        await iH.default.bulkUpdateCollectible(b, null == x ? void 0 : x.id, [64, 66, 68], !0 === g), h({
+                        await iK.default.bulkUpdateCollectible(b, null == x ? void 0 : x.id, [64, 66, 68], !0 === g), h({
                             message: u("Message.TimedOptionSettingsApplied"),
                             anchorOrigin: {
                                 vertical: "bottom",
                                 horizontal: "center"
                             },
-                            autoHideDuration: i2.toastDurationTime,
+                            autoHideDuration: i4.toastDurationTime,
                             autoHide: !0,
                             onClose: v
                         }), window.location.reload(), l()
                     } catch (e) {
                         h({
-                            message: u(i5(await (0, tD.default)(e), "Error.Unknown")),
+                            message: u(i6(await (0, t_.default)(e), "Error.Unknown")),
                             anchorOrigin: {
                                 vertical: "bottom",
                                 horizontal: "center"
                             },
-                            autoHideDuration: i2.toastDurationTime,
+                            autoHideDuration: i4.toastDurationTime,
                             autoHide: !0,
                             onClose: v
                         })
@@ -5168,45 +5169,45 @@
                     l()
                 }, [l]),
                 j = !w,
-                E = j ? (t = new Set(iE.ValidTimedOptionsAssetTypes.map(e => aa(e))), n = iM.CLOTHING_ASSET_TYPES.some(e => t.has(e) && !iM.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES.has(e)), s = Array.from(iM.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).some(e => t.has(e)), o = I.showCategorySubtypeDropdowns && (!s || n) ? iM.CLOTHING_ASSET_TYPES.filter(e => t.has(e)) : Array.from(iM.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).filter(e => t.has(e)), {
+                E = j ? (t = new Set(ik.ValidTimedOptionsAssetTypes.map(e => as(e))), n = ij.CLOTHING_ASSET_TYPES.some(e => t.has(e) && !ij.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES.has(e)), s = Array.from(ij.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).some(e => t.has(e)), o = I.showCategorySubtypeDropdowns && (!s || n) ? ij.CLOTHING_ASSET_TYPES.filter(e => t.has(e)) : Array.from(ij.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).filter(e => t.has(e)), {
                     clothing: o,
-                    makeup: iM.MAKEUP_ASSET_TYPES.filter(e => t.has(e)),
-                    accessories: I.showCategorySubtypeDropdowns ? iM.ACCESSORY_ASSET_TYPES.filter(e => t.has(e)) : []
+                    makeup: ij.MAKEUP_ASSET_TYPES.filter(e => t.has(e)),
+                    accessories: I.showCategorySubtypeDropdowns ? ij.ACCESSORY_ASSET_TYPES.filter(e => t.has(e)) : []
                 }) : void 0;
-            return j ? (0, i.jsx)(ai, {
+            return j ? (0, i.jsx)(aa, {
                 open: r,
                 onClose: M,
                 categoryFlags: I,
                 assetTypesByCategory: E
-            }) : (0, i.jsxs)(iP.Dialog, {
+            }) : (0, i.jsxs)(iN.Dialog, {
                 open: r,
                 onClose: M,
                 maxWidth: "Small",
                 color: "primaryBrand",
-                children: [(0, i.jsxs)(iL.DialogTitle, {
+                children: [(0, i.jsxs)(iR.DialogTitle, {
                     className: p.dialogTitle,
                     children: [(0, i.jsx)("span", {
                         children: null === g ? u("Action.TimedOptions") : u("Action.Confirm")
-                    }), (0, i.jsx)(is.IconButton, {
+                    }), (0, i.jsx)(io.IconButton, {
                         "aria-label": "Close",
                         onClick: M,
                         size: "small",
                         className: p.closeButton,
                         color: "inherit",
-                        children: (0, i.jsx)(iD.CloseIcon, {})
+                        children: (0, i.jsx)(i_.CloseIcon, {})
                     })]
-                }), (0, i.jsx)(iN.DialogContent, {
+                }), (0, i.jsx)(iL.DialogContent, {
                     className: p.dialogContent,
                     children: null === g ? (0, i.jsxs)(i.Fragment, {
-                        children: [(0, i.jsx)(i1.DialogContentText, {
+                        children: [(0, i.jsx)(i2.DialogContentText, {
                             className: p.descriptionText,
                             children: u("Description.BulkUpdateTimedOptions")
-                        }), (0, i.jsxs)(i4.default, {
+                        }), (0, i.jsxs)(i5.default, {
                             flexDirection: "column",
                             classes: {
                                 root: p.buttonContainer
                             },
-                            children: [(0, i.jsx)(ik.Button, {
+                            children: [(0, i.jsx)(iP.Button, {
                                 variant: "contained",
                                 color: "secondary",
                                 onClick: () => {
@@ -5215,7 +5216,7 @@
                                 size: "large",
                                 className: p.actionButton,
                                 children: u("Action.TurnAllOn")
-                            }), (0, i.jsx)(ik.Button, {
+                            }), (0, i.jsx)(iP.Button, {
                                 variant: "contained",
                                 color: "secondary",
                                 onClick: () => {
@@ -5227,7 +5228,7 @@
                             })]
                         })]
                     }) : (0, i.jsxs)(i.Fragment, {
-                        children: [(0, i.jsx)(i1.DialogContentText, {
+                        children: [(0, i.jsx)(i2.DialogContentText, {
                             className: p.descriptionText,
                             children: g ? c("Description.BulkUpdateOnConfirmation", [{
                                 opening: "boldStart",
@@ -5242,19 +5243,19 @@
                                     children: e
                                 })
                             }])
-                        }), (0, i.jsxs)(i4.default, {
+                        }), (0, i.jsxs)(i5.default, {
                             flexDirection: "column",
                             classes: {
                                 root: p.buttonContainer
                             },
-                            children: [(0, i.jsx)(ik.Button, {
+                            children: [(0, i.jsx)(iP.Button, {
                                 variant: "contained",
                                 color: "primaryBrand",
                                 onClick: A,
                                 size: "large",
                                 className: p.actionButton,
                                 children: u("Action.Confirm")
-                            }), (0, i.jsx)(ik.Button, {
+                            }), (0, i.jsx)(iP.Button, {
                                 variant: "contained",
                                 color: "secondary",
                                 onClick: M,
@@ -5267,24 +5268,24 @@
                 })]
             })
         }, [ei.TranslationNamespace.ConfigureItem, ei.TranslationNamespace.Creations]),
-        ar = Object.values(Q.SearchSortParameter),
-        al = Object.values(ib.EventSortBy),
-        au = ["publishSettings"],
-        ad = e => {
+        al = Object.values(Q.SearchSortParameter),
+        au = Object.values(iT.EventSortBy),
+        ad = ["publishSettings"],
+        ac = e => {
             let {
                 menuState: t
             } = e, {
                 translate: n
             } = (0, d.useTranslation)(), {
                 unifiedLogger: s
-            } = (0, iS.useUnifiedLoggerProvider)(), {
+            } = (0, iA.useUnifiedLoggerProvider)(), {
                 ready: o,
                 value: r
-            } = (0, u.useFlag)(iw.isAutoPublishPreferencesEnabled), {
+            } = (0, u.useFlag)(iS.isAutoPublishPreferencesEnabled), {
                 isFetched: l
             } = (0, f.useGroups)(), [c, p] = (0, a.useState)(!1), [h, v] = (0, a.useState)(!1), [g, y] = (0, a.useState)(0), [I, C] = (0, a.useState)(!1), [w, S] = (0, a.useState)(!1), [A, M] = (0, a.useState)(!1);
             (0, a.useEffect)(() => {
-                (0, iE.getValidTimedOptionsTypes)().then(() => {
+                (0, ik.getValidTimedOptionsTypes)().then(() => {
                     S(!0)
                 })
             }, []);
@@ -5301,13 +5302,13 @@
                 setIsPublicOnly: U,
                 isOnMarketplace: B,
                 setIsOnMarketplace: z
-            } = (0, eo.default)(), [{
+            } = (0, er.default)(), [{
                 filterIndex: V,
                 publishSettings: G
-            }] = (0, en.useQueryParams)(["filterIndex", "publishSettings"]), H = (0, a.useContext)(q).isResolving, [, K] = (0, en.useQueryParams)(["activeTab", "filterIndex"]), [, W] = (0, en.useQueryParams)(au), Y = (0, a.useMemo)(() => {
+            }] = (0, en.useQueryParams)(["filterIndex", "publishSettings"]), H = (0, a.useContext)(q).isResolving, [, K] = (0, en.useQueryParams)(["activeTab", "filterIndex"]), [, W] = (0, en.useQueryParams)(ad), Y = (0, a.useMemo)(() => {
                 let e = T.default.getAssetType(t);
                 return e !== m.Asset.AllCatalogAsset || Number(V) > 0 ? e : x.TAXONOMY_HOST_ASSET
-            }, [t, V]), J = Y in iM.AvatarMenuMap || Y === m.Asset.AllCatalogAsset, X = J && r, Z = (0, iA.normalizeSingleQueryParam)(G), $ = !!X && l && !H && !I && ("true" === Z || "1" === Z);
+            }, [t, V]), J = Y in ij.AvatarMenuMap || Y === m.Asset.AllCatalogAsset, X = J && r, Z = (0, iM.normalizeSingleQueryParam)(G), $ = !!X && l && !H && !I && ("true" === Z || "1" === Z);
             (0, a.useEffect)(() => {
                 o && l && !H && void 0 !== Z && ($ || W({
                     publishSettings: null
@@ -5325,11 +5326,11 @@
                 {
                     canUseTaxonomy: et,
                     isTaxonomyMode: ei
-                } = (0, ip.default)(Y),
-                ea = ix(t, (0, f.useCurrentGroup)()),
+                } = (0, ih.default)(Y),
+                ea = ig(t, (0, f.useCurrentGroup)()),
                 {
                     isSortable: es,
-                    isArchivable: er
+                    isArchivable: eo
                 } = (0, a.useMemo)(() => {
                     let e = ei || null == V ? void 0 : Number(V),
                         t = T.default.isAssetTypeArchivable(Y, e);
@@ -5349,13 +5350,13 @@
                         skipHistory: !0
                     })
                 }, [ei, Y, ea, K]),
-                ed = (0, a.useMemo)(() => !es && !er && !et && Y !== m.Asset.MyExperiences && Y !== m.Asset.SharedExperiences, [es, er, et, Y]),
+                ed = (0, a.useMemo)(() => !es && !eo && !et && Y !== m.Asset.MyExperiences && Y !== m.Asset.SharedExperiences, [es, eo, et, Y]),
                 ec = (0, a.useCallback)(e => {
-                    if (Y === m.Asset.MyExperiences || Y === m.Asset.SharedExperiences) ar.includes(e) && E(t => ({
+                    if (Y === m.Asset.MyExperiences || Y === m.Asset.SharedExperiences) al.includes(e) && E(t => ({
                         ...t,
                         [m.Asset.Place]: e
                     }));
-                    else al.includes(e) && E(t => ({
+                    else au.includes(e) && E(t => ({
                         ...t,
                         [Y]: e
                     }))
@@ -5369,7 +5370,7 @@
                 eh = (0, a.useCallback)(() => {
                     let e = !O;
                     s.logClickEvent({
-                        eventName: t_.default.ImpactedExperiencesFilterClick,
+                        eventName: tU.default.ImpactedExperiencesFilterClick,
                         parameters: {
                             page: "creations",
                             action: e ? "enable" : "disable",
@@ -5381,18 +5382,18 @@
                 ef = (0, a.useMemo)(() => ev ? Object.values(Q.SearchSortParameter).map(e => ({
                     value: e,
                     labelKey: b.universeSortTranslationKeys[e]
-                })) : Object.values(ib.EventSortBy).map(e => ({
+                })) : Object.values(iT.EventSortBy).map(e => ({
                     value: e,
                     labelKey: b.eventSortTranslationKeys[e]
                 })), [ev]),
-                ex = (0, a.useMemo)(() => ev ? j[m.Asset.Place] : (0, ij.getSortForAssetType)(Y, j), [ev, j, Y]),
-                eg = J && w && (iE.ValidTimedOptionsAssetTypes.length > 0 || iE.ValidTimedOptionsBundleTypes.length > 0);
+                ex = (0, a.useMemo)(() => ev ? j[m.Asset.Place] : (0, iE.getSortForAssetType)(Y, j), [ev, j, Y]),
+                eg = J && w && (ik.ValidTimedOptionsAssetTypes.length > 0 || ik.ValidTimedOptionsBundleTypes.length > 0);
             if (ed) return null;
-            let ey = Y === m.Asset.MyExperiences || Y === m.Asset.SharedExperiences || er || et || Y === m.Asset.MeshPart,
+            let ey = Y === m.Asset.MyExperiences || Y === m.Asset.SharedExperiences || eo || et || Y === m.Asset.MeshPart,
                 eb = Y === m.Asset.MyExperiences || Y === m.Asset.SharedExperiences,
                 eT = Y === m.Asset.Decal || Y === m.Asset.MeshPart,
                 eI = !!X || eg,
-                eC = !eI && !!(Y === m.Asset.MyExperiences || eb || er && Y);
+                eC = !eI && !!(Y === m.Asset.MyExperiences || eb || eo && Y);
             return (0, i.jsxs)("div", {
                 className: "flex flex-row justify-start items-center gap-large [flex-wrap:wrap] padding-left-medium max-large:[flex-grow:1] max-large:justify-between",
                 children: [ey && (0, i.jsxs)("div", {
@@ -5400,25 +5401,25 @@
                     children: [eC && (0, i.jsx)("span", {
                         className: "text-body-large margin-right-[16px]",
                         children: n("Label.ShowPrefix")
-                    }), Y === m.Asset.MyExperiences && (0, i.jsx)(iC.Toggle, {
+                    }), Y === m.Asset.MyExperiences && (0, i.jsx)(iw.Toggle, {
                         size: "Large",
                         placement: "Start",
                         label: n("Label.Public"),
                         isChecked: _,
                         onCheckedChange: () => U(e => !e)
-                    }), eb && (0, i.jsx)(iC.Toggle, {
+                    }), eb && (0, i.jsx)(iw.Toggle, {
                         size: "Large",
                         placement: "Start",
                         label: n("Label.Impacted"),
                         isChecked: O,
                         onCheckedChange: eh
-                    }), er && Y && (0, i.jsx)(iC.Toggle, {
+                    }), eo && Y && (0, i.jsx)(iw.Toggle, {
                         size: "Large",
                         placement: "Start",
                         label: X ? n("Action.ShowArchived") : n("Label.Archived"),
                         isChecked: L,
                         onCheckedChange: () => R(e => !e)
-                    }), et && (0, i.jsx)(iC.Toggle, {
+                    }), et && (0, i.jsx)(iw.Toggle, {
                         size: "Large",
                         placement: "Start",
                         label: el,
@@ -5427,13 +5428,13 @@
                     }), eI && (0, i.jsxs)(i.Fragment, {
                         children: [(0, i.jsx)("span", {
                             className: "flex [height:20px] margin-x-[12px]",
-                            children: (0, i.jsx)(iT.Divider, {
+                            children: (0, i.jsx)(iI.Divider, {
                                 orientation: "vertical"
                             })
-                        }), (0, i.jsxs)(iI.Popover, {
+                        }), (0, i.jsxs)(iC.Popover, {
                             open: A,
                             onOpenChange: M,
-                            children: [(0, i.jsx)(iI.PopoverTrigger, {
+                            children: [(0, i.jsx)(iC.PopoverTrigger, {
                                 asChild: !0,
                                 children: (0, i.jsx)(k.IconButton, {
                                     as: "button",
@@ -5443,20 +5444,20 @@
                                     isCircular: !0,
                                     ariaLabel: n("Label.Settings")
                                 })
-                            }), (0, i.jsx)(iI.PopoverContent, {
+                            }), (0, i.jsx)(iC.PopoverContent, {
                                 side: "bottom",
                                 align: "end",
                                 ariaLabel: n("Label.Settings"),
-                                children: (0, i.jsx)(nK.Menu, {
+                                children: (0, i.jsx)(nW.Menu, {
                                     size: "Medium",
-                                    children: (0, i.jsxs)(nK.MenuSection, {
-                                        children: [eg && (0, i.jsx)(nK.MenuItem, {
+                                    children: (0, i.jsxs)(nW.MenuSection, {
+                                        children: [eg && (0, i.jsx)(nW.MenuItem, {
                                             value: "timed-options",
                                             title: n("Action.TimedOptions"),
                                             onSelect: () => {
                                                 M(!1), ep()
                                             }
-                                        }), X && (0, i.jsx)(nK.MenuItem, {
+                                        }), X && (0, i.jsx)(nW.MenuItem, {
                                             value: "publish-settings",
                                             title: n("Action.StudioPublishSettings"),
                                             onSelect: () => {
@@ -5467,7 +5468,7 @@
                                 })
                             })]
                         })]
-                    }), eT && (0, i.jsx)(iC.Toggle, {
+                    }), eT && (0, i.jsx)(iw.Toggle, {
                         size: "Large",
                         placement: "Start",
                         label: n("Label.OnCreatorStore"),
@@ -5476,14 +5477,14 @@
                     })]
                 }), es && (0, i.jsxs)("div", {
                     className: "flex flex-row items-center gap-xsmall [flex-wrap:nowrap]",
-                    children: [(0, i.jsx)(nH.Dropdown, {
+                    children: [(0, i.jsx)(nK.Dropdown, {
                         size: "Medium",
                         ariaLabel: n("Label.SortBy"),
                         placeholder: n("Label.SortBy"),
                         value: ex,
                         onValueChange: ec,
-                        children: (0, i.jsx)(nK.Menu, {
-                            children: ef.map(e => (0, i.jsx)(nK.MenuItem, {
+                        children: (0, i.jsx)(nW.Menu, {
+                            children: ef.map(e => (0, i.jsx)(nW.MenuItem, {
                                 value: e.value,
                                 title: n("Label.SortByOption", {
                                     sortOption: n(e.labelKey)
@@ -5498,16 +5499,16 @@
                         ariaLabel: n("Heading.SortOrder"),
                         onClick: em
                     })]
-                }), (0, i.jsx)(ao, {
+                }), (0, i.jsx)(ar, {
                     open: c,
                     onClose: () => p(!1)
-                }), (0, i.jsx)(i0, {
+                }), (0, i.jsx)(i1, {
                     open: h || $,
                     onClose: ee
                 }, g)]
             })
         },
-        ac = e => {
+        am = e => {
             let {
                 menuState: t,
                 onMenuStateChange: n,
@@ -5516,40 +5517,40 @@
             } = e, o = [m.Asset.UpcomingEvent, m.Asset.PastEvent, m.Asset.DraftEvent], r = !!t.submenuItem && o.includes(t.submenuItem.type);
             return (0, i.jsxs)("div", {
                 className: "flex justify-between padding-top-small",
-                children: [t.menuItem.type === m.Asset.TShirt && (0, i.jsx)(ii, {
+                children: [t.menuItem.type === m.Asset.TShirt && (0, i.jsx)(ia, {
                     data: a
                 }), !r && (0, i.jsx)("div", {
                     className: "flex width-full padding-bottom-large [align-content:flex-start] [row-gap:12px] justify-between flex-row items-center wrap",
                     children: t.menuItem.type === m.Asset.Moments ? (0, i.jsxs)(i.Fragment, {
-                        children: [(0, i.jsx)(n9, {}), (0, i.jsx)(n6, {})]
+                        children: [(0, i.jsx)(ie, {}), (0, i.jsx)(n3, {})]
                     }) : (0, i.jsxs)(i.Fragment, {
-                        children: [t.submenuItem && (0, i.jsx)(iy, {
+                        children: [t.submenuItem && (0, i.jsx)(ib, {
                             menuState: t,
                             onMenuStateChange: n,
                             group: s
-                        }), (0, i.jsx)(ad, {
+                        }), (0, i.jsx)(ac, {
                             menuState: t
                         })]
                     })
                 })]
             })
         };
-    var am = e.i(812077),
-        ap = e.i(71375),
-        ah = e.i(83560),
-        av = e.i(576069),
-        af = e.i(134817);
-    let ax = [],
-        ag = new Date(0).toISOString(),
-        ay = e => e.startsWith("Label.AbuseType."),
-        ab = e => {
+    var ap = e.i(665591),
+        ah = e.i(71375),
+        av = e.i(83560),
+        af = e.i(576069),
+        ax = e.i(134817);
+    let ag = [],
+        ay = new Date(0).toISOString(),
+        ab = e => e.startsWith("Label.AbuseType."),
+        aT = e => {
             var t, n;
             return {
                 momentId: e.uid,
                 description: null != (t = e.description) ? t : "",
                 experienceName: "",
-                modifiedAt: null != (n = e.uploadedAt) ? n : ag,
-                status: ex,
+                modifiedAt: null != (n = e.uploadedAt) ? n : ay,
+                status: eg,
                 moderation: {
                     violationUid: e.uid,
                     abuseTypeLabelKeys: e.abuseTypeLabelKeys,
@@ -5560,12 +5561,12 @@
             }
         };
 
-    function aT(e) {
+    function aI(e) {
         return null != e.universeId ? e.universeId : "experienceId" in e && "number" == typeof e.experienceId ? e.experienceId : void 0
     }
-    var aI = e.i(11763),
-        aC = e.i(622361);
-    let aw = (e, t) => {
+    var aC = e.i(11763),
+        aw = e.i(622361);
+    let aS = (e, t) => {
             let {
                 user: n
             } = (0, V.useAuthentication)(), {
@@ -5584,12 +5585,12 @@
                         draftId: e,
                         userId: r
                     };
-                    tW(tB.LoadLocalVideoMedia, n);
+                    tY(tz.LoadLocalVideoMedia, n);
                     try {
-                        let i = await eL(r, e);
-                        t || (d(i), null != i && tY(tB.LoadLocalVideoMedia, n))
+                        let i = await eR(r, e);
+                        t || (d(i), null != i && tJ(tz.LoadLocalVideoMedia, n))
                     } catch (n) {
-                        tG(tB.LoadLocalVideoMedia, n, {
+                        tH(tz.LoadLocalVideoMedia, n, {
                             draftId: e
                         }), t || d(null)
                     }
@@ -5598,8 +5599,8 @@
                 }
             }, [e, i, l, r]), l) ? l : i ? u : null
         },
-        aS = "block width-full height-full max-w-full max-h-full object-contain",
-        aA = e => {
+        aA = "block width-full height-full max-w-full max-h-full object-contain",
+        aM = e => {
             let {
                 children: t
             } = e;
@@ -5609,15 +5610,15 @@
                 children: t
             })
         },
-        aM = e => {
+        aj = e => {
             let {
                 thumbnailUrl: t,
                 videoUrl: n
             } = e;
-            return n ? (0, i.jsx)(aA, {
+            return n ? (0, i.jsx)(aM, {
                 children: (0, i.jsx)("video", {
                     "aria-label": "Moment video preview",
-                    className: "radius-medium ".concat(aS),
+                    className: "radius-medium ".concat(aA),
                     controls: !0,
                     playsInline: !0,
                     poster: t,
@@ -5626,15 +5627,15 @@
                         kind: "captions"
                     })
                 })
-            }) : t ? (0, i.jsx)(aA, {
+            }) : t ? (0, i.jsx)(aM, {
                 children: (0, i.jsx)("img", {
                     alt: "Moment thumbnail preview",
-                    className: "radius-medium ".concat(aS),
+                    className: "radius-medium ".concat(aA),
                     src: t
                 })
-            }) : (0, i.jsx)(aA, {})
+            }) : (0, i.jsx)(aM, {})
         },
-        aj = (0, d.withTranslation)(e => {
+        aE = (0, d.withTranslation)(e => {
             var t, n, s;
             let {
                 moment: o,
@@ -5650,24 +5651,24 @@
                 translate: f
             } = (0, d.useTranslation)(), {
                 locale: x
-            } = (0, d.useLocalization)(), g = nM(), y = tZ(x), [b, T] = (0, a.useState)(() => {
+            } = (0, d.useLocalization)(), g = nj(), y = t$(x), [b, T] = (0, a.useState)(() => {
                 var e, t, n, i;
                 let a;
                 return o && ((a = {
-                    id: null != (i = aT(n = o)) ? i : 0,
+                    id: null != (i = aI(n = o)) ? i : 0,
                     name: n.experienceName
                 }).id > 0 || (null != (e = null == (t = a.name) ? void 0 : t.length) ? e : 0) > 0) ? a : void 0
             }), [I, C] = (0, a.useState)(() => {
                 var e;
                 return null != (e = null == o ? void 0 : o.description) ? e : ""
-            }), [w, S] = (0, a.useState)(), A = null != (t = null != w ? w : null == o ? void 0 : o.locale) ? t : y, M = (null == o ? void 0 : o.status) === ef && !0 === o.hasLocalVideo, j = aw((null == o ? void 0 : o.status) === ef ? o.draftId : null, {
+            }), [w, S] = (0, a.useState)(), A = null != (t = null != w ? w : null == o ? void 0 : o.locale) ? t : y, M = (null == o ? void 0 : o.status) === ex && !0 === o.hasLocalVideo, j = aS((null == o ? void 0 : o.status) === ex ? o.draftId : null, {
                 enabled: r && M,
                 thumbnailUrl: null == o ? void 0 : o.thumbnailUrl,
                 videoUrl: null == o ? void 0 : o.videoUrl
             }), E = (0, a.useCallback)(() => {
                 o && !v && null == p && (null == c || c(o))
             }, [v, o, c, p]), k = (0, a.useCallback)(() => {
-                o && h !== nj(o) && (null == m || m(o))
+                o && h !== nE(o) && (null == m || m(o))
             }, [h, o, m]), P = (0, a.useCallback)(e => {
                 o && e.id && e.name && (T(e), null == u || u(o, {
                     experienceId: e.id,
@@ -5690,34 +5691,34 @@
                 e || R(), l(e)
             }, [R, l]);
             if (!o) return null;
-            let _ = nj(o),
+            let _ = nE(o),
                 U = null != p && p === _,
                 B = null != p,
                 z = null != h && h === _,
-                q = o.status === eh,
-                V = o.status === ef,
+                q = o.status === ev,
+                V = o.status === ex,
                 F = V && !U,
                 G = !q && null != c && (V && M || U),
                 H = null != m,
                 K = I.length >= 140;
-            return (0, i.jsx)(aI.SheetRoot, {
+            return (0, i.jsx)(aC.SheetRoot, {
                 open: r,
                 onOpenChange: D,
-                children: (0, i.jsxs)(aI.SheetContent, {
+                children: (0, i.jsxs)(aC.SheetContent, {
                     closeLabel: f("Action.Close"),
                     largeScreenVariant: "side",
-                    children: [(0, i.jsx)(aI.SheetTitle, {
+                    children: [(0, i.jsx)(aC.SheetTitle, {
                         children: f("Heading.EditMoment")
-                    }), (0, i.jsxs)(aI.SheetBody, {
+                    }), (0, i.jsxs)(aC.SheetBody, {
                         className: "flex flex-col gap-y-medium padding-top-small padding-bottom-large",
-                        children: [(0, i.jsx)(aM, {
+                        children: [(0, i.jsx)(aj, {
                             thumbnailUrl: null != (n = null == j ? void 0 : j.thumbnailUrl) ? n : o.thumbnailUrl,
                             videoUrl: null != (s = null == j ? void 0 : j.videoUrl) ? s : o.videoUrl
                         }), F ? (0, i.jsx)(i.Fragment, {
-                            children: b ? (0, i.jsx)(nO, {
+                            children: b ? (0, i.jsx)(nD, {
                                 experience: b,
                                 onChangeExperience: () => T(void 0)
-                            }) : (0, i.jsx)(nG, {
+                            }) : (0, i.jsx)(nH, {
                                 onExperienceResolved: P
                             })
                         }) : b ? (0, i.jsxs)("div", {
@@ -5725,13 +5726,13 @@
                             children: [(0, i.jsx)("span", {
                                 className: "text-body-small content-muted",
                                 children: f("CreateMomentModal.ExperienceInput.Label")
-                            }), (0, i.jsx)(nO, {
+                            }), (0, i.jsx)(nD, {
                                 experience: b,
                                 hideTitle: !0
                             })]
                         }) : null, g ? (0, i.jsx)("div", {
                             className: "flex flex-col gap-y-xsmall width-full padding-top-small",
-                            children: F ? (0, i.jsx)(nW, {
+                            children: F ? (0, i.jsx)(nY, {
                                 value: A,
                                 onChange: L,
                                 isDisabled: U
@@ -5741,13 +5742,13 @@
                                     children: f("CreateMomentModal.LanguageInput.Label")
                                 }), (0, i.jsx)("span", {
                                     "data-testid": "edit-moment-content-language-readonly",
-                                    children: t$(o.locale)
+                                    children: t0(o.locale)
                                 })]
                             })
                         }) : null, (0, i.jsx)("div", {
                             className: "flex flex-col gap-y-xsmall width-full padding-top-small",
                             children: F ? (0, i.jsxs)(i.Fragment, {
-                                children: [(0, i.jsx)(aC.TextArea, {
+                                children: [(0, i.jsx)(aw.TextArea, {
                                     id: "edit-moment-description-".concat(_),
                                     label: f("MomentsTable.Header.Description"),
                                     rows: 3,
@@ -5773,11 +5774,11 @@
                                 })]
                             })
                         })]
-                    }), (0, i.jsx)(aI.SheetActions, {
+                    }), (0, i.jsx)(aC.SheetActions, {
                         className: "width-full",
                         children: (0, i.jsxs)("div", {
                             className: "flex gap-small width-full",
-                            children: [G ? (0, i.jsx)(er.Button, {
+                            children: [G ? (0, i.jsx)(el.Button, {
                                 variant: "Emphasis",
                                 size: "Medium",
                                 type: "button",
@@ -5786,7 +5787,7 @@
                                 isLoading: U,
                                 onClick: E,
                                 children: f("Action.Publish")
-                            }) : null, H ? (0, i.jsx)(er.Button, {
+                            }) : null, H ? (0, i.jsx)(el.Button, {
                                 variant: "Standard",
                                 size: "Medium",
                                 type: "button",
@@ -5804,22 +5805,22 @@
                 })
             })
         }, [ei.TranslationNamespace.Creations, ei.TranslationNamespace.Controls]);
-    var aE = e.i(24286),
-        ak = e.i(493924);
-    let aP = e => {
+    var ak = e.i(24286),
+        aP = e.i(493924);
+    let aN = e => {
         let {
             onCreateClick: t
         } = e, {
             translate: n
         } = (0, d.useTranslation)();
-        return (0, i.jsx)(ak.default, {
+        return (0, i.jsx)(aP.default, {
             title: n("Heading.ReachPlayersDirectlyInMoments"),
             size: "large",
             illustration: "videos",
             description: (0, i.jsxs)(i.Fragment, {
-                children: [n("Description.UploadExternalVideosToMoments"), " ", (0, i.jsx)(aE.Link, {
+                children: [n("Description.UploadExternalVideosToMoments"), " ", (0, i.jsx)(ak.Link, {
                     "aria-label": n("Label.LearnMore"),
-                    href: ie.MOMENTS_LEARN_MORE_URL,
+                    href: it.MOMENTS_LEARN_MORE_URL,
                     target: "_blank",
                     rel: "noopener noreferrer",
                     variant: "Inline",
@@ -5828,7 +5829,7 @@
                     children: n("Label.LearnMore")
                 })]
             }),
-            children: (0, i.jsx)(er.Button, {
+            children: (0, i.jsx)(el.Button, {
                 variant: "Emphasis",
                 size: "Large",
                 type: "button",
@@ -5837,22 +5838,22 @@
             })
         })
     };
-    var aN = e.i(260022),
-        aL = e.i(278300),
-        aR = e.i(776569),
-        aO = e.i(125677),
-        aD = e.i(20227),
-        a_ = e.i(494601);
-    let aU = "text/plain",
-        aB = async e => {
+    var aL = e.i(260022),
+        aR = e.i(278300),
+        aO = e.i(776569),
+        aD = e.i(125677),
+        a_ = e.i(20227),
+        aU = e.i(494601);
+    let aB = "text/plain",
+        az = async e => {
             if ("u" < typeof ClipboardItem || "function" != typeof navigator.clipboard.write) return e.then(e => navigator.clipboard.writeText(e));
             let t = e.then(e => new Blob([e], {
-                type: aU
+                type: aB
             }));
             return t.catch(() => {}), navigator.clipboard.write([new ClipboardItem({
-                [aU]: t
+                [aB]: t
             })])
-        }, az = e => {
+        }, aq = e => {
             let {
                 moment: t
             } = e, n = (() => {
@@ -5870,42 +5871,42 @@
                 let {
                     mutateAsync: e,
                     isPending: t
-                } = (0, eY.useMutation)({
-                    mutationFn: e => nS.createStaticLink(e)
+                } = (0, eJ.useMutation)({
+                    mutationFn: e => nA.createStaticLink(e)
                 });
                 return {
                     createMomentShareLink: (0, a.useCallback)(t => e(t), [e]),
                     isCreatingMomentShareLink: t
                 }
             }(), l = (0, a.useRef)(!1), c = s("Action.CopyMomentLink"), m = s("Message.MomentLinkCopied"), p = s("Message.MomentLinkCopyFailed"), h = (0, a.useCallback)(async () => {
-                if (l.current || t.status !== eh || !t.feedItemId) return;
+                if (l.current || t.status !== ev || !t.feedItemId) return;
                 l.current = !0;
                 let e = {
                     momentId: t.momentId,
                     feedItemId: t.feedItemId
                 };
-                tW(tB.CopyShareLink, e);
+                tY(tz.CopyShareLink, e);
                 try {
                     if (!("clipboard" in navigator)) throw Error("Clipboard API is unavailable");
                     let n = o({
                         momentId: t.momentId,
                         feedItemId: t.feedItemId
                     });
-                    await Promise.all([n, aB(n)]), tY(tB.CopyShareLink, e), (0, ah.toast)({
+                    await Promise.all([n, az(n)]), tJ(tz.CopyShareLink, e), (0, av.toast)({
                         title: m
                     })
                 } catch (t) {
-                    tG(tB.CopyShareLink, t, e), (0, ah.toast)({
+                    tH(tz.CopyShareLink, t, e), (0, av.toast)({
                         title: p
                     })
                 } finally {
                     l.current = !1
                 }
             }, [o, m, p, t]);
-            return n && t.status === eh && t.feedItemId ? (0, i.jsx)(aR.Tooltip, {
+            return n && t.status === ev && t.feedItemId ? (0, i.jsx)(aO.Tooltip, {
                 position: "top-center",
                 title: c,
-                children: (0, i.jsx)(aR.TooltipTrigger, {
+                children: (0, i.jsx)(aO.TooltipTrigger, {
                     asChild: !0,
                     children: (0, i.jsx)(k.IconButton, {
                         ariaLabel: c,
@@ -5918,12 +5919,12 @@
                     })
                 })
             }) : null
-        }, aq = {
-            [eh]: "bg-system-success",
-            [ev]: "bg-system-warning",
-            [ef]: "bg-surface-300",
-            [ex]: "bg-system-alert"
-        }, aV = e => {
+        }, aV = {
+            [ev]: "bg-system-success",
+            [ef]: "bg-system-warning",
+            [ex]: "bg-surface-300",
+            [eg]: "bg-system-alert"
+        }, aF = e => {
             let {
                 status: t,
                 label: n
@@ -5932,17 +5933,17 @@
                 className: "inline-flex items-center gap-xsmall",
                 children: [(0, i.jsx)("span", {
                     "aria-hidden": !0,
-                    className: "size-[8px] radius-circle shrink-0 ".concat(aq[t]),
+                    className: "size-[8px] radius-circle shrink-0 ".concat(aV[t]),
                     "data-testid": "moment-status-dot-".concat(t)
                 }), (0, i.jsx)("span", {
                     children: n
                 })]
             })
         };
-    var aF = e.i(458451),
-        aG = e.i(958885),
-        aH = e.i(302219);
-    let aK = (0, d.withTranslation)(e => {
+    var aG = e.i(458451),
+        aH = e.i(572676),
+        aK = e.i(302219);
+    let aW = (0, d.withTranslation)(e => {
             let t, {
                     moment: n
                 } = e,
@@ -5951,10 +5952,10 @@
                 } = (0, d.useTranslation)(),
                 {
                     user: o
-                } = (0, aF.useRobloxAuthentication)(),
-                r = n.status === ef,
+                } = (0, aG.useRobloxAuthentication)(),
+                r = n.status === ex,
                 l = r && !0 === n.hasLocalVideo,
-                u = aw(r ? n.draftId : null, {
+                u = aS(r ? n.draftId : null, {
                     enabled: l,
                     thumbnailUrl: n.thumbnailUrl,
                     videoUrl: n.videoUrl
@@ -5981,13 +5982,13 @@
             }) : null != c ? (0, i.jsx)("div", {
                 className: "radius-small clip size-[48px]",
                 "data-testid": "moment-video-thumbnail-image",
-                children: (0, i.jsx)(aG.Thumbnail2d, {
+                children: (0, i.jsx)(aH.Thumbnail2d, {
                     alt: "",
                     containerClass: "block",
                     imgClassName: "[object-fit:cover]",
-                    returnPolicy: aG.ReturnPolicy.PlaceHolder,
+                    returnPolicy: aH.ReturnPolicy.PlaceHolder,
                     targetId: c,
-                    type: aG.ThumbnailTypes.assetThumbnail
+                    type: aH.ThumbnailTypes.assetThumbnail
                 })
             }) : (0, i.jsx)("div", {
                 "aria-hidden": !0,
@@ -6005,8 +6006,8 @@
             }) : null != c && (g = (0, i.jsx)("div", {
                 "aria-label": h,
                 className: "radius-medium clip max-width-[500px] max-height-[500px] bg-surface-200",
-                children: (0, i.jsx)(aH.RobloxVideoPlayer, {
-                    cmcdInstanceType: aH.CmcdInstanceType.CreatorDashboard,
+                children: (0, i.jsx)(aK.RobloxVideoPlayer, {
+                    cmcdInstanceType: aK.CmcdInstanceType.CreatorDashboard,
                     cmcdUserId: null == o ? void 0 : o.id,
                     videoAssetId: String(c),
                     environment: "production",
@@ -6016,10 +6017,10 @@
                     loop: !0,
                     muted: !0
                 })
-            })), v) ? (0, i.jsxs)(iI.Popover, {
+            })), v) ? (0, i.jsxs)(iC.Popover, {
                 open: m,
                 onOpenChange: p,
-                children: [(0, i.jsx)(iI.PopoverAnchor, {
+                children: [(0, i.jsx)(iC.PopoverAnchor, {
                     asChild: !0,
                     children: (0, i.jsx)("button", {
                         "aria-label": h,
@@ -6031,7 +6032,7 @@
                         onBlur: x,
                         children: t
                     })
-                }), (0, i.jsx)(iI.PopoverContent, {
+                }), (0, i.jsx)(iC.PopoverContent, {
                     align: "start",
                     ariaLabel: h,
                     className: "outline-none",
@@ -6040,27 +6041,27 @@
                 })]
             }) : t
         }, [ei.TranslationNamespace.Creations]),
-        aW = [10, 25, 50],
-        aY = {
-            [eh]: "MomentsTable.NoActiveMoments",
-            [ef]: "MomentsTable.NoDraftMoments",
-            [ex]: "MomentsTable.NoModeratedMoments"
+        aY = [10, 25, 50],
+        aJ = {
+            [ev]: "MomentsTable.NoActiveMoments",
+            [ex]: "MomentsTable.NoDraftMoments",
+            [eg]: "MomentsTable.NoModeratedMoments"
         },
-        aJ = e => {
+        aQ = e => {
             let {
                 moment: t,
                 disabled: n,
                 onBlur: s
             } = e, {
                 translate: o
-            } = (0, d.useTranslation)(), r = nj(t), [l, u] = (0, a.useState)(t.description), c = l.length >= 140, m = (0, a.useCallback)(e => {
+            } = (0, d.useTranslation)(), r = nE(t), [l, u] = (0, a.useState)(t.description), c = l.length >= 140, m = (0, a.useCallback)(e => {
                 u(e.target.value)
             }, []), p = (0, a.useCallback)(e => {
                 s(t, e)
             }, [t, s]);
             return (0, i.jsxs)("div", {
                 className: "flex width-full flex-col gap-y-xsmall",
-                children: [(0, i.jsx)(nD.TextInput, {
+                children: [(0, i.jsx)(n_.TextInput, {
                     id: "moment-description-".concat(r),
                     "aria-label": o("MomentsTable.Header.Description"),
                     value: l,
@@ -6078,7 +6079,7 @@
                 })]
             })
         },
-        aQ = e => {
+        aX = e => {
             let t, {
                     moment: n,
                     editLabel: s,
@@ -6101,60 +6102,60 @@
                 {
                     locale: b
                 } = (0, d.useLocalization)(),
-                T = nj(n),
-                I = n.status === ef,
-                C = n.status === ex ? n.moderation : void 0,
+                T = nE(n),
+                I = n.status === ex,
+                C = n.status === eg ? n.moderation : void 0,
                 w = (0, a.useCallback)(() => {
                     v(n)
                 }, [n, v]),
                 S = (0, a.useCallback)(() => {
-                    n.status === ef && (null == x || x(n.draftId))
+                    n.status === ex && (null == x || x(n.draftId))
                 }, [n, x]),
                 A = (0, a.useMemo)(() => {
                     var e;
                     if (!c) return null;
-                    let t = (null != (e = null == C ? void 0 : C.abuseTypeLabelKeys) ? e : []).filter(ay);
+                    let t = (null != (e = null == C ? void 0 : C.abuseTypeLabelKeys) ? e : []).filter(ab);
                     return (t.length > 0 ? t : ["Label.AbuseType.Other"]).map(e => y(ei.TranslationNamespace.NotApproved, e)).join(", ")
                 }, [C, c, y]),
                 M = null != C ? (t = C.violationUid, p ? "".concat(p, "#/v/").concat(encodeURIComponent(t)) : null) : null,
-                j = (0, i.jsx)(aL.TableCell, {
-                    children: (0, i.jsx)(aV, {
+                j = (0, i.jsx)(aR.TableCell, {
+                    children: (0, i.jsx)(aF, {
                         label: h,
                         status: n.status
                     })
                 });
-            return (0, i.jsxs)(aL.TableRow, {
+            return (0, i.jsxs)(aR.TableRow, {
                 isHoverable: !0,
                 "data-testid": "moment-row-".concat(T),
-                children: [(0, i.jsx)(aL.TableCell, {
-                    children: (0, i.jsx)(aK, {
+                children: [(0, i.jsx)(aR.TableCell, {
+                    children: (0, i.jsx)(aW, {
                         moment: n
                     })
                 }), l ? (0, i.jsxs)(i.Fragment, {
-                    children: [(0, i.jsx)(aL.TableCell, {
+                    children: [(0, i.jsx)(aR.TableCell, {
                         children: n.experienceName
-                    }), (0, i.jsx)(aL.TableCell, {
-                        children: n.status === eh ? (0, i.jsx)("span", {
+                    }), (0, i.jsx)(aR.TableCell, {
+                        children: n.status === ev ? (0, i.jsx)("span", {
                             "data-testid": "moment-description-".concat(T),
                             children: n.description || "-"
-                        }) : (0, i.jsx)(aJ, {
+                        }) : (0, i.jsx)(aQ, {
                             moment: n,
                             disabled: null != o && o === T,
                             onBlur: f
                         }, "moment-description-".concat(T, "-").concat(n.modifiedAt))
                     })]
-                }) : null, u ? (0, i.jsx)(aL.TableCell, {
+                }) : null, u ? (0, i.jsx)(aR.TableCell, {
                     children: (0, i.jsx)("span", {
                         "data-testid": "moment-content-language-".concat(T),
-                        children: t$(n.locale)
+                        children: t0(n.locale)
                     })
                 }) : null, c ? (0, i.jsxs)(i.Fragment, {
-                    children: [(0, i.jsx)(aL.TableCell, {
+                    children: [(0, i.jsx)(aR.TableCell, {
                         children: (0, i.jsx)("span", {
                             "data-testid": "moment-description-".concat(T),
                             children: n.description || "-"
                         })
-                    }), (0, i.jsx)(aL.TableCell, {
+                    }), (0, i.jsx)(aR.TableCell, {
                         children: (0, i.jsx)("span", {
                             "data-testid": "moment-upload-time-".concat(T),
                             children: (null == C ? void 0 : C.uploadedAt) != null && ((e, t) => {
@@ -6179,17 +6180,17 @@
                                 return "".concat(o("weekday"), ", ").concat(o("month"), " ").concat(o("day"), ", ").concat(o("hour"), ":").concat(o("minute")).concat(r)
                             })(C.uploadedAt, null != b ? b : d.Locale.English) || "-"
                         })
-                    }), (0, i.jsx)(aL.TableCell, {
+                    }), (0, i.jsx)(aR.TableCell, {
                         children: (0, i.jsx)("span", {
                             "data-testid": "moment-moderation-reason-".concat(T),
                             children: A
                         })
-                    }), j, (0, i.jsx)(aL.TableCell, {
+                    }), j, (0, i.jsx)(aR.TableCell, {
                         align: "end",
-                        children: null != M ? (0, i.jsx)(aR.Tooltip, {
+                        children: null != M ? (0, i.jsx)(aO.Tooltip, {
                             position: "top-center",
                             title: m,
-                            children: (0, i.jsx)(aR.TooltipTrigger, {
+                            children: (0, i.jsx)(aO.TooltipTrigger, {
                                 asChild: !0,
                                 children: (0, i.jsx)(k.IconButton, {
                                     as: "a",
@@ -6206,16 +6207,16 @@
                         }) : null
                     })]
                 }) : (0, i.jsxs)(i.Fragment, {
-                    children: [j, (0, i.jsx)(aL.TableCell, {
+                    children: [j, (0, i.jsx)(aR.TableCell, {
                         align: "end",
                         children: (0, i.jsxs)("div", {
                             className: "inline-flex items-center gap-xsmall",
-                            children: [(0, i.jsx)(az, {
+                            children: [(0, i.jsx)(aq, {
                                 moment: n
-                            }), (0, i.jsx)(aR.Tooltip, {
+                            }), (0, i.jsx)(aO.Tooltip, {
                                 position: "top-center",
                                 title: s,
-                                children: (0, i.jsx)(aR.TooltipTrigger, {
+                                children: (0, i.jsx)(aO.TooltipTrigger, {
                                     asChild: !0,
                                     children: (0, i.jsx)(k.IconButton, {
                                         ariaLabel: s,
@@ -6226,7 +6227,7 @@
                                         onClick: w
                                     })
                                 })
-                            }), I && !0 === n.hasLocalVideo && x ? (0, i.jsx)(er.Button, {
+                            }), I && !0 === n.hasLocalVideo && x ? (0, i.jsx)(el.Button, {
                                 size: "Small",
                                 type: "button",
                                 variant: "Standard",
@@ -6239,7 +6240,7 @@
                 })]
             })
         },
-        aX = (0, d.withTranslation)(e => {
+        aZ = (0, d.withTranslation)(e => {
             let {
                 moments: t,
                 onEditMoment: n,
@@ -6258,33 +6259,33 @@
                     gridContainer: v,
                     createButtonContainer: f
                 }
-            } = (0, a_.default)(), {
+            } = (0, aU.default)(), {
                 statusTab: x
-            } = nN(), g = nM(), y = (0, a.useCallback)(e => {
+            } = nL(), g = nj(), y = (0, a.useCallback)(e => {
                 switch (e) {
-                    case eh:
-                        return p("MomentsTable.Pills.Active");
                     case ev:
-                        return p("MomentsTable.Pills.Pending");
+                        return p("MomentsTable.Pills.Active");
                     case ef:
-                        return p("MomentsTable.Pills.Draft");
+                        return p("MomentsTable.Pills.Pending");
                     case ex:
+                        return p("MomentsTable.Pills.Draft");
+                    case eg:
                         return p("MomentsTable.Pills.Moderated");
                     default:
                         return e
                 }
-            }, [p]), b = x === eh, T = x === ex, I = !T, C = g && !T, w = (0, a.useMemo)(() => x === ef ? t.filter(e => e.status === ef || e.status === ev) : t.filter(e => e.status === x), [t, x]), {
+            }, [p]), b = x === ev, T = x === eg, I = !T, C = g && !T, w = (0, a.useMemo)(() => x === ex ? t.filter(e => e.status === ex || e.status === ef) : t.filter(e => e.status === x), [t, x]), {
                 page: S,
                 rowsPerPage: A,
                 onPageChange: M,
                 onRowsPerPageChange: j
-            } = (0, aD.useTablePagination)({
+            } = (0, a_.useTablePagination)({
                 count: w.length,
                 initialRowsPerPage: 10,
                 resetKey: x
             }), {
                 currentPage: E
-            } = (0, aO.useCurrentPage)(w, {
+            } = (0, aD.useCurrentPage)(w, {
                 page: S,
                 rowsPerPage: A,
                 hasNextPage: !!b && u,
@@ -6297,7 +6298,7 @@
                 })
             }, [s]), P = (0, a.useCallback)(e => {
                 M(void 0, e)
-            }, [M]), L = p("Action.Edit"), R = h(ei.TranslationNamespace.OAuth, "Label.OAuthMoreDetails"), O = (0, aN.resolveUrl)("reportAppealsUrl", "production", "global"), D = (0, i.jsx)(aL.TableHeaderCell, {
+            }, [M]), L = p("Action.Edit"), R = h(ei.TranslationNamespace.OAuth, "Label.OAuthMoreDetails"), O = (0, aL.resolveUrl)("reportAppealsUrl", "production", "global"), D = (0, i.jsx)(aR.TableHeaderCell, {
                 children: p("MomentsTable.Header.Status")
             }), _ = 3 + 2 * !!I + +!!C + 3 * !!T;
             return (0, i.jsx)("div", {
@@ -6306,52 +6307,52 @@
                     className: (0, N.clsx)(f, "flex flex-col gap-xlarge width-full self-stretch"),
                     children: (0, i.jsxs)("div", {
                         className: "flex flex-col gap-y-medium width-full",
-                        children: [(0, i.jsxs)(aL.Table, {
+                        children: [(0, i.jsxs)(aR.Table, {
                             className: "width-full",
                             variant: "Framed",
-                            children: [(0, i.jsx)(aL.TableHeader, {
-                                children: (0, i.jsxs)(aL.TableRow, {
-                                    children: [(0, i.jsx)(aL.TableHeaderCell, {
+                            children: [(0, i.jsx)(aR.TableHeader, {
+                                children: (0, i.jsxs)(aR.TableRow, {
+                                    children: [(0, i.jsx)(aR.TableHeaderCell, {
                                         children: p("MomentsTable.Header.Moments")
                                     }), I ? (0, i.jsxs)(i.Fragment, {
-                                        children: [(0, i.jsx)(aL.TableHeaderCell, {
+                                        children: [(0, i.jsx)(aR.TableHeaderCell, {
                                             children: p("MomentsTable.Header.ExperienceName")
-                                        }), (0, i.jsx)(aL.TableHeaderCell, {
+                                        }), (0, i.jsx)(aR.TableHeaderCell, {
                                             children: p("MomentsTable.Header.Description")
                                         })]
-                                    }) : null, C ? (0, i.jsx)(aL.TableHeaderCell, {
+                                    }) : null, C ? (0, i.jsx)(aR.TableHeaderCell, {
                                         children: p("CreateMomentModal.LanguageInput.Label")
                                     }) : null, T ? (0, i.jsxs)(i.Fragment, {
-                                        children: [(0, i.jsx)(aL.TableHeaderCell, {
+                                        children: [(0, i.jsx)(aR.TableHeaderCell, {
                                             children: p("MomentsTable.Header.Description")
-                                        }), (0, i.jsx)(aL.TableHeaderCell, {
+                                        }), (0, i.jsx)(aR.TableHeaderCell, {
                                             children: h(ei.TranslationNamespace.AppealsPortal, "Label.UploadTime")
-                                        }), (0, i.jsx)(aL.TableHeaderCell, {
+                                        }), (0, i.jsx)(aR.TableHeaderCell, {
                                             children: p("TableHeader.Reason")
-                                        }), D, (0, i.jsx)(aL.TableHeaderCell, {
+                                        }), D, (0, i.jsx)(aR.TableHeaderCell, {
                                             align: "end",
                                             children: " "
                                         })]
                                     }) : (0, i.jsxs)(i.Fragment, {
-                                        children: [D, (0, i.jsx)(aL.TableHeaderCell, {
+                                        children: [D, (0, i.jsx)(aR.TableHeaderCell, {
                                             align: "end",
                                             children: " "
                                         })]
                                     })]
                                 })
-                            }), (0, i.jsx)(aL.TableBody, {
-                                children: 0 === w.length ? (0, i.jsx)(aL.TableRow, {
-                                    children: (0, i.jsx)(aL.TableCell, {
+                            }), (0, i.jsx)(aR.TableBody, {
+                                children: 0 === w.length ? (0, i.jsx)(aR.TableRow, {
+                                    children: (0, i.jsx)(aR.TableCell, {
                                         colSpan: _,
                                         align: "center",
                                         className: "padding-y-xxlarge",
                                         children: (0, i.jsx)("span", {
                                             className: "text-body-medium content-muted block padding-y-xxlarge",
                                             "data-testid": "moments-table-empty-filter-message",
-                                            children: p(aY[x])
+                                            children: p(aJ[x])
                                         })
                                     })
-                                }) : E.map(e => (0, i.jsx)(aQ, {
+                                }) : E.map(e => (0, i.jsx)(aX, {
                                     moment: e,
                                     editLabel: L,
                                     publishingDraftId: r,
@@ -6365,14 +6366,14 @@
                                     onEditMoment: n,
                                     onDescriptionBlur: k,
                                     onPublishMoment: o
-                                }, nj(e)))
+                                }, nE(e)))
                             })]
-                        }), w.length > 0 ? (0, i.jsx)(aL.TablePagination, {
+                        }), w.length > 0 ? (0, i.jsx)(aR.TablePagination, {
                             paginationAriaLabel: "Pagination",
                             page: S,
                             rowsPerPage: A,
                             totalRows: w.length,
-                            rowsPerPageOptions: aW,
+                            rowsPerPageOptions: aY,
                             onPageChange: P,
                             onRowsPerPageChange: j
                         }) : null]
@@ -6380,13 +6381,13 @@
                 })
             })
         }, [ei.TranslationNamespace.Creations, ei.TranslationNamespace.Controls, ei.TranslationNamespace.NotApproved, ei.TranslationNamespace.AppealsPortal, ei.TranslationNamespace.OAuth]),
-        aZ = (0, d.withTranslation)(e => {
+        a$ = (0, d.withTranslation)(e => {
             let {
                 onRetry: t
             } = e, {
                 translate: n
             } = (0, d.useTranslation)();
-            return (0, i.jsx)(el.Alert, {
+            return (0, i.jsx)(eu.Alert, {
                 className: "width-full",
                 variant: "Feedback",
                 severity: "Error",
@@ -6406,21 +6407,21 @@
                 })
             })
         }, [ei.TranslationNamespace.Error]);
-    var a$ = e.i(917852);
-    let a0 = () => {
-            window.open(a$.idVerificationActionUrl, "_blank", "noopener,noreferrer")
+    var a0 = e.i(917852);
+    let a1 = () => {
+            window.open(a0.idVerificationActionUrl, "_blank", "noopener,noreferrer")
         },
-        a1 = (0, d.withTranslation)(() => {
+        a2 = (0, d.withTranslation)(() => {
             let {
                 translate: e
             } = (0, d.useTranslation)();
-            return (0, i.jsx)(el.Alert, {
+            return (0, i.jsx)(eu.Alert, {
                 className: "width-full",
                 variant: "Feedback",
                 severity: "Warning",
                 hasCloseAffordance: !1,
                 primaryActionLabel: e("Label.VerifyId"),
-                onPrimaryAction: a0,
+                onPrimaryAction: a1,
                 "data-testid": "moments-id-verification-banner",
                 children: (0, i.jsxs)("div", {
                     className: "flex flex-col gap-xsmall",
@@ -6434,7 +6435,7 @@
                 })
             })
         }, [ei.TranslationNamespace.Creations]),
-        a2 = () => {
+        a4 = () => {
             var e;
             (() => {
                 let {
@@ -6442,9 +6443,9 @@
                 } = (0, V.useAuthentication)(), t = null == e ? void 0 : e.id;
                 (0, a.useEffect)(() => () => {
                     void 0 !== t && (() => {
-                        for (let e of eC.keys()) {
-                            let t = eC.get(e);
-                            t && (URL.revokeObjectURL(t.thumbnailUrl), URL.revokeObjectURL(t.videoUrl), eC.delete(e))
+                        for (let e of ew.keys()) {
+                            let t = ew.get(e);
+                            t && (URL.revokeObjectURL(t.thumbnailUrl), URL.revokeObjectURL(t.videoUrl), ew.delete(e))
                         }
                     })()
                 }, [t])
@@ -6458,13 +6459,13 @@
                 isLoading: r,
                 isError: l,
                 refetch: u
-            } = (0, av.useCreatorEligibility)(), c = null != (e = null == o ? void 0 : o.creatorEligibility.includes(am.CreatorEligibilityEnum.IdVerified)) && e, m = r || l || !c, p = !r && !l && !c, h = (0, a.useCallback)(() => {
+            } = (0, af.useCreatorEligibility)(), c = null != (e = null == o ? void 0 : o.creatorEligibility.includes(ap.CreatorEligibilityEnum.IdVerified)) && e, m = r || l || !c, p = !r && !l && !c, h = (0, a.useCallback)(() => {
                 u()
             }, [u]), [v, f] = (0, a.useState)(!1), [x, g] = (0, a.useState)(null), [y, b] = (0, a.useState)({}), {
                 moments: T,
                 updateMoment: I,
                 removeMoment: C
-            } = eG(), {
+            } = eH(), {
                 publishMoment: w,
                 publishingDraftId: S,
                 isPublishing: A
@@ -6474,21 +6475,21 @@
                     translate: t
                 } = (0, d.useTranslation)(), {
                     locale: n
-                } = (0, d.useLocalization)(), i = nM(), {
+                } = (0, d.useLocalization)(), i = nj(), {
                     user: s
                 } = (0, V.useAuthentication)(), o = null == s ? void 0 : s.id, {
                     mutateAsync: r,
                     isPending: l,
                     variables: u
-                } = (0, eY.useMutation)({
+                } = (0, eJ.useMutation)({
                     mutationFn: async e => {
                         let {
                             moment: a
                         } = e;
                         if (null == o) throw Error("Authenticated user is required to publish a moment");
-                        let s = await eN(o, a.draftId);
+                        let s = await eL(o, a.draftId);
                         if (!s) throw Error("Local moment video is required before publishing");
-                        return await nT({
+                        return await nI({
                             moment: a,
                             file: s,
                             userId: o,
@@ -6511,16 +6512,16 @@
             } = function() {
                 let {
                     user: e
-                } = (0, V.useAuthentication)(), t = (0, eH.useQueryClient)(), n = null == e ? void 0 : e.id, i = nA(), {
+                } = (0, V.useAuthentication)(), t = (0, eK.useQueryClient)(), n = null == e ? void 0 : e.id, i = nM(), {
                     mutateAsync: s,
                     isPending: o,
                     variables: r
-                } = (0, eY.useMutation)({
+                } = (0, eJ.useMutation)({
                     mutationFn: e => {
                         let {
                             moment: t
                         } = e;
-                        return t7({
+                        return t9({
                             momentId: t.momentId,
                             feedItemId: t.feedItemId,
                             useFeedItemId: i
@@ -6532,26 +6533,26 @@
                         } = a;
                         null != n && function(e, t, n) {
                             let i = arguments.length > 3 && void 0 !== arguments[3] && arguments[3];
-                            e.setQueryData(nk(t, i), e => (null == e ? void 0 : e.pages.length) ? {
+                            e.setQueryData(nP(t, i), e => (null == e ? void 0 : e.pages.length) ? {
                                 ...e,
                                 pages: e.pages.map(e => ({
                                     ...e,
-                                    moments: e.moments.filter(e => nj(e) !== n)
+                                    moments: e.moments.filter(e => nE(e) !== n)
                                 }))
                             } : e)
-                        }(t, n, nj(s), i)
+                        }(t, n, nE(s), i)
                     }
                 });
                 return {
                     deleteMoment: (0, a.useCallback)(e => s({
                         moment: e
                     }), [s]),
-                    deletingMomentKey: o && null != r ? nj(r.moment) : null,
+                    deletingMomentKey: o && null != r ? nE(r.moment) : null,
                     isDeleting: o
                 }
             }(), {
                 statusTab: k
-            } = nN(), P = nP(), {
+            } = nL(), P = nN(), {
                 serverMoments: N,
                 isAllServerMomentsLoaded: L,
                 hasNextPage: R,
@@ -6580,15 +6581,15 @@
                     } = function() {
                         let {
                             user: e
-                        } = (0, V.useAuthentication)(), t = null == e ? void 0 : e.id, n = nA();
-                        return (0, eW.useInfiniteQuery)({
-                            queryKey: nk(t, n),
+                        } = (0, V.useAuthentication)(), t = null == e ? void 0 : e.id, n = nM();
+                        return (0, eY.useInfiniteQuery)({
+                            queryKey: nP(t, n),
                             queryFn: null != t ? e => {
                                 let {
                                     pageParam: i
                                 } = e;
-                                return t6(t, i, n)
-                            } : eK.skipToken,
+                                return t3(t, i, n)
+                            } : eW.skipToken,
                             initialPageParam: {
                                 pageNumber: 1
                             },
@@ -6602,9 +6603,9 @@
                     m = (0, a.useMemo)(() => n ? function(e) {
                         let t = new Map;
                         for (let n of e)
-                            for (let e of n.moments) t.set(nj(e), e);
+                            for (let e of n.moments) t.set(nE(e), e);
                         return [...t.values()]
-                    }(n.pages) : ax, [n]),
+                    }(n.pages) : ag, [n]),
                     p = null != (e = null == n ? void 0 : n.pages.length) ? e : 0,
                     h = (0, a.useCallback)(() => {
                         r({
@@ -6613,7 +6614,7 @@
                         })
                     }, [r]),
                     v = l && !d;
-                (0, af.useBackgroundPageLoader)({
+                (0, ax.useBackgroundPageLoader)({
                     hasNextPage: v,
                     fetchNextPage: h,
                     disabled: s
@@ -6633,7 +6634,7 @@
                     refetch: o,
                     serverPageSize: t
                 }), [v, i, h, f, d, u, s, c, p, o, m, t])
-            }(), H = P && k === ex, {
+            }(), H = P && k === eg, {
                 data: K,
                 isPending: W,
                 error: Y,
@@ -6644,37 +6645,37 @@
                 } = e, {
                     user: n
                 } = (0, V.useAuthentication)(), i = null == n ? void 0 : n.id;
-                return (0, eJ.useQuery)({
+                return (0, eQ.useQuery)({
                     queryKey: ["userViolations", i],
-                    queryFn: null != i && t ? () => nh(i) : eK.skipToken,
+                    queryFn: null != i && t ? () => nv(i) : eW.skipToken,
                     staleTime: 1 / 0,
                     retry: !1
                 })
             }({
                 enabled: H
-            }), Q = (0, a.useMemo)(() => (null != K ? K : []).map(ab), [K]), X = (0, a.useCallback)(() => {
+            }), Q = (0, a.useMemo)(() => (null != K ? K : []).map(aT), [K]), X = (0, a.useCallback)(() => {
                 J()
             }, [J]);
             (0, a.useEffect)(() => {
-                Y && tG(tB.ListViolations, Y, {
+                Y && tH(tz.ListViolations, Y, {
                     userId: s
                 })
             }, [s, Y]);
             let $ = (0, a.useMemo)(() => [...N, ...T].map(e => {
-                    let t = y[nj(e)];
+                    let t = y[nE(e)];
                     return t ? {
                         ...e,
                         ...t
                     } : e
                 }), [T, y, N]),
                 ee = (0, a.useMemo)(() => {
-                    let e = $.filter(e => e.status !== ex);
+                    let e = $.filter(e => e.status !== eg);
                     return H ? [...e, ...Q] : e
                 }, [H, Q, $]),
                 et = ee.length > 0,
                 en = (0, a.useRef)(0);
             (0, a.useEffect)(() => {
-                !D || _ || B || z <= en.current || (en.current = z, tG(tB.ListMoments, D, {
+                !D || _ || B || z <= en.current || (en.current = z, tH(tz.ListMoments, D, {
                     userId: s,
                     pageCount: q
                 }))
@@ -6685,7 +6686,7 @@
                     ei.current = !1;
                     return
                 }
-                D && !ei.current && (ei.current = !0, tG(tB.FetchNextPage, D, {
+                D && !ei.current && (ei.current = !0, tH(tz.FetchNextPage, D, {
                     userId: s,
                     pageCount: q
                 }))
@@ -6693,8 +6694,8 @@
             let ea = (0, a.useMemo)(() => {
                     var e;
                     if (!x) return null;
-                    let t = nj(x);
-                    return null != (e = $.find(e => nj(e) === t)) ? e : x
+                    let t = nE(x);
+                    return null != (e = $.find(e => nE(e) === t)) ? e : x
                 }, [x, $]),
                 es = (0, a.useCallback)(e => {
                     g(e), f(!0)
@@ -6706,28 +6707,28 @@
                     F()
                 }, [F]),
                 el = (0, a.useCallback)(() => {
-                    (0, ah.toast)({
+                    (0, av.toast)({
                         title: t("Message.MomentPublishedError")
                     })
                 }, [t]),
                 eu = (0, a.useCallback)(() => {
-                    (0, ah.toast)({
+                    (0, av.toast)({
                         title: t("Message.MomentUploading")
                     })
                 }, [t]),
                 ed = (0, a.useCallback)(() => {
-                    (0, ah.toast)({
+                    (0, av.toast)({
                         title: t("Message.MomentProcessing")
                     })
                 }, [t]),
                 ec = (0, a.useCallback)(() => {
-                    (0, ah.toast)({
+                    (0, av.toast)({
                         title: t("Message.MomentDeletedError")
                     })
                 }, [t]),
                 em = (0, a.useCallback)(async e => {
-                    let t = e.status === ef,
-                        n = nj(e),
+                    let t = e.status === ex,
+                        n = nE(e),
                         i = {
                             ...t ? {
                                 draftId: e.draftId
@@ -6735,26 +6736,26 @@
                                 momentId: e.momentId,
                                 feedItemId: e.feedItemId
                             },
-                            experienceId: aT(e),
+                            experienceId: aI(e),
                             isLocalMoment: t,
                             userId: s
                         };
-                    tW(tB.DeleteMoment, i);
+                    tY(tz.DeleteMoment, i);
                     try {
-                        e.status === ef ? C(e.draftId) : await j(e), b(e => {
+                        e.status === ex ? C(e.draftId) : await j(e), b(e => {
                             if (!(n in e)) return e;
                             let {
                                 [n]: t, ...i
                             } = e;
                             return i
-                        }), f(!1), g(null), tY(tB.DeleteMoment, i)
+                        }), f(!1), g(null), tJ(tz.DeleteMoment, i)
                     } catch (e) {
-                        tG(tB.DeleteMoment, e, i), ec()
+                        tH(tz.DeleteMoment, e, i), ec()
                     }
                 }, [j, C, ec, s]),
                 ep = (0, a.useCallback)((e, t) => {
-                    if (e.status === ef) return void I(e.draftId, t);
-                    let n = nj(e),
+                    if (e.status === ex) return void I(e.draftId, t);
+                    let n = nE(e),
                         i = new Date().toISOString();
                     b(e => ({
                         ...e,
@@ -6780,23 +6781,23 @@
                     M.current = !0;
                     let n = {
                         draftId: e,
-                        experienceId: aT(t),
+                        experienceId: aI(t),
                         isLocalMoment: !0,
                         userId: s
                     };
-                    tW(tB.PublishMoment, n), eu();
+                    tY(tz.PublishMoment, n), eu();
                     try {
-                        await w(t), C(e), f(!1), g(null), tY(tB.PublishMoment, n), ed()
+                        await w(t), C(e), f(!1), g(null), tJ(tz.PublishMoment, n), ed()
                     } catch (e) {
-                        tG(tB.PublishMoment, e, n), el()
+                        tH(tz.PublishMoment, e, n), el()
                     } finally {
                         M.current = !1
                     }
                 }, [m, A, T, w, C, el, eu, ed, s]),
                 ev = (0, a.useCallback)(e => {
-                    e.status === ef && eh(e.draftId)
+                    e.status === ex && eh(e.draftId)
                 }, [eh]);
-            return H && Y ? (0, i.jsx)(ap.default, {
+            return H && Y ? (0, i.jsx)(ah.default, {
                 onReload: X
             }) : H && W ? (0, i.jsx)("div", {
                 className: "flex grow-1 flex-col items-center justify-center self-stretch width-full",
@@ -6805,11 +6806,11 @@
                     size: "Large",
                     variant: "Indeterminate"
                 })
-            }) : !D || k === ef || H || et ? (!_ || H || et) && (L || H || et) ? (0, i.jsxs)("div", {
+            }) : !D || k === ex || H || et ? (!_ || H || et) && (L || H || et) ? (0, i.jsxs)("div", {
                 className: "flex grow-1 flex-col gap-medium self-stretch width-full",
-                children: [l ? (0, i.jsx)(aZ, {
+                children: [l ? (0, i.jsx)(a$, {
                     onRetry: h
-                }) : null, p ? (0, i.jsx)(a1, {}) : null, et || H ? (0, i.jsx)(aX, {
+                }) : null, p ? (0, i.jsx)(a2, {}) : null, et || H ? (0, i.jsx)(aZ, {
                     moments: ee,
                     hasNextPage: R,
                     fetchNextPage: O,
@@ -6821,20 +6822,20 @@
                     isPublishDisabled: m
                 }) : (0, i.jsx)("div", {
                     className: "flex grow-1 flex-col items-center justify-center self-stretch width-full",
-                    children: (0, i.jsx)(aP, {
-                        onCreateClick: n5
+                    children: (0, i.jsx)(aN, {
+                        onCreateClick: n6
                     })
-                }), (0, i.jsx)(aj, {
+                }), (0, i.jsx)(aE, {
                     moment: ea,
                     open: v,
                     onOpenChange: eo,
                     onMomentMetadataChange: ep,
                     onDelete: ea ? em : void 0,
-                    onPublish: (null == ea ? void 0 : ea.status) === ef ? ev : void 0,
+                    onPublish: (null == ea ? void 0 : ea.status) === ex ? ev : void 0,
                     publishingDraftId: S,
                     deletingMomentKey: E,
                     isPublishDisabled: m
-                }, ea ? nj(ea) : void 0)]
+                }, ea ? nE(ea) : void 0)]
             }) : (0, i.jsx)("div", {
                 className: "flex grow-1 flex-col items-center justify-center self-stretch width-full",
                 children: (0, i.jsx)(Z.ProgressCircle, {
@@ -6842,20 +6843,20 @@
                     size: "Large",
                     variant: "Indeterminate"
                 })
-            }) : (0, i.jsx)(ap.default, {
+            }) : (0, i.jsx)(ah.default, {
                 onReload: er
             })
         },
-        a4 = {
+        a5 = {
             width: "100%",
             height: "100%"
         },
-        a5 = (0, il.makeStyles)()(e => ({
+        a6 = (0, iu.makeStyles)()(e => ({
             section: {
-                ...a4
+                ...a5
             },
             container: {
-                ...a4
+                ...a5
             },
             title: {
                 marginBottom: e.spacing(1),
@@ -6875,84 +6876,84 @@
             },
             ssr: !1
         }),
-        a6 = (0, J.default)(() => e.A(378869), {
+        a3 = (0, J.default)(() => e.A(378869), {
             loadableGenerated: {
                 modules: [518808]
             },
             ssr: !1
         }),
-        a3 = (0, J.default)(() => e.A(580854), {
+        a7 = (0, J.default)(() => e.A(580854), {
             loadableGenerated: {
                 modules: [427685]
             },
             ssr: !1
         }),
-        a7 = (0, J.default)(() => e.A(307640), {
+        a9 = (0, J.default)(() => e.A(307640), {
             loadableGenerated: {
                 modules: [48220]
             },
             ssr: !1
         }),
-        a9 = (0, J.default)(() => e.A(114198), {
+        se = (0, J.default)(() => e.A(114198), {
             loadableGenerated: {
                 modules: [595604]
             },
             ssr: !1
         }),
-        se = (0, J.default)(() => e.A(558217), {
+        st = (0, J.default)(() => e.A(558217), {
             loadableGenerated: {
                 modules: [333771]
             },
             ssr: !1
         }),
-        st = (0, J.default)(() => e.A(546234), {
+        sn = (0, J.default)(() => e.A(546234), {
             loadableGenerated: {
                 modules: [82873]
             },
             ssr: !1
         }),
-        sn = (0, J.default)(() => e.A(85397), {
+        si = (0, J.default)(() => e.A(85397), {
             loadableGenerated: {
                 modules: [973472]
             },
             ssr: !1
         }),
-        si = (0, J.default)(() => e.A(890748), {
+        sa = (0, J.default)(() => e.A(890748), {
             loadableGenerated: {
                 modules: [835459]
             },
             ssr: !1
         }),
-        sa = (0, J.default)(() => e.A(68996), {
+        ss = (0, J.default)(() => e.A(68996), {
             loadableGenerated: {
                 modules: [565869]
             },
             ssr: !1
         }),
-        ss = (0, J.default)(() => e.A(441969), {
+        so = (0, J.default)(() => e.A(441969), {
             loadableGenerated: {
                 modules: [415945]
             },
             ssr: !1
         }),
-        so = (0, J.default)(() => e.A(481709), {
+        sr = (0, J.default)(() => e.A(481709), {
             loadableGenerated: {
                 modules: [947274]
             },
             ssr: !1
         }),
-        sr = (0, J.default)(() => e.A(272047), {
+        sl = (0, J.default)(() => e.A(272047), {
             loadableGenerated: {
                 modules: [616027]
             },
             ssr: !1
         });
 
-    function sl(e) {
+    function su(e) {
         let t = (0, h.readQueryValue)(e);
         return void 0 === t ? m.Asset.MyExperiences : (0, p.isValidEnumValue)(m.Asset, t) ? t : m.Asset.MyExperiences
     }
-    let su = (0, d.withTranslation)(e => {
+    let sd = (0, d.withTranslation)(e => {
             let {
                 verificationMetadata: t,
                 currentGroup: n,
@@ -6960,16 +6961,16 @@
                 allowedAssetTypes: o
             } = e, [r, l] = (0, en.useQueryParams)(["activeTab", "filterIndex"]), {
                 resetAllFilters: u
-            } = (0, eo.default)(), {
+            } = (0, er.default)(), {
                 isFetched: c
             } = (0, f.useGroups)(), {
                 isResolving: p
-            } = (0, a.useContext)(q), h = C(), v = (0, ih.default)(), I = (0, iv.default)(), {
+            } = (0, a.useContext)(q), h = C(), v = (0, iv.default)(), I = (0, ix.default)(), {
                 translate: w,
                 ready: S
             } = (0, d.useTranslation)(), A = (0, y.default)(), M = (0, a.useRef)(void 0), j = (0, a.useMemo)(() => [], []), E = (0, x.isTaxonomyActiveTab)(r.activeTab), k = E || (0, x.isRecentsActiveTab)(r.activeTab), P = (0, a.useMemo)(() => {
                 let e = (0, x.isAllAssetTypesActiveTab)(r.activeTab) ? m.Asset.AllCatalogAsset : x.TAXONOMY_HOST_ASSET;
-                return T.default.getMenuState(k ? e : sl(r.activeTab), j)
+                return T.default.getMenuState(k ? e : su(r.activeTab), j)
             }, [r.activeTab, j, k]);
             (0, a.useEffect)(() => {
                 (0, x.isRecentsActiveTab)(r.activeTab) && l({
@@ -6983,7 +6984,7 @@
                         section: L,
                         container: R
                     }
-                } = a5(),
+                } = a6(),
                 O = (0, a.useCallback)(e => {
                     if (P.menuItem === e.menuItem && P.submenuItem === e.submenuItem) return;
                     if ((0, x.shouldOpenTaxonomyView)({
@@ -6994,21 +6995,21 @@
                         activeTab: x.AVATAR_ITEMS_ACTIVE_TAB,
                         filterIndex: 0
                     });
-                    let t = (0, es.isOnItemTab)(e.menuItem.type) ? 0 : void 0;
+                    let t = (0, eo.isOnItemTab)(e.menuItem.type) ? 0 : void 0;
                     l({
                         activeTab: T.default.getAssetType(e),
                         filterIndex: t
                     })
                 }, [P.menuItem, P.submenuItem, l, A]),
                 D = (0, a.useMemo)(() => {
-                    let e = sl(r.activeTab);
+                    let e = su(r.activeTab);
                     if (void 0 === h && e === m.Asset.Moments || void 0 === I && e === m.Asset.Showcase) return P;
-                    let t = sl(r.activeTab) === m.Asset.TextDocument;
+                    let t = su(r.activeTab) === m.Asset.TextDocument;
                     if (void 0 === v && t) return P;
                     let i = T.default.getValidMenuState(N, P, n, void 0, void 0, h, I, v);
                     if (i !== P) {
                         if (!E) {
-                            let e = (0, es.isOnItemTab)(i.menuItem.type) ? 0 : void 0;
+                            let e = (0, eo.isOnItemTab)(i.menuItem.type) ? 0 : void 0;
                             l({
                                 activeTab: T.default.getAssetType(i),
                                 filterIndex: e
@@ -7032,22 +7033,22 @@
                 z = (0, g.isDevelopmentItemAsset)(_, v),
                 V = (0, a.useMemo)(() => {
                     var e, t;
-                    return z ? (0, i.jsx)(so, {
+                    return z ? (0, i.jsx)(sr, {
                         groupId: null == n ? void 0 : n.id,
                         useTabNavigationSpacing: !1,
                         userId: null == s ? void 0 : s.id
-                    }) : _ === m.Asset.Decal ? (0, i.jsx)(a3, {
+                    }) : _ === m.Asset.Decal ? (0, i.jsx)(a7, {
                         groupId: null == n ? void 0 : n.id
-                    }) : _ === m.Asset.Animation ? (0, i.jsx)(a6, {
+                    }) : _ === m.Asset.Animation ? (0, i.jsx)(a3, {
                         groupId: null == n ? void 0 : n.id
-                    }) : _ === m.Asset.Audio || _ === m.Asset.Video ? (0, i.jsx)(a7, {
+                    }) : _ === m.Asset.Audio || _ === m.Asset.Video ? (0, i.jsx)(a9, {
                         mediaAssetType: _,
                         groupId: null == n ? void 0 : n.id
-                    }) : _ === m.Asset.Plugin ? (0, i.jsx)(st, {
+                    }) : _ === m.Asset.Plugin ? (0, i.jsx)(sn, {
                         groupId: null == n ? void 0 : n.id
-                    }) : _ === m.Asset.Model ? (0, i.jsx)(se, {
+                    }) : _ === m.Asset.Model ? (0, i.jsx)(st, {
                         groupId: null == n ? void 0 : n.id
-                    }) : _ === m.Asset.MeshPart ? (0, i.jsx)(a9, {
+                    }) : _ === m.Asset.MeshPart ? (0, i.jsx)(se, {
                         groupId: null == n ? void 0 : n.id
                     }) : _ === m.Asset.TextDocument ? (0, i.jsx)("div", {
                         className: "flex justify-center items-center padding-y-xxlarge",
@@ -7056,25 +7057,25 @@
                             size: "Large",
                             variant: "Indeterminate"
                         })
-                    }) : _ === m.Asset.ShareLink ? (0, i.jsx)(sa, {}) : _ === m.Asset.Moments ? (0, i.jsx)(a2, {}) : _ === m.Asset.AssetPermissionRequests ? (0, i.jsx)(sr, {}) : _ === m.Asset.Showcase ? (0, i.jsx)(sn, {
+                    }) : _ === m.Asset.ShareLink ? (0, i.jsx)(ss, {}) : _ === m.Asset.Moments ? (0, i.jsx)(a4, {}) : _ === m.Asset.AssetPermissionRequests ? (0, i.jsx)(sl, {}) : _ === m.Asset.Showcase ? (0, i.jsx)(si, {
                         groupId: null == n ? void 0 : n.id
                     }) : _ === m.Asset.AllCatalogAsset || _ === m.Asset.AvatarLooks || _ === m.Asset.AvatarBackground ? (0, i.jsx)(a8, {
                         assetType: _,
                         groupId: null == n ? void 0 : n.id
-                    }) : _ === m.Asset.Image || _ === m.Asset.Mesh ? (0, i.jsx)(si, {
+                    }) : _ === m.Asset.Image || _ === m.Asset.Mesh ? (0, i.jsx)(sa, {
                         primitiveAssetType: _,
                         groupId: null == n ? void 0 : n.id
                     }) : B ? (0, i.jsx)(a8, {
                         assetType: _,
                         groupId: null == n ? void 0 : n.id
-                    }) : (0, i.jsx)(ss, {
+                    }) : (0, i.jsx)(so, {
                         assetType: _,
                         creatorType: (null == n ? void 0 : n.id) ? Q.SearchCreatorType.Group : Q.SearchCreatorType.User,
                         creatorTargetId: null != (e = null != (t = null == n ? void 0 : n.id) ? t : null == s ? void 0 : s.id) ? e : 0,
-                        isTelemetryReady: c && S && !p && (null == s ? void 0 : s.id) !== void 0 && sl(r.activeTab) === _
+                        isTelemetryReady: c && S && !p && (null == s ? void 0 : s.id) !== void 0 && su(r.activeTab) === _
                     })
                 }, [_, null == n ? void 0 : n.id, null == s ? void 0 : s.id, B, z, w, c, S, p, r.activeTab]);
-            return (0, i.jsxs)(ea.default, {
+            return (0, i.jsxs)(es.default, {
                 children: [(0, i.jsx)(X.HubMeta, {
                     title: (0, X.buildTitle)(D.submenuItem ? w(D.submenuItem.nameKey) : w(D.menuItem.nameKey)),
                     breadcrumb: (0, X.buildBreadcrumb)(w("Heading.Creations"), w(D.menuItem.nameKey), D.submenuItem ? w(D.submenuItem.nameKey) : void 0)
@@ -7084,9 +7085,9 @@
                         container: !0,
                         direction: "column",
                         className: R,
-                        children: [(0, i.jsx)(ee.AgeVerificationUpsellBanner, {
+                        children: [(0, i.jsx)(ea.default, {}), (0, i.jsx)(ee.AgeVerificationUpsellBanner, {
                             trackingPage: ee.AgeVerificationUpsellPage.Creations
-                        }), !z && (0, i.jsx)(ac, {
+                        }), !z && (0, i.jsx)(am, {
                             menuState: D,
                             onMenuStateChange: O,
                             verificationMetadata: t,
@@ -7096,7 +7097,7 @@
                 })]
             })
         }, [ei.TranslationNamespace.AssetTypes, ei.TranslationNamespace.Controls, ei.TranslationNamespace.Creations, ei.TranslationNamespace.Error, ei.TranslationNamespace.Navigation, ei.TranslationNamespace.ShareLinksManagement, ei.TranslationNamespace.ExperienceReleases, ei.TranslationNamespace.Taxonomy]),
-        sd = () => {
+        sc = () => {
             let e = (0, f.useCurrentGroup)(),
                 {
                     user: t
@@ -7111,7 +7112,7 @@
                     o(t)
                 })
             }, []), (0, i.jsx)(W, {
-                children: (0, i.jsx)(su, {
+                children: (0, i.jsx)(sd, {
                     verificationMetadata: n,
                     currentGroup: e,
                     currentUser: t,
@@ -7119,14 +7120,14 @@
                 })
             })
         };
-    var sc = e.i(675330),
-        sm = e.i(177608),
-        sp = e.i(796266);
-    let sh = e => {
+    var sm = e.i(675330),
+        sp = e.i(177608),
+        sh = e.i(796266);
+    let sv = e => {
             let {
                 children: t
             } = e;
-            return (0, i.jsx)(sm.default, {
+            return (0, i.jsx)(sp.default, {
                 title: (0, i.jsx)(z, {}),
                 secondaryRail: (0, i.jsx)(j, {}),
                 secondarySize: "small",
@@ -7136,28 +7137,28 @@
                 })
             })
         },
-        sv = () => {
+        sf = () => {
             let {
                 isResolving: e
-            } = (0, sp.default)(), t = (0, a.useMemo)(() => ({
+            } = (0, sh.default)(), t = (0, a.useMemo)(() => ({
                 isResolving: e
             }), [e]);
             return (0, i.jsx)(r.default, {
-                children: (0, i.jsx)(sc.default, {
+                children: (0, i.jsx)(sm.default, {
                     children: (0, i.jsx)(s.default, {
                         children: (0, i.jsx)(q.Provider, {
                             value: t,
-                            children: (0, i.jsx)(sd, {})
+                            children: (0, i.jsx)(sc, {})
                         })
                     })
                 })
             })
         };
-    sv.getPageLayout = e => (0, i.jsx)(sh, {
+    sf.getPageLayout = e => (0, i.jsx)(sv, {
         children: e
-    }), sv.loggerConfig = {
+    }), sf.loggerConfig = {
         rosId: "3539"
-    }, e.s(["default", 0, sv], 962059)
+    }, e.s(["default", 0, sf], 962059)
 }, 748348, (e, t, n) => {
     let i = "/dashboard/creations";
     (window.__NEXT_P = window.__NEXT_P || []).push([i, () => e.r(962059)]), t.hot && t.hot.dispose(function() {
@@ -7165,5 +7166,5 @@
     })
 }]);
 
-//# debugId=1861767b-813b-521f-50c5-2c5beedbc276
-//# sourceMappingURL=1ymhxy50-cpik.js.map
+//# debugId=c991897c-0f13-4ea8-d038-52dc802bf88a
+//# sourceMappingURL=3pqm261pjszuh.js.map

@@ -48,25 +48,6 @@ thumbnail-2d {
     padding-top: 0
 }
 
-.light-theme .thumbnail-2d-container.avatar-card-image.trusted-connection-avatar-headshot,
-.light-theme .thumbnail-2d-container[thumbnail-type=AvatarHeadshot].trusted-connection-avatar-headshot,
-.dark-theme .thumbnail-2d-container.avatar-card-image.trusted-connection-avatar-headshot,
-.dark-theme .thumbnail-2d-container[thumbnail-type=AvatarHeadshot].trusted-connection-avatar-headshot {
-    border: 3px solid #335fff;
-    border-radius: 50%
-}
-
-.light-theme .avatar-headshot-xs .thumbnail-2d-container.avatar-card-image.trusted-connection-avatar-headshot,
-.light-theme .avatar-headshot-sm .thumbnail-2d-container.avatar-card-image.trusted-connection-avatar-headshot,
-.light-theme .avatar-headshot-xs .thumbnail-2d-container[thumbnail-type=AvatarHeadshot].trusted-connection-avatar-headshot,
-.light-theme .avatar-headshot-sm .thumbnail-2d-container[thumbnail-type=AvatarHeadshot].trusted-connection-avatar-headshot,
-.dark-theme .avatar-headshot-xs .thumbnail-2d-container.avatar-card-image.trusted-connection-avatar-headshot,
-.dark-theme .avatar-headshot-sm .thumbnail-2d-container.avatar-card-image.trusted-connection-avatar-headshot,
-.dark-theme .avatar-headshot-xs .thumbnail-2d-container[thumbnail-type=AvatarHeadshot].trusted-connection-avatar-headshot,
-.dark-theme .avatar-headshot-sm .thumbnail-2d-container[thumbnail-type=AvatarHeadshot].trusted-connection-avatar-headshot {
-    border-width: 1.5px
-}
-
 .avatar-headshot .thumbnail-2d-container {
     border-radius: 50%
 }
@@ -91,4 +72,4 @@ thumbnail-2d {
     display: block
 }
 
-/*# sourceMappingURL=https://sourcemaps.rbxcdn.com/thumbnails-3692212cbac36131.css.map*/
+/*# sourceMappingURL=https://sourcemaps.rbxcdn.com/thumbnails-64f4174640e15aa1.css.map*/

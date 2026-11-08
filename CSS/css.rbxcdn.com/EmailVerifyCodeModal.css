@@ -1,148 +1,329 @@
-.email-verify-code-webview {
-    padding: 0 !important
+.inset-\[0\] {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0
 }
 
-.email-verify-code-webview .modal-dialog {
-    width: 100VW;
-    height: 200VH
+.scroll {
+    overflow: auto
 }
 
-.email-verify-code-webview .modal-dialog .modal-content {
-    width: 100VW;
-    min-height: 200VH;
-    border: 0;
-    border-radius: 0 !important
+.size-\[1em\] {
+    width: 1em;
+    height: 1em
 }
 
-.email-verify-code-webview .modal-dialog .modal-content .modal-header {
-    text-align: center
+.size-\[var\(--icon-size-large\)\] {
+    width: var(--icon-size-large);
+    height: var(--icon-size-large)
 }
 
-.email-verify-code-webview .modal-dialog .modal-content .modal-header .modal-title {
-    padding: 0 30px
+.size-\[var\(--icon-size-medium\)\] {
+    width: var(--icon-size-medium);
+    height: var(--icon-size-medium)
 }
 
-.email-verify-code-webview .modal-dialog .modal-content .modal-header .close {
-    visibility: hidden
+.size-\[var\(--icon-size-small\)\] {
+    width: var(--icon-size-small);
+    height: var(--icon-size-small)
 }
 
-@media(max-width:319px) {
-    .email-verify-code-modal .modal-dialog {
-        padding: 0
-    }
+.size-\[var\(--icon-size-xlarge\)\] {
+    width: var(--icon-size-xlarge);
+    height: var(--icon-size-xlarge)
 }
 
-@media(min-width:543px) {
-    .email-verify-code-modal .modal-dialog {
-        width: 540px !important
-    }
+.size-\[var\(--icon-size-xsmall\)\] {
+    width: var(--icon-size-xsmall);
+    height: var(--icon-size-xsmall)
 }
 
-.email-verify-code-modal .modal-header .close {
-    float: left;
-    padding: 5px 0
+.size-\[var\(--icon-size-xxlarge\)\] {
+    width: var(--icon-size-xxlarge);
+    height: var(--icon-size-xxlarge)
 }
 
-.email-verify-code-modal .modal-header .modal-title {
-    text-align: center
+.max-width-\[calc\(var\(--size-100\)\*50\)\] {
+    max-width: calc(var(--size-100)*50)
 }
 
-.email-verify-code-modal .modal-content {
-    border-radius: 8px !important
+.\!text-label-large {
+    font: var(--typography-label-large-font) !important;
+    letter-spacing: var(--typography-label-large-letter-spacing) !important
 }
 
-.email-verify-code-modal .modal-content .modal-body {
-    margin: 0 12px 12px
+.content-\[var\(--inverse-surface-0\)\] {
+    color: var(--inverse-surface-0)
 }
 
-.email-verify-code-modal .modal-content .modal-body .legal-checkbox-container {
+.opacity-\[0\.5\] {
+    opacity: .5
+}
+
+.icon-regular-arrow-up-right-from-square {
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M5 3C3.89543 3 3 3.89543 3 5V27C3 28.1046 3.89543 29 5 29H27C28.1046 29 29 28.1046 29 27V16C29 15.4477 28.5523 15 28 15C27.4477 15 27 15.4477 27 16V27H5V5L16 5C16.5523 5 17 4.55228 17 4C17 3.44772 16.5523 3 16 3H5Z' fill='black'/%3E %3Cpath d='M28 11C28.5523 11 29 10.5523 29 10V4C29 3.44772 28.5523 3 28 3H22C21.4477 3 21 3.44772 21 4C21 4.55228 21.4477 5 22 5H25.5858L15.2929 15.2929C14.9024 15.6834 14.9024 16.3166 15.2929 16.7071C15.6834 17.0976 16.3166 17.0976 16.7071 16.7071L27 6.41421V10C27 10.5523 27.4477 11 28 11Z' fill='black'/%3E%3C/svg%3E")
+}
+
+.icon-regular-circle-i {
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M17 21H19.5V23H12.5V21H15V14H13V12H17V21Z' fill='black'/%3E %3Cpath d='M17 10H15V8H17V10Z' fill='black'/%3E %3Cpath d='M16 2C23.732 2 30 8.26801 30 16C30 23.732 23.732 30 16 30C8.26801 30 2 23.732 2 16C2 8.26801 8.26801 2 16 2ZM16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4Z' fill='black'/%3E%3C/svg%3E")
+}
+
+.icon-regular-x {
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M7.29289 8.70711C6.90237 8.31658 6.90237 7.68342 7.29289 7.29289C7.68342 6.90237 8.31658 6.90237 8.70711 7.29289L16 14.5858L23.2929 7.29289C23.6834 6.90237 24.3166 6.90237 24.7071 7.29289C25.0976 7.68342 25.0976 8.31658 24.7071 8.70711L17.4142 16L24.7071 23.2929C25.0976 23.6834 25.0976 24.3166 24.7071 24.7071C24.3166 25.0976 23.6834 25.0976 23.2929 24.7071L16 17.4142L8.70711 24.7071C8.31658 25.0976 7.68342 25.0976 7.29289 24.7071C6.90237 24.3166 6.90237 23.6834 7.29289 23.2929L14.5858 16L7.29289 8.70711Z' fill='black'/%3E%3C/svg%3E")
+}
+
+.\[grid-template-columns\:minmax\(var\(--size-600\)\,1fr\)_minmax\(0\,auto\)_minmax\(var\(--size-600\)\,1fr\)\] {
+    grid-template-columns: minmax(var(--size-600), 1fr)minmax(0, auto)minmax(var(--size-600), 1fr)
+}
+
+.\[text-align\:inherit\] {
+    text-align: inherit
+}
+
+.email-verify-code-dialog.foundation-web-dialog-content[data-size] {
+    width: 100%;
+    max-width: 540px
+}
+
+:where(.email-verify-code-dialog) .email-verify-code-help-text {
+    margin-bottom: var(--size-300);
+    text-align: left
+}
+
+:where(.email-verify-code-dialog) .email-verify-code-help-text p {
+    font: inherit
+}
+
+:where(.email-verify-code-dialog) .email-verify-code-email-display {
+    text-align: center;
+    margin: -12px 0 var(--size-300)
+}
+
+:where(.email-verify-code-dialog) .email-verify-code-email-display .email-verify-code-change-email-link {
+    background: 0 0;
+    border: none;
+    padding: 0;
+    font-size: 12px
+}
+
+:where(.email-verify-code-dialog) .email-verify-code-error-text {
+    min-height: var(--size-900);
+    margin: var(--size-100)0 0
+}
+
+:where(.email-verify-code-dialog) .email-verify-code-button {
+    margin-top: var(--size-300)
+}
+
+:where(.email-verify-code-dialog) .email-verify-code-help-link {
+    margin: var(--size-150)0
+}
+
+:where(.email-verify-code-dialog) .legal-checkbox-container {
     margin-top: 12px
 }
 
-.email-verify-code-modal .modal-content .modal-body .legal-text-container {
-    display: inline-flex;
-    padding-bottom: 10px;
+:where(.email-verify-code-dialog) .legal-text-container {
     text-align: left;
-    font-size: 14px
+    padding-bottom: 10px;
+    font-size: 14px;
+    display: -ms-inline-flexbox;
+    display: inline-flex
 }
 
-.email-verify-code-modal .modal-content .modal-body .legal-text-container .terms-agreement {
-    display: flex;
+:where(.email-verify-code-dialog) .legal-text-container .terms-agreement {
+    color: var(--color-content-default);
+    -ms-flex-direction: row;
     flex-direction: row;
-    color: #fff
+    display: -ms-flexbox;
+    display: flex
 }
 
-.email-verify-code-modal .modal-content .modal-body .legal-text-container.terms-experiment-padding {
+:where(.email-verify-code-dialog) .legal-text-container.terms-experiment-padding {
     padding-bottom: 4px
 }
 
-.email-verify-code-modal .modal-content .modal-body .legal-text-container div {
+:where(.email-verify-code-dialog) .legal-text-container div {
     font-size: 14px
 }
 
-.email-verify-code-modal .modal-content .modal-body .legal-text-container a {
+:where(.email-verify-code-dialog) .legal-text-container a {
     color: #70a0ff
 }
 
-.email-verify-code-modal .modal-content .modal-body .legal-text-container .checkbox {
-    min-width: 20px;
-    width: 20px;
-    height: 20px;
+:where(.email-verify-code-dialog) .legal-text-container .checkbox {
     accent-color: #fff;
+    float: left;
+    -ms-flex: none;
     flex: none;
-    margin-right: 8px;
+    width: 20px;
+    min-width: 20px;
+    height: 20px;
     margin-top: 0;
-    float: left
+    margin-right: 8px
 }
 
-.email-verify-code-modal .modal-content .modal-body .legal-text-container label {
-    font-weight: 400;
-    font-size: 13px;
+:where(.email-verify-code-dialog) .legal-text-container label {
     word-wrap: break-word;
-    display: inline;
     word-break: break-word;
-    margin-bottom: 0
+    margin-bottom: 0;
+    font-size: 13px;
+    font-weight: 400;
+    display: inline
 }
 
-.email-verify-code-help-text {
-    text-align: left;
-    margin-bottom: 12px;
-    font-size: 16px
+.email-verify-code-webview .email-verify-code-close {
+    visibility: hidden
 }
 
-.email-verify-code-email-display {
-    text-align: center;
-    margin-top: -12px
-}
-
-.email-verify-code-email-display .email-verify-code-email-text {
-    font-size: 16px;
-    font-weight: 700
-}
-
-.email-verify-code-email-display .email-verify-code-change-email-link {
-    font-size: 12px;
-    border: none;
-    background: none;
+.email-verify-code-webview-overlay {
     padding: 0
 }
 
-.email-verify-code-input {
-    margin: 12px 0
+.email-verify-code-webview.foundation-web-dialog-content[data-size] {
+    border: 0;
+    border-radius: 0;
+    width: 100vw;
+    max-width: none;
+    min-height: 200vh
 }
 
-.email-verify-code-error-text {
-    margin-top: -9px;
-    min-height: 36px
+@media (max-width:319px) {
+    .email-verify-code-dialog.foundation-web-dialog-content[data-size] {
+        min-width: 0
+    }
 }
 
-.email-verify-code-button {
-    width: 100%;
-    align-self: center;
-    margin-top: 12px
+.placeholder\:text-body-large::-webkit-input-placeholder {
+    font: var(--typography-body-large-font);
+    letter-spacing: var(--typography-body-large-letter-spacing)
 }
 
-.email-verify-code-help-link {
-    text-align: center;
-    margin: 6px 0
+.placeholder\:text-body-large::-ms-input-placeholder {
+    font: var(--typography-body-large-font);
+    letter-spacing: var(--typography-body-large-letter-spacing)
+}
+
+.placeholder\:text-body-large::placeholder {
+    font: var(--typography-body-large-font);
+    letter-spacing: var(--typography-body-large-letter-spacing)
+}
+
+.placeholder\:text-body-medium::-webkit-input-placeholder {
+    font: var(--typography-body-medium-font);
+    letter-spacing: var(--typography-body-medium-letter-spacing)
+}
+
+.placeholder\:text-body-medium::-ms-input-placeholder {
+    font: var(--typography-body-medium-font);
+    letter-spacing: var(--typography-body-medium-letter-spacing)
+}
+
+.placeholder\:text-body-medium::placeholder {
+    font: var(--typography-body-medium-font);
+    letter-spacing: var(--typography-body-medium-letter-spacing)
+}
+
+.placeholder\:text-body-small::-webkit-input-placeholder {
+    font: var(--typography-body-small-font);
+    letter-spacing: var(--typography-body-small-letter-spacing)
+}
+
+.placeholder\:text-body-small::-ms-input-placeholder {
+    font: var(--typography-body-small-font);
+    letter-spacing: var(--typography-body-small-letter-spacing)
+}
+
+.placeholder\:text-body-small::placeholder {
+    font: var(--typography-body-small-font);
+    letter-spacing: var(--typography-body-small-letter-spacing)
+}
+
+.placeholder\:content-muted::-webkit-input-placeholder {
+    color: var(--color-content-muted)
+}
+
+.placeholder\:content-muted::-ms-input-placeholder {
+    color: var(--color-content-muted)
+}
+
+.placeholder\:content-muted::placeholder {
+    color: var(--color-content-muted)
+}
+
+.focus-within\:stroke-system-alert:focus-within {
+    border-color: var(--color-system-alert)
+}
+
+.focus-within\:stroke-system-emphasis:focus-within {
+    border-color: var(--color-system-emphasis)
+}
+
+.hover\:underline:hover {
+    -webkit-text-decoration-skip-ink: none;
+    text-decoration-skip-ink: none;
+    -webkit-text-decoration-line: underline;
+    text-decoration-line: underline
+}
+
+.hover\:cursor-pointer:hover {
+    cursor: pointer
+}
+
+.hover\:\[opacity\:0\.8\]:hover {
+    opacity: .8
+}
+
+.focus-visible\:outline-focus:focus-visible {
+    outline: var(--stroke-thicker)solid var(--color-selection-start);
+    outline-offset: var(--stroke-thicker)
+}
+
+.focus-visible\:\[outline-color\:var\(--color-system-emphasis\)\]:focus-visible {
+    outline-color: var(--color-system-emphasis)
+}
+
+.focus-visible\:\[outline-style\:solid\]:focus-visible {
+    outline-style: solid
+}
+
+.focus-visible\:\[outline-width\:var\(--stroke-standard\)\]:focus-visible {
+    outline-width: var(--stroke-standard)
+}
+
+.disabled\:outline-none:disabled {
+    outline: var(--stroke-none)solid var(--color-none)
+}
+
+.group\/interactable:hover .group-hover\/interactable\:bg-\[var\(--color-state-hover\)\] {
+    background-color: var(--color-state-hover)
+}
+
+.group\/interactable:active .group-active\/interactable\:bg-\[var\(--color-state-press\)\] {
+    background-color: var(--color-state-press)
+}
+
+.group\/interactable:disabled .group-disabled\/interactable\:bg-none {
+    background-color: var(--color-none)
+}
+
+@media (prefers-reduced-motion:no-preference) {
+    .motion-safe\:transition-opacity {
+        transition-property: opacity;
+        transition-timing-function: var(--ease-linear);
+        transition-duration: var(--time-100)
+    }
+}
+
+@media (min-width:601px) {
+    .medium\:text-body-large {
+        font: var(--typography-body-large-font);
+        letter-spacing: var(--typography-body-large-letter-spacing)
+    }
+
+    .medium\:text-heading-small {
+        font: var(--typography-heading-small-font);
+        letter-spacing: var(--typography-heading-small-letter-spacing)
+    }
 }

@@ -3,12 +3,12 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "ff48e489-b690-7342-7c67-9f784d9f580d")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "e169b21c-1535-c0aa-a50d-f95d5b7feab4")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 799972, e => {
     "use strict";
-    var s = e.i(376618),
+    var s = e.i(378693),
         t = e.i(671376);
     let {
         docs: n
@@ -189,7 +189,7 @@
     }])
 }, 696564, e => {
     "use strict";
-    var s, t, n, a = e.i(155743),
+    var s, t, n, a = e.i(676089),
         o = e.i(913893),
         r = e.i(671376),
         i = e.i(814768),
@@ -362,8 +362,8 @@
     }])
 }, 418162, e => {
     "use strict";
-    var s = e.i(797516),
-        t = e.i(155743),
+    var s = e.i(742135),
+        t = e.i(676089),
         n = e.i(671376),
         a = e.i(759283),
         o = e.i(927868),
@@ -665,7 +665,7 @@
     }, "getItemTypeChipIconSrc", 0, function(e, s) {
         let t = e.toLowerCase(),
             n = c.has(t) ? "".concat(t, "accessory") : t;
-        return "".concat("".concat("https://assets.create.roblox.com/4c911cd452dcbbc3cd49c7458128a242d2a87e28/assets", "/unifiedFeeSystem"), "/").concat(s ? "".concat(n, ".svg") : "".concat(n, "_black.svg"))
+        return "".concat("".concat("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/assets", "/unifiedFeeSystem"), "/").concat(s ? "".concat(n, ".svg") : "".concat(n, "_black.svg"))
     }, "getPublishPageUrl", 0, function(e, s) {
         return "/dashboard/creations/".concat(a.itemTypeToPath[e], "/").concat(s, "/publish")
     }, "getTaxonomyDisplayName", 0, function(e, s) {
@@ -964,5 +964,5 @@
     e.s(["DialogContentText", () => s.D])
 }]);
 
-//# debugId=ff48e489-b690-7342-7c67-9f784d9f580d
-//# sourceMappingURL=3e2h2gsmvvg4v.js.map
+//# debugId=e169b21c-1535-c0aa-a50d-f95d5b7feab4
+//# sourceMappingURL=2mgyp87covrph.js.map

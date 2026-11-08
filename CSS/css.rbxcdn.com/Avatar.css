@@ -8,6 +8,12 @@
     overflow: hidden
 }
 
+.thumbnail-2d-container.thumbnail-2d-loading {
+    width: 100%;
+    height: 100%;
+    display: block
+}
+
 .thumbnail-2d-container img {
     display: inline
 }
@@ -2502,6 +2508,14 @@ thumbnail-3d,
     height: var(--icon-size-xxlarge)
 }
 
+.height-\[126px\] {
+    height: 126px
+}
+
+.height-\[14px\] {
+    height: 14px
+}
+
 .height-\[180px\] {
     height: 180px
 }
@@ -2510,8 +2524,20 @@ thumbnail-3d,
     height: 183px
 }
 
+.height-\[32px\] {
+    height: 32px
+}
+
+.height-\[352px\] {
+    height: 352px
+}
+
 .height-\[40px\] {
     height: 40px
+}
+
+.max-width-\[1238px\] {
+    max-width: 1238px
 }
 
 .max-width-\[480px\] {
@@ -2538,12 +2564,36 @@ thumbnail-3d,
     min-width: min(100% - max(2*var(--margin-small), env(safe-area-inset-left) + env(safe-area-inset-right)), 393px)
 }
 
+.width-\[120px\] {
+    width: 120px
+}
+
+.width-\[126px\] {
+    width: 126px
+}
+
+.width-\[160px\] {
+    width: 160px
+}
+
+.width-\[277px\] {
+    width: 277px
+}
+
 .width-\[284px\] {
     width: 284px
 }
 
 .width-\[300px\] {
     width: 300px
+}
+
+.width-\[80\%\] {
+    width: 80%
+}
+
+.width-\[96px\] {
+    width: 96px
 }
 
 .width-\[fit-content\] {
@@ -2620,6 +2670,10 @@ thumbnail-3d,
 
 .icon-regular-arrow-up-right-from-square {
     --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M5 3C3.89543 3 3 3.89543 3 5V27C3 28.1046 3.89543 29 5 29H27C28.1046 29 29 28.1046 29 27V16C29 15.4477 28.5523 15 28 15C27.4477 15 27 15.4477 27 16V27H5V5L16 5C16.5523 5 17 4.55228 17 4C17 3.44772 16.5523 3 16 3H5Z' fill='black'/%3E %3Cpath d='M28 11C28.5523 11 29 10.5523 29 10V4C29 3.44772 28.5523 3 28 3H22C21.4477 3 21 3.44772 21 4C21 4.55228 21.4477 5 22 5H25.5858L15.2929 15.2929C14.9024 15.6834 14.9024 16.3166 15.2929 16.7071C15.6834 17.0976 16.3166 17.0976 16.7071 16.7071L27 6.41421V10C27 10.5523 27.4477 11 28 11Z' fill='black'/%3E%3C/svg%3E")
+}
+
+.icon-regular-check {
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M23.7071 10.2929C24.0976 10.6834 24.0976 11.3166 23.7071 11.7071L13.7071 21.7071C13.3166 22.0976 12.6834 22.0976 12.2929 21.7071L8.29289 17.7071C7.90237 17.3166 7.90237 16.6834 8.29289 16.2929C8.68342 15.9024 9.31658 15.9024 9.70711 16.2929L13 19.5858L22.2929 10.2929C22.6834 9.90237 23.3166 9.90237 23.7071 10.2929Z' fill='black'/%3E%3C/svg%3E")
 }
 
 .icon-filled-check {
@@ -2977,6 +3031,12 @@ thumbnail-3d,
     }
 }
 
+@media (max-width:767px) {
+    .max-\[767px\]\:\!height-800 {
+        height: var(--size-800) !important
+    }
+}
+
 .\[\&\:\:after\]\:absolute:after {
     position: absolute
 }
@@ -3008,4 +3068,24 @@ thumbnail-3d,
 
 .\[\&\>\*\:nth-child\(even\)\]\:bg-surface-300>:nth-child(2n) {
     background-color: var(--color-surface-300)
+}
+
+.\[\&_input\:\:placeholder\]\:text-body-large input::-webkit-input-placeholder {
+    font: var(--typography-body-large-font);
+    letter-spacing: var(--typography-body-large-letter-spacing)
+}
+
+.\[\&_input\:\:placeholder\]\:text-body-large input::-ms-input-placeholder {
+    font: var(--typography-body-large-font);
+    letter-spacing: var(--typography-body-large-letter-spacing)
+}
+
+.\[\&_input\:\:placeholder\]\:text-body-large input::placeholder {
+    font: var(--typography-body-large-font);
+    letter-spacing: var(--typography-body-large-letter-spacing)
+}
+
+.\[\&_input\]\:text-body-large input {
+    font: var(--typography-body-large-font);
+    letter-spacing: var(--typography-body-large-letter-spacing)
 }

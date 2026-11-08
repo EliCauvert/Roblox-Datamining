@@ -1,3 +1,7 @@
+.\!relative {
+    position: relative !important
+}
+
 .inset-\[0\] {
     top: 0;
     bottom: 0;
@@ -120,7 +124,7 @@
 }
 
 #session-management .show-more {
-    color: #70a0ff;
+    color: var(--color-extended-blue-500);
     text-align: center;
     cursor: pointer
 }
@@ -178,11 +182,11 @@
 }
 
 .light-theme .session-info-section .session-info-content {
-    color: #272930
+    color: var(--color-extended-gray-900)
 }
 
 .dark-theme .session-info-section .session-info-content {
-    color: #fff
+    color: var(--color-extended-white-100)
 }
 
 .focus-visible\:outline-focus:focus-visible {

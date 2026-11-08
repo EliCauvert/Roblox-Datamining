@@ -185,8 +185,24 @@
 }
 
 .resellers-container .vlist .reseller-item .reseller-item-avatar {
+    -ms-flex: none;
+    flex: none;
     -ms-flex-order: 1;
     order: 1
+}
+
+.resellers-container .vlist .reseller-item .reseller-item-avatar .avatar-headshot-md {
+    display: block;
+    overflow: hidden
+}
+
+.resellers-container .vlist .reseller-item .reseller-item-avatar .thumbnail-2d-container {
+    width: 100%;
+    height: 100%
+}
+
+.resellers-container .vlist .reseller-item .reseller-item-avatar .thumbnail-2d-container[class*=icon-] {
+    padding-top: 0
 }
 
 .resellers-container .vlist .reseller-item .resale-info {

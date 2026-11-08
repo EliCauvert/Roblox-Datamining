@@ -8,7 +8,7 @@ Roblox.LangDynamic["Feature.DownloadLanding"] = {
     "Heading.MobileAppDownloadOption": "Don't forget the mobile app",
     "Label.MobileAppQrCode": "Scan this code with your phone's camera to get Roblox.",
     "Heading.AppStoreLinks": "Also available on",
-    "Heading.DownloadPage": "Explore millions of worlds and experiences",
+    "Heading.DownloadPage": "Explore millions of worlds and games",
     "Action.DownloadWindowsApp": "Download Windows App",
     "Action.DownloadMacApp": "Download Mac App",
     "Action.DownloadAndroidApp": "Download Android",
@@ -23,9 +23,9 @@ Roblox.LangDynamic["Feature.DownloadLanding"] = {
     "Heading.GetTheRobloxApp": "Get the Roblox app",
     "Description.PlayExploreBuildAndMore": "Play, explore, build, and more",
     "Action.GetTheApp": "Get the app",
-    "Action.NextExperience": "Next experience",
+    "Action.NextExperience": "Next game",
     "Heading.PlayRobloxAnywhere": "Play Roblox anywhere",
-    "Label.FeaturedExperiences": "Featured experiences",
+    "Label.FeaturedExperiences": "Featured games",
     "Heading.PlatformMobile": "Mobile",
     "Heading.PlatformConsole": "Console",
     "Heading.PlatformDesktop": "Desktop",
@@ -35,6 +35,6 @@ Roblox.LangDynamic["Feature.DownloadLanding"] = {
     "Heading.PlatformVr": "VR",
     "Description.PlatformVr": "Play in virtual reality on Meta Quest.",
     "Action.ShowExperience": "Show {experienceName}",
-    "Action.PreviousExperience": "Previous experience"
+    "Action.PreviousExperience": "Previous game"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.DownloadLanding");
