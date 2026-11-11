@@ -1,0 +1,1 @@
+﻿return (require(script:FindFirstAncestor("SquadsCore").Parent.LuaSocialLibrariesDeps).NetworkingPresence.config({ roduxNetworking = require(script.Parent.RoduxNetworking) }))

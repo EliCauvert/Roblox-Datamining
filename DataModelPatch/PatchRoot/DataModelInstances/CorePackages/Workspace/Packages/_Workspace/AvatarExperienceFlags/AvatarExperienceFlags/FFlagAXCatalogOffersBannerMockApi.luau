@@ -1,0 +1,3 @@
+﻿local FFlagAXCatalogOffersBannerEnabledModule = require(script.Parent.FFlagAXCatalogOffersBannerEnabled)
+
+return game:DefineFastFlag("AXCatalogOffersBannerMockApi", false) and FFlagAXCatalogOffersBannerEnabledModule

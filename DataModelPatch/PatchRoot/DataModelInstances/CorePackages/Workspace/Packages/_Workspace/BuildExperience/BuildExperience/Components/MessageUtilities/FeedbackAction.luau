@@ -1,0 +1,1 @@
+﻿return { INVALID = 0, THUMBS_UP = 1, THUMBS_DOWN = 2, REVERT = 3 }

@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("UserTileTextTCIndicator_V3", false)

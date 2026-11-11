@@ -1,0 +1,44 @@
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local _ = require(Foundation.Enums.Device)
+local FlagsModule = require(Foundation.Utility.Flags)
+local _ = require(Foundation.Enums.Theme)
+local TokenProcessingUtilitiesModule = require(Foundation.Providers.Style.Tokens.TokenProcessingUtilities)
+local TokensModule = require(Foundation.Providers.Style.Tokens)
+
+local function _(Text: string)
+	return Text:gsub("%.", ""):gsub("_", "")
+end
+
+local function emitLeafAttributes(p1, Key, ResolveTokenOverrideResult)
+	-- upvalues: emitLeafAttributes (copy)
+	if type(ResolveTokenOverrideResult) ~= "table" then
+		p1[Key] = ResolveTokenOverrideResult
+		
+		return
+	end
+	for i, value in ResolveTokenOverrideResult do
+		emitLeafAttributes(p1, Key .. tostring(i), value)
+	end
+end
+
+return function(p2, p3, List)
+	-- upvalues: FlagsModule (copy), TokensModule (copy), TokenProcessingUtilitiesModule (copy), emitLeafAttributes (copy)
+	local t = {}
+	
+	if not FlagsModule.FoundationTokenOverrides then
+		return t
+	end
+	if not List or not next(List) then
+		return t
+	end
+	local Tokens = TokensModule.getTokens(p2, p3, 1)
+	
+	for Text, value in List do
+		local ResolveTokenOverrideResult = TokenProcessingUtilitiesModule.resolveTokenOverride(Tokens, Text, value)
+		
+		if ResolveTokenOverrideResult ~= nil then
+			emitLeafAttributes(t, Text:gsub("%.", ""):gsub("_", ""), ResolveTokenOverrideResult)
+		end
+	end
+	return t
+end

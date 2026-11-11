@@ -1,0 +1,22 @@
+﻿return function(p1)
+	return function(List)
+		-- upvalues: p1 (copy)
+		local NewInstance = Instance.new(p1)
+		local Parent = nil
+		
+		for i, value in pairs(List) do
+			if type(i) == "number" and typeof(value) == "Instance" then
+				value.Parent = NewInstance
+			elseif type(i) == "string" then
+				if i == "Parent" then
+					Parent = value
+				else
+					NewInstance[i] = value
+				end
+			end
+		end
+		NewInstance.Parent = Parent
+		
+		return NewInstance
+	end
+end

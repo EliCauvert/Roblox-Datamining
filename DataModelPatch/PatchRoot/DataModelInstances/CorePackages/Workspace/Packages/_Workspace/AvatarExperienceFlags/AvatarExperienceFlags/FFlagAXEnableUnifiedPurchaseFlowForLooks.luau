@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("AvatarExperienceFlags").Parent.SharedFlags).FFlagEnableUnifiedProductPurchaseFlow and game:DefineFastFlag("AXEnableUnifiedPurchaseFlowForLooks", false)

@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXLogFacialAnimationToggle2", false)

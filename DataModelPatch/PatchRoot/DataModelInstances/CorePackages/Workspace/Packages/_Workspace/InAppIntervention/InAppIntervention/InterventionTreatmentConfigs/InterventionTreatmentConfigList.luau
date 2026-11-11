@@ -1,0 +1,8 @@
+﻿local InAppIntervention = script:FindFirstAncestor("InAppIntervention")
+local PartyChatDialogTimeoutConfigModule = require(InAppIntervention.InterventionTreatmentConfigs.PartyChatDialogTimeoutConfig)
+local _ = require(InAppIntervention.Utils.Types)
+local InterventionTreatmentConfigListModule = {}
+table.insert(InterventionTreatmentConfigListModule, (require(InAppIntervention.InterventionTreatmentConfigs.PartyChatDialogNudgeConfig)))
+table.insert(InterventionTreatmentConfigListModule, PartyChatDialogTimeoutConfigModule)
+
+return InterventionTreatmentConfigListModule

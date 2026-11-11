@@ -1,0 +1,25 @@
+﻿local BulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
+local PromiseModule = require(BulkPurchaseApp.Parent.Promise)
+local BulkPurchaseRequestedModule = require(BulkPurchaseApp.Store.Actions.BulkPurchaseRequested)
+local BulkPurchaseFailedModule = require(BulkPurchaseApp.Store.Actions.BulkPurchaseFailed)
+local BulkPurchaseStartedModule = require(BulkPurchaseApp.Store.Actions.BulkPurchaseStarted)
+local ErrorCodeEnumModule = require(BulkPurchaseApp.Enums.ErrorCodeEnum)
+local GetAccountModule = require(BulkPurchaseApp.NetworkRequests.getAccount)
+local _ = require(BulkPurchaseApp.Store.Types)
+
+return function(p1, p2, p3, p4, p5, p6, p7)
+	-- upvalues: BulkPurchaseRequestedModule (copy), GetAccountModule (copy), PromiseModule (copy), BulkPurchaseStartedModule (copy), BulkPurchaseFailedModule (copy), ErrorCodeEnumModule (copy)
+	return function(p8)
+		-- upvalues: BulkPurchaseRequestedModule (upval), p2 (copy), p3 (copy), p4 (copy), p5 (copy), p6 (copy), p7 (copy), GetAccountModule (upval), p1 (copy), PromiseModule (upval), BulkPurchaseStartedModule (upval), BulkPurchaseFailedModule (upval), ErrorCodeEnumModule (upval)
+		p8:dispatch(BulkPurchaseRequestedModule(p2, p3, p4, p5, p6, p7))
+		local AccountModule, _ = GetAccountModule(p1)
+		
+		return PromiseModule.all({ AccountModule }):andThen(function(_)
+			-- upvalues: p8 (copy), BulkPurchaseStartedModule (upval), p4 (upval)
+			p8:dispatch(BulkPurchaseStartedModule(p4))
+		end):catch(function(_)
+			-- upvalues: p8 (copy), BulkPurchaseFailedModule (upval), ErrorCodeEnumModule (upval)
+			p8:dispatch(BulkPurchaseFailedModule(ErrorCodeEnumModule.Generic))
+		end)
+	end
+end

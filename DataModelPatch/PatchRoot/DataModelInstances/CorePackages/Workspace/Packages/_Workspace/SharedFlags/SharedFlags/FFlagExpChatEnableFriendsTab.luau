@@ -1,0 +1,5 @@
+﻿local FFlagExpChatWindowMessageSourceRefactorModule = require(script.Parent.FFlagExpChatWindowMessageSourceRefactor)
+local FFlagExpChatChannelTabRefactorModule = require(script.Parent.FFlagExpChatChannelTabRefactor)
+local GetFFlagEnableAppChatInExperienceModule = require(script.Parent.GetFFlagEnableAppChatInExperience)
+
+return game:DefineFastFlag("ExpChatEnableFriendsTab", false) and (FFlagExpChatWindowMessageSourceRefactorModule and (FFlagExpChatChannelTabRefactorModule and GetFFlagEnableAppChatInExperienceModule()))

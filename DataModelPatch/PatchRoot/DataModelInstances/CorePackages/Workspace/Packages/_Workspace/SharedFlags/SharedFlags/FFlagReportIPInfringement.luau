@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("ReportIPInfringement_v2", false)

@@ -1,0 +1,3 @@
+﻿local EnableInExpChatPolishSummaryOnLuaForTranslatedMessageV2 = game:DefineFastFlag("EnableInExpChatPolishSummaryOnLuaForTranslatedMessageV2", false)
+
+return require(script.Parent.FFlagEnableInExpChatSummaryOnLua) and EnableInExpChatPolishSummaryOnLuaForTranslatedMessageV2

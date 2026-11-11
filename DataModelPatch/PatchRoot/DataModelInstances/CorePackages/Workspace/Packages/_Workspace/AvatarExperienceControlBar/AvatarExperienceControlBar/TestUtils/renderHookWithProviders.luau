@@ -1,0 +1,43 @@
+﻿local AvatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
+local Parent = AvatarExperienceControlBar.Parent
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.Dev.ReactRoblox)
+local RoduxModule = require(Parent.Rodux)
+local ActFunction = ReactRobloxModule.act
+local MakeTestRootModule = require(AvatarExperienceControlBar.TestUtils.makeTestRoot)
+
+return function(Callback, p1, p2)
+	-- upvalues: MakeTestRootModule (copy), RoduxModule (copy), ReactModule (copy), ReactRobloxModule (copy), ActFunction (copy)
+	local v1 = nil
+	
+	local function v7()
+		-- upvalues: v1 (ref), Callback (copy), p1 (copy)
+		v1 = Callback(p1)
+		
+		return nil
+	end
+	
+	local function createRootElement()
+		-- upvalues: MakeTestRootModule (upval), RoduxModule (upval), p2 (copy), ReactModule (upval), v7 (copy)
+		return ReactModule.createElement(MakeTestRootModule({
+			store = RoduxModule.Store.new(RoduxModule.createReducer(p2 or {}, {}))
+		}), {}, ReactModule.createElement(v7, {}))
+	end
+	
+	local Root = ReactRobloxModule.createRoot((Instance.new("Frame")))
+	ActFunction(function()
+		-- upvalues: Root (copy), createRootElement (copy)
+		Root:render(createRootElement())
+	end)
+	
+	return {
+		getResult = function()
+			-- upvalues: v1 (ref)
+			return v1
+		end,
+		cleanup = function()
+			-- upvalues: Root (copy)
+			Root:unmount()
+		end
+	}
+end

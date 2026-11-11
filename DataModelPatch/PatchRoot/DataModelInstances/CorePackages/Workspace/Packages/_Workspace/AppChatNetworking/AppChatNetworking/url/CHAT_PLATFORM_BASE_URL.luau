@@ -1,0 +1,1 @@
+﻿return `https://apis.{require(script:FindFirstAncestor("AppChatNetworking").Parent.Http).Url.DOMAIN}platform-chat-api`

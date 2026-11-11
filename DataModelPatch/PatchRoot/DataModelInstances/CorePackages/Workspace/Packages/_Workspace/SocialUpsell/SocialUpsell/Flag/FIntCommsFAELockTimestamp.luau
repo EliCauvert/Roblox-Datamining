@@ -1,0 +1,1 @@
+﻿return game:DefineFastInt("CommsFAELockTimestamp", 1764729600)

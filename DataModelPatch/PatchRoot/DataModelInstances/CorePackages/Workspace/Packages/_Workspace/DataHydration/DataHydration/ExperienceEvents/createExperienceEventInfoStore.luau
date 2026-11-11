@@ -1,0 +1,84 @@
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local PromiseModule = require(Parent.Promise)
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local _ = require(DataHydration.DataHydrationTypes)
+local ExperienceEventTypesModule = require(script.Parent.ExperienceEventTypes)
+local ExperienceEventDerivedFieldsModule = require(script.Parent.ExperienceEventDerivedFields)
+local ExperienceEventsUrlBuilderModule = require(script.Parent.ExperienceEventsUrlBuilder)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
+local DiscoveryUtilsModule = require(Parent.DiscoveryUtils)
+local DiscoveryEventErrorLogger = DiscoveryUtilsModule.DiscoveryEventErrorLogger
+local LogResponseErrorFunction = DiscoveryUtilsModule.logResponseError
+local UpdateEventRsvpModule = require(script.Parent.updateEventRsvp)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagSduiExperienceDetailsSupport = SharedFlagsModule.FFlagSduiExperienceDetailsSupport
+local FFlagSduiEventDetailsSupport = SharedFlagsModule.FFlagSduiEventDetailsSupport
+
+return function()
+	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), PromiseModule (copy), ExperienceEventDerivedFieldsModule (copy), ExperienceEventTypesModule (copy), UpdateEventRsvpModule (copy), LogResponseErrorFunction (copy), ExperienceEventsUrlBuilderModule (copy), DiscoveryEventErrorLogger (copy), FFlagSduiExperienceDetailsSupport (copy), FFlagSduiEventDetailsSupport (copy)
+	local DataCacheModule = CreateDataCacheModule()
+	local DataResolverModule = CreateDataResolverModule({
+		supportsMultiGet = false,
+		cache = DataCacheModule,
+		fetchFn = function(_)
+			-- upvalues: PromiseModule (upval)
+			return PromiseModule.resolve({})
+		end
+	})
+	
+	local function updateExperienceEventInfos(EnrichWithTimestampsResults)
+		-- upvalues: ExperienceEventDerivedFieldsModule (upval), DataCacheModule (copy)
+		for i, enrichWithTimestampsResult in EnrichWithTimestampsResults do
+			EnrichWithTimestampsResults[i] = ExperienceEventDerivedFieldsModule.enrichWithTimestamps(enrichWithTimestampsResult)
+		end
+		DataCacheModule.updateItems(EnrichWithTimestampsResults)
+	end
+	
+	return {
+		getExperienceEventInfo = DataResolverModule.getCachedItem,
+		getExperienceEventInfos = DataResolverModule.getCachedItems,
+		updateExperienceEventInfo = DataCacheModule.updateItem,
+		updateExperienceEventInfos = if FFlagSduiExperienceDetailsSupport or FFlagSduiEventDetailsSupport then updateExperienceEventInfos else DataCacheModule.updateItems,
+		calculateDerivedField = if FFlagSduiExperienceDetailsSupport or FFlagSduiEventDetailsSupport then ExperienceEventDerivedFieldsModule.calculateDerivedField else nil,
+		patchRsvpStatus = function(EventId, IsRsvpGoing)
+			-- upvalues: DataResolverModule (copy), ExperienceEventTypesModule (upval), UpdateEventRsvpModule (upval), DataCacheModule (copy), LogResponseErrorFunction (upval), ExperienceEventsUrlBuilderModule (upval), DiscoveryEventErrorLogger (upval), FFlagSduiExperienceDetailsSupport (upval), FFlagSduiEventDetailsSupport (upval)
+			local DataResult = DataResolverModule.getCachedItem(EventId).data()
+			local v1 = UpdateEventRsvpModule(EventId, if IsRsvpGoing then ExperienceEventTypesModule.EventRsvpTypes.Going else ExperienceEventTypesModule.EventRsvpTypes.NotGoing):andThen(function(Result)
+				-- upvalues: DataResult (copy), IsRsvpGoing (copy), DataCacheModule (upval), EventId (copy)
+				if DataResult then
+					DataCacheModule.updateItem(EventId, {
+						id = DataResult.id,
+						title = DataResult.title,
+						subtitle = DataResult.subtitle,
+						eventStart = DataResult.eventStart,
+						eventEnd = DataResult.eventEnd,
+						userRsvp = IsRsvpGoing,
+						mediaAssetId = DataResult.mediaAssetId,
+						description = DataResult.description,
+						rsvpCount = (DataResult.rsvpCount or 0) + (if IsRsvpGoing then 1 else -1)
+					})
+				end
+				return Result and Result.responseBody
+			end):catch(function(Err)
+				-- upvalues: DataResult (copy), DataCacheModule (upval), EventId (copy), LogResponseErrorFunction (upval), ExperienceEventsUrlBuilderModule (upval), DiscoveryEventErrorLogger (upval), IsRsvpGoing (copy)
+				if DataResult then
+					DataCacheModule.updateItem(EventId, DataResult)
+				end
+				local StatusCode = if type(Err) == "table" and Err.StatusCode then Err.StatusCode else nil
+				local StatusMessage = if type(Err) == "table" and Err.StatusMessage then Err.StatusMessage elseif type(Err) == "string" then Err else nil
+				LogResponseErrorFunction(ExperienceEventsUrlBuilderModule.RSVP_UPDATE_URL, { StatusCode = StatusCode })
+				DiscoveryEventErrorLogger.reportError("patchRsvpStatus", "Error updating event RSVP", {
+					eventId = EventId,
+					isRsvpGoing = IsRsvpGoing,
+					statusCode = StatusCode,
+					statusMessage = StatusMessage
+				})
+			end)
+			
+			return if FFlagSduiExperienceDetailsSupport or FFlagSduiEventDetailsSupport then v1 else nil
+		end,
+		clear = DataResolverModule.clear,
+		dispose = DataResolverModule.dispose
+	}
+end

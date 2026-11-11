@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("CreateConnectionsHub_v6", false)

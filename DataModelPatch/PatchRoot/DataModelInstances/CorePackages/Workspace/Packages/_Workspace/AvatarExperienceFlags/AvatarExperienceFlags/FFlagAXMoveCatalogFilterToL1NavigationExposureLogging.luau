@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXMoveCatalogFilterToL1NavigationExposureLogging3", false)

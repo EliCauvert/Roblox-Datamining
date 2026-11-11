@@ -1,0 +1,34 @@
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local UGCValidationCageMeshDistanceHeadMaxCageMeshDistance = game:DefineFastInt("UGCValidationCageMeshDistanceHeadMaxCageMeshDistance", 60)
+local UGCValidationCageMeshDistanceHeadMaxNegativeSDFThreshold = game:DefineFastInt("UGCValidationCageMeshDistanceHeadMaxNegativeSDFThreshold", 30)
+
+return {
+	categories = {
+		require(Parent.validationSystem.ValidationEnums).UploadCategory.DYNAMIC_HEAD
+	},
+	fflag = require(Parent.flags.getFFlagUGCValidateCageMeshDistanceHead),
+	expectedAqsData = { Measure_Cage_Distance_Head = {} },
+	run = function(p1, p2)
+		-- upvalues: ErrorSourceStringsModule (copy), UGCValidationCageMeshDistanceHeadMaxCageMeshDistance (copy), UGCValidationCageMeshDistanceHeadMaxNegativeSDFThreshold (copy)
+		local HeadOuterCage = p2.aqsSummaryData.Measure_Cage_Distance_Head.Head_OuterCage
+		
+		if HeadOuterCage == nil or HeadOuterCage.max_distance == nil or HeadOuterCage.negative_sdf_percent == nil then
+			p1:fail(ErrorSourceStringsModule.Keys.AQSInputDataError)
+			
+			return
+		end
+		if UGCValidationCageMeshDistanceHeadMaxCageMeshDistance / 100 < tonumber(HeadOuterCage.max_distance) then
+			p1:fail(ErrorSourceStringsModule.Keys.MeasureCageMeshDistanceHead_CageTooFar, {
+				max_sdf = tonumber(HeadOuterCage.max_distance),
+				max_sdf_threshold = UGCValidationCageMeshDistanceHeadMaxCageMeshDistance / 100
+			})
+		end
+		if UGCValidationCageMeshDistanceHeadMaxNegativeSDFThreshold < tonumber(HeadOuterCage.negative_sdf_percent) * 100 then
+			p1:fail(ErrorSourceStringsModule.Keys.MeasureCageMeshDistanceHead_CageInsideMesh, {
+				negtiveSDFPercent = tonumber(HeadOuterCage.negative_sdf_percent) * 100
+			})
+		end
+	end
+}

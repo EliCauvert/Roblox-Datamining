@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("ExpChat").Parent.SharedFlags).FFlagAllowAmpV2FeatureAccessCall and game:DefineFastFlag("ExpChatRefactorEnabledMessageLogic", false)

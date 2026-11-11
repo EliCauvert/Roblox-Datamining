@@ -1,0 +1,31 @@
+﻿local DataHydrationTypesModule = require(script.DataHydrationTypes)
+local FFlagSduiExperienceDetailsSupport = require(script.Parent.SharedFlags).FFlagSduiExperienceDetailsSupport
+local UserProfileModule = if FFlagSduiExperienceDetailsSupport then require(script.UserProfile) else nil
+
+return {
+	["jest.config"] = script["jest.config"],
+	createDataResolver = require(script.createDataResolver),
+	createDataCache = require(script.createDataCache),
+	createMutationLayer = require(script.createMutationLayer),
+	DataHydrationTypes = DataHydrationTypesModule,
+	DataHydrationUtils = require(script.DataHydrationUtils),
+	DataStatus = DataHydrationTypesModule.DataStatus,
+	Badges = require(script.Badges),
+	Game = require(script.Game),
+	Creator = require(script.Creator),
+	MediaAsset = require(script.MediaAsset),
+	MarketplaceCatalogCategory = require(script.MarketplaceCatalogCategory),
+	MarketplaceCatalogSort = require(script.MarketplaceCatalogSort),
+	SocialLink = require(script.SocialLink),
+	ExperienceEvents = require(script.ExperienceEvents),
+	TrustedConnections = require(script.TrustedConnections),
+	Profile = require(script.Profile),
+	Presence = require(script.Presence),
+	Friends = require(script.Friends),
+	MarketplaceAsset = require(script.MarketplaceAsset),
+	MarketplaceBundle = require(script.MarketplaceBundle),
+	MarketplaceLook = require(script.MarketplaceLook),
+	Song = require(script.Song),
+	UserSettings = require(script.UserSettings),
+	UserProfile = if FFlagSduiExperienceDetailsSupport then UserProfileModule else nil
+}

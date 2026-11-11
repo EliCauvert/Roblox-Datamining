@@ -1,0 +1,3 @@
+﻿local FFlagAXRootSlotBasedEditorFlagModule = require(script.Parent.FFlagAXRootSlotBasedEditorFlag)
+
+return game:DefineFastFlag("AXSlotsDesktopCrashFix", false) and FFlagAXRootSlotBasedEditorFlagModule

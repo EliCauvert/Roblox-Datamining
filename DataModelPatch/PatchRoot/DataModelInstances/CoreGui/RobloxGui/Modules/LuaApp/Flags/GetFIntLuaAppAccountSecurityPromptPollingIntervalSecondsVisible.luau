@@ -1,0 +1,10 @@
+﻿game:DefineFastInt("LuaAppAccountSecurityPromptPollingIntervalSecondsVisible", 15)
+
+return function()
+	local LuaAppAccountSecurityPromptPollingIntervalSecondsVisibleFastInt = game:GetFastInt("LuaAppAccountSecurityPromptPollingIntervalSecondsVisible")
+	
+	if LuaAppAccountSecurityPromptPollingIntervalSecondsVisibleFastInt <= 0 then
+		LuaAppAccountSecurityPromptPollingIntervalSecondsVisibleFastInt = 15
+	end
+	return LuaAppAccountSecurityPromptPollingIntervalSecondsVisibleFastInt
+end

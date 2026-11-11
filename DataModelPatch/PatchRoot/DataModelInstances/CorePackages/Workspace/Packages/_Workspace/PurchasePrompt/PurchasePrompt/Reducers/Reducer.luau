@@ -1,0 +1,44 @@
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local Parent = PurchasePrompt.Parent
+local CurrentToastMessagesReducer = require(Parent.ToastLite).Reducers.CurrentToastMessagesReducer
+local PurchaseCallbacksReducerModule = require(script.Parent.PurchaseCallbacksReducer)
+local PostPurchaseActionsReducerModule = require(script.Parent.PostPurchaseActionsReducer)
+local ProductPayloadReducerModule = require(script.Parent.ProductPayloadReducer)
+local UnifiedPurchaseEligibilityReducerModule = require(script.Parent.UnifiedPurchaseEligibilityReducer)
+local PurchaseAnalyticsMetadataReducerModule = require(script.Parent.PurchaseAnalyticsMetadataReducer)
+local PurchaseOptionsReducerModule = require(script.Parent.PurchaseOptionsReducer)
+local RobloxSubscriptionProductsReducerModule = require(script.Parent.RobloxSubscriptionProductsReducer)
+local CartPricingReducerModule = require(script.Parent.CartPricingReducer)
+local FFlagEnableUnifiedProductPurchaseFlow = require(PurchasePrompt.Parent.SharedFlags).FFlagEnableUnifiedProductPurchaseFlow
+local FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow = require(PurchasePrompt.Parent.SharedFlags).FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow
+local FFlagEnableBlackbirdUpsellInUnifiedPurchaseModal = require(PurchasePrompt.Parent.SharedFlags).FFlagEnableBlackbirdUpsellInUnifiedPurchaseModal
+local FFlagPurchasePromptCartPricingEnabledModule = require(PurchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
+
+return (require(Parent.PurchasePromptDeps).Rodux.combineReducers({
+	promptRequest = require(script.Parent.PromptRequestReducer),
+	purchaseFlow = require(script.Parent.PurchaseFlowReducer),
+	productInfo = require(script.Parent.ProductInfoReducer),
+	premiumProductInfo = require(script.Parent.PremiumProductsReducer),
+	robuxUpsellSuggestions = require(script.Parent.NativeUpsellSuggestionsReducer),
+	promptState = require(script.Parent.PromptStateReducer),
+	purchaseFlowUUID = require(script.Parent.PurchaseFlowUUIDReducer),
+	purchaseError = require(script.Parent.PurchaseErrorReducer),
+	economicRestrictionError = require(script.Parent.EconomicRestrictionErrorReducer),
+	accountInfo = require(script.Parent.AccountInfoReducer),
+	purchasingStartTime = require(script.Parent.PurchasingStartTimeReducer),
+	hasCompletedPurchase = require(script.Parent.HasCompletedPurchaseReducer),
+	gamepadEnabled = require(script.Parent.GamepadEnabledReducer),
+	abVariations = require(script.Parent.ABVariationReducer),
+	windowState = require(script.Parent.WindowStateReducer),
+	buttonState = require(script.Parent.ButtonStateReducer),
+	subscriptionPurchaseInfo = require(script.Parent.SubscriptionPurchaseInfoReducer),
+	currentToastMessages = if require(PurchasePrompt.Flags.GetFFlagEnableToastLiteRender)() then CurrentToastMessagesReducer else nil,
+	purchaseCallbacks = if FFlagEnableUnifiedProductPurchaseFlow then PurchaseCallbacksReducerModule else nil,
+	postPurchaseActions = if FFlagEnableUnifiedProductPurchaseFlow then PostPurchaseActionsReducerModule else nil,
+	productPayload = if FFlagEnableUnifiedProductPurchaseFlow then ProductPayloadReducerModule else nil,
+	isUserEligibleForUnifiedPurchaseFlow = if FFlagEnableUnifiedProductPurchaseFlow then UnifiedPurchaseEligibilityReducerModule else nil,
+	purchaseAnalyticsMetadata = if FFlagEnableUnifiedProductPurchaseFlow then PurchaseAnalyticsMetadataReducerModule else nil,
+	purchaseOptions = if FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow then PurchaseOptionsReducerModule else nil,
+	robloxSubscriptionProducts = if FFlagEnableBlackbirdUpsellInUnifiedPurchaseModal then RobloxSubscriptionProductsReducerModule else nil,
+	cartPricing = if FFlagPurchasePromptCartPricingEnabledModule then CartPricingReducerModule else nil
+}))

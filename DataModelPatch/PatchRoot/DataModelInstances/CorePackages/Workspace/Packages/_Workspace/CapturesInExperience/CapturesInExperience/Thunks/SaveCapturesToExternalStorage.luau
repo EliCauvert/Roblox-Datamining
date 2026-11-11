@@ -1,0 +1,38 @@
+﻿local Parent = script.Parent.Parent
+local CaptureService = game:GetService("CaptureService")
+local CaptureTypeModule = require(Parent.Enums.CaptureType)
+local CapturesToastTypeModule = require(Parent.Enums.CapturesToastType)
+local ToastTriggeredModule = require(Parent.Actions.ToastTriggered)
+local _ = require(Parent.Types)
+local FFlagCapturesVideoBulkManagerStopGapModule = require(Parent.Flags.FFlagCapturesVideoBulkManagerStopGap)
+local CapturesVideoSupportLegacyVideos = game:DefineFastFlag("CapturesVideoSupportLegacyVideos", false)
+local FFlagUseRbxstorageInGalleryModule = require(Parent.Flags.FFlagUseRbxstorageInGallery)
+local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
+
+return function(Entry)
+	-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), FFlagCapturesVideoBulkManagerStopGapModule (copy), CaptureService (copy), FFlagUseRbxstorageInGalleryModule (copy), CaptureTypeModule (copy), CapturesVideoSupportLegacyVideos (copy), ToastTriggeredModule (copy), CapturesToastTypeModule (copy)
+	local List = {}
+	
+	for _, value in ipairs(Entry) do
+		if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then
+			if FFlagCapturesVideoBulkManagerStopGapModule then
+				table.insert(List, (CaptureService:PreCaptureShared(value)))
+			else
+				table.insert(List, value)
+			end
+		elseif FFlagUseRbxstorageInGalleryModule and value.type == CaptureTypeModule.Video then
+			if CapturesVideoSupportLegacyVideos then
+				table.insert(List, (CaptureService:PreVideoCaptureShared(value.videoCapture)))
+			else
+				table.insert(List, value.videoCapture)
+			end
+		elseif value.type == CaptureTypeModule.Screenshot then
+			table.insert(List, value.filePath)
+		end
+	end
+	return function(p1)
+		-- upvalues: CaptureService (upval), List (copy), ToastTriggeredModule (upval), CapturesToastTypeModule (upval), Entry (copy)
+		CaptureService:SaveCapturesToExternalStorageAsync(List)
+		p1:dispatch(ToastTriggeredModule(CapturesToastTypeModule.CaptureSavedToDevice, { captureInfo = Entry[1] }))
+	end
+end

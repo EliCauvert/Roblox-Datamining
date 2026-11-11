@@ -1,0 +1,1 @@
+﻿return if game:DefineFastFlag("EnableFlyoutSidePanel15", false) then require(game:GetService("CorePackages").Workspace.Packages.SharedExperimentDefinition).FlyoutSidePanelIXP.isFlyoutSidePanelEnabled() else false

@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("CreateMomentsToast_v3", false)

@@ -1,0 +1,102 @@
+﻿local Parent = script.Parent.Parent
+local DependenciesModule = require(Parent.dependencies)
+local UseStyleFunction = DependenciesModule.UIBlox.Core.Style.useStyle
+local _ = require(Parent.type)
+local Text = require(script:FindFirstAncestor("NotificationsCommon").Parent.AppCommonLib).Text
+local React = DependenciesModule.React
+local config = {
+	highlight = function(Text): string
+		return "<b>" .. Text .. "</b>"
+	end,
+	warning = function(Text): string
+		return "<b>" .. Text .. "</b>"
+	end
+}
+
+function utf8Sub(Text: string, StartIndex: number, EndIndex: number): string
+	local OffsetResult = utf8.offset(Text, StartIndex)
+	local OffsetResult1 = utf8.offset(Text, EndIndex + 1)
+	
+	return if OffsetResult == nil or OffsetResult1 == nil then string.sub(Text, StartIndex, EndIndex) else string.sub(Text, OffsetResult, OffsetResult1 - 1)
+end
+
+local function formatString(p1)
+	-- upvalues: config (copy), Text (copy)
+	local Text1 = p1.text .. " "
+	local StyledElements = p1.styledElements
+	local List = {
+		{ Position = 0, ReferenceCount = 0, Format = "highlight" },
+		{
+			ReferenceCount = 0,
+			Format = "highlight",
+			Position = utf8.len(p1.text)
+		}
+	}
+	
+	if StyledElements then
+		for _, styledElement in pairs(StyledElements) do
+			table.insert(List, {
+				ReferenceCount = 1,
+				Position = styledElement.offset,
+				Format = styledElement.styledElementType
+			})
+			table.insert(List, {
+				ReferenceCount = -1,
+				Position = styledElement.offset + styledElement.length,
+				Format = styledElement.styledElementType
+			})
+		end
+	end
+	table.sort(List, function(A, B): boolean
+		return A.Position < B.Position
+	end)
+	local NewReferenceCounts = {}
+	
+	for i in pairs(config) do
+		NewReferenceCounts[i] = 0
+	end
+	local Text2 = ""
+	
+	for i1 = 1, #List - 1 do
+		local Entry = List[i1]
+		local Entry1 = List[i1 + 1]
+		
+		if Entry.Format then
+			local Format = Entry.Format
+			NewReferenceCounts[Format] += Entry.ReferenceCount
+		end
+		if Entry.Position ~= Entry1.Position then
+			local Utf8SubResult = utf8Sub(Text1, Entry.Position + 1, Entry1.Position)
+			
+			for i2, value in pairs(config) do
+				if NewReferenceCounts[i2] > 0 then
+					Utf8SubResult = value(Utf8SubResult)
+				end
+			end
+			Text2 ..= Utf8SubResult
+		end
+	end
+	return Text.Trim(Text2)
+end
+
+return function(Label)
+	-- upvalues: UseStyleFunction (copy), formatString (copy), React (copy)
+	local UseStyleResult = UseStyleFunction()
+	
+	return React.createElement("TextLabel", {
+		RichText = true,
+		BackgroundTransparency = 1,
+		TextWrapped = true,
+		Text = if Label.Text then formatString(Label.Text) else "",
+		TextColor3 = Label.TextColor3 or UseStyleResult.Theme.TextDefault.Color,
+		TextTransparency = Label.TextTransparency or UseStyleResult.Theme.TextDefault.Transparency,
+		Font = Label.Font or UseStyleResult.Font.Body.Font,
+		AutomaticSize = Label.AutomaticSize,
+		Size = Label.Size,
+		TextSize = Label.TextSize,
+		Position = Label.Position,
+		AnchorPoint = Label.AnchorPoint,
+		TextXAlignment = Label.TextXAlignment,
+		LayoutOrder = Label.LayoutOrder
+	})
+end

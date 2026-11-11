@@ -1,0 +1,1 @@
+﻿return { OBSERVED_IMAGE_TAG = "observed-image" }

@@ -1,0 +1,4 @@
+﻿local FFlagEnableSocialProofVerticalUserListSheetModule = require(script.Parent.FFlagEnableSocialProofVerticalUserListSheet)
+local FFlagSduiChipAccessoryPropsModule = require(script.Parent.FFlagSduiChipAccessoryProps)
+
+return require(script.Parent.FFlagLuaAppDataHydrationConnectionsPlayedStore) and (FFlagEnableSocialProofVerticalUserListSheetModule and (FFlagSduiChipAccessoryPropsModule and game:DefineFastFlag("SduiExperienceDetailsSocialProof_3", false)))

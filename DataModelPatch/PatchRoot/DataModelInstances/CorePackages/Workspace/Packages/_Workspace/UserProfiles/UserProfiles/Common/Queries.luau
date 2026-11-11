@@ -1,0 +1,16 @@
+﻿local Queries = require(script:FindFirstAncestor("UserProfiles").Parent.ApolloLocalState).queries
+
+return {
+	userProfilesCombinedNameByUserIds = Queries.userProfilesCombinedNameByUserIds,
+	userProfilesCombinedNameAndAliasByUserIds = Queries.userProfilesCombinedNameAndAliasByUserIds,
+	userProfilesCombinedNameAndUsernameByUserIds = Queries.userProfilesCombinedNameAndUsernameByUserIds,
+	userProfilesAllNamesByUserIds = Queries.userProfilesAllNamesByUserIds,
+	userProfilesDisplayNameAndUsernameByUserIds = Queries.userProfilesDisplayNameAndUsernameByUserIds,
+	userProfilesDisplayUserPlatformNamesByUserIds = Queries.userProfilesDisplayUserPlatformNamesByUserIds,
+	userProfilesInExperienceNamesByUserIds = Queries.userProfilesInExperienceNamesByUserIds,
+	userProfilesCombinedAndPlatformByUserIds = Queries.userProfilesCombinedAndPlatformByUserIds,
+	userProfilesPlatformNamesByUserIds = Queries.userProfilesPlatformNamesByUserIds,
+	userProfilesPlatformProfileIdsByUserIds = Queries.userProfilesPlatformProfileIdsByUserIds,
+	userProfilesCombinedNameUsernameAndIsVerifiedByUserIds = Queries.userProfilesCombinedNameUsernameAndIsVerifiedByUserIds,
+	userProfilesFriendsLandingQueryByUserIds = Queries.userProfilesFriendsLandingQueryByUserIds
+}

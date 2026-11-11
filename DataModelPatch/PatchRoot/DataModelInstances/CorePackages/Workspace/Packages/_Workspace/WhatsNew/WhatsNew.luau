@@ -1,0 +1,19 @@
+﻿local LoadWhatsNewRegistryModule = require(script.registry.LoadWhatsNewRegistry)
+
+return {
+	["jest.config"] = script["jest.config"],
+	Constants = require(script.Constants),
+	Enums = require(script.Enums),
+	TourTipCtaAccess = require(script.TourTipCtaAccess),
+	scopeActions = require(script.registry.ScopeActions),
+	Loader = {
+		validateRegistry = require(script.registry.validateRegistry),
+		loadWhatsNewRegistry = LoadWhatsNewRegistryModule.loadWhatsNewRegistry,
+		loadBundledRegistry = LoadWhatsNewRegistryModule.loadBundledRegistry
+	},
+	GetWhatsNewStore = require(script.store.GetWhatsNewStore),
+	useWhatsNewRuntimeState = require(script.hooks.useWhatsNewRuntimeState),
+	WhatsNewAnchor = require(script.components.WhatsNewAnchor),
+	WhatsNewScreenHost = require(script.components.WhatsNewScreenHost),
+	WhatsNewTourtip = require(script.components.WhatsNewTourtip)
+}

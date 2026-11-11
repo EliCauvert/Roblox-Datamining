@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("FriendsCarouselUseFindFriendsOnDesktop_v2", false)

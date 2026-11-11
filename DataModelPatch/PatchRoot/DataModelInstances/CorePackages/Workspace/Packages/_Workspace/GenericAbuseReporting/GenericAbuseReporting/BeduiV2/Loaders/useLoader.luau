@@ -1,0 +1,140 @@
+﻿local Parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
+local DashModule = require(Parent.Dash)
+local ReactModule = require(Parent.React)
+local LoaderContextModule = require(script.Parent.LoaderContext)
+
+local function _(p1): boolean
+	return typeof(p1) == "table" and p1["$load"] ~= nil
+end
+
+local function cacheKey(Load, Params): string
+	if not Params then
+		return Load .. "::{}"
+	end
+	local List = {}
+	
+	for param in pairs(Params) do
+		table.insert(List, param)
+	end
+	table.sort(List)
+	local List1 = {}
+	
+	for _, value in ipairs(List) do
+		table.insert(List1, value .. "=" .. Params[value])
+	end
+	return Load .. "::" .. table.concat(List1, ",")
+end
+
+local function useLoader(Data)
+	-- upvalues: LoaderContextModule (copy), ReactModule (copy), cacheKey (copy)
+	local UseLoaderContextResult = LoaderContextModule.useLoaderContext()
+	local RegistryRef = UseLoaderContextResult.registryRef
+	local CacheRef = UseLoaderContextResult.cacheRef
+	local HasLoad: boolean = typeof(Data) == "table" and Data["$load"] ~= nil
+	local Load = if HasLoad then Data["$load"] else nil
+	local Params = if HasLoad then Data.params else nil
+	local UseStateResult, UseStateResult2 = ReactModule.useState(if HasLoad then { data = nil, loading = true, error = nil } else { loading = false, error = nil, data = Data })
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
+	ReactModule.useEffect(function()
+		-- upvalues: HasLoad (copy), UseStateResult2 (copy), Data (copy), RegistryRef (copy), Load (copy), cacheKey (upval), Params (copy), CacheRef (copy)
+		if not HasLoad then
+			UseStateResult2({ loading = false, error = nil, data = Data })
+			
+			return
+		end
+		local CurrentEntry = RegistryRef.current[Load]
+		
+		if not CurrentEntry then
+			UseStateResult2({
+				data = nil,
+				loading = false,
+				error = string.format("Loader \"%s\" not found in registry", Load)
+			})
+			
+			return
+		end
+		local CacheKeyResult = cacheKey(Load, Params)
+		local CurrentEntry1 = CacheRef.current[CacheKeyResult]
+		
+		if CurrentEntry1 then
+			UseStateResult2({ loading = false, error = nil, data = CurrentEntry1 })
+			
+			return
+		end
+		local Flag = false
+		UseStateResult2({ data = nil, loading = true, error = nil })
+		CurrentEntry.fetch(Params or {}):andThen(function(Result)
+			-- upvalues: Flag (ref), CacheRef (upval), CacheKeyResult (copy), UseStateResult2 (upval)
+			if not Flag then
+				CacheRef.current[CacheKeyResult] = Result
+				UseStateResult2({ loading = false, error = nil, data = Result })
+				
+				return
+			end
+		end):catch(function(Err)
+			-- upvalues: Flag (ref), UseStateResult2 (upval)
+			if not Flag then
+				UseStateResult2({ data = nil, loading = false, error = tostring(Err) })
+				
+				return
+			end
+		end)
+		
+		return function()
+			-- upvalues: Flag (ref)
+			Flag = true
+		end
+	end, { Params, Data, UseStateResult1, HasLoad })
+	
+	return {
+		data = UseStateResult.data,
+		loading = UseStateResult.loading,
+		error = UseStateResult.error,
+		retry = ReactModule.useCallback(function()
+			-- upvalues: HasLoad (copy), CacheRef (copy), cacheKey (upval), Load (copy), Params (copy), UseStateResult2_1 (copy)
+			if HasLoad then
+				CacheRef.current[cacheKey(Load, Params)] = nil
+				UseStateResult2_1(function(p1: number): number
+					return p1 + 1
+				end)
+				
+				return
+			end
+		end, { Data, Params, HasLoad })
+	}
+end
+
+return {
+	useLoader = useLoader,
+	useListLoader = function(p1)
+		-- upvalues: useLoader (copy), ReactModule (copy), DashModule (copy)
+		local UseLoaderResult = useLoader(p1)
+		
+		return {
+			data = ReactModule.useMemo(function()
+				-- upvalues: UseLoaderResult (copy), DashModule (upval)
+				return if UseLoaderResult.data then DashModule.values(UseLoaderResult.data) else nil
+			end, { UseLoaderResult.data }),
+			loading = UseLoaderResult.loading,
+			error = UseLoaderResult.error,
+			retry = UseLoaderResult.retry
+		}
+	end,
+	useGroupedListLoader = function(p1)
+		-- upvalues: useLoader (copy), ReactModule (copy), DashModule (copy)
+		local UseLoaderResult = useLoader(p1)
+		
+		return {
+			data = ReactModule.useMemo(function()
+				-- upvalues: UseLoaderResult (copy), DashModule (upval)
+				return if UseLoaderResult.data then DashModule.map(DashModule.values(UseLoaderResult.data), function(p2)
+					-- upvalues: DashModule (upval)
+					return if p2.items then DashModule.join(p2, { items = DashModule.values(p2.items) }) else p2
+				end) else nil
+			end, { UseLoaderResult.data }),
+			loading = UseLoaderResult.loading,
+			error = UseLoaderResult.error,
+			retry = UseLoaderResult.retry
+		}
+	end
+}

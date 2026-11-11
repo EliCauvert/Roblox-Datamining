@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXMoveCatalogFilterToL1Navigation2", false)

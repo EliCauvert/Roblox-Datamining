@@ -1,0 +1,22 @@
+﻿local AbuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
+local _ = require(AbuseReportMenu.Components.Types)
+local MenuConfigs = AbuseReportMenu.MenuConfigs
+local MethodOfAbuseModalMenuConfigModule = require(MenuConfigs.Players.MethodOfAbuseModalMenuConfig)
+local OptionalAttachScreenshotMenuConfigModule = require(MenuConfigs.Players.OptionalAttachScreenshotMenuConfig)
+local PlayerModalSelectorMenuConfigModule = require(MenuConfigs.Players.PlayerModalSelectorMenuConfig)
+local ChatModalSelectorMenuConfigModule = require(MenuConfigs.Players.ChatModalSelectorMenuConfig)
+local AbuseReasonModalSelectorMenuConfigModule = require(MenuConfigs.Players.AbuseReasonModalSelectorMenuConfig)
+local SubmitReportButtonMenuConfigModule = require(MenuConfigs.Players.SubmitReportButtonMenuConfig)
+local FreeFormCommentMenuConfigModule = require(MenuConfigs.Players.FreeFormCommentMenuConfig)
+
+return if require(game:GetService("CorePackages").Workspace.Packages.SharedFlags).FFlagInGameMenuAddChatLineReporting then {
+	MethodOfAbuseModalMenuConfigModule, PlayerModalSelectorMenuConfigModule,
+	ChatModalSelectorMenuConfigModule, AbuseReasonModalSelectorMenuConfigModule,
+	OptionalAttachScreenshotMenuConfigModule, FreeFormCommentMenuConfigModule,
+	SubmitReportButtonMenuConfigModule
+} else {
+	MethodOfAbuseModalMenuConfigModule, PlayerModalSelectorMenuConfigModule,
+	AbuseReasonModalSelectorMenuConfigModule,
+	OptionalAttachScreenshotMenuConfigModule, FreeFormCommentMenuConfigModule,
+	SubmitReportButtonMenuConfigModule
+}

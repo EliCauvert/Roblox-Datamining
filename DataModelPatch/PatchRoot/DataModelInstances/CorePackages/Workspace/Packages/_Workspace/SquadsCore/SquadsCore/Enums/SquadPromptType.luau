@@ -1,0 +1,22 @@
+﻿return {
+	ScheduleSquad = "ScheduleSquad",
+	AddFriends = "AddFriends",
+	AlreadyJoined = "AlreadyJoined",
+	CannotExpandToGroupChatActiveParty = "CannotExpandToGroupChatActiveParty",
+	ConfirmDeleteScheduledSquad = "ConfirmDeleteScheduledSquad",
+	ConfirmInviteToSquad = "ConfirmInviteToSquad",
+	ConnectVoiceWithLowMemory = "ConnectVoiceWithLowMemory",
+	DisconnectVoiceDueToLowMemory = "DisconnectVoiceDueToLowMemory",
+	Error = "Error",
+	EuVoiceConsentPrompt = "EuVoiceConsentPrompt",
+	FailedToJoin = "FailedToJoin",
+	InvitedToExperience = "InvitedToExperience",
+	JoinAnotherSquad = "JoinAnotherSquad",
+	JoinWithLowMemory = "JoinWithLowMemory",
+	ParticipantChatDisabled = "ParticipantChatDisabled",
+	RemoveFromChat = "RemoveFromChat",
+	RemoveFromParty = "RemoveFromParty",
+	ScheduledSquadConflict = "ScheduledSquadConflict",
+	SquadEnded = "SquadEnded",
+	SquadFull = "SquadFull"
+}

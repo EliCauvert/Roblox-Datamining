@@ -1,0 +1,46 @@
+﻿local GetConnectionsPlayedStoreModule = require(script.ConnectionsPlayed.getConnectionsPlayedStore)
+local CreateConnectionsPlayedStoreModule = require(script.ConnectionsPlayed.createConnectionsPlayedStore)
+local GamePassModule = require(script.GamePass)
+local GameDeveloperProductModule = require(script.GameDeveloperProduct)
+local GameSubscriptionModule = require(script.GameSubscription)
+local _ = require(script.Followings.FollowingsStoreTypes)
+local _ = require(script.Votes.VotesStoreTypes)
+local _ = require(script.Favorites.FavoritesStoreTypes)
+local _ = require(script.AgeRecommendations.AgeRecommendationStoreTypes)
+local _ = require(script.GameInfo.GameInfoStoreTypes)
+local _ = require(script.Playability.PlayabilityStoreTypes)
+local _ = require(script.GameMedia.GameMediaStoreTypes)
+local _ = require(script.Votes.UserVoteFeedbackMetadataStoreTypes)
+local _ = require(script.GamePass.GamePassStoreTypes)
+local _ = require(script.GameDeveloperProduct.GameDeveloperProductStoreTypes)
+local _ = require(script.GameSubscription.GameSubscriptionStoreTypes)
+local FFlagLuaAppDataHydrationConnectionsPlayedStore = require(script:FindFirstAncestor("DataHydration").Parent.SharedFlags).FFlagLuaAppDataHydrationConnectionsPlayedStore
+
+return {
+	createGamePassStore = GamePassModule.createGamePassStore,
+	getGamePassStore = GamePassModule.getGamePassStore,
+	createGameDeveloperProductStore = GameDeveloperProductModule.createGameDeveloperProductStore,
+	getGameDeveloperProductStore = GameDeveloperProductModule.getGameDeveloperProductStore,
+	createGameSubscriptionStore = GameSubscriptionModule.createGameSubscriptionStore,
+	getGameSubscriptionStore = GameSubscriptionModule.getGameSubscriptionStore,
+	createFavoritesStore = require(script.Favorites.createFavoritesStore),
+	createAgeRecommendationStore = require(script.AgeRecommendations.createAgeRecommendationStore),
+	createFollowingsStore = require(script.Followings.createFollowingsStore),
+	createGameInfoStore = require(script.GameInfo.createGameInfoStore),
+	createPlayabilityStore = require(script.Playability.createPlayabilityStore),
+	createVotesStore = require(script.Votes.createVotesStore),
+	createUserVoteFeedbackMetadataStore = require(script.Votes.createUserVoteFeedbackMetadataStore),
+	createConnectionsPlayedStore = if FFlagLuaAppDataHydrationConnectionsPlayedStore then CreateConnectionsPlayedStoreModule else nil,
+	getFavoritesStore = require(script.Favorites.getFavoritesStore),
+	getAgeRecommendationStore = require(script.AgeRecommendations.getAgeRecommendationStore),
+	getFollowingsStore = require(script.Followings.getFollowingsStore),
+	getGameInfoStore = require(script.GameInfo.getGameInfoStore),
+	getPlayabilityStore = require(script.Playability.getPlayabilityStore),
+	getVotesStore = require(script.Votes.getVotesStore),
+	getUserVoteFeedbackMetadataStore = require(script.Votes.getUserVoteFeedbackMetadataStore),
+	VotesUtils = require(script.Votes.VotesUtils),
+	AgeRecommendationUtils = require(script.AgeRecommendations.AgeRecommendationUtils),
+	getConnectionsPlayedStore = if FFlagLuaAppDataHydrationConnectionsPlayedStore then GetConnectionsPlayedStoreModule else nil,
+	createGameMediaStore = require(script.GameMedia.createGameMediaStore),
+	getGameMediaStore = require(script.GameMedia.getGameMediaStore)
+}

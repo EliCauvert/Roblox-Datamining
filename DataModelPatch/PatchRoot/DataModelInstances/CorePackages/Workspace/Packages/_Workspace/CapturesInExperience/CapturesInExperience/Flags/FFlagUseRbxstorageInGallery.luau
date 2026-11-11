@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("UseRbxstorageInGallery", false) and game:GetEngineFeature("VideoCaptureUseRbxStorageLua")

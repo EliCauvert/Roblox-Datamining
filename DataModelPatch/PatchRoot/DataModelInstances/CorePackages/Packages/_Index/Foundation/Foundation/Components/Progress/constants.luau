@@ -1,0 +1,1 @@
+﻿return { INDETERMINATE_SHIMMER_SPEED = 0.7 }

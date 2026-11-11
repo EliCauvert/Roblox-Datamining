@@ -1,0 +1,8 @@
+﻿local AmpUpsell = script:FindFirstAncestor("AmpUpsell")
+local GetFFlagEnableVPCUpsellFoundationDialogHardeningModule = require(AmpUpsell.Flags.GetFFlagEnableVPCUpsellFoundationDialogHardening)
+local GetFFlagEnableFoundationUIVPCUpsellForInExperienceModule = require(AmpUpsell.Flags.GetFFlagEnableFoundationUIVPCUpsellForInExperience)
+
+return function(p1)
+	-- upvalues: GetFFlagEnableVPCUpsellFoundationDialogHardeningModule (copy), GetFFlagEnableFoundationUIVPCUpsellForInExperienceModule (copy)
+	return GetFFlagEnableVPCUpsellFoundationDialogHardeningModule() or GetFFlagEnableFoundationUIVPCUpsellForInExperienceModule() and p1
+end

@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("ProfilePlatformAddTC_v10", false)

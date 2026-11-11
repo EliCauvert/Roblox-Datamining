@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("UserSearch").Parent.SharedFlags).FFlagFriendSortedByPresenceSignalsImplementation and game:DefineFastFlag("UserSearchPresenceStoreMigration", false)
