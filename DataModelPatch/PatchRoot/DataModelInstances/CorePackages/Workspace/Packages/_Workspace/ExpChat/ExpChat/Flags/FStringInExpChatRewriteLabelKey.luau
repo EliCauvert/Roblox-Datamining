@@ -1,1 +1,0 @@
-﻿return game:DefineFastString("InExpChatRewriteLabelKey", "CoreScripts.TextChat.ChatWindow.RephrasedLabel")

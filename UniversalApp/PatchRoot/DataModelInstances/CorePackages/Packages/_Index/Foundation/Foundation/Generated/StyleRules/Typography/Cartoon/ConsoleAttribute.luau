@@ -15,9 +15,9 @@
 			}
 		},
 		properties = {
-			LineHeight = 1.177,
+			FontFace = "$FontBodyMedium",
 			TextSize = "$TextSizeBodyMedium",
-			FontFace = "$FontBodyMedium"
+			LineHeight = 1.177
 		},
 		attributes = {
 			[1] = {
@@ -46,9 +46,9 @@
 			}
 		},
 		properties = {
-			LineHeight = 1,
+			FontFace = "$FontDisplayMedium",
 			TextSize = "$TextSizeDisplayMedium",
-			FontFace = "$FontDisplayMedium"
+			LineHeight = 1
 		},
 		attributes = {
 			[1] = {
@@ -74,9 +74,9 @@
 			}
 		},
 		properties = {
-			LineHeight = 1.2,
+			FontFace = "$FontTitleSmall",
 			TextSize = "$TextSizeTitleSmall",
-			FontFace = "$FontTitleSmall"
+			LineHeight = 1.2
 		},
 		attributes = {
 			[1] = {
@@ -102,9 +102,9 @@
 			}
 		},
 		properties = {
-			LineHeight = 1,
+			FontFace = "$FontHeadingSmall",
 			TextSize = "$TextSizeHeadingSmall",
-			FontFace = "$FontHeadingSmall"
+			LineHeight = 1
 		},
 		attributes = {
 			[1] = {
@@ -130,9 +130,9 @@
 			}
 		},
 		properties = {
-			LineHeight = 1.177,
+			FontFace = "$FontCaptionLarge",
 			TextSize = "$TextSizeCaptionLarge",
-			FontFace = "$FontCaptionLarge"
+			LineHeight = 1.177
 		},
 		attributes = {
 			[1] = {
@@ -171,9 +171,9 @@
 			}
 		},
 		properties = {
-			LineHeight = 1.2,
+			FontFace = "$FontCaptionMedium",
 			TextSize = "$TextSizeCaptionMedium",
-			FontFace = "$FontCaptionMedium"
+			LineHeight = 1.2
 		},
 		attributes = {
 			[1] = {
@@ -202,9 +202,9 @@
 			}
 		},
 		properties = {
-			LineHeight = 1.103,
+			FontFace = "$FontHeadingMedium",
 			TextSize = "$TextSizeHeadingMedium",
-			FontFace = "$FontHeadingMedium"
+			LineHeight = 1.103
 		},
 		attributes = {
 			[1] = {
@@ -249,9 +249,9 @@
 			}
 		},
 		properties = {
-			LineHeight = 1.167,
+			FontFace = "$FontCaptionSmall",
 			TextSize = "$TextSizeCaptionSmall",
-			FontFace = "$FontCaptionSmall"
+			LineHeight = 1.167
 		},
 		attributes = {
 			[1] = {
@@ -277,9 +277,9 @@
 			}
 		},
 		properties = {
-			LineHeight = 1.2,
+			FontFace = "$FontBodySmall",
 			TextSize = "$TextSizeBodySmall",
-			FontFace = "$FontBodySmall"
+			LineHeight = 1.2
 		},
 		attributes = {
 			[1] = {
@@ -305,9 +305,9 @@
 			}
 		},
 		properties = {
-			LineHeight = 1,
+			FontFace = "$FontDisplaySmall",
 			TextSize = "$TextSizeDisplaySmall",
-			FontFace = "$FontDisplaySmall"
+			LineHeight = 1
 		},
 		attributes = {
 			[1] = {
@@ -333,9 +333,9 @@
 			}
 		},
 		properties = {
-			LineHeight = 0.99,
+			FontFace = "$FontDisplayLarge",
 			TextSize = "$TextSizeDisplayLarge",
-			FontFace = "$FontDisplayLarge"
+			LineHeight = 0.99
 		},
 		attributes = {
 			[1] = {
@@ -361,9 +361,9 @@
 			}
 		},
 		properties = {
-			LineHeight = 0.842,
+			FontFace = "$FontLabelLarge",
 			TextSize = "$TextSizeLabelLarge",
-			FontFace = "$FontLabelLarge"
+			LineHeight = 0.842
 		},
 		attributes = {
 			[1] = {
@@ -389,9 +389,9 @@
 			}
 		},
 		properties = {
-			LineHeight = 0.8,
+			FontFace = "$FontLabelSmall",
 			TextSize = "$TextSizeLabelSmall",
-			FontFace = "$FontLabelSmall"
+			LineHeight = 0.8
 		},
 		attributes = {
 			[1] = {
@@ -417,9 +417,9 @@
 			}
 		},
 		properties = {
-			LineHeight = 1.158,
+			FontFace = "$FontBodyLarge",
 			TextSize = "$TextSizeBodyLarge",
-			FontFace = "$FontBodyLarge"
+			LineHeight = 1.158
 		},
 		attributes = {
 			[1] = {
@@ -445,9 +445,9 @@
 			}
 		},
 		properties = {
-			LineHeight = 1.158,
+			FontFace = "$FontTitleLarge",
 			TextSize = "$TextSizeTitleLarge",
-			FontFace = "$FontTitleLarge"
+			LineHeight = 1.158
 		},
 		attributes = {
 			[1] = {
@@ -473,9 +473,9 @@
 			}
 		},
 		properties = {
-			LineHeight = 1.177,
+			FontFace = "$FontTitleMedium",
 			TextSize = "$TextSizeTitleMedium",
-			FontFace = "$FontTitleMedium"
+			LineHeight = 1.177
 		},
 		attributes = {
 			[1] = {
@@ -501,9 +501,9 @@
 			}
 		},
 		properties = {
-			LineHeight = 1,
+			FontFace = "$FontHeadingLarge",
 			TextSize = "$TextSizeHeadingLarge",
-			FontFace = "$FontHeadingLarge"
+			LineHeight = 1
 		},
 		attributes = {
 			[1] = {
@@ -529,9 +529,9 @@
 			}
 		},
 		properties = {
-			LineHeight = 0.824,
+			FontFace = "$FontLabelMedium",
 			TextSize = "$TextSizeLabelMedium",
-			FontFace = "$FontLabelMedium"
+			LineHeight = 0.824
 		},
 		attributes = {
 			[1] = {

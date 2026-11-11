@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnableInExperienceShop3", false)

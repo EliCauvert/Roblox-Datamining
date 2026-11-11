@@ -1,1 +1,0 @@
-﻿return { Default = "default", Quick = "quick", Slow = "slow" }

@@ -1,1 +1,0 @@
-﻿return game:DefineFastInt("LuaAppPlayButtonThrottleTimeSeconds", 2)

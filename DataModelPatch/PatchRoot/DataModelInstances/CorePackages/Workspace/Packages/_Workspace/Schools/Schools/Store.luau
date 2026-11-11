@@ -1,1 +1,0 @@
-﻿return { SchoolEntryStatus = require(script.SchoolEntryStatus) }

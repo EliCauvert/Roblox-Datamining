@@ -220,6 +220,7 @@ Authentication.AccountSwitch.Action.Continue,
 Authentication.AccountSwitch.Action.CreateNewAccount,Tạo Tài Khoản Mới
 Authentication.AccountSwitch.Action.LogoutAllAccounts,Thoát khỏi tất cả các tài khoản
 Authentication.AccountSwitch.Action.RemoveAllAccounts,Xóa tất cả tài khoản?
+Authentication.AccountSwitch.Action.SignIn,Đăng nhập
 Authentication.AccountSwitch.Action.SignInToExistingAccount,Đăng nhập vào tài khoản đã có
 Authentication.AccountSwitch.Action.SwitchAccount,Chuyển đổi tài khoản
 Authentication.AccountSwitch.Description.AccountLimit.2,"Bạn đã đạt giới hạn số lượng tài khoản. Để thêm tài khoản mới, vui lòng xóa bớt một tài khoản trước."
@@ -229,6 +230,8 @@ Authentication.AccountSwitch.Description.LogoutConfirmation,Bạn sẽ cần đ�
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,Vui lòng thử lại sau
 Authentication.AccountSwitch.Description.RemoveAllAccounts,"Sau khi bạn đăng xuất, tất cả các tài khoản sẽ bị xóa khỏi thiết bị này."
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,"Nếu thực hiện thao tác này, bạn sẽ không còn thấy tài khoản này trên thiết bị này nữa, trừ trường hợp đăng nhập lại. Bạn sẽ quay lại trang đích."
+Authentication.AccountSwitch.Description.SomethingWentWrongSignInAgain,Đã xảy ra lỗi. Vui lòng đăng nhập lại.
+Authentication.AccountSwitch.Description.StaleSessionSignInAgain,Đã lâu bạn không sử dụng tài khoản này tại đây. Hãy đăng nhập lại nhé.
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,Hãy thử đăng nhập trực tiếp
 Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,Không thể chuyển tài khoản
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
@@ -321,7 +324,7 @@ Authentication.Login.Action.ResendCode,
 Authentication.Login.Action.Save,Lưu
 Authentication.Login.Action.SendCodeSentenceCase,Gửi mã
 Authentication.Login.Action.SendVerificationEmail,Gửi email xác minh
-Authentication.Login.Action.SignIn,Đăng nhập
+Authentication.Login.Action.SignIn,
 Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,Sử dụng mã xác nhận
@@ -1599,7 +1602,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Tìm người chơi trên 
 Feature.AddFriends.Label.ConnectWithContacts,Mời liên hệ hoặc kết nối với bạn bè đang chơi Roblox!
 Feature.AddFriends.Label.ContactsTile,Liên hệ
 Feature.AddFriends.Label.DeclineAllBackgrounded,Bỏ qua tất cả yêu cầu kết bạn. Quá trình này có thể mất chút thời gian.
-Feature.AddFriends.Label.EmptyState.FriendsRename,Bạn muốn khám phá Roblox cùng ai? Thêm bạn bè để có trải nghiệm thú vị hơn trên Roblox!
 Feature.AddFriends.Label.EmptyStatePrompt,Bạn sẽ khám phá Roblox với ai? Tìm kiếm người chơi để thêm hoặc kết nối với bạn bè mà bạn đã biết!
 Feature.AddFriends.Label.FriendRequests,Yêu Cầu Kết Bạn
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Tìm kiếm mọi người
@@ -1607,16 +1609,13 @@ Feature.AddFriends.Label.MyQrCode,Mã QR Của Tôi
 Feature.AddFriends.Label.QRCodeTitle,
 Feature.AddFriends.Label.SchoolTile,Bạn cùng lớp
 Feature.AddFriends.Label.SearchForFriendsPrompt,Tìm người chơi trên Roblox bằng cách tìm kiếm tên người chơi hoặc tên hiển thị của họ.
-Feature.AddFriends.Label.ShareQRCodeAddConnection,Chia sẻ mã QR để thêm những người bạn quen biết
-Feature.AddFriends.Label.SyncContactsInvitePeople,Đồng bộ danh bạ để tìm và mời bạn bè!
-Feature.AddFriends.Label.SyncWithContacts,
+Feature.AddFriends.Label.SyncWithContacts,Đồng bộ danh bạ để tìm và mời bạn bè!
 Feature.AddFriends.Label.TrustedFriendRequests,Yêu cầu làm Bạn bè đáng tin cậy
 Feature.AddFriends.Text.EmptyState.FriendsRename,Bạn muốn khám phá Roblox cùng ai?{lineBreak}Thêm bạn bè để có trải nghiệm thú vị hơn trên Roblox!
 Feature.AddFriends.Title.AddFriendsToolTip,Roblox sẽ vui hơn khi chơi cùng bạn bè!
 Feature.AddFriends.Title.AddFriendsTooltipTitle,
 Feature.AddFriends.Title.CameraPermission,Quyền Truy Cập Camera
 Feature.AddFriends.Title.ConnectWithContacts,Thêm từ Danh bạ
-Feature.AddFriends.Title.ShareQRCode,Thêm từ mã QR
 Feature.AgeGuidelines.DisplayName.StrongLanguage,Ngôn từ xúc phạm
 Feature.AgeGuidelines.Label.CreatorEnabled,Nhà sáng tạo đã bật
 Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect,Mở khóa thêm nhiều nội dung và tính năng khác.
@@ -1729,6 +1728,7 @@ Feature.AppealsPortal.Label.Location,Vị trí
 Feature.AppealsPortal.Label.LookDescription,Mô tả avatar được chia sẻ
 Feature.AppealsPortal.Label.LookId,ID Avatar Được Chia Sẻ
 Feature.AppealsPortal.Label.LookName,Tên Avatar Được Chia Sẻ
+Feature.AppealsPortal.Label.MomentDescription,Mô tả về Khoảnh khắc
 Feature.AppealsPortal.Label.PlaceIDPrompt,ID địa điểm là gì?
 Feature.AppealsPortal.Label.PlaceId,ID địa điểm
 Feature.AppealsPortal.Label.PlaceName,Tên địa điểm
@@ -2186,6 +2186,8 @@ Feature.Avatar.Label.Shoes,Giày
 Feature.Avatar.Label.Shorts,Quần Ngắn
 Feature.Avatar.Label.Shoulder,Vai
 Feature.Avatar.Label.Skin,Da
+Feature.Avatar.Label.Spawn,Điểm hồi sinh
+Feature.Avatar.Label.SpawnEffects,Hiệu ứng hồi sinh
 Feature.Avatar.Label.Sweater,Áo Len
 Feature.Avatar.Label.Sweaters,
 Feature.Avatar.Label.Swim,Bơi
@@ -3008,6 +3010,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,Bạn bè của tôi ({count})
 Feature.BuyRobux.Label.PeopleWithCount,Mọi người ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Gallery,Thư Viện
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,
@@ -3498,7 +3501,6 @@ Feature.Chat.Label.SearchForFriendsAndChat,Tìm cuộc hội thoại
 Feature.Chat.Label.SearchFriends,Tìm kiếm bạn bè
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.Sent,Đã Gửi
-Feature.Chat.Label.SnoozeChatNotifications,Tắt thông báo trò chuyện trong trải nghiệm:
 Feature.Chat.Label.SnoozePartyNotifications,Tắt thông báo tổ đội trong trải nghiệm đối với:
 Feature.Chat.Label.SwipeToReplyTooltip,Vuốt để trả lời
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}ng
@@ -3555,7 +3557,6 @@ Feature.Chat.Response.NetworkError,Lỗi Mạng
 Feature.Chat.Response.Sending,Đang gửi
 Feature.Chat.RobloxConnectUnavailableWithUser,Roblox Connect không khả dụng với người dùng này tại thời điểm này.
 Feature.Chat.Text.NoFriends,"Bạn chưa thêm bất kỳ người bạn nào. Để bắt đầu, hãy tìm và thêm bạn bè trên Roblox."
-Feature.Chat.Title.MuteChatNotifications,Tắt thông báo trò chuyện từ bạn bè trong suốt trải nghiệm chơi
 Feature.Chat.Title.NewChat,Cuộc trò chuyện mới
 Feature.Chat.Toast.Error.InvalidUserSelected,Không thể thêm một hoặc nhiều người vào danh sách này
 Feature.CommunityLinks.Description.CommunityDefault,Hãy tham gia cộng đồng Guilded chính thức dành cho {experienceName} để xem thông báo và hơn thế nữa!
@@ -4451,6 +4452,7 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,Ảnh
 Feature.Moments.Label.PostDeleted,Khoảnh khắc đã bị xóa
 Feature.Moments.Label.PostRemovedBody,Khoảnh khắc bạn đăng vi phạm Tiêu chuẩn cộng đồng của chúng tôi.
+Feature.Moments.Label.PostedOnDate,Đăng vào {date}
 Feature.Moments.Label.PublishingRodeoBody,Quá trình này sẽ không mất quá nhiều thời gian.
 Feature.Moments.Label.Reactions,Lượt bày tỏ cảm xúc
 Feature.Moments.Label.ReportReason.BreaksRules,Bài đăng này vi phạm quy tắc
@@ -4784,6 +4786,9 @@ Feature.NotApproved.Label.LatestActivity,Hoạt động gần đây nhất mà c
 Feature.NotApproved.Label.LoadingImage,Đang tải hình ảnh
 Feature.NotApproved.Label.LogoutProgress,Đang đăng xuất
 Feature.NotApproved.Label.MenuContent,Nội dung menu
+Feature.NotApproved.Label.MessageToUser.AltConsequence.Reset,"Tài khoản này được liên kết với một tài khoản đã bị cấm (đã được đặt về @{account}) do vi phạm nghiêm trọng Tiêu chuẩn cộng đồng của chúng tôi. Chỉ tài khoản bị cấm mới có thể khiếu nại về trường hợp vi phạm đó. 
+
+Nếu hai tài khoản lẽ ra không có liên kết với nhau, hãy gửi khiếu nại bằng tài khoản này từ mục Vi phạm và khiếu nại."
 Feature.NotApproved.Label.MessageToUser.AltConsequence.V2,Tài khoản này được liên kết với một tài khoản đã bị cấm do vi phạm nghiêm trọng Tiêu chuẩn cộng đồng của chúng tôi. Bạn có thể sử dụng tài khoản bị cấm để khiếu nại về trường hợp vi phạm.
 Feature.NotApproved.Label.MessageToUser.AltConsequence.V3,"Tài khoản này được liên kết với một tài khoản đã bị cấm (@{account}) do vi phạm nghiêm trọng Tiêu chuẩn cộng đồng của chúng tôi. Chỉ tài khoản bị cấm mới có thể khiếu nại về trường hợp vi phạm đó. 
 

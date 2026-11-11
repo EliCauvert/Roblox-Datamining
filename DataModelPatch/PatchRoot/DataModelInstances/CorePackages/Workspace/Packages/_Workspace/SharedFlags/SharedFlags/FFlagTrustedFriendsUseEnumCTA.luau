@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("TrustedFriendsUseEnumCTA_2", false)

@@ -210,15 +210,15 @@ local function createSduiPoolStore(Key)
 					local Ceiled = math.ceil(Smallest / v2)
 					local Cells = {}
 					
-					for i1 = 0, Smallest - 1 do
-						local NewNextStartIndex = NextStartIndex + i1
-						Cells[i1 + 1] = {
+					for i = 0, Smallest - 1 do
+						local NewNextStartIndex = NextStartIndex + i
+						Cells[i + 1] = {
 							item = GetResult1.items[NewNextStartIndex],
 							realIndex = NewNextStartIndex
 						}
 					end
-					for i3 = Smallest + 1, Ceiled * v2 do
-						Cells[i3] = {}
+					for i1 = Smallest + 1, Ceiled * v2 do
+						Cells[i1] = {}
 					end
 					return {
 						cells = Cells,
@@ -232,21 +232,21 @@ local function createSduiPoolStore(Key)
 					
 					if FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui then
 						local OnPlaced = v1 and v1.onPlaced
-						for i, value in LayoutToCellsResult do
-							local Item = value.item
-							local OneByTwoTileFlowId = Item and Item.oneByTwoTileFlowId
+						for i3, value1 in LayoutToCellsResult do
+							local Item1 = value1.item
+							local OneByTwoTileFlowId = Item1 and Item1.oneByTwoTileFlowId
 							
-							if OnPlaced and (Item and typeof(OneByTwoTileFlowId) == "string") then
+							if OnPlaced and Item1 and typeof(OneByTwoTileFlowId) == "string" then
 								local Success, Result = pcall(function()
-									-- upvalues: OnPlaced (copy), OneByTwoTileFlowId (copy), Item (copy), i (copy), v2 (copy)
+									-- upvalues: OnPlaced (copy), OneByTwoTileFlowId (copy), Item1 (copy), i3 (copy), v2 (copy)
 									OnPlaced({
 										componentType = "OneByTwoTile",
 										isSdui = true,
 										oneByTwoTileFlowId = OneByTwoTileFlowId,
-										contentType = Item.contentType,
-										adId = Item.adId,
-										gridRow = math.ceil(i / v2),
-										gridCol = (i - 1) % v2 + 1
+										contentType = Item1.contentType,
+										adId = Item1.adId,
+										gridRow = math.ceil(i3 / v2),
+										gridCol = (i3 - 1) % v2 + 1
 									})
 									
 									return nil
@@ -262,9 +262,9 @@ local function createSduiPoolStore(Key)
 						end
 						local Flag = false
 						
-						for i2, value1 in t1 do
+						for i2, value in t1 do
 							if i2 ~= Key1 then
-								local GetResult2 = value1.get(false)
+								local GetResult2 = value.get(false)
 								
 								if GetResult2 and GetResult2.prevSectionInPoolId == Key1 then
 									Flag = true
@@ -279,19 +279,19 @@ local function createSduiPoolStore(Key)
 							local t6 = {}
 							
 							for _, value2 in LayoutToCellsResult do
-								local Item1 = value2.item
-								local OneByTwoTileFlowId1 = Item1 and Item1.oneByTwoTileFlowId
+								local Item2 = value2.item
+								local OneByTwoTileFlowId1 = Item2 and Item2.oneByTwoTileFlowId
 								
 								if typeof(OneByTwoTileFlowId1) == "string" then
 									t6[OneByTwoTileFlowId1] = true
 								end
 							end
 							for i4 = ProcessOneGridResult.nextStartIndex, #GetResult1.items do
-								local Item2 = GetResult1.items[i4]
-								local OneByTwoTileFlowId2 = Item2 and Item2.oneByTwoTileFlowId
+								local Item = GetResult1.items[i4]
+								local OneByTwoTileFlowId = Item and Item.oneByTwoTileFlowId
 								
-								if typeof(OneByTwoTileFlowId2) == "string" and not t6[OneByTwoTileFlowId2] then
-									logSkipped(Item2, v1, Key)
+								if typeof(OneByTwoTileFlowId) == "string" and not t6[OneByTwoTileFlowId] then
+									logSkipped(Item, v1, Key)
 								end
 							end
 						end

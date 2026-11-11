@@ -1,5 +1,6 @@
 ﻿local _ = require(script.Types)
 local _ = require(script.Hooks.useSlotItemCardBreakpoints)
+local _ = require(script.Enums.InventorySearchSortOption)
 
 return {
 	Components = {
@@ -54,6 +55,7 @@ return {
 		getRemainingTimeFromExpiration = require(script.Utils.getRemainingTimeFromExpiration),
 		buildSlotCategoryTabItems = require(script.Utils.buildSlotCategoryTabItems),
 		buildSlotCategoryLocalizationKeys = require(script.Utils.buildSlotCategoryLocalizationKeys),
+		buildSearchAvatarInventoryQuery = require(script.Utils.buildSearchAvatarInventoryQuery),
 		toSearchableItemCategories = require(script.Utils.toSearchableItemCategories),
 		getInventorySearchKey = require(script.Utils.getInventorySearchKey)
 	},

@@ -1065,7 +1065,7 @@ CoreScripts.InGameMenu.InviteFriends.Loading,Loading!
 CoreScripts.InGameMenu.InviteFriends.MakeFriendsNow,Make Friends Now
 CoreScripts.InGameMenu.InviteFriends.NoFriends,"You don't have any friends yet, check out the people menu to make friend requests."
 CoreScripts.InGameMenu.InviteFriends.Search,
-CoreScripts.InGameMenu.Label.TouchpadButton,Touchpad Button
+CoreScripts.InGameMenu.Label.TouchpadButton,Touch pad button
 CoreScripts.InGameMenu.Label.ViewButton,View Button
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.LeaveGame,
@@ -1481,6 +1481,7 @@ Feature.AddFriends.Action.FriendAdded,Friend Added
 Feature.AddFriends.Action.IgnoreFriendRequest,Ignore friend request
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Ignore trusted friend request
 Feature.AddFriends.Action.RequestIgnored,Request Ignored
+Feature.AddFriends.Heading.AddFriends,Add friends
 Feature.AddFriends.Label.AddFriendsTooltip,Get started by finding your friends so you can explore Roblox together.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Find people on Roblox by searching for their username or name.
 Feature.AddFriends.Label.ConnectWithContacts,Invite contacts or connect with friends already on Roblox!
@@ -1876,6 +1877,7 @@ Feature.Avatar.Label.Shorts,Shorts
 Feature.Avatar.Label.Shoulder,Shoulder
 Feature.Avatar.Label.Skin,Skin
 Feature.Avatar.Label.Spawn,Spawn
+Feature.Avatar.Label.SpawnEffect,Spawn Effect
 Feature.Avatar.Label.SpawnEffects,Spawn Effects
 Feature.Avatar.Label.Sweater,Sweater
 Feature.Avatar.Label.Sweaters,Sweaters
@@ -2261,7 +2263,7 @@ Feature.Build.Description.AdCampaignModerationReview,All ad campaigns are review
 Feature.Build.Description.AdCampaignSheetRunDates,Runs {startDate} – {endDate}
 Feature.Build.Description.AdComplete,Your ad has ended. Check your results.
 Feature.Build.Description.AdModerationReview,All ads are reviewed by Roblox moderation and may take up to 24 hours.
-Feature.Build.Description.AdvancedModel,Best for top quality. Usage runs out 3 times faster.
+Feature.Build.Description.AdvancedModel,Best for top quality. Usage runs out faster.
 Feature.Build.Description.AdvertisingAgreement,"By selecting Create, you agree to the {advertisingTermsStart}Roblox Advertising Terms{advertisingTermsEnd} and {advertisingStandardsStart}Advertising Standards{advertisingStandardsEnd}."
 Feature.Build.Description.ArchiveRemoval,"If you archive this game, it will be removed from Build. You can still access and restore it from Creator Hub or Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Use your Robux to automatically buy additional Build usage as you create. You can set a daily spend limit anytime.
@@ -2271,6 +2273,7 @@ Feature.Build.Description.BuildReplyNotif,Get notified when Build has a reply fo
 Feature.Build.Description.BuyRobuxToCreate,"Buy more Robux to keep creating, or wait for your free Build usage to reset tomorrow."
 Feature.Build.Description.BuyUsageOrWait,"Buy more Build usage with Robux, or wait for your daily limit to reset."
 Feature.Build.Description.CampaignRunDates,Your campaign will run {startDate} – {endDate}
+Feature.Build.Description.CaptureWhilePlaytesting,"Take a capture while you playtest, then add it to your prompt."
 Feature.Build.Description.ChooseAdCampaignLength,Choose how long you want your ad to run.
 Feature.Build.Description.ChoosePlaytesters,Choose friends to preview your game.
 Feature.Build.Description.CreateDeveloperProduct,"Create ""{NAME}"" for {PRICE} Robux, off sale."
@@ -2377,6 +2380,9 @@ Feature.Build.Label.BackToBuild,Back to Build
 Feature.Build.Label.Building,Building...
 Feature.Build.Label.CaptureLibrary,Capture library
 Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT} of {MAX_SELECTIONS} selected
+Feature.Build.Label.CaptureStepAddImages,Select Add images to attach your capture
+Feature.Build.Label.CaptureStepPlaytest,Playtest your game
+Feature.Build.Label.CaptureStepTapCamera,Select the camera in the Build toolbar
 Feature.Build.Label.ContentRating,Content rating
 Feature.Build.Label.CreatedDate,"{MONTH} {DAY}, {YEAR}"
 Feature.Build.Label.CreatorHub,Creator Hub
@@ -2433,7 +2439,7 @@ Feature.Build.Label.OnSale,On sale
 Feature.Build.Label.Pending,Pending
 Feature.Build.Label.PercentUsed,{PERCENT}% used
 Feature.Build.Label.PlayTime,Play time
-Feature.Build.Label.PreviewsTab,Previews
+Feature.Build.Label.PreviewsTab,Playtests
 Feature.Build.Label.PreviouslyPublished,Previously published
 Feature.Build.Label.Price,Price
 Feature.Build.Label.PriceUnavailable,--
@@ -3259,7 +3265,6 @@ Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} said...
 Feature.Chat.Label.ReplyingToYourself,You said...
 Feature.Chat.Label.SearchFriends,Search for friends
 Feature.Chat.Label.SearchWord,
-Feature.Chat.Label.SnoozeChatNotifications,Mute in-experience chat notifications:
 Feature.Chat.Label.SnoozePartyNotifications,Mute in-experience party notifications for:
 Feature.Chat.Label.SwipeToReplyTooltip,Swipe to reply
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}d
@@ -3315,7 +3320,6 @@ Feature.Chat.Response.NetworkError,Network Error
 Feature.Chat.RobloxConnectUnavailableWithUser,"At this time, Roblox Connect is not available with this user."
 Feature.Chat.Text.NoFriends,"You haven't added any friends yet. To get started, find and add your friends on Roblox."
 Feature.Chat.Title.FriendsChat,Friends chat
-Feature.Chat.Title.MuteChatNotifications,Mute chat notifications from friends during gameplay
 Feature.Chat.Title.NewChat,New chat
 Feature.Chat.Toast.Error.InvalidUserSelected,One or more people in this list can’t be added
 Feature.ContactUpsell.Action.Continue,

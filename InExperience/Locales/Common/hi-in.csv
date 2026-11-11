@@ -1463,6 +1463,7 @@ Feature.AddFriends.Action.FriendAdded,फ़्रेंड को जोड़�
 Feature.AddFriends.Action.IgnoreFriendRequest,फ़्रेंड रिक्वेस्ट इग्नोर करें
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,भरोसेमंद फ़्रेंड रिक्वेस्ट इग्नोर करें
 Feature.AddFriends.Action.RequestIgnored,रिक्वेस्ट इग्नोर की गई
+Feature.AddFriends.Heading.AddFriends,फ़्रेंड्स जोड़ें
 Feature.AddFriends.Label.AddFriendsTooltip,"फ़्रेंड्स ढूँढना शुरू करें, ताकि आप Roblox को एक साथ एक्सप्लोर कर सकें."
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,"लोगों को उनके यूज़रनेम या नाम से सर्च करके, उन्हें Roblox पर ढूँढे."
 Feature.AddFriends.Label.ConnectWithContacts,कॉन्टैक्ट्स को इनवाइट करें या Roblox पर पहले से मौजूद फ़्रेंड्स से कनेक्ट हों!
@@ -1856,6 +1857,8 @@ Feature.Avatar.Label.Shoes,जूते
 Feature.Avatar.Label.Shorts,शॉर्ट्स
 Feature.Avatar.Label.Shoulder,कंधा
 Feature.Avatar.Label.Skin,स्किन
+Feature.Avatar.Label.Spawn,स्पॉन
+Feature.Avatar.Label.SpawnEffects,स्पॉन इफ़ेक्ट्स
 Feature.Avatar.Label.Sweater,स्वेटर
 Feature.Avatar.Label.Sweaters,
 Feature.Avatar.Label.Swim,स्विम
@@ -2078,7 +2081,10 @@ Feature.AvatarSwitcher.Message.SelectAvatar,कोई अवतार चुन�
 Feature.AvatarSwitcher.Message.SwitchingDeferred,आपको यह अवतार अगली बार रीस्पॉन करने के बाद या आपके अगले एक्सपीरिएंस जॉइन करने पर दिखेगा. किसी भी समय दूसरे अवतार पर स्विच किया जा सकता है.
 Feature.AvatarSwitcher.Message.UnknownSupport,"आप अभी भी अपना अवतार बदल सकते हैं, लेकिन हो सकता है कि वह इस एक्सपीरिएंस में सही ढंग से न दिखे."
 Feature.AvatarSwitcher.Message.Unsupported,यह एक्सपीरिएंस कस्टम अवतार का इस्तेमाल करता है और Roblox अवतारों को सपोर्ट नहीं करता है.
+Feature.AvatarWorkshop.Action.EditAvatar,अवतार एडिट करें
 Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Heading.Customize,कस्टमाइज़ करें
+Feature.AvatarWorkshop.Heading.YourAvatars,आपके अवतार
 Feature.AvatarWorkshop.Message.LoadItemsError,आपके आइटम लोड नहीं हो सके.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,और आइटम लोड नहीं किए जा सके.
 Feature.AvatarWorkshop.Message.NoItemsOwned,आपके पास अभी तक यहाँ कोई भी आइटम नहीं है.
@@ -2762,7 +2768,7 @@ Feature.Catalog.Action.CheckoutPlural,चेकआउट देखें ({count
 Feature.Catalog.Action.CheckoutSingular,1 आइटम चेकआउट करें
 Feature.Catalog.Action.CloseDetails,जानकारी बंद करें
 Feature.Catalog.Action.CopyLink,लिंक कॉपी करें
-Feature.Catalog.Action.Customize,कस्टमाइज़ करें
+Feature.Catalog.Action.Customize,
 Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,अपने अवतार के बारे में बताएँ (ज़रूरी नहीं)
@@ -3235,7 +3241,6 @@ Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} ने कहा...
 Feature.Chat.Label.ReplyingToYourself,आपने कहा...
 Feature.Chat.Label.SearchFriends,फ़्रेंड्स के लिए सर्च करें
 Feature.Chat.Label.SearchWord,
-Feature.Chat.Label.SnoozeChatNotifications,इन-एक्सपीरिएंस चैट नोटिफ़िकेशन को म्यूट करें :
 Feature.Chat.Label.SnoozePartyNotifications,इन एक्सपीरिएंस पार्टी नोटिफ़िकेशन को म्यूट करें:
 Feature.Chat.Label.SwipeToReplyTooltip,जवाब देने के लिए स्वाइप करें
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}दिन
@@ -3291,7 +3296,6 @@ Feature.Chat.Response.NetworkError,नेटवर्क संबंधी ग�
 Feature.Chat.RobloxConnectUnavailableWithUser,"इस समय, इस यूज़र के लिए Roblox Connect की सुविधा उपलब्ध नहीं है."
 Feature.Chat.Text.NoFriends,आपके पास अभी तक कोई फ़्रेंड नहीं है. Roblox पर शुरू करने के लिए फ़्रेंड्स को खोजें और जोड़ें.
 Feature.Chat.Title.FriendsChat,फ़्रेंड्स चैट
-Feature.Chat.Title.MuteChatNotifications,गेमप्ले के दौरान फ़्रेंड्स से मिलने वाले चैट नोटिफ़िकेशन म्यूट करें
 Feature.Chat.Title.NewChat,नई चैट
 Feature.Chat.Toast.Error.InvalidUserSelected,इस लिस्ट में एक या इससे ज़्यादा लोगों को जोड़ा नहीं जा सकता
 Feature.ContactUpsell.Action.Continue,
@@ -3830,6 +3834,7 @@ Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining} में खत्म हो जाएगा
 Feature.InExperienceShop.Label.FreeTrial,फ़्री ट्रायल
 Feature.InExperienceShop.Label.HaveTrial,आपके लिए फ़्री ट्रायल
+Feature.InExperienceShop.Label.KeepIt,इसे बनाए रखें
 Feature.InExperienceShop.Label.NoDescription,कोई विवरण नहीं है
 Feature.InExperienceShop.Label.OfferEndTime,"{offer}, {timeRemaining} में खत्म हो जाएगा"
 Feature.InExperienceShop.Label.PreviewBanner,यह Roblox Studio में आपकी शॉप का प्रीव्यू है. प्लेयर्स को यह प्रीव्यू नहीं दिखता है.
@@ -3991,6 +3996,7 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,फ़ोटो
 Feature.Moments.Label.PostDeleted,Moment डिलीट किया गया
 Feature.Moments.Label.PostRemovedBody,आपका पोस्ट किया गया Moment हमारे कम्यूनिटी स्टैंडर्ड के मुताबिक नहीं है.
+Feature.Moments.Label.PostedOnDate,{date} को पोस्ट किया गया
 Feature.Moments.Label.PublishingRodeoBody,इसमें ज़्यादा समय नहीं लगना चाहिए.
 Feature.Moments.Label.Reactions,प्रतिक्रियाएँ
 Feature.Moments.Label.ReportReason.BreaksRules,इस पोस्ट से नियमों का उल्लंघन हुआ है
@@ -4173,7 +4179,7 @@ Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,प्रोफ़ाइल लिंक कॉपी करें
 Feature.Profile.Action.CreateInBuild,'बिल्ड' में क्रिएट करें
 Feature.Profile.Action.EditAppearance,लुक एडिट करें
-Feature.Profile.Action.EditAvatar,अवतार एडिट करें
+Feature.Profile.Action.EditAvatar,
 Feature.Profile.Action.EditBackground,बैकग्राउंड एडिट करें
 Feature.Profile.Action.EditEmotes,Emotes एडिट करें
 Feature.Profile.Action.EditLook,

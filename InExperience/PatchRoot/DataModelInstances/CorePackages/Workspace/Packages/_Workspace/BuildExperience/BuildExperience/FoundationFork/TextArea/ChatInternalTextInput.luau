@@ -734,7 +734,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1)
 					ref = UseRefResult,
 					tag = `{UseStyleTagsModuleResult or ""} data-testid={WithDefaultsModuleResult.testId}--textbox`,
 					Size = if IsUseStateResultAbove then _UDim2 else nil,
-					automaticSize = if WithDefaultsModuleResult.maxLines then nil elseif HasMaxLines then if IsUseStateResultAbove and not UseStateResult3 and UseStateResult6 ~= "" then Enum.AutomaticSize.Y else nil else MapBindableModule(WithDefaultsModuleResult.text, function(p2)
+					automaticSize = if WithDefaultsModuleResult.maxLines then nil elseif HasMaxLines then if IsUseStateResultAbove and (not UseStateResult3 and UseStateResult6 ~= "") then Enum.AutomaticSize.Y else nil else MapBindableModule(WithDefaultsModuleResult.text, function(p2)
 						-- upvalues: IsUseStateResultAbove (copy), UseStateResult3 (copy)
 						return if IsUseStateResultAbove and not UseStateResult3 and p2 ~= "" then Enum.AutomaticSize.Y else nil
 					end),
@@ -746,7 +746,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1)
 					onInputChanged = UseResult12,
 					onInputEnded = UseResult17,
 					manualFocusRelease = if IsUsePreferredInputModuleResultMatch then WithDefaultsModuleResult.manualFocusRelease else nil,
-					shouldEmitReturnEvents = IsUsePreferredInputModuleResultMatch and WithDefaultsModuleResult.manualFocusRelease == true and WithDefaultsModuleResult.alwaysMultiLine == true or nil
+					shouldEmitReturnEvents = IsUsePreferredInputModuleResultMatch and (WithDefaultsModuleResult.manualFocusRelease == true and WithDefaultsModuleResult.alwaysMultiLine == true) or nil
 				}, {
 					DragDetector = UseMemoResult8,
 					BoundsChecker = if IsUseStateResultAbove then ReactModule.createElement(MemoResult, {

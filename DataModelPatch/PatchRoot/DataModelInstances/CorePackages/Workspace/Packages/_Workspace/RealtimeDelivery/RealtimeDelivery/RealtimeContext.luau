@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("RealtimeDelivery").Parent.React).createContext((require(script.Parent.RobloxEventReceiver).new((game:GetService("NotificationService")))))

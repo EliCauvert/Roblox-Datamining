@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("LuaAppBootcampIntroUABOOTCAMP71", false)

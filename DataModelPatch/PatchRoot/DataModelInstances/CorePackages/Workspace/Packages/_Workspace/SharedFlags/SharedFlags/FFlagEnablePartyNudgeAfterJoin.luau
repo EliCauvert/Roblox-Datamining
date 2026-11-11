@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnablePartyNudgeAfterJoin2", false)

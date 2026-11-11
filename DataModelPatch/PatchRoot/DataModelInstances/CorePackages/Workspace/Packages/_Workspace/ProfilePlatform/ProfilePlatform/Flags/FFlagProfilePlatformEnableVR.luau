@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("ProfilePlatformEnableVR_v2", false)

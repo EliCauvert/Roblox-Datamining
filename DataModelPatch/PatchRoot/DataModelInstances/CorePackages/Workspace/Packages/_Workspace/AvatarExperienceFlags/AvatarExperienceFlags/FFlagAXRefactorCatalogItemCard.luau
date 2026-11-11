@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXRefactorCatalogItemCard8", false)

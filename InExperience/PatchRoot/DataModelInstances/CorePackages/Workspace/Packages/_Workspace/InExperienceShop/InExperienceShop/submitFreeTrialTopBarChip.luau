@@ -115,30 +115,36 @@ local _ = function(p1)
 end
 
 local function submitNotification(p1, p2)
-	-- upvalues: Active2 (copy), GamePassId (ref), FIntFreeTrialUpsellAutoDismissAfterSecsModule (copy), NotificationsOrchestratorModule (copy), FreeTrialTopBarChip (copy), FFlagTrialNotificationTopBarChipOnStudioModule (copy), Signal2 (copy)
-	Active2(p1)
-	GamePassId = if p1 == "upsell" then p2.gamePassId else nil
-	local ScaledFIntFreeTrialUpsellAutoDismissAfterSecsModule = if p1 == "upsell" then if FIntFreeTrialUpsellAutoDismissAfterSecsModule <= 0 then nil else FIntFreeTrialUpsellAutoDismissAfterSecsModule * 1000 else nil
-	local SubmitResult = NotificationsOrchestratorModule.submit({
-		priority = 0,
-		slotId = FreeTrialTopBarChip,
-		enableOnStudio = FFlagTrialNotificationTopBarChipOnStudioModule,
-		lifecycleKey = if p1 == "upsell" then "free-trial-top-bar-upsell-chip" else "free-trial-top-bar-chip",
-		lifecyclePolicy = {
-			frequency = {},
-			visibility = if ScaledFIntFreeTrialUpsellAutoDismissAfterSecsModule == nil then nil else {
-				autoDismissAfterMs = ScaledFIntFreeTrialUpsellAutoDismissAfterSecsModule
+	-- upvalues: GetInExperienceShopStoreModule (copy), NotificationsOrchestratorModule (copy), FreeTrialTopBarChip (copy), Active2 (copy), GamePassId (ref), FIntFreeTrialUpsellAutoDismissAfterSecsModule (copy), FFlagTrialNotificationTopBarChipOnStudioModule (copy), Signal2 (copy)
+	if GetInExperienceShopStoreModule(false).getNotificationFreeTrialTopBarChip(false) then
+		Active2(p1)
+		GamePassId = if p1 == "upsell" then p2.gamePassId else nil
+		local ScaledFIntFreeTrialUpsellAutoDismissAfterSecsModule = if p1 == "upsell" then if FIntFreeTrialUpsellAutoDismissAfterSecsModule <= 0 then nil else FIntFreeTrialUpsellAutoDismissAfterSecsModule * 1000 else nil
+		local SubmitResult = NotificationsOrchestratorModule.submit({
+			priority = 0,
+			slotId = FreeTrialTopBarChip,
+			enableOnStudio = FFlagTrialNotificationTopBarChipOnStudioModule,
+			lifecycleKey = if p1 == "upsell" then "free-trial-top-bar-upsell-chip" else "free-trial-top-bar-chip",
+			lifecyclePolicy = {
+				frequency = {},
+				visibility = if ScaledFIntFreeTrialUpsellAutoDismissAfterSecsModule == nil then nil else {
+					autoDismissAfterMs = ScaledFIntFreeTrialUpsellAutoDismissAfterSecsModule
+				}
+			},
+			source = if p1 == "upsell" then "GamePassFreeTrialUpsellTopBarChip" else "GamePassFreeTrialActiveTopBarChip",
+			slotDisplayPayload = {
+				slot = "FreeTrialTopBarChip",
+				image = if p2.image == "" then nil else p2.image
 			}
-		},
-		source = if p1 == "upsell" then "GamePassFreeTrialUpsellTopBarChip" else "GamePassFreeTrialActiveTopBarChip",
-		slotDisplayPayload = {
-			slot = "FreeTrialTopBarChip",
-			image = if p2.image == "" then nil else p2.image
-		}
-	})
-	Signal2(SubmitResult)
-	
-	return SubmitResult
+		})
+		Signal2(SubmitResult)
+		
+		return SubmitResult
+	else
+		NotificationsOrchestratorModule.report(FreeTrialTopBarChip, if p1 == "upsell" then "free-trial-top-bar-upsell-chip" else "free-trial-top-bar-chip", { type = "suppressed" })
+		
+		return nil
+	end
 end
 
 local _ = function(p1)

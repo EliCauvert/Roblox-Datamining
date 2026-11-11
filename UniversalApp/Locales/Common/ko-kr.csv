@@ -221,6 +221,7 @@ Authentication.AccountSwitch.Action.Continue,
 Authentication.AccountSwitch.Action.CreateNewAccount,새 계정 만들기
 Authentication.AccountSwitch.Action.LogoutAllAccounts,모든 계정에서 로그아웃
 Authentication.AccountSwitch.Action.RemoveAllAccounts,모든 계정을 삭제하시겠어요?
+Authentication.AccountSwitch.Action.SignIn,로그인
 Authentication.AccountSwitch.Action.SignInToExistingAccount,기존 계정에 로그인
 Authentication.AccountSwitch.Action.SwitchAccount,계정 전환
 Authentication.AccountSwitch.Description.AccountLimit.2,계정 한도에 도달했습니다. 새 계정을 추가하려면 먼저 계정을 삭제하세요.
@@ -230,6 +231,8 @@ Authentication.AccountSwitch.Description.LogoutConfirmation,새 계정을 추가
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,나중에 다시 시도하세요
 Authentication.AccountSwitch.Description.RemoveAllAccounts,로그아웃하면 이 기기에서 모든 계정이 삭제됩니다.
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,삭제 시에는 다시 로그인하지 않는 한 이 기기에 더 이상 해당 계정이 표시되지 않습니다. 랜딩 페이지로 다시 이동합니다.
+Authentication.AccountSwitch.Description.SomethingWentWrongSignInAgain,오류가 발생했어요. 다시 로그인하세요.
+Authentication.AccountSwitch.Description.StaleSessionSignInAgain,한동안 이 계정을 사용하지 않으셨습니다. 다시 로그인하세요.
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,직접 로그인해 보세요
 Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,계정을 전환할 수 없음
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
@@ -322,7 +325,7 @@ Authentication.Login.Action.ResendCode,
 Authentication.Login.Action.Save,저장
 Authentication.Login.Action.SendCodeSentenceCase,코드 전송
 Authentication.Login.Action.SendVerificationEmail,인증 이메일 보내기
-Authentication.Login.Action.SignIn,로그인
+Authentication.Login.Action.SignIn,
 Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,패스키 사용
@@ -1600,7 +1603,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,"사용자 이름이나 �
 Feature.AddFriends.Label.ConnectWithContacts,"연락처 목록의 친구들을 초대하거나, 이미 Roblox에 있는 친구들과 소통하세요!"
 Feature.AddFriends.Label.ContactsTile,연락처
 Feature.AddFriends.Label.DeclineAllBackgrounded,친구 요청을 모두 무시합니다. 1분 정도 걸릴 수 있습니다.
-Feature.AddFriends.Label.EmptyState.FriendsRename,Roblox에서 함께하고 싶은 사람이 있나요? 친구를 추가해 Roblox에서 더 많은 콘텐츠를 즐겨 보세요!
 Feature.AddFriends.Label.EmptyStatePrompt,"Roblox에서 함께하고 싶은 사람이 있나요? 친구로 추가할 사람을 찾아 보거나, 이미 알고 있는 친구와 소통하세요!"
 Feature.AddFriends.Label.FriendRequests,친구 요청
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,사람 검색
@@ -1608,16 +1610,13 @@ Feature.AddFriends.Label.MyQrCode,내 QR 코드
 Feature.AddFriends.Label.QRCodeTitle,
 Feature.AddFriends.Label.SchoolTile,학급 친구
 Feature.AddFriends.Label.SearchForFriendsPrompt,"사용자 이름이나 표시 이름으로 검색해, 아는 사람들을 Roblox에서 찾으세요."
-Feature.AddFriends.Label.ShareQRCodeAddConnection,QR 코드를 공유해 아는 사람을 추가하세요
-Feature.AddFriends.Label.SyncContactsInvitePeople,연락처를 동기화해 친구를 찾고 초대하세요!
-Feature.AddFriends.Label.SyncWithContacts,
+Feature.AddFriends.Label.SyncWithContacts,연락처를 동기화해 친구를 찾고 초대하세요!
 Feature.AddFriends.Label.TrustedFriendRequests,신뢰할 수 있는 친구 요청
 Feature.AddFriends.Text.EmptyState.FriendsRename,Roblox에서 함께하고 싶은 사람이 있나요?{lineBreak}친구를 추가해 Roblox에서 더 많은 콘텐츠를 즐겨 보세요!
 Feature.AddFriends.Title.AddFriendsToolTip,Roblox는 친구와 함께할 때 즐거움이 배가되죠!
 Feature.AddFriends.Title.AddFriendsTooltipTitle,Roblox는 친구와 함께할 때 더욱 즐겁답니다!
 Feature.AddFriends.Title.CameraPermission,카메라 권한
 Feature.AddFriends.Title.ConnectWithContacts,연락처에서 추가
-Feature.AddFriends.Title.ShareQRCode,QR 코드에서 추가
 Feature.AgeGuidelines.DisplayName.StrongLanguage,과격한 표현
 Feature.AgeGuidelines.Label.CreatorEnabled,크리에이터 활성화됨
 Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect,더 많은 콘텐츠와 기능을 만나보세요.
@@ -1730,6 +1729,7 @@ Feature.AppealsPortal.Label.Location,
 Feature.AppealsPortal.Label.LookDescription,공유된 아바타 설명
 Feature.AppealsPortal.Label.LookId,공유된 아바타 ID
 Feature.AppealsPortal.Label.LookName,공유된 아바타 이름
+Feature.AppealsPortal.Label.MomentDescription,모멘트 설명
 Feature.AppealsPortal.Label.PlaceIDPrompt,플레이스 ID가 뭔가요?
 Feature.AppealsPortal.Label.PlaceId,플레이스 ID
 Feature.AppealsPortal.Label.PlaceName,플레이스 이름
@@ -2187,6 +2187,8 @@ Feature.Avatar.Label.Shoes,신발
 Feature.Avatar.Label.Shorts,반바지
 Feature.Avatar.Label.Shoulder,어깨
 Feature.Avatar.Label.Skin,피부
+Feature.Avatar.Label.Spawn,스폰
+Feature.Avatar.Label.SpawnEffects,스폰 효과
 Feature.Avatar.Label.Sweater,스웨터
 Feature.Avatar.Label.Sweaters,
 Feature.Avatar.Label.Swim,수영
@@ -3009,6 +3011,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,내 친구({count}명)
 Feature.BuyRobux.Label.PeopleWithCount,회원({count}명)
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Gallery,갤러리
 Feature.Catalog.Action.Buy,구매
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,꾸미기로 이동하기
@@ -3500,7 +3503,6 @@ Feature.Chat.Label.SearchForFriendsAndChat,대화 검색
 Feature.Chat.Label.SearchFriends,친구 검색
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.Sent,전송됨
-Feature.Chat.Label.SnoozeChatNotifications,체험 내 채팅 알림 음소거:
 Feature.Chat.Label.SnoozePartyNotifications,체험 내 파티 알림 음소거 대상:
 Feature.Chat.Label.SwipeToReplyTooltip,밀어서 답장하기
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}일
@@ -3557,7 +3559,6 @@ Feature.Chat.Response.NetworkError,네트워크 오류
 Feature.Chat.Response.Sending,전송 중
 Feature.Chat.RobloxConnectUnavailableWithUser,현재 이 사용자와는 Roblox Connect를 이용할 수 없습니다.
 Feature.Chat.Text.NoFriends,아직 추가한 친구가 없습니다. 시작하려면 먼저 Roblox에서 친구를 찾아 추가하세요.
-Feature.Chat.Title.MuteChatNotifications,게임 플레이 중 친구의 채팅 알림 음소거
 Feature.Chat.Title.NewChat,새 채팅
 Feature.Chat.Toast.Error.InvalidUserSelected,이 목록에는 추가할 수 없는 사람이 한 명 이상 있습니다
 Feature.CommunityLinks.Description.CommunityDefault,공식 Guilded 커뮤니티에 가입하고 {experienceName} 관련 공지 등 다양한 것들을 확인하세요!
@@ -4454,6 +4455,7 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,사진
 Feature.Moments.Label.PostDeleted,모멘트 삭제됨
 Feature.Moments.Label.PostRemovedBody,게시하신 모멘트는 당사 커뮤니티 규정에 위배됩니다.
+Feature.Moments.Label.PostedOnDate,{date}에 게시됨
 Feature.Moments.Label.PublishingRodeoBody,오래 걸리지 않을 겁니다.
 Feature.Moments.Label.Reactions,반응
 Feature.Moments.Label.ReportReason.BreaksRules,이 게시물이 규칙을 위반하였습니다
@@ -4787,6 +4789,9 @@ Feature.NotApproved.Label.LatestActivity,검토된 최근 활동
 Feature.NotApproved.Label.LoadingImage,이미지 불러오는 중
 Feature.NotApproved.Label.LogoutProgress,로그아웃 진행 중
 Feature.NotApproved.Label.MenuContent,메뉴 콘텐츠
+Feature.NotApproved.Label.MessageToUser.AltConsequence.Reset,"이 계정은 Roblox의 커뮤니티 규정을 심각하게 위반하여 이용 정지된 계정(@{account}(으)로 재설정됨)에 연결되어 있습니다. 이용 정지된 계정만 위반 사항에 대해 이의 신청할 수 있습니다. 
+
+두 계정이 서로 연결되어 있지 않은 경우, 이 계정을 사용하여 '위반 및 이의 신청'에서 이의 신청을 제출하세요."
 Feature.NotApproved.Label.MessageToUser.AltConsequence.V2,이 계정은 커뮤니티 규정을 심각하게 위반하여 차단된 계정에 연결되어 있습니다. 차단된 계정을 사용하여 위반 사항에 대해 이의를 신청할 수 있습니다.
 Feature.NotApproved.Label.MessageToUser.AltConsequence.V3,"이 계정은 Roblox의 커뮤니티 규정을 심각하게 위반하여 이용 정지된 계정(@{account})에 연결되어 있습니다. 이용 정지된 계정만 위반 사항에 대해 이의 신청할 수 있습니다. 
 

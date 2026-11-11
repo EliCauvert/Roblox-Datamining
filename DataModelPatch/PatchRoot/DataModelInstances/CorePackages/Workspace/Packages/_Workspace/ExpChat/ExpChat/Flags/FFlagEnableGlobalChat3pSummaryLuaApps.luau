@@ -1,4 +1,0 @@
-﻿local EnableGlobalChat3pSummaryLuaApps = game:DefineFastFlag("EnableGlobalChat3pSummaryLuaApps", false)
-local FFlagEnableInExpChatSummaryOnLuaModule = require(script.Parent.FFlagEnableInExpChatSummaryOnLua)
-
-return game:GetEngineFeature("EnableGlobalChat3pSummary") and (EnableGlobalChat3pSummaryLuaApps and FFlagEnableInExpChatSummaryOnLuaModule)

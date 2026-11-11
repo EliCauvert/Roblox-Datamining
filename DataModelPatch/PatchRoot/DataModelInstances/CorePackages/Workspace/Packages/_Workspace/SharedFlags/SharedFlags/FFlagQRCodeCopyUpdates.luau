@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("QRCodeCopyUpdates_v2", false)

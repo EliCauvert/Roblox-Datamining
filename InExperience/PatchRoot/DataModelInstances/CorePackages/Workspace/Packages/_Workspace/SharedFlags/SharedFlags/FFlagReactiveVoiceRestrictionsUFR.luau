@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("ReactiveVoiceRestrictionsUFR3", false)
+﻿return game:DefineFastFlag("ReactiveVoiceRestrictionsUFR4", false)

@@ -1,1 +1,0 @@
-﻿return require(script.Parent.FFlagAddNewPlayerListFocusNav) and game:DefineFastFlag("AddNewPlayerListMobileFocusNav2", false)

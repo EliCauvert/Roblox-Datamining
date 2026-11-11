@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("ExpChatFixRateLimitedMessageRemoval2", false)

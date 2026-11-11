@@ -1,1 +1,0 @@
-﻿return { AdPlayer = 10, Modal = 15 }

@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("SduiAlwaysCacheWithIdentifier3", false)

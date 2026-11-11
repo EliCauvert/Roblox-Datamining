@@ -1,4 +1,0 @@
-﻿return {
-	ROBLOX_SUBSCRIPTION_PRODUCT_TYPE = "Blackbird",
-	ROBLOX_SUBSCRIPTION_PRODUCT_NAME = "Black bird"
-}

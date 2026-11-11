@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("PromptsHandlerEnabled2", false)

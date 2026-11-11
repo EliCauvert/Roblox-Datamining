@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "835e1c1b-88ae-6e23-4bdd-4a6e29e4be8d")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "9923bab6-5045-42cd-4608-2db8a0df23be")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 118413, e => {
@@ -186,20 +186,25 @@
         }),
         F = (0, a.defineFlag)({
             namespace: "creator-analytics",
-            name: "isClientSessionDetailsV2Enabled",
+            name: "isExperimentSignificanceCaasEnabled",
             defaultValue: !1
         }),
         B = (0, a.defineFlag)({
             namespace: "creator-analytics",
-            name: "isObservabilityDataCapturesEnabled",
+            name: "isClientSessionDetailsV2Enabled",
             defaultValue: !1
         }),
         z = (0, a.defineFlag)({
             namespace: "creator-analytics",
+            name: "isObservabilityDataCapturesEnabled",
+            defaultValue: !1
+        }),
+        K = (0, a.defineFlag)({
+            namespace: "creator-analytics",
             name: "isRaqiv2RequestQueryEnabled",
             defaultValue: !1
         });
-    e.s(["analyticsChartLoadEventstreamEnabled", 0, t, "isAnalyticsAssistantChatEnabled", 0, b, "isAnalyticsAssistantChatHistoryEnabled", 0, g, "isAnalyticsAssistantIssueBannerEnabled", 0, f, "isAnalyticsAssistantStreamSilenceRecoveryEnabled", 0, h, "isAnalyticsMetricAwareYAxisFormatterEnabled", 0, x, "isAssistantChartOverflowMenuEnabled", 0, C, "isClientSessionDetailsV2Enabled", 0, F, "isClientSessionsEnabled", 0, H, "isCustomDashboardsLocalStorageEnabled", 0, P, "isCustomMetricMdeEnabled", 0, l, "isCustomMetricsBackendEnabled", 0, s, "isEhdResultsAlwaysFetched", 0, S, "isEhdResultsEnabled", 0, A, "isExperimentLiftChartEnabled", 0, j, "isExperimentMetricsV2Enabled", 0, D, "isExperimentNullControlValueEnabled", 0, c, "isExperimentRolloutEnabled", 0, u, "isExperimentSampleSizeEnabled", 0, R, "isExperimentSegmentationEnabled", 0, L, "isExperimentTargetingEnabled", 0, o, "isExperimentationTemplatesEnabled", 0, r, "isGeneralBreakGlassBannerEnabled", 0, m, "isJourneyEventsEnabled", 0, E, "isLimitedAnalyticsAdminMonitoringNavigationEnabled", 0, i, "isMetricVariantChartStateEnabled", 0, M, "isMonetizationBreakGlassBannerEnabled", 0, p, "isObservabilityDataCapturesEnabled", 0, B, "isPeriodSummaryBridgeEnabled", 0, w, "isPlayerFeedbackExampleCommentsEnabled", 0, y, "isRaqiv2RequestQueryEnabled", 0, z, "isRotraceMetricEnabled", 0, N, "isTargetingConfigsEnabled", 0, d, "isTelemetryMigrationEnabled", 0, T, "isTreemapColorBySiblingProportionEnabled", 0, I, "showCreatorRewardsReportingDisclaimer", 0, v, "showVideoServiceDashboard", 0, k, "visibleAssetIdInPersonalizationEnabled", 0, n])
+    e.s(["analyticsChartLoadEventstreamEnabled", 0, t, "isAnalyticsAssistantChatEnabled", 0, b, "isAnalyticsAssistantChatHistoryEnabled", 0, g, "isAnalyticsAssistantIssueBannerEnabled", 0, f, "isAnalyticsAssistantStreamSilenceRecoveryEnabled", 0, h, "isAnalyticsMetricAwareYAxisFormatterEnabled", 0, x, "isAssistantChartOverflowMenuEnabled", 0, C, "isClientSessionDetailsV2Enabled", 0, B, "isClientSessionsEnabled", 0, H, "isCustomDashboardsLocalStorageEnabled", 0, P, "isCustomMetricMdeEnabled", 0, l, "isCustomMetricsBackendEnabled", 0, s, "isEhdResultsAlwaysFetched", 0, S, "isEhdResultsEnabled", 0, A, "isExperimentLiftChartEnabled", 0, j, "isExperimentMetricsV2Enabled", 0, D, "isExperimentNullControlValueEnabled", 0, c, "isExperimentRolloutEnabled", 0, u, "isExperimentSampleSizeEnabled", 0, R, "isExperimentSegmentationEnabled", 0, L, "isExperimentSignificanceCaasEnabled", 0, F, "isExperimentTargetingEnabled", 0, o, "isExperimentationTemplatesEnabled", 0, r, "isGeneralBreakGlassBannerEnabled", 0, m, "isJourneyEventsEnabled", 0, E, "isLimitedAnalyticsAdminMonitoringNavigationEnabled", 0, i, "isMetricVariantChartStateEnabled", 0, M, "isMonetizationBreakGlassBannerEnabled", 0, p, "isObservabilityDataCapturesEnabled", 0, z, "isPeriodSummaryBridgeEnabled", 0, w, "isPlayerFeedbackExampleCommentsEnabled", 0, y, "isRaqiv2RequestQueryEnabled", 0, K, "isRotraceMetricEnabled", 0, N, "isTargetingConfigsEnabled", 0, d, "isTelemetryMigrationEnabled", 0, T, "isTreemapColorBySiblingProportionEnabled", 0, I, "showCreatorRewardsReportingDisclaimer", 0, v, "showVideoServiceDashboard", 0, k, "visibleAssetIdInPersonalizationEnabled", 0, n])
 }, 97782, e => {
     "use strict";
     var a = e.i(730530),
@@ -534,7 +539,7 @@
         t = e.i(416340),
         i = e.i(37819),
         n = e.i(602635),
-        r = e.i(426408),
+        r = e.i(500758),
         s = e.i(79187),
         l = e.i(137467),
         o = e.i(665869),
@@ -3339,5 +3344,5 @@
     e.s(["HourglassEmptyIcon", () => a.HourglassEmpty])
 }]);
 
-//# debugId=835e1c1b-88ae-6e23-4bdd-4a6e29e4be8d
-//# sourceMappingURL=31rnej3jogt-3.js.map
+//# debugId=9923bab6-5045-42cd-4608-2db8a0df23be
+//# sourceMappingURL=1ojwy3d4h4nu5.js.map

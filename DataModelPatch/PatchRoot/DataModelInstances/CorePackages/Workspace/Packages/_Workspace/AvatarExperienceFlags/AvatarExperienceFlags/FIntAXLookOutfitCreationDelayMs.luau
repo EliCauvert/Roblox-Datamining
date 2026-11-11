@@ -1,1 +1,0 @@
-﻿return game:DefineFastInt("AXLookOutfitCreationDelayMs1", 5000)

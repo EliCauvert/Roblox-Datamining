@@ -1,1 +1,0 @@
-﻿return { Join = "Join", Leave = "Leave" }

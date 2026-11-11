@@ -65,6 +65,19 @@ return function(p1)
 	local UseRefResult2 = ReactModule.useRef(false)
 	local UseRefResult3 = ReactModule.useRef(true)
 	ReactModule.useEffect(function()
+		-- upvalues: p1 (copy)
+		p1.logEvent({
+			event_type = "show",
+			component = "private_server_config",
+			subscription_status = "active",
+			server_active = true,
+			friends_allowed = false,
+			num_server_members = 0,
+			price = p1.price,
+			offer_type = p1.offerType
+		})
+	end, {})
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult3 (copy), UseRefResult (copy)
 		UseRefResult3.current = true
 		
@@ -238,6 +251,12 @@ return function(p1)
 			UseRefResult1.current = true
 			UseStateResult2_6(true)
 			UseStateResult2_9(false)
+			p1.logEvent({
+				event_type = "click",
+				component = "private_server_config",
+				subcomponent = "generate_private_server_link_btn",
+				action = "generate"
+			})
 			p1.generateLink():andThen(function(Result)
 				-- upvalues: UseRefResult3 (upval), UseStateResult2_5 (upval), UseBindingResult2_1 (upval), UseStateResult2_6 (upval)
 				if UseRefResult3.current then
@@ -257,7 +276,7 @@ return function(p1)
 			
 			return
 		end
-	end, { p1.generateLink, UseBindingResult2_1 })
+	end, { p1.generateLink, p1.logEvent, UseBindingResult2_1 })
 	local UseResult2 = ReactModule.useCallback(function(Link)
 		-- upvalues: UseStateResult6 (copy), UseBindingResult2_1 (copy)
 		if UseStateResult6 ~= nil and Link ~= UseStateResult6 then
@@ -265,8 +284,13 @@ return function(p1)
 		end
 	end, { UseStateResult6, UseBindingResult2_1 })
 	local UseResult3 = ReactModule.useCallback(function()
-		-- upvalues: UseStateResult6 (copy), Default (upval), UseStateResult2_7 (copy), UseRefResult (copy)
+		-- upvalues: UseStateResult6 (copy), p1 (copy), Default (upval), UseStateResult2_7 (copy), UseRefResult (copy)
 		if UseStateResult6 == nil then return end
+		p1.logEvent({
+			event_type = "click",
+			component = "private_server_config",
+			subcomponent = "copy_private_server_link_btn"
+		})
 		Default:setClipboardText({
 			context = "PurchasePromptVIPServerLink",
 			text = UseStateResult6
@@ -281,8 +305,18 @@ return function(p1)
 			UseRefResult.current = nil
 			UseStateResult2_7(false)
 		end)
-	end, { UseStateResult6 })
-	local UseResult4 = ReactModule.useCallback(function()
+	end, { UseStateResult6, p1.logEvent })
+	local UseResult4 = ReactModule.useCallback(function(p2)
+		-- upvalues: p1 (copy), UseStateResult2_2 (copy)
+		p1.logEvent({
+			event_type = "click",
+			component = "private_server_config",
+			subcomponent = "friends_allowed_toggle",
+			target_state = if p2 then "enabled" else "disabled"
+		})
+		UseStateResult2_2(p2)
+	end, { p1.logEvent })
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult2 (copy), UseStateResult2_8 (copy), UseStateResult2_9 (copy), UseBindingResult (copy), UseStateResult4 (copy), p1 (copy), UseStateResult3 (copy), UseRefResult3 (copy)
 		if UseRefResult2.current then return end
 		UseRefResult2.current = true
@@ -294,6 +328,13 @@ return function(p1)
 		for i in UseStateResult4 do
 			table.insert(UsersToAdd, i)
 		end
+		p1.logEvent({
+			event_type = "click",
+			component = "private_server_config",
+			subcomponent = "cta_btn",
+			added_count = #UsersToAdd,
+			friends_allowed = UseStateResult3
+		})
 		p1.save({
 			name = if SS == "" or SS == p1.defaultServerName then nil else SS,
 			friendsAllowed = UseStateResult3,
@@ -314,36 +355,45 @@ return function(p1)
 		end)
 	end, {
 		UseBindingResult, UseStateResult4, UseStateResult3, p1.save, p1.onSaved,
-		p1.defaultServerName
+		p1.defaultServerName, p1.logEvent
 	})
 	local NoUseStateResult1: boolean = #UseMemoResult1 > 0 and not UseStateResult1
-	local UseResult5 = ReactModule.useCallback(function(p2)
+	local UseResult6 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2_1 (copy), UseStateResult2 (copy)
 		UseStateResult2_1(false)
 		UseStateResult2(p2)
 	end, {})
-	local UseResult6 = ReactModule.useCallback(function()
+	local UseResult7 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(true)
 	end, {})
-	local UseResult7 = ReactModule.useCallback(function()
-		-- upvalues: NoUseStateResult1 (copy), UseStateResult2_1 (copy), UseRefResult2 (copy), p1 (copy)
+	local UseResult8 = ReactModule.useCallback(function()
+		-- upvalues: p1 (copy)
+		p1.logEvent({
+			event_type = "click",
+			component = "private_server_config",
+			subcomponent = "cancel_btn"
+		})
+		p1.onClose()
+	end, { p1.onClose, p1.logEvent })
+	local UseResult9 = ReactModule.useCallback(function()
+		-- upvalues: NoUseStateResult1 (copy), UseStateResult2_1 (copy), UseRefResult2 (copy), UseResult8 (copy)
 		if NoUseStateResult1 then
 			UseStateResult2_1(true)
 			
 			return
 		end
 		if not UseRefResult2.current then
-			p1.onClose()
+			UseResult8()
 		end
-	end, { NoUseStateResult1, p1.onClose })
+	end, { NoUseStateResult1, UseResult8 })
 	local UseFocusRootResult = UseFocusRootFunction({
 		isAutoFocusRoot = true,
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay,
 		isFocusable = not NoUseStateResult1
 	})
-	local UseRefResult4 = ReactModule.useRef(UseResult7)
-	UseRefResult4.current = UseResult7
+	local UseRefResult4 = ReactModule.useRef(UseResult9)
+	UseRefResult4.current = UseResult9
 	ReactModule.useEffect(function()
 		-- upvalues: ContextActionService (upval), UseRefResult4 (copy)
 		ContextActionService:BindCoreAction("VIPServerConfigurationCancelButtonBind", function(_, UserInputState)
@@ -364,14 +414,14 @@ return function(p1)
 		serverName = UseBindingResult,
 		onServerNameChanged = UseBindingResult2,
 		searchText = UseStateResult,
-		onSearchTextChanged = UseResult5,
+		onSearchTextChanged = UseResult6,
 		isSearchMenuOpen = NoUseStateResult1,
-		onSearchMenuDismissed = UseResult6,
+		onSearchMenuDismissed = UseResult7,
 		searchResults = UseMemoResult1,
 		players = UseMemoResult,
 		addedPlayers = UseMemoResult2,
 		friendsAllowed = UseStateResult3,
-		onFriendsAllowedChanged = UseStateResult2_2,
+		onFriendsAllowedChanged = UseResult4,
 		link = UseStateResult6,
 		linkText = UseBindingResult1,
 		onLinkTextChanged = UseResult2,
@@ -381,9 +431,9 @@ return function(p1)
 		isLinkCopied = UseStateResult8,
 		hasError = UseStateResult10,
 		isSaving = UseStateResult9,
-		onSave = UseResult4,
-		onCancel = UseResult7,
-		onDismiss = p1.onClose,
+		onSave = UseResult5,
+		onCancel = UseResult9,
+		onDismiss = UseResult8,
 		focusRootRef = UseFocusRootResult
 	}
 end

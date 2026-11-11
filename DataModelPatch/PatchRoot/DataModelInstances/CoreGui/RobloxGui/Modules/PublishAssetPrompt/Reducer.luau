@@ -1,1 +1,0 @@
-﻿return (require(game:GetService("CorePackages").Packages.Rodux).combineReducers({ promptRequest = require(script.PromptRequestReducer) }))

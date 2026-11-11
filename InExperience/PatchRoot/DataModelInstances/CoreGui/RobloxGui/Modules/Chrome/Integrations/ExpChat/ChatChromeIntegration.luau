@@ -41,7 +41,6 @@ local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local FFlagEnableConsoleExpControls = SharedFlagsModule.FFlagEnableConsoleExpControls
 local FFlagExpChatWindowSyncUnibar = SharedFlagsModule.FFlagExpChatWindowSyncUnibar
 local FFlagRemoveFriendsChatUnibarEntrypoints = SharedFlagsModule.FFlagRemoveFriendsChatUnibarEntrypoints
-local FFlagExpChatEnableFriendsTab = SharedFlagsModule.FFlagExpChatEnableFriendsTab
 local FFlagExpChatCanShowFriendsTab = SharedFlagsModule.FFlagExpChatCanShowFriendsTab
 local FFlagSideSheetHeaderChatIcon = SharedFlagsModule.FFlagSideSheetHeaderChatIcon
 local FFlagExpChatHistoricalMessagesUnibarUnread = SharedFlagsModule.FFlagExpChatHistoricalMessagesUnibarUnread
@@ -97,7 +96,7 @@ local _ = function()
 end
 
 local function updateUnreadNotification()
-	-- upvalues: RegisterResult1 (ref), FFlagExpChatHistoricalMessagesUnibarUnread (copy), GetMessagesStoreFunction (copy), Smallest (ref), FFlagExpChatEnableFriendsTab (copy), Count (ref), GetFriendsChatIconUnreadStoreModule (copy), ChatVisible (ref)
+	-- upvalues: RegisterResult1 (ref), FFlagExpChatHistoricalMessagesUnibarUnread (copy), GetMessagesStoreFunction (copy), Smallest (ref), GetFriendsChatIconUnreadStoreModule (copy), Count (ref), ChatVisible (ref)
 	if not RegisterResult1.notification then return end
 	local HistoricalWindowMessageCountDelta = nil
 	if FFlagExpChatHistoricalMessagesUnibarUnread then
@@ -107,11 +106,6 @@ local function updateUnreadNotification()
 		HistoricalWindowMessageCountDelta = HistoricalWindowMessageCount - Smallest
 	else
 		HistoricalWindowMessageCountDelta = 0
-	end
-	if not FFlagExpChatEnableFriendsTab then
-		RegisterResult1.notification:fireCount(Count + HistoricalWindowMessageCountDelta)
-		
-		return
 	end
 	local NewCount = Count + GetFriendsChatIconUnreadStoreModule(false).getUnreadCountToDisplay(false) + HistoricalWindowMessageCountDelta
 	
@@ -173,7 +167,7 @@ local NewMappedSignal = MappedSignal.new(VisibilityStateChanged, function()
 	-- upvalues: ChatVisible (ref)
 	return ChatVisible
 end, function()
-	-- upvalues: ChatSelectorModule (copy), ExpChatUnibarAvailabilityRefactor (copy), RunService (copy), Chat (copy), Players (copy), RegisterResult1 (ref), GuiService (copy), GameSettings (copy), ChatVisible (ref), Flag (ref), FFlagExpChatEnableFriendsTab (copy), Count (ref), FFlagExpChatHistoricalMessagesUnibarUnread (copy), Smallest (ref), GetMessagesStoreFunction (copy), GetFriendsChatIconUnreadStoreModule (copy), updateUnreadNotification (copy)
+	-- upvalues: ChatSelectorModule (copy), ExpChatUnibarAvailabilityRefactor (copy), RunService (copy), Chat (copy), Players (copy), RegisterResult1 (ref), GuiService (copy), GameSettings (copy), ChatVisible (ref), Flag (ref), Count (ref), FFlagExpChatHistoricalMessagesUnibarUnread (copy), Smallest (ref), GetMessagesStoreFunction (copy), GetFriendsChatIconUnreadStoreModule (copy), updateUnreadNotification (copy)
 	local Visibility = ChatSelectorModule.GetVisibility()
 	
 	if not ExpChatUnibarAvailabilityRefactor and not Visibility then
@@ -197,30 +191,16 @@ end, function()
 	ChatVisible = Visibility
 	Flag = true
 	
-	if FFlagExpChatEnableFriendsTab then
-		if Visibility then
-			Count = 0
-			
-			if FFlagExpChatHistoricalMessagesUnibarUnread then
-				local GetHistoricalWindowMessageCountFunction = GetMessagesStoreFunction(false).getHistoricalWindowMessageCount
-				Smallest = if GetHistoricalWindowMessageCountFunction then GetHistoricalWindowMessageCountFunction(false) else 0
-			end
-			GetFriendsChatIconUnreadStoreModule(false).clearDisplayCount()
-		end
-		updateUnreadNotification()
+	if Visibility then
+		Count = 0
 		
-		return
-	else
-		if Visibility and Count and RegisterResult1.notification then
-			Count = 0
-			
-			if FFlagExpChatHistoricalMessagesUnibarUnread then
-				local GetHistoricalWindowMessageCountFunction1 = GetMessagesStoreFunction(false).getHistoricalWindowMessageCount
-				Smallest = if GetHistoricalWindowMessageCountFunction1 then GetHistoricalWindowMessageCountFunction1(false) else 0
-			end
-			RegisterResult1.notification:clear()
+		if FFlagExpChatHistoricalMessagesUnibarUnread then
+			local GetHistoricalWindowMessageCountFunction = GetMessagesStoreFunction(false).getHistoricalWindowMessageCount
+			Smallest = if GetHistoricalWindowMessageCountFunction then GetHistoricalWindowMessageCountFunction(false) else 0
 		end
+		GetFriendsChatIconUnreadStoreModule(false).clearDisplayCount()
 	end
+	updateUnreadNotification()
 end)
 
 local _ = function()
@@ -376,10 +356,10 @@ RegisterResult1 = ServiceModule:register({
 		end
 	}
 })
-RegisterResult1.chatOpenCapability = if FFlagExpChatEnableFriendsTab then {
+RegisterResult1.chatOpenCapability = {
 	isAvailable = isChatOpenAvailable,
 	ensureOpenChat = ensureOpenChat
-} else nil
+}
 
 if ExpChatUnibarAvailabilityRefactor then
 	SignalsUtilsModule.createDetachedEffect(function(p1)
@@ -410,13 +390,12 @@ if FFlagEnableConsoleExpControls then
 		end
 	end)
 end
-if FFlagExpChatEnableFriendsTab then
-	SignalsUtilsModule.createDetachedEffect(function(p1)
-		-- upvalues: GetFriendsChatIconUnreadStoreModule (copy), updateUnreadNotification (copy)
-		GetFriendsChatIconUnreadStoreModule(p1).getUnreadCountToDisplay(p1)
-		updateUnreadNotification()
-	end)
-end
+SignalsUtilsModule.createDetachedEffect(function(p1)
+	-- upvalues: GetFriendsChatIconUnreadStoreModule (copy), updateUnreadNotification (copy)
+	GetFriendsChatIconUnreadStoreModule(p1).getUnreadCountToDisplay(p1)
+	updateUnreadNotification()
+end)
+
 if FFlagExpChatHistoricalMessagesUnibarUnread then
 	SignalsUtilsModule.createDetachedEffect(function(p1)
 		-- upvalues: GetMessagesStoreFunction (copy), Flag (ref), ChatVisible (ref), Smallest (ref), updateUnreadNotification (copy)

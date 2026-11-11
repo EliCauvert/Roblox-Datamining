@@ -1,1 +1,0 @@
-﻿return { compact = "compact", wide = "wide" }

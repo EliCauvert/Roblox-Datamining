@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnableNonFlyoutUncheckedBadge2", false)

@@ -1,1 +1,0 @@
-﻿return game:DefineFastInt("PushUpsellChatMaxPromptCount", 1)

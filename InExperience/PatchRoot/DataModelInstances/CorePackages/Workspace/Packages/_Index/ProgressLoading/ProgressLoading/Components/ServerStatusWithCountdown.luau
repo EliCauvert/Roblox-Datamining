@@ -185,7 +185,7 @@ return ReactModule.memo(function(p1)
 				value = UseBindingResult
 			})
 		}) else nil,
-		ActionContainer = if UseSignalStateResult == PlaceLauncherStateModule.Queued and UseStateResult and FFlagEnableLuaAppsFollowUserId1 and ExperienceService:GetFollowUserId() > 0 then ReactModule.createElement(FoundationModule.View, {
+		ActionContainer = if UseSignalStateResult == PlaceLauncherStateModule.Queued and (UseStateResult and FFlagEnableLuaAppsFollowUserId1 and ExperienceService:GetFollowUserId() > 0) then ReactModule.createElement(FoundationModule.View, {
 			LayoutOrder = 3,
 			tag = "col align-x-center align-y-bottom gap-xsmall auto-xy"
 		}, {

@@ -1,1 +1,0 @@
-﻿return game:DefineFastInt("ScanFrequencyInExperienceShop", 1)

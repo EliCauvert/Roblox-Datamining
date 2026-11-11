@@ -220,6 +220,7 @@ Authentication.AccountSwitch.Action.Continue,
 Authentication.AccountSwitch.Action.CreateNewAccount,Utwórz nowe konto
 Authentication.AccountSwitch.Action.LogoutAllAccounts,Wyloguj się ze wszystkich kont
 Authentication.AccountSwitch.Action.RemoveAllAccounts,Usunąć wszystkie konta?
+Authentication.AccountSwitch.Action.SignIn,Zaloguj się
 Authentication.AccountSwitch.Action.SignInToExistingAccount,Zaloguj się na istniejące konto
 Authentication.AccountSwitch.Action.SwitchAccount,Przełącz konta
 Authentication.AccountSwitch.Description.AccountLimit.2,"Osiągnięto limit kont. Usuń jedno z nich, aby dodać nowe."
@@ -229,6 +230,8 @@ Authentication.AccountSwitch.Description.LogoutConfirmation,Przed dodaniem noweg
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,Spróbuj ponownie później
 Authentication.AccountSwitch.Description.RemoveAllAccounts,Po wylogowaniu wszystkie konta zostaną usunięte z tego urządzenia.
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,"Jeśli to zrobisz, to konto nie będzie już widoczne na tym urządzeniu, chyba że zalogujesz się ponownie. Powrócisz do strony startowej."
+Authentication.AccountSwitch.Description.SomethingWentWrongSignInAgain,Coś poszło nie tak. Zaloguj się ponownie.
+Authentication.AccountSwitch.Description.StaleSessionSignInAgain,Od dłuższego czasu nie korzystasz z tego konta. Zaloguj się ponownie.
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,Spróbuj zalogować się bezpośrednio
 Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,Nie można przełączyć kont
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
@@ -321,7 +324,7 @@ Authentication.Login.Action.ResendCode,
 Authentication.Login.Action.Save,Zapisz
 Authentication.Login.Action.SendCodeSentenceCase,Wyślij kod
 Authentication.Login.Action.SendVerificationEmail,Wyślij weryfikacyjną wiadomość e-mail
-Authentication.Login.Action.SignIn,Zaloguj się
+Authentication.Login.Action.SignIn,
 Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,Użyj klucza dostępu
@@ -686,7 +689,7 @@ Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,"Obramowanie głowy
 Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,"{irrelevant_percent}% zmodyfikowanych wierzchołków zewnętrznego obramowania nie obejmuje akcesorium. Dostosuj obramowanie, aby lepiej dopasować je do kształtu akcesorium."
 Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,"Obramowanie {cage_name} zawiera nieprawidłowe wartości UV. Nieprawidłowe wartości UV: {incorrect_uv_count} (bez odwołania: {unreferenced_vertex_count}, niezgodne z szablonem: {non_template_uv_count}, zduplikowane mapowania: {duplicate_mapping_count}), niedopasowane wierzchołki z szablonu: {unmatched_template_count}."
 Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,Część {partName} ma {degenerate_triangle_percent}% zdegenerowanych trójkątów.
-Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,"Dynamiczna głowa ma problemy z jakością mimiki. Zamknięte lewe oko: {left_eye_close}, zamknięte prawe oko: {right_eye_close}, otwarte usta: {mouth_open}, radość: {is_happy}, smutek: {is_sad}."
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,"Dynamiczna głowa ma problemy z jakością mimiki. Zamknięte lewe oko na ekranie (czerwone kropki po lewej stronie głowy we wtyczce wizualizacji): {left_eye_close}, zamknięte prawe oko na ekranie (niebieskie kropki po prawej stronie głowy we wtyczce wizualizacji): {right_eye_close}, otwarte usta (zielone kropki we wtyczce wizualizacji): {mouth_open}, radość: {is_happy}, smutek: {is_sad}."
 Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"Nieoczekiwana konfiguracja stawów. Łączna liczba stawów: {joint_number}, stawy lewej ręki: {left_hand_joint_number}, stawy prawej ręki: {right_hand_joint_number}."
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,Część {partName} zawiera małe odłączone wyspy siatki ({num_small_volume_islands}) w ogólnej liczbie {num_disconnected_components} komponentów. Usuń unoszące się elementy geometryczne.
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,"Część {partName} ma geometrię typu non-manifold. Sprawdź, czy nie ma powierzchni niepłaskich, powierzchni, które przecinają się same ze sobą lub krawędzi współdzielonych przez więcej niż dwie powierzchnie."
@@ -802,9 +805,9 @@ Common.UGCValidation.ErrorLabel.DynHead_JointAccumulatedExceeded,"Animacje twarz
 Common.UGCValidation.ErrorLabel.DynHead_JointBoundsCheckFailed,Nie udało się zweryfikować granic stawów animacji twarzy. Spróbuj ponownie później.
 Common.UGCValidation.ErrorLabel.DynHead_JointDirectExceeded,"Animacja twarzy {actionName} głowy powoduje, że stawy są przesuwane znacznie poza głowę. Edytuj animacje twarzy i spróbuj ponownie."
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,"Dynamiczne głowy na rynku muszą być prawidłowo umieszczone w klatce, tak aby wierzchołki oczu i ust na klatce pokrywały się z wierzchołkami siatki. Popraw klatkę i jej wyrównanie z siatką."
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,"Punkty orientacyjne lewego oka na obramowaniu dynamicznej głowy nie są wyrównane z siatką. Dostosuj obramowanie oka tak, aby siatka lewego oka znajdowała się w obrębie rzutowanego obszaru obramowania."
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,"Punkty orientacyjne ust na obramowaniu dynamicznej głowy nie są wyrównane z siatką. Dostosuj obramowanie ust tak, aby siatka ust znajdowała się w obrębie rzutowanego obszaru obramowania."
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,"Punkty orientacyjne prawego oka na obramowaniu dynamicznej głowy nie są wyrównane z siatką. Dostosuj obramowanie oka tak, aby siatka prawego oka znajdowała się w obrębie rzutowanego obszaru obramowania."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,"Punkty orientacyjne obramowania lewego oka na ekranie (czerwone kropki po lewej stronie głowy we wtyczce do wizualizacji) nie są wyrównane z siatką: niektóre punkty obramowania znajdują się wewnątrz siatki głowy (siatka wystaje przez obramowanie) lub zbyt daleko poza nią. Dostosuj odpowiednie obramowanie tak, aby znajdowało się na siatce wokół tego oka lub tuż poza nią."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,"Punkty orientacyjne obramowania ust (zielone kropki we wtyczce do wizualizacji) nie są wyrównane z siatką: niektóre punkty obramowania znajdują się wewnątrz siatki głowy (siatka wystaje przez obramowanie) lub zbyt daleko poza nią. Dostosuj obramowanie ust tak, aby znajdowało się na siatce wokół ust lub tuż poza nią."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,"Punkty orientacyjne obramowania prawego oka na ekranie (niebieskie kropki po prawej stronie głowy we wtyczce do wizualizacji) nie są wyrównane z siatką: niektóre punkty obramowania znajdują się wewnątrz siatki głowy (siatka wystaje przez obramowanie) lub zbyt daleko poza nią. Dostosuj odpowiednie obramowanie tak, aby znajdowało się na siatce wokół tego oka lub tuż poza nią."
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,"Nie można wykryć mimiki obejmującej uśmiech przeznaczonej dla dynamicznej głowy. Dostosuj punkty orientacyjne obramowania dla ust, aby pasowały do miejsca, w którym usta znajdują się na głowie, i upewnij się, że mogą one wyrażać mimikę uśmiechu."
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,"Nie można wykryć mimiki obejmującej zamknięcie lewego oka przeznaczonej dla dynamicznej głowy. Dostosuj punkty orientacyjne obramowania dla lewego oka, aby pasowały do miejsca, w którym lewe oko znajduje się na głowie, i upewnij się, że można je zamknąć."
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,Dynamiczne głowy na rynku nie mają obramowania. Utwórz obramowanie dla dynamicznej głowy.
@@ -830,9 +833,9 @@ Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,Właściwość 
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,W twarzy podstawowej brakuje wymaganych cech oczu. Dodaj oczy do twarzy podstawowej i spróbuj ponownie.
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,W twarzy podstawowej brakuje wymaganych ust. Dodaj usta do twarzy podstawowej i spróbuj ponownie.
 Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,"Nie można wykryć mimiki radości. Dostosuj obramowanie ust lub FACS mimiki radości, aby rzutowana siatka ust odkształcała się zgodnie z oczekiwaniami."
-Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,"Nie można wykryć mimiki zamknięcia lewego oka. Dostosuj obramowanie lewego oka lub FACS zamknięcia lewego oka, aby rzutowana siatka oka odkształcała się zgodnie z oczekiwaniami."
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,Lewe oko na ekranie (czerwone kropki po lewej stronie głowy we wtyczce wizualizacji) nie zamyka się wystarczająco. Sprawdź elementy sterujące FACS prawego oka i odpowiadające im obramowanie.
 Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,"Nie można wykryć mimiki otwarcia ust. Dostosuj obramowanie ust lub FACS otwarcia ust, aby rzutowana siatka ust odkształcała się zgodnie z oczekiwaniami."
-Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,"Nie można wykryć mimiki zamknięcia prawego oka. Dostosuj obramowanie prawego oka lub FACS zamknięcia prawego oka, aby rzutowana siatka oka odkształcała się zgodnie z oczekiwaniami."
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,Prawe oko na ekranie (niebieskie kropki po prawej stronie głowy we wtyczce wizualizacji) nie zamyka się wystarczająco. Sprawdź elementy sterujące FACS lewego oka i odpowiadające im obramowanie.
 Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,"Nie można wykryć mimiki smutku. Dostosuj obramowanie ust lub FACS mimiki smutku, aby rzutowana siatka ust odkształcała się zgodnie z oczekiwaniami."
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Wykryto, że FACS spowodował powiększenie Twojej głowy do {modPercent}%, ale zmienianie głowy jest niezgodne z polityką rynku w zakresie animacji twarzy."
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Liczba stawów FACS w dynamicznych głowach nie może przekroczyć {maxFacsJointCount}, ale ta głowa ma ich {actualJointCount}. Zmniejsz liczbę stawów FACS i spróbuj ponownie."
@@ -901,6 +904,11 @@ Common.UGCValidation.ErrorLabel.MeasureMeshOutsideOuterCage,"{mesh_outside_outer
 Common.UGCValidation.ErrorLabel.MeshGeometry_ExceedsBounds,"{meshName} ma rozmiar większy niż maksymalny dozwolony rozmiar ramki ograniczającej. Maksymalny rozmiar dla typu {assetTypeName} to [{maxSizeX}, {maxSizeY}, {maxSizeZ}]."
 Common.UGCValidation.ErrorLabel.MeshGeometry_NotCentered,"{meshName}.{fieldName} ma dane siatki, które nie są wyśrodkowane. Zaimportuj ponownie tę siatkę za pomocą importera 3D Roblox i upewnij się, że w pliku źródłowym nie ma luźnej geometrii."
 Common.UGCValidation.ErrorLabel.MeshGeometry_PositionOutOfBounds,Pozycja jest poza zakresem.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleAboveMaximum,Siatka {meshName} została powiększona do {scaleMultiple}-krotności swojego pierwotnego rozmiaru. Maksymalna wartość to {maxScaleMultiple}-krotność. Wyeksportuj lub zaimportuj ponownie siatkę w wymaganym rozmiarze zamiast powiększać ją w Studio.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleBelowMinimum,Siatka {meshName} została pomniejszona do {scalePercent}% swojego pierwotnego rozmiaru. Minimalna wartość to {minScalePercent}%. Wyeksportuj lub zaimportuj ponownie siatkę w wymaganym rozmiarze zamiast zmniejszać ją w Studio.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleNotPositive,"Siatka {meshName} ma skalę równą zeru lub ujemną. Użyj dodatnich wartości skali. Aby utworzyć odbicie lustrzane siatki, odwróć ją w oprogramowaniu do modelowania 3D i wyeksportuj ponownie."
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooLarge,Skala siatki {meshName} jest za duża.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooSmall,Skala siatki jest zbyt mała.
 Common.UGCValidation.ErrorLabel.MeshGeometry_SurfaceAreaExceeded,Całkowita powierzchnia siatki modelu „{meshName}” wynosi {surfaceArea} i nie może być większa niż {maxSurfaceArea}. Musisz zmniejszyć liczbę lub rozmiar wszystkich trójkątów.
 Common.UGCValidation.ErrorLabel.MeshGeometry_TotalTriangleCountExceeded,"Rozdzielczość siatki wynosząca „{triangleCount}” dla zasobu „{assetTypeName}” jest wyższa od maksymalnej obsługiwanej liczby trójkątów wynoszącej „{maxTriangles}”. Musisz zmienić topologię modelu, aby zmniejszyć liczbę trójkątów."
 Common.UGCValidation.ErrorLabel.MeshGeometry_TriangleCountExceeded,Rozdzielczość siatki modelu {meshName} wynosząca {triangleCount} jest wyższa od maksymalnej obsługiwanej wartości wynoszącej {maxTriangles}. Musisz zmienić topologię modelu i spróbować ponownie.
@@ -1594,7 +1602,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,"Znajdź znajomych na plat
 Feature.AddFriends.Label.ConnectWithContacts,"Zaproś osoby ze swoich kontaktów lub odszukaj znajomych, którzy już korzystają z platformy Roblox!"
 Feature.AddFriends.Label.ContactsTile,Kontakty
 Feature.AddFriends.Label.DeclineAllBackgrounded,Trwa ignorowanie wszystkich próśb o dodanie do znajomych. Może to chwilę potrwać.
-Feature.AddFriends.Label.EmptyState.FriendsRename,"Z kim chcesz odkrywać Robloxa? Dodaj znajomych, aby wykorzystać dodatkowe możliwości na Robloxie!"
 Feature.AddFriends.Label.EmptyStatePrompt,"Z kim chcesz eksplorować platformę Roblox? Wyszukaj użytkowników, których chcesz dodać, lub skontaktuj się z osobami, które już znasz!"
 Feature.AddFriends.Label.FriendRequests,Prośby o dodanie do znajomych
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Wyszukaj osoby
@@ -1602,8 +1609,6 @@ Feature.AddFriends.Label.MyQrCode,Mój kod QR
 Feature.AddFriends.Label.QRCodeTitle,
 Feature.AddFriends.Label.SchoolTile,Koledzy z klasy
 Feature.AddFriends.Label.SearchForFriendsPrompt,"Znajdź znajomych na platformie Roblox, wyszukując ich na podstawie nazwy użytkownika lub nazwy wyświetlanej."
-Feature.AddFriends.Label.ShareQRCodeAddConnection,"Udostępnij swój kod QR, aby dodać osoby, które znasz"
-Feature.AddFriends.Label.SyncContactsInvitePeople,"Zsynchronizuj kontakty, aby odnaleźć i zaprosić znajomych!"
 Feature.AddFriends.Label.SyncWithContacts,"Zsynchronizuj kontakty, aby móc znajdować i zapraszać znajomych!"
 Feature.AddFriends.Label.TrustedFriendRequests,Prośby o dodanie do zaufanych znajomych
 Feature.AddFriends.Text.EmptyState.FriendsRename,"Z kim chcesz odkrywać Robloxa?{lineBreak} Dodaj znajomych, aby wykorzystać dodatkowe możliwości na Robloxie!"
@@ -1611,7 +1616,6 @@ Feature.AddFriends.Title.AddFriendsToolTip,Zabawa na Robloxie jest lepsza w towa
 Feature.AddFriends.Title.AddFriendsTooltipTitle,Zabawa na platformie Roblox jest lepsza w towarzystwie znajomych!
 Feature.AddFriends.Title.CameraPermission,Uprawnienia do korzystania z aparatu
 Feature.AddFriends.Title.ConnectWithContacts,Dodaj z kontaktów
-Feature.AddFriends.Title.ShareQRCode,Dodaj za pomocą kodu QR
 Feature.AgeGuidelines.DisplayName.StrongLanguage,Dosadny język
 Feature.AgeGuidelines.Label.CreatorEnabled,Twórca włączony
 Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect,Odblokuj większą liczbę treści i funkcji.
@@ -1724,6 +1728,7 @@ Feature.AppealsPortal.Label.Location,
 Feature.AppealsPortal.Label.LookDescription,Opis udostępnionego awatara
 Feature.AppealsPortal.Label.LookId,Identyfikator udostępnionego awatara
 Feature.AppealsPortal.Label.LookName,Nazwa udostępnionego awatara
+Feature.AppealsPortal.Label.MomentDescription,Opis momentu
 Feature.AppealsPortal.Label.PlaceIDPrompt,Jaki jest identyfikator miejsca?
 Feature.AppealsPortal.Label.PlaceId,Identyfikator miejsca
 Feature.AppealsPortal.Label.PlaceName,Nazwa miejsca
@@ -2181,6 +2186,8 @@ Feature.Avatar.Label.Shoes,Buty
 Feature.Avatar.Label.Shorts,Szorty
 Feature.Avatar.Label.Shoulder,Ramię
 Feature.Avatar.Label.Skin,Skóra
+Feature.Avatar.Label.Spawn,Punkt odrodzenia
+Feature.Avatar.Label.SpawnEffects,Efekty towarzyszące punktowi odrodzenia
 Feature.Avatar.Label.Sweater,Bluza
 Feature.Avatar.Label.Sweaters,Bluzy
 Feature.Avatar.Label.Swim,Pływanie
@@ -2709,6 +2716,7 @@ Feature.Build.Label.ManagedPricingMixed,Mieszane dla aktualnych produktów
 Feature.Build.Label.MaximizeForGamePlays,Maksymalizuj pod kątem liczby rozegranych gier
 Feature.Build.Label.ModelUnavailable,Model niedostępny
 Feature.Build.Label.Models3D,Modele 3D
+Feature.Build.Label.MonetizationCreateTitle,{NAME} – liczba Robuxów: {PRICE}
 Feature.Build.Label.MyGames,Moje gry
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,Brak limitu
@@ -3002,6 +3010,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,Moi znajomi ({count})
 Feature.BuyRobux.Label.PeopleWithCount,Osoby ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Gallery,Galeria
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,Przejdź do strony Dostosuj
@@ -3492,7 +3501,6 @@ Feature.Chat.Label.SearchForFriendsAndChat,Wyszukaj rozmowy
 Feature.Chat.Label.SearchFriends,Wyszukaj znajomych
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.Sent,Wysłano
-Feature.Chat.Label.SnoozeChatNotifications,Wycisz powiadomienia dotyczące czatu w projekcie:
 Feature.Chat.Label.SnoozePartyNotifications,Wycisz powiadomienia dotyczące Imprezy w projekcie na:
 Feature.Chat.Label.SwipeToReplyTooltip,"Przesuń, aby odpowiedzieć"
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} dni
@@ -3549,7 +3557,6 @@ Feature.Chat.Response.NetworkError,Błąd sieci
 Feature.Chat.Response.Sending,Wysyłanie
 Feature.Chat.RobloxConnectUnavailableWithUser,Korzystanie z funkcji Roblox Connect z tym użytkownikiem nie jest obecnie dostępne.
 Feature.Chat.Text.NoFriends,Nie masz jeszcze dodanych żadnych znajomych. Na początek wyszukaj i dodaj znajomych na Robloxie.
-Feature.Chat.Title.MuteChatNotifications,Wycisz powiadomienia czatu od znajomych podczas gry
 Feature.Chat.Title.NewChat,Nowy czat
 Feature.Chat.Toast.Error.InvalidUserSelected,Nie można dodać co najmniej jednej osoby z tej listy
 Feature.CommunityLinks.Description.CommunityDefault,"Dołącz do oficjalnej społeczności Guilded, aby móc wyświetlać w projekcie {experienceName} ogłoszenia i nie tylko!"
@@ -3746,8 +3753,10 @@ Feature.FaceChat.Subtitle.UnableToAccessCamera,"Aby animować awatara przy użyc
 Feature.Favorites.Label.Favorite,
 Feature.Favorites.Label.Favorited,
 Feature.FlyoutSidePanel.Action.ContinuePlaying,
+Feature.FlyoutSidePanel.Description.SwitchAccountsHere,Teraz możesz się przełączać między kontami tutaj.
 Feature.FlyoutSidePanel.Label.TooltipBody,Twój profil oraz Twoje treści i ustawienia zostały przeniesione do nowej lokalizacji.
 Feature.FlyoutSidePanel.Label.TooltipTitle,Przeniesiono <b>{itemName}</b>
+Feature.FlyoutSidePanel.Title.AccountSwitcherMoved,Przeniesiono przełącznik kont
 Feature.Friends.Action.AcceptFriend,
 Feature.Friends.Action.AccountDeleted,Konto usunięte
 Feature.Friends.Action.Add,
@@ -4443,6 +4452,7 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,Zdjęcia
 Feature.Moments.Label.PostDeleted,Moment usunięty
 Feature.Moments.Label.PostRemovedBody,Opublikowany przez Ciebie moment jest niezgodny z naszymi Standardami społeczności.
+Feature.Moments.Label.PostedOnDate,Opublikowano {date}
 Feature.Moments.Label.PublishingRodeoBody,Nie powinno to zająć zbyt długo.
 Feature.Moments.Label.Reactions,Reakcje
 Feature.Moments.Label.ReportReason.BreaksRules,Ten post narusza zasady
@@ -4776,6 +4786,9 @@ Feature.NotApproved.Label.LatestActivity,Ostatnia sprawdzona przez nas aktywnoś
 Feature.NotApproved.Label.LoadingImage,Wczytuję obraz
 Feature.NotApproved.Label.LogoutProgress,Trwa wylogowywanie
 Feature.NotApproved.Label.MenuContent,Zawartość menu
+Feature.NotApproved.Label.MessageToUser.AltConsequence.Reset,"To konto jest powiązane z kontem (zresetowanym na @{account}) zbanowanym za poważne naruszenie naszych Standardów społeczności. Tylko zbanowane konto może odwołać się od tego naruszenia. 
+
+Jeśli te dwa konta nie powinny być ze sobą połączone, wyślij odwołanie za pomocą tego konta z poziomu sekcji „Naruszenia i odwołania”."
 Feature.NotApproved.Label.MessageToUser.AltConsequence.V2,To konto jest powiązane z kontem zbanowanym za poważne naruszenie naszych Standardów społeczności. Odwołanie od tego naruszenia można złożyć za pomocą zbanowanego konta.
 Feature.NotApproved.Label.MessageToUser.AltConsequence.V3,"To konto jest połączone z kontem (@{account}) zbanowanym za poważne naruszenie naszych Standardów społeczności. Tylko zbanowane konto może odwołać się od tego naruszenia. 
 
@@ -6072,7 +6085,9 @@ Notifications.SquadRegroupPrompt.ToastAction.Join,
 Notifications.SquadRegroupPrompt.ToastLabel.ContinuePlayingTogether,Grajcie dalej razem
 Notifications.SquadRegroupPrompt.ToastLabel.JoinANewServer,
 Notifications.ToastNotifications.Label.LeaveExperienceConfirmation,Czy na pewno chcesz wyjść i dołączyć do innego projektu?
+Notifications.ToastNotifications.Label.LeaveServerConfirmation,Czy na pewno chcesz wyjść i dołączyć do innego serwera?
 Notifications.ToastNotifications.Title.LeavingExperience,Opuszczanie projektu
+Notifications.ToastNotifications.Title.LeavingServer,Opuszczanie serwera
 PlayerFeedbacks.VoteForm.Message.Action.Report,Zgłoszenie
 PlayerFeedbacks.VoteForm.Message.MaxLengthCharacters,Użyj mniej niż {count} znaków.
 PlayerFeedbacks.VoteForm.Message.MinLengthCharacters,Użyj więcej niż {count} znaków.

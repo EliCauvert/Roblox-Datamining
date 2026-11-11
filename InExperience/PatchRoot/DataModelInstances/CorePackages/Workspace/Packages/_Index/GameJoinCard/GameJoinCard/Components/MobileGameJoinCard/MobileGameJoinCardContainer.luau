@@ -5,6 +5,8 @@ local GameJoinCard = script:FindFirstAncestor("GameJoinCard")
 local FFlagMobileGameJoinCardEDPFromTitleModule = require(GameJoinCard.Flags.FFlagMobileGameJoinCardEDPFromTitle)
 local FFlagMobileGameJoinCardEDPFromThumbnailModule = require(GameJoinCard.Flags.FFlagMobileGameJoinCardEDPFromThumbnail)
 local FFlagGameJoinCardChatEntryPointModule = require(GameJoinCard.Flags.FFlagGameJoinCardChatEntryPoint)
+local FFlagMobileGameJoinCardVideo = require(Parent.SharedFlags).FFlagMobileGameJoinCardVideo
+local UseJoinCardBannerVideoIdModule = require(GameJoinCard.Hooks.useJoinCardBannerVideoId)
 local AnalyticsConstantsModule = require(script.Parent.Parent.Parent.Analytics.AnalyticsConstants)
 local GameJoinCardButtonAction = AnalyticsConstantsModule.GameJoinCardButtonAction
 local GameJoinCardSurface = AnalyticsConstantsModule.GameJoinCardSurface
@@ -32,6 +34,7 @@ local UserProfilesModule = require(Parent.UserProfiles)
 local SocialCommonModule = require(Parent.SocialCommon)
 local ChatEntryPointNames = SocialCommonModule.Enums.ChatEntryPointNames
 local EnteredChatFromEntryPointFunction = SocialCommonModule.Actions.EnteredChatFromEntryPoint
+local _ = require(Parent.VideoUtils)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagSocialCarouselUseProfileStore = SharedFlagsModule.FFlagSocialCarouselUseProfileStore
 local FFlagUserProfilePlatformProfile = SharedFlagsModule.FFlagUserProfilePlatformProfile
@@ -91,7 +94,7 @@ local config = {
 local config1 = { skipFetch = true }
 
 return function()
-	-- upvalues: FFlagMobileGameJoinCardEDPFromTitleModule (copy), FFlagMobileGameJoinCardEDPFromThumbnailModule (copy), FFlagGameJoinCardChatEntryPointModule (copy), FFlagJoinabilityCTARefactor (copy), UseDispatchFunction (copy), UseNavigationFunction (copy), FFlagMobileGameJoinCardGamepadSupport (copy), UseNavigationFocusFunction (copy), FFlagGameJoinCardSourceAttribution (copy), ReactModule (copy), FFlagGameJoinCardAnalyticsCardId (copy), HttpService (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), AppGuiService (copy), AppSessionService (copy), UseAppPolicyFunction (copy), Players (copy), FFlagFriendSortedByPresenceSignalsImplementation (copy), SignalsModule (copy), GetResult1 (copy), FFlagProfileCTAHydratePresenceFromMetadataModule (copy), config1 (copy), SignalsReactModule (copy), UseQueryFunction (copy), ApolloLocalStateModule (copy), FFlagJoinUserCTAsIxpEnabled (copy), IXPServiceWrapper (copy), FStringJoinUserCTAsIxpLayer (copy), UseGameJoinCardAnalyticsModule (copy), FFlagSocialCarouselBuildPresence (copy), UsePlayerNameModule (copy), FFlagSocialCarouselUseProfileStore (copy), GetResult (copy), UserProfilesModule (copy), FFlagUserProfilePlatformProfile (copy), UseExperienceBannerImageFunction (copy), FFlagMobileGameJoinCardThumbnailModule (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), GameJoinCardTelemetryModule (copy), UseAgeCheckCompletionLoggerFunction (copy), UseJoinUserInExperienceFunction (copy), config (copy), UseJoinUserActionsModule (copy), UseLocalizationFunction (copy), ActionsModule (copy), UseLogActionsResolveTimeModule (copy), GameJoinCardSurface (copy), UseAgeCheckPressLoggerFunction (copy), DataStatus (copy), ContainsActionModule (copy), UserCtaAction (copy), GameJoinCardButtonAction (copy), GamePlayIntentFunction (copy), PeopleListInHomePage (copy), DependencyArrayFunction (copy), FFlagEnableSplitPane (copy), AppPage (copy), ViewProfileSourceValues (copy), SetGamePlaySessionFunction (copy), SessionType (copy), GameDetailReferralFunction (copy), OpenGameDetailsFunction (copy), ViewEDPsourceValues (copy), EnteredChatFromEntryPointFunction (copy), ChatEntryPointNames (copy), NotificationType (copy), MobileGameJoinCardModule (copy)
+	-- upvalues: FFlagMobileGameJoinCardEDPFromTitleModule (copy), FFlagMobileGameJoinCardEDPFromThumbnailModule (copy), FFlagGameJoinCardChatEntryPointModule (copy), FFlagJoinabilityCTARefactor (copy), UseDispatchFunction (copy), UseNavigationFunction (copy), FFlagMobileGameJoinCardGamepadSupport (copy), UseNavigationFocusFunction (copy), FFlagGameJoinCardSourceAttribution (copy), ReactModule (copy), FFlagGameJoinCardAnalyticsCardId (copy), HttpService (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), AppGuiService (copy), AppSessionService (copy), UseAppPolicyFunction (copy), Players (copy), FFlagFriendSortedByPresenceSignalsImplementation (copy), SignalsModule (copy), GetResult1 (copy), FFlagProfileCTAHydratePresenceFromMetadataModule (copy), config1 (copy), SignalsReactModule (copy), UseQueryFunction (copy), ApolloLocalStateModule (copy), FFlagJoinUserCTAsIxpEnabled (copy), IXPServiceWrapper (copy), FStringJoinUserCTAsIxpLayer (copy), UseGameJoinCardAnalyticsModule (copy), FFlagSocialCarouselBuildPresence (copy), UsePlayerNameModule (copy), FFlagSocialCarouselUseProfileStore (copy), GetResult (copy), UserProfilesModule (copy), FFlagUserProfilePlatformProfile (copy), UseExperienceBannerImageFunction (copy), FFlagMobileGameJoinCardThumbnailModule (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), GameJoinCardTelemetryModule (copy), UseAgeCheckCompletionLoggerFunction (copy), UseJoinUserInExperienceFunction (copy), config (copy), FFlagMobileGameJoinCardVideo (copy), UseJoinCardBannerVideoIdModule (copy), UseJoinUserActionsModule (copy), UseLocalizationFunction (copy), ActionsModule (copy), UseLogActionsResolveTimeModule (copy), GameJoinCardSurface (copy), UseAgeCheckPressLoggerFunction (copy), DataStatus (copy), ContainsActionModule (copy), UserCtaAction (copy), GameJoinCardButtonAction (copy), GamePlayIntentFunction (copy), PeopleListInHomePage (copy), DependencyArrayFunction (copy), FFlagEnableSplitPane (copy), AppPage (copy), ViewProfileSourceValues (copy), SetGamePlaySessionFunction (copy), SessionType (copy), GameDetailReferralFunction (copy), OpenGameDetailsFunction (copy), ViewEDPsourceValues (copy), EnteredChatFromEntryPointFunction (copy), ChatEntryPointNames (copy), NotificationType (copy), MobileGameJoinCardModule (copy)
 	local UseDispatchResult = if FFlagMobileGameJoinCardEDPFromTitleModule or FFlagMobileGameJoinCardEDPFromThumbnailModule or FFlagGameJoinCardChatEntryPointModule or FFlagJoinabilityCTARefactor then UseDispatchFunction() else nil
 	local UseNavigationResult = UseNavigationFunction()
 	local UseNavigationFocusResult = if FFlagMobileGameJoinCardGamepadSupport then UseNavigationFocusFunction() else nil
@@ -231,6 +234,8 @@ return function()
 		end, { UseNavigationResult }),
 		onAgeCheckCompletion = UseAgeCheckCompletionLoggerFunction(UniverseId)
 	})
+	local UseJoinCardBannerVideoIdModuleResult = if FFlagMobileGameJoinCardVideo then UseJoinCardBannerVideoIdModule(UniverseId, UseJoinUserInExperienceResult.cachedPlayabilityStatus, UseNavigationResult.getParam("isBannerVideoEnabled") == true) else nil
+	local VideoPlaybackContextParam = if FFlagMobileGameJoinCardVideo then UseNavigationResult.getParam("videoPlaybackContext") else nil
 	local v1 = nil
 	local Ready = nil
 	local Localized = nil
@@ -431,6 +436,8 @@ return function()
 		experienceName = ExperienceName,
 		bannerImageUrl = UseExperienceBannerImageResult.url,
 		thumbnailImageUrl = RbxThumb,
+		bannerVideoId = UseJoinCardBannerVideoIdModuleResult,
+		bannerVideoPlaybackContext = VideoPlaybackContextParam,
 		isLoading = UseJoinUserInExperienceResult.isLoading,
 		isInExperience = UseJoinUserInExperienceResult.isInExperience,
 		ageCheckRequired = UseJoinUserInExperienceResult.ageCheckRequired,

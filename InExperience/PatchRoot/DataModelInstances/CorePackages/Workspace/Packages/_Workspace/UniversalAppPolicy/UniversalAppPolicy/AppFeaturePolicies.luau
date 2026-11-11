@@ -648,6 +648,10 @@ return function(p1)
 			-- upvalues: p1 (copy)
 			return p1.BlockVNGU12SignUpOnClientSide or false
 		end,
+		getMetaSignupMinimumAge = function()
+			-- upvalues: IsVRAppBuildFunction (upval), p1 (copy)
+			return if IsVRAppBuildFunction() then tonumber(p1.MetaSignupMinimumAge) or 10 else nil
+		end,
 		getUseAgeInput = function()
 			-- upvalues: p1 (copy)
 			return p1.UseAgeInput or false

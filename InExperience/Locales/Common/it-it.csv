@@ -1463,6 +1463,7 @@ Feature.AddFriends.Action.FriendAdded,Amico Aggiunto
 Feature.AddFriends.Action.IgnoreFriendRequest,Ignora richiesta di amicizia
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Ignora richiesta di amico affidabile
 Feature.AddFriends.Action.RequestIgnored,Richiesta Ignorata
+Feature.AddFriends.Heading.AddFriends,Aggiungi amici
 Feature.AddFriends.Label.AddFriendsTooltip,Inizia a trovare i tuoi amici in modo da poter esplorare Roblox insieme.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Trova persone su Roblox cercando il loro nome utente o il nome visualizzato.
 Feature.AddFriends.Label.ConnectWithContacts,Invita contatti o connettiti con amici già su Roblox!
@@ -1856,6 +1857,8 @@ Feature.Avatar.Label.Shoes,Scarpe
 Feature.Avatar.Label.Shorts,Pantaloncini
 Feature.Avatar.Label.Shoulder,Spalle
 Feature.Avatar.Label.Skin,Pelle
+Feature.Avatar.Label.Spawn,Rigenerare
+Feature.Avatar.Label.SpawnEffects,Effetti Rigenerazione
 Feature.Avatar.Label.Sweater,Maglione
 Feature.Avatar.Label.Sweaters,Maglioni
 Feature.Avatar.Label.Swim,Nuota
@@ -2078,7 +2081,10 @@ Feature.AvatarSwitcher.Message.SelectAvatar,Seleziona un avatar
 Feature.AvatarSwitcher.Message.SwitchingDeferred,"Vedrai questo avatar dopo la tua prossima rigenerazione, o quando ti unisci a un'esperienza. Puoi passare a un avatar diverso in qualsiasi momento."
 Feature.AvatarSwitcher.Message.UnknownSupport,"Puoi comunque cambiare il tuo avatar, ma potrebbe non apparire correttamente in questa esperienza."
 Feature.AvatarSwitcher.Message.Unsupported,Questa esperienza utilizza un avatar personalizzato e non supporta gli avatar Roblox.
+Feature.AvatarWorkshop.Action.EditAvatar,Modifica avatar
 Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Heading.Customize,Personalizza
+Feature.AvatarWorkshop.Heading.YourAvatars,I tuoi avatar
 Feature.AvatarWorkshop.Message.LoadItemsError,Si è verificato un problema durante il caricamento dei tuoi articoli.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,Impossibile caricare altri articoli.
 Feature.AvatarWorkshop.Message.NoItemsOwned,Non possiedi ancora nessun articolo qui.
@@ -2762,7 +2768,7 @@ Feature.Catalog.Action.CheckoutPlural,Visualizza articoli selezionati ({count})
 Feature.Catalog.Action.CheckoutSingular,Pagamento di 1 articolo
 Feature.Catalog.Action.CloseDetails,Chiudi dettagli
 Feature.Catalog.Action.CopyLink,Copia Link
-Feature.Catalog.Action.Customize,Personalizza
+Feature.Catalog.Action.Customize,
 Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,Descrivi il tuo avatar (facoltativo)
@@ -3195,7 +3201,7 @@ Feature.Chat.Heading.SafeChattingWithUsername,Fai attenzione quando chatti con {
 Feature.Chat.Heading.UserInvitedYouToJoin,{combinedName} ti ha invitato a unirti
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,{combinedName} ti ha invitato a unirti a un gruppo
 Feature.Chat.Heading.YouWereInvitedToGroup,Hai ricevuto un invito a unirti al gruppo
-Feature.Chat.Label.AddFriends,Aggiungi amici
+Feature.Chat.Label.AddFriends,
 Feature.Chat.Label.Available,Disponibile
 Feature.Chat.Label.Blocked,
 Feature.Chat.Label.ChatDetails,Dettagli della chat
@@ -3235,7 +3241,6 @@ Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} ha detto...
 Feature.Chat.Label.ReplyingToYourself,Hai detto...
 Feature.Chat.Label.SearchFriends,Cerca amici
 Feature.Chat.Label.SearchWord,
-Feature.Chat.Label.SnoozeChatNotifications,Silenzia notifiche chat dell'esperienza:
 Feature.Chat.Label.SnoozePartyNotifications,Silenzia notifiche gruppo dell'esperienza per:
 Feature.Chat.Label.SwipeToReplyTooltip,Scorri per rispondere
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}gg
@@ -3291,7 +3296,6 @@ Feature.Chat.Response.NetworkError,Errore di rete
 Feature.Chat.RobloxConnectUnavailableWithUser,"Al momento, Roblox Connect non è disponibile per questo utente."
 Feature.Chat.Text.NoFriends,"Non hai ancora aggiunto nessun amico. Per iniziare, trova e aggiungi i tuoi amici su Roblox."
 Feature.Chat.Title.FriendsChat,Chat tra amici
-Feature.Chat.Title.MuteChatNotifications,Disattiva l'audio delle notifiche degli amici all'interno della chat durante la partita
 Feature.Chat.Title.NewChat,Nuova chat
 Feature.Chat.Toast.Error.InvalidUserSelected,Impossibile aggiungere una o più persone di questo elenco
 Feature.ContactUpsell.Action.Continue,
@@ -3438,8 +3442,10 @@ Feature.FaceChat.Subtitle.VideoPerformancePromptDisable,Spegnere la fotocamera p
 Feature.FaceChat.Subtitle.VideoUnsupported,Roblox non è in grado di usare la videocamera per animare l'avatar.
 Feature.Favorites.Label.Favorite,
 Feature.FlyoutSidePanel.Action.ContinuePlaying,
+Feature.FlyoutSidePanel.Description.SwitchAccountsHere,Ora puoi cambiare account qui.
 Feature.FlyoutSidePanel.Label.TooltipBody,"Il tuo profilo, i contenuti e le impostazioni sono stati spostati in una nuova posizione."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> è stato spostato
+Feature.FlyoutSidePanel.Title.AccountSwitcherMoved,Abbiamo modificato la posizione del pulsante Cambia account
 Feature.Friends.Action.AcceptFriend,Accetta amicizia
 Feature.Friends.Action.AccountDeleted,Account eliminato
 Feature.Friends.Action.Add,
@@ -3828,6 +3834,7 @@ Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Termina tra {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,Prova gratuita
 Feature.InExperienceShop.Label.HaveTrial,Prova gratuita per te
+Feature.InExperienceShop.Label.KeepIt,Mantieni
 Feature.InExperienceShop.Label.NoDescription,Nessuna descrizione
 Feature.InExperienceShop.Label.OfferEndTime,{offer} che termina tra {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,Questa è un'anteprima del tuo Negozio in Roblox Studio non visibile ai giocatori.
@@ -3989,6 +3996,7 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,Foto
 Feature.Moments.Label.PostDeleted,Momento eliminato
 Feature.Moments.Label.PostRemovedBody,Il Momento che hai pubblicato viola le nostre norme della community.
+Feature.Moments.Label.PostedOnDate,Pubblicato il {date}
 Feature.Moments.Label.PublishingRodeoBody,Non dovrebbe volerci molto.
 Feature.Moments.Label.Reactions,Reazioni
 Feature.Moments.Label.ReportReason.BreaksRules,Questo post viola le regole
@@ -4171,7 +4179,7 @@ Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,Copia il link del profilo
 Feature.Profile.Action.CreateInBuild,Crea in Build
 Feature.Profile.Action.EditAppearance,Modifica aspetto
-Feature.Profile.Action.EditAvatar,Modifica avatar
+Feature.Profile.Action.EditAvatar,
 Feature.Profile.Action.EditBackground,Modifica sfondo
 Feature.Profile.Action.EditEmotes,Modifica Emote
 Feature.Profile.Action.EditLook,Modifica look

@@ -98,6 +98,7 @@ return function()
 	local FriendsCallingStoreModule = GetFriendsCallingStoreModule(false)
 	local UseSignalStateResult = UseSignalStateFunction(FriendsCallingStoreModule.getWindowView)
 	local UseSignalStateResult1 = UseSignalStateFunction(FriendsCallingStoreModule.getCall)
+	local UseSignalStateResult2 = UseSignalStateFunction(FriendsCallingStoreModule.getExpandCount)
 	local UseRefResult = ReactModule.useRef(nil)
 	local At = nil
 	
@@ -147,6 +148,7 @@ return function()
 	return {
 		enabled = HasCall,
 		session = UseSignalStateResult.session,
+		expandCount = UseSignalStateResult2,
 		connectedAt = At,
 		callId = if UseSignalStateResult1 then UseSignalStateResult1.callId else nil,
 		participant = Card

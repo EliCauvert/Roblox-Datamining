@@ -165,7 +165,7 @@ return function(Frame)
 	end, { UseStateResult1, Groups, UseResult3, GroupId })
 	local Name = nil
 	
-	if UseFilterResult.games == "GroupGames" and (UseFilterResult.groupId ~= nil and Groups ~= nil) then
+	if UseFilterResult.games == "GroupGames" and UseFilterResult.groupId ~= nil and Groups ~= nil then
 		for _, group in Groups do
 			if group.id == UseFilterResult.groupId then
 				Name = group.name

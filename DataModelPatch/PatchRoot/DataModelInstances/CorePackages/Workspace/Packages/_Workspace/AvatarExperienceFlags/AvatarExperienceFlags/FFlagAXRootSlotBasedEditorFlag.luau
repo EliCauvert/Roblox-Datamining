@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXRootSlotBasedEditorFlag8", false)

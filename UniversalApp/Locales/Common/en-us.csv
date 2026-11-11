@@ -221,6 +221,7 @@ Authentication.AccountSwitch.Action.Continue,
 Authentication.AccountSwitch.Action.CreateNewAccount,Create New Account
 Authentication.AccountSwitch.Action.LogoutAllAccounts,Log Out of All Accounts
 Authentication.AccountSwitch.Action.RemoveAllAccounts,Remove all accounts?
+Authentication.AccountSwitch.Action.SignIn,Sign in
 Authentication.AccountSwitch.Action.SignInToExistingAccount,Sign in to existing account
 Authentication.AccountSwitch.Action.SwitchAccount,Switch Accounts
 Authentication.AccountSwitch.Description.AccountLimit.2,"You’ve reached your account limit. To add a new one, remove an account first."
@@ -230,6 +231,8 @@ Authentication.AccountSwitch.Description.LogoutConfirmation,You’ll need to log
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,Please try again later
 Authentication.AccountSwitch.Description.RemoveAllAccounts,"Once you sign out, all accounts will be removed from this device."
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,"If you do this, you won’t see this account on this device anymore, unless you sign in again. You’ll return to the landing page."
+Authentication.AccountSwitch.Description.SomethingWentWrongSignInAgain,Something went wrong. Sign in again.
+Authentication.AccountSwitch.Description.StaleSessionSignInAgain,You haven’t used this account here in a while. Sign in again.
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,Try logging in directly
 Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,Can't switch accounts
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
@@ -323,7 +326,7 @@ Authentication.Login.Action.Save,Save
 Authentication.Login.Action.SendCodeSentenceCase,Send code
 Authentication.Login.Action.SendVerificationEmail,Send Verification Email
 Authentication.Login.Action.SignIn,Sign In
-Authentication.Login.Action.SignInSentenceCase,Sign in
+Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,Use passkey
 Authentication.Login.Action.UsernameAndPassword,Username & password
@@ -1605,7 +1608,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Find people on Roblox by s
 Feature.AddFriends.Label.ConnectWithContacts,Invite contacts or connect with friends already on Roblox!
 Feature.AddFriends.Label.ContactsTile,Contacts
 Feature.AddFriends.Label.DeclineAllBackgrounded,Ignoring all friend requests. This may take a minute.
-Feature.AddFriends.Label.EmptyState.FriendsRename,Who will you explore Roblox with? Add friends to do more on Roblox!
 Feature.AddFriends.Label.EmptyStatePrompt,"Who will you explore Roblox with? Search for people to add, or connect with friends you already know!"
 Feature.AddFriends.Label.FriendRequests,Friend Requests
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Search for people
@@ -1613,16 +1615,13 @@ Feature.AddFriends.Label.MyQrCode,My QR Code
 Feature.AddFriends.Label.QRCodeTitle,
 Feature.AddFriends.Label.SchoolTile,Classmates
 Feature.AddFriends.Label.SearchForFriendsPrompt,Find people on Roblox by searching for their username or display name.
-Feature.AddFriends.Label.ShareQRCodeAddConnection,Share your QR code to add people you know
-Feature.AddFriends.Label.SyncContactsInvitePeople,Sync contacts to find and invite friends!
-Feature.AddFriends.Label.SyncWithContacts,
+Feature.AddFriends.Label.SyncWithContacts,Sync contacts to find and invite friends!
 Feature.AddFriends.Label.TrustedFriendRequests,Trusted Friend Requests
 Feature.AddFriends.Text.EmptyState.FriendsRename,Who will you explore Roblox with?{lineBreak}Add friends to do more on Roblox!
 Feature.AddFriends.Title.AddFriendsToolTip,Roblox is better with friends!
 Feature.AddFriends.Title.AddFriendsTooltipTitle,
 Feature.AddFriends.Title.CameraPermission,Camera Permission
 Feature.AddFriends.Title.ConnectWithContacts,Add from Contacts
-Feature.AddFriends.Title.ShareQRCode,Add from QR Code
 Feature.AgeGuidelines.DisplayName.StrongLanguage,Strong Language
 Feature.AgeGuidelines.Label.CreatorEnabled,Creator Enabled
 Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect,Unlock more content and features.
@@ -2195,6 +2194,7 @@ Feature.Avatar.Label.Shorts,Shorts
 Feature.Avatar.Label.Shoulder,Shoulder
 Feature.Avatar.Label.Skin,Skin
 Feature.Avatar.Label.Spawn,Spawn
+Feature.Avatar.Label.SpawnEffect,Spawn Effect
 Feature.Avatar.Label.SpawnEffects,Spawn Effects
 Feature.Avatar.Label.Sweater,Sweater
 Feature.Avatar.Label.Sweaters,Sweaters
@@ -2564,7 +2564,7 @@ Feature.Build.Description.AdCampaignModerationReview,All ad campaigns are review
 Feature.Build.Description.AdCampaignSheetRunDates,Runs {startDate} – {endDate}
 Feature.Build.Description.AdComplete,Your ad has ended. Check your results.
 Feature.Build.Description.AdModerationReview,All ads are reviewed by Roblox moderation and may take up to 24 hours.
-Feature.Build.Description.AdvancedModel,Best for top quality. Usage runs out 3 times faster.
+Feature.Build.Description.AdvancedModel,Best for top quality. Usage runs out faster.
 Feature.Build.Description.AdvertisingAgreement,"By selecting Create, you agree to the {advertisingTermsStart}Roblox Advertising Terms{advertisingTermsEnd} and {advertisingStandardsStart}Advertising Standards{advertisingStandardsEnd}."
 Feature.Build.Description.ArchiveRemoval,"If you archive this game, it will be removed from Build. You can still access and restore it from Creator Hub or Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Use your Robux to automatically buy additional Build usage as you create. You can set a daily spend limit anytime.
@@ -2574,6 +2574,7 @@ Feature.Build.Description.BuildReplyNotif,Get notified when Build has a reply fo
 Feature.Build.Description.BuyRobuxToCreate,"Buy more Robux to keep creating, or wait for your free Build usage to reset tomorrow."
 Feature.Build.Description.BuyUsageOrWait,"Buy more Build usage with Robux, or wait for your daily limit to reset."
 Feature.Build.Description.CampaignRunDates,Your campaign will run {startDate} – {endDate}
+Feature.Build.Description.CaptureWhilePlaytesting,"Take a capture while you playtest, then add it to your prompt."
 Feature.Build.Description.ChooseAdCampaignLength,Choose how long you want your ad to run.
 Feature.Build.Description.ChoosePlaytesters,Choose friends to preview your game.
 Feature.Build.Description.CreateDeveloperProduct,"Create ""{NAME}"" for {PRICE} Robux, off sale."
@@ -2680,6 +2681,9 @@ Feature.Build.Label.BackToBuild,Back to Build
 Feature.Build.Label.Building,Building...
 Feature.Build.Label.CaptureLibrary,Capture library
 Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT} of {MAX_SELECTIONS} selected
+Feature.Build.Label.CaptureStepAddImages,Select Add images to attach your capture
+Feature.Build.Label.CaptureStepPlaytest,Playtest your game
+Feature.Build.Label.CaptureStepTapCamera,Select the camera in the Build toolbar
 Feature.Build.Label.ContentRating,Content rating
 Feature.Build.Label.CreatedDate,"{MONTH} {DAY}, {YEAR}"
 Feature.Build.Label.CreatorHub,Creator Hub
@@ -2736,7 +2740,7 @@ Feature.Build.Label.OnSale,On sale
 Feature.Build.Label.Pending,Pending
 Feature.Build.Label.PercentUsed,{PERCENT}% used
 Feature.Build.Label.PlayTime,Play time
-Feature.Build.Label.PreviewsTab,Previews
+Feature.Build.Label.PreviewsTab,Playtests
 Feature.Build.Label.PreviouslyPublished,Previously published
 Feature.Build.Label.Price,Price
 Feature.Build.Label.PriceUnavailable,--
@@ -3018,6 +3022,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,My friends ({count})
 Feature.BuyRobux.Label.PeopleWithCount,People ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Gallery,Gallery
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,Go to Customize
@@ -3508,7 +3513,6 @@ Feature.Chat.Label.SearchForFriendsAndChat,Search for conversations
 Feature.Chat.Label.SearchFriends,Search for friends
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.Sent,Sent
-Feature.Chat.Label.SnoozeChatNotifications,Mute in-experience chat notifications:
 Feature.Chat.Label.SnoozePartyNotifications,Mute in-experience party notifications for:
 Feature.Chat.Label.SwipeToReplyTooltip,Swipe to reply
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}d
@@ -3565,7 +3569,6 @@ Feature.Chat.Response.NetworkError,Network Error
 Feature.Chat.Response.Sending,Sending
 Feature.Chat.RobloxConnectUnavailableWithUser,"At this time, Roblox Connect is not available with this user."
 Feature.Chat.Text.NoFriends,"You haven't added any friends yet. To get started, find and add your friends on Roblox."
-Feature.Chat.Title.MuteChatNotifications,Mute chat notifications from friends during gameplay
 Feature.Chat.Title.NewChat,New chat
 Feature.Chat.Toast.Error.InvalidUserSelected,One or more people in this list can’t be added
 Feature.CommunityLinks.Description.CommunityDefault,Join the official Guilded community for {experienceName} to view announcements and more!

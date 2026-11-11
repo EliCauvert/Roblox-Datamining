@@ -1,1 +1,0 @@
-﻿return require(script.Parent["experienceDetails.impl"])(require(script:FindFirstAncestor("VirtualEventsState").network).NetworkingGames)

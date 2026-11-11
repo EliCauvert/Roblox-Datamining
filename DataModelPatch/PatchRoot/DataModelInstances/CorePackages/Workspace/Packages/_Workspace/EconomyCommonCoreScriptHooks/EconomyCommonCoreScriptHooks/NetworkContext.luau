@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("EconomyCommonCoreScriptHooks").Parent.React).createContext(nil)

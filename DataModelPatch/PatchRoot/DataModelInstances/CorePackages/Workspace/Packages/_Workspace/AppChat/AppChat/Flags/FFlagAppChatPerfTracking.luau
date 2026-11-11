@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AppChatPerfTracking3", false)

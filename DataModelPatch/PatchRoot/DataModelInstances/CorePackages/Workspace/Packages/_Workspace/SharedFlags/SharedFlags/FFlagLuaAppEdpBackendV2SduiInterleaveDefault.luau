@@ -1,3 +1,0 @@
-﻿local FFlagSduiGetItemCollectionKeysModule = require(script.Parent.FFlagSduiGetItemCollectionKeys)
-
-return game:DefineFastFlag("LuaAppEdpBackendV2SduiInterleaveDefault3", false) and FFlagSduiGetItemCollectionKeysModule

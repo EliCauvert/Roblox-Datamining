@@ -1,1 +1,0 @@
-﻿return (game:DefineFastFlag("HelpPageIXPExposure3", false))

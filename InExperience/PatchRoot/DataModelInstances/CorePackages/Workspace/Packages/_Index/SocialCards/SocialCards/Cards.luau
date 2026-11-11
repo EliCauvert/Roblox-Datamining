@@ -13,38 +13,39 @@ local config = {
 	position = UDim2.fromScale(0, 0)
 }
 
-return function(p1)
-	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), ReactModule (copy), CardComponent (copy), AltTextCard (copy), FoundationModule (copy)
-	local UnionResult = CryoModule.Dictionary.union(config, p1)
-	local UseTokensResult = UseTokensFunction()
-	local UseResult = ReactModule.useCallback(function(p2)
-		-- upvalues: CardComponent (upval), UnionResult (copy), CryoModule (upval), ReactModule (upval), AltTextCard (upval), FoundationModule (upval), UseTokensResult (copy)
-		local List = {}
-		
-		for _, component in ipairs(p2.components) do
-			if not CardComponent[component.type] then
-				List = {
-					ReactModule.createElement(AltTextCard, { altText = p2.alt_text })
-				}
-				break
-			end
-			local Data = component.data
-			
-			if UnionResult.analyticsInfo then
-				Data = CryoModule.Dictionary.join(Data, UnionResult.analyticsInfo)
-			end
-			table.insert(List, ReactModule.createElement(CardComponent[component.type], Data))
+local function renderCard(p1, ConversationId, AnalyticsInfo, p2)
+	-- upvalues: CardComponent (copy), CryoModule (copy), ReactModule (copy), AltTextCard (copy), FoundationModule (copy)
+	local List = {}
+	
+	for _, component in ipairs(p1.components) do
+		if not CardComponent[component.type] then
+			List = {
+				ReactModule.createElement(AltTextCard, { altText = p1.alt_text })
+			}
+			break
 		end
-		return ReactModule.createElement(FoundationModule.View, {
-			AutomaticSize = Enum.AutomaticSize.XY,
-			backgroundStyle = UseTokensResult.Color.Shift.Shift_200,
-			cornerRadius = UDim.new(0, UseTokensResult.Radius.Large)
-		}, List)
-	end, {})
+		local JoinResult = CryoModule.Dictionary.join(component.data, { conversationId = ConversationId })
+		
+		if AnalyticsInfo then
+			JoinResult = CryoModule.Dictionary.join(JoinResult, AnalyticsInfo)
+		end
+		table.insert(List, ReactModule.createElement(CardComponent[component.type], JoinResult))
+	end
+	return ReactModule.createElement(FoundationModule.View, {
+		AutomaticSize = Enum.AutomaticSize.XY,
+		backgroundStyle = p2.Color.Shift.Shift_200,
+		cornerRadius = UDim.new(0, p2.Radius.Large)
+	}, List)
+end
+
+return function(p3)
+	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), renderCard (copy), ReactModule (copy), FoundationModule (copy)
+	local UnionResult = CryoModule.Dictionary.union(config, p3)
+	local UseTokensResult = UseTokensFunction()
 	local List = {}
 	
 	for _, card in pairs(UnionResult.cards) do
-		table.insert(List, UseResult(card))
+		table.insert(List, renderCard(card, UnionResult.conversationId, UnionResult.analyticsInfo, UseTokensResult))
 	end
 	return ReactModule.createElement(FoundationModule.View, {
 		AutomaticSize = Enum.AutomaticSize.XY,

@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("EconomyCommonCoreScriptHooks").Parent.React).createContext(Vector2.new(0, 0))

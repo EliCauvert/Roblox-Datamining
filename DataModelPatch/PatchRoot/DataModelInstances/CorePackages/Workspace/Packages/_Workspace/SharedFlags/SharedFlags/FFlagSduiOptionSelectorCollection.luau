@@ -1,4 +1,0 @@
-﻿local FFlagSduiActionsShouldTakeOverridesModule = require(script.Parent.FFlagSduiActionsShouldTakeOverrides)
-local FFlagSduiGenreSelectorModule = require(script.Parent.FFlagSduiGenreSelector)
-
-return game:DefineFastFlag("SduiOptionSelectorCollection", false) and (FFlagSduiActionsShouldTakeOverridesModule and FFlagSduiGenreSelectorModule)

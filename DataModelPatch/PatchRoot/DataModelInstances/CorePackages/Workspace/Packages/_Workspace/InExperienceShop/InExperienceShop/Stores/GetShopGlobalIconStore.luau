@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("InExperienceShop").Parent.Signals).createComputed((require(script.createShopGlobalIconStore)))

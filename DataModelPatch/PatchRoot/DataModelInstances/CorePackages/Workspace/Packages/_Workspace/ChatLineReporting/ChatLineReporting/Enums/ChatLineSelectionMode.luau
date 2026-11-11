@@ -1,1 +1,0 @@
-﻿return { Radio = "radio", Direct = "direct" }

@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("GenericAbuseReporting").Parent.RobloxAppLoggers).Logger:new("AbuseReport")

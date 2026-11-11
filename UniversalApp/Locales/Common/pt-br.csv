@@ -220,6 +220,7 @@ Authentication.AccountSwitch.Action.Continue,
 Authentication.AccountSwitch.Action.CreateNewAccount,Criar nova conta
 Authentication.AccountSwitch.Action.LogoutAllAccounts,Sair de todas as contas
 Authentication.AccountSwitch.Action.RemoveAllAccounts,Remover todas as contas?
+Authentication.AccountSwitch.Action.SignIn,Entrar
 Authentication.AccountSwitch.Action.SignInToExistingAccount,Entrar em uma conta existente
 Authentication.AccountSwitch.Action.SwitchAccount,Trocar de conta
 Authentication.AccountSwitch.Description.AccountLimit.2,"Você atingiu o limite da sua conta. Para adicionar uma nova, primeiro remova uma conta."
@@ -229,6 +230,8 @@ Authentication.AccountSwitch.Description.LogoutConfirmation,Você precisará sai
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,Tente novamente mais tarde
 Authentication.AccountSwitch.Description.RemoveAllAccounts,"Depois que você encerrar sessão, todas as contas serão removidas deste dispositivo."
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,"Se você fizer isso, não verá mais esta conta neste dispositivo, a menos que inicie uma sessão novamente. Você retornará à página inicial."
+Authentication.AccountSwitch.Description.SomethingWentWrongSignInAgain,Algo deu errado. Entre novamente.
+Authentication.AccountSwitch.Description.StaleSessionSignInAgain,Faz tempo que você não usa esta conta aqui. Entre novamente.
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,Tente entrar diretamente
 Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,Não é possível trocar de conta
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
@@ -242,7 +245,7 @@ Authentication.CrossDevice.Action.CancelLogin,
 Authentication.CrossDevice.Action.ConfirmLogin,Confirmar entrada
 Authentication.CrossDevice.Action.Done,Pronto
 Authentication.CrossDevice.Action.DontAllow,Não permitir
-Authentication.CrossDevice.Action.Enter,Entrar
+Authentication.CrossDevice.Action.Enter,
 Authentication.CrossDevice.Action.GoBack,Voltar
 Authentication.CrossDevice.Action.Next,
 Authentication.CrossDevice.Action.TryAgain,Tente novamente
@@ -1599,7 +1602,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Encontre pessoas na Roblox
 Feature.AddFriends.Label.ConnectWithContacts,Convide seus contatos ou conecte-se com amizades que já estão na Roblox!
 Feature.AddFriends.Label.ContactsTile,Contatos
 Feature.AddFriends.Label.DeclineAllBackgrounded,Ignorando todos os pedidos de amizade. Isto pode levar um minuto.
-Feature.AddFriends.Label.EmptyState.FriendsRename,Com quem você vai explorar a Roblox? Adicione amigos para fazer mais na Roblox!
 Feature.AddFriends.Label.EmptyStatePrompt,Com quem você vai explorar a Roblox? Procure pessoas para adicionar ou conecte-se com amizades que você já conhece!
 Feature.AddFriends.Label.FriendRequests,Pedidos de amizade
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Pesquisar pessoas
@@ -1607,16 +1609,13 @@ Feature.AddFriends.Label.MyQrCode,Meu código QR
 Feature.AddFriends.Label.QRCodeTitle,Código QR
 Feature.AddFriends.Label.SchoolTile,Colegas da escola
 Feature.AddFriends.Label.SearchForFriendsPrompt,Encontre pessoas na Roblox procurando seu nome de usuário ou nome de exibição.
-Feature.AddFriends.Label.ShareQRCodeAddConnection,Compartilhe o seu código QR para adicionar pessoas que você conhece
-Feature.AddFriends.Label.SyncContactsInvitePeople,Sincronize os contatos para encontrar e convidar amizades!
-Feature.AddFriends.Label.SyncWithContacts,
+Feature.AddFriends.Label.SyncWithContacts,Sincronize os contatos para encontrar e convidar amizades!
 Feature.AddFriends.Label.TrustedFriendRequests,Pedidos de amizade confiável
 Feature.AddFriends.Text.EmptyState.FriendsRename,Com quem você vai explorar a Roblox?{lineBreak}Adicione amigos para fazer mais na Roblox!
 Feature.AddFriends.Title.AddFriendsToolTip,A Roblox fica mais divertida com seus amigos!
 Feature.AddFriends.Title.AddFriendsTooltipTitle,A Roblox fica mais divertida com suas amizades!
 Feature.AddFriends.Title.CameraPermission,Permissões de câmera
 Feature.AddFriends.Title.ConnectWithContacts,Adicionar de contatos
-Feature.AddFriends.Title.ShareQRCode,Adicionar do código QR
 Feature.AgeGuidelines.DisplayName.StrongLanguage,Linguagem forte
 Feature.AgeGuidelines.Label.CreatorEnabled,Criador habilitado
 Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect,Desbloqueie mais conteúdos e funcionalidades.
@@ -1729,6 +1728,7 @@ Feature.AppealsPortal.Label.Location,Local
 Feature.AppealsPortal.Label.LookDescription,Descrição do avatar compartilhado
 Feature.AppealsPortal.Label.LookId,ID do avatar compartilhado
 Feature.AppealsPortal.Label.LookName,Nome do avatar compartilhado
+Feature.AppealsPortal.Label.MomentDescription,Descrição do Momento
 Feature.AppealsPortal.Label.PlaceIDPrompt,Qual é o ID do local?
 Feature.AppealsPortal.Label.PlaceId,ID do local
 Feature.AppealsPortal.Label.PlaceName,Nome do local
@@ -2186,6 +2186,8 @@ Feature.Avatar.Label.Shoes,Sapatos
 Feature.Avatar.Label.Shorts,Shorts
 Feature.Avatar.Label.Shoulder,Ombro
 Feature.Avatar.Label.Skin,Pele
+Feature.Avatar.Label.Spawn,Gerar
+Feature.Avatar.Label.SpawnEffects,Efeitos de geração
 Feature.Avatar.Label.Sweater,Moletom
 Feature.Avatar.Label.Sweaters,Moletons
 Feature.Avatar.Label.Swim,Nadar
@@ -3008,6 +3010,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,Minhas amizades ({count})
 Feature.BuyRobux.Label.PeopleWithCount,Pessoas ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,"Algo deu errado, tente novamente mais tarde."
+Feature.Captures.Title.Gallery,Galeria
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,Vá até Personalizar
@@ -3498,7 +3501,6 @@ Feature.Chat.Label.SearchForFriendsAndChat,Pesquisar conversas
 Feature.Chat.Label.SearchFriends,Procurar amigos
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.Sent,Enviado
-Feature.Chat.Label.SnoozeChatNotifications,Silenciar notificações de bate-papo na experiência para:
 Feature.Chat.Label.SnoozePartyNotifications,Silenciar notificações da Turma na experiência para:
 Feature.Chat.Label.SwipeToReplyTooltip,Deslize para responder
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} dias
@@ -3555,7 +3557,6 @@ Feature.Chat.Response.NetworkError,Erro de rede
 Feature.Chat.Response.Sending,Enviando
 Feature.Chat.RobloxConnectUnavailableWithUser,"No momento, o Roblox Connect não está disponível com este usuário."
 Feature.Chat.Text.NoFriends,"Você ainda não adicionou nenhum amigo. Para começar, encontre e adicione seus amigos na Roblox."
-Feature.Chat.Title.MuteChatNotifications,Silenciar notificações de chat das amizades durante o jogo
 Feature.Chat.Title.NewChat,Novo chat
 Feature.Chat.Toast.Error.InvalidUserSelected,Uma ou mais pessoas nesta lista não podem ser adicionadas
 Feature.CommunityLinks.Description.CommunityDefault,Junte-se à comunidade oficial do Guilded para {experienceName} para ver comunicados e muito mais!
@@ -3752,8 +3753,10 @@ Feature.FaceChat.Subtitle.UnableToAccessCamera,"Para animar seu avatar usando a 
 Feature.Favorites.Label.Favorite,Favorito
 Feature.Favorites.Label.Favorited,
 Feature.FlyoutSidePanel.Action.ContinuePlaying,
+Feature.FlyoutSidePanel.Description.SwitchAccountsHere,Agora você pode trocar de conta aqui.
 Feature.FlyoutSidePanel.Label.TooltipBody,"Seu perfil, conteúdo e configurações foram movidos para um novo local."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> foi movido
+Feature.FlyoutSidePanel.Title.AccountSwitcherMoved,O trocador de contas mudou de lugar
 Feature.Friends.Action.AcceptFriend,Aceitar amizade
 Feature.Friends.Action.AccountDeleted,Conta excluída
 Feature.Friends.Action.Add,
@@ -4449,6 +4452,7 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,Fotos
 Feature.Moments.Label.PostDeleted,Momento excluído
 Feature.Moments.Label.PostRemovedBody,O Momento que você publicou vai contra as Regras da Comunidade.
+Feature.Moments.Label.PostedOnDate,Publicado em {date}
 Feature.Moments.Label.PublishingRodeoBody,Isso não deve demorar muito.
 Feature.Moments.Label.Reactions,Reações
 Feature.Moments.Label.ReportReason.BreaksRules,Esta publicação quebra as regras
@@ -4782,6 +4786,9 @@ Feature.NotApproved.Label.LatestActivity,Última atividade que revisamos
 Feature.NotApproved.Label.LoadingImage,Carregando imagem
 Feature.NotApproved.Label.LogoutProgress,Encerrando sessão
 Feature.NotApproved.Label.MenuContent,Conteúdo do menu
+Feature.NotApproved.Label.MessageToUser.AltConsequence.Reset,"Esta conta está vinculada a uma conta (redefinir para @{account}), que foi banida por uma violação grave das nossas Regras da Comunidade. Somente a conta banida pode recorrer dessa violação. 
+
+Se as duas contas não deveriam estar vinculadas, envie um recurso usando esta conta pela seção Violações e Recursos."
 Feature.NotApproved.Label.MessageToUser.AltConsequence.V2,"Esta conta está vinculada a uma conta banida por uma violação grave das nossas Regras da Comunidade. Para recorrer, é necessário usar a conta banida."
 Feature.NotApproved.Label.MessageToUser.AltConsequence.V3,"Esta conta está vinculada a @{account}, que foi banida por uma violação grave das nossas Regras da Comunidade. Somente a conta banida pode recorrer dessa violação. 
 
@@ -5006,7 +5013,7 @@ Feature.Premium.Message.PleaseTryAgain,Tente novamente.
 Feature.Premium.Message.SomethingWentWrong,
 Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Grátis com o Plus
-Feature.PrivateServers.Action.Generate,Gerar
+Feature.PrivateServers.Action.Generate,
 Feature.PrivateServers.Description.FriendsAllowed,Qualquer pessoa na sua lista de amizades pode entrar sem um convite
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,As compras de servidores privados não são suportadas no Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,Este jogo não suporta servidores privados.

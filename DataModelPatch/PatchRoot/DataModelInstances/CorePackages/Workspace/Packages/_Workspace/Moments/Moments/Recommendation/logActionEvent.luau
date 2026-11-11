@@ -1,1 +1,0 @@
-﻿return function(_, _, _, _) end

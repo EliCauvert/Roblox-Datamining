@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("MomentsPostFeedback_dev", false)

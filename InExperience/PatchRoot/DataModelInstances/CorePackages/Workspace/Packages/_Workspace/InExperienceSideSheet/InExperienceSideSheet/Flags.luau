@@ -1,9 +1,7 @@
-﻿local SharedFlagsModule = require(script:FindFirstAncestor("InExperienceSideSheet").Parent.SharedFlags)
-
-return {
+﻿return {
 	FFlagClosePeoplePageWhenNoRoomBesideSideSheet = require(script.FFlagClosePeoplePageWhenNoRoomBesideSideSheet),
 	FFlagMountUnmountSideSheet = require(script.FFlagMountUnmountSideSheet),
 	FFlagSideSheetEmphasizeLeave = require(script.FFlagSideSheetEmphasizeLeave),
-	FFlagSideSheetOpenPeoplePage = SharedFlagsModule.FFlagSideSheetOpenPeoplePage,
-	FFlagSideSheetOpenPeoplePageRestoreChat = game:DefineFastFlag("SideSheetOpenPeoplePageRestoreChat", false) and SharedFlagsModule.FFlagSideSheetOpenPeoplePage
+	FFlagSideSheetOpenPeoplePage = require(script:FindFirstAncestor("InExperienceSideSheet").Parent.SharedFlags).FFlagSideSheetOpenPeoplePage,
+	FFlagSideSheetOpenPeoplePageRestoreChat = game:DefineFastFlag("SideSheetOpenPeoplePageRestoreChat2", false)
 }

@@ -117,21 +117,21 @@ return function(Frame)
 	local UsePreferredInputResult = ResponsiveModule.usePreferredInput()
 	local Options = {}
 	
-	for _, option in Frame.data.options do
+	for _, option1 in Frame.data.options do
 		local AdvancedLabel = UseLocalizationResult.unavailable
 		local AdvancedDescription = nil
 		
-		if option.model == "Default" then
+		if option1.model == "Default" then
 			AdvancedLabel = UseLocalizationResult.defaultLabel
 			AdvancedDescription = UseLocalizationResult.defaultDescription
-		elseif option.model == "Advanced" then
+		elseif option1.model == "Advanced" then
 			AdvancedLabel = UseLocalizationResult.advancedLabel
 			AdvancedDescription = UseLocalizationResult.advancedDescription
 		end
 		table.insert(Options, {
-			id = option.id,
-			model = option.model,
-			isAvailable = option.isAvailable,
+			id = option1.id,
+			model = option1.model,
+			isAvailable = option1.isAvailable,
 			label = AdvancedLabel,
 			description = AdvancedDescription
 		})
@@ -141,9 +141,9 @@ return function(Frame)
 	if Frame.selectedId ~= nil then
 		Title = UseLocalizationResult.unavailable
 		
-		for _, option1 in Options do
-			if option1.id == Frame.selectedId then
-				Title = option1.label
+		for _, option in Options do
+			if option.id == Frame.selectedId then
+				Title = option.label
 				break
 			end
 		end

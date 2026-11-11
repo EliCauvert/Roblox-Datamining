@@ -432,14 +432,14 @@ return function(p1)
 						end
 					end
 					for i, request in Requests do
-						local Entry5 = t3[i]
+						local CreateResult = t3[i]
 						
-						if Entry5 == nil and t4[i] then
-							local Entry6 = Tbl[request.viewType]
-							Entry5 = Entry6.items[Entry6.last]
-							Entry6.items[Entry6.last] = nil
-							Entry6.last -= 1
-							Tbl1[Entry5].active = true
+						if CreateResult == nil and t4[i] then
+							local Entry5 = Tbl[request.viewType]
+							CreateResult = Entry5.items[Entry5.last]
+							Entry5.items[Entry5.last] = nil
+							Entry5.last -= 1
+							Tbl1[CreateResult].active = true
 							
 							if T1 ~= nil then
 								table.insert(T1, {
@@ -450,9 +450,9 @@ return function(p1)
 									0
 								})
 							end
-						elseif Entry5 == nil then
-							Entry5 = CreateResults[i]
-							Tbl1[Entry5] = {
+						elseif CreateResult == nil then
+							CreateResult = CreateResults[i]
+							Tbl1[CreateResult] = {
 								active = true,
 								viewType = request.viewType,
 								pool = poolFor(request.viewType)
@@ -468,7 +468,7 @@ return function(p1)
 								})
 							end
 						end
-						table.insert(config.acquired, Entry5)
+						table.insert(config.acquired, CreateResult)
 					end
 					local Capacity1 = p5.capacity
 					

@@ -1,1 +1,0 @@
-﻿return { APP = "in-app", EXPERIENCE = "in-experience" }

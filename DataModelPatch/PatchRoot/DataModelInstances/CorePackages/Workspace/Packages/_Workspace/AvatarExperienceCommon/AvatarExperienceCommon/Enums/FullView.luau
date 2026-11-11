@@ -1,1 +1,0 @@
-﻿return (require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.enumerate)(script.Name, { "None", "SceneFullView", "UIFullView" }))

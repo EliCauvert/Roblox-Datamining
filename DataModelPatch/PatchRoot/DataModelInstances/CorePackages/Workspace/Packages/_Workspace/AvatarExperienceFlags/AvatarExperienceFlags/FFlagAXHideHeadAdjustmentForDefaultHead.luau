@@ -1,3 +1,0 @@
-﻿local FFlagDynamicHeadsMigrationModule = require(script.Parent.FFlagDynamicHeadsMigration)
-
-return game:DefineFastFlag("AXHideHeadAdjustmentForDefaultHead", false) and FFlagDynamicHeadsMigrationModule

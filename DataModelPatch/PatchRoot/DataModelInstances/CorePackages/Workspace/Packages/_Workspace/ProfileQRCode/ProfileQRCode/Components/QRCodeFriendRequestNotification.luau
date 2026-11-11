@@ -1,4 +1,0 @@
-﻿local QRCodeFriendRequestNotificationModule = require(script.QRCodeFriendRequestNotification)
-local QRCodeFriendRequestNotificationV2Module = require(script.QRCodeFriendRequestNotificationV2)
-
-return if require(script:FindFirstAncestor("ProfileQRCode").Flags.FFlagQRCodeFriendRequestNotificationV2) then QRCodeFriendRequestNotificationV2Module else QRCodeFriendRequestNotificationModule

@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "ab74f5a2448f902c4ed4a60b41e116e637ffe0ab"
+            id: "02220508c7dd2a90a68a06e6b236b1105b0085fe"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "0aedfdde-4d6f-490c-95a9-0b968cfb6e9d", e._sentryDebugIdIdentifier = "sentry-dbid-0aedfdde-4d6f-490c-95a9-0b968cfb6e9d")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "480de942-6170-44af-9f48-4a76add27552", e._sentryDebugIdIdentifier = "sentry-dbid-480de942-6170-44af-9f48-4a76add27552")
     } catch (e) {}
 }(),
 function() {
@@ -16,10 +16,10 @@ function() {
                 };
 
                 function o(e) {
-                    return n(a(e))
+                    return n(i(e))
                 }
 
-                function a(e) {
+                function i(e) {
                     if (!n.o(r, e)) {
                         var t = Error("Cannot find module '" + e + "'");
                         throw t.code = "MODULE_NOT_FOUND", t
@@ -28,7 +28,7 @@ function() {
                 }
                 o.keys = function() {
                     return Object.keys(r)
-                }, o.resolve = a, e.exports = o, o.id = 545
+                }, o.resolve = i, e.exports = o, o.id = 545
             },
             966: function(e, t, n) {
                 var r = {
@@ -36,10 +36,10 @@ function() {
                 };
 
                 function o(e) {
-                    return n(a(e))
+                    return n(i(e))
                 }
 
-                function a(e) {
+                function i(e) {
                     if (!n.o(r, e)) {
                         var t = Error("Cannot find module '" + e + "'");
                         throw t.code = "MODULE_NOT_FOUND", t
@@ -48,7 +48,7 @@ function() {
                 }
                 o.keys = function() {
                     return Object.keys(r)
-                }, o.resolve = a, e.exports = o, o.id = 966
+                }, o.resolve = i, e.exports = o, o.id = 966
             },
             254: function(e, t, n) {
                 var r = {
@@ -56,10 +56,10 @@ function() {
                 };
 
                 function o(e) {
-                    return n(a(e))
+                    return n(i(e))
                 }
 
-                function a(e) {
+                function i(e) {
                     if (!n.o(r, e)) {
                         var t = Error("Cannot find module '" + e + "'");
                         throw t.code = "MODULE_NOT_FOUND", t
@@ -68,7 +68,7 @@ function() {
                 }
                 o.keys = function() {
                     return Object.keys(r)
-                }, o.resolve = a, e.exports = o, o.id = 254
+                }, o.resolve = i, e.exports = o, o.id = 254
             },
             771: function(e, t, n) {
                 var r = {
@@ -77,10 +77,10 @@ function() {
                 };
 
                 function o(e) {
-                    return n(a(e))
+                    return n(i(e))
                 }
 
-                function a(e) {
+                function i(e) {
                     if (!n.o(r, e)) {
                         var t = Error("Cannot find module '" + e + "'");
                         throw t.code = "MODULE_NOT_FOUND", t
@@ -89,7 +89,7 @@ function() {
                 }
                 o.keys = function() {
                     return Object.keys(r)
-                }, o.resolve = a, e.exports = o, o.id = 771
+                }, o.resolve = i, e.exports = o, o.id = 771
             },
             185: function(e, t, n) {
                 var r = {
@@ -97,10 +97,10 @@ function() {
                 };
 
                 function o(e) {
-                    return n(a(e))
+                    return n(i(e))
                 }
 
-                function a(e) {
+                function i(e) {
                     if (!n.o(r, e)) {
                         var t = Error("Cannot find module '" + e + "'");
                         throw t.code = "MODULE_NOT_FOUND", t
@@ -109,7 +109,7 @@ function() {
                 }
                 o.keys = function() {
                     return Object.keys(r)
-                }, o.resolve = a, e.exports = o, o.id = 185
+                }, o.resolve = i, e.exports = o, o.id = 185
             },
             902: function(e, t, n) {
                 var r = {
@@ -117,10 +117,10 @@ function() {
                 };
 
                 function o(e) {
-                    return n(a(e))
+                    return n(i(e))
                 }
 
-                function a(e) {
+                function i(e) {
                     if (!n.o(r, e)) {
                         var t = Error("Cannot find module '" + e + "'");
                         throw t.code = "MODULE_NOT_FOUND", t
@@ -129,7 +129,7 @@ function() {
                 }
                 o.keys = function() {
                     return Object.keys(r)
-                }, o.resolve = a, e.exports = o, o.id = 902
+                }, o.resolve = i, e.exports = o, o.id = 902
             },
             145: function(e) {
                 e.exports = '<span ng-class="$ctrl.getCssClasses()" class="thumbnail-2d-container" thumbnail-type="{{ $ctrl.thumbnailType }}" thumbnail-target-id="{{ $ctrl.thumbnailTargetId }}"> <img ng-if="$ctrl.thumbnailUrl && !$ctrl.isLazyLoadingEnabled()" ng-src="{{ $ctrl.thumbnailUrl }}" thumbnail-error="$ctrl.setThumbnailLoadFailed" ng-class="{\'loading\': $ctrl.thumbnailUrl && !isLoaded }" image-load alt="{{$ctrl.altName}}" title="{{$ctrl.altName}}"/> <img ng-if="$ctrl.thumbnailUrl && $ctrl.isLazyLoadingEnabled()" lazy-img="{{ $ctrl.thumbnailUrl }}" thumbnail-error="$ctrl.setThumbnailLoadFailed"/> </span> '
@@ -157,7 +157,7 @@ function() {
                 n.r(t);
                 var r = n(954),
                     o = n(134),
-                    a = {
+                    i = {
                         thumbnailTypes: r.uS,
                         thumbnailStates: r.xc,
                         formats: r.Ul,
@@ -165,19 +165,19 @@ function() {
                         gameIconSize: r.fP,
                         thumbnailAvatarsSize: r.qh
                     };
-                o.A.constant("thumbnailConstants", a), t.default = a
+                o.A.constant("thumbnailConstants", i), t.default = i
             },
             495: function(e, t, n) {
                 "use strict";
                 n.r(t);
                 var r = n(932),
                     o = n(954),
-                    a = n(134);
+                    i = n(134);
 
-                function i(e, t) {
+                function a(e, t) {
                     var n = this,
-                        a = "",
-                        i = o.xc;
+                        i = "",
+                        a = o.xc;
                     n.getCssClasses = function() {
                         return n.isThumbnailRequestSending ? "shimmer" : t.getCssClass(n.thumbnailState)
                     }, n.setThumbnailLoadFailed = function() {}, n.isLazyLoadingEnabled = function() {
@@ -205,8 +205,8 @@ function() {
                     };
                     var u = function() {
                         var e, r, u, c = "".concat(n.thumbnailType, ":").concat(n.thumbnailTargetId);
-                        if (n.startTime = new Date().getTime(), a !== c) {
-                            a = c, n.thumbnailState = i.loading;
+                        if (n.startTime = new Date().getTime(), i !== c) {
+                            i = c, n.thumbnailState = a.loading;
                             var l = (null == (e = n.thumbnailOptions) ? void 0 : e.size) || o.F5,
                                 s = (null == (r = n.thumbnailOptions) ? void 0 : r.format) || o.R2,
                                 f = null == (u = n.thumbnailOptions) ? void 0 : u.includeProfileFrame;
@@ -214,11 +214,11 @@ function() {
                                 var t = e.thumbnail,
                                     r = t.state,
                                     o = t.imageUrl,
-                                    a = t.version,
-                                    i = e.performance;
-                                n.thumbnailState = r, n.thumbnailUrl = o, n.performance = i, n.version = a, n.onSuccess && n.onSuccess(i)
+                                    i = t.version,
+                                    a = e.performance;
+                                n.thumbnailState = r, n.thumbnailUrl = o, n.performance = a, n.version = i, n.onSuccess && n.onSuccess(a)
                             }).catch(function(e) {
-                                n.thumbnailState = i.error, n.onFailure && n.onFailure(e)
+                                n.thumbnailState = a.error, n.onFailure && n.onFailure(e)
                             }).finally(function() {
                                 n.isThumbnailRequestSending = !1
                             })
@@ -226,7 +226,7 @@ function() {
                     };
                     n.$onInit = u, n.$onChanges = u
                 }
-                i.$inject = ["$scope", "thumbnailService"], a.A.controller("2dThumbnailController", i), t.default = i
+                a.$inject = ["$scope", "thumbnailService"], i.A.controller("2dThumbnailController", a), t.default = a
             },
             694: function(e, t, n) {
                 "use strict";
@@ -266,11 +266,11 @@ function() {
                 var r = n(501),
                     o = n(134);
 
-                function a(e) {
+                function i(e) {
                     return {
-                        getThumbnailImage: function(t, n, o, a, i) {
+                        getThumbnailImage: function(t, n, o, i, a) {
                             return e(function(e, u) {
-                                r.getThumbnailImage(t, o, a, n, void 0, void 0, void 0, void 0, i).then(function(t) {
+                                r.getThumbnailImage(t, o, i, n, void 0, void 0, void 0, void 0, a).then(function(t) {
                                     e(t)
                                 }).catch(u)
                             })
@@ -279,20 +279,312 @@ function() {
                             return r.getCssClass(e)
                         },
                         reloadThumbnailImage: function(t, n, o) {
-                            return e(function(e, a) {
+                            return e(function(e, i) {
                                 r.reloadThumbnailImage(t, o, null, n).then(function(t) {
                                     e(t)
-                                }).catch(a)
+                                }).catch(i)
                             })
                         }
                     }
                 }
-                a.$inject = ["$q"], o.A.factory("thumbnailService", a), t.default = a
+                i.$inject = ["$q"], o.A.factory("thumbnailService", i), t.default = i
             },
             134: function(e, t, n) {
                 "use strict";
                 var r = n(192);
                 t.A = n.n(r)().module("thumbnails", ["robloxApp", "thumbnailsTemplates", "angularLazyImg"])
+            },
+            839: function(e, t, n) {
+                "use strict";
+
+                function r(e, t, n, r, o, i, a) {
+                    try {
+                        var u = e[i](a),
+                            c = u.value
+                    } catch (e) {
+                        n(e);
+                        return
+                    }
+                    u.done ? t(c) : Promise.resolve(c).then(r, o)
+                }
+
+                function o(e) {
+                    return function() {
+                        var t = this,
+                            n = arguments;
+                        return new Promise(function(o, i) {
+                            var a = e.apply(t, n);
+
+                            function u(e) {
+                                r(a, o, i, u, c, "next", e)
+                            }
+
+                            function c(e) {
+                                r(a, o, i, u, c, "throw", e)
+                            }
+                            u(void 0)
+                        })
+                    }
+                }
+                n.d(t, {
+                    _: function() {
+                        return o
+                    }
+                })
+            },
+            474: function(e, t, n) {
+                "use strict";
+
+                function r(e, t) {
+                    if (null != t && "u" > typeof Symbol && t[Symbol.hasInstance] ? !t[Symbol.hasInstance](e) : !(e instanceof t)) throw TypeError("Cannot call a class as a function")
+                }
+                n.d(t, {
+                    _: function() {
+                        return r
+                    }
+                })
+            },
+            374: function(e, t, n) {
+                "use strict";
+
+                function r(e, t) {
+                    for (var n = 0; n < t.length; n++) {
+                        var r = t[n];
+                        r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r)
+                    }
+                }
+
+                function o(e, t, n) {
+                    return t && r(e.prototype, t), n && r(e, n), e
+                }
+                n.d(t, {
+                    _: function() {
+                        return o
+                    }
+                })
+            },
+            528: function(e, t, n) {
+                "use strict";
+
+                function r(e, t, n) {
+                    return t in e ? Object.defineProperty(e, t, {
+                        value: n,
+                        enumerable: !0,
+                        configurable: !0,
+                        writable: !0
+                    }) : e[t] = n, e
+                }
+                n.d(t, {
+                    _: function() {
+                        return r
+                    }
+                })
+            },
+            842: function(e, t, n) {
+                "use strict";
+                n.d(t, {
+                    _: function() {
+                        return o
+                    }
+                });
+                var r = n(528);
+
+                function o(e) {
+                    for (var t = 1; t < arguments.length; t++) {
+                        var n = null != arguments[t] ? arguments[t] : {},
+                            o = Object.keys(n);
+                        "function" == typeof Object.getOwnPropertySymbols && (o = o.concat(Object.getOwnPropertySymbols(n).filter(function(e) {
+                            return Object.getOwnPropertyDescriptor(n, e).enumerable
+                        }))), o.forEach(function(t) {
+                            (0, r._)(e, t, n[t])
+                        })
+                    }
+                    return e
+                }
+            },
+            807: function(e, t, n) {
+                "use strict";
+
+                function r(e, t) {
+                    return t = null != t ? t : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : (function(e) {
+                        var t = Object.keys(e);
+                        if (Object.getOwnPropertySymbols) {
+                            var n = Object.getOwnPropertySymbols(e);
+                            t.push.apply(t, n)
+                        }
+                        return t
+                    })(Object(t)).forEach(function(n) {
+                        Object.defineProperty(e, n, Object.getOwnPropertyDescriptor(t, n))
+                    }), e
+                }
+                n.d(t, {
+                    _: function() {
+                        return r
+                    }
+                })
+            },
+            246: function(e, t, n) {
+                "use strict";
+
+                function r(e, t) {
+                    if (null == e) return {};
+                    var n, r, o, i = {};
+                    if ("u" > typeof Reflect && Reflect.ownKeys) {
+                        for (o = 0, n = Reflect.ownKeys(Object(e)); o < n.length; o++) r = n[o], !(t.indexOf(r) >= 0) && Object.prototype.propertyIsEnumerable.call(e, r) && (i[r] = e[r]);
+                        return i
+                    }
+                    if (i = function(e, t) {
+                            if (null == e) return {};
+                            var n, r, o = {},
+                                i = Object.getOwnPropertyNames(e);
+                            for (r = 0; r < i.length; r++) n = i[r], !(t.indexOf(n) >= 0) && Object.prototype.propertyIsEnumerable.call(e, n) && (o[n] = e[n]);
+                            return o
+                        }(e, t), Object.getOwnPropertySymbols)
+                        for (o = 0, n = Object.getOwnPropertySymbols(e); o < n.length; o++) r = n[o], !(t.indexOf(r) >= 0) && Object.prototype.propertyIsEnumerable.call(e, r) && (i[r] = e[r]);
+                    return i
+                }
+                n.d(t, {
+                    _: function() {
+                        return r
+                    }
+                })
+            },
+            936: function(e, t, n) {
+                "use strict";
+
+                function r(e, t) {
+                    (null == t || t > e.length) && (t = e.length);
+                    for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
+                    return r
+                }
+
+                function o(e, t) {
+                    return function(e) {
+                        if (Array.isArray(e)) return e
+                    }(e) || function(e, t) {
+                        var n, r, o = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
+                        if (null != o) {
+                            var i = [],
+                                a = !0,
+                                u = !1;
+                            try {
+                                for (o = o.call(e); !(a = (n = o.next()).done) && (i.push(n.value), !t || i.length !== t); a = !0);
+                            } catch (e) {
+                                u = !0, r = e
+                            } finally {
+                                try {
+                                    a || null == o.return || o.return()
+                                } finally {
+                                    if (u) throw r
+                                }
+                            }
+                            return i
+                        }
+                    }(e, t) || function(e, t) {
+                        if (e) {
+                            if ("string" == typeof e) return r(e, t);
+                            var n = Object.prototype.toString.call(e).slice(8, -1);
+                            if ("Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n) return Array.from(n);
+                            if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return r(e, t)
+                        }
+                    }(e, t) || function() {
+                        throw TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                    }()
+                }
+                n.d(t, {
+                    _: function() {
+                        return o
+                    }
+                })
+            },
+            386: function(e, t, n) {
+                "use strict";
+
+                function r(e, t) {
+                    var n, r, o, i = {
+                            label: 0,
+                            sent: function() {
+                                if (1 & o[0]) throw o[1];
+                                return o[1]
+                            },
+                            trys: [],
+                            ops: []
+                        },
+                        a = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype),
+                        u = Object.defineProperty;
+                    return u(a, "next", {
+                        value: c(0)
+                    }), u(a, "throw", {
+                        value: c(1)
+                    }), u(a, "return", {
+                        value: c(2)
+                    }), "function" == typeof Symbol && u(a, Symbol.iterator, {
+                        value: function() {
+                            return this
+                        }
+                    }), a;
+
+                    function c(u) {
+                        return function(c) {
+                            var l = [u, c];
+                            if (n) throw TypeError("Generator is already executing.");
+                            for (; a && (a = 0, l[0] && (i = 0)), i;) try {
+                                if (n = 1, r && (o = 2 & l[0] ? r.return : l[0] ? r.throw || ((o = r.return) && o.call(r), 0) : r.next) && !(o = o.call(r, l[1])).done) return o;
+                                switch (r = 0, o && (l = [2 & l[0], o.value]), l[0]) {
+                                    case 0:
+                                    case 1:
+                                        o = l;
+                                        break;
+                                    case 4:
+                                        return i.label++, {
+                                            value: l[1],
+                                            done: !1
+                                        };
+                                    case 5:
+                                        i.label++, r = l[1], l = [0];
+                                        continue;
+                                    case 7:
+                                        l = i.ops.pop(), i.trys.pop();
+                                        continue;
+                                    default:
+                                        if (!(o = (o = i.trys).length > 0 && o[o.length - 1]) && (6 === l[0] || 2 === l[0])) {
+                                            i = 0;
+                                            continue
+                                        }
+                                        if (3 === l[0] && (!o || l[1] > o[0] && l[1] < o[3])) {
+                                            i.label = l[1];
+                                            break
+                                        }
+                                        if (6 === l[0] && i.label < o[1]) {
+                                            i.label = o[1], o = l;
+                                            break
+                                        }
+                                        if (o && i.label < o[2]) {
+                                            i.label = o[2], i.ops.push(l);
+                                            break
+                                        }
+                                        o[2] && i.ops.pop(), i.trys.pop();
+                                        continue
+                                }
+                                l = t.call(e, i)
+                            } catch (e) {
+                                l = [6, e], r = 0
+                            } finally {
+                                n = o = 0
+                            }
+                            if (5 & l[0]) throw l[1];
+                            return {
+                                value: l[0] ? l[1] : void 0,
+                                done: !0
+                            }
+                        }
+                    }
+                }
+                n.d(t, {
+                    _: function() {
+                        return r
+                    }
+                })
             },
             390: function(e) {
                 function t(e) {
@@ -312,17 +604,17 @@ function() {
                     var n = {}.hasOwnProperty;
 
                     function r() {
-                        for (var e = "", a = 0; a < arguments.length; a++) {
-                            var i = arguments[a];
-                            i && (e = o(e, function(e) {
+                        for (var e = "", i = 0; i < arguments.length; i++) {
+                            var a = arguments[i];
+                            a && (e = o(e, function(e) {
                                 if ("string" == typeof e || "number" == typeof e) return e;
                                 if ("object" !== t(e)) return "";
                                 if (Array.isArray(e)) return r.apply(null, e);
                                 if (e.toString !== Object.prototype.toString && !e.toString.toString().includes("[native code]")) return e.toString();
-                                var a = "";
-                                for (var i in e) n.call(e, i) && e[i] && (a = o(a, i));
-                                return a
-                            }(i)))
+                                var i = "";
+                                for (var a in e) n.call(e, a) && e[a] && (i = o(i, a));
+                                return i
+                            }(a)))
                         }
                         return e
                     }
@@ -342,25 +634,25 @@ function() {
                         return G
                     },
                     EX: function() {
-                        return W
+                        return J
                     },
                     F5: function() {
-                        return C
+                        return O
                     },
                     JF: function() {
-                        return I
+                        return C
                     },
                     MU: function() {
-                        return V
+                        return X
                     },
                     Mi: function() {
-                        return j
+                        return _
                     },
                     Ou: function() {
-                        return k
+                        return E
                     },
                     Pq: function() {
-                        return T
+                        return w
                     },
                     R2: function() {
                         return P
@@ -372,91 +664,91 @@ function() {
                         return B
                     },
                     SH: function() {
-                        return N
+                        return L
                     },
                     TP: function() {
-                        return _
-                    },
-                    Tm: function() {
-                        return R
-                    },
-                    Ul: function() {
                         return $
                     },
+                    Tm: function() {
+                        return z
+                    },
+                    Ul: function() {
+                        return N
+                    },
                     XC: function() {
-                        return x
+                        return A
                     },
                     cu: function() {
-                        return K
+                        return V
                     },
                     dS: function() {
-                        return J
+                        return H
                     },
                     fP: function() {
-                        return E
+                        return R
                     },
                     jZ: function() {
                         return F
                     },
                     lo: function() {
-                        return L
-                    },
-                    o0: function() {
-                        return O
-                    },
-                    qh: function() {
-                        return z
-                    },
-                    s2: function() {
-                        return M
-                    },
-                    tb: function() {
-                        return H
-                    },
-                    uS: function() {
-                        return A
-                    },
-                    wu: function() {
                         return D
                     },
+                    o0: function() {
+                        return I
+                    },
+                    qh: function() {
+                        return k
+                    },
+                    s2: function() {
+                        return q
+                    },
+                    tb: function() {
+                        return W
+                    },
+                    uS: function() {
+                        return x
+                    },
+                    wu: function() {
+                        return j
+                    },
                     x$: function() {
-                        return X
+                        return K
                     },
                     xc: function() {
-                        return q
+                        return M
                     }
                 });
-                var r, o, a, i, u, c, l, s, f, m, h, b, d, p, y, v, g, S = n(93),
-                    w = n.n(S)().thumbnailsApi,
-                    T = "".concat(w, "/v1/metadata"),
-                    O = ((r = {}).processFailure = "processFailure", r.unretriableFailure = "unretriableFailure", r.maxAttemptsReached = "maxAttemptsReached", r),
-                    I = ((o = {}).Avatar = "Avatar", o.AvatarHeadShot = "AvatarHeadShot", o.GameIcon = "GameIcon", o.BadgeIcon = "BadgeIcon", o.GameThumbnail = "GameThumbnail", o.GamePass = "GamePass", o.Asset = "Asset", o.BundleThumbnail = "BundleThumbnail", o.Outfit = "Outfit", o.GroupIcon = "GroupIcon", o.DeveloperProduct = "DeveloperProduct", o.PlaceIcon = "PlaceIcon", o.LookThumbnail = "Look", o.Screenshot = "Screenshot", o),
-                    A = ((a = {}).avatar = "Avatar", a.avatarHeadshot = "AvatarHeadshot", a.gameIcon = "GameIcon", a.gameThumbnail = "GameThumbnail", a.badgeIcon = "BadgeIcon", a.gamePassIcon = "GamePass", a.assetThumbnail = "Asset", a.bundleThumbnail = "BundleThumbnail", a.userOutfit = "Outfit", a.groupIcon = "GroupIcon", a.developerProductIcon = "DeveloperProduct", a.universeThumbnail = "UniverseThumbnail", a.universeThumbnails = "UniverseThumbnails", a.placeGameIcon = "PlaceGameIcon", a.lookThumbnail = "Look", a.screenshot = "Screenshot", a),
-                    x = 100,
-                    j = ((i = {})[i.maxRetryAttempts = 10] = "maxRetryAttempts", i[i.minCooldown = 1e3] = "minCooldown", i[i.maxCooldown = 3e4] = "maxCooldown", i),
-                    C = "150x150",
+                var r, o, i, a, u, c, l, s, f, m, d, h, b, p, v, g, y, S = n(93),
+                    T = n.n(S)().thumbnailsApi,
+                    w = "".concat(T, "/v1/metadata"),
+                    I = ((r = {}).processFailure = "processFailure", r.unretriableFailure = "unretriableFailure", r.maxAttemptsReached = "maxAttemptsReached", r),
+                    C = ((o = {}).Avatar = "Avatar", o.AvatarHeadShot = "AvatarHeadShot", o.GameIcon = "GameIcon", o.BadgeIcon = "BadgeIcon", o.GameThumbnail = "GameThumbnail", o.GamePass = "GamePass", o.Asset = "Asset", o.BundleThumbnail = "BundleThumbnail", o.Outfit = "Outfit", o.GroupIcon = "GroupIcon", o.DeveloperProduct = "DeveloperProduct", o.PlaceIcon = "PlaceIcon", o.LookThumbnail = "Look", o.Screenshot = "Screenshot", o),
+                    x = ((i = {}).avatar = "Avatar", i.avatarHeadshot = "AvatarHeadshot", i.gameIcon = "GameIcon", i.gameThumbnail = "GameThumbnail", i.badgeIcon = "BadgeIcon", i.gamePassIcon = "GamePass", i.assetThumbnail = "Asset", i.bundleThumbnail = "BundleThumbnail", i.userOutfit = "Outfit", i.groupIcon = "GroupIcon", i.developerProductIcon = "DeveloperProduct", i.universeThumbnail = "UniverseThumbnail", i.universeThumbnails = "UniverseThumbnails", i.placeGameIcon = "PlaceGameIcon", i.lookThumbnail = "Look", i.screenshot = "Screenshot", i),
+                    A = 100,
+                    _ = ((a = {})[a.maxRetryAttempts = 10] = "maxRetryAttempts", a[a.minCooldown = 1e3] = "minCooldown", a[a.maxCooldown = 3e4] = "maxCooldown", a),
+                    O = "150x150",
                     P = "webp",
-                    E = ((u = {}).size50 = "50x50", u.size150 = "150x150", u.size256 = "256x256", u.size512 = "512x512", u),
-                    k = ((c = {}).size150 = "150x150", c),
-                    R = ((l = {}).size150 = "150x150", l.size420 = "420x420", l.size700 = "700x700", l.width256 = "256x144", l.width384 = "384x216", l.width480 = "480x270", l.width576 = "576x324", l.width768 = "768x432", l.width1320 = "1320x440", l.width660 = "660x220", l.width330 = "330x110", l.width720 = "720x228", l.width930 = "930x480", l.width1440 = "1440x456", l),
-                    z = ((s = {}).size100 = "100x100", s.size352 = "352x352", s.size720 = "720x720", s),
+                    R = ((u = {}).size50 = "50x50", u.size150 = "150x150", u.size256 = "256x256", u.size512 = "512x512", u),
+                    E = ((c = {}).size150 = "150x150", c),
+                    z = ((l = {}).size150 = "150x150", l.size420 = "420x420", l.size700 = "700x700", l.width256 = "256x144", l.width384 = "384x216", l.width480 = "480x270", l.width576 = "576x324", l.width768 = "768x432", l.width1320 = "1320x440", l.width660 = "660x220", l.width330 = "330x110", l.width720 = "720x228", l.width930 = "930x480", l.width1440 = "1440x456", l),
+                    k = ((s = {}).size100 = "100x100", s.size352 = "352x352", s.size720 = "720x720", s),
                     F = ((f = {}).size48 = "48x48", f.size60 = "60x60", f.size150 = "150x150", f),
-                    D = ((m = {}).size150 = "150x150", m.size420 = "420x420", m),
-                    U = ((h = {}).size150 = "150x150", h),
-                    M = ((b = {}).size150 = "150x150", b),
-                    N = ((d = {}).width768 = "768x432", d.width576 = "576x324", d.width480 = "480x270", d.width384 = "384x216", d.width256 = "256x144", d),
-                    L = ((p = {}).width768 = "768x432", p.width576 = "576x324", p.width480 = "480x270", p.width384 = "384x216", p.width256 = "256x144", p),
-                    q = ((y = {}).error = "Error", y.complete = "Completed", y.inReview = "InReview", y.pending = "Pending", y.blocked = "Blocked", y),
-                    $ = ((v = {}).png = "png", v.jpg = "jpg", v.jpeg = "jpeg", v.webp = "webp", v),
-                    _ = ((g = {}).PlaceHolder = "PlaceHolder", g.AutoGenerated = "AutoGenerated", g.ForceAutoGenerated = "ForceAutoGenerated", g),
+                    j = ((m = {}).size150 = "150x150", m.size420 = "420x420", m),
+                    U = ((d = {}).size150 = "150x150", d),
+                    q = ((h = {}).size150 = "150x150", h),
+                    L = ((b = {}).width768 = "768x432", b.width576 = "576x324", b.width480 = "480x270", b.width384 = "384x216", b.width256 = "256x144", b),
+                    D = ((p = {}).width768 = "768x432", p.width576 = "576x324", p.width480 = "480x270", p.width384 = "384x216", p.width256 = "256x144", p),
+                    M = ((v = {}).error = "Error", v.complete = "Completed", v.inReview = "InReview", v.pending = "Pending", v.blocked = "Blocked", v),
+                    N = ((g = {}).png = "png", g.jpg = "jpg", g.jpeg = "jpeg", g.webp = "webp", g),
+                    $ = ((y = {}).PlaceHolder = "PlaceHolder", y.AutoGenerated = "AutoGenerated", y.ForceAutoGenerated = "ForceAutoGenerated", y),
                     B = "Thumbnail2DWeb",
                     G = "LoadSuccess",
-                    H = "RetryLoadSuccess",
-                    W = "RetryPerThumbnailType",
-                    J = "Sequence",
-                    K = "LoadFailure",
-                    V = "Counter",
-                    X = {
+                    W = "RetryLoadSuccess",
+                    J = "RetryPerThumbnailType",
+                    H = "Sequence",
+                    V = "LoadFailure",
+                    X = "Counter",
+                    K = {
                         thumbnailMetricsSampleSize: 10,
                         isWebappUseCacheEnabled: !1,
                         webappCacheExpirationTimespan: "00:00:00",
@@ -467,250 +759,6 @@ function() {
                         concurrentThumbnailRequestCount: 1
                     }
             },
-            9: function(e, t, n) {
-                "use strict";
-                n.d(t, {
-                    FP: function() {
-                        return f
-                    },
-                    G4: function() {
-                        return g
-                    },
-                    Kp: function() {
-                        return i
-                    },
-                    ez: function() {
-                        return y
-                    },
-                    mt: function() {
-                        return u
-                    },
-                    st: function() {
-                        return v
-                    }
-                });
-                var r = n(609);
-
-                function o(e, t) {
-                    (null == t || t > e.length) && (t = e.length);
-                    for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
-                    return r
-                }
-
-                function a(e, t, n, r, o, a, i) {
-                    try {
-                        var u = e[a](i),
-                            c = u.value
-                    } catch (e) {
-                        n(e);
-                        return
-                    }
-                    u.done ? t(c) : Promise.resolve(c).then(r, o)
-                }
-                var i = "Avatar.AvatarExperience2",
-                    u = "isAvatarBackgroundInHeadshotThumbnailsEnabled",
-                    c = "AvatarHeadshot",
-                    l = function() {
-                        var e;
-                        return null == (e = window.Roblox) ? void 0 : e.ExperimentationService
-                    },
-                    s = function() {
-                        var e, t, n = null != (e = null == (t = window.Roblox.CurrentUser) ? void 0 : t.userId) ? e : 0;
-                        return "".concat(i, "_").concat(u, "_").concat(n, "_").concat(new Date().toDateString(), "_").concat("v1")
-                    },
-                    f = function() {
-                        try {
-                            return "true" === sessionStorage.getItem(s())
-                        } catch (e) {
-                            return !1
-                        }
-                    },
-                    m = null,
-                    h = !1,
-                    b = function() {
-                        if (!h) {
-                            var e = l();
-                            e && (h = !0, e.logLayerExposure(i))
-                        }
-                    },
-                    d = function() {
-                        if (m) return m;
-                        var e, t = l();
-                        if (!t) return Promise.resolve(!1);
-                        var n = (e = function() {
-                            var e;
-                            return function(e, t) {
-                                var n, r, o, a = {
-                                        label: 0,
-                                        sent: function() {
-                                            if (1 & o[0]) throw o[1];
-                                            return o[1]
-                                        },
-                                        trys: [],
-                                        ops: []
-                                    },
-                                    i = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype),
-                                    u = Object.defineProperty;
-                                return u(i, "next", {
-                                    value: c(0)
-                                }), u(i, "throw", {
-                                    value: c(1)
-                                }), u(i, "return", {
-                                    value: c(2)
-                                }), "function" == typeof Symbol && u(i, Symbol.iterator, {
-                                    value: function() {
-                                        return this
-                                    }
-                                }), i;
-
-                                function c(u) {
-                                    return function(c) {
-                                        var l = [u, c];
-                                        if (n) throw TypeError("Generator is already executing.");
-                                        for (; i && (i = 0, l[0] && (a = 0)), a;) try {
-                                            if (n = 1, r && (o = 2 & l[0] ? r.return : l[0] ? r.throw || ((o = r.return) && o.call(r), 0) : r.next) && !(o = o.call(r, l[1])).done) return o;
-                                            switch (r = 0, o && (l = [2 & l[0], o.value]), l[0]) {
-                                                case 0:
-                                                case 1:
-                                                    o = l;
-                                                    break;
-                                                case 4:
-                                                    return a.label++, {
-                                                        value: l[1],
-                                                        done: !1
-                                                    };
-                                                case 5:
-                                                    a.label++, r = l[1], l = [0];
-                                                    continue;
-                                                case 7:
-                                                    l = a.ops.pop(), a.trys.pop();
-                                                    continue;
-                                                default:
-                                                    if (!(o = (o = a.trys).length > 0 && o[o.length - 1]) && (6 === l[0] || 2 === l[0])) {
-                                                        a = 0;
-                                                        continue
-                                                    }
-                                                    if (3 === l[0] && (!o || l[1] > o[0] && l[1] < o[3])) {
-                                                        a.label = l[1];
-                                                        break
-                                                    }
-                                                    if (6 === l[0] && a.label < o[1]) {
-                                                        a.label = o[1], o = l;
-                                                        break
-                                                    }
-                                                    if (o && a.label < o[2]) {
-                                                        a.label = o[2], a.ops.push(l);
-                                                        break
-                                                    }
-                                                    o[2] && a.ops.pop(), a.trys.pop();
-                                                    continue
-                                            }
-                                            l = t.call(e, a)
-                                        } catch (e) {
-                                            l = [6, e], r = 0
-                                        } finally {
-                                            n = o = 0
-                                        }
-                                        if (5 & l[0]) throw l[1];
-                                        return {
-                                            value: l[0] ? l[1] : void 0,
-                                            done: !0
-                                        }
-                                    }
-                                }
-                            }(this, function(n) {
-                                switch (n.label) {
-                                    case 0:
-                                        return [4, t.getAllValuesForLayer(i)];
-                                    case 1:
-                                        e = !0 === n.sent()[u];
-                                        try {
-                                            sessionStorage.setItem(s(), e.toString())
-                                        } catch (e) {}
-                                        return [2, e]
-                                }
-                            })
-                        }, function() {
-                            var t = this,
-                                n = arguments;
-                            return new Promise(function(r, o) {
-                                var i = e.apply(t, n);
-
-                                function u(e) {
-                                    a(i, r, o, u, c, "next", e)
-                                }
-
-                                function c(e) {
-                                    a(i, r, o, u, c, "throw", e)
-                                }
-                                u(void 0)
-                            })
-                        })();
-                        return n.catch(function() {
-                            m = null
-                        }), m = n, n
-                    },
-                    p = !1,
-                    y = function() {
-                        p || (p = !0, d().catch(function(e) {
-                            console.error("Failed to prefetch avatar headshot background IXP:", e)
-                        }))
-                    },
-                    v = function(e, t, n) {
-                        return !0 === t || !1 !== t && e === c && n
-                    },
-                    g = function(e) {
-                        var t, n = e === c,
-                            a = function(e) {
-                                if (Array.isArray(e)) return e
-                            }(t = (0, r.useState)(function() {
-                                return !!n && f()
-                            })) || function(e) {
-                                var t, n, r = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
-                                if (null != r) {
-                                    var o = [],
-                                        a = !0,
-                                        i = !1;
-                                    try {
-                                        for (r = r.call(e); !(a = (t = r.next()).done) && (o.push(t.value), 2 !== o.length); a = !0);
-                                    } catch (e) {
-                                        i = !0, n = e
-                                    } finally {
-                                        try {
-                                            a || null == r.return || r.return()
-                                        } finally {
-                                            if (i) throw n
-                                        }
-                                    }
-                                    return o
-                                }
-                            }(t) || function(e) {
-                                if (e) {
-                                    if ("string" == typeof e) return o(e, 2);
-                                    var t = Object.prototype.toString.call(e).slice(8, -1);
-                                    if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                    if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return o(e, 2)
-                                }
-                            }(t) || function() {
-                                throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
-                            }(),
-                            i = a[0],
-                            u = a[1];
-                        return (0, r.useEffect)(function() {
-                            if (n) {
-                                var e = !0;
-                                return d().then(function(t) {
-                                        e && (u(t), b())
-                                    }).catch(function(e) {
-                                        console.error("Failed to load avatar headshot background IXP:", e)
-                                    }),
-                                    function() {
-                                        e = !1
-                                    }
-                            }
-                        }, [n]), i
-                    }
-            },
             932: function(e, t, n) {
                 "use strict";
                 n.d(t, {
@@ -718,377 +766,84 @@ function() {
                         return I
                     }
                 });
-                var r = n(971),
-                    o = n.n(r),
-                    a = n(93),
-                    i = n.n(a)().beaconApi,
-                    u = function(e) {
+                var r = n(839),
+                    o = n(842),
+                    i = n(246),
+                    a = n(386),
+                    u = n(971),
+                    c = n.n(u),
+                    l = n(93),
+                    s = n.n(l)().beaconApi,
+                    f = function(e) {
                         if (!e) return 0;
                         var t, n, r, o = e.split(":");
                         return (60 * parseInt(null != (t = o[0]) ? t : "", 10) * 60 + 60 * parseInt(null != (n = o[1]) ? n : "", 10) + parseInt(null != (r = o[2]) ? r : "", 10)) * 1e3
                     },
-                    c = window.Roblox["core-scripts"].auth.xsrfToken;
-
-                function l(e, t, n, r, o, a, i) {
-                    try {
-                        var u = e[a](i),
-                            c = u.value
-                    } catch (e) {
-                        n(e);
-                        return
-                    }
-                    u.done ? t(c) : Promise.resolve(c).then(r, o)
-                }
-
-                function s(e, t, n) {
-                    return t in e ? Object.defineProperty(e, t, {
-                        value: n,
-                        enumerable: !0,
-                        configurable: !0,
-                        writable: !0
-                    }) : e[t] = n, e
-                }
-
-                function f(e) {
-                    for (var t = 1; t < arguments.length; t++) {
-                        var n = null != arguments[t] ? arguments[t] : {},
-                            r = Object.keys(n);
-                        "function" == typeof Object.getOwnPropertySymbols && (r = r.concat(Object.getOwnPropertySymbols(n).filter(function(e) {
-                            return Object.getOwnPropertyDescriptor(n, e).enumerable
-                        }))), r.forEach(function(t) {
-                            s(e, t, n[t])
-                        })
-                    }
-                    return e
-                }
-
-                function m(e, t) {
-                    return t = null != t ? t : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : (function(e) {
-                        var t = Object.keys(e);
-                        if (Object.getOwnPropertySymbols) {
-                            var n = Object.getOwnPropertySymbols(e);
-                            t.push.apply(t, n)
-                        }
-                        return t
-                    })(Object(t)).forEach(function(n) {
-                        Object.defineProperty(e, n, Object.getOwnPropertyDescriptor(t, n))
-                    }), e
-                }
-                var h = "X-CSRF-TOKEN",
-                    b = function(e, t) {
-                        var n = (0, c.getToken)(),
+                    m = n(528),
+                    d = n(807),
+                    h = window.Roblox["core-scripts"].auth.xsrfToken,
+                    b = "X-CSRF-TOKEN",
+                    p = function(e, t) {
+                        var n = (0, h.getToken)(),
                             r = null != t ? t : {},
-                            o = r.headers,
-                            a = function(e, t) {
-                                if (null == e) return {};
-                                var n, r, o, a = {};
-                                if ("u" > typeof Reflect && Reflect.ownKeys) {
-                                    for (o = 0, n = Reflect.ownKeys(Object(e)); o < n.length; o++) r = n[o], !(t.indexOf(r) >= 0) && Object.prototype.propertyIsEnumerable.call(e, r) && (a[r] = e[r]);
-                                    return a
-                                }
-                                if (a = function(e, t) {
-                                        if (null == e) return {};
-                                        var n, r, o = {},
-                                            a = Object.getOwnPropertyNames(e);
-                                        for (r = 0; r < a.length; r++) n = a[r], !(t.indexOf(n) >= 0) && Object.prototype.propertyIsEnumerable.call(e, n) && (o[n] = e[n]);
-                                        return o
-                                    }(e, t), Object.getOwnPropertySymbols)
-                                    for (o = 0, n = Object.getOwnPropertySymbols(e); o < n.length; o++) r = n[o], !(t.indexOf(r) >= 0) && Object.prototype.propertyIsEnumerable.call(e, r) && (a[r] = e[r]);
-                                return a
-                            }(r, ["headers"]),
-                            i = m(f({}, Object.fromEntries(new Headers(o))), s({}, h, n));
-                        return fetch(e, m(f({}, a), {
-                            headers: i
+                            a = r.headers,
+                            u = (0, i._)(r, ["headers"]),
+                            c = (0, d._)((0, o._)({}, Object.fromEntries(new Headers(a))), (0, m._)({}, b, n));
+                        return fetch(e, (0, d._)((0, o._)({}, u), {
+                            headers: c
                         }))
                     },
-                    d = function(e, t) {
-                        var n;
-                        return (n = function() {
-                            var n, r;
-                            return function(e, t) {
-                                var n, r, o, a = {
-                                        label: 0,
-                                        sent: function() {
-                                            if (1 & o[0]) throw o[1];
-                                            return o[1]
-                                        },
-                                        trys: [],
-                                        ops: []
-                                    },
-                                    i = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype),
-                                    u = Object.defineProperty;
-                                return u(i, "next", {
-                                    value: c(0)
-                                }), u(i, "throw", {
-                                    value: c(1)
-                                }), u(i, "return", {
-                                    value: c(2)
-                                }), "function" == typeof Symbol && u(i, Symbol.iterator, {
-                                    value: function() {
-                                        return this
-                                    }
-                                }), i;
-
-                                function c(u) {
-                                    return function(c) {
-                                        var l = [u, c];
-                                        if (n) throw TypeError("Generator is already executing.");
-                                        for (; i && (i = 0, l[0] && (a = 0)), a;) try {
-                                            if (n = 1, r && (o = 2 & l[0] ? r.return : l[0] ? r.throw || ((o = r.return) && o.call(r), 0) : r.next) && !(o = o.call(r, l[1])).done) return o;
-                                            switch (r = 0, o && (l = [2 & l[0], o.value]), l[0]) {
-                                                case 0:
-                                                case 1:
-                                                    o = l;
-                                                    break;
-                                                case 4:
-                                                    return a.label++, {
-                                                        value: l[1],
-                                                        done: !1
-                                                    };
-                                                case 5:
-                                                    a.label++, r = l[1], l = [0];
-                                                    continue;
-                                                case 7:
-                                                    l = a.ops.pop(), a.trys.pop();
-                                                    continue;
-                                                default:
-                                                    if (!(o = (o = a.trys).length > 0 && o[o.length - 1]) && (6 === l[0] || 2 === l[0])) {
-                                                        a = 0;
-                                                        continue
-                                                    }
-                                                    if (3 === l[0] && (!o || l[1] > o[0] && l[1] < o[3])) {
-                                                        a.label = l[1];
-                                                        break
-                                                    }
-                                                    if (6 === l[0] && a.label < o[1]) {
-                                                        a.label = o[1], o = l;
-                                                        break
-                                                    }
-                                                    if (o && a.label < o[2]) {
-                                                        a.label = o[2], a.ops.push(l);
-                                                        break
-                                                    }
-                                                    o[2] && a.ops.pop(), a.trys.pop();
-                                                    continue
-                                            }
-                                            l = t.call(e, a)
-                                        } catch (e) {
-                                            l = [6, e], r = 0
-                                        } finally {
-                                            n = o = 0
-                                        }
-                                        if (5 & l[0]) throw l[1];
-                                        return {
-                                            value: l[0] ? l[1] : void 0,
-                                            done: !0
-                                        }
-                                    }
-                                }
-                            }(this, function(o) {
-                                switch (o.label) {
-                                    case 0:
-                                        return [4, b(e, t)];
-                                    case 1:
-                                        if (403 !== (n = o.sent()).status || !(r = n.headers.get(h))) return [3, 3];
-                                        return (0, c.setToken)(r), [4, b(e, t)];
-                                    case 2:
-                                        n = o.sent(), o.label = 3;
-                                    case 3:
-                                        return [2, n]
-                                }
-                            })
-                        }, function() {
-                            var e = this,
-                                t = arguments;
-                            return new Promise(function(r, o) {
-                                var a = n.apply(e, t);
-
-                                function i(e) {
-                                    l(a, r, o, i, u, "next", e)
-                                }
-
-                                function u(e) {
-                                    l(a, r, o, i, u, "throw", e)
-                                }
-                                i(void 0)
-                            })
-                        })()
-                    };
-
-                function p(e, t, n, r, o, a, i) {
-                    try {
-                        var u = e[a](i),
-                            c = u.value
-                    } catch (e) {
-                        n(e);
-                        return
-                    }
-                    u.done ? t(c) : Promise.resolve(c).then(r, o)
-                }
-
-                function y(e) {
-                    for (var t = 1; t < arguments.length; t++) {
-                        var n = null != arguments[t] ? arguments[t] : {},
-                            r = Object.keys(n);
-                        "function" == typeof Object.getOwnPropertySymbols && (r = r.concat(Object.getOwnPropertySymbols(n).filter(function(e) {
-                            return Object.getOwnPropertyDescriptor(n, e).enumerable
-                        }))), r.forEach(function(t) {
-                            var r;
-                            r = n[t], t in e ? Object.defineProperty(e, t, {
-                                value: r,
-                                enumerable: !0,
-                                configurable: !0,
-                                writable: !0
-                            }) : e[t] = r
-                        })
-                    }
-                    return e
-                }
-                var v = new(o()),
+                    v = new(c()),
                     g = 0,
-                    S = function() {
+                    y = function() {
                         if ("u" < typeof document) return {};
                         var e, t = document.getElementsByName("performance")[0];
                         return t ? {
-                            performanceMetricsBatchWaitTime: u(t.getAttribute("data-ui-performance-metrics-batch-wait-time")),
+                            performanceMetricsBatchWaitTime: f(t.getAttribute("data-ui-performance-metrics-batch-wait-time")),
                             performanceMetricsBatchSize: parseInt(null != (e = t.getAttribute("data-ui-performance-metrics-batch-size")) ? e : "", 10)
                         } : {}
                     }(),
-                    w = S.performanceMetricsBatchWaitTime,
-                    T = S.performanceMetricsBatchSize,
-                    O = v.createRequestProcessor(function(e) {
-                        var t;
-                        return (t = function() {
+                    S = y.performanceMetricsBatchWaitTime,
+                    T = y.performanceMetricsBatchSize,
+                    w = v.createRequestProcessor(function(e) {
+                        return (0, r._)(function() {
                             var t, n;
-                            return function(e, t) {
-                                var n, r, o, a = {
-                                        label: 0,
-                                        sent: function() {
-                                            if (1 & o[0]) throw o[1];
-                                            return o[1]
-                                        },
-                                        trys: [],
-                                        ops: []
-                                    },
-                                    i = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype),
-                                    u = Object.defineProperty;
-                                return u(i, "next", {
-                                    value: c(0)
-                                }), u(i, "throw", {
-                                    value: c(1)
-                                }), u(i, "return", {
-                                    value: c(2)
-                                }), "function" == typeof Symbol && u(i, Symbol.iterator, {
-                                    value: function() {
-                                        return this
-                                    }
-                                }), i;
-
-                                function c(u) {
-                                    return function(c) {
-                                        var l = [u, c];
-                                        if (n) throw TypeError("Generator is already executing.");
-                                        for (; i && (i = 0, l[0] && (a = 0)), a;) try {
-                                            if (n = 1, r && (o = 2 & l[0] ? r.return : l[0] ? r.throw || ((o = r.return) && o.call(r), 0) : r.next) && !(o = o.call(r, l[1])).done) return o;
-                                            switch (r = 0, o && (l = [2 & l[0], o.value]), l[0]) {
-                                                case 0:
-                                                case 1:
-                                                    o = l;
-                                                    break;
-                                                case 4:
-                                                    return a.label++, {
-                                                        value: l[1],
-                                                        done: !1
-                                                    };
-                                                case 5:
-                                                    a.label++, r = l[1], l = [0];
-                                                    continue;
-                                                case 7:
-                                                    l = a.ops.pop(), a.trys.pop();
-                                                    continue;
-                                                default:
-                                                    if (!(o = (o = a.trys).length > 0 && o[o.length - 1]) && (6 === l[0] || 2 === l[0])) {
-                                                        a = 0;
-                                                        continue
-                                                    }
-                                                    if (3 === l[0] && (!o || l[1] > o[0] && l[1] < o[3])) {
-                                                        a.label = l[1];
-                                                        break
-                                                    }
-                                                    if (6 === l[0] && a.label < o[1]) {
-                                                        a.label = o[1], o = l;
-                                                        break
-                                                    }
-                                                    if (o && a.label < o[2]) {
-                                                        a.label = o[2], a.ops.push(l);
-                                                        break
-                                                    }
-                                                    o[2] && a.ops.pop(), a.trys.pop();
-                                                    continue
-                                            }
-                                            l = t.call(e, a)
-                                        } catch (e) {
-                                            l = [6, e], r = 0
-                                        } finally {
-                                            n = o = 0
-                                        }
-                                        if (5 & l[0]) throw l[1];
-                                        return {
-                                            value: l[0] ? l[1] : void 0,
-                                            done: !0
-                                        }
-                                    }
-                                }
-                            }(this, function(r) {
-                                switch (r.label) {
+                            return (0, a._)(this, function(u) {
+                                switch (u.label) {
                                     case 0:
+                                        var c, l;
                                         return t = e.map(function(e) {
-                                            var t = e.data;
-                                            return y({}, (t.taskId, function(e, t) {
-                                                if (null == e) return {};
-                                                var n, r, o, a = {};
-                                                if ("u" > typeof Reflect && Reflect.ownKeys) {
-                                                    for (o = 0, n = Reflect.ownKeys(Object(e)); o < n.length; o++) r = n[o], !(t.indexOf(r) >= 0) && Object.prototype.propertyIsEnumerable.call(e, r) && (a[r] = e[r]);
-                                                    return a
-                                                }
-                                                if (a = function(e, t) {
-                                                        if (null == e) return {};
-                                                        var n, r, o = {},
-                                                            a = Object.getOwnPropertyNames(e);
-                                                        for (r = 0; r < a.length; r++) n = a[r], !(t.indexOf(n) >= 0) && Object.prototype.propertyIsEnumerable.call(e, n) && (o[n] = e[n]);
-                                                        return o
-                                                    }(e, t), Object.getOwnPropertySymbols)
-                                                    for (o = 0, n = Object.getOwnPropertySymbols(e); o < n.length; o++) r = n[o], !(t.indexOf(r) >= 0) && Object.prototype.propertyIsEnumerable.call(e, r) && (a[r] = e[r]);
-                                                return a
-                                            }(t, ["taskId"])))
-                                        }), [4, d("".concat(i, "/v1/measurements"), {
+                                            var t = e.data,
+                                                n = (t.taskId, (0, i._)(t, ["taskId"]));
+                                            return (0, o._)({}, n)
+                                        }), [4, (c = "".concat(s, "/v1/measurements"), l = {
                                             method: "POST",
                                             headers: {
                                                 "Content-Type": "application/json"
                                             },
                                             keepalive: !0,
                                             body: JSON.stringify(t)
-                                        })];
+                                        }, (0, r._)(function() {
+                                            var e, t;
+                                            return (0, a._)(this, function(n) {
+                                                switch (n.label) {
+                                                    case 0:
+                                                        return [4, p(c, l)];
+                                                    case 1:
+                                                        if (403 !== (e = n.sent()).status || !(t = e.headers.get(b))) return [3, 3];
+                                                        return (0, h.setToken)(t), [4, p(c, l)];
+                                                    case 2:
+                                                        e = n.sent(), n.label = 3;
+                                                    case 3:
+                                                        return [2, e]
+                                                }
+                                            })
+                                        })())];
                                     case 1:
-                                        return r.sent(), n = {}, e.forEach(function(e) {
+                                        return u.sent(), n = {}, e.forEach(function(e) {
                                             n[e.key] = !0
                                         }), [2, n]
                                 }
-                            })
-                        }, function() {
-                            var e = this,
-                                n = arguments;
-                            return new Promise(function(r, o) {
-                                var a = t.apply(e, n);
-
-                                function i(e) {
-                                    p(a, r, o, i, u, "next", e)
-                                }
-
-                                function u(e) {
-                                    p(a, r, o, i, u, "throw", e)
-                                }
-                                i(void 0)
                             })
                         })()
                     }, function(e) {
@@ -1098,7 +853,7 @@ function() {
                         getFailureCooldown: v.createExponentialBackoffCooldown(1e3, 3e3),
                         maxRetryAttempts: 5,
                         batchSize: null != T ? T : 100,
-                        processBatchWaitTime: null != w ? w : 1e3
+                        processBatchWaitTime: null != S ? S : 1e3
                     }),
                     I = function(e, t) {
                         var n = g;
@@ -1107,7 +862,7 @@ function() {
                             metricName: e,
                             jsonData: JSON.stringify(t)
                         };
-                        return O.queueItem(y({
+                        return w.queueItem((0, o._)({
                             taskId: n
                         }, r))
                     }
@@ -1119,44 +874,45 @@ function() {
                         return h
                     },
                     getThumbnailImage: function() {
-                        return f
+                        return m
                     },
                     peekThumbnailImage: function() {
                         return b
                     },
                     reloadThumbnailImage: function() {
-                        return m
+                        return d
                     }
                 });
-                var r, o = n(95),
-                    a = n(229),
-                    i = n(9),
-                    u = n(954),
-                    c = new Map,
-                    l = function(e, t, n, r, o, a, i, u) {
+                var r, o = n(842),
+                    i = n(349),
+                    a = n(95),
+                    u = n(229),
+                    c = n(954),
+                    l = new Map,
+                    s = function(e, t, n, r, o, i, a, u) {
                         var c = arguments.length > 8 && void 0 !== arguments[8] && arguments[8];
-                        return [e, t, n, null != r ? r : "", null != o ? o : "", null != a ? a : "", null != i ? i : "", u ? "bg" : "", c ? "frame" : ""].join(":")
+                        return [e, t, n, null != r ? r : "", null != o ? o : "", null != i ? i : "", null != a ? a : "", u ? "bg" : "", c ? "frame" : ""].join(":")
                     },
-                    s = function(e, t) {
-                        var n, s = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : u.Ul.webp,
-                            f = arguments.length > 3 ? arguments[3] : void 0,
-                            m = arguments.length > 4 ? arguments[4] : void 0,
+                    f = function(e, t) {
+                        var n, f = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : c.Ul.webp,
+                            m = arguments.length > 3 ? arguments[3] : void 0,
+                            d = arguments.length > 4 ? arguments[4] : void 0,
                             h = arguments.length > 5 ? arguments[5] : void 0,
                             b = arguments.length > 6 ? arguments[6] : void 0,
-                            d = arguments.length > 7 ? arguments[7] : void 0,
-                            p = arguments.length > 8 ? arguments[8] : void 0,
-                            y = arguments.length > 9 && void 0 !== arguments[9] && arguments[9];
-                        if (!f && !m) return new Promise(function(e, t) {
+                            p = arguments.length > 7 ? arguments[7] : void 0,
+                            v = arguments.length > 8 ? arguments[8] : void 0,
+                            g = arguments.length > 9 && void 0 !== arguments[9] && arguments[9];
+                        if (!m && !d) return new Promise(function(e, t) {
                             t(Error("TargetId or token can not be empty."))
                         });
                         if (!e) return new Promise(function(e, t) {
                             t(Error("ThumbnailType can not be empty."))
                         });
-                        null != s || (s = u.Ul.webp);
-                        var v = s;
-                        (e === u.uS.gameIcon || e === u.uS.gameThumbnail || e === u.uS.placeGameIcon || e === u.uS.universeThumbnail) && (v = u.Ul.webp), e === u.uS.avatarHeadshot && void 0 === p && (0, i.ez)();
-                        var g = (0, i.st)(e, p, (0, i.FP)());
-                        return ((n = v) !== u.Ul.webp ? Promise.resolve(n) : (void 0 === r && (r = new Promise(function(e) {
+                        null != f || (f = c.Ul.webp);
+                        var y = f;
+                        (e === c.uS.gameIcon || e === c.uS.gameThumbnail || e === c.uS.placeGameIcon || e === c.uS.universeThumbnail) && (y = c.Ul.webp);
+                        var S = (0, i.f)(e, v);
+                        return ((n = y) !== c.Ul.webp ? Promise.resolve(n) : (void 0 === r && (r = new Promise(function(e) {
                             try {
                                 var t = new Image;
                                 t.onload = function() {
@@ -1168,214 +924,148 @@ function() {
                                 e(!0)
                             }
                         })), r).then(function(e) {
-                            return e ? u.Ul.webp : u.Ul.png
+                            return e ? c.Ul.webp : c.Ul.png
                         })).then(function(n) {
-                            var r = function(e) {
-                                    for (var t = 1; t < arguments.length; t++) {
-                                        var n = null != arguments[t] ? arguments[t] : {},
-                                            r = Object.keys(n);
-                                        "function" == typeof Object.getOwnPropertySymbols && (r = r.concat(Object.getOwnPropertySymbols(n).filter(function(e) {
-                                            return Object.getOwnPropertyDescriptor(n, e).enumerable
-                                        }))), r.forEach(function(t) {
-                                            var r;
-                                            r = n[t], t in e ? Object.defineProperty(e, t, {
-                                                value: r,
-                                                enumerable: !0,
-                                                configurable: !0,
-                                                writable: !0
-                                            }) : e[t] = r
-                                        })
-                                    }
-                                    return e
-                                }({
-                                    targetId: f,
-                                    token: m,
+                            var r = (0, o._)({
+                                    targetId: m,
+                                    token: d,
                                     type: e,
                                     format: n,
                                     size: t,
                                     version: b,
-                                    headShape: d
-                                }, g ? {
+                                    headShape: p
+                                }, S ? {
                                     includeBackground: !0
-                                } : {}, e === u.uS.avatarHeadshot ? {
-                                    includeProfileFrame: y
+                                } : {}, e === c.uS.avatarHeadshot ? {
+                                    includeProfileFrame: g
                                 } : {}),
-                                i = [u.uS.universeThumbnails, u.uS.universeThumbnail].includes(e) ? "universeThumbnailProcessor" : "thumbnail2dProcessor";
-                            return o.W8.processThumbnailBatchRequest(r, function(t) {
-                                return e === u.uS.universeThumbnail ? a.yB.handle(t, 1) : e === u.uS.universeThumbnails ? a.yB.handle(t, 10) : a.u_.handle(t)
+                                i = [c.uS.universeThumbnails, c.uS.universeThumbnail].includes(e) ? "universeThumbnailProcessor" : "thumbnail2dProcessor";
+                            return a.W8.processThumbnailBatchRequest(r, function(t) {
+                                return e === c.uS.universeThumbnail ? u.yB.handle(t, 1) : e === c.uS.universeThumbnails ? u.yB.handle(t, 10) : u.u_.handle(t)
                             }, i, h).then(function(n) {
                                 var r = null == n ? void 0 : n.thumbnail;
-                                return (null == r ? void 0 : r.state) === u.xc.complete && r.imageUrl && c.set(l(e, t, s, f, m, b, d, p, y), {
+                                return (null == r ? void 0 : r.state) === c.xc.complete && r.imageUrl && l.set(s(e, t, f, m, d, b, p, S, g), {
                                     state: r.state,
                                     imageUrl: r.imageUrl
                                 }), n
                             })
                         })
                     },
-                    f = function(e, t) {
-                        var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : u.Ul.webp,
-                            r = arguments.length > 3 ? arguments[3] : void 0,
-                            o = arguments.length > 4 ? arguments[4] : void 0,
-                            a = arguments.length > 5 ? arguments[5] : void 0,
-                            i = arguments.length > 6 ? arguments[6] : void 0,
-                            c = arguments.length > 7 ? arguments[7] : void 0,
-                            l = arguments.length > 8 && void 0 !== arguments[8] && arguments[8];
-                        return s(e, t, n, r, o, !1, a, i, c, l)
-                    },
                     m = function(e, t) {
-                        var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : u.Ul.webp,
+                        var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : c.Ul.webp,
                             r = arguments.length > 3 ? arguments[3] : void 0,
                             o = arguments.length > 4 ? arguments[4] : void 0,
-                            a = arguments.length > 5 ? arguments[5] : void 0,
-                            i = arguments.length > 6 ? arguments[6] : void 0,
-                            c = arguments.length > 7 ? arguments[7] : void 0,
+                            i = arguments.length > 5 ? arguments[5] : void 0,
+                            a = arguments.length > 6 ? arguments[6] : void 0,
+                            u = arguments.length > 7 ? arguments[7] : void 0,
                             l = arguments.length > 8 && void 0 !== arguments[8] && arguments[8];
-                        return s(e, t, n, r, o, !0, a, i, c, l)
+                        return f(e, t, n, r, o, !1, i, a, u, l)
+                    },
+                    d = function(e, t) {
+                        var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : c.Ul.webp,
+                            r = arguments.length > 3 ? arguments[3] : void 0,
+                            o = arguments.length > 4 ? arguments[4] : void 0,
+                            i = arguments.length > 5 ? arguments[5] : void 0,
+                            a = arguments.length > 6 ? arguments[6] : void 0,
+                            u = arguments.length > 7 ? arguments[7] : void 0,
+                            l = arguments.length > 8 && void 0 !== arguments[8] && arguments[8];
+                        return f(e, t, n, r, o, !0, i, a, u, l)
                     },
                     h = function(e) {
                         return {
-                            "icon-broken": e === u.xc.error,
-                            "icon-in-review": e === u.xc.inReview,
-                            "icon-blocked": e === u.xc.blocked,
-                            "icon-pending": e === u.xc.pending
+                            "icon-broken": e === c.xc.error,
+                            "icon-in-review": e === c.xc.inReview,
+                            "icon-blocked": e === c.xc.blocked,
+                            "icon-pending": e === c.xc.pending
                         }
                     },
                     b = function(e, t) {
-                        var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : u.Ul.webp,
+                        var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : c.Ul.webp,
                             r = arguments.length > 3 ? arguments[3] : void 0,
                             o = arguments.length > 4 ? arguments[4] : void 0,
-                            a = arguments.length > 5 ? arguments[5] : void 0,
-                            i = arguments.length > 6 ? arguments[6] : void 0,
-                            s = arguments.length > 7 ? arguments[7] : void 0,
+                            i = arguments.length > 5 ? arguments[5] : void 0,
+                            a = arguments.length > 6 ? arguments[6] : void 0,
+                            u = arguments.length > 7 ? arguments[7] : void 0,
                             f = arguments.length > 8 && void 0 !== arguments[8] && arguments[8];
-                        return c.get(l(e, t, n, r, o, a, i, s, f))
+                        return l.get(s(e, t, n, r, o, i, a, u, f))
                     }
             },
             229: function(e, t, n) {
                 "use strict";
                 n.d(t, {
                     u_: function() {
-                        return m
+                        return p
                     },
                     XY: function() {
-                        return f
+                        return b
                     },
                     yB: function() {
-                        return h
+                        return v
                     }
                 });
-                var r = window.Roblox["core-scripts"].dataStore,
-                    o = n.n(r),
-                    a = n(803),
-                    i = n(954);
-
-                function u(e, t, n) {
-                    return t in e ? Object.defineProperty(e, t, {
-                        value: n,
-                        enumerable: !0,
-                        configurable: !0,
-                        writable: !0
-                    }) : e[t] = n, e
-                }
-
-                function c(e) {
-                    for (var t = 1; t < arguments.length; t++) {
-                        var n = null != arguments[t] ? arguments[t] : {},
-                            r = Object.keys(n);
-                        "function" == typeof Object.getOwnPropertySymbols && (r = r.concat(Object.getOwnPropertySymbols(n).filter(function(e) {
-                            return Object.getOwnPropertyDescriptor(n, e).enumerable
-                        }))), r.forEach(function(t) {
-                            u(e, t, n[t])
-                        })
-                    }
-                    return e
-                }
-                var l = o().thumbnailsDataStore,
-                    s = o().gameThumbnailsDataStore,
-                    f = function() {
-                        var e;
-
-                        function t(e, n, r, o, a) {
-                            if (!(this instanceof t)) throw TypeError("Cannot call a class as a function");
-                            u(this, "storeInstance", void 0), u(this, "keySetter", void 0), u(this, "keyGetter", void 0), u(this, "validator", void 0), u(this, "resultSetter", void 0), this.storeInstance = e, this.keySetter = n, this.keyGetter = r, this.validator = o, this.resultSetter = a
+                var r = n(474),
+                    o = n(374),
+                    i = n(528),
+                    a = n(842),
+                    u = n(807),
+                    c = n(246),
+                    l = window.Roblox["core-scripts"].dataStore,
+                    s = n.n(l),
+                    f = n(803),
+                    m = n(954),
+                    d = s().thumbnailsDataStore,
+                    h = s().gameThumbnailsDataStore,
+                    b = function() {
+                        function e(t, n, o, a, u) {
+                            (0, r._)(this, e), (0, i._)(this, "storeInstance", void 0), (0, i._)(this, "keySetter", void 0), (0, i._)(this, "keyGetter", void 0), (0, i._)(this, "validator", void 0), (0, i._)(this, "resultSetter", void 0), this.storeInstance = t, this.keySetter = n, this.keyGetter = o, this.validator = a, this.resultSetter = u
                         }
-                        return e = [{
-                                key: "handle",
-                                value: function(e, t) {
-                                    var n = this;
-                                    return new Promise(function(r) {
-                                        n.storeInstance(e, t).then(function(o) {
-                                            var a, u, l = new Map,
-                                                s = {};
-                                            (null != (a = null == o || null == (u = o.data) ? void 0 : u.data) ? a : []).forEach(function(e) {
-                                                l.set(n.keySetter(e), e)
-                                            }), e.forEach(function(e) {
-                                                var r, o, a, u = n.keyGetter(e);
-                                                if (l.has(u)) {
-                                                    var f = l.get(u);
-                                                    f && n.validator(f) && (s[u] = n.resultSetter(f, t))
-                                                } else a = t && t > 1 ? {
-                                                    thumbnails: []
-                                                } : {
-                                                    thumbnail: {
-                                                        targetId: u,
-                                                        state: i.xc.error
-                                                    }
-                                                }, s[u] = (r = c({}, a), o = o = {
-                                                    errorcode: 3,
-                                                    errorMessage: "id doesn't exist"
-                                                }, Object.getOwnPropertyDescriptors ? Object.defineProperties(r, Object.getOwnPropertyDescriptors(o)) : (function(e) {
-                                                    var t = Object.keys(e);
-                                                    if (Object.getOwnPropertySymbols) {
-                                                        var n = Object.getOwnPropertySymbols(e);
-                                                        t.push.apply(t, n)
-                                                    }
-                                                    return t
-                                                })(Object(o)).forEach(function(e) {
-                                                    Object.defineProperty(r, e, Object.getOwnPropertyDescriptor(o, e))
-                                                }), r)
-                                            }), r(s)
-                                        }).catch(function(e) {
-                                            (null == e ? void 0 : e.status) !== 503 && r({})
-                                        })
+                        return (0, o._)(e, [{
+                            key: "handle",
+                            value: function(e, t) {
+                                var n = this;
+                                return new Promise(function(r) {
+                                    n.storeInstance(e, t).then(function(o) {
+                                        var i, c, l = new Map,
+                                            s = {};
+                                        (null != (i = null == o || null == (c = o.data) ? void 0 : c.data) ? i : []).forEach(function(e) {
+                                            l.set(n.keySetter(e), e)
+                                        }), e.forEach(function(e) {
+                                            var r, o = n.keyGetter(e);
+                                            if (l.has(o)) {
+                                                var i = l.get(o);
+                                                i && n.validator(i) && (s[o] = n.resultSetter(i, t))
+                                            } else r = t && t > 1 ? {
+                                                thumbnails: []
+                                            } : {
+                                                thumbnail: {
+                                                    targetId: o,
+                                                    state: m.xc.error
+                                                }
+                                            }, s[o] = (0, u._)((0, a._)({}, r), {
+                                                errorcode: 3,
+                                                errorMessage: "id doesn't exist"
+                                            })
+                                        }), r(s)
+                                    }).catch(function(e) {
+                                        (null == e ? void 0 : e.status) !== 503 && r({})
                                     })
-                                }
-                            }],
-                            function(e, t) {
-                                for (var n = 0; n < t.length; n++) {
-                                    var r = t[n];
-                                    r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r)
-                                }
-                            }(t.prototype, e), t
+                                })
+                            }
+                        }]), e
                     }(),
-                    m = new f(function(e) {
+                    p = new b(function(e) {
                         var t = e.map(function(e) {
                             var t = e.data,
                                 n = t.type,
-                                r = function(e, t) {
-                                    if (null == e) return {};
-                                    var n, r, o, a = {};
-                                    if ("u" > typeof Reflect && Reflect.ownKeys) {
-                                        for (o = 0, n = Reflect.ownKeys(Object(e)); o < n.length; o++) r = n[o], !(t.indexOf(r) >= 0) && Object.prototype.propertyIsEnumerable.call(e, r) && (a[r] = e[r]);
-                                        return a
-                                    }
-                                    if (a = function(e, t) {
-                                            if (null == e) return {};
-                                            var n, r, o = {},
-                                                a = Object.getOwnPropertyNames(e);
-                                            for (r = 0; r < a.length; r++) n = a[r], !(t.indexOf(n) >= 0) && Object.prototype.propertyIsEnumerable.call(e, n) && (o[n] = e[n]);
-                                            return o
-                                        }(e, t), Object.getOwnPropertySymbols)
-                                        for (o = 0, n = Object.getOwnPropertySymbols(e); o < n.length; o++) r = n[o], !(t.indexOf(r) >= 0) && Object.prototype.propertyIsEnumerable.call(e, r) && (a[r] = e[r]);
-                                    return a
-                                }(t, ["type"]);
-                            return c({
-                                requestId: e.key,
-                                type: (0, a.JS)(n)
+                                r = (0, c._)(t, ["type"]),
+                                o = e.key;
+                            return (0, a._)({
+                                requestId: o,
+                                type: (0, f.JS)(n)
                             }, r)
                         });
                         return new Promise(function(e, n) {
-                            l.getBatchThumbnails(t).then(e).catch(n)
+                            d.getBatchThumbnails(t).then(e).catch(n)
                         })
                     }, function(e) {
                         var t;
@@ -1383,19 +1073,19 @@ function() {
                     }, function(e) {
                         return e.key
                     }, function(e) {
-                        return e.state !== i.xc.pending
+                        return e.state !== m.xc.pending
                     }, function(e) {
                         return {
                             thumbnail: e
                         }
                     }),
-                    h = new f(function(e, t) {
+                    v = new b(function(e, t) {
                         return new Promise(function(n, r) {
-                            var o, a, i;
-                            s.getAllUniverseThumbnails(e.map(function(e) {
+                            var o, i, a;
+                            h.getAllUniverseThumbnails(e.map(function(e) {
                                 var t = e.data.targetId;
                                 return null != t ? t : 0
-                            }), null == (o = e[0]) ? void 0 : o.data.size, null == (a = e[0]) ? void 0 : a.data.format, null == (i = e[0]) ? void 0 : i.data.isCircular, t).then(n).catch(r)
+                            }), null == (o = e[0]) ? void 0 : o.data.size, null == (i = e[0]) ? void 0 : i.data.format, null == (a = e[0]) ? void 0 : a.data.isCircular, t).then(n).catch(r)
                         })
                     }, function(e) {
                         return e.universeId.toString()
@@ -1415,34 +1105,25 @@ function() {
                 "use strict";
                 n.d(t, {
                     r6: function() {
-                        return l
+                        return f
                     },
                     W8: function() {
-                        return f
+                        return d
                     }
                 });
-                var r = n(971),
-                    o = n.n(r),
-                    a = n(932),
-                    i = n(954),
-                    u = n(803);
-
-                function c(e, t, n) {
-                    return t in e ? Object.defineProperty(e, t, {
-                        value: n,
-                        enumerable: !0,
-                        configurable: !0,
-                        writable: !0
-                    }) : e[t] = n, e
-                }
-                var l = function() {
-                    var e;
-
-                    function t(e, n) {
-                        if (!(this instanceof t)) throw TypeError("Cannot call a class as a function");
-                        c(this, "batchRequestFactory", void 0), c(this, "thumbnailProcessorKeySerializer", void 0), c(this, "thumbnailItemIdSerializer", void 0), c(this, "thumbnailRequesters", {}), this.batchRequestFactory = new(o()), this.thumbnailItemIdSerializer = e, this.thumbnailProcessorKeySerializer = n
-                    }
-                    return e = [{
+                var r = n(474),
+                    o = n(374),
+                    i = n(528),
+                    a = n(971),
+                    u = n.n(a),
+                    c = n(932),
+                    l = n(954),
+                    s = n(803),
+                    f = function() {
+                        function e(t, n) {
+                            (0, r._)(this, e), (0, i._)(this, "batchRequestFactory", void 0), (0, i._)(this, "thumbnailProcessorKeySerializer", void 0), (0, i._)(this, "thumbnailItemIdSerializer", void 0), (0, i._)(this, "thumbnailRequesters", {}), this.batchRequestFactory = new(u()), this.thumbnailItemIdSerializer = t, this.thumbnailProcessorKeySerializer = n
+                        }
+                        return (0, o._)(e, [{
                             key: "getThumbnailRequesterProperties",
                             value: function(e) {
                                 return e ? {
@@ -1452,9 +1133,9 @@ function() {
                                     concurrentRequestCount: e.concurrentThumbnailRequestCount,
                                     processBatchWaitTime: 1e3
                                 } : {
-                                    getFailureCooldown: this.batchRequestFactory.createExponentialBackoffCooldown(i.Mi.minCooldown, i.Mi.maxCooldown),
-                                    maxRetryAttempts: i.Mi.maxRetryAttempts,
-                                    batchSize: i.XC
+                                    getFailureCooldown: this.batchRequestFactory.createExponentialBackoffCooldown(l.Mi.minCooldown, l.Mi.maxCooldown),
+                                    maxRetryAttempts: l.Mi.maxRetryAttempts,
+                                    batchSize: l.XC
                                 }
                             }
                         }, {
@@ -1463,38 +1144,38 @@ function() {
                                 var r = this,
                                     o = this.thumbnailRequesters[t];
                                 if (o) return o;
-                                var a = this.batchRequestFactory.createRequestProcessor(e, function(e) {
+                                var i = this.batchRequestFactory.createRequestProcessor(e, function(e) {
                                     return r.thumbnailItemIdSerializer(e)
                                 }, this.getThumbnailRequesterProperties(n));
-                                return this.thumbnailRequesters[t] = a, a
+                                return this.thumbnailRequesters[t] = i, i
                             }
                         }, {
                             key: "processThumbnailBatchRequest",
                             value: function(e, t) {
-                                var n, r, o, c, l, s, f, m, h, b = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : this.thumbnailProcessorKeySerializer(e),
-                                    d = arguments.length > 3 ? arguments[3] : void 0,
+                                var n, r, o, i, a, u, f, m, d, h = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : this.thumbnailProcessorKeySerializer(e),
+                                    b = arguments.length > 3 ? arguments[3] : void 0,
                                     p = e.type,
-                                    y = void 0 === p ? "custom" : p,
-                                    v = (h = null == (n = document.getElementsByName("thumbnail-meta-data")[0]) ? void 0 : n.dataset) ? {
-                                        thumbnailMetricsSampleSize: parseInt(null != (r = h.thumbnailMetricsSampleSize) ? r : "", 10),
-                                        isWebappUseCacheEnabled: "True" === h.isWebappCacheEnabled,
-                                        webappCacheExpirationTimespan: null != (o = h.webappCacheExpirationsTimespan) ? o : "",
-                                        requestMinCooldown: parseInt(null != (c = h.requestMinCooldown) ? c : "", 10),
-                                        requestMaxCooldown: parseInt(null != (l = h.requestMaxCooldown) ? l : "", 10),
-                                        requestMaxRetryAttempts: parseInt(null != (s = h.requestMaxRetryAttempts) ? s : "", 10),
-                                        requestBatchSize: parseInt(null != (f = h.requestBatchSize) ? f : "", 10),
-                                        concurrentThumbnailRequestCount: parseInt(null != (m = h.concurrentThumbnailRequestCount) ? m : "", 10)
-                                    } : i.x$,
-                                    g = this.getThumbnailRequester(t, b, v);
-                                d && g.invalidateItem(e);
-                                var S = (0, u.$E)(v);
-                                return g.queueItem(e, void 0, S).then(function(e) {
-                                    if (e.performance && (0, u.rv)(v)) {
+                                    v = void 0 === p ? "custom" : p,
+                                    g = (d = null == (n = document.getElementsByName("thumbnail-meta-data")[0]) ? void 0 : n.dataset) ? {
+                                        thumbnailMetricsSampleSize: parseInt(null != (r = d.thumbnailMetricsSampleSize) ? r : "", 10),
+                                        isWebappUseCacheEnabled: "True" === d.isWebappCacheEnabled,
+                                        webappCacheExpirationTimespan: null != (o = d.webappCacheExpirationsTimespan) ? o : "",
+                                        requestMinCooldown: parseInt(null != (i = d.requestMinCooldown) ? i : "", 10),
+                                        requestMaxCooldown: parseInt(null != (a = d.requestMaxCooldown) ? a : "", 10),
+                                        requestMaxRetryAttempts: parseInt(null != (u = d.requestMaxRetryAttempts) ? u : "", 10),
+                                        requestBatchSize: parseInt(null != (f = d.requestBatchSize) ? f : "", 10),
+                                        concurrentThumbnailRequestCount: parseInt(null != (m = d.concurrentThumbnailRequestCount) ? m : "", 10)
+                                    } : l.x$,
+                                    y = this.getThumbnailRequester(t, h, g);
+                                b && y.invalidateItem(e);
+                                var S = (0, s.$E)(g);
+                                return y.queueItem(e, void 0, S).then(function(e) {
+                                    if (e.performance && (0, s.rv)(g)) {
                                         var t = e.thumbnails,
                                             n = e.thumbnail,
                                             r = function(e) {
-                                                (0, a.l)("ThumbnailStatusCountWebapp", {
-                                                    ThumbnailType: "".concat(y, "_2d"),
+                                                (0, c.l)("ThumbnailStatusCountWebapp", {
+                                                    ThumbnailType: "".concat(v, "_2d"),
                                                     Status: e.state,
                                                     Version: e.version
                                                 }).catch(function(e) {
@@ -1507,41 +1188,35 @@ function() {
                                 }).catch(function(e) {
                                     return console.error({
                                         error: e
-                                    }), (0, u.rv)(v) && e === i.o0.maxAttemptsReached && (0, a.l)("ThumbnailTimeoutWebapp", {
-                                        ThumbnailType: "".concat(y, "_2d")
+                                    }), (0, s.rv)(g) && e === l.o0.maxAttemptsReached && (0, c.l)("ThumbnailTimeoutWebapp", {
+                                        ThumbnailType: "".concat(v, "_2d")
                                     }).catch(function(e) {
                                         console.error(e)
                                     }), Promise.reject(e)
                                 })
                             }
-                        }],
-                        function(e, t) {
-                            for (var n = 0; n < t.length; n++) {
-                                var r = t[n];
-                                r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r)
-                            }
-                        }(t.prototype, e), t
-                }();
+                        }]), e
+                    }();
 
-                function s(e) {
+                function m(e) {
                     var t = e.targetId,
                         n = e.token,
                         r = e.type,
                         o = e.size,
-                        a = e.format,
-                        i = e.isCircular,
+                        i = e.format,
+                        a = e.isCircular,
                         u = e.version,
                         c = e.headShape,
                         l = e.includeBackground,
                         s = e.includeProfileFrame;
-                    return "".concat((void 0 === t ? 0 : t).toString(), ":").concat(n, ":").concat(r, ":").concat(o, ":").concat(a, ":").concat(i ? "circular" : "regular", ":").concat(void 0 === u ? 0 : u, ":").concat(null != c ? c : "", ":").concat(void 0 !== l && l, ":").concat(void 0 !== s && s)
+                    return "".concat((void 0 === t ? 0 : t).toString(), ":").concat(n, ":").concat(r, ":").concat(o, ":").concat(i, ":").concat(a ? "circular" : "regular", ":").concat(void 0 === u ? 0 : u, ":").concat(null != c ? c : "", ":").concat(void 0 !== l && l, ":").concat(void 0 !== s && s)
                 }
-                var f = new l(function(e) {
+                var d = new f(function(e) {
                     var t = e.type,
                         n = e.targetId;
-                    return t === i.uS.universeThumbnail || t === i.uS.universeThumbnails ? (void 0 === n ? 0 : n).toString() : s(e)
-                }, s);
-                new l(function(e) {
+                    return t === l.uS.universeThumbnail || t === l.uS.universeThumbnails ? (void 0 === n ? 0 : n).toString() : m(e)
+                }, m);
+                new f(function(e) {
                     return e.key
                 }, function() {
                     return "customThumbnailRequester"
@@ -1560,23 +1235,10 @@ function() {
                         return s
                     }
                 });
-                var r, o = n(954);
-
-                function a(e, t) {
-                    (null == t || t > e.length) && (t = e.length);
-                    for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
-                    return r
-                }
-
-                function i(e, t, n) {
-                    return t in e ? Object.defineProperty(e, t, {
-                        value: n,
-                        enumerable: !0,
-                        configurable: !0,
-                        writable: !0
-                    }) : e[t] = n, e
-                }
-                var u = (i(r = {}, o.uS.avatar, o.JF.Avatar), i(r, o.uS.avatarHeadshot, o.JF.AvatarHeadShot), i(r, o.uS.gameIcon, o.JF.GameIcon), i(r, o.uS.badgeIcon, o.JF.BadgeIcon), i(r, o.uS.gamePassIcon, o.JF.GamePass), i(r, o.uS.assetThumbnail, o.JF.Asset), i(r, o.uS.bundleThumbnail, o.JF.BundleThumbnail), i(r, o.uS.userOutfit, o.JF.Outfit), i(r, o.uS.groupIcon, o.JF.GroupIcon), i(r, o.uS.placeGameIcon, o.JF.PlaceIcon), i(r, o.uS.developerProductIcon, o.JF.DeveloperProduct), i(r, o.uS.gameThumbnail, o.JF.GameThumbnail), i(r, o.uS.lookThumbnail, o.JF.LookThumbnail), i(r, o.uS.screenshot, o.JF.Screenshot), r);
+                var r, o = n(528),
+                    i = n(936),
+                    a = n(954),
+                    u = (r = {}, (0, o._)(r, a.uS.avatar, a.JF.Avatar), (0, o._)(r, a.uS.avatarHeadshot, a.JF.AvatarHeadShot), (0, o._)(r, a.uS.gameIcon, a.JF.GameIcon), (0, o._)(r, a.uS.badgeIcon, a.JF.BadgeIcon), (0, o._)(r, a.uS.gamePassIcon, a.JF.GamePass), (0, o._)(r, a.uS.assetThumbnail, a.JF.Asset), (0, o._)(r, a.uS.bundleThumbnail, a.JF.BundleThumbnail), (0, o._)(r, a.uS.userOutfit, a.JF.Outfit), (0, o._)(r, a.uS.groupIcon, a.JF.GroupIcon), (0, o._)(r, a.uS.placeGameIcon, a.JF.PlaceIcon), (0, o._)(r, a.uS.developerProductIcon, a.JF.DeveloperProduct), (0, o._)(r, a.uS.gameThumbnail, a.JF.GameThumbnail), (0, o._)(r, a.uS.lookThumbnail, a.JF.LookThumbnail), (0, o._)(r, a.uS.screenshot, a.JF.Screenshot), r);
 
                 function c(e) {
                     return u[e]
@@ -1584,40 +1246,10 @@ function() {
 
                 function l(e) {
                     if (e) {
-                        var t, n, r, o, i;
+                        var t, n, r, o, a;
                         return {
                             useCache: e.isWebappUseCacheEnabled,
-                            expirationWindowMS: (r = (n = function(e) {
-                                if (Array.isArray(e)) return e
-                            }(t = e.webappCacheExpirationTimespan.split(":")) || function(e) {
-                                var t, n, r = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
-                                if (null != r) {
-                                    var o = [],
-                                        a = !0,
-                                        i = !1;
-                                    try {
-                                        for (r = r.call(e); !(a = (t = r.next()).done) && (o.push(t.value), 3 !== o.length); a = !0);
-                                    } catch (e) {
-                                        i = !0, n = e
-                                    } finally {
-                                        try {
-                                            a || null == r.return || r.return()
-                                        } finally {
-                                            if (i) throw n
-                                        }
-                                    }
-                                    return o
-                                }
-                            }(t) || function(e) {
-                                if (e) {
-                                    if ("string" == typeof e) return a(e, 3);
-                                    var t = Object.prototype.toString.call(e).slice(8, -1);
-                                    if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                    if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return a(e, 3)
-                                }
-                            }(t) || function() {
-                                throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
-                            }())[0], o = n[1], i = n[2], void 0 === r || void 0 === o || void 0 === i ? NaN : (60 * parseInt(r, 10) * 60 + 60 * parseInt(o, 10) + parseInt(i, 10)) * 1e3)
+                            expirationWindowMS: (t = e.webappCacheExpirationTimespan, r = (n = (0, i._)(t.split(":"), 3))[0], o = n[1], a = n[2], void 0 === r || void 0 === o || void 0 === a ? NaN : (60 * parseInt(r, 10) * 60 + 60 * parseInt(o, 10) + parseInt(a, 10)) * 1e3)
                         }
                     }
                 }
@@ -1626,9 +1258,16 @@ function() {
                     return !e || Math.floor(100 * Math.random()) <= e.thumbnailMetricsSampleSize
                 }
             },
-            609: function(e) {
+            349: function(e, t, n) {
                 "use strict";
-                e.exports = window.React
+                n.d(t, {
+                    f: function() {
+                        return r
+                    }
+                });
+                var r = function(e, t) {
+                    return null != t ? t : (null == e ? void 0 : e.toLowerCase()) === "avatarheadshot"
+                }
             },
             192: function(e) {
                 "use strict";
@@ -1648,10 +1287,10 @@ function() {
     function n(r) {
         var o = t[r];
         if (void 0 !== o) return o.exports;
-        var a = t[r] = {
+        var i = t[r] = {
             exports: {}
         };
-        return e[r](a, a.exports, n), a.exports
+        return e[r](i, i.exports, n), i.exports
     }
     n.m = e, n.n = function(e) {
             var t = e && e.__esModule ? function() {
@@ -1682,136 +1321,127 @@ function() {
             "use strict";
             var e, t = {};
             n.r(t), n.d(t, {
-                AVATAR_HEADSHOT_BACKGROUND_EXPERIMENT_KEY: function() {
-                    return g.mt
-                },
-                AVATAR_HEADSHOT_BACKGROUND_LAYER: function() {
-                    return g.Kp
-                },
                 BatchRequestError: function() {
-                    return v.o0
+                    return w.o0
                 },
                 DEFAULT_META_DATA: function() {
-                    return v.x$
+                    return w.x$
                 },
                 DefaultBatchSize: function() {
-                    return v.XC
+                    return w.XC
                 },
                 DefaultThumbnailFormat: function() {
-                    return v.R2
+                    return w.R2
                 },
                 DefaultThumbnailSize: function() {
-                    return v.F5
+                    return w.F5
                 },
                 FeatureName: function() {
-                    return v.SD
+                    return w.SD
                 },
                 LoadFailureMetricsType: function() {
-                    return v.MU
+                    return w.MU
                 },
                 LoadFailureName: function() {
-                    return v.cu
+                    return w.cu
                 },
                 LoadRetrySuccessName: function() {
-                    return v.tb
+                    return w.tb
                 },
                 LoadSuccessMetricsType: function() {
-                    return v.dS
+                    return w.dS
                 },
                 LoadSuccessName: function() {
-                    return v.DS
+                    return w.DS
                 },
                 PROFILE_FRAME_EXPERIMENT_KEY: function() {
-                    return L
+                    return U
                 },
                 PROFILE_FRAME_LAYER: function() {
-                    return N
+                    return j
                 },
                 ProfileFrameDefaultContext: function() {
-                    return S
+                    return I
                 },
                 RetryPerThumbnailType: function() {
-                    return v.EX
+                    return w.EX
                 },
                 ReturnPolicy: function() {
-                    return v.TP
+                    return w.TP
                 },
                 RobloxThumbnailsApisModelsThumbnailBatchRequestTypeEnum: function() {
-                    return v.JF
+                    return w.JF
                 },
                 Thumbnail2d: function() {
-                    return C
+                    return _
                 },
                 Thumbnail2dCarouselContainer: function() {
-                    return R
+                    return P
                 },
                 ThumbnailAssetsSize: function() {
-                    return v.Tm
+                    return w.Tm
                 },
                 ThumbnailAvatarHeadshotSize: function() {
-                    return v.jZ
+                    return w.jZ
                 },
                 ThumbnailAvatarsSize: function() {
-                    return v.qh
+                    return w.qh
                 },
                 ThumbnailBadgeIconSize: function() {
-                    return v.S3
+                    return w.S3
                 },
                 ThumbnailCooldown: function() {
-                    return v.Mi
+                    return w.Mi
                 },
                 ThumbnailDeveloperProductIconSize: function() {
-                    return v.s2
+                    return w.s2
                 },
                 ThumbnailFormat: function() {
-                    return v.Ul
+                    return w.Ul
                 },
                 ThumbnailGameIconSize: function() {
-                    return v.fP
+                    return w.fP
                 },
                 ThumbnailGamePassIconSize: function() {
-                    return v.Ou
+                    return w.Ou
                 },
                 ThumbnailGameThumbnailSize: function() {
-                    return v.SH
+                    return w.SH
                 },
                 ThumbnailGroupIconSize: function() {
-                    return v.wu
+                    return w.wu
                 },
                 ThumbnailMetadataUrl: function() {
-                    return v.Pq
+                    return w.Pq
                 },
                 ThumbnailStates: function() {
-                    return v.xc
+                    return w.xc
                 },
                 ThumbnailTypes: function() {
-                    return v.uS
+                    return w.uS
                 },
                 ThumbnailUniverseThumbnailSize: function() {
-                    return v.lo
-                },
-                prefetchAvatarHeadshotBackgroundExperiment: function() {
-                    return g.ez
+                    return w.lo
                 },
                 thumbnailService: function() {
-                    return d
+                    return y
                 },
                 useProfileFrameExperiment: function() {
-                    return G
+                    return N
                 }
             });
             var r = n(192),
                 o = n.n(r);
 
-            function a(e, t) {
+            function i(e, t) {
                 if (e) {
-                    if ("string" == typeof e) return i(e, t);
+                    if ("string" == typeof e) return a(e, t);
                     var n = ({}).toString.call(e).slice(8, -1);
-                    return "Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n ? Array.from(e) : "Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n) ? i(e, t) : void 0
+                    return "Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n ? Array.from(e) : "Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n) ? a(e, t) : void 0
                 }
             }
 
-            function i(e, t) {
+            function a(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
@@ -1819,219 +1449,116 @@ function() {
             var u = function(e) {
                     e.keys().forEach(e)
                 },
-                c = window.ReactJSX,
-                l = n(609),
-                s = n(390),
-                f = n.n(s),
-                m = window.PropTypes,
-                h = n.n(m),
-                b = n(932),
-                d = n(501),
-                p = n(95),
-                y = n(229),
-                v = n(954),
-                g = n(9),
-                S = (0, l.createContext)(!1);
+                c = n(842),
+                l = n(807),
+                s = n(936),
+                f = window.ReactJSX,
+                m = window.React,
+                d = n(390),
+                h = n.n(d),
+                b = window.PropTypes,
+                p = n.n(b),
+                v = n(349),
+                g = n(932),
+                y = n(501),
+                S = n(95),
+                T = n(229),
+                w = n(954),
+                I = (0, m.createContext)(!1);
 
-            function w(e, t) {
-                (null == t || t > e.length) && (t = e.length);
-                for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
-                return r
-            }
-
-            function T(e) {
-                var t, n = e.onLoad,
-                    r = e.errorIconClass,
-                    o = e.thumbnailUrl,
-                    a = e.imgClassName,
+            function C(e) {
+                var t = e.onLoad,
+                    n = e.errorIconClass,
+                    r = e.thumbnailUrl,
+                    o = e.imgClassName,
                     i = e.containerClass,
-                    u = e.altName,
-                    s = f()("thumbnail-2d-container", r, i),
-                    m = function(e) {
-                        if (Array.isArray(e)) return e
-                    }(t = (0, l.useState)(f()(a, "loading"))) || function(e) {
-                        var t, n, r = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
-                        if (null != r) {
-                            var o = [],
-                                a = !0,
-                                i = !1;
-                            try {
-                                for (r = r.call(e); !(a = (t = r.next()).done) && (o.push(t.value), 2 !== o.length); a = !0);
-                            } catch (e) {
-                                i = !0, n = e
-                            } finally {
-                                try {
-                                    a || null == r.return || r.return()
-                                } finally {
-                                    if (i) throw n
-                                }
-                            }
-                            return o
-                        }
-                    }(t) || function(e) {
-                        if (e) {
-                            if ("string" == typeof e) return w(e, 2);
-                            var t = Object.prototype.toString.call(e).slice(8, -1);
-                            if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return w(e, 2)
-                        }
-                    }(t) || function() {
-                        throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
-                    }(),
-                    h = m[0],
-                    b = m[1];
-                return (0, l.useEffect)(function() {
-                    null === o && b(f()(a, "loading"))
-                }, [o, a]), (0, c.jsx)("span", {
-                    className: s,
-                    children: o && (0, c.jsx)("img", {
-                        className: h,
-                        src: o,
-                        alt: u,
+                    a = e.altName,
+                    u = h()("thumbnail-2d-container", n, i),
+                    c = (0, s._)((0, m.useState)(h()(o, "loading")), 2),
+                    l = c[0],
+                    d = c[1];
+                return (0, m.useEffect)(function() {
+                    null === r && d(h()(o, "loading"))
+                }, [r, o]), (0, f.jsx)("span", {
+                    className: u,
+                    children: r && (0, f.jsx)("img", {
+                        className: l,
+                        src: r,
+                        alt: a,
                         onLoad: function() {
-                            n(), b(a)
+                            t(), d(o)
                         }
                     })
                 })
             }
-
-            function O(e, t) {
-                (null == t || t > e.length) && (t = e.length);
-                for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
-                return r
-            }
-
-            function I(e) {
-                for (var t = 1; t < arguments.length; t++) {
-                    var n = null != arguments[t] ? arguments[t] : {},
-                        r = Object.keys(n);
-                    "function" == typeof Object.getOwnPropertySymbols && (r = r.concat(Object.getOwnPropertySymbols(n).filter(function(e) {
-                        return Object.getOwnPropertyDescriptor(n, e).enumerable
-                    }))), r.forEach(function(t) {
-                        var r;
-                        r = n[t], t in e ? Object.defineProperty(e, t, {
-                            value: r,
-                            enumerable: !0,
-                            configurable: !0,
-                            writable: !0
-                        }) : e[t] = r
-                    })
-                }
-                return e
-            }
-
-            function A(e, t) {
-                return function(e) {
-                    if (Array.isArray(e)) return e
-                }(e) || function(e, t) {
-                    var n, r, o = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
-                    if (null != o) {
-                        var a = [],
-                            i = !0,
-                            u = !1;
-                        try {
-                            for (o = o.call(e); !(i = (n = o.next()).done) && (a.push(n.value), !t || a.length !== t); i = !0);
-                        } catch (e) {
-                            u = !0, r = e
-                        } finally {
-                            try {
-                                i || null == o.return || o.return()
-                            } finally {
-                                if (u) throw r
-                            }
-                        }
-                        return a
-                    }
-                }(e, t) || function(e, t) {
-                    if (e) {
-                        if ("string" == typeof e) return O(e, t);
-                        var n = Object.prototype.toString.call(e).slice(8, -1);
-                        if ("Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n) return Array.from(n);
-                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return O(e, t)
-                    }
-                }(e, t) || function() {
-                    throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
-                }()
-            }
-            T.defaultProps = {
+            C.defaultProps = {
                 errorIconClass: "",
                 thumbnailUrl: "",
                 imgClassName: "",
                 containerClass: "",
                 altName: "",
                 onLoad: function() {}
-            }, T.propTypes = {
-                errorIconClass: h().string,
-                thumbnailUrl: h().string,
-                imgClassName: h().string,
-                containerClass: h().string,
-                altName: h().string,
-                onLoad: h().func
+            }, C.propTypes = {
+                errorIconClass: p().string,
+                thumbnailUrl: p().string,
+                imgClassName: p().string,
+                containerClass: p().string,
+                altName: p().string,
+                onLoad: p().func
             };
-            var x = new p.r6(function(e) {
+            var x = new S.r6(function(e) {
                 return e.targetId
             }, function() {
                 return "customThumbnailRequester"
             });
 
-            function j(e) {
+            function A(e) {
                 var t, n, r = e.type,
                     o = e.targetId,
-                    a = e.token,
-                    i = e.size,
+                    i = e.token,
+                    a = e.size,
                     u = e.imgClassName,
-                    s = e.containerClass,
-                    m = e.format,
-                    h = e.altName,
-                    p = e.onLoad,
-                    w = e.getThumbnail,
-                    O = e.version,
-                    j = e.headShape,
-                    C = e.includeBackground,
-                    P = e.includeProfileFrame,
+                    d = e.containerClass,
+                    b = e.format,
+                    p = e.altName,
+                    S = e.onLoad,
+                    A = e.getThumbnail,
+                    _ = e.version,
+                    O = e.headShape,
+                    P = e.includeBackground,
+                    R = e.includeProfileFrame,
                     E = e.seedFromCache,
-                    k = A((0, l.useState)(new Date().getTime()), 1)[0],
-                    R = (0, l.useContext)(S),
-                    z = P || R,
-                    F = R && !P && r === v.uS.avatarHeadshot ? v.jZ.size150 : i,
-                    D = (0, g.G4)(r),
-                    U = (0, g.st)(r, C, D),
-                    M = A((0, l.useState)(function() {
-                        return E ? d.peekThumbnailImage(r, F, m, o, a, O, j, U, z) : void 0
+                    z = (0, s._)((0, m.useState)(new Date().getTime()), 1)[0],
+                    k = (0, m.useContext)(I),
+                    F = R || k,
+                    j = k && !R && r === w.uS.avatarHeadshot ? w.jZ.size150 : a,
+                    U = (0, v.f)(r, P),
+                    q = (0, s._)((0, m.useState)(function() {
+                        return E ? y.peekThumbnailImage(r, j, b, o, i, _, O, U, F) : void 0
                     }), 1)[0],
-                    N = (0, l.useRef)(!!M),
-                    L = A((0, l.useState)(null != (t = null == M ? void 0 : M.state) ? t : null), 2),
-                    q = L[0],
-                    $ = L[1],
-                    _ = A((0, l.useState)(null != (n = null == M ? void 0 : M.imageUrl) ? n : null), 2),
-                    B = _[0],
-                    G = _[1],
-                    H = f()(d.getCssClass(q)),
-                    W = A((0, l.useState)(M ? "" : "shimmer"), 2),
-                    J = W[0],
-                    K = W[1],
-                    V = A((0, l.useState)(null), 2),
-                    X = V[0],
-                    Q = V[1],
-                    Y = (0, l.useMemo)(function() {
-                        return new y.XY(function() {
+                    L = (0, m.useRef)(!!q),
+                    D = (0, s._)((0, m.useState)(null != (t = null == q ? void 0 : q.state) ? t : null), 2),
+                    M = D[0],
+                    N = D[1],
+                    $ = (0, s._)((0, m.useState)(null != (n = null == q ? void 0 : q.imageUrl) ? n : null), 2),
+                    B = $[0],
+                    G = $[1],
+                    W = h()(y.getCssClass(M)),
+                    J = (0, s._)((0, m.useState)(q ? "" : "shimmer"), 2),
+                    H = J[0],
+                    V = J[1],
+                    X = (0, s._)((0, m.useState)(null), 2),
+                    K = X[0],
+                    Q = X[1],
+                    Y = (0, m.useMemo)(function() {
+                        return new T.XY(function() {
                             return new Promise(function(e, t) {
-                                w().then(function(t) {
-                                    var n, r;
+                                A().then(function(t) {
                                     e({
                                         data: {
-                                            data: [(n = I({}, t.data), r = r = {
+                                            data: [(0, l._)((0, c._)({}, t.data), {
                                                 targetId: o
-                                            }, Object.getOwnPropertyDescriptors ? Object.defineProperties(n, Object.getOwnPropertyDescriptors(r)) : (function(e) {
-                                                var t = Object.keys(e);
-                                                if (Object.getOwnPropertySymbols) {
-                                                    var n = Object.getOwnPropertySymbols(e);
-                                                    t.push.apply(t, n)
-                                                }
-                                                return t
-                                            })(Object(r)).forEach(function(e) {
-                                                Object.defineProperty(n, e, Object.getOwnPropertyDescriptor(r, e))
-                                            }), n)]
+                                            })]
                                         }
                                     })
                                 }).catch(t)
@@ -2041,41 +1568,41 @@ function() {
                         }, function(e) {
                             return e.key
                         }, function(e) {
-                            return e.state !== v.xc.pending
+                            return e.state !== w.xc.pending
                         }, function(e) {
                             return {
                                 thumbnail: e
                             }
                         })
-                    }, [o, w]),
-                    Z = (0, l.useCallback)(function() {
-                        if (X) {
-                            var e = new Date().getTime() - k,
-                                t = X.retryAttempts;
-                            (0, b.l)("ThumbnailLoadDurationWebapp", {
+                    }, [o, A]),
+                    Z = (0, m.useCallback)(function() {
+                        if (K) {
+                            var e = new Date().getTime() - z,
+                                t = K.retryAttempts;
+                            (0, g.l)("ThumbnailLoadDurationWebapp", {
                                 Status: "Success",
                                 ThumbnailType: "".concat(r, "_2d"),
                                 Value: e.toString()
                             }).catch(function(e) {
                                 console.error(e)
-                            }), t ? (0, b.l)("ThumbnailRetryWebapp", {
+                            }), t ? (0, g.l)("ThumbnailRetryWebapp", {
                                 ThumbnailType: "".concat(r, "_2d"),
                                 Value: t.toString()
                             }).catch(function(e) {
                                 console.error(e)
-                            }) : (0, b.l)("ThumbnailNoRetrySuccessWebapp", {
+                            }) : (0, g.l)("ThumbnailNoRetrySuccessWebapp", {
                                 ThumbnailType: "".concat(r, "_2d")
                             }).catch(function(e) {
                                 console.error(e)
                             })
                         }
-                        p && p()
-                    }, [X]);
-                return (0, l.useEffect)(function() {
-                    N.current ? N.current = !1 : (K("shimmer"), $(null), G(null));
+                        S && S()
+                    }, [K]);
+                return (0, m.useEffect)(function() {
+                    L.current ? L.current = !1 : (V("shimmer"), N(null), G(null));
                     var e = !1,
-                        t = d.getThumbnailImage(r, F, m, o, a, O, j, U, z);
-                    return w && (t = x.processThumbnailBatchRequest({
+                        t = y.getThumbnailImage(r, j, b, o, i, _, O, U, F);
+                    return A && (t = x.processThumbnailBatchRequest({
                             targetId: o,
                             type: r
                         }, function(e) {
@@ -2084,24 +1611,24 @@ function() {
                             var n = t.thumbnail,
                                 r = n.state,
                                 o = n.imageUrl,
-                                a = t.performance;
-                            !e && ($(r), G(o), K(""), a && Q(I({}, a)))
+                                i = t.performance;
+                            !e && (N(r), G(o), V(""), i && Q((0, c._)({}, i)))
                         }).catch(function(t) {
-                            console.error(t), e || K("")
+                            console.error(t), e || V("")
                         }),
                         function() {
                             e = !0
                         }
-                }, [r, o, a, F, u, w, O, j, U, z]), (0, c.jsx)(T, {
+                }, [r, o, i, j, u, A, _, O, U, F]), (0, f.jsx)(C, {
                     thumbnailUrl: B,
-                    errorIconClass: H,
+                    errorIconClass: W,
                     imgClassName: u,
-                    altName: h,
+                    altName: p,
                     onLoad: Z,
-                    containerClass: f()(J, s)
+                    containerClass: h()(H, d)
                 })
             }
-            j.defaultProps = {
+            A.defaultProps = {
                 targetId: 0,
                 token: "",
                 size: "150x150",
@@ -2114,338 +1641,159 @@ function() {
                 version: "",
                 includeProfileFrame: !1,
                 seedFromCache: !1
-            }, j.propTypes = {
-                type: h().string.isRequired,
-                targetId: h().number,
-                token: h().string,
-                size: h().string,
-                format: h().string,
-                imgClassName: h().string,
-                containerClass: h().string,
-                altName: h().string,
-                onLoad: h().func,
-                getThumbnail: h().func,
-                version: h().string,
-                headShape: h().string,
-                includeBackground: h().bool,
-                includeProfileFrame: h().bool,
-                seedFromCache: h().bool
+            }, A.propTypes = {
+                type: p().string.isRequired,
+                targetId: p().number,
+                token: p().string,
+                size: p().string,
+                format: p().string,
+                imgClassName: p().string,
+                containerClass: p().string,
+                altName: p().string,
+                onLoad: p().func,
+                getThumbnail: p().func,
+                version: p().string,
+                headShape: p().string,
+                includeBackground: p().bool,
+                includeProfileFrame: p().bool,
+                seedFromCache: p().bool
             };
-            var C = j;
+            var _ = A;
 
-            function P(e, t) {
-                (null == t || t > e.length) && (t = e.length);
-                for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
-                return r
-            }
-
-            function E(e, t) {
-                return function(e) {
-                    if (Array.isArray(e)) return e
-                }(e) || function(e, t) {
-                    var n, r, o = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
-                    if (null != o) {
-                        var a = [],
-                            i = !0,
-                            u = !1;
-                        try {
-                            for (o = o.call(e); !(i = (n = o.next()).done) && (a.push(n.value), !t || a.length !== t); i = !0);
-                        } catch (e) {
-                            u = !0, r = e
-                        } finally {
-                            try {
-                                i || null == o.return || o.return()
-                            } finally {
-                                if (u) throw r
-                            }
-                        }
-                        return a
-                    }
-                }(e, t) || function(e, t) {
-                    if (e) {
-                        if ("string" == typeof e) return P(e, t);
-                        var n = Object.prototype.toString.call(e).slice(8, -1);
-                        if ("Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n) return Array.from(n);
-                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return P(e, t)
-                    }
-                }(e, t) || function() {
-                    throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
-                }()
-            }
-
-            function k(e) {
+            function O(e) {
                 var t = e.type,
                     n = e.targetId,
                     r = e.size,
                     o = e.imgClassName,
-                    a = e.containerClass,
-                    i = e.format,
+                    i = e.containerClass,
+                    a = e.format,
                     u = e.altName,
-                    s = E((0, l.useState)(null), 2),
-                    m = s[0],
-                    h = s[1],
-                    b = E((0, l.useState)(null), 2),
+                    c = (0, s._)((0, m.useState)(null), 2),
+                    l = c[0],
+                    d = c[1],
+                    b = (0, s._)((0, m.useState)(null), 2),
                     p = b[0],
-                    y = b[1],
-                    v = E((0, l.useState)(null), 2),
-                    g = v[0],
-                    S = v[1],
-                    w = E((0, l.useState)("shimmer"), 2),
-                    O = w[0],
-                    I = w[1],
-                    A = E((0, l.useState)(0), 2),
-                    x = A[0],
-                    j = A[1],
-                    C = function() {
-                        j(x >= m.length - 1 ? 0 : x + 1)
+                    v = b[1],
+                    g = (0, s._)((0, m.useState)(null), 2),
+                    S = g[0],
+                    T = g[1],
+                    w = (0, s._)((0, m.useState)("shimmer"), 2),
+                    I = w[0],
+                    x = w[1],
+                    A = (0, s._)((0, m.useState)(0), 2),
+                    _ = A[0],
+                    O = A[1],
+                    P = function() {
+                        O(_ >= l.length - 1 ? 0 : _ + 1)
                     };
-                return (0, l.useEffect)(function() {
+                return (0, m.useEffect)(function() {
                     var e;
-                    if (m) {
-                        var t = m[x];
-                        y(t.state), S(t.imageUrl), I(""), e = setInterval(function() {
-                            return C()
+                    if (l) {
+                        var t = l[_];
+                        v(t.state), T(t.imageUrl), x(""), e = setInterval(function() {
+                            return P()
                         }, 4e3)
                     }
                     return function() {
                         clearInterval(e)
                     }
-                }, [m, x]), (0, l.useEffect)(function() {
+                }, [l, _]), (0, m.useEffect)(function() {
                     var e = !1;
-                    return d.getThumbnailImage(t, r, i, n).then(function(t) {
-                            e || h(t.thumbnails)
+                    return y.getThumbnailImage(t, r, a, n).then(function(t) {
+                            e || d(t.thumbnails)
                         }).catch(function() {
-                            e || I("")
+                            e || x("")
                         }),
                         function() {
                             e = !0
                         }
-                }, [t, n, r, o, i]), (0, c.jsx)(T, {
-                    thumbnailUrl: g,
-                    errorIconClass: f()(d.getCssClass(p)),
+                }, [t, n, r, o, a]), (0, f.jsx)(C, {
+                    thumbnailUrl: S,
+                    errorIconClass: h()(y.getCssClass(p)),
                     imgClassName: o,
                     altName: u,
-                    containerClass: f()(O, a)
+                    containerClass: h()(I, i)
                 })
             }
-            k.defaultProps = {
+            O.defaultProps = {
                 size: "576x324",
                 imgClassName: "",
                 containerClass: "",
                 format: "webp",
                 altName: ""
-            }, k.propTypes = {
-                type: h().string.isRequired,
-                targetId: h().number.isRequired,
-                size: h().string,
-                format: h().string,
-                imgClassName: h().string,
-                containerClass: h().string,
-                altName: h().string
+            }, O.propTypes = {
+                type: p().string.isRequired,
+                targetId: p().number.isRequired,
+                size: p().string,
+                format: p().string,
+                imgClassName: p().string,
+                containerClass: p().string,
+                altName: p().string
             };
-            var R = k,
+            var P = O,
+                R = n(839),
+                E = n(386),
                 z = window.Roblox.ExperimentationService,
-                F = n.n(z),
-                D = window.Roblox["core-scripts"].meta.user;
-
-            function U(e, t) {
-                (null == t || t > e.length) && (t = e.length);
-                for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
-                return r
-            }
-
-            function M(e, t, n, r, o, a, i) {
-                try {
-                    var u = e[a](i),
-                        c = u.value
-                } catch (e) {
-                    n(e);
-                    return
-                }
-                u.done ? t(c) : Promise.resolve(c).then(r, o)
-            }
-            var N = "Social.Friends",
-                L = "friendsCarouselProfileFrameEnabled",
+                k = n.n(z),
+                F = window.Roblox["core-scripts"].meta.user,
+                j = "Social.Friends",
+                U = "friendsCarouselProfileFrameEnabled",
                 q = function() {
-                    var e, t = null != (e = (0, D.userId)()) ? e : 0;
-                    return "".concat(N, "_").concat(L, "_").concat(t, "_").concat(new Date().toDateString(), "_").concat("v1")
+                    var e, t = null != (e = (0, F.userId)()) ? e : 0;
+                    return "".concat(j, "_").concat(U, "_").concat(t, "_").concat(new Date().toDateString(), "_").concat("v1")
                 },
-                $ = function() {
+                L = function() {
                     try {
                         return "true" === sessionStorage.getItem(q())
                     } catch (e) {
                         return !1
                     }
                 },
-                _ = null,
-                B = function() {
-                    if (_) return _;
-                    var e, t = (e = function() {
+                D = null,
+                M = function() {
+                    if (D) return D;
+                    var e = (0, R._)(function() {
                         var e;
-                        return function(e, t) {
-                            var n, r, o, a = {
-                                    label: 0,
-                                    sent: function() {
-                                        if (1 & o[0]) throw o[1];
-                                        return o[1]
-                                    },
-                                    trys: [],
-                                    ops: []
-                                },
-                                i = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype),
-                                u = Object.defineProperty;
-                            return u(i, "next", {
-                                value: c(0)
-                            }), u(i, "throw", {
-                                value: c(1)
-                            }), u(i, "return", {
-                                value: c(2)
-                            }), "function" == typeof Symbol && u(i, Symbol.iterator, {
-                                value: function() {
-                                    return this
-                                }
-                            }), i;
-
-                            function c(u) {
-                                return function(c) {
-                                    var l = [u, c];
-                                    if (n) throw TypeError("Generator is already executing.");
-                                    for (; i && (i = 0, l[0] && (a = 0)), a;) try {
-                                        if (n = 1, r && (o = 2 & l[0] ? r.return : l[0] ? r.throw || ((o = r.return) && o.call(r), 0) : r.next) && !(o = o.call(r, l[1])).done) return o;
-                                        switch (r = 0, o && (l = [2 & l[0], o.value]), l[0]) {
-                                            case 0:
-                                            case 1:
-                                                o = l;
-                                                break;
-                                            case 4:
-                                                return a.label++, {
-                                                    value: l[1],
-                                                    done: !1
-                                                };
-                                            case 5:
-                                                a.label++, r = l[1], l = [0];
-                                                continue;
-                                            case 7:
-                                                l = a.ops.pop(), a.trys.pop();
-                                                continue;
-                                            default:
-                                                if (!(o = (o = a.trys).length > 0 && o[o.length - 1]) && (6 === l[0] || 2 === l[0])) {
-                                                    a = 0;
-                                                    continue
-                                                }
-                                                if (3 === l[0] && (!o || l[1] > o[0] && l[1] < o[3])) {
-                                                    a.label = l[1];
-                                                    break
-                                                }
-                                                if (6 === l[0] && a.label < o[1]) {
-                                                    a.label = o[1], o = l;
-                                                    break
-                                                }
-                                                if (o && a.label < o[2]) {
-                                                    a.label = o[2], a.ops.push(l);
-                                                    break
-                                                }
-                                                o[2] && a.ops.pop(), a.trys.pop();
-                                                continue
-                                        }
-                                        l = t.call(e, a)
-                                    } catch (e) {
-                                        l = [6, e], r = 0
-                                    } finally {
-                                        n = o = 0
-                                    }
-                                    if (5 & l[0]) throw l[1];
-                                    return {
-                                        value: l[0] ? l[1] : void 0,
-                                        done: !0
-                                    }
-                                }
-                            }
-                        }(this, function(t) {
+                        return (0, E._)(this, function(t) {
                             switch (t.label) {
                                 case 0:
-                                    return [4, F().getAllValuesForLayer(N)];
+                                    return [4, k().getAllValuesForLayer(j)];
                                 case 1:
-                                    e = !0 === t.sent()[L];
+                                    e = !0 === t.sent()[U];
                                     try {
                                         sessionStorage.setItem(q(), e.toString())
                                     } catch (e) {}
                                     return [2, e]
                             }
                         })
-                    }, function() {
-                        var t = this,
-                            n = arguments;
-                        return new Promise(function(r, o) {
-                            var a = e.apply(t, n);
-
-                            function i(e) {
-                                M(a, r, o, i, u, "next", e)
-                            }
-
-                            function u(e) {
-                                M(a, r, o, i, u, "throw", e)
-                            }
-                            i(void 0)
-                        })
                     })();
-                    return t.catch(function() {
-                        _ = null
-                    }), _ = t, t
+                    return e.catch(function() {
+                        D = null
+                    }), D = e, e
                 },
-                G = function() {
-                    var e, t = function(e) {
-                            if (Array.isArray(e)) return e
-                        }(e = (0, l.useState)($)) || function(e) {
-                            var t, n, r = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
-                            if (null != r) {
-                                var o = [],
-                                    a = !0,
-                                    i = !1;
-                                try {
-                                    for (r = r.call(e); !(a = (t = r.next()).done) && (o.push(t.value), 2 !== o.length); a = !0);
-                                } catch (e) {
-                                    i = !0, n = e
-                                } finally {
-                                    try {
-                                        a || null == r.return || r.return()
-                                    } finally {
-                                        if (i) throw n
-                                    }
-                                }
-                                return o
-                            }
-                        }(e) || function(e) {
-                            if (e) {
-                                if ("string" == typeof e) return U(e, 2);
-                                var t = Object.prototype.toString.call(e).slice(8, -1);
-                                if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return U(e, 2)
-                            }
-                        }(e) || function() {
-                            throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
-                        }(),
-                        n = t[0],
-                        r = t[1];
-                    return (0, l.useEffect)(function() {
+                N = function() {
+                    var e = (0, s._)((0, m.useState)(L), 2),
+                        t = e[0],
+                        n = e[1];
+                    return (0, m.useEffect)(function() {
                         var e = !0;
-                        return B().then(function(t) {
-                                e && r(t)
+                        return M().then(function(t) {
+                                e && n(t)
                             }).catch(function(e) {
                                 console.error("Failed to load profile frame IXP:", e)
                             }),
                             function() {
                                 e = !1
                             }
-                    }, []), n
+                    }, []), t
                 };
             o().module("angularLazyImg", []).factory("LazyImgMagic", ["$window", "$rootScope", "lazyImgConfig", "lazyImgHelpers", function(e, t, n, r) {
-                    var a, i, u, c, l, s, f, m;
+                    var i, a, u, c, l, s, f, m;
 
-                    function h() {
+                    function d() {
                         for (var e = u.length - 1; e >= 0; e--) {
                             var n = u[e];
-                            n && r.isElementInView(n.$elem[0], l.offset, a) && (function(e) {
+                            n && r.isElementInView(n.$elem[0], l.offset, i) && (function(e) {
                                 var n = new Image;
                                 n.onerror = function() {
                                     l.errorClass && e.$elem.addClass(l.errorClass), t.$emit("lazyImg:error", e), l.onError(e)
@@ -2458,38 +1806,38 @@ function() {
                         0 === u.length && p()
                     }
 
-                    function b(e) {
+                    function h(e) {
                         m.forEach(function(t) {
                             t[e]("scroll", s), t[e]("touchmove", s)
-                        }), i[e]("resize", s), i[e]("resize", f)
+                        }), a[e]("resize", s), a[e]("resize", f)
                     }
 
-                    function d() {
+                    function b() {
                         c = !0, setTimeout(function() {
-                            h(), b("on")
+                            d(), h("on")
                         }, 1)
                     }
 
                     function p() {
-                        c = !1, b("off")
+                        c = !1, h("off")
                     }
 
-                    function y(e) {
+                    function v(e) {
                         e.addClass(l.loadingClass), this.$elem = e
                     }
-                    return u = [], c = !1, l = n.getOptions(), i = o().element(e), a = r.getWinDimensions(), f = r.throttle(function() {
-                        a = r.getWinDimensions()
-                    }, 60), m = [l.container || i], s = r.throttle(h, 30), y.prototype.setSource = function(e) {
-                        this.src = e, u.unshift(this), c || d()
-                    }, y.prototype.removeImage = function() {
+                    return u = [], c = !1, l = n.getOptions(), a = o().element(e), i = r.getWinDimensions(), f = r.throttle(function() {
+                        i = r.getWinDimensions()
+                    }, 60), m = [l.container || a], s = r.throttle(d, 30), v.prototype.setSource = function(e) {
+                        this.src = e, u.unshift(this), c || b()
+                    }, v.prototype.removeImage = function() {
                         var e; - 1 !== (e = u.indexOf(this)) && u.splice(e, 1), 0 === u.length && p()
-                    }, y.prototype.checkImages = function() {
-                        h()
-                    }, y.addContainer = function(e) {
-                        p(), m.push(e), d()
-                    }, y.removeContainer = function(e) {
-                        p(), m.splice(m.indexOf(e), 1), d()
-                    }, y
+                    }, v.prototype.checkImages = function() {
+                        d()
+                    }, v.addContainer = function(e) {
+                        p(), m.push(e), b()
+                    }, v.removeContainer = function(e) {
+                        p(), m.splice(m.indexOf(e), 1), b()
+                    }, v
                 }]).provider("lazyImgConfig", function() {
                     this.options = {
                         offset: 100,
@@ -2524,27 +1872,27 @@ function() {
                         throttle: function(e, t, n) {
                             var r, o;
                             return function() {
-                                var a = n || this,
-                                    i = +new Date,
+                                var i = n || this,
+                                    a = +new Date,
                                     u = arguments;
-                                r && i < r + t ? (clearTimeout(o), o = setTimeout(function() {
-                                    r = i, e.apply(a, u)
-                                }, t)) : (r = i, e.apply(a, u))
+                                r && a < r + t ? (clearTimeout(o), o = setTimeout(function() {
+                                    r = a, e.apply(i, u)
+                                }, t)) : (r = a, e.apply(i, u))
                             }
                         }
                     }
                 }]).directive("lazyImg", ["$rootScope", "LazyImgMagic", function(e, t) {
                     return {
                         link: function(n, r, o) {
-                            var a = new t(r);
+                            var i = new t(r);
                             o.$observe("lazyImg", function(e) {
-                                e && a.setSource(e)
+                                e && i.setSource(e)
                             }), n.$on("$destroy", function() {
-                                a.removeImage()
+                                i.removeImage()
                             }), e.$on("lazyImg.runCheck", function() {
-                                a.checkImages()
+                                i.checkImages()
                             }), e.$on("lazyImg:refresh", function() {
-                                a.checkImages()
+                                i.checkImages()
                             })
                         },
                         restrict: "A"
@@ -2564,10 +1912,10 @@ function() {
                     if ("string" == typeof e) n[e] = t;
                     else {
                         var r, o = function(e) {
-                                if (Array.isArray(e)) return i(e)
+                                if (Array.isArray(e)) return a(e)
                             }(e) || function(e) {
                                 if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
-                            }(e) || a(e) || function() {
+                            }(e) || i(e) || function() {
                                 throw TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                             }(),
                             u = o.pop(),
@@ -2575,7 +1923,7 @@ function() {
                             l = function(e) {
                                 var t = "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
                                 if (!t) {
-                                    if (Array.isArray(e) || (t = a(e))) {
+                                    if (Array.isArray(e) || (t = i(e))) {
                                         t && (e = t);
                                         var n = 0,
                                             r = function() {};
@@ -2597,7 +1945,7 @@ function() {
                                     }
                                     throw TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                                 }
-                                var o, i = !0,
+                                var o, a = !0,
                                     u = !1;
                                 return {
                                     s: function() {
@@ -2605,14 +1953,14 @@ function() {
                                     },
                                     n: function() {
                                         var e = t.next();
-                                        return i = e.done, e
+                                        return a = e.done, e
                                     },
                                     e: function(e) {
                                         u = !0, o = e
                                     },
                                     f: function() {
                                         try {
-                                            i || null == t.return || t.return()
+                                            a || null == t.return || t.return()
                                         } finally {
                                             if (u) throw o
                                         }
@@ -2632,13 +1980,13 @@ function() {
                         c[u] = t
                     }
                 }("RobloxThumbnails", t), u(n(545)), u(n(966)), u(n(254)), u(n(771)), u(n(185));
-            var H = n(902);
+            var $ = n(902);
             e = o(), e.module("thumbnailsTemplates", []).run(["$templateCache", function(e) {
-                H && H.keys().forEach(function(t) {
+                $ && $.keys().forEach(function(t) {
                     var n = t.split("/").pop().replace(".html", "").replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
-                    e.put(n, H(t))
+                    e.put(n, $(t))
                 })
             }])
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected(document.currentScript && document.currentScript.getAttribute("data-bundlename") || "Thumbnails");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/thumbnails-aa227532fd0e0a58.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/thumbnails-5fb95d0827098053.js.map

@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("UserTileShowShimmerWhenLoading_v2", false)

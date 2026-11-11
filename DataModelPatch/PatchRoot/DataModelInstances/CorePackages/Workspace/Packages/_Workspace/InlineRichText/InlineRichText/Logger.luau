@@ -1,1 +1,0 @@
-﻿return (require(script:FindFirstAncestor("InlineRichText").Parent.Loggers).Logger:new("InlineRichText"))

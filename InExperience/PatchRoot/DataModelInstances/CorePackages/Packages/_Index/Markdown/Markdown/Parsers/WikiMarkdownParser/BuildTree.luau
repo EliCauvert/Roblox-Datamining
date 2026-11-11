@@ -132,10 +132,10 @@ function t.buildTree(p1, p2)
 				type = GetNodeTypeModule("IMAGE", p2)
 			})
 		elseif v1.name == "OPEN_CLOSE" and v1.capture then
-			local CaptureEntry = v1.capture[1]
-			local CaptureEntry1 = v1.capture[2]
+			local CaptureEntry2 = v1.capture[1]
+			local CaptureEntry3 = v1.capture[2]
 			
-			if v1.capture and CaptureEntry == "br" then
+			if v1.capture and CaptureEntry2 == "br" then
 				InsertFunction(Entry.children, {
 					name = "BREAK",
 					children = {},
@@ -145,16 +145,16 @@ function t.buildTree(p1, p2)
 			else
 				InsertFunction(Entry.children, {
 					name = "TAG",
-					text = CaptureEntry,
-					attributes = if CaptureEntry1 then t.parseXmlAttributes(CaptureEntry1) else {},
+					text = CaptureEntry2,
+					attributes = if CaptureEntry3 then t.parseXmlAttributes(CaptureEntry3) else {},
 					children = {},
 					offset = v1.offset,
-					type = if p2.inlineTags[CaptureEntry] then NodeTypeModule.InlineSpan else NodeTypeModule.Block
+					type = if p2.inlineTags[CaptureEntry2] then NodeTypeModule.InlineSpan else NodeTypeModule.Block
 				})
 			end
 		elseif v1.name == "OPEN" and v1.capture then
 			local CaptureEntry = v1.capture[1]
-			local CaptureEntry2 = v1.capture[2]
+			local CaptureEntry1 = v1.capture[2]
 			
 			if v1.capture and CaptureEntry == "br" then
 				InsertFunction(Entry.children, {
@@ -167,7 +167,7 @@ function t.buildTree(p1, p2)
 				InsertFunction(list, {
 					name = "TAG",
 					text = CaptureEntry,
-					attributes = if CaptureEntry2 then t.parseXmlAttributes(CaptureEntry2) else {},
+					attributes = if CaptureEntry1 then t.parseXmlAttributes(CaptureEntry1) else {},
 					children = {},
 					offset = v1.offset,
 					type = if p2.inlineTags[CaptureEntry] then NodeTypeModule.InlineSpan else NodeTypeModule.Block

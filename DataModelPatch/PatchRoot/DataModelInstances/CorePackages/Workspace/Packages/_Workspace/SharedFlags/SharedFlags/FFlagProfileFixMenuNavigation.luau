@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("ProfileFixMenuNavigation_V2", false)

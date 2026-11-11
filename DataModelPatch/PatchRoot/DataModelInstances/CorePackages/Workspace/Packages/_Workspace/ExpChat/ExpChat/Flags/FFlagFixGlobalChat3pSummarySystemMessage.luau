@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("FixGlobalChat3pSummarySystemMessage", false)

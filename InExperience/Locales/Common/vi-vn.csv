@@ -1482,6 +1482,7 @@ Feature.AddFriends.Action.FriendAdded,Đã Thêm Người Bạn
 Feature.AddFriends.Action.IgnoreFriendRequest,Bỏ qua yêu cầu kết bạn
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Bỏ qua yêu cầu làm bạn bè đáng tin cậy
 Feature.AddFriends.Action.RequestIgnored,Đã Bỏ Qua Yêu Cầu
+Feature.AddFriends.Heading.AddFriends,
 Feature.AddFriends.Label.AddFriendsTooltip,Bắt đầu bằng cách tìm bạn bè của bạn để bạn có thể khám phá Roblox cùng nhau.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Tìm người chơi trên Roblox bằng cách tìm kiếm tên tài khoản hoặc tên của họ.
 Feature.AddFriends.Label.ConnectWithContacts,Mời liên hệ hoặc kết nối với bạn bè đang chơi Roblox!
@@ -1875,6 +1876,8 @@ Feature.Avatar.Label.Shoes,Giày
 Feature.Avatar.Label.Shorts,Quần Ngắn
 Feature.Avatar.Label.Shoulder,Vai
 Feature.Avatar.Label.Skin,Da
+Feature.Avatar.Label.Spawn,Điểm hồi sinh
+Feature.Avatar.Label.SpawnEffects,Hiệu ứng hồi sinh
 Feature.Avatar.Label.Sweater,Áo Len
 Feature.Avatar.Label.Sweaters,
 Feature.Avatar.Label.Swim,Bơi
@@ -2097,7 +2100,10 @@ Feature.AvatarSwitcher.Message.SelectAvatar,Chọn một avatar
 Feature.AvatarSwitcher.Message.SwitchingDeferred,"Bạn sẽ thấy avatar này sau lần hồi sinh tiếp theo, hoặc khi tham gia một trải nghiệm khác. Bạn có thể đổi sang avatar khác bất cứ lúc nào."
 Feature.AvatarSwitcher.Message.UnknownSupport,"Bạn vẫn có thể đổi avatar của mình, nhưng avatar có thể không hiển thị chính xác trong trải nghiệm này."
 Feature.AvatarSwitcher.Message.Unsupported,Trải nghiệm này sử dụng avatar tùy chỉnh và không hỗ trợ avatar Roblox.
+Feature.AvatarWorkshop.Action.EditAvatar,Chỉnh sửa avatar
 Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Heading.Customize,Tùy chỉnh
+Feature.AvatarWorkshop.Heading.YourAvatars,Avatar của bạn
 Feature.AvatarWorkshop.Message.LoadItemsError,Đã xảy ra lỗi khi tải vật phẩm của bạn.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,Không thể tải thêm vật phẩm.
 Feature.AvatarWorkshop.Message.NoItemsOwned,Bạn chưa sở hữu bất kỳ vật phẩm nào ở đây.
@@ -2773,7 +2779,7 @@ Feature.Captures.Toast.VideoCaptureInitializationOtherError,Đã xảy ra lỗi 
 Feature.Captures.Toast.VideoCaptureOtherError,Đã xảy ra lỗi khi quay video
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
-Feature.Catalog.Action.Checkout.GoToCustomize,Tùy chỉnh
+Feature.Catalog.Action.Checkout.GoToCustomize,
 Feature.Catalog.Action.Checkout.ManageInCustomize,Quản lý trong mục Tùy chỉnh
 Feature.Catalog.Action.Checkout.UnavailableItems,
 Feature.Catalog.Action.Checkout.Wear,
@@ -3254,7 +3260,6 @@ Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} nói...
 Feature.Chat.Label.ReplyingToYourself,Bạn đã nói...
 Feature.Chat.Label.SearchFriends,Tìm kiếm bạn bè
 Feature.Chat.Label.SearchWord,
-Feature.Chat.Label.SnoozeChatNotifications,Tắt thông báo trò chuyện trong trải nghiệm:
 Feature.Chat.Label.SnoozePartyNotifications,Tắt thông báo tổ đội trong trải nghiệm đối với:
 Feature.Chat.Label.SwipeToReplyTooltip,Vuốt để trả lời
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}ng
@@ -3310,7 +3315,6 @@ Feature.Chat.Response.NetworkError,Lỗi Mạng
 Feature.Chat.RobloxConnectUnavailableWithUser,Roblox Connect không khả dụng với người dùng này tại thời điểm này.
 Feature.Chat.Text.NoFriends,"Bạn chưa thêm bất kỳ người bạn nào. Để bắt đầu, hãy tìm và thêm bạn bè trên Roblox."
 Feature.Chat.Title.FriendsChat,Trò chuyện cùng bạn bè
-Feature.Chat.Title.MuteChatNotifications,Tắt thông báo trò chuyện từ bạn bè trong suốt trải nghiệm chơi
 Feature.Chat.Title.NewChat,Cuộc trò chuyện mới
 Feature.Chat.Toast.Error.InvalidUserSelected,Không thể thêm một hoặc nhiều người vào danh sách này
 Feature.ContactUpsell.Action.Continue,
@@ -3849,6 +3853,7 @@ Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Kết thúc sau {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,Dùng thử miễn phí
 Feature.InExperienceShop.Label.HaveTrial,Bản dùng thử miễn phí dành cho bạn
+Feature.InExperienceShop.Label.KeepIt,Giữ lại
 Feature.InExperienceShop.Label.NoDescription,Không có mô tả
 Feature.InExperienceShop.Label.OfferEndTime,{offer} sẽ kết thúc sau {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,Đây là bản xem trước Cửa hàng của bạn trong Roblox Studio. Người chơi sẽ không thấy bản xem trước này.
@@ -4010,6 +4015,7 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,Ảnh
 Feature.Moments.Label.PostDeleted,Khoảnh khắc đã bị xóa
 Feature.Moments.Label.PostRemovedBody,Khoảnh khắc bạn đăng vi phạm Tiêu chuẩn cộng đồng của chúng tôi.
+Feature.Moments.Label.PostedOnDate,Đăng vào {date}
 Feature.Moments.Label.PublishingRodeoBody,Quá trình này sẽ không mất quá nhiều thời gian.
 Feature.Moments.Label.Reactions,Lượt bày tỏ cảm xúc
 Feature.Moments.Label.ReportReason.BreaksRules,Bài đăng này vi phạm quy tắc
@@ -4192,7 +4198,7 @@ Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,Sao Chép Liên Kết Hồ Sơ
 Feature.Profile.Action.CreateInBuild,Sáng tạo bằng Tạo dựng
 Feature.Profile.Action.EditAppearance,Chỉnh sửa ngoại hình
-Feature.Profile.Action.EditAvatar,Chỉnh sửa avatar
+Feature.Profile.Action.EditAvatar,
 Feature.Profile.Action.EditBackground,Chỉnh sửa hình nền
 Feature.Profile.Action.EditEmotes,Chỉnh sửa biểu cảm
 Feature.Profile.Action.EditLook,Chỉnh sửa diện mạo

@@ -220,6 +220,7 @@ Authentication.AccountSwitch.Action.Continue,
 Authentication.AccountSwitch.Action.CreateNewAccount,新規アカウントを作成
 Authentication.AccountSwitch.Action.LogoutAllAccounts,すべてのアカウントからログアウト
 Authentication.AccountSwitch.Action.RemoveAllAccounts,すべてのアカウントを削除しますか？
+Authentication.AccountSwitch.Action.SignIn,ログイン
 Authentication.AccountSwitch.Action.SignInToExistingAccount,既存のアカウントにログイン
 Authentication.AccountSwitch.Action.SwitchAccount,アカウントを切り替える
 Authentication.AccountSwitch.Description.AccountLimit.2,アカウント数の上限に達しました。新しいアカウントを追加するには、まずアカウントを削除してください。
@@ -229,6 +230,8 @@ Authentication.AccountSwitch.Description.LogoutConfirmation,新しいアカウ�
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,後でもう一度お試しください
 Authentication.AccountSwitch.Description.RemoveAllAccounts,ログアウトすると、すべてのアカウントがこのデバイスから削除されます。
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,削除すると、もう一度ログインしない限り、このアカウントはこのデバイス上で表示されなくなり、ランディングページに戻ります。
+Authentication.AccountSwitch.Description.SomethingWentWrongSignInAgain,問題が発生しました。もう一度ログインしてください。
+Authentication.AccountSwitch.Description.StaleSessionSignInAgain,しばらくこのアカウントをこちらで使用していません。再度ログインしてください。
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,直接、ログインしてみてください
 Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,アカウントを切り替えることができません
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
@@ -322,7 +325,7 @@ Authentication.Login.Action.Save,保存
 Authentication.Login.Action.SendCodeSentenceCase,コードを送信
 Authentication.Login.Action.SendVerificationEmail,確認メールを送信
 Authentication.Login.Action.SignIn,サインイン
-Authentication.Login.Action.SignInSentenceCase,ログイン
+Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,パスキーを使用
 Authentication.Login.Action.UsernameAndPassword,ユーザーネームとパスワード
@@ -686,7 +689,7 @@ Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,頭のケージが�
 Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,修正されたアウターケージの頂点の{irrelevant_percent}%がアクセサリを覆っていません。アクセサリの形状に合うようにケージを調整してください。
 Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,{cage_name}のUV値が正しくありません。不適切なUVが{incorrect_uv_count}個（未参照{unreferenced_vertex_count}個、テンプレート非対応{non_template_uv_count}個、重複マッピング{duplicate_mapping_count}個）あり、テンプレートの頂点と不一致のものが{unmatched_template_count}個あります。
 Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,{partName}には、退化した三角形が{degenerate_triangle_percent}%含まれています。
-Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,「動く頭」に、表情の品質に関する問題があります。左目の閉じ具合：{left_eye_close}、右目の閉じ具合：{right_eye_close}、口の開き具合：{mouth_open}、喜びの表情：{is_happy}、悲しみの表情：{is_sad}。
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,「動く頭」には、表情の質に関する問題があります。画面上の左目（視覚化プラグインでは頭部の左側にある赤い点）の閉じ具合：{left_eye_close}、画面上の右目（視覚化プラグインでは頭部の右側にある青い点）の閉じ具合：{right_eye_close}、口の開き具合（視覚化プラグインでは緑色の点）：{mouth_open}、喜びの表情：{is_happy}、悲しみの表情：{is_sad}。
 Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,予期しないジョイント構成です。ジョイント総数：{joint_number}、左手のジョイント：{left_hand_joint_number}、右手のジョイント：{right_hand_joint_number}。
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,{partName}には、合計{num_disconnected_components}個のコンポーネントのうち、{num_small_volume_islands}個の小さく分離したメッシュアイランドがあります。浮遊ジオメトリを削除してください。
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,{partName}には、非多様体ジオメトリが含まれています。平面でない面、自己交差するサーフェス、または3つ以上の面で共有されているエッジがないか確認してください。
@@ -802,9 +805,9 @@ Common.UGCValidation.ErrorLabel.DynHead_JointAccumulatedExceeded,頭部の表情
 Common.UGCValidation.ErrorLabel.DynHead_JointBoundsCheckFailed,表情アニメーションのジョイント境界を検証できませんでした。後でもう一度お試しください。
 Common.UGCValidation.ErrorLabel.DynHead_JointDirectExceeded,頭部の表情アニメーション「{actionName}」により、ジョイントが頭部の遥か外側に大幅に移動します。表情アニメーションを編集してから、もう一度お試しください。
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,マーケットプレイスの「動く頭」は、ケージの目と口の頂点がメッシュの頂点と一致するように、適切に合わせる必要があります。ケージとメッシュとの位置合わせを改善してください。
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,動く頭のケージの左目のランドマークがメッシュとずれています。左目のメッシュが投影されたケージエリア内に入るように、目のケージを調整してください。
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,動く頭のケージの口のランドマークがメッシュとずれています。口のメッシュが投影されたケージエリア内に入るように、口のケージを調整してください。
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,動く頭のケージの右目のランドマークがメッシュとずれています。右目のメッシュが投影されたケージエリア内に入るように、目のケージを調整してください。
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,画面上の左目（視覚化プラグインで頭の左側にある赤い点）のケージランドマークがメッシュとずれています。一部のケージポイントが頭部メッシュの内側（メッシュがケージを突き抜けている）にあるか、または外側すぎます。この目の周りのメッシュ上またはそのすぐ外側にくるように、該当するケージを調整してください。
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,口（視覚化プラグインで緑色の点）のケージランドマークがメッシュとずれています。一部のケージポイントが頭部メッシュの内側（メッシュがケージを突き抜けている）にあるか、または外側すぎます。口の周りのメッシュ上またはそのすぐ外側にくるように、口のケージを調整してください。
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,画面上の右目（視覚化プラグインで頭の右側にある青い点）のケージランドマークがメッシュとずれています。一部のケージポイントが頭部メッシュの内側（メッシュがケージを突き抜けている）にあるか、または外側すぎます。この目の周りのメッシュ上またはそのすぐ外側にくるように、該当するケージを調整してください。
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,動く頭の笑顔の表情を検出できません。口のケージのランドマークを調整して、頭の口の位置に合わせ、笑顔の表情ができるようにしてください。
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,動く頭の左目を閉じた表情を検出できません。左目のケージのランドマークを調整して、頭の左目の位置に合わせ、閉じられるようにしてください。
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,マーケットプレイスの「動く頭」に頭ケージがありません。「動く頭」に頭ケージを作成してください。
@@ -830,9 +833,9 @@ Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,アップロー
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,ベースの顔に必須の目の機能がありません。ベースの顔に目を追加してから、もう一度お試しください。
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,ベースの顔に必須の口がありません。ベースの顔に口を追加してから、もう一度お試しください。
 Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,喜びの表情を検出できません。投影された口のメッシュが期待どおりに変形するように、口のケージまたは喜びの表情のFACS（表情コーディングシステム）を調整してください。
-Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,左目を閉じた表情を検出できません。投影された目のメッシュが期待どおりに変形するように、左目のケージまたは左目を閉じた表情のFACS（表情コーディングシステム）を調整してください。
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,画面上の左目（視覚化プラグインで頭部の左側にある赤い点）が十分に閉じません。右目のFACS（表情コーディングシステム）操作と対応するケージを確認してください。
 Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,口を開けた表情を検出できません。投影された口のメッシュが期待どおりに変形するように、口のケージまたは口を開けた表情のFACS（表情コーディングシステム）を調整してください。
-Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,右目を閉じた表情を検出できません。投影された目のメッシュが期待どおりに変形するように、右目のケージまたは右目を閉じた表情のFACS（表情コーディングシステム）を調整してください。
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,画面上の右目（視覚化プラグインで頭部の右側にある青い点）が十分に閉じません。左目のFACS（表情コーディングシステム）操作と対応するケージを確認してください。
 Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,悲しみの表情を検出できません。投影された口のメッシュが期待どおりに変形するように、口のケージまたは悲しみの表情のFACS（表情コーディングシステム）を調整してください。
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,頭部を{modPercent}%に拡大するFACS（表情コーディングシステム）が検出されましたが、頭部の変更は表情アニメーションに関するマーケットプレイスのポリシーに違反します。
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,「動く頭」には最大{maxFacsJointCount}個のFACS（表情コーディングシステム）ジョイントを含めることができますが、この頭には{actualJointCount}個含まれています。FACSジョイントの数を減らしてから、もう一度お試しください。
@@ -901,6 +904,11 @@ Common.UGCValidation.ErrorLabel.MeasureMeshOutsideOuterCage,アクセサリの�
 Common.UGCValidation.ErrorLabel.MeshGeometry_ExceedsBounds,{meshName}のサイズが、許可されている最大バウンディングサイズを超えています。タイプ{assetTypeName}の最大サイズは、[{maxSizeX}、{maxSizeY}、{maxSizeZ}]です。
 Common.UGCValidation.ErrorLabel.MeshGeometry_NotCentered,{meshName}.{fieldName}には、中央に配置されていないメッシュデータがあります。このメッシュをRoblox 3Dインポーターで再度インポートし、ソースファイルにゆるいジオメトリがないことを確認してください。
 Common.UGCValidation.ErrorLabel.MeshGeometry_PositionOutOfBounds,位置が範囲外です。
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleAboveMaximum,{meshName}は、元のメッシュサイズの{scaleMultiple}倍に拡大されています。最大倍率は{maxScaleMultiple}倍です。Studioでサイズを拡大するのではなく、必要なサイズのメッシュを再度エクスポートまたはインポートしてください。
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleBelowMinimum,{meshName}は、元のメッシュサイズの{scalePercent}%に縮小されています。最小値は{minScalePercent}%です。Studioでサイズを縮小するのではなく、必要なサイズのメッシュを再度エクスポートまたはインポートしてください。
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleNotPositive,{meshName}のスケールがゼロまたは負の値になっています。正の拡大/縮小値を使用してください。メッシュをミラーリングするには、3Dモデル作成ソフトウェアでメッシュを反転してから、再エクスポートしてください。
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooLarge,{meshName}のメッシュのスケールが大きすぎます。
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooSmall,メッシュのスケールが小さすぎます。
 Common.UGCValidation.ErrorLabel.MeshGeometry_SurfaceAreaExceeded,モデルメッシュ「{meshName}」の総表面積は{surfaceArea}です。{maxSurfaceArea}を超えることはできません。すべての三角形の数および/またはサイズを減らす必要があります。
 Common.UGCValidation.ErrorLabel.MeshGeometry_TotalTriangleCountExceeded,「{assetTypeName}」の「{triangleCount}」のメッシュ解像度が、サポートされている最大三角形数「{maxTriangles}」を超えています。三角形の数を減らすには、モデルのトポロジーを再構成する必要があります。
 Common.UGCValidation.ErrorLabel.MeshGeometry_TriangleCountExceeded,モデルメッシュ{meshName}の解像度{triangleCount}が、サポートされている最大値{maxTriangles}を超えています。モデルのトポロジーを再構成してから、もう一度お試しください。
@@ -1594,7 +1602,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Robloxで人を見つけ�
 Feature.AddFriends.Label.ConnectWithContacts,連絡先にある人を招待するか、すでに知っている友達とロブロックスでつながりましょう！
 Feature.AddFriends.Label.ContactsTile,連絡先
 Feature.AddFriends.Label.DeclineAllBackgrounded,友達リクエストをすべて無視しています。数分かかるかもしれません。
-Feature.AddFriends.Label.EmptyState.FriendsRename,誰と一緒にRobloxを探検する？友達を追加してRobloxをもっと楽しもう！
 Feature.AddFriends.Label.EmptyStatePrompt,誰と一緒にRobloxを楽しみますか？新しくつながる人を検索したり、すでに知っている友達とつながりましょう！
 Feature.AddFriends.Label.FriendRequests,友達リクエスト
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,人をサーチ
@@ -1602,8 +1609,6 @@ Feature.AddFriends.Label.MyQrCode,マイQRコード
 Feature.AddFriends.Label.QRCodeTitle,
 Feature.AddFriends.Label.SchoolTile,クラスメート
 Feature.AddFriends.Label.SearchForFriendsPrompt,Robloxで人を見つけるには、ユーザーネームや表示名で検索してください。
-Feature.AddFriends.Label.ShareQRCodeAddConnection,QRコードを共有して知り合いを追加しましょう
-Feature.AddFriends.Label.SyncContactsInvitePeople,連絡先を同期して友達を見つけ、招待しましょう！
 Feature.AddFriends.Label.SyncWithContacts,連絡先を同期して友達を見つけて招待しましょう！
 Feature.AddFriends.Label.TrustedFriendRequests,信頼できる友達リクエスト
 Feature.AddFriends.Text.EmptyState.FriendsRename,誰と一緒にRobloxを探検する？{lineBreak}友達を追加してRobloxをもっと楽しもう！
@@ -1611,7 +1616,6 @@ Feature.AddFriends.Title.AddFriendsToolTip,友達と一緒なら、Robloxをも�
 Feature.AddFriends.Title.AddFriendsTooltipTitle,
 Feature.AddFriends.Title.CameraPermission,カメラ権限
 Feature.AddFriends.Title.ConnectWithContacts,連絡先で追加
-Feature.AddFriends.Title.ShareQRCode,QRコードで追加
 Feature.AgeGuidelines.DisplayName.StrongLanguage,強烈な表現
 Feature.AgeGuidelines.Label.CreatorEnabled,クリエーターが有効化済み
 Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect,より多くのコンテンツや機能を使えるようにしましょう。
@@ -2712,6 +2716,7 @@ Feature.Build.Label.ManagedPricingMixed,既存の製品で設定が混在
 Feature.Build.Label.MaximizeForGamePlays,プレイ数を最大化
 Feature.Build.Label.ModelUnavailable,モデルは利用できません
 Feature.Build.Label.Models3D,3Dモデル
+Feature.Build.Label.MonetizationCreateTitle,{NAME} - {PRICE} Robux
 Feature.Build.Label.MyGames,マイゲーム
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,制限なし
@@ -3005,6 +3010,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,自分の友達（{count}人）
 Feature.BuyRobux.Label.PeopleWithCount,{count}人
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Gallery,ギャラリー
 Feature.Catalog.Action.Buy,購入
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,カスタマイズへ
@@ -3495,7 +3501,6 @@ Feature.Chat.Label.SearchForFriendsAndChat,会話をサーチ
 Feature.Chat.Label.SearchFriends,友達をサーチ
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.Sent,送信済み
-Feature.Chat.Label.SnoozeChatNotifications,バーチャル空間内チャット通知をミュート:
 Feature.Chat.Label.SnoozePartyNotifications,以下のバーチャル空間内パーティ通知をミュート:
 Feature.Chat.Label.SwipeToReplyTooltip,スワイプして返信
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}日
@@ -3552,7 +3557,6 @@ Feature.Chat.Response.NetworkError,ネットワークエラー
 Feature.Chat.Response.Sending,送信中
 Feature.Chat.RobloxConnectUnavailableWithUser,現在、このユーザーはRoblox Connectに応答できません。
 Feature.Chat.Text.NoFriends,まだ友達を追加していません。始めるには、友達を見つけてRobloxに追加してください。
-Feature.Chat.Title.MuteChatNotifications,ゲームプレイ中に友達からのチャット通知をミュートする
 Feature.Chat.Title.NewChat,新規チャット
 Feature.Chat.Toast.Error.InvalidUserSelected,このリストに追加できない人が1人以上います
 Feature.CommunityLinks.Description.CommunityDefault,告知などを表示するには、 {experienceName} の公式 Guilded（ギルデッド）コミュニティに参加してください！
@@ -4448,6 +4452,7 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,写真
 Feature.Moments.Label.PostDeleted,モーメントが削除されました
 Feature.Moments.Label.PostRemovedBody,投稿したモーメントは、コミュニティ基準に違反しています。
+Feature.Moments.Label.PostedOnDate,投稿日：{date}
 Feature.Moments.Label.PublishingRodeoBody,あまり時間はかかりません。
 Feature.Moments.Label.Reactions,
 Feature.Moments.Label.ReportReason.BreaksRules,この投稿にはルール違反があります

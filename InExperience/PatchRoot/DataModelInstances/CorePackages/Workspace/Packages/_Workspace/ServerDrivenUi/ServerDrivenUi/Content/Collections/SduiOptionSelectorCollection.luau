@@ -12,11 +12,10 @@ local FFlagSduiOptionImpressionsEventName = require(Parent.SharedFlags).FFlagSdu
 local FFlagSduiOptionSelectorHeaderComponent = require(Parent.SharedFlags).FFlagSduiOptionSelectorHeaderComponent
 local FFlagSduiChartsSortDetailGenreFilter = require(Parent.SharedFlags).FFlagSduiChartsSortDetailGenreFilter
 local FFlagSduiOptionSelectorAnchorTag = require(Parent.SharedFlags).FFlagSduiOptionSelectorAnchorTag
-local LuaAppNilCheckOptionItemConfigs = game:DefineFastFlag("LuaAppNilCheckOptionItemConfigs", false)
 local FFlagSduiOptionSelectorSkipSelectedRefresh = require(Parent.SharedFlags).FFlagSduiOptionSelectorSkipSelectedRefresh
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), SduiErrorType (copy), SduiComponentType (copy), FFlagSduiOptionSelectorSkipSelectedRefresh (copy), FFlagSduiChartsSortDetailGenreFilter (copy), LuaAppNilCheckOptionItemConfigs (copy), FFlagSduiOptionSelectorAnchorTag (copy), CryoModule (copy), SduiVariableItemWidthCarouselModule (copy), FFlagSduiOptionImpressionsEventName (copy), FFlagSduiOptionSelectorHeaderComponent (copy), SduiPlaceholderWrapper (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), SduiErrorType (copy), SduiComponentType (copy), FFlagSduiOptionSelectorSkipSelectedRefresh (copy), FFlagSduiChartsSortDetailGenreFilter (copy), FFlagSduiOptionSelectorAnchorTag (copy), CryoModule (copy), SduiVariableItemWidthCarouselModule (copy), FFlagSduiOptionImpressionsEventName (copy), FFlagSduiOptionSelectorHeaderComponent (copy), SduiPlaceholderWrapper (copy)
 	local SduiContext = p1.sduiContext
 	local UseTokensResult = UseTokensFunction()
 	local PaddingBetweenOptionSelectorAndCollection = p1.paddingBetweenOptionSelectorAndCollection or UseTokensResult.Size.Size_400
@@ -79,8 +78,8 @@ return ReactModule.memo(function(p1)
 		if FFlagSduiOptionSelectorSkipSelectedRefresh then UseStateResult1 else nil
 	})
 	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function()
-		-- upvalues: LuaAppNilCheckOptionItemConfigs (upval), p1 (copy), SduiContext (copy), SduiErrorType (upval), SduiComponentType (upval), FFlagSduiOptionSelectorAnchorTag (upval), CryoModule (upval), UseStateResult1 (copy), UseResult (copy)
-		if LuaAppNilCheckOptionItemConfigs and (not p1.optionItemConfigs or not p1.optionsData) then
+		-- upvalues: p1 (copy), SduiContext (copy), SduiErrorType (upval), SduiComponentType (upval), FFlagSduiOptionSelectorAnchorTag (upval), CryoModule (upval), UseStateResult1 (copy), UseResult (copy)
+		if not p1.optionItemConfigs or not p1.optionsData then
 			SduiContext.dependencies.logger.reportError(SduiErrorType.InvalidProps, {
 				componentType = SduiComponentType.OptionSelectorCollection,
 				message = `Missing {if p1.optionItemConfigs then "optionsData" else "optionItemConfigs"} prop`,

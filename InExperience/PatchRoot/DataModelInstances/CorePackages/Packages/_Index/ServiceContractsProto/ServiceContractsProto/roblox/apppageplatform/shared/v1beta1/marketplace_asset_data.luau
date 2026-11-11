@@ -55,154 +55,154 @@ function Module:encode()
 		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.id)
 	end
 	if self.name ~= nil and self.name ~= "" then
-		local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeString(WriteTagResult3, WriteTagResult2_2, self.name)
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.name)
 	end
 	if self.creator_name ~= nil and self.creator_name ~= "" then
-		local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, self.creator_name)
+		local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult3, WriteTagResult2_2, self.creator_name)
 	end
 	if self.creator_has_verified_badge then
-		local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.varint)
-		Buf, Count = ProtoModule.writeVarInt(WriteTagResult6, WriteTagResult2_5, if self.creator_has_verified_badge then 1 else 0)
+		local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult4, WriteTagResult2_3, if self.creator_has_verified_badge then 1 else 0)
 	end
 	if self.asset_type ~= nil and self.asset_type ~= "" then
-		local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.asset_type)
+		local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, self.asset_type)
 	end
 	if self.price ~= nil and self.price ~= 0 then
-		local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.varint)
-		Buf, Count = ProtoModule.writeVarInt(WriteTagResult8, WriteTagResult2_7, self.price)
+		local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult6, WriteTagResult2_5, self.price)
 	end
 	if self.description ~= nil then
-		local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.description)
+		local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.description)
 	end
 	if self.creator_id ~= nil then
-		local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeString(WriteTagResult10, WriteTagResult2_9, self.creator_id)
+		local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.creator_id)
 	end
 	if self.creator_type ~= nil then
-		local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeString(WriteTagResult11, WriteTagResult2_10, self.creator_type)
+		local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.creator_type)
 	end
 	if self.creating_universe_id ~= nil then
-		local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeString(WriteTagResult12, WriteTagResult2_11, self.creating_universe_id)
+		local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult11, WriteTagResult2_10, self.creating_universe_id)
 	end
 	if self.taxonomy ~= nil and #self.taxonomy > 0 then
 		for _, value in self.taxonomy do
 			local EncodeResult = value:encode()
-			local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult13, WriteTagResult2_12, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult12, WriteTagResult2_11, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
 	if self.render_properties ~= nil and #self.render_properties > 0 then
 		for _, renderProperty in self.render_properties do
-			local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult15, WriteTagResult2_14, renderProperty)
+			local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult14, WriteTagResult2_13, renderProperty)
 		end
 	end
 	if self.item_restrictions ~= nil and #self.item_restrictions > 0 then
 		for _, itemRestriction in self.item_restrictions do
-			local WriteTagResult19, WriteTagResult2_18 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult19, WriteTagResult2_18, itemRestriction)
+			local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult15, WriteTagResult2_14, itemRestriction)
 		end
 	end
 	if self.is_high_definition ~= nil then
-		local WriteTagResult22, WriteTagResult2_21 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.varint)
-		Buf, Count = ProtoModule.writeVarInt(WriteTagResult22, WriteTagResult2_21, if self.is_high_definition then 1 else 0)
+		local WriteTagResult16, WriteTagResult2_15 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult16, WriteTagResult2_15, if self.is_high_definition then 1 else 0)
 	end
 	if self.is_pbr ~= nil then
-		local WriteTagResult23, WriteTagResult2_22 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.varint)
-		Buf, Count = ProtoModule.writeVarInt(WriteTagResult23, WriteTagResult2_22, if self.is_pbr then 1 else 0)
+		local WriteTagResult17, WriteTagResult2_16 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult17, WriteTagResult2_16, if self.is_pbr then 1 else 0)
 	end
 	if self.has_resellers ~= nil then
-		local WriteTagResult24, WriteTagResult2_23 = ProtoModule.writeTag(Buf, Count, 16, ProtoModule.wireTypes.varint)
-		Buf, Count = ProtoModule.writeVarInt(WriteTagResult24, WriteTagResult2_23, if self.has_resellers then 1 else 0)
+		local WriteTagResult18, WriteTagResult2_17 = ProtoModule.writeTag(Buf, Count, 16, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult18, WriteTagResult2_17, if self.has_resellers then 1 else 0)
 	end
 	if self.lowest_price ~= nil then
-		local WriteTagResult17, WriteTagResult2_16 = ProtoModule.writeTag(Buf, Count, 17, ProtoModule.wireTypes.varint)
-		Buf, Count = ProtoModule.writeVarInt(WriteTagResult17, WriteTagResult2_16, self.lowest_price)
+		local WriteTagResult19, WriteTagResult2_18 = ProtoModule.writeTag(Buf, Count, 17, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult19, WriteTagResult2_18, self.lowest_price)
 	end
 	if self.lowest_resale_price ~= nil then
-		local WriteTagResult20, WriteTagResult2_19 = ProtoModule.writeTag(Buf, Count, 18, ProtoModule.wireTypes.varint)
-		Buf, Count = ProtoModule.writeVarInt(WriteTagResult20, WriteTagResult2_19, self.lowest_resale_price)
+		local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 18, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult10, WriteTagResult2_9, self.lowest_resale_price)
 	end
 	if self.total_quantity ~= nil then
-		local WriteTagResult25, WriteTagResult2_24 = ProtoModule.writeTag(Buf, Count, 19, ProtoModule.wireTypes.varint)
-		Buf, Count = ProtoModule.writeVarInt(WriteTagResult25, WriteTagResult2_24, self.total_quantity)
+		local WriteTagResult20, WriteTagResult2_19 = ProtoModule.writeTag(Buf, Count, 19, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult20, WriteTagResult2_19, self.total_quantity)
 	end
 	if self.units_available_for_consumption ~= nil then
-		local WriteTagResult18, WriteTagResult2_17 = ProtoModule.writeTag(Buf, Count, 20, ProtoModule.wireTypes.varint)
-		Buf, Count = ProtoModule.writeVarInt(WriteTagResult18, WriteTagResult2_17, self.units_available_for_consumption)
+		local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 20, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult13, WriteTagResult2_12, self.units_available_for_consumption)
 	end
 	if self.favorite_count ~= nil then
-		local WriteTagResult26, WriteTagResult2_25 = ProtoModule.writeTag(Buf, Count, 21, ProtoModule.wireTypes.varint)
-		Buf, Count = ProtoModule.writeVarInt(WriteTagResult26, WriteTagResult2_25, self.favorite_count)
+		local WriteTagResult21, WriteTagResult2_20 = ProtoModule.writeTag(Buf, Count, 21, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult21, WriteTagResult2_20, self.favorite_count)
 	end
 	if self.timed_options ~= nil and #self.timed_options > 0 then
 		for _, timedOption in self.timed_options do
 			local EncodeResult = timedOption:encode()
-			local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(Buf, Count, 22, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult14, WriteTagResult2_13, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult22, WriteTagResult2_21 = ProtoModule.writeTag(Buf, Count, 22, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult22, WriteTagResult2_21, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
 	if self.collectible_item_id ~= nil then
-		local WriteTagResult21, WriteTagResult2_20 = ProtoModule.writeTag(Buf, Count, 23, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeString(WriteTagResult21, WriteTagResult2_20, self.collectible_item_id)
+		local WriteTagResult23, WriteTagResult2_22 = ProtoModule.writeTag(Buf, Count, 23, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult23, WriteTagResult2_22, self.collectible_item_id)
 	end
 	if self.is_off_sale ~= nil then
-		local WriteTagResult16, WriteTagResult2_15 = ProtoModule.writeTag(Buf, Count, 24, ProtoModule.wireTypes.varint)
-		Buf, Count = ProtoModule.writeVarInt(WriteTagResult16, WriteTagResult2_15, if self.is_off_sale then 1 else 0)
+		local WriteTagResult24, WriteTagResult2_23 = ProtoModule.writeTag(Buf, Count, 24, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult24, WriteTagResult2_23, if self.is_off_sale then 1 else 0)
 	end
 	if self.sale_location_type ~= nil then
-		local WriteTagResult27, WriteTagResult2_26 = ProtoModule.writeTag(Buf, Count, 25, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeString(WriteTagResult27, WriteTagResult2_26, self.sale_location_type)
+		local WriteTagResult25, WriteTagResult2_24 = ProtoModule.writeTag(Buf, Count, 25, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult25, WriteTagResult2_24, self.sale_location_type)
 	end
 	if self.item_status ~= nil and #self.item_status > 0 then
 		for _, value1 in self.item_status do
-			local WriteTagResult28, WriteTagResult2_27 = ProtoModule.writeTag(Buf, Count, 26, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult28, WriteTagResult2_27, value1)
+			local WriteTagResult26, WriteTagResult2_25 = ProtoModule.writeTag(Buf, Count, 26, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult26, WriteTagResult2_25, value1)
 		end
 	end
 	if self.price_status ~= nil then
-		local WriteTagResult29, WriteTagResult2_28 = ProtoModule.writeTag(Buf, Count, 27, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeString(WriteTagResult29, WriteTagResult2_28, self.price_status)
+		local WriteTagResult27, WriteTagResult2_26 = ProtoModule.writeTag(Buf, Count, 27, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult27, WriteTagResult2_26, self.price_status)
 	end
 	if self.product_id ~= nil then
-		local WriteTagResult30, WriteTagResult2_29 = ProtoModule.writeTag(Buf, Count, 28, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeString(WriteTagResult30, WriteTagResult2_29, self.product_id)
+		local WriteTagResult28, WriteTagResult2_27 = ProtoModule.writeTag(Buf, Count, 28, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult28, WriteTagResult2_27, self.product_id)
 	end
 	if self.owned ~= nil then
-		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 29, ProtoModule.wireTypes.varint)
-		Buf, Count = ProtoModule.writeVarInt(WriteTagResult1, WriteTagResult2_1, if self.owned then 1 else 0)
+		local WriteTagResult29, WriteTagResult2_28 = ProtoModule.writeTag(Buf, Count, 29, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult29, WriteTagResult2_28, if self.owned then 1 else 0)
 	end
 	if self.is_purchasable ~= nil then
-		local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 30, ProtoModule.wireTypes.varint)
-		Buf, Count = ProtoModule.writeVarInt(WriteTagResult4, WriteTagResult2_3, if self.is_purchasable then 1 else 0)
+		local WriteTagResult30, WriteTagResult2_29 = ProtoModule.writeTag(Buf, Count, 30, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult30, WriteTagResult2_29, if self.is_purchasable then 1 else 0)
 	end
 	if self.variant_attributes ~= nil and #self.variant_attributes > 0 then
 		for _, variantAttribute in self.variant_attributes do
 			local EncodeResult = variantAttribute:encode()
-			local WriteTagResult32, WriteTagResult2_31 = ProtoModule.writeTag(Buf, Count, 31, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult32, WriteTagResult2_31, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult31, WriteTagResult2_30 = ProtoModule.writeTag(Buf, Count, 31, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult31, WriteTagResult2_30, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
 	if self.genres ~= nil and #self.genres > 0 then
 		for _, genre in self.genres do
-			local WriteTagResult31, WriteTagResult2_30 = ProtoModule.writeTag(Buf, Count, 32, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult31, WriteTagResult2_30, genre)
+			local WriteTagResult32, WriteTagResult2_31 = ProtoModule.writeTag(Buf, Count, 32, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult32, WriteTagResult2_31, genre)
 		end
 	end
 	if self.licensing ~= nil then
 		local EncodeResult = self.licensing:encode()
-		local WriteTagResult34, WriteTagResult2_33 = ProtoModule.writeTag(Buf, Count, 33, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeBuffer(WriteTagResult34, WriteTagResult2_33, EncodeResult, buffer.len(EncodeResult))
+		local WriteTagResult33, WriteTagResult2_32 = ProtoModule.writeTag(Buf, Count, 33, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult33, WriteTagResult2_32, EncodeResult, buffer.len(EncodeResult))
 	end
 	if self.original_price ~= nil then
-		local WriteTagResult33, WriteTagResult2_32 = ProtoModule.writeTag(Buf, Count, 36, ProtoModule.wireTypes.varint)
-		Buf, Count = ProtoModule.writeVarInt(WriteTagResult33, WriteTagResult2_32, self.original_price)
+		local WriteTagResult34, WriteTagResult2_33 = ProtoModule.writeTag(Buf, Count, 36, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult34, WriteTagResult2_33, self.original_price)
 	end
 	local Buf1 = buffer.create(Count)
 	buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -291,49 +291,49 @@ function Module.decode(Buf)
 				Buffer6, v81 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.creator_id = buffer.tostring(Buffer6)
 			elseif Tag == 9 then
-				local Buffer7
-				Buffer7, v81 = ProtoModule.readBuffer(Buf, v1)
-				NewModule.creator_type = buffer.tostring(Buffer7)
-			elseif Tag == 10 then
 				local Buffer8
 				Buffer8, v81 = ProtoModule.readBuffer(Buf, v1)
-				NewModule.creating_universe_id = buffer.tostring(Buffer8)
-			elseif Tag == 11 then
+				NewModule.creator_type = buffer.tostring(Buffer8)
+			elseif Tag == 10 then
 				local Buffer9
 				Buffer9, v81 = ProtoModule.readBuffer(Buf, v1)
-				table.insert(NewModule.taxonomy, MarketplaceCatalogItemCommonModule.MarketplaceCatalogTaxonomyNode.decode(Buffer9))
-			elseif Tag == 12 then
+				NewModule.creating_universe_id = buffer.tostring(Buffer9)
+			elseif Tag == 11 then
 				local Buffer10
 				Buffer10, v81 = ProtoModule.readBuffer(Buf, v1)
-				table.insert(NewModule.render_properties, buffer.tostring(Buffer10))
-			elseif Tag == 13 then
+				table.insert(NewModule.taxonomy, MarketplaceCatalogItemCommonModule.MarketplaceCatalogTaxonomyNode.decode(Buffer10))
+			elseif Tag == 12 then
 				local Buffer11
 				Buffer11, v81 = ProtoModule.readBuffer(Buf, v1)
-				table.insert(NewModule.item_restrictions, buffer.tostring(Buffer11))
-			elseif Tag == 22 then
-				local Buffer12
-				Buffer12, v81 = ProtoModule.readBuffer(Buf, v1)
-				table.insert(NewModule.timed_options, MarketplaceCatalogItemCommonModule.MarketplaceCatalogTimedOption.decode(Buffer12))
-			elseif Tag == 23 then
+				table.insert(NewModule.render_properties, buffer.tostring(Buffer11))
+			elseif Tag == 13 then
 				local Buffer13
 				Buffer13, v81 = ProtoModule.readBuffer(Buf, v1)
-				NewModule.collectible_item_id = buffer.tostring(Buffer13)
-			elseif Tag == 25 then
+				table.insert(NewModule.item_restrictions, buffer.tostring(Buffer13))
+			elseif Tag == 22 then
 				local Buffer14
 				Buffer14, v81 = ProtoModule.readBuffer(Buf, v1)
-				NewModule.sale_location_type = buffer.tostring(Buffer14)
-			elseif Tag == 26 then
+				table.insert(NewModule.timed_options, MarketplaceCatalogItemCommonModule.MarketplaceCatalogTimedOption.decode(Buffer14))
+			elseif Tag == 23 then
 				local Buffer15
 				Buffer15, v81 = ProtoModule.readBuffer(Buf, v1)
-				table.insert(NewModule.item_status, buffer.tostring(Buffer15))
-			elseif Tag == 27 then
+				NewModule.collectible_item_id = buffer.tostring(Buffer15)
+			elseif Tag == 25 then
 				local Buffer16
 				Buffer16, v81 = ProtoModule.readBuffer(Buf, v1)
-				NewModule.price_status = buffer.tostring(Buffer16)
-			elseif Tag == 28 then
+				NewModule.sale_location_type = buffer.tostring(Buffer16)
+			elseif Tag == 26 then
 				local Buffer17
 				Buffer17, v81 = ProtoModule.readBuffer(Buf, v1)
-				NewModule.product_id = buffer.tostring(Buffer17)
+				table.insert(NewModule.item_status, buffer.tostring(Buffer17))
+			elseif Tag == 27 then
+				local Buffer7
+				Buffer7, v81 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.price_status = buffer.tostring(Buffer7)
+			elseif Tag == 28 then
+				local Buffer12
+				Buffer12, v81 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.product_id = buffer.tostring(Buffer12)
 			elseif Tag == 31 then
 				local Buffer18
 				Buffer18, v81 = ProtoModule.readBuffer(Buf, v1)

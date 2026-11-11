@@ -1,1 +1,0 @@
-﻿return (game:DefineFastFlag("DebugTCUpsellModalEnabled_DEV", false))

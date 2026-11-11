@@ -1,1 +1,0 @@
-﻿return game:DefineFastInt("ShopFetchOnGameJoinFallbackDelayMs", 5000)

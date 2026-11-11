@@ -1,11 +1,14 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
 local Parent = Foundation.Parent
+local FlagsModule = require(Foundation.Utility.Flags)
 local GetMainGuiModule = require(Foundation.Utility.getMainGui)
 local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local UseStyleSheetFunction = require(Foundation.Providers.Style.StyleSheetContext).useStyleSheet
 local _ = require(Foundation.Components.Types)
 local OverlayContextModule = require(script.Parent.OverlayContext)
+local ViewportBreakpointContextModule = require(script.Parent.ViewportBreakpointContext)
 local UseKeyboardAwareSizeModule = require(script.Parent.useKeyboardAwareSize)
+local UseSharedViewportBreakpointModule = require(script.Parent.useSharedViewportBreakpoint)
 local ReactModule = require(Parent.React)
 local ReactRobloxModule = require(Parent.ReactRoblox)
 local config = {
@@ -13,7 +16,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), UseKeyboardAwareSizeModule (copy), UseStyleSheetFunction (copy), GetMainGuiModule (copy), OverlayContextModule (copy), ReactRobloxModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), UseKeyboardAwareSizeModule (copy), UseStyleSheetFunction (copy), GetMainGuiModule (copy), FlagsModule (copy), UseSharedViewportBreakpointModule (copy), OverlayContextModule (copy), ReactRobloxModule (copy), ViewportBreakpointContextModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(WithDefaultsModuleResult.gui)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
@@ -30,6 +33,7 @@ return function(p1)
 	local UseStateResult1_1 = WithDefaultsModuleResult.gui == nil and (MainGuiModule ~= nil and UseStateResult1)
 	local UseStateResult3 = if WithDefaultsModuleResult.gui == nil then UseStateResult else WithDefaultsModuleResult.gui
 	local Parent1 = if WithDefaultsModuleResult.gui == nil then Parent else WithDefaultsModuleResult.gui
+	local UseSharedViewportBreakpointModuleResult = if FlagsModule.FoundationSharedViewportBreakpoint then UseSharedViewportBreakpointModule(Parent1) else nil
 	
 	return ReactModule.createElement(OverlayContextModule.Provider, {
 		value = ReactModule.useMemo(function()
@@ -57,6 +61,6 @@ return function(p1)
 			}),
 			FoundationStyleLink = ReactModule.createElement("StyleLink", { StyleSheet = UseStyleSheetResult })
 		}), MainGuiModule) else nil,
-		Children = ReactModule.createElement(ReactModule.Fragment, nil, WithDefaultsModuleResult.children)
+		Children = if FlagsModule.FoundationSharedViewportBreakpoint then ReactModule.createElement(ViewportBreakpointContextModule.Provider, { value = UseSharedViewportBreakpointModuleResult }, WithDefaultsModuleResult.children) else ReactModule.createElement(ReactModule.Fragment, nil, WithDefaultsModuleResult.children)
 	})
 end

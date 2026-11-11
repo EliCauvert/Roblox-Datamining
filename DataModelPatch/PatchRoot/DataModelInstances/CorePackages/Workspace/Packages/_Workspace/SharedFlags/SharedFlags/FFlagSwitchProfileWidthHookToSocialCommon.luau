@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("SwitchProfileWidthHookToSocialCommon_v2", false)

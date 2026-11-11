@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("SocialTabState").Parent.AppChatNetworking).rodux.GetConversationMetadata

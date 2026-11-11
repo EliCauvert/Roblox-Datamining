@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("ReplacePlayerIconRoduxWithSignal_2", false)

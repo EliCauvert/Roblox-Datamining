@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("TCParentChildAutoUpgrade2", false)

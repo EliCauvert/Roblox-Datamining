@@ -387,30 +387,30 @@ return function(p1)
 	local IsCreate1: boolean = FFlagBuildExperienceMonetizationCardFixesModule and (FFlagBuildExperienceMonetizationNativeUIModule and IsCreate)
 	local CreateElementFunction = ReactModule.createElement
 	local t = {}
-	local Name = nil
+	local FormatResult = nil
 	
 	if IsCreate1 then
 		local DefaultName = UseLocalizationResult.defaultName
 		local UnavailablePrice = UseLocalizationResult.unavailablePrice
-		Name = UseContextResult:Format(LocalizationStringsModule.AGENT_MONETIZATION_CREATE_TITLE, {
+		FormatResult = UseContextResult:Format(LocalizationStringsModule.AGENT_MONETIZATION_CREATE_TITLE, {
 			NAME = p1.name or DefaultName,
 			PRICE = if p1.priceInRobux == nil then UnavailablePrice else NumberLocalization.localize(tostring(p1.priceInRobux), LocalizationService.RobloxLocaleId)
 		})
 	else
-		Name = if IsCreate then p1.name or UseLocalizationResult.defaultName else UseLocalizationResult.title
+		FormatResult = if IsCreate then p1.name or UseLocalizationResult.defaultName else UseLocalizationResult.title
 	end
-	t.title = Name
+	t.title = FormatResult
 	t.fitToContent = if IsCreate or FFlagBuildExperienceMonetizationCardFixesModule then true else nil
-	local ItemSummaryTextResult = nil
+	local Description = nil
 	
 	if IsCreate1 then
-		ItemSummaryTextResult = p1.description or ""
+		Description = p1.description or ""
 	else
 		local DefaultName = UseLocalizationResult.defaultName
 		local UnavailablePrice = UseLocalizationResult.unavailablePrice
-		ItemSummaryTextResult = if FFlagCreatorAgentChatMonetizationToolHelpersModule or p1.itemKind ~= nil then itemSummaryText(p1, UseContextResult, DefaultName, UnavailablePrice) else devProductSummaryText(p1, UseContextResult, DefaultName, UnavailablePrice)
+		Description = if FFlagCreatorAgentChatMonetizationToolHelpersModule or p1.itemKind ~= nil then itemSummaryText(p1, UseContextResult, DefaultName, UnavailablePrice) else devProductSummaryText(p1, UseContextResult, DefaultName, UnavailablePrice)
 	end
-	t.textContent = ItemSummaryTextResult
+	t.textContent = Description
 	t.layoutOrder = p1.layoutOrder
 	t.testId = TestId
 	t.footer = if FFlagBuildExperienceDevProductRecoveryModule then Element1 else nil

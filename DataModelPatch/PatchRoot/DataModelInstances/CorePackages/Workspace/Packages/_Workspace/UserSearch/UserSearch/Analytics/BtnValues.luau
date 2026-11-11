@@ -1,1 +1,0 @@
-﻿return { NavigateToAddFriends = "navigateToAddFriends" }

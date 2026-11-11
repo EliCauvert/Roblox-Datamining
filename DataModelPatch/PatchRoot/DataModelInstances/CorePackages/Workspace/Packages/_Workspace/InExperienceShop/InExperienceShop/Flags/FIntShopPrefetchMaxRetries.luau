@@ -1,1 +1,0 @@
-﻿return game:DefineFastInt("ShopPrefetchMaxRetries", 0)

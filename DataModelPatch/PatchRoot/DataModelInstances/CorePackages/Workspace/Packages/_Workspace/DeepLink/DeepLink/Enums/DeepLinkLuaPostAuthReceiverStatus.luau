@@ -1,1 +1,0 @@
-﻿return { Ready = "Ready", Disconnected = "Disconnected" }

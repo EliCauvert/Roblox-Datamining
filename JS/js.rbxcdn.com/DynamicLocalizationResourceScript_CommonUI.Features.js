@@ -134,6 +134,7 @@ Roblox.LangDynamic["CommonUI.Features"] = {
     "Label.Newsroom": "Newsroom",
     "Label.HelpCenter2": "Help center",
     "Label.SupportCenter2": "Experience support history",
-    "Label.ContactUs2": "Contact us"
+    "Label.ContactUs2": "Contact us",
+    "Label.MyLibrary": "My Library"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_CommonUI.Features");

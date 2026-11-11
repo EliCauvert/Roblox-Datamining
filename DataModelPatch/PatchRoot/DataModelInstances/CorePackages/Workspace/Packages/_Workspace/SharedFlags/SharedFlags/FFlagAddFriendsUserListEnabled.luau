@@ -1,1 +1,0 @@
-﻿return require(script.Parent.FFlagAddFriendsRenderTileRefactor) and game:DefineFastFlag("AddFriendsUserListEnabled_v2", false)

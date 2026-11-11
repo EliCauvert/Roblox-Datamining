@@ -3,12 +3,12 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "1876b274-5c35-c005-cd50-7cd6bcd603f2")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "f1870943-e46c-1ba3-6c0b-3b5b80d6a8f6")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 29929, e => {
     "use strict";
-    var t, a, r, s, o, i, c, n, l, d, u, b, g, m, p, h, v, f, x = e.i(650502),
+    var t, a, r, s, o, i, n, l, c, d, u, g, m, p, b, h, v, f, x = e.i(650502),
         _ = e.i(864392),
         y = ((t = {}).ShowVrDeviceOption = "showVrDeviceOption", t.ShowIXPClientTest = "showIXPClientTest", t.ShowMemoryStoresDashboard = "showMemoryStoresDashboard", t.ShowAdvancedSettingsPage = "showAdvancedSettingsPage", t.EnableIA = "enableIA", t.EnableSubscriptionActivationTest = "enableSubscriptionActivationTest", t.EnableDevexEarnedRobux = "enableDevexEarnedRobux", t.EnableExperienceGenre = "enableExperienceGenre", t.EnablePlayerFeedbackTranslationsWeb = "EnablePlayerFeedbackTranslationsWeb", t.EnablePlayerFeedbackTranslationRetries = "EnablePlayerFeedbackTranslationRetries", t.EnablePlayerFeedbackDetailedFilter = "enablePlayerFeedbackDetailedFilter", t.EnableEventRequestFeaturing = "enableEventRequestFeaturing", t.EnableCollaboratorsPageV2 = "enableCollaboratorsPageV2", t),
         k = ((a = {}).EnableRightsManager = "enableRightsManager", a.EnableBulkFiling = "enableBulkFiling", a.EnableOnDemandSearch = "enableOnDemandSearch", a.EnableEditRegistration = "enableEditRegistration", a.EnableImageSearch = "enableImageSearch", a.EnableClaimsAgainstMe = "enableClaimsAgainstMe", a.EnableGenAiOptOut = "enableGenAiOptOut", a.EnableInExperienceIpReporting = "enableInExperienceIpReporting", a.EnableIpContentSearch = "enableIpContentSearch", a.EnableTrademark = "enableTrademark", a),
@@ -17,16 +17,16 @@
         S = ((o = S || {}).LicenseSwimlanePlacement = "licenseSwimlanePlacement", o),
         q = ((i = q || {}).EnableSignalLookup = "enableSignalLookup", i.AlwaysShow = "alwaysShow", i),
         E = E || {},
-        P = ((c = P || {}).mobileVariant = "mobileVariant", c),
+        P = ((n = P || {}).mobileVariant = "mobileVariant", n),
         U = U || {},
-        H = ((n = {}).ShowEditInStudioButton = "showEditInStudioButton", n.EnableCreationsNavLayout = "enableCreationsIPNavLayout", n),
-        A = ((l = {}).EnableMultiAssetSearch = "enableMultiAssetSearch", l),
+        H = ((l = {}).ShowEditInStudioButton = "showEditInStudioButton", l.EnableCreationsNavLayout = "enableCreationsIPNavLayout", l),
+        A = ((c = {}).EnableMultiAssetSearch = "enableMultiAssetSearch", c),
         I = ((d = {}).EnableAudienceReachOnOverview = "enableAudienceReachOnOverviewPage", d.EnableAudienceReachGrowthOpportunitiesBanner = "enableAudienceReachGrowthOpportunitiesBanner", d.EnableAudienceControls = "enableAudienceControls", d.EnableAtRiskAnnotationOnExperiences = "enableAtRiskAnnotationOnExperiences", d.EnableAudiencesReplacement = "enableAudiencesReplacement", d),
         T = ((u = {}).EnableTalentHubV2 = "enableTalentHubV2", u.EnableTalentHubV2M2 = "enableTalentHubV2M2", u),
-        R = ((b = R || {}).EnableExperienceWebhooks = "enableExperienceWebhooks", b),
-        G = ((g = G || {}).GameAppealsEnabled = "gameAppealsEnabled", g),
-        j = ((m = j || {}).EnableExperienceDataTileV2 = "enableExperienceDataTileV2", m),
-        L = ((p = L || {}).EnableChangelogCMS = "enableChangelogCMS", p),
+        R = ((g = R || {}).EnableExperienceWebhooks = "enableExperienceWebhooks", g),
+        G = ((m = G || {}).GameAppealsEnabled = "gameAppealsEnabled", m),
+        j = ((p = j || {}).EnableExperienceDataTileV2 = "enableExperienceDataTileV2", p),
+        L = ((b = L || {}).EnableChangelogCMS = "enableChangelogCMS", b),
         O = ((h = {}).CreatorDashboard = "CreatorDashboard", h.CreatorHubHomePage = "CreatorHub.HomePage.UserId", h.CreatorHomeDiscovery = "CreatorHomeDiscovery", h.CreatorHubHomePageExperienceTile = "CreatorHub.HomePage.ExperienceTile.UserId", h.CreatorHubHomePageOpportunitiesSection = "CreatorHub.HomePage.OpportunitiesSection.UserId", h.CreatorHubLandingPage = "CreatorHub.LandingPage", h.CreatorHubLandingPageUserId = "CreatorHub.LandingPage.UserId", h.CreatorHubNavigation = "CreatorHub.Navigation", h.CreatorHubNavigationUser = "CreatorHub.Navigation.User", h.CreatorHubPublishing = "CreatorHub.Publishing.UserId", h.LicenseManager = "CreatorDashboard.LicenseManager", h.RightsManager = "CreatorDashboard.RightsManager", h.CreatorSuccessOrganizations = "CreatorSuccess.OrganizationsV2", h.CreatorHubDocumentationSearch = "CreatorHub.CreatorDocumentation.Search.UserId", h.CreatorHubCreationsPermission = "CreatorHub.Creations.Permission", h.CreatorHubExperienceWebhooks = "CreatorHub.ExperienceWebhooks.UserId", h.CreatorHubGameAppeals = "CreatorHub.GameAppeals.UserId", h.CreatorHubChangelog = "CreatorHub.Changelog", h.TalentHub = "CreatorHub.TalentHub.UserId", h),
         M = ((v = M || {}).ShowMemoryStoresDashboard = "showMemoryStoresDashboard", v.EnableSubscriptionActivationTest = "enableSubscriptionActivationTest", v.ShowSecrets = "showSecrets", v.ShowQualitySignalCards = "showQualitySignalCards", v);
     let D = {
@@ -78,15 +78,15 @@
         s = e.i(776344),
         o = e.i(462863),
         i = e.i(177244),
-        c = e.i(346082),
-        n = e.i(676695),
-        l = e.i(551e3),
+        n = e.i(346082),
+        l = e.i(676695),
+        c = e.i(551e3),
         d = e.i(265260),
         u = e.i(330351),
-        b = e.i(267338),
-        g = e.i(636172),
-        m = e.i(508308),
-        p = e.i(517406),
+        g = e.i(267338),
+        m = e.i(636172),
+        p = e.i(508308),
+        b = e.i(517406),
         h = e.i(918777),
         v = e.i(739181),
         f = e.i(381997),
@@ -132,15 +132,15 @@
         es = e.i(867987),
         eo = e.i(75599),
         ei = e.i(836849),
-        ec = e.i(956436),
-        en = e.i(798641),
-        el = e.i(374526),
+        en = e.i(956436),
+        el = e.i(798641),
+        ec = e.i(374526),
         ed = e.i(602235),
         eu = e.i(684112),
-        eb = e.i(856476),
-        eg = e.i(663085),
-        em = e.i(665266),
-        ep = e.i(927690);
+        eg = e.i(856476),
+        em = e.i(663085),
+        ep = e.i(665266),
+        eb = e.i(927690);
     let eh = {
         secrets: {
             light: G.default,
@@ -155,8 +155,8 @@
             dark: Q.default
         },
         experiences: {
-            light: em.default,
-            dark: eg.default
+            light: ep.default,
+            dark: em.default
         },
         shareLinks: {
             light: er.default,
@@ -179,8 +179,8 @@
             dark: N.default
         },
         audio: {
-            light: l.default,
-            dark: n.default
+            light: c.default,
+            dark: l.default
         },
         decals: {
             light: x.default,
@@ -191,8 +191,8 @@
             dark: q.default
         },
         videos: {
-            light: ep.default,
-            dark: eb.default
+            light: eb.default,
+            dark: eg.default
         },
         meshes: {
             light: F.default,
@@ -219,7 +219,7 @@
             dark: J.default
         },
         tokens: {
-            light: ec.default,
+            light: en.default,
             dark: ei.default
         },
         chart: {
@@ -227,11 +227,11 @@
             dark: H.default
         },
         badge: {
-            light: g.default,
-            dark: b.default
+            light: m.default,
+            dark: g.default
         },
         apiKeys: {
-            light: c.default,
+            light: n.default,
             dark: i.default
         },
         signin: {
@@ -247,8 +247,8 @@
             dark: j.default
         },
         barGraph: {
-            light: p.default,
-            dark: m.default
+            light: b.default,
+            dark: p.default
         },
         leaderboard: {
             light: U.default,
@@ -268,15 +268,15 @@
         },
         trial: {
             light: eu.default,
-            dark: en.default
+            dark: el.default
         },
         trialGamepass: {
             light: ed.default,
-            dark: el.default
+            dark: ec.default
         }
     };
     e.s(["default", 0, eh], 938429);
-    let ev = "".concat("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/assets", "/spot_illustrations"),
+    let ev = "".concat("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/assets", "/spot_illustrations"),
         ef = {
             small: {
                 analytics: "".concat(ev, "/small/analytics.svg"),
@@ -365,34 +365,34 @@
                 children: r,
                 title: o,
                 description: i,
-                size: c = "large",
-                illustration: n
+                size: n = "large",
+                illustration: l
             } = e, {
                 classes: {
-                    smallContainer: l,
+                    smallContainer: c,
                     largeContainer: d,
                     smallText: u,
-                    largeText: b
+                    largeText: g
                 },
-                cx: g
+                cx: m
             } = ex();
             return (0, t.jsxs)(s.default, {
                 classes: {
-                    root: g({
-                        [l]: "small" === c,
-                        [d]: "large" === c
+                    root: m({
+                        [c]: "small" === n,
+                        [d]: "large" === n
                     })
                 },
                 flexDirection: "column",
                 alignItems: "center",
                 children: [(0, t.jsx)(e_, {
-                    illustration: n,
-                    size: c
+                    illustration: l,
+                    size: n
                 }), (0, t.jsxs)(s.default, {
                     classes: {
-                        root: g({
-                            [u]: "small" === c,
-                            [b]: "large" === c
+                        root: m({
+                            [u]: "small" === n,
+                            [g]: "large" === n
                         })
                     },
                     flexDirection: "column",
@@ -434,8 +434,8 @@
         };
     e.s(["default", 0, function(e, o) {
         var i;
-        let c = null != (i = null == o ? void 0 : o.cacheOnly) && i,
-            [n, l] = (0, t.useState)(() => c ? {
+        let n = null != (i = null == o ? void 0 : o.cacheOnly) && i,
+            [l, c] = (0, t.useState)(() => n ? {
                 params: r(e),
                 status: "success",
                 isFetched: !0
@@ -445,26 +445,26 @@
                 isFetched: !1
             });
         return (0, t.useEffect)(() => {
-            c || (async () => {
+            n || (async () => {
                 let t = {};
                 try {
-                    l(e => ({
+                    c(e => ({
                         ...e,
                         status: "loading"
-                    })), t = await (0, a.fetchIXPParametersForCurrentUser)(e), l({
+                    })), t = await (0, a.fetchIXPParametersForCurrentUser)(e), c({
                         params: t,
                         isFetched: !0,
                         status: "success"
                     }), s(e, t)
                 } catch (e) {
-                    l(e => ({
+                    c(e => ({
                         ...e,
                         isFetched: !0,
                         status: "error"
                     }))
                 }
             })()
-        }, []), n
+        }, []), l
     }])
 }, 191685, 875075, e => {
     "use strict";
@@ -485,12 +485,12 @@
         return "3f".concat(await t.create(e))
     };
     e.s(["WASM_HASH_PARAM", 0, o, "createWasmHash", 0, i], 875075);
-    var c = e.i(17829);
-    let n = "https://www.".concat("roblox.com"),
-        l = "https://advertise.".concat("roblox.com"),
-        d = e => "".concat(n, "/groups/").concat(e),
-        u = e => "".concat(n, "/users/").concat(e, "/profile");
-    e.s(["AdsManagerUrl", 0, l, "BUY_ROBUX_CTX_CREATOR_HUB", 0, "creatorhub", "getAccountSecurityMethodUrl", 0, e => "".concat(n, "/my/account#!/security?display=").concat(e), "getAccountSecurityUrl", 0, () => "".concat(n, "/my/account#!/security"), "getAccountSettingsUrl", 0, () => "".concat(n, "/my/account#!/info"), "getAppealsPortalUrl", 0, () => "".concat(n, "/report-appeals#"), "getBadgeUrl", 0, e => "".concat(n, "/badges/").concat(e), "getBundleUrl", 0, e => "".concat(n, "/bundles/").concat(e), "getBuyRobuxUrl", 0, e => "".concat(n, "/upgrades/robux?ctx=").concat(encodeURIComponent(e)), "getCatalogUrl", 0, e => "".concat(n, "/catalog/").concat(e), "getCommunitiesUrl", 0, e => "".concat(n, "/communities/").concat(e), "getConfigureGroupRevenueSalesUrl", 0, e => "".concat(n, "/groups/configure?id=").concat(e, "#!/revenue/sales"), "getConfigureGroupRolesUrl", 0, e => "".concat(n, "/groups/configure?id=").concat(e, "#!/roles"), "getCreatorUrl", 0, (e, t) => e === c.default.Group ? d(t) : u(t), "getEventUrl", 0, e => "".concat(n, "/events/").concat(e), "getGameDetailsUrl", 0, e => "".concat(n, "/games/").concat(e), "getGamePassUrl", 0, e => "".concat(n, "/game-pass/").concat(e), "getGroupUrl", 0, d, "getHomeUrl", 0, () => "".concat(n, "/home"), "getLegacyGroupTransactionsUrl", 0, e => "".concat(n, "/groups/configure?id=").concat(e, "#!/revenue/sales"), "getLegacyTransactionsUrl", 0, () => "".concat(n, "/transactions"), "getLookUrl", 0, e => "".concat(n, "/looks/").concat(e), "getPaymentMethodsUrl", 0, e => "".concat(n, "/upgrades/paymentmethods?ap=").concat(encodeURIComponent(e)), "getPlayOnWebUrl", 0, (e, a) => "".concat((0, t.resolveUrl)("playRobloxUrl", "production", "global"), "/games/start?placeId=").concat(e, "&").concat(o, "=").concat(a), "getSponsorAvatarItemsUrl", 0, () => "".concat(n, "/sponsorships/list#!/avatar-items"), "getSponsorExperienceCreateUrl", 0, e => "".concat(l, "/create?universeId=").concat(e), "getSponsorExperienceUrl", 0, e => "".concat(l, "?universeId=").concat(e), "getSupportFormUrl", 0, () => "".concat(n, "/support"), "getTermsUrl", 0, () => "".concat(n, "/info/terms"), "getTransactionsUrl", 0, () => "".concat(n, "/transactions"), "getUrl", 0, () => n, "getUserUrl", 0, u], 191685)
+    var n = e.i(17829);
+    let l = "https://www.".concat("roblox.com"),
+        c = "https://advertise.".concat("roblox.com"),
+        d = e => "".concat(l, "/groups/").concat(e),
+        u = e => "".concat(l, "/users/").concat(e, "/profile");
+    e.s(["AdsManagerUrl", 0, c, "BUY_ROBUX_CTX_CREATOR_HUB", 0, "creatorhub", "getAccountSecurityMethodUrl", 0, e => "".concat(l, "/my/account#!/security?display=").concat(e), "getAccountSecurityUrl", 0, () => "".concat(l, "/my/account#!/security"), "getAccountSettingsUrl", 0, () => "".concat(l, "/my/account#!/info"), "getAppealsPortalUrl", 0, () => "".concat(l, "/report-appeals#"), "getBadgeUrl", 0, e => "".concat(l, "/badges/").concat(e), "getBundleUrl", 0, e => "".concat(l, "/bundles/").concat(e), "getBuyRobuxUrl", 0, e => "".concat(l, "/upgrades/robux?ctx=").concat(encodeURIComponent(e)), "getCatalogUrl", 0, e => "".concat(l, "/catalog/").concat(e), "getCommunitiesUrl", 0, e => "".concat(l, "/communities/").concat(e), "getConfigureGroupRevenueSalesUrl", 0, e => "".concat(l, "/groups/configure?id=").concat(e, "#!/revenue/sales"), "getConfigureGroupRolesUrl", 0, e => "".concat(l, "/groups/configure?id=").concat(e, "#!/roles"), "getCreatorUrl", 0, (e, t) => e === n.default.Group ? d(t) : u(t), "getEventUrl", 0, e => "".concat(l, "/events/").concat(e), "getGameDetailsUrl", 0, e => "".concat(l, "/games/").concat(e), "getGamePassUrl", 0, e => "".concat(l, "/game-pass/").concat(e), "getGroupUrl", 0, d, "getHomeUrl", 0, () => "".concat(l, "/home"), "getLegacyGroupTransactionsUrl", 0, e => "".concat(l, "/groups/configure?id=").concat(e, "#!/revenue/sales"), "getLegacyTransactionsUrl", 0, () => "".concat(l, "/transactions"), "getLookUrl", 0, e => "".concat(l, "/looks/").concat(e), "getPaymentMethodsUrl", 0, e => "".concat(l, "/upgrades/paymentmethods?ap=").concat(encodeURIComponent(e)), "getPlayOnWebUrl", 0, (e, a) => "".concat((0, t.resolveUrl)("playRobloxUrl", "production", "global"), "/games/start?placeId=").concat(e, "&").concat(o, "=").concat(a), "getSponsorAvatarItemsUrl", 0, () => "".concat(l, "/sponsorships/list#!/avatar-items"), "getSponsorExperienceCreateUrl", 0, e => "".concat(c, "/create?universeId=").concat(e), "getSponsorExperienceUrl", 0, e => "".concat(c, "?universeId=").concat(e), "getSupportFormUrl", 0, () => "".concat(l, "/support"), "getTermsUrl", 0, () => "".concat(l, "/info/terms"), "getTransactionsUrl", 0, () => "".concat(l, "/transactions"), "getUrl", 0, () => l, "getUserUrl", 0, u], 191685)
 }, 426546, e => {
     "use strict";
     var t = e.i(191685);
@@ -512,45 +512,45 @@
         s = e.i(533414),
         o = e.i(157310),
         i = e.i(128513),
-        c = e.i(602635),
-        n = e.i(814975);
-    let l = (0, e.i(272593).createClientConfiguration)("creator-home-api", "bedev2"),
-        d = new i.UserScreenApi(l),
-        u = new i.GroupsApi(l),
-        b = {
+        n = e.i(602635),
+        l = e.i(814975);
+    let c = (0, e.i(272593).createClientConfiguration)("creator-home-api", "bedev2"),
+        d = new i.UserScreenApi(c),
+        u = new i.GroupsApi(c),
+        g = {
             groupsApi: u,
             userScreenApi: d,
-            creatorHomeContentApi: new i.CreatorHomeContentApi(l),
-            signalsApi: new i.SignalsApi(l)
+            creatorHomeContentApi: new i.CreatorHomeContentApi(c),
+            signalsApi: new i.SignalsApi(c)
         };
-    e.s(["CreatorHomeClient", 0, b], 67262);
-    let g = function() {
+    e.s(["CreatorHomeClient", 0, g], 67262);
+    let m = function() {
         let {
             user: e
-        } = (0, n.useAuthentication)();
+        } = (0, l.useAuthentication)();
         return (0, o.useQuery)({
-            queryKey: c.getGroupsQueryKey,
+            queryKey: n.getGroupsQueryKey,
             enabled: !!e,
             queryFn: () => {
                 let e;
                 return e = {
                     surface: i.GroupListSurface.CreatorHub
-                }, b.groupsApi.groupsListGroups(e)
+                }, g.groupsApi.groupsListGroups(e)
             }
         })
     };
-    var m = e.i(809576);
-    let p = (0, a.createContext)(null);
+    var p = e.i(809576);
+    let b = (0, a.createContext)(null);
     e.s(["GroupsProvider", 0, e => {
         let {
             children: o
         } = e, {
             user: i
-        } = (0, r.useRobloxAuthentication)(), c = (0, m.useGroupPermissionFetchers)(), {
-            data: n,
-            isLoading: l,
+        } = (0, r.useRobloxAuthentication)(), n = (0, p.useGroupPermissionFetchers)(), {
+            data: l,
+            isLoading: c,
             refetch: d
-        } = g(), [u, b] = (0, s.useLocalStorage)("creatorHubGroups.".concat(null == i ? void 0 : i.id), null), [h, v] = (0, s.useLocalStorage)("creatorHubGroup.".concat(null == i ? void 0 : i.id), null), [f, x] = (0, s.useLocalStorage)("creatorHubGroupData.".concat(null == i ? void 0 : i.id), {}), _ = (0, a.useCallback)(e => {
+        } = m(), [u, g] = (0, s.useLocalStorage)("creatorHubGroups.".concat(null == i ? void 0 : i.id), null), [h, v] = (0, s.useLocalStorage)("creatorHubGroup.".concat(null == i ? void 0 : i.id), null), [f, x] = (0, s.useLocalStorage)("creatorHubGroupData.".concat(null == i ? void 0 : i.id), {}), _ = (0, a.useCallback)(e => {
             v(e);
             let t = null != e ? e : "user";
             x(e => {
@@ -571,7 +571,7 @@
                 }
             })
         }, [v, x]), y = (0, a.useMemo)(() => {
-            if (null == n ? void 0 : n.groups) return null == n ? void 0 : n.groups;
+            if (null == l ? void 0 : l.groups) return null == l ? void 0 : l.groups;
             if (null === u) return [];
             try {
                 let e = "string" == typeof u ? JSON.parse(u) : u;
@@ -579,7 +579,7 @@
             } catch (e) {
                 return []
             }
-        }, [u, null == n ? void 0 : n.groups]), k = (0, a.useMemo)(() => {
+        }, [u, null == l ? void 0 : l.groups]), k = (0, a.useMemo)(() => {
             var e;
             return h && null != (e = y.find(e => {
                 let {
@@ -592,41 +592,41 @@
             error: q,
             isPending: E,
             refetch: P
-        } = (0, m.useGroupResolvedPermissionsQuery)(C, w), {
+        } = (0, p.useGroupResolvedPermissionsQuery)(C, w), {
             data: U,
             isPending: H,
             refetch: A
-        } = (0, m.useGroupOwnershipQuery)(C, w), I = (0, a.useCallback)(() => null == C || null == w ? Promise.resolve() : Promise.all([P(), A()]), [A, P, C, w]);
+        } = (0, p.useGroupOwnershipQuery)(C, w), I = (0, a.useCallback)(() => null == C || null == w ? Promise.resolve() : Promise.all([P(), A()]), [A, P, C, w]);
         (0, a.useEffect)(() => {
-            (null == i ? void 0 : i.id) && (null == n ? void 0 : n.groups) && !l && b(null == n ? void 0 : n.groups)
-        }, [null == n ? void 0 : n.groups, y, l, b, null == i ? void 0 : i.id]);
+            (null == i ? void 0 : i.id) && (null == l ? void 0 : l.groups) && !c && g(null == l ? void 0 : l.groups)
+        }, [null == l ? void 0 : l.groups, y, c, g, null == i ? void 0 : i.id]);
         let T = (0, a.useMemo)(() => {
             var e;
             return {
                 groups: y,
                 currentGroup: k,
                 groupData: f,
-                isFetched: !l && !!w,
+                isFetched: !c && !!w,
                 refreshGroups: d,
                 setCurrentGroup: _,
-                ...c,
+                ...n,
                 permissions: S,
                 isOwner: null != w && (null == U || null == (e = U.owner) ? void 0 : e.userId) === w,
                 isPermissionsLoading: null != k && (E || H),
                 permissionsError: q,
                 refreshPermissions: I
             }
-        }, [k, f, y, l, H, E, U, c, S, q, d, I, _, w]);
-        return (0, t.jsx)(p.Provider, {
+        }, [k, f, y, c, H, E, U, n, S, q, d, I, _, w]);
+        return (0, t.jsx)(b.Provider, {
             value: T,
             children: o
         })
     }, "useCurrentGroup", 0, () => {
-        let e = (0, a.useContext)(p);
+        let e = (0, a.useContext)(b);
         if (null === e) throw Error("useCurrentGroup must be used within a GroupsProvider");
         return e.currentGroup
     }, "useGroups", 0, () => {
-        let e = (0, a.useContext)(p);
+        let e = (0, a.useContext)(b);
         if (null === e) throw Error("useGroups must be used within a GroupsProvider");
         return e
     }], 745873)
@@ -638,24 +638,24 @@
         s = e.i(795621),
         o = e.i(458451),
         i = e.i(536745),
-        c = e.i(272593);
-    let n = new i.PermissionsV2Api((0, c.createClientConfiguration)("groups", "bedev1"));
-    async function l(e, t, a) {
+        n = e.i(272593);
+    let l = new i.PermissionsV2Api((0, n.createClientConfiguration)("groups", "bedev1"));
+    async function c(e, t, a) {
         var r;
-        return null != (r = (await n.v2GroupsGroupIdEntityTypeEntityIdPermissionsResolvedGet({
+        return null != (r = (await l.v2GroupsGroupIdEntityTypeEntityIdPermissionsResolvedGet({
             groupId: e,
             entityType: t,
             entityId: a
         })).permissions) ? r : {}
     }
     async function d(e) {
-        return l(e, "groups", String(e))
+        return c(e, "groups", String(e))
     }
     async function u(e) {
         let t, a = [];
         do {
             var r, s;
-            let o = await n.v2GroupsGroupIdEntityTypePermissionsResolvedGet({
+            let o = await l.v2GroupsGroupIdEntityTypePermissionsResolvedGet({
                 groupId: e,
                 entityType: "roles",
                 cursor: t
@@ -663,45 +663,45 @@
             a.push(...null != (r = o.data) ? r : []), t = null != (s = o.nextPageCursor) ? s : void 0
         } while (t) return a
     }
-    var b = e.i(156071);
-    let g = new i.PermissionsV2Api((0, c.createClientConfiguration)("groups", "bedev1"));
-    async function m(e) {
+    var g = e.i(156071);
+    let m = new i.PermissionsV2Api((0, n.createClientConfiguration)("groups", "bedev1"));
+    async function p(e) {
         var t;
-        return null != (t = (await g.v2EntityTypeEntityIdPermissionsResolvedGet({
+        return null != (t = (await m.v2EntityTypeEntityIdPermissionsResolvedGet({
             entityType: "universes",
             entityId: String(e)
         })).permissions) ? t : {}
     }
-    var p = e.i(759283);
+    var b = e.i(759283);
     let h = (e, t) => ["groups", e, t, "resolved-permissions"],
         v = (e, t) => ["groups", e, t, "roles", "resolved-permissions"],
         f = (e, t) => ["universe-resolved-permissions", t, void 0 === e ? e : String(e)];
     e.s(["useGroupOwnershipQuery", 0, function(e, t) {
         return (0, r.useQuery)({
             queryKey: ["groups", e, t, "owner"],
-            queryFn: e && t ? () => b.default.getGroupInfo(e) : a.skipToken
+            queryFn: e && t ? () => g.default.getGroupInfo(e) : a.skipToken
         })
     }, "useGroupPermissionFetchers", 0, function() {
         let {
             user: e
         } = (0, o.useRobloxAuthentication)(), a = (0, s.useQueryClient)(), r = null == e ? void 0 : e.id, i = (0, t.useCallback)(e => a.fetchQuery({
             queryKey: f(e, r),
-            queryFn: () => m(e),
+            queryFn: () => p(e),
             staleTime: 6e4
-        }), [a, r]), c = (0, t.useCallback)(e => a.fetchQuery({
+        }), [a, r]), n = (0, t.useCallback)(e => a.fetchQuery({
             queryKey: h(e, r),
             queryFn: () => d(e),
             staleTime: 6e4
-        }), [a, r]), n = (0, t.useCallback)(e => a.fetchQuery({
+        }), [a, r]), l = (0, t.useCallback)(e => a.fetchQuery({
             queryKey: v(e, r),
             queryFn: () => u(e),
             staleTime: 6e4
         }), [a, r]);
         return (0, t.useMemo)(() => ({
-            fetchGroupPermissions: c,
-            fetchRolePermissions: n,
+            fetchGroupPermissions: n,
+            fetchRolePermissions: l,
             fetchUniversePermissions: i
-        }), [c, n, i])
+        }), [n, l, i])
     }, "useGroupResolvedPermissionsQuery", 0, function(e, t) {
         return (0, r.useQuery)({
             queryKey: h(e, t),
@@ -723,142 +723,142 @@
         } = (0, o.useRobloxAuthentication)(), s = null == t ? void 0 : t.id;
         return (0, r.useQuery)({
             queryKey: f(e, s),
-            queryFn: void 0 !== e && e !== p.uninitializedUniverseId ? () => m(e) : a.skipToken,
+            queryFn: void 0 !== e && e !== b.uninitializedUniverseId ? () => p(e) : a.skipToken,
             staleTime: 6e4
         })
     }], 809576)
 }, 501704, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/alert_dark.1spa8ixzmujxs.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/alert_dark.1spa8ixzmujxs.svg")
 }, 782294, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/alert_light.3o6_fob3g_8zu.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/alert_light.3o6_fob3g_8zu.svg")
 }, 177244, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/api_key_dark.1k1v6y4zm3j28.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/api_key_dark.1k1v6y4zm3j28.svg")
 }, 346082, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/api_key_light.06t4q4202-77s.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/api_key_light.06t4q4202-77s.svg")
 }, 676695, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/audio_dark.16razgllw2ska.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/audio_dark.16razgllw2ska.svg")
 }, 551e3, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/audio_light.3ra073_18pbj-.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/audio_light.3ra073_18pbj-.svg")
 }, 265260, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/avatar_setup_dark.0orjsl7i089hc.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/avatar_setup_dark.0orjsl7i089hc.svg")
 }, 330351, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/avatar_setup_light.32r86q54d7kuh.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/avatar_setup_light.32r86q54d7kuh.svg")
 }, 267338, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/badge_dark.3m45r-3favo3f.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/badge_dark.3m45r-3favo3f.svg")
 }, 636172, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/badge_light.3fxfvj8ub7utb.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/badge_light.3fxfvj8ub7utb.svg")
 }, 508308, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/bar_graph_dark.01vf9sty52re2.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/bar_graph_dark.01vf9sty52re2.svg")
 }, 517406, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/bar_graph_light.1iiixo_d8ur81.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/bar_graph_light.1iiixo_d8ur81.svg")
 }, 918777, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/collaborators_dark.30gxkwssilacj.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/collaborators_dark.30gxkwssilacj.svg")
 }, 739181, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/collaborators_light.3x7fovqhay1x5.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/collaborators_light.3x7fovqhay1x5.svg")
 }, 381997, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/decals_dark.2jpntsljojhzc.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/decals_dark.2jpntsljojhzc.svg")
 }, 940530, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/decals_light.16_gp3tnuc5p_.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/decals_light.16_gp3tnuc5p_.svg")
 }, 549779, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/envelope_dark.2-ouf9shuihi4.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/envelope_dark.2-ouf9shuihi4.svg")
 }, 814110, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/envelope_light.1me9hqye66z7w.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/envelope_light.1me9hqye66z7w.svg")
 }, 40761, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/event_calendar_dark.3lx4_kse68by8.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/event_calendar_dark.3lx4_kse68by8.svg")
 }, 155845, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/event_calendar_light.1pq-t84d90ty1.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/event_calendar_light.1pq-t84d90ty1.svg")
 }, 550425, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/find_people_dark.220q6_cs04hcq.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/find_people_dark.220q6_cs04hcq.svg")
 }, 396147, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/find_people_light.1gkb3pmwc8s2n.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/find_people_light.1gkb3pmwc8s2n.svg")
 }, 28401, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/image_dark.2giew28wx4z86.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/image_dark.2giew28wx4z86.svg")
 }, 464170, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/image_light.0ouq8tcgpznz7.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/image_light.0ouq8tcgpznz7.svg")
 }, 564751, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/leaderboard_dark.301ypg94lbxpv.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/leaderboard_dark.301ypg94lbxpv.svg")
 }, 307025, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/leaderboard_light.43sjz_ibwkiq_.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/leaderboard_light.43sjz_ibwkiq_.svg")
 }, 313639, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/line_chart_dark.0k7qf3mhepo6s.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/line_chart_dark.0k7qf3mhepo6s.svg")
 }, 147556, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/line_chart_light.049gcvvmai0ax.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/line_chart_light.049gcvvmai0ax.svg")
 }, 559061, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/localization_dark.1ia7wat2mwyfi.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/localization_dark.1ia7wat2mwyfi.svg")
 }, 316883, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/localization_light.2jss_xvx2fuq0.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/localization_light.2jss_xvx2fuq0.svg")
 }, 421106, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/lockSecrets_dark.0na6naigcbnkj.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/lockSecrets_dark.0na6naigcbnkj.svg")
 }, 597112, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/lockSecrets_light.0rzix2i1i13lt.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/lockSecrets_light.0rzix2i1i13lt.svg")
 }, 353483, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/makeup_look_dark.26-5-yn8598c9.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/makeup_look_dark.26-5-yn8598c9.svg")
 }, 686034, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/makeup_look_light.0rc05t5n5al4m.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/makeup_look_light.0rc05t5n5al4m.svg")
 }, 519715, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/managed_pricing_dark.2zdkf2-ctboa2.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/managed_pricing_dark.2zdkf2-ctboa2.svg")
 }, 502010, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/managed_pricing_light.0sioq_hruq1qp.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/managed_pricing_light.0sioq_hruq1qp.svg")
 }, 774889, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/meshes_dark.2tlm50ns1pq5o.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/meshes_dark.2tlm50ns1pq5o.svg")
 }, 801362, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/meshes_light.36wh96flp2o3r.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/meshes_light.36wh96flp2o3r.svg")
 }, 956159, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/models_dark.30suu5lj5-ua5.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/models_dark.30suu5lj5-ua5.svg")
 }, 149660, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/models_light.0kiw6k3ejw-rn.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/models_light.0kiw6k3ejw-rn.svg")
 }, 889703, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/models_plugins_parts_dark.3jp6jislnsqf8.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/models_plugins_parts_dark.3jp6jislnsqf8.svg")
 }, 414235, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/models_plugins_parts_light.2nj1xhv0bfg_u.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/models_plugins_parts_light.2nj1xhv0bfg_u.svg")
 }, 118756, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/notifications_dark.2l_rf34_xo6o8.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/notifications_dark.2l_rf34_xo6o8.svg")
 }, 904302, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/notifications_light.3p-b4rzvwwfmj.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/notifications_light.3p-b4rzvwwfmj.svg")
 }, 178653, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/oauth_dark.42jv8--11_1i0.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/oauth_dark.42jv8--11_1i0.svg")
 }, 234503, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/oauth_light.17vwiebwrn8ox.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/oauth_light.17vwiebwrn8ox.svg")
 }, 638331, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/rights_manager_dark.0m7ca17sdbgim.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/rights_manager_dark.0m7ca17sdbgim.svg")
 }, 775937, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/rights_manager_light.1moaenz1cbft0.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/rights_manager_light.1moaenz1cbft0.svg")
 }, 272258, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/robux_dark.0adh_znay53ig.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/robux_dark.0adh_znay53ig.svg")
 }, 671182, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/robux_light.0r27xddcy2n6m.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/robux_light.0r27xddcy2n6m.svg")
 }, 335605, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/run_dark.1sun4tvxh_arh.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/run_dark.1sun4tvxh_arh.svg")
 }, 742089, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/run_light.29f-3jyw910_v.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/run_light.29f-3jyw910_v.svg")
 }, 599094, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/shareLinks_dark.1l5fwuv6cgzmy.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/shareLinks_dark.1l5fwuv6cgzmy.svg")
 }, 939457, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/shareLinks_light.116igf-ldibmu.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/shareLinks_light.116igf-ldibmu.svg")
 }, 867987, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/signin_dark.1k_gzn1-5q0ca.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/signin_dark.1k_gzn1-5q0ca.svg")
 }, 75599, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/signin_light.1o1-jng_ct0y2.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/signin_light.1o1-jng_ct0y2.svg")
 }, 836849, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/token_dark.2qy4jy9ffjhax.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/token_dark.2qy4jy9ffjhax.svg")
 }, 956436, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/token_light.2xc00j5zp1q8_.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/token_light.2xc00j5zp1q8_.svg")
 }, 798641, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/trial_dark.2llr5mlhjq5fa.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/trial_dark.2llr5mlhjq5fa.svg")
 }, 374526, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/trial_gamepass_dark.35rtv5i112_gt.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/trial_gamepass_dark.35rtv5i112_gt.svg")
 }, 602235, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/trial_gamepass_light.2wpn1oa2gkp7h.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/trial_gamepass_light.2wpn1oa2gkp7h.svg")
 }, 684112, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/trial_light.13hip-hiizhla.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/trial_light.13hip-hiizhla.svg")
 }, 856476, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/video_dark.2-gdpodjtsjj3.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/video_dark.2-gdpodjtsjj3.svg")
 }, 663085, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/video_game_dark.0tuxtkttj8gcu.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/video_game_dark.0tuxtkttj8gcu.svg")
 }, 665266, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/video_game_light.3l155817mjupj.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/video_game_light.3l155817mjupj.svg")
 }, 927690, e => {
-    e.q("https://assets.create.roblox.com/e6d8d6b5ed92c308adf0acc04c8be52988933b17/_next/static/media/video_light.1fum3vlxctp7w.svg")
+    e.q("https://assets.create.roblox.com/d722a9428d755989878c38d63441d75b79735e79/_next/static/media/video_light.1fum3vlxctp7w.svg")
 }, 459703, e => {
     "use strict";
     var t = e.i(30941),
@@ -877,15 +877,15 @@
         }
     });
     e.s(["default", 0, function(e) {
-        var o, i, c, n, l = e.children,
+        var o, i, n, l, c = e.children,
             d = (0, t.a)(e, ["children"]),
             u = (0, a.useRef)(null),
-            b = (0, a.useState)(!1),
-            g = b[0],
-            m = b[1],
-            p = (0, a.useState)([]),
-            h = p[0],
-            v = p[1],
+            g = (0, a.useState)(!1),
+            m = g[0],
+            p = g[1],
+            b = (0, a.useState)([]),
+            h = b[0],
+            v = b[1],
             f = (0, a.useCallback)(function(e, a) {
                 void 0 === e && (e = {}), void 0 === a && (a = function() {
                     return !0
@@ -897,10 +897,10 @@
                 })
             }, [v]),
             x = (0, a.useCallback)(function() {
-                m(!1)
-            }, [m]);
+                p(!1)
+            }, [p]);
         (0, a.useEffect)(function() {
-            h.length > 0 && m(!0)
+            h.length > 0 && p(!0)
         }, [h.length]);
         var _ = (0, a.useMemo)(function() {
             return {
@@ -911,8 +911,8 @@
         }, [x, f]);
         return a.default.createElement(a.default.Fragment, null, a.default.createElement(s.Provider, {
             value: _
-        }, l), a.default.createElement(r.S, (0, t._)({}, (null == (o = h[0]) ? void 0 : o.props) || {}, d, {
-            TransitionProps: (0, t._)((0, t._)({}, (null == (c = null == (i = h[0]) ? void 0 : i.props) ? void 0 : c.TransitionProps) || {}), {
+        }, c), a.default.createElement(r.S, (0, t._)({}, (null == (o = h[0]) ? void 0 : o.props) || {}, d, {
+            TransitionProps: (0, t._)((0, t._)({}, (null == (n = null == (i = h[0]) ? void 0 : i.props) ? void 0 : n.TransitionProps) || {}), {
                 onExited: function(e) {
                     var a, r, s, o;
                     v(function(e) {
@@ -923,10 +923,10 @@
             }),
             onClose: function(e, t) {
                 var a, r, s;
-                (null == (a = h[0]) ? void 0 : a.shouldClose(t)) && m(!1), (null == (r = h[0]) ? void 0 : r.props.onClose) && (null == (s = h[0]) || s.props.onClose(e, t))
+                (null == (a = h[0]) ? void 0 : a.shouldClose(t)) && p(!1), (null == (r = h[0]) ? void 0 : r.props.onClose) && (null == (s = h[0]) || s.props.onClose(e, t))
             },
-            open: g
-        }), null == (n = h[0]) ? void 0 : n.props.children))
+            open: m
+        }), null == (l = h[0]) ? void 0 : l.props.children))
     }, "useSnackbar", 0, function() {
         var e = (0, a.useContext)(s);
         return {
@@ -944,28 +944,28 @@
         o = ["pageload", "click", "impression", "hover", "webvitals", "apivitals", "formvitals", "error", "session"],
         i = new Set(["TTFB", "FCP", "LCP", "FID", "CLS", "INP"]);
 
-    function c() {
+    function n() {
         let e = (0, t.useContext)(r);
         if (null === e) throw Error("useUnifiedLoggerProvider must be used within a UnifiedLoggerProvider");
         return e
     }
-    let n = () => null;
+    let l = () => null;
     e.s(["UnifiedLoggerProvider", 0, e => {
-        var c;
+        var n;
         let {
-            children: n,
-            unifiedLogger: l,
+            children: l,
+            unifiedLogger: c,
             pageLoggerConfig: d,
             path: u,
-            url: b,
-            isReady: g = !0
-        } = e, m = null != (c = null == d ? void 0 : d.tags) ? c : s, p = null == d ? void 0 : d.rosId, h = (0, t.useMemo)(() => ({
-            tags: m,
-            rosId: p,
+            url: g,
+            isReady: m = !0
+        } = e, p = null != (n = null == d ? void 0 : d.tags) ? n : s, b = null == d ? void 0 : d.rosId, h = (0, t.useMemo)(() => ({
+            tags: p,
+            rosId: b,
             path: u,
-            url: b,
-            isReady: g
-        }), [m, p, u, b, g]), v = (0, t.useRef)(h), f = (0, t.useRef)(h);
+            url: g,
+            isReady: m
+        }), [p, b, u, g, m]), v = (0, t.useRef)(h), f = (0, t.useRef)(h);
         (0, t.useLayoutEffect)(() => {
             f.current = h, void 0 === v.current.path && void 0 !== h.path && (v.current = {
                 ...v.current,
@@ -983,31 +983,31 @@
                 }), s.tags.forEach(t => e.addTag(t)), void 0 !== s.rosId && e.addTag("owner: ".concat(s.rosId))
             };
             return o.forEach(t => {
-                l.events.on(t, e)
+                c.events.on(t, e)
             }), () => {
                 o.forEach(t => {
-                    l.events.off(t, e)
+                    c.events.off(t, e)
                 })
             }
-        }, [l]);
+        }, [c]);
         let x = (0, t.useMemo)(() => ({
-            unifiedLogger: l,
+            unifiedLogger: c,
             pageContext: h
-        }), [l, h]);
+        }), [c, h]);
         return t.default.createElement(r.Provider, {
             value: x
-        }, n)
+        }, l)
     }, "useOptionalUnifiedLoggerProvider", 0, function() {
         return (0, t.useContext)(r)
     }, "usePageSettled", 0, e => {
         let {
             unifiedLogger: a,
             pageContext: r
-        } = c(), {
+        } = n(), {
             path: s,
             url: o,
             isReady: i
-        } = r, l = a.pageSettledTracker, d = (0, t.useSyncExternalStore)(l.subscribe, l.getSnapshot, n);
+        } = r, c = a.pageSettledTracker, d = (0, t.useSyncExternalStore)(c.subscribe, c.getSnapshot, l);
         (0, t.useEffect)(() => {
             if (!d || d.isNavigating || !i || !s || !o || !e || d.url.split(/[?#]/)[0] !== o.split(/[?#]/)[0]) return;
             let t = new URL(s, window.location.origin).pathname,
@@ -1022,8 +1022,8 @@
                 });
             return () => cancelAnimationFrame(r)
         }, [d, i, o, s, e, a])
-    }, "useUnifiedLoggerProvider", 0, c])
+    }, "useUnifiedLoggerProvider", 0, n])
 }]);
 
-//# debugId=1876b274-5c35-c005-cd50-7cd6bcd603f2
-//# sourceMappingURL=35mkbsnf8u0-r.js.map
+//# debugId=f1870943-e46c-1ba3-6c0b-3b5b80d6a8f6
+//# sourceMappingURL=4308gdwbxgcg6.js.map

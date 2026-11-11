@@ -1,3 +1,0 @@
-﻿local FFlagLuaAppEdpMediaGalleryVideoPreviewIxpModule = require(script.Parent.FFlagLuaAppEdpMediaGalleryVideoPreviewIxp)
-
-return require(script.Parent.FFlagLuaAppEdpMediaGalleryRedesign) and (game:DefineFastFlag("LuaAppEdpMediaGalleryVideoPreview5", false) or FFlagLuaAppEdpMediaGalleryVideoPreviewIxpModule)

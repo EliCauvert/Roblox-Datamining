@@ -1,1 +1,0 @@
-﻿return _G.__PROFILE__

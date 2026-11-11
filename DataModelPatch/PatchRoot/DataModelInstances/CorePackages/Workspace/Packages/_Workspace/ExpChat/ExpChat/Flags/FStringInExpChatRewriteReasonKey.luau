@@ -1,1 +1,0 @@
-﻿return game:DefineFastString("InExpChatRewriteReasonKey", "CoreScripts.TextChat.ChatWindow.RephrasedReason.Description")

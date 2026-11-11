@@ -9,7 +9,6 @@ local ProtoVariableMapperModule = require(SduiCoreSystem.ClientBinding.ProtoVari
 local SplitDottedPathModule = require(SduiCoreSystem.ClientBinding.splitDottedPath)
 local FFlagSduiPropParsersShouldHandleTokens = require(Parent.SharedFlags).FFlagSduiPropParsersShouldHandleTokens
 local FFlagSduiUnwrapStructPropEnvelope = require(Parent.SharedFlags).FFlagSduiUnwrapStructPropEnvelope
-local FFlagSduiParseProtoGradientFields = require(Parent.SharedFlags).FFlagSduiParseProtoGradientFields
 
 local function resolveTokenValueToNumber(Tokens, Text: string)
 	-- upvalues: SplitDottedPathModule (copy)
@@ -280,37 +279,6 @@ local config = {
 	endColor = Color3.new(0, 0, 0)
 }
 
-local function parseGradient(p3)
-	-- upvalues: parseStruct (copy), config (copy), parseColor3 (copy)
-	local ParseStructResult = parseStruct(p3)
-	
-	if typeof(ParseStructResult) ~= "table" then
-		error(`Could not resolve gradient from input: {p3}`)
-	end
-	local StartColor = if ParseStructResult.startColor == nil then config.startColor else parseColor3(ParseStructResult.startColor)
-	local EndColor = if ParseStructResult.endColor == nil then config.endColor else parseColor3(ParseStructResult.endColor)
-	
-	if StartColor == nil or EndColor == nil then
-		error(`Could not resolve gradient colors from input: {p3}`)
-	end
-	if ParseStructResult.startOpacity ~= nil and typeof(ParseStructResult.startOpacity) ~= "number" then
-		error(`Could not resolve gradient startOpacity from input: {p3}`)
-	end
-	if ParseStructResult.endOpacity ~= nil and typeof(ParseStructResult.endOpacity) ~= "number" then
-		error(`Could not resolve gradient endOpacity from input: {p3}`)
-	end
-	if ParseStructResult.degree ~= nil and typeof(ParseStructResult.degree) ~= "number" then
-		error(`Could not resolve gradient degree from input: {p3}`)
-	end
-	return {
-		startColor = StartColor,
-		endColor = EndColor,
-		startOpacity = if ParseStructResult.startOpacity == nil then config.startOpacity else ParseStructResult.startOpacity,
-		endOpacity = if ParseStructResult.endOpacity == nil then config.endOpacity else ParseStructResult.endOpacity,
-		degree = if ParseStructResult.degree == nil then config.degree else ParseStructResult.degree
-	}
-end
-
 return {
 	parseUDim = Callback1,
 	parseUDim2 = Callback,
@@ -351,7 +319,36 @@ return {
 		return if p3 == nil then nil else tostring(p3)
 	end,
 	parseColor3 = parseColor3,
-	parseGradient = if FFlagSduiParseProtoGradientFields then parseGradient else nil,
+	parseGradient = function(p3)
+		-- upvalues: parseStruct (copy), config (copy), parseColor3 (copy)
+		local ParseStructResult = parseStruct(p3)
+		
+		if typeof(ParseStructResult) ~= "table" then
+			error(`Could not resolve gradient from input: {p3}`)
+		end
+		local StartColor = if ParseStructResult.startColor == nil then config.startColor else parseColor3(ParseStructResult.startColor)
+		local EndColor = if ParseStructResult.endColor == nil then config.endColor else parseColor3(ParseStructResult.endColor)
+		
+		if StartColor == nil or EndColor == nil then
+			error(`Could not resolve gradient colors from input: {p3}`)
+		end
+		if ParseStructResult.startOpacity ~= nil and typeof(ParseStructResult.startOpacity) ~= "number" then
+			error(`Could not resolve gradient startOpacity from input: {p3}`)
+		end
+		if ParseStructResult.endOpacity ~= nil and typeof(ParseStructResult.endOpacity) ~= "number" then
+			error(`Could not resolve gradient endOpacity from input: {p3}`)
+		end
+		if ParseStructResult.degree ~= nil and typeof(ParseStructResult.degree) ~= "number" then
+			error(`Could not resolve gradient degree from input: {p3}`)
+		end
+		return {
+			startColor = StartColor,
+			endColor = EndColor,
+			startOpacity = if ParseStructResult.startOpacity == nil then config.startOpacity else ParseStructResult.startOpacity,
+			endOpacity = if ParseStructResult.endOpacity == nil then config.endOpacity else ParseStructResult.endOpacity,
+			degree = if ParseStructResult.degree == nil then config.degree else ParseStructResult.degree
+		}
+	end,
 	parseColorPropLegacy = function(p3)
 		return if typeof(p3) == "string" then Color3.fromHex(p3) else p3
 	end,

@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXMigratePurchasePromptInteractiveToFocusNavigation2", false)

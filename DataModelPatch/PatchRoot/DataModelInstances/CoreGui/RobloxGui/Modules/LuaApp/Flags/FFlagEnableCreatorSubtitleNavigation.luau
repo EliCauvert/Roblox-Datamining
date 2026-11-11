@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnableCreatorSubtitleNavigation_v2", false)

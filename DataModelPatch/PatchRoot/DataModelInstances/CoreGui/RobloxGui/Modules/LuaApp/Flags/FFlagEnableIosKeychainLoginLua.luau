@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnableIosKeychainLoginLua4", false)

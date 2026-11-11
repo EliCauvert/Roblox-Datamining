@@ -1,1 +1,0 @@
-﻿return require(script.Parent.Parent.SocialCommon).Utils.buildApiSiteUrl("apis") .. "/look-api/v1/looks/purchase-details"

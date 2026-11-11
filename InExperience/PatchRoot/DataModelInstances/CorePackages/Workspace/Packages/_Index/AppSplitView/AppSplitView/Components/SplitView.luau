@@ -87,7 +87,7 @@ return ReactModule.memo(function(p1)
 		end
 	end
 	local IsSupportResizerAbovePane = p1.supportResizerAbovePane == true
-	local ZIndex: number = if IsSupportPaneModeMatch then 4 elseif NoIsSupportPaneModeMatch2 and (not HasOnSupportPaneWidthChanged and not IsSupportResizerAbovePane) then 3 else 1
+	local ZIndex: number = if IsSupportPaneModeMatch then 4 elseif NoIsSupportPaneModeMatch2 and not HasOnSupportPaneWidthChanged and not IsSupportResizerAbovePane then 3 else 1
 	
 	return ReactModule.createElement(ReactModule.Fragment, nil, {
 		CompositionStyleSheet = ReactModule.createElement(CompositionStyleSheet),

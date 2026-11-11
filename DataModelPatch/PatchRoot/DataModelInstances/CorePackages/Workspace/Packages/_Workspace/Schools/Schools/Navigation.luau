@@ -1,1 +1,0 @@
-﻿return { SchoolsNavigator = require(script.SchoolsNavigator) }

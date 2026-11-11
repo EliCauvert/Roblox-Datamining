@@ -1,1 +1,0 @@
-﻿return { OsaContextCardOneToOne = "OsaContextCardOneToOne" }

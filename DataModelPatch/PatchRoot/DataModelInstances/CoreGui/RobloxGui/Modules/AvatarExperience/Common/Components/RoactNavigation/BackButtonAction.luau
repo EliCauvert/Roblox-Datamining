@@ -1,1 +1,0 @@
-﻿return require(game:GetService("CorePackages").Packages.enumerate)("BackButtonAction", { "GoBack", "Unhandled", "NoOp" })

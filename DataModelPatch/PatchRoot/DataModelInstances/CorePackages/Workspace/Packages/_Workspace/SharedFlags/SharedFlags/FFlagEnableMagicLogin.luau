@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnableMagicLogin_debug", false)

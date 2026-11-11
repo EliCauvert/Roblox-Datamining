@@ -1,3 +1,0 @@
-﻿local EnableUnifiedPurchasePromptForEDPGamepass = game:DefineFastFlag("EnableUnifiedPurchasePromptForEDPGamepass", false)
-
-return require(game:GetService("CorePackages").Workspace.Packages.SharedFlags).FFlagEnableUnifiedProductPurchaseFlow and EnableUnifiedPurchasePromptForEDPGamepass

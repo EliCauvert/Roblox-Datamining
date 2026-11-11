@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnableArgus2", false)

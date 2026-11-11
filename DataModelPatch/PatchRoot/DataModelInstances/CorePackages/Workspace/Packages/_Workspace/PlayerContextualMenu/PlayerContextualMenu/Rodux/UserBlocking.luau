@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("PlayerContextualMenu").Parent.UserBlockingRodux).config({ keyPath = "PlayerContextualMenu.UserBlocking" })

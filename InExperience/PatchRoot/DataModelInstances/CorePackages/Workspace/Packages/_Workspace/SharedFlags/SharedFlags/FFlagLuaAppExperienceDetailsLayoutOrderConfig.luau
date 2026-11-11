@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("LuaAppExperienceDetailsLayoutOrderConfig2", false)

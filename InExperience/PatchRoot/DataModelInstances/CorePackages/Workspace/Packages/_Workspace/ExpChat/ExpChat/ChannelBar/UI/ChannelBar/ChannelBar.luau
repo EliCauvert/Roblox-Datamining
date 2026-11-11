@@ -15,7 +15,6 @@ local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local UseSelectionCursorFunction = UIBloxModule.App.SelectionImage.useSelectionCursor
 local UseInterpolatedClientSettingsModule = require(ExpChat.ClientSettings.useInterpolatedClientSettings)
 local v1 = require(ExpChat.Stores.GetFocusNavigationStore)(false)
-local FFlagExpChatEnableFriendsTab = require(Parent.SharedFlags).FFlagExpChatEnableFriendsTab
 local FFlagExpChatUseChannelTabsStore = require(Parent.SharedFlags).FFlagExpChatUseChannelTabsStore
 local FFlagExpChatTabShortcutNav = require(Parent.SharedFlags).FFlagExpChatTabShortcutNav
 local ExpChatPerfTracker = require(Parent.ChatUIPrimitives).Telemetry.ExpChatPerfTracker
@@ -46,7 +45,7 @@ local function setTransparency(p1, TransparencyValue)
 end
 
 return function(p1)
-	-- upvalues: ConfigModule (copy), ReactModule (copy), SignalsReactModule (copy), GetChatLayoutStoreModule (copy), v1 (copy), ReactFocusNavigationModule (copy), UseSelectionCursorFunction (copy), CursorKind (copy), FFlagExpChatTabShortcutNav (copy), UserInputService (copy), CreateEffectFunction (copy), FFlagExpChatUseChannelTabsStore (copy), ExpChatTabNavFocusPollDelayFrames (copy), RunService (copy), ExpChatTabNavFocusPollFrames (copy), FFlagExpChatEnableFriendsTab (copy), ChannelTabModule (copy), ExpChatPerfTracker (copy), FFlagExpChatPerfTrackerTabName (copy), Analytics (copy), JoinResult (copy), setTransparency (copy), TextChatService (copy), UseInterpolatedClientSettingsModule (copy), _Color3_1 (copy), ImageSetLabel (copy), IconsNavigationCycleDown (copy), _Color3 (copy)
+	-- upvalues: ConfigModule (copy), ReactModule (copy), SignalsReactModule (copy), GetChatLayoutStoreModule (copy), v1 (copy), ReactFocusNavigationModule (copy), UseSelectionCursorFunction (copy), CursorKind (copy), FFlagExpChatTabShortcutNav (copy), UserInputService (copy), CreateEffectFunction (copy), FFlagExpChatUseChannelTabsStore (copy), ExpChatTabNavFocusPollDelayFrames (copy), RunService (copy), ExpChatTabNavFocusPollFrames (copy), ChannelTabModule (copy), ExpChatPerfTracker (copy), FFlagExpChatPerfTrackerTabName (copy), Analytics (copy), JoinResult (copy), setTransparency (copy), TextChatService (copy), UseInterpolatedClientSettingsModule (copy), _Color3_1 (copy), ImageSetLabel (copy), IconsNavigationCycleDown (copy), _Color3 (copy)
 	local Count = 0
 	
 	for _ in pairs(p1.allChannelTabs) do
@@ -69,7 +68,7 @@ return function(p1)
 	local v3 = nil
 	
 	if FFlagExpChatTabShortcutNav then
-		v2, v49 = ReactModule.useState(nil)
+		v2, v48 = ReactModule.useState(nil)
 	end
 	local UseRefResult1 = if FFlagExpChatTabShortcutNav then ReactModule.useRef({}) else nil
 	local v4 = nil
@@ -198,7 +197,7 @@ return function(p1)
 			end
 		end
 		return false
-	end, if FFlagExpChatEnableFriendsTab then { Floored, p1.allChannelTabs } else nil)
+	end, { Floored, p1.allChannelTabs })
 	local config = {
 		["$layout"] = ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,

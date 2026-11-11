@@ -1,1 +1,0 @@
-﻿return { ProfileShareLinkActivated = "ProfileShareLinkActivated" }

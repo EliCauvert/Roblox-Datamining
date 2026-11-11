@@ -1,5 +1,0 @@
-﻿local PopulateContextModule = require(script.Parent.Tests.populateContext)
-require(script:FindFirstAncestor("ExpChat").Parent.Dev.JestGlobals3).beforeEach(function(p1)
-	-- upvalues: PopulateContextModule (copy)
-	PopulateContextModule(p1)
-end)

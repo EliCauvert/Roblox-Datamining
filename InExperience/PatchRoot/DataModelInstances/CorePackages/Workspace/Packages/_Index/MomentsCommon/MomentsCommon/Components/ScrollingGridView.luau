@@ -156,7 +156,7 @@ return function(p1)
 					size = FoundationModule.Enums.InputSize.Small,
 					text = p1.showMoreButtonText
 				}) else nil,
-				Footer = if ShouldShowShowMoreButton or p1.footer == nil or UseMemoResult2 >= #p1.items then nil else ReactModule.createElement(View, {
+				Footer = if ShouldShowShowMoreButton or (p1.footer == nil or UseMemoResult2 >= #p1.items) then nil else ReactModule.createElement(View, {
 					LayoutOrder = 3,
 					tag = "size-full-0 auto-y align-x-center align-y-center"
 				}, { Content = p1.footer })

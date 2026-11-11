@@ -1,1 +1,0 @@
-﻿return { Games = "Games", Songs = "Songs" }

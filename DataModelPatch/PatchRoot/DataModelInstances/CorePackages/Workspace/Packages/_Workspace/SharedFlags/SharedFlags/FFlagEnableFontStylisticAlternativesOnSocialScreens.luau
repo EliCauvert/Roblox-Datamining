@@ -1,3 +1,0 @@
-﻿local GetFFlagLuaAppEnableOpenTypeSupportModule = require(script.Parent.GetFFlagLuaAppEnableOpenTypeSupport)
-
-return game:DefineFastFlag("FFlagEnableFontStylisticAlternativesOnSocialScreens", false) and GetFFlagLuaAppEnableOpenTypeSupportModule()

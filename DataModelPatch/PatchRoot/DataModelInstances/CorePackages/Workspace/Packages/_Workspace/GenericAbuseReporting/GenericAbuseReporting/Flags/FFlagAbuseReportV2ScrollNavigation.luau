@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AbuseReportV2ScrollNavigation", false)

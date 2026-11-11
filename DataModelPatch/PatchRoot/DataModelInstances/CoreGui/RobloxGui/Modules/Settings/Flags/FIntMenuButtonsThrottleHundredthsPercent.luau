@@ -1,1 +1,0 @@
-﻿return game:DefineFastInt("MenuButtonsThrottleHundredthsPercent", 0)

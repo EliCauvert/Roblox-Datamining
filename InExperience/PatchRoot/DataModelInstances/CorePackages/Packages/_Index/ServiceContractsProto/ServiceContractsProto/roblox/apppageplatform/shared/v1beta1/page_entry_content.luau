@@ -504,384 +504,384 @@ do
 				Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "badge_details" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "static_content" then
 				local EncodeResult = self.kind.value:encode()
 				local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
 				Buf, Count = ProtoModule.writeBuffer(WriteTagResult5, WriteTagResult2_4, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "experience_attribution_row" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult6, WriteTagResult2_5, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult8, WriteTagResult2_7, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "experience_action_module" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult8, WriteTagResult2_7, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult10, WriteTagResult2_9, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "experience_media_gallery" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult13, WriteTagResult2_12, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult11, WriteTagResult2_10, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "experience_description" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult15, WriteTagResult2_14, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult12, WriteTagResult2_11, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "experience_stat_row" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult18, WriteTagResult2_17 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult18, WriteTagResult2_17, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult14, WriteTagResult2_13, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "experience_info_table" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult19, WriteTagResult2_18 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult19, WriteTagResult2_18, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult16, WriteTagResult2_15 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult16, WriteTagResult2_15, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "social_link_row" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult20, WriteTagResult2_19 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult20, WriteTagResult2_19, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult17, WriteTagResult2_16 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult17, WriteTagResult2_16, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "experience_carousel" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult23, WriteTagResult2_22 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult23, WriteTagResult2_22, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult19, WriteTagResult2_18 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult19, WriteTagResult2_18, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "song_carousel" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult25, WriteTagResult2_24 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult25, WriteTagResult2_24, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult21, WriteTagResult2_20 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult21, WriteTagResult2_20, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "events_carousel" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult27, WriteTagResult2_26 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult27, WriteTagResult2_26, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult22, WriteTagResult2_21 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult22, WriteTagResult2_21, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "game_pass_collection" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult28, WriteTagResult2_27 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult28, WriteTagResult2_27, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult23, WriteTagResult2_22 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult23, WriteTagResult2_22, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "developer_product_collection" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult29, WriteTagResult2_28 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult29, WriteTagResult2_28, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult24, WriteTagResult2_23 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult24, WriteTagResult2_23, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "subscription_collection" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult31, WriteTagResult2_30 = ProtoModule.writeTag(Buf, Count, 16, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult31, WriteTagResult2_30, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult26, WriteTagResult2_25 = ProtoModule.writeTag(Buf, Count, 16, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult26, WriteTagResult2_25, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "dynamic_store_category" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult32, WriteTagResult2_31 = ProtoModule.writeTag(Buf, Count, 17, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult32, WriteTagResult2_31, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult27, WriteTagResult2_26 = ProtoModule.writeTag(Buf, Count, 17, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult27, WriteTagResult2_26, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "card_container" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult33, WriteTagResult2_32 = ProtoModule.writeTag(Buf, Count, 20, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult33, WriteTagResult2_32, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult28, WriteTagResult2_27 = ProtoModule.writeTag(Buf, Count, 20, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult28, WriteTagResult2_27, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "card" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult36, WriteTagResult2_35 = ProtoModule.writeTag(Buf, Count, 21, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult36, WriteTagResult2_35, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult29, WriteTagResult2_28 = ProtoModule.writeTag(Buf, Count, 21, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult29, WriteTagResult2_28, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "dialog" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult38, WriteTagResult2_37 = ProtoModule.writeTag(Buf, Count, 22, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult38, WriteTagResult2_37, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult31, WriteTagResult2_30 = ProtoModule.writeTag(Buf, Count, 22, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult31, WriteTagResult2_30, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "banner" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(Buf, Count, 23, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult14, WriteTagResult2_13, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult32, WriteTagResult2_31 = ProtoModule.writeTag(Buf, Count, 23, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult32, WriteTagResult2_31, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "tooltip" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult39, WriteTagResult2_38 = ProtoModule.writeTag(Buf, Count, 24, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult39, WriteTagResult2_38, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult33, WriteTagResult2_32 = ProtoModule.writeTag(Buf, Count, 24, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult33, WriteTagResult2_32, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "coachmark" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult40, WriteTagResult2_39 = ProtoModule.writeTag(Buf, Count, 25, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult40, WriteTagResult2_39, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 25, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "system_banner_prompt" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 28, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult34, WriteTagResult2_33 = ProtoModule.writeTag(Buf, Count, 28, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult34, WriteTagResult2_33, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "age_check_upsell" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult41, WriteTagResult2_40 = ProtoModule.writeTag(Buf, Count, 29, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult41, WriteTagResult2_40, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult35, WriteTagResult2_34 = ProtoModule.writeTag(Buf, Count, 29, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult35, WriteTagResult2_34, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "catalog_item_list" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult24, WriteTagResult2_23 = ProtoModule.writeTag(Buf, Count, 26, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult24, WriteTagResult2_23, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult37, WriteTagResult2_36 = ProtoModule.writeTag(Buf, Count, 26, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult37, WriteTagResult2_36, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "user_list" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult43, WriteTagResult2_42 = ProtoModule.writeTag(Buf, Count, 27, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult43, WriteTagResult2_42, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult18, WriteTagResult2_17 = ProtoModule.writeTag(Buf, Count, 27, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult18, WriteTagResult2_17, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "experience_content_rating_label" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult44, WriteTagResult2_43 = ProtoModule.writeTag(Buf, Count, 30, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult44, WriteTagResult2_43, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 30, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult15, WriteTagResult2_14, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "experience_refund_policy" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult17, WriteTagResult2_16 = ProtoModule.writeTag(Buf, Count, 31, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult17, WriteTagResult2_16, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult38, WriteTagResult2_37 = ProtoModule.writeTag(Buf, Count, 31, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult38, WriteTagResult2_37, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "experience_play_with_reward" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult37, WriteTagResult2_36 = ProtoModule.writeTag(Buf, Count, 32, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult37, WriteTagResult2_36, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult40, WriteTagResult2_39 = ProtoModule.writeTag(Buf, Count, 32, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult40, WriteTagResult2_39, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "experience_guidelines_dialog" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult45, WriteTagResult2_44 = ProtoModule.writeTag(Buf, Count, 33, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult45, WriteTagResult2_44, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult41, WriteTagResult2_40 = ProtoModule.writeTag(Buf, Count, 33, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult41, WriteTagResult2_40, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "community_section" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 35, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult9, WriteTagResult2_8, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult42, WriteTagResult2_41 = ProtoModule.writeTag(Buf, Count, 35, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult42, WriteTagResult2_41, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "experience_leaderboard" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult46, WriteTagResult2_45 = ProtoModule.writeTag(Buf, Count, 36, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult46, WriteTagResult2_45, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 36, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult9, WriteTagResult2_8, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "moments_carousel" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 34, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult10, WriteTagResult2_9, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 34, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult6, WriteTagResult2_5, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "text" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult48, WriteTagResult2_47 = ProtoModule.writeTag(Buf, Count, 40, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult48, WriteTagResult2_47, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult43, WriteTagResult2_42 = ProtoModule.writeTag(Buf, Count, 40, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult43, WriteTagResult2_42, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "vertical_feed" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult49, WriteTagResult2_48 = ProtoModule.writeTag(Buf, Count, 41, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult49, WriteTagResult2_48, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 41, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult7, WriteTagResult2_6, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "page_header" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult50, WriteTagResult2_49 = ProtoModule.writeTag(Buf, Count, 42, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult50, WriteTagResult2_49, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult44, WriteTagResult2_43 = ProtoModule.writeTag(Buf, Count, 42, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult44, WriteTagResult2_43, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "image_cta_section" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult30, WriteTagResult2_29 = ProtoModule.writeTag(Buf, Count, 43, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult30, WriteTagResult2_29, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult45, WriteTagResult2_44 = ProtoModule.writeTag(Buf, Count, 43, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult45, WriteTagResult2_44, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "config_driven_form" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult51, WriteTagResult2_50 = ProtoModule.writeTag(Buf, Count, 44, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult51, WriteTagResult2_50, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult46, WriteTagResult2_45 = ProtoModule.writeTag(Buf, Count, 44, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult46, WriteTagResult2_45, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "sandbox_content" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult42, WriteTagResult2_41 = ProtoModule.writeTag(Buf, Count, 50, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult42, WriteTagResult2_41, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult47, WriteTagResult2_46 = ProtoModule.writeTag(Buf, Count, 50, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult47, WriteTagResult2_46, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "experience_details_feed" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult53, WriteTagResult2_52 = ProtoModule.writeTag(Buf, Count, 500, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult53, WriteTagResult2_52, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult48, WriteTagResult2_47 = ProtoModule.writeTag(Buf, Count, 500, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult48, WriteTagResult2_47, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "experience_details_action_bar" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult54, WriteTagResult2_53 = ProtoModule.writeTag(Buf, Count, 501, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult54, WriteTagResult2_53, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult49, WriteTagResult2_48 = ProtoModule.writeTag(Buf, Count, 501, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult49, WriteTagResult2_48, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "experience_details_banner_image" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 502, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult25, WriteTagResult2_24 = ProtoModule.writeTag(Buf, Count, 502, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult25, WriteTagResult2_24, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "experience_details_sticky_header" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult47, WriteTagResult2_46 = ProtoModule.writeTag(Buf, Count, 503, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult47, WriteTagResult2_46, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult51, WriteTagResult2_50 = ProtoModule.writeTag(Buf, Count, 503, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult51, WriteTagResult2_50, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "event_details_feed" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult55, WriteTagResult2_54 = ProtoModule.writeTag(Buf, Count, 600, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult55, WriteTagResult2_54, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult52, WriteTagResult2_51 = ProtoModule.writeTag(Buf, Count, 600, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult52, WriteTagResult2_51, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "event_details_action_bar" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult56, WriteTagResult2_55 = ProtoModule.writeTag(Buf, Count, 601, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult56, WriteTagResult2_55, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult53, WriteTagResult2_52 = ProtoModule.writeTag(Buf, Count, 601, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult53, WriteTagResult2_52, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "event_attribution_row" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 602, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult7, WriteTagResult2_6, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 602, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult13, WriteTagResult2_12, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "event_description" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult57, WriteTagResult2_56 = ProtoModule.writeTag(Buf, Count, 603, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult57, WriteTagResult2_56, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult55, WriteTagResult2_54 = ProtoModule.writeTag(Buf, Count, 603, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult55, WriteTagResult2_54, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "event_info_table" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult58, WriteTagResult2_57 = ProtoModule.writeTag(Buf, Count, 604, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult58, WriteTagResult2_57, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult56, WriteTagResult2_55 = ProtoModule.writeTag(Buf, Count, 604, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult56, WriteTagResult2_55, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "event_details_sheet_full_bleed" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult59, WriteTagResult2_58 = ProtoModule.writeTag(Buf, Count, 605, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult59, WriteTagResult2_58, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult57, WriteTagResult2_56 = ProtoModule.writeTag(Buf, Count, 605, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult57, WriteTagResult2_56, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "event_notifications_modal" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult60, WriteTagResult2_59 = ProtoModule.writeTag(Buf, Count, 606, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult60, WriteTagResult2_59, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult58, WriteTagResult2_57 = ProtoModule.writeTag(Buf, Count, 606, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult58, WriteTagResult2_57, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "dev_store_feed" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult34, WriteTagResult2_33 = ProtoModule.writeTag(Buf, Count, 700, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult34, WriteTagResult2_33, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult59, WriteTagResult2_58 = ProtoModule.writeTag(Buf, Count, 700, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult59, WriteTagResult2_58, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "game_item_details" then
 				local EncodeResult = self.kind.value:encode()
 				local WriteTagResult61, WriteTagResult2_60 = ProtoModule.writeTag(Buf, Count, 701, ProtoModule.wireTypes.lengthDelimited)
 				Buf, Count = ProtoModule.writeBuffer(WriteTagResult61, WriteTagResult2_60, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "charts_feed" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult62, WriteTagResult2_61 = ProtoModule.writeTag(Buf, Count, 800, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult62, WriteTagResult2_61, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult64, WriteTagResult2_63 = ProtoModule.writeTag(Buf, Count, 800, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult64, WriteTagResult2_63, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "filter_pills" then
 				local EncodeResult = self.kind.value:encode()
 				local WriteTagResult65, WriteTagResult2_64 = ProtoModule.writeTag(Buf, Count, 801, ProtoModule.wireTypes.lengthDelimited)
 				Buf, Count = ProtoModule.writeBuffer(WriteTagResult65, WriteTagResult2_64, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "sort_selector" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult52, WriteTagResult2_51 = ProtoModule.writeTag(Buf, Count, 802, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult52, WriteTagResult2_51, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult68, WriteTagResult2_67 = ProtoModule.writeTag(Buf, Count, 802, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult68, WriteTagResult2_67, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "genre_selector" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult67, WriteTagResult2_66 = ProtoModule.writeTag(Buf, Count, 803, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult67, WriteTagResult2_66, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult70, WriteTagResult2_69 = ProtoModule.writeTag(Buf, Count, 803, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult70, WriteTagResult2_69, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "marketplace_catalog_feed" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult68, WriteTagResult2_67 = ProtoModule.writeTag(Buf, Count, 900, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult68, WriteTagResult2_67, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult71, WriteTagResult2_70 = ProtoModule.writeTag(Buf, Count, 900, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult71, WriteTagResult2_70, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "marketplace_catalog_category_menu" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult70, WriteTagResult2_69 = ProtoModule.writeTag(Buf, Count, 901, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult70, WriteTagResult2_69, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult50, WriteTagResult2_49 = ProtoModule.writeTag(Buf, Count, 901, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult50, WriteTagResult2_49, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "marketplace_catalog_item_group" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult72, WriteTagResult2_71 = ProtoModule.writeTag(Buf, Count, 902, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult72, WriteTagResult2_71, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult73, WriteTagResult2_72 = ProtoModule.writeTag(Buf, Count, 902, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult73, WriteTagResult2_72, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "marketplace_catalog_item_carousel" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult73, WriteTagResult2_72 = ProtoModule.writeTag(Buf, Count, 903, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult73, WriteTagResult2_72, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult39, WriteTagResult2_38 = ProtoModule.writeTag(Buf, Count, 903, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult39, WriteTagResult2_38, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "marketplace_catalog_hero_unit" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult74, WriteTagResult2_73 = ProtoModule.writeTag(Buf, Count, 904, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult74, WriteTagResult2_73, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult75, WriteTagResult2_74 = ProtoModule.writeTag(Buf, Count, 904, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult75, WriteTagResult2_74, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "catalog_item_grid" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult75, WriteTagResult2_74 = ProtoModule.writeTag(Buf, Count, 905, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult75, WriteTagResult2_74, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult54, WriteTagResult2_53 = ProtoModule.writeTag(Buf, Count, 905, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult54, WriteTagResult2_53, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "marketplace_offer_modal" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 906, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult11, WriteTagResult2_10, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult76, WriteTagResult2_75 = ProtoModule.writeTag(Buf, Count, 906, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult76, WriteTagResult2_75, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "marketplace_item_media_header" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult77, WriteTagResult2_76 = ProtoModule.writeTag(Buf, Count, 907, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult77, WriteTagResult2_76, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult78, WriteTagResult2_77 = ProtoModule.writeTag(Buf, Count, 907, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult78, WriteTagResult2_77, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "marketplace_item_ownership" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult78, WriteTagResult2_77 = ProtoModule.writeTag(Buf, Count, 908, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult78, WriteTagResult2_77, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult79, WriteTagResult2_78 = ProtoModule.writeTag(Buf, Count, 908, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult79, WriteTagResult2_78, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "marketplace_item_info_table" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult79, WriteTagResult2_78 = ProtoModule.writeTag(Buf, Count, 909, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult79, WriteTagResult2_78, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult20, WriteTagResult2_19 = ProtoModule.writeTag(Buf, Count, 909, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult20, WriteTagResult2_19, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "marketplace_item_experiences_link" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult71, WriteTagResult2_70 = ProtoModule.writeTag(Buf, Count, 910, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult71, WriteTagResult2_70, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult80, WriteTagResult2_79 = ProtoModule.writeTag(Buf, Count, 910, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult80, WriteTagResult2_79, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "search_results_feed" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult80, WriteTagResult2_79 = ProtoModule.writeTag(Buf, Count, 1000, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult80, WriteTagResult2_79, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult81, WriteTagResult2_80 = ProtoModule.writeTag(Buf, Count, 1000, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult81, WriteTagResult2_80, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "power_search_ai_overview" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult82, WriteTagResult2_81 = ProtoModule.writeTag(Buf, Count, 1001, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult82, WriteTagResult2_81, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult62, WriteTagResult2_61 = ProtoModule.writeTag(Buf, Count, 1001, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult62, WriteTagResult2_61, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "experience_emphasis_tile" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult83, WriteTagResult2_82 = ProtoModule.writeTag(Buf, Count, 1002, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult83, WriteTagResult2_82, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult60, WriteTagResult2_59 = ProtoModule.writeTag(Buf, Count, 1002, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult60, WriteTagResult2_59, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "search_autocomplete" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult85, WriteTagResult2_84 = ProtoModule.writeTag(Buf, Count, 1003, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult85, WriteTagResult2_84, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult83, WriteTagResult2_82 = ProtoModule.writeTag(Buf, Count, 1003, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult83, WriteTagResult2_82, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "safety_resource_banner" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult86, WriteTagResult2_85 = ProtoModule.writeTag(Buf, Count, 1004, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult86, WriteTagResult2_85, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult69, WriteTagResult2_68 = ProtoModule.writeTag(Buf, Count, 1004, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult69, WriteTagResult2_68, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "option_selector_carousel" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult87, WriteTagResult2_86 = ProtoModule.writeTag(Buf, Count, 1100, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult87, WriteTagResult2_86, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult66, WriteTagResult2_65 = ProtoModule.writeTag(Buf, Count, 1100, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult66, WriteTagResult2_65, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "game_items_carousel" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult88, WriteTagResult2_87 = ProtoModule.writeTag(Buf, Count, 1101, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult88, WriteTagResult2_87, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult72, WriteTagResult2_71 = ProtoModule.writeTag(Buf, Count, 1101, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult72, WriteTagResult2_71, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "hero_unit" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult90, WriteTagResult2_89 = ProtoModule.writeTag(Buf, Count, 1102, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult90, WriteTagResult2_89, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult84, WriteTagResult2_83 = ProtoModule.writeTag(Buf, Count, 1102, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult84, WriteTagResult2_83, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "friend_recommendation_carousel" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult35, WriteTagResult2_34 = ProtoModule.writeTag(Buf, Count, 1103, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult35, WriteTagResult2_34, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult82, WriteTagResult2_81 = ProtoModule.writeTag(Buf, Count, 1103, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult82, WriteTagResult2_81, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "party_chat_conversation_upsell" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult21, WriteTagResult2_20 = ProtoModule.writeTag(Buf, Count, 1200, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult21, WriteTagResult2_20, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult86, WriteTagResult2_85 = ProtoModule.writeTag(Buf, Count, 1200, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult86, WriteTagResult2_85, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "pre_auth_landing_sticky_header" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult16, WriteTagResult2_15 = ProtoModule.writeTag(Buf, Count, 1300, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult16, WriteTagResult2_15, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 1300, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "community_announcement" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult91, WriteTagResult2_90 = ProtoModule.writeTag(Buf, Count, 1400, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult91, WriteTagResult2_90, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult77, WriteTagResult2_76 = ProtoModule.writeTag(Buf, Count, 1400, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult77, WriteTagResult2_76, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "group_announcement" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult22, WriteTagResult2_21 = ProtoModule.writeTag(Buf, Count, 1401, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult22, WriteTagResult2_21, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult63, WriteTagResult2_62 = ProtoModule.writeTag(Buf, Count, 1401, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult63, WriteTagResult2_62, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "group_forums_discovery" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult64, WriteTagResult2_63 = ProtoModule.writeTag(Buf, Count, 1402, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult64, WriteTagResult2_63, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult87, WriteTagResult2_86 = ProtoModule.writeTag(Buf, Count, 1402, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult87, WriteTagResult2_86, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "group_events" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult92, WriteTagResult2_91 = ProtoModule.writeTag(Buf, Count, 1403, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult92, WriteTagResult2_91, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult88, WriteTagResult2_87 = ProtoModule.writeTag(Buf, Count, 1403, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult88, WriteTagResult2_87, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "settings_row" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 1500, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult12, WriteTagResult2_11, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult89, WriteTagResult2_88 = ProtoModule.writeTag(Buf, Count, 1500, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult89, WriteTagResult2_88, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "settings_toggle" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult94, WriteTagResult2_93 = ProtoModule.writeTag(Buf, Count, 1501, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult94, WriteTagResult2_93, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult90, WriteTagResult2_89 = ProtoModule.writeTag(Buf, Count, 1501, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult90, WriteTagResult2_89, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "group_sidebar" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult76, WriteTagResult2_75 = ProtoModule.writeTag(Buf, Count, 1600, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult76, WriteTagResult2_75, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult91, WriteTagResult2_90 = ProtoModule.writeTag(Buf, Count, 1600, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult91, WriteTagResult2_90, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "group_overview_pane" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult95, WriteTagResult2_94 = ProtoModule.writeTag(Buf, Count, 1601, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult95, WriteTagResult2_94, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult92, WriteTagResult2_91 = ProtoModule.writeTag(Buf, Count, 1601, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult92, WriteTagResult2_91, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "group_sidebar_section" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult96, WriteTagResult2_95 = ProtoModule.writeTag(Buf, Count, 1602, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult96, WriteTagResult2_95, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult30, WriteTagResult2_29 = ProtoModule.writeTag(Buf, Count, 1602, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult30, WriteTagResult2_29, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "buy_robux_page" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult66, WriteTagResult2_65 = ProtoModule.writeTag(Buf, Count, 1700, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult66, WriteTagResult2_65, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult36, WriteTagResult2_35 = ProtoModule.writeTag(Buf, Count, 1700, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult36, WriteTagResult2_35, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "buy_robux_section" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult89, WriteTagResult2_88 = ProtoModule.writeTag(Buf, Count, 1701, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult89, WriteTagResult2_88, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult93, WriteTagResult2_92 = ProtoModule.writeTag(Buf, Count, 1701, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult93, WriteTagResult2_92, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "user_library_overview" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult26, WriteTagResult2_25 = ProtoModule.writeTag(Buf, Count, 1800, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult26, WriteTagResult2_25, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult94, WriteTagResult2_93 = ProtoModule.writeTag(Buf, Count, 1800, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult94, WriteTagResult2_93, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "user_library_list" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult93, WriteTagResult2_92 = ProtoModule.writeTag(Buf, Count, 1801, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult93, WriteTagResult2_92, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult74, WriteTagResult2_73 = ProtoModule.writeTag(Buf, Count, 1801, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult74, WriteTagResult2_73, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "user_library_header" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult84, WriteTagResult2_83 = ProtoModule.writeTag(Buf, Count, 1802, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult84, WriteTagResult2_83, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult95, WriteTagResult2_94 = ProtoModule.writeTag(Buf, Count, 1802, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult95, WriteTagResult2_94, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "stream_notification_row" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult69, WriteTagResult2_68 = ProtoModule.writeTag(Buf, Count, 1900, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult69, WriteTagResult2_68, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult85, WriteTagResult2_84 = ProtoModule.writeTag(Buf, Count, 1900, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult85, WriteTagResult2_84, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "stream_notification_feed" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult63, WriteTagResult2_62 = ProtoModule.writeTag(Buf, Count, 1901, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult63, WriteTagResult2_62, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult67, WriteTagResult2_66 = ProtoModule.writeTag(Buf, Count, 1901, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult67, WriteTagResult2_66, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "campaign_drops_hero" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult81, WriteTagResult2_80 = ProtoModule.writeTag(Buf, Count, 2000, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult81, WriteTagResult2_80, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult96, WriteTagResult2_95 = ProtoModule.writeTag(Buf, Count, 2000, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult96, WriteTagResult2_95, EncodeResult, buffer.len(EncodeResult))
 			end
 		end
 		local Buf1 = buffer.create(Count)
@@ -903,53 +903,53 @@ do
 				_, v581 = ProtoModule.readVarInt(Buf, v4)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
-					local Buffer1
-					Buffer1, v581 = ProtoModule.readBuffer(Buf, v4)
+					local Buffer3
+					Buffer3, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
 						type = "badges_grid",
-						value = t.BadgesGridInputData.decode(Buffer1)
+						value = t.BadgesGridInputData.decode(Buffer3)
 					}
 				elseif Tag == 2 then
-					local Buffer2
-					Buffer2, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "badge_details",
-						value = t.BadgeDetailsInputData.decode(Buffer2)
-					}
-				elseif Tag == 3 then
-					local Buffer4
-					Buffer4, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "static_content",
-						value = t.StaticInputData.decode(Buffer4)
-					}
-				elseif Tag == 4 then
 					local Buffer5
 					Buffer5, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
+						type = "badge_details",
+						value = t.BadgeDetailsInputData.decode(Buffer5)
+					}
+				elseif Tag == 3 then
+					local Buffer7
+					Buffer7, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "static_content",
+						value = t.StaticInputData.decode(Buffer7)
+					}
+				elseif Tag == 4 then
+					local Buffer9
+					Buffer9, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
 						type = "experience_attribution_row",
-						value = t.ExperienceAttributionRowInputData.decode(Buffer5)
+						value = t.ExperienceAttributionRowInputData.decode(Buffer9)
 					}
 				elseif Tag == 5 then
-					local Buffer6
-					Buffer6, v581 = ProtoModule.readBuffer(Buf, v4)
+					local Buffer10
+					Buffer10, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
 						type = "experience_action_module",
-						value = t.ExperienceActionModuleInputData.decode(Buffer6)
+						value = t.ExperienceActionModuleInputData.decode(Buffer10)
 					}
 				elseif Tag == 6 then
-					local Buffer8
-					Buffer8, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "experience_media_gallery",
-						value = t.ExperienceMediaGalleryInputData.decode(Buffer8)
-					}
-				elseif Tag == 7 then
 					local Buffer11
 					Buffer11, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
+						type = "experience_media_gallery",
+						value = t.ExperienceMediaGalleryInputData.decode(Buffer11)
+					}
+				elseif Tag == 7 then
+					local Buffer12
+					Buffer12, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
 						type = "experience_description",
-						value = t.ExperienceDescriptionInputData.decode(Buffer11)
+						value = t.ExperienceDescriptionInputData.decode(Buffer12)
 					}
 				elseif Tag == 8 then
 					local Buffer14
@@ -966,222 +966,222 @@ do
 						value = t.ExperienceInfoTableInputData.decode(Buffer15)
 					}
 				elseif Tag == 10 then
-					local Buffer16
-					Buffer16, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "social_link_row",
-						value = t.SocialLinkRowInputData.decode(Buffer16)
-					}
-				elseif Tag == 11 then
-					local Buffer17
-					Buffer17, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "experience_carousel",
-						value = t.ExperienceCarouselInputData.decode(Buffer17)
-					}
-				elseif Tag == 12 then
 					local Buffer18
 					Buffer18, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
-						type = "song_carousel",
-						value = t.SongCarouselInputData.decode(Buffer18)
+						type = "social_link_row",
+						value = t.SocialLinkRowInputData.decode(Buffer18)
 					}
-				elseif Tag == 13 then
+				elseif Tag == 11 then
 					local Buffer19
 					Buffer19, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
+						type = "experience_carousel",
+						value = t.ExperienceCarouselInputData.decode(Buffer19)
+					}
+				elseif Tag == 12 then
+					local Buffer22
+					Buffer22, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "song_carousel",
+						value = t.SongCarouselInputData.decode(Buffer22)
+					}
+				elseif Tag == 13 then
+					local Buffer23
+					Buffer23, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
 						type = "events_carousel",
-						value = t.EventsCarouselInputData.decode(Buffer19)
+						value = t.EventsCarouselInputData.decode(Buffer23)
 					}
 				elseif Tag == 14 then
-					local Buffer20
-					Buffer20, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "game_pass_collection",
-						value = t.GamePassCollectionInputData.decode(Buffer20)
-					}
-				elseif Tag == 15 then
-					local Buffer21
-					Buffer21, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "developer_product_collection",
-						value = t.DeveloperProductCollectionInputData.decode(Buffer21)
-					}
-				elseif Tag == 16 then
 					local Buffer24
 					Buffer24, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
-						type = "subscription_collection",
-						value = t.SubscriptionCollectionInputData.decode(Buffer24)
+						type = "game_pass_collection",
+						value = t.GamePassCollectionInputData.decode(Buffer24)
 					}
-				elseif Tag == 17 then
+				elseif Tag == 15 then
+					local Buffer25
+					Buffer25, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "developer_product_collection",
+						value = t.DeveloperProductCollectionInputData.decode(Buffer25)
+					}
+				elseif Tag == 16 then
 					local Buffer26
 					Buffer26, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
-						type = "dynamic_store_category",
-						value = t.DynamicStoreCategoryInputData.decode(Buffer26)
+						type = "subscription_collection",
+						value = t.SubscriptionCollectionInputData.decode(Buffer26)
 					}
-				elseif Tag == 20 then
+				elseif Tag == 17 then
 					local Buffer28
 					Buffer28, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
+						type = "dynamic_store_category",
+						value = t.DynamicStoreCategoryInputData.decode(Buffer28)
+					}
+				elseif Tag == 20 then
+					local Buffer29
+					Buffer29, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
 						type = "card_container",
-						value = t.CardContainerInputData.decode(Buffer28)
+						value = t.CardContainerInputData.decode(Buffer29)
 					}
 				elseif Tag == 21 then
+					local Buffer30
+					Buffer30, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = { type = "card", value = t.CardInputData.decode(Buffer30) }
+				elseif Tag == 22 then
 					local Buffer31
 					Buffer31, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = { type = "card", value = t.CardInputData.decode(Buffer31) }
-				elseif Tag == 22 then
+					NewModule.kind = {
+						type = "dialog",
+						value = t.DialogInputData.decode(Buffer31)
+					}
+				elseif Tag == 23 then
+					local Buffer32
+					Buffer32, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "banner",
+						value = t.BannerInputData.decode(Buffer32)
+					}
+				elseif Tag == 24 then
 					local Buffer33
 					Buffer33, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
-						type = "dialog",
-						value = t.DialogInputData.decode(Buffer33)
+						type = "tooltip",
+						value = t.TooltipInputData.decode(Buffer33)
 					}
-				elseif Tag == 23 then
+				elseif Tag == 25 then
+					local Buffer34
+					Buffer34, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "coachmark",
+						value = t.CoachmarkInputData.decode(Buffer34)
+					}
+				elseif Tag == 26 then
+					local Buffer17
+					Buffer17, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "catalog_item_list",
+						value = t.CatalogItemListInputData.decode(Buffer17)
+					}
+				elseif Tag == 27 then
 					local Buffer35
 					Buffer35, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
-						type = "banner",
-						value = t.BannerInputData.decode(Buffer35)
+						type = "user_list",
+						value = t.UserListInputData.decode(Buffer35)
 					}
-				elseif Tag == 24 then
+				elseif Tag == 28 then
+					local Buffer16
+					Buffer16, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "system_banner_prompt",
+						value = t.SystemBannerInputData.decode(Buffer16)
+					}
+				elseif Tag == 29 then
 					local Buffer36
 					Buffer36, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
-						type = "tooltip",
-						value = t.TooltipInputData.decode(Buffer36)
+						type = "age_check_upsell",
+						value = t.AgeCheckUpsellInputData.decode(Buffer36)
 					}
-				elseif Tag == 25 then
-					local Buffer37
-					Buffer37, v581 = ProtoModule.readBuffer(Buf, v4)
+				elseif Tag == 30 then
+					local Buffer21
+					Buffer21, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
-						type = "coachmark",
-						value = t.CoachmarkInputData.decode(Buffer37)
+						type = "experience_content_rating_label",
+						value = t.ExperienceContentRatingLabelInputData.decode(Buffer21)
 					}
-				elseif Tag == 26 then
+				elseif Tag == 31 then
 					local Buffer38
 					Buffer38, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
-						type = "catalog_item_list",
-						value = t.CatalogItemListInputData.decode(Buffer38)
+						type = "experience_refund_policy",
+						value = t.ExperienceRefundPolicyInputData.decode(Buffer38)
 					}
-				elseif Tag == 27 then
+				elseif Tag == 32 then
 					local Buffer39
 					Buffer39, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
-						type = "user_list",
-						value = t.UserListInputData.decode(Buffer39)
+						type = "experience_play_with_reward",
+						value = t.ExperiencePlayWithRewardInputData.decode(Buffer39)
 					}
-				elseif Tag == 28 then
-					local Buffer40
-					Buffer40, v581 = ProtoModule.readBuffer(Buf, v4)
+				elseif Tag == 33 then
+					local Buffer42
+					Buffer42, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
-						type = "system_banner_prompt",
-						value = t.SystemBannerInputData.decode(Buffer40)
+						type = "experience_guidelines_dialog",
+						value = t.ExperienceGuidelinesDialogInputData.decode(Buffer42)
 					}
-				elseif Tag == 29 then
+				elseif Tag == 34 then
+					local Buffer2
+					Buffer2, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "moments_carousel",
+						value = t.MomentsCarouselInputData.decode(Buffer2)
+					}
+				elseif Tag == 35 then
 					local Buffer43
 					Buffer43, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
-						type = "age_check_upsell",
-						value = t.AgeCheckUpsellInputData.decode(Buffer43)
+						type = "community_section",
+						value = t.CommunitySectionInputData.decode(Buffer43)
 					}
-				elseif Tag == 30 then
-					local Buffer45
-					Buffer45, v581 = ProtoModule.readBuffer(Buf, v4)
+				elseif Tag == 36 then
+					local Buffer44
+					Buffer44, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
-						type = "experience_content_rating_label",
-						value = t.ExperienceContentRatingLabelInputData.decode(Buffer45)
+						type = "experience_leaderboard",
+						value = t.ExperienceLeaderboardInputData.decode(Buffer44)
 					}
-				elseif Tag == 31 then
+				elseif Tag == 40 then
 					local Buffer46
 					Buffer46, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = { type = "text", value = t.TextInputData.decode(Buffer46) }
+				elseif Tag == 41 then
+					local Buffer47
+					Buffer47, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
-						type = "experience_refund_policy",
-						value = t.ExperienceRefundPolicyInputData.decode(Buffer46)
+						type = "vertical_feed",
+						value = t.VerticalFeedInputData.decode(Buffer47)
 					}
-				elseif Tag == 32 then
+				elseif Tag == 42 then
 					local Buffer48
 					Buffer48, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
-						type = "experience_play_with_reward",
-						value = t.ExperiencePlayWithRewardInputData.decode(Buffer48)
+						type = "page_header",
+						value = t.PageHeaderInputData.decode(Buffer48)
 					}
-				elseif Tag == 33 then
+				elseif Tag == 43 then
+					local Buffer4
+					Buffer4, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "image_cta_section",
+						value = t.ImageCtaSectionInputData.decode(Buffer4)
+					}
+				elseif Tag == 44 then
+					local Buffer49
+					Buffer49, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "config_driven_form",
+						value = ConfigDrivenFormDataModule.ConfigDrivenFormInputData.decode(Buffer49)
+					}
+				elseif Tag == 50 then
+					local Buffer50
+					Buffer50, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "sandbox_content",
+						value = StructModule.Struct.decode(Buffer50)
+					}
+				elseif Tag == 500 then
 					local Buffer51
 					Buffer51, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
-						type = "experience_guidelines_dialog",
-						value = t.ExperienceGuidelinesDialogInputData.decode(Buffer51)
-					}
-				elseif Tag == 34 then
-					local Buffer52
-					Buffer52, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "moments_carousel",
-						value = t.MomentsCarouselInputData.decode(Buffer52)
-					}
-				elseif Tag == 35 then
-					local Buffer53
-					Buffer53, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "community_section",
-						value = t.CommunitySectionInputData.decode(Buffer53)
-					}
-				elseif Tag == 36 then
-					local Buffer54
-					Buffer54, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "experience_leaderboard",
-						value = t.ExperienceLeaderboardInputData.decode(Buffer54)
-					}
-				elseif Tag == 40 then
-					local Buffer55
-					Buffer55, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = { type = "text", value = t.TextInputData.decode(Buffer55) }
-				elseif Tag == 41 then
-					local Buffer56
-					Buffer56, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "vertical_feed",
-						value = t.VerticalFeedInputData.decode(Buffer56)
-					}
-				elseif Tag == 42 then
-					local Buffer58
-					Buffer58, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "page_header",
-						value = t.PageHeaderInputData.decode(Buffer58)
-					}
-				elseif Tag == 43 then
-					local Buffer59
-					Buffer59, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "image_cta_section",
-						value = t.ImageCtaSectionInputData.decode(Buffer59)
-					}
-				elseif Tag == 44 then
-					local Buffer60
-					Buffer60, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "config_driven_form",
-						value = ConfigDrivenFormDataModule.ConfigDrivenFormInputData.decode(Buffer60)
-					}
-				elseif Tag == 50 then
-					local Buffer63
-					Buffer63, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "sandbox_content",
-						value = StructModule.Struct.decode(Buffer63)
-					}
-				elseif Tag == 500 then
-					local Buffer65
-					Buffer65, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
 						type = "experience_details_feed",
-						value = t.ExperienceDetailsFeedInputData.decode(Buffer65)
+						value = t.ExperienceDetailsFeedInputData.decode(Buffer51)
 					}
 				elseif Tag == 501 then
 					local Buffer27
@@ -1191,368 +1191,368 @@ do
 						value = t.ExperienceDetailsActionBarInputData.decode(Buffer27)
 					}
 				elseif Tag == 502 then
-					local Buffer22
-					Buffer22, v581 = ProtoModule.readBuffer(Buf, v4)
+					local Buffer52
+					Buffer52, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
 						type = "experience_details_banner_image",
-						value = t.ExperienceDetailsBannerImageInputData.decode(Buffer22)
+						value = t.ExperienceDetailsBannerImageInputData.decode(Buffer52)
 					}
 				elseif Tag == 503 then
-					local Buffer25
-					Buffer25, v581 = ProtoModule.readBuffer(Buf, v4)
+					local Buffer53
+					Buffer53, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
 						type = "experience_details_sticky_header",
-						value = t.ExperienceDetailsStickyHeaderInputData.decode(Buffer25)
+						value = t.ExperienceDetailsStickyHeaderInputData.decode(Buffer53)
 					}
 				elseif Tag == 600 then
-					local Buffer34
-					Buffer34, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "event_details_feed",
-						value = t.EventDetailsFeedInputData.decode(Buffer34)
-					}
-				elseif Tag == 601 then
-					local Buffer23
-					Buffer23, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "event_details_action_bar",
-						value = t.EventDetailsActionBarInputData.decode(Buffer23)
-					}
-				elseif Tag == 602 then
-					local Buffer32
-					Buffer32, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "event_attribution_row",
-						value = t.EventAttributionRowInputData.decode(Buffer32)
-					}
-				elseif Tag == 603 then
-					local Buffer67
-					Buffer67, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "event_description",
-						value = t.EventDescriptionInputData.decode(Buffer67)
-					}
-				elseif Tag == 604 then
-					local Buffer30
-					Buffer30, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "event_info_table",
-						value = t.EventInfoTableInputData.decode(Buffer30)
-					}
-				elseif Tag == 605 then
-					local Buffer68
-					Buffer68, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "event_details_sheet_full_bleed",
-						value = t.EventDetailsSheetFullBleedInputData.decode(Buffer68)
-					}
-				elseif Tag == 606 then
-					local Buffer69
-					Buffer69, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "event_notifications_modal",
-						value = t.EventNotificationsModalInputData.decode(Buffer69)
-					}
-				elseif Tag == 700 then
-					local Buffer70
-					Buffer70, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "dev_store_feed",
-						value = t.DevStoreFeedInputData.decode(Buffer70)
-					}
-				elseif Tag == 701 then
-					local Buffer10
-					Buffer10, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "game_item_details",
-						value = t.GameItemDetailsInputData.decode(Buffer10)
-					}
-				elseif Tag == 800 then
-					local Buffer3
-					Buffer3, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "charts_feed",
-						value = t.ChartsFeedInputData.decode(Buffer3)
-					}
-				elseif Tag == 801 then
-					local Buffer9
-					Buffer9, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "filter_pills",
-						value = t.FilterPillsInputData.decode(Buffer9)
-					}
-				elseif Tag == 802 then
-					local Buffer12
-					Buffer12, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "sort_selector",
-						value = t.SortSelectorInputData.decode(Buffer12)
-					}
-				elseif Tag == 803 then
-					local Buffer7
-					Buffer7, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "genre_selector",
-						value = t.ChartsGenreSelectorInputData.decode(Buffer7)
-					}
-				elseif Tag == 900 then
-					local Buffer71
-					Buffer71, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "marketplace_catalog_feed",
-						value = t.UAMarketplaceCatalogFeedInputData.decode(Buffer71)
-					}
-				elseif Tag == 901 then
-					local Buffer72
-					Buffer72, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "marketplace_catalog_category_menu",
-						value = t.UAMarketplaceCatalogCategoryMenuInputData.decode(Buffer72)
-					}
-				elseif Tag == 902 then
-					local Buffer73
-					Buffer73, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "marketplace_catalog_item_group",
-						value = t.UAMarketplaceCatalogItemGroupInputData.decode(Buffer73)
-					}
-				elseif Tag == 903 then
-					local Buffer74
-					Buffer74, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "marketplace_catalog_item_carousel",
-						value = t.UAMarketplaceCatalogItemCarouselInputData.decode(Buffer74)
-					}
-				elseif Tag == 904 then
-					local Buffer75
-					Buffer75, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "marketplace_catalog_hero_unit",
-						value = t.UAMarketplaceCatalogHeroUnitInputData.decode(Buffer75)
-					}
-				elseif Tag == 905 then
-					local Buffer76
-					Buffer76, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "catalog_item_grid",
-						value = t.CatalogItemGridInputData.decode(Buffer76)
-					}
-				elseif Tag == 906 then
-					local Buffer57
-					Buffer57, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "marketplace_offer_modal",
-						value = t.MarketplaceOfferModalInputData.decode(Buffer57)
-					}
-				elseif Tag == 907 then
-					local Buffer13
-					Buffer13, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "marketplace_item_media_header",
-						value = t.MarketplaceItemMediaHeaderInputData.decode(Buffer13)
-					}
-				elseif Tag == 908 then
-					local Buffer66
-					Buffer66, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "marketplace_item_ownership",
-						value = t.MarketplaceItemOwnershipInputData.decode(Buffer66)
-					}
-				elseif Tag == 909 then
-					local Buffer61
-					Buffer61, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "marketplace_item_info_table",
-						value = t.MarketplaceItemInfoTableInputData.decode(Buffer61)
-					}
-				elseif Tag == 910 then
-					local Buffer64
-					Buffer64, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "marketplace_item_experiences_link",
-						value = t.MarketplaceItemExperiencesLinkInputData.decode(Buffer64)
-					}
-				elseif Tag == 1000 then
-					local Buffer77
-					Buffer77, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "search_results_feed",
-						value = t.SearchResultsFeedInputData.decode(Buffer77)
-					}
-				elseif Tag == 1001 then
-					local Buffer62
-					Buffer62, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "power_search_ai_overview",
-						value = t.PowerSearchAIOverviewInputData.decode(Buffer62)
-					}
-				elseif Tag == 1002 then
-					local Buffer78
-					Buffer78, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "experience_emphasis_tile",
-						value = t.ExperienceEmphasisTileInputData.decode(Buffer78)
-					}
-				elseif Tag == 1003 then
-					local Buffer79
-					Buffer79, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "search_autocomplete",
-						value = t.SearchAutocompleteInputData.decode(Buffer79)
-					}
-				elseif Tag == 1004 then
-					local Buffer80
-					Buffer80, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "safety_resource_banner",
-						value = t.SafetyResourceBannerInputData.decode(Buffer80)
-					}
-				elseif Tag == 1100 then
-					local Buffer44
-					Buffer44, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "option_selector_carousel",
-						value = t.OptionSelectorCarouselInputData.decode(Buffer44)
-					}
-				elseif Tag == 1101 then
 					local Buffer41
 					Buffer41, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
+						type = "event_details_feed",
+						value = t.EventDetailsFeedInputData.decode(Buffer41)
+					}
+				elseif Tag == 601 then
+					local Buffer54
+					Buffer54, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "event_details_action_bar",
+						value = t.EventDetailsActionBarInputData.decode(Buffer54)
+					}
+				elseif Tag == 602 then
+					local Buffer55
+					Buffer55, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "event_attribution_row",
+						value = t.EventAttributionRowInputData.decode(Buffer55)
+					}
+				elseif Tag == 603 then
+					local Buffer56
+					Buffer56, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "event_description",
+						value = t.EventDescriptionInputData.decode(Buffer56)
+					}
+				elseif Tag == 604 then
+					local Buffer57
+					Buffer57, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "event_info_table",
+						value = t.EventInfoTableInputData.decode(Buffer57)
+					}
+				elseif Tag == 605 then
+					local Buffer6
+					Buffer6, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "event_details_sheet_full_bleed",
+						value = t.EventDetailsSheetFullBleedInputData.decode(Buffer6)
+					}
+				elseif Tag == 606 then
+					local Buffer58
+					Buffer58, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "event_notifications_modal",
+						value = t.EventNotificationsModalInputData.decode(Buffer58)
+					}
+				elseif Tag == 700 then
+					local Buffer60
+					Buffer60, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "dev_store_feed",
+						value = t.DevStoreFeedInputData.decode(Buffer60)
+					}
+				elseif Tag == 701 then
+					local Buffer61
+					Buffer61, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "game_item_details",
+						value = t.GameItemDetailsInputData.decode(Buffer61)
+					}
+				elseif Tag == 800 then
+					local Buffer62
+					Buffer62, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "charts_feed",
+						value = t.ChartsFeedInputData.decode(Buffer62)
+					}
+				elseif Tag == 801 then
+					local Buffer13
+					Buffer13, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "filter_pills",
+						value = t.FilterPillsInputData.decode(Buffer13)
+					}
+				elseif Tag == 802 then
+					local Buffer40
+					Buffer40, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "sort_selector",
+						value = t.SortSelectorInputData.decode(Buffer40)
+					}
+				elseif Tag == 803 then
+					local Buffer63
+					Buffer63, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "genre_selector",
+						value = t.ChartsGenreSelectorInputData.decode(Buffer63)
+					}
+				elseif Tag == 900 then
+					local Buffer64
+					Buffer64, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "marketplace_catalog_feed",
+						value = t.UAMarketplaceCatalogFeedInputData.decode(Buffer64)
+					}
+				elseif Tag == 901 then
+					local Buffer65
+					Buffer65, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "marketplace_catalog_category_menu",
+						value = t.UAMarketplaceCatalogCategoryMenuInputData.decode(Buffer65)
+					}
+				elseif Tag == 902 then
+					local Buffer66
+					Buffer66, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "marketplace_catalog_item_group",
+						value = t.UAMarketplaceCatalogItemGroupInputData.decode(Buffer66)
+					}
+				elseif Tag == 903 then
+					local Buffer67
+					Buffer67, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "marketplace_catalog_item_carousel",
+						value = t.UAMarketplaceCatalogItemCarouselInputData.decode(Buffer67)
+					}
+				elseif Tag == 904 then
+					local Buffer45
+					Buffer45, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "marketplace_catalog_hero_unit",
+						value = t.UAMarketplaceCatalogHeroUnitInputData.decode(Buffer45)
+					}
+				elseif Tag == 905 then
+					local Buffer68
+					Buffer68, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "catalog_item_grid",
+						value = t.CatalogItemGridInputData.decode(Buffer68)
+					}
+				elseif Tag == 906 then
+					local Buffer69
+					Buffer69, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "marketplace_offer_modal",
+						value = t.MarketplaceOfferModalInputData.decode(Buffer69)
+					}
+				elseif Tag == 907 then
+					local Buffer70
+					Buffer70, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "marketplace_item_media_header",
+						value = t.MarketplaceItemMediaHeaderInputData.decode(Buffer70)
+					}
+				elseif Tag == 908 then
+					local Buffer59
+					Buffer59, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "marketplace_item_ownership",
+						value = t.MarketplaceItemOwnershipInputData.decode(Buffer59)
+					}
+				elseif Tag == 909 then
+					local Buffer71
+					Buffer71, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "marketplace_item_info_table",
+						value = t.MarketplaceItemInfoTableInputData.decode(Buffer71)
+					}
+				elseif Tag == 910 then
+					local Buffer72
+					Buffer72, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "marketplace_item_experiences_link",
+						value = t.MarketplaceItemExperiencesLinkInputData.decode(Buffer72)
+					}
+				elseif Tag == 1000 then
+					local Buffer74
+					Buffer74, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "search_results_feed",
+						value = t.SearchResultsFeedInputData.decode(Buffer74)
+					}
+				elseif Tag == 1001 then
+					local Buffer75
+					Buffer75, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "power_search_ai_overview",
+						value = t.PowerSearchAIOverviewInputData.decode(Buffer75)
+					}
+				elseif Tag == 1002 then
+					local Buffer76
+					Buffer76, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "experience_emphasis_tile",
+						value = t.ExperienceEmphasisTileInputData.decode(Buffer76)
+					}
+				elseif Tag == 1003 then
+					local Buffer77
+					Buffer77, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "search_autocomplete",
+						value = t.SearchAutocompleteInputData.decode(Buffer77)
+					}
+				elseif Tag == 1004 then
+					local Buffer1
+					Buffer1, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "safety_resource_banner",
+						value = t.SafetyResourceBannerInputData.decode(Buffer1)
+					}
+				elseif Tag == 1100 then
+					local Buffer78
+					Buffer78, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "option_selector_carousel",
+						value = t.OptionSelectorCarouselInputData.decode(Buffer78)
+					}
+				elseif Tag == 1101 then
+					local Buffer79
+					Buffer79, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
 						type = "game_items_carousel",
-						value = t.GameItemsCarouselInputData.decode(Buffer41)
+						value = t.GameItemsCarouselInputData.decode(Buffer79)
 					}
 				elseif Tag == 1102 then
-					local Buffer29
-					Buffer29, v581 = ProtoModule.readBuffer(Buf, v4)
+					local Buffer20
+					Buffer20, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
 						type = "hero_unit",
-						value = t.HeroUnitInputData.decode(Buffer29)
+						value = t.HeroUnitInputData.decode(Buffer20)
 					}
 				elseif Tag == 1103 then
-					local Buffer50
-					Buffer50, v581 = ProtoModule.readBuffer(Buf, v4)
+					local Buffer8
+					Buffer8, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
 						type = "friend_recommendation_carousel",
-						value = t.FriendRecommendationCarouselInputData.decode(Buffer50)
+						value = t.FriendRecommendationCarouselInputData.decode(Buffer8)
 					}
 				elseif Tag == 1200 then
-					local Buffer42
-					Buffer42, v581 = ProtoModule.readBuffer(Buf, v4)
+					local Buffer80
+					Buffer80, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
 						type = "party_chat_conversation_upsell",
-						value = t.PartyChatConversationUpsellInputData.decode(Buffer42)
+						value = t.PartyChatConversationUpsellInputData.decode(Buffer80)
 					}
 				elseif Tag == 1300 then
-					local Buffer49
-					Buffer49, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "pre_auth_landing_sticky_header",
-						value = t.PreAuthLandingStickyHeaderInputData.decode(Buffer49)
-					}
-				elseif Tag == 1400 then
-					local Buffer84
-					Buffer84, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "community_announcement",
-						value = t.CommunityAnnouncementInputData.decode(Buffer84)
-					}
-				elseif Tag == 1401 then
-					local Buffer47
-					Buffer47, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "group_announcement",
-						value = t.GroupAnnouncementInputData.decode(Buffer47)
-					}
-				elseif Tag == 1402 then
-					local Buffer85
-					Buffer85, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "group_forums_discovery",
-						value = t.GroupForumsDiscoveryInputData.decode(Buffer85)
-					}
-				elseif Tag == 1403 then
-					local Buffer86
-					Buffer86, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "group_events",
-						value = t.GroupEventsInputData.decode(Buffer86)
-					}
-				elseif Tag == 1500 then
-					local Buffer87
-					Buffer87, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "settings_row",
-						value = t.SettingsRowInputData.decode(Buffer87)
-					}
-				elseif Tag == 1501 then
-					local Buffer88
-					Buffer88, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "settings_toggle",
-						value = t.SettingsToggleInputData.decode(Buffer88)
-					}
-				elseif Tag == 1600 then
-					local Buffer89
-					Buffer89, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "group_sidebar",
-						value = t.GroupSidebarInputData.decode(Buffer89)
-					}
-				elseif Tag == 1601 then
-					local Buffer90
-					Buffer90, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "group_overview_pane",
-						value = t.GroupOverviewPaneInputData.decode(Buffer90)
-					}
-				elseif Tag == 1602 then
-					local Buffer82
-					Buffer82, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "group_sidebar_section",
-						value = t.GroupSidebarSectionInputData.decode(Buffer82)
-					}
-				elseif Tag == 1700 then
-					local Buffer91
-					Buffer91, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "buy_robux_page",
-						value = t.BuyRobuxPageInputData.decode(Buffer91)
-					}
-				elseif Tag == 1701 then
 					local Buffer81
 					Buffer81, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
-						type = "buy_robux_section",
-						value = t.BuyRobuxSectionInputData.decode(Buffer81)
+						type = "pre_auth_landing_sticky_header",
+						value = t.PreAuthLandingStickyHeaderInputData.decode(Buffer81)
 					}
-				elseif Tag == 1800 then
-					local Buffer92
-					Buffer92, v581 = ProtoModule.readBuffer(Buf, v4)
+				elseif Tag == 1400 then
+					local Buffer37
+					Buffer37, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
-						type = "user_library_overview",
-						value = t.UserLibraryOverviewInputData.decode(Buffer92)
+						type = "community_announcement",
+						value = t.CommunityAnnouncementInputData.decode(Buffer37)
 					}
-				elseif Tag == 1801 then
-					local Buffer93
-					Buffer93, v581 = ProtoModule.readBuffer(Buf, v4)
+				elseif Tag == 1401 then
+					local Buffer82
+					Buffer82, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
-						type = "user_library_list",
-						value = t.UserLibraryListInputData.decode(Buffer93)
+						type = "group_announcement",
+						value = t.GroupAnnouncementInputData.decode(Buffer82)
 					}
-				elseif Tag == 1802 then
-					local Buffer94
-					Buffer94, v581 = ProtoModule.readBuffer(Buf, v4)
-					NewModule.kind = {
-						type = "user_library_header",
-						value = t.UserLibraryHeaderInputData.decode(Buffer94)
-					}
-				elseif Tag == 1900 then
+				elseif Tag == 1402 then
 					local Buffer83
 					Buffer83, v581 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.kind = {
+						type = "group_forums_discovery",
+						value = t.GroupForumsDiscoveryInputData.decode(Buffer83)
+					}
+				elseif Tag == 1403 then
+					local Buffer73
+					Buffer73, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "group_events",
+						value = t.GroupEventsInputData.decode(Buffer73)
+					}
+				elseif Tag == 1500 then
+					local Buffer84
+					Buffer84, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "settings_row",
+						value = t.SettingsRowInputData.decode(Buffer84)
+					}
+				elseif Tag == 1501 then
+					local Buffer85
+					Buffer85, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "settings_toggle",
+						value = t.SettingsToggleInputData.decode(Buffer85)
+					}
+				elseif Tag == 1600 then
+					local Buffer86
+					Buffer86, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "group_sidebar",
+						value = t.GroupSidebarInputData.decode(Buffer86)
+					}
+				elseif Tag == 1601 then
+					local Buffer87
+					Buffer87, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "group_overview_pane",
+						value = t.GroupOverviewPaneInputData.decode(Buffer87)
+					}
+				elseif Tag == 1602 then
+					local Buffer88
+					Buffer88, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "group_sidebar_section",
+						value = t.GroupSidebarSectionInputData.decode(Buffer88)
+					}
+				elseif Tag == 1700 then
+					local Buffer89
+					Buffer89, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "buy_robux_page",
+						value = t.BuyRobuxPageInputData.decode(Buffer89)
+					}
+				elseif Tag == 1701 then
+					local Buffer90
+					Buffer90, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "buy_robux_section",
+						value = t.BuyRobuxSectionInputData.decode(Buffer90)
+					}
+				elseif Tag == 1800 then
+					local Buffer91
+					Buffer91, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "user_library_overview",
+						value = t.UserLibraryOverviewInputData.decode(Buffer91)
+					}
+				elseif Tag == 1801 then
+					local Buffer92
+					Buffer92, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "user_library_list",
+						value = t.UserLibraryListInputData.decode(Buffer92)
+					}
+				elseif Tag == 1802 then
+					local Buffer93
+					Buffer93, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
+						type = "user_library_header",
+						value = t.UserLibraryHeaderInputData.decode(Buffer93)
+					}
+				elseif Tag == 1900 then
+					local Buffer94
+					Buffer94, v581 = ProtoModule.readBuffer(Buf, v4)
+					NewModule.kind = {
 						type = "stream_notification_row",
-						value = t.StreamNotificationRowInputData.decode(Buffer83)
+						value = t.StreamNotificationRowInputData.decode(Buffer94)
 					}
 				elseif Tag == 1901 then
 					local Buffer95
@@ -6700,29 +6700,29 @@ do
 			Buf, Count = ProtoModule.writeVarInt(WriteTagResult4, WriteTagResult2_3, if self.show_invite_view then 1 else 0)
 		end
 		if self.num_friends ~= nil and self.num_friends ~= 0 then
-			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult6, WriteTagResult2_5, self.num_friends)
+			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult5, WriteTagResult2_4, self.num_friends)
 		end
 		if self.global_next_cursor ~= nil and self.global_next_cursor ~= "" then
-			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.global_next_cursor)
+			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.global_next_cursor)
 		end
 		if self.friends_next_cursor ~= nil and self.friends_next_cursor ~= "" then
-			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.friends_next_cursor)
+			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.friends_next_cursor)
 		end
 		if self.initial_tab ~= nil and self.initial_tab ~= "" then
-			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, self.initial_tab)
+			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.initial_tab)
 		end
 		if self.current_user ~= nil then
 			local EncodeResult = self.current_user:encode()
-			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult10, WriteTagResult2_9, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult9, WriteTagResult2_8, EncodeResult, buffer.len(EncodeResult))
 		end
 		if self.score_unit ~= nil and self.score_unit ~= "" then
-			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.score_unit)
+			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult10, WriteTagResult2_9, self.score_unit)
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -7439,56 +7439,56 @@ do
 			Buf, Count = ProtoModule.writeVarInt(WriteTagResult11, WriteTagResult2_10, if self.is_placeholder then 1 else 0)
 		end
 		if self.primary_sort_id ~= nil then
-			local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult13, WriteTagResult2_12, self.primary_sort_id)
+			local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult12, WriteTagResult2_11, self.primary_sort_id)
 		end
 		if self.applied_filters ~= nil then
-			local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult14, WriteTagResult2_13, self.applied_filters)
+			local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult13, WriteTagResult2_12, self.applied_filters)
 		end
 		if self.pool_id ~= nil then
-			local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult15, WriteTagResult2_14, self.pool_id)
+			local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult14, WriteTagResult2_13, self.pool_id)
 		end
 		if self.has_emphasized_tile then
-			local WriteTagResult16, WriteTagResult2_15 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult16, WriteTagResult2_15, if self.has_emphasized_tile then 1 else 0)
+			local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult15, WriteTagResult2_14, if self.has_emphasized_tile then 1 else 0)
 		end
 		if self.tile_activation_mode ~= nil and self.tile_activation_mode ~= "" then
-			local WriteTagResult19, WriteTagResult2_18 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult19, WriteTagResult2_18, self.tile_activation_mode)
+			local WriteTagResult16, WriteTagResult2_15 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult16, WriteTagResult2_15, self.tile_activation_mode)
 		end
 		if self.initial_feed_visible_rows ~= nil then
-			local WriteTagResult21, WriteTagResult2_20 = ProtoModule.writeTag(Buf, Count, 16, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult21, WriteTagResult2_20, self.initial_feed_visible_rows)
+			local WriteTagResult17, WriteTagResult2_16 = ProtoModule.writeTag(Buf, Count, 16, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult17, WriteTagResult2_16, self.initial_feed_visible_rows)
 		end
 		if self.visible_rows_per_reveal ~= nil then
 			local WriteTagResult18, WriteTagResult2_17 = ProtoModule.writeTag(Buf, Count, 17, ProtoModule.wireTypes.varint)
 			Buf, Count = ProtoModule.writeVarInt(WriteTagResult18, WriteTagResult2_17, self.visible_rows_per_reveal)
 		end
 		if self.sponsored_user_cohort ~= nil then
-			local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 18, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult12, WriteTagResult2_11, self.sponsored_user_cohort)
+			local WriteTagResult19, WriteTagResult2_18 = ProtoModule.writeTag(Buf, Count, 18, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult19, WriteTagResult2_18, self.sponsored_user_cohort)
 		end
 		if self.anchor_tag ~= nil then
-			local WriteTagResult17, WriteTagResult2_16 = ProtoModule.writeTag(Buf, Count, 19, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult17, WriteTagResult2_16, self.anchor_tag)
+			local WriteTagResult20, WriteTagResult2_19 = ProtoModule.writeTag(Buf, Count, 19, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult20, WriteTagResult2_19, self.anchor_tag)
 		end
 		if self.collection_item_size ~= nil then
-			local WriteTagResult22, WriteTagResult2_21 = ProtoModule.writeTag(Buf, Count, 20, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult22, WriteTagResult2_21, self.collection_item_size)
+			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 20, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.collection_item_size)
 		end
 		if self.sort_sub_id ~= nil then
-			local WriteTagResult20, WriteTagResult2_19 = ProtoModule.writeTag(Buf, Count, 21, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult20, WriteTagResult2_19, self.sort_sub_id)
+			local WriteTagResult21, WriteTagResult2_20 = ProtoModule.writeTag(Buf, Count, 21, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult21, WriteTagResult2_20, self.sort_sub_id)
 		end
 		if self.enable_game_tile_videos then
-			local WriteTagResult23, WriteTagResult2_22 = ProtoModule.writeTag(Buf, Count, 22, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult23, WriteTagResult2_22, if self.enable_game_tile_videos then 1 else 0)
+			local WriteTagResult22, WriteTagResult2_21 = ProtoModule.writeTag(Buf, Count, 22, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult22, WriteTagResult2_21, if self.enable_game_tile_videos then 1 else 0)
 		end
 		if self.continues_previous_section ~= nil then
-			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 23, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult9, WriteTagResult2_8, if self.continues_previous_section then 1 else 0)
+			local WriteTagResult23, WriteTagResult2_22 = ProtoModule.writeTag(Buf, Count, 23, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult23, WriteTagResult2_22, if self.continues_previous_section then 1 else 0)
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -7510,91 +7510,91 @@ do
 				elseif Tag == 6 then
 					NewModule.max_visible_rows, v1512 = ProtoModule.readVarIntI32(Buf, v28)
 				elseif Tag == 10 then
-					local VarInt1
-					VarInt1, v1512 = ProtoModule.readVarInt(Buf, v28)
-					NewModule.is_placeholder = VarInt1 ~= 0
+					local VarInt
+					VarInt, v1512 = ProtoModule.readVarInt(Buf, v28)
+					NewModule.is_placeholder = VarInt ~= 0
 				elseif Tag == 11 then
 					NewModule.primary_sort_id, v1512 = ProtoModule.readVarIntI32(Buf, v28)
 				elseif Tag == 14 then
-					local VarInt3
-					VarInt3, v1512 = ProtoModule.readVarInt(Buf, v28)
-					NewModule.has_emphasized_tile = VarInt3 ~= 0
+					local VarInt1
+					VarInt1, v1512 = ProtoModule.readVarInt(Buf, v28)
+					NewModule.has_emphasized_tile = VarInt1 ~= 0
 				elseif Tag == 16 then
 					NewModule.initial_feed_visible_rows, v1512 = ProtoModule.readVarIntI32(Buf, v28)
 				elseif Tag == 17 then
 					NewModule.visible_rows_per_reveal, v1512 = ProtoModule.readVarIntI32(Buf, v28)
 				elseif Tag == 22 then
-					local VarInt4
-					VarInt4, v1512 = ProtoModule.readVarInt(Buf, v28)
-					NewModule.enable_game_tile_videos = VarInt4 ~= 0
+					local VarInt2
+					VarInt2, v1512 = ProtoModule.readVarInt(Buf, v28)
+					NewModule.enable_game_tile_videos = VarInt2 ~= 0
 				elseif Tag == 23 then
-					local VarInt5
-					VarInt5, v1512 = ProtoModule.readVarInt(Buf, v28)
-					NewModule.continues_previous_section = VarInt5 ~= 0
+					local VarInt3
+					VarInt3, v1512 = ProtoModule.readVarInt(Buf, v28)
+					NewModule.continues_previous_section = VarInt3 ~= 0
 				else
 					local _
 					_, v1512 = ProtoModule.readVarInt(Buf, v28)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
-					local Buffer2
-					Buffer2, v1512 = ProtoModule.readBuffer(Buf, v28)
-					NewModule.title = buffer.tostring(Buffer2)
-				elseif Tag == 2 then
-					local Buffer3
-					Buffer3, v1512 = ProtoModule.readBuffer(Buf, v28)
-					table.insert(NewModule.universe_items, t.ExperienceCarouselInputData_UniverseItem.decode(Buffer3))
-				elseif Tag == 3 then
-					local Buffer4
-					Buffer4, v1512 = ProtoModule.readBuffer(Buf, v28)
-					NewModule.next_page_token = buffer.tostring(Buffer4)
-				elseif Tag == 4 then
-					local Buffer5
-					Buffer5, v1512 = ProtoModule.readBuffer(Buf, v28)
-					NewModule.sort_id = buffer.tostring(Buffer5)
-				elseif Tag == 7 then
-					local Buffer6
-					Buffer6, v1512 = ProtoModule.readBuffer(Buf, v28)
-					NewModule.subtitle = buffer.tostring(Buffer6)
-				elseif Tag == 8 then
-					local Buffer7
-					Buffer7, v1512 = ProtoModule.readBuffer(Buf, v28)
-					NewModule.info_text = buffer.tostring(Buffer7)
-				elseif Tag == 9 then
-					local Buffer8
-					Buffer8, v1512 = ProtoModule.readBuffer(Buf, v28)
-					NewModule.subtitle_link_path = buffer.tostring(Buffer8)
-				elseif Tag == 12 then
-					local Buffer9
-					Buffer9, v1512 = ProtoModule.readBuffer(Buf, v28)
-					NewModule.applied_filters = buffer.tostring(Buffer9)
-				elseif Tag == 13 then
-					local Buffer10
-					Buffer10, v1512 = ProtoModule.readBuffer(Buf, v28)
-					NewModule.pool_id = buffer.tostring(Buffer10)
-				elseif Tag == 15 then
-					local Buffer11
-					Buffer11, v1512 = ProtoModule.readBuffer(Buf, v28)
-					NewModule.tile_activation_mode = buffer.tostring(Buffer11)
-				elseif Tag == 18 then
-					local Buffer12
-					Buffer12, v1512 = ProtoModule.readBuffer(Buf, v28)
-					NewModule.sponsored_user_cohort = buffer.tostring(Buffer12)
-				elseif Tag == 19 then
-					local Buffer13
-					Buffer13, v1512 = ProtoModule.readBuffer(Buf, v28)
-					NewModule.anchor_tag = buffer.tostring(Buffer13)
-				elseif Tag == 20 then
-					local Buffer14
-					Buffer14, v1512 = ProtoModule.readBuffer(Buf, v28)
-					NewModule.collection_item_size = buffer.tostring(Buffer14)
-				elseif Tag == 21 then
 					local Buffer1
 					Buffer1, v1512 = ProtoModule.readBuffer(Buf, v28)
-					NewModule.sort_sub_id = buffer.tostring(Buffer1)
+					NewModule.title = buffer.tostring(Buffer1)
+				elseif Tag == 2 then
+					local Buffer2
+					Buffer2, v1512 = ProtoModule.readBuffer(Buf, v28)
+					table.insert(NewModule.universe_items, t.ExperienceCarouselInputData_UniverseItem.decode(Buffer2))
+				elseif Tag == 3 then
+					local Buffer3
+					Buffer3, v1512 = ProtoModule.readBuffer(Buf, v28)
+					NewModule.next_page_token = buffer.tostring(Buffer3)
+				elseif Tag == 4 then
+					local Buffer4
+					Buffer4, v1512 = ProtoModule.readBuffer(Buf, v28)
+					NewModule.sort_id = buffer.tostring(Buffer4)
+				elseif Tag == 7 then
+					local Buffer5
+					Buffer5, v1512 = ProtoModule.readBuffer(Buf, v28)
+					NewModule.subtitle = buffer.tostring(Buffer5)
+				elseif Tag == 8 then
+					local Buffer6
+					Buffer6, v1512 = ProtoModule.readBuffer(Buf, v28)
+					NewModule.info_text = buffer.tostring(Buffer6)
+				elseif Tag == 9 then
+					local Buffer7
+					Buffer7, v1512 = ProtoModule.readBuffer(Buf, v28)
+					NewModule.subtitle_link_path = buffer.tostring(Buffer7)
+				elseif Tag == 12 then
+					local Buffer8
+					Buffer8, v1512 = ProtoModule.readBuffer(Buf, v28)
+					NewModule.applied_filters = buffer.tostring(Buffer8)
+				elseif Tag == 13 then
+					local Buffer9
+					Buffer9, v1512 = ProtoModule.readBuffer(Buf, v28)
+					NewModule.pool_id = buffer.tostring(Buffer9)
+				elseif Tag == 15 then
+					local Buffer10
+					Buffer10, v1512 = ProtoModule.readBuffer(Buf, v28)
+					NewModule.tile_activation_mode = buffer.tostring(Buffer10)
+				elseif Tag == 18 then
+					local Buffer11
+					Buffer11, v1512 = ProtoModule.readBuffer(Buf, v28)
+					NewModule.sponsored_user_cohort = buffer.tostring(Buffer11)
+				elseif Tag == 19 then
+					local Buffer12
+					Buffer12, v1512 = ProtoModule.readBuffer(Buf, v28)
+					NewModule.anchor_tag = buffer.tostring(Buffer12)
+				elseif Tag == 20 then
+					local Buffer13
+					Buffer13, v1512 = ProtoModule.readBuffer(Buf, v28)
+					NewModule.collection_item_size = buffer.tostring(Buffer13)
+				elseif Tag == 21 then
+					local Buffer14
+					Buffer14, v1512 = ProtoModule.readBuffer(Buf, v28)
+					NewModule.sort_sub_id = buffer.tostring(Buffer14)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v28)
-					v28 = VarInt2 + VarInt
+					local VarInt4, VarInt2_1 = ProtoModule.readVarInt(Buf, v28)
+					v28 = VarInt2_1 + VarInt4
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
@@ -7897,119 +7897,119 @@ do
 			Buf, Count = ProtoModule.writeVarInt(WriteTagResult1, WriteTagResult2_1, if self.is_sponsored then 1 else 0)
 		end
 		if self.roblox_component ~= nil and self.roblox_component ~= "" then
-			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult3, WriteTagResult2_2, self.roblox_component)
+			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult4, WriteTagResult2_3, self.roblox_component)
 		end
 		if self.native_ad_data ~= nil and self.native_ad_data ~= "" then
-			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult4, WriteTagResult2_3, self.native_ad_data)
+			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, self.native_ad_data)
 		end
 		if self.is_content_locked then
-			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult5, WriteTagResult2_4, if self.is_content_locked then 1 else 0)
+			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult6, WriteTagResult2_5, if self.is_content_locked then 1 else 0)
 		end
 		if self.title ~= nil and self.title ~= "" then
-			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.title)
+			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.title)
 		end
 		if self.subtitle ~= nil and self.subtitle ~= "" then
-			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.subtitle)
+			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.subtitle)
 		end
 		if self.image_asset_id ~= nil and self.image_asset_id ~= "" then
-			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.image_asset_id)
+			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.image_asset_id)
 		end
 		if self.video_asset_id ~= nil and self.video_asset_id ~= "" then
-			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.video_asset_id)
+			local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult11, WriteTagResult2_10, self.video_asset_id)
 		end
 		if self.badge_text ~= nil and self.badge_text ~= "" then
-			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult10, WriteTagResult2_9, self.badge_text)
+			local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult12, WriteTagResult2_11, self.badge_text)
 		end
 		if self.player_count ~= nil then
 			local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.varint)
 			Buf, Count = ProtoModule.writeVarInt(WriteTagResult13, WriteTagResult2_12, self.player_count)
 		end
 		if self.creator_key ~= nil and self.creator_key ~= "" then
-			local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult15, WriteTagResult2_14, self.creator_key)
+			local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult14, WriteTagResult2_13, self.creator_key)
 		end
 		if self.rank ~= nil then
-			local WriteTagResult16, WriteTagResult2_15 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult16, WriteTagResult2_15, self.rank)
+			local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult15, WriteTagResult2_14, self.rank)
 		end
 		if self.payer_name ~= nil then
-			local WriteTagResult18, WriteTagResult2_17 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult18, WriteTagResult2_17, self.payer_name)
+			local WriteTagResult16, WriteTagResult2_15 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult16, WriteTagResult2_15, self.payer_name)
 		end
 		if self.logo_asset_id ~= nil then
-			local WriteTagResult20, WriteTagResult2_19 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult20, WriteTagResult2_19, self.logo_asset_id)
+			local WriteTagResult17, WriteTagResult2_16 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult17, WriteTagResult2_16, self.logo_asset_id)
 		end
 		if self.logo_aspect_ratio ~= nil then
-			local WriteTagResult22, WriteTagResult2_21 = ProtoModule.writeTag(Buf, Count, 16, ProtoModule.wireTypes.i64)
-			Buf, Count = ProtoModule.writeDouble(WriteTagResult22, WriteTagResult2_21, self.logo_aspect_ratio)
+			local WriteTagResult18, WriteTagResult2_17 = ProtoModule.writeTag(Buf, Count, 16, ProtoModule.wireTypes.i64)
+			Buf, Count = ProtoModule.writeDouble(WriteTagResult18, WriteTagResult2_17, self.logo_aspect_ratio)
 		end
 		if self.place_id ~= nil then
-			local WriteTagResult23, WriteTagResult2_22 = ProtoModule.writeTag(Buf, Count, 17, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult23, WriteTagResult2_22, self.place_id)
+			local WriteTagResult19, WriteTagResult2_18 = ProtoModule.writeTag(Buf, Count, 17, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult19, WriteTagResult2_18, self.place_id)
 		end
 		if self.launch_data ~= nil then
-			local WriteTagResult21, WriteTagResult2_20 = ProtoModule.writeTag(Buf, Count, 18, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult21, WriteTagResult2_20, self.launch_data)
+			local WriteTagResult20, WriteTagResult2_19 = ProtoModule.writeTag(Buf, Count, 18, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult20, WriteTagResult2_19, self.launch_data)
 		end
 		if self.tile_variant ~= nil then
-			local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(Buf, Count, 19, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult14, WriteTagResult2_13, self.tile_variant)
+			local WriteTagResult21, WriteTagResult2_20 = ProtoModule.writeTag(Buf, Count, 19, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult21, WriteTagResult2_20, self.tile_variant)
 		end
 		if self.cta_text ~= nil then
-			local WriteTagResult24, WriteTagResult2_23 = ProtoModule.writeTag(Buf, Count, 20, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult24, WriteTagResult2_23, self.cta_text)
+			local WriteTagResult22, WriteTagResult2_21 = ProtoModule.writeTag(Buf, Count, 20, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult22, WriteTagResult2_21, self.cta_text)
 		end
 		if self.badge_analytics_id ~= nil then
-			local WriteTagResult17, WriteTagResult2_16 = ProtoModule.writeTag(Buf, Count, 21, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult17, WriteTagResult2_16, self.badge_analytics_id)
+			local WriteTagResult23, WriteTagResult2_22 = ProtoModule.writeTag(Buf, Count, 21, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult23, WriteTagResult2_22, self.badge_analytics_id)
 		end
 		if self.game_items ~= nil and #self.game_items > 0 then
 			for _, gameItem in self.game_items do
 				local EncodeResult = gameItem:encode()
-				local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 22, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult11, WriteTagResult2_10, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 22, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult10, WriteTagResult2_9, EncodeResult, buffer.len(EncodeResult))
 			end
 		end
 		if self.attribution_thumbnail_asset_id ~= nil then
-			local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 23, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult12, WriteTagResult2_11, self.attribution_thumbnail_asset_id)
+			local WriteTagResult24, WriteTagResult2_23 = ProtoModule.writeTag(Buf, Count, 23, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult24, WriteTagResult2_23, self.attribution_thumbnail_asset_id)
 		end
 		if self.game_items_compact ~= nil and #self.game_items_compact > 0 then
 			for _, value in self.game_items_compact do
 				local EncodeResult = value:encode()
-				local WriteTagResult19, WriteTagResult2_18 = ProtoModule.writeTag(Buf, Count, 24, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult19, WriteTagResult2_18, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult25, WriteTagResult2_24 = ProtoModule.writeTag(Buf, Count, 24, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult25, WriteTagResult2_24, EncodeResult, buffer.len(EncodeResult))
 			end
 		end
 		if self.source_sort_id ~= nil then
-			local WriteTagResult25, WriteTagResult2_24 = ProtoModule.writeTag(Buf, Count, 25, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult25, WriteTagResult2_24, self.source_sort_id)
+			local WriteTagResult26, WriteTagResult2_25 = ProtoModule.writeTag(Buf, Count, 25, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult26, WriteTagResult2_25, self.source_sort_id)
 		end
 		if self.new_game_enum ~= nil then
-			local WriteTagResult26, WriteTagResult2_25 = ProtoModule.writeTag(Buf, Count, 26, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult26, WriteTagResult2_25, self.new_game_enum)
+			local WriteTagResult27, WriteTagResult2_26 = ProtoModule.writeTag(Buf, Count, 26, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult27, WriteTagResult2_26, self.new_game_enum)
 		end
 		if self.moment_video_playback ~= nil then
 			local EncodeResult = self.moment_video_playback:encode()
-			local WriteTagResult27, WriteTagResult2_26 = ProtoModule.writeTag(Buf, Count, 27, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult27, WriteTagResult2_26, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult28, WriteTagResult2_27 = ProtoModule.writeTag(Buf, Count, 27, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult28, WriteTagResult2_27, EncodeResult, buffer.len(EncodeResult))
 		end
 		if self.thumbnail_list_id ~= nil then
-			local WriteTagResult28, WriteTagResult2_27 = ProtoModule.writeTag(Buf, Count, 28, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult28, WriteTagResult2_27, self.thumbnail_list_id)
+			local WriteTagResult29, WriteTagResult2_28 = ProtoModule.writeTag(Buf, Count, 28, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult29, WriteTagResult2_28, self.thumbnail_list_id)
 		end
 		if self.sponsored_game_preview_video_eligible ~= nil then
-			local WriteTagResult29, WriteTagResult2_28 = ProtoModule.writeTag(Buf, Count, 29, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult29, WriteTagResult2_28, if self.sponsored_game_preview_video_eligible then 1 else 0)
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 29, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult3, WriteTagResult2_2, if self.sponsored_game_preview_video_eligible then 1 else 0)
 		end
 		if self.footnote_text ~= nil then
 			local WriteTagResult30, WriteTagResult2_29 = ProtoModule.writeTag(Buf, Count, 30, ProtoModule.wireTypes.lengthDelimited)
@@ -8701,24 +8701,24 @@ do
 			Buf, Count = ProtoModule.writeVarInt(WriteTagResult5, WriteTagResult2_4, self.secondary_sort_id)
 		end
 		if self.subtitle ~= nil and self.subtitle ~= "" then
-			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.subtitle)
+			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.subtitle)
 		end
 		if self.info_text ~= nil and self.info_text ~= "" then
-			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.info_text)
+			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.info_text)
 		end
 		if self.subtitle_link_path ~= nil and self.subtitle_link_path ~= "" then
-			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult10, WriteTagResult2_9, self.subtitle_link_path)
+			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.subtitle_link_path)
 		end
 		if self.is_placeholder ~= nil then
-			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult6, WriteTagResult2_5, if self.is_placeholder then 1 else 0)
+			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult9, WriteTagResult2_8, if self.is_placeholder then 1 else 0)
 		end
 		if self.primary_sort_id ~= nil then
-			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult8, WriteTagResult2_7, self.primary_sort_id)
+			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult10, WriteTagResult2_9, self.primary_sort_id)
 		end
 		if self.applied_filters ~= nil then
 			local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
@@ -10597,28 +10597,28 @@ do
 			Buf, Count = ProtoModule.writeString(WriteTagResult4, WriteTagResult2_3, self.creator_key)
 		end
 		if self.collection_item_size ~= nil and self.collection_item_size ~= "" then
-			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.collection_item_size)
+			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, self.collection_item_size)
 		end
 		if self.item_height_mode ~= nil and self.item_height_mode ~= "" then
-			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.item_height_mode)
+			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.item_height_mode)
 		end
 		if self.experience_store_product_type ~= nil and self.experience_store_product_type ~= "" then
-			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.experience_store_product_type)
+			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.experience_store_product_type)
 		end
 		if self.content_type ~= nil and self.content_type ~= "" then
-			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult10, WriteTagResult2_9, self.content_type)
+			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.content_type)
 		end
 		if self.item_type ~= nil and self.item_type ~= "" then
 			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.item_type)
 		end
 		if self.filter_category_id ~= nil and self.filter_category_id ~= "" then
-			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, self.filter_category_id)
+			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult10, WriteTagResult2_9, self.filter_category_id)
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -10970,20 +10970,20 @@ do
 			Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, self.description)
 		end
 		if self.cta_text ~= nil and self.cta_text ~= "" then
-			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.cta_text)
+			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.cta_text)
 		end
 		if self.prompt_id ~= nil and self.prompt_id ~= "" then
-			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.prompt_id)
+			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.prompt_id)
 		end
 		if self.prompt_type ~= nil and self.prompt_type ~= "" then
-			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.prompt_type)
+			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.prompt_type)
 		end
 		if self.entity_id ~= nil and self.entity_id ~= "" then
-			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.entity_id)
+			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.entity_id)
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -11305,21 +11305,21 @@ do
 			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.prompt_type)
 		end
 		if self.sort_id ~= nil and self.sort_id ~= "" then
-			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.sort_id)
+			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.sort_id)
 		end
 		if self.feed_item_key ~= nil and self.feed_item_key ~= "" then
-			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.feed_item_key)
+			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.feed_item_key)
 		end
 		if self.client_attributes ~= nil and self.client_attributes.type == "communities_client_attributes" then
 			local EncodeResult = self.client_attributes.value:encode()
-			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult10, WriteTagResult2_9, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult9, WriteTagResult2_8, EncodeResult, buffer.len(EncodeResult))
 		end
 		if self.cta_text ~= nil then
-			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.cta_text)
+			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult10, WriteTagResult2_9, self.cta_text)
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -11993,21 +11993,21 @@ do
 			Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, self.prompt_id)
 		end
 		if self.prompt_type ~= nil and self.prompt_type ~= "" then
-			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.prompt_type)
+			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.prompt_type)
 		end
 		if self.times_seen ~= nil and self.times_seen ~= 0 then
-			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult7, WriteTagResult2_6, self.times_seen)
+			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult8, WriteTagResult2_7, self.times_seen)
 		end
 		if self.content ~= nil and self.content.type == "incoming_transfer_content" then
 			local EncodeResult = self.content.value:encode()
-			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult8, WriteTagResult2_7, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult9, WriteTagResult2_8, EncodeResult, buffer.len(EncodeResult))
 		end
 		if self.sort_id ~= nil then
-			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.sort_id)
+			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.sort_id)
 		end
 		if self.feed_item_key ~= nil and self.feed_item_key ~= "" then
 			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
@@ -14334,22 +14334,22 @@ do
 			Buf, Count = ProtoModule.writeString(WriteTagResult4, WriteTagResult2_3, self.default_option_id)
 		end
 		if self.selected_option_id ~= nil and self.selected_option_id ~= "" then
-			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.selected_option_id)
+			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, self.selected_option_id)
 		end
 		if self.filter_type ~= nil and self.filter_type ~= "" then
-			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.filter_type)
+			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.filter_type)
 		end
 		if self.inactive_option_ids ~= nil and #self.inactive_option_ids > 0 then
 			for _, inactiveOptionId in self.inactive_option_ids do
-				local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, inactiveOptionId)
+				local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, inactiveOptionId)
 			end
 		end
 		if self.info_text ~= nil and self.info_text ~= "" then
-			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, self.info_text)
+			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.info_text)
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -16237,20 +16237,20 @@ do
 			Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, self.terms_link_text)
 		end
 		if self.terms_title ~= nil then
-			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.terms_title)
+			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.terms_title)
 		end
 		if self.terms_body_rich_text ~= nil then
-			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.terms_body_rich_text)
+			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.terms_body_rich_text)
 		end
 		if self.terms_dismiss_button_text ~= nil then
-			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.terms_dismiss_button_text)
+			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.terms_dismiss_button_text)
 		end
 		if self.offer_id ~= nil and self.offer_id ~= "" then
-			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.offer_id)
+			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.offer_id)
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -16769,44 +16769,44 @@ do
 			Buf, Count = ProtoModule.writeVarInt(WriteTagResult6, WriteTagResult2_5, if self.creating_experience_available then 1 else 0)
 		end
 		if self.creating_universe_id ~= nil then
-			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.creating_universe_id)
+			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.creating_universe_id)
 		end
 		if self.collectible_item_id ~= nil then
-			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.collectible_item_id)
+			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.collectible_item_id)
 		end
 		if self.category_type ~= nil then
-			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult10, WriteTagResult2_9, self.category_type)
+			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.category_type)
 		end
 		if self.placement ~= nil then
 			local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeString(WriteTagResult11, WriteTagResult2_10, self.placement)
 		end
 		if self.resellable then
-			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult7, WriteTagResult2_6, if self.resellable then 1 else 0)
+			local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult12, WriteTagResult2_11, if self.resellable then 1 else 0)
 		end
 		if self.sold_count ~= nil then
-			local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult12, WriteTagResult2_11, self.sold_count)
+			local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult13, WriteTagResult2_12, self.sold_count)
 		end
 		if self.stock ~= nil then
-			local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult13, WriteTagResult2_12, self.stock)
+			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult10, WriteTagResult2_9, self.stock)
 		end
 		if self.recent_average_price ~= nil then
 			local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.varint)
 			Buf, Count = ProtoModule.writeVarInt(WriteTagResult14, WriteTagResult2_13, self.recent_average_price)
 		end
 		if self.rent_option_row_available then
-			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult3, WriteTagResult2_2, if self.rent_option_row_available then 1 else 0)
+			local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult15, WriteTagResult2_14, if self.rent_option_row_available then 1 else 0)
 		end
 		if self.high_definition_row_available then
-			local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult15, WriteTagResult2_14, if self.high_definition_row_available then 1 else 0)
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult3, WriteTagResult2_2, if self.high_definition_row_available then 1 else 0)
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -16859,29 +16859,29 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
-					local Buffer2
-					Buffer2, v3218 = ProtoModule.readBuffer(Buf, v76)
-					NewModule.item_id = buffer.tostring(Buffer2)
-				elseif Tag == 2 then
-					local Buffer3
-					Buffer3, v3218 = ProtoModule.readBuffer(Buf, v76)
-					NewModule.item_type = buffer.tostring(Buffer3)
-				elseif Tag == 6 then
-					local Buffer5
-					Buffer5, v3218 = ProtoModule.readBuffer(Buf, v76)
-					NewModule.creating_universe_id = buffer.tostring(Buffer5)
-				elseif Tag == 7 then
-					local Buffer6
-					Buffer6, v3218 = ProtoModule.readBuffer(Buf, v76)
-					NewModule.collectible_item_id = buffer.tostring(Buffer6)
-				elseif Tag == 8 then
 					local Buffer1
 					Buffer1, v3218 = ProtoModule.readBuffer(Buf, v76)
-					NewModule.category_type = buffer.tostring(Buffer1)
-				elseif Tag == 9 then
+					NewModule.item_id = buffer.tostring(Buffer1)
+				elseif Tag == 2 then
+					local Buffer2
+					Buffer2, v3218 = ProtoModule.readBuffer(Buf, v76)
+					NewModule.item_type = buffer.tostring(Buffer2)
+				elseif Tag == 6 then
+					local Buffer3
+					Buffer3, v3218 = ProtoModule.readBuffer(Buf, v76)
+					NewModule.creating_universe_id = buffer.tostring(Buffer3)
+				elseif Tag == 7 then
 					local Buffer4
 					Buffer4, v3218 = ProtoModule.readBuffer(Buf, v76)
-					NewModule.placement = buffer.tostring(Buffer4)
+					NewModule.collectible_item_id = buffer.tostring(Buffer4)
+				elseif Tag == 8 then
+					local Buffer5
+					Buffer5, v3218 = ProtoModule.readBuffer(Buf, v76)
+					NewModule.category_type = buffer.tostring(Buffer5)
+				elseif Tag == 9 then
+					local Buffer6
+					Buffer6, v3218 = ProtoModule.readBuffer(Buf, v76)
+					NewModule.placement = buffer.tostring(Buffer6)
 				else
 					local VarInt6, VarInt2_1 = ProtoModule.readVarInt(Buf, v76)
 					v76 = VarInt2_1 + VarInt6
@@ -17615,18 +17615,18 @@ do
 		end
 		if self.content_pools ~= nil and next(self.content_pools) ~= nil then
 			for i1, contentPool in self.content_pools do
-				local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-				local WriteStringResult1, WriteStringResult2_1 = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, i1)
+				local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+				local WriteStringResult1, WriteStringResult2_1 = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, i1)
 				local EncodeResult = contentPool:encode()
-				local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(WriteStringResult1, WriteStringResult2_1, 2, ProtoModule.wireTypes.lengthDelimited)
-				local WriteBufferResult1, WriteBufferResult2_1 = ProtoModule.writeBuffer(WriteTagResult6, WriteTagResult2_5, EncodeResult, buffer.len(EncodeResult))
-				local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult7, WriteTagResult2_6, WriteBufferResult1, WriteBufferResult2_1)
+				local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(WriteStringResult1, WriteStringResult2_1, 2, ProtoModule.wireTypes.lengthDelimited)
+				local WriteBufferResult1, WriteBufferResult2_1 = ProtoModule.writeBuffer(WriteTagResult7, WriteTagResult2_6, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult8, WriteTagResult2_7, WriteBufferResult1, WriteBufferResult2_1)
 			end
 		end
 		if self.search_session_id ~= nil and self.search_session_id ~= "" then
-			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.search_session_id)
+			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, self.search_session_id)
 		end
 		if self.search_query ~= nil and self.search_query ~= "" then
 			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
@@ -20388,25 +20388,25 @@ do
 			end
 		end
 		if self.entry_order_map ~= nil and next(self.entry_order_map) ~= nil then
-			for i2, value2 in self.entry_order_map do
-				local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-				local WriteStringResult3, WriteStringResult2_2 = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, i2)
+			for i1, value2 in self.entry_order_map do
+				local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+				local WriteStringResult1, WriteStringResult2_1 = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, i1)
 				local EncodeResult = value2:encode()
-				local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(WriteStringResult3, WriteStringResult2_2, 2, ProtoModule.wireTypes.lengthDelimited)
-				local WriteBufferResult3, WriteBufferResult2_2 = ProtoModule.writeBuffer(WriteTagResult9, WriteTagResult2_8, EncodeResult, buffer.len(EncodeResult))
-				local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult10, WriteTagResult2_9, WriteBufferResult3, WriteBufferResult2_2)
+				local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(WriteStringResult1, WriteStringResult2_1, 2, ProtoModule.wireTypes.lengthDelimited)
+				local WriteBufferResult1, WriteBufferResult2_1 = ProtoModule.writeBuffer(WriteTagResult6, WriteTagResult2_5, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult7, WriteTagResult2_6, WriteBufferResult1, WriteBufferResult2_1)
 			end
 		end
 		if self.content_pools ~= nil and next(self.content_pools) ~= nil then
-			for i1, contentPool in self.content_pools do
-				local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-				local WriteStringResult1, WriteStringResult2_1 = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, i1)
+			for i2, contentPool in self.content_pools do
+				local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+				local WriteStringResult3, WriteStringResult2_2 = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, i2)
 				local EncodeResult = contentPool:encode()
-				local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(WriteStringResult1, WriteStringResult2_1, 2, ProtoModule.wireTypes.lengthDelimited)
-				local WriteBufferResult1, WriteBufferResult2_1 = ProtoModule.writeBuffer(WriteTagResult6, WriteTagResult2_5, EncodeResult, buffer.len(EncodeResult))
-				local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult7, WriteTagResult2_6, WriteBufferResult1, WriteBufferResult2_1)
+				local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(WriteStringResult3, WriteStringResult2_2, 2, ProtoModule.wireTypes.lengthDelimited)
+				local WriteBufferResult3, WriteBufferResult2_2 = ProtoModule.writeBuffer(WriteTagResult9, WriteTagResult2_8, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult10, WriteTagResult2_9, WriteBufferResult3, WriteBufferResult2_2)
 			end
 		end
 		local Buf1 = buffer.create(Count)
@@ -21628,52 +21628,52 @@ do
 		end
 		if self.gradient ~= nil then
 			local EncodeResult = self.gradient:encode()
-			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult10, WriteTagResult2_9, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult11, WriteTagResult2_10, EncodeResult, buffer.len(EncodeResult))
 		end
 		if self.playable_text ~= nil then
-			local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult11, WriteTagResult2_10, self.playable_text)
+			local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult12, WriteTagResult2_11, self.playable_text)
 		end
 		if self.collection_id ~= nil then
-			local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult12, WriteTagResult2_11, self.collection_id)
+			local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult13, WriteTagResult2_12, self.collection_id)
 		end
 		if self.campaign_id ~= nil then
-			local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult13, WriteTagResult2_12, self.campaign_id)
+			local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult14, WriteTagResult2_13, self.campaign_id)
 		end
 		if self.cohort_id ~= nil then
-			local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult14, WriteTagResult2_13, self.cohort_id)
+			local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult15, WriteTagResult2_14, self.cohort_id)
 		end
 		if self.sort_id ~= nil then
-			local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult15, WriteTagResult2_14, self.sort_id)
+			local WriteTagResult16, WriteTagResult2_15 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult16, WriteTagResult2_15, self.sort_id)
 		end
 		if self.hero_unit_id ~= nil then
-			local WriteTagResult16, WriteTagResult2_15 = ProtoModule.writeTag(Buf, Count, 16, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult16, WriteTagResult2_15, self.hero_unit_id)
+			local WriteTagResult17, WriteTagResult2_16 = ProtoModule.writeTag(Buf, Count, 16, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult17, WriteTagResult2_16, self.hero_unit_id)
 		end
 		if self.analytics_id ~= nil then
-			local WriteTagResult17, WriteTagResult2_16 = ProtoModule.writeTag(Buf, Count, 17, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult17, WriteTagResult2_16, self.analytics_id)
+			local WriteTagResult18, WriteTagResult2_17 = ProtoModule.writeTag(Buf, Count, 17, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult18, WriteTagResult2_17, self.analytics_id)
 		end
 		if self.is_sponsored ~= nil then
-			local WriteTagResult18, WriteTagResult2_17 = ProtoModule.writeTag(Buf, Count, 18, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult18, WriteTagResult2_17, if self.is_sponsored then 1 else 0)
+			local WriteTagResult19, WriteTagResult2_18 = ProtoModule.writeTag(Buf, Count, 18, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult19, WriteTagResult2_18, if self.is_sponsored then 1 else 0)
 		end
 		if self.advertiser_disclosure ~= nil then
-			local WriteTagResult19, WriteTagResult2_18 = ProtoModule.writeTag(Buf, Count, 19, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult19, WriteTagResult2_18, self.advertiser_disclosure)
+			local WriteTagResult20, WriteTagResult2_19 = ProtoModule.writeTag(Buf, Count, 19, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult20, WriteTagResult2_19, self.advertiser_disclosure)
 		end
 		if self.payer_name ~= nil then
-			local WriteTagResult20, WriteTagResult2_19 = ProtoModule.writeTag(Buf, Count, 20, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult20, WriteTagResult2_19, self.payer_name)
+			local WriteTagResult21, WriteTagResult2_20 = ProtoModule.writeTag(Buf, Count, 20, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult21, WriteTagResult2_20, self.payer_name)
 		end
 		if self.sponsored_user_cohort ~= nil then
-			local WriteTagResult21, WriteTagResult2_20 = ProtoModule.writeTag(Buf, Count, 21, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult21, WriteTagResult2_20, self.sponsored_user_cohort)
+			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 21, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult10, WriteTagResult2_9, self.sponsored_user_cohort)
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -21720,53 +21720,53 @@ do
 					Buffer5, v4160 = ProtoModule.readBuffer(Buf, v101)
 					NewModule.foreground = t.HeroUnitInputData_VisualAsset.decode(Buffer5)
 				elseif Tag == 6 then
-					local Buffer8
-					Buffer8, v4160 = ProtoModule.readBuffer(Buf, v101)
-					NewModule.background = t.HeroUnitInputData_VisualAsset.decode(Buffer8)
-				elseif Tag == 7 then
-					local Buffer10
-					Buffer10, v4160 = ProtoModule.readBuffer(Buf, v101)
-					NewModule.title_image = t.HeroUnitInputData_VisualAsset.decode(Buffer10)
-				elseif Tag == 8 then
-					local Buffer12
-					Buffer12, v4160 = ProtoModule.readBuffer(Buf, v101)
-					NewModule.asset_title = buffer.tostring(Buffer12)
-				elseif Tag == 9 then
-					local Buffer13
-					Buffer13, v4160 = ProtoModule.readBuffer(Buf, v101)
-					NewModule.asset_subtitle = buffer.tostring(Buffer13)
-				elseif Tag == 10 then
-					local Buffer14
-					Buffer14, v4160 = ProtoModule.readBuffer(Buf, v101)
-					NewModule.gradient = t.HeroUnitInputData_Gradient.decode(Buffer14)
-				elseif Tag == 11 then
 					local Buffer6
 					Buffer6, v4160 = ProtoModule.readBuffer(Buf, v101)
-					NewModule.playable_text = buffer.tostring(Buffer6)
-				elseif Tag == 12 then
+					NewModule.background = t.HeroUnitInputData_VisualAsset.decode(Buffer6)
+				elseif Tag == 7 then
 					local Buffer7
 					Buffer7, v4160 = ProtoModule.readBuffer(Buf, v101)
-					NewModule.collection_id = buffer.tostring(Buffer7)
-				elseif Tag == 13 then
+					NewModule.title_image = t.HeroUnitInputData_VisualAsset.decode(Buffer7)
+				elseif Tag == 8 then
+					local Buffer8
+					Buffer8, v4160 = ProtoModule.readBuffer(Buf, v101)
+					NewModule.asset_title = buffer.tostring(Buffer8)
+				elseif Tag == 9 then
 					local Buffer9
 					Buffer9, v4160 = ProtoModule.readBuffer(Buf, v101)
-					NewModule.campaign_id = buffer.tostring(Buffer9)
-				elseif Tag == 14 then
+					NewModule.asset_subtitle = buffer.tostring(Buffer9)
+				elseif Tag == 10 then
+					local Buffer10
+					Buffer10, v4160 = ProtoModule.readBuffer(Buf, v101)
+					NewModule.gradient = t.HeroUnitInputData_Gradient.decode(Buffer10)
+				elseif Tag == 11 then
 					local Buffer11
 					Buffer11, v4160 = ProtoModule.readBuffer(Buf, v101)
-					NewModule.cohort_id = buffer.tostring(Buffer11)
+					NewModule.playable_text = buffer.tostring(Buffer11)
+				elseif Tag == 12 then
+					local Buffer12
+					Buffer12, v4160 = ProtoModule.readBuffer(Buf, v101)
+					NewModule.collection_id = buffer.tostring(Buffer12)
+				elseif Tag == 13 then
+					local Buffer13
+					Buffer13, v4160 = ProtoModule.readBuffer(Buf, v101)
+					NewModule.campaign_id = buffer.tostring(Buffer13)
+				elseif Tag == 14 then
+					local Buffer14
+					Buffer14, v4160 = ProtoModule.readBuffer(Buf, v101)
+					NewModule.cohort_id = buffer.tostring(Buffer14)
 				elseif Tag == 15 then
-					local Buffer16
-					Buffer16, v4160 = ProtoModule.readBuffer(Buf, v101)
-					NewModule.sort_id = buffer.tostring(Buffer16)
-				elseif Tag == 16 then
-					local Buffer17
-					Buffer17, v4160 = ProtoModule.readBuffer(Buf, v101)
-					NewModule.hero_unit_id = buffer.tostring(Buffer17)
-				elseif Tag == 17 then
 					local Buffer15
 					Buffer15, v4160 = ProtoModule.readBuffer(Buf, v101)
-					NewModule.analytics_id = buffer.tostring(Buffer15)
+					NewModule.sort_id = buffer.tostring(Buffer15)
+				elseif Tag == 16 then
+					local Buffer16
+					Buffer16, v4160 = ProtoModule.readBuffer(Buf, v101)
+					NewModule.hero_unit_id = buffer.tostring(Buffer16)
+				elseif Tag == 17 then
+					local Buffer17
+					Buffer17, v4160 = ProtoModule.readBuffer(Buf, v101)
+					NewModule.analytics_id = buffer.tostring(Buffer17)
 				elseif Tag == 19 then
 					local Buffer18
 					Buffer18, v4160 = ProtoModule.readBuffer(Buf, v101)
@@ -23268,36 +23268,36 @@ do
 			Buf, Count = ProtoModule.writeDouble(WriteTagResult5, WriteTagResult2_4, self.logo_aspect_ratio)
 		end
 		if self.cta_text ~= nil then
-			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.cta_text)
+			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.cta_text)
 		end
 		if self.title ~= nil then
-			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.title)
+			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.title)
 		end
 		if self.subtitle ~= nil then
-			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.subtitle)
+			local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult11, WriteTagResult2_10, self.subtitle)
 		end
 		if self.image_asset_id ~= nil then
-			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.image_asset_id)
+			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.image_asset_id)
 		end
 		if self.video_asset_id ~= nil then
-			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult10, WriteTagResult2_9, self.video_asset_id)
+			local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult12, WriteTagResult2_11, self.video_asset_id)
 		end
 		if self.badge_text ~= nil then
-			local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult11, WriteTagResult2_10, self.badge_text)
+			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.badge_text)
 		end
 		if self.badge_analytics_id ~= nil then
-			local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult12, WriteTagResult2_11, self.badge_analytics_id)
+			local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult13, WriteTagResult2_12, self.badge_analytics_id)
 		end
 		if self.roblox_component ~= nil then
-			local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult13, WriteTagResult2_12, self.roblox_component)
+			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult10, WriteTagResult2_9, self.roblox_component)
 		end
 		if self.attribution_thumbnail_asset_id ~= nil then
 			local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.lengthDelimited)
@@ -23346,41 +23346,41 @@ do
 					Buffer5, v4445 = ProtoModule.readBuffer(Buf, v108)
 					NewModule.cta_text = buffer.tostring(Buffer5)
 				elseif Tag == 7 then
-					local Buffer6
-					Buffer6, v4445 = ProtoModule.readBuffer(Buf, v108)
-					NewModule.title = buffer.tostring(Buffer6)
-				elseif Tag == 8 then
 					local Buffer7
 					Buffer7, v4445 = ProtoModule.readBuffer(Buf, v108)
-					NewModule.subtitle = buffer.tostring(Buffer7)
-				elseif Tag == 9 then
-					local Buffer8
-					Buffer8, v4445 = ProtoModule.readBuffer(Buf, v108)
-					NewModule.image_asset_id = buffer.tostring(Buffer8)
-				elseif Tag == 10 then
+					NewModule.title = buffer.tostring(Buffer7)
+				elseif Tag == 8 then
 					local Buffer9
 					Buffer9, v4445 = ProtoModule.readBuffer(Buf, v108)
-					NewModule.video_asset_id = buffer.tostring(Buffer9)
-				elseif Tag == 11 then
-					local Buffer10
-					Buffer10, v4445 = ProtoModule.readBuffer(Buf, v108)
-					NewModule.badge_text = buffer.tostring(Buffer10)
-				elseif Tag == 12 then
+					NewModule.subtitle = buffer.tostring(Buffer9)
+				elseif Tag == 9 then
 					local Buffer11
 					Buffer11, v4445 = ProtoModule.readBuffer(Buf, v108)
-					NewModule.badge_analytics_id = buffer.tostring(Buffer11)
-				elseif Tag == 13 then
+					NewModule.image_asset_id = buffer.tostring(Buffer11)
+				elseif Tag == 10 then
 					local Buffer12
 					Buffer12, v4445 = ProtoModule.readBuffer(Buf, v108)
-					NewModule.roblox_component = buffer.tostring(Buffer12)
-				elseif Tag == 14 then
+					NewModule.video_asset_id = buffer.tostring(Buffer12)
+				elseif Tag == 11 then
 					local Buffer13
 					Buffer13, v4445 = ProtoModule.readBuffer(Buf, v108)
-					NewModule.attribution_thumbnail_asset_id = buffer.tostring(Buffer13)
-				elseif Tag == 15 then
+					NewModule.badge_text = buffer.tostring(Buffer13)
+				elseif Tag == 12 then
 					local Buffer14
 					Buffer14, v4445 = ProtoModule.readBuffer(Buf, v108)
-					NewModule.footnote_text = buffer.tostring(Buffer14)
+					NewModule.badge_analytics_id = buffer.tostring(Buffer14)
+				elseif Tag == 13 then
+					local Buffer6
+					Buffer6, v4445 = ProtoModule.readBuffer(Buf, v108)
+					NewModule.roblox_component = buffer.tostring(Buffer6)
+				elseif Tag == 14 then
+					local Buffer8
+					Buffer8, v4445 = ProtoModule.readBuffer(Buf, v108)
+					NewModule.attribution_thumbnail_asset_id = buffer.tostring(Buffer8)
+				elseif Tag == 15 then
+					local Buffer10
+					Buffer10, v4445 = ProtoModule.readBuffer(Buf, v108)
+					NewModule.footnote_text = buffer.tostring(Buffer10)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v108)
 					v108 = VarInt2 + VarInt
@@ -24916,21 +24916,21 @@ do
 			Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, self.body)
 		end
 		if self.creator_key ~= nil and self.creator_key ~= "" then
-			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.creator_key)
+			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.creator_key)
 		end
 		if self.creator_role_name ~= nil then
-			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.creator_role_name)
+			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.creator_role_name)
 		end
 		if self.media_asset_id ~= nil then
-			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.media_asset_id)
+			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.media_asset_id)
 		end
 		if self.created_time ~= nil then
 			local EncodeResult = self.created_time:encode()
-			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult9, WriteTagResult2_8, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult6, WriteTagResult2_5, EncodeResult, buffer.len(EncodeResult))
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -25428,17 +25428,17 @@ do
 		if self.available_reactions ~= nil and #self.available_reactions > 0 then
 			for _, availableReaction in self.available_reactions do
 				local EncodeResult = availableReaction:encode()
-				local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult13, WriteTagResult2_12, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult14, WriteTagResult2_13, EncodeResult, buffer.len(EncodeResult))
 			end
 		end
 		if self.reaction_entity_id ~= nil and self.reaction_entity_id ~= "" then
-			local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult14, WriteTagResult2_13, self.reaction_entity_id)
+			local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult15, WriteTagResult2_14, self.reaction_entity_id)
 		end
 		if self.can_react then
-			local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult15, WriteTagResult2_14, if self.can_react then 1 else 0)
+			local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult13, WriteTagResult2_12, if self.can_react then 1 else 0)
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -25481,45 +25481,45 @@ do
 					Buffer3, v4853 = ProtoModule.readBuffer(Buf, v119)
 					NewModule.message_id = buffer.tostring(Buffer3)
 				elseif Tag == 4 then
-					local Buffer5
-					Buffer5, v4853 = ProtoModule.readBuffer(Buf, v119)
-					NewModule.title = buffer.tostring(Buffer5)
-				elseif Tag == 5 then
-					local Buffer7
-					Buffer7, v4853 = ProtoModule.readBuffer(Buf, v119)
-					NewModule.body = buffer.tostring(Buffer7)
-				elseif Tag == 6 then
-					local Buffer8
-					Buffer8, v4853 = ProtoModule.readBuffer(Buf, v119)
-					NewModule.creator_key = buffer.tostring(Buffer8)
-				elseif Tag == 7 then
-					local Buffer9
-					Buffer9, v4853 = ProtoModule.readBuffer(Buf, v119)
-					NewModule.creator_role_name = buffer.tostring(Buffer9)
-				elseif Tag == 8 then
-					local Buffer10
-					Buffer10, v4853 = ProtoModule.readBuffer(Buf, v119)
-					NewModule.media_asset_id = buffer.tostring(Buffer10)
-				elseif Tag == 9 then
-					local Buffer11
-					Buffer11, v4853 = ProtoModule.readBuffer(Buf, v119)
-					NewModule.created_time = TimestampModule.Timestamp.decode(Buffer11)
-				elseif Tag == 10 then
-					local Buffer12
-					Buffer12, v4853 = ProtoModule.readBuffer(Buf, v119)
-					NewModule.custom_form = CustomFormDataModule.CustomFormData.decode(Buffer12)
-				elseif Tag == 11 then
-					local Buffer6
-					Buffer6, v4853 = ProtoModule.readBuffer(Buf, v119)
-					table.insert(NewModule.reactions, t.ReactionInputData.decode(Buffer6))
-				elseif Tag == 13 then
-					local Buffer13
-					Buffer13, v4853 = ProtoModule.readBuffer(Buf, v119)
-					table.insert(NewModule.available_reactions, t.AvailableReactionInputData.decode(Buffer13))
-				elseif Tag == 14 then
 					local Buffer4
 					Buffer4, v4853 = ProtoModule.readBuffer(Buf, v119)
-					NewModule.reaction_entity_id = buffer.tostring(Buffer4)
+					NewModule.title = buffer.tostring(Buffer4)
+				elseif Tag == 5 then
+					local Buffer5
+					Buffer5, v4853 = ProtoModule.readBuffer(Buf, v119)
+					NewModule.body = buffer.tostring(Buffer5)
+				elseif Tag == 6 then
+					local Buffer6
+					Buffer6, v4853 = ProtoModule.readBuffer(Buf, v119)
+					NewModule.creator_key = buffer.tostring(Buffer6)
+				elseif Tag == 7 then
+					local Buffer8
+					Buffer8, v4853 = ProtoModule.readBuffer(Buf, v119)
+					NewModule.creator_role_name = buffer.tostring(Buffer8)
+				elseif Tag == 8 then
+					local Buffer9
+					Buffer9, v4853 = ProtoModule.readBuffer(Buf, v119)
+					NewModule.media_asset_id = buffer.tostring(Buffer9)
+				elseif Tag == 9 then
+					local Buffer10
+					Buffer10, v4853 = ProtoModule.readBuffer(Buf, v119)
+					NewModule.created_time = TimestampModule.Timestamp.decode(Buffer10)
+				elseif Tag == 10 then
+					local Buffer11
+					Buffer11, v4853 = ProtoModule.readBuffer(Buf, v119)
+					NewModule.custom_form = CustomFormDataModule.CustomFormData.decode(Buffer11)
+				elseif Tag == 11 then
+					local Buffer12
+					Buffer12, v4853 = ProtoModule.readBuffer(Buf, v119)
+					table.insert(NewModule.reactions, t.ReactionInputData.decode(Buffer12))
+				elseif Tag == 13 then
+					local Buffer7
+					Buffer7, v4853 = ProtoModule.readBuffer(Buf, v119)
+					table.insert(NewModule.available_reactions, t.AvailableReactionInputData.decode(Buffer7))
+				elseif Tag == 14 then
+					local Buffer13
+					Buffer13, v4853 = ProtoModule.readBuffer(Buf, v119)
+					NewModule.reaction_entity_id = buffer.tostring(Buffer13)
 				else
 					local VarInt2, VarInt2_1 = ProtoModule.readVarInt(Buf, v119)
 					v119 = VarInt2_1 + VarInt2
@@ -25747,21 +25747,21 @@ do
 		end
 		if self.section_order ~= nil and #self.section_order > 0 then
 			for _, value1 in self.section_order do
-				local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeString(WriteTagResult4, WriteTagResult2_3, value1)
+				local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, value1)
 			end
 		end
 		if self.terms_url_path ~= nil then
-			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, self.terms_url_path)
+			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.terms_url_path)
 		end
 		if self.payment_session_id ~= nil then
-			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.payment_session_id)
+			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.payment_session_id)
 		end
 		if self.purchase_flow_id ~= nil then
-			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.purchase_flow_id)
+			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.purchase_flow_id)
 		end
 		if self.login_redirect_pathname ~= nil then
 			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
@@ -25778,18 +25778,18 @@ do
 		end
 		if self.system_banner ~= nil then
 			local EncodeResult = self.system_banner:encode()
-			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult8, WriteTagResult2_7, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult12, WriteTagResult2_11, EncodeResult, buffer.len(EncodeResult))
 		end
 		if self.faq ~= nil then
 			local EncodeResult = self.faq:encode()
-			local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult12, WriteTagResult2_11, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult13, WriteTagResult2_12, EncodeResult, buffer.len(EncodeResult))
 		end
 		if self.analytics ~= nil then
 			local EncodeResult = self.analytics:encode()
-			local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult13, WriteTagResult2_12, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -25834,29 +25834,29 @@ do
 					Buffer4, v4921 = ProtoModule.readBuffer(Buf, v120)
 					NewModule.payment_session_id = buffer.tostring(Buffer4)
 				elseif Tag == 5 then
-					local Buffer5
-					Buffer5, v4921 = ProtoModule.readBuffer(Buf, v120)
-					NewModule.purchase_flow_id = buffer.tostring(Buffer5)
-				elseif Tag == 6 then
 					local Buffer6
 					Buffer6, v4921 = ProtoModule.readBuffer(Buf, v120)
-					NewModule.login_redirect_pathname = buffer.tostring(Buffer6)
-				elseif Tag == 8 then
+					NewModule.purchase_flow_id = buffer.tostring(Buffer6)
+				elseif Tag == 6 then
 					local Buffer7
 					Buffer7, v4921 = ProtoModule.readBuffer(Buf, v120)
-					NewModule.transfers = t.BuyRobuxTransfersInputData.decode(Buffer7)
-				elseif Tag == 9 then
+					NewModule.login_redirect_pathname = buffer.tostring(Buffer7)
+				elseif Tag == 8 then
 					local Buffer8
 					Buffer8, v4921 = ProtoModule.readBuffer(Buf, v120)
-					NewModule.system_banner = t.TextInputData.decode(Buffer8)
-				elseif Tag == 10 then
+					NewModule.transfers = t.BuyRobuxTransfersInputData.decode(Buffer8)
+				elseif Tag == 9 then
 					local Buffer9
 					Buffer9, v4921 = ProtoModule.readBuffer(Buf, v120)
-					NewModule.faq = t.BuyRobuxFaqInputData.decode(Buffer9)
-				elseif Tag == 11 then
+					NewModule.system_banner = t.TextInputData.decode(Buffer9)
+				elseif Tag == 10 then
 					local Buffer10
 					Buffer10, v4921 = ProtoModule.readBuffer(Buf, v120)
-					NewModule.analytics = t.BuyRobuxPageAnalyticsData.decode(Buffer10)
+					NewModule.faq = t.BuyRobuxFaqInputData.decode(Buffer10)
+				elseif Tag == 11 then
+					local Buffer5
+					Buffer5, v4921 = ProtoModule.readBuffer(Buf, v120)
+					NewModule.analytics = t.BuyRobuxPageAnalyticsData.decode(Buffer5)
 				else
 					local VarInt1, VarInt2 = ProtoModule.readVarInt(Buf, v120)
 					v120 = VarInt2 + VarInt1
@@ -26509,42 +26509,42 @@ do
 			Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.title)
 		end
 		if self.subtitle ~= nil then
-			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult4, WriteTagResult2_3, self.subtitle)
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult3, WriteTagResult2_2, self.subtitle)
 		end
 		if self.section ~= nil then
 			if self.section.type == "products_list" then
 				local EncodeResult = self.section.value:encode()
-				local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult5, WriteTagResult2_4, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
 			elseif self.section.type == "personalized_bonus" then
 				local EncodeResult = self.section.value:encode()
-				local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult7, WriteTagResult2_6, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult5, WriteTagResult2_4, EncodeResult, buffer.len(EncodeResult))
 			elseif self.section.type == "robux_gift" then
 				local EncodeResult = self.section.value:encode()
-				local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult8, WriteTagResult2_7, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult6, WriteTagResult2_5, EncodeResult, buffer.len(EncodeResult))
 			elseif self.section.type == "gift_card" then
 				local EncodeResult = self.section.value:encode()
-				local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult9, WriteTagResult2_8, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult8, WriteTagResult2_7, EncodeResult, buffer.len(EncodeResult))
 			elseif self.section.type == "recommended" then
 				local EncodeResult = self.section.value:encode()
-				local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult6, WriteTagResult2_5, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult9, WriteTagResult2_8, EncodeResult, buffer.len(EncodeResult))
 			elseif self.section.type == "redirect" then
 				local EncodeResult = self.section.value:encode()
-				local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult10, WriteTagResult2_9, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult7, WriteTagResult2_6, EncodeResult, buffer.len(EncodeResult))
 			elseif self.section.type == "subscription" then
 				local EncodeResult = self.section.value:encode()
-				local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 16, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult11, WriteTagResult2_10, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 16, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult10, WriteTagResult2_9, EncodeResult, buffer.len(EncodeResult))
 			elseif self.section.type == "limited_time_bonus" then
 				local EncodeResult = self.section.value:encode()
-				local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 17, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 17, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult11, WriteTagResult2_10, EncodeResult, buffer.len(EncodeResult))
 			end
 		end
 		local Buf1 = buffer.create(Count)
@@ -26594,46 +26594,46 @@ do
 						value = t.BuyRobuxPersonalizedBonusSectionInputData.decode(Buffer4)
 					}
 				elseif Tag == 12 then
-					local Buffer6
-					Buffer6, v5073 = ProtoModule.readBuffer(Buf, v124)
-					NewModule.section = {
-						type = "robux_gift",
-						value = t.BuyRobuxGiftSectionInputData.decode(Buffer6)
-					}
-				elseif Tag == 13 then
-					local Buffer7
-					Buffer7, v5073 = ProtoModule.readBuffer(Buf, v124)
-					NewModule.section = {
-						type = "gift_card",
-						value = t.BuyRobuxGiftCardSectionInputData.decode(Buffer7)
-					}
-				elseif Tag == 14 then
-					local Buffer8
-					Buffer8, v5073 = ProtoModule.readBuffer(Buf, v124)
-					NewModule.section = {
-						type = "recommended",
-						value = t.BuyRobuxProductsListSectionInputData.decode(Buffer8)
-					}
-				elseif Tag == 15 then
-					local Buffer9
-					Buffer9, v5073 = ProtoModule.readBuffer(Buf, v124)
-					NewModule.section = {
-						type = "redirect",
-						value = t.BuyRobuxProductsListSectionInputData.decode(Buffer9)
-					}
-				elseif Tag == 16 then
-					local Buffer10
-					Buffer10, v5073 = ProtoModule.readBuffer(Buf, v124)
-					NewModule.section = {
-						type = "subscription",
-						value = t.BuyRobuxSubscriptionSectionInputData.decode(Buffer10)
-					}
-				elseif Tag == 17 then
 					local Buffer5
 					Buffer5, v5073 = ProtoModule.readBuffer(Buf, v124)
 					NewModule.section = {
+						type = "robux_gift",
+						value = t.BuyRobuxGiftSectionInputData.decode(Buffer5)
+					}
+				elseif Tag == 13 then
+					local Buffer6
+					Buffer6, v5073 = ProtoModule.readBuffer(Buf, v124)
+					NewModule.section = {
+						type = "gift_card",
+						value = t.BuyRobuxGiftCardSectionInputData.decode(Buffer6)
+					}
+				elseif Tag == 14 then
+					local Buffer7
+					Buffer7, v5073 = ProtoModule.readBuffer(Buf, v124)
+					NewModule.section = {
+						type = "recommended",
+						value = t.BuyRobuxProductsListSectionInputData.decode(Buffer7)
+					}
+				elseif Tag == 15 then
+					local Buffer8
+					Buffer8, v5073 = ProtoModule.readBuffer(Buf, v124)
+					NewModule.section = {
+						type = "redirect",
+						value = t.BuyRobuxProductsListSectionInputData.decode(Buffer8)
+					}
+				elseif Tag == 16 then
+					local Buffer9
+					Buffer9, v5073 = ProtoModule.readBuffer(Buf, v124)
+					NewModule.section = {
+						type = "subscription",
+						value = t.BuyRobuxSubscriptionSectionInputData.decode(Buffer9)
+					}
+				elseif Tag == 17 then
+					local Buffer10
+					Buffer10, v5073 = ProtoModule.readBuffer(Buf, v124)
+					NewModule.section = {
 						type = "limited_time_bonus",
-						value = t.BuyRobuxLimitedTimeBonusSectionInputData.decode(Buffer5)
+						value = t.BuyRobuxLimitedTimeBonusSectionInputData.decode(Buffer10)
 					}
 				else
 					local VarInt1, VarInt2 = ProtoModule.readVarInt(Buf, v124)
@@ -28502,57 +28502,57 @@ do
 		local Count = 0
 		
 		if self.post_id ~= nil and self.post_id ~= "" then
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.post_id)
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.post_id)
 		end
 		if self.post_short_id ~= nil and self.post_short_id ~= "" then
-			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult3, WriteTagResult2_2, self.post_short_id)
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.post_short_id)
 		end
 		if self.category_id ~= nil and self.category_id ~= "" then
-			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult4, WriteTagResult2_3, self.category_id)
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult3, WriteTagResult2_2, self.category_id)
 		end
 		if self.category_short_id ~= nil and self.category_short_id ~= "" then
-			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, self.category_short_id)
+			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult4, WriteTagResult2_3, self.category_short_id)
 		end
 		if self.category_name ~= nil and self.category_name ~= "" then
 			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.category_name)
 		end
 		if self.title ~= nil and self.title ~= "" then
-			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.title)
+			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.title)
 		end
 		if self.body ~= nil and self.body ~= "" then
-			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.body)
+			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult10, WriteTagResult2_9, self.body)
 		end
 		if self.creator_key ~= nil and self.creator_key ~= "" then
-			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.creator_key)
+			local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult12, WriteTagResult2_11, self.creator_key)
 		end
 		if self.creator_user_id ~= nil and self.creator_user_id ~= "" then
-			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult10, WriteTagResult2_9, self.creator_user_id)
+			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.creator_user_id)
 		end
 		if self.creator_role_name ~= nil then
-			local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult11, WriteTagResult2_10, self.creator_role_name)
+			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, self.creator_role_name)
 		end
 		if self.reply_count ~= nil and self.reply_count ~= 0 then
-			local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult12, WriteTagResult2_11, self.reply_count)
+			local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult11, WriteTagResult2_10, self.reply_count)
 		end
 		if self.post_url ~= nil and self.post_url ~= "" then
-			local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult13, WriteTagResult2_12, self.post_url)
+			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.post_url)
 		end
 		if self.created_time ~= nil then
 			local EncodeResult = self.created_time:encode()
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult13, WriteTagResult2_12, EncodeResult, buffer.len(EncodeResult))
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -28818,40 +28818,40 @@ do
 			Buf, Count = ProtoModule.writeString(WriteTagResult4, WriteTagResult2_3, self.place_id)
 		end
 		if self.song_id ~= nil then
-			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.song_id)
+			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, self.song_id)
 		end
 		if self.item_name ~= nil then
-			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.item_name)
+			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.item_name)
 		end
 		if self.price ~= nil then
-			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult9, WriteTagResult2_8, self.price)
+			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult7, WriteTagResult2_6, self.price)
 		end
 		if self.thumbnail ~= nil then
-			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult10, WriteTagResult2_9, self.thumbnail)
+			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.thumbnail)
 		end
 		if self.details_url ~= nil then
-			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, self.details_url)
+			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.details_url)
 		end
 		if self.collection_id ~= nil then
-			local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult12, WriteTagResult2_11, self.collection_id)
+			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult10, WriteTagResult2_9, self.collection_id)
 		end
 		if self.saved_id ~= nil then
-			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.saved_id)
+			local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult11, WriteTagResult2_10, self.saved_id)
 		end
 		if self.asset_type_name ~= nil then
-			local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult13, WriteTagResult2_12, self.asset_type_name)
+			local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult12, WriteTagResult2_11, self.asset_type_name)
 		end
 		if self.look_abuse_vector ~= nil then
-			local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult11, WriteTagResult2_10, self.look_abuse_vector)
+			local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult13, WriteTagResult2_12, self.look_abuse_vector)
 		end
 		if self.look_asset_ids ~= nil and #self.look_asset_ids > 0 then
 			for _, lookAssetId in self.look_asset_ids do
@@ -28922,9 +28922,9 @@ do
 					Buffer8, v5489 = ProtoModule.readBuffer(Buf, v135)
 					NewModule.details_url = buffer.tostring(Buffer8)
 				elseif Tag == 10 then
-					local Buffer10
-					Buffer10, v5489 = ProtoModule.readBuffer(Buf, v135)
-					NewModule.collection_id = buffer.tostring(Buffer10)
+					local Buffer9
+					Buffer9, v5489 = ProtoModule.readBuffer(Buf, v135)
+					NewModule.collection_id = buffer.tostring(Buffer9)
 				elseif Tag == 11 then
 					local Buffer11
 					Buffer11, v5489 = ProtoModule.readBuffer(Buf, v135)
@@ -28946,9 +28946,9 @@ do
 					Buffer7, v5489 = ProtoModule.readBuffer(Buf, v135)
 					NewModule.album_art_asset_id = buffer.tostring(Buffer7)
 				elseif Tag == 16 then
-					local Buffer9
-					Buffer9, v5489 = ProtoModule.readBuffer(Buf, v135)
-					NewModule.target_key = buffer.tostring(Buffer9)
+					local Buffer10
+					Buffer10, v5489 = ProtoModule.readBuffer(Buf, v135)
+					NewModule.target_key = buffer.tostring(Buffer10)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v135)
 					v135 = VarInt2 + VarInt
@@ -29182,24 +29182,24 @@ do
 			Buf, Count = ProtoModule.writeString(WriteTagResult4, WriteTagResult2_3, self.visibility_label)
 		end
 		if self.visibility_icon ~= nil then
-			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.visibility_icon)
+			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, self.visibility_icon)
 		end
 		if self.placeholder_icon ~= nil then
-			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.placeholder_icon)
+			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.placeholder_icon)
 		end
 		if self.thumb_1 ~= nil then
-			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.thumb_1)
+			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.thumb_1)
 		end
 		if self.thumb_2 ~= nil then
-			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.thumb_2)
+			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.thumb_2)
 		end
 		if self.thumb_3 ~= nil then
-			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, self.thumb_3)
+			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.thumb_3)
 		end
 		if self.thumb_4 ~= nil then
 			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
@@ -29949,112 +29949,112 @@ do
 		end
 		if self.created_time ~= nil then
 			local EncodeResult = self.created_time:encode()
-			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult5, WriteTagResult2_4, EncodeResult, buffer.len(EncodeResult))
 		end
 		if self.body ~= nil then
 			local EncodeResult = self.body:encode()
-			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult5, WriteTagResult2_4, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult6, WriteTagResult2_5, EncodeResult, buffer.len(EncodeResult))
 		end
 		if self.title ~= nil then
-			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.title)
+			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.title)
 		end
 		if self.thumbnail_target_id ~= nil then
-			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.thumbnail_target_id)
+			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.thumbnail_target_id)
 		end
 		if self.thumbnail_type ~= nil then
-			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.thumbnail_type)
+			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.thumbnail_type)
 		end
 		if self.primary_button ~= nil then
 			local EncodeResult = self.primary_button:encode()
-			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult9, WriteTagResult2_8, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult10, WriteTagResult2_9, EncodeResult, buffer.len(EncodeResult))
 		end
 		if self.secondary_button ~= nil then
 			local EncodeResult = self.secondary_button:encode()
-			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult10, WriteTagResult2_9, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult11, WriteTagResult2_10, EncodeResult, buffer.len(EncodeResult))
 		end
 		if self.overflow_items ~= nil and #self.overflow_items > 0 then
 			for _, overflowItem in self.overflow_items do
 				local EncodeResult = overflowItem:encode()
-				local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult12, WriteTagResult2_11, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult13, WriteTagResult2_12, EncodeResult, buffer.len(EncodeResult))
 			end
 		end
 		if self.client_events_payload ~= nil and next(self.client_events_payload) ~= nil then
 			for i, value in self.client_events_payload do
-				local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-				local WriteStringResult, WriteStringResult2 = ProtoModule.writeString(WriteTagResult13, WriteTagResult2_12, i)
-				local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(WriteStringResult, WriteStringResult2, 2, ProtoModule.wireTypes.lengthDelimited)
-				local WriteStringResult1, WriteStringResult2_1 = ProtoModule.writeString(WriteTagResult14, WriteTagResult2_13, value)
-				local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult15, WriteTagResult2_14, WriteStringResult1, WriteStringResult2_1)
+				local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+				local WriteStringResult, WriteStringResult2 = ProtoModule.writeString(WriteTagResult14, WriteTagResult2_13, i)
+				local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(WriteStringResult, WriteStringResult2, 2, ProtoModule.wireTypes.lengthDelimited)
+				local WriteStringResult1, WriteStringResult2_1 = ProtoModule.writeString(WriteTagResult15, WriteTagResult2_14, value)
+				local WriteTagResult16, WriteTagResult2_15 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult16, WriteTagResult2_15, WriteStringResult1, WriteStringResult2_1)
 			end
 		end
 		if self.is_read then
-			local WriteTagResult17, WriteTagResult2_16 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult17, WriteTagResult2_16, if self.is_read then 1 else 0)
+			local WriteTagResult18, WriteTagResult2_17 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult18, WriteTagResult2_17, if self.is_read then 1 else 0)
 		end
 		if self.timestamp_text ~= nil and self.timestamp_text ~= "" then
-			local WriteTagResult18, WriteTagResult2_17 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult18, WriteTagResult2_17, self.timestamp_text)
+			local WriteTagResult19, WriteTagResult2_18 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult19, WriteTagResult2_18, self.timestamp_text)
 		end
 		if self.thumbnail_url ~= nil then
-			local WriteTagResult19, WriteTagResult2_18 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult19, WriteTagResult2_18, self.thumbnail_url)
+			local WriteTagResult20, WriteTagResult2_19 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult20, WriteTagResult2_19, self.thumbnail_url)
 		end
 		if self.bundle_key ~= nil and self.bundle_key ~= "" then
-			local WriteTagResult20, WriteTagResult2_19 = ProtoModule.writeTag(Buf, Count, 16, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult20, WriteTagResult2_19, self.bundle_key)
+			local WriteTagResult21, WriteTagResult2_20 = ProtoModule.writeTag(Buf, Count, 16, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult21, WriteTagResult2_20, self.bundle_key)
 		end
 		if self.visual_item_type ~= nil and self.visual_item_type ~= "" then
-			local WriteTagResult21, WriteTagResult2_20 = ProtoModule.writeTag(Buf, Count, 17, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult21, WriteTagResult2_20, self.visual_item_type)
+			local WriteTagResult17, WriteTagResult2_16 = ProtoModule.writeTag(Buf, Count, 17, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult17, WriteTagResult2_16, self.visual_item_type)
 		end
 		if self.supports_report then
 			local WriteTagResult22, WriteTagResult2_21 = ProtoModule.writeTag(Buf, Count, 18, ProtoModule.wireTypes.varint)
 			Buf, Count = ProtoModule.writeVarInt(WriteTagResult22, WriteTagResult2_21, if self.supports_report then 1 else 0)
 		end
 		if self.page_entry_identifier ~= nil and self.page_entry_identifier ~= "" then
-			local WriteTagResult23, WriteTagResult2_22 = ProtoModule.writeTag(Buf, Count, 19, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult23, WriteTagResult2_22, self.page_entry_identifier)
+			local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 19, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult12, WriteTagResult2_11, self.page_entry_identifier)
 		end
 		if self.starts_section then
-			local WriteTagResult24, WriteTagResult2_23 = ProtoModule.writeTag(Buf, Count, 20, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult24, WriteTagResult2_23, if self.starts_section then 1 else 0)
+			local WriteTagResult23, WriteTagResult2_22 = ProtoModule.writeTag(Buf, Count, 20, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult23, WriteTagResult2_22, if self.starts_section then 1 else 0)
 		end
 		if self.bundle_position ~= nil and self.bundle_position ~= 0 then
-			local WriteTagResult16, WriteTagResult2_15 = ProtoModule.writeTag(Buf, Count, 21, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult16, WriteTagResult2_15, self.bundle_position)
+			local WriteTagResult24, WriteTagResult2_23 = ProtoModule.writeTag(Buf, Count, 21, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult24, WriteTagResult2_23, self.bundle_position)
 		end
 		if self.bundle_more_count ~= nil and self.bundle_more_count ~= 0 then
-			local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 22, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult11, WriteTagResult2_10, self.bundle_more_count)
+			local WriteTagResult25, WriteTagResult2_24 = ProtoModule.writeTag(Buf, Count, 22, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult25, WriteTagResult2_24, self.bundle_more_count)
 		end
 		if self.bundle_expanded then
-			local WriteTagResult25, WriteTagResult2_24 = ProtoModule.writeTag(Buf, Count, 23, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult25, WriteTagResult2_24, if self.bundle_expanded then 1 else 0)
+			local WriteTagResult26, WriteTagResult2_25 = ProtoModule.writeTag(Buf, Count, 23, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult26, WriteTagResult2_25, if self.bundle_expanded then 1 else 0)
 		end
 		if self.supports_clear then
-			local WriteTagResult26, WriteTagResult2_25 = ProtoModule.writeTag(Buf, Count, 24, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult26, WriteTagResult2_25, if self.supports_clear then 1 else 0)
+			local WriteTagResult27, WriteTagResult2_26 = ProtoModule.writeTag(Buf, Count, 24, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult27, WriteTagResult2_26, if self.supports_clear then 1 else 0)
 		end
 		if self.bundle_size ~= nil and self.bundle_size ~= 0 then
-			local WriteTagResult27, WriteTagResult2_26 = ProtoModule.writeTag(Buf, Count, 25, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult27, WriteTagResult2_26, self.bundle_size)
+			local WriteTagResult28, WriteTagResult2_27 = ProtoModule.writeTag(Buf, Count, 25, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult28, WriteTagResult2_27, self.bundle_size)
 		end
 		if self.bundle_hidden then
-			local WriteTagResult28, WriteTagResult2_27 = ProtoModule.writeTag(Buf, Count, 26, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult28, WriteTagResult2_27, if self.bundle_hidden then 1 else 0)
+			local WriteTagResult29, WriteTagResult2_28 = ProtoModule.writeTag(Buf, Count, 26, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult29, WriteTagResult2_28, if self.bundle_hidden then 1 else 0)
 		end
 		if self.bundle_title ~= nil and self.bundle_title ~= "" then
-			local WriteTagResult29, WriteTagResult2_28 = ProtoModule.writeTag(Buf, Count, 27, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult29, WriteTagResult2_28, self.bundle_title)
+			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 27, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult4, WriteTagResult2_3, self.bundle_title)
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -30143,42 +30143,42 @@ do
 					Buffer9, v5727 = ProtoModule.readBuffer(Buf, v140)
 					NewModule.primary_button = t.StreamNotificationRowInputData_InteractiveItem.decode(Buffer9)
 				elseif Tag == 10 then
-					local Buffer10
-					Buffer10, v5727 = ProtoModule.readBuffer(Buf, v140)
-					NewModule.secondary_button = t.StreamNotificationRowInputData_InteractiveItem.decode(Buffer10)
-				elseif Tag == 11 then
 					local Buffer11
 					Buffer11, v5727 = ProtoModule.readBuffer(Buf, v140)
-					table.insert(NewModule.overflow_items, t.StreamNotificationRowInputData_InteractiveItem.decode(Buffer11))
-				elseif Tag == 12 then
+					NewModule.secondary_button = t.StreamNotificationRowInputData_InteractiveItem.decode(Buffer11)
+				elseif Tag == 11 then
 					local Buffer12
 					Buffer12, v5727 = ProtoModule.readBuffer(Buf, v140)
-					local DecodeResult = t.StreamNotificationRowInputData_ClientEventsPayloadEntry.decode(Buffer12)
-					NewModule.client_events_payload[DecodeResult.key or ""] = DecodeResult.value or ""
-				elseif Tag == 14 then
-					local Buffer13
-					Buffer13, v5727 = ProtoModule.readBuffer(Buf, v140)
-					NewModule.timestamp_text = buffer.tostring(Buffer13)
-				elseif Tag == 15 then
+					table.insert(NewModule.overflow_items, t.StreamNotificationRowInputData_InteractiveItem.decode(Buffer12))
+				elseif Tag == 12 then
 					local Buffer14
 					Buffer14, v5727 = ProtoModule.readBuffer(Buf, v140)
-					NewModule.thumbnail_url = buffer.tostring(Buffer14)
-				elseif Tag == 16 then
+					local DecodeResult = t.StreamNotificationRowInputData_ClientEventsPayloadEntry.decode(Buffer14)
+					NewModule.client_events_payload[DecodeResult.key or ""] = DecodeResult.value or ""
+				elseif Tag == 14 then
 					local Buffer15
 					Buffer15, v5727 = ProtoModule.readBuffer(Buf, v140)
-					NewModule.bundle_key = buffer.tostring(Buffer15)
-				elseif Tag == 17 then
-					local Buffer16
-					Buffer16, v5727 = ProtoModule.readBuffer(Buf, v140)
-					NewModule.visual_item_type = buffer.tostring(Buffer16)
-				elseif Tag == 19 then
+					NewModule.timestamp_text = buffer.tostring(Buffer15)
+				elseif Tag == 15 then
 					local Buffer17
 					Buffer17, v5727 = ProtoModule.readBuffer(Buf, v140)
-					NewModule.page_entry_identifier = buffer.tostring(Buffer17)
-				elseif Tag == 27 then
+					NewModule.thumbnail_url = buffer.tostring(Buffer17)
+				elseif Tag == 16 then
+					local Buffer13
+					Buffer13, v5727 = ProtoModule.readBuffer(Buf, v140)
+					NewModule.bundle_key = buffer.tostring(Buffer13)
+				elseif Tag == 17 then
+					local Buffer10
+					Buffer10, v5727 = ProtoModule.readBuffer(Buf, v140)
+					NewModule.visual_item_type = buffer.tostring(Buffer10)
+				elseif Tag == 19 then
 					local Buffer18
 					Buffer18, v5727 = ProtoModule.readBuffer(Buf, v140)
-					NewModule.bundle_title = buffer.tostring(Buffer18)
+					NewModule.page_entry_identifier = buffer.tostring(Buffer18)
+				elseif Tag == 27 then
+					local Buffer16
+					Buffer16, v5727 = ProtoModule.readBuffer(Buf, v140)
+					NewModule.bundle_title = buffer.tostring(Buffer16)
 				else
 					local VarInt6, VarInt2_1 = ProtoModule.readVarInt(Buf, v140)
 					v140 = VarInt2_1 + VarInt6
@@ -30683,17 +30683,17 @@ do
 			end
 		end
 		if self.event_name ~= nil and self.event_name ~= "" then
-			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.event_name)
+			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.event_name)
 		end
 		if self.client_events_payload ~= nil and next(self.client_events_payload) ~= nil then
 			for i, value in self.client_events_payload do
-				local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-				local WriteStringResult, WriteStringResult2 = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, i)
-				local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(WriteStringResult, WriteStringResult2, 2, ProtoModule.wireTypes.lengthDelimited)
-				local WriteStringResult1, WriteStringResult2_1 = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, value)
-				local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult9, WriteTagResult2_8, WriteStringResult1, WriteStringResult2_1)
+				local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+				local WriteStringResult, WriteStringResult2 = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, i)
+				local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(WriteStringResult, WriteStringResult2, 2, ProtoModule.wireTypes.lengthDelimited)
+				local WriteStringResult1, WriteStringResult2_1 = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, value)
+				local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult8, WriteTagResult2_7, WriteStringResult1, WriteStringResult2_1)
 			end
 		end
 		if self.event_visual_item_type ~= nil then

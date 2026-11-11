@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXFilterOutShopOnlyItemsOnBulkPurchase2", false)

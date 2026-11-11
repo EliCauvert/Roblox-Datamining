@@ -1,3 +1,0 @@
-﻿local FFlagAXRootSlotBasedEditorFlagModule = require(script.Parent.FFlagAXRootSlotBasedEditorFlag)
-
-return game:DefineFastFlag("AXSlotsDisableScrollAwayOnLandscape", false) and FFlagAXRootSlotBasedEditorFlagModule

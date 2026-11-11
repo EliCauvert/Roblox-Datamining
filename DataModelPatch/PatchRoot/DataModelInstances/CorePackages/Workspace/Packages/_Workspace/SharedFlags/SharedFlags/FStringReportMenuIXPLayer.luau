@@ -1,1 +1,0 @@
-﻿return game:DefineFastString("ReportMenuIXPLayer", "UserSafety.ReportMenu")

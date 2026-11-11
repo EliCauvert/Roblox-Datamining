@@ -1,1 +1,0 @@
-﻿return (require(game:GetService("CoreGui"):WaitForChild("RobloxGui"):WaitForChild("Modules"):WaitForChild("Settings"):WaitForChild("Pages"):WaitForChild("ReportAbuseMenuNewContainerPage")))

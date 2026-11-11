@@ -239,7 +239,9 @@ return function(p7)
 	local LabelFontSize = p7.labelFontSize
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
-	local config = { ValueRow = renderValueRow(p7, TestId) }
+	local config = {
+		ValueRow = if p7.hideHeader then nil else renderValueRow(p7, TestId)
+	}
 	
 	if p7.hasData then
 		local MeasureGutterResult: number = measureGutter(p7.yTicks, LabelFontSize, LabelFont)
@@ -352,7 +354,7 @@ return function(p7)
 		LayoutOrder = p7.layoutOrder,
 		testId = TestId
 	}, {
-		Header = ReactModule.createElement(View, {
+		Header = if p7.hideHeader then nil else ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "col gap-xxsmall size-full-0 auto-y"
 		}, {

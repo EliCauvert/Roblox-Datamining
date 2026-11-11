@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("SquadsCore").Parent.NetworkingSquads).config({ roduxNetworking = require(script.Parent.RoduxNetworking) })

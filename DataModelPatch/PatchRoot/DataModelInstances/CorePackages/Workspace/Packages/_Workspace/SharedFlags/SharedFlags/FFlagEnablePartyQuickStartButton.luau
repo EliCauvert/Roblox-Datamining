@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnablePartyQuickStartButton3", false)

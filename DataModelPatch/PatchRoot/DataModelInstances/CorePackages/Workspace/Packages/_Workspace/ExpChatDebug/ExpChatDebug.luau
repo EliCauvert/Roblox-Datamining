@@ -1,1 +1,0 @@
-﻿return { start = require(script.start) }

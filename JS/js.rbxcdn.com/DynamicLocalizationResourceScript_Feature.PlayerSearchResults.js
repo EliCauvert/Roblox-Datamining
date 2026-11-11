@@ -21,6 +21,7 @@ Roblox.LangDynamic["Feature.PlayerSearchResults"] = {
     "Label.PrimaryGroup": "Primary Community",
     "Label.NoResultsFound": "No results found",
     "Label.Previously": "Previously",
+    "Label.You": "You",
     "Label.NewUsername": "New username",
     "Label.YouAreConnections": "You are Connections"
 };

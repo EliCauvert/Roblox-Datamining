@@ -1,1 +1,0 @@
-﻿return (require(script.Parent._Index["FoundationCloudAssets-31ab8d40-0.5.0"].FoundationCloudAssets))

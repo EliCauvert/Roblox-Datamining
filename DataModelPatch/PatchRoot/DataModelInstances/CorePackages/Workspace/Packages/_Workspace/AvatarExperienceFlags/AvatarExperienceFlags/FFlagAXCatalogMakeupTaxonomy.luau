@@ -1,1 +1,0 @@
-﻿return require(script.Parent.FFlagAXCatalogMakeupSupport) and game:DefineFastFlag("AXCatalogMakeupTaxonomy2", false)

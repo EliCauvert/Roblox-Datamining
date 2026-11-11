@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("AppChat").Logger):new("AppChat.Telemetry")

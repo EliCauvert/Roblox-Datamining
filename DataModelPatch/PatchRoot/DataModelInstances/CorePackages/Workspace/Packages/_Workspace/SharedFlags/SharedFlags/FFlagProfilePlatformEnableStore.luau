@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("ProfilePlatformEnableStore_V2", false)

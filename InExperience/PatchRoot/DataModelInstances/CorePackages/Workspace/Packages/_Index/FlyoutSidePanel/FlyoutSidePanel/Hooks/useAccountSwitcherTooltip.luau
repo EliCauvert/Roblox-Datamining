@@ -1,18 +1,34 @@
-﻿local Parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
+﻿local FlyoutSidePanel = script:FindFirstAncestor("FlyoutSidePanel")
+local Parent = FlyoutSidePanel.Parent
 local ReactModule = require(Parent.React)
 local UseDrawerVisibleFunction = require(Parent.Drawer).Hooks.useDrawerVisible
 local AppStorageJsonCacheUtils = require(Parent.AppCommonLib).Utils.AppStorageJsonCacheUtils
+local FFlagFixFlyoutAccountSwitcherTooltipEmptyStringModule = require(FlyoutSidePanel.Flags.FFlagFixFlyoutAccountSwitcherTooltipEmptyString)
 local AppStorageService = game:GetService("AppStorageService")
 local HttpService = game:GetService("HttpService")
 local FlyoutAccountSwitcherTooltipMaxShows = game:DefineFastInt("FlyoutAccountSwitcherTooltipMaxShows", 1)
 
-local function _(p1, p2)
-	local FlyoutSidePanelAccountSwitcherTooltipSeenCachedJsonForKey = p1:getCachedJsonForKey("FlyoutSidePanelAccountSwitcherTooltipSeen", p2)
+local function readShowCount(UseMemoResult, p1, p2)
+	-- upvalues: FFlagFixFlyoutAccountSwitcherTooltipEmptyStringModule (copy)
+	local FlyoutSidePanelAccountSwitcherTooltipSeenCachedJsonForKey = UseMemoResult:getCachedJsonForKey("FlyoutSidePanelAccountSwitcherTooltipSeen", p1)
 	
-	return if typeof(FlyoutSidePanelAccountSwitcherTooltipSeenCachedJsonForKey) == "number" then FlyoutSidePanelAccountSwitcherTooltipSeenCachedJsonForKey else nil
+	if typeof(FlyoutSidePanelAccountSwitcherTooltipSeenCachedJsonForKey) == "number" then
+		return FlyoutSidePanelAccountSwitcherTooltipSeenCachedJsonForKey
+	end
+	if FFlagFixFlyoutAccountSwitcherTooltipEmptyStringModule and p2 ~= nil then
+		local Success, Result = pcall(function()
+			-- upvalues: p2 (copy)
+			return p2:GetItem("FlyoutSidePanelAccountSwitcherTooltipSeen")
+		end)
+		
+		if Success and Result == "" then
+			return 0
+		end
+	end
+	return nil
 end
 
-local _ = function(p1, p2, p3)
+local function _(p1, p2, p3)
 	-- upvalues: HttpService (copy)
 	if pcall(function()
 		-- upvalues: p1 (copy), HttpService (upval), p3 (copy)
@@ -24,7 +40,7 @@ local _ = function(p1, p2, p3)
 end
 
 return function(p1, p2, p3, p4)
-	-- upvalues: AppStorageService (copy), ReactModule (copy), AppStorageJsonCacheUtils (copy), UseDrawerVisibleFunction (copy), FlyoutAccountSwitcherTooltipMaxShows (copy), HttpService (copy)
+	-- upvalues: AppStorageService (copy), ReactModule (copy), AppStorageJsonCacheUtils (copy), UseDrawerVisibleFunction (copy), readShowCount (copy), FFlagFixFlyoutAccountSwitcherTooltipEmptyStringModule (copy), FlyoutAccountSwitcherTooltipMaxShows (copy), HttpService (copy)
 	local AppStorageService1 = if p3 == nil then AppStorageService else p3
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p3 (copy), AppStorageJsonCacheUtils (upval), AppStorageService1 (copy)
@@ -32,10 +48,8 @@ return function(p1, p2, p3, p4)
 	end, { p3, AppStorageService1 })
 	local UseDrawerVisibleResult = UseDrawerVisibleFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(function()
-		-- upvalues: UseMemoResult (copy)
-		local FlyoutSidePanelAccountSwitcherTooltipSeenCachedJsonForKey = UseMemoResult:getCachedJsonForKey("FlyoutSidePanelAccountSwitcherTooltipSeen", nil)
-		
-		return if typeof(FlyoutSidePanelAccountSwitcherTooltipSeenCachedJsonForKey) == "number" then FlyoutSidePanelAccountSwitcherTooltipSeenCachedJsonForKey else nil
+		-- upvalues: readShowCount (upval), UseMemoResult (copy), FFlagFixFlyoutAccountSwitcherTooltipEmptyStringModule (upval), AppStorageService1 (copy)
+		return (readShowCount(UseMemoResult, nil, if FFlagFixFlyoutAccountSwitcherTooltipEmptyStringModule then AppStorageService1 else nil))
 	end)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
@@ -64,13 +78,16 @@ return function(p1, p2, p3, p4)
 		UseMemoResult
 	})
 	ReactModule.useEffect(function()
-		-- upvalues: UseDrawerVisibleResult (copy), UseStateResult2_1 (copy), UseStateResult2 (copy), UseMemoResult (copy)
+		-- upvalues: UseDrawerVisibleResult (copy), UseStateResult2_1 (copy), UseStateResult2 (copy), readShowCount (upval), UseMemoResult (copy), FFlagFixFlyoutAccountSwitcherTooltipEmptyStringModule (upval), AppStorageService1 (copy)
 		if not UseDrawerVisibleResult then
 			UseStateResult2_1(false)
-			local FlyoutSidePanelAccountSwitcherTooltipSeenCachedJsonForKey = UseMemoResult:getCachedJsonForKey("FlyoutSidePanelAccountSwitcherTooltipSeen", true)
-			UseStateResult2(if typeof(FlyoutSidePanelAccountSwitcherTooltipSeenCachedJsonForKey) == "number" then FlyoutSidePanelAccountSwitcherTooltipSeenCachedJsonForKey else nil)
+			UseStateResult2((readShowCount(UseMemoResult, true, if FFlagFixFlyoutAccountSwitcherTooltipEmptyStringModule then AppStorageService1 else nil)))
 		end
-	end, { UseDrawerVisibleResult, UseMemoResult })
+	end, {
+		UseDrawerVisibleResult,
+		UseMemoResult,
+		if FFlagFixFlyoutAccountSwitcherTooltipEmptyStringModule then AppStorageService1 else nil
+	})
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(true)

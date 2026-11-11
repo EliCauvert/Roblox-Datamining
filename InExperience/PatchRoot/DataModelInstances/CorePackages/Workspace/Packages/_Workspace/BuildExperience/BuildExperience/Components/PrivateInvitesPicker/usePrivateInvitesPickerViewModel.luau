@@ -11,10 +11,12 @@ local UseUserPickerModule = require(BuildExperience.Components.UserPicker.useUse
 local _ = require(BuildExperience.Components.UserPicker.UserPickerTypes)
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
+local UseBuildPageImpressionModule = require(BuildExperience.Telemetry.useBuildPageImpression)
+local FFlagBuildExperiencePageImpressionsModule = require(BuildExperience.Flags.FFlagBuildExperiencePageImpressions)
 local _ = require(script.Parent.PrivateInvitesPickerView)
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), SendBuildExperienceEventModule (copy), GetPrivatePlaytestersStoreFunction (copy), SignalsReactModule (copy), FriendsStore (copy), SearchFriendsAsyncModule (copy), Logger (copy), UseUserPickerModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildExperiencePageImpressionsModule (copy), UseBuildPageImpressionModule (copy), GetPrivatePlaytestersStoreFunction (copy), SignalsReactModule (copy), FriendsStore (copy), SearchFriendsAsyncModule (copy), Logger (copy), UseUserPickerModule (copy)
 	local UniverseId = p1.universeId
 	local UseLocalizationResult = UseLocalizationFunction({
 		addPlaytester = LocalizationStringsModule.PRIVATE_INVITES_ADD_PLAYTESTER,
@@ -43,6 +45,10 @@ return function(p1)
 			return
 		end
 	end, { UniverseId })
+	
+	if FFlagBuildExperiencePageImpressionsModule then
+		UseBuildPageImpressionModule("invite-picker", { universeId = UniverseId })
+	end
 	local PrivatePlaytestersStore = GetPrivatePlaytestersStoreFunction(false)
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: PrivatePlaytestersStore (copy), UniverseId (copy)

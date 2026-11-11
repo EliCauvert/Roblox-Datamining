@@ -148,11 +148,11 @@ return function(p1)
 		end,
 		getUserMomentsVersion = Signal,
 		getPendingUserMoments = Signal1,
-		prependPendingUserMoment = function(Key, Moment)
+		prependPendingUserMoment = function(Key, Moment, StartedAtClock)
 			-- upvalues: Signal1 (copy), Signal2_1 (copy)
 			local Copy = table.clone(Signal1(false))
 			local Copy1 = table.clone(Copy[Key] or {})
-			table.insert(Copy1, 1, { moment = Moment })
+			table.insert(Copy1, 1, { moment = Moment, startedAtClock = StartedAtClock })
 			Copy[Key] = Copy1
 			Signal2_1(Copy)
 		end,

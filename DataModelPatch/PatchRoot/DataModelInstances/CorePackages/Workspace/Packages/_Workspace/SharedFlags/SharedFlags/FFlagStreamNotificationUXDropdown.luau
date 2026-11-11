@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("StreamNotificationUXDropdown2", false)

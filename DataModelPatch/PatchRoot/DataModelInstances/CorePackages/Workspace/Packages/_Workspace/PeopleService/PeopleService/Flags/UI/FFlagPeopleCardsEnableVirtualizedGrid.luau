@@ -1,1 +1,0 @@
-﻿return not require(script.Parent.FFlagPeoplePageEnablePersonSignalStore)() and game:DefineFastFlag("PeopleCardsEnableVirtualizedGrid", false)

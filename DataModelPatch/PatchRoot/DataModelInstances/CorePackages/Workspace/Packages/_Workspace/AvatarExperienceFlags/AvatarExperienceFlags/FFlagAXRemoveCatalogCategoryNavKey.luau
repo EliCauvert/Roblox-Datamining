@@ -1,1 +1,0 @@
-﻿return require(script.Parent.FFlagAXCatalogCategoryTooltip) and game:DefineFastFlag("AXRemoveCatalogCategoryNavKey4", false)

@@ -1,1 +1,0 @@
-﻿return { User = "User", Group = "Group" }

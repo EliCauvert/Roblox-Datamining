@@ -157,16 +157,16 @@ return function(List, p1, p2, p3)
 		end
 	end
 	for _, value5 in t1 do
-		local Entry1 = t[value5.key] or nil
+		local Entry = t[value5.key] or nil
 		
-		if Entry1 and (Entry1.key == value5.key and (Entry1.index == value5.index and (Entry1.isStale == value5.isStale and (Entry1.isActive == value5.isActive and (if Entry1 and value5 then Entry1.key == value5.key and TableUtilitiesModule.ShallowEqual(Entry1, value5) else Entry1 == value5))))) then
-			table.insert(List1, Entry1)
+		if Entry and (Entry.key == value5.key and (Entry.index == value5.index and (Entry.isStale == value5.isStale and (Entry.isActive == value5.isActive and (if Entry and value5 then Entry.key == value5.key and TableUtilitiesModule.ShallowEqual(Entry, value5) else Entry == value5))))) then
+			table.insert(List1, Entry)
 		else
 			table.insert(List1, value5)
 		end
 	end
 	table.sort(List1, compareScenes)
-	local Count = 0
+	local v2 = 0
 	
 	for i, value4 in List1 do
 		local IsIndexMatch: boolean = not value4.isStale and value4.index == p1.index
@@ -175,10 +175,10 @@ return function(List, p1, p2, p3)
 			List1[i] = Object.assign(table.clone(value4), { isActive = IsIndexMatch })
 		end
 		if IsIndexMatch then
-			Count += 1
+			v2 += 1
 		end
 	end
-	InvariantModule(Count == 1, "There should only be one active scene, not %d", Count)
+	InvariantModule(v2 == 1, "There should only be one active scene, not %d", v2)
 	
 	if #List1 ~= #List then
 		return List1

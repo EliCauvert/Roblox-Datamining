@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("UserSearchAddFocusActionsSupport_1", false)

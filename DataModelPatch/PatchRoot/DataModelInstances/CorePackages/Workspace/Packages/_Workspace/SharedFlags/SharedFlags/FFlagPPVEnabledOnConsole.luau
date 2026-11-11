@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("PPVEnabledOnConsole_V3", false)

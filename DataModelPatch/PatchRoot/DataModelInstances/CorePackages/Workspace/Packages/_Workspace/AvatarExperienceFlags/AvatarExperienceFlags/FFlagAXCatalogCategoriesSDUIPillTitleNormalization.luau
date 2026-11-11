@@ -1,3 +1,0 @@
-﻿local AXCatalogCategoriesSDUIPillTitleNormalization = game:DefineFastFlag("AXCatalogCategoriesSDUIPillTitleNormalization", false)
-
-return require(script.Parent.FFlagAXCatalogCategoriesSDUI) and AXCatalogCategoriesSDUIPillTitleNormalization

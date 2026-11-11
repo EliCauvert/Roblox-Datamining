@@ -1,8 +1,6 @@
 ﻿local TelemetryService = game:GetService("TelemetryService")
-local Parent = script:FindFirstAncestor("GameCollections").Parent
-local _ = require(Parent.DiscoveryTypes)
+local _ = require(script:FindFirstAncestor("GameCollections").Parent.DiscoveryTypes)
 local LuaAppNullableGridLayoutTelemetryFields = game:DefineFastFlag("LuaAppNullableGridLayoutTelemetryFields", false)
-local FFlagLuaAppFixTotalColsBound = require(Parent.SharedFlags).FFlagLuaAppFixTotalColsBound
 local StandardizedFields = { "addOSInfo", "addSessionInfo", "addSessionId" }
 local config = {
 	eventName = "TileSkipped",
@@ -37,8 +35,8 @@ return {
 			}
 		})
 	end,
-	logTilePlaced = function(p1, p2, TileType, PageContext, NumColumns, NumRows, OriginalFeedIndex, FinalFeedIndex, SortIndex, TopicId, p3)
-		-- upvalues: LuaAppNullableGridLayoutTelemetryFields (copy), FFlagLuaAppFixTotalColsBound (copy), TelemetryService (copy), config1 (copy), StandardizedFields (copy)
+	logTilePlaced = function(p1, p2, TileType, PageContext, NumColumns, NumRows, OriginalFeedIndex, FinalFeedIndex, SortIndex, TopicId, TotalFilledColumns)
+		-- upvalues: LuaAppNullableGridLayoutTelemetryFields (copy), TelemetryService (copy), config1 (copy), StandardizedFields (copy)
 		TelemetryService:LogEvent(config1, {
 			standardizedFields = StandardizedFields,
 			customFields = {
@@ -52,7 +50,7 @@ return {
 				finalFeedIndex = FinalFeedIndex,
 				sortIndex = SortIndex,
 				topicId = TopicId,
-				totalFilledColumns = if FFlagLuaAppFixTotalColsBound then p3 else nil
+				totalFilledColumns = TotalFilledColumns
 			}
 		})
 	end

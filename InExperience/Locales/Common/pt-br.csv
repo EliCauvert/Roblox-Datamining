@@ -1482,6 +1482,7 @@ Feature.AddFriends.Action.FriendAdded,Amizade adicionada
 Feature.AddFriends.Action.IgnoreFriendRequest,Ignorar pedido de amizade
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Ignorar pedido de amizade confiável
 Feature.AddFriends.Action.RequestIgnored,Pedido ignorado
+Feature.AddFriends.Heading.AddFriends,Adicionar amizades
 Feature.AddFriends.Label.AddFriendsTooltip,Comece encontrando seus amizades para que vocês possam explorar a Roblox juntos.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Encontre pessoas na Roblox pesquisando pelo nome de usuário ou nome.
 Feature.AddFriends.Label.ConnectWithContacts,Convide seus contatos ou conecte-se com amizades que já estão na Roblox!
@@ -1875,6 +1876,8 @@ Feature.Avatar.Label.Shoes,Sapatos
 Feature.Avatar.Label.Shorts,Shorts
 Feature.Avatar.Label.Shoulder,Ombro
 Feature.Avatar.Label.Skin,Pele
+Feature.Avatar.Label.Spawn,Gerar
+Feature.Avatar.Label.SpawnEffects,Efeitos de geração
 Feature.Avatar.Label.Sweater,Moletom
 Feature.Avatar.Label.Sweaters,Moletons
 Feature.Avatar.Label.Swim,Nadar
@@ -2097,7 +2100,10 @@ Feature.AvatarSwitcher.Message.SelectAvatar,Selecione um avatar
 Feature.AvatarSwitcher.Message.SwitchingDeferred,Você verá este avatar após a próxima regeneração ou ao entrar em uma experiência. Você pode trocar para outro avatar a qualquer momento.
 Feature.AvatarSwitcher.Message.UnknownSupport,"Você ainda pode mudar seu avatar, mas ele pode não ser exibido corretamente nesta experiência."
 Feature.AvatarSwitcher.Message.Unsupported,Esta experiência usa um avatar personalizado e não oferece suporte a avatares da Roblox.
+Feature.AvatarWorkshop.Action.EditAvatar,Editar avatar
 Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Heading.Customize,Personalizar
+Feature.AvatarWorkshop.Heading.YourAvatars,Seus avatares
 Feature.AvatarWorkshop.Message.LoadItemsError,Algo deu errado ao carregar seus itens.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,Não foi possível carregar mais itens.
 Feature.AvatarWorkshop.Message.NoItemsOwned,Você ainda não possui nenhum item aqui.
@@ -2781,7 +2787,7 @@ Feature.Catalog.Action.CheckoutPlural,Finalizar compra ({count})
 Feature.Catalog.Action.CheckoutSingular,Fazer checkout de 1 item
 Feature.Catalog.Action.CloseDetails,Ocultar detalhes
 Feature.Catalog.Action.CopyLink,Copiar link
-Feature.Catalog.Action.Customize,Personalizar
+Feature.Catalog.Action.Customize,
 Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,Descreva seu avatar (opcional)
@@ -3214,7 +3220,7 @@ Feature.Chat.Heading.SafeChattingWithUsername,Tenha cuidado ao conversar com {di
 Feature.Chat.Heading.UserInvitedYouToJoin,{combinedName} convidou você para se juntar
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,{combinedName} convidou você a entrar para um grupo
 Feature.Chat.Heading.YouWereInvitedToGroup,Você foi convidado para se juntar ao grupo
-Feature.Chat.Label.AddFriends,Adicionar amizades
+Feature.Chat.Label.AddFriends,
 Feature.Chat.Label.Available,Disponível
 Feature.Chat.Label.Blocked,
 Feature.Chat.Label.ChatDetails,Detalhes do bate-papo
@@ -3254,7 +3260,6 @@ Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} disse...
 Feature.Chat.Label.ReplyingToYourself,Você disse...
 Feature.Chat.Label.SearchFriends,Procurar amigos
 Feature.Chat.Label.SearchWord,
-Feature.Chat.Label.SnoozeChatNotifications,Silenciar notificações de bate-papo na experiência para:
 Feature.Chat.Label.SnoozePartyNotifications,Silenciar notificações da Turma na experiência para:
 Feature.Chat.Label.SwipeToReplyTooltip,Deslize para responder
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} dias
@@ -3310,7 +3315,6 @@ Feature.Chat.Response.NetworkError,Erro de rede
 Feature.Chat.RobloxConnectUnavailableWithUser,"No momento, o Roblox Connect não está disponível com este usuário."
 Feature.Chat.Text.NoFriends,"Você ainda não adicionou nenhum amigo. Para começar, encontre e adicione seus amigos na Roblox."
 Feature.Chat.Title.FriendsChat,Chat de amizades
-Feature.Chat.Title.MuteChatNotifications,Silenciar notificações de chat das amizades durante o jogo
 Feature.Chat.Title.NewChat,Novo chat
 Feature.Chat.Toast.Error.InvalidUserSelected,Uma ou mais pessoas nesta lista não podem ser adicionadas
 Feature.ContactUpsell.Action.Continue,
@@ -3457,8 +3461,10 @@ Feature.FaceChat.Subtitle.VideoPerformancePromptDisable,Desligar sua câmera pod
 Feature.FaceChat.Subtitle.VideoUnsupported,A Roblox não consegue usar a câmera para animar seu avatar.
 Feature.Favorites.Label.Favorite,Favorito
 Feature.FlyoutSidePanel.Action.ContinuePlaying,
+Feature.FlyoutSidePanel.Description.SwitchAccountsHere,Agora você pode trocar de conta aqui.
 Feature.FlyoutSidePanel.Label.TooltipBody,"Seu perfil, conteúdo e configurações foram movidos para um novo local."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> foi movido
+Feature.FlyoutSidePanel.Title.AccountSwitcherMoved,O trocador de contas mudou de lugar
 Feature.Friends.Action.AcceptFriend,Aceitar amizade
 Feature.Friends.Action.AccountDeleted,Conta excluída
 Feature.Friends.Action.Add,
@@ -3847,6 +3853,7 @@ Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Termina em {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,Teste grátis
 Feature.InExperienceShop.Label.HaveTrial,Teste grátis para você
+Feature.InExperienceShop.Label.KeepIt,
 Feature.InExperienceShop.Label.NoDescription,Sem descrição
 Feature.InExperienceShop.Label.OfferEndTime,{offer} terminando em {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,Esta é uma prévia da sua loja no Roblox Studio. Os jogadores não veem esta prévia.
@@ -4008,6 +4015,7 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,Fotos
 Feature.Moments.Label.PostDeleted,Momento excluído
 Feature.Moments.Label.PostRemovedBody,O Momento que você publicou vai contra as Regras da Comunidade.
+Feature.Moments.Label.PostedOnDate,Publicado em {date}
 Feature.Moments.Label.PublishingRodeoBody,Isso não deve demorar muito.
 Feature.Moments.Label.Reactions,Reações
 Feature.Moments.Label.ReportReason.BreaksRules,Esta publicação quebra as regras
@@ -4168,7 +4176,7 @@ Feature.PlayerSearchResults.Label.YouAreFollowing,Você está seguindo
 Feature.PlayerSearchResults.Label.YouAreFriends,Amizade formada
 Feature.PrivateServers.Action.CreatePrivateServer,Criar servidor privado
 Feature.PrivateServers.Action.FreeWithBlackbird,Grátis com o Plus
-Feature.PrivateServers.Action.Generate,Gerar
+Feature.PrivateServers.Action.Generate,
 Feature.PrivateServers.Description.FriendsAllowed,Qualquer pessoa na sua lista de amizades pode entrar sem um convite
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,As compras de servidores privados não são suportadas no Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,Este jogo não suporta servidores privados.
@@ -4191,7 +4199,7 @@ Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,Copiar link do perfil
 Feature.Profile.Action.CreateInBuild,Usar a função Criar
 Feature.Profile.Action.EditAppearance,Editar aparência
-Feature.Profile.Action.EditAvatar,Editar avatar
+Feature.Profile.Action.EditAvatar,
 Feature.Profile.Action.EditBackground,Editar plano de fundo
 Feature.Profile.Action.EditEmotes,Editar emotes
 Feature.Profile.Action.EditLook,Editar visual

@@ -1,1 +1,0 @@
-﻿return game:DefineFastString("AppChatRemoveConversationListDividerIxpLayer", "Party.LandingPage")

@@ -1,3 +1,0 @@
-﻿local FFlagEnableAmpWizardDeepLinkModule = require(script.Parent.FFlagEnableAmpWizardDeepLink)
-
-return game:DefineFastFlag("EnableAmpWizardDeepLinkValidateUserId", false) and FFlagEnableAmpWizardDeepLinkModule

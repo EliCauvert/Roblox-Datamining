@@ -1,1 +1,0 @@
-﻿return game:DefineFastString("LuaAppAdPreferencesUrl", "https://en.help.roblox.com/hc/articles/28943243301780-Ads-Preferences")

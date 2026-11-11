@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXEnableTaxonomyM20ExposureLoggingCatalog", false)

@@ -310,7 +310,7 @@ return ReactModule.memo(function(p1)
 		p1.enableUiBloxButton, p1.openGameDetailsOnPurchaseRequired,
 		if SduiGameTileDisableDefaultPlayButtonOnHover then p1.disableDefaultPlayButtonOnHover else nil
 	})
-	local UseResult9 = if FFlagSduiTileDisableLegacyHover then nil else ReactModule.useCallback(function(Offset: number, BackgroundColor3, Offset1)
+	local UseResult81 = if FFlagSduiTileDisableLegacyHover then nil else ReactModule.useCallback(function(Offset: number, BackgroundColor3, Offset1)
 		-- upvalues: p1 (copy), ReactModule (upval), UseResult5 (copy), UseResult6 (copy), UseRefResult (copy), UseMemoResult (copy)
 		return if p1.enableLegacyHoverState then ReactModule.createElement("Frame", {
 			AutomaticSize = Enum.AutomaticSize.Y,
@@ -384,7 +384,7 @@ return ReactModule.memo(function(p1)
 		p1.sduiContext, p1.analyticsContext, p1.ratingText, p1.playerCount,
 		p1.metadataFontStyle
 	})
-	local Element = if FFlagLuaAppSduiGameTileFeedback and HasHiddenStateComponent and p1.overflowMenuComponent and not UseSignalStateResult then ReactModule.createElement(SduiTileOverflowMenu, {
+	local Element1 = if FFlagLuaAppSduiGameTileFeedback and HasHiddenStateComponent and p1.overflowMenuComponent and not UseSignalStateResult then ReactModule.createElement(SduiTileOverflowMenu, {
 		debugName = "SduiGameTile.OverflowMenu",
 		zIndex = 5,
 		componentConfig = p1.overflowMenuComponent,
@@ -396,11 +396,11 @@ return ReactModule.memo(function(p1)
 		parentRef = UseRefResult1,
 		sduiContext = p1.sduiContext
 	}) else nil
-	local Element1 = nil
+	local Element2 = nil
 	
 	if FFlagLuaAppSduiVideoThumbnail and p1.videoPlayer and (not FFlagLuaAppSduiGameTileFeedback or not UseSignalStateResult) then
 		local CornerRadius = p1.cornerRadius or UseTokensResult.Radius.Medium
-		Element1 = ReactModule.createElement(SduiGameVideoThumbnailModule, {
+		Element2 = ReactModule.createElement(SduiGameVideoThumbnailModule, {
 			sduiContext = p1.sduiContext,
 			analyticsContext = p1.analyticsContext,
 			videoPlayer = p1.videoPlayer,
@@ -418,7 +418,7 @@ return ReactModule.memo(function(p1)
 			playbackCandidateRef = UseRefResult1
 		})
 	end
-	local Element2 = if FFlagLuaAppSduiGameTileFeedback and UseSignalStateResult and p1.hiddenStateComponent then ReactModule.createElement(SduiTileModule, {
+	local Element = if FFlagLuaAppSduiGameTileFeedback and UseSignalStateResult and p1.hiddenStateComponent then ReactModule.createElement(SduiTileModule, {
 		isDisabled = true,
 		isHovered = false,
 		selectable = false,
@@ -453,13 +453,13 @@ return ReactModule.memo(function(p1)
 		onMouseLeave = UseResult6,
 		onSelectionGained = UseResult3,
 		onSelectionLost = UseResult4,
-		renderLegacyHoverState = if FFlagSduiTileDisableLegacyHover then nil else UseResult9,
+		renderLegacyHoverState = if FFlagSduiTileDisableLegacyHover then nil else UseResult81,
 		isHovered = UseStateResult1,
-		imageComponent = if FFlagLuaAppSduiVideoThumbnail and Element1 then Element1 else p1.imageComponent,
+		imageComponent = if FFlagLuaAppSduiVideoThumbnail and Element2 then Element2 else p1.imageComponent,
 		setGuiObject = UseResult,
 		onActivated = UseResult2,
-		onTouchLongPress = if FFlagLuaAppSduiGameTileFeedback and Element then UseResult7 else nil,
-		thumbnailOverflowMenuComponent = if FFlagLuaAppSduiGameTileFeedback then Element else nil,
+		onTouchLongPress = if FFlagLuaAppSduiGameTileFeedback and Element1 then UseResult7 else nil,
+		thumbnailOverflowMenuComponent = if FFlagLuaAppSduiGameTileFeedback then Element1 else nil,
 		focusNavActionsComponent = CloneElementResult,
 		footerComponent = UseMemoResult1
 	}))
@@ -479,9 +479,9 @@ return ReactModule.memo(function(p1)
 				hoverPadding = p1.containmentPadding,
 				containmentPadding = p1.containmentPadding
 			}) else nil,
-			Tile = Element2
+			Tile = Element
 		})
 	else
-		return Element2
+		return Element
 	end
 end)

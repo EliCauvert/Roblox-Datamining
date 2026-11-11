@@ -1438,6 +1438,7 @@ Feature.AddFriends.Action.FriendAdded,Arkadaş Eklendi
 Feature.AddFriends.Action.IgnoreFriendRequest,Arkadaşlık isteğini yok say
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Güvenilir arkadaş olarak ekleme talebini yok say
 Feature.AddFriends.Action.RequestIgnored,İstek Yok Sayıldı
+Feature.AddFriends.Heading.AddFriends,Arkadaş ekle
 Feature.AddFriends.Label.AddFriendsTooltip,Roblox'u birlikte keşfedebilmen için arkadaşlarını bul.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Kullanıcı adlarını veya adlarını arayarak Roblox'taki kişileri bul.
 Feature.AddFriends.Label.ConnectWithContacts,Rehberindeki kişileri davet et veya hâlihazırda Roblox'ta olan arkadaşlarınla bağlantı kur!
@@ -1831,6 +1832,8 @@ Feature.Avatar.Label.Shoes,Ayakkabılar
 Feature.Avatar.Label.Shorts,Şort
 Feature.Avatar.Label.Shoulder,Omuz
 Feature.Avatar.Label.Skin,Cilt
+Feature.Avatar.Label.Spawn,
+Feature.Avatar.Label.SpawnEffects,Yeniden Doğma Efekti
 Feature.Avatar.Label.Sweater,Kazak
 Feature.Avatar.Label.Sweaters,Kazaklar
 Feature.Avatar.Label.Swim,Yüzme
@@ -2053,7 +2056,10 @@ Feature.AvatarSwitcher.Message.SelectAvatar,Bir avatar seç
 Feature.AvatarSwitcher.Message.SwitchingDeferred,Bu avatarı bir dahaki sıfırlamadan sonra veya bir deneyime katıldığında göreceksin. İstediğin zaman başka bir avatara geçebilirsin.
 Feature.AvatarSwitcher.Message.UnknownSupport,Avatarını yine de değiştirebilirsin ancak bu deneyimde doğru şekilde görünmeyebilir.
 Feature.AvatarSwitcher.Message.Unsupported,Bu deneyim özel bir avatar kullanıyor ve Roblox avatarlarını desteklemiyor.
+Feature.AvatarWorkshop.Action.EditAvatar,Avatarı düzenle
 Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Heading.Customize,Özelleştir
+Feature.AvatarWorkshop.Heading.YourAvatars,Avatarların
 Feature.AvatarWorkshop.Message.LoadItemsError,Öğelerin yüklenirken bir şeyler ters gitti.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,Daha fazla öğe yüklenemedi.
 Feature.AvatarWorkshop.Message.NoItemsOwned,Burada henüz hiçbir öğen yok.
@@ -2737,7 +2743,7 @@ Feature.Catalog.Action.CheckoutPlural,Ödeme Adımını Görüntüle ({count})
 Feature.Catalog.Action.CheckoutSingular,1 öğe için ödeme yap
 Feature.Catalog.Action.CloseDetails,Ayrıntıları Kapat
 Feature.Catalog.Action.CopyLink,Bağlantıyı Kopyala
-Feature.Catalog.Action.Customize,Özelleştir
+Feature.Catalog.Action.Customize,
 Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,Avatarı Sil
 Feature.Catalog.Action.DescribeAvatar,Avatarını tarif et (İsteğe Bağlı)
@@ -3210,7 +3216,6 @@ Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} şöyle dedi:
 Feature.Chat.Label.ReplyingToYourself,Şöyle demiştin:
 Feature.Chat.Label.SearchFriends,Arkadaş ara
 Feature.Chat.Label.SearchWord,
-Feature.Chat.Label.SnoozeChatNotifications,Deneyim içi sohbet bildirimlerini sustur:
 Feature.Chat.Label.SnoozePartyNotifications,Deneyim içi parti bildirimlerini sustur:
 Feature.Chat.Label.SwipeToReplyTooltip,Yanıtlamak için kaydır
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} gün
@@ -3266,7 +3271,6 @@ Feature.Chat.Response.NetworkError,Ağ Hatası
 Feature.Chat.RobloxConnectUnavailableWithUser,Bu kullanıcı şu anda Roblox Connect kullanamıyor.
 Feature.Chat.Text.NoFriends,Henüz arkadaş eklemedin. Başlamak için Roblox'ta arkadaşlarını bul ve ekle.
 Feature.Chat.Title.FriendsChat,Arkadaş sohbeti
-Feature.Chat.Title.MuteChatNotifications,Oyun sırasında arkadaşlardan gelen sohbet bildirimlerini sustur
 Feature.Chat.Title.NewChat,Yeni sohbet
 Feature.Chat.Toast.Error.InvalidUserSelected,Listedeki bir veya daha fazla kişi eklenemiyor
 Feature.ContactUpsell.Action.Continue,
@@ -3805,6 +3809,7 @@ Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining} sonra sona erecek
 Feature.InExperienceShop.Label.FreeTrial,Ücretsiz deneme
 Feature.InExperienceShop.Label.HaveTrial,Senin için ücretsiz deneme
+Feature.InExperienceShop.Label.KeepIt,
 Feature.InExperienceShop.Label.NoDescription,Açıklama Yok
 Feature.InExperienceShop.Label.OfferEndTime,"{offer}, {timeRemaining} sonra sona erecek"
 Feature.InExperienceShop.Label.PreviewBanner,"Bu, Roblox Studio'daki Mağazanın bir ön izlemesidir. Oyuncular bu ön izlemeyi görmez."
@@ -3966,6 +3971,7 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,Fotoğraflar
 Feature.Moments.Label.PostDeleted,An silindi
 Feature.Moments.Label.PostRemovedBody,"Paylaştığın An, Topluluk Standartlarımıza aykırı."
+Feature.Moments.Label.PostedOnDate,{date} tarihinde paylaşıldı
 Feature.Moments.Label.PublishingRodeoBody,Bu işlem pek uzun sürmez.
 Feature.Moments.Label.Reactions,Tepkiler
 Feature.Moments.Label.ReportReason.BreaksRules,Bu paylaşım kurallara aykırı
@@ -4115,7 +4121,7 @@ Feature.Parents.Message.TooManyAttemptAskParent,Çok fazla girişimde bulunuldu.
 Feature.Parents.Message.TooManyAttempts,Çok fazla girişimde bulunuldu. Daha sonra tekrar deneyin.
 Feature.Parents.Title.EnterParentEmailV2,Ebeveyn e-postası gir
 Feature.Parents.Title.SomethingWentWrong,
-Feature.PlayerSearchResults.Action.AddFriend,Arkadaş ekle
+Feature.PlayerSearchResults.Action.AddFriend,
 Feature.PlayerSearchResults.Label.FromSearch,Aramadan
 Feature.PlayerSearchResults.Label.NewUsername,Yeni kullanıcı adı
 Feature.PlayerSearchResults.Label.Previously,Önceki Adı
@@ -4148,7 +4154,7 @@ Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,Profil Bağlantısını Kopyala
 Feature.Profile.Action.CreateInBuild,İnşa Et'te oluştur
 Feature.Profile.Action.EditAppearance,Görünümü düzenle
-Feature.Profile.Action.EditAvatar,Avatarı düzenle
+Feature.Profile.Action.EditAvatar,
 Feature.Profile.Action.EditBackground,Arka planı düzenle
 Feature.Profile.Action.EditEmotes,İfadeleri düzenle
 Feature.Profile.Action.EditLook,

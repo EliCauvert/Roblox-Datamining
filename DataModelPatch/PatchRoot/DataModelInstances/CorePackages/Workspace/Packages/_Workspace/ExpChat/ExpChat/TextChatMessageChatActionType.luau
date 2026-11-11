@@ -1,1 +1,0 @@
-﻿return { Unknown = "Unknown", Summary = "Summary" }

@@ -4,7 +4,7 @@ local ExpChatSharedModule = require(Parent.ExpChatShared)
 local GetChannelTabsStoreModule = require(ExpChat.Stores.GetChannelTabsStore)
 local FFlagExpChatUseChannelTabsStore = require(Parent.SharedFlags).FFlagExpChatUseChannelTabsStore
 
-return function(p1): boolean
+return function(p1, p2): boolean
 	-- upvalues: ExpChatSharedModule (copy), FFlagExpChatUseChannelTabsStore (copy), GetChannelTabsStoreModule (copy)
 	local Store = ExpChatSharedModule.context.store
 	
@@ -20,7 +20,7 @@ return function(p1): boolean
 		if ChannelTabsStoreModule.getChannelTabsState(false).allChannelTabs[p1] == nil then
 			return false
 		else
-			ChannelTabsStoreModule.setTargetChannel(p1, false)
+			ChannelTabsStoreModule.setTargetChannel(p1, false, p2)
 			
 			return true
 		end

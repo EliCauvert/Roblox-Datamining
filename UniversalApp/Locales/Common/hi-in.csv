@@ -203,6 +203,7 @@ Authentication.AccountSwitch.Action.Continue,
 Authentication.AccountSwitch.Action.CreateNewAccount,नया अकाउंट बनाएँ
 Authentication.AccountSwitch.Action.LogoutAllAccounts,सभी अकाउंट से लॉग आउट करें
 Authentication.AccountSwitch.Action.RemoveAllAccounts,सभी अकाउंट हटाने हैं?
+Authentication.AccountSwitch.Action.SignIn,साइन-इन करें
 Authentication.AccountSwitch.Action.SignInToExistingAccount,मौजूदा अकाउंट में साइन इन करें
 Authentication.AccountSwitch.Action.SwitchAccount,अकाउंट बदलें
 Authentication.AccountSwitch.Description.AccountLimit.2,"आपकी अकाउंट लिमिट पूरी हो गई है. नया अकाउंट जोड़ने के लिए, पहले किसी मौजूदा अकाउंट को हटाना होगा."
@@ -212,6 +213,8 @@ Authentication.AccountSwitch.Description.LogoutConfirmation,"नया अका
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,"बाद में, फिर से कोशिश करें"
 Authentication.AccountSwitch.Description.RemoveAllAccounts,"साइन आउट करने के बाद, इस डिवाइस से सभी अकाउंट हटा दिए जाएँगे."
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,"ऐसा करने पर, आपको यह अकाउंट इस डिवाइस पर तब तक नहीं दिखेगा, जब तक कि आप फिर से साइन इन न करें. आपको लैंडिंग पेज पर वापस ले जाया जाएगा."
+Authentication.AccountSwitch.Description.SomethingWentWrongSignInAgain,कुछ गड़बड़ी हुई. फिर से साइन-इन करें.
+Authentication.AccountSwitch.Description.StaleSessionSignInAgain,आपने काफ़ी समय से यहाँ इस अकाउंट का इस्तेमाल नहीं किया है. फिर से साइन-इन करें.
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,सीधे लॉग इन करके देखें
 Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,अकाउंट स्विच नहीं किया जा सकता
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
@@ -305,7 +308,7 @@ Authentication.Login.Action.Save,सेव करें
 Authentication.Login.Action.SendCodeSentenceCase,कोड भेजें
 Authentication.Login.Action.SendVerificationEmail,वेरिफ़िकेशन ईमेल भेजें
 Authentication.Login.Action.SignIn,साइन इन करें
-Authentication.Login.Action.SignInSentenceCase,साइन-इन करें
+Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,पास-की का इस्तेमाल करें
 Authentication.Login.Action.UsernameAndPassword,यूज़रनेम और पासवर्ड
@@ -1579,7 +1582,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,"लोगों को �
 Feature.AddFriends.Label.ConnectWithContacts,कॉन्टैक्ट्स को इनवाइट करें या Roblox पर पहले से मौजूद फ़्रेंड्स से कनेक्ट हों!
 Feature.AddFriends.Label.ContactsTile,कॉन्टैक्ट्स
 Feature.AddFriends.Label.DeclineAllBackgrounded,सभी फ़्रेंड रिक्वेस्ट को इग्नोर किया जा रहा है. इसमें एक मिनट लग सकता है.
-Feature.AddFriends.Label.EmptyState.FriendsRename,आपको Roblox किसके साथ एक्सप्लोर करना है? Roblox पर ज़्यादा मज़ा करने के लिए फ़्रेंड्स जोड़ें!
 Feature.AddFriends.Label.EmptyStatePrompt,"आप Roblox को किसके साथ एक्सप्लोर करेंगे? लोगों को जोड़ने के लिए सर्च करें या उन फ़्रेंड्स से कनेक्ट हों, जिन्हें आप पहले से जानते हैं!"
 Feature.AddFriends.Label.FriendRequests,फ़्रेंड रिक्वेस्ट
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,लोगों को सर्च करें
@@ -1587,16 +1589,13 @@ Feature.AddFriends.Label.MyQrCode,मेरा QR कोड
 Feature.AddFriends.Label.QRCodeTitle,
 Feature.AddFriends.Label.SchoolTile,क्लासमेट
 Feature.AddFriends.Label.SearchForFriendsPrompt,"लोगों को उनके यूज़रनेम या डिसप्ले नाम से सर्च करके, उन्हें Roblox पर ढूँढे."
-Feature.AddFriends.Label.ShareQRCodeAddConnection,"अपनी जान-पहचान के लोगों को जोड़ने के लिए, अपना QR कोड शेयर करें"
-Feature.AddFriends.Label.SyncContactsInvitePeople,"फ़्रेंड्स को खोजने और इनवाइट करने के लिए, कॉन्टेक्ट्स को सिंक करें!"
-Feature.AddFriends.Label.SyncWithContacts,
+Feature.AddFriends.Label.SyncWithContacts,"फ़्रेंड्स को खोजने और इनवाइट करने के लिए, कॉन्टेक्ट्स को सिंक करें!"
 Feature.AddFriends.Label.TrustedFriendRequests,भरोसेमंद फ़्रेंड रिक्वेस्ट्स
 Feature.AddFriends.Text.EmptyState.FriendsRename,आपको Roblox किसके साथ एक्सप्लोर करना है?{lineBreak}Roblox पर ज़्यादा मज़ा करने के लिए कनेक्शन जोड़ें!
 Feature.AddFriends.Title.AddFriendsToolTip,Roblox का असली मज़ा फ़्रेंड्स के साथ है!
 Feature.AddFriends.Title.AddFriendsTooltipTitle,Roblox का असली मज़ा फ़्रेंड्स के साथ!
 Feature.AddFriends.Title.CameraPermission,कैमरे की परमिशन
 Feature.AddFriends.Title.ConnectWithContacts,कॉन्टैक्ट्स से जोड़ें
-Feature.AddFriends.Title.ShareQRCode,QR कोड से जोड़ें
 Feature.AgeGuidelines.DisplayName.StrongLanguage,आपत्तिजनक भाषा
 Feature.AgeGuidelines.Label.CreatorEnabled,क्रिएटर ने चालू किए हैं
 Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect,ज़्यादा कॉन्टेंट और फ़ीचर्स अनलॉक करें.
@@ -1709,6 +1708,7 @@ Feature.AppealsPortal.Label.Location,
 Feature.AppealsPortal.Label.LookDescription,शेयर किए गए अवतार का विवरण
 Feature.AppealsPortal.Label.LookId,शेयर की गई अवतार ID
 Feature.AppealsPortal.Label.LookName,शेयर किया गया अवतार का नाम
+Feature.AppealsPortal.Label.MomentDescription,Moment का विवरण
 Feature.AppealsPortal.Label.PlaceIDPrompt,प्लेस ID क्या है?
 Feature.AppealsPortal.Label.PlaceId,प्लेस ID
 Feature.AppealsPortal.Label.PlaceName,प्लेस का नाम
@@ -2166,6 +2166,8 @@ Feature.Avatar.Label.Shoes,जूते
 Feature.Avatar.Label.Shorts,शॉर्ट्स
 Feature.Avatar.Label.Shoulder,कंधा
 Feature.Avatar.Label.Skin,स्किन
+Feature.Avatar.Label.Spawn,स्पॉन
+Feature.Avatar.Label.SpawnEffects,स्पॉन इफ़ेक्ट्स
 Feature.Avatar.Label.Sweater,स्वेटर
 Feature.Avatar.Label.Sweaters,
 Feature.Avatar.Label.Swim,स्विम
@@ -2988,6 +2990,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,मेरे फ़्रेंड्�
 Feature.BuyRobux.Label.PeopleWithCount,लोग ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Gallery,गैलरी
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,'कस्टमाइज़ करें' पर जाएँ
@@ -3478,7 +3481,6 @@ Feature.Chat.Label.SearchForFriendsAndChat,बातचीत सर्च क�
 Feature.Chat.Label.SearchFriends,फ़्रेंड्स के लिए सर्च करें
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.Sent,भेज दिया गया
-Feature.Chat.Label.SnoozeChatNotifications,इन-एक्सपीरिएंस चैट नोटिफ़िकेशन को म्यूट करें :
 Feature.Chat.Label.SnoozePartyNotifications,इन एक्सपीरिएंस पार्टी नोटिफ़िकेशन को म्यूट करें:
 Feature.Chat.Label.SwipeToReplyTooltip,जवाब देने के लिए स्वाइप करें
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}दिन
@@ -3535,7 +3537,6 @@ Feature.Chat.Response.NetworkError,नेटवर्क संबंधी ग�
 Feature.Chat.Response.Sending,भेजा जा रहा है
 Feature.Chat.RobloxConnectUnavailableWithUser,"इस समय, इस यूज़र के लिए Roblox Connect की सुविधा उपलब्ध नहीं है."
 Feature.Chat.Text.NoFriends,आपके पास अभी तक कोई फ़्रेंड नहीं है. Roblox पर शुरू करने के लिए फ़्रेंड्स को खोजें और जोड़ें.
-Feature.Chat.Title.MuteChatNotifications,गेमप्ले के दौरान फ़्रेंड्स से मिलने वाले चैट नोटिफ़िकेशन म्यूट करें
 Feature.Chat.Title.NewChat,नई चैट
 Feature.Chat.Toast.Error.InvalidUserSelected,इस लिस्ट में एक या इससे ज़्यादा लोगों को जोड़ा नहीं जा सकता
 Feature.CommunityLinks.Description.CommunityDefault,"अनाउंसमेंट्स के साथ-साथ और कई चीज़ें देखने के लिए, {experienceName} की आफ़िशियल Guilded कम्यूनिटी जॉइन करें!"
@@ -4431,6 +4432,7 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,फ़ोटो
 Feature.Moments.Label.PostDeleted,Moment डिलीट किया गया
 Feature.Moments.Label.PostRemovedBody,आपका पोस्ट किया गया Moment हमारे कम्यूनिटी स्टैंडर्ड के मुताबिक नहीं है.
+Feature.Moments.Label.PostedOnDate,{date} को पोस्ट किया गया
 Feature.Moments.Label.PublishingRodeoBody,इसमें ज़्यादा समय नहीं लगना चाहिए.
 Feature.Moments.Label.Reactions,प्रतिक्रियाएँ
 Feature.Moments.Label.ReportReason.BreaksRules,इस पोस्ट से नियमों का उल्लंघन हुआ है
@@ -4764,6 +4766,9 @@ Feature.NotApproved.Label.LatestActivity,हमारी रिव्यू क�
 Feature.NotApproved.Label.LoadingImage,इमेज लोड हो रही है
 Feature.NotApproved.Label.LogoutProgress,लॉग आउट हो रहा है
 Feature.NotApproved.Label.MenuContent,मेन्यू का कॉन्टेंट
+Feature.NotApproved.Label.MessageToUser.AltConsequence.Reset,"यह अकाउंट उस अकाउंट (@{account} पर रीसेट) से लिंक किया हुआ है, जिसे हमारे कम्यूनिटी स्टैंडर्ड का गंभीर उल्लंघन करने पर बैन किया गया है. सिर्फ़ बैन किया गया अकाउंट ही उस उल्लंघन के खिलाफ़ अपील कर सकता है. 
+
+अगर दोनों अकाउंट एक-दूसरे से लिंक नहीं होने चाहिए, तो इस अकाउंट का इस्तेमाल करके 'उल्लंघन और अपील' पेज से अपील भेजें."
 Feature.NotApproved.Label.MessageToUser.AltConsequence.V2,यह अकाउंट उस अकाउंट से लिंक है जिसे हमारे कम्यूनिटी स्टैंडर्ड के गंभीर उल्लंघन के लिए बैन किया गया है. बैन किए गए अकाउंट के ज़रिए इस उल्लंघन के खिलाफ़ अपील किया जा सकता है.
 Feature.NotApproved.Label.MessageToUser.AltConsequence.V3,"यह अकाउंट उस अकाउंट (@{account}) से लिंक्ड है, जिसे हमारे कम्यूनिटी स्टैंडर्ड के गंभीर उल्लंघन के लिए बैन किया गया है. सिर्फ़ बैन किया गया अकाउंट ही उस उल्लंघन के खिलाफ़ अपील कर सकता है. 
 

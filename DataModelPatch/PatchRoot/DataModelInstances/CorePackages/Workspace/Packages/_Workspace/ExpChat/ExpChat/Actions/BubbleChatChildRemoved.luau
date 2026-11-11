@@ -1,3 +1,0 @@
-﻿return require(script:FindFirstAncestor("ExpChat").Parent.Rodux).makeActionCreator(script.Name, function(ChildName)
-	return { childName = ChildName }
-end)

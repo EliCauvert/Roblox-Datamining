@@ -1,1 +1,0 @@
-﻿return { HomeConfigKey = "home-sdui-v2" }

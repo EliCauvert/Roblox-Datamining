@@ -1,1 +1,0 @@
-﻿require(script:FindFirstAncestor("JestConfigs").Parent.JestGlobals).jest.retryTimes(game:DefineFastInt("JestTestRetryTimes", 2), { logErrorsBeforeRetry = true })

@@ -1,1 +1,0 @@
-﻿return "  # TODO: expand this type to include more metadata, e.g. Enum MediaType.\n  # In the future, this type should support data for videos, selecting\n  # images of different resolution/dpi, etc.\n  type Media {\n    url: String\n  }\n"

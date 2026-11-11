@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("Foundation").Parent.BuilderIcons).getBuilderIconForCurrentPlatform

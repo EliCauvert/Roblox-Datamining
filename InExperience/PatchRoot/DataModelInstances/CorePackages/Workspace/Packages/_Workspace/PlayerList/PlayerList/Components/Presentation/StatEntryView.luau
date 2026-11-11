@@ -85,7 +85,7 @@ return ReactModule.memo(function(p1)
 			}),
 			StatText = ReactModule.createElement("TextLabel", UseMemoResult)
 		}) else ReactModule.createElement("TextLabel", UseMemoResult),
-		DoubleOverLay = if FFlagRemoveNewPlayerListOverlayModule or not p1.doubleOverlay or not p1.overlayStyle then nil else ReactModule.createElement("Frame", {
+		DoubleOverLay = if FFlagRemoveNewPlayerListOverlayModule or (not p1.doubleOverlay or not p1.overlayStyle) then nil else ReactModule.createElement("Frame", {
 			ZIndex = 1,
 			BorderSizePixel = 0,
 			Size = UDim2.new(1, 0, 1, 0),

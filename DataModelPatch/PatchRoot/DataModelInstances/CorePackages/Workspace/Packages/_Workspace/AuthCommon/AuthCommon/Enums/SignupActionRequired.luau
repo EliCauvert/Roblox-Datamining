@@ -1,1 +1,0 @@
-﻿return { Auth = "auth" }

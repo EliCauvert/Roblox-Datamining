@@ -1,1 +1,0 @@
-﻿return (require(script:FindFirstAncestor("AvatarExperienceTimedOptions").Parent.React).createContext(false))

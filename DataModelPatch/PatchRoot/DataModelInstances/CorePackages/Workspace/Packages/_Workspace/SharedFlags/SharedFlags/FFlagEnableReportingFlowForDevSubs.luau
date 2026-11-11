@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnableReportingFlowForDevSubs2", false)

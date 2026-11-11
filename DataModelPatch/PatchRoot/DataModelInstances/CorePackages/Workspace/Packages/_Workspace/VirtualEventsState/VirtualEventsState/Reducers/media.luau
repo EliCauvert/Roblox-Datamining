@@ -1,1 +1,0 @@
-﻿return require(script.Parent["media.impl"])(require(script:FindFirstAncestor("VirtualEventsState").network).NetworkingGames)

@@ -1,1 +1,0 @@
-﻿return { Avatar = 8, Screenshot = 0, Video = 9 }

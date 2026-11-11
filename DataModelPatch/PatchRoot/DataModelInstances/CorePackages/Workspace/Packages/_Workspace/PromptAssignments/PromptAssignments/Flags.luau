@@ -1,5 +1,0 @@
-﻿return {
-	GetFFlagLuaAppAuthenticatorUpsellPopUpEnabled = require(script.GetFFlagLuaAppAuthenticatorUpsellPopUpEnabled),
-	GetFFlagLuaAppBroaderAuthenticatorUpsellPopUpEnabled = require(script.GetFFlagLuaAppBroaderAuthenticatorUpsellPopUpEnabled),
-	GetFFlagLuaAppAccountRestoresPolicyUpsellPopUpEnabled = require(script.GetFFlagLuaAppAccountRestoresPolicyUpsellPopUpEnabled)
-}

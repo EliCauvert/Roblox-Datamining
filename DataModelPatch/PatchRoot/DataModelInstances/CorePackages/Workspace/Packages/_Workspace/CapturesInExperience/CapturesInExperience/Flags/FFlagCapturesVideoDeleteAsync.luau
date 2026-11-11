@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("CapturesVideoDeleteAsync", false) and game:GetEngineFeature("CaptureStorageMutex")

@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("ProfilePlatformAddCurrentlyPlaying_V4", false)

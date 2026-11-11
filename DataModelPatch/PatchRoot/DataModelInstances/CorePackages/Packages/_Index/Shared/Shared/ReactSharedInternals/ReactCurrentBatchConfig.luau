@@ -1,1 +1,0 @@
-﻿return { transition = 0 }

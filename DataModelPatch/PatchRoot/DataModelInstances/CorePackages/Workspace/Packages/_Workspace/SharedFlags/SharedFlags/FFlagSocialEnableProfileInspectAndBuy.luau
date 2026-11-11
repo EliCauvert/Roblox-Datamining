@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("SocialEnableProfileInspectAndBuy_5", false) and game:GetEngineFeature("ProfileInspectAndBuyImpressionCountStorageKey")

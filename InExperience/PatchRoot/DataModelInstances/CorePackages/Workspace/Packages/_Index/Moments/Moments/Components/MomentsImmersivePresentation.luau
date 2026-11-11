@@ -25,6 +25,7 @@ local UseCreationEntryModule = require(Moments.Hooks.useCreationEntry)
 local UseUploadHostModule = require(Moments.Hooks.useUploadHost)
 local LogCreateIntentModule = require(Moments.Analytics.logCreateIntent)
 local LogMomentsLayerExposureFunction = MomentsCommonModule.Utils.logMomentsLayerExposure
+local FFlagMomentsCreateAvatarPosts = SharedFlagsModule.FFlagMomentsCreateAvatarPosts
 local FFlagMomentsFlushDwellBeforeNavigationModule = require(Moments.Flags.FFlagMomentsFlushDwellBeforeNavigation)
 local NavigationDestinationTypeModule = require(Moments.Enums.NavigationDestinationType)
 local FFlagMomentsNavigationEventModule = require(Moments.Flags.FFlagMomentsNavigationEvent)
@@ -58,7 +59,7 @@ local function PushedFeedSafeAreaProvider(p1)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), CreateMomentsStoreModule (copy), FFlagEnableArgus (copy), CreateSignalTrackerFunction (copy), FFlagMomentsOptimisticProfilePending (copy), UseCreationEntryModule (copy), UseUploadHostModule (copy), LogCreateIntentModule (copy), FunnelEventNames (copy), FFlagMomentsCreationFeatureGate (copy), UseMomentsGatingFunction (copy), ImmersiveFeedKind (copy), GetDeepLinkStoreModule (copy), CreateUserMomentsFeedSourceModule (copy), IsStudioModule (copy), GetFFlagArgusStudioMockFeedModule (copy), CreateMockFeedSourceFunction (copy), CreateMomentsFeedSourceModule (copy), CreateRecommendationTelemetryFunction (copy), LogMomentsLayerExposureFunction (copy), FStringMomentsExperienceJoinActionTextIxpLayerModule (copy), Moments (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Analytics (copy), UseNavigationFocusFunction (copy), UseSignalStateFunction (copy), FeedPlaybackSuspension (copy), GetMomentsPreferencesStoreModule (copy), ReportModalCovering (copy), FFlagMomentsFlushDwellBeforeNavigationModule (copy), UseNavigationFunction (copy), RoactNavigationModule (copy), FFlagMomentsNavigationEventModule (copy), NavigationDestinationTypeModule (copy), MomentsImmersiveNavigationMenu (copy), MomentsBackHeaderModule (copy), MomentsFeedSurfaceModule (copy), PushedFeedSafeAreaProvider (copy), View (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), ConstantsModule (copy), CreationFlowScreen (copy), FTUXEducationScreenModule (copy), MomentsHostShellModule (copy), FFlagMomentsAvatarLookTryOn (copy)
+	-- upvalues: ReactModule (copy), CreateMomentsStoreModule (copy), FFlagEnableArgus (copy), CreateSignalTrackerFunction (copy), FFlagMomentsOptimisticProfilePending (copy), UseCreationEntryModule (copy), UseUploadHostModule (copy), LogCreateIntentModule (copy), FunnelEventNames (copy), FFlagMomentsCreationFeatureGate (copy), UseMomentsGatingFunction (copy), ImmersiveFeedKind (copy), GetDeepLinkStoreModule (copy), CreateUserMomentsFeedSourceModule (copy), IsStudioModule (copy), GetFFlagArgusStudioMockFeedModule (copy), CreateMockFeedSourceFunction (copy), CreateMomentsFeedSourceModule (copy), CreateRecommendationTelemetryFunction (copy), LogMomentsLayerExposureFunction (copy), FStringMomentsExperienceJoinActionTextIxpLayerModule (copy), Moments (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Analytics (copy), UseNavigationFocusFunction (copy), UseSignalStateFunction (copy), FeedPlaybackSuspension (copy), GetMomentsPreferencesStoreModule (copy), ReportModalCovering (copy), FFlagMomentsCreateAvatarPosts (copy), FFlagMomentsNavigationEventModule (copy), NavigationDestinationTypeModule (copy), FFlagMomentsFlushDwellBeforeNavigationModule (copy), UseNavigationFunction (copy), RoactNavigationModule (copy), MomentsImmersiveNavigationMenu (copy), MomentsBackHeaderModule (copy), MomentsFeedSurfaceModule (copy), PushedFeedSafeAreaProvider (copy), View (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), ConstantsModule (copy), CreationFlowScreen (copy), FTUXEducationScreenModule (copy), MomentsHostShellModule (copy), FFlagMomentsAvatarLookTryOn (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	
@@ -169,7 +170,19 @@ return ReactModule.memo(function(p1)
 			Current.flushView(p2)
 		end
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function(p2)
+	local UseResult2 = if FFlagMomentsCreateAvatarPosts then ReactModule.useCallback(function()
+		-- upvalues: LogCreateIntentModule (upval), FunnelEventNames (upval), FFlagMomentsNavigationEventModule (upval), UseResult1 (copy), NavigationDestinationTypeModule (upval), p1 (copy)
+		LogCreateIntentModule(FunnelEventNames.CreationIntentSource.TopBar)
+		
+		if FFlagMomentsNavigationEventModule then
+			UseResult1(NavigationDestinationTypeModule.Create)
+		end
+		if p1.openAvatarMomentsCreation ~= nil then
+			p1.openAvatarMomentsCreation()
+		end
+	end, { UseResult1, p1.openAvatarMomentsCreation }) else nil
+	local UseResult3 = if FFlagMomentsCreateAvatarPosts and p1.openAvatarMomentsCreation ~= nil then UseResult2 else nil
+	local UseResult4 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult (copy)
 		local Current = UseRefResult.current
 		
@@ -195,20 +208,20 @@ return ReactModule.memo(function(p1)
 		end
 	end, { UseNavigationResult, UseResult1 })
 	local OnBackFunction = p1.onBack
-	local UseResult3 = ReactModule.useCallback(function()
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: FFlagMomentsFlushDwellBeforeNavigationModule (upval), UseResult1 (copy), FFlagMomentsNavigationEventModule (upval), NavigationDestinationTypeModule (upval), OnBackFunction (copy)
 		if FFlagMomentsFlushDwellBeforeNavigationModule then
 			UseResult1(if FFlagMomentsNavigationEventModule then NavigationDestinationTypeModule.Exit else nil)
 		end
 		OnBackFunction()
 	end, { OnBackFunction, UseResult1 })
-	local UseResult4 = ReactModule.useCallback(function()
-		-- upvalues: FireAnalyticsEventFunction (upval), EventNames (upval), UseResult2 (copy), FFlagMomentsNavigationEventModule (upval), NavigationDestinationTypeModule (upval)
+	local UseResult6 = ReactModule.useCallback(function()
+		-- upvalues: FireAnalyticsEventFunction (upval), EventNames (upval), UseResult4 (copy), FFlagMomentsNavigationEventModule (upval), NavigationDestinationTypeModule (upval)
 		FireAnalyticsEventFunction(EventNames.FeedHomeButtonPressed)
-		UseResult2(if FFlagMomentsNavigationEventModule then NavigationDestinationTypeModule.Trending else nil)
-	end, { UseResult2 })
+		UseResult4(if FFlagMomentsNavigationEventModule then NavigationDestinationTypeModule.Trending else nil)
+	end, { UseResult4 })
 	local OpenOwnMomentsFunction = p1.openOwnMoments
-	local UseResult5 = ReactModule.useCallback(function()
+	local UseResult7 = ReactModule.useCallback(function()
 		-- upvalues: FireAnalyticsEventFunction (upval), EventNames (upval), OpenOwnMomentsFunction (copy), FFlagMomentsFlushDwellBeforeNavigationModule (upval), UseResult1 (copy), FFlagMomentsNavigationEventModule (upval), NavigationDestinationTypeModule (upval)
 		FireAnalyticsEventFunction(EventNames.MyCreationButtonPressed)
 		
@@ -228,16 +241,18 @@ return ReactModule.memo(function(p1)
 		playbackActive = NoIsCreating,
 		initialIndex = InitialIndex,
 		header = ReactModule.useMemo(function()
-			-- upvalues: ReactModule (upval), MomentsBackHeaderModule (upval), UseResult3 (copy), NoFFlagMomentsCreationFeatureGate (copy), UseResult (copy), IsFeedKindMatch (copy), UseResult4 (copy), UseResult5 (copy)
+			-- upvalues: ReactModule (upval), MomentsBackHeaderModule (upval), UseResult5 (copy), NoFFlagMomentsCreationFeatureGate (copy), UseResult (copy), FFlagMomentsCreateAvatarPosts (upval), UseResult3 (copy), IsFeedKindMatch (copy), UseResult6 (copy), UseResult7 (copy)
 			return ReactModule.createElement(MomentsBackHeaderModule, {
-				onBack = UseResult3,
+				onBack = UseResult5,
 				onCreatePressed = if NoFFlagMomentsCreationFeatureGate then UseResult else nil,
-				onNavigateToTrending = if IsFeedKindMatch then UseResult4 else nil,
-				onNavigateToMyMoments = if IsFeedKindMatch then UseResult5 else nil
+				onCreateAvatarMomentPressed = if FFlagMomentsCreateAvatarPosts then UseResult3 else nil,
+				onNavigateToTrending = if IsFeedKindMatch then UseResult6 else nil,
+				onNavigateToMyMoments = if IsFeedKindMatch then UseResult7 else nil
 			})
 		end, {
-			UseResult3, NoFFlagMomentsCreationFeatureGate, UseResult, IsFeedKindMatch,
-			UseResult4, UseResult5
+			UseResult5, NoFFlagMomentsCreationFeatureGate, UseResult,
+			if FFlagMomentsCreateAvatarPosts then UseResult3 else nil, IsFeedKindMatch,
+			UseResult6, UseResult7
 		}),
 		controllerRef = UseRefResult
 	})))

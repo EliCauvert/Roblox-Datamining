@@ -1,1 +1,0 @@
-﻿return { Email = 2, Phone = 3 }

@@ -10,7 +10,6 @@ local FFlagExpChatPresetChatEnabled = ExpChatSharedModule.Flags.FFlagExpChatPres
 local GetFFlagTextChatEnableUniverseChatTabsFunction = ExpChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
 local FFlagExpChatUseChatConfigStore = SharedFlagsModule.FFlagExpChatUseChatConfigStore
 local FFlagExpChatUseChannelTabsStore = SharedFlagsModule.FFlagExpChatUseChannelTabsStore
-local FFlagExpChatEnableFriendsTab = SharedFlagsModule.FFlagExpChatEnableFriendsTab
 
 local function _(p1, p2)
 	-- upvalues: GetFFlagTextChatEnableUniverseChatTabsFunction (copy)
@@ -32,12 +31,12 @@ local _ = function(p1)
 end
 
 return function(p1, p2)
-	-- upvalues: FFlagExpChatUseChannelTabsStore (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), SelectSelectedTabNameModule (copy), FFlagExpChatEnableFriendsTab (copy), FriendsChatTabNameModule (copy), FFlagExpChatFixInputBarOrphanBorderModule (copy), FFlagExpChatUseChatConfigStore (copy), FFlagExpChatPresetChatEnabled (copy), FFlagExpChatNewInputBarModule (copy)
+	-- upvalues: FFlagExpChatUseChannelTabsStore (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), SelectSelectedTabNameModule (copy), FriendsChatTabNameModule (copy), FFlagExpChatFixInputBarOrphanBorderModule (copy), FFlagExpChatUseChatConfigStore (copy), FFlagExpChatPresetChatEnabled (copy), FFlagExpChatNewInputBarModule (copy)
 	local ChannelTabs = if FFlagExpChatUseChannelTabsStore then nil else p1.ChannelTabs
 	local SelectSelectedTabNameModuleResult = if FFlagExpChatUseChannelTabsStore or not GetFFlagTextChatEnableUniverseChatTabsFunction() then nil else SelectSelectedTabNameModule(p1)
 	local IsIsGlobalTabSelected: boolean = if FFlagExpChatUseChannelTabsStore then p2.isGlobalTabSelected == true else SelectSelectedTabNameModuleResult == "RBXGlobal"
 	local HasGlobalChannelTab = if FFlagExpChatUseChannelTabsStore or not GetFFlagTextChatEnableUniverseChatTabsFunction() then if FFlagExpChatUseChannelTabsStore then p2.hasGlobalChannelTab else false else ChannelTabs ~= nil and (ChannelTabs.allChannelTabs ~= nil and ChannelTabs.allChannelTabs.RBXGlobal ~= nil)
-	local HasAllChannelTab = if not FFlagExpChatUseChannelTabsStore and FFlagExpChatEnableFriendsTab then ChannelTabs ~= nil and (ChannelTabs.allChannelTabs ~= nil and ChannelTabs.allChannelTabs[FriendsChatTabNameModule] ~= nil) elseif FFlagExpChatUseChannelTabsStore then p2.hasFriendsChannelTab else false
+	local HasAllChannelTab = if not FFlagExpChatUseChannelTabsStore then ChannelTabs ~= nil and (ChannelTabs.allChannelTabs ~= nil and ChannelTabs.allChannelTabs[FriendsChatTabNameModule] ~= nil) elseif FFlagExpChatUseChannelTabsStore then p2.hasFriendsChannelTab else false
 	local SelectedTabType = nil
 	
 	if FFlagExpChatUseChannelTabsStore then
@@ -52,7 +51,7 @@ return function(p1, p2)
 			SelectedTabType = AllChannelTab and AllChannelTab.Type or nil
 		end
 	end
-	local IsFriendsChat: boolean = FFlagExpChatEnableFriendsTab and SelectedTabType == "FriendsChat"
+	local IsFriendsChat = SelectedTabType == "FriendsChat"
 	local NoIsFriendsChat = not IsFriendsChat
 	local t = {}
 	local NoIsFriendsChat1 = nil

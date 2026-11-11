@@ -1038,11 +1038,11 @@ function VirtualizedList.render(p7)
 						LargestDelta -= 1
 						continue
 					end
-					local FrameMetricsApprox1 = p7._getFrameMetricsApprox(v6)
-					local FrameMetricsApprox2 = p7._getFrameMetricsApprox(LargestDelta)
+					local FrameMetricsApprox = p7._getFrameMetricsApprox(v6)
+					local FrameMetricsApprox1 = p7._getFrameMetricsApprox(LargestDelta)
 					local InitialScrollIndex1 = p7.props.initialScrollIndex
 					local IsNotInitialScrollIndexMatch: boolean = InitialScrollIndex1 ~= nil and InitialScrollIndex1 ~= 1
-					local OffsetDelta = FrameMetricsApprox2.offset - FrameMetricsApprox1.offset - (if IsNotInitialScrollIndexMatch then 0 else FrameMetricsApprox1.length)
+					local OffsetDelta = FrameMetricsApprox1.offset - FrameMetricsApprox.offset - (if IsNotInitialScrollIndexMatch then 0 else FrameMetricsApprox.length)
 					table.insert(List, ReactModule.createElement(ViewModule, {
 						key = "$sticky_lead",
 						Name = "$sticky_lead",
@@ -1051,7 +1051,7 @@ function VirtualizedList.render(p7)
 						}
 					}))
 					p7:_pushCells(List, StickyHeaderIndices, NewSet, LargestDelta, LargestDelta, HorizontallyInverted)
-					local NewOffset = p7._getFrameMetricsApprox(First).offset - FrameMetricsApprox2.offset + FrameMetricsApprox2.length
+					local NewOffset = p7._getFrameMetricsApprox(First).offset - FrameMetricsApprox1.offset + FrameMetricsApprox1.length
 					table.insert(List, ReactModule.createElement(ViewModule, {
 						key = "$sticky_trail",
 						Name = "$sticky_trail",
@@ -1064,8 +1064,8 @@ function VirtualizedList.render(p7)
 				end
 			end
 			if not Flag1 then
-				local FrameMetricsApprox3 = p7._getFrameMetricsApprox(v6)
-				local OffsetDelta = p7._getFrameMetricsApprox(First).offset - (FrameMetricsApprox3.offset + FrameMetricsApprox3.length)
+				local FrameMetricsApprox = p7._getFrameMetricsApprox(v6)
+				local OffsetDelta = p7._getFrameMetricsApprox(First).offset - (FrameMetricsApprox.offset + FrameMetricsApprox.length)
 				table.insert(List, ReactModule.createElement(ViewModule, {
 					key = "$lead_spacer",
 					Name = "$lead_spacer",
@@ -1083,9 +1083,9 @@ function VirtualizedList.render(p7)
 			p7._hasWarned.keys = true
 		end
 		if not IsVirtualizationDisabled and Last < ItemCount then
-			local FrameMetricsApprox5 = p7._getFrameMetricsApprox(Last)
-			local FrameMetricsApprox6 = p7._getFrameMetricsApprox(if p7.props.getItemLayout then ItemCount else math.min(ItemCount, p7._highestMeasuredFrameIndex))
-			local OffsetDelta = FrameMetricsApprox6.offset + FrameMetricsApprox6.length - (FrameMetricsApprox5.offset + FrameMetricsApprox5.length)
+			local FrameMetricsApprox = p7._getFrameMetricsApprox(Last)
+			local FrameMetricsApprox2 = p7._getFrameMetricsApprox(if p7.props.getItemLayout then ItemCount else math.min(ItemCount, p7._highestMeasuredFrameIndex))
+			local OffsetDelta = FrameMetricsApprox2.offset + FrameMetricsApprox2.length - (FrameMetricsApprox.offset + FrameMetricsApprox.length)
 			table.insert(List, ReactModule.createElement(ViewModule, {
 				key = "$tail_spacer",
 				Name = "$tail_spacer",
@@ -1131,26 +1131,26 @@ function VirtualizedList.render(p7)
 			p7._canvasSize = if p7.props.horizontal then UDim2.new(0, p7._invertedCanvasLength, 1, 0) else UDim2.new(1, 0, 0, p7._invertedCanvasLength)
 		else
 			local Current = p7:getScrollRef()._nativeRef.current
-			local CanvasPosition = Current.CanvasPosition
-			local FrameMetricsApprox4 = p7._getFrameMetricsApprox((math.min(p7._highestMeasuredFrameIndex, ItemCount)))
-			local NewOffset = FrameMetricsApprox4.offset + FrameMetricsApprox4.length
+			local CanvasPosition1 = Current.CanvasPosition
+			local FrameMetricsApprox = p7._getFrameMetricsApprox((math.min(p7._highestMeasuredFrameIndex, ItemCount)))
+			local NewOffset = FrameMetricsApprox.offset + FrameMetricsApprox.length
 			local IsInvertedCanvasLengthBelow: boolean = if p7.props.optimizeInvertedCanvasResize then p7._invertedCanvasLength - p7._footerLength < NewOffset else NewOffset ~= p7._invertedCanvasLength - p7._footerLength
 			
 			if ItemCount <= p7._highestMeasuredFrameIndex and NewOffset ~= p7._invertedCanvasLength - p7._footerLength then
-				local NewOffsetDelta = NewOffset + p7._footerLength - p7._invertedCanvasLength
+				local FooterLengthDelta = NewOffset + p7._footerLength - p7._invertedCanvasLength
 				p7._invertedCanvasLength = NewOffset + p7._footerLength
 				local _UDim2: UDim2 = if p7.props.horizontal then UDim2.new(0, p7._invertedCanvasLength, 1, 0) else UDim2.new(1, 0, 0, p7._invertedCanvasLength)
 				Current.CanvasSize = _UDim2
-				p7._canvasPosition = if p7.props.horizontal then Vector2.new(CanvasPosition.X + NewOffsetDelta, CanvasPosition.Y) else Vector2.new(CanvasPosition.X, CanvasPosition.Y + NewOffsetDelta)
+				p7._canvasPosition = if p7.props.horizontal then Vector2.new(CanvasPosition1.X + FooterLengthDelta, CanvasPosition1.Y) else Vector2.new(CanvasPosition1.X, CanvasPosition1.Y + FooterLengthDelta)
 				p7._canvasSize = _UDim2
 			elseif IsInvertedCanvasLengthBelow and p7.state.scrollPositionDelta == 0 then
 				local WindowSize = p7.props.windowSize
-				local NewOffset1 = FrameMetricsApprox4.offset + p7._scrollMetrics.visibleLength + p7._scrollMetrics.visibleLength * (if WindowSize == nil then 21 else WindowSize) * 0.5
+				local NewOffset1 = FrameMetricsApprox.offset + p7._scrollMetrics.visibleLength + p7._scrollMetrics.visibleLength * (if WindowSize == nil then 21 else WindowSize) * 0.5
 				local NewOffsetDelta = NewOffset1 - p7._invertedCanvasLength
 				p7._invertedCanvasLength = NewOffset1
 				local _UDim2: UDim2 = if p7.props.horizontal then UDim2.new(0, p7._invertedCanvasLength, 1, 0) else UDim2.new(1, 0, 0, p7._invertedCanvasLength)
 				Current.CanvasSize = _UDim2
-				Current.CanvasPosition = if p7.props.horizontal then Vector2.new(CanvasPosition.X + NewOffsetDelta, CanvasPosition.Y) else Vector2.new(CanvasPosition.X, CanvasPosition.Y + NewOffsetDelta)
+				Current.CanvasPosition = if p7.props.horizontal then Vector2.new(CanvasPosition1.X + NewOffsetDelta, CanvasPosition1.Y) else Vector2.new(CanvasPosition1.X, CanvasPosition1.Y + NewOffsetDelta)
 				p7._canvasPosition = Current.CanvasPosition
 				p7._canvasSize = _UDim2
 			end
@@ -1341,7 +1341,7 @@ function VirtualizedList._onCellLayout(p8, Frame: Frame, KeyExtractorResult, Ind
 			p8._highestMeasuredFrameIndex = math.max(p8._highestMeasuredFrameIndex, Index)
 			p8:_scheduleCellsToRenderUpdate()
 			
-			if p8.props.inverted and not p8.props.getItemLayout and p8.state.last == p8.props.getItemCount(p8.props.data) and p8._highestMeasuredFrameIndex == p8.state.last then
+			if p8.props.inverted and not p8.props.getItemLayout and (p8.state.last == p8.props.getItemCount(p8.props.data) and p8._highestMeasuredFrameIndex == p8.state.last) then
 				p8:forceUpdate()
 			end
 		end

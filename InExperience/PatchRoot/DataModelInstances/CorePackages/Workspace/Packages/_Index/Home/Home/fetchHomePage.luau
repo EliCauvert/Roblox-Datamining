@@ -340,20 +340,20 @@ local function fetchHomePage(PageTimer, p3)
 			}))
 		end
 	end
-	local Promise = SduiApiStore.fetchIfNeeded(HomePageRequestConfig, if RegisterResult then true else ForceRefresh)
+	local IfNeeded = SduiApiStore.fetchIfNeeded(HomePageRequestConfig, if RegisterResult then true else ForceRefresh)
 	
 	if RegisterResult then
-		return HomePageFocusedFetchUtilsModule.resolve(Promise, RegisterResult), ConfigKey
+		return HomePageFocusedFetchUtilsModule.resolve(IfNeeded, RegisterResult), ConfigKey
 	end
-	if Promise then
-		Promise = Promise:catch(function(_)
+	if IfNeeded then
+		IfNeeded = IfNeeded:catch(function(_)
 			-- upvalues: DiscoveryAvailabilityModule (upval), setHomePageDataStatuses (upval), RetrievalStatus (upval)
 			if DiscoveryAvailabilityModule.Signals.getCacheStore().getHomePageDataSource(false) ~= "Cache" then
 				setHomePageDataStatuses(RetrievalStatus.Failed)
 			end
 		end)
 	end
-	return Promise, ConfigKey
+	return IfNeeded, ConfigKey
 end
 
 return fetchHomePage

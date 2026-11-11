@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("NavigateToSafetyDashboardForAppeals2", false)

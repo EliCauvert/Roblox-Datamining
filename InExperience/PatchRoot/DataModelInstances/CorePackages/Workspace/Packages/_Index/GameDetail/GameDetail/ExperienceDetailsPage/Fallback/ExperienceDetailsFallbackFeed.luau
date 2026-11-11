@@ -15,25 +15,15 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local CompositionTags = require(Parent.AppComposition).CompositionTags
 local ExperienceDetailsFallbackAttributionRowModule = require(script.Parent.ExperienceDetailsFallbackAttributionRow)
 local UseGameInfoModule = require(script.Parent.Parent.useGameInfo)
-local UseGameInfosSelectorFunction = require(Parent.GameInfosRodux).useGameInfosSelector
 local FFlagLuaAppSduiEdpFallbackAttributionFromCache = require(Parent.SharedFlags).FFlagLuaAppSduiEdpFallbackAttributionFromCache
-local FFlagMigrateGameInfoToStore = require(Parent.SharedFlags).FFlagMigrateGameInfoToStore
 
 local function ExperienceDetailsFeedSkeleton(p1)
-	-- upvalues: UseTokensFunction (copy), FFlagLuaAppSduiEdpFallbackAttributionFromCache (copy), FFlagMigrateGameInfoToStore (copy), UseGameInfoModule (copy), UseGameInfosSelectorFunction (copy), ReactModule (copy), View (copy), CompositionTags (copy), ExperienceDetailsFallbackAttributionRowModule (copy), Skeleton (copy), Radius (copy)
+	-- upvalues: UseTokensFunction (copy), FFlagLuaAppSduiEdpFallbackAttributionFromCache (copy), UseGameInfoModule (copy), ReactModule (copy), View (copy), CompositionTags (copy), ExperienceDetailsFallbackAttributionRowModule (copy), Skeleton (copy), Radius (copy)
 	local UniverseId = p1.universeId
 	local UseTokensResult = UseTokensFunction()
 	local IsSmallScreen = p1.isSmallScreen
-	local v1 = nil
-	local v2 = nil
+	local UseGameInfoModuleResult = if FFlagLuaAppSduiEdpFallbackAttributionFromCache then UseGameInfoModule(UniverseId) else nil
 	
-	if FFlagLuaAppSduiEdpFallbackAttributionFromCache then
-		if FFlagMigrateGameInfoToStore then
-			v2 = UseGameInfoModule(UniverseId)
-		else
-			v1 = UseGameInfosSelectorFunction(UniverseId)
-		end
-	end
 	return ReactModule.createElement(View, {
 		testId = "--edp-fallback-feed-skeleton",
 		tag = {
@@ -48,7 +38,7 @@ local function ExperienceDetailsFeedSkeleton(p1)
 		AttributionRow = ReactModule.createElement(ExperienceDetailsFallbackAttributionRowModule, {
 			isLoading = true,
 			universeId = UniverseId,
-			gameName = if FFlagMigrateGameInfoToStore then v2 and v2.name else v1 and v1.name,
+			gameName = UseGameInfoModuleResult and UseGameInfoModuleResult.name,
 			isSmallScreen = IsSmallScreen,
 			launchSource = p1.launchSource,
 			referralSource = p1.referralSource,

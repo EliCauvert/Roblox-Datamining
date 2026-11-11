@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnableSchoolEntry_DEV", false) and (game:GetEngineFeature("SchoolEntryTooltipSeenStorageKey") and game:GetEngineFeature("SchoolEntryLiveTooltipSeenStorageKey"))

@@ -103,43 +103,43 @@ function Module:encode()
 		end
 	end
 	if self.universe ~= nil and next(self.universe) ~= nil then
-		for i3, value3 in self.universe do
-			local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult5, WriteStringResult2_4 = ProtoModule.writeString(WriteTagResult13, WriteTagResult2_12, i3)
-			local EncodeResult = value3:encode()
-			local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(WriteStringResult5, WriteStringResult2_4, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteBufferResult5, WriteBufferResult2_4 = ProtoModule.writeBuffer(WriteTagResult14, WriteTagResult2_13, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult15, WriteTagResult2_14, WriteBufferResult5, WriteBufferResult2_4)
+		for i2, value2 in self.universe do
+			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult3, WriteStringResult2_2 = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, i2)
+			local EncodeResult = value2:encode()
+			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(WriteStringResult3, WriteStringResult2_2, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult3, WriteBufferResult2_2 = ProtoModule.writeBuffer(WriteTagResult8, WriteTagResult2_7, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult9, WriteTagResult2_8, WriteBufferResult3, WriteBufferResult2_2)
 		end
 	end
 	if self.creator ~= nil and next(self.creator) ~= nil then
-		for i4, value4 in self.creator do
+		for i3, value3 in self.creator do
+			local WriteTagResult16, WriteTagResult2_15 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult6, WriteStringResult2_5 = ProtoModule.writeString(WriteTagResult16, WriteTagResult2_15, i3)
+			local EncodeResult = value3:encode()
+			local WriteTagResult17, WriteTagResult2_16 = ProtoModule.writeTag(WriteStringResult6, WriteStringResult2_5, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult6, WriteBufferResult2_5 = ProtoModule.writeBuffer(WriteTagResult17, WriteTagResult2_16, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult18, WriteTagResult2_17 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult18, WriteTagResult2_17, WriteBufferResult6, WriteBufferResult2_5)
+		end
+	end
+	if self.event ~= nil and next(self.event) ~= nil then
+		for i4, value4 in self.event do
 			local WriteTagResult22, WriteTagResult2_21 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
 			local WriteStringResult8, WriteStringResult2_7 = ProtoModule.writeString(WriteTagResult22, WriteTagResult2_21, i4)
 			local EncodeResult = value4:encode()
 			local WriteTagResult23, WriteTagResult2_22 = ProtoModule.writeTag(WriteStringResult8, WriteStringResult2_7, 2, ProtoModule.wireTypes.lengthDelimited)
 			local WriteBufferResult8, WriteBufferResult2_7 = ProtoModule.writeBuffer(WriteTagResult23, WriteTagResult2_22, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult24, WriteTagResult2_23 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			local WriteTagResult24, WriteTagResult2_23 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult24, WriteTagResult2_23, WriteBufferResult8, WriteBufferResult2_7)
 		end
 	end
-	if self.event ~= nil and next(self.event) ~= nil then
-		for i5, value5 in self.event do
-			local WriteTagResult25, WriteTagResult2_24 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult9, WriteStringResult2_8 = ProtoModule.writeString(WriteTagResult25, WriteTagResult2_24, i5)
-			local EncodeResult = value5:encode()
-			local WriteTagResult26, WriteTagResult2_25 = ProtoModule.writeTag(WriteStringResult9, WriteStringResult2_8, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteBufferResult9, WriteBufferResult2_8 = ProtoModule.writeBuffer(WriteTagResult26, WriteTagResult2_25, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult27, WriteTagResult2_26 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult27, WriteTagResult2_26, WriteBufferResult9, WriteBufferResult2_8)
-		end
-	end
 	if self.song ~= nil and next(self.song) ~= nil then
-		for i6, value6 in self.song do
+		for i5, value5 in self.song do
 			local WriteTagResult28, WriteTagResult2_27 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult10, WriteStringResult2_9 = ProtoModule.writeString(WriteTagResult28, WriteTagResult2_27, i6)
-			local EncodeResult = value6:encode()
+			local WriteStringResult10, WriteStringResult2_9 = ProtoModule.writeString(WriteTagResult28, WriteTagResult2_27, i5)
+			local EncodeResult = value5:encode()
 			local WriteTagResult29, WriteTagResult2_28 = ProtoModule.writeTag(WriteStringResult10, WriteStringResult2_9, 2, ProtoModule.wireTypes.lengthDelimited)
 			local WriteBufferResult10, WriteBufferResult2_9 = ProtoModule.writeBuffer(WriteTagResult29, WriteTagResult2_28, EncodeResult, buffer.len(EncodeResult))
 			local WriteTagResult30, WriteTagResult2_29 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
@@ -147,21 +147,21 @@ function Module:encode()
 		end
 	end
 	if self.game_pass ~= nil and next(self.game_pass) ~= nil then
-		for i7, value7 in self.game_pass do
-			local WriteTagResult37, WriteTagResult2_36 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult13, WriteStringResult2_12 = ProtoModule.writeString(WriteTagResult37, WriteTagResult2_36, i7)
-			local EncodeResult = value7:encode()
-			local WriteTagResult38, WriteTagResult2_37 = ProtoModule.writeTag(WriteStringResult13, WriteStringResult2_12, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteBufferResult13, WriteBufferResult2_12 = ProtoModule.writeBuffer(WriteTagResult38, WriteTagResult2_37, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult39, WriteTagResult2_38 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult39, WriteTagResult2_38, WriteBufferResult13, WriteBufferResult2_12)
+		for i8, value8 in self.game_pass do
+			local WriteTagResult19, WriteTagResult2_18 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult7, WriteStringResult2_6 = ProtoModule.writeString(WriteTagResult19, WriteTagResult2_18, i8)
+			local EncodeResult = value8:encode()
+			local WriteTagResult20, WriteTagResult2_19 = ProtoModule.writeTag(WriteStringResult7, WriteStringResult2_6, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult7, WriteBufferResult2_6 = ProtoModule.writeBuffer(WriteTagResult20, WriteTagResult2_19, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult21, WriteTagResult2_20 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult21, WriteTagResult2_20, WriteBufferResult7, WriteBufferResult2_6)
 		end
 	end
 	if self.media_asset ~= nil and next(self.media_asset) ~= nil then
-		for i8, value8 in self.media_asset do
+		for i10, value10 in self.media_asset do
 			local WriteTagResult40, WriteTagResult2_39 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult14, WriteStringResult2_13 = ProtoModule.writeString(WriteTagResult40, WriteTagResult2_39, i8)
-			local EncodeResult = value8:encode()
+			local WriteStringResult14, WriteStringResult2_13 = ProtoModule.writeString(WriteTagResult40, WriteTagResult2_39, i10)
+			local EncodeResult = value10:encode()
 			local WriteTagResult41, WriteTagResult2_40 = ProtoModule.writeTag(WriteStringResult14, WriteStringResult2_13, 2, ProtoModule.wireTypes.lengthDelimited)
 			local WriteBufferResult14, WriteBufferResult2_13 = ProtoModule.writeBuffer(WriteTagResult41, WriteTagResult2_40, EncodeResult, buffer.len(EncodeResult))
 			local WriteTagResult42, WriteTagResult2_41 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
@@ -169,10 +169,10 @@ function Module:encode()
 		end
 	end
 	if self.social_link ~= nil and next(self.social_link) ~= nil then
-		for i10, value10 in self.social_link do
+		for i12, value12 in self.social_link do
 			local WriteTagResult46, WriteTagResult2_45 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult16, WriteStringResult2_15 = ProtoModule.writeString(WriteTagResult46, WriteTagResult2_45, i10)
-			local EncodeResult = value10:encode()
+			local WriteStringResult16, WriteStringResult2_15 = ProtoModule.writeString(WriteTagResult46, WriteTagResult2_45, i12)
+			local EncodeResult = value12:encode()
 			local WriteTagResult47, WriteTagResult2_46 = ProtoModule.writeTag(WriteStringResult16, WriteStringResult2_15, 2, ProtoModule.wireTypes.lengthDelimited)
 			local WriteBufferResult16, WriteBufferResult2_15 = ProtoModule.writeBuffer(WriteTagResult47, WriteTagResult2_46, EncodeResult, buffer.len(EncodeResult))
 			local WriteTagResult48, WriteTagResult2_47 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
@@ -180,120 +180,120 @@ function Module:encode()
 		end
 	end
 	if self.game_developer_product ~= nil and next(self.game_developer_product) ~= nil then
-		for i11, value11 in self.game_developer_product do
-			local WriteTagResult55, WriteTagResult2_54 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult19, WriteStringResult2_18 = ProtoModule.writeString(WriteTagResult55, WriteTagResult2_54, i11)
-			local EncodeResult = value11:encode()
-			local WriteTagResult56, WriteTagResult2_55 = ProtoModule.writeTag(WriteStringResult19, WriteStringResult2_18, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteBufferResult19, WriteBufferResult2_18 = ProtoModule.writeBuffer(WriteTagResult56, WriteTagResult2_55, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult57, WriteTagResult2_56 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult57, WriteTagResult2_56, WriteBufferResult19, WriteBufferResult2_18)
-		end
-	end
-	if self.game_subscription ~= nil and next(self.game_subscription) ~= nil then
-		for i2, value2 in self.game_subscription do
+		for i15, value15 in self.game_developer_product do
 			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult4, WriteStringResult2_3 = ProtoModule.writeString(WriteTagResult10, WriteTagResult2_9, i2)
-			local EncodeResult = value2:encode()
+			local WriteStringResult4, WriteStringResult2_3 = ProtoModule.writeString(WriteTagResult10, WriteTagResult2_9, i15)
+			local EncodeResult = value15:encode()
 			local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(WriteStringResult4, WriteStringResult2_3, 2, ProtoModule.wireTypes.lengthDelimited)
 			local WriteBufferResult4, WriteBufferResult2_3 = ProtoModule.writeBuffer(WriteTagResult11, WriteTagResult2_10, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
+			local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult12, WriteTagResult2_11, WriteBufferResult4, WriteBufferResult2_3)
 		end
 	end
-	if self.marketplace_catalog_category ~= nil and next(self.marketplace_catalog_category) ~= nil then
-		for i1, value1 in self.marketplace_catalog_category do
-			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult3, WriteStringResult2_2 = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, i1)
-			local EncodeResult = value1:encode()
-			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(WriteStringResult3, WriteStringResult2_2, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteBufferResult3, WriteBufferResult2_2 = ProtoModule.writeBuffer(WriteTagResult8, WriteTagResult2_7, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult9, WriteTagResult2_8, WriteBufferResult3, WriteBufferResult2_2)
-		end
-	end
-	if self.marketplace_asset ~= nil and next(self.marketplace_asset) ~= nil then
-		for i14, value14 in self.marketplace_asset do
-			local WriteTagResult64, WriteTagResult2_63 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult22, WriteStringResult2_21 = ProtoModule.writeString(WriteTagResult64, WriteTagResult2_63, i14)
-			local EncodeResult = value14:encode()
-			local WriteTagResult65, WriteTagResult2_64 = ProtoModule.writeTag(WriteStringResult22, WriteStringResult2_21, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteBufferResult22, WriteBufferResult2_21 = ProtoModule.writeBuffer(WriteTagResult65, WriteTagResult2_64, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult66, WriteTagResult2_65 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult66, WriteTagResult2_65, WriteBufferResult22, WriteBufferResult2_21)
-		end
-	end
-	if self.marketplace_bundle ~= nil and next(self.marketplace_bundle) ~= nil then
-		for i16, value16 in self.marketplace_bundle do
-			local WriteTagResult67, WriteTagResult2_66 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult23, WriteStringResult2_22 = ProtoModule.writeString(WriteTagResult67, WriteTagResult2_66, i16)
-			local EncodeResult = value16:encode()
-			local WriteTagResult68, WriteTagResult2_67 = ProtoModule.writeTag(WriteStringResult23, WriteStringResult2_22, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteBufferResult23, WriteBufferResult2_22 = ProtoModule.writeBuffer(WriteTagResult68, WriteTagResult2_67, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult69, WriteTagResult2_68 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult69, WriteTagResult2_68, WriteBufferResult23, WriteBufferResult2_22)
-		end
-	end
-	if self.marketplace_look ~= nil and next(self.marketplace_look) ~= nil then
-		for i18, value17 in self.marketplace_look do
-			local WriteTagResult52, WriteTagResult2_51 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult18, WriteStringResult2_17 = ProtoModule.writeString(WriteTagResult52, WriteTagResult2_51, i18)
+	if self.game_subscription ~= nil and next(self.game_subscription) ~= nil then
+		for i17, value17 in self.game_subscription do
+			local WriteTagResult25, WriteTagResult2_24 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult9, WriteStringResult2_8 = ProtoModule.writeString(WriteTagResult25, WriteTagResult2_24, i17)
 			local EncodeResult = value17:encode()
-			local WriteTagResult53, WriteTagResult2_52 = ProtoModule.writeTag(WriteStringResult18, WriteStringResult2_17, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteBufferResult18, WriteBufferResult2_17 = ProtoModule.writeBuffer(WriteTagResult53, WriteTagResult2_52, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult54, WriteTagResult2_53 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult54, WriteTagResult2_53, WriteBufferResult18, WriteBufferResult2_17)
+			local WriteTagResult26, WriteTagResult2_25 = ProtoModule.writeTag(WriteStringResult9, WriteStringResult2_8, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult9, WriteBufferResult2_8 = ProtoModule.writeBuffer(WriteTagResult26, WriteTagResult2_25, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult27, WriteTagResult2_26 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult27, WriteTagResult2_26, WriteBufferResult9, WriteBufferResult2_8)
 		end
 	end
-	if self.catalog_sort ~= nil and next(self.catalog_sort) ~= nil then
-		for i19, value18 in self.catalog_sort do
-			local WriteTagResult16, WriteTagResult2_15 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult6, WriteStringResult2_5 = ProtoModule.writeString(WriteTagResult16, WriteTagResult2_15, i19)
-			local EncodeResult = value18:encode()
-			local WriteTagResult17, WriteTagResult2_16 = ProtoModule.writeTag(WriteStringResult6, WriteStringResult2_5, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteBufferResult6, WriteBufferResult2_5 = ProtoModule.writeBuffer(WriteTagResult17, WriteTagResult2_16, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult18, WriteTagResult2_17 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult18, WriteTagResult2_17, WriteBufferResult6, WriteBufferResult2_5)
-		end
-	end
-	if self.age_recommendation ~= nil and next(self.age_recommendation) ~= nil then
-		for i20, value19 in self.age_recommendation do
+	if self.marketplace_catalog_category ~= nil and next(self.marketplace_catalog_category) ~= nil then
+		for i7, value7 in self.marketplace_catalog_category do
 			local WriteTagResult34, WriteTagResult2_33 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult12, WriteStringResult2_11 = ProtoModule.writeString(WriteTagResult34, WriteTagResult2_33, i20)
-			local EncodeResult = value19:encode()
+			local WriteStringResult12, WriteStringResult2_11 = ProtoModule.writeString(WriteTagResult34, WriteTagResult2_33, i7)
+			local EncodeResult = value7:encode()
 			local WriteTagResult35, WriteTagResult2_34 = ProtoModule.writeTag(WriteStringResult12, WriteStringResult2_11, 2, ProtoModule.wireTypes.lengthDelimited)
 			local WriteBufferResult12, WriteBufferResult2_11 = ProtoModule.writeBuffer(WriteTagResult35, WriteTagResult2_34, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult36, WriteTagResult2_35 = ProtoModule.writeTag(Buf, Count, 16, ProtoModule.wireTypes.lengthDelimited)
+			local WriteTagResult36, WriteTagResult2_35 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult36, WriteTagResult2_35, WriteBufferResult12, WriteBufferResult2_11)
 		end
 	end
+	if self.marketplace_asset ~= nil and next(self.marketplace_asset) ~= nil then
+		for i13, value13 in self.marketplace_asset do
+			local WriteTagResult49, WriteTagResult2_48 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult17, WriteStringResult2_16 = ProtoModule.writeString(WriteTagResult49, WriteTagResult2_48, i13)
+			local EncodeResult = value13:encode()
+			local WriteTagResult50, WriteTagResult2_49 = ProtoModule.writeTag(WriteStringResult17, WriteStringResult2_16, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult17, WriteBufferResult2_16 = ProtoModule.writeBuffer(WriteTagResult50, WriteTagResult2_49, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult51, WriteTagResult2_50 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult51, WriteTagResult2_50, WriteBufferResult17, WriteBufferResult2_16)
+		end
+	end
+	if self.marketplace_bundle ~= nil and next(self.marketplace_bundle) ~= nil then
+		for i1, value1 in self.marketplace_bundle do
+			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult1, WriteStringResult2_1 = ProtoModule.writeString(WriteTagResult4, WriteTagResult2_3, i1)
+			local EncodeResult = value1:encode()
+			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(WriteStringResult1, WriteStringResult2_1, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult1, WriteBufferResult2_1 = ProtoModule.writeBuffer(WriteTagResult5, WriteTagResult2_4, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult6, WriteTagResult2_5, WriteBufferResult1, WriteBufferResult2_1)
+		end
+	end
+	if self.marketplace_look ~= nil and next(self.marketplace_look) ~= nil then
+		for i9, value9 in self.marketplace_look do
+			local WriteTagResult37, WriteTagResult2_36 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult13, WriteStringResult2_12 = ProtoModule.writeString(WriteTagResult37, WriteTagResult2_36, i9)
+			local EncodeResult = value9:encode()
+			local WriteTagResult38, WriteTagResult2_37 = ProtoModule.writeTag(WriteStringResult13, WriteStringResult2_12, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult13, WriteBufferResult2_12 = ProtoModule.writeBuffer(WriteTagResult38, WriteTagResult2_37, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult39, WriteTagResult2_38 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult39, WriteTagResult2_38, WriteBufferResult13, WriteBufferResult2_12)
+		end
+	end
+	if self.catalog_sort ~= nil and next(self.catalog_sort) ~= nil then
+		for i20, value20 in self.catalog_sort do
+			local WriteTagResult64, WriteTagResult2_63 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult22, WriteStringResult2_21 = ProtoModule.writeString(WriteTagResult64, WriteTagResult2_63, i20)
+			local EncodeResult = value20:encode()
+			local WriteTagResult65, WriteTagResult2_64 = ProtoModule.writeTag(WriteStringResult22, WriteStringResult2_21, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult22, WriteBufferResult2_21 = ProtoModule.writeBuffer(WriteTagResult65, WriteTagResult2_64, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult66, WriteTagResult2_65 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult66, WriteTagResult2_65, WriteBufferResult22, WriteBufferResult2_21)
+		end
+	end
+	if self.age_recommendation ~= nil and next(self.age_recommendation) ~= nil then
+		for i21, value21 in self.age_recommendation do
+			local WriteTagResult67, WriteTagResult2_66 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult23, WriteStringResult2_22 = ProtoModule.writeString(WriteTagResult67, WriteTagResult2_66, i21)
+			local EncodeResult = value21:encode()
+			local WriteTagResult68, WriteTagResult2_67 = ProtoModule.writeTag(WriteStringResult23, WriteStringResult2_22, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult23, WriteBufferResult2_22 = ProtoModule.writeBuffer(WriteTagResult68, WriteTagResult2_67, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult69, WriteTagResult2_68 = ProtoModule.writeTag(Buf, Count, 16, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult69, WriteTagResult2_68, WriteBufferResult23, WriteBufferResult2_22)
+		end
+	end
 	if self.universe_user_follow ~= nil and next(self.universe_user_follow) ~= nil then
-		for i12, value12 in self.universe_user_follow do
-			local WriteTagResult58, WriteTagResult2_57 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult20, WriteStringResult2_19 = ProtoModule.writeString(WriteTagResult58, WriteTagResult2_57, i12)
-			local EncodeResult = value12:encode()
-			local WriteTagResult59, WriteTagResult2_58 = ProtoModule.writeTag(WriteStringResult20, WriteStringResult2_19, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteBufferResult20, WriteBufferResult2_19 = ProtoModule.writeBuffer(WriteTagResult59, WriteTagResult2_58, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult60, WriteTagResult2_59 = ProtoModule.writeTag(Buf, Count, 17, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult60, WriteTagResult2_59, WriteBufferResult20, WriteBufferResult2_19)
+		for i22, value22 in self.universe_user_follow do
+			local WriteTagResult73, WriteTagResult2_72 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult25, WriteStringResult2_24 = ProtoModule.writeString(WriteTagResult73, WriteTagResult2_72, i22)
+			local EncodeResult = value22:encode()
+			local WriteTagResult74, WriteTagResult2_73 = ProtoModule.writeTag(WriteStringResult25, WriteStringResult2_24, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult25, WriteBufferResult2_24 = ProtoModule.writeBuffer(WriteTagResult74, WriteTagResult2_73, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult75, WriteTagResult2_74 = ProtoModule.writeTag(Buf, Count, 17, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult75, WriteTagResult2_74, WriteBufferResult25, WriteBufferResult2_24)
 		end
 	end
 	if self.universe_user_vote ~= nil and next(self.universe_user_vote) ~= nil then
-		for i23, value22 in self.universe_user_vote do
-			local WriteTagResult19, WriteTagResult2_18 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult7, WriteStringResult2_6 = ProtoModule.writeString(WriteTagResult19, WriteTagResult2_18, i23)
-			local EncodeResult = value22:encode()
-			local WriteTagResult20, WriteTagResult2_19 = ProtoModule.writeTag(WriteStringResult7, WriteStringResult2_6, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteBufferResult7, WriteBufferResult2_6 = ProtoModule.writeBuffer(WriteTagResult20, WriteTagResult2_19, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult21, WriteTagResult2_20 = ProtoModule.writeTag(Buf, Count, 18, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult21, WriteTagResult2_20, WriteBufferResult7, WriteBufferResult2_6)
+		for i24, value24 in self.universe_user_vote do
+			local WriteTagResult58, WriteTagResult2_57 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult20, WriteStringResult2_19 = ProtoModule.writeString(WriteTagResult58, WriteTagResult2_57, i24)
+			local EncodeResult = value24:encode()
+			local WriteTagResult59, WriteTagResult2_58 = ProtoModule.writeTag(WriteStringResult20, WriteStringResult2_19, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult20, WriteBufferResult2_19 = ProtoModule.writeBuffer(WriteTagResult59, WriteTagResult2_58, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult60, WriteTagResult2_59 = ProtoModule.writeTag(Buf, Count, 18, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult60, WriteTagResult2_59, WriteBufferResult20, WriteBufferResult2_19)
 		end
 	end
 	if self.user_profile ~= nil and next(self.user_profile) ~= nil then
-		for i9, value9 in self.user_profile do
+		for i11, value11 in self.user_profile do
 			local WriteTagResult43, WriteTagResult2_42 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult15, WriteStringResult2_14 = ProtoModule.writeString(WriteTagResult43, WriteTagResult2_42, i9)
-			local EncodeResult = value9:encode()
+			local WriteStringResult15, WriteStringResult2_14 = ProtoModule.writeString(WriteTagResult43, WriteTagResult2_42, i11)
+			local EncodeResult = value11:encode()
 			local WriteTagResult44, WriteTagResult2_43 = ProtoModule.writeTag(WriteStringResult15, WriteStringResult2_14, 2, ProtoModule.wireTypes.lengthDelimited)
 			local WriteBufferResult15, WriteBufferResult2_14 = ProtoModule.writeBuffer(WriteTagResult44, WriteTagResult2_43, EncodeResult, buffer.len(EncodeResult))
 			local WriteTagResult45, WriteTagResult2_44 = ProtoModule.writeTag(Buf, Count, 19, ProtoModule.wireTypes.lengthDelimited)
@@ -301,223 +301,223 @@ function Module:encode()
 		end
 	end
 	if self.universe_user_favorite ~= nil and next(self.universe_user_favorite) ~= nil then
-		for i13, value13 in self.universe_user_favorite do
-			local WriteTagResult61, WriteTagResult2_60 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult21, WriteStringResult2_20 = ProtoModule.writeString(WriteTagResult61, WriteTagResult2_60, i13)
-			local EncodeResult = value13:encode()
-			local WriteTagResult62, WriteTagResult2_61 = ProtoModule.writeTag(WriteStringResult21, WriteStringResult2_20, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteBufferResult21, WriteBufferResult2_20 = ProtoModule.writeBuffer(WriteTagResult62, WriteTagResult2_61, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult63, WriteTagResult2_62 = ProtoModule.writeTag(Buf, Count, 20, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult63, WriteTagResult2_62, WriteBufferResult21, WriteBufferResult2_20)
-		end
-	end
-	if self.playability ~= nil and next(self.playability) ~= nil then
-		for i15, value15 in self.playability do
-			local WriteTagResult49, WriteTagResult2_48 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult17, WriteStringResult2_16 = ProtoModule.writeString(WriteTagResult49, WriteTagResult2_48, i15)
-			local EncodeResult = value15:encode()
-			local WriteTagResult50, WriteTagResult2_49 = ProtoModule.writeTag(WriteStringResult17, WriteStringResult2_16, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteBufferResult17, WriteBufferResult2_16 = ProtoModule.writeBuffer(WriteTagResult50, WriteTagResult2_49, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult51, WriteTagResult2_50 = ProtoModule.writeTag(Buf, Count, 21, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult51, WriteTagResult2_50, WriteBufferResult17, WriteBufferResult2_16)
-		end
-	end
-	if self.universe_user_follow_limit ~= nil and next(self.universe_user_follow_limit) ~= nil then
-		for i21, value20 in self.universe_user_follow_limit do
-			local WriteTagResult73, WriteTagResult2_72 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult25, WriteStringResult2_24 = ProtoModule.writeString(WriteTagResult73, WriteTagResult2_72, i21)
-			local EncodeResult = value20:encode()
-			local WriteTagResult74, WriteTagResult2_73 = ProtoModule.writeTag(WriteStringResult25, WriteStringResult2_24, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteBufferResult25, WriteBufferResult2_24 = ProtoModule.writeBuffer(WriteTagResult74, WriteTagResult2_73, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult75, WriteTagResult2_74 = ProtoModule.writeTag(Buf, Count, 22, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult75, WriteTagResult2_74, WriteBufferResult25, WriteBufferResult2_24)
-		end
-	end
-	if self.universe_user_vote_feedback_metadata ~= nil and next(self.universe_user_vote_feedback_metadata) ~= nil then
-		for i24, value23 in self.universe_user_vote_feedback_metadata do
-			local WriteTagResult79, WriteTagResult2_78 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult27, WriteStringResult2_26 = ProtoModule.writeString(WriteTagResult79, WriteTagResult2_78, i24)
-			local EncodeResult = value23:encode()
-			local WriteTagResult80, WriteTagResult2_79 = ProtoModule.writeTag(WriteStringResult27, WriteStringResult2_26, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteBufferResult27, WriteBufferResult2_26 = ProtoModule.writeBuffer(WriteTagResult80, WriteTagResult2_79, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult81, WriteTagResult2_80 = ProtoModule.writeTag(Buf, Count, 23, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult81, WriteTagResult2_80, WriteBufferResult27, WriteBufferResult2_26)
-		end
-	end
-	if self.moment ~= nil and next(self.moment) ~= nil then
-		for i26, value25 in self.moment do
+		for i27, value27 in self.universe_user_favorite do
 			local WriteTagResult85, WriteTagResult2_84 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult29, WriteStringResult2_28 = ProtoModule.writeString(WriteTagResult85, WriteTagResult2_84, i26)
-			local EncodeResult = value25:encode()
+			local WriteStringResult29, WriteStringResult2_28 = ProtoModule.writeString(WriteTagResult85, WriteTagResult2_84, i27)
+			local EncodeResult = value27:encode()
 			local WriteTagResult86, WriteTagResult2_85 = ProtoModule.writeTag(WriteStringResult29, WriteStringResult2_28, 2, ProtoModule.wireTypes.lengthDelimited)
 			local WriteBufferResult29, WriteBufferResult2_28 = ProtoModule.writeBuffer(WriteTagResult86, WriteTagResult2_85, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult87, WriteTagResult2_86 = ProtoModule.writeTag(Buf, Count, 24, ProtoModule.wireTypes.lengthDelimited)
+			local WriteTagResult87, WriteTagResult2_86 = ProtoModule.writeTag(Buf, Count, 20, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult87, WriteTagResult2_86, WriteBufferResult29, WriteBufferResult2_28)
 		end
 	end
-	if self.community ~= nil and next(self.community) ~= nil then
-		for i28, value27 in self.community do
-			local WriteTagResult91, WriteTagResult2_90 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult31, WriteStringResult2_30 = ProtoModule.writeString(WriteTagResult91, WriteTagResult2_90, i28)
-			local EncodeResult = value27:encode()
-			local WriteTagResult92, WriteTagResult2_91 = ProtoModule.writeTag(WriteStringResult31, WriteStringResult2_30, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteBufferResult31, WriteBufferResult2_30 = ProtoModule.writeBuffer(WriteTagResult92, WriteTagResult2_91, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult93, WriteTagResult2_92 = ProtoModule.writeTag(Buf, Count, 25, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult93, WriteTagResult2_92, WriteBufferResult31, WriteBufferResult2_30)
-		end
-	end
-	if self.community_user_membership ~= nil and next(self.community_user_membership) ~= nil then
-		for i29, value28 in self.community_user_membership do
-			local WriteTagResult97, WriteTagResult2_96 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult33, WriteStringResult2_32 = ProtoModule.writeString(WriteTagResult97, WriteTagResult2_96, i29)
-			local EncodeResult = value28:encode()
-			local WriteTagResult98, WriteTagResult2_97 = ProtoModule.writeTag(WriteStringResult33, WriteStringResult2_32, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteBufferResult33, WriteBufferResult2_32 = ProtoModule.writeBuffer(WriteTagResult98, WriteTagResult2_97, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult99, WriteTagResult2_98 = ProtoModule.writeTag(Buf, Count, 26, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult99, WriteTagResult2_98, WriteBufferResult33, WriteBufferResult2_32)
-		end
-	end
-	if self.friend_recommendation ~= nil and next(self.friend_recommendation) ~= nil then
-		for i30, value29 in self.friend_recommendation do
-			local WriteTagResult100, WriteTagResult2_99 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult34, WriteStringResult2_33 = ProtoModule.writeString(WriteTagResult100, WriteTagResult2_99, i30)
-			local EncodeResult = value29:encode()
-			local WriteTagResult101, WriteTagResult2_100 = ProtoModule.writeTag(WriteStringResult34, WriteStringResult2_33, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteBufferResult34, WriteBufferResult2_33 = ProtoModule.writeBuffer(WriteTagResult101, WriteTagResult2_100, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult102, WriteTagResult2_101 = ProtoModule.writeTag(Buf, Count, 27, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult102, WriteTagResult2_101, WriteBufferResult34, WriteBufferResult2_33)
-		end
-	end
-	if self.universe_private_server ~= nil and next(self.universe_private_server) ~= nil then
-		for i27, value26 in self.universe_private_server do
-			local WriteTagResult88, WriteTagResult2_87 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult30, WriteStringResult2_29 = ProtoModule.writeString(WriteTagResult88, WriteTagResult2_87, i27)
-			local EncodeResult = value26:encode()
-			local WriteTagResult89, WriteTagResult2_88 = ProtoModule.writeTag(WriteStringResult30, WriteStringResult2_29, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteBufferResult30, WriteBufferResult2_29 = ProtoModule.writeBuffer(WriteTagResult89, WriteTagResult2_88, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult90, WriteTagResult2_89 = ProtoModule.writeTag(Buf, Count, 28, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult90, WriteTagResult2_89, WriteBufferResult30, WriteBufferResult2_29)
-		end
-	end
-	if self.notification_badge ~= nil and next(self.notification_badge) ~= nil then
-		for i31, value30 in self.notification_badge do
-			local WriteTagResult103, WriteTagResult2_102 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult35, WriteStringResult2_34 = ProtoModule.writeString(WriteTagResult103, WriteTagResult2_102, i31)
-			local EncodeResult = value30:encode()
-			local WriteTagResult104, WriteTagResult2_103 = ProtoModule.writeTag(WriteStringResult35, WriteStringResult2_34, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteBufferResult35, WriteBufferResult2_34 = ProtoModule.writeBuffer(WriteTagResult104, WriteTagResult2_103, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult105, WriteTagResult2_104 = ProtoModule.writeTag(Buf, Count, 29, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult105, WriteTagResult2_104, WriteBufferResult35, WriteBufferResult2_34)
-		end
-	end
-	if self.collectible_item ~= nil and next(self.collectible_item) ~= nil then
-		for i22, value21 in self.collectible_item do
+	if self.playability ~= nil and next(self.playability) ~= nil then
+		for i23, value23 in self.playability do
 			local WriteTagResult76, WriteTagResult2_75 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult26, WriteStringResult2_25 = ProtoModule.writeString(WriteTagResult76, WriteTagResult2_75, i22)
-			local EncodeResult = value21:encode()
+			local WriteStringResult26, WriteStringResult2_25 = ProtoModule.writeString(WriteTagResult76, WriteTagResult2_75, i23)
+			local EncodeResult = value23:encode()
 			local WriteTagResult77, WriteTagResult2_76 = ProtoModule.writeTag(WriteStringResult26, WriteStringResult2_25, 2, ProtoModule.wireTypes.lengthDelimited)
 			local WriteBufferResult26, WriteBufferResult2_25 = ProtoModule.writeBuffer(WriteTagResult77, WriteTagResult2_76, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult78, WriteTagResult2_77 = ProtoModule.writeTag(Buf, Count, 30, ProtoModule.wireTypes.lengthDelimited)
+			local WriteTagResult78, WriteTagResult2_77 = ProtoModule.writeTag(Buf, Count, 21, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult78, WriteTagResult2_77, WriteBufferResult26, WriteBufferResult2_25)
 		end
 	end
-	if self.leaderboard_stats ~= nil and next(self.leaderboard_stats) ~= nil then
-		for i17, leaderboardStat in self.leaderboard_stats do
-			local WriteTagResult70, WriteTagResult2_69 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult24, WriteStringResult2_23 = ProtoModule.writeString(WriteTagResult70, WriteTagResult2_69, i17)
-			local EncodeResult = leaderboardStat:encode()
-			local WriteTagResult71, WriteTagResult2_70 = ProtoModule.writeTag(WriteStringResult24, WriteStringResult2_23, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteBufferResult24, WriteBufferResult2_23 = ProtoModule.writeBuffer(WriteTagResult71, WriteTagResult2_70, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult72, WriteTagResult2_71 = ProtoModule.writeTag(Buf, Count, 31, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult72, WriteTagResult2_71, WriteBufferResult24, WriteBufferResult2_23)
-		end
-	end
-	if self.marketplace_asset_user_favorite ~= nil and next(self.marketplace_asset_user_favorite) ~= nil then
-		for i33, value32 in self.marketplace_asset_user_favorite do
-			local WriteTagResult106, WriteTagResult2_105 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult36, WriteStringResult2_35 = ProtoModule.writeString(WriteTagResult106, WriteTagResult2_105, i33)
-			local EncodeResult = value32:encode()
-			local WriteTagResult107, WriteTagResult2_106 = ProtoModule.writeTag(WriteStringResult36, WriteStringResult2_35, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteBufferResult36, WriteBufferResult2_35 = ProtoModule.writeBuffer(WriteTagResult107, WriteTagResult2_106, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult108, WriteTagResult2_107 = ProtoModule.writeTag(Buf, Count, 32, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult108, WriteTagResult2_107, WriteBufferResult36, WriteBufferResult2_35)
-		end
-	end
-	if self.marketplace_bundle_user_favorite ~= nil and next(self.marketplace_bundle_user_favorite) ~= nil then
-		for i34, value33 in self.marketplace_bundle_user_favorite do
+	if self.universe_user_follow_limit ~= nil and next(self.universe_user_follow_limit) ~= nil then
+		for i28, value28 in self.universe_user_follow_limit do
 			local WriteTagResult94, WriteTagResult2_93 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult32, WriteStringResult2_31 = ProtoModule.writeString(WriteTagResult94, WriteTagResult2_93, i34)
-			local EncodeResult = value33:encode()
+			local WriteStringResult32, WriteStringResult2_31 = ProtoModule.writeString(WriteTagResult94, WriteTagResult2_93, i28)
+			local EncodeResult = value28:encode()
 			local WriteTagResult95, WriteTagResult2_94 = ProtoModule.writeTag(WriteStringResult32, WriteStringResult2_31, 2, ProtoModule.wireTypes.lengthDelimited)
 			local WriteBufferResult32, WriteBufferResult2_31 = ProtoModule.writeBuffer(WriteTagResult95, WriteTagResult2_94, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult96, WriteTagResult2_95 = ProtoModule.writeTag(Buf, Count, 33, ProtoModule.wireTypes.lengthDelimited)
+			local WriteTagResult96, WriteTagResult2_95 = ProtoModule.writeTag(Buf, Count, 22, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult96, WriteTagResult2_95, WriteBufferResult32, WriteBufferResult2_31)
 		end
 	end
-	if self.buy_robux_one_time_product ~= nil and next(self.buy_robux_one_time_product) ~= nil then
-		for i35, value34 in self.buy_robux_one_time_product do
-			local WriteTagResult109, WriteTagResult2_108 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult37, WriteStringResult2_36 = ProtoModule.writeString(WriteTagResult109, WriteTagResult2_108, i35)
-			local EncodeResult = value34:encode()
-			local WriteTagResult110, WriteTagResult2_109 = ProtoModule.writeTag(WriteStringResult37, WriteStringResult2_36, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteBufferResult37, WriteBufferResult2_36 = ProtoModule.writeBuffer(WriteTagResult110, WriteTagResult2_109, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult111, WriteTagResult2_110 = ProtoModule.writeTag(Buf, Count, 34, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult111, WriteTagResult2_110, WriteBufferResult37, WriteBufferResult2_36)
+	if self.universe_user_vote_feedback_metadata ~= nil and next(self.universe_user_vote_feedback_metadata) ~= nil then
+		for i29, value29 in self.universe_user_vote_feedback_metadata do
+			local WriteTagResult97, WriteTagResult2_96 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult33, WriteStringResult2_32 = ProtoModule.writeString(WriteTagResult97, WriteTagResult2_96, i29)
+			local EncodeResult = value29:encode()
+			local WriteTagResult98, WriteTagResult2_97 = ProtoModule.writeTag(WriteStringResult33, WriteStringResult2_32, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult33, WriteBufferResult2_32 = ProtoModule.writeBuffer(WriteTagResult98, WriteTagResult2_97, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult99, WriteTagResult2_98 = ProtoModule.writeTag(Buf, Count, 23, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult99, WriteTagResult2_98, WriteBufferResult33, WriteBufferResult2_32)
 		end
 	end
-	if self.buy_robux_subscription_product ~= nil and next(self.buy_robux_subscription_product) ~= nil then
-		for i25, value24 in self.buy_robux_subscription_product do
-			local WriteTagResult82, WriteTagResult2_81 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult28, WriteStringResult2_27 = ProtoModule.writeString(WriteTagResult82, WriteTagResult2_81, i25)
-			local EncodeResult = value24:encode()
-			local WriteTagResult83, WriteTagResult2_82 = ProtoModule.writeTag(WriteStringResult28, WriteStringResult2_27, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteBufferResult28, WriteBufferResult2_27 = ProtoModule.writeBuffer(WriteTagResult83, WriteTagResult2_82, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult84, WriteTagResult2_83 = ProtoModule.writeTag(Buf, Count, 35, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult84, WriteTagResult2_83, WriteBufferResult28, WriteBufferResult2_27)
+	if self.moment ~= nil and next(self.moment) ~= nil then
+		for i14, value14 in self.moment do
+			local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult5, WriteStringResult2_4 = ProtoModule.writeString(WriteTagResult13, WriteTagResult2_12, i14)
+			local EncodeResult = value14:encode()
+			local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(WriteStringResult5, WriteStringResult2_4, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult5, WriteBufferResult2_4 = ProtoModule.writeBuffer(WriteTagResult14, WriteTagResult2_13, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 24, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult15, WriteTagResult2_14, WriteBufferResult5, WriteBufferResult2_4)
 		end
 	end
-	if self.buy_robux_pending_transfer ~= nil and next(self.buy_robux_pending_transfer) ~= nil then
-		for i38, value37 in self.buy_robux_pending_transfer do
-			local WriteTagResult115, WriteTagResult2_114 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult39, WriteStringResult2_38 = ProtoModule.writeString(WriteTagResult115, WriteTagResult2_114, i38)
-			local EncodeResult = value37:encode()
-			local WriteTagResult116, WriteTagResult2_115 = ProtoModule.writeTag(WriteStringResult39, WriteStringResult2_38, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteBufferResult39, WriteBufferResult2_38 = ProtoModule.writeBuffer(WriteTagResult116, WriteTagResult2_115, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult117, WriteTagResult2_116 = ProtoModule.writeTag(Buf, Count, 36, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult117, WriteTagResult2_116, WriteBufferResult39, WriteBufferResult2_38)
+	if self.community ~= nil and next(self.community) ~= nil then
+		for i30, value30 in self.community do
+			local WriteTagResult100, WriteTagResult2_99 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult34, WriteStringResult2_33 = ProtoModule.writeString(WriteTagResult100, WriteTagResult2_99, i30)
+			local EncodeResult = value30:encode()
+			local WriteTagResult101, WriteTagResult2_100 = ProtoModule.writeTag(WriteStringResult34, WriteStringResult2_33, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult34, WriteBufferResult2_33 = ProtoModule.writeBuffer(WriteTagResult101, WriteTagResult2_100, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult102, WriteTagResult2_101 = ProtoModule.writeTag(Buf, Count, 25, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult102, WriteTagResult2_101, WriteBufferResult34, WriteBufferResult2_33)
 		end
 	end
-	if self.buy_robux_bonus_item ~= nil and next(self.buy_robux_bonus_item) ~= nil then
-		for i32, value31 in self.buy_robux_bonus_item do
+	if self.community_user_membership ~= nil and next(self.community_user_membership) ~= nil then
+		for i25, value25 in self.community_user_membership do
+			local WriteTagResult79, WriteTagResult2_78 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult27, WriteStringResult2_26 = ProtoModule.writeString(WriteTagResult79, WriteTagResult2_78, i25)
+			local EncodeResult = value25:encode()
+			local WriteTagResult80, WriteTagResult2_79 = ProtoModule.writeTag(WriteStringResult27, WriteStringResult2_26, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult27, WriteBufferResult2_26 = ProtoModule.writeBuffer(WriteTagResult80, WriteTagResult2_79, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult81, WriteTagResult2_80 = ProtoModule.writeTag(Buf, Count, 26, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult81, WriteTagResult2_80, WriteBufferResult27, WriteBufferResult2_26)
+		end
+	end
+	if self.friend_recommendation ~= nil and next(self.friend_recommendation) ~= nil then
+		for i32, value32 in self.friend_recommendation do
+			local WriteTagResult70, WriteTagResult2_69 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult24, WriteStringResult2_23 = ProtoModule.writeString(WriteTagResult70, WriteTagResult2_69, i32)
+			local EncodeResult = value32:encode()
+			local WriteTagResult71, WriteTagResult2_70 = ProtoModule.writeTag(WriteStringResult24, WriteStringResult2_23, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult24, WriteBufferResult2_23 = ProtoModule.writeBuffer(WriteTagResult71, WriteTagResult2_70, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult72, WriteTagResult2_71 = ProtoModule.writeTag(Buf, Count, 27, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult72, WriteTagResult2_71, WriteBufferResult24, WriteBufferResult2_23)
+		end
+	end
+	if self.universe_private_server ~= nil and next(self.universe_private_server) ~= nil then
+		for i33, value33 in self.universe_private_server do
+			local WriteTagResult91, WriteTagResult2_90 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult31, WriteStringResult2_30 = ProtoModule.writeString(WriteTagResult91, WriteTagResult2_90, i33)
+			local EncodeResult = value33:encode()
+			local WriteTagResult92, WriteTagResult2_91 = ProtoModule.writeTag(WriteStringResult31, WriteStringResult2_30, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult31, WriteBufferResult2_30 = ProtoModule.writeBuffer(WriteTagResult92, WriteTagResult2_91, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult93, WriteTagResult2_92 = ProtoModule.writeTag(Buf, Count, 28, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult93, WriteTagResult2_92, WriteBufferResult31, WriteBufferResult2_30)
+		end
+	end
+	if self.notification_badge ~= nil and next(self.notification_badge) ~= nil then
+		for i19, value19 in self.notification_badge do
+			local WriteTagResult61, WriteTagResult2_60 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult21, WriteStringResult2_20 = ProtoModule.writeString(WriteTagResult61, WriteTagResult2_60, i19)
+			local EncodeResult = value19:encode()
+			local WriteTagResult62, WriteTagResult2_61 = ProtoModule.writeTag(WriteStringResult21, WriteStringResult2_20, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult21, WriteBufferResult2_20 = ProtoModule.writeBuffer(WriteTagResult62, WriteTagResult2_61, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult63, WriteTagResult2_62 = ProtoModule.writeTag(Buf, Count, 29, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult63, WriteTagResult2_62, WriteBufferResult21, WriteBufferResult2_20)
+		end
+	end
+	if self.collectible_item ~= nil and next(self.collectible_item) ~= nil then
+		for i6, value6 in self.collectible_item do
 			local WriteTagResult31, WriteTagResult2_30 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult11, WriteStringResult2_10 = ProtoModule.writeString(WriteTagResult31, WriteTagResult2_30, i32)
-			local EncodeResult = value31:encode()
+			local WriteStringResult11, WriteStringResult2_10 = ProtoModule.writeString(WriteTagResult31, WriteTagResult2_30, i6)
+			local EncodeResult = value6:encode()
 			local WriteTagResult32, WriteTagResult2_31 = ProtoModule.writeTag(WriteStringResult11, WriteStringResult2_10, 2, ProtoModule.wireTypes.lengthDelimited)
 			local WriteBufferResult11, WriteBufferResult2_10 = ProtoModule.writeBuffer(WriteTagResult32, WriteTagResult2_31, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult33, WriteTagResult2_32 = ProtoModule.writeTag(Buf, Count, 37, ProtoModule.wireTypes.lengthDelimited)
+			local WriteTagResult33, WriteTagResult2_32 = ProtoModule.writeTag(Buf, Count, 30, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult33, WriteTagResult2_32, WriteBufferResult11, WriteBufferResult2_10)
 		end
 	end
-	if self.user_library_saved_state ~= nil and next(self.user_library_saved_state) ~= nil then
-		for i36, value35 in self.user_library_saved_state do
-			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult1, WriteStringResult2_1 = ProtoModule.writeString(WriteTagResult4, WriteTagResult2_3, i36)
-			local EncodeResult = value35:encode()
-			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(WriteStringResult1, WriteStringResult2_1, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteBufferResult1, WriteBufferResult2_1 = ProtoModule.writeBuffer(WriteTagResult5, WriteTagResult2_4, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 38, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult6, WriteTagResult2_5, WriteBufferResult1, WriteBufferResult2_1)
+	if self.leaderboard_stats ~= nil and next(self.leaderboard_stats) ~= nil then
+		for i35, leaderboardStat in self.leaderboard_stats do
+			local WriteTagResult106, WriteTagResult2_105 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult36, WriteStringResult2_35 = ProtoModule.writeString(WriteTagResult106, WriteTagResult2_105, i35)
+			local EncodeResult = leaderboardStat:encode()
+			local WriteTagResult107, WriteTagResult2_106 = ProtoModule.writeTag(WriteStringResult36, WriteStringResult2_35, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult36, WriteBufferResult2_35 = ProtoModule.writeBuffer(WriteTagResult107, WriteTagResult2_106, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult108, WriteTagResult2_107 = ProtoModule.writeTag(Buf, Count, 31, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult108, WriteTagResult2_107, WriteBufferResult36, WriteBufferResult2_35)
 		end
 	end
-	if self.game_pass_vote ~= nil and next(self.game_pass_vote) ~= nil then
-		for i37, value36 in self.game_pass_vote do
+	if self.marketplace_asset_user_favorite ~= nil and next(self.marketplace_asset_user_favorite) ~= nil then
+		for i36, value35 in self.marketplace_asset_user_favorite do
+			local WriteTagResult109, WriteTagResult2_108 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult37, WriteStringResult2_36 = ProtoModule.writeString(WriteTagResult109, WriteTagResult2_108, i36)
+			local EncodeResult = value35:encode()
+			local WriteTagResult110, WriteTagResult2_109 = ProtoModule.writeTag(WriteStringResult37, WriteStringResult2_36, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult37, WriteBufferResult2_36 = ProtoModule.writeBuffer(WriteTagResult110, WriteTagResult2_109, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult111, WriteTagResult2_110 = ProtoModule.writeTag(Buf, Count, 32, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult111, WriteTagResult2_110, WriteBufferResult37, WriteBufferResult2_36)
+		end
+	end
+	if self.marketplace_bundle_user_favorite ~= nil and next(self.marketplace_bundle_user_favorite) ~= nil then
+		for i37, value36 in self.marketplace_bundle_user_favorite do
 			local WriteTagResult112, WriteTagResult2_111 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
 			local WriteStringResult38, WriteStringResult2_37 = ProtoModule.writeString(WriteTagResult112, WriteTagResult2_111, i37)
 			local EncodeResult = value36:encode()
 			local WriteTagResult113, WriteTagResult2_112 = ProtoModule.writeTag(WriteStringResult38, WriteStringResult2_37, 2, ProtoModule.wireTypes.lengthDelimited)
 			local WriteBufferResult38, WriteBufferResult2_37 = ProtoModule.writeBuffer(WriteTagResult113, WriteTagResult2_112, EncodeResult, buffer.len(EncodeResult))
-			local WriteTagResult114, WriteTagResult2_113 = ProtoModule.writeTag(Buf, Count, 39, ProtoModule.wireTypes.lengthDelimited)
+			local WriteTagResult114, WriteTagResult2_113 = ProtoModule.writeTag(Buf, Count, 33, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult114, WriteTagResult2_113, WriteBufferResult38, WriteBufferResult2_37)
+		end
+	end
+	if self.buy_robux_one_time_product ~= nil and next(self.buy_robux_one_time_product) ~= nil then
+		for i16, value16 in self.buy_robux_one_time_product do
+			local WriteTagResult52, WriteTagResult2_51 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult18, WriteStringResult2_17 = ProtoModule.writeString(WriteTagResult52, WriteTagResult2_51, i16)
+			local EncodeResult = value16:encode()
+			local WriteTagResult53, WriteTagResult2_52 = ProtoModule.writeTag(WriteStringResult18, WriteStringResult2_17, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult18, WriteBufferResult2_17 = ProtoModule.writeBuffer(WriteTagResult53, WriteTagResult2_52, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult54, WriteTagResult2_53 = ProtoModule.writeTag(Buf, Count, 34, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult54, WriteTagResult2_53, WriteBufferResult18, WriteBufferResult2_17)
+		end
+	end
+	if self.buy_robux_subscription_product ~= nil and next(self.buy_robux_subscription_product) ~= nil then
+		for i34, value34 in self.buy_robux_subscription_product do
+			local WriteTagResult88, WriteTagResult2_87 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult30, WriteStringResult2_29 = ProtoModule.writeString(WriteTagResult88, WriteTagResult2_87, i34)
+			local EncodeResult = value34:encode()
+			local WriteTagResult89, WriteTagResult2_88 = ProtoModule.writeTag(WriteStringResult30, WriteStringResult2_29, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult30, WriteBufferResult2_29 = ProtoModule.writeBuffer(WriteTagResult89, WriteTagResult2_88, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult90, WriteTagResult2_89 = ProtoModule.writeTag(Buf, Count, 35, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult90, WriteTagResult2_89, WriteBufferResult30, WriteBufferResult2_29)
+		end
+	end
+	if self.buy_robux_pending_transfer ~= nil and next(self.buy_robux_pending_transfer) ~= nil then
+		for i18, value18 in self.buy_robux_pending_transfer do
+			local WriteTagResult55, WriteTagResult2_54 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult19, WriteStringResult2_18 = ProtoModule.writeString(WriteTagResult55, WriteTagResult2_54, i18)
+			local EncodeResult = value18:encode()
+			local WriteTagResult56, WriteTagResult2_55 = ProtoModule.writeTag(WriteStringResult19, WriteStringResult2_18, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult19, WriteBufferResult2_18 = ProtoModule.writeBuffer(WriteTagResult56, WriteTagResult2_55, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult57, WriteTagResult2_56 = ProtoModule.writeTag(Buf, Count, 36, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult57, WriteTagResult2_56, WriteBufferResult19, WriteBufferResult2_18)
+		end
+	end
+	if self.buy_robux_bonus_item ~= nil and next(self.buy_robux_bonus_item) ~= nil then
+		for i31, value31 in self.buy_robux_bonus_item do
+			local WriteTagResult103, WriteTagResult2_102 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult35, WriteStringResult2_34 = ProtoModule.writeString(WriteTagResult103, WriteTagResult2_102, i31)
+			local EncodeResult = value31:encode()
+			local WriteTagResult104, WriteTagResult2_103 = ProtoModule.writeTag(WriteStringResult35, WriteStringResult2_34, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult35, WriteBufferResult2_34 = ProtoModule.writeBuffer(WriteTagResult104, WriteTagResult2_103, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult105, WriteTagResult2_104 = ProtoModule.writeTag(Buf, Count, 37, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult105, WriteTagResult2_104, WriteBufferResult35, WriteBufferResult2_34)
+		end
+	end
+	if self.user_library_saved_state ~= nil and next(self.user_library_saved_state) ~= nil then
+		for i26, value26 in self.user_library_saved_state do
+			local WriteTagResult82, WriteTagResult2_81 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult28, WriteStringResult2_27 = ProtoModule.writeString(WriteTagResult82, WriteTagResult2_81, i26)
+			local EncodeResult = value26:encode()
+			local WriteTagResult83, WriteTagResult2_82 = ProtoModule.writeTag(WriteStringResult28, WriteStringResult2_27, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult28, WriteBufferResult2_27 = ProtoModule.writeBuffer(WriteTagResult83, WriteTagResult2_82, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult84, WriteTagResult2_83 = ProtoModule.writeTag(Buf, Count, 38, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult84, WriteTagResult2_83, WriteBufferResult28, WriteBufferResult2_27)
+		end
+	end
+	if self.game_pass_vote ~= nil and next(self.game_pass_vote) ~= nil then
+		for i38, value37 in self.game_pass_vote do
+			local WriteTagResult115, WriteTagResult2_114 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult39, WriteStringResult2_38 = ProtoModule.writeString(WriteTagResult115, WriteTagResult2_114, i38)
+			local EncodeResult = value37:encode()
+			local WriteTagResult116, WriteTagResult2_115 = ProtoModule.writeTag(WriteStringResult39, WriteStringResult2_38, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult39, WriteBufferResult2_38 = ProtoModule.writeBuffer(WriteTagResult116, WriteTagResult2_115, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult117, WriteTagResult2_116 = ProtoModule.writeTag(Buf, Count, 39, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult117, WriteTagResult2_116, WriteBufferResult39, WriteBufferResult2_38)
 		end
 	end
 	local Buf1 = buffer.create(Count)
@@ -539,21 +539,21 @@ function Module.decode(Buf)
 			_, v512 = ProtoModule.readVarInt(Buf, v1)
 		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 			if Tag == 1 then
-				local Buffer2
-				Buffer2, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_BadgeEntry.decode(Buffer2)
+				local Buffer1
+				Buffer1, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_BadgeEntry.decode(Buffer1)
 				local NewResult = BadgeDataModule.BadgeData.new()
 				NewModule.badge[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 2 then
-				local Buffer3
-				Buffer3, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_UniverseEntry.decode(Buffer3)
+				local Buffer2
+				Buffer2, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_UniverseEntry.decode(Buffer2)
 				local NewResult = UniverseDataModule.UniverseData.new()
 				NewModule.universe[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 3 then
-				local Buffer4
-				Buffer4, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_CreatorEntry.decode(Buffer4)
+				local Buffer3
+				Buffer3, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_CreatorEntry.decode(Buffer3)
 				local NewResult = CreatorDataModule.CreatorData.new()
 				NewModule.creator[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 4 then
@@ -581,9 +581,9 @@ function Module.decode(Buf)
 				local NewResult = MediaAssetDataModule.MediaAssetData.new()
 				NewModule.media_asset[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 8 then
-				local Buffer10
-				Buffer10, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_SocialLinkEntry.decode(Buffer10)
+				local Buffer9
+				Buffer9, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_SocialLinkEntry.decode(Buffer9)
 				local NewResult = SocialLinkDataModule.SocialLinkData.new()
 				NewModule.social_link[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 9 then
@@ -605,9 +605,9 @@ function Module.decode(Buf)
 				local NewResult = MarketplaceCatalogCategoryDataModule.MarketplaceCatalogCategoryData.new()
 				NewModule.marketplace_catalog_category[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 12 then
-				local Buffer16
-				Buffer16, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_MarketplaceAssetEntry.decode(Buffer16)
+				local Buffer15
+				Buffer15, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_MarketplaceAssetEntry.decode(Buffer15)
 				local NewResult = MarketplaceAssetDataModule.MarketplaceAssetData.new()
 				NewModule.marketplace_asset[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 13 then
@@ -623,63 +623,63 @@ function Module.decode(Buf)
 				local NewResult = MarketplaceLookDataModule.MarketplaceLookData.new()
 				NewModule.marketplace_look[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 15 then
-				local Buffer20
-				Buffer20, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_CatalogSortEntry.decode(Buffer20)
+				local Buffer19
+				Buffer19, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_CatalogSortEntry.decode(Buffer19)
 				local NewResult = CatalogSortDataModule.CatalogSortData.new()
 				NewModule.catalog_sort[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 16 then
-				local Buffer21
-				Buffer21, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_AgeRecommendationEntry.decode(Buffer21)
+				local Buffer16
+				Buffer16, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_AgeRecommendationEntry.decode(Buffer16)
 				local NewResult = AgeRecommendationDataModule.AgeRecommendationData.new()
 				NewModule.age_recommendation[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 17 then
-				local Buffer22
-				Buffer22, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_UniverseUserFollowEntry.decode(Buffer22)
+				local Buffer20
+				Buffer20, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_UniverseUserFollowEntry.decode(Buffer20)
 				local NewResult = UniverseUserFollowDataModule.UniverseUserFollowData.new()
 				NewModule.universe_user_follow[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 18 then
-				local Buffer23
-				Buffer23, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_UniverseUserVoteEntry.decode(Buffer23)
+				local Buffer21
+				Buffer21, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_UniverseUserVoteEntry.decode(Buffer21)
 				local NewResult = UniverseUserVoteDataModule.UniverseUserVoteData.new()
 				NewModule.universe_user_vote[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 19 then
-				local Buffer24
-				Buffer24, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_UserProfileEntry.decode(Buffer24)
+				local Buffer12
+				Buffer12, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_UserProfileEntry.decode(Buffer12)
 				local NewResult = UserProfileDataModule.UserProfileData.new()
 				NewModule.user_profile[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 20 then
-				local Buffer9
-				Buffer9, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_UniverseUserFavoriteEntry.decode(Buffer9)
+				local Buffer23
+				Buffer23, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_UniverseUserFavoriteEntry.decode(Buffer23)
 				local NewResult = UniverseUserFavoriteDataModule.UniverseUserFavoriteData.new()
 				NewModule.universe_user_favorite[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 21 then
-				local Buffer25
-				Buffer25, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_PlayabilityEntry.decode(Buffer25)
+				local Buffer24
+				Buffer24, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_PlayabilityEntry.decode(Buffer24)
 				local NewResult = PlayabilityDataModule.PlayabilityData.new()
 				NewModule.playability[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 22 then
-				local Buffer12
-				Buffer12, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_UniverseUserFollowLimitEntry.decode(Buffer12)
+				local Buffer25
+				Buffer25, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_UniverseUserFollowLimitEntry.decode(Buffer25)
 				local NewResult = UniverseUserFollowLimitDataModule.UniverseUserFollowLimitData.new()
 				NewModule.universe_user_follow_limit[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 23 then
-				local Buffer27
-				Buffer27, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_UniverseUserVoteFeedbackMetadataEntry.decode(Buffer27)
+				local Buffer26
+				Buffer26, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_UniverseUserVoteFeedbackMetadataEntry.decode(Buffer26)
 				local NewResult = UniverseUserVoteFeedbackMetadataDataModule.UniverseUserVoteFeedbackMetadataData.new()
 				NewModule.universe_user_vote_feedback_metadata[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 24 then
-				local Buffer28
-				Buffer28, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_MomentEntry.decode(Buffer28)
+				local Buffer27
+				Buffer27, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_MomentEntry.decode(Buffer27)
 				local NewResult = MomentDataModule.MomentData.new()
 				NewModule.moment[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 25 then
@@ -689,75 +689,75 @@ function Module.decode(Buf)
 				local NewResult = CommunityDataModule.CommunityData.new()
 				NewModule.community[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 26 then
-				local Buffer1
-				Buffer1, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_CommunityUserMembershipEntry.decode(Buffer1)
+				local Buffer30
+				Buffer30, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_CommunityUserMembershipEntry.decode(Buffer30)
 				local NewResult = CommunityUserMembershipDataModule.CommunityUserMembershipData.new()
 				NewModule.community_user_membership[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 27 then
-				local Buffer30
-				Buffer30, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_FriendRecommendationEntry.decode(Buffer30)
+				local Buffer31
+				Buffer31, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_FriendRecommendationEntry.decode(Buffer31)
 				local NewResult = FriendRecommendationDataModule.FriendRecommendationData.new()
 				NewModule.friend_recommendation[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 28 then
-				local Buffer31
-				Buffer31, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_UniversePrivateServerEntry.decode(Buffer31)
+				local Buffer32
+				Buffer32, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_UniversePrivateServerEntry.decode(Buffer32)
 				local NewResult = UniversePrivateServerDataModule.UniversePrivateServerData.new()
 				NewModule.universe_private_server[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 29 then
-				local Buffer32
-				Buffer32, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_NotificationBadgeEntry.decode(Buffer32)
+				local Buffer22
+				Buffer22, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_NotificationBadgeEntry.decode(Buffer22)
 				local NewResult = NotificationBadgeDataModule.NotificationBadgeData.new()
 				NewModule.notification_badge[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 30 then
-				local Buffer33
-				Buffer33, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_CollectibleItemEntry.decode(Buffer33)
+				local Buffer28
+				Buffer28, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_CollectibleItemEntry.decode(Buffer28)
 				local NewResult = CollectibleItemDataModule.CollectibleItemData.new()
 				NewModule.collectible_item[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 31 then
-				local Buffer34
-				Buffer34, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_LeaderboardStatsEntry.decode(Buffer34)
+				local Buffer33
+				Buffer33, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_LeaderboardStatsEntry.decode(Buffer33)
 				local NewResult = LeaderboardStatsDataModule.LeaderboardStatsData.new()
 				NewModule.leaderboard_stats[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 32 then
-				local Buffer19
-				Buffer19, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_MarketplaceAssetUserFavoriteEntry.decode(Buffer19)
+				local Buffer34
+				Buffer34, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_MarketplaceAssetUserFavoriteEntry.decode(Buffer34)
 				local NewResult = MarketplaceItemUserFavoriteDataModule.MarketplaceItemUserFavoriteData.new()
 				NewModule.marketplace_asset_user_favorite[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 33 then
-				local Buffer15
-				Buffer15, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_MarketplaceBundleUserFavoriteEntry.decode(Buffer15)
+				local Buffer35
+				Buffer35, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_MarketplaceBundleUserFavoriteEntry.decode(Buffer35)
 				local NewResult = MarketplaceItemUserFavoriteDataModule.MarketplaceItemUserFavoriteData.new()
 				NewModule.marketplace_bundle_user_favorite[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 34 then
-				local Buffer35
-				Buffer35, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_BuyRobuxOneTimeProductEntry.decode(Buffer35)
+				local Buffer10
+				Buffer10, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_BuyRobuxOneTimeProductEntry.decode(Buffer10)
 				local NewResult = BuyRobuxProductDataModule.BuyRobuxOneTimeProductData.new()
 				NewModule.buy_robux_one_time_product[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 35 then
-				local Buffer26
-				Buffer26, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_BuyRobuxSubscriptionProductEntry.decode(Buffer26)
+				local Buffer36
+				Buffer36, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_BuyRobuxSubscriptionProductEntry.decode(Buffer36)
 				local NewResult = BuyRobuxProductDataModule.BuyRobuxSubscriptionProductData.new()
 				NewModule.buy_robux_subscription_product[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 36 then
-				local Buffer36
-				Buffer36, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_BuyRobuxPendingTransferEntry.decode(Buffer36)
+				local Buffer37
+				Buffer37, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_BuyRobuxPendingTransferEntry.decode(Buffer37)
 				local NewResult = BuyRobuxPendingTransferDataModule.BuyRobuxPendingTransferData.new()
 				NewModule.buy_robux_pending_transfer[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 37 then
-				local Buffer37
-				Buffer37, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_BuyRobuxBonusItemEntry.decode(Buffer37)
+				local Buffer4
+				Buffer4, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_BuyRobuxBonusItemEntry.decode(Buffer4)
 				local NewResult = BuyRobuxBonusItemDataModule.BuyRobuxBonusItemData.new()
 				NewModule.buy_robux_bonus_item[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 38 then
@@ -843,224 +843,224 @@ function Module:jsonEncode()
 	if self.media_asset ~= nil and next(self.media_asset) ~= nil then
 		local MediaAsset = {}
 		
-		for i7, value7 in self.media_asset do
-			MediaAsset[i7] = value7:jsonEncode()
+		for i6, value6 in self.media_asset do
+			MediaAsset[i6] = value6:jsonEncode()
 		end
 		t.mediaAsset = MediaAsset
 	end
 	if self.social_link ~= nil and next(self.social_link) ~= nil then
 		local SocialLink = {}
 		
-		for i9, value9 in self.social_link do
-			SocialLink[i9] = value9:jsonEncode()
+		for i7, value7 in self.social_link do
+			SocialLink[i7] = value7:jsonEncode()
 		end
 		t.socialLink = SocialLink
 	end
 	if self.game_developer_product ~= nil and next(self.game_developer_product) ~= nil then
 		local GameDeveloperProduct = {}
 		
-		for i11, value11 in self.game_developer_product do
-			GameDeveloperProduct[i11] = value11:jsonEncode()
+		for i8, value8 in self.game_developer_product do
+			GameDeveloperProduct[i8] = value8:jsonEncode()
 		end
 		t.gameDeveloperProduct = GameDeveloperProduct
 	end
 	if self.game_subscription ~= nil and next(self.game_subscription) ~= nil then
 		local GameSubscription = {}
 		
-		for i12, value12 in self.game_subscription do
-			GameSubscription[i12] = value12:jsonEncode()
+		for i9, value9 in self.game_subscription do
+			GameSubscription[i9] = value9:jsonEncode()
 		end
 		t.gameSubscription = GameSubscription
 	end
 	if self.marketplace_catalog_category ~= nil and next(self.marketplace_catalog_category) ~= nil then
 		local MarketplaceCatalogCategory = {}
 		
-		for i13, value13 in self.marketplace_catalog_category do
-			MarketplaceCatalogCategory[i13] = value13:jsonEncode()
+		for i10, value10 in self.marketplace_catalog_category do
+			MarketplaceCatalogCategory[i10] = value10:jsonEncode()
 		end
 		t.marketplaceCatalogCategory = MarketplaceCatalogCategory
 	end
 	if self.marketplace_asset ~= nil and next(self.marketplace_asset) ~= nil then
 		local MarketplaceAsset = {}
 		
-		for i14, value14 in self.marketplace_asset do
-			MarketplaceAsset[i14] = value14:jsonEncode()
+		for i11, value11 in self.marketplace_asset do
+			MarketplaceAsset[i11] = value11:jsonEncode()
 		end
 		t.marketplaceAsset = MarketplaceAsset
 	end
 	if self.marketplace_bundle ~= nil and next(self.marketplace_bundle) ~= nil then
 		local MarketplaceBundle = {}
 		
-		for i15, value15 in self.marketplace_bundle do
-			MarketplaceBundle[i15] = value15:jsonEncode()
+		for i12, value12 in self.marketplace_bundle do
+			MarketplaceBundle[i12] = value12:jsonEncode()
 		end
 		t.marketplaceBundle = MarketplaceBundle
 	end
 	if self.marketplace_look ~= nil and next(self.marketplace_look) ~= nil then
 		local MarketplaceLook = {}
 		
-		for i16, value16 in self.marketplace_look do
-			MarketplaceLook[i16] = value16:jsonEncode()
+		for i14, value14 in self.marketplace_look do
+			MarketplaceLook[i14] = value14:jsonEncode()
 		end
 		t.marketplaceLook = MarketplaceLook
 	end
 	if self.catalog_sort ~= nil and next(self.catalog_sort) ~= nil then
 		local CatalogSort = {}
 		
-		for i17, value17 in self.catalog_sort do
-			CatalogSort[i17] = value17:jsonEncode()
+		for i15, value15 in self.catalog_sort do
+			CatalogSort[i15] = value15:jsonEncode()
 		end
 		t.catalogSort = CatalogSort
 	end
 	if self.age_recommendation ~= nil and next(self.age_recommendation) ~= nil then
 		local AgeRecommendation = {}
 		
-		for i19, value19 in self.age_recommendation do
-			AgeRecommendation[i19] = value19:jsonEncode()
+		for i18, value18 in self.age_recommendation do
+			AgeRecommendation[i18] = value18:jsonEncode()
 		end
 		t.ageRecommendation = AgeRecommendation
 	end
 	if self.universe_user_follow ~= nil and next(self.universe_user_follow) ~= nil then
 		local UniverseUserFollow = {}
 		
-		for i21, value21 in self.universe_user_follow do
-			UniverseUserFollow[i21] = value21:jsonEncode()
+		for i19, value19 in self.universe_user_follow do
+			UniverseUserFollow[i19] = value19:jsonEncode()
 		end
 		t.universeUserFollow = UniverseUserFollow
 	end
 	if self.universe_user_vote ~= nil and next(self.universe_user_vote) ~= nil then
 		local UniverseUserVote = {}
 		
-		for i22, value22 in self.universe_user_vote do
-			UniverseUserVote[i22] = value22:jsonEncode()
+		for i20, value20 in self.universe_user_vote do
+			UniverseUserVote[i20] = value20:jsonEncode()
 		end
 		t.universeUserVote = UniverseUserVote
 	end
 	if self.user_profile ~= nil and next(self.user_profile) ~= nil then
 		local UserProfile = {}
 		
-		for i23, value23 in self.user_profile do
-			UserProfile[i23] = value23:jsonEncode()
+		for i21, value21 in self.user_profile do
+			UserProfile[i21] = value21:jsonEncode()
 		end
 		t.userProfile = UserProfile
 	end
 	if self.universe_user_favorite ~= nil and next(self.universe_user_favorite) ~= nil then
 		local UniverseUserFavorite = {}
 		
-		for i24, value24 in self.universe_user_favorite do
-			UniverseUserFavorite[i24] = value24:jsonEncode()
+		for i22, value22 in self.universe_user_favorite do
+			UniverseUserFavorite[i22] = value22:jsonEncode()
 		end
 		t.universeUserFavorite = UniverseUserFavorite
 	end
 	if self.playability ~= nil and next(self.playability) ~= nil then
 		local Playability = {}
 		
-		for i25, value25 in self.playability do
-			Playability[i25] = value25:jsonEncode()
+		for i23, value23 in self.playability do
+			Playability[i23] = value23:jsonEncode()
 		end
 		t.playability = Playability
 	end
 	if self.universe_user_follow_limit ~= nil and next(self.universe_user_follow_limit) ~= nil then
 		local UniverseUserFollowLimit = {}
 		
-		for i20, value20 in self.universe_user_follow_limit do
-			UniverseUserFollowLimit[i20] = value20:jsonEncode()
+		for i24, value24 in self.universe_user_follow_limit do
+			UniverseUserFollowLimit[i24] = value24:jsonEncode()
 		end
 		t.universeUserFollowLimit = UniverseUserFollowLimit
 	end
 	if self.universe_user_vote_feedback_metadata ~= nil and next(self.universe_user_vote_feedback_metadata) ~= nil then
 		local UniverseUserVoteFeedbackMetadata = {}
 		
-		for i26, value26 in self.universe_user_vote_feedback_metadata do
-			UniverseUserVoteFeedbackMetadata[i26] = value26:jsonEncode()
+		for i25, value25 in self.universe_user_vote_feedback_metadata do
+			UniverseUserVoteFeedbackMetadata[i25] = value25:jsonEncode()
 		end
 		t.universeUserVoteFeedbackMetadata = UniverseUserVoteFeedbackMetadata
 	end
 	if self.moment ~= nil and next(self.moment) ~= nil then
 		local Moment = {}
 		
-		for i18, value18 in self.moment do
-			Moment[i18] = value18:jsonEncode()
+		for i13, value13 in self.moment do
+			Moment[i13] = value13:jsonEncode()
 		end
 		t.moment = Moment
 	end
 	if self.community ~= nil and next(self.community) ~= nil then
 		local Community = {}
 		
-		for i27, value27 in self.community do
-			Community[i27] = value27:jsonEncode()
+		for i26, value26 in self.community do
+			Community[i26] = value26:jsonEncode()
 		end
 		t.community = Community
 	end
 	if self.community_user_membership ~= nil and next(self.community_user_membership) ~= nil then
 		local CommunityUserMembership = {}
 		
-		for i28, value28 in self.community_user_membership do
-			CommunityUserMembership[i28] = value28:jsonEncode()
+		for i16, value16 in self.community_user_membership do
+			CommunityUserMembership[i16] = value16:jsonEncode()
 		end
 		t.communityUserMembership = CommunityUserMembership
 	end
 	if self.friend_recommendation ~= nil and next(self.friend_recommendation) ~= nil then
 		local FriendRecommendation = {}
 		
-		for i29, value29 in self.friend_recommendation do
-			FriendRecommendation[i29] = value29:jsonEncode()
+		for i27, value27 in self.friend_recommendation do
+			FriendRecommendation[i27] = value27:jsonEncode()
 		end
 		t.friendRecommendation = FriendRecommendation
 	end
 	if self.universe_private_server ~= nil and next(self.universe_private_server) ~= nil then
 		local UniversePrivateServer = {}
 		
-		for i30, value30 in self.universe_private_server do
-			UniversePrivateServer[i30] = value30:jsonEncode()
+		for i28, value28 in self.universe_private_server do
+			UniversePrivateServer[i28] = value28:jsonEncode()
 		end
 		t.universePrivateServer = UniversePrivateServer
 	end
 	if self.notification_badge ~= nil and next(self.notification_badge) ~= nil then
 		local NotificationBadge = {}
 		
-		for i31, value31 in self.notification_badge do
-			NotificationBadge[i31] = value31:jsonEncode()
+		for i29, value29 in self.notification_badge do
+			NotificationBadge[i29] = value29:jsonEncode()
 		end
 		t.notificationBadge = NotificationBadge
 	end
 	if self.collectible_item ~= nil and next(self.collectible_item) ~= nil then
 		local CollectibleItem = {}
 		
-		for i8, value8 in self.collectible_item do
-			CollectibleItem[i8] = value8:jsonEncode()
+		for i30, value30 in self.collectible_item do
+			CollectibleItem[i30] = value30:jsonEncode()
 		end
 		t.collectibleItem = CollectibleItem
 	end
 	if self.leaderboard_stats ~= nil and next(self.leaderboard_stats) ~= nil then
 		local LeaderboardStats = {}
 		
-		for i32, leaderboardStat in self.leaderboard_stats do
-			LeaderboardStats[i32] = leaderboardStat:jsonEncode()
+		for i31, leaderboardStat in self.leaderboard_stats do
+			LeaderboardStats[i31] = leaderboardStat:jsonEncode()
 		end
 		t.leaderboardStats = LeaderboardStats
 	end
 	if self.marketplace_asset_user_favorite ~= nil and next(self.marketplace_asset_user_favorite) ~= nil then
 		local MarketplaceAssetUserFavorite = {}
 		
-		for i33, value32 in self.marketplace_asset_user_favorite do
-			MarketplaceAssetUserFavorite[i33] = value32:jsonEncode()
+		for i32, value31 in self.marketplace_asset_user_favorite do
+			MarketplaceAssetUserFavorite[i32] = value31:jsonEncode()
 		end
 		t.marketplaceAssetUserFavorite = MarketplaceAssetUserFavorite
 	end
 	if self.marketplace_bundle_user_favorite ~= nil and next(self.marketplace_bundle_user_favorite) ~= nil then
 		local MarketplaceBundleUserFavorite = {}
 		
-		for i34, value33 in self.marketplace_bundle_user_favorite do
-			MarketplaceBundleUserFavorite[i34] = value33:jsonEncode()
+		for i33, value32 in self.marketplace_bundle_user_favorite do
+			MarketplaceBundleUserFavorite[i33] = value32:jsonEncode()
 		end
 		t.marketplaceBundleUserFavorite = MarketplaceBundleUserFavorite
 	end
 	if self.buy_robux_one_time_product ~= nil and next(self.buy_robux_one_time_product) ~= nil then
 		local BuyRobuxOneTimeProduct = {}
 		
-		for i6, value6 in self.buy_robux_one_time_product do
-			BuyRobuxOneTimeProduct[i6] = value6:jsonEncode()
+		for i34, value33 in self.buy_robux_one_time_product do
+			BuyRobuxOneTimeProduct[i34] = value33:jsonEncode()
 		end
 		t.buyRobuxOneTimeProduct = BuyRobuxOneTimeProduct
 	end
@@ -1075,16 +1075,16 @@ function Module:jsonEncode()
 	if self.buy_robux_pending_transfer ~= nil and next(self.buy_robux_pending_transfer) ~= nil then
 		local BuyRobuxPendingTransfer = {}
 		
-		for i10, value10 in self.buy_robux_pending_transfer do
-			BuyRobuxPendingTransfer[i10] = value10:jsonEncode()
+		for i36, value35 in self.buy_robux_pending_transfer do
+			BuyRobuxPendingTransfer[i36] = value35:jsonEncode()
 		end
 		t.buyRobuxPendingTransfer = BuyRobuxPendingTransfer
 	end
 	if self.buy_robux_bonus_item ~= nil and next(self.buy_robux_bonus_item) ~= nil then
 		local BuyRobuxBonusItem = {}
 		
-		for i36, value35 in self.buy_robux_bonus_item do
-			BuyRobuxBonusItem[i36] = value35:jsonEncode()
+		for i17, value17 in self.buy_robux_bonus_item do
+			BuyRobuxBonusItem[i17] = value17:jsonEncode()
 		end
 		t.buyRobuxBonusItem = BuyRobuxBonusItem
 	end
@@ -1114,466 +1114,466 @@ function Module:jsonDecode()
 	if self.badge ~= nil then
 		local Badge = {}
 		
-		for i1, value1 in self.badge do
-			Badge[i1] = BadgeDataModule.BadgeData.jsonDecode(value1)
+		for i, value in self.badge do
+			Badge[i] = BadgeDataModule.BadgeData.jsonDecode(value)
 		end
 		NewModule.badge = Badge
 	end
 	if self.universe ~= nil then
 		local Universe = {}
 		
-		for i2, value2 in self.universe do
-			Universe[i2] = UniverseDataModule.UniverseData.jsonDecode(value2)
+		for i1, value1 in self.universe do
+			Universe[i1] = UniverseDataModule.UniverseData.jsonDecode(value1)
 		end
 		NewModule.universe = Universe
 	end
 	if self.creator ~= nil then
 		local Creator = {}
 		
-		for i3, value3 in self.creator do
-			Creator[i3] = CreatorDataModule.CreatorData.jsonDecode(value3)
+		for i2, value2 in self.creator do
+			Creator[i2] = CreatorDataModule.CreatorData.jsonDecode(value2)
 		end
 		NewModule.creator = Creator
 	end
 	if self.event ~= nil then
 		local Event = {}
 		
-		for i4, value4 in self.event do
-			Event[i4] = EventDataModule.EventData.jsonDecode(value4)
+		for i3, value3 in self.event do
+			Event[i3] = EventDataModule.EventData.jsonDecode(value3)
 		end
 		NewModule.event = Event
 	end
 	if self.song ~= nil then
 		local Song = {}
 		
-		for i5, value5 in self.song do
-			Song[i5] = SongDataModule.SongData.jsonDecode(value5)
+		for i4, value4 in self.song do
+			Song[i4] = SongDataModule.SongData.jsonDecode(value4)
 		end
 		NewModule.song = Song
 	end
 	if self.game_pass ~= nil then
 		local Game_pass = {}
 		
-		for i6, value6 in self.game_pass do
-			Game_pass[i6] = GamePassDataModule.GamePassData.jsonDecode(value6)
+		for i5, value5 in self.game_pass do
+			Game_pass[i5] = GamePassDataModule.GamePassData.jsonDecode(value5)
 		end
 		NewModule.game_pass = Game_pass
 	end
 	if self.gamePass ~= nil then
 		local Game_pass = {}
 		
-		for i9, value9 in self.gamePass do
-			Game_pass[i9] = GamePassDataModule.GamePassData.jsonDecode(value9)
+		for i6, value6 in self.gamePass do
+			Game_pass[i6] = GamePassDataModule.GamePassData.jsonDecode(value6)
 		end
 		NewModule.game_pass = Game_pass
 	end
 	if self.media_asset ~= nil then
 		local Media_asset = {}
 		
-		for i11, value11 in self.media_asset do
-			Media_asset[i11] = MediaAssetDataModule.MediaAssetData.jsonDecode(value11)
+		for i7, value7 in self.media_asset do
+			Media_asset[i7] = MediaAssetDataModule.MediaAssetData.jsonDecode(value7)
 		end
 		NewModule.media_asset = Media_asset
 	end
 	if self.mediaAsset ~= nil then
 		local Media_asset = {}
 		
-		for i12, value12 in self.mediaAsset do
-			Media_asset[i12] = MediaAssetDataModule.MediaAssetData.jsonDecode(value12)
+		for i8, value8 in self.mediaAsset do
+			Media_asset[i8] = MediaAssetDataModule.MediaAssetData.jsonDecode(value8)
 		end
 		NewModule.media_asset = Media_asset
 	end
 	if self.social_link ~= nil then
 		local Social_link = {}
 		
-		for i13, value13 in self.social_link do
-			Social_link[i13] = SocialLinkDataModule.SocialLinkData.jsonDecode(value13)
+		for i9, value9 in self.social_link do
+			Social_link[i9] = SocialLinkDataModule.SocialLinkData.jsonDecode(value9)
 		end
 		NewModule.social_link = Social_link
 	end
 	if self.socialLink ~= nil then
 		local Social_link = {}
 		
-		for i14, value14 in self.socialLink do
-			Social_link[i14] = SocialLinkDataModule.SocialLinkData.jsonDecode(value14)
+		for i10, value10 in self.socialLink do
+			Social_link[i10] = SocialLinkDataModule.SocialLinkData.jsonDecode(value10)
 		end
 		NewModule.social_link = Social_link
 	end
 	if self.game_developer_product ~= nil then
 		local Game_developer_product = {}
 		
-		for i15, value15 in self.game_developer_product do
-			Game_developer_product[i15] = GameDeveloperProductDataModule.GameDeveloperProductData.jsonDecode(value15)
+		for i11, value11 in self.game_developer_product do
+			Game_developer_product[i11] = GameDeveloperProductDataModule.GameDeveloperProductData.jsonDecode(value11)
 		end
 		NewModule.game_developer_product = Game_developer_product
 	end
 	if self.gameDeveloperProduct ~= nil then
 		local Game_developer_product = {}
 		
-		for i16, value16 in self.gameDeveloperProduct do
-			Game_developer_product[i16] = GameDeveloperProductDataModule.GameDeveloperProductData.jsonDecode(value16)
+		for i12, value12 in self.gameDeveloperProduct do
+			Game_developer_product[i12] = GameDeveloperProductDataModule.GameDeveloperProductData.jsonDecode(value12)
 		end
 		NewModule.game_developer_product = Game_developer_product
 	end
 	if self.game_subscription ~= nil then
 		local Game_subscription = {}
 		
-		for i17, value17 in self.game_subscription do
-			Game_subscription[i17] = GameSubscriptionDataModule.GameSubscriptionData.jsonDecode(value17)
+		for i13, value13 in self.game_subscription do
+			Game_subscription[i13] = GameSubscriptionDataModule.GameSubscriptionData.jsonDecode(value13)
 		end
 		NewModule.game_subscription = Game_subscription
 	end
 	if self.gameSubscription ~= nil then
 		local Game_subscription = {}
 		
-		for i19, value19 in self.gameSubscription do
-			Game_subscription[i19] = GameSubscriptionDataModule.GameSubscriptionData.jsonDecode(value19)
+		for i14, value14 in self.gameSubscription do
+			Game_subscription[i14] = GameSubscriptionDataModule.GameSubscriptionData.jsonDecode(value14)
 		end
 		NewModule.game_subscription = Game_subscription
 	end
 	if self.marketplace_catalog_category ~= nil then
 		local Marketplace_catalog_category = {}
 		
-		for i21, value21 in self.marketplace_catalog_category do
-			Marketplace_catalog_category[i21] = MarketplaceCatalogCategoryDataModule.MarketplaceCatalogCategoryData.jsonDecode(value21)
+		for i15, value15 in self.marketplace_catalog_category do
+			Marketplace_catalog_category[i15] = MarketplaceCatalogCategoryDataModule.MarketplaceCatalogCategoryData.jsonDecode(value15)
 		end
 		NewModule.marketplace_catalog_category = Marketplace_catalog_category
 	end
 	if self.marketplaceCatalogCategory ~= nil then
 		local Marketplace_catalog_category = {}
 		
-		for i22, value22 in self.marketplaceCatalogCategory do
-			Marketplace_catalog_category[i22] = MarketplaceCatalogCategoryDataModule.MarketplaceCatalogCategoryData.jsonDecode(value22)
+		for i16, value16 in self.marketplaceCatalogCategory do
+			Marketplace_catalog_category[i16] = MarketplaceCatalogCategoryDataModule.MarketplaceCatalogCategoryData.jsonDecode(value16)
 		end
 		NewModule.marketplace_catalog_category = Marketplace_catalog_category
 	end
 	if self.marketplace_asset ~= nil then
 		local Marketplace_asset = {}
 		
-		for i24, value24 in self.marketplace_asset do
-			Marketplace_asset[i24] = MarketplaceAssetDataModule.MarketplaceAssetData.jsonDecode(value24)
+		for i17, value17 in self.marketplace_asset do
+			Marketplace_asset[i17] = MarketplaceAssetDataModule.MarketplaceAssetData.jsonDecode(value17)
 		end
 		NewModule.marketplace_asset = Marketplace_asset
 	end
 	if self.marketplaceAsset ~= nil then
 		local Marketplace_asset = {}
 		
-		for i26, value25 in self.marketplaceAsset do
-			Marketplace_asset[i26] = MarketplaceAssetDataModule.MarketplaceAssetData.jsonDecode(value25)
+		for i18, value18 in self.marketplaceAsset do
+			Marketplace_asset[i18] = MarketplaceAssetDataModule.MarketplaceAssetData.jsonDecode(value18)
 		end
 		NewModule.marketplace_asset = Marketplace_asset
 	end
 	if self.marketplace_bundle ~= nil then
 		local Marketplace_bundle = {}
 		
-		for i27, value26 in self.marketplace_bundle do
-			Marketplace_bundle[i27] = MarketplaceBundleDataModule.MarketplaceBundleData.jsonDecode(value26)
+		for i19, value19 in self.marketplace_bundle do
+			Marketplace_bundle[i19] = MarketplaceBundleDataModule.MarketplaceBundleData.jsonDecode(value19)
 		end
 		NewModule.marketplace_bundle = Marketplace_bundle
 	end
 	if self.marketplaceBundle ~= nil then
 		local Marketplace_bundle = {}
 		
-		for i30, value29 in self.marketplaceBundle do
-			Marketplace_bundle[i30] = MarketplaceBundleDataModule.MarketplaceBundleData.jsonDecode(value29)
+		for i20, value20 in self.marketplaceBundle do
+			Marketplace_bundle[i20] = MarketplaceBundleDataModule.MarketplaceBundleData.jsonDecode(value20)
 		end
 		NewModule.marketplace_bundle = Marketplace_bundle
 	end
 	if self.marketplace_look ~= nil then
 		local Marketplace_look = {}
 		
-		for i31, value30 in self.marketplace_look do
-			Marketplace_look[i31] = MarketplaceLookDataModule.MarketplaceLookData.jsonDecode(value30)
+		for i21, value21 in self.marketplace_look do
+			Marketplace_look[i21] = MarketplaceLookDataModule.MarketplaceLookData.jsonDecode(value21)
 		end
 		NewModule.marketplace_look = Marketplace_look
 	end
 	if self.marketplaceLook ~= nil then
-		local Marketplace_look = {}
+		local Marketplace_look1 = {}
 		
-		for i33, value32 in self.marketplaceLook do
-			Marketplace_look[i33] = MarketplaceLookDataModule.MarketplaceLookData.jsonDecode(value32)
+		for i22, value22 in self.marketplaceLook do
+			Marketplace_look1[i22] = MarketplaceLookDataModule.MarketplaceLookData.jsonDecode(value22)
 		end
-		NewModule.marketplace_look = Marketplace_look
+		NewModule.marketplace_look = Marketplace_look1
 	end
 	if self.catalog_sort ~= nil then
 		local Catalog_sort = {}
 		
-		for i34, value33 in self.catalog_sort do
-			Catalog_sort[i34] = CatalogSortDataModule.CatalogSortData.jsonDecode(value33)
+		for i24, value24 in self.catalog_sort do
+			Catalog_sort[i24] = CatalogSortDataModule.CatalogSortData.jsonDecode(value24)
 		end
 		NewModule.catalog_sort = Catalog_sort
 	end
 	if self.catalogSort ~= nil then
-		local Catalog_sort = {}
+		local Catalog_sort1 = {}
 		
-		for i35, value34 in self.catalogSort do
-			Catalog_sort[i35] = CatalogSortDataModule.CatalogSortData.jsonDecode(value34)
+		for i25, value25 in self.catalogSort do
+			Catalog_sort1[i25] = CatalogSortDataModule.CatalogSortData.jsonDecode(value25)
 		end
-		NewModule.catalog_sort = Catalog_sort
+		NewModule.catalog_sort = Catalog_sort1
 	end
 	if self.age_recommendation ~= nil then
 		local Age_recommendation = {}
 		
-		for i32, value31 in self.age_recommendation do
-			Age_recommendation[i32] = AgeRecommendationDataModule.AgeRecommendationData.jsonDecode(value31)
+		for i26, value26 in self.age_recommendation do
+			Age_recommendation[i26] = AgeRecommendationDataModule.AgeRecommendationData.jsonDecode(value26)
 		end
 		NewModule.age_recommendation = Age_recommendation
 	end
 	if self.ageRecommendation ~= nil then
-		local Age_recommendation = {}
+		local Age_recommendation1 = {}
 		
-		for i36, value35 in self.ageRecommendation do
-			Age_recommendation[i36] = AgeRecommendationDataModule.AgeRecommendationData.jsonDecode(value35)
+		for i27, value27 in self.ageRecommendation do
+			Age_recommendation1[i27] = AgeRecommendationDataModule.AgeRecommendationData.jsonDecode(value27)
 		end
-		NewModule.age_recommendation = Age_recommendation
+		NewModule.age_recommendation = Age_recommendation1
 	end
 	if self.universe_user_follow ~= nil then
 		local Universe_user_follow = {}
 		
-		for i37, value36 in self.universe_user_follow do
-			Universe_user_follow[i37] = UniverseUserFollowDataModule.UniverseUserFollowData.jsonDecode(value36)
+		for i28, value28 in self.universe_user_follow do
+			Universe_user_follow[i28] = UniverseUserFollowDataModule.UniverseUserFollowData.jsonDecode(value28)
 		end
 		NewModule.universe_user_follow = Universe_user_follow
 	end
 	if self.universeUserFollow ~= nil then
 		local Universe_user_follow = {}
 		
-		for i38, value37 in self.universeUserFollow do
-			Universe_user_follow[i38] = UniverseUserFollowDataModule.UniverseUserFollowData.jsonDecode(value37)
+		for i29, value29 in self.universeUserFollow do
+			Universe_user_follow[i29] = UniverseUserFollowDataModule.UniverseUserFollowData.jsonDecode(value29)
 		end
 		NewModule.universe_user_follow = Universe_user_follow
 	end
 	if self.universe_user_vote ~= nil then
-		local Universe_user_vote1 = {}
+		local Universe_user_vote = {}
 		
-		for i29, value28 in self.universe_user_vote do
-			Universe_user_vote1[i29] = UniverseUserVoteDataModule.UniverseUserVoteData.jsonDecode(value28)
+		for i30, value30 in self.universe_user_vote do
+			Universe_user_vote[i30] = UniverseUserVoteDataModule.UniverseUserVoteData.jsonDecode(value30)
 		end
-		NewModule.universe_user_vote = Universe_user_vote1
+		NewModule.universe_user_vote = Universe_user_vote
 	end
 	if self.universeUserVote ~= nil then
 		local Universe_user_vote = {}
 		
-		for i20, value20 in self.universeUserVote do
-			Universe_user_vote[i20] = UniverseUserVoteDataModule.UniverseUserVoteData.jsonDecode(value20)
+		for i31, value31 in self.universeUserVote do
+			Universe_user_vote[i31] = UniverseUserVoteDataModule.UniverseUserVoteData.jsonDecode(value31)
 		end
 		NewModule.universe_user_vote = Universe_user_vote
 	end
 	if self.user_profile ~= nil then
 		local User_profile = {}
 		
-		for i39, value38 in self.user_profile do
-			User_profile[i39] = UserProfileDataModule.UserProfileData.jsonDecode(value38)
+		for i32, value32 in self.user_profile do
+			User_profile[i32] = UserProfileDataModule.UserProfileData.jsonDecode(value32)
 		end
 		NewModule.user_profile = User_profile
 	end
 	if self.userProfile ~= nil then
 		local User_profile = {}
 		
-		for i40, value39 in self.userProfile do
-			User_profile[i40] = UserProfileDataModule.UserProfileData.jsonDecode(value39)
+		for i33, value33 in self.userProfile do
+			User_profile[i33] = UserProfileDataModule.UserProfileData.jsonDecode(value33)
 		end
 		NewModule.user_profile = User_profile
 	end
 	if self.universe_user_favorite ~= nil then
 		local Universe_user_favorite = {}
 		
-		for i41, value40 in self.universe_user_favorite do
-			Universe_user_favorite[i41] = UniverseUserFavoriteDataModule.UniverseUserFavoriteData.jsonDecode(value40)
+		for i35, value35 in self.universe_user_favorite do
+			Universe_user_favorite[i35] = UniverseUserFavoriteDataModule.UniverseUserFavoriteData.jsonDecode(value35)
 		end
 		NewModule.universe_user_favorite = Universe_user_favorite
 	end
 	if self.universeUserFavorite ~= nil then
-		local Universe_user_favorite = {}
+		local Universe_user_favorite1 = {}
 		
-		for i43, value41 in self.universeUserFavorite do
-			Universe_user_favorite[i43] = UniverseUserFavoriteDataModule.UniverseUserFavoriteData.jsonDecode(value41)
+		for i37, value37 in self.universeUserFavorite do
+			Universe_user_favorite1[i37] = UniverseUserFavoriteDataModule.UniverseUserFavoriteData.jsonDecode(value37)
 		end
-		NewModule.universe_user_favorite = Universe_user_favorite
+		NewModule.universe_user_favorite = Universe_user_favorite1
 	end
 	if self.playability ~= nil then
 		local Playability = {}
 		
-		for i44, value42 in self.playability do
-			Playability[i44] = PlayabilityDataModule.PlayabilityData.jsonDecode(value42)
+		for i38, value38 in self.playability do
+			Playability[i38] = PlayabilityDataModule.PlayabilityData.jsonDecode(value38)
 		end
 		NewModule.playability = Playability
 	end
 	if self.universe_user_follow_limit ~= nil then
-		local Universe_user_follow_limit1 = {}
-		
-		for i45, value43 in self.universe_user_follow_limit do
-			Universe_user_follow_limit1[i45] = UniverseUserFollowLimitDataModule.UniverseUserFollowLimitData.jsonDecode(value43)
-		end
-		NewModule.universe_user_follow_limit = Universe_user_follow_limit1
-	end
-	if self.universeUserFollowLimit ~= nil then
 		local Universe_user_follow_limit = {}
 		
-		for i8, value8 in self.universeUserFollowLimit do
-			Universe_user_follow_limit[i8] = UniverseUserFollowLimitDataModule.UniverseUserFollowLimitData.jsonDecode(value8)
+		for i39, value39 in self.universe_user_follow_limit do
+			Universe_user_follow_limit[i39] = UniverseUserFollowLimitDataModule.UniverseUserFollowLimitData.jsonDecode(value39)
 		end
 		NewModule.universe_user_follow_limit = Universe_user_follow_limit
+	end
+	if self.universeUserFollowLimit ~= nil then
+		local Universe_user_follow_limit1 = {}
+		
+		for i40, value40 in self.universeUserFollowLimit do
+			Universe_user_follow_limit1[i40] = UniverseUserFollowLimitDataModule.UniverseUserFollowLimitData.jsonDecode(value40)
+		end
+		NewModule.universe_user_follow_limit = Universe_user_follow_limit1
 	end
 	if self.universe_user_vote_feedback_metadata ~= nil then
 		local Universe_user_vote_feedback_metadata = {}
 		
-		for i46, value44 in self.universe_user_vote_feedback_metadata do
-			Universe_user_vote_feedback_metadata[i46] = UniverseUserVoteFeedbackMetadataDataModule.UniverseUserVoteFeedbackMetadataData.jsonDecode(value44)
+		for i41, value41 in self.universe_user_vote_feedback_metadata do
+			Universe_user_vote_feedback_metadata[i41] = UniverseUserVoteFeedbackMetadataDataModule.UniverseUserVoteFeedbackMetadataData.jsonDecode(value41)
 		end
 		NewModule.universe_user_vote_feedback_metadata = Universe_user_vote_feedback_metadata
 	end
 	if self.universeUserVoteFeedbackMetadata ~= nil then
-		local Universe_user_vote_feedback_metadata = {}
+		local Universe_user_vote_feedback_metadata1 = {}
 		
-		for i47, value45 in self.universeUserVoteFeedbackMetadata do
-			Universe_user_vote_feedback_metadata[i47] = UniverseUserVoteFeedbackMetadataDataModule.UniverseUserVoteFeedbackMetadataData.jsonDecode(value45)
+		for i42, value42 in self.universeUserVoteFeedbackMetadata do
+			Universe_user_vote_feedback_metadata1[i42] = UniverseUserVoteFeedbackMetadataDataModule.UniverseUserVoteFeedbackMetadataData.jsonDecode(value42)
 		end
-		NewModule.universe_user_vote_feedback_metadata = Universe_user_vote_feedback_metadata
+		NewModule.universe_user_vote_feedback_metadata = Universe_user_vote_feedback_metadata1
 	end
 	if self.moment ~= nil then
 		local Moment = {}
 		
-		for i48, value46 in self.moment do
-			Moment[i48] = MomentDataModule.MomentData.jsonDecode(value46)
+		for i43, value43 in self.moment do
+			Moment[i43] = MomentDataModule.MomentData.jsonDecode(value43)
 		end
 		NewModule.moment = Moment
 	end
 	if self.community ~= nil then
 		local Community = {}
 		
-		for i49, value47 in self.community do
-			Community[i49] = CommunityDataModule.CommunityData.jsonDecode(value47)
+		for i44, value44 in self.community do
+			Community[i44] = CommunityDataModule.CommunityData.jsonDecode(value44)
 		end
 		NewModule.community = Community
 	end
 	if self.community_user_membership ~= nil then
 		local Community_user_membership = {}
 		
-		for i10, value10 in self.community_user_membership do
-			Community_user_membership[i10] = CommunityUserMembershipDataModule.CommunityUserMembershipData.jsonDecode(value10)
+		for i45, value45 in self.community_user_membership do
+			Community_user_membership[i45] = CommunityUserMembershipDataModule.CommunityUserMembershipData.jsonDecode(value45)
 		end
 		NewModule.community_user_membership = Community_user_membership
 	end
 	if self.communityUserMembership ~= nil then
 		local Community_user_membership = {}
 		
-		for i51, value49 in self.communityUserMembership do
-			Community_user_membership[i51] = CommunityUserMembershipDataModule.CommunityUserMembershipData.jsonDecode(value49)
+		for i46, value46 in self.communityUserMembership do
+			Community_user_membership[i46] = CommunityUserMembershipDataModule.CommunityUserMembershipData.jsonDecode(value46)
 		end
 		NewModule.community_user_membership = Community_user_membership
 	end
 	if self.friend_recommendation ~= nil then
 		local Friend_recommendation = {}
 		
-		for i52, value50 in self.friend_recommendation do
-			Friend_recommendation[i52] = FriendRecommendationDataModule.FriendRecommendationData.jsonDecode(value50)
+		for i47, value47 in self.friend_recommendation do
+			Friend_recommendation[i47] = FriendRecommendationDataModule.FriendRecommendationData.jsonDecode(value47)
 		end
 		NewModule.friend_recommendation = Friend_recommendation
 	end
 	if self.friendRecommendation ~= nil then
 		local Friend_recommendation = {}
 		
-		for i53, value51 in self.friendRecommendation do
-			Friend_recommendation[i53] = FriendRecommendationDataModule.FriendRecommendationData.jsonDecode(value51)
+		for i48, value48 in self.friendRecommendation do
+			Friend_recommendation[i48] = FriendRecommendationDataModule.FriendRecommendationData.jsonDecode(value48)
 		end
 		NewModule.friend_recommendation = Friend_recommendation
 	end
 	if self.universe_private_server ~= nil then
 		local Universe_private_server = {}
 		
-		for i54, value52 in self.universe_private_server do
-			Universe_private_server[i54] = UniversePrivateServerDataModule.UniversePrivateServerData.jsonDecode(value52)
+		for i49, value49 in self.universe_private_server do
+			Universe_private_server[i49] = UniversePrivateServerDataModule.UniversePrivateServerData.jsonDecode(value49)
 		end
 		NewModule.universe_private_server = Universe_private_server
 	end
 	if self.universePrivateServer ~= nil then
 		local Universe_private_server = {}
 		
-		for i55, value53 in self.universePrivateServer do
-			Universe_private_server[i55] = UniversePrivateServerDataModule.UniversePrivateServerData.jsonDecode(value53)
+		for i50, value50 in self.universePrivateServer do
+			Universe_private_server[i50] = UniversePrivateServerDataModule.UniversePrivateServerData.jsonDecode(value50)
 		end
 		NewModule.universe_private_server = Universe_private_server
 	end
 	if self.notification_badge ~= nil then
 		local Notification_badge = {}
 		
-		for i28, value27 in self.notification_badge do
-			Notification_badge[i28] = NotificationBadgeDataModule.NotificationBadgeData.jsonDecode(value27)
+		for i51, value51 in self.notification_badge do
+			Notification_badge[i51] = NotificationBadgeDataModule.NotificationBadgeData.jsonDecode(value51)
 		end
 		NewModule.notification_badge = Notification_badge
 	end
 	if self.notificationBadge ~= nil then
 		local Notification_badge = {}
 		
-		for i56, value54 in self.notificationBadge do
-			Notification_badge[i56] = NotificationBadgeDataModule.NotificationBadgeData.jsonDecode(value54)
+		for i52, value52 in self.notificationBadge do
+			Notification_badge[i52] = NotificationBadgeDataModule.NotificationBadgeData.jsonDecode(value52)
 		end
 		NewModule.notification_badge = Notification_badge
 	end
 	if self.collectible_item ~= nil then
-		local Collectible_item = {}
+		local Collectible_item1 = {}
 		
-		for i57, value55 in self.collectible_item do
-			Collectible_item[i57] = CollectibleItemDataModule.CollectibleItemData.jsonDecode(value55)
+		for i53, value53 in self.collectible_item do
+			Collectible_item1[i53] = CollectibleItemDataModule.CollectibleItemData.jsonDecode(value53)
 		end
-		NewModule.collectible_item = Collectible_item
+		NewModule.collectible_item = Collectible_item1
 	end
 	if self.collectibleItem ~= nil then
 		local Collectible_item = {}
 		
-		for i50, value48 in self.collectibleItem do
-			Collectible_item[i50] = CollectibleItemDataModule.CollectibleItemData.jsonDecode(value48)
+		for i23, value23 in self.collectibleItem do
+			Collectible_item[i23] = CollectibleItemDataModule.CollectibleItemData.jsonDecode(value23)
 		end
 		NewModule.collectible_item = Collectible_item
 	end
 	if self.leaderboard_stats ~= nil then
 		local Leaderboard_stats = {}
 		
-		for i42, leaderboardStat1 in self.leaderboard_stats do
-			Leaderboard_stats[i42] = LeaderboardStatsDataModule.LeaderboardStatsData.jsonDecode(leaderboardStat1)
+		for i54, leaderboardStat in self.leaderboard_stats do
+			Leaderboard_stats[i54] = LeaderboardStatsDataModule.LeaderboardStatsData.jsonDecode(leaderboardStat)
 		end
 		NewModule.leaderboard_stats = Leaderboard_stats
 	end
 	if self.leaderboardStats ~= nil then
-		local Leaderboard_stats = {}
+		local Leaderboard_stats1 = {}
 		
-		for i25, leaderboardStat in self.leaderboardStats do
-			Leaderboard_stats[i25] = LeaderboardStatsDataModule.LeaderboardStatsData.jsonDecode(leaderboardStat)
+		for i55, leaderboardStat1 in self.leaderboardStats do
+			Leaderboard_stats1[i55] = LeaderboardStatsDataModule.LeaderboardStatsData.jsonDecode(leaderboardStat1)
 		end
-		NewModule.leaderboard_stats = Leaderboard_stats
+		NewModule.leaderboard_stats = Leaderboard_stats1
 	end
 	if self.marketplace_asset_user_favorite ~= nil then
-		local Marketplace_asset_user_favorite1 = {}
+		local Marketplace_asset_user_favorite = {}
 		
-		for i58, value56 in self.marketplace_asset_user_favorite do
-			Marketplace_asset_user_favorite1[i58] = MarketplaceItemUserFavoriteDataModule.MarketplaceItemUserFavoriteData.jsonDecode(value56)
+		for i56, value54 in self.marketplace_asset_user_favorite do
+			Marketplace_asset_user_favorite[i56] = MarketplaceItemUserFavoriteDataModule.MarketplaceItemUserFavoriteData.jsonDecode(value54)
 		end
-		NewModule.marketplace_asset_user_favorite = Marketplace_asset_user_favorite1
+		NewModule.marketplace_asset_user_favorite = Marketplace_asset_user_favorite
 	end
 	if self.marketplaceAssetUserFavorite ~= nil then
 		local Marketplace_asset_user_favorite = {}
 		
-		for i18, value18 in self.marketplaceAssetUserFavorite do
-			Marketplace_asset_user_favorite[i18] = MarketplaceItemUserFavoriteDataModule.MarketplaceItemUserFavoriteData.jsonDecode(value18)
+		for i57, value55 in self.marketplaceAssetUserFavorite do
+			Marketplace_asset_user_favorite[i57] = MarketplaceItemUserFavoriteDataModule.MarketplaceItemUserFavoriteData.jsonDecode(value55)
 		end
 		NewModule.marketplace_asset_user_favorite = Marketplace_asset_user_favorite
 	end
 	if self.marketplace_bundle_user_favorite ~= nil then
 		local Marketplace_bundle_user_favorite = {}
 		
-		for i7, value7 in self.marketplace_bundle_user_favorite do
-			Marketplace_bundle_user_favorite[i7] = MarketplaceItemUserFavoriteDataModule.MarketplaceItemUserFavoriteData.jsonDecode(value7)
+		for i58, value56 in self.marketplace_bundle_user_favorite do
+			Marketplace_bundle_user_favorite[i58] = MarketplaceItemUserFavoriteDataModule.MarketplaceItemUserFavoriteData.jsonDecode(value56)
 		end
 		NewModule.marketplace_bundle_user_favorite = Marketplace_bundle_user_favorite
 	end
 	if self.marketplaceBundleUserFavorite ~= nil then
-		local Marketplace_bundle_user_favorite = {}
+		local Marketplace_bundle_user_favorite1 = {}
 		
 		for i59, value57 in self.marketplaceBundleUserFavorite do
-			Marketplace_bundle_user_favorite[i59] = MarketplaceItemUserFavoriteDataModule.MarketplaceItemUserFavoriteData.jsonDecode(value57)
+			Marketplace_bundle_user_favorite1[i59] = MarketplaceItemUserFavoriteDataModule.MarketplaceItemUserFavoriteData.jsonDecode(value57)
 		end
-		NewModule.marketplace_bundle_user_favorite = Marketplace_bundle_user_favorite
+		NewModule.marketplace_bundle_user_favorite = Marketplace_bundle_user_favorite1
 	end
 	if self.buy_robux_one_time_product ~= nil then
 		local Buy_robux_one_time_product = {}
@@ -1584,12 +1584,12 @@ function Module:jsonDecode()
 		NewModule.buy_robux_one_time_product = Buy_robux_one_time_product
 	end
 	if self.buyRobuxOneTimeProduct ~= nil then
-		local Buy_robux_one_time_product1 = {}
+		local Buy_robux_one_time_product = {}
 		
 		for i61, value59 in self.buyRobuxOneTimeProduct do
-			Buy_robux_one_time_product1[i61] = BuyRobuxProductDataModule.BuyRobuxOneTimeProductData.jsonDecode(value59)
+			Buy_robux_one_time_product[i61] = BuyRobuxProductDataModule.BuyRobuxOneTimeProductData.jsonDecode(value59)
 		end
-		NewModule.buy_robux_one_time_product = Buy_robux_one_time_product1
+		NewModule.buy_robux_one_time_product = Buy_robux_one_time_product
 	end
 	if self.buy_robux_subscription_product ~= nil then
 		local Buy_robux_subscription_product = {}
@@ -1600,76 +1600,76 @@ function Module:jsonDecode()
 		NewModule.buy_robux_subscription_product = Buy_robux_subscription_product
 	end
 	if self.buyRobuxSubscriptionProduct ~= nil then
-		local Buy_robux_subscription_product = {}
+		local Buy_robux_subscription_product1 = {}
 		
-		for i63, value61 in self.buyRobuxSubscriptionProduct do
-			Buy_robux_subscription_product[i63] = BuyRobuxProductDataModule.BuyRobuxSubscriptionProductData.jsonDecode(value61)
+		for i34, value34 in self.buyRobuxSubscriptionProduct do
+			Buy_robux_subscription_product1[i34] = BuyRobuxProductDataModule.BuyRobuxSubscriptionProductData.jsonDecode(value34)
 		end
-		NewModule.buy_robux_subscription_product = Buy_robux_subscription_product
+		NewModule.buy_robux_subscription_product = Buy_robux_subscription_product1
 	end
 	if self.buy_robux_pending_transfer ~= nil then
-		local Buy_robux_pending_transfer1 = {}
+		local Buy_robux_pending_transfer = {}
 		
-		for i64, value62 in self.buy_robux_pending_transfer do
-			Buy_robux_pending_transfer1[i64] = BuyRobuxPendingTransferDataModule.BuyRobuxPendingTransferData.jsonDecode(value62)
+		for i36, value36 in self.buy_robux_pending_transfer do
+			Buy_robux_pending_transfer[i36] = BuyRobuxPendingTransferDataModule.BuyRobuxPendingTransferData.jsonDecode(value36)
 		end
-		NewModule.buy_robux_pending_transfer = Buy_robux_pending_transfer1
+		NewModule.buy_robux_pending_transfer = Buy_robux_pending_transfer
 	end
 	if self.buyRobuxPendingTransfer ~= nil then
 		local Buy_robux_pending_transfer = {}
 		
-		for i, value in self.buyRobuxPendingTransfer do
-			Buy_robux_pending_transfer[i] = BuyRobuxPendingTransferDataModule.BuyRobuxPendingTransferData.jsonDecode(value)
+		for i63, value61 in self.buyRobuxPendingTransfer do
+			Buy_robux_pending_transfer[i63] = BuyRobuxPendingTransferDataModule.BuyRobuxPendingTransferData.jsonDecode(value61)
 		end
 		NewModule.buy_robux_pending_transfer = Buy_robux_pending_transfer
 	end
 	if self.buy_robux_bonus_item ~= nil then
 		local Buy_robux_bonus_item = {}
 		
-		for i65, value63 in self.buy_robux_bonus_item do
-			Buy_robux_bonus_item[i65] = BuyRobuxBonusItemDataModule.BuyRobuxBonusItemData.jsonDecode(value63)
+		for i64, value62 in self.buy_robux_bonus_item do
+			Buy_robux_bonus_item[i64] = BuyRobuxBonusItemDataModule.BuyRobuxBonusItemData.jsonDecode(value62)
 		end
 		NewModule.buy_robux_bonus_item = Buy_robux_bonus_item
 	end
 	if self.buyRobuxBonusItem ~= nil then
 		local Buy_robux_bonus_item1 = {}
 		
-		for i66, value64 in self.buyRobuxBonusItem do
-			Buy_robux_bonus_item1[i66] = BuyRobuxBonusItemDataModule.BuyRobuxBonusItemData.jsonDecode(value64)
+		for i65, value63 in self.buyRobuxBonusItem do
+			Buy_robux_bonus_item1[i65] = BuyRobuxBonusItemDataModule.BuyRobuxBonusItemData.jsonDecode(value63)
 		end
 		NewModule.buy_robux_bonus_item = Buy_robux_bonus_item1
 	end
 	if self.user_library_saved_state ~= nil then
 		local User_library_saved_state = {}
 		
-		for i68, value66 in self.user_library_saved_state do
-			User_library_saved_state[i68] = UserLibrarySavedStateDataModule.UserLibrarySavedStateData.jsonDecode(value66)
+		for i66, value64 in self.user_library_saved_state do
+			User_library_saved_state[i66] = UserLibrarySavedStateDataModule.UserLibrarySavedStateData.jsonDecode(value64)
 		end
 		NewModule.user_library_saved_state = User_library_saved_state
 	end
 	if self.userLibrarySavedState ~= nil then
-		local User_library_saved_state = {}
+		local User_library_saved_state1 = {}
 		
-		for i23, value23 in self.userLibrarySavedState do
-			User_library_saved_state[i23] = UserLibrarySavedStateDataModule.UserLibrarySavedStateData.jsonDecode(value23)
+		for i67, value65 in self.userLibrarySavedState do
+			User_library_saved_state1[i67] = UserLibrarySavedStateDataModule.UserLibrarySavedStateData.jsonDecode(value65)
 		end
-		NewModule.user_library_saved_state = User_library_saved_state
+		NewModule.user_library_saved_state = User_library_saved_state1
 	end
 	if self.game_pass_vote ~= nil then
+		local Game_pass_vote = {}
+		
+		for i68, value66 in self.game_pass_vote do
+			Game_pass_vote[i68] = VoteDataModule.VoteData.jsonDecode(value66)
+		end
+		NewModule.game_pass_vote = Game_pass_vote
+	end
+	if self.gamePassVote ~= nil then
 		local Game_pass_vote1 = {}
 		
-		for i69, value67 in self.game_pass_vote do
+		for i69, value67 in self.gamePassVote do
 			Game_pass_vote1[i69] = VoteDataModule.VoteData.jsonDecode(value67)
 		end
 		NewModule.game_pass_vote = Game_pass_vote1
-	end
-	if self.gamePassVote ~= nil then
-		local Game_pass_vote = {}
-		
-		for i67, value65 in self.gamePassVote do
-			Game_pass_vote[i67] = VoteDataModule.VoteData.jsonDecode(value65)
-		end
-		NewModule.game_pass_vote = Game_pass_vote
 	end
 	return NewModule
 end

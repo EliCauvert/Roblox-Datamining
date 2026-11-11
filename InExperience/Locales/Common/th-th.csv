@@ -1465,6 +1465,7 @@ Feature.AddFriends.Action.FriendAdded,เพิ่มเป็นเพื่อ
 Feature.AddFriends.Action.IgnoreFriendRequest,ปฏิเสธคำขอเป็นเพื่อน
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,ปฏิเสธคำขอเป็นเพื่อนที่เชื่อได้
 Feature.AddFriends.Action.RequestIgnored,คำขอถูกปฏิเสธ
+Feature.AddFriends.Heading.AddFriends,
 Feature.AddFriends.Label.AddFriendsTooltip,เริ่มต้นด้วยการค้นหาเพื่อนๆ ของคุณเพื่อจะได้ไปสำรวจ Roblox ด้วยกัน
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,ค้นหาผู้ใช้บน Roblox โดยใช้ชื่อผู้ใช้หรือชื่อในการค้นหา
 Feature.AddFriends.Label.ConnectWithContacts,เชิญเพื่อนจากรายชื่อผู้ติดต่อหรือเชื่อมต่อกับเพื่อนๆ ที่อยู่บน Roblox อยู่แล้วก็ได้!
@@ -1858,6 +1859,8 @@ Feature.Avatar.Label.Shoes,รองเท้า
 Feature.Avatar.Label.Shorts,กางเกงขาสั้น
 Feature.Avatar.Label.Shoulder,ไหล่
 Feature.Avatar.Label.Skin,
+Feature.Avatar.Label.Spawn,การเกิดใหม่
+Feature.Avatar.Label.SpawnEffects,เอฟเฟกต์การเกิดใหม่
 Feature.Avatar.Label.Sweater,เสื้อสเวตเตอร์
 Feature.Avatar.Label.Sweaters,
 Feature.Avatar.Label.Swim,ว่ายน้ำ
@@ -2080,7 +2083,10 @@ Feature.AvatarSwitcher.Message.SelectAvatar,เลือกอวาตาร์
 Feature.AvatarSwitcher.Message.SwitchingDeferred,คุณจะเห็นอวาตาร์นี้หลังจากการเกิดใหม่ครั้งต่อไปหรือเมื่อคุณเข้าร่วมประสบการณ์ คุณสามารถเปลี่ยนเป็นอวาตาร์อื่นได้ทุกเมื่อ
 Feature.AvatarSwitcher.Message.UnknownSupport,คุณยังสามารถเปลี่ยนอวาตาร์ได้ แต่อาจแสดงไม่ถูกต้องในประสบการณ์นี้
 Feature.AvatarSwitcher.Message.Unsupported,ประสบการณ์นี้ใช้อวาตาร์ที่กำหนดเองและไม่รองรับอวาตาร์ของ Roblox
+Feature.AvatarWorkshop.Action.EditAvatar,แก้ไขอวาตาร์
 Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Heading.Customize,ปรับแต่ง
+Feature.AvatarWorkshop.Heading.YourAvatars,อวาตาร์ของคุณ
 Feature.AvatarWorkshop.Message.LoadItemsError,มีบางอย่างผิดปกติขณะโหลดไอเท็มของคุณ
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,ไม่สามารถโหลดไอเท็มเพิ่มเติมได้
 Feature.AvatarWorkshop.Message.NoItemsOwned,คุณยังไม่ได้เป็นเจ้าของไอเท็มไหนในหมวดนี้เลย
@@ -2764,7 +2770,7 @@ Feature.Catalog.Action.CheckoutPlural,ดูหน้าการชำระเ
 Feature.Catalog.Action.CheckoutSingular,ชำระเงิน 1 รายการ
 Feature.Catalog.Action.CloseDetails,ปิดรายละเอียด
 Feature.Catalog.Action.CopyLink,คัดลอกลิงก์
-Feature.Catalog.Action.Customize,ปรับแต่ง
+Feature.Catalog.Action.Customize,
 Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,อธิบายเกี่ยวกับอวาตาร์ของคุณ (ไม่บังคับ)
@@ -3237,7 +3243,6 @@ Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} พูดว่า...
 Feature.Chat.Label.ReplyingToYourself,คุณพูดว่า...
 Feature.Chat.Label.SearchFriends,ค้นหาเพื่อน
 Feature.Chat.Label.SearchWord,
-Feature.Chat.Label.SnoozeChatNotifications,ปิดเสียงแจ้งเตือนแชทในประสบการณ์:
 Feature.Chat.Label.SnoozePartyNotifications,ปิดเสียงการแจ้งเตือนเกี่ยวกับ Party ในประสบการณ์สำหรับ:
 Feature.Chat.Label.SwipeToReplyTooltip,ปัดเพื่อตอบกลับ
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} วัน
@@ -3293,7 +3298,6 @@ Feature.Chat.Response.NetworkError,เกิดข้อผิดพลาดก
 Feature.Chat.RobloxConnectUnavailableWithUser,ตอนนี้ผู้ใช้รายนี้ใช้งาน Roblox Connect ไม่ได้
 Feature.Chat.Text.NoFriends,คุณยังไม่ได้เพิ่มเพื่อน หากต้องการเริ่ม ให้ค้นหาและเพิ่มเพื่อนของคุณบน Roblox
 Feature.Chat.Title.FriendsChat,การแชทกับเพื่อน
-Feature.Chat.Title.MuteChatNotifications,ปิดการแจ้งเตือนเกี่ยวกับแชทจากเพื่อนระหว่างเล่นเกม
 Feature.Chat.Title.NewChat,แชทใหม่
 Feature.Chat.Toast.Error.InvalidUserSelected,ไม่สามารถเพิ่มอย่างน้อยหนึ่งคนที่อยู่ในรายการนี้ได้
 Feature.ContactUpsell.Action.Continue,
@@ -3832,6 +3836,7 @@ Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,สิ้นสุดใน {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,ทดลองใช้ฟรี
 Feature.InExperienceShop.Label.HaveTrial,การทดลองใช้ฟรีสำหรับคุณ
+Feature.InExperienceShop.Label.KeepIt,
 Feature.InExperienceShop.Label.NoDescription,
 Feature.InExperienceShop.Label.OfferEndTime,{offer} จะสิ้นสุดใน {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,นี่คือตัวอย่างร้านค้าของคุณใน Roblox Studio ผู้เล่นจะไม่เห็นตัวอย่างนี้
@@ -3993,6 +3998,7 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,รูปภาพ
 Feature.Moments.Label.PostDeleted,ลบโมเมนต์แล้ว
 Feature.Moments.Label.PostRemovedBody,โมเมนต์ที่คุณโพสต์ขัดต่อมาตรฐานชุมชนของเรา
+Feature.Moments.Label.PostedOnDate,โพสต์เมื่อ {date}
 Feature.Moments.Label.PublishingRodeoBody,การดำเนินการนี้น่าจะใช้เวลาไม่นาน
 Feature.Moments.Label.Reactions,การแสดงความรู้สึก
 Feature.Moments.Label.ReportReason.BreaksRules,โพสต์นี้ละเมิดกฎ
@@ -4175,7 +4181,7 @@ Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,คัดลอกลิงก์โปรไฟล์
 Feature.Profile.Action.CreateInBuild,สร้างใน Build
 Feature.Profile.Action.EditAppearance,แก้ไขรูปลักษณ์
-Feature.Profile.Action.EditAvatar,แก้ไขอวาตาร์
+Feature.Profile.Action.EditAvatar,
 Feature.Profile.Action.EditBackground,แก้ไขพื้นหลัง
 Feature.Profile.Action.EditEmotes,แก้ไขท่าทาง
 Feature.Profile.Action.EditLook,แก้ไขลุค

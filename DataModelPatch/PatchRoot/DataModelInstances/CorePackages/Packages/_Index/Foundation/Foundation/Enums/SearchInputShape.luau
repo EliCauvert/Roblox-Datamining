@@ -1,1 +1,0 @@
-﻿return { Rounded = "Rounded", Pill = "Pill", Box = "Box" }

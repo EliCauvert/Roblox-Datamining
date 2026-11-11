@@ -424,21 +424,21 @@ return function(p1)
 			
 			if NoFlag1 then
 				local v4 = if Flag2 or Flag1 then nil else v1
-				for i9 = FirstIndex, Smallest do
-					local ItemKey = if v4 == nil or Frozen7.firstIndex > i9 or i9 > Frozen7.lastIndex then DataSource.getItemKey(i9) else v4[i9 - Frozen7.firstIndex + 1]
+				for i6 = FirstIndex, Smallest do
+					local ItemKey = if v4 == nil or Frozen7.firstIndex > i6 or i6 > Frozen7.lastIndex then DataSource.getItemKey(i6) else v4[i6 - Frozen7.firstIndex + 1]
 					local Entry = t2[ItemKey]
 					
 					if Entry == nil then
-						local Item = DataSource.getItem(i9)
-						local NewI = i9 - FirstIndex + 1
+						local Item = DataSource.getItem(i6)
+						local NewI = i6 - FirstIndex + 1
 						local config = {
 							side = false,
 							entered = true,
 							changed = true,
 							key = ItemKey,
 							value = Item,
-							viewType = p1.getItemViewType(Item, i9),
-							index = i9,
+							viewType = p1.getItemViewType(Item, i6),
+							index = i6,
 							epoch = Epoch
 						}
 						Count1 += 1
@@ -449,14 +449,14 @@ return function(p1)
 						Entry.epoch = Epoch
 						Entry.entered = false
 						Entry.changed = false
-						Entry.index = i9
+						Entry.index = i6
 						Entry.side = false
-						Buffer[i9 - FirstIndex + 1] = Entry
+						Buffer[i6 - FirstIndex + 1] = Entry
 					end
 				end
-				for _, value5 in t2 do
-					if value5.epoch ~= Epoch then
-						table.insert(List2, value5)
+				for _, value4 in t2 do
+					if value4.epoch ~= Epoch then
+						table.insert(List2, value4)
 					end
 				end
 			else
@@ -465,39 +465,39 @@ return function(p1)
 				local Largest1 = math.max(FirstIndex1, FirstIndex)
 				local Smallest1 = math.min(LastIndex, Smallest)
 				
-				for i3 = FirstIndex1, math.min(LastIndex, FirstIndex - 1) do
-					table.insert(List2, t[i3 - FirstIndex1 + 1])
+				for i = FirstIndex1, math.min(LastIndex, FirstIndex - 1) do
+					table.insert(List2, t[i - FirstIndex1 + 1])
 				end
-				for i4 = math.max(FirstIndex1, Smallest + 1), LastIndex do
-					table.insert(List2, t[i4 - FirstIndex1 + 1])
+				for i2 = math.max(FirstIndex1, Smallest + 1), LastIndex do
+					table.insert(List2, t[i2 - FirstIndex1 + 1])
 				end
-				for _, value4 in t1 do
-					table.insert(List2, value4)
+				for _, value1 in t1 do
+					table.insert(List2, value1)
 				end
 				if Largest1 <= Smallest1 then
 					table.move(t, Largest1 - FirstIndex1 + 1, Smallest1 - FirstIndex1 + 1, Largest1 - FirstIndex + 1, Buffer)
 					
-					for i6 = Largest1 - FirstIndex + 1, Smallest1 - FirstIndex + 1 do
-						local BufferEntry = Buffer[i6]
+					for i3 = Largest1 - FirstIndex + 1, Smallest1 - FirstIndex + 1 do
+						local BufferEntry = Buffer[i3]
 						BufferEntry.epoch = Epoch
 						BufferEntry.entered = false
 						BufferEntry.changed = false
 					end
 				end
-				for i7 = FirstIndex, math.min(Smallest, Largest1 - 1) do
-					Buffer[i7 - FirstIndex + 1] = enterIndex(i7)
+				for i4 = FirstIndex, math.min(Smallest, Largest1 - 1) do
+					Buffer[i4 - FirstIndex + 1] = enterIndex(i4)
 				end
-				for i8 = math.max(FirstIndex, Smallest1 + 1), Smallest do
-					Buffer[i8 - FirstIndex + 1] = enterIndex(i8)
+				for i5 = math.max(FirstIndex, Smallest1 + 1), Smallest do
+					Buffer[i5 - FirstIndex + 1] = enterIndex(i5)
 				end
 			end
 			for _, retainedItem in Plan.retainedItems do
 				if retainedItem.index < FirstIndex or Smallest < retainedItem.index then
-					local Entry = t2[retainedItem.key]
+					local Entry1 = t2[retainedItem.key]
 					
-					if Entry == nil then
+					if Entry1 == nil then
 						local Item = DataSource.getItem(retainedItem.index)
-						local config = {
+						local config1 = {
 							side = false,
 							entered = true,
 							changed = true,
@@ -508,17 +508,17 @@ return function(p1)
 							epoch = Epoch
 						}
 						Count1 += 1
-						table.insert(List, config)
-						config.side = true
-						table.insert(List1, config)
+						table.insert(List, config1)
+						config1.side = true
+						table.insert(List1, config1)
 					else
-						assert(Entry.epoch ~= Epoch, `Virtualizer: duplicate key "{retainedItem.key}"`)
-						Entry.epoch = Epoch
-						Entry.entered = false
-						Entry.changed = false
-						Entry.index = retainedItem.index
-						Entry.side = true
-						table.insert(List1, Entry)
+						assert(Entry1.epoch ~= Epoch, `Virtualizer: duplicate key "{retainedItem.key}"`)
+						Entry1.epoch = Epoch
+						Entry1.entered = false
+						Entry1.changed = false
+						Entry1.index = retainedItem.index
+						Entry1.side = true
+						table.insert(List1, Entry1)
 					end
 				end
 			end
@@ -528,10 +528,10 @@ return function(p1)
 				
 				if PinnedItem ~= nil and PinnedItem.key == additionalItem.key then
 					local Entry = t2[additionalItem.key]
-					local config = nil
+					local config2 = nil
 					
 					if Entry == nil then
-						config = {
+						config2 = {
 							index = nil,
 							side = false,
 							entered = true,
@@ -542,16 +542,16 @@ return function(p1)
 							epoch = Epoch
 						}
 						Count1 += 1
-						table.insert(List, config)
+						table.insert(List, config2)
 					else
 						assert(Entry.epoch ~= Epoch, `Virtualizer: duplicate key "{additionalItem.key}"`)
 						Entry.epoch = Epoch
 						Entry.entered = false
 						Entry.changed = false
-						config = Entry
+						config2 = Entry
 						
-						if config.viewType == PinnedItem.itemViewType then
-							if config.value ~= PinnedItem.value then
+						if config2.viewType == PinnedItem.itemViewType then
+							if config2.value ~= PinnedItem.value then
 								table.insert(List, {
 									key = additionalItem.key,
 									value = PinnedItem.value,
@@ -562,7 +562,7 @@ return function(p1)
 							local Value = PinnedItem.value
 							local ItemViewType = PinnedItem.itemViewType
 							table.insert(Keys, Entry.key)
-							config = {
+							config2 = {
 								side = false,
 								entered = true,
 								changed = true,
@@ -573,46 +573,46 @@ return function(p1)
 								epoch = Epoch
 							}
 							Count1 += 1
-							table.insert(List, config)
-							config.side = Entry.side
+							table.insert(List, config2)
+							config2.side = Entry.side
 						end
 					end
-					config.index = nil
-					config.side = true
-					config.pinnedPosition = Position
-					config.pinnedRevision = additionalItem.identity.revision
-					table.insert(List1, config)
+					config2.index = nil
+					config2.side = true
+					config2.pinnedPosition = Position
+					config2.pinnedRevision = additionalItem.identity.revision
+					table.insert(List1, config2)
 				end
 			end
 			if Flag3 then
-				for i10, value6 in Buffer do
-					Buffer[i10] = reread(value6, false) or value6
+				for i7, value3 in Buffer do
+					Buffer[i7] = reread(value3, false) or value3
 				end
-				for i11, value7 in List1 do
-					List1[i11] = reread(value7, false) or value7
+				for i8, value5 in List1 do
+					List1[i8] = reread(value5, false) or value5
 				end
 			elseif HasNextEntry then
-				for i5 in Tbl do
-					local Entry1 = t2[i5]
-					local NoEntry: boolean = Entry1 == nil or Entry1.epoch ~= Epoch
+				for i9 in Tbl do
+					local Entry = t2[i9]
+					local NoEntry: boolean = Entry == nil or Entry.epoch ~= Epoch
 					local RereadResult = nil
 					
 					if not NoEntry then
-						RereadResult = reread(Entry1, true)
+						RereadResult = reread(Entry, true)
 						NoEntry = RereadResult == nil
 					end
 					if not NoEntry then
-						if Entry1.side then
-							List1[table.find(List1, Entry1)] = RereadResult
+						if Entry.side then
+							List1[table.find(List1, Entry)] = RereadResult
 						else
-							Buffer[Entry1.index - FirstIndex + 1] = RereadResult
+							Buffer[Entry.index - FirstIndex + 1] = RereadResult
 						end
 					end
 				end
 			end
-			for _, value2 in List2 do
-				if value2.epoch ~= Epoch then
-					table.insert(Keys, value2.key)
+			for _, value6 in List2 do
+				if value6.epoch ~= Epoch then
+					table.insert(Keys, value6.key)
 				end
 			end
 			local ApplyResult = SlotBinder.apply(Keys, List)
@@ -621,12 +621,12 @@ return function(p1)
 				t2[key] = nil
 				t3[t2[key].view] = nil
 			end
-			for _, value8 in ApplyResult.entered do
-				t2[value8.key] = value8
-				t3[value8.view] = value8
+			for _, value7 in ApplyResult.entered do
+				t2[value7.key] = value7
+				t3[value7.view] = value7
 			end
-			for _, value9 in ApplyResult.updated do
-				value9.changed = true
+			for _, value in ApplyResult.updated do
+				value.changed = true
 			end
 			local Reassigned = #Keys - #ApplyResult.departed
 			T = Frozen2
@@ -634,21 +634,21 @@ return function(p1)
 			v3 = nil
 			
 			if Largest > 1 and Layout1.getItemLayouts ~= nil and (NoFlag1_1 and (v2 or not Flag1) or Largest < Count1 * 2) then
-				local Buffer2 = table.create(Largest)
-				Layout1.getItemLayouts(FirstIndex, Smallest, Buffer2)
-				v3 = Buffer2
+				local Buffer1 = table.create(Largest)
+				Layout1.getItemLayouts(FirstIndex, Smallest, Buffer1)
+				v3 = Buffer1
 			end
 			Placements = Plan.placements
 			local Placements1 = Frozen5.placements
 			
 			if NoFlag1_1 then
-				for _, value10 in Buffer do
-					restate(value10)
+				for _, value8 in Buffer do
+					restate(value8)
 				end
 			else
-				for _, value11 in Buffer do
-					if value11.entered or value11.changed then
-						restate(value11)
+				for _, value2 in Buffer do
+					if value2.entered or value2.changed then
+						restate(value2)
 					end
 				end
 				for placement in Placements do
@@ -666,22 +666,22 @@ return function(p1)
 					end
 				end
 			end
-			for _, value3 in List1 do
-				restate(value3)
+			for _, value9 in List1 do
+				restate(value9)
 			end
 			local Flag5: boolean = #Buffer ~= #t or (#List1 ~= #t1 or Inverted)
 			
 			if not Flag5 and NoFlag1 then
-				for i2, value1 in Buffer do
-					if t[i2] ~= value1 then
+				for i10, value10 in Buffer do
+					if t[i10] ~= value10 then
 						Flag5 = true
 						break
 					end
 				end
 			end
 			if not Flag5 then
-				for i, value in List1 do
-					if t1[i] ~= value then
+				for i11, value11 in List1 do
+					if t1[i11] ~= value11 then
 						Flag5 = true
 						break
 					end
@@ -705,20 +705,20 @@ return function(p1)
 			v1 = nil
 			local Departed = ApplyResult.departed
 			
-			if not Flag5 and #T == 0 and (#T1 == 0 and #Departed == 0) then
+			if not Flag5 and (#T == 0 and (#T1 == 0 and #Departed == 0)) then
 				return nil, nil
 			end
-			local Buffer1 = table.create(#t + #t1)
+			local Buffer2 = table.create(#t + #t1)
 			
 			for i12, value12 in t do
-				Buffer1[i12] = value12.record
+				Buffer2[i12] = value12.record
 			end
 			local CountT = #t
 			
 			for i13, value13 in t1 do
-				Buffer1[CountT + i13] = value13.record
+				Buffer2[CountT + i13] = value13.record
 			end
-			Frozen6 = table.freeze(Buffer1)
+			Frozen6 = table.freeze(Buffer2)
 			local Touched = #T + #T1 + #Departed
 			local config = { entered = T, updated = T1, departed = Departed }
 			
@@ -727,7 +727,7 @@ return function(p1)
 			else
 				return config, {
 					kind = DiagnosticsModule.EventKind.ItemViewsSynchronized,
-					retained = #Buffer1 - #T - #T1,
+					retained = #Buffer2 - #T - #T1,
 					reassigned = Reassigned,
 					acquired = #T - Reassigned,
 					released = #Departed,

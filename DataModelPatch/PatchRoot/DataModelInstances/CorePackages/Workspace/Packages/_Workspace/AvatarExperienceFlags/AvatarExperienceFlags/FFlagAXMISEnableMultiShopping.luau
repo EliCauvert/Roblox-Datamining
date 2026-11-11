@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXMISEnableMultiShopping13", false)

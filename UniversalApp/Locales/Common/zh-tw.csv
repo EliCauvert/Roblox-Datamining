@@ -219,6 +219,7 @@ Authentication.AccountSwitch.Action.Continue,
 Authentication.AccountSwitch.Action.CreateNewAccount,建立新帳號
 Authentication.AccountSwitch.Action.LogoutAllAccounts,登出所有帳戶
 Authentication.AccountSwitch.Action.RemoveAllAccounts,要移除所有帳號嗎？
+Authentication.AccountSwitch.Action.SignIn,登入
 Authentication.AccountSwitch.Action.SignInToExistingAccount,登入現有帳號
 Authentication.AccountSwitch.Action.SwitchAccount,切換帳戶
 Authentication.AccountSwitch.Description.AccountLimit.2,已達到帳號數量上限。如要新增帳號，請先移除現有帳號。
@@ -228,6 +229,8 @@ Authentication.AccountSwitch.Description.LogoutConfirmation,"在添加新帳號�
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,請稍後再試
 Authentication.AccountSwitch.Description.RemoveAllAccounts,登出後，所有帳號將從此裝置中移除。
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,除非再次登入，否則你將不會再在此裝置上看到此帳號。你即將返回登陸頁面。
+Authentication.AccountSwitch.Description.SomethingWentWrongSignInAgain,發生錯誤，請重新登入。
+Authentication.AccountSwitch.Description.StaleSessionSignInAgain,你有一段時間沒有在這裡使用此帳號了。請再次登入。
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,嘗試直接登入
 Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,無法切換帳號
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
@@ -320,7 +323,7 @@ Authentication.Login.Action.ResendCode,
 Authentication.Login.Action.Save,儲存
 Authentication.Login.Action.SendCodeSentenceCase,傳送驗證碼
 Authentication.Login.Action.SendVerificationEmail,傳送驗證電子郵件
-Authentication.Login.Action.SignIn,登入
+Authentication.Login.Action.SignIn,
 Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,使用密碼金鑰
@@ -1598,7 +1601,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,搜尋使用者名稱或�
 Feature.AddFriends.Label.ConnectWithContacts,邀請聯絡人或與已經在 Roblox 的好友交流！
 Feature.AddFriends.Label.ContactsTile,通訊錄
 Feature.AddFriends.Label.DeclineAllBackgrounded,忽略所有好友邀請。這可能需要一分鐘。
-Feature.AddFriends.Label.EmptyState.FriendsRename,想和誰一起探索 Roblox 呢？新增好友，在 Roblox 上享受更多樂趣！
 Feature.AddFriends.Label.EmptyStatePrompt,您要和誰探索 Roblox 呢？尋找新的朋友，或新增您認識的人為好友！
 Feature.AddFriends.Label.FriendRequests,好友邀請
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,搜尋人員
@@ -1606,8 +1608,6 @@ Feature.AddFriends.Label.MyQrCode,我的 QR 碼
 Feature.AddFriends.Label.QRCodeTitle,
 Feature.AddFriends.Label.SchoolTile,同學
 Feature.AddFriends.Label.SearchForFriendsPrompt,搜尋使用者名稱或顯示名稱，在 Roblox 找到其他人。
-Feature.AddFriends.Label.ShareQRCodeAddConnection,分享你的 QR 碼，即可新增認識的人
-Feature.AddFriends.Label.SyncContactsInvitePeople,同步通訊錄以尋找及邀請好友！
 Feature.AddFriends.Label.SyncWithContacts,同步聯絡人以尋找及邀請好友！
 Feature.AddFriends.Label.TrustedFriendRequests,信任的好友邀請
 Feature.AddFriends.Text.EmptyState.FriendsRename,想和誰一起探索 Roblox 呢？{lineBreak}新增好友，在 Roblox 上享受更多樂趣！
@@ -1615,7 +1615,6 @@ Feature.AddFriends.Title.AddFriendsToolTip,跟好友一起玩 Roblox 更好玩�
 Feature.AddFriends.Title.AddFriendsTooltipTitle,Roblox 跟好友一起享受更棒！
 Feature.AddFriends.Title.CameraPermission,攝影機權限
 Feature.AddFriends.Title.ConnectWithContacts,透過聯絡人新增
-Feature.AddFriends.Title.ShareQRCode,透過 QR 碼新增
 Feature.AgeGuidelines.DisplayName.StrongLanguage,激烈措辭
 Feature.AgeGuidelines.Label.CreatorEnabled,已啟用創作者
 Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect,解鎖更多內容和功能。
@@ -1728,6 +1727,7 @@ Feature.AppealsPortal.Label.Location,發生於
 Feature.AppealsPortal.Label.LookDescription,已分享的虛擬人偶說明
 Feature.AppealsPortal.Label.LookId,已分享的虛擬人偶 ID
 Feature.AppealsPortal.Label.LookName,已分享的虛擬人偶名稱
+Feature.AppealsPortal.Label.MomentDescription,「美好時光」說明
 Feature.AppealsPortal.Label.PlaceIDPrompt,地點編號為何？
 Feature.AppealsPortal.Label.PlaceId,地點編號
 Feature.AppealsPortal.Label.PlaceName,地點名稱
@@ -2185,6 +2185,8 @@ Feature.Avatar.Label.Shoes,鞋子
 Feature.Avatar.Label.Shorts,短褲
 Feature.Avatar.Label.Shoulder,肩膀
 Feature.Avatar.Label.Skin,
+Feature.Avatar.Label.Spawn,生成
+Feature.Avatar.Label.SpawnEffects,生成效果
 Feature.Avatar.Label.Sweater,外套
 Feature.Avatar.Label.Sweaters,
 Feature.Avatar.Label.Swim,游泳
@@ -3007,6 +3009,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,我的好友（{count} 位）
 Feature.BuyRobux.Label.PeopleWithCount,人員 ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Gallery,圖庫
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,前往「自訂」頁面
@@ -3497,7 +3500,6 @@ Feature.Chat.Label.SearchForFriendsAndChat,搜尋對話
 Feature.Chat.Label.SearchFriends,搜尋好友
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.Sent,已傳送
-Feature.Chat.Label.SnoozeChatNotifications,將體驗中的聊天通知靜音：
 Feature.Chat.Label.SnoozePartyNotifications,將體驗內的隊伍通知靜音：
 Feature.Chat.Label.SwipeToReplyTooltip,滑動以回覆
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} 天
@@ -3554,7 +3556,6 @@ Feature.Chat.Response.NetworkError,網路錯誤
 Feature.Chat.Response.Sending,正在傳送
 Feature.Chat.RobloxConnectUnavailableWithUser,此使用者目前無法使用 Roblox Connect。
 Feature.Chat.Text.NoFriends,你尚未新增任何好友。若要開始，請在 Roblox 上尋找並新增好友。
-Feature.Chat.Title.MuteChatNotifications,在遊戲遊玩期間將好友的聊天通知靜音
 Feature.Chat.Title.NewChat,新聊天
 Feature.Chat.Toast.Error.InvalidUserSelected,此清單中有人員無法新增
 Feature.CommunityLinks.Description.CommunityDefault,加入 {experienceName} 的 Guilded 官方社群，即可檢視公告和更多資訊！
@@ -4450,6 +4451,7 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,相片
 Feature.Moments.Label.PostDeleted,美好時光已刪除
 Feature.Moments.Label.PostRemovedBody,你張貼的「美好時光」違反了我們的《社群標準》。
+Feature.Moments.Label.PostedOnDate,張貼日期：{date}
 Feature.Moments.Label.PublishingRodeoBody,這不會花太久時間。
 Feature.Moments.Label.Reactions,反應
 Feature.Moments.Label.ReportReason.BreaksRules,此貼文違反規定
@@ -4783,6 +4785,9 @@ Feature.NotApproved.Label.LatestActivity,我們最新審核的活動
 Feature.NotApproved.Label.LoadingImage,正在載入圖片
 Feature.NotApproved.Label.LogoutProgress,正在登出
 Feature.NotApproved.Label.MenuContent,選單內容
+Feature.NotApproved.Label.MessageToUser.AltConsequence.Reset,"此帳號所連結的另一個帳號（已重置為 @{account}）因嚴重違反《社群標準》而遭到停權。只有遭停權的帳號能對違規處分提出上訴。
+
+如果這兩個帳號不應彼此連結，請透過「違規與上訴」使用此帳號提出上訴。"
 Feature.NotApproved.Label.MessageToUser.AltConsequence.V2,此帳號所連結的另一個帳號已因嚴重違反《社群標準》而遭到停權。你可以使用遭停權的帳號，對違規處分提出上訴。
 Feature.NotApproved.Label.MessageToUser.AltConsequence.V3,"此帳號所連結的另一個帳號 (@{account}) 已因嚴重違反《社群標準》而遭到停權。只有遭停權的帳號能對違規處分提出上訴。
 
@@ -5006,7 +5011,7 @@ Feature.Premium.Message.PleaseTryAgain,請再試一次。
 Feature.Premium.Message.SomethingWentWrong,
 Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,透過 Plus 免費使用
-Feature.PrivateServers.Action.Generate,生成
+Feature.PrivateServers.Action.Generate,
 Feature.PrivateServers.Description.FriendsAllowed,好友名單中的任何人無需邀請就能加入
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio 不支援購買私人伺服器。
 Feature.PrivateServers.Description.VipServersNotSupported,此遊戲不支援私人伺服器。

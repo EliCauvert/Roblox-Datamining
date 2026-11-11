@@ -3,16 +3,18 @@ local Parent = Moments.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local MomentsCommonModule = require(Parent.MomentsCommon)
+local FFlagProfileRenderAvatarMoments = require(Parent.SharedFlags).FFlagProfileRenderAvatarMoments
 local MomentItemModule = require(Moments.Components.Feed.Items.Moment.MomentItem)
 local _ = require(Moments.Components.Feed.Items.Moment.MomentContext)
 local GetMomentsPreferencesStoreModule = require(Moments.Stores.GetMomentsPreferencesStore)
 local _ = require(Parent.MomentsTypes)
 
 return function(p1)
-	-- upvalues: ReactModule (copy), MomentsCommonModule (copy), GetMomentsPreferencesStoreModule (copy), FoundationModule (copy), MomentItemModule (copy)
+	-- upvalues: ReactModule (copy), MomentsCommonModule (copy), GetMomentsPreferencesStoreModule (copy), FoundationModule (copy), FFlagProfileRenderAvatarMoments (copy), MomentItemModule (copy)
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "size-full",
-		backgroundStyle = { Transparency = 1 }
+		backgroundStyle = { Transparency = 1 },
+		ref = if FFlagProfileRenderAvatarMoments then p1.pageRef else nil
 	}, {
 		Moment = ReactModule.createElement(MomentItemModule, {
 			isStaticMedia = true,

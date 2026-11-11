@@ -1,1 +1,0 @@
-﻿return { Send = "send", Receive = "receive" }

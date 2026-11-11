@@ -35,8 +35,10 @@ local UseInterventionFocusRootModule = require(InterventionShared.Hooks.useInter
 local UseInterventionPlacementModule = require(InterventionShared.Hooks.useInterventionPlacement)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UsePreferredInputFunction = ResponsiveModule.usePreferredInput
+local UseSinkCoreShortcutsModule = require(InterventionShared.Hooks.useSinkCoreShortcuts)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseWebViewModule = require(InterventionShared.Hooks.useWebView)
+local FFlagInterventionDialogBlockExperienceInputModule = require(InterventionShared.Flags.FFlagInterventionDialogBlockExperienceInput)
 local FFlagNavigateToSafetyDashboardForAppeals = require(Parent.SharedFlags).FFlagNavigateToSafetyDashboardForAppeals
 local FFlagUFRDialogContentCutoffFixModule = require(InterventionShared.Flags.FFlagUFRDialogContentCutoffFix)
 local FFlagUFRImprovementsModule = require(InterventionShared.Flags.FFlagUFRImprovements)
@@ -47,7 +49,7 @@ local function _(p1)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), UseRefFunction (copy), UseInterventionPlacementModule (copy), UseLocalizationFunction (copy), ConstantsModule (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), FFlagNavigateToSafetyDashboardForAppeals (copy), UrlBuilder (copy), UseWebViewModule (copy), LinkingProtocol (copy), UseInterventionFocusRootModule (copy), FocusNavigableSurfaceIdentifierEnum (copy), UseEffectFunction (copy), InterventionAnalyticsModule (copy), UseCallbackFunction (copy), PostDismissInterventionModule (copy), NotificationModalsManagerModule (copy), IconsActionsAccept (copy), VRService (copy), ReactModule (copy), Text (copy), FFlagUFRImprovementsModule (copy), View (copy), Divider (copy), EvidenceFieldModule (copy), FFlagUFRDialogContentCutoffFixModule (copy), Badge (copy), BadgeVariant (copy), IconName (copy), IconPosition (copy), IconVariant (copy), CryoModule (copy), Button (copy), ButtonVariant (copy), ButtonSize (copy), Dialog (copy), DialogSize (copy), InterventionDialogLoadingSkeletonModule (copy), InterventionDialogFooterModule (copy)
+	-- upvalues: UseTokensFunction (copy), UseRefFunction (copy), UseInterventionPlacementModule (copy), UseLocalizationFunction (copy), ConstantsModule (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), FFlagNavigateToSafetyDashboardForAppeals (copy), UrlBuilder (copy), UseWebViewModule (copy), LinkingProtocol (copy), UseInterventionFocusRootModule (copy), FocusNavigableSurfaceIdentifierEnum (copy), FFlagInterventionDialogBlockExperienceInputModule (copy), UseSinkCoreShortcutsModule (copy), UseEffectFunction (copy), InterventionAnalyticsModule (copy), UseCallbackFunction (copy), PostDismissInterventionModule (copy), NotificationModalsManagerModule (copy), IconsActionsAccept (copy), VRService (copy), ReactModule (copy), Text (copy), FFlagUFRImprovementsModule (copy), View (copy), Divider (copy), EvidenceFieldModule (copy), FFlagUFRDialogContentCutoffFixModule (copy), Badge (copy), BadgeVariant (copy), IconName (copy), IconPosition (copy), IconVariant (copy), CryoModule (copy), Button (copy), ButtonVariant (copy), ButtonSize (copy), Dialog (copy), DialogSize (copy), InterventionDialogLoadingSkeletonModule (copy), InterventionDialogFooterModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local InterventionId = p1.interventionId
 	local InterventionId1 = if InterventionId == "" then nil else InterventionId
@@ -74,6 +76,10 @@ return ReactModule.memo(function(p1)
 		isAutoFocusRoot = true,
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.ModerationOverlay
 	})
+	
+	if FFlagInterventionDialogBlockExperienceInputModule then
+		UseSinkCoreShortcutsModule(UseInterventionPlacementModuleResult == ConstantsModule.InterventionPlacementType.InExperience)
+	end
 	UseEffectFunction(function()
 		-- upvalues: InterventionAnalyticsModule (upval), p1 (copy), UseInterventionPlacementModuleResult (copy), UseRefResult (copy)
 		InterventionAnalyticsModule.sendAnalyticsEvent(InterventionAnalyticsModule.TelemetryConfigs.DialogRendered, {

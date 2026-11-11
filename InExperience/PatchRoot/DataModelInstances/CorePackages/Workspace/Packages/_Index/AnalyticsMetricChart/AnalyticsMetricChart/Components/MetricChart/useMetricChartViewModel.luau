@@ -92,6 +92,7 @@ return function(p1)
 		deltaText = p1.deltaText,
 		isDeltaPositive = p1.isDeltaPositive,
 		hasData = p1.hasData,
+		hideHeader = p1.hideHeader == true,
 		points = UseMemoResult.points,
 		minX = UseMemoResult.minX,
 		maxX = UseMemoResult.maxX,

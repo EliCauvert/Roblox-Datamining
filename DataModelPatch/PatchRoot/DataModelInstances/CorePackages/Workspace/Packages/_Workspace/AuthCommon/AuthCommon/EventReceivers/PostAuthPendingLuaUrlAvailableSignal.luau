@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("AuthCommon").Parent.AppCommonLib).Signal.new()

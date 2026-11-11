@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AddFriendsPageFAEUpsell3", false)

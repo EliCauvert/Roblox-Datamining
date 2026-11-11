@@ -1,1 +1,0 @@
-﻿return (require(script:FindFirstAncestor("ScrollIntervalTracker").Parent.Loggers).Logger:new("ScrollIntervalTracker"))

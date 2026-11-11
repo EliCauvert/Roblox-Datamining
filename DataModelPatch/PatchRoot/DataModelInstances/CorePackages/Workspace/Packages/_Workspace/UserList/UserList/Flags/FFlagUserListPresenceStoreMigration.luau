@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("UserList").Parent.SharedFlags).FFlagFriendSortedByPresenceSignalsImplementation and game:DefineFastFlag("UserListPresenceStoreMigration", false)

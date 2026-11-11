@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("ExpChatDictatedSpeechEnabled", false) and game:GetEngineFeature("EnableExpChatDictatedSpeechOnLua")

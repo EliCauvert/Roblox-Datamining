@@ -1,1 +1,0 @@
-﻿return (game:DefineFastFlag("AppChatEnableDoubleOptInRC3", false))

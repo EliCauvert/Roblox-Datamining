@@ -1,1 +1,0 @@
-﻿return game:DefineFastString("AgeCheckAmpNameSpace", "account_identity/AgeCheck")

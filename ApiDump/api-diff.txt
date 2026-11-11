@@ -1,210 +1,318 @@
-Version version-fee454b8e2094ba9 (2026-11-04 18:08:50 UTC)
+Version version-63eb6055af4e4688 (2026-11-10 23:37:50 UTC)
 ============================================================
 
-Added Class FeatureSearchParams : Object [NotCreatable] [NotReplicated]
-	Added Property FeatureSearchParams.AnchorCostScale: number {🚧InternalTest}
-	Added Property FeatureSearchParams.AnchorIgnoresTagFilters: boolean {🚧InternalTest}
-	Added Property FeatureSearchParams.AnchorRow: number {🚧InternalTest}
-	Added Property FeatureSearchParams.MaxDistance: number {🚧InternalTest}
-	Added Property FeatureSearchParams.MaxResults: number {🚧InternalTest}
-	Added Property FeatureSearchParams.NormalizationKey: number {🚧InternalTest}
-	Added Property FeatureSearchParams.ReturnChannelCosts: boolean {🚧InternalTest}
-	Added Property FeatureSearchParams.SelectionMode: Enum.FeatureSelectionMode {🚧InternalTest}
-	Added Property FeatureSearchParams.SelectionSeed: number {🚧InternalTest}
-	Added Property FeatureSearchParams.SelectionTemperature: number {🚧InternalTest}
-	Added Function FeatureSearchParams:GetChannelWeights() -> { [string]: any } {🚧InternalTest}
-	Added Function FeatureSearchParams:GetCostBiases() -> { any } {🚧InternalTest}
-	Added Function FeatureSearchParams:GetFilters() -> { [string]: any } {🚧InternalTest}
-	Added Function FeatureSearchParams:GetReturnedFields() -> { any } {🚧InternalTest}
-	Added Function FeatureSearchParams:SetChannelWeights(weights: { [string]: any }) -> () {🚧InternalTest}
-	Added Function FeatureSearchParams:SetCostBiases(costBiases: { any }) -> () {🚧InternalTest}
-	Added Function FeatureSearchParams:SetFilters(filters: { [string]: any }) -> () {🚧InternalTest}
-	Added Function FeatureSearchParams:SetReturnedFields(fieldNames: { any }) -> () {🚧InternalTest}
+Added Class AudioStreamReader : Instance [NotBrowsable]
+	Added Property AudioStreamReader.Layout: Enum.AudioChannelLayout {🚧Audio}
+	Added Property AudioStreamReader.SampleFormat: Enum.AudioSampleFormat [ReadOnly] {🚧Audio}
+	Added Property AudioStreamReader.SampleRate: number [ReadOnly] {🚧Audio}
+	Added Property AudioStreamReader.WindowSize: Enum.AudioWindowSize {🚧Audio}
+	Added Function AudioStreamReader:GetConnectedWires(pin: string) -> { Instance } {🚧Audio}
+	Added Function AudioStreamReader:GetInputPins() -> { any } {🚧Audio}
+	Added Function AudioStreamReader:GetOutputPins() -> { any } {🚧Audio}
+	Added Function AudioStreamReader:Peek(into: { any }) -> number [CustomLuaState] {🚧Audio} {🧬Safe}
+	Added Function AudioStreamReader:Read(into: { any }) -> number [CustomLuaState] {🚧Audio} {🧬Safe}
+	Added Event AudioStreamReader.WiringChanged(connected: boolean, pin: string, wire: Wire, instance: Instance) {🚧Audio}
 
-Added Class PlaceSettings : Instance [NotCreatable] [Service] [NotReplicated]
-	Added Function PlaceSettings:GetActiveRollouts() -> { any } {🚧PluginOrOpenCloud}
-	Added Function PlaceSettings:GetRolloutState(rolloutName: string) -> any {🚧PluginOrOpenCloud}
-	Added Function PlaceSettings:SetRolloutState(rolloutName: string, state: any) -> () {🚧PluginOrOpenCloud}
+Added Class AudioStreamWriter : Instance [NotBrowsable]
+	Added Property AudioStreamWriter.Layout: Enum.AudioChannelLayout {🚧Audio}
+	Added Property AudioStreamWriter.SampleFormat: Enum.AudioSampleFormat [ReadOnly] {🚧Audio}
+	Added Property AudioStreamWriter.SampleRate: number [ReadOnly] {🚧Audio}
+	Added Property AudioStreamWriter.WindowSize: Enum.AudioWindowSize {🚧Audio}
+	Added Function AudioStreamWriter:GetConnectedWires(pin: string) -> { Instance } {🚧Audio}
+	Added Function AudioStreamWriter:GetInputPins() -> { any } {🚧Audio}
+	Added Function AudioStreamWriter:GetOutputPins() -> { any } {🚧Audio}
+	Added Function AudioStreamWriter:Space() -> number {🚧Audio} {🧬Safe}
+	Added Function AudioStreamWriter:Write(audioBuffer: { any }) -> number [CustomLuaState] {🚧Audio} {🧬Safe}
+	Added Event AudioStreamWriter.WiringChanged(connected: boolean, pin: string, wire: Wire, instance: Instance) {🚧Audio}
 
-Added Property LayerCollector.InputSinkEnabled: Enum.RolloutState {🚧UI}
-Added Property Workspace.ParticlesUseDynamicWind: Enum.RolloutState [NotScriptable] {🚧Basic}
-Added Property Workspace.NextGenerationPhysicsSolver: Enum.RolloutState {🚧PluginOrOpenCloud}
-Added Property Workspace.InputSinkEnabled: Enum.RolloutState {🔒RobloxScript}
-Added Property Workspace.NextGenerationReplicationStorage: Enum.RolloutState [Hidden] [NotReplicated] [NotScriptable] {🔒RobloxEngine}
-Added Property Workspace.PlayerScriptsUseInputActionSystemStorage: Enum.RolloutState [Hidden] [NotReplicated] [NotScriptable] {🔒RobloxEngine}
-Added Property Workspace.SignalBehaviorStorage: Enum.SignalBehavior [Hidden] [NotReplicated] [NotScriptable] {🔒RobloxEngine}
-Added Property Workspace.UseFixedSimulationStorage: Enum.RolloutState [Hidden] [NotReplicated] [NotScriptable] {🔒RobloxEngine}
-Added Property AnimatedImageService.UserCreatedClips: BinaryString [Hidden] [NotScriptable] {🔒RobloxScript}
-Added Property AnimationPlayer.ParametersSerialize: BinaryString [Hidden] [NotScriptable] {🔒RobloxScript}
-Added Property AnimationPlayer.Parameters: boolean [NotReplicated] [NotScriptable] {🔒RobloxScript}
+Added Class AvatarEffectDescription : Instance
+	Added Property AvatarEffectDescription.AssetId: number {🚧AvatarAppearance}
+	Added Property AvatarEffectDescription.EffectType: Enum.AvatarEffectType {🚧AvatarAppearance}
 
-Added Function FeatureMatchingService:CreateSearchParams() -> FeatureSearchParams {🚧InternalTest}
-Added Function GeometryService:SplitApartAsync(parts: { any }, options: { [string]: any }? = nil) -> { any } [Yields] {🚧CSG}
-Added Function GuiService:GetUIScaleOptions() -> { [string]: any } {🚧UI} {🔒RobloxScript}
-Added Function HapticEffect:GetWaveformKeys() -> { any } {🚧Input}
-Added Function ScriptEditorService:GetActiveScriptDocument() -> ScriptDocument {🔒RobloxScript}
-Added Function ScriptEditorService:OpenTextDocumentAsync(textDocument: TextDocument, options: { [string]: any }? = nil) -> ...any [Yields] {🔒RobloxScript}
-Added Function SerializationService:DeserializeValue(buffer: buffer, format: Enum.SerializationFormat? = "Binary") -> any {🚧PluginOrOpenCloud}
-Added Function SerializationService:SerializeValue(value: any, format: Enum.SerializationFormat? = "Binary") -> buffer {🚧PluginOrOpenCloud}
-Added Function AchievementService:IsAchievementAvailable(achievementName: string) -> boolean {🔒RobloxScript}
-Added Function AnimationPlayer:GetParameter(name: string) -> any {🔒RobloxScript}
-Added Function AnimationPlayer:GetParameterDefaults() -> { [string]: any } {🔒RobloxScript}
-Added Function AnimationPlayer:SetParameter(name: string, value: any) -> () {🔒RobloxScript}
-Added Function AssetImportService:PickAnimatedImageFileWithPromptAsync() -> string [Yields] {🔒RobloxScript}
-Added Function AssetImportService:PickTextDocumentFileWithPromptAsync() -> string [Yields] {🔒RobloxScript}
-Added Function FeatureMatchingSession:Search(query: buffer, params: FeatureSearchParams? = nil) -> { [string]: any } {🚧InternalTest}
-Added Function FeatureMatchingSession:SearchBatch(queries: { any }, sharedParams: FeatureSearchParams? = nil, perQueryParams: { any }? = {}) -> { any } {🚧InternalTest}
-Added Function FriendsCallingService:AnswerCall(callId: string) -> () {🔒RobloxScript}
-Added Function FriendsCallingService:ReceiveCall(pushPayloadJson: string) -> () {🔒RobloxScript}
+Added Class FollowRotationBoneBehavior : Instance [NotBrowsable]
+	Added Property FollowRotationBoneBehavior.CounterRotate: boolean {🚧InternalTest}
+	Added Property FollowRotationBoneBehavior.Driver: Instance? {🚧InternalTest}
+	Added Property FollowRotationBoneBehavior.Weight: number {🚧InternalTest}
 
-Added Event ScriptEditorService.ActiveScriptDocumentChanged(newDocument: ScriptDocument) {🔒RobloxScript}
+Added Class FollowTwistBoneBehavior : Instance [NotBrowsable]
+	Added Property FollowTwistBoneBehavior.Axis: Enum.Axis {🚧InternalTest}
+	Added Property FollowTwistBoneBehavior.AxisMode: Enum.FollowTwistBoneAxisMode {🚧InternalTest}
+	Added Property FollowTwistBoneBehavior.CounterRotate: boolean {🚧InternalTest}
+	Added Property FollowTwistBoneBehavior.Driver: Instance? {🚧InternalTest}
+	Added Property FollowTwistBoneBehavior.EndBone: Instance? {🚧InternalTest}
+	Added Property FollowTwistBoneBehavior.StartBone: Instance? {🚧InternalTest}
+	Added Property FollowTwistBoneBehavior.Weight: number {🚧InternalTest}
 
-Added Enum FeatureMatchingSource
-	Added EnumItem FeatureMatchingSource.Input : 0
-	Added EnumItem FeatureMatchingSource.Continuity : 1
-	Added EnumItem FeatureMatchingSource.Ignore : 2
+Added Class GameDownloaderService : Instance {🔒RobloxScript} [NotCreatable] [Service] [NotReplicated]
+	Added Function GameDownloaderService:CancelGameDownload(universeId: number) -> () {🔒RobloxScript}
+	Added Function GameDownloaderService:DownloadGame(universeId: number) -> Enum.GameDownloadStartResult {🔒RobloxScript}
+	Added Function GameDownloaderService:GetGameDownloadStatus(universeId: number) -> { [string]: any } {🔒RobloxScript}
+	Added Event GameDownloaderService.DownloadCompleted(universeId: number, result: Enum.GameDownloadResult) {🔒RobloxScript}
+	Added Event GameDownloaderService.DownloadProgressChanged(universeId: number, phase: Enum.GameDownloadPhase, bytesDownloaded: number, totalExpectedBytes: number) {🔒RobloxScript}
 
-Added Enum FeatureSelectionMode
-	Added EnumItem FeatureSelectionMode.Nearest : 0
-	Added EnumItem FeatureSelectionMode.WeightedRandom : 1
+Added Class ModelInfoService : Instance {🔒RobloxScript} [NotCreatable] [Service] [NotReplicated]
+	Added Function ModelInfoService:GetModelTriangleCount(model: Model) -> number {🔒RobloxScript}
 
-Added Enum SerializationFormat
-	Added EnumItem SerializationFormat.Binary : 0
-	Added EnumItem SerializationFormat.Json : 1
-	Added EnumItem SerializationFormat.Luau : 2
+Added Property AvatarAccessoryRules.EnableSpawnEffects: boolean {🚧AvatarAppearance}
+Added Property AvatarCollisionRules.HitboxSize: Vector3 {🚧AvatarAppearance}
+Added Property AvatarCollisionRules.TouchAndQueryDetectionMode: Enum.AvatarSettingsTouchAndQueryDetectionMode {🚧AvatarAppearance}
+Added Property DataModel.ServerRegion: string [ReadOnly]
+Added Property Folder.ExplorerIconContent: Content {🚧Basic}
+Added Property Model.ExplorerIconContent: Content {🚧Basic}
+Added Property ParticleEmitter2D.LightInfluence: number {🚧Basic}
+Added Property Humanoid.InternalAnimationHipHeight: number [Hidden] [NotScriptable] {🔒RobloxScript}
+Added Property Studio.Enable Flag Editor: boolean {🔒RobloxScript}
+Added Property QWidgetPluginGui.CloseButtonEnabled: boolean [Hidden] [NotReplicated] {🚧UI} {🔒RobloxScript}
 
-Added EnumItem AnimationValueNodeType.FeatureMatching : 2
+Added Function GeometryService:NegateAsync(parts: { Instance }) -> { any } [Yields] {🚧CSG + PluginOrOpenCloud}
+Added Function GeometryService:SeparateAsync(parts: { Instance }) -> { any } [Yields] {🚧CSG + PluginOrOpenCloud}
+Added Function SocialService:PromptRateExperienceAsync() -> Enum.ExperienceRatingResult [Yields] {🚧Social}
+Added Function SocialService:RateExperiencePromptCompleted(result: Enum.ExperienceRatingResult) -> () {🚧Social} {🔒RobloxScript}
+Added Function TextDocument:ReadAsync() -> string [Yields] {🚧PluginOrOpenCloud}
+Added Function UserInputService:CreateVirtualInputForPluginGuiId(pluginGuiId: string) -> Object? {🚧Input} {🔒RobloxScript}
+Added Function CloudClientService:CheckOfferEligibility(offerType: string) -> boolean {🔒RobloxScript}
+Added Function CloudClientService:CheckOfferEligibilityAsync(offerType: string) -> boolean [Yields] {🔒RobloxScript}
+Added Function CloudClientService:MakeOfferReservationAsync(placeId: number, offerType: string) -> string [Yields] {🔒RobloxScript}
 
-Added LegacyName "Enabled" to EnumItem FluidForces.Experimental
+Added Event SocialService.ShowRateExperiencePrompt() {🚧Social} {🔒RobloxScript}
+Added Event VideoFrame.SubtitlesChanged(subtitleCues: { any }) {🚧Audio + UI}
 
-Added Tag [Deprecated] to Property TeleportOptions.ReservedServerAccessCode
-Added Tag [Deprecated] to Property TeleportOptions.ShouldReserveServer
-Added Tag [Deprecated] to Function TeleportService:ReserveServerAsync
+Added Enum AvatarEffectType
+	Added EnumItem AvatarEffectType.None : 0
+	Added EnumItem AvatarEffectType.Spawn : 1
 
-Changed the security of Class FriendsCallingInstance 
-	from: {🔒RobloxEngine}
-	  to: {🔒RobloxScript}
+Added Enum AvatarSettingsTouchAndQueryDetectionMode
+	Added EnumItem AvatarSettingsTouchAndQueryDetectionMode.UseParts : 0
+	Added EnumItem AvatarSettingsTouchAndQueryDetectionMode.UseCollider : 1
+	Added EnumItem AvatarSettingsTouchAndQueryDetectionMode.UseHitbox : 2
 
-Changed the security of Class FriendsCallingParticipant 
-	from: {🔒RobloxEngine}
-	  to: {🔒RobloxScript}
+Added Enum ExperienceRatingResult
+	Added EnumItem ExperienceRatingResult.Completed : 1
+	Added EnumItem ExperienceRatingResult.Dismissed : 2
+	Added EnumItem ExperienceRatingResult.NotAllowed : 3
+	Added EnumItem ExperienceRatingResult.Failed : 4
 
-Changed the capabilities of Property Terrain.Decoration 
-	from: {🚧Environment}
-	  to: {🚧🔎Environment} {🚧✏️PluginOrOpenCloud}
+Added Enum FollowTwistBoneAxisMode
+	Added EnumItem FollowTwistBoneAxisMode.Local : 0
+	Added EnumItem FollowTwistBoneAxisMode.Follower : 1
+	Added EnumItem FollowTwistBoneAxisMode.StartToEndBone : 2
 
-Changed the capabilities of Property Terrain.GrassLength 
-	from: {🚧Environment}
-	  to: {🚧🔎Environment} {🚧✏️PluginOrOpenCloud}
+Added Enum GameDownloadPhase
+	Added EnumItem GameDownloadPhase.FetchingManifest : 0
+	Added EnumItem GameDownloadPhase.CheckingGuards : 1
+	Added EnumItem GameDownloadPhase.Downloading : 2
 
-Changed the capabilities of Property Workspace.PredictiveStreamingMode 
-	from: 
-	  to: {🚧PluginOrOpenCloud}
+Added Enum GameDownloadResult
+	Added EnumItem GameDownloadResult.Success : 0
+	Added EnumItem GameDownloadResult.ManifestUnavailable : 1
+	Added EnumItem GameDownloadResult.NotEnoughSpace : 2
+	Added EnumItem GameDownloadResult.NotOnWiFi : 3
+	Added EnumItem GameDownloadResult.NetworkMetered : 4
+	Added EnumItem GameDownloadResult.LowPowerMode : 5
+	Added EnumItem GameDownloadResult.Moderated : 6
+	Added EnumItem GameDownloadResult.NetworkError : 7
+	Added EnumItem GameDownloadResult.Cancelled : 8
 
-Changed the capabilities of Property Workspace.StreamOutBehavior 
-	from: 
-	  to: {🚧PluginOrOpenCloud}
+Added Enum GameDownloadStartResult
+	Added EnumItem GameDownloadStartResult.Started : 0
+	Added EnumItem GameDownloadStartResult.AlreadyDownloading : 1
+	Added EnumItem GameDownloadStartResult.GameDownloadInProgress : 2
+	Added EnumItem GameDownloadStartResult.NotOnWiFi : 3
+	Added EnumItem GameDownloadStartResult.NetworkMetered : 4
+	Added EnumItem GameDownloadStartResult.LowPowerMode : 5
 
-Changed the capabilities of Property Workspace.StreamingIntegrityMode 
-	from: 
-	  to: {🚧PluginOrOpenCloud}
+Added Enum GuiNavigationDirection
+	Added EnumItem GuiNavigationDirection.None : 0
+	Added EnumItem GuiNavigationDirection.Up : 1
+	Added EnumItem GuiNavigationDirection.Down : 2
+	Added EnumItem GuiNavigationDirection.Left : 3
+	Added EnumItem GuiNavigationDirection.Right : 4
+	Added EnumItem GuiNavigationDirection.Forward : 5
+	Added EnumItem GuiNavigationDirection.Backward : 6
 
-Changed the capabilities of Property Workspace.StreamingMinRadius 
-	from: 
-	  to: {🚧PluginOrOpenCloud}
+Added EnumItem AppShellActionType.TapCampaignPageTab : 12
+Added EnumItem AppShellActionType.CampaignPageLoaded : 13
+Added EnumItem AssetType.ComputeFunction : 96
+Added EnumItem AssetType.SpawnEffect : 97
+Added EnumItem AvatarAssetType.SpawnEffect : 97
+Added EnumItem AvatarSettingsHitAndTouchDetectionMode.UseHitbox : 2 [Preliminary]
+Added EnumItem ImageCombineType.Darken : 8
+Added EnumItem ImageCombineType.Lighten : 9
+Added EnumItem ImageCombineType.Screen : 10
+Added EnumItem ImageCombineType.Overlay : 11
+Added EnumItem ImageCombineType.SoftLight : 12
+Added EnumItem ImageCombineType.HardLight : 13
+Added EnumItem ImageCombineType.Difference : 14
 
-Changed the capabilities of Property Workspace.StreamingTargetRadius 
-	from: 
-	  to: {🚧PluginOrOpenCloud}
+Added Tag [Deprecated] to Property AvatarCollisionRules.HitAndTouchDetectionMode
 
-Changed the capabilities and security of Property Workspace.AuthorityMode 
-	from:  {🔒RobloxScript}
+Added Tag [Deprecated] to Enum AvatarSettingsHitAndTouchDetectionMode
+	Added Tag [Deprecated] to EnumItem AvatarSettingsHitAndTouchDetectionMode.UseParts
+	Added Tag [Deprecated] to EnumItem AvatarSettingsHitAndTouchDetectionMode.UseCollider
+
+Added Tag [NotBrowsable] to Class UIBlur
+Added Tag [NotReplicated] to Class AnimatedImageService
+
+Changed the capabilities of Property PhysicsActivitySensor.Active 
+	from: {🚧InternalTest}
+	  to: {🚧Basic}
+
+Changed the capabilities and serialization of Property PhysicsActivitySensor.Position 
+	from: {🚧InternalTest} [💾|📁Serialized]
+	  to: {🚧Basic} [🚫None]
+
+Changed the capabilities and serialization of Property PhysicsActivitySensor.Size 
+	from: {🚧InternalTest} [💾|📁Serialized]
+	  to: {🚧Basic} [🚫None]
+
+Changed the capabilities and write permissions of Property BaseWrap.CageMeshContent 
+	from: {🚧AvatarAppearance} {✏️Plugin}
+	  to: {🚧🔎AvatarAppearance} {🚧✏️PluginOrOpenCloud} 
+
+Changed the capabilities and write permissions of Property BaseWrap.CageMeshId 
+	from: {🚧AvatarAppearance} {✏️Plugin}
+	  to: {🚧🔎AvatarAppearance} {🚧✏️PluginOrOpenCloud} 
+
+Changed the capabilities and write permissions of Property BaseWrap.CageOrigin 
+	from: {🚧AvatarAppearance} {✏️Plugin}
+	  to: {🚧🔎AvatarAppearance} {🚧✏️PluginOrOpenCloud} 
+
+Changed the capabilities and write permissions of Property BaseWrap.ImportOrigin 
+	from: {🚧AvatarAppearance} {✏️Plugin}
+	  to: {🚧🔎AvatarAppearance} {🚧✏️PluginOrOpenCloud} 
+
+Changed the capabilities and write permissions of Property Chat.LoadDefaultChat 
+	from: {🚧Chat} {✏️NotAccessible}
+	  to: {🚧🔎Chat} {🚧✏️PluginOrOpenCloud} 
+
+Changed the capabilities and write permissions of Property Decal.EmissiveMaskContent 
+	from: {🚧Basic} {✏️Plugin}
 	  to: {🚧🔎Basic} {🚧✏️PluginOrOpenCloud} 
 
-Changed the capabilities and write permissions of Property TextChatService.ChatTranslationEnabled 
-	from: {🚧Chat} {✏️RobloxScript}
-	  to: {🚧🔎Chat} {🚧✏️PluginOrOpenCloud} 
+Changed the capabilities and write permissions of Property Decal.MetalnessMapContent 
+	from: {🚧Basic} {✏️Plugin}
+	  to: {🚧🔎Basic} {🚧✏️PluginOrOpenCloud} 
 
-Changed the capabilities and write permissions of Property TextChatService.CreateDefaultCommands 
-	from: {🚧Chat} {✏️Plugin}
-	  to: {🚧🔎Chat} {🚧✏️PluginOrOpenCloud} 
+Changed the capabilities and write permissions of Property Decal.NormalMapContent 
+	from: {🚧Basic} {✏️Plugin}
+	  to: {🚧🔎Basic} {🚧✏️PluginOrOpenCloud} 
 
-Changed the capabilities and write permissions of Property TextChatService.CreateDefaultTextChannels 
-	from: {🚧Chat} {✏️Plugin}
-	  to: {🚧🔎Chat} {🚧✏️PluginOrOpenCloud} 
+Changed the capabilities and write permissions of Property Decal.RoughnessMapContent 
+	from: {🚧Basic} {✏️Plugin}
+	  to: {🚧🔎Basic} {🚧✏️PluginOrOpenCloud} 
 
-Changed the security of Property AnimationNodeDefinition.NodeId 
-	from: {🔒RobloxScript}
-	  to: 
+Changed the capabilities and write permissions of Property WrapLayer.ReferenceMeshContent 
+	from: {🚧AvatarAppearance} {✏️Plugin}
+	  to: {🚧🔎AvatarAppearance} {🚧✏️PluginOrOpenCloud} 
 
-Changed the security of Property AnimationValueNodeDefinition.NodeId 
-	from: {🔒RobloxScript}
-	  to: 
+Changed the capabilities and write permissions of Property WrapLayer.ReferenceMeshId 
+	from: {🚧AvatarAppearance} {✏️Plugin}
+	  to: {🚧🔎AvatarAppearance} {🚧✏️PluginOrOpenCloud} 
 
-Changed the security of Property SoundService.DefaultListenerLocation 
+Changed the capabilities and write permissions of Property WrapLayer.ReferenceOrigin 
+	from: {🚧AvatarAppearance} {✏️Plugin}
+	  to: {🚧🔎AvatarAppearance} {🚧✏️PluginOrOpenCloud} 
+
+Changed the capabilities and write permissions of Property WrapLayer.BindOffset 
+	from: {🚧AvatarAppearance} {✏️Plugin}
+	  to: {🚧🔎AvatarAppearance} {🚧✏️PluginOrOpenCloud} 
+
+Changed the capabilities and write permissions of Property WrapTarget.Stiffness 
+	from: {🚧AvatarAppearance} {✏️Plugin}
+	  to: {🚧🔎AvatarAppearance} {🚧✏️PluginOrOpenCloud} 
+
+Changed the security of Property VoiceChatService.DefaultDistanceAttenuation 
 	from: {🔒Plugin}
 	  to: 
 
-Changed the security of Property StateMachineTransitionDefinition.TransitionId 
-	from: {🔒RobloxScript}
+Changed the security of Property VoiceChatService.EnableDefaultVoice 
+	from: {🔒Plugin}
 	  to: 
 
-Changed the value-type of Property Studio.Theme 
-	from: Instance?
-	  to: StudioTheme?
+Changed the security of Property VoiceChatService.UseAudioApi 
+	from: {🔒Plugin}
+	  to: 
 
-Changed the capabilities and security of Function SoundService:GetInputDevice 
-	from: {🚧Audio} {🔒RobloxScript}
-	  to: {🚧Audio + InternalTest} 
+Changed the security of Property Decal.MetalnessMap 
+	from: {🔒Plugin}
+	  to: 
 
-Changed the parameters of Function EditableImage:DrawCircle 
-	from: (center: Vector2, radius: number, color: Color3, transparency: number, combineType: Enum.ImageCombineType, antiAliasing: Enum.AntiAliasing? = "Enabled")
-	  to: (center: Vector2, radius: number, color: Color3, transparency: number, combineType: Enum.ImageCombineType, antiAliasing: Enum.AntiAliasing? = "Enabled", alphaBlendType: Enum.ImageAlphaType? = "Default")
+Changed the security of Property Decal.NormalMap 
+	from: {🔒Plugin}
+	  to: 
 
-Changed the parameters of Function EditableImage:DrawImage 
-	from: (position: Vector2, image: EditableImage, combineType: Enum.ImageCombineType)
-	  to: (position: Vector2, image: EditableImage, combineType: Enum.ImageCombineType, alphaBlendType: Enum.ImageAlphaType? = "Default")
+Changed the security of Property Decal.RoughnessMap 
+	from: {🔒Plugin}
+	  to: 
 
-Changed the parameters of Function EditableImage:DrawLine 
-	from: (p1: Vector2, p2: Vector2, color: Color3, transparency: number, combineType: Enum.ImageCombineType, antiAliasing: Enum.AntiAliasing? = "Enabled")
-	  to: (p1: Vector2, p2: Vector2, color: Color3, transparency: number, combineType: Enum.ImageCombineType, antiAliasing: Enum.AntiAliasing? = "Enabled", alphaBlendType: Enum.ImageAlphaType? = "Default")
+Changed the security and serialization of Property AvatarCollisionRules.HitAndTouchDetectionMode 
+	from:  [💾|📁Serialized]
+	  to: {🔒RobloxScript} [📁LoadOnly]
 
-Changed the parameters of Function EditableImage:DrawRectangle 
-	from: (position: Vector2, size: Vector2, color: Color3, transparency: number, combineType: Enum.ImageCombineType)
-	  to: (position: Vector2, size: Vector2, color: Color3, transparency: number, combineType: Enum.ImageCombineType, alphaBlendType: Enum.ImageAlphaType? = "Default")
-
-Changed the parameters of Function GamepadService:EnableGamepadCursor 
-	from: (guiObject: Instance)
-	  to: (guiObject: GuiObject? = nil)
-
-Changed the parameters of Function FriendsCallingService:EndCall 
+Changed the parameters of Function UserInputService:CreateVirtualInput 
 	from: ()
-	  to: (callId: string, reason: string)
+	  to: (target: Instance? = nil)
 
-Removed Class WrapDeformMeshProvider
+Changed the parameters of Event GuiObject.SelectionGained 
+	from: ()
+	  to: (inputDirection: Enum.GuiNavigationDirection)
 
-Removed Property Workspace.PrimalPhysicsSolver
-Removed Property Workspace.UseInputSink
-Removed Property BasePart.siz
-Removed Property AnimatedImageService.UserCreatedTracks
+Changed the parameters of Event GuiObject.SelectionLost 
+	from: ()
+	  to: (inputDirection: Enum.GuiNavigationDirection)
 
-Removed Function AnimationRigData:LoadFromHumanoid
-Removed Function ScriptEditorService:OpenTextDocumentDocumentAsync
-Removed Function TestFailure:GetContext
+Changed the parameters of Event RealtimeMedia.Disconnected 
+	from: (expected: boolean)
+	  to: (expected: boolean, reason: string)
 
-Removed Enum PrimalPhysicsSolver
-	Removed EnumItem PrimalPhysicsSolver.Default
-	Removed EnumItem PrimalPhysicsSolver.Experimental
-	Removed EnumItem PrimalPhysicsSolver.Disabled
+Removed Class PlayerDataRecord
+	Removed Property PlayerDataRecord.CreatedTime
+	Removed Property PlayerDataRecord.DefaultRecordName
+	Removed Property PlayerDataRecord.Dirty
+	Removed Property PlayerDataRecord.Error
+	Removed Property PlayerDataRecord.FlushedTime
+	Removed Property PlayerDataRecord.LoadedTime
+	Removed Property PlayerDataRecord.ModifiedTime
+	Removed Property PlayerDataRecord.NewRecord
+	Removed Property PlayerDataRecord.Readable
+	Removed Property PlayerDataRecord.RecordName
+	Removed Property PlayerDataRecord.Writable
+	Removed Function PlayerDataRecord:GetPlayer
+	Removed Function PlayerDataRecord:GetValue
+	Removed Function PlayerDataRecord:GetValueChangedSignal
+	Removed Function PlayerDataRecord:ReleaseAsync
+	Removed Function PlayerDataRecord:RemoveValue
+	Removed Function PlayerDataRecord:RequestFlushAsync
+	Removed Function PlayerDataRecord:SetValue
+	Removed Event PlayerDataRecord.Changed
+	Removed Event PlayerDataRecord.Flushed
+	Removed Event PlayerDataRecord.Loaded
 
-Removed Tag [Hidden] from Property Player.DeviceTrustLevel
-Removed Tag [NotBrowsable] from Property UIGradient.Scale
-Removed Tag [NotBrowsable] from Property UIGradient.TileMode
-Removed Tag [NotBrowsable] from Property UIGradient.Type
-Removed Tag [NotScriptable] from Property Terrain.Decoration
-Removed Tag [NotScriptable] from Property Terrain.GrassLength
-Removed Tag [NotScriptable] from Property Workspace.PredictiveStreamingMode
-Removed Tag [NotScriptable] from Property Workspace.StreamOutBehavior
-Removed Tag [NotScriptable] from Property Workspace.StreamingIntegrityMode
-Removed Tag [NotScriptable] from Property Workspace.StreamingMinRadius
-Removed Tag [NotScriptable] from Property Workspace.StreamingTargetRadius
+Removed Class PlayerDataRecordConfig
+	Removed Property PlayerDataRecordConfig.RecordName
+	Removed Function PlayerDataRecordConfig:GetDefaultValue
+	Removed Function PlayerDataRecordConfig:SetDefaultValue
+
+Removed Property ParticleEmitter2D.LightEmission
+Removed Property PlayerDataService.LoadFailureBehavior
+Removed Property Workspace.ImprovedAnimationConstraint
+Removed Property AnimatedImageService.UserCreatedClips
+
+Removed Function Player:GetData
+Removed Function PlayerData:GetPlayer
+Removed Function PlayerData:GetRecordAsync
+Removed Function PlayerDataService:GetRecordConfig
+Removed Function UGCValidationService:ValidateEditableMeshCageNonManifoldAndHoles
+Removed Function UGCValidationService:ValidateEditableMeshFullBodyCageDeletion
+Removed Function UGCValidationService:ValidateEditableMeshTriangles
+
+Removed Enum PlayerDataErrorState
+	Removed EnumItem PlayerDataErrorState.LoadFailed
+	Removed EnumItem PlayerDataErrorState.FlushFailed
+	Removed EnumItem PlayerDataErrorState.ReleaseFailed
+	Removed EnumItem PlayerDataErrorState.None
+
+Removed Enum PlayerDataLoadFailureBehavior
+	Removed EnumItem PlayerDataLoadFailureBehavior.Failure
+	Removed EnumItem PlayerDataLoadFailureBehavior.FallbackToDefault
+	Removed EnumItem PlayerDataLoadFailureBehavior.Kick

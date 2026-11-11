@@ -69,9 +69,12 @@ local FFlagAppThemeHalloween2026BuildBackgroundModule = require(script.Parent.Fl
 local UseThemeBackgroundFunction = require(Parent.ThemeBackground).useThemeBackground
 local FFlagBuildWithGroupsModule = require(script.Parent.Flags.FFlagBuildWithGroups)
 local BuildHomeTabsContainerModule = if FFlagBuildExperiencePreviewsTabModule then require(script.Parent.Components.BuildHomeTabs.BuildHomeTabsContainer) else nil
+local FFlagBuildExperienceHomeTelemetryModule = require(script.Parent.Flags.FFlagBuildExperienceHomeTelemetry)
 local FFlagBuildExperienceAnalytics = SharedFlagsModule.FFlagBuildExperienceAnalytics
 local FFlagBuildExperienceHideNavBarOnSubPages = SharedFlagsModule.FFlagBuildExperienceHideNavBarOnSubPages
 local FFlagBuildExperienceChatOpenTelemetryModule = require(script.Parent.Flags.FFlagBuildExperienceChatOpenTelemetry)
+local FFlagBuildExperiencePageImpressionsModule = require(script.Parent.Flags.FFlagBuildExperiencePageImpressions)
+local UseBuildPageImpressionModule = require(BuildExperience.Telemetry.useBuildPageImpression)
 local GetAdsCampaignDeepLinkStoreModule = require(BuildExperience.Stores.GetAdsCampaignDeepLinkStore)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local FFlagBuildAdUpsellModule1 = FFlagBuildAdUpsellModule or FFlagBuildExperienceMonetizationNativeUIModule
@@ -335,11 +338,15 @@ local function BuildSearchScreen(p2)
 end
 
 local function BuildGetUsersScreen(p2)
-	-- upvalues: UseBuildPageLayoutModule (copy), BuildNavigationParamsModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), UseAdsStatsPageViewModelModule (copy), AdsStatsViewModule (copy), View (copy), Button (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), FullscreenPageWithSafeArea (copy), OverflowMenuPageShellModule (copy), AdsManagerMenuButtonModule (copy), OverlayProvider (copy), AdCampaignCreatedToastModule (copy)
+	-- upvalues: UseBuildPageLayoutModule (copy), BuildNavigationParamsModule (copy), FFlagBuildExperiencePageImpressionsModule (copy), UseBuildPageImpressionModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), UseAdsStatsPageViewModelModule (copy), AdsStatsViewModule (copy), View (copy), Button (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), FullscreenPageWithSafeArea (copy), OverflowMenuPageShellModule (copy), AdsManagerMenuButtonModule (copy), OverlayProvider (copy), AdCampaignCreatedToastModule (copy)
 	local Navigation = p2.navigation
 	local UseBuildPageLayoutModuleResult = UseBuildPageLayoutModule()
 	local Target = BuildNavigationParamsModule.getTarget(Navigation)
 	local UniverseId = if Target == nil then nil else Target.universeId
+	
+	if FFlagBuildExperiencePageImpressionsModule then
+		UseBuildPageImpressionModule("get-users", Target)
+	end
 	local PageTitle = UseLocalizationFunction({
 		pageTitle = LocalizationStringsModule.ADS_STATS_PAGE_TITLE
 	}).pageTitle
@@ -411,7 +418,7 @@ local List = {
 	{
 		[config.BuildHome] = {
 			screen = function(p2)
-				-- upvalues: UseBuildPageLayoutModule (copy), UseNavigationFocusFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), FFlagBuildExperienceModelPickerModule (copy), PrepareBuildModelSelectionTargetModule (copy), FFlagBuildExperienceChatOpenTelemetryModule (copy), SendBuildExperienceEventModule (copy), config (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), useHomeConfigurationPages (copy), FFlagAppThemeHalloween2026BuildBackgroundModule (copy), UseThemeBackgroundFunction (copy), FFlagBuildAdUpsellModule (copy), GetAdsCampaignDeepLinkStoreModule (copy), ResumeBuildChatModule (copy), GetSearchQueryStoreModule (copy), MyCreationsTabModule (copy), FullscreenPageWithSafeArea (copy), View (copy), BuildPageHeaderModule (copy), FFlagBuildExperiencePreviewsTabModule (copy), BuildHomeTabsContainerModule (copy), FFlagBuildPublishNavigationSheetModule (copy), PublishSheetControllerModule (copy)
+				-- upvalues: UseBuildPageLayoutModule (copy), UseNavigationFocusFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), FFlagBuildExperienceModelPickerModule (copy), PrepareBuildModelSelectionTargetModule (copy), FFlagBuildExperienceChatOpenTelemetryModule (copy), SendBuildExperienceEventModule (copy), config (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), useHomeConfigurationPages (copy), FFlagAppThemeHalloween2026BuildBackgroundModule (copy), UseThemeBackgroundFunction (copy), FFlagBuildAdUpsellModule (copy), GetAdsCampaignDeepLinkStoreModule (copy), ResumeBuildChatModule (copy), GetSearchQueryStoreModule (copy), FFlagBuildExperienceHomeTelemetryModule (copy), MyCreationsTabModule (copy), FullscreenPageWithSafeArea (copy), View (copy), BuildPageHeaderModule (copy), FFlagBuildExperiencePreviewsTabModule (copy), BuildHomeTabsContainerModule (copy), FFlagBuildPublishNavigationSheetModule (copy), PublishSheetControllerModule (copy)
 				local ScreenProps = p2.screenProps or {}
 				local Navigation = p2.navigation
 				local UseBuildPageLayoutModuleResult = UseBuildPageLayoutModule()
@@ -497,7 +504,10 @@ local List = {
 							height = UseBuildPageLayoutModuleResult.topBarHeight,
 							searchQueryStore = SearchQueryStore,
 							onOpenSearch = ReactModule.useCallback(function()
-								-- upvalues: SearchQueryStore (copy), Navigation (copy), config (upval)
+								-- upvalues: SearchQueryStore (copy), FFlagBuildExperienceHomeTelemetryModule (upval), SendBuildExperienceEventModule (upval), Navigation (copy), config (upval)
+								if FFlagBuildExperienceHomeTelemetryModule then
+									SendBuildExperienceEventModule("SEARCH_OPEN", {}, { source = "home_header" })
+								end
 								SearchQueryStore.beginSearch()
 								Navigation.navigate(config.BuildSearch, { searchQueryStore = SearchQueryStore })
 							end, { Navigation, SearchQueryStore })
@@ -517,7 +527,7 @@ local List = {
 							}) else Element
 						})
 					}),
-					PublishSheet = if FFlagBuildPublishNavigationSheetModule and UseHomeConfigurationPagesResult ~= nil and PublishSheetTarget ~= nil and PublishSheetTarget.universeId ~= nil then ReactModule.createElement(PublishSheetControllerModule, {
+					PublishSheet = if FFlagBuildPublishNavigationSheetModule and UseHomeConfigurationPagesResult ~= nil and (PublishSheetTarget ~= nil and PublishSheetTarget.universeId ~= nil) then ReactModule.createElement(PublishSheetControllerModule, {
 						isOpen = UseHomeConfigurationPagesResult.isPublishSheetOpen,
 						target = PublishSheetTarget,
 						onClose = UseHomeConfigurationPagesResult.onClosePublishSheet,
@@ -806,8 +816,12 @@ local List = {
 	{
 		[config.BuildCreatorCredit] = {
 			screen = function(p3)
-				-- upvalues: UseBuildPageLayoutModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), CreatorCreditPageContainerModule (copy), FullscreenPageWithSafeArea (copy), OverflowMenuPageShellModule (copy), CreatorCreditBalanceChipContainerModule (copy)
+				-- upvalues: FFlagBuildExperiencePageImpressionsModule (copy), UseBuildPageImpressionModule (copy), BuildNavigationParamsModule (copy), UseBuildPageLayoutModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), CreatorCreditPageContainerModule (copy), FullscreenPageWithSafeArea (copy), OverflowMenuPageShellModule (copy), CreatorCreditBalanceChipContainerModule (copy)
 				local Navigation = p3.navigation
+				
+				if FFlagBuildExperiencePageImpressionsModule then
+					UseBuildPageImpressionModule("creator-credit-ai-usage", BuildNavigationParamsModule.getTarget(Navigation))
+				end
 				local UseBuildPageLayoutModuleResult = UseBuildPageLayoutModule()
 				
 				return ReactModule.createElement(FullscreenPageWithSafeArea, {

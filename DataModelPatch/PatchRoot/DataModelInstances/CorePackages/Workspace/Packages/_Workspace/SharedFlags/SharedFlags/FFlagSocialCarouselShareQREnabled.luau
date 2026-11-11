@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("SocialCarouselShareQREnabled_v5", false)

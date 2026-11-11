@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("AppChat").Parent.SharedFlags).FFlagAppChatEnableU13ChatOptIn

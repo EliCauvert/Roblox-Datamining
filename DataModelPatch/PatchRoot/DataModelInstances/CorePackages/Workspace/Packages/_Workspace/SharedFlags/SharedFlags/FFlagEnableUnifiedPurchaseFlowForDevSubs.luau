@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnableUnifiedPurchaseFlowForDevSubs10", false)

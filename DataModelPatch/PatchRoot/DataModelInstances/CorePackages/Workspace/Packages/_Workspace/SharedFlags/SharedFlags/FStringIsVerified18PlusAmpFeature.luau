@@ -1,1 +1,0 @@
-﻿return game:DefineFastString("IsVerified18PlusAmpFeature", "IsVerified18Plus")

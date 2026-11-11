@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnablePreAuthDeepLinkHandler2", false)

@@ -1,1 +1,0 @@
-﻿return { Icon = "Icon", Media = "Media", Avatar = "Avatar" }

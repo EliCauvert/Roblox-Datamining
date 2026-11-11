@@ -1,1 +1,0 @@
-﻿return { FriendsOwnedChip = require(script.FriendsOwnedChip) }

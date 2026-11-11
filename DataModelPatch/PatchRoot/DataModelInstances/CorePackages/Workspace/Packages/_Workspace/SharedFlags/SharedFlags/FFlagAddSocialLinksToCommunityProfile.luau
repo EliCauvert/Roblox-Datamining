@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AddSocialLinksToCommunityProfile_v3", false)

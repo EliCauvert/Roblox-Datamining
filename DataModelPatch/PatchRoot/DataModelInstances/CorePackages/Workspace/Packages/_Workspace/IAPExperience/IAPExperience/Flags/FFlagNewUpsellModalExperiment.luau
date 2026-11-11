@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("NewUpsellModalExperimentV2", false)

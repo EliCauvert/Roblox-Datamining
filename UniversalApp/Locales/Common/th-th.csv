@@ -203,6 +203,7 @@ Authentication.AccountSwitch.Action.Continue,
 Authentication.AccountSwitch.Action.CreateNewAccount,สร้างบัญชีใหม่
 Authentication.AccountSwitch.Action.LogoutAllAccounts,ลงชื่อออกจากบัญชีทั้งหมด
 Authentication.AccountSwitch.Action.RemoveAllAccounts,ลบบัญชีทั้งหมดใช่ไหม?
+Authentication.AccountSwitch.Action.SignIn,ลงชื่อเข้าใช้
 Authentication.AccountSwitch.Action.SignInToExistingAccount,ลงชื่อเข้าใช้บัญชีที่มีอยู่
 Authentication.AccountSwitch.Action.SwitchAccount,สลับบัญชี
 Authentication.AccountSwitch.Description.AccountLimit.2,คุณมีบัญชีถึงจำนวนสูงสุดแล้ว หากต้องการเพิ่มบัญชีใหม่ โปรดลบบัญชีที่มีอยู่ออกก่อน
@@ -212,6 +213,8 @@ Authentication.AccountSwitch.Description.LogoutConfirmation,คุณจะต�
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,โปรดลองอีกครั้งในภายหลัง
 Authentication.AccountSwitch.Description.RemoveAllAccounts,เมื่อคุณลงชื่อออก บัญชีทั้งหมดจะถูกลบออกจากอุปกรณ์นี้
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,หากลบออก คุณจะกลับไปที่หน้า Landing Page และจะไม่เห็นบัญชีนี้บนอุปกรณ์นี้อีกต่อไป เว้นแต่จะลงชื่อเข้าใช้อีกครั้ง
+Authentication.AccountSwitch.Description.SomethingWentWrongSignInAgain,เกิดข้อผิดพลาดบางอย่าง โปรดลงชื่อเข้าใช้อีกครั้ง
+Authentication.AccountSwitch.Description.StaleSessionSignInAgain,คุณไม่ได้ใช้บัญชีนี้ที่นี่มาสักพักแล้ว โปรดลงชื่อเข้าใช้อีกครั้ง
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,โปรดลงชื่อเข้าใช้โดยตรง
 Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,ไม่สามารถสลับบัญชีได้
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
@@ -304,7 +307,7 @@ Authentication.Login.Action.ResendCode,
 Authentication.Login.Action.Save,บันทึก
 Authentication.Login.Action.SendCodeSentenceCase,ส่งรหัส
 Authentication.Login.Action.SendVerificationEmail,ส่งอีเมลการตรวจสอบยืนยัน
-Authentication.Login.Action.SignIn,ลงชื่อเข้าใช้
+Authentication.Login.Action.SignIn,
 Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,ใช้พาสคีย์
@@ -1582,7 +1585,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,ค้นหาผู้�
 Feature.AddFriends.Label.ConnectWithContacts,เชิญเพื่อนจากรายชื่อผู้ติดต่อหรือเชื่อมต่อกับเพื่อนๆ ที่อยู่บน Roblox อยู่แล้วก็ได้!
 Feature.AddFriends.Label.ContactsTile,รายชื่อผู้ติดต่อ
 Feature.AddFriends.Label.DeclineAllBackgrounded,ปฏิเสธคำขอเป็นเพื่อนทั้งหมด การดำเนินการนี้อาจใช้เวลาสักครู่
-Feature.AddFriends.Label.EmptyState.FriendsRename,คุณจะออกสำรวจ Roblox กับใครดี? เพิ่มเพื่อนเพื่อทำสิ่งต่างๆ บน Roblox ได้มากขึ้น!
 Feature.AddFriends.Label.EmptyStatePrompt,ใครที่คุณจะสำรวจ Roblox ด้วย? ค้นหาผู้ใช้เพื่อเพิ่มเป็นเพื่อนหรือเชื่อมต่อกับเพื่อนๆ ที่คุณรู้จักอยู่แล้วก็ได้!
 Feature.AddFriends.Label.FriendRequests,คำขอเป็นเพื่อน
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,ค้นหาผู้ใช้
@@ -1590,8 +1592,6 @@ Feature.AddFriends.Label.MyQrCode,รหัส QR ของฉัน
 Feature.AddFriends.Label.QRCodeTitle,
 Feature.AddFriends.Label.SchoolTile,เพื่อนร่วมชั้น
 Feature.AddFriends.Label.SearchForFriendsPrompt,ค้นหาผู้ใช้บน Roblox โดยใช้ชื่อผู้ใช้หรือชื่อที่แสดงในการค้นหา
-Feature.AddFriends.Label.ShareQRCodeAddConnection,แชร์รหัส QR เพื่อเพิ่มผู้ใช้ที่คุณรู้จัก
-Feature.AddFriends.Label.SyncContactsInvitePeople,ซิงค์รายชื่อผู้ติดต่อเพื่อค้นหาและเชิญเพื่อน!
 Feature.AddFriends.Label.SyncWithContacts,ซิงค์รายชื่อติดต่อเพื่อค้นหาและเชิญเพื่อน!
 Feature.AddFriends.Label.TrustedFriendRequests,คำขอเป็นเพื่อนที่เชื่อได้
 Feature.AddFriends.Text.EmptyState.FriendsRename,คุณจะออกสำรวจ Roblox กับใครดี?{lineBreak}เพิ่มเพื่อนเพื่อทำสิ่งต่างๆ บน Roblox ได้มากขึ้น!
@@ -1599,7 +1599,6 @@ Feature.AddFriends.Title.AddFriendsToolTip,Roblox จะสนุกยิ่ง
 Feature.AddFriends.Title.AddFriendsTooltipTitle,
 Feature.AddFriends.Title.CameraPermission,สิทธิ์ในการเข้าถึงกล้อง
 Feature.AddFriends.Title.ConnectWithContacts,เพิ่มจากรายชื่อผู้ติดต่อ
-Feature.AddFriends.Title.ShareQRCode,เพิ่มจากรหัส QR
 Feature.AgeGuidelines.DisplayName.StrongLanguage,คำที่ไม่เหมาะสม
 Feature.AgeGuidelines.Label.CreatorEnabled,เปิดใช้งานครีเอเตอร์แล้ว
 Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect,ปลดล็อคเนื้อหาและคุณสมบัติเพิ่มเติม
@@ -1712,6 +1711,7 @@ Feature.AppealsPortal.Label.Location,
 Feature.AppealsPortal.Label.LookDescription,คำอธิบายอวาตาร์ที่แชร์
 Feature.AppealsPortal.Label.LookId,ID อวาตาร์ที่แชร์
 Feature.AppealsPortal.Label.LookName,ชื่ออวาตาร์ที่แชร์
+Feature.AppealsPortal.Label.MomentDescription,คำอธิบายโมเมนต์
 Feature.AppealsPortal.Label.PlaceIDPrompt,ID สถานที่คืออะไร?
 Feature.AppealsPortal.Label.PlaceId,ID สถานที่
 Feature.AppealsPortal.Label.PlaceName,ชื่อสถานที่
@@ -2169,6 +2169,8 @@ Feature.Avatar.Label.Shoes,รองเท้า
 Feature.Avatar.Label.Shorts,กางเกงขาสั้น
 Feature.Avatar.Label.Shoulder,ไหล่
 Feature.Avatar.Label.Skin,
+Feature.Avatar.Label.Spawn,การเกิดใหม่
+Feature.Avatar.Label.SpawnEffects,เอฟเฟกต์การเกิดใหม่
 Feature.Avatar.Label.Sweater,เสื้อสเวตเตอร์
 Feature.Avatar.Label.Sweaters,
 Feature.Avatar.Label.Swim,ว่ายน้ำ
@@ -2991,6 +2993,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,เพื่อนของฉัน (
 Feature.BuyRobux.Label.PeopleWithCount,ผู้ใช้ ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Gallery,แกลลอรี
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,ไปที่การปรับแต่ง
@@ -3481,7 +3484,6 @@ Feature.Chat.Label.SearchForFriendsAndChat,ค้นหาการสนทน�
 Feature.Chat.Label.SearchFriends,ค้นหาเพื่อน
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.Sent,ส่งแล้ว
-Feature.Chat.Label.SnoozeChatNotifications,ปิดเสียงแจ้งเตือนแชทในประสบการณ์:
 Feature.Chat.Label.SnoozePartyNotifications,ปิดเสียงการแจ้งเตือนเกี่ยวกับ Party ในประสบการณ์สำหรับ:
 Feature.Chat.Label.SwipeToReplyTooltip,ปัดเพื่อตอบกลับ
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} วัน
@@ -3538,7 +3540,6 @@ Feature.Chat.Response.NetworkError,เกิดข้อผิดพลาดก
 Feature.Chat.Response.Sending,กําลังส่ง
 Feature.Chat.RobloxConnectUnavailableWithUser,ตอนนี้ผู้ใช้รายนี้ใช้งาน Roblox Connect ไม่ได้
 Feature.Chat.Text.NoFriends,คุณยังไม่ได้เพิ่มเพื่อน หากต้องการเริ่ม ให้ค้นหาและเพิ่มเพื่อนของคุณบน Roblox
-Feature.Chat.Title.MuteChatNotifications,ปิดการแจ้งเตือนเกี่ยวกับแชทจากเพื่อนระหว่างเล่นเกม
 Feature.Chat.Title.NewChat,แชทใหม่
 Feature.Chat.Toast.Error.InvalidUserSelected,ไม่สามารถเพิ่มอย่างน้อยหนึ่งคนที่อยู่ในรายการนี้ได้
 Feature.CommunityLinks.Description.CommunityDefault,เข้าร่วมชุมชน Guilded อย่างเป็นทางการของ {experienceName} เพื่อดูประกาศและอื่นๆ อีกมากมาย!
@@ -4434,6 +4435,7 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,รูปภาพ
 Feature.Moments.Label.PostDeleted,ลบโมเมนต์แล้ว
 Feature.Moments.Label.PostRemovedBody,โมเมนต์ที่คุณโพสต์ขัดต่อมาตรฐานชุมชนของเรา
+Feature.Moments.Label.PostedOnDate,โพสต์เมื่อ {date}
 Feature.Moments.Label.PublishingRodeoBody,การดำเนินการนี้น่าจะใช้เวลาไม่นาน
 Feature.Moments.Label.Reactions,การแสดงความรู้สึก
 Feature.Moments.Label.ReportReason.BreaksRules,โพสต์นี้ละเมิดกฎ
@@ -4767,6 +4769,9 @@ Feature.NotApproved.Label.LatestActivity,กิจกรรมล่าสุด
 Feature.NotApproved.Label.LoadingImage,กำลังโหลดภาพ
 Feature.NotApproved.Label.LogoutProgress,กำลังออกจากระบบ
 Feature.NotApproved.Label.MenuContent,เนื้อหาเมนู
+Feature.NotApproved.Label.MessageToUser.AltConsequence.Reset,"บัญชีนี้เชื่อมโยงกับบัญชี (รีเซ็ตเป็น @{account}) ที่ถูกแบนเนื่องจากละเมิดมาตรฐานชุมชนของเราอย่างร้ายแรง เฉพาะบัญชีที่ถูกแบนเท่านั้นที่สามารถอุทธรณ์การละเมิดดังกล่าวได้ 
+
+หากทั้งสองบัญชีไม่มีการเชื่อมโยงระหว่างกัน ก็ส่งคำอุทธรณ์ได้จากส่วน ""การละเมิดและการอุทธรณ์"" โดยใช้บัญชีนี้"
 Feature.NotApproved.Label.MessageToUser.AltConsequence.V2,บัญชีนี้เชื่อมโยงกับบัญชีที่ถูกแบนเนื่องจากละเมิดมาตรฐานชุมชนของเราอย่างร้ายแรง หากต้องการอุทธรณ์การละเมิด โปรดดำเนินการด้วยบัญชีที่ถูกแบน
 Feature.NotApproved.Label.MessageToUser.AltConsequence.V3,"บัญชีนี้เชื่อมโยงกับบัญชี (@{account}) ที่ถูกแบนเนื่องจากละเมิดมาตรฐานชุมชนของเราอย่างร้ายแรง เฉพาะบัญชีที่ถูกแบนเท่านั้นที่สามารถอุทธรณ์การละเมิดดังกล่าวได้ 
 

@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnableLuaLoginRevamp8", false)

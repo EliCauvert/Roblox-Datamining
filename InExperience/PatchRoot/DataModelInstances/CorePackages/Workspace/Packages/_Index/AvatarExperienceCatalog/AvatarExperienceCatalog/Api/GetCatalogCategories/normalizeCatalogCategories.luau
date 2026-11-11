@@ -511,7 +511,7 @@ local function normalizeCategoryOrSubcategory(p4, p5)
 			CameraZoomRadius1 = nil
 			v8 = nil
 		else
-			CameraZoomRadius1, v139 = NormalizeNumberFunction(CameraZoomRadius)
+			CameraZoomRadius1, v141 = NormalizeNumberFunction(CameraZoomRadius)
 		end
 	end
 	if v8 then
@@ -521,7 +521,7 @@ local function normalizeCategoryOrSubcategory(p4, p5)
 	
 	if not p5.isSubcategory then
 		local v9
-		Subcategories, v141 = v1(p4)
+		Subcategories, v145 = v1(p4)
 		
 		if v9 then
 			table.insert(List, "Subcategories: " .. v9)
@@ -536,77 +536,77 @@ local function normalizeCategoryOrSubcategory(p4, p5)
 		v10 = nil
 	else
 		local v11 = nil
-		local Flag = nil
+		local Flag1 = nil
 		if type(CanAnimateCameraBasedMood) == "boolean" then
-			Flag = CanAnimateCameraBasedMood
+			Flag1 = CanAnimateCameraBasedMood
 			v11 = nil
 		elseif type(CanAnimateCameraBasedMood) == "string" then
 			if CanAnimateCameraBasedMood == "True" then
-				Flag = true
+				Flag1 = true
 				v11 = nil
 			elseif CanAnimateCameraBasedMood == "False" then
-				Flag = false
+				Flag1 = false
 				v11 = nil
 			else
-				Flag = nil
+				Flag1 = nil
 				v11 = "Invalid boolean string value, expected \"True\" or \"False\""
 			end
 		else
-			Flag = nil
+			Flag1 = nil
 			v11 = "Expected boolean or string"
 		end
 		if v11 then
 			CanAnimateCameraBasedMood1 = nil
 			v10 = v11
 		else
-			CanAnimateCameraBasedMood1, v146 = NormalizeBooleanFunction(Flag)
+			CanAnimateCameraBasedMood1, v150 = NormalizeBooleanFunction(Flag1)
 		end
 	end
 	if v10 then
 		table.insert(List, "CanAnimateCameraBasedMood: " .. v10)
 	end
-	local DisableFilters = p4.props and p4.props.disableFilters
-	local DisableFilters1 = nil
+	local DisableFilters1 = p4.props and p4.props.disableFilters
+	local DisableFilters = nil
 	local v12 = nil
 	
-	if DisableFilters == nil or DisableFilters == "" then
-		DisableFilters1 = nil
+	if DisableFilters1 == nil or DisableFilters1 == "" then
+		DisableFilters = nil
 		v12 = nil
 	else
 		local v13 = nil
-		local Flag1 = nil
-		if type(DisableFilters) == "boolean" then
-			Flag1 = DisableFilters
+		local Flag = nil
+		if type(DisableFilters1) == "boolean" then
+			Flag = DisableFilters1
 			v13 = nil
-		elseif type(DisableFilters) == "string" then
-			if DisableFilters == "True" then
-				Flag1 = true
+		elseif type(DisableFilters1) == "string" then
+			if DisableFilters1 == "True" then
+				Flag = true
 				v13 = nil
-			elseif DisableFilters == "False" then
-				Flag1 = false
+			elseif DisableFilters1 == "False" then
+				Flag = false
 				v13 = nil
 			else
-				Flag1 = nil
+				Flag = nil
 				v13 = "Invalid boolean string value, expected \"True\" or \"False\""
 			end
 		else
-			Flag1 = nil
+			Flag = nil
 			v13 = "Expected boolean or string"
 		end
 		if v13 then
-			DisableFilters1 = nil
+			DisableFilters = nil
 			v12 = v13
 		else
-			DisableFilters1, v153 = NormalizeBooleanFunction(Flag1)
+			DisableFilters, v148 = NormalizeBooleanFunction(Flag)
 		end
 	end
 	if v12 then
 		table.insert(List, "DisableFilters: " .. v12)
 	end
-	local NormalizeNotEmptyStringResult11, NormalizeNotEmptyStringResult2_7 = NormalizeNotEmptyStringFunction(p4.props and p4.props.pageType)
+	local NormalizeNotEmptyStringResult12, NormalizeNotEmptyStringResult2_8 = NormalizeNotEmptyStringFunction(p4.props and p4.props.pageType)
 	
-	if NormalizeNotEmptyStringResult2_7 then
-		table.insert(List, "PageType: " .. NormalizeNotEmptyStringResult2_7)
+	if NormalizeNotEmptyStringResult2_8 then
+		table.insert(List, "PageType: " .. NormalizeNotEmptyStringResult2_8)
 	end
 	local ExtractShowCatalogContentActionRequestParamsResult3 = extractShowCatalogContentActionRequestParams(p4)
 	local Context = ExtractShowCatalogContentActionRequestParamsResult3 and ExtractShowCatalogContentActionRequestParamsResult3.context
@@ -617,25 +617,25 @@ local function normalizeCategoryOrSubcategory(p4, p5)
 		LooksWidgetContextForOrganicContent = nil
 		v14 = nil
 	else
-		LooksWidgetContextForOrganicContent, v155 = NormalizeStringFunction(Context)
+		LooksWidgetContextForOrganicContent, v152 = NormalizeStringFunction(Context)
 	end
 	if v14 then
 		table.insert(List, "LooksWidgetContextForOrganicContent: " .. v14)
 	end
-	local NormalizeNotEmptyStringResult12, NormalizeNotEmptyStringResult2_8 = NormalizeNotEmptyStringFunction(p4.props and p4.props.tooltipKey)
-	
-	if NormalizeNotEmptyStringResult2_8 then
-		table.insert(List, "TooltipKey: " .. NormalizeNotEmptyStringResult2_8)
-	end
-	local NormalizeNotEmptyStringResult10, NormalizeNotEmptyStringResult2_6 = NormalizeNotEmptyStringFunction(p4.props and p4.props.tooltipBody)
-	
-	if NormalizeNotEmptyStringResult2_6 then
-		table.insert(List, "TooltipBody: " .. NormalizeNotEmptyStringResult2_6)
-	end
-	local NormalizeNotEmptyStringResult13, NormalizeNotEmptyStringResult2_9 = NormalizeNotEmptyStringFunction(p4.props and p4.props.tileType)
+	local NormalizeNotEmptyStringResult13, NormalizeNotEmptyStringResult2_9 = NormalizeNotEmptyStringFunction(p4.props and p4.props.tooltipKey)
 	
 	if NormalizeNotEmptyStringResult2_9 then
-		table.insert(List, "TileType: " .. NormalizeNotEmptyStringResult2_9)
+		table.insert(List, "TooltipKey: " .. NormalizeNotEmptyStringResult2_9)
+	end
+	local NormalizeNotEmptyStringResult11, NormalizeNotEmptyStringResult2_7 = NormalizeNotEmptyStringFunction(p4.props and p4.props.tooltipBody)
+	
+	if NormalizeNotEmptyStringResult2_7 then
+		table.insert(List, "TooltipBody: " .. NormalizeNotEmptyStringResult2_7)
+	end
+	local NormalizeNotEmptyStringResult10, NormalizeNotEmptyStringResult2_6 = NormalizeNotEmptyStringFunction(p4.props and p4.props.tileType)
+	
+	if NormalizeNotEmptyStringResult2_6 then
+		table.insert(List, "TileType: " .. NormalizeNotEmptyStringResult2_6)
 	end
 	if #List > 0 then
 		return nil, (if p5.isSubcategory then "Subcategory" else "Category") .. " normalization failed: " .. table.concat(List, "; ")
@@ -654,12 +654,12 @@ local function normalizeCategoryOrSubcategory(p4, p5)
 		CameraFocus = NormalizeNotEmptyStringResult9,
 		CameraZoomRadius = CameraZoomRadius1,
 		CanAnimateCameraBasedMood = CanAnimateCameraBasedMood1,
-		DisableFilters = DisableFilters1,
-		PageType = NormalizeNotEmptyStringResult11,
+		DisableFilters = DisableFilters,
+		PageType = NormalizeNotEmptyStringResult12,
 		LooksWidgetContextForOrganicContent = LooksWidgetContextForOrganicContent,
-		TooltipKey = NormalizeNotEmptyStringResult12,
-		TooltipBody = NormalizeNotEmptyStringResult10,
-		TileType = NormalizeNotEmptyStringResult13
+		TooltipKey = NormalizeNotEmptyStringResult13,
+		TooltipBody = NormalizeNotEmptyStringResult11,
+		TileType = NormalizeNotEmptyStringResult10
 	}
 	
 	if p5.isSubcategory then

@@ -1,1 +1,0 @@
-﻿return (require(script:FindFirstAncestor("CurrencyTransfers").Parent.React).createContext(nil))

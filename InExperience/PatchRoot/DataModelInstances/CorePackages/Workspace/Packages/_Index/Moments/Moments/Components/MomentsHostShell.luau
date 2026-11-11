@@ -9,9 +9,11 @@ local ExperienceDetailsSheet = require(Moments.ExperienceDetailsSheet).Experienc
 local GetExperienceDetailsSheetStoreModule = require(Moments.ExperienceDetailsSheet.Sheet.getExperienceDetailsSheetStore)
 local ToastOverlayModule = require(Moments.Components.ToastOverlay)
 local UseIsTopMomentsShellModule = require(Moments.Hooks.useIsTopMomentsShell)
+local FFlagMomentsCreateAvatarPosts = SharedFlagsModule.FFlagMomentsCreateAvatarPosts
 local FFlagMomentsOverlaysInTopShellOnlyModule = require(Moments.Flags.FFlagMomentsOverlaysInTopShellOnly)
 local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
 local FFlagMomentsAvatarLookTryOn = SharedFlagsModule.FFlagMomentsAvatarLookTryOn
+local FFlagProfileRenderAvatarMoments = SharedFlagsModule.FFlagProfileRenderAvatarMoments
 local SheetModule = if FFlagMomentsComments then require(Moments.Components.Comments.Sheet) else nil
 local FFlagMomentsCreatorAnalyticsModule = require(Moments.Flags.FFlagMomentsCreatorAnalytics)
 local PostInsightsModule = if FFlagMomentsCreatorAnalyticsModule then require(Moments.Components.PostInsights) else nil
@@ -32,27 +34,35 @@ local function closeSheets(p1)
 	end
 end
 
+local function ignoreTopShellChange(_) end
+
 return function(p1)
-	-- upvalues: ReactModule (copy), FFlagMomentsAvatarLookTryOn (copy), FFlagMomentsOverlaysInTopShellOnlyModule (copy), UseIsTopMomentsShellModule (copy), closeSheets (copy), MomentsSessionContextModule (copy), MomentsHostContextModule (copy), ExperienceDetailsSheet (copy), FFlagMomentsComments (copy), SheetModule (copy), FFlagMomentsCreatorAnalyticsModule (copy), PostInsightsModule (copy), ToastOverlayModule (copy)
-	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: p1 (copy), FFlagMomentsAvatarLookTryOn (upval)
-		return {
-			openProfile = p1.openProfile,
-			openOwnMoments = p1.openOwnMoments,
-			openMomentsFeedReport = p1.openMomentsFeedReport,
-			openAvatarLookTryOn = if FFlagMomentsAvatarLookTryOn then p1.openAvatarLookTryOn else nil,
-			openMomentCommentReport = p1.openMomentCommentReport,
-			openBlockUser = p1.openBlockUser
-		}
-	end, {
-		p1.openProfile, p1.openOwnMoments, p1.openMomentsFeedReport,
-		p1.openMomentCommentReport, p1.openBlockUser,
-		if FFlagMomentsAvatarLookTryOn then p1.openAvatarLookTryOn else nil
-	})
-	local NoFFlagMomentsOverlaysInTopShellOnlyModule = not FFlagMomentsOverlaysInTopShellOnlyModule or UseIsTopMomentsShellModule(closeSheets)
+	-- upvalues: FFlagMomentsOverlaysInTopShellOnlyModule (copy), FFlagProfileRenderAvatarMoments (copy), UseIsTopMomentsShellModule (copy), closeSheets (copy), ignoreTopShellChange (copy), ReactModule (copy), FFlagMomentsCreateAvatarPosts (copy), FFlagMomentsAvatarLookTryOn (copy), MomentsSessionContextModule (copy), MomentsHostContextModule (copy), ExperienceDetailsSheet (copy), FFlagMomentsComments (copy), SheetModule (copy), FFlagMomentsCreatorAnalyticsModule (copy), PostInsightsModule (copy), ToastOverlayModule (copy)
+	local NoFFlagProfileRenderAvatarMoments = not FFlagMomentsOverlaysInTopShellOnlyModule and not FFlagProfileRenderAvatarMoments or UseIsTopMomentsShellModule(if FFlagMomentsOverlaysInTopShellOnlyModule then closeSheets else ignoreTopShellChange)
+	local NoFFlagMomentsOverlaysInTopShellOnlyModule = not FFlagMomentsOverlaysInTopShellOnlyModule or NoFFlagProfileRenderAvatarMoments
 	
 	return ReactModule.createElement(MomentsSessionContextModule.MomentsSessionContext.Provider, { value = p1.sessionStore }, {
-		Host = ReactModule.createElement(MomentsHostContextModule.MomentsHostContext.Provider, { value = UseMemoResult }, {
+		Host = ReactModule.createElement(MomentsHostContextModule.MomentsHostContext.Provider, {
+			value = ReactModule.useMemo(function()
+				-- upvalues: FFlagProfileRenderAvatarMoments (upval), NoFFlagProfileRenderAvatarMoments (ref), p1 (copy), FFlagMomentsCreateAvatarPosts (upval), FFlagMomentsAvatarLookTryOn (upval)
+				return {
+					isTopShell = if FFlagProfileRenderAvatarMoments then NoFFlagProfileRenderAvatarMoments else nil,
+					openProfile = p1.openProfile,
+					openOwnMoments = p1.openOwnMoments,
+					openAvatarMomentsCreation = if FFlagMomentsCreateAvatarPosts then p1.openAvatarMomentsCreation else nil,
+					openMomentsFeedReport = p1.openMomentsFeedReport,
+					openAvatarLookTryOn = if FFlagMomentsAvatarLookTryOn then p1.openAvatarLookTryOn else nil,
+					openMomentCommentReport = p1.openMomentCommentReport,
+					openBlockUser = p1.openBlockUser
+				}
+			end, {
+				if FFlagProfileRenderAvatarMoments then NoFFlagProfileRenderAvatarMoments else nil,
+				p1.openProfile, p1.openOwnMoments,
+				if FFlagMomentsCreateAvatarPosts then p1.openAvatarMomentsCreation else nil,
+				p1.openMomentsFeedReport, p1.openMomentCommentReport, p1.openBlockUser,
+				if FFlagMomentsAvatarLookTryOn then p1.openAvatarLookTryOn else nil
+			})
+		}, {
 			Content = ReactModule.createElement(ReactModule.Fragment, nil, p1.children, if NoFFlagMomentsOverlaysInTopShellOnlyModule then ReactModule.createElement(ExperienceDetailsSheet) else nil, if FFlagMomentsComments and SheetModule ~= nil and NoFFlagMomentsOverlaysInTopShellOnlyModule then ReactModule.createElement(SheetModule.CommentsSheetContainer) else nil, if FFlagMomentsCreatorAnalyticsModule and PostInsightsModule ~= nil and NoFFlagMomentsOverlaysInTopShellOnlyModule then ReactModule.createElement(PostInsightsModule.PostInsightsPageContainer) else nil, if NoFFlagMomentsOverlaysInTopShellOnlyModule then ReactModule.createElement(ToastOverlayModule) else nil)
 		})
 	})

@@ -260,13 +260,13 @@ return function(p1)
 					tag = "auto-xy text-body-medium content-emphasis text-truncate-end text-align-x-left text-wrap padding-bottom-large padding-top-large",
 					Text = if UseConvertedItemDataModuleResult then UseConvertedItemDataModuleResult.description else ""
 				}),
-				ResellableInstancesLabel = if IsCollectibleFunction(UseConvertedItemDataModuleResult) and UseConvertedItemDataModuleResult and UseConvertedItemDataModuleResult.collectibleItemDetails and UseConvertedItemDataModuleResult.collectibleItemDetails.resellableCount > 0 then ReactModule.createElement(ResellableInstancesLabelModule, {
+				ResellableInstancesLabel = if IsCollectibleFunction(UseConvertedItemDataModuleResult) and (UseConvertedItemDataModuleResult and UseConvertedItemDataModuleResult.collectibleItemDetails and UseConvertedItemDataModuleResult.collectibleItemDetails.resellableCount > 0) then ReactModule.createElement(ResellableInstancesLabelModule, {
 					LayoutOrder = 3,
 					ownedItemsLabel = UseItemStatusLocalizationModuleResult.ownedItems,
 					padding = { top = UDim.new(0, UseTokensResult.Padding.Large) }
 				}) else nil,
 				ItemInfoLabels = ReactModule.createElement(ItemInfoLabelsModule, { LayoutOrder = 5, itemInfoLabels = ItemInfoLabels }),
-				BundleAssetsList = if UseConvertedItemDataModuleResult and UseConvertedItemDataModuleResult.assetsInBundle and #UseConvertedItemDataModuleResult.assetsInBundle > 0 then ReactModule.createElement(BundleAssetsListModule, {
+				BundleAssetsList = if UseConvertedItemDataModuleResult and (UseConvertedItemDataModuleResult.assetsInBundle and #UseConvertedItemDataModuleResult.assetsInBundle > 0) then ReactModule.createElement(BundleAssetsListModule, {
 					LayoutOrder = 6,
 					itemData = UseConvertedItemDataModuleResult,
 					headerLabel = UseItemStatusLocalizationModuleResult.includedParts,

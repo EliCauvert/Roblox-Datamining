@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnableSocialTabsPage_DEV", false)

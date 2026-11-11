@@ -1,1 +1,0 @@
-﻿return game:DefineFastInt("ExpChatWindowTransparencyRewriteInteractableThresholdHundredth", 90) / 100

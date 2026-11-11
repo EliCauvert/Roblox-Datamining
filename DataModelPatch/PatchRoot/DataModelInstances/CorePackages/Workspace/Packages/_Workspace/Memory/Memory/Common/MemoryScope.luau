@@ -1,1 +1,0 @@
-﻿return { UniversalApp = 1, InExperience = 2 }

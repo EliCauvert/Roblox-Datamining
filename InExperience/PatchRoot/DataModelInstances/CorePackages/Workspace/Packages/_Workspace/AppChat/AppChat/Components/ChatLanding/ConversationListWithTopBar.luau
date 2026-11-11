@@ -22,20 +22,16 @@ local FFlagAppIaScrollAway = SharedFlagsModule.FFlagAppIaScrollAway
 local FFlagEnableStickyShortcutBarOnAllPlatforms = SharedFlagsModule.FFlagEnableStickyShortcutBarOnAllPlatforms
 local GetShortcutBarStatusStore = if FFlagEnableStickyShortcutBarOnAllPlatforms then require(Parent.AppShortcutBar).GetShortcutBarStatusStore else nil
 local PartyPageCarouselExperimentation = require(Parent.SocialExperiments).PartyPageCarouselExperimentation
-local FFlagAppChatUseUltimateListConversationListModule = require(AppChat.Flags.FFlagAppChatUseUltimateListConversationList)
 local FFlagAppChatConsoleFocusFixesModule = require(AppChat.Flags.FFlagAppChatConsoleFocusFixes)
 local FFlagAppChatUseViewRecyclerConversationListModule = require(AppChat.Flags.FFlagAppChatUseViewRecyclerConversationList)
 local ConversationListWithTopBar = RoactModule.PureComponent:extend("ConversationListWithTopBar")
 local ShouldUseFoundationConversationRow = require(AppChat.Flags.SignalsMigrationConfig).shouldUseFoundationConversationRow
-local FFlagAppChatUseUltimateListConversationListModule1 = ShouldUseFoundationConversationRow and FFlagAppChatUseUltimateListConversationListModule
 local FFlagAppChatUseViewRecyclerConversationListModule1 = ShouldUseFoundationConversationRow and FFlagAppChatUseViewRecyclerConversationListModule
 local ConversationListModule = require(script.Parent.ConversationList)
 local SearchLoadingModule = require(script.Parent.SearchLoading)
 local SearchNoResultsModule = require(script.Parent.SearchNoResults)
 local Flag = false
 local v1 = nil
-local Flag1 = false
-local v2 = nil
 
 local function _()
 	-- upvalues: Flag (ref), v1 (ref)
@@ -44,29 +40,13 @@ local function _()
 	end
 	Flag = true
 	local Success, Result = pcall(function()
-		return require(script.Parent.ConversationListUltimate)
+		return require(script.Parent.ConversationListViewRecycler)
 	end)
 	
 	if Success then
 		v1 = Result
 	end
 	return v1
-end
-
-local _ = function()
-	-- upvalues: Flag1 (ref), v2 (ref)
-	if Flag1 then
-		return v2
-	end
-	Flag1 = true
-	local Success, Result = pcall(function()
-		return require(script.Parent.ConversationListViewRecycler)
-	end)
-	
-	if Success then
-		v2 = Result
-	end
-	return v2
 end
 
 ConversationListWithTopBar.defaultProps = {
@@ -200,11 +180,11 @@ function ConversationListWithTopBar.init(p1)
 end
 
 function ConversationListWithTopBar.render(p1)
-	-- upvalues: WithAnalyticsModule (copy), WithTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), FFlagEnableStickyShortcutBarOnAllPlatforms (copy), PartyPageCarouselExperimentation (copy), ShouldUseFoundationConversationRow (copy), FFlagAppChatConsoleFocusFixesModule (copy), FFlagAppIaScrollAway (copy), FFlagAppChatUseUltimateListConversationListModule1 (copy), FFlagAppChatUseViewRecyclerConversationListModule1 (copy), ConversationListModule (copy), Flag1 (ref), v2 (ref), Flag (ref), v1 (ref), RoactModule (copy), SearchLoadingModule (copy), SearchNoResultsModule (copy)
+	-- upvalues: WithAnalyticsModule (copy), WithTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), FFlagEnableStickyShortcutBarOnAllPlatforms (copy), PartyPageCarouselExperimentation (copy), ShouldUseFoundationConversationRow (copy), FFlagAppChatConsoleFocusFixesModule (copy), FFlagAppIaScrollAway (copy), FFlagAppChatUseViewRecyclerConversationListModule1 (copy), ConversationListModule (copy), Flag (ref), v1 (ref), RoactModule (copy), SearchLoadingModule (copy), SearchNoResultsModule (copy)
 	return WithAnalyticsModule(function(p2)
-		-- upvalues: WithTelemetryModule (upval), ChatLandingTelemetryLayerModule (upval), p1 (copy), FFlagEnableStickyShortcutBarOnAllPlatforms (upval), PartyPageCarouselExperimentation (upval), ShouldUseFoundationConversationRow (upval), FFlagAppChatConsoleFocusFixesModule (upval), FFlagAppIaScrollAway (upval), FFlagAppChatUseUltimateListConversationListModule1 (upval), FFlagAppChatUseViewRecyclerConversationListModule1 (upval), ConversationListModule (upval), Flag1 (upval), v2 (upval), Flag (upval), v1 (upval), RoactModule (upval), SearchLoadingModule (upval), SearchNoResultsModule (upval)
+		-- upvalues: WithTelemetryModule (upval), ChatLandingTelemetryLayerModule (upval), p1 (copy), FFlagEnableStickyShortcutBarOnAllPlatforms (upval), PartyPageCarouselExperimentation (upval), ShouldUseFoundationConversationRow (upval), FFlagAppChatConsoleFocusFixesModule (upval), FFlagAppIaScrollAway (upval), FFlagAppChatUseViewRecyclerConversationListModule1 (upval), ConversationListModule (upval), Flag (upval), v1 (upval), RoactModule (upval), SearchLoadingModule (upval), SearchNoResultsModule (upval)
 		return WithTelemetryModule(ChatLandingTelemetryLayerModule.Context)(function(p3)
-			-- upvalues: p1 (upval), FFlagEnableStickyShortcutBarOnAllPlatforms (upval), p2 (copy), PartyPageCarouselExperimentation (upval), ShouldUseFoundationConversationRow (upval), FFlagAppChatConsoleFocusFixesModule (upval), FFlagAppIaScrollAway (upval), FFlagAppChatUseUltimateListConversationListModule1 (upval), FFlagAppChatUseViewRecyclerConversationListModule1 (upval), ConversationListModule (upval), Flag1 (upval), v2 (upval), Flag (upval), v1 (upval), RoactModule (upval), SearchLoadingModule (upval), SearchNoResultsModule (upval)
+			-- upvalues: p1 (upval), FFlagEnableStickyShortcutBarOnAllPlatforms (upval), p2 (copy), PartyPageCarouselExperimentation (upval), ShouldUseFoundationConversationRow (upval), FFlagAppChatConsoleFocusFixesModule (upval), FFlagAppIaScrollAway (upval), FFlagAppChatUseViewRecyclerConversationListModule1 (upval), ConversationListModule (upval), Flag (upval), v1 (upval), RoactModule (upval), SearchLoadingModule (upval), SearchNoResultsModule (upval)
 			local IsShortcutBarVisible = if FFlagEnableStickyShortcutBarOnAllPlatforms then p1.props.isShortcutBarVisible else false
 			local config = {
 				Size = UDim2.fromScale(1, 1),
@@ -238,60 +218,41 @@ function ConversationListWithTopBar.render(p1)
 			if ShouldUseFoundationConversationRow then
 				config.canAccessParty = p1.props.canAccessParty
 			end
-			if FFlagAppChatUseUltimateListConversationListModule1 or FFlagAppChatUseViewRecyclerConversationListModule1 then
+			if FFlagAppChatUseViewRecyclerConversationListModule1 then
 				config.isLoadingNext = p1.props.conversationsIsFetching
 				config.isLoadingPrevious = p1.props.conversationsIsFetching
 				config.oldestConversationIsFetched = p1.props.oldestConversationIsFetched
 			end
-			local ConversationListModule2 = ConversationListModule
+			local ConversationListModule1 = ConversationListModule
 			
 			if FFlagAppChatUseViewRecyclerConversationListModule1 then
-				local v3 = nil
-				if Flag1 then
-					v3 = v2
+				local v2 = nil
+				if Flag then
+					v2 = v1
 				else
-					Flag1 = true
+					Flag = true
 					local Success, Result = pcall(function()
 						return require(script.Parent.ConversationListViewRecycler)
 					end)
 					
 					if Success then
-						v2 = Result
+						v1 = Result
 					end
-					v3 = v2
+					v2 = v1
 				end
-				if not v3 then
-					v3 = ConversationListModule
+				if not v2 then
+					v2 = ConversationListModule
 				end
-				ConversationListModule2 = v3
-			elseif FFlagAppChatUseUltimateListConversationListModule1 then
-				local ConversationListModule1 = nil
-				if Flag then
-					ConversationListModule1 = v1
-				else
-					Flag = true
-					local Success1, Result1 = pcall(function()
-						return require(script.Parent.ConversationListUltimate)
-					end)
-					
-					if Success1 then
-						v1 = Result1
-					end
-					ConversationListModule1 = v1
-				end
-				if not ConversationListModule1 then
-					ConversationListModule1 = ConversationListModule
-				end
-				ConversationListModule2 = ConversationListModule1
+				ConversationListModule1 = v2
 			end
 			return RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = if FFlagAppChatConsoleFocusFixesModule and not p1.props.isInExperience and (not FFlagEnableStickyShortcutBarOnAllPlatforms or not IsShortcutBarVisible) then UDim2.new(1, 0, 1, p1.props.deviceSafePadding.bottom) else UDim2.new(1, 0, 1, 0)
 			}, {
-				conversationList = if p1.props.isSearchActive and (p1.props.isSearchAwaitingResults and #p1.props.itemList == 0) then RoactModule.createElement(SearchLoadingModule, {
+				conversationList = if p1.props.isSearchActive and p1.props.isSearchAwaitingResults and #p1.props.itemList == 0 then RoactModule.createElement(SearchLoadingModule, {
 					entryHeight = p1.props.entryHeight,
 					topPadding = p1.props.canvasTopPadding
-				}) elseif p1.props.isSearchActive and not p1.props.isSearchAwaitingResults and #p1.props.itemList == 0 and p1.props.oldestConversationIsFetched then RoactModule.createElement(SearchNoResultsModule, { topPadding = p1.props.canvasTopPadding }) else RoactModule.createElement(ConversationListModule2, config)
+				}) elseif p1.props.isSearchActive and not p1.props.isSearchAwaitingResults and #p1.props.itemList == 0 and p1.props.oldestConversationIsFetched then RoactModule.createElement(SearchNoResultsModule, { topPadding = p1.props.canvasTopPadding }) else RoactModule.createElement(ConversationListModule1, config)
 			})
 		end)
 	end)

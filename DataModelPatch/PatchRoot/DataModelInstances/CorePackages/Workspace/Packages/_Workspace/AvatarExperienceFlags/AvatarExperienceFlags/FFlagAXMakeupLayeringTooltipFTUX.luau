@@ -1,4 +1,0 @@
-﻿local FFlagAXMakeupEquippingModule = require(script.Parent.FFlagAXMakeupEquipping)
-local FFlagAXMoveContextualActionButtonsModule = require(script.Parent.FFlagAXMoveContextualActionButtons)
-
-return game:DefineFastFlag("AXMakeupLayeringTooltipFTUX", false) and (FFlagAXMakeupEquippingModule and FFlagAXMoveContextualActionButtonsModule)

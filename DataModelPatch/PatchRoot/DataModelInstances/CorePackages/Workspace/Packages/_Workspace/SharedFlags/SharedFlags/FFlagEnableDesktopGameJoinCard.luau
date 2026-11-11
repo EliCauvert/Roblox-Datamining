@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnableDesktopGameJoinCard_v5", false)

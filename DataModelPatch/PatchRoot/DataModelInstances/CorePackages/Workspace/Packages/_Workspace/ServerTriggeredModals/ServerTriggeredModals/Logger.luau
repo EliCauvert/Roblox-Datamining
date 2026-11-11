@@ -1,1 +1,0 @@
-﻿return (require(script:FindFirstAncestor("ServerTriggeredModals").Parent.Loggers).Logger:new("ServerTriggeredModals"))

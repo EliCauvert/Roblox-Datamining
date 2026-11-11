@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("SSOLoggingProtocolEnabled3", false)

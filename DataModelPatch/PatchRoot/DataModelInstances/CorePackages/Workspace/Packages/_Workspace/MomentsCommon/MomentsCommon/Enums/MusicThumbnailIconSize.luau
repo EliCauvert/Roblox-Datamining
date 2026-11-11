@@ -1,1 +1,0 @@
-﻿return { Small = "Small", Large = "Large" }

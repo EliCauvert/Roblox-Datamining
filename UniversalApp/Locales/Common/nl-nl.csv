@@ -203,6 +203,7 @@ Authentication.AccountSwitch.Action.Continue,
 Authentication.AccountSwitch.Action.CreateNewAccount,Nieuw account aanmaken
 Authentication.AccountSwitch.Action.LogoutAllAccounts,Uitloggen bij alle accounts
 Authentication.AccountSwitch.Action.RemoveAllAccounts,Alle accounts verwijderen?
+Authentication.AccountSwitch.Action.SignIn,Aanmelden
 Authentication.AccountSwitch.Action.SignInToExistingAccount,Inloggen op bestaand account
 Authentication.AccountSwitch.Action.SwitchAccount,Van account wisselen
 Authentication.AccountSwitch.Description.AccountLimit.2,"Je hebt het maximale aantal accounts bereikt. Verwijder eerst een account, daarna kun je een nieuw account toevoegen."
@@ -212,6 +213,8 @@ Authentication.AccountSwitch.Description.LogoutConfirmation,Je moet uitloggen bi
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,Probeer het later nog een keer
 Authentication.AccountSwitch.Description.RemoveAllAccounts,"Zodra je je afmeldt, worden alle accounts van dit apparaat verwijderd."
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,"Als je dit doet, zie je dit account niet meer op dit apparaat, tenzij je je opnieuw aanmeldt. Je keert terug naar de spelpagina."
+Authentication.AccountSwitch.Description.SomethingWentWrongSignInAgain,Er is iets misgegaan. Meld je opnieuw aan.
+Authentication.AccountSwitch.Description.StaleSessionSignInAgain,Je hebt dit account hier al een tijdje niet gebruikt. Meld je opnieuw aan.
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,Probeer direct op het account in te loggen
 Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,Kan niet van account wisselen
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
@@ -304,7 +307,7 @@ Authentication.Login.Action.ResendCode,
 Authentication.Login.Action.Save,Opslaan
 Authentication.Login.Action.SendCodeSentenceCase,Code sturen
 Authentication.Login.Action.SendVerificationEmail,Verificatiemail sturen
-Authentication.Login.Action.SignIn,Aanmelden
+Authentication.Login.Action.SignIn,
 Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,Toegangssleutel gebruiken
@@ -1581,7 +1584,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Vind personen op Roblox do
 Feature.AddFriends.Label.ConnectWithContacts,Nodig contactpersonen uit of maak contact met vrienden die al op Roblox zitten!
 Feature.AddFriends.Label.ContactsTile,Contactpersonen
 Feature.AddFriends.Label.DeclineAllBackgrounded,Alle vriendschapsverzoeken worden genegeerd. Dit kan een minuut duren.
-Feature.AddFriends.Label.EmptyState.FriendsRename,Met wie ga je Roblox verkennen? Voeg vrienden toe om meer te doen op Roblox!
 Feature.AddFriends.Label.EmptyStatePrompt,Met wie ga je Roblox verkennen? Zoek naar personen om toe te voegen of maak contact met vrienden die je al kent!
 Feature.AddFriends.Label.FriendRequests,Vriendschapsverzoeken
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Personen zoeken
@@ -1589,16 +1591,13 @@ Feature.AddFriends.Label.MyQrCode,Mijn QR-code
 Feature.AddFriends.Label.QRCodeTitle,
 Feature.AddFriends.Label.SchoolTile,Klasgenoten
 Feature.AddFriends.Label.SearchForFriendsPrompt,
-Feature.AddFriends.Label.ShareQRCodeAddConnection,"Deel je QR-code om personen die je kent, toe te voegen"
-Feature.AddFriends.Label.SyncContactsInvitePeople,Synchroniseer contactpersonen om vrienden te vinden en uit te nodigen!
-Feature.AddFriends.Label.SyncWithContacts,
+Feature.AddFriends.Label.SyncWithContacts,Synchroniseer contactpersonen om vrienden te vinden en uit te nodigen!
 Feature.AddFriends.Label.TrustedFriendRequests,Vertrouwde vriendschapsverzoeken
 Feature.AddFriends.Text.EmptyState.FriendsRename,Met wie ga je Roblox verkennen?{lineBreak}Voeg vrienden toe om meer te doen op Roblox!
 Feature.AddFriends.Title.AddFriendsToolTip,Roblox is beter met vrienden!
 Feature.AddFriends.Title.AddFriendsTooltipTitle,
 Feature.AddFriends.Title.CameraPermission,Cameramachtiging
 Feature.AddFriends.Title.ConnectWithContacts,Toevoegen vanuit contactpersonen
-Feature.AddFriends.Title.ShareQRCode,Toevoegen via QR-code
 Feature.AgeGuidelines.DisplayName.StrongLanguage,Grof taalgebruik
 Feature.AgeGuidelines.Label.CreatorEnabled,Ingeschakeld door creator
 Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect,Ontgrendel meer content en functies.
@@ -1711,6 +1710,7 @@ Feature.AppealsPortal.Label.Location,
 Feature.AppealsPortal.Label.LookDescription,Beschrijving van gedeelde avatar
 Feature.AppealsPortal.Label.LookId,ID van gedeelde avatar
 Feature.AppealsPortal.Label.LookName,Naam van gedeelde avatar
+Feature.AppealsPortal.Label.MomentDescription,Beschrijving van moment
 Feature.AppealsPortal.Label.PlaceIDPrompt,Wat is de ID van de plaats?
 Feature.AppealsPortal.Label.PlaceId,Plaats-ID
 Feature.AppealsPortal.Label.PlaceName,Plaatsnaam
@@ -2168,6 +2168,8 @@ Feature.Avatar.Label.Shoes,Schoenen
 Feature.Avatar.Label.Shorts,Shorts
 Feature.Avatar.Label.Shoulder,Schouder
 Feature.Avatar.Label.Skin,Huid
+Feature.Avatar.Label.Spawn,Spawnen
+Feature.Avatar.Label.SpawnEffects,Spawneffecten
 Feature.Avatar.Label.Sweater,Trui
 Feature.Avatar.Label.Sweaters,Truien
 Feature.Avatar.Label.Swim,Zwemmen
@@ -2990,6 +2992,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,Mijn vrienden ({count})
 Feature.BuyRobux.Label.PeopleWithCount,Personen ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Gallery,Galerij
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,Ga door naar Aanpassen
@@ -3480,7 +3483,6 @@ Feature.Chat.Label.SearchForFriendsAndChat,Gesprekken zoeken
 Feature.Chat.Label.SearchFriends,Vrienden zoeken
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.Sent,Verzonden
-Feature.Chat.Label.SnoozeChatNotifications,Chatmeldingen in de ervaring dempen:
 Feature.Chat.Label.SnoozePartyNotifications,Groepsmeldingen in de ervaring dempen voor:
 Feature.Chat.Label.SwipeToReplyTooltip,Veeg om te antwoorden
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} d
@@ -3537,7 +3539,6 @@ Feature.Chat.Response.NetworkError,Netwerkfout
 Feature.Chat.Response.Sending,
 Feature.Chat.RobloxConnectUnavailableWithUser,Op dit moment is Roblox Connect niet beschikbaar voor deze gebruiker.
 Feature.Chat.Text.NoFriends,Je hebt nog geen vrienden toegevoegd. Zoek en voeg je vrienden toe op Roblox om te beginnen.
-Feature.Chat.Title.MuteChatNotifications,Chatmeldingen van vrienden dempen tijdens het spelen
 Feature.Chat.Title.NewChat,Nieuwe chat
 Feature.Chat.Toast.Error.InvalidUserSelected,Een of meerdere mensen in deze lijst kunnen niet worden toegevoegd
 Feature.CommunityLinks.Description.CommunityDefault,Word lid van de officiële Guilded-community voor {experienceName} om aankondigingen en meer te bekijken!
@@ -3734,8 +3735,10 @@ Feature.FaceChat.Subtitle.UnableToAccessCamera,"Ga naar de instellingen van je b
 Feature.Favorites.Label.Favorite,Markeren als favoriet
 Feature.Favorites.Label.Favorited,Als favoriet opgeslagen
 Feature.FlyoutSidePanel.Action.ContinuePlaying,
+Feature.FlyoutSidePanel.Description.SwitchAccountsHere,Je kunt nu hier van account wisselen.
 Feature.FlyoutSidePanel.Label.TooltipBody,"Je profiel, content en instellingen zijn verplaatst."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> is verplaatst
+Feature.FlyoutSidePanel.Title.AccountSwitcherMoved,Accountwisselaar is verplaatst
 Feature.Friends.Action.AcceptFriend,Vriend accepteren
 Feature.Friends.Action.AccountDeleted,Account verwijderd
 Feature.Friends.Action.Add,
@@ -4431,6 +4434,7 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,Foto's
 Feature.Moments.Label.PostDeleted,Moment verwijderd
 Feature.Moments.Label.PostRemovedBody,"Het moment dat je hebt gepost, is in strijd met onze Communityrichtlijnen."
+Feature.Moments.Label.PostedOnDate,Gepost op {date}
 Feature.Moments.Label.PublishingRodeoBody,Dit zou niet lang moeten duren.
 Feature.Moments.Label.Reactions,Reacties
 Feature.Moments.Label.ReportReason.BreaksRules,Deze post overtreedt de regels
@@ -4764,6 +4768,9 @@ Feature.NotApproved.Label.LatestActivity,Laatste activiteit die we hebben beoord
 Feature.NotApproved.Label.LoadingImage,Afbeelding laden
 Feature.NotApproved.Label.LogoutProgress,Uitloggen in uitvoering
 Feature.NotApproved.Label.MenuContent,Menucontent
+Feature.NotApproved.Label.MessageToUser.AltConsequence.Reset,"Dit account is gekoppeld aan een account (reset naar @{account}) dat is verbannen wegens een ernstige schending van onze Communityrichtlijnen. Alleen het verbannen account kan bezwaar maken tegen die schending. 
+
+Als de twee accounts niet aan elkaar gekoppeld zouden moeten zijn, dien dan bezwaar in via dit account vanuit Overtredingen en bezwaren."
 Feature.NotApproved.Label.MessageToUser.AltConsequence.V2,Dit account is gekoppeld aan een account dat is verbannen wegens een ernstige schending van onze Communityrichtlijnen. Je kunt een bezwaar indienen tegen de schending via het verbannen account.
 Feature.NotApproved.Label.MessageToUser.AltConsequence.V3,"Dit account is gekoppeld aan een account (@{account}) dat is verbannen wegens een ernstige schending van onze Communityrichtlijnen. Alleen het verbannen account kan bezwaar maken tegen die schending. 
 

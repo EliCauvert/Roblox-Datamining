@@ -1,1 +1,0 @@
-﻿return { Pill = "Pill", Box = "Box" }

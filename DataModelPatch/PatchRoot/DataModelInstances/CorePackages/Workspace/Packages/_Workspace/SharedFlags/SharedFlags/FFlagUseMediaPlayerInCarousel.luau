@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("UseMediaPlayerInCarousel_v2", false)

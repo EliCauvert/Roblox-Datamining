@@ -1,1 +1,0 @@
-﻿return game:DefineFastInt("MaxDaysToShowCountDownLabel", 14)

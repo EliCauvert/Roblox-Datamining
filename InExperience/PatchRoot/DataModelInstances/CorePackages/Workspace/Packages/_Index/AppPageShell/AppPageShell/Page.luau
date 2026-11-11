@@ -13,7 +13,9 @@ local CreateFeedContextAdapterModule = require(AppPageShell.createFeedContextAda
 local CreatePageScrollStoreModule = require(AppPageShell.createPageScrollStore)
 local ResolveCompositionTagsModule = require(AppPageShell.resolveCompositionTags)
 local ComputeStickyOffsetModule = require(AppPageShell.computeStickyOffset)
-local FFlagSduiFeedScrollBarFixes = require(Parent.SharedFlags).FFlagSduiFeedScrollBarFixes
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagSduiFeedScrollBarFixes = SharedFlagsModule.FFlagSduiFeedScrollBarFixes
+local FFlagAppPageShellScrollTelemetry = SharedFlagsModule.FFlagAppPageShellScrollTelemetry
 local Frozen = table.freeze({
 	contentMode = require(AppPageShell.PageConstants).PageContentMode.Scroll,
 	content = table.freeze({})
@@ -24,7 +26,7 @@ local function _(p1, p2)
 end
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: Frozen (copy), FFlagSduiFeedScrollBarFixes (copy), UseDeviceInsetsFunction (copy), ReactModule (copy), ComputeStickyOffsetModule (copy), CreatePageScrollStoreModule (copy), CreateFeedContextAdapterModule (copy), SignalsModule (copy), ResolveCompositionTagsModule (copy), PageWholeContentModule (copy), PullToRefreshSpinnerModule (copy), PageContextModule (copy), View (copy), PageStickyHeaderModule (copy)
+	-- upvalues: Frozen (copy), FFlagSduiFeedScrollBarFixes (copy), UseDeviceInsetsFunction (copy), ReactModule (copy), ComputeStickyOffsetModule (copy), CreatePageScrollStoreModule (copy), FFlagAppPageShellScrollTelemetry (copy), CreateFeedContextAdapterModule (copy), SignalsModule (copy), ResolveCompositionTagsModule (copy), PageWholeContentModule (copy), PullToRefreshSpinnerModule (copy), PageContextModule (copy), View (copy), PageStickyHeaderModule (copy)
 	local ContentConfig = p1.contentConfig or Frozen
 	local ContentMode = ContentConfig.contentMode
 	local OnScrollToEnd = p1.onScrollToEnd
@@ -49,7 +51,11 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	end
 	local UseRefResult = ReactModule.useRef(OnScrollToEnd)
 	UseRefResult.current = OnScrollToEnd
-	local UseMemoResult1 = ReactModule.useMemo(CreatePageScrollStoreModule, {})
+	local ScrollPerformanceIntervalName = p1.scrollPerformanceIntervalName
+	local UseMemoResult1 = ReactModule.useMemo(function()
+		-- upvalues: CreatePageScrollStoreModule (upval), FFlagAppPageShellScrollTelemetry (upval), ScrollPerformanceIntervalName (copy)
+		return CreatePageScrollStoreModule(if FFlagAppPageShellScrollTelemetry then ScrollPerformanceIntervalName else nil)
+	end, {})
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: CreateFeedContextAdapterModule (upval), UseMemoResult1 (copy), UseRefResult1 (copy)

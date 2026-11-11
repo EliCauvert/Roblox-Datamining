@@ -1,1 +1,0 @@
-﻿return script.Parent._Workspace.GraphqlHttpArtifacts.GraphqlHttpArtifacts

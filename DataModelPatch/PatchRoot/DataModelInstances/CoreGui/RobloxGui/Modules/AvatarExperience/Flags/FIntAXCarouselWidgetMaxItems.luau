@@ -1,1 +1,0 @@
-﻿return game:DefineFastInt("AXCarouselMaxItems", 50)

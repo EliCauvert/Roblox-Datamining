@@ -608,6 +608,8 @@ Roblox.LangDynamic["Feature.Parents"] = {
     "Description.RobuxTransferApprovalAlwaysAsk": "Approve every transfer.",
     "Heading.ConversationalRequest.RobuxTransferApprovalMode": "Would you like to allow transfers with Trusted Friends?",
     "Description.ConversationalRequest.RobuxTransferApprovalMode": "Your child requested to allow transfers with trusted friends. You'll still be notified.",
-    "Description.RobuxTransferApprovalTrustedFriends": "Allow transfers with trusted friends without asking. You'll still be notified."
+    "Description.RobuxTransferApprovalTrustedFriends": "Allow transfers with trusted friends without asking. You'll still be notified.",
+    "Description.ConsentRequest.RobuxApproval.AlwaysAsk": "Approve every transfer.",
+    "Description.ConsentRequest.RobuxApproval.TrustedFriends": "Allow transfers with trusted friends without asking. You'll still be notified."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Parents");

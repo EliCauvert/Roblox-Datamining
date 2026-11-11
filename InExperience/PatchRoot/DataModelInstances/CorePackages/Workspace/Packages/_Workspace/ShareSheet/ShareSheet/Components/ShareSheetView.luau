@@ -8,6 +8,7 @@ local Sheet = FoundationModule.Sheet
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 local FFlagShareSheetDesktopReadinessModule = require(ShareSheet.Flags.FFlagShareSheetDesktopReadiness)
+local FFlagShareSheetOmitsEmptyActionsModule = require(ShareSheet.Flags.FFlagShareSheetOmitsEmptyActions)
 local FIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercent = require(ShareSheet.ShareSheetConstants).FIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercent
 local PeoplePickerModule = require(ShareSheet.Components.PeoplePicker)
 local ShareSheetActionRowModule = require(script.Parent.ShareSheetActionRow)
@@ -32,10 +33,11 @@ local function setPeoplePickerContentScrollingFrameRef(p1)
 end
 
 return function(p1)
-	-- upvalues: FIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercent (copy), ReactModule (copy), ShareSheetTelemetryModule (copy), Sheet (copy), FFlagShareSheetDesktopReadinessModule (copy), DialogSize (copy), PeoplePickerModule (copy), Text (copy), setPeoplePickerContentScrollingFrameRef (copy), setDefaultContentScrollingFrameRef (copy), View (copy), ShareSheetSocialRowModule (copy), Divider (copy), ShareSendRowModule (copy), ShareSheetActionRowModule (copy)
+	-- upvalues: FFlagShareSheetOmitsEmptyActionsModule (copy), FIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercent (copy), ReactModule (copy), ShareSheetTelemetryModule (copy), Sheet (copy), FFlagShareSheetDesktopReadinessModule (copy), DialogSize (copy), PeoplePickerModule (copy), Text (copy), setPeoplePickerContentScrollingFrameRef (copy), setDefaultContentScrollingFrameRef (copy), View (copy), ShareSheetSocialRowModule (copy), Divider (copy), ShareSendRowModule (copy), ShareSheetActionRowModule (copy)
 	local HasNextEntry: boolean = next(p1.selectedConversationIds) ~= nil or p1.isSending == true
 	local PeoplePicker = p1.peoplePicker
 	local IsPeoplePickerDisplayed = p1.isPeoplePickerDisplayed
+	local HasNextEntry1 = if FFlagShareSheetOmitsEmptyActionsModule then HasNextEntry or not IsPeoplePickerDisplayed else nil
 	local SnapPoints = nil
 	local CenterSheetHeight: number? = nil
 	
@@ -90,7 +92,7 @@ return function(p1)
 				RowDivider = if p1.shouldShowSocialRow then ReactModule.createElement(Divider, { LayoutOrder = 2, testId = "share-sheet-row-divider" }) else nil
 			})
 		}),
-		Actions = ReactModule.createElement(Sheet.Actions, nil, {
+		Actions = if FFlagShareSheetOmitsEmptyActionsModule and not HasNextEntry1 then nil else ReactModule.createElement(Sheet.Actions, nil, {
 			Footer = if HasNextEntry then ReactModule.createElement(ShareSendRowModule, {
 				isLoading = p1.isSending,
 				label = p1.sendLabel,

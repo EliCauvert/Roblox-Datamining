@@ -210,17 +210,17 @@ return ReactModule.memo(function(p1)
 				size = Size,
 				zIndex = -Index
 			}
-			local _UDim2 = nil
+			local InnerWrapperSize = nil
 			
 			if ComponentConfig.spanOverride == nil then
-				_UDim2 = nil
+				InnerWrapperSize = nil
 			else
 				local SpanOverride = ComponentConfig.spanOverride
 				local ColSpan = SpanOverride.colSpan or 1
 				local RowSpan = SpanOverride.rowSpan or 1
-				_UDim2 = UDim2.new(ColSpan, Gutter * (ColSpan - 1), RowSpan, VerticalGap * (RowSpan - 1))
+				InnerWrapperSize = UDim2.new(ColSpan, Gutter * (ColSpan - 1), RowSpan, VerticalGap * (RowSpan - 1))
 			end
-			config.innerWrapperSize = _UDim2
+			config.innerWrapperSize = InnerWrapperSize
 			
 			return CreateElementFunction(SduiCollectionItemModule, config, { Item = Element }), ComponentType or "unknown"
 		end, {

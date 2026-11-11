@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnableTopSongsSort7", false)

@@ -56,6 +56,13 @@ Roblox.LangDynamic["Feature.ExperienceDetails"] = {
     "Description.MadeWithBuild": "Build games are AI generated",
     "Label.MadeByVerifiedCreatorWithBuild": "Made by {creatorName} with Build",
     "PlayButtonText.Playtest": "Preview",
-    "PlayButtonText.PlayOnWeb": "Play in Browser"
+    "PlayButtonText.PlayOnWeb": "Play in browser",
+    "PlayOnWebModal.Label.PlayWithoutDownloading": "You can play without downloading the app.",
+    "PlayOnWebModal.Label.CheckingForRoblox": "Checking for Roblox...",
+    "PlayOnWebModal.Label.RobloxDidNotOpen": "Roblox didn't open?",
+    "PlayOnWebModal.Label.PlayInBrowserInstead": "You can play this game in your browser instead.",
+    "PlayOnWebModal.Action.Get": "Get",
+    "PlayOnWebModal.Label.CheckingYourDevice": "Checking your device...",
+    "PlayOnWebModal.Label.PlayInYourBrowser": "Play in your browser"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.ExperienceDetails");

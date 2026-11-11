@@ -220,6 +220,7 @@ Authentication.AccountSwitch.Action.Continue,
 Authentication.AccountSwitch.Action.CreateNewAccount,Yeni Hesap Oluştur
 Authentication.AccountSwitch.Action.LogoutAllAccounts,Tüm Hesaplardan Çık
 Authentication.AccountSwitch.Action.RemoveAllAccounts,Tüm hesaplar kaldırılsın mı?
+Authentication.AccountSwitch.Action.SignIn,Giriş yap
 Authentication.AccountSwitch.Action.SignInToExistingAccount,Mevcut hesaba giriş yap
 Authentication.AccountSwitch.Action.SwitchAccount,Hesap Değiştir
 Authentication.AccountSwitch.Description.AccountLimit.2,Hesap sınırına ulaştın. Yeni bir hesap eklemek için lütfen mevcut bir hesabı kaldır.
@@ -229,6 +230,8 @@ Authentication.AccountSwitch.Description.LogoutConfirmation,Yeni bir hesap eklem
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,Lütfen daha sonra tekrar dene
 Authentication.AccountSwitch.Description.RemoveAllAccounts,Çıkış yaptığında tüm hesaplar bu cihazdan kaldırılacaktır.
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,Bunu yaparsan tekrar giriş yapmadığın sürece bu hesabı artık bu cihazda görmeyeceksin. Açılış sayfasına geri döneceksin.
+Authentication.AccountSwitch.Description.SomethingWentWrongSignInAgain,Bir şeyler ters gitti. Tekrar giriş yap.
+Authentication.AccountSwitch.Description.StaleSessionSignInAgain,Bu hesabı burada bir süredir kullanmadın. Tekrar giriş yap.
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,Doğrudan giriş yapmayı dene
 Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,Hesap değiştirilemiyor
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
@@ -322,7 +325,7 @@ Authentication.Login.Action.Save,Kaydet
 Authentication.Login.Action.SendCodeSentenceCase,Kod gönder
 Authentication.Login.Action.SendVerificationEmail,Doğrulama E-postası Gönder
 Authentication.Login.Action.SignIn,Giriş Yap
-Authentication.Login.Action.SignInSentenceCase,Giriş yap
+Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,Geçiş anahtarı kullan
 Authentication.Login.Action.UsernameAndPassword,Kullanıcı adı ve şifre
@@ -1555,7 +1558,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Kullanıcı adlarını vey
 Feature.AddFriends.Label.ConnectWithContacts,Rehberindeki kişileri davet et veya hâlihazırda Roblox'ta olan arkadaşlarınla bağlantı kur!
 Feature.AddFriends.Label.ContactsTile,Kişiler
 Feature.AddFriends.Label.DeclineAllBackgrounded,"Tüm arkadaş istekleri yok sayılıyor. Bu işlem, biraz zaman alabilir."
-Feature.AddFriends.Label.EmptyState.FriendsRename,Roblox'u kiminle birlikte keşfedeceksin? Roblox'ta daha fazlasını yapmak için arkadaş ekle!
 Feature.AddFriends.Label.EmptyStatePrompt,Roblox'u kiminle keşfedeceksin? Eklemek istediğin kişileri ara veya zaten tanıdığın arkadaşlarınla bağlantı kur!
 Feature.AddFriends.Label.FriendRequests,Arkadaş İstekleri
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,İnsanlar ara
@@ -1563,8 +1565,6 @@ Feature.AddFriends.Label.MyQrCode,QR Kodum
 Feature.AddFriends.Label.QRCodeTitle,
 Feature.AddFriends.Label.SchoolTile,Sınıf arkadaşları
 Feature.AddFriends.Label.SearchForFriendsPrompt,Kullanıcı adlarını veya görünen adlarını arayarak Roblox'taki kişileri bul.
-Feature.AddFriends.Label.ShareQRCodeAddConnection,Tanıdığın insanları eklemek için QR kodunu paylaş
-Feature.AddFriends.Label.SyncContactsInvitePeople,Arkadaşlarını bulup davet etmek için rehberindeki kişileri senkronize et!
 Feature.AddFriends.Label.SyncWithContacts,Rehberini senkronize et ve arkadaşlarını davet et!
 Feature.AddFriends.Label.TrustedFriendRequests,Güvenilir Arkadaşlık Talepleri
 Feature.AddFriends.Text.EmptyState.FriendsRename,Roblox'u kiminle birlikte keşfedeceksin?{lineBreak}Roblox'ta daha fazlasını yapmak için arkadaş ekle!
@@ -1572,7 +1572,6 @@ Feature.AddFriends.Title.AddFriendsToolTip,Roblox arkadaşlarla daha güzel!
 Feature.AddFriends.Title.AddFriendsTooltipTitle,
 Feature.AddFriends.Title.CameraPermission,Kamera İzni
 Feature.AddFriends.Title.ConnectWithContacts,Kişiler rehberinden ekle
-Feature.AddFriends.Title.ShareQRCode,QR kodundan ekle
 Feature.AgeGuidelines.DisplayName.StrongLanguage,Kaba Dil
 Feature.AgeGuidelines.Label.CreatorEnabled,İçerik Oluşturucu Etkinleştirildi
 Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect,Daha fazla içerik ve özelliğin kilidini aç.
@@ -1685,6 +1684,7 @@ Feature.AppealsPortal.Label.Location,
 Feature.AppealsPortal.Label.LookDescription,Paylaşılan Avatar Açıklaması
 Feature.AppealsPortal.Label.LookId,Paylaşılan Avatar Kimliği
 Feature.AppealsPortal.Label.LookName,Paylaşılan Avatar Adı
+Feature.AppealsPortal.Label.MomentDescription,An Açıklaması
 Feature.AppealsPortal.Label.PlaceIDPrompt,Dünya kimliği nedir?
 Feature.AppealsPortal.Label.PlaceId,Dünya Kimliği
 Feature.AppealsPortal.Label.PlaceName,Dünya Adı
@@ -2142,6 +2142,8 @@ Feature.Avatar.Label.Shoes,Ayakkabılar
 Feature.Avatar.Label.Shorts,Şort
 Feature.Avatar.Label.Shoulder,Omuz
 Feature.Avatar.Label.Skin,Cilt
+Feature.Avatar.Label.Spawn,Yeniden Doğma
+Feature.Avatar.Label.SpawnEffects,Yeniden Doğma Efekti
 Feature.Avatar.Label.Sweater,Kazak
 Feature.Avatar.Label.Sweaters,Kazaklar
 Feature.Avatar.Label.Swim,Yüzme
@@ -2964,6 +2966,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,Arkadaşlarım ({count})
 Feature.BuyRobux.Label.PeopleWithCount,İnsanlar ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Gallery,Galeri
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,Özelleştir'e git
@@ -3454,7 +3457,6 @@ Feature.Chat.Label.SearchForFriendsAndChat,Konuşma ara
 Feature.Chat.Label.SearchFriends,Arkadaş ara
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.Sent,Gönderildi
-Feature.Chat.Label.SnoozeChatNotifications,Deneyim içi sohbet bildirimlerini sustur:
 Feature.Chat.Label.SnoozePartyNotifications,Deneyim içi parti bildirimlerini sustur:
 Feature.Chat.Label.SwipeToReplyTooltip,Yanıtlamak için kaydır
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} gün
@@ -3511,7 +3513,6 @@ Feature.Chat.Response.NetworkError,Ağ Hatası
 Feature.Chat.Response.Sending,Gönderiliyor
 Feature.Chat.RobloxConnectUnavailableWithUser,Bu kullanıcı şu anda Roblox Connect kullanamıyor.
 Feature.Chat.Text.NoFriends,Henüz arkadaş eklemedin. Başlamak için Roblox'ta arkadaşlarını bul ve ekle.
-Feature.Chat.Title.MuteChatNotifications,Oyun sırasında arkadaşlardan gelen sohbet bildirimlerini sustur
 Feature.Chat.Title.NewChat,Yeni sohbet
 Feature.Chat.Toast.Error.InvalidUserSelected,Listedeki bir veya daha fazla kişi eklenemiyor
 Feature.CommunityLinks.Description.CommunityDefault,Duyuruları ve daha fazlasını görüntülemek için {experienceName} deneyiminin resmî Guilded topluluğuna katıl!
@@ -4407,6 +4408,7 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,Fotoğraflar
 Feature.Moments.Label.PostDeleted,An silindi
 Feature.Moments.Label.PostRemovedBody,"Paylaştığın An, Topluluk Standartlarımıza aykırı."
+Feature.Moments.Label.PostedOnDate,{date} tarihinde paylaşıldı
 Feature.Moments.Label.PublishingRodeoBody,Bu işlem pek uzun sürmez.
 Feature.Moments.Label.Reactions,Tepkiler
 Feature.Moments.Label.ReportReason.BreaksRules,Bu paylaşım kurallara aykırı
@@ -4740,6 +4742,9 @@ Feature.NotApproved.Label.LatestActivity,İncelediğimiz en son etkinlik
 Feature.NotApproved.Label.LoadingImage,Görsel yükleniyor
 Feature.NotApproved.Label.LogoutProgress,Çıkış yapılıyor
 Feature.NotApproved.Label.MenuContent,Menü içeriği
+Feature.NotApproved.Label.MessageToUser.AltConsequence.Reset,"Bu hesap, ciddi bir Topluluk Standartları ihlali nedeniyle yasaklanan bir hesaba (@{account} olarak sıfırlandı) bağlı. Bu ihlale yalnızca yasaklanan hesaptan itiraz edilebilir. 
+
+İki hesabın birbirine bağlı olmaması gerekiyorsa bu hesabı kullanarak İhlaller ve İtirazlar bölümünden itirazda bulun."
 Feature.NotApproved.Label.MessageToUser.AltConsequence.V2,"Bu hesap, ciddi bir Topluluk Standartları ihlali nedeniyle yasaklanan bir hesaba bağlı. Yasaklanan hesabı kullanarak ihlal konusunda itirazda bulunulabilir."
 Feature.NotApproved.Label.MessageToUser.AltConsequence.V3,"Bu hesap, ciddi bir Topluluk Standartları ihlali nedeniyle yasaklanan bir hesaba (@{account}) bağlı. Bu ihlale yalnızca yasaklanan hesaptan itiraz edilebilir. 
 

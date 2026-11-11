@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("ProfilePlatformNavigateToMarketplaceWebView_V2", false)

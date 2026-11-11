@@ -1,1 +1,0 @@
-﻿return { Breakpoint = { HeightSmall = 600 } }

@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnableCoreContentTheme5", false)

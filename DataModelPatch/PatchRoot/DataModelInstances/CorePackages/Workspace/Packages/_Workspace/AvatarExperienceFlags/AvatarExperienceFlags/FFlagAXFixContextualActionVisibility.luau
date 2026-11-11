@@ -1,3 +1,0 @@
-﻿local FFlagAXMoveContextualActionButtonsModule = require(script.Parent.FFlagAXMoveContextualActionButtons)
-
-return game:DefineFastFlag("AXFixContextualActionVisibility2", false) and FFlagAXMoveContextualActionButtonsModule

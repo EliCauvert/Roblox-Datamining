@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("LuaAppLaunchWhenLoadingForce", false)

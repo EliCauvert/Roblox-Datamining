@@ -1,1 +1,0 @@
-﻿return { NO_BACKGROUND_ASSET_ID = 0 }

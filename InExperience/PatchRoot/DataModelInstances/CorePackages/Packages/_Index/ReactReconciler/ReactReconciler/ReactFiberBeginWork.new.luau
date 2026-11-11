@@ -1078,21 +1078,21 @@ do
 					
 					return (Callback4(p2, Return, PendingProps.children, BaseLanes))
 				end
-				local CallbackResult = Callback5(p2, Return, PendingProps.children, PendingProps.fallback, BaseLanes)
+				local CallbackResult1 = Callback5(p2, Return, PendingProps.children, PendingProps.fallback, BaseLanes)
 				local Child = Return.child
-				local MemoizedState3 = p2.child.memoizedState
+				local MemoizedState4 = p2.child.memoizedState
 				
-				if MemoizedState3 == nil then
+				if MemoizedState4 == nil then
 					Child.memoizedState = { baseLanes = BaseLanes }
 				else
 					Child.memoizedState = {
-						baseLanes = ReactFiberLaneModule.mergeLanes(MemoizedState3.baseLanes, BaseLanes)
+						baseLanes = ReactFiberLaneModule.mergeLanes(MemoizedState4.baseLanes, BaseLanes)
 					}
 				end
 				Child.childLanes = ReactFiberLaneModule.removeLanes(p2.childLanes, BaseLanes)
 				Return.memoizedState = MemoizedState
 				
-				return CallbackResult
+				return CallbackResult1
 			else
 				if EnableSuspenseServerRenderer then
 					local Dehydrated = MemoizedState1.dehydrated
@@ -1118,21 +1118,21 @@ do
 					
 					return (Callback4(p2, Return, PendingProps.children, BaseLanes))
 				end
-				local CallbackResult1 = Callback5(p2, Return, PendingProps.children, PendingProps.fallback, BaseLanes)
-				local Child1 = Return.child
-				local MemoizedState4 = p2.child.memoizedState
+				local CallbackResult = Callback5(p2, Return, PendingProps.children, PendingProps.fallback, BaseLanes)
+				local Child = Return.child
+				local MemoizedState3 = p2.child.memoizedState
 				
-				if MemoizedState4 == nil then
-					Child1.memoizedState = { baseLanes = BaseLanes }
+				if MemoizedState3 == nil then
+					Child.memoizedState = { baseLanes = BaseLanes }
 				else
-					Child1.memoizedState = {
-						baseLanes = ReactFiberLaneModule.mergeLanes(MemoizedState4.baseLanes, BaseLanes)
+					Child.memoizedState = {
+						baseLanes = ReactFiberLaneModule.mergeLanes(MemoizedState3.baseLanes, BaseLanes)
 					}
 				end
-				Child1.childLanes = ReactFiberLaneModule.removeLanes(p2.childLanes, BaseLanes)
+				Child.childLanes = ReactFiberLaneModule.removeLanes(p2.childLanes, BaseLanes)
 				Return.memoizedState = MemoizedState
 				
-				return CallbackResult1
+				return CallbackResult
 			end
 		end
 	end

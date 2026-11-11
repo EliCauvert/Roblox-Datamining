@@ -10,6 +10,7 @@ local UseStatusBarHeightFunction = MomentsCommonModule.Hooks.useStatusBarHeight
 local UseIsTvRemoteDeviceFunction = require(Parent.RoactUtils).Hooks.useIsTvRemoteDevice
 local UseSetDrawerVisibleFunction = require(Parent.Drawer).Hooks.useSetDrawerVisible
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local FFlagMomentsCreateAvatarPosts = require(Parent.SharedFlags).FFlagMomentsCreateAvatarPosts
 local GetFFlagMomentsAndroidTvEnabledModule = require(Moments.Flags.GetFFlagMomentsAndroidTvEnabled)
 local FFlagMomentsFtuxTooltipCreateCopyModule = require(Moments.Flags.FFlagMomentsFtuxTooltipCreateCopy)
 local FFlagMomentsFixFeedForDeviceSafeInsetsModule = require(Moments.Flags.FFlagMomentsFixFeedForDeviceSafeInsets)
@@ -39,7 +40,7 @@ local function _()
 end
 
 return function(p1, p2, ShowHamburger)
-	-- upvalues: UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseSetDrawerVisibleFunction (copy), UseIsTvRemoteDeviceFunction (copy), UseCompositionLayoutFunction (copy), UseStatusBarHeightFunction (copy), FFlagMomentsFtuxTooltipCreateCopyModule (copy), UseLocalizationFunction (copy), config (copy), FFlagMomentsFollowingFeedModule (copy), config1 (copy), UseTrendingFeedLabelModule (copy), MomentsFeedTypeModule (copy), noop (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Players (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), ShouldUseDeviceSafeInsets (copy), GetFFlagMomentsAndroidTvEnabledModule (copy)
+	-- upvalues: UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseSetDrawerVisibleFunction (copy), UseIsTvRemoteDeviceFunction (copy), UseCompositionLayoutFunction (copy), UseStatusBarHeightFunction (copy), FFlagMomentsFtuxTooltipCreateCopyModule (copy), UseLocalizationFunction (copy), config (copy), FFlagMomentsFollowingFeedModule (copy), config1 (copy), UseTrendingFeedLabelModule (copy), MomentsFeedTypeModule (copy), noop (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Players (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), ShouldUseDeviceSafeInsets (copy), FFlagMomentsCreateAvatarPosts (copy), GetFFlagMomentsAndroidTvEnabledModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseSetDrawerVisibleResult = UseSetDrawerVisibleFunction()
@@ -144,6 +145,7 @@ return function(p1, p2, ShowHamburger)
 		ftuxTooltipTitle = Title,
 		ftuxTooltipText = FtuxTooltipText,
 		onCreateMomentButtonPressed = UseResult1,
+		onCreateAvatarMomentPressed = if FFlagMomentsCreateAvatarPosts then p1.onCreateAvatarMomentPressed else nil,
 		onFtuxTooltipClosed = UseResult,
 		onHamburgerPressed = UseResult2,
 		onBack = p1.onBack or noop,

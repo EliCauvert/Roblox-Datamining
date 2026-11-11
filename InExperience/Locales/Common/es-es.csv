@@ -200,7 +200,7 @@ Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,"La jaula de cabeza
 Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,El {irrelevant_percent}% de los vértices de la caja exterior modificada no cubren el accesorio. Ajusta la caja para que se adapte mejor a la forma del accesorio.
 Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,"La jaula {cage_name} tiene valores UV incorrectos. {incorrect_uv_count} UV incorrectos ({unreferenced_vertex_count} sin referencia, {non_template_uv_count} no pertenecen a la plantilla, {duplicate_mapping_count} asignaciones duplicadas), {unmatched_template_count} vértices de la plantilla que no coinciden."
 Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,{partName} tiene un {degenerate_triangle_percent}% de triángulos degenerados.
-Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,"La cabeza dinámica tiene problemas de calidad de expresión. Ojo izquierdo cerrado: {left_eye_close}, ojo derecho cerrado: {right_eye_close}, boca abierta: {mouth_open}, feliz: {is_happy}, triste: {is_sad}."
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,"La cabeza dinámica tiene problemas de calidad de expresión. Ojo izquierdo en la pantalla (puntos rojos en el lado izquierdo de la cabeza en el complemento de visualización) cerrado: {left_eye_close}, ojo derecho en la pantalla (puntos azules en el lado derecho de la cabeza en el complemento de visualización) cerrado: {right_eye_close}, boca abierta (puntos verdes en el complemento de visualización): {mouth_open}, feliz: {is_happy}, triste: {is_sad}."
 Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"Configuración de articulaciones inesperada. Total de articulaciones: {joint_number}, articulaciones de la mano izquierda: {left_hand_joint_number}, articulaciones de la mano derecha: {right_hand_joint_number}."
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,{partName} tiene {num_small_volume_islands} pequeñas islas de malla desconectadas de un total de {num_disconnected_components} componentes. Elimina la geometría flotante.
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,"{partName} tiene una geometría no múltiple. Verifica si hay caras no planas, superficies que se cruzan consigo mismas o aristas compartidas por más de dos caras."
@@ -316,9 +316,9 @@ Common.UGCValidation.ErrorLabel.DynHead_JointAccumulatedExceeded,Las animaciones
 Common.UGCValidation.ErrorLabel.DynHead_JointBoundsCheckFailed,No se pudieron validar los límites de las articulaciones de la animación facial. Inténtalo de nuevo más tarde.
 Common.UGCValidation.ErrorLabel.DynHead_JointDirectExceeded,La animación facial de la cabeza {actionName} hace que las articulaciones se desplacen considerablemente fuera de la cabeza. Edita tus animaciones faciales e inténtalo de nuevo.
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,Las cabezas dinámicas en el mercado deben estar correctamente enjauladas para que los vértices de los ojos y la boca en la jaula se alineen con los vértices de la malla. Mejora tu enjaulamiento y su alineación con la malla.
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,Los puntos de referencia del ojo izquierdo de la jaula de cabeza dinámica están desalineados con la malla. Ajusta la malla del ojo para que la malla del ojo izquierdo esté dentro del área proyectada de la malla.
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,Los puntos de referencia de la boca de la jaula de cabeza dinámica están desalineados con la malla. Ajusta la jaula de la boca para que la malla de la boca esté dentro del área proyectada de la jaula.
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,Los puntos de referencia del ojo derecho de la jaula de cabeza dinámica están desalineados con la malla. Ajusta la jaula del ojo para que la malla del ojo derecho esté dentro del área proyectada de la jaula.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,El ojo izquierdo en la pantalla (puntos rojos en el lado izquierdo de la cabeza en el complemento de visualización) tiene puntos de referencia de la jaula desalineados con la malla: algunos puntos de la jaula están dentro de la malla de la cabeza (la malla sobresale a través de la jaula) o demasiado lejos de ella. Ajusta la jaula correspondiente para que quede sobre la malla o justo fuera de ella alrededor de este ojo.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,La boca (puntos verdes en el complemento de visualización) tiene puntos de referencia de la jaula desalineados con la malla: algunos puntos de la jaula están dentro de la malla de la cabeza (la malla sobresale a través de la jaula) o demasiado lejos de ella. Ajusta la jaula de la boca para que quede sobre la malla o justo fuera de ella alrededor de la boca.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,El ojo derecho en la pantalla (puntos azules en el lado derecho de la cabeza en el complemento de visualización) tiene puntos de referencia de la jaula desalineados con la malla: algunos puntos de la jaula están dentro de la malla de la cabeza (la malla sobresale a través de la jaula) o demasiado lejos de ella. Ajusta la jaula correspondiente para que quede sobre la malla o justo fuera de ella alrededor de este ojo.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,No se puede detectar la expresión de sonrisa en la cabeza dinámica. Ajusta los puntos de referencia de la jaula de la boca para que coincidan con la ubicación de la boca en la cabeza y asegúrate de que pueda mostrar la expresión de sonrisa.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,No se puede detectar la expresión de cierre del ojo izquierdo en la cabeza dinámica. Ajusta los puntos de referencia de la jaula del ojo izquierdo para que coincidan con la ubicación del ojo en la cabeza y asegúrate de que pueda cerrarse.
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,Las cabezas dinámicas en el mercado no tienen jaulas de cabeza. Crea una jaula de cabeza para la cabeza dinámica.
@@ -344,9 +344,9 @@ Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,La propiedad In
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,A la cara base le faltan las características oculares requeridas. Agrega ojos al rostro base e inténtalo de nuevo.
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,La cara base necesita una boca. Agrégala e inténtalo de nuevo.
 Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,No se puede detectar la expresión de felicidad. Ajusta la jaula de la boca o el Sistema de Codificación Facial de expresión de felicidad para que la malla de la boca proyectada se deforme como se espera.
-Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,No se puede detectar la expresión de ojo izquierdo cerrado. Ajusta la jaula del ojo izquierdo o el Sistema de Codificación Facial de cierre del ojo izquierdo para que la malla del ojo proyectada se deforme como se espera.
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,El ojo izquierdo en la pantalla (puntos rojos en el lado izquierdo de la cabeza en el complemento de visualización) no se cierra lo suficiente. Revisa los controles del Sistema de Codificación Facial del ojo derecho y la jaula correspondiente.
 Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,No se puede detectar la expresión de boca abierta. Ajusta la jaula de la boca o el FACS de boca abierta para que la malla de la boca proyectada se deforme como se espera.
-Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,No se puede detectar la expresión de ojo derecho cerrado. Ajusta la jaula del ojo derecho o el Sistema de Codificación Facial de cierre del ojo derecho para que la malla del ojo proyectada se deforme como se espera.
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,El ojo derecho en la pantalla (puntos azules en el lado derecho de la cabeza en el complemento de visualización) no se cierra lo suficiente. Revisa los controles del Sistema de Codificación Facial del ojo izquierdo y la jaula correspondiente.
 Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,No se puede detectar la expresión de tristeza. Ajusta la jaula de la boca o el Sistema de Codificación Facial de expresión de tristeza para que la malla de la boca proyectada se deforme como se espera.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Se detectó que FACs agrandó tu cabeza al {modPercent}%, pero alterar la cabeza va en contra de la política del mercado para las animaciones faciales."
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Las cabezas dinámicas pueden tener un máximo de {maxFacsJointCount} articulaciones del Sistema de Codificación Facial, pero esta cabeza tiene {actualJointCount}. Reduce el número de articulaciones del Sistema de Codificación Facial e inténtalo de nuevo."
@@ -416,6 +416,11 @@ Common.UGCValidation.ErrorLabel.MeasureMeshOutsideOuterCage,El {mesh_outside_out
 Common.UGCValidation.ErrorLabel.MeshGeometry_ExceedsBounds,"{meshName} tiene un tamaño superior al tamaño máximo permitido de la caja delimitadora. El tamaño máximo para el tipo {assetTypeName} es [{maxSizeX}, {maxSizeY}, {maxSizeZ}]."
 Common.UGCValidation.ErrorLabel.MeshGeometry_NotCentered,{meshName}.{fieldName} tiene datos de malla que no están centrados. Vuelve a importar esta malla con el importador 3D de Roblox y asegúrate de que no haya geometría suelta en el archivo de origen.
 Common.UGCValidation.ErrorLabel.MeshGeometry_PositionOutOfBounds,La posición está fuera de los límites.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleAboveMaximum,{meshName} se amplía hasta {scaleMultiple} veces su tamaño de malla original. El máximo es {maxScaleMultiple} veces. Vuelve a exportar o importar la malla al tamaño que necesitas en lugar de aumentarla en Studio.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleBelowMinimum,{meshName} se reduce al {scalePercent}% de su tamaño de malla original. El mínimo es {minScalePercent}%. Vuelve a exportar o importar la malla al tamaño que necesitas en lugar de reducirla en Studio.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleNotPositive,"{meshName} tiene una escala cero o negativa. Usa valores de escala positivos. Para reflejar una malla, gírala en tu software de modelado 3D y vuelve a exportarla."
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooLarge,La escala de la malla {meshName} es demasiado grande.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooSmall,La escala de la malla es demasiado pequeña.
 Common.UGCValidation.ErrorLabel.MeshGeometry_SurfaceAreaExceeded,"El área total de la superficie de la malla del modelo {meshName} es {surfaceArea}, no puede ser mayor que {maxSurfaceArea}. Debes reducir el número o el tamaño de todos los triángulos."
 Common.UGCValidation.ErrorLabel.MeshGeometry_TotalTriangleCountExceeded,La resolución de la malla de {triangleCount} para {assetTypeName} es superior al número máximo de triángulos admitido {maxTriangles}. Debes retopologizar tu modelo para reducir el recuento de triángulos.
 Common.UGCValidation.ErrorLabel.MeshGeometry_TriangleCountExceeded,La resolución de la malla del modelo {meshName} de {triangleCount} es superior al valor máximo admitido de {maxTriangles}. Debes retopologizar tu modelo e intentarlo de nuevo.
@@ -1069,6 +1074,7 @@ CoreScripts.InGameMenu.Ok,
 CoreScripts.InGameMenu.PageTitle.Controls,Controles...
 CoreScripts.InGameMenu.PageTitle.GameSettings,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Invitar amistades
+CoreScripts.InGameMenu.PageTitle.JoinOrInvite,Únete o invita
 CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends,Únete o invita a tus amistades
 CoreScripts.InGameMenu.PageTitle.Players,Personas
 CoreScripts.InGameMenu.PageTitle.Report,Denunciar
@@ -1477,6 +1483,7 @@ Feature.AddFriends.Action.FriendAdded,Amistad añadida
 Feature.AddFriends.Action.IgnoreFriendRequest,Ignorar solicitud de amistad
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Ignorar solicitud de amistad de confianza
 Feature.AddFriends.Action.RequestIgnored,Solicitud ignorada
+Feature.AddFriends.Heading.AddFriends,Añadir amigos
 Feature.AddFriends.Label.AddFriendsTooltip,Comienza encontrando a tus amigos para que puedan explorar Roblox juntos.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Encuentra gente en Roblox buscando por su nombre de usuario o nombre.
 Feature.AddFriends.Label.ConnectWithContacts,Invita a contactos o conecta con amigos que ya están en Roblox.
@@ -1870,6 +1877,8 @@ Feature.Avatar.Label.Shoes,Zapatos
 Feature.Avatar.Label.Shorts,Pantalones cortos
 Feature.Avatar.Label.Shoulder,Hombro
 Feature.Avatar.Label.Skin,Piel
+Feature.Avatar.Label.Spawn,
+Feature.Avatar.Label.SpawnEffects,Efectos de regeneración
 Feature.Avatar.Label.Sweater,Suéter
 Feature.Avatar.Label.Sweaters,Suéteres
 Feature.Avatar.Label.Swim,Nado
@@ -2092,7 +2101,10 @@ Feature.AvatarSwitcher.Message.SelectAvatar,Selecciona un avatar
 Feature.AvatarSwitcher.Message.SwitchingDeferred,"Verás este avatar después de tu próxima regeneración, o cuando te unas a una experiencia. Puedes cambiar a un avatar diferente en cualquier momento."
 Feature.AvatarSwitcher.Message.UnknownSupport,"Aún puedes cambiar tu avatar, pero es posible que no se muestre correctamente en esta experiencia."
 Feature.AvatarSwitcher.Message.Unsupported,Esta experiencia utiliza un avatar personalizado y no es compatible con los avatares de Roblox.
+Feature.AvatarWorkshop.Action.EditAvatar,Editar avatar
 Feature.AvatarWorkshop.Action.TryAgain,Inténtalo de nuevo
+Feature.AvatarWorkshop.Heading.Customize,Personalizar
+Feature.AvatarWorkshop.Heading.YourAvatars,Tus avatares
 Feature.AvatarWorkshop.Message.LoadItemsError,Algo salió mal al cargar tus artículos.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,No se pudieron cargar más objetos.
 Feature.AvatarWorkshop.Message.NoItemsOwned,Aún no tienes ningún artículo aquí.
@@ -2411,6 +2423,7 @@ Feature.Build.Label.ManagedPricingMixed,Combinado entre los productos actuales
 Feature.Build.Label.MaximizeForGamePlays,Maximizar para las reproducciones del juego
 Feature.Build.Label.ModelUnavailable,Modelo no disponible
 Feature.Build.Label.Models3D,Modelos 3D
+Feature.Build.Label.MonetizationCreateTitle,{NAME} - {PRICE} Robux
 Feature.Build.Label.MyGames,Mis juegos
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,Sin límite
@@ -2775,7 +2788,7 @@ Feature.Catalog.Action.CheckoutPlural,Ver carrito ({count})
 Feature.Catalog.Action.CheckoutSingular,Pagar 1 objeto
 Feature.Catalog.Action.CloseDetails,Cerrar detalles
 Feature.Catalog.Action.CopyLink,Copiar enlace
-Feature.Catalog.Action.Customize,Personalizar
+Feature.Catalog.Action.Customize,
 Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,
@@ -3208,7 +3221,7 @@ Feature.Chat.Heading.SafeChattingWithUsername,Ten cuidado al chatear con {displa
 Feature.Chat.Heading.UserInvitedYouToJoin,{combinedName} te invitó a unirte
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,{combinedName} te invitó a unirte a un grupo
 Feature.Chat.Heading.YouWereInvitedToGroup,Te invitaron a unirte al grupo
-Feature.Chat.Label.AddFriends,Añadir amigos
+Feature.Chat.Label.AddFriends,
 Feature.Chat.Label.Available,Disponible
 Feature.Chat.Label.Blocked,Bloqueada
 Feature.Chat.Label.ChatDetails,Detalles del chat
@@ -3248,7 +3261,6 @@ Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} dijo...
 Feature.Chat.Label.ReplyingToYourself,Tú dijiste...
 Feature.Chat.Label.SearchFriends,Buscar amigos
 Feature.Chat.Label.SearchWord,
-Feature.Chat.Label.SnoozeChatNotifications,Silenciar notificaciones de chat en la experiencia:
 Feature.Chat.Label.SnoozePartyNotifications,Silenciar notificaciones de Equipo en la experiencia para
 Feature.Chat.Label.SwipeToReplyTooltip,Desliza para responder
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} d
@@ -3304,7 +3316,6 @@ Feature.Chat.Response.NetworkError,Error de red
 Feature.Chat.RobloxConnectUnavailableWithUser,"En este momento, Roblox Connect no está disponible para este usuario."
 Feature.Chat.Text.NoFriends,"Aún no has añadido ningún amigo. Para empezar, encuentra y añade tus amigos en Roblox."
 Feature.Chat.Title.FriendsChat,Chat de amistades
-Feature.Chat.Title.MuteChatNotifications,Silenciar las notificaciones de chat de las amistades durante el juego
 Feature.Chat.Title.NewChat,Nuevo chat
 Feature.Chat.Toast.Error.InvalidUserSelected,Hay una o más personas en esta lista que no se pueden añadir
 Feature.ContactUpsell.Action.Continue,
@@ -3451,8 +3462,10 @@ Feature.FaceChat.Subtitle.VideoPerformancePromptDisable,Apagar la cámara puede 
 Feature.FaceChat.Subtitle.VideoUnsupported,Roblox no puede usar la cámara para animar tu avatar.
 Feature.Favorites.Label.Favorite,Favorita
 Feature.FlyoutSidePanel.Action.ContinuePlaying,Seguir jugando
+Feature.FlyoutSidePanel.Description.SwitchAccountsHere,Ahora puedes cambiar de cuenta aquí.
 Feature.FlyoutSidePanel.Label.TooltipBody,"Tu perfil, contenido y configuración se movieron a una nueva ubicación."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> se movió
+Feature.FlyoutSidePanel.Title.AccountSwitcherMoved,Se movió el conmutador de cuentas
 Feature.Friends.Action.AcceptFriend,
 Feature.Friends.Action.AccountDeleted,Cuenta eliminada
 Feature.Friends.Action.Add,
@@ -3841,6 +3854,7 @@ Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Termina en {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,Prueba gratuita
 Feature.InExperienceShop.Label.HaveTrial,Prueba gratuita para ti
+Feature.InExperienceShop.Label.KeepIt,Guardarlo
 Feature.InExperienceShop.Label.NoDescription,Sin descripción
 Feature.InExperienceShop.Label.OfferEndTime,{offer} termina en {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,Esta es la vista previa de tu tienda en Roblox Studio. Los jugadores no pueden verla.
@@ -4002,6 +4016,7 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,Fotos
 Feature.Moments.Label.PostDeleted,Momento eliminado
 Feature.Moments.Label.PostRemovedBody,El Momento que publicaste va en contra de nuestras Normas de la comunidad.
+Feature.Moments.Label.PostedOnDate,Publicado el {date}
 Feature.Moments.Label.PublishingRodeoBody,Esto no tomará mucho tiempo.
 Feature.Moments.Label.Reactions,Reacciones
 Feature.Moments.Label.ReportReason.BreaksRules,Esta publicación infringe las reglas
@@ -4184,7 +4199,7 @@ Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,Copiar enlace de perfil
 Feature.Profile.Action.CreateInBuild,Crear en Build
 Feature.Profile.Action.EditAppearance,Editar aspecto
-Feature.Profile.Action.EditAvatar,Editar avatar
+Feature.Profile.Action.EditAvatar,
 Feature.Profile.Action.EditBackground,Editar fondo
 Feature.Profile.Action.EditEmotes,Editar emotes
 Feature.Profile.Action.EditLook,Editar estilo
@@ -5445,7 +5460,9 @@ Notifications.SquadRegroupPrompt.ToastAction.Join,
 Notifications.SquadRegroupPrompt.ToastLabel.ContinuePlayingTogether,Seguir jugando juntos
 Notifications.SquadRegroupPrompt.ToastLabel.JoinANewServer,Únete a un nuevo servidor
 Notifications.ToastNotifications.Label.LeaveExperienceConfirmation,¿Realmente quieres salir y unirte a otra experiencia?
+Notifications.ToastNotifications.Label.LeaveServerConfirmation,¿Confirmas que deseas salir y unirte a otro servidor?
 Notifications.ToastNotifications.Title.LeavingExperience,Saliendo de la experiencia
+Notifications.ToastNotifications.Title.LeavingServer,Saliendo del servidor
 PlayerFeedbacks.VoteForm.Message.Action.Report,
 PlayerFeedbacks.VoteForm.Message.MaxLengthCharacters,Usa menos de {count} caracteres.
 PlayerFeedbacks.VoteForm.Message.MinLengthCharacters,Usa más de {count} caracteres.

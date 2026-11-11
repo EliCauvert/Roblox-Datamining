@@ -1,1 +1,0 @@
-﻿return { AttributionTraversal = "AttributionTraversal" }

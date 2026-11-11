@@ -6,11 +6,13 @@ local ReactModule = require(Parent.React)
 local UseSocialCarouselAnalyticsModule = require(SocialCarousel.Analytics.useSocialCarouselAnalytics)
 local UseSocialCarouselContextModule = require(SocialCarousel.Contexts.useSocialCarouselContext)
 local TileModule = require(SocialCarousel.BaseComponents.Tile)
+local FFlagSocialCarouselXXSmallTilesModule = require(SocialCarousel.Flags.FFlagSocialCarouselXXSmallTiles)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local ConstantsModule = require(SocialCarousel.Common.Constants)
 
 return function(p1)
-	-- upvalues: UseNavigationFunction (copy), UseSocialCarouselAnalyticsModule (copy), UseSocialCarouselContextModule (copy), UseLocalizationFunction (copy), ConstantsModule (copy), ReactModule (copy), AppPage (copy), TileModule (copy)
+	-- upvalues: FFlagSocialCarouselXXSmallTilesModule (copy), UseNavigationFunction (copy), UseSocialCarouselAnalyticsModule (copy), UseSocialCarouselContextModule (copy), UseLocalizationFunction (copy), ConstantsModule (copy), ReactModule (copy), AppPage (copy), TileModule (copy)
+	local IsIsCompact: boolean = FFlagSocialCarouselXXSmallTilesModule and p1.isCompact == true
 	local UseNavigationResult = UseNavigationFunction()
 	local UseSocialCarouselAnalyticsModuleResult = UseSocialCarouselAnalyticsModule()
 	local UseSocialCarouselContextModuleResult = UseSocialCarouselContextModule()
@@ -37,11 +39,13 @@ return function(p1)
 	end, {})
 	
 	return ReactModule.createElement(TileModule, {
-		icon = "icons/actions/friends/friendsplaying",
+		testId = p1.testId or `--social-social-carousel-view-start-squad-{p0.index}`,
 		index = p1.index,
 		itemSize = p1.itemSize,
 		onActivated = UseResult,
 		title = UseLocalizationResult.startPartyText,
+		icon = if IsIsCompact then "person-play" else "icons/actions/friends/friendsplaying",
+		iconScale = if IsIsCompact then ConstantsModule.TILE_ICON_SCALE else nil,
 		selectionOrder = p1.selectionOrder
 	})
 end

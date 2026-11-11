@@ -1,1 +1,0 @@
-﻿return game:DefineFastInt("SideSheetVariant2", 0)

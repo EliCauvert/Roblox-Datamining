@@ -137,19 +137,19 @@ return {
 						if value2.fieldName == "AnimationId" and not GetFFlagUGCValidateAllowAnimationVersionPinsModule() then
 							p1:fail(ErrorSourceStringsModule.Keys.DescendantIdAnimationVersionNotSupported, config)
 						else
-							local Entry = t1[AssetId]
+							local Version1 = t1[AssetId]
 							
-							if Entry == nil then
+							if Version1 == nil then
 								local Success2, Result2 = pcall(UnpublishedDependenciesModule.getLatestVersionNumber, AssetId)
 								
 								if not Success2 then
 									p1:fetchError(`Failed to read asset {AssetId}: {Result2}`)
 								end
-								Entry = Result2
+								Version1 = Result2
 								t1[AssetId] = Result2
 							end
-							if Version ~= Entry then
-								config.LatestVersion = tostring(Entry)
+							if Version ~= Version1 then
+								config.LatestVersion = tostring(Version1)
 								p1:fail(ErrorSourceStringsModule.Keys.DescendantIdVersionNotLatest, config)
 							end
 						end

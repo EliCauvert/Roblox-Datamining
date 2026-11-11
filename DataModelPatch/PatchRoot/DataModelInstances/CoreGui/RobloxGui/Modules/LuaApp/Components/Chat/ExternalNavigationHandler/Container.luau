@@ -1,1 +1,0 @@
-﻿return require(game:GetService("CorePackages").Packages.RoactRodux).connect(require(script.Parent.mapStateToProps), (require(script.Parent.mapDispatchToProps)))((require(script.Parent.ExternalNavigationHandler)))

@@ -2,6 +2,7 @@
 local Parent = FriendsCalling.Parent
 local HttpService = game:GetService("HttpService")
 local ReactModule = require(Parent.React)
+local NewResult = require(Parent.Loggers).Logger:new(script.Name)
 local ToastNotificationModule = require(Parent.ToastNotification)
 local CallingStatusModule = require(FriendsCalling.Enums.CallingStatus)
 local FFlagFriendsCallingServiceLuaMigrationModule = require(Parent.SharedFlags.FFlagFriendsCallingServiceLuaMigration)
@@ -11,7 +12,7 @@ local UseEventConnectionFunction = require(Parent.ReactUtils).useEventConnection
 local Default = require(Parent.ToastNotificationsProtocol).ToastNotificationProtocol.default
 
 return function(p1)
-	-- upvalues: FFlagFriendsCallingServiceLuaMigrationModule (copy), ReactModule (copy), Default (copy), NotificationTypeEnum (copy), HttpService (copy), CallingStatusModule (copy), UseEventConnectionFunction (copy), LifecycleEvents (copy)
+	-- upvalues: FFlagFriendsCallingServiceLuaMigrationModule (copy), ReactModule (copy), Default (copy), NotificationTypeEnum (copy), HttpService (copy), CallingStatusModule (copy), UseEventConnectionFunction (copy), LifecycleEvents (copy), NewResult (copy)
 	local CallingService = p1.callingService or game:GetService("CallingService")
 	local FriendsCallingService = if FFlagFriendsCallingServiceLuaMigrationModule then p1.friendsCallingService or game:GetService("FriendsCallingService") else nil
 	local UseRefResult = ReactModule.useRef({})
@@ -99,9 +100,9 @@ return function(p1)
 		end
 	end, {})))
 	ReactModule.useEffect(function()
-		-- upvalues: LifecycleEvents (upval), NotificationTypeEnum (upval), HttpService (upval), FFlagFriendsCallingServiceLuaMigrationModule (upval), FriendsCallingService (ref), CallingService (copy)
+		-- upvalues: LifecycleEvents (upval), NotificationTypeEnum (upval), HttpService (upval), FFlagFriendsCallingServiceLuaMigrationModule (upval), FriendsCallingService (ref), NewResult (upval), CallingService (copy)
 		return LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.UserAction, NotificationTypeEnum.VoiceCallReceived, function(p3)
-			-- upvalues: HttpService (upval), FFlagFriendsCallingServiceLuaMigrationModule (upval), FriendsCallingService (upval), CallingService (upval)
+			-- upvalues: HttpService (upval), FFlagFriendsCallingServiceLuaMigrationModule (upval), FriendsCallingService (upval), NewResult (upval), CallingService (upval)
 			local VisualItem = p3 and p3.visualItem
 			
 			if p3 == nil or p3.userActionType ~= "click" or VisualItem == nil then return end
@@ -109,10 +110,21 @@ return function(p1)
 			
 			if VisualItem.visualItemName == "AnswerCall" then
 				if FFlagFriendsCallingServiceLuaMigrationModule then
+					for _, FriendsCallingInstance in FriendsCallingService:GetChildren() do
+						if FriendsCallingInstance.ClassName == "FriendsCallingInstance" and FriendsCallingInstance.CallId ~= "" and FriendsCallingInstance.CallId ~= CallId then
+							NewResult:warning("Answering {} while {} is still up", CallId, FriendsCallingInstance.CallId)
+							break
+						end
+					end
 					FriendsCallingService:AnswerCall(CallId)
 					
 					return
 				else
+					local CallingState = CallingService:GetCallingState()
+					
+					if CallingState.callId ~= nil and CallingState.callId ~= CallId then
+						NewResult:warning("Answering {} while {} is still up", CallId, CallingState.callId)
+					end
 					CallingService:AnswerIncomingCall(CallId)
 					
 					return

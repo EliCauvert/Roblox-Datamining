@@ -134,7 +134,7 @@ function WidgetManager:_flushWith(PendingDeregisters, PendingRegisters)
 				Signal.VisibleChanged:Disconnect()
 				Signal.AncestryChanged:Disconnect()
 			else
-				if FlagsModule.FoundationPopoverPluginOverlayMeasurement and Signal.Host ~= DEPRECATEDPluginGui then
+				if Signal.Host ~= DEPRECATEDPluginGui then
 					Signal.Host = DEPRECATEDPluginGui
 					table.insert(List1, Registration1.Uri)
 					continue
@@ -144,7 +144,7 @@ function WidgetManager:_flushWith(PendingDeregisters, PendingRegisters)
 		end
 		self._signals[String1] = {
 			Widget = Registration1.Widget,
-			Host = if FlagsModule.FoundationPopoverPluginOverlayMeasurement then DEPRECATEDPluginGui else nil,
+			Host = DEPRECATEDPluginGui,
 			PositionChanged = Registration1.Widget:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
 				-- upvalues: self (copy), Registration1 (copy)
 				self:register(Registration1.Uri, Registration1.Widget)
@@ -165,7 +165,7 @@ function WidgetManager:_flushWith(PendingDeregisters, PendingRegisters)
 			end)
 		}
 	end
-	if FlagsModule.FoundationPopoverPluginOverlayMeasurement and #List1 > 0 then
+	if #List1 > 0 then
 		pcall(function()
 			-- upvalues: self (copy), List1 (copy)
 			self._widgetsApi:DeregisterAsync(List1)

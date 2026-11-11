@@ -1,1 +1,0 @@
-﻿return { All = "All", TimedOptionsOnly = "TimedOptionsOnly" }

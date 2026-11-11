@@ -1,1 +1,0 @@
-﻿return require(script.Parent.FFlagFriendsPageUserListEnabled) and game:DefineFastFlag("FriendsPageViewBtnEnabled", false)

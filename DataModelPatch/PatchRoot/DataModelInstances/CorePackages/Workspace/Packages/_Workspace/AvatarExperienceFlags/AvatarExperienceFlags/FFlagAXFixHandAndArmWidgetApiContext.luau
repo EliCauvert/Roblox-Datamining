@@ -1,3 +1,0 @@
-﻿local FFlagAXCatalogM41HandAndArmModule = require(script.Parent.FFlagAXCatalogM41HandAndArm)
-
-return game:DefineFastFlag("AXFixHandAndArmWidgetApiContext", false) and FFlagAXCatalogM41HandAndArmModule

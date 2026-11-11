@@ -1,1 +1,0 @@
-﻿return (game:DefineFastInt("AppChatModalSeenImpressionDelayMs", 3000))

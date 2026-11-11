@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("Foundation").Utility.createUseModalNavigation)((require(script.Parent.DialogContext)))

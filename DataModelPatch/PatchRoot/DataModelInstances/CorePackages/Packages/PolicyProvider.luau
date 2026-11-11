@@ -1,1 +1,0 @@
-﻿return (require(script.Parent._Index.LuaRoactPolicyProvider.LuaRoactPolicyProvider))

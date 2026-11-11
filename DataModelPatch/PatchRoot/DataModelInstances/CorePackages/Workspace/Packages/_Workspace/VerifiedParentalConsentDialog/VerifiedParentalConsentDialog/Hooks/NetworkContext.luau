@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("VerifiedParentalConsentDialog").Parent.React).createContext(nil)

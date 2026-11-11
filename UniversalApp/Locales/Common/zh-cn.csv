@@ -203,6 +203,7 @@ Authentication.AccountSwitch.Action.Continue,
 Authentication.AccountSwitch.Action.CreateNewAccount,创建新帐户
 Authentication.AccountSwitch.Action.LogoutAllAccounts,注销所有帐户
 Authentication.AccountSwitch.Action.RemoveAllAccounts,是否移除所有帐户？
+Authentication.AccountSwitch.Action.SignIn,登录
 Authentication.AccountSwitch.Action.SignInToExistingAccount,登录现有帐户
 Authentication.AccountSwitch.Action.SwitchAccount,切换帐户
 Authentication.AccountSwitch.Description.AccountLimit.2,你已达到帐户数量上限。要添加新帐户，请先移除一个帐户。
@@ -212,6 +213,8 @@ Authentication.AccountSwitch.Description.LogoutConfirmation,您必须注销此�
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,请稍后重试
 Authentication.AccountSwitch.Description.RemoveAllAccounts,注销后，所有帐户都将从此设备中移除。
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,如果你执行此操作，除非再次登录，否则你将不会在此设备上再看到此帐户。你将返回着陆页。
+Authentication.AccountSwitch.Description.SomethingWentWrongSignInAgain,出错了。请重新登录。
+Authentication.AccountSwitch.Description.StaleSessionSignInAgain,你有一段时间没有在这里使用此帐户了。请重新登录。
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,尝试直接登录
 Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,无法切换帐户
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
@@ -304,7 +307,7 @@ Authentication.Login.Action.ResendCode,
 Authentication.Login.Action.Save,保存
 Authentication.Login.Action.SendCodeSentenceCase,发送验证码
 Authentication.Login.Action.SendVerificationEmail,发送验证电子邮件
-Authentication.Login.Action.SignIn,登录
+Authentication.Login.Action.SignIn,
 Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,使用通行密钥
@@ -1580,7 +1583,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,通过搜索用户名或�
 Feature.AddFriends.Label.ConnectWithContacts,邀请联系人或与已经在 Roblox 上的好友交流！
 Feature.AddFriends.Label.ContactsTile,联系人
 Feature.AddFriends.Label.DeclineAllBackgrounded,正在忽略所有好友邀请。请稍候。
-Feature.AddFriends.Label.EmptyState.FriendsRename,想和谁一起探索 Roblox 呢？添加好友，在 Roblox 上享受更多乐趣！
 Feature.AddFriends.Label.EmptyStatePrompt,你要和谁一起探索 Roblox？寻找新的朋友，或添加你认识的人为好友！
 Feature.AddFriends.Label.FriendRequests,好友邀请
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,搜索用户
@@ -1588,8 +1590,6 @@ Feature.AddFriends.Label.MyQrCode,我的二维码
 Feature.AddFriends.Label.QRCodeTitle,
 Feature.AddFriends.Label.SchoolTile,同学
 Feature.AddFriends.Label.SearchForFriendsPrompt,搜索用户名或昵称，在 Roblox 上找到对方。
-Feature.AddFriends.Label.ShareQRCodeAddConnection,分享你的二维码，添加你认识的人
-Feature.AddFriends.Label.SyncContactsInvitePeople,同步通讯录以查找并邀请好友！
 Feature.AddFriends.Label.SyncWithContacts,同步联系人以寻找并不接受预付卡。邀请好友！
 Feature.AddFriends.Label.TrustedFriendRequests,可信好友请求
 Feature.AddFriends.Text.EmptyState.FriendsRename,想和谁一起探索 Roblox 呢？{lineBreak}添加好友，在 Roblox 上享受更多乐趣！
@@ -1597,7 +1597,6 @@ Feature.AddFriends.Title.AddFriendsToolTip,和好友一起玩 Roblox 更开心�
 Feature.AddFriends.Title.AddFriendsTooltipTitle,
 Feature.AddFriends.Title.CameraPermission,摄像头权限
 Feature.AddFriends.Title.ConnectWithContacts,从通讯录添加
-Feature.AddFriends.Title.ShareQRCode,从二维码添加
 Feature.AgeGuidelines.DisplayName.StrongLanguage,激烈言辞
 Feature.AgeGuidelines.Label.CreatorEnabled,已启用创作者
 Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect,解锁更多内容和功能。
@@ -1710,6 +1709,7 @@ Feature.AppealsPortal.Label.Location,发生地点
 Feature.AppealsPortal.Label.LookDescription,已分享的虚拟形象描述
 Feature.AppealsPortal.Label.LookId,已分享的虚拟形象 ID
 Feature.AppealsPortal.Label.LookName,已分享的虚拟形象名称
+Feature.AppealsPortal.Label.MomentDescription,“精彩瞬间”描述
 Feature.AppealsPortal.Label.PlaceIDPrompt,场景 ID 是什么？
 Feature.AppealsPortal.Label.PlaceId,场景 ID
 Feature.AppealsPortal.Label.PlaceName,场景名称
@@ -2166,6 +2166,8 @@ Feature.Avatar.Label.Shoes,鞋
 Feature.Avatar.Label.Shorts,短裤
 Feature.Avatar.Label.Shoulder,肩部
 Feature.Avatar.Label.Skin,皮肤
+Feature.Avatar.Label.Spawn,重生点
+Feature.Avatar.Label.SpawnEffects,重生点效果
 Feature.Avatar.Label.Sweater,毛衣
 Feature.Avatar.Label.Sweaters,
 Feature.Avatar.Label.Swim,游泳
@@ -2989,6 +2991,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,我的好友（{count} 位）
 Feature.BuyRobux.Label.PeopleWithCount,用户（{count} 个）
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Gallery,图库
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,前往“自定义”
@@ -3477,7 +3480,6 @@ Feature.Chat.Label.SearchForFriendsAndChat,搜索对话
 Feature.Chat.Label.SearchFriends,搜索好友
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.Sent,已发送
-Feature.Chat.Label.SnoozeChatNotifications,将体验内聊天通知静音：
 Feature.Chat.Label.SnoozePartyNotifications,将体验中的队伍通知静音：
 Feature.Chat.Label.SwipeToReplyTooltip,滑动以回复
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} 天
@@ -3534,7 +3536,6 @@ Feature.Chat.Response.NetworkError,网络错误
 Feature.Chat.Response.Sending,正在发送
 Feature.Chat.RobloxConnectUnavailableWithUser,此用户当前无法使用 Roblox Connect 功能。
 Feature.Chat.Text.NoFriends,你尚未添加任何好友。若要开始，请在 Roblox 上寻找并添加你的好友。
-Feature.Chat.Title.MuteChatNotifications,在游戏期间将好友聊天通知静音
 Feature.Chat.Title.NewChat,新聊天
 Feature.Chat.Toast.Error.InvalidUserSelected,此列表中的一人或多人无法被添加
 Feature.CommunityLinks.Description.CommunityDefault,加入“{experienceName}”的官方 Guilded 社区 ，查看公告并获取更多信息！
@@ -4429,6 +4430,7 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,照片
 Feature.Moments.Label.PostDeleted,精彩瞬间已删除
 Feature.Moments.Label.PostRemovedBody,你发布的精彩瞬间违反了社区准则。
+Feature.Moments.Label.PostedOnDate,发布于 {date}
 Feature.Moments.Label.PublishingRodeoBody,此过程不会花太长时间。
 Feature.Moments.Label.Reactions,回应
 Feature.Moments.Label.ReportReason.BreaksRules,此帖子违反了规定
@@ -4762,6 +4764,9 @@ Feature.NotApproved.Label.LatestActivity,我们审查的最新活动
 Feature.NotApproved.Label.LoadingImage,正在加载图片
 Feature.NotApproved.Label.LogoutProgress,正在退出登录
 Feature.NotApproved.Label.MenuContent,菜单内容
+Feature.NotApproved.Label.MessageToUser.AltConsequence.Reset,"此帐户与因严重违反我们的社区准则而被封禁的帐户 (@{account}) 相关联。只有被封禁的帐户才能对违规行为提出申诉。
+
+如果这两个帐户不应相互关联，请使用此帐户通过“违规和申诉”发送申诉。"
 Feature.NotApproved.Label.MessageToUser.AltConsequence.V2,此帐户关联的另一个帐户因严重违反我们的社区准则已被封禁。你可以使用被封禁的帐户对违规处置提出申诉。
 Feature.NotApproved.Label.MessageToUser.AltConsequence.V3,"此帐户与因严重违反我们的社区准则而被封禁的帐户 (@{account}) 相关联。只有被封禁的帐户才能对违规行为提出申诉。
 

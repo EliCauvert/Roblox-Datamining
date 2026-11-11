@@ -1,1 +1,0 @@
-﻿return game:DefineFastString("CoreContentAmpNameSpace", "core_content/CoreContent")

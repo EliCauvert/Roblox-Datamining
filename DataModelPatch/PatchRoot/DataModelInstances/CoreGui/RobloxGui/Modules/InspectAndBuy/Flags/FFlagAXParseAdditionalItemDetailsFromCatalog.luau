@@ -1,1 +1,0 @@
-﻿return require(game:GetService("CorePackages").Workspace.Packages.SharedFlags).FFlagEnableInspectAndBuyV2RootFlag and game:DefineFastFlag("AXParseAdditionalItemDetailsFromCatalog4", false)

@@ -1,0 +1,119 @@
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local ReactModule = require(Parent.React)
+local LocalizationRoactContext = require(Parent.Localization).LocalizationRoactContext
+
+local function _(p1, p2, p3)
+	if p1 == nil then
+		return p3
+	else
+		local Success, Result = pcall(function()
+			-- upvalues: p1 (copy), p2 (copy)
+			return p1:Format(p2)
+		end)
+		
+		return if Success and typeof(Result) == "string" and Result ~= "" then Result else p3
+	end
+end
+
+return function()
+	-- upvalues: ReactModule (copy), LocalizationRoactContext (copy)
+	local UseContextResult = ReactModule.useContext(LocalizationRoactContext)
+	
+	return ReactModule.useMemo(function()
+		-- upvalues: UseContextResult (copy)
+		local t = {}
+		local PostingYourMomentKeepTheAppOpenAndWeLlNotifyYou = nil
+		
+		if UseContextResult == nil then
+			PostingYourMomentKeepTheAppOpenAndWeLlNotifyYou = "Posting your Moment, keep the app open and we'll notify you"
+		else
+			local v1 = "Feature.Moments.Label.PostFeedbackPostingSnackbar"
+			local Success, Result = pcall(function()
+				-- upvalues: UseContextResult (copy), v1 (copy)
+				return UseContextResult:Format(v1)
+			end)
+			PostingYourMomentKeepTheAppOpenAndWeLlNotifyYou = if Success and typeof(Result) == "string" and Result ~= "" then Result else "Posting your Moment, keep the app open and we'll notify you"
+		end
+		t.postingSnackbar = PostingYourMomentKeepTheAppOpenAndWeLlNotifyYou
+		local PostingMoment = nil
+		
+		if UseContextResult == nil then
+			PostingMoment = "Posting Moment"
+		else
+			local v2 = "Feature.Moments.Label.PostFeedbackPostingTitle"
+			local Success1, Result1 = pcall(function()
+				-- upvalues: UseContextResult (copy), v2 (copy)
+				return UseContextResult:Format(v2)
+			end)
+			PostingMoment = if Success1 and typeof(Result1) == "string" and Result1 ~= "" then Result1 else "Posting Moment"
+		end
+		t.postingTitle = PostingMoment
+		local ThisMayTakeAMinute = nil
+		
+		if UseContextResult == nil then
+			ThisMayTakeAMinute = "This may take a minute"
+		else
+			local v3 = "Feature.Moments.Label.PostFeedbackPostingBody"
+			local Success2, Result2 = pcall(function()
+				-- upvalues: UseContextResult (copy), v3 (copy)
+				return UseContextResult:Format(v3)
+			end)
+			ThisMayTakeAMinute = if Success2 and typeof(Result2) == "string" and Result2 ~= "" then Result2 else "This may take a minute"
+		end
+		t.postingBody = ThisMayTakeAMinute
+		local MomentWasModerated = nil
+		
+		if UseContextResult == nil then
+			MomentWasModerated = "Moment was moderated"
+		else
+			local v4 = "Feature.Moments.Label.PostFeedbackModeratedTitle"
+			local Success3, Result3 = pcall(function()
+				-- upvalues: UseContextResult (copy), v4 (copy)
+				return UseContextResult:Format(v4)
+			end)
+			MomentWasModerated = if Success3 and typeof(Result3) == "string" and Result3 ~= "" then Result3 else "Moment was moderated"
+		end
+		t.moderatedTitle = MomentWasModerated
+		local ThisIsModeratedAndHiddenFromOthers = nil
+		
+		if UseContextResult == nil then
+			ThisIsModeratedAndHiddenFromOthers = "This is moderated and hidden from others"
+		else
+			local v5 = "Feature.Moments.Label.PostFeedbackModeratedBody"
+			local Success4, Result4 = pcall(function()
+				-- upvalues: UseContextResult (copy), v5 (copy)
+				return UseContextResult:Format(v5)
+			end)
+			ThisIsModeratedAndHiddenFromOthers = if Success4 and typeof(Result4) == "string" and Result4 ~= "" then Result4 else "This is moderated and hidden from others"
+		end
+		t.moderatedBody = ThisIsModeratedAndHiddenFromOthers
+		local Posting = nil
+		
+		if UseContextResult == nil then
+			Posting = "Posting…"
+		else
+			local v6 = "Feature.Moments.Label.PostFeedbackPostingBadge"
+			local Success5, Result5 = pcall(function()
+				-- upvalues: UseContextResult (copy), v6 (copy)
+				return UseContextResult:Format(v6)
+			end)
+			Posting = if Success5 and typeof(Result5) == "string" and Result5 ~= "" then Result5 else "Posting…"
+		end
+		t.postingBadge = Posting
+		local Moderated = nil
+		
+		if UseContextResult == nil then
+			Moderated = "Moderated"
+		else
+			local v7 = "Feature.Moments.Label.PostFeedbackModeratedBadge"
+			local Success6, Result6 = pcall(function()
+				-- upvalues: UseContextResult (copy), v7 (copy)
+				return UseContextResult:Format(v7)
+			end)
+			Moderated = if Success6 and typeof(Result6) == "string" and Result6 ~= "" then Result6 else "Moderated"
+		end
+		t.moderatedBadge = Moderated
+		
+		return t
+	end, { UseContextResult })
+end

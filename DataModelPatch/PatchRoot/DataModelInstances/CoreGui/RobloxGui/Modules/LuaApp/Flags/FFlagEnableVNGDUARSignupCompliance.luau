@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnableVNGDUARSignupCompliance3", false)

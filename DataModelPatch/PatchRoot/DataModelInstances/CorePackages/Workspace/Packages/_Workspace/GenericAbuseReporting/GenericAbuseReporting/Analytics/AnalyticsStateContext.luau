@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React).createContext({})

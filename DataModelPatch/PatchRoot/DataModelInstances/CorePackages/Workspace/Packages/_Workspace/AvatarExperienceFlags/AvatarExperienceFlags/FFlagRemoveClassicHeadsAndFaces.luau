@@ -1,1 +1,0 @@
-﻿return require(script.Parent.FFlagDynamicHeadsMigration) and game:DefineFastFlag("RemoveClassicHeadsAndFaces", true)

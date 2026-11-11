@@ -1,3 +1,0 @@
-﻿local FFlagLuaAppEdpMediaGalleryRedesignIxpModule = require(script.Parent.FFlagLuaAppEdpMediaGalleryRedesignIxp)
-
-return game:DefineFastFlag("LuaAppEdpMediaGalleryRedesign5", false) or FFlagLuaAppEdpMediaGalleryRedesignIxpModule

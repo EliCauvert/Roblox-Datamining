@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("InExperienceTopBar").Parent.Signals).createComputed((require(script.createTopBarStore)))

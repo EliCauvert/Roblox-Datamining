@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnableNewPartyInviteChanges2", false)

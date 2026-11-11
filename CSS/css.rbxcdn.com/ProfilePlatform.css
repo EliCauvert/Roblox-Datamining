@@ -773,6 +773,12 @@
     right: 0
 }
 
+.user-profile-header-info:has(.currently-playing-card) .buttons-show-on-desktop {
+    top: calc(21px + var(--gap-medium, 12px));
+    gap: var(--gap-large, 16px);
+    position: relative
+}
+
 .profile-platform-container .profile-carousel {
     padding-bottom: var(--padding-xxlarge)
 }

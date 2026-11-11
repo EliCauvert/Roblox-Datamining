@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AppChatMessageTTIMilestones1", false)

@@ -18,6 +18,8 @@ local TitleDescriptionPageModule = require(BuildExperience.Components.TitleDescr
 local MediaSelectionPageModule = require(BuildExperience.Components.MediaSelectionPage.MediaSelectionPage)
 local MonetizationPageContainerModule = require(BuildExperience.Components.MonetizationPage.MonetizationPageContainer)
 local FFlagBuildPublishNavigationSheetModule = require(BuildExperience.Flags.FFlagBuildPublishNavigationSheet)
+local FFlagBuildExperiencePageImpressionsModule = require(BuildExperience.Flags.FFlagBuildExperiencePageImpressions)
+local UseBuildPageImpressionModule = require(BuildExperience.Telemetry.useBuildPageImpression)
 local BuildNavigationParamsModule = require(BuildExperience.utils.BuildNavigationParams)
 local GameInfoUtilsModule = require(BuildExperience.utils.GameInfoUtils)
 local _ = require(BuildExperience.Stores.GetBuildOverflowMenuStore.createBuildOverflowMenuStore)
@@ -105,7 +107,8 @@ local function BuildSheetPage(p1)
 end
 
 local function ConfigurationScreen(p1, Page, TestId)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), BuildNavigationParamsModule (copy), GameInfoUtilsModule (copy), getTargetWithGameInfo (copy), ReactModule (copy), Screens (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), BuildOverflowMenuPageModule (copy), BuildSheetPage (copy), BuildFullscreenPage (copy), PrivateInvitesPickerHostModule (copy), BuildExperience (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), BuildNavigationParamsModule (copy), FFlagBuildExperiencePageImpressionsModule (copy), UseBuildPageImpressionModule (copy), GameInfoUtilsModule (copy), getTargetWithGameInfo (copy), ReactModule (copy), Screens (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), BuildOverflowMenuPageModule (copy), BuildSheetPage (copy), BuildFullscreenPage (copy), PrivateInvitesPickerHostModule (copy), BuildExperience (copy)
+	local Loading = UseLocalizationFunction({ loading = LocalizationStringsModule.BUILD_MENU_LOADING }).loading
 	local Navigation = p1.navigation
 	local ScreenProps = p1.screenProps or {}
 	local Target = BuildNavigationParamsModule.getTarget(Navigation) or ScreenProps.target
@@ -117,10 +120,18 @@ local function ConfigurationScreen(p1, Page, TestId)
 		gameIcon = Target.gameIcon,
 		isNewGameTarget = Target.isNewGameTarget
 	}
+	
+	if FFlagBuildExperiencePageImpressionsModule then
+		UseBuildPageImpressionModule(Page, Config)
+	end
 	local UseGameInfoResult = GameInfoUtilsModule.useGameInfo(if Config then Config.universeId else nil)
-	local TargetWithGameInfo = getTargetWithGameInfo(Config, UseGameInfoResult, UseLocalizationFunction({ loading = LocalizationStringsModule.BUILD_MENU_LOADING }).loading)
+	local TargetWithGameInfo = getTargetWithGameInfo(Config, UseGameInfoResult, Loading)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	
+	if FFlagBuildExperiencePageImpressionsModule then
+		UseBuildPageImpressionModule("version-history", TargetWithGameInfo, UseStateResult1 and (TargetWithGameInfo ~= nil and TargetWithGameInfo.placeId ~= nil))
+	end
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: ScreenProps (copy), Navigation (copy)
 		if ScreenProps.onClose then
@@ -303,7 +314,7 @@ return {
 		return ConfigurationScreen(p1, "settings", "BuildPage.settings.Page")
 	end,
 	BuildMonetizationScreen = function(p1)
-		-- upvalues: BuildNavigationParamsModule (copy), FFlagBuildPublishNavigationSheetModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), ReactModule (copy), MonetizationPageContainerModule (copy), BuildSheetPage (copy), BuildFullscreenPage (copy)
+		-- upvalues: BuildNavigationParamsModule (copy), FFlagBuildExperiencePageImpressionsModule (copy), UseBuildPageImpressionModule (copy), FFlagBuildPublishNavigationSheetModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), ReactModule (copy), MonetizationPageContainerModule (copy), BuildSheetPage (copy), BuildFullscreenPage (copy)
 		local Navigation = p1.navigation
 		local ScreenProps = p1.screenProps or {}
 		local Target = BuildNavigationParamsModule.getTarget(Navigation) or ScreenProps.target
@@ -315,6 +326,10 @@ return {
 			gameIcon = Target.gameIcon,
 			isNewGameTarget = Target.isNewGameTarget
 		}
+		
+		if FFlagBuildExperiencePageImpressionsModule then
+			UseBuildPageImpressionModule("monetization", Config)
+		end
 		local OnClose = ScreenProps.onClose
 		local OnClose1 = if FFlagBuildPublishNavigationSheetModule and OnClose ~= nil and BuildNavigationParamsModule.getShouldDismissOnBack(Navigation) then OnClose else Navigation.goBack
 		local Element = ReactModule.createElement(MonetizationPageContainerModule, {
@@ -328,7 +343,7 @@ return {
 		return if ScreenProps.onClose then ReactModule.createElement(BuildSheetPage, { pageContent = Element }) else ReactModule.createElement(BuildFullscreenPage, { pageContent = Element })
 	end,
 	BuildStatsScreen = function(p1)
-		-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), BuildNavigationParamsModule (copy), ReactModule (copy), BuildExperience (copy), OverflowMenuPageShellModule (copy), BuildSheetPage (copy), BuildFullscreenPage (copy)
+		-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), BuildNavigationParamsModule (copy), FFlagBuildExperiencePageImpressionsModule (copy), UseBuildPageImpressionModule (copy), ReactModule (copy), BuildExperience (copy), OverflowMenuPageShellModule (copy), BuildSheetPage (copy), BuildFullscreenPage (copy)
 		local Stats = UseLocalizationFunction({ stats = LocalizationStringsModule.BUILD_MENU_STATS }).stats
 		local Navigation = p1.navigation
 		local ScreenProps = p1.screenProps or {}
@@ -341,6 +356,10 @@ return {
 			gameIcon = Target.gameIcon,
 			isNewGameTarget = Target.isNewGameTarget
 		}
+		
+		if FFlagBuildExperiencePageImpressionsModule then
+			UseBuildPageImpressionModule("stats", Config)
+		end
 		local UseResult = ReactModule.useCallback(function()
 			-- upvalues: ScreenProps (copy), Navigation (copy)
 			if ScreenProps.onClose then
@@ -373,7 +392,7 @@ return {
 		return if ScreenProps.onClose then ReactModule.createElement(BuildSheetPage, { pageContent = Element }) else ReactModule.createElement(BuildFullscreenPage, { pageContent = Element })
 	end,
 	BuildAudienceScreen = function(p1)
-		-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), BuildNavigationParamsModule (copy), ReactModule (copy), OverflowMenuPageShellModule (copy), AudienceConfigurationContentModule (copy), BuildSheetPage (copy), BuildFullscreenPage (copy)
+		-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), BuildNavigationParamsModule (copy), FFlagBuildExperiencePageImpressionsModule (copy), UseBuildPageImpressionModule (copy), ReactModule (copy), OverflowMenuPageShellModule (copy), AudienceConfigurationContentModule (copy), BuildSheetPage (copy), BuildFullscreenPage (copy)
 		local UseLocalizationResult = UseLocalizationFunction({ audience = LocalizationStringsModule.BUILD_MENU_AUDIENCE })
 		local Navigation = p1.navigation
 		local ScreenProps = p1.screenProps or {}
@@ -386,6 +405,10 @@ return {
 			gameIcon = Target.gameIcon,
 			isNewGameTarget = Target.isNewGameTarget
 		}
+		
+		if FFlagBuildExperiencePageImpressionsModule then
+			UseBuildPageImpressionModule("audience", Config)
+		end
 		local UseResult = ReactModule.useCallback(function()
 			-- upvalues: Navigation (copy)
 			Navigation.goBack()
@@ -479,7 +502,7 @@ return {
 		})
 	end,
 	BuildTitleDescriptionScreen = function(p1)
-		-- upvalues: BuildNavigationParamsModule (copy), UseOnScreenKeyboardVisibleModule (copy), ReactModule (copy), BuildTitleDescriptionContent (copy), FFlagBuildPublishNavigationSheetModule (copy), BuildSheetPage (copy), BuildFullscreenPage (copy)
+		-- upvalues: BuildNavigationParamsModule (copy), FFlagBuildExperiencePageImpressionsModule (copy), UseBuildPageImpressionModule (copy), UseOnScreenKeyboardVisibleModule (copy), ReactModule (copy), BuildTitleDescriptionContent (copy), FFlagBuildPublishNavigationSheetModule (copy), BuildSheetPage (copy), BuildFullscreenPage (copy)
 		local Navigation = p1.navigation
 		local ScreenProps = p1.screenProps or {}
 		local Target = BuildNavigationParamsModule.getTarget(Navigation) or ScreenProps.target
@@ -491,6 +514,10 @@ return {
 			gameIcon = Target.gameIcon,
 			isNewGameTarget = Target.isNewGameTarget
 		}
+		
+		if FFlagBuildExperiencePageImpressionsModule then
+			UseBuildPageImpressionModule("title-description", Config)
+		end
 		local UseOnScreenKeyboardVisibleModuleResult = UseOnScreenKeyboardVisibleModule()
 		local PageContent = nil
 		
@@ -510,7 +537,7 @@ return {
 		})
 	end,
 	BuildVersionTitleDescriptionScreen = function(p1)
-		-- upvalues: BuildNavigationParamsModule (copy), UseOnScreenKeyboardVisibleModule (copy), ReactModule (copy), BuildExperience (copy), FFlagBuildPublishNavigationSheetModule (copy), BuildSheetPage (copy), BuildFullscreenPage (copy)
+		-- upvalues: BuildNavigationParamsModule (copy), FFlagBuildExperiencePageImpressionsModule (copy), UseBuildPageImpressionModule (copy), UseOnScreenKeyboardVisibleModule (copy), ReactModule (copy), BuildExperience (copy), FFlagBuildPublishNavigationSheetModule (copy), BuildSheetPage (copy), BuildFullscreenPage (copy)
 		local Navigation = p1.navigation
 		local ScreenProps = p1.screenProps or {}
 		local Target = BuildNavigationParamsModule.getTarget(Navigation) or ScreenProps.target
@@ -522,6 +549,10 @@ return {
 			gameIcon = Target.gameIcon,
 			isNewGameTarget = Target.isNewGameTarget
 		}
+		
+		if FFlagBuildExperiencePageImpressionsModule then
+			UseBuildPageImpressionModule("version-title-description", Config)
+		end
 		local UseOnScreenKeyboardVisibleModuleResult = UseOnScreenKeyboardVisibleModule()
 		local PageContent = nil
 		
@@ -541,10 +572,14 @@ return {
 		})
 	end,
 	BuildMediaSelectionScreen = function(p1)
-		-- upvalues: BuildNavigationParamsModule (copy), FFlagBuildPublishNavigationSheetModule (copy), ReactModule (copy), MediaSelectionPageModule (copy), BuildSheetPage (copy), BuildFullscreenPage (copy)
+		-- upvalues: BuildNavigationParamsModule (copy), FFlagBuildExperiencePageImpressionsModule (copy), UseBuildPageImpressionModule (copy), FFlagBuildPublishNavigationSheetModule (copy), ReactModule (copy), MediaSelectionPageModule (copy), BuildSheetPage (copy), BuildFullscreenPage (copy)
 		local Navigation = p1.navigation
 		local ScreenProps = p1.screenProps or {}
 		local Target = BuildNavigationParamsModule.getTarget(Navigation)
+		
+		if FFlagBuildExperiencePageImpressionsModule then
+			UseBuildPageImpressionModule("media-selection", Target)
+		end
 		local OnClose = ScreenProps.onClose
 		local OnClose1 = if FFlagBuildPublishNavigationSheetModule and OnClose ~= nil and BuildNavigationParamsModule.getShouldDismissOnBack(Navigation) then OnClose else Navigation.goBack
 		local Element = if Target == nil or Target.universeId == nil then nil else ReactModule.createElement(MediaSelectionPageModule, { onClose = OnClose1, universeId = Target.universeId })

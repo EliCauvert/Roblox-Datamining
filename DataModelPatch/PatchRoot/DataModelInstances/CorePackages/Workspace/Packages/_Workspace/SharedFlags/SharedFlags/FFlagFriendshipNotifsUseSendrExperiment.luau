@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("FriendshipNotifsUseSendrExperiment_v3", false)

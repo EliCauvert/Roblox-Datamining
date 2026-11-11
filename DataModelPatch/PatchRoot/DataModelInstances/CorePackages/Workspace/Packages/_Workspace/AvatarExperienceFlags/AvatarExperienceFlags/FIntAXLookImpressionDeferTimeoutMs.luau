@@ -1,1 +1,0 @@
-﻿return game:DefineFastInt("AXLookImpressionDeferTimeoutMs", 5000)

@@ -200,7 +200,7 @@ Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,"Cage kepala tidak 
 Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,{irrelevant_percent}% dari verteks cage luar yang dimodifikasi tidak mencakup aksesori. Sesuaikan cage agar lebih sesuai dengan bentuk aksesori.
 Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,"{cage_name} memiliki nilai UV yang salah. Terdapat {incorrect_uv_count} UV yang salah ({unreferenced_vertex_count} verteks tanpa referensi, {non_template_uv_count} UV yang bukan dari templat, {duplicate_mapping_count} pemetaan duplikat), {unmatched_template_count} verteks templat yang tidak sesuai."
 Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,{partName} memiliki {degenerate_triangle_percent}% segitiga degenerasi.
-Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,"Kepala dinamis memiliki masalah kualitas ekspresi. Mata kiri tertutup: {left_eye_close}, mata kanan tertutup: {right_eye_close}, mulut terbuka: {mouth_open}, senang: {is_happy}, sedih: {is_sad}."
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,"Kepala dinamis memiliki masalah dengan kualitas ekspresinya. Mata kiri di layar (titik-titik merah di sisi kiri kepala di Plugin Visualisasi) tertutup: {left_eye_close}, mata kanan di layar (titik-titik biru di sisi kanan kepala di Plugin Visualisasi) tertutup: {right_eye_close}, mulut terbuka (titik-titik hijau di Plugin Visualisasi): {mouth_open}, senang: {is_happy}, sedih: {is_sad}."
 Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"Konfigurasi sendi tidak terduga. Total sendi: {joint_number}, sendi tangan kiri: {left_hand_joint_number}, sendi tangan kanan: {right_hand_joint_number}."
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,{partName} memiliki {num_small_volume_islands} mesh island kecil yang terputus dari {num_disconnected_components} total komponen. Hapus geometri yang mengambang.
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,"{partName} memiliki geometri non-manifold. Periksa apakah ada permukaan non-planar, permukaan yang saling berpotongan, atau tepi yang digunakan bersama oleh lebih dari 2 permukaan."
@@ -316,9 +316,9 @@ Common.UGCValidation.ErrorLabel.DynHead_JointAccumulatedExceeded,Animasi wajah k
 Common.UGCValidation.ErrorLabel.DynHead_JointBoundsCheckFailed,Gagal memvalidasi batas sendi animasi wajah. Coba lagi nanti.
 Common.UGCValidation.ErrorLabel.DynHead_JointDirectExceeded,Animasi wajah kepala {actionName} menyebabkan sendi berpindah jauh di luar kepala. Edit animasi wajah lalu coba lagi.
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,Kepala Dinamis di marketplace harus dikurung dengan benar sehingga titik lengkung mata dan mulut pada cage sejajar dengan titik lengkung mesh. Tingkatkan kurungan (caging) dan keselarasan dengan mesh.
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,Titik penanda mata kiri pada cage Kepala Dinamis tidak sejajar dengan mesh. Sesuaikan cage mata agar mesh mata kiri ada di dalam area cage yang diproyeksikan.
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,Titik penanda mulut pada cage Kepala Dinamis tidak sejajar dengan mesh. Sesuaikan cage mulut agar mesh mulut ada di dalam area cage yang diproyeksikan.
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,Titik penanda mata kanan pada cage Kepala Dinamis tidak sejajar dengan mesh. Sesuaikan cage mata agar mesh mata kanan ada dalam area cage yang diproyeksikan.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,Mata kiri di layar (titik-titik merah di sisi kiri kepala di Plugin Visualisasi) memiliki titik penanda cage yang tidak sejajar dengan mesh: beberapa titik cage berada di dalam mesh kepala (mesh menembus cage) atau terlalu jauh di luarnya. Sesuaikan cage yang terkait agar berada di atas atau tepat di luar mesh di sekitar mata ini.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,Mulut (titik-titik hijau di Plugin Visualisasi) memiliki titik penanda cage yang tidak sejajar dengan mesh: beberapa titik cage berada di dalam mesh kepala (mesh menembus cage) atau terlalu jauh di luarnya. Sesuaikan cage mulut agar berada di atas atau tepat di luar mesh di sekitar mulut.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,Mata kanan di layar (titik-titik biru di sisi kanan kepala di Plugin Visualisasi) memiliki titik penanda cage yang tidak sejajar dengan mesh: beberapa titik cage berada di dalam mesh kepala (mesh menembus cage) atau terlalu jauh di luarnya. Sesuaikan cage yang terkait agar berada di atas atau tepat di luar mesh di sekitar mata ini.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Tidak dapat mendeteksi ekspresi senyum untuk Kepala Dinamis. Sesuaikan titik acuan cage untuk mulut agar sesuai dengan posisi mulut di kepala dan pastikan mulut dapat menunjukkan ekspresi senyum.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,Tidak dapat mendeteksi ekspresi mata kiri tertutup untuk Kepala Dinamis. Sesuaikan titik acuan cage untuk mata kiri agar sesuai dengan posisi mata kiri di kepala dan pastikan mata tersebut dapat ditutup.
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,Kepala Dinamis di marketplace tidak memiliki Cage Kepala. Buat Cage Kepala untuk Kepala Dinamis.
@@ -344,9 +344,9 @@ Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,Properti Intern
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,"Wajah dasar tidak memiliki fitur mata yang diperlukan. Tambahkan mata ke wajah dasar, lalu coba lagi."
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,"Wajah dasar tidak memiliki fitur mulut yang diperlukan. Tambahkan mulut ke wajah dasar, lalu coba lagi."
 Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,Tidak dapat mendeteksi ekspresi senang. Sesuaikan cage mulut atau FACS ekspresi senang agar mesh mulut yang diproyeksikan berubah bentuk sesuai keinginan.
-Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,Tidak dapat mendeteksi ekspresi mata kiri terpejam. Sesuaikan cage mata kiri atau FACS mata kiri terpejam agar mesh mata yang diproyeksikan berubah bentuk sesuai keinginan.
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,Mata kiri di layar (titik-titik merah di sisi kiri kepala di Plugin Visualisasi) tidak cukup tertutup. Periksa kendali FACS mata kanan dan cage yang terkait.
 Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,Tidak dapat mendeteksi ekspresi mulut menganga. Sesuaikan cage mulut atau FACS mulut menganga agar mesh mulut yang diproyeksikan berubah bentuk sesuai keinginan.
-Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,Tidak dapat mendeteksi ekspresi mata kanan terpejam. Sesuaikan cage mata kanan atau FACS mata kanan terpejam agar mesh mata yang diproyeksikan berubah bentuk sesuai keinginan.
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,Mata kanan di layar (titik-titik biru di sisi kanan kepala di Plugin Visualisasi) tidak cukup tertutup. Periksa kendali FACS mata kiri dan cage yang terkait.
 Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,Tidak dapat mendeteksi ekspresi sedih. Sesuaikan cage mulut atau FACS ekspresi sedih agar mesh mulut yang diproyeksikan berubah bentuk sesuai keinginan.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"FAC terdeteksi memperbesar kepala Anda menjadi {modPercent}%, tetapi mengubah kepala bertentangan dengan kebijakan marketplace untuk animasi wajah."
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Kepala dinamis dapat memiliki maksimal {maxFacsJointCount} sendi FACS, tetapi kepala ini memiliki {actualJointCount}. Kurangi jumlah sendi FACS, lalu coba lagi."
@@ -415,6 +415,11 @@ Common.UGCValidation.ErrorLabel.MeasureMeshOutsideOuterCage,{mesh_outside_outer_
 Common.UGCValidation.ErrorLabel.MeshGeometry_ExceedsBounds,"{meshName} memiliki ukuran yang lebih besar daripada ukuran batas maksimum yang diizinkan. Ukuran maksimum untuk tipe {assetTypeName} adalah [{maxSizeX}, {maxSizeY}, {maxSizeZ}]."
 Common.UGCValidation.ErrorLabel.MeshGeometry_NotCentered,"{meshName}.{fieldName} memiliki data mesh yang tidak berada di tengah. Impor ulang mesh ini dengan pengimpor 3D Roblox, dan pastikan tidak ada geometri yang lepas di file sumber."
 Common.UGCValidation.ErrorLabel.MeshGeometry_PositionOutOfBounds,Posisi berada di luar batas.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleAboveMaximum,"{meshName} diperbesar hingga {scaleMultiple} kali dari ukuran mesh aslinya. Ukuran maksimum yang diizinkan adalah {maxScaleMultiple} kali. Ekspor atau impor ulang mesh dalam ukuran yang kamu butuhkan, jangan memperbesarnya di Studio."
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleBelowMinimum,"{meshName} diperkecil menjadi {scalePercent}% dari ukuran mesh aslinya. Ukuran minimum yang diizinkan adalah {minScalePercent}%. Ekspor atau impor ulang mesh dalam ukuran yang kamu butuhkan, jangan memperkecilnya di Studio."
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleNotPositive,"{meshName} memiliki skala nol atau negatif. Gunakan nilai skala positif. Untuk mencerminkan mesh, balikkan di software pemodelan 3D-mu, lalu ekspor ulang."
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooLarge,Skala mesh {meshName} terlalu besar.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooSmall,Skala mesh terlalu kecil.
 Common.UGCValidation.ErrorLabel.MeshGeometry_SurfaceAreaExceeded,"Total luas permukaan mesh model '{meshName}' adalah {surfaceArea}, tidak boleh lebih besar dari {maxSurfaceArea}. Kamu harus mengurangi jumlah dan/atau ukuran semua segitiga."
 Common.UGCValidation.ErrorLabel.MeshGeometry_TotalTriangleCountExceeded,"Resolusi mesh '{triangleCount}' untuk '{assetTypeName}' lebih tinggi daripada jumlah maksimum segitiga yang didukung, '{maxTriangles}'. Kamu harus melakukan retopologisasi pada modelmu untuk mengurangi jumlah segitiga."
 Common.UGCValidation.ErrorLabel.MeshGeometry_TriangleCountExceeded,"Resolusi mesh model {meshName}, yaitu {triangleCount}, lebih tinggi daripada jumlah maksimum yang didukung, {maxTriangles}. Kamu harus melakukan retopologisasi pada modelmu untuk mengurangi jumlah segitiga."
@@ -1068,6 +1073,7 @@ CoreScripts.InGameMenu.Ok,
 CoreScripts.InGameMenu.PageTitle.Controls,Kontrol...
 CoreScripts.InGameMenu.PageTitle.GameSettings,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Undang Teman
+CoreScripts.InGameMenu.PageTitle.JoinOrInvite,Bergabung atau Undang
 CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends,Bergabung atau Undang Teman
 CoreScripts.InGameMenu.PageTitle.Players,Pengguna
 CoreScripts.InGameMenu.PageTitle.Report,Laporkan
@@ -1476,6 +1482,7 @@ Feature.AddFriends.Action.FriendAdded,Teman Ditambahkan
 Feature.AddFriends.Action.IgnoreFriendRequest,Abaikan permintaan pertemanan
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Abaikan permintaan pertemanan tepercaya
 Feature.AddFriends.Action.RequestIgnored,Permintaan Diabaikan
+Feature.AddFriends.Heading.AddFriends,Tambah teman
 Feature.AddFriends.Label.AddFriendsTooltip,Mulai dengan menemukan teman kamu supaya kamu bisa menjelajahi Roblox bersama mereka.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Temukan pengguna di Roblox dengan memasukkan nama pengguna atau nama mereka.
 Feature.AddFriends.Label.ConnectWithContacts,Undang kontak atau terhubung dengan teman yang sudah ada di Roblox.
@@ -1869,6 +1876,8 @@ Feature.Avatar.Label.Shoes,Sepatu
 Feature.Avatar.Label.Shorts,Celana Pendek
 Feature.Avatar.Label.Shoulder,Bahu
 Feature.Avatar.Label.Skin,Kulit
+Feature.Avatar.Label.Spawn,Spawn
+Feature.Avatar.Label.SpawnEffects,Efek Spawn
 Feature.Avatar.Label.Sweater,Sweater
 Feature.Avatar.Label.Sweaters,
 Feature.Avatar.Label.Swim,Renang
@@ -2091,7 +2100,10 @@ Feature.AvatarSwitcher.Message.SelectAvatar,Pilih avatar
 Feature.AvatarSwitcher.Message.SwitchingDeferred,"Kamu akan melihat avatar ini setelah respawn berikutnya, atau saat kamu bergabung ke pengalaman virtual. Kamu dapat beralih ke avatar yang berbeda kapan saja."
 Feature.AvatarSwitcher.Message.UnknownSupport,"Kamu masih bisa mengganti avatar, tetapi avatar itu mungkin tidak akan ditampilkan dengan benar di pengalaman virtual ini."
 Feature.AvatarSwitcher.Message.Unsupported,Pengalaman virtual ini menggunakan avatar kustom dan tidak mendukung avatar Roblox.
+Feature.AvatarWorkshop.Action.EditAvatar,Edit avatar
 Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Heading.Customize,Sesuaikan
+Feature.AvatarWorkshop.Heading.YourAvatars,Avatarmu
 Feature.AvatarWorkshop.Message.LoadItemsError,Terjadi kesalahan saat me-load item-mu.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,Tidak dapat me-load item lainnya.
 Feature.AvatarWorkshop.Message.NoItemsOwned,Kamu belum memiliki item apa pun di sini.
@@ -2410,6 +2422,7 @@ Feature.Build.Label.ManagedPricingMixed,Harga terkelola campuran di seluruh prod
 Feature.Build.Label.MaximizeForGamePlays,Maksimalkan agar game lebih banyak dimainkan
 Feature.Build.Label.ModelUnavailable,Model tidak tersedia
 Feature.Build.Label.Models3D,Model 3D
+Feature.Build.Label.MonetizationCreateTitle,{NAME} — {PRICE} Robux
 Feature.Build.Label.MyGames,Game saya
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,Tidak ada batas
@@ -3245,7 +3258,6 @@ Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} mengatakan...
 Feature.Chat.Label.ReplyingToYourself,Kamu mengatakan...
 Feature.Chat.Label.SearchFriends,Cari teman
 Feature.Chat.Label.SearchWord,
-Feature.Chat.Label.SnoozeChatNotifications,Bisukan notifikasi chat dalam pengalaman virtual:
 Feature.Chat.Label.SnoozePartyNotifications,Bisukan notifikasi party dalam pengalaman virtual selama:
 Feature.Chat.Label.SwipeToReplyTooltip,Geser untuk membalas
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}hr
@@ -3301,7 +3313,6 @@ Feature.Chat.Response.NetworkError,Jaringan Eror
 Feature.Chat.RobloxConnectUnavailableWithUser,"Saat ini, Roblox Connect tidak tersedia dengan pengguna ini."
 Feature.Chat.Text.NoFriends,"Kamu belum menambahkan satu teman pun. Untuk memulai, cari dan tambahkan temanmu di Roblox."
 Feature.Chat.Title.FriendsChat,Chat teman
-Feature.Chat.Title.MuteChatNotifications,Bisukan notifikasi chat dari teman selama gameplay
 Feature.Chat.Title.NewChat,Chat baru
 Feature.Chat.Toast.Error.InvalidUserSelected,Satu atau beberapa orang di daftar ini tidak dapat ditambahkan
 Feature.ContactUpsell.Action.Continue,
@@ -3840,6 +3851,7 @@ Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Berakhir dalam {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,Uji coba gratis
 Feature.InExperienceShop.Label.HaveTrial,Uji coba gratis untukmu
+Feature.InExperienceShop.Label.KeepIt,
 Feature.InExperienceShop.Label.NoDescription,Tidak Ada Deskripsi
 Feature.InExperienceShop.Label.OfferEndTime,{offer} berakhir dalam {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,Ini preview Toko-mu di Roblox Studio. Pemain tidak bisa melihat preview ini.
@@ -4001,6 +4013,7 @@ Feature.Moments.Label.Overview,Ikhtisar
 Feature.Moments.Label.Photos,Foto
 Feature.Moments.Label.PostDeleted,Moment dihapus
 Feature.Moments.Label.PostRemovedBody,Moment yang kamu posting bertentangan dengan Standar Komunitas kami.
+Feature.Moments.Label.PostedOnDate,Diposting pada {date}
 Feature.Moments.Label.PublishingRodeoBody,Ini tidak butuh waktu lama.
 Feature.Moments.Label.Reactions,Reaksi
 Feature.Moments.Label.ReportReason.BreaksRules,Postingan ini melanggar aturan
@@ -4183,7 +4196,7 @@ Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,Salin Tautan Profil
 Feature.Profile.Action.CreateInBuild,Buat di Build
 Feature.Profile.Action.EditAppearance,Edit penampilan
-Feature.Profile.Action.EditAvatar,Edit avatar
+Feature.Profile.Action.EditAvatar,
 Feature.Profile.Action.EditBackground,Edit latar belakang
 Feature.Profile.Action.EditEmotes,Edit emote
 Feature.Profile.Action.EditLook,Edit tampilan
@@ -5444,7 +5457,9 @@ Notifications.SquadRegroupPrompt.ToastAction.Join,
 Notifications.SquadRegroupPrompt.ToastLabel.ContinuePlayingTogether,Lanjutkan bermain bersama
 Notifications.SquadRegroupPrompt.ToastLabel.JoinANewServer,
 Notifications.ToastNotifications.Label.LeaveExperienceConfirmation,Kamu yakin ingin keluar lalu bergabung ke pengalaman virtual lain?
+Notifications.ToastNotifications.Label.LeaveServerConfirmation,Kamu yakin ingin keluar lalu bergabung ke server lain?
 Notifications.ToastNotifications.Title.LeavingExperience,Meninggalkan Pengalaman Virtual
+Notifications.ToastNotifications.Title.LeavingServer,Keluar dari Server
 PlayerFeedbacks.VoteForm.Message.Action.Report,
 PlayerFeedbacks.VoteForm.Message.MaxLengthCharacters,Gunakan kurang dari {count} karakter.
 PlayerFeedbacks.VoteForm.Message.MinLengthCharacters,Gunakan lebih dari {count} karakter.

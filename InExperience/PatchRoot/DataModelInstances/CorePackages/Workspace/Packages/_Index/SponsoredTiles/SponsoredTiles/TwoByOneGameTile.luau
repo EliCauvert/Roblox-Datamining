@@ -1,7 +1,6 @@
 ﻿local SponsoredTiles = script:FindFirstAncestor("SponsoredTiles")
 local Parent = SponsoredTiles.Parent
 local GameTileModule = require(Parent.GameTile)
-local GetGameTileLayoutDataFunction = GameTileModule.getGameTileLayoutData
 local FormatExperienceThumbnailFunction = GameTileModule.formatExperienceThumbnail
 local UseIsHoveredTileFunction = GameTileModule.useIsHoveredTile
 local UseNavigateToGameDetailsFunction = GameTileModule.useNavigateToGameDetails
@@ -11,7 +10,6 @@ local SpanTileOverflowMenuModule = require(SponsoredTiles.SpanTileOverflowMenu.S
 local TwoByOneGameTileTelemetry = require(Parent.SponsoredTilesTelemetry).TwoByOneGameTileTelemetry
 local _ = require(SponsoredTiles.types)
 local HiddenTileContent = GameTileModule.HiddenTileContent
-local ItemLayoutDataParsingUtils = GameTileModule.ItemLayoutDataParsingUtils
 local HoverTileCoordinator = GameTileModule.HoverTileCoordinator
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
@@ -20,8 +18,6 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local Image = FoundationModule.Image
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local ResponsiveModule = require(Parent.Responsive)
-local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
-local GameInfosReducer = require(Parent.GameInfosRodux).GameInfosReducer
 local AppBloxModule = require(Parent.AppBlox)
 local GetOverflowMenuSignalStoreFunction = AppBloxModule.getOverflowMenuSignalStore
 local UseOverflowMenuOpenFunction = AppBloxModule.useOverflowMenuOpen
@@ -52,7 +48,6 @@ local FFlagLuaAppFeatureTileHapticsFix = SharedFlagsModule.FFlagLuaAppFeatureTil
 local FFlagLuaAppTileVideoCandidateOnly = SharedFlagsModule.FFlagLuaAppTileVideoCandidateOnly
 local FFlagLuaAppDemoModePlayButtonTelemetry = SharedFlagsModule.FFlagLuaAppDemoModePlayButtonTelemetry
 local FFlagLuaAppHomeThumbnailPrefetch = SharedFlagsModule.FFlagLuaAppHomeThumbnailPrefetch
-local FFlagMigrateGameInfoToStore = SharedFlagsModule.FFlagMigrateGameInfoToStore
 local FFlagLuaAppSduiSponsoredTwoByOneTile = SharedFlagsModule.FFlagLuaAppSduiSponsoredTwoByOneTile
 local FFlagLuaAppEnableReportExperience = SharedFlagsModule.FFlagLuaAppEnableReportExperience
 local ResolveGameTileThumbnailUri = if FFlagLuaAppHomeThumbnailPrefetch then GameTileModule.resolveGameTileThumbnailUri else nil
@@ -88,7 +83,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: UseNavigateToGameDetailsFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), AppSessionService (copy), UseLocalizationFunction (copy), config (copy), UseTokensFunction (copy), ResponsiveModule (copy), LuaAppTwoByOneTileSmallScreenBreakpoint (copy), ButtonSize (copy), ReactModule (copy), GetTextSizeFunction (copy), LuaAppTwoByOneTileLogoHeightPercentLandscapeRatio (copy), LuaAppTwoByOneTileLogoHeightPercentSquareRatio (copy), UseValidTileBadgesFunction (copy), UseTriggerFeedbackFunction (copy), UseOverflowMenuOpenFunction (copy), UseIsHoveredTileFunction (copy), FFlagLuaAppSduiSponsoredTwoByOneTile (copy), SponsoredGamesRecordClickFunction (copy), GameCollectionItemTypes (copy), TwoByOneGameTileTelemetry (copy), GetAvailableGameTileOverflowMenuItemsFunction (copy), FFlagLuaAppEnableReportExperience (copy), TileLongPress (copy), GetOverflowMenuSignalStoreFunction (copy), SetGamePlaySessionFunction (copy), SessionType (copy), HoverTileCoordinator (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy), UsePlayButtonStateFunction (copy), UseOnPlayButtonCallbackFunction (copy), FFlagMigrateGameInfoToStore (copy), UseSelectorFunction (copy), GameInfosReducer (copy), FFlagLuaAppHomeThumbnailPrefetch (copy), ResolveGameTileThumbnailUri (copy), FormatExperienceThumbnailFunction (copy), GetGameTileLayoutDataFunction (copy), ItemLayoutDataParsingUtils (copy), ImpressionsTagUtility (copy), UseTagAsViewportAutoplayCandidateFunction (copy), FFlagLuaAppTileVideoCandidateOnly (copy), UseTagAsSponsoredAdViewabilityCandidateFunction (copy), HiddenTileContent (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), LuaAppTwoByOneTileGradientWidthPercentRatio (copy), _Color3 (copy), LuaAppTwoByOneTileGradientStartOpacityPercentRatio (copy), LuaAppTwoByOneTileGradientEndOpacityPercentRatio (copy), _Color3_1 (copy), GameTileThumbnailBadges (copy), FFlagLuaAppSponsoredTileBadgeContentPaddingModule (copy), Image (copy), NormalizeFontFaceFunction (copy), PlayButton (copy), SpanTileOverflowMenuModule (copy)
+	-- upvalues: UseNavigateToGameDetailsFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), AppSessionService (copy), UseLocalizationFunction (copy), config (copy), UseTokensFunction (copy), ResponsiveModule (copy), LuaAppTwoByOneTileSmallScreenBreakpoint (copy), ButtonSize (copy), ReactModule (copy), GetTextSizeFunction (copy), LuaAppTwoByOneTileLogoHeightPercentLandscapeRatio (copy), LuaAppTwoByOneTileLogoHeightPercentSquareRatio (copy), UseValidTileBadgesFunction (copy), UseTriggerFeedbackFunction (copy), UseOverflowMenuOpenFunction (copy), UseIsHoveredTileFunction (copy), FFlagLuaAppSduiSponsoredTwoByOneTile (copy), SponsoredGamesRecordClickFunction (copy), GameCollectionItemTypes (copy), TwoByOneGameTileTelemetry (copy), GetAvailableGameTileOverflowMenuItemsFunction (copy), FFlagLuaAppEnableReportExperience (copy), TileLongPress (copy), GetOverflowMenuSignalStoreFunction (copy), SetGamePlaySessionFunction (copy), SessionType (copy), HoverTileCoordinator (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy), UsePlayButtonStateFunction (copy), UseOnPlayButtonCallbackFunction (copy), FFlagLuaAppHomeThumbnailPrefetch (copy), ResolveGameTileThumbnailUri (copy), FormatExperienceThumbnailFunction (copy), ImpressionsTagUtility (copy), UseTagAsViewportAutoplayCandidateFunction (copy), FFlagLuaAppTileVideoCandidateOnly (copy), UseTagAsSponsoredAdViewabilityCandidateFunction (copy), HiddenTileContent (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), LuaAppTwoByOneTileGradientWidthPercentRatio (copy), _Color3 (copy), LuaAppTwoByOneTileGradientStartOpacityPercentRatio (copy), LuaAppTwoByOneTileGradientEndOpacityPercentRatio (copy), _Color3_1 (copy), GameTileThumbnailBadges (copy), FFlagLuaAppSponsoredTileBadgeContentPaddingModule (copy), Image (copy), NormalizeFontFaceFunction (copy), PlayButton (copy), SpanTileOverflowMenuModule (copy)
 	local UseNavigateToGameDetailsResult = UseNavigateToGameDetailsFunction()
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(AppSessionService)
@@ -101,13 +96,13 @@ return function(p1)
 	local UseTokensResult = UseTokensFunction()
 	local _UDim = UDim.new(0, UseTokensResult.Radius.Medium)
 	local TitleSmall = nil
-	local XXSmall = nil
+	local TitleLarge = nil
 	local Medium = nil
 	local Small = nil
 	local Medium1 = nil
-	local TitleLarge = nil
 	local BodySmall = nil
 	local CaptionSmall = nil
+	local XXSmall = nil
 	local Size800 = nil
 	
 	if ResponsiveModule.useResponsive({
@@ -333,28 +328,14 @@ return function(p1)
 		UseResult9,
 		UseResult
 	})
-	local UseSelectorResult = if FFlagMigrateGameInfoToStore then nil else UseSelectorFunction(function(p2)
-		-- upvalues: GameInfosReducer (upval), UniverseId (copy)
-		return p2.Personalization[GameInfosReducer.key][UniverseId]
-	end)
-	local ResolveGameTileThumbnailUriResult = nil
-	
-	if FFlagLuaAppHomeThumbnailPrefetch then
-		ResolveGameTileThumbnailUriResult = ResolveGameTileThumbnailUri({
-			useGridTile = true,
-			isEmphasized = true,
-			placeId = PlaceId,
-			perEntryWideAssetId = if FFlagMigrateGameInfoToStore then p1.wideAssetId else p1.primaryWideImageAssetId,
-			game = if FFlagMigrateGameInfoToStore then nil else UseSelectorResult,
-			topicId = p1.topicId
-		})
-	elseif FFlagMigrateGameInfoToStore then
-		ResolveGameTileThumbnailUriResult = FormatExperienceThumbnailFunction(p1.wideAssetId, PlaceId, true)
-	else
-		local GameTileLayoutData = GetGameTileLayoutDataFunction(UseSelectorResult, p1.topicId)
-		ResolveGameTileThumbnailUriResult = FormatExperienceThumbnailFunction((if p1.primaryWideImageAssetId then p1.primaryWideImageAssetId else ItemLayoutDataParsingUtils.getWideImageAssetId(GameTileLayoutData)) or (UseSelectorResult and UseSelectorResult.primaryWideAssetId or nil), PlaceId, true)
-	end
-	local AgeRatingLabel = if FFlagMigrateGameInfoToStore then p1.ageRatingLabel else UseSelectorResult and UseSelectorResult.ageRecommendationDisplayName or nil
+	local ResolveGameTileThumbnailUriResult = if FFlagLuaAppHomeThumbnailPrefetch then ResolveGameTileThumbnailUri({
+		useGridTile = true,
+		isEmphasized = true,
+		placeId = PlaceId,
+		perEntryWideAssetId = p1.wideAssetId,
+		topicId = p1.topicId
+	}) else FormatExperienceThumbnailFunction(p1.wideAssetId, PlaceId, true)
+	local AgeRatingLabel = p1.ageRatingLabel
 	local UseRefResult2 = ReactModule.useRef(nil)
 	ReactModule.useEffect(function()
 		-- upvalues: ImpressionsTagUtility (upval), UseRefResult2 (copy), p1 (copy)

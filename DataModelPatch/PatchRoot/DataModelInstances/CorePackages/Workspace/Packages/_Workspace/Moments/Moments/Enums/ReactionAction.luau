@@ -1,1 +1,0 @@
-﻿return { React = "React", Switch = "Switch", Unreact = "Unreact" }

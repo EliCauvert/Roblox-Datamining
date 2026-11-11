@@ -199,7 +199,7 @@ Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,"Der Kopf-Cage folg
 Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,"{irrelevant_percent} % der geänderten Eckpunkte des äußeren Cages decken das Accessoire nicht ab. Bitte passe den Cage an, damit er besser an die Form des Accessoires angepasst ist."
 Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,"{cage_name} hat falsche UV-Werte. {incorrect_uv_count} falsche UVs ({unreferenced_vertex_count} nicht referenziert, {non_template_uv_count} nicht zur Vorlage gehörend, {duplicate_mapping_count} doppelte Zuordnungen), {unmatched_template_count} nicht übereinstimmende Vorlagen-Eckpunkte."
 Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,{partName} hat {degenerate_triangle_percent} % degenerierte Dreiecke.
-Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,"Der dynamische Kopf weist Probleme mit der Qualität des Gesichtsausdrucks auf. Linkes Auge geschlossen: {left_eye_close}, rechtes Auge geschlossen: {right_eye_close}, Mund geöffnet: {mouth_open}, fröhlich: {is_happy}, traurig: {is_sad}."
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,"Der dynamische Kopf weist Probleme mit der Qualität des Gesichtsausdrucks auf. Linkes Auge auf dem Bildschirm (rote Punkte auf der linken Seite des Kopfes im Visualisierungs-Plug-in) geschlossen: {left_eye_close}, rechtes Auge auf dem Bildschirm (blaue Punkte auf der rechten Seite des Kopfes im Visualisierungs-Plug-in) geschlossen: {right_eye_close}, Mund geöffnet (grüne Punkte im Visualisierungs-Plug-in): {mouth_open}, fröhlich: {is_happy}, traurig: {is_sad}."
 Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"Unerwartete Gelenkkonfiguration. Gelenke insgesamt: {joint_number}, Gelenke in der linken Hand: {left_hand_joint_number}, Gelenke in der rechten Hand: {right_hand_joint_number}."
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,"{partName} enthält {num_small_volume_islands} kleine, nicht verbundene Mesh-Inseln von insgesamt {num_disconnected_components} Komponenten. Bitte entferne die schwebende Geometrie."
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,"{partName} hat eine nicht-mannigfaltige Geometrie. Bitte überprüfe, ob nicht-ebene Flächen, sich selbst schneidende Flächen oder Kanten vorhanden sind, die von mehr als zwei Flächen gemeinsam genutzt werden."
@@ -315,9 +315,9 @@ Common.UGCValidation.ErrorLabel.DynHead_JointAccumulatedExceeded,"Gesichtsanimat
 Common.UGCValidation.ErrorLabel.DynHead_JointBoundsCheckFailed,Die Verbindungsgrenzen der Gesichtsanimation konnten nicht validiert werden. Bitte versuche es später erneut.
 Common.UGCValidation.ErrorLabel.DynHead_JointDirectExceeded,"Die Gesichtsanimation des Kopfes {actionName} führt dazu, dass Verbindungen erheblich über den Kopf hinaus bewegt werden. Bitte bearbeite deine Gesichtsanimationen und versuche es erneut."
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,"Dynamische Köpfe auf dem Marktplatz müssen ordnungsgemäß gecaged sein, damit die Augen- und Mundscheitelpunkte auf dem Cage mit den Mesh-Scheitelpunkten übereinstimmen. Bitte verbessere deine Cages und deren Ausrichtung mit dem Netz."
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,"Die Orientierungspunkte für das linken Auges des dynamischen Kopf-Cages sind nicht korrekt mit dem Mesh ausgerichtet. Passe den Augen-Cage so an, dass sich das Mesh des linken Auges innerhalb des projizierten Cage-Bereichs befindet."
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,"Die Orientierungspunkte für den Mund des dynamischen Kopf-Cages sind nicht korrekt mit dem Mesh ausgerichtet. Passe den Mund-Cage so an, dass sich das Mund-Mesh innerhalb des projizierten Cage-Bereichs befindet."
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,"Die Orientierungspunkte für das rechte Auge des dynamischen Kopf-Cages sind nicht korrekt mit dem Mesh ausgerichtet. Passe den Augen-Cage so an, dass sich das Mesh des rechten Auges innerhalb des projizierten Cage-Bereichs befindet."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,"Beim linken Auge auf dem Bildschirm (rote Punkte auf der linken Seite des Kopfes im Visualisierungs-Plug-in) sind die Cage-Orientierungspunkte nicht korrekt mit dem Mesh ausgerichtet: Einige Cage-Punkte befinden sich innerhalb des Kopf-Meshes (das Mesh ragt durch den Cage) oder zu weit außerhalb davon. Passe den entsprechenden Cage so an, dass er auf dem Mesh oder knapp außerhalb des Meshes um dieses Auge liegt."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,"Beim Mund (grüne Punkte im Visualisierungs-Plug-in) sind die Cage-Orientierungspunkte nicht korrekt auf das Mesh ausgerichtet: Einige Cage-Punkte befinden sich innerhalb des Kopf-Meshes (das Mesh ragt durch den Cage) oder zu weit außerhalb davon. Passe den Mund-Cage so an, dass er auf dem Mesh oder knapp außerhalb des Meshes um den Mund liegt."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,"Beim rechten Auge auf dem Bildschirm (blaue Punkte auf der rechten Seite des Kopfes im Visualisierungs-Plug-in) sind die Cage-Orientierungspunkte nicht korrekt auf das Mesh ausgerichtet: Einige Cage-Punkte befinden sich innerhalb des Kopf-Meshes (das Mesh ragt durch den Cage) oder zu weit außerhalb davon. Passe den entsprechenden Cage so an, dass er auf dem Mesh oder knapp außerhalb des Meshes um dieses Auge liegt."
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,"Der Ausdruck ""Lächeln"" für den dynamischen Kopf kann nicht erkannt werden. Bitte passe die Cage-Orientierungspunkte für den Mund so an, dass sie mit der Position des Mundes auf dem Kopf übereinstimmen, und stelle sicher, dass er den Ausdruck ""Lächeln"" zeigen kann."
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,"Der Ausdruck ""Linkes Auge geschlossen"" kann für den dynamischen Kopf nicht erkannt werden. Bitte passe die Cage-Orientierungspunkte für das linke Auge so an, dass sie mit der Position des linken Auges auf dem Kopf übereinstimmen, und stelle sicher, dass es geschlossen werden kann."
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,Für dynamische Köpfe auf dem Marktplatz sind keine Kopf-Cages angegeben. Bitte erstelle einen Kopf-Cage für den dynamischen Kopf.
@@ -343,9 +343,9 @@ Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,Die Eigenschaft
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,Dem Basisgesicht fehlen die erforderlichen Augenmerkmale. Füge dem Basisgesicht Augen hinzu und versuche es erneut.
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,Dem Basisgesicht fehlt ein erforderlicher Mund. Füge dem Basisgesicht einen Mund hinzu und versuche es erneut.
 Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,"Der fröhliche Gesichtsausdruck kann nicht erkannt werden. Passe den Cage des Mundes oder das FACS für den fröhlichen Gesichtsausdruck an, damit sich das projizierte Mund-Mesh wie erwartet verformt."
-Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,"Der Gesichtsausdruck ""Linkes Auge geschlossen"" kann nicht erkannt werden. Passe den Cage des linken Auges oder das FACS für das Schließen des linken Auges an, damit sich das projizierte Augen-Mesh wie erwartet verformt."
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,Das linke Auge auf dem Bildschirm (rote Punkte auf der linken Seite des Kopfes im Visualisierungs-Plug-in) schließt nicht ausreichend. Überprüfe die FACS-Steuerungen für das rechte Auge und den entsprechenden Cage.
 Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,"Der Ausdruck ""Mund geöffnet"" kann nicht erkannt werden. Passe den Cage des Mundes oder das FACS für den geöffneten Mund an, damit sich das projizierte Mund-Mesh wie erwartet verformt."
-Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,"Der Gesichtsausdruck ""Rechtes Auge geschlossen"" kann nicht erkannt werden. Passe den Cage des rechten Auges oder das FACS für das Schließen des rechten Auges an, damit sich das projizierte Augen-Mesh wie erwartet verformt."
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,Das rechte Auge auf dem Bildschirm (blaue Punkte auf der rechten Seite des Kopfes im Visualisierungs-Plug-in) schließt nicht ausreichend. Überprüfe die FACS-Steuerungen für das linke Auge und den entsprechenden Cage.
 Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,"Der traurige Gesichtsausdruck kann nicht erkannt werden. Passe den Cage des Mundes oder das FACS für den traurigen Gesichtsausdruck an, damit sich das projizierte Mund-Mesh wie erwartet verformt."
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Wir haben festgestellt, dass FACS deinen Kopf auf {modPercent} % vergrößert hat. Die Änderung des Kopfes verstößt jedoch gegen die Marktplatzrichtlinien für Gesichtsanimationen."
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Dynamische Köpfe dürfen höchstens {maxFacsJointCount} FACS-Gelenke haben, aber dieser Kopf hat {actualJointCount}. Bitte reduziere die Anzahl der FACS-Gelenke und versuche es erneut."
@@ -414,6 +414,11 @@ Common.UGCValidation.ErrorLabel.MeasureMeshOutsideOuterCage,"{mesh_outside_outer
 Common.UGCValidation.ErrorLabel.MeshGeometry_ExceedsBounds,"{meshName} ist größer ist als die maximal zulässige Begrenzungsgröße. Die maximale Größe für den Typ {assetTypeName} beträgt [{maxSizeX}, {maxSizeY}, {maxSizeZ}]."
 Common.UGCValidation.ErrorLabel.MeshGeometry_NotCentered,"{meshName}.{fieldName} hat Mesh-Daten, die nicht zentriert sind. Bitte importiere dieses Mesh erneut mit dem Roblox-3D-Importer und stelle sicher, dass sich keine lose Geometrie in der Quelldatei befindet."
 Common.UGCValidation.ErrorLabel.MeshGeometry_PositionOutOfBounds,Die Position liegt außerhalb der Grenzen.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleAboveMaximum,"{meshName} wird auf das {scaleMultiple}-fache seiner ursprünglichen Mesh-Größe vergrößert. Das Maximum beträgt das {maxScaleMultiple}-fache. Exportiere oder importiere das Mesh erneut in der gewünschten Größe, anstatt es in Studio zu vergrößern."
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleBelowMinimum,"{meshName} wird auf {scalePercent} % seiner ursprünglichen Mesh-Größe verkleinert. Der Mindestwert beträgt {minScalePercent} %. Exportiere oder importiere das Mesh erneut in der gewünschten Größe, anstatt es in Studio zu verkleinern."
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleNotPositive,"{meshName} hat eine Skalierung von Null oder eine negative Skalierung. Verwende positive Skalierungswerte. Um ein Mesh zu spiegeln, drehe es in deiner 3D-Modellierungssoftware um und exportiere es erneut."
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooLarge,Die Mesh-Skalierung von {meshName} ist zu groß.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooSmall,Die Mesh-Skalierung ist zu klein.
 Common.UGCValidation.ErrorLabel.MeshGeometry_SurfaceAreaExceeded,Die Gesamtoberfläche des Modell-Meshs “{meshName}” beträgt {surfaceArea}. Sie darf nicht größer sein als {maxSurfaceArea}. Du musst die Anzahl und/oder die Größe aller Dreiecke reduzieren.
 Common.UGCValidation.ErrorLabel.MeshGeometry_TotalTriangleCountExceeded,"Die Mesh-Auflösung von “{triangleCount}” für “{assetTypeName}” ist höher als die maximal unterstützte Anzahl von Dreiecken ({maxTriangles}). Du musst die Topologie deines Modells neu erstellen, um die Anzahl der Dreiecke zu reduzieren."
 Common.UGCValidation.ErrorLabel.MeshGeometry_TriangleCountExceeded,Die Auflösung des Modell-Meshs {meshName} von {triangleCount} ist höher als der maximal unterstützte Wert von {maxTriangles}. Du musst die Topologie deines Modells neu erstellen und es erneut versuchen.
@@ -1402,6 +1407,7 @@ Feature.AddFriends.Action.FriendAdded,Freund hinzugefügt
 Feature.AddFriends.Action.IgnoreFriendRequest,Anfrage ignorieren
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Anfrage zum Hinzufügen als vertrauter Freund ignorieren
 Feature.AddFriends.Action.RequestIgnored,Anfrage ignoriert
+Feature.AddFriends.Heading.AddFriends,Freunde hinzufügen
 Feature.AddFriends.Label.AddFriendsTooltip,"Finde deine Freunde, damit ihr Roblox zusammen erkunden könnt."
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,"Finde Leute auf Roblox, indem du ihren Benutzernamen oder Namen eingibst."
 Feature.AddFriends.Label.ConnectWithContacts,"Lade Kontakte ein oder verbinde dich mit Freunden, die schon auf Roblox sind!"
@@ -1795,6 +1801,8 @@ Feature.Avatar.Label.Shoes,Schuhe
 Feature.Avatar.Label.Shorts,Shorts
 Feature.Avatar.Label.Shoulder,Schultern
 Feature.Avatar.Label.Skin,Haut
+Feature.Avatar.Label.Spawn,Spawn
+Feature.Avatar.Label.SpawnEffects,Spawn-Effekte
 Feature.Avatar.Label.Sweater,Pullover
 Feature.Avatar.Label.Sweaters,
 Feature.Avatar.Label.Swim,Schwimmen
@@ -2017,7 +2025,10 @@ Feature.AvatarSwitcher.Message.SelectAvatar,Wähle einen Avatar
 Feature.AvatarSwitcher.Message.SwitchingDeferred,"Du siehst diesen Avatar nach deinem nächsten Respawn oder, wenn du einer Experience beitrittst. Du kannst jederzeit zu einem anderen Avatar wechseln."
 Feature.AvatarSwitcher.Message.UnknownSupport,"Du kannst deinen Avatar zwar wechseln, aber er wird in dieser Experience möglicherweise nicht korrekt angezeigt."
 Feature.AvatarSwitcher.Message.Unsupported,Diese Experience verwendet einen benutzerdefinierten Avatar und unterstützt keine Roblox-Avatare.
+Feature.AvatarWorkshop.Action.EditAvatar,Avatar bearbeiten
 Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Heading.Customize,Anpassen
+Feature.AvatarWorkshop.Heading.YourAvatars,Deine Avatare
 Feature.AvatarWorkshop.Message.LoadItemsError,Beim Laden deiner Artikel ist etwas schiefgelaufen.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,Es konnten keine weiteren Artikel geladen werden.
 Feature.AvatarWorkshop.Message.NoItemsOwned,Du besitzt hier noch keine Artikel.
@@ -2336,6 +2347,7 @@ Feature.Build.Label.ManagedPricingMixed,Gemischt über aktuelle Produkte
 Feature.Build.Label.MaximizeForGamePlays,Für maximale Spielaufrufe optimieren
 Feature.Build.Label.ModelUnavailable,Modell nicht verfügbar
 Feature.Build.Label.Models3D,3D-Modelle
+Feature.Build.Label.MonetizationCreateTitle,{NAME} – {PRICE} Robux
 Feature.Build.Label.MyGames,Meine Spiele
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,Kein Limit
@@ -2700,7 +2712,7 @@ Feature.Catalog.Action.CheckoutPlural,Bezahlung ansehen ({count})
 Feature.Catalog.Action.CheckoutSingular,1 Artikel bezahlen
 Feature.Catalog.Action.CloseDetails,Infos schließen
 Feature.Catalog.Action.CopyLink,Link kopieren
-Feature.Catalog.Action.Customize,Anpassen
+Feature.Catalog.Action.Customize,
 Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,Avatar löschen
 Feature.Catalog.Action.DescribeAvatar,Beschreibe deinen Avatar (optional)
@@ -3173,7 +3185,6 @@ Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} hat gesagt …
 Feature.Chat.Label.ReplyingToYourself,Du hast gesagt …
 Feature.Chat.Label.SearchFriends,Suche nach Freunden
 Feature.Chat.Label.SearchWord,
-Feature.Chat.Label.SnoozeChatNotifications,Chat-Benachrichtigungen in Experiences stummschalten:
 Feature.Chat.Label.SnoozePartyNotifications,In-Experience Party-Benachrichtigungen stummschalten für:
 Feature.Chat.Label.SwipeToReplyTooltip,Zum Antworten wischen
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} Tag(e)
@@ -3229,7 +3240,6 @@ Feature.Chat.Response.NetworkError,Netzwerkfehler
 Feature.Chat.RobloxConnectUnavailableWithUser,Derzeit ist Roblox Connect für diesen Benutzer nicht verfügbar.
 Feature.Chat.Text.NoFriends,"Du hast noch keine Freunde hinzugefügt. Um loszulegen, finde deine Freunde auf Roblox und füge sie hinzu."
 Feature.Chat.Title.FriendsChat,Freunde-Chat
-Feature.Chat.Title.MuteChatNotifications,Chat-Benachrichtigungen von Freunden während des Spiels stummschalten
 Feature.Chat.Title.NewChat,Neuer Chat
 Feature.Chat.Toast.Error.InvalidUserSelected,Eine oder mehrere Personen in dieser Liste können nicht hinzugefügt werden
 Feature.ContactUpsell.Action.Continue,
@@ -3376,8 +3386,10 @@ Feature.FaceChat.Subtitle.VideoPerformancePromptDisable,Das Ausschalten deiner K
 Feature.FaceChat.Subtitle.VideoUnsupported,Roblox kann deine Kamera nicht für die Animation deines Avatars verwenden.
 Feature.Favorites.Label.Favorite,
 Feature.FlyoutSidePanel.Action.ContinuePlaying,Weiterspielen
+Feature.FlyoutSidePanel.Description.SwitchAccountsHere,Du kannst jetzt hier zwischen Konten wechseln.
 Feature.FlyoutSidePanel.Label.TooltipBody,"Dein Profil, deine Inhalte und deine Einstellungen wurden an einen neuen Ort verschoben."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> wurde verschoben
+Feature.FlyoutSidePanel.Title.AccountSwitcherMoved,Kontowechsler verschoben
 Feature.Friends.Action.AcceptFriend,
 Feature.Friends.Action.AccountDeleted,Konto gelöscht
 Feature.Friends.Action.Add,
@@ -3766,6 +3778,7 @@ Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Endet in {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,Kostenlose Testversion
 Feature.InExperienceShop.Label.HaveTrial,Deine kostenlose Testversion
+Feature.InExperienceShop.Label.KeepIt,
 Feature.InExperienceShop.Label.NoDescription,Keine Beschreibung
 Feature.InExperienceShop.Label.OfferEndTime,{offer} endet in {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,Dies ist eine Vorschau deines Shops in Roblox Studio. Spieler sehen diese Vorschau nicht.
@@ -3927,6 +3940,7 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,Fotos
 Feature.Moments.Label.PostDeleted,Moment gelöscht
 Feature.Moments.Label.PostRemovedBody,"Der Moment, den du gepostet hast, verstößt gegen unsere Community-Regeln."
+Feature.Moments.Label.PostedOnDate,Gepostet am {date}
 Feature.Moments.Label.PublishingRodeoBody,Dies sollte nicht allzu lange dauern.
 Feature.Moments.Label.Reactions,Reaktionen
 Feature.Moments.Label.ReportReason.BreaksRules,Dieser Post verstößt gegen die Regeln
@@ -4109,7 +4123,7 @@ Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,Profillink kopieren
 Feature.Profile.Action.CreateInBuild,In Build erstellen
 Feature.Profile.Action.EditAppearance,Aussehen bearbeiten
-Feature.Profile.Action.EditAvatar,Avatar bearbeiten
+Feature.Profile.Action.EditAvatar,
 Feature.Profile.Action.EditBackground,Hintergrund bearbeiten
 Feature.Profile.Action.EditEmotes,Emotes bearbeiten
 Feature.Profile.Action.EditLook,Look bearbeiten
@@ -5367,7 +5381,9 @@ Notifications.SquadRegroupPrompt.ToastAction.Join,
 Notifications.SquadRegroupPrompt.ToastLabel.ContinuePlayingTogether,Spielt gemeinsam weiter
 Notifications.SquadRegroupPrompt.ToastLabel.JoinANewServer,Tritt einem neuen Server bei
 Notifications.ToastNotifications.Label.LeaveExperienceConfirmation,"Bist du sicher, dass du diese Experience verlassen und eine anderen betreten möchtest?"
+Notifications.ToastNotifications.Label.LeaveServerConfirmation,"Bist du sicher, dass du diesen Server verlassen und einem anderen Server beitreten möchtest?"
 Notifications.ToastNotifications.Title.LeavingExperience,Du verlässt die Experience
+Notifications.ToastNotifications.Title.LeavingServer,Server wird verlassen
 PlayerFeedbacks.VoteForm.Message.Action.Report,
 PlayerFeedbacks.VoteForm.Message.MaxLengthCharacters,Verwende weniger als {count} Zeichen.
 PlayerFeedbacks.VoteForm.Message.MinLengthCharacters,Verwende mehr als {count} Zeichen.

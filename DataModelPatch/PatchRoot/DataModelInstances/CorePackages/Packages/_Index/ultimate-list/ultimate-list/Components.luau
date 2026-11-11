@@ -1,1 +1,0 @@
-﻿return { ScrollingFrame = require(script.ScrollingFrame) }

@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnableAbuseReportRevampFlow_1", false)

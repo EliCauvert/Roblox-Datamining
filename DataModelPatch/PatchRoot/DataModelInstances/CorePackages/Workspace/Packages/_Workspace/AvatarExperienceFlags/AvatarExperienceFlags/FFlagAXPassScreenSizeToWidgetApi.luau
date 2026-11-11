@@ -1,4 +1,0 @@
-﻿local FFlagAXUnifiedMarketplaceResultsFetcherModule = require(script.Parent.FFlagAXUnifiedMarketplaceResultsFetcher)
-local FFlagAXResetFetchMarketplaceLogicModule = require(script.Parent.FFlagAXResetFetchMarketplaceLogic)
-
-return require(script.Parent.FFlagAXRootRFYMigration) and (FFlagAXUnifiedMarketplaceResultsFetcherModule and (FFlagAXResetFetchMarketplaceLogicModule and game:DefineFastFlag("AXPassScreenSizeToWidgetApi5", false)))

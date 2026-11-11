@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AEGIS2UseGuacToShowEnabledMessage", false)

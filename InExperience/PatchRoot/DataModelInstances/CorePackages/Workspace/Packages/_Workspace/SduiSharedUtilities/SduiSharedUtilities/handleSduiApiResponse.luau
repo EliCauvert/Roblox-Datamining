@@ -230,7 +230,7 @@ return function(p2)
 					end
 					continue
 				end
-				local Success3, Result3 = pcall(function()
+				local Success4, Result4 = pcall(function()
 					-- upvalues: CreateBuilderConfigFunction (upval), SurfaceKey (copy), ConfigCacheKey (copy), EnableTemplateCache (copy), resolveTemplateForRobloxComponent (copy), t (ref), FFlagSduiErrorPaths (upval), getTemplateIdForRCT (copy), FFlagSduiSharedLocalizedLiterals (upval), ParseLocalizedLiteralsFromResponseResult (copy), getLocalizedLiteral (upval), GetSduiClientBindingBuilderFunction (upval), ResolveTemplateForRobloxComponentResult (copy), FFlagLuaAppSduiHomePageSupport (upval), value (copy), InputDataSignalsForRequest (ref), RobloxComponentType (copy), Identifier (copy)
 					return (GetSduiClientBindingBuilderFunction().buildConfigForComponent(ResolveTemplateForRobloxComponentResult, if FFlagLuaAppSduiHomePageSupport and value.componentInputDataGetter then value.componentInputDataGetter else InputDataSignalsForRequest.get, CreateBuilderConfigFunction({
 						appPage = SurfaceKey,
@@ -246,7 +246,7 @@ return function(p2)
 					}), nil, nil, nil, nil, if FFlagSduiErrorPaths then RobloxComponentType else nil, if FFlagSduiErrorPaths then Identifier else nil))
 				end)
 				
-				if Success3 then
+				if Success4 then
 					if FFlagSduiFreshInputDataSignalOnRebuild and SetInputDataSignalsForRequestFunction then
 						if v2 == nil then
 							v2 = {}
@@ -260,12 +260,12 @@ return function(p2)
 						}
 						
 						if FFlagSduiErrorPaths then
-							AddSduiErrorContextFieldsFunction(config1, Result3 and Result3.errorContext)
+							AddSduiErrorContextFieldsFunction(config1, Result4 and Result4.errorContext)
 						end
 						SduiLogger.reportError(SduiErrors.SduiErrorType.DuplicateOrMissingIdentifier, config1, SurfaceKey)
 					end
 					t1[Text] = {
-						config = Result3,
+						config = Result4,
 						dataUpdatedTimestamp = os.clock(),
 						identifier = if FFlagEnableSduiV2HomepagePrompts or FFlagPromptsHandlerEnabled then Identifier else nil,
 						robloxComponentType = if FFlagEnableSduiV2HomepagePrompts or FFlagPromptsHandlerEnabled then RobloxComponentType else nil,
@@ -273,7 +273,7 @@ return function(p2)
 						surfacing = value.surfacing
 					}
 				else
-					local config = { name = RobloxComponentType, message = `{Result3}` }
+					local config = { name = RobloxComponentType, message = `{Result4}` }
 					
 					if FFlagSduiErrorPaths then
 						AddSduiErrorContextFieldsFunction(config, (createErrorContextForRCT(RobloxComponentType, value)))
@@ -318,7 +318,7 @@ return function(p2)
 			t1[Text].nextPagePostBody = if NextPagePostBody then NextPagePostBody else CryoModule.None
 		end
 	end
-	if FFlagSduiFreshInputDataSignalOnRebuild and SetInputDataSignalsForRequestFunction and v2 then
+	if FFlagSduiFreshInputDataSignalOnRebuild and (SetInputDataSignalsForRequestFunction and v2) then
 		for i, value1 in v2 do
 			SetInputDataSignalsForRequestFunction(ConfigCacheKey, i, value1)
 		end
@@ -358,7 +358,7 @@ return function(p2)
 	end
 	
 	LoadTimer.logSduiClientHintsBegin()
-	local Success4, Result4 = pcall(function()
+	local Success3, Result3 = pcall(function()
 		-- upvalues: ProcessClientHintsModule (upval), ParsePageEntriesFromResponseResult (copy), getTemplateForRobloxComponent (copy), getKnownTemplates (copy)
 		ProcessClientHintsModule({
 			pageEntries = ParsePageEntriesFromResponseResult,
@@ -368,8 +368,8 @@ return function(p2)
 	end)
 	LoadTimer.logSduiClientHintsEnd()
 	
-	if not Success4 then
-		SduiLogger.reportError(SduiErrors.SduiErrorType.FailedToProcessClientHints, { name = ConfigCacheKey, message = Result4 }, SurfaceKey)
+	if not Success3 then
+		SduiLogger.reportError(SduiErrors.SduiErrorType.FailedToProcessClientHints, { name = ConfigCacheKey, message = Result3 }, SurfaceKey)
 	end
 	return t1, Result
 end

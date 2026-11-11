@@ -1,1 +1,0 @@
-﻿return game:DefineFastString("PreviousFriendRequestsCountEngineFeature2", "PreviousFriendRequestsCountStorageKeyV3")

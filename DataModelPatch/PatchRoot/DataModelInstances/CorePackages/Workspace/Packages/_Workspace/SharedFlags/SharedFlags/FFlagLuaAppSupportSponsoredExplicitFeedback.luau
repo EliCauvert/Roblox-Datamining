@@ -1,3 +1,0 @@
-﻿local FFlagLuaAppEnableWhyThisAdModalModule = require(script.Parent.FFlagLuaAppEnableWhyThisAdModal)
-
-return game:DefineFastFlag("LuaAppSupportSponsoredExplicitFeedback2", false) and FFlagLuaAppEnableWhyThisAdModalModule

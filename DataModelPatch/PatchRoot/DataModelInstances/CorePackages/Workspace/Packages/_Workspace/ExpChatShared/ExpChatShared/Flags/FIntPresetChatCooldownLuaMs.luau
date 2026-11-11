@@ -1,1 +1,0 @@
-﻿return game:DefineFastInt("PresetChatCooldownLuaMs", 10000)

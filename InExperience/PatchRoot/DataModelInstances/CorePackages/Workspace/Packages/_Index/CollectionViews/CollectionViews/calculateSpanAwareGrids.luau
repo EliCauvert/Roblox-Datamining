@@ -180,12 +180,12 @@ local function processOneGrid(p1, NextStartIndex, PendingSpanTiles, ItemsPerRow:
 				return false
 			else
 				if FFlagLuaAppEnableNxMRoduxApportioning or p2 then
-					local NewNewFloored = nil
-					local NewNewNextFreePositionResult = nil
-					for i3 = 0, RowSpan - 1 do
-						for i = 0, ColSpan - 1 do
-							NewNewFloored = NewFloored + i3
-							NewNewNextFreePositionResult = NewNextFreePositionResult + i
+					for i = 0, RowSpan - 1 do
+						local NewNewFloored = nil
+						local NewNewNextFreePositionResult = nil
+						for i1 = 0, ColSpan - 1 do
+							NewNewFloored = NewFloored + i
+							NewNewNextFreePositionResult = NewNextFreePositionResult + i1
 							
 							if not t[NewNewFloored] or t[NewNewFloored][NewNewNextFreePositionResult] == nil then
 								continue
@@ -212,8 +212,8 @@ local function processOneGrid(p1, NextStartIndex, PendingSpanTiles, ItemsPerRow:
 				end
 				if FFlagLuaAppEnableNxMRoduxApportioning or p2 then
 					for i2 = 0, RowSpan - 1 do
-						for i1 = 0, ColSpan - 1 do
-							writeLayoutCell(NewFloored + i2, NewNextFreePositionResult + i1, -1)
+						for i3 = 0, ColSpan - 1 do
+							writeLayoutCell(NewFloored + i2, NewNextFreePositionResult + i3, -1)
 						end
 					end
 					writeLayoutCell(NewFloored, NewNextFreePositionResult, OriginalIndex)

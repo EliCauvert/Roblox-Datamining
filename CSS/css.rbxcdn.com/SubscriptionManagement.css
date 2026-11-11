@@ -914,6 +914,10 @@
     width: 540px
 }
 
+.light-theme .subscription-update-payment-method .modal-dialog.foundation-web-dialog-content {
+    overflow: visible
+}
+
 @media (max-width:480px) {
     .light-theme .subscription-update-payment-method .modal-dialog {
         width: 100vw
@@ -955,7 +959,7 @@
     padding: 24px;
     display: -ms-flexbox;
     display: flex;
-    overflow-x: hidden
+    overflow: visible
 }
 
 .light-theme .subscription-update-payment-method .modal-dialog .modal-content .modal-body .expiry-input {
@@ -973,16 +977,10 @@
 }
 
 .light-theme .subscription-update-payment-method .modal-dialog .modal-content .modal-body .custom-select {
-    width: 490px;
+    width: 100%;
     margin-top: 12px;
     margin-bottom: 12px;
     position: relative
-}
-
-@media (max-width:767px) {
-    .light-theme .subscription-update-payment-method .modal-dialog .modal-content .modal-body .custom-select {
-        width: 320px
-    }
 }
 
 .light-theme .subscription-update-payment-method .modal-dialog .modal-content .modal-body .custom-select .select-button {
@@ -1012,14 +1010,17 @@
 }
 
 .light-theme .subscription-update-payment-method .modal-dialog .modal-content .modal-body .custom-select .select-dropdown {
-    width: inherit;
     background-color: var(--color-surface-0);
     z-index: 2;
     border-radius: 0 0 5px 5px;
+    width: auto;
     max-height: 0;
     list-style: none;
     transition: max-height .25s ease-in-out;
-    position: fixed;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
     overflow-y: hidden
 }
 
@@ -1152,6 +1153,10 @@
     width: 540px
 }
 
+.dark-theme .subscription-update-payment-method .modal-dialog.foundation-web-dialog-content {
+    overflow: visible
+}
+
 @media (max-width:480px) {
     .dark-theme .subscription-update-payment-method .modal-dialog {
         width: 100vw
@@ -1193,7 +1198,7 @@
     padding: 24px;
     display: -ms-flexbox;
     display: flex;
-    overflow-x: hidden
+    overflow: visible
 }
 
 .dark-theme .subscription-update-payment-method .modal-dialog .modal-content .modal-body .expiry-input {
@@ -1211,16 +1216,10 @@
 }
 
 .dark-theme .subscription-update-payment-method .modal-dialog .modal-content .modal-body .custom-select {
-    width: 490px;
+    width: 100%;
     margin-top: 12px;
     margin-bottom: 12px;
     position: relative
-}
-
-@media (max-width:767px) {
-    .dark-theme .subscription-update-payment-method .modal-dialog .modal-content .modal-body .custom-select {
-        width: 320px
-    }
 }
 
 .dark-theme .subscription-update-payment-method .modal-dialog .modal-content .modal-body .custom-select .select-button {
@@ -1250,14 +1249,17 @@
 }
 
 .dark-theme .subscription-update-payment-method .modal-dialog .modal-content .modal-body .custom-select .select-dropdown {
-    width: inherit;
     background-color: var(--color-surface-0);
     z-index: 2;
     border-radius: 0 0 5px 5px;
+    width: auto;
     max-height: 0;
     list-style: none;
     transition: max-height .25s ease-in-out;
-    position: fixed;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
     overflow-y: hidden
 }
 

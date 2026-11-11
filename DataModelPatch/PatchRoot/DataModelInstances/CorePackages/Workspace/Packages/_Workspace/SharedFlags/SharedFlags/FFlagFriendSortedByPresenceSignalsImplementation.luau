@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("FriendSortedByPresenceSignalsImplementation_v2", false)

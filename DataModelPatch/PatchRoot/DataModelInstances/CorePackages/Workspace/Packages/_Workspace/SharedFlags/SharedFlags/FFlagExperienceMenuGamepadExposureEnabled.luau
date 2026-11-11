@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("ExperienceMenuGamepadExposureEnabled684", false)

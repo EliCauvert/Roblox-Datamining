@@ -14,7 +14,6 @@ local FFlagLuaAppFixDetailsPageThumbnailRenderInPhone = require(Parent.SharedFla
 local LuaAppBottomAlignDetailsHeaderInfoFrame = game:DefineFastFlag("LuaAppBottomAlignDetailsHeaderInfoFrame", false)
 local FFlagUIBloxEnableActionBarButtonOverride = require(Parent.SharedFlags).UIBlox.FFlagUIBloxEnableActionBarButtonOverride
 local FFlagUIBloxAddTestIdToActionBar = require(Parent.SharedFlags).UIBlox.FFlagUIBloxAddTestIdToActionBar
-local FFlagFixDetailsPageIconShadowSlicing = game:DefineFastFlag("FFlagFixDetailsPageIconShadowSlicing", false)
 local DetailsPageHeader = RoactModule.PureComponent:extend("DetailsPageHeader")
 DetailsPageHeader.defaultProps = {
 	thumbnailHeight = 200,
@@ -52,7 +51,7 @@ function DetailsPageHeader.init(p1)
 end
 
 function DetailsPageHeader.renderThumbnail(p1, p2, ThumbnailShadowHeight: number, XOffset, YOffset)
-	-- upvalues: RoactModule (copy), LoadableImage (copy), ImageSetLabel (copy), Images (copy), FFlagFixDetailsPageIconShadowSlicing (copy)
+	-- upvalues: RoactModule (copy), LoadableImage (copy), ImageSetLabel (copy), Images (copy)
 	return RoactModule.createElement("Frame", {
 		LayoutOrder = 1,
 		BackgroundTransparency = 1,
@@ -73,7 +72,7 @@ function DetailsPageHeader.renderThumbnail(p1, p2, ThumbnailShadowHeight: number
 			ImageColor3 = p2.Theme.DropShadow.Color,
 			ImageTransparency = p2.Theme.DropShadow.Transparency,
 			ScaleType = Enum.ScaleType.Slice,
-			SliceCenter = if FFlagFixDetailsPageIconShadowSlicing then Rect.new(32, 0, 33, 1) else Rect.new(32, 0, 33, 28)
+			SliceCenter = Rect.new(32, 0, 33, 1)
 		}) else nil
 	})
 end

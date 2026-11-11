@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("PasskeySilentUpgradeEnabled5", false)

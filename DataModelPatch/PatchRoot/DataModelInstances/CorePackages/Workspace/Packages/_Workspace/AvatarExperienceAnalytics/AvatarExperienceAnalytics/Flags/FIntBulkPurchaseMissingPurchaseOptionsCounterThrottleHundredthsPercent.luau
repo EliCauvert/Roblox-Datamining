@@ -1,5 +1,0 @@
-﻿game:DefineFastInt("BulkPurchaseMissingPurchaseOptionsCounterThrottleHundredthsPercent", 100)
-
-return function()
-	return game:GetFastInt("BulkPurchaseMissingPurchaseOptionsCounterThrottleHundredthsPercent")
-end

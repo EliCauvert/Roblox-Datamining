@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("ProfilePlatform").Parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Dictionary.getDeepValue

@@ -154,7 +154,7 @@ local MemoResult1 = ReactModule.memo(function(p1)
 				}))
 			end
 		end
-	elseif GameStats and GameStatsCount and (GameStatsCount > 0 and PlayerStats and PlayerStatsCount and PlayerStatsCount >= 0) then
+	elseif GameStats and GameStatsCount and GameStatsCount > 0 and PlayerStats and PlayerStatsCount and PlayerStatsCount >= 0 then
 		GameStats.iterateData(function(StatName, p2)
 			-- upvalues: MaxLeaderstats (copy), PlayerStats (copy), Elements (copy), ReactModule (upval), StatEntryContainerModule (upval), CryoModule (upval), config2 (copy)
 			if MaxLeaderstats >= p2.order(false) then

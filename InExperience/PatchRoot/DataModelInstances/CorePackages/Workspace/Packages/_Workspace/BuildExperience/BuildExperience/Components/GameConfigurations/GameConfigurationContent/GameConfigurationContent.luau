@@ -28,6 +28,8 @@ local GetPrivatePlaytestersStoreFunction = require(Parent.DataHydration.PrivateP
 local FFlagBuildExperiencePrivateInvitesModule = require(BuildExperience.Flags.FFlagBuildExperiencePrivateInvites)
 local FFlagBuildExperienceMonetizationNativeUIModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
+local FFlagBuildExperienceConfigurationRowTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceConfigurationRowTelemetry)
+local SendConfigurationRowClickModule = require(BuildExperience.Telemetry.sendConfigurationRowClick)
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 local IconName = FoundationModule.Enums.IconName
@@ -36,7 +38,7 @@ local PrivacyType = UniverseConfigurationModule.PrivacyType
 local Signal = SignalsModule.createSignal(nil)
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), LocalizationModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), UseOpenWebViewFunction (copy), UseArchiveGameFlowModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), UseExperienceShareFlowModule (copy), UniverseConfigurationModule (copy), ExperienceGuidelinesModule (copy), SignalsReactModule (copy), Signal (copy), GameConfigurationLabelsModule (copy), PrivacyType (copy), UniverseActivationModule (copy), ContentMaturityUtilsModule (copy), GameConfigurationActionsModule (copy), RefreshPublishEligibilityModule (copy), CaptureServiceStartUploadCoreScriptBypassEngineFeature (copy), IconName (copy), GetPrivatePlaytestersStoreFunction (copy), SignalsModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), View (copy), GameConfigurationListModule (copy), BuildMaturityBannerModule (copy), Text (copy), ArchiveGameDialogModule (copy), ExperienceShareOverlaysModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), LocalizationModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), UseOpenWebViewFunction (copy), UseArchiveGameFlowModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), UseExperienceShareFlowModule (copy), UniverseConfigurationModule (copy), ExperienceGuidelinesModule (copy), SignalsReactModule (copy), Signal (copy), GameConfigurationLabelsModule (copy), PrivacyType (copy), UniverseActivationModule (copy), ContentMaturityUtilsModule (copy), GameConfigurationActionsModule (copy), RefreshPublishEligibilityModule (copy), CaptureServiceStartUploadCoreScriptBypassEngineFeature (copy), IconName (copy), GetPrivatePlaytestersStoreFunction (copy), SignalsModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), FFlagBuildExperienceConfigurationRowTelemetryModule (copy), SendConfigurationRowClickModule (copy), View (copy), GameConfigurationListModule (copy), BuildMaturityBannerModule (copy), Text (copy), ArchiveGameDialogModule (copy), ExperienceShareOverlaysModule (copy)
 	local TestId = p1.testId or "game-configuration-content"
 	local UseLocalizationResult = UseLocalizationFunction({
 		access = LocalizationStringsModule.GAME_CONFIGURATION_ACCESS,
@@ -95,7 +97,7 @@ return function(p1)
 	local NoFFlagBuildCheckGamePermissionsModule1 = not FFlagBuildCheckGamePermissionsModule or UseGamePermissionsModuleResult.canMonetize
 	local NoFFlagBuildCheckGamePermissionsModule2 = not FFlagBuildCheckGamePermissionsModule or UseGamePermissionsModuleResult.canViewOnCreatorHub
 	local UseOpenWebViewResult = UseOpenWebViewFunction()
-	local UseArchiveGameFlowModuleResult = UseArchiveGameFlowModule()
+	local UseArchiveGameFlowModuleResult = UseArchiveGameFlowModule({ context = "settings" })
 	local UseExperienceShareFlowModuleResult = if FFlagBuildExperiencePrivateInvitesModule then UseExperienceShareFlowModule(p1.universeId, p1.placeId) else nil
 	local OnShare = if UseExperienceShareFlowModuleResult == nil then nil else UseExperienceShareFlowModuleResult.onShare
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -258,7 +260,7 @@ return function(p1)
 		UseResult1, Config, OnShare, p1.onOpenAudiencePage, Audience, ContentRating,
 		PrivateInvitesShareLink
 	})
-	local UseMemoResult4 = ReactModule.useMemo(function()
+	local UseMemoResult31 = ReactModule.useMemo(function()
 		-- upvalues: CreatorHub (copy), CreatorHubDescription (copy), IconName (upval), UseResult (copy), NoFFlagBuildCheckGamePermissionsModule2 (copy)
 		return {
 			{
@@ -286,6 +288,15 @@ return function(p1)
 			isDisabled = not NoFFlagBuildCheckGamePermissionsModule1
 		})
 	end
+	local UseResult2 = if FFlagBuildExperienceConfigurationRowTelemetryModule then ReactModule.useCallback(function(p2)
+		-- upvalues: SendConfigurationRowClickModule (upval), p1 (copy)
+		SendConfigurationRowClickModule("settings", {
+			universeId = p1.universeId,
+			placeId = p1.placeId,
+			sessionId = p1.sessionId
+		}, p2)
+	end, { p1.universeId, p1.placeId, p1.sessionId }) else nil
+	
 	return ReactModule.createElement(View, {
 		tag = "col gap-xlarge size-full-0 auto-y padding-y-large",
 		LayoutOrder = p1.layoutOrder,
@@ -296,6 +307,7 @@ return function(p1)
 			title = GameDetails,
 			body = GameDetailsBody,
 			rows = UseMemoResult2,
+			onRowActivated = UseResult2,
 			testId = `{TestId}-game-details`
 		}),
 		Access = ReactModule.createElement(View, {
@@ -307,6 +319,7 @@ return function(p1)
 				title = if NoIsGroup then AccessAndSharing else Access,
 				body = AccessBody,
 				rows = UseMemoResult3,
+				onRowActivated = UseResult2,
 				testId = `{TestId}-access`
 			}),
 			BuildMaturityBanner = if Text1 == nil then nil else ReactModule.createElement(BuildMaturityBannerModule, { text = Text1 })
@@ -316,23 +329,29 @@ return function(p1)
 			title = UseLocalizationResult.gameConfiguration,
 			body = UseLocalizationResult.gameConfigurationBody,
 			rows = Rows,
+			onRowActivated = UseResult2,
 			testId = `{TestId}-game-configuration`
 		}) else nil,
 		CreatorHub = ReactModule.createElement(GameConfigurationListModule, {
 			layoutOrder = if FFlagBuildExperienceMonetizationNativeUIModule then 4 else 3,
 			title = CreatorHub,
-			rows = UseMemoResult4,
+			rows = UseMemoResult31,
+			onRowActivated = UseResult2,
 			testId = `{TestId}-creator-hub`
 		}),
 		ArchiveGame = ReactModule.createElement(View, {
 			tag = "row align-y-center size-full-0 auto-y padding-large stroke-standard stroke-default radius-large bg-surface-0",
 			LayoutOrder = if FFlagBuildExperienceMonetizationNativeUIModule then 5 else 4,
 			onActivated = ReactModule.useCallback(function()
-				-- upvalues: UseArchiveGameFlowModuleResult (copy), p1 (copy)
+				-- upvalues: FFlagBuildExperienceConfigurationRowTelemetryModule (upval), UseResult2 (copy), UseArchiveGameFlowModuleResult (copy), p1 (copy)
+				if FFlagBuildExperienceConfigurationRowTelemetryModule and UseResult2 ~= nil then
+					UseResult2("archive-game")
+				end
 				UseArchiveGameFlowModuleResult.requestArchive(p1.universeId)
 			end, {
 				UseArchiveGameFlowModuleResult.requestArchive,
-				p1.universeId
+				p1.universeId,
+				UseResult2
 			}),
 			stateLayer = {},
 			testId = `{TestId}-archive-game`

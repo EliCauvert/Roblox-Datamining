@@ -1,1 +1,0 @@
-﻿return require(script.Parent.Parent._Workspace.AppChat.AppChat.Components.ChatLanding.ChatLandingTelemetryEvents)

@@ -414,33 +414,33 @@ function Module2.decode(Buf)
 			end
 		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 			if Tag == 1 then
-				local Buffer1
-				Buffer1, v97 = ProtoModule.readBuffer(Buf, v3)
-				NewModule.id = buffer.tostring(Buffer1)
-			elseif Tag == 2 then
 				local Buffer2
 				Buffer2, v97 = ProtoModule.readBuffer(Buf, v3)
-				NewModule.collectible_product_id = buffer.tostring(Buffer2)
-			elseif Tag == 3 then
+				NewModule.id = buffer.tostring(Buffer2)
+			elseif Tag == 2 then
 				local Buffer3
 				Buffer3, v97 = ProtoModule.readBuffer(Buf, v3)
-				NewModule.name = buffer.tostring(Buffer3)
-			elseif Tag == 4 then
+				NewModule.collectible_product_id = buffer.tostring(Buffer3)
+			elseif Tag == 3 then
 				local Buffer4
 				Buffer4, v97 = ProtoModule.readBuffer(Buf, v3)
-				NewModule.description = buffer.tostring(Buffer4)
-			elseif Tag == 5 then
+				NewModule.name = buffer.tostring(Buffer4)
+			elseif Tag == 4 then
 				local Buffer5
 				Buffer5, v97 = ProtoModule.readBuffer(Buf, v3)
-				NewModule.creator = config.CollectibleItemCreator.decode(Buffer5)
-			elseif Tag == 9 then
-				local Buffer6
-				Buffer6, v97 = ProtoModule.readBuffer(Buf, v3)
-				NewModule.offsale_deadline = buffer.tostring(Buffer6)
-			elseif Tag == 12 then
+				NewModule.description = buffer.tostring(Buffer5)
+			elseif Tag == 5 then
 				local Buffer7
 				Buffer7, v97 = ProtoModule.readBuffer(Buf, v3)
-				table.insert(NewModule.universe_ids, buffer.tostring(Buffer7))
+				NewModule.creator = config.CollectibleItemCreator.decode(Buffer7)
+			elseif Tag == 9 then
+				local Buffer1
+				Buffer1, v97 = ProtoModule.readBuffer(Buf, v3)
+				NewModule.offsale_deadline = buffer.tostring(Buffer1)
+			elseif Tag == 12 then
+				local Buffer6
+				Buffer6, v97 = ProtoModule.readBuffer(Buf, v3)
+				table.insert(NewModule.universe_ids, buffer.tostring(Buffer6))
 			elseif Tag == 13 then
 				local Buffer8
 				Buffer8, v97 = ProtoModule.readBuffer(Buf, v3)

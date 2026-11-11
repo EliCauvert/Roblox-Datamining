@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("PYMKCarousel").Parent.SharedFlags).FFlagFriendSortedByPresenceSignalsImplementation and game:DefineFastFlag("PymkCarouselPresenceStoreMigration", false)

@@ -1,1 +1,0 @@
-﻿return require(script.Parent.GetFFlagAXEnableSlotBasedEditor)() and game:DefineFastFlag("AXFixEmoteRedirectFromCatalogForSlots", false)

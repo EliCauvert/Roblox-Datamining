@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.Signals).createComputed((require(script.createAXTooltipStore)))

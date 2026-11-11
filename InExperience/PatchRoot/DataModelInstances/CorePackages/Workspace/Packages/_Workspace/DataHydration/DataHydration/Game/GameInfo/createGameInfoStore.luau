@@ -14,7 +14,6 @@ local FFlagLuaAppInExperienceDetailsPrompt = require(Parent.SharedFlags).FFlagLu
 local FFlagLuaAppDataHydrationPlayerCountGameInfoStore = require(Parent.SharedFlags).FFlagLuaAppDataHydrationPlayerCountGameInfoStore
 local GetFIntLuaAppThrottleRefreshPlayabilityIntervalSecondsFunction = require(Parent.SharedFlags).GetFIntLuaAppThrottleRefreshPlayabilityIntervalSeconds
 local FFlagLuaAppDataHydrationUpdateItem = require(Parent.SharedFlags).FFlagLuaAppDataHydrationUpdateItem
-local FFlagMigrateGameInfoToStore = require(Parent.SharedFlags).FFlagMigrateGameInfoToStore
 local FIntLuaAppThrottleRefreshPlayabilityIntervalSeconds = if FFlagLuaAppInExperienceDetailsPrompt then GetFIntLuaAppThrottleRefreshPlayabilityIntervalSecondsFunction() else nil
 
 local function sanitizeGameInfo(p1)
@@ -26,7 +25,7 @@ local function sanitizeGameInfo(p1)
 end
 
 return function()
-	-- upvalues: FFlagLuaAppInExperienceDetailsPrompt (copy), CreateDataCacheModule (copy), FIntLuaAppThrottleRefreshPlayabilityIntervalSeconds (copy), sanitizeGameInfo (copy), CreateDataResolverModule (copy), LogResponseErrorFunction (copy), DiscoveryEventErrorLogger (copy), DashModule (copy), FetchGameDetailsModule (copy), GameInfoStoreTypesModule (copy), FFlagLuaAppDataHydrationPlayerCountGameInfoStore (copy), FFlagMigrateGameInfoToStore (copy), FFlagLuaAppDataHydrationUpdateItem (copy)
+	-- upvalues: FFlagLuaAppInExperienceDetailsPrompt (copy), CreateDataCacheModule (copy), FIntLuaAppThrottleRefreshPlayabilityIntervalSeconds (copy), sanitizeGameInfo (copy), CreateDataResolverModule (copy), LogResponseErrorFunction (copy), DiscoveryEventErrorLogger (copy), DashModule (copy), FetchGameDetailsModule (copy), GameInfoStoreTypesModule (copy), FFlagLuaAppDataHydrationPlayerCountGameInfoStore (copy), FFlagLuaAppDataHydrationUpdateItem (copy)
 	local t = {}
 	
 	local function _(p1, p2)
@@ -55,11 +54,11 @@ return function()
 			end
 		end else nil,
 		fetchFn = function(p1)
-			-- upvalues: DashModule (upval), FetchGameDetailsModule (upval), FFlagLuaAppInExperienceDetailsPrompt (upval), GameInfoStoreTypesModule (upval), FFlagLuaAppDataHydrationPlayerCountGameInfoStore (upval), FFlagMigrateGameInfoToStore (upval), t (copy)
+			-- upvalues: DashModule (upval), FetchGameDetailsModule (upval), FFlagLuaAppInExperienceDetailsPrompt (upval), GameInfoStoreTypesModule (upval), FFlagLuaAppDataHydrationPlayerCountGameInfoStore (upval), t (copy)
 			local KeysResult = DashModule.keys(p1)
 			
 			return FetchGameDetailsModule(KeysResult):andThen(function(Result)
-				-- upvalues: FFlagLuaAppInExperienceDetailsPrompt (upval), KeysResult (copy), GameInfoStoreTypesModule (upval), FFlagLuaAppDataHydrationPlayerCountGameInfoStore (upval), DashModule (upval), FFlagMigrateGameInfoToStore (upval), t (upval)
+				-- upvalues: FFlagLuaAppInExperienceDetailsPrompt (upval), KeysResult (copy), GameInfoStoreTypesModule (upval), FFlagLuaAppDataHydrationPlayerCountGameInfoStore (upval), DashModule (upval), t (upval)
 				if FFlagLuaAppInExperienceDetailsPrompt then
 					if not Result or not Result.responseBody then
 						error({
@@ -127,11 +126,9 @@ return function()
 						}
 					end)
 				end
-				if FFlagMigrateGameInfoToStore then
-					for i, value1 in t1 do
-						if value1 and value1.rootPlaceId then
-							t[tostring(value1.rootPlaceId)] = i
-						end
+				for i, value1 in t1 do
+					if value1 and value1.rootPlaceId then
+						t[tostring(value1.rootPlaceId)] = i
 					end
 				end
 				return t1
@@ -142,38 +139,11 @@ return function()
 	})
 	
 	local function updateGameInfo(p2, p3, p4)
-		-- upvalues: t (copy), FFlagMigrateGameInfoToStore (upval), DataCacheModule (copy)
+		-- upvalues: t (copy), DataCacheModule (copy)
 		if p3 and p3.rootPlaceId then
 			t[tostring(p3.rootPlaceId)] = p2
 		end
-		if FFlagMigrateGameInfoToStore then
-			DataCacheModule.updateItem(p2, p3, p4)
-			
-			return
-		else
-			DataCacheModule.updateItem(p2, p3)
-		end
-	end
-	
-	local function updateGameInfos(List, p2)
-		-- upvalues: t (copy), FFlagMigrateGameInfoToStore (upval), DataCacheModule (copy)
-		for i, value in List do
-			if value and value.rootPlaceId then
-				t[tostring(value.rootPlaceId)] = i
-			end
-		end
-		if FFlagMigrateGameInfoToStore then
-			DataCacheModule.updateItems(List, p2)
-			
-			return
-		else
-			DataCacheModule.updateItems(List)
-		end
-	end
-	
-	local function getUniverseIdForPlaceId(p3)
-		-- upvalues: t (copy)
-		return t[tostring(p3)]
+		DataCacheModule.updateItem(p2, p3, p4)
 	end
 	
 	local function clear()
@@ -199,40 +169,38 @@ return function()
 		getGameInfos = DataResolverModule.getCachedItems,
 		getAndFetchGameInfo = DataResolverModule.getAndFetchItem,
 		getAndFetchGameInfos = DataResolverModule.getAndFetchItems,
-		updateGameInfo = if FFlagLuaAppDataHydrationUpdateItem then if FFlagMigrateGameInfoToStore then updateGameInfo else DataCacheModule.updateItem else nil,
-		updateGameInfos = if FFlagMigrateGameInfoToStore then updateGameInfos else DataCacheModule.updateItems,
-		getUniverseIdForPlaceId = if FFlagMigrateGameInfoToStore then getUniverseIdForPlaceId else nil,
+		updateGameInfo = if FFlagLuaAppDataHydrationUpdateItem then updateGameInfo else nil,
+		updateGameInfos = function(List, p2)
+			-- upvalues: t (copy), DataCacheModule (copy)
+			for i, value in List do
+				if value and value.rootPlaceId then
+					t[tostring(value.rootPlaceId)] = i
+				end
+			end
+			DataCacheModule.updateItems(List, p2)
+		end,
+		getUniverseIdForPlaceId = function(p3)
+			-- upvalues: t (copy)
+			return t[tostring(p3)]
+		end,
 		applyVoteChange = function(p3, Enabled1, Enabled)
-			-- upvalues: DataResolverModule (copy), FFlagMigrateGameInfoToStore (upval), DataCacheModule (copy)
+			-- upvalues: DataResolverModule (copy), DataCacheModule (copy)
 			local CachedItem = DataResolverModule.getCachedItem(p3)
 			local DataResult = CachedItem and CachedItem.data(false)
 			
-			if not DataResult or DataResult.totalUpVotes == nil then
-				return nil
-			end
-			local Number: number = tonumber(DataResult.totalUpVotes) or 0
-			local Number1: number = tonumber(DataResult.totalDownVotes) or 0
-			local config = {
-				totalUpVotes = DataResult.totalUpVotes,
-				totalDownVotes = DataResult.totalDownVotes
-			}
-			local v1 = (if Enabled == true then 1 else 0) - (if Enabled1 == true then 1 else 0)
-			local v2 = (if Enabled == false then 1 else 0) - (if Enabled1 == false then 1 else 0)
-			
-			if FFlagMigrateGameInfoToStore then
+			if DataResult and DataResult.totalUpVotes ~= nil then
+				local config = {
+					totalUpVotes = DataResult.totalUpVotes,
+					totalDownVotes = DataResult.totalDownVotes
+				}
 				DataCacheModule.updateItem(p3, {
-					totalUpVotes = tostring((math.max(0, Number + v1))),
-					totalDownVotes = tostring((math.max(0, Number1 + v2)))
+					totalUpVotes = tostring((math.max(0, (tonumber(DataResult.totalUpVotes) or 0) + ((if Enabled == true then 1 else 0) - (if Enabled1 == true then 1 else 0))))),
+					totalDownVotes = tostring((math.max(0, (tonumber(DataResult.totalDownVotes) or 0) + ((if Enabled == false then 1 else 0) - (if Enabled1 == false then 1 else 0)))))
 				}, false)
 				
 				return config
 			else
-				DataCacheModule.updateItem(p3, {
-					totalUpVotes = tostring((math.max(0, Number + v1))),
-					totalDownVotes = tostring((math.max(0, Number1 + v2)))
-				})
-				
-				return config
+				return nil
 			end
 		end,
 		clear = if FFlagLuaAppInExperienceDetailsPrompt then DataResolverModule.clear else clear,

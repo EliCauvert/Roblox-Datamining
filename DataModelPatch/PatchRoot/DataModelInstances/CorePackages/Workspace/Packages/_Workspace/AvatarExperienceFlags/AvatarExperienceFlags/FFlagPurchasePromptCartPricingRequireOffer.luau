@@ -1,5 +1,0 @@
-﻿local SharedFlagsModule = require(script:FindFirstAncestor("AvatarExperienceFlags").Parent.SharedFlags)
-local FFlagMarketplaceOffersRoot = SharedFlagsModule.FFlagMarketplaceOffersRoot
-local FFlagMarketplaceOffersOptOutRoot = SharedFlagsModule.FFlagMarketplaceOffersOptOutRoot
-
-return game:DefineFastFlag("PurchasePromptCartPricingRequireOffer2", false) and (FFlagMarketplaceOffersRoot and FFlagMarketplaceOffersOptOutRoot)

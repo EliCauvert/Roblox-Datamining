@@ -1464,6 +1464,7 @@ Feature.AddFriends.Action.FriendAdded,Vriend toegevoegd
 Feature.AddFriends.Action.IgnoreFriendRequest,Vriendschapsverzoek negeren
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Vertrouwde vriendschapsverzoek negeren
 Feature.AddFriends.Action.RequestIgnored,Verzoek genegeerd
+Feature.AddFriends.Heading.AddFriends,Vrienden toevoegen
 Feature.AddFriends.Label.AddFriendsTooltip,"Ga aan de slag door je vrienden te vinden, zodat jullie Roblox samen kunnen verkennen."
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Vind personen op Roblox door te zoeken op hun gebruikersnaam of schermnaam.
 Feature.AddFriends.Label.ConnectWithContacts,Nodig contactpersonen uit of maak contact met vrienden die al op Roblox zitten!
@@ -1857,6 +1858,8 @@ Feature.Avatar.Label.Shoes,Schoenen
 Feature.Avatar.Label.Shorts,Shorts
 Feature.Avatar.Label.Shoulder,Schouder
 Feature.Avatar.Label.Skin,Huid
+Feature.Avatar.Label.Spawn,Spawnen
+Feature.Avatar.Label.SpawnEffects,Spawneffecten
 Feature.Avatar.Label.Sweater,Trui
 Feature.Avatar.Label.Sweaters,Truien
 Feature.Avatar.Label.Swim,Zwemmen
@@ -2079,7 +2082,10 @@ Feature.AvatarSwitcher.Message.SelectAvatar,Selecteer een avatar
 Feature.AvatarSwitcher.Message.SwitchingDeferred,Je ziet deze avatar na je volgende respawn of wanneer je deelneemt aan een ervaring. Je kunt op elk moment van avatar wisselen.
 Feature.AvatarSwitcher.Message.UnknownSupport,"Je kunt je avatar nog steeds wisselen, maar deze wordt mogelijk niet correct weergegeven in deze ervaring."
 Feature.AvatarSwitcher.Message.Unsupported,Deze ervaring maakt gebruik van een aangepaste avatar en ondersteunt geen Roblox-avatars.
+Feature.AvatarWorkshop.Action.EditAvatar,Avatar bewerken
 Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Heading.Customize,Aanpassen
+Feature.AvatarWorkshop.Heading.YourAvatars,Je avatars
 Feature.AvatarWorkshop.Message.LoadItemsError,Er is iets misgegaan bij het laden van je items.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,Kan geen items meer laden.
 Feature.AvatarWorkshop.Message.NoItemsOwned,Je hebt hier nog geen items.
@@ -2763,7 +2769,7 @@ Feature.Catalog.Action.CheckoutPlural,Afrekenen bekijken ({count})
 Feature.Catalog.Action.CheckoutSingular,1 item afrekenen
 Feature.Catalog.Action.CloseDetails,Details sluiten
 Feature.Catalog.Action.CopyLink,Link kopiëren
-Feature.Catalog.Action.Customize,Aanpassen
+Feature.Catalog.Action.Customize,
 Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,Avatar verwijderen
 Feature.Catalog.Action.DescribeAvatar,Beschrijf je avatar (optioneel)
@@ -3196,7 +3202,7 @@ Feature.Chat.Heading.SafeChattingWithUsername,Chat veilig met {displayName}
 Feature.Chat.Heading.UserInvitedYouToJoin,{combinedName} heeft je uitgenodigd om deel te nemen
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,{combinedName} heeft je uitgenodigd om lid te worden van een groep
 Feature.Chat.Heading.YouWereInvitedToGroup,Je bent uitgenodigd om lid te worden van de groep
-Feature.Chat.Label.AddFriends,Vrienden toevoegen
+Feature.Chat.Label.AddFriends,
 Feature.Chat.Label.Available,Beschikbaar
 Feature.Chat.Label.Blocked,
 Feature.Chat.Label.ChatDetails,Chatgegevens
@@ -3236,7 +3242,6 @@ Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} zei...
 Feature.Chat.Label.ReplyingToYourself,Je zei...
 Feature.Chat.Label.SearchFriends,Vrienden zoeken
 Feature.Chat.Label.SearchWord,
-Feature.Chat.Label.SnoozeChatNotifications,Chatmeldingen in de ervaring dempen:
 Feature.Chat.Label.SnoozePartyNotifications,Groepsmeldingen in de ervaring dempen voor:
 Feature.Chat.Label.SwipeToReplyTooltip,Veeg om te antwoorden
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} d
@@ -3292,7 +3297,6 @@ Feature.Chat.Response.NetworkError,Netwerkfout
 Feature.Chat.RobloxConnectUnavailableWithUser,Op dit moment is Roblox Connect niet beschikbaar voor deze gebruiker.
 Feature.Chat.Text.NoFriends,Je hebt nog geen vrienden toegevoegd. Zoek en voeg je vrienden toe op Roblox om te beginnen.
 Feature.Chat.Title.FriendsChat,Vriendenchat
-Feature.Chat.Title.MuteChatNotifications,Chatmeldingen van vrienden dempen tijdens het spelen
 Feature.Chat.Title.NewChat,Nieuwe chat
 Feature.Chat.Toast.Error.InvalidUserSelected,Een of meerdere mensen in deze lijst kunnen niet worden toegevoegd
 Feature.ContactUpsell.Action.Continue,
@@ -3439,8 +3443,10 @@ Feature.FaceChat.Subtitle.VideoPerformancePromptDisable,Je camera uitschakelen k
 Feature.FaceChat.Subtitle.VideoUnsupported,Roblox kan je avatar niet animeren met je camera.
 Feature.Favorites.Label.Favorite,Markeren als favoriet
 Feature.FlyoutSidePanel.Action.ContinuePlaying,
+Feature.FlyoutSidePanel.Description.SwitchAccountsHere,Je kunt nu hier van account wisselen.
 Feature.FlyoutSidePanel.Label.TooltipBody,"Je profiel, content en instellingen zijn verplaatst."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> is verplaatst
+Feature.FlyoutSidePanel.Title.AccountSwitcherMoved,Accountwisselaar is verplaatst
 Feature.Friends.Action.AcceptFriend,Vriend accepteren
 Feature.Friends.Action.AccountDeleted,Account verwijderd
 Feature.Friends.Action.Add,
@@ -3829,6 +3835,7 @@ Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Eindigt over {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,Gratis proefperiode
 Feature.InExperienceShop.Label.HaveTrial,Gratis proefperiode voor jou
+Feature.InExperienceShop.Label.KeepIt,
 Feature.InExperienceShop.Label.NoDescription,Geen beschrijving
 Feature.InExperienceShop.Label.OfferEndTime,{offer} eindigt over {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,Dit is een voorbeeld van je winkel in Roblox Studio. Spelers zien dit voorbeeld niet.
@@ -3990,6 +3997,7 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,Foto's
 Feature.Moments.Label.PostDeleted,Moment verwijderd
 Feature.Moments.Label.PostRemovedBody,"Het moment dat je hebt gepost, is in strijd met onze Communityrichtlijnen."
+Feature.Moments.Label.PostedOnDate,Gepost op {date}
 Feature.Moments.Label.PublishingRodeoBody,Dit zou niet lang moeten duren.
 Feature.Moments.Label.Reactions,Reacties
 Feature.Moments.Label.ReportReason.BreaksRules,Deze post overtreedt de regels
@@ -4172,7 +4180,7 @@ Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,Profiellink kopiëren
 Feature.Profile.Action.CreateInBuild,Maken in Bouwen
 Feature.Profile.Action.EditAppearance,Uiterlijk bewerken
-Feature.Profile.Action.EditAvatar,Avatar bewerken
+Feature.Profile.Action.EditAvatar,
 Feature.Profile.Action.EditBackground,Achtergrond bewerken
 Feature.Profile.Action.EditEmotes,Emotes bewerken
 Feature.Profile.Action.EditLook,Look bewerken

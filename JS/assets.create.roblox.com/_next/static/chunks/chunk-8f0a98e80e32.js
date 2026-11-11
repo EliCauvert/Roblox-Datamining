@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "e060f033-dd69-58b5-a621-718c0a51efe9")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "dd58627d-6a7b-0c22-5ad3-8c89d2b22cc1")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 118413, e => {
@@ -154,12 +154,12 @@
             name: "isEhdResultsAlwaysFetched",
             defaultValue: !1
         }),
-        M = (0, t.defineFlag)({
+        V = (0, t.defineFlag)({
             namespace: "creator-analytics",
             name: "isMetricVariantChartStateEnabled",
             defaultValue: !1
         }),
-        V = (0, t.defineFlag)({
+        M = (0, t.defineFlag)({
             namespace: "creator-analytics",
             name: "isPeriodSummaryBridgeEnabled",
             defaultValue: !1
@@ -186,20 +186,25 @@
         }),
         N = (0, t.defineFlag)({
             namespace: "creator-analytics",
-            name: "isClientSessionDetailsV2Enabled",
+            name: "isExperimentSignificanceCaasEnabled",
             defaultValue: !1
         }),
         L = (0, t.defineFlag)({
             namespace: "creator-analytics",
-            name: "isObservabilityDataCapturesEnabled",
+            name: "isClientSessionDetailsV2Enabled",
             defaultValue: !1
         }),
         G = (0, t.defineFlag)({
             namespace: "creator-analytics",
+            name: "isObservabilityDataCapturesEnabled",
+            defaultValue: !1
+        }),
+        j = (0, t.defineFlag)({
+            namespace: "creator-analytics",
             name: "isRaqiv2RequestQueryEnabled",
             defaultValue: !1
         });
-    e.s(["analyticsChartLoadEventstreamEnabled", 0, a, "isAnalyticsAssistantChatEnabled", 0, g, "isAnalyticsAssistantChatHistoryEnabled", 0, h, "isAnalyticsAssistantIssueBannerEnabled", 0, y, "isAnalyticsAssistantStreamSilenceRecoveryEnabled", 0, b, "isAnalyticsMetricAwareYAxisFormatterEnabled", 0, A, "isAssistantChartOverflowMenuEnabled", 0, w, "isClientSessionDetailsV2Enabled", 0, N, "isClientSessionsEnabled", 0, R, "isCustomDashboardsLocalStorageEnabled", 0, D, "isCustomMetricMdeEnabled", 0, r, "isCustomMetricsBackendEnabled", 0, i, "isEhdResultsAlwaysFetched", 0, T, "isEhdResultsEnabled", 0, B, "isExperimentLiftChartEnabled", 0, F, "isExperimentMetricsV2Enabled", 0, P, "isExperimentNullControlValueEnabled", 0, d, "isExperimentRolloutEnabled", 0, u, "isExperimentSampleSizeEnabled", 0, _, "isExperimentSegmentationEnabled", 0, I, "isExperimentTargetingEnabled", 0, s, "isExperimentationTemplatesEnabled", 0, l, "isGeneralBreakGlassBannerEnabled", 0, m, "isJourneyEventsEnabled", 0, x, "isLimitedAnalyticsAdminMonitoringNavigationEnabled", 0, n, "isMetricVariantChartStateEnabled", 0, M, "isMonetizationBreakGlassBannerEnabled", 0, p, "isObservabilityDataCapturesEnabled", 0, L, "isPeriodSummaryBridgeEnabled", 0, V, "isPlayerFeedbackExampleCommentsEnabled", 0, f, "isRaqiv2RequestQueryEnabled", 0, G, "isRotraceMetricEnabled", 0, k, "isTargetingConfigsEnabled", 0, c, "isTelemetryMigrationEnabled", 0, v, "isTreemapColorBySiblingProportionEnabled", 0, S, "showCreatorRewardsReportingDisclaimer", 0, C, "showVideoServiceDashboard", 0, E, "visibleAssetIdInPersonalizationEnabled", 0, o])
+    e.s(["analyticsChartLoadEventstreamEnabled", 0, a, "isAnalyticsAssistantChatEnabled", 0, g, "isAnalyticsAssistantChatHistoryEnabled", 0, h, "isAnalyticsAssistantIssueBannerEnabled", 0, y, "isAnalyticsAssistantStreamSilenceRecoveryEnabled", 0, b, "isAnalyticsMetricAwareYAxisFormatterEnabled", 0, A, "isAssistantChartOverflowMenuEnabled", 0, w, "isClientSessionDetailsV2Enabled", 0, L, "isClientSessionsEnabled", 0, R, "isCustomDashboardsLocalStorageEnabled", 0, D, "isCustomMetricMdeEnabled", 0, r, "isCustomMetricsBackendEnabled", 0, i, "isEhdResultsAlwaysFetched", 0, T, "isEhdResultsEnabled", 0, B, "isExperimentLiftChartEnabled", 0, F, "isExperimentMetricsV2Enabled", 0, P, "isExperimentNullControlValueEnabled", 0, d, "isExperimentRolloutEnabled", 0, u, "isExperimentSampleSizeEnabled", 0, _, "isExperimentSegmentationEnabled", 0, I, "isExperimentSignificanceCaasEnabled", 0, N, "isExperimentTargetingEnabled", 0, s, "isExperimentationTemplatesEnabled", 0, l, "isGeneralBreakGlassBannerEnabled", 0, m, "isJourneyEventsEnabled", 0, x, "isLimitedAnalyticsAdminMonitoringNavigationEnabled", 0, n, "isMetricVariantChartStateEnabled", 0, V, "isMonetizationBreakGlassBannerEnabled", 0, p, "isObservabilityDataCapturesEnabled", 0, G, "isPeriodSummaryBridgeEnabled", 0, M, "isPlayerFeedbackExampleCommentsEnabled", 0, f, "isRaqiv2RequestQueryEnabled", 0, j, "isRotraceMetricEnabled", 0, k, "isTargetingConfigsEnabled", 0, c, "isTelemetryMigrationEnabled", 0, v, "isTreemapColorBySiblingProportionEnabled", 0, S, "showCreatorRewardsReportingDisclaimer", 0, C, "showVideoServiceDashboard", 0, E, "visibleAssetIdInPersonalizationEnabled", 0, o])
 }, 665869, 729904, e => {
     "use strict";
     var t = e.i(157700);
@@ -330,16 +335,16 @@
             }
         } = p("light" !== y)(), {
             translate: x
-        } = (0, n.useTranslation)(), [R, B] = (0, a.useState)(!1), [T, M] = (0, a.useState)(), V = (0, a.useCallback)(async function(e, t, a) {
+        } = (0, n.useTranslation)(), [R, B] = (0, a.useState)(!1), [T, V] = (0, a.useState)(), M = (0, a.useCallback)(async function(e, t, a) {
             let n = arguments.length > 3 && void 0 !== arguments[3] && arguments[3];
             if (t && e) {
                 B(!0);
                 try {
                     let l = n ? o.ThumbnailClient.reloadThumbnailImage : o.ThumbnailClient.getThumbnailImage,
                         i = await l(e, t, a);
-                    M(i)
+                    V(i)
                 } catch (e) {
-                    M({
+                    V({
                         state: l.ThumbnailResponseState.TemporarilyUnavailable
                     })
                 } finally {
@@ -398,8 +403,8 @@
             })
         }, [R, null == T ? void 0 : T.state, k, g, v, D, x, y]);
         return (0, a.useEffect)(() => {
-            V(f, m, h)
-        }, [m, f, h, V]), {
+            M(f, m, h)
+        }, [m, f, h, M]), {
             thumbnailImage: (0, t.jsx)(r.Grid, {
                 item: !0,
                 container: !0,
@@ -422,7 +427,7 @@
                 })
             }),
             thumbnailData: T,
-            refreshThumbnail: (0, a.useCallback)(async () => V(f, m, h, !0), [V, f, m, h])
+            refreshThumbnail: (0, a.useCallback)(async () => M(f, m, h, !0), [M, f, m, h])
         }
     }], 450639)
 }, 692587, e => {
@@ -1225,7 +1230,7 @@
             content: "Description.Undisclosed"
         }];
     var R, B, T = ((R = T || {}).BannerTitle = "Heading.CookieBanner", R.CookieBannerContent = "Description.CookieBannerContent", R.CookieBannerButton = "Action.CookieBanner", R.PrivacyPolicy = "Description.PrivacyPolicy", R.ConsentToolModalTitle = "Heading.CookieSettings", R.SaveBtn = "Action.SavePreferences", R.CancelBtn = "Action.Cancel", R.InfoCollectionHeader = "Heading.InformationCollection", R.InfoCollectionContent = "Description.InformationCollection", R.InfoCollectionHeader2 = "Heading.InformationCollection2", R.InfoCollectionContent2 = "Description.InformationCollection2", R.InfoPartnerCollectionHeader = "Heading.InformationPartnerCollection", R.InfoPartnerCollectionContent = "Description.InformationPartnerCollection", R.RBXViralAcquisition = "RBXViralAcquisition", R.RBXViralAcquisitionDescription = "Description.RBXViralAcquisition", R.RBXSource = "RBXSource", R.RBXSourceDescription = "Description.RBXSource", R.GoogleAnalytics = "Heading.GoogleAnalytics", R.OwnedBy = "Label.OwnedBy", R.GoogleInc = "Google Inc.", R.Website = "Label.Website", R.GoogleAnalyticsPurposeHeader = "Heading.GoogleAnalyticsPurpose", R.GoogleAnalyticsPurposeDescription = "Description.GoogleAnalyticsPurpose", R.CompanyCollectionHeader = "Heading.CompanyCollection", R.DataCollected = "Label.DataCollected", R.DataCollectedContent = "Description.DataCollected", R.DataSharing = "Label.DataSharing", R.DataSharingContent = "Description.DataSharing", R.DataRetention = "Label.DataRetention", R.DataRetentionContent = "Description.DataRetention", R.DataUse = "Label.DataUse", R.DataUseContent = "Description.DataUse", R.DataStorage = "Label.DataStorage", R.DataStorageContent = "Description.Undisclosed", R.RequestData = "Action.RequestData", R.SetCookieOptions = "Action.SetCookieOptions", R.DeclineAll = "Action.DeclineAll", R.AcceptAll = "Action.AcceptAll", R.EssentialCookie = "Heading.EssentialCookies", R.AnalyticsCookie = "Heading.AnalyticsCookies", R.GAReadMore = "Description.GAReadMore", R.GAReadMoreUrl = "{googleAnalyticsLink}", R);
-    let M = (0, n.makeStyles)()(e => ({
+    let V = (0, n.makeStyles)()(e => ({
             root: {
                 padding: 24,
                 maxWidth: 1250,
@@ -1256,7 +1261,7 @@
                 backgroundColor: "transparent"
             }
         })),
-        V = e => {
+        M = e => {
             let {
                 onAcceptAll: n,
                 onDeclineAll: u,
@@ -1266,7 +1271,7 @@
                 translate: f
             } = (0, t.useTranslation)(), {
                 classes: h
-            } = M(), g = (0, l.useMediaQuery)((0, o.useTheme)().breakpoints.down("Medium")), b = (0, a.useMemo)(() => a.default.createElement(i.Link, {
+            } = V(), g = (0, l.useMediaQuery)((0, o.useTheme)().breakpoints.down("Medium")), b = (0, a.useMemo)(() => a.default.createElement(i.Link, {
                 href: w,
                 target: "_blank",
                 underline: "hover",
@@ -1686,7 +1691,7 @@
                 m = (0, a.useCallback)(() => {
                     l(!1), r(!1)
                 }, []);
-            return a.default.createElement(a.default.Fragment, null, a.default.createElement(V, {
+            return a.default.createElement(a.default.Fragment, null, a.default.createElement(M, {
                 isOpen: i,
                 onAcceptAll: s,
                 onDeclineAll: c,
@@ -1772,5 +1777,5 @@
     }, "useCookieConsentContext", 0, F], 260241)
 }]);
 
-//# debugId=e060f033-dd69-58b5-a621-718c0a51efe9
-//# sourceMappingURL=1g7y_gh05r_-v.js.map
+//# debugId=dd58627d-6a7b-0c22-5ad3-8c89d2b22cc1
+//# sourceMappingURL=0d4fj6klm2riu.js.map

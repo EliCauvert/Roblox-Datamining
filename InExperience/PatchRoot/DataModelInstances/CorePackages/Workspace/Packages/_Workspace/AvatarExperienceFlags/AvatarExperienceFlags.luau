@@ -6,7 +6,6 @@
 	FFlagAXBackgroundImageOnLoaded = require(script.FFlagAXBackgroundImageOnLoaded),
 	FFlagAXHeroSpotlightReportsThumbnailLoaded = require(script.FFlagAXHeroSpotlightReportsThumbnailLoaded),
 	FFlagAXFixSduiWidgetTTITileLatencyCallbackIdentity = require(script.FFlagAXFixSduiWidgetTTITileLatencyCallbackIdentity),
-	FFlagAXColorAdjustmentButtonShouldAccountForTryOns = require(script.FFlagAXColorAdjustmentButtonShouldAccountForTryOns),
 	FFlagAXAddTransparencyToItemCardHeader = require(script.FFlagAXAddTransparencyToItemCardHeader),
 	FFlagAXEnableManualSaving = require(script.FFlagAXEnableManualSaving),
 	FFlagAXEnableManualSavingBlockingPrompt = require(script.FFlagAXEnableManualSavingBlockingPrompt),
@@ -360,6 +359,7 @@
 	FFlagAXDeprecateAvatarEditorServiceTelemetryV1 = require(script.FFlagAXDeprecateAvatarEditorServiceTelemetryV1),
 	FFlagAXCatalogSduiUseOpaqueRouteForSearch = require(script.FFlagAXCatalogSduiUseOpaqueRouteForSearch),
 	FFlagAXCatalogSduiDisableOnSearchRoute = require(script.FFlagAXCatalogSduiDisableOnSearchRoute),
+	FFlagAXCatalogSduiDisableInSearchResults = require(script.FFlagAXCatalogSduiDisableInSearchResults),
 	FFlagAXCatalogUseFixedWidgetPadding = require(script.FFlagAXCatalogUseFixedWidgetPadding),
 	FFlagAXFixLimitedUniqueResale = require(script.FFlagAXFixLimitedUniqueResale),
 	FFlagAXBackgroundGeneration = require(script.FFlagAXBackgroundGeneration),
@@ -374,6 +374,7 @@
 	FFlagAXBackgroundGenerationResultActionButtons = require(script.FFlagAXBackgroundGenerationResultActionButtons),
 	FFlagAXBackgroundGenerationInventoryUpsellBanner = require(script.FFlagAXBackgroundGenerationInventoryUpsellBanner),
 	FFlagAXBackgroundsHidePlusUpsellsWhenGuacDisabled = require(script.FFlagAXBackgroundsHidePlusUpsellsWhenGuacDisabled),
+	FFlagAXBackgroundsHideCreateTileWithoutAiEntitlement = require(script.FFlagAXBackgroundsHideCreateTileWithoutAiEntitlement),
 	FFlagAXBackgroundUploadQuotaError = require(script.FFlagAXBackgroundUploadQuotaError),
 	FFlagAXPlusExclusiveBackgroundTryOn = require(script.FFlagAXPlusExclusiveBackgroundTryOn),
 	FFlagAXFixBackgroundGenerationResultMenuNavigation = require(script.FFlagAXFixBackgroundGenerationResultMenuNavigation),
@@ -453,5 +454,7 @@
 	FIntAXSpawnEffectPlaySeconds = require(script.FIntAXSpawnEffectPlaySeconds),
 	FIntAXSpawnEffectEmitterFadeSeconds = require(script.FIntAXSpawnEffectEmitterFadeSeconds),
 	FFlagAXMomentsLookTryOnOpaqueCloseButton = require(script.FFlagAXMomentsLookTryOnOpaqueCloseButton),
-	FFlagAXSpawnEffectSaveRoundTrip = require(script.FFlagAXSpawnEffectSaveRoundTrip)
+	FFlagAXSpawnEffectSaveRoundTrip = require(script.FFlagAXSpawnEffectSaveRoundTrip),
+	FFlagAXPhotoboothMomentsStableCamera = require(script.FFlagAXPhotoboothMomentsStableCamera),
+	FFlagAXSpawnEffects = require(script.FFlagAXSpawnEffects)
 }

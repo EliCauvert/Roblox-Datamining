@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("ProfilePlatformEnableInventory_V2", false)

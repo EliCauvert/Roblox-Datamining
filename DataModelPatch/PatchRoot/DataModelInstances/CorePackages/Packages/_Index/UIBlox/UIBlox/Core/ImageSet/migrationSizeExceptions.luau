@@ -1,1 +1,0 @@
-﻿return { ["play-large"] = true, tilt = true }

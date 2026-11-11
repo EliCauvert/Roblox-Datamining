@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("SduiInputDataMergeStrategy2", false)

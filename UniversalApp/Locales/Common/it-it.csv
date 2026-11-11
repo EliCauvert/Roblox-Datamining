@@ -204,6 +204,7 @@ Authentication.AccountSwitch.Action.Continue,
 Authentication.AccountSwitch.Action.CreateNewAccount,Crea un account nuovo
 Authentication.AccountSwitch.Action.LogoutAllAccounts,Esci da tutti gli account
 Authentication.AccountSwitch.Action.RemoveAllAccounts,Rimuovere tutti gli account?
+Authentication.AccountSwitch.Action.SignIn,Accedi
 Authentication.AccountSwitch.Action.SignInToExistingAccount,Accedi a un account esistente
 Authentication.AccountSwitch.Action.SwitchAccount,Cambia Account
 Authentication.AccountSwitch.Description.AccountLimit.2,Hai raggiunto il limite di account. Rimuovi un account prima di aggiungerne uno nuovo.
@@ -213,6 +214,7 @@ Authentication.AccountSwitch.Description.LogoutConfirmation,Dovrai uscire dagli 
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,Per favore riprova più tardi
 Authentication.AccountSwitch.Description.RemoveAllAccounts,"Una volta effettuata la disconnessione, tutti gli account verranno rimossi da questo dispositivo."
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,"Se lo fai, non vedrai più questo account su questo dispositivo, a meno che non effettui nuovamente l'accesso. Tornerai alla pagina di destinazione."
+Authentication.AccountSwitch.Description.StaleSessionSignInAgain,È da un po' che non utilizzi questo account. Accedi di nuovo.
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,Prova ad accedere direttamente
 Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,Non è possibile cambiare account
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
@@ -305,7 +307,7 @@ Authentication.Login.Action.ResendCode,
 Authentication.Login.Action.Save,Salva
 Authentication.Login.Action.SendCodeSentenceCase,Invia codice
 Authentication.Login.Action.SendVerificationEmail,Invia e-mail di verifica
-Authentication.Login.Action.SignIn,Accedi
+Authentication.Login.Action.SignIn,
 Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,Usa Passkey
@@ -1581,7 +1583,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Trova persone su Roblox ce
 Feature.AddFriends.Label.ConnectWithContacts,Invita contatti o connettiti con amici già su Roblox!
 Feature.AddFriends.Label.ContactsTile,
 Feature.AddFriends.Label.DeclineAllBackgrounded,Ignora tutte le richieste di amicizia. Questo potrebbe richiedere un minuto.
-Feature.AddFriends.Label.EmptyState.FriendsRename,Con chi esplorerai Roblox? Aggiungi amici per fare di più su Roblox!
 Feature.AddFriends.Label.EmptyStatePrompt,"Con chi esplorerai Roblox? Cerca persone da aggiungere, o connettiti con amici che conosci già!"
 Feature.AddFriends.Label.FriendRequests,Richieste di amicizia
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Ricerca gente
@@ -1589,16 +1590,13 @@ Feature.AddFriends.Label.MyQrCode,Il mio codice QR
 Feature.AddFriends.Label.QRCodeTitle,
 Feature.AddFriends.Label.SchoolTile,Compagni di classe
 Feature.AddFriends.Label.SearchForFriendsPrompt,
-Feature.AddFriends.Label.ShareQRCodeAddConnection,Condividi il tuo codice QR per aggiungere persone che conosci
-Feature.AddFriends.Label.SyncContactsInvitePeople,Sincronizza i contatti per trovare e invitare amici!
-Feature.AddFriends.Label.SyncWithContacts,
+Feature.AddFriends.Label.SyncWithContacts,Sincronizza i contatti per trovare e invitare amici!
 Feature.AddFriends.Label.TrustedFriendRequests,Richieste come amico affidabile
 Feature.AddFriends.Text.EmptyState.FriendsRename,Con chi esplorerai Roblox?{lineBreak}Aggiungi amici per fare di più su Roblox!
 Feature.AddFriends.Title.AddFriendsToolTip,Roblox è meglio con gli amici!
 Feature.AddFriends.Title.AddFriendsTooltipTitle,
 Feature.AddFriends.Title.CameraPermission,Autorizzazione fotocamera
 Feature.AddFriends.Title.ConnectWithContacts,Aggiungi dai contatti
-Feature.AddFriends.Title.ShareQRCode,Aggiungi dal codice QR
 Feature.AgeGuidelines.DisplayName.StrongLanguage,Linguaggio forte
 Feature.AgeGuidelines.Label.CreatorEnabled,Creatore abilitato
 Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect,Sblocca più contenuti e funzionalità.
@@ -1711,6 +1709,7 @@ Feature.AppealsPortal.Label.Location,Su
 Feature.AppealsPortal.Label.LookDescription,Descrizione Avatar condiviso
 Feature.AppealsPortal.Label.LookId,ID Avatar condiviso
 Feature.AppealsPortal.Label.LookName,Nome Avatar condiviso
+Feature.AppealsPortal.Label.MomentDescription,Descrizione del Momento
 Feature.AppealsPortal.Label.PlaceIDPrompt,Qual è l'ID del posto?
 Feature.AppealsPortal.Label.PlaceId,ID luogo
 Feature.AppealsPortal.Label.PlaceName,Nome della località
@@ -2168,6 +2167,8 @@ Feature.Avatar.Label.Shoes,Scarpe
 Feature.Avatar.Label.Shorts,Pantaloncini
 Feature.Avatar.Label.Shoulder,Spalle
 Feature.Avatar.Label.Skin,Pelle
+Feature.Avatar.Label.Spawn,Rigenerare
+Feature.Avatar.Label.SpawnEffects,Effetti Rigenerazione
 Feature.Avatar.Label.Sweater,Maglione
 Feature.Avatar.Label.Sweaters,Maglioni
 Feature.Avatar.Label.Swim,Nuota
@@ -2990,6 +2991,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,I miei amici ({count})
 Feature.BuyRobux.Label.PeopleWithCount,Persone ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Gallery,Galleria
 Feature.Catalog.Action.Buy,Compra
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,Vai a Personalizza
@@ -3480,7 +3482,6 @@ Feature.Chat.Label.SearchForFriendsAndChat,Cerca conversazioni
 Feature.Chat.Label.SearchFriends,Cerca amici
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.Sent,Inviato
-Feature.Chat.Label.SnoozeChatNotifications,Silenzia notifiche chat dell'esperienza:
 Feature.Chat.Label.SnoozePartyNotifications,Silenzia notifiche gruppo dell'esperienza per:
 Feature.Chat.Label.SwipeToReplyTooltip,Scorri per rispondere
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}gg
@@ -3537,7 +3538,6 @@ Feature.Chat.Response.NetworkError,Errore di rete
 Feature.Chat.Response.Sending,Invio
 Feature.Chat.RobloxConnectUnavailableWithUser,"Al momento, Roblox Connect non è disponibile per questo utente."
 Feature.Chat.Text.NoFriends,"Non hai ancora aggiunto nessun amico. Per iniziare, trova e aggiungi i tuoi amici su Roblox."
-Feature.Chat.Title.MuteChatNotifications,Disattiva l'audio delle notifiche degli amici all'interno della chat durante la partita
 Feature.Chat.Title.NewChat,Nuova chat
 Feature.Chat.Toast.Error.InvalidUserSelected,Impossibile aggiungere una o più persone di questo elenco
 Feature.CommunityLinks.Description.CommunityDefault,Unisciti alla comunità Guilded ufficiale per {experienceName} per visualizzare annunci e altro!
@@ -3734,8 +3734,10 @@ Feature.FaceChat.Subtitle.UnableToAccessCamera,"Per animare il tuo avatar usando
 Feature.Favorites.Label.Favorite,
 Feature.Favorites.Label.Favorited,
 Feature.FlyoutSidePanel.Action.ContinuePlaying,
+Feature.FlyoutSidePanel.Description.SwitchAccountsHere,Ora puoi cambiare account qui.
 Feature.FlyoutSidePanel.Label.TooltipBody,"Il tuo profilo, i contenuti e le impostazioni sono stati spostati in una nuova posizione."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> è stato spostato
+Feature.FlyoutSidePanel.Title.AccountSwitcherMoved,Abbiamo modificato la posizione del pulsante Cambia account
 Feature.Friends.Action.AcceptFriend,Accetta amicizia
 Feature.Friends.Action.AccountDeleted,Account eliminato
 Feature.Friends.Action.Add,
@@ -4431,6 +4433,7 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,Foto
 Feature.Moments.Label.PostDeleted,Momento eliminato
 Feature.Moments.Label.PostRemovedBody,Il Momento che hai pubblicato viola le nostre norme della community.
+Feature.Moments.Label.PostedOnDate,Pubblicato il {date}
 Feature.Moments.Label.PublishingRodeoBody,Non dovrebbe volerci molto.
 Feature.Moments.Label.Reactions,Reazioni
 Feature.Moments.Label.ReportReason.BreaksRules,Questo post viola le regole
@@ -4764,6 +4767,9 @@ Feature.NotApproved.Label.LatestActivity,Ultima attività esaminata
 Feature.NotApproved.Label.LoadingImage,Caricamento dell'immagine in corso
 Feature.NotApproved.Label.LogoutProgress,Disconnessione in corso
 Feature.NotApproved.Label.MenuContent,Contenuto del menu
+Feature.NotApproved.Label.MessageToUser.AltConsequence.Reset,"Questo account è collegato a un account ripristinato (@{account}) che è stato bandito per una grave violazione delle nostre Norme della community. Solo l'account bandito può contestare la violazione. 
+
+Se ritieni che i due account siano stati collegati per errore, puoi inviare un reclamo tramite questo account dalla sezione Violazioni e ricorsi."
 Feature.NotApproved.Label.MessageToUser.AltConsequence.V2,"Questo account è collegato a un account che è stato bannato per una grave violazione delle nostre Norme della community. Per contestare la violazione, è necessario inoltrare la richiesta dall'account bannato."
 Feature.NotApproved.Label.MessageToUser.AltConsequence.V3,"Questo account è collegato a un account (@{account}) che è stato bandito per una grave violazione delle nostre Norme della community. Solo l'account bandito può contestare la violazione. 
 

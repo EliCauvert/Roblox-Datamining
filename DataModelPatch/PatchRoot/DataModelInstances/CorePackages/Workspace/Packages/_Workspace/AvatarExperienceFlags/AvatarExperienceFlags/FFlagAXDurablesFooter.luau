@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXDurablesFooter2", false)

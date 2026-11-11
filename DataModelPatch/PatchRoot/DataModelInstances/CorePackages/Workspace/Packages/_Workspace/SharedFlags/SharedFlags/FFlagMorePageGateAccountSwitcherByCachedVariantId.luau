@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("MorePageGateAccountSwitcherByCachedVariantId2", false)

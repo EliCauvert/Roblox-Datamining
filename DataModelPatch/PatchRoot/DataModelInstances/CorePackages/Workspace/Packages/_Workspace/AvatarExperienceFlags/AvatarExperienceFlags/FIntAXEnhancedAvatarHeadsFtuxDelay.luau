@@ -1,1 +1,0 @@
-﻿return game:DefineFastInt("AXEnhancedAvatarHeadsFtuxDelayMs", 1000)

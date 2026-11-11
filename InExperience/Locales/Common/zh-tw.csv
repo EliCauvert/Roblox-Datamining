@@ -1481,6 +1481,7 @@ Feature.AddFriends.Action.FriendAdded,已新增好友
 Feature.AddFriends.Action.IgnoreFriendRequest,忽略好友邀請
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,忽略信任的好友邀請
 Feature.AddFriends.Action.RequestIgnored,已忽略邀請
+Feature.AddFriends.Heading.AddFriends,
 Feature.AddFriends.Label.AddFriendsTooltip,先找到您的朋友，一起開始探索 Roblox。
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,搜尋使用者名稱或名字，在 Roblox 找到其他人。
 Feature.AddFriends.Label.ConnectWithContacts,邀請聯絡人或與已經在 Roblox 的好友交流！
@@ -1874,6 +1875,8 @@ Feature.Avatar.Label.Shoes,鞋子
 Feature.Avatar.Label.Shorts,短褲
 Feature.Avatar.Label.Shoulder,肩膀
 Feature.Avatar.Label.Skin,
+Feature.Avatar.Label.Spawn,生成
+Feature.Avatar.Label.SpawnEffects,生成效果
 Feature.Avatar.Label.Sweater,外套
 Feature.Avatar.Label.Sweaters,
 Feature.Avatar.Label.Swim,游泳
@@ -2096,7 +2099,10 @@ Feature.AvatarSwitcher.Message.SelectAvatar,選擇虛擬人偶
 Feature.AvatarSwitcher.Message.SwitchingDeferred,下次重生或加入體驗時，將會看到此虛擬人偶。你可以隨時切換其他虛擬人偶。
 Feature.AvatarSwitcher.Message.UnknownSupport,你仍可切換虛擬人偶，但可能無法在此體驗中正確顯示。
 Feature.AvatarSwitcher.Message.Unsupported,此體驗使用自訂虛擬人偶，不支援 Roblox 虛擬人偶。
+Feature.AvatarWorkshop.Action.EditAvatar,編輯虛擬人偶
 Feature.AvatarWorkshop.Action.TryAgain,再試一次
+Feature.AvatarWorkshop.Heading.Customize,
+Feature.AvatarWorkshop.Heading.YourAvatars,你的虛擬人偶
 Feature.AvatarWorkshop.Message.LoadItemsError,載入物品時發生錯誤。
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,無法載入更多物品。
 Feature.AvatarWorkshop.Message.NoItemsOwned,你在此處還沒有任何物品。
@@ -3253,7 +3259,6 @@ Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} 說...
 Feature.Chat.Label.ReplyingToYourself,你說…
 Feature.Chat.Label.SearchFriends,搜尋好友
 Feature.Chat.Label.SearchWord,
-Feature.Chat.Label.SnoozeChatNotifications,將體驗中的聊天通知靜音：
 Feature.Chat.Label.SnoozePartyNotifications,將體驗內的隊伍通知靜音：
 Feature.Chat.Label.SwipeToReplyTooltip,滑動以回覆
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} 天
@@ -3309,7 +3314,6 @@ Feature.Chat.Response.NetworkError,網路錯誤
 Feature.Chat.RobloxConnectUnavailableWithUser,此使用者目前無法使用 Roblox Connect。
 Feature.Chat.Text.NoFriends,你尚未新增任何好友。若要開始，請在 Roblox 上尋找並新增好友。
 Feature.Chat.Title.FriendsChat,好友聊天
-Feature.Chat.Title.MuteChatNotifications,在遊戲遊玩期間將好友的聊天通知靜音
 Feature.Chat.Title.NewChat,新聊天
 Feature.Chat.Toast.Error.InvalidUserSelected,此清單中有人員無法新增
 Feature.ContactUpsell.Action.Continue,
@@ -3848,6 +3852,7 @@ Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining}後結束
 Feature.InExperienceShop.Label.FreeTrial,免費試用
 Feature.InExperienceShop.Label.HaveTrial,專屬免費試用機會
+Feature.InExperienceShop.Label.KeepIt,
 Feature.InExperienceShop.Label.NoDescription,無說明
 Feature.InExperienceShop.Label.OfferEndTime,{offer}將於 {timeRemaining}後結束
 Feature.InExperienceShop.Label.PreviewBanner,這是你在 Roblox Studio 中的商店預覽。玩家不會看到此預覽。
@@ -4009,6 +4014,7 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,相片
 Feature.Moments.Label.PostDeleted,美好時光已刪除
 Feature.Moments.Label.PostRemovedBody,你張貼的「美好時光」違反了我們的《社群標準》。
+Feature.Moments.Label.PostedOnDate,張貼日期：{date}
 Feature.Moments.Label.PublishingRodeoBody,這不會花太久時間。
 Feature.Moments.Label.Reactions,反應
 Feature.Moments.Label.ReportReason.BreaksRules,此貼文違反規定
@@ -4168,7 +4174,7 @@ Feature.PlayerSearchResults.Label.YouAreFollowing,您在追蹤
 Feature.PlayerSearchResults.Label.YouAreFriends,您們是好友
 Feature.PrivateServers.Action.CreatePrivateServer,建立私人伺服器
 Feature.PrivateServers.Action.FreeWithBlackbird,透過 Plus 免費使用
-Feature.PrivateServers.Action.Generate,生成
+Feature.PrivateServers.Action.Generate,
 Feature.PrivateServers.Description.FriendsAllowed,好友名單中的任何人無需邀請就能加入
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio 不支援購買私人伺服器。
 Feature.PrivateServers.Description.VipServersNotSupported,此遊戲不支援私人伺服器。
@@ -4191,7 +4197,7 @@ Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,複製個人檔案連結
 Feature.Profile.Action.CreateInBuild,在組建中建立
 Feature.Profile.Action.EditAppearance,編輯外觀
-Feature.Profile.Action.EditAvatar,編輯虛擬人偶
+Feature.Profile.Action.EditAvatar,
 Feature.Profile.Action.EditBackground,編輯背景
 Feature.Profile.Action.EditEmotes,編輯動作
 Feature.Profile.Action.EditLook,編輯造型
