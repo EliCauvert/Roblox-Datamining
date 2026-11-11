@@ -1,0 +1,8 @@
+﻿local InviteLinkExpiredModal = script:FindFirstAncestor("InviteLinkExpiredModal")
+local DependenciesModule = require(InviteLinkExpiredModal.dependencies)
+require(InviteLinkExpiredModal.devDependencies).JestGlobals.beforeAll(function(_)
+	-- upvalues: DependenciesModule (copy)
+	DependenciesModule.RoduxNetworking.setNetworkImpl(function(p1)
+		error(string.format("Should have replaced network implementation for url: %s", (tostring(p1))))
+	end)
+end)

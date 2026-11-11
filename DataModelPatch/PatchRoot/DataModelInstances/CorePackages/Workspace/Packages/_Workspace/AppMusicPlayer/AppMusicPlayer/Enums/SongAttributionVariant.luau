@@ -1,0 +1,1 @@
+﻿return { Compact = "Compact", Expanded = "Expanded" }

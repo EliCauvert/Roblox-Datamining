@@ -1,0 +1,211 @@
+﻿local Modules = game:GetService("CoreGui").RobloxGui.Modules
+local CorePackages = game:GetService("CorePackages")
+local RoduxModule = require(CorePackages.Packages.Rodux)
+local EventNetworkingModule = require(Modules.LuaApp.Components.EventReceivers.EventNetworking)
+local ClearUserSpecificDataModule = require(Modules.LuaApp.Actions.ClearUserSpecificData)
+local ApiModule = require(Modules.LuaApp.Components.PYMKCarousel.api)
+local ApiModule1 = require(Modules.LuaApp.Components.ContactImporter.api)
+local ApiModule2 = require(Modules.LuaApp.Components.DiscoverabilityModal.api)
+local ApiModule3 = require(Modules.LuaApp.Components.SetAlias.api)
+local ProfileQRCodeModule = require(CorePackages.Workspace.Packages.ProfileQRCode)
+local SocialExperienceJoinModule = require(CorePackages.Workspace.Packages.SocialExperienceJoin)
+local InstallReducerModule = require(CorePackages.Workspace.Packages.SquadsCore.installReducer)
+local SquadLocation = require(CorePackages.Workspace.Packages.SquadsCore.Enums).SquadLocation
+local ContactsToastModule = require(CorePackages.Workspace.Packages.ContactsToast)
+local GameIconRoduxModule = require(CorePackages.Workspace.Packages.GameIconRodux)
+local GameIconReducer = GameIconRoduxModule.GameIcons.GameIconReducer
+local BigGameIconReducer = GameIconRoduxModule.BigGameIcons.BigGameIconReducer
+local GamesProductInfoReducer = require(CorePackages.Workspace.Packages.GameProductInfoRodux).GamesProductInfoReducer
+local DiscoveryTypesModule = require(CorePackages.Workspace.Packages.DiscoveryTypes)
+local FriendRequestNicknamesModule = require(CorePackages.Workspace.Packages.FriendRequestNicknames)
+local UserSearchModule = require(CorePackages.Workspace.Packages.UserSearch)
+local SocialBlockingModalModule = require(CorePackages.Workspace.Packages.SocialBlockingModal)
+local SocialProofModule = require(CorePackages.Workspace.Packages.SocialProof)
+local SocialTabsPageModule = require(CorePackages.Workspace.Packages.SocialTabsPage)
+local UserListModule = require(CorePackages.Workspace.Packages.UserList)
+local Modules1 = require(CorePackages.Workspace.Packages.DiscoveryMonolith).Modules
+local GetFFlagLocalUserGameVoteCounterReducerModule = require(Modules.LuaApp.Flags.GetFFlagLocalUserGameVoteCounterReducer)
+local GetFFlagIsSquadEnabledFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagIsSquadEnabled
+local GetFFlagLuaAppEnableNativeRobuxProductsModule = require(Modules.LuaApp.Flags.GetFFlagLuaAppEnableNativeRobuxProducts)
+local GetFFlagContactsToastEnabledFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagContactsToastEnabled
+local FFlagUseSignalsForSearchBar = require(CorePackages.Workspace.Packages.SharedFlags).FFlagUseSignalsForSearchBar
+local FFlagUseSignalsForGlobalContextMenuInset = require(CorePackages.Workspace.Packages.SharedFlags).FFlagUseSignalsForGlobalContextMenuInset
+local ContactsToastIXP = ContactsToastModule.ContactsToastIXP
+local FFlagFriendRequestNicknames = require(CorePackages.Workspace.Packages.SharedFlags).FFlagFriendRequestNicknames
+local FFlagRemoveUnusedLoginResultRoduxSlice = require(CorePackages.Workspace.Packages.SharedFlags).FFlagRemoveUnusedLoginResultRoduxSlice
+local FFlagRemoveUnusedSignUpInfoRoduxSlice = require(CorePackages.Workspace.Packages.SharedFlags).FFlagRemoveUnusedSignUpInfoRoduxSlice
+local GetFFlagLuaAppEnableTopBannerFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagLuaAppEnableTopBanner
+local FFlagEnableUserAccessServiceIntegration = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableUserAccessServiceIntegration
+local FFlagRobuxBadgeEnabledModule = require(Modules.LuaApp.Flags.FFlagRobuxBadgeEnabled)
+local FFlagEnableSocialProofUserList = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableSocialProofUserList
+local FFlagEnablePlayWithRewardComponent = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnablePlayWithRewardComponent
+local FFlagEnableUserListModule = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableUserListModule
+local FFlagEnableSocialTabsPage = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableSocialTabsPage
+local FFlagLuaAppEdpBackendV2HydrateLegacyIxp = require(CorePackages.Workspace.Packages.SharedFlags).FFlagLuaAppEdpBackendV2HydrateLegacyIxp
+
+local function _(p1, p2)
+	-- upvalues: ClearUserSpecificDataModule (copy)
+	if p2.type == ClearUserSpecificDataModule.name then
+		p1 = {
+			ScreenSize = p1.ScreenSize,
+			DeviceOrientation = p1.DeviceOrientation,
+			FormFactor = p1.FormFactor,
+			GlobalGuiInset = p1.GlobalGuiInset,
+			TopBar = p1.TopBar,
+			AuthenticationStatus = p1.AuthenticationStatus
+		}
+	end
+	return p1
+end
+
+local Callback = (if require(CorePackages.Workspace.Packages.SharedFlags).FFlagUseSignalsRoduxStore then require(CorePackages.Workspace.Packages.SignalsRodux).combineReducers else RoduxModule.combineReducers)({
+	DeviceOrientation = require(Modules.LuaApp.Reducers.DeviceOrientation),
+	TopBar = require(Modules.LuaApp.Reducers.TopBar),
+	SiteMessage = require(Modules.LuaApp.Reducers.SiteMessage),
+	TabBarVisible = require(CorePackages.Workspace.Packages.AppTabBarRodux).Reducers.TabBarVisible,
+	GamepadBottomBar = require(Modules.LuaApp.Reducers.GamepadBottomBar),
+	FetchingStatus = require(Modules.LuaApp.Reducers.FetchingStatus),
+	LaunchContext = require(CorePackages.Workspace.Packages.AppStartup).Reducers.LaunchContext,
+	AppTopBanner = if GetFFlagLuaAppEnableTopBannerFunction() then require(CorePackages.Workspace.Packages.AppTopBanner).Reducers.AppTopBannerReducer else nil,
+	Users = require(Modules.LuaApp.Reducers.Users),
+	UsersAsync = require(Modules.LuaApp.Reducers.UsersAsync),
+	UserStatuses = require(Modules.LuaApp.Reducers.UserStatuses),
+	LocalUserId = require(CorePackages.Workspace.Packages.UserLib).Reducers.LocalUserIdReducer,
+	InGameUsersByGame = require(Modules.LuaApp.Reducers.InGameUsersByGame),
+	IsLocalUserSoothsayer = require(Modules.LuaApp.Reducers.IsLocalUserSoothsayer),
+	SignUpInfo = if FFlagRemoveUnusedSignUpInfoRoduxSlice then nil else require(Modules.LuaApp.Reducers.Authentication.SignUpInfo),
+	CountryCodeList = require(CorePackages.Workspace.Packages.AuthCommon).Reducers.CountryCodeList,
+	CountryCode = require(CorePackages.Workspace.Packages.CountryCode).CountryCodeReducer,
+	LoginResult = if FFlagRemoveUnusedLoginResultRoduxSlice then nil else require(Modules.LuaApp.Reducers.Authentication.LoginResult),
+	GameSortGroups = Modules1.LuaApp.Reducers.Games.GameSortGroups,
+	[GameIconReducer.key] = GameIconReducer.reducer,
+	[BigGameIconReducer.key] = BigGameIconReducer.reducer,
+	GameThumbnails = require(CorePackages.Workspace.Packages.GameThumbnailsRodux).GameThumbnailsReducer,
+	GameDetails = require(CorePackages.Workspace.Packages.GameDetailRodux).GameDetails.GameDetailReducer,
+	GameDetailsV2 = if require(CorePackages.Workspace.Packages.SharedFlags).FFlagLuaAppEdpBackendV2HydrateLegacyDefault or FFlagLuaAppEdpBackendV2HydrateLegacyIxp then require(CorePackages.Workspace.Packages.GameDetailRodux).GameDetails.GameDetailsV2Reducer else nil,
+	GameDetailErrors = require(CorePackages.Workspace.Packages.GameDetailRodux).GameDetails.GameDetailErrorReducer,
+	GameSocialLinks = require(Modules.LuaApp.Reducers.Games.GameSocialLinks),
+	GameFollowings = require(Modules.LuaApp.Reducers.GameFollowings),
+	ExperienceNotificationsEnabled = require(Modules.LuaApp.Reducers.Games.ExperienceNotificationsEnabled),
+	GamePasses = require(Modules.LuaApp.Reducers.Games.GamePasses),
+	PassesThumbnails = require(Modules.LuaApp.Reducers.PassesThumbnails),
+	GameSubscriptionProducts = require(Modules.LuaApp.Reducers.Subscription.GameSubscriptionProducts),
+	SubscriptionProductsThumbnails = require(Modules.LuaApp.Reducers.Subscription.SubscriptionProductsThumbnails),
+	SubscriptionStatuses = require(Modules.LuaApp.Reducers.Subscription.SubscriptionStatuses),
+	GameDeveloperProducts = require(Modules.LuaApp.Reducers.DeveloperProduct.GameDeveloperProducts),
+	DeveloperProductsThumbnails = require(Modules.LuaApp.Reducers.DeveloperProduct.DeveloperProductsThumbnails),
+	DeveloperProductStatuses = require(Modules.LuaApp.Reducers.DeveloperProduct.DeveloperProductStatuses),
+	GameBadges = require(Modules.LuaApp.Reducers.GameBadges),
+	ShowAgeVerificationOverlay = require(CorePackages.Workspace.Packages.VoiceChat).AgeVerificationOverlay.ShowAgeVerificationOverlay,
+	VoiceChatOptInStatus = require(CorePackages.Workspace.Packages.VoiceChat).OptInStatus.VoiceChatOptInStatus,
+	UserRobux = require(Modules.LuaApp.Reducers.UserRobux),
+	GameCoPlay = require(Modules.LuaApp.Reducers.GameCoPlay),
+	GameVotes = require(CorePackages.Workspace.Packages.GameVotesRodux).GameVotes.GameVotes,
+	UserGameVotes = require(CorePackages.Workspace.Packages.GameVotesRodux).UserGameVotes.UserGameVotes,
+	LocalUserGameVoteCounter = if GetFFlagLocalUserGameVoteCounterReducerModule() then require(CorePackages.Workspace.Packages.Achievements).Reducers.LocalUserGameVoteCounter else nil,
+	GameFavorites = require(Modules.LuaApp.Reducers.Games.GameFavorites),
+	GamePrivateServersEnabled = require(Modules.LuaApp.Reducers.Games.GamePrivateServersEnabled),
+	[GamesProductInfoReducer.key] = GamesProductInfoReducer.reducer,
+	OmniRecommendationsRefreshTime = Modules1.LuaApp.Reducers.Games.OmniRecommendationsRefreshTime,
+	RecommendedGameEntries = require(Modules.LuaApp.Reducers.Games.RecommendedGameEntries),
+	GameMedia = Modules1.LuaApp.Reducers.Games.GameMedia,
+	GameDetailsPeekView = require(Modules.LuaApp.Reducers.Games.GameDetailsPeekView),
+	SearchBar = if FFlagUseSignalsForSearchBar then nil else require(Modules.LuaApp.Reducers.SearchBar),
+	OmniRecommendations = Modules1.LuaApp.Reducers.Games.OmniRecommendations,
+	Personalization = require(Modules.Personalization.PersonalizationReducer),
+	AgeRecommendations = require(CorePackages.Workspace.Packages.GameDetailRodux).AgeRecommendations.AgeRecommendationsReducer,
+	AgeRecommendationHeaders = require(CorePackages.Workspace.Packages.GameDetailRodux).AgeRecommendations.AgeRecommendationHeaders,
+	AssetTextFilterSettings = require(Modules.LuaApp.Reducers.AssetTextFilterSettings),
+	CommunityLinks = require(CorePackages.Workspace.Packages.CommunityLinks).installReducer(),
+	CatalogAssets = require(Modules.LuaApp.Reducers.CatalogAssets),
+	CatalogBundles = require(Modules.LuaApp.Reducers.CatalogBundles),
+	PlayabilityStatus = require(CorePackages.Workspace.Packages.PlayabilityRodux).PlayabilityStatus.PlayabilityStatusReducer,
+	UniversePlaceInfos = require(CorePackages.Workspace.Packages.PlaceInfoRodux).Reducers.UniversePlaceInfos,
+	AutocompleteSuggestions = require(Modules.LuaApp.Reducers.AutocompleteSuggestions),
+	UsersSearchResults = require(Modules.LuaApp.Components.UserSearch.Reducers.UsersSearchResults),
+	FriendStatuses = require(Modules.LuaApp.Reducers.FriendStatuses),
+	CurrentToastMessages = require(Modules.LuaApp.Reducers.CurrentToastMessages),
+	CentralOverlay = require(CorePackages.Workspace.Packages.CentralOverlay).Reducers.CentralOverlayReducer,
+	RequestsStatus = Modules1.LuaApp.Reducers.RequestsStatus,
+	Navigation = require(Modules.LuaApp.Reducers.Navigation),
+	Search = require(Modules.LuaApp.Reducers.Search),
+	SearchesParameters = require(Modules.LuaApp.Reducers.SearchesParameters),
+	SearchTimes = require(Modules.LuaApp.Reducers.SearchTimes),
+	SearchesTypes = require(Modules.LuaApp.Reducers.SearchesTypes),
+	FriendCount = require(CorePackages.Workspace.Packages.LegacyFriendsRodux).Reducers.FriendCount,
+	FriendPresenceCounts = require(CorePackages.Workspace.Packages.LegacyFriendsRodux).Reducers.FriendPresenceCounts,
+	ConnectionState = require(Modules.LuaApp.Reducers.ConnectionState),
+	HomePageUpsellCardVariation = Modules1.LuaApp.Flags.GetFFlagEnableHomePageUpsellCard() and Modules1.LuaApp.Reducers.HomePageUpsellCardVariation or nil,
+	GameInvitesStatus = require(CorePackages.Workspace.Packages.GameInvite).GameInvitesStatusReducer,
+	GlobalGuiInset = require(Modules.LuaApp.Reducers.GlobalGuiInset),
+	GlobalContextMenuInset = if FFlagUseSignalsForGlobalContextMenuInset then nil else require(Modules.LuaApp.Reducers.GlobalContextMenuInset),
+	ScreenSize = require(Modules.LuaApp.Reducers.ScreenSize),
+	FormFactor = require(CorePackages.Workspace.Packages.FormFactor).FormFactorReducer,
+	ScreenGuiBlur = require(Modules.LuaApp.Reducers.ScreenGuiBlur),
+	Platform = require(Modules.LuaApp.Reducers.Platform),
+	RoactChat = require(Modules.LuaApp.Reducers.RoactChat),
+	ChatAppReducer = require(CorePackages.Workspace.Packages.AppChat.installReducer)(),
+	AvatarExperience = require(Modules.AvatarExperience.Common.Reducers.AvatarExperience),
+	Luobu = require(Modules.Luobu.Reducers.Luobu),
+	Startup = require(Modules.LuaApp.Reducers.Startup),
+	NotificationBadgeCounts = require(Modules.LuaApp.Reducers.NotificationBadgeCounts),
+	DevSubs = require(Modules.LuaApp.Reducers.DevSubs),
+	IAPProducts = require(Modules.LuaApp.Reducers.IAPProducts),
+	NativePurchase = require(Modules.LuaApp.Reducers.NativePurchase),
+	NativeRobuxProducts = if GetFFlagLuaAppEnableNativeRobuxProductsModule() then require(Modules.LuaApp.Reducers.NativeRobuxProducts) else nil,
+	AuthenticationStatus = require(CorePackages.Workspace.Packages.AuthenticationStatus).Reducers.AuthenticationStatusReducer,
+	IsLocalUserUnder13 = require(CorePackages.Workspace.Packages.UserLib).Reducers.IsLocalUserUnder13Reducer,
+	SocialTab = require(CorePackages.Workspace.Packages.SocialTabState).installReducer(),
+	FriendsLanding = require(CorePackages.Workspace.Packages.FriendsLanding.installReducer)(),
+	AddFriends = require(CorePackages.Workspace.Packages.AddFriendsState).installReducer(),
+	ProfilePlatform = require(CorePackages.Workspace.Packages.ProfilePlatform.installReducer)(),
+	[SocialExperienceJoinModule.RoduxKey] = SocialExperienceJoinModule.installReducer(),
+	SocialProof = if FFlagEnableSocialProofUserList then SocialProofModule.installReducer() else nil,
+	[SocialTabsPageModule.RoduxKey] = if FFlagEnableSocialTabsPage then SocialTabsPageModule.installReducer() else nil,
+	UserList = if FFlagEnableUserListModule then UserListModule.installReducer() else nil,
+	ProfileShareLinks = require(CorePackages.Workspace.Packages.ProfileShareLinks).Rodux.installReducer(),
+	[ApiModule1.RoduxKey] = ApiModule1.installReducer(),
+	InviteLinkExpiredModal = require(Modules.LuaApp.Components.InviteLinkExpiredModal.api).installReducer(),
+	Moderation = require(Modules.LuaApp.Reducers.Moderation.UserModeration),
+	AccountSecurityPrompt = require(Modules.LuaApp.Reducers.AccountSecurity.Prompt),
+	FriendsCarousel = require(Modules.LuaApp.Components.FriendsCarousel.api).installReducer(),
+	VerifiedBadges = require(CorePackages.Workspace.Packages.VerifiedBadges).installReducer(),
+	VirtualEvents = require(CorePackages.Workspace.Packages.VirtualEventsState).installReducer(),
+	[EventNetworkingModule.RoduxKey] = EventNetworkingModule.installReducer(),
+	[ApiModule.RoduxKey] = ApiModule.installReducer({
+		contentType = DiscoveryTypesModule.OmniRecommendationsContentType.RecommendedFriend,
+		treatmentType = DiscoveryTypesModule.OmniFeedTypes.FriendRecommendationCarousel
+	}),
+	[ApiModule2.RoduxKey] = ApiModule2.installReducer(),
+	[ApiModule3.RoduxKey] = ApiModule3.installReducer(),
+	[ProfileQRCodeModule.RoduxKey] = ProfileQRCodeModule.installReducer(),
+	[require(CorePackages.Workspace.Packages.EditProfile.Constants).RODUX_KEY] = require(CorePackages.Workspace.Packages.EditProfile.installReducer)(),
+	[require(CorePackages.Workspace.Packages.SquadsCore.Constants).RODUX_KEY] = if GetFFlagIsSquadEnabledFunction() then InstallReducerModule(SquadLocation.InApp) else nil,
+	CrossPlaySettings = require(CorePackages.Workspace.Packages.CrossPlay).Reducers.CrossPlaySettings,
+	PlayerContextualMenu = require(CorePackages.Workspace.Packages.PlayerContextualMenu).installReducer(),
+	[ContactsToastModule.RoduxKey] = if GetFFlagContactsToastEnabledFunction() or ContactsToastIXP.FFlagContactsToastExperimentEnabled then ContactsToastModule.installReducer() else nil,
+	[FriendRequestNicknamesModule.RoduxKey] = if FFlagFriendRequestNicknames then FriendRequestNicknamesModule.installReducer() else nil,
+	[UserSearchModule.RoduxKey] = UserSearchModule.installReducer(),
+	UserAccess = if FFlagEnableUserAccessServiceIntegration then require(Modules.LuaApp.Reducers.UserAccess.UserAccess) else nil,
+	RobuxVirtualItem = if FFlagRobuxBadgeEnabledModule then require(Modules.LuaApp.Reducers.RobuxVirtualItem) else nil,
+	[SocialBlockingModalModule.RoduxKey] = SocialBlockingModalModule.installReducer(),
+	PlayWithRewardState = if FFlagEnablePlayWithRewardComponent then require(CorePackages.Workspace.Packages.PlayWithRewardState).PlayWithRewardState else nil,
+	TextSearchResults = require(Modules.LuaApp.Components.Search.Reducers.TextSearchResults)
+})
+
+return function(p1, p2, p3)
+	-- upvalues: Callback (copy), ClearUserSpecificDataModule (copy)
+	local v1 = p1
+	
+	if p2.type == ClearUserSpecificDataModule.name then
+		v1 = {
+			ScreenSize = v1.ScreenSize,
+			DeviceOrientation = v1.DeviceOrientation,
+			FormFactor = v1.FormFactor,
+			GlobalGuiInset = v1.GlobalGuiInset,
+			TopBar = v1.TopBar,
+			AuthenticationStatus = v1.AuthenticationStatus
+		}
+	end
+	return Callback(v1, p2, p3)
+end

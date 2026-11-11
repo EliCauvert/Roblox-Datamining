@@ -1,0 +1,1 @@
+﻿return { testMatch = { "**/*.test" } }

@@ -1,0 +1,3 @@
+﻿local FFlagLuaAppUnifyPlayButtonAllSurfacesIxpModule = require(script.Parent.FFlagLuaAppUnifyPlayButtonAllSurfacesIxp)
+
+return require(script.Parent.UIBlox).FFlagUIBloxEnableActionBarButtonOverride and (game:DefineFastFlag("LuaAppUnifyPlayButtonNonMobileEdp3", false) or FFlagLuaAppUnifyPlayButtonAllSurfacesIxpModule)

@@ -1,0 +1,4 @@
+﻿return {
+	UserReportButtonClicked = "userReportButtonClicked",
+	DevDoNotPushToProd = "DEV_EVENT_TYPE_DO_NOT_PUSH_TO_PROD"
+}

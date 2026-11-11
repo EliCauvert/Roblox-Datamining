@@ -1,0 +1,3 @@
+﻿local IntegrationsChromeShortcutTelemetry = game:DefineFastFlag("IntegrationsChromeShortcutTelemetry", false)
+
+return require(script.Parent.Parent.Parent.Chrome.Flags.EnrolledConsoleExperienceControls) or IntegrationsChromeShortcutTelemetry

@@ -1,0 +1,3 @@
+﻿local FFlagAXCatalogMakeupSupportModule = require(script.Parent.FFlagAXCatalogMakeupSupport)
+
+return game:DefineFastFlag("AXFixMakeupLookGrantOutfitHoisting", false) and FFlagAXCatalogMakeupSupportModule

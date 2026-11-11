@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("ExpChat").Parent.Dev.JestConfigs).createBenchmarkConfig("ExpChatBenchmarks")

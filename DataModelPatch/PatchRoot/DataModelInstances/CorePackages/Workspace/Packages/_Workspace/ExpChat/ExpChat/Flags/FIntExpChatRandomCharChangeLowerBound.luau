@@ -1,0 +1,1 @@
+﻿return game:DefineFastInt("ExpChatRandomCharChangeLowerBound", -5)

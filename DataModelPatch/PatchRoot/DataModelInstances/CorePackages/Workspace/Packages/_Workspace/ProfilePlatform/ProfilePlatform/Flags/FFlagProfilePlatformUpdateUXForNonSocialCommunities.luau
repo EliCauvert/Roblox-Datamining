@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("ProfilePlatformUpdateUXForNonSocialCommunities_v2", false)

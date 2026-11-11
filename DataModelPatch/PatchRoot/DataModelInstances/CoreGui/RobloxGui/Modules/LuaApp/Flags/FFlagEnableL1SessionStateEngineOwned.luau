@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("EnableL1SessionStateEngineOwned", false) and game:GetEngineFeature("L1SessionStateEngineOwnedLua")

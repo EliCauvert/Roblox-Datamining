@@ -1,0 +1,1 @@
+﻿return { Regular = "Regular", Filled = "Filled" }

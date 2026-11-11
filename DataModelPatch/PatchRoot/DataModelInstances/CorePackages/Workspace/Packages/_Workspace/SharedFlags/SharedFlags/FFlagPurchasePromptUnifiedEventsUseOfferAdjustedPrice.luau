@@ -1,0 +1,3 @@
+﻿local FFlagMarketplaceOffersRootModule = require(script.Parent.FFlagMarketplaceOffersRoot)
+
+return game:DefineFastFlag("PurchasePromptUnifiedEventsUseOfferAdjustedPrice", false) and FFlagMarketplaceOffersRootModule

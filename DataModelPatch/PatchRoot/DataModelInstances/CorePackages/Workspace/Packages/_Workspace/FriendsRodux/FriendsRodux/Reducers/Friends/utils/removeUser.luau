@@ -1,0 +1,6 @@
+﻿local LlamaModule = require(script:FindFirstAncestor("FriendsRodux").Parent.llama)
+
+return function(p1, p2)
+	-- upvalues: LlamaModule (copy)
+	return LlamaModule.List.removeValue(p1 or {}, p2)
+end

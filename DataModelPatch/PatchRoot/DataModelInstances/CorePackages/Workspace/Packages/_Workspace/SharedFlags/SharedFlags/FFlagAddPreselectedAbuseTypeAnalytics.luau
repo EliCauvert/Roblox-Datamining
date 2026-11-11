@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AddPreselectedAbuseTypeAnalytics2", false)

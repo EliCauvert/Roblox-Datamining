@@ -1,0 +1,3 @@
+﻿local FFlagProfilePlatformNewProfileHeader = require(script:FindFirstAncestor("ProfilePlatform").Parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
+
+return game:DefineFastFlag("ProfilePlatformAboutBeforeActionClient", false) and FFlagProfilePlatformNewProfileHeader

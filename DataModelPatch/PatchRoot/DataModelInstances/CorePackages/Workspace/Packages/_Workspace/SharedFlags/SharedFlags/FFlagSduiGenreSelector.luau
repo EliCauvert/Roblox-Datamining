@@ -1,0 +1,4 @@
+﻿local FFlagEnableSduiV2HomeInterleaveModule = require(script.Parent.FFlagEnableSduiV2HomeInterleave)
+local FFlagSduiVariableItemWidthCarouselModule = require(script.Parent.FFlagSduiVariableItemWidthCarousel)
+
+return game:DefineFastFlag("SduiGenreSelector2", false) and (FFlagEnableSduiV2HomeInterleaveModule and FFlagSduiVariableItemWidthCarouselModule)

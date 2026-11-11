@@ -1,0 +1,10 @@
+﻿game:DefineFastInt("LuaAppChallengeDialogEventReceiverRetryIntervalSeconds", 1)
+
+return function()
+	local LuaAppChallengeDialogEventReceiverRetryIntervalSecondsFastInt = game:GetFastInt("LuaAppChallengeDialogEventReceiverRetryIntervalSeconds")
+	
+	if LuaAppChallengeDialogEventReceiverRetryIntervalSecondsFastInt <= 0 then
+		LuaAppChallengeDialogEventReceiverRetryIntervalSecondsFastInt = 1
+	end
+	return LuaAppChallengeDialogEventReceiverRetryIntervalSecondsFastInt
+end

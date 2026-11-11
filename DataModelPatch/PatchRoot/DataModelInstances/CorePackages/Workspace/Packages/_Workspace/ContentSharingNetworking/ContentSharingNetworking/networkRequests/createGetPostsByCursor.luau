@@ -1,0 +1,13 @@
+﻿local APIURLModule = require(script.Parent.Parent.API_URL)
+
+return function(p1)
+	-- upvalues: APIURLModule (copy)
+	return p1.roduxNetworking.GET({ Name = "GetPostsByCursor" }, function(Callback, p2)
+		-- upvalues: APIURLModule (upval)
+		return Callback(APIURLModule):path("posts-api"):path("v1"):path("content-posts"):path("findByUser"):queryArgs({
+			cursor = p2.cursor,
+			sortOrder = p2.sortOrder,
+			userId = p2.userId
+		})
+	end)
+end

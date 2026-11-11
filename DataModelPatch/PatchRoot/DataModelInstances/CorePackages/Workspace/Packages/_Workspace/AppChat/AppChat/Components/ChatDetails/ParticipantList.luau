@@ -1,0 +1,134 @@
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local SocialLibrariesModule = require(AppChat.SocialLibraries)
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local MemoFunction = ReactModule.memo
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LoggerModule = require(script.Parent.Logger)
+local SortedList = SocialLibrariesModule.Components.SortedList
+local ParticipantEntryRightFrameModule = require(script.Parent.ParticipantEntryRightFrame)
+local ParticipantEntryModule = require(script.Parent.ParticipantEntry)
+local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
+local DomLocatorsModule = require(AppChat.Utils.DomLocators)
+local GetFFlagAppChatParticipantDialogFoundationMenuModule = require(AppChat.Flags.getFFlagAppChatParticipantDialogFoundationMenu)
+local config = {
+	entryHeight = 64,
+	pendingKey = "Feature.Chat.Label.Pending",
+	invitedKey = "Feature.SettingsHub.Label.Invited",
+	LayoutOrder = 0,
+	entries = {},
+	onEntryActivated = function(_, _)
+		-- upvalues: LoggerModule (copy)
+		LoggerModule:warning("onEntryActivated was not passed to ParticipantList")
+	end,
+	sortComparator = SocialLibrariesModule.Utils.presenceSortComparator
+}
+
+function ParticipantList(p1)
+	-- upvalues: CryoModule (copy), config (copy), GetFFlagAppChatParticipantDialogFoundationMenuModule (copy), ReactModule (copy), UseLocalizationFunction (copy), ParticipantEntryModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), ParticipantEntryRightFrameModule (copy), SortedList (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local OnEntryActivated = JoinResult.onEntryActivated or config.onEntryActivated
+	local FFlagAppChatParticipantDialogFoundationMenuModule = GetFFlagAppChatParticipantDialogFoundationMenuModule()
+	local UseRefResult = if FFlagAppChatParticipantDialogFoundationMenuModule then ReactModule.useRef({}) else nil
+	local UseLocalizationResult = UseLocalizationFunction({
+		pendingLabelText = JoinResult.pendingKey,
+		invitedLabelText = JoinResult.invitedKey
+	})
+	
+	local function _(p2)
+		-- upvalues: UseRefResult (ref), ReactModule (upval)
+		if UseRefResult == nil then
+			return nil
+		end
+		if UseRefResult.current[p2] == nil then
+			UseRefResult.current[p2] = ReactModule.createRef()
+		end
+		return UseRefResult.current[p2]
+	end
+	
+	local function RenderEntry(p2, _)
+		-- upvalues: UseLocalizationResult (copy), FFlagAppChatParticipantDialogFoundationMenuModule (copy), UseRefResult (ref), ReactModule (upval), JoinResult (copy), OnEntryActivated (copy), ParticipantEntryModule (upval)
+		local IsInvited = p2.metadata and p2.metadata.isInvited
+		local Text = tostring(p2.id)
+		local config = {
+			userId = p2.id,
+			statusText = if IsInvited then UseLocalizationResult.invitedLabelText else nil
+		}
+		
+		if FFlagAppChatParticipantDialogFoundationMenuModule then
+			local CurrentEntry = nil
+			if UseRefResult == nil then
+				CurrentEntry = nil
+			else
+				if UseRefResult.current[Text] == nil then
+					UseRefResult.current[Text] = ReactModule.createRef()
+				end
+				CurrentEntry = UseRefResult.current[Text]
+			end
+			local IsActiveParticipantIdMatch = JoinResult.activeParticipantId == Text
+			config.onActivated = if IsActiveParticipantIdMatch then nil else function()
+				-- upvalues: OnEntryActivated (upval), p2 (copy), CurrentEntry (copy)
+				OnEntryActivated(p2, CurrentEntry)
+			end
+		else
+			function config.onActivated()
+				-- upvalues: OnEntryActivated (upval), p2 (copy)
+				OnEntryActivated(p2, nil)
+			end
+		end
+		return ReactModule.createElement(ParticipantEntryModule, config, p2.children)
+	end
+	
+	local Entries = {}
+	
+	for _, entry in pairs(JoinResult.entries) do
+		local t = {}
+		local NoIsLocalUser = not entry.isLocalUser
+		local IsPending = entry.metadata and entry.metadata.isPending
+		
+		if NoIsLocalUser or IsPending then
+			local config1 = {
+				labelText = if IsPending then UseLocalizationResult.pendingLabelText else nil,
+				shouldShowDots = NoIsLocalUser,
+				testId = if FFlagDebugAppChatEnableDomLocatorsModule and NoIsLocalUser then DomLocatorsModule.chatDetailsParticipantMoreButton(entry.displayName) else nil
+			}
+			
+			if FFlagAppChatParticipantDialogFoundationMenuModule and NoIsLocalUser then
+				local Text = tostring(entry.id)
+				local CurrentEntry = nil
+				
+				if UseRefResult == nil then
+					CurrentEntry = nil
+				else
+					if UseRefResult.current[Text] == nil then
+						UseRefResult.current[Text] = ReactModule.createRef()
+					end
+					CurrentEntry = UseRefResult.current[Text]
+				end
+				config1.dotsRef = CurrentEntry
+				
+				function config1.onDotsActivated()
+					-- upvalues: OnEntryActivated (copy), entry (copy), CurrentEntry (copy)
+					OnEntryActivated(entry, CurrentEntry)
+				end
+			else
+				config1.dotsRef = nil
+				config1.onDotsActivated = nil
+			end
+			t.children = {
+				rightFrame = ReactModule.createElement(ParticipantEntryRightFrameModule, config1)
+			}
+		end
+		table.insert(Entries, CryoModule.Dictionary.join(t, entry))
+	end
+	return ReactModule.createElement(SortedList, {
+		entries = Entries,
+		entryHeight = JoinResult.entryHeight,
+		renderEntry = RenderEntry,
+		sortComparator = JoinResult.sortComparator,
+		LayoutOrder = JoinResult.LayoutOrder
+	})
+end
+
+return MemoFunction(ParticipantList)

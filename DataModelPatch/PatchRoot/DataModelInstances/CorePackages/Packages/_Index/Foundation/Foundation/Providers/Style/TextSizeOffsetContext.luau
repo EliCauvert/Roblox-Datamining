@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("Foundation").Parent.React).createContext(0)

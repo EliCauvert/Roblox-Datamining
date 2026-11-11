@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("ExpChatEnableV2ChatWindow6", false)

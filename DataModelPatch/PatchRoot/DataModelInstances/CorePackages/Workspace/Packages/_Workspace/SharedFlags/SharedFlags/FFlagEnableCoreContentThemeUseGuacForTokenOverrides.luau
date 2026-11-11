@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("EnableCoreContentThemeUseGuacForTokenOverrides2", false)

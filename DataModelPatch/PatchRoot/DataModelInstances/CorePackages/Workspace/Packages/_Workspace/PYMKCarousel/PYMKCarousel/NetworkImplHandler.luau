@@ -1,0 +1,8 @@
+﻿local PYMKCarousel = script:FindFirstAncestor("PYMKCarousel")
+local DependenciesModule = require(PYMKCarousel.dependencies)
+require(PYMKCarousel.devDependencies).JestGlobals.beforeAll(function()
+	-- upvalues: DependenciesModule (copy)
+	DependenciesModule.RoduxNetworking.setNetworkImpl(function(p1)
+		error(string.format("🔥 Should have replaced network implementation for url: %s", (tostring(p1))))
+	end)
+end)

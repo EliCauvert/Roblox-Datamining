@@ -1,0 +1,1 @@
+﻿return { LayeredSlot = "LayeredSlot", BaseSlot = "BaseSlot" }

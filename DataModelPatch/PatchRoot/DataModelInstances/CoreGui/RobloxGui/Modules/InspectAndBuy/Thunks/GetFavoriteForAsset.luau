@@ -1,0 +1,36 @@
+﻿local PerformFetch = require(game:GetService("CorePackages").Workspace.Packages.Http).PerformFetch
+local Parent = script.Parent.Parent
+local ThunkModule = require(Parent.Thunk)
+local NetworkModule = require(Parent.Services.Network)
+local SetFavoriteAssetModule = require(Parent.Actions.SetFavoriteAsset)
+local SendCounterModule = require(Parent.Thunks.SendCounter)
+local ConstantsModule = require(Parent.Constants)
+local list = { NetworkModule }
+local GetFavoriteForAsset = require(Parent.createInspectAndBuyKeyMapper)("getFavoriteForAsset")
+
+return function(p1)
+	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), GetFavoriteForAsset (copy), PerformFetch (copy), SetFavoriteAssetModule (copy), SendCounterModule (copy), ConstantsModule (copy)
+	return ThunkModule.new(script.Name, list, function(p2, p3)
+		-- upvalues: NetworkModule (upval), GetFavoriteForAsset (upval), p1 (copy), PerformFetch (upval), SetFavoriteAssetModule (upval), SendCounterModule (upval), ConstantsModule (upval)
+		local v1 = p3[NetworkModule]
+		
+		return PerformFetch.Single(GetFavoriteForAsset(p2:getState().storeId, p1), function(_)
+			-- upvalues: v1 (copy), p1 (upval), p2 (copy), SetFavoriteAssetModule (upval), SendCounterModule (upval), ConstantsModule (upval)
+			return v1.getFavoriteForAsset(p1):andThen(function(Result)
+				-- upvalues: p2 (upval), SetFavoriteAssetModule (upval), p1 (upval), SendCounterModule (upval), ConstantsModule (upval)
+				if Result == "null" then
+					p2:dispatch(SetFavoriteAssetModule(tostring(p1), false))
+				else
+					p2:dispatch(SetFavoriteAssetModule(tostring(p1), true))
+				end
+				p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetFavoriteForAsset .. ConstantsModule.CounterSuffix.RequestSucceeded))
+			end, function(_)
+				-- upvalues: p2 (upval), SendCounterModule (upval), ConstantsModule (upval)
+				p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetFavoriteForAsset .. ConstantsModule.CounterSuffix.RequestRejected))
+			end)
+		end)(p2):catch(function(_)
+			-- upvalues: p2 (copy), SendCounterModule (upval), ConstantsModule (upval)
+			p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetFavoriteForAsset .. ConstantsModule.CounterSuffix.RequestFailed))
+		end)
+	end)
+end

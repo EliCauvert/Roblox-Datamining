@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("LuaAppApportioningInCollectionViews2", false)

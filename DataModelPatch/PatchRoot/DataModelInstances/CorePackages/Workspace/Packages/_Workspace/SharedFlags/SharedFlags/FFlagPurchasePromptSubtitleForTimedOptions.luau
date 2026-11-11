@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("PurchasePromptSubtitleForTimedOptions2", false)

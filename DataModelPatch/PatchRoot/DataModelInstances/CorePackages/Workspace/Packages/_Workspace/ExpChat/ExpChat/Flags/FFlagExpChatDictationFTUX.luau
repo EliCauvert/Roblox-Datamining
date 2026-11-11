@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("ExpChatDictationFTUX2", false)

@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AppChatUseAbuseReportingApiV2", false)

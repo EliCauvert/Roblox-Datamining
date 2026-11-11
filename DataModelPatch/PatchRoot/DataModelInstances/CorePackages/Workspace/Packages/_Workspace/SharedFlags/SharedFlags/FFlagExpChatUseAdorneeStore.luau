@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("ExpChatUseAdorneeStoreV4", false)

@@ -1,0 +1,1 @@
+﻿return { Asset = "Asset", Outfit = "Outfit", Unknown = "Unknown" }

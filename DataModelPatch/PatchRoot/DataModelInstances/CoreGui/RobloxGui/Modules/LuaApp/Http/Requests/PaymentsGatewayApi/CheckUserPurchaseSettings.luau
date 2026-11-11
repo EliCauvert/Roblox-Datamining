@@ -1,0 +1,14 @@
+﻿local HttpService = game:GetService("HttpService")
+local UrlBuilderModule = require(game:GetService("CoreGui").RobloxGui.Modules.LuaApp.Http.UrlBuilder)
+local _ = require(game:GetService("CorePackages").Workspace.Packages.Http)
+
+return function(Callback)
+	-- upvalues: UrlBuilderModule (copy), HttpService (copy)
+	return Callback(UrlBuilderModule.economy.paymentsGateway.checkUserPurchaseSettings(), "POST", {
+		postBody = HttpService:JSONEncode({}),
+		headers = {
+			["Content-Type"] = "application/json",
+			Accept = "application/json"
+		}
+	})
+end

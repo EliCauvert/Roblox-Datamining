@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("EnableSignUpExitModal3", false)

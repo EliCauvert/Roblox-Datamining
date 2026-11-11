@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("AppChat").Parent.FriendsRodux).config({ keyPath = "ChatAppReducer.Friends" })

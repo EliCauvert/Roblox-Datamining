@@ -1,0 +1,1 @@
+﻿return game:GetEngineFeature("RegisterQRCodeKey2") and game:DefineFastFlag("RegisterQRCodeKeyInEngine_v2", false)

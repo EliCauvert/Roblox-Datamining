@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("EnableAppRatingPromptLua4", false)

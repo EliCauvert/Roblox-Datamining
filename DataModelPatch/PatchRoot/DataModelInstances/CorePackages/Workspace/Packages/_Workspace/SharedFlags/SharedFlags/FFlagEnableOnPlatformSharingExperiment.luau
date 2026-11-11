@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("EnableOnPlatformSharingExperiment_v5", false)

@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXAvatarsTabIXP1", false)

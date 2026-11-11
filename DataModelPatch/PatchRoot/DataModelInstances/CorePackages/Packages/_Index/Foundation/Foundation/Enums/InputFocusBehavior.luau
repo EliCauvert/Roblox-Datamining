@@ -1,0 +1,1 @@
+﻿return { Clear = "Clear", Highlight = "Highlight" }

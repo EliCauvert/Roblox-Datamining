@@ -1,0 +1,12 @@
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local _ = require(CorePackages.Workspace.Packages.AvatarExperienceCatalog)
+local _ = require(CorePackages.Workspace.Packages.AvatarExperienceCommon)
+local _ = require(game:GetService("CoreGui").RobloxGui.Modules.AvatarExperience.Common.Types)
+local UseCatalogItemCardViewModelModule = require(script.Parent.useCatalogItemCardViewModel)
+local CatalogItemCardModule = require(script.Parent.CatalogItemCard)
+
+return (ReactModule.memo(function(p1)
+	-- upvalues: UseCatalogItemCardViewModelModule (copy), ReactModule (copy), CatalogItemCardModule (copy)
+	return ReactModule.createElement(CatalogItemCardModule, (UseCatalogItemCardViewModelModule(p1)))
+end, require(CorePackages.Packages.tutils).deepEqual))
