@@ -48,8 +48,8 @@ return function(p1, p2)
 			local Velocity = p3.velocity or 0
 			local ValueDelta = p3.value - p1
 			local ExpResult = ExpFunction(-p4 * DampingRatio * ScaledFrequency)
-			local NewVelocity = nil
 			local ScaledVelocity = nil
+			local NewVelocity = nil
 			
 			if DampingRatio == 1 then
 				NewVelocity = (Velocity * p4 + ValueDelta * (ScaledFrequency * p4 + 1)) * ExpResult + p1

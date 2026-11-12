@@ -1,4 +1,5 @@
 ﻿local JestGlobalsModule = require(script:FindFirstAncestor("MarkdownCore").Parent.Dev.JestGlobals)
+local BeforeAllFunction: (any) -> () = JestGlobalsModule.beforeAll
 local ExpectFunction = JestGlobalsModule.expect
 local Jest = JestGlobalsModule.jest
 
@@ -62,7 +63,7 @@ local function toWarn(_, p1)
 	return { message = Message, pass = Count > 0 }
 end
 
-JestGlobalsModule.beforeAll(function()
+BeforeAllFunction(function()
 	-- upvalues: ExpectFunction (copy), toWarnWith (copy), toWarn (copy)
 	ExpectFunction.extend({ toWarnWith = toWarnWith, toWarn = toWarn })
 end)

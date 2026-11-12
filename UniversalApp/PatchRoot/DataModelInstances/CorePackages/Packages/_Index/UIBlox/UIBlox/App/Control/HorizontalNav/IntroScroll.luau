@@ -1,8 +1,9 @@
 ﻿local Parent = script.Parent.Parent.Parent.Parent.Parent
+local RoactModule = require(Parent.Roact)
 local TModule = require(Parent.t)
 local OtterModule = require(Parent.Otter)
 local config = { dampingRatio = 1, frequency = 3.5 }
-local IntroScroll = require(Parent.Roact).PureComponent:extend("IntroScroll")
+local IntroScroll = RoactModule.PureComponent:extend("IntroScroll")
 IntroScroll.validateProps = TModule.strictInterface({
 	childWidgetIndex = TModule.number,
 	scrollingFrameRef = TModule.table,

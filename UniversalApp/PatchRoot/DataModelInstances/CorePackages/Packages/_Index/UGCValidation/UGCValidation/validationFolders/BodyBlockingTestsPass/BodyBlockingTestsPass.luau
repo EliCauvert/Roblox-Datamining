@@ -3,6 +3,15 @@ local _ = require(Parent.util.Types)
 local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 local FloatEqualsModule = require(Parent.util.floatEquals)
+local Categories = {
+	ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+	ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD,
+	ValidationEnumsModule.UploadCategory.FULL_BODY
+}
+local RequiredData = {
+	ValidationEnumsModule.SharedDataMember.rootInstance,
+	ValidationEnumsModule.SharedDataMember.renderMeshesData
+}
 
 local function validateMeshMin(p1, OriginalSize, MeshName)
 	-- upvalues: FloatEqualsModule (copy), ErrorSourceStringsModule (copy)
@@ -19,15 +28,8 @@ local function validateMeshMin(p1, OriginalSize, MeshName)
 end
 
 return {
-	categories = {
-		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD,
-		ValidationEnumsModule.UploadCategory.FULL_BODY
-	},
-	requiredData = {
-		ValidationEnumsModule.SharedDataMember.rootInstance,
-		ValidationEnumsModule.SharedDataMember.renderMeshesData
-	},
+	categories = Categories,
+	requiredData = RequiredData,
 	expectedFailures = {},
 	run = function(p2, p3)
 		-- upvalues: validateMeshMin (copy)

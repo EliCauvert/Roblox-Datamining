@@ -2,8 +2,9 @@
 local DependenciesModule = require(SocialLibraries.dependencies)
 local Roact = DependenciesModule.Roact
 local ButtonType = DependenciesModule.UIBlox.App.Button.Enum.ButtonType
+local Components = SocialLibraries.Components
 local UserInputService = DependenciesModule.UserInputService
-local AlertViewBuilderModule = require(SocialLibraries.Components.AlertViewBuilder.AlertViewBuilder)
+local AlertViewBuilderModule = require(Components.AlertViewBuilder.AlertViewBuilder)
 local InputAlertView = Roact.Component:extend("InputAlertView")
 InputAlertView.defaultProps = {
 	titleText = "TestTitle",

@@ -2048,7 +2048,7 @@ Feature.Avatar.Label.FaceMakeup,
 Feature.Avatar.Label.FacialAnimation,การเคลื่อนไหวใบหน้า
 Feature.Avatar.Label.Fall,หล่น
 Feature.Avatar.Label.FallAnimations,แอนิเมชันการหล่น
-Feature.Avatar.Label.FromMarketplace,จากมาร์เก็ตเพลส
+Feature.Avatar.Label.FromMarketplace,ผลการค้นหาในมาร์เก็ตเพลส
 Feature.Avatar.Label.Front,ด้านหน้า
 Feature.Avatar.Label.FullBody,ร่างกายทุกส่วน
 Feature.Avatar.Label.FullMasks,มาสก์เต็มหน้า
@@ -2449,6 +2449,7 @@ Feature.Build.Action.Resume,ทำต่อ
 Feature.Build.Action.Retry,
 Feature.Build.Action.Revert,
 Feature.Build.Action.Save,
+Feature.Build.Action.SaveFilters,
 Feature.Build.Action.SetDailyLimit,กำหนดวงเงินต่อวัน
 Feature.Build.Action.SetLimit,ตั้งวงเงิน
 Feature.Build.Action.Settings,
@@ -4316,7 +4317,7 @@ Feature.Moments.Action.AddMusic,เพิ่มดนตรี
 Feature.Moments.Action.AddSticker,เพิ่มสติกเกอร์
 Feature.Moments.Action.AddText,เพิ่มข้อความ
 Feature.Moments.Action.AddVoice,เพิ่มเสียง
-Feature.Moments.Action.Analytics,การวิเคราะห์
+Feature.Moments.Action.Analytics,ดูสถิติ
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
@@ -4358,6 +4359,7 @@ Feature.Moments.Action.ViewOtherFeed,ดูฟีดอื่น
 Feature.Moments.Action.ViewRecommended,ดูฟีดแนะนำ
 Feature.Moments.Action.ViewTrending,ดูฟีดมาแรง
 Feature.Moments.Body.EDPMomentIPReportInstructions,หากต้องการรายงานเรื่องการละเมิดทรัพย์สินทางปัญญาในโมเมนต์นี้ โปรดดำเนินการต่อที่หน้ารายละเอียดเกม
+Feature.Moments.Body.MomentPosting,กำลังดำเนินการกับโมเมนต์ของคุณอยู่
 Feature.Moments.Description.CommunityStandards,ดูข้อมูลเพิ่มเติมเกี่ยวกับสิ่งที่คุณพูดได้และพูดไม่ได้ในมาตรฐานชุมชน
 Feature.Moments.Description.EmptyCapturesLibrary,ภาพที่คุณจับไว้จะปรากฏที่นี่
 Feature.Moments.Description.FollowingCaughtUpBody,คุณติดตามโมเมนต์ใหม่ในฟีดนี้หมดแล้ว สลับฟีดเพื่อดูเพิ่มเติม
@@ -4367,11 +4369,14 @@ Feature.Moments.Description.GenerateTextFeedbackDisclosure,ข้อความ
 Feature.Moments.Description.HowToCaptureStep1,เข้าร่วมประสบการณ์ที่เปิดใช้งานการจับภาพ แล้วเลือกเมนูแฮมเบอร์เกอร์
 Feature.Moments.Description.HowToCaptureStep2,เปิดใช้งานการควบคุมการจับภาพ
 Feature.Moments.Description.HowToCaptureStep3,จับภาพและวิดีโอการเล่นเกม
+Feature.Moments.Description.LeaveAvatarMomentsCreation,ข้อมูลที่คุณแก้ไขจะหายไปทั้งหมด แต่ชุดอวาตาร์ของคุณจะยังเหมือนเดิม
 Feature.Moments.Description.LeaveMomentsCreation,ข้อมูลที่เปลี่ยนแปลงทั้งหมดจะหายไป แต่คุณยังค้นหาภาพที่จับนี้ได้ในแกลเลอรี<b>การจับภาพ</b>
+Feature.Moments.Description.MomentsOffBody,ขอให้ผู้ปกครองเปิดโมเมนต์ในการควบคุมโดยผู้ปกครอง
 Feature.Moments.Description.NoMusicResults,ไม่พบดนตรี
 Feature.Moments.Description.NonInfiniteScrollEndBody,เราหยุดฟีดของคุณชั่วคราว คุณเลือกได้ว่าจะดูต่อหรือไม่
 Feature.Moments.Description.NothingHereYet,ยังไม่มีอะไรในนี้...
 Feature.Moments.Description.PublishMoment,อธิบายเกี่ยวกับโมเมนต์ของคุณ
+Feature.Moments.Description.TimeLimitReachedBody,เวลาที่ดูได้ขึ้นอยู่กับอายุ กลับมาดูโมเมนต์ได้พรุ่งนี้
 Feature.Moments.Description.TooManyUploads,คุณอัปโหลดวิดีโอมากเกินไปในวันนี้ โปรดลองอีกครั้งในวันพรุ่งนี้
 Feature.Moments.Disclaimer.EveryoneMoments,ทุกคนในโมเมนต์สามารถดูสิ่งที่เผยแพร่ได้
 Feature.Moments.Label.All,
@@ -4442,6 +4447,7 @@ Feature.Moments.Label.MomentRemovedTitle,เราลบโมเมนต์น
 Feature.Moments.Label.MomentUnavailable,โมเมนต์ไม่พร้อมใช้งาน
 Feature.Moments.Label.MomentUnavailableDefault,โมเมนต์นี้ไม่สามารถใช้ได้
 Feature.Moments.Label.MomentsExperienceName,
+Feature.Moments.Label.MomentsOffTitle,ปิดโมเมนต์อยู่
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,ยังไม่มีความคิดเห็น
 Feature.Moments.Label.NonInfiniteScrollEndTitle,ยังมีโมเมนต์ให้ดูอีกเพียบ
@@ -4471,6 +4477,7 @@ Feature.Moments.Label.TextGenerationFailedBody,ไม่สามารถสร
 Feature.Moments.Label.TextGenerationFailedTitle,สร้างไม่สำเร็จ
 Feature.Moments.Label.TextGenerationFilteredBody,ไม่สามารถสร้างข้อความบนวิดีโอนี้ได้ เนื่องจากเนื้อหาถูกกรอง
 Feature.Moments.Label.TextGenerationFilteredTitle,มีการกรองการสร้าง
+Feature.Moments.Label.TimeLimitReachedTitle,คุณใช้เวลาดูโมเมนต์ครบตามที่กำหนดแล้ว
 Feature.Moments.Label.Tone,น้ำเสียง
 Feature.Moments.Label.Tone.Cinematic,ภาพยนตร์
 Feature.Moments.Label.Tone.Funny,
@@ -4498,6 +4505,7 @@ Feature.Moments.Title.EDPMomentIPReportInstructions,รายงานบนห�
 Feature.Moments.Title.GenerateTextFeedbackReason,มีอะไรผิดพลาด?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,ต้องการออกจากการสร้างสรรค์โมเมนต์ใช่ไหม?
+Feature.Moments.Title.MomentPosting,กำลังโพสต์โมเมนต์ของคุณ
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,รายงานโพสต์
 Feature.Moments.Title.UnfollowConfirmationDialog,เลิกติดตาม @{username} ใช่ไหม?
@@ -5683,6 +5691,8 @@ Feature.UniversalShareSheet.Response.SharedMessage,ส่งข้อควา�
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + อีก {N} คน
 Feature.UserLibrary.Label.MyLibrary,คลังของฉัน
+Feature.VIPServer.Message.TooManyFreeServersOnGame,คุณไม่สามารถเพิ่มเซิร์ฟเวอร์ส่วนตัวฟรีในประสบการณ์นี้ได้อีก
+Feature.VIPServer.Message.TooManyTotalActiveFreeServers,คุณไม่สามารถเพิ่มเซิร์ฟเวอร์ส่วนตัวฟรีที่เปิดใช้งานอยู่ได้อีก โปรดปิดใช้งานบางเซิร์ฟเวอร์ก่อน
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,เพิ่มหมายเลขโทรศัพท์สำหรับการแชทด้วยเสียง
 Feature.VerificationUpsell.Action.ChangeEmail,

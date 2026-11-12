@@ -1,4 +1,5 @@
 ﻿local Parent = script.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
 local Console = require(Parent.Shared).console
 local _ = require(script.Parent.ReactInternalTypes)
 local ReactCurrentFiberModule = require(script.Parent.ReactCurrentFiber)
@@ -14,7 +15,7 @@ local ReactStrictModeWarningsModule = {
 	discardPendingWarnings = function() end
 }
 
-if require(Parent.ReactGlobals).__DEV__ then
+if ReactGlobalsModule.__DEV__ then
 	local function _(Return)
 		-- upvalues: StrictMode (copy)
 		local v1 = nil
@@ -28,7 +29,7 @@ if require(Parent.ReactGlobals).__DEV__ then
 		return v1
 	end
 	
-	local function v6(List): string
+	local function v7(List): string
 		local List1 = {}
 		
 		for i, _ in List do
@@ -71,7 +72,7 @@ if require(Parent.ReactGlobals).__DEV__ then
 	end
 	
 	function ReactStrictModeWarningsModule.flushPendingUnsafeLifecycleWarnings()
-		-- upvalues: Tbl (copy), GetComponentNameFunction (copy), t (copy), Tbl1 (copy), Tbl2 (copy), Tbl3 (copy), Tbl4 (copy), Tbl5 (copy), v6 (copy), Console (copy)
+		-- upvalues: Tbl (copy), GetComponentNameFunction (copy), t (copy), Tbl1 (copy), Tbl2 (copy), Tbl3 (copy), Tbl4 (copy), Tbl5 (copy), v7 (copy), Console (copy)
 		local t1 = {}
 		
 		if #Tbl > 0 then
@@ -127,22 +128,22 @@ if require(Parent.ReactGlobals).__DEV__ then
 			table.clear(Tbl5)
 		end
 		if next(t2) ~= nil then
-			Console.error("Using UNSAFE_componentWillMount in strict mode is not recommended and may indicate bugs in your code. See https://reactjs.org/link/unsafe-component-lifecycles for details.\n\n* Move code with side effects to componentDidMount, and set initial state in the constructor.\n\nPlease update the following components: %s", (v6(t2)))
+			Console.error("Using UNSAFE_componentWillMount in strict mode is not recommended and may indicate bugs in your code. See https://reactjs.org/link/unsafe-component-lifecycles for details.\n\n* Move code with side effects to componentDidMount, and set initial state in the constructor.\n\nPlease update the following components: %s", (v7(t2)))
 		end
 		if next(t4) ~= nil then
-			Console.error("Using UNSAFE_componentWillReceiveProps in strict mode is not recommended and may indicate bugs in your code. See https://reactjs.org/link/unsafe-component-lifecycles for details.\n\n* Move data fetching code or side effects to componentDidUpdate.\n* If you're updating state whenever props change, refactor your code to use memoization techniques or move it to static getDerivedStateFromProps. Learn more at: https://reactjs.org/link/derived-state\n\nPlease update the following components: %s", (v6(t4)))
+			Console.error("Using UNSAFE_componentWillReceiveProps in strict mode is not recommended and may indicate bugs in your code. See https://reactjs.org/link/unsafe-component-lifecycles for details.\n\n* Move data fetching code or side effects to componentDidUpdate.\n* If you're updating state whenever props change, refactor your code to use memoization techniques or move it to static getDerivedStateFromProps. Learn more at: https://reactjs.org/link/derived-state\n\nPlease update the following components: %s", (v7(t4)))
 		end
 		if next(t6) ~= nil then
-			Console.error("Using UNSAFE_componentWillUpdate in strict mode is not recommended and may indicate bugs in your code. See https://reactjs.org/link/unsafe-component-lifecycles for details.\n\n* Move data fetching code or side effects to componentDidUpdate.\n\nPlease update the following components: %s", (v6(t6)))
+			Console.error("Using UNSAFE_componentWillUpdate in strict mode is not recommended and may indicate bugs in your code. See https://reactjs.org/link/unsafe-component-lifecycles for details.\n\n* Move data fetching code or side effects to componentDidUpdate.\n\nPlease update the following components: %s", (v7(t6)))
 		end
 		if next(t1) ~= nil then
-			Console.warn("componentWillMount has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.\n\n* Move code with side effects to componentDidMount, and set initial state in the constructor.\n* Rename componentWillMount to UNSAFE_componentWillMount to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work.\n\nPlease update the following components: %s", (v6(t1)))
+			Console.warn("componentWillMount has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.\n\n* Move code with side effects to componentDidMount, and set initial state in the constructor.\n* Rename componentWillMount to UNSAFE_componentWillMount to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work.\n\nPlease update the following components: %s", (v7(t1)))
 		end
 		if next(t3) ~= nil then
-			Console.warn("componentWillReceiveProps has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.\n\n* Move data fetching code or side effects to componentDidUpdate.\n* If you're updating state whenever props change, refactor your code to use memoization techniques or move it to static getDerivedStateFromProps. Learn more at: https://reactjs.org/link/derived-state\n* Rename componentWillReceiveProps to UNSAFE_componentWillReceiveProps to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work.\n\nPlease update the following components: %s", (v6(t3)))
+			Console.warn("componentWillReceiveProps has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.\n\n* Move data fetching code or side effects to componentDidUpdate.\n* If you're updating state whenever props change, refactor your code to use memoization techniques or move it to static getDerivedStateFromProps. Learn more at: https://reactjs.org/link/derived-state\n* Rename componentWillReceiveProps to UNSAFE_componentWillReceiveProps to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work.\n\nPlease update the following components: %s", (v7(t3)))
 		end
 		if next(t5) ~= nil then
-			Console.warn("componentWillUpdate has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.\n\n* Move data fetching code or side effects to componentDidUpdate.\n* Rename componentWillUpdate to UNSAFE_componentWillUpdate to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work.\n\nPlease update the following components: %s", (v6(t5)))
+			Console.warn("componentWillUpdate has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.\n\n* Move data fetching code or side effects to componentDidUpdate.\n* Rename componentWillUpdate to UNSAFE_componentWillUpdate to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work.\n\nPlease update the following components: %s", (v7(t5)))
 		end
 	end
 	
@@ -177,7 +178,7 @@ if require(Parent.ReactGlobals).__DEV__ then
 	end
 	
 	function ReactStrictModeWarningsModule.flushLegacyContextWarning()
-		-- upvalues: Tbl6 (copy), GetComponentNameFunction (copy), t1 (copy), v6 (copy), SetCurrentFiberFunction (copy), Console (copy), ResetCurrentFiberFunction (copy)
+		-- upvalues: Tbl6 (copy), GetComponentNameFunction (copy), t1 (copy), v7 (copy), SetCurrentFiberFunction (copy), Console (copy), ResetCurrentFiberFunction (copy)
 		for _, value in Tbl6 do
 			if #value == 0 then break end
 			local Entry = value[1]
@@ -187,7 +188,7 @@ if require(Parent.ReactGlobals).__DEV__ then
 				t[GetComponentNameFunction(value1.type) or "Component"] = true
 				t1[value1.type] = true
 			end
-			local v3 = v6(t)
+			local v3 = v7(t)
 			local Success, Result = pcall(function()
 				-- upvalues: SetCurrentFiberFunction (upval), Entry (copy), Console (upval), v3 (copy)
 				SetCurrentFiberFunction(Entry)

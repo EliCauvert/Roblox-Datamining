@@ -6,6 +6,11 @@ local GetDiffBetweenOrientationsModule = require(Parent.util.getDiffBetweenOrien
 local ValueToStringModule = require(Parent.util.valueToString)
 local GetAllInstancesWithNameModule = require(Parent.util.getAllInstancesWithName)
 local R15plusUtilsModule = require(Parent.util.R15plusUtils)
+local Categories = {
+	ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+	ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
+}
+local RequiredData = { ValidationEnumsModule.SharedDataMember.rootInstance }
 local UGCValidationJointRotationMaximumHundredthPositionOffset = game:DefineFastInt("UGCValidationJointRotationMaximumHundredthPositionOffset", 1)
 local UGCValidationJointRotationMaximumDegreeOrientationOffset = game:DefineFastInt("UGCValidationJointRotationMaximumDegreeOrientationOffset", 1)
 local config = {
@@ -22,11 +27,8 @@ local config = {
 }
 
 return {
-	categories = {
-		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
-	},
-	requiredData = { ValidationEnumsModule.SharedDataMember.rootInstance },
+	categories = Categories,
+	requiredData = RequiredData,
 	fflag = R15plusUtilsModule.checkFlagEnabledForAllowHrd,
 	run = function(p1, p2)
 		-- upvalues: GetAllInstancesWithNameModule (copy), R15plusUtilsModule (copy), ErrorSourceStringsModule (copy), config (copy), GetDiffBetweenOrientationsModule (copy), UGCValidationJointRotationMaximumDegreeOrientationOffset (copy), ValueToStringModule (copy), UGCValidationJointRotationMaximumHundredthPositionOffset (copy)

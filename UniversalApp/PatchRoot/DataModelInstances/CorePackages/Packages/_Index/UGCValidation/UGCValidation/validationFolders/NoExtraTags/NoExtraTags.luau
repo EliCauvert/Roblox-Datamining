@@ -4,6 +4,10 @@ local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local CollectionService = game:GetService("CollectionService")
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 local GetFFlagUGCValidateNoExtraTagsRequireHsrAssetsModule = require(Parent.flags.getFFlagUGCValidateNoExtraTagsRequireHsrAssets)
+local List = if GetFFlagUGCValidateNoExtraTagsRequireHsrAssetsModule() then {
+	ValidationEnumsModule.SharedDataMember.rootInstance,
+	ValidationEnumsModule.SharedDataMember.hsrAssets
+} else { ValidationEnumsModule.SharedDataMember.rootInstance }
 
 local function collectTaggedPaths(RootInstance, List)
 	-- upvalues: CollectionService (copy)
@@ -19,10 +23,7 @@ end
 
 return {
 	categories = require(Parent.Constants).AllAssetUploadCategories,
-	requiredData = if GetFFlagUGCValidateNoExtraTagsRequireHsrAssetsModule() then {
-		ValidationEnumsModule.SharedDataMember.rootInstance,
-		ValidationEnumsModule.SharedDataMember.hsrAssets
-	} else { ValidationEnumsModule.SharedDataMember.rootInstance },
+	requiredData = List,
 	expectedFailures = {
 		"Asset_EF_TaggedJacket",
 		"Bundle_EF_BodyWithLLLTagged.LeftLeg"

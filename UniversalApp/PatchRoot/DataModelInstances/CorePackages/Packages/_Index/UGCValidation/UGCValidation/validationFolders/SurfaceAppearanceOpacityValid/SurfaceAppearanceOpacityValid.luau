@@ -4,6 +4,8 @@ local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 local FetchAllDesiredDataModule = require(Parent.validationSystem.dataFetchModules.FetchAllDesiredData)
 local config = { ColorMap = true, NormalMap = true }
+local Categories = { ValidationEnumsModule.UploadCategory.RIGID_ACCESSORY }
+local ConditionalData = { ValidationEnumsModule.SharedDataMember.meshTextures }
 
 local function getIsOpaque(Editable): boolean
 	local PixelsBuffer = Editable:ReadPixelsBuffer(Vector2.new(0, 0), Editable.Size)
@@ -17,9 +19,9 @@ local function getIsOpaque(Editable): boolean
 end
 
 return {
-	categories = { ValidationEnumsModule.UploadCategory.RIGID_ACCESSORY },
+	categories = Categories,
 	requiredData = {},
-	conditionalData = { ValidationEnumsModule.SharedDataMember.meshTextures },
+	conditionalData = ConditionalData,
 	expectedFailures = {},
 	run = function(p1, p2)
 		-- upvalues: FetchAllDesiredDataModule (copy), ErrorSourceStringsModule (copy), config (copy), getIsOpaque (copy)

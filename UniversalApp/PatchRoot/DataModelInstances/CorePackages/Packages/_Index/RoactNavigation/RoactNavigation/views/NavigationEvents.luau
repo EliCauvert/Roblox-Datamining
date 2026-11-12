@@ -1,4 +1,5 @@
 ﻿local Parent = script.Parent.Parent
+local ReactModule = require(Parent.Parent.React)
 local WithNavigationModule = require(script.Parent.withNavigation)
 local EventsModule = require(Parent.Events)
 local config = {
@@ -7,7 +8,7 @@ local config = {
 	[EventsModule.WillBlur] = "onWillBlur",
 	[EventsModule.DidBlur] = "onDidBlur"
 }
-local NavigationEvents = require(Parent.Parent.React).Component:extend("NavigationEvents")
+local NavigationEvents = ReactModule.Component:extend("NavigationEvents")
 
 function NavigationEvents.didMount(p1)
 	p1:subscribeAll()

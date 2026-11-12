@@ -3,9 +3,10 @@ local Parent = RoduxUsers.Parent
 local RoduxModule = require(Parent.Rodux)
 local CryoModule = require(Parent.Cryo)
 local Actions = RoduxUsers.Actions
+local Models = RoduxUsers.Models
 local UserRemovedModule = require(Actions.UserRemoved)
 local UserUpdatedModule = require(Actions.UserUpdated)
-local UserModelModule = require(RoduxUsers.Models.UserModel)
+local UserModelModule = require(Models.UserModel)
 
 local function _(p1, List)
 	local v1 = nil
@@ -20,7 +21,7 @@ local function _(p1, List)
 	return v1
 end
 
-local function v9(p2, List)
+local function v10(p2, List)
 	-- upvalues: CryoModule (copy)
 	local t = {}
 	
@@ -35,30 +36,30 @@ end
 local t = {}
 
 return function(p3)
-	-- upvalues: RoduxModule (copy), t (copy), v9 (copy), UserUpdatedModule (copy), UserModelModule (copy), CryoModule (copy), UserRemovedModule (copy)
+	-- upvalues: RoduxModule (copy), t (copy), v10 (copy), UserUpdatedModule (copy), UserModelModule (copy), CryoModule (copy), UserRemovedModule (copy)
 	local UsersNetworking = p3.usersNetworking
 	local FriendsNetworking = p3.friendsNetworking
 	
 	return RoduxModule.createReducer(t, {
 		[UsersNetworking.GetUserV2FromUserId.Succeeded.name] = function(p4, p5)
-			-- upvalues: v9 (upval)
-			return v9(p4, { p5.responseBody })
+			-- upvalues: v10 (upval)
+			return v10(p4, { p5.responseBody })
 		end,
 		[UsersNetworking.GetSkinnyUsersFromUserIds.Succeeded.name] = function(p4, p5)
-			-- upvalues: v9 (upval)
-			return v9(p4, p5.responseBody.data)
+			-- upvalues: v10 (upval)
+			return v10(p4, p5.responseBody.data)
 		end,
 		[FriendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p4, p5)
-			-- upvalues: v9 (upval)
-			return v9(p4, p5.responseBody.data)
+			-- upvalues: v10 (upval)
+			return v10(p4, p5.responseBody.data)
 		end,
 		[FriendsNetworking.GetFriendRequests.Succeeded.name] = function(p4, p5)
-			-- upvalues: v9 (upval)
-			return v9(p4, p5.responseBody.data)
+			-- upvalues: v10 (upval)
+			return v10(p4, p5.responseBody.data)
 		end,
 		[FriendsNetworking.GetFriendRecommendationsFromUserId.Succeeded.name] = function(p4, p5)
-			-- upvalues: v9 (upval)
-			return v9(p4, p5.responseBody.data)
+			-- upvalues: v10 (upval)
+			return v10(p4, p5.responseBody.data)
 		end,
 		[UserUpdatedModule.name] = function(p4, p5)
 			-- upvalues: UserModelModule (upval), CryoModule (upval)

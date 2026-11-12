@@ -2066,7 +2066,7 @@ Feature.Avatar.Label.FaceMakeup,
 Feature.Avatar.Label.FacialAnimation,얼굴 애니메이션
 Feature.Avatar.Label.Fall,낙하
 Feature.Avatar.Label.FallAnimations,낙하 애니메이션
-Feature.Avatar.Label.FromMarketplace,마켓플레이스에서
+Feature.Avatar.Label.FromMarketplace,마켓플레이스 결과
 Feature.Avatar.Label.Front,전면
 Feature.Avatar.Label.FullBody,전신
 Feature.Avatar.Label.FullMasks,전면 마스크
@@ -2467,6 +2467,7 @@ Feature.Build.Action.Resume,다시 시작
 Feature.Build.Action.Retry,
 Feature.Build.Action.Revert,
 Feature.Build.Action.Save,
+Feature.Build.Action.SaveFilters,
 Feature.Build.Action.SetDailyLimit,일일 한도 설정
 Feature.Build.Action.SetLimit,한도 설정
 Feature.Build.Action.Settings,
@@ -4336,7 +4337,7 @@ Feature.Moments.Action.AddMusic,음악 추가
 Feature.Moments.Action.AddSticker,스티커 추가
 Feature.Moments.Action.AddText,텍스트 추가
 Feature.Moments.Action.AddVoice,음성 추가
-Feature.Moments.Action.Analytics,애널리틱스
+Feature.Moments.Action.Analytics,통계 보기
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
@@ -4378,6 +4379,7 @@ Feature.Moments.Action.ViewOtherFeed,다른 피드 보기
 Feature.Moments.Action.ViewRecommended,추천 보기
 Feature.Moments.Action.ViewTrending,인기 게시물 보기
 Feature.Moments.Body.EDPMomentIPReportInstructions,이 모멘트에서 지식재산권 위반을 신고하려면 게임 세부 정보 페이지로 이동하세요.
+Feature.Moments.Body.MomentPosting,모멘트를 처리 중입니다.
 Feature.Moments.Description.CommunityStandards,허용되는 표현과 금지되는 표현에 대한 자세한 내용은 커뮤니티 규정을 확인하세요.
 Feature.Moments.Description.EmptyCapturesLibrary,내 캡처가 표시되는 곳입니다.
 Feature.Moments.Description.FollowingCaughtUpBody,이 피드의 새로운 모멘트를 모두 시청하셨습니다. 더 많은 내용을 보려면 피드를 전환하세요.
@@ -4387,11 +4389,14 @@ Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI가 생성했습니
 Feature.Moments.Description.HowToCaptureStep1,캡처가 활성화된 체험에 참가해서 햄버거 메뉴를 선택합니다.
 Feature.Moments.Description.HowToCaptureStep2,캡처 제어를 활성화합니다.
 Feature.Moments.Description.HowToCaptureStep3,게임 플레이 사진 및 동영상을 캡처합니다.
+Feature.Moments.Description.LeaveAvatarMomentsCreation,"모든 변경 사항이 사라지지만, 의상은 변경되지 않은 상태로 유지됩니다."
 Feature.Moments.Description.LeaveMomentsCreation,"모든 변경 사항이 사라지지만, 이 캡처는 <b>캡처</b> 갤러리에서 계속 확인하실 수 있습니다."
+Feature.Moments.Description.MomentsOffBody,부모님께 자녀 보호 기능에서 모멘트를 켜달라고 요청하세요.
 Feature.Moments.Description.NoMusicResults,음악을 찾을 수 없음
 Feature.Moments.Description.NonInfiniteScrollEndBody,피드가 일시 중지되었습니다. 계속 시청할지 여부를 결정하실 수 있습니다.
 Feature.Moments.Description.NothingHereYet,아직 아무것도 없네요...
 Feature.Moments.Description.PublishMoment,모멘트에 대한 설명을 작성해 주세요
+Feature.Moments.Description.TimeLimitReachedBody,한도는 연령에 따라 다릅니다. 내일 모멘트를 시청하세요.
 Feature.Moments.Description.TooManyUploads,오늘 업로드한 동영상이 너무 많습니다. 내일 다시 시도하세요.
 Feature.Moments.Disclaimer.EveryoneMoments,모멘트에 참여하는 모든 사람이 게시된 내용을 볼 수 있습니다
 Feature.Moments.Label.All,
@@ -4462,6 +4467,7 @@ Feature.Moments.Label.MomentRemovedTitle,이 모멘트는 제거되었습니다
 Feature.Moments.Label.MomentUnavailable,모멘트 이용 불가
 Feature.Moments.Label.MomentUnavailableDefault,이 모멘트는 이용할 수 없습니다.
 Feature.Moments.Label.MomentsExperienceName,
+Feature.Moments.Label.MomentsOffTitle,모멘트가 꺼져 있습니다
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,코멘트 아직 없음
 Feature.Moments.Label.NonInfiniteScrollEndTitle,시청할 모멘트가 더 있습니다
@@ -4491,6 +4497,7 @@ Feature.Moments.Label.TextGenerationFailedBody,텍스트를 생성하지 못했�
 Feature.Moments.Label.TextGenerationFailedTitle,생성 실패
 Feature.Moments.Label.TextGenerationFilteredBody,콘텐츠 필터링으로 인해 이 캡처된 동영상에서 생성 기능을 사용할 수 없습니다.
 Feature.Moments.Label.TextGenerationFilteredTitle,생성이 차단되었습니다
+Feature.Moments.Label.TimeLimitReachedTitle,모멘트 시간 한도에 도달했습니다
 Feature.Moments.Label.Tone,어조
 Feature.Moments.Label.Tone.Cinematic,시네마틱함
 Feature.Moments.Label.Tone.Funny,유쾌함
@@ -4518,6 +4525,7 @@ Feature.Moments.Title.EDPMomentIPReportInstructions,게임 세부 정보 페이�
 Feature.Moments.Title.GenerateTextFeedbackReason,어떤 문제가 생겼나요?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,모멘트 만들기를 종료할까요?
+Feature.Moments.Title.MomentPosting,
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,게시물 신고
 Feature.Moments.Title.UnfollowConfirmationDialog,@{username} 님을 언팔로우하시겠어요?
@@ -5703,6 +5711,8 @@ Feature.UniversalShareSheet.Response.SharedMessage,메시지가 전송되었습�
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} 외 {N}명
 Feature.UserLibrary.Label.MyLibrary,내 라이브러리
+Feature.VIPServer.Message.TooManyFreeServersOnGame,이 체험에서는 더 이상 무료 비공개 서버를 추가할 수 없습니다.
+Feature.VIPServer.Message.TooManyTotalActiveFreeServers,더 이상 무료 비공개 서버를 활성화할 수 없습니다. 먼저 다른 서버를 비활성화하세요.
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,음성 채팅을 위해 휴대폰 번호 추가
 Feature.VerificationUpsell.Action.ChangeEmail,

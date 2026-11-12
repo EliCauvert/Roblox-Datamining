@@ -2,6 +2,7 @@
 local Parent1 = Parent.Parent
 local ReactModule = require(Parent1.React)
 local CryoModule = require(Parent1.Cryo)
+local FoundationModule = require(Parent1.Foundation)
 local Label = require(Parent.Core.ImageSet.ImageSetComponent).Label
 local UseStyleModule = require(Parent.Core.Style.useStyle)
 local _ = require(Parent.App.ImageSet.ImagesTypes)
@@ -9,12 +10,13 @@ local _ = require(Parent.App.Style.StyleTypes)
 local WithHoverTooltipFunction = require(Parent.App.Dialog.TooltipV2.Controllers).withHoverTooltip
 local TooltipOrientationModule = require(Parent.App.Dialog.Tooltip.Enum.TooltipOrientation)
 local StateLayerModule = require(Parent.Core.Control.StateLayer)
+local BadgeVariantModule = require(Parent.App.Indicator.Enum.BadgeVariant)
 local MigrateBadgeVariantModule = require(Parent.Utility.migrateBadgeVariant)
-local StatusIndicator = require(Parent1.Foundation).StatusIndicator
+local StatusIndicator = FoundationModule.StatusIndicator
 local config = {
 	disableOutset = false,
 	onMedia = false,
-	badgeVariant = require(Parent.App.Indicator.Enum.BadgeVariant).Alert,
+	badgeVariant = BadgeVariantModule.Alert,
 	tooltipTarget = game:GetService("CoreGui")
 }
 

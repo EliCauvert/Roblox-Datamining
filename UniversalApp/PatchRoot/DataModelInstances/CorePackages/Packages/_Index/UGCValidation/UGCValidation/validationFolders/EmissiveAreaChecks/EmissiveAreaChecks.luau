@@ -265,14 +265,14 @@ return {
 					local TotalEmissiveSurfaceArea1 = getTotalEmissiveSurfaceArea(value, EmissiveMask.editable)
 					
 					if GetFFlagUGCValidateEmissiveFixAreaChecksModule() then
-						local RootInstance = p6.rootInstance
+						local ChildName1 = p6.rootInstance
 						
-						if RootInstance.Name ~= ChildName then
-							RootInstance = p6.rootInstance:FindFirstChild(ChildName, true)
+						if ChildName1.Name ~= ChildName then
+							ChildName1 = p6.rootInstance:FindFirstChild(ChildName, true)
 						end
 						local EmissiveStrength = nil
-						if RootInstance then
-							local SurfaceAppearance = RootInstance:FindFirstChildWhichIsA("SurfaceAppearance", true)
+						if ChildName1 then
+							local SurfaceAppearance = ChildName1:FindFirstChildWhichIsA("SurfaceAppearance", true)
 							EmissiveStrength = if SurfaceAppearance then SurfaceAppearance.EmissiveStrength else 0
 						else
 							EmissiveStrength = 0

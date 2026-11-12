@@ -28,6 +28,12 @@ local config = {
 		mainParts = { RightFoot = true }
 	}
 }
+local Categories = { ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING }
+local RequiredData = {
+	ValidationEnumsModule.SharedDataMember.innerCagesData,
+	ValidationEnumsModule.SharedDataMember.outerCagesData,
+	ValidationEnumsModule.SharedDataMember.renderMeshesData
+}
 
 local function gatherUVs(AllowedParts)
 	-- upvalues: WrapTargetCageUVReferenceValuesModule (copy)
@@ -73,12 +79,8 @@ local _ = function(p2)
 end
 
 return {
-	categories = { ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING },
-	requiredData = {
-		ValidationEnumsModule.SharedDataMember.innerCagesData,
-		ValidationEnumsModule.SharedDataMember.outerCagesData,
-		ValidationEnumsModule.SharedDataMember.renderMeshesData
-	},
+	categories = Categories,
+	requiredData = RequiredData,
 	conditionalData = {},
 	expectedFailures = {},
 	run = function(p2, p3)

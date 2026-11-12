@@ -2,12 +2,15 @@
 local Parent1 = Parent.Parent
 local RoactModule = require(Parent1.Roact)
 local TModule = require(Parent1.t)
+local FoundationModule = require(Parent1.Foundation)
 local WithStyleModule = require(Parent.Core.Style.withStyle)
 local ImagesModule = require(Parent.App.ImageSet.Images)
-local Skeleton = require(Parent1.Foundation).Skeleton
+local Skeleton = FoundationModule.Skeleton
 local ImageTextLabelModule = require(Parent.Core.Text.ImageTextLabel.ImageTextLabel)
 local EmojiTextLabelModule = require(Parent.Core.Text.EmojiTextLabel.EmojiTextLabel)
 local EmojiModule = require(Parent.Core.Emoji.Enum.Emoji)
+local ValidateFontInfoModule = require(Parent.Core.Style.Validator.validateFontInfo)
+local ValidateTypographyInfoModule = require(Parent.Core.Style.Validator.validateTypographyInfo)
 local ItemTileName = RoactModule.PureComponent:extend("ItemTileName")
 ItemTileName.validateProps = TModule.strictInterface({
 	LayoutOrder = TModule.optional(TModule.integer),
@@ -21,7 +24,7 @@ ItemTileName.validateProps = TModule.strictInterface({
 	hasVerifiedBadge = TModule.optional(TModule.boolean),
 	useMaxHeight = TModule.optional(TModule.boolean),
 	fluidSizing = TModule.optional(TModule.boolean),
-	titleFontStyle = TModule.optional(TModule.union(require(Parent.Core.Style.Validator.validateFontInfo), (require(Parent.Core.Style.Validator.validateTypographyInfo)))),
+	titleFontStyle = TModule.optional(TModule.union(ValidateFontInfoModule, ValidateTypographyInfoModule)),
 	horizontalAlignment = TModule.optional(TModule.enum(Enum.HorizontalAlignment))
 })
 

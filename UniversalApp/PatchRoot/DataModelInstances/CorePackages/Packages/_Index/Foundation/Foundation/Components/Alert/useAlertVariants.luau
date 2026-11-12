@@ -25,6 +25,16 @@ local function variantsFactory(p1)
 		padding = { top = UDim.new(0, p1.Size.Size_150 + 1) }
 	}
 	local config = { container = { tag = "stroke-standard stroke-emphasis" } }
+	local Strokes = {
+		[AlertSeverityModule.Info] = config,
+		[AlertSeverityModule.Success] = config,
+		[AlertSeverityModule.Warning] = {
+			container = { tag = "stroke-standard stroke-system-warning" }
+		},
+		[AlertSeverityModule.Error] = {
+			container = { tag = "stroke-standard stroke-system-alert" }
+		}
+	}
 	local XOffset = Size500 - p1.Size.Size_100
 	local IconBackplate = {
 		tag = "radius-circle",
@@ -58,16 +68,7 @@ local function variantsFactory(p1)
 			},
 			[AlertVariantModule.System] = { container = { tag = "col size-full-0 auto-y" } }
 		},
-		strokes = {
-			[AlertSeverityModule.Info] = config,
-			[AlertSeverityModule.Success] = config,
-			[AlertSeverityModule.Warning] = {
-				container = { tag = "stroke-standard stroke-system-warning" }
-			},
-			[AlertSeverityModule.Error] = {
-				container = { tag = "stroke-standard stroke-system-alert" }
-			}
-		},
+		strokes = Strokes,
 		backplates = {
 			[AlertSeverityModule.Info] = { iconBackplate = IconBackplate },
 			[AlertSeverityModule.Success] = { iconBackplate = IconBackplate },

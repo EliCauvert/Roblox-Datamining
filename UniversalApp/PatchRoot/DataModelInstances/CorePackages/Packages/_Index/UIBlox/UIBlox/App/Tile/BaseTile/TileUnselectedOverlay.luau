@@ -2,10 +2,11 @@
 local Parent1 = Parent.Parent
 local RoactModule = require(Parent1.Roact)
 local TModule = require(Parent1.t)
+local ImagesModule = require(Parent.App.ImageSet.Images)
 local ImageSetComponentModule = require(Parent.Core.ImageSet.ImageSetComponent)
 local WithStyleModule = require(Parent.Core.Style.withStyle)
 local TileUnselectedOverlay = RoactModule.PureComponent:extend("TileUnselectedOverlay")
-local SquirclesHollow = require(Parent.App.ImageSet.Images)["squircles/hollow"]
+local SquirclesHollow = ImagesModule["squircles/hollow"]
 TileUnselectedOverlay.validateProps = TModule.strictInterface({ ZIndex = TModule.optional(TModule.integer) })
 
 function TileUnselectedOverlay.render(p1)

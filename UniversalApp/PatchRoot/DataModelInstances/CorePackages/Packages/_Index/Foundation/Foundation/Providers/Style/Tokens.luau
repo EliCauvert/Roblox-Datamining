@@ -1,5 +1,6 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
 local _ = require(Foundation.Parent.RbxDesignFoundations)
+local ColorModeModule = require(Foundation.Enums.ColorMode)
 local DeprecatedTokenUtilitiesModule = require(script.DeprecatedTokenUtilities)
 local DeviceModule = require(Foundation.Enums.Device)
 local FlagsModule = require(Foundation.Utility.Flags)
@@ -86,7 +87,7 @@ local function getTokens(p2, p3, p4, p5, p6)
 	return (buildTokens(ThemeGeneratorsModule.getGenerator(p6 or ThemeNameModule.Default, p2), ScaledClampedValue, p5))
 end
 
-local Dark = require(Foundation.Enums.ColorMode).Dark
+local Dark = ColorModeModule.Dark
 local Desktop = DeviceModule.Desktop or DeviceModule.Desktop
 local Value: number? = nil
 local ScaledClampedValue = nil

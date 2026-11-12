@@ -3,6 +3,8 @@ local KnownTypeNamesRule = require(Rules.KnownTypeNamesRule).KnownTypeNamesRule
 local KnownDirectivesRule = require(Rules.KnownDirectivesRule).KnownDirectivesRule
 local UniqueDirectivesPerLocationRule = require(Rules.UniqueDirectivesPerLocationRule).UniqueDirectivesPerLocationRule
 local KnownArgumentNamesRuleModule = require(Rules.KnownArgumentNamesRule)
+local KnownArgumentNamesRule = KnownArgumentNamesRuleModule.KnownArgumentNamesRule
+local KnownArgumentNamesOnDirectivesRule = KnownArgumentNamesRuleModule.KnownArgumentNamesOnDirectivesRule
 local UniqueArgumentNamesRule = require(Rules.UniqueArgumentNamesRule).UniqueArgumentNamesRule
 local ProvidedRequiredArgumentsRuleModule = require(Rules.ProvidedRequiredArgumentsRule)
 local UniqueInputFieldNamesRule = require(Rules.UniqueInputFieldNamesRule).UniqueInputFieldNamesRule
@@ -26,8 +28,8 @@ return {
 		require(Rules.UniqueVariableNamesRule).UniqueVariableNamesRule,
 		require(Rules.NoUndefinedVariablesRule).NoUndefinedVariablesRule,
 		require(Rules.NoUnusedVariablesRule).NoUnusedVariablesRule,
-		KnownDirectivesRule, UniqueDirectivesPerLocationRule,
-		KnownArgumentNamesRuleModule.KnownArgumentNamesRule, UniqueArgumentNamesRule,
+		KnownDirectivesRule, UniqueDirectivesPerLocationRule, KnownArgumentNamesRule,
+		UniqueArgumentNamesRule,
 		require(Rules.ValuesOfCorrectTypeRule).ValuesOfCorrectTypeRule,
 		ProvidedRequiredArgumentsRuleModule.ProvidedRequiredArgumentsRule,
 		require(Rules.VariablesInAllowedPositionRule).VariablesInAllowedPositionRule,
@@ -43,8 +45,8 @@ return {
 		require(Rules.UniqueDirectiveNamesRule).UniqueDirectiveNamesRule,
 		KnownTypeNamesRule, KnownDirectivesRule, UniqueDirectivesPerLocationRule,
 		require(Rules.PossibleTypeExtensionsRule).PossibleTypeExtensionsRule,
-		KnownArgumentNamesRuleModule.KnownArgumentNamesOnDirectivesRule,
-		UniqueArgumentNamesRule, UniqueInputFieldNamesRule,
+		KnownArgumentNamesOnDirectivesRule, UniqueArgumentNamesRule,
+		UniqueInputFieldNamesRule,
 		ProvidedRequiredArgumentsRuleModule.ProvidedRequiredArgumentsOnDirectivesRule
 	}
 }

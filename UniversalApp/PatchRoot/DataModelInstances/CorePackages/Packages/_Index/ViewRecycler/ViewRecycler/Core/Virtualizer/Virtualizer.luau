@@ -206,15 +206,15 @@ return function(p1)
 	local v2 = nil
 	local StartResult = nil
 	local v3 = nil
-	local Callback5: ((any) -> any)? = nil
-	local Callback3: (() -> any)? = nil
+	local Callback3: ((any) -> any)? = nil
+	local Callback6: (() -> any)? = nil
 	local Callback7: (() -> ())? = nil
 	
 	if FFlagViewRecyclerReact084 then
 		StartResult = nil
 		v3 = nil
 		
-		Callback5 = function(p2)
+		Callback3 = function(p2)
 			-- upvalues: DataSource (ref)
 			local IndexHint = p2.indexHint
 			
@@ -231,14 +231,14 @@ return function(p1)
 			return nil
 		end
 		
-		Callback3 = function()
-			-- upvalues: v3 (ref), Callback5 (ref), ViewportModuleResult (copy), ScrollAlignmentModule (upval)
+		Callback6 = function()
+			-- upvalues: v3 (ref), Callback3 (ref), ViewportModuleResult (copy), ScrollAlignmentModule (upval)
 			local v4 = v3
 			
 			if v4 == nil then
 				return nil
 			elseif v4.kind == "index" then
-				local CallbackResult = Callback5(v4)
+				local CallbackResult = Callback3(v4)
 				
 				return if CallbackResult == nil then nil else ViewportModuleResult.offsetForItem(CallbackResult, v4.alignment)
 			else
@@ -436,7 +436,7 @@ return function(p1)
 	local moveSettled = nil
 	local settleScroll = nil
 	local policyContext = nil
-	local Callback6: ((any) -> ())? = nil
+	local Callback5: ((any) -> ())? = nil
 	
 	if FFlagViewRecyclerReact084 then
 		moveSettled = function(p2)
@@ -455,7 +455,7 @@ return function(p1)
 		moveSettled = nil
 		settleScroll = nil
 		policyContext = nil
-		Callback6 = nil
+		Callback5 = nil
 		
 		if FFlagViewRecyclerReact08 then
 			moveSettled = function(p2)
@@ -480,7 +480,7 @@ return function(p1)
 				}
 			end
 			
-			Callback6 = function(p2)
+			Callback5 = function(p2)
 				-- upvalues: ViewportModuleResult (copy), Callback4 (ref), v1 (ref), policyContext (ref), checkEdges (copy), PaginationEdgesModule (upval)
 				if ViewportModuleResult.getContentLength() ~= p2.contentLengthBefore then
 					p2.contentLengthChanged = true
@@ -514,7 +514,7 @@ return function(p1)
 	local t2 = {}
 	
 	local function settle(p2)
-		-- upvalues: ViewportModuleResult (copy), FFlagViewRecyclerReact084 (upval), FFlagViewRecyclerReact08 (upval), settleScroll (ref), Callback6 (ref), p1 (copy), DiagnosticsModule (upval), Flag1 (ref), ActiveMutation (ref), t1 (copy), DataSource (ref), Layout (ref), HasIsItemStickyHeader (ref), PinnedItemPlannerModule (copy), ListRowsModuleResult (copy), t2 (copy), DataPrefetch (ref), DataPrefetchControllerModuleResult (copy)
+		-- upvalues: ViewportModuleResult (copy), FFlagViewRecyclerReact084 (upval), FFlagViewRecyclerReact08 (upval), settleScroll (ref), Callback5 (ref), p1 (copy), DiagnosticsModule (upval), Flag1 (ref), ActiveMutation (ref), t1 (copy), DataSource (ref), Layout (ref), HasIsItemStickyHeader (ref), PinnedItemPlannerModule (copy), ListRowsModuleResult (copy), t2 (copy), DataPrefetch (ref), DataPrefetchControllerModuleResult (copy)
 		ViewportModuleResult.refresh()
 		
 		if if FFlagViewRecyclerReact084 then p2.settlesScroll elseif FFlagViewRecyclerReact08 then p2.settlesScroll else p2.policyEligible then
@@ -523,7 +523,7 @@ return function(p1)
 			elseif FFlagViewRecyclerReact08 then
 				settleScroll(p2)
 			else
-				Callback6(p2)
+				Callback5(p2)
 			end
 		end
 		local UpdateRangesResult, UpdateRangesResult2 = ViewportModuleResult.updateRanges()
@@ -646,16 +646,16 @@ return function(p1)
 	
 	if FFlagViewRecyclerReact084 then
 		mutateAndSettle = function(Callback: (any, any, any, any) -> (), p2, p3, p4, p5)
-			-- upvalues: StartResult (ref), Callback3 (ref), Callback7 (ref), settle (copy)
+			-- upvalues: StartResult (ref), Callback6 (ref), Callback7 (ref), settle (copy)
 			Callback(p2, p3, p4, p5)
 			
-			if StartResult ~= nil and Callback3() == nil then
+			if StartResult ~= nil and Callback6() == nil then
 				Callback7()
 			end
 			settle(p2)
 			
 			if StartResult ~= nil then
-				p2.animatedScrollTarget = Callback3()
+				p2.animatedScrollTarget = Callback6()
 			end
 		end
 		
@@ -1031,7 +1031,7 @@ return function(p1)
 		end
 		
 		animate = function(p7, p8): boolean
-			-- upvalues: ScrollMotionModule (upval), StartResult (ref), Callback7 (ref), isLaidOut (ref), v3 (ref), Callback3 (ref), ViewportModuleResult (copy), ScrollAnchorModuleResult (copy)
+			-- upvalues: ScrollMotionModule (upval), StartResult (ref), Callback7 (ref), isLaidOut (ref), v3 (ref), Callback6 (ref), ViewportModuleResult (copy), ScrollAnchorModuleResult (copy)
 			if p7 == nil or p7.animated ~= true then
 				return false
 			end
@@ -1043,7 +1043,7 @@ return function(p1)
 				return false
 			end
 			v3 = p8
-			local CallbackResult = Callback3()
+			local CallbackResult = Callback6()
 			local ScrollOffset = ViewportModuleResult.getScrollOffset()
 			
 			if CallbackResult == nil or ScrollMotionModule.isAtRest(ScrollOffset, CallbackResult, Velocity) then
@@ -1175,12 +1175,12 @@ return function(p1)
 		end
 		
 		landMotion = function(p7)
-			-- upvalues: v3 (ref), Callback7 (ref), Callback5 (ref), scrollToIndexMutation (ref), scrollToEdgeMutation (ref), scrollToOffsetMutation (ref)
+			-- upvalues: v3 (ref), Callback7 (ref), Callback3 (ref), scrollToIndexMutation (ref), scrollToEdgeMutation (ref), scrollToOffsetMutation (ref)
 			local v8 = v3
 			Callback7()
 			
 			if v8.kind == "index" then
-				local CallbackResult = Callback5(v8)
+				local CallbackResult = Callback3(v8)
 				
 				if CallbackResult ~= nil then
 					scrollToIndexMutation(p7, CallbackResult, v8.alignment, nil)
@@ -1197,9 +1197,9 @@ return function(p1)
 		end
 		
 		StepAnimatedScrollMutation = function(p7, p8)
-			-- upvalues: StartResult (ref), Callback3 (ref), Callback7 (ref), isLaidOut (ref), landMotion (ref), ScrollMotionModule (upval), ViewportModuleResult (copy), moveTo (ref)
+			-- upvalues: StartResult (ref), Callback6 (ref), Callback7 (ref), isLaidOut (ref), landMotion (ref), ScrollMotionModule (upval), ViewportModuleResult (copy), moveTo (ref)
 			local StartResult1 = StartResult
-			local CallbackResult = Callback3()
+			local CallbackResult = Callback6()
 			
 			if CallbackResult == nil then
 				Callback7()

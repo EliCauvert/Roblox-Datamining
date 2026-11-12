@@ -1,5 +1,7 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
 local ReactModule = require(Foundation.Parent.React)
+local BannerContextPresentationModule = require(Foundation.Enums.BannerContextPresentation)
+local BannerContextVariantModule = require(Foundation.Enums.BannerContextVariant)
 local InternalNoticeModule = require(Foundation.Components.InternalNotice)
 local _ = require(Foundation.Components.Types)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
@@ -8,8 +10,8 @@ local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local UseBannerContextVariantsModule = require(script.Parent.useBannerContextVariants)
 local config = {
 	testId = "--foundation-banner-context",
-	variant = require(Foundation.Enums.BannerContextVariant).Standard,
-	presentation = require(Foundation.Enums.BannerContextPresentation).Inline
+	variant = BannerContextVariantModule.Standard,
+	presentation = BannerContextPresentationModule.Inline
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)

@@ -4384,10 +4384,12 @@ Feature.Moments.Description.HowToCaptureStep1,加入已啟用截圖功能的體�
 Feature.Moments.Description.HowToCaptureStep2,啟用截圖控制項
 Feature.Moments.Description.HowToCaptureStep3,擷取遊戲遊玩的照片和影片
 Feature.Moments.Description.LeaveMomentsCreation,你即將失去所有變更，但仍可在<b>截圖</b>圖庫中找到此截圖。
+Feature.Moments.Description.MomentsOffBody,請家長在家長監護中開啟「美好時光」。
 Feature.Moments.Description.NoMusicResults,找不到音樂
 Feature.Moments.Description.NonInfiniteScrollEndBody,我們已暫停你的饋送。你可以決定是否要繼續觀看。
 Feature.Moments.Description.NothingHereYet,這裡還沒有任何內容...
 Feature.Moments.Description.PublishMoment,描述你的「美好時光」
+Feature.Moments.Description.TimeLimitReachedBody,上限是根據年齡而定。請明天再觀看「美好時光」。
 Feature.Moments.Description.TooManyUploads,你今天上傳了太多的影片，請明天再試。
 Feature.Moments.Disclaimer.EveryoneMoments,參與「美好時光」的所有人皆可檢視已發佈的內容
 Feature.Moments.Label.All,
@@ -4458,6 +4460,7 @@ Feature.Moments.Label.MomentRemovedTitle,我們已將此「美好時光」移除
 Feature.Moments.Label.MomentUnavailable,無法載入美好時光
 Feature.Moments.Label.MomentUnavailableDefault,無法使用這個美好時光。
 Feature.Moments.Label.MomentsExperienceName,
+Feature.Moments.Label.MomentsOffTitle,「美好時光」已關閉
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,尚無留言
 Feature.Moments.Label.NonInfiniteScrollEndTitle,還有更多美好時光可供觀看
@@ -4487,6 +4490,7 @@ Feature.Moments.Label.TextGenerationFailedBody,無法生成文字，請再試一
 Feature.Moments.Label.TextGenerationFailedTitle,生成失敗
 Feature.Moments.Label.TextGenerationFilteredBody,無法為此截圖影片執行生成程序，內容已遭到過濾。
 Feature.Moments.Label.TextGenerationFilteredTitle,已過濾生成文字
+Feature.Moments.Label.TimeLimitReachedTitle,你已達到「美好時光」的時間上限
 Feature.Moments.Label.Tone,語氣
 Feature.Moments.Label.Tone.Cinematic,電影感
 Feature.Moments.Label.Tone.Funny,
@@ -5699,6 +5703,8 @@ Feature.UniversalShareSheet.Response.SharedMessage,訊息已傳送
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} 和另外 {N} 人
 Feature.UserLibrary.Label.MyLibrary,我的收藏庫
+Feature.VIPServer.Message.TooManyFreeServersOnGame,無法在此體驗擁有更多免費私人伺服器。
+Feature.VIPServer.Message.TooManyTotalActiveFreeServers,無法啟用更多免費私人伺服器，請先停用其他伺服器。
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,新增手機號碼以使用語音聊天
 Feature.VerificationUpsell.Action.ChangeEmail,

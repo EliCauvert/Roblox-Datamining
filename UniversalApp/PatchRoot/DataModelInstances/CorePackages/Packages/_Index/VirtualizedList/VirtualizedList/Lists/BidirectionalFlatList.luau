@@ -212,11 +212,11 @@ return {
 				end
 				
 				local v1 = v42(ScrollFrame.AbsoluteSize)
-				local v2 = if Tbl.inverted then v42(ScrollFrame.AbsoluteCanvasSize) - v42(ScrollFrame.CanvasPosition) - v1 else v42(ScrollFrame.CanvasPosition)
-				local IsOnStartReachedThresholdAbove = v2 < OnStartReachedThreshold
-				local IsOnEndReachedThresholdAbove = v42(Child.AbsoluteSize) - v1 - v2 < OnEndReachedThreshold
+				local v2 = v42(Child.AbsoluteSize)
+				local v3 = if Tbl.inverted then v42(ScrollFrame.AbsoluteCanvasSize) - v42(ScrollFrame.CanvasPosition) - v1 else v42(ScrollFrame.CanvasPosition)
+				local IsOnEndReachedThresholdAbove = v2 - v1 - v3 < OnEndReachedThreshold
 				
-				if IsOnStartReachedThresholdAbove then
+				if v3 < OnStartReachedThreshold then
 					maybeCallOnStartReached()
 				elseif EnableRetryOnStartReached and Data and #Data > 0 and UseRefResult.current[#Data] then
 					UseRefResult.current[#Data] = false

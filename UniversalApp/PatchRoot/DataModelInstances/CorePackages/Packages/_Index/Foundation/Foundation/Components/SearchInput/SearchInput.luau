@@ -14,6 +14,8 @@ local UseTextInputVariantsModule = require(Foundation.Components.TextInput.useTe
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
 local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local InputVariantModule = require(Foundation.Enums.InputVariant)
 local RadiusModule = require(Foundation.Enums.Radius)
 local SearchInputShapeModule = require(Foundation.Enums.SearchInputShape)
 local config = {
@@ -23,8 +25,8 @@ local config = {
 local config1 = {
 	hasClearButton = true,
 	testId = "--foundation-search-input",
-	size = require(Foundation.Enums.InputSize).Medium,
-	variant = require(Foundation.Enums.InputVariant).Standard,
+	size = InputSizeModule.Medium,
+	variant = InputVariantModule.Standard,
 	shape = SearchInputShapeModule.Pill
 }
 

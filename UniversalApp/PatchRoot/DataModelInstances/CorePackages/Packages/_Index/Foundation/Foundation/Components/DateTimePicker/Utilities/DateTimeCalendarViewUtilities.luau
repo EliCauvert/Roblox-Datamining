@@ -27,9 +27,11 @@ return {
 		local Smallest = math.min(RoundToStartOfDayResult, RoundToStartOfDayResult1)
 		local Largest = math.max(RoundToStartOfDayResult, RoundToStartOfDayResult1)
 		local RoundToStartOfDayResult2 = DateTimeUtilitiesModule.roundToStartOfDay(p1)
+		local IsSmallestBelow = Smallest < RoundToStartOfDayResult2
+		local IsRoundToStartOfDayResultBelow = RoundToStartOfDayResult2 < Largest
 		local Number: number = tonumber((p1:FormatLocalTime("d", "en-us"))) or 0
-		local IsNumberMatch: boolean = End ~= DateTimePickerRangeBandRoleModule.Start and (Number == 0 or not (Smallest < RoundToStartOfDayResult2))
-		local IsNumberMatch1: boolean = End ~= DateTimePickerRangeBandRoleModule.End and (Number == 6 or not (RoundToStartOfDayResult2 < Largest))
+		local IsNumberMatch: boolean = End ~= DateTimePickerRangeBandRoleModule.Start and (Number == 0 or not IsSmallestBelow)
+		local IsNumberMatch1: boolean = End ~= DateTimePickerRangeBandRoleModule.End and (Number == 6 or not IsRoundToStartOfDayResultBelow)
 		
 		return if IsNumberMatch and IsNumberMatch1 then "radius-circle" elseif IsNumberMatch then "radius-left-circle" elseif IsNumberMatch1 then "radius-right-circle" else ""
 	end,

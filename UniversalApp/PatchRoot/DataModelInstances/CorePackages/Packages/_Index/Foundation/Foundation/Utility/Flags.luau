@@ -3,7 +3,10 @@ local FoundationFixColorOnScrubbableNumberInput = SafeFlagsModule.createGetFFlag
 local v1 = SafeFlagsModule.createGetFFlag("FoundationAlertLinkWrap")()
 local FoundationEducationalTooltipRefresh = SafeFlagsModule.createGetFFlag("FoundationEducationalTooltipRefresh3")()
 local FoundationEducationalTooltipMinMediaWidth = SafeFlagsModule.createGetFFlag("FoundationEducationalTooltipMinMediaWidth3")()
-local FoundationSliderCapture = SafeFlagsModule.createGetFFlag("FoundationSliderCapture")()
+local v2 = SafeFlagsModule.createGetFFlag("FoundationSliderRebuild2")()
+local FoundationSliderAutoSizeFix = v2 and SafeFlagsModule.createGetFFlag("FoundationSliderAutoSizeFix")()
+local FoundationSliderCapture = SafeFlagsModule.createGetFFlag("FoundationSliderCapture")() or FoundationSliderAutoSizeFix
+local V5 = FoundationSliderCapture and v2
 local FoundationNumberInputScrubCallbackProps = SafeFlagsModule.createGetFFlag("FoundationNumberInputScrubCallbackProps2")()
 
 return {
@@ -28,12 +31,10 @@ return {
 	FoundationFixColorOnScrubbableNumberInput = FoundationFixColorOnScrubbableNumberInput,
 	FoundationPluginShadowSize = SafeFlagsModule.createGetFFlag("FoundationPluginShadowSize")(),
 	FoundationNumberInputScrubbingUsesOffset = FoundationFixColorOnScrubbableNumberInput and SafeFlagsModule.createGetFFlag("FoundationNumberInputScrubbingUsesOffset")(),
-	FoundationSliderCapture = FoundationSliderCapture,
 	FoundationAlertLinkWrap = SafeFlagsModule.createGetFFlag("FoundationAlertLinkWrap")(),
 	FoundationAlertStackTrailingOnOverflow = v1 and SafeFlagsModule.createGetFFlag("FoundationAlertStackTrailingOnOverflow")(),
 	FoundationEducationalTooltipMinMediaWidth = FoundationEducationalTooltipMinMediaWidth,
 	FoundationStudioFontFaceMigration = SafeFlagsModule.createGetFFlag("FoundationStudioFontFaceMigration")(),
-	FoundationSheetReversedContent = SafeFlagsModule.createGetFFlag("FoundationSheetReversedContent")(),
 	FoundationStatusIndicatorDesignUpdate = SafeFlagsModule.createGetFFlag("FoundationStatusIndicatorDesignUpdate")(),
 	FoundationUnifiedScrimScrolling = SafeFlagsModule.createGetFFlag("FoundationUnifiedScrimScrolling2")(),
 	FoundationFixChipAccessoryLayout = SafeFlagsModule.createGetFFlag("FoundationFixChipAccessoryLayout")(),
@@ -43,6 +44,7 @@ return {
 	FoundationDialogOverlayShadow = SafeFlagsModule.createGetFFlag("FoundationDialogOverlayShadow")(),
 	FoundationPopoverOverlayShadow = SafeFlagsModule.createGetFFlag("FoundationPopoverOverlayShadow")(),
 	FoundationFixTabsFitGap = SafeFlagsModule.createGetFFlag("FoundationFixTabsFitGap")(),
+	FoundationSliderRebuild = V5,
 	FoundationAlertUseLink = v1 and SafeFlagsModule.createGetFFlag("FoundationAlertStackTrailingOnOverflow")() and SafeFlagsModule.createGetFFlag("FoundationAlertUseLink")(),
 	FoundationBadgeBetaUpdate = SafeFlagsModule.createGetFFlag("FoundationBadgeBetaUpdate4")(),
 	FoundationBadgeOverMediaAdaptive = SafeFlagsModule.createGetFFlag("FoundationBadgeOverMediaAdaptive")(),
@@ -59,7 +61,6 @@ return {
 	FoundationLightweightGuiControlState = SafeFlagsModule.createGetFFlag("FoundationLightweightGuiControlState")(),
 	FoundationNumberInputScrubEndedAlone = FoundationNumberInputScrubCallbackProps and SafeFlagsModule.createGetFFlag("FoundationNumberInputScrubEndedAlone")(),
 	FoundationSideSheetInternalDrawer = SafeFlagsModule.createGetFFlag("FoundationSideSheetInternalDrawer")(),
-	FoundationSliderRebuild = FoundationSliderCapture and SafeFlagsModule.createGetFFlag("FoundationSliderRebuild2")(),
 	FoundationTabsAccessory = SafeFlagsModule.createGetFFlag("FoundationTabsAccessory")(),
 	FoundationBottomSheetClearsActionsHeight = SafeFlagsModule.createGetFFlag("FoundationBottomSheetClearsActionsHeight")(),
 	FoundationBottomSheetKeepsSnapPoint = SafeFlagsModule.createGetFFlag("FoundationBottomSheetKeepsSnapPoint")(),
@@ -68,5 +69,10 @@ return {
 	FoundationMetadataTruncateFallback = SafeFlagsModule.createGetFFlag("FoundationMetadataTruncateFallback")(),
 	FoundationPopoverPluginPoolReclaim = SafeFlagsModule.createGetFFlag("FoundationPopoverPluginPoolReclaim")(),
 	FoundationScreenRegionProvider = SafeFlagsModule.createGetFFlag("FoundationScreenRegionProvider")(),
-	FoundationSharedViewportBreakpoint = SafeFlagsModule.createGetFFlag("FoundationSharedViewportBreakpoint")()
+	FoundationSharedViewportBreakpoint = SafeFlagsModule.createGetFFlag("FoundationSharedViewportBreakpoint")(),
+	FoundationColorPickerSliderRebuild = SafeFlagsModule.createGetFFlag("FoundationColorPickerSliderRebuild")(),
+	FoundationPopoverClampOffscreenAnchor = SafeFlagsModule.createGetFFlag("FoundationPopoverClampOffscreenAnchor")(),
+	FoundationSliderAutoSizeFix = FoundationSliderAutoSizeFix,
+	FoundationSliderCapture = FoundationSliderCapture,
+	FoundationSliderSharedPieces = V5 and SafeFlagsModule.createGetFFlag("FoundationSliderSharedPieces")()
 }

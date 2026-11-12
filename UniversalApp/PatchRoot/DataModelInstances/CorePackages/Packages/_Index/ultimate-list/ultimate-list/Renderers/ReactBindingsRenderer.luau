@@ -3,10 +3,11 @@ local _ = require(UltimateList.Dimensions)
 local DimensionsMethodsModule = require(UltimateList.Dimensions.DimensionsMethods)
 local ReactModule = require(UltimateList.Parent.React)
 local AdjustPositionToScrollAxisModule = require(UltimateList.Dimensions.adjustPositionToScrollAxis)
+local CreateDebugLoggerModule = require(UltimateList.Util.createDebugLogger)
 local _ = require(UltimateList.createVirtualizedListController)
 local JoinAndMapBindingsModule = require(UltimateList.Util.joinAndMapBindings)
 local CreateElementFunction = ReactModule.createElement
-local ReactBindingsRenderer = require(UltimateList.Util.createDebugLogger)("ReactBindingsRenderer")
+local ReactBindingsRenderer = CreateDebugLoggerModule("ReactBindingsRenderer")
 
 local function getKeyDefault(_, p1): string
 	return (tostring(p1))

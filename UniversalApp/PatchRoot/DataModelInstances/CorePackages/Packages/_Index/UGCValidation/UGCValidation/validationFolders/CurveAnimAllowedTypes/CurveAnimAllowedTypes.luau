@@ -2,6 +2,7 @@
 local _ = require(Parent.util.Types)
 local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local GetFFlagUGCValidateAddObjectValueToAcceptableTypesModule = require(Parent.flags.getFFlagUGCValidateAddObjectValueToAcceptableTypes)
 local CurveAnimAllowedTypesModule = {
 	categories = {
 		ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
@@ -18,7 +19,7 @@ local List = {
 	"EulerRotationCurve", "FloatCurve"
 }
 
-if require(Parent.flags.getFFlagUGCValidateAddObjectValueToAcceptableTypes)() then
+if GetFFlagUGCValidateAddObjectValueToAcceptableTypesModule() then
 	table.insert(List, "ObjectValue")
 end
 function CurveAnimAllowedTypesModule.run(p1, p2)

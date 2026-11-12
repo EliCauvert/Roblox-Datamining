@@ -13,9 +13,11 @@ return function(p1, p2, p3, p4, p5): UDim
 	local JoinResult = CryoModule.Dictionary.join(ConstantsModule.getDefaultStyleProps(p1), p5 or {})
 	local TopContentPadding = JoinResult.topContentPadding
 	local BottomContentPadding = JoinResult.bottomContentPadding
+	local ContentTitleFont = JoinResult.contentTitleFont
+	local ContentTitlePadding = JoinResult.contentTitlePadding
 	local SelectionCursorPadding = JoinResult.selectionCursorPadding
 	local NewLeft = SelectionCursorPadding.Left + SelectionCursorPadding.Right + TopContentPadding.Left + TopContentPadding.Right
-	local NewFloored = math.floor(SetDefaultModule(p3, ConstantsModule.DEFAULT_TEXT_LINE_COUNT) * JoinResult.contentTitleFont.RelativeSize * p1.Font.BaseSize + JoinResult.contentTitlePadding) + SetDefaultModule(p4, ConstantsModule.DEFAULT_FOOTER_HEIGHT)
+	local NewFloored = math.floor(SetDefaultModule(p3, ConstantsModule.DEFAULT_TEXT_LINE_COUNT) * ContentTitleFont.RelativeSize * p1.Font.BaseSize + ContentTitlePadding) + SetDefaultModule(p4, ConstantsModule.DEFAULT_FOOTER_HEIGHT)
 	local NewTop = TopContentPadding.Top + TopContentPadding.Bottom + (BottomContentPadding.Top + BottomContentPadding.Bottom) + (SelectionCursorPadding.Top + SelectionCursorPadding.Bottom)
 	local AspectRatioModule = GetAspectRatioModule((SetDefaultModule(p2, AspectRatioModeModule.Square)))
 	

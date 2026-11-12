@@ -3,12 +3,13 @@ local Parent = RoduxUsers.Parent
 local RoduxModule = require(Parent.Rodux)
 local CryoModule = require(Parent.Cryo)
 local Actions = RoduxUsers.Actions
+local Models = RoduxUsers.Models
 local UserRemovedModule = require(Actions.UserRemoved)
 local UserUpdatedModule = require(Actions.UserUpdated)
-local UserModelModule = require(RoduxUsers.Models.UserModel)
+local UserModelModule = require(Models.UserModel)
 local t = {}
 
-local function v9(p1, List)
+local function v10(p1, List)
 	-- upvalues: UserModelModule (copy), CryoModule (copy)
 	local NewResults = {}
 	
@@ -26,30 +27,30 @@ local function v9(p1, List)
 end
 
 return function(p2)
-	-- upvalues: RoduxModule (copy), t (copy), v9 (copy), UserUpdatedModule (copy), UserModelModule (copy), CryoModule (copy), UserRemovedModule (copy)
+	-- upvalues: RoduxModule (copy), t (copy), v10 (copy), UserUpdatedModule (copy), UserModelModule (copy), CryoModule (copy), UserRemovedModule (copy)
 	local UsersNetworking = p2.usersNetworking
 	local FriendsNetworking = p2.friendsNetworking
 	
 	return RoduxModule.createReducer(t, {
 		[UsersNetworking.GetUserV2FromUserId.Succeeded.name] = function(p3, p4)
-			-- upvalues: v9 (upval)
-			return v9(p3, { p4.responseBody })
+			-- upvalues: v10 (upval)
+			return v10(p3, { p4.responseBody })
 		end,
 		[UsersNetworking.GetSkinnyUsersFromUserIds.Succeeded.name] = function(p3, p4)
-			-- upvalues: v9 (upval)
-			return v9(p3, p4.responseBody.data)
+			-- upvalues: v10 (upval)
+			return v10(p3, p4.responseBody.data)
 		end,
 		[FriendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p3, p4)
-			-- upvalues: v9 (upval)
-			return v9(p3, p4.responseBody.data)
+			-- upvalues: v10 (upval)
+			return v10(p3, p4.responseBody.data)
 		end,
 		[FriendsNetworking.GetFriendRequests.Succeeded.name] = function(p3, p4)
-			-- upvalues: v9 (upval)
-			return v9(p3, p4.responseBody.data)
+			-- upvalues: v10 (upval)
+			return v10(p3, p4.responseBody.data)
 		end,
 		[FriendsNetworking.GetFriendRecommendationsFromUserId.Succeeded.name] = function(p3, p4)
-			-- upvalues: v9 (upval)
-			return v9(p3, p4.responseBody.data)
+			-- upvalues: v10 (upval)
+			return v10(p3, p4.responseBody.data)
 		end,
 		[UserUpdatedModule.name] = function(p3, p4)
 			-- upvalues: UserModelModule (upval), CryoModule (upval)

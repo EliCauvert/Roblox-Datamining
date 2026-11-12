@@ -96,29 +96,29 @@ function extendSchemaImpl(p1, p2, p3)
 		return p1
 	end
 	local NewMap1 = Map.new()
-	local Callback5 = nil
+	local Callback4 = nil
 	local ExtendArg = nil
 	local ExtendField = nil
+	local Callback3 = nil
 	local Callback6 = nil
-	local Callback4 = nil
 	local Callback7 = nil
-	local Callback2 = nil
 	local Callback8 = nil
 	local Callback9 = nil
+	local Callback2 = nil
 	local Callback10 = nil
 	local Callback11 = nil
-	local Callback3 = nil
 	local Callback13 = nil
+	local Callback12 = nil
 	local Callback14 = nil
 	local Callback15 = nil
-	local Callback12 = nil
+	local Callback5 = nil
 	
 	local function replaceType(Type)
-		-- upvalues: IsListTypeFunction (upval), GraphQLList (upval), replaceType (copy), IsNonNullTypeFunction (upval), GraphQLNonNull (upval), Callback5 (ref)
-		return if IsListTypeFunction(Type) then GraphQLList.new(replaceType(Type.ofType)) elseif IsNonNullTypeFunction(Type) then GraphQLNonNull.new(replaceType(Type.ofType)) else Callback5(Type)
+		-- upvalues: IsListTypeFunction (upval), GraphQLList (upval), replaceType (copy), IsNonNullTypeFunction (upval), GraphQLNonNull (upval), Callback4 (ref)
+		return if IsListTypeFunction(Type) then GraphQLList.new(replaceType(Type.ofType)) elseif IsNonNullTypeFunction(Type) then GraphQLNonNull.new(replaceType(Type.ofType)) else Callback4(Type)
 	end
 	
-	Callback5 = function(Mutation)
+	Callback4 = function(Mutation)
 		-- upvalues: NewMap1 (copy)
 		return NewMap1:get(Mutation.name)
 	end
@@ -133,27 +133,27 @@ function extendSchemaImpl(p1, p2, p3)
 	end
 	
 	local function extendNamedType(p4)
-		-- upvalues: IsIntrospectionTypeFunction (upval), IsSpecifiedScalarTypeFunction (upval), IsScalarTypeFunction (upval), Callback6 (ref), IsObjectTypeFunction (upval), Callback4 (ref), IsInterfaceTypeFunction (upval), Callback7 (ref), IsUnionTypeFunction (upval), Callback2 (ref), IsEnumTypeFunction (upval), Callback8 (ref), IsInputObjectTypeFunction (upval), Callback9 (ref), InspectFunction (upval)
+		-- upvalues: IsIntrospectionTypeFunction (upval), IsSpecifiedScalarTypeFunction (upval), IsScalarTypeFunction (upval), Callback3 (ref), IsObjectTypeFunction (upval), Callback6 (ref), IsInterfaceTypeFunction (upval), Callback7 (ref), IsUnionTypeFunction (upval), Callback8 (ref), IsEnumTypeFunction (upval), Callback9 (ref), IsInputObjectTypeFunction (upval), Callback2 (ref), InspectFunction (upval)
 		if IsIntrospectionTypeFunction(p4) or IsSpecifiedScalarTypeFunction(p4) then
 			return p4
 		elseif IsScalarTypeFunction(p4) then
-			return Callback6(p4)
+			return Callback3(p4)
 		elseif IsObjectTypeFunction(p4) then
-			return Callback4(p4)
+			return Callback6(p4)
 		elseif IsInterfaceTypeFunction(p4) then
 			return Callback7(p4)
 		elseif IsUnionTypeFunction(p4) then
-			return Callback2(p4)
-		elseif IsEnumTypeFunction(p4) then
 			return Callback8(p4)
-		elseif IsInputObjectTypeFunction(p4) then
+		elseif IsEnumTypeFunction(p4) then
 			return Callback9(p4)
+		elseif IsInputObjectTypeFunction(p4) then
+			return Callback2(p4)
 		else
 			assert(false, "Unexpected type: " .. InspectFunction(p4))
 		end
 	end
 	
-	Callback9 = function(p4)
+	Callback2 = function(p4)
 		-- upvalues: NewMap (copy), GraphQLInputObjectType (upval), Object (upval), Map (upval), Array (upval), MapValueOrderedFunction (upval), CoerceToMapFunction (upval), replaceType (copy), Callback10 (ref)
 		local Config = p4:toConfig()
 		local New = NewMap[Config.name] or {}
@@ -170,7 +170,7 @@ function extendSchemaImpl(p1, p2, p3)
 		}))
 	end
 	
-	Callback8 = function(p4)
+	Callback9 = function(p4)
 		-- upvalues: NewMap (copy), GraphQLEnumType (upval), Object (upval), Map (upval), Array (upval), Callback11 (ref)
 		local Config = p4:toConfig()
 		local GetResult = NewMap:get(p4.name) or {}
@@ -181,7 +181,7 @@ function extendSchemaImpl(p1, p2, p3)
 		}))
 	end
 	
-	Callback6 = function(p4)
+	Callback3 = function(p4)
 		-- upvalues: NewMap (copy), Callback (upval), GraphQLScalarType (upval), Object (upval), Array (upval)
 		local Config = p4:toConfig()
 		local GetResult = NewMap:get(Config.name) or {}
@@ -196,51 +196,51 @@ function extendSchemaImpl(p1, p2, p3)
 		}))
 	end
 	
-	Callback4 = function(p5)
-		-- upvalues: NewMap (copy), GraphQLObjectType (upval), Object (upval), Array (upval), Callback5 (ref), Callback3 (ref), Map (upval), MapValueOrderedFunction (upval), CoerceToMapFunction (upval), ExtendField (ref), Callback12 (ref)
+	Callback6 = function(p5)
+		-- upvalues: NewMap (copy), GraphQLObjectType (upval), Object (upval), Array (upval), Callback4 (ref), Callback13 (ref), Map (upval), MapValueOrderedFunction (upval), CoerceToMapFunction (upval), ExtendField (ref), Callback5 (ref)
 		local Config = p5:toConfig()
 		local GetResult = NewMap:get(Config.name) or {}
 		
 		return GraphQLObjectType.new(Object.assign({}, Config, {
 			interfaces = function()
-				-- upvalues: Array (upval), p5 (copy), Callback5 (upval), Callback3 (upval), GetResult (copy)
-				return Array.concat(Array.map(p5:getInterfaces(), Callback5), Callback3(GetResult))
+				-- upvalues: Array (upval), p5 (copy), Callback4 (upval), Callback13 (upval), GetResult (copy)
+				return Array.concat(Array.map(p5:getInterfaces(), Callback4), Callback13(GetResult))
 			end,
 			fields = function()
-				-- upvalues: Map (upval), Array (upval), MapValueOrderedFunction (upval), CoerceToMapFunction (upval), Config (copy), ExtendField (upval), Callback12 (upval), GetResult (copy)
-				return Map.new(Array.concat(MapValueOrderedFunction(CoerceToMapFunction(Config.fields), ExtendField):entries(), Callback12(GetResult):entries()))
+				-- upvalues: Map (upval), Array (upval), MapValueOrderedFunction (upval), CoerceToMapFunction (upval), Config (copy), ExtendField (upval), Callback5 (upval), GetResult (copy)
+				return Map.new(Array.concat(MapValueOrderedFunction(CoerceToMapFunction(Config.fields), ExtendField):entries(), Callback5(GetResult):entries()))
 			end,
 			extensionASTNodes = Array.concat(Config.extensionASTNodes, GetResult)
 		}))
 	end
 	
 	Callback7 = function(p5)
-		-- upvalues: NewMap (copy), GraphQLInterfaceType (upval), Object (upval), Array (upval), Callback5 (ref), Callback3 (ref), Map (upval), MapValueOrderedFunction (upval), CoerceToMapFunction (upval), ExtendField (ref), Callback12 (ref)
+		-- upvalues: NewMap (copy), GraphQLInterfaceType (upval), Object (upval), Array (upval), Callback4 (ref), Callback13 (ref), Map (upval), MapValueOrderedFunction (upval), CoerceToMapFunction (upval), ExtendField (ref), Callback5 (ref)
 		local Config = p5:toConfig()
 		local GetResult = NewMap:get(Config.name) or {}
 		
 		return GraphQLInterfaceType.new(Object.assign({}, Config, {
 			interfaces = function()
-				-- upvalues: Array (upval), p5 (copy), Callback5 (upval), Callback3 (upval), GetResult (copy)
-				return Array.concat(Array.map(p5:getInterfaces(), Callback5), Callback3(GetResult))
+				-- upvalues: Array (upval), p5 (copy), Callback4 (upval), Callback13 (upval), GetResult (copy)
+				return Array.concat(Array.map(p5:getInterfaces(), Callback4), Callback13(GetResult))
 			end,
 			fields = function()
-				-- upvalues: Map (upval), Array (upval), MapValueOrderedFunction (upval), CoerceToMapFunction (upval), Config (copy), ExtendField (upval), Callback12 (upval), GetResult (copy)
-				return Map.new(Array.concat(MapValueOrderedFunction(CoerceToMapFunction(Config.fields), ExtendField):entries(), Callback12(GetResult):entries()))
+				-- upvalues: Map (upval), Array (upval), MapValueOrderedFunction (upval), CoerceToMapFunction (upval), Config (copy), ExtendField (upval), Callback5 (upval), GetResult (copy)
+				return Map.new(Array.concat(MapValueOrderedFunction(CoerceToMapFunction(Config.fields), ExtendField):entries(), Callback5(GetResult):entries()))
 			end,
 			extensionASTNodes = Array.concat(Config.extensionASTNodes, GetResult)
 		}))
 	end
 	
-	Callback2 = function(p5)
-		-- upvalues: NewMap (copy), GraphQLUnionType (upval), Object (upval), Array (upval), Callback5 (ref), Callback13 (ref)
+	Callback8 = function(p5)
+		-- upvalues: NewMap (copy), GraphQLUnionType (upval), Object (upval), Array (upval), Callback4 (ref), Callback12 (ref)
 		local Config = p5:toConfig()
 		local GetResult = NewMap:get(Config.name) or {}
 		
 		return GraphQLUnionType.new(Object.assign({}, Config, {
 			types = function()
-				-- upvalues: Array (upval), p5 (copy), Callback5 (upval), Callback13 (upval), GetResult (copy)
-				return Array.concat(Array.map(p5:getTypes(), Callback5), Callback13(GetResult))
+				-- upvalues: Array (upval), p5 (copy), Callback4 (upval), Callback12 (upval), GetResult (copy)
+				return Array.concat(Array.map(p5:getTypes(), Callback4), Callback12(GetResult))
 			end,
 			extensionASTNodes = Array.concat(Config.extensionASTNodes, GetResult)
 		}))
@@ -302,7 +302,7 @@ function extendSchemaImpl(p1, p2, p3)
 		})
 	end
 	
-	Callback12 = function(ConcatResult)
+	Callback5 = function(ConcatResult)
 		-- upvalues: Map (upval), getWrappedType (copy), Callback15 (ref), Callback1 (upval)
 		local NewMap = Map.new()
 		
@@ -375,7 +375,7 @@ function extendSchemaImpl(p1, p2, p3)
 		return NewMap
 	end
 	
-	Callback3 = function(ConcatResult)
+	Callback13 = function(ConcatResult)
 		-- upvalues: Callback14 (ref)
 		local List = {}
 		
@@ -389,7 +389,7 @@ function extendSchemaImpl(p1, p2, p3)
 		return List
 	end
 	
-	Callback13 = function(ConcatResult)
+	Callback12 = function(ConcatResult)
 		-- upvalues: Callback14 (ref)
 		local List = {}
 		
@@ -404,7 +404,7 @@ function extendSchemaImpl(p1, p2, p3)
 	end
 	
 	local function buildType(AstNode)
-		-- upvalues: NewMap (copy), Kind (upval), Array (upval), GraphQLObjectType (upval), Callback3 (ref), Callback12 (ref), GraphQLInterfaceType (upval), GraphQLEnumType (upval), Callback11 (ref), GraphQLUnionType (upval), Callback13 (ref), GraphQLScalarType (upval), Callback (upval), GraphQLInputObjectType (upval), Callback10 (ref), InspectFunction (upval)
+		-- upvalues: NewMap (copy), Kind (upval), Array (upval), GraphQLObjectType (upval), Callback13 (ref), Callback5 (ref), GraphQLInterfaceType (upval), GraphQLEnumType (upval), Callback11 (ref), GraphQLUnionType (upval), Callback12 (ref), GraphQLScalarType (upval), Callback (upval), GraphQLInputObjectType (upval), Callback10 (ref), InspectFunction (upval)
 		local Value = AstNode.name.value
 		local New = NewMap[Value] or {}
 		local Kind1 = AstNode.kind
@@ -416,12 +416,12 @@ function extendSchemaImpl(p1, p2, p3)
 				name = Value,
 				description = if AstNode.description then AstNode.description.value else nil,
 				interfaces = function()
-					-- upvalues: Callback3 (upval), ConcatResult (copy)
-					return Callback3(ConcatResult)
+					-- upvalues: Callback13 (upval), ConcatResult (copy)
+					return Callback13(ConcatResult)
 				end,
 				fields = function()
-					-- upvalues: Callback12 (upval), ConcatResult (copy)
-					return Callback12(ConcatResult)
+					-- upvalues: Callback5 (upval), ConcatResult (copy)
+					return Callback5(ConcatResult)
 				end,
 				astNode = AstNode,
 				extensionASTNodes = New
@@ -433,12 +433,12 @@ function extendSchemaImpl(p1, p2, p3)
 				name = Value,
 				description = if AstNode.description then AstNode.description.value else nil,
 				interfaces = function()
-					-- upvalues: Callback3 (upval), ConcatResult1 (copy)
-					return Callback3(ConcatResult1)
+					-- upvalues: Callback13 (upval), ConcatResult1 (copy)
+					return Callback13(ConcatResult1)
 				end,
 				fields = function()
-					-- upvalues: Callback12 (upval), ConcatResult1 (copy)
-					return Callback12(ConcatResult1)
+					-- upvalues: Callback5 (upval), ConcatResult1 (copy)
+					return Callback5(ConcatResult1)
 				end,
 				astNode = AstNode,
 				extensionASTNodes = New
@@ -458,8 +458,8 @@ function extendSchemaImpl(p1, p2, p3)
 				name = Value,
 				description = if AstNode.description then AstNode.description.value else nil,
 				types = function()
-					-- upvalues: Callback13 (upval), ConcatResult2 (copy)
-					return Callback13(ConcatResult2)
+					-- upvalues: Callback12 (upval), ConcatResult2 (copy)
+					return Callback12(ConcatResult2)
 				end,
 				astNode = AstNode,
 				extensionASTNodes = New
@@ -502,9 +502,9 @@ function extendSchemaImpl(p1, p2, p3)
 	local AssignResult = Object.assign({}, {
 		description = if v2 == nil or v2.description == nil then nil else v2.description.value
 	}, Object.assign({}, {
-		query = p1.query and Callback5(p1.query),
-		mutation = p1.mutation and Callback5(p1.mutation),
-		subscription = p1.subscription and Callback5(p1.subscription)
+		query = p1.query and Callback4(p1.query),
+		mutation = p1.mutation and Callback4(p1.mutation),
+		subscription = p1.subscription and Callback4(p1.subscription)
 	}, v2 and getOperationTypes({ v2 }) or {}, (getOperationTypes(List2))), {
 		types = NewMap1:values(),
 		directives = Array.concat(Array.map(p1.directives, replaceDirective), Array.map(List1, buildDirective)),

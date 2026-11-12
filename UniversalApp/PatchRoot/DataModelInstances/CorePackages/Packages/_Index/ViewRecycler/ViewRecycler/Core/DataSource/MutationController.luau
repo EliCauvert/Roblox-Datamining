@@ -2,7 +2,7 @@
 local _ = require(ViewRecycler.Core.Types)
 local CreateEventModule = require(ViewRecycler.Internal.createEvent)
 
-return function(Callback, Callback1, Callback2, Callback3)
+return function(Callback1, Callback2, Callback3, Callback)
 	-- upvalues: CreateEventModule (copy)
 	local EventModule = CreateEventModule()
 	local Count = 0
@@ -10,7 +10,7 @@ return function(Callback, Callback1, Callback2, Callback3)
 	local v1 = nil
 	
 	local function flush()
-		-- upvalues: v1 (ref), List (ref), EventModule (copy), Callback (copy)
+		-- upvalues: v1 (ref), List (ref), EventModule (copy), Callback1 (copy)
 		local PreviousItemCount = v1
 		local Changes = List
 		List = {}
@@ -18,7 +18,7 @@ return function(Callback, Callback1, Callback2, Callback3)
 		EventModule.fire({
 			changes = Changes,
 			previousItemCount = PreviousItemCount,
-			itemCount = Callback()
+			itemCount = Callback1()
 		})
 	end
 	
@@ -60,28 +60,28 @@ return function(Callback, Callback1, Callback2, Callback3)
 				flush()
 			end
 		end,
-		transaction = function(Callback)
-			-- upvalues: Callback1 (copy), List (ref), v1 (ref), Count (ref), Callback2 (copy), Callback3 (copy), flush (copy)
-			local CallbackResult = Callback1()
+		transaction = function(Callback1)
+			-- upvalues: Callback2 (copy), List (ref), v1 (ref), Count (ref), Callback3 (copy), Callback (copy), flush (copy)
+			local CallbackResult = Callback2()
 			local Copy = table.clone(List)
 			local v2 = v1
 			Count += 1
 			local Packed = table.pack(pcall(function(): boolean
-				-- upvalues: Callback (copy)
-				Callback()
+				-- upvalues: Callback1 (copy)
+				Callback1()
 				
 				return true
 			end))
 			Count -= 1
 			
 			if not Packed[1] then
-				Callback2(CallbackResult)
+				Callback3(CallbackResult)
 				List = Copy
 				v1 = v2
 				error(Packed[2], 0)
 			end
-			if Callback3 ~= nil then
-				Callback3(CallbackResult)
+			if Callback ~= nil then
+				Callback(CallbackResult)
 			end
 			if Count == 0 and #List > 0 then
 				flush()

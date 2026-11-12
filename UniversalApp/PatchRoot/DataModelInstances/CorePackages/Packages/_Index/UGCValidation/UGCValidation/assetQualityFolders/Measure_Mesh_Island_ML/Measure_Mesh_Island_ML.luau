@@ -1,12 +1,11 @@
 ﻿local Parent = script.Parent.Parent.Parent
 local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 local UGCValidationMeshIslandMLMinScore = game:DefineFastInt("UGCValidationMeshIslandMLMinScore", 9)
 
 return {
-	categories = {
-		require(Parent.validationSystem.ValidationEnums).UploadCategory.FULL_BODY
-	},
+	categories = { ValidationEnumsModule.UploadCategory.FULL_BODY },
 	run = function(p1, p2)
 		-- upvalues: UGCValidationMeshIslandMLMinScore (copy), ErrorSourceStringsModule (copy)
 		local MeasureMeshIslandML = p2.aqsSummaryData.Measure_Mesh_Island_ML

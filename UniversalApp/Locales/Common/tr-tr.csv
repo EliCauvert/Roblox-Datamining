@@ -4341,10 +4341,12 @@ Feature.Moments.Description.HowToCaptureStep1,Yakalamaların etkin olduğu bir D
 Feature.Moments.Description.HowToCaptureStep2,Yakalama denetimlerini etkinleştir
 Feature.Moments.Description.HowToCaptureStep3,Oynanışın fotoğraflarını ve videolarını yakala
 Feature.Moments.Description.LeaveMomentsCreation,Tüm değişikliklerini kaybedeceksin ancak yakalanan bu ekran görüntüsünü <b>Yakalananlar</b> galerinde bulabilirsin.
+Feature.Moments.Description.MomentsOffBody,Ebeveyn denetimlerinde Anlar'ı açmasını bir ebeveynden iste.
 Feature.Moments.Description.NoMusicResults,Müzik bulunamadı
 Feature.Moments.Description.NonInfiniteScrollEndBody,Sayfanı duraklattık. İzlemeye devam etmek isteyip istemediğine karar verebilirsin.
 Feature.Moments.Description.NothingHereYet,Burada henüz bir şey yok...
 Feature.Moments.Description.PublishMoment,Anını anlat
+Feature.Moments.Description.TimeLimitReachedBody,Sınırlar yaşa göre belirlenir. Anları yarın izle.
 Feature.Moments.Description.TooManyUploads,Bugün çok fazla video yükledin. Yarın tekrar dene.
 Feature.Moments.Disclaimer.EveryoneMoments,Anlardaki herkes yayınlananları görüntüleyebilir
 Feature.Moments.Label.All,
@@ -4415,6 +4417,7 @@ Feature.Moments.Label.MomentRemovedTitle,Bu Anı kaldırdık
 Feature.Moments.Label.MomentUnavailable,An kullanılamıyor
 Feature.Moments.Label.MomentUnavailableDefault,Bu An kullanılamıyor.
 Feature.Moments.Label.MomentsExperienceName,
+Feature.Moments.Label.MomentsOffTitle,Anlar kapalı
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,Henüz yorum yok
 Feature.Moments.Label.NonInfiniteScrollEndTitle,İzlenecek daha fazla An var
@@ -4444,6 +4447,7 @@ Feature.Moments.Label.TextGenerationFailedBody,Metin oluşturulamadı. Lütfen t
 Feature.Moments.Label.TextGenerationFailedTitle,Oluşturma Başarısız
 Feature.Moments.Label.TextGenerationFilteredBody,"Bu yakalanan video için oluşturma işlemi gerçekleştirilemiyor, içerik filtrelendi."
 Feature.Moments.Label.TextGenerationFilteredTitle,Oluşturma Filtrelendi
+Feature.Moments.Label.TimeLimitReachedTitle,Anlar için süre sınırına ulaştın
 Feature.Moments.Label.Tone,Üslup
 Feature.Moments.Label.Tone.Cinematic,Sinematik
 Feature.Moments.Label.Tone.Funny,Komik
@@ -5656,6 +5660,8 @@ Feature.UniversalShareSheet.Response.SharedMessage,Mesaj gönderildi
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Mesajlar gönderildi
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE}: {N} kişiyle daha
 Feature.UserLibrary.Label.MyLibrary,Kütüphanem
+Feature.VIPServer.Message.TooManyFreeServersOnGame,Bu deneyimde daha fazla ücretsiz özel sunucuya sahip olamazsın.
+Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Daha fazla etkin ücretsiz özel sunucuya sahip olamazsın. Lütfen önce diğer birkaç sunucuyu devre dışı bırak.
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,Sesli Sohbet için Telefon ekle
 Feature.VerificationUpsell.Action.ChangeEmail,E-posta Adresini Değiştir

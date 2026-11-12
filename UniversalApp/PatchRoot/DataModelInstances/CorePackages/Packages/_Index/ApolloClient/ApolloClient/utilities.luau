@@ -1,8 +1,9 @@
 ﻿local UtilitiesModule = {}
 local Parent = script.Parent
 local Parent1 = Parent.Parent
+local InvariantFunction: (any, any) -> () = require(Parent.jsutils.invariant).invariant
 local DEV = require(script.globals).DEV
-require(Parent.jsutils.invariant).invariant(typeof(DEV) == "boolean", (tostring(DEV)))
+InvariantFunction(typeof(DEV) == "boolean", (tostring(DEV)))
 UtilitiesModule.DEV = DEV
 local Object = require(Parent1.LuauPolyfill).Object
 UtilitiesModule.NULL = require(script.globals).NULL

@@ -4,18 +4,20 @@ local _ = require(Parent.util.Types)
 local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 local EyelashCageUVReferenceValuesModule = require(Parent.EyelashCageUVReferenceValues)
+local Categories = {
+	ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+	ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH
+}
+local RequiredData = {
+	ValidationEnumsModule.SharedDataMember.renderMeshesData,
+	ValidationEnumsModule.SharedDataMember.innerCagesData
+}
 local DistanceThreshold = require(Parent.flags.getFIntUGCValidationLeaderVertsNearCageIslandsDistance)() / 10000
 
 return {
 	fflag = require(Parent.flags.getEngineFeatureEngineUGCValidateLeaderVertsNearCageIslands),
-	categories = {
-		ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
-		ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH
-	},
-	requiredData = {
-		ValidationEnumsModule.SharedDataMember.renderMeshesData,
-		ValidationEnumsModule.SharedDataMember.innerCagesData
-	},
+	categories = Categories,
+	requiredData = RequiredData,
 	run = function(p1, p2)
 		-- upvalues: UGCValidationService (copy), EyelashCageUVReferenceValuesModule (copy), DistanceThreshold (copy), ErrorSourceStringsModule (copy)
 		if p2.uploadEnum.assetType ~= Enum.AssetType.EyelashAccessory then return end

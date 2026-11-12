@@ -8,12 +8,14 @@ local ViewModule = require(Components.View)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
 local UseRadioGroupItemVariantsModule = require(script.Parent.useRadioGroupItemVariants)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local InputPlacementModule = require(Foundation.Enums.InputPlacement)
 local UseInputGroupDefaultsModule = require(Foundation.Components.InternalInputGroup.useInputGroupDefaults)
 local UseRadioGroupModule = require(script.Parent.Parent.useRadioGroup)
 local config = {
 	isDisabled = false,
-	size = require(Foundation.Enums.InputSize).Medium,
-	placement = require(Foundation.Enums.InputPlacement).Start
+	size = InputSizeModule.Medium,
+	placement = InputPlacementModule.Start
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)

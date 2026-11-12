@@ -8,6 +8,7 @@ local GetEngineFeatureEngineUGCValidationReportScriptTimeModule = require(Parent
 local GetEngineFeatureEngineUGCValidationIECTelemetryModule = require(Parent.flags.getEngineFeatureEngineUGCValidationIECTelemetry)
 local GetEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule = require(Parent.flags.getEngineFeatureEngineUGCValidateFACSJointTransformsWithinBounds)
 local GetEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(Parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
+local GetFFlagUGCValidationEyebrowEyelashSupportModule = require(Parent.flags.getFFlagUGCValidationEyebrowEyelashSupport)
 
 local function joinTables(...)
 	local t = {}
@@ -107,7 +108,7 @@ config.ErrorType.validateSkinningTransfer_BodyPartsWithSpecialJoints = "validate
 config.ErrorType.validateSkinningTransfer_SkinningTransferOverride = "validateSkinningTransfer_SkinningTransferOverride"
 config.ErrorType.validateSkinningTransfer_Weights = "validateSkinningTransfer_Weights"
 
-if require(Parent.flags.getFFlagUGCValidationEyebrowEyelashSupport)() then
+if GetFFlagUGCValidationEyebrowEyelashSupportModule() then
 	config.ErrorType.validateSkinningTransfer_RequiredAssetTypes = "validateSkinningTransfer_RequiredAssetTypes"
 end
 if GetEngineFeatureEngineUGCValidatePropertiesSensibleModule() then

@@ -3,6 +3,7 @@ local Parent = Foundation.Parent
 local UserInputService = require(Foundation.Utility.Wrappers).Services.UserInputService
 local ReactModule = require(Parent.React)
 local ReactOtterModule = require(Parent.ReactOtter)
+local ReactUtilsModule = require(Parent.ReactUtils)
 local GetVisualForKeyModule = require(script.Parent.getVisualForKey)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
@@ -12,7 +13,7 @@ local ImageModule = require(Foundation.Components.Image)
 local TextModule = require(Foundation.Components.Text)
 local _ = require(Foundation.Components.Types)
 local ViewModule = require(Foundation.Components.View)
-local EventConnection = require(Parent.ReactUtils).EventConnection
+local EventConnection = ReactUtilsModule.EventConnection
 local config = { holdTime = 1, resetTime = 0.5 }
 local config1 = { testId = "--foundation-key-label" }
 local _Rect = Rect.new(Vector2.new(10, 9), Vector2.new(25, 25))

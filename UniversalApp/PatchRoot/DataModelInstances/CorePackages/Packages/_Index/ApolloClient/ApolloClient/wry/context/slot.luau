@@ -1,6 +1,7 @@
 ﻿local Parent = script.Parent.Parent.Parent
 local LuauPolyfillModule = require(Parent.Parent.LuauPolyfill)
 local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
 local UuidFunction = require(Parent.utilities.common.makeUniqueId).uuid
 local t = {}
 local Parent1 = nil
@@ -117,7 +118,7 @@ local function makeSlotClass()
 end
 local WryContextSlot = nil
 repeat
-	if LuauPolyfillModule.Boolean.toJSBoolean(Array["@wry/context:Slot"]) then
+	if Boolean.toJSBoolean(Array["@wry/context:Slot"]) then
 		WryContextSlot = Array["@wry/context:Slot"]
 		
 		if WryContextSlot then break end

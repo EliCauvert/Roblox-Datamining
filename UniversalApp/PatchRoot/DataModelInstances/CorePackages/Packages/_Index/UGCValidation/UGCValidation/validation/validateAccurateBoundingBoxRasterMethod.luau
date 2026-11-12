@@ -125,9 +125,10 @@ local function calculateMinimumBoundsForView(p1, p2)
 				local ScaledVector = Vector2.new(Entry[1], Entry[3]) * NewSummedAreaTable.size
 				AreaDensityContinuous = NewSummedAreaTable:GetAreaDensityContinuous(ScaledVector, Vector2.new(Entry[2], Entry[4]) * NewSummedAreaTable.size - ScaledVector)
 			end
+			local ScaledMagnitude = math.abs(AreaDensityContinuous / AreaDensity * 100 - TargetPercentageResult) * PercentageWeightResult
 			local _Vector2 = Vector2.new(Entry[2] - Entry[1], Entry[4] - Entry[3])
 			
-			return math.abs(AreaDensityContinuous / AreaDensity * 100 - TargetPercentageResult) * PercentageWeightResult + (_Vector2.X + _Vector2.Y)
+			return ScaledMagnitude + (_Vector2.X + _Vector2.Y)
 		end
 		
 		local MaxIterationsResult = ValidateAccurateBoundingBoxFlagsModule.maxIterations()

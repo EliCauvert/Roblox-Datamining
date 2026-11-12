@@ -4,6 +4,14 @@ local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 local GetFIntUGCValidateMaxAnimationFPSModule = require(Parent.flags.getFIntUGCValidateMaxAnimationFPS)
 local GetFStringUGCValidateMaxJointRotationPerPartModule = require(script.Parent.GetFStringUGCValidateMaxJointRotationPerPart)
+local Categories = { ValidationEnumsModule.UploadCategory.ANIMATION }
+local RequiredData = {
+	ValidationEnumsModule.SharedDataMember.curveAnimations,
+	ValidationEnumsModule.SharedDataMember.curveAnimComputedFrames
+}
+local PrereqTests = {
+	ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
+}
 
 local function validateCurveAnimClip(p1, p2)
 	-- upvalues: GetFIntUGCValidateMaxAnimationFPSModule (copy), GetFStringUGCValidateMaxJointRotationPerPartModule (copy), ErrorSourceStringsModule (copy)
@@ -13,10 +21,10 @@ local function validateCurveAnimClip(p1, p2)
 	local Amount = 1 / GetFIntUGCValidateMaxAnimationFPSModule()
 	local AsNumberResults = {}
 	local Total = nil
-	local Degrees = nil
-	local AsNumberResult = nil
-	local Degrees1 = nil
 	local Text = nil
+	local Degrees = nil
+	local Degrees1 = nil
+	local AsNumberResult = nil
 	
 	for i, track in Tracks do
 		if track.rot then
@@ -29,16 +37,16 @@ local function validateCurveAnimClip(p1, p2)
 			Total = 0
 			while Total <= AnimLength do
 				local _, Angle = track.rot:GetRotationAtTime(Total):ToAxisAngle()
-				Degrees1 = math.deg((math.abs(Angle)))
+				Degrees = math.deg((math.abs(Angle)))
 				
-				if AsNumberResult >= Degrees1 then
+				if AsNumberResult >= Degrees then
 					Total += Amount
 					continue
 				end
 				local config = {
 					time = string.format("%.2f", Total),
 					bodyPart = Text,
-					rotation = string.format("%.2f", Degrees1),
+					rotation = string.format("%.2f", Degrees),
 					maxRotation = tostring(AsNumberResult)
 				}
 				
@@ -50,13 +58,13 @@ local function validateCurveAnimClip(p1, p2)
 			end
 			if AnimLength >= 0 then
 				local _, Angle1 = track.rot:GetRotationAtTime(AnimLength):ToAxisAngle()
-				Degrees = math.deg((math.abs(Angle1)))
+				Degrees1 = math.deg((math.abs(Angle1)))
 				
-				if AsNumberResult < Degrees then
+				if AsNumberResult < Degrees1 then
 					local config = {
 						time = string.format("%.2f", AnimLength),
 						bodyPart = Text,
-						rotation = string.format("%.2f", Degrees),
+						rotation = string.format("%.2f", Degrees1),
 						maxRotation = tostring(AsNumberResult)
 					}
 					
@@ -72,15 +80,10 @@ local function validateCurveAnimClip(p1, p2)
 end
 
 return {
-	categories = { ValidationEnumsModule.UploadCategory.ANIMATION },
-	requiredData = {
-		ValidationEnumsModule.SharedDataMember.curveAnimations,
-		ValidationEnumsModule.SharedDataMember.curveAnimComputedFrames
-	},
+	categories = Categories,
+	requiredData = RequiredData,
 	expectedFailures = {},
-	prereqTests = {
-		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
-	},
+	prereqTests = PrereqTests,
 	run = function(p3, p4)
 		-- upvalues: validateCurveAnimClip (copy)
 		for _, curveAnimComputedFrame in p4.curveAnimComputedFrames do

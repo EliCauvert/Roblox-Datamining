@@ -6,11 +6,12 @@ local FoundationModule = require(Parent1.Foundation)
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
+local MarkdownCoreModule = require(Parent1.MarkdownCore)
 local CommonMarkComplianceParserModule = require(Parent.Parsers.CommonMarkComplianceParser)
 local FlagsModule = require(Parent.Flags)
 local _ = require(Parent.Types)
 local MarkdownRendererModule = require(script.MarkdownRenderer)
-local Flags = require(Parent1.MarkdownCore).Flags
+local Flags = MarkdownCoreModule.Flags
 
 local function _(p1)
 	-- upvalues: Parent (copy)

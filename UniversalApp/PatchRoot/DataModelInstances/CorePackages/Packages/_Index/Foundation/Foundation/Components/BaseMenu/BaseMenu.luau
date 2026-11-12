@@ -9,11 +9,12 @@ local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local _ = require(Foundation.Enums.ControlState)
 local RadiusModule = require(Foundation.Enums.Radius)
 local _ = require(Foundation.Components.Types)
+local InputSizeModule = require(Foundation.Enums.InputSize)
 local BaseMenuContextModule = require(script.Parent.BaseMenuContext)
 local BaseMenuScrollContainerModule = require(script.Parent.BaseMenuScrollContainer)
 local UseSubmenuHoverModule = require(script.Parent.useSubmenuHover)
 local DeclarativeBaseMenuContentModule = require(script.Parent.DeclarativeBaseMenuContent)
-local config = { size = require(Foundation.Enums.InputSize).Medium }
+local config = { size = InputSizeModule.Medium }
 local config1 = {
 	[RadiusModule.Small] = "radius-small",
 	[RadiusModule.Medium] = "radius-medium"

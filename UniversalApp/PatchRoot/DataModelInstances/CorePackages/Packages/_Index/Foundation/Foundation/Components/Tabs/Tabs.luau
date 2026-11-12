@@ -67,6 +67,9 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 		return Current
 	end, { WithDefaultsModuleResult.tabs })
 	local UseAnimatedHighlightModuleResult = UseAnimatedHighlightModule(ActiveTabId, p2 or UseRefResult, UseMemoResult, WithDefaultsModuleResult.size, WithDefaultsModuleResult.fillBehavior)
+	local HighlightPosition = UseAnimatedHighlightModuleResult.highlightPosition
+	local HighlightWidth = UseAnimatedHighlightModuleResult.highlightWidth
+	local ActiveItemHeight = UseAnimatedHighlightModuleResult.activeItemHeight
 	local Size = WithDefaultsModuleResult.size
 	
 	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
@@ -147,15 +150,12 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 		AnimatedBorder = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 0,
 			ZIndex = WithDefaultsModuleResult.ZIndex + 1,
-			Size = UseAnimatedHighlightModuleResult.highlightWidth:map(function(XOffset): UDim2
+			Size = HighlightWidth:map(function(XOffset): UDim2
 				-- upvalues: UseTokensModuleResult (copy)
 				return UDim2.fromOffset(XOffset, UseTokensModuleResult.Stroke.Thick)
 			end),
 			AnchorPoint = Vector2.new(0, 1),
-			Position = ReactModule.joinBindings({
-				UseAnimatedHighlightModuleResult.highlightPosition,
-				UseAnimatedHighlightModuleResult.activeItemHeight
-			}):map(function(Entry): UDim2
+			Position = ReactModule.joinBindings({ HighlightPosition, ActiveItemHeight }):map(function(Entry): UDim2
 				return UDim2.fromOffset(Entry[1], Entry[2])
 			end),
 			backgroundStyle = UseTokensModuleResult.Color.System.Contrast,

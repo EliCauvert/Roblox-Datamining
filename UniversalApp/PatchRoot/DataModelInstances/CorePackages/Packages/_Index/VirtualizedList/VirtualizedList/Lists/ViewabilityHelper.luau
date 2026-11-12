@@ -8,8 +8,8 @@ local Console = LuauPolyfillModule.console
 local SetTimeoutFunction = LuauPolyfillModule.setTimeout
 local ClearTimeoutFunction = LuauPolyfillModule.clearTimeout
 local InvariantModule = require(Parent.jsUtils.invariant)
-local Callback1 = nil
 local Callback2 = nil
+local Callback1 = nil
 local Callback = nil
 local ViewabilityHelper = {}
 ViewabilityHelper.__index = ViewabilityHelper
@@ -151,21 +151,21 @@ function ViewabilityHelper:_onUpdateSync(ViewableItems, Callback: (any) -> (), C
 end
 
 Callback = function(p4, p5, OffsetDelta, NewLength, p6, Length): boolean
-	-- upvalues: Callback1 (ref), Callback2 (ref)
-	if Callback1(OffsetDelta, NewLength, p6) then
+	-- upvalues: Callback2 (ref), Callback1 (ref)
+	if Callback2(OffsetDelta, NewLength, p6) then
 		return true
 	else
-		local CallbackResult = Callback2(OffsetDelta, NewLength, p6)
+		local CallbackResult = Callback1(OffsetDelta, NewLength, p6)
 		
 		return p5 <= 100 * (if p4 then CallbackResult / p6 else CallbackResult / Length)
 	end
 end
 
-Callback2 = function(p4: number, p5: number, p6: number): number
+Callback1 = function(p4: number, p5: number, p6: number): number
 	return (math.max(0, math.min(p5, p6) - math.max(p4, 0)))
 end
 
-Callback1 = function(p4: number, p5, p6): boolean
+Callback2 = function(p4: number, p5, p6): boolean
 	return p4 >= 0 and p5 <= p6 and p4 < p5
 end
 

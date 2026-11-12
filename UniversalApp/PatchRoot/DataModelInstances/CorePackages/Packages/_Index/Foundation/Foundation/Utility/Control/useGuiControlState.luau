@@ -4,6 +4,7 @@ local ReactModule = require(Parent.React)
 local UseForwardRefFunction = require(Parent.ReactUtils).useForwardRef
 local ControlStateModule = require(Foundation.Enums.ControlState)
 local _ = require(Foundation.Enums.ControlStateEvent)
+local FlagsModule = require(Foundation.Utility.Flags)
 local _ = require(Foundation.Components.Types)
 local config = {
 	[Enum.GuiState.Idle] = ControlStateModule.Default,
@@ -202,4 +203,4 @@ local function useGuiControlState(Callback, OnStateChanged)
 	end, { Callback })
 end
 
-return if require(Foundation.Utility.Flags).FoundationLightweightGuiControlState then useGuiControlState else useGuiControlState_DEPRECATED
+return if FlagsModule.FoundationLightweightGuiControlState then useGuiControlState else useGuiControlState_DEPRECATED

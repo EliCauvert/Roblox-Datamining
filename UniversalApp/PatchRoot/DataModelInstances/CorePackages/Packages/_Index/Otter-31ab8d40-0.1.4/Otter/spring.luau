@@ -15,8 +15,8 @@ local function step(p1, p2, p3)
 	local Velocity = p2.velocity or 0
 	local ValueDelta = p2.value - GoalPosition
 	local ExpResult = ExpFunction(-p3 * DampingRatio * ScaledFrequency)
-	local ScaledVelocity = nil
 	local NewVelocity = nil
+	local ScaledVelocity = nil
 	
 	if DampingRatio == 1 then
 		NewVelocity = (Velocity * p3 + ValueDelta * (ScaledFrequency * p3 + 1)) * ExpResult + GoalPosition

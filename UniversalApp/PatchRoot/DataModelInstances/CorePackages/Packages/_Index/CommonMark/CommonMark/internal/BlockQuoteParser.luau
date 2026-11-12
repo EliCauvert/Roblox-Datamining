@@ -1,4 +1,5 @@
 ﻿local CommonMark = script:FindFirstAncestor("CommonMark")
+local AbstractBlockParserModule = require(CommonMark.parser.block.AbstractBlockParser)
 local BlockContinueModule = require(CommonMark.parser.block.BlockContinue)
 local _ = require(CommonMark.parser.block.BlockParserFactory)
 local BlockStartModule = require(CommonMark.parser.block.BlockStart)
@@ -9,9 +10,7 @@ local NodesModule = require(CommonMark.node.Nodes)
 local _ = require(CommonMark.parser.block.ParserState)
 local ParsingModule = require(CommonMark.internal.util.Parsing)
 local ByteFunction = string.byte
-local self = setmetatable({}, {
-	__index = require(CommonMark.parser.block.AbstractBlockParser)
-})
+local self = setmetatable({}, { __index = AbstractBlockParserModule })
 self.__index = self
 
 function self.new()

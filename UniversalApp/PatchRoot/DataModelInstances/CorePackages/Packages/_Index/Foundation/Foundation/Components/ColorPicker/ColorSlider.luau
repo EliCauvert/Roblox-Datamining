@@ -61,6 +61,7 @@ return function(p1)
 			return { Color3 = p2.baseColor, Transparency = 1 - p2.value }
 		end)
 	end
+	local IsSliderTypeMatch = SliderType == ColorSliderTypeModule.Alpha
 	local Element = ReactModule.createElement(SliderModule, {
 		isContained = true,
 		value = Value,
@@ -83,7 +84,7 @@ return function(p1)
 		})
 	})
 	
-	return if SliderType == ColorSliderTypeModule.Alpha then ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, { tag = "size-full-300" }), {
+	return if IsSliderTypeMatch then ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, { tag = "size-full-300" }), {
 		Background = ReactModule.createElement(ViewModule, {
 			tag = "size-full stroke-standard stroke-emphasis radius-circle",
 			ClipsDescendants = true,

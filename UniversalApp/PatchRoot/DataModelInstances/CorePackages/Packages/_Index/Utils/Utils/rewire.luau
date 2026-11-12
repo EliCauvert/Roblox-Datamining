@@ -37,33 +37,33 @@ return {
 		local NewResult = nil
 		local NewResult1 = nil
 		local rewireDirective = nil
-		local Callback = nil
+		local Callback1 = nil
 		local rewireNamedType = nil
 		local Callback2 = nil
 		local Callback4 = nil
 		local Callback3 = nil
-		local Callback1 = nil
+		local Callback = nil
 		
 		rewireDirective = function(p2)
-			-- upvalues: IsSpecifiedDirectiveFunction (upval), Callback (ref), GraphQLDirective (upval)
+			-- upvalues: IsSpecifiedDirectiveFunction (upval), Callback1 (ref), GraphQLDirective (upval)
 			if IsSpecifiedDirectiveFunction(p2) then
 				return p2
 			else
 				local Config = p2:toConfig()
-				Config.args = Callback(Config.args)
+				Config.args = Callback1(Config.args)
 				
 				return GraphQLDirective.new(Config)
 			end
 		end
 		
-		Callback = function(Args)
-			-- upvalues: Map (upval), Callback1 (ref)
+		Callback1 = function(Args)
+			-- upvalues: Map (upval), Callback (ref)
 			local NewMap = Map.new()
 			
 			for _, arg in Args do
 				local v1 = arg[1]
 				local GetResult = Args:get(v1)
-				local CallbackResult = Callback1(GetResult.type)
+				local CallbackResult = Callback(GetResult.type)
 				
 				if CallbackResult ~= nil then
 					GetResult.type = CallbackResult
@@ -165,17 +165,17 @@ return {
 		end
 		
 		Callback2 = function(Fields)
-			-- upvalues: Map (upval), Callback1 (ref), Callback (ref)
+			-- upvalues: Map (upval), Callback (ref), Callback1 (ref)
 			local NewMap = Map.new()
 			
 			for _, field in Fields do
 				local v2 = field[1]
 				local GetResult = Fields:get(v2)
-				local CallbackResult = Callback1(GetResult.type)
+				local CallbackResult = Callback(GetResult.type)
 				
 				if CallbackResult ~= nil and GetResult.args then
 					GetResult.type = CallbackResult
-					GetResult.args = Callback(GetResult.args)
+					GetResult.args = Callback1(GetResult.args)
 					NewMap:set(v2, GetResult)
 				end
 			end
@@ -183,13 +183,13 @@ return {
 		end
 		
 		Callback4 = function(Fields)
-			-- upvalues: Map (upval), Callback1 (ref)
+			-- upvalues: Map (upval), Callback (ref)
 			local NewMap = Map.new()
 			
 			for _, field in Fields do
 				local v3 = field[1]
 				local GetResult = Fields:get(v3)
-				local CallbackResult = Callback1(GetResult.type)
+				local CallbackResult = Callback(GetResult.type)
 				
 				if CallbackResult ~= nil then
 					GetResult.type = CallbackResult
@@ -200,11 +200,11 @@ return {
 		end
 		
 		Callback3 = function(Interfaces)
-			-- upvalues: Callback1 (ref), Object (upval)
+			-- upvalues: Callback (ref), Object (upval)
 			local List = {}
 			
 			for _, interface in Interfaces do
-				local CallbackResult = Callback1(interface)
+				local CallbackResult = Callback(interface)
 				
 				if CallbackResult ~= nil and CallbackResult ~= Object.None then
 					table.insert(List, CallbackResult)
@@ -213,15 +213,15 @@ return {
 			return List
 		end
 		
-		Callback1 = function(Type)
-			-- upvalues: IsListTypeFunction (upval), Callback1 (ref), Object (upval), GraphQLList (upval), IsNonNullTypeFunction (upval), GraphQLNonNull (upval), IsNamedTypeFunction (upval), NewResult (ref), IsNamedStubFunction (upval), GetBuiltInForStubFunction (upval), rewireNamedType (ref), NewResult1 (ref)
+		Callback = function(Type)
+			-- upvalues: IsListTypeFunction (upval), Callback (ref), Object (upval), GraphQLList (upval), IsNonNullTypeFunction (upval), GraphQLNonNull (upval), IsNamedTypeFunction (upval), NewResult (ref), IsNamedStubFunction (upval), GetBuiltInForStubFunction (upval), rewireNamedType (ref), NewResult1 (ref)
 			if IsListTypeFunction(Type) then
-				local CallbackResult = Callback1(Type.ofType)
+				local CallbackResult = Callback(Type.ofType)
 				
 				return if CallbackResult == nil or CallbackResult == Object.None then nil else GraphQLList.new(CallbackResult)
 			end
 			if IsNonNullTypeFunction(Type) then
-				local CallbackResult = Callback1(Type.ofType)
+				local CallbackResult = Callback(Type.ofType)
 				
 				return if CallbackResult == nil or CallbackResult == Object.None then nil else GraphQLNonNull.new(CallbackResult)
 			end

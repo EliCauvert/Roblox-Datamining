@@ -519,9 +519,10 @@ function ScrollView.init(p1, Props)
 	function p1._keyboardIsDismissible(): boolean
 		-- upvalues: config6 (upval), p1 (copy), v1 (upval)
 		local CurrentlyFocusedInputResult = config6:currentlyFocusedInput()
+		local IsTextInput = CurrentlyFocusedInputResult ~= nil and config6:isTextInput(CurrentlyFocusedInputResult)
 		local HasKeyboardWillOpenTo: boolean = p1._keyboardWillOpenTo ~= nil or v1.OS == "android"
 		
-		return CurrentlyFocusedInputResult ~= nil and config6:isTextInput(CurrentlyFocusedInputResult) and HasKeyboardWillOpenTo
+		return IsTextInput and HasKeyboardWillOpenTo
 	end
 	
 	function p1._handleTouchEnd(p2, p3)

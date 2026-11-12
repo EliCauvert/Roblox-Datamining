@@ -1,10 +1,11 @@
 ﻿local Parent = script.Parent
 local StaticFallbackImagesModule = require(Parent.Deprecated.StaticFallbackImages)
+local v1 = require(Parent.Deprecated.GetDeprecatedIconImageSetData)((require(Parent.getResolutionScale)()))
 local Uiblox = require(Parent.Parent.BuilderIcons).Migration.uiblox
 local WhitelistedIconAssetsModule = require(Parent.whitelistedIconAssets)
 local DeprecatedIconImagesModule = {}
 
-for i, value in require(Parent.Deprecated.GetDeprecatedIconImageSetData)((require(Parent.getResolutionScale)())) do
+for i, value in v1 do
 	if Uiblox[i] and WhitelistedIconAssetsModule[i] == nil then
 		local t = {}
 		

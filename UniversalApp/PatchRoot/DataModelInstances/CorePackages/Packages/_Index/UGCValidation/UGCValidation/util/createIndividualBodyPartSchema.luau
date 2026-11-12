@@ -52,7 +52,7 @@ return function(p1, Text, _)
 		local AvatarBoneSchema = R15plusUtilsModule.getAvatarBoneSchema(Text)
 		local AttachmentNameWhitelistOfClassInSchema = R15plusUtilsModule.getNameWhitelistOfClassInSchema(AvatarBoneSchema, "Attachment")
 		
-		for _, Attachment in config1._children do
+		for i, Attachment in config1._children do
 			if Attachment.ClassName == "Attachment" and AttachmentNameWhitelistOfClassInSchema[Attachment.Name[1]] then
 				Attachment._optional = true
 			end

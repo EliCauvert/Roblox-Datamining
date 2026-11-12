@@ -17,6 +17,8 @@ local List = {
 	ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
 	ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH
 }
+local GetFFlagUGCValidateMakeupCategoryParityModule = require(Parent.flags.getFFlagUGCValidateMakeupCategoryParity)
+local AllAssetUploadCategories = if GetFFlagUGCValidateMakeupCategoryParityModule() then ConstantsModule.AllAssetUploadCategories else ConstantsModule.AllAssetUploadCategoriesIncludingMakeup
 
 local function walkInstanceTree(p1, RootInstance, p2)
 	-- upvalues: UGCValidationService (copy), ErrorSourceStringsModule (copy), DescribeProblematicPropertiesModule (copy)
@@ -38,7 +40,7 @@ local function walkInstanceTree(p1, RootInstance, p2)
 end
 
 return {
-	categories = if require(Parent.flags.getFFlagUGCValidateMakeupCategoryParity)() then ConstantsModule.AllAssetUploadCategories else ConstantsModule.AllAssetUploadCategoriesIncludingMakeup,
+	categories = AllAssetUploadCategories,
 	requiredData = {
 		ValidationEnumsModule.SharedDataMember.rootInstance,
 		ValidationEnumsModule.SharedDataMember.hsrAssets,

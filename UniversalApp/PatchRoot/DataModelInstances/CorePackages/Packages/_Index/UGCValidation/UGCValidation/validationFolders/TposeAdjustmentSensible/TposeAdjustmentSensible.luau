@@ -7,6 +7,14 @@ local Vector3UtilsModule = require(Parent.util.Vector3Utils)
 local ValueToStringModule = require(Parent.util.valueToString)
 local CFrameUtilsModule = require(Parent.util.CFrameUtils)
 local GetDiffBetweenOrientationsModule = require(Parent.util.getDiffBetweenOrientations)
+local Categories = {
+	ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+	ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
+}
+local RequiredData = {
+	ValidationEnumsModule.SharedDataMember.rootInstance,
+	ValidationEnumsModule.SharedDataMember.renderMeshesData
+}
 local UGCValidationService = game:GetService("UGCValidationService")
 local UGCValidationTposeShoulderDegreeOffsetThreshold = game:DefineFastInt("UGCValidationTposeShoulderDegreeOffsetThreshold", 30)
 local UGCValidationTposeElbowDegreeOffsetThreshold = game:DefineFastInt("UGCValidationTposeElbowDegreeOffsetThreshold", 30)
@@ -46,14 +54,8 @@ local function checkJointTposeAdjustment(p1, Label, TposeAdjustment, RootInstanc
 end
 
 return {
-	categories = {
-		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
-	},
-	requiredData = {
-		ValidationEnumsModule.SharedDataMember.rootInstance,
-		ValidationEnumsModule.SharedDataMember.renderMeshesData
-	},
+	categories = Categories,
+	requiredData = RequiredData,
 	fflag = require(Parent.flags.getEngineFeatureEngineUGCValidateTPoseAdjustment),
 	run = function(p1, p2)
 		-- upvalues: GetAllInstancesIsAModule (copy), UGCValidationTposePositionOffsetPercentThresholdRatio (copy), checkJointTposeAdjustment (copy), config (copy), UGCValidationTposeGeneralDegreeOffsetThreshold (copy), UGCValidationTposeFingerDegreeOffsetThreshold (copy)

@@ -2873,6 +2873,8 @@ Feature.Toast.VoteError.AssetNotVoteable,"Возможно, проголосов
 Feature.Toast.VoteError.Default,Действие недоступно.
 Feature.Toast.VoteError.FloodCheckThresholdMet,Ты голосуешь слишком быстро.
 Feature.Toast.VoteError.PlayGame,"Прежде чем оценить плейс, необходимо его посетить."
+Feature.VIPServer.Message.TooManyFreeServersOnGame,В этом плейсе больше нельзя создавать бесплатные частные серверы.
+Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Ты не можешь создать больше активных бесплатных частных серверов. Сначала отключи часть других серверов.
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,Добавить номер телефона для голосового чата
 Feature.VerificationUpsell.Action.ChangeEmail,Сменить эл. почту

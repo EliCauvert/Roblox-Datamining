@@ -1,9 +1,12 @@
 ﻿local Parent = script.Parent
 local Foundation = script:FindFirstAncestor("Foundation")
 local ReactModule = require(Foundation.Parent.React)
+local ColorModeModule = require(Foundation.Enums.ColorMode)
+local DeviceModule = require(Foundation.Enums.Device)
 local StyleSheetContextModule = require(Parent.StyleSheetContext)
 local TagsContextModule = require(Parent.TagsContext)
 local TextSizeOffsetContextModule = require(Parent.TextSizeOffsetContext)
+local ThemeNameModule = require(Foundation.Enums.ThemeName)
 local TokensContextModule = require(Parent.TokensContext)
 local VariantsContextModule = require(Parent.VariantsContext)
 local GetTextSizeOffsetModule = require(Foundation.Utility.getTextSizeOffset)
@@ -13,9 +16,9 @@ local GetTokensFunction = require(Parent.Tokens).getTokens
 local UseRegistryStyleSheetModule = require(Parent.useRegistryStyleSheet)
 local config = {
 	scale = 1,
-	themeName = require(Foundation.Enums.ThemeName).Default,
-	colorMode = require(Foundation.Enums.ColorMode).Dark,
-	device = require(Foundation.Enums.Device).Desktop
+	themeName = ThemeNameModule.Default,
+	colorMode = ColorModeModule.Dark,
+	device = DeviceModule.Desktop
 }
 
 return function(p1)

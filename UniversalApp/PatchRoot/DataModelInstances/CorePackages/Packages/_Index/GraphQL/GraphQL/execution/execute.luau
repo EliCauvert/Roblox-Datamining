@@ -71,13 +71,13 @@ local Callback7 = nil
 local Callback5 = nil
 local Callback11 = nil
 local Callback12 = nil
+local Callback13 = nil
 local Callback14 = nil
 local Callback15 = nil
-local Callback16 = nil
 local Callback18 = nil
-local Callback17 = nil
+local Callback16 = nil
 local Callback19 = nil
-local Callback13 = nil
+local Callback17 = nil
 local Callback20 = nil
 
 execute = function(p1)
@@ -349,7 +349,7 @@ Callback11 = function(p9, OfType, p10)
 end
 
 Callback12 = function(p9, OfType, FieldNodes, ResolveInfo, Path, Promise)
-	-- upvalues: InstanceofFunction (copy), Error2 (copy), IsNonNullTypeFunction (copy), Callback12 (ref), IsNillishFunction (copy), NullModule (copy), IsListTypeFunction (copy), Callback14 (ref), IsLeafTypeFunction (copy), Callback15 (ref), IsAbstractTypeFunction (copy), Callback16 (ref), IsObjectTypeFunction (copy), Callback17 (ref), InvariantFunction (copy), InspectFunction (copy)
+	-- upvalues: InstanceofFunction (copy), Error2 (copy), IsNonNullTypeFunction (copy), Callback12 (ref), IsNillishFunction (copy), NullModule (copy), IsListTypeFunction (copy), Callback13 (ref), IsLeafTypeFunction (copy), Callback14 (ref), IsAbstractTypeFunction (copy), Callback15 (ref), IsObjectTypeFunction (copy), Callback16 (ref), InvariantFunction (copy), InspectFunction (copy)
 	if InstanceofFunction(Promise, Error2) then
 		error(Promise)
 	end
@@ -363,20 +363,20 @@ Callback12 = function(p9, OfType, FieldNodes, ResolveInfo, Path, Promise)
 	elseif IsNillishFunction(Promise) then
 		return NullModule
 	elseif IsListTypeFunction(OfType) then
-		return Callback14(p9, OfType, FieldNodes, ResolveInfo, Path, Promise)
+		return Callback13(p9, OfType, FieldNodes, ResolveInfo, Path, Promise)
 	elseif IsLeafTypeFunction(OfType) then
-		return Callback15(OfType, Promise)
+		return Callback14(OfType, Promise)
 	elseif IsAbstractTypeFunction(OfType) then
-		return Callback16(p9, OfType, FieldNodes, ResolveInfo, Path, Promise)
+		return Callback15(p9, OfType, FieldNodes, ResolveInfo, Path, Promise)
 	elseif IsObjectTypeFunction(OfType) then
-		return Callback17(p9, OfType, FieldNodes, ResolveInfo, Path, Promise)
+		return Callback16(p9, OfType, FieldNodes, ResolveInfo, Path, Promise)
 	else
 		InvariantFunction(false, "Cannot complete value of unexpected output type: " .. InspectFunction(OfType))
 		assert(false, "Cannot complete value of unexpected output type: " .. InspectFunction(OfType))
 	end
 end
 
-Callback14 = function(p9, p10, p11, ResolveInfo, p12, List)
+Callback13 = function(p9, p10, p11, ResolveInfo, p12, List)
 	-- upvalues: InstanceofFunction (copy), Set (copy), IsIteratableObjectFunction (copy), GraphQLError (copy), Array (copy), AddPathFunction (copy), IsPromiseFunction (copy), Callback12 (ref), LocatedErrorFunction (copy), PathToArrayFunction (copy), Callback11 (ref), PromiseModule (copy)
 	if InstanceofFunction(List, Set) then
 		local List1 = {}
@@ -428,7 +428,7 @@ Callback14 = function(p9, p10, p11, ResolveInfo, p12, List)
 	return if Flag then PromiseModule.all(FromResult) else FromResult
 end
 
-Callback15 = function(p13, p14)
+Callback14 = function(p13, p14)
 	-- upvalues: Error2 (copy), InspectFunction (copy)
 	local SerializeResult = p13:serialize(p14)
 	
@@ -438,14 +438,14 @@ Callback15 = function(p13, p14)
 	return SerializeResult
 end
 
-Callback16 = function(p13, p14, p15, p16, p17, p18)
-	-- upvalues: IsPromiseFunction (copy), Callback17 (ref), Callback18 (ref)
+Callback15 = function(p13, p14, p15, p16, p17, p18)
+	-- upvalues: IsPromiseFunction (copy), Callback16 (ref), Callback18 (ref)
 	local Promise = (if p14.resolveType then p14.resolveType else p13.typeResolver)(p18, p13.contextValue, p16, p14)
 	
 	return if IsPromiseFunction(Promise) then Promise:andThen(function(Result)
-		-- upvalues: Callback17 (upval), p13 (copy), Callback18 (upval), p14 (copy), p15 (copy), p16 (copy), p18 (copy), p17 (copy)
-		return Callback17(p13, Callback18(Result, p13, p14, p15, p16, p18), p15, p16, p17, p18)
-	end) else Callback17(p13, Callback18(Promise, p13, p14, p15, p16, p18), p15, p16, p17, p18)
+		-- upvalues: Callback16 (upval), p13 (copy), Callback18 (upval), p14 (copy), p15 (copy), p16 (copy), p18 (copy), p17 (copy)
+		return Callback16(p13, Callback18(Result, p13, p14, p15, p16, p18), p15, p16, p17, p18)
+	end) else Callback16(p13, Callback18(Promise, p13, p14, p15, p16, p18), p15, p16, p17, p18)
 end
 
 Callback18 = function(Promise, p13, p14, p15, ResolveInfo, p16)
@@ -473,25 +473,25 @@ Callback18 = function(Promise, p13, p14, p15, ResolveInfo, p16)
 	return Type
 end
 
-Callback17 = function(p13, p14, p15, p16, p17, p18)
-	-- upvalues: IsPromiseFunction (copy), Callback19 (ref), Callback13 (ref)
+Callback16 = function(p13, p14, p15, p16, p17, p18)
+	-- upvalues: IsPromiseFunction (copy), Callback19 (ref), Callback17 (ref)
 	if p14.isTypeOf ~= nil then
 		local IsTypeOf = p14.isTypeOf(p14, p18, p13.contextValue, p16)
 		
 		if IsPromiseFunction(IsTypeOf) then
 			return IsTypeOf:andThen(function(Result)
-				-- upvalues: Callback19 (upval), p14 (copy), p18 (copy), p15 (copy), Callback13 (upval), p13 (copy), p17 (copy)
+				-- upvalues: Callback19 (upval), p14 (copy), p18 (copy), p15 (copy), Callback17 (upval), p13 (copy), p17 (copy)
 				if not Result then
 					error(Callback19(p14, p18, p15))
 				end
-				return Callback13(p13, p14, p15, p17, p18)
+				return Callback17(p13, p14, p15, p17, p18)
 			end)
 		end
 		if not IsTypeOf then
 			error(Callback19(p14, p18, p15))
 		end
 	end
-	return Callback13(p13, p14, p15, p17, p18)
+	return Callback17(p13, p14, p15, p17, p18)
 end
 
 Callback19 = function(p13, p14, p15)
@@ -499,7 +499,7 @@ Callback19 = function(p13, p14, p15)
 	return GraphQLError.new(("Expected value of type \"%s\" but got: %s."):format(p13.name, InspectFunction(p14)), p15)
 end
 
-Callback13 = function(p13, p14, p15, p16, p17)
+Callback17 = function(p13, p14, p15, p16, p17)
 	-- upvalues: Callback20 (ref), ExecuteFields (ref)
 	return ExecuteFields(p13, p14, p17, p16, (Callback20(p13, p14, p15)))
 end

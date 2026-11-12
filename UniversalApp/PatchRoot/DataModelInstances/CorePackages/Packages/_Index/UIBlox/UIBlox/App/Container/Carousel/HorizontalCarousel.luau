@@ -6,6 +6,7 @@ local RoactModule = require(Parent3.Roact)
 local TModule = require(Parent3.t)
 local ImagesModule = require(Parent1.ImageSet.Images)
 local ScrollButtonModule = require(Parent.ScrollButton)
+local IsCallableModule = require(Parent2.Utility.isCallable)
 local BidirectionalFlatList = require(Parent3.VirtualizedList).BidirectionalFlatList
 local PromiseModule = require(Parent3.Promise)
 local LuauPolyfillModule = require(Parent3.LuauPolyfill)
@@ -32,7 +33,7 @@ HorizontalCarousel.validateProps = TModule.strictInterface({
 			itemVisiblePercentThreshold = TModule.optional(TModule.number),
 			waitForInteraction = TModule.optional(TModule.boolean)
 		}),
-		onViewableItemsChanged = require(Parent2.Utility.isCallable)
+		onViewableItemsChanged = IsCallableModule
 	})))
 })
 HorizontalCarousel.defaultProps = {

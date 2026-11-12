@@ -1,6 +1,7 @@
 ﻿local Parent = script.Parent.Parent
+local Lib = Parent.lib
 local JsonModule = require(Parent.src.json)
-local UrlModule = require(Parent.lib.url)
+local UrlModule = require(Lib.url)
 
 local function _(p1): number
 	return tonumber(p1) or p1

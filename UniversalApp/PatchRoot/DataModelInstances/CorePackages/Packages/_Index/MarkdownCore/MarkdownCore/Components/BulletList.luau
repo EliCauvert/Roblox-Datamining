@@ -54,17 +54,7 @@ return function(Frame)
 		TextColor = ListStyle.TextColor or Label.TextColor
 		LineHeight = ListStyle.LineHeight or Label.LineHeight
 	end
-	local Size = Frame.Size
-	
-	return ReactModule.createElement(View, {
-		testId = "--markdown--bullet-list",
-		tag = "col align-x-left gap-xsmall",
-		AutomaticSize = if Size and (Size.X.Scale > 0 or Size.X.Offset > 0) then Enum.AutomaticSize.Y else Enum.AutomaticSize.XY,
-		backgroundStyle = { Transparency = 1 },
-		LayoutOrder = Frame.LayoutOrder or 1,
-		Position = Frame.Position,
-		Size = Size
-	}, DashModule.assign(MapFunction(Items, function(ContentElement, LayoutOrder)
+	local MapResult = MapFunction(Items, function(ContentElement, LayoutOrder)
 		-- upvalues: ItemIndentation (copy), ListStyle (copy), Label (upval), ReactModule (upval), Text (upval), _Font (ref), TextSize (ref), _UDim2 (copy), TextColor (ref), TextTruncate (copy), TextWrapped (copy), View (upval), LineHeight (ref), Image (upval)
 		local MarkerImage = ListStyle.MarkerImage or Label.MarkerImage
 		local UIPadding = nil
@@ -138,5 +128,16 @@ return function(Frame)
 			Content = Element,
 			Padding = UIPadding
 		})
-	end), Frame.children or {}))
+	end)
+	local Size = Frame.Size
+	
+	return ReactModule.createElement(View, {
+		testId = "--markdown--bullet-list",
+		tag = "col align-x-left gap-xsmall",
+		AutomaticSize = if Size and (Size.X.Scale > 0 or Size.X.Offset > 0) then Enum.AutomaticSize.Y else Enum.AutomaticSize.XY,
+		backgroundStyle = { Transparency = 1 },
+		LayoutOrder = Frame.LayoutOrder or 1,
+		Position = Frame.Position,
+		Size = Size
+	}, DashModule.assign(MapResult, Frame.children or {}))
 end

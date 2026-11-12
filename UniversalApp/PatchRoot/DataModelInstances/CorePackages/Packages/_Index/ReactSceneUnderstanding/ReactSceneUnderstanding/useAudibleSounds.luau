@@ -1,5 +1,6 @@
 ﻿local ReactSceneUnderstanding = script:FindFirstAncestor("ReactSceneUnderstanding")
 local ReactModule = require(ReactSceneUnderstanding.Parent.React)
+local ReactUtilsModule = require(ReactSceneUnderstanding.Parent.ReactUtils)
 local SceneAnalysisContextModule = require(ReactSceneUnderstanding.SceneAnalysisContext)
 local EnumsModule = require(ReactSceneUnderstanding.enums)
 local UseCameraStateModule = require(ReactSceneUnderstanding.useCameraState)
@@ -8,7 +9,7 @@ local UseAudioSourcesModule = require(ReactSceneUnderstanding.audio.useAudioSour
 local UseTimedLoopModule = require(ReactSceneUnderstanding.useTimedLoop)
 local UseCallbackFunction = ReactModule.useCallback
 local UseEffectFunction = ReactModule.useEffect
-local UsePreviousFunction = require(ReactSceneUnderstanding.Parent.ReactUtils).usePrevious
+local UsePreviousFunction = ReactUtilsModule.usePrevious
 
 return function()
 	-- upvalues: SceneAnalysisContextModule (copy), UseAudioSourcesModule (copy), UseCameraStateModule (copy), UsePreviousFunction (copy), UseCallbackFunction (copy), SortByAudibleVolumeModule (copy), UseTimedLoopModule (copy), UseEffectFunction (copy), EnumsModule (copy)

@@ -12,21 +12,21 @@ local UseUncontrolledStateModule = require(Components.InternalInput.useUncontrol
 local BuilderIconsModule = require(Parent.BuilderIcons)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local ColorNamespaceModule = require(Foundation.Enums.ColorNamespace)
 local _ = require(Foundation.Enums.ControlState)
 local UseToggleVariantsModule = require(script.Parent.useToggleVariants)
 local InputSizeModule = require(Foundation.Enums.InputSize)
 local _ = require(Foundation.Enums.InputLabelSize)
+local InputPlacementModule = require(Foundation.Enums.InputPlacement)
 local UseInputGroupDefaultsModule = require(Components.InternalInputGroup.useInputGroupDefaults)
 local config = { frequency = 4 }
 local config1 = {
 	Selectable = true,
 	testId = "--foundation-toggle",
 	size = InputSizeModule.Medium,
-	placement = require(Foundation.Enums.InputPlacement).Start
+	placement = InputPlacementModule.Start
 }
-local config2 = {
-	colorNamespace = require(Foundation.Enums.ColorNamespace).Color
-}
+local config2 = { colorNamespace = ColorNamespaceModule.Color }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: UseInputGroupDefaultsModule (copy), config1 (copy), UseTokensModule (copy), UseToggleVariantsModule (copy), UseUncontrolledStateModule (copy), InputSizeModule (copy), ReactModule (copy), OtterModule (copy), config (copy), InternalInputModule (copy), WithCommonPropsModule (copy), ConstantsModule (copy), PresentationContextModule (copy), config2 (copy), KnobModule (copy), BuilderIconsModule (copy)

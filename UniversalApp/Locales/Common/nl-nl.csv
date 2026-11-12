@@ -4367,10 +4367,12 @@ Feature.Moments.Description.HowToCaptureStep1,"Doe mee aan een ervaring terwijl 
 Feature.Moments.Description.HowToCaptureStep2,Schakel de besturing voor opnames in
 Feature.Moments.Description.HowToCaptureStep3,Leg foto's en video's van het spel vast
 Feature.Moments.Description.LeaveMomentsCreation,"Al je wijzigingen gaan verloren, maar je kunt deze opname nog steeds vinden in je galerij met <b>Opnames</b>."
+Feature.Moments.Description.MomentsOffBody,Vraag een ouder om Momenten in te schakelen in Ouderlijk toezicht.
 Feature.Moments.Description.NoMusicResults,Geen muziek gevonden
 Feature.Moments.Description.NonInfiniteScrollEndBody,We hebben je feed gepauzeerd. Je kunt beslissen of je wilt blijven kijken.
 Feature.Moments.Description.NothingHereYet,Hier is nog niets te zien...
 Feature.Moments.Description.PublishMoment,Beschrijf je moment
+Feature.Moments.Description.TimeLimitReachedBody,Limieten zijn gebaseerd op leeftijd. Bekijk Momenten morgen.
 Feature.Moments.Description.TooManyUploads,Je hebt vandaag al te veel video's geüpload. Probeer het morgen nog een keer.
 Feature.Moments.Disclaimer.EveryoneMoments,Iedereen in Momenten kan zien wat er is gepubliceerd
 Feature.Moments.Label.All,
@@ -4441,6 +4443,7 @@ Feature.Moments.Label.MomentRemovedTitle,We hebben dit moment verwijderd
 Feature.Moments.Label.MomentUnavailable,Moment niet beschikbaar
 Feature.Moments.Label.MomentUnavailableDefault,Dit moment is niet beschikbaar.
 Feature.Moments.Label.MomentsExperienceName,
+Feature.Moments.Label.MomentsOffTitle,Momenten is uitgeschakeld
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,Nog geen reacties
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Er zijn meer momenten om te bekijken
@@ -4470,6 +4473,7 @@ Feature.Moments.Label.TextGenerationFailedBody,Kan geen tekst genereren. Probeer
 Feature.Moments.Label.TextGenerationFailedTitle,Genereren mislukt
 Feature.Moments.Label.TextGenerationFilteredBody,"Kan de tekst voor deze opgenomen video niet genereren, de content is gefilterd."
 Feature.Moments.Label.TextGenerationFilteredTitle,Gegenereerde tekst gefilterd
+Feature.Moments.Label.TimeLimitReachedTitle,Je hebt de tijdslimiet voor Momenten bereikt
 Feature.Moments.Label.Tone,Toon
 Feature.Moments.Label.Tone.Cinematic,Cinematisch
 Feature.Moments.Label.Tone.Funny,Grappig
@@ -5682,6 +5686,8 @@ Feature.UniversalShareSheet.Response.SharedMessage,Bericht is verzonden
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Berichten zijn verzonden
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} anderen
 Feature.UserLibrary.Label.MyLibrary,Mijn bibliotheek
+Feature.VIPServer.Message.TooManyFreeServersOnGame,Je kunt niet meer gratis privéservers hebben voor deze ervaring.
+Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Je kunt niet meer actieve gratis privéservers hebben. Deactiveer eerst een aantal andere servers.
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,Telefoonnummer toevoegen voor spraakchat
 Feature.VerificationUpsell.Action.ChangeEmail,

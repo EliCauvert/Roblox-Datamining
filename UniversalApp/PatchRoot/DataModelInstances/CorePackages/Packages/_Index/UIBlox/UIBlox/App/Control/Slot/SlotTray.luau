@@ -1,6 +1,7 @@
 ﻿local Parent = script.Parent.Parent.Parent
 local Parent1 = Parent.Parent
 local Parent2 = Parent1.Parent
+local Core = Parent1.Core
 local ReactModule = require(Parent2.React)
 local TModule = require(Parent2.t)
 local OtterModule = require(Parent2.Otter)
@@ -8,7 +9,7 @@ local CryoModule = require(Parent2.Cryo)
 local RoactGamepadModule = require(Parent2.RoactGamepad)
 local Focusable = RoactGamepadModule.Focusable
 local TileSlotModule = require(script.Parent.TileSlot)
-local UseStyleModule = require(Parent1.Core.Style.useStyle)
+local UseStyleModule = require(Core.Style.useStyle)
 local CursorKindModule = require(Parent.SelectionImage.CursorKind)
 local UseSelectionCursorModule = require(Parent.SelectionImage.useSelectionCursor)
 local config = { dampingRatio = 1, frequency = 10 }
@@ -81,8 +82,9 @@ return function(Gui)
 		local X = Current.CanvasPosition.X
 		local X1 = Current.AbsolutePosition.X
 		local X2: number = Current1.AbsolutePosition.X
+		local XDelta = X2 - 24 - X1
 		local NewX = X + (X2 + 48 + 24 - (X1 + Width))
-		local NewX1 = X + (X2 - 24 - X1)
+		local NewX1 = X + XDelta
 		
 		if X < NewX then
 			UseScrollingFrameMotorResult:setGoal(OtterModule.spring(NewX, config))

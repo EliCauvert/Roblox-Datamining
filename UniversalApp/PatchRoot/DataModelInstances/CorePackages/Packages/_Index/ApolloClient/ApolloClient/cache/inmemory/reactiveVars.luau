@@ -4,17 +4,18 @@ local _ = require(script.Parent.Parent.core.cache)
 local LuauPolyfillModule = require(Parent.Parent.LuauPolyfill)
 local Array = LuauPolyfillModule.Array
 local Set = LuauPolyfillModule.Set
+local WeakMap = LuauPolyfillModule.WeakMap
 local Callback = nil
 local NewResult = require(Parent.wry.context).Slot.new()
-local NewResult1 = LuauPolyfillModule.WeakMap.new()
+local NewWeakMap = WeakMap.new()
 
 local function getCacheInfo(p1)
-	-- upvalues: NewResult1 (copy), Set (copy), DepFunction (copy)
-	local GetResult = NewResult1:get(p1)
+	-- upvalues: NewWeakMap (copy), Set (copy), DepFunction (copy)
+	local GetResult = NewWeakMap:get(p1)
 	
 	if not GetResult then
 		GetResult = { vars = Set.new(), dep = DepFunction() }
-		NewResult1:set(p1, GetResult)
+		NewWeakMap:set(p1, GetResult)
 	end
 	return GetResult
 end

@@ -3,6 +3,9 @@ local ReactGlobalsModule = require(Parent.ReactGlobals)
 local _ = require(Parent.Shared)
 local _ = require(script.Parent["ReactRobloxHostTypes.roblox"])
 local ReactRobloxRootModule = require(script.Parent.ReactRobloxRoot)
+local CreateRoot = ReactRobloxRootModule.createRoot
+local CreateBlockingRoot = ReactRobloxRootModule.createBlockingRoot
+local CreateLegacyRoot = ReactRobloxRootModule.createLegacyRoot
 local IsValidContainerFunction = ReactRobloxRootModule.isValidContainer
 local ReactReconcilerRobloxModule = require(script.Parent.Parent["ReactReconciler.roblox"])
 local InjectIntoDevToolsFunction = ReactReconcilerRobloxModule.injectIntoDevTools
@@ -30,9 +33,9 @@ local ReactRobloxModule = {
 		}
 	},
 	version = ReactVersion,
-	createRoot = ReactRobloxRootModule.createRoot,
-	createBlockingRoot = ReactRobloxRootModule.createBlockingRoot,
-	createLegacyRoot = ReactRobloxRootModule.createLegacyRoot,
+	createRoot = CreateRoot,
+	createBlockingRoot = CreateBlockingRoot,
+	createLegacyRoot = CreateLegacyRoot,
 	Event = require(Parent.Shared).Event,
 	Change = require(Parent.Shared).Change,
 	Tag = require(Parent.Shared).Tag,

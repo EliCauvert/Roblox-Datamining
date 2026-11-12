@@ -16,6 +16,8 @@ local _ = require(Parent.App.Style.StyleTypes)
 local GetTextSizeModule = require(Parent.Core.Text.GetTextSize)
 local IsBuilderIconFunction = FoundationModule.Utility.isBuilderIcon
 local InputSize = FoundationModule.Enums.InputSize
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local PopoverSide = FoundationModule.Enums.PopoverSide
 local Radius = FoundationModule.Enums.Radius
 local Icon = FoundationModule.Icon
 local Popover = FoundationModule.Popover
@@ -29,8 +31,8 @@ local config = {
 	isChecked = false,
 	badgeValue = nil,
 	layout = NavigationTabLayoutModule.Stacked,
-	tooltipSide = FoundationModule.Enums.PopoverSide.Right,
-	tooltipAlign = FoundationModule.Enums.PopoverAlign.Center
+	tooltipSide = PopoverSide.Right,
+	tooltipAlign = PopoverAlign.Center
 }
 
 local function NavigationTabTooltip(p1)
