@@ -1,4 +1,5 @@
-﻿local ViewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
+﻿local FFlagViewRecyclerReact084 = require(script:FindFirstAncestor("ViewRecyclerRoblox").Flags).FFlagViewRecyclerReact084
+local ViewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
 local _ = require(ViewRecyclerRoblox.Parent.ViewRecycler)
 local CanvasItemPlacerModule = require(ViewRecyclerRoblox.RobloxAdapter.CanvasItemPlacer)
 local EndLimitFrameModule = require(ViewRecyclerRoblox.RobloxAdapter.EndLimitFrame)
@@ -6,7 +7,7 @@ local HostPresentationPhaseModule = require(ViewRecyclerRoblox.RobloxAdapter.Hos
 
 return {
 	new = function(Configuration, Configuration1, Callback)
-		-- upvalues: CanvasItemPlacerModule (copy), HostPresentationPhaseModule (copy), EndLimitFrameModule (copy)
+		-- upvalues: CanvasItemPlacerModule (copy), HostPresentationPhaseModule (copy), EndLimitFrameModule (copy), FFlagViewRecyclerReact084 (copy)
 		local Tbl = {}
 		
 		local function _(p1)
@@ -82,16 +83,24 @@ return {
 				return IsNotHiddenMatch1
 			end,
 			remove = function(Key)
-				-- upvalues: Tbl (copy)
+				-- upvalues: Tbl (copy), FFlagViewRecyclerReact084 (upval)
 				local Entry = Tbl[Key]
 				
 				if Entry ~= nil then
 					Tbl[Key] = nil
-					local EndLimitFrame = Entry.endLimitFrame
 					
-					if EndLimitFrame ~= nil then
+					if FFlagViewRecyclerReact084 then
+						local EndLimitFrame = Entry.endLimitFrame
+						
+						if EndLimitFrame ~= nil and Key.Parent == EndLimitFrame.instance then
+							Key.Parent = EndLimitFrame.instance.Parent
+						end
+					end
+					local EndLimitFrame1 = Entry.endLimitFrame
+					
+					if EndLimitFrame1 ~= nil then
 						Entry.endLimitFrame = nil
-						EndLimitFrame.destroy()
+						EndLimitFrame1.destroy()
 					end
 				end
 			end,

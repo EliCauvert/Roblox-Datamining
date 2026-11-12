@@ -1,4 +1,5 @@
-﻿local FFlagViewRecyclerReact08 = require(script:FindFirstAncestor("ViewRecyclerReact").Flags).FFlagViewRecyclerReact08
+﻿local FFlagViewRecyclerReact084 = require(script:FindFirstAncestor("ViewRecyclerReact").Flags).FFlagViewRecyclerReact084
+local FFlagViewRecyclerReact08 = require(script:FindFirstAncestor("ViewRecyclerReact").Flags).FFlagViewRecyclerReact08
 local ViewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
 local ViewRecyclerModule = require(ViewRecyclerReact.Parent.ViewRecycler)
 local ViewRecyclerRobloxModule = require(ViewRecyclerReact.Parent.ViewRecyclerRoblox)
@@ -24,12 +25,12 @@ end
 
 return {
 	create = function(p1)
-		-- upvalues: RecyclingScopeModule (copy), FFlagViewRecyclerReact08 (copy), ReactModule (copy), RecyclingScopeContextModule (copy), ShallowTable (copy), Frozen (copy), ViewRecyclerRobloxModule (copy), Axis (copy), CreateElementFunction (copy), RecyclingViewportContextModule (copy)
+		-- upvalues: RecyclingScopeModule (copy), FFlagViewRecyclerReact084 (copy), FFlagViewRecyclerReact08 (copy), ReactModule (copy), RecyclingScopeContextModule (copy), ShallowTable (copy), Frozen (copy), ViewRecyclerRobloxModule (copy), Axis (copy), CreateElementFunction (copy), RecyclingViewportContextModule (copy)
 		local NewRecyclingScope = RecyclingScopeModule.create(p1)
 		
 		return function(p2)
-			-- upvalues: FFlagViewRecyclerReact08 (upval), ReactModule (upval), RecyclingScopeContextModule (upval), ShallowTable (upval), Frozen (upval), ViewRecyclerRobloxModule (upval), Axis (upval), CreateElementFunction (upval), RecyclingViewportContextModule (upval), NewRecyclingScope (copy)
-			local UseContextResult = if FFlagViewRecyclerReact08 then nil else ReactModule.useContext(RecyclingScopeContextModule)
+			-- upvalues: FFlagViewRecyclerReact084 (upval), FFlagViewRecyclerReact08 (upval), ReactModule (upval), RecyclingScopeContextModule (upval), ShallowTable (upval), Frozen (upval), ViewRecyclerRobloxModule (upval), Axis (upval), CreateElementFunction (upval), RecyclingViewportContextModule (upval), NewRecyclingScope (copy)
+			local UseContextResult = if FFlagViewRecyclerReact084 then nil elseif FFlagViewRecyclerReact08 then nil else ReactModule.useContext(RecyclingScopeContextModule)
 			local UseStateResult = ReactModule.useState(function()
 				-- upvalues: p2 (copy)
 				return {
@@ -86,7 +87,7 @@ return {
 				Viewport = CreateElementFunction("ScrollingFrame", config, p2.children)
 			})
 			
-			if FFlagViewRecyclerReact08 or UseContextResult == nil then
+			if FFlagViewRecyclerReact084 or FFlagViewRecyclerReact08 or UseContextResult == nil then
 				return CreateElementFunction(NewRecyclingScope, {
 					maxPoolSize = p2.maxPoolSize,
 					diagnostics = p2.diagnostics

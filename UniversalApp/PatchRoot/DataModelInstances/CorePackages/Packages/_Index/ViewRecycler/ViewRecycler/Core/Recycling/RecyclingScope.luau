@@ -1,4 +1,5 @@
-﻿local FFlagViewRecyclerReact08 = require(script:FindFirstAncestor("ViewRecycler").Flags).FFlagViewRecyclerReact08
+﻿local FFlagViewRecyclerReact084 = require(script:FindFirstAncestor("ViewRecycler").Flags).FFlagViewRecyclerReact084
+local FFlagViewRecyclerReact08 = require(script:FindFirstAncestor("ViewRecycler").Flags).FFlagViewRecyclerReact08
 local DiagnosticsModule = require(script:FindFirstAncestor("ViewRecycler").Core.Diagnostics)
 local Frozen = table.freeze({})
 
@@ -17,7 +18,7 @@ local _ = function(List, p1, p2, p3, p4, p5)
 end
 
 return function(p1)
-	-- upvalues: DiagnosticsModule (copy), Frozen (copy), FFlagViewRecyclerReact08 (copy)
+	-- upvalues: DiagnosticsModule (copy), FFlagViewRecyclerReact084 (copy), Frozen (copy), FFlagViewRecyclerReact08 (copy)
 	local Adapter = p1.adapter
 	local Tbl = {}
 	local Tbl1 = {}
@@ -169,6 +170,57 @@ return function(p1)
 		return { releasedCount = 0, acquired = Buffer }
 	end
 	
+	local EvictDestroyedVacancies = if FFlagViewRecyclerReact084 then function(List)
+		-- upvalues: Adapter (copy), p1 (copy), Tbl (copy), Tbl1 (copy), DiagnosticsModule (upval), Flag1 (ref), finalize (copy)
+		local IsDestroyedFunction = Adapter.isDestroyed
+		
+		if IsDestroyedFunction == nil or #List == 0 then return end
+		local Items = {}
+		local T = if p1.onPoolChanged == nil then nil else {}
+		local t = {}
+		
+		for _, value in List do
+			local Entry = Tbl[value.viewType]
+			
+			if Entry ~= nil and not t[value.viewType] then
+				t[value.viewType] = true
+				local First = Entry.first
+				
+				for i = Entry.first, Entry.last do
+					local Item = Entry.items[i]
+					Entry.items[i] = nil
+					
+					if IsDestroyedFunction(Item) then
+						Tbl1[Item] = nil
+						table.insert(Items, Item)
+						
+						if T ~= nil then
+							table.insert(T, {
+								DiagnosticsModule.PoolAction.Evict,
+								Entry.viewType,
+								0,
+								-1,
+								-1
+							})
+						end
+					else
+						Entry.items[First] = Item
+						First += 1
+					end
+				end
+				Entry.last = First - 1
+			end
+		end
+		if #Items > 0 then
+			Flag1 = true
+			local FinalizeResult, FinalizeResult2 = finalize(T, Items, nil)
+			Flag1 = false
+			
+			if not FinalizeResult then
+				error(FinalizeResult2, 0)
+			end
+		end
+	end else nil
 	local Tbl2 = {}
 	local Tbl3 = {}
 	
@@ -261,62 +313,82 @@ return function(p1)
 	
 	return {
 		bind = function(p5)
-			-- upvalues: Flag (ref), Flag1 (ref), FFlagViewRecyclerReact08 (upval), Adapter (copy), uniformDirectReuse (copy), p1 (copy), Tbl (copy), trimPoolExcess (copy), finalize (copy), exchangeWithoutCreation (copy), Frozen (upval), Tbl1 (copy), DiagnosticsModule (upval), poolFor (copy)
+			-- upvalues: Flag (ref), Flag1 (ref), FFlagViewRecyclerReact084 (upval), Adapter (copy), uniformDirectReuse (copy), FFlagViewRecyclerReact08 (upval), p1 (copy), Tbl (copy), trimPoolExcess (copy), finalize (copy), EvictDestroyedVacancies (ref), exchangeWithoutCreation (copy), Frozen (upval), Tbl1 (copy), DiagnosticsModule (upval), poolFor (copy)
 			assert(not Flag, "RecyclingScope: cannot bind after disposal")
 			assert(not Flag1, "RecyclingScope: cannot bind reentrantly")
 			local Capacity: number = p5.capacity
 			assert(Capacity == nil or Capacity >= 0 and Capacity % 1 == 0, "RecyclingScope: capacity must be a non-negative integer")
 			local Releases = p5.releases
 			local Requests = p5.requests
-			local v2 = nil
 			local UniformDirectReuseResult = nil
+			local v2 = nil
 			
-			if FFlagViewRecyclerReact08 then
+			if FFlagViewRecyclerReact084 then
 				v2 = nil
 				
 				if Adapter.isDestroyed ~= nil then
 					for _, releas in Releases do
 						if Adapter.isDestroyed(releas) then
-							local V50 = v2 or {}
-							V50[releas] = true
-							v2 = V50
+							local V60 = v2 or {}
+							V60[releas] = true
+							v2 = V60
 						end
 					end
 				end
 				UniformDirectReuseResult = if v2 == nil then uniformDirectReuse(Releases, Requests) else nil
 			else
-				UniformDirectReuseResult = uniformDirectReuse(Releases, Requests)
+				v2 = nil
+				
+				if FFlagViewRecyclerReact08 then
+					v2 = nil
+					
+					if Adapter.isDestroyed ~= nil then
+						for _, releas1 in Releases do
+							if Adapter.isDestroyed(releas1) then
+								local V60 = v2 or {}
+								V60[releas1] = true
+								v2 = V60
+							end
+						end
+					end
+					UniformDirectReuseResult = if v2 == nil then uniformDirectReuse(Releases, Requests) else nil
+				else
+					UniformDirectReuseResult = uniformDirectReuse(Releases, Requests)
+				end
 			end
 			if UniformDirectReuseResult == nil then
+				if FFlagViewRecyclerReact084 then
+					EvictDestroyedVacancies(Requests)
+				end
 				local T = if p1.onPoolChanged == nil then nil else {}
-				local ExchangeWithoutCreationResult = if FFlagViewRecyclerReact08 then if v2 == nil then exchangeWithoutCreation(Releases, Requests, T) else nil else exchangeWithoutCreation(Releases, Requests, T)
+				local ExchangeWithoutCreationResult = if FFlagViewRecyclerReact084 then if v2 == nil then exchangeWithoutCreation(Releases, Requests, T) else nil elseif FFlagViewRecyclerReact08 then if v2 == nil then exchangeWithoutCreation(Releases, Requests, T) else nil else exchangeWithoutCreation(Releases, Requests, T)
 				
 				if ExchangeWithoutCreationResult == nil then
 					Flag1 = true
 					local t = {}
 					local t1 = {}
 					
-					for _, releas1 in Releases do
-						local Entry = Tbl1[releas1]
+					for _, releas2 in Releases do
+						local Entry = Tbl1[releas2]
 						
 						if Entry == nil or not Entry.active then
 							Flag1 = false
 							error("RecyclingScope: can only release an active view", 2)
 						end
-						if t1[releas1] then
+						if t1[releas2] then
 							Flag1 = false
 							error("RecyclingScope: cannot release one view more than once", 2)
 						end
-						t1[releas1] = true
+						t1[releas2] = true
 						
-						if not FFlagViewRecyclerReact08 or v2 == nil or not v2[releas1] then
+						if not (if FFlagViewRecyclerReact084 then v2 ~= nil and v2[releas2] else FFlagViewRecyclerReact08) or not FFlagViewRecyclerReact084 and (v2 == nil or not v2[releas2]) then
 							local List = t[Entry.viewType]
 							
 							if List == nil then
 								List = {}
 								t[Entry.viewType] = List
 							end
-							table.insert(List, releas1)
+							table.insert(List, releas2)
 						end
 					end
 					local t2 = {}
@@ -367,39 +439,39 @@ return function(p1)
 					local T1 = if p1.onPoolChanged == nil then nil else {}
 					local List1 = {}
 					
-					for _, releas2 in Releases do
-						if FFlagViewRecyclerReact08 then
-							if v2 == nil or not v2[releas2] then
-								local Entry1 = t5[releas2]
-								local Entry3 = nil
+					for _, releas3 in Releases do
+						if FFlagViewRecyclerReact084 then
+							if v2 == nil or not v2[releas3] then
+								local Entry = t5[releas3]
+								local Entry2 = nil
 								
-								if not Entry1 then
-									Entry3 = Tbl1[releas2]
-									Entry3.active = false
-									local Pool = Entry3.pool
+								if not Entry then
+									Entry2 = Tbl1[releas3]
+									Entry2.active = false
+									local Pool = Entry2.pool
 									Pool.last += 1
-									Pool.items[Pool.last] = releas2
+									Pool.items[Pool.last] = releas3
 									config.releasedCount += 1
-									Entry1 = T1 == nil
+									Entry = T1 == nil
 								end
-								if not Entry1 then
+								if not Entry then
 									table.insert(T1, {
 										DiagnosticsModule.PoolAction.Release,
-										Entry3.viewType,
+										Entry2.viewType,
 										-1,
 										1,
 										0
 									})
 								end
 							else
-								local Entry2 = Tbl1[releas2]
-								Tbl1[releas2] = nil
-								table.insert(List1, releas2)
+								local Entry1 = Tbl1[releas3]
+								Tbl1[releas3] = nil
+								table.insert(List1, releas3)
 								
 								if T1 ~= nil then
 									table.insert(T1, {
 										DiagnosticsModule.PoolAction.Evict,
-										Entry2.viewType,
+										Entry1.viewType,
 										-1,
 										0,
 										-1
@@ -408,38 +480,79 @@ return function(p1)
 								end
 							end
 						else
-							local Entry = t5[releas2]
-							local Entry4 = nil
-							
-							if not Entry then
-								Entry4 = Tbl1[releas2]
-								Entry4.active = false
-								local Pool = Entry4.pool
-								Pool.last += 1
-								Pool.items[Pool.last] = releas2
-								config.releasedCount += 1
-								Entry = T1 == nil
-							end
-							if not Entry then
-								table.insert(T1, {
-									DiagnosticsModule.PoolAction.Release,
-									Entry4.viewType,
-									-1,
-									1,
-									0
-								})
+							if FFlagViewRecyclerReact08 then
+								if v2 == nil or not v2[releas3] then
+									local Entry4 = t5[releas3]
+									local Entry6 = nil
+									
+									if not Entry4 then
+										Entry6 = Tbl1[releas3]
+										Entry6.active = false
+										local Pool = Entry6.pool
+										Pool.last += 1
+										Pool.items[Pool.last] = releas3
+										config.releasedCount += 1
+										Entry4 = T1 == nil
+									end
+									if not Entry4 then
+										table.insert(T1, {
+											DiagnosticsModule.PoolAction.Release,
+											Entry6.viewType,
+											-1,
+											1,
+											0
+										})
+									end
+								else
+									local Entry5 = Tbl1[releas3]
+									Tbl1[releas3] = nil
+									table.insert(List1, releas3)
+									
+									if T1 ~= nil then
+										table.insert(T1, {
+											DiagnosticsModule.PoolAction.Evict,
+											Entry5.viewType,
+											-1,
+											0,
+											-1
+										})
+										continue
+									end
+								end
+							else
+								local Entry3 = t5[releas3]
+								local Entry7 = nil
+								
+								if not Entry3 then
+									Entry7 = Tbl1[releas3]
+									Entry7.active = false
+									local Pool = Entry7.pool
+									Pool.last += 1
+									Pool.items[Pool.last] = releas3
+									config.releasedCount += 1
+									Entry3 = T1 == nil
+								end
+								if not Entry3 then
+									table.insert(T1, {
+										DiagnosticsModule.PoolAction.Release,
+										Entry7.viewType,
+										-1,
+										1,
+										0
+									})
+								end
 							end
 						end
 					end
 					for i, request in Requests do
-						local CreateResult = t3[i]
+						local Entry8 = t3[i]
 						
-						if CreateResult == nil and t4[i] then
-							local Entry5 = Tbl[request.viewType]
-							CreateResult = Entry5.items[Entry5.last]
-							Entry5.items[Entry5.last] = nil
-							Entry5.last -= 1
-							Tbl1[CreateResult].active = true
+						if Entry8 == nil and t4[i] then
+							local Entry9 = Tbl[request.viewType]
+							Entry8 = Entry9.items[Entry9.last]
+							Entry9.items[Entry9.last] = nil
+							Entry9.last -= 1
+							Tbl1[Entry8].active = true
 							
 							if T1 ~= nil then
 								table.insert(T1, {
@@ -450,9 +563,9 @@ return function(p1)
 									0
 								})
 							end
-						elseif CreateResult == nil then
-							CreateResult = CreateResults[i]
-							Tbl1[CreateResult] = {
+						elseif Entry8 == nil then
+							Entry8 = CreateResults[i]
+							Tbl1[Entry8] = {
 								active = true,
 								viewType = request.viewType,
 								pool = poolFor(request.viewType)
@@ -468,7 +581,7 @@ return function(p1)
 								})
 							end
 						end
-						table.insert(config.acquired, CreateResult)
+						table.insert(config.acquired, Entry8)
 					end
 					local Capacity1 = p5.capacity
 					
@@ -514,13 +627,13 @@ return function(p1)
 				
 				if Capacity3 ~= nil then
 					local t = {}
-					local T1 = if p1.onPoolChanged == nil then nil else {}
+					local T = if p1.onPoolChanged == nil then nil else {}
 					for _, value in Tbl do
-						trimPoolExcess(value, Capacity3, t, T1)
+						trimPoolExcess(value, Capacity3, t, T)
 					end
 					if #t > 0 then
 						Flag1 = true
-						local FinalizeResult, FinalizeResult2 = finalize(T1, t, nil)
+						local FinalizeResult, FinalizeResult2 = finalize(T, t, nil)
 						Flag1 = false
 						
 						if not FinalizeResult then

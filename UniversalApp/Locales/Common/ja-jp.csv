@@ -1449,6 +1449,7 @@ Feature.Accessibility.Heading.UiNavigationKeyBind,
 Feature.Accessibility.Heading.VREnvironmentSetting,VR環境
 Feature.Accessibility.Label.AppThemeBadgeNew,新規
 Feature.Accessibility.Label.AppThemeUnlockBanner,Plusのアプリテーマのロックを解除
+Feature.Accessibility.Menu.SelectModeToggle,モード切りかえを選択
 Feature.Accessibility.PreferredTextSize.Default,初期設定
 Feature.Accessibility.PreferredTextSize.Largest,最大
 Feature.Accessibility.PreferredTransparency.Opaque,不透明
@@ -1566,6 +1567,7 @@ Feature.AccountSettings.Heading.Tab.BillingV2,
 Feature.AccountSettings.Heading.Tab.Notifications,通知
 Feature.AccountSettings.Heading.Tab.ParentalControls,保護者コントロール
 Feature.AccountSettings.Heading.Tab.ParentalControlsV2,
+Feature.AccountSettings.Heading.Tab.PersonalizedRecommendations,パーソナライズされたおすすめ
 Feature.AccountSettings.Heading.Tab.Privacy,
 Feature.AccountSettings.Heading.Tab.PrivacyContentRestrictions,プライバシーとコンテンツ制限
 Feature.AccountSettings.Heading.Tab.Robux,Robux
@@ -2187,7 +2189,8 @@ Feature.Avatar.Label.Shorts,短パン
 Feature.Avatar.Label.Shoulder,肩
 Feature.Avatar.Label.Skin,スキン
 Feature.Avatar.Label.Spawn,スポーン
-Feature.Avatar.Label.SpawnEffects,スポーン効果
+Feature.Avatar.Label.SpawnEffect,スポーン効果
+Feature.Avatar.Label.SpawnEffects,
 Feature.Avatar.Label.Sweater,セーター
 Feature.Avatar.Label.Sweaters,
 Feature.Avatar.Label.Swim,泳ぐ
@@ -2566,6 +2569,7 @@ Feature.Build.Description.BuildReplyNotif,ビルドで返信が届いたとき�
 Feature.Build.Description.BuyRobuxToCreate,作成を続けるには、Robuxをさらに購入するか、明日になって無料のビルド使用量がリセットされるのをお待ちください。
 Feature.Build.Description.BuyUsageOrWait,Robuxでビルド使用量をさらに購入するか、1日あたりの限度額がリセットされるのをお待ちください。
 Feature.Build.Description.CampaignRunDates,キャンペーンは、{startDate}～{endDate}に実施されます。
+Feature.Build.Description.CaptureWhilePlaytesting,プレイテスト中に切り抜きし、プロンプトに追加してください。
 Feature.Build.Description.ChooseAdCampaignLength,広告の掲載期間を選択してください。
 Feature.Build.Description.ChoosePlaytesters,ゲームをテストプレイしてもらう友達を選択してください。
 Feature.Build.Description.CreateDeveloperProduct,{PRICE} Robuxの「{NAME}」を作成し、非売品にします。
@@ -2672,6 +2676,9 @@ Feature.Build.Label.BackToBuild,ビルドに戻る
 Feature.Build.Label.Building,制作中…
 Feature.Build.Label.CaptureLibrary,切り抜きライブラリ
 Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT} / {MAX_SELECTIONS}点を選択済み
+Feature.Build.Label.CaptureStepAddImages,[画像を追加]を選択して、切り抜きを添付します
+Feature.Build.Label.CaptureStepPlaytest,ゲームのプレイテスト
+Feature.Build.Label.CaptureStepTapCamera,ビルドツールバーでカメラを選択します
 Feature.Build.Label.ContentRating,コンテンツのレーティング
 Feature.Build.Label.CreatedDate,{YEAR}年{MONTH}月{DAY}日
 Feature.Build.Label.CreatorHub,クリエーターハブ
@@ -3611,6 +3618,13 @@ Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes}分前
 Feature.ContentFeed.Timestamp.Now,現在
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks}週間前
 Feature.CustomForms.Label.Percent,
+Feature.Denied.Denied.Action,
+Feature.Denied.Denied.Body,アカウントのセキュリティのため、今回はリクエストを完了することができません。以前に使ったことのあるデバイスでもう一度お試しいただくか、サポートにお問い合わせください。
+Feature.Denied.Denied.Header,操作が制限されています
+Feature.Denied.Denied.Wasm.GameJoin.Body,セキュリティ上の理由により、このウェブセッションを終了しました。プレイを続けるには、Robloxアプリを使用してください。
+Feature.Denied.Denied.Wasm.GameJoin.Header,Robloxアプリで続行
+Feature.Denied.Denied.Wasm.InExperienceFeature.Body,セキュリティ上の理由により、この機能はウェブ版では利用できません。すべての機能を利用するには、Robloxアプリに切り替えてください。
+Feature.Denied.Denied.Wasm.InExperienceFeature.Header,この機能はウェブ版では利用できません
 Feature.DevSubs.Action.CancelSubscription,定期購入をキャンセル
 Feature.DevSubs.Action.RenewSubscription,定期購入を更新する
 Feature.DevSubs.Label.ActiveSubscriptions,有効期間中の定期購入
@@ -4493,6 +4507,7 @@ Feature.Moments.Label.VoicePlaceholder,ボイスオーバーで読み上げた�
 Feature.Moments.Label.VoiceTimeoutBody,ボイスオーバーの生成がタイムアウトしました。
 Feature.Moments.Label.VoiceTooManyNumbersError,スクリプトに含まれる桁数が多すぎます
 Feature.Moments.Label.WriteComment,コメントを書く
+Feature.Moments.PostInsights.Stats,
 Feature.Moments.Title.Comments,コメント
 Feature.Moments.Title.CommentsWithCappedCount,{count}件以上のコメント
 Feature.Moments.Title.CommentsWithCount,{count}件のコメント

@@ -1406,6 +1406,7 @@ Feature.Accessibility.AppTheme.PolarFreeze,极地冰冻
 Feature.Accessibility.AppTheme.QuantumPulse,量子脉冲
 Feature.Accessibility.AppTheme.StarBurst,星芒
 Feature.Accessibility.AppTheme.SuperCharge,超级充能
+Feature.Accessibility.Description.AppIcon,
 Feature.Accessibility.Description.AppThemeMode,选择 App 模式，其他设备将不受影响。
 Feature.Accessibility.Description.DeviceAppTheme,选择 App 主题。所有类型的设备都会显示所选效果。
 Feature.Accessibility.Description.DeviceAppThemeExclusive,探索 Plus 专属主题，自定义你的体验。立即试用并订阅，保存你的选择。
@@ -1426,6 +1427,7 @@ Feature.Accessibility.DeviceLevelTheme.Light,简约白
 Feature.Accessibility.DeviceLevelTheme.System,
 Feature.Accessibility.Header.Haptics,触觉
 Feature.Accessibility.Header.ShowInMenuBar,在菜单栏中显示
+Feature.Accessibility.Heading.AppIcon,
 Feature.Accessibility.Heading.AppThemeMode,模式
 Feature.Accessibility.Heading.DeviceAppTheme,App 主题
 Feature.Accessibility.Heading.DevicePreferences,设备偏好设置
@@ -1446,6 +1448,7 @@ Feature.Accessibility.Label.AppThemeBadgeNew,新
 Feature.Accessibility.Label.AppThemeUnlockBanner,订阅 Plus，解锁 App 主题
 Feature.Accessibility.LaunchDestination.Home,
 Feature.Accessibility.LaunchDestination.MostRecentGame,
+Feature.Accessibility.Menu.SelectModeToggle,选择模式切换
 Feature.Accessibility.PreferredTextSize.Default,
 Feature.Accessibility.PreferredTextSize.Largest,最大
 Feature.Accessibility.PreferredTransparency.Opaque,不透明
@@ -1563,6 +1566,7 @@ Feature.AccountSettings.Heading.Tab.BillingV2,付款方式
 Feature.AccountSettings.Heading.Tab.Notifications,通知
 Feature.AccountSettings.Heading.Tab.ParentalControls,家长控制
 Feature.AccountSettings.Heading.Tab.ParentalControlsV2,
+Feature.AccountSettings.Heading.Tab.PersonalizedRecommendations,个性化推荐
 Feature.AccountSettings.Heading.Tab.Privacy,
 Feature.AccountSettings.Heading.Tab.PrivacyContentRestrictions,隐私与内容限制
 Feature.AccountSettings.Heading.Tab.Robux,Robux
@@ -2185,8 +2189,8 @@ Feature.Avatar.Label.Shorts,短裤
 Feature.Avatar.Label.Shoulder,肩部
 Feature.Avatar.Label.Skin,皮肤
 Feature.Avatar.Label.Spawn,重生点
-Feature.Avatar.Label.SpawnEffect,
-Feature.Avatar.Label.SpawnEffects,重生点效果
+Feature.Avatar.Label.SpawnEffect,重生点效果
+Feature.Avatar.Label.SpawnEffects,
 Feature.Avatar.Label.Sweater,毛衣
 Feature.Avatar.Label.Sweaters,
 Feature.Avatar.Label.Swim,游泳
@@ -2463,6 +2467,7 @@ Feature.Build.Action.Resume,
 Feature.Build.Action.Retry,
 Feature.Build.Action.Revert,
 Feature.Build.Action.Save,
+Feature.Build.Action.SaveFilters,
 Feature.Build.Action.SetDailyLimit,设置每日限额
 Feature.Build.Action.SetLimit,设置限额
 Feature.Build.Action.Settings,
@@ -2566,7 +2571,7 @@ Feature.Build.Description.BuildReplyNotif,在 Build 回复你后获得通知。
 Feature.Build.Description.BuyRobuxToCreate,购买更多 Robux 以继续创建，或等待你的免费 Build 使用额度在明天重置。
 Feature.Build.Description.BuyUsageOrWait,使用 Robux 购买更多 Build 使用额度，或等待你的每日限额重置。
 Feature.Build.Description.CampaignRunDates,你的广告活动将在 {startDate} – {endDate}期间投放
-Feature.Build.Description.CaptureWhilePlaytesting,
+Feature.Build.Description.CaptureWhilePlaytesting,在游戏测试时截图，然后将其添加到你的提示词中。
 Feature.Build.Description.ChooseAdCampaignLength,选择你希望广告投放的时长。
 Feature.Build.Description.ChoosePlaytesters,选择好友来抢先体验你的游戏。
 Feature.Build.Description.CreateDeveloperProduct,创建“{NAME}”，售价 {PRICE} Robux，已下架。
@@ -2673,9 +2678,9 @@ Feature.Build.Label.BackToBuild,返回构建
 Feature.Build.Label.Building,正在构建…
 Feature.Build.Label.CaptureLibrary,截图库
 Feature.Build.Label.CaptureSelectionCount,已选择 {SELECTED_COUNT} 张，共 {MAX_SELECTIONS} 张
-Feature.Build.Label.CaptureStepAddImages,
-Feature.Build.Label.CaptureStepPlaytest,
-Feature.Build.Label.CaptureStepTapCamera,
+Feature.Build.Label.CaptureStepAddImages,选择“添加图片”以附加你的截图
+Feature.Build.Label.CaptureStepPlaytest,测试你的游戏
+Feature.Build.Label.CaptureStepTapCamera,在“构建”工具栏中选择镜头
 Feature.Build.Label.ContentRating,内容评级
 Feature.Build.Label.CreatedDate,{YEAR} 年 {MONTH} {DAY} 日
 Feature.Build.Label.CreatorHub,创作者中心
@@ -3613,6 +3618,13 @@ Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes} 分钟前
 Feature.ContentFeed.Timestamp.Now,
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks} 周前
 Feature.CustomForms.Label.Percent,
+Feature.Denied.Denied.Action,
+Feature.Denied.Denied.Body,为了你的帐户安全，我们现在无法完成你的请求。请在之前使用过的设备上重试，或联系客户支持以获取帮助。
+Feature.Denied.Denied.Header,操作被限制
+Feature.Denied.Denied.Wasm.GameJoin.Body,出于安全原因，我们已结束此网页会话。若要继续游玩，请使用 Roblox App。
+Feature.Denied.Denied.Wasm.GameJoin.Header,在 Roblox App 中继续
+Feature.Denied.Denied.Wasm.InExperienceFeature.Body,出于安全原因，你无法在浏览器中使用此功能。要使用所有功能，请改用 Roblox App。
+Feature.Denied.Denied.Wasm.InExperienceFeature.Header,此功能在这里不可用
 Feature.DevSubs.Action.CancelSubscription,取消订阅
 Feature.DevSubs.Action.RenewSubscription,更新订阅
 Feature.DevSubs.Label.ActiveSubscriptions,激活订阅
@@ -4362,6 +4374,7 @@ Feature.Moments.Action.ViewOtherFeed,查看其他推送
 Feature.Moments.Action.ViewRecommended,查看推荐内容
 Feature.Moments.Action.ViewTrending,查看热门内容
 Feature.Moments.Body.EDPMomentIPReportInstructions,要举报此“精彩瞬间”中的知识产权违规行为，请继续前往游戏详情页面。
+Feature.Moments.Body.MomentPosting,
 Feature.Moments.Description.CommunityStandards,请查看《社区准则》，进一步了解关于言论的规范。
 Feature.Moments.Description.EmptyCapturesLibrary,你的截图将显示在此处。
 Feature.Moments.Description.FollowingCaughtUpBody,你已看完此推送中的所有新“精彩瞬间”。切换推送以查看更多内容。
@@ -4371,6 +4384,7 @@ Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI 生成的内容。
 Feature.Moments.Description.HowToCaptureStep1,加入已启用“截图”功能的体验，然后选择汉堡菜单
 Feature.Moments.Description.HowToCaptureStep2,启用“截图”控件
 Feature.Moments.Description.HowToCaptureStep3,截取游戏的照片和视频
+Feature.Moments.Description.LeaveAvatarMomentsCreation,
 Feature.Moments.Description.LeaveMomentsCreation,你将丢失所有更改，但仍然可以在<b>截图</b>图库中找到此截图。
 Feature.Moments.Description.NoMusicResults,未找到音乐
 Feature.Moments.Description.NonInfiniteScrollEndBody,我们已暂停你的推送。你可以决定是否要继续观看。
@@ -4452,6 +4466,11 @@ Feature.Moments.Label.NonInfiniteScrollEndTitle,还有更多精彩瞬间可供�
 Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,照片
 Feature.Moments.Label.PostDeleted,精彩瞬间已删除
+Feature.Moments.Label.PostFeedbackModeratedBadge,
+Feature.Moments.Label.PostFeedbackPostingBadge,
+Feature.Moments.Label.PostFeedbackPostingBody,
+Feature.Moments.Label.PostFeedbackPostingSnackbar,
+Feature.Moments.Label.PostFeedbackPostingTitle,
 Feature.Moments.Label.PostRemovedBody,你发布的精彩瞬间违反了社区准则。
 Feature.Moments.Label.PostedOnDate,发布于 {date}
 Feature.Moments.Label.PublishingRodeoBody,此过程不会花太长时间。
@@ -4494,6 +4513,7 @@ Feature.Moments.Label.VoicePlaceholder,请输入你希望旁白说的话。
 Feature.Moments.Label.VoiceTimeoutBody,旁白生成超时。
 Feature.Moments.Label.VoiceTooManyNumbersError,脚本包含的数字过多
 Feature.Moments.Label.WriteComment,留下评论
+Feature.Moments.PostInsights.Stats,
 Feature.Moments.Title.Comments,评论
 Feature.Moments.Title.CommentsWithCappedCount,超过 {count} 条评论
 Feature.Moments.Title.CommentsWithCount,{count} 条评论
@@ -4501,6 +4521,7 @@ Feature.Moments.Title.EDPMomentIPReportInstructions,在游戏详情页面上举�
 Feature.Moments.Title.GenerateTextFeedbackReason,内容有什么问题？
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,要离开“精彩瞬间”创建页面吗？
+Feature.Moments.Title.MomentPosting,
 Feature.Moments.Title.MomentRemoved,精彩瞬间已移除
 Feature.Moments.Title.ReportPost,举报帖子
 Feature.Moments.Title.UnfollowConfirmationDialog,要取消关注 @{username} 吗？
@@ -4620,6 +4641,7 @@ Feature.NotApproved.Description.SecondChance.Details,你现在可以回到游戏
 Feature.NotApproved.Description.SecondChance.Second,鉴于你以往的表现良好，这一次你可以免于帐户封禁处罚。
 Feature.NotApproved.Description.SuspendedUntil,你的帐户已被暂时停用，直至 {date} {time}。
 Feature.NotApproved.Description.Violation,经管理员审查，您在罗布乐思的部分行为构成了对我方{startLink}服务条款{endLink}的违反。
+Feature.NotApproved.Description.WalletInformation,
 Feature.NotApproved.Description.WarningDescription.Kids,你违反了规则。如果问题持续存在，你的帐户可能会被暂时停用。
 Feature.NotApproved.Heading.AccountBanned,帐户被封禁
 Feature.NotApproved.Heading.AccountDeleted,账户已被删除
@@ -4801,6 +4823,7 @@ Feature.NotApproved.Label.MessageToUser.AltConsequence.V3,"此帐户与因严重
 Feature.NotApproved.Label.Mistake,
 Feature.NotApproved.Label.ModeratorMessage, 管理员记录
 Feature.NotApproved.Label.ModeratorNote,审核员注释
+Feature.NotApproved.Label.MyWallet,
 Feature.NotApproved.Label.OffensiveItem,违规项目：
 Feature.NotApproved.Label.OffensiveItem.V2,违规项目
 Feature.NotApproved.Label.OpenMenu,打开菜单
@@ -5252,6 +5275,7 @@ Feature.RobloxSubscription.Body.GenericError,我们目前无法完成此操作�
 Feature.RobloxSubscription.Body.UnsupportedPlatform,此订阅无法在此设备上购买。
 Feature.RobloxSubscription.Description.AgeCheckTrial,为表达我们的谢意，完成年龄验证即可免费使用 Roblox Plus 一周。无需提供付款方式即可享受此免费试用。
 Feature.RobloxSubscription.Description.Benefit.Customize,使用个人资料边框和 App 主题进行自定义
+Feature.RobloxSubscription.Description.Benefit.CustomizeWithAppIcon,
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,前 60 天享道具与虚拟形象九折优惠，之后享八折优惠
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,前 {trialUnlockDays} 天享道具与虚拟形象九折优惠，之后享八折优惠
 Feature.RobloxSubscription.Description.ExclusiveBenefits,以更少的 Robux 享受更多乐趣。订阅 Roblox Plus。

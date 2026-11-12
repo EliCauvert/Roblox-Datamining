@@ -1,4 +1,5 @@
-﻿local FFlagViewRecyclerReact08 = require(script:FindFirstAncestor("ViewRecyclerReact").Flags).FFlagViewRecyclerReact08
+﻿local FFlagViewRecyclerReact084 = require(script:FindFirstAncestor("ViewRecyclerReact").Flags).FFlagViewRecyclerReact084
+local FFlagViewRecyclerReact08 = require(script:FindFirstAncestor("ViewRecyclerReact").Flags).FFlagViewRecyclerReact08
 local ViewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
 local ReactModule = require(ViewRecyclerReact.Parent.React)
 local RecyclableViewContextModule = require(ViewRecyclerReact.ReactAdapter.Private.RecyclableViewContext)
@@ -22,7 +23,7 @@ local function CommitObserver(p1)
 end
 
 return (ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), FFlagViewRecyclerReact08 (copy), ReparentableHost (copy), RecyclableViewRegistryModule (copy), CreateElementFunction (copy), SignalsReactModule (copy), RecyclableViewReadinessModule (copy), CommitObserver (copy), RecyclableViewContextModule (copy)
+	-- upvalues: ReactModule (copy), FFlagViewRecyclerReact084 (copy), FFlagViewRecyclerReact08 (copy), ReparentableHost (copy), RecyclableViewRegistryModule (copy), CreateElementFunction (copy), SignalsReactModule (copy), RecyclableViewReadinessModule (copy), CommitObserver (copy), RecyclableViewContextModule (copy)
 	local ItemView = p1.itemView
 	local Signal = ItemView.signal
 	local PortalFrameResult = ItemView.portalFrame(false)
@@ -38,8 +39,8 @@ return (ReactModule.memo(function(p1)
 		}
 	end)
 	ReactModule.useLayoutEffect(function()
-		-- upvalues: FFlagViewRecyclerReact08 (upval), PortalFrameResult (copy), ReparentableHost (upval), ItemView (copy)
-		local DetachFromPlaceholder = if FFlagViewRecyclerReact08 then nil else function(Parent)
+		-- upvalues: FFlagViewRecyclerReact084 (upval), FFlagViewRecyclerReact08 (upval), PortalFrameResult (copy), ReparentableHost (upval), ItemView (copy)
+		local DetachFromPlaceholder = if FFlagViewRecyclerReact084 then nil elseif FFlagViewRecyclerReact08 then nil else function(Parent)
 			-- upvalues: PortalFrameResult (upval), ReparentableHost (upval)
 			if PortalFrameResult.Parent == Parent then
 				ReparentableHost.detach(PortalFrameResult)
@@ -50,7 +51,7 @@ return (ReactModule.memo(function(p1)
 				-- upvalues: ReparentableHost (upval), PortalFrameResult (upval)
 				ReparentableHost.clearSelection(PortalFrameResult)
 			end,
-			detachFromPlaceholder = if FFlagViewRecyclerReact08 then nil else DetachFromPlaceholder
+			detachFromPlaceholder = if FFlagViewRecyclerReact084 then nil elseif FFlagViewRecyclerReact08 then nil else DetachFromPlaceholder
 		})
 		
 		return function()

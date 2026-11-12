@@ -214,6 +214,7 @@ Authentication.AccountSwitch.Description.LogoutConfirmation,Dovrai uscire dagli 
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,Per favore riprova più tardi
 Authentication.AccountSwitch.Description.RemoveAllAccounts,"Una volta effettuata la disconnessione, tutti gli account verranno rimossi da questo dispositivo."
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,"Se lo fai, non vedrai più questo account su questo dispositivo, a meno che non effettui nuovamente l'accesso. Tornerai alla pagina di destinazione."
+Authentication.AccountSwitch.Description.SomethingWentWrongSignInAgain,Qualcosa è andato storto. Accedi di nuovo.
 Authentication.AccountSwitch.Description.StaleSessionSignInAgain,È da un po' che non utilizzi questo account. Accedi di nuovo.
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,Prova ad accedere direttamente
 Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,Non è possibile cambiare account
@@ -1430,6 +1431,7 @@ Feature.Accessibility.Heading.UiNavigationKeyBind,Attiva/Disattiva navigazione i
 Feature.Accessibility.Heading.VREnvironmentSetting,Ambiente VR
 Feature.Accessibility.Label.AppThemeBadgeNew,Novità
 Feature.Accessibility.Label.AppThemeUnlockBanner,Sblocca i temi dell'app con il piano Plus
+Feature.Accessibility.Menu.SelectModeToggle,Attiva/disattiva modalità di selezione
 Feature.Accessibility.PreferredTextSize.Default,
 Feature.Accessibility.PreferredTextSize.Largest,Più grande
 Feature.Accessibility.PreferredTransparency.Opaque,Opaco
@@ -1547,6 +1549,7 @@ Feature.AccountSettings.Heading.Tab.BillingV2,
 Feature.AccountSettings.Heading.Tab.Notifications,Notifiche
 Feature.AccountSettings.Heading.Tab.ParentalControls,Controllo Parentale
 Feature.AccountSettings.Heading.Tab.ParentalControlsV2,Controllo parentale
+Feature.AccountSettings.Heading.Tab.PersonalizedRecommendations,Consigli personalizzati
 Feature.AccountSettings.Heading.Tab.Privacy,
 Feature.AccountSettings.Heading.Tab.PrivacyContentRestrictions,Privacy e restrizioni sui contenuti
 Feature.AccountSettings.Heading.Tab.Robux,Robux
@@ -2168,6 +2171,7 @@ Feature.Avatar.Label.Shorts,Pantaloncini
 Feature.Avatar.Label.Shoulder,Spalle
 Feature.Avatar.Label.Skin,Pelle
 Feature.Avatar.Label.Spawn,Rigenerare
+Feature.Avatar.Label.SpawnEffect,Effetto Rigenerazione
 Feature.Avatar.Label.SpawnEffects,Effetti Rigenerazione
 Feature.Avatar.Label.Sweater,Maglione
 Feature.Avatar.Label.Sweaters,Maglioni
@@ -2547,6 +2551,7 @@ Feature.Build.Description.BuildReplyNotif,Ricevi una notifica quando Build ha un
 Feature.Build.Description.BuyRobuxToCreate,Acquista più Robux per continuare a creare o attendi che il tuo utilizzo gratuito di Costruisci venga ripristinato domani.
 Feature.Build.Description.BuyUsageOrWait,Acquista più utilizzo di Build con Robux o attendi il ripristino del limite giornaliero.
 Feature.Build.Description.CampaignRunDates,La tua campagna sarà attiva dal giorno {startDate} al giorno {endDate}
+Feature.Build.Description.CaptureWhilePlaytesting,"Esegui una cattura durante il test di giocabilità, quindi aggiungila al tuo prompt."
 Feature.Build.Description.ChooseAdCampaignLength,Scegli per quanto tempo vuoi che il tuo annuncio sia attivo.
 Feature.Build.Description.ChoosePlaytesters,Scegli gli amici che proveranno il tuo gioco in anteprima.
 Feature.Build.Description.CreateDeveloperProduct,"Crea ""{NAME}"" per {PRICE} Robux, non in vendita."
@@ -2653,6 +2658,9 @@ Feature.Build.Label.BackToBuild,Torna a Costruisci
 Feature.Build.Label.Building,Costruzione in corso...
 Feature.Build.Label.CaptureLibrary,Libreria delle acquisizioni
 Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT} di {MAX_SELECTIONS} selezionati
+Feature.Build.Label.CaptureStepAddImages,Seleziona Aggiungi immagini per allegare la tua cattura
+Feature.Build.Label.CaptureStepPlaytest,Esegui un test di giocabilità del tuo gioco
+Feature.Build.Label.CaptureStepTapCamera,Seleziona la videocamera nella barra degli strumenti Build
 Feature.Build.Label.ContentRating,Classificazione del contenuto
 Feature.Build.Label.CreatedDate,{DAY} {MONTH} {YEAR}
 Feature.Build.Label.CreatorHub,Hub Creatore
@@ -2709,7 +2717,7 @@ Feature.Build.Label.OnSale,In vendita
 Feature.Build.Label.Pending,In sospeso
 Feature.Build.Label.PercentUsed,{PERCENT}% utilizzata
 Feature.Build.Label.PlayTime,Tempo di gioco
-Feature.Build.Label.PreviewsTab,Anteprime
+Feature.Build.Label.PreviewsTab,
 Feature.Build.Label.PreviouslyPublished,Pubblicato in precedenza
 Feature.Build.Label.Price,Prezzo
 Feature.Build.Label.PriceUnavailable,--
@@ -3592,6 +3600,13 @@ Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes} min. fa
 Feature.ContentFeed.Timestamp.Now,adesso
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks} sett. fa
 Feature.CustomForms.Label.Percent,
+Feature.Denied.Denied.Action,
+Feature.Denied.Denied.Body,"Per la sicurezza del tuo account, al momento non siamo in grado di completare la tua richiesta. Per favore riprova su un dispositivo precedentemente utilizzato o contatta l'assistenza."
+Feature.Denied.Denied.Header,Azione limitata
+Feature.Denied.Denied.Wasm.GameJoin.Body,"Abbiamo terminato questa sessione web per motivi di sicurezza. Per continuare a giocare, usa l'app Roblox."
+Feature.Denied.Denied.Wasm.GameJoin.Header,Continua nell'app Roblox
+Feature.Denied.Denied.Wasm.InExperienceFeature.Body,"Per motivi di sicurezza, non puoi usarla sul web. Passa all'app Roblox per accedere a tutte le funzionalità."
+Feature.Denied.Denied.Wasm.InExperienceFeature.Header,Questa funzionalità non è disponibile qui
 Feature.DevSubs.Action.CancelSubscription,Annulla abbonamento
 Feature.DevSubs.Action.RenewSubscription,Rinnova abbonamento
 Feature.DevSubs.Label.ActiveSubscriptions,Abbonamenti attivi
@@ -4474,6 +4489,7 @@ Feature.Moments.Label.VoicePlaceholder,Scrivi ciò che vuoi che dica la tua voce
 Feature.Moments.Label.VoiceTimeoutBody,Tempo di generazione della voce fuori campo scaduto.
 Feature.Moments.Label.VoiceTooManyNumbersError,Lo script contiene troppi numeri
 Feature.Moments.Label.WriteComment,Scrivi un commento
+Feature.Moments.PostInsights.Stats,
 Feature.Moments.Title.Comments,Commenti
 Feature.Moments.Title.CommentsWithCappedCount,Più di {count} commenti
 Feature.Moments.Title.CommentsWithCount,{count} commenti

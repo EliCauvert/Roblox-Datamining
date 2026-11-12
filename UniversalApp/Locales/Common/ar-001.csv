@@ -1385,6 +1385,7 @@ Feature.Accessibility.Heading.UiNavigationKeyBind,مفتاح تبديل وضع �
 Feature.Accessibility.Heading.VREnvironmentSetting,بيئة الواقع الافتراضي
 Feature.Accessibility.Label.AppThemeBadgeNew,جديد
 Feature.Accessibility.Label.AppThemeUnlockBanner,افتح سمات التطبيق باستخدام اشتراك Plus
+Feature.Accessibility.Menu.SelectModeToggle,تبديل وضع التحديد
 Feature.Accessibility.PreferredTextSize.Default,الافتراضي
 Feature.Accessibility.PreferredTextSize.Largest,الأكبر
 Feature.Accessibility.PreferredTransparency.Opaque,مظلم
@@ -1502,6 +1503,7 @@ Feature.AccountSettings.Heading.Tab.BillingV2,
 Feature.AccountSettings.Heading.Tab.Notifications,الإشعارات
 Feature.AccountSettings.Heading.Tab.ParentalControls,رقابة الوالدين
 Feature.AccountSettings.Heading.Tab.ParentalControlsV2,
+Feature.AccountSettings.Heading.Tab.PersonalizedRecommendations,المقترحات المخصصة
 Feature.AccountSettings.Heading.Tab.Privacy,
 Feature.AccountSettings.Heading.Tab.PrivacyContentRestrictions,القيود المفروضة على الخصوصية والمحتوى
 Feature.AccountSettings.Heading.Tab.Robux,Robux
@@ -1999,7 +2001,7 @@ Feature.Avatar.Label.FaceMakeup,الوجه
 Feature.Avatar.Label.FacialAnimation,محرك الوجه
 Feature.Avatar.Label.Fall,سقوط
 Feature.Avatar.Label.FallAnimations,حركة سقوط
-Feature.Avatar.Label.FromMarketplace,من المتجر
+Feature.Avatar.Label.FromMarketplace,نتائج المتجر
 Feature.Avatar.Label.Front,الجزء الأمامي
 Feature.Avatar.Label.FullBody,الجسد بالكامل
 Feature.Avatar.Label.FullMasks,الأقنعة الكاملة
@@ -2400,6 +2402,7 @@ Feature.Build.Action.Resume,استئناف
 Feature.Build.Action.Retry,
 Feature.Build.Action.Revert,تراجع
 Feature.Build.Action.Save,
+Feature.Build.Action.SaveFilters,
 Feature.Build.Action.SetDailyLimit,تعيين حد يومي
 Feature.Build.Action.SetLimit,تعيين الحد
 Feature.Build.Action.Settings,
@@ -2493,7 +2496,7 @@ Feature.Build.Description.AdCampaignModerationReview,تتم مراجعة جمي�
 Feature.Build.Description.AdCampaignSheetRunDates,سيتم تشغيل حملتك من {startDate} إلى {endDate}
 Feature.Build.Description.AdComplete,انتهى إعلانك. تحقَّق من نتائجك.
 Feature.Build.Description.AdModerationReview,تتم مراجعة جميع الإعلانات من قِبل فريق الإشراف لدى منصّة Roblox وقد تستغرق العملية ما يصل إلى 24 ساعة.
-Feature.Build.Description.AdvancedModel,مثالي للجودة العالية، لكن استخدامك سينفد أسرع.
+Feature.Build.Description.AdvancedModel,الأفضل للحصول على أعلى جودة. ينفد رصيد الاستخدام بشكل أسرع.
 Feature.Build.Description.AdvertisingAgreement,"من خلال تحديد ""إنشاء""، فإنك توافق على {advertisingTermsStart}شروط الإعلان{advertisingTermsEnd} و{advertisingStandardsStart}معايير الإعلان{advertisingStandardsEnd} لدى منصّة Roblox."
 Feature.Build.Description.ArchiveRemoval,إذا قمت بأرشفة هذه اللعبة، فستتم إزالتها من ميزة Build. سيظل بإمكانك الوصول إليها واستعادتها من مركز المصمم أو من Roblox Studio.
 Feature.Build.Description.AutoBuyUsage,استخدم عملات Robux لشراء المزيد من استخدام ميزة Build تلقائيًا أثناء الإنشاء. يمكنك تعيين حد الإنفاق اليومي في أي وقت.
@@ -3552,6 +3555,13 @@ Feature.ContentFeed.Timestamp.MinutesAgo,منذ {numMinutes} من الدقائق
 Feature.ContentFeed.Timestamp.Now,
 Feature.ContentFeed.Timestamp.WeeksAgo,منذ {numWeeks} من الأسابيع
 Feature.CustomForms.Label.Percent,
+Feature.Denied.Denied.Action,
+Feature.Denied.Denied.Body,للحفاظ على أمان حسابك، لا يمكننا إكمال طلبك في الوقت الحالي. يُرجى إعادة المحاولة باستخدام جهاز سبق استخدامه أو الاتصال بفريق الدعم للحصول على المساعدة.
+Feature.Denied.Denied.Header,الإجراء مقيّد
+Feature.Denied.Denied.Wasm.GameJoin.Body,لقد أنهينا جلسة الويب هذه لأسباب أمنية. لمواصلة اللعب، استخدم تطبيق Roblox.
+Feature.Denied.Denied.Wasm.GameJoin.Header,المتابعة في تطبيق Roblox
+Feature.Denied.Denied.Wasm.InExperienceFeature.Body,لأسباب أمنية، لا يمكنك استخدام هذه الميزة على الويب. انتقل إلى تطبيق Roblox للاستمتاع بجميع الميزات.
+Feature.Denied.Denied.Wasm.InExperienceFeature.Header,هذه الميزة غير متاحة هنا
 Feature.DevSubs.Action.CancelSubscription,إلغاء الاشتراك
 Feature.DevSubs.Action.RenewSubscription,تجديد الاشتراك
 Feature.DevSubs.Label.ActiveSubscriptions,الاشتراكات النشطة
@@ -4260,7 +4270,7 @@ Feature.Moments.Action.AddMusic,أضِف موسيقى
 Feature.Moments.Action.AddSticker,إضافة ملصق
 Feature.Moments.Action.AddText,أضِف نص
 Feature.Moments.Action.AddVoice,إضافة صوت
-Feature.Moments.Action.Analytics,التحليلات
+Feature.Moments.Action.Analytics,عرض الإحصائيات
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
@@ -4302,6 +4312,7 @@ Feature.Moments.Action.ViewOtherFeed,عرض موجز آخر
 Feature.Moments.Action.ViewRecommended,عرض اللحظات المقترحة
 Feature.Moments.Action.ViewTrending,عرض اللحظات الرائجة
 Feature.Moments.Body.EDPMomentIPReportInstructions,للإبلاغ عن انتهاك للملكية الفكرية في هذه اللحظة، تابع إلى صفحة تفاصيل اللعبة.
+Feature.Moments.Body.MomentPosting,جارٍ معالجة لحظتك.
 Feature.Moments.Description.CommunityStandards,تحقَّق من معايير المجتمع للحصول على مزيد من المعلومات حول ما يمكنك وما لا يمكنك قوله.
 Feature.Moments.Description.EmptyCapturesLibrary,هذا هو المكان الذي ستظهر فيه لقطاتك.
 Feature.Moments.Description.FollowingCaughtUpBody,لقد شاهدتَ جميع اللحظات الجديدة في هذا الموجز. يمكنك التبديل بين الموجزات لعرض المزيد.
@@ -4311,6 +4322,7 @@ Feature.Moments.Description.GenerateTextFeedbackDisclosure,نص من إنشاء 
 Feature.Moments.Description.HowToCaptureStep1,انضم إلى تجربة معينة مع تمكين اللقطات وحدد قائمة الهامبرغر
 Feature.Moments.Description.HowToCaptureStep2,تمكين عناصر تحكم اللقطة
 Feature.Moments.Description.HowToCaptureStep3,التقط صورًا ومقاطع فيديو خاصة باللعب
+Feature.Moments.Description.LeaveAvatarMomentsCreation,ستفقد جميع التغييرات التي أجريتها، لكن زيّك سيبقى دون تغيير.
 Feature.Moments.Description.LeaveMomentsCreation,ستفقد جميع التغييرات التي أجريتها، لكن لا يزال بإمكانك العثور على هذه اللقطة في معرض <b>اللقطات</b>.
 Feature.Moments.Description.NoMusicResults,لم يتم العثور على أي موسيقى
 Feature.Moments.Description.NonInfiniteScrollEndBody,لقد أوقفنا موجزك مؤقتًا. يمكنك تحديد ما إذا كنت ترغب في مواصلة المشاهدة.
@@ -4379,8 +4391,8 @@ Feature.Moments.Label.MomentDeletedTitle,
 Feature.Moments.Label.MomentFailedToPostBody,حدث خطأ ما.
 Feature.Moments.Label.MomentFailedToPostTitle,تعذَّر نشر اللحظة
 Feature.Moments.Label.MomentNoLongerAvailable,لم تعد هذه اللحظة متاحة.
-Feature.Moments.Label.MomentPublishedBody,جارٍ معالجة لحظتك
-Feature.Moments.Label.MomentPublishedTitle,جارٍ نشر لحظتك
+Feature.Moments.Label.MomentPublishedBody,تم نشر لحظتك بنجاح.
+Feature.Moments.Label.MomentPublishedTitle,تم نشر اللحظة
 Feature.Moments.Label.MomentRemovedBody,لقد انتهكت قواعد السلامة السارية لدينا، لذا لم تعد متاحة.
 Feature.Moments.Label.MomentRemovedTitle,أزلنا هذه اللحظة
 Feature.Moments.Label.MomentUnavailable,اللحظة غير متاحة
@@ -4434,6 +4446,7 @@ Feature.Moments.Label.VoicePlaceholder,اكتب ما تريد أن يقوله ت
 Feature.Moments.Label.VoiceTimeoutBody,انتهت المدة لإنشاء التعليق الصوتي.
 Feature.Moments.Label.VoiceTooManyNumbersError,يحتوي النص البرمجي على عدد كبير جدًا من الأرقام
 Feature.Moments.Label.WriteComment,اكتب تعليقًا
+Feature.Moments.PostInsights.Stats,
 Feature.Moments.Title.Comments,التعليقات
 Feature.Moments.Title.CommentsWithCappedCount,{count} فأكثر من التعليقات
 Feature.Moments.Title.CommentsWithCount,{count} من التعليقات
@@ -4441,6 +4454,7 @@ Feature.Moments.Title.EDPMomentIPReportInstructions,الإبلاغ في صفحة
 Feature.Moments.Title.GenerateTextFeedbackReason,ما الخطأ الذي حدث؟
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,هل تريد الخروج من إنشاء اللحظة؟
+Feature.Moments.Title.MomentPosting,جارٍ نشر لحظتك
 Feature.Moments.Title.MomentRemoved,تمت إزالة اللحظة
 Feature.Moments.Title.ReportPost,الإبلاغ عن المنشور
 Feature.Moments.Title.UnfollowConfirmationDialog,هل تريد إلغاء متابعة @{username}؟

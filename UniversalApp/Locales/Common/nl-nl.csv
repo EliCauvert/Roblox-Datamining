@@ -1431,6 +1431,7 @@ Feature.Accessibility.Heading.UiNavigationKeyBind,
 Feature.Accessibility.Heading.VREnvironmentSetting,VR-spelomgeving
 Feature.Accessibility.Label.AppThemeBadgeNew,Nieuw
 Feature.Accessibility.Label.AppThemeUnlockBanner,App-thema's ontgrendelen met Plus
+Feature.Accessibility.Menu.SelectModeToggle,Selectiemodus in-/uitschakelen
 Feature.Accessibility.PreferredTextSize.Default,
 Feature.Accessibility.PreferredTextSize.Largest,Grootst
 Feature.Accessibility.PreferredTransparency.Opaque,Ondoorzichtig
@@ -1548,6 +1549,7 @@ Feature.AccountSettings.Heading.Tab.BillingV2,
 Feature.AccountSettings.Heading.Tab.Notifications,Meldingen
 Feature.AccountSettings.Heading.Tab.ParentalControls,Ouderlijk toezicht
 Feature.AccountSettings.Heading.Tab.ParentalControlsV2,
+Feature.AccountSettings.Heading.Tab.PersonalizedRecommendations,Gepersonaliseerde aanbevelingen
 Feature.AccountSettings.Heading.Tab.Privacy,
 Feature.AccountSettings.Heading.Tab.PrivacyContentRestrictions,Privacy- en contentbeperkingen
 Feature.AccountSettings.Heading.Tab.Robux,Robux
@@ -2169,6 +2171,7 @@ Feature.Avatar.Label.Shorts,Shorts
 Feature.Avatar.Label.Shoulder,Schouder
 Feature.Avatar.Label.Skin,Huid
 Feature.Avatar.Label.Spawn,Spawnen
+Feature.Avatar.Label.SpawnEffect,Spawneffect
 Feature.Avatar.Label.SpawnEffects,Spawneffecten
 Feature.Avatar.Label.Sweater,Trui
 Feature.Avatar.Label.Sweaters,Truien
@@ -2548,6 +2551,7 @@ Feature.Build.Description.BuildReplyNotif,Ontvang een melding wanneer Build een 
 Feature.Build.Description.BuyRobuxToCreate,"Koop meer Robux om content te blijven maken, of wacht tot je gratis Build-tegoed morgen wordt gereset."
 Feature.Build.Description.BuyUsageOrWait,"Koop meer Build-tegoed met Robux, of wacht tot je dagelijkse limiet wordt gereset."
 Feature.Build.Description.CampaignRunDates,Je campagne loopt van {startDate} tot en met {endDate}
+Feature.Build.Description.CaptureWhilePlaytesting,Maak een opname tijdens de playtest en voeg deze vervolgens toe aan je prompt.
 Feature.Build.Description.ChooseAdCampaignLength,Kies hoelang je wilt dat je advertentie wordt weergegeven.
 Feature.Build.Description.ChoosePlaytesters,Kies vrienden om een voorbeeld van je spel te bekijken.
 Feature.Build.Description.CreateDeveloperProduct,"'{NAME}' maken voor {PRICE} Robux, niet in de uitverkoop."
@@ -2654,6 +2658,9 @@ Feature.Build.Label.BackToBuild,Terug naar Bouwen
 Feature.Build.Label.Building,Bezig met bouwen…
 Feature.Build.Label.CaptureLibrary,Opnamebibliotheek
 Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT} van {MAX_SELECTIONS} geselecteerd
+Feature.Build.Label.CaptureStepAddImages,Selecteer Afbeeldingen toevoegen om je opname toe te voegen
+Feature.Build.Label.CaptureStepPlaytest,Je game playtesten
+Feature.Build.Label.CaptureStepTapCamera,Selecteer de camera in de werkbalk Bouwen
 Feature.Build.Label.ContentRating,
 Feature.Build.Label.CreatedDate, {DAY} {MONTH} {YEAR} 
 Feature.Build.Label.CreatorHub,Creator Hub
@@ -2710,7 +2717,7 @@ Feature.Build.Label.OnSale,In de verkoop
 Feature.Build.Label.Pending,In behandeling
 Feature.Build.Label.PercentUsed,{PERCENT}% gebruikt
 Feature.Build.Label.PlayTime,Speeltijd
-Feature.Build.Label.PreviewsTab,Voorbeeldweergaven
+Feature.Build.Label.PreviewsTab,Playtests
 Feature.Build.Label.PreviouslyPublished,Eerder gepubliceerd
 Feature.Build.Label.Price,Prijs
 Feature.Build.Label.PriceUnavailable,--
@@ -3593,6 +3600,13 @@ Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes} m geleden
 Feature.ContentFeed.Timestamp.Now,nu
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks} w geleden
 Feature.CustomForms.Label.Percent,
+Feature.Denied.Denied.Action,
+Feature.Denied.Denied.Body,Voor de veiligheid van je account kunnen we je verzoek op dit moment niet voltooien. Probeer het opnieuw op een eerder gebruikt apparaat of neem contact op met support voor hulp.
+Feature.Denied.Denied.Header,Actie beperkt
+Feature.Denied.Denied.Wasm.GameJoin.Body,We hebben deze websessie om veiligheidsredenen beëindigd. Gebruik de Roblox-app om door te gaan met spelen.
+Feature.Denied.Denied.Wasm.GameJoin.Header,Doorgaan in de Roblox-app
+Feature.Denied.Denied.Wasm.InExperienceFeature.Body,Om veiligheidsredenen kun je deze functie niet op het web gebruiken. Schakel over naar de Roblox-app voor alle functies.
+Feature.Denied.Denied.Wasm.InExperienceFeature.Header,Deze functie is hier niet beschikbaar
 Feature.DevSubs.Action.CancelSubscription,Abonnement annuleren
 Feature.DevSubs.Action.RenewSubscription,Abonnement verlengen
 Feature.DevSubs.Label.ActiveSubscriptions,Actieve abonnementen
@@ -4475,6 +4489,7 @@ Feature.Moments.Label.VoicePlaceholder,Voer in wat je wilt dat je voice-over zeg
 Feature.Moments.Label.VoiceTimeoutBody,De tijdslimiet voor het genereren van de voice-over is bereikt.
 Feature.Moments.Label.VoiceTooManyNumbersError,Script bevat te veel getallen
 Feature.Moments.Label.WriteComment,Schrijf een reactie
+Feature.Moments.PostInsights.Stats,
 Feature.Moments.Title.Comments,
 Feature.Moments.Title.CommentsWithCappedCount,{count}+ reacties
 Feature.Moments.Title.CommentsWithCount,{count} reacties

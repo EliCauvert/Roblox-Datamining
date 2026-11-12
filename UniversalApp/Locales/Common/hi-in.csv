@@ -1429,6 +1429,7 @@ Feature.Accessibility.Heading.UiNavigationKeyBind,
 Feature.Accessibility.Heading.VREnvironmentSetting,VR एनवायरनमेंट
 Feature.Accessibility.Label.AppThemeBadgeNew,नया
 Feature.Accessibility.Label.AppThemeUnlockBanner,Plus सब्सक्रिप्शन के साथ ऐप थीम्स अनलॉक करें
+Feature.Accessibility.Menu.SelectModeToggle,'मोड चुनें' टॉगल
 Feature.Accessibility.PreferredTextSize.Default,
 Feature.Accessibility.PreferredTextSize.Largest,सबसे बड़ा
 Feature.Accessibility.PreferredTransparency.Opaque,अपारदर्शी
@@ -1546,6 +1547,7 @@ Feature.AccountSettings.Heading.Tab.BillingV2,
 Feature.AccountSettings.Heading.Tab.Notifications,नोटिफ़िकेशन
 Feature.AccountSettings.Heading.Tab.ParentalControls,पेरेंटल कंट्रोल
 Feature.AccountSettings.Heading.Tab.ParentalControlsV2,
+Feature.AccountSettings.Heading.Tab.PersonalizedRecommendations,पर्सनलाइज़ किए गए सुझाव
 Feature.AccountSettings.Heading.Tab.Privacy,
 Feature.AccountSettings.Heading.Tab.PrivacyContentRestrictions,प्राइवेसी और कॉन्टेंट से जुड़ी पाबंदियाँ
 Feature.AccountSettings.Heading.Tab.Robux,Robux
@@ -2167,6 +2169,7 @@ Feature.Avatar.Label.Shorts,शॉर्ट्स
 Feature.Avatar.Label.Shoulder,कंधा
 Feature.Avatar.Label.Skin,स्किन
 Feature.Avatar.Label.Spawn,स्पॉन
+Feature.Avatar.Label.SpawnEffect,स्पॉन इफ़ेक्ट
 Feature.Avatar.Label.SpawnEffects,स्पॉन इफ़ेक्ट्स
 Feature.Avatar.Label.Sweater,स्वेटर
 Feature.Avatar.Label.Sweaters,
@@ -2546,6 +2549,7 @@ Feature.Build.Description.BuildReplyNotif,बिल्ड से आपके �
 Feature.Build.Description.BuyRobuxToCreate,"क्रिएट करना जारी रखने के लिए, और Robux खरीदें या कल अपने मुफ़्त बिल्ड के इस्तेमाल के रीसेट होने का इंतज़ार करें."
 Feature.Build.Description.BuyUsageOrWait,Robux की मदद से बिल्ड का ज़्यादा इस्तेमाल खरीदें या अपनी रोज़ाना की लिमिट के रीसेट होने का इंतज़ार करें.
 Feature.Build.Description.CampaignRunDates,आपका कैंपेन {startDate} – {endDate} तक चलेगा
+Feature.Build.Description.CaptureWhilePlaytesting,"प्लेटेस्ट के दौरान एक कैप्चर लें, फिर उसे अपने प्रॉम्प्ट में जोड़ें."
 Feature.Build.Description.ChooseAdCampaignLength,चुनें कि आपको अपना ऐड कब तक चलाना है।
 Feature.Build.Description.ChoosePlaytesters,चुनें कि कौन-से फ़्रेंड्स आपका गेम प्रीव्यू कर सकते हैं.
 Feature.Build.Description.CreateDeveloperProduct,"{PRICE} Robux में ""{NAME}"" क्रिएट करें, बिक्री से हटाया गया."
@@ -2652,6 +2656,9 @@ Feature.Build.Label.BackToBuild,बिल्ड पर वापस जाएँ
 Feature.Build.Label.Building,बना रहा है...
 Feature.Build.Label.CaptureLibrary,कैप्चर लाइब्रेरी
 Feature.Build.Label.CaptureSelectionCount,{MAX_SELECTIONS} में से {SELECTED_COUNT} को चुना गया
+Feature.Build.Label.CaptureStepAddImages,"अपना कैप्चर अटैच करने के लिए, 'इमेज जोड़ें' चुनें"
+Feature.Build.Label.CaptureStepPlaytest,अपना गेम प्ले-टेस्ट करें
+Feature.Build.Label.CaptureStepTapCamera,'बिल्ड' टूलबार में कैमरा चुनें
 Feature.Build.Label.ContentRating,कॉन्टेंट रेटिंग
 Feature.Build.Label.CreatedDate,"{MONTH} {DAY}, {YEAR}"
 Feature.Build.Label.CreatorHub,Creator Hub
@@ -3591,6 +3598,13 @@ Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes}मि. पहले
 Feature.ContentFeed.Timestamp.Now,
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks}हफ़्ते पहले
 Feature.CustomForms.Label.Percent,
+Feature.Denied.Denied.Action,
+Feature.Denied.Denied.Body,"आपके अकाउंट की सुरक्षा के लिए, हम इस समय आपकी रिक्वेस्ट को पूरा नहीं कर पा रहे हैं. पहले इस्तेमाल किए गए डिवाइस पर फिर से कोशिश करें या मदद के लिए सपोर्ट टीम से संपर्क करें."
+Feature.Denied.Denied.Header,ऐक्शन प्रतिबंधित किया गया
+Feature.Denied.Denied.Wasm.GameJoin.Body,"हमने सुरक्षा कारणों से यह वेब सेशन खत्म कर दिया है. खेलना जारी रखने के लिए, Roblox ऐप का इस्तेमाल करें."
+Feature.Denied.Denied.Wasm.GameJoin.Header,Roblox ऐप में जारी रखें
+Feature.Denied.Denied.Wasm.InExperienceFeature.Body,"सुरक्षा कारणों से, इसका इस्तेमाल वेब पर नहीं किया जा सकता. सभी फ़ीचर्स का इस्तेमाल करने के लिए, Roblox ऐप पर जाएँ."
+Feature.Denied.Denied.Wasm.InExperienceFeature.Header,यह फ़ीचर यहाँ उपलब्ध नहीं है
 Feature.DevSubs.Action.CancelSubscription,सब्सक्रिप्शन कैंसिल करें
 Feature.DevSubs.Action.RenewSubscription,सब्सक्रिप्शन रिन्यू करें
 Feature.DevSubs.Label.ActiveSubscriptions,ऐक्टिव सब्सक्रिप्शंस
@@ -4473,6 +4487,7 @@ Feature.Moments.Label.VoicePlaceholder,"वह टेक्स्ट टाइ�
 Feature.Moments.Label.VoiceTimeoutBody,वॉइसओवर जेनरेशन टाइम आउट हो गया.
 Feature.Moments.Label.VoiceTooManyNumbersError,स्क्रिप्ट में बहुत ज़्यादा नंबर हैं
 Feature.Moments.Label.WriteComment,कमेंट लिखें
+Feature.Moments.PostInsights.Stats,
 Feature.Moments.Title.Comments,कमेंट्स
 Feature.Moments.Title.CommentsWithCappedCount,{count}+ कमेंट्स
 Feature.Moments.Title.CommentsWithCount,{count} कमेंट्स

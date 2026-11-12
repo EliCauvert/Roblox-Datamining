@@ -1449,6 +1449,7 @@ Feature.Accessibility.Heading.UiNavigationKeyBind,Bật/tắt nút điều hư�
 Feature.Accessibility.Heading.VREnvironmentSetting,Môi trường VR
 Feature.Accessibility.Label.AppThemeBadgeNew,Mới
 Feature.Accessibility.Label.AppThemeUnlockBanner,Mở khóa chủ đề của ứng dụng với gói Plus
+Feature.Accessibility.Menu.SelectModeToggle,Nút gạt Chế độ chọn
 Feature.Accessibility.PreferredTextSize.Default,
 Feature.Accessibility.PreferredTextSize.Largest,Lớn nhất
 Feature.Accessibility.PreferredTransparency.Opaque,Mờ
@@ -1566,6 +1567,7 @@ Feature.AccountSettings.Heading.Tab.BillingV2,Phương thức thanh toán
 Feature.AccountSettings.Heading.Tab.Notifications,Thông Báo
 Feature.AccountSettings.Heading.Tab.ParentalControls,Giám Sát Của Cha Mẹ
 Feature.AccountSettings.Heading.Tab.ParentalControlsV2,Giám sát của cha mẹ
+Feature.AccountSettings.Heading.Tab.PersonalizedRecommendations,Đề xuất cá nhân hóa
 Feature.AccountSettings.Heading.Tab.Privacy,Quyền Riêng Tư
 Feature.AccountSettings.Heading.Tab.PrivacyContentRestrictions,Quyền riêng tư và quy định hạn chế về nội dung
 Feature.AccountSettings.Heading.Tab.Robux,Robux
@@ -2187,7 +2189,8 @@ Feature.Avatar.Label.Shorts,Quần Ngắn
 Feature.Avatar.Label.Shoulder,Vai
 Feature.Avatar.Label.Skin,Da
 Feature.Avatar.Label.Spawn,Điểm hồi sinh
-Feature.Avatar.Label.SpawnEffects,Hiệu ứng hồi sinh
+Feature.Avatar.Label.SpawnEffect,Hiệu ứng hồi sinh
+Feature.Avatar.Label.SpawnEffects,
 Feature.Avatar.Label.Sweater,Áo Len
 Feature.Avatar.Label.Sweaters,
 Feature.Avatar.Label.Swim,Bơi
@@ -2566,6 +2569,7 @@ Feature.Build.Description.BuildReplyNotif,Nhận thông báo khi Build gửi ph�
 Feature.Build.Description.BuyRobuxToCreate,Hãy mua thêm Robux để tiếp tục sáng tạo hoặc chờ đến ngày mai để lượt sử dụng Build miễn phí của bạn được làm mới.
 Feature.Build.Description.BuyUsageOrWait,"Dùng Robux để mua thêm lượt sử dụng Build, hoặc đợi hạn mức hằng ngày được làm mới."
 Feature.Build.Description.CampaignRunDates,Chiến dịch của bạn sẽ diễn ra từ {startDate} – {endDate}
+Feature.Build.Description.CaptureWhilePlaytesting,"Chụp ảnh trong lúc chơi thử, rồi thêm ảnh đó vào câu lệnh của bạn."
 Feature.Build.Description.ChooseAdCampaignLength,Chọn thời gian bạn muốn chạy quảng cáo.
 Feature.Build.Description.ChoosePlaytesters,Chọn bạn bè để xem trước trò chơi của bạn.
 Feature.Build.Description.CreateDeveloperProduct,"Tạo ""{NAME}"" với giá {PRICE} Robux, không đăng bán."
@@ -2672,6 +2676,9 @@ Feature.Build.Label.BackToBuild,Quay lại phần Xây dựng
 Feature.Build.Label.Building,Đang xây dựng...
 Feature.Build.Label.CaptureLibrary,Thư viện ảnh/video
 Feature.Build.Label.CaptureSelectionCount,Đã chọn {SELECTED_COUNT}/{MAX_SELECTIONS}
+Feature.Build.Label.CaptureStepAddImages,Chọn Thêm hình ảnh để đính kèm ảnh chụp của bạn
+Feature.Build.Label.CaptureStepPlaytest,Chơi thử trò chơi của bạn
+Feature.Build.Label.CaptureStepTapCamera,Chọn camera trong thanh công cụ Dựng
 Feature.Build.Label.ContentRating,Mức phân loại nội dung
 Feature.Build.Label.CreatedDate,{DAY} {MONTH} năm {YEAR}
 Feature.Build.Label.CreatorHub,Trung tâm nhà sáng tạo
@@ -2728,7 +2735,7 @@ Feature.Build.Label.OnSale,Đang bán
 Feature.Build.Label.Pending,Đang chờ xử lý
 Feature.Build.Label.PercentUsed,Đã dùng {PERCENT}%
 Feature.Build.Label.PlayTime,Thời gian chơi
-Feature.Build.Label.PreviewsTab,Bản xem trước
+Feature.Build.Label.PreviewsTab,Thử nghiệm trò chơi
 Feature.Build.Label.PreviouslyPublished,Đã đăng trước đây
 Feature.Build.Label.Price,Giá
 Feature.Build.Label.PriceUnavailable,--
@@ -3611,6 +3618,13 @@ Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes} phút trước
 Feature.ContentFeed.Timestamp.Now,bây giờ
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks} tuần trước
 Feature.CustomForms.Label.Percent,
+Feature.Denied.Denied.Action,
+Feature.Denied.Denied.Body,"Vì lý do bảo mật tài khoản của bạn, lúc này chúng tôi không thể hoàn tất yêu cầu của bạn. Vui lòng thử lại trên thiết bị từng sử dụng trước đó hoặc liên hệ với bộ phận hỗ trợ để được trợ giúp."
+Feature.Denied.Denied.Header,Hành Động Bị Hạn Chế
+Feature.Denied.Denied.Wasm.GameJoin.Body,"Chúng tôi đã kết thúc phiên truy cập trên web này vì lý do bảo mật. Để tiếp tục chơi, hãy dùng ứng dụng Roblox."
+Feature.Denied.Denied.Wasm.GameJoin.Header,Tiếp tục trong ứng dụng Roblox
+Feature.Denied.Denied.Wasm.InExperienceFeature.Body,"Vì lý do bảo mật, bạn không thể sử dụng tính năng này trên web. Hãy chuyển sang ứng dụng Roblox để sử dụng toàn bộ tính năng."
+Feature.Denied.Denied.Wasm.InExperienceFeature.Header,Tính năng không được hỗ trợ trên nền tảng này
 Feature.DevSubs.Action.CancelSubscription,Hủy Bỏ Gói Đăng Ký
 Feature.DevSubs.Action.RenewSubscription,Tái Tục Gói Đăng Ký
 Feature.DevSubs.Label.ActiveSubscriptions,Gói Đăng Ký Đang Hoạt Động
@@ -4493,6 +4507,7 @@ Feature.Moments.Label.VoicePlaceholder,Nhập nội dung bạn muốn thuyết m
 Feature.Moments.Label.VoiceTimeoutBody,Đã hết thời gian chờ tạo phần thuyết minh.
 Feature.Moments.Label.VoiceTooManyNumbersError,Tập lệnh chứa quá nhiều chữ số
 Feature.Moments.Label.WriteComment,Viết bình luận
+Feature.Moments.PostInsights.Stats,
 Feature.Moments.Title.Comments,Bình luận
 Feature.Moments.Title.CommentsWithCappedCount,{count}+ bình luận
 Feature.Moments.Title.CommentsWithCount,{count} bình luận

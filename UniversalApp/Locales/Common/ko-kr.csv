@@ -1450,6 +1450,7 @@ Feature.Accessibility.Heading.UiNavigationKeyBind,
 Feature.Accessibility.Heading.VREnvironmentSetting,VR 환경
 Feature.Accessibility.Label.AppThemeBadgeNew,신규
 Feature.Accessibility.Label.AppThemeUnlockBanner,Plus로 앱 테마 잠금 해제
+Feature.Accessibility.Menu.SelectModeToggle,모드 전환 선택
 Feature.Accessibility.PreferredTextSize.Default,
 Feature.Accessibility.PreferredTextSize.Largest,최대
 Feature.Accessibility.PreferredTransparency.Opaque,불투명
@@ -1567,6 +1568,7 @@ Feature.AccountSettings.Heading.Tab.BillingV2,
 Feature.AccountSettings.Heading.Tab.Notifications,
 Feature.AccountSettings.Heading.Tab.ParentalControls,자녀 보호 기능
 Feature.AccountSettings.Heading.Tab.ParentalControlsV2,
+Feature.AccountSettings.Heading.Tab.PersonalizedRecommendations,맞춤 추천
 Feature.AccountSettings.Heading.Tab.Privacy,개인정보
 Feature.AccountSettings.Heading.Tab.PrivacyContentRestrictions,개인정보 및 콘텐츠 이용 제한
 Feature.AccountSettings.Heading.Tab.Robux,Robux
@@ -2188,7 +2190,8 @@ Feature.Avatar.Label.Shorts,반바지
 Feature.Avatar.Label.Shoulder,어깨
 Feature.Avatar.Label.Skin,피부
 Feature.Avatar.Label.Spawn,스폰
-Feature.Avatar.Label.SpawnEffects,스폰 효과
+Feature.Avatar.Label.SpawnEffect,스폰 효과
+Feature.Avatar.Label.SpawnEffects,
 Feature.Avatar.Label.Sweater,스웨터
 Feature.Avatar.Label.Sweaters,
 Feature.Avatar.Label.Swim,수영
@@ -2567,6 +2570,7 @@ Feature.Build.Description.BuildReplyNotif,Build에서 답변이 있을 때 알�
 Feature.Build.Description.BuyRobuxToCreate,"계속 제작하려면 Robux를 더 구매하거나, 내일 무료 Build 사용량이 초기화될 때까지 기다리세요."
 Feature.Build.Description.BuyUsageOrWait,"Robux로 Build 사용량을 더 구매하거나, 일일 한도가 초기화될 때까지 기다리세요."
 Feature.Build.Description.CampaignRunDates,캠페인은 {startDate}~{endDate} 에 실행됩니다.
+Feature.Build.Description.CaptureWhilePlaytesting,플레이테스트하는 동안 캡처한 후 프롬프트에 추가하세요.
 Feature.Build.Description.ChooseAdCampaignLength,광고 게재 기간을 선택하세요.
 Feature.Build.Description.ChoosePlaytesters,게임을 미리 볼 친구를 선택하세요.
 Feature.Build.Description.CreateDeveloperProduct,"{PRICE} Robux로 ""{NAME}""을(를) 만듭니다(판매 중단)."
@@ -2673,6 +2677,9 @@ Feature.Build.Label.BackToBuild,빌드로 돌아가기
 Feature.Build.Label.Building,제작 중...
 Feature.Build.Label.CaptureLibrary,캡처 라이브러리
 Feature.Build.Label.CaptureSelectionCount,{MAX_SELECTIONS}개 중 {SELECTED_COUNT}개 선택됨
+Feature.Build.Label.CaptureStepAddImages,이미지 추가하기를 선택하여 캡처 첨부
+Feature.Build.Label.CaptureStepPlaytest,내 게임 플레이테스트하기
+Feature.Build.Label.CaptureStepTapCamera,빌드 도구 모음에서 카메라 선택
 Feature.Build.Label.ContentRating,콘텐츠 등급
 Feature.Build.Label.CreatedDate,{YEAR}년 {MONTH}월 {DAY}일
 Feature.Build.Label.CreatorHub,크리에이터 허브
@@ -3613,6 +3620,13 @@ Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes}분 전
 Feature.ContentFeed.Timestamp.Now,
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks}주 전
 Feature.CustomForms.Label.Percent,
+Feature.Denied.Denied.Action,
+Feature.Denied.Denied.Body,계정 보안을 위해 이번에는 요청을 완료할 수 없습니다. 이전에 사용한 기기에서 다시 시도하세요. 도움이 필요하시면 지원 센터에 문의하세요.
+Feature.Denied.Denied.Header,제한된 액션
+Feature.Denied.Denied.Wasm.GameJoin.Body,보안상의 이유로 이 웹 세션을 종료했습니다. 계속 플레이하려면 Roblox 앱을 사용하세요.
+Feature.Denied.Denied.Wasm.GameJoin.Header,Roblox 앱에서 계속하기
+Feature.Denied.Denied.Wasm.InExperienceFeature.Body,보안상의 이유로 웹에서는 이 기능을 사용할 수 없습니다. 전체 기능을 사용하려면 Roblox 앱으로 전환하세요.
+Feature.Denied.Denied.Wasm.InExperienceFeature.Header,이 기능은 여기에서 이용하실 수 없습니다
 Feature.DevSubs.Action.CancelSubscription,가입 취소
 Feature.DevSubs.Action.RenewSubscription,가입 갱신
 Feature.DevSubs.Label.ActiveSubscriptions,활성화된 가입
@@ -4496,6 +4510,7 @@ Feature.Moments.Label.VoicePlaceholder,보이스오버에서 말하고자 하는
 Feature.Moments.Label.VoiceTimeoutBody,보이스오버 생성 시간이 초과되었습니다.
 Feature.Moments.Label.VoiceTooManyNumbersError,스크립트에 숫자가 너무 많습니다
 Feature.Moments.Label.WriteComment,코멘트를 남기세요
+Feature.Moments.PostInsights.Stats,
 Feature.Moments.Title.Comments,코멘트
 Feature.Moments.Title.CommentsWithCappedCount,코멘트 {count}개 이상
 Feature.Moments.Title.CommentsWithCount,코멘트 {count}개

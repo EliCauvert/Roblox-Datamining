@@ -1764,6 +1764,9 @@ Feature.ContentFeed.Timestamp.HoursAgo,{numHours}ч назад
 Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes}мин назад
 Feature.ContentFeed.Timestamp.Now,сейчас
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks}нед. назад
+Feature.Denied.Denied.Action,
+Feature.Denied.Denied.Body,В целях безопасности твеого аккаунта мы не можем выполнить данный запрос в данный момент. Повтори попытку на ранее использованном устройстве или обратись в Службу поддержки.
+Feature.Denied.Denied.Header,Ограниченное действие
 Feature.DevSubs.Action.CancelSubscription,Отменить подписку
 Feature.DevSubs.Action.RenewSubscription,Обновить подписку
 Feature.DevSubs.Label.ActiveSubscriptions,Активные подписки

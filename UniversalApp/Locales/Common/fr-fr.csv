@@ -1449,6 +1449,7 @@ Feature.Accessibility.Heading.UiNavigationKeyBind,
 Feature.Accessibility.Heading.VREnvironmentSetting,Environnement RV
 Feature.Accessibility.Label.AppThemeBadgeNew,Nouveau
 Feature.Accessibility.Label.AppThemeUnlockBanner,Débloque les thèmes de l'app avec Plus
+Feature.Accessibility.Menu.SelectModeToggle,Activer/désactiver le mode de sélection
 Feature.Accessibility.PreferredTextSize.Default,
 Feature.Accessibility.PreferredTextSize.Largest,Le plus grand
 Feature.Accessibility.PreferredTransparency.Opaque,Opaque
@@ -1566,6 +1567,7 @@ Feature.AccountSettings.Heading.Tab.BillingV2,
 Feature.AccountSettings.Heading.Tab.Notifications,Notifications
 Feature.AccountSettings.Heading.Tab.ParentalControls,Contrôles parentaux
 Feature.AccountSettings.Heading.Tab.ParentalControlsV2,
+Feature.AccountSettings.Heading.Tab.PersonalizedRecommendations,Recommandations personnalisées
 Feature.AccountSettings.Heading.Tab.Privacy,
 Feature.AccountSettings.Heading.Tab.PrivacyContentRestrictions,Restrictions de confidentialité et de contenu
 Feature.AccountSettings.Heading.Tab.Robux,Robux
@@ -2187,6 +2189,7 @@ Feature.Avatar.Label.Shorts,Shorts
 Feature.Avatar.Label.Shoulder,Épaules
 Feature.Avatar.Label.Skin,Peau
 Feature.Avatar.Label.Spawn,Apparition
+Feature.Avatar.Label.SpawnEffect,Effet d'apparition
 Feature.Avatar.Label.SpawnEffects,Effets d'apparition
 Feature.Avatar.Label.Sweater,Pull-over
 Feature.Avatar.Label.Sweaters,Pull-overs
@@ -2566,6 +2569,7 @@ Feature.Build.Description.BuildReplyNotif,Recevoir une notification lorsque tu r
 Feature.Build.Description.BuyRobuxToCreate,"Achète plus de Robux pour continuer à créer, ou attends que ton utilisation gratuite de la fonctionnalité Construire soit réinitialisée demain."
 Feature.Build.Description.BuyUsageOrWait,Achète plus de capacités d'utilisation de Construire avec des Robux ou attends que ta limite quotidienne soit réinitialisée.
 Feature.Build.Description.CampaignRunDates,Ta campagne se déroulera du {startDate} au {endDate} 
+Feature.Build.Description.CaptureWhilePlaytesting,"Fais une capture d'écran pendant que tu testes le jeu, puis ajoute-la à ton invite."
 Feature.Build.Description.ChooseAdCampaignLength,Choisis la durée de diffusion de ton annonce.
 Feature.Build.Description.ChoosePlaytesters,Choisis des amis pour tester ton jeu.
 Feature.Build.Description.CreateDeveloperProduct,Crée « {NAME} » pour {PRICE} Robux (hors vente).
@@ -2672,6 +2676,9 @@ Feature.Build.Label.BackToBuild,Retour à la construction
 Feature.Build.Label.Building,Construction...
 Feature.Build.Label.CaptureLibrary,Bibliothèque de captures
 Feature.Build.Label.CaptureSelectionCount,Sélection : {SELECTED_COUNT}/{MAX_SELECTIONS}
+Feature.Build.Label.CaptureStepAddImages,Sélectionne Ajouter des images pour joindre ta capture.
+Feature.Build.Label.CaptureStepPlaytest,Teste ton jeu
+Feature.Build.Label.CaptureStepTapCamera,Sélectionne Caméra dans la barre d'outils Construire.
 Feature.Build.Label.ContentRating,Classification du contenu
 Feature.Build.Label.CreatedDate,{DAY} {MONTH} {YEAR}
 Feature.Build.Label.CreatorHub,Hub Création
@@ -2728,7 +2735,7 @@ Feature.Build.Label.OnSale,En vente
 Feature.Build.Label.Pending,En attente
 Feature.Build.Label.PercentUsed,{PERCENT} % utilisé(s)
 Feature.Build.Label.PlayTime,Temps de jeu
-Feature.Build.Label.PreviewsTab,Prévisualisations
+Feature.Build.Label.PreviewsTab,Tests de jeu
 Feature.Build.Label.PreviouslyPublished,Publiée précédemment
 Feature.Build.Label.Price,Prix
 Feature.Build.Label.PriceUnavailable,--
@@ -3611,6 +3618,13 @@ Feature.ContentFeed.Timestamp.MinutesAgo,Il y a {numMinutes} m
 Feature.ContentFeed.Timestamp.Now,maintenant
 Feature.ContentFeed.Timestamp.WeeksAgo,Il y a {numWeeks} sem
 Feature.CustomForms.Label.Percent,
+Feature.Denied.Denied.Action,
+Feature.Denied.Denied.Body,"Pour la sécurité de ton compte, nous ne pouvons pas répondre à ta demande pour le moment. Essaie à nouveau sur un appareil déjà utilisé ou contacte l'assistance pour obtenir de l'aide."
+Feature.Denied.Denied.Header,Action restreinte
+Feature.Denied.Denied.Wasm.GameJoin.Body,"Pour des raisons de sécurité, nous avons mis fin à cette session Web. Utilise l'application Roblox si tu veux continuer ta partie."
+Feature.Denied.Denied.Wasm.GameJoin.Header,Continuer dans l'application Roblox
+Feature.Denied.Denied.Wasm.InExperienceFeature.Body,"Pour des raisons de sécurité, cette fonctionnalité n'est pas disponible sur le Web. Passe à l'application Roblox pour accéder à toutes les fonctionnalités."
+Feature.Denied.Denied.Wasm.InExperienceFeature.Header,Cette fonctionnalité n'est pas disponible ici
 Feature.DevSubs.Action.CancelSubscription,Annuler l'abonnement
 Feature.DevSubs.Action.RenewSubscription,Renouveler l'abonnement
 Feature.DevSubs.Label.ActiveSubscriptions,Abonnements actifs
@@ -4493,6 +4507,7 @@ Feature.Moments.Label.VoicePlaceholder,Saisis le texte à faire prononcer par ta
 Feature.Moments.Label.VoiceTimeoutBody,La génération de la voix off a expiré.
 Feature.Moments.Label.VoiceTooManyNumbersError,Le script contient trop de chiffres
 Feature.Moments.Label.WriteComment,Écrire un commentaire
+Feature.Moments.PostInsights.Stats,
 Feature.Moments.Title.Comments,Commentaires
 Feature.Moments.Title.CommentsWithCappedCount,+{count} commentaires
 Feature.Moments.Title.CommentsWithCount,{count} commentaires

@@ -1449,6 +1449,7 @@ Feature.Accessibility.Heading.UiNavigationKeyBind,Tombol navigasi UI
 Feature.Accessibility.Heading.VREnvironmentSetting,Lingkungan VR
 Feature.Accessibility.Label.AppThemeBadgeNew,Baru
 Feature.Accessibility.Label.AppThemeUnlockBanner,Buka tema aplikasi dengan Plus
+Feature.Accessibility.Menu.SelectModeToggle,Tombol Alih Mode Pilih
 Feature.Accessibility.PreferredTextSize.Default,
 Feature.Accessibility.PreferredTextSize.Largest,Terbesar
 Feature.Accessibility.PreferredTransparency.Opaque,Buram
@@ -1566,6 +1567,7 @@ Feature.AccountSettings.Heading.Tab.BillingV2,Metode pembayaran
 Feature.AccountSettings.Heading.Tab.Notifications,Notifikasi
 Feature.AccountSettings.Heading.Tab.ParentalControls,Kendali Orang Tua
 Feature.AccountSettings.Heading.Tab.ParentalControlsV2,Kendali orang tua
+Feature.AccountSettings.Heading.Tab.PersonalizedRecommendations,Rekomendasi yang dipersonalisasi
 Feature.AccountSettings.Heading.Tab.Privacy,
 Feature.AccountSettings.Heading.Tab.PrivacyContentRestrictions,Privasi & pembatasan konten
 Feature.AccountSettings.Heading.Tab.Robux,Robux
@@ -2187,7 +2189,8 @@ Feature.Avatar.Label.Shorts,Celana Pendek
 Feature.Avatar.Label.Shoulder,Bahu
 Feature.Avatar.Label.Skin,Kulit
 Feature.Avatar.Label.Spawn,Spawn
-Feature.Avatar.Label.SpawnEffects,Efek Spawn
+Feature.Avatar.Label.SpawnEffect,Efek Spawn
+Feature.Avatar.Label.SpawnEffects,
 Feature.Avatar.Label.Sweater,Sweater
 Feature.Avatar.Label.Sweaters,
 Feature.Avatar.Label.Swim,Renang
@@ -2566,6 +2569,7 @@ Feature.Build.Description.BuildReplyNotif,Dapatkan notifikasi saat Build memilik
 Feature.Build.Description.BuyRobuxToCreate,"Beli lebih banyak Robux untuk terus berkreasi, atau tunggu hingga kuota penggunaan Build gratismu direset besok."
 Feature.Build.Description.BuyUsageOrWait,"Beli lebih banyak kuota penggunaan Build dengan Robux, atau tunggu hingga batas harianmu direset."
 Feature.Build.Description.CampaignRunDates,Kampanyemu akan berlangsung {startDate}—{endDate}
+Feature.Build.Description.CaptureWhilePlaytesting,"Ambil screenshot saat playtest, lalu tambahkan ke prompt-mu."
 Feature.Build.Description.ChooseAdCampaignLength,Pilih durasi yang kamu inginkan untuk menayangkan iklanmu.
 Feature.Build.Description.ChoosePlaytesters,Pilih teman untuk melihat preview game-mu.
 Feature.Build.Description.CreateDeveloperProduct,"Buat ""{NAME}"" dengan membayar {PRICE} Robux, tidak dijual."
@@ -2672,6 +2676,9 @@ Feature.Build.Label.BackToBuild,Kembali ke Build
 Feature.Build.Label.Building,Membangun...
 Feature.Build.Label.CaptureLibrary,Perpustakaan Media
 Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT} dari {MAX_SELECTIONS} dipilih
+Feature.Build.Label.CaptureStepAddImages,Pilih Tambahkan gambar untuk melampirkan mediamu
+Feature.Build.Label.CaptureStepPlaytest,Playtest game-mu
+Feature.Build.Label.CaptureStepTapCamera,Pilih kamera di toolbar Build
 Feature.Build.Label.ContentRating,Rating konten
 Feature.Build.Label.CreatedDate,"{DAY} {MONTH}, {YEAR}"
 Feature.Build.Label.CreatorHub,Pusat Kreator
@@ -2728,7 +2735,7 @@ Feature.Build.Label.OnSale,Dijual
 Feature.Build.Label.Pending,Pending
 Feature.Build.Label.PercentUsed,{PERCENT}% digunakan
 Feature.Build.Label.PlayTime,Waktu bermain
-Feature.Build.Label.PreviewsTab,Pratinjau
+Feature.Build.Label.PreviewsTab,
 Feature.Build.Label.PreviouslyPublished,Dipublikasikan sebelumnya
 Feature.Build.Label.Price,Harga
 Feature.Build.Label.PriceUnavailable,--
@@ -3609,6 +3616,13 @@ Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes} menit lalu
 Feature.ContentFeed.Timestamp.Now,sekarang
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks} minggu lalu
 Feature.CustomForms.Label.Percent,
+Feature.Denied.Denied.Action,
+Feature.Denied.Denied.Body,"Demi keamanan akunmu, kami tidak dapat memenuhi permintaanmu saat ini. Coba lagi di perangkat yang sebelumnya digunakan atau hubungi dukungan pelanggan untuk meminta bantuan."
+Feature.Denied.Denied.Header,Tindakan Dibatasi
+Feature.Denied.Denied.Wasm.GameJoin.Body,"Kami sudah mengakhiri sesi web ini karena alasan keamanan. Untuk terus bermain, gunakan aplikasi Roblox."
+Feature.Denied.Denied.Wasm.GameJoin.Header,Lanjutkan di aplikasi Roblox
+Feature.Denied.Denied.Wasm.InExperienceFeature.Body,"Karena alasan keamanan, kamu tidak dapat menggunakannya di web. Beralih ke aplikasi Roblox untuk mengakses semua fitur."
+Feature.Denied.Denied.Wasm.InExperienceFeature.Header,Fitur ini tidak tersedia di sini
 Feature.DevSubs.Action.CancelSubscription,Batalkan Subscription
 Feature.DevSubs.Action.RenewSubscription,Perpanjang Subscription
 Feature.DevSubs.Label.ActiveSubscriptions,Subscription Aktif
@@ -4491,6 +4505,7 @@ Feature.Moments.Label.VoicePlaceholder,Ketik apa yang ingin dikatakan oleh voice
 Feature.Moments.Label.VoiceTimeoutBody,Waktu pembuatan voiceover habis.
 Feature.Moments.Label.VoiceTooManyNumbersError,Skrip berisi terlalu banyak angka
 Feature.Moments.Label.WriteComment,Tulis komentar
+Feature.Moments.PostInsights.Stats,
 Feature.Moments.Title.Comments,Komentar
 Feature.Moments.Title.CommentsWithCappedCount,{count}+ komentar
 Feature.Moments.Title.CommentsWithCount,{count} komentar

@@ -1,4 +1,5 @@
-﻿local FFlagViewRecyclerReact08 = require(script:FindFirstAncestor("ViewRecyclerReact").Flags).FFlagViewRecyclerReact08
+﻿local FFlagViewRecyclerReact084 = require(script:FindFirstAncestor("ViewRecyclerReact").Flags).FFlagViewRecyclerReact084
+local FFlagViewRecyclerReact08 = require(script:FindFirstAncestor("ViewRecyclerReact").Flags).FFlagViewRecyclerReact08
 local ViewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
 local ComposedRecyclableViewModule = require(ViewRecyclerReact.ReactAdapter.Private.ComposedRecyclableView)
 local ReactModule = require(ViewRecyclerReact.Parent.React)
@@ -7,10 +8,25 @@ local SignalsModule = require(ViewRecyclerReact.Parent.Signals)
 local SelectViewTypeModule = require(ViewRecyclerReact.ReactAdapter.Private.selectViewType)
 
 return function(p1)
-	-- upvalues: FFlagViewRecyclerReact08 (copy), ReactModule (copy), RecyclableViewRegistryModule (copy), SelectViewTypeModule (copy), ComposedRecyclableViewModule (copy), SignalsModule (copy)
+	-- upvalues: FFlagViewRecyclerReact084 (copy), ReactModule (copy), RecyclableViewRegistryModule (copy), SelectViewTypeModule (copy), ComposedRecyclableViewModule (copy), FFlagViewRecyclerReact08 (copy), SignalsModule (copy)
 	local SelectedFunction = p1.selected
 	local Views = p1.views
 	
+	if FFlagViewRecyclerReact084 then
+		return ReactModule.createElement(ComposedRecyclableViewModule, {
+			viewType = ReactModule.useMemo(function()
+				-- upvalues: Views (copy), RecyclableViewRegistryModule (upval), SelectViewTypeModule (upval), SelectedFunction (copy)
+				for i, view in Views do
+					assert(RecyclableViewRegistryModule.isRegistered(view), `RecyclableViewSwitch: views.{i} is not a Recyclable view type`)
+				end
+				return SelectViewTypeModule(SelectedFunction, function(p2)
+					-- upvalues: Views (upval)
+					return if p2 == nil then nil else Views[p2]
+				end)
+			end, { SelectedFunction, Views }),
+			itemSignal = p1.itemSignal
+		})
+	end
 	if FFlagViewRecyclerReact08 then
 		return ReactModule.createElement(ComposedRecyclableViewModule, {
 			viewType = ReactModule.useMemo(function()
