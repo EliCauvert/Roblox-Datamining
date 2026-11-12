@@ -6,6 +6,15 @@ local GetAllInstancesIsAModule = require(Parent.util.getAllInstancesIsA)
 local R15plusUtilsModule = require(Parent.util.R15plusUtils)
 local GetEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule = require(Parent.flags.getEngineFeatureEngineUGCValidateInstanceTreesEquivalent)
 local ShouldValidateR15LegacyDuplicateModule = require(Parent.util.shouldValidateR15LegacyDuplicate)
+local Categories = {
+	ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+	ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
+}
+local RequiredData = {
+	ValidationEnumsModule.SharedDataMember.rootInstance,
+	ValidationEnumsModule.SharedDataMember.uploadEnum,
+	ValidationEnumsModule.SharedDataMember.consumerConfig
+}
 local UGCValidationRemoveHRDBlocker = game:DefineFastFlag("UGCValidationRemoveHRDBlocker", false)
 
 local function fillBoneTreeFlatList(Bone, p1, List)
@@ -113,15 +122,8 @@ local function validateBonesForRoot(R15LegacyDuplicateRoot, p3)
 end
 
 return {
-	categories = {
-		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
-	},
-	requiredData = {
-		ValidationEnumsModule.SharedDataMember.rootInstance,
-		ValidationEnumsModule.SharedDataMember.uploadEnum,
-		ValidationEnumsModule.SharedDataMember.consumerConfig
-	},
+	categories = Categories,
+	requiredData = RequiredData,
 	fflag = R15plusUtilsModule.checkFlagEnabledForAllowHrd,
 	run = function(p4, p5)
 		-- upvalues: validateBonesForRoot (copy), GetEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule (copy), ShouldValidateR15LegacyDuplicateModule (copy), ErrorSourceStringsModule (copy)

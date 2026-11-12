@@ -4,6 +4,17 @@ local _ = require(Parent.util.Types)
 local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 local GetFStringUGCValidateMaxAnimationMovementPerPartModule = require(Parent.flags.GetFStringUGCValidateMaxAnimationMovementPerPart)
+local Categories = {
+	ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
+	ValidationEnumsModule.UploadCategory.ANIMATION
+}
+local RequiredData = {
+	ValidationEnumsModule.SharedDataMember.curveAnimations,
+	ValidationEnumsModule.SharedDataMember.curveAnimComputedFrames
+}
+local PrereqTests = {
+	ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
+}
 
 local function validateCurveAnimClip(p1, p2)
 	-- upvalues: ConstantsModule (copy), GetFStringUGCValidateMaxAnimationMovementPerPartModule (copy), ErrorSourceStringsModule (copy)
@@ -34,18 +45,10 @@ local function validateCurveAnimClip(p1, p2)
 end
 
 return {
-	categories = {
-		ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
-		ValidationEnumsModule.UploadCategory.ANIMATION
-	},
-	requiredData = {
-		ValidationEnumsModule.SharedDataMember.curveAnimations,
-		ValidationEnumsModule.SharedDataMember.curveAnimComputedFrames
-	},
+	categories = Categories,
+	requiredData = RequiredData,
 	expectedFailures = {},
-	prereqTests = {
-		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
-	},
+	prereqTests = PrereqTests,
 	run = function(p3, p4)
 		-- upvalues: validateCurveAnimClip (copy)
 		for _, curveAnimComputedFrame in p4.curveAnimComputedFrames do

@@ -52,12 +52,12 @@ local _ = function(p1, List): boolean
 	return true
 end
 
-local Callback1: ((any) -> any)? = nil
-local Callback2: ((any, any) -> any)? = nil
 local Callback: ((any) -> any)? = nil
+local Callback1: ((any, any) -> any)? = nil
+local Callback2: ((any) -> any)? = nil
 
 if FFlagViewRecyclerReact084 then
-	Callback1 = function(List)
+	Callback = function(List)
 		-- upvalues: ReactModule (copy), RecyclableViewContextModule (copy)
 		local Buffer = table.create(#(List or {}) + 1)
 		local UseContextResult = ReactModule.useContext(RecyclableViewContextModule)
@@ -72,7 +72,7 @@ if FFlagViewRecyclerReact084 then
 		return Buffer
 	end
 	
-	Callback2 = function(List, p2)
+	Callback1 = function(List, p2)
 		local Buffer = table.create(#List)
 		
 		for i, value in List do
@@ -81,7 +81,7 @@ if FFlagViewRecyclerReact084 then
 		return Buffer
 	end
 else
-	Callback = function(List)
+	Callback2 = function(List)
 		-- upvalues: ReactModule (copy), RecyclableViewContextModule (copy), SignalsModule (copy)
 		local UseContextResult = ReactModule.useContext(RecyclableViewContextModule)
 		assert(type(UseContextResult) == "table", "Recycling hooks must be called within a Recyclable view")
@@ -156,16 +156,16 @@ else
 	end
 end
 function config.useRecyclingState(Callback3, p3, ResetCallback)
-	-- upvalues: FFlagViewRecyclerReact084 (copy), Callback1 (ref), Callback2 (ref), Callback (ref), ReactModule (copy), SignalsModule (copy)
+	-- upvalues: FFlagViewRecyclerReact084 (copy), Callback (ref), Callback1 (ref), Callback2 (ref), ReactModule (copy), SignalsModule (copy)
 	local v1 = nil
 	local v2 = nil
 	local Token = nil
 	
 	if FFlagViewRecyclerReact084 then
-		v1 = Callback1(p3)
-		v2 = Callback2(v1, false)
+		v1 = Callback(p3)
+		v2 = Callback1(v1, false)
 	else
-		Token = Callback(p3)
+		Token = Callback2(p3)
 	end
 	local UseStateResult, UseStateResult2 = ReactModule.useState(function()
 		-- upvalues: FFlagViewRecyclerReact084 (upval), Token (ref), v2 (ref), Callback3 (copy)
@@ -215,10 +215,10 @@ function config.useRecyclingState(Callback3, p3, ResetCallback)
 			UseRefResult.current = { initialState = Callback3, resetCallback = ResetCallback }
 		end)
 		ReactModule.useLayoutEffect(function()
-			-- upvalues: SignalsModule (upval), Callback2 (upval), v1 (ref), UseStateResult2 (copy), UseRefResult (ref)
+			-- upvalues: SignalsModule (upval), Callback1 (upval), v1 (ref), UseStateResult2 (copy), UseRefResult (ref)
 			return SignalsModule.createEffect(function(p4)
-				-- upvalues: Callback2 (upval), v1 (upval), UseStateResult2 (upval), UseRefResult (upval)
-				local CallbackResult = Callback2(v1, p4)
+				-- upvalues: Callback1 (upval), v1 (upval), UseStateResult2 (upval), UseRefResult (upval)
+				local CallbackResult = Callback1(v1, p4)
 				UseStateResult2(function(p5)
 					-- upvalues: CallbackResult (copy), UseRefResult (upval)
 					local Values = p5.values
@@ -307,23 +307,23 @@ function config.useRecyclingState(Callback3, p3, ResetCallback)
 end
 
 function config.useRecyclingSignal(Callback3, p4, Callback4)
-	-- upvalues: FFlagViewRecyclerReact084 (copy), Callback1 (ref), Callback (ref), ReactModule (copy), SignalsModule (copy), Callback2 (ref)
+	-- upvalues: FFlagViewRecyclerReact084 (copy), Callback (ref), Callback2 (ref), ReactModule (copy), SignalsModule (copy), Callback1 (ref)
 	local v5 = nil
 	local CommittedToken = nil
 	
 	if FFlagViewRecyclerReact084 then
-		v5 = Callback1(p4)
+		v5 = Callback(p4)
 	else
-		CommittedToken = Callback(p4)
+		CommittedToken = Callback2(p4)
 	end
 	local UseStateResult = ReactModule.useState(function()
-		-- upvalues: SignalsModule (upval), Callback3 (copy), FFlagViewRecyclerReact084 (upval), Callback2 (upval), v5 (ref), CommittedToken (ref)
+		-- upvalues: SignalsModule (upval), Callback3 (copy), FFlagViewRecyclerReact084 (upval), Callback1 (upval), v5 (ref), CommittedToken (ref)
 		local Signal, Signal2 = SignalsModule.createSignal(if type(Callback3) == "function" then Callback3() else Callback3)
 		
 		return {
 			getter = Signal,
 			setter = Signal2,
-			values = if FFlagViewRecyclerReact084 then Callback2(v5, false) else nil,
+			values = if FFlagViewRecyclerReact084 then Callback1(v5, false) else nil,
 			unmounted = not FFlagViewRecyclerReact084 and nil,
 			committedToken = if FFlagViewRecyclerReact084 then nil else CommittedToken
 		}
@@ -348,10 +348,10 @@ function config.useRecyclingSignal(Callback3, p4, Callback4)
 			end
 		end, { UseStateResult })
 		ReactModule.useLayoutEffect(function()
-			-- upvalues: SignalsModule (upval), Callback2 (upval), v5 (ref), UseStateResult (copy), UseRefResult (ref)
+			-- upvalues: SignalsModule (upval), Callback1 (upval), v5 (ref), UseStateResult (copy), UseRefResult (ref)
 			return SignalsModule.createEffect(function(p5)
-				-- upvalues: Callback2 (upval), v5 (upval), UseStateResult (upval), UseRefResult (upval)
-				local CallbackResult = Callback2(v5, p5)
+				-- upvalues: Callback1 (upval), v5 (upval), UseStateResult (upval), UseRefResult (upval)
+				local CallbackResult = Callback1(v5, p5)
 				local Values = UseStateResult.values
 				local Flag = nil
 				

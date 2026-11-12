@@ -31,8 +31,9 @@ return {
 					Console.error(Value)
 				end
 				local ComponentName = if Source == nil then nil else GetComponentNameFunction(Source.type)
+				local Text: string = if ComponentName then "The above error occurred in the <" .. tostring(ComponentName) .. "> component:" else "The above error occurred in one of your React components:"
 				local ComponentName1 = GetComponentNameFunction(p1.type)
-				Console.error((if ComponentName then "The above error occurred in the <" .. tostring(ComponentName) .. "> component:" else "The above error occurred in one of your React components:") .. "\n" .. Stack .. "\n\n" .. (if ComponentName1 then "React will try to recreate this component tree from scratch " .. "using the error boundary you provided, " .. ComponentName1 .. "." else "Consider adding an error boundary to your tree to customize error handling behavior.\nVisit https://reactjs.org/link/error-boundaries to learn more about error boundaries."))
+				Console.error(Text .. "\n" .. Stack .. "\n\n" .. (if ComponentName1 then "React will try to recreate this component tree from scratch " .. "using the error boundary you provided, " .. ComponentName1 .. "." else "Consider adding an error boundary to your tree to customize error handling behavior.\nVisit https://reactjs.org/link/error-boundaries to learn more about error boundaries."))
 			else
 				Console.error(InspectFunction(Value))
 			end

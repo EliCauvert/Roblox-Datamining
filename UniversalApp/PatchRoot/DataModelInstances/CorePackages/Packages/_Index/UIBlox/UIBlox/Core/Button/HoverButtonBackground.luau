@@ -3,11 +3,12 @@ local Parent1 = Parent.Parent.Parent
 local RoactModule = require(Parent1.Roact)
 local TModule = require(Parent1.t)
 local ImageSetComponentModule = require(Parent.ImageSet.ImageSetComponent)
+local ValidateImageModule = require(Parent.ImageSet.Validator.validateImage)
 local WithStyleModule = require(Parent.Style.withStyle)
 local HoverButtonBackground = RoactModule.PureComponent:extend("HoverButtonBackground")
 HoverButtonBackground.validateProps = TModule.strictInterface({
 	sidePadding = TModule.optional(TModule.number),
-	image = TModule.optional((require(Parent.ImageSet.Validator.validateImage))),
+	image = TModule.optional(ValidateImageModule),
 	sliceCenter = TModule.optional(TModule.Rect)
 })
 

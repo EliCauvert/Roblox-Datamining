@@ -2065,7 +2065,7 @@ Feature.Avatar.Label.FaceMakeup,
 Feature.Avatar.Label.FacialAnimation,Hiệu ứng khuôn mặt
 Feature.Avatar.Label.Fall,Té
 Feature.Avatar.Label.FallAnimations,Hiệu Ứng Té
-Feature.Avatar.Label.FromMarketplace,Từ Chợ
+Feature.Avatar.Label.FromMarketplace,Kết quả từ Chợ
 Feature.Avatar.Label.Front,Phía Trước
 Feature.Avatar.Label.FullBody,Toàn thân
 Feature.Avatar.Label.FullMasks,Mặt nạ che kín mặt
@@ -2466,6 +2466,7 @@ Feature.Build.Action.Resume,
 Feature.Build.Action.Retry,
 Feature.Build.Action.Revert,Trả về phiên bản trước
 Feature.Build.Action.Save,
+Feature.Build.Action.SaveFilters,
 Feature.Build.Action.SetDailyLimit,Thiết lập hạn mức hằng ngày
 Feature.Build.Action.SetLimit,Thiết lập hạn mức
 Feature.Build.Action.Settings,
@@ -4333,7 +4334,7 @@ Feature.Moments.Action.AddMusic,Thêm nhạc
 Feature.Moments.Action.AddSticker,Thêm nhãn dán
 Feature.Moments.Action.AddText,Thêm văn bản
 Feature.Moments.Action.AddVoice,Thêm giọng nói
-Feature.Moments.Action.Analytics,Dữ liệu phân tích
+Feature.Moments.Action.Analytics,Xem số liệu thống kê
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
@@ -4375,6 +4376,7 @@ Feature.Moments.Action.ViewOtherFeed,Xem bảng tin khác
 Feature.Moments.Action.ViewRecommended,Xem khoảnh khắc được đề xuất
 Feature.Moments.Action.ViewTrending,Xem khoảnh khắc thịnh hành
 Feature.Moments.Body.EDPMomentIPReportInstructions,"Để báo cáo trường hợp vi phạm về tài sản trí tuệ trong Khoảnh khắc này, hãy chuyển đến trang chi tiết của trò chơi."
+Feature.Moments.Body.MomentPosting,Khoảnh khắc của bạn đang được xử lý.
 Feature.Moments.Description.CommunityStandards,Xem Tiêu chuẩn cộng đồng để biết thêm thông tin về những điều bạn được phép và không được phép nói.
 Feature.Moments.Description.EmptyCapturesLibrary,Ảnh chụp/video quay màn hình của bạn sẽ xuất hiện ở đây.
 Feature.Moments.Description.FollowingCaughtUpBody,Bạn đã xem hết Khoảnh khắc mới trong bảng tin này. Hãy chuyển sang bảng tin khác để xem thêm.
@@ -4384,11 +4386,14 @@ Feature.Moments.Description.GenerateTextFeedbackDisclosure,Do AI tạo. Vui lòn
 Feature.Moments.Description.HowToCaptureStep1,"Tham gia Trải nghiệm có bật tính năng Chụp ảnh/quay màn hình và chọn menu, có hình ba dấu gạch ngang"
 Feature.Moments.Description.HowToCaptureStep2,Bật các nút điều khiển Chụp ảnh/quay màn hình
 Feature.Moments.Description.HowToCaptureStep3,Chụp ảnh và quay màn hình trong quá trình trải nghiệm trò chơi
+Feature.Moments.Description.LeaveAvatarMomentsCreation,"Mọi thay đổi bạn đã thực hiện sẽ biến mất, nhưng trang phục của bạn sẽ không thay đổi."
 Feature.Moments.Description.LeaveMomentsCreation,"Mọi thay đổi bạn đã thực hiện sẽ biến mất, nhưng bạn vẫn có thể tìm lại bản ghi này trong thư viện <b>Bản ghi</b> của mình."
+Feature.Moments.Description.MomentsOffBody,Hãy nhờ cha mẹ bật tính năng Khoảnh khắc trong phần giám sát của cha mẹ nhé.
 Feature.Moments.Description.NoMusicResults,Không tìm thấy nhạc
 Feature.Moments.Description.NonInfiniteScrollEndBody,Chúng tôi đã tạm dừng bảng tin của bạn. Bạn có thể chọn tiếp tục xem nếu muốn.
 Feature.Moments.Description.NothingHereYet,Chưa có gì ở đây...
 Feature.Moments.Description.PublishMoment,Mô tả Khoảnh khắc của bạn
+Feature.Moments.Description.TimeLimitReachedBody,Giới hạn được áp dụng dựa trên độ tuổi. Hãy xem Khoảnh khắc vào ngày mai nhé.
 Feature.Moments.Description.TooManyUploads,Bạn đã tải lên quá nhiều video cho hôm nay. Hãy thử lại vào ngày mai.
 Feature.Moments.Disclaimer.EveryoneMoments,Ai trong Khoảnh khắc cũng có thể xem nội dung được đăng
 Feature.Moments.Label.All,
@@ -4459,6 +4464,7 @@ Feature.Moments.Label.MomentRemovedTitle,Chúng tôi đã xóa Khoảnh khắc n
 Feature.Moments.Label.MomentUnavailable,Khoảnh khắc không tồn tại
 Feature.Moments.Label.MomentUnavailableDefault,Khoảnh khắc này không tồn tại.
 Feature.Moments.Label.MomentsExperienceName,
+Feature.Moments.Label.MomentsOffTitle,Khoảnh khắc đã bị tắt
 Feature.Moments.Label.Music,Âm nhạc
 Feature.Moments.Label.NoCommentsYet,Chưa có bình luận nào
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Còn nhiều Khoảnh khắc khác để xem
@@ -4488,6 +4494,7 @@ Feature.Moments.Label.TextGenerationFailedBody,Không tạo được văn bản.
 Feature.Moments.Label.TextGenerationFailedTitle,Tạo không thành công
 Feature.Moments.Label.TextGenerationFilteredBody,Không thể tạo văn bản cho video đã quay này vì nội dung đã bị lọc.
 Feature.Moments.Label.TextGenerationFilteredTitle,Nội dung tạo sinh bị chặn
+Feature.Moments.Label.TimeLimitReachedTitle,Bạn đã đạt đến giới hạn thời gian cho Khoảnh khắc
 Feature.Moments.Label.Tone,Giọng điệu
 Feature.Moments.Label.Tone.Cinematic,Điện ảnh
 Feature.Moments.Label.Tone.Funny,Hài hước
@@ -4515,6 +4522,7 @@ Feature.Moments.Title.EDPMomentIPReportInstructions,Báo cáo trên trang chi ti
 Feature.Moments.Title.GenerateTextFeedbackReason,Đã xảy ra vấn đề gì?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Rời khỏi quá trình tạo Khoảnh khắc?
+Feature.Moments.Title.MomentPosting,
 Feature.Moments.Title.MomentRemoved,Đã xóa Khoảnh khắc
 Feature.Moments.Title.ReportPost,Báo cáo bài đăng
 Feature.Moments.Title.UnfollowConfirmationDialog,Hủy theo dõi @{username}?
@@ -5700,6 +5708,8 @@ Feature.UniversalShareSheet.Response.SharedMessage,Tin nhắn đã được gử
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} người khác
 Feature.UserLibrary.Label.MyLibrary,Thư viện của tôi
+Feature.VIPServer.Message.TooManyFreeServersOnGame,Bạn không thể tạo thêm máy chủ riêng tư miễn phí trong trải nghiệm này.
+Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Số lượng máy chủ riêng tư miễn phí có thể hoạt động cùng lúc đã đạt mức tối đa. Vui lòng tắt máy chủ khác trước.
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,Thêm số điện thoại vào Cuộc nói chuyện
 Feature.VerificationUpsell.Action.ChangeEmail,Thay Đổi Email

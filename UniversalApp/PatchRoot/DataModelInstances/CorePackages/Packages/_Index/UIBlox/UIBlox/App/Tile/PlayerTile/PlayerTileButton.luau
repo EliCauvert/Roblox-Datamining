@@ -1,11 +1,12 @@
 ﻿local App = script:FindFirstAncestor("App")
 local Parent = App.Parent
+local Core = Parent.Core
 local Parent1 = Parent.Parent
 local TModule = require(Parent1.t)
 local RoactModule = require(Parent1.Roact)
 local ButtonModule = require(App.Button.Button)
 local ButtonTypeModule = require(App.Button.Enum.ButtonType)
-local ControlStateModule = require(Parent.Core.Control.Enum.ControlState)
+local ControlStateModule = require(Core.Control.Enum.ControlState)
 local PlayerTileButton = RoactModule.PureComponent:extend("PlayerTileButton")
 PlayerTileButton.validateProps = TModule.strictInterface({
 	buttonHeight = TModule.optional(TModule.number),

@@ -628,7 +628,7 @@ local function ChildReconciler(p1)
 			
 			return WorkInProgress
 		else
-			if DEV and (ValueType == "function" and DEV) then
+			if DEV and ValueType == "function" and DEV then
 				local ComponentName = GetComponentNameFunction(Return_.type) or "Component"
 				
 				if not v2[ComponentName] then

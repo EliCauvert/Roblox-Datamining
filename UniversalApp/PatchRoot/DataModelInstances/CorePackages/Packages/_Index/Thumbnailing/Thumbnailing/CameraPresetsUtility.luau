@@ -71,15 +71,17 @@ function CameraPresetsUtilityModule.GetFullBodyCameraCFrame(Object, Callback: ()
 		local _CFrame1 = CFrame.fromEulerAnglesXYZ(Rx, Ry, Rz)
 		NewPosition = _CFrame1 - _CFrame1.Position + v1
 	end
-	local LargestRatio = math.max(_Vector3.X - BodyPartsExtents.X, _Vector3.Y - BodyPartsExtents.Y) * CameraUtilityModule.DefaultBodyMarginScale / Tangent
-	local LargestRatio1 = math.max(BodyPartsExtents2.X - _Vector3.X, BodyPartsExtents2.Y - _Vector3.Y) * CameraUtilityModule.DefaultBodyMarginScale / Tangent
-	local Largest: number = LargestRatio
+	local Largest = math.max(_Vector3.X - BodyPartsExtents.X, _Vector3.Y - BodyPartsExtents.Y)
+	local Largest1 = math.max(BodyPartsExtents2.X - _Vector3.X, BodyPartsExtents2.Y - _Vector3.Y)
+	local LargestRatio = Largest * CameraUtilityModule.DefaultBodyMarginScale / Tangent
+	local LargestRatio1 = Largest1 * CameraUtilityModule.DefaultBodyMarginScale / Tangent
+	local Largest2: number = LargestRatio
 	local IsXBelow = UpVector.X < CameraPresetsUtilityModule.UPVECTOR_ORENTATION_TRESHOLD
 	
 	if UpVector.Y < CameraPresetsUtilityModule.UPVECTOR_ORENTATION_TRESHOLD or IsXBelow then
-		Largest = math.max(LargestRatio, LargestRatio1)
+		Largest2 = math.max(LargestRatio, LargestRatio1)
 	end
-	return CameraUtilityModule.GetCameraCFrame(NewPosition, Largest * CameraUtilityModule.DistanceScaleForFullBody * LookVector)
+	return CameraUtilityModule.GetCameraCFrame(NewPosition, Largest2 * CameraUtilityModule.DistanceScaleForFullBody * LookVector)
 end
 
 CameraPresetsUtilityModule.GetCameraCFrame_ForAvatarR15Action_LookAtGoldenRatioOfTheHumanoid = CameraPresetsUtilityModule.GetFullBodyCameraCFrame

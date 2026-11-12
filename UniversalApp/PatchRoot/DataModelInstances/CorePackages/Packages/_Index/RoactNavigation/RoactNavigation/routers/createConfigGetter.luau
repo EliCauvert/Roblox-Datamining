@@ -22,8 +22,10 @@ return function(p1, p2)
 		InvariantModule(type(State.routeName) == "string", "Cannot get config because the route does not have a routeName.")
 		local ScreenForRouteNameModule = GetScreenForRouteNameModule(p1, State.routeName)
 		local v1 = p1[State.routeName]
+		local NavigationOptions = if v1 == ScreenForRouteNameModule then nil else v1.navigationOptions
+		local NavigationOptions1 = if type(ScreenForRouteNameModule) == "table" then ScreenForRouteNameModule.navigationOptions else {}
 		local config = { navigation = Navigation, screenProps = P4 }
-		local ApplyConfigResult = applyConfig(if v1 == ScreenForRouteNameModule then nil else v1.navigationOptions, applyConfig(if type(ScreenForRouteNameModule) == "table" then ScreenForRouteNameModule.navigationOptions else {}, applyConfig(p2, {}, config), config), config)
+		local ApplyConfigResult = applyConfig(NavigationOptions, applyConfig(NavigationOptions1, applyConfig(p2, {}, config), config), config)
 		ValidateScreenOptionsModule(ApplyConfigResult, State)
 		
 		return ApplyConfigResult

@@ -40,8 +40,8 @@ local _ = require(script.Parent.Parent.core.types.Cache)
 local CanonicalStringifyFunction = require(script.Parent["object-canon"]).canonicalStringify
 local _ = require(script.Parent.writeToStore_types)
 local Callback = nil
-local Callback1 = nil
 local Callback2 = nil
+local Callback1 = nil
 local Callback3 = nil
 local Callback4 = nil
 local Module = {}
@@ -146,7 +146,7 @@ function Module:writeToStore(Store, Context)
 end
 
 function Module:processSelectionSet(p1)
-	-- upvalues: MakeReferenceFunction (copy), Array (copy), GetTypenameFromResultFunction (copy), Set (copy), ShouldIncludeFunction (copy), IsFieldFunction (copy), ResultKeyNameFromFieldFunction (copy), Callback1 (ref), IsReferenceFunction (copy), Callback2 (ref), AddTypenameToDocument (copy), InvariantFunction (copy), HttpService (copy), GetFragmentFromSelectionFunction (copy), Callback3 (ref)
+	-- upvalues: MakeReferenceFunction (copy), Array (copy), GetTypenameFromResultFunction (copy), Set (copy), ShouldIncludeFunction (copy), IsFieldFunction (copy), ResultKeyNameFromFieldFunction (copy), Callback2 (ref), IsReferenceFunction (copy), Callback1 (ref), AddTypenameToDocument (copy), InvariantFunction (copy), HttpService (copy), GetFragmentFromSelectionFunction (copy), Callback3 (ref)
 	local DataId = p1.dataId
 	local Result = p1.result
 	local SelectionSet = p1.selectionSet
@@ -215,7 +215,7 @@ function Module:processSelectionSet(p1)
 					field = Field,
 					variables = Context.variables
 				})
-				local CallbackResult = Callback1(MergeTree, StoreFieldName)
+				local CallbackResult = Callback2(MergeTree, StoreFieldName)
 				local ProcessFieldValueResult = self:processFieldValue(Entry, Field, Context, CallbackResult)
 				local Typename = nil
 				local NoSelectionSet = Field.selectionSet == nil
@@ -225,13 +225,13 @@ function Module:processSelectionSet(p1)
 					NoSelectionSet = Typename or not IsReferenceFunction(ProcessFieldValueResult)
 				end
 				if not NoSelectionSet then
-					local GetResult = Context.incomingById:get(ProcessFieldValueResult.__ref)
-					Typename = if GetResult == nil then nil else GetResult.fields.__typename
+					local GetResult1 = Context.incomingById:get(ProcessFieldValueResult.__ref)
+					Typename = if GetResult1 == nil then nil else GetResult1.fields.__typename
 				end
 				local MergeFunction = Policies:getMergeFunction(RootTypenamesByIdEntry, Field.name.value, Typename)
 				
 				if MergeFunction == nil then
-					Callback2(MergeTree, StoreFieldName)
+					Callback1(MergeTree, StoreFieldName)
 				else
 					CallbackResult.info = {
 						field = Field,
@@ -265,11 +265,11 @@ function Module:processSelectionSet(p1)
 end
 
 function Module.processFieldValue(p2, Result, Field, Context, MergeTree)
-	-- upvalues: NULL (copy), DEV (copy), CloneDeepFunction (copy), Array (copy), Callback1 (ref), Callback2 (ref)
+	-- upvalues: NULL (copy), DEV (copy), CloneDeepFunction (copy), Array (copy), Callback2 (ref), Callback1 (ref)
 	return if Field.selectionSet and Result ~= NULL then if Array.isArray(Result) then Array.map(Result, function(p3, p4)
-		-- upvalues: p2 (copy), Field (copy), Context (copy), Callback1 (upval), MergeTree (copy), Callback2 (upval)
-		local ProcessFieldValueResult = p2:processFieldValue(p3, Field, Context, Callback1(MergeTree, p4))
-		Callback2(MergeTree, p4)
+		-- upvalues: p2 (copy), Field (copy), Context (copy), Callback2 (upval), MergeTree (copy), Callback1 (upval)
+		local ProcessFieldValueResult = p2:processFieldValue(p3, Field, Context, Callback2(MergeTree, p4))
+		Callback1(MergeTree, p4)
 		
 		return ProcessFieldValueResult
 	end) else p2:processSelectionSet({
@@ -331,7 +331,7 @@ end
 WriteToStore.StoreWriter = Module
 local List = {}
 
-Callback1 = function(MergeTree, StoreFieldName)
+Callback2 = function(MergeTree, StoreFieldName)
 	-- upvalues: List (copy), Map (copy)
 	local Map1 = MergeTree.map
 	
@@ -374,7 +374,7 @@ Callback4 = function(GetResult): boolean
 	return not GetResult or not (GetResult.info or GetResult.map.size > 0)
 end
 
-Callback2 = function(MergeTree, StoreFieldName)
+Callback1 = function(MergeTree, StoreFieldName)
 	-- upvalues: Callback4 (ref), List (copy)
 	local Map = MergeTree.map
 	local GetResult = Map:get(StoreFieldName)

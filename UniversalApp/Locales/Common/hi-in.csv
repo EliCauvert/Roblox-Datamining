@@ -2045,7 +2045,7 @@ Feature.Avatar.Label.FaceMakeup,चेहरा
 Feature.Avatar.Label.FacialAnimation,फ़ेशियल ऐनिमेशन
 Feature.Avatar.Label.Fall,fall
 Feature.Avatar.Label.FallAnimations,Fall ऐनिमेशन
-Feature.Avatar.Label.FromMarketplace,मार्केटप्लेस से
+Feature.Avatar.Label.FromMarketplace,मार्केटप्लेस के रिज़ल्ट
 Feature.Avatar.Label.Front,फ़्रंट
 Feature.Avatar.Label.FullBody,फ़ुल बॉडी
 Feature.Avatar.Label.FullMasks,फ़ुल मास्क
@@ -2446,6 +2446,7 @@ Feature.Build.Action.Resume,
 Feature.Build.Action.Retry,
 Feature.Build.Action.Revert,
 Feature.Build.Action.Save,
+Feature.Build.Action.SaveFilters,
 Feature.Build.Action.SetDailyLimit,रोज़ाना लिमिट सेट करें
 Feature.Build.Action.SetLimit,लिमिट सेट करें
 Feature.Build.Action.Settings,
@@ -4313,7 +4314,7 @@ Feature.Moments.Action.AddMusic,म्यूज़िक जोड़ें
 Feature.Moments.Action.AddSticker,स्टिकर जोड़ें
 Feature.Moments.Action.AddText,टेक्स्ट जोड़ें
 Feature.Moments.Action.AddVoice,वॉइस जोड़ें
-Feature.Moments.Action.Analytics,एनालिटिक्स
+Feature.Moments.Action.Analytics,आँकड़े देखें
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
@@ -4355,6 +4356,7 @@ Feature.Moments.Action.ViewOtherFeed,अन्य फ़ीड देखें
 Feature.Moments.Action.ViewRecommended,'सुझाया गया' देखें
 Feature.Moments.Action.ViewTrending,'ट्रेंडिंग' देखें
 Feature.Moments.Body.EDPMomentIPReportInstructions,"इस Moment में IP (बौद्धिक संपदा) उल्लंघन की रिपोर्ट करने के लिए, गेम की जानकारी वाले पेज पर जाएँ."
+Feature.Moments.Body.MomentPosting,आपका Moment प्रोसेस किया जा रहा है.
 Feature.Moments.Description.CommunityStandards,"क्या कहें और क्या न कहें, इस बारे में ज़्यादा जानकारी के लिए कम्यूनिटी स्टैंडर्ड देखें."
 Feature.Moments.Description.EmptyCapturesLibrary,आपके कैप्चर यहाँ दिखेंगे.
 Feature.Moments.Description.FollowingCaughtUpBody,आपने इस फ़ीड में सभी नए Moments देख लिए हैं. और देखने के लिए फ़ीड बदलें.
@@ -4364,11 +4366,14 @@ Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI से जेन�
 Feature.Moments.Description.HowToCaptureStep1,"ऐसा कोई एक्सपीरिएंस जॉइन करें, जिसमें कैप्चर की सुविधा चालू हो और हैमबर्गर मेन्यू चुनें"
 Feature.Moments.Description.HowToCaptureStep2,कैप्चर कंट्रोल्स चालू करें
 Feature.Moments.Description.HowToCaptureStep3,गेमप्ले की फ़ोटो और वीडियो कैप्चर करें
+Feature.Moments.Description.LeaveAvatarMomentsCreation,"आपके सभी बदलाव हट जाएँगे, लेकिन आपके आउटफ़िट में कोई बदलाव नहीं होगा."
 Feature.Moments.Description.LeaveMomentsCreation,"आपके सभी बदलाव हट जाएँगे, लेकिन आप अभी भी इस कैप्चर को अपनी <b>कैप्चर</b> गैलरी में देख सकते हैं."
+Feature.Moments.Description.MomentsOffBody,पेरेंट से पेरेंटल कंट्रोल में Moments चालू करने के लिए कहें.
 Feature.Moments.Description.NoMusicResults,कोई म्यूज़िक नहीं मिला
 Feature.Moments.Description.NonInfiniteScrollEndBody,हमने आपकी फ़ीड को रोक दिया है. आपको तय करना है कि आपको देखना जारी रखना है या नहीं.
 Feature.Moments.Description.NothingHereYet,अभी तक यहाँ कुछ भी नहीं है...
 Feature.Moments.Description.PublishMoment,अपने Moment के बारे में बताएँ
+Feature.Moments.Description.TimeLimitReachedBody,"लिमिट, उम्र के आधार पर तय होती हैं. Moments कल देखें."
 Feature.Moments.Description.TooManyUploads,आपने आज बहुत सारे वीडियो अपलोड कर दिए हैं. कल फिर से कोशिश करें.
 Feature.Moments.Disclaimer.EveryoneMoments,Moments में मौजूद हर कोई पब्लिश की गई चीज़ें देख सकता है
 Feature.Moments.Label.All,
@@ -4439,6 +4444,7 @@ Feature.Moments.Label.MomentRemovedTitle,हमने इस Moment को ह�
 Feature.Moments.Label.MomentUnavailable,Moment उपलब्ध नहीं है
 Feature.Moments.Label.MomentUnavailableDefault,यह Moment उपलब्ध नहीं है.
 Feature.Moments.Label.MomentsExperienceName,
+Feature.Moments.Label.MomentsOffTitle,Moments बंद है
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,अभी तक कोई कमेंट नहीं है
 Feature.Moments.Label.NonInfiniteScrollEndTitle,देखने के लिए और भी कई Moments हैं
@@ -4468,6 +4474,7 @@ Feature.Moments.Label.TextGenerationFailedBody,टेक्स्ट जेन�
 Feature.Moments.Label.TextGenerationFailedTitle,जेनरेट नहीं हो सका
 Feature.Moments.Label.TextGenerationFilteredBody,"कैप्चर किए गए इस वीडियो के लिए टेक्स्ट जेनरेट नहीं हो सकता, कॉन्टेंट फ़िल्टर किया गया."
 Feature.Moments.Label.TextGenerationFilteredTitle,जेनरेशन फ़िल्टर किया गया
+Feature.Moments.Label.TimeLimitReachedTitle,आपने Moments के लिए तय समयसीमा पूरी कर ली है
 Feature.Moments.Label.Tone,टोन
 Feature.Moments.Label.Tone.Cinematic,सिनेमैटिक
 Feature.Moments.Label.Tone.Funny,मज़ेदार
@@ -4495,6 +4502,7 @@ Feature.Moments.Title.EDPMomentIPReportInstructions,गेम की जान�
 Feature.Moments.Title.GenerateTextFeedbackReason,क्या गड़बड़ी हुई?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,क्या आपको ‘Moment’ क्रिएशन छोड़ना है?
+Feature.Moments.Title.MomentPosting,आपका Moment पोस्ट किया जा रहा है
 Feature.Moments.Title.MomentRemoved,Moment हटा दिया गया
 Feature.Moments.Title.ReportPost,पोस्ट की रिपोर्ट करें
 Feature.Moments.Title.UnfollowConfirmationDialog,@{username} को अनफ़ॉलो करना है?
@@ -5679,6 +5687,8 @@ Feature.UniversalShareSheet.Response.SharedMessage,मैसेज भेजा 
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,मैसेज भेजे गए
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} अन्य
 Feature.UserLibrary.Label.MyLibrary,मेरी लाइब्रेरी
+Feature.VIPServer.Message.TooManyFreeServersOnGame,आपके पास इस एक्सपीरिएंस पर और ज़्यादा फ़्री प्राइवेट सर्वर नहीं हो सकते.
+Feature.VIPServer.Message.TooManyTotalActiveFreeServers,आपके पास ज़्यादा ऐक्टिव फ़्री प्राइवेट सर्वर नहीं हो सकते. पहले कुछ और सर्वर डीऐक्टिवेट करें.
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,वॉइस चैट के लिए फ़ोन नंबर जोड़ें
 Feature.VerificationUpsell.Action.ChangeEmail,

@@ -2055,7 +2055,7 @@ Feature.Avatar.Label.FaceMakeup,
 Feature.Avatar.Label.FacialAnimation,Gesichtsanimation
 Feature.Avatar.Label.Fall,Fallen
 Feature.Avatar.Label.FallAnimations,Fallanimationen
-Feature.Avatar.Label.FromMarketplace,Vom Marktplatz
+Feature.Avatar.Label.FromMarketplace,Marktplatz-Ergebnisse
 Feature.Avatar.Label.Front,Vorderseite
 Feature.Avatar.Label.FullBody,Ganzer Körper
 Feature.Avatar.Label.FullMasks,Vollmasken
@@ -2456,6 +2456,7 @@ Feature.Build.Action.Resume,
 Feature.Build.Action.Retry,
 Feature.Build.Action.Revert,
 Feature.Build.Action.Save,
+Feature.Build.Action.SaveFilters,
 Feature.Build.Action.SetDailyLimit,Lege ein tägliches Limit fest
 Feature.Build.Action.SetLimit,Limit festlegen
 Feature.Build.Action.Settings,
@@ -4323,7 +4324,7 @@ Feature.Moments.Action.AddMusic,Musik hinzufügen
 Feature.Moments.Action.AddSticker,Sticker hinzufügen
 Feature.Moments.Action.AddText,Text hinzufügen
 Feature.Moments.Action.AddVoice,Stimme hinzufügen
-Feature.Moments.Action.Analytics,Analytics
+Feature.Moments.Action.Analytics,Statistiken anzeigen
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
@@ -4365,6 +4366,7 @@ Feature.Moments.Action.ViewOtherFeed,Anderen Feed anzeigen
 Feature.Moments.Action.ViewRecommended,Empfehlungen anzeigen
 Feature.Moments.Action.ViewTrending,Trends anzeigen
 Feature.Moments.Body.EDPMomentIPReportInstructions,"Um einen Verstoß gegen das geistige Eigentum in diesem Moment zu melden, gehe weiter zur Detailseite des Spiels."
+Feature.Moments.Body.MomentPosting,Dein Moment wird verarbeitet.
 Feature.Moments.Description.CommunityStandards,"In den Community-Regeln findest du weitere Informationen darüber, was du schreiben darfst und was nicht."
 Feature.Moments.Description.EmptyCapturesLibrary,Hier werden deine Aufnahmen angezeigt.
 Feature.Moments.Description.FollowingCaughtUpBody,"Du hast dir alle neuen Moments in diesem Feed angesehen. Wechsle die Feeds, um mehr anzuzeigen."
@@ -4374,11 +4376,14 @@ Feature.Moments.Description.GenerateTextFeedbackDisclosure,"KI-generiert. Überp
 Feature.Moments.Description.HowToCaptureStep1,"Tritt einer Experience bei, bei der Aufnahmen aktiviert sind, und wähle das Hamburger-Menü aus"
 Feature.Moments.Description.HowToCaptureStep2,Aktiviere die Aufnahme-Steuerung
 Feature.Moments.Description.HowToCaptureStep3,Fotos und Videos des Gameplays aufnehmen
+Feature.Moments.Description.LeaveAvatarMomentsCreation,"Du verlierst alle deine Änderungen, aber dein Outfit bleibt unverändert."
 Feature.Moments.Description.LeaveMomentsCreation,Du verlierst alle deine Änderungen. Diese Aufnahme bleibt aber in deiner <b>Aufnahmen</b>-Galerie.
+Feature.Moments.Description.MomentsOffBody,"Bitte einen Elternteil, Moments in der Kindersicherung einzuschalten."
 Feature.Moments.Description.NoMusicResults,Keine Musik gefunden
 Feature.Moments.Description.NonInfiniteScrollEndBody,"Wir haben deinen Feed pausiert. Du kannst entscheiden, ob du weiter zuschauen möchtest."
 Feature.Moments.Description.NothingHereYet,Hier ist noch nichts …
 Feature.Moments.Description.PublishMoment,Beschreibe deinen Moment
+Feature.Moments.Description.TimeLimitReachedBody,Die Zeitlimits hängen vom Alter ab. Morgen kannst du Moments wieder anschauen.
 Feature.Moments.Description.TooManyUploads,Du hast heute zu viele Videos hochgeladen. Versuche es morgen erneut.
 Feature.Moments.Disclaimer.EveryoneMoments,"Jeder in Moments kann sehen, was veröffentlicht wird"
 Feature.Moments.Label.All,
@@ -4449,6 +4454,7 @@ Feature.Moments.Label.MomentRemovedTitle,Wir haben diesen Moment entfernt
 Feature.Moments.Label.MomentUnavailable,Moment nicht verfügbar
 Feature.Moments.Label.MomentUnavailableDefault,Dieser Moment ist nicht verfügbar.
 Feature.Moments.Label.MomentsExperienceName,
+Feature.Moments.Label.MomentsOffTitle,Moments ist ausgeschaltet
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,Noch keine Kommentare
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Es gibt noch mehr Moments zum Ansehen
@@ -4478,6 +4484,7 @@ Feature.Moments.Label.TextGenerationFailedBody,Der Text konnte nicht generiert w
 Feature.Moments.Label.TextGenerationFailedTitle,Generierung fehlgeschlagen
 Feature.Moments.Label.TextGenerationFilteredBody,"Generierung für dieses aufgenommene Video nicht möglich, Inhalt gefiltert."
 Feature.Moments.Label.TextGenerationFilteredTitle,Generierung gefiltert
+Feature.Moments.Label.TimeLimitReachedTitle,Du hast das Zeitlimit für Moments erreicht
 Feature.Moments.Label.Tone,Tonfall
 Feature.Moments.Label.Tone.Cinematic,Cinematisch
 Feature.Moments.Label.Tone.Funny,Lustig
@@ -4505,6 +4512,7 @@ Feature.Moments.Title.EDPMomentIPReportInstructions,Auf der Detailseite des Spie
 Feature.Moments.Title.GenerateTextFeedbackReason,Was ist schiefgelaufen?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Moment-Kreation verlassen?
+Feature.Moments.Title.MomentPosting,Dein Moment wird gepostet
 Feature.Moments.Title.MomentRemoved,Moment entfernt
 Feature.Moments.Title.ReportPost,Post melden
 Feature.Moments.Title.UnfollowConfirmationDialog,@{username} entfolgen?
@@ -5685,6 +5693,8 @@ Feature.UniversalShareSheet.Response.SharedMessage,Nachricht wurde gesendet
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Nachrichten wurden gesendet
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} weitere
 Feature.UserLibrary.Label.MyLibrary,Meine Bibliothek
+Feature.VIPServer.Message.TooManyFreeServersOnGame,Du kannst keine zusätzlichen kostenlosen privaten Server für diese Experience haben.
+Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Du kannst keine zusätzlichen aktiven kostenlosen privaten Server haben. Bitte deaktiviere erst einige deiner anderen Server.
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,Telefon für Sprachchat hinzufügen
 Feature.VerificationUpsell.Action.ChangeEmail,E-Mail-Adresse ändern

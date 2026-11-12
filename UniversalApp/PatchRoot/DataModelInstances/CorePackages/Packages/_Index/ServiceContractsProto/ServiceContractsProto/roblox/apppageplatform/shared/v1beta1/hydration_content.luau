@@ -539,165 +539,165 @@ function Module.decode(Buf)
 			_, v512 = ProtoModule.readVarInt(Buf, v1)
 		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 			if Tag == 1 then
-				local Buffer1
-				Buffer1, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_BadgeEntry.decode(Buffer1)
+				local Buffer2
+				Buffer2, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_BadgeEntry.decode(Buffer2)
 				local NewResult = BadgeDataModule.BadgeData.new()
 				NewModule.badge[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 2 then
-				local Buffer2
-				Buffer2, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_UniverseEntry.decode(Buffer2)
+				local Buffer3
+				Buffer3, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_UniverseEntry.decode(Buffer3)
 				local NewResult = UniverseDataModule.UniverseData.new()
 				NewModule.universe[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 3 then
-				local Buffer3
-				Buffer3, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_CreatorEntry.decode(Buffer3)
+				local Buffer6
+				Buffer6, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_CreatorEntry.decode(Buffer6)
 				local NewResult = CreatorDataModule.CreatorData.new()
 				NewModule.creator[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 4 then
-				local Buffer5
-				Buffer5, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_EventEntry.decode(Buffer5)
+				local Buffer8
+				Buffer8, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_EventEntry.decode(Buffer8)
 				local NewResult = EventDataModule.EventData.new()
 				NewModule.event[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 5 then
-				local Buffer6
-				Buffer6, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_SongEntry.decode(Buffer6)
+				local Buffer9
+				Buffer9, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_SongEntry.decode(Buffer9)
 				local NewResult = SongDataModule.SongData.new()
 				NewModule.song[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 6 then
-				local Buffer7
-				Buffer7, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_GamePassEntry.decode(Buffer7)
+				local Buffer10
+				Buffer10, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_GamePassEntry.decode(Buffer10)
 				local NewResult = GamePassDataModule.GamePassData.new()
 				NewModule.game_pass[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 7 then
-				local Buffer8
-				Buffer8, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_MediaAssetEntry.decode(Buffer8)
+				local Buffer12
+				Buffer12, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_MediaAssetEntry.decode(Buffer12)
 				local NewResult = MediaAssetDataModule.MediaAssetData.new()
 				NewModule.media_asset[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 8 then
-				local Buffer9
-				Buffer9, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_SocialLinkEntry.decode(Buffer9)
+				local Buffer13
+				Buffer13, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_SocialLinkEntry.decode(Buffer13)
 				local NewResult = SocialLinkDataModule.SocialLinkData.new()
 				NewModule.social_link[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 9 then
-				local Buffer11
-				Buffer11, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_GameDeveloperProductEntry.decode(Buffer11)
+				local Buffer14
+				Buffer14, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_GameDeveloperProductEntry.decode(Buffer14)
 				local NewResult = GameDeveloperProductDataModule.GameDeveloperProductData.new()
 				NewModule.game_developer_product[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 10 then
-				local Buffer13
-				Buffer13, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_GameSubscriptionEntry.decode(Buffer13)
+				local Buffer15
+				Buffer15, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_GameSubscriptionEntry.decode(Buffer15)
 				local NewResult = GameSubscriptionDataModule.GameSubscriptionData.new()
 				NewModule.game_subscription[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 11 then
-				local Buffer14
-				Buffer14, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_MarketplaceCatalogCategoryEntry.decode(Buffer14)
+				local Buffer16
+				Buffer16, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_MarketplaceCatalogCategoryEntry.decode(Buffer16)
 				local NewResult = MarketplaceCatalogCategoryDataModule.MarketplaceCatalogCategoryData.new()
 				NewModule.marketplace_catalog_category[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 12 then
-				local Buffer15
-				Buffer15, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_MarketplaceAssetEntry.decode(Buffer15)
+				local Buffer19
+				Buffer19, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_MarketplaceAssetEntry.decode(Buffer19)
 				local NewResult = MarketplaceAssetDataModule.MarketplaceAssetData.new()
 				NewModule.marketplace_asset[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 13 then
-				local Buffer17
-				Buffer17, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_MarketplaceBundleEntry.decode(Buffer17)
+				local Buffer20
+				Buffer20, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_MarketplaceBundleEntry.decode(Buffer20)
 				local NewResult = MarketplaceBundleDataModule.MarketplaceBundleData.new()
 				NewModule.marketplace_bundle[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 14 then
-				local Buffer18
-				Buffer18, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_MarketplaceLookEntry.decode(Buffer18)
+				local Buffer22
+				Buffer22, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_MarketplaceLookEntry.decode(Buffer22)
 				local NewResult = MarketplaceLookDataModule.MarketplaceLookData.new()
 				NewModule.marketplace_look[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 15 then
-				local Buffer19
-				Buffer19, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_CatalogSortEntry.decode(Buffer19)
+				local Buffer23
+				Buffer23, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_CatalogSortEntry.decode(Buffer23)
 				local NewResult = CatalogSortDataModule.CatalogSortData.new()
 				NewModule.catalog_sort[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 16 then
-				local Buffer16
-				Buffer16, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_AgeRecommendationEntry.decode(Buffer16)
+				local Buffer24
+				Buffer24, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_AgeRecommendationEntry.decode(Buffer24)
 				local NewResult = AgeRecommendationDataModule.AgeRecommendationData.new()
 				NewModule.age_recommendation[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 17 then
-				local Buffer20
-				Buffer20, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_UniverseUserFollowEntry.decode(Buffer20)
+				local Buffer25
+				Buffer25, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_UniverseUserFollowEntry.decode(Buffer25)
 				local NewResult = UniverseUserFollowDataModule.UniverseUserFollowData.new()
 				NewModule.universe_user_follow[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 18 then
-				local Buffer21
-				Buffer21, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_UniverseUserVoteEntry.decode(Buffer21)
+				local Buffer11
+				Buffer11, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_UniverseUserVoteEntry.decode(Buffer11)
 				local NewResult = UniverseUserVoteDataModule.UniverseUserVoteData.new()
 				NewModule.universe_user_vote[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 19 then
-				local Buffer12
-				Buffer12, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_UserProfileEntry.decode(Buffer12)
+				local Buffer26
+				Buffer26, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_UserProfileEntry.decode(Buffer26)
 				local NewResult = UserProfileDataModule.UserProfileData.new()
 				NewModule.user_profile[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 20 then
-				local Buffer23
-				Buffer23, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_UniverseUserFavoriteEntry.decode(Buffer23)
+				local Buffer27
+				Buffer27, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_UniverseUserFavoriteEntry.decode(Buffer27)
 				local NewResult = UniverseUserFavoriteDataModule.UniverseUserFavoriteData.new()
 				NewModule.universe_user_favorite[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 21 then
-				local Buffer24
-				Buffer24, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_PlayabilityEntry.decode(Buffer24)
+				local Buffer28
+				Buffer28, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_PlayabilityEntry.decode(Buffer28)
 				local NewResult = PlayabilityDataModule.PlayabilityData.new()
 				NewModule.playability[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 22 then
-				local Buffer25
-				Buffer25, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_UniverseUserFollowLimitEntry.decode(Buffer25)
+				local Buffer1
+				Buffer1, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_UniverseUserFollowLimitEntry.decode(Buffer1)
 				local NewResult = UniverseUserFollowLimitDataModule.UniverseUserFollowLimitData.new()
 				NewModule.universe_user_follow_limit[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 23 then
-				local Buffer26
-				Buffer26, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_UniverseUserVoteFeedbackMetadataEntry.decode(Buffer26)
+				local Buffer30
+				Buffer30, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_UniverseUserVoteFeedbackMetadataEntry.decode(Buffer30)
 				local NewResult = UniverseUserVoteFeedbackMetadataDataModule.UniverseUserVoteFeedbackMetadataData.new()
 				NewModule.universe_user_vote_feedback_metadata[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 24 then
-				local Buffer27
-				Buffer27, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_MomentEntry.decode(Buffer27)
+				local Buffer4
+				Buffer4, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_MomentEntry.decode(Buffer4)
 				local NewResult = MomentDataModule.MomentData.new()
 				NewModule.moment[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 25 then
-				local Buffer29
-				Buffer29, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_CommunityEntry.decode(Buffer29)
+				local Buffer31
+				Buffer31, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_CommunityEntry.decode(Buffer31)
 				local NewResult = CommunityDataModule.CommunityData.new()
 				NewModule.community[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 26 then
-				local Buffer30
-				Buffer30, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_CommunityUserMembershipEntry.decode(Buffer30)
+				local Buffer5
+				Buffer5, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_CommunityUserMembershipEntry.decode(Buffer5)
 				local NewResult = CommunityUserMembershipDataModule.CommunityUserMembershipData.new()
 				NewModule.community_user_membership[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 27 then
-				local Buffer31
-				Buffer31, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_FriendRecommendationEntry.decode(Buffer31)
+				local Buffer17
+				Buffer17, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_FriendRecommendationEntry.decode(Buffer17)
 				local NewResult = FriendRecommendationDataModule.FriendRecommendationData.new()
 				NewModule.friend_recommendation[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 28 then
@@ -707,57 +707,57 @@ function Module.decode(Buf)
 				local NewResult = UniversePrivateServerDataModule.UniversePrivateServerData.new()
 				NewModule.universe_private_server[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 29 then
-				local Buffer22
-				Buffer22, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_NotificationBadgeEntry.decode(Buffer22)
+				local Buffer33
+				Buffer33, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_NotificationBadgeEntry.decode(Buffer33)
 				local NewResult = NotificationBadgeDataModule.NotificationBadgeData.new()
 				NewModule.notification_badge[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 30 then
-				local Buffer28
-				Buffer28, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_CollectibleItemEntry.decode(Buffer28)
+				local Buffer34
+				Buffer34, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_CollectibleItemEntry.decode(Buffer34)
 				local NewResult = CollectibleItemDataModule.CollectibleItemData.new()
 				NewModule.collectible_item[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 31 then
-				local Buffer33
-				Buffer33, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_LeaderboardStatsEntry.decode(Buffer33)
+				local Buffer18
+				Buffer18, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_LeaderboardStatsEntry.decode(Buffer18)
 				local NewResult = LeaderboardStatsDataModule.LeaderboardStatsData.new()
 				NewModule.leaderboard_stats[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 32 then
-				local Buffer34
-				Buffer34, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_MarketplaceAssetUserFavoriteEntry.decode(Buffer34)
+				local Buffer35
+				Buffer35, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_MarketplaceAssetUserFavoriteEntry.decode(Buffer35)
 				local NewResult = MarketplaceItemUserFavoriteDataModule.MarketplaceItemUserFavoriteData.new()
 				NewModule.marketplace_asset_user_favorite[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 33 then
-				local Buffer35
-				Buffer35, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_MarketplaceBundleUserFavoriteEntry.decode(Buffer35)
+				local Buffer29
+				Buffer29, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_MarketplaceBundleUserFavoriteEntry.decode(Buffer29)
 				local NewResult = MarketplaceItemUserFavoriteDataModule.MarketplaceItemUserFavoriteData.new()
 				NewModule.marketplace_bundle_user_favorite[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 34 then
-				local Buffer10
-				Buffer10, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_BuyRobuxOneTimeProductEntry.decode(Buffer10)
+				local Buffer36
+				Buffer36, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_BuyRobuxOneTimeProductEntry.decode(Buffer36)
 				local NewResult = BuyRobuxProductDataModule.BuyRobuxOneTimeProductData.new()
 				NewModule.buy_robux_one_time_product[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 35 then
-				local Buffer36
-				Buffer36, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_BuyRobuxSubscriptionProductEntry.decode(Buffer36)
+				local Buffer37
+				Buffer37, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_BuyRobuxSubscriptionProductEntry.decode(Buffer37)
 				local NewResult = BuyRobuxProductDataModule.BuyRobuxSubscriptionProductData.new()
 				NewModule.buy_robux_subscription_product[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 36 then
-				local Buffer37
-				Buffer37, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_BuyRobuxPendingTransferEntry.decode(Buffer37)
+				local Buffer7
+				Buffer7, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_BuyRobuxPendingTransferEntry.decode(Buffer7)
 				local NewResult = BuyRobuxPendingTransferDataModule.BuyRobuxPendingTransferData.new()
 				NewModule.buy_robux_pending_transfer[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 37 then
-				local Buffer4
-				Buffer4, v512 = ProtoModule.readBuffer(Buf, v1)
-				local DecodeResult = t.HydrationContent_BuyRobuxBonusItemEntry.decode(Buffer4)
+				local Buffer21
+				Buffer21, v512 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.HydrationContent_BuyRobuxBonusItemEntry.decode(Buffer21)
 				local NewResult = BuyRobuxBonusItemDataModule.BuyRobuxBonusItemData.new()
 				NewModule.buy_robux_bonus_item[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 38 then

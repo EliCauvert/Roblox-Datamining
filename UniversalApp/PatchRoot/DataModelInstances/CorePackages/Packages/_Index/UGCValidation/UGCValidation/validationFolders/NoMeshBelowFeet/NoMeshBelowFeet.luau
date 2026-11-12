@@ -6,6 +6,11 @@ local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStri
 local BoundsCalculatorModule = require(Parent.util.BoundsCalculator)
 local GetFFlagUGCValidateNoMeshBelowFeetModule = require(Parent.flags.getFFlagUGCValidateNoMeshBelowFeet)
 game:DefineFastString("UGCValidateMaxMeshBelowFeet", "0.1")
+local Categories = { ValidationEnumsModule.UploadCategory.FULL_BODY }
+local RequiredData = {
+	ValidationEnumsModule.SharedDataMember.rootInstance,
+	ValidationEnumsModule.SharedDataMember.renderMeshesData
+}
 local list = {
 	ConstantsModule.NAMED_R15_BODY_PARTS.LeftUpperLeg,
 	ConstantsModule.NAMED_R15_BODY_PARTS.LeftLowerLeg,
@@ -34,11 +39,8 @@ local function _(p1, p2)
 end
 
 return {
-	categories = { ValidationEnumsModule.UploadCategory.FULL_BODY },
-	requiredData = {
-		ValidationEnumsModule.SharedDataMember.rootInstance,
-		ValidationEnumsModule.SharedDataMember.renderMeshesData
-	},
+	categories = Categories,
+	requiredData = RequiredData,
 	fflag = GetFFlagUGCValidateNoMeshBelowFeetModule,
 	expectedFailures = {},
 	run = function(p1, p2)

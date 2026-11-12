@@ -10,6 +10,8 @@ local UGCValidatePoseArmMinDegFromXVectorOnXYPlane = game:DefineFastInt("UGCVali
 local UGCValidatePoseArmMaxDegFromXVectorOnXYPlane = game:DefineFastInt("UGCValidatePoseArmMaxDegFromXVectorOnXYPlane", 30)
 local UGCValidatePoseLegMinDegFromXVectorOnXYPlane = game:DefineFastInt("UGCValidatePoseLegMinDegFromXVectorOnXYPlane", -93)
 local UGCValidatePoseLegMaxDegFromXVectorOnXYPlane = game:DefineFastInt("UGCValidatePoseLegMaxDegFromXVectorOnXYPlane", -60)
+local Categories = { ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS }
+local RequiredData = { ValidationEnumsModule.SharedDataMember.rootInstance }
 
 local function validateAngleFromXYPlane(p1, AssetType, Vector, p2)
 	-- upvalues: UGCValidatePoseDegFromXYPlane (copy), ErrorSourceStringsModule (copy)
@@ -47,8 +49,8 @@ local function _(p1)
 end
 
 return {
-	categories = { ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS },
-	requiredData = { ValidationEnumsModule.SharedDataMember.rootInstance },
+	categories = Categories,
+	requiredData = RequiredData,
 	expectedFailures = {},
 	run = function(p1, p2)
 		-- upvalues: AssetCalculatorModule (copy), ErrorSourceStringsModule (copy), CanBeNormalizedModule (copy), validateAngleFromXYPlane (copy), UGCValidatePoseArmMinDegFromXVectorOnXYPlane (copy), UGCValidatePoseArmMaxDegFromXVectorOnXYPlane (copy), UGCValidatePoseLegMinDegFromXVectorOnXYPlane (copy), UGCValidatePoseLegMaxDegFromXVectorOnXYPlane (copy), validateAngleFromWorldXVectorOnXYPlane (copy)

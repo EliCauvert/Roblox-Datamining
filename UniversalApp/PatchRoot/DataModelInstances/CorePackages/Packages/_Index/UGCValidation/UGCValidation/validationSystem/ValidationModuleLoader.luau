@@ -66,7 +66,7 @@ for ChildName, value3 in t1 do
 	end
 	local Module = require(ChildName1)
 	
-	for i2, _ in Module do
+	for i2, value4 in Module do
 		if typeof(i2) ~= "string" then
 			error(`{ChildName}.lua contains non-string key {tostring(i2)}`)
 		elseif not t2.ValidationConfig[i2] then

@@ -3,21 +3,24 @@ local Parent = script.Parent.Parent.Parent
 local _ = require(Parent.util.Types)
 local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local Categories = {
+	ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
+	ValidationEnumsModule.UploadCategory.ANIMATION
+}
+local RequiredData = { ValidationEnumsModule.SharedDataMember.curveAnimations }
+local PrereqTests = {
+	ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
+}
 
 local function _(Text: string): boolean
 	return #Text <= 30 and string.match(Text, "^[0-9]+$") ~= nil
 end
 
 return {
-	categories = {
-		ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
-		ValidationEnumsModule.UploadCategory.ANIMATION
-	},
-	requiredData = { ValidationEnumsModule.SharedDataMember.curveAnimations },
+	categories = Categories,
+	requiredData = RequiredData,
 	expectedFailures = {},
-	prereqTests = {
-		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
-	},
+	prereqTests = PrereqTests,
 	run = function(p1, p2)
 		-- upvalues: CollectionService (copy), ErrorSourceStringsModule (copy)
 		for _, curveAnimation in p2.curveAnimations do

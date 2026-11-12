@@ -819,9 +819,9 @@ function InlineParserImplModule:processDelimiters(Previous)
 	-- upvalues: config (copy)
 	local Previouses = {}
 	local LastDelimiter = self._lastDelimiter
-	local ContentNestingDepth = nil
-	local Flag = nil
 	local Next1 = nil
+	local Flag = nil
+	local ContentNestingDepth = nil
 	local Previous2 = nil
 	local Largest = nil
 	while LastDelimiter ~= nil and LastDelimiter.previous ~= Previous do

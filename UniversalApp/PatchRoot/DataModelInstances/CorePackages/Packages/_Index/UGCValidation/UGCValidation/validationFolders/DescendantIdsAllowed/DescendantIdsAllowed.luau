@@ -9,6 +9,7 @@ local GetAssetCreationDetailsModule = require(Parent.util.getAssetCreationDetail
 local GetAssetCreationDetailsRCCModule = require(Parent.util.getAssetCreationDetailsRCC)
 local GetFFlagUGCValidateForwardIECRestrictedUserIdsModule = require(Parent.flags.getFFlagUGCValidateForwardIECRestrictedUserIds)
 local GetFFlagUGCValidateBackendInExperienceViaCanPublishModule = require(Parent.flags.getFFlagUGCValidateBackendInExperienceViaCanPublish)
+local GetFFlagUGCValidateMakeupCategoryParityModule = require(Parent.flags.getFFlagUGCValidateMakeupCategoryParity)
 local GetFFlagUGCValidateRejectUnsupportedCreatorTypesModule = require(Parent.flags.getFFlagUGCValidateRejectUnsupportedCreatorTypes)
 local config = { MODERATION_STATE_REVIEWING = true, Reviewing = true }
 local config1 = { MODERATION_STATE_APPROVED = true, Approved = true }
@@ -168,7 +169,7 @@ local function runCanPublishOwnershipCheck(p4, RootInstance, ContentIds, IecConf
 end
 
 return {
-	categories = if require(Parent.flags.getFFlagUGCValidateMakeupCategoryParity)() then ConstantsModule.AllAssetUploadCategories else ConstantsModule.AllAssetUploadCategoriesIncludingMakeup,
+	categories = if GetFFlagUGCValidateMakeupCategoryParityModule() then ConstantsModule.AllAssetUploadCategories else ConstantsModule.AllAssetUploadCategoriesIncludingMakeup,
 	requiredData = {
 		ValidationEnumsModule.SharedDataMember.rootInstance,
 		ValidationEnumsModule.SharedDataMember.consumerConfig,

@@ -24,10 +24,11 @@ local list = {
 return {
 	mapColorTokensToFoundation = function(p1, p2)
 		-- upvalues: CryoModule (copy)
-		p1.Semantic.Color = CryoModule.Dictionary.join(p1.Semantic.Color, p2.Semantic.Color)
-		p1.Global.Color = CryoModule.Dictionary.join(p1.Global.Color, p2.Global.Color)
-		p1.Component = CryoModule.Dictionary.join(p1.Component, p2.Component)
+		local Semantic = p2.Semantic
 		
+		if Semantic then
+			p1.Semantic.Color = CryoModule.Dictionary.join(p1.Semantic.Color, Semantic.Color)
+		end
 		return p1
 	end,
 	mapThemeToFoundation = function(p1, p2)

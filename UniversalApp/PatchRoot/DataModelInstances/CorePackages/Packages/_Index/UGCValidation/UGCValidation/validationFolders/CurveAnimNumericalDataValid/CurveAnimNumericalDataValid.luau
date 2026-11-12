@@ -7,6 +7,14 @@ local GetFStringUGCValidateFrameDeltaKeyTimeTolModule = require(Parent.flags.Get
 local GetFIntUGCValidateMaxAnimationFPSModule = require(Parent.flags.getFIntUGCValidateMaxAnimationFPS)
 local GetFIntUGCValidateMaxMarkerCurveValueLengthModule = require(Parent.flags.getFIntUGCValidateMaxMarkerCurveValueLength)
 local GetFIntUGCValidateMaxTotalInternalMarkersModule = require(Parent.flags.getFIntUGCValidateMaxTotalInternalMarkers)
+local Categories = {
+	ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
+	ValidationEnumsModule.UploadCategory.ANIMATION
+}
+local RequiredData = { ValidationEnumsModule.SharedDataMember.curveAnimations }
+local PrereqTests = {
+	ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
+}
 
 local function areNumbersGood(...): boolean
 	local function _(p1): boolean
@@ -28,15 +36,10 @@ local function areNumbersGood(...): boolean
 end
 
 return {
-	categories = {
-		ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
-		ValidationEnumsModule.UploadCategory.ANIMATION
-	},
-	requiredData = { ValidationEnumsModule.SharedDataMember.curveAnimations },
+	categories = Categories,
+	requiredData = RequiredData,
 	expectedFailures = {},
-	prereqTests = {
-		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
-	},
+	prereqTests = PrereqTests,
 	run = function(p1, p2)
 		-- upvalues: GetFIntUGCValidateMaxAnimationFPSModule (copy), GetFStringUGCValidateFrameDeltaKeyTimeTolModule (copy), GetFStringUGCValidationMaxAnimationLengthModule (copy), GetFIntUGCValidateMaxTotalInternalMarkersModule (copy), ErrorSourceStringsModule (copy), areNumbersGood (copy), GetFIntUGCValidateMaxMarkerCurveValueLengthModule (copy)
 		local ScaledFIntUGCValidateMaxAnimationFPSModule = 1 / GetFIntUGCValidateMaxAnimationFPSModule() * GetFStringUGCValidateFrameDeltaKeyTimeTolModule.asNumber()

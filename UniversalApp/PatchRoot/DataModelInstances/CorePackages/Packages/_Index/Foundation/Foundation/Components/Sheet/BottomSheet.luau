@@ -39,7 +39,7 @@ local function _(p1, p2, p3, p4: number)
 end
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
-	-- upvalues: WithDefaultsModule (copy), config (copy), UseOverlayModule (copy), UseTokensModule (copy), UseElevationModule (copy), ElevationLayerModule (copy), UsePreferencesModule (copy), UseScreenHeightModule (copy), ReactModule (copy), FlagsModule (copy), UseHardwareInsetsModule (copy), UseAnimatedBindingFunction (copy), ChildrenHasFullBleedModule (copy), OtterModule (copy), ReactUtilsModule (copy), SheetTypeModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), ReactRobloxModule (copy), TypesModule (copy), DashModule (copy), SheetContextModule (copy), ElevationOwnerScope (copy), ImageModule (copy), SHADOWIMAGE (copy), SHADOWSIZE (copy), BackdropModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseOverlayModule (copy), UseTokensModule (copy), UseElevationModule (copy), ElevationLayerModule (copy), UsePreferencesModule (copy), UseScreenHeightModule (copy), ReactModule (copy), UseHardwareInsetsModule (copy), UseAnimatedBindingFunction (copy), ChildrenHasFullBleedModule (copy), OtterModule (copy), FlagsModule (copy), ReactUtilsModule (copy), SheetTypeModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), ReactRobloxModule (copy), TypesModule (copy), DashModule (copy), SheetContextModule (copy), ElevationOwnerScope (copy), ImageModule (copy), SHADOWIMAGE (copy), SHADOWSIZE (copy), BackdropModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseOverlayModuleResult = UseOverlayModule()
 	local UseTokensModuleResult = UseTokensModule()
@@ -57,27 +57,23 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 		-- upvalues: UseScreenHeightModuleResult (copy)
 		return if p3 > 1 then p3 else p3 * UseScreenHeightModuleResult
 	end, { UseScreenHeightModuleResult })
-	local Smallest1 = 0
-	local MinValue = 1e999
+	local Smallest2 = 0
+	local Smallest = 1e999
 	
 	for _, snapPoint in SnapPoints do
 		local UseResultResult: number = UseResult(snapPoint)
 		
-		if Smallest1 < UseResultResult then
-			Smallest1 = UseResultResult
+		if Smallest2 < UseResultResult then
+			Smallest2 = UseResultResult
 		end
-		if FlagsModule.FoundationSheetReversedContent then
-			MinValue = math.min(MinValue, UseResultResult)
-		end
+		Smallest = math.min(Smallest, UseResultResult)
 	end
-	Smallest1 = math.min(Smallest1, UseScreenHeightModuleResult)
+	Smallest2 = math.min(Smallest2, UseScreenHeightModuleResult)
 	
 	if UseStateResult > 0 then
-		Smallest1 = math.min(Smallest1, UseStateResult)
+		Smallest2 = math.min(Smallest2, UseStateResult)
 	end
-	if FlagsModule.FoundationSheetReversedContent then
-		MinValue = math.min(MinValue, Smallest1)
-	end
+	Smallest = math.min(Smallest, Smallest2)
 	local Bottom: number = UseHardwareInsetsModule(UseOverlayModuleResult).bottom
 	local UseRefResult = ReactModule.useRef(0)
 	local UseRefResult1 = ReactModule.useRef(false)
@@ -103,24 +99,24 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 	local UseBindingResult6, UseBindingResult2_5 = ReactModule.useBinding(0)
 	local UseRefResult5 = ReactModule.useRef(nil)
 	local UseBindingResult7, UseBindingResult2_6 = ReactModule.useBinding(false)
-	local UseRefResult6 = if FlagsModule.FoundationSheetReversedContent then ReactModule.useRef(false) else nil
-	local UseResult1 = if FlagsModule.FoundationSheetReversedContent then ReactModule.useCallback(function(Current)
+	local UseRefResult6 = ReactModule.useRef(false)
+	local UseResult1 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult6 (copy)
 		UseRefResult6.current = Current
-	end, {}) else nil
-	local UseMemoResult1 = if FlagsModule.FoundationSheetReversedContent then ReactModule.useMemo(function()
-		-- upvalues: WithDefaultsModuleResult (copy), UseBindingResult (copy), UseTokensModuleResult (copy), Smallest1 (ref), MinValue (ref)
+	end, {})
+	local UseMemoResult1 = ReactModule.useMemo(function()
+		-- upvalues: WithDefaultsModuleResult (copy), UseBindingResult (copy), UseTokensModuleResult (copy), Smallest2 (ref), Smallest (ref)
 		return if WithDefaultsModuleResult.snapPoints == nil then nil else UseBindingResult:map(function(p3): number
-			-- upvalues: UseTokensModuleResult (upval), Smallest1 (upval), MinValue (upval)
-			return Smallest1 - math.clamp(p3 + UseTokensModuleResult.Margin.Small, MinValue, Smallest1)
+			-- upvalues: UseTokensModuleResult (upval), Smallest2 (upval), Smallest (upval)
+			return Smallest2 - math.clamp(p3 + UseTokensModuleResult.Margin.Small, Smallest, Smallest2)
 		end)
 	end, {
 		WithDefaultsModuleResult.snapPoints == nil,
 		UseBindingResult,
-		MinValue,
-		Smallest1,
+		Smallest,
+		Smallest2,
 		UseTokensModuleResult.Margin.Small
-	}) else nil
+	})
 	local UseRefResult7 = ReactModule.useRef(false)
 	local UseRefResult8 = ReactModule.useRef(0)
 	local UseRefResult9 = ReactModule.useRef(nil)
@@ -181,9 +177,9 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 		end)
 	end, { UseResult3 })
 	local UseResult5 = ReactModule.useCallback(function(p3): number
-		-- upvalues: UseResult (copy), Smallest1 (ref), Bottom (copy)
-		return math.min(UseResult(p3), Smallest1) + Bottom
-	end, { Bottom, UseResult, Smallest1 })
+		-- upvalues: UseResult (copy), Smallest2 (ref), Bottom (copy)
+		return math.min(UseResult(p3), Smallest2) + Bottom
+	end, { Bottom, UseResult, Smallest2 })
 	local UseResult6 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), UseResult4 (copy), UseResult5 (copy), SnapPoints (copy), UseRefResult2 (copy)
 		UseRefResult.current = Current
@@ -225,15 +221,15 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 		UseAnimatedBindingResult2((OtterModule.instant(1)))
 	end, { UseResult4, UseResult3, ReducedMotion })
 	local UseResult9 = ReactModule.useCallback(function(): boolean
-		-- upvalues: Smallest1 (ref), Bottom (copy), UseRefResult3 (copy)
-		return math.floor(Smallest1 + Bottom) - 0.01 <= UseRefResult3.current
-	end, { Smallest1, Bottom })
+		-- upvalues: Smallest2 (ref), Bottom (copy), UseRefResult3 (copy)
+		return math.floor(Smallest2 + Bottom) - 0.01 <= UseRefResult3.current
+	end, { Smallest2, Bottom })
 	local UseResult10 = ReactModule.useCallback(function()
-		-- upvalues: UseBindingResult6 (copy), UseResult9 (copy), FlagsModule (upval), UseRefResult6 (copy), UseRefResult7 (copy), UseBindingResult7 (copy), UseRefResult5 (copy), UseRefResult8 (copy), UseBindingResult2_6 (copy)
+		-- upvalues: UseBindingResult6 (copy), UseResult9 (copy), UseRefResult6 (copy), UseRefResult7 (copy), UseBindingResult7 (copy), UseRefResult5 (copy), UseRefResult8 (copy), UseBindingResult2_6 (copy)
 		local IsValueBelow = UseBindingResult6:getValue() <= 0
 		local UseResultResult = UseResult9()
 		
-		if FlagsModule.FoundationSheetReversedContent and UseRefResult6.current then
+		if UseRefResult6.current then
 			if not UseRefResult7.current or UseBindingResult7:getValue() or UseResultResult then
 				local Current = UseRefResult5.current
 				local NoCurrent: boolean = Current == nil or Current.AbsoluteCanvasSize.Y - Current.AbsoluteWindowSize.Y - 1 <= UseBindingResult6:getValue()
@@ -280,10 +276,10 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 		end
 	end, { SnapPoints, UseResult6, UseResult5, UseResult8 })
 	local UseResult12 = if FlagsModule.FoundationBottomSheetKeepsSnapPoint then ReactModule.useCallback(function()
-		-- upvalues: SnapPoints (copy), UseRefResult (copy), UseResult (copy), Smallest1 (ref), UseRefResult2 (copy)
+		-- upvalues: SnapPoints (copy), UseRefResult (copy), UseResult (copy), Smallest2 (ref), UseRefResult2 (copy)
 		local SnapPoint = SnapPoints[UseRefResult.current]
 		
-		if SnapPoint == nil or Smallest1 <= UseResult(SnapPoint) then return end
+		if SnapPoint == nil or Smallest2 <= UseResult(SnapPoint) then return end
 		local Current = 1
 		
 		for i, snapPoint in SnapPoints do
@@ -296,9 +292,9 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 		if UseRefResult2.current then
 			UseRefResult2.current(SnapPoints[Current], Current)
 		end
-	end, { SnapPoints, UseResult, Smallest1 }) else nil
+	end, { SnapPoints, UseResult, Smallest2 }) else nil
 	ReactModule.useEffect(function()
-		-- upvalues: UseOverlayModuleResult (copy), FlagsModule (upval), SnapPoints (copy), UseRefResult (copy), WithDefaultsModuleResult (copy), ReducedMotion (copy), UseResult7 (copy), UseAnimatedBindingResult2 (copy), OtterModule (upval), UseResult6 (copy), UseTokensModuleResult (copy), UseResult (copy), Smallest1 (ref), UseBindingResult2_6 (copy), UseRefResult6 (copy), UseResult3 (copy)
+		-- upvalues: UseOverlayModuleResult (copy), FlagsModule (upval), SnapPoints (copy), UseRefResult (copy), WithDefaultsModuleResult (copy), ReducedMotion (copy), UseResult7 (copy), UseAnimatedBindingResult2 (copy), OtterModule (upval), UseResult6 (copy), UseTokensModuleResult (copy), UseResult (copy), Smallest2 (ref), UseBindingResult2_6 (copy), UseRefResult6 (copy), UseResult3 (copy)
 		if UseOverlayModuleResult then
 			local Current = if FlagsModule.FoundationBottomSheetKeepsSnapPoint and SnapPoints[UseRefResult.current] ~= nil then UseRefResult.current else WithDefaultsModuleResult.defaultSnapPointIndex
 			
@@ -309,8 +305,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 				UseResult6(Current)
 				UseAnimatedBindingResult2(OtterModule.ease(0, { duration = UseTokensModuleResult.Time.Time_100 }))
 			end
-			local IsUseResultResultAbove = UseResult(SnapPoints[Current]) >= Smallest1
-			UseBindingResult2_6(if FlagsModule.FoundationSheetReversedContent then IsUseResultResultAbove or UseRefResult6.current else IsUseResultResultAbove)
+			UseBindingResult2_6(Smallest2 <= UseResult(SnapPoints[Current]) or UseRefResult6.current)
 		end
 		return function()
 			-- upvalues: UseResult3 (upval)
@@ -336,7 +331,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 		end
 	end, { UseOverlayModuleResult })
 	ReactModule.useEffect(function()
-		-- upvalues: UseRefResult8 (copy), UseRefResult7 (copy), UseResult2 (ref), UseResult10 (copy), UseResult3 (copy), UseRefResult4 (copy), FlagsModule (upval), UseRefResult6 (copy), UseBindingResult2_6 (copy), UseResult9 (copy), UseRefResult1 (copy), UseResult12 (copy), UseResult11 (copy)
+		-- upvalues: UseRefResult8 (copy), UseRefResult7 (copy), UseResult2 (ref), UseResult10 (copy), UseResult3 (copy), UseRefResult4 (copy), UseRefResult6 (copy), UseBindingResult2_6 (copy), UseResult9 (copy), UseRefResult1 (copy), FlagsModule (upval), UseResult12 (copy), UseResult11 (copy)
 		local TouchPanConnection = game:GetService("UserInputService").TouchPan:Connect(function(_, TotalTranslation, Velocity, _)
 			-- upvalues: UseRefResult8 (upval), UseRefResult7 (upval), UseResult2 (upval), UseResult10 (upval)
 			UseRefResult8.current = Velocity.Y
@@ -354,13 +349,13 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 			UseResult3()
 		end)
 		local InputEndedConnection = game:GetService("UserInputService").InputEnded:Connect(function()
-			-- upvalues: UseRefResult7 (upval), UseResult2 (upval), UseRefResult4 (upval), UseRefResult8 (upval), FlagsModule (upval), UseRefResult6 (upval), UseBindingResult2_6 (upval), UseResult9 (upval), UseRefResult1 (upval), UseResult12 (upval), UseResult11 (upval)
+			-- upvalues: UseRefResult7 (upval), UseResult2 (upval), UseRefResult4 (upval), UseRefResult8 (upval), UseRefResult6 (upval), UseBindingResult2_6 (upval), UseResult9 (upval), UseRefResult1 (upval), FlagsModule (upval), UseResult12 (upval), UseResult11 (upval)
 			if UseRefResult7.current == false then return end
 			UseRefResult7.current = false
 			UseResult2(false)
 			UseRefResult8.current = if UseRefResult4.current then UseRefResult4.current:GetScrollVelocity().Y else 0
 			
-			if FlagsModule.FoundationSheetReversedContent and UseRefResult6.current then
+			if UseRefResult6.current then
 				UseBindingResult2_6(true)
 			end
 			if not UseResult9() and not UseRefResult1.current then
@@ -447,10 +442,10 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 			tag = "size-1000-600",
 			stateLayer = { affordance = StateLayerAffordanceModule.None },
 			onActivated = function()
-				-- upvalues: UseRefResult7 (copy), FlagsModule (upval), UseRefResult6 (copy), UseRefResult5 (copy), UseBindingResult2_5 (copy), SnapPoints (copy), UseRefResult (copy), ReducedMotion (copy), UseResult7 (copy), UseResult6 (copy), UseResult (copy), Smallest1 (ref), UseBindingResult2_6 (copy), UseResult8 (copy)
+				-- upvalues: UseRefResult7 (copy), UseRefResult6 (copy), UseRefResult5 (copy), UseBindingResult2_5 (copy), SnapPoints (copy), UseRefResult (copy), ReducedMotion (copy), UseResult7 (copy), UseResult6 (copy), UseResult (copy), Smallest2 (ref), UseBindingResult2_6 (copy), UseResult8 (copy)
 				UseRefResult7.current = false
 				
-				if FlagsModule.FoundationSheetReversedContent and UseRefResult6.current and UseRefResult5.current then
+				if UseRefResult6.current and UseRefResult5.current then
 					local Current = UseRefResult5.current
 					local Largest = math.max(0, Current.AbsoluteCanvasSize.Y - Current.AbsoluteWindowSize.Y)
 					UseBindingResult2_5(Largest)
@@ -473,8 +468,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 				else
 					UseResult6(NewCurrent)
 				end
-				local IsUseResultResultAbove = UseResult(SnapPoints[NewCurrent]) >= Smallest1
-				UseBindingResult2_6(if FlagsModule.FoundationSheetReversedContent then IsUseResultResultAbove or UseRefResult6.current else IsUseResultResultAbove)
+				UseBindingResult2_6(Smallest2 <= UseResult(SnapPoints[NewCurrent]) or UseRefResult6.current)
 			end
 		})
 	})
@@ -488,19 +482,19 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 		testId = `{WithDefaultsModuleResult.testId}--surface`
 	}, ReactModule.createElement("ScrollingFrame", {
 		Size = UDim2.fromScale(1, 1),
-		CanvasSize = UDim2.new(1, 0, 1, Smallest1 + Bottom),
+		CanvasSize = UDim2.new(1, 0, 1, Smallest2 + Bottom),
 		ClipsDescendants = false,
 		BackgroundTransparency = 1,
 		ScrollingDirection = Enum.ScrollingDirection.Y,
 		ScrollBarThickness = 0,
 		ref = UseRefResult4,
 		[ReactModule.Change.CanvasPosition] = function(ScrollFrame)
-			-- upvalues: UseRefResult3 (copy), FlagsModule (upval), UseMemoResult1 (copy), UseBindingResult2 (copy), Bottom (copy), UseTokensModuleResult (copy), UseRefResult5 (copy), UseRefResult6 (copy), UseResult10 (copy), UseResult8 (copy)
+			-- upvalues: UseRefResult3 (copy), UseMemoResult1 (copy), UseBindingResult2 (copy), Bottom (copy), UseTokensModuleResult (copy), UseRefResult5 (copy), UseRefResult6 (copy), UseResult10 (copy), UseResult8 (copy)
 			UseRefResult3.current = ScrollFrame.CanvasPosition.Y
-			local Value = if FlagsModule.FoundationSheetReversedContent and UseMemoResult1 then UseMemoResult1:getValue() else nil
+			local Value = if UseMemoResult1 then UseMemoResult1:getValue() else nil
 			UseBindingResult2(UseRefResult3.current - Bottom - UseTokensModuleResult.Margin.Small)
 			
-			if FlagsModule.FoundationSheetReversedContent and UseMemoResult1 and Value then
+			if UseMemoResult1 and Value then
 				local Current = UseRefResult5.current
 				local ValueDelta = UseMemoResult1:getValue() - Value
 				
@@ -517,11 +511,11 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 	}, {
 		SheetContainer = ReactModule.createElement(ViewModule, {
 			ZIndex = 3,
-			Size = UDim2.new(1, 0, 1, 200 - Smallest1 - Bottom),
-			Position = UDim2.new(0, 0, 1, -Smallest1)
+			Size = UDim2.new(1, 0, 1, 200 - Smallest2 - Bottom),
+			Position = UDim2.new(0, 0, 1, -Smallest2)
 		}, {
 			Sheet = ReactModule.createElement(ViewModule, {
-				Size = if WithDefaultsModuleResult.snapPoints == nil then UDim2.fromScale(1, 0) else UDim2.new(1, 0, 0, Smallest1 + 200),
+				Size = if WithDefaultsModuleResult.snapPoints == nil then UDim2.fromScale(1, 0) else UDim2.new(1, 0, 0, Smallest2 + 200),
 				AutomaticSize = if WithDefaultsModuleResult.snapPoints == nil then Enum.AutomaticSize.Y else nil,
 				onAbsoluteSizeChanged = if WithDefaultsModuleResult.snapPoints == nil then function(Frame)
 					-- upvalues: UseStateResult2_1 (copy)
@@ -542,14 +536,14 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 		Shadow = if FlagsModule.FoundationBottomSheetOverlayShadow then ReactModule.createElement(ViewModule, {
 			tag = "shadow-overlay-300 radius-large",
 			ZIndex = 2,
-			Size = UDim2.new(1, 0, 0, Smallest1 + 200),
-			Position = UDim2.new(0, 0, 1, -Smallest1),
+			Size = UDim2.new(1, 0, 0, Smallest2 + 200),
+			Position = UDim2.new(0, 0, 1, -Smallest2),
 			testId = `{WithDefaultsModuleResult.testId}--shadow`
 		}) else ReactModule.createElement(ImageModule, {
 			ZIndex = 2,
 			Image = SHADOWIMAGE,
-			Size = UDim2.new(1, SHADOWSIZE * 2, 0, Smallest1 + 200 + SHADOWSIZE * 2),
-			Position = UDim2.new(-SHADOWSIZE, 0, 1, -Smallest1 - SHADOWSIZE),
+			Size = UDim2.new(1, SHADOWSIZE * 2, 0, Smallest2 + 200 + SHADOWSIZE * 2),
+			Position = UDim2.new(-SHADOWSIZE, 0, 1, -Smallest2 - SHADOWSIZE),
 			slice = {
 				scale = 2,
 				center = Rect.new(SHADOWSIZE, SHADOWSIZE, SHADOWSIZE + 1, SHADOWSIZE + 1)

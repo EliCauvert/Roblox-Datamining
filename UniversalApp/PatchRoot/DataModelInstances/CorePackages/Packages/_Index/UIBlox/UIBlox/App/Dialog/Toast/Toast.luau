@@ -6,7 +6,9 @@ local RoactModule = require(Parent3.Roact)
 local TModule = require(Parent3.t)
 local SlidingDirectionModule = require(Parent2.Core.Animation.Enum.SlidingDirection)
 local SlidingContainerModule = require(Parent2.Core.Animation.SlidingContainer)
+local ValidateColorInfoModule = require(Parent2.Core.Style.Validator.validateColorInfo)
 local StateTableModule = require(Parent2.StateTable.StateTable)
+local ButtonTypeModule = require(Parent1.Button.Enum.ButtonType)
 local AnimationStateModule = require(Parent.Enum.AnimationState)
 local InformativeToastModule = require(Parent.InformativeToast)
 local InteractiveToastModule = require(Parent.InteractiveToast)
@@ -22,7 +24,7 @@ Toast.validateProps = TModule.strictInterface({
 	springOptions = TModule.optional(TModule.table),
 	toastContent = TModule.strictInterface({
 		buttonText = TModule.optional(TModule.string),
-		iconColorStyle = TModule.optional((require(Parent2.Core.Style.Validator.validateColorInfo))),
+		iconColorStyle = TModule.optional(ValidateColorInfoModule),
 		iconImage = TModule.optional(TModule.union(TModule.table, TModule.string, TModule.callback)),
 		iconSize = TModule.optional(TModule.Vector2),
 		iconChildren = TModule.optional(TModule.table),
@@ -33,7 +35,7 @@ Toast.validateProps = TModule.strictInterface({
 		toastSubtitle = TModule.optional(TModule.string),
 		sequenceNumber = TModule.optional(TModule.integer),
 		toastTitle = TModule.string,
-		buttonType = TModule.optional(require(Parent1.Button.Enum.ButtonType).isEnumValue),
+		buttonType = TModule.optional(ButtonTypeModule.isEnumValue),
 		onTouchSwipeUp = TModule.optional(TModule.callback)
 	})
 })

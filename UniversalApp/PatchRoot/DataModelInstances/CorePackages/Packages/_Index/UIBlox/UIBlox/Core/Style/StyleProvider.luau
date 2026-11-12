@@ -3,6 +3,7 @@ local Parent1 = Parent.Parent.Parent
 local Style = Parent1.App.Style
 local RoactModule = require(Parent1.Parent.Roact)
 local TModule = require(Parent1.Parent.t)
+local ValidateStyleModule = require(Style.Validator.validateStyle)
 local StyleContextModule = require(Parent.StyleContext)
 local GetTextSizeOffsetModule = require(Parent1.Utility.getTextSizeOffset)
 local _ = require(Style.StyleTypes)
@@ -18,7 +19,7 @@ local Object = require(Parent2.LuauPolyfill).Object
 local EnablePreferredTextSizeSetting = require(Parent2.UIBlox.Core.Utility.GetEngineFeatureSafe)("EnablePreferredTextSizeSetting")
 local StyleProvider = RoactModule.Component:extend("StyleProvider")
 StyleProvider.validateProps = TModule.strictInterface({
-	style = TModule.optional((require(Style.Validator.validateStyle))),
+	style = TModule.optional(ValidateStyleModule),
 	derivedValues = TModule.optional(TModule.table),
 	[RoactModule.Children] = TModule.table
 })

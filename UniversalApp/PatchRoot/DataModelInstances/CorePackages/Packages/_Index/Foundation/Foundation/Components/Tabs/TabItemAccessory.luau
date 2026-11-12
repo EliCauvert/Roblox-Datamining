@@ -2,6 +2,7 @@
 local Parent = Foundation.Parent
 local ReactModule = require(Parent.React)
 local BadgeModule = require(Foundation.Components.Badge)
+local BuilderIconsModule = require(Parent.BuilderIcons)
 local IconModule = require(Foundation.Components.Icon)
 local _ = require(Foundation.Enums.IconSize)
 local ImageModule = require(Foundation.Components.Image)
@@ -13,7 +14,7 @@ local GetIconScaleModule = require(Foundation.Utility.getIconScale)
 local IconMigrationUtilsModule = require(Foundation.Utility.iconMigrationUtils)
 local IsMigratedFunction = IconMigrationUtilsModule.isMigrated
 local IsBuilderOrMigratedIconFunction = IconMigrationUtilsModule.isBuilderOrMigratedIcon
-local Uiblox = require(Parent.BuilderIcons).Migration.uiblox
+local Uiblox = BuilderIconsModule.Migration.uiblox
 
 return {
 	resolve = function(IconName, IconName1, IconName2, p1)

@@ -3,6 +3,14 @@ local ConstantsModule = require(Parent.Constants)
 local _ = require(Parent.util.Types)
 local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local Categories = {
+	ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+	ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD,
+	ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+	ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH,
+	ValidationEnumsModule.UploadCategory.RIGID_ACCESSORY
+}
+local RequiredData = { ValidationEnumsModule.SharedDataMember.rootInstance }
 
 local function buildAcceptedMaterialList(): string
 	-- upvalues: ConstantsModule (copy)
@@ -15,14 +23,8 @@ local function buildAcceptedMaterialList(): string
 end
 
 return {
-	categories = {
-		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD,
-		ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
-		ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH,
-		ValidationEnumsModule.UploadCategory.RIGID_ACCESSORY
-	},
-	requiredData = { ValidationEnumsModule.SharedDataMember.rootInstance },
+	categories = Categories,
+	requiredData = RequiredData,
 	expectedFailures = {},
 	run = function(p1, p2)
 		-- upvalues: ConstantsModule (copy), buildAcceptedMaterialList (copy), ErrorSourceStringsModule (copy)

@@ -12,14 +12,16 @@ local UseStatusIndicatorVariantsModule = require(script.Parent.useStatusIndicato
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
 local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local StatusIndicatorSizeModule = require(Foundation.Enums.StatusIndicatorSize)
+local StatusIndicatorVariantModule = require(Foundation.Enums.StatusIndicatorVariant)
 local StatusIndicatorShapeModule = require(Foundation.Enums.StatusIndicatorShape)
 local ValidNumericVariantsModule = require(script.Parent.ValidNumericVariants)
 local config = {
 	max = 1e999,
 	testId = "--foundation-status-indicator",
-	variant = require(Foundation.Enums.StatusIndicatorVariant).Standard,
+	variant = StatusIndicatorVariantModule.Standard,
 	shape = StatusIndicatorShapeModule.Circle,
-	size = require(Foundation.Enums.StatusIndicatorSize).Small
+	size = StatusIndicatorSizeModule.Small
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)

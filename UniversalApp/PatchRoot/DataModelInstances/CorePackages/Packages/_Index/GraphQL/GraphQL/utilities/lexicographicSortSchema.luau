@@ -28,11 +28,11 @@ local IsUnionTypeFunction = DefinitionModule.isUnionType
 local IsEnumTypeFunction = DefinitionModule.isEnumType
 local IsInputObjectTypeFunction = DefinitionModule.isInputObjectType
 local Callback2 = nil
-local Callback = nil
 local Callback1 = nil
+local Callback = nil
 
 local function lexicographicSortSchema(p1)
-	-- upvalues: IsListTypeFunction (copy), GraphQLList (copy), IsNonNullTypeFunction (copy), GraphQLNonNull (copy), GraphQLDirective (copy), Object (copy), Callback1 (ref), Callback2 (ref), Array (copy), Callback (ref), IsScalarTypeFunction (copy), IsIntrospectionTypeFunction (copy), IsObjectTypeFunction (copy), GraphQLObjectType (copy), IsInterfaceTypeFunction (copy), GraphQLInterfaceType (copy), IsUnionTypeFunction (copy), GraphQLUnionType (copy), IsEnumTypeFunction (copy), GraphQLEnumType (copy), IsInputObjectTypeFunction (copy), GraphQLInputObjectType (copy), InvariantFunction (copy), InspectFunction (copy), KeyValMapFunction (copy), GraphQLSchema (copy)
+	-- upvalues: IsListTypeFunction (copy), GraphQLList (copy), IsNonNullTypeFunction (copy), GraphQLNonNull (copy), GraphQLDirective (copy), Object (copy), Callback (ref), Callback2 (ref), Array (copy), Callback1 (ref), IsScalarTypeFunction (copy), IsIntrospectionTypeFunction (copy), IsObjectTypeFunction (copy), GraphQLObjectType (copy), IsInterfaceTypeFunction (copy), GraphQLInterfaceType (copy), IsUnionTypeFunction (copy), GraphQLUnionType (copy), IsEnumTypeFunction (copy), GraphQLEnumType (copy), IsInputObjectTypeFunction (copy), GraphQLInputObjectType (copy), InvariantFunction (copy), InspectFunction (copy), KeyValMapFunction (copy), GraphQLSchema (copy)
 	local v1 = nil
 	local Callback3 = nil
 	local Callback4 = nil
@@ -57,11 +57,11 @@ local function lexicographicSortSchema(p1)
 	end
 	
 	local function sortDirective(p2)
-		-- upvalues: GraphQLDirective (upval), Object (upval), Callback1 (upval), Callback4 (ref)
+		-- upvalues: GraphQLDirective (upval), Object (upval), Callback (upval), Callback4 (ref)
 		local Config = p2:toConfig()
 		
 		return GraphQLDirective.new(Object.assign({}, Config, {
-			locations = Callback1(Config.locations, function(p3)
+			locations = Callback(Config.locations, function(p3)
 				return p3
 			end),
 			args = Callback4(Config.args)
@@ -96,11 +96,11 @@ local function lexicographicSortSchema(p1)
 	end
 	
 	sortTypes = function(Interfaces)
-		-- upvalues: Array (upval), Callback (upval), Callback3 (ref)
-		return Array.map(Callback(Interfaces), Callback3)
+		-- upvalues: Array (upval), Callback1 (upval), Callback3 (ref)
+		return Array.map(Callback1(Interfaces), Callback3)
 	end
 	
-	v1 = KeyValMapFunction(Callback(Config.types), function(p2)
+	v1 = KeyValMapFunction(Callback1(Config.types), function(p2)
 		return p2.name
 	end, function(p2)
 		-- upvalues: IsScalarTypeFunction (upval), IsIntrospectionTypeFunction (upval), IsObjectTypeFunction (upval), GraphQLObjectType (upval), Object (upval), sortTypes (ref), sortFields (ref), IsInterfaceTypeFunction (upval), GraphQLInterfaceType (upval), IsUnionTypeFunction (upval), GraphQLUnionType (upval), IsEnumTypeFunction (upval), GraphQLEnumType (upval), Callback2 (upval), IsInputObjectTypeFunction (upval), GraphQLInputObjectType (upval), sortInputFields (ref), InvariantFunction (upval), InspectFunction (upval)
@@ -166,33 +166,33 @@ local function lexicographicSortSchema(p1)
 	
 	return GraphQLSchema.new(Object.assign({}, Config, {
 		types = v1:values(),
-		directives = Array.map(Callback(Config.directives), sortDirective),
+		directives = Array.map(Callback1(Config.directives), sortDirective),
 		query = replaceMaybeType(Config.query),
 		mutation = replaceMaybeType(Config.mutation),
 		subscription = replaceMaybeType(Config.subscription)
 	}))
 end
 
-Callback2 = function(Values, Callback)
-	-- upvalues: Map (copy), Callback1 (ref)
+Callback2 = function(Values, Callback1)
+	-- upvalues: Map (copy), Callback (ref)
 	local NewMap = Map.new()
 	
-	for _, value in ipairs((Callback1(Values:keys(), function(p1)
+	for _, value in ipairs((Callback(Values:keys(), function(p1)
 		return p1
 	end))) do
-		NewMap[value] = Callback(Values[value])
+		NewMap[value] = Callback1(Values[value])
 	end
 	return NewMap
 end
 
-Callback = function(Directives)
-	-- upvalues: Callback1 (ref)
-	return Callback1(Directives, function(p1)
+Callback1 = function(Directives)
+	-- upvalues: Callback (ref)
+	return Callback(Directives, function(p1)
 		return p1.name
 	end)
 end
 
-Callback1 = function(KeysResult, Callback)
+Callback = function(KeysResult, Callback)
 	-- upvalues: Array (copy), NaturalCompareFunction (copy)
 	return Array.sort(Array.slice(KeysResult), function(p1, p2)
 		-- upvalues: Callback (copy), NaturalCompareFunction (upval)

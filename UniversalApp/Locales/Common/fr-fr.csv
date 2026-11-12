@@ -4385,10 +4385,12 @@ Feature.Moments.Description.HowToCaptureStep1,"Rejoins une expérience où les c
 Feature.Moments.Description.HowToCaptureStep2,Active les contrôles de capture
 Feature.Moments.Description.HowToCaptureStep3,Capture des photos et des vidéos durant ta partie
 Feature.Moments.Description.LeaveMomentsCreation,"Tu perdras tous tes changements, mais tu pourras toujours retrouver cette capture dans ta galerie de <b>captures</b>."
+Feature.Moments.Description.MomentsOffBody,Demande à un parent d'activer les Moments dans les contrôles parentaux.
 Feature.Moments.Description.NoMusicResults,Aucune musique trouvée
 Feature.Moments.Description.NonInfiniteScrollEndBody,Nous avons mis ton fil d'actualité en pause. À toi de décider si tu veux continuer à regarder des Moments.
 Feature.Moments.Description.NothingHereYet,Rien ici pour l'instant…
 Feature.Moments.Description.PublishMoment,Décris ton Moment
+Feature.Moments.Description.TimeLimitReachedBody,Les limites dépendent de l'âge. Reviens demain pour regarder d'autres Moments.
 Feature.Moments.Description.TooManyUploads,Tu as téléchargé trop de vidéos aujourd'hui. Réessaie demain.
 Feature.Moments.Disclaimer.EveryoneMoments,Tous les participants aux Moments peuvent voir ce qui est publié
 Feature.Moments.Label.All,
@@ -4459,6 +4461,7 @@ Feature.Moments.Label.MomentRemovedTitle,Nous avons retiré ce Moment
 Feature.Moments.Label.MomentUnavailable,Moment indisponible
 Feature.Moments.Label.MomentUnavailableDefault,Ce moment est indisponible.
 Feature.Moments.Label.MomentsExperienceName,
+Feature.Moments.Label.MomentsOffTitle,Les Moments sont désactivés
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,Aucun commentaire
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Il y a d'autres Moments à regarder
@@ -4488,6 +4491,7 @@ Feature.Moments.Label.TextGenerationFailedBody,Impossible de générer du texte.
 Feature.Moments.Label.TextGenerationFailedTitle,Échec de la génération
 Feature.Moments.Label.TextGenerationFilteredBody,Impossible de générer du contenu à partir de cette vidéo capturée : contenu filtré.
 Feature.Moments.Label.TextGenerationFilteredTitle,Génération filtrée
+Feature.Moments.Label.TimeLimitReachedTitle,Tu as atteint la limite de temps pour les Moments
 Feature.Moments.Label.Tone,Ton
 Feature.Moments.Label.Tone.Cinematic,Dramatique
 Feature.Moments.Label.Tone.Funny,Amusant
@@ -5700,6 +5704,8 @@ Feature.UniversalShareSheet.Response.SharedMessage,Le message a bien été envoy
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Les messages ont bien été envoyés
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} autres
 Feature.UserLibrary.Label.MyLibrary,Ma bibliothèque
+Feature.VIPServer.Message.TooManyFreeServersOnGame,Tu ne peux pas avoir plus de serveurs gratuits privés pour cette expérience.
+Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Tu ne peux pas avoir plus de serveurs privés gratuits actifs. Essaie de désactiver d'autres serveurs d'abord.
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,Ajouter un téléphone pour le chat vocal
 Feature.VerificationUpsell.Action.ChangeEmail,Changer d'email

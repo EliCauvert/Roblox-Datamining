@@ -24,6 +24,8 @@ return function(Frame)
 	local UseTextSizeModuleResult1 = UseTextSizeModule(Text, UseTokensModuleResult.Typography.BodySmall)
 	local UseScaledValueModuleResult = UseScaledValueModule(44)
 	local UseScaledValueModuleResult1 = UseScaledValueModule(200)
+	local NewCeiled: number = if UseTextSizeModuleResult then math.ceil(UseTextSizeModuleResult.X) + UseScaledValueModuleResult else 110
+	local NewCeiled1: number = if UseTextSizeModuleResult1 then math.ceil(UseTextSizeModuleResult1.X) + UseScaledValueModuleResult else 70
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: DateTimeUtilitiesModule (upval)
 		local List = {}
@@ -86,7 +88,7 @@ return function(Frame)
 				testId = `{Frame.testId}--month-dropdown`,
 				value = ViewDate.month,
 				variant = InputVariantModule.Utility,
-				width = UDim.new(0, if UseTextSizeModuleResult then math.ceil(UseTextSizeModuleResult.X) + UseScaledValueModuleResult else 110)
+				width = UDim.new(0, NewCeiled)
 			}),
 			YearDropdown = ReactModule.createElement(DropdownModule.Root, {
 				label = "",
@@ -106,7 +108,7 @@ return function(Frame)
 				testId = `{Frame.testId}--year-dropdown`,
 				value = ViewDate.year,
 				variant = InputVariantModule.Utility,
-				width = UDim.new(0, if UseTextSizeModuleResult1 then math.ceil(UseTextSizeModuleResult1.X) + UseScaledValueModuleResult else 70)
+				width = UDim.new(0, NewCeiled1)
 			})
 		}),
 		NextMonthButton = ReactModule.createElement(IconButtonModule, {

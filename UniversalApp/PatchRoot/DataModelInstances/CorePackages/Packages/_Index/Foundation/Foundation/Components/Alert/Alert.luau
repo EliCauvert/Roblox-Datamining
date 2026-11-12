@@ -1,9 +1,12 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
 local Parent = Foundation.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
 local ReactModule = require(Parent.React)
 local AlertConstantsModule = require(Foundation.Components.AlertActions.AlertConstants)
 local AlertSeverityModule = require(Foundation.Enums.AlertSeverity)
 local AlertVariantModule = require(Foundation.Enums.AlertVariant)
+local BreakpointModule = require(Foundation.Enums.Breakpoint)
+local BreakpointConfigModule = require(Foundation.Utility.Responsive.BreakpointConfig)
 local ButtonGroupModule = require(Foundation.Components.ButtonGroup)
 local ButtonVariantModule = require(Foundation.Enums.ButtonVariant)
 local CloseAffordanceModule = require(Foundation.Components.CloseAffordance)
@@ -24,7 +27,7 @@ local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
 local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local UseAlertVariantsModule = require(script.Parent.useAlertVariants)
-local IconVariant = require(Parent.BuilderIcons).IconVariant
+local IconVariant = BuilderIconsModule.IconVariant
 local config = {
 	testId = "--foundation-alert",
 	variant = AlertVariantModule.Feedback,
@@ -34,7 +37,7 @@ local config1 = {
 	[AlertVariantModule.Standard] = AlertVariantModule.Feedback,
 	[AlertVariantModule.Emphasis] = AlertVariantModule.Feedback
 }
-local Width = require(Foundation.Utility.Responsive.BreakpointConfig).widths[require(Foundation.Enums.Breakpoint).XSmall]
+local Width = BreakpointConfigModule.widths[BreakpointModule.XSmall]
 
 local function _(p1, p2)
 	return if p1 then p1.text elseif p2 then `{p2.primary.text}|{if p2.secondary then p2.secondary.text else ""}` else ""

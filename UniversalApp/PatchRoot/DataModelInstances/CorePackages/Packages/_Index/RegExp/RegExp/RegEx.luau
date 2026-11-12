@@ -587,17 +587,17 @@ local function re_rawfind(Token, Str_arr, Total, Flags, VerbFlags, p10)
 	local Total1 = Total
 	local Total2 = Total
 	local List = {}
-	local v7 = nil
-	local Entry1 = nil
 	local Count1 = nil
-	local Alternation2_1 = nil
-	local v8 = nil
-	local Entry = nil
-	local v9 = nil
 	local Flag = nil
-	local Amount = nil
+	local v7 = nil
+	local v8 = nil
+	local Entry1 = nil
+	local Entry = nil
+	local Alternation2_1 = nil
+	local v9 = nil
 	local v10 = nil
 	local v11 = nil
+	local Amount = nil
 	while Count do
 		if Count == 0 then
 			Count += 1
@@ -648,14 +648,14 @@ local function re_rawfind(Token, Str_arr, Total, Flags, VerbFlags, p10)
 					local Removed = nil
 					if TokenEntry[4] == 33 or TokenEntry[4] == 61 then
 						while true do
-							v8 = nil
+							v10 = nil
 							Removed = table.remove(List, 1)
-							if (Removed[1] ~= "group" or Removed[2] ~= TokenEntry[3]) and (Removed[1] ~= "matchStart" or v8 or TokenEntry[4] ~= 61 or true) then continue end
+							if (Removed[1] ~= "group" or Removed[2] ~= TokenEntry[3]) and (Removed[1] ~= "matchStart" or v10 or TokenEntry[4] ~= 61 or true) then continue end
 							if (TokenEntry[4] == 33 or TokenEntry[4] == 61) and not TokenEntry[5] then
 								Total1 = Removed[3]
 							end
-							if not v8 then break end
-							table.insert(List, 1, v8)
+							if not v10 then break end
+							table.insert(List, 1, v10)
 							break
 						end
 					elseif TokenEntry[4] == 62 then
@@ -755,8 +755,8 @@ local function re_rawfind(Token, Str_arr, Total, Flags, VerbFlags, p10)
 							end
 							Inverted = true
 						else
-							v10 = nil
-							v11 = nil
+							v7 = nil
+							v9 = nil
 							Amount = 1
 							local IsBackref: boolean = type(TokenEntry[5]) == "table" and TokenEntry[5][1] == "backref"
 							
@@ -766,9 +766,9 @@ local function re_rawfind(Token, Str_arr, Total, Flags, VerbFlags, p10)
 								
 								for _, value3 in ipairs(List) do
 									if value3[1] == "group" and value3[5] == TokenEntry6 then
-										v10 = value3[3]
-										v11 = value3[4]
-										Amount = v11 - v10
+										v7 = value3[3]
+										v9 = value3[4]
+										Amount = v9 - v7
 										break
 									end
 								end
@@ -777,10 +777,10 @@ local function re_rawfind(Token, Str_arr, Total, Flags, VerbFlags, p10)
 							local Count2 = 0
 							while Count2 < TokenEntry[3] do
 								if IsBackref then
-									if not v10 or not v11 then break end
+									if not v7 or not v9 then break end
 									local S: string = Str_arr.s
-									local OffsetResult = utf8.offset(S, v11)
-									local Segment = string.sub(S, utf8.offset(S, v10), OffsetResult and OffsetResult - 1)
+									local OffsetResult = utf8.offset(S, v9)
+									local Segment = string.sub(S, utf8.offset(S, v7), OffsetResult and OffsetResult - 1)
 									local S1: string = Str_arr.s
 									local OffsetResult1 = utf8.offset(S1, Total1 + Amount)
 									
@@ -807,23 +807,23 @@ local function re_rawfind(Token, Str_arr, Total, Flags, VerbFlags, p10)
 							end
 						end
 					elseif TokenEntry1 == "backref" then
-						v7 = nil
-						v9 = nil
+						v8 = nil
+						v11 = nil
 						local TokenEntry5 = TokenEntry[2]
 						
 						for _, value4 in ipairs(List) do
 							if value4[1] == "group" and value4[5] == TokenEntry5 then
-								v7 = value4[3]
-								v9 = value4[4]
+								v8 = value4[3]
+								v11 = value4[4]
 								break
 							end
 						end
-						if v7 and v9 then
+						if v8 and v11 then
 							local Total5: number = Total1
-							Total1 += v9 - v7
+							Total1 += v11 - v8
 							local S: string = Str_arr.s
-							local OffsetResult = utf8.offset(S, v9)
-							local Segment = string.sub(S, utf8.offset(S, v7), OffsetResult and OffsetResult - 1)
+							local OffsetResult = utf8.offset(S, v11)
+							local Segment = string.sub(S, utf8.offset(S, v8), OffsetResult and OffsetResult - 1)
 							local S2: string = Str_arr.s
 							local OffsetResult2 = utf8.offset(S2, Total1)
 							Inverted = Segment == string.sub(S2, utf8.offset(S2, Total5), OffsetResult2 and OffsetResult2 - 1)
@@ -1386,8 +1386,8 @@ local function v42(p13, Callback, p14, p15: number?, p16, Source)
 		elseif ValueType == "subst_string" then
 			MoveResult = insert_tokenized_sub(table.create(Count), Str_arr, Re_rawfindResult, Callback)
 		else
-			local Match = nil
 			local CallbackResult = nil
+			local Match = nil
 			if ValueType == "table" then
 				local S: string = Str_arr.s
 				local OffsetResult = utf8.offset(S, Re_rawfindResult[0][2])
@@ -1622,17 +1622,17 @@ local function tokenize_ptn(List, Flags)
 	local List1 = {}
 	local t = {}
 	local config = { newline = 1, newline_seq = 1, not_empty = 0 }
-	local Entry10 = nil
-	local Count6 = nil
-	local Entry6 = nil
 	local Count5 = nil
-	local Largest1 = nil
-	local v22 = nil
+	local Entry6 = nil
 	local Count4 = nil
+	local Largest1 = nil
+	local Entry1 = nil
+	local v22 = nil
+	local Entry10 = nil
 	while Count <= N do
-		local Entry1: number = List[Count]
+		local Entry2: number = List[Count]
 		
-		if Entry1 == 40 then
+		if Entry2 == 40 then
 			local Entry = nil
 			
 			if List[Count + 1] == 42 then
@@ -1812,82 +1812,82 @@ local function tokenize_ptn(List, Flags)
 			if Entry then
 				table.insert(List1, Entry)
 			end
-		elseif Entry1 == 41 then
+		elseif Entry2 == 41 then
 			local v24 = #List1 + 1
-			Count4 = -1
-			Count5 = 0
+			Count5 = -1
+			Count4 = 0
 			Largest1 = 0
-			Count6 = 0
+			Entry1 = 0
 			repeat
 				v24 -= 1
 				Entry6 = List1[v24]
 				local IsTable = type(List1[v24]) == "table"
 				if IsTable and Entry6[1] == 40 then
-					Count6 += 1
+					Entry1 += 1
 					
-					if Count5 and Entry6.count then
-						Count5 += Entry6.count
+					if Count4 and Entry6.count then
+						Count4 += Entry6.count
 					end
 					if not Entry6[3] then
 						if Entry6[4] == 124 then
-							Count1 = Entry6[5] + math.max(Largest1, Count6)
+							Count1 = Entry6[5] + math.max(Largest1, Entry1)
 						end
-						if Count5 == Count4 or Count4 == -1 then
-							Count4 = Count5
+						if Count4 == Count5 or Count5 == -1 then
+							Count5 = Count4
 							break
 						else
-							Count4 = nil
+							Count5 = nil
 							break
 						end
 					end
 				elseif Entry6 == list3 then
-					if Count5 == Count4 or Count4 == -1 then
-						Count4 = Count5
-						Count5 = 0
+					if Count4 == Count5 or Count5 == -1 then
+						Count5 = Count4
+						Count4 = 0
 					else
-						Count4 = nil
 						Count5 = nil
+						Count4 = nil
 					end
-					Largest1 = math.max(Largest1, Count6)
-					Count6 = 0
-				elseif Count5 then
+					Largest1 = math.max(Largest1, Entry1)
+					Entry1 = 0
+				elseif Count4 then
 					if IsTable and Entry6[1] == "quantifier" then
 						if Entry6[2] == Entry6[3] then
-							Count5 += Entry6[2]
+							Count4 += Entry6[2]
 						else
-							Count5 = nil
+							Count4 = nil
 						end
 					else
-						Count5 += 1
+						Count4 += 1
 					end
 				end
 			until v24 < 1
 			if v24 < 1 then
 				return "unmatched ) in regular expression"
 			end
-			local Entry4 = List1[v24]
-			local v25 = #List1 + 1
-			local config4 = {
+			Entry1 = List1[v24]
+			Largest1 = #List1 + 1
+			Count4 = {
 				41,
-				Entry4[2],
+				Entry1[2],
 				v24,
-				Entry4[4],
-				Entry4[5],
-				count = Count4
+				Entry1[4],
+				Entry1[5],
+				count = Count5
 			}
 			
-			if (Entry4[4] == 33 or Entry4[4] == 61) and (Entry4[5] and not Count4) then
+			if (Entry1[4] == 33 or Entry1[4] == 61) and (Entry1[5] and not Count5) then
 				return "lookbehind assertion is not fixed width"
 			end
-			Entry4[3] = v25
-			table.insert(List1, config4)
-		elseif Entry1 == 46 then
+			Entry1[3] = Largest1
+			table.insert(List1, Count4)
+		elseif Entry2 == 46 then
 			table.insert(List1, list1)
-		elseif Entry1 == 91 then
+		elseif Entry2 == 91 then
 			local Flag1 = false
 			v22 = nil
 			Count += 1
-			local Count7: number = Count
+			local Count6: number = Count
 			
 			if List[Count] == 94 then
 				Flag1 = true
@@ -1911,9 +1911,9 @@ local function tokenize_ptn(List, Flags)
 						table.insert(List2, 1, 45)
 					else
 						Count += 1
-						local v26 = List[Count]
+						local v25 = List[Count]
 						
-						if v26 == 91 then
+						if v25 == 91 then
 							if List[Count + 1] == 46 or List[Count + 1] == 58 or List[Count + 1] == 61 then
 								local NewCount: number? = Count + 2
 								repeat
@@ -1929,59 +1929,59 @@ local function tokenize_ptn(List, Flags)
 							if List2[1] > 91 then
 								return "invalid range in character class"
 							end
-						elseif v26 == 92 then
+						elseif v25 == 92 then
 							Count += 1
 							
 							if List[Count] == 120 then
 								local EntryDelta: number? = nil
-								local v27 = nil
+								local v26 = nil
 								Count += 1
 								
 								if List[Count] and (List[Count] >= 48 and List[Count] <= 57) or (List[Count] >= 65 and List[Count] <= 70 or List[Count] >= 97 and List[Count] <= 102) then
-									local Entry2 = List[Count]
-									EntryDelta = Entry2 - (if List[Count] >= 65 and List[Count] <= 90 then 55 elseif List[Count] >= 97 and List[Count] <= 122 then 87 else 48)
+									local Entry3 = List[Count]
+									EntryDelta = Entry3 - (if List[Count] >= 65 and List[Count] <= 90 then 55 elseif List[Count] >= 97 and List[Count] <= 122 then 87 else 48)
 									Count += 1
 									
 									if List[Count] and (List[Count] >= 48 and List[Count] <= 57) or (List[Count] >= 65 and List[Count] <= 70 or List[Count] >= 97 and List[Count] <= 102) then
-										Entry2 = List[Count]
-										v27 = Entry2 - (if List[Count] >= 65 and List[Count] <= 90 then 55 elseif List[Count] >= 97 and List[Count] <= 122 then 87 else 48)
+										Entry3 = List[Count]
+										v26 = Entry3 - (if List[Count] >= 65 and List[Count] <= 90 then 55 elseif List[Count] >= 97 and List[Count] <= 122 then 87 else 48)
 									else
 										Count -= 1
 									end
 								else
 									Count -= 1
 								end
-								v26 = EntryDelta and (v27 and 16 * EntryDelta + v27 or EntryDelta) or 0
+								v25 = EntryDelta and (v26 and 16 * EntryDelta + v26 or EntryDelta) or 0
 							elseif List[Count] >= 48 and List[Count] <= 55 then
 								local EntryDelta3 = List[Count] - 48
+								local v27: number? = nil
 								local v28: number? = nil
-								local v29: number? = nil
 								Count += 1
 								
 								if List[Count] and List[Count] >= 48 and List[Count] <= 55 then
-									v28 = List[Count] - 48
+									v27 = List[Count] - 48
 									Count += 1
 									
 									if List[Count] and List[Count] >= 48 and List[Count] <= 55 then
-										v29 = List[Count] - 48
+										v28 = List[Count] - 48
 									else
 										Count -= 1
 									end
 								else
 									Count -= 1
 								end
-								v26 = v28 and (v29 and 64 * EntryDelta3 + 8 * v28 + v29 or 8 * EntryDelta3 + v28) or EntryDelta3
+								v25 = v27 and (v28 and 64 * EntryDelta3 + 8 * v27 + v28 or 8 * EntryDelta3 + v27) or EntryDelta3
 							else
-								v26 = config2[List[Count]] or List[Count]
+								v25 = config2[List[Count]] or List[Count]
 								
-								if type(v26) ~= "number" then
+								if type(v25) ~= "number" then
 									return "invalid range in character class"
 								end
 							end
-						elseif v26 < List2[1] then
+						elseif v25 < List2[1] then
 							return "invalid range in character class"
 						end
-						List2[1] = { "range", List2[1], v26 }
+						List2[1] = { "range", List2[1], v25 }
 					end
 				elseif List[Count] == 91 then
 					if List[Count + 1] == 46 or (List[Count + 1] == 58 or List[Count + 1] == 61) then
@@ -2018,29 +2018,29 @@ local function tokenize_ptn(List, Flags)
 					Count += 1
 					
 					if List[Count] == 120 then
-						local v30: number? = nil
+						local v29: number? = nil
 						local EntryDelta2 = nil
 						Count += 1
 						
 						if List[Count] == 123 then
 							Count += 1
-							local Count9: number = Count
+							local Count8: number = Count
 							while List[Count] and (List[Count] >= 48 and List[Count] <= 57 or (List[Count] >= 65 and List[Count] <= 70 or List[Count] >= 97 and List[Count] <= 102)) do
 								Count += 1
 							end
-							if List[Count] ~= 125 or Count == Count9 then
+							if List[Count] ~= 125 or Count == Count8 then
 								return "malformed hexadecimal character"
 							end
-							if Count - Count9 > 4 then
+							if Count - Count8 > 4 then
 								return "character offset too large"
 							end
 							local S7: string = List.s
 							local OffsetResult9 = utf8.offset(S7, Count)
-							table.insert(List2, 1, (tonumber(string.sub(S7, utf8.offset(S7, Count9), OffsetResult9 and OffsetResult9 - 1), 16)))
+							table.insert(List2, 1, (tonumber(string.sub(S7, utf8.offset(S7, Count8), OffsetResult9 and OffsetResult9 - 1), 16)))
 						else
 							if List[Count] and List[Count] >= 48 and List[Count] <= 57 or (List[Count] >= 65 and List[Count] <= 70 or List[Count] >= 97 and List[Count] <= 102) then
 								local Entry5 = List[Count]
-								v30 = Entry5 - (if List[Count] >= 65 and List[Count] <= 90 then 55 elseif List[Count] >= 97 and List[Count] <= 122 then 87 else 48)
+								v29 = Entry5 - (if List[Count] >= 65 and List[Count] <= 90 then 55 elseif List[Count] >= 97 and List[Count] <= 122 then 87 else 48)
 								Count += 1
 								
 								if List[Count] and List[Count] >= 48 and List[Count] <= 57 or (List[Count] >= 65 and List[Count] <= 70 or List[Count] >= 97 and List[Count] <= 102) then
@@ -2052,16 +2052,16 @@ local function tokenize_ptn(List, Flags)
 							else
 								Count -= 1
 							end
-							table.insert(List2, 1, v30 and (EntryDelta2 and 16 * v30 + EntryDelta2 or v30) or 0)
+							table.insert(List2, 1, v29 and (EntryDelta2 and 16 * v29 + EntryDelta2 or v29) or 0)
 						end
 					elseif List[Count] >= 48 and List[Count] <= 55 then
 						local EntryDelta6 = List[Count] - 48
-						local v31: number? = nil
+						local v30: number? = nil
 						local EntryDelta1: number? = nil
 						Count += 1
 						
 						if List[Count] and List[Count] >= 48 and List[Count] <= 55 then
-							v31 = List[Count] - 48
+							v30 = List[Count] - 48
 							Count += 1
 							
 							if List[Count] and List[Count] >= 48 and List[Count] <= 55 then
@@ -2072,7 +2072,7 @@ local function tokenize_ptn(List, Flags)
 						else
 							Count -= 1
 						end
-						table.insert(List2, 1, v31 and (EntryDelta1 and 64 * EntryDelta6 + 8 * v31 + EntryDelta1 or 8 * EntryDelta6 + v31) or EntryDelta6)
+						table.insert(List2, 1, v30 and (EntryDelta1 and 64 * EntryDelta6 + 8 * v30 + EntryDelta1 or 8 * EntryDelta6 + v30) or EntryDelta6)
 					elseif List[Count] ~= 69 then
 						if List[Count] == 81 then
 							local NewCount = Count + 1
@@ -2088,16 +2088,16 @@ local function tokenize_ptn(List, Flags)
 								return "invalid escape sequence"
 							end
 							Count += 4
-							local Count11: number = Count
+							local Count10: number = Count
 							while List[Count] and (List[Count] >= 48 and List[Count] <= 57 or List[Count] >= 65 and List[Count] <= 70 or List[Count] >= 97 and List[Count] <= 102) do
 								Count += 1
 							end
-							if List[Count] ~= 125 or Count == Count11 then
+							if List[Count] ~= 125 or Count == Count10 then
 								return "malformed Unicode code point"
 							end
 							local S8: string = List.s
 							local OffsetResult10 = utf8.offset(S8, Count)
-							table.insert(List2, 1, (tonumber((string.sub(S8, utf8.offset(S8, Count11), OffsetResult10 and OffsetResult10 - 1)))))
+							table.insert(List2, 1, (tonumber((string.sub(S8, utf8.offset(S8, Count10), OffsetResult10 and OffsetResult10 - 1)))))
 						else
 							if List[Count] == 80 or List[Count] == 112 then
 								return "USE_UNICODE_DATA in regexp has always been disabled. Do not use the flag \\p"
@@ -2109,24 +2109,24 @@ local function tokenize_ptn(List, Flags)
 									return "malformed octal code"
 								end
 								Count += 1
-								local Count8: number = Count
+								local Count7: number = Count
 								while List[Count] and (List[Count] >= 48 and List[Count] <= 55) do
 									Count += 1
 								end
-								if List[Count] ~= 125 or Count == Count8 then
+								if List[Count] ~= 125 or Count == Count7 then
 									return "malformed octal code"
 								end
 								local S3: string = List.s
 								local OffsetResult5 = utf8.offset(S3, Count)
-								local Number1: number? = tonumber(string.sub(S3, utf8.offset(S3, Count8), OffsetResult5 and OffsetResult5 - 1), 8)
+								local Number1: number? = tonumber(string.sub(S3, utf8.offset(S3, Count7), OffsetResult5 and OffsetResult5 - 1), 8)
 								
 								if Number1 > 65535 then
 									return "character offset too large"
 								end
 								table.insert(List2, 1, Number1)
 							else
-								local Entry3 = config2[List[Count]]
-								table.insert(List2, 1, type(Entry3) == "string" and { "class", Entry3, false } or (Entry3 or List[Count]))
+								local Entry4 = config2[List[Count]]
+								table.insert(List2, 1, type(Entry4) == "string" and { "class", Entry4, false } or (Entry4 or List[Count]))
 							end
 						end
 					end
@@ -2137,7 +2137,7 @@ local function tokenize_ptn(List, Flags)
 				end
 				Count += 1
 			end
-			if List[Count - 1] == v22 and Count - 1 ~= Count7 then
+			if List[Count - 1] == v22 and Count - 1 ~= Count6 then
 				return if v22 == 58 then "POSIX named classes are only support within a character set" else "POSIX collating elements aren't supported"
 			end
 			if List2[2] or Flag1 then
@@ -2145,7 +2145,7 @@ local function tokenize_ptn(List, Flags)
 			else
 				table.insert(List1, List2[1])
 			end
-		elseif Entry1 == 92 then
+		elseif Entry2 == 92 then
 			Count += 1
 			local Entry8: number = List[Count]
 			
@@ -2153,23 +2153,23 @@ local function tokenize_ptn(List, Flags)
 				return "pattern may not end with a trailing backslash"
 			end
 			if Entry8 >= 48 and Entry8 <= 57 then
-				local Count12: number = Count
+				local Count11: number = Count
 				while List[Count + 1] and (List[Count + 1] >= 48 and List[Count + 1] <= 57) do
 					Count += 1
 				end
 				local S = List.s
 				local OffsetResult: number? = utf8.offset(S, Count + 1)
-				local OffsetResult2 = utf8.offset(S, Count12)
+				local OffsetResult2 = utf8.offset(S, Count11)
 				local Number: number? = tonumber((string.sub(S, OffsetResult2, OffsetResult and OffsetResult - 1)))
 				
-				if Count1 < Number and Count ~= Count12 then
-					Count = Count12
-					local v32: number? = nil
+				if Count1 < Number and Count ~= Count11 then
+					Count = Count11
+					local v31: number? = nil
 					S = nil
 					OffsetResult = nil
 					
 					if List[Count] <= 55 then
-						v32 = List[Count] - 48
+						v31 = List[Count] - 48
 						Count += 1
 						
 						if List[Count] and List[Count] >= 48 and List[Count] <= 55 then
@@ -2185,7 +2185,7 @@ local function tokenize_ptn(List, Flags)
 							Count -= 1
 						end
 					end
-					OffsetResult2 = v32 and (S and (OffsetResult and 64 * v32 + 8 * S + OffsetResult or 8 * v32 + S) or v32) or List[Count12]
+					OffsetResult2 = v31 and (S and (OffsetResult and 64 * v31 + 8 * S + OffsetResult or 8 * v31 + S) or v31) or List[Count11]
 					table.insert(List1, OffsetResult2)
 				else
 					table.insert(List1, { "backref", Number })
@@ -2203,16 +2203,16 @@ local function tokenize_ptn(List, Flags)
 				elseif Entry8 == 78 then
 					if List[Count + 1] == 123 and (List[Count + 2] == 85 and List[Count + 3] == 43 and Flags.unicode) then
 						Count += 4
-						local Count13: number = Count
+						local Count12: number = Count
 						while List[Count] and (List[Count] >= 48 and List[Count] <= 57 or List[Count] >= 65 and List[Count] <= 70 or List[Count] >= 97 and List[Count] <= 102) do
 							Count += 1
 						end
-						if List[Count] ~= 125 or Count == Count13 then
+						if List[Count] ~= 125 or Count == Count12 then
 							return "malformed Unicode code point"
 						end
 						local S2: string = List.s
 						local OffsetResult4 = utf8.offset(S2, Count)
-						table.insert(List1, (tonumber((string.sub(S2, utf8.offset(S2, Count13), OffsetResult4 and OffsetResult4 - 1)))))
+						table.insert(List1, (tonumber((string.sub(S2, utf8.offset(S2, Count12), OffsetResult4 and OffsetResult4 - 1)))))
 					else
 						table.insert(List1, config2[78])
 					end
@@ -2230,7 +2230,7 @@ local function tokenize_ptn(List, Flags)
 						elseif List[Count] < 48 or List[Count] > 57 then
 							return "malformed reference code"
 						end
-						local Count14: number = Count
+						local Count13: number = Count
 						while List[Count] and (List[Count] >= 48 and List[Count] <= 57 or (List[Count] >= 65 and List[Count] <= 70 or List[Count] >= 97 and List[Count] <= 102)) do
 							Count += 1
 						end
@@ -2241,7 +2241,7 @@ local function tokenize_ptn(List, Flags)
 						local OffsetResult = utf8.offset(S, Count + (if Flag then 0 else 1))
 						table.insert(List1, {
 							"backref",
-							(tonumber((string.sub(S, utf8.offset(S, Count14), OffsetResult and OffsetResult - 1))))
+							(tonumber((string.sub(S, utf8.offset(S, Count13), OffsetResult and OffsetResult - 1))))
 						})
 						
 						if not Flag then
@@ -2254,16 +2254,16 @@ local function tokenize_ptn(List, Flags)
 							return "malformed octal code"
 						end
 						Count += 1
-						local Count10: number = Count
+						local Count9: number = Count
 						while List[Count] and List[Count] >= 48 and List[Count] <= 55 do
 							Count += 1
 						end
-						if List[Count] ~= 125 or Count == Count10 then
+						if List[Count] ~= 125 or Count == Count9 then
 							return "malformed octal code"
 						end
 						local S: string = List.s
 						local OffsetResult = utf8.offset(S, Count)
-						local Number: number? = tonumber(string.sub(S, utf8.offset(S, Count10), OffsetResult and OffsetResult - 1), 8)
+						local Number: number? = tonumber(string.sub(S, utf8.offset(S, Count9), OffsetResult and OffsetResult - 1), 8)
 						
 						if Number > 65535 then
 							return "character offset too large"
@@ -2276,19 +2276,19 @@ local function tokenize_ptn(List, Flags)
 						
 						if List[Count] == 123 then
 							Count += 1
-							local Count15: number = Count
+							local Count14: number = Count
 							while List[Count] and (List[Count] >= 48 and List[Count] <= 57 or (List[Count] >= 65 and List[Count] <= 70 or List[Count] >= 97 and List[Count] <= 102)) do
 								Count += 1
 							end
-							if List[Count] ~= 125 or Count == Count15 then
+							if List[Count] ~= 125 or Count == Count14 then
 								return "malformed hexadecimal code"
 							end
-							if Count - Count15 > 4 then
+							if Count - Count14 > 4 then
 								return "character offset too large"
 							end
 							local S: string = List.s
 							local OffsetResult = utf8.offset(S, Count)
-							table.insert(List1, (tonumber(string.sub(S, utf8.offset(S, Count15), OffsetResult and OffsetResult - 1), 16)))
+							table.insert(List1, (tonumber(string.sub(S, utf8.offset(S, Count14), OffsetResult and OffsetResult - 1), 16)))
 						else
 							if List[Count] and (List[Count] >= 48 and List[Count] <= 57 or List[Count] >= 65 and List[Count] <= 70 or List[Count] >= 97 and List[Count] <= 102) then
 								local Entry7 = List[Count]
@@ -2311,55 +2311,55 @@ local function tokenize_ptn(List, Flags)
 					end
 				end
 			end
-		elseif Entry1 == 42 or Entry1 == 43 or (Entry1 == 63 or Entry1 == 123) then
+		elseif Entry2 == 42 or Entry2 == 43 or (Entry2 == 63 or Entry2 == 123) then
 			local Number2: number? = nil
-			local v33: number? = nil
+			local v32: number? = nil
 			
-			if Entry1 == 123 then
+			if Entry2 == 123 then
 				local NewCount = Count + 1
-				local v34: number? = nil
-				while List[Count + 1] and (List[Count + 1] >= 48 and List[Count + 1] <= 57 or List[Count + 1] == 44 and not v34 and Count + 1 ~= NewCount) do
+				local v33: number? = nil
+				while List[Count + 1] and (List[Count + 1] >= 48 and List[Count + 1] <= 57 or List[Count + 1] == 44 and not v33 and Count + 1 ~= NewCount) do
 					Count += 1
 					
 					if List[Count] == 44 then
-						v34 = Count
+						v33 = Count
 					end
 				end
 				if List[Count + 1] == 125 then
 					Count += 1
 					
-					if v34 then
+					if v33 then
 						local S5 = List.s
-						local OffsetResult7 = utf8.offset(S5, v34)
+						local OffsetResult7 = utf8.offset(S5, v33)
 						local EndIndex: number = OffsetResult7 and OffsetResult7 - 1
 						Number2 = tonumber((string.sub(S5, utf8.offset(S5, NewCount), EndIndex)))
 						local Number = nil
 						
-						if v34 + 1 == Count then
+						if v33 + 1 == Count then
 							Number = 1e999
 						else
 							S5 = List.s
 							local OffsetResult = utf8.offset(S5, Count)
-							EndIndex = utf8.offset(S5, v34 + 1)
+							EndIndex = utf8.offset(S5, v33 + 1)
 							Number = tonumber((string.sub(S5, EndIndex, OffsetResult and OffsetResult - 1)))
 						end
-						v33 = Number
+						v32 = Number
 						
-						if v33 < Number2 then
+						if v32 < Number2 then
 							return "numbers out of order in {} quantifier"
 						end
 					else
 						local S4: string = List.s
 						local OffsetResult6 = utf8.offset(S4, Count)
 						Number2 = tonumber((string.sub(S4, utf8.offset(S4, NewCount), OffsetResult6 and OffsetResult6 - 1)))
-						v33 = Number2
+						v32 = Number2
 					end
 				else
 					table.move(List, NewCount - 1, Count, #List1 + 1, List1)
 				end
 			else
-				Number2 = if Entry1 == 43 then 1 else 0
-				v33 = if Entry1 == 63 then 1 else 1e999
+				Number2 = if Entry2 == 43 then 1 else 0
+				v32 = if Entry2 == 63 then 1 else 1e999
 			end
 			if Number2 then
 				local Possessive: string = if Flags.ungreedy then "lazy" else "greedy"
@@ -2374,22 +2374,22 @@ local function tokenize_ptn(List, Flags)
 				if not Entry9 or type(Entry9) == "table" and (Entry9[1] == "quantifier" or (Entry9[1] == 40 or config3[Entry9[1]])) or (Entry9 == list3 or type(Entry9) == "string") then
 					return "quantifier doesn't follow a repeatable pattern"
 				end
-				if v33 == 0 then
+				if v32 == 0 then
 					table.remove(List1)
-				elseif Number2 ~= 1 or v33 ~= 1 then
+				elseif Number2 ~= 1 or v32 ~= 1 then
 					if type(Entry9) == "table" and Entry9[1] == 41 then
 						CountList1 = Entry9[3]
 					end
 					List1[CountList1] = {
 						"quantifier",
 						Number2,
-						v33,
+						v32,
 						Possessive,
 						List1[CountList1]
 					}
 				end
 			end
-		elseif Entry1 == 124 then
+		elseif Entry2 == 124 then
 			table.insert(List1, list3)
 			local CountList1 = #List1
 			repeat
@@ -2404,18 +2404,18 @@ local function tokenize_ptn(List, Flags)
 					break
 				end
 			until not Entry10
-		elseif Entry1 == 36 or Entry1 == 94 then
-			table.insert(List1, Entry1 == 94 and list2 or list)
-		elseif Flags.ignoreCase and Entry1 >= 97 and Entry1 <= 122 then
-			table.insert(List1, Entry1 - 32)
-		elseif Flags.extended and (Entry1 >= 9 and Entry1 <= 13 or (Entry1 == 32 or Entry1 == 35)) then
-			if Entry1 == 35 then
+		elseif Entry2 == 36 or Entry2 == 94 then
+			table.insert(List1, Entry2 == 94 and list2 or list)
+		elseif Flags.ignoreCase and Entry2 >= 97 and Entry2 <= 122 then
+			table.insert(List1, Entry2 - 32)
+		elseif Flags.extended and (Entry2 >= 9 and Entry2 <= 13 or (Entry2 == 32 or Entry2 == 35)) then
+			if Entry2 == 35 then
 				repeat
 					Count += 1
 				until not List[Count] or (List[Count] == 10 or List[Count] == 13)
 			end
 		else
-			table.insert(List1, Entry1)
+			table.insert(List1, Entry2)
 		end
 		Count += 1
 	end
@@ -2540,15 +2540,15 @@ function t.new(...)
 	if select("#", ...) == 0 then
 		error("missing argument #1 (string expected)", 2)
 	end
-	local Text, v35 = ...
+	local Text, v34 = ...
 	
 	if type(Text) == "number" then
 		Text ..= ""
 	elseif type(Text) ~= "string" then
 		error(string.format("invalid argument #1 (string expected, got %s)", (typeof(Text))), 2)
 	end
-	if type(v35) ~= "string" and type(v35) ~= "number" and v35 ~= nil then
-		error(string.format("invalid argument #2 (string expected, got %s)", (typeof(v35))), 2)
+	if type(v34) ~= "string" and type(v34) ~= "number" and v34 ~= nil then
+		error(string.format("invalid argument #2 (string expected, got %s)", (typeof(v34))), 2)
 	end
 	local config1 = {
 		anchored = false,
@@ -2561,7 +2561,7 @@ function t.new(...)
 	}
 	local List = {}
 	
-	for i in string.gmatch(v35 or "", utf8.charpattern) do
+	for i in string.gmatch(v34 or "", utf8.charpattern) do
 		if config1[config[i]] ~= false then
 			error("invalid regular expression flag " .. i, 3)
 		end
@@ -2649,7 +2649,7 @@ function t.escape(...)
 	if select("#", ...) == 0 then
 		error("missing argument #1 (string expected)", 2)
 	end
-	local Text1, v36, Text = ...
+	local Text1, v35, Text = ...
 	
 	if type(Text1) == "number" then
 		Text1 ..= ""
@@ -2666,7 +2666,7 @@ function t.escape(...)
 	if utf8.len(Text) > 1 or Text:match("^[%a\\]$") then
 		error("delimiter have not be alphanumeric", 2)
 	end
-	return (string.gsub(Text1, "[\0\f\n\r\t]", config7):gsub(string.format("[\\%s#()%%%%*+.?[%%]^{|%s]", if v36 then "%s" else "", (if Text:find("^[%%%]]$") then "%" else "") .. Text), "\\%1"))
+	return (string.gsub(Text1, "[\0\f\n\r\t]", config7):gsub(string.format("[\\%s#()%%%%*+.?[%%]^{|%s]", if v35 then "%s" else "", (if Text:find("^[%%%]]$") then "%" else "") .. Text), "\\%1"))
 end
 
 function t.type(...)

@@ -7,12 +7,14 @@ local ViewModule = require(Components.View)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
 local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local InputPlacementModule = require(Foundation.Enums.InputPlacement)
+local InputSizeModule = require(Foundation.Enums.InputSize)
 local InputGroupContextModule = require(script.Parent.InputGroupContext)
 local UseInputGroupVariantsModule = require(script.Parent.useInputGroupVariants)
 local config = {
 	testId = "--foundation-internal-input-group",
-	size = require(Foundation.Enums.InputSize).Medium,
-	placement = require(Foundation.Enums.InputPlacement).Start
+	size = InputSizeModule.Medium,
+	placement = InputPlacementModule.Start
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)

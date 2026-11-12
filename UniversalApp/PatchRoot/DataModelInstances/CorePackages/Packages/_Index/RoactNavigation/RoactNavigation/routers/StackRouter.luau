@@ -96,6 +96,7 @@ return function(p1, p2)
 		end
 		local ValidateRouteConfigMapModuleResultEntry = ValidateRouteConfigMapModuleResult[InitialRouteName]
 		local Params = type(ValidateRouteConfigMapModuleResultEntry) == "table" and ValidateRouteConfigMapModuleResultEntry.params
+		local AssignResult = if Params or StateForAction.params or p3.params then Object.assign(if Params then table.clone(Params) else {}, StateForAction.params or {}, p3.params or {}, InitialRouteParams or {}) else InitialRouteParams and Object.assign(if Params then table.clone(Params) else {}, StateForAction.params or {}, p3.params or {}, InitialRouteParams or {})
 		local InitialRouteKey = P7.initialRouteKey
 		
 		return {
@@ -104,7 +105,7 @@ return function(p1, p2)
 			index = 1,
 			routes = {
 				(Object.assign(table.clone(StateForAction), {
-					params = if Params or StateForAction.params or p3.params then Object.assign(if Params then table.clone(Params) else {}, StateForAction.params or {}, p3.params or {}, InitialRouteParams or {}) else InitialRouteParams and Object.assign(if Params then table.clone(Params) else {}, StateForAction.params or {}, p3.params or {}, InitialRouteParams or {}),
+					params = AssignResult,
 					routeName = InitialRouteName,
 					key = p3.key or (InitialRouteKey or KeyGeneratorModule.generateKey())
 				}))
@@ -285,11 +286,11 @@ return function(p1, p2)
 				if Action.type == NavigationActionsModule.Navigate or Action.type == StackActionsModule.Push then
 					local Tbl1 = nil
 					for childIsScreenRouterSymbolRobloxModule in ChildIsScreenRouterSymbolRobloxModules do
-						local ChildIsScreenRouterSymbolRobloxModule5 = ChildIsScreenRouterSymbolRobloxModules[childIsScreenRouterSymbolRobloxModule]
+						local ChildIsScreenRouterSymbolRobloxModule4 = ChildIsScreenRouterSymbolRobloxModules[childIsScreenRouterSymbolRobloxModule]
 						
-						if ChildIsScreenRouterSymbolRobloxModule5 ~= nil and ChildIsScreenRouterSymbolRobloxModule5 ~= ChildIsScreenRouterSymbolRobloxModule then
-							local StateForAction = ChildIsScreenRouterSymbolRobloxModule5.getStateForAction(NavigationActionsModule.init())
-							local StateForAction1 = ChildIsScreenRouterSymbolRobloxModule5.getStateForAction(Action, StateForAction)
+						if ChildIsScreenRouterSymbolRobloxModule4 ~= nil and ChildIsScreenRouterSymbolRobloxModule4 ~= ChildIsScreenRouterSymbolRobloxModule then
+							local StateForAction = ChildIsScreenRouterSymbolRobloxModule4.getStateForAction(NavigationActionsModule.init())
+							local StateForAction1 = ChildIsScreenRouterSymbolRobloxModule4.getStateForAction(Action, StateForAction)
 							Tbl1 = nil
 							
 							if StateForAction1 == nil then
@@ -320,13 +321,14 @@ return function(p1, p2)
 					end)
 					
 					if CountRoutes > 0 then
-						local ChildIsScreenRouterSymbolRobloxModule6 = ChildIsScreenRouterSymbolRobloxModules[Action.routeName]
+						local ChildIsScreenRouterSymbolRobloxModule5 = ChildIsScreenRouterSymbolRobloxModules[Action.routeName]
+						local T = if ChildIsScreenRouterSymbolRobloxModule5 == nil or ChildIsScreenRouterSymbolRobloxModule5 == ChildIsScreenRouterSymbolRobloxModule then {} else ChildIsScreenRouterSymbolRobloxModule5.getStateForAction(Action.action or NavigationActionsModule.init({
+							params = getParamsForRouteAndAction(Action.routeName, Action)
+						}))
 						local Copy = table.clone(Tbl.routes)
 						Copy[CountRoutes] = Object.assign({
 							params = getParamsForRouteAndAction(Action.routeName, Action)
-						}, if ChildIsScreenRouterSymbolRobloxModule6 == nil or ChildIsScreenRouterSymbolRobloxModule6 == ChildIsScreenRouterSymbolRobloxModule then {} else ChildIsScreenRouterSymbolRobloxModule6.getStateForAction(Action.action or NavigationActionsModule.init({
-							params = getParamsForRouteAndAction(Action.routeName, Action)
-						})), {
+						}, T, {
 							routeName = Action.routeName,
 							key = Action.newKey or KeyGeneratorModule.generateKey()
 						})
@@ -338,10 +340,10 @@ return function(p1, p2)
 					return Object.assign(table.clone(Tbl), { isTransitioning = false })
 				end
 				if Action.type == NavigationActionsModule.SetParams then
-					local Key = Action.key
+					local Key1 = Action.key
 					local Index: number = Array.findIndex(Tbl.routes, function(p3): boolean
-						-- upvalues: Key (copy)
-						return p3.key == Key
+						-- upvalues: Key1 (copy)
+						return p3.key == Key1
 					end)
 					
 					if Index > 0 then
@@ -369,15 +371,15 @@ return function(p1, p2)
 					}) else Tbl
 				end
 				if Action.type == NavigationActionsModule.Back or Action.type == StackActionsModule.Pop then
-					local Key1 = Action.key
+					local Key = Action.key
 					local N = Action.n
 					local Immediate = Action.immediate
 					local Prune = Action.prune
 					
-					if Action.type == StackActionsModule.Pop and Prune == false and Key1 then
+					if Action.type == StackActionsModule.Pop and Prune == false and Key then
 						local Index1: number = Array.findIndex(Tbl.routes, function(p3): boolean
-							-- upvalues: Key1 (copy)
-							return p3.key == Key1
+							-- upvalues: Key (copy)
+							return p3.key == Key
 						end)
 						
 						if Index1 > 0 then
@@ -396,10 +398,10 @@ return function(p1, p2)
 						
 						if Action.type == StackActionsModule.Pop and N ~= nil then
 							Index = math.max(2, Tbl.index - N + 1)
-						elseif Key1 then
+						elseif Key then
 							Index = Array.findIndex(Tbl.routes, function(p3): boolean
-								-- upvalues: Key1 (copy)
-								return p3.key == Key1
+								-- upvalues: Key (copy)
+								return p3.key == Key
 							end)
 						end
 						if Index > 1 then
@@ -416,15 +418,15 @@ return function(p1, p2)
 				local StateForAction = nil
 				for i1 = #Tbl.routes, 1, -1 do
 					Route3 = Tbl.routes[i1]
-					local NoChildIsScreenRouterSymbolRobloxModule: boolean = Route3.key == Route.key or IndexOfResult ~= 1 and Route3.key ~= Action.key
-					local ChildIsScreenRouterSymbolRobloxModule4 = nil
+					local IsKeyMatch: boolean = Route3.key == Route.key or IndexOfResult ~= 1 and Route3.key ~= Action.key
+					local ChildIsScreenRouterSymbolRobloxModule6 = nil
 					
-					if not NoChildIsScreenRouterSymbolRobloxModule then
-						ChildIsScreenRouterSymbolRobloxModule4 = ChildIsScreenRouterSymbolRobloxModules[Route3.routeName]
-						NoChildIsScreenRouterSymbolRobloxModule = ChildIsScreenRouterSymbolRobloxModule4 == nil or ChildIsScreenRouterSymbolRobloxModule4 == ChildIsScreenRouterSymbolRobloxModule
+					if not IsKeyMatch then
+						ChildIsScreenRouterSymbolRobloxModule6 = ChildIsScreenRouterSymbolRobloxModules[Route3.routeName]
+						IsKeyMatch = ChildIsScreenRouterSymbolRobloxModule6 == nil or ChildIsScreenRouterSymbolRobloxModule6 == ChildIsScreenRouterSymbolRobloxModule
 					end
-					if not NoChildIsScreenRouterSymbolRobloxModule then
-						StateForAction = ChildIsScreenRouterSymbolRobloxModule4.getStateForAction(Action, Route3)
+					if not IsKeyMatch then
+						StateForAction = ChildIsScreenRouterSymbolRobloxModule6.getStateForAction(Action, Route3)
 						
 						if StateForAction == nil then
 							return Tbl

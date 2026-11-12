@@ -5,8 +5,9 @@ local Array = LuauPolyfillModule.Array
 local Boolean = LuauPolyfillModule.Boolean
 local _ = require(Parent1.GraphQL)
 local InvariantFunction = require(Parent.jsutils.invariant).invariant
+local Map = LuauPolyfillModule.Map
 local DocumentType = { Query = 0, Mutation = 1, Subscription = 2 }
-local NewResult = LuauPolyfillModule.Map.new(nil)
+local NewMap = Map.new(nil)
 
 return {
 	DocumentType = DocumentType,
@@ -30,8 +31,8 @@ return {
 		return v1
 	end,
 	parser = function(p1)
-		-- upvalues: NewResult (copy), InvariantFunction (copy), Boolean (copy), Array (copy), DocumentType (copy)
-		local GetResult = NewResult:get(p1)
+		-- upvalues: NewMap (copy), InvariantFunction (copy), Boolean (copy), Array (copy), DocumentType (copy)
+		local GetResult = NewMap:get(p1)
 		
 		if GetResult == nil then
 			InvariantFunction(Boolean.toJSBoolean(p1) and Boolean.toJSBoolean(p1.kind), ("Argument of %s passed to parser was not a valid GraphQL "):format((tostring(p1))) .. "DocumentNode. You may need to use 'graphql-tag' or another method " .. "to convert your operation into a document")
@@ -57,7 +58,7 @@ return {
 				type = Subscription,
 				variables = FilterResultEntry.variableDefinitions and FilterResultEntry.variableDefinitions or {}
 			}
-			NewResult:set(p1, config)
+			NewMap:set(p1, config)
 			
 			return config
 		else

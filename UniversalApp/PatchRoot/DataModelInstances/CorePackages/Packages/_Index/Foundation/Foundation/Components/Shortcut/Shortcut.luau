@@ -4,8 +4,10 @@ local TextModule = require(Foundation.Components.Text)
 local _ = require(Foundation.Components.Types)
 local ViewModule = require(Foundation.Components.View)
 local _ = require(Foundation.Enums.InputPlatform)
+local InputSizeModule = require(Foundation.Enums.InputSize)
 local PlacementModule = require(Foundation.Enums.Placement)
 local _ = require(Foundation.Enums.ShortcutSeparator)
+local ShortcutVariantModule = require(Foundation.Enums.ShortcutVariant)
 local UseInputPlatformModule = require(Foundation.Utility.useInputPlatform)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
@@ -16,9 +18,9 @@ local KeyDisplayModule = require(script.Parent.keyDisplay)
 local UseShortcutVariantsModule = require(script.Parent.useShortcutVariants)
 local config = {
 	testId = "--foundation-shortcut",
-	size = require(Foundation.Enums.InputSize).XSmall,
+	size = InputSizeModule.XSmall,
 	placement = PlacementModule.Start,
-	variant = require(Foundation.Enums.ShortcutVariant).Standard
+	variant = ShortcutVariantModule.Standard
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)

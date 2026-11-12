@@ -4,6 +4,15 @@ local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 local R15plusUtilsModule = require(Parent.util.R15plusUtils)
 local CurveAnimBoneHierarchyUtilsModule = require(Parent.util.CurveAnimBoneHierarchyUtils)
+local Categories = {
+	ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
+	ValidationEnumsModule.UploadCategory.ANIMATION
+}
+local RequiredData = { ValidationEnumsModule.SharedDataMember.curveAnimations }
+local ConditionalData = { ValidationEnumsModule.SharedDataMember.curveAnimBoneData }
+local PrereqTests = {
+	ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
+}
 local list = {
 	"Head", "UpperTorso", "LeftFoot", "RightFoot", "LeftHand", "RightHand"
 }
@@ -37,16 +46,11 @@ local function getParentMap()
 end
 
 return {
-	categories = {
-		ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
-		ValidationEnumsModule.UploadCategory.ANIMATION
-	},
-	requiredData = { ValidationEnumsModule.SharedDataMember.curveAnimations },
-	conditionalData = { ValidationEnumsModule.SharedDataMember.curveAnimBoneData },
+	categories = Categories,
+	requiredData = RequiredData,
+	conditionalData = ConditionalData,
 	expectedFailures = {},
-	prereqTests = {
-		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
-	},
+	prereqTests = PrereqTests,
 	run = function(p1, p2)
 		-- upvalues: getParentMap (copy), CurveAnimBoneHierarchyUtilsModule (copy), ErrorSourceStringsModule (copy)
 		local ParentMap = getParentMap()

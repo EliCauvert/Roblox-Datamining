@@ -11,6 +11,7 @@ local ReactGlobalsModule = require(Parent.ReactGlobals)
 local LuauPolyfillModule = require(Parent.LuauPolyfill)
 local InspectFunction = LuauPolyfillModule.util.inspect
 local Console = require(Parent.Shared).console
+local Object = LuauPolyfillModule.Object
 local SetTimeout = LuauPolyfillModule.setTimeout
 local ClearTimeout = LuauPolyfillModule.clearTimeout
 local _ = require(script.Parent["ReactRobloxHostTypes.roblox"])
@@ -36,7 +37,7 @@ local _ = function(Object)
 end
 
 local ReactRobloxHostConfig = {}
-LuauPolyfillModule.Object.assign(ReactRobloxHostConfig, require(Parent.Shared).ReactFiberHostConfig.WithNoPersistence)
+Object.assign(ReactRobloxHostConfig, require(Parent.Shared).ReactFiberHostConfig.WithNoPersistence)
 
 function ReactRobloxHostConfig.getRootHostContext(p1)
 	return p1.ClassName

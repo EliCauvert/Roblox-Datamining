@@ -14,8 +14,8 @@ local PrintTypeNodeFunction = UtilsModule.printTypeNode
 local MergeDirectivesFunction = require(script.Parent.directives).mergeDirectives
 local CompareNodes = require(Parent.Utils).compareNodes
 local MergeArgumentsFunction = require(script.Parent.arguments).mergeArguments
-local Callback = nil
 local Callback1 = nil
+local Callback = nil
 
 local function fieldAlreadyExists(ConcatResult, p1, p2): boolean
 	-- upvalues: Array (copy), Boolean (copy), ExtractTypeFunction (copy), Error1 (copy)
@@ -37,7 +37,7 @@ end
 
 local FieldsModule = {
 	mergeFields = function(p1, List, p2, p3)
-		-- upvalues: Array (copy), Boolean (copy), fieldAlreadyExists (copy), Callback (ref), IsNonNullTypeNodeFunction (copy), MergeArgumentsFunction (copy), MergeDirectivesFunction (copy), CompareNodes (copy)
+		-- upvalues: Array (copy), Boolean (copy), fieldAlreadyExists (copy), Callback1 (ref), IsNonNullTypeNodeFunction (copy), MergeArgumentsFunction (copy), MergeDirectivesFunction (copy), CompareNodes (copy)
 		local ConcatResult = {}
 		
 		if p2 ~= nil then
@@ -56,9 +56,9 @@ local FieldsModule = {
 				
 				if not p3 or not Boolean.toJSBoolean(p3.ignoreFieldConflicts) then
 					if p3 and Boolean.toJSBoolean(p3.throwOnConflict) then
-						Callback(p1, FindResult, value, false)
+						Callback1(p1, FindResult, value, false)
 					else
-						Callback(p1, FindResult, value, true)
+						Callback1(p1, FindResult, value, true)
 					end
 					local ToJSBooleanFunction = Boolean.toJSBoolean
 					local IsNonNullTypeNode = IsNonNullTypeNodeFunction(value.type)
@@ -88,22 +88,22 @@ local FieldsModule = {
 	end
 }
 
-Callback = function(p4, FindResult, p5, p6)
-	-- upvalues: PrintTypeNodeFunction (copy), Boolean (copy), Callback1 (ref), Error1 (copy)
+Callback1 = function(p4, FindResult, p5, p6)
+	-- upvalues: PrintTypeNodeFunction (copy), Boolean (copy), Callback (ref), Error1 (copy)
 	local P13 = p6 ~= nil and p6
 	local PrintTypeNodeResult = PrintTypeNodeFunction(FindResult.type)
 	local PrintTypeNodeResult1 = PrintTypeNodeFunction(p5.type)
 	
-	if PrintTypeNodeResult ~= PrintTypeNodeResult1 and not Boolean.toJSBoolean(Callback1(FindResult.type, p5.type, P13)) then
+	if PrintTypeNodeResult ~= PrintTypeNodeResult1 and not Boolean.toJSBoolean(Callback(FindResult.type, p5.type, P13)) then
 		error(Error1.new(("Field '%s.%s' changed type from '%s' to '%s'"):format(tostring(p4.name.value), tostring(FindResult.name.value), tostring(PrintTypeNodeResult), (tostring(PrintTypeNodeResult1)))))
 	end
 end
 
-Callback1 = function(Type, Type1, p4)
-	-- upvalues: Boolean (copy), IsWrappingTypeNodeFunction (copy), IsNonNullTypeNodeFunction (copy), Callback1 (ref), IsListTypeNodeFunction (copy)
+Callback = function(Type, Type1, p4)
+	-- upvalues: Boolean (copy), IsWrappingTypeNodeFunction (copy), IsNonNullTypeNodeFunction (copy), Callback (ref), IsListTypeNodeFunction (copy)
 	local P16 = p4 ~= nil and p4
 	
-	return if Boolean.toJSBoolean(IsWrappingTypeNodeFunction(Type)) or Boolean.toJSBoolean(IsWrappingTypeNodeFunction(Type1)) then if Boolean.toJSBoolean(IsNonNullTypeNodeFunction(Type1)) then Callback1(if Boolean.toJSBoolean(IsNonNullTypeNodeFunction(Type)) then Type.type else Type, Type1.type) elseif Boolean.toJSBoolean(IsNonNullTypeNodeFunction(Type)) then Callback1(Type1, Type, P16) elseif Boolean.toJSBoolean(IsListTypeNodeFunction(Type)) then IsListTypeNodeFunction(Type1) and Callback1(Type.type, Type1.type) or IsNonNullTypeNodeFunction(Type1) and Callback1(Type, Type1.type) else false else typeof(Type) == "table" and #Type == 0 and typeof(Type1) == "table" and #Type1 == 0 or tostring(Type) == tostring(Type1)
+	return if Boolean.toJSBoolean(IsWrappingTypeNodeFunction(Type)) or Boolean.toJSBoolean(IsWrappingTypeNodeFunction(Type1)) then if Boolean.toJSBoolean(IsNonNullTypeNodeFunction(Type1)) then Callback(if Boolean.toJSBoolean(IsNonNullTypeNodeFunction(Type)) then Type.type else Type, Type1.type) elseif Boolean.toJSBoolean(IsNonNullTypeNodeFunction(Type)) then Callback(Type1, Type, P16) elseif Boolean.toJSBoolean(IsListTypeNodeFunction(Type)) then IsListTypeNodeFunction(Type1) and Callback(Type.type, Type1.type) or IsNonNullTypeNodeFunction(Type1) and Callback(Type, Type1.type) else false else typeof(Type) == "table" and #Type == 0 and typeof(Type1) == "table" and #Type1 == 0 or tostring(Type) == tostring(Type1)
 end
 
 return FieldsModule

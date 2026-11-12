@@ -1,5 +1,6 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
 local Parent = Foundation.Parent
+local ConstantsModule = require(Foundation.Constants)
 local FlagsModule = require(Foundation.Utility.Flags)
 local GetMainGuiModule = require(Foundation.Utility.getMainGui)
 local WithDefaultsModule = require(Foundation.Utility.withDefaults)
@@ -11,9 +12,7 @@ local UseKeyboardAwareSizeModule = require(script.Parent.useKeyboardAwareSize)
 local UseSharedViewportBreakpointModule = require(script.Parent.useSharedViewportBreakpoint)
 local ReactModule = require(Parent.React)
 local ReactRobloxModule = require(Parent.ReactRoblox)
-local config = {
-	DisplayOrder = require(Foundation.Constants).MAX_LAYOUT_ORDER - 1
-}
+local config = { DisplayOrder = ConstantsModule.MAX_LAYOUT_ORDER - 1 }
 
 return function(p1)
 	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), UseKeyboardAwareSizeModule (copy), UseStyleSheetFunction (copy), GetMainGuiModule (copy), FlagsModule (copy), UseSharedViewportBreakpointModule (copy), OverlayContextModule (copy), ReactRobloxModule (copy), ViewportBreakpointContextModule (copy)

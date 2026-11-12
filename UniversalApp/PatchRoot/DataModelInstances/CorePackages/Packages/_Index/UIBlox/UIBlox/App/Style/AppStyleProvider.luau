@@ -2,7 +2,6 @@
 local Parent1 = Parent.Parent.Parent
 local GetTextSizeOffsetModule = require(Parent1.Utility.getTextSizeOffset)
 local Parent2 = Parent1.Parent
-local CryoModule = require(Parent2.Cryo)
 local ReactModule = require(Parent2.React)
 local RoactModule = require(Parent2.Roact)
 local FoundationModule = require(Parent2.Foundation)
@@ -32,7 +31,7 @@ local config1 = {
 }
 
 return function(p1)
-	-- upvalues: Object (copy), config1 (copy), ReactModule (copy), GetTokensFunction (copy), GetThemeFromNameModule (copy), UseTokensFunction (copy), GetFoundationTokensFunction (copy), CryoModule (copy), Mappers (copy), GetFontFromNameModule (copy), ConstantsModule (copy), GetTextSizeOffsetModule (copy), StyleContextModule (copy), FoundationSurfaceTokensDifferModule (copy), RoactModule (copy), LoggerModule (copy), FoundationProvider (copy), config (copy)
+	-- upvalues: Object (copy), config1 (copy), ReactModule (copy), GetTokensFunction (copy), GetThemeFromNameModule (copy), UseTokensFunction (copy), GetFoundationTokensFunction (copy), Mappers (copy), GetFontFromNameModule (copy), ConstantsModule (copy), GetTextSizeOffsetModule (copy), StyleContextModule (copy), FoundationSurfaceTokensDifferModule (copy), RoactModule (copy), LoggerModule (copy), FoundationProvider (copy), config (copy)
 	local AssignResult = Object.assign({}, config1, p1.style)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(AssignResult.themeName)
 	local Tokens = GetTokensFunction(AssignResult.deviceType, UseStateResult, AssignResult.settings and AssignResult.settings.scale)
@@ -41,7 +40,7 @@ return function(p1)
 	local UseTokensResult = UseTokensFunction()
 	local HasConfig = UseTokensResult.Config ~= nil
 	local FoundationTokens = GetFoundationTokensFunction(AssignResult.deviceType, UseStateResult)
-	local AddFoundationFlatKeysResult = Mappers.addFoundationFlatKeys(Mappers.mapColorTokensToFoundation(Tokens, if HasConfig then CryoModule.Dictionary.join(FoundationTokens, UseTokensResult) else FoundationTokens), if HasConfig then UseTokensResult else FoundationTokens)
+	local AddFoundationFlatKeysResult = Mappers.addFoundationFlatKeys(Mappers.mapColorTokensToFoundation(Tokens, if HasConfig then UseTokensResult else FoundationTokens), if HasConfig then UseTokensResult else FoundationTokens)
 	local Style = {
 		Font = GetFontFromNameModule(AssignResult.fontName, AddFoundationFlatKeysResult),
 		Theme = Mappers.mapThemeToFoundation(ThemeFromNameModule, if HasConfig then UseTokensResult else FoundationTokens),
@@ -99,7 +98,7 @@ return function(p1)
 		local Parent = script.Parent.Parent.Parent
 		local Packages = Parent:FindFirstAncestor("Packages") or Parent:FindFirstAncestor("CorePackages")
 		
-		if not (if Packages and Packages:FindFirstChild("Dev") and Packages.Dev:FindFirstChild("JestGlobals") then pcall(require, Packages.Dev.JestGlobals) else false) then
+		if not (if Packages and (Packages:FindFirstChild("Dev") and Packages.Dev:FindFirstChild("JestGlobals")) then pcall(require, Packages.Dev.JestGlobals) else false) then
 			LoggerModule:warning(debug.traceback("FoundationProvider not found. Please ensure that the FoundationProvider is present in the component tree."))
 		end
 	end

@@ -4,13 +4,12 @@ local _ = require(Foundation.Components.Types)
 local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
 local KnobModule = require(Foundation.Components.Knob)
 local ViewModule = require(Foundation.Components.View)
+local ColorNamespaceModule = require(Foundation.Enums.ColorNamespace)
 local PresentationContextModule = require(Foundation.Providers.Style.PresentationContext)
 local _ = require(Foundation.Enums.InputSize)
 local CalculateSliderFractionModule = require(script.Parent.calculateSliderFraction)
 local GetGuiInputPositionModule = require(script.Parent.getGuiInputPosition)
-local config = {
-	colorNamespace = require(Foundation.Enums.ColorNamespace).Inverse
-}
+local config = { colorNamespace = ColorNamespaceModule.Inverse }
 
 return function(Frame: Frame)
 	-- upvalues: ReactModule (copy), CalculateSliderFractionModule (copy), GetGuiInputPositionModule (copy), KnobModule (copy), ViewModule (copy), WithCommonPropsModule (copy), PresentationContextModule (copy), config (copy)

@@ -19,6 +19,7 @@ local UseDropdownVariantsModule = require(script.Parent.useDropdownVariants)
 local ControlStateModule = require(Foundation.Enums.ControlState)
 local _ = require(Foundation.Enums.CursorType)
 local _ = require(Foundation.Enums.InputSize)
+local InputVariantModule = require(Foundation.Enums.InputVariant)
 local BuilderIconsModule = require(Parent.BuilderIcons)
 local ChevronLargeUp = BuilderIconsModule.Icon.ChevronLargeUp
 local ChevronLargeDown = BuilderIconsModule.Icon.ChevronLargeDown
@@ -26,7 +27,7 @@ local config = {
 	isMenuOpen = false,
 	placeholder = "",
 	Selectable = true,
-	variant = require(Foundation.Enums.InputVariant).Standard
+	variant = InputVariantModule.Standard
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)

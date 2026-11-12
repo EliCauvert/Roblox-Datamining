@@ -2,8 +2,9 @@
 local LocalizationService = require(Parent.Utility.Wrappers).Services.LocalizationService
 local ConstantsModule = require(script.Parent.Constants)
 local GeneratedTranslationsModule = require(Parent.Generated.Translations.GeneratedTranslations)
+local DevAssertModule: (any, any) -> () = require(Parent.Utility.devAssert)
 local Parent1 = require(Parent.Utility.getMainGui)()
-require(Parent.Utility.devAssert)(Parent1 ~= nil, "MainGui not found")
+DevAssertModule(Parent1 ~= nil, "MainGui not found")
 local Text = ConstantsModule.LOCALIZATION_TABLE_NAME .. game:GetService("HttpService"):GenerateGUID(false)
 
 local function createFoundationLocalizationTable(Parent)

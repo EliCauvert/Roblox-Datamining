@@ -1,6 +1,7 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
 local ReactModule = require(Foundation.Parent.React)
 local FlagsModule = require(Foundation.Utility.Flags)
+local MetadataSizeModule = require(Foundation.Enums.MetadataSize)
 local TextModule = require(Foundation.Components.Text)
 local _ = require(Foundation.Components.Types)
 local ViewModule = require(Foundation.Components.View)
@@ -16,7 +17,7 @@ local config = {
 	maxLines = 1,
 	hasSeparator = true,
 	testId = "--foundation-metadata",
-	size = require(Foundation.Enums.MetadataSize).Medium
+	size = MetadataSizeModule.Medium
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)

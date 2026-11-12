@@ -1,6 +1,6 @@
 ﻿local Total = 0
-local Callback = nil
-local Callback1: ((any) -> ())? = nil
+local Callback1 = nil
+local Callback: ((any) -> ())? = nil
 local v1 = -1
 local List = nil
 local v2 = -1
@@ -13,21 +13,21 @@ local Console = require(Parent.Shared).console
 local DisabledLog = require(Parent.Shared).ConsolePatchingDev.disabledLog
 local SchedulerHostConfig = {
 	requestHostCallback = function(p1)
-		-- upvalues: Callback (ref)
-		Callback = p1
+		-- upvalues: Callback1 (ref)
+		Callback1 = p1
 	end,
 	cancelHostCallback = function()
-		-- upvalues: Callback (ref)
-		Callback = nil
+		-- upvalues: Callback1 (ref)
+		Callback1 = nil
 	end,
 	requestHostTimeout = function(p1, p2)
-		-- upvalues: Callback1 (ref), v1 (ref), Total (ref)
-		Callback1 = p1
+		-- upvalues: Callback (ref), v1 (ref), Total (ref)
+		Callback = p1
 		v1 = Total + p2
 	end,
 	cancelHostTimeout = function()
-		-- upvalues: Callback1 (ref), v1 (ref)
-		Callback1 = nil
+		-- upvalues: Callback (ref), v1 (ref)
+		Callback = nil
 		v1 = -1
 	end,
 	shouldYieldToHost = function(): boolean
@@ -48,13 +48,13 @@ local SchedulerHostConfig = {
 	end,
 	forceFrameRate = function() end,
 	reset = function()
-		-- upvalues: Flag1 (ref), Total (ref), Callback (ref), Callback1 (ref), v1 (ref), List (ref), v2 (ref), Flag (ref), Flag2 (ref)
+		-- upvalues: Flag1 (ref), Total (ref), Callback1 (ref), Callback (ref), v1 (ref), List (ref), v2 (ref), Flag (ref), Flag2 (ref)
 		if Flag1 then
 			error("Cannot reset while already flushing work.")
 		end
 		Total = 0
-		Callback = nil
 		Callback1 = nil
+		Callback = nil
 		v1 = -1
 		List = nil
 		v2 = -1
@@ -63,22 +63,22 @@ local SchedulerHostConfig = {
 		Flag2 = false
 	end,
 	unstable_flushNumberOfYields = function(p1)
-		-- upvalues: Flag1 (ref), Callback (ref), v2 (ref), Total (ref), Flag (ref)
+		-- upvalues: Flag1 (ref), Callback1 (ref), v2 (ref), Total (ref), Flag (ref)
 		if Flag1 then
 			error("Already flushing work.")
 		end
-		if Callback ~= nil then
-			local Callback1 = Callback
+		if Callback1 ~= nil then
+			local Callback = Callback1
 			v2 = p1
 			Flag1 = true
 			local Success, Result = pcall(function()
-				-- upvalues: Callback1 (copy), Total (upval), Flag (upval), Callback (upval)
+				-- upvalues: Callback (copy), Total (upval), Flag (upval), Callback1 (upval)
 				local CallbackResult = nil
 				repeat
-					CallbackResult = Callback1(true, Total)
+					CallbackResult = Callback(true, Total)
 				until not CallbackResult or Flag
 				if not CallbackResult then
-					Callback = nil
+					Callback1 = nil
 				end
 			end)
 			v2 = -1
@@ -91,23 +91,23 @@ local SchedulerHostConfig = {
 		end
 	end,
 	unstable_flushUntilNextPaint = function()
-		-- upvalues: Flag1 (ref), Callback (ref), Flag3 (ref), Flag2 (ref), Total (ref), Flag (ref)
+		-- upvalues: Flag1 (ref), Callback1 (ref), Flag3 (ref), Flag2 (ref), Total (ref), Flag (ref)
 		if Flag1 then
 			error("Already flushing work.")
 		end
-		if Callback ~= nil then
-			local Callback1 = Callback
+		if Callback1 ~= nil then
+			local Callback = Callback1
 			Flag3 = true
 			Flag2 = false
 			Flag1 = true
 			local Success, Result = pcall(function()
-				-- upvalues: Callback1 (copy), Total (upval), Flag (upval), Callback (upval)
+				-- upvalues: Callback (copy), Total (upval), Flag (upval), Callback1 (upval)
 				local CallbackResult = nil
 				repeat
-					CallbackResult = Callback1(true, Total)
+					CallbackResult = Callback(true, Total)
 				until not CallbackResult or Flag
 				if not CallbackResult then
-					Callback = nil
+					Callback1 = nil
 				end
 			end)
 			Flag3 = false
@@ -120,16 +120,16 @@ local SchedulerHostConfig = {
 		end
 	end,
 	unstable_flushExpired = function()
-		-- upvalues: Flag1 (ref), Callback (ref), Total (ref)
+		-- upvalues: Flag1 (ref), Callback1 (ref), Total (ref)
 		if Flag1 then
 			error("Already flushing work.")
 		end
-		if Callback ~= nil then
+		if Callback1 ~= nil then
 			Flag1 = true
 			local Success, Result = pcall(function()
-				-- upvalues: Callback (upval), Total (upval)
-				if not Callback(false, Total) then
-					Callback = nil
+				-- upvalues: Callback1 (upval), Total (upval)
+				if not Callback1(false, Total) then
+					Callback1 = nil
 				end
 			end)
 			Flag1 = false
@@ -140,23 +140,23 @@ local SchedulerHostConfig = {
 		end
 	end,
 	unstable_flushAllWithoutAsserting = function(): boolean
-		-- upvalues: Flag1 (ref), Callback (ref), Total (ref)
+		-- upvalues: Flag1 (ref), Callback1 (ref), Total (ref)
 		if Flag1 then
 			error("Already flushing work.")
 		end
-		if Callback == nil then
+		if Callback1 == nil then
 			return false
 		end
-		local Callback1 = Callback
+		local Callback = Callback1
 		Flag1 = true
 		local Success, Result = pcall(function()
-			-- upvalues: Callback1 (copy), Total (upval), Callback (upval)
+			-- upvalues: Callback (copy), Total (upval), Callback1 (upval)
 			local CallbackResult = nil
 			repeat
-				CallbackResult = Callback1(true, Total)
+				CallbackResult = Callback(true, Total)
 			until not CallbackResult
 			if not CallbackResult then
-				Callback = nil
+				Callback1 = nil
 			end
 		end)
 		Flag1 = false
@@ -204,14 +204,14 @@ function SchedulerHostConfig.unstable_yieldValue(p1)
 end
 
 function SchedulerHostConfig.unstable_advanceTime(Amount)
-	-- upvalues: Console (copy), DisabledLog (copy), Total (ref), Callback1 (ref), v1 (ref)
+	-- upvalues: Console (copy), DisabledLog (copy), Total (ref), Callback (ref), v1 (ref)
 	if Console.log == DisabledLog then return end
 	Total += Amount
 	
-	if Callback1 ~= nil and v1 <= Total then
-		Callback1(Total)
+	if Callback ~= nil and v1 <= Total then
+		Callback(Total)
 		v1 = -1
-		Callback1 = nil
+		Callback = nil
 	end
 end
 

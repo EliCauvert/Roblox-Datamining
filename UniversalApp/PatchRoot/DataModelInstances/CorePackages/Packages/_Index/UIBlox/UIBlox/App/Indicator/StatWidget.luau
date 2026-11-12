@@ -5,6 +5,8 @@ local ReactModule = require(Parent1.React)
 local CryoModule = require(Parent1.Cryo)
 local _ = require(App.ImageSet.ImagesTypes)
 local _ = require(App.Style.StyleTypes)
+local IconSizeModule = require(App.ImageSet.Enum.IconSize)
+local GetIconSizeModule = require(App.ImageSet.getIconSize)
 local Label = require(Parent.Core.ImageSet.ImageSetComponent).Label
 local GenericTextLabelModule = require(Parent.Core.Text.GenericTextLabel.GenericTextLabel)
 local UseStyleModule = require(Parent.Core.Style.useStyle)
@@ -13,7 +15,7 @@ local config = {
 	containerPaddingRight = 12,
 	containerGap = 12,
 	dataGap = 0,
-	iconSize = require(App.ImageSet.getIconSize)(require(App.ImageSet.Enum.IconSize).Large)
+	iconSize = GetIconSizeModule(IconSizeModule.Large)
 }
 
 return function(p1)

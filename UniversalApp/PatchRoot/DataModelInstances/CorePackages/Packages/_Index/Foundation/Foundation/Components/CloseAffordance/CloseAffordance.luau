@@ -3,8 +3,10 @@ local Parent = Foundation.Parent
 local BuilderIconsModule = require(Parent.BuilderIcons)
 local IconModule = require(Foundation.Components.Icon)
 local ReactModule = require(Parent.React)
+local InputSizeModule = require(Foundation.Enums.InputSize)
 local IconVariant = BuilderIconsModule.IconVariant
 local _ = require(Foundation.Enums.IconSize)
+local CloseAffordanceVariantModule = require(Foundation.Enums.CloseAffordanceVariant)
 local _ = require(Foundation.Enums.Radius)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local UsePresentationContextFunction = require(Foundation.Providers.Style.PresentationContext).usePresentationContext
@@ -19,8 +21,8 @@ local config = {
 	isCircular = false,
 	hasPadding = true,
 	testId = "--foundation-close-affordance",
-	size = require(Foundation.Enums.InputSize).Medium,
-	variant = require(Foundation.Enums.CloseAffordanceVariant).OverMedia
+	size = InputSizeModule.Medium,
+	variant = CloseAffordanceVariantModule.OverMedia
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)

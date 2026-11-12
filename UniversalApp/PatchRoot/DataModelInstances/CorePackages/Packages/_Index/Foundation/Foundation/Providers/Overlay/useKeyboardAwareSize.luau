@@ -1,8 +1,9 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
 local WrappersModule = require(Foundation.Utility.Wrappers)
 local GuiService = WrappersModule.Services.GuiService
 local UserInputService = WrappersModule.Services.UserInputService
-local ReactModule = require(Foundation.Parent.React)
+local ReactModule = require(Parent.React)
 
 return function(Frame: Frame)
 	-- upvalues: ReactModule (copy), UserInputService (copy), GuiService (copy)

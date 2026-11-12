@@ -1,9 +1,10 @@
 ﻿local Parent = script.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
 local GraphQLModule = require(Parent.GraphQL)
 local GetNamedTypeFunction = GraphQLModule.getNamedType
 local IsObjectTypeFunction = GraphQLModule.isObjectType
 local _ = require(script.Parent.Interfaces)
-local String = require(Parent.LuauPolyfill).String
+local String = LuauPolyfillModule.String
 
 return {
 	forEachField = function(p1, Callback: (any, any, any) -> ())

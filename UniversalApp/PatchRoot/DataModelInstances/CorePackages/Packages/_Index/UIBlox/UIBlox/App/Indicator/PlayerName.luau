@@ -52,6 +52,7 @@ local function NameItem(p1)
 	local OnActivated = ItemProps.onActivated
 	local IsLoading = ItemProps.isLoading ~= nil and ItemProps.isLoading
 	local JoinResult = CryoModule.Dictionary.join(p1.itemStyleDefaults, ItemProps.styleProps or {})
+	local IconLabelSpacing = JoinResult.iconLabelSpacing
 	local IconSize: number = JoinResult.iconSize
 	local IconColorStyle = JoinResult.iconColorStyle or {}
 	local LabelTypography = JoinResult.labelTypography
@@ -75,7 +76,7 @@ local function NameItem(p1)
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
-			Padding = UDim.new(0, JoinResult.iconLabelSpacing)
+			Padding = UDim.new(0, IconLabelSpacing)
 		}),
 		Shimmer = if IsLoading then ReactModule.createElement(Skeleton, { Size = UDim2.new(1, 0, 0, Largest) }) else nil,
 		Icon = if Icon1 then if UseTextAsIcon then ReactModule.createElement("TextLabel", {
