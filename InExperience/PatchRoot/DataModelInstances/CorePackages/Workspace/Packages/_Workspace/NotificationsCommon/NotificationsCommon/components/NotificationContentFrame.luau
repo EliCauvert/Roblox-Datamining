@@ -11,6 +11,7 @@ local FoundationModule = require(NotificationsCommon.Parent.Foundation)
 local UseStyleFunction = UIBlox.Core.Style.useStyle
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local ConstantsModule = require(NotificationsCommon.constants)
 local UseNotificationCardStateModule = require(Context.useNotificationCardState)
 local UseNotificationCardDataModule = require(Context.useNotificationCardData)
@@ -25,11 +26,11 @@ local TimestampWidth = ConstantsModule.TimestampWidth
 local TimestampHeight = ConstantsModule.TimestampHeight
 
 return function()
-	-- upvalues: UseStyleFunction (copy), UseTokensFunction (copy), UseNotificationCardDataModule (copy), ConstantsModule (copy), UseNotificationCardStateModule (copy), NormalizeFontFaceFunction (copy), DefaultTextContentPadding (copy), MetaActionsWidth (copy), TimestampWidth (copy), TimestampHeight (copy), React (copy), DefaultContentPadding (copy), NotificationThumbnailModule (copy), NotificationStyledTextModule (copy), IconButton (copy), IconSize (copy), IconsCommonOverflow (copy), NotificationActionsFrameModule (copy)
+	-- upvalues: UseStyleFunction (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), UseNotificationCardDataModule (copy), ConstantsModule (copy), UseNotificationCardStateModule (copy), NormalizeFontFaceFunction (copy), DefaultTextContentPadding (copy), MetaActionsWidth (copy), TimestampWidth (copy), TimestampHeight (copy), React (copy), DefaultContentPadding (copy), NotificationThumbnailModule (copy), NotificationStyledTextModule (copy), IconButton (copy), IconSize (copy), IconsCommonOverflow (copy), NotificationActionsFrameModule (copy)
 	local UseStyleResult = UseStyleFunction()
-	local UseTokensResult = UseTokensFunction()
-	local FontSize = UseTokensResult.Typography.CaptionLarge.FontSize
-	local FontSize1 = UseTokensResult.Typography.BodySmall.FontSize
+	local UseTokensResult = if FoundationFontFaceMigration then UseTokensFunction() else nil
+	local FontSize = if FoundationFontFaceMigration then UseTokensResult.Typography.CaptionLarge.FontSize else UseStyleResult.Font.BaseSize * UseStyleResult.Font.CaptionHeader.RelativeSize
+	local FontSize1 = if FoundationFontFaceMigration then UseTokensResult.Typography.BodySmall.FontSize else UseStyleResult.Font.BaseSize * UseStyleResult.Font.CaptionBody.RelativeSize
 	local UseNotificationCardDataModuleResult = UseNotificationCardDataModule()
 	local CardSize = UseNotificationCardDataModuleResult.cardSize
 	local ReadOnly = UseNotificationCardDataModuleResult.readOnly
@@ -46,7 +47,8 @@ return function()
 		AutomaticSize = Enum.AutomaticSize.Y,
 		TextSize = FontSize,
 		TextXAlignment = Enum.TextXAlignment.Left,
-		FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.CaptionLarge.Font),
+		Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.CaptionHeader.Font,
+		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.CaptionLarge.Font) else nil,
 		TextColor3 = UseStyleResult.Theme.TextEmphasis.Color
 	})
 	local Config1 = TextBodyEntry and (TextBodyEntry.label and {
@@ -56,7 +58,8 @@ return function()
 		AutomaticSize = Enum.AutomaticSize.Y,
 		TextSize = FontSize1,
 		TextXAlignment = Enum.TextXAlignment.Left,
-		FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.BodySmall.Font),
+		Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.CaptionBody.Font,
+		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.BodySmall.Font) else nil,
 		TextColor3 = UseStyleResult.Theme.TextEmphasis.Color
 	})
 	local Config2 = NotificationPayload and (NotificationPayload.timestamp and {
@@ -69,7 +72,8 @@ return function()
 		TextXAlignment = Enum.TextXAlignment.Right,
 		AnchorPoint = Vector2.new(1, 0),
 		Position = UDim2.new(1, if ReadOnly then -DefaultTextContentPadding else -(MetaActionsWidth + DefaultTextContentPadding), 0, 0),
-		FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.CaptionLarge.Font),
+		Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.CaptionHeader.Font,
+		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.CaptionLarge.Font) else nil,
 		TextColor3 = UseStyleResult.Theme.TextEmphasis.Color
 	})
 	

@@ -2,7 +2,9 @@
 local RoactModule = require(Parent.Roact)
 local WithStyleFunction = require(Parent.UIBlox).Style.withStyle
 local OtterModule = require(Parent.Otter)
-local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(Parent.Foundation)
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local UIBloxModule = require(Parent.UIBlox)
 local Images = UIBloxModule.App.ImageSet.Images
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
@@ -58,10 +60,11 @@ function UserTypingIndicator.didUpdate(p1, p2, _)
 end
 
 function UserTypingIndicator.render(p1)
-	-- upvalues: WithStyleFunction (copy), RoactModule (copy), ImageSetLabel (copy), Images (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: WithStyleFunction (copy), RoactModule (copy), ImageSetLabel (copy), Images (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	return WithStyleFunction(function(p2)
-		-- upvalues: RoactModule (upval), p1 (copy), ImageSetLabel (upval), Images (upval), NormalizeFontFaceFunction (upval)
+		-- upvalues: RoactModule (upval), p1 (copy), ImageSetLabel (upval), Images (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 		local _Font = p2.Font
+		local FooterFont = _Font.Footer.Font
 		
 		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -114,7 +117,8 @@ function UserTypingIndicator.render(p1)
 					BackgroundTransparency = 1,
 					Text = p1.getDisplayText(),
 					TextSize = _Font.BaseSize * _Font.Footer.RelativeSize,
-					FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.CaptionSmall.Font),
+					Font = if FoundationFontFaceMigration then nil else FooterFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.CaptionSmall.Font) else nil,
 					TextColor3 = p2.Theme.TextMuted.Color,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Center,

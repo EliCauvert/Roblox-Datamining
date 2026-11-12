@@ -29,14 +29,14 @@ local PrintFunction = require(Language.printer).print
 local _ = require(Parent.language.ast)
 local ValueFromASTUntypedFunction = require(Parent.utilities.valueFromASTUntyped).valueFromASTUntyped
 local isType = nil
+local Callback = nil
 local Callback1 = nil
 local Callback3 = nil
 local Callback5 = nil
+local Callback6 = nil
 local Callback7 = nil
-local Callback = nil
 local Callback2 = nil
 local Callback4 = nil
-local Callback6 = nil
 local _ = nil
 local _ = nil
 local isLeafType = nil
@@ -45,14 +45,14 @@ local isAbstractType = nil
 local Callback8 = nil
 local Callback9 = nil
 local isNamedType = nil
+local Callback10 = nil
+local Callback18 = nil
 local Callback15 = nil
 local Callback14 = nil
+local Callback17 = nil
 local Callback16 = nil
 local Callback13 = nil
-local Callback18 = nil
-local Callback17 = nil
 local Callback12 = nil
-local Callback10 = nil
 local Callback11 = nil
 local Module = nil
 local Module1 = nil
@@ -64,8 +64,8 @@ local Module6 = {}
 local Module7 = {}
 
 isType = function(OfType)
-	-- upvalues: Callback1 (ref), Callback3 (ref), Callback5 (ref), Callback7 (ref), Callback (ref), Callback2 (ref), Callback4 (ref), Callback6 (ref)
-	return Callback1(OfType) or (Callback3(OfType) or (Callback5(OfType) or (Callback7(OfType) or (Callback(OfType) or (Callback2(OfType) or (Callback4(OfType) or Callback6(OfType)))))))
+	-- upvalues: Callback (ref), Callback1 (ref), Callback3 (ref), Callback5 (ref), Callback6 (ref), Callback7 (ref), Callback2 (ref), Callback4 (ref)
+	return Callback(OfType) or (Callback1(OfType) or (Callback3(OfType) or (Callback5(OfType) or (Callback6(OfType) or (Callback7(OfType) or (Callback2(OfType) or Callback4(OfType)))))))
 end
 
 local function assertType(p1)
@@ -76,113 +76,113 @@ local function assertType(p1)
 	return p1
 end
 
-Callback1 = function(p1)
+Callback = function(p1)
 	-- upvalues: InstanceOfModule (copy), Module2 (copy)
 	return InstanceOfModule(p1, Module2)
 end
 
 local function assertScalarType(p1)
-	-- upvalues: Callback1 (ref), Error1 (copy), InspectFunction (copy)
-	if not Callback1(p1) then
+	-- upvalues: Callback (ref), Error1 (copy), InspectFunction (copy)
+	if not Callback(p1) then
 		error(Error1.new(("Expected %s to be a GraphQL Scalar type."):format(InspectFunction(p1))))
 	end
 	return p1
 end
 
-Callback3 = function(p1)
+Callback1 = function(p1)
 	-- upvalues: InstanceOfModule (copy), Module3 (copy)
 	return InstanceOfModule(p1, Module3)
 end
 
 local function assertObjectType(p1)
-	-- upvalues: Callback3 (ref), Error1 (copy), InspectFunction (copy)
-	if not Callback3(p1) then
+	-- upvalues: Callback1 (ref), Error1 (copy), InspectFunction (copy)
+	if not Callback1(p1) then
 		error(Error1.new(("Expected %s to be a GraphQL Object type."):format(InspectFunction(p1))))
 	end
 	return p1
 end
 
-Callback5 = function(p1)
+Callback3 = function(p1)
 	-- upvalues: InstanceOfModule (copy), Module4 (copy)
 	return InstanceOfModule(p1, Module4)
 end
 
 local function assertInterfaceType(p1)
-	-- upvalues: Callback5 (ref), Error1 (copy), InspectFunction (copy)
-	if not Callback5(p1) then
+	-- upvalues: Callback3 (ref), Error1 (copy), InspectFunction (copy)
+	if not Callback3(p1) then
 		error(Error1.new(("Expected %s to be a GraphQL Interface type."):format(InspectFunction(p1))))
 	end
 	return p1
 end
 
-Callback7 = function(p1)
+Callback5 = function(p1)
 	-- upvalues: InstanceOfModule (copy), Module5 (copy)
 	return InstanceOfModule(p1, Module5)
 end
 
 local function assertUnionType(p1)
-	-- upvalues: Callback7 (ref), Error1 (copy), InspectFunction (copy)
-	if not Callback7(p1) then
+	-- upvalues: Callback5 (ref), Error1 (copy), InspectFunction (copy)
+	if not Callback5(p1) then
 		error(Error1.new(("Expected %s to be a GraphQL Union type."):format(InspectFunction(p1))))
 	end
 	return p1
 end
 
-Callback = function(p1)
+Callback6 = function(p1)
 	-- upvalues: InstanceOfModule (copy), Module6 (copy)
 	return InstanceOfModule(p1, Module6)
 end
 
 local function assertEnumType(p1)
-	-- upvalues: Callback (ref), Error1 (copy), InspectFunction (copy)
-	if not Callback(p1) then
+	-- upvalues: Callback6 (ref), Error1 (copy), InspectFunction (copy)
+	if not Callback6(p1) then
 		error(Error1.new(("Expected %s to be a GraphQL Enum type."):format(InspectFunction(p1))))
 	end
 	return p1
 end
 
-Callback2 = function(p1)
+Callback7 = function(p1)
 	-- upvalues: InstanceOfModule (copy), Module7 (copy)
 	return InstanceOfModule(p1, Module7)
 end
 
 local function assertInputObjectType(p1)
-	-- upvalues: Callback2 (ref), Error1 (copy), InspectFunction (copy)
-	if not Callback2(p1) then
+	-- upvalues: Callback7 (ref), Error1 (copy), InspectFunction (copy)
+	if not Callback7(p1) then
 		error(Error1.new(("Expected %s to be a GraphQL Input Object type."):format(InspectFunction(p1))))
 	end
 	return p1
 end
 
-Callback4 = function(p1)
+Callback2 = function(p1)
 	-- upvalues: InstanceOfModule (copy), Module (ref)
 	return InstanceOfModule(p1, Module)
 end
 
 local function assertListType(p1)
-	-- upvalues: Callback4 (ref), Error1 (copy), InspectFunction (copy)
-	if not Callback4(p1) then
+	-- upvalues: Callback2 (ref), Error1 (copy), InspectFunction (copy)
+	if not Callback2(p1) then
 		error(Error1.new(("Expected %s to be a GraphQL List type."):format(InspectFunction(p1))))
 	end
 	return p1
 end
 
-Callback6 = function(Type)
+Callback4 = function(Type)
 	-- upvalues: InstanceOfModule (copy), Module1 (ref)
 	return InstanceOfModule(Type, Module1)
 end
 
 local function assertNonNullType(p1)
-	-- upvalues: Callback6 (ref), Error1 (copy), InspectFunction (copy)
-	if not Callback6(p1) then
+	-- upvalues: Callback4 (ref), Error1 (copy), InspectFunction (copy)
+	if not Callback4(p1) then
 		error(Error1.new(("Expected %s to be a GraphQL Non-Null type."):format(InspectFunction(p1))))
 	end
 	return p1
 end
 
 local function isInputType(OfType)
-	-- upvalues: Callback1 (ref), Callback (ref), Callback2 (ref), Callback8 (ref), isInputType (ref)
-	return Callback1(OfType) or (Callback(OfType) or (Callback2(OfType) or Callback8(OfType) and isInputType(OfType.ofType)))
+	-- upvalues: Callback (ref), Callback6 (ref), Callback7 (ref), Callback8 (ref), isInputType (ref)
+	return Callback(OfType) or (Callback6(OfType) or (Callback7(OfType) or Callback8(OfType) and isInputType(OfType.ofType)))
 end
 
 local function assertInputType(p1)
@@ -194,8 +194,8 @@ local function assertInputType(p1)
 end
 
 local function isOutputType(OfType)
-	-- upvalues: Callback1 (ref), Callback3 (ref), Callback5 (ref), Callback7 (ref), Callback (ref), Callback8 (ref), isOutputType (ref)
-	return Callback1(OfType) or (Callback3(OfType) or (Callback5(OfType) or (Callback7(OfType) or (Callback(OfType) or Callback8(OfType) and isOutputType(OfType.ofType)))))
+	-- upvalues: Callback (ref), Callback1 (ref), Callback3 (ref), Callback5 (ref), Callback6 (ref), Callback8 (ref), isOutputType (ref)
+	return Callback(OfType) or (Callback1(OfType) or (Callback3(OfType) or (Callback5(OfType) or (Callback6(OfType) or Callback8(OfType) and isOutputType(OfType.ofType)))))
 end
 
 local function assertOutputType(p1)
@@ -207,8 +207,8 @@ local function assertOutputType(p1)
 end
 
 isLeafType = function(p1)
-	-- upvalues: Callback1 (ref), Callback (ref)
-	return Callback1(p1) or Callback(p1)
+	-- upvalues: Callback (ref), Callback6 (ref)
+	return Callback(p1) or Callback6(p1)
 end
 
 local function assertLeafType(p1)
@@ -220,8 +220,8 @@ local function assertLeafType(p1)
 end
 
 isCompositeType = function(p1)
-	-- upvalues: Callback3 (ref), Callback5 (ref), Callback7 (ref)
-	return Callback3(p1) or (Callback5(p1) or Callback7(p1))
+	-- upvalues: Callback1 (ref), Callback3 (ref), Callback5 (ref)
+	return Callback1(p1) or (Callback3(p1) or Callback5(p1))
 end
 
 local function assertCompositeType(p1)
@@ -233,8 +233,8 @@ local function assertCompositeType(p1)
 end
 
 isAbstractType = function(p1)
-	-- upvalues: Callback5 (ref), Callback7 (ref)
-	return Callback5(p1) or Callback7(p1)
+	-- upvalues: Callback3 (ref), Callback5 (ref)
+	return Callback3(p1) or Callback5(p1)
 end
 
 local function assertAbstractType(p1)
@@ -294,8 +294,8 @@ function Module1:toJSON()
 end
 
 Callback8 = function(OfType)
-	-- upvalues: Callback4 (ref), Callback6 (ref)
-	return Callback4(OfType) or Callback6(OfType)
+	-- upvalues: Callback2 (ref), Callback4 (ref)
+	return Callback2(OfType) or Callback4(OfType)
 end
 
 local function assertWrappingType(p1)
@@ -307,8 +307,8 @@ local function assertWrappingType(p1)
 end
 
 Callback9 = function(OfType): boolean
-	-- upvalues: isType (ref), Callback6 (ref)
-	return isType(OfType) and not Callback6(OfType)
+	-- upvalues: isType (ref), Callback4 (ref)
+	return isType(OfType) and not Callback4(OfType)
 end
 
 local function assertNullableType(p1)
@@ -320,13 +320,13 @@ local function assertNullableType(p1)
 end
 
 local function getNullableType(p1)
-	-- upvalues: Callback6 (ref)
-	return if p1 then if Callback6(p1) then p1.ofType else p1 else nil
+	-- upvalues: Callback4 (ref)
+	return if p1 then if Callback4(p1) then p1.ofType else p1 else nil
 end
 
 isNamedType = function(p1)
-	-- upvalues: Callback1 (ref), Callback3 (ref), Callback5 (ref), Callback7 (ref), Callback (ref), Callback2 (ref)
-	return Callback1(p1) or (Callback3(p1) or (Callback5(p1) or (Callback7(p1) or (Callback(p1) or Callback2(p1)))))
+	-- upvalues: Callback (ref), Callback1 (ref), Callback3 (ref), Callback5 (ref), Callback6 (ref), Callback7 (ref)
+	return Callback(p1) or (Callback1(p1) or (Callback3(p1) or (Callback5(p1) or (Callback6(p1) or Callback7(p1)))))
 end
 
 local function assertNamedType(p1)
@@ -427,7 +427,7 @@ end
 Module3.__index = Module3
 
 function Module3.new(p1)
-	-- upvalues: ToObjMapFunction (copy), Callback11 (ref), Callback10 (ref), DevAssertFunction (copy), InspectFunction (copy), Module3 (copy)
+	-- upvalues: ToObjMapFunction (copy), Callback11 (ref), Callback12 (ref), DevAssertFunction (copy), InspectFunction (copy), Module3 (copy)
 	local ExtensionASTNodes = p1.extensionASTNodes
 	local config = {
 		name = p1.name,
@@ -441,8 +441,8 @@ function Module3.new(p1)
 			return Callback11(p1)
 		end,
 		_interfaces = function()
-			-- upvalues: Callback10 (upval), p1 (copy)
-			return Callback10(p1)
+			-- upvalues: Callback12 (upval), p1 (copy)
+			return Callback12(p1)
 		end
 	}
 	DevAssertFunction(typeof(p1.name) == "string", "Must provide name.")
@@ -466,12 +466,12 @@ function Module3:getInterfaces()
 end
 
 function Module3:toConfig()
-	-- upvalues: Callback12 (ref)
+	-- upvalues: Callback13 (ref)
 	return {
 		name = self.name,
 		description = self.description,
 		interfaces = self:getInterfaces(),
-		fields = Callback12(self:getFields()),
+		fields = Callback13(self:getFields()),
 		isTypeOf = self.isTypeOf,
 		extensions = self.extensions,
 		astNode = self.astNode,
@@ -491,7 +491,7 @@ function Module3:toJSON()
 	return self:toString()
 end
 
-Callback10 = function(p1)
+Callback12 = function(p1)
 	-- upvalues: DevAssertFunction (copy), Array (copy)
 	local InterfacesFunction = p1.interfaces
 	local InterfacesResult = if typeof(InterfacesFunction) == "function" then InterfacesFunction() else InterfacesFunction
@@ -502,17 +502,17 @@ Callback10 = function(p1)
 end
 
 Callback11 = function(p1)
-	-- upvalues: DevAssertFunction (copy), Callback13 (ref), InstanceOfModule (copy), Map (copy), CoerceToMapFunction (copy), MapValueOrderedFunction (copy), InspectFunction (copy), Array (copy), ToObjMapFunction (copy)
+	-- upvalues: DevAssertFunction (copy), Callback14 (ref), InstanceOfModule (copy), Map (copy), CoerceToMapFunction (copy), MapValueOrderedFunction (copy), InspectFunction (copy), Array (copy), ToObjMapFunction (copy)
 	local FieldsFunction = p1.fields
 	local FieldsResult = if typeof(FieldsFunction) == "function" then FieldsFunction() else FieldsFunction
-	DevAssertFunction(Callback13(FieldsResult) or InstanceOfModule(FieldsResult, Map), ("%s fields must be an object with field names as keys or a function which returns such an object."):format(p1.name))
+	DevAssertFunction(Callback14(FieldsResult) or InstanceOfModule(FieldsResult, Map), ("%s fields must be an object with field names as keys or a function which returns such an object."):format(p1.name))
 	
 	return MapValueOrderedFunction(CoerceToMapFunction(FieldsResult), function(p2, Name)
-		-- upvalues: DevAssertFunction (upval), Callback13 (upval), p1 (copy), InspectFunction (upval), InstanceOfModule (upval), Map (upval), Array (upval), CoerceToMapFunction (upval), ToObjMapFunction (upval)
-		DevAssertFunction(Callback13(p2), ("%s.%s field config must be an object."):format(p1.name, Name))
+		-- upvalues: DevAssertFunction (upval), Callback14 (upval), p1 (copy), InspectFunction (upval), InstanceOfModule (upval), Map (upval), Array (upval), CoerceToMapFunction (upval), ToObjMapFunction (upval)
+		DevAssertFunction(Callback14(p2), ("%s.%s field config must be an object."):format(p1.name, Name))
 		DevAssertFunction(p2.resolve == nil or typeof(p2.resolve) == "function", ("%s.%s field resolver must be a function if "):format(p1.name, Name) .. ("provided, but got: %s."):format(InspectFunction(p2.resolve)))
 		local Args = if p2.args then p2.args else {}
-		DevAssertFunction(Callback13(Args) or InstanceOfModule(Args, Map), ("%s.%s args must be an object with argument names as keys."):format(p1.name, Name))
+		DevAssertFunction(Callback14(Args) or InstanceOfModule(Args, Map), ("%s.%s args must be an object with argument names as keys."):format(p1.name, Name))
 		
 		return {
 			name = Name,
@@ -541,19 +541,19 @@ Callback11 = function(p1)
 	end)
 end
 
-Callback13 = function(Args): boolean
+Callback14 = function(Args): boolean
 	-- upvalues: NullModule (copy), IsObjectLikeFunction (copy), Array (copy)
 	return Args ~= NullModule and (IsObjectLikeFunction(Args) and (not Array.isArray(Args) or next(Args) == nil))
 end
 
-Callback12 = function(Fields)
-	-- upvalues: MapValueOrderedFunction (copy), Callback15 (ref)
+Callback13 = function(Fields)
+	-- upvalues: MapValueOrderedFunction (copy), Callback10 (ref)
 	return MapValueOrderedFunction(Fields, function(p1)
-		-- upvalues: Callback15 (upval)
+		-- upvalues: Callback10 (upval)
 		return {
 			description = p1.description,
 			type = p1.type,
-			args = Callback15(p1.args),
+			args = Callback10(p1.args),
 			resolve = p1.resolve,
 			subscribe = p1.subscribe,
 			deprecationReason = p1.deprecationReason,
@@ -563,7 +563,7 @@ Callback12 = function(Fields)
 	end)
 end
 
-Callback15 = function(Args)
+Callback10 = function(Args)
 	-- upvalues: KeyValMapFunction (copy)
 	return KeyValMapFunction(Args, function(p1)
 		return p1.name
@@ -580,14 +580,14 @@ Callback15 = function(Args)
 end
 
 local function isRequiredArgument(p1): boolean
-	-- upvalues: Callback6 (ref)
-	return Callback6(p1.type) and p1.defaultValue == nil
+	-- upvalues: Callback4 (ref)
+	return Callback4(p1.type) and p1.defaultValue == nil
 end
 
 Module4.__index = Module4
 
 function Module4.new(p1)
-	-- upvalues: ToObjMapFunction (copy), Callback11 (ref), Callback10 (ref), DevAssertFunction (copy), InspectFunction (copy), Module4 (copy)
+	-- upvalues: ToObjMapFunction (copy), Callback11 (ref), Callback12 (ref), DevAssertFunction (copy), InspectFunction (copy), Module4 (copy)
 	local ExtensionASTNodes = p1.extensionASTNodes
 	local config = {
 		name = p1.name,
@@ -601,8 +601,8 @@ function Module4.new(p1)
 			return Callback11(p1)
 		end,
 		_interfaces = function()
-			-- upvalues: Callback10 (upval), p1 (copy)
-			return Callback10(p1)
+			-- upvalues: Callback12 (upval), p1 (copy)
+			return Callback12(p1)
 		end
 	}
 	DevAssertFunction(typeof(p1.name) == "string", "Must provide name.")
@@ -626,12 +626,12 @@ function Module4:getInterfaces()
 end
 
 function Module4:toConfig()
-	-- upvalues: Callback12 (ref)
+	-- upvalues: Callback13 (ref)
 	return {
 		name = self.name,
 		description = self.description,
 		interfaces = self:getInterfaces(),
-		fields = Callback12(self:getFields()),
+		fields = Callback13(self:getFields()),
 		resolveType = self.resolveType,
 		extensions = self.extensions,
 		astNode = self.astNode,
@@ -654,7 +654,7 @@ end
 Module5.__index = Module5
 
 function Module5.new(p1)
-	-- upvalues: ToObjMapFunction (copy), Callback16 (ref), DevAssertFunction (copy), InspectFunction (copy), Module5 (copy)
+	-- upvalues: ToObjMapFunction (copy), Callback15 (ref), DevAssertFunction (copy), InspectFunction (copy), Module5 (copy)
 	local ExtensionASTNodes = p1.extensionASTNodes
 	local config = {
 		name = p1.name,
@@ -664,8 +664,8 @@ function Module5.new(p1)
 		astNode = p1.astNode,
 		extensionASTNodes = if ExtensionASTNodes and #ExtensionASTNodes > 0 then ExtensionASTNodes else nil,
 		_types = function()
-			-- upvalues: Callback16 (upval), p1 (copy)
-			return Callback16(p1)
+			-- upvalues: Callback15 (upval), p1 (copy)
+			return Callback15(p1)
 		end
 	}
 	DevAssertFunction(typeof(p1.name) == "string", "Must provide name.")
@@ -705,7 +705,7 @@ function Module5:toJSON()
 	return self:toString()
 end
 
-Callback16 = function(p1)
+Callback15 = function(p1)
 	-- upvalues: DevAssertFunction (copy), Array (copy)
 	local TypesFunction = p1.types
 	local TypesResult = if typeof(TypesFunction) == "function" then TypesFunction() else TypesFunction
@@ -717,7 +717,7 @@ end
 Module6.__index = Module6
 
 function Module6.new(p1)
-	-- upvalues: ToObjMapFunction (copy), Callback17 (ref), Array (copy), FreezeResult (copy), KeyMapFunction (copy), DevAssertFunction (copy), Module6 (copy)
+	-- upvalues: ToObjMapFunction (copy), Callback16 (ref), Array (copy), FreezeResult (copy), KeyMapFunction (copy), DevAssertFunction (copy), Module6 (copy)
 	local ExtensionASTNodes = p1.extensionASTNodes
 	local config = {
 		name = p1.name,
@@ -726,7 +726,7 @@ function Module6.new(p1)
 		astNode = p1.astNode,
 		extensionASTNodes = if ExtensionASTNodes and #ExtensionASTNodes > 0 then ExtensionASTNodes else nil
 	}
-	config._values = Callback17(config.name, p1.values)
+	config._values = Callback16(config.name, p1.values)
 	config._valueLookup = {}
 	Array.forEach(config._values, function(p2)
 		-- upvalues: config (copy), FreezeResult (upval)
@@ -765,30 +765,30 @@ function Module6:serialize(p1)
 end
 
 function Module6:parseValue(p1: string)
-	-- upvalues: InspectFunction (copy), GraphQLError (copy), Callback18 (ref)
+	-- upvalues: InspectFunction (copy), GraphQLError (copy), Callback17 (ref)
 	if typeof(p1) ~= "string" then
 		local InspectResult = InspectFunction(p1)
-		error(GraphQLError.new(("Enum \"%s\" cannot represent non-string value: %s." .. Callback18(self, InspectResult)):format(self.name, InspectResult)))
+		error(GraphQLError.new(("Enum \"%s\" cannot represent non-string value: %s." .. Callback17(self, InspectResult)):format(self.name, InspectResult)))
 	end
 	local Value = self:getValue(p1)
 	
 	if Value == nil then
-		error(GraphQLError.new(("Value \"%s\" does not exist in \"%s\" enum."):format(p1, self.name) .. Callback18(self, p1)))
+		error(GraphQLError.new(("Value \"%s\" does not exist in \"%s\" enum."):format(p1, self.name) .. Callback17(self, p1)))
 	end
 	return Value.value
 end
 
 function Module6:parseLiteral(p1, _)
-	-- upvalues: Kind (copy), PrintFunction (copy), GraphQLError (copy), Callback18 (ref)
+	-- upvalues: Kind (copy), PrintFunction (copy), GraphQLError (copy), Callback17 (ref)
 	if p1.kind ~= Kind.ENUM then
 		local PrintResult = PrintFunction(p1)
-		error(GraphQLError.new(("Enum \"%s\" cannot represent non-enum value: %s."):format(self.name, PrintResult) .. Callback18(self, PrintResult), p1))
+		error(GraphQLError.new(("Enum \"%s\" cannot represent non-enum value: %s."):format(self.name, PrintResult) .. Callback17(self, PrintResult), p1))
 	end
 	local Value = self:getValue(p1.value)
 	
 	if Value == nil then
 		local PrintResult = PrintFunction(p1)
-		error(GraphQLError.new(("Value \"%s\" does not exist in \"%s\" enum."):format(PrintResult, self.name) .. Callback18(self, PrintResult), p1))
+		error(GraphQLError.new(("Value \"%s\" does not exist in \"%s\" enum."):format(PrintResult, self.name) .. Callback17(self, PrintResult), p1))
 	end
 	return Value.value
 end
@@ -827,22 +827,22 @@ function Module6:toJSON()
 	return self:toString()
 end
 
-Callback18 = function(p1, p2)
+Callback17 = function(p1, p2)
 	-- upvalues: Array (copy), SuggestionListFunction (copy), DidYouMeanFunction (copy)
 	return DidYouMeanFunction("the enum value", (SuggestionListFunction(p2, (Array.map(p1:getValues(), function(p3)
 		return p3.name
 	end)))))
 end
 
-Callback17 = function(Name, Values)
-	-- upvalues: DevAssertFunction (copy), Callback13 (ref), InstanceOfModule (copy), Map (copy), CoerceToMapFunction (copy), Array (copy), InspectFunction (copy), ToObjMapFunction (copy)
-	DevAssertFunction(Callback13(Values) or InstanceOfModule(Values, Map), ("%s values must be an object with value names as keys."):format((tostring(Name))))
+Callback16 = function(Name, Values)
+	-- upvalues: DevAssertFunction (copy), Callback14 (ref), InstanceOfModule (copy), Map (copy), CoerceToMapFunction (copy), Array (copy), InspectFunction (copy), ToObjMapFunction (copy)
+	DevAssertFunction(Callback14(Values) or InstanceOfModule(Values, Map), ("%s values must be an object with value names as keys."):format((tostring(Name))))
 	
 	return Array.map(CoerceToMapFunction(Values):entries(), function(Entry)
-		-- upvalues: DevAssertFunction (upval), Callback13 (upval), Name (copy), InspectFunction (upval), ToObjMapFunction (upval)
+		-- upvalues: DevAssertFunction (upval), Callback14 (upval), Name (copy), InspectFunction (upval), ToObjMapFunction (upval)
 		local Entry1 = Entry[1]
 		local Entry2 = Entry[2]
-		DevAssertFunction(Callback13(Entry2), ("%s.%s must refer to an object with a \"value\" key "):format(tostring(Name), (tostring(Entry1))) .. ("representing an internal value but got: %s."):format(InspectFunction(Entry2)))
+		DevAssertFunction(Callback14(Entry2), ("%s.%s must refer to an object with a \"value\" key "):format(tostring(Name), (tostring(Entry1))) .. ("representing an internal value but got: %s."):format(InspectFunction(Entry2)))
 		
 		return {
 			name = tostring(Entry1),
@@ -858,7 +858,7 @@ end
 Module7.__index = Module7
 
 function Module7.new(p1)
-	-- upvalues: ToObjMapFunction (copy), Callback14 (ref), DevAssertFunction (copy), Module7 (copy)
+	-- upvalues: ToObjMapFunction (copy), Callback18 (ref), DevAssertFunction (copy), Module7 (copy)
 	local ExtensionASTNodes = p1.extensionASTNodes
 	local config = {
 		name = p1.name,
@@ -867,8 +867,8 @@ function Module7.new(p1)
 		astNode = p1.astNode,
 		extensionASTNodes = if ExtensionASTNodes and #ExtensionASTNodes > 0 then ExtensionASTNodes else nil,
 		_fields = function()
-			-- upvalues: Callback14 (upval), p1 (copy)
-			return Callback14(p1)
+			-- upvalues: Callback18 (upval), p1 (copy)
+			return Callback18(p1)
 		end
 	}
 	DevAssertFunction(typeof(p1.name) == "string", "Must provide name.")
@@ -915,11 +915,11 @@ function Module7:toJSON()
 	return self:toString()
 end
 
-Callback14 = function(p1)
-	-- upvalues: DevAssertFunction (copy), Callback13 (ref), InstanceOfModule (copy), Map (copy), CoerceToMapFunction (copy), MapValueOrderedFunction (copy), ToObjMapFunction (copy)
+Callback18 = function(p1)
+	-- upvalues: DevAssertFunction (copy), Callback14 (ref), InstanceOfModule (copy), Map (copy), CoerceToMapFunction (copy), MapValueOrderedFunction (copy), ToObjMapFunction (copy)
 	local FieldsFunction = p1.fields
 	local FieldsResult = if typeof(FieldsFunction) == "function" then FieldsFunction() else FieldsFunction
-	DevAssertFunction(Callback13(FieldsResult) or InstanceOfModule(FieldsResult, Map), ("%s fields must be an object with field names as keys or a function which returns such an object."):format(p1.name))
+	DevAssertFunction(Callback14(FieldsResult) or InstanceOfModule(FieldsResult, Map), ("%s fields must be an object with field names as keys or a function which returns such an object."):format(p1.name))
 	
 	return MapValueOrderedFunction(CoerceToMapFunction(FieldsResult), function(p2, Name)
 		-- upvalues: DevAssertFunction (upval), p1 (copy), ToObjMapFunction (upval)
@@ -952,21 +952,21 @@ return {
 	GraphQLInputObjectType = Module7,
 	isType = isType,
 	assertType = assertType,
-	isScalarType = Callback1,
+	isScalarType = Callback,
 	assertScalarType = assertScalarType,
-	isObjectType = Callback3,
+	isObjectType = Callback1,
 	assertObjectType = assertObjectType,
-	isInterfaceType = Callback5,
+	isInterfaceType = Callback3,
 	assertInterfaceType = assertInterfaceType,
-	isUnionType = Callback7,
+	isUnionType = Callback5,
 	assertUnionType = assertUnionType,
-	isEnumType = Callback,
+	isEnumType = Callback6,
 	assertEnumType = assertEnumType,
-	isInputObjectType = Callback2,
+	isInputObjectType = Callback7,
 	assertInputObjectType = assertInputObjectType,
-	isListType = Callback4,
+	isListType = Callback2,
 	assertListType = assertListType,
-	isNonNullType = Callback6,
+	isNonNullType = Callback4,
 	assertNonNullType = assertNonNullType,
 	isInputType = isInputType,
 	assertInputType = assertInputType,
@@ -986,11 +986,11 @@ return {
 	isNamedType = isNamedType,
 	assertNamedType = assertNamedType,
 	getNamedType = getNamedType,
-	argsToArgsConfig = Callback15,
+	argsToArgsConfig = Callback10,
 	isRequiredArgument = isRequiredArgument,
 	isRequiredInputField = function(p1): boolean
-		-- upvalues: Callback6 (ref)
-		return Callback6(p1.type) and p1.defaultValue == nil
+		-- upvalues: Callback4 (ref)
+		return Callback4(p1.type) and p1.defaultValue == nil
 	end,
 	NULL = NullModule
 }

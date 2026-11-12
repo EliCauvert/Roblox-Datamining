@@ -159,8 +159,9 @@ end
 local function addProbeLines(List, p1, p2)
 	-- upvalues: FormatModule (copy), Repeated (copy)
 	local MedianMs = if p2 then p2.medianMs else nil
+	local ColorTagResult = if MedianMs == nil or MedianMs < 0 then FormatModule.colorTag(FormatModule.COLOR_RED, "—") else FormatModule.colorTag(FormatModule.rttColor(MedianMs), string.format("%.0f ms", MedianMs))
 	local JitterMs = if p2 then p2.jitterMs else nil
-	table.insert(List, "  PoP probe             " .. (if MedianMs == nil or MedianMs < 0 then FormatModule.colorTag(FormatModule.COLOR_RED, "—") else FormatModule.colorTag(FormatModule.rttColor(MedianMs), string.format("%.0f ms", MedianMs))) .. (if JitterMs then FormatModule.colorTag(FormatModule.COLOR_DIM, string.format(" ±%.0f ms jitter", JitterMs)) else ""))
+	table.insert(List, "  PoP probe             " .. ColorTagResult .. (if JitterMs then FormatModule.colorTag(FormatModule.COLOR_DIM, string.format(" ±%.0f ms jitter", JitterMs)) else ""))
 	
 	if p2 and #p2.history > 0 then
 		table.insert(List, Repeated .. FormatModule.sparkline(p2.history))
@@ -241,10 +242,10 @@ return {
 		if not AddPingLinesResult then
 			local DataMs = p3.dataMs
 			local RakMs1 = p3.rakMs
-			local ColorTagResult1 = if DataMs and RakMs1 then FormatModule.colorTag(FormatModule.COLOR_DIM, string.format("%+.0f ms", DataMs - RakMs1)) else nil
+			local ColorTagResult = if DataMs and RakMs1 then FormatModule.colorTag(FormatModule.COLOR_DIM, string.format("%+.0f ms", DataMs - RakMs1)) else nil
 			
-			if ColorTagResult1 then
-				table.insert(List, "  Replication overhead  " .. ColorTagResult1)
+			if ColorTagResult then
+				table.insert(List, "  Replication overhead  " .. ColorTagResult)
 			end
 		end
 		local ColorTagResult = nil

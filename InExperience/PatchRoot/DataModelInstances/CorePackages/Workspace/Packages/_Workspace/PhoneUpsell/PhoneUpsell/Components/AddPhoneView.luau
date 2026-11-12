@@ -6,6 +6,7 @@ local FoundationModule = require(Parent.Foundation)
 local Checkbox = FoundationModule.Checkbox
 local Text = FoundationModule.Text
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local WithStyleFunction = UIBloxModule.Style.withStyle
 local WithLocalizationFunction = require(Parent.Localization).withLocalization
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
@@ -63,7 +64,7 @@ local function getButtonStackProps(Text, OnActivated, IsDisabled, Text1, OnActiv
 end
 
 return function(p1)
-	-- upvalues: MergePropsModule (copy), config (copy), ReactModule (copy), GetPartialPageModalMiddleContentWidthFunction (copy), FFlagHomePhoneVerificationUpsellNewCopy (copy), WithStyleFunction (copy), WithLocalizationFunction (copy), PartialPageModal (copy), getButtonStackProps (copy), FFlagPhoneUpsellFocusNavigationModule (copy), NormalizeFontFaceFunction (copy), TextBoxStateWrapper (copy), PhoneNumberTextBox (copy), Text (copy), Checkbox (copy), LinkButton (copy)
+	-- upvalues: MergePropsModule (copy), config (copy), ReactModule (copy), GetPartialPageModalMiddleContentWidthFunction (copy), FFlagHomePhoneVerificationUpsellNewCopy (copy), WithStyleFunction (copy), WithLocalizationFunction (copy), PartialPageModal (copy), getButtonStackProps (copy), FFlagPhoneUpsellFocusNavigationModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), TextBoxStateWrapper (copy), PhoneNumberTextBox (copy), Text (copy), Checkbox (copy), LinkButton (copy)
 	local MergePropsModuleResult = MergePropsModule(config, p1)
 	
 	local function noOp() end
@@ -87,9 +88,9 @@ return function(p1)
 		config1.extraButtonKey = MergePropsModuleResult.extraButtonKey
 	end
 	return WithStyleFunction(function(p2)
-		-- upvalues: WithLocalizationFunction (upval), config1 (copy), MergePropsModuleResult (copy), UseStateResult (copy), ReactModule (upval), PartialPageModal (upval), getButtonStackProps (upval), FFlagPhoneUpsellFocusNavigationModule (upval), UseRefResult (copy), NormalizeFontFaceFunction (upval), PartialPageModalMiddleContentWidth (copy), TextBoxStateWrapper (upval), PhoneNumberTextBox (upval), noOp (copy), FFlagHomePhoneVerificationUpsellNewCopy (upval), Text (upval), Checkbox (upval), UseStateResult2 (copy), LinkButton (upval)
+		-- upvalues: WithLocalizationFunction (upval), config1 (copy), MergePropsModuleResult (copy), UseStateResult (copy), ReactModule (upval), PartialPageModal (upval), getButtonStackProps (upval), FFlagPhoneUpsellFocusNavigationModule (upval), UseRefResult (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), PartialPageModalMiddleContentWidth (copy), TextBoxStateWrapper (upval), PhoneNumberTextBox (upval), noOp (copy), FFlagHomePhoneVerificationUpsellNewCopy (upval), Text (upval), Checkbox (upval), UseStateResult2 (copy), LinkButton (upval)
 		return WithLocalizationFunction(config1)(function(p3)
-			-- upvalues: p2 (copy), MergePropsModuleResult (upval), UseStateResult (upval), ReactModule (upval), PartialPageModal (upval), getButtonStackProps (upval), FFlagPhoneUpsellFocusNavigationModule (upval), UseRefResult (upval), NormalizeFontFaceFunction (upval), PartialPageModalMiddleContentWidth (upval), TextBoxStateWrapper (upval), PhoneNumberTextBox (upval), noOp (upval), FFlagHomePhoneVerificationUpsellNewCopy (upval), Text (upval), Checkbox (upval), UseStateResult2 (upval), LinkButton (upval)
+			-- upvalues: p2 (copy), MergePropsModuleResult (upval), UseStateResult (upval), ReactModule (upval), PartialPageModal (upval), getButtonStackProps (upval), FFlagPhoneUpsellFocusNavigationModule (upval), UseRefResult (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), PartialPageModalMiddleContentWidth (upval), TextBoxStateWrapper (upval), PhoneNumberTextBox (upval), noOp (upval), FFlagHomePhoneVerificationUpsellNewCopy (upval), Text (upval), Checkbox (upval), UseStateResult2 (upval), LinkButton (upval)
 			local BaseSize = p2.Font.BaseSize
 			local RelativeSize = p2.Font.CaptionHeader.RelativeSize
 			local NoDisableLegalText: boolean = MergePropsModuleResult.countryCode.prefix == "1" and not MergePropsModuleResult.disableLegalText
@@ -124,7 +125,8 @@ return function(p1)
 						TextSize = BaseSize,
 						TextColor3 = p2.Theme.TextDefault.Color,
 						TextTransparency = p2.Theme.TextDefault.Transparency,
-						FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font),
+						Font = if FoundationFontFaceMigration then nil else p2.Font.Body.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font) else nil,
 						TextXAlignment = Enum.TextXAlignment.Left,
 						Size = UDim2.new(0, PartialPageModalMiddleContentWidth, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y
@@ -165,7 +167,8 @@ return function(p1)
 						TextSize = BaseSize * RelativeSize,
 						TextColor3 = p2.Theme.TextEmphasis.Color,
 						TextTransparency = p2.Theme.TextEmphasis.Transparency,
-						FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font),
+						Font = if FoundationFontFaceMigration then nil else p2.Font.Body.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font) else nil,
 						TextXAlignment = Enum.TextXAlignment.Left,
 						Size = UDim2.new(0, PartialPageModalMiddleContentWidth, 0, 24)
 					}),
@@ -198,7 +201,8 @@ return function(p1)
 							TextSize = BaseSize * RelativeSize,
 							TextColor3 = p2.Theme.TextDefault.Color,
 							TextTransparency = p2.Theme.TextDefault.Transparency,
-							FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font),
+							Font = if FoundationFontFaceMigration then nil else p2.Font.Body.Font,
+							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font) else nil,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							Size = UDim2.new(1, -32, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y
@@ -211,7 +215,8 @@ return function(p1)
 						TextSize = BaseSize * RelativeSize,
 						TextColor3 = p2.Theme.TextDefault.Color,
 						TextTransparency = p2.Theme.TextDefault.Transparency,
-						FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font),
+						Font = if FoundationFontFaceMigration then nil else p2.Font.Body.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font) else nil,
 						TextXAlignment = Enum.TextXAlignment.Left,
 						Size = UDim2.new(0, PartialPageModalMiddleContentWidth, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y
@@ -245,7 +250,8 @@ return function(p1)
 							TextSize = BaseSize * RelativeSize,
 							TextColor3 = p2.Theme.TextDefault.Color,
 							TextTransparency = p2.Theme.TextDefault.Transparency,
-							FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font),
+							Font = if FoundationFontFaceMigration then nil else p2.Font.Body.Font,
+							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font) else nil,
 							TextXAlignment = Enum.TextXAlignment.Center,
 							AutomaticSize = Enum.AutomaticSize.XY
 						}),

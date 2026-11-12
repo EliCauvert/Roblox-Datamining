@@ -13,7 +13,6 @@ local TextChannelWindowPerfTrackerModule = require(ChatUIPrimitives.Telemetry.Te
 local RewriteToggleModule = require(script.Parent.RewriteToggle)
 local TranslateHitOverlayModule = require(script.Parent.TranslateHitOverlay)
 local FFlagTCWTranslationSupportModule = require(ChatUIPrimitives.Flags.FFlagTCWTranslationSupport)
-local FFlagExpChatLazyMountRewriteToggleModule = require(ChatUIPrimitives.Flags.FFlagExpChatLazyMountRewriteToggle)
 local SelectableUsernameModule = require(script.Parent.SelectableUsername)
 local IconName = FoundationModule.Enums.IconName
 local UseSignalBindingFunction = SignalsReactModule.useSignalBinding
@@ -56,7 +55,7 @@ local _ = function(p1: number)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FoundationModule (copy), ReactModule (copy), SignalsModule (copy), UseStableSignalModule (copy), SignalsReactModule (copy), TextChannelWindowPerfTrackerModule (copy), UseSignalBindingFunction (copy), Signal (copy), FFlagTCWTranslationSupportModule (copy), UseTranslateToggleModule (copy), FormatInlineIconModule (copy), IconName (copy), ResolveDisplayTextModule (copy), RewriteToggleModule (copy), FFlagExpChatLazyMountRewriteToggleModule (copy), SelectableUsernameModule (copy), TranslateHitOverlayModule (copy), noop (copy), config (copy)
+	-- upvalues: FoundationModule (copy), ReactModule (copy), SignalsModule (copy), UseStableSignalModule (copy), SignalsReactModule (copy), TextChannelWindowPerfTrackerModule (copy), UseSignalBindingFunction (copy), Signal (copy), FFlagTCWTranslationSupportModule (copy), UseTranslateToggleModule (copy), FormatInlineIconModule (copy), IconName (copy), ResolveDisplayTextModule (copy), RewriteToggleModule (copy), SelectableUsernameModule (copy), TranslateHitOverlayModule (copy), noop (copy), config (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseMemoResult = ReactModule.useMemo(function(): string
 		-- upvalues: UseTokensResult (copy)
@@ -204,15 +203,6 @@ return ReactModule.memo(function(p1)
 			onToggle = UseResult
 		})
 	}
-	
-	if FFlagExpChatLazyMountRewriteToggleModule and (UseSignalStateResult2 == nil or UseSignalStateResult2.wasRewritten ~= true) then
-		config1.rewriteToggle = nil
-		config1.rewriteToggleSpacer = ReactModule.createElement("Frame", {
-			BackgroundTransparency = 1,
-			LayoutOrder = 2,
-			Size = UDim2.fromScale(0, 0)
-		})
-	end
 	local HasUseTranslateToggleModuleResult: boolean = IsOffered and UseTranslateToggleModuleResult ~= nil
 	
 	if IsNotPrefixTextMatch or HasUseTranslateToggleModuleResult then

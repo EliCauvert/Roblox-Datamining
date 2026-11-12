@@ -115,15 +115,15 @@ return function(List, p4)
 			local AssetTypes = LayeredSlotSubcategory.assetTypes
 			local Flag2 = false
 			
-			for _, assetType1 in AssetTypes do
-				local v4 = p4[tostring(assetType1.Value)]
+			for _, assetType2 in AssetTypes do
+				local v4 = p4[tostring(assetType2.Value)]
 				
 				if v4 ~= nil and next(v4) then
-					if assetType1 == Enum.AvatarAssetType.Face then
+					if assetType2 == Enum.AvatarAssetType.Face then
 						Flag1 = true
 						continue
 					end
-					if assetType1 == Enum.AvatarAssetType.DynamicHead then
+					if assetType2 == Enum.AvatarAssetType.DynamicHead then
 						Flag = true
 					end
 					for i2, _ in v4 do
@@ -151,7 +151,7 @@ return function(List, p4)
 							assetTypes = LayeredSlotSubcategory.assetTypes,
 							editorSubcategory = LayeredSlotSubcategory.editorSubcategory,
 							eligibleSubcategories = LayeredSlotSubcategory.eligibleSubcategories,
-							currentAssetType = assetType1,
+							currentAssetType = assetType2,
 							hide = LayeredSlotSubcategory.hide,
 							deselectable = LayeredSlotSubcategory.deselectable
 						})
@@ -159,8 +159,8 @@ return function(List, p4)
 					end
 				end
 			end
-			for _, assetType2 in AssetTypes do
-				if assetType2 == Enum.AvatarAssetType.Face and (Flag or Flag1) then
+			for _, assetType1 in AssetTypes do
+				if assetType1 == Enum.AvatarAssetType.Face and (Flag or Flag1) then
 					table.insert(List1, {
 						nameTranslationKey = LayeredSlotSubcategory.nameTranslationKey,
 						icon = LayeredSlotSubcategory.icon,
@@ -168,7 +168,7 @@ return function(List, p4)
 						assetTypes = LayeredSlotSubcategory.assetTypes,
 						editorSubcategory = LayeredSlotSubcategory.editorSubcategory,
 						eligibleSubcategories = LayeredSlotSubcategory.eligibleSubcategories,
-						currentAssetType = assetType2,
+						currentAssetType = assetType1,
 						hide = LayeredSlotSubcategory.hide,
 						deselectable = LayeredSlotSubcategory.deselectable
 					})

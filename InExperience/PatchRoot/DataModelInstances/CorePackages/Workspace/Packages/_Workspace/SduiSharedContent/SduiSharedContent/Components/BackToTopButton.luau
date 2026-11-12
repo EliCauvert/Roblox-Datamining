@@ -12,6 +12,7 @@ local UseCursorFunction = FoundationModule.Hooks.useCursor
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local CursorType = FoundationModule.Enums.CursorType
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local FFlagAppPageShellScrollToTopFocus = require(Parent.SharedFlags).FFlagAppPageShellScrollToTopFocus
 local SelectionOrder: number = if FFlagAppPageShellScrollToTopFocus then 1000000 else 1e999
 
@@ -26,7 +27,7 @@ local function scrollBackWithFocus(Target)
 end
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseCursorFunction (copy), CursorType (copy), FFlagAppPageShellScrollToTopFocus (copy), ResponsiveModule (copy), UseLocalizationFunction (copy), ReactModule (copy), ScrollToTopFunction (copy), UserGameSettings (copy), scrollBackWithFocus (copy), BackToTopClickEventFunction (copy), SelectionOrder (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseTokensFunction (copy), UseCursorFunction (copy), CursorType (copy), FFlagAppPageShellScrollToTopFocus (copy), ResponsiveModule (copy), UseLocalizationFunction (copy), ReactModule (copy), ScrollToTopFunction (copy), UserGameSettings (copy), scrollBackWithFocus (copy), BackToTopClickEventFunction (copy), SelectionOrder (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsUseLastInputResultMatch = if FFlagAppPageShellScrollToTopFocus then nil else ResponsiveModule.useLastInput() == ResponsiveModule.Input.Directional
 	
@@ -43,7 +44,8 @@ return function(p1)
 			AutoButtonColor = false,
 			SelectionOrder = SelectionOrder,
 			Text = UseLocalizationFunction({ backToTop = "Feature.GamePage.Action.BackToTop" }).backToTop,
-			FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.BodyLarge.Font),
+			Font = if FoundationFontFaceMigration then nil else UseTokensResult.Typography.BodyLarge.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.BodyLarge.Font) else nil,
 			TextSize = UseTokensResult.Typography.BodyLarge.FontSize,
 			TextColor3 = UseTokensResult.Color.Content.Emphasis.Color3,
 			TextTransparency = UseTokensResult.Color.Content.Emphasis.Transparency,

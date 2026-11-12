@@ -251,18 +251,6 @@ return function(p1)
 		-- upvalues: CommentsListCoordinatorModule (copy), p1 (copy)
 		return CommentsListCoordinatorModule.ensureReactionPresent(p1.feedItemId, p2, p3, p4)
 	end, { CommentsListCoordinatorModule, p1.feedItemId })
-	local UseResult11 = if FFlagMomentsCommentTranslationModule then ReactModule.useCallback(function(CommentId)
-		-- upvalues: UseStateResult1 (copy), AnalyticsSession (copy), EventNames (upval), FFlagMomentsCommentTranslationShownByDefaultModule (upval)
-		local IsNotToggledCommentId = UseStateResult1.getToggledCommentIds(false)[CommentId] ~= true
-		UseStateResult1.toggle(CommentId)
-		
-		if AnalyticsSession ~= nil then
-			AnalyticsSession.logEvent(EventNames.MomentCommentTranslationToggled, {
-				commentId = CommentId,
-				isTranslationShown = tostring(IsNotToggledCommentId ~= FFlagMomentsCommentTranslationShownByDefaultModule)
-			})
-		end
-	end, { UseStateResult1, AnalyticsSession }) else nil
 	local UseMomentsHostResult = UseMomentsHostFunction()
 	local OpenMomentCommentReportFunction = UseMomentsHostResult.openMomentCommentReport
 	local ChannelId = UseSignalStateResult.channelId
@@ -325,7 +313,7 @@ return function(p1)
 		p1.feedItemId,
 		AnalyticsSession
 	})
-	local UseResult12 = ReactModule.useCallback(function(CommentId)
+	local UseResult11 = ReactModule.useCallback(function(CommentId)
 		-- upvalues: FFlagMomentsComments (upval), AnalyticsSession (copy), EventNames (upval), DeleteFailed (copy), GetToastStoreModule (upval), CommentsListCoordinatorModule (copy), p1 (copy)
 		return CommentsListCoordinatorModule.deleteComment(p1.feedItemId, CommentId, function()
 			-- upvalues: DeleteFailed (upval), GetToastStoreModule (upval)
@@ -369,7 +357,7 @@ return function(p1)
 		layout = UseStateResult2,
 		rowBleed = Small,
 		row = ReactModule.useMemo(function()
-			-- upvalues: Name (copy), p1 (copy), UseSignalStateResult4 (copy), CreatorEnabled (copy), ViewerCanWrite (copy), Shift300 (copy), UseRefResult3 (copy), UseResult9 (copy), UseResult10 (copy), UseMemoResult3 (copy), UseMemoResult4 (copy), UseResult12 (copy), UseStateResult (copy), UseResult11 (ref), UseResult7 (copy), UseResult8 (copy), UseResult6 (copy)
+			-- upvalues: Name (copy), p1 (copy), UseSignalStateResult4 (copy), CreatorEnabled (copy), ViewerCanWrite (copy), Shift300 (copy), UseRefResult3 (copy), UseResult9 (copy), UseResult10 (copy), UseMemoResult3 (copy), UseMemoResult4 (copy), UseResult11 (copy), UseStateResult (copy), UseStateResult1 (ref), UseResult7 (copy), UseResult8 (copy), UseResult6 (copy)
 			return {
 				viewerUsername = Name,
 				feedItemId = p1.feedItemId,
@@ -382,17 +370,17 @@ return function(p1)
 				onAddReaction = UseResult10,
 				onReportComment = UseMemoResult3,
 				onBlockCommentAuthor = UseMemoResult4,
-				onDeleteComment = UseResult12,
+				onDeleteComment = UseResult11,
 				onToggleCommentExpanded = UseStateResult.toggle,
-				onToggleCommentTranslation = UseResult11,
+				onToggleCommentTranslation = if UseStateResult1 == nil then nil else UseStateResult1.toggle,
 				onRetryPendingSubmission = UseResult7,
 				onEditPendingSubmission = UseResult8,
 				onRetryLoadMore = UseResult6
 			}
 		end, {
 			Name, p1.feedItemId, UseSignalStateResult4, CreatorEnabled, ViewerCanWrite,
-			Shift300, UseResult9, UseResult10, UseMemoResult3, UseMemoResult4, UseResult12,
-			UseStateResult, UseResult11 or false, UseResult7, UseResult8, UseResult6
+			Shift300, UseResult9, UseResult10, UseMemoResult3, UseMemoResult4, UseResult11,
+			UseStateResult, UseStateResult1 or false, UseResult7, UseResult8, UseResult6
 		}),
 		scrollingFrame = if FFlagMomentsCommentsAttachSheetScrollerModule then p1.scrollingFrame else nil,
 		listScrollingFrameRef = UseRefResult3,

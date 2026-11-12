@@ -1,12 +1,18 @@
 ﻿local Parent = script:FindFirstAncestor("GameHydrationReact").Parent
 local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local DataHydrationModule = require(Parent.DataHydration)
-local Signal = require(Parent.Signals).createSignal(false)
-local t = {}
+local FFlagMigrateGameInfoToStore = require(Parent.SharedFlags).FFlagMigrateGameInfoToStore
+local Callback = nil
+local v1 = nil
 
+if FFlagMigrateGameInfoToStore then
+	Callback = SignalsModule.createSignal(false)
+	v1 = {}
+end
 return function(List)
-	-- upvalues: ReactModule (copy), DataHydrationModule (copy), Signal (copy), t (copy), SignalsReactModule (copy)
+	-- upvalues: ReactModule (copy), DataHydrationModule (copy), FFlagMigrateGameInfoToStore (copy), Callback (ref), v1 (ref), SignalsReactModule (copy)
 	local List1 = {}
 	
 	for _, value in List do
@@ -20,15 +26,15 @@ return function(List)
 	end, { Joined })
 	
 	return SignalsReactModule.useSignalState((ReactModule.useMemo(function()
-		-- upvalues: DataHydrationModule (upval), UseMemoResult (copy), Signal (upval), t (upval)
+		-- upvalues: DataHydrationModule (upval), UseMemoResult (copy), FFlagMigrateGameInfoToStore (upval), Callback (upval), v1 (upval)
 		local GameInfos = DataHydrationModule.Game.getGameInfoStore(false).getGameInfos(UseMemoResult)
 		
 		return function(p1)
-			-- upvalues: GameInfos (copy), Signal (upval), t (upval)
-			if next(GameInfos) == nil then
-				Signal(p1)
+			-- upvalues: FFlagMigrateGameInfoToStore (upval), GameInfos (copy), Callback (upval), v1 (upval)
+			if FFlagMigrateGameInfoToStore and next(GameInfos) == nil then
+				Callback(p1)
 				
-				return t
+				return v1
 			end
 			local DataResults = {}
 			

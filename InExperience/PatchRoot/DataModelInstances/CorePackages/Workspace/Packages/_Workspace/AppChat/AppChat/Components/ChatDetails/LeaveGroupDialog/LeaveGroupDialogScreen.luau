@@ -1,5 +1,6 @@
 ﻿local AppChat = script:FindFirstAncestor("AppChat")
 local EnumScreensModule = require(AppChat.EnumScreens)
+local GetFFlagAppChatEnableRootedNavigationModule = require(AppChat.Flags.getFFlagAppChatEnableRootedNavigation)
 local RoactModule = require(AppChat.Parent.Roact)
 local LeaveGroupDialogContainerModule = require(script.Parent.LeaveGroupDialogContainer)
 local LoggerModule = require(script.Parent.Logger)
@@ -7,17 +8,17 @@ local LeaveGroupDialogScreen = RoactModule.PureComponent:extend("LeaveGroupDialo
 LeaveGroupDialogScreen.defaultProps = { navigation = nil }
 
 function LeaveGroupDialogScreen.init(p1)
-	-- upvalues: LoggerModule (copy), EnumScreensModule (copy)
+	-- upvalues: GetFFlagAppChatEnableRootedNavigationModule (copy), LoggerModule (copy), EnumScreensModule (copy)
 	function p1.onLeaveGroupDialogClose()
 		-- upvalues: p1 (copy)
 		p1.props.navigation.goBack()
 	end
 	
 	function p1.onLeaveGroupSuccess()
-		-- upvalues: p1 (copy), LoggerModule (upval), EnumScreensModule (upval)
+		-- upvalues: p1 (copy), GetFFlagAppChatEnableRootedNavigationModule (upval), LoggerModule (upval), EnumScreensModule (upval)
 		local Navigation = p1.props.navigation
 		
-		if Navigation.getParam("isRooted", false) then
+		if GetFFlagAppChatEnableRootedNavigationModule() and Navigation.getParam("isRooted", false) then
 			LoggerModule:info("Close rooted ChatDetails after leave from {screen}")
 			local NavigateToRootStackScreenProps: () -> () = Navigation.getScreenProps("navigateToRootStack", nil)
 			
@@ -43,7 +44,7 @@ function LeaveGroupDialogScreen.init(p1)
 end
 
 function LeaveGroupDialogScreen.render(p1)
-	-- upvalues: LoggerModule (copy), RoactModule (copy), LeaveGroupDialogContainerModule (copy)
+	-- upvalues: LoggerModule (copy), GetFFlagAppChatEnableRootedNavigationModule (copy), RoactModule (copy), LeaveGroupDialogContainerModule (copy)
 	local Navigation = p1.props.navigation
 	assert(type(Navigation) ~= "nil", "LeaveGroupDialogScreen should be wrapped with Roact Navigation")
 	local ConversationIdParam = Navigation.getParam("conversationId", nil)
@@ -55,7 +56,7 @@ function LeaveGroupDialogScreen.render(p1)
 	else
 		return RoactModule.createElement(LeaveGroupDialogContainerModule, {
 			conversationId = ConversationIdParam,
-			isRooted = Navigation.getParam("isRooted", false),
+			isRooted = GetFFlagAppChatEnableRootedNavigationModule() and Navigation.getParam("isRooted", false),
 			onModalClose = p1.onLeaveGroupDialogClose,
 			onLeaveSuccess = p1.onLeaveGroupSuccess
 		})

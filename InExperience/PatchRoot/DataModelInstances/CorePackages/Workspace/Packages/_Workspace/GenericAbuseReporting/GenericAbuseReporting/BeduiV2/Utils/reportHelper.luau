@@ -3,13 +3,10 @@ local Parent = GenericAbuseReporting.Parent
 local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local PromiseModule = require(Parent.Promise)
-local _ = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
 local FFlagEnableChatReportingTextChannelTag = require(Parent.SharedFlags).FFlagEnableChatReportingTextChannelTag
-local GetFFlagGetHumanoidDescriptionUpdatesV2EFunction = require(Parent.SharedFlags).GetFFlagGetHumanoidDescriptionUpdatesV2E
+local _ = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
 local FFlagAbuseReportForwardCustomTagFieldsModule = require(GenericAbuseReporting.Flags.FFlagAbuseReportForwardCustomTagFields)
-local FFlagGenericAbuseReportingAvatarHumanoidDescriptionModule = require(GenericAbuseReporting.Flags.FFlagGenericAbuseReportingAvatarHumanoidDescription)
 local AppendReportAnythingTagsFunction = require(GenericAbuseReporting.BeduiV2.Utils.appendReportAnythingTags).appendReportAnythingTags
-local GetHumanoidDescriptionFunction = require(Parent.GetHumanoidDescription).getHumanoidDescription
 
 local function tag(AbuseVector)
 	return if AbuseVector then { valueList = { { data = AbuseVector } } } else nil
@@ -94,20 +91,8 @@ local function buildChatReport(p4, p5)
 	return config
 end
 
-local _ = function(p4, p5)
-	-- upvalues: GetFFlagGetHumanoidDescriptionUpdatesV2EFunction (copy), GetHumanoidDescriptionFunction (copy)
-	if GetFFlagGetHumanoidDescriptionUpdatesV2EFunction() and p5 then
-		local IdentifiedAvatar = p5.identificationResults.identifiedAvatars[p4]
-		
-		if IdentifiedAvatar and IdentifiedAvatar.humanoidDescription and IdentifiedAvatar.humanoidDescriptionStatus == "OK" then
-			return IdentifiedAvatar.humanoidDescription, IdentifiedAvatar.humanoidDescriptionStatus
-		end
-	end
-	return GetHumanoidDescriptionFunction(p4)
-end
-
 local function buildAvatarReport(p4, p5)
-	-- upvalues: Players (copy), tag (copy), AppendReportAnythingTagsFunction (copy), FFlagGenericAbuseReportingAvatarHumanoidDescriptionModule (copy), GetFFlagGetHumanoidDescriptionUpdatesV2EFunction (copy), GetHumanoidDescriptionFunction (copy), HttpService (copy), FFlagAbuseReportForwardCustomTagFieldsModule (copy), appendCustomTagFields (copy)
+	-- upvalues: Players (copy), tag (copy), AppendReportAnythingTagsFunction (copy), FFlagAbuseReportForwardCustomTagFieldsModule (copy), appendCustomTagFields (copy)
 	local LocalPlayer = Players.LocalPlayer
 	local Tags = {
 		ENTRY_POINT = tag("in-experience"),
@@ -118,26 +103,7 @@ local function buildAvatarReport(p4, p5)
 		REPORTED_ABUSE_VECTOR = tag(p4.data.abuseVector)
 	}
 	AppendReportAnythingTagsFunction(Tags, p5)
-	local Number: number? = tonumber(p4.data.targetIdStr)
-	local HumanoidDescription = nil
-	local HumanoidDescription2 = nil
-	repeat
-		if not FFlagGenericAbuseReportingAvatarHumanoidDescriptionModule or not Number then break end
-		repeat
-			if GetFFlagGetHumanoidDescriptionUpdatesV2EFunction() and p5 then
-				local IdentifiedAvatar = p5.identificationResults.identifiedAvatars[Number]
-				
-				if IdentifiedAvatar and IdentifiedAvatar.humanoidDescription and IdentifiedAvatar.humanoidDescriptionStatus == "OK" then
-					HumanoidDescription = IdentifiedAvatar.humanoidDescription
-					HumanoidDescription2 = IdentifiedAvatar.humanoidDescriptionStatus
-					break
-				end
-			end
-			HumanoidDescription, HumanoidDescription2 = GetHumanoidDescriptionFunction(Number)
-		until true
-		Tags.REPORT_TARGET_HUMANOID_DESCRIPTION = tag(HttpService:JSONEncode(HumanoidDescription))
-		Tags.REPORT_TARGET_HUMANOID_DESCRIPTION_STATUS = tag(HumanoidDescription2)
-	until true
+	
 	if FFlagAbuseReportForwardCustomTagFieldsModule then
 		appendCustomTagFields(Tags, p4)
 	end
@@ -197,24 +163,15 @@ return {
 		end)
 	end,
 	submitAvatarReport = function(p4, p5)
-		-- upvalues: FFlagGenericAbuseReportingAvatarHumanoidDescriptionModule (copy), PromiseModule (copy), buildAvatarReport (copy), Players (copy)
-		if FFlagGenericAbuseReportingAvatarHumanoidDescriptionModule then
-			return PromiseModule.try(function()
-				-- upvalues: buildAvatarReport (upval), p4 (copy), p5 (copy), Players (upval)
-				Players:ReportAvatarAbuse(tonumber(p4.data.targetIdStr), (buildAvatarReport(p4, p5)))
-				
-				return { responseBody = {} }
-			end)
-		else
-			local AvatarReport = buildAvatarReport(p4, p5)
+		-- upvalues: buildAvatarReport (copy), PromiseModule (copy), Players (copy)
+		local AvatarReport = buildAvatarReport(p4, p5)
+		
+		return PromiseModule.try(function()
+			-- upvalues: Players (upval), p4 (copy), AvatarReport (copy)
+			Players:ReportAvatarAbuse(tonumber(p4.data.targetIdStr), AvatarReport)
 			
-			return PromiseModule.try(function()
-				-- upvalues: Players (upval), p4 (copy), AvatarReport (copy)
-				Players:ReportAvatarAbuse(tonumber(p4.data.targetIdStr), AvatarReport)
-				
-				return { responseBody = {} }
-			end)
-		end
+			return { responseBody = {} }
+		end)
 	end,
 	submitPlaceReport = function(p4, p5)
 		-- upvalues: buildPlaceReport (copy), PromiseModule (copy), Players (copy)

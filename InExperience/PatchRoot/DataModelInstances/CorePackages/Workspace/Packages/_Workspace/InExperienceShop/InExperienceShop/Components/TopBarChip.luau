@@ -25,7 +25,6 @@ return function(Frame)
 		LayoutOrder = Frame.LayoutOrder,
 		ref = Frame.chipRef,
 		testId = Frame.testId,
-		sizeConstraint = if Frame.maxWidth == nil then nil else { MaxSize = Vector2.new(Frame.maxWidth, 1e999) },
 		cursor = {
 			radius = UDim.new(0, UseTokensResult.Radius.Circle),
 			offset = Floored * 2,

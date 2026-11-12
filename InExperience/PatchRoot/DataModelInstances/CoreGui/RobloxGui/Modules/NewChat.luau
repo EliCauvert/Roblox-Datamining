@@ -360,7 +360,7 @@ local function RegisterCoreGuiConnections(p1)
 			addSetCore("ChatWindowSize")
 			addSetCore("ChatBarDisabled")
 			config1.GetCore.ChatWindowPosition = if GetCore and GetCore.ChatWindowPosition and GetCore.ChatWindowPosition:IsA("BindableFunction") then GetCore.ChatWindowPosition else nil
-			config1.GetCore.ChatWindowSize = if GetCore and (GetCore.ChatWindowSize and GetCore.ChatWindowSize:IsA("BindableFunction")) then GetCore.ChatWindowSize else nil
+			config1.GetCore.ChatWindowSize = if GetCore and GetCore.ChatWindowSize and GetCore.ChatWindowSize:IsA("BindableFunction") then GetCore.ChatWindowSize else nil
 			config1.GetCore.ChatBarDisabled = if GetCore and GetCore.ChatBarDisabled and GetCore.ChatBarDisabled:IsA("BindableFunction") then GetCore.ChatBarDisabled else nil
 			
 			return

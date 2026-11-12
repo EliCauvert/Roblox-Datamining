@@ -264,29 +264,29 @@ function Module1.decode(Buf)
 			end
 		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 			if Tag == 1 then
-				local Buffer2
-				Buffer2, v65 = ProtoModule.readBuffer(Buf, v2)
-				NewModule.id = buffer.tostring(Buffer2)
-			elseif Tag == 2 then
 				local Buffer3
 				Buffer3, v65 = ProtoModule.readBuffer(Buf, v2)
-				NewModule.display_name = buffer.tostring(Buffer3)
-			elseif Tag == 7 then
+				NewModule.id = buffer.tostring(Buffer3)
+			elseif Tag == 2 then
 				local Buffer4
 				Buffer4, v65 = ProtoModule.readBuffer(Buf, v2)
-				NewModule.display_description = buffer.tostring(Buffer4)
-			elseif Tag == 8 then
+				NewModule.display_name = buffer.tostring(Buffer4)
+			elseif Tag == 7 then
 				local Buffer5
 				Buffer5, v65 = ProtoModule.readBuffer(Buf, v2)
-				table.insert(NewModule.price_discount_details, config.PriceDiscountDetail.decode(Buffer5))
-			elseif Tag == 12 then
+				NewModule.display_description = buffer.tostring(Buffer5)
+			elseif Tag == 8 then
 				local Buffer1
 				Buffer1, v65 = ProtoModule.readBuffer(Buf, v2)
-				NewModule.created_time = TimestampModule.Timestamp.decode(Buffer1)
-			elseif Tag == 13 then
+				table.insert(NewModule.price_discount_details, config.PriceDiscountDetail.decode(Buffer1))
+			elseif Tag == 12 then
 				local Buffer6
 				Buffer6, v65 = ProtoModule.readBuffer(Buf, v2)
-				NewModule.updated_time = TimestampModule.Timestamp.decode(Buffer6)
+				NewModule.created_time = TimestampModule.Timestamp.decode(Buffer6)
+			elseif Tag == 13 then
+				local Buffer2
+				Buffer2, v65 = ProtoModule.readBuffer(Buf, v2)
+				NewModule.updated_time = TimestampModule.Timestamp.decode(Buffer2)
 			else
 				local VarInt4, VarInt2_1 = ProtoModule.readVarInt(Buf, v2)
 				v2 = VarInt2_1 + VarInt4

@@ -41,8 +41,8 @@ local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local FFlagEnableConsoleExpControls = SharedFlagsModule.FFlagEnableConsoleExpControls
 local FFlagExpChatWindowSyncUnibar = SharedFlagsModule.FFlagExpChatWindowSyncUnibar
 local FFlagRemoveFriendsChatUnibarEntrypoints = SharedFlagsModule.FFlagRemoveFriendsChatUnibarEntrypoints
+local FFlagExpChatEnableFriendsTab = SharedFlagsModule.FFlagExpChatEnableFriendsTab
 local FFlagExpChatCanShowFriendsTab = SharedFlagsModule.FFlagExpChatCanShowFriendsTab
-local FFlagSideSheetHeaderChatIcon = SharedFlagsModule.FFlagSideSheetHeaderChatIcon
 local FFlagExpChatHistoricalMessagesUnibarUnread = SharedFlagsModule.FFlagExpChatHistoricalMessagesUnibarUnread
 local FFlagExpChatContinuousListeningChatIconDot = SharedFlagsModule.FFlagExpChatContinuousListeningChatIconDot
 local RedDotModule = if FFlagExpChatContinuousListeningChatIconDot then require(Chrome.Integrations.RedDot) else nil
@@ -68,7 +68,7 @@ if SharedFlagsModule.FFlagExpChatInitializeWindowFromGameSettings then
 else
 	ChatVisible = ChatSelectorModule:GetVisibility()
 end
-local RegisterResult1 = nil
+local RegisterResult = nil
 local VisibilityStateChanged = ChatSelectorModule.VisibilityStateChanged
 local Smallest = 0
 local Flag = false
@@ -96,8 +96,8 @@ local _ = function()
 end
 
 local function updateUnreadNotification()
-	-- upvalues: RegisterResult1 (ref), FFlagExpChatHistoricalMessagesUnibarUnread (copy), GetMessagesStoreFunction (copy), Smallest (ref), GetFriendsChatIconUnreadStoreModule (copy), Count (ref), ChatVisible (ref)
-	if not RegisterResult1.notification then return end
+	-- upvalues: RegisterResult (ref), FFlagExpChatHistoricalMessagesUnibarUnread (copy), GetMessagesStoreFunction (copy), Smallest (ref), FFlagExpChatEnableFriendsTab (copy), Count (ref), GetFriendsChatIconUnreadStoreModule (copy), ChatVisible (ref)
+	if not RegisterResult.notification then return end
 	local HistoricalWindowMessageCountDelta = nil
 	if FFlagExpChatHistoricalMessagesUnibarUnread then
 		local GetHistoricalWindowMessageCountFunction = GetMessagesStoreFunction(false).getHistoricalWindowMessageCount
@@ -107,14 +107,19 @@ local function updateUnreadNotification()
 	else
 		HistoricalWindowMessageCountDelta = 0
 	end
+	if not FFlagExpChatEnableFriendsTab then
+		RegisterResult.notification:fireCount(Count + HistoricalWindowMessageCountDelta)
+		
+		return
+	end
 	local NewCount = Count + GetFriendsChatIconUnreadStoreModule(false).getUnreadCountToDisplay(false) + HistoricalWindowMessageCountDelta
 	
 	if ChatVisible or NewCount == 0 then
-		RegisterResult1.notification:clear()
+		RegisterResult.notification:clear()
 		
 		return
 	else
-		RegisterResult1.notification:fireCount(NewCount)
+		RegisterResult.notification:fireCount(NewCount)
 	end
 end
 
@@ -134,25 +139,25 @@ end
 
 if not FFlagExpChatWindowSyncUnibar then
 	VisibilityStateChanged:connect(function(p1)
-		-- upvalues: ExpChatUnibarAvailabilityRefactor (copy), Default (copy), RegisterResult1 (ref)
+		-- upvalues: ExpChatUnibarAvailabilityRefactor (copy), Default (copy), RegisterResult (ref)
 		if ExpChatUnibarAvailabilityRefactor then
 			Default.setVisibleViaChatSelector(p1)
 			
 			return
 		end
 		if p1 then
-			RegisterResult1.availability:pinned()
+			RegisterResult.availability:pinned()
 		end
 	end)
 	ChatSelectorModule.ChatWindowToggled:connect(function(p1)
-		-- upvalues: ExpChatUnibarAvailabilityRefactor (copy), Default (copy), RegisterResult1 (ref)
+		-- upvalues: ExpChatUnibarAvailabilityRefactor (copy), Default (copy), RegisterResult (ref)
 		if ExpChatUnibarAvailabilityRefactor then
 			Default.setVisibleViaChatSelector(p1)
 			
 			return
 		end
 		if p1 then
-			RegisterResult1.availability:pinned()
+			RegisterResult.availability:pinned()
 		end
 	end)
 end
@@ -167,7 +172,7 @@ local NewMappedSignal = MappedSignal.new(VisibilityStateChanged, function()
 	-- upvalues: ChatVisible (ref)
 	return ChatVisible
 end, function()
-	-- upvalues: ChatSelectorModule (copy), ExpChatUnibarAvailabilityRefactor (copy), RunService (copy), Chat (copy), Players (copy), RegisterResult1 (ref), GuiService (copy), GameSettings (copy), ChatVisible (ref), Flag (ref), Count (ref), FFlagExpChatHistoricalMessagesUnibarUnread (copy), Smallest (ref), GetMessagesStoreFunction (copy), GetFriendsChatIconUnreadStoreModule (copy), updateUnreadNotification (copy)
+	-- upvalues: ChatSelectorModule (copy), ExpChatUnibarAvailabilityRefactor (copy), RunService (copy), Chat (copy), Players (copy), RegisterResult (ref), GuiService (copy), GameSettings (copy), ChatVisible (ref), Flag (ref), FFlagExpChatEnableFriendsTab (copy), Count (ref), FFlagExpChatHistoricalMessagesUnibarUnread (copy), Smallest (ref), GetMessagesStoreFunction (copy), GetFriendsChatIconUnreadStoreModule (copy), updateUnreadNotification (copy)
 	local Visibility = ChatSelectorModule.GetVisibility()
 	
 	if not ExpChatUnibarAvailabilityRefactor and not Visibility then
@@ -182,7 +187,7 @@ end, function()
 			Result1 = Success and Result
 		end
 		if not Result1 then
-			RegisterResult1.availability:unavailable()
+			RegisterResult.availability:unavailable()
 		end
 	end
 	if not GuiService.MenuIsOpen then
@@ -191,16 +196,30 @@ end, function()
 	ChatVisible = Visibility
 	Flag = true
 	
-	if Visibility then
-		Count = 0
-		
-		if FFlagExpChatHistoricalMessagesUnibarUnread then
-			local GetHistoricalWindowMessageCountFunction = GetMessagesStoreFunction(false).getHistoricalWindowMessageCount
-			Smallest = if GetHistoricalWindowMessageCountFunction then GetHistoricalWindowMessageCountFunction(false) else 0
+	if FFlagExpChatEnableFriendsTab then
+		if Visibility then
+			Count = 0
+			
+			if FFlagExpChatHistoricalMessagesUnibarUnread then
+				local GetHistoricalWindowMessageCountFunction = GetMessagesStoreFunction(false).getHistoricalWindowMessageCount
+				Smallest = if GetHistoricalWindowMessageCountFunction then GetHistoricalWindowMessageCountFunction(false) else 0
+			end
+			GetFriendsChatIconUnreadStoreModule(false).clearDisplayCount()
 		end
-		GetFriendsChatIconUnreadStoreModule(false).clearDisplayCount()
+		updateUnreadNotification()
+		
+		return
+	else
+		if Visibility and Count and RegisterResult.notification then
+			Count = 0
+			
+			if FFlagExpChatHistoricalMessagesUnibarUnread then
+				local GetHistoricalWindowMessageCountFunction1 = GetMessagesStoreFunction(false).getHistoricalWindowMessageCount
+				Smallest = if GetHistoricalWindowMessageCountFunction1 then GetHistoricalWindowMessageCountFunction1(false) else 0
+			end
+			RegisterResult.notification:clear()
+		end
 	end
-	updateUnreadNotification()
 end)
 
 local _ = function()
@@ -213,20 +232,20 @@ local _ = function()
 end
 
 local _ = function()
-	-- upvalues: InExperienceAppChatModalModule (copy), ChatSelectorModule (copy), FFlagEnableConsoleExpControls (copy), FocusSelectExpChatModule (copy), RegisterResult1 (ref)
+	-- upvalues: InExperienceAppChatModalModule (copy), ChatSelectorModule (copy), FFlagEnableConsoleExpControls (copy), FocusSelectExpChatModule (copy), RegisterResult (ref)
 	if InExperienceAppChatModalModule:getVisible() then
 		InExperienceAppChatModalModule.default:setVisible(false)
 	end
 	ChatSelectorModule:SetVisible(true)
 	
 	if FFlagEnableConsoleExpControls then
-		FocusSelectExpChatModule(RegisterResult1.id)
+		FocusSelectExpChatModule(RegisterResult.id)
 	end
 end
 
 local function isChatOpenAvailable(): boolean
-	-- upvalues: RegisterResult1 (ref), ServiceModule (copy)
-	return RegisterResult1.availability:get() ~= ServiceModule.AvailabilitySignal.Unavailable
+	-- upvalues: RegisterResult (ref), ServiceModule (copy)
+	return RegisterResult.availability:get() ~= ServiceModule.AvailabilitySignal.Unavailable
 end
 
 local _ = function(): boolean
@@ -235,7 +254,7 @@ local _ = function(): boolean
 end
 
 local function ensureOpenChat(Callback)
-	-- upvalues: ChatVisible (ref), InExperienceAppChatModalModule (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), InExperienceUIVRIXP (copy), ChatSelectorModule (copy), FFlagEnableConsoleExpControls (copy), FocusSelectExpChatModule (copy), RegisterResult1 (ref), ChromeIntegrationUtilsModule (copy), ServiceModule (copy)
+	-- upvalues: ChatVisible (ref), InExperienceAppChatModalModule (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), InExperienceUIVRIXP (copy), ChatSelectorModule (copy), FFlagEnableConsoleExpControls (copy), FocusSelectExpChatModule (copy), RegisterResult (ref), ChromeIntegrationUtilsModule (copy), ServiceModule (copy)
 	if not ChatVisible then
 		if IsInExperienceUIVREnabled and (IsSpatialFunction() and not InExperienceUIVRIXP:isMovePanelToCenter()) then
 			if InExperienceAppChatModalModule:getVisible() then
@@ -244,21 +263,21 @@ local function ensureOpenChat(Callback)
 			ChatSelectorModule:SetVisible(true)
 			
 			if FFlagEnableConsoleExpControls then
-				FocusSelectExpChatModule(RegisterResult1.id)
+				FocusSelectExpChatModule(RegisterResult.id)
 				
 				return
 			end
 		else
 			ChromeIntegrationUtilsModule.dismissRobloxMenuAndRun(function()
-				-- upvalues: Callback (copy), RegisterResult1 (upval), ServiceModule (upval), InExperienceAppChatModalModule (upval), ChatSelectorModule (upval), FFlagEnableConsoleExpControls (upval), FocusSelectExpChatModule (upval)
-				if Callback() and RegisterResult1.availability:get() ~= ServiceModule.AvailabilitySignal.Unavailable then
+				-- upvalues: Callback (copy), RegisterResult (upval), ServiceModule (upval), InExperienceAppChatModalModule (upval), ChatSelectorModule (upval), FFlagEnableConsoleExpControls (upval), FocusSelectExpChatModule (upval)
+				if Callback() and RegisterResult.availability:get() ~= ServiceModule.AvailabilitySignal.Unavailable then
 					if InExperienceAppChatModalModule:getVisible() then
 						InExperienceAppChatModalModule.default:setVisible(false)
 					end
 					ChatSelectorModule:SetVisible(true)
 					
 					if FFlagEnableConsoleExpControls then
-						FocusSelectExpChatModule(RegisterResult1.id)
+						FocusSelectExpChatModule(RegisterResult.id)
 					end
 				end
 			end)
@@ -272,12 +291,12 @@ local function ensureOpenChat(Callback)
 	end
 end
 
-RegisterResult1 = ServiceModule:register({
+RegisterResult = ServiceModule:register({
 	id = "chat",
 	label = "CoreScripts.TopBar.Chat",
-	sideSheetPlacement = if FFlagSideSheetHeaderChatIcon or FFlagRemoveFriendsChatUnibarEntrypoints and FFlagExpChatCanShowFriendsTab then SideSheetPlacement.Unibar else SideSheetPlacement.None,
+	sideSheetPlacement = if FFlagRemoveFriendsChatUnibarEntrypoints and FFlagExpChatCanShowFriendsTab then SideSheetPlacement.Unibar else SideSheetPlacement.None,
 	activated = function(_)
-		-- upvalues: ChatVisible (ref), ChatSelectorModule (copy), ExpChatPerfTracker (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), InExperienceUIVRIXP (copy), ChromeIntegrationUtilsModule (copy), InExperienceAppChatModalModule (copy), FFlagEnableConsoleExpControls (copy), FocusSelectExpChatModule (copy), RegisterResult1 (ref)
+		-- upvalues: ChatVisible (ref), ChatSelectorModule (copy), ExpChatPerfTracker (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), InExperienceUIVRIXP (copy), ChromeIntegrationUtilsModule (copy), InExperienceAppChatModalModule (copy), FFlagEnableConsoleExpControls (copy), FocusSelectExpChatModule (copy), RegisterResult (ref)
 		if ChatVisible then
 			ChatSelectorModule:SetVisible(false)
 			
@@ -291,21 +310,21 @@ RegisterResult1 = ServiceModule:register({
 			return
 		else
 			ChromeIntegrationUtilsModule.dismissRobloxMenuAndRun(function()
-				-- upvalues: InExperienceAppChatModalModule (upval), ChatSelectorModule (upval), FFlagEnableConsoleExpControls (upval), FocusSelectExpChatModule (upval), RegisterResult1 (upval)
+				-- upvalues: InExperienceAppChatModalModule (upval), ChatSelectorModule (upval), FFlagEnableConsoleExpControls (upval), FocusSelectExpChatModule (upval), RegisterResult (upval)
 				if InExperienceAppChatModalModule:getVisible() then
 					InExperienceAppChatModalModule.default:setVisible(false)
 				end
 				ChatSelectorModule:SetVisible(true)
 				
 				if FFlagEnableConsoleExpControls then
-					FocusSelectExpChatModule(RegisterResult1.id)
+					FocusSelectExpChatModule(RegisterResult.id)
 				end
 			end)
 		end
 	end,
 	isActivated = NewMappedSignal,
 	selected = if FFlagEnableConsoleExpControls then function(p1)
-		-- upvalues: ServiceModule (copy), UserInputService (copy), GamepadUtils (copy), FocusSelectExpChatModule (copy), RegisterResult1 (ref)
+		-- upvalues: ServiceModule (copy), UserInputService (copy), GamepadUtils (copy), FocusSelectExpChatModule (copy), RegisterResult (ref)
 		local Connection = nil
 		local Connection1 = nil
 		local Connection2 = nil
@@ -317,17 +336,17 @@ RegisterResult1 = ServiceModule:register({
 			Connection2:Disconnect()
 		end)
 		Connection1 = UserInputService.InputChanged:Connect(function(Input)
-			-- upvalues: GamepadUtils (upval), FocusSelectExpChatModule (upval), RegisterResult1 (upval)
+			-- upvalues: GamepadUtils (upval), FocusSelectExpChatModule (upval), RegisterResult (upval)
 			if Input.KeyCode == Enum.KeyCode.Thumbstick1 and GamepadUtils.mapPositionToDirection(Vector2.new(Input.Position.X, Input.Position.Y)) == Enum.KeyCode.Down then
-				FocusSelectExpChatModule(RegisterResult1.id)
+				FocusSelectExpChatModule(RegisterResult.id)
 			end
 		end)
 		Connection2 = UserInputService.InputBegan:Connect(function(Input)
-			-- upvalues: FocusSelectExpChatModule (upval), RegisterResult1 (upval)
+			-- upvalues: FocusSelectExpChatModule (upval), RegisterResult (upval)
 			local KeyCode = Input.KeyCode
 			
 			if KeyCode == Enum.KeyCode.DPadDown or KeyCode == Enum.KeyCode.Down then
-				FocusSelectExpChatModule(RegisterResult1.id)
+				FocusSelectExpChatModule(RegisterResult.id)
 			end
 		end)
 	end else nil,
@@ -356,24 +375,24 @@ RegisterResult1 = ServiceModule:register({
 		end
 	}
 })
-RegisterResult1.chatOpenCapability = {
+RegisterResult.chatOpenCapability = if FFlagExpChatEnableFriendsTab then {
 	isAvailable = isChatOpenAvailable,
 	ensureOpenChat = ensureOpenChat
-}
+} else nil
 
 if ExpChatUnibarAvailabilityRefactor then
 	SignalsUtilsModule.createDetachedEffect(function(p1)
-		-- upvalues: Default (copy), RegisterResult1 (ref), FFlagExpChatWindowSyncUnibar (copy), ExpChatModule (copy)
+		-- upvalues: Default (copy), RegisterResult (ref), FFlagExpChatWindowSyncUnibar (copy), ExpChatModule (copy)
 		if Default.getIsChatIconVisible(p1) then
-			RegisterResult1.availability:available()
+			RegisterResult.availability:available()
 		else
-			RegisterResult1.availability:unavailable()
+			RegisterResult.availability:unavailable()
 		end
 		if FFlagExpChatWindowSyncUnibar then
 			ExpChatModule.Events.ChatTopBarButtonActivated((Default.getIsChatWindowVisible(p1)))
 		end
 	end)
-	ChromeUtilsModule.setCoreGuiAvailability(RegisterResult1, Enum.CoreGuiType.Chat, function(p1)
+	ChromeUtilsModule.setCoreGuiAvailability(RegisterResult, Enum.CoreGuiType.Chat, function(p1)
 		-- upvalues: Default (copy)
 		Default.setCoreGuiEnabled(p1)
 	end)
@@ -390,12 +409,13 @@ if FFlagEnableConsoleExpControls then
 		end
 	end)
 end
-SignalsUtilsModule.createDetachedEffect(function(p1)
-	-- upvalues: GetFriendsChatIconUnreadStoreModule (copy), updateUnreadNotification (copy)
-	GetFriendsChatIconUnreadStoreModule(p1).getUnreadCountToDisplay(p1)
-	updateUnreadNotification()
-end)
-
+if FFlagExpChatEnableFriendsTab then
+	SignalsUtilsModule.createDetachedEffect(function(p1)
+		-- upvalues: GetFriendsChatIconUnreadStoreModule (copy), updateUnreadNotification (copy)
+		GetFriendsChatIconUnreadStoreModule(p1).getUnreadCountToDisplay(p1)
+		updateUnreadNotification()
+	end)
+end
 if FFlagExpChatHistoricalMessagesUnibarUnread then
 	SignalsUtilsModule.createDetachedEffect(function(p1)
 		-- upvalues: GetMessagesStoreFunction (copy), Flag (ref), ChatVisible (ref), Smallest (ref), updateUnreadNotification (copy)
@@ -448,7 +468,7 @@ end)
 
 if not FFlagExpChatWindowSyncUnibar then
 	ChatSelectorModule.ChatActiveChanged:connect(function(p1)
-		-- upvalues: ExpChatUnibarAvailabilityRefactor (copy), Default (copy), RunService (copy), Chat (copy), Players (copy), RegisterResult1 (ref)
+		-- upvalues: ExpChatUnibarAvailabilityRefactor (copy), Default (copy), RunService (copy), Chat (copy), Players (copy), RegisterResult (ref)
 		if ExpChatUnibarAvailabilityRefactor then
 			Default.setChatActiveCalledByDeveloper(p1)
 			
@@ -466,7 +486,7 @@ if not FFlagExpChatWindowSyncUnibar then
 				Result1 = Success and Result
 			end
 			if not Result1 then
-				RegisterResult1.availability:available()
+				RegisterResult.availability:available()
 			end
 		end
 	end)
@@ -479,7 +499,7 @@ local _ = function()
 end
 
 coroutine.wrap(function()
-	-- upvalues: Players (copy), RunService (copy), Chat (copy), ExpChatUnibarAvailabilityRefactor (copy), Default (copy), GameSettings (copy), ViewportUtilModule (copy), ChatVisible (ref), ChatSelectorModule (copy), RegisterResult1 (ref), ChromeUtilsModule (copy)
+	-- upvalues: Players (copy), RunService (copy), Chat (copy), ExpChatUnibarAvailabilityRefactor (copy), Default (copy), GameSettings (copy), ViewportUtilModule (copy), ChatVisible (ref), ChatSelectorModule (copy), RegisterResult (ref), ChromeUtilsModule (copy)
 	local LocalPlayer = Players.LocalPlayer
 	while not LocalPlayer do
 		Players:GetPropertyChangedSignal("LocalPlayer"):Wait()
@@ -505,15 +525,15 @@ coroutine.wrap(function()
 			
 			return
 		end
-	elseif Result1 and RegisterResult1.availability then
-		ChromeUtilsModule.setCoreGuiAvailability(RegisterResult1, Enum.CoreGuiType.Chat, function(p1)
-			-- upvalues: RegisterResult1 (upval)
+	elseif Result1 and RegisterResult.availability then
+		ChromeUtilsModule.setCoreGuiAvailability(RegisterResult, Enum.CoreGuiType.Chat, function(p1)
+			-- upvalues: RegisterResult (upval)
 			if p1 then
-				RegisterResult1.availability:pinned()
+				RegisterResult.availability:pinned()
 				
 				return
 			else
-				RegisterResult1.availability:unavailable()
+				RegisterResult.availability:unavailable()
 			end
 		end)
 		local ChatVisible2 = not ViewportUtilModule.isSmallTouchScreen() and GameSettings.ChatVisible
@@ -534,4 +554,4 @@ function _simulateChat()
 	end
 end
 
-return RegisterResult1
+return RegisterResult

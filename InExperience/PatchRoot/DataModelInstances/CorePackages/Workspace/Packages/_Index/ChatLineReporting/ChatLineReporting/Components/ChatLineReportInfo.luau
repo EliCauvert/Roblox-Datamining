@@ -7,6 +7,7 @@ local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local View = FoundationModule.View
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local ConstantsModule = require(ChatLineReporting.Common.Constants)
 local config = {
 	stiffness = 400,
@@ -17,7 +18,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), ConstantsModule (copy), ReactOtterModule (copy), config (copy), View (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), ConstantsModule (copy), ReactOtterModule (copy), config (copy), View (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseLocalizationResult = UseLocalizationFunction(ConstantsModule.ChatLineLocalizationKeys)
@@ -69,7 +70,8 @@ return function(p1)
 				InfoText = ReactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					TextWrapped = true,
-					FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.BodySmall.Font),
+					Font = if FoundationFontFaceMigration then nil else UseTokensResult.Typography.BodySmall.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.BodySmall.Font) else nil,
 					Text = UseLocalizationResult.InfoTextKey,
 					TextColor3 = UseTokensResult.Color.Content.Default.Color3,
 					TextSize = UseTokensResult.Typography.BodySmall.FontSize,

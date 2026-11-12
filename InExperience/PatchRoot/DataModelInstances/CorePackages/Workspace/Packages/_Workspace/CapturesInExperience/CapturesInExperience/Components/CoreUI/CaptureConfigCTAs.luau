@@ -3,10 +3,13 @@ local Parent1 = Parent.Parent
 local GuiService = game:GetService("GuiService")
 local UserInputService = game:GetService("UserInputService")
 local ReactModule = require(Parent1.React)
+local FoundationModule = require(Parent1.Foundation)
 local GetTextSizeFunction = require(Parent1.Style).GetTextSize
-local NormalizeFontFaceFunction = require(Parent1.Foundation).Utility.normalizeFontFace
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
 local UseStyleFunction = require(Parent1.UIBlox).Core.Style.useStyle
+local Text = require(Parent1.AppCommonLib).Text
 local CapturesContextModule = require(Parent.Context.CapturesContext)
 local OnOffButtonModule = require(Parent.Components.CoreUI.OnOffButton)
 local VideoCaptureCTAModule = require(Parent.Components.CoreUI.VideoCaptureCTA)
@@ -17,7 +20,7 @@ local Opt: string = if UserInputService:GetPlatform() == Enum.Platform.OSX then 
 return (require(Parent.App.CapturesPolicy).connect(function(p1)
 	return { eligibleForVideoCapture = p1.eligibleForVideoCapture() }
 end)(function(Frame)
-	-- upvalues: UseStyleFunction (copy), ReactModule (copy), CapturesContextModule (copy), GuiService (copy), UseLocalizationFunction (copy), Opt (copy), UserInputService (copy), UseKeyboardEnabledModule (copy), GetTextSizeFunction (copy), _UDim (copy), NormalizeFontFaceFunction (copy), OnOffButtonModule (copy), VideoCaptureCTAModule (copy)
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), CapturesContextModule (copy), GuiService (copy), UseLocalizationFunction (copy), Opt (copy), UserInputService (copy), UseKeyboardEnabledModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), _UDim (copy), NormalizeFontFaceFunction (copy), OnOffButtonModule (copy), VideoCaptureCTAModule (copy)
 	local UseStyleResult = UseStyleFunction()
 	local ChromeEnabled = ReactModule.useContext(CapturesContextModule).chromeEnabled
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
@@ -47,10 +50,10 @@ end)(function(Frame)
 	local Color = UseStyleResult.Theme.BackgroundDefault.Color
 	local Transparency = UseStyleResult.Theme.BackgroundDefault.Transparency
 	local Color1 = UseStyleResult.Theme.TextDefault.Color
-	local BodySmallFont = UseStyleResult.Tokens.Typography.BodySmall.Font
+	local BodySmallFont = if FoundationFontFaceMigration then UseStyleResult.Tokens.Typography.BodySmall.Font else UseStyleResult.Font.CaptionBody.Font
 	local ScaledBaseSize = UseStyleResult.Font.BaseSize * UseStyleResult.Font.CaptionBody.RelativeSize
 	local Color2 = UseStyleResult.Theme.TextEmphasis.Color
-	local TitleLargeFont = UseStyleResult.Tokens.Typography.TitleLarge.Font
+	local TitleLargeFont = if FoundationFontFaceMigration then UseStyleResult.Tokens.Typography.TitleLarge.Font else UseStyleResult.Font.Header2.Font
 	local ScaledBaseSize1 = UseStyleResult.Font.BaseSize * UseStyleResult.Font.Header2.RelativeSize
 	local UseResult = ReactModule.useCallback(function(Frame1: Frame)
 		-- upvalues: UseStateResult2 (copy), Frame (copy)
@@ -61,8 +64,8 @@ end)(function(Frame)
 		end
 	end, {})
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: GetTextSizeFunction (upval), HotkeyEducationalText (copy), ScaledBaseSize (copy), BodySmallFont (copy)
-		return GetTextSizeFunction(HotkeyEducationalText, ScaledBaseSize, BodySmallFont, Vector2.new(10000, 10000)).X
+		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), HotkeyEducationalText (copy), ScaledBaseSize (copy), BodySmallFont (copy), Text (upval)
+		return if FoundationFontFaceMigration then GetTextSizeFunction(HotkeyEducationalText, ScaledBaseSize, BodySmallFont, Vector2.new(10000, 10000)).X else Text.GetTextWidth(HotkeyEducationalText, BodySmallFont, ScaledBaseSize)
 	end, {
 		BodySmallFont,
 		ScaledBaseSize,
@@ -74,7 +77,7 @@ end)(function(Frame)
 	local YOffset = 20
 	
 	if not IsUseMemoResultBelow and UseMemoResult >= X - 24 then
-		YOffset = GetTextSizeFunction(HotkeyEducationalText, ScaledBaseSize, BodySmallFont, Vector2.new(X - 24, 10000)).Y + 10
+		YOffset = (if FoundationFontFaceMigration then GetTextSizeFunction(HotkeyEducationalText, ScaledBaseSize, BodySmallFont, Vector2.new(X - 24, 10000)).Y else Text.GetTextHeight(HotkeyEducationalText, BodySmallFont, ScaledBaseSize, X - 24)) + 10
 	end
 	return ReactModule.createElement("Frame", {
 		AutomaticSize = Enum.AutomaticSize.Y,
@@ -120,7 +123,8 @@ end)(function(Frame)
 				Title = ReactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
-					FontFace = NormalizeFontFaceFunction(TitleLargeFont),
+					Font = if FoundationFontFaceMigration then nil else TitleLargeFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(TitleLargeFont) else nil,
 					Size = UDim2.new(1, 0, 0, 30),
 					Text = UseLocalizationResult.capturesTitle,
 					TextColor3 = Color2,
@@ -131,7 +135,8 @@ end)(function(Frame)
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
 					TextWrapped = true,
-					FontFace = NormalizeFontFaceFunction(BodySmallFont),
+					Font = if FoundationFontFaceMigration then nil else BodySmallFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(BodySmallFont) else nil,
 					Size = UDim2.new(1, 0, 0, YOffset),
 					Text = HotkeyEducationalText,
 					TextColor3 = Color1,

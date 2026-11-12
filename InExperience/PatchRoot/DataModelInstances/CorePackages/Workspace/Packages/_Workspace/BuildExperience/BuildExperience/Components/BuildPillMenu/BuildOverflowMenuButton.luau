@@ -18,11 +18,8 @@ local UseCreatorCreditMenuItemFunction = require(script.Parent.useCreatorCreditM
 local FFlagBuildExperiencePrivateInvitesModule = require(BuildExperience.Flags.FFlagBuildExperiencePrivateInvites)
 local FFlagEnableBuildAdPromotionModule = require(BuildExperience.Flags.FFlagEnableBuildAdPromotion)
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
-local FFlagBuildExperiencePageImpressionsModule = require(BuildExperience.Flags.FFlagBuildExperiencePageImpressions)
-local UseBuildPageImpressionModule = require(BuildExperience.Telemetry.useBuildPageImpression)
-local FFlagBuildExperienceOverflowMenuTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceOverflowMenuTelemetry)
-local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
+local FFlagBuildExperienceReleaseFocusOnOverflowOpenModule = require(BuildExperience.Flags.FFlagBuildExperienceReleaseFocusOnOverflowOpen)
 local UseGetAdCampaignEligibilityModule = require(BuildExperience.Components.Ads.useGetAdCampaignEligibility)
 local AdCampaignEligibilityUtilsModule = require(BuildExperience.Components.Ads.adCampaignEligibilityUtils)
 local IconButton = FoundationModule.IconButton
@@ -45,32 +42,12 @@ local _ = function(p1, p2)
 	return if p1.getText == nil then p1.text else p1.getText(p2)
 end
 
-local function sendOverflowMenuEvent(p1, Target, Item)
-	-- upvalues: SendBuildExperienceEventModule (copy)
-	local config = {
-		surface = if game.GameId == 0 then "app" else "in_experience"
-	}
-	
-	if Item ~= nil then
-		config.item = Item
-	end
-	SendBuildExperienceEventModule(p1, {
-		universeId = Target.universeId,
-		placeId = Target.placeId,
-		conversationId = Target.sessionId
-	}, config)
-end
-
 return function(p1)
-	-- upvalues: UseScaledValueFunction (copy), BuildOverflowMenuWidth (copy), UseOpenWebViewFunction (copy), ReactModule (copy), FFlagBuildExperiencePageImpressionsModule (copy), UseBuildPageImpressionModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), UseExperienceShareFlowModule (copy), UseSharePublishedExperienceFunction (copy), FFlagEnableBuildAdPromotionModule (copy), UseGetAdCampaignEligibilityModule (copy), AdCampaignEligibilityUtilsModule (copy), UseLocalizationFunction (copy), UseCreatorCreditMenuItemFunction (copy), BadgeVariant (copy), UserInputService (copy), FFlagBuildExperienceOverflowMenuTelemetryModule (copy), sendOverflowMenuEvent (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), DeveloperProducts (copy), LocalizationStringsModule (copy), ReleaseAnyFocusModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), LeaveExperienceModule (copy), VersionHistoryContainerModule (copy), Menu (copy), PopoverSide (copy), InputSize (copy), PopoverAlign (copy), IconButton (copy), ButtonVariant (copy), ExperienceShareOverlaysModule (copy), FriendsOnlyShareDialogModule (copy)
+	-- upvalues: UseScaledValueFunction (copy), BuildOverflowMenuWidth (copy), UseOpenWebViewFunction (copy), ReactModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), UseExperienceShareFlowModule (copy), UseSharePublishedExperienceFunction (copy), FFlagEnableBuildAdPromotionModule (copy), UseGetAdCampaignEligibilityModule (copy), AdCampaignEligibilityUtilsModule (copy), UseLocalizationFunction (copy), UseCreatorCreditMenuItemFunction (copy), BadgeVariant (copy), FFlagBuildExperienceReleaseFocusOnOverflowOpenModule (copy), UserInputService (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), DeveloperProducts (copy), LocalizationStringsModule (copy), ReleaseAnyFocusModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), LeaveExperienceModule (copy), VersionHistoryContainerModule (copy), Menu (copy), PopoverSide (copy), InputSize (copy), PopoverAlign (copy), IconButton (copy), ButtonVariant (copy), ExperienceShareOverlaysModule (copy), FriendsOnlyShareDialogModule (copy)
 	local UseScaledValueResult = UseScaledValueFunction(BuildOverflowMenuWidth)
 	local UseOpenWebViewResult = UseOpenWebViewFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
-	
-	if FFlagBuildExperiencePageImpressionsModule then
-		UseBuildPageImpressionModule("version-history", p1.target, UseStateResult1 and p1.target.placeId ~= nil)
-	end
 	local UseGamePermissionsModuleResult = if FFlagBuildCheckGamePermissionsModule then UseGamePermissionsModule({
 		universeId = p1.target.universeId,
 		isNewGame = p1.target.isNewGameTarget
@@ -201,14 +178,11 @@ return function(p1)
 				UseStateResult2(false)
 			end, {}),
 			onActivated = ReactModule.useCallback(function(Id)
-				-- upvalues: UserInputService (upval), FFlagBuildExperienceOverflowMenuTelemetryModule (upval), sendOverflowMenuEvent (upval), p1 (copy), HasOnOpenCreatorCreditPage (copy), UseCreatorCreditMenuItemResult (copy), UseStateResult2 (copy), UseMemoResult (copy), UseItemsResult (copy), FFlagBuildExperienceMonetizationNativeUIModule (upval), UseOpenWebViewResult (copy), DeveloperProducts (upval), LocalizationStringsModule (upval), ReleaseAnyFocusModule (upval), UseStateResult2_1 (copy), FFlagBuildExperiencePrivateInvitesModule (upval), OnShareFunction (copy), UseSharePublishedExperienceResult (copy), UseStateResult2_2 (copy), LeaveExperienceModule (upval)
+				-- upvalues: UserInputService (upval), HasOnOpenCreatorCreditPage (copy), UseCreatorCreditMenuItemResult (copy), UseStateResult2 (copy), UseMemoResult (copy), UseItemsResult (copy), FFlagBuildExperienceMonetizationNativeUIModule (upval), UseOpenWebViewResult (copy), DeveloperProducts (upval), LocalizationStringsModule (upval), p1 (copy), ReleaseAnyFocusModule (upval), UseStateResult2_1 (copy), FFlagBuildExperiencePrivateInvitesModule (upval), OnShareFunction (copy), UseSharePublishedExperienceResult (copy), UseStateResult2_2 (copy), LeaveExperienceModule (upval)
 				local FocusedTextBox = UserInputService:GetFocusedTextBox()
 				
 				if FocusedTextBox then
 					FocusedTextBox:ReleaseFocus()
-				end
-				if FFlagBuildExperienceOverflowMenuTelemetryModule then
-					sendOverflowMenuEvent("OVERFLOW_MENU_ITEM_CLICK", p1.target, (tostring(Id)))
 				end
 				if HasOnOpenCreatorCreditPage and UseCreatorCreditMenuItemResult ~= nil and Id == UseCreatorCreditMenuItemResult.item.id then
 					UseCreatorCreditMenuItemResult.activate()
@@ -266,8 +240,7 @@ return function(p1)
 			end, {
 				UseItemsResult, UseMemoResult, UseOpenWebViewResult, p1.onAction,
 				p1.onOpenGetUsersPage, OnShareFunction, UseSharePublishedExperienceResult,
-				HasOnOpenCreatorCreditPage, UseCreatorCreditMenuItemResult,
-				if FFlagBuildExperienceOverflowMenuTelemetryModule then p1.target else nil
+				HasOnOpenCreatorCreditPage, UseCreatorCreditMenuItemResult
 			}),
 			LayoutOrder = p1.layoutOrder,
 			width = UDim.new(0, UseScaledValueResult)
@@ -279,15 +252,14 @@ return function(p1)
 			size = InputSize.Medium,
 			isDisabled = IsIsDisabled,
 			onActivated = ReactModule.useCallback(function()
-				-- upvalues: IsIsDisabled (copy), UserInputService (upval), FFlagBuildExperienceOverflowMenuTelemetryModule (upval), UseStateResult (copy), sendOverflowMenuEvent (upval), p1 (copy), UseStateResult2 (copy)
+				-- upvalues: IsIsDisabled (copy), FFlagBuildExperienceReleaseFocusOnOverflowOpenModule (upval), UserInputService (upval), UseStateResult2 (copy), p1 (copy)
 				if IsIsDisabled then return end
-				local FocusedTextBox = UserInputService:GetFocusedTextBox()
-				
-				if FocusedTextBox then
-					FocusedTextBox:ReleaseFocus()
-				end
-				if FFlagBuildExperienceOverflowMenuTelemetryModule and not UseStateResult then
-					sendOverflowMenuEvent("OVERFLOW_MENU_OPEN", p1.target)
+				if FFlagBuildExperienceReleaseFocusOnOverflowOpenModule then
+					local FocusedTextBox = UserInputService:GetFocusedTextBox()
+					
+					if FocusedTextBox then
+						FocusedTextBox:ReleaseFocus()
+					end
 				end
 				UseStateResult2(function(p2): boolean
 					return not p2
@@ -296,12 +268,7 @@ return function(p1)
 				if p1.onActivated then
 					p1.onActivated()
 				end
-			end, {
-				IsIsDisabled,
-				p1.onActivated,
-				if FFlagBuildExperienceOverflowMenuTelemetryModule then UseStateResult else nil,
-				if FFlagBuildExperienceOverflowMenuTelemetryModule then p1.target else nil
-			})
+			end, { IsIsDisabled, p1.onActivated })
 		})),
 		ShareOverlays = if FFlagBuildExperiencePrivateInvitesModule then ReactModule.createElement(ExperienceShareOverlaysModule, {
 			activeDialog = UseExperienceShareFlowModuleResult.activeDialog,

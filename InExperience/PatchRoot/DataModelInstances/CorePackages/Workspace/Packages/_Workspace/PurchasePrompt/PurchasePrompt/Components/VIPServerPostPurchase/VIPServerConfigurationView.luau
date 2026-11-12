@@ -1,6 +1,5 @@
 ﻿local Parent = script:FindFirstAncestor("PurchasePrompt").Parent
 local ReactModule = require(Parent.React)
-local GetFirstFocusableDescendantFunction = require(Parent.FocusNavigationUtils).getFirstFocusableDescendant
 local FoundationModule = require(Parent.Foundation)
 local View = FoundationModule.View
 local Text = FoundationModule.Text
@@ -13,13 +12,14 @@ local Chip = FoundationModule.Chip
 local Menu = FoundationModule.Menu
 local ScrollView = FoundationModule.ScrollView
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local Sheet = FoundationModule.Sheet
+local Dialog = FoundationModule.Dialog
 local AvatarSize = FoundationModule.Enums.AvatarSize
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
-local FillBehavior = FoundationModule.Enums.FillBehavior
+local DialogSize = FoundationModule.Enums.DialogSize
 local IconName = FoundationModule.Enums.IconName
 local InputFocusBehavior = FoundationModule.Enums.InputFocusBehavior
 local InputSize = FoundationModule.Enums.InputSize
+local Orientation = FoundationModule.Enums.Orientation
 
 local function renderPlayerRow(p1, p2, LayoutOrder)
 	-- upvalues: ReactModule (copy), View (copy), Avatar (copy), AvatarSize (copy), Text (copy), Button (copy), IconName (copy), ButtonVariant (copy), InputSize (copy)
@@ -94,79 +94,67 @@ local function renderAddedPlayerChips(ViewProps)
 end
 
 local function PeopleSearch(Frame)
-	-- upvalues: ReactModule (copy), GetFirstFocusableDescendantFunction (copy), View (copy), SearchInput (copy), Menu (copy)
+	-- upvalues: ReactModule (copy), View (copy), SearchInput (copy), Menu (copy)
 	local ViewProps = Frame.viewProps
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
-	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local SearchResults = ViewProps.searchResults
+	local OnSearchTextChangedFunction = ViewProps.onSearchTextChanged
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: SearchResults (copy), UseStateResult2_1 (copy)
+		-- upvalues: SearchResults (copy)
 		local List = {}
 		
-		for i, searchResult in SearchResults do
+		for _, searchResult in SearchResults do
 			table.insert(List, {
 				id = searchResult.userId,
 				text = searchResult.displayName,
-				leading = { type = "Avatar", userId = searchResult.userId },
-				ref = if i == 1 then UseStateResult2_1 else nil
+				leading = { type = "Avatar", userId = searchResult.userId }
 			})
 		end
 		return List
 	end, { SearchResults })
-	local UseResult = ReactModule.useCallback(function(UserId)
-		-- upvalues: SearchResults (copy)
-		for _, searchResult in SearchResults do
-			if searchResult.userId == UserId then
-				searchResult.onSelected()
-				break
-			end
-		end
-	end, { SearchResults })
-	local UseResult1 = ReactModule.useCallback(function(Frame)
-		-- upvalues: UseStateResult2 (copy)
-		UseStateResult2(Frame.AbsoluteSize.X)
-	end, {})
-	ReactModule.useEffect(function()
-		-- upvalues: UseRefResult (copy), GetFirstFocusableDescendantFunction (upval), UseStateResult1 (copy)
-		local FirstFocusableDescendant = if UseRefResult.current then GetFirstFocusableDescendantFunction(UseRefResult.current) else nil
-		
-		if FirstFocusableDescendant == nil or UseStateResult1 == nil then
-			return nil
-		else
-			FirstFocusableDescendant.NextSelectionDown = UseStateResult1
-			UseStateResult1.NextSelectionUp = FirstFocusableDescendant
-			
-			return function()
-				-- upvalues: FirstFocusableDescendant (copy), UseStateResult1 (copy)
-				FirstFocusableDescendant.NextSelectionDown = nil
-				UseStateResult1.NextSelectionUp = nil
-			end
-		end
-	end, { UseStateResult1 })
 	
 	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y",
 		ref = UseRefResult,
-		onAbsoluteSizeChanged = UseResult1,
+		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(Frame.AbsoluteSize.X)
+		end, {}),
 		LayoutOrder = Frame.LayoutOrder
 	}, {
 		Search = ReactModule.createElement(SearchInput, {
 			testId = "--purchase-prompt-searchinput-people",
 			text = ViewProps.searchText,
 			placeholder = ViewProps.locales.searchPeople,
-			onChanged = ViewProps.onSearchTextChanged,
+			onChanged = ReactModule.useCallback(function(p1)
+				-- upvalues: UseStateResult2_1 (copy), OnSearchTextChangedFunction (copy)
+				UseStateResult2_1(false)
+				OnSearchTextChangedFunction(p1)
+			end, { OnSearchTextChangedFunction }),
 			width = UDim.new(1, 0)
 		}),
 		Results = ReactModule.createElement(Menu, {
 			testId = "--purchase-prompt-menu-search-results",
 			maxHeight = 240,
-			isOpen = ViewProps.isSearchMenuOpen,
+			isOpen = #UseMemoResult > 0 and not UseStateResult1,
 			items = UseMemoResult,
 			anchorRef = UseRefResult,
 			width = UDim.new(0, UseStateResult),
-			onPressedOutside = ViewProps.onSearchMenuDismissed,
-			onActivated = UseResult
+			onPressedOutside = ReactModule.useCallback(function()
+				-- upvalues: UseStateResult2_1 (copy)
+				UseStateResult2_1(true)
+			end, {}),
+			onActivated = ReactModule.useCallback(function(UserId)
+				-- upvalues: SearchResults (copy)
+				for _, searchResult in SearchResults do
+					if searchResult.userId == UserId then
+						searchResult.onSelected()
+						break
+					end
+				end
+			end, { SearchResults })
 		})
 	})
 end
@@ -222,20 +210,15 @@ local function renderPrivateServerLink(ViewProps)
 end
 
 return function(ViewProps)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Sheet (copy), Text (copy), View (copy), TextInput (copy), PeopleSearch (copy), renderAddedPlayerChips (copy), ScrollView (copy), renderPlayerList (copy), Toggle (copy), renderPrivateServerLink (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)
-	return ReactModule.createElement(Sheet.Root, {
-		preferCenterSheet = true,
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), View (copy), TextInput (copy), Text (copy), PeopleSearch (copy), renderAddedPlayerChips (copy), ScrollView (copy), renderPlayerList (copy), Toggle (copy), renderPrivateServerLink (copy), Orientation (copy), ButtonVariant (copy)
+	return ReactModule.createElement(Dialog.Root, {
+		disablePortal = true,
 		testId = "VIPServerConfigurationView",
-		onClose = ViewProps.onDismiss,
-		ref = ViewProps.focusRootRef
+		size = DialogSize.Medium,
+		onClose = if ViewProps.isSaving then nil else ViewProps.onCancel
 	}, {
-		Header = ReactModule.createElement(Sheet.Header, {}, {
-			Title = ReactModule.createElement(Text, {
-				tag = "auto-xy text-heading-small text-align-x-left content-default",
-				Text = ViewProps.locales.title
-			})
-		}),
-		Content = ReactModule.createElement(Sheet.Content, { LayoutOrder = 2 }, {
+		Title = ReactModule.createElement(Dialog.Title, { LayoutOrder = 1, text = ViewProps.locales.title }),
+		Content = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
 			Body = ReactModule.createElement(View, { tag = "col gap-large size-full-0 auto-y" }, {
 				ServerName = ReactModule.createElement(TextInput, {
 					testId = "--purchase-prompt-textinput-server-name",
@@ -310,15 +293,18 @@ return function(ViewProps)
 				}) else nil
 			})
 		}),
-		Actions = ReactModule.createElement(Sheet.Actions, { LayoutOrder = 3 }, {
-			Continue = ReactModule.createElement(Button, {
-				testId = "--purchase-prompt-button-continue",
-				text = ViewProps.locales["continue"],
-				variant = ButtonVariant.Emphasis,
-				fillBehavior = FillBehavior.Fill,
-				onActivated = ViewProps.onSave,
-				isLoading = ViewProps.isSaving
-			})
+		Actions = ReactModule.createElement(Dialog.Actions, {
+			LayoutOrder = 3,
+			orientation = Orientation.Horizontal,
+			actions = {
+				{
+					testId = "--purchase-prompt-button-continue",
+					text = ViewProps.locales["continue"],
+					variant = ButtonVariant.Emphasis,
+					onActivated = ViewProps.onSave,
+					isLoading = ViewProps.isSaving
+				}
+			}
 		})
 	})
 end

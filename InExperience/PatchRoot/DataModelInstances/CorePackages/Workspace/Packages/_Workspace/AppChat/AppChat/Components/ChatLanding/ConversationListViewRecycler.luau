@@ -8,6 +8,7 @@ local FocusNavigationService = require(Parent.ReactFocusNavigation).FocusNavigat
 local CryoModule = require(Parent.Cryo)
 local ReactModule = require(Parent.React)
 local ReactOtterModule = require(Parent.ReactOtter)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local Signal = require(Parent.AppCommonLib).Signal
 local SignalsModule = require(Parent.Signals)
 local SocialCarouselModule = require(Parent.SocialCarousel)
@@ -17,7 +18,6 @@ local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FFlagAppChatConversationListViewRecyclerConsolePropsModule = require(AppChat.Flags.FFlagAppChatConversationListViewRecyclerConsoleProps)
 local FFlagAppChatPerfTrackingModule = require(AppChat.Flags.FFlagAppChatPerfTracking)
-local FFlagFriendsChatUseViewRecyclerConversationListModule = require(AppChat.Flags.FFlagFriendsChatUseViewRecyclerConversationList)
 local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
 local CreateScrollIntervalTrackerModule = require(AppChat.Telemetry.createScrollIntervalTracker)
 local Constants = SocialCarouselModule.Constants
@@ -25,7 +25,8 @@ local Enums = SocialCarouselModule.Enums
 local SquadQuickStartExperimentation = require(Parent.SocialExperiments).SquadQuickStartExperimentation
 local ConversationListViewRecyclerItemsModule = require(script.Parent.ConversationListViewRecyclerItems)
 local AppChatChatLandingInitialFetchLimit = game:DefineFastInt("AppChatChatLandingInitialFetchLimit", 5)
-local FFlagAppIaScrollAway = require(Parent.SharedFlags).FFlagAppIaScrollAway
+local FFlagAppIaScrollAway = SharedFlagsModule.FFlagAppIaScrollAway
+local FFlagFriendsChatConversationListShowScrollBar = SharedFlagsModule.FFlagFriendsChatConversationListShowScrollBar
 local AppChatChatLandingInitialFetchMinimumConversations = game:DefineFastInt("AppChatChatLandingInitialFetchMinimumConversations", 30)
 local FFlagAppChatRemoveConversationListDividerIxpEnabledModule = require(AppChat.Flags.FFlagAppChatRemoveConversationListDividerIxpEnabled)
 local FStringAppChatRemoveConversationListDividerIxpLayerModule = require(AppChat.Flags.FStringAppChatRemoveConversationListDividerIxpLayer)
@@ -239,38 +240,49 @@ local function useMeasuredLayout(EstimatedItemLength)
 end
 
 local function useConversationListScrollbar(IsShowScrollbarOnScroll, ScrollbarThickness, EmphasisColor)
-	-- upvalues: ReactModule (copy), ReactOtterModule (copy), AppChatConversationListScrollBarIdleHideMsRatio (copy), config (copy)
-	local UseRefResult = ReactModule.useRef(nil)
-	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1)
-	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: IsShowScrollbarOnScroll (copy), UseRefResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), AppChatConversationListScrollBarIdleHideMsRatio (upval), config (upval)
-		if not IsShowScrollbarOnScroll then return end
-		if UseRefResult.current ~= nil then
-			pcall(task.cancel, UseRefResult.current)
-			UseRefResult.current = nil
-		end
-		UseAnimatedBindingResult2(ReactOtterModule.instant(0))
-		UseRefResult.current = task.delay(AppChatConversationListScrollBarIdleHideMsRatio, function()
-			-- upvalues: UseRefResult (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval)
-			UseRefResult.current = nil
-			UseAnimatedBindingResult2(ReactOtterModule.spring(1, config))
-		end)
-	end, { IsShowScrollbarOnScroll, UseAnimatedBindingResult2 })
-	ReactModule.useEffect(function()
-		-- upvalues: UseRefResult (copy)
-		return function()
-			-- upvalues: UseRefResult (upval)
+	-- upvalues: FFlagFriendsChatConversationListShowScrollBar (copy), ReactModule (copy), ReactOtterModule (copy), AppChatConversationListScrollBarIdleHideMsRatio (copy), config (copy)
+	local UseRefResult = nil
+	local v1 = nil
+	local Callback = nil
+	
+	if FFlagFriendsChatConversationListShowScrollBar then
+		UseRefResult = ReactModule.useRef(nil)
+		v1, Callback = ReactOtterModule.useAnimatedBinding(1)
+	end
+	local UseResult = nil
+	
+	if FFlagFriendsChatConversationListShowScrollBar then
+		UseResult = ReactModule.useCallback(function()
+			-- upvalues: IsShowScrollbarOnScroll (copy), UseRefResult (ref), Callback (ref), ReactOtterModule (upval), AppChatConversationListScrollBarIdleHideMsRatio (upval), config (upval)
+			if not IsShowScrollbarOnScroll then return end
 			if UseRefResult.current ~= nil then
 				pcall(task.cancel, UseRefResult.current)
 				UseRefResult.current = nil
 			end
-		end
-	end, {})
+			Callback(ReactOtterModule.instant(0))
+			UseRefResult.current = task.delay(AppChatConversationListScrollBarIdleHideMsRatio, function()
+				-- upvalues: UseRefResult (upval), Callback (upval), ReactOtterModule (upval), config (upval)
+				UseRefResult.current = nil
+				Callback(ReactOtterModule.spring(1, config))
+			end)
+		end, { IsShowScrollbarOnScroll, Callback })
+		ReactModule.useEffect(function()
+			-- upvalues: UseRefResult (ref)
+			return function()
+				-- upvalues: UseRefResult (upval)
+				if UseRefResult.current ~= nil then
+					pcall(task.cancel, UseRefResult.current)
+					UseRefResult.current = nil
+				end
+			end
+		end, {})
+	end
+	local IsShowScrollbarOnScroll1 = FFlagFriendsChatConversationListShowScrollBar and IsShowScrollbarOnScroll
 	
 	return {
-		ScrollBarThickness = if IsShowScrollbarOnScroll then ScrollbarThickness or 8 else 0,
-		ScrollBarImageColor3 = if IsShowScrollbarOnScroll then EmphasisColor else nil,
-		ScrollBarImageTransparency = if IsShowScrollbarOnScroll then UseAnimatedBindingResult else nil
+		ScrollBarThickness = if IsShowScrollbarOnScroll1 then ScrollbarThickness or 8 else 0,
+		ScrollBarImageColor3 = if IsShowScrollbarOnScroll1 then EmphasisColor else nil,
+		ScrollBarImageTransparency = if IsShowScrollbarOnScroll1 then v1 else nil
 	}, UseResult
 end
 
@@ -340,7 +352,7 @@ local function useLegacyListRef(ListRef, p2, Callback)
 end
 
 return ReactModule.memo(function(p2)
-	-- upvalues: CryoModule (copy), config1 (copy), UseTokensFunction (copy), usePagination (copy), useUnderfillPagination (copy), useConversationListScrollbar (copy), useScrollTracking (copy), ReactModule (copy), FFlagFriendsChatUseViewRecyclerConversationListModule (copy), AppChatPerfExperimentation (copy), PartyPageCarouselExperimentation (copy), SquadQuickStartExperimentation (copy), FFlagAppChatRemoveConversationListDividerIxpEnabledModule (copy), IXPService (copy), FStringAppChatRemoveConversationListDividerIxpLayerModule (copy), FocusNavigationService (copy), CoreGui (copy), AppPage (copy), Constants (copy), Enums (copy), usePresentationSignal (copy), FFlagAppIaScrollAway (copy), ConversationListViewRecyclerItemsModule (copy), buildConversationItems (copy), FFlagAppChatConversationListViewRecyclerConsolePropsModule (copy), concatItems (copy), useListData (copy), useLegacyListRef (copy), useMeasuredLayout (copy), View (copy), ViewRecyclerModule (copy), AppChatPerfChatLandingPaginationOnStartReachedUnits (copy), AppChatPerfChatLandingPaginationOnEndReachedUnits (copy)
+	-- upvalues: CryoModule (copy), config1 (copy), UseTokensFunction (copy), usePagination (copy), useUnderfillPagination (copy), useConversationListScrollbar (copy), useScrollTracking (copy), ReactModule (copy), AppChatPerfExperimentation (copy), PartyPageCarouselExperimentation (copy), SquadQuickStartExperimentation (copy), FFlagAppChatRemoveConversationListDividerIxpEnabledModule (copy), IXPService (copy), FStringAppChatRemoveConversationListDividerIxpLayerModule (copy), FocusNavigationService (copy), CoreGui (copy), AppPage (copy), Constants (copy), Enums (copy), usePresentationSignal (copy), FFlagAppIaScrollAway (copy), ConversationListViewRecyclerItemsModule (copy), buildConversationItems (copy), FFlagAppChatConversationListViewRecyclerConsolePropsModule (copy), concatItems (copy), useListData (copy), useLegacyListRef (copy), useMeasuredLayout (copy), View (copy), ViewRecyclerModule (copy), AppChatPerfChatLandingPaginationOnStartReachedUnits (copy), AppChatPerfChatLandingPaginationOnEndReachedUnits (copy)
 	local JoinResult = CryoModule.Dictionary.join(config1, p2)
 	local EntryHeight = JoinResult.entryHeight
 	local ItemList = JoinResult.itemList
@@ -360,10 +372,9 @@ return ReactModule.memo(function(p2)
 	local UseConversationListScrollbarResult, UseConversationListScrollbarResult2 = useConversationListScrollbar(JoinResult.showScrollbarOnScroll == true, JoinResult.scrollbarThickness, UseTokensResult.Color.Content.Emphasis.Color3)
 	local UseScrollTrackingResult, UseScrollTrackingResult2, UseScrollTrackingResult3 = useScrollTracking(OnScrollUpdate, UseConversationListScrollbarResult2)
 	ReactModule.useEffect(function()
-		-- upvalues: FFlagFriendsChatUseViewRecyclerConversationListModule (upval), JoinResult (copy), AppChatPerfExperimentation (upval), PartyPageCarouselExperimentation (upval), SquadQuickStartExperimentation (upval), FFlagAppChatRemoveConversationListDividerIxpEnabledModule (upval), IXPService (upval), FStringAppChatRemoveConversationListDividerIxpLayerModule (upval)
-		if not FFlagFriendsChatUseViewRecyclerConversationListModule or JoinResult.shouldLogPerfExposure ~= false then
-			AppChatPerfExperimentation.logExposure()
-		end
+		-- upvalues: AppChatPerfExperimentation (upval), JoinResult (copy), PartyPageCarouselExperimentation (upval), SquadQuickStartExperimentation (upval), FFlagAppChatRemoveConversationListDividerIxpEnabledModule (upval), IXPService (upval), FStringAppChatRemoveConversationListDividerIxpLayerModule (upval)
+		AppChatPerfExperimentation.logExposure()
+		
 		if JoinResult.shouldLogHeaderEntryExposures ~= false then
 			PartyPageCarouselExperimentation.logExposure()
 			

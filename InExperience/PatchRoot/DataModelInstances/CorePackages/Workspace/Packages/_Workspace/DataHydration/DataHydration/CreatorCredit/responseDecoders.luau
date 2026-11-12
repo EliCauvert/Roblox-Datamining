@@ -95,34 +95,34 @@ local function decodeQuotaSummary(p1)
 	}
 	
 	if FFlagBuildExperienceModelPickerData then
-		local BlockDetails1 = Summary.blockDetails
+		local BlockDetails = Summary.blockDetails
 		
-		if typeof(BlockDetails1) == "table" then
-			local ModelTier = BlockDetails1.modelTier
-			local BlockDetails = {
+		if typeof(BlockDetails) == "table" then
+			local ModelTier = BlockDetails.modelTier
+			local BlockDetails1 = {
 				modelTier = if typeof(ModelTier) == "string" or typeof(ModelTier) == "number" then config1[ModelTier] else nil
 			}
-			local RequiredRobux = BlockDetails1.requiredRobux
-			local Number1 = nil
+			local RequiredRobux = BlockDetails.requiredRobux
+			local Number2 = nil
 			
 			if typeof(RequiredRobux) == "number" or typeof(RequiredRobux) == "string" then
 				local Number: number? = tonumber(RequiredRobux)
+				Number2 = if Number == nil or Number < 0 or (Number > 9007199254740991 or Number % 1 ~= 0) then nil else Number
+			else
+				Number2 = nil
+			end
+			BlockDetails1.requiredRobux = Number2
+			local AvailableRobux = BlockDetails.availableRobux
+			local Number1 = nil
+			
+			if typeof(AvailableRobux) == "number" or typeof(AvailableRobux) == "string" then
+				local Number: number? = tonumber(AvailableRobux)
 				Number1 = if Number == nil or Number < 0 or Number > 9007199254740991 or Number % 1 ~= 0 then nil else Number
 			else
 				Number1 = nil
 			end
-			BlockDetails.requiredRobux = Number1
-			local AvailableRobux = BlockDetails1.availableRobux
-			local Number2 = nil
-			
-			if typeof(AvailableRobux) == "number" or typeof(AvailableRobux) == "string" then
-				local Number: number? = tonumber(AvailableRobux)
-				Number2 = if Number == nil or Number < 0 or Number > 9007199254740991 or Number % 1 ~= 0 then nil else Number
-			else
-				Number2 = nil
-			end
-			BlockDetails.availableRobux = Number2
-			config3.blockDetails = BlockDetails
+			BlockDetails1.availableRobux = Number1
+			config3.blockDetails = BlockDetails1
 		end
 	end
 	return config3

@@ -16,9 +16,6 @@ local FFlagAbuseReportSubmissionTargetV4 = SharedFlagsModule.FFlagAbuseReportSub
 local FFlagMomentsServeEDPVideos = SharedFlagsModule.FFlagMomentsServeEDPVideos
 local FFlagAbuseReportAttributes = SharedFlagsModule.FFlagAbuseReportAttributes
 local FFlagProfileRenderAvatarMoments = SharedFlagsModule.FFlagProfileRenderAvatarMoments
-local FFlagProfileMomentsFeedAboveSplitPane = SharedFlagsModule.FFlagProfileMomentsFeedAboveSplitPane
-local SplitPaneStore = if FFlagProfileMomentsFeedAboveSplitPane then require(Parent.SplitPane).SplitPaneStore else nil
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local View = FoundationModule.View
 local IconButton = FoundationModule.IconButton
 local ButtonSize = FoundationModule.Enums.ButtonSize
@@ -42,7 +39,7 @@ local CreateUserMomentsFeedSourceModule = require(Parent.Moments.CreateUserMomen
 local ReportMomentFunction = MomentsModule.reportMoment
 
 local function MomentsFeedPageImmersive()
-	-- upvalues: UseNavigationFunction (copy), FFlagMomentsOptimisticProfilePending (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), UseDispatchFunction (copy), FFlagMomentsServeEDPVideos (copy), CloseCentralOverlayFunction (copy), OpenGameDetailsFunction (copy), OpenDynamicAbuseReportFunction (copy), AbuseVector (copy), FFlagAbuseReportAttributes (copy), ReportEdpVideo (copy), ReportMomentFunction (copy), FFlagAbuseReportSubmissionTargetV4 (copy), FFlagEnableMomentsCommentReporting (copy), FFlagEnableMomentsCommentBlocking (copy), UseOpenBlockingModalModule (copy), UseScreenSizeFunction (copy), FFlagProfileMomentsFeedAboveSplitPane (copy), UseSignalStateFunction (copy), SplitPaneStore (copy), View (copy), FFlagProfileRenderAvatarMoments (copy), MomentsImmersivePresentation (copy), ImmersiveFeedKind (copy)
+	-- upvalues: UseNavigationFunction (copy), FFlagMomentsOptimisticProfilePending (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), UseDispatchFunction (copy), FFlagMomentsServeEDPVideos (copy), CloseCentralOverlayFunction (copy), OpenGameDetailsFunction (copy), OpenDynamicAbuseReportFunction (copy), AbuseVector (copy), FFlagAbuseReportAttributes (copy), ReportEdpVideo (copy), ReportMomentFunction (copy), FFlagAbuseReportSubmissionTargetV4 (copy), FFlagEnableMomentsCommentReporting (copy), FFlagEnableMomentsCommentBlocking (copy), UseOpenBlockingModalModule (copy), UseScreenSizeFunction (copy), View (copy), FFlagProfileRenderAvatarMoments (copy), MomentsImmersivePresentation (copy), ImmersiveFeedKind (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local ExtraPropsParam = UseNavigationResult.getParam("extraProps")
 	local TargetUserId = if ExtraPropsParam and ExtraPropsParam.targetUserId then ExtraPropsParam.targetUserId else 0
@@ -160,10 +157,9 @@ local function MomentsFeedPageImmersive()
 		if FFlagMomentsServeEDPVideos then UseNavigationResult else false
 	})
 	local UseScreenSizeResult = UseScreenSizeFunction()
-	local UseSignalStateResult = if FFlagProfileMomentsFeedAboveSplitPane then UseSignalStateFunction(SplitPaneStore.getStore().getIsSplitPaneActive) else false
 	
 	return ReactModule.createElement(View, {
-		Size = if UseSignalStateResult then UDim2.fromScale(1, 1) else UDim2.fromOffset(UseScreenSizeResult.X, UseScreenSizeResult.Y),
+		Size = UDim2.fromOffset(UseScreenSizeResult.X, UseScreenSizeResult.Y),
 		backgroundStyle = if FFlagProfileRenderAvatarMoments then { Transparency = 1 } else nil,
 		tag = { ["bg-surface-0"] = not FFlagProfileRenderAvatarMoments }
 	}, {

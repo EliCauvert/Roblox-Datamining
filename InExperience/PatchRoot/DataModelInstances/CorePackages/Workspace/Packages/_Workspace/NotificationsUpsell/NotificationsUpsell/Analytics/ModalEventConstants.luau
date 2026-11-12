@@ -15,8 +15,6 @@
 	ModalContextPushEduUpsell = "pushEduUpsell",
 	ModalContextSysUpsell = "pushSysUpsell",
 	ModalContextSettingsUpsell = "pushSettingsUpsell",
-	EntryPointInGameRsvp = "inGameRsvp",
-	EventId = "eventId",
 	OptInEventName = "experienceNotificationClientPromptOptInEvent",
 	OptInPushEventName = "pushNotificationClientPromptOptInEvent",
 	OptInPushUpsellEventName = "pushUpsellNotificationClientEvent",
@@ -24,8 +22,5 @@
 	Button = "btn",
 	UniverseId = "universeId",
 	EntryPoint = "entryPoint",
-	SettingsResult = "settingsResult",
-	EntryPointChat = "Chat",
-	Variant = "variant",
-	VariantLegacy = "legacy"
+	SettingsResult = "settingsResult"
 }

@@ -7,28 +7,22 @@ local Text = FoundationModule.Text
 local UseOpenLinkModule = require(GenericAbuseReporting.BeduiV2.Hooks.useOpenLink)
 local _ = require(GenericAbuseReporting.BeduiV2.Utils.Translate.translate)
 local UseArTranslationFunction = require(GenericAbuseReporting.BeduiV2.Utils.Translate.arTranslation).useArTranslation
+local AddFontStyleToTextWithTranslation = game:DefineFastFlag("AddFontStyleToTextWithTranslation", false)
 local TelemetryEventType = require(GenericAbuseReporting.BeduiV2.Analytics.analyticsService).TelemetryEventType
 local UseOptionalAbuseReportAnalyticsFunction = require(GenericAbuseReporting.BeduiV2.Analytics.AbuseReportAnalyticsContext).useOptionalAbuseReportAnalytics
-local FFlagAbuseReportTranslateColorWrapperModule = require(GenericAbuseReporting.Flags.FFlagAbuseReportTranslateColorWrapper)
-local AddFontStyleToTextWithTranslation = game:DefineFastFlag("AddFontStyleToTextWithTranslation", false)
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseArTranslationFunction (copy), UseOpenLinkModule (copy), ReactModule (copy), UseOptionalAbuseReportAnalyticsFunction (copy), FFlagAbuseReportTranslateColorWrapperModule (copy), TelemetryEventType (copy), ControlState (copy), Text (copy), AddFontStyleToTextWithTranslation (copy)
+	-- upvalues: UseArTranslationFunction (copy), UseOpenLinkModule (copy), ReactModule (copy), UseOptionalAbuseReportAnalyticsFunction (copy), TelemetryEventType (copy), ControlState (copy), Text (copy), AddFontStyleToTextWithTranslation (copy)
 	local TranslateIntoStringFunction = UseArTranslationFunction().translateIntoString
 	local TranslateIntoRichTextStringFunction = UseArTranslationFunction().translateIntoRichTextString
 	local UseOpenLinkModuleResult = UseOpenLinkModule()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseOptionalAbuseReportAnalyticsResult = UseOptionalAbuseReportAnalyticsFunction()
 	local SendEvent = if UseOptionalAbuseReportAnalyticsResult then UseOptionalAbuseReportAnalyticsResult.sendEvent else nil
-	local UseStateResult1 = FFlagAbuseReportTranslateColorWrapperModule and UseStateResult
 	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function()
-		-- upvalues: TranslateIntoRichTextStringFunction (copy), p1 (copy), UseStateResult1 (copy)
-		return TranslateIntoRichTextStringFunction(p1.input, UseStateResult1)
-	end, {
-		p1.input,
-		TranslateIntoRichTextStringFunction,
-		UseStateResult1
-	})
+		-- upvalues: TranslateIntoRichTextStringFunction (copy), p1 (copy)
+		return TranslateIntoRichTextStringFunction(p1.input)
+	end, { p1.input, TranslateIntoRichTextStringFunction })
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseMemoResult2 (copy), SendEvent (copy), TelemetryEventType (upval), p1 (copy), UseOpenLinkModuleResult (copy), TranslateIntoStringFunction (copy)
 		local Href = if UseMemoResult2 ~= nil then UseMemoResult2.href else nil
@@ -58,7 +52,7 @@ return ReactModule.memo(function(p1)
 	return ReactModule.createElement(Text, {
 		RichText = true,
 		TextWrapped = true,
-		Text = if UseStateResult and not FFlagAbuseReportTranslateColorWrapperModule then `<u>{UseMemoResult}</u>` else UseMemoResult,
+		Text = if UseStateResult then `<u>{UseMemoResult}</u>` else UseMemoResult,
 		TextXAlignment = Enum.TextXAlignment.Left,
 		fontStyle = if AddFontStyleToTextWithTranslation then p1.fontStyle else nil,
 		tag = p1.tag,

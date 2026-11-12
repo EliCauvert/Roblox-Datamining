@@ -5,7 +5,9 @@ local RoactRoduxModule = require(Parent.RoactRodux)
 local RoactAppExperimentModule = require(Parent.RoactAppExperiment)
 local RoactModule = require(Parent.Roact)
 local UIBloxModule = require(Parent.UIBlox)
-local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local WithStyleFunction = UIBloxModule.Style.withStyle
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local GetImageDataFunction = require(Parent.RobloxAppAssets).GetImageData
@@ -176,7 +178,7 @@ function PasswordBox.render(p1)
 end
 
 function PasswordBox.renderWithSelectionCursor(p1, Callback)
-	-- upvalues: EnableAndroidPasswordSuggestionEngineFeature (copy), GetFFlagEnableTextFieldContentTypeFunction (copy), WithStyleFunction (copy), GetFFlagLuaAppFixSelectionCursorFunction (copy), CursorKind (copy), RoactModule (copy), ImageSetLabel (copy), GetImageDataFunction (copy), NormalizeFontFaceFunction (copy), GuiObjectInputSinkEngineFeature (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), OpenTypeSupport (copy)
+	-- upvalues: EnableAndroidPasswordSuggestionEngineFeature (copy), GetFFlagEnableTextFieldContentTypeFunction (copy), WithStyleFunction (copy), GetFFlagLuaAppFixSelectionCursorFunction (copy), CursorKind (copy), RoactModule (copy), ImageSetLabel (copy), GetImageDataFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), GuiObjectInputSinkEngineFeature (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), OpenTypeSupport (copy)
 	local Size = p1.props.Size
 	local Position = p1.props.Position
 	local LayoutOrder = p1.props.LayoutOrder
@@ -208,7 +210,7 @@ function PasswordBox.renderWithSelectionCursor(p1, Callback)
 	local NewPasswordShown = EnablePasswordSuggestion and EnableAndroidPasswordSuggestionEngineFeature and Enum.TextInputType.NewPasswordShown or (GetFFlagEnableTextFieldContentTypeFunction() and Enum.TextInputType.PasswordShown or Enum.TextInputType.NoSuggestions)
 	
 	return WithStyleFunction(function(p2)
-		-- upvalues: GetFFlagLuaAppFixSelectionCursorFunction (upval), Callback (copy), CursorKind (upval), RoactModule (upval), ImageSetLabel (upval), Size (copy), Position (copy), LayoutOrder (copy), GetImageDataFunction (upval), Color (copy), Transparency (copy), p1 (copy), Y (copy), Text (copy), PlaceholderText (copy), PlaceholderColor (copy), NormalizeFontFaceFunction (upval), GuiObjectInputSinkEngineFeature (upval), GetFFlagLuaAppEnableOpenTypeSupportFunction (upval), OpenTypeSupport (upval), TextSize (copy), TextColor (copy), TextTransparency (copy), TextXAlignment (copy), ClearTextOnFocus (copy), HidePassword (copy), NewPassword (copy), NewPasswordShown (copy), ReturnKeyType (copy), NextSelectionDown (copy), NextSelectionLeft (copy), NextSelectionRight (copy), NextSelectionUp (copy), OnFocused (copy), OnFocusLost (copy), OnMouseEnter (copy), OnMouseLeave (copy), PaddingY (copy), PaddingX (copy)
+		-- upvalues: GetFFlagLuaAppFixSelectionCursorFunction (upval), Callback (copy), CursorKind (upval), RoactModule (upval), ImageSetLabel (upval), Size (copy), Position (copy), LayoutOrder (copy), GetImageDataFunction (upval), Color (copy), Transparency (copy), p1 (copy), Y (copy), Text (copy), PlaceholderText (copy), PlaceholderColor (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), GuiObjectInputSinkEngineFeature (upval), GetFFlagLuaAppEnableOpenTypeSupportFunction (upval), OpenTypeSupport (upval), TextSize (copy), TextColor (copy), TextTransparency (copy), TextXAlignment (copy), ClearTextOnFocus (copy), HidePassword (copy), NewPassword (copy), NewPasswordShown (copy), ReturnKeyType (copy), NextSelectionDown (copy), NextSelectionLeft (copy), NextSelectionRight (copy), NextSelectionUp (copy), OnFocused (copy), OnFocusLost (copy), OnMouseEnter (copy), OnMouseLeave (copy), PaddingY (copy), PaddingX (copy)
 		local CallbackResult = if GetFFlagLuaAppFixSelectionCursorFunction() then Callback(CursorKind.InputButton) else nil
 		
 		return RoactModule.createElement(ImageSetLabel, {
@@ -236,7 +238,8 @@ function PasswordBox.renderWithSelectionCursor(p1, Callback)
 					Text = Text,
 					PlaceholderText = PlaceholderText,
 					PlaceholderColor3 = PlaceholderColor,
-					FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font),
+					Font = if FoundationFontFaceMigration then nil else p2.Font.Body.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font) else nil,
 					InputSink = if GuiObjectInputSinkEngineFeature then Enum.InputSink.None else nil,
 					OpenTypeFeatures = if GetFFlagLuaAppEnableOpenTypeSupportFunction() then OpenTypeSupport:getPasswordStylisticAlternative() else nil,
 					TextSize = TextSize,

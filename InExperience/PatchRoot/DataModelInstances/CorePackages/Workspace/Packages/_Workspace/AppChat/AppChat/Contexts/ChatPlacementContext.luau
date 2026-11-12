@@ -1,4 +1,6 @@
-﻿local ReactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local ReactModule = require(Parent.React)
+local FFlagExpChatEnableFriendsTab = require(Parent.SharedFlags).FFlagExpChatEnableFriendsTab
 local config = {
 	Unknown = "Unknown",
 	ConnectTab = "ConnectTab",
@@ -28,7 +30,7 @@ return {
 		})
 	end,
 	isPlacementInExperience = function(InExperienceDefault): boolean
-		-- upvalues: config (copy)
-		return InExperienceDefault == config.InExperienceFriendsTab or InExperienceDefault == config.InExperienceDefault
+		-- upvalues: FFlagExpChatEnableFriendsTab (copy), config (copy)
+		return FFlagExpChatEnableFriendsTab and InExperienceDefault == config.InExperienceFriendsTab or InExperienceDefault == config.InExperienceDefault
 	end
 }

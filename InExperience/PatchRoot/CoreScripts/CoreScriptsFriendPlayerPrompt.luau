@@ -17,6 +17,7 @@ local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTra
 local UserRelationshipModalsModule = require(CorePackages.Workspace.Packages.UserRelationshipModals)
 local LegacyThumbnailUrlsModule = require(Modules.Common.LegacyThumbnailUrls)
 local FFlagRemoveHardCodedFriendLimitPromptModule = require(Modules.Flags.FFlagRemoveHardCodedFriendLimitPrompt)
+local FriendRequestModalRevampV4 = game:DefineFastFlag("FriendRequestModalRevampV4", false)
 local FriendRequestModalIxpEnabled = game:DefineFastFlag("FriendRequestModalIxpEnabled", false)
 local FriendRequestModalIxpLayer = game:DefineFastString("FriendRequestModalIxpLayer", "")
 local _ = LegacyThumbnailUrlsModule.Thumbnail
@@ -73,12 +74,82 @@ function AtFriendLimit(Player): boolean
 end
 
 function DoPromptRequestFriendPlayer(Player: Player)
-	-- upvalues: LocalPlayer (ref), FriendRequestModalIxpEnabled (copy), IXPService (copy), FriendRequestModalIxpLayer (copy), UserRelationshipModalsModule (copy)
+	-- upvalues: LocalPlayer (ref), FriendRequestModalIxpEnabled (copy), IXPService (copy), FriendRequestModalIxpLayer (copy), FriendRequestModalRevampV4 (copy), UserRelationshipModalsModule (copy), FFlagRemoveHardCodedFriendLimitPromptModule (copy), PromptCreatorModule (copy), Size150x150 (copy), HeadShot (copy), Size352x352 (copy), AvatarThumbnail (copy), RobloxTranslatorModule (copy)
 	if LocalPlayer:IsFriendsWithAsync(Player.UserId) then return end
 	if FriendRequestModalIxpEnabled then
 		IXPService:LogFlagLinkedUserLayerExposure(FriendRequestModalIxpLayer)
 	end
-	UserRelationshipModalsModule.launchPromptFriendRequestModal(Player.UserId)
+	if FriendRequestModalRevampV4 then
+		UserRelationshipModalsModule.launchPromptFriendRequestModal(Player.UserId)
+		
+		return
+	else
+		PromptCreatorModule:CreatePrompt({
+			ConfirmationText = "Send Request",
+			CancelText = "Cancel",
+			CancelActive = true,
+			Image = "",
+			ImageConsoleVR = "",
+			WindowTitle = RobloxTranslatorModule:FormatByKey("InGame.FriendPlayerPrompt.Title.SendFriendRequest"),
+			MainText = string.format("Would you like to send %s a Friend Request?", Player.Name),
+			FetchImageFunction = createFetchImageFunction(Player.UserId, Size150x150, HeadShot),
+			FetchImageFunctionConsoleVR = createFetchImageFunction(Player.UserId, Size352x352, AvatarThumbnail),
+			PromptCompletedCallback = function(p1)
+				-- upvalues: FFlagRemoveHardCodedFriendLimitPromptModule (upval), LocalPlayer (upval), PromptCreatorModule (upval), Player (copy), Size150x150 (upval), HeadShot (upval), Size352x352 (upval), AvatarThumbnail (upval)
+				if p1 then
+					if not FFlagRemoveHardCodedFriendLimitPromptModule and AtFriendLimit(LocalPlayer) then
+						while PromptCreatorModule:IsCurrentlyPrompting() do
+							wait()
+						end
+						PromptCreatorModule:CreatePrompt({
+							WindowTitle = "Friend Limit Reached",
+							MainText = "You can not send a friend request because you are at the max friend limit.",
+							ConfirmationText = "Okay",
+							CancelActive = false,
+							Image = "",
+							ImageConsoleVR = "",
+							FetchImageFunction = createFetchImageFunction(Player.UserId, Size150x150, HeadShot),
+							FetchImageFunctionConsoleVR = createFetchImageFunction(Player.UserId, Size352x352, AvatarThumbnail),
+							StripeColor = Color3.fromRGB(183, 34, 54)
+						})
+						
+						return
+					elseif not FFlagRemoveHardCodedFriendLimitPromptModule and AtFriendLimit(Player) then
+						PromptCreatorModule:CreatePrompt({
+							WindowTitle = "Error Sending Friend Request",
+							ConfirmationText = "Okay",
+							CancelActive = false,
+							Image = "",
+							ImageConsoleVR = "",
+							MainText = string.format("You can not send a friend request to %s because they are at the max friend limit.", Player.Name),
+							FetchImageFunction = createFetchImageFunction(Player.UserId, Size150x150, HeadShot),
+							FetchImageFunctionConsoleVR = createFetchImageFunction(Player.UserId, Size352x352, AvatarThumbnail),
+							StripeColor = Color3.fromRGB(183, 34, 54)
+						})
+						
+						return
+					else
+						if not SendFriendRequest(Player) then
+							while PromptCreatorModule:IsCurrentlyPrompting() do
+								wait()
+							end
+							PromptCreatorModule:CreatePrompt({
+								WindowTitle = "Error Sending Friend Request",
+								ConfirmationText = "Okay",
+								CancelActive = false,
+								Image = "",
+								ImageConsoleVR = "",
+								MainText = string.format("An error occurred while sending %s a friend request. Please try again later.", Player.Name),
+								FetchImageFunction = createFetchImageFunction(Player.UserId, Size150x150, HeadShot),
+								FetchImageFunctionConsoleVR = createFetchImageFunction(Player.UserId, Size352x352, AvatarThumbnail),
+								StripeColor = Color3.fromRGB(183, 34, 54)
+							})
+						end
+					end
+				end
+			end
+		})
+	end
 end
 
 function PromptRequestFriendPlayer(Player: Player)

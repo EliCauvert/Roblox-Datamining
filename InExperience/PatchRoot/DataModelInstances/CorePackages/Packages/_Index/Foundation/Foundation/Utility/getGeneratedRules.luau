@@ -224,9 +224,31 @@ local config2 = {
 		end
 	}
 }
+local config3 = {
+	[FontNameModule.BuilderSans] = {
+		Desktop = function()
+			-- upvalues: Foundation (copy)
+			return require(Foundation.Generated.StyleRules.Legacy.Typography.BuilderSans.DesktopAttribute)
+		end,
+		Console = function()
+			-- upvalues: Foundation (copy)
+			return require(Foundation.Generated.StyleRules.Legacy.Typography.BuilderSans.ConsoleAttribute)
+		end
+	},
+	[FontNameModule.Cartoon] = {
+		Desktop = function()
+			-- upvalues: Foundation (copy)
+			return require(Foundation.Generated.StyleRules.Legacy.Typography.Cartoon.DesktopAttribute)
+		end,
+		Console = function()
+			-- upvalues: Foundation (copy)
+			return require(Foundation.Generated.StyleRules.Legacy.Typography.Cartoon.ConsoleAttribute)
+		end
+	}
+}
 
 return function(p1, p2, Console)
-	-- upvalues: ThemeNameModule (copy), config (copy), config1 (copy), DeviceModule (copy), FlagsModule (copy), TypographyVariantsModule (copy), BuilderSans (copy), config2 (copy)
+	-- upvalues: ThemeNameModule (copy), config (copy), config1 (copy), DeviceModule (copy), FlagsModule (copy), TypographyVariantsModule (copy), BuilderSans (copy), config2 (copy), config3 (copy)
 	local P0 = p1 or ThemeNameModule.Default
 	local CommonResult = config.Common()
 	local v1 = (config1[P0] or config1[ThemeNameModule.Default])[p2]()
@@ -243,7 +265,8 @@ return function(p1, p2, Console)
 	for i1, value1 in v1 do
 		Copy[i1] = value1
 	end
-	local Entry = (config2[TypographyVariantsModule[P0] or BuilderSans] or config2[BuilderSans])[if Console == DeviceModule.Console and not FlagsModule.FoundationDisableTokenScaling then DeviceModule.Console else DeviceModule.Desktop]
+	local TypographyVariantsModuleEntry = TypographyVariantsModule[P0] or BuilderSans
+	local Entry = (if FlagsModule.FoundationFontFaceMigration then config2[TypographyVariantsModuleEntry] or config2[BuilderSans] else config3[TypographyVariantsModuleEntry] or config3[BuilderSans])[if Console == DeviceModule.Console and not FlagsModule.FoundationDisableTokenScaling then DeviceModule.Console else DeviceModule.Desktop]
 	
 	if Entry then
 		local EntryResult = Entry()

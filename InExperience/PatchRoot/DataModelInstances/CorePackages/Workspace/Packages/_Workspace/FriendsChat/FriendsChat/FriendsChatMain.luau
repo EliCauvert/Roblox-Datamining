@@ -10,6 +10,7 @@ local EnumScreensModule = require(Parent.AppChat.EnumScreens)
 local GetChatModerationStatusDataHydrationModule = require(Parent.AppChat.GetChatModerationStatusDataHydration)
 local InExperienceAppChatModalModule = require(Parent.AppChat.InExperienceAppChatModal)
 local IXPNavigationUtilsModule = require(Parent.AppChat.IXPNavigationUtils)
+local GetFFlagAppChatEnableRootedNavigationModule = require(Parent.AppChat.getFFlagAppChatEnableRootedNavigation)
 local LocalizationProvider = require(Parent.Localization).LocalizationProvider
 local Localization = require(Parent.RobloxAppLocales).Localization
 local UseChatWindowSettingsModule = require(Parent.ExpChatIntegration.useChatWindowSettings)
@@ -31,31 +32,15 @@ local FriendsChatConversationTelemetryProvidersModule = require(script.Parent.Te
 local ExpChatPerfTracker = require(Parent.ChatUIPrimitives).Telemetry.ExpChatPerfTracker
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagAppChatReactiveFeatureRestrictions = SharedFlagsModule.FFlagAppChatReactiveFeatureRestrictions
+local FFlagExpChatEnableFriendsTab = SharedFlagsModule.FFlagExpChatEnableFriendsTab
 local FFlagFriendsChatConversationListFocusNav = SharedFlagsModule.FFlagFriendsChatConversationListFocusNav
 local FFlagFriendsChatFocusInputOnConversationActivatedModule = require(script.Parent.Flags.FFlagFriendsChatFocusInputOnConversationActivated)
 local FFlagFriendsChatIxpScreenExposureModule = require(script.Parent.Flags.FFlagFriendsChatIxpScreenExposure)
-local FFlagFriendsChatIxpParallelScreenLayersModule = require(script.Parent.Flags.FFlagFriendsChatIxpParallelScreenLayers)
-local FStringFriendsChatLandingConversationRowsIxpLayerModule = require(script.Parent.Flags.FStringFriendsChatLandingConversationRowsIxpLayer)
-local FStringFriendsChatLandingConversationListIxpLayerModule = require(script.Parent.Flags.FStringFriendsChatLandingConversationListIxpLayer)
-local FStringFriendsChatLandingPerformanceIxpLayerModule = require(script.Parent.Flags.FStringFriendsChatLandingPerformanceIxpLayer)
-local FStringFriendsChatConversationComposerIxpLayerModule = require(script.Parent.Flags.FStringFriendsChatConversationComposerIxpLayer)
-local FStringFriendsChatConversationMessagesIxpLayerModule = require(script.Parent.Flags.FStringFriendsChatConversationMessagesIxpLayer)
-local FStringFriendsChatConversationPerformanceIxpLayerModule = require(script.Parent.Flags.FStringFriendsChatConversationPerformanceIxpLayer)
 local Exposure = IXPNavigationUtilsModule.createExposureHandler((require(script.Parent.Flags.FStringFriendsChatLandingPageIxpLayer)))
 local Exposure1 = IXPNavigationUtilsModule.createExposureHandler((require(script.Parent.Flags.FStringFriendsChatConversationPageIxpLayer)))
-local List = if FFlagFriendsChatIxpParallelScreenLayersModule then {
-	IXPNavigationUtilsModule.createExposureHandler(FStringFriendsChatLandingConversationRowsIxpLayerModule),
-	IXPNavigationUtilsModule.createExposureHandler(FStringFriendsChatLandingConversationListIxpLayerModule),
-	IXPNavigationUtilsModule.createExposureHandler(FStringFriendsChatLandingPerformanceIxpLayerModule)
-} else {}
-local List1 = if FFlagFriendsChatIxpParallelScreenLayersModule then {
-	IXPNavigationUtilsModule.createExposureHandler(FStringFriendsChatConversationComposerIxpLayerModule),
-	IXPNavigationUtilsModule.createExposureHandler(FStringFriendsChatConversationMessagesIxpLayerModule),
-	IXPNavigationUtilsModule.createExposureHandler(FStringFriendsChatConversationPerformanceIxpLayerModule)
-} else {}
 
 local function FriendsChatMainContent(p1)
-	-- upvalues: UseFriendsChatVisibilityTelemetryModule (copy), UseChatWindowSettingsModule (copy), ReactModule (copy), GetChatModerationStatusDataHydrationModule (copy), GetFriendsChatNavigationStoreModule (copy), GetFriendsChatRealtimeStoreModule (copy), FFlagFriendsChatConversationListFocusNav (copy), ReactFocusNavigationModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy), UsePartyChatReactiveFeatureRestrictionModule (copy), ExpChatPerfTracker (copy), FriendsChatTabNameModule (copy), SignalsReactModule (copy), FFlagFriendsChatIxpScreenExposureModule (copy), Exposure1 (copy), Exposure (copy), FFlagFriendsChatIxpParallelScreenLayersModule (copy), List1 (copy), List (copy), Players (copy), Localization (copy), LocalizationService (copy), FFlagFriendsChatFocusInputOnConversationActivatedModule (copy), ChatSessionRefCountModule (copy), InExperienceAppChatModalModule (copy), EnumScreensModule (copy), SocialCommonModule (copy), FriendsChatLandingTelemetryProvidersModule (copy), ConversationListModule (copy), FriendsChatConversationTelemetryProvidersModule (copy), FriendsChatConversationWindowModule (copy), LocalizationProvider (copy), FoundationModule (copy)
+	-- upvalues: UseFriendsChatVisibilityTelemetryModule (copy), UseChatWindowSettingsModule (copy), ReactModule (copy), GetChatModerationStatusDataHydrationModule (copy), GetFriendsChatNavigationStoreModule (copy), GetFriendsChatRealtimeStoreModule (copy), FFlagFriendsChatConversationListFocusNav (copy), ReactFocusNavigationModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy), UsePartyChatReactiveFeatureRestrictionModule (copy), FFlagExpChatEnableFriendsTab (copy), ExpChatPerfTracker (copy), FriendsChatTabNameModule (copy), SignalsReactModule (copy), FFlagFriendsChatIxpScreenExposureModule (copy), Exposure1 (copy), Exposure (copy), Players (copy), Localization (copy), LocalizationService (copy), FFlagFriendsChatFocusInputOnConversationActivatedModule (copy), ChatSessionRefCountModule (copy), InExperienceAppChatModalModule (copy), EnumScreensModule (copy), SocialCommonModule (copy), FriendsChatLandingTelemetryProvidersModule (copy), ConversationListModule (copy), FriendsChatConversationTelemetryProvidersModule (copy), FriendsChatConversationWindowModule (copy), GetFFlagAppChatEnableRootedNavigationModule (copy), LocalizationProvider (copy), FoundationModule (copy)
 	UseFriendsChatVisibilityTelemetryModule()
 	local UseChatWindowSettingsModuleResult = UseChatWindowSettingsModule()
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -78,8 +63,8 @@ local function FriendsChatMainContent(p1)
 		FriendsChatRealtimeStoreModule.markFriendsTabEntered()
 	end, { FriendsChatRealtimeStoreModule })
 	ReactModule.useEffect(function()
-		-- upvalues: FFlagAppChatReactiveFeatureRestrictions (upval), ChatModerationStatusDataHydrationModule (copy)
-		if not FFlagAppChatReactiveFeatureRestrictions then
+		-- upvalues: FFlagExpChatEnableFriendsTab (upval), FFlagAppChatReactiveFeatureRestrictions (upval), ChatModerationStatusDataHydrationModule (copy)
+		if FFlagExpChatEnableFriendsTab and not FFlagAppChatReactiveFeatureRestrictions then
 			ChatModerationStatusDataHydrationModule.getUserStatus()
 		end
 	end, { ChatModerationStatusDataHydrationModule })
@@ -105,13 +90,6 @@ local function FriendsChatMainContent(p1)
 		if UseRefResult.current ~= HasUseSignalStateResult then
 			UseRefResult.current = HasUseSignalStateResult
 			pcall(if HasUseSignalStateResult then Exposure1 else Exposure)
-			
-			if FFlagFriendsChatIxpParallelScreenLayersModule then
-				local List2 = if HasUseSignalStateResult then List1 else List
-				for _, value in List2 do
-					pcall(value)
-				end
-			end
 		end
 	end
 	local ChatWindowSettings = p1.chatWindowSettings or UseMemoResult
@@ -196,7 +174,7 @@ local function FriendsChatMainContent(p1)
 					onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged,
 					onAbsolutePositionChanged = p1.onAbsolutePositionChanged,
 					onBack = UseResult2,
-					onOpenDetails = UseResult3,
+					onOpenDetails = if GetFFlagAppChatEnableRootedNavigationModule() then UseResult3 else nil,
 					onFriendPlaceholderConversationCreated = UseResult4
 				})
 			})
@@ -204,22 +182,22 @@ local function FriendsChatMainContent(p1)
 	})
 end
 
-return function(p2)
-	-- upvalues: Players (copy), LocalizationService (copy), RbxAnalyticsService (copy), UseAppChatUpdateSessionModule (copy), ReactModule (copy), SocialCommonModule (copy), ChatPlacementContextModule (copy), UseGetAndSetRefModule (copy), AppTelemetryLayerModule (copy), FriendsChatMainContent (copy)
+return function(p1)
+	-- upvalues: Players (copy), LocalizationService (copy), RbxAnalyticsService (copy), UseAppChatUpdateSessionModule (copy), ReactModule (copy), FFlagExpChatEnableFriendsTab (copy), ChatPlacementContextModule (copy), SocialCommonModule (copy), UseGetAndSetRefModule (copy), AppTelemetryLayerModule (copy), FriendsChatMainContent (copy)
 	local LocalPlayer = Players.LocalPlayer
 	local Text: string = if LocalPlayer then tostring(LocalPlayer.UserId) else "unknown"
 	local RobloxLocaleId = LocalizationService.RobloxLocaleId
 	local PlaySessionId = RbxAnalyticsService:GetPlaySessionId()
 	UseAppChatUpdateSessionModule()
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: RobloxLocaleId (copy), SocialCommonModule (upval), Text (copy), ChatPlacementContextModule (upval), PlaySessionId (copy)
+		-- upvalues: FFlagExpChatEnableFriendsTab (upval), ChatPlacementContextModule (upval), RobloxLocaleId (copy), SocialCommonModule (upval), Text (copy), PlaySessionId (copy)
 		return {
 			context = "platformChat",
 			currentSquadId = nil,
 			locale = RobloxLocaleId,
 			entryPoint = SocialCommonModule.Enums.ChatEntryPointNames.ExperienceChatTabBar,
 			userId = Text,
-			placement = ChatPlacementContextModule.Enum.InExperienceFriendsTab,
+			placement = if FFlagExpChatEnableFriendsTab then ChatPlacementContextModule.Enum.InExperienceFriendsTab else ChatPlacementContextModule.Enum.InExperienceDefault,
 			playSessionId = PlaySessionId
 		}
 	end, { RobloxLocaleId, Text, PlaySessionId })
@@ -230,6 +208,6 @@ return function(p2)
 	end, { UseMemoResult, UseGetAndSetRefModuleResult2 })
 	
 	return ReactModule.createElement(AppTelemetryLayerModule.Provider, { value = UseGetAndSetRefModuleResult }, {
-		Content = ReactModule.createElement(FriendsChatMainContent, p2)
+		Content = ReactModule.createElement(FriendsChatMainContent, p1)
 	})
 end

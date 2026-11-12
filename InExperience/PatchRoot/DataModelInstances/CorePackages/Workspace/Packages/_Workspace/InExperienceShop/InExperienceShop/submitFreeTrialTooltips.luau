@@ -78,7 +78,10 @@ local _ = function(p1)
 end
 
 local _ = function(p1)
-	-- upvalues: FFlagEnableActiveFreeTrialTooltipModule (copy), config1 (copy), FFlagEnableRedeemedFreeTrialTooltipModule (copy), HasRedeemedTrialWithinWindowModule (copy), config (copy)
+	-- upvalues: FFlagEnableRedeemedFreeTrialTooltipModule (copy), HasRedeemedTrialWithinWindowModule (copy), config1 (copy), FFlagEnableActiveFreeTrialTooltipModule (copy), config (copy)
+	if FFlagEnableRedeemedFreeTrialTooltipModule and HasRedeemedTrialWithinWindowModule(p1.redeemed) then
+		return config1
+	end
 	if FFlagEnableActiveFreeTrialTooltipModule then
 		local _, Value = next(p1.active)
 		
@@ -86,13 +89,9 @@ local _ = function(p1)
 			return config1
 		end
 	end
-	if FFlagEnableRedeemedFreeTrialTooltipModule and HasRedeemedTrialWithinWindowModule(p1.redeemed) then
-		return config1
-	else
-		local _, Value1 = next(p1.available)
-		
-		return if Value1 == true then config else nil
-	end
+	local _, Value1 = next(p1.available)
+	
+	return if Value1 == true then config else nil
 end
 
 local function chooseSlot(p1)
@@ -211,17 +210,21 @@ end
 local Flag = false
 
 local _ = function()
-	-- upvalues: v1 (ref), GetInExperienceShopStoreModule (copy), Effect (ref), SignalsModule (copy), FFlagEnableActiveFreeTrialTooltipModule (copy), config1 (copy), FFlagEnableRedeemedFreeTrialTooltipModule (copy), HasRedeemedTrialWithinWindowModule (copy), config (copy), Flag (ref), chooseSlot (copy), v2 (ref), DelayMs (ref), DurationMs (ref), Action (ref), GamePassId (ref), firstRedeemedGamePassId (copy), Signal2 (copy), submitTooltip (copy), isTrialTooltipShowing (copy)
+	-- upvalues: v1 (ref), GetInExperienceShopStoreModule (copy), Effect (ref), SignalsModule (copy), FFlagEnableRedeemedFreeTrialTooltipModule (copy), HasRedeemedTrialWithinWindowModule (copy), config1 (copy), FFlagEnableActiveFreeTrialTooltipModule (copy), config (copy), Flag (ref), chooseSlot (copy), v2 (ref), DelayMs (ref), DurationMs (ref), Action (ref), GamePassId (ref), firstRedeemedGamePassId (copy), Signal2 (copy), submitTooltip (copy), isTrialTooltipShowing (copy)
 	local v5 = v1
 	
 	if v5 == nil then
 		local v6 = false
 		local InExperienceShopStoreModule = GetInExperienceShopStoreModule(false)
 		Effect = SignalsModule.createEffect(function(p1)
-			-- upvalues: InExperienceShopStoreModule (copy), FFlagEnableActiveFreeTrialTooltipModule (upval), config1 (upval), FFlagEnableRedeemedFreeTrialTooltipModule (upval), HasRedeemedTrialWithinWindowModule (upval), config (upval), Flag (upval), v6 (ref), chooseSlot (upval), v2 (upval), DelayMs (upval), DurationMs (upval), Action (upval), GamePassId (upval), firstRedeemedGamePassId (upval), Signal2 (upval), submitTooltip (upval)
+			-- upvalues: InExperienceShopStoreModule (copy), FFlagEnableRedeemedFreeTrialTooltipModule (upval), HasRedeemedTrialWithinWindowModule (upval), config1 (upval), FFlagEnableActiveFreeTrialTooltipModule (upval), config (upval), Flag (upval), v6 (ref), chooseSlot (upval), v2 (upval), DelayMs (upval), DurationMs (upval), Action (upval), GamePassId (upval), firstRedeemedGamePassId (upval), Signal2 (upval), submitTooltip (upval)
 			local TrialAvailabilities = InExperienceShopStoreModule.getTrialAvailabilities(p1)
 			local ActiveTooltip = nil
 			repeat
+				if FFlagEnableRedeemedFreeTrialTooltipModule and HasRedeemedTrialWithinWindowModule(TrialAvailabilities.redeemed) then
+					ActiveTooltip = config1
+					break
+				end
 				if FFlagEnableActiveFreeTrialTooltipModule then
 					local _, Value = next(TrialAvailabilities.active)
 					
@@ -229,10 +232,6 @@ local _ = function()
 						ActiveTooltip = config1
 						break
 					end
-				end
-				if FFlagEnableRedeemedFreeTrialTooltipModule and HasRedeemedTrialWithinWindowModule(TrialAvailabilities.redeemed) then
-					ActiveTooltip = config1
-					break
 				end
 				local _, Value1 = next(TrialAvailabilities.available)
 				local IsValue = Value1 == true
@@ -248,22 +247,17 @@ local _ = function()
 			DurationMs = ActiveTooltip.durationMs
 			Action = ActiveTooltip.action
 			local v7 = nil
-			repeat
-				if ActiveTooltip.action ~= "promptGamePassPurchase" then
-					v7 = nil
-					break
+			
+			if ActiveTooltip.action == "promptGamePassPurchase" then
+				if FFlagEnableRedeemedFreeTrialTooltipModule and HasRedeemedTrialWithinWindowModule(TrialAvailabilities.redeemed) then
+					v7 = firstRedeemedGamePassId(TrialAvailabilities)
+				else
+					local Key, Value2 = next(TrialAvailabilities.active)
+					v7 = if Value2 == true then Key else nil
 				end
-				if FFlagEnableActiveFreeTrialTooltipModule then
-					local _, Value2 = next(TrialAvailabilities.active)
-					
-					if Value2 == true then
-						local Key, Value3 = next(TrialAvailabilities.active)
-						v7 = if Value3 == true then Key else nil
-						break
-					end
-				end
-				v7 = firstRedeemedGamePassId(TrialAvailabilities)
-			until true
+			else
+				v7 = nil
+			end
 			GamePassId = v7
 			Signal2(submitTooltip(SlotId, ActiveTooltip))
 		end)
@@ -322,25 +316,25 @@ return (setmetatable({
 	end
 }, {
 	__call = function(_)
-		-- upvalues: v1 (ref), GetInExperienceShopStoreModule (copy), Effect (ref), SignalsModule (copy), FFlagEnableActiveFreeTrialTooltipModule (copy), config1 (copy), FFlagEnableRedeemedFreeTrialTooltipModule (copy), HasRedeemedTrialWithinWindowModule (copy), config (copy), Flag (ref), chooseSlot (copy), v2 (ref), DelayMs (ref), DurationMs (ref), Action (ref), GamePassId (ref), firstRedeemedGamePassId (copy), Signal2 (copy), submitTooltip (copy), isTrialTooltipShowing (copy)
+		-- upvalues: v1 (ref), GetInExperienceShopStoreModule (copy), Effect (ref), SignalsModule (copy), FFlagEnableRedeemedFreeTrialTooltipModule (copy), HasRedeemedTrialWithinWindowModule (copy), config1 (copy), FFlagEnableActiveFreeTrialTooltipModule (copy), config (copy), Flag (ref), chooseSlot (copy), v2 (ref), DelayMs (ref), DurationMs (ref), Action (ref), GamePassId (ref), firstRedeemedGamePassId (copy), Signal2 (copy), submitTooltip (copy), isTrialTooltipShowing (copy)
 		local v5 = v1
 		
 		if v5 == nil then
 			local v6 = false
 			local InExperienceShopStoreModule = GetInExperienceShopStoreModule(false)
 			Effect = SignalsModule.createEffect(function(p1)
-				-- upvalues: InExperienceShopStoreModule (copy), FFlagEnableActiveFreeTrialTooltipModule (upval), config1 (upval), FFlagEnableRedeemedFreeTrialTooltipModule (upval), HasRedeemedTrialWithinWindowModule (upval), config (upval), Flag (upval), v6 (ref), chooseSlot (upval), v2 (upval), DelayMs (upval), DurationMs (upval), Action (upval), GamePassId (upval), firstRedeemedGamePassId (upval), Signal2 (upval), submitTooltip (upval)
+				-- upvalues: InExperienceShopStoreModule (copy), FFlagEnableRedeemedFreeTrialTooltipModule (upval), HasRedeemedTrialWithinWindowModule (upval), config1 (upval), FFlagEnableActiveFreeTrialTooltipModule (upval), config (upval), Flag (upval), v6 (ref), chooseSlot (upval), v2 (upval), DelayMs (upval), DurationMs (upval), Action (upval), GamePassId (upval), firstRedeemedGamePassId (upval), Signal2 (upval), submitTooltip (upval)
 				local TrialAvailabilities = InExperienceShopStoreModule.getTrialAvailabilities(p1)
 				local ActiveTooltip = nil
+				if FFlagEnableRedeemedFreeTrialTooltipModule and HasRedeemedTrialWithinWindowModule(TrialAvailabilities.redeemed) then
+					ActiveTooltip = config1
+				end
 				if FFlagEnableActiveFreeTrialTooltipModule then
 					local _, Value = next(TrialAvailabilities.active)
 					
 					if Value == true then
 						ActiveTooltip = config1
 					end
-				end
-				if FFlagEnableRedeemedFreeTrialTooltipModule and HasRedeemedTrialWithinWindowModule(TrialAvailabilities.redeemed) then
-					ActiveTooltip = config1
 				end
 				local _, Value1 = next(TrialAvailabilities.available)
 				local IsValue = Value1 == true

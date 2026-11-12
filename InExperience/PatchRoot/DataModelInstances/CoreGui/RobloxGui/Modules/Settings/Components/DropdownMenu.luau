@@ -2,7 +2,9 @@
 local ReactModule = require(CorePackages.Packages.React)
 local RoactModule = require(CorePackages.Packages.Roact)
 local UIBloxModule = require(CorePackages.Packages.UIBlox)
-local NormalizeFontFaceFunction = require(CorePackages.Packages.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local TModule = require(CorePackages.Packages.t)
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
@@ -17,7 +19,7 @@ local WrapResult = require(CorePackages.Workspace.Packages.ArgCheck).wrap(TModul
 }))
 
 return function(p1)
-	-- upvalues: WrapResult (copy), UseStyleFunction (copy), ReactModule (copy), RoactModule (copy), NormalizeFontFaceFunction (copy), ImageSetLabel (copy), IconsActionsTruncationExpandSmall (copy), BaseMenu (copy)
+	-- upvalues: WrapResult (copy), UseStyleFunction (copy), ReactModule (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ImageSetLabel (copy), IconsActionsTruncationExpandSmall (copy), BaseMenu (copy)
 	assert(WrapResult(p1))
 	local UseStyleResult = UseStyleFunction()
 	local CaptionHeader = UseStyleResult.Font.CaptionHeader
@@ -65,7 +67,8 @@ return function(p1)
 			Text = p1.dropdownList[p1.selectedIndex],
 			TextColor3 = Color3.new(1, 1, 1),
 			TextSize = ScaledRelativeSize,
-			FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionLarge.Font),
+			Font = if FoundationFontFaceMigration then nil else CaptionHeader.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionLarge.Font) else nil,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			BackgroundColor3 = ControlInputBackground,
 			BackgroundTransparency = 0,

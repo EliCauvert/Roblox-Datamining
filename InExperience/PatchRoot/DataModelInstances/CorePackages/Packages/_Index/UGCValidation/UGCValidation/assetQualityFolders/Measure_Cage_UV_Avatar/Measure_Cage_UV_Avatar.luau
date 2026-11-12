@@ -11,6 +11,7 @@ return {
 	categories = {
 		require(Parent.validationSystem.ValidationEnums).UploadCategory.FULL_BODY
 	},
+	fflag = require(Parent.flags.getFFlagUGCValidateAQCageQualityAvatar),
 	run = function(p1, p2)
 		-- upvalues: GetFFlagUGCValidateLCCageUVScoreCheckModule (copy), ConstantsModule (copy), UGCValidateLCCageUVAvatarMinScore (copy), ErrorSourceStringsModule (copy), GetFFlagUGCValidateAQScoreWarningsModule (copy), UGCValidateLCCagingIncorrectUVThresholdBodyPart (copy)
 		local MeasureCageUVAvatar = p2.aqsSummaryData.Measure_Cage_UV_Avatar

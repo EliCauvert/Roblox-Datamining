@@ -336,9 +336,9 @@ local function tokenizeTextSpan(Text: string, NewOffset: number, p2, p3)
 	local IsTABLEROW = false
 	local IsIsStreaming: boolean = Flags.FFlagMarkdownTables and p3.isStreaming == true
 	local InlineCodeTracker = if Flags.FFlagMarkdownTagFallbacks then createInlineCodeTracker(Text) else nil
+	local Segment = nil
 	local v6 = nil
 	local v7 = nil
-	local Segment = nil
 	local Flag = nil
 	while StartIndex1 <= #Text do
 		Segment = if StartIndex1 == 0 and not p2 then "\n" else string.sub(Text, StartIndex1, StartIndex1)

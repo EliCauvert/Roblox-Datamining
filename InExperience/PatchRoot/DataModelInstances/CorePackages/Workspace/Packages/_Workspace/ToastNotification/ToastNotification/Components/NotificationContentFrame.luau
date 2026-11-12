@@ -17,17 +17,18 @@ local ReactModule = require(Parent2.React)
 local FoundationModule = require(Parent2.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local DefaultContentPadding = ConstantsModule.DefaultContentPadding
 local DefaultTextContentPadding = ConstantsModule.DefaultTextContentPadding
 local _Vector2 = Vector2.new(36, 36)
 local IsUserThumbnailFunction = require(Parent1.utils.toastNotificationHelper).isUserThumbnail
 
 return function(p1)
-	-- upvalues: UseStyleFunction (copy), UseTokensFunction (copy), UseNotificationCardDataModule (copy), IsUserThumbnailFunction (copy), UseNotificationCardStateModule (copy), ReactModule (copy), ConstantsModule (copy), NormalizeFontFaceFunction (copy), DefaultContentPadding (copy), _Vector2 (copy), NotificationThumbnailModule (copy), DefaultTextContentPadding (copy), NotificationStyledTextModule (copy), ToastHoldButtonModule (copy), Interactable (copy), ImageSetLabel (copy), TypeModule (copy)
+	-- upvalues: UseStyleFunction (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), UseNotificationCardDataModule (copy), IsUserThumbnailFunction (copy), UseNotificationCardStateModule (copy), ReactModule (copy), ConstantsModule (copy), NormalizeFontFaceFunction (copy), DefaultContentPadding (copy), _Vector2 (copy), NotificationThumbnailModule (copy), DefaultTextContentPadding (copy), NotificationStyledTextModule (copy), ToastHoldButtonModule (copy), Interactable (copy), ImageSetLabel (copy), TypeModule (copy)
 	local UseStyleResult = UseStyleFunction()
-	local UseTokensResult = UseTokensFunction()
-	local FontSize: number = UseTokensResult.Typography.CaptionLarge.FontSize
-	local FontSize1: number = UseTokensResult.Typography.BodySmall.FontSize
+	local UseTokensResult = if FoundationFontFaceMigration then UseTokensFunction() else nil
+	local FontSize = if FoundationFontFaceMigration then UseTokensResult.Typography.CaptionLarge.FontSize else UseStyleResult.Font.BaseSize * UseStyleResult.Font.CaptionHeader.RelativeSize
+	local FontSize1 = if FoundationFontFaceMigration then UseTokensResult.Typography.BodySmall.FontSize else UseStyleResult.Font.BaseSize * UseStyleResult.Font.CaptionBody.RelativeSize
 	local CardSize = UseNotificationCardDataModule().cardSize
 	local UseMemoResult = nil
 	
@@ -65,7 +66,8 @@ return function(p1)
 		TextSize = FontSize,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		TextXAlignment = Enum.TextXAlignment.Left,
-		FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.CaptionLarge.Font),
+		Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.CaptionHeader.Font,
+		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.CaptionLarge.Font) else nil,
 		TextColor3 = UseStyleResult.Theme.TextEmphasis.Color
 	})
 	local Config1 = TextBodyEntry and (TextBodyEntry.label and {
@@ -76,7 +78,8 @@ return function(p1)
 		TextSize = FontSize1,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		TextXAlignment = Enum.TextXAlignment.Left,
-		FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.BodySmall.Font)
+		Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.CaptionBody.Font,
+		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.BodySmall.Font) else nil
 	})
 	local UseNotificationCardDataModuleResult = UseNotificationCardDataModule()
 	CardSize = UseNotificationCardDataModuleResult.cardSize

@@ -5,6 +5,7 @@ local FoundationModule = require(Parent.Foundation)
 local IconSize = FoundationModule.Enums.IconSize
 local Loading = FoundationModule.Loading
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local AnalyticsServiceModule = require(AmpUpsell.Analytics.AnalyticsService)
@@ -23,13 +24,14 @@ local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelec
 local IdvWithQRCodeUpsellStrings = require(AmpUpsell.Common.LocalizationStrings).idvWithQRCodeUpsellStrings
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), IdvWithQRCodeUpsellStrings (copy), UseStyleFunction (copy), AnalyticsServiceModule (copy), UseSelectorFunction (copy), ReactModule (copy), PartialPageModal (copy), SendButtonClickEventModule (copy), AppScreensModule (copy), StyledTextLabel (copy), DirectionsTileModule (copy), ProgressChecklistModule (copy), DisplayQRCode (copy), ECLevels (copy), Loading (copy), IconSize (copy), NormalizeFontFaceFunction (copy), LinkButton (copy)
+	-- upvalues: UseLocalizationFunction (copy), IdvWithQRCodeUpsellStrings (copy), UseStyleFunction (copy), AnalyticsServiceModule (copy), UseSelectorFunction (copy), ReactModule (copy), PartialPageModal (copy), SendButtonClickEventModule (copy), AppScreensModule (copy), StyledTextLabel (copy), DirectionsTileModule (copy), ProgressChecklistModule (copy), DisplayQRCode (copy), ECLevels (copy), Loading (copy), IconSize (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), LinkButton (copy)
 	local FeatureName = p1.featureName
 	local QrCodeLink = p1.qrCodeLink
 	local UseLocalizationResult = UseLocalizationFunction(IdvWithQRCodeUpsellStrings)
 	local UseStyleResult = UseStyleFunction()
 	local OnCloseFunction = p1.onClose
 	local OpenPrivacyPolicyLinkFunction = p1.openPrivacyPolicyLink
+	local BodyFont = UseStyleResult.Font.Body.Font
 	local Transparency = UseStyleResult.Theme.TextEmphasis.Transparency
 	local ScaledBaseSize = UseStyleResult.Font.BaseSize * UseStyleResult.Font.CaptionBody.RelativeSize
 	local AnalyticsService = if p1.analyticsService then p1.analyticsService else AnalyticsServiceModule.EventStream
@@ -167,7 +169,8 @@ return function(p1)
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
 					Text = UseLocalizationResult.disclaimer,
-					FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
+					Font = if FoundationFontFaceMigration then nil else BodyFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 					TextSize = ScaledBaseSize,
 					TextColor3 = UseStyleResult.Theme.TextDefault.Color,
 					TextTransparency = Transparency,

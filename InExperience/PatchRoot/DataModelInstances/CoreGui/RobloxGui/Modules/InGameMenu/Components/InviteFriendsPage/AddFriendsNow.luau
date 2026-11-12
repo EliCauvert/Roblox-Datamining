@@ -1,4 +1,5 @@
-﻿local CorePackages = game:GetService("CorePackages")
+﻿local TextService = game:GetService("TextService")
+local CorePackages = game:GetService("CorePackages")
 local GuiService = game:GetService("GuiService")
 local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
 local Roact = InGameMenuDependenciesModule.Roact
@@ -17,7 +18,9 @@ local FocusHandlerModule = require(Parent.Components.Connection.FocusHandler)
 local RootedConnectionModule = require(Parent.Components.Connection.RootedConnection)
 local SetCurrentPageModule = require(Parent.Actions.SetCurrentPage)
 local ImageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
-local Image = require(CorePackages.Packages.Foundation).Image
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local Image = FoundationModule.Image
 local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
 local AddFriendsNow = Roact.PureComponent:extend("AddFriendsNow")
 AddFriendsNow.validateProps = T.strictInterface({
@@ -31,27 +34,31 @@ function AddFriendsNow.init(p1)
 end
 
 function AddFriendsNow.render(p1)
-	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), WithLocalizationModule (copy), GetTextSizeFunction (copy), Roact (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), AssetsModule (copy), ImageSetLabel (copy), ThemedTextLabelModule (copy), RootedConnectionModule (copy), FocusHandlerModule (copy), GuiService (copy), Button (copy), ButtonType (copy)
+	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), WithLocalizationModule (copy), GetTextSizeFunction (copy), TextService (copy), Roact (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), AssetsModule (copy), ImageSetLabel (copy), ThemedTextLabelModule (copy), RootedConnectionModule (copy), FocusHandlerModule (copy), GuiService (copy), Button (copy), ButtonType (copy)
 	local Props = p1.props
 	
-	return WithFoundationOrUIBloxStyleFunction(function(Tokens)
+	return WithFoundationOrUIBloxStyleFunction(function(p2)
+		-- upvalues: FoundationFontFaceMigration (upval)
 		return {
-			Tokens = Tokens,
+			Tokens = if FoundationFontFaceMigration then p2 else nil,
 			Font = {
 				BaseSize = 1,
 				Body = {
-					Font = Tokens.Typography.BodyLarge.Font,
-					RelativeSize = Tokens.Typography.BodyLarge.FontSize
+					Font = p2.Typography.BodyLarge.Font,
+					RelativeSize = p2.Typography.BodyLarge.FontSize
 				}
 			}
 		}
 	end, function(p2)
-		-- upvalues: WithLocalizationModule (upval), GetTextSizeFunction (upval), Roact (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), AssetsModule (upval), ImageSetLabel (upval), ThemedTextLabelModule (upval), RootedConnectionModule (upval), FocusHandlerModule (upval), Props (copy), GuiService (upval), p1 (copy), Button (upval), ButtonType (upval)
+		-- upvalues: WithLocalizationModule (upval), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), TextService (upval), Roact (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), AssetsModule (upval), ImageSetLabel (upval), ThemedTextLabelModule (upval), RootedConnectionModule (upval), FocusHandlerModule (upval), Props (copy), GuiService (upval), p1 (copy), Button (upval), ButtonType (upval)
 		return WithLocalizationModule({
 			noFriendsText = "CoreScripts.InGameMenu.InviteFriends.NoFriends",
 			makeFriendsNow = "CoreScripts.InGameMenu.InviteFriends.MakeFriendsNow"
 		})(function(p3)
-			-- upvalues: p2 (copy), GetTextSizeFunction (upval), Roact (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), AssetsModule (upval), ImageSetLabel (upval), ThemedTextLabelModule (upval), RootedConnectionModule (upval), FocusHandlerModule (upval), Props (upval), GuiService (upval), p1 (upval), Button (upval), ButtonType (upval)
+			-- upvalues: p2 (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), TextService (upval), Roact (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), AssetsModule (upval), ImageSetLabel (upval), ThemedTextLabelModule (upval), RootedConnectionModule (upval), FocusHandlerModule (upval), Props (upval), GuiService (upval), p1 (upval), Button (upval), ButtonType (upval)
+			local BodyFont = p2.Font.Body.Font
+			local ScaledRelativeSize = p2.Font.Body.RelativeSize * p2.Font.BaseSize
+			
 			return Roact.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(0, 304, 1, 0),
@@ -83,7 +90,7 @@ function AddFriendsNow.render(p1)
 				TextContainer = Roact.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
-					Size = UDim2.new(1, 0, 0, GetTextSizeFunction(p3.noFriendsText, p2.Font.Body.RelativeSize * p2.Font.BaseSize, p2.Tokens.Typography.BodyLarge.Font, Vector2.new(304, 1e999), { addTemporaryPadding = false }).Y + 20)
+					Size = UDim2.new(1, 0, 0, (if FoundationFontFaceMigration then GetTextSizeFunction(p3.noFriendsText, ScaledRelativeSize, p2.Tokens.Typography.BodyLarge.Font, Vector2.new(304, 1e999), { addTemporaryPadding = false }).Y else TextService:GetTextSize(p3.noFriendsText, ScaledRelativeSize, BodyFont, Vector2.new(304, 1e999)).Y) + 20)
 				}, {
 					Text = Roact.createElement(ThemedTextLabelModule, {
 						fontKey = "Body",

@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("LuaAppSduiStreamingFirstDataTiming", false)
+﻿return require(script.Parent.FFlagLuaAppSduiStreamingChunkedResponses) and game:DefineFastFlag("LuaAppSduiStreamingFirstDataTiming", false)

@@ -17,6 +17,7 @@ local _ = require(CollectionViews.SeeAllButtonType_Legacy)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagLuaAppSortHeaderAnchorTag = SharedFlagsModule.FFlagLuaAppSortHeaderAnchorTag
 local FFlagSduiComponentsUseFoundationTokens = SharedFlagsModule.FFlagSduiComponentsUseFoundationTokens
+local FoundationFontFaceMigration = require(Parent.Foundation).Utility.Flags.FoundationFontFaceMigration
 local IconsActionsTruncationCollapseSmall = Images["icons/actions/truncationCollapse_small"]
 local IconsActionsCycleRight = Images["icons/actions/cycleRight"]
 local config = {
@@ -46,7 +47,7 @@ local function HeaderButton(Frame: Frame)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), UsePreferredInputFunction (copy), FFlagSduiComponentsUseFoundationTokens (copy), UseTokensFunction (copy), UseDesignTokensFunction (copy), ResponsiveModule (copy), CheckAndFormatPossibleLinkModule (copy), FFlagLuaAppSortHeaderAnchorTag (copy), NormalizeFontFaceFunction (copy), HeaderButton (copy), IconsActionsCycleRight (copy), IconsActionsTruncationCollapseSmall (copy), IconWithTooltip (copy), TooltipOrientation (copy)
+	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), UsePreferredInputFunction (copy), FFlagSduiComponentsUseFoundationTokens (copy), UseTokensFunction (copy), UseDesignTokensFunction (copy), ResponsiveModule (copy), CheckAndFormatPossibleLinkModule (copy), FFlagLuaAppSortHeaderAnchorTag (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), HeaderButton (copy), IconsActionsCycleRight (copy), IconsActionsTruncationCollapseSmall (copy), IconWithTooltip (copy), TooltipOrientation (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 	local UseResult = ReactModule.useCallback(function(Frame)
@@ -134,7 +135,8 @@ return ReactModule.memo(function(p1)
 					Text = JoinResult.title,
 					AutomaticSize = Enum.AutomaticSize.XY,
 					Size = UDim2.new(0, 0, 0, 0),
-					FontFace = NormalizeFontFaceFunction(TitleTypography.Font),
+					Font = if FoundationFontFaceMigration then nil else TitleTypography.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(TitleTypography.Font) else nil,
 					TextSize = TitleTypography.FontSize,
 					TextTransparency = TitleColor.Transparency,
 					TextColor3 = TitleColor.Color3,
@@ -182,7 +184,8 @@ return ReactModule.memo(function(p1)
 					Text = CheckAndFormatPossibleLinkModuleResult2,
 					AutomaticSize = Enum.AutomaticSize.XY,
 					Size = UDim2.new(0, 0, 0, 0),
-					FontFace = NormalizeFontFaceFunction(SubtitleTypography.Font),
+					Font = if FoundationFontFaceMigration then nil else SubtitleTypography.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(SubtitleTypography.Font) else nil,
 					TextSize = FontSize,
 					TextTransparency = TitleColor.Transparency,
 					TextColor3 = SubtitleColor.Color3,

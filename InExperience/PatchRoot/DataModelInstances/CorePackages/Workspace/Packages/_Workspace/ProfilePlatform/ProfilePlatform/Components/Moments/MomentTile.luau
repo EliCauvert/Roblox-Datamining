@@ -7,8 +7,6 @@ local ToMediaItemModule = require(Parent.Moments.ToMediaItem)
 local UseSceneOutfitMediaItemModule = require(script.Parent.useSceneOutfitMediaItem)
 local SceneOutfitPosterModule = require(script.Parent.SceneOutfitPoster)
 local FFlagProfileMomentSceneOutfitPoster = require(Parent.SharedFlags).FFlagProfileMomentSceneOutfitPoster
-local FFlagMomentsPostFeedback = require(Parent.SharedFlags).FFlagMomentsPostFeedback
-local PostStatusBadgeModule = require(Parent.Moments.PostStatusBadge)
 local UseExperienceNameModule = require(ProfilePlatform.Hooks.useExperienceName)
 local View = FoundationModule.View
 local Text = FoundationModule.Text
@@ -17,7 +15,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local MomentMediaTile = require(Parent.MomentsCommon).Media.MomentMediaTile
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseExperienceNameModule (copy), ReactModule (copy), ToMediaItemModule (copy), FFlagProfileMomentSceneOutfitPoster (copy), UseSceneOutfitMediaItemModule (copy), View (copy), StateLayerAffordance (copy), MomentMediaTile (copy), SceneOutfitPosterModule (copy), FFlagMomentsPostFeedback (copy), PostStatusBadgeModule (copy), Text (copy)
+	-- upvalues: UseTokensFunction (copy), UseExperienceNameModule (copy), ReactModule (copy), ToMediaItemModule (copy), FFlagProfileMomentSceneOutfitPoster (copy), UseSceneOutfitMediaItemModule (copy), View (copy), StateLayerAffordance (copy), MomentMediaTile (copy), SceneOutfitPosterModule (copy), Text (copy)
 	local Moment = p1.moment
 	local UseTokensResult = UseTokensFunction()
 	local UseExperienceNameModuleResult = UseExperienceNameModule(Moment.metadata.universeId)
@@ -52,8 +50,7 @@ return function(p1)
 				zIndex = 2,
 				content = UseSceneOutfitMediaItemModuleResult.scenePoster,
 				cornerRadius = UseTokensResult.Radius.Large
-			}),
-			StatusBadge = if FFlagMomentsPostFeedback then ReactModule.createElement(PostStatusBadgeModule, { ZIndex = 3, momentId = Moment.momentId }) else nil
+			})
 		}),
 		Footer = ReactModule.createElement(View, {
 			LayoutOrder = 2,

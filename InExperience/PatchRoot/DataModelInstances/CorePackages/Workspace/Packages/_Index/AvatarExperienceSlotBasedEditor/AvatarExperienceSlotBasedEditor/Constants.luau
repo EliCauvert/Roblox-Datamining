@@ -12,7 +12,6 @@ local FFlagAXSlotsDesktopRedesign = AvatarExperienceFlagsModule.FFlagAXSlotsDesk
 local FFlagAXInventoryDurablesExpiredFilter = AvatarExperienceFlagsModule.FFlagAXInventoryDurablesExpiredFilter
 local FFlagAXCustomizeBackgrounds = AvatarExperienceFlagsModule.FFlagAXCustomizeBackgrounds
 local FFlagAXDownrankMakeupCustomize = AvatarExperienceFlagsModule.FFlagAXDownrankMakeupCustomize
-local FFlagAXSpawnEffects = AvatarExperienceFlagsModule.FFlagAXSpawnEffects
 local IconName = require(Parent.Foundation).Enums.IconName
 local IconVariant = require(Parent.Foundation).Enums.IconVariant
 local Character = {
@@ -121,11 +120,7 @@ local Character = {
 	} else "icons/menu/clothing/build_on",
 	Eyelashes = if FFlagAXMigrateBuilderIcons then { name = IconName.Eyelashes, variant = IconVariant.Regular } else IconName.Eyelashes,
 	Eyebrows = if FFlagAXMigrateBuilderIcons then { name = IconName.Eyebrows, variant = IconVariant.Regular } else IconName.Eyebrows,
-	Backgrounds = { name = IconName.Image, variant = IconVariant.Filled },
-	SpawnEffects = {
-		name = IconName.CursorStars,
-		variant = IconVariant.Filled
-	}
+	Backgrounds = { name = IconName.Image, variant = IconVariant.Filled }
 }
 local BodyAssetTypes = {
 	Enum.AssetType.LeftLeg, Enum.AssetType.RightLeg, Enum.AssetType.LeftArm,
@@ -158,7 +153,8 @@ local t = {}
 for i, value in List do
 	t[value] = i - 1
 end
-local SlotEditorCategories = {
+ConstantsModule.Categories = CategoriesModule
+ConstantsModule.SlotEditorCategories = {
 	[CategoriesModule.All] = {
 		name = "All",
 		hide = true,
@@ -486,17 +482,6 @@ local SlotEditorCategories = {
 		slots = {}
 	}
 }
-
-if FFlagAXSpawnEffects then
-	table.insert(SlotEditorCategories[CategoriesModule.Animations].slots, 1, {
-		nameTranslationKey = "Feature.Avatar.Label.Spawn",
-		icon = Character.SpawnEffects,
-		editorSubcategory = AvatarEditorSubcategories.SpawnEffects,
-		assetTypes = { (Enum.AvatarAssetType:FromValue(97)) }
-	})
-end
-ConstantsModule.Categories = CategoriesModule
-ConstantsModule.SlotEditorCategories = SlotEditorCategories
 ConstantsModule.Icons = Character
 ConstantsModule.BodyAssetTypes = BodyAssetTypes
 ConstantsModule.InventoryFilterToAvailabilityStatus = if FFlagAXInventoryDurablesExpiredFilter then { [InventoryFiltersModule.Expired] = 2 } else nil

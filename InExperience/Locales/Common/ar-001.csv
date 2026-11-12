@@ -171,8 +171,8 @@ Common.Presence.Label.Online,متصل
 Common.Presence.Label.RobloxStudio,Roblox Studio
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,الحركة طويلة جدًا ({duration} من الثواني). يجب أن يكون طول الحركات التعبيرية (Emote) {maxLength} من الثواني على الأكثر.
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,الحركة قصيرة جدًا ({duration} من الثواني). يجب أن يكون طول الحركات التعبيرية (Emote) أكثر من {minLength} من الثواني.
-Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,يوجد انتهاك لوضع جزء القفص في {cageName}: لم يتم وضع {upperPart} بشكل صحيح بالنسبة إلى {lowerPart}.
-Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,يحتوي جزء القفص {partName} في {cageName} على {actualCount} من الرؤوس، بينما العدد المتوقع تقريبًا هو {expectedCount}. قد يشير ذلك إلى وجود تصميم هندسي مفقود أو مكرر في منطقة القفص تلك.
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,يوجد انتهاك في وضع أجزاء القفص في {cageName}: لم يتم وضع {upperPart} بشكل صحيح فوق {lowerPart}.
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,يحتوي جزء القفص {partName} في {cageName} على {actualCount} من الرؤوس، بينما العدد المتوقع تقريبًا هو {expectedCount}. قد يشير ذلك إلى وجود تصميم هندسي مفقود أو مكرر في منطقة الجسد تلك.
 Common.UGCValidation.ErrorLabel.AQSFail_CageUV,يحتوي غلاف {cage_name} على قيم إحداثيات UV غير صحيحة ولا تتطابق مع القالب. توجد {incorrect_uv_count} من إحداثيات UV غير صحيحة ({unreferenced_vertex_count} غير مرجحة، و{non_template_uv_count} لا تتبع القالب، و{duplicate_mapping_count} من التعيينات المكررة)، بالإضافة إلى {unmatched_template_count} من رؤوس القوالب غير المطابقة. يُرجى تصحيح إحداثيات UV الخاصة بالغلاف لتتطابق مع القالب.
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,يحتوي الجسد لديك على مكونات صغيرة منفصلة من أصل mesh (جزر من أصل mesh). يُرجى إزالة الهندسة العائمة والتأكد من توصيل جميع أجزاء أصل mesh بشكل صحيح.
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,يحتوي الجزء {partName} على {num_disconnected_components} من المكونات غير المتصلة، وهو ما يتجاوز الحد الأقصى البالغ {max_disconnected_components}.
@@ -183,7 +183,7 @@ Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,لا يتبع قف�
 Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,ما نسبته {irrelevant_percent}% من رؤوس القفص الخارجي المعدلة لا تغطي الإكسسوار. يُرجى ضبط القفص ليتناسب بشكل أفضل مع شكل الإكسسوار.
 Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,يحتوي {cage_name} على قيم إحداثيات UV غير صحيحة. توجد {incorrect_uv_count} من إحداثيات UV غير صحيحة ({unreferenced_vertex_count} بدون مرجع، و{non_template_uv_count} لا تتبع القالب، و{duplicate_mapping_count} من التعيينات المكررة)، بالإضافة إلى {unmatched_template_count} من رؤوس القوالب غير المطابقة.
 Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,يحتوي الجزء {partName} على نسبة {degenerate_triangle_percent}% من المثلثات الملتوية.
-Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,توجد بالرأس الديناميكي مشاكل في جودة التعبير. إغلاق العين اليسرى على الشاشة (النقاط الحمراء على الجانب الأيسر من الرأس في مكون التصور الإضافي): {left_eye_close}، إغلاق العين اليمنى على الشاشة (النقاط الزرقاء على الجانب الأيمن من الرأس في مكون التصور الإضافي): {right_eye_close}، فتح الفم (النقاط الخضراء في مكون التصور الإضافي): {mouth_open}، سعيد: {is_happy}، حزين: {is_sad}.
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,توجد بالرأس الديناميكي مشاكل في جودة التعبير. إغلاق العين اليسرى: {left_eye_close}، إغلاق العين اليمنى: {right_eye_close}، فتح الفم: {mouth_open}، سعيد: {is_happy}، حزين: {is_sad}.
 Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,تهيئة مفاصل غير متوقعة. إجمالي المفاصل: {joint_number}، مفاصل اليد اليسرى: {left_hand_joint_number}، مفاصل اليد اليمنى: {right_hand_joint_number}.
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,يحتوي الجزء {partName} على {num_small_volume_islands} من الجزر الصغيرة المنفصلة من أصل mesh من إجمالي {num_disconnected_components} من المكونات. يرجى إزالة الأشكال الهندسية العائمة.
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,يحتوي الجزء {partName} على أشكال هندسية غير متشعبة. يُرجى التحقق من وجود أوجه غير مستوية أو أسطح تتقاطع مع نفسها أو حواف مشتركة بين أكثر من وجهين.
@@ -192,9 +192,7 @@ Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,تقع ما نسب�
 Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,تعذر احتساب بيانات التحقق لـ {measureName} لأن بيانات الإدخال غير مكتملة أو غير صالحة. هذا لا يمنع عملية الرفع.
 Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,تتميز الهيئة {textureName} بانخفاض تعقيدها. قد تفتقر الهيئة إلى التفاصيل أو التباين الكافيين.
 Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,تتميز الهيئة {textureName} بدقة منخفضة تبلغ {texture_width}x{texture_height}. يُرجى استخدام هيئة ذات دقة أعلى.
-Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,يحتوي الجزء {partName} على نسبة {intersecting_tri_face_percent}% من الأوجه المتقاطعة ذاتيًا، وهو ما يتجاوز النسبة المسموح بها البالغة {threshold}%.
 Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,يحتوي الجزء {partName} على نسبة {uv_outside_bound_vert_percent} % من رؤوس إحداثيات UV خارج الحدود [0،1].
-Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,يحتوي الجزء {partName} على نسبة {similar_vertex_percent}% من الرؤوس المتطابقة، وهو ما يتجاوز النسبة المسموح بها البالغة {threshold}%.
 Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,"يجب وضع نقطة اتصال الإكسسوار ""{AttachmentName}"" في الجزء ""{PartName}"" بالقرب من سطح mesh. الموضع الحالي [{CurrentPosition}] خارج النطاق الصالح. انقله ليكون أقرب إلى [{ClosestValidPosition}]."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,المقبض مربوط بالمفصل {jointName}، وهو ليس جزءًا من المخطط المسموح به. يُسمح فقط بمفاصل R15 القياسية ومفاصل نقل الإكساء.
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,يجب على {assetType} استخدام نقل الإكساء، لكن المفصل المطلوب {requiredJointName} غير موجود لديك.
@@ -206,44 +204,14 @@ Common.UGCValidation.ErrorLabel.AccessorySkinning_WeightNotFull,يجب أن تك
 Common.UGCValidation.ErrorLabel.AnimationPack_DuplicateAnimationId,"تحتوي حزمة الرسوم المتحركة على معرّف حركة مكرر باسم ""{animationId}"" مستخدم بواسطة مقاطع متعددة: {instancePaths}. يجب أن يشير كل مقطع حركة إلى أصل حركة فريد."
 Common.UGCValidation.ErrorLabel.AnimationPack_InvalidR15AnimChildren,الحزمة الخاصة بحزمة الرسوم المتحركة تفتقد نوع (أنواع) الحركة المتوقعة: {missingAnimationTypes}. يجب أن يحتوي كل نوع حركة على مجلد R15Anim واحد يحتوي بالضبط على فروع StringValue المتوقعة.
 Common.UGCValidation.ErrorLabel.Animation_WeightNotPositive,"تحتوي الحركة ""{animationName}"" على قيمة وزن {weight}، ولكن يجب أن يكون الوزن أكبر من 0. يُرجى إصلاح الحركة."
-Common.UGCValidation.ErrorLabel.AssetBounds_InconsistentScaleType,يجب أن تحتوي جميع الأجزاء الشبكية على القيمة نفسها في العنصر الفرعي AvatarPartScaleType الخاص بها. يُرجى التحقق من تطابق القيم.
-Common.UGCValidation.ErrorLabel.AssetBounds_TooLarge,"حجم أصول mesh ومفاصل {assetName} على المحور {axis} البالغ ""{currentSize}"" من الأزرار أكبر من الحد الأقصى المسموح به لحجم المحور {axis} لمستطيل التحديد البالغ ""{maxSize}"" من الأزرار. يُرجى تصغير حجم أصول mesh/المفاصل"
-Common.UGCValidation.ErrorLabel.AssetBounds_TooSmall,"حجم أصول mesh للجزء {assetName} على المحور {axis} البالغ ""{currentSize}"" من الأزرار أصغر من الحد الأدنى المسموح به لحجم المحور {axis} لمستطيل التحديد البالغ ""{minSize}"" من الأزرار. يتعين عليك تكبير حجم أصول mesh."
-Common.UGCValidation.ErrorLabel.AssetDoesNotExist,"الأصل ""{AssetId}"" المُشار إليه بواسطة ""{InstancePath}"" غير موجود أو لا يمكن تحميله. استبدله بمعرف أصل صالح."
-Common.UGCValidation.ErrorLabel.AssetOpacity_BelowThreshold,{AssetName} ليس معتمًا بما فيه الكفاية من {ViewName}. الشفافية هي {Opacity} ولكن يجب أن تكون أعلى من {Threshold}.
-Common.UGCValidation.ErrorLabel.AssetOpacity_Invisible,"أصل Mesh الخاص بـ ""{AssetName}"" غير مرئي تمامًا."
-Common.UGCValidation.ErrorLabel.AssetOpacity_MeshLoadFailed,"تعذَّر تحميل أصل mesh للجزء الشبكي ''{PartName}"". تأكد من وجود أصل mesh وحاول مرة أخرى."
-Common.UGCValidation.ErrorLabel.AssetOpacity_NoTriangles,"لا يحتوي أصل Mesh الخاص بـ ""{AssetName}"" على أي مثلثات."
-Common.UGCValidation.ErrorLabel.AssetOpacity_NonZeroTransparency,"يحتوي الجزء ""{PartName}"" على شفافية لا تساوي صفرًا. يجب أن تكون شفافية الجزء مساوية لصفر تمامًا دائمًا."
-Common.UGCValidation.ErrorLabel.AssetOpacity_ZeroSize,"يجب ألا تكون أصول mesh الخاصة بـ ""{AssetName}"" ذات حجم صفري."
 Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,تعذَّر العثور على {ExpectedClass} المطلوب باسم {ExpectedName} في {ParentPath}
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,الحالات التالية ليست جزءًا من المخطط المعتمد ويجب إزالتها: {UnexpectedDescendantPaths}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,يجب أن يكون الأصل الذي تم تحميله من نوع {ExpectedClass} لكنه من نوع {RootClass}.
-Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,يجب أن يُسمّى الأصل الذي تم تحميله {ExpectedName}، ولكنه مُسمّى حاليًا {RootName}.
-Common.UGCValidation.ErrorLabel.AttachmentBoundsAssetCalculationFailed,"تعذر حساب حدود أصول mesh لـ ""{InstancePath}"" قبل التحقق من مواقع نقاط الاتصال. قد تكون بيانات أصول mesh مفقودة أو تالفة؛ يُرجى إعادة استيراد الأصل والمحاولة مرة أخرى."
-Common.UGCValidation.ErrorLabel.AttachmentBoundsCalculationFailed,"تعذّر حساب حدود نقطة الاتصال ""{AttachmentName}"" في الجزء ""{PartName}"". قد تكون بيانات أصل mesh مفقودة أو غير صحيحة؛ يُرجى إعادة استيراد الأصل والمحاولة مرة أخرى."
-Common.UGCValidation.ErrorLabel.AttachmentOrientationDeviation,"ينحرف اتجاه نقطة الاتصال ""{InstancePath}"" بشكل كبير عن المتوقع. الاتجاه المقترح هو {ExpectedOrientation}، والحد الأقصى للانحراف هو {MaxDeviation} من الدرجات."
-Common.UGCValidation.ErrorLabel.AttachmentOrientationRigRotated,"لا يمكن تدوير نقاط اتصال Rig. يرجى إعداد اتجاه ""{InstancePath}"" إلى (0،0،0)."
-Common.UGCValidation.ErrorLabel.BodyBlocking_ZeroMeshSize,عرض أصل mesh لـ {meshName}: {details}. يُرجى زيادة حجم أصل mesh.
-Common.UGCValidation.ErrorLabel.BodyMesh_LoadFailed,"تعذَّر تحميل أصل Mesh الخاص بـ ""{meshName}"". تأكد من وجود أصل mesh وحاول مرة أخرى."
-Common.UGCValidation.ErrorLabel.BodyMesh_SizeMismatch,حجم {meshContext} يتجاوز الحد الأقصى للفرق البالغ {maxDiff} مقارنةً بـ {otherMeshContext}. يُرجى تعديل النموذج لضبط حجمه
-Common.UGCValidation.ErrorLabel.BodyPartCageDistanceValid_TooFar,تم العثور على قمة في أصل mesh للقفص للجزء {partName} على مسافة تبلغ {distance} من الأزرار لأقرب عرض لأصل mesh. الحد الأقصى المسموح به هو {maxDistance} من الأزرار. يُرجى جعل أصل mesh للقفص مطابقًا بشكل أقرب لشكل عرض أصل mesh وحجمه.
-Common.UGCValidation.ErrorLabel.BoundingBox_ValidationFailed,{reason}
-Common.UGCValidation.ErrorLabel.CageMeshDistanceBounded_DistanceTooHigh,متوسط المسافة بين القفص الخارجي وأصل mesh مرتفع للغاية ({distance}). يُرجى تعديل القفص الخارجي ليناسب أصل mesh بشكل أفضل.
-Common.UGCValidation.ErrorLabel.CageMeshDistanceBounded_MeshOutsideCage,متوسط المسافة بين القفص الخارجي وأصل mesh مرتفع جدًا. يبدو أن أصل mesh يقع خارج القفص الخارجي.
-Common.UGCValidation.ErrorLabel.CageUV_ExtraDuplicateUVs,"توجد {count} من قيم UV في القفص {cageType} للجزء ""{partName}"" التي لا تنتمي إلى القالب. يُرجى تصحيح قيم UV للقفص."
-Common.UGCValidation.ErrorLabel.CageUV_IncorrectUVCount,"يجب أن يحتوي القفص الخارجي لـ ""{partName}"" على {requiredUVCount} من قيم UV الفريدة، ولكنه يحتوي على {actualUVCount}. يُرجى التأكد من أن أصل mesh يحتوي على العدد المطلوب من قيم UV الفريدة ثم المحاولة مرة أخرى."
-Common.UGCValidation.ErrorLabel.CageUV_InvalidUVValue,"تم العثور على قيمة UV غير صالحة خارج النطاق [0، 1] للجزء ""{partName}"". تحتاج إلى تحرير خريطة UV لإصلاح هذه المشكلة."
-Common.UGCValidation.ErrorLabel.CageUV_RenderMeshBoundsCheckFailed,تعذّر تنفيذ اختبار أصل mesh للعرض داخل مستطيل التحديد المحيط بالمنطقة المعدلة للقفص الخارجي. تأكد من وجود كل من أصول mesh للقفص وأصل mesh للعرض وحاول مرة أخرى.
-Common.UGCValidation.ErrorLabel.CageUV_RenderMeshOutsideModifiedArea,تقع نسبة {currentPercent}% فقط من رؤوس أصل mesh للعرض في المنطقة المعدلة {allowedArea} الخاصة بـ WrapLayer CageMesh (أصل mesh الخارجي). النسبة المطلوبة هي {requiredPercent}%. حرِّك أصل mesh للعرض بحيث يكون داخل WrapLayer CageMesh (القفص الخارجي).
-Common.UGCValidation.ErrorLabel.CageUV_TooFewMainModified,يجب أن يقوم WrapLayer CageMesh (أصل mesh الخارجي) لـ {assetTypeName} بتعديل {requiredPercent}% من قيم UV للقفص في منطقة {mainArea}. حاليًا، يتم تعديل {currentPercent}% فقط. حرّك أصلك إلى المنطقة الصحيحة من الجسم.
-Common.UGCValidation.ErrorLabel.CageUV_TooManyExcludedModified,تقع نسبة {modifiedPercent}% من قيم UV المعدلة للقفص في WrapLayer CageMesh (أصل mesh الخارجي) خارج المنطقة المتوقعة من الجسم. بالنسبة إلى {assetTypeName}، لا يمكن أن تكون نسبة تزيد عن {maxPercent}% من قيم UV المعدلة خارج منطقة {allowedArea}. حرّك أصلك إلى المنطقة الصحيحة من الجسم.
-Common.UGCValidation.ErrorLabel.CageUV_ZeroAreaTriangle,"تم اكتشاف مثلث مساحته صفر في خريطة UV للجزء ""{partName}"". تحتاج إلى تحرير خريطة UV لإصلاح هذه المشكلة."
-Common.UGCValidation.ErrorLabel.CollisionFidelityWrong,"يحتوي ""{InstancePath}"" على CollisionFidelity غير صحيح. كان من المتوقع أن يكون {ExpectedFidelity}."
 Common.UGCValidation.ErrorLabel.ContentNotEditable,لا تزال الخاصية {InstanceFullName}.{FieldName} تحتوي على محتوى قابل للتحرير غير محفوظ. احفظها كأصل قبل النشر وحاول مرة أخرى.
-Common.UGCValidation.ErrorLabel.CoplanarTri_TooMany,"تم اكتشاف الكثير من المثلثات مستوية الأسطح المتقاطعة في أصل mesh ""{MeshName}"". الحد الأقصى هو {MaxIntersections} من التقاطعات في أصل mesh مكون من {TriangleCount} من المثلثات. قم بتحرير أصل mesh لتقليل عدد تقاطعات المثلثات مستوية الأسطح."
+Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,"يحتوي جزء الجسد ""{bodyPartName}"" في CurveAnimation على مسار موضع (الإزاحة). يمكن تدوير أجزاء جسد الحركة فقط؛ ومسارات الموضع غير مسموح بها. يُرجى إزالة مسار الموضع من جزء الجسد هذا."
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,"يتحرك جزء الجسد ""{bodyPartName}"" في CurveAnimation بمقدار {distance} من الأزرار عن موضعه الأولي. الحد الأقصى المسموح به للإزاحة هو {maxDistance} من الأزرار. يُرجى تقليل حركة موضع جزء الجسد."
-Common.UGCValidation.ErrorLabel.CurveAnim_BoneRequiresParent,"يتطلب مجلد العظام ""{boneName}"" وجود ""{parentBoneName}"" أيضًا في الحركة."
+Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"يحتوي CurveAnimation على عظام HRD/DRD، ويحتوي جزء الجسد ""{bodyPartName}"" على مسار موضع (الإزاحة). عند وجود أي عظام في الحركات، لا يجوز لأي أجزاء من الجسد أن تحتوي على إزاحة لمنع انفصال المفاصل. يُرجى إزالة جميع مسارات الموضع من أجزاء الجسد."
+Common.UGCValidation.ErrorLabel.CurveAnim_BonePositionNotAllowed,يحتوي العظم {boneName} في CurveAnimation على مسار موضع (الإزاحة). يمكن تدوير عظام HRD/DRD فقط؛ وتسبب مسارات الموضع فصل المفاصل وهي غير مسموح بها. يُرجى إزالة حركة الموضع من هذا العظم.
 Common.UGCValidation.ErrorLabel.CurveAnim_BoneTranslationExceedsThreshold,"يتحرك العظم ""{boneName}"" في CurveAnimation بمقدار {distance} من الأزرار عن موضعه الأولي. الحد الأقصى المسموح به للإزاحة هو {maxDistance} من الأزرار. يُرجى تقليل حركة موضع العظم."
 Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,يحتوي CurveAnimation على مجلدات عظام HRD/DRD غير مدعومة حاليًا. يُرجى إزالة جميع المجلدات الفرعية للعظام قبل الرفع.
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,لا يمكن أن تكون أجزاء الجسد في CurveAnimation أسفل {minHeight} من الأزرار أو على بعد أكثر من {maxDistance} من الأزرار عن HumanoidRootPart. يُرجى إصلاح الحركة.
@@ -255,27 +223,18 @@ Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,تحتوي Cu
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"المجلد ""{boneName}"" في CurveAnimation ليس اسم عظم HRD/DRD معترفًا به. يجب أن تكون المجلدات الفرعية للحركة إما أجزاء جسد R15 صالحة أو أسماء عظام معترف بها (مثل HeadBase وSpine وChest وLeftClavicle وRightClavicle وLeftToeBase وRightToeBase أو عظام الأصابع مثل LeftHandIndex1)."
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidCurveData,تحتوي CurveAnimation على Curves ذات وقت أو قيمة غير صالحة. يُرجى إصلاح الحركة.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidInstanceTypes,يمكن لتسلسل CurveAnimation الهرمي أن يحتوي فقط على {allowedTypes}. يُرجى إزالة أي أنواع حالات أخرى من التسلسل الهرمي.
-Common.UGCValidation.ErrorLabel.CurveAnim_InvalidLength,يجب أن يتراوح طول CurveAnimation {animationName} بين {minLength} و{maxLength} ثانية. يُرجى إصلاح الحركة.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidMarkerData,تحتوي CurveAnimation على MarkerCurves ذات وقت أو قيمة غير صالحة، أو أن القيمة طويلة جدًا. يُرجى إصلاح الحركة.
-Common.UGCValidation.ErrorLabel.CurveAnim_InvalidNumericalData,تحتوي CurveAnimation {animationName} على Curves بها بيانات رقمية غير صالحة. يُرجى إصلاح الحركة.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidRigData,فشل التحقق الداخلي من صحة AnimationRigData. يُرجى التأكد من إعداد AnimationRigData بشكل صحيح.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidRigDataR15Plus,فشل التحقق الداخلي من صحة AnimationRigData R15+. يُرجى التأكد من إعداد AnimationRigData بشكل صحيح لحركات العظام.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidTags,يمكن أن يحتوي CurveAnimation على وسم وقت واحد فقط. يُرجى إزالة جميع الوسوم الأخرى.
-Common.UGCValidation.ErrorLabel.CurveAnim_JointRotationExceeded,في CurveAnimation {animationName} عند الزمن {time} ثانية، يحتوي المفصل {bodyPart} على زاوية دوران مقدارها {rotation} من الدرجات عن وضعية الراحة. الحد الأقصى المسموح به هو {maxRotation} من الدرجات. يُرجى إصلاح الحركة.
 Common.UGCValidation.ErrorLabel.CurveAnim_KeysTooClose,تحتوي CurveAnimation على Curve {curvePath} به مفاتيح متقاربة جدًا زمنيًا بالنسبة لحركة بحد أقصى {maxFPS} إطار/ثانية. يُرجى إصلاح الحركة.
 Common.UGCValidation.ErrorLabel.CurveAnim_LoopingNotEnabled,"لم يتم تمكين خاصية Loop على CurveAnimation ""{animationName}"". يجب أن تكون الحركات التي يتم رفعها إلى المتجر قابلة للتكرار. يُرجى تمكين خاصية Loop."
 Common.UGCValidation.ErrorLabel.CurveAnim_MultipleBodyRoots,تحتوي CurveAnimation على أكثر من مجلد فرعي واحد يحمل اسم جزء من الجسد أو HumanoidRootPart. يُرجى التأكد من وجود مجلد فرعي واحد فقط يحمل اسم جزء من الجسد أو HumanoidRootPart.
 Common.UGCValidation.ErrorLabel.CurveAnim_MultipleRigData,تحتوي CurveAnimation على أكثر من عنصر فرعي واحد من نوع AnimationRigData. يُرجى التأكد من وجود عنصر فرعي واحد فقط من نوع AnimationRigData.
 Common.UGCValidation.ErrorLabel.CurveAnim_NegativeKeyTime,تحتوي CurveAnimation على Curve {curvePath} به مفتاح له وقت سالب. يُرجى إصلاح الحركة.
 Common.UGCValidation.ErrorLabel.CurveAnim_NoBodyRoot,لا تحتوي CurveAnimation على أي مجلد فرعي يحمل اسم جزء من الجسد أو HumanoidRootPart. يُرجى التأكد من وجود مجلد فرعي واحد فقط (لا غير) يحمل اسم جزء من الجسد أو HumanoidRootPart.
-Common.UGCValidation.ErrorLabel.CurveAnim_NoJointManipulation,لا يحتوي CurveAnimation {animationName} على أي تعديل للمفاصل.
 Common.UGCValidation.ErrorLabel.CurveAnim_NoRigData,لا تحتوي CurveAnimation على أي عناصر فرعية من نوع AnimationRigData. يُرجى التأكد من وجود عنصر فرعي واحد فقط (لا غير) من نوع AnimationRigData.
 Common.UGCValidation.ErrorLabel.CurveAnim_NotCurveAnimation,الحركة المُشار إليها ليست CurveAnimation. يُرجى التأكد من رفع الحركة بشكل صحيح.
-Common.UGCValidation.ErrorLabel.CurveAnim_PartTooFar,في CurveAnimation {animationName} عند الزمن {time} ثانية، يكون جزء الجسد {bodyPart} على بعد {distance} من الأزرار عن HumanoidRootPart. لا يمكن أن تكون أجزاء الجسد على بعد أكثر من {maxDistance} من الأزرار عن HumanoidRootPart. يُرجى إصلاح الحركة.
-Common.UGCValidation.ErrorLabel.CurveAnim_PartTooLow,في CurveAnimation {animationName} عند الزمن {time} ثانية، يكون جزء الجسد {bodyPart} على ارتفاع {height} من الأزرار عن HumanoidRootPart. لا يمكن أن تكون أجزاء الجسد أسفل {minHeight} من الأزرار عن HumanoidRootPart. يُرجى إصلاح الحركة.
-Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,تحتوي CurveAnimation {animationName} على فصل موضعي لأجزاء الجسد. يمكن لجزء LowerTorso فقط تغيير الموضع. يمكن لجميع أجزاء الجسد الأخرى تغيير اتجاهها فقط. يتحرك {bodyPart} مسافة تزيد عن {maxMovement} من الأزرار عن أصله. يُرجى إصلاح الحركة.
-Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,في CurveAnimation {animationName} عند الزمن {time} ثانية، يتحرك جزء الجسد {bodyPart} بسرعة دوران {speed} من الدرجات في الثانية. الحد الأقصى للسرعة هو {maxSpeed} درجة في الثانية. يُرجى إصلاح الحركة.
-Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,في CurveAnimation {animationName} عند الزمن {time} ثانية، يتحرك جزء الجسد {bodyPart} بسرعة {speed} من الأزرار في الثانية. الحد الأقصى للسرعة هو {maxSpeed} من الأزرار في الثانية. يُرجى إصلاح الحركة.
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,يتحرك جزء الجسد {bodyPart} في CurveAnimation مسافة تزيد عن {maxMovement} من الأزرار بين الإطارات. يُرجى إصلاح الحركة.
 Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,بنية CurveAnimation غير صالحة: {detail}. يُرجى التأكد من أن الحركة تتبع المخطط المتوقع.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,يحتوي CurveAnimation على {count} من العناصر التابعة. الحد الأقصى المسموح به هو {maxAllowed}. يُرجى تقليل عدد العناصر التابعة.
@@ -284,24 +243,12 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,تحتوي CurveAn
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,تحتوي CurveAnimation على MarkerCurve به {count} من العلامات. الحد الأقصى لكل MarkerCurve هو {maxAllowed}. يُرجى إصلاح الحركة.
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,تحتوي CurveAnimation على عنصر فرعي غير متوقع: {childName}
 Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,يثبّت {InstanceFullName}.{FieldName} حركة {AssetId} على الإصدار {Version}، ولكن لا يمكن تثبيت الحركات على أي إصدار حتى الآن. قم بإزالة '&version={Version}' وحاول مرة أخرى.
-Common.UGCValidation.ErrorLabel.DescendantIdFetchFailed,تعذَّر الحصول على نتائج الإشراف للحالة {InstanceFullName}. تأكد من أن جميع الأصول مملوكة للمستخدم الحالي.
-Common.UGCValidation.ErrorLabel.DescendantIdMalformed,تعذَّر تحليل ContentId في {InstanceFullName}.{FieldName}. تأكد من استخدام عنوان URL صالح يحتوي على معرف صحيح ثم حاول مرة أخرى.
-Common.UGCValidation.ErrorLabel.DescendantIdMissing, لا يمكن أن يكون {InstanceFullName}.{FieldName} فارغًا. تأكد من تعيين أصل صالح وحاول مرة أخرى.
-Common.UGCValidation.ErrorLabel.DescendantIdNotApproved,فشل أحد الأصول (أو أكثر) في اجتياز مراجعة الإشراف: {ModerationMessages}
-Common.UGCValidation.ErrorLabel.DescendantIdNotOwned,الأصل {AssetId} ({InstanceFullName}.{FieldName}) ليس مملوكًا لمصمّم معتمد.
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,لم يتم نشر الأصل {AssetId} ({InstanceFullName}.{FieldName}). انشره وحاول مرة أخرى.
-Common.UGCValidation.ErrorLabel.DescendantIdVersionNotLatest,يستخدم {InstanceFullName}.{FieldName} الإصدار {Version} من الأصل {AssetId}، ولكن لا يمكن استخدام سوى أحدث إصدار منه وهو {LatestVersion} في الوقت الحالي. استخدِم الإصدار {LatestVersion} أو قم بإزالة '&version={Version}'، وحاول مرة أخرى.
-Common.UGCValidation.ErrorLabel.DescendantIdsTooMany,يحتوي نموذج الرفع على عدد كبير للغاية من الأصول الفرعية (أصول mesh، والهيئات، وما إلى ذلك) ولا يمكن معالجته بالشكل الحالي. يجب عليك إعادة ترتيب النموذج.
-Common.UGCValidation.ErrorLabel.DynHead_ControlsInactive,يحتوي أصل mesh لـ {headName} ({meshId}) على عناصر تحكم FACS غير نشطة: {controlList}
-Common.UGCValidation.ErrorLabel.DynHead_ControlsMissing,يفتقر أصل mesh لـ {headName} ({meshId}) إلى عناصر تحكم FACS: {controlList}
-Common.UGCValidation.ErrorLabel.DynHead_FacsMissing,"تعذَّر التحقق من صحة الرأس الديناميكي ""{headName}"" بسبب نقص معلومات نظام FACS. يجب عليك توفير عناصر تحكم نظام FACS لما لا يقل عن 17 وضعية (راجع التوثيق)."
-Common.UGCValidation.ErrorLabel.DynHead_JointAccumulatedExceeded,يمكن دمج محركات الوجه لتمديد المِفصل {jointName} إلى مسافة بعيدة خارج الرأس. يُرجى تحرير محركات الوجه والمحاولة مرة أخرى.
-Common.UGCValidation.ErrorLabel.DynHead_JointBoundsCheckFailed,تعذَّر التحقق من صحة حدود مِفصل محرك الوجه، يُرجى المحاولة مرة أخرى لاحقًا.
-Common.UGCValidation.ErrorLabel.DynHead_JointDirectExceeded,يؤدي محرك الوجه {actionName} في الرأس إلى تحريك المفاصل إلى مسافة بعيدة خارج الرأس. يُرجى تحرير محركات الوجه والمحاولة مرة أخرى.
+Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,يستخدم {InstanceFullName}.{FieldName} الإصدار {Version} من الأصل {AssetId}، ولكن الإصدار 1 فقط هو المدعوم في الوقت الحالي. استخدِم الإصدار 1 وحاول مرة أخرى.
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,يجب أن تكون الرؤوس الديناميكية في المتجر محصورة بشكل صحيح بحيث تصطف قمم العينين والفم على القفص مع قمم الشبكة. يرجى تحسين القفص ومحاذاته مع الشبكة.
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,العين اليسرى على الشاشة (النقاط الحمراء على الجانب الأيسر من الرأس في المكون الإضافي للتصور) بها معالم قفص غير محاذية لأصل mesh: تقع بعض نقاط القفص داخل أصل mesh للرأس (يخترق أصل mesh القفص) أو بعيدًا جدًا خارجه. اضبط القفص المقابل بحيث يكون موضوعًا على أصل mesh أو خارجه مباشرةً حول هذه العين.
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,الفم (النقاط الخضراء في المكون الإضافي للتصور) به معالم قفص غير محاذية لأصل mesh: تقع بعض نقاط القفص داخل أصل mesh للرأس (يخترق أصل mesh القفص) أو بعيدًا جدًا خارجه. اضبط قفص الفم بحيث يكون موضوعًا على أصل mesh أو خارجه مباشرةً حول الفم.
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,العين اليمنى على الشاشة (النقاط الزرقاء على الجانب الأيمن من الرأس في المكون الإضافي للتصور) بها معالم قفص غير محاذية لأصل mesh: تقع بعض نقاط القفص داخل أصل mesh للرأس (يخترق أصل mesh القفص) أو بعيدًا جدًا خارجه. اضبط القفص المقابل بحيث يكون موضوعًا على أصل mesh أو خارجه مباشرةً حول هذه العين.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,معالم غلاف العين اليسرى للرأس الديناميكي غير محاذية للمجسم. قم بضبط غلاف العين بحيث يقع مجسم العين اليسرى ضمن منطقة الغلاف المسقطة.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,معالم غلاف الفم للرأس الديناميكي غير محاذية للمجسم. قم بضبط غلاف الفم بحيث يقع مجسم الفم ضمن منطقة الغلاف المسقطة.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,معالم غلاف العين اليمنى للرأس الديناميكي غير محاذية للمجسم. قم بضبط غلاف العين بحيث يقع مجسم العين اليمنى ضمن منطقة الغلاف المسقطة.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,تعذّر اكتشاف تعبير الابتسامة للرأس الديناميكي. يُرجى ضبط معالم القفص الخاصة بالفم لتتطابق مع موضع الفم على الرأس والتأكد من إمكانية إظهار تعبير الابتسامة.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,تعذّر اكتشاف تعبير إغلاق العين اليسرى للرأس الديناميكي. يُرجى ضبط معالم القفص الخاصة بالعين اليسرى لتتطابق مع موضع العين اليسرى على الرأس والتأكد من إمكانية إغلاقها.
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,لا تحتوي الرؤوس الديناميكية في المتجر على أقفاص للرأس. يرجى إنشاء قفص رأس للرأس الديناميكي.
@@ -309,9 +256,7 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,تعذّر اكتشاف 
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,يجب أن تكون الرؤوس الديناميكية في المتجر متحركة، لكن هذا الرأس لا يحتوي على بيانات نظام FACS.
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,تعذّر اكتشاف تعبير إغلاق العين اليمنى للرأس الديناميكي. يُرجى ضبط معالم القفص الخاصة بالعين اليمنى لتتطابق مع موضع العين اليمنى على الرأس والتأكد من إمكانية إغلاقها.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,تعذّر اكتشاف تعبير العبوس للرأس الديناميكي. يُرجى ضبط معالم القفص الخاصة بالفم لتتطابق مع موضع الفم على الرأس والتأكد من إمكانية إظهار تعبير العبوس.
-Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,"أصل mesh لجزء الجسد ""{meshName}"" ذاتي الإضاءة بنسبة {emissivePercentage}%. يجب ألا تتجاوز التغطية المُضيئة {maxEmissivePercentage}%. يُرجى تقليل شدة القناع الانبعاثي أو نطاق تغطيته."
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,يتميز {meshName} بكونه مضيئًا للغاية. تتجاوز مساحة الإضاءة × الشدة الحد المسموح به (حيث تبلغ حاليًا {emissivePercentage}%، ويجب أن تكون {maxEmissivePercentage}% أو أقل). قم بتقليص المساحة المتوهجة أو خفض قيمة EmissiveStrength.
-Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,"يحتوي أصل Mesh ""{meshName}"" على مساحة سطحية مضيئة موزونة تبلغ {emissiveArea} من الأزرار المربعة، وهو ما يتجاوز الحد الأقصى البالغ {maxEmissiveArea} من الأزرار المربعة. يُرجى تقليل شدة القناع الانبعاثي أو نطاق تغطيته."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,يتميز {assetTypeName} بكونه مضيئًا للغاية. تتجاوز مساحة الإضاءة × الشدة الحد المسموح به (حيث تبلغ حاليًا {emissiveArea}، ويجب أن تكون {maxEmissiveArea} أو أقل). قم بتقليص المساحة المتوهجة أو خفض قيمة EmissiveStrength.
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedInExperience,خرائط الإضاءة الذاتية غير مدعومة للعناصر التي تم إنشاؤها داخل التجارب. قم بإزالة EmissiveMaskContent من كل SurfaceAppearance.
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedOnDecal,"لا يمكن للملصقات أن تكون ذاتية الإضاءة. في ""{InstancePath}""، قم بإزالة EmissiveMaskContent، وقم بإعداد EmissiveStrength إلى 1، وقم بإعداد EmissiveTint إلى اللون الأبيض."
@@ -319,29 +264,19 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribut
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,تفتقد الحركة المنشورة إلى علامة حركة تعبيرية صالحة من تصميم المستخدم (UGC). يُرجى إعادة نشر الحركة.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,تعذَّر حساب الحد الأقصى لإزاحة الجزء من بيانات الحركة المنشورة. يُرجى إعادة نشر الحركة.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,تحدد الحركة المنشورة الحد الأقصى لإزاحة الجزء بمقدار {taggedTranslation} من الأزرار، لكن بيانات الحركة الخاصة بها تُحسب لتكون {calculatedTranslation} من الأزرار. يُرجى إعادة نشر الحركة.
-Common.UGCValidation.ErrorLabel.ExperienceCreatorNotSupported,لا يمكن لمصممي التجارب إنشاء عناصر الأفاتار. نوع المصمّم: {CreatorType}، ومُعرِّف المصمّم: {CreatorId}.
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,يجب وضع الرأس فوق UpperTorso. يقع مركز الرأس أسفل الجزء العلوي من الجسم، مما يشير إلى أن أصل Mesh للرأس منهار أو في غير موضعه الصحيح.
-Common.UGCValidation.ErrorLabel.Extents_ParentBelowPart,لا يمكن لـ {upperPart} الامتداد إلى أسفل {lowerPart}. يمكنك تعديل كيفية تجميع الأجزاء عن طريق تحريك {attachmentName}
-Common.UGCValidation.ErrorLabel.Extents_PartAboveParent,لا يمكن لـ {lowerPart} الامتداد إلى أعلى {upperPart}. يمكنك تعديل كيفية تجميع الأجزاء عن طريق تحريك {attachmentName}
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,يجب أن تكون خاصية InternalOverrideFACSData في FaceControls فارغة عند الرفع.
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,يفتقر الوجه الأساسي إلى ملامح العين المطلوبة. يُرجى إضافة عينين إلى الوجه الأساسي والمحاولة مرة أخرى.
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,يفتقر الوجه الأساسي إلى الفم المطلوب. يرجى إضافة فم إلى الوجه الأساسي والمحاولة مرة أخرى.
 Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,تعذّر رصد تعبير السعادة. قم بضبط غلاف الفم أو نظام تعبير السعادة حتى يتشكل مجسم الفم المسقط كما هو متوقع.
-Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,لا تُغلق العين اليسرى على الشاشة (النقاط الحمراء على الجانب الأيسر من الرأس في مكون التصور الإضافي) بما فيه الكفاية. تحقق من عناصر تحكم نظام FACS للعين اليمنى والقفص المقابل.
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,تعذّر رصد تعبير إغلاق العين اليسرى. قم بضبط غلاف العين اليسرى أو نظام تعبير إغلاق العين اليسرى حتى يتشكل مجسم العين المسقط كما هو متوقع.
 Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,تعذّر رصد تعبير فتح الفم. قم بضبط غلاف الفم أو نظام تعبير فتح الفم حتى يتشكل مجسم الفم المسقط كما هو متوقع.
-Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,لا تُغلق العين اليمنى على الشاشة (النقاط الزرقاء على الجانب الأيمن من الرأس في مكون التصور الإضافي) بما فيه الكفاية. تحقق من عناصر تحكم نظام FACS للعين اليسرى والقفص المقابل.
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,تعذّر رصد تعبير إغلاق العين اليمنى. قم بضبط غلاف العين اليمنى أو نظام تعبير إغلاق العين اليمنى حتى يتشكل مجسم العين المسقط كما هو متوقع.
 Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,تعذّر رصد تعبير الحزن. قم بضبط غلاف الفم أو نظام تعبير الحزن حتى يتشكل مجسم الفم المسقط كما هو متوقع.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,تم اكتشاف أن نظام FACS قام بتوسيع حجم رأسك إلى {modPercent}%، لكن تعديل الرأس مخالف لسياسة المتجر المتعلقة بحركات الوجه.
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,يمكن أن تحتوي الرؤوس الديناميكية على {maxFacsJointCount} من مفاصل نظام FACS كحد أقصى، لكن هذا الرأس يحتوي على {actualJointCount}. يُرجى تقليل عدد مفاصل نظام FACS والمحاولة مرة أخرى.
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,تم اكتشاف أن نظام FACS قام بتقليص حجم رأسك إلى {modPercent}%، لكن تغيير الرأس مخالف لسياسة المتجر المتعلقة بحركات الوجه.
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,تنسيق الملف الذي تم تحميله لا يطابق بنية المجلد المتوقعة. يُرجى المحاولة مرة أخرى أو الإبلاغ عن الأخطاء.
-Common.UGCValidation.ErrorLabel.HSRAssetHasChildren,يحتوي أصل WrapLayer HSR على عناصر فرعية تحت الحالة الجذرية HiddenSurfaceRemovalAsset.
-Common.UGCValidation.ErrorLabel.HSRAssetIdInvalidUrl,"تحتوي الحالة ""{InstancePath}"" على HSRAssetId بعنوان URL غير صالح."
-Common.UGCValidation.ErrorLabel.HSRAssetIdRequired,"تتطلب الحالة ""{InstancePath}"" إعداد HSRAssetId."
-Common.UGCValidation.ErrorLabel.HSRAssetInvalidRoot,لا يحتوي أصل WrapLayer HSR على جذر HiddenSurfaceRemovalAsset واحد بالضبط.
-Common.UGCValidation.ErrorLabel.HSRDataNotReady,"بيانات HSR مفقودة لـ ""{InstancePath}"". يُرجى المحاولة مرة أخرى."
-Common.UGCValidation.ErrorLabel.HSRMeshIdValidationError,"حدث خطأ أثناء التحقق من صحة معرّفات أصل mesh HSR لـ ""{InstancePath}""."
-Common.UGCValidation.ErrorLabel.HSRMeshIdsMismatch,"تم اكتشاف بيانات HSR غير صالحة لـ ""{InstancePath}"". يُرجى إعادة إنشاء الأصل باستخدام أداة تجربة الأكسسوارات والمحاولة مرة أخرى."
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,العظم {bonePath} بعيد جدًا عن MeshPart {partName}، يرجى وضعه أقرب إلى حدود حجم MeshPart‏.
 Common.UGCValidation.ErrorLabel.HrdBone_TooCloseToParent,العظم {bonePath} قريب جدًا من أصله. اضبط موضع العظم قليلاً.
 Common.UGCValidation.ErrorLabel.HrdBone_TransformNotIdentity,يحتوي العظم {bonePath} على خاصية التحويل، ولكن لم يتم تمكين هذه الخاصية بعد لعمليات الرفع إلى المتجر. يرجى إعادة تعيينها إلى إطار CFrame المتطابق.
@@ -362,8 +297,6 @@ Common.UGCValidation.ErrorLabel.HrdProperties_UncontainedJoint,تتم الإشا
 Common.UGCValidation.ErrorLabel.HrdTposePosition,يحتوي المفصل {jointName} على موضع TposeAdjustment خارج الحدود المقبولة. يُرجى تقليل الإزاحة بحيث تكون ضمن +-({offsetLimit}).
 Common.UGCValidation.ErrorLabel.HrdTposeRotation,يحتوي المفصل {jointName} على موضع TposeAdjustment ينحرف بأكثر من {degLimit} من الدرجات عن الاتجاه المُقترح {expectedOrientation}.
 Common.UGCValidation.ErrorLabel.InstanceTagsFound,تحتوي الحالات التالية على وسوم ولكن أصول السوق لا يمكن أن تحتوي على أي وسوم: {ProblematicDescendantPaths}
-Common.UGCValidation.ErrorLabel.InstanceTreeBannedClass,"الحالة ""{InstancePath}"" من نوع {ClassName}، وهو غير مسموح به في أصول المتجر."
-Common.UGCValidation.ErrorLabel.InstanceTreeBannedName,"تحمل الحالة ""{InstancePath}"" اسمًا محجوزًا ولا يمكن استخدامه في أصول المتجر."
 Common.UGCValidation.ErrorLabel.InternalError,تعذّر التحقق من صحة الأصل بشكل صحيح بسبب خطأ داخلي. إذا استمرت هذه المشكلة، يُرجى إنشاء بلاغ عن الأخطاء. ValidationJobId: {ValidationJobId}
 Common.UGCValidation.ErrorLabel.JointRotAtt_Moved,الحالة {instPath} هي jointRotation تم تحريكه، لكن رفع العناصر على المتجر قد لا يسمح بعد بتعديل هذه الحالة. يُرجى إعادة تعيين الموضع إلى {expectedPosition}.
 Common.UGCValidation.ErrorLabel.JointRotAtt_MultipleAttachments,لا يمكن أن تحتوي الحالة {parentPath} على أكثر من عنصر فرعي واحد من نوع JointRotation.
@@ -371,21 +304,7 @@ Common.UGCValidation.ErrorLabel.JointRotAtt_Rotated,الحالة {instPath} هي
 Common.UGCValidation.ErrorLabel.JointRotAtt_UnrecognizedParent,تحتوي الحالة {parentPath} على عنصر فرعي من نوع JointRotation، ولكن هذا ليس جزءًا من مخطط R15plus المسموح به.
 Common.UGCValidation.ErrorLabel.JointRotAtt_WrongInstanceClass,الحالة {instPath} تسمى JointRotation ولكن JointRotation محجوز لنقاط الاتصال التي هي أجزاء فرعية لنقطة اتصال أخرى.
 Common.UGCValidation.ErrorLabel.LCDeformTooLarge,تتشوه الملابس ذات الطبقات الخاصة بك بما يتجاوز الحجم المقبول البالغ {maxSize} عند وضعها على الأفاتار.
-Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NoHandle,"لا يحتوي الإكسسوار ""{accessoryName}"" على مقبض. لا يمكن التحقق من صحة الملابس ذات الطبقات خارج الحدود."
-Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NoWrapLayer,"لا يحتوي الإكسسوار ""{accessoryName}"" على WrapLayer. لا يمكن التحقق من صحة الملابس ذات الطبقات خارج الحدود."
-Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NonZeroMaxSize,يحتوي الإكسسوار على قيمة MaxSize لا تساوي صفرًا.
-Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NonZeroOffset,يحتوي الإكسسوار على قيمة إزاحة لا تساوي صفرًا.
-Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_OutOfBounds,"تعذَّر التحقق من صحة الملابس ذات الطبقات للإكسسوار ""{accessoryName}"". عند التشويه، تصبح الملابس ذات الطبقات كبيرة جدًا."
 Common.UGCValidation.ErrorLabel.LeaderVertsNearCageIslands,تحتوي الرموش على رؤوس (vertices) مُكسوة بإكساء RBX_Leader تقع بعيدة جدًا عن معالم العين على القفص الداخلي. تأكد من أن جميع الرؤوس المُكسوة بإكساء RBX_Leader تقع بالقرب من منطقة العين في القفص الداخلي
-Common.UGCValidation.ErrorLabel.LegsSeparated_HipAttachmentOutOfRange,تبلغ نقطة الاتصال {attachmentPath} ما مقداره {currentValue} ولا يمكن أن تكون {comparison} {cutoff}. يُرجى إصلاح نقطة الاتصال.
-Common.UGCValidation.ErrorLabel.LegsSeparated_LegsOverlap,تتداخل الساقان بمقدار {overlap} من الأزرار على المحور X. {leftMax} هو الحد الأقصى للساق اليسرى. {rightMax} هو الحد الأقصى للساق اليمنى. يُرجى ضبط الساقين لتقليل التداخل.
-Common.UGCValidation.ErrorLabel.MakeupDecal_FailedToLoadTexture,تعذَّر تحميل {fieldName} للملصق {instanceName}. تأكد من وجود TextureContent وصلاحيته ثم حاول مرة أخرى.
-Common.UGCValidation.ErrorLabel.MakeupDecal_FailedToLoadTextureData,"تعذَّر تحميل بيانات الهيئة لـ ""{fullName}"". تأكد من وجود الهيئة ثم حاول مرة أخرى."
-Common.UGCValidation.ErrorLabel.MakeupDecal_NoColorMap,لم يتم العثور على ColorMap للملصق {instanceName}. يجب أن تحتوي ملصقات المكياج على ColorMap صالحة.
-Common.UGCValidation.ErrorLabel.MakeupDecal_TextureTooBig,"دقة الهيئة {sizeX}x{sizeY} بكسل الموجودة في ""{fullName}"" أعلى من الحد الأقصى للحجم المدعوم البالغ {maxSize}x{maxSize} بكسل للحقل ""{fieldName}""."
-Common.UGCValidation.ErrorLabel.MakeupDecal_UVZoneExcludeViolation,تم العثور على وحدات بكسل غير شفافة في ColorMap للحالة {instanceName} ضمن منطقة UV مقيدة بين [{minBound}] و[{maxBound}] لنوع الأصل {assetTypeName}.
-Common.UGCValidation.ErrorLabel.MakeupDecal_UVZoneIncludeViolation,لا تقع المنطقة المعتمة في ColorMap للحالة {instanceName} ضمن منطقة UV المسموح بها بين [{minBound}] و[{maxBound}] لنوع الأصل {assetTypeName}.
-Common.UGCValidation.ErrorLabel.MaterialNotAllowed,الحالات التالية تحتوي على مادة غير صالحة: {InstanceNameList}. المواد المسموح بها فقط هي: {AllowedMaterials}.
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceAvatar_CageInsideMesh,يتقاطع قفص الجسم مع mesh الجسم. {negtiveSDFPercent}% من قمم قفص الجسم تقع داخل mesh الجسم.
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceAvatar_CageTooFar,قفص الرأس بعيد جدًا عن mesh الرأس. يبلغ الحد الأقصى للمسافة بين قفص الرأس و {max_sdf}، وهو أعلى من الحد المسموح به {max_sdf_threshold}
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceHead_CageInsideMesh,يتقاطع قفص الرأس مع mesh الرأس. {negtiveSDFPercent}% من قمم قفص الرأس تقع داخل mesh الرأس.
@@ -395,61 +314,18 @@ Common.UGCValidation.ErrorLabel.MeasureCageMeshDistance_CageTooFar,القفص ا
 Common.UGCValidation.ErrorLabel.MeasureCageRelevancy,{outer_cage_face_irrelevant_percent}% من رؤوس القفص الخارجي المُعدَّلة لا تغطي الإكسسوار. تأكد من تحريك القفص الخارجي فقط عند الحاجة.
 Common.UGCValidation.ErrorLabel.MeasureCageUV,توجد {incorrect_uv_count} قيم UV في القفص {cage_name} غير صحيحة أو لا تنتمي إلى القالب. يرجى تصحيح قيم UV للقفص.
 Common.UGCValidation.ErrorLabel.MeasureMeshOutsideOuterCage,{mesh_outside_outer_cage_percent}% من قمم mesh الخاصة بالإكسسوار تقع خارج قفصه الخارجي. قم بإجراء تعديلات لوضع جزء أكبر من الإكسسوار بين الأقفاص.
-Common.UGCValidation.ErrorLabel.MeshGeometry_ExceedsBounds,حجم {meshName} أكبر من الحد الأقصى المسموح به لحجم الإطار المحيط. الحد الأقصى للحجم للنوع {assetTypeName} هو [{maxSizeX}، {maxSizeY}، {maxSizeZ}].
-Common.UGCValidation.ErrorLabel.MeshGeometry_NotCentered,يحتوي {meshName}.{fieldName} على بيانات أصل mesh غير متمركزة. يُرجى إعادة استيراد أصل mesh هذا باستخدام أداة استيراد Roblox ثلاثية الأبعاد، والتأكد من عدم وجود تصميم هندسي مفكك في ملف المصدر.
-Common.UGCValidation.ErrorLabel.MeshGeometry_PositionOutOfBounds,الموضع خارج الحدود.
-Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleAboveMaximum,تم تكبير حجم {meshName} إلى {scaleMultiple} ضعفًا من حجم أصل mesh الأصلي. الحد الأقصى هو {maxScaleMultiple} ضعفًا. يُرجى إعادة تصدير أصل mesh أو استيراده بالحجم المطلوب بدلًا من تكبيره داخل Studio.
-Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleBelowMinimum,تم تصغير حجم {meshName} إلى نسبة {scalePercent}% من حجمه الأصلي. الحد الأدنى المسموح به هو {minScalePercent}%. يُرجى إعادة تصدير المجسم أو استيراده بالحجم المطلوب بدلًا من تصغيره داخل Studio.
-Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleNotPositive,يحتوي {meshName} على مقياس يساوي صفرًا أو قيمة سالبة. استخدم قيم مقياس موجبة. لعكس أصل mesh، اقلبه في برمجيات النمذجة ثلاثية الأبعاد لديك وأعد تصديره.
-Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooLarge,حجم أصل mesh لـ {meshName} كبير للغاية.
-Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooSmall,حجم أصل mesh صغير جدًا.
-Common.UGCValidation.ErrorLabel.MeshGeometry_SurfaceAreaExceeded,"المساحة السطحية الإجمالية لنموذج أصل mesh ""{meshName}"" هي {surfaceArea}، ولا يمكن أن تكون أكبر من {maxSurfaceArea}. يجب عليك تقليل عدد و/أو حجم جميع المثلثات."
-Common.UGCValidation.ErrorLabel.MeshGeometry_TotalTriangleCountExceeded,"دقة أصل mesh البالغة ""{triangleCount}"" لـ ""{assetTypeName}"" أعلى من الحد الأقصى لعدد المثلثات المدعوم البالغ ""{maxTriangles}"". يتعين عليك إعادة تشكيل هندسة النموذج لتقليل عدد المثلثات."
-Common.UGCValidation.ErrorLabel.MeshGeometry_TriangleCountExceeded,دقة نموذج أصل mesh {meshName} البالغة {triangleCount} أعلى من القيمة القصوى المدعومة البالغة {maxTriangles}. يتعين عليك إعادة تشكيل هندسة النموذج والمحاولة مرة أخرى.
-Common.UGCValidation.ErrorLabel.MeshGeometry_VertexDensityExceeded,تم تجاوز الحد الأقصى لكثافة القمم. قلل عدد القمم المتقاربة جدًا من بعضها البعض.
-Common.UGCValidation.ErrorLabel.MeshGeometry_ZeroAreaTriangle,تم اكتشاف مثلث مساحته صفر في نموذج أصل mesh {meshName}. يتعين عليك تحرير الشبكة لإزالة المثلثات ذات المساحة الصفرية.
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,"حجم أصل mesh للجزء {partName} على المحور {axis} البالغ ""{currentSize}"" من الأزرار أكبر من الحد الأقصى المسموح به لحجم الجزء الفردي البالغ ""{maxSize}"" من الأزرار. يرجى تغيير حجم أصل mesh إلى الأصغر."
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"حجم أصل mesh للجزء {partName} على المحور {axis} البالغ ""{currentSize}"" من الأزرار أصغر من الحد الأدنى المسموح به لحجم الجزء الفردي البالغ ""{minSize}"" من الأزرار. يرجى تغيير حجم أصل mesh إلى الأكبر."
-Common.UGCValidation.ErrorLabel.MeshSize_LoadFailed,
-Common.UGCValidation.ErrorLabel.MeshSize_Mismatch,حجم أصل mesh المحسوب لـ {meshName} لا يتطابق مع قيمة خاصية MeshSize
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,يجب أن توجد نقطة الاتصال {attName} مرة واحدة بالضبط ضمن العناصر الفرعية للجزء {partName}.
 Common.UGCValidation.ErrorLabel.NoAttributes,يحتوي '{RootInstanceName}' (أو العناصر الفرعية له) على سمات. يتعين عليك إزالة السمات مما يلي: {InstanceNameList}
-Common.UGCValidation.ErrorLabel.NoMeshBelowFeet_PartBelowFeet,يمتد {partName} بمقدار {distance} من الأزرار أسفل قاع القدمين. الحد الأقصى هو {maxDistance} من الأزرار. يُسمح للساقين فقط بلمس الأرض، لذا يُرجى تقصير {partName} أو رفعه.
-Common.UGCValidation.ErrorLabel.Pose_AngleFromXYPlane,"يقع {assetName} بزاوية قدرها {angle} درجة عن مستوى السينات والصادات (X,Y)، ويجب أن يكون في حدود {limit} من الدرجات. تأكد من أن الشخصية تتخذ وضعية حرف I، أو حرف A، أو حرف T."
-Common.UGCValidation.ErrorLabel.Pose_AngleOnXYPlane,"يقع {assetName} بزاوية قدرها {angle} درجة بالنسبة للاتجاه [{xVector}] على مستوى السينات والصادات (X,Y)، ويجب أن تكون بين {minAngle} و{maxAngle} من الدرجات. تأكد من أن الشخصية تتخذ وضعية حرف I، أو حرف A، أو حرف T."
-Common.UGCValidation.ErrorLabel.Pose_CFrameCalculationFailed,تعذَّر حساب CFrame للأصل {assetName}. تأكّد من أن الشخصية في وضعية I أو وضعية A أو وضعية T، وأن الأجزاء ليست جميعها في نفس الموضع.
-Common.UGCValidation.ErrorLabel.Pose_PointingAlongZVector,يشير {assetName} باتجاه Z العالمي. تأكد من أن الشخصية تتخذ وضعية حرف I، أو حرف A، أو حرف T.
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,"يحتوي {ClassName} ""{InstancePath}"" على خصائص غير صالحة: {ProblematicProperties}. لقد تم تجاوز حد البايت المحدد (الحد 0 يعني أن الخاصية يجب أن تكون فارغة)، أو أن إحدى الخصائص تحتوي على قيم NaN/Inf أو تجاوزت الحد الافتراضي للحجم."
-Common.UGCValidation.ErrorLabel.PropertyNotFound,"لم يتم العثور على الخاصية ""{PropertyName}"" في ""{InstancePath}""."
-Common.UGCValidation.ErrorLabel.PropertyValueInvalid,"الخاصية ""{PropertyName}"" في ""{InstancePath}"" غير صالحة. المتوقع أن تكون {ComparisonMethod} {ExpectedValue}."
 Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,تفتقر الرسوم المتحركة التي تم تقديمها إلى تعبير واحد أو أكثر من تعابير الوجه المطلوبة (إغلاق العين، فتح الفم، السعادة، الحزن).
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,"يجب وضع نقطة اتصال rig ""{AttachmentName}"" في الجزء ""{PartName}"" بالقرب من حدود المفصل حيث يتصل جزء الجسد هذا بجزء مجاور. الموضع الحالي [{CurrentPosition}] بعيد جدًا عن مستوى الاتصال. انقله ليكون أقرب إلى [{ClosestValidPosition}]."
-Common.UGCValidation.ErrorLabel.SAOpacity_FailedToLoadTexture,"تعذَّر تحميل الهيئة ""{FieldName}"" لـ SurfaceAppearance ""{FullName}"". تأكد من وجود الهيئة ثم حاول مرة أخرى."
-Common.UGCValidation.ErrorLabel.SAOpacity_InvalidAlphaMode,خاصية AlphaMode لـ SurfaceAppearance ({FullName}) غير صالحة. يجب أن تكون Enum.AlphaMode.Overlay.
-Common.UGCValidation.ErrorLabel.SAOpacity_TextureNotOpaque,"الهيئة ""{FullName}"" ليست معتمة بالكامل. يُرجى استخدام هيئة معتمة."
-Common.UGCValidation.ErrorLabel.ScaleTypeInvalid,"قيمة AvatarPartScaleType في ""{ParentName}"" غير صالحة. القيم المقبولة هي Classic أو ProportionsSlender أو ProportionsNormal."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,لرفع أصل على منصة Roblox، يجب عليك تحديد حالة واحدة بالضبط ونوع الرفع المرتبط بها.
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,هذا الأصل أكبر من الحد المسموح به للرفع (حجمه {sizeBytes} بايت متجاوزًا الحد الأقصى البالغ {maxSizeBytes} بايت). يرجى تقليل حجمه والمحاولة مرة أخرى.
-Common.UGCValidation.ErrorLabel.SurfaceAppearance_MissingSA,يحتوي ({MeshPartFullName}) على TextureID فارغ وليس له عنصر فرعي من نوع SurfaceAppearance. يجب تحديد أحدهما على الأقل.
-Common.UGCValidation.ErrorLabel.SurfaceAppearance_TextureAndSABothDefined,تم تعريف كل من TextureID وSurfaceAppearance للجزء الشبكي ({MeshPartFullName}). سيستخدم النشر SurfaceAppearance فقط.
 Common.UGCValidation.ErrorLabel.TexturePackInvalidURL,"تحتوي ""{SurfaceAppearanceName}"" على خاصية ""TexturePack"" بعنوان URL غير صالح. يُرجى إصلاح عنوان URL."
-Common.UGCValidation.ErrorLabel.TexturePack_DownloadFailed,"تعذَّر تنزيل TexturePack لـ SurfaceAppearance ""{SurfaceAppearanceName}""."
-Common.UGCValidation.ErrorLabel.TexturePack_Mismatch,"الهيئات في SurfaceAppearance ""{SurfaceAppearanceName}"" غير متطابقة مع تلك الموجودة في TexturePack الخاص بها. يُرجى إصلاح TexturePack."
-Common.UGCValidation.ErrorLabel.TextureSize_FailedToLoad,"تعذَّر تحميل بيانات الهيئة لـ ""{FullName}"". تأكد من وجود الهيئة ثم حاول مرة أخرى."
-Common.UGCValidation.ErrorLabel.TextureSize_TooBig,"دقة الهيئة {Width}x{Height} بكسل الموجودة في ""{FullName}"" أعلى من الحد الأقصى للحجم المدعوم البالغ {MaxSize}x{MaxSize} بكسل للحقل ""{FieldName}""."
-Common.UGCValidation.ErrorLabel.ThumbnailInvalidTarget,"الأصل المستهدف غير صالح لإنشاء الصورة المصغّرة. المتوقع أن يكون ""{ExpectedTarget}""."
-Common.UGCValidation.ErrorLabel.ThumbnailOutsideView,"يقع الأصل ""{InstancePath}"" خارج زاوية رؤية الكاميرا للصور المصغرة. أعد وضع الأصل في منتصف عرض الكاميرا."
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,يحتوي MeshPart الخاص بالرأس على محرك وجه لـ {jointName}، والذي لا يمكن استخدامه في نظام FACs. يُرجى إعادة تسمية هذه المفصل ثم إعادة استيراد الرأس.
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned, الجزء {partName} مربوط بالمفصل الافتراضي {jointName}، وهو ليسو جزءًا من مخطط R15plus.
-Common.UGCValidation.ErrorLabel.UnsupportedCreatorType,نوع المصمِّم غير مدعوم. نوع المصمِّم: {CreatorType}، ومُعرِّف المصمِّم: {CreatorId}.
-Common.UGCValidation.ErrorLabel.VertexColors_NotOpaque,"تم العثور على لون قمة غير صالح في نموذج أصل mesh ""{MeshName}"". يتعين عليك تحرير خريطة الألوان لتكون باللون الأبيض بالكامل {TransparencyNote} والمحاولة مرة أخرى."
-Common.UGCValidation.ErrorLabel.VerticesNotCoincident_TooManySimilar,يحتوي {cageName} على نسبة {percentage}% من القمم المتقاربة جدًا من بعضها البعض. يُرجى تحرير القمم بحيث لا يكون هناك أكثر من نسبة {threshold}% منها متطابق أو قريب من بعضها البعض.
-Common.UGCValidation.ErrorLabel.WrapTexture_FailedToLoadCage,تعذّر تحميل ReferenceCageContent لـ {instanceName}.
-Common.UGCValidation.ErrorLabel.WrapTexture_FailedToLoadUV,"تعذّر تحميل إحداثيات UV لـ ""{instanceName}"". تأكد من وجود خريطة إحداثيات UV ثم حاول مرة أخرى."
-Common.UGCValidation.ErrorLabel.WrapTexture_InvalidMaxBound,قيمة UVMaxBound لـ {instanceName} تبلغ [{actual}] ولا تتطابق مع القيمة المطلوبة [{expected}].
-Common.UGCValidation.ErrorLabel.WrapTexture_InvalidMinBound,قيمة UVMinBound لـ {instanceName} تبلغ [{actual}] ولا تتطابق مع القيمة المطلوبة [{expected}].
-Common.UGCValidation.ErrorLabel.WrapTexture_InvalidUV,"تم العثور على قيمة UV غير صالحة للقفص للجزء ""{instanceName}"". تحتاج إلى تحرير خريطة UV لإصلاح هذه المشكلة."
-Common.UGCValidation.ErrorLabel.WrapTexture_NoCage,لم يتم تقديم ReferenceCageContent لـ {instanceName}.
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,الانتقال إلى الإعدادات
@@ -1056,7 +932,6 @@ CoreScripts.InGameMenu.Ok,
 CoreScripts.InGameMenu.PageTitle.Controls,التحكم...
 CoreScripts.InGameMenu.PageTitle.GameSettings,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,دعوة أصدقاء
-CoreScripts.InGameMenu.PageTitle.JoinOrInvite,الانضمام أو الدعوة
 CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends,الانضمام إلى الأصدقاء أو دعوتهم
 CoreScripts.InGameMenu.PageTitle.Players,الأشخاص
 CoreScripts.InGameMenu.PageTitle.Report,إبلاغ
@@ -1418,7 +1293,6 @@ Feature.AddFriends.Action.FriendAdded,تمت إضافة صديق
 Feature.AddFriends.Action.IgnoreFriendRequest,تجاهل طلب الصداقة
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,تجاهل طلب الصديق الموثوق به
 Feature.AddFriends.Action.RequestIgnored,تم تجاهل الطلب
-Feature.AddFriends.Heading.AddFriends,إضافة أصدقاء
 Feature.AddFriends.Label.AddFriendsTooltip,ابدأ بالبحث عن أصدقائك لاستكشاف Roblox برفقتهم.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,العثور على أشخاص على Roblox عن طريق البحث عن اسم المستخدم أو اسم العرض.
 Feature.AddFriends.Label.ConnectWithContacts,دعوة جهات اتصالك أو الاتصال بأصدقاء على Roblox.
@@ -1812,9 +1686,6 @@ Feature.Avatar.Label.Shoes,أحذية
 Feature.Avatar.Label.Shorts,سراويل قصيرة
 Feature.Avatar.Label.Shoulder,الكتف
 Feature.Avatar.Label.Skin,البشرة
-Feature.Avatar.Label.Spawn,نقطة العودة
-Feature.Avatar.Label.SpawnEffect,تأثير نقطة العودة
-Feature.Avatar.Label.SpawnEffects,تأثيرات نقطة العودة
 Feature.Avatar.Label.Sweater,سترة
 Feature.Avatar.Label.Sweaters,سترات
 Feature.Avatar.Label.Swim,سباحة
@@ -2037,10 +1908,8 @@ Feature.AvatarSwitcher.Message.SelectAvatar,حدّد أفاتارًا
 Feature.AvatarSwitcher.Message.SwitchingDeferred,سترى هذه الصورة الرمزية بعد إعادة الظهور التالية، أو عند الانضمام إلى تجربة. يمكنك التبديل إلى صورة رمزية مختلفة في أي وقت.
 Feature.AvatarSwitcher.Message.UnknownSupport,لا يزال بإمكانك تبديل الأفاتار، لكن قد لا يظهر بشكل صحيح في هذه التجربة.
 Feature.AvatarSwitcher.Message.Unsupported,تستخدم هذه التجربة أفاتارًا مخصصًا ولا تدعم أفاتارات منصة Roblox.
-Feature.AvatarWorkshop.Action.EditAvatar,تحرير الأفاتار
 Feature.AvatarWorkshop.Action.TryAgain,
-Feature.AvatarWorkshop.Heading.Customize,
-Feature.AvatarWorkshop.Heading.YourAvatars,أفاتاراتك
+Feature.AvatarWorkshop.Heading.AvatarWorkshop,ورشة الأفاتار
 Feature.AvatarWorkshop.Message.LoadItemsError,حدث خطأ ما أثناء تحميل عناصرك.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,تعذَّر تحميل المزيد من العناصر.
 Feature.AvatarWorkshop.Message.NoItemsOwned,لا تملك أي عناصر هنا حتى الآن.
@@ -2199,7 +2068,7 @@ Feature.Build.Description.AdCampaignModerationReview,تتم مراجعة جمي�
 Feature.Build.Description.AdCampaignSheetRunDates,سيتم تشغيل حملتك من {startDate} إلى {endDate}
 Feature.Build.Description.AdComplete,انتهى إعلانك. تحقَّق من نتائجك.
 Feature.Build.Description.AdModerationReview,تتم مراجعة جميع الإعلانات من قِبل فريق الإشراف لدى منصّة Roblox وقد تستغرق العملية ما يصل إلى 24 ساعة.
-Feature.Build.Description.AdvancedModel,مثالي للجودة العالية، لكن استخدامك سينفد أسرع.
+Feature.Build.Description.AdvancedModel,الأفضل للحصول على أعلى جودة. ينفد الاستخدام بسرعة أكبر بمقدار 3 أضعاف.
 Feature.Build.Description.AdvertisingAgreement,"من خلال تحديد ""إنشاء""، فإنك توافق على {advertisingTermsStart}شروط الإعلان{advertisingTermsEnd} و{advertisingStandardsStart}معايير الإعلان{advertisingStandardsEnd} لدى منصّة Roblox."
 Feature.Build.Description.ArchiveRemoval,إذا قمت بأرشفة هذه اللعبة، فستتم إزالتها من ميزة Build. سيظل بإمكانك الوصول إليها واستعادتها من مركز المصمم أو من Roblox Studio.
 Feature.Build.Description.AutoBuyUsage,استخدم عملات Robux لشراء المزيد من استخدام ميزة Build تلقائيًا أثناء الإنشاء. يمكنك تعيين حد الإنفاق اليومي في أي وقت.
@@ -2209,7 +2078,6 @@ Feature.Build.Description.BuildReplyNotif,احصل على إشعار عندما 
 Feature.Build.Description.BuyRobuxToCreate,اشترِ المزيد من عملات Robux لمواصلة الإنشاء، أو انتظر حتى تتم إعادة تعيين استخدام ميزة Build المجاني غدًا.
 Feature.Build.Description.BuyUsageOrWait,اشترِ المزيد من استخدام ميزة Build باستخدام عملات Robux، أو انتظر حتى تتم إعادة تعيين الحد اليومي.
 Feature.Build.Description.CampaignRunDates,
-Feature.Build.Description.CaptureWhilePlaytesting,التقط صورة أثناء اختبار اللعب، ثم أضفها إلى طلبك.
 Feature.Build.Description.ChooseAdCampaignLength,اختر المدة التي تريد أن يستمر فيها عرض إعلانك.
 Feature.Build.Description.ChoosePlaytesters,اختر أصدقاء لمعاينة لعبتك.
 Feature.Build.Description.CreateDeveloperProduct,"إنشاء ""{NAME}"" مقابل {PRICE} من عملات Robux، غير معروض للبيع."
@@ -2316,9 +2184,6 @@ Feature.Build.Label.BackToBuild,الرجوع إلى البناء
 Feature.Build.Label.Building,جارٍ البناء...
 Feature.Build.Label.CaptureLibrary,مكتبة اللقطات
 Feature.Build.Label.CaptureSelectionCount,تم تحديد {SELECTED_COUNT} من أصل {MAX_SELECTIONS}
-Feature.Build.Label.CaptureStepAddImages,"اضغط على ""إضافة صور"" لإرفاق لقطتك"
-Feature.Build.Label.CaptureStepPlaytest,شغّل اختبار اللعب
-Feature.Build.Label.CaptureStepTapCamera,"اضغط على ""الكاميرا"" في شريط أدوات ميزة Build"
 Feature.Build.Label.ContentRating,تصنيف المحتوى
 Feature.Build.Label.CreatedDate,{MONTH} {DAY}، {YEAR}
 Feature.Build.Label.CreatorHub,مركز المصمم
@@ -2363,7 +2228,6 @@ Feature.Build.Label.ManagedPricingMixed,مختلط عبر المنتجات ال�
 Feature.Build.Label.MaximizeForGamePlays,زوِّد عدد مرات تشغيل اللعبة إلى أقصى حد
 Feature.Build.Label.ModelUnavailable,النموذج غير متاح
 Feature.Build.Label.Models3D,النماذج ثلاثية الأبعاد
-Feature.Build.Label.MonetizationCreateTitle,{NAME} - {PRICE} من عملات Robux
 Feature.Build.Label.MyGames,ألعابي
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,لا يوجد حدّ
@@ -2375,7 +2239,7 @@ Feature.Build.Label.OnSale,معروض للبيع
 Feature.Build.Label.Pending,معلّق
 Feature.Build.Label.PercentUsed,تم استخدام {PERCENT}%
 Feature.Build.Label.PlayTime,وقت اللعب
-Feature.Build.Label.PreviewsTab,اختبارات اللعب
+Feature.Build.Label.PreviewsTab,المعاينات
 Feature.Build.Label.PreviouslyPublished,تم النشر سابقًا
 Feature.Build.Label.Price,السعر
 Feature.Build.Label.PriceUnavailable,--
@@ -3161,7 +3025,7 @@ Feature.Chat.Heading.SafeChattingWithUsername,حافِظ على سلامتك أ�
 Feature.Chat.Heading.UserInvitedYouToJoin,تمت دعوتك من {combinedName} للانضمام إلى الدردشة
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,تمت دعوتك من {combinedName} للانضمام إلى مجموعة
 Feature.Chat.Heading.YouWereInvitedToGroup,لقد تلقيتَ دعوة للانضمام إلى المجموعة
-Feature.Chat.Label.AddFriends,
+Feature.Chat.Label.AddFriends,إضافة أصدقاء
 Feature.Chat.Label.Available,متاحة
 Feature.Chat.Label.Blocked,محظور
 Feature.Chat.Label.ChatDetails,تفاصيل المحادثة
@@ -3201,6 +3065,7 @@ Feature.Chat.Label.ReplyingToOthers,رسالة {DISPLAY_NAME} مفادها...
 Feature.Chat.Label.ReplyingToYourself,رسالتك مفادها…
 Feature.Chat.Label.SearchFriends,البحث عن أصدقاء
 Feature.Chat.Label.SearchWord,
+Feature.Chat.Label.SnoozeChatNotifications,كتم إشعارات الدردشة داخل التجربة:
 Feature.Chat.Label.SnoozePartyNotifications,كتم إشعارات الفرقة داخل التجربة لمدة:
 Feature.Chat.Label.SwipeToReplyTooltip,اسحب للرد
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}ي
@@ -3256,6 +3121,7 @@ Feature.Chat.Response.NetworkError,خطأ في الشبكة
 Feature.Chat.RobloxConnectUnavailableWithUser,لا تتوفر ميزة Roblox Connect مع هذا المستخدم في الوقت الحالي.
 Feature.Chat.Text.NoFriends,لم تضف أي أصدقاء بعد. للبدء، ابحث عن أصدقائك على منصّة Roblox ثم أضفهم.
 Feature.Chat.Title.FriendsChat,دردشة الأصدقاء
+Feature.Chat.Title.MuteChatNotifications,كتم إشعارات الدردشة من الأصدقاء أثناء اللعب
 Feature.Chat.Title.NewChat,دردشة جديدة
 Feature.Chat.Toast.Error.InvalidUserSelected,لا يمكن إضافة شخص واحد أو أكثر من الأشخاص المُدرجين ضمن هذه القائمة
 Feature.ContactUpsell.Action.Continue,
@@ -3402,10 +3268,8 @@ Feature.FaceChat.Subtitle.VideoPerformancePromptDisable,إيقاف تشغيل ا
 Feature.FaceChat.Subtitle.VideoUnsupported,لم يتمكن Roblox من استخدام كاميرتك لتحريك أفاتارك.
 Feature.Favorites.Label.Favorite,
 Feature.FlyoutSidePanel.Action.ContinuePlaying,متابعة التشغيل
-Feature.FlyoutSidePanel.Description.SwitchAccountsHere,يمكنك الآن التبديل بين الحسابات من هنا.
 Feature.FlyoutSidePanel.Label.TooltipBody,تم نقل ملفك الشخصي والمحتوى والإعدادات إلى موقع جديد.
 Feature.FlyoutSidePanel.Label.TooltipTitle,تم نقل <b>{itemName}</b>
-Feature.FlyoutSidePanel.Title.AccountSwitcherMoved,تم نقل مبدّل الحسابات
 Feature.Friends.Action.AcceptFriend,
 Feature.Friends.Action.AccountDeleted,تم حذف الحساب
 Feature.Friends.Action.Add,
@@ -3794,7 +3658,6 @@ Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,ينتهي خلال {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,فترة تجريبية مجانية
 Feature.InExperienceShop.Label.HaveTrial,فترة تجريبية مجانية لك
-Feature.InExperienceShop.Label.KeepIt,الاحتفاظ به
 Feature.InExperienceShop.Label.NoDescription,لا يوجد وصف
 Feature.InExperienceShop.Label.OfferEndTime,ينتهي {offer} خلال {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,هذه معاينة لمتجرك في Roblox Studio. لا يرى اللاعبون هذه المعاينة.
@@ -3807,6 +3670,7 @@ Feature.InExperienceShop.Label.Timer.Minute.Singular,دقيقة واحدة
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} من الثواني
 Feature.InExperienceShop.Label.Timer.Second.Singular,ثانية واحدة
 Feature.InExperienceShop.Label.Trial,فترة تجريبية
+Feature.InExperienceShop.Label.Trialed,تمت تجربتها
 Feature.InExperienceShop.Label.TryNow,احصل على فترة تجريبية مجانية
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,لقد اشتريتَ {ROBUX_AMOUNT} من عملات Robux بنجاح
 Feature.InExperienceShop.Tooltip.RecentlyRedeemed,هل استمتعت بفترتك التجريبية؟
@@ -3826,8 +3690,6 @@ Feature.Moments.Action.Analytics,التحليلات
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
-Feature.Moments.Action.CommentSeeOriginal,عرض النص الأصلي
-Feature.Moments.Action.CommentSeeTranslation,عرض الترجمة
 Feature.Moments.Action.CommentShowLess,عرض أقل
 Feature.Moments.Action.CommentShowMore,
 Feature.Moments.Action.Continue,
@@ -3867,8 +3729,8 @@ Feature.Moments.Body.EDPMomentIPReportInstructions,للإبلاغ عن انته�
 Feature.Moments.Description.CommunityStandards,تحقَّق من معايير المجتمع للحصول على مزيد من المعلومات حول ما يمكنك وما لا يمكنك قوله.
 Feature.Moments.Description.EmptyCapturesLibrary,هذا هو المكان الذي ستظهر فيه لقطاتك.
 Feature.Moments.Description.FollowingCaughtUpBody,لقد شاهدتَ جميع اللحظات الجديدة في هذا الموجز. يمكنك التبديل بين الموجزات لعرض المزيد.
-Feature.Moments.Description.FollowingEmptyBodyRecommended,ستظهر لك لحظات المصمّمين الذين تتابعهم هنا.
-Feature.Moments.Description.FollowingEmptyBodyTrending,
+Feature.Moments.Description.FollowingEmptyBodyRecommended,استمتع بلحظات من حساباتك المفضلة بعد متابعة بعض المصمّمين. يمكنك عرض موجز اللحظات المقترحة للعثور على بعضهم.
+Feature.Moments.Description.FollowingEmptyBodyTrending,استمتع بلحظات من حساباتك المفضلة بعد متابعة بعض المصمّمين. يمكنك عرض موجز اللحظات الرائجة للعثور على بعضهم.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,نص من إنشاء الذكاء الاصطناعي. راجع قبل النشر، فأنت مسؤول عما يتم نشره.
 Feature.Moments.Description.HowToCaptureStep1,انضم إلى تجربة معينة مع تمكين اللقطات وحدد قائمة الهامبرغر
 Feature.Moments.Description.HowToCaptureStep2,تمكين عناصر تحكم اللقطة
@@ -3931,7 +3793,7 @@ Feature.Moments.Label.FeedRecommended,مُقترَح
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.FirstCommentInvite,لا توجد أي تعليقات حتى الآن. كن أول من يكتب تعليقًا!
 Feature.Moments.Label.FollowingCaughtUpTitle,أنت على اطلاع بكل جديد حاليًا
-Feature.Moments.Label.FollowingEmptyTitle,تابِع المصمّمين لعرض لحظاتهم هنا
+Feature.Moments.Label.FollowingEmptyTitle,تابِع المصمّمين لعرض لحظاتهم
 Feature.Moments.Label.GameJoinConversion,التحويل للانضمام إلى اللعبة
 Feature.Moments.Label.HowToUseCaptureTitle,كيفية استخدام اللقطات
 Feature.Moments.Label.LinkCopied,تم نسخ الرابط
@@ -3942,8 +3804,8 @@ Feature.Moments.Label.MomentDeletedTitle,
 Feature.Moments.Label.MomentFailedToPostBody,حدث خطأ ما.
 Feature.Moments.Label.MomentFailedToPostTitle,تعذَّر نشر اللحظة
 Feature.Moments.Label.MomentNoLongerAvailable,لم تعد هذه اللحظة متاحة.
-Feature.Moments.Label.MomentPublishedBody,جارٍ معالجة لحظتك
-Feature.Moments.Label.MomentPublishedTitle,جارٍ نشر لحظتك
+Feature.Moments.Label.MomentPublishedBody,تم نشر لحظتك بنجاح.
+Feature.Moments.Label.MomentPublishedTitle,تم نشر اللحظة
 Feature.Moments.Label.MomentRemovedBody,لقد انتهكت قواعد السلامة السارية لدينا، لذا لم تعد متاحة.
 Feature.Moments.Label.MomentRemovedTitle,أزلنا هذه اللحظة
 Feature.Moments.Label.MomentUnavailable,اللحظة غير متاحة
@@ -3956,7 +3818,6 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,الصور
 Feature.Moments.Label.PostDeleted,تم حذف اللحظة
 Feature.Moments.Label.PostRemovedBody,تنتهك اللحظة التي نشرتها معايير مجتمعنا.
-Feature.Moments.Label.PostedOnDate,تم النشر في {date}
 Feature.Moments.Label.PublishingRodeoBody,لن يستغرق الأمر وقتًا طويلاً.
 Feature.Moments.Label.Reactions,التفاعلات
 Feature.Moments.Label.ReportReason.BreaksRules,هذا المنشور يخالف القواعد
@@ -4139,7 +4000,7 @@ Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,نسخ رابط الملف الشخصي
 Feature.Profile.Action.CreateInBuild,أنشئ في ميزة Build
 Feature.Profile.Action.EditAppearance,تحرير المظهر
-Feature.Profile.Action.EditAvatar,
+Feature.Profile.Action.EditAvatar,تحرير الأفاتار
 Feature.Profile.Action.EditBackground,تحرير الخلفية
 Feature.Profile.Action.EditEmotes,تحرير العواطف (emotes)
 Feature.Profile.Action.EditLook,
@@ -4978,7 +4839,6 @@ Features.Transfers.RobuxTransfer.Label.RecipientWillGetInApp,سيحصل المت
 Features.Transfers.RobuxTransfer.Label.RecipientWillGetInGame,سيحصل المتلقي على {amount} من عملات Robux بعد خصم الرسوم. تشمل التحويلات داخل اللعبة رسومًا للمصمّم بنسبة {commissionPercentage}%.
 Features.Transfers.RobuxTransfer.SentInstantNoFee,يتم إرسال عملات Robux فورًا دون أي رسوم
 Features.Transfers.RobuxTransfers.Label.SuccessNotification,لقد أرسلتَ {amount} من عملات Robux
-Features.Transfers.Title.FreeTransfersExhausted,لقد استنفدت عمليات التحويل المجانية لديك
 Features.Transfers.Title.UpsellSubscription,
 Features.Transfers.Transfer.Block.RequireReceiverFAE,دعنا نتحقق من عمرك حتى تتمكن من قبول عملات Robux
 Features.Transfers.Transfer.Block.RequireSenderFAE,دعنا نتحقق من عمرك حتى تتمكن من إرسال عملات Robux
@@ -5400,9 +5260,7 @@ Notifications.SquadRegroupPrompt.ToastAction.Join,
 Notifications.SquadRegroupPrompt.ToastLabel.ContinuePlayingTogether,متابعة اللعب معًا
 Notifications.SquadRegroupPrompt.ToastLabel.JoinANewServer,
 Notifications.ToastNotifications.Label.LeaveExperienceConfirmation,هل أنت متأكد من أنك تريد المغادرة للانضمام إلى تجربة أخرى؟
-Notifications.ToastNotifications.Label.LeaveServerConfirmation,هل أنت متأكد من أنك تريد المغادرة للانضمام إلى خادم آخر؟
 Notifications.ToastNotifications.Title.LeavingExperience,مغادرة التجربة
-Notifications.ToastNotifications.Title.LeavingServer,مغادرة الخادم
 PlayerFeedbacks.VoteForm.Message.Action.Report,
 PlayerFeedbacks.VoteForm.Message.MaxLengthCharacters,استخدِم أقل من {count} من الأحرف.
 PlayerFeedbacks.VoteForm.Message.MinLengthCharacters,استخدِم أكثر من {count} من الأحرف.

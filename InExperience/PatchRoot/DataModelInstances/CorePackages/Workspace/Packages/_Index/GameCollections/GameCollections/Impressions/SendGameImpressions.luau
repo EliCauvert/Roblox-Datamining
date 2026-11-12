@@ -120,7 +120,7 @@ local function addGameFields(EntryIndexes, p2, p3: number, p4, p5, GameSortId, p
 			if v2.tileBadgeIds then
 				Joined = v2.tileBadgeIds
 			elseif TileBadgeByPositionConfigFromEntry then
-				local List17 = {}
+				local List18 = {}
 				
 				for i, value in GetValidTileBadgesFunction(TileBadgeByPositionConfigFromEntry) do
 					local MapResult = CryoModule.List.map(value, function(p8)
@@ -128,11 +128,11 @@ local function addGameFields(EntryIndexes, p2, p3: number, p4, p5, GameSortId, p
 					end)
 					
 					if #MapResult > 0 then
-						table.insert(List17, i .. "=" .. table.concat(MapResult, "+"))
+						table.insert(List18, i .. "=" .. table.concat(MapResult, "+"))
 					end
 				end
-				if #List17 > 0 then
-					Joined = table.concat(List17, "&")
+				if #List18 > 0 then
+					Joined = table.concat(List18, "&")
 				end
 			end
 			table.insert(List12, Joined or "0")
@@ -244,7 +244,7 @@ local function addGameFields(EntryIndexes, p2, p3: number, p4, p5, GameSortId, p
 	if p4 and #List6 > 0 then
 		config.videoThumbnailAssetIds = table.concat(List6, ",")
 	end
-	if FFlagLuaAppDiscoveryMomentVideoTelemetry and (#T > 0 and not t.videoIsMoment) then
+	if FFlagLuaAppDiscoveryMomentVideoTelemetry and #T > 0 and not t.videoIsMoment then
 		config.videoIsMoment_arr = table.concat(T, ",")
 	end
 	if #List12 > 0 then
@@ -263,12 +263,12 @@ local function addGameFields(EntryIndexes, p2, p3: number, p4, p5, GameSortId, p
 	
 	if next(t) then
 		for i2 in t do
-			local List18 = {}
+			local List17 = {}
 			
 			for _, value1 in List16 do
-				table.insert(List18, value1[i2] or "0")
+				table.insert(List17, value1[i2] or "0")
 			end
-			t1[`{i2}_arr`] = table.concat(List18, ",")
+			t1[`{i2}_arr`] = table.concat(List17, ",")
 		end
 	end
 	local JoinResult = CryoModule.Dictionary.join(t1, p6 or {})

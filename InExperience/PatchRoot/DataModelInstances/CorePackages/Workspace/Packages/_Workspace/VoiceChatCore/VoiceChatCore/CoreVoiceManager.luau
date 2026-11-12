@@ -73,7 +73,6 @@ local GetFFlagEnableInExpPhoneVoiceUpsellEntrypointsFunction = require(Parent1.S
 local GetFFlagVoiceChatClientRewriteMasterLuaFunction = require(Parent1.SharedFlags).GetFFlagVoiceChatClientRewriteMasterLua
 local GetFFlagCheckUniversePlaceBeforeSuspendingFunction = require(Parent1.SharedFlags).GetFFlagCheckUniversePlaceBeforeSuspending
 local FFlagEnablePartyVoiceChangersInLua = require(Parent1.SharedFlags).FFlagEnablePartyVoiceChangersInLua
-local FFlagReactiveVoiceRestrictionsUFR = require(Parent1.SharedFlags).FFlagReactiveVoiceRestrictionsUFR
 local FFlagSkipVoiceInTeamCreateViewerModule = require(Flags.FFlagSkipVoiceInTeamCreateViewer)
 local GetFFlagCoreMicManagerRefactorModule = require(Flags.GetFFlagCoreMicManagerRefactor)
 local GetFFlagMicConsumerRegistryModule = require(Flags.GetFFlagMicConsumerRegistry)
@@ -855,7 +854,7 @@ function config1:EligibleForAgeCheckToast(): boolean
 end
 
 function config1:userAndPlaceCanUseVoice()
-	-- upvalues: GetFFlagAvatarChatServiceEnabledFunction (copy), GetFFlagVoiceChatServiceManagerUseAvatarChatModule (copy), GetShowAgeVerificationOverlayModule (copy), UtilsModule (copy), AnalyticsModule (copy), NewResult (copy), GetFFlagEnableVoiceSignalFunction (copy), GetFFlagEnableInExpPhoneVoiceUpsellEntrypointsFunction (copy), ConstantsModule (copy), VOICEJOINPROGRESS (copy), FFlagReactiveVoiceRestrictionsUFR (copy)
+	-- upvalues: GetFFlagAvatarChatServiceEnabledFunction (copy), GetFFlagVoiceChatServiceManagerUseAvatarChatModule (copy), GetShowAgeVerificationOverlayModule (copy), UtilsModule (copy), AnalyticsModule (copy), NewResult (copy), GetFFlagEnableVoiceSignalFunction (copy), GetFFlagEnableInExpPhoneVoiceUpsellEntrypointsFunction (copy), ConstantsModule (copy), VOICEJOINPROGRESS (copy)
 	if self.ThirdPartyUserService ~= nil and self.ThirdPartyUserService:IsChatRestrictionSupported() and self.ThirdPartyUserService:GetVoiceChatRestrictionStatus() ~= Enum.ChatRestrictionStatus.NotRestricted then
 		return false
 	end
@@ -896,12 +895,8 @@ function config1:userAndPlaceCanUseVoice()
 			self:SetupFAECompleteListener()
 		end
 		task.spawn(function()
-			-- upvalues: self (copy), FFlagReactiveVoiceRestrictionsUFR (upval)
-			local AgeVerificationOverlay = self:FetchAgeVerificationOverlay()
-			
-			if FFlagReactiveVoiceRestrictionsUFR then
-				self:emit("OnJoinAgeVerificationOverlayFetched", AgeVerificationOverlay)
-			end
+			-- upvalues: self (copy)
+			self:FetchAgeVerificationOverlay()
 		end)
 	end
 	if not VoiceSettings.isVoiceEnabled then

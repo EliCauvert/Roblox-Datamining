@@ -2,7 +2,9 @@
 local Parent = FriendsMenu.Parent
 local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
-local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local SignalsModule = require(Parent.Signals)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local FFlagUseSignalsForGameInvitesStatus = require(Parent.SharedFlags).FFlagUseSignalsForGameInvitesStatus
@@ -24,7 +26,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: FFlagUseSignalsForGameInvitesStatus (copy), ReactModule (copy), SignalsModule (copy), GetGameInvitesStatusStore (copy), UseSignalStateFunction (copy), UseSelectorFunction (copy), GetLocalizedStringsFunction (copy), config (copy), FriendsListContextModule (copy), UseStyleFunction (copy), InviteStatus (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: FFlagUseSignalsForGameInvitesStatus (copy), ReactModule (copy), SignalsModule (copy), GetGameInvitesStatusStore (copy), UseSignalStateFunction (copy), UseSelectorFunction (copy), GetLocalizedStringsFunction (copy), config (copy), FriendsListContextModule (copy), UseStyleFunction (copy), InviteStatus (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseSignalStateResult = nil
 	if FFlagUseSignalsForGameInvitesStatus then
 		local Id = p1.friend and p1.friend.id
@@ -72,7 +74,8 @@ return function(p1)
 		AnchorPoint = p1.anchorPoint,
 		Position = p1.position,
 		TextColor3 = Theme.TextDefault.Color,
-		FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionLarge.Font),
+		Font = if FoundationFontFaceMigration then nil else _Font.CaptionHeader.Font,
+		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionLarge.Font) else nil,
 		LayoutOrder = p1.layoutOrder
 	})
 end

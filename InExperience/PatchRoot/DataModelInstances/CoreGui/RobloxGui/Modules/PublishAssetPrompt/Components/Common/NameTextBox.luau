@@ -4,7 +4,9 @@ local TModule = require(CorePackages.Packages.t)
 local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
 local Focusable = require(CorePackages.Packages.RoactGamepad).Focusable
 local UIBloxModule = require(CorePackages.Packages.UIBlox)
-local NormalizeFontFaceFunction = require(CorePackages.Packages.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local WithStyleFunction = UIBloxModule.Style.withStyle
 local WithSelectionCursorProviderFunction = UIBloxModule.App.SelectionImage.withSelectionCursorProvider
 local CursorKind = UIBloxModule.App.SelectionImage.CursorKind
@@ -86,9 +88,10 @@ function NameTextBox:checkIsNameValid(Text: string): boolean
 end
 
 function NameTextBox.renderWithProviders(p1, p2, Callback)
-	-- upvalues: RoactModule (copy), Focusable (copy), NormalizeFontFaceFunction (copy), CursorKind (copy)
+	-- upvalues: RoactModule (copy), Focusable (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), CursorKind (copy)
 	local _Font = p2.Font
 	local Theme = p2.Theme
+	local Body = _Font.Body
 	
 	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -105,8 +108,9 @@ function NameTextBox.renderWithProviders(p1, p2, Callback)
 				Text = p1.state.name,
 				BackgroundTransparency = 1,
 				ClearTextOnFocus = false,
-				FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font),
-				TextSize = _Font.BaseSize * _Font.Body.RelativeSize,
+				Font = if FoundationFontFaceMigration then nil else Body.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font) else nil,
+				TextSize = _Font.BaseSize * Body.RelativeSize,
 				PlaceholderColor3 = Theme.PlaceHolder.Color,
 				PlaceholderText = p1.props.defaultName,
 				Position = UDim2.fromOffset(6, 0),
@@ -148,7 +152,8 @@ function NameTextBox.renderWithProviders(p1, p2, Callback)
 			TextYAlignment = Enum.TextYAlignment.Top,
 			Size = UDim2.new(1, 0, 0, 20),
 			TextColor3 = Theme.Alert.Color,
-			FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font)
+			Font = if FoundationFontFaceMigration then nil else _Font.Body.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font) else nil
 		})
 	})
 end

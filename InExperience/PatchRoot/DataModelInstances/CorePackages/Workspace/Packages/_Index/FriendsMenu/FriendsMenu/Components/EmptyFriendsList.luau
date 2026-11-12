@@ -1,14 +1,16 @@
 ﻿local Parent = script:FindFirstAncestor("FriendsMenu").Parent
 local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
-local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local GetLocalizedStringsFunction = require(Parent.NotificationsCommon).LocalizationHelper.getLocalizedStrings
 local IconsMenuFriendsLarge = UIBloxModule.App.ImageSet.Images["icons/menu/friends_large"]
 
 return function()
-	-- upvalues: UseStyleFunction (copy), GetLocalizedStringsFunction (copy), ReactModule (copy), ImageSetLabel (copy), IconsMenuFriendsLarge (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseStyleFunction (copy), GetLocalizedStringsFunction (copy), ReactModule (copy), ImageSetLabel (copy), IconsMenuFriendsLarge (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseStyleResult = UseStyleFunction()
 	local Theme = UseStyleResult.Theme
 	local UseStyleResultFont = UseStyleResult.Font
@@ -44,7 +46,8 @@ return function()
 			TextColor3 = Theme.TextDefault.Color,
 			TextTransparency = Theme.TextDefault.Transparency,
 			TextSize = ScaledBaseSize,
-			FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
+			Font = if FoundationFontFaceMigration then nil else UseStyleResultFont.Body.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 			Size = UDim2.new(1, 0, 0, ScaledBaseSize),
 			TextYAlignment = Enum.TextYAlignment.Top
 		})

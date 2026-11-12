@@ -1,4 +1,5 @@
-﻿local Parent = script:FindFirstAncestor("Gifting").Parent
+﻿local TextService = game:GetService("TextService")
+local Parent = script:FindFirstAncestor("Gifting").Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
@@ -13,12 +14,13 @@ local IconName = FoundationModule.Enums.IconName
 local UseTextSizeFunction = FoundationModule.Hooks.useTextSize
 local UseTextSizeOffsetFunction = FoundationModule.Hooks.useTextSizeOffset
 local UseTokensFunction = FoundationModule.Hooks.useTokens
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseFocusRootFunction = FocusNavigationUtilsModule.useFocusRoot
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
 
 local function useFooterLayout(CaptionText)
-	-- upvalues: UseTokensFunction (copy), UseTextSizeOffsetFunction (copy), ReactModule (copy), UseTextSizeFunction (copy)
+	-- upvalues: UseTokensFunction (copy), UseTextSizeOffsetFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), UseTextSizeFunction (copy), TextService (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseTextSizeOffsetResult = UseTextSizeOffsetFunction()
 	local CaptionSmall = UseTokensResult.Typography.CaptionSmall
@@ -31,16 +33,16 @@ local function useFooterLayout(CaptionText)
 			return if Floored1 == Floored then Floored1 else Floored
 		end)
 	end, {})
-	local UseTextSizeResult = UseTextSizeFunction(if UseStateResult > 0 then CaptionText else nil, {
+	local UseTextSizeResult = if FoundationFontFaceMigration then UseTextSizeFunction(if UseStateResult > 0 then CaptionText else nil, {
 		Font = CaptionSmall.Font,
 		FontSize = CaptionSmall.FontSize + UseTextSizeOffsetResult
-	}, Vector2.new(UseStateResult, 1e999))
+	}, Vector2.new(UseStateResult, 1e999)) else nil
 	
 	return {
 		topInset = UseTokensResult.Padding.Medium - UseTokensResult.Margin.Small,
 		captionHeight = ReactModule.useMemo(function()
-			-- upvalues: CaptionText (copy), UseStateResult (copy), CaptionSmall (copy), UseTextSizeResult (copy), UseTextSizeOffsetResult (copy)
-			return if CaptionText == nil or UseStateResult <= 0 then 0 else CaptionSmall.LineHeight * (if UseTextSizeResult then UseTextSizeResult.Y else CaptionSmall.FontSize + UseTextSizeOffsetResult)
+			-- upvalues: CaptionText (copy), UseStateResult (copy), FoundationFontFaceMigration (upval), CaptionSmall (copy), UseTextSizeResult (copy), UseTextSizeOffsetResult (copy), TextService (upval)
+			return if CaptionText == nil or UseStateResult <= 0 then 0 elseif FoundationFontFaceMigration then CaptionSmall.LineHeight * (if UseTextSizeResult then UseTextSizeResult.Y else CaptionSmall.FontSize + UseTextSizeOffsetResult) else CaptionSmall.LineHeight * TextService:GetTextSize(CaptionText, CaptionSmall.FontSize + UseTextSizeOffsetResult, CaptionSmall.Font, Vector2.new(UseStateResult, 1e999)).Y
 		end, {
 			CaptionText,
 			UseStateResult,

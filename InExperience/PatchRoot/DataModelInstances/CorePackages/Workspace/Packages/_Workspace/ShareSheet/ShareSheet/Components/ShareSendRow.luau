@@ -1,28 +1,35 @@
-﻿local Parent = script:FindFirstAncestor("ShareSheet").Parent
+﻿local ShareSheet = script:FindFirstAncestor("ShareSheet")
+local Parent = ShareSheet.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local Button = FoundationModule.Button
 local TextInput = FoundationModule.TextInput
 local View = FoundationModule.View
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FillBehavior = FoundationModule.Enums.FillBehavior
 local InputSize = FoundationModule.Enums.InputSize
+local FFlagShareSheetPeoplePickerEnabledModule = require(ShareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
 
-return function(p1)
-	-- upvalues: ReactModule (copy), View (copy), TextInput (copy), InputSize (copy), Button (copy), ButtonVariant (copy)
+return function(Frame)
+	-- upvalues: ReactModule (copy), View (copy), FFlagShareSheetPeoplePickerEnabledModule (copy), TextInput (copy), InputSize (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState("")
 	
 	return ReactModule.createElement(View, {
-		tag = "col gap-medium size-full-0 auto-y",
-		testId = "share-send-row"
+		testId = "share-send-row",
+		tag = {
+			["col gap-medium size-full-0 auto-y"] = true,
+			["padding-x-xlarge padding-bottom-medium"] = not FFlagShareSheetPeoplePickerEnabledModule
+		},
+		LayoutOrder = Frame.LayoutOrder
 	}, {
 		MessageInput = ReactModule.createElement(TextInput, {
 			label = "",
 			LayoutOrder = 1,
 			testId = "share-message-input",
-			isDisabled = p1.isLoading,
+			isDisabled = Frame.isLoading,
 			onChanged = UseStateResult2,
-			onFocusGained = p1.onFocusGained,
-			placeholder = p1.messagePlaceholder,
+			onFocusGained = Frame.onFocusGained,
+			placeholder = Frame.messagePlaceholder,
 			size = InputSize.Medium,
 			text = UseStateResult,
 			width = UDim.new(1, 0)
@@ -30,14 +37,15 @@ return function(p1)
 		SendButton = ReactModule.createElement(Button, {
 			LayoutOrder = 2,
 			testId = "share-send-button",
-			text = p1.label,
+			text = Frame.label,
 			variant = ButtonVariant.Emphasis,
-			isLoading = p1.isLoading,
+			fillBehavior = if FFlagShareSheetPeoplePickerEnabledModule and Frame.shouldFillButton == false then nil else FillBehavior.Fill,
+			isLoading = Frame.isLoading,
 			size = InputSize.Medium,
 			onActivated = ReactModule.useCallback(function()
-				-- upvalues: p1 (copy), UseStateResult (copy)
-				p1.onActivated(UseStateResult)
-			end, { UseStateResult, p1.onActivated }),
+				-- upvalues: Frame (copy), UseStateResult (copy)
+				Frame.onActivated(UseStateResult)
+			end, { UseStateResult, Frame.onActivated }),
 			width = UDim.new(1, 0)
 		})
 	})

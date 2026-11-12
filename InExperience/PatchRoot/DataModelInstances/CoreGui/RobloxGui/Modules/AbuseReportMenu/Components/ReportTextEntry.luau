@@ -1,11 +1,14 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local ReactModule = require(CorePackages.Packages.React)
-local NormalizeFontFaceFunction = require(CorePackages.Packages.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseStyleFunction = require(CorePackages.Packages.UIBlox).Core.Style.useStyle
 
 return function(p1)
-	-- upvalues: UseStyleFunction (copy), ReactModule (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseStyleResult = UseStyleFunction()
+	local BodyFont = UseStyleResult.Font.Body.Font
 	local Theme = UseStyleResult.Theme
 	
 	return ReactModule.createElement("Frame", {
@@ -28,7 +31,8 @@ return function(p1)
 			AnchorPoint = Vector2.new(0, 0),
 			BackgroundColor3 = Theme.BackgroundUIDefault.Color,
 			PlaceholderText = p1.placeholderText,
-			FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
+			Font = if FoundationFontFaceMigration then nil else BodyFont,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 			Text = p1.text,
 			TextSize = UseStyleResult.Tokens.FontSize.FontSize_400,
 			TextColor3 = Theme.TextDefault.Color,

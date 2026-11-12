@@ -10,7 +10,6 @@ local Icon = FoundationModule.Icon
 local IconSize = FoundationModule.Enums.IconSize
 local Text = FoundationModule.Text
 local View = FoundationModule.View
-local FFlagSideSheetEmphasizeLeave = require(InExperienceSideSheet.Flags).FFlagSideSheetEmphasizeLeave
 local ButtonWidth = require(InExperienceSideSheet.Common.Enums).ButtonWidth
 local Signal = require(Parent.Signals).createSignal(nil)
 
@@ -19,7 +18,7 @@ local function _(p1: number): number
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), SignalsReactModule (copy), Signal (copy), ReactModule (copy), IconSize (copy), IsBuilderIconFunction (copy), FFlagSideSheetEmphasizeLeave (copy), ButtonWidth (copy), View (copy), Icon (copy), Text (copy)
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), SignalsReactModule (copy), Signal (copy), ReactModule (copy), IconSize (copy), IsBuilderIconFunction (copy), ButtonWidth (copy), View (copy), Icon (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({ label = p1.label })
 	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.getIsEnabled)
@@ -35,15 +34,13 @@ return ReactModule.memo(function(p1)
 		Medium = IconSize.XLarge
 		XSmall = UseTokensResult.Gap.Small
 	end
-	local IsIsEmphasized: boolean = FFlagSideSheetEmphasizeLeave and p1.isEmphasized == true
-	local Background = if IsIsEmphasized then UseTokensResult.Color.ActionSoftEmphasis.Background else UseTokensResult.Color.ActionStandard.Background
-	local Foreground = if IsIsEmphasized then UseTokensResult.Color.ActionSoftEmphasis.Foreground else UseTokensResult.Color.ActionStandard.Foreground
+	local Background = UseTokensResult.Color.ActionStandard.Background
+	local Foreground = UseTokensResult.Color.ActionStandard.Foreground
 	local IsFullMatch = (p1.width or ButtonWidth.Full) == ButtonWidth.Full
 	local CreateElementFunction = ReactModule.createElement
 	local config = {
 		tag = {
-			["row align-x-center align-y-center gap-small radius-medium"] = true,
-			["bg-action-standard"] = not IsIsEmphasized,
+			["row align-x-center align-y-center gap-small radius-medium bg-action-standard"] = true,
 			["size-full-1000"] = IsFullMatch,
 			["fill size-0-1000"] = not IsFullMatch
 		},
@@ -53,20 +50,18 @@ return ReactModule.memo(function(p1)
 		},
 		isDisabled = not UseSignalStateResult
 	}
-	local BackgroundStyle = nil
+	local BackgroundStyle = { Color3 = Background.Color3 }
+	local Transparency = nil
 	
 	if UseSignalStateResult then
-		BackgroundStyle = Background
+		Transparency = Background.Transparency
 	else
-		local Transparency: number = Background.Transparency
-		BackgroundStyle = {
-			Color3 = Background.Color3,
-			Transparency = Transparency + (1 - Transparency) * 0.5
-		}
+		local Transparency1: number = Background.Transparency
+		Transparency = Transparency1 + (1 - Transparency1) * 0.5
 	end
+	BackgroundStyle.Transparency = Transparency
 	config.backgroundStyle = BackgroundStyle
 	config.onActivated = UseResult
-	config.testId = if FFlagSideSheetEmphasizeLeave then p1.testId else nil
 	config.LayoutOrder = p1.layoutOrder
 	
 	return CreateElementFunction(View, config, {
@@ -76,13 +71,13 @@ return ReactModule.memo(function(p1)
 			size = Medium
 		}) else nil,
 		Text = ReactModule.createElement(Text, {
+			tag = "auto-x text-label-medium content-action-standard",
 			LayoutOrder = 2,
-			tag = {
-				["auto-x text-label-medium"] = true,
-				["content-action-standard"] = not IsIsEmphasized
-			},
 			Text = UseLocalizationResult.label,
-			textStyle = if UseSignalStateResult then Foreground else { Transparency = 0.5, Color3 = Foreground.Color3 }
+			textStyle = {
+				Color3 = Foreground.Color3,
+				Transparency = if UseSignalStateResult then Foreground.Transparency else 0.5
+			}
 		})
 	})
 end)

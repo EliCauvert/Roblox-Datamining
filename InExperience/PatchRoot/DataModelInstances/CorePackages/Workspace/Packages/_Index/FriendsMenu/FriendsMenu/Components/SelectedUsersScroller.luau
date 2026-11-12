@@ -1,7 +1,9 @@
 ﻿local FriendsMenu = script:FindFirstAncestor("FriendsMenu")
 local Parent = FriendsMenu.Parent
 local ReactModule = require(Parent.React)
-local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local ResponsiveModule = require(Parent.Responsive)
 local UseFocusGuiObjectFunction = require(Parent.ReactFocusNavigation).useFocusGuiObject
@@ -12,7 +14,7 @@ local FriendsMenuUserCardModule = require(script.Parent.FriendsMenuUserCard)
 local SelectedUsersContextModule = require(FriendsMenu.Context.SelectedUsersContext)
 
 return function(p1)
-	-- upvalues: ReactModule (copy), SelectedUsersContextModule (copy), ResponsiveModule (copy), UseLastInputModeFunction (copy), UseFocusGuiObjectFunction (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), FriendsMenuUserCardModule (copy), NormalizeFontFaceFunction (copy), ConstantsModule (copy)
+	-- upvalues: ReactModule (copy), SelectedUsersContextModule (copy), ResponsiveModule (copy), UseLastInputModeFunction (copy), UseFocusGuiObjectFunction (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), FriendsMenuUserCardModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ConstantsModule (copy)
 	local UseContextResult = ReactModule.useContext(SelectedUsersContextModule)
 	local UseBreakpointYOrLargerResult = ResponsiveModule.useBreakpointYOrLarger(ResponsiveModule.Keys.Medium)
 	local UseLastInputModeResult = UseLastInputModeFunction()
@@ -111,7 +113,8 @@ return function(p1)
 			LayoutOrder = 0,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
-			FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.TitleLarge.Font),
+			Font = if FoundationFontFaceMigration then nil else UseStyleResultFont.Header2.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.TitleLarge.Font) else nil,
 			Text = if p1.selectionLimit then UseLocalizationResult.selectedFriendsCountText else UseLocalizationResult.selectedFriendsCountNoLimitText,
 			TextColor3 = Theme.TextEmphasis.Color,
 			TextSize = UseStyleResultFont.BaseSize * UseStyleResultFont.Header2.RelativeSize,

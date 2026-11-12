@@ -1,5 +1,9 @@
 ﻿local ShareSheet = script:FindFirstAncestor("ShareSheet")
-local ReactModule = require(ShareSheet.Parent.React)
+local Parent = ShareSheet.Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.AppChat.GetConversationListStore)
+local FetchConversationListPageToSignalsModule = require(Parent.AppChat.fetchConversationListPageToSignals)
+local FFlagShareSheetFriendsSort = require(Parent.SharedFlags).FFlagShareSheetFriendsSort
 local _ = require(ShareSheet.Types)
 local ShareSheetConstantsModule = require(ShareSheet.ShareSheetConstants)
 local FIntShareSheetPeoplePickerLoadMoreThresholdWindowHundredthsPercentRatio = ShareSheetConstantsModule.FIntShareSheetPeoplePickerLoadMoreThresholdWindowHundredthsPercent / 10000
@@ -14,24 +18,39 @@ local _ = function(p1: number, p2): boolean
 end
 
 return function(p1)
-	-- upvalues: ShareSheetConstantsModule (copy), ReactModule (copy), FIntShareSheetPeoplePickerLoadMoreThresholdWindowHundredthsPercentRatio (copy)
+	-- upvalues: FFlagShareSheetFriendsSort (copy), ShareSheetConstantsModule (copy), ReactModule (copy), FetchConversationListPageToSignalsModule (copy), FIntShareSheetPeoplePickerLoadMoreThresholdWindowHundredthsPercentRatio (copy)
 	local IsPeoplePickerDisplayed = p1.isPeoplePickerDisplayed
-	local ListResult = p1.listResult
-	local IsFetchingNextPage = ListResult.isFetchingNextPage
-	local HasNextPageToken = ListResult.nextPageToken ~= nil
+	local HasNextPageToken = nil
+	local NextPageToken = nil
+	local IsFetchingNextPage = nil
+	
+	if FFlagShareSheetFriendsSort then
+		local ListResult = p1.listResult
+		IsFetchingNextPage = ListResult.isFetchingNextPage
+		HasNextPageToken = ListResult.nextPageToken ~= nil
+		NextPageToken = ListResult.nextPageToken
+	else
+		IsFetchingNextPage = p1.listStatus.isFetchingConversations == true
+		HasNextPageToken = p1.listStatus.oldestConversationIsFetched ~= true
+		NextPageToken = p1.listStatus.nextCursor
+	end
 	local IsEligibilityLoading = p1.isEligibilityLoading or IsFetchingNextPage
-	local NextPageToken = not IsEligibilityLoading and (HasNextPageToken and p1.conversationCount < ShareSheetConstantsModule.FIntShareSheetPeoplePickerMaxConversations) and ListResult.nextPageToken or ""
+	local NextPageToken1 = not IsEligibilityLoading and (HasNextPageToken and p1.conversationCount < ShareSheetConstantsModule.FIntShareSheetPeoplePickerMaxConversations) and NextPageToken or ""
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: NextPageToken (copy), UseRefResult (copy), p1 (copy)
-		if NextPageToken ~= "" and UseRefResult.current ~= NextPageToken then
-			UseRefResult.current = NextPageToken
-			p1.loadMore(NextPageToken)
+		-- upvalues: NextPageToken1 (copy), UseRefResult (copy), FFlagShareSheetFriendsSort (upval), p1 (copy), FetchConversationListPageToSignalsModule (upval)
+		if NextPageToken1 == "" or UseRefResult.current == NextPageToken1 then return end
+		UseRefResult.current = NextPageToken1
+		
+		if FFlagShareSheetFriendsSort then
+			p1.loadMore(NextPageToken1)
 			
 			return
+		else
+			FetchConversationListPageToSignalsModule({ cursor = NextPageToken1 })
 		end
-	end, { NextPageToken, p1.loadMore })
+	end, { NextPageToken1, p1.loadMore })
 	local UseRefResult2 = ReactModule.useRef({
 		contentLength = nil,
 		scrollOffset = 0,
@@ -125,7 +144,7 @@ return function(p1)
 			endReachedThreshold = UseStateResult,
 			scrollingFrameRef = UseResult6,
 			onContentLengthChanged = UseResult3,
-			onEndReached = if IsPeoplePickerDisplayed and NextPageToken ~= "" then UseResult else nil,
+			onEndReached = if IsPeoplePickerDisplayed and NextPageToken1 ~= "" then UseResult else nil,
 			onScrollOffsetChanged = UseResult4,
 			onViewportChanged = UseResult5
 		}

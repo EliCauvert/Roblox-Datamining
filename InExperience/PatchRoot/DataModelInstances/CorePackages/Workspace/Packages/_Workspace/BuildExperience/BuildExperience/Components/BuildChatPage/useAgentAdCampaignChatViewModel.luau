@@ -340,7 +340,7 @@ return function(Current, p1)
 		if Attempt ~= nil and (Attempt.isPending or Attempt.userId ~= P4 or Attempt.universeId ~= Current.universeId or Attempt.sessionId ~= Current.sessionId) then
 			return "ignored"
 		end
-		local Copy = if Attempt == nil then {
+		local Config = if Attempt == nil then {
 			universeId = Current.universeId,
 			sessionId = Current.sessionId,
 			toolCallId = ToolCallId,
@@ -357,14 +357,14 @@ return function(Current, p1)
 			if RetryOffers == nil then
 				return "failed"
 			end
-			Copy = table.clone(Copy)
-			Copy.offers = RetryOffers
+			Config = table.clone(Config)
+			Config.offers = RetryOffers
 		end
 		if FFlagBuildAgentAdCampaignRefreshEligibilityModule then
 			UseRefResult5.current = if Attempt == nil or not AgentAdCampaignStoreModule.canReplaceRejectedAttempt(Attempt) then nil else Attempt
 		end
-		UseRefResult.current = Copy
-		UseStateResult2(Copy)
+		UseRefResult.current = Config
+		UseStateResult2(Config)
 		UseCreateAdCampaignModuleResult.clearCreateError()
 		
 		return "opened"

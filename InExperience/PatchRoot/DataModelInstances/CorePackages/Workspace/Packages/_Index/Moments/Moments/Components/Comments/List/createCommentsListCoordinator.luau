@@ -868,10 +868,10 @@ return function(p1)
 						
 						if p2.generation == Generation2 then
 							ReactionStore.markUncertain(p2.commentId, Generation2)
-							local Entry1 = list[p2.attempt]
+							local Entry = list[p2.attempt]
 							
-							if p2.attempt <= 2 and (Entry1 ~= nil and NowMs() - p2.startedAtMs + Entry1 <= 2000) then
-								p2.cancelRetry = Schedule(Entry1, function()
+							if p2.attempt <= 2 and Entry ~= nil and NowMs() - p2.startedAtMs + Entry <= 2000 then
+								p2.cancelRetry = Schedule(Entry, function()
 									-- upvalues: p2 (upval), t (upval), CommentsStore (upval), v106 (upval)
 									p2.cancelRetry = nil
 									
@@ -887,11 +887,11 @@ return function(p1)
 							ReactionStore.markUncertain(p2.commentId, p2.generation)
 							local CommentId2 = p2.commentId
 							local Generation1 = p2.generation
-							local Entry: () -> () = t1[CommentId2]
+							local Entry1: () -> () = t1[CommentId2]
 							t1[CommentId2] = nil
 							
-							if Entry ~= nil then
-								Entry()
+							if Entry1 ~= nil then
+								Entry1()
 							end
 							t1[CommentId2] = Schedule(10000, function()
 								-- upvalues: t1 (upval), CommentId2 (copy), ReactionStore (upval), Generation1 (copy), FeedItemIds (upval)

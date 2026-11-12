@@ -1,4 +1,5 @@
-﻿local Parent = script.Parent.Parent.Parent
+﻿local TextService = game:GetService("TextService")
+local Parent = script.Parent.Parent.Parent
 local Parent1 = Parent.Parent
 local FoundationModule = require(Parent1.Foundation)
 local ReactModule = require(Parent1.React)
@@ -10,7 +11,6 @@ local NotificationModalsManagerModule = require(Parent1.NotificationModalsManage
 local MouseIconOverrideService = require(Parent1.CoreScriptsCommon).MouseIconOverrideService
 local UseDesignTokensFunction = require(Parent1.Style).useDesignTokens
 local ConstantsModule = require(Parent.constants)
-local LoggerModule = require(Parent.logger)
 local PostRsvpStatusModule = require(Parent.Common.postRsvpStatus)
 local FormatDateLocalizedModule = require(Parent.Common.formatDateLocalized)
 local ServiceOverrideContextModule = require(Parent.Components.CoreUI.ServiceOverrideContext)
@@ -24,14 +24,14 @@ local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local GetTextBoundsAsyncFunction = FoundationModule.Utility.getTextBoundsAsync
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local GameTileThumbnailBadges = require(Parent1.GameTile).GameTileThumbnailBadges
 local ScrollView = FoundationModule.ScrollView
 local ScrollBarVisibility = FoundationModule.Enums.ScrollBarVisibility
 local LuaAppFixRsvpPromptDescriptionScrolling = game:DefineFastFlag("LuaAppFixRsvpPromptDescriptionScrolling", false)
-local FFlagInGameRsvpPushUpsellEnabled = require(Parent1.SharedFlags).FFlagInGameRsvpPushUpsellEnabled
 
 return function(p1)
-	-- upvalues: UseScreenSizeFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), MouseIconOverrideService (copy), ConstantsModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), FormatDateLocalizedModule (copy), UseContextFunction (copy), ServiceOverrideContextModule (copy), PostRsvpStatusModule (copy), NotificationModalsManagerModule (copy), FFlagInGameRsvpPushUpsellEnabled (copy), LoggerModule (copy), ButtonType (copy), UseDesignTokensFunction (copy), UseTokensFunction (copy), LuaAppFixRsvpPromptDescriptionScrolling (copy), GetTextBoundsAsyncFunction (copy), LoadableImage (copy), GameTileThumbnailBadges (copy), NormalizeFontFaceFunction (copy), ScrollView (copy), ScrollBarVisibility (copy), Text (copy), View (copy), InteractiveAlert (copy)
+	-- upvalues: UseScreenSizeFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), MouseIconOverrideService (copy), ConstantsModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), FormatDateLocalizedModule (copy), UseContextFunction (copy), ServiceOverrideContextModule (copy), PostRsvpStatusModule (copy), NotificationModalsManagerModule (copy), ButtonType (copy), UseDesignTokensFunction (copy), UseTokensFunction (copy), LuaAppFixRsvpPromptDescriptionScrolling (copy), FoundationFontFaceMigration (copy), GetTextBoundsAsyncFunction (copy), TextService (copy), LoadableImage (copy), GameTileThumbnailBadges (copy), NormalizeFontFaceFunction (copy), ScrollView (copy), ScrollBarVisibility (copy), Text (copy), View (copy), InteractiveAlert (copy)
 	local UseScreenSizeResult = UseScreenSizeFunction()
 	local NoEnableInputDelayed = p1.enableInputDelayed == nil or p1.enableInputDelayed
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -73,7 +73,7 @@ return function(p1)
 	local UnfollowEvent1 = if IsGoing then UseLocalizationResult.unfollowEvent else UseLocalizationResult.joinEvent
 	local SocialService = UseContextFunction(ServiceOverrideContextModule).socialService
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: IsGoing (copy), PostRsvpStatusModule (upval), UseRoactServiceResult (copy), p1 (copy), SocialService (copy), Going (ref), UseLocalizationResult (copy), DisplayTitle (copy), EventTime (ref), NotificationModalsManagerModule (upval), FFlagInGameRsvpPushUpsellEnabled (upval), LoggerModule (upval)
+		-- upvalues: IsGoing (copy), PostRsvpStatusModule (upval), UseRoactServiceResult (copy), p1 (copy), SocialService (copy), Going (ref), UseLocalizationResult (copy), DisplayTitle (copy), EventTime (ref), NotificationModalsManagerModule (upval)
 		if IsGoing then
 			PostRsvpStatusModule(UseRoactServiceResult, p1.promptData.eventId, "notGoing"):andThen(function()
 				-- upvalues: SocialService (upval), p1 (upval), Going (upval)
@@ -85,19 +85,12 @@ return function(p1)
 			end)
 		else
 			PostRsvpStatusModule(UseRoactServiceResult, p1.promptData.eventId, "going"):andThen(function()
-				-- upvalues: SocialService (upval), p1 (upval), Going (upval), UseLocalizationResult (upval), DisplayTitle (upval), EventTime (upval), NotificationModalsManagerModule (upval), FFlagInGameRsvpPushUpsellEnabled (upval), LoggerModule (upval)
+				-- upvalues: SocialService (upval), p1 (upval), Going (upval), UseLocalizationResult (upval), DisplayTitle (upval), EventTime (upval), NotificationModalsManagerModule (upval)
 				SocialService:PromptRsvpToEventCompleted(p1.promptData.eventId, true, Enum.RsvpStatus.Going, Going)
 				NotificationModalsManagerModule.SetUIBloxToast({
 					toastTitle = UseLocalizationResult.toastText:gsub("{(.-)}", { eventName = DisplayTitle, eventTime = EventTime }),
 					sequenceNumber = DateTime.now().UnixTimestamp
 				})
-				
-				if FFlagInGameRsvpPushUpsellEnabled and p1.onRsvpGoingSucceeded then
-					xpcall(p1.onRsvpGoingSucceeded, function(Err)
-						-- upvalues: LoggerModule (upval)
-						LoggerModule:warning("Error starting the push upsell: {}", (tostring(Err)))
-					end, p1.promptData.eventId)
-				end
 			end, function(p2)
 				-- upvalues: SocialService (upval), p1 (upval), Going (upval)
 				SocialService:PromptRsvpToEventCompleted(p1.promptData.eventId, false, Enum.RsvpStatus.None, Going)
@@ -105,12 +98,7 @@ return function(p1)
 			end)
 		end
 		p1.closePrompt()
-	end, {
-		SocialService,
-		p1.closePrompt,
-		IsGoing,
-		p1.onRsvpGoingSucceeded
-	})
+	end, { SocialService, p1.closePrompt, IsGoing })
 	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: EventDetails (copy), SocialService (copy), p1 (copy), Going (ref)
 		SocialService:PromptRsvpToEventCompleted(p1.promptData.eventId, true, if EventDetails.userRsvpStatus == "notGoing" then Enum.RsvpStatus.NotGoing elseif EventDetails.userRsvpStatus == "going" then Enum.RsvpStatus.Going else Enum.RsvpStatus.None, Going)
@@ -173,17 +161,22 @@ return function(p1)
 		end
 	end, { OverrideUseWideMode, DisplayDescription })
 	ReactModule.useEffect(function()
-		-- upvalues: LuaAppFixRsvpPromptDescriptionScrolling (upval), UseRefResult1 (copy), UseStateResult2_2 (copy), UseRefResult (copy), GetTextBoundsAsyncFunction (upval), DisplayDescription (copy), UseStateResult2_1 (copy)
-		if not LuaAppFixRsvpPromptDescriptionScrolling then
+		-- upvalues: LuaAppFixRsvpPromptDescriptionScrolling (upval), UseRefResult1 (copy), UseStateResult2_2 (copy), FoundationFontFaceMigration (upval), UseRefResult (copy), GetTextBoundsAsyncFunction (upval), DisplayDescription (copy), UseStateResult2_1 (copy), TextService (upval)
+		if LuaAppFixRsvpPromptDescriptionScrolling then
+			if UseRefResult1.current then
+				UseStateResult2_2(UseRefResult1.current.AbsoluteSize.Y)
+			end
+			return
+		elseif FoundationFontFaceMigration then
 			local Current = UseRefResult.current
 			
 			if not Current then return end
-			local Flag = false
+			local Current1 = false
 			task.spawn(function()
-				-- upvalues: GetTextBoundsAsyncFunction (upval), DisplayDescription (upval), Current (copy), Flag (ref), UseStateResult2_1 (upval), UseRefResult1 (upval), UseStateResult2_2 (upval)
+				-- upvalues: GetTextBoundsAsyncFunction (upval), DisplayDescription (upval), Current (copy), Current1 (ref), UseStateResult2_1 (upval), UseRefResult1 (upval), UseStateResult2_2 (upval)
 				local TextBoundsAsync = GetTextBoundsAsyncFunction(DisplayDescription, Current.FontFace, Current.TextSize, Current.AbsoluteSize.X)
 				
-				if Flag or not TextBoundsAsync then return end
+				if Current1 or not TextBoundsAsync then return end
 				UseStateResult2_1(TextBoundsAsync.Y * Current.LineHeight)
 				
 				if UseRefResult1.current then
@@ -192,10 +185,32 @@ return function(p1)
 			end)
 			
 			return function()
-				-- upvalues: Flag (ref)
-				Flag = true
+				-- upvalues: Current1 (ref)
+				Current1 = true
 			end
-		elseif UseRefResult1.current then
+		elseif not UseRefResult.current then return end
+		local Current1 = "GetTextBoundsParams"
+		local NewInstance = Instance.new(Current1)
+		Current1 = DisplayDescription
+		NewInstance.Text = Current1
+		Current1 = UseRefResult
+		Current1 = Current1.current
+		Current1 = Current1.FontFace
+		NewInstance.Font = Current1
+		Current1 = UseRefResult
+		Current1 = Current1.current
+		Current1 = Current1.TextSize
+		NewInstance.Size = Current1
+		Current1 = UseRefResult
+		Current1 = Current1.current
+		Current1 = Current1.AbsoluteSize
+		Current1 = Current1.X
+		NewInstance.Width = Current1
+		Current1 = TextService
+		Current1 = Current1:GetTextBoundsAsync(NewInstance)
+		UseStateResult2_1(Current1.Y * UseRefResult.current.LineHeight)
+		
+		if UseRefResult1.current then
 			UseStateResult2_2(UseRefResult1.current.AbsoluteSize.Y)
 		end
 	end, {
@@ -210,7 +225,7 @@ return function(p1)
 		onCloseClicked = UseResult1,
 		buttonStackInfo = UseMemoResult,
 		middleContent = ReactModule.useCallback(function()
-			-- upvalues: UseScreenSizeResult (copy), OverrideUseWideMode (copy), UseStateResult (copy), ConstantsModule (upval), LuaAppFixRsvpPromptDescriptionScrolling (upval), UseStateResult3 (copy), Size300 (copy), UseStateResult1 (copy), ReactModule (upval), LoadableImage (upval), MediaId (ref), v1 (ref), GameTileThumbnailBadges (upval), EventTime (ref), DisplayDescription (copy), NormalizeFontFaceFunction (upval), BodyLarge (copy), UseTokensResult (copy), UseResult3 (copy), UseRefResult (copy), ScrollView (upval), ScrollBarVisibility (upval), Text (upval), View (upval), UseResult2 (copy), DisplayTitle (copy), UseRefResult1 (copy)
+			-- upvalues: UseScreenSizeResult (copy), OverrideUseWideMode (copy), UseStateResult (copy), ConstantsModule (upval), LuaAppFixRsvpPromptDescriptionScrolling (upval), UseStateResult3 (copy), Size300 (copy), UseStateResult1 (copy), ReactModule (upval), LoadableImage (upval), MediaId (ref), v1 (ref), GameTileThumbnailBadges (upval), EventTime (ref), DisplayDescription (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), BodyLarge (copy), UseTokensResult (copy), UseResult3 (copy), UseRefResult (copy), ScrollView (upval), ScrollBarVisibility (upval), Text (upval), View (upval), UseResult2 (copy), DisplayTitle (copy), UseRefResult1 (copy)
 			local YDelta = UseScreenSizeResult.Y - 80 - 200
 			
 			if YDelta < 80 then
@@ -290,7 +305,7 @@ return function(p1)
 						Text = DisplayDescription,
 						TextTruncate = Enum.TextTruncate.None,
 						TextWrapped = true,
-						FontFace = NormalizeFontFaceFunction(BodyLarge.Font),
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(BodyLarge.Font) else Font.fromEnum(BodyLarge.Font),
 						TextSize = BodyLarge.FontSize,
 						LineHeight = BodyLarge.LineHeight,
 						TextColor3 = UseTokensResult.Color.Content.Emphasis.Color3,

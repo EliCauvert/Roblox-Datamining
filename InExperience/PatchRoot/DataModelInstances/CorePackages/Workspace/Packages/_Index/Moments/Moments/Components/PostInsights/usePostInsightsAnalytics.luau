@@ -1,6 +1,5 @@
 ﻿local Parent = script:FindFirstAncestor("Moments").Parent
 local CreatorAnalyticsModule = require(Parent.DataHydration.CreatorAnalytics)
-local MomentsCommonModule = require(Parent.MomentsCommon)
 local _ = require(Parent.MomentsTypes)
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
@@ -9,11 +8,6 @@ local GetPostInsightsQueryParamsModule = require(script.Parent.getPostInsightsQu
 local MetricSeriesToChartPointsModule = require(script.Parent.metricSeriesToChartPoints)
 local DataStatus = CreatorAnalyticsModule.DataStatus
 local GetCreatorAnalyticsStoreFunction = CreatorAnalyticsModule.getCreatorAnalyticsStore
-local config = {
-	views = "lifetime_views",
-	watchTime = "lifetime_watch_time",
-	joins = "lifetime_joins"
-}
 
 local function _(p1): number?
 	if p1 == nil then
@@ -42,7 +36,7 @@ local function combineStatus(List)
 end
 
 return function(p2, p3, p4)
-	-- upvalues: ReactModule (copy), GetPostInsightsQueryParamsModule (copy), SignalsModule (copy), DataStatus (copy), GetCreatorAnalyticsStoreFunction (copy), combineStatus (copy), SignalsReactModule (copy), MetricSeriesToChartPointsModule (copy), MomentsCommonModule (copy), config (copy)
+	-- upvalues: ReactModule (copy), GetPostInsightsQueryParamsModule (copy), SignalsModule (copy), DataStatus (copy), GetCreatorAnalyticsStoreFunction (copy), combineStatus (copy), SignalsReactModule (copy), MetricSeriesToChartPointsModule (copy)
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: GetPostInsightsQueryParamsModule (upval), p2 (copy), p3 (copy)
 		return GetPostInsightsQueryParamsModule(p2, p3 or os.time())
@@ -151,57 +145,17 @@ return function(p2, p3, p4)
 			end
 		end
 	end, { UseMemoResult, Delay })
-	local UseMemoResult1 = ReactModule.useMemo(function()
-		-- upvalues: UseMemoResult (copy), UseSignalStateResult1 (copy), DataStatus (upval), MetricSeriesToChartPointsModule (upval)
-		return if UseMemoResult == nil or UseSignalStateResult1.viewsStatus ~= DataStatus.Ready then nil else MetricSeriesToChartPointsModule(UseSignalStateResult1.views, UseMemoResult.window)
-	end, {
-		UseMemoResult,
-		UseSignalStateResult1.viewsStatus,
-		UseSignalStateResult1.views
-	})
-	local UseRefResult = ReactModule.useRef({ params = nil, queries = {}, inFlight = {} })
-	ReactModule.useEffect(function()
-		-- upvalues: UseMemoResult (copy), UseRefResult (copy), DataStatus (upval), MomentsCommonModule (upval), UseSignalStateResult (copy), config (upval)
-		if UseMemoResult == nil then return end
-		local Current = UseRefResult.current
-		
-		if Current.params ~= UseMemoResult then
-			Current.params = UseMemoResult
-			Current.queries = {}
-			Current.inFlight = {}
-		end
-		local function reportOnce(p5, LifetimeStatus)
-			-- upvalues: Current (copy), DataStatus (upval), MomentsCommonModule (upval)
-			if Current.queries[p5] then return end
-			if LifetimeStatus ~= DataStatus.NotReady then
-				local InFlightEntry = Current.inFlight[p5]
-				
-				if InFlightEntry == nil then return end
-				local Success = if LifetimeStatus == DataStatus.Ready then "success" elseif LifetimeStatus == DataStatus.Failed then "failed" else nil
-				
-				if Success ~= nil then
-					Current.queries[p5] = true
-					MomentsCommonModule.Analytics.reportMomentsPostInsightsRequest(p5, Success)
-					MomentsCommonModule.Analytics.reportMomentsPostInsightsRequestLatency(p5, Success, (math.round((os.clock() - InFlightEntry) * 1000)))
-					
-					return
-				end
-				return
-			elseif Current.inFlight[p5] == nil then
-				Current.inFlight[p5] = os.clock()
-			end
-		end
-		
-		reportOnce("views", UseSignalStateResult.viewsStatus)
-		
-		for i, value in config do
-			reportOnce(value, UseSignalStateResult.lifetimeStatuses[i])
-		end
-	end, { UseMemoResult, UseSignalStateResult })
 	
 	return {
 		viewsStatus = UseSignalStateResult1.viewsStatus,
-		viewsSeries = UseMemoResult1,
+		viewsSeries = ReactModule.useMemo(function()
+			-- upvalues: UseMemoResult (copy), UseSignalStateResult1 (copy), DataStatus (upval), MetricSeriesToChartPointsModule (upval)
+			return if UseMemoResult == nil or UseSignalStateResult1.viewsStatus ~= DataStatus.Ready then nil else MetricSeriesToChartPointsModule(UseSignalStateResult1.views, UseMemoResult.window)
+		end, {
+			UseMemoResult,
+			UseSignalStateResult1.viewsStatus,
+			UseSignalStateResult1.views
+		}),
 		window = if UseMemoResult == nil then nil else UseMemoResult.window,
 		lifetimeStatus = if HasJoins then DataStatus.Ready else UseSignalStateResult.lifetimeStatus,
 		lifetimeViews = LifetimeTotals.views,

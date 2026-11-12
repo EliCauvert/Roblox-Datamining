@@ -8,6 +8,7 @@ local _ = require(Parent.Signals)
 local ConfigModule = require(ExpChat.Config)
 local AdvanceHistoryScrollModule = require(script.Parent.advanceHistoryScroll)
 local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
+local FFlagExpChatEnableFriendsTab = require(Parent.SharedFlags).FFlagExpChatEnableFriendsTab
 local GetFFlagExpChatSendWindowScrollEventModule = require(ExpChat.Flags.getFFlagExpChatSendWindowScrollEvent)
 local FFlagExpChatLimitScrollingV2WindowModule = require(ExpChat.Flags.FFlagExpChatLimitScrollingV2Window)
 local FFlagExpChatScrollbarInsetModule = require(ExpChat.Flags.FFlagExpChatScrollbarInset)
@@ -37,7 +38,7 @@ local Callback = require(ExpChat.ChatWindow.Helpers.debounce)(function()
 end, (game:DefineFastInt("ExpChatWindowScrollV3Debounce", 0)))
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseStyleFunction (copy), ReactModule (copy), SignalsReactModule (copy), UserInputService (copy), ExpChatPerfTracker (copy), FFlagExpChatPerfTrackerTabName (copy), ExpChatScrollLockThresholdRatio (copy), GetFFlagExpChatSendWindowScrollEventModule (copy), Callback (copy), FFlagExpChatRenderHistoricalMessagesModule (copy), AdvanceHistoryScrollModule (copy), ConfigModule (copy), FFlagExpChatScrollbarInsetModule (copy), FFlagExpChatLimitScrollingV2WindowModule (copy), FFlagExpChatFixWarmMountBottomLockModule (copy)
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), SignalsReactModule (copy), UserInputService (copy), ExpChatPerfTracker (copy), FFlagExpChatPerfTrackerTabName (copy), ExpChatScrollLockThresholdRatio (copy), GetFFlagExpChatSendWindowScrollEventModule (copy), Callback (copy), FFlagExpChatEnableFriendsTab (copy), FFlagExpChatRenderHistoricalMessagesModule (copy), AdvanceHistoryScrollModule (copy), ConfigModule (copy), FFlagExpChatScrollbarInsetModule (copy), FFlagExpChatLimitScrollingV2WindowModule (copy), FFlagExpChatFixWarmMountBottomLockModule (copy)
 	local Theme = UseStyleFunction().Theme
 	local UseRefResult = ReactModule.useRef(nil)
 	local IsScrollToTopOnReset = p1.scrollToTopOnReset == true
@@ -90,7 +91,7 @@ return ReactModule.memo(function(p1)
 	local UseRefResult8 = ReactModule.useRef(p1.selectedChannelName)
 	UseRefResult8.current = p1.selectedChannelName
 	local UseResult2 = ReactModule.useCallback(function(ScrollFrame)
-		-- upvalues: UseRefResult7 (copy), UseRefResult8 (copy), ExpChatPerfTracker (upval), FFlagExpChatPerfTrackerTabName (upval), UseRefResult1 (copy), ExpChatScrollLockThresholdRatio (upval), GetFFlagExpChatSendWindowScrollEventModule (upval), Callback (upval), p1 (copy)
+		-- upvalues: UseRefResult7 (copy), UseRefResult8 (copy), ExpChatPerfTracker (upval), FFlagExpChatPerfTrackerTabName (upval), UseRefResult1 (copy), ExpChatScrollLockThresholdRatio (upval), GetFFlagExpChatSendWindowScrollEventModule (upval), Callback (upval), FFlagExpChatEnableFriendsTab (upval), p1 (copy)
 		if UseRefResult7.current == nil then
 			local Current = UseRefResult8.current
 			UseRefResult7.current = ExpChatPerfTracker.startChatWindowScrollInterval(ExpChatPerfTracker.Events.ChatWindowScrollInterval, ScrollFrame, {}, if FFlagExpChatPerfTrackerTabName and Current then { tabName = Current } else nil)
@@ -106,10 +107,12 @@ return ReactModule.memo(function(p1)
 		if GetFFlagExpChatSendWindowScrollEventModule() and not UseRefResult1.current then
 			Callback()
 		end
-		if p1.onCanvasPositionChanged then
+		if FFlagExpChatEnableFriendsTab and p1.onCanvasPositionChanged then
 			p1.onCanvasPositionChanged(ScrollFrame.CanvasPosition, (math.max(ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y, 0)))
 		end
-	end, { p1.onCanvasPositionChanged })
+	end, {
+		if FFlagExpChatEnableFriendsTab then p1.onCanvasPositionChanged else nil
+	})
 	local UseResult3 = ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: UseRefResult1 (copy), UseRefResult5 (copy)
 		if UseRefResult1.current and not UseRefResult5.current then
@@ -183,9 +186,9 @@ return ReactModule.memo(function(p1)
 		ScrollResetKey,
 		p1.historicalMessageCountSignal
 	})
-	local _UDim = if type(p1.contentTopPadding) == "number" then UDim.new(0, p1.contentTopPadding) elseif p1.contentTopPadding == nil then nil else p1.contentTopPadding:map(function(Offset): UDim
+	local _UDim = if FFlagExpChatEnableFriendsTab and type(p1.contentTopPadding) == "number" then UDim.new(0, p1.contentTopPadding) elseif FFlagExpChatEnableFriendsTab and p1.contentTopPadding ~= nil then p1.contentTopPadding:map(function(Offset): UDim
 		return UDim.new(0, Offset)
-	end)
+	end) else nil
 	
 	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -216,9 +219,9 @@ return ReactModule.memo(function(p1)
 			CanvasSize = UDim2.new(),
 			[ReactModule.Change.CanvasPosition] = UseResult2,
 			[ReactModule.Change.AbsoluteWindowSize] = if FFlagExpChatFixWarmMountBottomLockModule then UseResult3 else nil
-		}, {
+		}, if FFlagExpChatEnableFriendsTab then {
 			contentPadding = if _UDim == nil then nil else ReactModule.createElement("UIPadding", { PaddingTop = _UDim }),
 			messages = ReactModule.createElement(ReactModule.Fragment, nil, UseSignalStateResult)
-		})
+		} else UseSignalStateResult)
 	})
 end)

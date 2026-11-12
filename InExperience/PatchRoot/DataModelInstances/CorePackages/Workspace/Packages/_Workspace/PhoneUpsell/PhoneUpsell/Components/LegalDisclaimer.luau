@@ -4,11 +4,12 @@ local UIBloxModule = require(Parent.UIBlox)
 local FoundationModule = require(Parent.Foundation)
 local Checkbox = FoundationModule.Checkbox
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local LinkButton = UIBloxModule.App.Button.LinkButton
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 
 return function(Frame)
-	-- upvalues: UseStyleFunction (copy), ReactModule (copy), Checkbox (copy), NormalizeFontFaceFunction (copy), LinkButton (copy)
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), Checkbox (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), LinkButton (copy)
 	local UseStyleResult = UseStyleFunction()
 	local BaseSize = UseStyleResult.Font.BaseSize
 	local RelativeSize = UseStyleResult.Font.CaptionHeader.RelativeSize
@@ -48,7 +49,8 @@ return function(Frame)
 				TextSize = BaseSize * RelativeSize,
 				TextColor3 = UseStyleResult.Theme.TextDefault.Color,
 				TextTransparency = UseStyleResult.Theme.TextDefault.Transparency,
-				FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
+				Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				Size = UDim2.new(1, -(26 + Size150), 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y
@@ -61,7 +63,8 @@ return function(Frame)
 			TextSize = BaseSize * RelativeSize,
 			TextColor3 = UseStyleResult.Theme.TextDefault.Color,
 			TextTransparency = UseStyleResult.Theme.TextDefault.Transparency,
-			FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
+			Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
@@ -93,7 +96,8 @@ return function(Frame)
 				TextSize = BaseSize * RelativeSize,
 				TextColor3 = UseStyleResult.Theme.TextDefault.Color,
 				TextTransparency = UseStyleResult.Theme.TextDefault.Transparency,
-				FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
+				Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				AutomaticSize = Enum.AutomaticSize.XY
 			}),

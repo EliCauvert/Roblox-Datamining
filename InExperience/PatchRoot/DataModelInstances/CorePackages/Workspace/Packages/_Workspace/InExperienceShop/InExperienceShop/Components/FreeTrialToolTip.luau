@@ -5,7 +5,6 @@ local FoundationModule = require(Parent.Foundation)
 local SignalsReactModule = require(Parent.SignalsReact)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local FFlagEnableExperienceShopGlobalIconModule = require(InExperienceShop.Flags.FFlagEnableExperienceShopGlobalIcon)
-local FFlagFixFreeTrialTooltipLocalizationModule = require(InExperienceShop.Flags.FFlagFixFreeTrialTooltipLocalization)
 local GetShopGlobalIconStoreModule = require(InExperienceShop.Stores.GetShopGlobalIconStore)
 local SubmitFreeTrialTooltipsModule = require(InExperienceShop.submitFreeTrialTooltips)
 local EducationalTooltip = FoundationModule.EducationalTooltip
@@ -14,45 +13,8 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local PopoverSide = FoundationModule.Enums.PopoverSide
 local PopoverAlign = FoundationModule.Enums.PopoverAlign
 
-local function createShownTooltip(AnchorRef, Title, ActionText, OnActivated, Callback)
-	-- upvalues: ReactModule (copy), OverlayProvider (copy), EducationalTooltip (copy), PopoverSide (copy), PopoverAlign (copy), ButtonVariant (copy)
-	return ReactModule.createElement(OverlayProvider, nil, {
-		Tooltip = ReactModule.createElement(EducationalTooltip, {
-			isOpen = true,
-			testId = "trial-available-tooltip",
-			anchorRef = AnchorRef,
-			title = Title .. string.rep(" ", 10),
-			side = PopoverSide.Bottom,
-			align = PopoverAlign.Start,
-			actions = {
-				{
-					text = ActionText,
-					variant = ButtonVariant.Emphasis,
-					onActivated = OnActivated,
-					width = UDim.new(1, 0)
-				}
-			},
-			onClose = function()
-				-- upvalues: Callback (copy)
-				Callback("user")
-			end,
-			onPressedOutside = function()
-				-- upvalues: Callback (copy)
-				Callback("user")
-			end
-		})
-	})
-end
-
-local function ShownFreeTrialToolTip(p1)
-	-- upvalues: UseLocalizationFunction (copy), createShownTooltip (copy)
-	local UseLocalizationResult = UseLocalizationFunction({ title = p1.titleKey, actionText = p1.actionTextKey })
-	
-	return createShownTooltip(p1.anchorRef, UseLocalizationResult.title, UseLocalizationResult.actionText, p1.onActionActivated, p1.dismiss)
-end
-
 return ReactModule.memo(function(p1)
-	-- upvalues: SignalsReactModule (copy), SubmitFreeTrialTooltipsModule (copy), FFlagEnableExperienceShopGlobalIconModule (copy), GetShopGlobalIconStoreModule (copy), ReactModule (copy), InExperienceShop (copy), FFlagFixFreeTrialTooltipLocalizationModule (copy), UseLocalizationFunction (copy), ShownFreeTrialToolTip (copy), createShownTooltip (copy)
+	-- upvalues: SignalsReactModule (copy), SubmitFreeTrialTooltipsModule (copy), FFlagEnableExperienceShopGlobalIconModule (copy), GetShopGlobalIconStoreModule (copy), ReactModule (copy), InExperienceShop (copy), UseLocalizationFunction (copy), OverlayProvider (copy), EducationalTooltip (copy), PopoverSide (copy), PopoverAlign (copy), ButtonVariant (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(SubmitFreeTrialTooltipsModule.getActiveTooltip)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(function(p2)
 		-- upvalues: FFlagEnableExperienceShopGlobalIconModule (upval), GetShopGlobalIconStoreModule (upval)
@@ -88,17 +50,10 @@ return ReactModule.memo(function(p1)
 			p1.onOpenShop()
 		end
 	end, { UseResult, p1.onOpenShop, Action, GamePassId })
-	local Title = ""
-	local ActionText = ""
-	
-	if not FFlagFixFreeTrialTooltipLocalizationModule then
-		local UseLocalizationResult = UseLocalizationFunction({
-			title = if UseSignalStateResult == nil then "" else UseSignalStateResult.title,
-			actionText = if UseSignalStateResult == nil then "" else UseSignalStateResult.actionText
-		})
-		Title = UseLocalizationResult.title
-		ActionText = UseLocalizationResult.actionText
-	end
+	local UseLocalizationResult = UseLocalizationFunction({
+		title = if UseSignalStateResult == nil then "" else UseSignalStateResult.title,
+		actionText = if UseSignalStateResult == nil then "" else UseSignalStateResult.actionText
+	})
 	local HasUseSignalStateResult: boolean = UseSignalStateResult ~= nil and (UseStateResult and not UseStateResult1)
 	HasUseSignalStateResult = if IsEducationTooltipOnShopIcon then HasUseSignalStateResult and UseSignalStateResult1 ~= nil else HasUseSignalStateResult and p1.visible == true
 	local TooltipQueue = p1.tooltipQueue
@@ -150,11 +105,30 @@ return ReactModule.memo(function(p1)
 		end
 	end, { IsTRIALAVAILABLETOOLTIP1 })
 	
-	return if IsTRIALAVAILABLETOOLTIP1 and UseSignalStateResult ~= nil then if FFlagFixFreeTrialTooltipLocalizationModule then if UseSignalStateResult.title == "" or UseSignalStateResult.actionText == "" then nil else ReactModule.createElement(ShownFreeTrialToolTip, {
-		anchorRef = UseRefResult1,
-		titleKey = UseSignalStateResult.title,
-		actionTextKey = UseSignalStateResult.actionText,
-		onActionActivated = UseResult1,
-		dismiss = UseResult
-	}) else createShownTooltip(UseRefResult1, Title, ActionText, UseResult1, UseResult) else nil
+	return if IsTRIALAVAILABLETOOLTIP1 and UseSignalStateResult ~= nil then ReactModule.createElement(OverlayProvider, nil, {
+		Tooltip = ReactModule.createElement(EducationalTooltip, {
+			isOpen = true,
+			testId = "trial-available-tooltip",
+			anchorRef = UseRefResult1,
+			title = UseLocalizationResult.title .. string.rep(" ", 10),
+			side = PopoverSide.Bottom,
+			align = PopoverAlign.Start,
+			actions = {
+				{
+					text = UseLocalizationResult.actionText,
+					variant = ButtonVariant.Emphasis,
+					onActivated = UseResult1,
+					width = UDim.new(1, 0)
+				}
+			},
+			onClose = function()
+				-- upvalues: UseResult (copy)
+				UseResult("user")
+			end,
+			onPressedOutside = function()
+				-- upvalues: UseResult (copy)
+				UseResult("user")
+			end
+		})
+	}) else nil
 end)

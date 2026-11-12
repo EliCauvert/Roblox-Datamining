@@ -1644,6 +1644,7 @@ Feature.Chat.Label.PrivacySettings,Настройки конфиденциаль
 Feature.Chat.Label.ReplyingToOthers,
 Feature.Chat.Label.ReplyingToYourself,Ответить себе
 Feature.Chat.Label.SearchWord,
+Feature.Chat.Label.SnoozeChatNotifications,Отключить уведомления чата внутри плейса:
 Feature.Chat.Label.SnoozePartyNotifications,Отключить уведомления команды внутри плейса:
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,неизвестный пользователь

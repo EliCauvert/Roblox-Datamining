@@ -6,6 +6,7 @@ local UIBloxModule = require(Parent.UIBlox)
 local FoundationModule = require(Parent.Foundation)
 local Skeleton = FoundationModule.Skeleton
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local UseSelectionCursorFunction = UIBloxModule.App.SelectionImage.useSelectionCursor
 local CursorKind = UIBloxModule.App.SelectionImage.CursorKind
@@ -15,7 +16,7 @@ local _Vector2 = Vector2.new(14, 14)
 local _UDim2 = UDim2.new(0.3, 0, 0.8, 0)
 
 return (ReactModule.forwardRef(function(Label, Ref)
-	-- upvalues: UseStyleFunction (copy), UseSelectionCursorFunction (copy), CursorKind (copy), _Vector2 (copy), Focusable (copy), ReactModule (copy), NormalizeFontFaceFunction (copy), VerifiedBadgesModule (copy), Skeleton (copy), _UDim2 (copy), ImageSetLabel (copy), IconsNavigationPushRightSmall (copy)
+	-- upvalues: UseStyleFunction (copy), UseSelectionCursorFunction (copy), CursorKind (copy), _Vector2 (copy), Focusable (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), VerifiedBadgesModule (copy), Skeleton (copy), _UDim2 (copy), ImageSetLabel (copy), IconsNavigationPushRightSmall (copy)
 	local LayoutOrder = Label.LayoutOrder
 	local InfoName = Label.infoName
 	local InfoData = Label.infoData
@@ -51,7 +52,8 @@ return (ReactModule.forwardRef(function(Label, Ref)
 		}, {
 			InfoNameTextLabel = ReactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
-				FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
+				Font = if FoundationFontFaceMigration then nil else UseStyleResultFont.Body.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 				Size = UDim2.new(0.5, 0, 1, 0),
 				Text = InfoName,
 				TextColor3 = Theme.TextDefault.Color,
@@ -72,7 +74,8 @@ return (ReactModule.forwardRef(function(Label, Ref)
 			}, {
 				InfoDataTextLabel = ReactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
-					FontFace = NormalizeFontFaceFunction(if OnActivate then UseStyleResult.Tokens.Typography.TitleLarge.Font else UseStyleResult.Tokens.Typography.BodyLarge.Font),
+					Font = if FoundationFontFaceMigration then nil else OnActivate and UseStyleResultFont.Header2.Font or UseStyleResultFont.Body.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(if OnActivate then UseStyleResult.Tokens.Typography.TitleLarge.Font else UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 					Size = UDim2.new(0, 0, 1, 0),
 					Text = InfoData,
 					TextColor3 = if OnActivate then Theme.TextEmphasis.Color else Theme.TextDefault.Color,
@@ -87,7 +90,8 @@ return (ReactModule.forwardRef(function(Label, Ref)
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(1, 0),
 				Position = UDim2.new(1, if OnActivate then v1 else 0, 0, 0),
-				FontFace = NormalizeFontFaceFunction(if OnActivate then UseStyleResult.Tokens.Typography.TitleLarge.Font else UseStyleResult.Tokens.Typography.BodyLarge.Font),
+				Font = if FoundationFontFaceMigration then nil elseif OnActivate then UseStyleResultFont.Header2.Font else UseStyleResultFont.Body.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(if OnActivate then UseStyleResult.Tokens.Typography.TitleLarge.Font else UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 				Size = UDim2.new(0.5, 0, 1, 0),
 				Text = InfoData,
 				TextColor3 = if OnActivate then Theme.TextEmphasis.Color else Theme.TextDefault.Color,

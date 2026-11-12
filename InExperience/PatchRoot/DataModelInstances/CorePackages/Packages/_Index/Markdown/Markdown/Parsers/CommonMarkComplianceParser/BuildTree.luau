@@ -349,7 +349,7 @@ function t.buildTree(p3, p4)
 					type = if p4.inlineTags[CaptureEntry] then NodeTypeModule.InlineSpan else NodeTypeModule.Block
 				})
 			end
-		elseif Flags.FFlagMarkdownTagFallbacks and TextNode.name == "CLOSE" and TextNode.capture then
+		elseif Flags.FFlagMarkdownTagFallbacks and (TextNode.name == "CLOSE" and TextNode.capture) then
 			local CaptureEntry = TextNode.capture[1]
 			
 			if not t.closeNode(list, function(TextNode): boolean

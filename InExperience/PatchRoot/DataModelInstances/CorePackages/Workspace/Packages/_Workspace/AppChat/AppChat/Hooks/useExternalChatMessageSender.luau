@@ -27,6 +27,7 @@ local UseIsChatUserMessagesEnabledModule = require(AppChat.Hooks.useIsChatUserMe
 local UseChatSettingsRetrievalStatusModule = require(AppChat.Hooks.useChatSettingsRetrievalStatus)
 local UseIsGroupChatEnabledModule = require(AppChat.Hooks.useIsGroupChatEnabled)
 local IsNavigationAvailableFunction = require(Parent.RobloxAppNavigation).isNavigationAvailable
+local FFlagShareSheetFriendsSort = require(Parent.SharedFlags).FFlagShareSheetFriendsSort
 
 local function _(Status, ConversationId)
 	return { conversationId = ConversationId, status = Status }
@@ -41,7 +42,7 @@ local _ = function(p1): boolean
 end
 
 return function(p1)
-	-- upvalues: UseDispatchFunction (copy), GetChatModerationStatusDataHydrationModule (copy), UseAppPolicyModule (copy), UseChatSettingsRetrievalStatusModule (copy), UseSelectorFunction (copy), UseIsChatEnabledModule (copy), UseIsChatUserMessagesEnabledModule (copy), UseIsGroupChatEnabledModule (copy), RetrievalStatus (copy), ReactModule (copy), GetConversationSendEligibilityStatusModule (copy), GetUserSendEligibilityStatusModule (copy), ReceivedConversationModule (copy), PromiseModule (copy), SendTextMessageModule (copy), StatusCodes (copy), AppChatNetworkingModule (copy), NavigateWithOsaGateModule (copy), CreateConversationFromFriendPlaceholderModule (copy), CreateConversationModule (copy), NavigateIntoChatModule1 (copy), NavigateIntoChatModule (copy), EnumScreensModule (copy), IsNavigationAvailableFunction (copy)
+	-- upvalues: UseDispatchFunction (copy), GetChatModerationStatusDataHydrationModule (copy), UseAppPolicyModule (copy), UseChatSettingsRetrievalStatusModule (copy), UseSelectorFunction (copy), UseIsChatEnabledModule (copy), UseIsChatUserMessagesEnabledModule (copy), UseIsGroupChatEnabledModule (copy), RetrievalStatus (copy), ReactModule (copy), GetConversationSendEligibilityStatusModule (copy), GetUserSendEligibilityStatusModule (copy), ReceivedConversationModule (copy), PromiseModule (copy), SendTextMessageModule (copy), StatusCodes (copy), AppChatNetworkingModule (copy), NavigateWithOsaGateModule (copy), CreateConversationFromFriendPlaceholderModule (copy), FFlagShareSheetFriendsSort (copy), CreateConversationModule (copy), NavigateIntoChatModule1 (copy), NavigateIntoChatModule (copy), EnumScreensModule (copy), IsNavigationAvailableFunction (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local ChatModerationStatusDataHydrationModule = GetChatModerationStatusDataHydrationModule()
 	local UseAppPolicyModuleResult = UseAppPolicyModule(function(p2)
@@ -140,7 +141,7 @@ return function(p1)
 		end)
 	end, { UseDispatchResult, UseResult })
 	local UseResult4 = ReactModule.useCallback(function(p2, p3)
-		-- upvalues: UseResult1 (copy), PromiseModule (upval), CreateConversationFromFriendPlaceholderModule (upval), UseSelectorResult (copy), UseResult3 (copy)
+		-- upvalues: UseResult1 (copy), PromiseModule (upval), CreateConversationFromFriendPlaceholderModule (upval), UseSelectorResult (copy), FFlagShareSheetFriendsSort (upval), UseResult3 (copy), UseResult (copy), UseDispatchResult (copy), ReceivedConversationModule (upval), SendTextMessageModule (upval), StatusCodes (upval), AppChatNetworkingModule (upval), NavigateWithOsaGateModule (upval)
 		if not UseResult1(p2) then
 			return PromiseModule.resolve({ conversationId = nil, status = "failure" })
 		end
@@ -156,8 +157,59 @@ return function(p1)
 		else
 			ConversationFromFriendPlaceholderModule = PromiseModule.resolve(p2)
 		end
-		return UseResult3(ConversationFromFriendPlaceholderModule, IsFriends, p3)
-	end, { UseResult1, UseSelectorResult, UseResult3 })
+		return if FFlagShareSheetFriendsSort then UseResult3(ConversationFromFriendPlaceholderModule, IsFriends, p3) else ConversationFromFriendPlaceholderModule:andThen(function(Result)
+			-- upvalues: UseResult (upval), IsFriends (copy), UseDispatchResult (upval), ReceivedConversationModule (upval), PromiseModule (upval), SendTextMessageModule (upval), p3 (copy), StatusCodes (upval), AppChatNetworkingModule (upval), NavigateWithOsaGateModule (upval)
+			local Id = Result and Result.id
+			
+			if Result == nil or Id == nil or Id == "" or Result.source == "friends" or UseResult(Result, IsFriends) ~= "eligible" then
+				return { conversationId = nil, status = "failure" }
+			end
+			if IsFriends then
+				UseDispatchResult(ReceivedConversationModule(Result))
+			end
+			return PromiseModule.new(function(Callback)
+				-- upvalues: UseDispatchResult (upval), SendTextMessageModule (upval), Id (copy), p3 (upval), StatusCodes (upval), AppChatNetworkingModule (upval), NavigateWithOsaGateModule (upval)
+				local function sendMessage()
+					-- upvalues: UseDispatchResult (upval), SendTextMessageModule (upval), Id (upval), p3 (upval), Callback (copy), StatusCodes (upval), AppChatNetworkingModule (upval)
+					UseDispatchResult(SendTextMessageModule(Id, p3, nil)):andThen(function(Result)
+						-- upvalues: Callback (upval), StatusCodes (upval), AppChatNetworkingModule (upval), Id (upval)
+						local Message = Result and (Result.responseCode == StatusCodes.OK and (Result.responseBody and (Result.responseBody.messages and Result.responseBody.messages[1])))
+						local Status = Message and Message.status
+						local NoStatus: boolean = Message ~= nil and (Status == nil or (Status == "" or Status == AppChatNetworkingModule.Constants.ResponseStatus.SUCCESS))
+						Callback(if NoStatus then { status = "success", conversationId = Id } else { conversationId = nil, status = "failure" })
+					end, function()
+						-- upvalues: Callback (upval)
+						Callback({ conversationId = nil, status = "failure" })
+					end)
+				end
+				
+				NavigateWithOsaGateModule({
+					conversationId = Id,
+					dispatch = UseDispatchResult,
+					onAccepted = function()
+						-- upvalues: sendMessage (copy)
+						sendMessage()
+					end,
+					onDeclined = function()
+						-- upvalues: Callback (copy)
+						Callback({ conversationId = nil, status = "declined" })
+					end,
+					onError = function()
+						-- upvalues: Callback (copy)
+						Callback({ conversationId = nil, status = "failure" })
+					end
+				})
+			end)
+		end):catch(function()
+			return { conversationId = nil, status = "failure" }
+		end)
+	end, {
+		UseResult1,
+		UseDispatchResult,
+		UseResult,
+		UseSelectorResult,
+		UseResult3
+	})
 	local UseResult5 = ReactModule.useCallback(function(p2, p3)
 		-- upvalues: UseResult2 (copy), PromiseModule (upval), UseResult3 (copy), UseDispatchResult (copy), CreateConversationModule (upval)
 		return if UseResult2(p2) then UseResult3(UseDispatchResult(CreateConversationModule("one_to_one", { p2 })), true, p3) else PromiseModule.resolve({ conversationId = nil, status = "failure" })

@@ -18,21 +18,17 @@ local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispa
 local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
 local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local FFlagSignalsNavP3Dispatch = SharedFlagsModule.FFlagSignalsNavP3Dispatch
-local FFlagProfileMomentsFeedRootRoute = SharedFlagsModule.FFlagProfileMomentsFeedRootRoute
-local FFlagEnableArgus = SharedFlagsModule.FFlagEnableArgus
-local FFlagEnableArgusImmersiveNav = SharedFlagsModule.FFlagEnableArgusImmersiveNav
 local FFlagProfileRenderAvatarMoments = SharedFlagsModule.FFlagProfileRenderAvatarMoments
 local FFlagProfileMomentsLoadFailureAnalyticsModule = require(ProfilePlatform.Flags.FFlagProfileMomentsLoadFailureAnalytics)
-local FFlagProfileRenderAvatarMoments1 = FFlagProfileMomentsFeedRootRoute and (FFlagEnableArgus and (FFlagEnableArgusImmersiveNav and FFlagProfileRenderAvatarMoments))
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
-local FFlagProfileMomentsFeedRootRoute1 = FFlagProfileMomentsFeedRootRoute or FFlagProfileRenderAvatarMoments
+local FFlagProfileMomentsFeedRootRoute = SharedFlagsModule.FFlagProfileMomentsFeedRootRoute or FFlagProfileRenderAvatarMoments
 
 return function(p1)
-	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseNavigationFunction (copy), FFlagProfileMomentsFeedRootRoute1 (copy), UseDispatchFunction (copy), UseUserMomentsModule (copy), FFlagProfileMomentsLoadFailureAnalyticsModule (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), EventNamesModule (copy), EnumsModule (copy), MakeProfileTileFieldsModule (copy), FFlagMomentsOptimisticProfilePending (copy), FFlagProfileRenderAvatarMoments1 (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), MomentsCarouselModule (copy)
+	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseNavigationFunction (copy), FFlagProfileMomentsFeedRootRoute (copy), UseDispatchFunction (copy), UseUserMomentsModule (copy), FFlagProfileMomentsLoadFailureAnalyticsModule (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), EventNamesModule (copy), EnumsModule (copy), MakeProfileTileFieldsModule (copy), FFlagMomentsOptimisticProfilePending (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), MomentsCarouselModule (copy)
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	local UseProfileAnalyticsContextModuleResult = UseProfileAnalyticsContextModule()
 	local UseNavigationResult = UseNavigationFunction()
-	local UseDispatchResult = if FFlagProfileMomentsFeedRootRoute1 then UseDispatchFunction() else nil
+	local UseDispatchResult = if FFlagProfileMomentsFeedRootRoute then UseDispatchFunction() else nil
 	local ProfileId = UseProfileWrapperContextModuleResult.profileId
 	local UseUserMomentsModuleResult = UseUserMomentsModule(ProfileId)
 	local Moments = UseUserMomentsModuleResult.moments
@@ -55,7 +51,7 @@ return function(p1)
 		ProfileId
 	})
 	local UseResult1 = ReactModule.useCallback(function(InitialIndex)
-		-- upvalues: Moments (copy), ProfileId (copy), MakeProfileTileFieldsModule (upval), FireAnalyticsEventFunction (upval), EventNames (upval), FFlagMomentsOptimisticProfilePending (upval), FFlagProfileMomentsFeedRootRoute1 (upval), FFlagProfileRenderAvatarMoments1 (upval), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (ref), NavigateDownFunction (upval), UseNavigationResult (copy), EnumsModule (upval)
+		-- upvalues: Moments (copy), ProfileId (copy), MakeProfileTileFieldsModule (upval), FireAnalyticsEventFunction (upval), EventNames (upval), FFlagMomentsOptimisticProfilePending (upval), FFlagProfileMomentsFeedRootRoute (upval), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (ref), NavigateDownFunction (upval), UseNavigationResult (copy), EnumsModule (upval)
 		local Moment = Moments[InitialIndex]
 		
 		if Moment and ProfileId then
@@ -71,13 +67,13 @@ return function(p1)
 			initialMomentId = if FFlagMomentsOptimisticProfilePending and Moment ~= nil then Moment.momentId else nil
 		}
 		
-		if not FFlagProfileMomentsFeedRootRoute1 then
+		if not FFlagProfileMomentsFeedRootRoute then
 			UseNavigationResult.navigate(EnumsModule.Screens.MomentsFeed, { extraProps = ExtraProps })
 			
 			return
 		end
 		local config = {
-			name = if FFlagProfileRenderAvatarMoments1 then AppPage.MomentsImmersive else AppPage.ProfileMomentsFeed,
+			name = AppPage.ProfileMomentsFeed,
 			extraProps = ExtraProps
 		}
 		

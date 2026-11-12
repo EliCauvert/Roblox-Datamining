@@ -5,7 +5,6 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local IXPServiceWrapper = require(Parent.IxpServiceWrapper).IXPServiceWrapper
 local GetAppFeaturePoliciesFunction = require(Parent.UniversalAppPolicy).getAppFeaturePolicies
 local IsSduiBuyRobuxSupportedModule = require(BuyRobuxRouting.isSduiBuyRobuxSupported)
-local FFlagBuyRobuxRoutingAppendWebContextModule = require(BuyRobuxRouting.Flags.FFlagBuyRobuxRoutingAppendWebContext)
 local FFlagEnableBuyRobuxNextJS = SharedFlagsModule.FFlagEnableBuyRobuxNextJS
 local FFlagBuyRobuxLatencyIxpEnabled = SharedFlagsModule.FFlagBuyRobuxLatencyIxpEnabled
 local FFlagEnableBuyRobuxSdui = SharedFlagsModule.FFlagEnableBuyRobuxSdui
@@ -34,66 +33,8 @@ local function buildUrl(Text, p1): string
 	return Replaced .. Text .. (if #List > 0 then "?" .. table.concat(List, "&") else "")
 end
 
-local function appendRoutingContext(Text: string, Input): string
-	-- upvalues: HttpService (copy)
-	local List = {}
-	
-	if Input ~= nil then
-		table.insert(List, "variant=" .. HttpService:UrlEncode(Input))
-	end
-	table.insert(List, "startMs=" .. tostring(DateTime.now().UnixTimestampMillis))
-	
-	return Text .. (if string.find(Text, "?", 1, true) then "&" else "?") .. table.concat(List, "&")
-end
-
 local _ = function(Url, ShouldExpose)
 	return { kind = "web", url = Url, shouldExpose = ShouldExpose }
-end
-
-local function resolveDestinationWithWebContext(p1)
-	-- upvalues: GetAppFeaturePoliciesFunction (copy), LogBuyRobuxRoutingDecisionModule (copy), appendRoutingContext (copy), buildUrl (copy), FFlagBypassBuyRobuxSduiSupportForWebRouting (copy), IsSduiBuyRobuxSupportedModule (copy), FFlagEnableBuyRobuxSdui (copy), FFlagBuyRobuxLatencyIxpEnabled (copy), FFlagEnableBuyRobuxNextJS (copy)
-	local AppFeaturePolicies = GetAppFeaturePoliciesFunction()
-	
-	if AppFeaturePolicies.useLuobuAuthentication() or (AppFeaturePolicies.getUseVNGUserAgreementPopup() or (AppFeaturePolicies.getRedirectBuyRobuxToVNG() or AppFeaturePolicies.getShowVNGTosForRobuxUpsell())) then
-		LogBuyRobuxRoutingDecisionModule("controlWeb", "excludedRegion")
-		
-		return {
-			kind = "web",
-			shouldExpose = false,
-			url = appendRoutingContext(buildUrl("upgrades/robux", p1), nil)
-		}
-	elseif not FFlagBypassBuyRobuxSduiSupportForWebRouting and not IsSduiBuyRobuxSupportedModule() then
-		LogBuyRobuxRoutingDecisionModule("controlWeb", "sduiNotSupported")
-		
-		return {
-			kind = "web",
-			shouldExpose = false,
-			url = appendRoutingContext(buildUrl("upgrades/robux", p1), nil)
-		}
-	elseif FFlagEnableBuyRobuxSdui then
-		LogBuyRobuxRoutingDecisionModule("nativeSdui", "experimentArm")
-		
-		return {
-			kind = "native",
-			shouldExpose = FFlagBuyRobuxLatencyIxpEnabled
-		}
-	elseif FFlagEnableBuyRobuxNextJS then
-		LogBuyRobuxRoutingDecisionModule("nextJsWeb", "experimentArm")
-		
-		return {
-			kind = "web",
-			url = appendRoutingContext(buildUrl("upgrades/robux/v2", p1), "nextjs"),
-			shouldExpose = FFlagBuyRobuxLatencyIxpEnabled
-		}
-	else
-		LogBuyRobuxRoutingDecisionModule("controlWeb", "experimentArm")
-		
-		return {
-			kind = "web",
-			url = appendRoutingContext(buildUrl("upgrades/robux", p1), "control"),
-			shouldExpose = FFlagBuyRobuxLatencyIxpEnabled
-		}
-	end
 end
 
 local function resolveDestination(p1)
@@ -135,14 +76,12 @@ local function resolveDestination(p1)
 	end
 end
 
-local Callback = if FFlagBuyRobuxRoutingAppendWebContextModule then resolveDestinationWithWebContext else resolveDestination
-
 return {
 	fallbackWebUrl = function(p1)
 		-- upvalues: buildUrl (copy)
 		return (buildUrl("upgrades/robux", p1))
 	end,
-	resolveDestination = Callback,
+	resolveDestination = resolveDestination,
 	logExposure = function(p1)
 		-- upvalues: FStringPaymentsBuyRobuxLayer (copy), IXPServiceWrapper (copy)
 		if p1.shouldExpose and FStringPaymentsBuyRobuxLayer ~= "" then
@@ -150,12 +89,12 @@ return {
 		end
 	end,
 	resolveAndLogDestination = function(p1)
-		-- upvalues: FFlagBuyRobuxRoutingAppendWebContextModule (copy), Callback (copy), resolveDestination (copy), FStringPaymentsBuyRobuxLayer (copy), IXPServiceWrapper (copy)
-		local CallbackResult = if FFlagBuyRobuxRoutingAppendWebContextModule then Callback(p1) else resolveDestination(p1)
+		-- upvalues: resolveDestination (copy), FStringPaymentsBuyRobuxLayer (copy), IXPServiceWrapper (copy)
+		local ResolveDestinationResult = resolveDestination(p1)
 		
-		if CallbackResult.shouldExpose and FStringPaymentsBuyRobuxLayer ~= "" then
+		if ResolveDestinationResult.shouldExpose and FStringPaymentsBuyRobuxLayer ~= "" then
 			IXPServiceWrapper:LogFlagLinkedUserLayerExposure(FStringPaymentsBuyRobuxLayer)
 		end
-		return CallbackResult
+		return ResolveDestinationResult
 	end
 }

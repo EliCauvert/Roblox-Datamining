@@ -12,10 +12,7 @@ local function variantsFactory(p1)
 	return {
 		common = {
 			container = { tag = "row align-y-center auto-xy" },
-			item = {
-				tag = "row align-y-center gap-xsmall auto-xy",
-				gap = p1.Gap.XSmall
-			},
+			item = { tag = "row align-y-center gap-xsmall auto-xy" },
 			truncatedItem = { tag = "row align-y-center shrink gap-xsmall auto-xy" },
 			text = {
 				tag = "auto-xy content-default",
@@ -31,9 +28,7 @@ local function variantsFactory(p1)
 				avatarTag = "auto-xy padding-right-xxsmall",
 				iconSize = IconSizeModule.Small,
 				avatarSize = AvatarIconSizeModule.Small,
-				style = p1.Color.Content.Default,
-				width = p1.Size.Size_400,
-				avatarWidth = p1.Size.Size_400 + p1.Padding.XXSmall
+				style = p1.Color.Content.Default
 			}
 		},
 		sizes = {

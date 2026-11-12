@@ -295,15 +295,4 @@ function BoundsCalculatorModule.calculateIndividualAssetPartsDataFromData(p13, A
 	return BoundsCalculatorModule.calculateIndividualAssetPartsData(p13, (buildValidationContextFromRenderMeshes(p13, AssetTypeEnum, p14)))
 end
 
-function BoundsCalculatorModule.calculateIndividualFullBodyPartsDataFromData(p13, p14)
-	-- upvalues: buildValidationContextFromRenderMeshes (copy), BoundsCalculatorModule (copy)
-	local NextEntry = next(p13)
-	
-	if NextEntry then
-		return BoundsCalculatorModule.calculateIndividualFullBodyPartsData(p13, buildValidationContextFromRenderMeshes(p13[NextEntry].Parent, nil, p14), nil, true)
-	else
-		return false, { "No body parts provided" }
-	end
-end
-
 return BoundsCalculatorModule

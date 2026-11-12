@@ -24,18 +24,18 @@ function StateTableModule.new(Name, CurrentState, p1, List)
 	t.transitionTable = {}
 	t.events = {}
 	
-	for i1, value1 in pairs(List) do
-		local ValueType1 = typeof(i1)
-		assert(ValueType1 == "string" or ValueType1 == "userdata", string.format("%s '%s' must be a string or userdata but is a %s", "state", tostring(i1), ValueType1))
-		assert(typeof(value1) == "table", string.format("state '%s' must map to a table", (tostring(i1))))
+	for i, value in pairs(List) do
+		local ValueType1 = typeof(i)
+		assert(ValueType1 == "string" or ValueType1 == "userdata", string.format("%s '%s' must be a string or userdata but is a %s", "state", tostring(i), ValueType1))
+		assert(typeof(value) == "table", string.format("state '%s' must map to a table", (tostring(i))))
 		local t1 = {}
 		
-		for i, value in pairs(value1) do
-			local ValueType2 = typeof(i)
-			assert(ValueType2 == "string" or ValueType2 == "userdata", string.format("%s '%s' must be a string or userdata but is a %s", "event", tostring(i), ValueType2))
-			assert(typeof(value) == "table", string.format("event '%s' must map to a table", (tostring(i))))
-			local NextState = value.nextState
-			local Action = value.action
+		for i1, value1 in pairs(value) do
+			local ValueType2 = typeof(i1)
+			assert(ValueType2 == "string" or ValueType2 == "userdata", string.format("%s '%s' must be a string or userdata but is a %s", "event", tostring(i1), ValueType2))
+			assert(typeof(value1) == "table", string.format("event '%s' must map to a table", (tostring(i1))))
+			local NextState = value1.nextState
+			local Action = value1.action
 			
 			if NextState ~= nil then
 				local ValueType3 = typeof(NextState)
@@ -43,16 +43,16 @@ function StateTableModule.new(Name, CurrentState, p1, List)
 				assert(List[NextState] ~= nil, string.format("nextState '%s' does not exist in transitionTable", (tostring(NextState))))
 			end
 			assert(Action == nil or typeof(Action) == "function", "action must be a function")
-			t1[i] = value
+			t1[i1] = value1
 			
-			if t.events[i] == nil then
-				t.events[i] = function(p2)
-					-- upvalues: t (copy), i (copy)
-					return t:handleEvent(i, p2)
+			if t.events[i1] == nil then
+				t.events[i1] = function(p2)
+					-- upvalues: t (copy), i1 (copy)
+					return t:handleEvent(i1, p2)
 				end
 			end
 		end
-		t.transitionTable[i1] = t1
+		t.transitionTable[i] = t1
 	end
 	setmetatable(t.events, {
 		__index = function(_, p2)

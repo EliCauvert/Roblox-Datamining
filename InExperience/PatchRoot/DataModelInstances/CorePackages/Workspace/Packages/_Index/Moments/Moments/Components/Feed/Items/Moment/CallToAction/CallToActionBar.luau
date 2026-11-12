@@ -23,10 +23,7 @@ local _ = require(Moments.Components.Feed.FeedTypes)
 local MomentContextModule = require(script.Parent.Parent.MomentContext)
 local GetExperienceDetailsSheetStoreModule = require(Moments.ExperienceDetailsSheet.Sheet.getExperienceDetailsSheetStore)
 local JoinButtonModule = require(Moments.ExperienceDetailsSheet.Join.JoinButton)
-local PostStatusRowContainerModule = require(Moments.Components.PostFeedback.PostStatusRow.PostStatusRowContainer)
-local UsePendingMomentRecordModule = require(Moments.Components.PostFeedback.usePendingMomentRecord)
 local FFlagMomentsServeEDPVideos = require(Parent.SharedFlags).FFlagMomentsServeEDPVideos
-local FFlagMomentsPostFeedback = require(Parent.SharedFlags).FFlagMomentsPostFeedback
 local MomentsFixExperienceHandleVerifiedSpacing = game:DefineFastFlag("MomentsFixExperienceHandleVerifiedSpacing", false)
 local FFlagMomentsFixRecommendationImpressionLifecycleModule = require(Moments.Flags.FFlagMomentsFixRecommendationImpressionLifecycle)
 local FFlagMomentsUpdateExperienceActionLabelTextModule = require(Moments.Flags.FFlagMomentsUpdateExperienceActionLabelText)
@@ -38,8 +35,8 @@ local config = {
 }
 local Character = utf8.char(57344)
 
-return ReactModule.memo(function(Frame: Frame)
-	-- upvalues: UseLocalizationFunction (copy), config (copy), UseTokensFunction (copy), MomentContextModule (copy), UseSignalStateFunction (copy), GetMomentsPreferencesStoreModule (copy), GetFFlagMomentsAndroidTvEnabledModule (copy), UseIsTvRemoteDeviceFunction (copy), UseExperienceDetailsModule (copy), FFlagMomentsServeEDPVideos (copy), UseScaledValueFunction (copy), FFlagMomentsFixRecommendationImpressionLifecycleModule (copy), FFlagMomentsFollowingFeedModule (copy), FeedContextModule (copy), FFlagMomentsPostFeedback (copy), UsePendingMomentRecordModule (copy), GetRbxThumbFunction (copy), FoundationModule (copy), ReactModule (copy), PostStatusRowContainerModule (copy), MomentsFixExperienceHandleVerifiedSpacing (copy), Character (copy), ImageWithSkeletonModule (copy), Radius (copy), View (copy), Text (copy), Skeleton (copy), VerifiedBadgeModule (copy), IconSize (copy), GetExperienceDetailsSheetStoreModule (copy), Button (copy), JoinButtonModule (copy), FFlagMomentsJoinImpressionModule (copy)
+return ReactModule.memo(function(Frame)
+	-- upvalues: UseLocalizationFunction (copy), config (copy), UseTokensFunction (copy), MomentContextModule (copy), UseSignalStateFunction (copy), GetMomentsPreferencesStoreModule (copy), GetFFlagMomentsAndroidTvEnabledModule (copy), UseIsTvRemoteDeviceFunction (copy), UseExperienceDetailsModule (copy), FFlagMomentsServeEDPVideos (copy), UseScaledValueFunction (copy), FFlagMomentsFixRecommendationImpressionLifecycleModule (copy), FFlagMomentsFollowingFeedModule (copy), FeedContextModule (copy), GetRbxThumbFunction (copy), FoundationModule (copy), MomentsFixExperienceHandleVerifiedSpacing (copy), Character (copy), ReactModule (copy), ImageWithSkeletonModule (copy), Radius (copy), View (copy), Text (copy), Skeleton (copy), VerifiedBadgeModule (copy), IconSize (copy), GetExperienceDetailsSheetStoreModule (copy), Button (copy), JoinButtonModule (copy), FFlagMomentsJoinImpressionModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseTokensResult = UseTokensFunction()
 	local Store = MomentContextModule.useMoment().store
@@ -60,12 +57,7 @@ return ReactModule.memo(function(Frame: Frame)
 	local RecommendationSource = if FFlagMomentsFollowingFeedModule and UseFeedOptionalResult ~= nil then UseFeedOptionalResult.recommendationSource else nil
 	local IconImage = if IsAd then if Advertiser then Advertiser.iconImage else nil elseif UniverseId == 0 then GetRbxThumbFunction(FoundationModule.Enums.ThumbnailType.Asset, RootPlaceId) else GetRbxThumbFunction(FoundationModule.Enums.ThumbnailType.GameIcon, UniverseId)
 	
-	if (if FFlagMomentsPostFeedback then UsePendingMomentRecordModule(Data.momentId) else nil) ~= nil and Data.kind == "experience" and Data.isPending then
-		return ReactModule.createElement(PostStatusRowContainerModule, {
-			momentId = Data.momentId,
-			LayoutOrder = Frame.LayoutOrder
-		})
-	elseif IsAd or RootPlaceId ~= 0 or IsRootPlaceIdMatch then
+	if IsAd or RootPlaceId ~= 0 or IsRootPlaceIdMatch then
 		local Title = if FFlagMomentsServeEDPVideos and IsRootPlaceIdMatch then nil elseif IsAd then if Advertiser then Advertiser.title else nil else UseExperienceDetailsModuleResult.name
 		local Subtitle = if FFlagMomentsServeEDPVideos and IsRootPlaceIdMatch then nil elseif IsAd then if Advertiser then Advertiser.subtitle else nil else UseExperienceDetailsModuleResult.creatorName
 		local IsVerified = if IsAd then Advertiser ~= nil and Advertiser.isVerified else UseExperienceDetailsModuleResult.isCreatorVerified == true

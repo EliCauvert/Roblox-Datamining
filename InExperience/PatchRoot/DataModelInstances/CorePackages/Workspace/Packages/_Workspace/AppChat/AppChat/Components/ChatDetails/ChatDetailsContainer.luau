@@ -37,6 +37,7 @@ local ChatDetailsTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatDet
 local ChatDetailsTelemetryEventsModule = require(AppChat.Components.ChatDetails.ChatDetailsTelemetryEvents)
 local ChatConversationTelemetryStateModule = require(AppChat.Contexts.TelemetryState.ChatConversationTelemetryState)
 local ChatDetailsTelemetryStateModule = require(AppChat.Contexts.TelemetryState.ChatDetailsTelemetryState)
+local GetFFlagAppChatEnableRootedNavigationModule = require(AppChat.Flags.getFFlagAppChatEnableRootedNavigation)
 local FFlagAppChatUseUserProfileHydrationModule = require(AppChat.Flags.FFlagAppChatUseUserProfileHydration)
 local UseProfileNamesModule = require(AppChat.Hooks.useProfileNames)
 local GetCombinedNameFromProfileNamesModule = require(AppChat.Users.getCombinedNameFromProfileNames)
@@ -74,7 +75,7 @@ local function getParticipantProfiles(p1, Participants)
 end
 
 return function(p2)
-	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), GetFFlagIsSquadEnabledFunction (copy), ReactModule (copy), LuaAppNavigationContextModule (copy), UseDispatchFunction (copy), UseStateFunction (copy), UseNavigationFunction (copy), UseIsGroupChatEnabledModule (copy), UseIsChatEnabledModule (copy), UseEffectFunction (copy), UseSelectorFunction (copy), GetDeepValueModule (copy), ConversationModule (copy), AppChatNetworkingModule (copy), FFlagAppChatUseUserProfileHydrationModule (copy), UseProfileNamesModule (copy), UseUserProfilesFetchFunction (copy), UserProfilesCombinedNameAndUsernameByUserIds (copy), UseTelemetryModule (copy), ChatDetailsTelemetryLayerModule (copy), SelectChatUserEntryModelListModule (copy), getParticipantProfiles (copy), GetConversationTitleModule (copy), UseIsUserPendingModule (copy), ConversationChannelsModule (copy), PromiseModule (copy), GenericDialogTypeModule (copy), ChatDetailsTelemetryEventsModule (copy), UseCallbackFunction (copy), UseAppPolicyFunction (copy), UseChatPlacementContextFunction (copy), IsPlacementInExperienceFunction (copy), ChatConversationTelemetryStateModule (copy), ChatDetailsTelemetryStateModule (copy), UseEffectOnMountFunction (copy), ChatDetailsPageModule (copy), ParticipantDialogContainerModule (copy)
+	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), GetFFlagIsSquadEnabledFunction (copy), ReactModule (copy), LuaAppNavigationContextModule (copy), UseDispatchFunction (copy), UseStateFunction (copy), UseNavigationFunction (copy), UseIsGroupChatEnabledModule (copy), UseIsChatEnabledModule (copy), UseEffectFunction (copy), UseSelectorFunction (copy), GetDeepValueModule (copy), ConversationModule (copy), AppChatNetworkingModule (copy), FFlagAppChatUseUserProfileHydrationModule (copy), UseProfileNamesModule (copy), UseUserProfilesFetchFunction (copy), UserProfilesCombinedNameAndUsernameByUserIds (copy), UseTelemetryModule (copy), ChatDetailsTelemetryLayerModule (copy), SelectChatUserEntryModelListModule (copy), getParticipantProfiles (copy), GetConversationTitleModule (copy), UseIsUserPendingModule (copy), ConversationChannelsModule (copy), PromiseModule (copy), GenericDialogTypeModule (copy), GetFFlagAppChatEnableRootedNavigationModule (copy), ChatDetailsTelemetryEventsModule (copy), UseCallbackFunction (copy), UseAppPolicyFunction (copy), UseChatPlacementContextFunction (copy), IsPlacementInExperienceFunction (copy), ChatConversationTelemetryStateModule (copy), ChatDetailsTelemetryStateModule (copy), UseEffectOnMountFunction (copy), ChatDetailsPageModule (copy), ParticipantDialogContainerModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p2 or {})
 	local UseStyleResult = UseStyleFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -210,10 +211,10 @@ return function(p2)
 	end
 	
 	local function OnLeaveGroupCellActivated()
-		-- upvalues: UseNavigationResult (copy), JoinResult (copy), GenericDialogTypeModule (upval), UseTelemetryModuleResult (copy), ChatDetailsTelemetryEventsModule (upval)
+		-- upvalues: GetFFlagAppChatEnableRootedNavigationModule (upval), UseNavigationResult (copy), JoinResult (copy), GenericDialogTypeModule (upval), UseTelemetryModuleResult (copy), ChatDetailsTelemetryEventsModule (upval)
 		JoinResult.navigateToDialog(GenericDialogTypeModule.LeaveGroupDialog, {
 			conversationId = JoinResult.conversationId,
-			isRooted = if UseNavigationResult then UseNavigationResult.getParam("isRooted", false) else false
+			isRooted = if GetFFlagAppChatEnableRootedNavigationModule() and UseNavigationResult then UseNavigationResult.getParam("isRooted", false) else false
 		})
 		UseTelemetryModuleResult.emit(ChatDetailsTelemetryEventsModule.ChatDetailsLeaveGroupBtnClicked, {})
 	end
@@ -286,15 +287,15 @@ return function(p2)
 		end
 	end
 	
-	local function v69(ToastTitle)
+	local function v70(ToastTitle)
 		-- upvalues: JoinResult (copy)
 		JoinResult.navigateToToast({
 			toastProps = { toastContent = { toastTitle = ToastTitle } }
 		})
 	end
 	
-	local function v70(ToastTitle)
-		-- upvalues: UseSelectorResult (copy), PromiseModule (upval), JoinResult (copy), v69 (copy), UseTelemetryModuleResult (copy), ChatDetailsTelemetryEventsModule (upval)
+	local function v71(ToastTitle)
+		-- upvalues: UseSelectorResult (copy), PromiseModule (upval), JoinResult (copy), v70 (copy), UseTelemetryModuleResult (copy), ChatDetailsTelemetryEventsModule (upval)
 		PromiseModule.new(function(Callback1: () -> (), Callback: () -> ())
 			-- upvalues: UseSelectorResult (copy)
 			if #UseSelectorResult.participants > 5 then
@@ -308,8 +309,8 @@ return function(p2)
 			-- upvalues: JoinResult (upval), UseSelectorResult (upval)
 			JoinResult.navigateToEditChatMembers(UseSelectorResult)
 		end, function()
-			-- upvalues: v69 (upval), ToastTitle (copy)
-			v69(ToastTitle)
+			-- upvalues: v70 (upval), ToastTitle (copy)
+			v70(ToastTitle)
 		end)
 		UseTelemetryModuleResult.emit(ChatDetailsTelemetryEventsModule.ChatDetailsAddFriendsBtnClicked, {})
 	end
@@ -354,8 +355,8 @@ return function(p2)
 		onLeaveGroupCellActivated = OnLeaveGroupCellActivated,
 		onParticipantCellActivated = OnParticipantCellActivated,
 		onAddFriendsCellActivated = function()
-			-- upvalues: v70 (copy), UseLocalizationResult (copy)
-			return v70(UseLocalizationResult.tooManyPeopleText)
+			-- upvalues: v71 (copy), UseLocalizationResult (copy)
+			return v71(UseLocalizationResult.tooManyPeopleText)
 		end,
 		onConversationTypeIconActivated = UseCallbackResult,
 		onCreateUnfilteredChatCellActivated = UseCallbackResult1,

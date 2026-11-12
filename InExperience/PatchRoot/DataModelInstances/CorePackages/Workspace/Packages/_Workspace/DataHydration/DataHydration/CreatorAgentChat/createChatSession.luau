@@ -7,7 +7,6 @@ local ExperimentOverrideModule = require(script.Parent.experimentOverride)
 local GetFundingErrorModule = require(script.Parent.getFundingError)
 local SendConfigurationModule = require(script.Parent.sendConfiguration)
 local FFlagBuildExperienceModelPickerData = SharedFlagsModule.FFlagBuildExperienceModelPickerData
-local FFlagBuildExperienceAdvancedPreviewSpecs = SharedFlagsModule.FFlagBuildExperienceAdvancedPreviewSpecs
 local SessionHistoryMergeModule = require(script.Parent.sessionHistoryMerge)
 local _ = require(script.Parent.types)
 local ConstantsModule = require(script.Parent.ChatSession.constants)
@@ -21,7 +20,7 @@ local _ = require(script.Parent.ChatSession.sessionDeps)
 local FFlagBuildExperiencePromptFailureTelemetry = SharedFlagsModule.FFlagBuildExperiencePromptFailureTelemetry
 
 return function(Deps, UniverseId, PlaceId, p1)
-	-- upvalues: SessionScalarStateModule (copy), ConstantsModule (copy), SessionHistoryCacheModule (copy), ExperimentOverrideModule (copy), SessionHistoryMergeModule (copy), SignalsModule (copy), HistoryPageUtilsModule (copy), FFlagBuildExperienceModelPickerData (copy), HistoryLoaderModule (copy), HistoryPollingModule (copy), AcpProtocolModule (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), ClassifyRequestFailureModule (copy), GetFundingErrorModule (copy), FFlagBuildExperienceAdvancedPreviewSpecs (copy), SendConfigurationModule (copy), SendPromptModule (copy)
+	-- upvalues: SessionScalarStateModule (copy), ConstantsModule (copy), SessionHistoryCacheModule (copy), ExperimentOverrideModule (copy), SessionHistoryMergeModule (copy), SignalsModule (copy), HistoryPageUtilsModule (copy), FFlagBuildExperienceModelPickerData (copy), HistoryLoaderModule (copy), HistoryPollingModule (copy), AcpProtocolModule (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), ClassifyRequestFailureModule (copy), GetFundingErrorModule (copy), SendConfigurationModule (copy), SendPromptModule (copy)
 	local LoadedBySequenceId = {}
 	local OverlayBySequenceId = {}
 	local SessionScalarState = SessionScalarStateModule.createSessionScalarState(p1)
@@ -324,7 +323,7 @@ return function(Deps, UniverseId, PlaceId, p1)
 	end
 	
 	local function createCasSession(Model, Callback, p2, Callback1)
-		-- upvalues: Generation (ref), FFlagBuildExperienceModelPickerData (upval), Experiment (ref), SessionScalarState (copy), UniverseId (copy), PlaceId (copy), ensureInitialized (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), Deps (copy), HistoryPageUtilsModule (upval), RpcTimeoutSeconds (copy), GetFundingErrorModule (upval), ClassifyRequestFailureModule (upval), ExperimentOverrideModule (upval), PendingExperimentKey (ref), FFlagBuildExperienceAdvancedPreviewSpecs (upval), SendConfigurationModule (upval), setCasSessionIdInternal (copy)
+		-- upvalues: Generation (ref), FFlagBuildExperienceModelPickerData (upval), Experiment (ref), SessionScalarState (copy), UniverseId (copy), PlaceId (copy), ensureInitialized (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), Deps (copy), HistoryPageUtilsModule (upval), RpcTimeoutSeconds (copy), GetFundingErrorModule (upval), ClassifyRequestFailureModule (upval), ExperimentOverrideModule (upval), PendingExperimentKey (ref), SendConfigurationModule (upval), setCasSessionIdInternal (copy)
 		local Generation1 = Generation
 		
 		local function isStale()
@@ -388,7 +387,7 @@ return function(Deps, UniverseId, PlaceId, p1)
 				if ExperimentOverrideModule.has(PendingExperimentKey) then
 					ExperimentOverrideModule.move(PendingExperimentKey, Key)
 				elseif Experiment2 ~= nil then
-					ExperimentOverrideModule.hydrate(Key, Experiment2.specVersion, if FFlagBuildExperienceAdvancedPreviewSpecs then Experiment2 else nil)
+					ExperimentOverrideModule.hydrate(Key, Experiment2.specVersion)
 				end
 				if not FFlagBuildExperienceModelPickerData or p2 == nil or SendConfigurationModule.sameExperiment(ExperimentOverrideModule.getPromptExperiment(Key), Experiment2) then
 					ExperimentOverrideModule.consumePending(Key)

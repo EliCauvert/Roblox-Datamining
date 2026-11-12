@@ -414,7 +414,7 @@ local function UnifiedRobuxUpsellModal(p1)
 		size = Small
 	}
 	local ColAlignXCenterAlignYCenterGapMediumSizeFull0AutoY: string = if FFlagIAPExperienceEnableMultiDisplayUpsellModule then "col align-x-center align-y-center gap-medium size-full-0 auto-y" else "col gap-medium auto-y size-full-0 align-x-center align-y-center"
-	local CreateElementFunction3 = ReactModule.createElement
+	local CreateElementFunction = ReactModule.createElement
 	local Root = Sheet.Root
 	local config1 = {
 		preferCenterSheet = true,
@@ -434,11 +434,11 @@ local function UnifiedRobuxUpsellModal(p1)
 			})
 		})
 	}
-	local CreateElementFunction2 = ReactModule.createElement
+	local CreateElementFunction3 = ReactModule.createElement
 	local Content = Sheet.Content
 	local config3 = { LayoutOrder = 2 }
 	local t = {}
-	local CreateElementFunction1 = ReactModule.createElement
+	local CreateElementFunction2 = ReactModule.createElement
 	local config4 = {
 		tag = if FFlagIAPExperienceEnableMultiDisplayUpsellModule then "col align-x-center align-y-start gap-medium size-full-0 auto-y" else "col gap-medium auto-y size-full-0 align-x-center align-y-start"
 	}
@@ -464,7 +464,7 @@ local function UnifiedRobuxUpsellModal(p1)
 			LayoutOrder = 3
 		}, CartPricingOfferCheckboxesModule) else nil
 	}
-	local CreateElementFunction = ReactModule.createElement
+	local CreateElementFunction1 = ReactModule.createElement
 	local config6 = {
 		LayoutOrder = 2,
 		tag = if FFlagIAPExperienceEnableMultiDisplayUpsellModule then "col align-x-center align-y-start gap-medium size-full-0 auto-y padding-x-xsmall" else "col gap-medium auto-y size-full-0 align-x-center align-y-center padding-x-xsmall padding-y-small padding-bottom-xxlarge"
@@ -512,9 +512,9 @@ local function UnifiedRobuxUpsellModal(p1)
 			}) else nil
 		}
 	end
-	config5.UpsellSuggestions = CreateElementFunction(View, config6, Elements)
-	t.SheetContentContainer = CreateElementFunction1(View, config4, config5)
-	config2.Content = CreateElementFunction2(Content, config3, t)
+	config5.UpsellSuggestions = CreateElementFunction1(View, config6, Elements)
+	t.SheetContentContainer = CreateElementFunction2(View, config4, config5)
+	config2.Content = CreateElementFunction3(Content, config3, t)
 	config2.Actions = ReactModule.createElement(Sheet.Actions, { LayoutOrder = 3 }, {
 		ReactModule.createElement(View, { LayoutOrder = 1, tag = ColGapSmallSizeFull0AutoY }, {
 			BuyAndPlusRow = if OnActivated then ReactModule.createElement(ButtonGroup, {
@@ -569,7 +569,7 @@ local function UnifiedRobuxUpsellModal(p1)
 		})
 	})
 	
-	return CreateElementFunction3(Root, config1, config2)
+	return CreateElementFunction(Root, config1, config2)
 end
 
 return function(p2)

@@ -7,6 +7,7 @@ local GameCollectionItemTypes = require(Parent.DiscoveryTypes).GameCollectionIte
 local SpanForItemType = GameCollectionItemTypes.SpanForItemType
 local FFlagLuaAppEnableNxMRoduxApportioning = SharedFlagsModule.FFlagLuaAppEnableNxMRoduxApportioning
 local FFlagLuaAppEnableNxMApportioningExtraLogging = SharedFlagsModule.FFlagLuaAppEnableNxMApportioningExtraLogging
+local LuaAppFixApportioningTileTailConflict = game:DefineFastFlag("LuaAppFixApportioningTileTailConflict", false)
 local config = {
 	[GameCollectionItemTypes.GameCollectionItemType.TwoByOneTile] = { colSpan = 2, rowSpan = 1 }
 }
@@ -24,7 +25,7 @@ local function defaultGetSpanConfig(p1)
 end
 
 local function processOneGrid(p1, NextStartIndex, PendingSpanTiles, ItemsPerRow: number, MaxRows, Callback, p2)
-	-- upvalues: DiscoveryEventErrorLogger (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), FFlagLuaAppEnableNxMApportioningExtraLogging (copy), ApportioningDiagnosticTelemetry (copy), defaultGetSpanConfig (copy)
+	-- upvalues: DiscoveryEventErrorLogger (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), FFlagLuaAppEnableNxMApportioningExtraLogging (copy), ApportioningDiagnosticTelemetry (copy), LuaAppFixApportioningTileTailConflict (copy), defaultGetSpanConfig (copy)
 	local ScaledMaxRows = MaxRows * ItemsPerRow
 	local List = {}
 	local List1 = {}
@@ -63,7 +64,7 @@ local function processOneGrid(p1, NextStartIndex, PendingSpanTiles, ItemsPerRow:
 	end
 	
 	local function tryPlaceSpanTile(OriginalIndex, SpanConfig): boolean
-		-- upvalues: FFlagLuaAppEnableNxMRoduxApportioning (upval), p2 (copy), nextFreePosition (copy), NextScanPosition (ref), ItemsPerRow (copy), NextAllowedRow (ref), FFlagLuaAppEnableNxMApportioningExtraLogging (upval), ApportioningDiagnosticTelemetry (upval), MaxRows (copy), ScaledMaxRows (copy), p1 (copy), t (copy), writeLayoutCell (copy), List (copy)
+		-- upvalues: FFlagLuaAppEnableNxMRoduxApportioning (upval), p2 (copy), nextFreePosition (copy), NextScanPosition (ref), ItemsPerRow (copy), NextAllowedRow (ref), FFlagLuaAppEnableNxMApportioningExtraLogging (upval), ApportioningDiagnosticTelemetry (upval), MaxRows (copy), ScaledMaxRows (copy), p1 (copy), LuaAppFixApportioningTileTailConflict (upval), t (copy), writeLayoutCell (copy), List (copy)
 		local ColSpan: number = SpanConfig.colSpan
 		local RowSpan = if FFlagLuaAppEnableNxMRoduxApportioning or p2 then SpanConfig.rowSpan else nil
 		local MinRowPadding: number = SpanConfig.minRowPadding
@@ -179,13 +180,13 @@ local function processOneGrid(p1, NextStartIndex, PendingSpanTiles, ItemsPerRow:
 				end
 				return false
 			else
-				if FFlagLuaAppEnableNxMRoduxApportioning or p2 then
-					for i = 0, RowSpan - 1 do
-						local NewNewFloored = nil
-						local NewNewNextFreePositionResult = nil
-						for i1 = 0, ColSpan - 1 do
-							NewNewFloored = NewFloored + i
-							NewNewNextFreePositionResult = NewNextFreePositionResult + i1
+				if LuaAppFixApportioningTileTailConflict and (FFlagLuaAppEnableNxMRoduxApportioning or p2) then
+					local NewNewFloored = nil
+					local NewNewNextFreePositionResult = nil
+					for i2 = 0, RowSpan - 1 do
+						for i = 0, ColSpan - 1 do
+							NewNewFloored = NewFloored + i2
+							NewNewNextFreePositionResult = NewNextFreePositionResult + i
 							
 							if not t[NewNewFloored] or t[NewNewFloored][NewNewNextFreePositionResult] == nil then
 								continue
@@ -211,9 +212,9 @@ local function processOneGrid(p1, NextStartIndex, PendingSpanTiles, ItemsPerRow:
 					end
 				end
 				if FFlagLuaAppEnableNxMRoduxApportioning or p2 then
-					for i2 = 0, RowSpan - 1 do
+					for i1 = 0, RowSpan - 1 do
 						for i3 = 0, ColSpan - 1 do
-							writeLayoutCell(NewFloored + i2, NewNextFreePositionResult + i3, -1)
+							writeLayoutCell(NewFloored + i1, NewNextFreePositionResult + i3, -1)
 						end
 					end
 					writeLayoutCell(NewFloored, NewNextFreePositionResult, OriginalIndex)

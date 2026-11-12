@@ -52,6 +52,7 @@ local LayoutMode = UserListModule.Enums.LayoutMode
 local function OnFewestInteractionsSelection() end
 
 local FFlagFixScalingOnFriendsLandingModule = require(FriendsLanding.Flags.FFlagFixScalingOnFriendsLanding)
+local FFlagEnableFriendsLandingFilterChipsOnConsoleModule = require(FriendsLanding.Flags.FFlagEnableFriendsLandingFilterChipsOnConsole)
 local FFlagFriendsPageUserListCtaEnabledModule = require(FriendsLanding.Flags.FFlagFriendsPageUserListCtaEnabled)
 local FriendsLandingCtaConfigModule = if FFlagFriendsPageUserListCtaEnabledModule then require(FriendsLanding.Common.FriendsLandingCtaConfig) else nil
 local FFlagConnectionManagementChips = require(Parent.SharedFlags).FFlagConnectionManagementChips
@@ -67,7 +68,7 @@ local FStringCanAccessTrustedContactsAmpNameSpace = require(Parent.SharedFlags).
 local FixFriendsLandingRightMargin = game:DefineFastFlag("FixFriendsLandingRightMargin", false)
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FriendsLandingContextModule (copy), FriendsLandingAnalyticsModule (copy), UseNavigationFunction (copy), UseDesignTokensFunction (copy), UseUiModeInfoFunction (copy), FFlagFixScalingOnFriendsLandingModule (copy), UseTokensFunction (copy), UseFocusGuiObjectFunction (copy), GetPageMarginFunction (copy), UseScreenSizeFunction (copy), UiMode (copy), FocusNavigationUtilsModule (copy), InputHandlersModule (copy), AppPage (copy), ReactFocusNavigationModule (copy), FocusNavigationEventNameEnum (copy), UseTextSizeOffsetFunction (copy), FFlagConnectionManagementChips (copy), AmpApiProvider (copy), FStringIsUserInTcEligibleCountryAmpFeature (copy), FStringCanAccessTrustedContactsAmpNameSpace (copy), AccessResponseEnum (copy), FFlagFriendsPageAlwaysOpenPPV (copy), ConvertUserPresenceTypeToStringFunction (copy), EnumScreensModule (copy), ButtonClickEventsModule (copy), ConstantsModule (copy), FriendTileModule (copy), DependencyArrayFunction (copy), OnFewestInteractionsSelection (copy), FilterStatesModule (copy), FFlagCreateConnectionsHub (copy), GridMetrics (copy), UseAnimatedScrollToSelectionFunction (copy), FFlagExtendScrollingFramesBySafeInsets (copy), UseSignalStateFunction (copy), DisplayModule (copy), IsFromConnectionsHubModule (copy), FFlagAppThemeHalloween2026FriendsBackground (copy), UseThemeBackgroundFunction (copy), FFlagFixFriendsListGapInConnectionsHubModule (copy), UseFocusOnMountFunction (copy), FFlagFriendsPageUserListEnabled (copy), RoactModule (copy), HorizontalPageMargin (copy), FixFriendsLandingRightMargin (copy), RefreshScrollingFrame (copy), FilterByButtonModule (copy), EmptyResultsViewModule (copy), NoFriendsViewModule (copy), UserListLayoutAdaptor (copy), LayoutMode (copy), FFlagFriendsPageUserListCtaEnabledModule (copy), FriendsLandingCtaConfigModule (ref), CollectionGrid (copy), Button (copy), ButtonType (copy)
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FriendsLandingContextModule (copy), FriendsLandingAnalyticsModule (copy), UseNavigationFunction (copy), UseDesignTokensFunction (copy), UseUiModeInfoFunction (copy), FFlagFixScalingOnFriendsLandingModule (copy), UseTokensFunction (copy), UseFocusGuiObjectFunction (copy), GetPageMarginFunction (copy), UseScreenSizeFunction (copy), UiMode (copy), FFlagEnableFriendsLandingFilterChipsOnConsoleModule (copy), FocusNavigationUtilsModule (copy), InputHandlersModule (copy), AppPage (copy), ReactFocusNavigationModule (copy), FocusNavigationEventNameEnum (copy), UseTextSizeOffsetFunction (copy), FFlagConnectionManagementChips (copy), AmpApiProvider (copy), FStringIsUserInTcEligibleCountryAmpFeature (copy), FStringCanAccessTrustedContactsAmpNameSpace (copy), AccessResponseEnum (copy), FFlagFriendsPageAlwaysOpenPPV (copy), ConvertUserPresenceTypeToStringFunction (copy), EnumScreensModule (copy), ButtonClickEventsModule (copy), ConstantsModule (copy), FriendTileModule (copy), DependencyArrayFunction (copy), OnFewestInteractionsSelection (copy), FilterStatesModule (copy), FFlagCreateConnectionsHub (copy), GridMetrics (copy), UseAnimatedScrollToSelectionFunction (copy), FFlagExtendScrollingFramesBySafeInsets (copy), UseSignalStateFunction (copy), DisplayModule (copy), IsFromConnectionsHubModule (copy), FFlagAppThemeHalloween2026FriendsBackground (copy), UseThemeBackgroundFunction (copy), FFlagFixFriendsListGapInConnectionsHubModule (copy), UseFocusOnMountFunction (copy), FFlagFriendsPageUserListEnabled (copy), RoactModule (copy), HorizontalPageMargin (copy), FixFriendsLandingRightMargin (copy), RefreshScrollingFrame (copy), FilterByButtonModule (copy), EmptyResultsViewModule (copy), NoFriendsViewModule (copy), UserListLayoutAdaptor (copy), LayoutMode (copy), FFlagFriendsPageUserListCtaEnabledModule (copy), FriendsLandingCtaConfigModule (ref), CollectionGrid (copy), Button (copy), ButtonType (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		pageError = "CommonUI.Messages.Response.PageError",
 		successText = "Feature.Friends.Action.FriendRemoved",
@@ -84,6 +85,7 @@ return function(p1)
 	local UseFocusGuiObjectResult = UseFocusGuiObjectFunction()
 	local PageMargin = GetPageMarginFunction(UseScreenSizeFunction().X)
 	local IsUiModeMatch = UseUiModeInfoResult.uiMode == UiMode.TenFoot
+	local NoFFlagEnableFriendsLandingFilterChipsOnConsoleModule: boolean = IsUiModeMatch and not FFlagEnableFriendsLandingFilterChipsOnConsoleModule
 	local IsCursor = FocusNavigationUtilsModule.useLastInputMode() == "Cursor"
 	local UseEventResult = ReactFocusNavigationModule.useEventHandler(FocusNavigationEventNameEnum.Search, (InputHandlersModule.onRelease(function(p2)
 		-- upvalues: UseNavigationResult (copy), AppPage (upval)
@@ -299,7 +301,7 @@ return function(p1)
 					BackgroundTransparency = 1,
 					Size = UDim2.new(1, 0, 0, 1)
 				}) or nil,
-				filterByButton = ReactModule.createElement(FilterByButtonModule, {
+				filterByButton = if NoFFlagEnableFriendsLandingFilterChipsOnConsoleModule then nil else ReactModule.createElement(FilterByButtonModule, {
 					layoutOrder = 2,
 					analytics = UseContextResult1,
 					filter = UseContextResult.filter,

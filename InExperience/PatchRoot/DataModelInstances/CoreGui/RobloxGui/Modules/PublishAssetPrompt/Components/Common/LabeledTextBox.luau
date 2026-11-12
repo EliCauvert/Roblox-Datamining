@@ -1,16 +1,19 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local ReactModule = require(CorePackages.Packages.React)
-local NormalizeFontFaceFunction = require(CorePackages.Packages.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local CryoModule = require(CorePackages.Packages.Cryo)
 local UseStyleFunction = require(CorePackages.Packages.UIBlox).Core.Style.useStyle
 local NameTextBoxModule = require(script.Parent.NameTextBox)
 local config = { textBoxHeight = 30, topPadding = 0 }
 
 return function(p1)
-	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), ReactModule (copy), NormalizeFontFaceFunction (copy), NameTextBoxModule (copy)
+	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), NameTextBoxModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseStyleResult = UseStyleFunction()
 	local UseStyleResultFont = UseStyleResult.Font
+	local CaptionHeader = UseStyleResultFont.CaptionHeader
 	
 	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -28,9 +31,10 @@ return function(p1)
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
 			Size = UDim2.new(1, 0, 0, 15),
-			FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionLarge.Font),
+			Font = if FoundationFontFaceMigration then nil else CaptionHeader.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionLarge.Font) else nil,
 			Text = JoinResult.labelText,
-			TextSize = UseStyleResultFont.BaseSize * UseStyleResultFont.CaptionHeader.RelativeSize,
+			TextSize = UseStyleResultFont.BaseSize * CaptionHeader.RelativeSize,
 			TextColor3 = UseStyleResult.Theme.TextDefault.Color,
 			TextXAlignment = Enum.TextXAlignment.Left
 		}),

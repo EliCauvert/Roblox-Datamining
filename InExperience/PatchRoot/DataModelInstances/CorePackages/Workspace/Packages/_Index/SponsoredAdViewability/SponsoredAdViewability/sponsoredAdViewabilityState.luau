@@ -364,24 +364,24 @@ function SponsoredAdViewabilityStateModule:_tryFire(Band, MilestoneLabel, Entere
 			
 		end
 		config.cumulativeInGridViewDurationMs = CumulativeMs3
-		local NewImageBandRequiresTheCurrentTimestampDelta = FullscreenBand50.cumulativeMs
+		local CumulativeMs4 = FullscreenBand50.cumulativeMs
 		local MaxContinuousMs4 = FullscreenBand50.maxContinuousMs
 		local EnteredAtMs6 = FullscreenBand50.enteredAtMs
 		local CurrentContinuousMs4 = FullscreenBand50.currentContinuousMs
-		local ImageBandRequiresTheCurrentTimestampDelta21 = nil
+		local ImageBandRequiresTheCurrentTimestampDelta4 = nil
 		
 		if CurrentContinuousMs4 == nil then
 			if EnteredAtMs6 ~= nil then
-				ImageBandRequiresTheCurrentTimestampDelta21 = assert(nil, "image band requires the current timestamp") - EnteredAtMs6
+				ImageBandRequiresTheCurrentTimestampDelta4 = assert(nil, "image band requires the current timestamp") - EnteredAtMs6
 			end
 		elseif EnteredAtMs6 ~= nil or FullscreenBand50.pendingContinuity then
-			ImageBandRequiresTheCurrentTimestampDelta21 = CurrentContinuousMs4
+			ImageBandRequiresTheCurrentTimestampDelta4 = CurrentContinuousMs4
 		end
-		if ImageBandRequiresTheCurrentTimestampDelta21 ~= nil then
-			NewImageBandRequiresTheCurrentTimestampDelta += ImageBandRequiresTheCurrentTimestampDelta21
+		if ImageBandRequiresTheCurrentTimestampDelta4 ~= nil then
+			CumulativeMs4 += ImageBandRequiresTheCurrentTimestampDelta4
 			
 		end
-		config.cumulativeFullScreenViewDurationMs = NewImageBandRequiresTheCurrentTimestampDelta
+		config.cumulativeFullScreenViewDurationMs = CumulativeMs4
 	end
 	self._achieved[MilestoneLabel] = true
 	table.insert(List, config)
@@ -779,11 +779,11 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 		
 		if CurrentContinuousMs2 == nil then
 			if EnteredAtMs3 ~= nil then
-				local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs3
-				Band100.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
+				local ImageBandRequiresAnEndTimestampDelta1 = assert(nil, "image band requires an end timestamp") - EnteredAtMs3
+				Band100.cumulativeMs += ImageBandRequiresAnEndTimestampDelta1
 				
-				if Band100.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
-					Band100.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
+				if Band100.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta1 then
+					Band100.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta1
 				end
 				Band100.enteredAtMs = nil
 			end
@@ -820,11 +820,11 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 				
 				if CurrentContinuousMs == nil then
 					if EnteredAtMs4 ~= nil then
-						local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs4
-						Band30.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
+						local ImageBandRequiresAnEndTimestampDelta2 = assert(nil, "image band requires an end timestamp") - EnteredAtMs4
+						Band30.cumulativeMs += ImageBandRequiresAnEndTimestampDelta2
 						
-						if Band30.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
-							Band30.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
+						if Band30.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta2 then
+							Band30.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta2
 						end
 						Band30.enteredAtMs = nil
 					end
@@ -844,11 +844,11 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 				
 				if CurrentContinuousMs2 == nil then
 					if EnteredAtMs5 ~= nil then
-						local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs5
-						Band30.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
+						local ImageBandRequiresAnEndTimestampDelta4 = assert(nil, "image band requires an end timestamp") - EnteredAtMs5
+						Band30.cumulativeMs += ImageBandRequiresAnEndTimestampDelta4
 						
-						if Band30.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
-							Band30.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
+						if Band30.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta4 then
+							Band30.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta4
 						end
 						Band30.enteredAtMs = nil
 					end
@@ -871,11 +871,11 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 				
 				if CurrentContinuousMs == nil then
 					if EnteredAtMs6 ~= nil then
-						local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs6
-						Band50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
+						local ImageBandRequiresAnEndTimestampDelta5 = assert(nil, "image band requires an end timestamp") - EnteredAtMs6
+						Band50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta5
 						
-						if Band50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
-							Band50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
+						if Band50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta5 then
+							Band50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta5
 						end
 						Band50.enteredAtMs = nil
 					end
@@ -895,11 +895,11 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 				
 				if CurrentContinuousMs3 == nil then
 					if EnteredAtMs7 ~= nil then
-						local ImageBandRequiresAnEndTimestampDelta1 = assert(nil, "image band requires an end timestamp") - EnteredAtMs7
-						Band50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta1
+						local ImageBandRequiresAnEndTimestampDelta6 = assert(nil, "image band requires an end timestamp") - EnteredAtMs7
+						Band50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta6
 						
-						if Band50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta1 then
-							Band50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta1
+						if Band50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta6 then
+							Band50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta6
 						end
 						Band50.enteredAtMs = nil
 					end
@@ -917,16 +917,40 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 			local Band100 = self._band100
 			
 			if Band100.pendingContinuity then
+				local EnteredAtMs9 = Band100.enteredAtMs
+				local CurrentContinuousMs = Band100.currentContinuousMs
+				
+				if CurrentContinuousMs == nil then
+					if EnteredAtMs9 ~= nil then
+						local ImageBandRequiresAnEndTimestampDelta7 = assert(nil, "image band requires an end timestamp") - EnteredAtMs9
+						Band100.cumulativeMs += ImageBandRequiresAnEndTimestampDelta7
+						
+						if Band100.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta7 then
+							Band100.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta7
+						end
+						Band100.enteredAtMs = nil
+					end
+				elseif EnteredAtMs9 ~= nil or Band100.pendingContinuity then
+					Band100.cumulativeMs += CurrentContinuousMs
+					
+					if Band100.maxContinuousMs < CurrentContinuousMs then
+						Band100.maxContinuousMs = CurrentContinuousMs
+					end
+					Band100.enteredAtMs = nil
+					Band100.currentContinuousMs = 0
+					Band100.pendingContinuity = false
+				end
+			else
 				local EnteredAtMs8 = Band100.enteredAtMs
 				local CurrentContinuousMs = Band100.currentContinuousMs
 				
 				if CurrentContinuousMs == nil then
 					if EnteredAtMs8 ~= nil then
-						local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs8
-						Band100.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
+						local ImageBandRequiresAnEndTimestampDelta8 = assert(nil, "image band requires an end timestamp") - EnteredAtMs8
+						Band100.cumulativeMs += ImageBandRequiresAnEndTimestampDelta8
 						
-						if Band100.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
-							Band100.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
+						if Band100.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta8 then
+							Band100.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta8
 						end
 						Band100.enteredAtMs = nil
 					end
@@ -940,30 +964,6 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 					Band100.currentContinuousMs = 0
 					Band100.pendingContinuity = false
 				end
-			else
-				local EnteredAtMs9 = Band100.enteredAtMs
-				local CurrentContinuousMs4 = Band100.currentContinuousMs
-				
-				if CurrentContinuousMs4 == nil then
-					if EnteredAtMs9 ~= nil then
-						local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs9
-						Band100.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
-						
-						if Band100.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
-							Band100.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
-						end
-						Band100.enteredAtMs = nil
-					end
-				elseif EnteredAtMs9 ~= nil or Band100.pendingContinuity then
-					Band100.cumulativeMs += CurrentContinuousMs4
-					
-					if Band100.maxContinuousMs < CurrentContinuousMs4 then
-						Band100.maxContinuousMs = CurrentContinuousMs4
-					end
-					Band100.enteredAtMs = nil
-					Band100.currentContinuousMs = 0
-					Band100.pendingContinuity = false
-				end
 			end
 			if InGridBand50.pendingContinuity then
 				local EnteredAtMs10 = InGridBand50.enteredAtMs
@@ -971,11 +971,11 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 				
 				if CurrentContinuousMs == nil then
 					if EnteredAtMs10 ~= nil then
-						local ImageBandRequiresAnEndTimestampDelta2 = assert(nil, "image band requires an end timestamp") - EnteredAtMs10
-						InGridBand50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta2
+						local ImageBandRequiresAnEndTimestampDelta9 = assert(nil, "image band requires an end timestamp") - EnteredAtMs10
+						InGridBand50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta9
 						
-						if InGridBand50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta2 then
-							InGridBand50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta2
+						if InGridBand50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta9 then
+							InGridBand50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta9
 						end
 						InGridBand50.enteredAtMs = nil
 					end
@@ -991,23 +991,23 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 				end
 			else
 				local EnteredAtMs11 = InGridBand50.enteredAtMs
-				local CurrentContinuousMs5 = InGridBand50.currentContinuousMs
+				local CurrentContinuousMs4 = InGridBand50.currentContinuousMs
 				
-				if CurrentContinuousMs5 == nil then
+				if CurrentContinuousMs4 == nil then
 					if EnteredAtMs11 ~= nil then
-						local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs11
-						InGridBand50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
+						local ImageBandRequiresAnEndTimestampDelta10 = assert(nil, "image band requires an end timestamp") - EnteredAtMs11
+						InGridBand50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta10
 						
-						if InGridBand50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
-							InGridBand50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
+						if InGridBand50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta10 then
+							InGridBand50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta10
 						end
 						InGridBand50.enteredAtMs = nil
 					end
 				elseif EnteredAtMs11 ~= nil or InGridBand50.pendingContinuity then
-					InGridBand50.cumulativeMs += CurrentContinuousMs5
+					InGridBand50.cumulativeMs += CurrentContinuousMs4
 					
-					if InGridBand50.maxContinuousMs < CurrentContinuousMs5 then
-						InGridBand50.maxContinuousMs = CurrentContinuousMs5
+					if InGridBand50.maxContinuousMs < CurrentContinuousMs4 then
+						InGridBand50.maxContinuousMs = CurrentContinuousMs4
 					end
 					InGridBand50.enteredAtMs = nil
 					InGridBand50.currentContinuousMs = 0
@@ -1020,11 +1020,11 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 				
 				if CurrentContinuousMs == nil then
 					if EnteredAtMs12 ~= nil then
-						local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs12
-						FullscreenBand50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
+						local ImageBandRequiresAnEndTimestampDelta3 = assert(nil, "image band requires an end timestamp") - EnteredAtMs12
+						FullscreenBand50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta3
 						
-						if FullscreenBand50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
-							FullscreenBand50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
+						if FullscreenBand50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta3 then
+							FullscreenBand50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta3
 						end
 						FullscreenBand50.enteredAtMs = nil
 					end
@@ -1040,9 +1040,9 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 				end
 			else
 				local EnteredAtMs13 = FullscreenBand50.enteredAtMs
-				local CurrentContinuousMs6 = FullscreenBand50.currentContinuousMs
+				local CurrentContinuousMs5 = FullscreenBand50.currentContinuousMs
 				
-				if CurrentContinuousMs6 == nil then
+				if CurrentContinuousMs5 == nil then
 					if EnteredAtMs13 ~= nil then
 						local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs13
 						FullscreenBand50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
@@ -1053,10 +1053,10 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 						FullscreenBand50.enteredAtMs = nil
 					end
 				elseif EnteredAtMs13 ~= nil or FullscreenBand50.pendingContinuity then
-					FullscreenBand50.cumulativeMs += CurrentContinuousMs6
+					FullscreenBand50.cumulativeMs += CurrentContinuousMs5
 					
-					if FullscreenBand50.maxContinuousMs < CurrentContinuousMs6 then
-						FullscreenBand50.maxContinuousMs = CurrentContinuousMs6
+					if FullscreenBand50.maxContinuousMs < CurrentContinuousMs5 then
+						FullscreenBand50.maxContinuousMs = CurrentContinuousMs5
 					end
 					FullscreenBand50.enteredAtMs = nil
 					FullscreenBand50.currentContinuousMs = 0
@@ -1706,11 +1706,11 @@ function SponsoredAdViewabilityStateModule:advance(EnteredAtMs, LastRatio, _latc
 		
 		if CurrentContinuousMs1 == nil then
 			if EnteredAtMs2 ~= nil then
-				local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs2
-				Band50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
+				local ImageBandRequiresAnEndTimestampDelta1 = assert(nil, "image band requires an end timestamp") - EnteredAtMs2
+				Band50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta1
 				
-				if Band50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
-					Band50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
+				if Band50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta1 then
+					Band50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta1
 				end
 				Band50.enteredAtMs = nil
 			end
@@ -1730,11 +1730,11 @@ function SponsoredAdViewabilityStateModule:advance(EnteredAtMs, LastRatio, _latc
 		
 		if CurrentContinuousMs2 == nil then
 			if EnteredAtMs3 ~= nil then
-				local ImageBandRequiresAnEndTimestampDelta2 = assert(nil, "image band requires an end timestamp") - EnteredAtMs3
-				Band100.cumulativeMs += ImageBandRequiresAnEndTimestampDelta2
+				local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs3
+				Band100.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
 				
-				if Band100.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta2 then
-					Band100.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta2
+				if Band100.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
+					Band100.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
 				end
 				Band100.enteredAtMs = nil
 			end
@@ -1757,11 +1757,11 @@ function SponsoredAdViewabilityStateModule:advance(EnteredAtMs, LastRatio, _latc
 			
 			if CurrentContinuousMs3 == nil then
 				if EnteredAtMs4 ~= nil then
-					local ImageBandRequiresAnEndTimestampDelta1 = assert(nil, "image band requires an end timestamp") - EnteredAtMs4
-					InGridBand50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta1
+					local ImageBandRequiresAnEndTimestampDelta = assert(nil, "image band requires an end timestamp") - EnteredAtMs4
+					InGridBand50.cumulativeMs += ImageBandRequiresAnEndTimestampDelta
 					
-					if InGridBand50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta1 then
-						InGridBand50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta1
+					if InGridBand50.maxContinuousMs < ImageBandRequiresAnEndTimestampDelta then
+						InGridBand50.maxContinuousMs = ImageBandRequiresAnEndTimestampDelta
 					end
 					InGridBand50.enteredAtMs = nil
 				end

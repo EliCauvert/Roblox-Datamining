@@ -1,9 +1,6 @@
-﻿local ScreensModule = require(script:FindFirstAncestor("AvatarWorkshop").Navigation.Screens)
-local Inventory = ScreensModule.Inventory
+﻿local Inventory = require(script:FindFirstAncestor("AvatarWorkshop").Navigation.Screens).Inventory
 
 return {
-	[ScreensModule.Workshop.YourAvatars] = "Feature.AvatarWorkshop.Heading.YourAvatars",
-	[ScreensModule.Workshop.Customize] = "Feature.AvatarWorkshop.Heading.Customize",
 	[Inventory.Root] = "Feature.Avatar.Label.Title.Inventory",
 	[Inventory.Avatars] = "Feature.Avatar.Label.Avatars",
 	[Inventory.Emotes] = "Feature.Avatar.Label.Title.Emotes",

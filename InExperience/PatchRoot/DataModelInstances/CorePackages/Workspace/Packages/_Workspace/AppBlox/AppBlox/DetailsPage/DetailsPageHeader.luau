@@ -1,6 +1,8 @@
 ﻿local Parent = script:FindFirstAncestor("AppBlox").Parent
 local UIBloxModule = require(Parent.UIBlox)
-local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local WithStyleFunction = UIBloxModule.Core.Style.withStyle
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local Images = UIBloxModule.App.ImageSet.Images
@@ -14,6 +16,7 @@ local FFlagLuaAppFixDetailsPageThumbnailRenderInPhone = require(Parent.SharedFla
 local LuaAppBottomAlignDetailsHeaderInfoFrame = game:DefineFastFlag("LuaAppBottomAlignDetailsHeaderInfoFrame", false)
 local FFlagUIBloxEnableActionBarButtonOverride = require(Parent.SharedFlags).UIBlox.FFlagUIBloxEnableActionBarButtonOverride
 local FFlagUIBloxAddTestIdToActionBar = require(Parent.SharedFlags).UIBlox.FFlagUIBloxAddTestIdToActionBar
+local FFlagFixDetailsPageIconShadowSlicing = game:DefineFastFlag("FFlagFixDetailsPageIconShadowSlicing", false)
 local DetailsPageHeader = RoactModule.PureComponent:extend("DetailsPageHeader")
 DetailsPageHeader.defaultProps = {
 	thumbnailHeight = 200,
@@ -51,7 +54,7 @@ function DetailsPageHeader.init(p1)
 end
 
 function DetailsPageHeader.renderThumbnail(p1, p2, ThumbnailShadowHeight: number, XOffset, YOffset)
-	-- upvalues: RoactModule (copy), LoadableImage (copy), ImageSetLabel (copy), Images (copy)
+	-- upvalues: RoactModule (copy), LoadableImage (copy), ImageSetLabel (copy), Images (copy), FFlagFixDetailsPageIconShadowSlicing (copy)
 	return RoactModule.createElement("Frame", {
 		LayoutOrder = 1,
 		BackgroundTransparency = 1,
@@ -72,13 +75,13 @@ function DetailsPageHeader.renderThumbnail(p1, p2, ThumbnailShadowHeight: number
 			ImageColor3 = p2.Theme.DropShadow.Color,
 			ImageTransparency = p2.Theme.DropShadow.Transparency,
 			ScaleType = Enum.ScaleType.Slice,
-			SliceCenter = Rect.new(32, 0, 33, 1)
+			SliceCenter = if FFlagFixDetailsPageIconShadowSlicing then Rect.new(32, 0, 33, 1) else Rect.new(32, 0, 33, 28)
 		}) else nil
 	})
 end
 
 function DetailsPageHeader.renderDesktopMode(p1, p2)
-	-- upvalues: RoactModule (copy), LuaAppBottomAlignDetailsHeaderInfoFrame (copy), DetailsPageTitleContentModule (copy), ActionBar (copy), FFlagUIBloxEnableActionBarButtonOverride (copy), FFlagUIBloxAddTestIdToActionBar (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: RoactModule (copy), LuaAppBottomAlignDetailsHeaderInfoFrame (copy), DetailsPageTitleContentModule (copy), ActionBar (copy), FFlagUIBloxEnableActionBarButtonOverride (copy), FFlagUIBloxAddTestIdToActionBar (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local ThumbnailHeight = p1.props.thumbnailHeight
 	local ScaledThumbnailHeight = ThumbnailHeight * (p1.props.thumbnailAspectRatio.X / p1.props.thumbnailAspectRatio.Y)
 	local SideMargin = p1.props.sideMargin or 48
@@ -129,7 +132,8 @@ function DetailsPageHeader.renderDesktopMode(p1, p2)
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextWrapped = true,
 			BackgroundTransparency = 1,
-			FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font),
+			Font = if FoundationFontFaceMigration then nil else p2.Tokens.Typography.BodyLarge.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font) else nil,
 			TextSize = p2.Tokens.FontSize.FontSize_350,
 			TextColor3 = p2.Tokens.Color.Content.Emphasis.Color3,
 			TextTransparency = p2.Tokens.Color.Content.Emphasis.Transparency,

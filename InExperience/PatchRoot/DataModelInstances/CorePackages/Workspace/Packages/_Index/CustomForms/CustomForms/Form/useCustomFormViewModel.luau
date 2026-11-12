@@ -104,16 +104,16 @@ return function(p1)
 			local OptionId = ""
 			
 			for _, option in field.options do
-				local IsChosen = UseStateResultEntry[option.optionId] == true
+				local IsUseStateResultEntry = UseStateResultEntry[option.optionId] == true
 				
-				if IsChosen then
+				if IsUseStateResultEntry then
 					OptionId = option.optionId
 				end
 				local FieldEntry = if HasField and Field then Field[option.optionId] or { voteCount = "0", percentage = 0 } else nil
 				table.insert(Options, {
 					optionId = option.optionId,
 					label = option.label,
-					isChosen = IsChosen,
+					isChosen = IsUseStateResultEntry,
 					result = if FieldEntry then { percentage = FieldEntry.percentage } else nil,
 					onActivated = function()
 						-- upvalues: field (copy), option (copy), IsFunction (copy), UseStateResult2 (copy), CustomFormSelectionModule (upval), UseStateResult2_2 (copy)
@@ -149,7 +149,7 @@ return function(p1)
 					end
 				end,
 				errors = Errors.fields[field.fieldId] or {},
-				requiredMessage = if UseStateResult1 and t[field.fieldId] and not HasResponse then p1.requiredErrorMessage else nil,
+				requiredMessage = if UseStateResult1 and (t[field.fieldId] and not HasResponse) then p1.requiredErrorMessage else nil,
 				testId = FieldName
 			})
 		end
@@ -168,7 +168,7 @@ return function(p1)
 		sections = Sections,
 		isEditable = IsFunction,
 		isSubmitting = IsIsSubmitting,
-		summary = if HasResponse and Results and (type(ResultsSummary) == "string" and ResultsSummary ~= "") then ResultsSummary else nil,
+		summary = if HasResponse and (Results and type(ResultsSummary) == "string" and ResultsSummary ~= "") then ResultsSummary else nil,
 		disabledMessage = if p1.isEditable == true or HasResponse then nil else p1.disabledMessage,
 		formErrors = Errors.form,
 		failureMessage = if IsHasInvalidData or UseStateResult3 then p1.submissionErrorMessage else nil,

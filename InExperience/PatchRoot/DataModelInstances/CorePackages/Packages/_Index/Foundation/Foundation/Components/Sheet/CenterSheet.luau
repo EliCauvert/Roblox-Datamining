@@ -272,10 +272,10 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 					},
 					Position = UDim2.fromScale(0.5, 0.5),
 					testId = `{WithDefaultsModuleResult.testId}--center-sheet-container`,
-					onAbsoluteSizeChanged = function(Frame)
+					onAbsoluteSizeChanged = if FlagsModule.FoundationCenterSheetHeightFix or WithDefaultsModuleResult.centerSheetHeight and UseBindingResult2 then function(Frame)
 						-- upvalues: UseTokensModuleResult (copy), UseBindingResult2 (copy), UseScaledValueModuleResult1 (copy)
 						UseBindingResult2((math.min(Frame.AbsoluteSize.Y - UseTokensModuleResult.Margin.Medium * 2, UseScaledValueModuleResult1)))
-					end
+					end else nil
 				}, nil)
 			}) else nil,
 			SheetContainer = if FlagsModule.FoundationCenterSheetOverlayShadow then nil else ReactModule.createElement(ViewModule, {
@@ -293,10 +293,10 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 					-- upvalues: Size800 (copy)
 					return p2 / Size800
 				end) else nil,
-				onAbsoluteSizeChanged = function(Frame)
+				onAbsoluteSizeChanged = if FlagsModule.FoundationCenterSheetHeightFix or WithDefaultsModuleResult.centerSheetHeight and UseBindingResult2 then function(Frame)
 					-- upvalues: UseTokensModuleResult (copy), UseBindingResult2 (copy), UseScaledValueModuleResult1 (copy)
 					UseBindingResult2((math.min(Frame.AbsoluteSize.Y - UseTokensModuleResult.Margin.Medium * 2, UseScaledValueModuleResult1)))
-				end
+				end else nil
 			}, nil),
 			Backdrop = if FlagsModule.FoundationCenterSheetInternalBackdrop then ReactModule.createElement(BackdropModule, {
 				ZIndex = 1,

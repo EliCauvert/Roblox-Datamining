@@ -4,7 +4,6 @@ local ReactModule = require(Parent.React)
 local MotionModule = require(Parent.Motion)
 local ShouldHoldForExitModule = require(script.Parent.Parent.shouldHoldForExit)
 local FFlagLoadingScreenMilestones = require(Parent.SharedFlags).FFlagLoadingScreenMilestones
-local FFlagTiltLoadingScreenDismissOnLoaded = require(Parent.SharedFlags).FFlagTiltLoadingScreenDismissOnLoaded
 local Players = require(Parent.MockableProxyServices).Players
 local ReplicatedFirst = require(Parent.MockableProxyServices).ReplicatedFirst
 local Game = require(Parent.MockableProxyServices).game
@@ -23,7 +22,7 @@ local Milestone = ConstantsModule.Milestone
 local DismissSource = ConstantsModule.DismissSource
 
 return function(p1, p2, Current)
-	-- upvalues: FFlagLoadingScreenMilestones (copy), ReactModule (copy), ReplicatedFirst (copy), MotionModule (copy), State (copy), Milestone (copy), State1 (copy), FFlagTiltLoadingScreenDismissOnLoaded (copy), UserGameSettings (copy), ANIMATION (copy), ShouldHoldForExitModule (copy), Players (copy), DismissSource (copy), Game (copy), AbortReason (copy)
+	-- upvalues: FFlagLoadingScreenMilestones (copy), ReactModule (copy), ReplicatedFirst (copy), MotionModule (copy), State (copy), Milestone (copy), State1 (copy), UserGameSettings (copy), ANIMATION (copy), ShouldHoldForExitModule (copy), Players (copy), DismissSource (copy), Game (copy), AbortReason (copy)
 	local UseRefResult = if FFlagLoadingScreenMilestones then ReactModule.useRef(p2) else nil
 	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean
 		-- upvalues: p1 (copy), ReplicatedFirst (upval)
@@ -44,7 +43,7 @@ return function(p1, p2, Current)
 		end
 	end, {})
 	ReactModule.useEffect(function()
-		-- upvalues: p1 (copy), UseRefResult (copy), FFlagLoadingScreenMilestones (upval), Milestone (upval), UseStateResult2_1 (copy), UseRefResult2 (copy), State1 (upval), FFlagTiltLoadingScreenDismissOnLoaded (upval), ReplicatedFirst (upval), UseStateResult2 (copy), UseRefResult3 (copy), UserGameSettings (upval), ANIMATION (upval), UseRefResult4 (copy), ShouldHoldForExitModule (upval), Players (upval), DismissSource (upval), Game (upval), AbortReason (upval)
+		-- upvalues: p1 (copy), UseRefResult (copy), FFlagLoadingScreenMilestones (upval), Milestone (upval), UseStateResult2_1 (copy), UseRefResult2 (copy), State1 (upval), ReplicatedFirst (upval), UseStateResult2 (copy), UseRefResult3 (copy), UserGameSettings (upval), ANIMATION (upval), UseRefResult4 (copy), ShouldHoldForExitModule (upval), Players (upval), DismissSource (upval), Game (upval), AbortReason (upval)
 		if not p1 then return end
 		local Current = if UseRefResult then UseRefResult.current else nil
 		
@@ -61,7 +60,7 @@ return function(p1, p2, Current)
 		local Flag3 = false
 		
 		local function doDismiss()
-			-- upvalues: FFlagLoadingScreenMilestones (upval), Current (copy), Milestone (upval), Flag (ref), UseStateResult2_1 (upval), DelayedThread (ref), Flag1 (ref), UseRefResult2 (upval), State1 (upval), FFlagTiltLoadingScreenDismissOnLoaded (upval), ReplicatedFirst (upval), UseStateResult2 (upval), UseRefResult3 (upval), UserGameSettings (upval), ANIMATION (upval)
+			-- upvalues: FFlagLoadingScreenMilestones (upval), Current (copy), Milestone (upval), Flag (ref), UseStateResult2_1 (upval), DelayedThread (ref), Flag1 (ref), UseRefResult2 (upval), State1 (upval), ReplicatedFirst (upval), UseStateResult2 (upval), UseRefResult3 (upval), UserGameSettings (upval), ANIMATION (upval)
 			if FFlagLoadingScreenMilestones and Current then
 				Current.record(Milestone.DismissStarted)
 			end
@@ -69,22 +68,23 @@ return function(p1, p2, Current)
 			UseStateResult2_1(true)
 			
 			local function fadeChrome()
-				-- upvalues: DelayedThread (upval), Flag1 (upval), UseRefResult2 (upval), State1 (upval), FFlagLoadingScreenMilestones (upval), Current (upval), Milestone (upval), FFlagTiltLoadingScreenDismissOnLoaded (upval), ReplicatedFirst (upval), UseStateResult2 (upval), UseRefResult3 (upval)
+				-- upvalues: DelayedThread (upval), Flag1 (upval), UseRefResult2 (upval), State1 (upval), FFlagLoadingScreenMilestones (upval), Current (upval), Milestone (upval), ReplicatedFirst (upval), UseStateResult2 (upval), UseRefResult3 (upval)
 				DelayedThread = nil
 				
 				if not Flag1 then
 					UseRefResult2.current(State1, {
 						onAnimationComplete = function(Enabled)
-							-- upvalues: Flag1 (upval), FFlagLoadingScreenMilestones (upval), Current (upval), Milestone (upval), FFlagTiltLoadingScreenDismissOnLoaded (upval), ReplicatedFirst (upval), UseStateResult2 (upval), UseRefResult3 (upval)
+							-- upvalues: Flag1 (upval), FFlagLoadingScreenMilestones (upval), Current (upval), Milestone (upval), ReplicatedFirst (upval), UseStateResult2 (upval), UseRefResult3 (upval)
 							if Enabled ~= true or Flag1 then return end
 							if FFlagLoadingScreenMilestones and Current then
 								Current.record(Milestone.ScreenHidden)
 							end
-							if not FFlagTiltLoadingScreenDismissOnLoaded then
-								ReplicatedFirst:SetDefaultLoadingGuiRemoved()
-							end
+							ReplicatedFirst:SetDefaultLoadingGuiRemoved()
 							UseStateResult2(false)
 							
+							if FFlagLoadingScreenMilestones and Current then
+								Current.complete()
+							end
 							if UseRefResult3.current then
 								UseRefResult3.current()
 							end
@@ -190,7 +190,7 @@ return function(p1, p2, Current)
 			end
 		end
 		
-		local function handleFinishedReplicating()
+		table.insert(List, ReplicatedFirst.FinishedReplicating:Connect(function()
 			-- upvalues: Game (upval), SpawnedThread (ref), Players (upval), Flag1 (ref), FFlagLoadingScreenMilestones (upval), Current (copy), DismissSource (upval), Flag (ref), ShouldHoldForExitModule (upval), UserGameSettings (upval), doDismiss (copy), Flag2 (ref), Flag3 (ref), List (copy)
 			if not Game:IsLoaded() then
 				local Connection = nil
@@ -277,33 +277,7 @@ return function(p1, p2, Current)
 				
 				return
 			end
-		end
-		
-		local function dismissOnLoaded()
-			-- upvalues: FFlagLoadingScreenMilestones (upval), Current (copy), DismissSource (upval), Flag (ref), ShouldHoldForExitModule (upval), UserGameSettings (upval), doDismiss (copy), Flag2 (ref), Flag3 (ref)
-			if FFlagLoadingScreenMilestones and Current then
-				Current.dismissRequested(DismissSource.NormalReady)
-			end
-			if Flag then return end
-			if not ShouldHoldForExitModule(UserGameSettings.ReducedMotion) then
-				doDismiss()
-				
-				return
-			end
-			if Flag2 then
-				doDismiss()
-				
-				return
-			else
-				Flag3 = true
-			end
-		end
-		
-		if FFlagTiltLoadingScreenDismissOnLoaded then
-			table.insert(List, Game.Loaded:Connect(dismissOnLoaded))
-		else
-			table.insert(List, ReplicatedFirst.FinishedReplicating:Connect(handleFinishedReplicating))
-		end
+		end))
 		table.insert(List, ReplicatedFirst.RemoveDefaultLoadingGuiSignal:Connect(function()
 			-- upvalues: FFlagLoadingScreenMilestones (upval), Current (copy), DismissSource (upval), Flag (ref), ShouldHoldForExitModule (upval), UserGameSettings (upval), doDismiss (copy), Flag2 (ref), Flag3 (ref)
 			if FFlagLoadingScreenMilestones and Current then
@@ -324,24 +298,7 @@ return function(p1, p2, Current)
 			end
 		end))
 		
-		if FFlagTiltLoadingScreenDismissOnLoaded then
-			if Game:IsLoaded() then
-				if FFlagLoadingScreenMilestones and Current then
-					Current.dismissRequested(DismissSource.NormalReady)
-				end
-				if not Flag then
-					if ShouldHoldForExitModule(UserGameSettings.ReducedMotion) then
-						if Flag2 then
-							doDismiss()
-						else
-							Flag3 = true
-						end
-					else
-						doDismiss()
-					end
-				end
-			end
-		elseif ReplicatedFirst:IsFinishedReplicating() then
+		if ReplicatedFirst:IsFinishedReplicating() then
 			if Game:IsLoaded() then
 				if not SpawnedThread then
 					SpawnedThread = task.spawn(function()

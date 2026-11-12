@@ -360,18 +360,18 @@ return function(p2)
 								responseBody = if config == nil then nil else HttpService:JSONEncode(config)
 							}
 						end
-						local Entry1 = t2[Comment.feedItemId]
+						local Entry = t2[Comment.feedItemId]
 						
-						if Entry1 == nil then
-							Entry1 = {}
-							t2[Comment.feedItemId] = Entry1
+						if Entry == nil then
+							Entry = {}
+							t2[Comment.feedItemId] = Entry
 						end
-						Entry1[Comment.commentId] = Comment
+						Entry[Comment.commentId] = Comment
 						local ApiComment = toApiComment(Comment)
-						local Entry2 = t3[`{Match}:{Match1}`] or (P9.reactionProjectionsByCommentId or {})[Match1]
+						local Entry1 = t3[`{Match}:{Match1}`] or (P9.reactionProjectionsByCommentId or {})[Match1]
 						
-						if Entry2 ~= nil then
-							ApiComment.reactions = cloneReactions(Entry2)
+						if Entry1 ~= nil then
+							ApiComment.reactions = cloneReactions(Entry1)
 						end
 						return {
 							statusCode = 200,
@@ -432,13 +432,13 @@ return function(p2)
 						local Entry = t[Match] or {}
 						table.insert(Entry, 1, Comment)
 						t[Match] = Entry
-						local Comments1 = t2[Comment.feedItemId]
+						local Entry2 = t2[Comment.feedItemId]
 						
-						if Comments1 == nil then
-							Comments1 = {}
-							t2[Comment.feedItemId] = Comments1
+						if Entry2 == nil then
+							Entry2 = {}
+							t2[Comment.feedItemId] = Entry2
 						end
-						Comments1[Comment.commentId] = Comment
+						Entry2[Comment.commentId] = Comment
 						
 						if PostOutcome == "replay" then
 							local ApiComment = toApiComment(Comment)

@@ -2,7 +2,9 @@
 local RoactModule = require(CorePackages.Packages.Roact)
 local TModule = require(CorePackages.Packages.t)
 local UIBloxModule = require(CorePackages.Packages.UIBlox)
-local NormalizeFontFaceFunction = require(CorePackages.Packages.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
 local WithStyleFunction = UIBloxModule.Core.Style.withStyle
 local Images = UIBloxModule.App.ImageSet.Images
@@ -18,9 +20,9 @@ MenuHeader.validateProps = TModule.strictInterface({
 })
 
 function MenuHeader.render(p1)
-	-- upvalues: WithStyleFunction (copy), RoactModule (copy), ImageSetLabel (copy), ComponentAssetsCircle17 (copy), _Rect (copy), IconsImageUnavailable (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: WithStyleFunction (copy), RoactModule (copy), ImageSetLabel (copy), ComponentAssetsCircle17 (copy), _Rect (copy), IconsImageUnavailable (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	return WithStyleFunction(function(p2)
-		-- upvalues: RoactModule (upval), ImageSetLabel (upval), ComponentAssetsCircle17 (upval), _Rect (upval), IconsImageUnavailable (upval), p1 (copy), NormalizeFontFaceFunction (upval)
+		-- upvalues: RoactModule (upval), ImageSetLabel (upval), ComponentAssetsCircle17 (upval), _Rect (upval), IconsImageUnavailable (upval), p1 (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 		local Theme = p2.Theme
 		local _Font = p2.Font
 		
@@ -75,7 +77,8 @@ function MenuHeader.render(p1)
 						TextWrapped = true,
 						Size = UDim2.new(1, 0, 1, -45),
 						Position = UDim2.fromOffset(0, 25),
-						FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.HeadingSmall.Font),
+						Font = if FoundationFontFaceMigration then nil else _Font.Header1.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.HeadingSmall.Font) else nil,
 						Text = p1.props.gameName,
 						TextSize = _Font.BaseSize * _Font.Header1.RelativeSize,
 						TextColor3 = Theme.TextEmphasis.Color,

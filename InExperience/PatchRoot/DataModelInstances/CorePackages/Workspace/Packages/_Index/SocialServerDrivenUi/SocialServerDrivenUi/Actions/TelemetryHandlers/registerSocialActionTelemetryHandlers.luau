@@ -16,11 +16,6 @@ return function()
 			lazyHandler = function()
 				return require(script.Parent.SduiSocialUpsellButtonClickTelemetryHandler)
 			end
-		} else nil,
-		SocialProofTextClick = {
-			lazyHandler = function()
-				return require(script.Parent.SduiSocialProofTextClickTelemetryHandler)
-			end
-		}
+		} else nil
 	})
 end

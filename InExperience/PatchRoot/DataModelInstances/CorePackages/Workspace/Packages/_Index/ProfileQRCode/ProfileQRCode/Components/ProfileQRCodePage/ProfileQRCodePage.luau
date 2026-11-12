@@ -7,7 +7,6 @@ local ProfileShareLinksModule = require(Parent.ProfileShareLinks)
 local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 local UseProfileShareLinkFunction = ProfileShareLinksModule.Hooks.useProfileShareLink
 local ProfileSharePolicyEnum = ProfileShareLinksModule.Enums.ProfileSharePolicyEnum
-local UseCloseWithBackButtonFunction = require(Parent.AppBlox).useCloseWithBackButton
 local Button = UIBloxModule.App.Button.Button
 local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
@@ -32,7 +31,6 @@ local UseFocusGuiObjectFunction = require(Parent.ReactFocusNavigation).useFocusG
 local UseLastInputModeFunction = require(Parent.FocusNavigationUtils).useLastInputMode
 local _Color3 = Color3.new(1, 1, 1)
 local FFlagProfileQRCodeFixFocusNavigationModule = require(ProfileQRCode.Flags.FFlagProfileQRCodeFixFocusNavigation)
-local FFlagProfileQRCodeGamepadBackFixModule = require(ProfileQRCode.Flags.FFlagProfileQRCodeGamepadBackFix)
 local FFlagQRCodeCopyUpdates = require(Parent.SharedFlags).FFlagQRCodeCopyUpdates
 local FFlagQRCodePageVisualRefresh = require(Parent.SharedFlags).FFlagQRCodePageVisualRefresh
 local FStringCanAccessTrustedContactsAmpFeature = require(Parent.SharedFlags).FStringCanAccessTrustedContactsAmpFeature
@@ -43,7 +41,7 @@ local AmpApiProvider = require(Parent.AmpUpsell).AmpApiProvider
 local AmpEnums = require(Parent.AmpUpsell).AmpEnums
 
 return function(p1)
-	-- upvalues: UseDispatchFunction (copy), UseAppPolicyFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), FFlagProfileQRCodeFixFocusNavigationModule (copy), UseIsWideModeFunction (copy), UseStyleFunction (copy), UseLastInputModeFunction (copy), UseFocusGuiObjectFunction (copy), FFlagProfileQRCodeGamepadBackFixModule (copy), UseCloseWithBackButtonFunction (copy), UseProfileShareLinkFunction (copy), Contexts (copy), ProfileSharePolicyEnum (copy), Images (copy), FFlagQRCodeCopyUpdates (copy), FFlagTCPolicyCheckRedirect (copy), FStringIsUserInTcEligibleCountryAmpFeature (copy), FStringCanAccessTrustedContactsAmpFeature (copy), AmpApiProvider (copy), FStringCanAccessTrustedContactsAmpNameSpace (copy), AmpEnums (copy), FFlagQRCodePageVisualRefresh (copy), FoundationModule (copy), ProfileQRCodeTopElementsModule (copy), VerticalScrollView (copy), _Color3 (copy), QRCodeViewModule (copy), StyledTextLabel (copy), InputLabel (copy), InputLabelSize (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy)
+	-- upvalues: UseDispatchFunction (copy), UseAppPolicyFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), FFlagProfileQRCodeFixFocusNavigationModule (copy), UseIsWideModeFunction (copy), UseStyleFunction (copy), UseLastInputModeFunction (copy), UseFocusGuiObjectFunction (copy), UseProfileShareLinkFunction (copy), Contexts (copy), ProfileSharePolicyEnum (copy), Images (copy), FFlagQRCodeCopyUpdates (copy), FFlagTCPolicyCheckRedirect (copy), FStringIsUserInTcEligibleCountryAmpFeature (copy), FStringCanAccessTrustedContactsAmpFeature (copy), AmpApiProvider (copy), FStringCanAccessTrustedContactsAmpNameSpace (copy), AmpEnums (copy), FFlagQRCodePageVisualRefresh (copy), FoundationModule (copy), ProfileQRCodeTopElementsModule (copy), VerticalScrollView (copy), _Color3 (copy), QRCodeViewModule (copy), StyledTextLabel (copy), InputLabel (copy), InputLabelSize (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseAppPolicyResult = UseAppPolicyFunction(function(p2)
 		return p2.getWebViewSupport()
@@ -77,7 +75,6 @@ return function(p1)
 	local UseStyleResult = UseStyleFunction()
 	local UseLastInputModeResult = if FFlagProfileQRCodeFixFocusNavigationModule then UseLastInputModeFunction() else nil
 	local UseFocusGuiObjectResult = if FFlagProfileQRCodeFixFocusNavigationModule then UseFocusGuiObjectFunction() else nil
-	local UseCloseWithBackButtonResult = if FFlagProfileQRCodeGamepadBackFixModule then UseCloseWithBackButtonFunction(nil, p1.onClose) else nil
 	local UseProfileShareLinkResult = UseProfileShareLinkFunction({ context = Contexts.ProfileQRCode })
 	local HasLoaded = UseProfileShareLinkResult.policy ~= ProfileSharePolicyEnum.Disabled and UseProfileShareLinkResult.hasLoaded
 	local CopyProfileLink = nil
@@ -113,8 +110,7 @@ return function(p1)
 	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		Size = UDim2.fromScale(1, 1),
-		ref = UseCloseWithBackButtonResult
+		Size = UDim2.fromScale(1, 1)
 	}, {
 		WidePanel = if FFlagQRCodePageVisualRefresh and UseIsWideModeResult then ReactModule.createElement(FoundationModule.View, {
 			tag = "bg-over-media-100",

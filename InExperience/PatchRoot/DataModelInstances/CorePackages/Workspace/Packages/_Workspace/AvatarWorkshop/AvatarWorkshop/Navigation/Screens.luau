@@ -1,8 +1,4 @@
 ﻿return {
-	Workshop = {
-		YourAvatars = "Avatar.Workshop.YourAvatars",
-		Customize = "Avatar.Workshop.Customize"
-	},
 	Inventory = {
 		Root = "Avatar.Inventory.Root",
 		Avatars = "Avatar.Inventory.Avatars",

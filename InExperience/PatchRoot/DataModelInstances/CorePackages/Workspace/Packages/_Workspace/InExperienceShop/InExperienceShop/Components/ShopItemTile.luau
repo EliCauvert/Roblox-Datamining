@@ -24,7 +24,6 @@ local FFlagCategoryLoggingInShopPurchaseModule = require(InExperienceShop.Flags.
 local FFlagFixThumbnailBackgroundInExperienceShopModule = require(InExperienceShop.Flags.FFlagFixThumbnailBackgroundInExperienceShop)
 local FFlagEnableDiscountOnInShopTileModule = require(InExperienceShop.Flags.FFlagEnableDiscountOnInShopTile)
 local FFlagLuaAppEnableGamePassFreeTrialsModule = require(InExperienceShop.Flags.FFlagLuaAppEnableGamePassFreeTrials)
-local FFlagEnableFreeTrialTopBarChipModule = require(InExperienceShop.Flags.FFlagEnableFreeTrialTopBarChip)
 local FFlagEnableGamePassTrialUnifiedLoggingModule = require(InExperienceShop.Flags.FFlagEnableGamePassTrialUnifiedLogging)
 local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
 local FormatPriceModule = if FFlagEnableDiscountOnInShopTileModule then require(InExperienceShop.Utils.formatPrice) else nil
@@ -34,7 +33,7 @@ local config = {
 	freeTrial = "Feature.InExperienceShop.Label.FreeTrial",
 	trial = "Feature.InExperienceShop.Label.Trial",
 	active = "Feature.InExperienceShop.Label.Active",
-	keepIt = "Feature.InExperienceShop.Label.KeepIt"
+	trialed = "Feature.InExperienceShop.Label.Trialed"
 }
 
 local function TrialBadge(p1)
@@ -44,7 +43,7 @@ local function TrialBadge(p1)
 	
 	return ReactModule.createElement(Badge, {
 		testId = "ShopItemTile-TrialBadge",
-		text = if p1.freeTrialStatus == "active" then UseLocalizationResult.active elseif p1.freeTrialStatus == "redeemed" then UseLocalizationResult.keepIt else UseLocalizationResult.trial,
+		text = if p1.freeTrialStatus == "active" then UseLocalizationResult.active elseif p1.freeTrialStatus == "redeemed" then UseLocalizationResult.trialed else UseLocalizationResult.trial,
 		variant = if p1.freeTrialStatus == "active" then Enums.BadgeVariant.Emphasis else Enums.BadgeVariant.OverMedia,
 		size = Enums.BadgeSize.Small,
 		Position = UDim2.fromOffset(UseTokensResult.Gap.Small, UseTokensResult.Gap.Small)
@@ -62,7 +61,7 @@ local function FreeTrialLabel(Frame)
 end
 
 return ReactModule.memo(function(Frame: Frame)
-	-- upvalues: SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), ReactModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), FFlagEnableGamePassTrialUnifiedLoggingModule (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (copy), Parent (copy), InExperienceShop (copy), ToUnifiedCategoryIdModule (copy), FFlagEnableCategoryLoggingInShopModule (copy), SessionService (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), UseGamePassTrialRedemptionModule (copy), FFlagEnableFreeTrialTopBarChipModule (copy), FFlagEnableDiscountOnInShopTileModule (copy), FormatPriceModule (copy), View (copy), SHOPITEMMEDIAHEIGHTSCALE (copy), Image (copy), FFlagFixThumbnailBackgroundInExperienceShopModule (copy), TrialBadge (copy), Text (copy), FreeTrialLabel (copy), Icon (copy), ConstantsModule (copy), IconSize (copy), GetIconRichTextFunction (copy), Enums (copy), ShopItemFooterModule (copy)
+	-- upvalues: SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), ReactModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), FFlagEnableGamePassTrialUnifiedLoggingModule (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (copy), Parent (copy), InExperienceShop (copy), ToUnifiedCategoryIdModule (copy), FFlagEnableCategoryLoggingInShopModule (copy), SessionService (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), UseGamePassTrialRedemptionModule (copy), FFlagEnableDiscountOnInShopTileModule (copy), FormatPriceModule (copy), View (copy), SHOPITEMMEDIAHEIGHTSCALE (copy), Image (copy), FFlagFixThumbnailBackgroundInExperienceShopModule (copy), TrialBadge (copy), Text (copy), FreeTrialLabel (copy), Icon (copy), ConstantsModule (copy), IconSize (copy), GetIconRichTextFunction (copy), Enums (copy), ShopItemFooterModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetInExperienceShopStoreModule)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(function(p1)
@@ -193,7 +192,7 @@ return ReactModule.memo(function(Frame: Frame)
 		categoryLocation = CategoryLocation,
 		universeId = if Config == nil then nil else Config.universeId,
 		trialStatus = if Config == nil then nil else Config.trialStatus
-	}, if FFlagEnableFreeTrialTopBarChipModule then Frame.thumbnail else nil)
+	})
 	local IsUserBasePriceInRobuxAbove: boolean = FFlagEnableDiscountOnInShopTileModule and (Frame.userBasePriceInRobux ~= nil and (Frame.price ~= nil and Frame.userBasePriceInRobux > Frame.price))
 	local FormatPriceModuleResult = if IsUserBasePriceInRobuxAbove and FormatPriceModule then FormatPriceModule(Frame.userBasePriceInRobux) else nil
 	local FormatPriceModuleResult1 = if IsUserBasePriceInRobuxAbove and FormatPriceModule then FormatPriceModule(Frame.price) else nil

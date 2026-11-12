@@ -141,7 +141,7 @@ function ReplyComposeBarContainer(p1)
 				query = UserProfilesModule.Queries.userProfilesCombinedNameAndUsernameByUserIds
 			})
 		end
-		local DisplayName = if UseSelectorResult1.targetUser and UseSelectorResult1.targetUser.displayName and UseSelectorResult1.targetUser.displayName ~= "" then UseSelectorResult1.targetUser.displayName elseif FFlagAppChatUseUserProfileHydrationModule then v2.combinedName or UnionResult.unknownUserKey elseif UseUserProfilesFetchResult1.data and (UseUserProfilesFetchResult1.data.userProfiles and UseUserProfilesFetchResult1.data.userProfiles[1] and UseUserProfilesFetchResult1.data.userProfiles[1].names) then UserProfilesModule.Selectors.getCombinedNameFromId(UseUserProfilesFetchResult1.data, UnionResult.message.senderTargetId) else UnionResult.unknownUserKey
+		local DisplayName = if UseSelectorResult1.targetUser and UseSelectorResult1.targetUser.displayName and UseSelectorResult1.targetUser.displayName ~= "" then UseSelectorResult1.targetUser.displayName elseif FFlagAppChatUseUserProfileHydrationModule then v2.combinedName or UnionResult.unknownUserKey elseif UseUserProfilesFetchResult1.data and UseUserProfilesFetchResult1.data.userProfiles and UseUserProfilesFetchResult1.data.userProfiles[1] and UseUserProfilesFetchResult1.data.userProfiles[1].names then UserProfilesModule.Selectors.getCombinedNameFromId(UseUserProfilesFetchResult1.data, UnionResult.message.senderTargetId) else UnionResult.unknownUserKey
 		local ReplyingToUserName = UseLocalizationFunction(if DisplayName == UnionResult.unknownUserKey then { replyingToUserName = DisplayName } else {}).replyingToUserName or DisplayName
 		local IsUseLocalUserIdResultMatch = UseLocalUserIdResult == UnionResult.message.senderTargetId
 		

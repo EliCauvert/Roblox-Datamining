@@ -230,17 +230,17 @@ function MoveAssistController:applyMoveAssist(Offset, _debugSnapshot)
 	end
 	self._assistTarget = Committed
 	local Interpolated = OffsetRatio:Lerp(ZeroVector, AssistStrength.assistStrength)
-	local Magnitude2: number = Interpolated.Magnitude
-	local InterpolatedRatio = if Magnitude2 > 0.00001 then Interpolated / Magnitude2 else Vector2.zero
+	local Magnitude1: number = Interpolated.Magnitude
+	local InterpolatedRatio = if Magnitude1 > 0.00001 then Interpolated / Magnitude1 else Vector2.zero
 	
 	if InterpolatedRatio == Vector2.zero then
 		return Offset
 	end
-	local ScaledMagnitude = InterpolatedRatio * Magnitude
+	local ScaledInterpolatedRatio = InterpolatedRatio * Magnitude
 	
 	if FFlagEnableVirtualCursorDebugging then
-		if (ScaledMagnitude - Offset).Magnitude > 0 then
-			print("Move input adjusted from", Offset, "to", ScaledMagnitude)
+		if (ScaledInterpolatedRatio - Offset).Magnitude > 0 then
+			print("Move input adjusted from", Offset, "to", ScaledInterpolatedRatio)
 		end
 		local DebugSnapshot = self._debugSnapshot
 		
@@ -260,7 +260,7 @@ function MoveAssistController:applyMoveAssist(Offset, _debugSnapshot)
 			v2.state = "committed"
 		end
 	end
-	return ScaledMagnitude
+	return ScaledInterpolatedRatio
 end
 
 function MoveAssistController:clearDebugSnapshot()

@@ -417,7 +417,7 @@ local function constructClassInstance(p1, Key, p2)
 			elseif type(CtorResult.UNSAFE_componentWillUpdate) == "function" then
 				v11 = "UNSAFE_componentWillUpdate"
 			end
-			if v9 ~= nil or v10 ~= nil or v11 ~= nil then
+			if v9 ~= nil or (v10 ~= nil or v11 ~= nil) then
 				local ComponentName = GetComponentNameFunction(Key) or "Component"
 				local GetDerivedStateFromProps: string = if type(Key.getDerivedStateFromProps) == "function" then "getDerivedStateFromProps()" else "getSnapshotBeforeUpdate()"
 				local Text: string = if v9 == nil then "" else "\n  " .. tostring(v9)
@@ -681,7 +681,7 @@ return {
 					p4.flags = bit32.bor(p4.flags, Snapshot)
 				end
 			else
-				if StateNode.componentDidUpdate ~= nil and (type(StateNode.componentDidUpdate) == "function" and (MemoizedProps1 ~= p3.memoizedProps or MemoizedState ~= p3.memoizedState)) then
+				if StateNode.componentDidUpdate ~= nil and type(StateNode.componentDidUpdate) == "function" and (MemoizedProps1 ~= p3.memoizedProps or MemoizedState ~= p3.memoizedState) then
 					p4.flags = bit32.bor(p4.flags, Update)
 				end
 				if StateNode.getSnapshotBeforeUpdate ~= nil and type(StateNode.getSnapshotBeforeUpdate) == "function" and (MemoizedProps1 ~= p3.memoizedProps or MemoizedState ~= p3.memoizedState) then

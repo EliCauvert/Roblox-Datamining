@@ -1,10 +1,12 @@
-﻿local _ = game:GetService("TextService")
+﻿local TextService = game:GetService("TextService")
 local CorePackages = game:GetService("CorePackages")
 local CryoModule = require(CorePackages.Packages.Cryo)
 local RoactModule = require(CorePackages.Packages.Roact)
 local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local FoundationModule = require(CorePackages.Packages.Foundation)
 local GetTextSizeFunction = require(CorePackages.Workspace.Packages.Style).GetTextSize
-local NormalizeFontFaceFunction = require(CorePackages.Packages.Foundation).Utility.normalizeFontFace
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local TModule = require(CorePackages.Packages.t)
 local Parent = script.Parent.Parent
 local AssetsModule = require(Parent.Resources.Assets)
@@ -39,14 +41,16 @@ function TextEntryField.init(p1)
 end
 
 function TextEntryField.calculateNeedsRescroll(p1, p2, Body)
-	-- upvalues: GetTextSizeFunction (copy)
+	-- upvalues: FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy)
 	p1:setState(function(State, p3)
-		-- upvalues: Body (copy), p2 (copy), GetTextSizeFunction (upval)
+		-- upvalues: Body (copy), p2 (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), TextService (upval)
 		if State.cursorPosition == -1 then
 			return nil
 		else
+			local Segment = p3.text:sub(1, State.cursorPosition - 1)
 			local ScaledRelativeSize = Body.RelativeSize * p2.Font.BaseSize
-			local TextSize = GetTextSizeFunction(p3.text:sub(1, State.cursorPosition - 1), ScaledRelativeSize, p2.Tokens.Typography.BodyLarge.Font, Vector2.new(p3.textBoxWidth, 10000), { addTemporaryPadding = false })
+			local _Vector2 = Vector2.new(p3.textBoxWidth, 10000)
+			local TextSize = if FoundationFontFaceMigration then GetTextSizeFunction(Segment, ScaledRelativeSize, p2.Tokens.Typography.BodyLarge.Font, _Vector2, { addTemporaryPadding = false }) else TextService:GetTextSize(Segment, ScaledRelativeSize, Body.Font, _Vector2)
 			
 			return if State.scrollingFrameHeight + State.canvasPosition < TextSize.Y then { canvasPosition = TextSize.Y - State.scrollingFrameHeight } elseif TextSize.Y - ScaledRelativeSize < State.canvasPosition then { canvasPosition = TextSize.Y - ScaledRelativeSize } else nil
 		end
@@ -54,11 +58,12 @@ function TextEntryField.calculateNeedsRescroll(p1, p2, Body)
 end
 
 function TextEntryField.renderWithSelectionCursor(p1, Callback)
-	-- upvalues: WithStyleFunction (copy), GetTextSizeFunction (copy), RoactModule (copy), ImageSetLabel (copy), AssetsModule (copy), NormalizeFontFaceFunction (copy), CursorKind (copy), ThemedTextLabelModule (copy)
+	-- upvalues: WithStyleFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), RoactModule (copy), ImageSetLabel (copy), AssetsModule (copy), NormalizeFontFaceFunction (copy), CursorKind (copy), ThemedTextLabelModule (copy)
 	return WithStyleFunction(function(p2)
-		-- upvalues: p1 (copy), GetTextSizeFunction (upval), RoactModule (upval), ImageSetLabel (upval), AssetsModule (upval), NormalizeFontFaceFunction (upval), Callback (copy), CursorKind (upval), ThemedTextLabelModule (upval)
+		-- upvalues: p1 (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), TextService (upval), RoactModule (upval), ImageSetLabel (upval), AssetsModule (upval), NormalizeFontFaceFunction (upval), Callback (copy), CursorKind (upval), ThemedTextLabelModule (upval)
 		local TextDefault = p2.Theme.TextDefault
 		local Body = p2.Font.Body
+		local _Vector2 = Vector2.new(p1.state.textBoxWidth, 10000)
 		
 		return RoactModule.createElement(ImageSetLabel, {
 			BackgroundTransparency = 1,
@@ -77,7 +82,7 @@ function TextEntryField.renderWithSelectionCursor(p1, Callback)
 				Position = UDim2.new(0.5, 0, 0, 7),
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				CanvasSize = UDim2.new(1, -24, 0, GetTextSizeFunction(p1.props.text, Body.RelativeSize * p2.Font.BaseSize, p2.Tokens.Typography.BodyLarge.Font, Vector2.new(p1.state.textBoxWidth, 10000), { addTemporaryPadding = false }).Y),
+				CanvasSize = UDim2.new(1, -24, 0, (if FoundationFontFaceMigration then GetTextSizeFunction(p1.props.text, Body.RelativeSize * p2.Font.BaseSize, p2.Tokens.Typography.BodyLarge.Font, _Vector2, { addTemporaryPadding = false }) else TextService:GetTextSize(p1.props.text, Body.RelativeSize * p2.Font.BaseSize, Body.Font, _Vector2)).Y),
 				ScrollBarThickness = 8,
 				VerticalScrollBarInset = Enum.ScrollBarInset.Always,
 				CanvasPosition = Vector2.new(0, p1.state.canvasPosition),
@@ -106,7 +111,8 @@ function TextEntryField.renderWithSelectionCursor(p1, Callback)
 					TextYAlignment = Enum.TextYAlignment.Top,
 					TextColor3 = TextDefault.Color,
 					TextTransparency = TextDefault.Transparency,
-					FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font),
+					Font = if FoundationFontFaceMigration then nil else Body.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font) else nil,
 					TextSize = Body.RelativeSize * p2.Font.BaseSize,
 					TextWrapped = true,
 					MultiLine = true,

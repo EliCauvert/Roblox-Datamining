@@ -201,7 +201,7 @@ return function()
 				end
 				p1:dispatch(ErrorOccurredModule(Err))
 			end)
-		elseif FFlagMockDevSubPurchaseInStudioModule and FFlagEnableUnifiedPurchaseFlowForDevSubs and State1.productPayload.kind == ProductTypeEnum.DeveloperSubscription and v2.isStudio() then
+		elseif FFlagMockDevSubPurchaseInStudioModule and FFlagEnableUnifiedPurchaseFlowForDevSubs and (State1.productPayload.kind == ProductTypeEnum.DeveloperSubscription and v2.isStudio()) then
 			p1:dispatch(CompletePurchaseModule())
 			
 			return

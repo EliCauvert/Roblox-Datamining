@@ -12,18 +12,20 @@ local UseChatPagePaddingModule = require(AppChat.Contexts.ChatPagePadding.useCha
 local AppChatNetworkingModule = require(Parent.AppChatNetworking)
 local FoundationModule = require(Parent.Foundation)
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local FFlagAppChatLandingModalThemedBackgroundModule = require(AppChat.Flags.FFlagAppChatLandingModalThemedBackground)
 local IconsActionsFavoriteOn = UIBloxModule.App.ImageSet.Images["icons/actions/favoriteOn"]
 local X = FoundationModule.Enums.IconName.X
 local config = {
 	[AppChatNetworkingModule.Constants.ModalContentType.Link] = function(p1)
-		-- upvalues: UseStyleFunction (copy), ReactModule (copy), NormalizeFontFaceFunction (copy)
+		-- upvalues: UseStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 		local UseStyleResult = UseStyleFunction()
 		
 		return ReactModule.createElement("TextButton", {
 			Size = UDim2.new(1, 0, 0, 0),
 			LayoutOrder = p1.layoutOrder,
-			FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
+			Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 			BorderSizePixel = 0,
 			Text = `<u>{p1.content.text}</u>`,
 			RichText = true,
@@ -37,7 +39,7 @@ local config = {
 		})
 	end,
 	[AppChatNetworkingModule.Constants.ModalContentType.Text] = function(p1)
-		-- upvalues: UseStyleFunction (copy), ReactModule (copy), NormalizeFontFaceFunction (copy)
+		-- upvalues: UseStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 		local UseStyleResult = UseStyleFunction()
 		
 		return ReactModule.createElement("TextLabel", {
@@ -46,7 +48,8 @@ local config = {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 0),
 			LayoutOrder = p1.layoutOrder,
-			FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
+			Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 			Text = p1.content.text,
 			TextColor3 = UseStyleResult.Theme.TextDefault.Color,
 			TextSize = UseStyleResult.Font.CaptionBody.RelativeSize * UseStyleResult.Font.BaseSize,
@@ -68,7 +71,7 @@ local config1 = {
 }
 
 return ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: CryoModule (copy), config1 (copy), UseStyleFunction (copy), UseChatPagePaddingModule (copy), FoundationModule (copy), ReactModule (copy), config (copy), NewResult (copy), FFlagAppChatLandingModalThemedBackgroundModule (copy), LabelModule (copy), IconsActionsFavoriteOn (copy), NormalizeFontFaceFunction (copy), X (copy), ButtonStack (copy)
+	-- upvalues: CryoModule (copy), config1 (copy), UseStyleFunction (copy), UseChatPagePaddingModule (copy), FoundationModule (copy), ReactModule (copy), config (copy), NewResult (copy), FFlagAppChatLandingModalThemedBackgroundModule (copy), LabelModule (copy), IconsActionsFavoriteOn (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), X (copy), ButtonStack (copy)
 	local JoinResult = CryoModule.Dictionary.join(config1, p1)
 	local UseStyleResult = UseStyleFunction()
 	local Style = JoinResult.style or UseStyleResult
@@ -181,7 +184,8 @@ return ReactModule.forwardRef(function(p1, Ref)
 							TextWrapped = true,
 							BackgroundTransparency = 1,
 							Size = UDim2.new(1, 0, 0, 0),
-							FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.HeadingLarge.Font),
+							Font = if FoundationFontFaceMigration then nil else Style.Font.Title.Font,
+							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.HeadingLarge.Font) else nil,
 							Text = JoinResult.titleText,
 							TextColor3 = Style.Theme.TextEmphasis.Color,
 							TextSize = Style.Font.Header2.RelativeSize * Style.Font.BaseSize,
@@ -197,7 +201,8 @@ return ReactModule.forwardRef(function(p1, Ref)
 						TextWrapped = true,
 						BackgroundTransparency = 1,
 						Size = UDim2.new(1, 0, 0, 0),
-						FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.BodyLarge.Font),
+						Font = if FoundationFontFaceMigration then nil else Style.Font.Body.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.BodyLarge.Font) else nil,
 						Text = JoinResult.bodyText,
 						TextColor3 = Style.Theme.TextDefault.Color,
 						TextSize = Style.Font.CaptionBody.RelativeSize * Style.Font.BaseSize,

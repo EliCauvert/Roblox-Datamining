@@ -4,7 +4,9 @@ local ReactModule = require(Parent1.React)
 local RoactUtilsModule = require(Parent1.RoactUtils)
 local SocialStopwatchModule = require(Parent1.SocialStopwatch)
 local UIBloxModule = require(Parent1.UIBlox)
-local NormalizeFontFaceFunction = require(Parent1.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(Parent1.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local IconButton = UIBloxModule.App.Button.IconButton
 local IconSize = UIBloxModule.App.Constant.IconSize
 local Images = UIBloxModule.App.ImageSet.Images
@@ -30,7 +32,7 @@ local _UDim2 = UDim2.new(0.33, 0, 0, 36)
 return (require(Parent.App.CapturesPolicy).connect(function(p1)
 	return { enableShareCaptureCTA = p1.enableShareCaptureCTA() }
 end)(function(Frame: Frame)
-	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseStyleFunction (copy), UseRefFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), ReactModule (copy), CapturesSaveToExternalStorageLimit (copy), UseLocalizationFunction (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), GetSaveToStoragePermissionModule (copy), EventNamesModule (copy), SocialStopwatchModule (copy), ShareCaptureModule (copy), ExternalShareSourceTypeModule (copy), GetIsDeleteWarningModalOptedOutModule (copy), DeleteWarningModalOpenedModule (copy), NormalizeFontFaceFunction (copy), IconButton (copy), Images (copy), IconSize (copy), _UDim2 (copy)
+	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseStyleFunction (copy), UseRefFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), ReactModule (copy), CapturesSaveToExternalStorageLimit (copy), UseLocalizationFunction (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), GetSaveToStoragePermissionModule (copy), EventNamesModule (copy), SocialStopwatchModule (copy), ShareCaptureModule (copy), ExternalShareSourceTypeModule (copy), GetIsDeleteWarningModalOptedOutModule (copy), DeleteWarningModalOpenedModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), IconButton (copy), Images (copy), IconSize (copy), _UDim2 (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseStyleResult = UseStyleFunction()
@@ -130,7 +132,8 @@ end)(function(Frame: Frame)
 			ZIndex = 1,
 			AnchorPoint = Vector2.new(1, 0.5),
 			AutomaticSize = Enum.AutomaticSize.X,
-			FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.TitleLarge.Font),
+			Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Header2.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.TitleLarge.Font) else nil,
 			Position = UDim2.new(1, 0, 1, 0),
 			Size = _UDim2_1,
 			Text = ReactModule.useCallback(function()

@@ -36,7 +36,6 @@ return {
 	Back = "Back",
 	Waist = "Waist",
 	Gear = "Gear",
-	SpawnEffects = "SpawnEffects",
 	AnimationFullSets = "AnimationFullSets",
 	IdleAnimations = "IdleAnimations",
 	WalkAnimations = "WalkAnimations",

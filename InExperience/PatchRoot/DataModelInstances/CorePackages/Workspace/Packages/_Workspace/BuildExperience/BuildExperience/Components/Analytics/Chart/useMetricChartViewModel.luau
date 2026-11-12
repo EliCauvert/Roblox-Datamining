@@ -1,15 +1,17 @@
 ﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseMetricChartContentModule = require(script.Parent.useMetricChartContent)
 local DeriveChartAxesFunction = require(Parent.AnalyticsMetricChart).deriveChartAxes
 
 return function(p1)
-	-- upvalues: UseMetricChartContentModule (copy), FoundationModule (copy), ReactModule (copy), DeriveChartAxesFunction (copy)
+	-- upvalues: UseMetricChartContentModule (copy), FoundationModule (copy), FoundationFontFaceMigration (copy), ReactModule (copy), DeriveChartAxesFunction (copy)
 	local UseMetricChartContentModuleResult = UseMetricChartContentModule(p1)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local BodySmall = UseTokensResult.Typography.BodySmall
 	local BodySmallFont = BodySmall.Font
+	local BodySmallFont1 = if FoundationFontFaceMigration then BodySmallFont elseif typeof(BodySmallFont) == "EnumItem" then BodySmallFont else Enum.Font.BuilderSans
 	local NewFontSize = BodySmall.FontSize + (FoundationModule.Hooks.useTextSizeOffset() or 0)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
@@ -98,7 +100,7 @@ return function(p1)
 		maxY = UseMemoResult.maxY,
 		yTicks = YTicks,
 		xAxisLabels = XAxisLabels,
-		labelFont = BodySmallFont,
+		labelFont = BodySmallFont1,
 		labelFontSize = NewFontSize,
 		inspectedIndex = UseStateResult,
 		tooltip = Tooltip,

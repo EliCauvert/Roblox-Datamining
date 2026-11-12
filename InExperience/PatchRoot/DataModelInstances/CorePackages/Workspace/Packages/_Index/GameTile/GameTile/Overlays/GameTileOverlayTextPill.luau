@@ -1,6 +1,8 @@
 ﻿local Parent = script:FindFirstAncestor("GameTile").Parent
 local ReactModule = require(Parent.React)
-local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local StyleModule = require(Parent.Style)
 local Colors = StyleModule.Colors
 local LightTheme = StyleModule.Themes.LightTheme
@@ -8,7 +10,7 @@ local GetTextSizeFunction = StyleModule.GetTextSize
 local UseDesignTokensFunction = StyleModule.useDesignTokens
 
 return function(Frame)
-	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy), GetTextSizeFunction (copy), Colors (copy), LightTheme (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy), GetTextSizeFunction (copy), Colors (copy), LightTheme (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	if Frame.text and string.len(Frame.text) ~= 0 then
 		local UseDesignTokensResult = UseDesignTokensFunction()
 		local Size200 = UseDesignTokensResult.Size.Size_200
@@ -40,7 +42,8 @@ return function(Frame)
 				Size = UDim2.fromOffset(UseMemoResult.X, UseMemoResult.Y),
 				Text = Frame.text,
 				TextColor3 = LightTheme.TextEmphasis.Color3,
-				FontFace = NormalizeFontFaceFunction(HeadingLargeFont),
+				Font = if FoundationFontFaceMigration then nil else HeadingLargeFont,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(HeadingLargeFont) else nil,
 				TextSize = FontSize300,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,

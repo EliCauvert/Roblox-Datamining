@@ -2,7 +2,6 @@
 local LocalizationService = game:GetService("LocalizationService")
 local Parent = script:FindFirstAncestor("InExperienceOverlay").Parent
 local CoreGuiCommonModule = require(Parent.CoreGuiCommon)
-local CloudPlayUnsuccessfulJoinSnackbar = require(Parent.InExperienceCloudPlay).CloudPlayUnsuccessfulJoinSnackbar
 local FoundationModule = require(Parent.Foundation)
 local Localization = require(Parent.InExperienceLocales).Localization
 local LocalizationModule = require(Parent.Localization)
@@ -12,10 +11,9 @@ local SongbirdModule = require(Parent.Songbird)
 local Components = CoreGuiCommonModule.Components
 local View = FoundationModule.View
 local FFlagEnableUISelector = CoreGuiCommonModule.Flags.FFlagEnableUISelector
-local FFlagUseUIOverlayForCloudPlay = require(Parent.SharedFlags).FFlagUseUIOverlayForCloudPlay
 
 return function()
-	-- upvalues: CoreGui (copy), ReactModule (copy), FoundationModule (copy), LocalizationModule (copy), Localization (copy), LocalizationService (copy), View (copy), Components (copy), FFlagEnableUISelector (copy), FFlagUseUIOverlayForCloudPlay (copy), CloudPlayUnsuccessfulJoinSnackbar (copy), SongbirdModule (copy), ReactRobloxModule (copy)
+	-- upvalues: CoreGui (copy), ReactModule (copy), FoundationModule (copy), LocalizationModule (copy), Localization (copy), LocalizationService (copy), View (copy), Components (copy), FFlagEnableUISelector (copy), SongbirdModule (copy), ReactRobloxModule (copy)
 	local InExperienceOverlay = Instance.new("ScreenGui")
 	InExperienceOverlay.Name = "InExperienceOverlay"
 	InExperienceOverlay.DisplayOrder = 6
@@ -33,8 +31,7 @@ return function()
 			Popups = ReactModule.createElement(View, { tag = "size-full" }, {
 				HeadsetDisconnectDialog = ReactModule.createElement(Components.HeadsetDisconnectDialog),
 				HurtOverlay = ReactModule.createElement(Components.HurtOverlay),
-				InExperienceUiSelector = if FFlagEnableUISelector then ReactModule.createElement(Components.InExperienceUiSelector) else nil,
-				CloudPlayUnsuccessfulJoinSnackbar = if FFlagUseUIOverlayForCloudPlay then ReactModule.createElement(CloudPlayUnsuccessfulJoinSnackbar, { insetFromDeviceSafeArea = true }) else nil
+				InExperienceUiSelector = if FFlagEnableUISelector then ReactModule.createElement(Components.InExperienceUiSelector) else nil
 			}),
 			Binders = ReactModule.createElement(ReactModule.Fragment, {}, {
 				SongbirdDebugAudio = ReactModule.createElement(SongbirdModule.DebugAudioEmitters)

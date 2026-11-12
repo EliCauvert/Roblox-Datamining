@@ -13,7 +13,6 @@ return {
 	Functional = require(script.Functional),
 	callOnce = require(script.callOnce),
 	memoize = require(script.memoize),
-	nextWrappedInteger = require(script.nextWrappedInteger),
 	OrderedMap = require(script.OrderedMap),
 	Text = require(script.Text),
 	Symbol = require(script.Symbol),

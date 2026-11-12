@@ -3,20 +3,18 @@ local Parent1 = Parent.Parent
 local ReactModule = require(Parent1.React)
 local SignalsModule = require(Parent1.Signals)
 local SignalsReactModule = require(Parent1.SignalsReact)
-local UseTokensFunction = require(Parent1.Foundation).Hooks.useTokens
 local _ = require(Parent1.LeaderboardStore)
 local StatCellModule = require(Parent.Components.Presentation.StatCell)
 local LeaderboardRowShellModule = require(Parent.Components.Presentation.LeaderboardRowShell)
 local PeopleCellModule = require(Parent.Components.Presentation.PeopleCell)
 local ResolveDisplayNameModule = require(Parent.Common.resolveDisplayName)
 local _ = require(Parent.Common.computeStatColumns)
-local FFlagPlayerListContrastingTeamTextModule = require(Parent.Flags.FFlagPlayerListContrastingTeamText)
 local TEAMLAYOUTMULTIPLIER = require(Parent.Common.Constants).TEAM_LAYOUT_MULTIPLIER
 local Signal = SignalsModule.createSignal({})
 local config = { Selectable = true }
 
-local function buildEntryViewElement(p1, p2, LayoutOrder, OnActivated, RowRef, Selection, p3)
-	-- upvalues: ReactModule (copy), PeopleCellModule (copy), ResolveDisplayNameModule (copy), StatCellModule (copy), FFlagPlayerListContrastingTeamTextModule (copy), LeaderboardRowShellModule (copy)
+local function buildEntryViewElement(p1, p2, LayoutOrder, OnActivated, RowRef, Selection)
+	-- upvalues: ReactModule (copy), PeopleCellModule (copy), ResolveDisplayNameModule (copy), StatCellModule (copy), LeaderboardRowShellModule (copy)
 	local RowHeight = p1.rowHeight
 	local StatColumns = p1.statColumns or {}
 	local config = {
@@ -34,9 +32,7 @@ local function buildEntryViewElement(p1, p2, LayoutOrder, OnActivated, RowRef, S
 			playerStat = if p2 then p2.stats.getData(statColumn.name, false) else nil,
 			statWidth = p1.statWidth,
 			rowHeight = RowHeight,
-			layoutOrder = i + 1,
-			fontStyle = if FFlagPlayerListContrastingTeamTextModule then p3.Typography.BodySmall else nil,
-			textStyle = if FFlagPlayerListContrastingTeamTextModule then p3.Color.Content.Default else nil
+			layoutOrder = i + 1
 		})
 	end
 	return ReactModule.createElement(LeaderboardRowShellModule, {
@@ -50,33 +46,33 @@ local function buildEntryViewElement(p1, p2, LayoutOrder, OnActivated, RowRef, S
 	}, config)
 end
 
-local function useEntryViewCore(p4)
+local function useEntryViewCore(p3)
 	-- upvalues: ReactModule (copy), SignalsReactModule (copy), Signal (copy), SignalsModule (copy), TEAMLAYOUTMULTIPLIER (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: p4 (copy), UseRefResult (copy)
-		if p4.onActivated then
-			p4.onActivated(p4.player, if UseRefResult.current then UseRefResult.current.AbsolutePosition else nil, UseRefResult.current)
+		-- upvalues: p3 (copy), UseRefResult (copy)
+		if p3.onActivated then
+			p3.onActivated(p3.player, if UseRefResult.current then UseRefResult.current.AbsolutePosition else nil, UseRefResult.current)
 		end
-	end, { p4.player, p4.onActivated })
-	local PlayerEntry = p4.leaderboardStore.getPlayerEntry(p4.player, false)
+	end, { p3.player, p3.onActivated })
+	local PlayerEntry = p3.leaderboardStore.getPlayerEntry(p3.player, false)
 	SignalsReactModule.useSignalState(if PlayerEntry then PlayerEntry.stats.getAllData else Signal)
 	
 	return UseRefResult, PlayerEntry, SignalsReactModule.useSignalBinding((ReactModule.useMemo(function()
-		-- upvalues: SignalsModule (upval), PlayerEntry (copy), p4 (copy), TEAMLAYOUTMULTIPLIER (upval)
-		return SignalsModule.createComputed(function(p5)
-			-- upvalues: PlayerEntry (upval), p4 (upval), TEAMLAYOUTMULTIPLIER (upval)
-			return if PlayerEntry and p4.teamOrder ~= nil then p4.teamOrder * TEAMLAYOUTMULTIPLIER + PlayerEntry.order(p5) else p4.layoutOrder or 0
+		-- upvalues: SignalsModule (upval), PlayerEntry (copy), p3 (copy), TEAMLAYOUTMULTIPLIER (upval)
+		return SignalsModule.createComputed(function(p4)
+			-- upvalues: PlayerEntry (upval), p3 (upval), TEAMLAYOUTMULTIPLIER (upval)
+			return if PlayerEntry and p3.teamOrder ~= nil then p3.teamOrder * TEAMLAYOUTMULTIPLIER + PlayerEntry.order(p4) else p3.layoutOrder or 0
 		end)
-	end, { PlayerEntry, p4.teamOrder, p4.layoutOrder }))), UseResult
+	end, { PlayerEntry, p3.teamOrder, p3.layoutOrder }))), UseResult
 end
 
-return ReactModule.memo(function(p4)
-	-- upvalues: useEntryViewCore (copy), FFlagPlayerListContrastingTeamTextModule (copy), UseTokensFunction (copy), ReactModule (copy), buildEntryViewElement (copy), config (copy)
-	local UseEntryViewCoreResult, UseEntryViewCoreResult2, UseEntryViewCoreResult3, UseEntryViewCoreResult4 = useEntryViewCore(p4)
-	local RowRefForwardFunction = p4.rowRefForward
+return ReactModule.memo(function(p3)
+	-- upvalues: useEntryViewCore (copy), ReactModule (copy), buildEntryViewElement (copy), config (copy)
+	local UseEntryViewCoreResult, UseEntryViewCoreResult2, UseEntryViewCoreResult3, UseEntryViewCoreResult4 = useEntryViewCore(p3)
+	local RowRefForwardFunction = p3.rowRefForward
 	
-	return buildEntryViewElement(p4, UseEntryViewCoreResult2, UseEntryViewCoreResult3, UseEntryViewCoreResult4, ReactModule.useCallback(function(Current)
+	return buildEntryViewElement(p3, UseEntryViewCoreResult2, UseEntryViewCoreResult3, UseEntryViewCoreResult4, ReactModule.useCallback(function(Current)
 		-- upvalues: UseEntryViewCoreResult (copy), RowRefForwardFunction (copy)
 		UseEntryViewCoreResult.current = Current
 		
@@ -88,5 +84,5 @@ return ReactModule.memo(function(p4)
 			end
 			RowRefForwardFunction.current = Current
 		end
-	end, { UseEntryViewCoreResult, RowRefForwardFunction }), config, if FFlagPlayerListContrastingTeamTextModule then UseTokensFunction() else nil)
+	end, { UseEntryViewCoreResult, RowRefForwardFunction }), config)
 end)

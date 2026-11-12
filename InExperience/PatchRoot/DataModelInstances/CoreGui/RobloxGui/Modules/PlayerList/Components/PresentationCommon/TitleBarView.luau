@@ -2,7 +2,9 @@
 local CoreGui = game:GetService("CoreGui")
 local ReactModule = require(CorePackages.Packages.React)
 local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
-local NormalizeFontFaceFunction = require(CorePackages.Packages.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local PlayerListModule = require(CorePackages.Workspace.Packages.PlayerList)
 local _ = require(CorePackages.Workspace.Packages.LeaderboardStore)
 local GameTranslatorModule = require(CoreGui:WaitForChild("RobloxGui").Modules.GameTranslator)
@@ -21,7 +23,7 @@ local config = {
 }
 
 return ReactModule.memo(function(List)
-	-- upvalues: config (copy), UseLayoutValuesFunction (copy), UseStyleFunction (copy), ReactModule (copy), RobloxTranslatorModule (copy), NormalizeFontFaceFunction (copy), FFlagEnableMobilePlayerListOnConsole (copy), FFlagPlayerListFixLeaderstatsStacking (copy), SignalsReactModule (copy), GameTranslatorModule (copy), CoreGui (copy), CorePackages (copy)
+	-- upvalues: config (copy), UseLayoutValuesFunction (copy), UseStyleFunction (copy), ReactModule (copy), RobloxTranslatorModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), FFlagEnableMobilePlayerListOnConsole (copy), FFlagPlayerListFixLeaderstatsStacking (copy), SignalsReactModule (copy), GameTranslatorModule (copy), CoreGui (copy), CorePackages (copy)
 	local t = {}
 	
 	for i, value in pairs(config) do
@@ -47,7 +49,8 @@ return ReactModule.memo(function(List)
 			Text = RobloxTranslatorModule:FormatByKey("InGame.PlayerList.Players"),
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Center,
-			FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionSmall.Font),
+			Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Footer.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionSmall.Font) else nil,
 			TextSize = if FFlagEnableMobilePlayerListOnConsole then UseLayoutValuesResult.TitleBarTextSize else UseStyleResult.Font.BaseSize * UseStyleResult.Font.Footer.RelativeSize,
 			TextTransparency = Transparency,
 			TextColor3 = CustomTextColor
@@ -67,7 +70,8 @@ return ReactModule.memo(function(List)
 					Text = GameTranslatorModule:TranslateGameText(CoreGui, i2),
 					TextXAlignment = Enum.TextXAlignment.Center,
 					TextYAlignment = Enum.TextYAlignment.Center,
-					FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionSmall.Font),
+					Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Footer.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionSmall.Font) else nil,
 					TextSize = if FFlagEnableMobilePlayerListOnConsole then UseLayoutValuesResult.TitleBarTextSize else UseStyleResult.Font.BaseSize * UseStyleResult.Font.Footer.RelativeSize,
 					TextTransparency = Transparency,
 					TextColor3 = CustomTextColor,
@@ -77,7 +81,7 @@ return ReactModule.memo(function(List)
 		end
 	elseif t.gameStatsCount and t.gameStatsCount > 0 then
 		t.gameStats.iterateData(function(Text, p1)
-			-- upvalues: MaxLeaderstats (copy), GameTranslatorModule (upval), CoreGui (upval), TextLabels (copy), ReactModule (upval), UseLayoutValuesResult (copy), NormalizeFontFaceFunction (upval), UseStyleResult (copy), FFlagEnableMobilePlayerListOnConsole (upval), Transparency (copy), CustomTextColor (copy)
+			-- upvalues: MaxLeaderstats (copy), GameTranslatorModule (upval), CoreGui (upval), TextLabels (copy), ReactModule (upval), UseLayoutValuesResult (copy), FoundationFontFaceMigration (upval), UseStyleResult (copy), NormalizeFontFaceFunction (upval), FFlagEnableMobilePlayerListOnConsole (upval), Transparency (copy), CustomTextColor (copy)
 			if MaxLeaderstats >= p1.order(false) then
 				TextLabels["stat_" .. Text] = ReactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
@@ -86,7 +90,8 @@ return ReactModule.memo(function(List)
 					Text = GameTranslatorModule:TranslateGameText(CoreGui, Text),
 					TextXAlignment = Enum.TextXAlignment.Center,
 					TextYAlignment = Enum.TextYAlignment.Center,
-					FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionSmall.Font),
+					Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Footer.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionSmall.Font) else nil,
 					TextSize = if FFlagEnableMobilePlayerListOnConsole then UseLayoutValuesResult.TitleBarTextSize else UseStyleResult.Font.BaseSize * UseStyleResult.Font.Footer.RelativeSize,
 					TextTransparency = Transparency,
 					TextColor3 = CustomTextColor,

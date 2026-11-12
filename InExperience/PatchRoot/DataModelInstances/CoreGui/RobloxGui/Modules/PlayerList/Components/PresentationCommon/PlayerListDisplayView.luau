@@ -300,7 +300,7 @@ return ReactModule.memo(function(p1)
 		-- upvalues: UsePlayerListFocusNavigationResult (copy)
 		UsePlayerListFocusNavigationResult.setTitlePlayerInstance(p2)
 	end, { UsePlayerListFocusNavigationResult }) else nil
-	local UseResult51 = if FFlagPlayerListUseFocusNavHook then ReactModule.useCallback(function(_)
+	local UseResult6 = if FFlagPlayerListUseFocusNavHook then ReactModule.useCallback(function(_)
 		-- upvalues: UsePlayerListFocusNavigationResult (copy)
 		UsePlayerListFocusNavigationResult.setTitlePlayerInstance(nil)
 	end, { UsePlayerListFocusNavigationResult }) else nil
@@ -329,7 +329,7 @@ return ReactModule.memo(function(p1)
 			},
 			setDropDownPlayerDimensionY = UseStateResult2_4,
 			registerPlayerInstance = if FFlagPlayerListUseFocusNavHook then UseResult5 else nil,
-			unregisterPlayerInstance = if FFlagPlayerListUseFocusNavHook then UseResult51 else nil,
+			unregisterPlayerInstance = if FFlagPlayerListUseFocusNavHook then UseResult6 else nil,
 			setSelectedPlayerId = if FFlagPlayerListUseFocusNavHook then UsePlayerListFocusNavigationResult.setSelectedPlayerId else nil
 		})
 		config1.BottomDiv = ReactModule.createElement("Frame", {

@@ -19,12 +19,18 @@ local TextChatService = game:GetService("TextChatService")
 local SafetyService = game:GetService("SafetyService")
 local ExperienceStateCaptureService = if game:GetEngineFeature("CaptureModeEnabled") then game:GetService("ExperienceStateCaptureService") else nil
 local IsInExperienceUIVREnabled = require(CorePackages.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
+local FFlagIEMSettingsGroupsModule = require(RobloxGui.Modules.Settings.Flags.FFlagIEMSettingsGroups)
 local NewResult = nil
 NewResult = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
 local GetCamMicPermissionsModule = require(RobloxGui.Modules.Settings.getCamMicPermissions)
 local IsCamEnabledForUserAndPlaceModule = require(RobloxGui.Modules.Settings.isCamEnabledForUserAndPlace)
-local RenderSettingsHeaderModule = require(RobloxGui.Modules.Settings.Components.renderSettingsHeader)
-local RenderSettingsDividerModule = require(RobloxGui.Modules.Settings.Components.renderSettingsDivider)
+local Callback = nil
+local Callback1 = nil
+
+if FFlagIEMSettingsGroupsModule then
+	Callback = require(RobloxGui.Modules.Settings.Components.renderSettingsHeader)
+	Callback1 = require(RobloxGui.Modules.Settings.Components.renderSettingsDivider)
+end
 local RenderMoreSettingsBannerModule = if require(RobloxGui.Modules.Settings.Flags.FFlagEnablePioneerIGMSettingsBanner) and require(CorePackages.Workspace.Packages.PioneerUtils).isPioneerLaunch() then require(RobloxGui.Modules.Settings.Components.renderMoreSettingsBanner) else nil
 local Default = require(CorePackages.Workspace.Packages.PermissionsProtocol).PermissionsProtocol.default
 local IsVoiceFocusedFunction = require(CorePackages.Workspace.Packages.CrossExperience).Utils.isVoiceFocused
@@ -58,6 +64,7 @@ local FFlagRenameVolumeToMainVolumeModule = require(RobloxGui.Modules.Flags.FFla
 local FFlagAIRephraseSettingEnabled = require(CorePackages.Workspace.Packages.SharedFlags).FFlagAIRephraseSettingEnabled
 local FFlagChatSummariesSettingEnabled = SharedFlagsModule.FFlagChatSummariesSettingEnabled
 local FFlagExpChatDictation = SharedFlagsModule.FFlagExpChatDictationVoiceTypingModeSetting and (SharedFlagsModule.FFlagExpChatDictation or SharedFlagsModule.FFlagExpChatContinuousDictation)
+local FFlagExpChatEnableFriendsTab = SharedFlagsModule.FFlagExpChatEnableFriendsTab
 local FFlagVoiceRewarmTelemetry = SharedFlagsModule.FFlagVoiceRewarmTelemetry
 local DebounceVoiceSelectorIndexChange = game:DefineFastFlag("DebounceVoiceSelectorIndexChange", false)
 local VoiceSelectorIgnoreFailedStateDisconnect = game:DefineFastFlag("VoiceSelectorIgnoreFailedStateDisconnect", false)
@@ -306,7 +313,7 @@ local function getFirstValueChangerFrame(NewPage)
 end
 
 return ((function()
-	-- upvalues: IGMEnableGFXReset (copy), GfxResetModule (copy), RobloxGui (copy), GetFFlagLazyInitiateExperienceLanguageSwitcherModule (copy), VRService (copy), GameSettings (copy), UtilityModule (copy), SETTINGSMENULAYOUTORDER (copy), GuiService (copy), GetFFlagFixCyclicFullscreenIndexEventModule (copy), GetFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy), RbxAnalyticsService (copy), ConstantsModule (copy), GameBasicSettingsFramerateCapEngineFeature (copy), FramerateCapIOSOptions (copy), Platform (copy), EraseFPSFromDefaultSetting (copy), RobloxTranslatorModule (copy), InGameGraphicsFollowsSavedQuality (copy), SavedQualityFollowerModule (copy), RomarkStartWithGraphicQualityLevelFastInt (copy), config (copy), UpdateVisibilitySettingsCopy (copy), FFlagUpdatePeopleNamesSettingCopyModule (copy), config6 (copy), UserGameSettings (copy), NewResult (ref), UIScaleOptions (copy), UserInputService (copy), CreateFunction (copy), ThemeModule (copy), CenterShiftLockOverride (copy), MicroProfilerReadOnlyInformationLabel (copy), TouchEnabled (copy), IsPlatformMatch1 (copy), IsPlatformMatch (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), LocalPlayer (copy), CoreUtilityModule (copy), config3 (copy), GetFFlagAlwaysShowVRToggleModule (copy), GetAppFeaturePoliciesFunction (copy), config5 (copy), FeatureSettingsHubTouchMovementModeClassicThumbstick (copy), config2 (copy), config1 (copy), Url (copy), HttpService (copy), FeedbackEntryPointImprovedStrictnessCheck (copy), SafetyService (copy), ExperienceStateCaptureService (ref), FeedbackEntryPointButtonSizeAdjustment2 (copy), CoreScriptsFeedbackEntryPointButtonText (copy), DisableFeedbackSoothsayerCheck (copy), NewResult1 (copy), Players (copy), FeatureSettingsHubLanguageSelectionUnavailable (copy), RunService (copy), GetFFlagChatTranslationWaitForIXPModule (copy), IXPServiceWrapper (copy), GetFFlagChatTranslationNewDefaultsModule (copy), FFlagRenameVolumeToMainVolumeModule (copy), GetFFlagEnablePartyVoiceVolumeOnlyWhenInEligiblePartyFunction (copy), Default3 (copy), VoiceVolumeControlsDisableInteractionWhenNoMasterVolume (copy), FFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (copy), CorePackages (copy), ContextActionService (copy), FixDeveloperConsoleButtonSizeAndPositioning (copy), PlayerPermissionsModule (copy), UserFreecamGuiDestabilization (copy), UserShowGuiHideToggles (copy), SoundService (copy), GetFIntVoiceChatDeviceChangeDebounceDelayModule (copy), Default2 (copy), GetFFlagEnableCrossExpVoiceFunction (copy), SignalsModule (copy), GetFIntDebounceAIRephraseSettingDelayModule (copy), TextChatService (copy), ExpChatDebounceRephraseIndexSelection (copy), ThrottleFunctionCallModule (copy), GetFIntDebounceChatSummariesSettingDelayModule (copy), FeatureSettingsHubVideoVideoCamera (copy), GetFFlagVoiceChatUILoggingModule (copy), VideoCaptureService (copy), FeatureSettingsHubVideoSystemDefault (copy), RUUserScalePreferenceAPIEngineFeature (copy), FFlagUIScaleEngineOptions (copy), DifferentiateVoiceSelectorSystemAndUser (copy), VoiceSelectorAvailableAfterFae (copy), GetFIntDebounceDisconnectButtonDelayModule (copy), FFlagVoiceRewarmTelemetry (copy), ConstantsModule1 (copy), VoiceSelectorIgnoreFailedStateDisconnect (copy), VoiceChatSelectorReconnectFocus2AEGIS2 (copy), DebounceVoiceSelectorIndexChange (copy), DeferProgrammaticChange (copy), HideVoiceChatSelectorForFaeAEGIS2 (copy), IsVoiceFocusedFunction (copy), ObserveIsVoiceFocusedFunction (copy), FFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (copy), VoiceVolumeControlsFixSliderVisibilityOnEligibleGames (copy), VoiceVolumeControlsSuppressInExperienceUiForPartyVoice (copy), GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction (copy), VoiceVolumeControlsEligibility (copy), GetFFlagEnableUniveralVoiceToastsModule (copy), config4 (copy), GetFFlagSelfViewCameraSettingsFunction (copy), IsCamEnabledForUserAndPlaceModule (copy), GetCamMicPermissionsModule (copy), Default (copy), CameraDevicePermissionGrantedSignalModule (copy), IsEnabled (copy), FFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry (copy), HasPartyVoiceVolume (copy), ShowAntiHarassmentSettings (copy), GetFFlagEnablePlayerNamesEnabledSettingModule (copy), PlayerChoiceTranslationSettingInitializerModule (copy), CachedPolicyServiceModule (copy), Inverted1 (copy), FFlagBadgeVisibilitySettingEnabled (copy), FFlagEnableModerateChatRemoteEvent (copy), FFlagAIRephraseSettingEnabled (copy), FFlagChatSummariesSettingEnabled (copy), FFlagExpChatDictation (copy), GetHasGuiHidingPermissionModule (copy), RenderMoreSettingsBannerModule (ref), RenderSettingsHeaderModule (copy), RenderSettingsDividerModule (copy), Migration (copy), BuilderIconsModule (copy), EnableTFFeedbackModeEntryCheck (copy), GetFFlagEnableLocalesForExperienceLanguageSwitcherModule (copy), ExperienceLanguageSwitcherInitializerModule (copy), getLastValueChangerFrame (copy), FFlagIEMTabFocusNav (copy), getFirstValueChangerFrame (copy), GetFFlagChatTranslationSettingEnabledModule (copy), GetFFlagChatTranslationHoldoutEnabledModule (copy), GetFStringChatTranslationLayerNameModule (copy), TextChatServiceSettingsSavedEngineFeature (copy), GetFFlagChatTranslationForceSettingModule (copy), ChatTranslationOptionsWithChatLanguageSwitcherInitializerModule (copy)
+	-- upvalues: IGMEnableGFXReset (copy), GfxResetModule (copy), RobloxGui (copy), GetFFlagLazyInitiateExperienceLanguageSwitcherModule (copy), VRService (copy), GameSettings (copy), UtilityModule (copy), SETTINGSMENULAYOUTORDER (copy), GuiService (copy), GetFFlagFixCyclicFullscreenIndexEventModule (copy), GetFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy), RbxAnalyticsService (copy), ConstantsModule (copy), GameBasicSettingsFramerateCapEngineFeature (copy), FramerateCapIOSOptions (copy), Platform (copy), EraseFPSFromDefaultSetting (copy), RobloxTranslatorModule (copy), InGameGraphicsFollowsSavedQuality (copy), SavedQualityFollowerModule (copy), RomarkStartWithGraphicQualityLevelFastInt (copy), config (copy), UpdateVisibilitySettingsCopy (copy), FFlagUpdatePeopleNamesSettingCopyModule (copy), config6 (copy), UserGameSettings (copy), NewResult (ref), UIScaleOptions (copy), UserInputService (copy), CreateFunction (copy), ThemeModule (copy), CenterShiftLockOverride (copy), MicroProfilerReadOnlyInformationLabel (copy), TouchEnabled (copy), IsPlatformMatch1 (copy), IsPlatformMatch (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), LocalPlayer (copy), CoreUtilityModule (copy), config3 (copy), GetFFlagAlwaysShowVRToggleModule (copy), GetAppFeaturePoliciesFunction (copy), config5 (copy), FeatureSettingsHubTouchMovementModeClassicThumbstick (copy), config2 (copy), config1 (copy), Url (copy), HttpService (copy), FeedbackEntryPointImprovedStrictnessCheck (copy), SafetyService (copy), ExperienceStateCaptureService (ref), FeedbackEntryPointButtonSizeAdjustment2 (copy), CoreScriptsFeedbackEntryPointButtonText (copy), DisableFeedbackSoothsayerCheck (copy), NewResult1 (copy), Players (copy), FeatureSettingsHubLanguageSelectionUnavailable (copy), RunService (copy), GetFFlagChatTranslationWaitForIXPModule (copy), IXPServiceWrapper (copy), GetFFlagChatTranslationNewDefaultsModule (copy), FFlagRenameVolumeToMainVolumeModule (copy), GetFFlagEnablePartyVoiceVolumeOnlyWhenInEligiblePartyFunction (copy), Default3 (copy), VoiceVolumeControlsDisableInteractionWhenNoMasterVolume (copy), FFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (copy), CorePackages (copy), ContextActionService (copy), FixDeveloperConsoleButtonSizeAndPositioning (copy), PlayerPermissionsModule (copy), UserFreecamGuiDestabilization (copy), UserShowGuiHideToggles (copy), SoundService (copy), GetFIntVoiceChatDeviceChangeDebounceDelayModule (copy), Default2 (copy), GetFFlagEnableCrossExpVoiceFunction (copy), SignalsModule (copy), GetFIntDebounceAIRephraseSettingDelayModule (copy), TextChatService (copy), ExpChatDebounceRephraseIndexSelection (copy), ThrottleFunctionCallModule (copy), GetFIntDebounceChatSummariesSettingDelayModule (copy), FeatureSettingsHubVideoVideoCamera (copy), GetFFlagVoiceChatUILoggingModule (copy), VideoCaptureService (copy), FeatureSettingsHubVideoSystemDefault (copy), RUUserScalePreferenceAPIEngineFeature (copy), FFlagUIScaleEngineOptions (copy), DifferentiateVoiceSelectorSystemAndUser (copy), VoiceSelectorAvailableAfterFae (copy), GetFIntDebounceDisconnectButtonDelayModule (copy), FFlagVoiceRewarmTelemetry (copy), ConstantsModule1 (copy), VoiceSelectorIgnoreFailedStateDisconnect (copy), VoiceChatSelectorReconnectFocus2AEGIS2 (copy), DebounceVoiceSelectorIndexChange (copy), DeferProgrammaticChange (copy), HideVoiceChatSelectorForFaeAEGIS2 (copy), IsVoiceFocusedFunction (copy), ObserveIsVoiceFocusedFunction (copy), FFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (copy), VoiceVolumeControlsFixSliderVisibilityOnEligibleGames (copy), VoiceVolumeControlsSuppressInExperienceUiForPartyVoice (copy), GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction (copy), VoiceVolumeControlsEligibility (copy), GetFFlagEnableUniveralVoiceToastsModule (copy), config4 (copy), GetFFlagSelfViewCameraSettingsFunction (copy), IsCamEnabledForUserAndPlaceModule (copy), GetCamMicPermissionsModule (copy), Default (copy), CameraDevicePermissionGrantedSignalModule (copy), IsEnabled (copy), FFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry (copy), HasPartyVoiceVolume (copy), ShowAntiHarassmentSettings (copy), GetFFlagEnablePlayerNamesEnabledSettingModule (copy), PlayerChoiceTranslationSettingInitializerModule (copy), CachedPolicyServiceModule (copy), Inverted1 (copy), FFlagBadgeVisibilitySettingEnabled (copy), FFlagEnableModerateChatRemoteEvent (copy), FFlagAIRephraseSettingEnabled (copy), FFlagChatSummariesSettingEnabled (copy), FFlagExpChatDictation (copy), FFlagExpChatEnableFriendsTab (copy), GetHasGuiHidingPermissionModule (copy), RenderMoreSettingsBannerModule (ref), FFlagIEMSettingsGroupsModule (copy), Callback (ref), Callback1 (ref), Migration (copy), BuilderIconsModule (copy), EnableTFFeedbackModeEntryCheck (copy), GetFFlagEnableLocalesForExperienceLanguageSwitcherModule (copy), ExperienceLanguageSwitcherInitializerModule (copy), getLastValueChangerFrame (copy), FFlagIEMTabFocusNav (copy), getFirstValueChangerFrame (copy), GetFFlagChatTranslationSettingEnabledModule (copy), GetFFlagChatTranslationHoldoutEnabledModule (copy), GetFStringChatTranslationLayerNameModule (copy), TextChatServiceSettingsSavedEngineFeature (copy), GetFFlagChatTranslationForceSettingModule (copy), ChatTranslationOptionsWithChatLanguageSwitcherInitializerModule (copy)
 	if IGMEnableGFXReset then
 		GfxResetModule.RunGfxReset()
 	end
@@ -1197,11 +1204,11 @@ return ((function()
 		if NewPage.ShiftLockFrame then
 			NewPage.ShiftLockFrame.Visible = KeyboardEnabled
 		end
-		local NoDevEnableMouseLock1 = not LocalPlayer.DevEnableMouseLock
+		local NoDevEnableMouseLock = not LocalPlayer.DevEnableMouseLock
 		
 		if NewPage.ShiftLockOverrideText then
-			NewPage.ShiftLockOverrideText.Visible = NoDevEnableMouseLock1
-			local DevEnableMouseLock = not NoDevEnableMouseLock1 and LocalPlayer.DevEnableMouseLock
+			NewPage.ShiftLockOverrideText.Visible = NoDevEnableMouseLock
+			local DevEnableMouseLock = not NoDevEnableMouseLock and LocalPlayer.DevEnableMouseLock
 			
 			if NewPage.ShiftLockMode then
 				NewPage.ShiftLockMode.SelectorFrame.Visible = DevEnableMouseLock
@@ -1672,11 +1679,11 @@ return ((function()
 				end
 			end
 		end
-		local NoDevEnableMouseLock = not LocalPlayer.DevEnableMouseLock
+		local NoDevEnableMouseLock1 = not LocalPlayer.DevEnableMouseLock
 		
 		if NewPage.ShiftLockOverrideText then
-			NewPage.ShiftLockOverrideText.Visible = NoDevEnableMouseLock
-			local DevEnableMouseLock = not NoDevEnableMouseLock and LocalPlayer.DevEnableMouseLock
+			NewPage.ShiftLockOverrideText.Visible = NoDevEnableMouseLock1
+			local DevEnableMouseLock = not NoDevEnableMouseLock1 and LocalPlayer.DevEnableMouseLock
 			
 			if NewPage.ShiftLockMode then
 				NewPage.ShiftLockMode.SelectorFrame.Visible = DevEnableMouseLock
@@ -4039,7 +4046,7 @@ return ((function()
 	NewPage.VoiceChatOptionsEnabled = false
 	local EventConnection = nil
 	local EventConnection1 = nil
-	local Callback: (() -> ())? = nil
+	local Callback2: (() -> ())? = nil
 	
 	if game:GetEngineFeature("VoiceChatSupported") then
 		spawn(function()
@@ -4214,7 +4221,7 @@ return ((function()
 			end
 		end)
 		
-		Callback = function()
+		Callback2 = function()
 			-- upvalues: EventConnection (ref), EventConnection1 (ref)
 			if EventConnection then
 				EventConnection:Disconnect()
@@ -4238,13 +4245,13 @@ return ((function()
 	end
 	
 	if GetFFlagSelfViewCameraSettingsFunction() and (not IsInExperienceUIVREnabled or not IsSpatialFunction()) then
-		local function v236(p8)
+		local function v243(p8)
 			-- upvalues: NewPage (copy)
 			NewPage.VideoOptionsEnabled = p8.hasCameraPermissions
 		end
 		
 		if IsCamEnabledForUserAndPlaceModule() then
-			GetCamMicPermissionsModule(v236, { Default.Permissions.CAMERA_ACCESS }, true)
+			GetCamMicPermissionsModule(v243, { Default.Permissions.CAMERA_ACCESS }, true)
 			
 			if Connection2 then
 				Connection2:disconnect()
@@ -4458,7 +4465,9 @@ return ((function()
 	if FFlagExpChatDictation then
 		createVoiceTypingModeSettingOptions()
 	end
-	createChatNotificationsSettingOptions()
+	if FFlagExpChatEnableFriendsTab then
+		createChatNotificationsSettingOptions()
+	end
 	createDeveloperConsoleOption()
 	GetHasGuiHidingPermissionModule(RunService:IsStudio(), LocalPlayer, PlayerPermissionsModule):andThen(function(Result)
 		-- upvalues: createUiToggleOptions (copy)
@@ -4483,41 +4492,43 @@ return ((function()
 			parent = NewPage.Page
 		})
 	end
-	NewPage.AudioHeader = RenderSettingsHeaderModule({
-		headerText = "CoreScripts.InGameMenu.GameSettings.AudioHeader",
-		layoutOrder = SETTINGSMENULAYOUTORDER.AudioHeader,
-		parent = NewPage.Page
-	})
-	NewPage.AudioDivider = RenderSettingsDividerModule({
-		layoutOrder = SETTINGSMENULAYOUTORDER.AudioDivider,
-		parent = NewPage.Page
-	})
-	NewPage.DisplayHeader = RenderSettingsHeaderModule({
-		headerText = "CoreScripts.InGameMenu.GameSettings.DisplayHeader",
-		layoutOrder = SETTINGSMENULAYOUTORDER.DisplayHeader,
-		parent = NewPage.Page
-	})
-	NewPage.DisplayDivider = RenderSettingsDividerModule({
-		layoutOrder = SETTINGSMENULAYOUTORDER.DisplayDivider,
-		parent = NewPage.Page
-	})
-	
-	if not IsSpatialFunction() then
-		NewPage.LanguageHeader = RenderSettingsHeaderModule({
-			headerText = "CoreScripts.InGameMenu.GameSettings.LanguageHeader",
-			layoutOrder = SETTINGSMENULAYOUTORDER.LanguageHeader,
+	if FFlagIEMSettingsGroupsModule then
+		NewPage.AudioHeader = Callback({
+			headerText = "CoreScripts.InGameMenu.GameSettings.AudioHeader",
+			layoutOrder = SETTINGSMENULAYOUTORDER.AudioHeader,
 			parent = NewPage.Page
 		})
-		NewPage.LanguageDivider = RenderSettingsDividerModule({
-			layoutOrder = SETTINGSMENULAYOUTORDER.LanguageDivider,
+		NewPage.AudioDivider = Callback1({
+			layoutOrder = SETTINGSMENULAYOUTORDER.AudioDivider,
+			parent = NewPage.Page
+		})
+		NewPage.DisplayHeader = Callback({
+			headerText = "CoreScripts.InGameMenu.GameSettings.DisplayHeader",
+			layoutOrder = SETTINGSMENULAYOUTORDER.DisplayHeader,
+			parent = NewPage.Page
+		})
+		NewPage.DisplayDivider = Callback1({
+			layoutOrder = SETTINGSMENULAYOUTORDER.DisplayDivider,
+			parent = NewPage.Page
+		})
+		
+		if not IsSpatialFunction() then
+			NewPage.LanguageHeader = Callback({
+				headerText = "CoreScripts.InGameMenu.GameSettings.LanguageHeader",
+				layoutOrder = SETTINGSMENULAYOUTORDER.LanguageHeader,
+				parent = NewPage.Page
+			})
+			NewPage.LanguageDivider = Callback1({
+				layoutOrder = SETTINGSMENULAYOUTORDER.LanguageDivider,
+				parent = NewPage.Page
+			})
+		end
+		NewPage.ViewAndControlsHeader = Callback({
+			headerText = "CoreScripts.InGameMenu.GameSettings.ViewandControlsHeader",
+			layoutOrder = SETTINGSMENULAYOUTORDER.ViewAndControlsHeader,
 			parent = NewPage.Page
 		})
 	end
-	NewPage.ViewAndControlsHeader = RenderSettingsHeaderModule({
-		headerText = "CoreScripts.InGameMenu.GameSettings.ViewandControlsHeader",
-		layoutOrder = SETTINGSMENULAYOUTORDER.ViewAndControlsHeader,
-		parent = NewPage.Page
-	})
 	NewPage.TabHeader.Name = "GameSettingsTab"
 	local IconsCommonSettings = Migration.uiblox["icons/common/settings"]
 	NewPage.TabHeader.TabLabel.Icon.Text = IconsCommonSettings.name
@@ -4611,7 +4622,7 @@ return ((function()
 	end
 	
 	function NewPage.CloseSettingsPage()
-		-- upvalues: NewPage (copy), IsInExperienceUIVREnabled (upval), IsSpatialFunction (upval), SoundService (upval), DeviceListChangedConnection (ref), RUUserScalePreferenceAPIEngineFeature (upval), HeartbeatConnection (ref), Connection (ref), Connection1 (ref), ScaledCeiled (ref), ScaledFloored (ref), GetFFlagEnableCrossExpVoiceFunction (upval), Callback (ref), GetFFlagSelfViewCameraSettingsFunction (upval), VideoCaptureService (upval), DevicesChangedConnection (ref), Connection2 (ref), Default2 (upval), FFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (upval), FFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (upval)
+		-- upvalues: NewPage (copy), IsInExperienceUIVREnabled (upval), IsSpatialFunction (upval), SoundService (upval), DeviceListChangedConnection (ref), RUUserScalePreferenceAPIEngineFeature (upval), HeartbeatConnection (ref), Connection (ref), Connection1 (ref), ScaledCeiled (ref), ScaledFloored (ref), GetFFlagEnableCrossExpVoiceFunction (upval), Callback2 (ref), GetFFlagSelfViewCameraSettingsFunction (upval), VideoCaptureService (upval), DevicesChangedConnection (ref), Connection2 (ref), Default2 (upval), FFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (upval), FFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (upval)
 		NewPage.PageOpen = false
 		
 		if IsInExperienceUIVREnabled and IsSpatialFunction() then return end
@@ -4634,8 +4645,8 @@ return ((function()
 			ScaledCeiled = nil
 			ScaledFloored = nil
 		end
-		if GetFFlagEnableCrossExpVoiceFunction() and Callback then
-			Callback()
+		if GetFFlagEnableCrossExpVoiceFunction() and Callback2 then
+			Callback2()
 		end
 		if GetFFlagSelfViewCameraSettingsFunction() then
 			if game:GetEngineFeature("VideoCaptureService") and VideoCaptureService.DevicesChanged and DevicesChangedConnection then

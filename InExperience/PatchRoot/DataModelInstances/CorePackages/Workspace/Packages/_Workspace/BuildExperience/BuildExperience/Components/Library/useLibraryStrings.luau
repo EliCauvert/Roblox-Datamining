@@ -22,14 +22,6 @@ local config1 = {
 	searchEmpty = {
 		LocalizationStringsModule.LIBRARY_SEARCH_EMPTY,
 		"No search results found"
-	},
-	selectAll = {
-		LocalizationStringsModule.LIBRARY_SELECT_ALL,
-		"Select all"
-	},
-	selectFirst = {
-		LocalizationStringsModule.LIBRARY_SELECT_FIRST,
-		"Select first {count}"
 	}
 }
 

@@ -431,20 +431,20 @@ return function(Callback)
 							}) else p4
 						end)
 					end
-					local MessageId1 = p3.messageId
+					local MessageId = p3.messageId
 					
 					if FFlagExpChatMessagesStoreUseProxyModule then
-						Proxy[MessageId1] = nil
+						Proxy[MessageId] = nil
 					else
 						Signal2(function(p4)
-							-- upvalues: Dictionary (upval), MessageId1 (copy)
-							return Dictionary.removeKey(p4, MessageId1)
+							-- upvalues: Dictionary (upval), MessageId (copy)
+							return Dictionary.removeKey(p4, MessageId)
 						end)
 					end
 					if p3.userId then
-						local UserId1 = p3.userId
+						local UserId = p3.userId
 						
-						local function v156(p4)
+						local function v153(p4)
 							-- upvalues: FFlagExpChatMessagesStoreMemoryCleanupModule (upval), List (upval), p3 (upval)
 							if p4 then
 								local FilterResult = if FFlagExpChatMessagesStoreMemoryCleanupModule then List.filter(p4, function(MessageId): boolean
@@ -462,15 +462,15 @@ return function(Callback)
 						end
 						
 						if FFlagExpChatMessagesStoreUseProxyModule then
-							Proxy1[UserId1] = v156(Proxy1[UserId1])
+							Proxy1[UserId] = v153(Proxy1[UserId])
 							
 							return
 						end
 						Signal2_1(function(p4)
-							-- upvalues: v156 (copy), UserId1 (copy), Dictionary (upval)
-							local v4 = v156(p4[UserId1])
+							-- upvalues: v153 (copy), UserId (copy), Dictionary (upval)
+							local v4 = v153(p4[UserId])
 							
-							return if v4 == nil then Dictionary.removeKey(p4, UserId1) else Dictionary.join(p4, { [UserId1] = v4 })
+							return if v4 == nil then Dictionary.removeKey(p4, UserId) else Dictionary.join(p4, { [UserId] = v4 })
 						end)
 					end
 					return
@@ -481,9 +481,9 @@ return function(Callback)
 						writeByMessageId(p3.messageId, p3)
 					end
 					if not FFlagExpChatMessagesStoreMemoryCleanupModule and p3.userId then
-						local UserId2 = p3.userId
+						local UserId1 = p3.userId
 						
-						local function v159(List)
+						local function v155(List)
 							-- upvalues: p3 (upval), List (upval)
 							if not List then
 								return nil
@@ -500,15 +500,15 @@ return function(Callback)
 						end
 						
 						if FFlagExpChatMessagesStoreUseProxyModule then
-							Proxy1[UserId2] = v159(Proxy1[UserId2])
+							Proxy1[UserId1] = v155(Proxy1[UserId1])
 							
 							return
 						end
 						Signal2_1(function(p4)
-							-- upvalues: v159 (copy), UserId2 (copy), Dictionary (upval)
-							local v5 = v159(p4[UserId2])
+							-- upvalues: v155 (copy), UserId1 (copy), Dictionary (upval)
+							local v5 = v155(p4[UserId1])
 							
-							return if v5 == nil then Dictionary.removeKey(p4, UserId2) else Dictionary.join(p4, { [UserId2] = v5 })
+							return if v5 == nil then Dictionary.removeKey(p4, UserId1) else Dictionary.join(p4, { [UserId1] = v5 })
 						end)
 					end
 					return
@@ -534,25 +534,25 @@ return function(Callback)
 					end
 					if IsVisibleInChatWindow then return end
 				end
-				local UserId3 = p3.userId
+				local UserId2 = p3.userId
 				local PartOrModel = p3.partOrModel
 				
-				if not UserId3 and PartOrModel then
-					UserId3 = Signal10(false)[PartOrModel]
+				if not UserId2 and PartOrModel then
+					UserId2 = Signal10(false)[PartOrModel]
 					
-					if not UserId3 then
-						UserId3 = HttpService:GenerateGUID(false)
+					if not UserId2 then
+						UserId2 = HttpService:GenerateGUID(false)
 						Signal2_6(function(p4)
-							-- upvalues: Dictionary (upval), UserId3 (ref), PartOrModel (copy)
-							return Dictionary.join(p4, { [UserId3] = PartOrModel })
+							-- upvalues: Dictionary (upval), UserId2 (ref), PartOrModel (copy)
+							return Dictionary.join(p4, { [UserId2] = PartOrModel })
 						end)
 						Signal2_7(function(p4)
-							-- upvalues: Dictionary (upval), PartOrModel (copy), UserId3 (ref)
-							return Dictionary.join(p4, { [PartOrModel] = UserId3 })
+							-- upvalues: Dictionary (upval), PartOrModel (copy), UserId2 (ref)
+							return Dictionary.join(p4, { [PartOrModel] = UserId2 })
 						end)
 					end
 				end
-				local JoinResult = if UserId3 == p3.userId then p3 else Dictionary.join(p3, { userId = UserId3 })
+				local JoinResult = if UserId2 == p3.userId then p3 else Dictionary.join(p3, { userId = UserId2 })
 				local ChannelNameOverride = nil
 				
 				if GetFFlagTextChatEnableUniverseChatTabsFunction() and JoinResult.channelNameOverride then
@@ -565,34 +565,34 @@ return function(Callback)
 					local T = if ChannelNameOverride then Signal4(false)[ChannelNameOverride] or {} else {}
 					
 					if config.messageLimit <= #v8 then
-						local MessageId = v8[1]
-						local v9 = v1 and v1[MessageId]
+						local MessageId1 = v8[1]
+						local v9 = v1 and v1[MessageId1]
 						
 						if v9 then
 							if not FFlagExpChatMessagesStoreKeepInByMessageIdModule then
 								if FFlagExpChatMessagesStoreUseProxyModule then
-									Proxy[MessageId] = nil
+									Proxy[MessageId1] = nil
 								else
 									Signal2(function(p4)
-										-- upvalues: Dictionary (upval), MessageId (copy)
-										return Dictionary.removeKey(p4, MessageId)
+										-- upvalues: Dictionary (upval), MessageId1 (copy)
+										return Dictionary.removeKey(p4, MessageId1)
 									end)
 								end
 							end
 							if v9.userId then
-								local UserId4 = v9.userId
+								local UserId3 = v9.userId
 								
-								local function v174(p4)
-									-- upvalues: FFlagExpChatMessagesStoreMemoryCleanupModule (upval), List (upval), MessageId (copy), Signal9 (upval), v9 (copy), Signal2_7 (upval), Dictionary (upval), Signal2_6 (upval)
+								local function v171(p4)
+									-- upvalues: FFlagExpChatMessagesStoreMemoryCleanupModule (upval), List (upval), MessageId1 (copy), Signal9 (upval), v9 (copy), Signal2_7 (upval), Dictionary (upval), Signal2_6 (upval)
 									if not p4 then
 										return nil
 									end
 									local FilterResult = if FFlagExpChatMessagesStoreMemoryCleanupModule then List.filter(p4, function(p5): boolean
-										-- upvalues: MessageId (upval)
-										return p5 ~= MessageId
+										-- upvalues: MessageId1 (upval)
+										return p5 ~= MessageId1
 									end) else List.filter(p4, function(p5): boolean
-										-- upvalues: MessageId (upval)
-										return p5.messageId ~= MessageId
+										-- upvalues: MessageId1 (upval)
+										return p5.messageId ~= MessageId1
 									end)
 									
 									if #FilterResult ~= 0 then
@@ -615,13 +615,13 @@ return function(Callback)
 								end
 								
 								if FFlagExpChatMessagesStoreUseProxyModule then
-									Proxy1[UserId4] = v174(Proxy1[UserId4])
+									Proxy1[UserId3] = v171(Proxy1[UserId3])
 								else
 									Signal2_1(function(p4)
-										-- upvalues: v174 (copy), UserId4 (copy), Dictionary (upval)
-										local v10 = v174(p4[UserId4])
+										-- upvalues: v171 (copy), UserId3 (copy), Dictionary (upval)
+										local v10 = v171(p4[UserId3])
 										
-										return if v10 == nil then Dictionary.removeKey(p4, UserId4) else Dictionary.join(p4, { [UserId4] = v10 })
+										return if v10 == nil then Dictionary.removeKey(p4, UserId3) else Dictionary.join(p4, { [UserId3] = v10 })
 									end)
 								end
 							end
@@ -631,7 +631,7 @@ return function(Callback)
 							end)
 							
 							if FFlagExpChatMessagesStoreMemoryCleanupModule then
-								t2[MessageId] = nil
+								t2[MessageId1] = nil
 							end
 						end
 					end
@@ -665,9 +665,9 @@ return function(Callback)
 				writeByMessageId(JoinResult.messageId, JoinResult)
 				
 				if JoinResult.userId then
-					local UserId = JoinResult.userId
+					local UserId4 = JoinResult.userId
 					
-					local function v151(p4)
+					local function v173(p4)
 						-- upvalues: FFlagExpChatMessagesStoreMemoryCleanupModule (upval), JoinResult (copy), List (upval)
 						local P51 = p4 or {}
 						local Flag = false
@@ -694,13 +694,13 @@ return function(Callback)
 					end
 					
 					if FFlagExpChatMessagesStoreUseProxyModule then
-						Proxy1[UserId] = v151(Proxy1[UserId])
+						Proxy1[UserId4] = v173(Proxy1[UserId4])
 					else
 						Signal2_1(function(p4)
-							-- upvalues: v151 (copy), UserId (copy), Dictionary (upval)
-							local v10 = v151(p4[UserId])
+							-- upvalues: v173 (copy), UserId4 (copy), Dictionary (upval)
+							local v10 = v173(p4[UserId4])
 							
-							return if v10 == nil then Dictionary.removeKey(p4, UserId) else Dictionary.join(p4, { [UserId] = v10 })
+							return if v10 == nil then Dictionary.removeKey(p4, UserId4) else Dictionary.join(p4, { [UserId4] = v10 })
 						end)
 					end
 				end
@@ -738,10 +738,10 @@ return function(Callback)
 						local ChannelNameOverride1 = Signal14(false)
 						
 						if ChannelNameOverride1 == nil or ChannelNameOverride == ChannelNameOverride1 then
-							local MessageId = JoinResult.messageId
+							local MessageId2 = JoinResult.messageId
 							
 							if not v10 and not Flag1 then
-								Callback2(MessageId)
+								Callback2(MessageId2)
 							elseif Flag then
 								Flag1 = true
 							else
@@ -911,20 +911,20 @@ return function(Callback)
 							}) else p9
 						end)
 					end
-					local MessageId1 = config1.messageId
+					local MessageId = config1.messageId
 					
 					if FFlagExpChatMessagesStoreUseProxyModule then
-						Proxy[MessageId1] = nil
+						Proxy[MessageId] = nil
 					else
 						Signal2(function(p9)
-							-- upvalues: Dictionary (upval), MessageId1 (copy)
-							return Dictionary.removeKey(p9, MessageId1)
+							-- upvalues: Dictionary (upval), MessageId (copy)
+							return Dictionary.removeKey(p9, MessageId)
 						end)
 					end
 					if config1.userId then
-						local UserId1 = config1.userId
+						local UserId = config1.userId
 						
-						local function v156(p9)
+						local function v153(p9)
 							-- upvalues: FFlagExpChatMessagesStoreMemoryCleanupModule (upval), List (upval), config1 (upval)
 							if p9 then
 								local FilterResult = if FFlagExpChatMessagesStoreMemoryCleanupModule then List.filter(p9, function(MessageId): boolean
@@ -942,15 +942,15 @@ return function(Callback)
 						end
 						
 						if FFlagExpChatMessagesStoreUseProxyModule then
-							Proxy1[UserId1] = v156(Proxy1[UserId1])
+							Proxy1[UserId] = v153(Proxy1[UserId])
 							
 							return
 						end
 						Signal2_1(function(p9)
-							-- upvalues: v156 (copy), UserId1 (copy), Dictionary (upval)
-							local v4 = v156(p9[UserId1])
+							-- upvalues: v153 (copy), UserId (copy), Dictionary (upval)
+							local v4 = v153(p9[UserId])
 							
-							return if v4 == nil then Dictionary.removeKey(p9, UserId1) else Dictionary.join(p9, { [UserId1] = v4 })
+							return if v4 == nil then Dictionary.removeKey(p9, UserId) else Dictionary.join(p9, { [UserId] = v4 })
 						end)
 					end
 					return
@@ -961,9 +961,9 @@ return function(Callback)
 						writeByMessageId(config1.messageId, config1)
 					end
 					if not FFlagExpChatMessagesStoreMemoryCleanupModule and config1.userId then
-						local UserId2 = config1.userId
+						local UserId1 = config1.userId
 						
-						local function v159(List)
+						local function v155(List)
 							-- upvalues: config1 (upval), List (upval)
 							if not List then
 								return nil
@@ -980,15 +980,15 @@ return function(Callback)
 						end
 						
 						if FFlagExpChatMessagesStoreUseProxyModule then
-							Proxy1[UserId2] = v159(Proxy1[UserId2])
+							Proxy1[UserId1] = v155(Proxy1[UserId1])
 							
 							return
 						end
 						Signal2_1(function(p9)
-							-- upvalues: v159 (copy), UserId2 (copy), Dictionary (upval)
-							local v5 = v159(p9[UserId2])
+							-- upvalues: v155 (copy), UserId1 (copy), Dictionary (upval)
+							local v5 = v155(p9[UserId1])
 							
-							return if v5 == nil then Dictionary.removeKey(p9, UserId2) else Dictionary.join(p9, { [UserId2] = v5 })
+							return if v5 == nil then Dictionary.removeKey(p9, UserId1) else Dictionary.join(p9, { [UserId1] = v5 })
 						end)
 					end
 					return
@@ -1014,25 +1014,25 @@ return function(Callback)
 					end
 					if IsVisibleInChatWindow then return end
 				end
-				local UserId3 = config1.userId
+				local UserId2 = config1.userId
 				local PartOrModel = config1.partOrModel
 				
-				if not UserId3 and PartOrModel then
-					UserId3 = Signal10(false)[PartOrModel]
+				if not UserId2 and PartOrModel then
+					UserId2 = Signal10(false)[PartOrModel]
 					
-					if not UserId3 then
-						UserId3 = HttpService:GenerateGUID(false)
+					if not UserId2 then
+						UserId2 = HttpService:GenerateGUID(false)
 						Signal2_6(function(p9)
-							-- upvalues: Dictionary (upval), UserId3 (ref), PartOrModel (copy)
-							return Dictionary.join(p9, { [UserId3] = PartOrModel })
+							-- upvalues: Dictionary (upval), UserId2 (ref), PartOrModel (copy)
+							return Dictionary.join(p9, { [UserId2] = PartOrModel })
 						end)
 						Signal2_7(function(p9)
-							-- upvalues: Dictionary (upval), PartOrModel (copy), UserId3 (ref)
-							return Dictionary.join(p9, { [PartOrModel] = UserId3 })
+							-- upvalues: Dictionary (upval), PartOrModel (copy), UserId2 (ref)
+							return Dictionary.join(p9, { [PartOrModel] = UserId2 })
 						end)
 					end
 				end
-				local JoinResult = if UserId3 == config1.userId then config1 else Dictionary.join(config1, { userId = UserId3 })
+				local JoinResult = if UserId2 == config1.userId then config1 else Dictionary.join(config1, { userId = UserId2 })
 				local ChannelNameOverride = nil
 				
 				if GetFFlagTextChatEnableUniverseChatTabsFunction() and JoinResult.channelNameOverride then
@@ -1045,34 +1045,34 @@ return function(Callback)
 					local T = if ChannelNameOverride then Signal4(false)[ChannelNameOverride] or {} else {}
 					
 					if config.messageLimit <= #v8 then
-						local MessageId = v8[1]
-						local v9 = v1 and v1[MessageId]
+						local MessageId1 = v8[1]
+						local v9 = v1 and v1[MessageId1]
 						
 						if v9 then
 							if not FFlagExpChatMessagesStoreKeepInByMessageIdModule then
 								if FFlagExpChatMessagesStoreUseProxyModule then
-									Proxy[MessageId] = nil
+									Proxy[MessageId1] = nil
 								else
 									Signal2(function(p9)
-										-- upvalues: Dictionary (upval), MessageId (copy)
-										return Dictionary.removeKey(p9, MessageId)
+										-- upvalues: Dictionary (upval), MessageId1 (copy)
+										return Dictionary.removeKey(p9, MessageId1)
 									end)
 								end
 							end
 							if v9.userId then
-								local UserId4 = v9.userId
+								local UserId3 = v9.userId
 								
-								local function v174(p9)
-									-- upvalues: FFlagExpChatMessagesStoreMemoryCleanupModule (upval), List (upval), MessageId (copy), Signal9 (upval), v9 (copy), Signal2_7 (upval), Dictionary (upval), Signal2_6 (upval)
+								local function v171(p9)
+									-- upvalues: FFlagExpChatMessagesStoreMemoryCleanupModule (upval), List (upval), MessageId1 (copy), Signal9 (upval), v9 (copy), Signal2_7 (upval), Dictionary (upval), Signal2_6 (upval)
 									if not p9 then
 										return nil
 									end
 									local FilterResult = if FFlagExpChatMessagesStoreMemoryCleanupModule then List.filter(p9, function(p10): boolean
-										-- upvalues: MessageId (upval)
-										return p10 ~= MessageId
+										-- upvalues: MessageId1 (upval)
+										return p10 ~= MessageId1
 									end) else List.filter(p9, function(p10): boolean
-										-- upvalues: MessageId (upval)
-										return p10.messageId ~= MessageId
+										-- upvalues: MessageId1 (upval)
+										return p10.messageId ~= MessageId1
 									end)
 									
 									if #FilterResult ~= 0 then
@@ -1095,13 +1095,13 @@ return function(Callback)
 								end
 								
 								if FFlagExpChatMessagesStoreUseProxyModule then
-									Proxy1[UserId4] = v174(Proxy1[UserId4])
+									Proxy1[UserId3] = v171(Proxy1[UserId3])
 								else
 									Signal2_1(function(p9)
-										-- upvalues: v174 (copy), UserId4 (copy), Dictionary (upval)
-										local v10 = v174(p9[UserId4])
+										-- upvalues: v171 (copy), UserId3 (copy), Dictionary (upval)
+										local v10 = v171(p9[UserId3])
 										
-										return if v10 == nil then Dictionary.removeKey(p9, UserId4) else Dictionary.join(p9, { [UserId4] = v10 })
+										return if v10 == nil then Dictionary.removeKey(p9, UserId3) else Dictionary.join(p9, { [UserId3] = v10 })
 									end)
 								end
 							end
@@ -1111,7 +1111,7 @@ return function(Callback)
 							end)
 							
 							if FFlagExpChatMessagesStoreMemoryCleanupModule then
-								t2[MessageId] = nil
+								t2[MessageId1] = nil
 							end
 						end
 					end
@@ -1145,9 +1145,9 @@ return function(Callback)
 				writeByMessageId(JoinResult.messageId, JoinResult)
 				
 				if JoinResult.userId then
-					local UserId = JoinResult.userId
+					local UserId4 = JoinResult.userId
 					
-					local function v151(p9)
+					local function v173(p9)
 						-- upvalues: FFlagExpChatMessagesStoreMemoryCleanupModule (upval), JoinResult (copy), List (upval)
 						local P51 = p9 or {}
 						local Flag = false
@@ -1167,13 +1167,13 @@ return function(Callback)
 					end
 					
 					if FFlagExpChatMessagesStoreUseProxyModule then
-						Proxy1[UserId] = v151(Proxy1[UserId])
+						Proxy1[UserId4] = v173(Proxy1[UserId4])
 					else
 						Signal2_1(function(p10)
-							-- upvalues: v151 (copy), UserId (copy), Dictionary (upval)
-							local v10 = v151(p10[UserId])
+							-- upvalues: v173 (copy), UserId4 (copy), Dictionary (upval)
+							local v10 = v173(p10[UserId4])
 							
-							return if v10 == nil then Dictionary.removeKey(p10, UserId) else Dictionary.join(p10, { [UserId] = v10 })
+							return if v10 == nil then Dictionary.removeKey(p10, UserId4) else Dictionary.join(p10, { [UserId4] = v10 })
 						end)
 					end
 				end
@@ -1211,10 +1211,10 @@ return function(Callback)
 						local ChannelNameOverride1 = Signal14(false)
 						
 						if ChannelNameOverride1 == nil or ChannelNameOverride == ChannelNameOverride1 then
-							local MessageId = JoinResult.messageId
+							local MessageId2 = JoinResult.messageId
 							
 							if not v10 and not Flag1 then
-								Callback2(MessageId)
+								Callback2(MessageId2)
 							elseif Flag then
 								Flag1 = true
 							else
@@ -1315,8 +1315,8 @@ return function(Callback)
 		if FFlagExpChatMessageHistoryExperiment and IsHistorical then
 			ExpChatMessageHistoryExperimentation.logExposure(Signal7(false))
 		end
-		if config1.isVisibleInChatWindow or config1.isVisibleInBubbleChat or HasProxyEntry then
-			local function v217()
+		if config1.isVisibleInChatWindow or (config1.isVisibleInBubbleChat or HasProxyEntry) then
+			local function v207()
 				-- upvalues: FFlagExpChatMessagesStoreUseProxyModule (upval), Proxy (upval), Signal (upval), IsBorderlessBubbleChatEnabledModule (upval), config1 (copy), GetServerTimeNowMillisModule (upval), FFlagExpChatEvictFloodcheckedFromWindowOrderModule (upval), Signal2_2 (upval), List (upval), resolveChannelNameForMapOrder (upval), Signal2_3 (upval), Dictionary (upval), Signal2 (upval), FFlagExpChatMessagesStoreMemoryCleanupModule (upval), Proxy1 (upval), Signal2_1 (upval), FFlagExpChatRenderHistoricalMessagesModule (upval), writeByMessageId (upval), keepHistoricalFlag (upval), Signal3 (upval), config (upval), Signal10 (upval), HttpService (upval), Signal2_6 (upval), Signal2_7 (upval), GetFFlagTextChatEnableUniverseChatTabsFunction (upval), Signal11 (upval), Signal4 (upval), FFlagExpChatMessagesStoreKeepInByMessageIdModule (upval), Signal9 (upval), t2 (upval), insertWindowMessageIdInOrder (upval), FFlagExpChatMessageHistoryExperiment (upval), capHistoricalPrefix (upval), FFlagExpChatEnableV2ChatWindowModule (upval), Signal14 (upval), Flag1 (upval), Callback2 (upval), Flag (upval), Callback1 (upval)
 				local v10 = if FFlagExpChatMessagesStoreUseProxyModule then Proxy else Signal(false)
 				
@@ -1348,20 +1348,20 @@ return function(Callback)
 								}) else p11
 							end)
 						end
-						local MessageId1 = config1.messageId
+						local MessageId = config1.messageId
 						
 						if FFlagExpChatMessagesStoreUseProxyModule then
-							Proxy[MessageId1] = nil
+							Proxy[MessageId] = nil
 						else
 							Signal2(function(p11)
-								-- upvalues: Dictionary (upval), MessageId1 (copy)
-								return Dictionary.removeKey(p11, MessageId1)
+								-- upvalues: Dictionary (upval), MessageId (copy)
+								return Dictionary.removeKey(p11, MessageId)
 							end)
 						end
 						if config1.userId then
-							local UserId1 = config1.userId
+							local UserId = config1.userId
 							
-							local function v156(p11)
+							local function v153(p11)
 								-- upvalues: FFlagExpChatMessagesStoreMemoryCleanupModule (upval), List (upval), config1 (upval)
 								if p11 then
 									local FilterResult = if FFlagExpChatMessagesStoreMemoryCleanupModule then List.filter(p11, function(MessageId): boolean
@@ -1379,15 +1379,15 @@ return function(Callback)
 							end
 							
 							if FFlagExpChatMessagesStoreUseProxyModule then
-								Proxy1[UserId1] = v156(Proxy1[UserId1])
+								Proxy1[UserId] = v153(Proxy1[UserId])
 								
 								return
 							end
 							Signal2_1(function(p11)
-								-- upvalues: v156 (copy), UserId1 (copy), Dictionary (upval)
-								local v13 = v156(p11[UserId1])
+								-- upvalues: v153 (copy), UserId (copy), Dictionary (upval)
+								local v13 = v153(p11[UserId])
 								
-								return if v13 == nil then Dictionary.removeKey(p11, UserId1) else Dictionary.join(p11, { [UserId1] = v13 })
+								return if v13 == nil then Dictionary.removeKey(p11, UserId) else Dictionary.join(p11, { [UserId] = v13 })
 							end)
 						end
 						return
@@ -1398,9 +1398,9 @@ return function(Callback)
 							writeByMessageId(config1.messageId, config1)
 						end
 						if not FFlagExpChatMessagesStoreMemoryCleanupModule and config1.userId then
-							local UserId2 = config1.userId
+							local UserId1 = config1.userId
 							
-							local function v159(List)
+							local function v155(List)
 								-- upvalues: config1 (upval), List (upval)
 								if not List then
 									return nil
@@ -1417,15 +1417,15 @@ return function(Callback)
 							end
 							
 							if FFlagExpChatMessagesStoreUseProxyModule then
-								Proxy1[UserId2] = v159(Proxy1[UserId2])
+								Proxy1[UserId1] = v155(Proxy1[UserId1])
 								
 								return
 							end
 							Signal2_1(function(p11)
-								-- upvalues: v159 (copy), UserId2 (copy), Dictionary (upval)
-								local v14 = v159(p11[UserId2])
+								-- upvalues: v155 (copy), UserId1 (copy), Dictionary (upval)
+								local v14 = v155(p11[UserId1])
 								
-								return if v14 == nil then Dictionary.removeKey(p11, UserId2) else Dictionary.join(p11, { [UserId2] = v14 })
+								return if v14 == nil then Dictionary.removeKey(p11, UserId1) else Dictionary.join(p11, { [UserId1] = v14 })
 							end)
 						end
 						return
@@ -1451,25 +1451,25 @@ return function(Callback)
 						end
 						if IsVisibleInChatWindow then return end
 					end
-					local UserId3 = config1.userId
+					local UserId2 = config1.userId
 					local PartOrModel = config1.partOrModel
 					
-					if not UserId3 and PartOrModel then
-						UserId3 = Signal10(false)[PartOrModel]
+					if not UserId2 and PartOrModel then
+						UserId2 = Signal10(false)[PartOrModel]
 						
-						if not UserId3 then
-							UserId3 = HttpService:GenerateGUID(false)
+						if not UserId2 then
+							UserId2 = HttpService:GenerateGUID(false)
 							Signal2_6(function(p11)
-								-- upvalues: Dictionary (upval), UserId3 (ref), PartOrModel (copy)
-								return Dictionary.join(p11, { [UserId3] = PartOrModel })
+								-- upvalues: Dictionary (upval), UserId2 (ref), PartOrModel (copy)
+								return Dictionary.join(p11, { [UserId2] = PartOrModel })
 							end)
 							Signal2_7(function(p11)
-								-- upvalues: Dictionary (upval), PartOrModel (copy), UserId3 (ref)
-								return Dictionary.join(p11, { [PartOrModel] = UserId3 })
+								-- upvalues: Dictionary (upval), PartOrModel (copy), UserId2 (ref)
+								return Dictionary.join(p11, { [PartOrModel] = UserId2 })
 							end)
 						end
 					end
-					local JoinResult = if UserId3 == config1.userId then config1 else Dictionary.join(config1, { userId = UserId3 })
+					local JoinResult = if UserId2 == config1.userId then config1 else Dictionary.join(config1, { userId = UserId2 })
 					local ChannelNameOverride = nil
 					
 					if GetFFlagTextChatEnableUniverseChatTabsFunction() and JoinResult.channelNameOverride then
@@ -1482,34 +1482,34 @@ return function(Callback)
 						local T = if ChannelNameOverride then Signal4(false)[ChannelNameOverride] or {} else {}
 						
 						if config.messageLimit <= #v17 then
-							local MessageId = v17[1]
-							local v18 = v10 and v10[MessageId]
+							local MessageId1 = v17[1]
+							local v18 = v10 and v10[MessageId1]
 							
 							if v18 then
 								if not FFlagExpChatMessagesStoreKeepInByMessageIdModule then
 									if FFlagExpChatMessagesStoreUseProxyModule then
-										Proxy[MessageId] = nil
+										Proxy[MessageId1] = nil
 									else
 										Signal2(function(p11)
-											-- upvalues: Dictionary (upval), MessageId (copy)
-											return Dictionary.removeKey(p11, MessageId)
+											-- upvalues: Dictionary (upval), MessageId1 (copy)
+											return Dictionary.removeKey(p11, MessageId1)
 										end)
 									end
 								end
 								if v18.userId then
-									local UserId4 = v18.userId
+									local UserId3 = v18.userId
 									
-									local function v174(p11)
-										-- upvalues: FFlagExpChatMessagesStoreMemoryCleanupModule (upval), List (upval), MessageId (copy), Signal9 (upval), v18 (copy), Signal2_7 (upval), Dictionary (upval), Signal2_6 (upval)
+									local function v171(p11)
+										-- upvalues: FFlagExpChatMessagesStoreMemoryCleanupModule (upval), List (upval), MessageId1 (copy), Signal9 (upval), v18 (copy), Signal2_7 (upval), Dictionary (upval), Signal2_6 (upval)
 										if not p11 then
 											return nil
 										end
 										local FilterResult = if FFlagExpChatMessagesStoreMemoryCleanupModule then List.filter(p11, function(p12): boolean
-											-- upvalues: MessageId (upval)
-											return p12 ~= MessageId
+											-- upvalues: MessageId1 (upval)
+											return p12 ~= MessageId1
 										end) else List.filter(p11, function(p12): boolean
-											-- upvalues: MessageId (upval)
-											return p12.messageId ~= MessageId
+											-- upvalues: MessageId1 (upval)
+											return p12.messageId ~= MessageId1
 										end)
 										
 										if #FilterResult ~= 0 then
@@ -1532,13 +1532,13 @@ return function(Callback)
 									end
 									
 									if FFlagExpChatMessagesStoreUseProxyModule then
-										Proxy1[UserId4] = v174(Proxy1[UserId4])
+										Proxy1[UserId3] = v171(Proxy1[UserId3])
 									else
 										Signal2_1(function(p11)
-											-- upvalues: v174 (copy), UserId4 (copy), Dictionary (upval)
-											local v19 = v174(p11[UserId4])
+											-- upvalues: v171 (copy), UserId3 (copy), Dictionary (upval)
+											local v19 = v171(p11[UserId3])
 											
-											return if v19 == nil then Dictionary.removeKey(p11, UserId4) else Dictionary.join(p11, { [UserId4] = v19 })
+											return if v19 == nil then Dictionary.removeKey(p11, UserId3) else Dictionary.join(p11, { [UserId3] = v19 })
 										end)
 									end
 								end
@@ -1548,7 +1548,7 @@ return function(Callback)
 								end)
 								
 								if FFlagExpChatMessagesStoreMemoryCleanupModule then
-									t2[MessageId] = nil
+									t2[MessageId1] = nil
 								end
 							end
 						end
@@ -1582,9 +1582,9 @@ return function(Callback)
 					writeByMessageId(JoinResult.messageId, JoinResult)
 					
 					if JoinResult.userId then
-						local UserId = JoinResult.userId
+						local UserId4 = JoinResult.userId
 						
-						local function v151(p11)
+						local function v173(p11)
 							-- upvalues: FFlagExpChatMessagesStoreMemoryCleanupModule (upval), JoinResult (copy), List (upval)
 							local P51 = p11 or {}
 							local Flag = false
@@ -1604,13 +1604,13 @@ return function(Callback)
 						end
 						
 						if FFlagExpChatMessagesStoreUseProxyModule then
-							Proxy1[UserId] = v151(Proxy1[UserId])
+							Proxy1[UserId4] = v173(Proxy1[UserId4])
 						else
 							Signal2_1(function(p12)
-								-- upvalues: v151 (copy), UserId (copy), Dictionary (upval)
-								local v19 = v151(p12[UserId])
+								-- upvalues: v173 (copy), UserId4 (copy), Dictionary (upval)
+								local v19 = v173(p12[UserId4])
 								
-								return if v19 == nil then Dictionary.removeKey(p12, UserId) else Dictionary.join(p12, { [UserId] = v19 })
+								return if v19 == nil then Dictionary.removeKey(p12, UserId4) else Dictionary.join(p12, { [UserId4] = v19 })
 							end)
 						end
 					end
@@ -1648,10 +1648,10 @@ return function(Callback)
 							local ChannelNameOverride1 = Signal14(false)
 							
 							if ChannelNameOverride1 == nil or ChannelNameOverride == ChannelNameOverride1 then
-								local MessageId = JoinResult.messageId
+								local MessageId2 = JoinResult.messageId
 								
 								if not v19 and not Flag1 then
-									Callback2(MessageId)
+									Callback2(MessageId2)
 								elseif Flag then
 									Flag1 = true
 								else
@@ -1664,9 +1664,9 @@ return function(Callback)
 			end
 			
 			if FFlagExpChatMessagesStoreBatchModule then
-				SignalsExperimentalModule.batch(v217)
+				SignalsExperimentalModule.batch(v207)
 			else
-				v217()
+				v207()
 			end
 		end
 		if ExpChatPresetChatEmojiEffectExperimentation.isExperimentEnabled then
@@ -1726,20 +1726,20 @@ return function(Callback)
 							}) else p12
 						end)
 					end
-					local MessageId1 = config1.messageId
+					local MessageId = config1.messageId
 					
 					if FFlagExpChatMessagesStoreUseProxyModule then
-						Proxy[MessageId1] = nil
+						Proxy[MessageId] = nil
 					else
 						Signal2(function(p12)
-							-- upvalues: Dictionary (upval), MessageId1 (copy)
-							return Dictionary.removeKey(p12, MessageId1)
+							-- upvalues: Dictionary (upval), MessageId (copy)
+							return Dictionary.removeKey(p12, MessageId)
 						end)
 					end
 					if config1.userId then
-						local UserId1 = config1.userId
+						local UserId = config1.userId
 						
-						local function v156(p12)
+						local function v153(p12)
 							-- upvalues: FFlagExpChatMessagesStoreMemoryCleanupModule (upval), List (upval), config1 (upval)
 							if p12 then
 								local FilterResult = if FFlagExpChatMessagesStoreMemoryCleanupModule then List.filter(p12, function(MessageId): boolean
@@ -1757,15 +1757,15 @@ return function(Callback)
 						end
 						
 						if FFlagExpChatMessagesStoreUseProxyModule then
-							Proxy1[UserId1] = v156(Proxy1[UserId1])
+							Proxy1[UserId] = v153(Proxy1[UserId])
 							
 							return
 						end
 						Signal2_1(function(p12)
-							-- upvalues: v156 (copy), UserId1 (copy), Dictionary (upval)
-							local v22 = v156(p12[UserId1])
+							-- upvalues: v153 (copy), UserId (copy), Dictionary (upval)
+							local v22 = v153(p12[UserId])
 							
-							return if v22 == nil then Dictionary.removeKey(p12, UserId1) else Dictionary.join(p12, { [UserId1] = v22 })
+							return if v22 == nil then Dictionary.removeKey(p12, UserId) else Dictionary.join(p12, { [UserId] = v22 })
 						end)
 					end
 					return
@@ -1776,9 +1776,9 @@ return function(Callback)
 						writeByMessageId(config1.messageId, config1)
 					end
 					if not FFlagExpChatMessagesStoreMemoryCleanupModule and config1.userId then
-						local UserId2 = config1.userId
+						local UserId1 = config1.userId
 						
-						local function v159(List)
+						local function v155(List)
 							-- upvalues: config1 (upval), List (upval)
 							if not List then
 								return nil
@@ -1795,15 +1795,15 @@ return function(Callback)
 						end
 						
 						if FFlagExpChatMessagesStoreUseProxyModule then
-							Proxy1[UserId2] = v159(Proxy1[UserId2])
+							Proxy1[UserId1] = v155(Proxy1[UserId1])
 							
 							return
 						end
 						Signal2_1(function(p12)
-							-- upvalues: v159 (copy), UserId2 (copy), Dictionary (upval)
-							local v23 = v159(p12[UserId2])
+							-- upvalues: v155 (copy), UserId1 (copy), Dictionary (upval)
+							local v23 = v155(p12[UserId1])
 							
-							return if v23 == nil then Dictionary.removeKey(p12, UserId2) else Dictionary.join(p12, { [UserId2] = v23 })
+							return if v23 == nil then Dictionary.removeKey(p12, UserId1) else Dictionary.join(p12, { [UserId1] = v23 })
 						end)
 					end
 					return
@@ -1829,25 +1829,25 @@ return function(Callback)
 					end
 					if IsVisibleInChatWindow then return end
 				end
-				local UserId3 = config1.userId
+				local UserId2 = config1.userId
 				local PartOrModel = config1.partOrModel
 				
-				if not UserId3 and PartOrModel then
-					UserId3 = Signal10(false)[PartOrModel]
+				if not UserId2 and PartOrModel then
+					UserId2 = Signal10(false)[PartOrModel]
 					
-					if not UserId3 then
-						UserId3 = HttpService:GenerateGUID(false)
+					if not UserId2 then
+						UserId2 = HttpService:GenerateGUID(false)
 						Signal2_6(function(p12)
-							-- upvalues: Dictionary (upval), UserId3 (ref), PartOrModel (copy)
-							return Dictionary.join(p12, { [UserId3] = PartOrModel })
+							-- upvalues: Dictionary (upval), UserId2 (ref), PartOrModel (copy)
+							return Dictionary.join(p12, { [UserId2] = PartOrModel })
 						end)
 						Signal2_7(function(p12)
-							-- upvalues: Dictionary (upval), PartOrModel (copy), UserId3 (ref)
-							return Dictionary.join(p12, { [PartOrModel] = UserId3 })
+							-- upvalues: Dictionary (upval), PartOrModel (copy), UserId2 (ref)
+							return Dictionary.join(p12, { [PartOrModel] = UserId2 })
 						end)
 					end
 				end
-				local JoinResult = if UserId3 == config1.userId then config1 else Dictionary.join(config1, { userId = UserId3 })
+				local JoinResult = if UserId2 == config1.userId then config1 else Dictionary.join(config1, { userId = UserId2 })
 				local ChannelNameOverride = nil
 				
 				if GetFFlagTextChatEnableUniverseChatTabsFunction() and JoinResult.channelNameOverride then
@@ -1860,34 +1860,34 @@ return function(Callback)
 					local T = if ChannelNameOverride then Signal4(false)[ChannelNameOverride] or {} else {}
 					
 					if config.messageLimit <= #v26 then
-						local MessageId = v26[1]
-						local v27 = v19 and v19[MessageId]
+						local MessageId1 = v26[1]
+						local v27 = v19 and v19[MessageId1]
 						
 						if v27 then
 							if not FFlagExpChatMessagesStoreKeepInByMessageIdModule then
 								if FFlagExpChatMessagesStoreUseProxyModule then
-									Proxy[MessageId] = nil
+									Proxy[MessageId1] = nil
 								else
 									Signal2(function(p12)
-										-- upvalues: Dictionary (upval), MessageId (copy)
-										return Dictionary.removeKey(p12, MessageId)
+										-- upvalues: Dictionary (upval), MessageId1 (copy)
+										return Dictionary.removeKey(p12, MessageId1)
 									end)
 								end
 							end
 							if v27.userId then
-								local UserId4 = v27.userId
+								local UserId3 = v27.userId
 								
-								local function v174(p12)
-									-- upvalues: FFlagExpChatMessagesStoreMemoryCleanupModule (upval), List (upval), MessageId (copy), Signal9 (upval), v27 (copy), Signal2_7 (upval), Dictionary (upval), Signal2_6 (upval)
+								local function v171(p12)
+									-- upvalues: FFlagExpChatMessagesStoreMemoryCleanupModule (upval), List (upval), MessageId1 (copy), Signal9 (upval), v27 (copy), Signal2_7 (upval), Dictionary (upval), Signal2_6 (upval)
 									if not p12 then
 										return nil
 									end
 									local FilterResult = if FFlagExpChatMessagesStoreMemoryCleanupModule then List.filter(p12, function(p13): boolean
-										-- upvalues: MessageId (upval)
-										return p13 ~= MessageId
+										-- upvalues: MessageId1 (upval)
+										return p13 ~= MessageId1
 									end) else List.filter(p12, function(p13): boolean
-										-- upvalues: MessageId (upval)
-										return p13.messageId ~= MessageId
+										-- upvalues: MessageId1 (upval)
+										return p13.messageId ~= MessageId1
 									end)
 									
 									if #FilterResult ~= 0 then
@@ -1910,13 +1910,13 @@ return function(Callback)
 								end
 								
 								if FFlagExpChatMessagesStoreUseProxyModule then
-									Proxy1[UserId4] = v174(Proxy1[UserId4])
+									Proxy1[UserId3] = v171(Proxy1[UserId3])
 								else
 									Signal2_1(function(p12)
-										-- upvalues: v174 (copy), UserId4 (copy), Dictionary (upval)
-										local v28 = v174(p12[UserId4])
+										-- upvalues: v171 (copy), UserId3 (copy), Dictionary (upval)
+										local v28 = v171(p12[UserId3])
 										
-										return if v28 == nil then Dictionary.removeKey(p12, UserId4) else Dictionary.join(p12, { [UserId4] = v28 })
+										return if v28 == nil then Dictionary.removeKey(p12, UserId3) else Dictionary.join(p12, { [UserId3] = v28 })
 									end)
 								end
 							end
@@ -1926,7 +1926,7 @@ return function(Callback)
 							end)
 							
 							if FFlagExpChatMessagesStoreMemoryCleanupModule then
-								t2[MessageId] = nil
+								t2[MessageId1] = nil
 							end
 						end
 					end
@@ -1960,9 +1960,9 @@ return function(Callback)
 				writeByMessageId(JoinResult.messageId, JoinResult)
 				
 				if JoinResult.userId then
-					local UserId = JoinResult.userId
+					local UserId4 = JoinResult.userId
 					
-					local function v151(p12)
+					local function v173(p12)
 						-- upvalues: FFlagExpChatMessagesStoreMemoryCleanupModule (upval), JoinResult (copy), List (upval)
 						local P51 = p12 or {}
 						local Flag = false
@@ -1982,13 +1982,13 @@ return function(Callback)
 					end
 					
 					if FFlagExpChatMessagesStoreUseProxyModule then
-						Proxy1[UserId] = v151(Proxy1[UserId])
+						Proxy1[UserId4] = v173(Proxy1[UserId4])
 					else
 						Signal2_1(function(p13)
-							-- upvalues: v151 (copy), UserId (copy), Dictionary (upval)
-							local v28 = v151(p13[UserId])
+							-- upvalues: v173 (copy), UserId4 (copy), Dictionary (upval)
+							local v28 = v173(p13[UserId4])
 							
-							return if v28 == nil then Dictionary.removeKey(p13, UserId) else Dictionary.join(p13, { [UserId] = v28 })
+							return if v28 == nil then Dictionary.removeKey(p13, UserId4) else Dictionary.join(p13, { [UserId4] = v28 })
 						end)
 					end
 				end
@@ -2026,10 +2026,10 @@ return function(Callback)
 						local ChannelNameOverride1 = Signal14(false)
 						
 						if ChannelNameOverride1 == nil or ChannelNameOverride == ChannelNameOverride1 then
-							local MessageId = JoinResult.messageId
+							local MessageId2 = JoinResult.messageId
 							
 							if not v28 and not Flag1 then
-								Callback2(MessageId)
+								Callback2(MessageId2)
 							elseif Flag then
 								Flag1 = true
 							else
@@ -2100,20 +2100,20 @@ return function(Callback)
 							}) else p12
 						end)
 					end
-					local MessageId1 = config1.messageId
+					local MessageId = config1.messageId
 					
 					if FFlagExpChatMessagesStoreUseProxyModule then
-						Proxy[MessageId1] = nil
+						Proxy[MessageId] = nil
 					else
 						Signal2(function(p12)
-							-- upvalues: Dictionary (upval), MessageId1 (copy)
-							return Dictionary.removeKey(p12, MessageId1)
+							-- upvalues: Dictionary (upval), MessageId (copy)
+							return Dictionary.removeKey(p12, MessageId)
 						end)
 					end
 					if config1.userId then
-						local UserId1 = config1.userId
+						local UserId = config1.userId
 						
-						local function v156(p12)
+						local function v153(p12)
 							-- upvalues: FFlagExpChatMessagesStoreMemoryCleanupModule (upval), List (upval), config1 (upval)
 							if p12 then
 								local FilterResult = if FFlagExpChatMessagesStoreMemoryCleanupModule then List.filter(p12, function(MessageId): boolean
@@ -2131,15 +2131,15 @@ return function(Callback)
 						end
 						
 						if FFlagExpChatMessagesStoreUseProxyModule then
-							Proxy1[UserId1] = v156(Proxy1[UserId1])
+							Proxy1[UserId] = v153(Proxy1[UserId])
 							
 							return
 						end
 						Signal2_1(function(p12)
-							-- upvalues: v156 (copy), UserId1 (copy), Dictionary (upval)
-							local v31 = v156(p12[UserId1])
+							-- upvalues: v153 (copy), UserId (copy), Dictionary (upval)
+							local v31 = v153(p12[UserId])
 							
-							return if v31 == nil then Dictionary.removeKey(p12, UserId1) else Dictionary.join(p12, { [UserId1] = v31 })
+							return if v31 == nil then Dictionary.removeKey(p12, UserId) else Dictionary.join(p12, { [UserId] = v31 })
 						end)
 					end
 					return
@@ -2150,9 +2150,9 @@ return function(Callback)
 						writeByMessageId(config1.messageId, config1)
 					end
 					if not FFlagExpChatMessagesStoreMemoryCleanupModule and config1.userId then
-						local UserId2 = config1.userId
+						local UserId1 = config1.userId
 						
-						local function v159(List)
+						local function v155(List)
 							-- upvalues: config1 (upval), List (upval)
 							if not List then
 								return nil
@@ -2169,15 +2169,15 @@ return function(Callback)
 						end
 						
 						if FFlagExpChatMessagesStoreUseProxyModule then
-							Proxy1[UserId2] = v159(Proxy1[UserId2])
+							Proxy1[UserId1] = v155(Proxy1[UserId1])
 							
 							return
 						end
 						Signal2_1(function(p12)
-							-- upvalues: v159 (copy), UserId2 (copy), Dictionary (upval)
-							local v32 = v159(p12[UserId2])
+							-- upvalues: v155 (copy), UserId1 (copy), Dictionary (upval)
+							local v32 = v155(p12[UserId1])
 							
-							return if v32 == nil then Dictionary.removeKey(p12, UserId2) else Dictionary.join(p12, { [UserId2] = v32 })
+							return if v32 == nil then Dictionary.removeKey(p12, UserId1) else Dictionary.join(p12, { [UserId1] = v32 })
 						end)
 					end
 					return
@@ -2203,25 +2203,25 @@ return function(Callback)
 					end
 					if IsVisibleInChatWindow then return end
 				end
-				local UserId3 = config1.userId
+				local UserId2 = config1.userId
 				local PartOrModel = config1.partOrModel
 				
-				if not UserId3 and PartOrModel then
-					UserId3 = Signal10(false)[PartOrModel]
+				if not UserId2 and PartOrModel then
+					UserId2 = Signal10(false)[PartOrModel]
 					
-					if not UserId3 then
-						UserId3 = HttpService:GenerateGUID(false)
+					if not UserId2 then
+						UserId2 = HttpService:GenerateGUID(false)
 						Signal2_6(function(p12)
-							-- upvalues: Dictionary (upval), UserId3 (ref), PartOrModel (copy)
-							return Dictionary.join(p12, { [UserId3] = PartOrModel })
+							-- upvalues: Dictionary (upval), UserId2 (ref), PartOrModel (copy)
+							return Dictionary.join(p12, { [UserId2] = PartOrModel })
 						end)
 						Signal2_7(function(p12)
-							-- upvalues: Dictionary (upval), PartOrModel (copy), UserId3 (ref)
-							return Dictionary.join(p12, { [PartOrModel] = UserId3 })
+							-- upvalues: Dictionary (upval), PartOrModel (copy), UserId2 (ref)
+							return Dictionary.join(p12, { [PartOrModel] = UserId2 })
 						end)
 					end
 				end
-				local JoinResult = if UserId3 == config1.userId then config1 else Dictionary.join(config1, { userId = UserId3 })
+				local JoinResult = if UserId2 == config1.userId then config1 else Dictionary.join(config1, { userId = UserId2 })
 				local ChannelNameOverride = nil
 				
 				if GetFFlagTextChatEnableUniverseChatTabsFunction() and JoinResult.channelNameOverride then
@@ -2234,34 +2234,34 @@ return function(Callback)
 					local T = if ChannelNameOverride then Signal4(false)[ChannelNameOverride] or {} else {}
 					
 					if config.messageLimit <= #v35 then
-						local MessageId = v35[1]
-						local v36 = v28 and v28[MessageId]
+						local MessageId1 = v35[1]
+						local v36 = v28 and v28[MessageId1]
 						
 						if v36 then
 							if not FFlagExpChatMessagesStoreKeepInByMessageIdModule then
 								if FFlagExpChatMessagesStoreUseProxyModule then
-									Proxy[MessageId] = nil
+									Proxy[MessageId1] = nil
 								else
 									Signal2(function(p12)
-										-- upvalues: Dictionary (upval), MessageId (copy)
-										return Dictionary.removeKey(p12, MessageId)
+										-- upvalues: Dictionary (upval), MessageId1 (copy)
+										return Dictionary.removeKey(p12, MessageId1)
 									end)
 								end
 							end
 							if v36.userId then
-								local UserId4 = v36.userId
+								local UserId3 = v36.userId
 								
-								local function v174(p12)
-									-- upvalues: FFlagExpChatMessagesStoreMemoryCleanupModule (upval), List (upval), MessageId (copy), Signal9 (upval), v36 (copy), Signal2_7 (upval), Dictionary (upval), Signal2_6 (upval)
+								local function v171(p12)
+									-- upvalues: FFlagExpChatMessagesStoreMemoryCleanupModule (upval), List (upval), MessageId1 (copy), Signal9 (upval), v36 (copy), Signal2_7 (upval), Dictionary (upval), Signal2_6 (upval)
 									if not p12 then
 										return nil
 									end
 									local FilterResult = if FFlagExpChatMessagesStoreMemoryCleanupModule then List.filter(p12, function(p13): boolean
-										-- upvalues: MessageId (upval)
-										return p13 ~= MessageId
+										-- upvalues: MessageId1 (upval)
+										return p13 ~= MessageId1
 									end) else List.filter(p12, function(p13): boolean
-										-- upvalues: MessageId (upval)
-										return p13.messageId ~= MessageId
+										-- upvalues: MessageId1 (upval)
+										return p13.messageId ~= MessageId1
 									end)
 									
 									if #FilterResult ~= 0 then
@@ -2284,13 +2284,13 @@ return function(Callback)
 								end
 								
 								if FFlagExpChatMessagesStoreUseProxyModule then
-									Proxy1[UserId4] = v174(Proxy1[UserId4])
+									Proxy1[UserId3] = v171(Proxy1[UserId3])
 								else
 									Signal2_1(function(p12)
-										-- upvalues: v174 (copy), UserId4 (copy), Dictionary (upval)
-										local v37 = v174(p12[UserId4])
+										-- upvalues: v171 (copy), UserId3 (copy), Dictionary (upval)
+										local v37 = v171(p12[UserId3])
 										
-										return if v37 == nil then Dictionary.removeKey(p12, UserId4) else Dictionary.join(p12, { [UserId4] = v37 })
+										return if v37 == nil then Dictionary.removeKey(p12, UserId3) else Dictionary.join(p12, { [UserId3] = v37 })
 									end)
 								end
 							end
@@ -2300,7 +2300,7 @@ return function(Callback)
 							end)
 							
 							if FFlagExpChatMessagesStoreMemoryCleanupModule then
-								t2[MessageId] = nil
+								t2[MessageId1] = nil
 							end
 						end
 					end
@@ -2334,9 +2334,9 @@ return function(Callback)
 				writeByMessageId(JoinResult.messageId, JoinResult)
 				
 				if JoinResult.userId then
-					local UserId = JoinResult.userId
+					local UserId4 = JoinResult.userId
 					
-					local function v151(p12)
+					local function v173(p12)
 						-- upvalues: FFlagExpChatMessagesStoreMemoryCleanupModule (upval), JoinResult (copy), List (upval)
 						local P51 = p12 or {}
 						local Flag = false
@@ -2356,13 +2356,13 @@ return function(Callback)
 					end
 					
 					if FFlagExpChatMessagesStoreUseProxyModule then
-						Proxy1[UserId] = v151(Proxy1[UserId])
+						Proxy1[UserId4] = v173(Proxy1[UserId4])
 					else
 						Signal2_1(function(p13)
-							-- upvalues: v151 (copy), UserId (copy), Dictionary (upval)
-							local v37 = v151(p13[UserId])
+							-- upvalues: v173 (copy), UserId4 (copy), Dictionary (upval)
+							local v37 = v173(p13[UserId4])
 							
-							return if v37 == nil then Dictionary.removeKey(p13, UserId) else Dictionary.join(p13, { [UserId] = v37 })
+							return if v37 == nil then Dictionary.removeKey(p13, UserId4) else Dictionary.join(p13, { [UserId4] = v37 })
 						end)
 					end
 				end
@@ -2400,10 +2400,10 @@ return function(Callback)
 						local ChannelNameOverride1 = Signal14(false)
 						
 						if ChannelNameOverride1 == nil or ChannelNameOverride == ChannelNameOverride1 then
-							local MessageId = JoinResult.messageId
+							local MessageId2 = JoinResult.messageId
 							
 							if not v37 and not Flag1 then
-								Callback2(MessageId)
+								Callback2(MessageId2)
 							elseif Flag then
 								Flag1 = true
 							else
@@ -2506,20 +2506,20 @@ return function(Callback)
 							}) else p13
 						end)
 					end
-					local MessageId1 = config1.messageId
+					local MessageId = config1.messageId
 					
 					if FFlagExpChatMessagesStoreUseProxyModule then
-						Proxy[MessageId1] = nil
+						Proxy[MessageId] = nil
 					else
 						Signal2(function(p13)
-							-- upvalues: Dictionary (upval), MessageId1 (copy)
-							return Dictionary.removeKey(p13, MessageId1)
+							-- upvalues: Dictionary (upval), MessageId (copy)
+							return Dictionary.removeKey(p13, MessageId)
 						end)
 					end
 					if config1.userId then
-						local UserId1 = config1.userId
+						local UserId = config1.userId
 						
-						local function v156(p13)
+						local function v153(p13)
 							-- upvalues: FFlagExpChatMessagesStoreMemoryCleanupModule (upval), List (upval), config1 (upval)
 							if p13 then
 								local FilterResult = if FFlagExpChatMessagesStoreMemoryCleanupModule then List.filter(p13, function(MessageId): boolean
@@ -2537,15 +2537,15 @@ return function(Callback)
 						end
 						
 						if FFlagExpChatMessagesStoreUseProxyModule then
-							Proxy1[UserId1] = v156(Proxy1[UserId1])
+							Proxy1[UserId] = v153(Proxy1[UserId])
 							
 							return
 						end
 						Signal2_1(function(p13)
-							-- upvalues: v156 (copy), UserId1 (copy), Dictionary (upval)
-							local v40 = v156(p13[UserId1])
+							-- upvalues: v153 (copy), UserId (copy), Dictionary (upval)
+							local v40 = v153(p13[UserId])
 							
-							return if v40 == nil then Dictionary.removeKey(p13, UserId1) else Dictionary.join(p13, { [UserId1] = v40 })
+							return if v40 == nil then Dictionary.removeKey(p13, UserId) else Dictionary.join(p13, { [UserId] = v40 })
 						end)
 					end
 					return
@@ -2556,9 +2556,9 @@ return function(Callback)
 						writeByMessageId(config1.messageId, config1)
 					end
 					if not FFlagExpChatMessagesStoreMemoryCleanupModule and config1.userId then
-						local UserId2 = config1.userId
+						local UserId1 = config1.userId
 						
-						local function v159(List)
+						local function v155(List)
 							-- upvalues: config1 (upval), List (upval)
 							if not List then
 								return nil
@@ -2575,15 +2575,15 @@ return function(Callback)
 						end
 						
 						if FFlagExpChatMessagesStoreUseProxyModule then
-							Proxy1[UserId2] = v159(Proxy1[UserId2])
+							Proxy1[UserId1] = v155(Proxy1[UserId1])
 							
 							return
 						end
 						Signal2_1(function(p13)
-							-- upvalues: v159 (copy), UserId2 (copy), Dictionary (upval)
-							local v41 = v159(p13[UserId2])
+							-- upvalues: v155 (copy), UserId1 (copy), Dictionary (upval)
+							local v41 = v155(p13[UserId1])
 							
-							return if v41 == nil then Dictionary.removeKey(p13, UserId2) else Dictionary.join(p13, { [UserId2] = v41 })
+							return if v41 == nil then Dictionary.removeKey(p13, UserId1) else Dictionary.join(p13, { [UserId1] = v41 })
 						end)
 					end
 					return
@@ -2609,25 +2609,25 @@ return function(Callback)
 					end
 					if IsVisibleInChatWindow then return end
 				end
-				local UserId3 = config1.userId
+				local UserId2 = config1.userId
 				local PartOrModel = config1.partOrModel
 				
-				if not UserId3 and PartOrModel then
-					UserId3 = Signal10(false)[PartOrModel]
+				if not UserId2 and PartOrModel then
+					UserId2 = Signal10(false)[PartOrModel]
 					
-					if not UserId3 then
-						UserId3 = HttpService:GenerateGUID(false)
+					if not UserId2 then
+						UserId2 = HttpService:GenerateGUID(false)
 						Signal2_6(function(p13)
-							-- upvalues: Dictionary (upval), UserId3 (ref), PartOrModel (copy)
-							return Dictionary.join(p13, { [UserId3] = PartOrModel })
+							-- upvalues: Dictionary (upval), UserId2 (ref), PartOrModel (copy)
+							return Dictionary.join(p13, { [UserId2] = PartOrModel })
 						end)
 						Signal2_7(function(p13)
-							-- upvalues: Dictionary (upval), PartOrModel (copy), UserId3 (ref)
-							return Dictionary.join(p13, { [PartOrModel] = UserId3 })
+							-- upvalues: Dictionary (upval), PartOrModel (copy), UserId2 (ref)
+							return Dictionary.join(p13, { [PartOrModel] = UserId2 })
 						end)
 					end
 				end
-				local JoinResult = if UserId3 == config1.userId then config1 else Dictionary.join(config1, { userId = UserId3 })
+				local JoinResult = if UserId2 == config1.userId then config1 else Dictionary.join(config1, { userId = UserId2 })
 				local ChannelNameOverride = nil
 				
 				if GetFFlagTextChatEnableUniverseChatTabsFunction() and JoinResult.channelNameOverride then
@@ -2640,34 +2640,34 @@ return function(Callback)
 					local T = if ChannelNameOverride then Signal4(false)[ChannelNameOverride] or {} else {}
 					
 					if config.messageLimit <= #v44 then
-						local MessageId = v44[1]
-						local v45 = v37 and v37[MessageId]
+						local MessageId1 = v44[1]
+						local v45 = v37 and v37[MessageId1]
 						
 						if v45 then
 							if not FFlagExpChatMessagesStoreKeepInByMessageIdModule then
 								if FFlagExpChatMessagesStoreUseProxyModule then
-									Proxy[MessageId] = nil
+									Proxy[MessageId1] = nil
 								else
 									Signal2(function(p13)
-										-- upvalues: Dictionary (upval), MessageId (copy)
-										return Dictionary.removeKey(p13, MessageId)
+										-- upvalues: Dictionary (upval), MessageId1 (copy)
+										return Dictionary.removeKey(p13, MessageId1)
 									end)
 								end
 							end
 							if v45.userId then
-								local UserId4 = v45.userId
+								local UserId3 = v45.userId
 								
-								local function v174(p13)
-									-- upvalues: FFlagExpChatMessagesStoreMemoryCleanupModule (upval), List (upval), MessageId (copy), Signal9 (upval), v45 (copy), Signal2_7 (upval), Dictionary (upval), Signal2_6 (upval)
+								local function v171(p13)
+									-- upvalues: FFlagExpChatMessagesStoreMemoryCleanupModule (upval), List (upval), MessageId1 (copy), Signal9 (upval), v45 (copy), Signal2_7 (upval), Dictionary (upval), Signal2_6 (upval)
 									if not p13 then
 										return nil
 									end
 									local FilterResult = if FFlagExpChatMessagesStoreMemoryCleanupModule then List.filter(p13, function(p14): boolean
-										-- upvalues: MessageId (upval)
-										return p14 ~= MessageId
+										-- upvalues: MessageId1 (upval)
+										return p14 ~= MessageId1
 									end) else List.filter(p13, function(p14): boolean
-										-- upvalues: MessageId (upval)
-										return p14.messageId ~= MessageId
+										-- upvalues: MessageId1 (upval)
+										return p14.messageId ~= MessageId1
 									end)
 									
 									if #FilterResult ~= 0 then
@@ -2690,13 +2690,13 @@ return function(Callback)
 								end
 								
 								if FFlagExpChatMessagesStoreUseProxyModule then
-									Proxy1[UserId4] = v174(Proxy1[UserId4])
+									Proxy1[UserId3] = v171(Proxy1[UserId3])
 								else
 									Signal2_1(function(p13)
-										-- upvalues: v174 (copy), UserId4 (copy), Dictionary (upval)
-										local v46 = v174(p13[UserId4])
+										-- upvalues: v171 (copy), UserId3 (copy), Dictionary (upval)
+										local v46 = v171(p13[UserId3])
 										
-										return if v46 == nil then Dictionary.removeKey(p13, UserId4) else Dictionary.join(p13, { [UserId4] = v46 })
+										return if v46 == nil then Dictionary.removeKey(p13, UserId3) else Dictionary.join(p13, { [UserId3] = v46 })
 									end)
 								end
 							end
@@ -2706,7 +2706,7 @@ return function(Callback)
 							end)
 							
 							if FFlagExpChatMessagesStoreMemoryCleanupModule then
-								t2[MessageId] = nil
+								t2[MessageId1] = nil
 							end
 						end
 					end
@@ -2740,9 +2740,9 @@ return function(Callback)
 				writeByMessageId(JoinResult.messageId, JoinResult)
 				
 				if JoinResult.userId then
-					local UserId = JoinResult.userId
+					local UserId4 = JoinResult.userId
 					
-					local function v151(p13)
+					local function v173(p13)
 						-- upvalues: FFlagExpChatMessagesStoreMemoryCleanupModule (upval), JoinResult (copy), List (upval)
 						local P51 = p13 or {}
 						local Flag = false
@@ -2762,13 +2762,13 @@ return function(Callback)
 					end
 					
 					if FFlagExpChatMessagesStoreUseProxyModule then
-						Proxy1[UserId] = v151(Proxy1[UserId])
+						Proxy1[UserId4] = v173(Proxy1[UserId4])
 					else
 						Signal2_1(function(p14)
-							-- upvalues: v151 (copy), UserId (copy), Dictionary (upval)
-							local v46 = v151(p14[UserId])
+							-- upvalues: v173 (copy), UserId4 (copy), Dictionary (upval)
+							local v46 = v173(p14[UserId4])
 							
-							return if v46 == nil then Dictionary.removeKey(p14, UserId) else Dictionary.join(p14, { [UserId] = v46 })
+							return if v46 == nil then Dictionary.removeKey(p14, UserId4) else Dictionary.join(p14, { [UserId4] = v46 })
 						end)
 					end
 				end
@@ -2806,10 +2806,10 @@ return function(Callback)
 						local ChannelNameOverride1 = Signal14(false)
 						
 						if ChannelNameOverride1 == nil or ChannelNameOverride == ChannelNameOverride1 then
-							local MessageId = JoinResult.messageId
+							local MessageId2 = JoinResult.messageId
 							
 							if not v46 and not Flag1 then
-								Callback2(MessageId)
+								Callback2(MessageId2)
 							elseif Flag then
 								Flag1 = true
 							else

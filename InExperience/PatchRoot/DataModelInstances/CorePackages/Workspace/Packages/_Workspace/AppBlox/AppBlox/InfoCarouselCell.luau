@@ -1,24 +1,26 @@
 ﻿local Parent = script:FindFirstAncestor("AppBlox").Parent
 local ReactModule = require(Parent.React)
-local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local ImageSetLabel = require(Parent.UIBlox).Core.ImageSet.ImageSetLabel
 local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 
 return function(Frame)
-	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy), NormalizeFontFaceFunction (copy), ImageSetLabel (copy)
+	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ImageSetLabel (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
-	local Padding = Frame.padding or UseDesignTokensResult.Size.Size_100
 	local IconSize = Frame.iconSize or 18
 	local BodyLargeFont = UseDesignTokensResult.Typography.BodyLarge.Font
-	local FontSize350 = UseDesignTokensResult.FontSize.FontSize_350
 	local Default = UseDesignTokensResult.Color.Content.Default
+	local TitleLargeFont = UseDesignTokensResult.Typography.TitleLarge.Font
 	local Emphasis = UseDesignTokensResult.Color.Content.Emphasis
 	local TextLabel = ReactModule.createElement("TextLabel", {
 		LayoutOrder = 2,
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.XY,
 		Text = Frame.bodyText,
-		FontFace = NormalizeFontFaceFunction(UseDesignTokensResult.Typography.TitleLarge.Font),
+		Font = if FoundationFontFaceMigration then nil else TitleLargeFont,
+		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(TitleLargeFont) else nil,
 		TextSize = UseDesignTokensResult.Typography.TitleLarge.FontSize,
 		TextColor3 = Emphasis.Color3,
 		TextTransparency = Emphasis.Transparency,
@@ -37,15 +39,16 @@ return function(Frame)
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, Padding)
+			Padding = UDim.new(0, Frame.padding or UseDesignTokensResult.Size.Size_100)
 		}),
 		Header = ReactModule.createElement("TextLabel", {
 			LayoutOrder = 1,
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.XY,
 			Text = Frame.headerText,
-			FontFace = NormalizeFontFaceFunction(BodyLargeFont),
-			TextSize = FontSize350,
+			Font = if FoundationFontFaceMigration then nil else BodyLargeFont,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(BodyLargeFont) else nil,
+			TextSize = UseDesignTokensResult.FontSize.FontSize_350,
 			TextColor3 = Default.Color3,
 			TextTransparency = Default.Transparency,
 			TextYAlignment = Enum.TextYAlignment.Center

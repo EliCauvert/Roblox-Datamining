@@ -1,7 +1,9 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local RoactModule = require(CorePackages.Packages.Roact)
 local TModule = require(CorePackages.Packages.t)
-local NormalizeFontFaceFunction = require(CorePackages.Packages.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local TextButton = require(CorePackages.Packages.UIBlox).App.Button.TextButton
 local CheckboxRowModule = require(script.Parent.CheckboxRow)
@@ -66,42 +68,43 @@ function ReportActionSelection.init(DefaultProps)
 end
 
 function ReportActionSelection.render(DefaultProps)
-	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), RoactModule (copy), NormalizeFontFaceFunction (copy), CheckboxRowModule (copy), TextButton (copy)
-	return WithFoundationOrUIBloxStyleFunction(function(Tokens)
+	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), RoactModule (copy), NormalizeFontFaceFunction (copy), CheckboxRowModule (copy), TextButton (copy)
+	return WithFoundationOrUIBloxStyleFunction(function(p1)
+		-- upvalues: FoundationFontFaceMigration (upval)
 		return {
-			Tokens = Tokens,
+			Tokens = if FoundationFontFaceMigration then p1 else nil,
 			Theme = {
 				Divider = {
-					Color = Tokens.Color.Stroke.Emphasis.Color3,
-					Transparency = Tokens.Color.Stroke.Emphasis.Transparency
+					Color = p1.Color.Stroke.Emphasis.Color3,
+					Transparency = p1.Color.Stroke.Emphasis.Transparency
 				},
 				SystemPrimaryContent = {
-					Color = Tokens.Color.ActionSubEmphasis.Foreground.Color3,
-					Transparency = Tokens.Color.ActionSubEmphasis.Foreground.Transparency
+					Color = p1.Color.ActionSubEmphasis.Foreground.Color3,
+					Transparency = p1.Color.ActionSubEmphasis.Foreground.Transparency
 				},
 				TextDefault = {
-					Color = Tokens.Color.Content.Default.Color3,
-					Transparency = Tokens.Color.Content.Default.Transparency
+					Color = p1.Color.Content.Default.Color3,
+					Transparency = p1.Color.Content.Default.Transparency
 				},
 				TextEmphasis = {
-					Color = Tokens.Color.Content.Emphasis.Color3,
-					Transparency = Tokens.Color.Content.Emphasis.Transparency
+					Color = p1.Color.Content.Emphasis.Color3,
+					Transparency = p1.Color.Content.Emphasis.Transparency
 				}
 			},
 			Font = {
 				BaseSize = 1,
 				CaptionHeader = {
-					Font = Tokens.Typography.CaptionLarge.Font,
-					RelativeSize = Tokens.Typography.CaptionLarge.FontSize
+					Font = p1.Typography.CaptionLarge.Font,
+					RelativeSize = p1.Typography.CaptionLarge.FontSize
 				},
 				Header1 = {
-					Font = Tokens.Typography.HeadingSmall.Font,
-					RelativeSize = Tokens.Typography.HeadingSmall.FontSize
+					Font = p1.Typography.HeadingSmall.Font,
+					RelativeSize = p1.Typography.HeadingSmall.FontSize
 				}
 			}
 		}
 	end, function(p1)
-		-- upvalues: RoactModule (upval), DefaultProps (copy), NormalizeFontFaceFunction (upval), CheckboxRowModule (upval), TextButton (upval)
+		-- upvalues: RoactModule (upval), DefaultProps (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), CheckboxRowModule (upval), TextButton (upval)
 		local BaseSize = p1.Font.BaseSize
 		
 		return RoactModule.createElement("Frame", {
@@ -126,7 +129,8 @@ function ReportActionSelection.render(DefaultProps)
 				TextColor3 = p1.Theme.TextEmphasis.Color,
 				TextTransparency = p1.Theme.TextEmphasis.Transparency,
 				TextSize = p1.Font.Header1.RelativeSize * BaseSize,
-				FontFace = NormalizeFontFaceFunction(p1.Tokens.Typography.HeadingSmall.Font),
+				Font = if FoundationFontFaceMigration then nil else p1.Font.Header1.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.HeadingSmall.Font) else nil,
 				AutomaticSize = Enum.AutomaticSize.XY
 			}),
 			subtitle = RoactModule.createElement("TextLabel", {
@@ -138,7 +142,8 @@ function ReportActionSelection.render(DefaultProps)
 				TextColor3 = p1.Theme.TextEmphasis.Color,
 				TextTransparency = p1.Theme.TextEmphasis.Transparency,
 				TextSize = p1.Font.CaptionHeader.RelativeSize * BaseSize,
-				FontFace = NormalizeFontFaceFunction(p1.Tokens.Typography.CaptionLarge.Font),
+				Font = if FoundationFontFaceMigration then nil else p1.Font.CaptionHeader.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.CaptionLarge.Font) else nil,
 				AutomaticSize = Enum.AutomaticSize.Y
 			}),
 			actions = RoactModule.createElement("Frame", {
@@ -162,7 +167,8 @@ function ReportActionSelection.render(DefaultProps)
 					TextColor3 = p1.Theme.TextDefault.Color,
 					TextTransparency = p1.Theme.TextDefault.Transparency,
 					TextSize = p1.Font.CaptionHeader.RelativeSize * BaseSize,
-					FontFace = NormalizeFontFaceFunction(p1.Tokens.Typography.CaptionLarge.Font),
+					Font = if FoundationFontFaceMigration then nil else p1.Font.CaptionHeader.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.CaptionLarge.Font) else nil,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					AutomaticSize = Enum.AutomaticSize.Y
 				}),

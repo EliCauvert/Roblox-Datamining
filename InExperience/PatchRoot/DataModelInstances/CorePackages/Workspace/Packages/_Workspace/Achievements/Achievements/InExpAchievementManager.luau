@@ -8,7 +8,6 @@ local GetUserRecentExperiencesModule = require(Achievements.Requests.GetUserRece
 local DashModule = require(Parent.Dash)
 local TimeRefresherModule = require(Achievements.AchievementDataRefresher.TimeRefresher)
 local FriendCountRefresherModule = require(Achievements.AchievementDataRefresher.FriendCountRefresher)
-local FFlagInExpAchievementsIsolateStartUpErrorsModule = require(Achievements.Flags.FFlagInExpAchievementsIsolateStartUpErrors)
 local ConfigResult = HttpRequestModule.config({
 	requestFunction = function(p1, p2, p3)
 		-- upvalues: HttpRequestModule (copy)
@@ -39,7 +38,7 @@ pcall(function()
 end)
 local InExpAchievementManager = {
 	startUp = function(p1)
-		-- upvalues: SignalModule (copy), TimeRefresherModule (copy), FriendCountRefresherModule (copy), AchievementModule (copy), FFlagInExpAchievementsIsolateStartUpErrorsModule (copy), LoggerModule (copy)
+		-- upvalues: SignalModule (copy), TimeRefresherModule (copy), FriendCountRefresherModule (copy), AchievementModule (copy)
 		local ReadableSignal, ReadableSignal2 = SignalModule.createReadableSignal(0)
 		local ReadableSignal1, ReadableSignal2_1 = SignalModule.createReadableSignal(0)
 		local ReadableSignal3, ReadableSignal2_2 = SignalModule.createReadableSignal(0)
@@ -52,24 +51,8 @@ local InExpAchievementManager = {
 		p1.achievementExplorer = AchievementModule.new(AchievementModule.NAMES.ACHIEVEMENT_EXPLORER, ReadableSignal1, p1.achievementService)
 		p1.achievementTrailblazer = AchievementModule.new(AchievementModule.NAMES.ACHIEVEMENT_TRAILBLAZER, ReadableSignal1, p1.achievementService)
 		p1.achievementStrengthInNumbers = AchievementModule.new(AchievementModule.NAMES.ACHIEVEMENT_STRENGTH_IN_NUMBERS, ReadableSignal3, p1.achievementService)
-		
-		if FFlagInExpAchievementsIsolateStartUpErrorsModule then
-			local Success, Result = pcall(p1._checkStrengthInNumbers, p1, ReadableSignal2_2)
-			
-			if not Success then
-				LoggerModule:warning("Failed to check Strength In Numbers achievement: " .. tostring(Result))
-			end
-			local Success1, Result1 = pcall(p1._checkJoinExperienceAchievements, p1, ReadableSignal2_1)
-			
-			if not Success1 then
-				LoggerModule:warning("Failed to check join experience achievements: " .. tostring(Result1))
-				
-				return
-			end
-		else
-			p1:_checkStrengthInNumbers(ReadableSignal2_2)
-			p1:_checkJoinExperienceAchievements(ReadableSignal2_1)
-		end
+		p1:_checkStrengthInNumbers(ReadableSignal2_2)
+		p1:_checkJoinExperienceAchievements(ReadableSignal2_1)
 	end,
 	_checkJoinExperienceAchievements = function(p1, Callback: (any) -> ())
 		-- upvalues: DashModule (copy), GetUserRecentExperiencesModule (copy), LoggerModule (copy)

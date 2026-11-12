@@ -2165,7 +2165,7 @@ local function StepFreecam(DeltaTime: number)
 			for _, value in ipairs(list1) do
 				local GetResult = value.get()
 				
-				if GetResult and GetResult.Enabled and ActiveGroupName ~= value.group then
+				if GetResult and (GetResult.Enabled and ActiveGroupName ~= value.group) then
 					local Entry = Config[value.key]
 					local FmtResult = value.fmt(GetResult)
 					Entry.bubble.Visible = FmtResult ~= ""

@@ -4,13 +4,15 @@ local _ = require(AppChat.types)
 local CryoModule = require(Parent.Cryo)
 local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
-local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local config = { bodyText = "" }
 
 return ReactModule.memo(function(p1)
-	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), ReactModule (copy), ImageSetLabel (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), ReactModule (copy), ImageSetLabel (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseStyleResult = UseStyleFunction()
 	local Style = JoinResult.style or UseStyleResult
@@ -50,7 +52,8 @@ return ReactModule.memo(function(p1)
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
 			AutomaticSize = Enum.AutomaticSize.X,
-			FontFace = NormalizeFontFaceFunction(Style.Tokens.Typography.BodyLarge.Font),
+			Font = if FoundationFontFaceMigration then nil else Style.Font.Body.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Style.Tokens.Typography.BodyLarge.Font) else nil,
 			Size = UDim2.new(0, 0, 1, 0),
 			Text = JoinResult.bodyText,
 			TextColor3 = JoinResult.bodyTextColor3 or Style.Theme.TextEmphasis.Color,

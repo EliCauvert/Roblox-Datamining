@@ -32,8 +32,6 @@ local GetReplyingToStoreModule = require(AppChat.Stores.GetReplyingToStore)
 local FFlagAppChatSignalsReplyStoreModule = require(AppChat.Flags.FFlagAppChatSignalsReplyStore)
 local SmartSuggestionsChipRowContainerModule = require(script.Parent.SmartSuggestions.SmartSuggestionsChipRowContainer)
 local FFlagAppChatSmartSuggestionsModule = require(AppChat.Flags.FFlagAppChatSmartSuggestions)
-local GetEmojiSetsStoreModule = require(AppChat.Stores.GetEmojiSetsStore)
-local FFlagAppChatEnableReactions = require(Parent.SharedFlags).FFlagAppChatEnableReactions
 local ConversationExitTypeModule = require(AppChat.Analytics.Enums.ConversationExitType)
 local SendMessageErrorModule = require(AppChat.Analytics.Enums.SendMessageError)
 local WithRoactChatAnalyticsModule = require(AppChat.LegacyAnalytics.withRoactChatAnalytics)
@@ -434,7 +432,7 @@ function ChatConversation.init(p1)
 end
 
 function ChatConversation.didMount(p1)
-	-- upvalues: FFlagAppChatConsoleFocusFixesModule (copy), FocusBehaviorsModule (copy), AppChatNewChatInputBarIxpEnabled (copy), IXPService (copy), AppChatNewChatInputBarIxpLayer (copy), FFlagAppChatEnableReactions (copy), GetEmojiSetsStoreModule (copy)
+	-- upvalues: FFlagAppChatConsoleFocusFixesModule (copy), FocusBehaviorsModule (copy), AppChatNewChatInputBarIxpEnabled (copy), IXPService (copy), AppChatNewChatInputBarIxpLayer (copy)
 	p1.isMounted = true
 	p1.markAsRead(p1.props.markConversationAsRead, p1.props.conversationId)()
 	local Value = p1.inputBarRef:getValue()
@@ -446,9 +444,6 @@ function ChatConversation.didMount(p1)
 	if AppChatNewChatInputBarIxpEnabled and p1.props.shouldShowChatInputBar then
 		IXPService:LogFlagLinkedUserLayerExposure(AppChatNewChatInputBarIxpLayer)
 	end
-	if FFlagAppChatEnableReactions then
-		GetEmojiSetsStoreModule(false).getAndFetchEmojiSets()
-	end
 end
 
 function ChatConversation.willUpdate(p1, p2, _)
@@ -458,7 +453,7 @@ function ChatConversation.willUpdate(p1, p2, _)
 end
 
 function ChatConversation.didUpdate(p1, DefaultProps, p2)
-	-- upvalues: FFlagAppChatConsoleFocusFixesModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatScrollToLatestModule (copy), RoactModule (copy), FFlagAppChatEnableReactions (copy), GetEmojiSetsStoreModule (copy)
+	-- upvalues: FFlagAppChatConsoleFocusFixesModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatScrollToLatestModule (copy), RoactModule (copy)
 	if p1.props.wideMode and p1.props.navigation.getParam("navigatedWithFocus") then
 		local Value = p1.inputBarRef:getValue()
 		p1.props.navigation.setParams({ navigatedWithFocus = false })
@@ -494,10 +489,6 @@ function ChatConversation.didUpdate(p1, DefaultProps, p2)
 			end)
 		end
 		p1.markAsRead(p1.props.markConversationAsRead, p1.props.conversationId, false)()
-		
-		if FFlagAppChatEnableReactions then
-			GetEmojiSetsStoreModule(false).getAndFetchEmojiSets()
-		end
 	end
 	if FFlagAppChatPerfTrackingModule and DefaultProps.shouldShowChatInputBar ~= p1.props.shouldShowChatInputBar then
 		p1.reportInputBarReady(p1.state.inputBarHeight)

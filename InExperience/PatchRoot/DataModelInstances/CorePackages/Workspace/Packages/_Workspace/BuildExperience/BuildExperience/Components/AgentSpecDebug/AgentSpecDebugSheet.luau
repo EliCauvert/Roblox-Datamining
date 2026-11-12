@@ -1,6 +1,5 @@
 ﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
 local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
-local FFlagBuildExperienceAdvancedPreviewSpecs = require(Parent.SharedFlags).FFlagBuildExperienceAdvancedPreviewSpecs
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
@@ -83,16 +82,9 @@ local function getSelectedValue(UseMemoResult, Override, p1)
 end
 
 return function(p2)
-	-- upvalues: FoundationModule (copy), ReactModule (copy), FFlagBuildExperienceAdvancedPreviewSpecs (copy), CreatorAgentChatModule (copy), SignalsReactModule (copy), Computed (copy), Computed1 (copy), getRows (copy), Text (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy), RadioGroup (copy), InputSize (copy), Divider (copy), getSelectedValue (copy), Loading (copy), Sheet (copy), TextInput (copy), Button (copy)
+	-- upvalues: FoundationModule (copy), ReactModule (copy), CreatorAgentChatModule (copy), SignalsReactModule (copy), Computed (copy), Computed1 (copy), getRows (copy), View (copy), Text (copy), Icon (copy), IconName (copy), IconSize (copy), RadioGroup (copy), InputSize (copy), Divider (copy), getSelectedValue (copy), Loading (copy), Sheet (copy), TextInput (copy), Button (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(p2.specVersion or "")
-	local HasSpecName: boolean = FFlagBuildExperienceAdvancedPreviewSpecs and p2.specName ~= nil
-	local Value = nil
-	local Callback = nil
-	
-	if FFlagBuildExperienceAdvancedPreviewSpecs then
-		Value, Callback = ReactModule.useState(p2.specName or "build-on-mobile")
-	end
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
 	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2_1 (copy), CreatorAgentChatModule (upval)
@@ -117,12 +109,7 @@ return function(p2)
 	end, { UseMemoResult })
 	local Element = nil
 	
-	if HasSpecName and Value == "build-on-mobile-advanced" then
-		Element = ReactModule.createElement(Text, {
-			Text = "Enter the published build-on-mobile-advanced preview hash below.",
-			tag = "size-full-0 auto-y text-body-small text-wrap text-align-x-left content-default"
-		})
-	elseif UseSignalStateResult == "Ready" then
+	if UseSignalStateResult == "Ready" then
 		local Ceiled = math.ceil(UseTokensResult.Typography.TitleMedium.FontSize * UseTokensResult.Typography.TitleMedium.LineHeight)
 		local Elements = {}
 		
@@ -210,33 +197,6 @@ return function(p2)
 		Content = ReactModule.createElement(Sheet.Content, nil, { List = Element }),
 		Actions = ReactModule.createElement(Sheet.Actions, nil, {
 			Form = ReactModule.createElement(View, { tag = "col gap-small size-full-0 auto-y" }, {
-				SpecName = if HasSpecName then ReactModule.createElement(RadioGroup.Root, {
-					LayoutOrder = 0,
-					testId = "AgentSpecDebug.SpecName",
-					tag = "size-full-0 auto-y",
-					value = Value,
-					onValueChanged = function(p4)
-						-- upvalues: Callback (ref), UseStateResult2 (copy), UseStateResult2_2 (copy)
-						if p4 == "build-on-mobile" or p4 == "build-on-mobile-advanced" then
-							Callback(p4)
-							UseStateResult2("")
-							UseStateResult2_2(nil)
-						end
-					end
-				}, {
-					Default = ReactModule.createElement(RadioGroup.Item, {
-						LayoutOrder = 1,
-						label = "Default spec",
-						value = "build-on-mobile",
-						testId = "AgentSpecDebug.SpecName.default"
-					}),
-					Advanced = ReactModule.createElement(RadioGroup.Item, {
-						LayoutOrder = 2,
-						label = "Advanced spec",
-						value = "build-on-mobile-advanced",
-						testId = "AgentSpecDebug.SpecName.advanced"
-					})
-				}) else nil,
 				Input = ReactModule.createElement(TextInput, {
 					LayoutOrder = 1,
 					label = "specVersion",
@@ -252,8 +212,8 @@ return function(p2)
 					variant = FoundationModule.Enums.ButtonVariant.Emphasis,
 					width = UDim.new(1, 0),
 					onActivated = function()
-						-- upvalues: p2 (copy), UseStateResult (copy), HasSpecName (copy), Value (ref)
-						p2.onSave(UseStateResult, if HasSpecName and Value == "build-on-mobile-advanced" then Value else nil)
+						-- upvalues: p2 (copy), UseStateResult (copy)
+						p2.onSave(UseStateResult)
 						p2.onClose()
 					end
 				})

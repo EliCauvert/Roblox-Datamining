@@ -112,7 +112,7 @@ return {
 				return nil, "A subscription's name can't be changed after it is created."
 			elseif config.productType ~= nil then
 				return nil, "A subscription's product type can't be changed after it is created."
-			elseif config.description == nil and (config.priceInRobux == nil and config.imageAssetId == nil) then
+			elseif config.description == nil and config.priceInRobux == nil and config.imageAssetId == nil then
 				return nil, "An update needs a description, priceInRobux or imageAssetId."
 			end
 		elseif ParseActionResult == "deactivate" and config.cancelRenewals == nil then

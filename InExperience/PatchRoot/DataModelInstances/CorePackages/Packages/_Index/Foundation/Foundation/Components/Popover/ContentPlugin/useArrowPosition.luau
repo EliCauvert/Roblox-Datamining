@@ -1,10 +1,11 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
 local ReactModule = require(Foundation.Parent.React)
 local ConstantsModule = require(Foundation.Constants)
+local FlagsModule = require(Foundation.Utility.Flags)
 local PopoverSideModule = require(Foundation.Enums.PopoverSide)
 local RadiusModule = require(Foundation.Enums.Radius)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
-local PLUGINSHADOWSIZE = if require(Foundation.Utility.Flags).FoundationPluginShadowSize then ConstantsModule.PLUGIN_SHADOW_SIZE else ConstantsModule.SHADOW_SIZE
+local PLUGINSHADOWSIZE = if FlagsModule.FoundationPopoverPluginOverlayMeasurement and FlagsModule.FoundationPluginShadowSize then ConstantsModule.PLUGIN_SHADOW_SIZE else ConstantsModule.SHADOW_SIZE
 
 return function(p1, Top, Circle, p2, p3, Frame)
 	-- upvalues: UseTokensModule (copy), ReactModule (copy), RadiusModule (copy), PopoverSideModule (copy), PLUGINSHADOWSIZE (copy)

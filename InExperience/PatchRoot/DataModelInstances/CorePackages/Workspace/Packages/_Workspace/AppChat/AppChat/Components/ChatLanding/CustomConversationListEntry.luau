@@ -7,6 +7,7 @@ local UseTextSizeOffsetFunction = UIBloxModule.Core.Style.useTextSizeOffset
 local UseChatPagePaddingModule = require(AppChat.Contexts.ChatPagePadding.useChatPagePadding)
 local FoundationModule = require(Parent.Foundation)
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local GetBoldTextThemeModule = require(script.Parent.Utils.getBoldTextTheme)
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local IconSize = UIBloxModule.App.Constant.IconSize
@@ -15,12 +16,14 @@ local FFlagAppChatRemoveConversationListDividerModule = require(AppChat.Flags.FF
 local IconsNavigationPushRight = UIBloxModule.App.ImageSet.Images["icons/navigation/pushRight"]
 
 function CustomConversationListEntry(p1)
-	-- upvalues: UseStyleFunction (copy), GetBoldTextThemeModule (copy), UseTextSizeOffsetFunction (copy), UseChatPagePaddingModule (copy), IconSize (copy), FoundationModule (copy), ReactModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), ImageSetLabel (copy), NormalizeFontFaceFunction (copy), IconsNavigationPushRight (copy), FFlagAppChatRemoveConversationListDividerModule (copy)
+	-- upvalues: UseStyleFunction (copy), GetBoldTextThemeModule (copy), UseTextSizeOffsetFunction (copy), UseChatPagePaddingModule (copy), IconSize (copy), FoundationModule (copy), ReactModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), ImageSetLabel (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), IconsNavigationPushRight (copy), FFlagAppChatRemoveConversationListDividerModule (copy)
 	local UseStyleResult = UseStyleFunction()
 	local BoldTextThemeModule = GetBoldTextThemeModule(UseStyleResult)
 	local UseTextSizeOffsetResult = UseTextSizeOffsetFunction()
 	local UseChatPagePaddingModuleResult = UseChatPagePaddingModule()
+	local HeaderFont = BoldTextThemeModule.Font.Header2.Font
 	local ScaledRelativeSize = BoldTextThemeModule.Font.Header2.RelativeSize * BoldTextThemeModule.Font.BaseSize
+	local CaptionBodyFont = UseStyleResult.Font.CaptionBody.Font
 	local ScaledRelativeSize1 = UseStyleResult.Font.CaptionBody.RelativeSize * UseStyleResult.Font.BaseSize
 	local XOffset = 60 - (60 - IconSize.Regular) / 2
 	
@@ -85,7 +88,8 @@ function CustomConversationListEntry(p1)
 					TextSize = ScaledRelativeSize,
 					TextColor3 = BoldTextThemeModule.Theme.TextEmphasis.Color,
 					TextTransparency = BoldTextThemeModule.Theme.TextEmphasis.Transparency,
-					FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.TitleLarge.Font),
+					Font = if FoundationFontFaceMigration then nil else HeaderFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.TitleLarge.Font) else nil,
 					Text = p1.titleText or "",
 					TextTruncate = Enum.TextTruncate.AtEnd,
 					TextXAlignment = Enum.TextXAlignment.Left
@@ -97,7 +101,8 @@ function CustomConversationListEntry(p1)
 					TextSize = ScaledRelativeSize1,
 					TextColor3 = UseStyleResult.Theme.TextDefault.Color,
 					TextTransparency = UseStyleResult.Theme.TextDefault.Transparency,
-					FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodySmall.Font),
+					Font = if FoundationFontFaceMigration then nil else CaptionBodyFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodySmall.Font) else nil,
 					Text = p1.subTitleText,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextTruncate = Enum.TextTruncate.AtEnd

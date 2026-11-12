@@ -4,7 +4,9 @@ local AppChat = script:FindFirstAncestor("AppChat")
 local Parent = AppChat.Parent
 local Tokens = require(Parent.UIBlox).App.Style.Tokens
 local ColorMode = require(Parent.Foundation).Enums.ColorMode
-local FFlagSettingsHubIndependentBackgroundVisibility = require(Parent.SharedFlags).getFFlagSettingsHubIndependentBackgroundVisibility()
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagExpChatEnableFriendsTab = SharedFlagsModule.FFlagExpChatEnableFriendsTab
+local FFlagSettingsHubIndependentBackgroundVisibility = SharedFlagsModule.getFFlagSettingsHubIndependentBackgroundVisibility()
 local GetFFlagAppChatInExperienceTabBarAdjustmentModule = require(AppChat.Flags.getFFlagAppChatInExperienceTabBarAdjustment)
 local EnumScreensModule = require(AppChat.EnumScreens)
 local ChatSessionRefCountModule = require(AppChat.Hooks.ChatSessionRefCount)
@@ -12,6 +14,11 @@ local InExperienceAppChatModalModule = {}
 InExperienceAppChatModalModule.__index = InExperienceAppChatModalModule
 
 local function _()
+	-- upvalues: AppChat (copy)
+	return require(AppChat.Flags.getFFlagAppChatEnableRootedNavigation)()
+end
+
+local _ = function()
 	-- upvalues: AppChat (copy)
 	return require(AppChat.Stores.GetRootedNavigationStore)(false)
 end
@@ -62,12 +69,12 @@ function InExperienceAppChatModalModule.initialize(p1, TopMargin, SettingsHub, V
 end
 
 function InExperienceAppChatModalModule.setVisible(p1, _visible, EntryPoint)
-	-- upvalues: AppChat (copy), ChatSessionRefCountModule (copy), CoreGui (copy), GetFFlagAppChatInExperienceTabBarAdjustmentModule (copy), GuiService (copy), FFlagSettingsHubIndependentBackgroundVisibility (copy)
-	if not _visible then
+	-- upvalues: AppChat (copy), FFlagExpChatEnableFriendsTab (copy), ChatSessionRefCountModule (copy), CoreGui (copy), GetFFlagAppChatInExperienceTabBarAdjustmentModule (copy), GuiService (copy), FFlagSettingsHubIndependentBackgroundVisibility (copy)
+	if not _visible and require(AppChat.Flags.getFFlagAppChatEnableRootedNavigation)() then
 		require(AppChat.Stores.GetRootedNavigationStore)(false).cancelNavigation()
 	end
 	if _visible == p1._visible then return end
-	if not _visible and p1._reserveChatSessionOnClose then
+	if FFlagExpChatEnableFriendsTab and not _visible and p1._reserveChatSessionOnClose then
 		p1._reserveChatSessionOnClose = false
 		
 		if ChatSessionRefCountModule.getReservations() == 0 then
@@ -109,7 +116,7 @@ function InExperienceAppChatModalModule.setVisible(p1, _visible, EntryPoint)
 		ImageButton.Parent = InExperienceAppChatModal
 		
 		if GetFFlagAppChatInExperienceTabBarAdjustmentModule() and p1.viewportUtil then
-			local function v21()
+			local function v24()
 				-- upvalues: p1 (copy), Padding (copy), GuiService (upval)
 				local GetResult = p1.viewportUtil.screenSize:get()
 				
@@ -123,8 +130,8 @@ function InExperienceAppChatModalModule.setVisible(p1, _visible, EntryPoint)
 				end
 			end
 			
-			p1.viewportUtil.screenSize:connect(v21)
-			v21()
+			p1.viewportUtil.screenSize:connect(v24)
+			v24()
 		end
 		local SizeConstraint = Instance.new("UISizeConstraint")
 		SizeConstraint.MaxSize = Vector2.new(850, 780)
@@ -184,26 +191,29 @@ function InExperienceAppChatModalModule.reserveChatSessionOnClose(p1)
 end
 
 function InExperienceAppChatModalModule.openToScreen(p1, RequestedRoute)
-	-- upvalues: AppChat (copy), EnumScreensModule (copy)
+	-- upvalues: AppChat (copy), EnumScreensModule (copy), FFlagExpChatEnableFriendsTab (copy)
 	local RequestedRoute1 = RequestedRoute
-	local v1 = require(AppChat.Stores.GetRootedNavigationStore)(false)
-	local Params = RequestedRoute.params
-	local ConversationId = if Params then Params.conversationId else nil
 	
-	if RequestedRoute.screen == EnumScreensModule.ChatDetails and (Params ~= nil and (Params.rooted == true and (type(ConversationId) == "string" and ConversationId ~= ""))) then
-		local Copy = table.clone(RequestedRoute.params)
-		Copy.rootedNavigationRequestId = v1.beginNavigation()
-		RequestedRoute1 = { screen = RequestedRoute.screen, params = Copy }
-	else
-		v1.cancelNavigation()
+	if require(AppChat.Flags.getFFlagAppChatEnableRootedNavigation)() then
+		local v1 = require(AppChat.Stores.GetRootedNavigationStore)(false)
+		local Params = RequestedRoute.params
+		local ConversationId = if Params then Params.conversationId else nil
+		
+		if RequestedRoute.screen == EnumScreensModule.ChatDetails and (Params ~= nil and (Params.rooted == true and (type(ConversationId) == "string" and ConversationId ~= ""))) then
+			local Copy = table.clone(RequestedRoute.params)
+			Copy.rootedNavigationRequestId = v1.beginNavigation()
+			RequestedRoute1 = { screen = RequestedRoute.screen, params = Copy }
+		else
+			v1.cancelNavigation()
+		end
 	end
 	p1.requestedRoute = RequestedRoute1
 	p1.requestedRouteSignal:Fire(RequestedRoute1)
 	
-	if RequestedRoute.params and RequestedRoute.params.rooted == true then
+	if FFlagExpChatEnableFriendsTab and RequestedRoute.params and RequestedRoute.params.rooted == true then
 		p1:reserveChatSessionOnClose()
 	end
-	p1:setVisible(true, if RequestedRoute1.params then RequestedRoute1.params.entryPoint else nil)
+	p1:setVisible(true, if FFlagExpChatEnableFriendsTab and RequestedRoute1.params then RequestedRoute1.params.entryPoint else nil)
 end
 
 function InExperienceAppChatModalModule.clearRequestedRoute(p1)

@@ -20,21 +20,6 @@ return function()
 	local Signal9, Signal2_8 = SignalsModule.createSignal(nil)
 	local Token = 0
 	
-	local function requestRemoveAllFromChat(Resources)
-		-- upvalues: Token (ref), Signal2_5 (copy)
-		if #Resources ~= 0 then
-			Token += 1
-			Signal2_5({
-				action = "Remove",
-				token = Token,
-				resources = Resources,
-				replacePaths = {}
-			})
-			
-			return
-		end
-	end
-	
 	return {
 		getIsOpen = Signal,
 		getIsChatOpen = GetPlayButtonStoreModule(false).getIsActive,
@@ -73,44 +58,22 @@ return function()
 				Signal2_5(nil)
 			end
 		end,
-		requestAddToChat = function(p1, p2, FocusComposer)
+		requestAddToChat = function(Resource, ReplacePath, FocusComposer)
 			-- upvalues: Token (ref), Signal2_5 (copy)
-			local Resources = { p1 }
-			local T = if p2 == nil then {} else { p2 }
-			
-			if #Resources ~= 0 then
-				Token += 1
-				Signal2_5({
-					action = "Add",
-					token = Token,
-					resources = Resources,
-					replacePaths = T,
-					focusComposer = FocusComposer
-				})
-				
-				return
-			end
+			Token += 1
+			Signal2_5({
+				action = "Add",
+				token = Token,
+				resource = Resource,
+				replacePath = ReplacePath,
+				focusComposer = FocusComposer
+			})
 		end,
-		requestRemoveFromChat = function(p1)
-			-- upvalues: requestRemoveAllFromChat (copy)
-			requestRemoveAllFromChat({ p1 })
-		end,
-		requestAddAllToChat = function(Resources, ReplacePaths, FocusComposer)
+		requestRemoveFromChat = function(Resource)
 			-- upvalues: Token (ref), Signal2_5 (copy)
-			if #Resources ~= 0 then
-				Token += 1
-				Signal2_5({
-					action = "Add",
-					token = Token,
-					resources = Resources,
-					replacePaths = ReplacePaths,
-					focusComposer = FocusComposer
-				})
-				
-				return
-			end
+			Token += 1
+			Signal2_5({ action = "Remove", token = Token, resource = Resource })
 		end,
-		requestRemoveAllFromChat = requestRemoveAllFromChat,
 		getChatComposerState = Signal7,
 		setChatComposerState = Signal2_6,
 		getPromptFailure = Signal8,

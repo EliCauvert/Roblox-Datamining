@@ -5,6 +5,7 @@ local TModule = require(CorePackages.Packages.t)
 local UIBloxModule = require(CorePackages.Packages.UIBlox)
 local FoundationModule = require(CorePackages.Packages.Foundation)
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UserLibModule = require(CorePackages.Workspace.Packages.UserLib)
 local PlayerListModule = require(CorePackages.Workspace.Packages.PlayerList)
 local UseLayoutValuesFunction = PlayerListModule.Common.useLayoutValues
@@ -38,11 +39,11 @@ DropDownPlayerHeader.validateProps = TModule.strictInterface({
 })
 
 function DropDownPlayerHeader.render(p1)
-	-- upvalues: WithLayoutValuesFunction (copy), WithStyleFunction (copy), FFlagEnableVerifiedBadgeStore (copy), UserLibModule (copy), FFlagPlayerListDropDownShowPlatformName (copy), RoactModule (copy), EmojiTextLabel (copy), CryoModule (copy), Emoji (copy), FFlagEnableMobilePlayerListOnConsole (copy), NormalizeFontFaceFunction (copy), View (copy), Result (copy), Image (copy), Text (copy)
+	-- upvalues: WithLayoutValuesFunction (copy), WithStyleFunction (copy), FFlagEnableVerifiedBadgeStore (copy), UserLibModule (copy), FFlagPlayerListDropDownShowPlatformName (copy), RoactModule (copy), EmojiTextLabel (copy), FoundationFontFaceMigration (copy), CryoModule (copy), Emoji (copy), FFlagEnableMobilePlayerListOnConsole (copy), NormalizeFontFaceFunction (copy), View (copy), Result (copy), Image (copy), Text (copy)
 	return WithLayoutValuesFunction(function(p2)
-		-- upvalues: WithStyleFunction (upval), p1 (copy), FFlagEnableVerifiedBadgeStore (upval), UserLibModule (upval), FFlagPlayerListDropDownShowPlatformName (upval), RoactModule (upval), EmojiTextLabel (upval), CryoModule (upval), Emoji (upval), FFlagEnableMobilePlayerListOnConsole (upval), NormalizeFontFaceFunction (upval), View (upval), Result (upval), Image (upval), Text (upval)
+		-- upvalues: WithStyleFunction (upval), p1 (copy), FFlagEnableVerifiedBadgeStore (upval), UserLibModule (upval), FFlagPlayerListDropDownShowPlatformName (upval), RoactModule (upval), EmojiTextLabel (upval), FoundationFontFaceMigration (upval), CryoModule (upval), Emoji (upval), FFlagEnableMobilePlayerListOnConsole (upval), NormalizeFontFaceFunction (upval), View (upval), Result (upval), Image (upval), Text (upval)
 		return WithStyleFunction(function(p3)
-			-- upvalues: p2 (ref), p1 (upval), FFlagEnableVerifiedBadgeStore (upval), UserLibModule (upval), FFlagPlayerListDropDownShowPlatformName (upval), RoactModule (upval), EmojiTextLabel (upval), CryoModule (upval), Emoji (upval), FFlagEnableMobilePlayerListOnConsole (upval), NormalizeFontFaceFunction (upval), View (upval), Result (upval), Image (upval), Text (upval)
+			-- upvalues: p2 (ref), p1 (upval), FFlagEnableVerifiedBadgeStore (upval), UserLibModule (upval), FFlagPlayerListDropDownShowPlatformName (upval), RoactModule (upval), EmojiTextLabel (upval), FoundationFontFaceMigration (upval), CryoModule (upval), Emoji (upval), FFlagEnableMobilePlayerListOnConsole (upval), NormalizeFontFaceFunction (upval), View (upval), Result (upval), Image (upval), Text (upval)
 			p2 = p1.props.layoutValues
 			local Tokens = p1.props.tokens
 			local Size3000 = Tokens.Size.Size_3000
@@ -82,7 +83,7 @@ function DropDownPlayerHeader.render(p1)
 							fluidSizing = false,
 							LayoutOrder = 1,
 							BackgroundTransparency = 1,
-							fontStyle = CryoModule.Dictionary.join(p3.Font.Header2, { Font = p3.Tokens.Typography.TitleLarge.Font }),
+							fontStyle = if FoundationFontFaceMigration then CryoModule.Dictionary.join(p3.Font.Header2, { Font = p3.Tokens.Typography.TitleLarge.Font }) else p3.Font.Header2,
 							colorStyle = p3.Theme.TextEmphasis,
 							emoji = Emoji.Verified,
 							maxSize = Vector2.new(p2.PlayerDropDownSizeXMobile - Size3000, Size500),
@@ -97,7 +98,8 @@ function DropDownPlayerHeader.render(p1)
 							BackgroundTransparency = 1,
 							Size = UDim2.new(1, 0, 0, Size500),
 							Text = Player.DisplayName,
-							FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.TitleLarge.Font),
+							Font = if FoundationFontFaceMigration then nil else p3.Font.Header2.Font,
+							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.TitleLarge.Font) else nil,
 							TextSize = if FFlagEnableMobilePlayerListOnConsole then p2.DropDownHeaderDisplayNameTextSize else p3.Font.BaseSize * p3.Font.Header2.RelativeSize,
 							TextColor3 = p3.Theme.TextEmphasis.Color,
 							TextTransparency = p3.Theme.TextEmphasis.Transparency,
@@ -115,7 +117,8 @@ function DropDownPlayerHeader.render(p1)
 							BackgroundTransparency = 1,
 							Size = UDim2.new(1, 0, 0, Size500),
 							Text = "@" .. Player.Name,
-							FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.CaptionLarge.Font),
+							Font = if FoundationFontFaceMigration then nil else p3.Font.CaptionHeader.Font,
+							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.CaptionLarge.Font) else nil,
 							TextSize = if FFlagEnableMobilePlayerListOnConsole then p2.DropDownHeaderPlayerNameTextSize else p3.Font.BaseSize * p3.Font.CaptionHeader.RelativeSize,
 							TextColor3 = p3.Theme.TextMuted.Color,
 							TextTransparency = p3.Theme.TextMuted.Transparency,

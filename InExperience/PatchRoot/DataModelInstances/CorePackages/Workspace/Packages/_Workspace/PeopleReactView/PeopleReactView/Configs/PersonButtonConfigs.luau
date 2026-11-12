@@ -163,7 +163,7 @@ return function(UserId, Enabled)
 		else
 			table.insert(List, config2)
 		end
-		local config3 = {
+		local config21 = {
 			id = ConstantsService.PERSON_BUTTONS.REPORT_PLAYER,
 			onIcon = if FFlagStandardizeSafetyIcon then ConstantsModule.PEOPLEPAGE.PERSON_BUTTONS.ICON.REPORT_PLAYER_FLAG elseif GetFFlagNewPeoplePageIconsFunction() then ConstantsModule.PEOPLEPAGE.PERSON_BUTTONS.ICON.REPORT_PLAYER_NEW else ConstantsModule.PEOPLEPAGE.PERSON_BUTTONS.ICON.REPORT_PLAYER_LEGACY,
 			shouldShow = function()
@@ -181,11 +181,11 @@ return function(UserId, Enabled)
 		}
 		
 		if GetFFlagAddPeoplePageCardLayoutFunction() then
-			List[ConstantsService.PERSON_BUTTONS.REPORT_PLAYER] = config3
+			List[ConstantsService.PERSON_BUTTONS.REPORT_PLAYER] = config21
 		else
-			table.insert(List, config3)
+			table.insert(List, config21)
 		end
-		local config4 = {
+		local config11 = {
 			layoutOrder = 20,
 			id = ConstantsService.PERSON_BUTTONS.INSPECT,
 			onIcon = if GetFFlagNewPeoplePageIconsFunction() then ConstantsModule.PEOPLEPAGE.PERSON_BUTTONS.ICON.INSPECT_NEW else ConstantsModule.PEOPLEPAGE.PERSON_BUTTONS.ICON.INSPECT_LEGACY,
@@ -213,11 +213,11 @@ return function(UserId, Enabled)
 		}
 		
 		if GetFFlagAddPeoplePageCardLayoutFunction() then
-			List[ConstantsService.PERSON_BUTTONS.INSPECT] = config4
+			List[ConstantsService.PERSON_BUTTONS.INSPECT] = config11
 			
 			return List
 		else
-			table.insert(List, config4)
+			table.insert(List, config11)
 			
 			return List
 		end

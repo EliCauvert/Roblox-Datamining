@@ -110,7 +110,7 @@ local function LoadableVideoFrame(Image, p1)
 	}, {
 		VideoFrame = ReactModule.createElement(if FFlagLuaAppVideoPlayerTrimAndMusic and Image.edits then EditedVideoFrameModule else VideoFrameWrapperModule, {
 			zIndex = 4,
-			videoFrameRef = if FFlagLuaAppEdpMediaGalleryAutoAdvance or (FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableHomepageOneByTwoTile) then p1 else UseRefResult2,
+			videoFrameRef = if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableHomepageOneByTwoTile then p1 else UseRefResult2,
 			video = if FFlagLuaAppVideoLoadFailureFallback then Video elseif FFlagLuaAppHomeMomentVideoFallback then GetAuthorizedVideoUriModule(Image.video, Image.accessContext) else Image.video,
 			isPlaying = Image.shouldStartPlayback and (not FFlagLuaAppVideoLoadFailureFallback or not v1),
 			looped = Image.looped,

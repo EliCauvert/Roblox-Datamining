@@ -5,6 +5,7 @@ local UIBloxModule = require(Parent.UIBlox)
 local FoundationModule = require(Parent.Foundation)
 local Checkbox = FoundationModule.Checkbox
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
@@ -53,7 +54,7 @@ local function getButtonStackProps(Text, ButtonHeight, OnActivated, IsDisabled, 
 end
 
 return function(p1)
-	-- upvalues: MergePropsModule (copy), config (copy), ReactModule (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), InteractiveAlert (copy), getButtonStackProps (copy), NormalizeFontFaceFunction (copy), GetFFlagDisablePVUpsellDataConsentFunction (copy), Checkbox (copy), LinkButton (copy)
+	-- upvalues: MergePropsModule (copy), config (copy), ReactModule (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), InteractiveAlert (copy), getButtonStackProps (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), GetFFlagDisablePVUpsellDataConsentFunction (copy), Checkbox (copy), LinkButton (copy)
 	local MergePropsModuleResult = MergePropsModule(config, p1)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local config1 = {
@@ -83,7 +84,7 @@ return function(p1)
 		buttonStackInfo = getButtonStackProps(UseLocalizationResult.buttonKey, UseStyleResult.Tokens.Size.Size_1200, MergePropsModuleResult.onButtonClick, MergePropsModuleResult.isButtonDisabled, UseLocalizationResult.extraButtonKey, MergePropsModuleResult.onExtraButtonClick, MergePropsModuleResult.isExtraButtonDisabled),
 		onCloseClicked = MergePropsModuleResult.onClose,
 		middleContent = function()
-			-- upvalues: ReactModule (upval), UseLocalizationResult (copy), BaseSize (copy), UseStyleResult (copy), NormalizeFontFaceFunction (upval)
+			-- upvalues: ReactModule (upval), UseLocalizationResult (copy), BaseSize (copy), UseStyleResult (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.Y,
@@ -98,7 +99,8 @@ return function(p1)
 					TextSize = BaseSize,
 					TextColor3 = UseStyleResult.Theme.TextDefault.Color,
 					TextTransparency = UseStyleResult.Theme.TextDefault.Transparency,
-					FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
+					Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
@@ -108,7 +110,7 @@ return function(p1)
 		footerContent = if GetFFlagDisablePVUpsellDataConsentFunction() then function()
 			return nil
 		end else function()
-			-- upvalues: ReactModule (upval), UseStyleResult (copy), MergePropsModuleResult (copy), Size150 (copy), Checkbox (upval), UseStateResult2 (copy), UseStateResult (copy), UseLocalizationResult (copy), BaseSize (copy), RelativeSize (copy), NormalizeFontFaceFunction (upval), LinkButton (upval)
+			-- upvalues: ReactModule (upval), UseStyleResult (copy), MergePropsModuleResult (copy), Size150 (copy), Checkbox (upval), UseStateResult2 (copy), UseStateResult (copy), UseLocalizationResult (copy), BaseSize (copy), RelativeSize (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), LinkButton (upval)
 			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.Y,
@@ -146,7 +148,8 @@ return function(p1)
 						TextSize = BaseSize * RelativeSize,
 						TextColor3 = UseStyleResult.Theme.TextDefault.Color,
 						TextTransparency = UseStyleResult.Theme.TextDefault.Transparency,
-						FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
+						Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 						TextXAlignment = Enum.TextXAlignment.Left,
 						Size = UDim2.new(1, -(26 + Size150), 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y
@@ -159,7 +162,8 @@ return function(p1)
 					TextSize = BaseSize * RelativeSize,
 					TextColor3 = UseStyleResult.Theme.TextDefault.Color,
 					TextTransparency = UseStyleResult.Theme.TextDefault.Transparency,
-					FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
+					Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
@@ -171,7 +175,8 @@ return function(p1)
 					TextSize = BaseSize * RelativeSize,
 					TextColor3 = UseStyleResult.Theme.TextDefault.Color,
 					TextTransparency = UseStyleResult.Theme.TextDefault.Transparency,
-					FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
+					Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
@@ -204,7 +209,8 @@ return function(p1)
 						TextSize = BaseSize * RelativeSize,
 						TextColor3 = UseStyleResult.Theme.TextDefault.Color,
 						TextTransparency = UseStyleResult.Theme.TextDefault.Transparency,
-						FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
+						Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 						TextXAlignment = Enum.TextXAlignment.Center,
 						AutomaticSize = Enum.AutomaticSize.XY
 					}),

@@ -3,6 +3,8 @@ local DependenciesModule = require(SocialLibraries.dependencies)
 local Roact = DependenciesModule.Roact
 local Cryo = DependenciesModule.Cryo
 local UIBlox = DependenciesModule.UIBlox
+local Text = DependenciesModule.Text
+local FoundationFontFaceMigration = DependenciesModule.Foundation.Utility.Flags.FoundationFontFaceMigration
 local GetTextBoundsAsyncFunction = DependenciesModule.Foundation.Utility.getTextBoundsAsync
 local Components = SocialLibraries.Components
 local AlertViewLabelModule = require(Components.AlertView.AlertViewLabel)
@@ -29,7 +31,7 @@ AlertViewBuilder.defaultProps = {
 }
 
 function AlertViewBuilder.init(p1)
-	-- upvalues: Roact (copy), GetTextBoundsAsyncFunction (copy)
+	-- upvalues: Roact (copy), FoundationFontFaceMigration (copy), GetTextBoundsAsyncFunction (copy), Text (copy)
 	local NumTextboxes = 0
 	p1.refs = {}
 	
@@ -38,57 +40,59 @@ function AlertViewBuilder.init(p1)
 		NumTextboxes += 1
 	end
 	p1.state = { numTextboxes = NumTextboxes }
-	p1.isMounted = false
-	p1.textMeasurements = {}
 	
-	function p1.flushTextMeasurements()
-		-- upvalues: p1 (copy), GetTextBoundsAsyncFunction (upval)
-		for i, textMeasurement in p1.textMeasurements do
-			if not p1.props.textboxes[i] then
-				p1.textMeasurements[i] = nil
-				continue
-			end
-			for i1, value in textMeasurement do
-				if value.height == nil and not value.inFlight then
-					value.inFlight = true
-					task.spawn(function()
-						-- upvalues: GetTextBoundsAsyncFunction (upval), value (copy), p1 (upval), i (copy), i1 (copy)
-						local TextBoundsAsync = GetTextBoundsAsyncFunction(value.text, value.font, value.fontSize, value.width)
-						value.inFlight = false
-						local TextMeasurement = p1.textMeasurements[i]
-						
-						if TextBoundsAsync and p1.isMounted and TextMeasurement and TextMeasurement[i1] == value then
-							value.height = TextBoundsAsync.Y
-							p1:setState(function(p2)
-								return {
-									textMeasurementVersion = (p2.textMeasurementVersion or 0) + 1
-								}
-							end)
-						end
-					end)
+	if FoundationFontFaceMigration then
+		p1.isMounted = false
+		p1.textMeasurements = {}
+		
+		function p1.flushTextMeasurements()
+			-- upvalues: p1 (copy), GetTextBoundsAsyncFunction (upval)
+			for i, textMeasurement in p1.textMeasurements do
+				if not p1.props.textboxes[i] then
+					p1.textMeasurements[i] = nil
+					continue
+				end
+				for i1, value in textMeasurement do
+					if value.height == nil and not value.inFlight then
+						value.inFlight = true
+						task.spawn(function()
+							-- upvalues: GetTextBoundsAsyncFunction (upval), value (copy), p1 (upval), i (copy), i1 (copy)
+							local TextBoundsAsync = GetTextBoundsAsyncFunction(value.text, value.font, value.fontSize, value.width)
+							value.inFlight = false
+							local TextMeasurement = p1.textMeasurements[i]
+							
+							if TextBoundsAsync and p1.isMounted and TextMeasurement and TextMeasurement[i1] == value then
+								value.height = TextBoundsAsync.Y
+								p1:setState(function(p2)
+									return {
+										textMeasurementVersion = (p2.textMeasurementVersion or 0) + 1
+									}
+								end)
+							end
+						end)
+					end
 				end
 			end
 		end
-	end
-	
-	function p1.scheduleTextMeasurementFlush()
-		-- upvalues: p1 (copy)
-		if not p1.textMeasurementFlushScheduled then
-			p1.textMeasurementFlushScheduled = true
-			task.defer(function()
-				-- upvalues: p1 (upval)
-				p1.textMeasurementFlushScheduled = false
+		
+		function p1.scheduleTextMeasurementFlush()
+			-- upvalues: p1 (copy)
+			if not p1.textMeasurementFlushScheduled then
+				p1.textMeasurementFlushScheduled = true
+				task.defer(function()
+					-- upvalues: p1 (upval)
+					p1.textMeasurementFlushScheduled = false
+					
+					if p1.isMounted then
+						p1.flushTextMeasurements()
+					end
+				end)
 				
-				if p1.isMounted then
-					p1.flushTextMeasurements()
-				end
-			end)
-			
-			return
+				return
+			end
 		end
 	end
-	
-	function p1.calcTextboxTextHeight(p2, Text, p3, Key)
+	p1.calcTextboxTextHeight = if FoundationFontFaceMigration then function(p2, Text, p3, Key)
 		-- upvalues: p1 (copy)
 		if Text and Text ~= "" then
 			local ScaledRelativeSize = p2.Font.Body.RelativeSize * p2.Font.BaseSize
@@ -124,24 +128,38 @@ function AlertViewBuilder.init(p1)
 			end
 			return 0
 		end
+	end else function(p2, p3)
+		-- upvalues: Text (upval), p1 (copy)
+		local ScaledRelativeSize = p2.Font.Body.RelativeSize * p2.Font.BaseSize
+		local BodyFont = p2.Font.Body.Font
+		
+		return if p3 and p3 ~= "" then Text.GetTextHeight(p3, BodyFont, ScaledRelativeSize, p1.props.childComponentWidth) else 0
 	end
 end
 
 function AlertViewBuilder.didMount(p2)
-	p2.isMounted = true
-	p2.flushTextMeasurements()
-	
+	-- upvalues: FoundationFontFaceMigration (copy)
+	if FoundationFontFaceMigration then
+		p2.isMounted = true
+		p2.flushTextMeasurements()
+	end
 	if type(p2.props.onModalOpen) == "function" then
 		p2.props.onModalOpen()
 	end
 end
 
 function AlertViewBuilder.didUpdate(p2)
-	p2.flushTextMeasurements()
+	-- upvalues: FoundationFontFaceMigration (copy)
+	if FoundationFontFaceMigration then
+		p2.flushTextMeasurements()
+	end
 end
 
 function AlertViewBuilder.willUnmount(p2)
-	p2.isMounted = false
+	-- upvalues: FoundationFontFaceMigration (copy)
+	if FoundationFontFaceMigration then
+		p2.isMounted = false
+	end
 end
 
 function AlertViewBuilder.reset(p2)

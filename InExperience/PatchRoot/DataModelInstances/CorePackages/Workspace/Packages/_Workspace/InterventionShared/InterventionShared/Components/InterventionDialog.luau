@@ -23,6 +23,7 @@ local UseScrollFrameHeightCalculationModule = require(InterventionShared.Hooks.u
 local UseCursorFunction = UIBloxModule.App.SelectionCursor.useCursor
 local UseInterventionPlacementModule = require(InterventionShared.Hooks.useInterventionPlacement)
 local UseDeviceInsetsFunction = require(Parent.Responsive).useDeviceInsets
+local FFlagExpChatEnableFriendsTab = require(Parent.SharedFlags).FFlagExpChatEnableFriendsTab
 local FFlagLuaAppSupportDeviceSafeInsets = require(Parent.SharedFlags).FFlagLuaAppSupportDeviceSafeInsets
 local AppChatInterventionDeviceSafeInsets = game:DefineFastFlag("AppChatInterventionDeviceSafeInsets", false)
 local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
@@ -30,7 +31,7 @@ local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavi
 local FocusRoot = FocusNavigationUtilsModule.FocusRoot
 
 function InterventionDialog(p1)
-	-- upvalues: UseLayerCollectorFunction (copy), ReactModule (copy), UseTokensFunction (copy), UseStyleFunction (copy), UseInterventionPlacementModule (copy), AppChatInterventionDeviceSafeInsets (copy), FFlagLuaAppSupportDeviceSafeInsets (copy), UseDeviceInsetsFunction (copy), ConstantsModule (copy), UseLocalizationFunction (copy), InterventionAnalyticsModule (copy), NotificationModalsManagerModule (copy), IconsActionsAccept (copy), UseScrollFrameHeightCalculationModule (copy), UseCursorFunction (copy), ModalWindow (copy), View (copy), ScrollView (copy), ScrollBarVisibility (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), Icon (copy), Text (copy), ButtonStack (copy), ButtonType (copy)
+	-- upvalues: UseLayerCollectorFunction (copy), ReactModule (copy), UseTokensFunction (copy), UseStyleFunction (copy), UseInterventionPlacementModule (copy), AppChatInterventionDeviceSafeInsets (copy), FFlagLuaAppSupportDeviceSafeInsets (copy), UseDeviceInsetsFunction (copy), ConstantsModule (copy), UseLocalizationFunction (copy), InterventionAnalyticsModule (copy), NotificationModalsManagerModule (copy), IconsActionsAccept (copy), UseScrollFrameHeightCalculationModule (copy), UseCursorFunction (copy), ModalWindow (copy), View (copy), ScrollView (copy), ScrollBarVisibility (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), Icon (copy), Text (copy), FFlagExpChatEnableFriendsTab (copy), ButtonStack (copy), ButtonType (copy)
 	local AbsoluteSize = UseLayerCollectorFunction().absoluteSize
 	local UseRefResult = ReactModule.useRef(DateTime.now().UnixTimestampMillis)
 	local UseTokensResult = UseTokensFunction()
@@ -183,10 +184,10 @@ function InterventionDialog(p1)
 							})
 						}),
 						ButtonContainer = ReactModule.createElement(View, {
-							tag = "padding-x-xxsmall",
 							LayoutOrder = 2,
 							Size = UDim2.new(1, 0, 0, 0),
-							AutomaticSize = Enum.AutomaticSize.Y
+							AutomaticSize = Enum.AutomaticSize.Y,
+							tag = if FFlagExpChatEnableFriendsTab then "padding-x-xxsmall" else nil
 						}, {
 							ButtonStack = ReactModule.createElement(ButtonStack, {
 								buttons = {

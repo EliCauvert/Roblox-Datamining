@@ -1,5 +1,5 @@
-﻿game:DefineFastFlag("UGCValidateVersionedContentIds2", false)
+﻿game:DefineFastFlag("UGCValidateVersionedContentIds", false)
 
 return function()
-	return game:GetFastFlag("UGCValidateVersionedContentIds2")
+	return game:GetFastFlag("UGCValidateVersionedContentIds")
 end

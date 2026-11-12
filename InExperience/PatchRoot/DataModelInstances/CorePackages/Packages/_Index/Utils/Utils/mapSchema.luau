@@ -523,10 +523,10 @@ Callback8 = function(NewResult)
 			local Fields = {}
 			
 			for _, field2 in Config.fields do
-				local GetResult1 = Config.fields:get((table.unpack(field2)))
+				local GetResult = Config.fields:get((table.unpack(field2)))
 				
-				if GetResult1.astNode ~= nil then
-					table.insert(Fields, GetResult1.astNode)
+				if GetResult.astNode ~= nil then
+					table.insert(Fields, GetResult.astNode)
 				end
 			end
 			Config.astNode = Object.assign({}, Config.astNode, {

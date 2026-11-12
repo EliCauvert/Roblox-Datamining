@@ -2,7 +2,9 @@
 local Parent = CoreScriptsPlayerFeedback.Parent
 local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
-local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
@@ -19,7 +21,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local ComponentAssetsCircle21 = UIBloxModule.App.ImageSet.Images["component_assets/circle_21"]
 
 return (ReactModule.memo(function(p1)
-	-- upvalues: UseScreenSizeFunction (copy), UseStyleFunction (copy), UseLastInputMethodFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), GuiService (copy), ConstantsModule (copy), MouseIconOverrideService (copy), TelemetryService (copy), UseEscapeDismissModule (copy), ContextActionService (copy), NormalizeFontFaceFunction (copy), ImageSetLabel (copy), ComponentAssetsCircle21 (copy), ButtonType (copy), InteractiveAlert (copy)
+	-- upvalues: UseScreenSizeFunction (copy), UseStyleFunction (copy), UseLastInputMethodFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), GuiService (copy), ConstantsModule (copy), MouseIconOverrideService (copy), TelemetryService (copy), UseEscapeDismissModule (copy), ContextActionService (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ImageSetLabel (copy), ComponentAssetsCircle21 (copy), ButtonType (copy), InteractiveAlert (copy)
 	local UseScreenSizeResult = UseScreenSizeFunction()
 	local UseStyleResult = UseStyleFunction()
 	local UseLastInputMethodResult = UseLastInputMethodFunction()
@@ -215,8 +217,9 @@ return (ReactModule.memo(function(p1)
 			UseStateResult3
 		}),
 		middleContent = ReactModule.useCallback(function()
-			-- upvalues: UseStyleResult (copy), UseScreenSizeResult (copy), ConstantsModule (upval), ReactModule (upval), UseLocalizationResult (copy), NormalizeFontFaceFunction (upval), ImageSetLabel (upval), ComponentAssetsCircle21 (upval), UseStateResult1 (copy), Placeholder (copy), UseRefResult (copy), UseResult2 (copy)
-			local Floored = math.floor(UseStyleResult.Font.Body.RelativeSize * UseStyleResult.Font.BaseSize)
+			-- upvalues: UseStyleResult (copy), UseScreenSizeResult (copy), ConstantsModule (upval), ReactModule (upval), UseLocalizationResult (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), ImageSetLabel (upval), ComponentAssetsCircle21 (upval), UseStateResult1 (copy), Placeholder (copy), UseRefResult (copy), UseResult2 (copy)
+			local Body = UseStyleResult.Font.Body
+			local Floored = math.floor(Body.RelativeSize * UseStyleResult.Font.BaseSize)
 			local Largest = math.max(ConstantsModule.MIN_TEXTBOX_HEIGHT, (math.min(ConstantsModule.MAX_TEXTBOX_HEIGHT, (math.clamp(UseScreenSizeResult.Y - 320, ConstantsModule.MIN_TEXTBOX_HEIGHT, ConstantsModule.MAX_TEXTBOX_HEIGHT)))))
 			
 			return ReactModule.createElement("Frame", {
@@ -240,7 +243,8 @@ return (ReactModule.memo(function(p1)
 					TextYAlignment = Enum.TextYAlignment.Top,
 					TextColor3 = UseStyleResult.Theme.TextEmphasis.Color,
 					TextTransparency = UseStyleResult.Theme.TextEmphasis.Transparency,
-					FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
+					Font = if FoundationFontFaceMigration then nil else Body.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 					TextSize = Floored,
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
@@ -278,7 +282,8 @@ return (ReactModule.memo(function(p1)
 							TextColor3 = UseStyleResult.Theme.TextEmphasis.Color,
 							TextTransparency = UseStyleResult.Theme.TextEmphasis.Transparency,
 							PlaceholderColor3 = UseStyleResult.Theme.TextMuted.Color,
-							FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
+							Font = if FoundationFontFaceMigration then nil else Body.Font,
+							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 							TextSize = Floored,
 							ClearTextOnFocus = false,
 							MultiLine = true,
@@ -296,7 +301,7 @@ return (ReactModule.memo(function(p1)
 		defaultChildRef = if UseStateResult then UseRefResult else nil,
 		isRoactGamepadEnabled = UseStateResult,
 		footerContent = ReactModule.useCallback(function()
-			-- upvalues: Footer (copy), ReactModule (upval), UseStyleResult (copy), NormalizeFontFaceFunction (upval)
+			-- upvalues: Footer (copy), ReactModule (upval), UseStyleResult (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 			local Text: string = Footer
 			
 			if type(Text) == "string" and string.find(Text, "Roblox Terms of Use", 1, true) then
@@ -318,7 +323,8 @@ return (ReactModule.memo(function(p1)
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Top,
 					TextSize = math.floor(UseStyleResult.Font.CaptionHeader.RelativeSize * UseStyleResult.Font.BaseSize),
-					FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionLarge.Font),
+					Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.CaptionHeader.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionLarge.Font) else nil,
 					TextColor3 = UseStyleResult.Theme.TextMuted.Color,
 					TextTransparency = UseStyleResult.Theme.TextMuted.Transparency,
 					Size = UDim2.new(1, 0, 0, 0),

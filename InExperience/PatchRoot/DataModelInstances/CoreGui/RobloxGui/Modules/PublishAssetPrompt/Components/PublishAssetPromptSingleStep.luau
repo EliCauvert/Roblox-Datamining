@@ -5,7 +5,9 @@ local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
 local TModule = require(CorePackages.Packages.t)
 local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
 local UIBloxModule = require(CorePackages.Packages.UIBlox)
-local NormalizeFontFaceFunction = require(CorePackages.Packages.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local WithStyleFunction = UIBloxModule.Style.withStyle
 local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
@@ -99,9 +101,10 @@ function PublishAssetPromptSingleStep.init(p1)
 end
 
 function PublishAssetPromptSingleStep.renderMiddle(p1, p2)
-	-- upvalues: WithStyleFunction (copy), EnableImagePublishEngineFeature (copy), RoactModule (copy), RoactGamepadModule (copy), ImagePreviewModule (copy), ObjectViewportModule (copy), NormalizeFontFaceFunction (copy), NameTextBoxModule (copy), AssetDescriptionTextBoxModule (copy)
+	-- upvalues: WithStyleFunction (copy), EnableImagePublishEngineFeature (copy), RoactModule (copy), RoactGamepadModule (copy), ImagePreviewModule (copy), ObjectViewportModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), NameTextBoxModule (copy), AssetDescriptionTextBoxModule (copy)
 	return WithStyleFunction(function(p3)
-		-- upvalues: EnableImagePublishEngineFeature (upval), p1 (copy), RoactModule (upval), RoactGamepadModule (upval), ImagePreviewModule (upval), ObjectViewportModule (upval), NormalizeFontFaceFunction (upval), p2 (copy), NameTextBoxModule (upval), AssetDescriptionTextBoxModule (upval)
+		-- upvalues: EnableImagePublishEngineFeature (upval), p1 (copy), RoactModule (upval), RoactGamepadModule (upval), ImagePreviewModule (upval), ObjectViewportModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), p2 (copy), NameTextBoxModule (upval), AssetDescriptionTextBoxModule (upval)
+		local _Font = p3.Font
 		local Theme = p3.Theme
 		local IsDecal = EnableImagePublishEngineFeature and (p1.props.assetType == Enum.AssetType.Image and p1.props.assetInstance:IsA("Decal"))
 		
@@ -136,7 +139,8 @@ function PublishAssetPromptSingleStep.renderMiddle(p1, p2)
 						TextSize = 12,
 						BackgroundTransparency = 1,
 						Size = UDim2.new(1, 0, 0, 15),
-						FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font),
+						Font = if FoundationFontFaceMigration then nil else _Font.Body.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
 						Text = p2.name,
 						TextColor3 = Theme.TextDefault.Color,
 						TextXAlignment = Enum.TextXAlignment.Left
@@ -154,7 +158,8 @@ function PublishAssetPromptSingleStep.renderMiddle(p1, p2)
 						BackgroundTransparency = 1,
 						Size = UDim2.new(1, 0, 0, 15),
 						Position = UDim2.new(0, 0, 0, 60),
-						FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font),
+						Font = if FoundationFontFaceMigration then nil else _Font.Body.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
 						Text = p2.description,
 						TextColor3 = Theme.TextDefault.Color,
 						TextXAlignment = Enum.TextXAlignment.Left
@@ -176,7 +181,8 @@ function PublishAssetPromptSingleStep.renderMiddle(p1, p2)
 				Size = UDim2.new(1, 0, 0, 50),
 				TextYAlignment = Enum.TextYAlignment.Center,
 				Text = p2.disclaimer,
-				FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font),
+				Font = if FoundationFontFaceMigration then nil else _Font.Body.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
 				TextColor3 = Theme.TextEmphasis.Color,
 				AnchorPoint = Vector2.new(0, 1),
 				Position = UDim2.fromScale(0, 1)

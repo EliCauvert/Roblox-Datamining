@@ -143,7 +143,7 @@ return function(p1)
 				text = UseLocalizationResult1.baseVirtualTransactionDiscountText
 			}))
 		end
-		if VirtualTransactionDiscounts2 and typeof(VirtualTransactionDiscounts2.DiscountPercent) == "number" and not p1.noPurchaseMethodRequired then
+		if VirtualTransactionDiscounts2 and (typeof(VirtualTransactionDiscounts2.DiscountPercent) == "number" and not p1.noPurchaseMethodRequired) then
 			table.insert(List, FeatureRow({
 				layoutOrder = #List + 1,
 				iconName = if RobloxPlusUpdateDiscountIcons then IconName.TagArrowUp else IconName.TagSparkleArrowUp,

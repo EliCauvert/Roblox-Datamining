@@ -11,14 +11,13 @@ local UseMomentsHostFunction = require(Moments.MomentsHostContext).useMomentsHos
 local _ = require(script.Parent.AvatarActionBar)
 local FFlagAXEnableUnifiedLoggingAvatarMoment = SharedFlagsModule.FFlagAXEnableUnifiedLoggingAvatarMoment
 local FFlagMomentsRenderAvatarPostsInFeed = SharedFlagsModule.FFlagMomentsRenderAvatarPostsInFeed
-local FFlagMomentsHideUnavailableAvatarActionBarModule = require(Moments.Flags.FFlagMomentsHideUnavailableAvatarActionBar)
 
 local function _(p1): string
 	return `rbxthumb://type=Look&id={p1}&w={150}&h={150}`
 end
 
 return function(Frame)
-	-- upvalues: MomentContextModule (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), UseMomentsHostFunction (copy), UseAvatarLookModule (copy), UseSignalStateFunction (copy), UseLocalizationFunction (copy), FFlagMomentsHideUnavailableAvatarActionBarModule (copy), LocalizationModule (copy), LocalizationService (copy), FFlagAXEnableUnifiedLoggingAvatarMoment (copy)
+	-- upvalues: MomentContextModule (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), UseMomentsHostFunction (copy), UseAvatarLookModule (copy), UseSignalStateFunction (copy), UseLocalizationFunction (copy), LocalizationModule (copy), LocalizationService (copy), FFlagAXEnableUnifiedLoggingAvatarMoment (copy)
 	local Store = MomentContextModule.useMoment().store
 	local Data = Store.getData(false)
 	local Outfit = if FFlagMomentsRenderAvatarPostsInFeed and Data.kind == "avatar" then Data.outfit else nil
@@ -43,7 +42,6 @@ return function(Frame)
 	
 	return {
 		LayoutOrder = Frame.LayoutOrder,
-		hasLookError = FFlagMomentsHideUnavailableAvatarActionBarModule and (Data.kind == "avatar" and Config == nil and UseAvatarLookModuleResult.status == "Unavailable"),
 		isLoading = Config == nil and UseAvatarLookModuleResult.status ~= "Ready",
 		thumbnailImage = if LookId == nil then nil else `rbxthumb://type=Look&id={LookId}&w={150}&h={150}`,
 		priceText = if Config1 == nil or Config1.totalPrice == nil then nil else LocalizationModule.NumberLocalization.localize(Config1.totalPrice, LocalizationService.RobloxLocaleId),

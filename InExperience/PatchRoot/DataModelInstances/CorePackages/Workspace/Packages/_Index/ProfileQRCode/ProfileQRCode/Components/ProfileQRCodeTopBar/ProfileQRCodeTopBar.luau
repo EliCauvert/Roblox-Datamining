@@ -23,7 +23,6 @@ local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseLastInputModeFunction = require(Parent.FocusNavigationUtils).useLastInputMode
 local FFlagProfileQRCodeFixFocusNavigationModule = require(ProfileQRCode.Flags.FFlagProfileQRCodeFixFocusNavigation)
-local FFlagProfileQRCodeGamepadBackFixModule = require(ProfileQRCode.Flags.FFlagProfileQRCodeGamepadBackFix)
 
 local function _(p1): boolean
 	-- upvalues: AppStorageService (copy)
@@ -49,7 +48,7 @@ local _ = function(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: FFlagProfileQRCodeFixFocusNavigationModule (copy), UseLastInputModeFunction (copy), UseAnalyticsModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseAppPolicyFunction (copy), ReactModule (copy), AppStorageService (copy), EventNamesModule (copy), InputUtilities (copy), IXPService (copy), AppUserLayers (copy), CoreGui (copy), TooltipOrientation (copy), WithTooltipFunction (copy), IconButton (copy), Images (copy), IconSize (copy), ExternalEventConnection (copy), UserInputService (copy), MakeBackButtonFunction (copy), HeaderBar (copy), FFlagProfileQRCodeGamepadBackFixModule (copy)
+	-- upvalues: FFlagProfileQRCodeFixFocusNavigationModule (copy), UseLastInputModeFunction (copy), UseAnalyticsModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseAppPolicyFunction (copy), ReactModule (copy), AppStorageService (copy), EventNamesModule (copy), InputUtilities (copy), IXPService (copy), AppUserLayers (copy), CoreGui (copy), TooltipOrientation (copy), WithTooltipFunction (copy), IconButton (copy), Images (copy), IconSize (copy), ExternalEventConnection (copy), UserInputService (copy), MakeBackButtonFunction (copy), HeaderBar (copy)
 	local IsFocus = if FFlagProfileQRCodeFixFocusNavigationModule then UseLastInputModeFunction() == "Focus" else nil
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -144,7 +143,7 @@ return function(p1)
 			backgroundTransparency = 1,
 			barHeight = 56,
 			title = UseLocalizationResult.title,
-			renderLeft = if FFlagProfileQRCodeGamepadBackFixModule or FFlagProfileQRCodeFixFocusNavigationModule and not IsFocus then BackButton elseif FFlagProfileQRCodeFixFocusNavigationModule then nil else BackButton,
+			renderLeft = if FFlagProfileQRCodeFixFocusNavigationModule and not IsFocus then BackButton elseif FFlagProfileQRCodeFixFocusNavigationModule then nil else BackButton,
 			renderRight = if UseAppPolicyResult then UseResult2 else nil
 		})
 	})

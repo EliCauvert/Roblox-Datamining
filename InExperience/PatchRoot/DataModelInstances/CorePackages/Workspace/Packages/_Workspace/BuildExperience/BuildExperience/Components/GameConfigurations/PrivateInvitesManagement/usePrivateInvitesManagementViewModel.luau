@@ -6,12 +6,10 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local GetPrivatePlaytestersStoreFunction = require(Parent.DataHydration.PrivatePlaytesters).getPrivatePlaytestersStore
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
-local UseBuildPageImpressionModule = require(BuildExperience.Telemetry.useBuildPageImpression)
-local FFlagBuildExperiencePageImpressionsModule = require(BuildExperience.Flags.FFlagBuildExperiencePageImpressions)
 local _ = require(script.Parent.PrivateInvitesManagementView)
 
 return function(p1)
-	-- upvalues: GetPrivatePlaytestersStoreFunction (copy), ReactModule (copy), SignalsReactModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildExperiencePageImpressionsModule (copy), UseBuildPageImpressionModule (copy)
+	-- upvalues: GetPrivatePlaytestersStoreFunction (copy), ReactModule (copy), SignalsReactModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), SendBuildExperienceEventModule (copy)
 	local PrivatePlaytestersStore = GetPrivatePlaytestersStoreFunction(false)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function()
 		-- upvalues: PrivatePlaytestersStore (copy), p1 (copy)
@@ -47,10 +45,6 @@ return function(p1)
 			return
 		end
 	end, { UniverseId })
-	
-	if FFlagBuildExperiencePageImpressionsModule then
-		UseBuildPageImpressionModule("invite-management", { universeId = UniverseId })
-	end
 	local UseStateResult, UseStateResult2 = ReactModule.useState({})
 	
 	return {

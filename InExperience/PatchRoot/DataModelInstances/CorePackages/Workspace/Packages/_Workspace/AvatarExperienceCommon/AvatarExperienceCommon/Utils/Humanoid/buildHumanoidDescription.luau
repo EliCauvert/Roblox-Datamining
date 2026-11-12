@@ -1,16 +1,12 @@
 ﻿local AvatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local Parent = AvatarExperienceCommon.Parent
-local MutedErrorFunction = require(Parent.Loggers).mutedError
+local MutedErrorFunction = require(AvatarExperienceCommon.Parent.Loggers).mutedError
 local ConstantsModule = require(AvatarExperienceCommon.Constants)
-local FFlagAXSpawnEffectSaveRoundTrip = require(Parent.AvatarExperienceFlags).FFlagAXSpawnEffectSaveRoundTrip
 local CreateHumanoidDescriptionAccessoryInfoModule = require(AvatarExperienceCommon.Utils.Humanoid.createHumanoidDescriptionAccessoryInfo)
-local SetAvatarEffectDescriptionsModule = require(AvatarExperienceCommon.Utils.Humanoid.setAvatarEffectDescriptions)
 local SetMakeupDescriptionsModule = require(AvatarExperienceCommon.Utils.Humanoid.setMakeupDescriptions)
 local IsMakeupAssetTypeModule = require(AvatarExperienceCommon.Utils.isMakeupAssetType)
-local IsSpawnEffectAssetTypeModule = require(AvatarExperienceCommon.Utils.isSpawnEffectAssetType)
 
 local function applyCurrentAssets(HumanoidDescription, CurrentAssets)
-	-- upvalues: ConstantsModule (copy), CreateHumanoidDescriptionAccessoryInfoModule (copy), IsMakeupAssetTypeModule (copy), FFlagAXSpawnEffectSaveRoundTrip (copy), IsSpawnEffectAssetTypeModule (copy), MutedErrorFunction (copy), SetMakeupDescriptionsModule (copy), SetAvatarEffectDescriptionsModule (copy)
+	-- upvalues: ConstantsModule (copy), CreateHumanoidDescriptionAccessoryInfoModule (copy), IsMakeupAssetTypeModule (copy), MutedErrorFunction (copy), SetMakeupDescriptionsModule (copy)
 	if CurrentAssets then
 		local List = {}
 		
@@ -31,17 +27,13 @@ local function applyCurrentAssets(HumanoidDescription, CurrentAssets)
 				
 				if ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROPEntry then
 					HumanoidDescription[ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROPEntry] = Joined
-				elseif i ~= ConstantsModule.ASSET_TYPE_NAME_TO_ID_STRING.Gear and not IsMakeupAssetTypeModule(i) and (not FFlagAXSpawnEffectSaveRoundTrip or not IsSpawnEffectAssetTypeModule(i)) then
+				elseif i ~= ConstantsModule.ASSET_TYPE_NAME_TO_ID_STRING.Gear and not IsMakeupAssetTypeModule(i) then
 					MutedErrorFunction(string.format("assetTypeId: %s not recognized as member of humanoidDescription", (tostring(i))))
 				end
 			end
 		end
 		HumanoidDescription:SetAccessories(List, true)
 		SetMakeupDescriptionsModule(HumanoidDescription, CurrentAssets)
-		
-		if FFlagAXSpawnEffectSaveRoundTrip then
-			SetAvatarEffectDescriptionsModule(HumanoidDescription, CurrentAssets)
-		end
 	end
 end
 

@@ -139,12 +139,12 @@ local function sanitizeAdUpsellScheduler(Scheduler)
 	for i1 = #EmptyAdUpsellScheduler.anchors, 1, -1 do
 		local Anchor = EmptyAdUpsellScheduler.anchors[i1]
 		local Text: string = `{Anchor.universeId}:{Anchor.sessionId}`
-		local Entry = t[Text] or 0
+		local v2 = t[Text] or 0
 		
-		if Entry >= 10 then
+		if v2 >= 10 then
 			table.remove(EmptyAdUpsellScheduler.anchors, i1)
 		else
-			t[Text] = Entry + 1
+			t[Text] = v2 + 1
 		end
 	end
 	table.sort(EmptyAdUpsellScheduler.pendingMilestones, function(A, B): boolean
@@ -167,16 +167,16 @@ end
 
 local function createBuildAppStorage(AppStorageService, HttpService)
 	-- upvalues: CreateAdCampaignCardStorageModule (copy), FFlagBuildAdUpsellModule (copy), makeEmptyAdUpsellScheduler (copy), sanitizeAdUpsellScheduler (copy), FFlagBuildAdUpsellPinnedModule (copy), pruneUniverseCap (copy), FFlagBuildAgentAdCampaignCardModule (copy)
-	local v2 = nil
+	local v3 = nil
 	local Flag = false
-	local v3 = 0
-	local v4 = nil
+	local v4 = 0
+	local v5 = nil
 	local Flag1 = false
 	local Inverted = false
 	local Count = 0
 	local DelayedThread = nil
 	local Flag2 = false
-	local v5 = nil
+	local v6 = nil
 	
 	local function tryReadData()
 		-- upvalues: AppStorageService (copy), HttpService (copy)
@@ -248,15 +248,15 @@ local function createBuildAppStorage(AppStorageService, HttpService)
 		-- upvalues: tryReadData (copy), HttpService (copy), AppStorageService (copy)
 		local TryReadDataResult, TryReadDataResult2 = tryReadData()
 		local TryReadDataResult1 = nil
-		local v6 = nil
+		local v7 = nil
 		
 		if TryReadDataResult then
-			v6 = true
+			v7 = true
 			TryReadDataResult1 = TryReadDataResult2
 		else
-			v6, TryReadDataResult1 = tryReadData()
+			v7, TryReadDataResult1 = tryReadData()
 		end
-		if v6 then
+		if v7 then
 			Callback(TryReadDataResult1)
 			local Success, Result = pcall(HttpService.JSONEncode, HttpService, TryReadDataResult1)
 			
@@ -271,9 +271,9 @@ local function createBuildAppStorage(AppStorageService, HttpService)
 	end
 	
 	local function getAdCampaignCardStorage()
-		-- upvalues: v5 (ref), CreateAdCampaignCardStorageModule (upval), tryReadDataWithRetry (copy), tryReadDataStrict (copy), writeData (copy)
-		if v5 == nil then
-			v5 = CreateAdCampaignCardStorageModule({
+		-- upvalues: v6 (ref), CreateAdCampaignCardStorageModule (upval), tryReadDataWithRetry (copy), tryReadDataStrict (copy), writeData (copy)
+		if v6 == nil then
+			v6 = CreateAdCampaignCardStorageModule({
 				readData = function()
 					-- upvalues: tryReadDataWithRetry (upval), tryReadDataStrict (upval)
 					return tryReadDataWithRetry(tryReadDataStrict)
@@ -281,33 +281,33 @@ local function createBuildAppStorage(AppStorageService, HttpService)
 				writeData = writeData
 			})
 		end
-		return v5
+		return v6
 	end
 	
 	local function loadAdUpsell()
-		-- upvalues: v4 (ref), Flag1 (ref), tryReadDataStrict (copy), makeEmptyAdUpsellScheduler (upval), sanitizeAdUpsellScheduler (upval)
-		if v4 ~= nil then
-			return true, v4
+		-- upvalues: v5 (ref), Flag1 (ref), tryReadDataStrict (copy), makeEmptyAdUpsellScheduler (upval), sanitizeAdUpsellScheduler (upval)
+		if v5 ~= nil then
+			return true, v5
 		end
 		if Flag1 then
 			return false, nil
 		end
 		local TryReadDataStrictResult, TryReadDataStrictResult2 = tryReadDataStrict()
 		local TryReadDataStrictResult1 = nil
-		local v6 = nil
+		local v7 = nil
 		
 		if TryReadDataStrictResult then
-			v6 = true
+			v7 = true
 			TryReadDataStrictResult1 = TryReadDataStrictResult2
 		else
-			v6, TryReadDataStrictResult1 = tryReadDataStrict()
+			v7, TryReadDataStrictResult1 = tryReadDataStrict()
 		end
-		if v6 then
+		if v7 then
 			local AdUpsell = TryReadDataStrictResult1.adUpsell
 			local Copy = if type(AdUpsell) == "table" then table.clone(AdUpsell) else {}
 			Copy.dismissedPermanently = Copy.dismissedPermanently == true
 			Copy.scheduler = if Copy.dismissedPermanently then makeEmptyAdUpsellScheduler() else sanitizeAdUpsellScheduler(Copy.scheduler)
-			v4 = Copy
+			v5 = Copy
 			
 			return true, Copy
 		else
@@ -318,27 +318,27 @@ local function createBuildAppStorage(AppStorageService, HttpService)
 	end
 	
 	local function persistCachedAdUpsell(p1)
-		-- upvalues: v4 (ref), tryReadData (copy), tryReadDataStrict (copy), HttpService (copy), AppStorageService (copy)
-		if v4 == nil then
+		-- upvalues: v5 (ref), tryReadData (copy), tryReadDataStrict (copy), HttpService (copy), AppStorageService (copy)
+		if v5 == nil then
 			return false
 		end
 		local TryReadData = if p1 then tryReadData else tryReadDataStrict
 		local TryReadDataResult, TryReadDataResult2 = TryReadData()
-		local v6 = nil
+		local v7 = nil
 		local TryReadDataResult1 = nil
 		
 		if TryReadDataResult then
-			v6 = true
+			v7 = true
 			TryReadDataResult1 = TryReadDataResult2
 		else
-			v6, TryReadDataResult1 = TryReadData()
+			v7, TryReadDataResult1 = TryReadData()
 		end
-		if v6 then
+		if v7 then
 			local AdUpsell = TryReadDataResult1.adUpsell
 			local Copy = if type(AdUpsell) == "table" then table.clone(AdUpsell) else {}
-			local v7 = v4
-			Copy.dismissedPermanently = v7.dismissedPermanently
-			Copy.scheduler = v7.scheduler
+			local v8 = v5
+			Copy.dismissedPermanently = v8.dismissedPermanently
+			Copy.scheduler = v8.scheduler
 			TryReadDataResult1.adUpsell = Copy
 			local Success, Result = pcall(HttpService.JSONEncode, HttpService, TryReadDataResult1)
 			
@@ -499,24 +499,24 @@ local function createBuildAppStorage(AppStorageService, HttpService)
 		-- upvalues: loadAdUpsell (copy), Inverted (ref), persistAdUpsellMutation (copy), rememberEvent (copy), pruneUniverseCap (upval), addMilestone (copy)
 		local AdUpsell, AdUpsell2 = loadAdUpsell()
 		local Flag = nil
-		local v6 = nil
+		local v7 = nil
 		local Scheduler = nil
 		
 		if AdUpsell and AdUpsell2 ~= nil then
 			Flag = true
-			v6 = AdUpsell2
+			v7 = AdUpsell2
 			Scheduler = AdUpsell2.scheduler
 		else
 			Flag = false
-			v6 = nil
+			v7 = nil
 			Scheduler = nil
 		end
-		if not Flag or v6 == nil or Scheduler == nil then
+		if not Flag or v7 == nil or Scheduler == nil then
 			return false, false
 		end
 		local Univers = Scheduler.universes[tostring(p1.universeId)]
 		
-		if v6.dismissedPermanently == true or Univers ~= nil and Univers.dismissedPermanently then
+		if v7.dismissedPermanently == true or Univers ~= nil and Univers.dismissedPermanently then
 			return true, false
 		end
 		if not p1.isEligiblePublish then
@@ -574,16 +574,16 @@ local function createBuildAppStorage(AppStorageService, HttpService)
 			end
 			
 			local TryReadDataResult, TryReadDataResult2 = tryReadData()
-			local v6 = nil
+			local v7 = nil
 			local TryReadDataResult1 = nil
 			
 			if TryReadDataResult then
-				v6 = true
+				v7 = true
 				TryReadDataResult1 = TryReadDataResult2
 			else
-				v6, TryReadDataResult1 = tryReadData()
+				v7, TryReadDataResult1 = tryReadData()
 			end
-			if v6 then
+			if v7 then
 				local Copy = if type(TryReadDataResult1.chatDrafts) == "table" then table.clone(TryReadDataResult1.chatDrafts) else {}
 				Copy[Key] = if p1 == "" then nil else p1
 				TryReadDataResult1.chatDrafts = Copy
@@ -599,19 +599,19 @@ local function createBuildAppStorage(AppStorageService, HttpService)
 			end
 		end,
 		getUnpublishedPlaytestModeTooltipDisplayCount = function(): number
-			-- upvalues: tryReadData (copy), v3 (ref)
+			-- upvalues: tryReadData (copy), v4 (ref)
 			local _, TryReadDataResult2 = tryReadData()
 			local UnpublishedPlaytestModeTooltipDisplayCount: number = TryReadDataResult2.unpublishedPlaytestModeTooltipDisplayCount
 			
-			return (math.max(if type(UnpublishedPlaytestModeTooltipDisplayCount) == "number" and UnpublishedPlaytestModeTooltipDisplayCount >= 0 then math.floor(UnpublishedPlaytestModeTooltipDisplayCount) else 0, v3))
+			return (math.max(if type(UnpublishedPlaytestModeTooltipDisplayCount) == "number" and UnpublishedPlaytestModeTooltipDisplayCount >= 0 then math.floor(UnpublishedPlaytestModeTooltipDisplayCount) else 0, v4))
 		end,
 		incrementUnpublishedPlaytestModeTooltipDisplayCount = function()
-			-- upvalues: FFlagBuildAdUpsellModule (upval), v3 (ref), tryReadData (copy), HttpService (copy), AppStorageService (copy)
+			-- upvalues: FFlagBuildAdUpsellModule (upval), v4 (ref), tryReadData (copy), HttpService (copy), AppStorageService (copy)
 			if not FFlagBuildAdUpsellModule then
 				local _, TryReadDataResult2_1 = tryReadData()
 				local UnpublishedPlaytestModeTooltipDisplayCount: number = TryReadDataResult2_1.unpublishedPlaytestModeTooltipDisplayCount
-				local NewLargest = math.max(if type(UnpublishedPlaytestModeTooltipDisplayCount) == "number" and UnpublishedPlaytestModeTooltipDisplayCount >= 0 then math.floor(UnpublishedPlaytestModeTooltipDisplayCount) else 0, v3) + 1
-				v3 = NewLargest
+				local NewLargest = math.max(if type(UnpublishedPlaytestModeTooltipDisplayCount) == "number" and UnpublishedPlaytestModeTooltipDisplayCount >= 0 then math.floor(UnpublishedPlaytestModeTooltipDisplayCount) else 0, v4) + 1
+				v4 = NewLargest
 				TryReadDataResult2_1.unpublishedPlaytestModeTooltipDisplayCount = NewLargest
 				local Success, Result = pcall(HttpService.JSONEncode, HttpService, TryReadDataResult2_1)
 				
@@ -621,31 +621,31 @@ local function createBuildAppStorage(AppStorageService, HttpService)
 					AppStorageService:Flush()
 				end) else false
 			end
-			local v6 = v3 + 1
-			v3 = v6
+			local v7 = v4 + 1
+			v4 = v7
 			
 			local function _(p1)
-				-- upvalues: v6 (copy), v3 (upval)
+				-- upvalues: v7 (copy), v4 (upval)
 				local UnpublishedPlaytestModeTooltipDisplayCount: number = p1.unpublishedPlaytestModeTooltipDisplayCount
-				local Largest = math.max((if type(UnpublishedPlaytestModeTooltipDisplayCount) == "number" and UnpublishedPlaytestModeTooltipDisplayCount >= 0 then math.floor(UnpublishedPlaytestModeTooltipDisplayCount) else 0) + 1, v6)
-				v3 = Largest
+				local Largest = math.max((if type(UnpublishedPlaytestModeTooltipDisplayCount) == "number" and UnpublishedPlaytestModeTooltipDisplayCount >= 0 then math.floor(UnpublishedPlaytestModeTooltipDisplayCount) else 0) + 1, v7)
+				v4 = Largest
 				p1.unpublishedPlaytestModeTooltipDisplayCount = Largest
 			end
 			
 			local TryReadDataResult, TryReadDataResult2 = tryReadData()
-			local v7 = nil
+			local v8 = nil
 			local TryReadDataResult1 = nil
 			
 			if TryReadDataResult then
-				v7 = true
+				v8 = true
 				TryReadDataResult1 = TryReadDataResult2
 			else
-				v7, TryReadDataResult1 = tryReadData()
+				v8, TryReadDataResult1 = tryReadData()
 			end
-			if v7 then
+			if v8 then
 				local UnpublishedPlaytestModeTooltipDisplayCount: number = TryReadDataResult1.unpublishedPlaytestModeTooltipDisplayCount
-				local Largest = math.max((if type(UnpublishedPlaytestModeTooltipDisplayCount) == "number" and UnpublishedPlaytestModeTooltipDisplayCount >= 0 then math.floor(UnpublishedPlaytestModeTooltipDisplayCount) else 0) + 1, v6)
-				v3 = Largest
+				local Largest = math.max((if type(UnpublishedPlaytestModeTooltipDisplayCount) == "number" and UnpublishedPlaytestModeTooltipDisplayCount >= 0 then math.floor(UnpublishedPlaytestModeTooltipDisplayCount) else 0) + 1, v7)
+				v4 = Largest
 				TryReadDataResult1.unpublishedPlaytestModeTooltipDisplayCount = Largest
 				local Success1, Result1 = pcall(HttpService.JSONEncode, HttpService, TryReadDataResult1)
 				
@@ -659,9 +659,9 @@ local function createBuildAppStorage(AppStorageService, HttpService)
 			end
 		end,
 		wasPushNotificationsUpsellShownToday = function(p1): boolean
-			-- upvalues: v2 (ref), tryReadData (copy)
+			-- upvalues: v3 (ref), tryReadData (copy)
 			local IsoDate: string = (p1 or DateTime.now()):ToIsoDate()
-			local Text: string = v2
+			local Text: string = v3
 			
 			if Text ~= nil and string.match(Text, "^(%d%d%d%d%-%d%d%-%d%d)") == string.match(IsoDate, "^(%d%d%d%d%-%d%d%-%d%d)") then
 				return true
@@ -677,9 +677,9 @@ local function createBuildAppStorage(AppStorageService, HttpService)
 			return IsMatchMatch
 		end,
 		markPushNotificationsUpsellShown = function(p1)
-			-- upvalues: v2 (ref), FFlagBuildAdUpsellModule (upval), tryReadData (copy), HttpService (copy), AppStorageService (copy)
+			-- upvalues: v3 (ref), FFlagBuildAdUpsellModule (upval), tryReadData (copy), HttpService (copy), AppStorageService (copy)
 			local IsoDate = (p1 or DateTime.now()):ToIsoDate()
-			v2 = IsoDate
+			v3 = IsoDate
 			
 			if not FFlagBuildAdUpsellModule then
 				local _, TryReadDataResult2_1 = tryReadData()
@@ -704,16 +704,16 @@ local function createBuildAppStorage(AppStorageService, HttpService)
 			end
 			
 			local TryReadDataResult, TryReadDataResult2 = tryReadData()
-			local v6 = nil
+			local v7 = nil
 			local TryReadDataResult1 = nil
 			
 			if TryReadDataResult then
-				v6 = true
+				v7 = true
 				TryReadDataResult1 = TryReadDataResult2
 			else
-				v6, TryReadDataResult1 = tryReadData()
+				v7, TryReadDataResult1 = tryReadData()
 			end
-			if v6 then
+			if v7 then
 				local PushNotificationsUpsell = TryReadDataResult1.pushNotificationsUpsell
 				local Copy = if type(PushNotificationsUpsell) == "table" then table.clone(PushNotificationsUpsell) else {}
 				Copy.lastShownAt = IsoDate
@@ -739,19 +739,19 @@ local function createBuildAppStorage(AppStorageService, HttpService)
 			-- upvalues: loadAdUpsell (copy)
 			local AdUpsell, AdUpsell2 = loadAdUpsell()
 			local Flag = nil
-			local v6 = nil
+			local v7 = nil
 			local Scheduler = nil
 			
 			if AdUpsell and AdUpsell2 ~= nil then
 				Flag = true
-				v6 = AdUpsell2
+				v7 = AdUpsell2
 				Scheduler = AdUpsell2.scheduler
 			else
 				Flag = false
-				v6 = nil
+				v7 = nil
 				Scheduler = nil
 			end
-			if not Flag or v6 == nil or Scheduler == nil then
+			if not Flag or v7 == nil or Scheduler == nil then
 				return {
 					isAvailable = false,
 					dismissedPermanently = true,
@@ -779,7 +779,7 @@ local function createBuildAppStorage(AppStorageService, HttpService)
 			end
 			return {
 				isAvailable = true,
-				dismissedPermanently = v6.dismissedPermanently == true or Univers ~= nil and Univers.dismissedPermanently,
+				dismissedPermanently = v7.dismissedPermanently == true or Univers ~= nil and Univers.dismissedPermanently,
 				hasShownUpsell = Univers ~= nil and Univers.hasShownUpsell,
 				anchors = Anchors,
 				pendingMilestoneCount = PendingMilestoneCount
@@ -797,22 +797,22 @@ local function createBuildAppStorage(AppStorageService, HttpService)
 			-- upvalues: loadAdUpsell (copy), FFlagBuildAdUpsellPinnedModule (upval), pruneAnchorCaps (copy), persistAdUpsellMutation (copy)
 			local AdUpsell, AdUpsell2 = loadAdUpsell()
 			local Flag = nil
-			local v7 = nil
+			local v8 = nil
 			local Scheduler = nil
 			
 			if AdUpsell and AdUpsell2 ~= nil then
 				Flag = true
-				v7 = AdUpsell2
+				v8 = AdUpsell2
 				Scheduler = AdUpsell2.scheduler
 			else
 				Flag = false
-				v7 = nil
+				v8 = nil
 				Scheduler = nil
 			end
-			if not Flag or v7 == nil or Scheduler == nil then
+			if not Flag or v8 == nil or Scheduler == nil then
 				return false
 			end
-			if v7.dismissedPermanently == true then
+			if v8.dismissedPermanently == true then
 				return true
 			end
 			local PendingMilestones = {}
@@ -886,19 +886,19 @@ local function createBuildAppStorage(AppStorageService, HttpService)
 			-- upvalues: loadAdUpsell (copy), Count (ref), Inverted (ref), Flag2 (ref), scheduleAdUpsellWriteRetry (copy)
 			local AdUpsell, AdUpsell2 = loadAdUpsell()
 			local Flag = nil
-			local v8 = nil
+			local v9 = nil
 			local Scheduler = nil
 			
 			if AdUpsell and AdUpsell2 ~= nil then
 				Flag = true
-				v8 = AdUpsell2
+				v9 = AdUpsell2
 				Scheduler = AdUpsell2.scheduler
 			else
 				Flag = false
-				v8 = nil
+				v9 = nil
 				Scheduler = nil
 			end
-			if not Flag or v8 == nil or Scheduler == nil or v8.dismissedPermanently == true then
+			if not Flag or v9 == nil or Scheduler == nil or v9.dismissedPermanently == true then
 				return false
 			end
 			for _, anchor in Scheduler.anchors do
@@ -919,7 +919,7 @@ local function createBuildAppStorage(AppStorageService, HttpService)
 			return false
 		end,
 		markAdUpsellDismissedPermanently = function(UniverseId): boolean
-			-- upvalues: loadAdUpsell (copy), tryReadData (copy), sanitizeAdUpsellScheduler (upval), v4 (ref), Flag1 (ref), Count (ref), persistCachedAdUpsell (copy), Inverted (ref), Flag2 (ref), scheduleAdUpsellWriteRetry (copy), DelayedThread (ref)
+			-- upvalues: loadAdUpsell (copy), tryReadData (copy), sanitizeAdUpsellScheduler (upval), v5 (ref), Flag1 (ref), Count (ref), persistCachedAdUpsell (copy), Inverted (ref), Flag2 (ref), scheduleAdUpsellWriteRetry (copy), DelayedThread (ref)
 			local AdUpsell, AdUpsell2 = loadAdUpsell()
 			
 			if AdUpsell and AdUpsell2 ~= nil and AdUpsell2.dismissedPermanently == true then
@@ -940,11 +940,11 @@ local function createBuildAppStorage(AppStorageService, HttpService)
 				local Copy = if type(TryReadDataResult1.adUpsell) == "table" then table.clone(TryReadDataResult1.adUpsell) else {}
 				Copy.dismissedPermanently = Copy.dismissedPermanently == true
 				Copy.scheduler = sanitizeAdUpsellScheduler(Copy.scheduler)
-				v4 = Copy
+				v5 = Copy
 				Flag1 = false
 				Enabled = true
 			end
-			local Scheduler = v4.scheduler
+			local Scheduler = v5.scheduler
 			local Text = tostring(UniverseId)
 			local Univers = Scheduler.universes[Text]
 			
@@ -1029,16 +1029,16 @@ local function createBuildAppStorage(AppStorageService, HttpService)
 			end
 			
 			local TryReadDataResult, TryReadDataResult2 = tryReadData()
-			local v9 = nil
+			local v10 = nil
 			local TryReadDataResult1 = nil
 			
 			if TryReadDataResult then
-				v9 = true
+				v10 = true
 				TryReadDataResult1 = TryReadDataResult2
 			else
-				v9, TryReadDataResult1 = tryReadData()
+				v10, TryReadDataResult1 = tryReadData()
 			end
-			if v9 then
+			if v10 then
 				local PushNotificationsUpsell = TryReadDataResult1.pushNotificationsUpsell
 				local Copy = if type(PushNotificationsUpsell) == "table" then table.clone(PushNotificationsUpsell) else {}
 				Copy.dismissedPermanently = true
@@ -1055,14 +1055,14 @@ local function createBuildAppStorage(AppStorageService, HttpService)
 			end
 		end,
 		clearSessionCacheForTests = function()
-			-- upvalues: FFlagBuildAgentAdCampaignCardModule (upval), v5 (ref), v2 (ref), Flag (ref), v3 (ref), v4 (ref), Flag1 (ref), Inverted (ref), Count (ref), DelayedThread (ref), Flag2 (ref)
-			if FFlagBuildAgentAdCampaignCardModule and v5 ~= nil then
-				v5.reset()
+			-- upvalues: FFlagBuildAgentAdCampaignCardModule (upval), v6 (ref), v3 (ref), Flag (ref), v4 (ref), v5 (ref), Flag1 (ref), Inverted (ref), Count (ref), DelayedThread (ref), Flag2 (ref)
+			if FFlagBuildAgentAdCampaignCardModule and v6 ~= nil then
+				v6.reset()
 			end
-			v2 = nil
+			v3 = nil
 			Flag = false
-			v3 = 0
-			v4 = nil
+			v4 = 0
+			v5 = nil
 			Flag1 = false
 			Inverted = false
 			Count = 0

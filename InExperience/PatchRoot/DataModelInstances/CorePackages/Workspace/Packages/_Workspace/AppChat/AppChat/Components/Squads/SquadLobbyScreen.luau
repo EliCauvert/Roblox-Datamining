@@ -1,6 +1,7 @@
 ﻿local AppChat = script:FindFirstAncestor("AppChat")
 local EnumScreensModule = require(AppChat.EnumScreens)
 local Parent = AppChat.Parent
+local SharedFlagsModule = require(Parent.SharedFlags)
 local CryoModule = require(Parent.Cryo)
 local ReactModule = require(Parent.React)
 local _ = require(Parent.Squads.ModelTypes)
@@ -11,8 +12,9 @@ local SquadLobbyScreen = ReactModule.PureComponent:extend("SquadLobbyScreen")
 local ChatPlacementContextModule = require(AppChat.Contexts.ChatPlacementContext)
 local WithChatPlacementContextFunction = ChatPlacementContextModule.withChatPlacementContext
 local ParentContainerContextModule = require(AppChat.Contexts.ParentContainer.ParentContainerContext)
-local FFlagEnablePartyVoiceChangersInLua = require(Parent.SharedFlags).FFlagEnablePartyVoiceChangersInLua
+local FFlagEnablePartyVoiceChangersInLua = SharedFlagsModule.FFlagEnablePartyVoiceChangersInLua
 local FFlagAppChatIxpScreenExposureModule = require(AppChat.Flags.FFlagAppChatIxpScreenExposure)
+local FFlagExpChatEnableFriendsTab = SharedFlagsModule.FFlagExpChatEnableFriendsTab
 local IXPNavigationUtilsModule = require(AppChat.Utils.IXPNavigationUtils)
 local GetTopBarStoreModule = require(AppChat.Stores.GetTopBarStore)
 local List = {
@@ -127,13 +129,13 @@ function SquadLobbyScreen.willUnmount(p2)
 end
 
 function SquadLobbyScreen.render(p2)
-	-- upvalues: WithChatPlacementContextFunction (copy), ChatPlacementContextModule (copy), ReactModule (copy), SquadLobbyModule (copy), FFlagEnablePartyVoiceChangersInLua (copy), ParentContainerContextModule (copy)
+	-- upvalues: WithChatPlacementContextFunction (copy), ChatPlacementContextModule (copy), ReactModule (copy), SquadLobbyModule (copy), FFlagEnablePartyVoiceChangersInLua (copy), FFlagExpChatEnableFriendsTab (copy), ParentContainerContextModule (copy)
 	return WithChatPlacementContextFunction(function(p3)
-		-- upvalues: p2 (copy), ChatPlacementContextModule (upval), ReactModule (upval), SquadLobbyModule (upval), FFlagEnablePartyVoiceChangersInLua (upval), ParentContainerContextModule (upval)
+		-- upvalues: p2 (copy), ChatPlacementContextModule (upval), ReactModule (upval), SquadLobbyModule (upval), FFlagEnablePartyVoiceChangersInLua (upval), FFlagExpChatEnableFriendsTab (upval), ParentContainerContextModule (upval)
 		local IsPlacementInExperience = ChatPlacementContextModule.isPlacementInExperience(p3.chatPlacement)
 		
 		if p2.state.isFocused then
-			local function v29(NavigateToChat)
+			local function v31(NavigateToChat)
 				-- upvalues: ReactModule (upval), SquadLobbyModule (upval), p2 (upval), FFlagEnablePartyVoiceChangersInLua (upval), IsPlacementInExperience (copy)
 				return ReactModule.createElement(SquadLobbyModule, {
 					navigateToHomePage = p2.navigateToHomePage,
@@ -148,10 +150,10 @@ function SquadLobbyScreen.render(p2)
 				})
 			end
 			
-			return if IsPlacementInExperience then ReactModule.createElement(ParentContainerContextModule.Consumer, {
+			return if FFlagExpChatEnableFriendsTab and IsPlacementInExperience then ReactModule.createElement(ParentContainerContextModule.Consumer, {
 				render = function(p4)
-					-- upvalues: v29 (copy), p2 (upval)
-					return v29(function(p5)
+					-- upvalues: v31 (copy), p2 (upval)
+					return v31(function(p5)
 						-- upvalues: p4 (copy), p2 (upval)
 						return p4.openFriendsChatConversation(p5):andThen(function(Result)
 							-- upvalues: p2 (upval)
@@ -161,7 +163,7 @@ function SquadLobbyScreen.render(p2)
 						end)
 					end)
 				end
-			}) else v29(nil)
+			}) else v31(nil)
 		else
 			return nil
 		end

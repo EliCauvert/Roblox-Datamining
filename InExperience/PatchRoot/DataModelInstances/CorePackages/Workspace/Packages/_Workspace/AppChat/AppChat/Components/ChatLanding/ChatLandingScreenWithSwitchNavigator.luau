@@ -29,7 +29,6 @@ local ResetForSquadLobbyForWideModeModule = require(AppChat.Utils.resetForSquadL
 local ChatSearchBoxModule = require(script.Parent.ChatSearchBox)
 local ChatLandingSearchRowModule = require(AppChat.Components.TopBar.ChatLandingSearchRow)
 local FFlagAppChatWideAlwaysVisibleSearchBoxModule = require(AppChat.Flags.FFlagAppChatWideAlwaysVisibleSearchBox)
-local FFlagAppChatFixInExpSearchRowLayoutOrderModule = require(AppChat.Flags.FFlagAppChatFixInExpSearchRowLayoutOrder)
 local ChatLandingContainerModule = require(script.Parent.ChatLandingContainer)
 local LoggerModule = require(script.Parent.Logger)
 local GetCurrentRouteModule = require(script.Parent.Utils.getCurrentRoute)
@@ -40,6 +39,7 @@ local UseGetAndSetRefModule = require(AppChat.Hooks.useGetAndSetRef)
 local UseIsChatSearchAllowedModule = require(AppChat.Hooks.useIsChatSearchAllowed)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local GetFFlagEnableAppChatInExperienceFunction = SharedFlagsModule.GetFFlagEnableAppChatInExperience
+local AppChatFixChatLandingContainerKeyPropConflict = game:DefineFastFlag("AppChatFixChatLandingContainerKeyPropConflict", false)
 local FFlagAppChatConsoleFocusFixesModule = require(AppChat.Flags.FFlagAppChatConsoleFocusFixes)
 
 local function LeftContainerTelemetryProviders(p1)
@@ -239,7 +239,7 @@ function ChatLandingScreenWithSwitchNavigator.init(p1)
 end
 
 function ChatLandingScreenWithSwitchNavigator.render(p1)
-	-- upvalues: LoggerModule (copy), ArgCheckModule (copy), WithStyleFunction (copy), FFlagAppChatWideAlwaysVisibleSearchBoxModule (copy), RoactModule (copy), TopBarProviderModule (copy), EnumScreensModule (copy), ChatLandingSearchRowModule (copy), ChatSearchBoxModule (copy), FFlagAppChatFixInExpSearchRowLayoutOrderModule (copy), FFlagAppChatConsoleFocusFixesModule (copy), ChatLandingTopBarModule (copy), ProviderModule (copy), ChatLandingContainerModule (copy), LeftContainerTelemetryProviders (copy), RightContainerTelemetryProviders (copy), ConversationSwitchNavigatorModule (copy), ReactModule (copy), ContextModule (copy), ConversationStackNavigationFocusListenerModule (copy)
+	-- upvalues: LoggerModule (copy), ArgCheckModule (copy), WithStyleFunction (copy), FFlagAppChatWideAlwaysVisibleSearchBoxModule (copy), RoactModule (copy), TopBarProviderModule (copy), EnumScreensModule (copy), ChatLandingSearchRowModule (copy), ChatSearchBoxModule (copy), FFlagAppChatConsoleFocusFixesModule (copy), ChatLandingTopBarModule (copy), ProviderModule (copy), AppChatFixChatLandingContainerKeyPropConflict (copy), ChatLandingContainerModule (copy), LeftContainerTelemetryProviders (copy), RightContainerTelemetryProviders (copy), ConversationSwitchNavigatorModule (copy), ReactModule (copy), ContextModule (copy), ConversationStackNavigationFocusListenerModule (copy)
 	LoggerModule:info("{screen} render")
 	local NavigationInChatLandingScreenWithSwitchNavigator = ArgCheckModule.isNotNil(p1.props.navigation, "navigation in ChatLandingScreenWithSwitchNavigator")
 	local KeyParam = NavigationInChatLandingScreenWithSwitchNavigator and NavigationInChatLandingScreenWithSwitchNavigator.getParam("key", "") or ""
@@ -248,7 +248,7 @@ function ChatLandingScreenWithSwitchNavigator.render(p1)
 	local IsInExperienceScreenProps = NavigationInChatLandingScreenWithSwitchNavigator.getScreenProps("isInExperience", false)
 	
 	return WithStyleFunction(function(p2)
-		-- upvalues: FFlagAppChatWideAlwaysVisibleSearchBoxModule (upval), IsInExperienceScreenProps (copy), ShowSearchRowScreenProps (copy), RoactModule (upval), TopBarProviderModule (upval), EnumScreensModule (upval), ArgCheckModule (upval), ChatLandingSearchRowModule (upval), TopBarHeightScreenProps (copy), NavigationInChatLandingScreenWithSwitchNavigator (copy), ChatSearchBoxModule (upval), FFlagAppChatFixInExpSearchRowLayoutOrderModule (upval), FFlagAppChatConsoleFocusFixesModule (upval), p1 (copy), ChatLandingTopBarModule (upval), ProviderModule (upval), ChatLandingContainerModule (upval), KeyParam (copy), LeftContainerTelemetryProviders (upval), RightContainerTelemetryProviders (upval), ConversationSwitchNavigatorModule (upval), ReactModule (upval), ContextModule (upval), ConversationStackNavigationFocusListenerModule (upval)
+		-- upvalues: FFlagAppChatWideAlwaysVisibleSearchBoxModule (upval), IsInExperienceScreenProps (copy), ShowSearchRowScreenProps (copy), RoactModule (upval), TopBarProviderModule (upval), EnumScreensModule (upval), ArgCheckModule (upval), ChatLandingSearchRowModule (upval), TopBarHeightScreenProps (copy), NavigationInChatLandingScreenWithSwitchNavigator (copy), ChatSearchBoxModule (upval), FFlagAppChatConsoleFocusFixesModule (upval), p1 (copy), ChatLandingTopBarModule (upval), ProviderModule (upval), AppChatFixChatLandingContainerKeyPropConflict (upval), ChatLandingContainerModule (upval), KeyParam (copy), LeftContainerTelemetryProviders (upval), RightContainerTelemetryProviders (upval), ConversationSwitchNavigatorModule (upval), ReactModule (upval), ContextModule (upval), ConversationStackNavigationFocusListenerModule (upval)
 		return ReactModule.createElement(ContextModule.Provider, { value = p1.wideModeFocusValue }, {
 			FocusListener = RoactModule.createElement(ConversationStackNavigationFocusListenerModule, {
 				navigation = NavigationInChatLandingScreenWithSwitchNavigator,
@@ -259,7 +259,7 @@ function ChatLandingScreenWithSwitchNavigator.render(p1)
 			}, {
 				LeftContainerProviders = RoactModule.createElement(LeftContainerTelemetryProviders, {
 					renderChildren = function(p3)
-						-- upvalues: FFlagAppChatWideAlwaysVisibleSearchBoxModule (upval), IsInExperienceScreenProps (upval), ShowSearchRowScreenProps (upval), RoactModule (upval), TopBarProviderModule (upval), EnumScreensModule (upval), ArgCheckModule (upval), ChatLandingSearchRowModule (upval), TopBarHeightScreenProps (upval), NavigationInChatLandingScreenWithSwitchNavigator (upval), ChatSearchBoxModule (upval), FFlagAppChatFixInExpSearchRowLayoutOrderModule (upval), FFlagAppChatConsoleFocusFixesModule (upval), p1 (upval), ChatLandingTopBarModule (upval), ProviderModule (upval), p2 (copy), ChatLandingContainerModule (upval), KeyParam (upval)
+						-- upvalues: FFlagAppChatWideAlwaysVisibleSearchBoxModule (upval), IsInExperienceScreenProps (upval), ShowSearchRowScreenProps (upval), RoactModule (upval), TopBarProviderModule (upval), EnumScreensModule (upval), ArgCheckModule (upval), ChatLandingSearchRowModule (upval), TopBarHeightScreenProps (upval), NavigationInChatLandingScreenWithSwitchNavigator (upval), ChatSearchBoxModule (upval), FFlagAppChatConsoleFocusFixesModule (upval), p1 (upval), ChatLandingTopBarModule (upval), ProviderModule (upval), p2 (copy), AppChatFixChatLandingContainerKeyPropConflict (upval), ChatLandingContainerModule (upval), KeyParam (upval)
 						local P9 = FFlagAppChatWideAlwaysVisibleSearchBoxModule and (not IsInExperienceScreenProps and p3)
 						local ShowSearchRowScreenProps1 = ShowSearchRowScreenProps or P9
 						
@@ -267,9 +267,10 @@ function ChatLandingScreenWithSwitchNavigator.render(p1)
 							LeftContainer = RoactModule.createElement(TopBarProviderModule, {
 								screenName = EnumScreensModule.ChatLanding,
 								render = function(p4)
-									-- upvalues: EnumScreensModule (upval), ArgCheckModule (upval), ShowSearchRowScreenProps1 (copy), P9 (copy), RoactModule (upval), ChatLandingSearchRowModule (upval), TopBarHeightScreenProps (upval), NavigationInChatLandingScreenWithSwitchNavigator (upval), ChatSearchBoxModule (upval), FFlagAppChatFixInExpSearchRowLayoutOrderModule (upval), FFlagAppChatConsoleFocusFixesModule (upval), p1 (upval), ChatLandingTopBarModule (upval), ProviderModule (upval), p2 (upval), ChatLandingContainerModule (upval), KeyParam (upval)
+									-- upvalues: EnumScreensModule (upval), ArgCheckModule (upval), ShowSearchRowScreenProps1 (copy), P9 (copy), RoactModule (upval), ChatLandingSearchRowModule (upval), TopBarHeightScreenProps (upval), NavigationInChatLandingScreenWithSwitchNavigator (upval), ChatSearchBoxModule (upval), FFlagAppChatConsoleFocusFixesModule (upval), p1 (upval), ChatLandingTopBarModule (upval), ProviderModule (upval), p2 (upval), AppChatFixChatLandingContainerKeyPropConflict (upval), ChatLandingContainerModule (upval), KeyParam (upval)
 									local ScreenTopBar = p4.getScreenTopBar(EnumScreensModule.ChatLanding)
 									ArgCheckModule.isType(ScreenTopBar, "table", "screenTopBar")
+									local ShouldRenderCenter = ScreenTopBar.shouldRenderCenter or ShowSearchRowScreenProps1
 									
 									return RoactModule.createElement("Frame", {
 										Size = UDim2.new(0.37, 0, 1, 0),
@@ -299,8 +300,7 @@ function ChatLandingScreenWithSwitchNavigator.render(p1)
 											onFilter = function(FilterText)
 												-- upvalues: p4 (copy), EnumScreensModule (upval)
 												p4.setScreenTopBar(EnumScreensModule.ChatLanding, { filterText = FilterText })
-											end,
-											layoutOrder = if FFlagAppChatFixInExpSearchRowLayoutOrderModule then 0 else nil
+											end
 										}) else nil,
 										content = RoactModule.createElement(ProviderModule, {
 											value = {
@@ -314,8 +314,8 @@ function ChatLandingScreenWithSwitchNavigator.render(p1)
 												Size = UDim2.new(1, 0, 1, -NavigationInChatLandingScreenWithSwitchNavigator.getScreenProps("topBarHeight", 0) - (if ShowSearchRowScreenProps1 then TopBarHeightScreenProps else 0)),
 												BackgroundTransparency = p2.Tokens.Color.None.Transparency
 											}, {
-												RoactModule.createElement(ChatLandingContainerModule, {
-													isShowingFilterBox = ScreenTopBar.shouldRenderCenter or ShowSearchRowScreenProps1,
+												ChatLandingContainer = if AppChatFixChatLandingContainerKeyPropConflict then nil else RoactModule.createElement(ChatLandingContainerModule, {
+													isShowingFilterBox = ShouldRenderCenter,
 													filterText = ScreenTopBar.filterText,
 													navigateToConversation = p1.navigateToConversation,
 													navigateToCreateChat = p1.navigateToCreateChat,
@@ -324,7 +324,18 @@ function ChatLandingScreenWithSwitchNavigator.render(p1)
 													navigateToToast = p1.navigateToToast,
 													navigateToAddFriends = p1.props.navigation.getScreenProps("navigateToAddFriends", {}),
 													key = "ChatLanding" .. KeyParam
-												})
+												}),
+												if AppChatFixChatLandingContainerKeyPropConflict then RoactModule.createElement(ChatLandingContainerModule, {
+													isShowingFilterBox = ShouldRenderCenter,
+													filterText = ScreenTopBar.filterText,
+													navigateToConversation = p1.navigateToConversation,
+													navigateToCreateChat = p1.navigateToCreateChat,
+													navigateToPrivacy = p1.navigateToPrivacy,
+													navigateToSquadLobby = p1.navigateToSquadLobby,
+													navigateToToast = p1.navigateToToast,
+													navigateToAddFriends = p1.props.navigation.getScreenProps("navigateToAddFriends", {}),
+													key = "ChatLanding" .. KeyParam
+												}) else nil
 											})
 										})
 									})

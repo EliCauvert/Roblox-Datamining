@@ -1,6 +1,6 @@
 ﻿local FriendsLanding = script:FindFirstAncestor("FriendsLanding")
 local Parent = FriendsLanding.Parent
-local FFlagFontFaceSocialFriends = require(Parent.SharedFlags).FFlagFontFaceSocialFriends
+local FoundationFontFaceMigration = require(Parent.SharedFlags).FFlagFontFaceSocialFriends and require(Parent.Foundation).Utility.Flags.FoundationFontFaceMigration
 local DependenciesModule = require(FriendsLanding.dependencies)
 local React = DependenciesModule.React
 local Dash = DependenciesModule.Dash
@@ -43,7 +43,7 @@ local function _(p1)
 end
 
 return function(p1)
-	-- upvalues: Dash (copy), config (copy), MigrateNoFriendsViewToFoundation (copy), PreloadAssetFunction (copy), Assets (copy), React (copy), UseLocalizationFunction (copy), UseStyleFunction (copy), UseTokensFunction (copy), Image (copy), ImageSetLabel (copy), Images (copy), Colors (copy), StyledTextLabel (copy), FFlagFontFaceSocialFriends (copy), AppFonts (copy), NormalizeFontFaceFunction (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy)
+	-- upvalues: Dash (copy), config (copy), MigrateNoFriendsViewToFoundation (copy), PreloadAssetFunction (copy), Assets (copy), React (copy), UseLocalizationFunction (copy), UseStyleFunction (copy), UseTokensFunction (copy), Image (copy), ImageSetLabel (copy), Images (copy), Colors (copy), StyledTextLabel (copy), FoundationFontFaceMigration (copy), AppFonts (copy), NormalizeFontFaceFunction (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy)
 	local JoinResult = Dash.join(config, p1 or {})
 	local Collaborators = if MigrateNoFriendsViewToFoundation then "pictograms/collaborators" else nil
 	local AssetId = nil
@@ -117,8 +117,8 @@ return function(p1)
 				BackgroundTransparency = 1,
 				LayoutOrder = 3,
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Font = if FFlagFontFaceSocialFriends then nil else AppFonts.default:getDefault(),
-				FontFace = if FFlagFontFaceSocialFriends then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodySmall.Font) else nil,
+				Font = if FoundationFontFaceMigration then nil else AppFonts.default:getDefault(),
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodySmall.Font) else nil,
 				Size = UDim2.new(1, 0, 0, 0),
 				Text = UseLocalizationResult.noFriendsText,
 				TextColor3 = UseStyleResult.Theme.TextMuted.Color,

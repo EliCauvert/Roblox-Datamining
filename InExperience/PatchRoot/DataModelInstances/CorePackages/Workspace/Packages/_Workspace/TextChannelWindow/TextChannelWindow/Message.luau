@@ -23,12 +23,6 @@ local function createUserMessage(UserMessage)
 end
 
 return {
-	markHistorical = function(Tbl)
-		local Copy = table.clone(Tbl)
-		Copy.isHistorical = true
-		
-		return Copy
-	end,
 	createSystemMessage = function(Content, p1)
 		-- upvalues: HttpService (copy)
 		return {

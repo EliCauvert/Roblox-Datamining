@@ -172,7 +172,7 @@ Common.Presence.Label.RobloxStudio,Roblox Studio
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,ऐनिमेशन बहुत लंबा है ({duration} सेकंड). Emote ऐनिमेशन ज़्यादा-से-ज़्यादा {maxLength} सेकंड लंबे होने चाहिए.
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,ऐनिमेशन बहुत छोटा है ({duration} सेकंड). Emote ऐनिमेशन {minLength} सेकंड से ज़्यादा लंबे होने चाहिए.
 Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,{cageName} में केज पार्ट की प्लेसमेंट का उल्लंघन : {upperPart} को {lowerPart} के ऊपर सही ढंग से नहीं रखा गया है.
-Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,"{cageName} में मौजूद केज पार्ट {partName} में {actualCount} वर्टिसेज़ हैं, जबकि उसमें लगभग {expectedCount} वर्टिसेज़ होने की उम्मीद थी. इससे यह पता लग सकता है कि उस केज रीजन में कोई ज्योमेट्री मौजूद नहीं है या कोई डुप्लिकेट ज्योमेट्री है."
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,"{cageName} में मौजूद केज पार्ट {partName} में {actualCount} वर्टिसेस हैं, जबकि उम्मीद लगभग {expectedCount} वर्टिसेस के होने की थी. इससे यह पता लग सकता है कि उस बॉडी रीजन में कोई ज्योमेट्री मौजूद नहीं है या कोई डुप्लिकेट ज्योमेट्री है."
 Common.UGCValidation.ErrorLabel.AQSFail_CageUV,"{cage_name} में गलत UV वैल्यू हैं, जो टेम्पलेट से मैच नहीं करती हैं. {incorrect_uv_count} गलत UV ({unreferenced_vertex_count} रेफ़रेंस नहीं दिए गए, {non_template_uv_count} नॉन-टेम्पलेट, {duplicate_mapping_count} डुप्लिकेट मैपिंग), {unmatched_template_count} अनमैच टेम्पलेट वर्टिस. कृपया केज UV को सही करके टेम्पलेट से मैच करें."
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,आपके बॉडी में छोटे डिस्कनेक्टेड मेश कॉम्पोनेंट (मेश आइलैंड) मौजूद हैं. कृपया फ़्लोटिंग ज्योमेट्री हटा दें और पक्का करें कि सभी मेश पार्ट्स ठीक से जुड़े हुए हैं.
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,"{partName} में {num_disconnected_components} डिस्कनेक्ट हुए कॉम्पोनेंट हैं, जो {max_disconnected_components} की अधिकतम तय लिमिट से ज़्यादा हैं."
@@ -183,7 +183,7 @@ Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,"हेड के�
 Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,"बाहरी केज के बदले गए वर्टिसेज़ का {irrelevant_percent}% हिस्सा ऐक्सेसरीज़ को कवर नहीं करता है. कृपया केज को एडजस्ट करें, ताकि वह ऐक्सेसरी के आकार के मुताबिक बेहतर ढंग से फ़िट हो सके."
 Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,"{cage_name} में गलत UV वैल्यू हैं. {incorrect_uv_count} गलत UV ({unreferenced_vertex_count} रेफ़रेंस नहीं दिए गए, {non_template_uv_count} नॉन-टेम्पलेट, {duplicate_mapping_count} डुप्लिकेट मैपिंग), {unmatched_template_count} अनमैच टेम्पलेट वर्टिसेज़."
 Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,{partName} में {degenerate_triangle_percent}% डिजेनरेट ट्रायंगल हैं.
-Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,"डायनैमिक हेड में एक्सप्रेशन क्वॉलिटी से जुड़ी समस्याएँ हैं. स्क्रीन पर मौजूद बाईं आँख (विज़ुअलाइज़ेशन प्लग-इन में सिर की बाईं ओर लाल डॉट्स) बंद है : {left_eye_close}, स्क्रीन पर मौजूद दाईं आँख (विज़ुअलाइज़ेशन प्लग-इन में सिर की दाईं ओर नीले डॉट्स) बंद है : {right_eye_close}, मुँह खुला (विज़ुअलाइज़ेशन प्लग-इन में हरे डॉट्स) है : {mouth_open}, खुश : {is_happy}, उदास : {is_sad}."
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,"डायनैमिक हेड में एक्सप्रेशन क्वालिटी से जुड़ी समस्याएँ हैं. बाईं आँख बंद : {left_eye_close}, दाईं आँख बंद : {right_eye_close}, मुँह खुला : {mouth_open}, खुश : {is_happy}, उदास : {is_sad} है."
 Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"इस जॉइंट कॉन्फ़िगरेशन की उम्मीद नहीं थी. कुल जॉइंट : {joint_number}, बाएँ हाथ के जॉइंट : {left_hand_joint_number}, दाएँ हाथ के जॉइंट : {right_hand_joint_number}."
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,{partName} में कुल {num_disconnected_components} कॉम्पोनेंट में से {num_small_volume_islands} छोटे डिस्कनेक्ट हुए मेश आइलैंड मौजूद हैं. कृपया फ़्लोटिंग ज्योमेट्री हटा दें.
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,"{partName} में नॉन-मैनिफ़ोल्ड ज्योमेट्री है. कृपया देखें कि कहीं नॉन-प्लेनर फ़ेस, आपस में कटती हुई सर्फ़ेस या दो से ज़्यादा फ़ेस द्वारा शेयर किए जाने वाले एज तो नहीं हैं."
@@ -192,9 +192,7 @@ Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,"मेश वर�
 Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,"{measureName} के लिए वैलिडेशन डेटा का हिसाब नहीं लगाया जा सका, क्योंकि इनपुट डेटा अधूरा या अमान्य था. इससे आपका अपलोड ब्लॉक नहीं होता है."
 Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,टेक्स्चर {textureName} थोड़ा कम मुश्किल है. हो सकता है कि टेक्स्चर में पर्याप्त जानकारी या वेरिएशन न हो.
 Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,टेक्स्चर {textureName} का रिज़ॉल्यूशन {texture_width}x{texture_height} कम है. ज़्यादा रिज़ॉल्यूशन वाला टेक्स्चर इस्तेमाल करें.
-Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,"{partName} में {intersecting_tri_face_percent}% चेहरे आपस में इंटरसेक्ट हो रहे हैं, जो तय सीमा {threshold}% से ज़्यादा हैं."
 Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,"{partName} में {uv_outside_bound_vert_percent}% UV वर्टिसेज़ हैं, जो [0,1] की सीमा से बाहर हैं."
-Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,"{partName} में {similar_vertex_percent}% मिलते-जुलते वर्टिसेज़ हैं, जो तय सीमा {threshold}% से ज़्यादा हैं."
 Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,'{PartName}' में ऐक्सेसरी अटैचमेंट '{AttachmentName}' को मेश की सतह के पास रखना चाहिए. मौजूदा पोज़िशन [{CurrentPosition}] मान्य क्षेत्र से बाहर है. इसे [{ClosestValidPosition}] के करीब लाएँ.
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,"हैंडल, जॉइंट {jointName} से जुड़ा हुआ है, जो मंज़ूर किए गए स्कीमा का हिस्सा नहीं है. सिर्फ़ स्टैंडर्ड R15 जॉइंट और स्किनिंग ट्रांसफ़र जॉइंट की अनुमति है."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,"{assetType} के लिए स्किनिंग ट्रांसफ़र का इस्तेमाल करना ज़रूरी है, लेकिन आपके पास ज़रूरी जॉइंट {requiredJointName} मौजूद नहीं है."
@@ -206,44 +204,14 @@ Common.UGCValidation.ErrorLabel.AccessorySkinning_WeightNotFull,ट्रां�
 Common.UGCValidation.ErrorLabel.AnimationPack_DuplicateAnimationId,"ऐनिमेशन पैक बंडल में डुप्लिकेट ऐनिमेशन ID '{animationId}' मौजूद है, जिसका इस्तेमाल कई क्लिप में हो रहा है : {instancePaths}. हर ऐनिमेशन क्लिप में एक यूनीक ऐनिमेशन ऐसेट का रेफ़रेंस होना चाहिए."
 Common.UGCValidation.ErrorLabel.AnimationPack_InvalidR15AnimChildren,ऐनिमेशन पैक बंडल में वह ऐनिमेशन टाइप मौजूद नहीं है (हैं) जो होना चाहिए : {missingAnimationTypes}. हर ऐनिमेशन टाइप में एक R15Anim फ़ोल्डर होना चाहिए जिसमें उसके अपेक्षित StringValue चिल्ड्रन बिल्कुल सही हों.
 Common.UGCValidation.ErrorLabel.Animation_WeightNotPositive,"ऐनिमेशन '{animationName}' का वज़न {weight} है, लेकिन वज़न 0 से ज़्यादा होना चाहिए. कृपया ऐनिमेशन को ठीक करें."
-Common.UGCValidation.ErrorLabel.AssetBounds_InconsistentScaleType,सभी MeshParts के अपने AvatarPartScaleType चाइल्ड में एक ही वैल्यू होनी चाहिए. कृपया वेरिफ़ाई करें कि वैल्यू मैच करती हों.
-Common.UGCValidation.ErrorLabel.AssetBounds_TooLarge,"{assetName} के मेश और जॉइंट का {axis} ऐक्सिस साइज़ '{currentSize}' है, जो तय अधिकतम बाउंडिंग बॉक्स के {axis} ऐक्सिस साइज़ '{maxSize}' से बड़ा है. आपको मेश और जॉइंट का साइज़ कम करना होगा."
-Common.UGCValidation.ErrorLabel.AssetBounds_TooSmall,"{assetName} के मेश और जॉइंट का {axis} ऐक्सिस साइज़ '{currentSize}' है, जो तय न्यूनतम बाउंडिंग बॉक्स के {axis} ऐक्सिस साइज़ '{minSize}' से छोटा है. आपको मेश और जॉइंट का साइज़ बढ़ाना होगा."
-Common.UGCValidation.ErrorLabel.AssetDoesNotExist,'{InstancePath}' द्वारा रेफ़र किया गया '{AssetId}' ऐसेट मौजूद नहीं है या उसे लोड नहीं किया जा सकता. इसे किसी मान्य ऐसेट ID से बदलें.
-Common.UGCValidation.ErrorLabel.AssetOpacity_BelowThreshold,"{AssetName} में, {ViewName} से काफ़ी हद तक आर-पार दिख रहा है. ओपैसिटी {Opacity} है, लेकिन इसे {Threshold} से ज़्यादा होना चाहिए."
-Common.UGCValidation.ErrorLabel.AssetOpacity_Invisible,'{AssetName}' का मेश बिलकुल नहीं दिख रहा.
-Common.UGCValidation.ErrorLabel.AssetOpacity_MeshLoadFailed,MeshPart '{PartName}' के मेश को लोड नहीं किया जा सका. पक्का करें कि मेश मौजूद है और फिर दोबारा कोशिश करें.
-Common.UGCValidation.ErrorLabel.AssetOpacity_NoTriangles,'{AssetName}' के मेश में कोई ट्राएंगल नहीं है.
-Common.UGCValidation.ErrorLabel.AssetOpacity_NonZeroTransparency,पार्ट '{PartName}' की ट्रांसपेरेंसी शून्य नहीं है. पार्ट की ट्रांसपेरेंसी हमेशा बिलकुल शून्य होनी चाहिए.
-Common.UGCValidation.ErrorLabel.AssetOpacity_ZeroSize,'{AssetName}' के मेश का साइज़ शून्य नहीं होना चाहिए.
 Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,{ParentPath} में {ExpectedName} नाम का ज़रूरी {ExpectedClass} नहीं मिला
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,नीचे दिए गए इंस्टैंस मंज़ूर किए गए स्कीमा का हिस्सा नहीं हैं और उन्हें हटा दिया जाना चाहिए: {UnexpectedDescendantPaths}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,"अपलोड किया गया ऐसेट {ExpectedClass} होना चाहिए, लेकिन यह {RootClass} है."
-Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,"अपलोड किए गए ऐसेट का नाम {ExpectedName} होना चाहिए, लेकिन इसका नाम {RootName} है."
-Common.UGCValidation.ErrorLabel.AttachmentBoundsAssetCalculationFailed,अटैचमेंट की पोज़िशन चेक करने से पहले '{InstancePath}' के मेश की सीमाएँ कैलकुलेट नहीं की जा सकीं. हो सकता है कि मेश डेटा मौजूद न हो या उसका फ़ॉर्मैट गलत हो; कृपया ऐसेट को फिर से इंपोर्ट करें और दोबारा कोशिश करें.
-Common.UGCValidation.ErrorLabel.AttachmentBoundsCalculationFailed,'{PartName}' में अटैचमेंट '{AttachmentName}' के लिए सीमाएँ कैलकुलेट नहीं की जा सकीं. हो सकता है कि मेश डेटा मौजूद न हो या उसका फ़ॉर्मैट गलत हो; कृपया ऐसेट को फिर से इंपोर्ट करें और दोबारा कोशिश करें.
-Common.UGCValidation.ErrorLabel.AttachmentOrientationDeviation,"अटैचमेंट '{InstancePath}' का ओरिएंटेशन उम्मीद से बहुत ज़्यादा अलग है. सुझाया गया ओरिएंटेशन {ExpectedOrientation} है, ज़्यादा-से-ज़्यादा {MaxDeviation} डिग्री तक घुमाया जा सकता है."
-Common.UGCValidation.ErrorLabel.AttachmentOrientationRigRotated,"रिग अटैचमेंट को रोटेट नहीं जा सकता. कृपया '{InstancePath}' के ओरिएंटेशन को (0,0,0) पर सेट करें."
-Common.UGCValidation.ErrorLabel.BodyBlocking_ZeroMeshSize,{meshName} के मेश को रेंडर करें : {details}. मेश का साइज़ बढ़ाएँ.
-Common.UGCValidation.ErrorLabel.BodyMesh_LoadFailed,'{meshName}' का मेश लोड नहीं हो सका. पक्का करें कि मेश मौजूद है और फिर दोबारा कोशिश करें.
-Common.UGCValidation.ErrorLabel.BodyMesh_SizeMismatch,"{meshContext} और अन्य मेश {otherMeshContext} के साइज़ में बहुत ज़्यादा अंतर है, जबकि अंतर ज़्यादा-से-ज़्यादा {maxDiff} तक हो सकता है. आपको मॉडल को एडिट करके उसका साइज़ एडजस्ट करना होगा"
-Common.UGCValidation.ErrorLabel.BodyPartCageDistanceValid_TooFar,"{partName} के केज मेश पर एक वर्टेक्स पाया गया, जो सबसे नज़दीकी रेंडर मेश से {distance} स्टड दूर है. ज़्यादा-से-ज़्यादा {maxDistance} स्टड तक की दूरी हो सकती है. केज मेश के शेप और साइज़ को रेंडर मेश के लगभग करें."
-Common.UGCValidation.ErrorLabel.BoundingBox_ValidationFailed,{reason}
-Common.UGCValidation.ErrorLabel.CageMeshDistanceBounded_DistanceTooHigh,"बाहरी केज से मेश के बीच की औसत दूरी ({distance}) बहुत ज़्यादा है. केज को एडजस्ट करें, ताकि वह मेश के मुताबिक बेहतर ढंग से फ़िट हो सके."
-Common.UGCValidation.ErrorLabel.CageMeshDistanceBounded_MeshOutsideCage,"बाहरी केज से मेश के बीच की औसत दूरी बहुत ज़्यादा है. ऐसा लगता है कि मेश, बाहरी केज के बाहर है."
-Common.UGCValidation.ErrorLabel.CageUV_ExtraDuplicateUVs,"'{partName}' के {cageType} केज में ऐसी {count} UV वैल्यू हैं, जो टेम्पलेट से संबंधित नहीं हैं. कृपया केज UV को सही करें."
-Common.UGCValidation.ErrorLabel.CageUV_IncorrectUVCount,"'{partName}' के बाहरी केज में {requiredUVCount} यूनीक UV होने चाहिए, लेकिन उसमें {actualUVCount} ही हैं. कृपया पक्का करें कि मेश में ज़रूरी संख्या में यूनीक UV मौजूद हैं और फिर दोबारा कोशिश करें."
-Common.UGCValidation.ErrorLabel.CageUV_InvalidUVValue,"'{partName}' की [0, 1] रेंज के बाहर अमान्य UV वैल्यू मिली. इस समस्या को दूर करने के लिए, आपको UV मैप एडिट करना होगा."
-Common.UGCValidation.ErrorLabel.CageUV_RenderMeshBoundsCheckFailed,"बाहरी केज के बदले गए हिस्से के बाउंडिंग बॉक्स के अंदर रेंडर मेश की टेस्टिंग नहीं की जा सकी. पक्का करें कि केज मेश और रेंडर मेश, दोनों मौजूद हों और फिर से कोशिश करें."
-Common.UGCValidation.ErrorLabel.CageUV_RenderMeshOutsideModifiedArea,"रेंडर मेश के वर्टिसेज़ का सिर्फ़ {currentPercent}% हिस्सा, WrapLayer CageMesh (बाहरी मेश) के बदले गए {allowedArea} एरिया में मौजूद है. इसमें कम-से-कम {requiredPercent}% हिस्से का होना ज़रूरी है. रेंडर मेश को WrapLayer CageMesh (बाहरी मेश) के बदले गए हिस्से में ले जाएँ."
-Common.UGCValidation.ErrorLabel.CageUV_TooFewMainModified,"किसी {assetTypeName} के लिए, WrapLayer CageMesh (बाहरी मेश) को {mainArea} एरिया में मौजूद केज UVs के {requiredPercent}% हिस्से में बदलाव करना होगा. फ़िलहाल सिर्फ़ {currentPercent}% हिस्से में बदलाव किया गया है. अपने ऐसेट को बॉडी के सही हिस्से में ले जाएँ."
-Common.UGCValidation.ErrorLabel.CageUV_TooManyExcludedModified,"WrapLayer CageMesh (बाहरी मेश) में बदले गए केज UVs का {modifiedPercent}% हिस्सा, बॉडी के उस हिस्से में नहीं है, जहाँ उसे होना चाहिए. किसी {assetTypeName} के लिए, बदले गए UVs का {maxPercent}% से ज़्यादा हिस्सा {allowedArea} एरिया के बाहर नहीं हो सकता. अपने ऐसेट को बॉडी के सही हिस्से में ले जाएँ."
-Common.UGCValidation.ErrorLabel.CageUV_ZeroAreaTriangle,"'{partName}' के UV मैप में ज़ीरो-एरिया वाला ट्राएंगल पाया गया. इस समस्या को दूर करने के लिए, आपको UV मैप एडिट करना होगा."
-Common.UGCValidation.ErrorLabel.CollisionFidelityWrong,'{InstancePath}' में गलत CollisionFidelity है. इसके {ExpectedFidelity} होने की उम्मीद थी.
 Common.UGCValidation.ErrorLabel.ContentNotEditable,"{InstanceFullName}.{FieldName} में अभी भी एडिट किया जा सकने वाला ऐसा कॉन्टेंट मौजूद है, जिसे सेव नहीं किया गया है. पब्लिश करने से पहले इसे ऐसेट के तौर पर सेव करें और फिर से कोशिश करें."
-Common.UGCValidation.ErrorLabel.CoplanarTri_TooMany,मॉडल मेश '{MeshName}' में एक ही प्लेन पर बहुत सारे ट्राएंगल आपस में इंटरसेक्ट होते हुए पाए गए. किसी {TriangleCount} ट्राएंगल मेश में ज़्यादा-से-ज़्यादा {MaxIntersections} इंटरसेक्शन हो सकते हैं. अपने मेश को एडिट करके एक ही प्लेन पर होने वाले ट्राएंगल इंटरसेक्शन की संख्या कम करें.
+Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,CurveAnimation में बॉडी पार्ट '{bodyPartName}' में एक पोज़िशन (ट्रांसलेशन) ट्रैक है. ऐनिमेशन बॉडी पार्ट्स सिर्फ़ घुमाए जा सकते हैं; पोज़िशन ट्रैक्स की अनुमति नहीं है. कृपया इस बॉडी पार्ट से पोज़िशन ट्रैक हटा दें.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,CurveAnimation में बॉडी पार्टी '{bodyPartName}' अपनी शुरुआती पोज़िशन से {distance} स्टड्स दूर चला जाता है. ज़्यादा से ज़्यादा {maxDistance} स्टड्स की दूरी की अनुमति है. कृपया बोन की पोज़िशनल मूवमेंट कम करें.
-Common.UGCValidation.ErrorLabel.CurveAnim_BoneRequiresParent,"बोन फ़ोल्डर '{boneName}' के लिए ज़रूरी है कि '{parentBoneName}', ऐनिमेशन में भी मौजूद हो."
+Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"CurveAnimation में HRD/DRD बोन हैं और बॉडी पार्ट '{bodyPartName}' में एक पोज़िशन (ट्रांसलेशन) ट्रैक है. ऐनिमेशन में कोई भी बोन मौजूद होने पर, जॉइंट को अलग होने से रोकने के लिए कोई भी बॉडी पार्ट ट्रांसलेट नहीं हो सकता. कृपया बॉडी पार्ट्स से सभी पोज़िशन ट्रैक हटा दें."
+Common.UGCValidation.ErrorLabel.CurveAnim_BonePositionNotAllowed,CurveAnimation में {boneName} बोन का एक पोज़िशन (ट्रांसलेशन) ट्रैक है. HRD/DRD बोन सिर्फ़ घुमाए जा सकते हैं; पोज़िशन ट्रैक्स से जॉइंट अलग हो जाते हैं और इसकी अनुमति नहीं है. कृपया इस बोन से पोज़िशन ऐनिमेशन को हटा दें.
 Common.UGCValidation.ErrorLabel.CurveAnim_BoneTranslationExceedsThreshold,CurveAnimation में बोन '{boneName}' अपनी शुरुआती पोज़िशन से {distance} स्टड्स दूर चला जाता है. ज़्यादा से ज़्यादा {maxDistance} स्टड्स की दूरी की अनुमति है. कृपया बोन की पोज़िशनल मूवमेंट कम करें.
 Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,"CurveAnimation में HRD/DRD बोन फ़ोल्डर हैं, जो अभी तक काम नहीं करते हैं. कृपया अपलोड करने से पहले सभी बोन सब-फ़ोल्डर हटा दें."
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,"CurveAnimation में बॉडी पार्ट्स, HumanoidRootPart से {minHeight} स्टड्स से नीचे या {maxDistance} स्टड्स से ऊपर नहीं हो सकते. कृपया ऐनिमेशन को ठीक करें."
@@ -255,27 +223,18 @@ Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,"CurveAnimati
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"CurveAnimation में मौजूद फ़ोल्डर '{boneName}' एक मान्य HRD/DRD बोन नाम नहीं है. ऐनिमेशन सब-फ़ोल्डर या तो मान्य R15 बॉडी पार्ट्स होने चाहिए या फिर मान्य बोन नेम (जैसे कि HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase, या उँगली की हड्डियाँ, जैसे कि LeftHandIndex1)."
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidCurveData,CurveAnimation में अमान्य समय या वैल्यू वाले Curves मौजूद हैं. कृपया ऐनिमेशन को ठीक करें.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidInstanceTypes,CurveAnimation हायरार्की में सिर्फ़ {allowedTypes} हो सकते हैं. कृपया अन्य सभी इंस्टैंस टाइप हटा दें.
-Common.UGCValidation.ErrorLabel.CurveAnim_InvalidLength,कर्व ऐनिमेशन {animationName} की अवधि {minLength} से {maxLength} सेकंड के बीच होनी चाहिए. कृपया ऐनिमेशन को ठीक करें.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidMarkerData,CurveAnimation में अमान्य समय या वैल्यू वाले MarkerCurves मौजूद हैं या वैल्यू बहुत लंबा है. कृपया ऐनिमेशन को ठीक करें.
-Common.UGCValidation.ErrorLabel.CurveAnim_InvalidNumericalData,कर्व ऐनिमेशन {animationName} में अमान्य न्यूमेरिकल डेटा वाले कर्व हैं. कृपया ऐनिमेशन की ठीक करें.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidRigData,AnimationRigData का इंटरनल वैलिडेशन नहीं हो सका. कृपया पक्का करें कि AnimationRigData सही तरीके से सेट अप किया गया है.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidRigDataR15Plus,"AnimationRigData का इंटर्नल वैलिडेशन नहीं हो सका. कृपया पक्का करें कि बोन एनिमेशन के लिए, AnimationRigData सही तरीके से सेट अप किया गया हो."
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidTags,CurveAnimation में सिर्फ़ एक टाइमस्टैंप टैग हो सकता है. कृपया अन्य सभी टैग हटा दें.
-Common.UGCValidation.ErrorLabel.CurveAnim_JointRotationExceeded,"कर्व ऐनिमेशन {animationName} में {time} सेकंड पर, जॉइंट {bodyPart} रेस्ट पोज़ से {rotation} डिग्री के रोटेशन ऐंगल पर है. ज़्यादा-से-ज़्यादा {maxRotation} डिग्री तक रोटेट हो सकता है. कृपया ऐनिमेशन को ठीक करें."
 Common.UGCValidation.ErrorLabel.CurveAnim_KeysTooClose,"CurveAnimation में {curvePath} Curve है, जिसमें ऐसी की (key) हैं जिनके बीच के समय का अंतर ज़्यादा से ज़्यादा {maxFPS} fps वाले ऐनिमेशन के लिए बहुत कम है. कृपया ऐनिमेशन को ठीक करें."
 Common.UGCValidation.ErrorLabel.CurveAnim_LoopingNotEnabled,"CurveAnimation '{animationName}' में लूप चालू नहीं है. मार्केटप्लेस पर अपलोड किए गए ऐनिमेशन, लूप में होने चाहिए. कृपया लूप प्रॉपर्टी चालू करें."
 Common.UGCValidation.ErrorLabel.CurveAnim_MultipleBodyRoots,CurveAnimation में एक से ज़्यादा बॉडी पार्ट या HumanoidRootPart सब-फ़ोल्डर हैं. कृपया पक्का करें कि किसी बॉडी पार्ट या HumanoidRootPart के नाम पर सिर्फ़ एक सब-फ़ोल्डर हो.
 Common.UGCValidation.ErrorLabel.CurveAnim_MultipleRigData,CurveAnimation में एक से ज़्यादा AnimationRigData सब-फ़ोल्डर हैं. कृपया पक्का करें कि सिर्फ़ एक AnimationRigData सब-फ़ोल्डर हो.
 Common.UGCValidation.ErrorLabel.CurveAnim_NegativeKeyTime,"CurveAnimation में {curvePath} Curve है,  जिसमें एक ऐसी की (key) है जिसका समय नेगेटिव है. कृपया ऐनिमेशन को ठीक करें."
 Common.UGCValidation.ErrorLabel.CurveAnim_NoBodyRoot,CurveAnimation में कोई भी बॉडी पार्ट या HumanoidRootPart सब-फ़ोल्डर नहीं है. कृपया पक्का करें कि किसी बॉडी पार्ट या HumanoidRootPart के नाम पर एक (और सिर्फ़ एक) सब-फ़ोल्डर हो.
-Common.UGCValidation.ErrorLabel.CurveAnim_NoJointManipulation,कर्व एनिमेशन {animationName} में कोई भी जॉइंट मैनिपुलेशन नहीं है.
 Common.UGCValidation.ErrorLabel.CurveAnim_NoRigData,CurveAnimation में कोई भी AnimationRigData सब-फ़ोल्डर नहीं है. कृपया पक्का करें कि एक (और सिर्फ़ एक) AnimationRigData सब-फ़ोल्डर हो.
 Common.UGCValidation.ErrorLabel.CurveAnim_NotCurveAnimation,रेफ़र किया गया ऐनिमेशन CurveAnimation नहीं है. कृपया पक्का करें कि ऐनिमेशन सही तरीके से अपलोड किया गया है.
-Common.UGCValidation.ErrorLabel.CurveAnim_PartTooFar,"कर्व ऐनिमेशन {animationName} में {time} सेकंड पर, बॉडी पार्ट {bodyPart}, HumanoidRootPart से {distance} स्टड की दूरी पर है. बॉडी पार्ट, HumanoidRootPart से {maxDistance} स्टड से ज़्यादा दूरी पर नहीं हो सकते. कृपया ऐनिमेशन को ठीक करें."
-Common.UGCValidation.ErrorLabel.CurveAnim_PartTooLow,"कर्व ऐनिमेशन {animationName} में {time} सेकंड पर, बॉडी पार्ट {bodyPart}, HumanoidRootPart से {height} स्टड की ऊँचाई पर है. बॉडी पार्ट, HumanoidRootPart से {minHeight} स्टड से नीचे नहीं हो सकते. कृपया ऐनिमेशन को ठीक करें."
-Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,"कर्व ऐनिमेशन {animationName} में बॉडी पार्ट, पोज़िशन के हिसाब से एक दूसरे से अलग हैं. सिर्फ़ LowerTorso ही पोज़िशन बदल सकता है. बाकी सभी बॉडी पार्ट सिर्फ़ अपना ओरिएंटेशन बदल सकते हैं. {bodyPart} अपने पेरेंट से {maxMovement} स्टड से ज़्यादा दूर जा रहा है. कृपया ऐनिमेशन को ठीक करें."
-Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,"कर्व ऐनिमेशन {animationName} में {time} सेकंड पर, बॉडी पार्ट {bodyPart}, {speed} डिग्री/सेकंड की स्पीड से रोटेट कर रहा है. ज़्यादा-से-ज़्यादा स्पीड {maxSpeed} डिग्री/सेकंड हो सकती है. कृपया ऐनिमेशन को ठीक करें."
-Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,"कर्व ऐनिमेशन {animationName} में {time} सेकंड पर, बॉडी पार्ट {bodyPart}, {speed} स्टड/सेकंड की स्पीड से आगे बढ़ रहा है. ज़्यादा-से-ज़्यादा स्पीड {maxSpeed} स्टड/सेकंड हो सकती है. कृपया ऐनिमेशन को ठीक करें."
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,"CurveAnimation  में बॉडी पार्ट {bodyPart}, फ़्रेम्स के बीच {maxMovement} स्टड्स से ज़्यादा दूरी तय करता है. कृपया ऐनिमेशन को ठीक करें."
 Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,CurveAnimation स्ट्रक्चर अमान्य है : {detail}. कृपया पक्का करें कि ऐनिमेशन सही स्कीमा के मुताबिक हो.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation में {count} डिसेंडेंट्स हैं. ज़्यादा से ज़्यादा {maxAllowed} डिसेंडेंट्स ही हो सकते हैं. कृपया डिसेंडेंट्स की संख्या कम करें.
@@ -284,24 +243,12 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation म
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation में {count} मार्कर्स वाला MarkerCurve है. हर MarkerCurve में ज़्यादा से ज़्यादा {maxAllowed} मार्कर्स हो सकते हैं. कृपया ऐनिमेशन को ठीक करें.
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation में एक अनचाहा सब-फ़ोल्डर मौजूद है : {childName}
 Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,"{InstanceFullName}.{FieldName} में ऐनिमेशन {AssetId} को वर्ज़न {Version} पर पिन किया जाता है, लेकिन ऐनिमेशन को अभी तक किसी वर्ज़न पर पिन नहीं किया जा सकता. '&version={Version}' हटाकर फिर से कोशिश करें."
-Common.UGCValidation.ErrorLabel.DescendantIdFetchFailed,{InstanceFullName} के लिए मॉडरेशन के रिज़ल्ट नहीं मिल सके. पक्का करें कि सभी ऐसेट की ओनरशिप मौजूदा यूज़र के पास हो.
-Common.UGCValidation.ErrorLabel.DescendantIdMalformed,{InstanceFullName}.{FieldName} में ContentId को पार्स नहीं किया जा सका. पक्का करें कि आपने मान्य ID के साथ मान्य URL का इस्तेमाल किया है और फिर दोबारा कोशिश करें.
-Common.UGCValidation.ErrorLabel.DescendantIdMissing,{InstanceFullName}.{FieldName} को खाली नहीं छोड़ा जा सकता. पक्का करें कि कोई मान्य ऐसेट असाइन किया गया है और फिर दोबारा कोशिश करें.
-Common.UGCValidation.ErrorLabel.DescendantIdNotApproved,"ऐसेट, मॉडरेशन में पास नहीं हुए : {ModerationMessages}"
-Common.UGCValidation.ErrorLabel.DescendantIdNotOwned,ऐसेट {AssetId} ({InstanceFullName}.{FieldName}) का ओनर कोई अधिकृत क्रिएटर नहीं है.
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,ऐसेट {AssetId} ({InstanceFullName}.{FieldName}) पब्लिश नहीं किया गया है. इसे पब्लिश करके फिर से कोशिश करें.
-Common.UGCValidation.ErrorLabel.DescendantIdVersionNotLatest,"{InstanceFullName}.{FieldName} में ऐसेट {AssetId} के वर्ज़न {Version} का इस्तेमाल किया जाता है, लेकिन अभी सिर्फ़ उसका सबसे नया वर्ज़न {LatestVersion} ही इस्तेमाल किया जा सकता है. वर्ज़न {LatestVersion} का इस्तेमाल करें या '&version={Version}' को हटाकर फिर से कोशिश करें."
-Common.UGCValidation.ErrorLabel.DescendantIdsTooMany,"अपलोड किए जाने वाले मॉडल में बहुत सारे चाइल्ड ऐसेट (मेश, टेक्स्चर वगैरह) हैं और उसे इसी रूप में प्रोसेस नहीं किया जा सकता. आपको मॉडल को फिर से व्यवस्थित करना होगा."
-Common.UGCValidation.ErrorLabel.DynHead_ControlsInactive,{headName} मेश ({meshId}) में इनऐक्टिव FACS कंट्रोल हैं : {controlList}
-Common.UGCValidation.ErrorLabel.DynHead_ControlsMissing,{headName} मेश ({meshId}) में FACS कंट्रोल मौजूद नहीं हैं : {controlList}
-Common.UGCValidation.ErrorLabel.DynHead_FacsMissing,FACS जानकारी मौजूद नहीं होने की वजह से डायनैमिक हेड '{headName}' का वैलिडेशन नहीं हो सका. आपको कम-से-कम 17 पोज़ के लिए FACS कंट्रोल उपलब्ध कराने होंगे (डॉक्यूमेंटेशन देखें).
-Common.UGCValidation.ErrorLabel.DynHead_JointAccumulatedExceeded,सिर के फ़ेशियल ऐनिमेशन को मिलाने से जॉइंट {jointName} को सिर से काफ़ी आगे तक ले जाया जा सकता है. अपने फ़ेशियल ऐनिमेशन को एडिट करके फिर से कोशिश करें.
-Common.UGCValidation.ErrorLabel.DynHead_JointBoundsCheckFailed,"फ़ेशियल ऐनिमेशन के जॉइंट की सीमाओं को वेरिफ़ाई नहीं किया जा सका, बाद में फिर से कोशिश करें."
-Common.UGCValidation.ErrorLabel.DynHead_JointDirectExceeded,"सिर के फ़ेशियल ऐनिमेशन {actionName} की वजह से जॉइंट्स, सिर से काफ़ी बाहर तक चले जाते हैं. अपने फ़ेशियल ऐनिमेशन को एडिट करके फिर से कोशिश करें."
+Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,"{InstanceFullName}.{FieldName} में ऐसेट {AssetId} के वर्ज़न {Version} का इस्तेमाल किया जाता है, लेकिन अभी सिर्फ़ वर्ज़न 1 ही काम करता है. वर्ज़न 1 का इस्तेमाल करके फिर से कोशिश करें."
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,"मार्केटप्लेस पर डायनैमिक हेड को ठीक से केज किया जाना चाहिए, ताकि केज पर मौजूद आँखों और मुँह के वर्टिस, मेश वर्टिस के साथ लाइन अप हो जाएँ. कृपया अपनी केजिंग और मेश के साथ उसके अलाइनमेंट को बेहतर बनाएँ."
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,"स्क्रीन पर मौजूद बाईं आँख (विज़ुअलाइज़ेशन प्लग-इन में सिर की बाईं ओर मौजूद लाल डॉट्स) के केज लैंडमार्क और मेश के बीच अलाइनमेंट में गड़बड़ी है : केज के कुछ पॉइंट, सिर के मेश के अंदर हैं (मेश, केज से बाहर निकल रहा है) या उससे बहुत बाहर हैं. संबंधित केज में बदलाव करें, ताकि वह इस आँख के आस-पास के मेश पर या ठीक उसके बाहर रहे."
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,"मुँह (विज़ुअलाइज़ेशन प्लग-इन में मौजूद हरे डॉट्स) के केज लैंडमार्क और मेश के बीच अलाइनमेंट में गड़बड़ी है : केज के कुछ पॉइंट, सिर के मेश के अंदर हैं (मेश, केज से बाहर निकल रहा है) या उससे बहुत बाहर हैं. मुँह के केज में बदलाव करें, ताकि वह मुँह के आस-पास के मेश पर या ठीक उसके बाहर रहे."
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,"स्क्रीन पर मौजूद दाईं आँख (विज़ुअलाइज़ेशन प्लग-इन में सिर की दाईं ओर मौजूद नीले डॉट्स) के केज लैंडमार्क और मेश के बीच अलाइनमेंट में गड़बड़ी है : केज के कुछ पॉइंट, सिर के मेश के अंदर हैं (मेश, केज से बाहर निकल रहा है) या उससे बहुत बाहर हैं. संबंधित केज में बदलाव करें, ताकि वह इस आँख के आस-पास के मेश पर या ठीक उसके बाहर रहे."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,"डायनैमिक हेड के केज में बाईं आँख के लैंडमार्क, मेश के साथ सही तरीके से अलाइन नहीं हैं. आँख के केज में बदलाव करें, ताकि बाईं आँख का मेश, प्रोजेक्ट किए गए केज एरिया के अंदर रहे."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,"डायनैमिक हेड के केज में मुँह के लैंडमार्क, मेश के साथ सही तरीके से अलाइन नहीं हैं. मुँह के केज में बदलाव करें, ताकि मुँह का मेश, प्रोजेक्ट किए गए केज एरिया के अंदर रहे."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,"डायनैमिक हेड के केज में दाईं आँख के लैंडमार्क, मेश के साथ सही तरीके से अलाइन नहीं हैं. आँख के केज में बदलाव करें, ताकि दाईं आँख का मेश, प्रोजेक्ट किए गए केज एरिया के अंदर रहे."
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,डायनैमिक हेड के लिए मुस्कुराहट वाला एक्सप्रेशन नहीं मिल रहा है. कृपया मुँह के लिए केज लैंडमार्क को एडजस्ट करें ताकि वह सिर पर मुँह की जगह से मैच करे और पक्का करें कि वह मुस्कुराहट वाला एक्सप्रेशन दिखा सके.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,"डायनैमिक हेड के लिए बाईं आँख के बंद होने के एक्सप्रेशन का पता नहीं लगाया जा सका. कृपया बाईं आँख के लिए केज लैंडमार्क को एडजस्ट करें, ताकि वह सिर पर बाईं आँख वाली जगह से मैच करे और पक्का करें कि उसे बंद किया जा सकता है."
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,मार्केटप्लेस पर डायनैमिक हेड के लिए कोई हेड केज नहीं है. कृपया डायनैमिक हेड के लिए हेड केज क्रिएट करें.
@@ -309,9 +256,7 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,"डायनैमि�
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"मार्केटप्लेस पर डायनैमिक हेड को ऐनिमेट किया जाना चाहिए, लेकिन इस हेड में कोई FACS डेटा नहीं है."
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,"डायनैमिक हेड के लिए दाहिनी आँख बंद करने का एक्सप्रेशन नहीं मिल रहा है. कृपया दाहिनी आँख के लिए केज लैंडमार्क को एडजस्ट करें, ताकि वह सिर पर दाहिनी आँख की जगह से मैच करे और पक्का करें कि उसे बंद किया जा सकता है."
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,"डायनैमिक हेड के लिए फ़्राउन एक्सप्रेशन का पता नहीं लगाया जा सकता. कृपया मुँह के लिए केज लैंडमार्क को एडजस्ट करें, ताकि वह सिर पर मुँह से मैच करे और पक्का करें कि यह फ़्राउन एक्सप्रेशन दिखा सकता है."
-Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,"बॉडी पार्ट मेश '{meshName}', {emissivePercentage}% एमिसिव है. एमिसिव कवरेज {maxEmissivePercentage}% से ज़्यादा नहीं होना चाहिए. कृपया एमिसिव मास्क की इंटेंसिटी या कवरेज कम करें."
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} बहुत ज़्यादा एमिसिव है. एमिसिव एरिया × इंटेंसिटी, लिमिट से ज़्यादा है (फ़िलहाल {emissivePercentage}% को {maxEmissivePercentage}% या इससे कम होना चाहिए). चमक रहे एरिया को छोटा करें या इसकी EmissiveStrength कम करें."
-Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,"मेश '{meshName}' का वेटेड एमिसिव सर्फ़ेस एरिया {emissiveArea} स्क्वैयर स्टड है, जो {maxEmissiveArea} स्क्वैयर स्टड की अधिकतम तय सीमा से ज़्यादा है. कृपया एमिसिव मास्क की इंटेंसिटी या कवरेज कम करें."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} बहुत ज़्यादा एमिसिव है. एमिसिव एरिया × इंटेंसिटी, लिमिट से ज़्यादा है (फ़िलहाल {emissiveArea} को {maxEmissiveArea} या इससे कम होना चाहिए). चमक रहे एरिया को छोटा करें या इसकी EmissiveStrength कम करें."
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedInExperience,एक्सपीरिएंस में क्रिएट किए गए आइटम के लिए एमिसिव मैप काम नहीं करते हैं. हर SurfaceAppearance से EmissiveMaskContent को हटाएँ.
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedOnDecal,"डीकैल, एमिसिव नहीं हो सकते. '{InstancePath}' पर, EmissiveMaskContent को हटाएँ, EmissiveStrength को 1 पर सेट करें और EmissiveTint को सफ़ेद पर सेट करें."
@@ -319,29 +264,19 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribut
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,पब्लिश किए गए ऐनिमेशन में एक मान्य UGC emote मार्कर मौजूद नहीं है. कृपया ऐनिमेशन को फिर से पब्लिश करें.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,पब्लिश किए गए ऐनिमेशन डेटा से 'मैक्सिमम पार्ट ट्रांसलेशन' का हिसाब नहीं लगाया जा सका. कृपया ऐनिमेशन को फिर से पब्लिश करें.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"पब्लिश किए गए ऐनिमेशन में, {taggedTranslation} स्टड का 'मैक्सिमम पार्ट ट्रांसलेशन' हो सकता है, लेकिन ऐनिमेशन के असल डेटा के मताबिक यह {calculatedTranslation} स्टड है. कृपया ऐनिमेशन को फिर से पब्लिश करें."
-Common.UGCValidation.ErrorLabel.ExperienceCreatorNotSupported,"एक्सपीरिएंस क्रिएटर अवतार के ऐसेट नहीं क्रिएट कर सकते. क्रिएटर टाइप : {CreatorType}, क्रिएटर ID : {CreatorId}."
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"सिर को टॉर्सो के ऊपरी हिस्से पर रखा जाना चाहिए. सिर के बीच का हिस्सा टॉर्सो के ऊपरी हिस्से से नीचे है, जिसका मतलब है कि हेड मेश दब गया है या गलत जगह पर है."
-Common.UGCValidation.ErrorLabel.Extents_ParentBelowPart,{upperPart} को {lowerPart} से नीचे नहीं ले जाया जा सकता. आपके पास {attachmentName} को मूव करके इन हिस्सों को आपस में जोड़ने के तरीके में बदलाव करने की सुविधा है.
-Common.UGCValidation.ErrorLabel.Extents_PartAboveParent,{lowerPart} को {upperPart} से ऊपर नहीं ले जाया जा सकता. आपके पास {attachmentName} को मूव करके इन हिस्सों को आपस में जोड़ने के तरीके में बदलाव करने की सुविधा है.
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,FaceControls पर InternalOverrideFACSData प्रॉपर्टी अपलोड के समय खाली होनी चाहिए.
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,बेस चेहरे में आँखों के ज़रूरी फ़ीचर्स मौजूद नहीं हैं. बेस चेहरे में आँखें जोड़कर फिर से कोशिश करें.
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,"बेस चेहरे में मुँह ज़रूरी है, लेकिन वह मौजूद नहीं है. बेस चेहरे में मुँह जोड़कर फिर से कोशिश करें."
 Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,"खुशी का एक्सप्रेशन नहीं पहचाना जा सका. मुँह के केज या खुशी वाले FACS पोज़ में बदलाव करें, ताकि प्रोजेक्ट किया गया मुँह का मेश उम्मीद के मुताबिक मुड़ सके."
-Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,स्क्रीन पर मौजूद बाईं आँख (विज़ुअलाइज़ेशन प्लग-इन में सिर की बाईं ओर लाल डॉट्स) ठीक से बंद नहीं हो रही है. दाईं आँख के FACS कंट्रोल और संबंधित केज को चेक करें.
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,"बाईं आँख बंद करने का एक्सप्रेशन नहीं पहचाना जा सका. बाईं आँख के केज या बाईं आँख बंद करने वाले FACS पोज़ में बदलाव करें, ताकि प्रोजेक्ट किया गया आँख का मेश उम्मीद के मुताबिक मुड़ सके."
 Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,"मुँह खोलने का एक्सप्रेशन नहीं पहचाना जा सका. मुँह के केज या मुँह खोलने वाले FACS पोज़ में बदलाव करें, ताकि प्रोजेक्ट किया गया मुँह का मेश उम्मीद के मुताबिक मुड़ सके."
-Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,स्क्रीन पर मौजूद दाईं आँख (विज़ुअलाइज़ेशन प्लग-इन में सिर की दाईं ओर मौजूद नीले डॉट्स) ठीक से बंद नहीं हो रही है. बाईं आँख के FACS कंट्रोल और संबंधित केज को चेक करें.
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,"दाईं आँख बंद करने का एक्सप्रेशन नहीं पहचाना जा सका. दाईं आँख के केज या दाईं आँख बंद करने वाले FACS पोज़ में बदलाव करें, ताकि प्रोजेक्ट किया गया आँख का मेश उम्मीद के मुताबिक मुड़ सके."
 Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,"उदासी का एक्सप्रेशन नहीं पहचाना जा सका. मुँह के केज या उदासी वाले FACS पोज़ में बदलाव करें, ताकि प्रोजेक्ट किया गया मुँह का मेश उम्मीद के मुताबिक मुड़ सके."
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"FACs को आपके सिर को {modPercent}% तक फैलाते हुए पाया गया, लेकिन सिर में बदलाव करना 'चेहरे के ऐनिमेशन के लिए मार्केटप्लेस पॉलिसी' के खिलाफ़ है."
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"डायनैमिक हेड में ज़्यादा-से-ज़्यादा {maxFacsJointCount} FACS जॉइंट हो सकते हैं, लेकिन इस हेड में {actualJointCount} हैं. कृपया FACS जॉइंट की संख्या कम करके फिर से कोशिश करें."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"FACs को आपके सिर को {modPercent}% तक सिकोड़ते हुए पाया गया, लेकिन सिर में बदलाव करना 'चेहरे के ऐनिमेशन के लिए मार्केटप्लेस पॉलिसी' के खिलाफ़ है."
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,अपलोड किया गया फ़ॉर्मेट सही फ़ोल्डर स्ट्रक्चर से मैच नहीं करता है. कृपया फिर से कोशिश करें या बग रिपोर्ट फ़ाइल करें.
-Common.UGCValidation.ErrorLabel.HSRAssetHasChildren,WrapLayer HSR ऐसेट में HiddenSurfaceRemovalAsset रूट इंस्टैंस के तहत चाइल्ड ऐसेट मौजूद हैं.
-Common.UGCValidation.ErrorLabel.HSRAssetIdInvalidUrl,'{InstancePath}' में अमान्य URL वाली HSRAssetId है.
-Common.UGCValidation.ErrorLabel.HSRAssetIdRequired,'{InstancePath}' के लिए HSRAssetId सेट करना ज़रूरी है.
-Common.UGCValidation.ErrorLabel.HSRAssetInvalidRoot,WrapLayer HSR ऐसेट में बिलकुल 1 HiddenSurfaceRemovalAsset रूट नहीं है.
-Common.UGCValidation.ErrorLabel.HSRDataNotReady,'{InstancePath}' के लिए HSR डेटा मौजूद नहीं है. फिर से कोशिश करें.
-Common.UGCValidation.ErrorLabel.HSRMeshIdValidationError,'{InstancePath}' के लिए HSR मेश Id वेरिफ़ाई नहीं हो सकीं.
-Common.UGCValidation.ErrorLabel.HSRMeshIdsMismatch,'{InstancePath}' के लिए अमान्य HSR डेटा मिला. ऐक्सेसरी फ़िटिंग टूल का इस्तेमाल करके ऐसेट को फिर से जेनरेट करें और दोबारा कोशिश करें.
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,"बोन {bonePath}, मेशपार्ट {partName} से बहुत दूर है, कृपया इसे मेशपार्ट के साइज़ की सीमा के करीब रखें."
 Common.UGCValidation.ErrorLabel.HrdBone_TooCloseToParent,बोन {bonePath} अपने पेरेंट से बहुत करीब है. बोन की पोज़िशन को थोड़ा एडजस्ट करें.
 Common.UGCValidation.ErrorLabel.HrdBone_TransformNotIdentity,"बोन {bonePath} में एक ट्रांसफ़ॉर्म प्रॉपर्टी है, लेकिन इसे अभी तक मार्केटप्लेस अपलोड के लिए चालू नहीं किया गया है. कृपया इसे आइडेंटिटी CFrame पर रीसेट करें."
@@ -362,8 +297,6 @@ Common.UGCValidation.ErrorLabel.HrdProperties_UncontainedJoint,"HRD प्रॉ
 Common.UGCValidation.ErrorLabel.HrdTposePosition,जॉइंट {jointName} में TposeAdjustment पोज़िशन स्वीकृत सीमा से बाहर है. कृपया ऑफ़सेट को कम करके +-({offsetLimit}) के अंदर लाएँ.
 Common.UGCValidation.ErrorLabel.HrdTposeRotation,"जॉइंट {jointName} में TposeAdjustment है, जो सुझाए गए ओरिएंटेशन {expectedOrientation} से {degLimit} डिग्री ज़्यादा मुड़ा हुआ है."
 Common.UGCValidation.ErrorLabel.InstanceTagsFound,"नीचे दिए गए इंस्टैंस में टैग हैं, लेकिन मार्केटप्लेस ऐसेट में कोई टैग नहीं हो सकता : {ProblematicDescendantPaths}"
-Common.UGCValidation.ErrorLabel.InstanceTreeBannedClass,"'{InstancePath}', {ClassName} टाइप का है, जिसके लिए मार्केटप्लेस ऐसेट में परमिशन नहीं है."
-Common.UGCValidation.ErrorLabel.InstanceTreeBannedName,'{InstancePath}' का नाम रिज़र्व है और इसका इस्तेमाल मार्केटप्लेस ऐसेट में नहीं किया जा सकता.
 Common.UGCValidation.ErrorLabel.InternalError,"आंतरिक गड़बड़ी की वजह से आपके ऐसेट को ठीक से वैलिडेट नहीं किया जा सका. समस्या बनी रहने पर, कृपया एक बग रिपोर्ट बनाएँ. ValidationJobId: {ValidationJobId}"
 Common.UGCValidation.ErrorLabel.JointRotAtt_Moved,"{instPath} मूव किया गया एक jointRotation है, लेकिन हो सकता है कि मार्केटप्लेस अपलोड ने अभी तक इस इंस्टैंस को एडजस्ट न किया हो. कृपया पोज़िशन को {expectedPosition} पर रीसेट करें."
 Common.UGCValidation.ErrorLabel.JointRotAtt_MultipleAttachments,इंस्टैंस {parentPath} में 1 से ज़्यादा JointRotation चाइल्ड नहीं हो सकता.
@@ -371,21 +304,7 @@ Common.UGCValidation.ErrorLabel.JointRotAtt_Rotated,"{instPath} रोटेट 
 Common.UGCValidation.ErrorLabel.JointRotAtt_UnrecognizedParent,"इंस्टैंस {parentPath} का एक JointRotation चाइल्ड है, लेकिन यह मंज़ूर किए गए R15plus स्कीमा का हिस्सा नहीं है."
 Common.UGCValidation.ErrorLabel.JointRotAtt_WrongInstanceClass,"इंस्टैंस {instPath} को JointRotation कहा जाता है, लेकिन JointRotation उन अटैचमेंट के लिए रिज़र्व है, जो किसी अटैचमेंट के तहत आते हैं."
 Common.UGCValidation.ErrorLabel.LCDeformTooLarge,"अवतार पर पहनाई जाने वाली आपकी लेयर्ड क्लोदिंग, {maxSize} से बड़ी होने पर खराब हो जाती है."
-Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NoHandle,ऐक्सेसरी '{accessoryName}' में कोई हैंडल नहीं है. सीमा से बाहर की लेयर्ड क्लोदिंग को वैलिडेट नहीं किया जा सकता.
-Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NoWrapLayer,ऐक्सेसरी '{accessoryName}' में कोई WrapLayer नहीं है. सीमा से बाहर की लेयर्ड क्लोदिंग को वैलिडेट नहीं किया जा सकता.
-Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NonZeroMaxSize,ऐक्सेसरी का MaxSize शून्य नहीं है.
-Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NonZeroOffset,ऐक्सेसरी का ऑफ़सेट शून्य नहीं है.
-Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_OutOfBounds,"'{accessoryName}' की लेयर्ड क्लोदिंग को वैलिडेट नहीं किया जा सका. आकार बदलने पर, लेयर्ड क्लोदिंग बहुत बड़ी हो जाती है."
 Common.UGCValidation.ErrorLabel.LeaderVertsNearCageIslands,"आईलैशेज़ में RBX_Leader पर स्किन किए गए कुछ वर्टिसेज़ हैं, जो इनर केज पर मौजूद आई लैंडमार्क्स से बहुत दूर हैं. पक्का करें कि RBX_Leader पर स्किन किए गए सभी वर्टिसेज़ इनर केज के आई एरिया के पास रखे गए हों."
-Common.UGCValidation.ErrorLabel.LegsSeparated_HipAttachmentOutOfRange,"{attachmentPath} की वैल्यू {currentValue} है, जो {cutoff} से {comparison} कम नहीं हो सकती. अटैचमेंट को ठीक करें."
-Common.UGCValidation.ErrorLabel.LegsSeparated_LegsOverlap,X-ऐक्सिस पर पैर {overlap} स्टड तक ओवरलैप हो रहे हैं. बाएँ पैर की अधिकतम सीमा {leftMax} है. दाएँ पैर की अधिकतम सीमा {rightMax} है. ओवरलैप कम करने के लिए पैरों को एडजस्ट करें.
-Common.UGCValidation.ErrorLabel.MakeupDecal_FailedToLoadTexture,डीकैल {instanceName} के लिए {fieldName} को लोड नहीं किया जा सका. पक्का करें कि TextureContent मौजूद और मान्य है और फिर दोबारा कोशिश करें.
-Common.UGCValidation.ErrorLabel.MakeupDecal_FailedToLoadTextureData,'{fullName}' के लिए टेक्स्चर डेटा लोड नहीं किया जा सका. पक्का करें कि टेक्स्चर मौजूद है और फिर दोबारा कोशिश करें.
-Common.UGCValidation.ErrorLabel.MakeupDecal_NoColorMap,डीकैल {instanceName} के लिए कोई ColorMap नहीं मिला. मेकअप डीकैल के लिए मान्य ColorMap होना ज़रूरी है.
-Common.UGCValidation.ErrorLabel.MakeupDecal_TextureTooBig,"'{fullName}' में पाया गया टेक्स्चर रिज़ॉल्यूशन {sizeX}x{sizeY} px, फ़ील्ड ' {fieldName}' के अधिकतम साइज़ की वैल्यू {maxSize}x{maxSize} px से ज़्यादा है."
-Common.UGCValidation.ErrorLabel.MakeupDecal_UVZoneExcludeViolation,{instanceName} के ColorMap में {assetTypeName} ऐसेट टाइप के लिए प्रतिबंधित UV एरिया [{minBound}] और [{maxBound}] के बीच आर-पार न देखे जा सकने वाले पिक्सेल पाए गए.
-Common.UGCValidation.ErrorLabel.MakeupDecal_UVZoneIncludeViolation,"{instanceName} के ColorMap का आर-पास नहीं दिखने वाला एरिया, {assetTypeName} ऐसेट टाइप के लिए तय अनुमत UV एरिया [{minBound}] और [{maxBound}] के अंदर नहीं है."
-Common.UGCValidation.ErrorLabel.MaterialNotAllowed,नीचे दिए गए इंस्टैंस में एक अमान्य मटीरियल है : {InstanceNameList}. सिर्फ़ इन मटीरियल की परमिशन है : {AllowedMaterials}.
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceAvatar_CageInsideMesh,"बॉडी केज, बॉडी मेश के साथ इंटरसेक्ट कर रहा है. बॉडी केज के {negtiveSDFPercent}% वर्टिसेस, बॉडी मेश के अंदर हैं."
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceAvatar_CageTooFar,"बॉडी केज, बॉडी मेश से बहुत दूर है. बॉडी केज और मेश के बीच की अधिकतम दूरी {max_sdf} है, जो {max_sdf_threshold} की अधिकतम सीमा से ज़्यादा है"
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceHead_CageInsideMesh,"हेड केज, हेड मेश के साथ इंटरसेक्ट कर रहा है. हेड केज के {negtiveSDFPercent}% वर्टिसेस, हेड मेश के अंदर हैं."
@@ -394,61 +313,18 @@ Common.UGCValidation.ErrorLabel.MeasureCageMeshDistance_CageInsideMesh,"बा�
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistance_CageTooFar,"बाहरी केज, रेंडर मेश से बहुत दूर है. बाहरी केज और मेश के बीच की अधिकतम दूरी {max_sdf} है, जो कि {max_sdf_threshold} की अधिकतम सीमा से ज़्यादा है"
 Common.UGCValidation.ErrorLabel.MeasureCageUV,"केज {cage_name} में {incorrect_uv_count} ऐसी UV वैल्यू हैं, जो गलत हैं या टेम्पलेट से संबंधित नहीं हैं. कृपया केज UV को सही करें."
 Common.UGCValidation.ErrorLabel.MeasureMeshOutsideOuterCage,"ऐक्सेसरी के {mesh_outside_outer_cage_percent}% मेश वर्टिसेस, उसके बाहरी केज के बाहर हैं. एडजस्टमेंट करें, जिससे कि ऐक्सेसरी का ज़्यादा-से-ज़्यादा हिस्सा केज के बीच रहे."
-Common.UGCValidation.ErrorLabel.MeshGeometry_ExceedsBounds,"{meshName} का आकार अधिकतम अनुमत बाउंडिंग साइज़ से बड़ा है. {assetTypeName} टाइप के लिए अधिकतम अनुमत साइज़ [{maxSizeX},{maxSizeY}, {maxSizeZ}] है."
-Common.UGCValidation.ErrorLabel.MeshGeometry_NotCentered,{meshName}.{fieldName} में मेश डेटा बीच में मौजूद नहीं है. Roblox 3D इंपोर्टर की मदद से इस मेश को दोबारा इंपोर्ट करें और सुनिश्चित करें कि सोर्स फ़ाइल में कोई भी अलग-थलग पड़ा ज्योमेट्री ऑब्जेक्ट न हो.
-Common.UGCValidation.ErrorLabel.MeshGeometry_PositionOutOfBounds,पोज़िशन सीमा से बाहर है.
-Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleAboveMaximum,"{meshName} को इसके ओरिजिनल मेश साइज़ से {scaleMultiple} गुना बड़ा कर दिया गया है. इसे {maxScaleMultiple} गुना तक ही बड़ा किया जा सकता है. Studio में इसे बड़ा करने के बजाय, मेश को अपने मनचाहे साइज़ में फिर से एक्सपोर्ट या फिर से इंपोर्ट करें."
-Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleBelowMinimum,"{meshName} को इसके ओरिजिनल मेश साइज़ के {scalePercent}% तक छोटा कर दिया गया है. इसे {minScalePercent}% तक ही छोटा किया जा सकता है. Studio में इसे छोटा करने के बजाय, मेश को अपने मनचाहे साइज़ में फिर से एक्सपोर्ट या फिर से इंपोर्ट करें."
-Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleNotPositive,"{meshName} का स्केल शून्य या नेगेटिव है. पॉज़िटिव स्केल वैल्यू का इस्तेमाल करें. किसी मेश को मिरर करने के लिए, उसे अपने 3D मॉडलिंग सॉफ़्टवेयर में फ़्लिप करें और फिर से एक्सपोर्ट करें."
-Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooLarge,{meshName} का मेश स्केल बहुत बड़ा है.
-Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooSmall,मेश स्केल बहुत छोटा है.
-Common.UGCValidation.ErrorLabel.MeshGeometry_SurfaceAreaExceeded,"मॉडल मेश '{meshName}' का कुल सर्फ़ेस एरिया {surfaceArea} है, जो {maxSurfaceArea} से ज़्यादा नहीं हो सकता. आपको सभी ट्राएंगल की संख्या और/या साइज़ कम करना होगा."
-Common.UGCValidation.ErrorLabel.MeshGeometry_TotalTriangleCountExceeded,"'{assetTypeName}' के '{triangleCount}' का मेश रिज़ॉल्यूशन, ट्राएंगल की तय अधिकतम संख्या '{maxTriangles}' से ज़्यादा है. ट्राएंगल की संख्या कम करने के लिए, आपको अपने मॉडल को रीटोपोलोजाइज़ करना होगा."
-Common.UGCValidation.ErrorLabel.MeshGeometry_TriangleCountExceeded,"मॉडल मेश {meshName} के {triangleCount} का रिज़ॉल्यूशन, तय अधिकतम वैल्यू {maxTriangles} से ज़्यादा है. आपको अपने मॉडल को रीटोपोलोजाइज़ करके फिर से कोशिश करनी होगी."
-Common.UGCValidation.ErrorLabel.MeshGeometry_VertexDensityExceeded,अधिकतम वर्टेक्स डेंसिटी पार हो गई है. एक-दूसरे के बेहद करीब मौजूद वर्टिसेज़ की संख्या कम करें.
-Common.UGCValidation.ErrorLabel.MeshGeometry_ZeroAreaTriangle,"मॉडल मेश {meshName} में ज़ीरो-एरिया वाला ट्राएंगल पाया गया. ज़ीरो-एरिया वाले ट्राएंगल हटाने के लिए, आपको मेश को एडिट करना होगा."
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,"{partName} मेश के {axis} ऐक्सिस पर '{currentSize}' स्टड्स का साइज़, किसी अलग हिस्से के लिए मंज़ूर किए गए मैक्सिमम साइज़ '{maxSize}' स्टड्स से बड़ा है. मेश का साइज़ कम करें."
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"{partName} मेश के {axis} ऐक्सिस पर '{currentSize}' स्टड्स का साइज़, किसी अलग हिस्से के लिए मंज़ूर किए गए न्यूनतम साइज़ '{minSize}' स्टड्स से छोटा है. मेश का साइज़ बढ़ाएँ."
-Common.UGCValidation.ErrorLabel.MeshSize_LoadFailed,
-Common.UGCValidation.ErrorLabel.MeshSize_Mismatch,"{meshName} के लिए कैलकुलेट किया गया मेश साइज़, MeshSize प्रॉपर्टी वैल्यू से मैच नहीं करता"
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,अटैचमेंट {attName} को {partName} डिसेंडेंट के अंदर सिर्फ़ एक बार मौजूद होना चाहिए.
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}' (या इसके डिसेंडेंट) में ऐट्रिब्यूट हैं. आपको इनसे ऐट्रिब्यूट हटाने होंगे: {InstanceNameList}
-Common.UGCValidation.ErrorLabel.NoMeshBelowFeet_PartBelowFeet,{partName} तलवों के नीचे से {distance} स्टड नीचे तक फैला हुआ है. सिर्फ़ पैर ही ज़मीन तक पहुँच सकते हैं और बाकी बॉडी पार्ट उससे ज़्यादा-से-ज़्यादा {maxDistance} स्टड नीचे तक जा सकते हैं. {partName} को छोटा या ऊपर करें.
-Common.UGCValidation.ErrorLabel.Pose_AngleFromXYPlane,"{assetName} X,Y प्लेन से {angle} डिग्री ऐंगल पर है. यह {limit} डिग्री के अंदर होना चाहिए. पक्का करें कि कैरेक्टर I पोज़, A पोज़ या T पोज़ में हो."
-Common.UGCValidation.ErrorLabel.Pose_AngleOnXYPlane,"{assetName} X,Y प्लेन पर [{xVector}] वेक्टर के {angle} डिग्री ऐंगल पर है. यह {minAngle} और {maxAngle} डिग्री के बीच होना चाहिए. पक्का करें कि कैरेक्टर I पोज़, A पोज़ या T पोज़ में हो."
-Common.UGCValidation.ErrorLabel.Pose_CFrameCalculationFailed,"{assetName} ऐसेट का CFrame कैलकुलेट नहीं किया जा सका. पक्का करें कि कैरेक्टर I पोज़, A पोज़ या T पोज़ में हो और सभी हिस्से एक ही पोज़िशन में न हों."
-Common.UGCValidation.ErrorLabel.Pose_PointingAlongZVector,"{assetName} का मुँह वर्ल्ड Z वेक्टर की दिशा में है. पक्का करें कि कैरेक्टर I पोज़, A पोज़ या T पोज़ में हो."
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' में अमान्य प्रॉपर्टी हैं : {ProblematicProperties}. दिखाई गई बाइट लिमिट पार हो गई है (0 की लिमिट का मतलब है कि प्रॉपर्टी खाली होनी चाहिए); किसी भी अन्य प्रॉपर्टी में NaN/Inf वैल्यू हैं या वह अपनी डिफ़ॉल्ट साइज़ लिमिट से ज़्यादा है.
-Common.UGCValidation.ErrorLabel.PropertyNotFound,"प्रॉपर्टी '{PropertyName}', '{InstancePath}' पर नहीं मिली."
-Common.UGCValidation.ErrorLabel.PropertyValueInvalid,'{InstancePath}' पर प्रॉपर्टी '{PropertyName}' अमान्य है. इसकी वैल्यू {ComparisonMethod} {ExpectedValue} होनी चाहिए थी.
 Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,"रेंडर किए गए ऐनिमेशन में एक या एक से ज़्यादा ज़रूरी फ़ेशियल एक्सप्रेशन (आँख बंद, मुँह खुला, खुश, उदास) मौजूद नहीं हैं."
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,"'{PartName}' में रिग अटैचमेंट '{AttachmentName}' को जॉइंट की उस सीमा के पास रखना चाहिए, जहाँ यह बॉडी पार्ट आस-पास मौजूद किसी दूसरे पार्ट से जुड़ता है. मौजूदा पोज़िशन [{CurrentPosition}] कनेक्शन प्लेन से बहुत दूर है. इसे [{ClosestValidPosition}] के करीब लाएँ."
-Common.UGCValidation.ErrorLabel.SAOpacity_FailedToLoadTexture,SurfaceAppearance '{FullName}' के लिए टेक्स्चर '{FieldName}' को लोड नहीं किया जा सका. पक्का करें कि टेक्स्चर मौजूद है और फिर दोबारा कोशिश करें.
-Common.UGCValidation.ErrorLabel.SAOpacity_InvalidAlphaMode,SurfaceAppearance ({FullName}) में अमान्य AlphaMode है. Enum.AlphaMode.Overlay की उम्मीद थी.
-Common.UGCValidation.ErrorLabel.SAOpacity_TextureNotOpaque,"टेक्स्चर '{FullName}' के थोड़ा-बहुत आर-पार दिख रहा है. ऐसे किसी टेक्स्चर का इस्तेमाल करें, जिसके आर-पार बिलकुल न दिखे."
-Common.UGCValidation.ErrorLabel.ScaleTypeInvalid,"'{ParentName}' में AvatarPartScaleType की वैल्यू अमान्य है. Classic, ProportionsSlender या ProportionsNormal वैल्यू स्वीकार की जाती हैं."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Roblox पर कोई ऐसेट अपलोड करने के लिए, आपको ठीक 1 इंस्टैंस और उससे जुड़ा अपलोड टाइप चुनना होगा."
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,"इतना बड़ा ऐसेट अपलोड नहीं हो सकता ({sizeBytes} बाइट, अधिकतम तय {maxSizeBytes} बाइट से ज़्यादा है). कृपया इसे छोटा करके फिर से कोशिश करें."
-Common.UGCValidation.ErrorLabel.SurfaceAppearance_MissingSA,({MeshPartFullName}) में एक TextureID खाली है और कोई चाइल्ड SurfaceAppearance इंस्टैंस नहीं है. आपको इनमें से कम-से-कम कोई एक देना होगा.
-Common.UGCValidation.ErrorLabel.SurfaceAppearance_TextureAndSABothDefined,MeshPart ({MeshPartFullName}) के लिए TextureID और SurfaceAppearance दोनों दिए गए हैं. पब्लिश करने के लिए सिर्फ़ SurfaceAppearance का इस्तेमाल होगा.
 Common.UGCValidation.ErrorLabel.TexturePackInvalidURL,'{SurfaceAppearanceName}' में अमान्य URL वाली 'TexturePack' प्रॉपर्टी है. कृपया URL को ठीक करें.
-Common.UGCValidation.ErrorLabel.TexturePack_DownloadFailed,SurfaceAppearance '{SurfaceAppearanceName}' के लिए TexturePack डाउनलोड नहीं किया जा सका.
-Common.UGCValidation.ErrorLabel.TexturePack_Mismatch,SurfaceAppearance '{SurfaceAppearanceName}' में मौजूद टेक्स्चर उसके TexturePack में मौजूद टेक्स्चर से मेल नहीं खाते. TexturePack को ठीक करें.
-Common.UGCValidation.ErrorLabel.TextureSize_FailedToLoad,'{FullName}' के लिए टेक्स्चर डेटा लोड नहीं किया जा सका. पक्का करें कि टेक्स्चर मौजूद है और फिर दोबारा कोशिश करें.
-Common.UGCValidation.ErrorLabel.TextureSize_TooBig,"'{FullName}' में पाया गया टेक्स्चर रिज़ॉल्यूशन {Width}x{Height} px, फ़ील्ड '{FieldName}' के तय अधिकतम साइज़ की वैल्यू {MaxSize}x{MaxSize} px से ज़्यादा है."
-Common.UGCValidation.ErrorLabel.ThumbnailInvalidTarget,थंबनेल जेनरेशन के लिए टार्गेट ऐसेट अमान्य है. इसके '{ExpectedTarget}' होने की उम्मीद थी.
-Common.UGCValidation.ErrorLabel.ThumbnailOutsideView,"ऐसेट '{InstancePath}', थंबनेल कैमरा व्यू के बाहर है. ऐसेट को फिर से कैमरा व्यू के बीच में रखें."
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"हेड मेशपार्ट में {jointName} के लिए चेहरे के एनिमेशन हैं, जिनका इस्तेमाल FAC में नहीं किया जा सकता. कृपया इस जॉइंट का नाम बदलें, फिर अपना हेड दोबारा इंपोर्ट करें."
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,"बॉडीपार्ट {partName} वर्चुअल जॉइंट {jointName} से जुड़ा है, जो R15plus स्कीमा का हिस्सा नहीं है."
-Common.UGCValidation.ErrorLabel.UnsupportedCreatorType,"यह क्रिएटर टाइप अमान्य है. क्रिएटर टाइप : {CreatorType}, क्रिएटर ID : {CreatorId}."
-Common.UGCValidation.ErrorLabel.VertexColors_NotOpaque,मेश मॉडल '{MeshName}' में अमान्य वर्टेक्स कलर पाया गया. आपको कलर मैप को एडिट करके पूरी तरह से सफ़ेद {TransparencyNote} बनाना होगा और फिर से कोशिश करनी होगी.
-Common.UGCValidation.ErrorLabel.VerticesNotCoincident_TooManySimilar,{cageName} में {percentage}% वर्टिसेज़ एक-दूसरे के बहुत करीब हैं. वर्टिसेज़ को इस तरह से एडिट करें कि उनमें से ज़्यादा-से-ज़्यादा {threshold}% एक-दूसरे से मैच करें या एक-दूसरे के करीब रहें.
-Common.UGCValidation.ErrorLabel.WrapTexture_FailedToLoadCage,{instanceName} के लिए ReferenceCageContent लोड नहीं हो सका.
-Common.UGCValidation.ErrorLabel.WrapTexture_FailedToLoadUV,'{instanceName}' के लिए UV लोड नहीं किए जा सके. पक्का करें कि UV मैप मौजूद है और फिर दोबारा कोशिश करें.
-Common.UGCValidation.ErrorLabel.WrapTexture_InvalidMaxBound,{instanceName}.UVMaxBound [{actual}] ज़रूरी UVMaxBound [{expected}] से मैच नहीं करता.
-Common.UGCValidation.ErrorLabel.WrapTexture_InvalidMinBound,{instanceName}.UVMinBound [{actual}] ज़रूरी UVMinBound [{expected}] से मैच नहीं करता.
-Common.UGCValidation.ErrorLabel.WrapTexture_InvalidUV,"'{instanceName}' के केज के लिए अमान्य UV वैल्यू मिली. इस समस्या को दूर करने के लिए, आपको UV मैप एडिट करना होगा."
-Common.UGCValidation.ErrorLabel.WrapTexture_NoCage,{instanceName} के लिए कोई ReferenceCageContent उपलब्ध नहीं कराया गया है.
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,सेटिंग्स पर जाएँ
@@ -1055,7 +931,6 @@ CoreScripts.InGameMenu.Ok,
 CoreScripts.InGameMenu.PageTitle.Controls,कंट्रोल...
 CoreScripts.InGameMenu.PageTitle.GameSettings,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,फ़्रेंड्स को इनवाइट करें
-CoreScripts.InGameMenu.PageTitle.JoinOrInvite,जॉइन या इन्वाइट करें
 CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends,जॉइन करें या फ़्रेंड्स को इन्वाइट करें
 CoreScripts.InGameMenu.PageTitle.Players,लोग
 CoreScripts.InGameMenu.PageTitle.Report,रिपोर्ट करें
@@ -1463,7 +1338,6 @@ Feature.AddFriends.Action.FriendAdded,फ़्रेंड को जोड़�
 Feature.AddFriends.Action.IgnoreFriendRequest,फ़्रेंड रिक्वेस्ट इग्नोर करें
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,भरोसेमंद फ़्रेंड रिक्वेस्ट इग्नोर करें
 Feature.AddFriends.Action.RequestIgnored,रिक्वेस्ट इग्नोर की गई
-Feature.AddFriends.Heading.AddFriends,फ़्रेंड्स जोड़ें
 Feature.AddFriends.Label.AddFriendsTooltip,"फ़्रेंड्स ढूँढना शुरू करें, ताकि आप Roblox को एक साथ एक्सप्लोर कर सकें."
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,"लोगों को उनके यूज़रनेम या नाम से सर्च करके, उन्हें Roblox पर ढूँढे."
 Feature.AddFriends.Label.ConnectWithContacts,कॉन्टैक्ट्स को इनवाइट करें या Roblox पर पहले से मौजूद फ़्रेंड्स से कनेक्ट हों!
@@ -1520,7 +1394,6 @@ Feature.Avatar.Action.Rename,नाम बदलें
 Feature.Avatar.Action.RenameSet,सेट का नाम बदलें
 Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,आखिरी बार सेव किए गए अवतार को रीस्टोर करें
-Feature.Avatar.Action.Retry,
 Feature.Avatar.Action.Revert,रिवर्ट करें
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,
@@ -1734,7 +1607,6 @@ Feature.Avatar.Label.FaceMakeup,चेहरा
 Feature.Avatar.Label.FacialAnimation,फ़ेशियल ऐनिमेशन
 Feature.Avatar.Label.Fall,fall
 Feature.Avatar.Label.FallAnimations,Fall ऐनिमेशन
-Feature.Avatar.Label.FromMarketplace,मार्केटप्लेस से
 Feature.Avatar.Label.Front,फ़्रंट
 Feature.Avatar.Label.FullBody,फ़ुल बॉडी
 Feature.Avatar.Label.FullMasks,फ़ुल मास्क
@@ -1792,7 +1664,6 @@ Feature.Avatar.Label.Name,
 Feature.Avatar.Label.Neck,नेक
 Feature.Avatar.Label.Newest,सबसे नया
 Feature.Avatar.Label.NoExpiredItems,कोई भी एक्सपायर्ड {itemType} नहीं है
-Feature.Avatar.Label.NoInventorySearchResults,"कोई भी आइटम ""{query}"" से मैच नहीं करता"
 Feature.Avatar.Label.NoItems,कोई {itemType} नहीं
 Feature.Avatar.Label.NoLongerAvailableInCollection,वे अब इस कलेक्शन में उपलब्ध नहीं रहेंगे
 Feature.Avatar.Label.NoSets,अभी तक कोई सेट नहीं है
@@ -1857,8 +1728,6 @@ Feature.Avatar.Label.Shoes,जूते
 Feature.Avatar.Label.Shorts,शॉर्ट्स
 Feature.Avatar.Label.Shoulder,कंधा
 Feature.Avatar.Label.Skin,स्किन
-Feature.Avatar.Label.Spawn,स्पॉन
-Feature.Avatar.Label.SpawnEffects,स्पॉन इफ़ेक्ट्स
 Feature.Avatar.Label.Sweater,स्वेटर
 Feature.Avatar.Label.Sweaters,
 Feature.Avatar.Label.Swim,स्विम
@@ -1991,7 +1860,6 @@ Feature.Avatar.Message.UnknownErrorCreatingOutfit,अननोन गड़ब�
 Feature.Avatar.Message.UpdateOutfitSuccess,अपडेट हो गया!
 Feature.Avatar.Message.UpdateRequired,"अपडेट करना ज़रूरी है. इस आइटम को देखने के लिए, Roblox को लेटेस्ट वर्ज़न में अपडेट करें."
 Feature.Avatar.Placeholder.NameYourAvatar,अपने अवतार का नाम रखें
-Feature.Avatar.Placeholder.SearchInventory,इन्वेंट्री सर्च करें
 Feature.Avatar.Placeholder.WriteAvatarCaption,अपने अवतार के लिए कैप्शन लिखें (ज़रूरी नहीं)
 Feature.Avatar.RevokedItems.BodyText,"{category} आइटम ""{item}"" को सेव किए गए इस अवतार से हटा दिया गया है. इसलिए, हमने वह रकम रिफ़ंड कर दी है जिसका पेमेंट आपने किया था.{lineBreak}ज़्यादा जानकारी के लिए, अपना इनबॉक्स देखें."
 Feature.Avatar.RevokedItems.BodyTextMultiple,"नीचे दिए गए आइटम सेव किए गए इस अवतार से हटा दिए गए हैं. इसलिए, हमने वह रकम रिफ़ंड कर दी है जिसका पेमेंट आपने किया था.{lineBreak}{items}{lineBreak}ज़्यादा जानकारी के लिए, अपना इनबॉक्स देखें."
@@ -2081,10 +1949,8 @@ Feature.AvatarSwitcher.Message.SelectAvatar,कोई अवतार चुन�
 Feature.AvatarSwitcher.Message.SwitchingDeferred,आपको यह अवतार अगली बार रीस्पॉन करने के बाद या आपके अगले एक्सपीरिएंस जॉइन करने पर दिखेगा. किसी भी समय दूसरे अवतार पर स्विच किया जा सकता है.
 Feature.AvatarSwitcher.Message.UnknownSupport,"आप अभी भी अपना अवतार बदल सकते हैं, लेकिन हो सकता है कि वह इस एक्सपीरिएंस में सही ढंग से न दिखे."
 Feature.AvatarSwitcher.Message.Unsupported,यह एक्सपीरिएंस कस्टम अवतार का इस्तेमाल करता है और Roblox अवतारों को सपोर्ट नहीं करता है.
-Feature.AvatarWorkshop.Action.EditAvatar,अवतार एडिट करें
 Feature.AvatarWorkshop.Action.TryAgain,
-Feature.AvatarWorkshop.Heading.Customize,कस्टमाइज़ करें
-Feature.AvatarWorkshop.Heading.YourAvatars,आपके अवतार
+Feature.AvatarWorkshop.Heading.AvatarWorkshop,अवतार वर्कशॉप
 Feature.AvatarWorkshop.Message.LoadItemsError,आपके आइटम लोड नहीं हो सके.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,और आइटम लोड नहीं किए जा सके.
 Feature.AvatarWorkshop.Message.NoItemsOwned,आपके पास अभी तक यहाँ कोई भी आइटम नहीं है.
@@ -2403,7 +2269,6 @@ Feature.Build.Label.ManagedPricingMixed,मौजूदा प्रॉडक्
 Feature.Build.Label.MaximizeForGamePlays,गेम प्ले की संख्या ज़्यादा से ज़्यादा बढ़ाएँ
 Feature.Build.Label.ModelUnavailable,मॉडल उपलब्ध नहीं है
 Feature.Build.Label.Models3D,3D मॉडल
-Feature.Build.Label.MonetizationCreateTitle,{NAME} - {PRICE} Robux
 Feature.Build.Label.MyGames,मेरे गेम्स
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,कोई लिमिट नहीं
@@ -2768,7 +2633,7 @@ Feature.Catalog.Action.CheckoutPlural,चेकआउट देखें ({count
 Feature.Catalog.Action.CheckoutSingular,1 आइटम चेकआउट करें
 Feature.Catalog.Action.CloseDetails,जानकारी बंद करें
 Feature.Catalog.Action.CopyLink,लिंक कॉपी करें
-Feature.Catalog.Action.Customize,
+Feature.Catalog.Action.Customize,कस्टमाइज़ करें
 Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,अपने अवतार के बारे में बताएँ (ज़रूरी नहीं)
@@ -2929,7 +2794,6 @@ Feature.Catalog.Label.FullBody,
 Feature.Catalog.Label.Gear,
 Feature.Catalog.Label.Get,पाएँ
 Feature.Catalog.Label.GetPremiumAndPrice,Premium मेंबर बनें और इस कीमत पर खरीदें 
-Feature.Catalog.Label.Glowing,चमकता हुआ
 Feature.Catalog.Label.HD,HD
 Feature.Catalog.Label.Hair,बाल
 Feature.Catalog.Label.HeadShape,
@@ -3030,7 +2894,6 @@ Feature.Catalog.Label.SerialNumberColon,सीरियल नंबर :
 Feature.Catalog.Label.ShareToMoments,Moments पर शेयर करें
 Feature.Catalog.Label.ShoulderAccessories,कंधे की ऐक्सेसरीज़
 Feature.Catalog.Label.SoldOut,
-Feature.Catalog.Label.SpecialFeatures,खास फ़ीचर्स
 Feature.Catalog.Label.SupportsHeadShapes,सिर के अलग-अलग आकार को सपोर्ट करता है
 Feature.Catalog.Label.TakeOffResaleConfirmation,क्या आपको वाकई इस आइटम को रीसेल के लिए ऑफ़र नहीं करना है?
 Feature.Catalog.Label.TimedOptions,समयसीमा वाले विकल्प
@@ -3241,6 +3104,7 @@ Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} ने कहा...
 Feature.Chat.Label.ReplyingToYourself,आपने कहा...
 Feature.Chat.Label.SearchFriends,फ़्रेंड्स के लिए सर्च करें
 Feature.Chat.Label.SearchWord,
+Feature.Chat.Label.SnoozeChatNotifications,इन-एक्सपीरिएंस चैट नोटिफ़िकेशन को म्यूट करें :
 Feature.Chat.Label.SnoozePartyNotifications,इन एक्सपीरिएंस पार्टी नोटिफ़िकेशन को म्यूट करें:
 Feature.Chat.Label.SwipeToReplyTooltip,जवाब देने के लिए स्वाइप करें
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}दिन
@@ -3296,6 +3160,7 @@ Feature.Chat.Response.NetworkError,नेटवर्क संबंधी ग�
 Feature.Chat.RobloxConnectUnavailableWithUser,"इस समय, इस यूज़र के लिए Roblox Connect की सुविधा उपलब्ध नहीं है."
 Feature.Chat.Text.NoFriends,आपके पास अभी तक कोई फ़्रेंड नहीं है. Roblox पर शुरू करने के लिए फ़्रेंड्स को खोजें और जोड़ें.
 Feature.Chat.Title.FriendsChat,फ़्रेंड्स चैट
+Feature.Chat.Title.MuteChatNotifications,गेमप्ले के दौरान फ़्रेंड्स से मिलने वाले चैट नोटिफ़िकेशन म्यूट करें
 Feature.Chat.Title.NewChat,नई चैट
 Feature.Chat.Toast.Error.InvalidUserSelected,इस लिस्ट में एक या इससे ज़्यादा लोगों को जोड़ा नहीं जा सकता
 Feature.ContactUpsell.Action.Continue,
@@ -3442,10 +3307,8 @@ Feature.FaceChat.Subtitle.VideoPerformancePromptDisable,कैमरा बं�
 Feature.FaceChat.Subtitle.VideoUnsupported,"Roblox आपके अवतार को ऐनिमेट करने के लिए, आपके कैमरे का इस्तेमाल नहीं कर पा रहा है."
 Feature.Favorites.Label.Favorite,
 Feature.FlyoutSidePanel.Action.ContinuePlaying,
-Feature.FlyoutSidePanel.Description.SwitchAccountsHere,अब यहाँ से अकाउंट बदले जा सकते हैं.
 Feature.FlyoutSidePanel.Label.TooltipBody,"आपकी प्रोफ़ाइल, कॉन्टेंट और सेटिंग नई जगह चली गई हैं."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> को मूव कर दिया गया है
-Feature.FlyoutSidePanel.Title.AccountSwitcherMoved,अकाउंट स्विचर को दूसरी जगह मूव कर दिया गया है
 Feature.Friends.Action.AcceptFriend,
 Feature.Friends.Action.AccountDeleted,अकाउंट डिलीट किया गया
 Feature.Friends.Action.Add,
@@ -3834,7 +3697,6 @@ Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining} में खत्म हो जाएगा
 Feature.InExperienceShop.Label.FreeTrial,फ़्री ट्रायल
 Feature.InExperienceShop.Label.HaveTrial,आपके लिए फ़्री ट्रायल
-Feature.InExperienceShop.Label.KeepIt,इसे बनाए रखें
 Feature.InExperienceShop.Label.NoDescription,कोई विवरण नहीं है
 Feature.InExperienceShop.Label.OfferEndTime,"{offer}, {timeRemaining} में खत्म हो जाएगा"
 Feature.InExperienceShop.Label.PreviewBanner,यह Roblox Studio में आपकी शॉप का प्रीव्यू है. प्लेयर्स को यह प्रीव्यू नहीं दिखता है.
@@ -3847,6 +3709,7 @@ Feature.InExperienceShop.Label.Timer.Minute.Singular,
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} सेकंड
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 सेकंड
 Feature.InExperienceShop.Label.Trial,ट्रायल
+Feature.InExperienceShop.Label.Trialed,ट्रायल पूरा हो गया
 Feature.InExperienceShop.Label.TryNow,फ़्री ट्रायल पाएँ
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,आपने {ROBUX_AMOUNT} Robux खरीद लिए हैं
 Feature.InExperienceShop.Tooltip.RecentlyRedeemed,आपको अपना ट्रायल पसंद आया?
@@ -3866,8 +3729,6 @@ Feature.Moments.Action.Analytics,एनालिटिक्स
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
-Feature.Moments.Action.CommentSeeOriginal,मूल भाषा में देखें
-Feature.Moments.Action.CommentSeeTranslation,अनुवाद देखें
 Feature.Moments.Action.CommentShowLess,कम दिखाएँ
 Feature.Moments.Action.CommentShowMore,
 Feature.Moments.Action.Continue,
@@ -3907,8 +3768,8 @@ Feature.Moments.Body.EDPMomentIPReportInstructions,"इस Moment में IP (
 Feature.Moments.Description.CommunityStandards,"क्या कहें और क्या न कहें, इस बारे में ज़्यादा जानकारी के लिए कम्यूनिटी स्टैंडर्ड देखें."
 Feature.Moments.Description.EmptyCapturesLibrary,आपके कैप्चर यहाँ दिखेंगे.
 Feature.Moments.Description.FollowingCaughtUpBody,आपने इस फ़ीड में सभी नए Moments देख लिए हैं. और देखने के लिए फ़ीड बदलें.
-Feature.Moments.Description.FollowingEmptyBodyRecommended,"आपको यहाँ उन क्रिएटर्स के Moments दिखेंगे, जिन्हें आपने फ़ॉलो किया है."
-Feature.Moments.Description.FollowingEmptyBodyTrending,
+Feature.Moments.Description.FollowingEmptyBodyRecommended,कुछ क्रिएटर्स को फ़ॉलो करने के बाद अपने पसंदीदा लोगों के Moments का आनंद लें. कुछ को ढूँढने के लिए 'सुझाया गया' देखें.
+Feature.Moments.Description.FollowingEmptyBodyTrending,कुछ क्रिएटर्स को फ़ॉलो करने के बाद अपने पसंदीदा लोगों के Moments का आनंद लें. कुछ को ढूँढने के लिए 'ट्रेंडिंग' देखें.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI से जेनरेट किया गया टेक्स्ट. पोस्ट करने से पहले रिव्यू करें — पब्लिश की गई किसी भी चीज़ के लिए आप ज़िम्मेदार हैं.
 Feature.Moments.Description.HowToCaptureStep1,"ऐसा कोई एक्सपीरिएंस जॉइन करें, जिसमें कैप्चर की सुविधा चालू हो और हैमबर्गर मेन्यू चुनें"
 Feature.Moments.Description.HowToCaptureStep2,कैप्चर कंट्रोल्स चालू करें
@@ -3971,7 +3832,7 @@ Feature.Moments.Label.FeedRecommended,
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.FirstCommentInvite,अभी तक कोई कमेंट नहीं है. सबसे पहले कमेंट करें!
 Feature.Moments.Label.FollowingCaughtUpTitle,अभी कुछ नया नहीं है
-Feature.Moments.Label.FollowingEmptyTitle,क्रिएटर्स के Moments यहाँ देखने के लिए उन्हें फ़ॉलो करें
+Feature.Moments.Label.FollowingEmptyTitle,क्रिएटर्स के Moments देखने के लिए उन्हें फ़ॉलो करें
 Feature.Moments.Label.GameJoinConversion,गेम जॉइन करने का कन्वर्ज़न
 Feature.Moments.Label.HowToUseCaptureTitle,कैप्चर का इस्तेमाल कैसे करें
 Feature.Moments.Label.LinkCopied,लिंक कॉपी किया गया
@@ -3996,7 +3857,6 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,फ़ोटो
 Feature.Moments.Label.PostDeleted,Moment डिलीट किया गया
 Feature.Moments.Label.PostRemovedBody,आपका पोस्ट किया गया Moment हमारे कम्यूनिटी स्टैंडर्ड के मुताबिक नहीं है.
-Feature.Moments.Label.PostedOnDate,{date} को पोस्ट किया गया
 Feature.Moments.Label.PublishingRodeoBody,इसमें ज़्यादा समय नहीं लगना चाहिए.
 Feature.Moments.Label.Reactions,प्रतिक्रियाएँ
 Feature.Moments.Label.ReportReason.BreaksRules,इस पोस्ट से नियमों का उल्लंघन हुआ है
@@ -4179,7 +4039,7 @@ Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,प्रोफ़ाइल लिंक कॉपी करें
 Feature.Profile.Action.CreateInBuild,'बिल्ड' में क्रिएट करें
 Feature.Profile.Action.EditAppearance,लुक एडिट करें
-Feature.Profile.Action.EditAvatar,
+Feature.Profile.Action.EditAvatar,अवतार एडिट करें
 Feature.Profile.Action.EditBackground,बैकग्राउंड एडिट करें
 Feature.Profile.Action.EditEmotes,Emotes एडिट करें
 Feature.Profile.Action.EditLook,
@@ -5019,7 +4879,6 @@ Features.Transfers.RobuxTransfer.Label.RecipientWillGetInApp,पैसे पा
 Features.Transfers.RobuxTransfer.Label.RecipientWillGetInGame,पैसे पाने वाले को फ़ीस लेने के बाद {amount} Robux मिलेंगे. इन-गेम ट्रांसफ़र में {commissionPercentage}% का क्रिएटर फ़ीस शामिल है.
 Features.Transfers.RobuxTransfer.SentInstantNoFee,Robux को बिना किसी शुल्क के तुरंत भेजा जाता है
 Features.Transfers.RobuxTransfers.Label.SuccessNotification,आपने {amount} Robux भेजा है
-Features.Transfers.Title.FreeTransfersExhausted,आपने अपने फ़्री ट्रांसफ़र इस्तेमाल कर लिए हैं
 Features.Transfers.Title.UpsellSubscription,
 Features.Transfers.Transfer.Block.RequireReceiverFAE,"आइए आपकी उम्र वेरिफ़ाई करें, ताकि आप Robux स्वीकार कर सकें"
 Features.Transfers.Transfer.Block.RequireSenderFAE,"आइए आपकी उम्र वेरिफ़ाई करें, ताकि आप Robux भेज सकें"
@@ -5441,9 +5300,7 @@ Notifications.SquadRegroupPrompt.ToastAction.Join,
 Notifications.SquadRegroupPrompt.ToastLabel.ContinuePlayingTogether,साथ खेलना जारी रखें
 Notifications.SquadRegroupPrompt.ToastLabel.JoinANewServer,नए सर्वर को जॉइन करें
 Notifications.ToastNotifications.Label.LeaveExperienceConfirmation,क्या आपको वाकई यह एक्सपीरिएंस छोड़कर दूसरे में शामिल होना है?
-Notifications.ToastNotifications.Label.LeaveServerConfirmation,क्या आपको वाकई यह सर्वर छोड़कर दूसरा सर्वर जॉइन करना है?
 Notifications.ToastNotifications.Title.LeavingExperience,एक्सपीरिएंस छोड़ना
-Notifications.ToastNotifications.Title.LeavingServer,सर्वर छोड़ा जा रहा है
 PlayerFeedbacks.VoteForm.Message.Action.Report,
 PlayerFeedbacks.VoteForm.Message.MaxLengthCharacters,{count} से कम कैरेक्टर का इस्तेमाल करें.
 PlayerFeedbacks.VoteForm.Message.MinLengthCharacters,{count} से ज़्यादा कैरेक्टर का इस्तेमाल करें.

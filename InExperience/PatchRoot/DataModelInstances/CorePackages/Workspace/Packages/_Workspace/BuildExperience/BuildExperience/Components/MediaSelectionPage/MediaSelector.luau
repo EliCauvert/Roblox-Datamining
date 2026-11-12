@@ -449,19 +449,19 @@ return function(p1)
 	local MediaType = nil
 	local AssetSource = nil
 	local IsIcon = false
-	local UseStateResultEntry = false
+	local Icon = false
 	
 	if UseStateResult3.kind == "icon" then
 		IsIcon = true
 		AssetSource = UseStateResult
 		MediaType = "image"
-		UseStateResultEntry = UseStateResult7.icon or false
+		Icon = UseStateResult7.icon or false
 	elseif UseStateResult3.kind == "thumbnail" then
 		for _, value in UseMemoResult do
 			if value.id == UseStateResult3.id then
 				MediaType = value.mediaType
 				AssetSource = value.assetSource
-				UseStateResultEntry = UseStateResult7[value.id] or false
+				Icon = UseStateResult7[value.id] or false
 				break
 			end
 		end
@@ -550,7 +550,7 @@ return function(p1)
 				mediaType = MediaType,
 				assetSource = AssetSource,
 				isIcon = IsIcon,
-				isLoading = UseStateResultEntry
+				isLoading = Icon
 			})
 		}),
 		Filmstrip = ReactModule.createElement(ScrollView, {

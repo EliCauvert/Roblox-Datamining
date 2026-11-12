@@ -97,13 +97,5 @@ return {
 	reportMomentsGenerateText = function(Status, p1)
 		-- upvalues: RealtimeTelemetryActionListModule (copy), RealtimeEventNamesModule (copy), RealtimeTelemetryEmitterModule (copy)
 		(p1 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[RealtimeEventNamesModule.MomentsGenerateText], { status = Status })
-	end,
-	reportMomentsPostInsightsRequest = function(Query, Status, p1)
-		-- upvalues: RealtimeTelemetryActionListModule (copy), RealtimeEventNamesModule (copy), RealtimeTelemetryEmitterModule (copy)
-		(p1 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[RealtimeEventNamesModule.MomentsPostInsightsRequest], { query = Query, status = Status })
-	end,
-	reportMomentsPostInsightsRequestLatency = function(Query, Status, StatValue, p1)
-		-- upvalues: RealtimeTelemetryActionListModule (copy), RealtimeEventNamesModule (copy), RealtimeTelemetryEmitterModule (copy)
-		(p1 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[RealtimeEventNamesModule.MomentsPostInsightsRequestLatency], { query = Query, status = Status, statValue = StatValue })
 	end
 }

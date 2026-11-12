@@ -1,8 +1,10 @@
-﻿local Parent = script:FindFirstAncestor("AnalyticsMetricChart").Parent
+﻿local TextService = game:GetService("TextService")
+local Parent = script:FindFirstAncestor("AnalyticsMetricChart").Parent
 local FoundationModule = require(Parent.Foundation)
 local GraphingModule = require(Parent.Graphing)
 local ReactModule = require(Parent.React)
 local StyleModule = require(Parent.Style)
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local Canvas = GraphingModule.Canvas
 local Curve = GraphingModule.Curve
 local GridLine = GraphingModule.GridLine
@@ -128,11 +130,11 @@ local function renderValueRow(p1, TestId)
 end
 
 local function measureGutter(YTicks, LabelFontSize, LabelFont): number
-	-- upvalues: StyleModule (copy)
+	-- upvalues: FoundationFontFaceMigration (copy), StyleModule (copy), TextService (copy)
 	local Value = 0
 	
 	for _, yTick in YTicks do
-		Value = math.max(Value, StyleModule.GetTextSize(yTick.label, LabelFontSize, LabelFont, Vector2.new(1000, 100), { addTemporaryPadding = false }).X)
+		Value = math.max(Value, (if FoundationFontFaceMigration then StyleModule.GetTextSize(yTick.label, LabelFontSize, LabelFont, Vector2.new(1000, 100), { addTemporaryPadding = false }) else TextService:GetTextSize(yTick.label, LabelFontSize, LabelFont, Vector2.new(1000, 100))).X)
 	end
 	return (math.max(60, math.ceil(Value) + 2 + 12))
 end
@@ -158,8 +160,8 @@ local function renderYAxisLabels(p1)
 	return Elements
 end
 
-local function selectXAxisTicks(XAxisLabels, p2: number, p3, p4)
-	-- upvalues: StyleModule (copy)
+local function selectXAxisTicks(XAxisLabels, p2: number, FontSize, p3)
+	-- upvalues: FoundationFontFaceMigration (copy), StyleModule (copy), TextService (copy)
 	local CountXAxisLabels = #XAxisLabels
 	
 	if CountXAxisLabels <= 2 or p2 <= 0 then
@@ -168,7 +170,7 @@ local function selectXAxisTicks(XAxisLabels, p2: number, p3, p4)
 	local Largest = 0
 	
 	for _, xAxisLabel in XAxisLabels do
-		Largest = math.max(Largest, StyleModule.GetTextSize(xAxisLabel, p3, p4, Vector2.new(1000, 100), { addTemporaryPadding = false }).X)
+		Largest = math.max(Largest, (if FoundationFontFaceMigration then StyleModule.GetTextSize(xAxisLabel, FontSize, p3, Vector2.new(1000, 100), { addTemporaryPadding = false }) else TextService:GetTextSize(xAxisLabel, FontSize, p3, Vector2.new(1000, 100))).X)
 	end
 	if p2 < Largest then
 		return {}
@@ -211,17 +213,17 @@ local function selectXAxisTicks(XAxisLabels, p2: number, p3, p4)
 	return {}
 end
 
-local function renderXAxisLabels(p5, Offset, p6, LabelFontSize, LabelFont)
+local function renderXAxisLabels(p4, Offset, p5, LabelFontSize, LabelFont)
 	-- upvalues: selectXAxisTicks (copy), ReactModule (copy), Text (copy), PLOTHEIGHTDelta (copy)
-	local AxisLabel = p5.colors.axisLabel
-	local Largest = math.max(p5.maxX - p5.minX, 0.000001)
+	local AxisLabel = p4.colors.axisLabel
+	local Largest = math.max(p4.maxX - p4.minX, 0.000001)
 	local Elements = {}
 	
-	for _, value in selectXAxisTicks(p5.xAxisLabels, p6, LabelFontSize, LabelFont) do
+	for _, value in selectXAxisTicks(p4.xAxisLabels, p5, LabelFontSize, LabelFont) do
 		Elements[`XLabel_{value.position}`] = ReactModule.createElement(Text, {
 			tag = "anchor-top-center auto-xy text-body-small",
 			ZIndex = 4,
-			Position = UDim2.new(0, Offset + (value.position - p5.minX) / Largest * p6, 0, PLOTHEIGHTDelta + 4),
+			Position = UDim2.new(0, Offset + (value.position - p4.minX) / Largest * p5, 0, PLOTHEIGHTDelta + 4),
 			Text = value.label,
 			textStyle = AxisLabel,
 			TextXAlignment = Enum.TextXAlignment.Center,
@@ -231,23 +233,21 @@ local function renderXAxisLabels(p5, Offset, p6, LabelFontSize, LabelFont)
 	return Elements
 end
 
-return function(p7)
+return function(p6)
 	-- upvalues: ReactModule (copy), renderValueRow (copy), measureGutter (copy), Curve (copy), InputDetector (copy), GridLine (copy), renderYAxisLabels (copy), renderXAxisLabels (copy), Point (copy), YOffset (copy), renderTooltip (copy), Canvas (copy), View (copy), PLOTHEIGHT (copy), Text (copy)
-	local TestId = p7.testId or "MetricChartView"
-	local Colors = p7.colors
-	local LabelFont = p7.labelFont
-	local LabelFontSize = p7.labelFontSize
+	local TestId = p6.testId or "MetricChartView"
+	local Colors = p6.colors
+	local LabelFont = p6.labelFont
+	local LabelFontSize = p6.labelFontSize
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
-	local config = {
-		ValueRow = if p7.hideHeader then nil else renderValueRow(p7, TestId)
-	}
+	local config = { ValueRow = renderValueRow(p6, TestId) }
 	
-	if p7.hasData then
-		local MeasureGutterResult: number = measureGutter(p7.yTicks, LabelFontSize, LabelFont)
+	if p6.hasData then
+		local MeasureGutterResult: number = measureGutter(p6.yTicks, LabelFontSize, LabelFont)
 		local Points = {}
 		
-		for i, point in p7.points do
+		for i, point in p6.points do
 			Points[i] = { Position = point }
 		end
 		local config1 = {
@@ -261,17 +261,17 @@ return function(p7)
 			Input = ReactModule.createElement(InputDetector, {
 				TreatMouseAsAnchor = true,
 				ZIndex = 20,
-				OnHoverStart = p7.onHoverStart,
-				OnHoverMoved = p7.onHoverMoved,
-				OnHoverEnded = p7.onHoverEnded,
-				OnPress = p7.onPress,
-				OnDragStart = p7.onDragStart,
-				OnDragMoved = p7.onDragMoved,
-				OnDragEnded = p7.onDragEnded
+				OnHoverStart = p6.onHoverStart,
+				OnHoverMoved = p6.onHoverMoved,
+				OnHoverEnded = p6.onHoverEnded,
+				OnPress = p6.onPress,
+				OnDragStart = p6.onDragStart,
+				OnDragMoved = p6.onDragMoved,
+				OnDragEnded = p6.onDragEnded
 			})
 		}
 		
-		for _, yTick in p7.yTicks do
+		for _, yTick in p6.yTicks do
 			config1[`Grid_{yTick.position}`] = ReactModule.createElement(GridLine, {
 				Orientation = "Horizontal",
 				Thickness = 1,
@@ -281,17 +281,17 @@ return function(p7)
 				Transparency = Colors.grid.Transparency
 			})
 		end
-		local RenderYAxisLabelsResult = renderYAxisLabels(p7)
+		local RenderYAxisLabelsResult = renderYAxisLabels(p6)
 		
-		for i1, value in renderXAxisLabels(p7, MeasureGutterResult, UseStateResult - MeasureGutterResult - 8, LabelFontSize, LabelFont) do
+		for i1, value in renderXAxisLabels(p6, MeasureGutterResult, UseStateResult - MeasureGutterResult - 8, LabelFontSize, LabelFont) do
 			RenderYAxisLabelsResult[i1] = value
 		end
 		local ChildrenUnclipped = {}
 		local Tooltip = nil
-		local InspectedIndex: number = p7.inspectedIndex
+		local InspectedIndex: number = p6.inspectedIndex
 		
-		if InspectedIndex ~= nil and InspectedIndex >= 1 and InspectedIndex <= #p7.points then
-			local Point1 = p7.points[InspectedIndex]
+		if InspectedIndex ~= nil and InspectedIndex >= 1 and InspectedIndex <= #p6.points then
+			local Point1 = p6.points[InspectedIndex]
 			ChildrenUnclipped.InspectionLine = ReactModule.createElement(GridLine, {
 				Orientation = "Vertical",
 				Transparency = 0,
@@ -310,27 +310,27 @@ return function(p7)
 				Tag = `data-testid={TestId}.InspectionPoint`
 			})
 			
-			if p7.tooltip ~= nil then
-				local XRatio = (Point1.X - p7.minX) / math.max(p7.maxX - p7.minX, 0.000001)
+			if p6.tooltip ~= nil then
+				local XRatio = (Point1.X - p6.minX) / math.max(p6.maxX - p6.minX, 0.000001)
 				local UseStateResultDelta = UseStateResult - 8
-				Tooltip = renderTooltip(UseBindingResult:map(function(p8: number): UDim2
+				Tooltip = renderTooltip(UseBindingResult:map(function(p7: number): UDim2
 					-- upvalues: MeasureGutterResult (copy), XRatio (copy), UseStateResultDelta (copy), YOffset (upval)
 					local NewMeasureGutterResult = MeasureGutterResult + XRatio * (UseStateResultDelta - MeasureGutterResult)
-					local v2 = p8 / 2
+					local v2 = p7 / 2
 					local NewMeasureGutterResult1 = MeasureGutterResult + v2
 					local UseStateResultDeltaDelta = UseStateResultDelta - v2
 					
 					return UDim2.new(0, if NewMeasureGutterResult1 <= UseStateResultDeltaDelta then math.clamp(NewMeasureGutterResult, NewMeasureGutterResult1, UseStateResultDeltaDelta) else (MeasureGutterResult + UseStateResultDelta) / 2, 0, YOffset)
-				end), p7.tooltip, Colors, TestId, p7.icon, function(Frame)
+				end), p6.tooltip, Colors, TestId, p6.icon, function(Frame)
 					-- upvalues: UseBindingResult2 (copy)
 					UseBindingResult2(Frame.AbsoluteSize.X)
 				end)
 			end
 		end
-		RenderYAxisLabelsResult[`Canvas_{p7.plotKey}`] = ReactModule.createElement(Canvas, {
+		RenderYAxisLabelsResult[`Canvas_{p6.plotKey}`] = ReactModule.createElement(Canvas, {
 			CanvasBackgroundTransparency = 1,
 			ViewportBackgroundTransparency = 1,
-			GraphRect = Rect.new(p7.minX, p7.minY, p7.maxX, p7.maxY),
+			GraphRect = Rect.new(p6.minX, p6.minY, p6.maxX, p6.maxY),
 			ViewportPaddingLeft = UDim.new(0, MeasureGutterResult),
 			ViewportPaddingRight = UDim.new(0, 8),
 			ViewportPaddingTop = UDim.new(0, 12),
@@ -351,23 +351,23 @@ return function(p7)
 	end
 	return ReactModule.createElement(View, {
 		tag = "col gap-xsmall size-full-0 auto-y",
-		LayoutOrder = p7.layoutOrder,
+		LayoutOrder = p6.layoutOrder,
 		testId = TestId
 	}, {
-		Header = if p7.hideHeader then nil else ReactModule.createElement(View, {
+		Header = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "col gap-xxsmall size-full-0 auto-y"
 		}, {
 			Title = ReactModule.createElement(Text, {
 				LayoutOrder = 1,
 				tag = "size-full-0 auto-y text-title-medium text-align-x-left text-truncate-end content-default",
-				Text = p7.title,
+				Text = p6.title,
 				testId = `{TestId}.Title`
 			}),
-			Summary = if p7.summary == nil then nil else ReactModule.createElement(Text, {
+			Summary = if p6.summary == nil then nil else ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
-				Text = p7.summary,
+				Text = p6.summary,
 				testId = `{TestId}.Summary`
 			})
 		}),

@@ -58,8 +58,6 @@ return function(Object)
 	-- upvalues: SignalsModule (copy), readCall (copy), LoggerModule (copy), disconnectObservedCall (copy)
 	local Signal, Signal2 = SignalsModule.createSignal({})
 	local Signal1, Signal2_1 = SignalsModule.createSignal(0)
-	local Count = 0
-	local Signal3, Signal2_2 = SignalsModule.createSignal(0)
 	local Computed = SignalsModule.createComputed(function(p2)
 		-- upvalues: Signal (copy)
 		return Signal(p2)[1]
@@ -80,11 +78,11 @@ return function(Object)
 	end)
 	local List = {}
 	local ArrivalOrder = 0
-	local Count1 = 0
+	local Count = 0
 	local Flag = false
 	
 	local function publish()
-		-- upvalues: List (copy), readCall (upval), Flag (ref), Signal2 (copy), Count1 (ref), Signal2_1 (copy), LoggerModule (upval)
+		-- upvalues: List (copy), readCall (upval), Flag (ref), Signal2 (copy), Count (ref), Signal2_1 (copy), LoggerModule (upval)
 		local Copy = table.clone(List)
 		table.sort(Copy, function(A, B): boolean
 			return A.arrivalOrder < B.arrivalOrder
@@ -95,16 +93,16 @@ return function(Object)
 			table.insert(List1, (readCall(value.instance)))
 		end
 		local v1 = #List1 > 0
-		local NoV33: boolean = Flag and not v1
+		local NoV30: boolean = Flag and not v1
 		Flag = v1
 		Signal2(List1)
 		
-		if NoV33 then
-			Count1 += 1
-			Signal2_1(Count1)
+		if NoV30 then
+			Count += 1
+			Signal2_1(Count)
 		end
 		local Entry = List1[1]
-		LoggerModule:debug("{} - published: hasCall={}, session={}, callId={}, phase={}, endReason={}, participants={}", script.Name, tostring(v1), Count1, Entry and Entry.callId or "", if Entry then Entry.phase.Name else "", if Entry then Entry.endReason.Name else "", if Entry then #Entry.participants else 0)
+		LoggerModule:debug("{} - published: hasCall={}, session={}, callId={}, phase={}, endReason={}, participants={}", script.Name, tostring(v1), Count, Entry and Entry.callId or "", if Entry then Entry.phase.Name else "", if Entry then Entry.endReason.Name else "", if Entry then #Entry.participants else 0)
 	end
 	
 	local function unobserveCall(FriendsCallingInstance)
@@ -227,14 +225,8 @@ return function(Object)
 		getHasCall = Computed2,
 		getSession = Signal1,
 		getWindowView = Computed3,
-		getExpandCount = Signal3,
-		expand = function()
-			-- upvalues: Count (ref), Signal2_2 (copy)
-			Count += 1
-			Signal2_2(Count)
-		end,
 		cleanup = function()
-			-- upvalues: LoggerModule (upval), ChildAddedConnection (copy), ChildRemovedConnection (copy), List (copy), disconnectObservedCall (upval), Flag (ref), Signal2 (copy), Count1 (ref), Signal2_1 (copy)
+			-- upvalues: LoggerModule (upval), ChildAddedConnection (copy), ChildRemovedConnection (copy), List (copy), disconnectObservedCall (upval), Flag (ref), Signal2 (copy), Count (ref), Signal2_1 (copy)
 			LoggerModule:debug("{} - store cleanup", script.Name)
 			ChildAddedConnection:Disconnect()
 			ChildRemovedConnection:Disconnect()
@@ -248,8 +240,8 @@ return function(Object)
 			Signal2({})
 			
 			if Flag1 then
-				Count1 += 1
-				Signal2_1(Count1)
+				Count += 1
+				Signal2_1(Count)
 			end
 		end
 	}

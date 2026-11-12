@@ -72,30 +72,30 @@ return function(p1)
 	local function DoWhisperCommand(p2, Text: string, p3)
 		-- upvalues: p1 (copy), ChatSettingsModule (upval), DisplayNameHelpersModule (upval), ChatLocalizationModule (upval), config (upval), ChatConstantsModule (upval), CanCommunicate (copy)
 		local Speaker = p1:GetSpeaker(p2)
-		local Text1: string = Text
-		local Text2: string? = nil
+		local Text2: string = Text
+		local Text1: string? = nil
 		
 		if string.sub(Text, 1, 1) == "\"" then
 			local FoundAt: number? = string.find(Text, "\"", 2)
 			
 			if FoundAt then
-				Text1 = string.sub(Text, 2, FoundAt - 1)
-				Text2 = string.sub(Text, FoundAt + 2)
+				Text2 = string.sub(Text, 2, FoundAt - 1)
+				Text1 = string.sub(Text, FoundAt + 2)
 			end
 		else
 			local Match: string? = string.match(Text, "^[^%s]+")
 			
 			if Match then
-				Text1 = Match
-				Text2 = string.sub(Text, string.len(Text1) + 2)
+				Text2 = Match
+				Text1 = string.sub(Text, string.len(Text2) + 2)
 			end
 		end
 		local UserNameFromChattedName2 = nil
 		local UserNameFromChattedName = nil
 		if ChatSettingsModule.PlayerDisplayNamesEnabled and ChatSettingsModule.WhisperByDisplayNameEnabled then
-			UserNameFromChattedName, UserNameFromChattedName2 = DisplayNameHelpersModule.getUserNameFromChattedName(Text1, p2, Speaker:GetNameForDisplay())
+			UserNameFromChattedName, UserNameFromChattedName2 = DisplayNameHelpersModule.getUserNameFromChattedName(Text2, p2, Speaker:GetNameForDisplay())
 		else
-			UserNameFromChattedName, UserNameFromChattedName2 = DisplayNameHelpersModule.getUserNameFromChattedName(Text1, p2, nil)
+			UserNameFromChattedName, UserNameFromChattedName2 = DisplayNameHelpersModule.getUserNameFromChattedName(Text2, p2, nil)
 		end
 		local Speaker1 = p1:GetSpeaker(UserNameFromChattedName)
 		
@@ -105,12 +105,12 @@ return function(p1)
 			return
 		end
 		if UserNameFromChattedName2 == DisplayNameHelpersModule.CommandErrorCodes.NoMatches then
-			Speaker:SendSystemMessage(ChatLocalizationModule:FormatMessageToSend("GameChat_MuteSpeaker_SpeakerDoesNotExist", string.format("Speaker '%s' does not exist.", (tostring(Text1))), "RBX_NAME", (tostring(UserNameFromChattedName))), p3, config)
+			Speaker:SendSystemMessage(ChatLocalizationModule:FormatMessageToSend("GameChat_MuteSpeaker_SpeakerDoesNotExist", string.format("Speaker '%s' does not exist.", (tostring(Text2))), "RBX_NAME", (tostring(UserNameFromChattedName))), p3, config)
 			
 			return
 		end
 		if UserNameFromChattedName2 == DisplayNameHelpersModule.CommandErrorCodes.MultipleMatches then
-			local UsersWithDisplayNameString = DisplayNameHelpersModule.getUsersWithDisplayNameString(Text1, p2)
+			local UsersWithDisplayNameString = DisplayNameHelpersModule.getUsersWithDisplayNameString(Text2, p2)
 			Speaker:SendSystemMessage(ChatLocalizationModule:FormatMessageToSend("InGame.Chat.Response.DisplayNameMultipleMatches", "Warning: The following users have this display name: "), p3, config)
 			Speaker:SendSystemMessage(UsersWithDisplayNameString, p3, config)
 			
@@ -128,14 +128,14 @@ return function(p1)
 				if not Speaker:IsInChannel(Channel.Name) then
 					Speaker:JoinChannel(Channel.Name)
 				end
-				if Text2 and string.len(Text2) > 0 then
-					Speaker:SayMessage(Text2, Channel.Name)
+				if Text1 and string.len(Text1) > 0 then
+					Speaker:SayMessage(Text1, Channel.Name)
 				end
 				Speaker:SetMainChannel(Channel.Name)
 				
 				return
 			else
-				Speaker:SendSystemMessage(ChatLocalizationModule:FormatMessageToSend("GameChat_MuteSpeaker_SpeakerDoesNotExist", string.format("Speaker '%s' does not exist.", (tostring(Text1))), "RBX_NAME", (tostring(UserNameFromChattedName))), p3, config)
+				Speaker:SendSystemMessage(ChatLocalizationModule:FormatMessageToSend("GameChat_MuteSpeaker_SpeakerDoesNotExist", string.format("Speaker '%s' does not exist.", (tostring(Text2))), "RBX_NAME", (tostring(UserNameFromChattedName))), p3, config)
 			end
 		end
 	end

@@ -6,7 +6,9 @@ local RoactFitComponentsModule = require(Parent1.RoactFitComponents)
 local FitFrameVertical = RoactFitComponentsModule.FitFrameVertical
 local FitTextLabel = RoactFitComponentsModule.FitTextLabel
 local UIBloxModule = require(Parent1.UIBlox)
-local NormalizeFontFaceFunction = require(Parent1.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(Parent1.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
@@ -133,7 +135,7 @@ function ExtendResult.render(p1)
 end
 
 function ExtendResult.renderAlert(p1, p2)
-	-- upvalues: LoggerModule (copy), GetAppContextModule (copy), Default (copy), PurchaseModalV1ShownCounter (copy), WithStyleFunction (copy), Character (copy), RoactModule (copy), ModelViewportModule (copy), ImageSetLabel (copy), InteractiveAlert (copy), FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (copy), FitFrameVertical (copy), FitTextLabel (copy), ButtonType (copy), IconsCommonRobux (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: LoggerModule (copy), GetAppContextModule (copy), Default (copy), PurchaseModalV1ShownCounter (copy), WithStyleFunction (copy), Character (copy), RoactModule (copy), ModelViewportModule (copy), ImageSetLabel (copy), InteractiveAlert (copy), FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (copy), FitFrameVertical (copy), FitTextLabel (copy), ButtonType (copy), IconsCommonRobux (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local Props = p1.props
 	LoggerModule.debug({
 		message = "Purchase Modal V1 Shown",
@@ -150,7 +152,7 @@ function ExtendResult.renderAlert(p1, p2)
 	})
 	
 	return WithStyleFunction(function(p3)
-		-- upvalues: p1 (copy), p2 (copy), Character (upval), RoactModule (upval), ModelViewportModule (upval), ImageSetLabel (upval), InteractiveAlert (upval), FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (upval), FitFrameVertical (upval), FitTextLabel (upval), ButtonType (upval), IconsCommonRobux (upval), NormalizeFontFaceFunction (upval)
+		-- upvalues: p1 (copy), p2 (copy), Character (upval), RoactModule (upval), ModelViewportModule (upval), ImageSetLabel (upval), InteractiveAlert (upval), FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (upval), FitFrameVertical (upval), FitTextLabel (upval), ButtonType (upval), IconsCommonRobux (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 		local Theme = p3.Theme
 		local _Font = p3.Font
 		local Color = Theme.IconEmphasis.Color
@@ -232,7 +234,7 @@ function ExtendResult.renderAlert(p1, p2)
 				}
 			},
 			footerContent = function()
-				-- upvalues: p1 (upval), RoactModule (upval), FitFrameVertical (upval), ScaledX (copy), NormalizeFontFaceFunction (upval), p3 (copy), Formatted (copy), _Font (copy), Theme (copy), FitTextLabel (upval), p2 (upval)
+				-- upvalues: p1 (upval), RoactModule (upval), FitFrameVertical (upval), ScaledX (copy), FoundationFontFaceMigration (upval), _Font (copy), NormalizeFontFaceFunction (upval), p3 (copy), Formatted (copy), Theme (copy), FitTextLabel (upval), p2 (upval)
 				return if p1.props.currentBalanceValid then if p1.props.testPurchase then RoactModule.createElement(FitFrameVertical, {
 					BackgroundTransparency = 1,
 					width = UDim.new(1, 0),
@@ -270,7 +272,8 @@ function ExtendResult.renderAlert(p1, p2)
 						Position = UDim2.fromScale(0, 0.5),
 						Size = UDim2.fromOffset(ScaledX, 0),
 						AutomaticSize = Enum.AutomaticSize.Y,
-						FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.CaptionSmall.Font),
+						Font = if FoundationFontFaceMigration then nil else _Font.Footer.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.CaptionSmall.Font) else nil,
 						Text = Formatted,
 						TextSize = _Font.BaseSize * _Font.Footer.RelativeSize,
 						TextColor3 = Theme.TextDefault.Color

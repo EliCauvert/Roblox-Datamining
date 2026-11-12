@@ -5,34 +5,6 @@ local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 local GetFStringUGCValidateMaxAnimationMovementPerPartModule = require(Parent.flags.GetFStringUGCValidateMaxAnimationMovementPerPart)
 
-local function validateCurveAnimClip(p1, p2)
-	-- upvalues: ConstantsModule (copy), GetFStringUGCValidateMaxAnimationMovementPerPartModule (copy), ErrorSourceStringsModule (copy)
-	local FullName = p2.animation and p2.animation:GetFullName()
-	local AsNumberResults = {}
-	
-	for _, positionMagnitudeFrame in p2.positionMagnitudeFrames do
-		for BodyPart, value in positionMagnitudeFrame do
-			if BodyPart ~= ConstantsModule.NAMED_R15_BODY_PARTS.LowerTorso then
-				if not AsNumberResults[BodyPart] then
-					AsNumberResults[BodyPart] = GetFStringUGCValidateMaxAnimationMovementPerPartModule.asNumber(BodyPart)
-				end
-				if AsNumberResults[BodyPart] < value then
-					local config = {
-						bodyPart = BodyPart,
-						maxMovement = tostring(AsNumberResults[BodyPart])
-					}
-					
-					if FullName then
-						config.animationName = FullName
-					end
-					p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_PositionSeparation, config, p2.animation)
-					break
-				end
-			end
-		end
-	end
-end
-
 return {
 	categories = {
 		ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
@@ -46,10 +18,25 @@ return {
 	prereqTests = {
 		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	},
-	run = function(p3, p4)
-		-- upvalues: validateCurveAnimClip (copy)
-		for _, curveAnimComputedFrame in p4.curveAnimComputedFrames do
-			validateCurveAnimClip(p3, curveAnimComputedFrame)
+	run = function(p1, p2)
+		-- upvalues: ConstantsModule (copy), GetFStringUGCValidateMaxAnimationMovementPerPartModule (copy), ErrorSourceStringsModule (copy)
+		local AsNumberResults = {}
+		
+		for _, positionMagnitudeFrame in p2.curveAnimComputedFrames.positionMagnitudeFrames do
+			for BodyPart, value in positionMagnitudeFrame do
+				if BodyPart ~= ConstantsModule.NAMED_R15_BODY_PARTS.LowerTorso then
+					if not AsNumberResults[BodyPart] then
+						AsNumberResults[BodyPart] = GetFStringUGCValidateMaxAnimationMovementPerPartModule.asNumber(BodyPart)
+					end
+					if AsNumberResults[BodyPart] < value then
+						p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_PositionSeparation, {
+							bodyPart = BodyPart,
+							maxMovement = tostring(AsNumberResults[BodyPart])
+						})
+						break
+					end
+				end
+			end
 		end
 	end
 }

@@ -3,7 +3,6 @@
 return table.freeze({
 	DURATION_SECONDS_KEY = "Feature.Moments.Label.DurationSeconds",
 	PERCENT_KEY = "Feature.Build.Analytics.Percent",
-	POSTED_ON_DATE_KEY = "Feature.Moments.Label.PostedOnDate",
 	MENU_KEYS = Frozen,
 	PAGE_KEYS = table.freeze({
 		overview = "Feature.Moments.Label.Overview",

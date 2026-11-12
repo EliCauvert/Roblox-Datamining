@@ -81,8 +81,8 @@ return function(Entry, Tbl, List, p1)
 	local OverlaySlotChildren = {}
 	
 	if p1 then
-		for _, value in List do
-			local Key = Entry[value].descriptor.key
+		for _, value1 in List do
+			local Key = Entry[value1].descriptor.key
 			local Entry1 = Copy[Key]
 			
 			if Entry1 ~= nil then
@@ -94,21 +94,21 @@ return function(Entry, Tbl, List, p1)
 	if UseSignalStateResult2 then
 		local v1 = 0
 		
-		for i, value1 in Entry do
-			local Options = value1.descriptor.options
+		for i, value2 in Entry do
+			local Options = value2.descriptor.options
 			
 			if Options ~= nil and Options.splitPaneEligibility ~= nil then
 				v1 = i
 			end
 		end
-		for i1, value2 in Entry do
-			local Options = value2.descriptor.options
+		for i1, value3 in Entry do
+			local Options = value3.descriptor.options
 			local NoOptions = Options == nil or not Options.transparent or Options.overlayEnabled or Options.splitPaneEligibility ~= nil
 			local Key = nil
 			local Entry2 = nil
 			
 			if not NoOptions then
-				Key = value2.descriptor.key
+				Key = value3.descriptor.key
 				Entry2 = Copy[Key]
 				NoOptions = Entry2 == nil
 			end
@@ -166,9 +166,9 @@ return function(Entry, Tbl, List, p1)
 	local SupportRouteKeys = {}
 	
 	if p1 then
-		for _, value3 in Entry do
-			if IsSupportPaneScreenModule(value3) then
-				local State = value3.descriptor.state
+		for _, value in Entry do
+			if IsSupportPaneScreenModule(value) then
+				local State = value.descriptor.state
 				
 				if State ~= nil and State.key ~= nil then
 					table.insert(SupportRouteKeys, State.key)

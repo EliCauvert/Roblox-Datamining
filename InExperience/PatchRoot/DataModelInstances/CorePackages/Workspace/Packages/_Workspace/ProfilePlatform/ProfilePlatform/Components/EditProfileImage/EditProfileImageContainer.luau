@@ -14,7 +14,6 @@ local FFlagEditProfileImageR15UpgradePrompt = require(Parent.SharedFlags).FFlagE
 local FFlagEditProfileFramesEnabled = require(Parent.SharedFlags).FFlagEditProfileFramesEnabled
 local FFlagEditProfileFramesImpression = require(Parent.EditProfile).Flags.FFlagEditProfileFramesImpression
 local FFlagSignalsNavP3hMisc = require(Parent.SharedFlags).FFlagSignalsNavP3hMisc
-local FFlagProfilePlatformExitStandaloneEditor = require(Parent.SharedFlags).FFlagProfilePlatformExitStandaloneEditor
 local FFlagSplitPaneProfileEditFillPane = require(Parent.SharedFlags).FFlagSplitPaneProfileEditFillPane
 local SplitPaneModule = if FFlagSplitPaneProfileEditFillPane then require(Parent.SplitPane) else nil
 local UseReportFramesImpressionModule = require(ProfilePlatform.Hooks.useReportFramesImpression)
@@ -35,7 +34,7 @@ local function _(AvatarExperienceWrapper): boolean
 end
 
 return function(p1)
-	-- upvalues: UseProfileWrapperContextModule (copy), UseScreenSizeFunction (copy), UseSelectorFunction (copy), FFlagSignalsNavP3hMisc (copy), ReactModule (copy), SignalsModule (copy), GetLegacyNavigationStoreFunction (copy), AppPage (copy), UseSignalStateFunction (copy), Selectors (copy), UseDispatchFunction (copy), FFlagSplitPaneProfileEditFillPane (copy), SplitPaneModule (copy), FFlagProfilePlatformExitStandaloneEditor (copy), CloseProfilePictureEditorFunction (copy), ShowEditProfileImageToast (copy), EnumsModule (copy), FFlagEditProfileImageR15UpgradePrompt (copy), FFlagEditProfileFramesImpression (copy), FFlagEditProfileFramesEnabled (copy), UseReportFramesImpressionModule (copy), Enums (copy), View (copy), AXEditProfileImageFillCardHeight (copy), EditProfileImage (copy)
+	-- upvalues: UseProfileWrapperContextModule (copy), UseScreenSizeFunction (copy), UseSelectorFunction (copy), FFlagSignalsNavP3hMisc (copy), ReactModule (copy), SignalsModule (copy), GetLegacyNavigationStoreFunction (copy), AppPage (copy), UseSignalStateFunction (copy), Selectors (copy), UseDispatchFunction (copy), FFlagSplitPaneProfileEditFillPane (copy), SplitPaneModule (copy), CloseProfilePictureEditorFunction (copy), ShowEditProfileImageToast (copy), EnumsModule (copy), FFlagEditProfileImageR15UpgradePrompt (copy), FFlagEditProfileFramesImpression (copy), FFlagEditProfileFramesEnabled (copy), UseReportFramesImpressionModule (copy), Enums (copy), View (copy), AXEditProfileImageFillCardHeight (copy), EditProfileImage (copy)
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	local RenderRecommendedEmotePurchaseFooter = UseProfileWrapperContextModuleResult.renderRecommendedEmotePurchaseFooter
 	assert(RenderRecommendedEmotePurchaseFooter, "Edit Profile Image requires a host purchase-footer renderer")
@@ -74,22 +73,15 @@ return function(p1)
 			v1 = Vector2.new(if UseSignalStateResult1 == SplitPaneModule.SupportPaneMode.Expanded then Largest else UseScreenSizeResult.X * UseSignalStateResult2, UseScreenSizeResult.Y)
 		end
 	end
-	local CloseProfileRoute = if FFlagProfilePlatformExitStandaloneEditor then UseProfileWrapperContextModuleResult.navigateTo.closeProfileRoute else nil
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: CloseProfileRoute (copy), CloseProfilePictureEditorFunction (upval), p1 (copy)
-		if CloseProfileRoute then
-			CloseProfileRoute()
-			
-			return
-		else
-			CloseProfilePictureEditorFunction(p1.navigation)
-		end
-	end, { p1.navigation, CloseProfileRoute })
+		-- upvalues: CloseProfilePictureEditorFunction (upval), p1 (copy)
+		CloseProfilePictureEditorFunction(p1.navigation)
+	end, { p1.navigation })
 	local UseResult1 = ReactModule.useCallback(function()
-		-- upvalues: ShowEditProfileImageToast (upval), UseDispatchResult (copy), UseResult (copy)
+		-- upvalues: ShowEditProfileImageToast (upval), UseDispatchResult (copy), CloseProfilePictureEditorFunction (upval), p1 (copy)
 		ShowEditProfileImageToast.showSaveSuccessToast(UseDispatchResult)
-		UseResult()
-	end, { UseDispatchResult, UseResult })
+		CloseProfilePictureEditorFunction(p1.navigation)
+	end, { UseDispatchResult, p1.navigation })
 	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseProfileWrapperContextModuleResult (copy), EnumsModule (upval)
 		local NavigateTo = UseProfileWrapperContextModuleResult.navigateTo

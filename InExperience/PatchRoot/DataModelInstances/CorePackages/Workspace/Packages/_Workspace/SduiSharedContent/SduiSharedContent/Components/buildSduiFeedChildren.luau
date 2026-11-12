@@ -76,7 +76,7 @@ return function(p1)
 				v1 = LayoutOrder * 2
 				local SamePoolFeedItemGap = if FFlagSduiSamePoolFeedItemSpacing then p1.samePoolFeedItemGap else nil
 				local Config1 = if FFlagSduiSamePoolFeedItemSpacing then p1.configs[CollectionPosition + 1] else nil
-				local YOffset = if GapBetweenFeedItems == nil then nil elseif FFlagSduiSamePoolFeedItemSpacing and SamePoolFeedItemGap ~= nil and (Config1 ~= nil and Config1.continuesPreviousSection == true) then SamePoolFeedItemGap elseif CollectionPosition == 1 and (GapAfterFirstFeedItem ~= nil and GapAfterFirstFeedItem >= 0) then GapAfterFirstFeedItem else GapBetweenFeedItems
+				local YOffset = if GapBetweenFeedItems == nil then nil elseif FFlagSduiSamePoolFeedItemSpacing and (SamePoolFeedItemGap ~= nil and Config1 ~= nil and Config1.continuesPreviousSection == true) then SamePoolFeedItemGap elseif CollectionPosition == 1 and GapAfterFirstFeedItem ~= nil and GapAfterFirstFeedItem >= 0 then GapAfterFirstFeedItem else GapBetweenFeedItems
 				
 				if YOffset ~= nil and YOffset > 0 then
 					Elements[`{Text}_GapAfter`] = ReactModule.createElement("Frame", {
@@ -107,6 +107,7 @@ return function(p1)
 				AddSduiErrorContextFieldsFunction(config1, config.errorContext)
 			end
 			SduiContext.dependencies.logger.reportError(SduiErrors.SduiErrorType.NilComponentType, config1, SduiContext.appPage)
+			continue
 		end
 	end
 	return Elements

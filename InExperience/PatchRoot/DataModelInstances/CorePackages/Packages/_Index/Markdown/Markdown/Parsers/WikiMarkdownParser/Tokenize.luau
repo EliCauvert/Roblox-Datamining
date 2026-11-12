@@ -61,22 +61,22 @@ return function(Text: string)
 	local Offset = 0
 	local Offset1 = 0
 	local t = {}
-	local Segment = nil
-	local v1 = nil
 	local Segment1 = nil
+	local v1 = nil
+	local Segment = nil
 	local Flag = nil
 	while Offset <= #Text do
-		Segment = if Offset == 0 then "\n" else Text:sub(Offset, Offset)
-		local Entry = config[Segment]
+		Segment1 = if Offset == 0 then "\n" else Text:sub(Offset, Offset)
+		local Entry = config[Segment1]
 		Flag = false
 		
 		if Entry then
-			v1 = if Segment == "\n" then 1 else 0
-			Segment1 = Text:sub(Offset + v1)
+			v1 = if Segment1 == "\n" then 1 else 0
+			Segment = Text:sub(Offset + v1)
 			local MatchResult = nil
 			
 			for _, value in Entry do
-				MatchResult = Segment1:match(value[2])
+				MatchResult = Segment:match(value[2])
 				
 				if MatchResult then
 					local Entry1 = value[1]
@@ -93,8 +93,8 @@ return function(Text: string)
 					local config1 = {
 						name = Entry1,
 						text = MatchResult,
-						capture = if Entry11 then { Segment1:match(Entry11) } else nil,
-						isBlock = Segment == "\n"
+						capture = if Entry11 then { Segment:match(Entry11) } else nil,
+						isBlock = Segment1 == "\n"
 					}
 					config1.offset = Offset
 					InsertFunction(t, config1)

@@ -8,6 +8,7 @@ local EnumsModule = require(UserList.Common.Enums)
 local ConstantsModule = require(UserList.Common.Constants)
 local TextKeysModule = require(UserList.Common.TextKeys)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UserListUseActionAddTranslation = game:DefineFastFlag("UserListUseActionAddTranslation", false)
 local FFlagFriendsPageViewBtnEnabled = require(Parent.SharedFlags).FFlagFriendsPageViewBtnEnabled
 local FFlagEnableBlackbirdCheck = require(Parent.SharedFlags).FFlagEnableBlackbirdCheck
 local FFlagUserListCtaIntegrationEnabled = require(Parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
@@ -34,10 +35,10 @@ local config = {
 }
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), FFlagUserListSurfaceExtensions (copy), UseLocalizationFunction (copy), TextKeysModule (copy), EnumsModule (copy), FFlagUserListInviteCta (copy), FFlagFriendsPageViewBtnEnabled (copy), FFlagUserListCtaIntegrationEnabled (copy), ReactModule (copy), View (copy), ConstantsModule (copy), UserTile (copy), FoundationModule (copy), FFlagEnableBlackbirdCheck (copy), config (copy), FFlagAddStatusIndicatorToBaseRow (copy), StatusIndicator (copy), StatusIndicatorVariant (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), Skeleton (copy), Radius (copy), IconButton (copy), IconSize (copy)
+	-- upvalues: UseTokensFunction (copy), FFlagUserListSurfaceExtensions (copy), UserListUseActionAddTranslation (copy), UseLocalizationFunction (copy), TextKeysModule (copy), EnumsModule (copy), FFlagUserListInviteCta (copy), FFlagFriendsPageViewBtnEnabled (copy), FFlagUserListCtaIntegrationEnabled (copy), ReactModule (copy), View (copy), ConstantsModule (copy), UserTile (copy), FoundationModule (copy), FFlagEnableBlackbirdCheck (copy), config (copy), FFlagAddStatusIndicatorToBaseRow (copy), StatusIndicator (copy), StatusIndicatorVariant (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), Skeleton (copy), Radius (copy), IconButton (copy), IconSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsDisableRowActivation: boolean = FFlagUserListSurfaceExtensions and p1.disableRowActivation == true
-	local UseLocalizationResult = UseLocalizationFunction({
+	local UseLocalizationResult = if UserListUseActionAddTranslation then UseLocalizationFunction({
 		Accept = TextKeysModule.Accept,
 		Add = TextKeysModule.Add,
 		Chat = TextKeysModule.Chat,
@@ -46,7 +47,7 @@ return ReactModule.memo(function(p1)
 		[EnumsModule.ButtonTypes.Invite] = if FFlagUserListInviteCta then TextKeysModule.Invite else nil,
 		[EnumsModule.ButtonTypes.Invited] = if FFlagUserListInviteCta then TextKeysModule.Invited else nil,
 		[EnumsModule.ButtonTypes.View] = if FFlagFriendsPageViewBtnEnabled or FFlagUserListCtaIntegrationEnabled then TextKeysModule.View else nil
-	})
+	}) else nil
 	
 	return ReactModule.createElement(View, {
 		LayoutOrder = p1.layoutOrder,
@@ -103,7 +104,7 @@ return ReactModule.memo(function(p1)
 				}
 			}, {
 				Button = ReactModule.createElement(Button, {
-					text = UseLocalizationResult[p1.primaryCta.type],
+					text = if UserListUseActionAddTranslation then UseLocalizationResult[p1.primaryCta.type] else p1.primaryCta.type,
 					size = InputSize.Small,
 					variant = (FFlagFriendsPageViewBtnEnabled or FFlagUserListCtaIntegrationEnabled) and p1.primaryCta.variant or ButtonVariant.SoftEmphasis,
 					onActivated = p1.primaryCta.onActivated,
@@ -112,7 +113,7 @@ return ReactModule.memo(function(p1)
 					fillBehavior = FillBehavior.Fill
 				})
 			}) else ReactModule.createElement(Button, {
-				text = UseLocalizationResult[p1.primaryCta.type],
+				text = if UserListUseActionAddTranslation then UseLocalizationResult[p1.primaryCta.type] else p1.primaryCta.type,
 				size = InputSize.Small,
 				variant = (FFlagFriendsPageViewBtnEnabled or FFlagUserListCtaIntegrationEnabled) and p1.primaryCta.variant or ButtonVariant.SoftEmphasis,
 				onActivated = p1.primaryCta.onActivated,
@@ -125,7 +126,7 @@ return ReactModule.memo(function(p1)
 				Size = UDim2.fromOffset(p1.ctaLoading.minWidth or 0, UseTokensResult.Size.Size_800),
 				radius = Radius.Medium
 			}) else nil,
-			SecondaryActionCta = if p1.layoutMode == EnumsModule.RowLayoutMode.Wide and p1.secondaryCta and p1.secondaryCta.icon and p1.secondaryCta.onActivated then ReactModule.createElement(IconButton, {
+			SecondaryActionCta = if p1.layoutMode == EnumsModule.RowLayoutMode.Wide and (p1.secondaryCta and p1.secondaryCta.icon and p1.secondaryCta.onActivated) then ReactModule.createElement(IconButton, {
 				icon = p1.secondaryCta.icon,
 				size = IconSize.Small,
 				variant = ButtonVariant.Utility,

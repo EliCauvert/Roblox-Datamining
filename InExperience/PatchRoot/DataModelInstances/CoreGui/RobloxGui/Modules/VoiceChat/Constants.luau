@@ -41,7 +41,7 @@
 		ERROR = "Error",
 		HIDDEN = "Hidden"
 	},
-	BAN_REASON = { NUDGE_V3 = 7, UFR_UNACKNOWLEDGED_EXPIRED = 10 },
+	BAN_REASON = { NUDGE_V3 = 7 },
 	IN_EXP_UPSELL_VARIANT = {
 		CONTROL = "control",
 		VARIANT1 = "variant1",

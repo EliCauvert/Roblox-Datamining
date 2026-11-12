@@ -3,7 +3,7 @@ local DependenciesModule = require(Parent.dependencies)
 local UseStyleFunction = DependenciesModule.UIBlox.Core.Style.useStyle
 local _ = require(Parent.type)
 local React = DependenciesModule.React
-local _ = require(Parent.Parent.Foundation)
+local FoundationFontFaceMigration = require(Parent.Parent.Foundation).Utility.Flags.FoundationFontFaceMigration
 local config = {
 	highlight = function(Text): string
 		return "<b>" .. Text .. "</b>"
@@ -70,7 +70,7 @@ local function formatString(p1): string
 end
 
 return function(Label)
-	-- upvalues: UseStyleFunction (copy), formatString (copy), React (copy)
+	-- upvalues: UseStyleFunction (copy), formatString (copy), React (copy), FoundationFontFaceMigration (copy)
 	local UseStyleResult = UseStyleFunction()
 	
 	return React.createElement("TextLabel", {
@@ -80,8 +80,8 @@ return function(Label)
 		Text = if Label.Text then formatString(Label.Text) else "",
 		TextColor3 = Label.TextColor3 or UseStyleResult.Theme.TextDefault.Color,
 		TextTransparency = Label.TextTransparency or UseStyleResult.Theme.TextDefault.Transparency,
-		Font = if Label.FontFace then nil else Label.Font or UseStyleResult.Font.Body.Font,
-		FontFace = Label.FontFace,
+		Font = if FoundationFontFaceMigration and Label.FontFace then nil else Label.Font or UseStyleResult.Font.Body.Font,
+		FontFace = if FoundationFontFaceMigration then Label.FontFace else nil,
 		AutomaticSize = Label.AutomaticSize,
 		Size = Label.Size,
 		TextSize = Label.TextSize,

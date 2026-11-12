@@ -77,7 +77,7 @@ return ReactModule.memo(function(p1)
 	if not NoPlatformBodyHeight then
 		config.AutomaticSize = Enum.AutomaticSize.Y
 	end
-	local Element = ReactModule.createElement("Frame", config, {
+	local Frame1 = ReactModule.createElement("Frame", config, {
 		UIListLayout = ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Vertical,
@@ -105,7 +105,7 @@ return ReactModule.memo(function(p1)
 	})
 	
 	if FFlagPlayerListLocalizeGameTextModule then
-		Element = ReactModule.createElement(LocalizationProvider, { localization = UseMemoResult }, { Column = Element })
+		Frame1 = ReactModule.createElement(LocalizationProvider, { localization = UseMemoResult }, { Column = Frame1 })
 	end
-	return ReactModule.createElement(FoundationProvider, { theme = Theme.Dark }, { Column = Element })
+	return ReactModule.createElement(FoundationProvider, { theme = Theme.Dark }, { Column = Frame1 })
 end)

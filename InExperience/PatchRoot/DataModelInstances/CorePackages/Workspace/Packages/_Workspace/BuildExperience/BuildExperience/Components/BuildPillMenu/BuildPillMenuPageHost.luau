@@ -16,8 +16,6 @@ local View = FoundationModule.View
 local OverlayProvider = FoundationModule.OverlayProvider
 local UseOverlayFunction = FoundationModule.Hooks.useOverlay
 local BuildOverflowMenuScreensModule = require(script.Parent.BuildOverflowMenuScreens)
-local FFlagBuildExperiencePageImpressionsModule = require(BuildExperience.Flags.FFlagBuildExperiencePageImpressions)
-local UseBuildPageImpressionModule = require(BuildExperience.Telemetry.useBuildPageImpression)
 local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPicker)
 local PrivateInvitesPickerContainerModule = require(BuildExperience.Components.PrivateInvitesPicker.PrivateInvitesPickerContainer)
 local PrivateInvitesManagementContainerModule = require(BuildExperience.Components.GameConfigurations.PrivateInvitesManagement.PrivateInvitesManagementContainer)
@@ -187,12 +185,9 @@ local List = {
 	{
 		BuildPillMenuCreatorCredit = {
 			screen = function(p3)
-				-- upvalues: FFlagBuildExperiencePageImpressionsModule (copy), UseBuildPageImpressionModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), CreatorCreditPageContainerModule (copy), OverflowMenuPageShellModule (copy), CreatorCreditBalanceChipContainerModule (copy)
+				-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), CreatorCreditPageContainerModule (copy), OverflowMenuPageShellModule (copy), CreatorCreditBalanceChipContainerModule (copy)
 				local ScreenProps = p3.screenProps
 				
-				if FFlagBuildExperiencePageImpressionsModule then
-					UseBuildPageImpressionModule("creator-credit-ai-usage", ScreenProps.target)
-				end
 				return ReactModule.createElement(OverflowMenuPageShellModule, {
 					scrollPerformanceIntervalName = "LuaApp_Build_CreatorCredit_Scroll",
 					testId = "BuildPillMenu.CreatorCreditPage",
@@ -250,7 +245,7 @@ local _ = function(p3)
 end
 
 return ReactModule.memo(function(p3)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseOverlayFunction (copy), ReactModule (copy), config (copy), BuildOverflowMenuScreensModule (copy), FFlagBuildExperienceModelPickerModule (copy), SignalsReactModule (copy), LocalUserIdStore (copy), CreatorAgentChatModule (copy), UseSessionSummaryModule (copy), PrivateInvitesPickerContainerModule (copy), View (copy), OverflowMenuPageShellModule (copy), PrivateInvitesManagementContainerModule (copy), AppContainer (copy), ReactRobloxModule (copy), BuildExperienceCompositionStyleSheetModule (copy), OverlayProvider (copy), FFlagBuildExperiencePageImpressionsModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseOverlayFunction (copy), ReactModule (copy), config (copy), BuildOverflowMenuScreensModule (copy), FFlagBuildExperienceModelPickerModule (copy), SignalsReactModule (copy), LocalUserIdStore (copy), CreatorAgentChatModule (copy), UseSessionSummaryModule (copy), PrivateInvitesPickerContainerModule (copy), View (copy), OverflowMenuPageShellModule (copy), PrivateInvitesManagementContainerModule (copy), AppContainer (copy), ReactRobloxModule (copy), BuildExperienceCompositionStyleSheetModule (copy), OverlayProvider (copy)
 	local PrivateInvitesPageTitle = UseLocalizationFunction({
 		privateInvitesPageTitle = LocalizationStringsModule.PRIVATE_INVITES_PAGE_TITLE
 	}).privateInvitesPageTitle
@@ -335,7 +330,7 @@ return ReactModule.memo(function(p3)
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 		}, {
 			CompositionStyleSheet = ReactModule.createElement(BuildExperienceCompositionStyleSheetModule),
-			Page = if UseStateResult == nil then if FFlagBuildExperiencePageImpressionsModule or p3.activePage.type == "invitePicker" then nil else Element else ReactModule.createElement(OverlayProvider, { gui = UseStateResult }, { Page = Element })
+			Page = if UseStateResult == nil then if p3.activePage.type == "invitePicker" then nil else Element else ReactModule.createElement(OverlayProvider, { gui = UseStateResult }, { Page = Element })
 		}), UseOverlayResult2)
 	end
 end)

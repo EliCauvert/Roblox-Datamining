@@ -8,7 +8,6 @@ local UseUidRefStringFunction = require(Parent.SduiCoreSystem).useUidRefString
 local _ = require(Parent.SduiCompat)
 local FoundationModule = require(Parent.Foundation)
 local FFlagLuaAppSduiGameTileFeedback = require(Parent.SharedFlags).FFlagLuaAppSduiGameTileFeedback
-local FFlagSduiOverflowMenuHideWhenEmpty = require(Parent.SharedFlags).FFlagSduiOverflowMenuHideWhenEmpty
 
 local function addMenuItemTelemetry(List)
 	local List1 = {}
@@ -39,7 +38,7 @@ local function addMenuItemTelemetry(List)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseUidRefStringFunction (copy), FFlagLuaAppSduiGameTileFeedback (copy), ReactModule (copy), addMenuItemTelemetry (copy), GetOverflowMenuSignalStoreFunction (copy), UseBackButtonBindingFunction (copy), FFlagSduiOverflowMenuHideWhenEmpty (copy), FoundationModule (copy), OverflowMenu (copy)
+	-- upvalues: UseUidRefStringFunction (copy), FFlagLuaAppSduiGameTileFeedback (copy), ReactModule (copy), addMenuItemTelemetry (copy), GetOverflowMenuSignalStoreFunction (copy), UseBackButtonBindingFunction (copy), FoundationModule (copy), OverflowMenu (copy)
 	local UseUidRefStringResult = UseUidRefStringFunction()
 	local MenuKey = if FFlagLuaAppSduiGameTileFeedback and p1.menuKey then p1.menuKey else `sdui-overflow-menu-{UseUidRefStringResult.current}`
 	local AnchorPoint = p1.anchorPoint or Vector2.new(0, 0)
@@ -73,34 +72,30 @@ return ReactModule.memo(function(p1)
 		end
 		UseMemoResult1 = List
 	end
-	if FFlagSduiOverflowMenuHideWhenEmpty and #UseMemoResult1 == 0 then
-		return nil
-	else
-		local HasLayoutOrder = p1.layoutOrder ~= nil
-		local config = {
-			anchorPoint = if HasLayoutOrder then nil else AnchorPoint,
-			anchorPosition = if HasLayoutOrder then nil else Position,
-			menuItems = UseMemoResult1,
-			menuKey = MenuKey,
-			buttonVariant = p1.buttonVariant,
-			buttonIconSize = p1.buttonSize,
-			buttonIcon = p1.buttonIcon,
-			buttonIconBackgroundStyle = p1.buttonIconBackgroundStyle,
-			menuItemSize = p1.menuItemSize,
-			popoverAlign = p1.popoverAlign,
-			popoverSide = p1.popoverSide,
-			menuWidth = p1.menuWidth,
-			hasOverflowButton = not FFlagLuaAppSduiGameTileFeedback or NoHasOverflowButton,
-			shouldShowAnchor = not FFlagLuaAppSduiGameTileFeedback or NoShouldShowAnchor,
-			buttonIsCircular = p1.buttonIsCircular,
-			buttonTag = p1.buttonTag,
-			setFocusRef = if FFlagLuaAppSduiGameTileFeedback and p1.setFocusRef then p1.setFocusRef else UseBackButtonBindingResult,
-			onMenuOpenChanged = if FFlagLuaAppSduiGameTileFeedback then p1.onMenuOpenChanged else nil,
-			zIndex = if FFlagLuaAppSduiGameTileFeedback then p1.zIndex else nil
-		}
-		
-		return if HasLayoutOrder then ReactModule.createElement(FoundationModule.View, { tag = "auto-xy", LayoutOrder = p1.layoutOrder }, {
-			OverflowMenu = ReactModule.createElement(OverflowMenu, config)
-		}) else ReactModule.createElement(OverflowMenu, config)
-	end
+	local HasLayoutOrder = p1.layoutOrder ~= nil
+	local config = {
+		anchorPoint = if HasLayoutOrder then nil else AnchorPoint,
+		anchorPosition = if HasLayoutOrder then nil else Position,
+		menuItems = UseMemoResult1,
+		menuKey = MenuKey,
+		buttonVariant = p1.buttonVariant,
+		buttonIconSize = p1.buttonSize,
+		buttonIcon = p1.buttonIcon,
+		buttonIconBackgroundStyle = p1.buttonIconBackgroundStyle,
+		menuItemSize = p1.menuItemSize,
+		popoverAlign = p1.popoverAlign,
+		popoverSide = p1.popoverSide,
+		menuWidth = p1.menuWidth,
+		hasOverflowButton = not FFlagLuaAppSduiGameTileFeedback or NoHasOverflowButton,
+		shouldShowAnchor = not FFlagLuaAppSduiGameTileFeedback or NoShouldShowAnchor,
+		buttonIsCircular = p1.buttonIsCircular,
+		buttonTag = p1.buttonTag,
+		setFocusRef = if FFlagLuaAppSduiGameTileFeedback and p1.setFocusRef then p1.setFocusRef else UseBackButtonBindingResult,
+		onMenuOpenChanged = if FFlagLuaAppSduiGameTileFeedback then p1.onMenuOpenChanged else nil,
+		zIndex = if FFlagLuaAppSduiGameTileFeedback then p1.zIndex else nil
+	}
+	
+	return if HasLayoutOrder then ReactModule.createElement(FoundationModule.View, { tag = "auto-xy", LayoutOrder = p1.layoutOrder }, {
+		OverflowMenu = ReactModule.createElement(OverflowMenu, config)
+	}) else ReactModule.createElement(OverflowMenu, config)
 end)

@@ -22,6 +22,7 @@ local FFlagSduiAlwaysCacheWithIdentifier = require(Parent.SharedFlags).FFlagSdui
 local FFlagEnableSduiV2HomepagePrompts = require(Parent.SharedFlags).FFlagEnableSduiV2HomepagePrompts
 local FFlagEnableHomepagePromptsForModalsAndBanners = require(Parent.SharedFlags).FFlagEnableHomepagePromptsForModalsAndBanners
 local FFlagPromptsHandlerEnabled = require(Parent.SharedFlags).FFlagPromptsHandlerEnabled
+local FFlagLuaAppSduiStreamingChunkedResponses = require(Parent.SharedFlags).FFlagLuaAppSduiStreamingChunkedResponses
 local FFlagLuaAppEnableSduiHomePage = require(Parent.SharedFlags).FFlagLuaAppEnableSduiHomePage
 local FFlagSduiStreamingRefreshReplacesInputData = require(Parent.SharedFlags).FFlagSduiStreamingRefreshReplacesInputData
 local FFlagSduiUseHttpClientModule = require(SduiSharedUtilities.Flags.FFlagSduiUseHttpClient)
@@ -56,7 +57,7 @@ local function getLocalizedLiteral(p2)
 end
 
 return function(p2)
-	-- upvalues: FFlagSduiAllowNoConfigsBuilt (copy), FFlagLuaAppEnableSduiHomePage (copy), FFlagSduiStreamingRefreshReplacesInputData (copy), FFlagSduiUseHttpClientModule (copy), SduiRequestStatus (copy), SduiLogger (copy), SduiErrors (copy), GetSduiDataBinderFunction (copy), FFlagSduiErrorPaths (copy), GetSduiTemplateStoreModule (copy), RecordTemplateUsage (copy), SduiUsageRecorder (copy), SduiProtobufResponseHelpersModule (copy), FFlagSduiSharedLocalizedLiterals (copy), AddSduiErrorContextFieldsFunction (copy), FFlagSduiAlwaysCacheWithIdentifier (copy), SduiInputDataMergeModule (copy), FFlagSduiFreshInputDataSignalOnRebuild (copy), SignalsModule (copy), CreateBuilderConfigFunction (copy), getLocalizedLiteral (copy), GetSduiClientBindingBuilderFunction (copy), FFlagLuaAppSduiHomePageSupport (copy), FFlagEnableSduiV2HomepagePrompts (copy), FFlagPromptsHandlerEnabled (copy), FFlagEnableHomepagePromptsForModalsAndBanners (copy), CryoModule (copy), ProcessClientHintsModule (copy)
+	-- upvalues: FFlagSduiAllowNoConfigsBuilt (copy), FFlagLuaAppEnableSduiHomePage (copy), FFlagSduiStreamingRefreshReplacesInputData (copy), FFlagSduiUseHttpClientModule (copy), SduiRequestStatus (copy), SduiLogger (copy), SduiErrors (copy), GetSduiDataBinderFunction (copy), FFlagSduiErrorPaths (copy), GetSduiTemplateStoreModule (copy), RecordTemplateUsage (copy), SduiUsageRecorder (copy), SduiProtobufResponseHelpersModule (copy), FFlagSduiSharedLocalizedLiterals (copy), AddSduiErrorContextFieldsFunction (copy), FFlagSduiAlwaysCacheWithIdentifier (copy), FFlagLuaAppSduiStreamingChunkedResponses (copy), SduiInputDataMergeModule (copy), FFlagSduiFreshInputDataSignalOnRebuild (copy), SignalsModule (copy), CreateBuilderConfigFunction (copy), getLocalizedLiteral (copy), GetSduiClientBindingBuilderFunction (copy), FFlagLuaAppSduiHomePageSupport (copy), FFlagEnableSduiV2HomepagePrompts (copy), FFlagPromptsHandlerEnabled (copy), FFlagEnableHomepagePromptsForModalsAndBanners (copy), CryoModule (copy), ProcessClientHintsModule (copy)
 	local Response = p2.response
 	local DecodeResponseFunction = p2.decodeResponse
 	local ParsePageEntriesFromResponseFunction = p2.parsePageEntriesFromResponse
@@ -196,7 +197,7 @@ return function(p2)
 		local ComponentInputData = value.componentInputData
 		local InputDataSignalsForRequest = GetInputDataSignalsForRequestFunction(Text)
 		local GetResult = InputDataSignalsForRequest.get(false)
-		local EnableStreamingMerge = p2.enableStreamingMerge
+		local EnableStreamingMerge = FFlagLuaAppSduiStreamingChunkedResponses and p2.enableStreamingMerge
 		
 		if (PaginateResponse or (if FFlagLuaAppEnableSduiHomePage or FFlagSduiStreamingRefreshReplacesInputData then EnableInputDataMerge else EnableStreamingMerge)) and GetResult then
 			if ComponentInputData then
@@ -230,7 +231,7 @@ return function(p2)
 					end
 					continue
 				end
-				local Success4, Result4 = pcall(function()
+				local Success3, Result3 = pcall(function()
 					-- upvalues: CreateBuilderConfigFunction (upval), SurfaceKey (copy), ConfigCacheKey (copy), EnableTemplateCache (copy), resolveTemplateForRobloxComponent (copy), t (ref), FFlagSduiErrorPaths (upval), getTemplateIdForRCT (copy), FFlagSduiSharedLocalizedLiterals (upval), ParseLocalizedLiteralsFromResponseResult (copy), getLocalizedLiteral (upval), GetSduiClientBindingBuilderFunction (upval), ResolveTemplateForRobloxComponentResult (copy), FFlagLuaAppSduiHomePageSupport (upval), value (copy), InputDataSignalsForRequest (ref), RobloxComponentType (copy), Identifier (copy)
 					return (GetSduiClientBindingBuilderFunction().buildConfigForComponent(ResolveTemplateForRobloxComponentResult, if FFlagLuaAppSduiHomePageSupport and value.componentInputDataGetter then value.componentInputDataGetter else InputDataSignalsForRequest.get, CreateBuilderConfigFunction({
 						appPage = SurfaceKey,
@@ -246,7 +247,7 @@ return function(p2)
 					}), nil, nil, nil, nil, if FFlagSduiErrorPaths then RobloxComponentType else nil, if FFlagSduiErrorPaths then Identifier else nil))
 				end)
 				
-				if Success4 then
+				if Success3 then
 					if FFlagSduiFreshInputDataSignalOnRebuild and SetInputDataSignalsForRequestFunction then
 						if v2 == nil then
 							v2 = {}
@@ -260,12 +261,12 @@ return function(p2)
 						}
 						
 						if FFlagSduiErrorPaths then
-							AddSduiErrorContextFieldsFunction(config1, Result4 and Result4.errorContext)
+							AddSduiErrorContextFieldsFunction(config1, Result3 and Result3.errorContext)
 						end
 						SduiLogger.reportError(SduiErrors.SduiErrorType.DuplicateOrMissingIdentifier, config1, SurfaceKey)
 					end
 					t1[Text] = {
-						config = Result4,
+						config = Result3,
 						dataUpdatedTimestamp = os.clock(),
 						identifier = if FFlagEnableSduiV2HomepagePrompts or FFlagPromptsHandlerEnabled then Identifier else nil,
 						robloxComponentType = if FFlagEnableSduiV2HomepagePrompts or FFlagPromptsHandlerEnabled then RobloxComponentType else nil,
@@ -273,7 +274,7 @@ return function(p2)
 						surfacing = value.surfacing
 					}
 				else
-					local config = { name = RobloxComponentType, message = `{Result4}` }
+					local config = { name = RobloxComponentType, message = `{Result3}` }
 					
 					if FFlagSduiErrorPaths then
 						AddSduiErrorContextFieldsFunction(config, (createErrorContextForRCT(RobloxComponentType, value)))
@@ -318,7 +319,7 @@ return function(p2)
 			t1[Text].nextPagePostBody = if NextPagePostBody then NextPagePostBody else CryoModule.None
 		end
 	end
-	if FFlagSduiFreshInputDataSignalOnRebuild and (SetInputDataSignalsForRequestFunction and v2) then
+	if FFlagSduiFreshInputDataSignalOnRebuild and SetInputDataSignalsForRequestFunction and v2 then
 		for i, value1 in v2 do
 			SetInputDataSignalsForRequestFunction(ConfigCacheKey, i, value1)
 		end
@@ -358,7 +359,7 @@ return function(p2)
 	end
 	
 	LoadTimer.logSduiClientHintsBegin()
-	local Success3, Result3 = pcall(function()
+	local Success4, Result4 = pcall(function()
 		-- upvalues: ProcessClientHintsModule (upval), ParsePageEntriesFromResponseResult (copy), getTemplateForRobloxComponent (copy), getKnownTemplates (copy)
 		ProcessClientHintsModule({
 			pageEntries = ParsePageEntriesFromResponseResult,
@@ -368,8 +369,8 @@ return function(p2)
 	end)
 	LoadTimer.logSduiClientHintsEnd()
 	
-	if not Success3 then
-		SduiLogger.reportError(SduiErrors.SduiErrorType.FailedToProcessClientHints, { name = ConfigCacheKey, message = Result3 }, SurfaceKey)
+	if not Success4 then
+		SduiLogger.reportError(SduiErrors.SduiErrorType.FailedToProcessClientHints, { name = ConfigCacheKey, message = Result4 }, SurfaceKey)
 	end
 	return t1, Result
 end

@@ -25,9 +25,6 @@ return {
 		if p2 <= 0 or p3 <= 0 then
 			return p1
 		end
-		if Amount <= p1.offset then
-			return p1
-		end
 		local NewOffset = p1.offset + p2 * p3
 		local LoopsCompleted = p1.loopsCompleted
 		while Amount <= NewOffset and LoopsCompleted < p4 do

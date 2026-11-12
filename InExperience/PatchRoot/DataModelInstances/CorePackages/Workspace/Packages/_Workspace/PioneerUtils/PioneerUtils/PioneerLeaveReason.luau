@@ -1,1 +1,1 @@
-﻿return { AccountUnder13 = "AccountUnder13", Logout = "Logout" }
+﻿return { AccountUnder13 = "AccountUnder13" }

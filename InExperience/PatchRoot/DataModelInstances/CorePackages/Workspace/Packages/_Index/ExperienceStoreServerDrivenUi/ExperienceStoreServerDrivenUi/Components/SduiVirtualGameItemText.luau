@@ -49,7 +49,7 @@ return ReactModule.memo(function(p1)
 	local BasePriceRobuxIconStyle = p1.basePriceRobuxIconStyle
 	local Muted = UseTokensResult.Color.Content.Muted
 	local Muted1 = if BasePriceRobuxIconStyle == nil then Muted else BasePriceRobuxIconStyle
-	local CreateElementFunction = ReactModule.createElement
+	local CreateElementFunction2 = ReactModule.createElement
 	local Tag = p1.tag
 	local config1 = {
 		LayoutOrder = p1.layoutOrder,
@@ -78,7 +78,7 @@ return ReactModule.memo(function(p1)
 	local PriceRow = nil
 	
 	if IsNotPriceTextMatch1 then
-		local CreateElementFunction2 = ReactModule.createElement
+		local CreateElementFunction1 = ReactModule.createElement
 		local PriceRowTag = p1.priceRowTag
 		local config2 = {
 			LayoutOrder = 2,
@@ -156,7 +156,7 @@ return ReactModule.memo(function(p1)
 		local OwnedCount = nil
 		
 		if IsNotPendingReceiptsCountTextMatch then
-			local CreateElementFunction1 = ReactModule.createElement
+			local CreateElementFunction = ReactModule.createElement
 			local OwnedCountTag = p1.ownedCountTag
 			local config4 = {
 				LayoutOrder = 3,
@@ -198,16 +198,16 @@ return ReactModule.memo(function(p1)
 					testId = if p1.testId then `{p1.testId}--owned-count-label` else nil
 				})
 			}))
-			OwnedCount = CreateElementFunction1(View, config4, t2)
+			OwnedCount = CreateElementFunction(View, config4, t2)
 		else
 			OwnedCount = nil
 		end
 		t1.OwnedCount = OwnedCount
-		PriceRow = CreateElementFunction2(View, config2, t1)
+		PriceRow = CreateElementFunction1(View, config2, t1)
 	else
 		PriceRow = nil
 	end
 	t.PriceRow = PriceRow
 	
-	return CreateElementFunction(View, config1, t)
+	return CreateElementFunction2(View, config1, t)
 end)

@@ -14,8 +14,6 @@ local FFlagLuaAppVideoPlayerTrimAndMusic = require(Parent.SharedFlags).FFlagLuaA
 local ResponsiveModule = require(Parent.Responsive)
 local UseBreakpointXOrSmallerFunction = ResponsiveModule.useBreakpointXOrSmaller
 local UseLastInputFunction = ResponsiveModule.useLastInput
-local FFlagLuaAppMediaGalleryHideScrollArrowsOnTouch = require(Parent.SharedFlags).FFlagLuaAppMediaGalleryHideScrollArrowsOnTouch
-local FFlagLuaAppMediaGalleryPageIndicatorOpacity = require(Parent.SharedFlags).FFlagLuaAppMediaGalleryPageIndicatorOpacity
 local UseGamepadSupportsFunction = require(Parent.RoactUtils).Hooks.useGamepadSupports
 local LuaAppMediaGalleryGamepadSupportsPagingIcons = game:DefineFastFlag("LuaAppMediaGalleryGamepadSupportsPagingIcons", false)
 local List = if FFlagLuaAppMediaGalleryGamepadSupport then { Enum.KeyCode.ButtonL2, Enum.KeyCode.ButtonR2 } else { Enum.KeyCode.ButtonL1, Enum.KeyCode.ButtonR1 }
@@ -55,7 +53,7 @@ local function getVisibleIndices(CountItems, CurrentIndex: number)
 end
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: UseTokensFunction (copy), MediaGalleryConstantsModule (copy), ReactModule (copy), IsValidIdentifierModule (copy), IsYouTubeVideoModule (copy), IsAudioPlaybackAllowedForDeviceModule (copy), EnableAudioPlaybackInApp (copy), UseSnapScrollModule (copy), getVisibleIndices (copy), Signal (copy), VideoPlaybackCoordinator (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), UseAutoAdvanceModule (copy), FFlagLuaAppVideoLoadFailureFallback (copy), UseBreakpointXOrSmallerFunction (copy), ResponsiveModule (copy), UseLastInputFunction (copy), AppCommonLibModule (copy), LuaAppMediaGalleryGamepadSupportsPagingIcons (copy), UseGamepadSupportsFunction (copy), List (copy), FFlagLuaAppMediaGalleryHideScrollArrowsOnTouch (copy), list (copy), UseCursorFunction (copy), CursorType (copy), UseCarouselGamepadInputModule (copy), UseTouchDragScrollModule (copy), FFlagLuaAppEdpMomentVideo (copy), FFlagLuaAppVideoPlayerTrimAndMusic (copy), MediaGalleryVideoItemModule (copy), MediaGalleryImageItemModule (copy), UserInputService (copy), MediaGalleryPageIndicatorsModule (copy), FFlagLuaAppMediaGalleryPageIndicatorOpacity (copy), CarouselScrollButtons (copy), RoundIconButton (copy)
+	-- upvalues: UseTokensFunction (copy), MediaGalleryConstantsModule (copy), ReactModule (copy), IsValidIdentifierModule (copy), IsYouTubeVideoModule (copy), IsAudioPlaybackAllowedForDeviceModule (copy), EnableAudioPlaybackInApp (copy), UseSnapScrollModule (copy), getVisibleIndices (copy), Signal (copy), VideoPlaybackCoordinator (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), UseAutoAdvanceModule (copy), FFlagLuaAppVideoLoadFailureFallback (copy), UseBreakpointXOrSmallerFunction (copy), ResponsiveModule (copy), UseLastInputFunction (copy), AppCommonLibModule (copy), LuaAppMediaGalleryGamepadSupportsPagingIcons (copy), UseGamepadSupportsFunction (copy), List (copy), list (copy), UseCursorFunction (copy), CursorType (copy), UseCarouselGamepadInputModule (copy), UseTouchDragScrollModule (copy), FFlagLuaAppEdpMomentVideo (copy), FFlagLuaAppVideoPlayerTrimAndMusic (copy), MediaGalleryVideoItemModule (copy), MediaGalleryImageItemModule (copy), UserInputService (copy), MediaGalleryPageIndicatorsModule (copy), CarouselScrollButtons (copy), RoundIconButton (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ItemPadding = Frame.itemPadding or UseTokensResult.Padding.Medium
 	local AspectRatio = Frame.aspectRatio or MediaGalleryConstantsModule.ITEM_ASPECT_RATIO
@@ -189,7 +187,7 @@ return ReactModule.memo(function(Frame)
 	local IsPointerMatch = Pointer == ResponsiveModule.Input.Directional
 	local UseGamepadSupportsResult = if LuaAppMediaGalleryGamepadSupportsPagingIcons then UseGamepadSupportsFunction(List, Pointer) else false
 	local UseGamepadSupportsResult1 = if LuaAppMediaGalleryGamepadSupportsPagingIcons then IsPointerMatch and UseGamepadSupportsResult else IsPointerMatch
-	local IsPointerMatch1: boolean = if FFlagLuaAppMediaGalleryHideScrollArrowsOnTouch then Pointer == ResponsiveModule.Input.Pointer or (Pointer == ResponsiveModule.Input.Touch and Frame.isFullscreen == true or LuaAppMediaGalleryGamepadSupportsPagingIcons and (IsPointerMatch and not UseGamepadSupportsResult)) else Pointer == ResponsiveModule.Input.Pointer or LuaAppMediaGalleryGamepadSupportsPagingIcons and not UseGamepadSupportsResult
+	local IsPointerMatch1: boolean = Pointer == ResponsiveModule.Input.Pointer or LuaAppMediaGalleryGamepadSupportsPagingIcons and not UseGamepadSupportsResult
 	local v3 = false
 	
 	if FFlagLuaAppMediaGalleryGamepadSupport then
@@ -222,7 +220,7 @@ return ReactModule.memo(function(Frame)
 		scrollLeft = UseResult5,
 		scrollRight = UseResult6
 	})
-	UseTouchDragScrollModule(UseSnapScrollModuleResult.scrollingFrameRef, if FFlagLuaAppMediaGalleryHideScrollArrowsOnTouch then UseResult2 else UseSnapScrollModuleResult.scrollInDirection)
+	UseTouchDragScrollModule(UseSnapScrollModuleResult.scrollingFrameRef, UseSnapScrollModuleResult.scrollInDirection)
 	local config = {
 		Layout = ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
@@ -377,7 +375,7 @@ return ReactModule.memo(function(Frame)
 					useSpring = true,
 					numberOfItems = CountItems,
 					startIndex = Frame.startIndex or 1,
-					currentItemProgressBinding = if FFlagLuaAppMediaGalleryPageIndicatorOpacity and Frame.autoAdvanceEnabled == false and not UseStateResult1 then nil else UseAutoAdvanceModuleResult.progressBinding,
+					currentItemProgressBinding = UseAutoAdvanceModuleResult.progressBinding,
 					mediaGalleryScrolledSignal = UseSnapScrollModuleResult.scrolledSignal,
 					springConfig = MediaGalleryConstantsModule.SPRING_CONFIG
 				}),

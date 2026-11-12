@@ -1123,7 +1123,7 @@ local function ConstructKeyboardUI(List)
 		end
 	end)
 	
-	for _, value1 in pairs(List) do
+	for _, value in pairs(List) do
 		local Keys = {}
 		local Container = CreateFunction("Frame")({
 			Name = "KeyboardSizeConstrainer",
@@ -1136,7 +1136,7 @@ local function ConstructKeyboardUI(List)
 		local Largest1 = 0
 		local NewY = 0
 		
-		for _, value in pairs(value1) do
+		for _, value1 in pairs(value) do
 			local NewX = 0
 			local W = 1
 			local H = 1
@@ -1145,7 +1145,7 @@ local function ConstructKeyboardUI(List)
 			local X2 = nil
 			local Y2 = nil
 			
-			for _, Text in pairs(value) do
+			for _, Text in pairs(value1) do
 				if type(Text) ~= "table" then
 					if type(Text) == "string" then
 						if Text == "" then

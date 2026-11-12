@@ -27,6 +27,7 @@ local FFlagExpChatEnableV2ChatWindowModule = require(ExpChat.Flags.FFlagExpChatE
 local FFlagExpChatPresetChatEnabled = ExpChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
 local FFlagExpChatTopBannerForPresetChatAccessModule = require(ExpChat.Flags.FFlagExpChatTopBannerForPresetChatAccess)
 local UseIsARButtonVisibleModule = require(ExpChat.useIsARButtonVisible)
+local FFlagExpChatEnableFriendsTab = require(Parent.SharedFlags).FFlagExpChatEnableFriendsTab
 local ExpChatPerfTracker = require(Parent.ChatUIPrimitives).Telemetry.ExpChatPerfTracker
 local FFlagExpChatPerfTrackerTabName = require(Parent.ChatUIPrimitives).Flags.FFlagExpChatPerfTrackerTabName
 local FFlagExpChatRewriteInlineModule = require(ExpChat.Flags.FFlagExpChatRewriteInline)
@@ -45,7 +46,7 @@ local config = {
 }
 
 return (ReactModule.memo(function(p1)
-	-- upvalues: Dictionary (copy), config (copy), UseInterpolatedClientSettingsModule (copy), FFlagExpChatPresetChatEnabled (copy), FFlagExpChatTopBannerForPresetChatAccessModule (copy), UseIsARButtonVisibleModule (copy), GetChatStatusStoreModule (copy), SignalsReactModule (copy), ShowChatEnabledUIModule (copy), FFlagExpChatUseUnifiedTooltipStore (copy), GetChatTooltipStoreModule (copy), GetGlobalChatTooltipStoreModule (copy), ReactModule (copy), GetFFlagMemoizeChatReportingMenuFunction (copy), FFlagExpChatEnableV2ChatWindowModule (copy), GetMessagesStoreModule (copy), List (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), GetFFlagEnableChatLineReportingFunction (copy), UseUserExperimentFunction (copy), FStringReportingIXPLayer (copy), GetFFlagChatWindowUseCallbackOptimizationsModule (copy), FFlagExpChatPerfTrackerTabName (copy), ExpChatPerfTracker (copy), FFlagExpChatRewriteInlineModule (copy), FFlagExpChatRenderHistoricalMessagesModule (copy), ConfigModule (copy), IsChatRegionLockedModule (copy), TopBannerModule (copy), ScrollingViewModule (copy), TextChatService (copy), GlobalChatTooltipModule (copy)
+	-- upvalues: Dictionary (copy), config (copy), UseInterpolatedClientSettingsModule (copy), FFlagExpChatPresetChatEnabled (copy), FFlagExpChatTopBannerForPresetChatAccessModule (copy), UseIsARButtonVisibleModule (copy), GetChatStatusStoreModule (copy), SignalsReactModule (copy), ShowChatEnabledUIModule (copy), FFlagExpChatUseUnifiedTooltipStore (copy), GetChatTooltipStoreModule (copy), GetGlobalChatTooltipStoreModule (copy), ReactModule (copy), GetFFlagMemoizeChatReportingMenuFunction (copy), FFlagExpChatEnableV2ChatWindowModule (copy), GetMessagesStoreModule (copy), List (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), GetFFlagEnableChatLineReportingFunction (copy), UseUserExperimentFunction (copy), FStringReportingIXPLayer (copy), GetFFlagChatWindowUseCallbackOptimizationsModule (copy), FFlagExpChatPerfTrackerTabName (copy), ExpChatPerfTracker (copy), FFlagExpChatRewriteInlineModule (copy), FFlagExpChatRenderHistoricalMessagesModule (copy), ConfigModule (copy), FFlagExpChatEnableFriendsTab (copy), IsChatRegionLockedModule (copy), TopBannerModule (copy), ScrollingViewModule (copy), TextChatService (copy), GlobalChatTooltipModule (copy)
 	local JoinResult = Dictionary.join(config, p1)
 	local ChatWindowSettings = JoinResult.chatWindowSettings
 	local BackgroundTransparency = UseInterpolatedClientSettingsModule(ChatWindowSettings).BackgroundTransparency
@@ -173,6 +174,7 @@ return (ReactModule.memo(function(p1)
 		historicalMessageCountSignal = if FFlagExpChatRenderHistoricalMessagesModule then GetMessagesStoreModule(false).getHistoricalWindowMessageCount else nil
 	} else {}
 	Config1.messageComponentsSignal = JoinResult.messageComponentsSignal
+	local DisableLineReporting = FFlagExpChatEnableFriendsTab and JoinResult.disableLineReporting
 	
 	return ReactModule.createElement("Frame", {
 		BackgroundColor3 = BackgroundColor3,
@@ -180,7 +182,7 @@ return (ReactModule.memo(function(p1)
 		LayoutOrder = JoinResult.LayoutOrder,
 		Size = JoinResult.size,
 		Visible = JoinResult.visible,
-		BackgroundTransparency = if JoinResult.suppressBackground then 1 else UseResult1(BackgroundTransparency, JoinResult.transparencyValue),
+		BackgroundTransparency = if FFlagExpChatEnableFriendsTab and JoinResult.suppressBackground then 1 else UseResult1(BackgroundTransparency, JoinResult.transparencyValue),
 		[ReactModule.Change.AbsoluteSize] = if GetFFlagChatWindowUseCallbackOptimizationsModule() then ReactModule.useCallback(function(p2)
 			-- upvalues: TextChatService (upval), JoinResult (copy)
 			local ChatWindowConfiguration = TextChatService:FindFirstChildOfClass("ChatWindowConfiguration")
@@ -229,7 +231,7 @@ return (ReactModule.memo(function(p1)
 				return p2 < ConfigModule.ChatWindowMessageHideRootFadeThreshold
 			end)
 		}, {
-			TopBanner = if JoinResult.disableLineReporting or IsChatRegionLockedModule() or not ShowChatEnabledUIModuleResult or not UseUserExperimentResult then nil else ReactModule.createElement(TopBannerModule, {
+			TopBanner = if DisableLineReporting or IsChatRegionLockedModule() or not ShowChatEnabledUIModuleResult or not UseUserExperimentResult then nil else ReactModule.createElement(TopBannerModule, {
 				backgroundColor3 = BackgroundColor3,
 				backgroundTransparency = BackgroundTransparency,
 				iconTransparency = if GetFFlagMemoizeChatReportingMenuFunction() then JoinResult.transparencyValue else UseResult1(BackgroundTransparency, JoinResult.transparencyValue),
@@ -242,9 +244,9 @@ return (ReactModule.memo(function(p1)
 				size = JoinResult.size,
 				isChannelBarVisible = JoinResult.isChannelBarVisible,
 				scrollResetKey = JoinResult.scrollResetKey,
-				scrollToTopOnReset = JoinResult.scrollToTopOnReset,
-				onCanvasPositionChanged = JoinResult.onCanvasPositionChanged,
-				contentTopPadding = JoinResult.contentTopPadding
+				scrollToTopOnReset = if FFlagExpChatEnableFriendsTab then JoinResult.scrollToTopOnReset else nil,
+				onCanvasPositionChanged = if FFlagExpChatEnableFriendsTab then JoinResult.onCanvasPositionChanged else nil,
+				contentTopPadding = if FFlagExpChatEnableFriendsTab then JoinResult.contentTopPadding else nil
 			}, Config1))
 		}),
 		GlobalChatTooltip = if UseSignalStateResult1 then ReactModule.createElement(GlobalChatTooltipModule, {

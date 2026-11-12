@@ -47,28 +47,28 @@ local function _(Value, Callback)
 end
 
 for _, value in List do
-	for i1, value3 in value do
-		assert(t[i1] == nil, "Duplicate ProfileAction key: " .. tostring(i1))
+	for i, value2 in value do
+		assert(t[i] == nil, "Duplicate ProfileAction key: " .. tostring(i))
 		
-		t[i1] = function(p1)
-			-- upvalues: value3 (copy), i1 (copy), SupportedProfileTypesModule (copy)
-			local CallbackResult = value3(p1)
+		t[i] = function(p1)
+			-- upvalues: value2 (copy), i (copy), SupportedProfileTypesModule (copy)
+			local CallbackResult = value2(p1)
 			
 			if CallbackResult ~= nil then
-				assert(type(CallbackResult.onActivated) == "table", i1 .. " has onActivated as " .. type(CallbackResult.onActivated) .. ", expected table")
+				assert(type(CallbackResult.onActivated) == "table", i .. " has onActivated as " .. type(CallbackResult.onActivated) .. ", expected table")
 				
 				for i in CallbackResult.onActivated do
 					local SupportedProfileTypesModuleEntry = SupportedProfileTypesModule[i]
-					assert(SupportedProfileTypesModuleEntry and table.find(SupportedProfileTypesModuleEntry, i1), i1 .. " has onActivated for " .. tostring(i) .. " but is missing from SupportedProfileTypes")
+					assert(SupportedProfileTypesModuleEntry and table.find(SupportedProfileTypesModuleEntry, i), i .. " has onActivated for " .. tostring(i) .. " but is missing from SupportedProfileTypes")
 				end
 			end
 			return CallbackResult
 		end
 	end
 end
-for i, value1 in SupportedProfileTypesModule do
-	for _, value2 in value1 do
-		assert(t[value2] ~= nil, value2 .. " is listed in SupportedProfileTypes for " .. tostring(i) .. " but has no matching factory")
+for i1, value3 in SupportedProfileTypesModule do
+	for _, value1 in value3 do
+		assert(t[value1] ~= nil, value1 .. " is listed in SupportedProfileTypes for " .. tostring(i1) .. " but has no matching factory")
 	end
 end
 return t

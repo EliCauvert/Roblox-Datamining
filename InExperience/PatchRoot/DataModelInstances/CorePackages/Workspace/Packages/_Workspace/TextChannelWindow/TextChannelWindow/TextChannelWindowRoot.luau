@@ -16,8 +16,6 @@ local TextChatServiceBridgeModule = require(script.Parent.TextChatServiceBridge)
 local UseWelcomeSystemMessageModule = require(script.Parent.useWelcomeSystemMessage)
 local UseSummarySystemMessageModule = require(script.Parent.useSummarySystemMessage)
 local ThirdPartySummaryEligibilityModule = require(script.Parent.thirdPartySummaryEligibility)
-local ExpChatMessageHistoryExperimentation = require(Parent.SocialExperiments).ExpChatMessageHistoryExperimentation
-local FFlagExpChatTextChannelWindowHistoryReplayModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowHistoryReplay)
 local TextChatService = game:GetService("TextChatService")
 local UseLocalUserChatAvailabilityFunction = ChatAvailabilityContextModule.useLocalUserChatAvailability
 local Signal = SignalsModule.createSignal({})
@@ -126,29 +124,13 @@ local Flag = false
 
 return {
 	start = function()
-		-- upvalues: ChatAvailabilityContextModule (copy), FFlagExpChatTextChannelWindowHistoryReplayModule (copy), CreateChannelMessagesStoreModule (copy), ExpChatMessageHistoryExperimentation (copy), ThirdPartySummaryEligibilityModule (copy), TextChannelWindowAnalyticsModule (copy), t1 (copy), TextChatService (copy), t (copy), TextChannelWindowPerfTracker (copy), ReactModule (copy), TextChannelWindowErrorBoundary (copy), MessageWriterContextModule (copy), TextChannelWindowRoot (copy), MountToTargetInstanceModule (copy), Flag (ref), onScriptError (copy), TextChatServiceBridgeModule (copy)
+		-- upvalues: CreateChannelMessagesStoreModule (copy), ThirdPartySummaryEligibilityModule (copy), TextChannelWindowAnalyticsModule (copy), t1 (copy), TextChatService (copy), t (copy), TextChannelWindowPerfTracker (copy), ReactModule (copy), TextChannelWindowErrorBoundary (copy), MessageWriterContextModule (copy), ChatAvailabilityContextModule (copy), TextChannelWindowRoot (copy), MountToTargetInstanceModule (copy), Flag (ref), onScriptError (copy), TextChatServiceBridgeModule (copy)
 		local Players = game:GetService("Players")
 		local LocalPlayer = Players.LocalPlayer
 		
 		if not LocalPlayer then return end
 		local Text = tostring(LocalPlayer.UserId)
-		
-		local function _()
-			-- upvalues: ChatAvailabilityContextModule (upval), LocalPlayer (copy)
-			return ChatAvailabilityContextModule.resolve(LocalPlayer.ChatAvailabilityStatus).canChat
-		end
-		
-		local ChannelMessagesStoreModule = nil
-		ChannelMessagesStoreModule = if FFlagExpChatTextChannelWindowHistoryReplayModule then CreateChannelMessagesStoreModule({
-			getHistoryArm = function()
-				-- upvalues: ExpChatMessageHistoryExperimentation (upval), ChatAvailabilityContextModule (upval), LocalPlayer (copy)
-				return ExpChatMessageHistoryExperimentation.getHistoryArm(ChatAvailabilityContextModule.resolve(LocalPlayer.ChatAvailabilityStatus).canChat)
-			end,
-			logHistoryExposure = function()
-				-- upvalues: ExpChatMessageHistoryExperimentation (upval), ChatAvailabilityContextModule (upval), LocalPlayer (copy)
-				ExpChatMessageHistoryExperimentation.logExposure(ChatAvailabilityContextModule.resolve(LocalPlayer.ChatAvailabilityStatus).canChat)
-			end
-		}) else CreateChannelMessagesStoreModule()
+		local ChannelMessagesStoreModule = CreateChannelMessagesStoreModule()
 		local NewThirdPartySummaryEligibility = ThirdPartySummaryEligibilityModule.create(Text)
 		
 		local function flushWindowStatus(Mouse)
@@ -181,7 +163,7 @@ return {
 		end
 		
 		local function onAdded(TextChannelWindow)
-			-- upvalues: ChannelMessagesStoreModule (ref), TextChannelWindowAnalyticsModule (upval), ReactModule (upval), TextChannelWindowErrorBoundary (upval), MessageWriterContextModule (upval), ChatAvailabilityContextModule (upval), LocalPlayer (copy), TextChannelWindowRoot (upval), Text (copy), NewThirdPartySummaryEligibility (copy), TextChannelWindowPerfTracker (upval), MountToTargetInstanceModule (upval), t (upval), t1 (upval), flushWindowStatus (copy)
+			-- upvalues: ChannelMessagesStoreModule (copy), TextChannelWindowAnalyticsModule (upval), ReactModule (upval), TextChannelWindowErrorBoundary (upval), MessageWriterContextModule (upval), ChatAvailabilityContextModule (upval), LocalPlayer (copy), TextChannelWindowRoot (upval), Text (copy), NewThirdPartySummaryEligibility (copy), TextChannelWindowPerfTracker (upval), MountToTargetInstanceModule (upval), t (upval), t1 (upval), flushWindowStatus (copy)
 			local Element = ReactModule.createElement(TextChannelWindowErrorBoundary, nil, {
 				inner = ReactModule.createElement(MessageWriterContextModule.Provider, {
 					upsertMessage = function(Target)
@@ -281,30 +263,8 @@ return {
 			game:GetService("ScriptContext").Error:Connect(onScriptError)
 		end
 		local TextChatService1 = game:GetService("TextChatService")
+		TextChatServiceBridgeModule(TextChatService1, Text, ChannelMessagesStoreModule)
 		
-		if FFlagExpChatTextChannelWindowHistoryReplayModule then
-			TextChatServiceBridgeModule(TextChatService1, Text, ChannelMessagesStoreModule, {
-				whenCanChat = function(Callback: () -> ())
-					-- upvalues: ChatAvailabilityContextModule (upval), LocalPlayer (copy)
-					if ChatAvailabilityContextModule.resolve(LocalPlayer.ChatAvailabilityStatus).canChat then
-						Callback()
-						
-						return
-					else
-						local Connection = nil
-						Connection = LocalPlayer:GetPropertyChangedSignal("ChatAvailabilityStatus"):Connect(function()
-							-- upvalues: ChatAvailabilityContextModule (upval), LocalPlayer (upval), Connection (ref), Callback (copy)
-							if ChatAvailabilityContextModule.resolve(LocalPlayer.ChatAvailabilityStatus).canChat then
-								Connection:Disconnect()
-								Callback()
-							end
-						end)
-					end
-				end
-			})
-		else
-			TextChatServiceBridgeModule(TextChatService1, Text, ChannelMessagesStoreModule)
-		end
 		for _, textChannelWindow in TextChatService1:GetTextChannelWindows() do
 			onAdded(textChannelWindow)
 		end

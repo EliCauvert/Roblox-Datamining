@@ -1,1 +1,0 @@
-﻿return { FloatingBanner = "FloatingBanner", Snackbar = "Snackbar" }

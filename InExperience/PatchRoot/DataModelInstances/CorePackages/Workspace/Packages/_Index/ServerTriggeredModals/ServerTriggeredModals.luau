@@ -8,7 +8,6 @@ local FFlagEnableHomepagePromptsForModalsAndBanners = SharedFlagsModule.FFlagEna
 local FFlagPromptsHandlerEnabled = SharedFlagsModule.FFlagPromptsHandlerEnabled
 local FFlagEdpGameLeavePromptsHandlerEnabled = SharedFlagsModule.FFlagEdpGameLeavePromptsHandlerEnabled
 local FFlagEdpOpenPromptsHandlerEnabled = SharedFlagsModule.FFlagEdpOpenPromptsHandlerEnabled
-local FFlagChatPushUpsellPromptsEnabled = SharedFlagsModule.FFlagChatPushUpsellPromptsEnabled
 local FFlagNotificationStreamPromptsHandlerEnabled = SharedFlagsModule.FFlagNotificationStreamPromptsHandlerEnabled
 
 return {
@@ -27,6 +26,5 @@ return {
 	PromptsHandler = if FFlagPromptsHandlerEnabled then PromptsHandlerModule.PromptsHandler else nil,
 	EdpGameLeavePromptsHandler = if FFlagEdpGameLeavePromptsHandlerEnabled then require(script.SduiV2.EdpGameLeavePromptsHandler) else nil,
 	EdpOpenPromptsHandler = if FFlagEdpOpenPromptsHandlerEnabled then require(script.SduiV2.EdpOpenPromptsHandler) else nil,
-	ChatPromptsHandler = if FFlagChatPushUpsellPromptsEnabled then require(script.SduiV2.ChatPromptsHandler) else nil,
 	StreamPromptsHandler = if FFlagNotificationStreamPromptsHandlerEnabled then require(script.SduiV2.StreamPromptsHandler) else nil
 }

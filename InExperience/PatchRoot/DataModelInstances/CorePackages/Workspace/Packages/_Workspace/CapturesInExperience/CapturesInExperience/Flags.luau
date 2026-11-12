@@ -1,3 +1,1 @@
-﻿return {
-	FFlagCapturesControlsGalleryButton = require(script.FFlagCapturesControlsGalleryButton)
-}
+﻿return {}

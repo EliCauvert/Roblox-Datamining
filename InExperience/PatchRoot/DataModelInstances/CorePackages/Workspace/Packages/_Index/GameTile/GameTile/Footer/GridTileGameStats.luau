@@ -1,4 +1,5 @@
-﻿local GameTile = script:FindFirstAncestor("GameTile")
+﻿local TextService = game:GetService("TextService")
+local GameTile = script:FindFirstAncestor("GameTile")
 local Parent = GameTile.Parent
 local ReactModule = require(Parent.React)
 local StyleModule = require(Parent.Style)
@@ -6,6 +7,7 @@ local UseDesignTokensFunction = StyleModule.useDesignTokens
 local FoundationModule = require(Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UIBloxModule = require(Parent.UIBlox)
 local Images = UIBloxModule.App.ImageSet.Images
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
@@ -23,7 +25,7 @@ local IconsStatusGamesPeoplePlayingSmall = Images["icons/status/games/people-pla
 local _Vector2 = Vector2.new(1e999, 1e999)
 
 return function(Frame)
-	-- upvalues: UseDesignTokensFunction (copy), UseTextSizeOffsetFunction (copy), UseTokensFunction (copy), FFlagLuaAppFixSmallScreenFooterStatsOverlap (copy), UseBreakpointXOrSmallerFunction (copy), ResponsiveModule (copy), GameTileTypesModule (copy), FFlagLuaAppMigrateGameTileFooterValueFixes (copy), GetGameTileMetadataFontModule (copy), ReactModule (copy), FFlagLuaAppNarrowTileHideRating (copy), StyleModule (copy), _Vector2 (copy), ImageSetLabel (copy), IconsStatusGamesRatingSmall (copy), NormalizeFontFaceFunction (copy), FFlagLuaAppNarrowTileHidePlayerCount (copy), IconsStatusGamesPeoplePlayingSmall (copy)
+	-- upvalues: UseDesignTokensFunction (copy), UseTextSizeOffsetFunction (copy), UseTokensFunction (copy), FFlagLuaAppFixSmallScreenFooterStatsOverlap (copy), UseBreakpointXOrSmallerFunction (copy), ResponsiveModule (copy), GameTileTypesModule (copy), FFlagLuaAppMigrateGameTileFooterValueFixes (copy), GetGameTileMetadataFontModule (copy), ReactModule (copy), FFlagLuaAppNarrowTileHideRating (copy), FoundationFontFaceMigration (copy), StyleModule (copy), _Vector2 (copy), TextService (copy), ImageSetLabel (copy), IconsStatusGamesRatingSmall (copy), NormalizeFontFaceFunction (copy), FFlagLuaAppNarrowTileHidePlayerCount (copy), IconsStatusGamesPeoplePlayingSmall (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local UseTextSizeOffsetResult: number = UseTextSizeOffsetFunction()
 	local UseTokensResult = UseTokensFunction()
@@ -41,8 +43,8 @@ return function(Frame)
 	local XOffset = FontSize / 1.26
 	local RatingText = Frame.ratingText
 	local UseMemoResult: number = ReactModule.useMemo(function()
-		-- upvalues: FFlagLuaAppNarrowTileHideRating (upval), Frame (copy), RatingText (copy), StyleModule (upval), FontSize (copy), GameTileMetadataFontModuleFont (copy), _Vector2 (upval)
-		return if FFlagLuaAppNarrowTileHideRating and Frame.hideRating or RatingText == nil or RatingText == "" then 0 else StyleModule.GetTextSize(RatingText, FontSize, GameTileMetadataFontModuleFont, _Vector2, { addTemporaryPadding = false }).X
+		-- upvalues: FFlagLuaAppNarrowTileHideRating (upval), Frame (copy), RatingText (copy), FoundationFontFaceMigration (upval), StyleModule (upval), FontSize (copy), GameTileMetadataFontModuleFont (copy), _Vector2 (upval), TextService (upval)
+		return if FFlagLuaAppNarrowTileHideRating and Frame.hideRating or RatingText == nil or RatingText == "" then 0 elseif FoundationFontFaceMigration then StyleModule.GetTextSize(RatingText, FontSize, GameTileMetadataFontModuleFont, _Vector2, { addTemporaryPadding = false }).X else TextService:GetTextSize(RatingText, FontSize, GameTileMetadataFontModuleFont, _Vector2).X
 	end, {
 		RatingText,
 		FontSize,
@@ -98,7 +100,8 @@ return function(Frame)
 				Position = UDim2.new(0, XOffset + XXSmall, 0.5, 0),
 				AnchorPoint = Vector2.new(0, 0.5),
 				TextSize = FontSize,
-				FontFace = NormalizeFontFaceFunction(GameTileMetadataFontModule.Font),
+				Font = if FoundationFontFaceMigration then nil else GameTileMetadataFontModule.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(GameTileMetadataFontModule.Font) else nil,
 				TextTransparency = Default.Transparency,
 				TextColor3 = Default.Color3,
 				TextTruncate = Enum.TextTruncate.AtEnd,
@@ -138,7 +141,8 @@ return function(Frame)
 				Position = UDim2.new(0, XOffset + XXSmall, 0.5, 0),
 				AnchorPoint = Vector2.new(0, 0.5),
 				TextSize = GameTileMetadataFontModule.FontSize,
-				FontFace = NormalizeFontFaceFunction(GameTileMetadataFontModule.Font),
+				Font = if FoundationFontFaceMigration then nil else GameTileMetadataFontModule.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(GameTileMetadataFontModule.Font) else nil,
 				TextTransparency = Default.Transparency,
 				TextColor3 = Default.Color3,
 				TextTruncate = Enum.TextTruncate.AtEnd,
