@@ -3,6 +3,8 @@ local DependenciesModule = require(SocialLibraries.dependencies)
 local ChatBubbleContainerAutomaticSizeModule = require(script.Parent.ChatBubbleContainerAutomaticSize)
 local Roact = DependenciesModule.Roact
 local WithStyleFunction = DependenciesModule.UIBlox.Style.withStyle
+local TextService = game:GetService("TextService")
+local FoundationFontFaceMigration = DependenciesModule.Foundation.Utility.Flags.FoundationFontFaceMigration
 local NormalizeFontFaceFunction = DependenciesModule.Foundation.Utility.normalizeFontFace
 local UseTextBoundsModule = require(SocialLibraries.Utils.useTextBounds)
 game:DefineFastFlag("FixPlainTextAutomaticSizeClippingText", false)
@@ -40,11 +42,18 @@ local function TextContent(p1)
 end
 
 return function(Frame1: Frame)
-	-- upvalues: WithStyleFunction (copy), Frame (copy), Roact (copy), ChatBubbleContainerAutomaticSizeModule (copy), TextContent (copy)
+	-- upvalues: WithStyleFunction (copy), Frame (copy), FoundationFontFaceMigration (copy), TextService (copy), Roact (copy), ChatBubbleContainerAutomaticSizeModule (copy), TextContent (copy), FixPlainTextAutomaticSizeClippingTextFastFlag (copy)
 	return WithStyleFunction(function(p1)
-		-- upvalues: Frame1 (copy), Frame (upval), Roact (upval), ChatBubbleContainerAutomaticSizeModule (upval), TextContent (upval)
+		-- upvalues: Frame1 (copy), Frame (upval), FoundationFontFaceMigration (upval), TextService (upval), Roact (upval), ChatBubbleContainerAutomaticSizeModule (upval), TextContent (upval), FixPlainTextAutomaticSizeClippingTextFastFlag (upval)
+		local MaxWidth = Frame1.maxWidth or Frame.maxWidth
 		local InnerPadding = Frame1.innerPadding or Frame.innerPadding
+		local Largest = math.max(0, MaxWidth - InnerPadding)
 		local Body = p1.Font.Body
+		local TextSize = Frame1.textSize or p1.Font.BaseSize * Body.RelativeSize
+		local Text = Frame1.text or Frame.text
+		local _Font = Frame1.font or Body.Font
+		local _Vector2 = Vector2.new(Largest, 1e999)
+		local TextSize1 = if FoundationFontFaceMigration then nil else TextService:GetTextSize(Text, TextSize, _Font, _Vector2)
 		
 		return Roact.createElement(ChatBubbleContainerAutomaticSizeModule, {
 			isIncoming = Frame1.isIncoming or Frame.isIncoming,
@@ -54,13 +63,27 @@ return function(Frame1: Frame)
 			LayoutOrder = Frame1.LayoutOrder or Frame.LayoutOrder,
 			[Roact.Change.AbsoluteSize] = Frame1[Roact.Change.AbsoluteSize] or Frame[Roact.Change.AbsoluteSize]
 		}, {
-			textContent = Roact.createElement(TextContent, {
-				text = Frame1.text or Frame.text,
-				font = Frame1.font or Body.Font,
-				textSize = Frame1.textSize or p1.Font.BaseSize * Body.RelativeSize,
-				contentMaxWidth = math.max(0, (Frame1.maxWidth or Frame.maxWidth) - InnerPadding),
+			textContent = if FoundationFontFaceMigration then Roact.createElement(TextContent, {
+				text = Text,
+				font = _Font,
+				textSize = TextSize,
+				contentMaxWidth = Largest,
 				textColor3 = p1.Theme.TextEmphasis.Color,
 				textTransparency = Frame1.isPending and p1.Theme.TextMuted.Transparency or 0
+			}) else Roact.createElement("TextLabel", {
+				BackgroundTransparency = 1,
+				TextWrapped = true,
+				Text = Text,
+				TextXAlignment = Enum.TextXAlignment.Left,
+				TextColor3 = p1.Theme.TextEmphasis.Color,
+				AutomaticSize = Enum.AutomaticSize.XY,
+				Font = _Font,
+				TextSize = TextSize,
+				Size = FixPlainTextAutomaticSizeClippingTextFastFlag and UDim2.fromOffset(math.ceil(TextSize1.X), (math.ceil(TextSize1.Y))) or UDim2.new(0, TextSize1.X, 0, TextSize1.Y),
+				TextTransparency = Frame1.isPending and p1.Theme.TextMuted.Transparency or 0,
+				TextYAlignment = Enum.TextYAlignment.Top
+			}, {
+				SizeConstraint = Roact.createElement("UISizeConstraint", { MaxSize = Vector2.new(Largest or MaxWidth, 1e999) })
 			})
 		})
 	end)

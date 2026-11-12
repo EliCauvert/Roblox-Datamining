@@ -7,6 +7,7 @@ local FoundationModule = require(Parent.Foundation)
 local UseCursorFunction = FoundationModule.Hooks.useCursor
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local GetFFlagEnableFriendsListSearchNormalizationErrorFixFunction = require(Parent.SharedFlags).GetFFlagEnableFriendsListSearchNormalizationErrorFix
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
@@ -29,7 +30,7 @@ local config = {
 }
 
 return (ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
-	-- upvalues: UseStyleFunction (copy), UseTokensFunction (copy), ReactModule (copy), FriendsListContextModule (copy), GetLocalizedStringsFunction (copy), config (copy), Size200 (ref), Size150 (ref), Size400 (ref), Size600 (ref), Size100 (ref), FontSize300 (ref), Small (ref), NewSize (ref), UseCursorFunction (copy), FoundationModule (copy), GetFFlagEnableFriendsListSearchNormalizationErrorFixFunction (copy), DebounceFunction (copy), ImageSetLabel (copy), IconsMenuSearch (copy), NormalizeFontFaceFunction (copy), ImageSetButton (copy), IconsActionsEditClear (copy)
+	-- upvalues: UseStyleFunction (copy), UseTokensFunction (copy), ReactModule (copy), FriendsListContextModule (copy), GetLocalizedStringsFunction (copy), config (copy), Size200 (ref), Size150 (ref), Size400 (ref), Size600 (ref), Size100 (ref), FontSize300 (ref), Small (ref), NewSize (ref), UseCursorFunction (copy), FoundationModule (copy), GetFFlagEnableFriendsListSearchNormalizationErrorFixFunction (copy), DebounceFunction (copy), ImageSetLabel (copy), IconsMenuSearch (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ImageSetButton (copy), IconsActionsEditClear (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseTokensResult = UseTokensFunction()
 	local UseContextResult = ReactModule.useContext(FriendsListContextModule)
@@ -113,7 +114,8 @@ return (ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 			TextWrapped = true,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextSize = FontSize300,
-			FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.BodyLarge.Font),
+			Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.BodyLarge.Font) else nil,
 			ref = UseRefResult,
 			[ReactModule.Event.Focused] = p1.onFocus,
 			[ReactModule.Change.Text] = UseResult,

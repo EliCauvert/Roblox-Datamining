@@ -37,7 +37,7 @@ local config = {
 	variant = require(Foundation.Enums.InputVariant).Standard
 }
 local MemoResult = ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: ReactModule (copy), NormalizeFontFaceModule (copy), IsPluginSecurityModule (copy), PaddingModule (copy)
+	-- upvalues: ReactModule (copy), FlagsModule (copy), NormalizeFontFaceModule (copy), IsPluginSecurityModule (copy), PaddingModule (copy)
 	local IsBoundsChecker = p1.isBoundsChecker
 	local IsMultiLine = p1.isMultiLine or IsBoundsChecker
 	
@@ -46,7 +46,8 @@ local MemoResult = ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 		Selectable = false,
 		Active = not IsBoundsChecker and nil,
 		Visible = not IsBoundsChecker and nil,
-		FontFace = NormalizeFontFaceModule(p1.fontStyle.Font),
+		Font = if FlagsModule.FoundationFontFaceMigration then nil else p1.fontStyle.Font,
+		FontFace = if FlagsModule.FoundationFontFaceMigration then NormalizeFontFaceModule(p1.fontStyle.Font) else nil,
 		TextSize = p1.fontStyle.FontSize,
 		LineHeight = p1.fontStyle.LineHeight,
 		TextColor3 = if p1.textStyle then p1.textStyle.Color3 else nil,

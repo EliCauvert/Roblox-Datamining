@@ -18,8 +18,7 @@ end
 local config = {
 	isContained = false,
 	testId = "--foundation-base-tile",
-	mediaAspectRatio = require(Foundation.Enums.TileAspectRatio).Ratio16x9,
-	mediaClippingStyle = require(Foundation.Enums.BaseTileMediaClipping).Default
+	mediaAspectRatio = require(Foundation.Enums.TileAspectRatio).Ratio16x9
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
@@ -87,7 +86,6 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 	local OnSecondaryActivated = WithDefaultsModuleResult.onSecondaryActivated
 	local OnStateChanged = WithDefaultsModuleResult.onStateChanged
 	local HasOnActivated: boolean = OnActivated ~= nil or OnSecondaryActivated ~= nil
-	local HasMinSize: boolean = WithDefaultsModuleResult.minSize ~= nil or WithDefaultsModuleResult.maxSize ~= nil
 	local HasOnStateChanged = OnStateChanged ~= nil
 	local ContainedBackgroundStyle = if WithDefaultsModuleResult.isContained then WithDefaultsModuleResult.containedBackgroundStyle or UseTokensModuleResult.Color.Shift.Shift_200 else nil
 	local UseGuiControlStateModuleResult = UseGuiControlStateModule(if HasOnStateChanged then p2 else nil, OnStateChanged)
@@ -126,10 +124,6 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 		Corner = ReactModule.createElement("UICorner", {
 			CornerRadius = UDim.new(0, UseTokensModuleResult.Radius.Medium)
 		}),
-		SizeConstraint = if HasMinSize then ReactModule.createElement("UISizeConstraint", {
-			MinSize = WithDefaultsModuleResult.minSize,
-			MaxSize = WithDefaultsModuleResult.maxSize
-		}) else nil,
 		Layout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
@@ -138,10 +132,8 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 		Media = ReactModule.createElement(BaseTileMediaModule, {
 			LayoutOrder = 1,
 			content = WithDefaultsModuleResult.mediaContent,
-			clippingStyle = WithDefaultsModuleResult.mediaClippingStyle,
 			aspectRatio = WithDefaultsModuleResult.mediaAspectRatio,
 			backgroundStyle = WithDefaultsModuleResult.mediaBackgroundStyle or UseTokensModuleResult.Color.Shift.Shift_200,
-			isSizeConstrained = HasMinSize,
 			isContained = WithDefaultsModuleResult.isContained,
 			tileSize = Size,
 			maxHeight = if UseMemoResult == nil then nil else UseMemoResult.mediaMaxHeight,

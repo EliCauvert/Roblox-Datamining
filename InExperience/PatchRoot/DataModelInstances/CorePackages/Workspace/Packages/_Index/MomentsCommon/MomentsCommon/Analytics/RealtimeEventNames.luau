@@ -23,8 +23,5 @@
 	MomentsCommentReaction = "MomentsCommentReaction",
 	MomentsCommentDelete = "MomentsCommentDelete",
 	MomentsCommentReport = "MomentsCommentReport",
-	MomentsCommentAuthorBlock = "MomentsCommentAuthorBlock",
-	MomentsPostInsightsRequest = "MomentsPostInsightsRequest",
-	MomentsPostInsightsRequestLatency = "MomentsPostInsightsRequestLatency",
-	MomentsCommentTranslationToggle = "MomentsCommentTranslationToggle"
+	MomentsCommentAuthorBlock = "MomentsCommentAuthorBlock"
 }

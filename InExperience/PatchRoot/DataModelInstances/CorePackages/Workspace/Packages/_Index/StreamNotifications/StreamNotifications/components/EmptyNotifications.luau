@@ -7,13 +7,13 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
 return function()
-	-- upvalues: UseStyleFunction (copy), UseTokensFunction (copy), NormalizeFontFaceFunction (copy), UseLocalizationFunction (copy), ConstantsModule (copy), ReactModule (copy)
+	-- upvalues: UseStyleFunction (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), NormalizeFontFaceFunction (copy), UseLocalizationFunction (copy), ConstantsModule (copy), ReactModule (copy)
 	local UseStyleResult = UseStyleFunction()
-	local UseTokensResult = UseTokensFunction()
-	local NormalizeFontFaceResult = NormalizeFontFaceFunction(UseTokensResult.Typography.TitleLarge.Font)
-	local FontSize = UseTokensResult.Typography.TitleLarge.FontSize
+	local UseTokensResult = if FoundationFontFaceMigration then UseTokensFunction() else nil
+	local UseStyleResultFont = UseStyleResult.Font
 	local UseLocalizationResult = UseLocalizationFunction({ emptyText = ConstantsModule.Text.EmptyKey })
 	
 	return ReactModule.createElement("Frame", {
@@ -33,8 +33,9 @@ return function()
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
 			Text = UseLocalizationResult and UseLocalizationResult.emptyText,
-			FontFace = NormalizeFontFaceResult,
-			TextSize = FontSize,
+			Font = if FoundationFontFaceMigration then nil else UseStyleResultFont.Header1.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.TitleLarge.Font) else nil,
+			TextSize = if FoundationFontFaceMigration then UseTokensResult.Typography.TitleLarge.FontSize else UseStyleResultFont.BaseSize,
 			TextColor3 = UseStyleResult.Theme.TextDefault.Color,
 			Size = UDim2.new(1, 0, 0, ConstantsModule.EmptyNotifications.LabelHeight)
 		})

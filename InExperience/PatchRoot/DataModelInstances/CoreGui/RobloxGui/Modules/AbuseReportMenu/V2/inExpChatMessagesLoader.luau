@@ -51,8 +51,8 @@ return {
 			local t = {}
 			local List2 = {}
 			
-			for Id, value2 in pairs(WindowMessagesInOrderByTabId) do
-				local CollectItemsResult = ExpChatMessageHelpersModule.collectItems(ByMessageId, value2)
+			for Id, value1 in pairs(WindowMessagesInOrderByTabId) do
+				local CollectItemsResult = ExpChatMessageHelpersModule.collectItems(ByMessageId, value1)
 				
 				if #CollectItemsResult > 0 then
 					local LocalizeStringResult = nil
@@ -87,8 +87,8 @@ return {
 			end)
 			local List = {}
 			
-			for _, value1 in ipairs(List2) do
-				table.insert(List, t[value1])
+			for _, value2 in ipairs(List2) do
+				table.insert(List, t[value2])
 			end
 			return EnrichMissingUsernamesFunction(List)
 		else

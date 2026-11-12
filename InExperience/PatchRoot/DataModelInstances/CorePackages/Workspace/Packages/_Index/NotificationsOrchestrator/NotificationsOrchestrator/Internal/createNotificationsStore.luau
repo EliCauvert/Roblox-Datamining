@@ -407,8 +407,6 @@ return function()
 				-- upvalues: SlotId (copy), p1 (copy), p2 (copy)
 				return `report: slot={SlotId} key={p1} event={p2.type}`
 			end)
-			
-			if p2.type == "suppressed" then return end
 			local Entry = Tbl[p1]
 			
 			if Entry == nil or Entry.slotId ~= SlotId then

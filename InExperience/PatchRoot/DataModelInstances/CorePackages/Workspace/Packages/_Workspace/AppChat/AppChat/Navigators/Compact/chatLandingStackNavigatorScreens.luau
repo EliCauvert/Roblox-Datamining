@@ -7,6 +7,13 @@ local SquadInviteFriendsScreenModule = require(AppChat.Components.Squads.SquadIn
 local SquadLobbyScreenModule = require(AppChat.Components.Squads.SquadLobbyScreen)
 local QuickStartSquadInviteFriendsScreenModule = require(AppChat.Components.Squads.QuickStartSquadInviteFriendsScreen)
 local FFlagEnablePartyQuickStartButton = require(Parent.SharedFlags).FFlagEnablePartyQuickStartButton
+local GetFFlagAppChatEnableRootedNavigationModule = require(AppChat.Flags.getFFlagAppChatEnableRootedNavigation)
+
+local function getChatDetailsNavigationOptions(p1)
+	-- upvalues: ChatDetailsNavigationOptionsModule (copy)
+	return ChatDetailsNavigationOptionsModule.getNavigationOptions(p1, { tabBarVisible = false })
+end
+
 local List = {
 	{
 		[EnumScreensModule.ChatLanding] = {
@@ -38,10 +45,7 @@ local List = {
 	{
 		[EnumScreensModule.ChatDetails] = {
 			screen = require(AppChat.Components.ChatDetails.ChatDetailsScreen),
-			navigationOptions = function(p1)
-				-- upvalues: ChatDetailsNavigationOptionsModule (copy)
-				return ChatDetailsNavigationOptionsModule.getNavigationOptions(p1, { tabBarVisible = false })
-			end
+			navigationOptions = if GetFFlagAppChatEnableRootedNavigationModule() then getChatDetailsNavigationOptions else { backButtonEnabled = true, tabBarVisible = false }
 		}
 	},
 	{

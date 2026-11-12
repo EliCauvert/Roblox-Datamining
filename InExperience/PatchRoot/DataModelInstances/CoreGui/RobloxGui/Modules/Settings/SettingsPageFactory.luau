@@ -14,12 +14,13 @@ RobloxGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
 local FFlagResponsiveUnitsDeprecateTenFoot = SharedFlagsModule.FFlagResponsiveUnitsDeprecateTenFoot
 local NoFFlagResponsiveUnitsDeprecateTenFoot: boolean = require(RobloxGui.Modules.TenFootInterface):IsEnabled() and not FFlagResponsiveUnitsDeprecateTenFoot
 local GetFFlagFixIGMTabTransitionsModule = require(script.Parent.Flags.GetFFlagFixIGMTabTransitions)
+local FFlagIEMSettingsGroupsModule = require(script.Parent.Flags.FFlagIEMSettingsGroups)
 local FFlagIEMFocusNavSupportNewButtonsModule = require(script.Parent.Flags.FFlagIEMFocusNavSupportNewButtons)
 local FFlagIEMTabFocusNav = SharedFlagsModule.FFlagIEMTabFocusNav
 local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 
 local function Initialize()
-	-- upvalues: IsSideSheetEnabledModule (copy), Signal (copy), FFlagIEMTabFocusNav (copy), CreateFunction (copy), UtilityModule (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (copy), ThemeModule (copy), GuiService (copy), FFlagIEMFocusNavSupportNewButtonsModule (copy), CoreGui (copy), UserGameSettings (copy), GetFFlagFixIGMTabTransitionsModule (copy), TweenService (copy)
+	-- upvalues: IsSideSheetEnabledModule (copy), Signal (copy), FFlagIEMTabFocusNav (copy), CreateFunction (copy), UtilityModule (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (copy), ThemeModule (copy), GuiService (copy), FFlagIEMSettingsGroupsModule (copy), FFlagIEMFocusNavSupportNewButtonsModule (copy), CoreGui (copy), UserGameSettings (copy), GetFFlagFixIGMTabTransitionsModule (copy), TweenService (copy)
 	local config = {
 		HubRef = nil,
 		LastSelectedObject = nil,
@@ -222,7 +223,7 @@ local function Initialize()
 	end
 	
 	function config:SelectARow(p1)
-		-- upvalues: FFlagIEMTabFocusNav (upval), GuiService (upval), config (copy), t (copy), FFlagIEMFocusNavSupportNewButtonsModule (upval), CoreGui (upval)
+		-- upvalues: FFlagIEMTabFocusNav (upval), GuiService (upval), config (copy), t (copy), FFlagIEMSettingsGroupsModule (upval), FFlagIEMFocusNavSupportNewButtonsModule (upval), CoreGui (upval)
 		if FFlagIEMTabFocusNav and not p1 and GuiService.SelectedCoreObject == config.TabHeader then return end
 		if p1 or not GuiService.SelectedCoreObject or not GuiService.SelectedCoreObject:IsDescendantOf(config.Page) then
 			if config.LastSelectedObject then
@@ -231,16 +232,22 @@ local function Initialize()
 				return
 			end
 			if t and #t > 0 then
-				local LayoutOrder = 1e999
-				local ValueChanger = t[1].ValueChanger
-				
-				for _, value in t do
-					if value.SelectionFrame and value.SelectionFrame.LayoutOrder < LayoutOrder then
-						LayoutOrder = value.SelectionFrame.LayoutOrder
-						ValueChanger = value
+				local ValueChangerFrame = nil
+				if FFlagIEMSettingsGroupsModule then
+					local LayoutOrder = 1e999
+					local ValueChanger = t[1].ValueChanger
+					
+					for _, value in t do
+						if value.SelectionFrame and value.SelectionFrame.LayoutOrder < LayoutOrder then
+							LayoutOrder = value.SelectionFrame.LayoutOrder
+							ValueChanger = value
+						end
 					end
+					ValueChangerFrame = config:getValueChangerFrame(ValueChanger.ValueChanger)
+				else
+					ValueChangerFrame = config:getValueChangerFrame(t[1].ValueChanger)
 				end
-				GuiService.SelectedCoreObject = config:getValueChangerFrame(ValueChanger.ValueChanger)
+				GuiService.SelectedCoreObject = ValueChangerFrame
 				
 				return
 			elseif config.PageNextSelectionDown and (not FFlagIEMFocusNavSupportNewButtonsModule or config.PageNextSelectionDown:IsDescendantOf(CoreGui)) then
@@ -263,7 +270,7 @@ local function Initialize()
 		config.Displaying:Fire()
 		local _UDim2 = UDim2.new(0, 0, 0, 0)
 		
-		local function v33()
+		local function v35()
 			-- upvalues: UserGameSettings (upval), Parent (copy), GetFFlagFixIGMTabTransitionsModule (upval), config (upval), _UDim2 (copy), Flag (upval)
 			if UserGameSettings.ReducedMotion then
 				Parent.InnerCanvasGroupShow.Visible = false
@@ -324,7 +331,7 @@ local function Initialize()
 			
 			return
 		else
-			config.Page:TweenPositionInternal(_UDim2, Enum.EasingDirection.In, Enum.EasingStyle.Quad, 0.1, true, v33)
+			config.Page:TweenPositionInternal(_UDim2, Enum.EasingDirection.In, Enum.EasingStyle.Quad, 0.1, true, v35)
 		end
 	end
 	
@@ -340,7 +347,7 @@ local function Initialize()
 		if config.Page.Parent then
 			local _UDim2 = UDim2.new(1 * p2, 0, 0, 0)
 			
-			local function v36()
+			local function v38()
 				-- upvalues: UserGameSettings (upval), p6 (copy), Parent (copy), config (upval), p3 (copy), Flag (upval)
 				if UserGameSettings.ReducedMotion and p6 then
 					Parent.InnerCanvasGroupHide.Visible = false
@@ -351,8 +358,8 @@ local function Initialize()
 				config.Hidden:Fire()
 			end
 			
-			local function v37()
-				-- upvalues: p4 (copy), config (upval), _UDim2 (copy), UserGameSettings (upval), p6 (copy), Parent (copy), p3 (copy), Flag (upval), TweenService (upval), v36 (copy)
+			local function v39()
+				-- upvalues: p4 (copy), config (upval), _UDim2 (copy), UserGameSettings (upval), p6 (copy), Parent (copy), p3 (copy), Flag (upval), TweenService (upval), v38 (copy)
 				if p4 then
 					config.Page.Position = _UDim2
 					
@@ -387,22 +394,22 @@ local function Initialize()
 					
 					return
 				else
-					config.Page:TweenPositionInternal(_UDim2, Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.1, true, v36)
+					config.Page:TweenPositionInternal(_UDim2, Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.1, true, v38)
 				end
 			end
 			
 			if p5 then
 				local OpenStateChangedCount = config.OpenStateChangedCount
 				delay(p5, function()
-					-- upvalues: OpenStateChangedCount (copy), config (upval), v37 (copy)
+					-- upvalues: OpenStateChangedCount (copy), config (upval), v39 (copy)
 					if OpenStateChangedCount == config.OpenStateChangedCount then
-						v37()
+						v39()
 					end
 				end)
 				
 				return
 			else
-				v37()
+				v39()
 			end
 		end
 	end

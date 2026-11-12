@@ -9,31 +9,8 @@ local GetAssetCreationDetailsModule = require(Parent.util.getAssetCreationDetail
 local GetAssetCreationDetailsRCCModule = require(Parent.util.getAssetCreationDetailsRCC)
 local GetFFlagUGCValidateForwardIECRestrictedUserIdsModule = require(Parent.flags.getFFlagUGCValidateForwardIECRestrictedUserIds)
 local GetFFlagUGCValidateBackendInExperienceViaCanPublishModule = require(Parent.flags.getFFlagUGCValidateBackendInExperienceViaCanPublish)
-local GetFFlagUGCValidateRejectUnsupportedCreatorTypesModule = require(Parent.flags.getFFlagUGCValidateRejectUnsupportedCreatorTypes)
 local config = { MODERATION_STATE_REVIEWING = true, Reviewing = true }
 local config1 = { MODERATION_STATE_APPROVED = true, Approved = true }
-
-local function validateConfiguredCreators(p1, RestrictedUserIds): boolean
-	-- upvalues: ErrorSourceStringsModule (copy)
-	for _, restrictedUserId in RestrictedUserIds do
-		if restrictedUserId.creatorType == "Experience" then
-			p1:fail(ErrorSourceStringsModule.Keys.ExperienceCreatorNotSupported, {
-				CreatorType = restrictedUserId.creatorType,
-				CreatorId = restrictedUserId.id
-			})
-			
-			return false
-		elseif restrictedUserId.creatorType ~= "User" and restrictedUserId.creatorType ~= "Group" then
-			p1:fail(ErrorSourceStringsModule.Keys.UnsupportedCreatorType, {
-				CreatorType = restrictedUserId.creatorType,
-				CreatorId = restrictedUserId.id
-			})
-			
-			return false
-		end
-	end
-	return true
-end
 
 local function _(List)
 	local List1 = {}
@@ -44,7 +21,7 @@ local function _(List)
 	return List1
 end
 
-local function runStudio(p2, RootInstance, ContentIds)
+local function runStudio(p1, RootInstance, ContentIds)
 	-- upvalues: GetAssetCreationDetailsModule (copy), ErrorSourceStringsModule (copy), ConstantsModule (copy)
 	local List = {}
 	
@@ -55,7 +32,7 @@ local function runStudio(p2, RootInstance, ContentIds)
 	local AssetCreationDetailsModule, AssetCreationDetailsModule2 = GetAssetCreationDetailsModule(List)
 	
 	if not AssetCreationDetailsModule or #AssetCreationDetailsModule2 ~= #List then
-		p2:fail(ErrorSourceStringsModule.Keys.DescendantIdFetchFailed, { InstanceFullName = RootInstance:GetFullName() })
+		p1:fail(ErrorSourceStringsModule.Keys.DescendantIdFetchFailed, { InstanceFullName = RootInstance:GetFullName() })
 		
 		return
 	end
@@ -63,7 +40,7 @@ local function runStudio(p2, RootInstance, ContentIds)
 		if value.status == ConstantsModule.ASSET_STATUS.UNKNOWN or (value.status == ConstantsModule.ASSET_STATUS.REVIEW_PENDING or value.status == ConstantsModule.ASSET_STATUS.MODERATED) then
 			local Text = tostring(value.assetId)
 			local ContentId = ContentIds[Text]
-			p2:fail(ErrorSourceStringsModule.Keys.DescendantIdNotApproved, {
+			p1:fail(ErrorSourceStringsModule.Keys.DescendantIdNotApproved, {
 				ModerationMessages = if ContentId then string.format("%s.%s ( %s )", ContentId[1].instance:GetFullName(), ContentId[1].fieldName, Text) else Text
 			})
 		end
@@ -79,44 +56,27 @@ local _ = function(List)
 	return t
 end
 
-local function buildTypedCreatorLookup(RestrictedUserIds)
-	local config = { User = {}, Group = {} }
-	
-	for _, restrictedUserId in RestrictedUserIds do
-		config[restrictedUserId.creatorType][tonumber(restrictedUserId.id)] = true
-	end
-	return config
-end
-
-local function runBackend(p3, ContentIds, BackendConfigs)
-	-- upvalues: GetFFlagUGCValidateRejectUnsupportedCreatorTypesModule (copy), validateConfiguredCreators (copy), buildTypedCreatorLookup (copy), GetAssetCreationDetailsRCCModule (copy), ErrorSourceStringsModule (copy), config (copy), config1 (copy)
+local function runBackend(p2, ContentIds, BackendConfigs)
+	-- upvalues: GetAssetCreationDetailsRCCModule (copy), ErrorSourceStringsModule (copy), config (copy), config1 (copy)
 	local RestrictedUserIds = BackendConfigs.restrictedUserIds
 	
 	if not RestrictedUserIds or #RestrictedUserIds == 0 then return end
-	local FFlagUGCValidateRejectUnsupportedCreatorTypesModule = GetFFlagUGCValidateRejectUnsupportedCreatorTypesModule()
 	local t = {}
 	
-	if FFlagUGCValidateRejectUnsupportedCreatorTypesModule then
-		if not validateConfiguredCreators(p3, RestrictedUserIds) then return end
-		t = buildTypedCreatorLookup(RestrictedUserIds)
-	end
-	local t1 = {}
-	
 	for AssetId, restrictedUserId in RestrictedUserIds do
-		t1[tonumber(restrictedUserId.id)] = true
+		t[tonumber(restrictedUserId.id)] = true
 	end
 	for AssetId, contentId in ContentIds do
 		local v1 = contentId[1]
 		local AssetCreationDetailsRCCModule, AssetCreationDetailsRCCModule2 = GetAssetCreationDetailsRCCModule(AssetId)
 		
 		if not AssetCreationDetailsRCCModule then
-			p3:forceError("Failed to load asset")
+			p2:forceError("Failed to load asset")
 		end
 		local Creator = AssetCreationDetailsRCCModule2.creationContext.creator
-		local NoFFlagUGCValidateRejectUnsupportedCreatorTypesModule: boolean = not FFlagUGCValidateRejectUnsupportedCreatorTypesModule or (if Creator.userId == nil then Creator.groupId ~= nil and t.Group[tonumber(Creator.groupId)] == true else t.User[tonumber(Creator.userId)] == true)
 		
-		if not t1[tonumber(if Creator.userId then Creator.userId else Creator.groupId)] or not NoFFlagUGCValidateRejectUnsupportedCreatorTypesModule then
-			p3:fail(ErrorSourceStringsModule.Keys.DescendantIdNotOwned, {
+		if not t[tonumber(if Creator.userId then Creator.userId else Creator.groupId)] then
+			p2:fail(ErrorSourceStringsModule.Keys.DescendantIdNotOwned, {
 				AssetId = AssetId,
 				InstanceFullName = v1.instance:GetFullName(),
 				FieldName = v1.fieldName
@@ -125,31 +85,30 @@ local function runBackend(p3, ContentIds, BackendConfigs)
 		local ModerationState = AssetCreationDetailsRCCModule2.moderationResult.moderationState
 		
 		if config[ModerationState] then
-			p3:forceError("Failed to load asset " .. v1.instance:GetFullName() .. "." .. v1.fieldName .. " ( " .. AssetId .. " ) that is still going through the review process. Please, wait for a notification of completion from the review process and try again.")
+			p2:forceError("Failed to load asset " .. v1.instance:GetFullName() .. "." .. v1.fieldName .. " ( " .. AssetId .. " ) that is still going through the review process. Please, wait for a notification of completion from the review process and try again.")
 		end
 		if not config1[ModerationState] then
-			p3:fail(ErrorSourceStringsModule.Keys.DescendantIdNotApproved, {
+			p2:fail(ErrorSourceStringsModule.Keys.DescendantIdNotApproved, {
 				ModerationMessages = string.format("%s.%s ( %s )", v1.instance:GetFullName(), v1.fieldName, AssetId)
 			})
 		end
 	end
 end
 
-local function runCanPublishOwnershipCheck(p4, RootInstance, ContentIds, IecConfigs)
-	-- upvalues: GetFFlagUGCValidateRejectUnsupportedCreatorTypesModule (copy), validateConfiguredCreators (copy), GetFFlagUGCValidateBackendInExperienceViaCanPublishModule (copy), GetFFlagUGCValidateForwardIECRestrictedUserIdsModule (copy), RunService (copy), CanPublishAssetsModule (copy), ErrorSourceStringsModule (copy)
-	if GetFFlagUGCValidateRejectUnsupportedCreatorTypesModule() and not validateConfiguredCreators(p4, IecConfigs.restrictedUserIds or {}) then return end
+local function runCanPublishOwnershipCheck(p3, RootInstance, ContentIds, IecConfigs)
+	-- upvalues: GetFFlagUGCValidateBackendInExperienceViaCanPublishModule (copy), GetFFlagUGCValidateForwardIECRestrictedUserIdsModule (copy), RunService (copy), CanPublishAssetsModule (copy), ErrorSourceStringsModule (copy)
 	local HasUniverseId: boolean = GetFFlagUGCValidateBackendInExperienceViaCanPublishModule() and (IecConfigs.token == nil and IecConfigs.universeId ~= nil)
 	
 	if not IecConfigs.token and not HasUniverseId or GetFFlagUGCValidateForwardIECRestrictedUserIdsModule() and RunService:IsStudio() then return end
 	local CanPublishAssetsModule1 = CanPublishAssetsModule(ContentIds, if GetFFlagUGCValidateForwardIECRestrictedUserIdsModule() or HasUniverseId then IecConfigs.restrictedUserIds or {} else {}, IecConfigs.token, IecConfigs.universeId, true)
 	
 	if CanPublishAssetsModule1.status == "tooManyAssets" then
-		p4:fail(ErrorSourceStringsModule.Keys.DescendantIdsTooMany, { InstanceFullName = RootInstance:GetFullName() })
+		p3:fail(ErrorSourceStringsModule.Keys.DescendantIdsTooMany, { InstanceFullName = RootInstance:GetFullName() })
 		
 		return
 	end
 	if CanPublishAssetsModule1.status == "loadFailed" then
-		p4:fail(ErrorSourceStringsModule.Keys.DescendantIdFetchFailed, { InstanceFullName = RootInstance:GetFullName() })
+		p3:fail(ErrorSourceStringsModule.Keys.DescendantIdFetchFailed, { InstanceFullName = RootInstance:GetFullName() })
 		
 		return
 	end
@@ -158,7 +117,7 @@ local function runCanPublishOwnershipCheck(p4, RootInstance, ContentIds, IecConf
 	if not Verdicts then return end
 	for _, verdict in Verdicts do
 		if not verdict.allowed then
-			p4:fail(ErrorSourceStringsModule.Keys.DescendantIdNotOwned, {
+			p3:fail(ErrorSourceStringsModule.Keys.DescendantIdNotOwned, {
 				AssetId = verdict.assetId,
 				InstanceFullName = verdict.entry.instance:GetFullName(),
 				FieldName = verdict.entry.fieldName
@@ -175,17 +134,17 @@ return {
 		ValidationEnumsModule.SharedDataMember.contentIds
 	},
 	expectedFailures = {},
-	run = function(p5, p6)
+	run = function(p4, p5)
 		-- upvalues: ValidationEnumsModule (copy), runStudio (copy), GetFFlagUGCValidateBackendInExperienceViaCanPublishModule (copy), runCanPublishOwnershipCheck (copy), runBackend (copy)
-		local ConsumerConfig = p6.consumerConfig
+		local ConsumerConfig = p5.consumerConfig
 		
 		if ConsumerConfig.source == "AutoSetup" then return end
-		local RootInstance = p6.rootInstance
-		local ContentIds = p6.contentIds
+		local RootInstance = p5.rootInstance
+		local ContentIds = p5.contentIds
 		local ValidationEnv = ConsumerConfig.validationEnv
 		
 		if ValidationEnv == ValidationEnumsModule.ValidationEnv.Studio then
-			runStudio(p5, RootInstance, ContentIds)
+			runStudio(p4, RootInstance, ContentIds)
 			
 			return
 		end
@@ -193,19 +152,19 @@ return {
 			local BackendConfigs = ConsumerConfig.backendConfigs
 			
 			if GetFFlagUGCValidateBackendInExperienceViaCanPublishModule() and BackendConfigs.universeId then
-				runCanPublishOwnershipCheck(p5, RootInstance, ContentIds, {
+				runCanPublishOwnershipCheck(p4, RootInstance, ContentIds, {
 					universeId = BackendConfigs.universeId,
 					restrictedUserIds = BackendConfigs.restrictedUserIds
 				})
 				
 				return
 			else
-				runBackend(p5, ContentIds, BackendConfigs)
+				runBackend(p4, ContentIds, BackendConfigs)
 				
 				return
 			end
 		elseif ValidationEnv == ValidationEnumsModule.ValidationEnv.IEC then
-			runCanPublishOwnershipCheck(p5, RootInstance, ContentIds, ConsumerConfig.iecConfigs)
+			runCanPublishOwnershipCheck(p4, RootInstance, ContentIds, ConsumerConfig.iecConfigs)
 		end
 	end
 }

@@ -274,47 +274,47 @@ return {
 			end
 			if GetFFlagGetHumanoidDescriptionFunction() then
 				local UserId = InterpretAnnotationsResult[1].UserId
-				local HumanoidDescription1 = nil
-				local HumanoidDescription2_1 = nil
+				local HumanoidDescription = nil
+				local HumanoidDescription2 = nil
 				
 				if GetFFlagGetHumanoidDescriptionUpdatesV2EFunction() then
 					local IdentifiedAvatar = p4.identificationResults.identifiedAvatars[UserId]
 					
 					if IdentifiedAvatar and IdentifiedAvatar.humanoidDescription and IdentifiedAvatar.humanoidDescriptionStatus == "OK" then
-						HumanoidDescription1 = IdentifiedAvatar.humanoidDescription
-						HumanoidDescription2_1 = IdentifiedAvatar.humanoidDescriptionStatus
+						HumanoidDescription = IdentifiedAvatar.humanoidDescription
+						HumanoidDescription2 = IdentifiedAvatar.humanoidDescriptionStatus
 					else
-						HumanoidDescription1, HumanoidDescription2_1 = GetHumanoidDescriptionFunction(UserId)
+						HumanoidDescription, HumanoidDescription2 = GetHumanoidDescriptionFunction(UserId)
 					end
 				else
-					HumanoidDescription1, HumanoidDescription2_1 = GetHumanoidDescriptionFunction(UserId)
+					HumanoidDescription, HumanoidDescription2 = GetHumanoidDescriptionFunction(UserId)
 				end
 				config.tags.REPORT_TARGET_HUMANOID_DESCRIPTION = {
-					valueList = { { data = HttpService:JSONEncode(HumanoidDescription1) } }
+					valueList = { { data = HttpService:JSONEncode(HumanoidDescription) } }
 				}
-				config.tags.REPORT_TARGET_HUMANOID_DESCRIPTION_STATUS = { valueList = { { data = HumanoidDescription2_1 } } }
+				config.tags.REPORT_TARGET_HUMANOID_DESCRIPTION_STATUS = { valueList = { { data = HumanoidDescription2 } } }
 				local Input1 = {}
 				
 				for _, Player1 in ipairs(InterpretAnnotationsResult) do
 					local UserId1 = Player1.UserId
-					local HumanoidDescription2 = nil
-					local HumanoidDescription = nil
+					local HumanoidDescription2_1 = nil
+					local HumanoidDescription1 = nil
 					
 					if GetFFlagGetHumanoidDescriptionUpdatesV2EFunction() then
 						local IdentifiedAvatar = p4.identificationResults.identifiedAvatars[UserId1]
 						
 						if IdentifiedAvatar and IdentifiedAvatar.humanoidDescription and IdentifiedAvatar.humanoidDescriptionStatus == "OK" then
-							HumanoidDescription = IdentifiedAvatar.humanoidDescription
-							HumanoidDescription2 = IdentifiedAvatar.humanoidDescriptionStatus
+							HumanoidDescription1 = IdentifiedAvatar.humanoidDescription
+							HumanoidDescription2_1 = IdentifiedAvatar.humanoidDescriptionStatus
 						else
-							HumanoidDescription, HumanoidDescription2 = GetHumanoidDescriptionFunction(UserId1)
+							HumanoidDescription1, HumanoidDescription2_1 = GetHumanoidDescriptionFunction(UserId1)
 						end
 					else
-						HumanoidDescription, HumanoidDescription2 = GetHumanoidDescriptionFunction(UserId1)
+						HumanoidDescription1, HumanoidDescription2_1 = GetHumanoidDescriptionFunction(UserId1)
 					end
 					Input1[#Input1 + 1] = {
-						humanoidDescription = HumanoidDescription,
-						outputMessage = HumanoidDescription2
+						humanoidDescription = HumanoidDescription1,
+						outputMessage = HumanoidDescription2_1
 					}
 				end
 				config.tags.RA_ALL_ANNOTATED_HUMANOID_DESCRIPTIONS = {

@@ -1,5 +1,6 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
 local Parent = script.Parent.Parent.Parent
+local GetEngineFeatureUGCValidateHSRMeshIdsModule = require(Parent.flags.getEngineFeatureUGCValidateHSRMeshIds)
 local GetFFlagUGCValidateVersionedContentIdsModule = require(Parent.flags.getFFlagUGCValidateVersionedContentIds)
 local _ = require(Parent.util.Types)
 local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
@@ -43,7 +44,7 @@ return {
 	},
 	expectedFailures = {},
 	run = function(p1, p2)
-		-- upvalues: ValidationEnumsModule (copy), ErrorSourceStringsModule (copy), GetFFlagUGCValidateVersionedContentIdsModule (copy), ParseContentIdsModule (copy), validateHSRStructure (copy), PcallDeferredModule (copy), UGCValidationService (copy)
+		-- upvalues: ValidationEnumsModule (copy), ErrorSourceStringsModule (copy), GetFFlagUGCValidateVersionedContentIdsModule (copy), ParseContentIdsModule (copy), validateHSRStructure (copy), GetEngineFeatureUGCValidateHSRMeshIdsModule (copy), PcallDeferredModule (copy), UGCValidationService (copy)
 		if p2.consumerConfig.consumerEnv == ValidationEnumsModule.ConsumerEnv.IEC then return end
 		local IsConsumerEnvMatch = p2.consumerConfig.consumerEnv == ValidationEnumsModule.ConsumerEnv.Backend
 		local Descendants = p2.rootInstance:GetDescendants()
@@ -73,7 +74,7 @@ return {
 					if HsrAsset then
 						local ValidateHSRStructureResult = validateHSRStructure(HsrAsset, WrapLayer, p1)
 						
-						if ValidateHSRStructureResult then
+						if ValidateHSRStructureResult and GetEngineFeatureUGCValidateHSRMeshIdsModule() then
 							local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function()
 								-- upvalues: UGCValidationService (upval), WrapLayer (copy), ValidateHSRStructureResult (copy)
 								return UGCValidationService:ValidateHSRMeshIds(WrapLayer, ValidateHSRStructureResult)

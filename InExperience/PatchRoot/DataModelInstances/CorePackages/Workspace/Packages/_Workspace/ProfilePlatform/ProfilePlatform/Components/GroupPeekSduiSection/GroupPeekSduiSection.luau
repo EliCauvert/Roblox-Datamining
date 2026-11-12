@@ -9,11 +9,9 @@ local UsePreferredInputFunction = ResponsiveModule.usePreferredInput
 local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
 local SduiFeatureEntryPoint = SduiSharedUtilitiesModule.SduiFeatureEntryPoint
 local UseComponentConfigFunction = SduiSharedUtilitiesModule.useComponentConfig
-local UsePublishContainerWidthFunction = SduiSharedUtilitiesModule.usePublishContainerWidth
 local EnumsModule = require(ProfilePlatform.Common.Enums)
 local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
 local FFlagGroupPeekEngagementTelemetry = require(Parent.SharedFlags).FFlagGroupPeekEngagementTelemetry
-local FFlagGroupSduiPublishContainerWidth = require(Parent.SharedFlags).FFlagGroupSduiPublishContainerWidth
 local GroupPeekSduiModule = nil
 
 local function _()
@@ -29,20 +27,8 @@ local _ = function(p1, Announcements)
 	return if Announcements == EnumsModule.Components.Announcements then p1.Identifiers.Announcement else p1.Identifiers.ForumsDiscovery
 end
 
-local function ContainerWidthFrame(p1)
-	-- upvalues: UsePublishContainerWidthFunction (copy), ReactModule (copy)
-	return ReactModule.createElement("Frame", {
-		BackgroundTransparency = 1,
-		BorderSizePixel = 0,
-		LayoutOrder = 1,
-		Size = UDim2.fromScale(1, 0),
-		AutomaticSize = Enum.AutomaticSize.Y,
-		ref = UsePublishContainerWidthFunction(p1.configKey)
-	}, p1.children)
-end
-
 local function SectionEntry(p1)
-	-- upvalues: GroupPeekSduiModule (ref), Parent (copy), EnumsModule (copy), UseComponentConfigFunction (copy), FFlagGroupPeekEngagementTelemetry (copy), ReactModule (copy), SduiFeatureEntryPoint (copy), HorizontalPageMargin (copy), FFlagGroupSduiPublishContainerWidth (copy), ContainerWidthFrame (copy)
+	-- upvalues: GroupPeekSduiModule (ref), Parent (copy), EnumsModule (copy), UseComponentConfigFunction (copy), FFlagGroupPeekEngagementTelemetry (copy), ReactModule (copy), HorizontalPageMargin (copy), SduiFeatureEntryPoint (copy)
 	if GroupPeekSduiModule == nil then
 		GroupPeekSduiModule = require(Parent.GroupPeekSdui)
 	end
@@ -59,10 +45,13 @@ local function SectionEntry(p1)
 		}
 	end, { p1.sessionId, p1.groupId }) else nil
 	
-	if UseComponentConfigFunction(ConfigKey, Announcement) == nil then
-		return nil
-	else
-		local Element = ReactModule.createElement(SduiFeatureEntryPoint, {
+	return if UseComponentConfigFunction(ConfigKey, Announcement) == nil then nil else ReactModule.createElement(HorizontalPageMargin, {
+		backgroundTransparency = 1,
+		useAutomaticSizing = true,
+		size = UDim2.new(1, 0, 0, 0),
+		layoutOrder = p1.layoutOrder
+	}, {
+		Sdui = ReactModule.createElement(SduiFeatureEntryPoint, {
 			shouldDisplayLoading = false,
 			shouldDisplayError = false,
 			LayoutOrder = 1,
@@ -71,16 +60,7 @@ local function SectionEntry(p1)
 			identifier = Announcement,
 			additionalAnalyticsData = UseMemoResult
 		})
-		
-		return ReactModule.createElement(HorizontalPageMargin, {
-			backgroundTransparency = 1,
-			useAutomaticSizing = true,
-			size = UDim2.new(1, 0, 0, 0),
-			layoutOrder = p1.layoutOrder
-		}, {
-			Sdui = if FFlagGroupSduiPublishContainerWidth then ReactModule.createElement(ContainerWidthFrame, { configKey = ConfigKey }, { Sdui = Element }) else Element
-		})
-	end
+	})
 end
 
 return ReactModule.memo(function(p1)

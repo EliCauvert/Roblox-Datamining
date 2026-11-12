@@ -11,11 +11,12 @@ local UseRealtimePlatformChatModule = require(script.Parent.useRealtimePlatformC
 local UseUnreadMessagesDispatchModule = require(AppChat.Contexts.UnreadMessages.useUnreadMessagesDispatch)
 local UseChatIsVisibleModule = require(AppChat.Hooks.useChatIsVisible)
 local InExperienceAppChatModalModule = require(AppChat.App.InExperienceAppChatModal)
+local FFlagExpChatEnableFriendsTab = require(Parent.SharedFlags).FFlagExpChatEnableFriendsTab
 local GetUnreadMessageCountStoreModule = require(AppChat.Stores.GetUnreadMessageCountStore)
 local NewResult = require(AppChat.Logger):new(script.Name)
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseAnalyticsModule (copy), UseUnreadMessagesDispatchModule (copy), UseDispatchFunction (copy), UseSignalStateFunction (copy), GetUnreadMessageCountStoreModule (copy), UseChatIsVisibleModule (copy), ReactModule (copy), InExperienceAppChatModalModule (copy), NewResult (copy), AppChatNetworkingModule (copy), EventNamesModule (copy), UseRealtimePlatformChatModule (copy), RealtimeDeliveryModule (copy)
+	-- upvalues: UseAnalyticsModule (copy), UseUnreadMessagesDispatchModule (copy), UseDispatchFunction (copy), UseSignalStateFunction (copy), GetUnreadMessageCountStoreModule (copy), UseChatIsVisibleModule (copy), ReactModule (copy), InExperienceAppChatModalModule (copy), FFlagExpChatEnableFriendsTab (copy), NewResult (copy), AppChatNetworkingModule (copy), EventNamesModule (copy), UseRealtimePlatformChatModule (copy), RealtimeDeliveryModule (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseUnreadMessagesDispatchModuleResult = UseUnreadMessagesDispatchModule()
 	local UseDispatchResult = UseDispatchFunction()
@@ -35,16 +36,16 @@ return ReactModule.memo(function(p1)
 			EventConnection:Disconnect()
 		end
 	end, {})
-	local UseStateResult1 = if p1.isInExperience then UseStateResult else UseChatIsVisibleModuleResult
+	local UseStateResult1 = if FFlagExpChatEnableFriendsTab and p1.isInExperience then UseStateResult else UseChatIsVisibleModuleResult
 	ReactModule.useEffect(function()
-		-- upvalues: NewResult (upval), UseDispatchResult (copy), AppChatNetworkingModule (upval), p1 (copy), InExperienceAppChatModalModule (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval)
+		-- upvalues: NewResult (upval), UseDispatchResult (copy), AppChatNetworkingModule (upval), FFlagExpChatEnableFriendsTab (upval), p1 (copy), InExperienceAppChatModalModule (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval)
 		NewResult:debug("Fetching conversation metadata to get unread count")
 		UseDispatchResult(AppChatNetworkingModule.rodux.GetConversationMetadata.API()):andThen(function(Result)
-			-- upvalues: NewResult (upval), p1 (upval), InExperienceAppChatModalModule (upval), UseAnalyticsModuleResult (upval), EventNamesModule (upval)
+			-- upvalues: NewResult (upval), FFlagExpChatEnableFriendsTab (upval), p1 (upval), InExperienceAppChatModalModule (upval), UseAnalyticsModuleResult (upval), EventNamesModule (upval)
 			local GlobalUnreadMessageCount = Result.responseBody.global_unread_message_count
 			NewResult:info("Initial unread message count: {}", GlobalUnreadMessageCount)
 			
-			if p1.isInExperience then
+			if FFlagExpChatEnableFriendsTab and p1.isInExperience then
 				InExperienceAppChatModalModule:markInitialUnreadCountReceived(GlobalUnreadMessageCount or 0)
 			end
 			UseAnalyticsModuleResult.fireAnalyticsEvent(EventNamesModule.preloadSocialTabDataEvent, { unreadConversationCount = GlobalUnreadMessageCount })

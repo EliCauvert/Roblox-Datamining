@@ -465,8 +465,8 @@ return {
 		table.insert(List1, separator(v11))
 		local Count1 = 1
 		
-		for _, value7 in ipairs(PrepareRowsResult) do
-			renderPopRows(List1, value7, string.format("<font color=\"%s\">%s</font>", string.format("rgb(%d,%d,%d)", math.floor(_Color3_2.R * 255), math.floor(_Color3_2.G * 255), (math.floor(_Color3_2.B * 255))), (string.format("%2d.", Count1):gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;"))), true, v12, Flag1)
+		for _, value6 in ipairs(PrepareRowsResult) do
+			renderPopRows(List1, value6, string.format("<font color=\"%s\">%s</font>", string.format("rgb(%d,%d,%d)", math.floor(_Color3_2.R * 255), math.floor(_Color3_2.G * 255), (math.floor(_Color3_2.B * 255))), (string.format("%2d.", Count1):gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;"))), true, v12, Flag1)
 			Count1 += 1
 		end
 		for _, value8 in ipairs(PrepareRowsResult2) do
@@ -475,11 +475,11 @@ return {
 		if #t1 > 0 then
 			table.insert(List1, colorTag(_Color3_2, (("debug — public STUN servers, not Roblox PoPs"):gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;"))))
 			
-			for _, value9 in ipairs(PrepareRowsResult1) do
-				renderPopRows(List1, value9, string.format("<font color=\"%s\">%s</font>", string.format("rgb(%d,%d,%d)", math.floor(_Color3_2.R * 255), math.floor(_Color3_2.G * 255), (math.floor(_Color3_2.B * 255))), " · "), true, v12, Flag1)
+			for _, value10 in ipairs(PrepareRowsResult1) do
+				renderPopRows(List1, value10, string.format("<font color=\"%s\">%s</font>", string.format("rgb(%d,%d,%d)", math.floor(_Color3_2.R * 255), math.floor(_Color3_2.G * 255), (math.floor(_Color3_2.B * 255))), " · "), true, v12, Flag1)
 			end
-			for _, value10 in ipairs(PrepareRowsResult2_1) do
-				renderPopRows(List1, value10, string.format("<font color=\"%s\">%s</font>", string.format("rgb(%d,%d,%d)", math.floor(_Color3_7.R * 255), math.floor(_Color3_7.G * 255), (math.floor(_Color3_7.B * 255))), " — "), false, v12, Flag1)
+			for _, value7 in ipairs(PrepareRowsResult2_1) do
+				renderPopRows(List1, value7, string.format("<font color=\"%s\">%s</font>", string.format("rgb(%d,%d,%d)", math.floor(_Color3_7.R * 255), math.floor(_Color3_7.G * 255), (math.floor(_Color3_7.B * 255))), " — "), false, v12, Flag1)
 			end
 		end
 		table.insert(List1, separator(v11))
@@ -487,52 +487,52 @@ return {
 		local NewSort = 0
 		local v15: string? = nil
 		local v16: number? = nil
-		local Text1: string? = nil
-		local Sort: number? = nil
+		local v17: string? = nil
+		local v18: number? = nil
 		
-		for _, value6 in ipairs(PrepareRowsResult) do
+		for _, value9 in ipairs(PrepareRowsResult) do
 			v14 += 1
-			local Sort1: number = value6.__sort
-			NewSort += Sort1
+			local Sort: number = value9.__sort
+			NewSort += Sort
 			
-			if not v16 or Sort1 < v16 then
-				v16 = Sort1
-				v15 = tostring(value6.popCode)
+			if not v16 or Sort < v16 then
+				v16 = Sort
+				v15 = tostring(value9.popCode)
 			end
-			if not Sort or Sort < Sort1 then
-				Sort = Sort1
-				Text1 = tostring(value6.popCode)
+			if not v18 or v18 < Sort then
+				v18 = Sort
+				v17 = tostring(value9.popCode)
 			end
 		end
-		local NewSortRatio: number = v14 > 0 and NewSort / v14 or 0
+		local v19 = v14 > 0 and NewSort / v14 or 0
 		local CountPrepareRowsResult2 = #PrepareRowsResult2
 		local List2 = {}
 		
 		if v15 then
 			table.insert(List2, "best " .. string.format("<font color=\"%s\">%s</font>", string.format("rgb(%d,%d,%d)", math.floor(_Color3_4.R * 255), math.floor(_Color3_4.G * 255), (math.floor(_Color3_4.B * 255))), (string.format("%s %.1fms", v15, v16))))
 		end
-		if Text1 then
-			table.insert(List2, "worst " .. string.format("<font color=\"%s\">%s</font>", string.format("rgb(%d,%d,%d)", math.floor(_Color3_6.R * 255), math.floor(_Color3_6.G * 255), (math.floor(_Color3_6.B * 255))), (string.format("%s %.1fms", Text1, Sort))))
+		if v17 then
+			table.insert(List2, "worst " .. string.format("<font color=\"%s\">%s</font>", string.format("rgb(%d,%d,%d)", math.floor(_Color3_6.R * 255), math.floor(_Color3_6.G * 255), (math.floor(_Color3_6.B * 255))), (string.format("%s %.1fms", v17, v18))))
 		end
 		if v14 > 0 then
-			table.insert(List2, "avg " .. string.format("<font color=\"%s\">%s</font>", string.format("rgb(%d,%d,%d)", math.floor(_Color3_5.R * 255), math.floor(_Color3_5.G * 255), (math.floor(_Color3_5.B * 255))), (string.format("%.1fms", NewSortRatio))))
+			table.insert(List2, "avg " .. string.format("<font color=\"%s\">%s</font>", string.format("rgb(%d,%d,%d)", math.floor(_Color3_5.R * 255), math.floor(_Color3_5.G * 255), (math.floor(_Color3_5.B * 255))), (string.format("%.1fms", v19))))
 		end
 		table.insert(List2, string.format("%d ok   ", v14) .. string.format("<font color=\"%s\">%s</font>", string.format("rgb(%d,%d,%d)", math.floor(_Color3_7.R * 255), math.floor(_Color3_7.G * 255), (math.floor(_Color3_7.B * 255))), (string.format("%d timeout", CountPrepareRowsResult2))))
+		local v20 = 0
 		local Count2 = 0
-		local v17 = 0
 		
 		for _, value5 in ipairs(t) do
 			if value5.v6 and not value5.v6.debug then
-				Count2 += 1
+				v20 += 1
 				
 				if value5.v6.rttMs and value5.v6.rttMs >= 0 then
-					v17 += 1
+					Count2 += 1
 				end
 			end
 		end
-		if Count2 > 0 then
-			local _Color3_4_1 = v17 > 0 and _Color3_4 or _Color3_6
-			table.insert(List2, "v6 " .. string.format("<font color=\"%s\">%s</font>", string.format("rgb(%d,%d,%d)", math.floor(_Color3_4_1.R * 255), math.floor(_Color3_4_1.G * 255), (math.floor(_Color3_4_1.B * 255))), (string.format("%d/%d ok", v17, Count2))))
+		if v20 > 0 then
+			local _Color3_4_1 = Count2 > 0 and _Color3_4 or _Color3_6
+			table.insert(List2, "v6 " .. string.format("<font color=\"%s\">%s</font>", string.format("rgb(%d,%d,%d)", math.floor(_Color3_4_1.R * 255), math.floor(_Color3_4_1.G * 255), (math.floor(_Color3_4_1.B * 255))), (string.format("%d/%d ok", Count2, v20))))
 		end
 		table.insert(List1, (table.concat(List2, "   │   ")))
 		

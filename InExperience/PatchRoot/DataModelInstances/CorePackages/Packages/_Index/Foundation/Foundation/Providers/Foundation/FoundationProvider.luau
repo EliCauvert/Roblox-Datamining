@@ -15,12 +15,11 @@ local StyleProviderModule = require(Parent.Style.StyleProvider)
 local _ = require(Parent1.Components.Types)
 local WidgetsProviderModule = require(Parent.StudioWidgets.WidgetsProvider)
 local ElevationProvider = require(Parent.Elevation.ElevationProvider).ElevationProvider
-local ScreenRegionProvider = require(Parent.ScreenRegion.ScreenRegionProvider).ScreenRegionProvider
 local IsPluginElevatedModule = require(Parent.Plugin.isPluginElevated)
 local Frozen = table.freeze({})
 
 return function(p1)
-	-- upvalues: FlagsModule (copy), Frozen (copy), ReactModule (copy), PluginProviderModule (copy), ElevationProvider (copy), PreferencesProviderModule (copy), StyleProviderModule (copy), ResponsiveProviderModule (copy), OverlayModule (copy), CursorModule (copy), ScreenRegionProvider (copy), IsPluginElevatedModule (copy), WidgetsProviderModule (copy), PanelsProviderModule (copy), ContextStack (copy)
+	-- upvalues: FlagsModule (copy), Frozen (copy), ReactModule (copy), PluginProviderModule (copy), ElevationProvider (copy), PreferencesProviderModule (copy), StyleProviderModule (copy), ResponsiveProviderModule (copy), OverlayModule (copy), CursorModule (copy), IsPluginElevatedModule (copy), WidgetsProviderModule (copy), PanelsProviderModule (copy), ContextStack (copy)
 	local Preferences = if p1.preferences then p1.preferences elseif FlagsModule.FoundationProviderStableEmptyTable then Frozen else {}
 	local Elements = {
 		ReactModule.createElement(PluginProviderModule, { plugin = p1.plugin }),
@@ -42,9 +41,6 @@ return function(p1)
 		ReactModule.createElement(CursorModule)
 	}
 	
-	if FlagsModule.FoundationScreenRegionProvider then
-		table.insert(Elements, ReactModule.createElement(ScreenRegionProvider, nil))
-	end
 	if p1.plugin and IsPluginElevatedModule(p1.plugin) then
 		table.insert(Elements, ReactModule.createElement(WidgetsProviderModule, {}))
 		table.insert(Elements, ReactModule.createElement(PanelsProviderModule, {}))

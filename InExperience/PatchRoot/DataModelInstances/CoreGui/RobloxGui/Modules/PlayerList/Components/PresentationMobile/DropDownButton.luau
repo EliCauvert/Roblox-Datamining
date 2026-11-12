@@ -10,6 +10,7 @@ local IconName = FoundationModule.Enums.IconName
 local IconVariant = FoundationModule.Enums.IconVariant
 local IconSize = FoundationModule.Enums.IconSize
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseLayoutValuesFunction = PlayerListModule.Common.useLayoutValues
 local WithStyleFunction = UIBloxModule.Style.withStyle
 local Parent = script.Parent.Parent
@@ -77,11 +78,11 @@ function DropDownButton.getColorBackgroundAnimation(p1, p2)
 end
 
 function DropDownButton.render(p1)
-	-- upvalues: WithLayoutValuesFunction (copy), WithStyleFunction (copy), Colors (copy), FFlagAllowDisplayingFoundationIconsForDropdownModule (copy), IconName (copy), RoactModule (copy), FoundationModule (copy), IconVariant (copy), IconSize (copy), ImageSetLabel (copy), NormalizeFontFaceFunction (copy), FFlagEnableMobilePlayerListOnConsole (copy), IconButtonModule (copy), Images (copy)
+	-- upvalues: WithLayoutValuesFunction (copy), WithStyleFunction (copy), Colors (copy), FFlagAllowDisplayingFoundationIconsForDropdownModule (copy), IconName (copy), RoactModule (copy), FoundationModule (copy), IconVariant (copy), IconSize (copy), ImageSetLabel (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), FFlagEnableMobilePlayerListOnConsole (copy), IconButtonModule (copy), Images (copy)
 	return WithLayoutValuesFunction(function(p2)
-		-- upvalues: WithStyleFunction (upval), p1 (copy), Colors (upval), FFlagAllowDisplayingFoundationIconsForDropdownModule (upval), IconName (upval), RoactModule (upval), FoundationModule (upval), IconVariant (upval), IconSize (upval), ImageSetLabel (upval), NormalizeFontFaceFunction (upval), FFlagEnableMobilePlayerListOnConsole (upval), IconButtonModule (upval), Images (upval)
+		-- upvalues: WithStyleFunction (upval), p1 (copy), Colors (upval), FFlagAllowDisplayingFoundationIconsForDropdownModule (upval), IconName (upval), RoactModule (upval), FoundationModule (upval), IconVariant (upval), IconSize (upval), ImageSetLabel (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), FFlagEnableMobilePlayerListOnConsole (upval), IconButtonModule (upval), Images (upval)
 		return WithStyleFunction(function(p3)
-			-- upvalues: p2 (ref), p1 (upval), Colors (upval), FFlagAllowDisplayingFoundationIconsForDropdownModule (upval), IconName (upval), RoactModule (upval), FoundationModule (upval), IconVariant (upval), IconSize (upval), ImageSetLabel (upval), NormalizeFontFaceFunction (upval), FFlagEnableMobilePlayerListOnConsole (upval), IconButtonModule (upval), Images (upval)
+			-- upvalues: p2 (ref), p1 (upval), Colors (upval), FFlagAllowDisplayingFoundationIconsForDropdownModule (upval), IconName (upval), RoactModule (upval), FoundationModule (upval), IconVariant (upval), IconSize (upval), ImageSetLabel (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), FFlagEnableMobilePlayerListOnConsole (upval), IconButtonModule (upval), Images (upval)
 			p2 = p1.props.layoutValues
 			local BackgroundOnPress = if p1.state.isPressed then p3.Theme.BackgroundOnPress elseif p1.state.isHovered then p3.Theme.BackgroundOnHover else { Transparency = 1, Color = Color3.new(1, 1, 1) }
 			local BottomRoundedRect8pxPng: string = if p1.props.lastButton then "rbxasset://textures/ui/BottomRoundedRect8px.png" else ""
@@ -209,7 +210,8 @@ function DropDownButton.render(p1)
 						BackgroundTransparency = 1,
 						Size = UDim2.new(1, -NewDropDownPadding, 1, 0),
 						Text = p1.props.text,
-						FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.TitleLarge.Font),
+						Font = if FoundationFontFaceMigration then nil else p3.Font.Header2.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.TitleLarge.Font) else nil,
 						TextSize = if FFlagEnableMobilePlayerListOnConsole then p2.DropDownButtonTextSize else p3.Font.BaseSize * p3.Font.Header2.RelativeSize,
 						TextColor3 = p3.Theme.TextEmphasis.Color,
 						TextTransparency = p3.Theme.TextEmphasis.Transparency,

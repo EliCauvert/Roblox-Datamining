@@ -1,8 +1,6 @@
-﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
-local Parent = BuildExperience.Parent
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
-local FFlagBuildExperienceConfigurationRowTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceConfigurationRowTelemetry)
 local Icon = FoundationModule.Icon
 local List = FoundationModule.List
 local Text = FoundationModule.Text
@@ -11,25 +9,16 @@ local IconSize = FoundationModule.Enums.IconSize
 local InputSize = FoundationModule.Enums.InputSize
 
 local function GameConfigurationListItem(Frame: Frame)
-	-- upvalues: FFlagBuildExperienceConfigurationRowTelemetryModule (copy), ReactModule (copy), Icon (copy), IconSize (copy), List (copy)
+	-- upvalues: ReactModule (copy), Icon (copy), IconSize (copy), List (copy)
 	local Row = Frame.row
 	local IsIsDisabled = Row.isDisabled == true
 	local OnActivatedFunction = Row.onActivated
-	local OnRowActivated = if FFlagBuildExperienceConfigurationRowTelemetryModule then Frame.onRowActivated else nil
-	local Id = Row.id
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: FFlagBuildExperienceConfigurationRowTelemetryModule (upval), OnRowActivated (copy), Id (copy), OnActivatedFunction (copy)
-		if FFlagBuildExperienceConfigurationRowTelemetryModule and OnRowActivated ~= nil then
-			OnRowActivated(Id)
-		end
+		-- upvalues: OnActivatedFunction (copy)
 		if OnActivatedFunction ~= nil then
 			OnActivatedFunction()
 		end
-	end, {
-		OnActivatedFunction,
-		OnRowActivated,
-		if FFlagBuildExperienceConfigurationRowTelemetryModule then Id else nil
-	})
+	end, { OnActivatedFunction })
 	local Element = ReactModule.createElement(List.Item, {
 		LayoutOrder = Frame.LayoutOrder,
 		title = Row.title,
@@ -54,7 +43,7 @@ local function GameConfigurationListItem(Frame: Frame)
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), GameConfigurationListItem (copy), FFlagBuildExperienceConfigurationRowTelemetryModule (copy), View (copy), Text (copy), List (copy), InputSize (copy)
+	-- upvalues: ReactModule (copy), GameConfigurationListItem (copy), View (copy), Text (copy), List (copy), InputSize (copy)
 	local TestId = p1.testId or "game-configuration-list"
 	
 	return ReactModule.createElement(View, {
@@ -85,22 +74,17 @@ return function(p1)
 			hasDivider = { hasDivider = true, isInset = false },
 			size = InputSize.Medium
 		}, (ReactModule.useMemo(function()
-			-- upvalues: p1 (copy), ReactModule (upval), GameConfigurationListItem (upval), FFlagBuildExperienceConfigurationRowTelemetryModule (upval), TestId (copy)
+			-- upvalues: p1 (copy), ReactModule (upval), GameConfigurationListItem (upval), TestId (copy)
 			local Elements = {}
 			
 			for LayoutOrder, row in p1.rows do
 				Elements[row.id] = ReactModule.createElement(GameConfigurationListItem, {
 					LayoutOrder = LayoutOrder,
 					row = row,
-					onRowActivated = if FFlagBuildExperienceConfigurationRowTelemetryModule then p1.onRowActivated else nil,
 					testId = `{TestId}-row-{row.id}`
 				})
 			end
 			return Elements
-		end, {
-			p1.rows,
-			TestId,
-			if FFlagBuildExperienceConfigurationRowTelemetryModule then p1.onRowActivated else nil
-		})))
+		end, { p1.rows, TestId })))
 	})
 end

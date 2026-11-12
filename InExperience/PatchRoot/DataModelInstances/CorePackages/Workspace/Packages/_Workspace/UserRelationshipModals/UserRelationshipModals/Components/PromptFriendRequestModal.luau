@@ -8,13 +8,14 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local UserTileModule = require(Parent.UserTile)
 local UserTile = UserTileModule.UserTile
 local LayoutMode = UserTileModule.LayoutMode
+local PromptFriendRequestModalRevampFriendsRename = game:DefineFastFlag("PromptFriendRequestModalRevampFriendsRename", false)
 local PromptFriendRequestModalInputDelayMs = game:DefineFastInt("PromptFriendRequestModalInputDelayMs", 1000)
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), FoundationModule (copy), UserTile (copy), LayoutMode (copy), ButtonVariant (copy), PromptFriendRequestModalInputDelayMs (copy)
+	-- upvalues: UseLocalizationFunction (copy), PromptFriendRequestModalRevampFriendsRename (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), FoundationModule (copy), UserTile (copy), LayoutMode (copy), ButtonVariant (copy), PromptFriendRequestModalInputDelayMs (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
-		titleText = "InGame.FriendPlayerPrompt.Title.SendFriendRequest.FriendsRename",
-		sendText = "InGame.FriendPlayerPrompt.Action.Send"
+		sendText = "InGame.FriendPlayerPrompt.Action.Send",
+		titleText = if PromptFriendRequestModalRevampFriendsRename then "InGame.FriendPlayerPrompt.Title.SendFriendRequest.FriendsRename" else "InGame.FriendPlayerPrompt.Title.SendFriendRequest"
 	})
 	
 	return ReactModule.createElement(Dialog.Root, { size = DialogSize.Medium, onClose = p1.onClose }, {

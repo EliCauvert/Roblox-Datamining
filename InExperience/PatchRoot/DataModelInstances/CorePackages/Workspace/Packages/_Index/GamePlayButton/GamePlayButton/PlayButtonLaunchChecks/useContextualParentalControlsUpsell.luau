@@ -10,7 +10,9 @@ local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
 local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
 local AppEventIngestService = require(Parent.RoactServiceTags).AppEventIngestService
 local FlaggedMutedErrorFunction = require(Parent.Loggers).flaggedMutedError
+local GameInfosReducer = require(Parent.GameInfosRodux).GameInfosReducer
 local GameHydrationReactModule = require(Parent.GameHydrationReact)
+local FFlagMigrateGameInfoToStore = require(Parent.SharedFlags).FFlagMigrateGameInfoToStore
 local FetchUserSettingsAndOptionsFunction = require(Parent.GameDetailRodux).FetchUserSettingsAndOptions
 local DashModule = require(Parent.Dash)
 local AppPage = require(Parent.RobloxAppEnums).AppPage
@@ -80,18 +82,31 @@ local v1 = (function(p1)
 end)((game:DefineFastString("LuaAppUpsellMaturityRatingToSettingMapping", "mild=NinePlus,moderate=ThirteenPlus,restricted=SeventeenPlus,unrated=ThirteenPlus")))
 
 return function(UniverseId, Callback, PageName)
-	-- upvalues: UseRoactServiceFunction (copy), RoactNetworking (copy), AppEventIngestService (copy), UseDispatchFunction (copy), UseSelectorFunction (copy), GameHydrationReactModule (copy), UseLocalizationFunction (copy), FFlagLuaAppParentApprovedExperiences (copy), ReactModule (copy), OpenAmpWizardContainerFunction (copy), FFlagLuaAppPlayButtonAmpAgeCheckFlow (copy), FFlagLuaAppVpcUpsellNamespace (copy), FFlagLuaAppPlayButtonWizardCloseDelay (copy), FFlagEnablePlayButtonWizardVPCPrologueModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), OpenPlayButtonUpsellDialogFunction (copy), OpenCloseOnlyInteractiveAlertFunction (copy), NavigateBackFunction (copy), CloseCentralOverlayFunction (copy), FetchGamePlayButtonDataModule (copy), AuthButtonClickFunction (copy), PlayButtonUpsellBodyModule (copy), FFlagLuaAppPlayButtonOdpEventUniverseIdModule (copy), GetFFlagEnableAmpWizardVPCNavigationFixFunction (copy), FStringLuaAppVpcAccountManagementAmpNameSpace (copy), FStringLuaAppVpcSettingsChangeAmpNameSpace (copy), UnlockPlayIntentFunction (copy), PlayabilityStatusEnum (copy), FFlagLuaAppParentUpsellPolicy (copy), UseAppPolicyFunction (copy), FetchUserSettingsAndOptionsFunction (copy), FlaggedMutedErrorFunction (copy), v1 (copy), LoggingProtocolModule (copy), UnknownUpsellErrorEventHundredthsPercent (copy), DashModule (copy), FStringLuaAppPlayButtonAgeCheckAmpFeatureName (copy), FStringLuaAppPlayButtonAgeCheckAmpNameSpace (copy), DelayedAmpWizardCompletionCallbackOverrideModule (copy), FIntLuaAppPlayButtonWizardCloseDelayMs (copy)
+	-- upvalues: UseRoactServiceFunction (copy), RoactNetworking (copy), AppEventIngestService (copy), UseDispatchFunction (copy), UseSelectorFunction (copy), FFlagMigrateGameInfoToStore (copy), GameInfosReducer (copy), GameHydrationReactModule (copy), UseLocalizationFunction (copy), FFlagLuaAppParentApprovedExperiences (copy), ReactModule (copy), OpenAmpWizardContainerFunction (copy), FFlagLuaAppPlayButtonAmpAgeCheckFlow (copy), FFlagLuaAppVpcUpsellNamespace (copy), FFlagLuaAppPlayButtonWizardCloseDelay (copy), FFlagEnablePlayButtonWizardVPCPrologueModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), OpenPlayButtonUpsellDialogFunction (copy), OpenCloseOnlyInteractiveAlertFunction (copy), NavigateBackFunction (copy), CloseCentralOverlayFunction (copy), FetchGamePlayButtonDataModule (copy), AuthButtonClickFunction (copy), PlayButtonUpsellBodyModule (copy), FFlagLuaAppPlayButtonOdpEventUniverseIdModule (copy), GetFFlagEnableAmpWizardVPCNavigationFixFunction (copy), FStringLuaAppVpcAccountManagementAmpNameSpace (copy), FStringLuaAppVpcSettingsChangeAmpNameSpace (copy), UnlockPlayIntentFunction (copy), PlayabilityStatusEnum (copy), FFlagLuaAppParentUpsellPolicy (copy), UseAppPolicyFunction (copy), FetchUserSettingsAndOptionsFunction (copy), FlaggedMutedErrorFunction (copy), v1 (copy), LoggingProtocolModule (copy), UnknownUpsellErrorEventHundredthsPercent (copy), DashModule (copy), FStringLuaAppPlayButtonAgeCheckAmpFeatureName (copy), FStringLuaAppPlayButtonAgeCheckAmpNameSpace (copy), DelayedAmpWizardCompletionCallbackOverrideModule (copy), FIntLuaAppPlayButtonWizardCloseDelayMs (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(AppEventIngestService)
 	local UseDispatchResult = UseDispatchFunction()
-	local UseGameInfoResult = GameHydrationReactModule.useGameInfo(UniverseId)
-	local ContentMaturity = UseGameInfoResult and UseGameInfoResult.contentMaturity
 	local UseSelectorResult = UseSelectorFunction(function(p1)
-		-- upvalues: UniverseId (copy)
+		-- upvalues: UniverseId (copy), FFlagMigrateGameInfoToStore (upval), GameInfosReducer (upval)
 		local AgeRecommendation = p1.AgeRecommendations[UniverseId]
 		
-		return if AgeRecommendation and AgeRecommendation.summary and AgeRecommendation.summary.ageRecommendation and AgeRecommendation.summary.ageRecommendation.contentMaturity then AgeRecommendation.summary.ageRecommendation.contentMaturity else nil
-	end) or ContentMaturity
+		if AgeRecommendation and AgeRecommendation.summary and AgeRecommendation.summary.ageRecommendation and AgeRecommendation.summary.ageRecommendation.contentMaturity then
+			return AgeRecommendation.summary.ageRecommendation.contentMaturity
+		elseif FFlagMigrateGameInfoToStore then
+			return nil
+		else
+			local PersonalizationEntry = p1.Personalization[GameInfosReducer.key][UniverseId]
+			
+			return if PersonalizationEntry and PersonalizationEntry.contentMaturity then PersonalizationEntry.contentMaturity else nil
+		end
+	end)
+	local ContentMaturity = nil
+	
+	if FFlagMigrateGameInfoToStore then
+		local UseGameInfoResult = GameHydrationReactModule.useGameInfo(UniverseId)
+		ContentMaturity = UseGameInfoResult and UseGameInfoResult.contentMaturity
+	end
+	local UseSelectorResult1 = if FFlagMigrateGameInfoToStore then UseSelectorResult or ContentMaturity else UseSelectorResult
 	local UseLocalizationResult = UseLocalizationFunction({
 		unplayableTitleText = "Feature.ExperienceDetails.RestrictedUnplayableModal.Label.Title",
 		unplayableBodyText = "Feature.ExperienceDetails.RestrictedUnplayableModal.Label.Body",
@@ -260,7 +275,7 @@ return function(UniverseId, Callback, PageName)
 	}) else nil
 	
 	return ReactModule.useCallback(function(p1)
-		-- upvalues: FFlagLuaAppParentUpsellPolicy (upval), UseAppPolicyResult (ref), Callback (copy), UseResult11 (copy), FetchUserSettingsAndOptionsFunction (upval), UseRoactServiceResult (copy), UseSelectorResult (copy), FlaggedMutedErrorFunction (upval), v1 (upval), LoggingProtocolModule (upval), UnknownUpsellErrorEventHundredthsPercent (upval), UniverseId (copy), DashModule (upval), UseAppPolicyResult1 (copy), UseResult3 (copy), UseLocalizationResult (copy), UseResult5 (copy), UseResult1 (copy), UseResult7 (copy), FFlagEnablePlayButtonWizardVPCPrologueModule (upval), UseResult10 (copy), UseResult9 (ref), UseResult2 (copy), UseResult8 (copy), UseResult (copy), FFlagLuaAppPlayButtonAmpAgeCheckFlow (upval), FStringLuaAppPlayButtonAgeCheckAmpFeatureName (upval), UseResult6 (copy), PageName (copy), FStringLuaAppPlayButtonAgeCheckAmpNameSpace (upval), FFlagLuaAppPlayButtonWizardCloseDelay (upval), DelayedAmpWizardCompletionCallbackOverrideModule (upval), FIntLuaAppPlayButtonWizardCloseDelayMs (upval)
+		-- upvalues: FFlagLuaAppParentUpsellPolicy (upval), UseAppPolicyResult (ref), Callback (copy), UseResult11 (copy), FetchUserSettingsAndOptionsFunction (upval), UseRoactServiceResult (copy), UseSelectorResult1 (copy), FlaggedMutedErrorFunction (upval), v1 (upval), LoggingProtocolModule (upval), UnknownUpsellErrorEventHundredthsPercent (upval), UniverseId (copy), DashModule (upval), UseAppPolicyResult1 (copy), UseResult3 (copy), UseLocalizationResult (copy), UseResult5 (copy), UseResult1 (copy), UseResult7 (copy), FFlagEnablePlayButtonWizardVPCPrologueModule (upval), UseResult10 (copy), UseResult9 (ref), UseResult2 (copy), UseResult8 (copy), UseResult (copy), FFlagLuaAppPlayButtonAmpAgeCheckFlow (upval), FStringLuaAppPlayButtonAgeCheckAmpFeatureName (upval), UseResult6 (copy), PageName (copy), FStringLuaAppPlayButtonAgeCheckAmpNameSpace (upval), FFlagLuaAppPlayButtonWizardCloseDelay (upval), DelayedAmpWizardCompletionCallbackOverrideModule (upval), FIntLuaAppPlayButtonWizardCloseDelayMs (upval)
 		if FFlagLuaAppParentUpsellPolicy and not UseAppPolicyResult then
 			Callback(p1)
 			UseResult11("GameLaunch")
@@ -268,19 +283,19 @@ return function(UniverseId, Callback, PageName)
 			return
 		else
 			FetchUserSettingsAndOptionsFunction(UseRoactServiceResult):andThen(function(Result)
-				-- upvalues: UseSelectorResult (upval), FlaggedMutedErrorFunction (upval), Callback (upval), p1 (copy), UseResult11 (upval), v1 (upval), LoggingProtocolModule (upval), UnknownUpsellErrorEventHundredthsPercent (upval), UniverseId (upval), DashModule (upval), UseAppPolicyResult1 (upval), UseResult3 (upval), UseLocalizationResult (upval), UseResult5 (upval), UseResult1 (upval), UseResult7 (upval), FFlagEnablePlayButtonWizardVPCPrologueModule (upval), UseResult10 (upval), UseResult9 (upval), UseResult2 (upval), UseResult8 (upval), UseResult (upval), FFlagLuaAppPlayButtonAmpAgeCheckFlow (upval), FStringLuaAppPlayButtonAgeCheckAmpFeatureName (upval), UseResult6 (upval), PageName (upval), FStringLuaAppPlayButtonAgeCheckAmpNameSpace (upval), FFlagLuaAppPlayButtonWizardCloseDelay (upval), DelayedAmpWizardCompletionCallbackOverrideModule (upval), FIntLuaAppPlayButtonWizardCloseDelayMs (upval)
+				-- upvalues: UseSelectorResult1 (upval), FlaggedMutedErrorFunction (upval), Callback (upval), p1 (copy), UseResult11 (upval), v1 (upval), LoggingProtocolModule (upval), UnknownUpsellErrorEventHundredthsPercent (upval), UniverseId (upval), DashModule (upval), UseAppPolicyResult1 (upval), UseResult3 (upval), UseLocalizationResult (upval), UseResult5 (upval), UseResult1 (upval), UseResult7 (upval), FFlagEnablePlayButtonWizardVPCPrologueModule (upval), UseResult10 (upval), UseResult9 (upval), UseResult2 (upval), UseResult8 (upval), UseResult (upval), FFlagLuaAppPlayButtonAmpAgeCheckFlow (upval), FStringLuaAppPlayButtonAgeCheckAmpFeatureName (upval), UseResult6 (upval), PageName (upval), FStringLuaAppPlayButtonAgeCheckAmpNameSpace (upval), FFlagLuaAppPlayButtonWizardCloseDelay (upval), DelayedAmpWizardCompletionCallbackOverrideModule (upval), FIntLuaAppPlayButtonWizardCloseDelayMs (upval)
 				local ContentAgeRestriction = Result.contentAgeRestriction
 				
-				if not ContentAgeRestriction or not UseSelectorResult then
-					FlaggedMutedErrorFunction("ExperienceParentalControlsUpsellUnknownContentMaturityRating", `Unknown content maturity rating {UseSelectorResult} or age restriction setting {ContentAgeRestriction} for Contextual Parental Controls upsell on play button click`)
+				if not ContentAgeRestriction or not UseSelectorResult1 then
+					FlaggedMutedErrorFunction("ExperienceParentalControlsUpsellUnknownContentMaturityRating", `Unknown content maturity rating {UseSelectorResult1} or age restriction setting {ContentAgeRestriction} for Contextual Parental Controls upsell on play button click`)
 					Callback(p1)
 					UseResult11("GameLaunch")
 					
 					return
 				end
-				assert(UseSelectorResult, "Content maturity rating must be present to show correct upsell")
+				assert(UseSelectorResult1, "Content maturity rating must be present to show correct upsell")
 				
-				if not v1[UseSelectorResult] then
+				if not v1[UseSelectorResult1] then
 					LoggingProtocolModule.default:logRobloxTelemetryEvent({
 						eventName = "ExperienceParentalControlsUpsellUnexpectedContentMaturityRating",
 						description = "Unexpected content maturity rating for Contextual Parental Controls upsell on play button click",
@@ -291,7 +306,7 @@ return function(UniverseId, Callback, PageName)
 						LoggingProtocolModule.default.StandardizedFields.addOsInfo
 					}, {
 						eventName = "ExperienceParentalControlsUpsellUnexpectedContentMaturityRating",
-						contentMaturityRating = UseSelectorResult,
+						contentMaturityRating = UseSelectorResult1,
 						universeId = UniverseId
 					})
 					Callback(p1)
@@ -299,7 +314,7 @@ return function(UniverseId, Callback, PageName)
 					
 					return
 				end
-				local OptionValue = v1[UseSelectorResult]
+				local OptionValue = v1[UseSelectorResult1]
 				local FindResult = DashModule.find(ContentAgeRestriction.options, function(p2): boolean
 					-- upvalues: OptionValue (copy)
 					return if p2 and p2.option then p2.option.optionValue == OptionValue else false
@@ -347,7 +362,7 @@ return function(UniverseId, Callback, PageName)
 			end)
 		end
 	end, {
-		UseRoactServiceResult, UniverseId, Callback, UseSelectorResult,
+		UseRoactServiceResult, UniverseId, Callback, UseSelectorResult1,
 		UseDispatchResult, UseResult1, UseResult, UseResult3, UseResult2, UseResult10,
 		UseResult7, UseResult8, UseResult5,
 		if FFlagLuaAppPlayButtonAmpAgeCheckFlow then UseResult6 else nil, UseResult11,

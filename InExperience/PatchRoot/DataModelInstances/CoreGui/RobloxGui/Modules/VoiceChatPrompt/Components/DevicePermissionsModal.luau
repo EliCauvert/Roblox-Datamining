@@ -1,8 +1,10 @@
 ﻿local CorePackages = game:GetService("CorePackages")
+local TextService = game:GetService("TextService")
 local ReactModule = require(CorePackages.Packages.React)
 local TModule = require(CorePackages.Packages.t)
 local UIBloxModule = require(CorePackages.Packages.UIBlox)
 local GetTextSizeFunction = require(CorePackages.Workspace.Packages.Style).GetTextSize
+local FoundationFontFaceMigration = require(CorePackages.Packages.Foundation).Utility.Flags.FoundationFontFaceMigration
 local Button = UIBloxModule.App.Button.Button
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 local AssetsModule = require(script.Parent.Parent.Parent.InGameMenu.Resources.Assets)
@@ -27,14 +29,30 @@ local WrapResult = require(CorePackages.Workspace.Packages.ArgCheck).wrap(TModul
 }))
 
 local function DevicePermissionsModal(p1, p2)
-	-- upvalues: WrapResult (copy), GetMicDeeplinkDirectionsModule (copy), GetPrimingTextModule (copy), GetTextSizeFunction (copy), GetFFlagSupportGamepadNavInVoiceModalsFunction (copy), ReactModule (copy), UIBloxModule (copy), AssetsModule (copy), IconsControlsMicrophone (copy), Button (copy), ButtonType (copy), FeatureSettingsHubActionNotNow (copy), FeatureSettingsHubActionOpenSettings (copy), FeatureSettingsHubActionOk (copy)
+	-- upvalues: WrapResult (copy), GetMicDeeplinkDirectionsModule (copy), GetPrimingTextModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), GetFFlagSupportGamepadNavInVoiceModalsFunction (copy), ReactModule (copy), UIBloxModule (copy), AssetsModule (copy), IconsControlsMicrophone (copy), Button (copy), ButtonType (copy), FeatureSettingsHubActionNotNow (copy), FeatureSettingsHubActionOpenSettings (copy), FeatureSettingsHubActionOk (copy)
 	assert(WrapResult(p1))
 	local MicDeeplinkDirectionsModule = GetMicDeeplinkDirectionsModule(p1.settingsAppAvailable, p1.UserInputService)
 	local PrimingTextModule = GetPrimingTextModule(p1.UserInputService)
-	local NewY = 20 + GetTextSizeFunction(p1.titleText, p1.promptStyle.Font.Header1.RelativeSize * p1.promptStyle.Font.BaseSize, p1.promptStyle.Font.Header1.Font, Vector2.new(325, 1e999), { addTemporaryPadding = false }).Y
-	local NewY1 = 20 + GetTextSizeFunction(p1.bodyText, p1.promptStyle.Font.Body.RelativeSize * p1.promptStyle.Font.BaseSize, p1.promptStyle.Font.Body.Font, Vector2.new(325, 1e999), { addTemporaryPadding = false }).Y
-	local NewY2: number = if PrimingTextModule then 10 + GetTextSizeFunction(PrimingTextModule, p1.promptStyle.Font.CaptionHeader.RelativeSize * p1.promptStyle.Font.BaseSize, p1.promptStyle.Font.CaptionHeader.Font, Vector2.new(325, 1e999), { addTemporaryPadding = false }).Y else 0
-	local NewY3: number = if MicDeeplinkDirectionsModule then (if PrimingTextModule then 10 else 20) + GetTextSizeFunction(MicDeeplinkDirectionsModule, p1.promptStyle.Font.Body.RelativeSize * p1.promptStyle.Font.BaseSize, p1.promptStyle.Font.Body.Font, Vector2.new(325, 1e999), { addTemporaryPadding = false }).Y else 0
+	local HeaderFont = p1.promptStyle.Font.Header1.Font
+	local ScaledRelativeSize = p1.promptStyle.Font.Header1.RelativeSize * p1.promptStyle.Font.BaseSize
+	local YOffset = 20 + (if FoundationFontFaceMigration then GetTextSizeFunction(p1.titleText, ScaledRelativeSize, HeaderFont, Vector2.new(325, 1e999), { addTemporaryPadding = false }).Y else TextService:GetTextSize(p1.titleText, ScaledRelativeSize, HeaderFont, Vector2.new(325, 1e999)).Y)
+	local BodyFont = p1.promptStyle.Font.Body.Font
+	local ScaledRelativeSize1 = p1.promptStyle.Font.Body.RelativeSize * p1.promptStyle.Font.BaseSize
+	local YOffset2 = 20 + (if FoundationFontFaceMigration then GetTextSizeFunction(p1.bodyText, ScaledRelativeSize1, BodyFont, Vector2.new(325, 1e999), { addTemporaryPadding = false }).Y else TextService:GetTextSize(p1.bodyText, ScaledRelativeSize1, BodyFont, Vector2.new(325, 1e999)).Y)
+	local YOffset3 = 0
+	
+	if PrimingTextModule then
+		local CaptionHeaderFont = p1.promptStyle.Font.CaptionHeader.Font
+		local ScaledRelativeSize2 = p1.promptStyle.Font.CaptionHeader.RelativeSize * p1.promptStyle.Font.BaseSize
+		YOffset3 = 10 + (if FoundationFontFaceMigration then GetTextSizeFunction(PrimingTextModule, ScaledRelativeSize2, CaptionHeaderFont, Vector2.new(325, 1e999), { addTemporaryPadding = false }).Y else TextService:GetTextSize(PrimingTextModule, ScaledRelativeSize2, CaptionHeaderFont, Vector2.new(325, 1e999)).Y)
+	end
+	local YOffset1 = 0
+	
+	if MicDeeplinkDirectionsModule then
+		local BodyFont1 = p1.promptStyle.Font.Body.Font
+		local ScaledRelativeSize3 = p1.promptStyle.Font.Body.RelativeSize * p1.promptStyle.Font.BaseSize
+		YOffset1 = (if PrimingTextModule then 10 else 20) + (if FoundationFontFaceMigration then GetTextSizeFunction(MicDeeplinkDirectionsModule, ScaledRelativeSize3, BodyFont1, Vector2.new(325, 1e999), { addTemporaryPadding = false }).Y else TextService:GetTextSize(MicDeeplinkDirectionsModule, ScaledRelativeSize3, BodyFont1, Vector2.new(325, 1e999)).Y)
+	end
 	local Stop = if GetFFlagSupportGamepadNavInVoiceModalsFunction() then Enum.SelectionBehavior.Stop else nil
 	local Selectable = if GetFFlagSupportGamepadNavInVoiceModalsFunction() then true else nil
 	
@@ -61,7 +79,7 @@ local function DevicePermissionsModal(p1, p2)
 			ImageTransparency = p1.promptStyle.Theme.BackgroundUIDefault.Transparency,
 			Position = UDim2.new(0.5, 0, 0.5, 0),
 			ScaleType = AssetsModule.Images.RoundedRect.ScaleType,
-			Size = UDim2.new(0, 365, 0, NewY + 5 + NewY1 + 36 + (if MicDeeplinkDirectionsModule then if PrimingTextModule then 5.5 else 4.5 elseif PrimingTextModule then 5.5 else 4) * 20 + NewY3 + 55 + NewY2),
+			Size = UDim2.new(0, 365, 0, YOffset + 5 + YOffset2 + 36 + (if MicDeeplinkDirectionsModule then if PrimingTextModule then 5.5 else 4.5 elseif PrimingTextModule then 5.5 else 4) * 20 + YOffset1 + 55 + YOffset3),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			SliceCenter = AssetsModule.Images.RoundedRect.SliceCenter,
 			SelectionBehaviorDown = Stop,
@@ -94,7 +112,7 @@ local function DevicePermissionsModal(p1, p2)
 			TitleTextContainer = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
-				Size = UDim2.new(1, 0, 0, NewY),
+				Size = UDim2.new(1, 0, 0, YOffset),
 				AutomaticSize = Enum.AutomaticSize.Y
 			}, {
 				Padding = ReactModule.createElement("UIPadding", { PaddingBottom = UDim.new(0, 7) }),
@@ -121,7 +139,7 @@ local function DevicePermissionsModal(p1, p2)
 			BodyTextContainer = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 5,
-				Size = UDim2.new(1, 0, 0, NewY1)
+				Size = UDim2.new(1, 0, 0, YOffset2)
 			}, {
 				BodyText = ReactModule.createElement(UIBloxModule.App.Text.StyledTextLabel, {
 					lineHeight = 1.2,
@@ -135,7 +153,7 @@ local function DevicePermissionsModal(p1, p2)
 			InfoTextContainer = if MicDeeplinkDirectionsModule then ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 6,
-				Size = UDim2.new(1, 0, 0, NewY3 + 20)
+				Size = UDim2.new(1, 0, 0, YOffset1 + 20)
 			}, {
 				Padding = ReactModule.createElement("UIPadding", {
 					PaddingTop = UDim.new(0, if PrimingTextModule then 8 else 15),
@@ -144,7 +162,7 @@ local function DevicePermissionsModal(p1, p2)
 				TextContainer = ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
-					Size = UDim2.new(1, 0, 0, NewY3)
+					Size = UDim2.new(1, 0, 0, YOffset1)
 				}, {
 					InfoText = ReactModule.createElement(UIBloxModule.App.Text.StyledTextLabel, {
 						lineHeight = 1.25,
@@ -165,7 +183,7 @@ local function DevicePermissionsModal(p1, p2)
 			PrimingTextContainer = if PrimingTextModule then ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 8,
-				Size = UDim2.new(1, 0, 0, NewY2)
+				Size = UDim2.new(1, 0, 0, YOffset3)
 			}, {
 				PrimingText = ReactModule.createElement(UIBloxModule.App.Text.StyledTextLabel, {
 					lineHeight = 1.25,

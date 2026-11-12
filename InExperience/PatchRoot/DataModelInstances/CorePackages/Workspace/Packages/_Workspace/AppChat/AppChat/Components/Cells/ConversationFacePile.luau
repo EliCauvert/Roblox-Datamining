@@ -129,24 +129,24 @@ local function ConversationFacePileInner(p1)
 	else
 		None = UseFoundationPresenceModuleResult.presence
 	end
-	local v1: string? = nil
+	local Text2: string? = nil
 	
 	if FFlagEnableBlackbirdCheck and #Participants == 2 then
-		local Text2 = nil
+		local Text3 = nil
 		for _, participant1 in Participants do
 			if type(participant1) == "table" then
 				local Id = participant1.id or participant1.userId
-				Text2 = if Id == nil then nil else tostring(Id)
+				Text3 = if Id == nil then nil else tostring(Id)
 			else
-				Text2 = if participant1 == nil then nil else tostring(participant1)
+				Text3 = if participant1 == nil then nil else tostring(participant1)
 			end
-			if Text2 and tostring(Text2) ~= tostring(Text) then
-				v1 = tostring(Text2)
+			if Text3 and tostring(Text3) ~= tostring(Text) then
+				Text2 = tostring(Text3)
 				break
 			end
 		end
 	end
-	local UseIsRobloxSubscriberResult = UseIsRobloxSubscriberFunction(v1)
+	local UseIsRobloxSubscriberResult = UseIsRobloxSubscriberFunction(Text2)
 	
 	return ReactModule.createElement(UserTile, {
 		userId = Entry,

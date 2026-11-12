@@ -41,26 +41,26 @@ return function(p1)
 	if p1 == nil or next(p1) == nil then
 		return config
 	end
-	for i1, value1 in pairs(p1.Color) do
-		if value1.Background then
-			Variants[pascalToKebab(i1)] = value1
+	for i, value in pairs(p1.Color) do
+		if value.Background then
+			Variants[pascalToKebab(i)] = value
 			continue
 		end
-		Colors[i1] = {}
+		Colors[i] = {}
 		
-		for i2, value2 in value1 do
-			Colors[i1][pascalToKebab(if ColorScopeKeepPrefixModule[i1] then i1 .. i2 else i2)] = value2
+		for i1, value1 in value do
+			Colors[i][pascalToKebab(if ColorScopeKeepPrefixModule[i] then i .. i1 else i1)] = value1
 		end
 	end
-	for i3, value3 in pairs(p1.Inverse) do
-		if i3 == "Content" then
-			for i4, value4 in value3 do
-				Colors[i3][`inverse-{pascalToKebab(if ColorScopeKeepPrefixModule[i3] then i3 .. i4 else i4)}`] = value4
+	for i2, value2 in pairs(p1.Inverse) do
+		if i2 == "Content" then
+			for i3, value3 in value2 do
+				Colors[i2][`inverse-{pascalToKebab(if ColorScopeKeepPrefixModule[i2] then i2 .. i3 else i3)}`] = value3
 			end
 		end
 	end
-	for i5, Size in pairs(p1.Stroke) do
-		table.insert(List, { name = pascalToKebab(i5), size = Size })
+	for i4, Size in pairs(p1.Stroke) do
+		table.insert(List, { name = pascalToKebab(i4), size = Size })
 	end
 	table.insert(List, { name = "none", size = 0 })
 	table.sort(List, function(A, B): boolean
@@ -74,8 +74,8 @@ return function(p1)
 		return A.size.Offset < B.size.Offset
 	end)
 	
-	for i8, value7 in pairs(p1.Radius) do
-		table.insert(List2, { name = string.lower(i8), size = UDim.new(0, value7) })
+	for i7, value6 in pairs(p1.Radius) do
+		table.insert(List2, { name = string.lower(i7), size = UDim.new(0, value6) })
 	end
 	table.sort(List2, function(A, B): boolean
 		return A.size.Offset < B.size.Offset
@@ -92,29 +92,29 @@ return function(p1)
 		return A.size.Offset < B.size.Offset
 	end)
 	
-	for i7, value6 in pairs(p1.Typography) do
-		Typography[pascalToKebab(i7)] = {
-			Font = value6.Font,
-			TextSize = value6.FontSize,
-			LineHeight = value6.LineHeight
+	for i5, value4 in pairs(p1.Typography) do
+		Typography[pascalToKebab(i5)] = {
+			Font = value4.Font,
+			TextSize = value4.FontSize,
+			LineHeight = value4.LineHeight
 		}
 	end
-	for i11, value10 in pairs(p1.Padding) do
-		table.insert(List4, { name = string.lower(i11), size = UDim.new(0, value10) })
+	for i10, value9 in pairs(p1.Padding) do
+		table.insert(List4, { name = string.lower(i10), size = UDim.new(0, value9) })
 	end
 	table.sort(List4, function(A, B): boolean
 		return A.size.Offset < B.size.Offset
 	end)
 	
-	for i10, value9 in pairs(p1.Margin) do
-		table.insert(List5, { name = string.lower(i10), size = UDim.new(0, value9) })
+	for i8, value7 in pairs(p1.Margin) do
+		table.insert(List5, { name = string.lower(i8), size = UDim.new(0, value7) })
 	end
 	table.sort(List5, function(A, B): boolean
 		return A.size.Offset < B.size.Offset
 	end)
 	
-	for i, value in pairs(p1.Gutter) do
-		table.insert(List6, { name = string.lower(i), size = UDim.new(0, value) })
+	for i11, value10 in pairs(p1.Gutter) do
+		table.insert(List6, { name = string.lower(i11), size = UDim.new(0, value10) })
 	end
 	table.sort(List6, function(A, B): boolean
 		return A.size.Offset < B.size.Offset

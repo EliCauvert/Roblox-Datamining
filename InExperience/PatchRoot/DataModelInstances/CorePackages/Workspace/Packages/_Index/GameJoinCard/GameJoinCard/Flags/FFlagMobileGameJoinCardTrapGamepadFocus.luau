@@ -1,3 +1,0 @@
-﻿local FFlagMobileGameJoinCardGamepadSupport = require(script:FindFirstAncestor("GameJoinCard").Parent.SharedFlags).FFlagMobileGameJoinCardGamepadSupport
-
-return game:DefineFastFlag("MobileGameJoinCardTrapGamepadFocus", false) and FFlagMobileGameJoinCardGamepadSupport

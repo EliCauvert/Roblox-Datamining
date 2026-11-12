@@ -143,28 +143,28 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 			end
 		elseif CaptureServiceStartUploadCoreScriptBypassEngineFeature then
 			LoggerModule:debug("event=path_selected path=two_phase localId={}", (string.gsub(string.gsub(EnumNameFunction(Capture.LocalId) or "nil", "\r", "\\r"), "\n", "\\n")))
-			local Success4, Result5, Result3_1 = pcall(function()
+			local Success2, Result2, Result3 = pcall(function()
 				-- upvalues: P9 (upval), Capture (upval)
 				return P9:StartUploadCaptureAsync(Capture)
 			end)
 			
-			if Success4 then
-				LoggerModule:debug("event=start_upload localId={} pcallSuccess=true status={}", string.gsub(string.gsub(EnumNameFunction(Capture.LocalId) or "nil", "\r", "\\r"), "\n", "\\n"), (string.gsub(string.gsub(EnumNameFunction(Result5) or "nil", "\r", "\\r"), "\n", "\\n")))
+			if Success2 then
+				LoggerModule:debug("event=start_upload localId={} pcallSuccess=true status={}", string.gsub(string.gsub(EnumNameFunction(Capture.LocalId) or "nil", "\r", "\\r"), "\n", "\\n"), (string.gsub(string.gsub(EnumNameFunction(Result2) or "nil", "\r", "\\r"), "\n", "\\n")))
 			else
-				LoggerModule:debug("event=start_upload localId={} pcallSuccess=false status=pcall_error errorClass={}", string.gsub(string.gsub(EnumNameFunction(Capture.LocalId) or "nil", "\r", "\\r"), "\n", "\\n"), (typeof(Result5)))
+				LoggerModule:debug("event=start_upload localId={} pcallSuccess=false status=pcall_error errorClass={}", string.gsub(string.gsub(EnumNameFunction(Capture.LocalId) or "nil", "\r", "\\r"), "\n", "\\n"), (typeof(Result2)))
 			end
-			if not Success4 then
+			if not Success2 then
 				UploadStore.setFailed("StartUploadFailed")
 				ToastStore.triggerToast({
 					title = Localizations.failedTitle,
 					text = Localizations.failedBody
 				})
 				local config = {
-					status = EnumNameFunction(Result5),
+					status = EnumNameFunction(Result2),
 					captureType = EnumNameFunction(Capture.CaptureType)
 				}
 				config.status = "StartUploadFailed"
-				config.error = tostring(Result5)
+				config.error = tostring(Result2)
 				MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", "StartUploadFailed")
 				config.localId = tostring(Capture.LocalId)
 				config.creationSessionId = CreationSessionId
@@ -172,14 +172,14 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 				
 				return
 			end
-			if Result5 == Enum.UploadCaptureResult.Success then
-				local Success2, Result2 = pcall(function()
+			if Result2 == Enum.UploadCaptureResult.Success then
+				local Success3, Result4 = pcall(function()
 					-- upvalues: P9 (upval), Capture (upval), NormalizeMomentMetadataModuleResult (upval), FeedRegistrationInfo (upval)
 					P9:UploadCaptureAndPostMoment(Capture, NormalizeMomentMetadataModuleResult, FeedRegistrationInfo)
 				end)
-				LoggerModule:debug("event=registration localId={} pcallSuccess={} errorClass={}", string.gsub(string.gsub(EnumNameFunction(Capture.LocalId) or "nil", "\r", "\\r"), "\n", "\\n"), tostring(Success2), if Success2 then "none" else typeof(Result2))
+				LoggerModule:debug("event=registration localId={} pcallSuccess={} errorClass={}", string.gsub(string.gsub(EnumNameFunction(Capture.LocalId) or "nil", "\r", "\\r"), "\n", "\\n"), tostring(Success3), if Success3 then "none" else typeof(Result4))
 				
-				if not Success2 then
+				if not Success3 then
 					UploadStore.setFailed("RegistrationFailed")
 					ToastStore.triggerToast({
 						title = Localizations.failedTitle,
@@ -187,7 +187,7 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 					})
 					local config = {
 						status = "RegistrationFailed",
-						error = tostring(Result2),
+						error = tostring(Result4),
 						captureType = EnumNameFunction(Capture.CaptureType)
 					}
 					MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", "RegistrationFailed")
@@ -201,35 +201,35 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 				CaptureDescriptorFields.creationSessionId = CreationSessionId
 				FireAnalyticsEventModule(EventNames.EditingFlowMomentPublished, CaptureDescriptorFields)
 				local Flag = false
-				local UploadCaptureResult = nil
+				local v2 = nil
 				local MomentsUploadPollIntervalSecondsFastInt = game:GetFastInt("MomentsUploadPollIntervalSeconds")
 				local MomentsUploadMaxPollAttemptsFastInt = game:GetFastInt("MomentsUploadMaxPollAttempts")
-				local Result1 = nil
-				local Result3 = nil
+				local Result5 = nil
+				local Result3_1 = nil
 				
 				for i = 1, MomentsUploadMaxPollAttemptsFastInt do
 					task.wait(MomentsUploadPollIntervalSecondsFastInt)
-					local Success1
-					Success1, Result1, Result3 = pcall(function()
-						-- upvalues: P9 (upval), Result3_1 (copy)
-						return P9:CheckUploadCaptureStatusAsync(Result3_1)
+					local Success4
+					Success4, Result5, Result3_1 = pcall(function()
+						-- upvalues: P9 (upval), Result3 (copy)
+						return P9:CheckUploadCaptureStatusAsync(Result3)
 					end)
-					local NoFlag: boolean = not Flag or Success1 and Result1 ~= UploadCaptureResult
-					local NoSuccess1: boolean = not Success1 or Result1 ~= Enum.UploadCaptureResult.UploadPending
-					local v2 = i % 6 == 0
+					local NoFlag: boolean = not Flag or Success4 and Result5 ~= v2
+					local NoSuccess4: boolean = not Success4 or Result5 ~= Enum.UploadCaptureResult.UploadPending
+					local IsIMatch = i % 6 == 0
 					
-					if Success1 then
+					if Success4 then
 						Flag = true
-						UploadCaptureResult = Result1
+						v2 = Result5
 					end
-					if i == 1 or NoFlag or NoSuccess1 or v2 then
-						if Success1 then
-							LoggerModule:debug("event=poll localId={} attempt={} pcallSuccess=true status={} assetId={} heartbeat={}", string.gsub(string.gsub(EnumNameFunction(Capture.LocalId) or "nil", "\r", "\\r"), "\n", "\\n"), tostring(i), string.gsub(string.gsub(EnumNameFunction(Result1) or "nil", "\r", "\\r"), "\n", "\\n"), string.gsub(string.gsub(EnumNameFunction(Result3) or "nil", "\r", "\\r"), "\n", "\\n"), (tostring(v2 and not NoFlag)))
+					if i == 1 or NoFlag or NoSuccess4 or IsIMatch then
+						if Success4 then
+							LoggerModule:debug("event=poll localId={} attempt={} pcallSuccess=true status={} assetId={} heartbeat={}", string.gsub(string.gsub(EnumNameFunction(Capture.LocalId) or "nil", "\r", "\\r"), "\n", "\\n"), tostring(i), string.gsub(string.gsub(EnumNameFunction(Result5) or "nil", "\r", "\\r"), "\n", "\\n"), string.gsub(string.gsub(EnumNameFunction(Result3_1) or "nil", "\r", "\\r"), "\n", "\\n"), (tostring(IsIMatch and not NoFlag)))
 						else
-							LoggerModule:debug("event=poll localId={} attempt={} pcallSuccess=false status=pcall_error errorClass={}", string.gsub(string.gsub(EnumNameFunction(Capture.LocalId) or "nil", "\r", "\\r"), "\n", "\\n"), tostring(i), (typeof(Result1)))
+							LoggerModule:debug("event=poll localId={} attempt={} pcallSuccess=false status=pcall_error errorClass={}", string.gsub(string.gsub(EnumNameFunction(Capture.LocalId) or "nil", "\r", "\\r"), "\n", "\\n"), tostring(i), (typeof(Result5)))
 						end
 					end
-					if not Success1 then
+					if not Success4 then
 						UploadStore.setFailed("PollError")
 						ToastStore.triggerToast({
 							title = Localizations.failedTitle,
@@ -237,7 +237,7 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 						})
 						local config = {
 							status = "PollError",
-							error = tostring(Result1),
+							error = tostring(Result5),
 							captureType = EnumNameFunction(Capture.CaptureType)
 						}
 						MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", "PollError")
@@ -247,17 +247,17 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 						
 						return
 					end
-					if Result1 == Enum.UploadCaptureResult.Success then
-						CompleteMomentUploadModule(Result3, {
+					if Result5 == Enum.UploadCaptureResult.Success then
+						CompleteMomentUploadModule(Result3_1, {
 							uploadStore = UploadStore,
 							toastStore = ToastStore,
 							feedStore = FeedStore,
 							myCreationsStore = MyCreationsStore,
 							localizations = Localizations,
 							onPostedToFeed = function()
-								-- upvalues: FireAnalyticsEventModule (upval), EventNames (upval), Result3 (copy), Capture (upval), EnumNameFunction (upval), CreationSessionId (upval)
+								-- upvalues: FireAnalyticsEventModule (upval), EventNames (upval), Result3_1 (copy), Capture (upval), EnumNameFunction (upval), CreationSessionId (upval)
 								FireAnalyticsEventModule(EventNames.EditingFlowMomentPostedToFeed, {
-									assetId = tostring(Result3),
+									assetId = tostring(Result3_1),
 									localId = tostring(Capture.LocalId),
 									captureType = EnumNameFunction(Capture.CaptureType),
 									creationSessionId = CreationSessionId
@@ -267,35 +267,35 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 						
 						return
 					end
-					if Result1 == Enum.UploadCaptureResult.UploadPending then
+					if Result5 == Enum.UploadCaptureResult.UploadPending then
 						continue
-					elseif Result1 == Enum.UploadCaptureResult.CaptureModerated then
+					elseif Result5 == Enum.UploadCaptureResult.CaptureModerated then
 						UploadStore.setFailed("Moderated")
 						ToastStore.triggerToast({
 							title = Localizations.removedTitle,
 							text = Localizations.removedBody
 						})
 						local config = {
-							status = EnumNameFunction(Result1),
+							status = EnumNameFunction(Result5),
 							captureType = EnumNameFunction(Capture.CaptureType)
 						}
-						MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", (EnumNameFunction(Result1)))
+						MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", (EnumNameFunction(Result5)))
 						config.localId = tostring(Capture.LocalId)
 						config.creationSessionId = CreationSessionId
 						FireAnalyticsEventModule(EventNames.UploadCaptureFailed, config)
 						
 						return
 					else
-						UploadStore.setFailed((tostring(Result1)))
+						UploadStore.setFailed((tostring(Result5)))
 						ToastStore.triggerToast({
 							title = Localizations.failedTitle,
 							text = Localizations.failedBody
 						})
 						local config = {
-							status = EnumNameFunction(Result1),
+							status = EnumNameFunction(Result5),
 							captureType = EnumNameFunction(Capture.CaptureType)
 						}
-						MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", (EnumNameFunction(Result1)))
+						MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", (EnumNameFunction(Result5)))
 						config.localId = tostring(Capture.LocalId)
 						config.creationSessionId = CreationSessionId
 						FireAnalyticsEventModule(EventNames.UploadCaptureFailed, config)
@@ -320,12 +320,12 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 				
 				return
 			else
-				if Result5 == Enum.UploadCaptureResult.CaptureModerated then
+				if Result2 == Enum.UploadCaptureResult.CaptureModerated then
 					ToastStore.triggerToast({
 						title = Localizations.removedTitle,
 						text = Localizations.removedBody
 					})
-				elseif Result5 == Enum.UploadCaptureResult.UploadQuotaReached then
+				elseif Result2 == Enum.UploadCaptureResult.UploadQuotaReached then
 					ToastStore.triggerToast({
 						title = Localizations.failedTitle,
 						text = Localizations.uploadQuotaReachedBody
@@ -336,12 +336,12 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 						text = Localizations.failedBody
 					})
 				end
-				UploadStore.setFailed((tostring(Result5)))
+				UploadStore.setFailed((tostring(Result2)))
 				local config = {
-					status = EnumNameFunction(Result5),
+					status = EnumNameFunction(Result2),
 					captureType = EnumNameFunction(Capture.CaptureType)
 				}
-				MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", (EnumNameFunction(Result5)))
+				MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", (EnumNameFunction(Result2)))
 				config.localId = tostring(Capture.LocalId)
 				config.creationSessionId = CreationSessionId
 				FireAnalyticsEventModule(EventNames.UploadCaptureFailed, config)
@@ -350,17 +350,17 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 			end
 		else
 			LoggerModule:debug("event=path_selected path=fallback localId={}", (string.gsub(string.gsub(EnumNameFunction(Capture.LocalId) or "nil", "\r", "\\r"), "\n", "\\n")))
-			local Success3, Result4 = pcall(function()
+			local Success1, Result1 = pcall(function()
 				-- upvalues: P9 (upval), Capture (upval), NormalizeMomentMetadataModuleResult (upval), FeedRegistrationInfo (upval)
 				P9:UploadCaptureAndPostMoment(Capture, NormalizeMomentMetadataModuleResult, FeedRegistrationInfo)
 			end)
 			
-			if Success3 then
+			if Success1 then
 				local CaptureDescriptorFields = MakeCreationEventFieldsModule.makeCaptureDescriptorFields(Capture)
 				CaptureDescriptorFields.creationSessionId = CreationSessionId
 				FireAnalyticsEventModule(EventNames.EditingFlowMomentPublished, CaptureDescriptorFields)
 			end
-			if Success3 then
+			if Success1 then
 				MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "success")
 				
 				return
@@ -371,7 +371,7 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 					text = Localizations.failedBody
 				})
 				local config = {
-					error = tostring(Result4),
+					error = tostring(Result1),
 					captureType = EnumNameFunction(Capture.CaptureType),
 					status = "GenericFailure"
 				}

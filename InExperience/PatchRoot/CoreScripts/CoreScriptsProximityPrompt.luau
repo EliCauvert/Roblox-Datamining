@@ -322,12 +322,12 @@ local function createPrompt(Prompt, ProximityPromptInputType, Parent)
 			ButtonText.Position = UDim2.fromOffset(0, -1)
 			ButtonText.Size = UDim2.fromScale(1, 1)
 			ButtonText.Font = AppFonts.default:getMedium()
-			local Entry2 = config3[Prompt.KeyboardKeyCode]
+			local TextSize = config3[Prompt.KeyboardKeyCode]
 			
-			if Entry2 == nil then
-				Entry2 = 14
+			if TextSize == nil then
+				TextSize = 14
 			end
-			ButtonText.TextSize = Entry2
+			ButtonText.TextSize = TextSize
 			ButtonText.BackgroundTransparency = 1
 			ButtonText.TextTransparency = 1
 			ButtonText.TextColor3 = _Color3_1

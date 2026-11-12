@@ -2,7 +2,6 @@
 local Parent = ServerTriggeredModals.Parent
 local ReactModule = require(Parent.React)
 local AppNavBarModule = require(Parent.AppNavBar)
-local LocalUserIdStore = require(Parent.LocalUserIdStore).LocalUserIdStore
 local SignalsReactModule = require(Parent.SignalsReact)
 local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
 local SharedFlagsModule = require(Parent.SharedFlags)
@@ -43,9 +42,7 @@ local FFlagHomepagePromptsHandlerPassClientAttributes = SharedFlagsModule.FFlagH
 local FFlagPromptsEdpOpenReplaceOnFetch = SharedFlagsModule.FFlagPromptsEdpOpenReplaceOnFetch
 local FFlagPromptsHandlerFetchOncePerSession = SharedFlagsModule.FFlagPromptsHandlerFetchOncePerSession
 local FIntPromptsHandlerSessionTimeoutMs = SharedFlagsModule.FIntPromptsHandlerSessionTimeoutMs
-local FFlagChatPushUpsellPromptsEnabled = SharedFlagsModule.FFlagChatPushUpsellPromptsEnabled
 local Tbl = {}
-local CurrentUserIds = {}
 
 local function parsePromptStyles(Text: string)
 	local List = {}
@@ -56,34 +53,13 @@ local function parsePromptStyles(Text: string)
 	return if #List == 0 then nil else List
 end
 
-local function _(ChatLandingOpen, Key): boolean
-	-- upvalues: FFlagChatPushUpsellPromptsEnabled (copy), PromptsEntryPointModule (copy), LocalUserIdStore (copy), CurrentUserIds (copy)
-	if not FFlagChatPushUpsellPromptsEnabled or ChatLandingOpen ~= PromptsEntryPointModule.ChatLandingOpen then
-		return true
-	end
-	local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
-	
-	if CurrentUserIds[Key] == CurrentUserId then
-		return false
-	else
-		CurrentUserIds[Key] = CurrentUserId
-		
-		return true
-	end
-end
-
-local _ = function(ChatLandingOpen): boolean
-	-- upvalues: FFlagEdpGameLeavePromptsHandlerEnabled (copy), FFlagEdpOpenPromptsHandlerEnabled (copy), FFlagChatPushUpsellPromptsEnabled (copy), PromptsEntryPointModule (copy)
-	return if FFlagEdpGameLeavePromptsHandlerEnabled or FFlagEdpOpenPromptsHandlerEnabled then true else FFlagChatPushUpsellPromptsEnabled and ChatLandingOpen == PromptsEntryPointModule.ChatLandingOpen
-end
-
-local _ = function(HomepageLaunch)
+local function _(HomepageLaunch)
 	-- upvalues: PromptsEntryPointModule (copy), parsePromptStyles (copy), SharedFlagsModule (copy)
 	return if HomepageLaunch == PromptsEntryPointModule.HomepageLaunch then parsePromptStyles(SharedFlagsModule.FStringHomePromptsHandlerPromptStyles) else nil
 end
 
 local MemoResult = ReactModule.memo(function(p1)
-	-- upvalues: FFlagNotificationStreamPromptsHandlerEnabled (copy), PromptsEntryPointModule (copy), SharedFlagsModule (copy), UseDispatchFunction (copy), FFlagSduiDismissPromptAction (copy), UseStoreFunction (copy), UseModalSignalStoreModule (copy), FFlagEdpGameLeavePromptsHandlerEnabled (copy), FFlagEdpOpenPromptsHandlerEnabled (copy), FFlagPromptsEdpOpenReplaceOnFetch (copy), FFlagPushNotificationsUpsellPassClientAttributesToPrompts (copy), GetHomepagePromptsClientAttributesModule (copy), ReactModule (copy), GetEntryPointSurfaceConfigModule (copy), SignalsReactModule (copy), FFlagHomepagePromptsHandlerPassClientAttributes (copy), FFlagChatPushUpsellPromptsEnabled (copy), FFlagSduiAllowNoConfigsBuilt (copy), SduiLoadTimer (copy), parsePromptStyles (copy), FIntPromptsHandlerSessionTimeoutMs (copy), FFlagPromptsHandlerFetchOncePerSession (copy), Tbl (copy), FetchPromptsModule (copy), LocalUserIdStore (copy), CurrentUserIds (copy), UsePromptEntriesModule (copy), PromptStyleModule (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), FFlagPromptsImpressionUsesTitle (copy), ReportPromptImpressionModule (copy), LoggerModule (copy), SendModalImpressionEventFunction (copy), FFlagPromptsHandlerCoachmarkEnabled (copy), FFlagSduiSurfaceBannerScrollAwaySticky (copy), FFlagAppIaScrollAway (copy), AppNavBarModule (copy), FFlagSduiSurfaceBannerAlwaysMounted (copy), FFlagSduiSystemBannerComponent (copy), SurfaceBannerModule (copy), SduiFeatureEntryPoint (copy), FFlagPromptsActionEventLoggingModule (copy), FFlagHomepagePromptsPaddingFix (copy), View (copy), CoachmarkRendererModule (copy)
+	-- upvalues: FFlagNotificationStreamPromptsHandlerEnabled (copy), PromptsEntryPointModule (copy), SharedFlagsModule (copy), UseDispatchFunction (copy), FFlagSduiDismissPromptAction (copy), UseStoreFunction (copy), UseModalSignalStoreModule (copy), FFlagEdpGameLeavePromptsHandlerEnabled (copy), FFlagEdpOpenPromptsHandlerEnabled (copy), FFlagPromptsEdpOpenReplaceOnFetch (copy), FFlagPushNotificationsUpsellPassClientAttributesToPrompts (copy), GetHomepagePromptsClientAttributesModule (copy), ReactModule (copy), GetEntryPointSurfaceConfigModule (copy), SignalsReactModule (copy), FFlagHomepagePromptsHandlerPassClientAttributes (copy), FFlagSduiAllowNoConfigsBuilt (copy), SduiLoadTimer (copy), parsePromptStyles (copy), FIntPromptsHandlerSessionTimeoutMs (copy), FFlagPromptsHandlerFetchOncePerSession (copy), Tbl (copy), FetchPromptsModule (copy), UsePromptEntriesModule (copy), PromptStyleModule (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), FFlagPromptsImpressionUsesTitle (copy), ReportPromptImpressionModule (copy), LoggerModule (copy), SendModalImpressionEventFunction (copy), FFlagPromptsHandlerCoachmarkEnabled (copy), FFlagSduiSurfaceBannerScrollAwaySticky (copy), FFlagAppIaScrollAway (copy), AppNavBarModule (copy), FFlagSduiSurfaceBannerAlwaysMounted (copy), FFlagSduiSystemBannerComponent (copy), SurfaceBannerModule (copy), SduiFeatureEntryPoint (copy), FFlagPromptsActionEventLoggingModule (copy), FFlagHomepagePromptsPaddingFix (copy), View (copy), CoachmarkRendererModule (copy)
 	local EntryPoint = p1.entryPoint
 	local IsEntryPointMatch: boolean = FFlagNotificationStreamPromptsHandlerEnabled and EntryPoint == PromptsEntryPointModule.NotificationStreamOpen
 	local PromptStyle = p1.promptStyle
@@ -105,16 +81,8 @@ local MemoResult = ReactModule.memo(function(p1)
 	
 	if FFlagHomepagePromptsHandlerPassClientAttributes then
 		UseMemoResult1 = ReactModule.useMemo(function()
-			-- upvalues: IsEntryPointMatch (copy), p1 (copy), FFlagPushNotificationsUpsellPassClientAttributesToPrompts (upval), EntryPoint (copy), PromptsEntryPointModule (upval), FFlagEdpGameLeavePromptsHandlerEnabled (upval), FFlagEdpOpenPromptsHandlerEnabled (upval), UseResult (copy), FFlagChatPushUpsellPromptsEnabled (upval), GetHomepagePromptsClientAttributesModule (upval)
-			if IsEntryPointMatch then
-				return p1.clientAttributes
-			elseif FFlagPushNotificationsUpsellPassClientAttributesToPrompts and EntryPoint == PromptsEntryPointModule.HomepageLaunch and (not FFlagEdpGameLeavePromptsHandlerEnabled and not FFlagEdpOpenPromptsHandlerEnabled or p1.clientAttributes == nil) then
-				return UseResult
-			else
-				local IsEntryPointMatch1: boolean = if FFlagEdpGameLeavePromptsHandlerEnabled or FFlagEdpOpenPromptsHandlerEnabled then true else FFlagChatPushUpsellPromptsEnabled and EntryPoint == PromptsEntryPointModule.ChatLandingOpen
-				
-				return if IsEntryPointMatch1 and p1.clientAttributes ~= nil then p1.clientAttributes elseif EntryPoint == PromptsEntryPointModule.HomepageLaunch then GetHomepagePromptsClientAttributesModule.get() else nil
-			end
+			-- upvalues: IsEntryPointMatch (copy), p1 (copy), FFlagPushNotificationsUpsellPassClientAttributesToPrompts (upval), EntryPoint (copy), PromptsEntryPointModule (upval), FFlagEdpGameLeavePromptsHandlerEnabled (upval), FFlagEdpOpenPromptsHandlerEnabled (upval), UseResult (copy), GetHomepagePromptsClientAttributesModule (upval)
+			return if IsEntryPointMatch then p1.clientAttributes elseif FFlagPushNotificationsUpsellPassClientAttributesToPrompts and EntryPoint == PromptsEntryPointModule.HomepageLaunch and (not FFlagEdpGameLeavePromptsHandlerEnabled and not FFlagEdpOpenPromptsHandlerEnabled or p1.clientAttributes == nil) then UseResult elseif (FFlagEdpGameLeavePromptsHandlerEnabled or FFlagEdpOpenPromptsHandlerEnabled) and p1.clientAttributes ~= nil then p1.clientAttributes elseif EntryPoint == PromptsEntryPointModule.HomepageLaunch then GetHomepagePromptsClientAttributesModule.get() else nil
 		end, {
 			EntryPoint,
 			UseResult,
@@ -143,9 +111,7 @@ local MemoResult = ReactModule.memo(function(p1)
 		})
 	else
 		UseMemoResult2 = ReactModule.useMemo(function()
-			-- upvalues: EntryPoint (copy), UseMemoResult (copy), FFlagSduiAllowNoConfigsBuilt (upval), SduiLoadTimer (upval), FFlagEdpGameLeavePromptsHandlerEnabled (upval), FFlagEdpOpenPromptsHandlerEnabled (upval), FFlagChatPushUpsellPromptsEnabled (upval), PromptsEntryPointModule (upval), IsEntryPointMatch (copy), p1 (copy), FFlagPromptsEdpOpenReplaceOnFetch (upval), ReplaceOnFetch (copy), FFlagLuaAppEnableSduiHomePage (copy), parsePromptStyles (upval), SharedFlagsModule (upval)
-			local IsEntryPointMatch1: boolean = if FFlagEdpGameLeavePromptsHandlerEnabled or FFlagEdpOpenPromptsHandlerEnabled then true else FFlagChatPushUpsellPromptsEnabled and EntryPoint == PromptsEntryPointModule.ChatLandingOpen
-			
+			-- upvalues: EntryPoint (copy), UseMemoResult (copy), FFlagSduiAllowNoConfigsBuilt (upval), SduiLoadTimer (upval), FFlagEdpGameLeavePromptsHandlerEnabled (upval), FFlagEdpOpenPromptsHandlerEnabled (upval), IsEntryPointMatch (copy), p1 (copy), FFlagPromptsEdpOpenReplaceOnFetch (upval), ReplaceOnFetch (copy), FFlagLuaAppEnableSduiHomePage (copy), PromptsEntryPointModule (upval), parsePromptStyles (upval), SharedFlagsModule (upval)
 			return {
 				clearOnEmptyResponse = true,
 				entryPoint = EntryPoint,
@@ -153,11 +119,11 @@ local MemoResult = ReactModule.memo(function(p1)
 				configKey = UseMemoResult.configKey,
 				allowNoConfigsBuilt = if FFlagSduiAllowNoConfigsBuilt then true else nil,
 				loadTimer = SduiLoadTimer.createLoadTimer(UseMemoResult.configKey),
-				clientAttributes = if IsEntryPointMatch1 or IsEntryPointMatch then p1.clientAttributes else nil,
+				clientAttributes = if FFlagEdpGameLeavePromptsHandlerEnabled or FFlagEdpOpenPromptsHandlerEnabled or IsEntryPointMatch then p1.clientAttributes else nil,
 				replaceOnFetch = if FFlagPromptsEdpOpenReplaceOnFetch then ReplaceOnFetch else nil,
 				promptStyles = if FFlagLuaAppEnableSduiHomePage and EntryPoint == PromptsEntryPointModule.HomepageLaunch then parsePromptStyles(SharedFlagsModule.FStringHomePromptsHandlerPromptStyles) else nil
 			}
-		end, if FFlagEdpGameLeavePromptsHandlerEnabled or FFlagEdpOpenPromptsHandlerEnabled or FFlagChatPushUpsellPromptsEnabled or FFlagNotificationStreamPromptsHandlerEnabled then {
+		end, if FFlagEdpGameLeavePromptsHandlerEnabled or FFlagEdpOpenPromptsHandlerEnabled or FFlagNotificationStreamPromptsHandlerEnabled then {
 			EntryPoint, UseMemoResult, p1.clientAttributes, FFlagLuaAppEnableSduiHomePage,
 			if FFlagPromptsEdpOpenReplaceOnFetch then ReplaceOnFetch else nil,
 			IsEntryPointMatch
@@ -172,21 +138,21 @@ local MemoResult = ReactModule.memo(function(p1)
 	
 	if FFlagPushNotificationsUpsellPassClientAttributesToPrompts then
 		ReactModule.useEffect(function()
-			-- upvalues: EntryPoint (copy), PromptsEntryPointModule (upval), FFlagEdpGameLeavePromptsHandlerEnabled (upval), FFlagEdpOpenPromptsHandlerEnabled (upval), p1 (copy), GetHomepagePromptsClientAttributesModule (upval), UseMemoResult1 (ref), FFlagPromptsHandlerFetchOncePerSession (upval), UseMemoResult2 (ref), Tbl (upval), UseRefResult (copy), FetchPromptsModule (upval), FFlagChatPushUpsellPromptsEnabled (upval), LocalUserIdStore (upval), CurrentUserIds (upval), IsEntryPointMatch (copy)
+			-- upvalues: EntryPoint (copy), PromptsEntryPointModule (upval), FFlagEdpGameLeavePromptsHandlerEnabled (upval), FFlagEdpOpenPromptsHandlerEnabled (upval), p1 (copy), GetHomepagePromptsClientAttributesModule (upval), UseMemoResult1 (ref), FFlagPromptsHandlerFetchOncePerSession (upval), UseMemoResult2 (ref), Tbl (upval), UseRefResult (copy), FetchPromptsModule (upval), IsEntryPointMatch (copy)
 			local Inverted: boolean = EntryPoint == PromptsEntryPointModule.HomepageLaunch and not (if FFlagEdpGameLeavePromptsHandlerEnabled then p1.clientAttributes ~= nil else FFlagEdpOpenPromptsHandlerEnabled and p1.clientAttributes ~= nil)
 			local SessionClientAttribute = if Inverted then GetHomepagePromptsClientAttributesModule.sessionClientAttribute else nil
 			
 			if Inverted and UseMemoResult1 == nil and (not FFlagPromptsHandlerFetchOncePerSession or SessionClientAttribute == nil) then return end
 			if FFlagPromptsHandlerFetchOncePerSession and SessionClientAttribute ~= nil then
-				local ConfigKey1 = UseMemoResult2.configKey
+				local ConfigKey = UseMemoResult2.configKey
 				local UseMemoResultEntry = if UseMemoResult1 then UseMemoResult1[SessionClientAttribute] else nil
 				
 				if UseMemoResultEntry == nil then
-					if Tbl[ConfigKey1] ~= nil then return end
+					if Tbl[ConfigKey] ~= nil then return end
 					local DelayedThread = task.delay(math.max(0, UseRefResult.current - os.clock()), function()
-						-- upvalues: Tbl (upval), ConfigKey1 (copy), FetchPromptsModule (upval), UseMemoResult2 (upval)
-						if Tbl[ConfigKey1] == nil then
-							Tbl[ConfigKey1] = false
+						-- upvalues: Tbl (upval), ConfigKey (copy), FetchPromptsModule (upval), UseMemoResult2 (upval)
+						if Tbl[ConfigKey] == nil then
+							Tbl[ConfigKey] = false
 							FetchPromptsModule(UseMemoResult2, true)
 						end
 					end)
@@ -195,13 +161,13 @@ local MemoResult = ReactModule.memo(function(p1)
 						-- upvalues: DelayedThread (copy)
 						task.cancel(DelayedThread)
 					end
-				elseif Tbl[ConfigKey1] == false then
-					Tbl[ConfigKey1] = UseMemoResultEntry
+				elseif Tbl[ConfigKey] == false then
+					Tbl[ConfigKey] = UseMemoResultEntry
 					
 					return
 				else
-					if Tbl[ConfigKey1] ~= UseMemoResultEntry then
-						Tbl[ConfigKey1] = UseMemoResultEntry
+					if Tbl[ConfigKey] ~= UseMemoResultEntry then
+						Tbl[ConfigKey] = UseMemoResultEntry
 						FetchPromptsModule(UseMemoResult2, true)
 						
 						return
@@ -209,22 +175,6 @@ local MemoResult = ReactModule.memo(function(p1)
 					return
 				end
 			else
-				local ConfigKey = UseMemoResult2.configKey
-				local Flag = nil
-				
-				if FFlagChatPushUpsellPromptsEnabled and EntryPoint == PromptsEntryPointModule.ChatLandingOpen then
-					local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
-					
-					if CurrentUserIds[ConfigKey] == CurrentUserId then
-						Flag = false
-					else
-						CurrentUserIds[ConfigKey] = CurrentUserId
-						Flag = true
-					end
-				else
-					Flag = true
-				end
-				if not Flag then return end
 				local Inverted1 = if FFlagEdpOpenPromptsHandlerEnabled then Inverted or EntryPoint == PromptsEntryPointModule.ExperienceDetailsPageOpen else nil
 				
 				if IsEntryPointMatch or not FFlagEdpOpenPromptsHandlerEnabled and Inverted or FFlagEdpOpenPromptsHandlerEnabled and Inverted1 then
@@ -244,31 +194,12 @@ local MemoResult = ReactModule.memo(function(p1)
 		})
 	else
 		ReactModule.useEffect(function()
-			-- upvalues: EntryPoint (copy), UseMemoResult2 (ref), FFlagChatPushUpsellPromptsEnabled (upval), PromptsEntryPointModule (upval), LocalUserIdStore (upval), CurrentUserIds (upval), FFlagEdpOpenPromptsHandlerEnabled (upval), FetchPromptsModule (upval), IsEntryPointMatch (copy)
-			local ConfigKey = UseMemoResult2.configKey
-			local Flag = nil
-			
-			if FFlagChatPushUpsellPromptsEnabled and EntryPoint == PromptsEntryPointModule.ChatLandingOpen then
-				local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
-				
-				if CurrentUserIds[ConfigKey] == CurrentUserId then
-					Flag = false
-				else
-					CurrentUserIds[ConfigKey] = CurrentUserId
-					Flag = true
-				end
-			else
-				Flag = true
-			end
-			if Flag then
-				local IsEntryPointMatch1 = if FFlagEdpOpenPromptsHandlerEnabled then EntryPoint == PromptsEntryPointModule.ExperienceDetailsPageOpen else nil
-				FetchPromptsModule(UseMemoResult2, if IsEntryPointMatch or FFlagEdpOpenPromptsHandlerEnabled and IsEntryPointMatch1 then true else nil)
-				
-				return
-			end
+			-- upvalues: FFlagEdpOpenPromptsHandlerEnabled (upval), EntryPoint (copy), PromptsEntryPointModule (upval), FetchPromptsModule (upval), UseMemoResult2 (ref), IsEntryPointMatch (copy)
+			local IsEntryPointMatch1 = if FFlagEdpOpenPromptsHandlerEnabled then EntryPoint == PromptsEntryPointModule.ExperienceDetailsPageOpen else nil
+			FetchPromptsModule(UseMemoResult2, if IsEntryPointMatch or FFlagEdpOpenPromptsHandlerEnabled and IsEntryPointMatch1 then true else nil)
 		end, {
 			UseMemoResult2,
-			if FFlagEdpOpenPromptsHandlerEnabled or FFlagChatPushUpsellPromptsEnabled then EntryPoint else nil,
+			if FFlagEdpOpenPromptsHandlerEnabled then EntryPoint else nil,
 			IsEntryPointMatch
 		})
 	end
@@ -437,9 +368,8 @@ local MemoResult = ReactModule.memo(function(p1)
 end)
 
 function MemoResult.resetFetchedSessionsForTests()
-	-- upvalues: Tbl (copy), CurrentUserIds (copy)
+	-- upvalues: Tbl (copy)
 	table.clear(Tbl)
-	table.clear(CurrentUserIds)
 end
 
 return MemoResult

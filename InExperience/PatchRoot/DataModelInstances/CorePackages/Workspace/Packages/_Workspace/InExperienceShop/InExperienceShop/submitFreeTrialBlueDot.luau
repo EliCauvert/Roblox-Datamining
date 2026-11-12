@@ -42,7 +42,7 @@ local Handle1 = nil
 
 local _ = function(p1)
 	-- upvalues: FFlagEnableActiveFreeTrialBlueDotModule (copy), FFlagEnableRedeemedFreeTrialBlueDotModule (copy), HasRedeemedTrialWithinWindowModule (copy)
-	return if FFlagEnableActiveFreeTrialBlueDotModule and next(p1.active) ~= nil then "active" elseif FFlagEnableRedeemedFreeTrialBlueDotModule and HasRedeemedTrialWithinWindowModule(p1.redeemed) then "redeemed" elseif next(p1.available) == nil then nil else "available"
+	return if next(p1.available) == nil then if FFlagEnableActiveFreeTrialBlueDotModule and next(p1.active) ~= nil then "active" elseif FFlagEnableRedeemedFreeTrialBlueDotModule and HasRedeemedTrialWithinWindowModule(p1.redeemed) then "redeemed" else nil else "available"
 end
 
 local function chooseSlot(p1)
@@ -174,7 +174,7 @@ local _ = function()
 			local TrialAvailabilities = InExperienceShopStoreModule.getTrialAvailabilities(p1)
 			
 			if Flag or v3 then return end
-			local Active = if FFlagEnableActiveFreeTrialBlueDotModule and next(TrialAvailabilities.active) ~= nil then "active" elseif FFlagEnableRedeemedFreeTrialBlueDotModule and HasRedeemedTrialWithinWindowModule(TrialAvailabilities.redeemed) then "redeemed" elseif next(TrialAvailabilities.available) == nil then nil else "available"
+			local Active = if next(TrialAvailabilities.available) == nil then if FFlagEnableActiveFreeTrialBlueDotModule and next(TrialAvailabilities.active) ~= nil then "active" elseif FFlagEnableRedeemedFreeTrialBlueDotModule and HasRedeemedTrialWithinWindowModule(TrialAvailabilities.redeemed) then "redeemed" else nil else "available"
 			
 			if Active == nil then return end
 			local SlotId = chooseSlot(p1)
@@ -235,7 +235,7 @@ return (setmetatable({
 				local TrialAvailabilities = InExperienceShopStoreModule.getTrialAvailabilities(p1)
 				
 				if Flag or v3 then return end
-				local Active = if FFlagEnableActiveFreeTrialBlueDotModule and next(TrialAvailabilities.active) ~= nil then "active" elseif FFlagEnableRedeemedFreeTrialBlueDotModule and HasRedeemedTrialWithinWindowModule(TrialAvailabilities.redeemed) then "redeemed" elseif next(TrialAvailabilities.available) == nil then nil else "available"
+				local Active = if next(TrialAvailabilities.available) == nil then if FFlagEnableActiveFreeTrialBlueDotModule and next(TrialAvailabilities.active) ~= nil then "active" elseif FFlagEnableRedeemedFreeTrialBlueDotModule and HasRedeemedTrialWithinWindowModule(TrialAvailabilities.redeemed) then "redeemed" else nil else "available"
 				
 				if Active == nil then return end
 				local SlotId = chooseSlot(p1)

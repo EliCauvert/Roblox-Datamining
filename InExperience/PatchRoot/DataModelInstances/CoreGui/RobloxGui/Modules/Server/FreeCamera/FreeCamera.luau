@@ -378,9 +378,9 @@ local function Keypress(_, UserInputState, Input)
 		end
 		DepthOfField.Enabled = not DepthOfField.Enabled
 		
-		for i2, _ in pairs(config2) do
-			if config9[i2.Name] then
-				config9[i2.Name] = 0
+		for i1, _ in pairs(config2) do
+			if config9[i1.Name] then
+				config9[i1.Name] = 0
 			end
 		end
 	end
@@ -406,9 +406,9 @@ local function Keypress(_, UserInputState, Input)
 			if Inverted and #List > 0 then
 				v7 = findPlayerLockRootPart(config9.T - config9.R)
 			end
-			for i1, _ in pairs(config4) do
-				if config9[i1.Name] then
-					config9[i1.Name] = 0
+			for i4, _ in pairs(config4) do
+				if config9[i4.Name] then
+					config9[i4.Name] = 0
 				end
 			end
 		end
@@ -418,9 +418,9 @@ local function Keypress(_, UserInputState, Input)
 			if Freecam and Freecam.Parent then
 				Freecam.Enabled = not Freecam.Enabled
 			end
-			for i, _ in pairs(config5) do
-				if config9[i.Name] then
-					config9[i.Name] = 0
+			for i2, _ in pairs(config5) do
+				if config9[i2.Name] then
+					config9[i2.Name] = 0
 				end
 			end
 		end
@@ -434,9 +434,9 @@ local function Keypress(_, UserInputState, Input)
 					end
 				end
 			end
-			for i4, _ in pairs(config6) do
-				if config9[i4.Name] then
-					config9[i4.Name] = 0
+			for i5, _ in pairs(config6) do
+				if config9[i5.Name] then
+					config9[i5.Name] = 0
 				end
 			end
 		end
@@ -444,9 +444,9 @@ local function Keypress(_, UserInputState, Input)
 			Inverted2 = not Inverted2
 			StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList, Inverted2)
 			
-			for i5, _ in pairs(config7) do
-				if config9[i5.Name] then
-					config9[i5.Name] = 0
+			for i, _ in pairs(config7) do
+				if config9[i.Name] then
+					config9[i.Name] = 0
 				end
 			end
 		end

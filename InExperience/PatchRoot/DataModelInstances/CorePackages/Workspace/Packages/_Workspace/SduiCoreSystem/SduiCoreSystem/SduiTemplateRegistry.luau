@@ -134,16 +134,16 @@ function SduiTemplateRegistry:resolveTemplateForConfig(RegisteredTemplate, p3, p
 	if RegisteredTemplate1.children then
 		local Children = RegisteredTemplate.children or {}
 		
-		for _, value1 in TutilsModule.deepCopy(RegisteredTemplate1.children) do
-			table.insert(Children, value1)
+		for _, value in TutilsModule.deepCopy(RegisteredTemplate1.children) do
+			table.insert(Children, value)
 		end
 		RegisteredTemplate.children = Children
 	end
 	if RegisteredTemplate1.conditionalProps then
 		local ConditionalProps = RegisteredTemplate.conditionalProps or {}
 		
-		for _, value in TutilsModule.deepCopy(RegisteredTemplate1.conditionalProps) do
-			table.insert(ConditionalProps, value)
+		for _, value1 in TutilsModule.deepCopy(RegisteredTemplate1.conditionalProps) do
+			table.insert(ConditionalProps, value1)
 		end
 		RegisteredTemplate.conditionalProps = ConditionalProps
 	end

@@ -13,7 +13,8 @@ local GetGroupPeekPageUrlModule = require(GroupPeekSdui.getGroupPeekPageUrl)
 return function(Group_id, p1)
 	-- upvalues: GetGroupPeekPageUrlModule (copy), GroupPeekSduiConstantsModule (copy), SduiLoadTimer (copy), Parent (copy), SduiCapabilities (copy), GetSduiTemplateStoreFunction (copy), GetSduiApiStoreFunction (copy), SduiResponseType (copy), SduiApiStorePostConfigContentType (copy)
 	local AppPage = GroupPeekSduiConstantsModule.AppPage
-	local GroupPeekPage = require(Parent.ServiceContractsProto).apppageplatform.groups.group_peek_page
+	local ServiceContractsProtoModule = require(Parent.ServiceContractsProto)
+	local GroupPeekPage = ServiceContractsProtoModule.apppageplatform.groups.group_peek_page
 	
 	return GetSduiApiStoreFunction().fetchIfNeeded({
 		enableTemplateCache = true,
@@ -29,7 +30,12 @@ return function(Group_id, p1)
 			protoMessage = GroupPeekPage.GroupPeekPageRequest,
 			body = {
 				group_id = Group_id,
-				client_capabilities = SduiCapabilities.buildClientCapabilities(),
+				client_capabilities = ServiceContractsProtoModule.apppageplatform.shared.client_capabilities.ClientCapabilities.new({
+					enabled_capabilities = SduiCapabilities.getEnabledCapabilityNumbers({
+						"CAPABILITY_SUPPORTS_GROUP_ANNOUNCEMENTS",
+						"CAPABILITY_SUPPORTS_GROUP_CONTENT_REACTIONS"
+					})
+				}),
 				cached_roblox_component_to_template_id = GetSduiTemplateStoreFunction().getCachedRobloxComponentToTemplateId(AppPage)
 			}
 		}

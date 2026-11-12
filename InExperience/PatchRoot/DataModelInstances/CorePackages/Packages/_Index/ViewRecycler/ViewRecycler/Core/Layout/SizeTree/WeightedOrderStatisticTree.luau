@@ -276,10 +276,10 @@ local function splitByItems(Left, NewItemCount)
 				Right6 = Right5
 				config3 = config
 			else
-				local PopMinimumResult2_2
-				config.left, PopMinimumResult2_2 = popMinimum(config.left)
+				local PopMinimumResult2_3
+				config.left, PopMinimumResult2_3 = popMinimum(config.left)
 				Right6 = balance(config)
-				config3 = PopMinimumResult2_2
+				config3 = PopMinimumResult2_3
 			end
 			config1 = join(Left4, config3, Right6)
 		end
@@ -303,22 +303,22 @@ local function splitByItems(Left, NewItemCount)
 		if Right == nil then
 			return config1, config2
 		end
-		local Right8 = nil
-		local Right9 = nil
+		local BalanceResult = nil
+		local PopMinimumResult = nil
 		if Right.left == nil then
 			local Right7 = Right.right
 			Right.left = nil
 			Right.right = nil
 			refresh(Right)
-			Right8 = Right7
-			Right9 = Right
+			BalanceResult = Right7
+			PopMinimumResult = Right
 		else
-			local PopMinimumResult2_3
-			Right.left, PopMinimumResult2_3 = popMinimum(Right.left)
-			Right8 = balance(Right)
-			Right9 = PopMinimumResult2_3
+			local PopMinimumResult2_2
+			Right.left, PopMinimumResult2_2 = popMinimum(Right.left)
+			BalanceResult = balance(Right)
+			PopMinimumResult = PopMinimumResult2_2
 		end
-		return config1, (join(config2, Right9, Right8))
+		return config1, (join(config2, PopMinimumResult, BalanceResult))
 	end
 end
 

@@ -5,10 +5,11 @@ local FoundationModule = require(Parent.Foundation)
 local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local FooterCornerButtonStyle = require(Parent.GameTile).FooterCornerButtonStyle
 
 return function(p1)
-	-- upvalues: UseDesignTokensFunction (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), FooterCornerButtonStyle (copy), ReactModule (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseDesignTokensFunction (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), FooterCornerButtonStyle (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -36,7 +37,8 @@ return function(p1)
 		Position = UDim2.new(0, 0, 1, 0),
 		AnchorPoint = Vector2.new(0, 1),
 		TextSize = UseDesignTokensResult.Size.Size_350,
-		FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.HeadingSmall.Font),
+		Font = if FoundationFontFaceMigration then nil else UseDesignTokensResult.Typography.HeadingSmall.Font,
+		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.HeadingSmall.Font) else nil,
 		BackgroundColor3 = BackgroundColor3,
 		TextColor3 = ForegroundColor3,
 		AutoButtonColor = false,

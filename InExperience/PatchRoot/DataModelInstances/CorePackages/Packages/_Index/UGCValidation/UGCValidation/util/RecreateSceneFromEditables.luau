@@ -106,12 +106,6 @@ local function createEmoteExportScene(p1)
 end
 
 return {
-	requiredData = {
-		ValidationEnumsModule.SharedDataMember.renderMeshesData,
-		ValidationEnumsModule.SharedDataMember.innerCagesData,
-		ValidationEnumsModule.SharedDataMember.outerCagesData,
-		ValidationEnumsModule.SharedDataMember.meshTextures
-	},
 	createModelForGltfExport = function(p1)
 		-- upvalues: GetEngineFeatureEngineUGCValidateEmoteAnimationExportModule (copy), ValidationEnumsModule (copy), createEmoteExportScene (copy), copyMeshPart (copy), createCagePart (copy)
 		if GetEngineFeatureEngineUGCValidateEmoteAnimationExportModule() and p1.uploadCategory == ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION then

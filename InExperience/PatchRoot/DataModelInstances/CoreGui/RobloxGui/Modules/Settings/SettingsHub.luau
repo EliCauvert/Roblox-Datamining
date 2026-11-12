@@ -1133,20 +1133,20 @@ local function CreateSettingsHub()
 		
 		if FFlagLocalizeVersionLabels then
 			if RobloxTranslatorModule then
-				local Success2, Result2 = pcall(RobloxTranslatorModule.FormatByKey, RobloxTranslatorModule, "InGame.HelpMenu.Label.ClientVersion")
-				ClientVersion = if Success2 then Result2 else "Client Version: "
+				local Success1, Result1 = pcall(RobloxTranslatorModule.FormatByKey, RobloxTranslatorModule, "InGame.HelpMenu.Label.ClientVersion")
+				ClientVersion = if Success1 then Result1 else "Client Version: "
 			else
 				ClientVersion = "Client Version: "
 			end
 		end
 		local RobloxVersion = RunService:GetRobloxVersion()
-		local Success1, Result1 = pcall(function()
+		local Success, Result = pcall(function()
 			-- upvalues: RunService (upval)
 			return RunService.ClientGitHash
 		end)
 		
-		if Success1 then
-			RobloxVersion = string.format("%s (%.6s)", RobloxVersion, Result1)
+		if Success then
+			RobloxVersion = string.format("%s (%.6s)", RobloxVersion, Result)
 		end
 		config2.ClientVersionLabel = CreateFunction("TextLabel")({
 			Name = "ClientVersionLabel",
@@ -1162,8 +1162,8 @@ local function CreateSettingsHub()
 			TextYAlignment = Enum.TextYAlignment.Center
 		})
 		local ClientVersionLabel = config2.ClientVersionLabel
-		local _UDim2_3 = UDim2.new(0.2, -6, 1, 0)
-		ClientVersionLabel.Size = CoreScriptVersionEnabledEngineFeature and UDim2.new(0, ClientVersionLabel.TextBounds.X + 6, 0, YOffset) or _UDim2_3
+		local _UDim2_4 = UDim2.new(0.2, -6, 1, 0)
+		ClientVersionLabel.Size = CoreScriptVersionEnabledEngineFeature and UDim2.new(0, ClientVersionLabel.TextBounds.X + 6, 0, YOffset) or _UDim2_4
 		config2.ClientVersionLabel.TextScaled = not (CoreScriptVersionEnabledEngineFeature or config2.ClientVersionLabel.TextFits)
 		config2.PlaceVersionLabel = CreateFunction("TextLabel")({
 			Name = "PlaceVersionLabel",
@@ -1232,8 +1232,8 @@ local function CreateSettingsHub()
 				Visible = Inverted
 			})
 			local EnvironmentLabel = config2.EnvironmentLabel
-			local _UDim2_4 = UDim2.new(0.2, -6, 1, 0)
-			EnvironmentLabel.Size = CoreScriptVersionEnabledEngineFeature and UDim2.new(0, EnvironmentLabel.TextBounds.X + 6, 0, YOffset) or _UDim2_4
+			local _UDim2_3 = UDim2.new(0.2, -6, 1, 0)
+			EnvironmentLabel.Size = CoreScriptVersionEnabledEngineFeature and UDim2.new(0, EnvironmentLabel.TextBounds.X + 6, 0, YOffset) or _UDim2_3
 			config2.EnvironmentLabel.TextScaled = not (CoreScriptVersionEnabledEngineFeature or config2.EnvironmentLabel.TextFits)
 		end
 		if game:GetEngineFeature("GetPlaySessionIdEnabled") then
@@ -1373,8 +1373,8 @@ local function CreateSettingsHub()
 			
 			if FFlagLocalizeVersionLabels then
 				if RobloxTranslatorModule then
-					local Success, Result = pcall(RobloxTranslatorModule.FormatByKey, RobloxTranslatorModule, "InGame.HelpMenu.Label.ClientCoreScriptVersion")
-					ClientCoreScriptVersion = if Success then Result else "Client CoreScript Version: "
+					local Success2, Result2 = pcall(RobloxTranslatorModule.FormatByKey, RobloxTranslatorModule, "InGame.HelpMenu.Label.ClientCoreScriptVersion")
+					ClientCoreScriptVersion = if Success2 then Result2 else "Client CoreScript Version: "
 				else
 					ClientCoreScriptVersion = "Client CoreScript Version: "
 				end
@@ -1775,7 +1775,7 @@ local function CreateSettingsHub()
 			config2.setShowBottomBarSignal(config2.BottomButtonFrame.Visible)
 		end)
 		
-		local function v290(AnalyticsResumeShieldSource)
+		local function v291(AnalyticsResumeShieldSource)
 			-- upvalues: config (upval), Callback2 (upval), config2 (upval), RbxAnalyticsService (upval), ConstantsModule (upval), GuiService (upval)
 			if config.FFlagAddUILessMode then
 				Callback2(false, nil, nil, nil, AnalyticsResumeShieldSource)
@@ -1795,8 +1795,8 @@ local function CreateSettingsHub()
 		
 		if IsSideSheetEnabledModule then
 			config2.PageTitleCloseButton = UtilityModule:MakeStyledImageButton("PageTitleClose", "rbxasset://textures/ui/InspectMenu/x.png", UDim2.new(0, 40, 0, 40), UDim2.new(0, 16, 0, 16), function()
-				-- upvalues: v290 (copy), ConstantsModule (upval)
-				v290(ConstantsModule.AnalyticsResumeXButtonSource)
+				-- upvalues: v291 (copy), ConstantsModule (upval)
+				v291(ConstantsModule.AnalyticsResumeXButtonSource)
 			end, nil, config2, "DefaultButton")
 			config2.PageTitleCloseButton.AnchorPoint = Vector2.new(1, 0.5)
 			config2.PageTitleCloseButton.Position = UDim2.new(1, 0, 0.5, 0)
@@ -1825,13 +1825,13 @@ local function CreateSettingsHub()
 		if config.FFlagEnableSystemScrimInSettingsHub then
 			local SystemScrimSignalStoreResult = require(CorePackages.Workspace.Packages.SystemScrim).SystemScrimSignalStore(false)
 			SystemScrimSignalStoreResult.backgroundScrimActivated.Event:Connect(function()
-				-- upvalues: config (upval), config2 (upval), ConstantsModule (upval), v290 (copy)
+				-- upvalues: config (upval), config2 (upval), ConstantsModule (upval), v291 (copy)
 				if config.FFlagRelocateMobileMenuButtons and config.FIntRelocateMobileMenuButtonsVariant ~= 0 then
 					config2:GetExperienceControlStore().onResume(ConstantsModule.AnalyticsResumeShieldSource)
 					
 					return
 				else
-					v290(ConstantsModule.AnalyticsResumeShieldSource)
+					v291(ConstantsModule.AnalyticsResumeShieldSource)
 				end
 			end)
 			config2.Shield:GetPropertyChangedSignal("Visible"):Connect(function()
@@ -1842,29 +1842,29 @@ local function CreateSettingsHub()
 			end)
 		end
 		config2.Shield.Activated:Connect(function()
-			-- upvalues: config (upval), config2 (upval), ConstantsModule (upval), v290 (copy)
+			-- upvalues: config (upval), config2 (upval), ConstantsModule (upval), v291 (copy)
 			if config.FFlagRelocateMobileMenuButtons and config.FIntRelocateMobileMenuButtonsVariant ~= 0 then
 				config2:GetExperienceControlStore().onResume(ConstantsModule.AnalyticsResumeShieldSource)
 				
 				return
 			else
-				v290(ConstantsModule.AnalyticsResumeShieldSource)
+				v291(ConstantsModule.AnalyticsResumeShieldSource)
 			end
 		end)
 		
 		if config.FFlagSettingsHubIndependentBackgroundVisibility then
 			config2.DarkenBackground.Activated:Connect(function()
-				-- upvalues: config (upval), config2 (upval), ConstantsModule (upval), v290 (copy), InExperienceAppChatModalModule (upval)
+				-- upvalues: config (upval), config2 (upval), ConstantsModule (upval), v291 (copy), InExperienceAppChatModalModule (upval)
 				if config.FFlagRelocateMobileMenuButtons and config.FIntRelocateMobileMenuButtonsVariant ~= 0 then
 					config2:GetExperienceControlStore().onResume(ConstantsModule.AnalyticsResumeShieldSource)
 				else
-					v290(ConstantsModule.AnalyticsResumeShieldSource)
+					v291(ConstantsModule.AnalyticsResumeShieldSource)
 				end
 				InExperienceAppChatModalModule.default:setVisible(false)
 			end)
 		end
 		if not config.FFlagRelocateMobileMenuButtons or config.FIntRelocateMobileMenuButtonsVariant == 0 then
-			local function v287()
+			local function v264()
 				-- upvalues: config (upval), config2 (upval), removeBottomBarBindings (upval), ConstantsModule1 (upval)
 				if config.FFlagPreventHiddenSwitchPage and config2:GetVisibility() == false then return end
 				config2:AddToMenuStack(config2.Pages.CurrentPage)
@@ -1881,12 +1881,12 @@ local function CreateSettingsHub()
 			end
 			
 			if InExperienceCapabilities.canNavigateHome then
-				addBottomBarButtonOld("LeaveGame", "Leave", ImageForKeyCode1, "rbxasset://textures/ui/Settings/Help/LeaveIcon.png", UDim2.new(0.5, if NoFFlagResponsiveUnitsDeprecateTenFoot then -160 else -130, 0.5, -25), v287, {
+				addBottomBarButtonOld("LeaveGame", "Leave", ImageForKeyCode1, "rbxasset://textures/ui/Settings/Help/LeaveIcon.png", UDim2.new(0.5, if NoFFlagResponsiveUnitsDeprecateTenFoot then -160 else -130, 0.5, -25), v264, {
 					Enum.KeyCode.L,
 					if config.FFlagEnableConsoleExpControls and config.ChromeEnabled then nil else Enum.KeyCode.ButtonX
-				}, v287)
+				}, v264)
 			end
-			local function v266()
+			local function v289()
 				-- upvalues: ResetEnabled (upval), config2 (upval), removeBottomBarBindings (upval)
 				if ResetEnabled then
 					config2:AddToMenuStack(config2.Pages.CurrentPage)
@@ -1896,16 +1896,16 @@ local function CreateSettingsHub()
 				end
 			end
 			
-			addBottomBarButtonOld("ResetCharacter", NewLocalization:Format(ConstantsModule.RespawnLocalizedKey), ImageForKeyCode2, "rbxasset://textures/ui/Settings/Help/ResetIcon.png", UDim2.new(0.5, if NoFFlagResponsiveUnitsDeprecateTenFoot then -550 else -400, 0.5, -25), v266, {
+			addBottomBarButtonOld("ResetCharacter", NewLocalization:Format(ConstantsModule.RespawnLocalizedKey), ImageForKeyCode2, "rbxasset://textures/ui/Settings/Help/ResetIcon.png", UDim2.new(0.5, if NoFFlagResponsiveUnitsDeprecateTenFoot then -550 else -400, 0.5, -25), v289, {
 				Enum.KeyCode.R,
 				if config.FFlagEnableConsoleExpControls and config.ChromeEnabled then nil else Enum.KeyCode.ButtonY
-			}, v266)
+			}, v289)
 			addBottomBarButtonOld("Resume", "Resume", if config.FFlagEnableConsoleExpControls then ImageForKeyCode3 else ImageForKeyCode, "rbxasset://textures/ui/Settings/Help/EscapeIcon.png", UDim2.new(0.5, if NoFFlagResponsiveUnitsDeprecateTenFoot then 200 else 140, 0.5, -25), function()
-				-- upvalues: v290 (copy), ConstantsModule (upval)
-				v290(ConstantsModule.AnalyticsResumeButtonSource)
+				-- upvalues: v291 (copy), ConstantsModule (upval)
+				v291(ConstantsModule.AnalyticsResumeButtonSource)
 			end, if config.FFlagEnableConsoleExpControls and config.ChromeEnabled then {} else { Enum.KeyCode.ButtonB, Enum.KeyCode.ButtonStart }, function()
-				-- upvalues: v290 (copy), ConstantsModule (upval)
-				v290(ConstantsModule.AnalyticsResumeGamepadSource)
+				-- upvalues: v291 (copy), ConstantsModule (upval)
+				v291(ConstantsModule.AnalyticsResumeGamepadSource)
 			end)
 		end
 		if config.FFlagAddSwitchTabHintsToIEM then
@@ -2143,16 +2143,16 @@ local function CreateSettingsHub()
 		local MenuContainerPositionResult = ThemeModule.MenuContainerPosition(config2.SettingsUIDelegate)
 		local v3 = 600
 		local FullScreenSize = if config.isInExperienceUIVREnabled then config2.SettingsUIDelegate:getFullScreenSize() else RobloxGui.AbsoluteSize.y
-		local YOffset = 0.050000000000000044 * FullScreenSize
+		local YOffset1 = 0.050000000000000044 * FullScreenSize
 		local IsPortrait = UtilityModule:IsPortrait()
 		
 		if NoFFlagResponsiveUnitsDeprecateTenFoot then
 			v3 = 800
-			YOffset = 0.07 * FullScreenSize
+			YOffset1 = 0.07 * FullScreenSize
 		elseif UtilityModule:IsSmallTouchScreen() then
-			YOffset = math.min(10, 0.010000000000000009 * FullScreenSize)
+			YOffset1 = math.min(10, 0.010000000000000009 * FullScreenSize)
 		elseif config.isInExperienceUIVREnabled and VRService.VREnabled then
-			YOffset = 0
+			YOffset1 = 0
 		end
 		local Position = MenuContainerPositionResult.Position
 		local AnchorPoint = MenuContainerPositionResult.AnchorPoint
@@ -2171,7 +2171,7 @@ local function CreateSettingsHub()
 		config2.MenuContainer.Size = MenuContainerPositionResult.Size
 		config2.MenuContainer.Position = Position1
 		config2.MenuContainer.AnchorPoint = AnchorPoint1
-		local _ = YOffset * 2 + config2.HubBar.Size.Y.Offset * 2
+		local _ = YOffset1 * 2 + config2.HubBar.Size.Y.Offset * 2
 		local NewOffset = 0
 		
 		if not config.FFlagAddTraversalBackButton then
@@ -2208,15 +2208,15 @@ local function CreateSettingsHub()
 			local XDelta = RobloxGui.AbsoluteSize.X - 60
 			local IsPeoplePageOpen2 = if FFlagSideSheetOpenPeoplePage then GetDidSideSheetOpenWithPeoplePageFunction() and (GetSideSheetVisibilityFunction() and GetIsPeoplePageOpenFunction()) else FFlagSideSheetOpenPeoplePage and (GetSideSheetVisibilityFunction() and GetIsPeoplePageOpenFunction())
 			local SideSheetDrawerWidth2 = if IsPeoplePageOpen2 then GetSideSheetDrawerWidthFunction() else 0
-			local Largest = nil
+			local Largest1 = nil
 			
 			if SideSheetDrawerWidth2 <= 0 then
-				Largest = XDelta
+				Largest1 = XDelta
 			else
 				local HubPaddingResult = ThemeModule.HubPadding()
-				Largest = math.max(150, (math.min(XDelta, (GetSideSheetMenuPageWidthFunction(RobloxGui.AbsoluteSize.X, SideSheetDrawerWidth2, HubPaddingResult.PaddingLeft.Offset + HubPaddingResult.PaddingRight.Offset)))))
+				Largest1 = math.max(150, (math.min(XDelta, (GetSideSheetMenuPageWidthFunction(RobloxGui.AbsoluteSize.X, SideSheetDrawerWidth2, HubPaddingResult.PaddingLeft.Offset + HubPaddingResult.PaddingRight.Offset)))))
 			end
-			HubBar.Size = NewFunction(v5, Largest, 0, 52)
+			HubBar.Size = NewFunction(v5, Largest1, 0, 52)
 		elseif config.isInExperienceUIVREnabled then
 			local HubBar = config2.HubBar
 			local NewFunction2 = UDim2.new
@@ -2238,19 +2238,19 @@ local function CreateSettingsHub()
 			local NewFunction3 = UDim2.new
 			local v7 = 0
 			local IsPeoplePageOpen4 = if FFlagSideSheetOpenPeoplePage then GetDidSideSheetOpenWithPeoplePageFunction() and (GetSideSheetVisibilityFunction() and GetIsPeoplePageOpenFunction()) else FFlagSideSheetOpenPeoplePage and (GetSideSheetVisibilityFunction() and GetIsPeoplePageOpenFunction())
-			local SideSheetDrawerWidth1 = if IsPeoplePageOpen4 then GetSideSheetDrawerWidthFunction() else 0
+			local SideSheetDrawerWidth4 = if IsPeoplePageOpen4 then GetSideSheetDrawerWidthFunction() else 0
 			local Largest = nil
 			
-			if SideSheetDrawerWidth1 <= 0 then
+			if SideSheetDrawerWidth4 <= 0 then
 				Largest = 800
 			else
 				local HubPaddingResult = ThemeModule.HubPadding()
-				Largest = math.max(150, (math.min(800, (GetSideSheetMenuPageWidthFunction(RobloxGui.AbsoluteSize.X, SideSheetDrawerWidth1, HubPaddingResult.PaddingLeft.Offset + HubPaddingResult.PaddingRight.Offset)))))
+				Largest = math.max(150, (math.min(800, (GetSideSheetMenuPageWidthFunction(RobloxGui.AbsoluteSize.X, SideSheetDrawerWidth4, HubPaddingResult.PaddingLeft.Offset + HubPaddingResult.PaddingRight.Offset)))))
 			end
 			HubBar1.Size = NewFunction3(v7, Largest, 0, 60)
 		end
 		local Offset = if IsSideSheetEnabledModule or not ThemeModule.AlwaysShowBottomBar() then config2.HubBar.Size.Y.Offset else config2.HubBar.Size.Y.Offset + config2.BottomButtonFrame.Size.Y.Offset
-		local NewYOffset = YOffset * 2 + (if config.FFlagFixDisableTopPaddingError and config2.Pages.CurrentPage == nil then Offset elseif config2.Pages.CurrentPage.DisableTopPadding then 0 else Offset)
+		local NewMenuContainerExtraSpace = YOffset1 * 2 + (if config.FFlagFixDisableTopPaddingError and config2.Pages.CurrentPage == nil then Offset elseif config2.Pages.CurrentPage.DisableTopPadding then 0 else Offset)
 		
 		if not config.FFlagAddTraversalBackButton then
 			NewOffset = if (if config2.BackBarRef:getValue() then config2.BackBarRef:getValue().Visible else false) and config2.BackBarRef:getValue() then config2.BackBarRef:getValue().Size.Y.Offset else 0
@@ -2268,53 +2268,53 @@ local function CreateSettingsHub()
 			removeBottomBarBindings()
 		end
 		if config.isInExperienceUIVREnabled then
-			NewYOffset += config2.SettingsUIDelegate:getMenuContainerExtraSpace()
+			NewMenuContainerExtraSpace += config2.SettingsUIDelegate:getMenuContainerExtraSpace()
 		end
-		local SideSheetMenuPageHeight = FullScreenSize - NewYOffset - NewOffset
+		local FullScreenSizeDelta = FullScreenSize - NewMenuContainerExtraSpace - NewOffset
 		
 		if config.FFlagRelocateMobileMenuButtons and (config.FIntRelocateMobileMenuButtonsVariant == 1 or config.FIntRelocateMobileMenuButtonsVariant == 3) and UtilityModule:IsSmallTouchScreen() then
-			SideSheetMenuPageHeight -= ThemeModule.ExtraHubBottomPaddingMobile
+			FullScreenSizeDelta -= ThemeModule.ExtraHubBottomPaddingMobile
 		end
 		if FFlagSideSheetOpenPeoplePage and GetDidSideSheetOpenWithPeoplePageFunction() and (GetSideSheetVisibilityFunction() and GetIsPeoplePageOpenFunction()) then
 			local HubPaddingResult = ThemeModule.HubPadding()
-			SideSheetMenuPageHeight = GetSideSheetMenuPageHeightFunction(config2.Shield.AbsoluteSize.Y, Offset + HubPaddingResult.PaddingTop.Offset + HubPaddingResult.PaddingBottom.Offset + NewOffset)
+			FullScreenSizeDelta = GetSideSheetMenuPageHeightFunction(config2.Shield.AbsoluteSize.Y, Offset + HubPaddingResult.PaddingTop.Offset + HubPaddingResult.PaddingBottom.Offset + NewOffset)
 		end
 		if FFlagSideSheetOpenPeoplePage then
 			local IsPeoplePageOpen5 = if FFlagSideSheetOpenPeoplePage then GetDidSideSheetOpenWithPeoplePageFunction() and (GetSideSheetVisibilityFunction() and GetIsPeoplePageOpenFunction()) else FFlagSideSheetOpenPeoplePage and (GetSideSheetVisibilityFunction() and GetIsPeoplePageOpenFunction())
 			config2.PageView.VerticalScrollBarInset = if IsPeoplePageOpen5 then Enum.ScrollBarInset.Always else Enum.ScrollBarInset.ScrollBar
 		end
-		local YOffset1 = nil
+		local YOffset = nil
 		if IsPortrait then
-			YOffset1 = SideSheetMenuPageHeight
-		elseif v3 < SideSheetMenuPageHeight then
-			YOffset1 = v3
+			YOffset = FullScreenSizeDelta
+		elseif v3 < FullScreenSizeDelta then
+			YOffset = v3
 			config2.HubBar.Position = UDim2.new(config2.HubBar.Position.X.Scale, config2.HubBar.Position.X.Offset, 0.5, -v3 / 2 - config2.HubBar.Size.Y.Offset)
 			
 			if config2.BottomButtonFrame then
 				config2.BottomButtonFrame.Position = UDim2.new(config2.BottomButtonFrame.Position.X.Scale, config2.BottomButtonFrame.Position.X.Offset, 0.5, v3 / 2)
 			end
-		elseif SideSheetMenuPageHeight < 150 then
-			YOffset1 = 150
+		elseif FullScreenSizeDelta < 150 then
+			YOffset = 150
 			config2.HubBar.Position = UDim2.new(config2.HubBar.Position.X.Scale, config2.HubBar.Position.X.Offset, 0.5, -75 - config2.HubBar.Size.Y.Offset)
 			
 			if config2.BottomButtonFrame then
 				config2.BottomButtonFrame.Position = UDim2.new(config2.BottomButtonFrame.Position.X.Scale, config2.BottomButtonFrame.Position.X.Offset, 0.5, 75)
 			end
 		else
-			YOffset1 = SideSheetMenuPageHeight
-			config2.HubBar.Position = UDim2.new(config2.HubBar.Position.X.Scale, config2.HubBar.Position.X.Offset, 0, YOffset)
+			YOffset = FullScreenSizeDelta
+			config2.HubBar.Position = UDim2.new(config2.HubBar.Position.X.Scale, config2.HubBar.Position.X.Offset, 0, YOffset1)
 			
 			if config2.BottomButtonFrame then
-				config2.BottomButtonFrame.Position = UDim2.new(config2.BottomButtonFrame.Position.X.Scale, config2.BottomButtonFrame.Position.X.Offset, 1, -(YOffset + Offset))
+				config2.BottomButtonFrame.Position = UDim2.new(config2.BottomButtonFrame.Position.X.Scale, config2.BottomButtonFrame.Position.X.Offset, 1, -(YOffset1 + Offset))
 			end
 		end
-		local _UDim2: UDim2 = if NoFFlagResponsiveUnitsDeprecateTenFoot then UDim2.new(0, config2.HubBar.AbsoluteSize.X, 0, YOffset1) elseif UtilityModule:IsSmallTouchScreen() then if config.FFlagRelocateMobileMenuButtons and (config.FIntRelocateMobileMenuButtonsVariant == 1 or config.FIntRelocateMobileMenuButtonsVariant == 3) then UDim2.new(0, config2.HubBar.AbsoluteSize.X, 0, YOffset1 + 0 + 0 - config2.BottomButtonFrame.Size.Y.Offset) else UDim2.new(0, config2.HubBar.AbsoluteSize.X, 0, YOffset1 + 0 + 0) else UDim2.new(0, config2.HubBar.AbsoluteSize.X, 0, YOffset1)
+		local _UDim2: UDim2 = if NoFFlagResponsiveUnitsDeprecateTenFoot then UDim2.new(0, config2.HubBar.AbsoluteSize.X, 0, YOffset) elseif UtilityModule:IsSmallTouchScreen() then if config.FFlagRelocateMobileMenuButtons and (config.FIntRelocateMobileMenuButtonsVariant == 1 or config.FIntRelocateMobileMenuButtonsVariant == 3) then UDim2.new(0, config2.HubBar.AbsoluteSize.X, 0, YOffset + 0 + 0 - config2.BottomButtonFrame.Size.Y.Offset) else UDim2.new(0, config2.HubBar.AbsoluteSize.X, 0, YOffset + 0 + 0) else UDim2.new(0, config2.HubBar.AbsoluteSize.X, 0, YOffset)
 		
-		if config.FFlagRelocateMobileMenuButtons and (config.FIntRelocateMobileMenuButtonsVariant ~= 0 and config2.BottomButtonFrame) then
+		if config.FFlagRelocateMobileMenuButtons and config.FIntRelocateMobileMenuButtonsVariant ~= 0 and config2.BottomButtonFrame then
 			config2.BottomButtonFrame.Size = UDim2.new(0, config2.HubBar.Size.X.Offset, 0, config2.HubBar.Size.Y.Offset)
 		end
 		local HubPaddingResult = ThemeModule.HubPadding()
-		config2.ReactPage.Size = UDim2.new(0, config2.HubBar.AbsoluteSize.X + (HubPaddingResult.PaddingLeft.Offset + HubPaddingResult.PaddingRight.Offset), 0, YOffset1 + Offset + (HubPaddingResult.PaddingTop.Offset + HubPaddingResult.PaddingBottom.Offset))
+		config2.ReactPage.Size = UDim2.new(0, config2.HubBar.AbsoluteSize.X + (HubPaddingResult.PaddingLeft.Offset + HubPaddingResult.PaddingRight.Offset), 0, YOffset + Offset + (HubPaddingResult.PaddingTop.Offset + HubPaddingResult.PaddingBottom.Offset))
 		config2.PageViewClipper.Size = _UDim2
 		
 		if IsPortrait then
@@ -2322,7 +2322,7 @@ local function CreateSettingsHub()
 			
 			return
 		else
-			config2.PageViewClipper.Position = UDim2.new(config2.PageViewClipper.Position.X.Scale, config2.PageViewClipper.Position.X.Offset, 0.5, -YOffset1 / 2)
+			config2.PageViewClipper.Position = UDim2.new(config2.PageViewClipper.Position.X.Scale, config2.PageViewClipper.Position.X.Offset, 0.5, -YOffset / 2)
 		end
 	end
 	
@@ -2503,20 +2503,20 @@ local function CreateSettingsHub()
 	
 	local _ = nil
 	
-	local function v190(ZIndex, Gui)
-		-- upvalues: v190 (ref)
+	local function v189(ZIndex, Gui)
+		-- upvalues: v189 (ref)
 		if Gui:IsA("GuiObject") then
 			Gui.ZIndex = ZIndex
 			local Children = Gui:GetChildren()
 			
 			for i = 1, #Children do
-				v190(ZIndex, Children[i])
+				v189(ZIndex, Children[i])
 			end
 		end
 	end
 	
 	local function AddHeader(Gui, p5)
-		-- upvalues: config2 (copy), v190 (ref)
+		-- upvalues: config2 (copy), v189 (ref)
 		if not Gui then return end
 		table.insert(config2.TabHeaders, Gui)
 		p5.TabPosition = #config2.TabHeaders
@@ -2525,7 +2525,7 @@ local function CreateSettingsHub()
 		for i = 1, #config2.TabHeaders do
 			config2.TabHeaders[i].Size = UDim2.new(XScale, 0, 1, 0)
 		end
-		v190(3, Gui)
+		v189(3, Gui)
 		Gui.Parent = config2.HubBarContainer
 	end
 	
@@ -2797,9 +2797,9 @@ local function CreateSettingsHub()
 		end
 		local TabPosition = CurrentPage.TabPosition
 		
-		for CurrentPage3, _ in pairs(config2.Pages.PageTable) do
-			if CurrentPage3 ~= CurrentPage then
-				CurrentPage3:Hide(-p8, TabPosition, p9, nil, config2.PageViewInnerFrame, CurrentPage3 == config2.Pages.CurrentPage)
+		for CurrentPage2, _ in pairs(config2.Pages.PageTable) do
+			if CurrentPage2 ~= CurrentPage then
+				CurrentPage2:Hide(-p8, TabPosition, p9, nil, config2.PageViewInnerFrame, CurrentPage2 == config2.Pages.CurrentPage)
 			end
 		end
 		if config2.BottomButtonFrame then
@@ -2809,8 +2809,8 @@ local function CreateSettingsHub()
 			else
 				config2.BottomButtonFrame.Visible = false
 			end
-			local CurrentPage4 = CurrentPage or config2.Pages.CurrentPage
-			config2.HubBar.Visible = if IsSideSheetEnabledModule then CurrentPage4.ShouldShowHubBar == true else CurrentPage4.ShouldShowBottomBar == true
+			local CurrentPage3 = CurrentPage or config2.Pages.CurrentPage
+			config2.HubBar.Visible = if IsSideSheetEnabledModule then CurrentPage3.ShouldShowHubBar == true else CurrentPage3.ShouldShowBottomBar == true
 		end
 		if config.FFlagIEMTabFocusNav and config.FFlagIEMTabFocusNav then
 			local TabHeader = CurrentPage:GetTabHeader()
@@ -2832,18 +2832,18 @@ local function CreateSettingsHub()
 		config2.CurrentPageSignal:fire(config2.Pages.CurrentPage and config2.Pages.CurrentPage.Page.Name or nil)
 		
 		if IsSideSheetEnabledModule then
-			local CurrentPage5 = config2.Pages.CurrentPage
-			local CurrentPage5_1 = CurrentPage5 or config2.Pages.CurrentPage
+			local CurrentPage4 = config2.Pages.CurrentPage
+			local CurrentPage4_1 = CurrentPage4 or config2.Pages.CurrentPage
 			
-			if (if IsSideSheetEnabledModule then CurrentPage5_1.ShouldShowHubBar == true else CurrentPage5_1.ShouldShowBottomBar == true) and CurrentPage5.TabHeader then
-				config2.PageTitleLabel.Text = CurrentPage5.TabHeader.TabLabel.Title.Text
+			if (if IsSideSheetEnabledModule then CurrentPage4_1.ShouldShowHubBar == true else CurrentPage4_1.ShouldShowBottomBar == true) and CurrentPage4.TabHeader then
+				config2.PageTitleLabel.Text = CurrentPage4.TabHeader.TabLabel.Title.Text
 			else
 				config2.PageTitleLabel.Text = ""
 			end
 		end
-		local CurrentPage2 = config2.Pages.CurrentPage
+		local CurrentPage5 = config2.Pages.CurrentPage
 		
-		if CurrentPage2 ~= nil and CurrentPage2.ShouldDisableDefaultScroll == true then
+		if CurrentPage5 ~= nil and CurrentPage5.ShouldDisableDefaultScroll == true then
 			config2.PageView.ScrollBarThickness = 0
 			config2.PageView.ScrollingEnabled = false
 			config2.PageView.CanvasPosition = Vector2.new(0, 0)
@@ -3141,12 +3141,12 @@ local function CreateSettingsHub()
 					end)
 				end
 				if not config.FFlagSettingsHubIndependentBackgroundVisibility and config2.DarkenBackground then
-					local _TweenInfo = TweenInfo.new(SideSheetAnimationDuration, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+					local _TweenInfo1 = TweenInfo.new(SideSheetAnimationDuration, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
 					
 					if config2.DarkenBackgroundTween then
 						config2.DarkenBackgroundTween:Cancel()
 					end
-					config2.DarkenBackgroundTween = TweenService:Create(config2.DarkenBackground, _TweenInfo, {
+					config2.DarkenBackgroundTween = TweenService:Create(config2.DarkenBackground, _TweenInfo1, {
 						BackgroundTransparency = ThemeModule.transparency("DarkenBackground")
 					})
 					config2.DarkenBackgroundTween:Play()
@@ -3196,16 +3196,16 @@ local function CreateSettingsHub()
 				else
 					PlayerListManagerModule:HideTemp("SettingsMenu", true)
 				end
-				if not config.isInExperienceUIVREnabled or not config.InExperienceUIVRIXP:isMovePanelToCenter() or not config.FFlagSpatialUIFixMenuPanelChatExclusive or not VRService.VREnabled then
+				if not config.isInExperienceUIVREnabled or not config.InExperienceUIVRIXP:isMovePanelToCenter() or (not config.FFlagSpatialUIFixMenuPanelChatExclusive or not VRService.VREnabled) then
 					ChatSelectorModule:HideTemp("SettingsMenu", true)
 				end
 				if FFlagEnableNewBackpack then
 					Features.setVisibility(Features.FeatureName.Backpack, false)
 				else
-					local BackpackScriptModule1 = require(RobloxGui.Modules.BackpackScript)
+					local BackpackScriptModule = require(RobloxGui.Modules.BackpackScript)
 					
-					if BackpackScriptModule1.IsOpen then
-						BackpackScriptModule1:OpenClose()
+					if BackpackScriptModule.IsOpen then
+						BackpackScriptModule:OpenClose()
 					end
 				end
 			end
@@ -3330,12 +3330,12 @@ local function CreateSettingsHub()
 					end)
 				end
 				if not config.FFlagSettingsHubIndependentBackgroundVisibility and config2.DarkenBackground then
-					local _TweenInfo1 = TweenInfo.new(SideSheetAnimationDuration, Enum.EasingStyle.Quart, Enum.EasingDirection.Out)
+					local _TweenInfo = TweenInfo.new(SideSheetAnimationDuration, Enum.EasingStyle.Quart, Enum.EasingDirection.Out)
 					
 					if config2.DarkenBackgroundTween then
 						config2.DarkenBackgroundTween:Cancel()
 					end
-					config2.DarkenBackgroundTween = TweenService:Create(config2.DarkenBackground, _TweenInfo1, { BackgroundTransparency = 1 })
+					config2.DarkenBackgroundTween = TweenService:Create(config2.DarkenBackground, _TweenInfo, { BackgroundTransparency = 1 })
 					config2.DarkenBackgroundTween:Play()
 				end
 			end
@@ -3674,7 +3674,7 @@ local function CreateSettingsHub()
 		config2.PlayersPage = require(RobloxGui.Modules.Settings.Pages.PeopleWrapper)
 		config2.PlayersPage:SetHub(config2)
 		
-		if not config.FFlagMenuButtonsMountWithIEM and config.FFlagRelocateMobileMenuButtons and (config.FIntRelocateMobileMenuButtonsVariant == 2 and UtilityModule:IsSmallTouchScreen()) then
+		if not config.FFlagMenuButtonsMountWithIEM and config.FFlagRelocateMobileMenuButtons and config.FIntRelocateMobileMenuButtonsVariant == 2 and UtilityModule:IsSmallTouchScreen() then
 			config2.PlayersPage:CreateMenuButtonsContainer()
 		end
 	end

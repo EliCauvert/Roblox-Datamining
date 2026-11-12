@@ -2,6 +2,8 @@
 local Parent = UserList.Parent
 local ReactModule = require(Parent.React)
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local NetworkingPresenceModule = require(UserList.Networking.NetworkingPresence)
+local FFlagUserListPresenceStoreMigrationModule = require(UserList.Flags.FFlagUserListPresenceStoreMigration)
 local View = require(Parent.Foundation).View
 local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
 local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
@@ -11,7 +13,7 @@ local ConstantsModule = require(UserList.Common.Constants)
 local UserRowWrapperModule = require(script.Parent.UserRowWrapper)
 
 return function(p1)
-	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), AppPage (copy), ConstantsModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), View (copy), UserRowWrapperModule (copy)
+	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), AppPage (copy), ConstantsModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), FFlagUserListPresenceStoreMigrationModule (copy), NetworkingPresenceModule (copy), View (copy), UserRowWrapperModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseResult = ReactModule.useCallback(function(Detail)
 		-- upvalues: p1 (copy), AppPage (upval), ConstantsModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
@@ -34,6 +36,12 @@ return function(p1)
 			UseDispatchResult(NavigateDownFunction(config))
 		end
 	end, { p1.onUserSelected, UseDispatchResult })
+	ReactModule.useEffect(function()
+		-- upvalues: FFlagUserListPresenceStoreMigrationModule (upval), p1 (copy), UseDispatchResult (copy), NetworkingPresenceModule (upval)
+		if not FFlagUserListPresenceStoreMigrationModule and #p1.userIds > 0 then
+			UseDispatchResult(NetworkingPresenceModule.GetPresencesFromUserIds.API(p1.userIds))
+		end
+	end, { p1.userIds })
 	
 	return if #p1.userIds == 0 then nil else ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y col gap-large",

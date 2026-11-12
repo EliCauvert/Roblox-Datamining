@@ -37,47 +37,47 @@ function Module:encode()
 		Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.display_name)
 	end
 	if self.display_icon_image_id ~= nil and self.display_icon_image_id ~= 0 then
-		local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.varint)
-		Buf, Count = ProtoModule.writeVarInt(WriteTagResult4, WriteTagResult2_3, self.display_icon_image_id)
+		local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult3, WriteTagResult2_2, self.display_icon_image_id)
 	end
 	if self.display_description ~= nil and self.display_description ~= "" then
-		local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, self.display_description)
+		local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult4, WriteTagResult2_3, self.display_description)
 	end
 	if self.total_awarded_count ~= nil and self.total_awarded_count ~= 0 then
-		local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.varint)
-		Buf, Count = ProtoModule.writeVarInt(WriteTagResult6, WriteTagResult2_5, self.total_awarded_count)
+		local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult5, WriteTagResult2_4, self.total_awarded_count)
 	end
 	if self.past_day_awarded_count ~= nil and self.past_day_awarded_count ~= 0 then
-		local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.varint)
-		Buf, Count = ProtoModule.writeVarInt(WriteTagResult7, WriteTagResult2_6, self.past_day_awarded_count)
+		local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult6, WriteTagResult2_5, self.past_day_awarded_count)
 	end
 	if self.rarity ~= nil and self.rarity ~= "" then
-		local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.rarity)
+		local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.rarity)
 	end
 	if self.badge_type_label ~= nil and self.badge_type_label ~= "" then
-		local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeString(WriteTagResult11, WriteTagResult2_10, self.badge_type_label)
+		local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.badge_type_label)
 	end
 	if self.created_time ~= nil then
 		local EncodeResult = self.created_time:encode()
-		local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeBuffer(WriteTagResult10, WriteTagResult2_9, EncodeResult, buffer.len(EncodeResult))
+		local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult9, WriteTagResult2_8, EncodeResult, buffer.len(EncodeResult))
 	end
 	if self.updated_time ~= nil then
 		local EncodeResult = self.updated_time:encode()
-		local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeBuffer(WriteTagResult12, WriteTagResult2_11, EncodeResult, buffer.len(EncodeResult))
+		local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult10, WriteTagResult2_9, EncodeResult, buffer.len(EncodeResult))
 	end
 	if self.is_earned_by_user then
-		local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.varint)
-		Buf, Count = ProtoModule.writeVarInt(WriteTagResult9, WriteTagResult2_8, if self.is_earned_by_user then 1 else 0)
+		local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult11, WriteTagResult2_10, if self.is_earned_by_user then 1 else 0)
 	end
 	if self.awarded_time ~= nil then
 		local EncodeResult = self.awarded_time:encode()
-		local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
+		local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult12, WriteTagResult2_11, EncodeResult, buffer.len(EncodeResult))
 	end
 	local Buf1 = buffer.create(Count)
 	buffer.copy(Buf1, 0, Buf, 0, Count)

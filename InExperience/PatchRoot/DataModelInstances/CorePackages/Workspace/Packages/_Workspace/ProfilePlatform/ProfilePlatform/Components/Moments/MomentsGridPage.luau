@@ -46,16 +46,12 @@ local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptim
 local IsPlayableVideoMomentModule = require(script.Parent.isPlayableVideoMoment)
 local FFlagAXEnableProfileTab = SharedFlagsModule.FFlagAXEnableProfileTab
 local FFlagSignalsNavP3Dispatch = SharedFlagsModule.FFlagSignalsNavP3Dispatch
-local FFlagProfileMomentsFeedRootRoute = SharedFlagsModule.FFlagProfileMomentsFeedRootRoute
-local FFlagEnableArgus = SharedFlagsModule.FFlagEnableArgus
-local FFlagEnableArgusImmersiveNav = SharedFlagsModule.FFlagEnableArgusImmersiveNav
 local FFlagProfileRenderAvatarMoments = SharedFlagsModule.FFlagProfileRenderAvatarMoments
 local FFlagProfileMomentSceneOutfitPoster = SharedFlagsModule.FFlagProfileMomentSceneOutfitPoster
 local FFlagProfileMomentsLoadFailureAnalyticsModule = require(ProfilePlatform.Flags.FFlagProfileMomentsLoadFailureAnalytics)
 local ProfileMomentsGridMeTabTopInset = game:DefineFastFlag("ProfileMomentsGridMeTabTopInset", false)
-local FFlagProfileRenderAvatarMoments1 = FFlagProfileMomentsFeedRootRoute and (FFlagEnableArgus and (FFlagEnableArgusImmersiveNav and FFlagProfileRenderAvatarMoments))
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
-local FFlagProfileMomentsFeedRootRoute1 = FFlagProfileMomentsFeedRootRoute or FFlagProfileRenderAvatarMoments
+local FFlagProfileMomentsFeedRootRoute = SharedFlagsModule.FFlagProfileMomentsFeedRootRoute or FFlagProfileRenderAvatarMoments
 local View = FoundationModule.View
 local IconButton = FoundationModule.IconButton
 local ButtonSize = FoundationModule.Enums.ButtonSize
@@ -64,9 +60,9 @@ local ChevronLargeLeft = FoundationModule.Enums.IconName.ChevronLargeLeft
 local Frozen = table.freeze({})
 
 return function()
-	-- upvalues: UseNavigationFunction (copy), FFlagProfileMomentsFeedRootRoute1 (copy), UseDispatchFunction (copy), UseStyleFunction (copy), UseTokensFunction (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), FFlagAXEnableProfileTab (copy), UseProfileWrapperContextModule (copy), UseScreenSizeFunction (copy), UseSelectorFunction (copy), GetSafeAreaSizeFunction (copy), ProfileMomentsGridMeTabTopInset (copy), UseStatusBarHeightFunction (copy), FFlagProfilePlatformNewProfileHeader (copy), FFlagSwitchProfileWidthHookToSocialCommon (copy), UseProfileCardWidthFunction (copy), UseProfileCardWidthModule (copy), ConstantsModule (copy), ReactModule (copy), UseUserProfilesFetchFunction (copy), UserProfilesModule (copy), UseUserMomentsModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseAppPolicyFunction (copy), FFlagMomentsOptimisticProfilePending (copy), FireAnalyticsEventFunction (copy), EventNames (copy), FFlagProfileMomentsLoadFailureAnalyticsModule (copy), MakeProfileTileFieldsModule (copy), FFlagProfileRenderAvatarMoments1 (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), MomentGridItemModule (copy), View (copy), IconButton (copy), ChevronLargeLeft (copy), ButtonSize (copy), UserTile (copy), LayoutMode (copy), FFlagProfileMomentSceneOutfitPoster (copy), IsPlayableVideoMomentModule (copy), UseNavigationFocusFunction (copy), FoundationModule (copy), ScrollingGridView (copy), MomentsCarouselMediaProviderModule (copy), Frozen (copy), ProfileModalViewModule (copy), FullscreenPageWithSafeArea (copy)
+	-- upvalues: UseNavigationFunction (copy), FFlagProfileMomentsFeedRootRoute (copy), UseDispatchFunction (copy), UseStyleFunction (copy), UseTokensFunction (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), FFlagAXEnableProfileTab (copy), UseProfileWrapperContextModule (copy), UseScreenSizeFunction (copy), UseSelectorFunction (copy), GetSafeAreaSizeFunction (copy), ProfileMomentsGridMeTabTopInset (copy), UseStatusBarHeightFunction (copy), FFlagProfilePlatformNewProfileHeader (copy), FFlagSwitchProfileWidthHookToSocialCommon (copy), UseProfileCardWidthFunction (copy), UseProfileCardWidthModule (copy), ConstantsModule (copy), ReactModule (copy), UseUserProfilesFetchFunction (copy), UserProfilesModule (copy), UseUserMomentsModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseAppPolicyFunction (copy), FFlagMomentsOptimisticProfilePending (copy), FireAnalyticsEventFunction (copy), EventNames (copy), FFlagProfileMomentsLoadFailureAnalyticsModule (copy), MakeProfileTileFieldsModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), MomentGridItemModule (copy), View (copy), IconButton (copy), ChevronLargeLeft (copy), ButtonSize (copy), UserTile (copy), LayoutMode (copy), FFlagProfileMomentSceneOutfitPoster (copy), IsPlayableVideoMomentModule (copy), UseNavigationFocusFunction (copy), FoundationModule (copy), ScrollingGridView (copy), MomentsCarouselMediaProviderModule (copy), Frozen (copy), ProfileModalViewModule (copy), FullscreenPageWithSafeArea (copy)
 	local UseNavigationResult = UseNavigationFunction()
-	local UseDispatchResult = if FFlagProfileMomentsFeedRootRoute1 then UseDispatchFunction() else nil
+	local UseDispatchResult = if FFlagProfileMomentsFeedRootRoute then UseDispatchFunction() else nil
 	local ExtraPropsParam = UseNavigationResult.getParam("extraProps")
 	local Theme = UseStyleFunction().Theme
 	local UseTokensResult = UseTokensFunction()
@@ -117,7 +113,7 @@ return function()
 		UseNavigationResult.goBack()
 	end, { UseNavigationResult.goBack })
 	local UseResult1 = ReactModule.useCallback(function(InitialIndex)
-		-- upvalues: Moments (copy), ProfileId (copy), MakeProfileTileFieldsModule (upval), FireAnalyticsEventFunction (upval), EventNames (upval), FFlagMomentsOptimisticProfilePending (upval), UseRefResult (ref), FFlagProfileMomentsFeedRootRoute1 (upval), FFlagProfileRenderAvatarMoments1 (upval), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (ref), NavigateDownFunction (upval), UseNavigationResult (copy), EnumsModule (upval)
+		-- upvalues: Moments (copy), ProfileId (copy), MakeProfileTileFieldsModule (upval), FireAnalyticsEventFunction (upval), EventNames (upval), FFlagMomentsOptimisticProfilePending (upval), UseRefResult (ref), FFlagProfileMomentsFeedRootRoute (upval), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (ref), NavigateDownFunction (upval), UseNavigationResult (copy), EnumsModule (upval)
 		local Moment = Moments[InitialIndex]
 		
 		if Moment and ProfileId then
@@ -136,13 +132,13 @@ return function()
 		if FFlagMomentsOptimisticProfilePending and UseRefResult ~= nil and UseRefResult.current ~= nil then
 			UseRefResult.current.release()
 		end
-		if not FFlagProfileMomentsFeedRootRoute1 then
+		if not FFlagProfileMomentsFeedRootRoute then
 			UseNavigationResult.navigate(EnumsModule.Screens.MomentsFeed, { extraProps = ExtraProps })
 			
 			return
 		end
 		local config = {
-			name = if FFlagProfileRenderAvatarMoments1 then AppPage.MomentsImmersive else AppPage.ProfileMomentsFeed,
+			name = AppPage.ProfileMomentsFeed,
 			extraProps = ExtraProps
 		}
 		

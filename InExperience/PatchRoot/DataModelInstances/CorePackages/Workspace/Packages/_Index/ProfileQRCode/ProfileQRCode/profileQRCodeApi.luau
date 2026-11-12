@@ -1,6 +1,5 @@
 ﻿return {
 	["jest.config"] = script.Parent["jest.config"],
-	FFlagProfileQRCodeGamepadBackFix = require(script.Parent.Flags.FFlagProfileQRCodeGamepadBackFix),
 	installReducer = require(script.Parent.Rodux).installReducer,
 	ProfileQRCodeEntryPoint = require(script.Parent.Components.ProfileQRCodeEntryPoint),
 	RoduxKey = require(script.Parent.Common.Constants).RODUX_KEY,

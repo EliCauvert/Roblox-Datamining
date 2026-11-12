@@ -1,1 +1,1 @@
-﻿return (require(script.Parent.Parent.Parent._Workspace.SystemInfoProtocol.SystemInfoProtocol))
+﻿return (require(script.Parent.Parent.Parent._Index.SystemInfoProtocol.SystemInfoProtocol))

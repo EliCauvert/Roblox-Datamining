@@ -3,7 +3,6 @@ local Parent = BuildExperience.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local MotionModule = require(Parent.Motion)
-local Button = FoundationModule.Button
 local IconButton = FoundationModule.IconButton
 local SegmentedControl = FoundationModule.SegmentedControl
 local Text = FoundationModule.Text
@@ -17,7 +16,6 @@ local _ = require(script.Parent.LibraryWorldCutout.useLibraryWorldCutoutViewMode
 local ReleaseFocusWithinModule = require(BuildExperience.utils.releaseFocusWithin)
 local UseTypedQueryBindingModule = require(script.Parent.useTypedQueryBinding)
 local UseHardwareInsetsModule = require(BuildExperience.Components.ChatSheet.useHardwareInsets)
-local FFlagBuildExperienceLibrary = require(Parent.SharedFlags).FFlagBuildExperienceLibrary
 local config = {
 	Top = {
 		UDim2.fromOffset(-10000, -10000),
@@ -32,7 +30,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: FoundationModule (copy), UseHardwareInsetsModule (copy), ReactModule (copy), MotionModule (copy), ReleaseFocusWithinModule (copy), UseTypedQueryBindingModule (copy), config (copy), View (copy), IconButton (copy), FFlagBuildExperienceLibrary (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), Text (copy), SearchBarContainerModule (copy), Button (copy), SegmentedControl (copy), LibraryWorldBackdropViewModule (copy)
+	-- upvalues: FoundationModule (copy), UseHardwareInsetsModule (copy), ReactModule (copy), MotionModule (copy), ReleaseFocusWithinModule (copy), UseTypedQueryBindingModule (copy), config (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), Text (copy), SearchBarContainerModule (copy), SegmentedControl (copy), LibraryWorldBackdropViewModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local ReducedMotion = FoundationModule.Hooks.usePreferences().reducedMotion
 	local Bottom = UseHardwareInsetsModule().bottom
@@ -127,7 +125,7 @@ return function(p1)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseRefResult2 = ReactModule.useRef(nil)
 	
-	local function v43(p2): boolean
+	local function v41(p2): boolean
 		-- upvalues: UseRefResult2 (copy)
 		local Current = UseRefResult2.current
 		
@@ -201,7 +199,7 @@ return function(p1)
 			}, {
 				Button = ReactModule.createElement(IconButton, {
 					isCircular = true,
-					icon = if OnBack == nil and not FFlagBuildExperienceLibrary then IconName.X else IconName.ChevronLargeLeft,
+					icon = if OnBack == nil then IconName.X else IconName.ChevronLargeLeft,
 					ref = UseRefResult2,
 					onActivated = function()
 						-- upvalues: OnBack (copy), p1 (copy), ReleaseFocusWithinModule (upval), UseRefResult1 (copy), UseStateResult2_1 (copy), IsUseStateResultMatch1 (copy), UseTypedQueryBindingModuleResult2 (copy)
@@ -262,8 +260,8 @@ return function(p1)
 						UseStateResult2_1(nil)
 					end,
 					onFocusLost = function(p2)
-						-- upvalues: UseTypedQueryBindingModuleResult (copy), v43 (copy), UseStateResult2_1 (copy)
-						if UseTypedQueryBindingModuleResult:getValue() == "" and not v43(p2) then
+						-- upvalues: UseTypedQueryBindingModuleResult (copy), v41 (copy), UseStateResult2_1 (copy)
+						if UseTypedQueryBindingModuleResult:getValue() == "" and not v41(p2) then
 							UseStateResult2_1(nil)
 						end
 					end,
@@ -284,18 +282,6 @@ return function(p1)
 					UseStateResult2_1(Title)
 				end,
 				size = InputSize.Large,
-				variant = ButtonVariant.Utility
-			}) else nil,
-			SelectAll = if p1.isOpen and p1.onSelectAll ~= nil and p1.selectAllLabel ~= nil then ReactModule.createElement(Button, {
-				LayoutOrder = 4,
-				testId = "Library.Experience.SelectAll",
-				text = p1.selectAllLabel,
-				onActivated = function()
-					-- upvalues: ReleaseFocusWithinModule (upval), UseRefResult1 (copy), p1 (copy)
-					ReleaseFocusWithinModule(UseRefResult1.current)
-					p1.onSelectAll()
-				end,
-				size = InputSize.Medium,
 				variant = ButtonVariant.Utility
 			}) else nil
 		}),

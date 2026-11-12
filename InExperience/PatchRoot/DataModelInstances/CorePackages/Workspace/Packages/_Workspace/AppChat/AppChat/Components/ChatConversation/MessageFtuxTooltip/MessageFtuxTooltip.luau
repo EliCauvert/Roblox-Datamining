@@ -1,8 +1,10 @@
 ﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local Text = require(Parent.AppCommonLib).Text
 local ReactModule = require(Parent.React)
 local CryoModule = require(Parent.Cryo)
 local FoundationModule = require(Parent.Foundation)
 local GetTextSizeFunction = require(Parent.Style).GetTextSize
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local Enums = FoundationModule.Enums
 local UseMessageFtuxTooltipModule = require(script.Parent.useMessageFtuxTooltip)
 local MessageFtuxTooltipVariantModule = require(script.Parent.MessageFtuxTooltipVariant)
@@ -11,17 +13,17 @@ local config = {
 	variant = MessageFtuxTooltipVariantModule.None
 }
 
-local function v8(p1)
-	-- upvalues: CryoModule (copy), config (copy), FoundationModule (copy), UseMessageFtuxTooltipModule (copy), ReactModule (copy), GetTextSizeFunction (copy), Enums (copy)
+local function v10(p1)
+	-- upvalues: CryoModule (copy), config (copy), FoundationModule (copy), UseMessageFtuxTooltipModule (copy), ReactModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), Enums (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseMessageFtuxTooltipModuleResult = UseMessageFtuxTooltipModule(UnionResult.variant)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	ReactModule.useEffect(function()
-		-- upvalues: UseTokensResult (copy), GetTextSizeFunction (upval), UseMessageFtuxTooltipModuleResult (copy), UseStateResult2 (copy), UnionResult (copy), UseStateResult2_1 (copy)
+		-- upvalues: UseTokensResult (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), UseMessageFtuxTooltipModuleResult (copy), Text (upval), UseStateResult2 (copy), UnionResult (copy), UseStateResult2_1 (copy)
 		local TitleSmall = UseTokensResult.Typography.TitleSmall
-		local NewX = GetTextSizeFunction(UseMessageFtuxTooltipModuleResult.text, TitleSmall.FontSize, TitleSmall.Font, Vector2.new(10000, 10000)).X + UseTokensResult.Padding.Small * 2
+		local NewX = if FoundationFontFaceMigration then GetTextSizeFunction(UseMessageFtuxTooltipModuleResult.text, TitleSmall.FontSize, TitleSmall.Font, Vector2.new(10000, 10000)).X + UseTokensResult.Padding.Small * 2 else Text.GetTextWidth(UseMessageFtuxTooltipModuleResult.text, TitleSmall.Font, TitleSmall.FontSize) + UseTokensResult.Padding.Small * 2
 		UseStateResult2(if UnionResult.messageRef.current then UnionResult.messageRef.current.AbsoluteSize.X < NewX else false)
 		UseStateResult2_1(true)
 	end, {
@@ -64,8 +66,8 @@ local function v8(p1)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: config (copy), MessageFtuxTooltipVariantModule (copy), ReactModule (copy), v8 (copy)
+	-- upvalues: config (copy), MessageFtuxTooltipVariantModule (copy), ReactModule (copy), v10 (copy)
 	local Variant = p1.variant or config.variant
 	
-	return if Variant == MessageFtuxTooltipVariantModule.None then nil else ReactModule.createElement(v8, p1)
+	return if Variant == MessageFtuxTooltipVariantModule.None then nil else ReactModule.createElement(v10, p1)
 end)

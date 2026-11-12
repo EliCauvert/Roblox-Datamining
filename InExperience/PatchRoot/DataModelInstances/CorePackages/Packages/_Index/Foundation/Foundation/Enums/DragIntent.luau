@@ -1,1 +1,0 @@
-﻿return { Claim = "Claim", Ignore = "Ignore", Pending = "Pending" }

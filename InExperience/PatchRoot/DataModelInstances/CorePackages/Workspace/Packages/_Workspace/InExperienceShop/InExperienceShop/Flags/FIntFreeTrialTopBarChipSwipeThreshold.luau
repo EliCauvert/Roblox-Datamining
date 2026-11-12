@@ -1,1 +1,0 @@
-﻿return game:DefineFastInt("FreeTrialTopBarChipSwipeThreshold", 48)

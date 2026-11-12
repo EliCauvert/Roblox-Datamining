@@ -19,7 +19,6 @@ local UserGameSettings = UserSettings():GetService("UserGameSettings")
 local FFlagRefactorMenuConfirmationButtonsModule = require(RobloxGui.Modules.Settings.Flags.FFlagRefactorMenuConfirmationButtons)
 local RepositionDropDownScrim = game:DefineFastFlag("RepositionDropDownScrim", false)
 local FFlagUIScaleEngineOptions = require(CorePackages.Workspace.Packages.SharedFlags).FFlagUIScaleEngineOptions
-local FFlagUIScaleSliderImprovementsModule = require(RobloxGui.Modules.Settings.Flags.FFlagUIScaleSliderImprovements)
 local Chrome = RobloxGui.Modules.Chrome
 local ServiceModule = if require(CorePackages.Workspace.Packages.Chrome).Enabled() then require(Chrome.Service) else nil
 local SignalsModule = require(CorePackages.Packages.Signals)
@@ -1084,18 +1083,18 @@ local function CreateSelector(p7, CurrentIndex)
 	})
 	
 	if UserInputService.PreferredInput ~= Enum.PreferredInput.Touch then
-		local function v175(Image)
+		local function v174(Image)
 			-- upvalues: ARROWCOLOR (upval)
 			Image.ImageColor3 = ARROWCOLOR
 		end
 		
-		local function v176(Image)
+		local function v175(Image)
 			-- upvalues: ARROWCOLORHOVER (upval)
 			Image.ImageColor3 = ARROWCOLORHOVER
 		end
 		
-		addHoverState(Parent, Image, v175, v176)
-		addHoverState(Parent1, Image1, v175, v176)
+		addHoverState(Parent, Image, v174, v175)
+		addHoverState(Parent1, Image1, v174, v175)
 	end
 	config.Selections = {}
 	local t1 = {}
@@ -1371,15 +1370,15 @@ local function CreateSelector(p7, CurrentIndex)
 				if not VRService.VREnabled and (UserInputService.PreferredInput ~= Enum.PreferredInput.Touch or UserInputService.GamepadEnabled) then
 					GuiService.SelectedCoreObject = config.SelectorFrame
 				end
-				local NewCurrentIndex = 1 + config.CurrentIndex
-				local v5: number = if NewCurrentIndex > config.CurrentIndex then 1 else -1
+				local CountSelections = 1 + config.CurrentIndex
+				local v5: number = if CountSelections > config.CurrentIndex then 1 else -1
 				
-				if #config.Selections < NewCurrentIndex then
-					NewCurrentIndex = 1
-				elseif NewCurrentIndex < 1 then
-					NewCurrentIndex = #config.Selections
+				if #config.Selections < CountSelections then
+					CountSelections = 1
+				elseif CountSelections < 1 then
+					CountSelections = #config.Selections
 				end
-				setSelection(NewCurrentIndex, v5)
+				setSelection(CountSelections, v5)
 			end
 		end
 	end)
@@ -1590,7 +1589,7 @@ local function ShowAlert(Text, p9, p10, Callback, p11)
 end
 
 local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
-	-- upvalues: HttpService (copy), Signal (copy), CreateFunction (copy), SelectionImageObject (copy), RobloxGui (copy), ThemeModule (copy), UserInputService (copy), ARROWCOLORHOVER (copy), ARROWCOLOR (copy), ARROWCOLORHOVER (copy), addHoverState (copy), SELECTEDCOLOR (copy), NONSELECTEDCOLOR (copy), FFlagUIScaleEngineOptions (copy), FFlagUIScaleSliderImprovementsModule (copy), VRService (copy), GuiService (copy), RunService (copy)
+	-- upvalues: HttpService (copy), Signal (copy), CreateFunction (copy), SelectionImageObject (copy), RobloxGui (copy), ThemeModule (copy), UserInputService (copy), ARROWCOLORHOVER (copy), ARROWCOLOR (copy), ARROWCOLORHOVER (copy), addHoverState (copy), SELECTEDCOLOR (copy), NONSELECTEDCOLOR (copy), FFlagUIScaleEngineOptions (copy), VRService (copy), GuiService (copy), RunService (copy)
 	local t = {}
 	local Number: number? = tonumber(p9)
 	local CurrentStep1 = CurrentStep
@@ -1598,9 +1597,6 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 	local CurrentTime = nil
 	local Selectable = true
 	local EnabledSteps = nil
-	local NoVREnabled = false
-	local Flag = false
-	local Input = nil
 	local Guid = HttpService:GenerateGUID(false)
 	
 	if Number <= 0 then
@@ -1764,23 +1760,23 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 	})
 	
 	if UserInputService.PreferredInput ~= Enum.PreferredInput.Touch then
-		local function v242(Image)
+		local function v243(Image)
 			-- upvalues: ARROWCOLOR (upval)
 			Image.ImageColor3 = ARROWCOLOR
 		end
 		
-		local function v243(Image)
+		local function v244(Image)
 			-- upvalues: ARROWCOLORHOVER (upval)
 			Image.ImageColor3 = ARROWCOLORHOVER
 		end
 		
-		addHoverState(Parent1, v6, v242, v243)
-		addHoverState(Parent2, v7, v242, v243)
+		addHoverState(Parent1, v6, v243, v244)
+		addHoverState(Parent2, v7, v243, v244)
 	end
 	t.Steps = {}
 	local XScale = 1 / Number
 	
-	for i = 1, Number do
+	for i1 = 1, Number do
 		local Parent = CreateFunction("ImageButton")({
 			BackgroundTransparency = 0,
 			BorderSizePixel = 0,
@@ -1790,19 +1786,19 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 			ZIndex = 3,
 			Selectable = false,
 			ImageTransparency = 0.36,
-			Name = "Step" .. tostring(i),
+			Name = "Step" .. tostring(i1),
 			BackgroundColor3 = SELECTEDCOLOR,
 			AnchorPoint = Vector2.new(0, 0.5),
-			Position = UDim2.new((i - 1) * XScale, 2, 0.5, 0),
+			Position = UDim2.new((i1 - 1) * XScale, 2, 0.5, 0),
 			Size = UDim2.new(XScale, -4, 0, 24),
 			Parent = t.StepsContainer,
 			SelectionImageObject = SelectionImageObject
 		})
 		
-		if CurrentStep1 < i then
+		if CurrentStep1 < i1 then
 			Parent.BackgroundColor3 = NONSELECTEDCOLOR
 		end
-		if i == 1 or i == Number then
+		if i1 == 1 or i1 == Number then
 			CreateFunction("UICorner")({
 				CornerRadius = ThemeModule.DefaultCornerRadius,
 				Parent = Parent
@@ -1813,7 +1809,7 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 				BackgroundColor3 = Parent.BackgroundColor3,
 				Parent = Parent,
 				Size = UDim2.new(0.25, 0, 1, 0),
-				Position = if i == 1 then UDim2.new(0.75, 0, 0, 0) else UDim2.new(0, 0, 0, 0)
+				Position = if i1 == 1 then UDim2.new(0.75, 0, 0, 0) else UDim2.new(0, 0, 0, 0)
 			})
 		end
 		t.Steps[#t.Steps + 1] = Parent
@@ -1832,11 +1828,11 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 	end
 	
 	local function showSelection()
-		-- upvalues: Number (copy), CurrentStep1 (ref), FFlagUIScaleEngineOptions (upval), EnabledSteps (ref), FFlagUIScaleSliderImprovementsModule (upval), t (copy), SELECTEDCOLOR (upval)
+		-- upvalues: Number (copy), CurrentStep1 (ref), FFlagUIScaleEngineOptions (upval), EnabledSteps (ref), t (copy), SELECTEDCOLOR (upval)
 		for i = 1, Number do
 			if CurrentStep1 < i then break end
 			if FFlagUIScaleEngineOptions and EnabledSteps then
-				if EnabledSteps[i] or i == CurrentStep1 and not FFlagUIScaleSliderImprovementsModule then
+				if EnabledSteps[i] or i == CurrentStep1 then
 					t.Steps[i].BackgroundTransparency = 0
 					t.Steps[i].BackgroundColor3 = SELECTEDCOLOR
 				end
@@ -1866,7 +1862,7 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 	end
 	
 	local function setCurrentStep(Value: number, p10)
-		-- upvalues: FFlagUIScaleEngineOptions (upval), EnabledSteps (ref), CurrentStep1 (ref), Number (copy), MinStep (ref), Parent1 (copy), Parent2 (copy), Selectable (ref), hideSelection (copy), showSelection (copy), CurrentTime (ref), FFlagUIScaleSliderImprovementsModule (upval), NoVREnabled (ref), Flag (ref), NewSignal (copy), ValueChanged (copy)
+		-- upvalues: FFlagUIScaleEngineOptions (upval), EnabledSteps (ref), CurrentStep1 (ref), Number (copy), MinStep (ref), Parent1 (copy), Parent2 (copy), Selectable (ref), hideSelection (copy), showSelection (copy), CurrentTime (ref), NewSignal (copy), ValueChanged (copy)
 		if FFlagUIScaleEngineOptions and EnabledSteps and not p10 and Value ~= CurrentStep1 then
 			Value = math.clamp(Value, 1, Number)
 			local Amount: number = if Value < CurrentStep1 then -1 else 1
@@ -1925,11 +1921,6 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 			showSelection()
 			CurrentTime = tick()
 			
-			if FFlagUIScaleSliderImprovementsModule and NoVREnabled then
-				Flag = true
-				
-				return
-			end
 			if NewSignal then
 				NewSignal:fire(CurrentStep1)
 				
@@ -1940,51 +1931,18 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 		end
 	end
 	
-	local _ = function()
-		-- upvalues: NoVREnabled (ref), Input (ref), Flag (ref), NewSignal (copy), CurrentStep1 (ref), ValueChanged (copy)
-		NoVREnabled = false
-		Input = nil
-		
-		if not Flag then return end
-		Flag = false
-		
-		if NewSignal then
-			NewSignal:fire(CurrentStep1)
-			
-			return
-		else
-			ValueChanged:Fire(CurrentStep1)
-		end
-	end
-	
 	local _ = function(Input): boolean
 		return if Input then Input.UserInputType == Enum.UserInputType.MouseButton1 or (Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.Gamepad1 and Input.KeyCode == Enum.KeyCode.ButtonA) else false
 	end
 	
-	local function mouseDownFunc(Input1, CurrentStep, p11)
-		-- upvalues: Selectable (ref), FFlagUIScaleEngineOptions (upval), EnabledSteps (ref), VRService (upval), UserInputService (upval), GuiService (upval), t (copy), FFlagUIScaleSliderImprovementsModule (upval), Input (ref), NoVREnabled (ref), Flag (ref), NewSignal (copy), CurrentStep1 (ref), ValueChanged (copy), v4 (ref), Number (copy), setCurrentStep (copy)
+	local function mouseDownFunc(Input, CurrentStep, p11)
+		-- upvalues: Selectable (ref), FFlagUIScaleEngineOptions (upval), EnabledSteps (ref), VRService (upval), UserInputService (upval), GuiService (upval), t (copy), v4 (ref), CurrentStep1 (ref), Number (copy), setCurrentStep (copy)
 		if not Selectable then return end
 		if FFlagUIScaleEngineOptions and EnabledSteps and not p11 and not EnabledSteps[CurrentStep] then return end
-		if Input1 == nil then return end
-		if not (if Input1 then Input1.UserInputType == Enum.UserInputType.MouseButton1 or (Input1.UserInputType == Enum.UserInputType.Touch or Input1.UserInputType == Enum.UserInputType.Gamepad1 and Input1.KeyCode == Enum.KeyCode.ButtonA) else false) then return end
+		if Input == nil then return end
+		if not (if Input then Input.UserInputType == Enum.UserInputType.MouseButton1 or (Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.Gamepad1 and Input.KeyCode == Enum.KeyCode.ButtonA) else false) then return end
 		if not VRService.VREnabled and (UserInputService.PreferredInput ~= Enum.PreferredInput.Touch or UserInputService.GamepadEnabled) and not VRService.VREnabled then
 			GuiService.SelectedCoreObject = t.SliderFrame
-		end
-		if FFlagUIScaleSliderImprovementsModule and Input1 ~= Input then
-			NoVREnabled = false
-			Input = nil
-			
-			if Flag then
-				Flag = false
-				
-				if NewSignal then
-					NewSignal:fire(CurrentStep1)
-				else
-					ValueChanged:Fire(CurrentStep1)
-				end
-			end
-			NoVREnabled = FFlagUIScaleEngineOptions and (EnabledSteps ~= nil and (not p11 and not VRService.VREnabled))
-			Input = if NoVREnabled then Input1 else nil
 		end
 		if VRService.VREnabled then
 			v4 = 0
@@ -2017,26 +1975,14 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 					end
 				end
 			end)
-			Connection = UserInputService.InputEnded:Connect(function(Input1)
-				-- upvalues: v4 (upval), Connection (ref), InputChangedConnection (ref), FFlagUIScaleSliderImprovementsModule (upval), NoVREnabled (upval), Input (upval), Flag (upval), NewSignal (upval), CurrentStep1 (upval), ValueChanged (upval)
-				if not (if Input1 then Input1.UserInputType == Enum.UserInputType.MouseButton1 or (Input1.UserInputType == Enum.UserInputType.Touch or Input1.UserInputType == Enum.UserInputType.Gamepad1 and Input1.KeyCode == Enum.KeyCode.ButtonA) else false) then return end
-				v4 = 0
-				Connection:Disconnect()
-				InputChangedConnection:Disconnect()
-				
-				if FFlagUIScaleSliderImprovementsModule and NoVREnabled then
-					NoVREnabled = false
-					Input = nil
+			Connection = UserInputService.InputEnded:Connect(function(Input)
+				-- upvalues: v4 (upval), Connection (ref), InputChangedConnection (ref)
+				if if Input then Input.UserInputType == Enum.UserInputType.MouseButton1 or (Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.Gamepad1 and Input.KeyCode == Enum.KeyCode.ButtonA) else false then
+					v4 = 0
+					Connection:Disconnect()
+					InputChangedConnection:Disconnect()
 					
-					if not Flag then return end
-					Flag = false
-					
-					if NewSignal then
-						NewSignal:fire(CurrentStep1)
-						
-						return
-					end
-					ValueChanged:Fire(CurrentStep1)
+					return
 				end
 			end)
 		end
@@ -2153,8 +2099,17 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 	end
 	
 	Parent1.InputBegan:Connect(function(Input)
-		-- upvalues: mouseDownFunc (copy), CurrentStep1 (ref)
-		mouseDownFunc(Input, CurrentStep1 - 1, true)
+		-- upvalues: CurrentStep1 (ref), Selectable (ref), FFlagUIScaleEngineOptions (upval), EnabledSteps (ref), VRService (upval), UserInputService (upval), GuiService (upval), t (copy), v4 (ref), setCurrentStep (copy)
+		local CurrentStepDelta = CurrentStep1 - 1
+		
+		if not Selectable or (not FFlagUIScaleEngineOptions or not EnabledSteps) and false then return end
+		if Input == nil then return end
+		if not (if Input then Input.UserInputType == Enum.UserInputType.MouseButton1 or (Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.Gamepad1 and Input.KeyCode == Enum.KeyCode.ButtonA) else false) then return end
+		if not VRService.VREnabled and (UserInputService.PreferredInput ~= Enum.PreferredInput.Touch or UserInputService.GamepadEnabled) and not VRService.VREnabled then
+			GuiService.SelectedCoreObject = t.SliderFrame
+		end
+		v4 = if VRService.VREnabled then 0 else CurrentStepDelta - CurrentStep1
+		setCurrentStep(CurrentStepDelta)
 	end)
 	Parent1.InputEnded:Connect(function(Input)
 		-- upvalues: Selectable (ref), v4 (ref)
@@ -2166,8 +2121,17 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 		end
 	end)
 	Parent2.InputBegan:Connect(function(Input)
-		-- upvalues: mouseDownFunc (copy), CurrentStep1 (ref)
-		mouseDownFunc(Input, CurrentStep1 + 1, true)
+		-- upvalues: CurrentStep1 (ref), Selectable (ref), FFlagUIScaleEngineOptions (upval), EnabledSteps (ref), VRService (upval), UserInputService (upval), GuiService (upval), t (copy), v4 (ref), setCurrentStep (copy)
+		local NewCurrentStep = CurrentStep1 + 1
+		
+		if not Selectable or (not FFlagUIScaleEngineOptions or not EnabledSteps) and false then return end
+		if Input == nil then return end
+		if not (if Input then Input.UserInputType == Enum.UserInputType.MouseButton1 or (Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.Gamepad1 and Input.KeyCode == Enum.KeyCode.ButtonA) else false) then return end
+		if not VRService.VREnabled and (UserInputService.PreferredInput ~= Enum.PreferredInput.Touch or UserInputService.GamepadEnabled) and not VRService.VREnabled then
+			GuiService.SelectedCoreObject = t.SliderFrame
+		end
+		v4 = if VRService.VREnabled then 0 else NewCurrentStep - CurrentStep1
+		setCurrentStep(NewCurrentStep)
 	end)
 	Parent2.InputEnded:Connect(function(Input)
 		-- upvalues: Selectable (ref), v4 (ref)
@@ -2213,12 +2177,12 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 	VRService.Changed:Connect(onVREnabled)
 	onVREnabled("VREnabled")
 	
-	for i1 = 1, Number do
-		t.Steps[i1].InputBegan:Connect(function(Input)
-			-- upvalues: mouseDownFunc (copy), i1 (copy)
-			mouseDownFunc(Input, i1)
+	for i = 1, Number do
+		t.Steps[i].InputBegan:Connect(function(Input)
+			-- upvalues: mouseDownFunc (copy), i (copy)
+			mouseDownFunc(Input, i)
 		end)
-		t.Steps[i1].InputEnded:Connect(function(Input)
+		t.Steps[i].InputEnded:Connect(function(Input)
 			-- upvalues: Selectable (ref), v4 (ref)
 			if not Selectable then return end
 			if if Input then Input.UserInputType == Enum.UserInputType.MouseButton1 or (Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.Gamepad1 and Input.KeyCode == Enum.KeyCode.ButtonA) else false then
@@ -2252,7 +2216,7 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 		end
 	end)
 	
-	local function v254()
+	local function v238()
 		-- upvalues: CurrentTime (ref), setCurrentStep (copy), CurrentStep1 (ref), v4 (ref)
 		if CurrentTime == nil then return end
 		if tick() - CurrentTime >= 0.2 then
@@ -2271,35 +2235,21 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 		[Enum.KeyCode.D] = 1,
 		[Enum.KeyCode.ButtonA] = true
 	}
-	UserInputService.InputBegan:Connect(function(Input1)
-		-- upvalues: Selectable (ref), v16 (ref), GuiService (upval), t (copy), FFlagUIScaleSliderImprovementsModule (upval), NoVREnabled (ref), config (copy), Input (ref), Flag (ref), NewSignal (copy), CurrentStep1 (ref), ValueChanged (copy), v4 (ref), setCurrentStep (copy)
+	UserInputService.InputBegan:Connect(function(Input)
+		-- upvalues: Selectable (ref), v16 (ref), GuiService (upval), t (copy), config (copy), v4 (ref), setCurrentStep (copy), CurrentStep1 (ref)
 		if not Selectable then return end
 		if not v16 then return end
-		if Input1.UserInputType ~= Enum.UserInputType.Gamepad1 and Input1.UserInputType ~= Enum.UserInputType.Keyboard then return end
+		if Input.UserInputType ~= Enum.UserInputType.Gamepad1 and Input.UserInputType ~= Enum.UserInputType.Keyboard then return end
 		local SelectedCoreObject = GuiService.SelectedCoreObject
 		
 		if not SelectedCoreObject or not SelectedCoreObject:IsDescendantOf(t.SliderFrame.Parent) then return end
-		if FFlagUIScaleSliderImprovementsModule and NoVREnabled and config[Input1.KeyCode] then
-			NoVREnabled = false
-			Input = nil
-			
-			if Flag then
-				Flag = false
-				
-				if NewSignal then
-					NewSignal:fire(CurrentStep1)
-				else
-					ValueChanged:Fire(CurrentStep1)
-				end
-			end
-		end
-		if config[Input1.KeyCode] == -1 then
+		if config[Input.KeyCode] == -1 then
 			v4 = -1
 			setCurrentStep(CurrentStep1 - 1)
 			
 			return
 		end
-		if config[Input1.KeyCode] == 1 then
+		if config[Input.KeyCode] == 1 then
 			v4 = 1
 			setCurrentStep(CurrentStep1 + 1)
 		end
@@ -2348,22 +2298,22 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 			v4 = 0
 		end
 	end)
-	local Flag1 = false
+	local Flag = false
 	GuiService.Changed:Connect(function(p13)
-		-- upvalues: GuiService (upval), t (copy), Flag1 (ref), CurrentTime (ref), RunService (upval), Guid (copy), v254 (copy)
+		-- upvalues: GuiService (upval), t (copy), Flag (ref), CurrentTime (ref), RunService (upval), Guid (copy), v238 (copy)
 		if p13 ~= "SelectedCoreObject" then return end
 		local SelectedCoreObject = GuiService.SelectedCoreObject
 		
 		if SelectedCoreObject and SelectedCoreObject:IsDescendantOf(t.SliderFrame.Parent) then
-			if not Flag1 then
-				Flag1 = true
+			if not Flag then
+				Flag = true
 				CurrentTime = tick()
-				RunService:BindToRenderStep(Guid, Enum.RenderPriority.Input.Value + 1, v254)
+				RunService:BindToRenderStep(Guid, Enum.RenderPriority.Input.Value + 1, v238)
 				
 				return
 			end
-		elseif Flag1 then
-			Flag1 = false
+		elseif Flag then
+			Flag = false
 			RunService:UnbindFromRenderStep(Guid)
 		end
 	end)

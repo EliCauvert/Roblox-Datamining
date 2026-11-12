@@ -285,7 +285,7 @@ local function convertApiMomentToMomentItem(p2)
 		config.metadata.isMomentScene = true
 		local PostAsset = p2.postAsset
 		
-		if config.postAsset == nil and (PostAsset ~= nil and PostAsset.postAssetId ~= nil) then
+		if config.postAsset == nil and PostAsset ~= nil and PostAsset.postAssetId ~= nil then
 			config.postAsset = { postAssetId = PostAsset.postAssetId }
 		end
 	end

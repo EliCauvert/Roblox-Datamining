@@ -11,7 +11,6 @@ local Analytics = MomentsCommonModule.Analytics
 local EventNames = Analytics.EventNames
 local FireAnalyticsEventFunction = Analytics.fireAnalyticsEvent
 local MomentsSurfaceLoadManager = MomentsCommonModule.Performance.MomentsSurfaceLoadManager
-local FFlagMomentsPostInsightsIxpEnabledModule = require(Moments.Flags.FFlagMomentsPostInsightsIxpEnabled)
 local FFlagMomentsRemoveDeletedFromProfile = SharedFlagsModule.FFlagMomentsRemoveDeletedFromProfile
 local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local FFlagMomentsRenderAvatarPostsInFeed = SharedFlagsModule.FFlagMomentsRenderAvatarPostsInFeed
@@ -122,7 +121,7 @@ local _ = function()
 end
 
 return function(Frame: Frame)
-	-- upvalues: NoopTelemetry (copy), FFlagMomentsComments (copy), GetCommentsSheetStoreModule (copy), SignalsReactModule (copy), FFlagMomentsCreatorAnalyticsModule (copy), GetPostInsightsPageStoreModule (copy), GetImmersiveChromeStoreModule (copy), UseLocalizationFunction (copy), config (copy), UseMomentsSessionFunction (copy), GetToastStoreModule (copy), ReactModule (copy), GetFeedScrollLimitModule (copy), GetFFlagMomentsNonInfiniteScrollFunction (copy), GetMomentsCapabilitiesFunction (copy), CreateFeedStoreModule (copy), feedItemDedupeKey (copy), FFlagMomentsCommentsCloseOnFeedJumpModule (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), SignalsModule (copy), FFlagMomentsNavigationEventModule (copy), UseMomentsHostFunction (copy), FFlagMomentsPostInsightsIxpEnabledModule (copy), Moments (copy), LogMomentViewBeganModule (copy), FFlagMomentsImpressionPrimaryEntityModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), LogFeedEndStateReachedModule (copy), UseFeedTelemetryModule (copy), feedItemAttribution (copy), FFlagMomentsOptimisticProfilePending (copy), MomentsSurfaceLoadManager (copy), FeedItemRegistryModule (copy), DeleteMomentModule (copy), MomentsFeed (ref), Parent (copy), FFlagMomentsRemoveDeletedFromProfile (copy), GetDeletedMomentsStoreModule (copy), MakeFeedActionFieldsModule (copy), FFlagMomentsDeleteSnackbarModule (copy), FFlagMomentsFixDeleteToastCopyModule (copy), makeMediaLoadEventFields (copy), Analytics (copy), FFlagMomentsFeedMediaLoadAttemptedEvent (copy), FFlagMomentsCommentDeepLinks (copy), FeedContext (copy), VerticalPager (copy), renderFeedItem (copy), feedItemKey (copy), FeedStateViewModule (copy), FeedNavigationBarModule (copy), ImmersiveChromeControllerModule (copy), SwipeLatencyTrackerModule (copy), DeletionConfirmationDialogModule (copy), MomentMediaCoordinatorProviderModule (copy), SurfaceReadyTrackerModule (copy)
+	-- upvalues: NoopTelemetry (copy), FFlagMomentsComments (copy), GetCommentsSheetStoreModule (copy), SignalsReactModule (copy), FFlagMomentsCreatorAnalyticsModule (copy), GetPostInsightsPageStoreModule (copy), GetImmersiveChromeStoreModule (copy), UseLocalizationFunction (copy), config (copy), UseMomentsSessionFunction (copy), GetToastStoreModule (copy), ReactModule (copy), GetFeedScrollLimitModule (copy), GetFFlagMomentsNonInfiniteScrollFunction (copy), GetMomentsCapabilitiesFunction (copy), CreateFeedStoreModule (copy), feedItemDedupeKey (copy), FFlagMomentsCommentsCloseOnFeedJumpModule (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), SignalsModule (copy), FFlagMomentsNavigationEventModule (copy), UseMomentsHostFunction (copy), LogMomentViewBeganModule (copy), FFlagMomentsImpressionPrimaryEntityModule (copy), Moments (copy), FireAnalyticsEventFunction (copy), EventNames (copy), LogFeedEndStateReachedModule (copy), UseFeedTelemetryModule (copy), feedItemAttribution (copy), FFlagMomentsOptimisticProfilePending (copy), MomentsSurfaceLoadManager (copy), FeedItemRegistryModule (copy), DeleteMomentModule (copy), MomentsFeed (ref), Parent (copy), FFlagMomentsRemoveDeletedFromProfile (copy), GetDeletedMomentsStoreModule (copy), MakeFeedActionFieldsModule (copy), FFlagMomentsDeleteSnackbarModule (copy), FFlagMomentsFixDeleteToastCopyModule (copy), makeMediaLoadEventFields (copy), Analytics (copy), FFlagMomentsFeedMediaLoadAttemptedEvent (copy), FFlagMomentsCommentDeepLinks (copy), FeedContext (copy), VerticalPager (copy), renderFeedItem (copy), feedItemKey (copy), FeedStateViewModule (copy), FeedNavigationBarModule (copy), ImmersiveChromeControllerModule (copy), SwipeLatencyTrackerModule (copy), DeletionConfirmationDialogModule (copy), MomentMediaCoordinatorProviderModule (copy), SurfaceReadyTrackerModule (copy)
 	local Source = Frame.source
 	local NoActive = Frame.active == nil or Frame.active
 	local NoActive1 = if Frame.playbackActive == nil then NoActive else Frame.playbackActive
@@ -280,20 +279,14 @@ return function(Frame: Frame)
 	local UseRefResult7 = ReactModule.useRef(nil)
 	local HasOpenAvatarLookTryOn = UseMomentsHostFunction().openAvatarLookTryOn ~= nil
 	local UseResult2 = ReactModule.useCallback(function(p2)
-		-- upvalues: FFlagMomentsRenderAvatarPostsInFeed (upval), FFlagMomentsPostInsightsIxpEnabledModule (upval), Moments (upval), Source (copy), UseRefResult7 (copy), LogMomentViewBeganModule (upval), UseMomentsSessionResult (copy), FFlagMomentsNavigationEventModule (upval), FFlagMomentsImpressionPrimaryEntityModule (upval), HasOpenAvatarLookTryOn (copy)
-		if p2.kind ~= "moment" and (not FFlagMomentsRenderAvatarPostsInFeed or p2.kind ~= "avatarMoment") then return end
-		local Moment = p2.moment
-		
-		if FFlagMomentsPostInsightsIxpEnabledModule then
-			require(Moments.Analytics.logPostInsightsLayerExposure)(Moment, Source.recommendationSource)
+		-- upvalues: FFlagMomentsRenderAvatarPostsInFeed (upval), UseRefResult7 (copy), LogMomentViewBeganModule (upval), UseMomentsSessionResult (copy), FFlagMomentsNavigationEventModule (upval), FFlagMomentsImpressionPrimaryEntityModule (upval), HasOpenAvatarLookTryOn (copy)
+		if p2.kind == "moment" or FFlagMomentsRenderAvatarPostsInFeed and p2.kind == "avatarMoment" then
+			local CurrentFunction = UseRefResult7.current
+			LogMomentViewBeganModule(p2.moment, UseMomentsSessionResult.getSessionSource(false), if FFlagMomentsNavigationEventModule and CurrentFunction ~= nil then CurrentFunction() else nil, if FFlagMomentsImpressionPrimaryEntityModule then HasOpenAvatarLookTryOn else nil)
+			
+			return
 		end
-		local CurrentFunction = UseRefResult7.current
-		LogMomentViewBeganModule(Moment, UseMomentsSessionResult.getSessionSource(false), if FFlagMomentsNavigationEventModule and CurrentFunction ~= nil then CurrentFunction() else nil, if FFlagMomentsImpressionPrimaryEntityModule then HasOpenAvatarLookTryOn else nil)
-	end, {
-		UseMomentsSessionResult,
-		HasOpenAvatarLookTryOn,
-		FFlagMomentsPostInsightsIxpEnabledModule and Source.recommendationSource or false
-	})
+	end, { UseMomentsSessionResult, HasOpenAvatarLookTryOn })
 	local HasTelemetry = Frame.telemetry ~= nil
 	local UseResult3 = ReactModule.useCallback(function(MediaLoadEventFields, p2)
 		-- upvalues: Moments (upval), FireAnalyticsEventFunction (upval), EventNames (upval), HasTelemetry (copy)

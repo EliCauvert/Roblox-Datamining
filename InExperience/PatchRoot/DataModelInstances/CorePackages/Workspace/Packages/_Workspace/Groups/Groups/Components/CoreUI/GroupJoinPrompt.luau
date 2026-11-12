@@ -1,8 +1,10 @@
-﻿local Groups = script:FindFirstAncestor("Groups")
+﻿local TextService = game:GetService("TextService")
+local Groups = script:FindFirstAncestor("Groups")
 local Parent = Groups.Parent
 local EnumsModule = require(Parent.ProfilePlatform.Enums)
 local FoundationModule = require(Parent.Foundation)
 local GetTextSizeFunction = require(Parent.Style).GetTextSize
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local UserLibModule = require(Parent.UserLib)
@@ -38,7 +40,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseScreenSizeFunction (copy), ConstantsModule (copy), UseLocalizationFunction (copy), ReactModule (copy), MouseIconOverrideService (copy), EnumsModule (copy), config (copy), GetTextSizeFunction (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy), View (copy), LoadableImage (copy), Text (copy), Skeleton (copy), VerifiedBadgesModule (copy), UseAbbreviatedNumberLocalizationFunction (copy), ButtonVariant (copy), Dialog (copy), DialogSize (copy)
+	-- upvalues: UseTokensFunction (copy), UseScreenSizeFunction (copy), ConstantsModule (copy), UseLocalizationFunction (copy), ReactModule (copy), MouseIconOverrideService (copy), EnumsModule (copy), config (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy), View (copy), LoadableImage (copy), Text (copy), Skeleton (copy), VerifiedBadgesModule (copy), UseAbbreviatedNumberLocalizationFunction (copy), ButtonVariant (copy), Dialog (copy), DialogSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local NoEnableInputDelayed = p1.enableInputDelayed == nil or p1.enableInputDelayed
 	local THUMBNAILSIZESMALL = if UseScreenSizeFunction().Y < ConstantsModule.SMALL_SCREEN_HEIGHT_THRESHOLD then ConstantsModule.THUMBNAIL_SIZE_SMALL else ConstantsModule.THUMBNAIL_SIZE
@@ -206,8 +208,8 @@ return function(p1)
 	local FontSize1 = UseTokensResult.Typography.BodyMedium.FontSize
 	local Medium = UseTokensResult.Padding.Medium
 	local UseMemoResult2 = ReactModule.useMemo(function()
-		-- upvalues: UseMemoResult1 (copy), UseStateResult (copy), GetTextSizeFunction (upval), FontSize (copy), HeadingSmallFont (copy)
-		return if UseMemoResult1 and UseMemoResult1 ~= "" and UseStateResult and UseStateResult > 0 then GetTextSizeFunction(UseMemoResult1, FontSize, HeadingSmallFont, Vector2.new(UseStateResult, 1e999), { addTemporaryPadding = false }) else nil
+		-- upvalues: UseMemoResult1 (copy), UseStateResult (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), FontSize (copy), HeadingSmallFont (copy), TextService (upval)
+		return if UseMemoResult1 and UseMemoResult1 ~= "" and UseStateResult and UseStateResult > 0 then if FoundationFontFaceMigration then GetTextSizeFunction(UseMemoResult1, FontSize, HeadingSmallFont, Vector2.new(UseStateResult, 1e999), { addTemporaryPadding = false }) else TextService:GetTextSize(UseMemoResult1, FontSize, HeadingSmallFont, Vector2.new(UseStateResult, 1e999)) else nil
 	end, {
 		UseMemoResult1,
 		UseStateResult,
@@ -215,12 +217,12 @@ return function(p1)
 		FontSize
 	})
 	local UseMemoResult3 = ReactModule.useMemo(function()
-		-- upvalues: UseMemoResult (copy), UseStateResult1 (copy), Medium (copy), GetTextSizeFunction (upval), FontSize1 (copy), BodyMediumFont (copy)
+		-- upvalues: UseMemoResult (copy), UseStateResult1 (copy), Medium (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), FontSize1 (copy), BodyMediumFont (copy), TextService (upval)
 		if UseMemoResult and UseStateResult1 and UseStateResult1 > 0 then
 			local UseStateResultDelta = UseStateResult1 - Medium * 2
 			
 			if UseStateResultDelta > 0 then
-				return (GetTextSizeFunction(UseMemoResult, FontSize1, BodyMediumFont, Vector2.new(UseStateResultDelta, 1e999), { addTemporaryPadding = false }))
+				return if FoundationFontFaceMigration then GetTextSizeFunction(UseMemoResult, FontSize1, BodyMediumFont, Vector2.new(UseStateResultDelta, 1e999), { addTemporaryPadding = false }) else TextService:GetTextSize(UseMemoResult, FontSize1, BodyMediumFont, Vector2.new(UseStateResultDelta, 1e999))
 			end
 		end
 		return nil

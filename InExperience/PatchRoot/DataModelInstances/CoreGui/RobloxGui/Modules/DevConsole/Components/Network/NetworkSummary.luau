@@ -71,11 +71,11 @@ function NetworkSummary.render(p1)
 			BackgroundColor3 = LineColor
 		})
 	end
-	for i2, summaryHeaderName in ipairs(SummaryHeaderNames) do
+	for i1, summaryHeaderName in ipairs(SummaryHeaderNames) do
 		config1[summaryHeaderName] = RoactModule.createElement(HeaderButtonModule, {
 			text = summaryHeaderName,
-			size = List1[i2],
-			pos = List[i2]
+			size = List1[i1],
+			pos = List[i1]
 		})
 	end
 	config.Header = RoactModule.createElement("Frame", {
@@ -83,10 +83,10 @@ function NetworkSummary.render(p1)
 		LayoutOrder = 1,
 		Size = UDim2.new(0, Width, 0, HeaderFrameHeight)
 	}, config1)
-	local v1 = 0
+	local Count = 0
 	
 	for _, Frames in pairs(HttpSummaryTable) do
-		v1 += 1
+		Count += 1
 		local config2 = {
 			RequestType = RoactModule.createElement(CellLabelModule, {
 				text = Frames.RequestType,
@@ -126,21 +126,21 @@ function NetworkSummary.render(p1)
 			})
 		}
 		
-		for i1 = 2, #t do
-			config2[string.format("VerticalLine_%d", i1)] = RoactModule.createElement("Frame", {
+		for i2 = 2, #t do
+			config2[string.format("VerticalLine_%d", i2)] = RoactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				Size = UDim2.new(0, LineWidth, 1, 0),
-				Position = t[i1],
+				Position = t[i2],
 				BackgroundColor3 = LineColor
 			})
 		end
 		config[Frames.RequestType] = RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(0, Width, 0, EntryFrameHeight),
-			LayoutOrder = v1 + 1
+			LayoutOrder = Count + 1
 		}, config2)
 	end
-	if v1 == 0 then
+	if Count == 0 then
 		config.Padding = RoactModule.createElement("TextLabel", {
 			Text = "No Summary Data Found",
 			BackgroundTransparency = 1,
@@ -148,13 +148,13 @@ function NetworkSummary.render(p1)
 			Size = UDim2.new(0, Width, 0, EntryFrameHeight),
 			TextColor3 = Text
 		})
-		v1 = 1
+		Count = 1
 	end
 	return RoactModule.createElement("ScrollingFrame", {
 		ScrollingEnabled = false,
 		ScrollBarThickness = 0,
 		BackgroundTransparency = 1,
-		Size = UDim2.new(1, 0, 0, v1 * EntryFrameHeight + HeaderFrameHeight),
+		Size = UDim2.new(1, 0, 0, Count * EntryFrameHeight + HeaderFrameHeight),
 		LayoutOrder = LayoutOrder
 	}, config)
 end

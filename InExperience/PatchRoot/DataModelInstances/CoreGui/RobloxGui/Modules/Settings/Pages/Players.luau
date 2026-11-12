@@ -764,8 +764,8 @@ return ((function()
 	local v7 = nil
 	local v8 = nil
 	local v9 = nil
-	local Callback2: (() -> any)? = nil
-	local v10 = nil
+	local v10: (() -> any)? = nil
+	local v11 = nil
 	local Enabled = false
 	local EventConnection = nil
 	
@@ -1112,7 +1112,7 @@ return ((function()
 	end
 	
 	if GetFFlagEnableConsoleJoinVoiceModule() then
-		Callback2 = function()
+		v10 = function()
 			-- upvalues: createRow (copy), _UDim2 (upval), ThemeModule (upval), EnableConsoleJoinVoiceTranslation (upval), NewResults (copy), RobloxLocaleId (copy), Uiblox (upval), BuilderIconsModule (upval), UtilityModule (upval), Default (upval), ConstantsModule (upval)
 			local ImageButton = createRow("ImageButton", nil, true)
 			ImageButton.Size = UDim2.new(1, 0, 0, 52)
@@ -1194,9 +1194,9 @@ return ((function()
 		end
 	end
 	local _ = function()
-		-- upvalues: shouldShowJoinVoiceButton (copy), Object2 (ref), Callback2 (ref)
+		-- upvalues: shouldShowJoinVoiceButton (copy), Object2 (ref), v10 (ref)
 		if shouldShowJoinVoiceButton() and not Object2 then
-			Object2 = Callback2()
+			Object2 = v10()
 			
 			return
 		end
@@ -1263,7 +1263,7 @@ return ((function()
 		ConsoleNameContainer2.TextScaled = false
 		ConsoleNameContainer2.TextWrapped = false
 		ConsoleNameContainer2.AutomaticSize = Enum.AutomaticSize.X
-		local v11 = CreateFunction("ImageLabel")({
+		local v12 = CreateFunction("ImageLabel")({
 			Name = "iconLabel",
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
@@ -1273,7 +1273,7 @@ return ((function()
 			Size = ThemeModule.platformNameIconSize,
 			ImageColor3 = Color3.new(1, 1, 1)
 		})
-		v11.Parent = ConsoleNameContainer
+		v12.Parent = ConsoleNameContainer
 		CreateFunction("UIListLayout")({
 			Name = "PLatformNameUIListLayout",
 			FillDirection = Enum.FillDirection.Horizontal,
@@ -1282,7 +1282,7 @@ return ((function()
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			Padding = UDim.new(0, 12)
 		}).Parent = ConsoleNameContainer
-		v11.LayoutOrder = 1
+		v12.LayoutOrder = 1
 		ConsoleNameContainer2.LayoutOrder = 2
 		CreateFunction("UIPadding")({
 			PaddingLeft = UDim.new(0, 12),
@@ -1293,7 +1293,7 @@ return ((function()
 		return PlatformNameContainer1
 	end
 	
-	v10 = function()
+	v11 = function()
 		-- upvalues: createRow (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (upval), OpenTypeSupport (upval), GuiService (upval)
 		local ImageLabel = createRow("ImageLabel", true)
 		ImageLabel.TextLabel.Name = "DisplayNameLabel"
@@ -1381,12 +1381,12 @@ return ((function()
 	
 	local function managePlayerNameCutoff(Object, Player: Player)
 		-- upvalues: CheckForNilUserIdOnPlayerList (upval), UserProfileStore (upval), IsEngineTruncationEnabledForIngameSettingsModule (upval), UtilityModule (upval), PlayerListRefactorUsernameFormatting (upval), FormatUsernameFunction (upval)
-		local v11 = nil
+		local v12 = nil
 		local ChildAddedConnection = nil
 		
 		local function reportFlagChanged(Frame, p1, Text: string)
-			-- upvalues: v11 (ref), Object (copy), Player (copy)
-			if p1 == "AbsolutePosition" and v11 then
+			-- upvalues: v12 (ref), Object (copy), Player (copy)
+			if p1 == "AbsolutePosition" and v12 then
 				local XDelta = Frame.AbsolutePosition.X - 20 - Object.NameLabel.AbsolutePosition.X
 				Object.NameLabel.Text = "@" .. Player.Name
 				Object.DisplayNameLabel.Text = Player.DisplayName
@@ -1453,10 +1453,10 @@ return ((function()
 		
 		if not IsEngineTruncationEnabledForIngameSettingsModule() then
 			UtilityModule:OnResized(Object.NameLabel, function(_, p2)
-				-- upvalues: v11 (ref), UtilityModule (upval), ChildAddedConnection (ref), Object (copy), reportFlagChangedWithCombinedName (copy), Player (copy), CheckForNilUserIdOnPlayerList (upval), UserProfileStore (upval)
-				if v11 ~= nil and v11 == p2 then return end
+				-- upvalues: v12 (ref), UtilityModule (upval), ChildAddedConnection (ref), Object (copy), reportFlagChangedWithCombinedName (copy), Player (copy), CheckForNilUserIdOnPlayerList (upval), UserProfileStore (upval)
+				if v12 ~= nil and v12 == p2 then return end
 				local Inverted: boolean = p2 and not (UtilityModule:IsSmallTouchScreen() and UtilityModule:IsPortrait())
-				v11 = Inverted
+				v12 = Inverted
 				
 				if Inverted then
 					if ChildAddedConnection == nil then
@@ -1535,14 +1535,14 @@ return ((function()
 			return X
 		end
 		
-		local v12 = nil
+		local v13 = nil
 		
 		local function rightSideButtonsChanged()
-			-- upvalues: getNearestRightSideButtonXPosition (copy), v12 (ref), Object (copy), PlayerListRefactorUsernameFormatting (upval), FormatUsernameFunction (upval), Player (copy), CheckForNilUserIdOnPlayerList (upval), UserProfileStore (upval)
+			-- upvalues: getNearestRightSideButtonXPosition (copy), v13 (ref), Object (copy), PlayerListRefactorUsernameFormatting (upval), FormatUsernameFunction (upval), Player (copy), CheckForNilUserIdOnPlayerList (upval), UserProfileStore (upval)
 			local NearestRightSideButtonXPosition = getNearestRightSideButtonXPosition()
 			
-			if NearestRightSideButtonXPosition == v12 then return end
-			v12 = NearestRightSideButtonXPosition
+			if NearestRightSideButtonXPosition == v13 then return end
+			v13 = NearestRightSideButtonXPosition
 			local _UDim2: UDim2 = if NearestRightSideButtonXPosition then UDim2.new(0, NearestRightSideButtonXPosition - Object.NameLabel.AbsolutePosition.X - 20, 0, 0) else UDim2.new(1, -20, 0, 0)
 			Object.NameLabel.Size = _UDim2
 			Object.DisplayNameLabel.Size = _UDim2
@@ -1662,8 +1662,8 @@ return ((function()
 		end
 	end
 	
-	local function v138(_)
-		-- upvalues: NewPage (copy), FFlagIEMTabFocusNav (upval), Players2 (ref), Players (upval), EnabledResult (upval), LocalPlayer (upval), UtilityModule (upval), Enabled (ref), Object (ref), Default (upval), FFlagHidePeoplePageInviteFriends (upval), FFlagAddInviteFriendsIntegration (upval), IsSideSheetEnabledModule (upval), SelectedCoreObject (ref), RunService (upval), Parent (ref), CreateFunction (upval), v4 (ref), _UDim2 (upval), GameInviteAnalyticsManager (upval), v7 (ref), GetFFlagEnableConsoleJoinVoiceModule (upval), shouldShowJoinVoiceButton (copy), Object2 (ref), Callback2 (ref), v1 (ref), GuiService (upval), t (copy), t1 (copy), v10 (ref), muteButtonUpdate (copy), SocialUtilModule (upval), PlayerListRefactorUsernameFormatting (upval), FormatUsernameFunction (upval), IsEngineTruncationEnabledForIngameSettingsModule (upval), managePlayerNameCutoff (copy), friendStatusCreate (copy), resizeFriendButton (copy), Callback (ref), resizeInspectButton (copy), reportAbuseButtonCreate (copy), v8 (ref), v6 (ref), RobloxTranslatorModule (upval), GetFFlagVoiceChatUILoggingModule (upval), NewResult (upval), Players1 (copy), ConstantsModule (upval), updateAllMuteButtons (copy), CheckShareGameButtonInMuteAllLayout (upval), CheckForNilUserIdOnPlayerList (upval), CryoModule (upval), UserProfileStore (upval), resizePlatformName (copy), FFlagUserProfilePlatformProfile (upval), Flag (ref), GetFFlagCleanupMuteSelfButtonModule (upval), pollImage (copy), UserInputService (upval), OnlyCaptureFocusIfOnPlayerPage (upval)
+	local function v119(_)
+		-- upvalues: NewPage (copy), FFlagIEMTabFocusNav (upval), Players2 (ref), Players (upval), EnabledResult (upval), LocalPlayer (upval), UtilityModule (upval), Enabled (ref), Object (ref), Default (upval), FFlagHidePeoplePageInviteFriends (upval), FFlagAddInviteFriendsIntegration (upval), IsSideSheetEnabledModule (upval), SelectedCoreObject (ref), RunService (upval), Parent (ref), CreateFunction (upval), v4 (ref), _UDim2 (upval), GameInviteAnalyticsManager (upval), v7 (ref), GetFFlagEnableConsoleJoinVoiceModule (upval), shouldShowJoinVoiceButton (copy), Object2 (ref), v10 (ref), v1 (ref), GuiService (upval), t (copy), t1 (copy), v11 (ref), muteButtonUpdate (copy), SocialUtilModule (upval), PlayerListRefactorUsernameFormatting (upval), FormatUsernameFunction (upval), IsEngineTruncationEnabledForIngameSettingsModule (upval), managePlayerNameCutoff (copy), friendStatusCreate (copy), resizeFriendButton (copy), Callback (ref), resizeInspectButton (copy), reportAbuseButtonCreate (copy), v8 (ref), v6 (ref), RobloxTranslatorModule (upval), GetFFlagVoiceChatUILoggingModule (upval), NewResult (upval), Players1 (copy), ConstantsModule (upval), updateAllMuteButtons (copy), CheckShareGameButtonInMuteAllLayout (upval), CheckForNilUserIdOnPlayerList (upval), CryoModule (upval), UserProfileStore (upval), resizePlatformName (copy), FFlagUserProfilePlatformProfile (upval), Flag (ref), GetFFlagCleanupMuteSelfButtonModule (upval), pollImage (copy), UserInputService (upval), OnlyCaptureFocusIfOnPlayerPage (upval)
 		NewPage.LastSelectableObjects = {}
 		
 		if FFlagIEMTabFocusNav and not NewPage.ButtonsContainer.Visible then
@@ -1690,7 +1690,7 @@ return ((function()
 				return A.Name:lower() < B.Name:lower()
 			end)
 		end
-		local v12: number = if UtilityModule:IsSmallTouchScreen() or UtilityModule:IsPortrait() then 85 else 20
+		local v13: number = if UtilityModule:IsSmallTouchScreen() or UtilityModule:IsPortrait() then 85 else 20
 		local VoiceUIVisible = Enabled and (not Object and Default.voiceUIVisible)
 		local IsSideSheetEnabledModule1 = FFlagHidePeoplePageInviteFriends and (FFlagAddInviteFriendsIntegration and IsSideSheetEnabledModule)
 		local NoIsSideSheetEnabledModule1: boolean = LocalPlayer.UserId > 0 and (not SelectedCoreObject and (not RunService:IsStudio() and not IsSideSheetEnabledModule1))
@@ -1749,7 +1749,7 @@ return ((function()
 		end
 		if GetFFlagEnableConsoleJoinVoiceModule() and shouldShowJoinVoiceButton() then
 			if shouldShowJoinVoiceButton() and not Object2 then
-				Object2 = Callback2()
+				Object2 = v10()
 			end
 			v1()
 		end
@@ -1775,7 +1775,7 @@ return ((function()
 				t1[Player.Name] = true
 				
 				if not Entry or not Entry.Parent then
-					Entry = v10((i - 1) * 80 + v12)
+					Entry = v11((i - 1) * 80 + v13)
 					Entry.Parent = NewPage.Page
 					t[Player.Name] = Entry
 				end
@@ -1795,9 +1795,9 @@ return ((function()
 				end
 				managePlayerNameCutoff(Entry, Player)
 				friendStatusCreate(Entry, Player)
-				local v13 = nil
+				local v14 = nil
 				UtilityModule:OnResized(Entry, function(_, p2)
-					-- upvalues: Entry (ref), UtilityModule (upval), resizeFriendButton (upval), Player (copy), v13 (ref), Callback (upval), InspectMenuEnabled (copy), resizeInspectButton (upval)
+					-- upvalues: Entry (ref), UtilityModule (upval), resizeFriendButton (upval), Player (copy), v14 (ref), Callback (upval), InspectMenuEnabled (copy), resizeInspectButton (upval)
 					local RightSideButtons = Entry:FindFirstChild("RightSideButtons")
 					local DisplayNameLabel = Entry:FindFirstChild("DisplayNameLabel")
 					local NameLabel = Entry:FindFirstChild("NameLabel")
@@ -1843,13 +1843,13 @@ return ((function()
 						end
 					end
 					if RightSideButtons then
-						resizeFriendButton(RightSideButtons, Player, p2, v13)
-						Callback(RightSideButtons, Player, p2, v13)
+						resizeFriendButton(RightSideButtons, Player, p2, v14)
+						Callback(RightSideButtons, Player, p2, v14)
 						
 						if InspectMenuEnabled then
-							resizeInspectButton(RightSideButtons, Player, p2, v13)
+							resizeInspectButton(RightSideButtons, Player, p2, v14)
 						end
-						v13 = p2
+						v14 = p2
 					end
 				end)
 				reportAbuseButtonCreate(Entry, Player)
@@ -1985,20 +1985,20 @@ return ((function()
 		end
 		UtilityModule:OnResized("MenuPlayerListExtraPageSize", function(_, _)
 			-- upvalues: UtilityModule (upval), Players2 (upval), NewPage (upval)
-			local v14: number = if UtilityModule:IsSmallTouchScreen() or UtilityModule:IsPortrait() then 85 else 20
-			local v15 = #Players2 + 1
+			local v15: number = if UtilityModule:IsSmallTouchScreen() or UtilityModule:IsPortrait() then 85 else 20
+			local v16 = #Players2 + 1
 			
 			if UtilityModule:IsSmallTouchScreen() and UtilityModule:IsPortrait() then
-				NewPage.Page.Size = UDim2.new(1, 0, 0, v14 + v15 * 123 - 5)
+				NewPage.Page.Size = UDim2.new(1, 0, 0, v15 + v16 * 123 - 5)
 				
 				return
 			else
-				NewPage.Page.Size = UDim2.new(1, 0, 0, v14 + v15 * 80 - 5)
+				NewPage.Page.Size = UDim2.new(1, 0, 0, v15 + v16 * 80 - 5)
 			end
 		end)
 	end
 	
-	local function v139()
+	local function v120()
 		-- upvalues: Flag (ref), NewResult (upval), RunService (upval)
 		if Flag then
 			NewResult:debug("Unbinding Playerlist Mic Update Renderstep Hook")
@@ -2009,7 +2009,7 @@ return ((function()
 	
 	if game:GetEngineFeature("VoiceChatSupported") and not Enabled then
 		Default:asyncInit():andThen(function()
-			-- upvalues: Enabled (ref), Default (upval), EnabledResult (upval), GetFFlagCleanupMuteSelfButtonModule (upval), Object1 (ref), v9 (ref), updateAllMuteButtons (copy), Images (copy), Object (ref), v1 (ref), EventConnection (ref), GetFFlagEnableConsoleJoinVoiceModule (upval), Object2 (ref), v138 (copy), Parent1 (copy), destroyAllUserMuteButtons (copy), resetButtonRow (copy)
+			-- upvalues: Enabled (ref), Default (upval), EnabledResult (upval), GetFFlagCleanupMuteSelfButtonModule (upval), Object1 (ref), v9 (ref), updateAllMuteButtons (copy), Images (copy), Object (ref), v1 (ref), EventConnection (ref), GetFFlagEnableConsoleJoinVoiceModule (upval), Object2 (ref), v119 (copy), Parent1 (copy), destroyAllUserMuteButtons (copy), resetButtonRow (copy)
 			Enabled = true
 			Default:SetupParticipantListeners()
 			
@@ -2030,7 +2030,7 @@ return ((function()
 				Images[Key] = nil
 			end)
 			Default:getService().StateChanged:Connect(function(_, NewState)
-				-- upvalues: Object (upval), v1 (upval), Object1 (upval), EventConnection (upval), GetFFlagEnableConsoleJoinVoiceModule (upval), Object2 (upval), Enabled (upval), v138 (upval)
+				-- upvalues: Object (upval), v1 (upval), Object1 (upval), EventConnection (upval), GetFFlagEnableConsoleJoinVoiceModule (upval), Object2 (upval), Enabled (upval), v119 (upval)
 				if NewState == Enum.VoiceChatState.Ended then
 					if Object then
 						Object.Visible = false
@@ -2073,16 +2073,16 @@ return ((function()
 							end
 							v1()
 						end
-						v138()
+						v119()
 					end
 				end
 			end)
 			
 			if not GetFFlagCleanupMuteSelfButtonModule() then
-				v138()
+				v119()
 			end
 			Default.showVoiceUI.Event:Connect(function()
-				-- upvalues: GetFFlagCleanupMuteSelfButtonModule (upval), Object1 (upval), EnabledResult (upval), v9 (upval), Parent1 (upval), GetFFlagEnableConsoleJoinVoiceModule (upval), Object2 (upval), v1 (upval), v138 (upval)
+				-- upvalues: GetFFlagCleanupMuteSelfButtonModule (upval), Object1 (upval), EnabledResult (upval), v9 (upval), Parent1 (upval), GetFFlagEnableConsoleJoinVoiceModule (upval), Object2 (upval), v1 (upval), v119 (upval)
 				if GetFFlagCleanupMuteSelfButtonModule() then
 					if not Object1 and not EnabledResult then
 						if GetFFlagCleanupMuteSelfButtonModule() then
@@ -2106,10 +2106,10 @@ return ((function()
 					end
 					v1()
 				end
-				v138()
+				v119()
 			end)
 			Default.hideVoiceUI.Event:Connect(function()
-				-- upvalues: Object (upval), v1 (upval), Object1 (upval), EventConnection (upval), destroyAllUserMuteButtons (upval), v138 (upval), resetButtonRow (upval)
+				-- upvalues: Object (upval), v1 (upval), Object1 (upval), EventConnection (upval), destroyAllUserMuteButtons (upval), v119 (upval), resetButtonRow (upval)
 				if Object then
 					if Object then
 						Object.Visible = false
@@ -2129,7 +2129,7 @@ return ((function()
 				end
 				v1()
 				destroyAllUserMuteButtons()
-				v138()
+				v119()
 				resetButtonRow()
 			end)
 			Default.muteAllChanged.Event:Connect(function()
@@ -2143,8 +2143,8 @@ return ((function()
 			end
 		end)
 	end
-	NewPage.Displayed.Event:connect(v138)
-	NewPage.Hidden.Event:connect(v139)
+	NewPage.Displayed.Event:connect(v119)
+	NewPage.Hidden.Event:connect(v120)
 	Players.PlayerRemoving:Connect(function(Player)
 		-- upvalues: t1 (copy), t (copy), GuiService (upval), UserInputService (upval), SelectedCoreObject (ref), GetFFlagDestroyPlayerCardOnLeaveModule (upval)
 		t1[Player.Name] = nil

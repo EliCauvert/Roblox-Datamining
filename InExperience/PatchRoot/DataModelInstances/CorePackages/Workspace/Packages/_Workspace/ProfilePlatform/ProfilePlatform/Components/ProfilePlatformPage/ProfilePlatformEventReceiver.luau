@@ -20,10 +20,11 @@ local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
 local EnumsModule = require(ProfilePlatform.Common.Enums)
 local FFlagProfilePlatformPresenceStoreMigrationModule = require(ProfilePlatform.Flags.FFlagProfilePlatformPresenceStoreMigration)
 local UseGetPresenceByUserId = if FFlagProfilePlatformPresenceStoreMigrationModule then require(Parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
+local RefreshProfileOnTrustedFriendsRtn = game:DefineFastFlag("RefreshProfileOnTrustedFriendsRtn", false)
 local config = { skipFetch = true }
 
 return function()
-	-- upvalues: UseProfileWrapperContextModule (copy), UseRoactServiceFunction (copy), AppNotificationService (copy), ReactModule (copy), RobloxEventReceiver (copy), UseDispatchFunction (copy), UseLocalUserIdFunction (copy), FFlagProfilePlatformRefreshActionsRespectPoliciesModule (copy), UseActionsComponentRequestModule (copy), FFlagProfilePlatformPresenceStoreMigrationModule (copy), UseGetPresenceByUserId (copy), config (copy), ConvertPresenceEnumModule (copy), PresenceType (copy), UseSelectorFunction (copy), PresenceModule (copy), EnumsModule (copy), RefreshProfilePlatformActionInfoModule (copy), RefreshProfilePlatformUserInfoModule (copy)
+	-- upvalues: UseProfileWrapperContextModule (copy), UseRoactServiceFunction (copy), AppNotificationService (copy), ReactModule (copy), RobloxEventReceiver (copy), UseDispatchFunction (copy), UseLocalUserIdFunction (copy), FFlagProfilePlatformRefreshActionsRespectPoliciesModule (copy), UseActionsComponentRequestModule (copy), FFlagProfilePlatformPresenceStoreMigrationModule (copy), UseGetPresenceByUserId (copy), config (copy), ConvertPresenceEnumModule (copy), PresenceType (copy), UseSelectorFunction (copy), PresenceModule (copy), EnumsModule (copy), RefreshProfilePlatformActionInfoModule (copy), RefreshProfilePlatformUserInfoModule (copy), RefreshProfileOnTrustedFriendsRtn (copy)
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	local UseRoactServiceResult = UseRoactServiceFunction(AppNotificationService)
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -103,22 +104,25 @@ return function()
 		UseMemoResult, UseDispatchResult, ProfileId, UseLocalUserIdResult, ProfileType,
 		if FFlagProfilePlatformRefreshActionsRespectPoliciesModule then UseActionsComponentRequestModuleResult else nil
 	})
-	ReactModule.useEffect(function()
-		-- upvalues: ProfileType (copy), EnumsModule (upval), UseMemoResult (copy), UseLocalUserIdResult (copy), ProfileId (copy), UseDispatchResult (copy), RefreshProfilePlatformActionInfoModule (upval), UseActionsComponentRequestModuleResult (copy)
-		if ProfileType ~= EnumsModule.ProfileTypes.User then return end
-		local TrustedConnectionNotifications = UseMemoResult:observeEvent("TrustedConnectionNotifications", function(Mouse)
-			-- upvalues: UseLocalUserIdResult (upval), ProfileId (upval), UseDispatchResult (upval), RefreshProfilePlatformActionInfoModule (upval), UseActionsComponentRequestModuleResult (upval)
-			if ProfileId == (if tostring(UseLocalUserIdResult) == tostring(Mouse.Actor) then tostring(Mouse.Target) else tostring(Mouse.Actor)) then
-				UseDispatchResult(RefreshProfilePlatformActionInfoModule(ProfileId, UseActionsComponentRequestModuleResult))
+	
+	if RefreshProfileOnTrustedFriendsRtn then
+		ReactModule.useEffect(function()
+			-- upvalues: ProfileType (copy), EnumsModule (upval), UseMemoResult (copy), UseLocalUserIdResult (copy), ProfileId (copy), UseDispatchResult (copy), RefreshProfilePlatformActionInfoModule (upval), UseActionsComponentRequestModuleResult (copy)
+			if ProfileType ~= EnumsModule.ProfileTypes.User then return end
+			local TrustedConnectionNotifications = UseMemoResult:observeEvent("TrustedConnectionNotifications", function(Mouse)
+				-- upvalues: UseLocalUserIdResult (upval), ProfileId (upval), UseDispatchResult (upval), RefreshProfilePlatformActionInfoModule (upval), UseActionsComponentRequestModuleResult (upval)
+				if ProfileId == (if tostring(UseLocalUserIdResult) == tostring(Mouse.Actor) then tostring(Mouse.Target) else tostring(Mouse.Actor)) then
+					UseDispatchResult(RefreshProfilePlatformActionInfoModule(ProfileId, UseActionsComponentRequestModuleResult))
+				end
+			end)
+			
+			return function()
+				-- upvalues: TrustedConnectionNotifications (copy)
+				TrustedConnectionNotifications:disconnect()
 			end
-		end)
-		
-		return function()
-			-- upvalues: TrustedConnectionNotifications (copy)
-			TrustedConnectionNotifications:disconnect()
-		end
-	end, {
-		UseMemoResult, UseDispatchResult, ProfileId, UseLocalUserIdResult, ProfileType,
-		if FFlagProfilePlatformRefreshActionsRespectPoliciesModule then UseActionsComponentRequestModuleResult else nil
-	})
+		end, {
+			UseMemoResult, UseDispatchResult, ProfileId, UseLocalUserIdResult, ProfileType,
+			if FFlagProfilePlatformRefreshActionsRespectPoliciesModule then UseActionsComponentRequestModuleResult else nil
+		})
+	end
 end

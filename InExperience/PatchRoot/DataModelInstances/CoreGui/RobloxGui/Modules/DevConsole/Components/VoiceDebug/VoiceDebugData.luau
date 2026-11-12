@@ -301,8 +301,8 @@ function VoiceDebugDataModule:start()
 				local IncomingLossPercent = nil
 				
 				if type(IncomingPacketsDelta) == "number" and type(IncomingPacketsLostDelta) == "number" then
-					local v1 = IncomingPacketsDelta + IncomingPacketsLostDelta
-					IncomingLossPercent = if v1 <= 0 then nil else IncomingPacketsLostDelta / v1 * 100
+					local NewIncomingPacketsDelta = IncomingPacketsDelta + IncomingPacketsLostDelta
+					IncomingLossPercent = if NewIncomingPacketsDelta <= 0 then nil else IncomingPacketsLostDelta / NewIncomingPacketsDelta * 100
 				else
 					IncomingLossPercent = nil
 				end

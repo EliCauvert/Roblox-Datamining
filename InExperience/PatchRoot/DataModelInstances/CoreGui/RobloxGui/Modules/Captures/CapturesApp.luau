@@ -3,7 +3,6 @@ local CorePackages = game:GetService("CorePackages")
 local RobloxGui = CoreGui:WaitForChild("RobloxGui")
 local EnabledFunction = require(CorePackages.Workspace.Packages.Chrome).Enabled
 local CapturesInExperienceModule = require(CorePackages.Workspace.Packages.CapturesInExperience)
-local OpenCapturesGalleryModule = require(script.Parent.openCapturesGallery)
 local App = CapturesInExperienceModule.App.createApp()
 local ScreenshotsCarousel = Instance.new("ScreenGui")
 ScreenshotsCarousel.DisplayOrder = CapturesInExperienceModule.Constants.CarouselDisplayOrder
@@ -33,13 +32,7 @@ MomentsCreationFlow.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 MomentsCreationFlow.Parent = CoreGui
 App.mountCaptureManager(CaptureManager)
 App.mountCarousel(ScreenshotsCarousel)
-
-local function openGallery()
-	-- upvalues: RobloxGui (copy), OpenCapturesGalleryModule (copy)
-	return OpenCapturesGalleryModule((require(RobloxGui.Modules.Settings.SettingsHub)))
-end
-
-App.mountCoreUI(RobloxGui, EnabledFunction(), if CapturesInExperienceModule.Flags.FFlagCapturesControlsGalleryButton then openGallery else nil)
+App.mountCoreUI(RobloxGui, EnabledFunction())
 App.mountCaptureOverlay(ScreenGui)
 App.mountMomentsCreationFlow(MomentsCreationFlow)
 

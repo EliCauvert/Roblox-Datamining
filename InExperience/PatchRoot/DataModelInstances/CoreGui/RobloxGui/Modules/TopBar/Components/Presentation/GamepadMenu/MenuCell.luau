@@ -2,7 +2,9 @@
 local RoactModule = require(CorePackages.Packages.Roact)
 local TModule = require(CorePackages.Packages.t)
 local UIBloxModule = require(CorePackages.Packages.UIBlox)
-local NormalizeFontFaceFunction = require(CorePackages.Packages.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local WithStyleFunction = UIBloxModule.Core.Style.withStyle
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
@@ -18,9 +20,9 @@ MenuCell.validateProps = TModule.strictInterface({
 })
 
 function MenuCell.render(p1)
-	-- upvalues: WithStyleFunction (copy), RobloxTranslatorModule (copy), RoactModule (copy), ImageSetLabel (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: WithStyleFunction (copy), RobloxTranslatorModule (copy), RoactModule (copy), ImageSetLabel (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	return WithStyleFunction(function(p2)
-		-- upvalues: RobloxTranslatorModule (upval), p1 (copy), RoactModule (upval), ImageSetLabel (upval), NormalizeFontFaceFunction (upval)
+		-- upvalues: RobloxTranslatorModule (upval), p1 (copy), RoactModule (upval), ImageSetLabel (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 		local Theme = p2.Theme
 		local _Font = p2.Font
 		
@@ -95,7 +97,8 @@ function MenuCell.render(p1)
 					LayoutOrder = 2,
 					Size = UDim2.new(1, -48, 1, 0),
 					Text = RobloxTranslatorModule:FormatByKey(p1.props.localizationKey),
-					FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.TitleLarge.Font),
+					Font = if FoundationFontFaceMigration then nil else _Font.Header2.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.TitleLarge.Font) else nil,
 					TextSize = _Font.BaseSize * _Font.Header2.RelativeSize,
 					TextColor3 = Theme.TextEmphasis.Color,
 					TextTransparency = Theme.TextEmphasis.TextTransparency,

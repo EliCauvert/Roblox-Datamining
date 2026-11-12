@@ -1,3 +1,0 @@
-﻿local FFlagMomentsCommentRowRedesignModule = require(script.Parent.FFlagMomentsCommentRowRedesign)
-
-return game:DefineFastFlag("MomentsCommentRowTrailingReaction", false) and FFlagMomentsCommentRowRedesignModule

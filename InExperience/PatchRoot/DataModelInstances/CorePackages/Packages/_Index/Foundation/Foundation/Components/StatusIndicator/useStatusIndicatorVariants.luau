@@ -9,169 +9,71 @@ local IndexBindableModule = require(Foundation.Utility.indexBindable)
 local _ = require(Foundation.Providers.Style.Tokens)
 local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 local DevAssertModule = require(Foundation.Utility.devAssert)
-local GetStatusIndicatorSizeModule = require(script.Parent.getStatusIndicatorSize)
 local _Font = Font.new(require(Foundation.Constants).BUILDER_SANS_FONT_ASSET, Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
 
 function variantsFactory(p1)
-	-- upvalues: _Font (copy), FlagsModule (copy), StatusIndicatorVariantModule (copy), StatusIndicatorShapeModule (copy), GetStatusIndicatorSizeModule (copy), StatusIndicatorSizeModule (copy)
-	local Common = {
-		content = {
-			tag = "auto-xy text-align-x-left",
-			font = _Font,
-			typography = p1.Typography.LabelSmall
-		},
-		stroke = if FlagsModule.FoundationStatusIndicatorDesignUpdate then { Thickness = p1.Stroke.Thicker } else nil
-	}
-	local Variants = {
-		[StatusIndicatorVariantModule.Alert] = {
-			container = { tag = "bg-system-alert" },
-			content = { style = p1.DarkMode.Content.Emphasis }
-		},
-		[StatusIndicatorVariantModule.Success] = {
-			container = { tag = "bg-system-success" },
-			content = { style = p1.LightMode.Content.Emphasis }
-		},
-		[StatusIndicatorVariantModule.Warning] = {
-			container = { tag = "bg-system-warning" },
-			content = { style = p1.LightMode.Content.Emphasis }
-		},
-		[StatusIndicatorVariantModule.Emphasis] = {
-			container = { tag = "bg-system-emphasis" },
-			content = { style = p1.DarkMode.Content.Emphasis }
-		},
-		[StatusIndicatorVariantModule.Neutral] = {
-			container = { tag = "bg-system-neutral" },
-			content = { style = p1.Inverse.Content.Emphasis }
-		},
-		[StatusIndicatorVariantModule.Standard] = {
-			container = { tag = "bg-action-standard" },
-			content = { style = p1.Color.Content.Emphasis }
-		},
-		[StatusIndicatorVariantModule.Contrast_Experiment] = {
-			container = { tag = "bg-system-contrast" },
-			content = { style = p1.Inverse.Content.Emphasis }
-		},
-		[StatusIndicatorVariantModule.Voice] = {
-			container = { backgroundStyle = p1.Color.Extended.Orange.Orange_600 }
-		}
-	}
-	local Shape = {
-		[StatusIndicatorShapeModule.Circle] = {
-			container = { tag = "radius-circle" },
-			stroke = { LineJoinMode = Enum.LineJoinMode.Round }
-		},
-		[StatusIndicatorShapeModule.Ring] = {
-			container = { tag = "align-x-center align-y-center radius-circle" },
-			ring = { tag = "radius-circle bg-surface-100" },
-			stroke = { LineJoinMode = Enum.LineJoinMode.Round }
-		},
-		[StatusIndicatorShapeModule.Square] = {
-			container = { tag = "radius-none" },
-			stroke = { LineJoinMode = Enum.LineJoinMode.Miter }
-		}
-	}
-	
-	local function _(p2, p3, p4): UDim2
-		-- upvalues: GetStatusIndicatorSizeModule (upval), p1 (copy)
-		local ScaledStatusIndicatorSizeModule = GetStatusIndicatorSizeModule(p1, p2, p3) * (p4 or 1)
-		
-		return UDim2.fromOffset(ScaledStatusIndicatorSizeModule, ScaledStatusIndicatorSizeModule)
-	end
-	
-	local XSmall = StatusIndicatorSizeModule.XSmall
-	local ScaledStatusIndicatorSizeModule = GetStatusIndicatorSizeModule(p1, StatusIndicatorSizeModule.XSmall, false) * 1
-	local Container = {
-		size = UDim2.fromOffset(ScaledStatusIndicatorSizeModule, ScaledStatusIndicatorSizeModule)
-	}
-	local ScaledStatusIndicatorSizeModule1 = GetStatusIndicatorSizeModule(p1, StatusIndicatorSizeModule.XSmall, false) * 0.5
+	-- upvalues: _Font (copy), FlagsModule (copy), StatusIndicatorVariantModule (copy), StatusIndicatorShapeModule (copy), StatusIndicatorSizeModule (copy)
 	local config = {
-		container = Container,
-		ring = {
-			size = UDim2.fromOffset(ScaledStatusIndicatorSizeModule1, ScaledStatusIndicatorSizeModule1)
-		},
-		stroke = if FlagsModule.FoundationStatusIndicatorDesignUpdate then nil else { Thickness = p1.Stroke.Standard }
+		container = {
+			size = UDim2.fromOffset(p1.Size.Size_400, p1.Size.Size_400)
+		}
 	}
-	local Small = StatusIndicatorSizeModule.Small
-	local ScaledStatusIndicatorSizeModule2 = GetStatusIndicatorSizeModule(p1, StatusIndicatorSizeModule.Small, false) * 1
-	local Container1 = {
-		size = UDim2.fromOffset(ScaledStatusIndicatorSizeModule2, ScaledStatusIndicatorSizeModule2)
-	}
-	local ScaledStatusIndicatorSizeModule3 = GetStatusIndicatorSizeModule(p1, StatusIndicatorSizeModule.Small, false) * 0.5
 	local config1 = {
-		container = Container1,
-		ring = {
-			size = UDim2.fromOffset(ScaledStatusIndicatorSizeModule3, ScaledStatusIndicatorSizeModule3)
-		},
-		stroke = if FlagsModule.FoundationStatusIndicatorDesignUpdate then nil else { Thickness = p1.Size.Size_50 }
-	}
-	local Medium = StatusIndicatorSizeModule.Medium
-	local ScaledStatusIndicatorSizeModule4 = GetStatusIndicatorSizeModule(p1, StatusIndicatorSizeModule.Medium, false) * 1
-	local Container2 = {
-		size = UDim2.fromOffset(ScaledStatusIndicatorSizeModule4, ScaledStatusIndicatorSizeModule4)
-	}
-	local ScaledStatusIndicatorSizeModule5 = GetStatusIndicatorSizeModule(p1, StatusIndicatorSizeModule.Medium, false) * 0.5
-	local config2 = {
-		container = Container2,
-		ring = {
-			size = UDim2.fromOffset(ScaledStatusIndicatorSizeModule5, ScaledStatusIndicatorSizeModule5)
-		},
-		stroke = if FlagsModule.FoundationStatusIndicatorDesignUpdate then nil else { Thickness = p1.Size.Size_50 }
-	}
-	local Large = StatusIndicatorSizeModule.Large
-	local ScaledStatusIndicatorSizeModule6 = GetStatusIndicatorSizeModule(p1, StatusIndicatorSizeModule.Large, false) * 1
-	local Container3 = {
-		size = UDim2.fromOffset(ScaledStatusIndicatorSizeModule6, ScaledStatusIndicatorSizeModule6)
-	}
-	local ScaledStatusIndicatorSizeModule7 = GetStatusIndicatorSizeModule(p1, StatusIndicatorSizeModule.Large, false) * 0.5
-	local Pictogram = StatusIndicatorSizeModule.Pictogram
-	local ScaledStatusIndicatorSizeModule11 = GetStatusIndicatorSizeModule(p1, StatusIndicatorSizeModule.Pictogram, false) * 1
-	local Container11 = {
-		size = UDim2.fromOffset(ScaledStatusIndicatorSizeModule11, ScaledStatusIndicatorSizeModule11)
-	}
-	local ScaledStatusIndicatorSizeModule21 = GetStatusIndicatorSizeModule(p1, StatusIndicatorSizeModule.Pictogram, false) * 0.5
-	local Sizes = {
-		[XSmall] = config,
-		[Small] = config1,
-		[Medium] = config2,
-		[Large] = {
-			container = Container3,
-			ring = {
-				size = UDim2.fromOffset(ScaledStatusIndicatorSizeModule7, ScaledStatusIndicatorSizeModule7)
-			},
-			stroke = { Thickness = p1.Stroke.Thicker }
-		},
-		[Pictogram] = {
-			container = Container11,
-			ring = {
-				size = UDim2.fromOffset(ScaledStatusIndicatorSizeModule21, ScaledStatusIndicatorSizeModule21)
-			},
-			stroke = { Thickness = p1.Stroke.Thicker }
-		}
-	}
-	local ScaledStatusIndicatorSizeModule8 = GetStatusIndicatorSizeModule(p1, StatusIndicatorSizeModule.Small, true) * 1
-	local config3 = {
 		container = {
-			size = UDim2.fromOffset(ScaledStatusIndicatorSizeModule8, ScaledStatusIndicatorSizeModule8)
-		}
-	}
-	local ScaledStatusIndicatorSizeModule9 = GetStatusIndicatorSizeModule(p1, StatusIndicatorSizeModule.Large, true) * 1
-	local config31 = {
-		container = {
-			size = UDim2.fromOffset(ScaledStatusIndicatorSizeModule9, ScaledStatusIndicatorSizeModule9)
+			size = UDim2.fromOffset(p1.Size.Size_500, p1.Size.Size_500)
 		},
 		content = { typography = p1.Typography.LabelMedium }
 	}
-	local config4 = {
-		[StatusIndicatorSizeModule.XSmall] = config3,
-		[StatusIndicatorSizeModule.Small] = config3,
-		[StatusIndicatorSizeModule.Medium] = config3,
-		[StatusIndicatorSizeModule.Large] = config31,
-		[StatusIndicatorSizeModule.Pictogram] = config31
+	local config2 = {
+		[StatusIndicatorSizeModule.XSmall] = config,
+		[StatusIndicatorSizeModule.Small] = config,
+		[StatusIndicatorSizeModule.Medium] = config,
+		[StatusIndicatorSizeModule.Large] = config1,
+		[StatusIndicatorSizeModule.Pictogram] = config1
 	}
 	
 	return {
-		common = Common,
-		variants = Variants,
+		common = {
+			content = {
+				tag = "auto-xy text-align-x-left",
+				font = _Font,
+				typography = p1.Typography.LabelSmall
+			},
+			stroke = if FlagsModule.FoundationStatusIndicatorDesignUpdate then { Thickness = p1.Stroke.Thicker } else nil
+		},
+		variants = {
+			[StatusIndicatorVariantModule.Alert] = {
+				container = { tag = "bg-system-alert" },
+				content = { style = p1.DarkMode.Content.Emphasis }
+			},
+			[StatusIndicatorVariantModule.Success] = {
+				container = { tag = "bg-system-success" },
+				content = { style = p1.LightMode.Content.Emphasis }
+			},
+			[StatusIndicatorVariantModule.Warning] = {
+				container = { tag = "bg-system-warning" },
+				content = { style = p1.LightMode.Content.Emphasis }
+			},
+			[StatusIndicatorVariantModule.Emphasis] = {
+				container = { tag = "bg-system-emphasis" },
+				content = { style = p1.DarkMode.Content.Emphasis }
+			},
+			[StatusIndicatorVariantModule.Neutral] = {
+				container = { tag = "bg-system-neutral" },
+				content = { style = p1.Inverse.Content.Emphasis }
+			},
+			[StatusIndicatorVariantModule.Standard] = {
+				container = { tag = "bg-action-standard" },
+				content = { style = p1.Color.Content.Emphasis }
+			},
+			[StatusIndicatorVariantModule.Contrast_Experiment] = {
+				container = { tag = "bg-system-contrast" },
+				content = { style = p1.Inverse.Content.Emphasis }
+			},
+			[StatusIndicatorVariantModule.Voice] = {
+				container = { backgroundStyle = p1.Color.Extended.Orange.Orange_600 }
+			}
+		},
 		hasValue = {
 			[true] = {
 				container = {
@@ -179,9 +81,69 @@ function variantsFactory(p1)
 				}
 			}
 		},
-		shape = Shape,
-		sizes = Sizes,
-		numericSizes = if FlagsModule.FoundationStatusIndicatorDesignUpdate then config4 else nil
+		shape = {
+			[StatusIndicatorShapeModule.Circle] = {
+				container = { tag = "radius-circle" },
+				stroke = { LineJoinMode = Enum.LineJoinMode.Round }
+			},
+			[StatusIndicatorShapeModule.Ring] = {
+				container = { tag = "align-x-center align-y-center radius-circle" },
+				ring = { tag = "radius-circle bg-surface-100" },
+				stroke = { LineJoinMode = Enum.LineJoinMode.Round }
+			},
+			[StatusIndicatorShapeModule.Square] = {
+				container = { tag = "radius-none" },
+				stroke = { LineJoinMode = Enum.LineJoinMode.Miter }
+			}
+		},
+		sizes = {
+			[StatusIndicatorSizeModule.XSmall] = {
+				container = {
+					size = UDim2.fromOffset(p1.Size.Size_150, p1.Size.Size_150)
+				},
+				ring = {
+					size = UDim2.fromOffset(p1.Size.Size_150 / 2, p1.Size.Size_150 / 2)
+				},
+				stroke = if FlagsModule.FoundationStatusIndicatorDesignUpdate then nil else { Thickness = p1.Stroke.Standard }
+			},
+			[StatusIndicatorSizeModule.Small] = {
+				container = {
+					size = UDim2.fromOffset(p1.Size.Size_200, p1.Size.Size_200)
+				},
+				ring = {
+					size = UDim2.fromOffset(p1.Size.Size_200 / 2, p1.Size.Size_200 / 2)
+				},
+				stroke = if FlagsModule.FoundationStatusIndicatorDesignUpdate then nil else { Thickness = p1.Size.Size_50 }
+			},
+			[StatusIndicatorSizeModule.Medium] = {
+				container = {
+					size = UDim2.fromOffset(p1.Size.Size_250, p1.Size.Size_250)
+				},
+				ring = {
+					size = UDim2.fromOffset(p1.Size.Size_250 / 2, p1.Size.Size_250 / 2)
+				},
+				stroke = if FlagsModule.FoundationStatusIndicatorDesignUpdate then nil else { Thickness = p1.Size.Size_50 }
+			},
+			[StatusIndicatorSizeModule.Large] = {
+				container = {
+					size = UDim2.fromOffset(p1.Size.Size_500, p1.Size.Size_500)
+				},
+				ring = {
+					size = UDim2.fromOffset(p1.Size.Size_500 / 2, p1.Size.Size_500 / 2)
+				},
+				stroke = { Thickness = p1.Stroke.Thicker }
+			},
+			[StatusIndicatorSizeModule.Pictogram] = {
+				container = {
+					size = UDim2.fromOffset(p1.Size.Size_500, p1.Size.Size_500)
+				},
+				ring = {
+					size = UDim2.fromOffset(p1.Size.Size_500 / 2, p1.Size.Size_500 / 2)
+				},
+				stroke = { Thickness = p1.Stroke.Thicker }
+			}
+		},
+		numericSizes = if FlagsModule.FoundationStatusIndicatorDesignUpdate then config2 else nil
 	}
 end
 

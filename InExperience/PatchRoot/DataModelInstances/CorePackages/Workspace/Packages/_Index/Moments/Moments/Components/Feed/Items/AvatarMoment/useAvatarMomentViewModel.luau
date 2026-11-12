@@ -11,9 +11,6 @@ local DecodeInlineMomentSceneModule = require(script.Parent.decodeInlineMomentSc
 local FeedContextModule = require(Moments.Components.Feed.FeedContext)
 local _ = require(Moments.Components.Feed.FeedTypes)
 local _ = require(Moments.Components.Feed.Items.Moment.MomentContext)
-local MomentsHostContextModule = require(Moments.MomentsHostContext)
-local ObserveGuiOnScreenModule = require(script.Parent.observeGuiOnScreen)
-local FFlagProfileRenderAvatarMoments = require(Parent.SharedFlags).FFlagProfileRenderAvatarMoments
 local FFlagMomentsRecommendationContentTypeModule = require(Moments.Flags.FFlagMomentsRecommendationContentType)
 local _CFrame = CFrame.new(0, 2000, 0)
 
@@ -50,7 +47,7 @@ local _ = function(p1)
 end
 
 return function(p1)
-	-- upvalues: FeedContextModule (copy), SignalsReactModule (copy), ReactModule (copy), MomentsCommonModule (copy), SignalsModule (copy), FFlagProfileRenderAvatarMoments (copy), MomentsHostContextModule (copy), Workspace (copy), _CFrame (copy), RunService (copy), DecodeInlineMomentSceneModule (copy), Parent (copy), ObserveGuiOnScreenModule (copy), FFlagMomentsRecommendationContentTypeModule (copy)
+	-- upvalues: FeedContextModule (copy), SignalsReactModule (copy), ReactModule (copy), MomentsCommonModule (copy), SignalsModule (copy), DecodeInlineMomentSceneModule (copy), Parent (copy), Workspace (copy), _CFrame (copy), RunService (copy), FFlagMomentsRecommendationContentTypeModule (copy)
 	local UseFeedResult = FeedContextModule.useFeed()
 	local GetCurrentIndex = UseFeedResult.getCurrentIndex
 	assert(GetCurrentIndex ~= nil, "Avatar Moments require the flag-gated feed index")
@@ -84,104 +81,20 @@ return function(p1)
 	end, {})
 	local IsUseSignalStateResultMatch: boolean = UseFeedResult.isPlaybackActive and UseSignalStateResult == p1.index
 	local FeedItemId = Moment.recommendationMetadata.feedItemId
-	local UseRefResult3 = if FFlagProfileRenderAvatarMoments then ReactModule.useRef(nil) else nil
-	local UseMomentsHostResult = if FFlagProfileRenderAvatarMoments then MomentsHostContextModule.useMomentsHost() else nil
-	local NoUseMomentsHostResult: boolean = UseMomentsHostResult == nil or UseMomentsHostResult.isTopShell ~= false
-	local IsUseSignalStateResultMatch1: boolean = if FFlagProfileRenderAvatarMoments then NoUseMomentsHostResult and UseSignalStateResult == p1.index else IsUseSignalStateResultMatch
 	ReactModule.useEffect(function()
-		-- upvalues: IsUseSignalStateResultMatch1 (copy), UseMomentMediaControllerResult (copy), UseRefResult (copy), Workspace (upval), _CFrame (upval), RunService (upval), p1 (copy), DecodeInlineMomentSceneModule (upval), Parent (upval), MomentsCommonModule (upval), UseFeedResult (copy), Moment (copy), FeedItemId (copy), UseRefResult3 (copy), FFlagProfileRenderAvatarMoments (upval), UseRefResult1 (copy), UseRefResult2 (copy), ObserveGuiOnScreenModule (upval), UseResult (copy)
-		if not IsUseSignalStateResultMatch1 or UseMomentMediaControllerResult == nil then return end
+		-- upvalues: IsUseSignalStateResultMatch (copy), UseMomentMediaControllerResult (copy), UseRefResult (copy), p1 (copy), DecodeInlineMomentSceneModule (upval), Parent (upval), MomentsCommonModule (upval), UseFeedResult (copy), Moment (copy), FeedItemId (copy), UseRefResult1 (copy), UseRefResult2 (copy), Workspace (upval), _CFrame (upval), RunService (upval), UseResult (copy)
+		if not IsUseSignalStateResultMatch or UseMomentMediaControllerResult == nil then return end
 		local SetExternalBaseReadinessFunction: (any) -> () = UseMomentMediaControllerResult.setExternalBaseReadiness
 		assert(SetExternalBaseReadinessFunction ~= nil, "Avatar Moments require external-base readiness")
 		SetExternalBaseReadinessFunction("Loading")
 		UseRefResult.current += 1
 		local Current = UseRefResult.current
 		local v1 = nil
-		local Callback = nil
 		local Config = nil
 		local RenderSteppedConnection = nil
 		local CurrentCamera = nil
-		
-		local function showScene()
-			-- upvalues: v1 (ref), RenderSteppedConnection (ref), Workspace (upval), CurrentCamera (ref), Config (ref), _CFrame (upval), RunService (upval)
-			local v2 = v1
-			
-			if v2 == nil or RenderSteppedConnection ~= nil then return end
-			local CurrentCamera1 = Workspace.CurrentCamera
-			
-			if CurrentCamera1 == nil then
-				local AvatarMomentCamera = Instance.new("Camera")
-				AvatarMomentCamera.Name = "AvatarMomentCamera"
-				AvatarMomentCamera.Parent = Workspace
-				Workspace.CurrentCamera = AvatarMomentCamera
-				CurrentCamera = AvatarMomentCamera
-				CurrentCamera1 = AvatarMomentCamera
-			end
-			local Camera = CurrentCamera1
-			Config = {
-				instance = Camera,
-				cframe = Camera.CFrame,
-				focus = Camera.Focus,
-				fieldOfView = Camera.FieldOfView,
-				fieldOfViewMode = Camera.FieldOfViewMode,
-				cameraType = Camera.CameraType
-			}
-			v2.root.Parent = Workspace
-			v2.root:PivotTo(_CFrame)
-			
-			local function updateCamera()
-				-- upvalues: Workspace (upval), Camera (copy), v2 (copy), _CFrame (upval)
-				if Workspace.CurrentCamera == Camera then
-					Camera.CameraType = Enum.CameraType.Scriptable
-					Camera.FieldOfViewMode = v2.camera.FieldOfViewMode
-					Camera.FieldOfView = v2.camera.FieldOfView
-					Camera.CFrame = _CFrame * v2.camera.CFrame
-					Camera.Focus = _CFrame * v2.camera.Focus
-					
-					return
-				end
-			end
-			
-			if Workspace.CurrentCamera == Camera then
-				Camera.CameraType = Enum.CameraType.Scriptable
-				Camera.FieldOfViewMode = v2.camera.FieldOfViewMode
-				Camera.FieldOfView = v2.camera.FieldOfView
-				Camera.CFrame = _CFrame * v2.camera.CFrame
-				Camera.Focus = _CFrame * v2.camera.Focus
-			end
-			RenderSteppedConnection = RunService.RenderStepped:Connect(updateCamera)
-		end
-		
-		local function _()
-			-- upvalues: v1 (ref), RenderSteppedConnection (ref), Config (ref), Workspace (upval), CurrentCamera (ref)
-			local v2 = v1
-			
-			if v2 == nil or RenderSteppedConnection == nil then return end
-			RenderSteppedConnection:Disconnect()
-			RenderSteppedConnection = nil
-			v2.root.Parent = nil
-			local Config1 = Config
-			
-			if Config1 ~= nil and Config1.instance.Parent ~= nil and Workspace.CurrentCamera == Config1.instance then
-				Config1.instance.CFrame = Config1.cframe
-				Config1.instance.Focus = Config1.focus
-				Config1.instance.FieldOfView = Config1.fieldOfView
-				Config1.instance.FieldOfViewMode = Config1.fieldOfViewMode
-				Config1.instance.CameraType = Config1.cameraType
-			end
-			Config = nil
-			
-			if CurrentCamera ~= nil then
-				if Workspace.CurrentCamera == CurrentCamera then
-					Workspace.CurrentCamera = nil
-				end
-				CurrentCamera:Destroy()
-				CurrentCamera = nil
-			end
-		end
-		
 		task.spawn(function()
-			-- upvalues: p1 (upval), DecodeInlineMomentSceneModule (upval), Parent (upval), Current (copy), UseRefResult (upval), MomentsCommonModule (upval), UseFeedResult (upval), Moment (upval), FeedItemId (upval), SetExternalBaseReadinessFunction (copy), UseRefResult3 (upval), FFlagProfileRenderAvatarMoments (upval), v1 (ref), UseRefResult1 (upval), UseRefResult2 (upval), Callback (ref), ObserveGuiOnScreenModule (upval), showScene (copy), RenderSteppedConnection (ref), Config (ref), Workspace (upval), CurrentCamera (ref), UseResult (upval), UseMomentMediaControllerResult (upval)
+			-- upvalues: p1 (upval), DecodeInlineMomentSceneModule (upval), Parent (upval), Current (copy), UseRefResult (upval), MomentsCommonModule (upval), UseFeedResult (upval), Moment (upval), FeedItemId (upval), SetExternalBaseReadinessFunction (copy), v1 (ref), UseRefResult1 (upval), UseRefResult2 (upval), Workspace (upval), CurrentCamera (ref), Config (ref), _CFrame (upval), RenderSteppedConnection (ref), RunService (upval), UseResult (upval), UseMomentMediaControllerResult (upval)
 			local Stage = "validate-outfit"
 			local Success, Result = pcall(function()
 				-- upvalues: p1 (upval), Stage (ref), DecodeInlineMomentSceneModule (upval), Parent (upval)
@@ -194,10 +107,7 @@ return function(p1)
 				local DecodeInlineMomentSceneModuleResult = DecodeInlineMomentSceneModule(p1.item.rbxmData, Source.id)
 				Stage = "create-moment-scene"
 				
-				return require(Parent.MomentScenes).createMomentScene({
-					type = DecodeInlineMomentSceneModuleResult.type,
-					args = DecodeInlineMomentSceneModuleResult.args
-				})
+				return require(Parent.MomentScenes).createMomentScene(DecodeInlineMomentSceneModuleResult)
 			end)
 			
 			if Current == UseRefResult.current then
@@ -212,66 +122,52 @@ return function(p1)
 					
 					return
 				end
-				local Current1 = if UseRefResult3 == nil then nil else UseRefResult3.current
-				
-				if FFlagProfileRenderAvatarMoments and Current1 == nil then
-					MomentsCommonModule.Analytics.fireAnalyticsEvent(MomentsCommonModule.Analytics.EventNames.AvatarMomentLoadFailed, {
-						stage = "attach-page",
-						recommendationSource = UseFeedResult.recommendationSource or "unknown",
-						momentId = Moment.momentId,
-						feedItemId = FeedItemId or "unknown"
-					})
-					SetExternalBaseReadinessFunction("Failed", "Avatar scene attach-page failed: page ref was not attached")
-					pcall(function()
-						-- upvalues: Result (copy)
-						Result.root.Parent = nil
-					end)
-					pcall(Result.dispose)
-					
-					return
-				end
 				v1 = Result
 				UseRefResult1.current = Result
 				UseRefResult2.current = false
+				local CurrentCamera1 = Workspace.CurrentCamera
 				
-				if FFlagProfileRenderAvatarMoments then
-					Callback = ObserveGuiOnScreenModule(Current1, function(p2)
-						-- upvalues: showScene (upval), v1 (upval), RenderSteppedConnection (upval), Config (upval), Workspace (upval), CurrentCamera (upval)
-						if p2 then
-							showScene()
-							
-							return
-						end
-						local v2 = v1
-						
-						if v2 ~= nil then
-							if RenderSteppedConnection == nil then return end
-							RenderSteppedConnection:Disconnect()
-							RenderSteppedConnection = nil
-							v2.root.Parent = nil
-							local Config1 = Config
-							
-							if Config1 ~= nil and Config1.instance.Parent ~= nil and Workspace.CurrentCamera == Config1.instance then
-								Config1.instance.CFrame = Config1.cframe
-								Config1.instance.Focus = Config1.focus
-								Config1.instance.FieldOfView = Config1.fieldOfView
-								Config1.instance.FieldOfViewMode = Config1.fieldOfViewMode
-								Config1.instance.CameraType = Config1.cameraType
-							end
-							Config = nil
-							
-							if CurrentCamera ~= nil then
-								if Workspace.CurrentCamera == CurrentCamera then
-									Workspace.CurrentCamera = nil
-								end
-								CurrentCamera:Destroy()
-								CurrentCamera = nil
-							end
-						end
-					end)
-				else
-					showScene()
+				if CurrentCamera1 == nil then
+					local AvatarMomentCamera = Instance.new("Camera")
+					AvatarMomentCamera.Name = "AvatarMomentCamera"
+					AvatarMomentCamera.Parent = Workspace
+					Workspace.CurrentCamera = AvatarMomentCamera
+					CurrentCamera = AvatarMomentCamera
+					CurrentCamera1 = AvatarMomentCamera
 				end
+				local Camera = CurrentCamera1
+				Config = {
+					instance = Camera,
+					cframe = Camera.CFrame,
+					focus = Camera.Focus,
+					fieldOfView = Camera.FieldOfView,
+					fieldOfViewMode = Camera.FieldOfViewMode,
+					cameraType = Camera.CameraType
+				}
+				Result.root.Parent = Workspace
+				Result.root:PivotTo(_CFrame)
+				
+				local function updateCamera()
+					-- upvalues: Workspace (upval), Camera (copy), Result (copy), _CFrame (upval)
+					if Workspace.CurrentCamera == Camera then
+						Camera.CameraType = Enum.CameraType.Scriptable
+						Camera.FieldOfViewMode = Result.camera.FieldOfViewMode
+						Camera.FieldOfView = Result.camera.FieldOfView
+						Camera.CFrame = _CFrame * Result.camera.CFrame
+						Camera.Focus = _CFrame * Result.camera.Focus
+						
+						return
+					end
+				end
+				
+				if Workspace.CurrentCamera == Camera then
+					Camera.CameraType = Enum.CameraType.Scriptable
+					Camera.FieldOfViewMode = Result.camera.FieldOfViewMode
+					Camera.FieldOfView = Result.camera.FieldOfView
+					Camera.CFrame = _CFrame * Result.camera.CFrame
+					Camera.Focus = _CFrame * Result.camera.Focus
+				end
+				RenderSteppedConnection = RunService.RenderStepped:Connect(updateCamera)
 				SetExternalBaseReadinessFunction("Ready")
 				UseResult(UseMomentMediaControllerResult.getState(false).isPlaying)
 				
@@ -286,37 +182,12 @@ return function(p1)
 		end)
 		
 		return function()
-			-- upvalues: UseRefResult (upval), Callback (ref), v1 (ref), RenderSteppedConnection (ref), Config (ref), Workspace (upval), CurrentCamera (ref), SetExternalBaseReadinessFunction (copy), UseRefResult1 (upval), UseRefResult2 (upval)
+			-- upvalues: UseRefResult (upval), RenderSteppedConnection (ref), v1 (ref), SetExternalBaseReadinessFunction (copy), UseRefResult1 (upval), UseRefResult2 (upval), Config (ref), Workspace (upval), CurrentCamera (ref)
 			UseRefResult.current += 1
 			
-			if Callback ~= nil then
-				Callback()
-				Callback = nil
-			end
-			local v2 = v1
-			
-			if v2 ~= nil and RenderSteppedConnection ~= nil then
+			if RenderSteppedConnection ~= nil then
 				RenderSteppedConnection:Disconnect()
 				RenderSteppedConnection = nil
-				v2.root.Parent = nil
-				local Config1 = Config
-				
-				if Config1 ~= nil and Config1.instance.Parent ~= nil and Workspace.CurrentCamera == Config1.instance then
-					Config1.instance.CFrame = Config1.cframe
-					Config1.instance.Focus = Config1.focus
-					Config1.instance.FieldOfView = Config1.fieldOfView
-					Config1.instance.FieldOfViewMode = Config1.fieldOfViewMode
-					Config1.instance.CameraType = Config1.cameraType
-				end
-				Config = nil
-				
-				if CurrentCamera ~= nil then
-					if Workspace.CurrentCamera == CurrentCamera then
-						Workspace.CurrentCamera = nil
-					end
-					CurrentCamera:Destroy()
-					CurrentCamera = nil
-				end
 			end
 			local Current = v1
 			v1 = nil
@@ -328,15 +199,31 @@ return function(p1)
 					UseRefResult1.current = nil
 					UseRefResult2.current = false
 				end
+				local Config1 = Config
+				
+				if Config1 ~= nil and Config1.instance.Parent ~= nil and Workspace.CurrentCamera == Config1.instance then
+					Config1.instance.CFrame = Config1.cframe
+					Config1.instance.Focus = Config1.focus
+					Config1.instance.FieldOfView = Config1.fieldOfView
+					Config1.instance.FieldOfViewMode = Config1.fieldOfViewMode
+					Config1.instance.CameraType = Config1.cameraType
+				end
 				pcall(function()
 					-- upvalues: Current (copy)
 					Current.root.Parent = nil
 				end)
 				pcall(Current.dispose)
 			end
+			if CurrentCamera ~= nil then
+				if Workspace.CurrentCamera == CurrentCamera then
+					Workspace.CurrentCamera = nil
+				end
+				CurrentCamera:Destroy()
+				CurrentCamera = nil
+			end
 		end
 	end, {
-		IsUseSignalStateResultMatch1, UseMomentMediaControllerResult, p1.item.rbxmData,
+		IsUseSignalStateResultMatch, UseMomentMediaControllerResult, p1.item.rbxmData,
 		p1.item.outfit.source, Moment.momentId, FeedItemId,
 		UseFeedResult.recommendationSource, UseResult
 	})
@@ -368,7 +255,6 @@ return function(p1)
 			RecommendationMetadata.feedItemId,
 			RecommendationMetadata.tracingId
 		}),
-		moment = Moment,
-		pageRef = UseRefResult3
+		moment = Moment
 	}
 end

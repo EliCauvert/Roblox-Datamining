@@ -406,7 +406,7 @@ function MenuIcon.render(p1)
 			Visible = if EnabledFunction() and FFlagEnableConsoleExpControls then p1.showIcon:map(function(p2)
 				-- upvalues: NoVREnabled (ref)
 				return NoVREnabled and p2
-			end) elseif FFlagAddUILessMode and (FIntAddUILessModeVariant ~= 0 and p1.uiLessStore.getUILessModeEnabled(false)) then p1.showIcon:map(function(p2)
+			end) elseif FFlagAddUILessMode and FIntAddUILessModeVariant ~= 0 and p1.uiLessStore.getUILessModeEnabled(false) then p1.showIcon:map(function(p2)
 				-- upvalues: NoVREnabled (ref)
 				return NoVREnabled and p2
 			end) else NoVREnabled,
@@ -491,7 +491,7 @@ function MenuIcon.render(p1)
 			[RoactModule.Change.AbsolutePosition] = v85
 		}, {
 			BadgeOver12 = Element2,
-			Background = if EnabledFunction() and (FFlagEnableConsoleExpControls and p1.props.unibarMenuRef and p1.props.unibarMenuRef.current) then nil else Element,
+			Background = if EnabledFunction() and FFlagEnableConsoleExpControls and (p1.props.unibarMenuRef and p1.props.unibarMenuRef.current) then nil else Element,
 			IconHitArea = if EnabledFunction() and FFlagEnableConsoleExpControls then Element3 else nil,
 			ShowTopBarListener = Element1
 		})

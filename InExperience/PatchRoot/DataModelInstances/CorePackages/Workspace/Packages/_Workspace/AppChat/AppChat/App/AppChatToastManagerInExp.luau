@@ -4,12 +4,14 @@ local AppChatToastEventReceiverModule = require(AppChat.Components.EventReceiver
 local CryoModule = require(Parent.Cryo)
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
-local GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction = require(Parent.SharedFlags).GetFFlagAppChatInExpToastSnoozeMenuDismissFix
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagExpChatEnableFriendsTab = SharedFlagsModule.FFlagExpChatEnableFriendsTab
+local GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction = SharedFlagsModule.GetFFlagAppChatInExpToastSnoozeMenuDismissFix
 local FriendsSurfaceVisibility = require(Parent.ExpChatShared).FriendsSurfaceVisibility
 local config = { hideAllChatToasts = false, isAppChatVisible = false }
 
 function AppChatToastManagerInExp(p1)
-	-- upvalues: CryoModule (copy), config (copy), SignalsReactModule (copy), FriendsSurfaceVisibility (copy), ReactModule (copy), AppChatToastEventReceiverModule (copy), GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction (copy)
+	-- upvalues: CryoModule (copy), config (copy), FFlagExpChatEnableFriendsTab (copy), SignalsReactModule (copy), FriendsSurfaceVisibility (copy), ReactModule (copy), AppChatToastEventReceiverModule (copy), GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	
 	return ReactModule.createElement(AppChatToastEventReceiverModule, {
@@ -20,7 +22,7 @@ function AppChatToastManagerInExp(p1)
 		end, { JoinResult.navigateToChat }),
 		hideAllChatToasts = if GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction() then nil else JoinResult.hideAllChatToasts,
 		isAppChatVisible = if GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction() then JoinResult.isAppChatVisible else nil,
-		visibleFriendsConversationId = SignalsReactModule.useSignalState(FriendsSurfaceVisibility.getVisibleConversationId)
+		visibleFriendsConversationId = if FFlagExpChatEnableFriendsTab then SignalsReactModule.useSignalState(FriendsSurfaceVisibility.getVisibleConversationId) else nil
 	})
 end
 

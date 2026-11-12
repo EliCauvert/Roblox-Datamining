@@ -3,7 +3,9 @@ local Parent = EditProfile.Parent
 local UserInputService = game:GetService("UserInputService")
 local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
-local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local Images = UIBloxModule.App.ImageSet.Images
@@ -13,7 +15,7 @@ local UseScreenSizeFunction = require(Parent.RobloxAppHooks).useScreenSize
 local CallbackInputBox = require(Parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Components.CallbackInputBox
 
 return function(p1)
-	-- upvalues: ReactModule (copy), UseStyleFunction (copy), UseScreenSizeFunction (copy), SocialNetworksInEditProfileIXPModule (copy), UserInputService (copy), NormalizeFontFaceFunction (copy), ImageSetLabel (copy), Images (copy), CallbackInputBox (copy), IconSize (copy)
+	-- upvalues: ReactModule (copy), UseStyleFunction (copy), UseScreenSizeFunction (copy), SocialNetworksInEditProfileIXPModule (copy), UserInputService (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ImageSetLabel (copy), Images (copy), CallbackInputBox (copy), IconSize (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStyleResult = UseStyleFunction()
 	local UseStyleResultFont = UseStyleResult.Font
@@ -82,7 +84,8 @@ return function(p1)
 			LayoutOrder = 1,
 			BackgroundTransparency = 1,
 			RichText = true,
-			FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
+			Font = if FoundationFontFaceMigration then nil else UseStyleResultFont.Body.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 			Text = p1.networkTitle,
 			TextSize = ScaledBaseSize,
 			TextColor3 = Theme.TextDefault.Color,

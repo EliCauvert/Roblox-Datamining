@@ -4,7 +4,6 @@ local Parent = script:FindFirstAncestor("ExpChatServer").Parent
 local List = require(Parent.llama).List
 local ExpChatSharedModule = require(Parent.ExpChatShared)
 local MarkTextChannelAsDefaultFunction = ExpChatSharedModule.markTextChannelAsDefault
-local FFlagExpChatWhisperSetDirectChatRequester = require(Parent.SharedFlags).FFlagExpChatWhisperSetDirectChatRequester
 local NewResult = ExpChatSharedModule.Logger:new("ExpChat/" .. script.Name)
 
 local function _(p1, p2)
@@ -28,19 +27,14 @@ local _ = function(p1, p2)
 	return (TextChatService:FindFirstChild("TextChannels") or TextChatService):FindFirstChild((string.format("RBXWhisper:%d_%d", p1 < p2 and p1 or p2, p2 < p1 and p1 or p2)))
 end
 
-local function createWhisperChannel(Player, UserId, Number)
-	-- upvalues: TextChatService (copy), MarkTextChannelAsDefaultFunction (copy), FFlagExpChatWhisperSetDirectChatRequester (copy), List (copy)
+local function createWhisperChannel(UserId, Number)
+	-- upvalues: TextChatService (copy), MarkTextChannelAsDefaultFunction (copy), List (copy)
 	local TextChannels = TextChatService:FindFirstChild("TextChannels") or TextChatService
 	local TextChannel = Instance.new("TextChannel")
 	TextChannel.Name = string.format("RBXWhisper:%d_%d", UserId < Number and UserId or Number, Number < UserId and UserId or Number)
 	MarkTextChannelAsDefaultFunction(TextChannel)
 	TextChannel.Parent = TextChannels
-	
-	if FFlagExpChatWhisperSetDirectChatRequester then
-		TextChannel:SetDirectChatRequester(Player)
-	else
-		TextChannel:AddUserAsync(UserId)
-	end
+	TextChannel:AddUserAsync(UserId)
 	TextChannel:AddUserAsync(Number)
 	TextChannel.ChildRemoved:Connect(function(_)
 		-- upvalues: List (upval), TextChannel (copy)
@@ -108,7 +102,7 @@ return function()
 				if v1 then
 					NewResult:trace("Creating whisper TextChannel")
 					
-					return (createWhisperChannel(Player, UserId, Number))
+					return (createWhisperChannel(UserId, Number))
 				end
 			end
 			return nil

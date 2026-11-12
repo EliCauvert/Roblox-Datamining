@@ -213,18 +213,18 @@ function Module:jsonDecode()
 		NewModule.registered_ui_component_types = Registered_ui_component_types
 	end
 	if self.registered_action_types ~= nil then
-		local Registered_action_types = {}
+		local Registered_action_types1 = {}
 		
-		for _, registeredActionType in self.registered_action_types do
-			table.insert(Registered_action_types, (if typeof(registeredActionType) == "number" then ActionsModule.ActionType.fromNumber(registeredActionType) else ActionsModule.ActionType.fromName(registeredActionType)) or registeredActionType)
+		for _, registeredActionType1 in self.registered_action_types do
+			table.insert(Registered_action_types1, (if typeof(registeredActionType1) == "number" then ActionsModule.ActionType.fromNumber(registeredActionType1) else ActionsModule.ActionType.fromName(registeredActionType1)) or registeredActionType1)
 		end
-		NewModule.registered_action_types = Registered_action_types
+		NewModule.registered_action_types = Registered_action_types1
 	end
 	if self.registeredActionTypes ~= nil then
 		local Registered_action_types = {}
 		
-		for _, registeredActionType1 in self.registeredActionTypes do
-			table.insert(Registered_action_types, (if typeof(registeredActionType1) == "number" then ActionsModule.ActionType.fromNumber(registeredActionType1) else ActionsModule.ActionType.fromName(registeredActionType1)) or registeredActionType1)
+		for _, registeredActionType in self.registeredActionTypes do
+			table.insert(Registered_action_types, (if typeof(registeredActionType) == "number" then ActionsModule.ActionType.fromNumber(registeredActionType) else ActionsModule.ActionType.fromName(registeredActionType)) or registeredActionType)
 		end
 		NewModule.registered_action_types = Registered_action_types
 	end

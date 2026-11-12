@@ -450,35 +450,35 @@ return {
 					return nil
 				end
 			elseif bit32.band(Return.flags, DidCapture) == NoFlags then
-				local HasMemoizedState1 = MemoizedState ~= nil
-				local HasMemoizedState2 = false
+				local v1 = MemoizedState ~= nil
+				local HasMemoizedState = false
 				
 				if p3 == nil then
 					if Return.memoizedProps.fallback ~= nil then
 						PopHydrationStateFunction(Return)
 					end
 				else
-					HasMemoizedState2 = p3.memoizedState ~= nil
+					HasMemoizedState = p3.memoizedState ~= nil
 				end
-				if HasMemoizedState1 and not HasMemoizedState2 and bit32.band(Return.mode, BlockingMode) ~= NoMode then
+				if v1 and not HasMemoizedState and bit32.band(Return.mode, BlockingMode) ~= NoMode then
 					if p3 == nil and Return.memoizedProps.unstable_avoidThisFallback ~= true or HasSuspenseContextFunction(SuspenseStackCursor.current, InvisibleParentSuspenseContext) then
 						RenderDidSuspendFunction()
 					else
 						RenderDidSuspendDelayIfPossibleFunction()
 					end
 				end
-				if SupportsPersistence and HasMemoizedState1 then
+				if SupportsPersistence and v1 then
 					Return.flags = bit32.bor(Return.flags, Update)
 				end
-				if SupportsMutation and (HasMemoizedState1 or HasMemoizedState2) then
+				if SupportsMutation and (v1 or HasMemoizedState) then
 					Return.flags = bit32.bor(Return.flags, Update)
 				end
-				if EnableSuspenseCallback and (Return.updateQueue ~= nil and Return.memoizedProps.suspenseCallback ~= nil) then
+				if EnableSuspenseCallback and Return.updateQueue ~= nil and Return.memoizedProps.suspenseCallback ~= nil then
 					Return.flags = bit32.bor(Return.flags, Update)
 				end
 				bubbleProperties(Return)
 				
-				if EnableProfilerTimer and bit32.band(Return.mode, ProfileMode) ~= NoMode and HasMemoizedState1 then
+				if EnableProfilerTimer and bit32.band(Return.mode, ProfileMode) ~= NoMode and v1 then
 					local Child = Return.child
 					
 					if Child ~= nil then
@@ -546,7 +546,7 @@ return {
 					if p3 ~= nil and (p3.memoizedState ~= nil ~= HasMemoizedState and PendingProps.mode ~= "unstable-defer-without-hiding") then
 						Return.flags = bit32.bor(Return.flags, Update)
 					end
-					if not HasMemoizedState or IncludesSomeLaneFunction(ReactFiberWorkLoopNewModule.subtreeRenderLanes, OffscreenLane) or bit32.band(Return.mode, ConcurrentMode) == NoMode then
+					if not HasMemoizedState or (IncludesSomeLaneFunction(ReactFiberWorkLoopNewModule.subtreeRenderLanes, OffscreenLane) or bit32.band(Return.mode, ConcurrentMode) == NoMode) then
 						bubbleProperties(Return)
 					end
 					return nil

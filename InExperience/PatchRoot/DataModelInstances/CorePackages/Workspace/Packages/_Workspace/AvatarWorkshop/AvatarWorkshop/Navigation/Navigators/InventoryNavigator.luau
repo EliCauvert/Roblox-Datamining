@@ -42,4 +42,4 @@ return require(script.Parent.createPagesNavigator)(TabsNavigatorViewModule, {
 		CreateInventoryPageRouteModule(Inventory.Animations.Swim, InventoryGridContainerModule)
 	}),
 	CreateInventoryPageRouteModule(Inventory.Emotes, InventoryGridContainerModule)
-}, { initialRouteName = Inventory.Body.Root })
+})

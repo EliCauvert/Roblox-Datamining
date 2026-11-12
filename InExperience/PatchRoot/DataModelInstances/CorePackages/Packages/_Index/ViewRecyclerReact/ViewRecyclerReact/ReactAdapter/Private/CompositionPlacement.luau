@@ -193,27 +193,27 @@ return {
 				v8, v57 = pcall(SlotBinder.apply, List1, List2)
 			end
 			if not (if FFlagViewRecyclerReact08 then v6 else v8) then
-				for _, value2 in List do
-					Tbl2[value2] = true
+				for _, value in List do
+					Tbl2[value] = true
 				end
 				error(if FFlagViewRecyclerReact08 then v7 else v9, 0)
 			end
-			for _, value3 in List do
+			for _, value2 in List do
 				if FFlagViewRecyclerReact08 then
-					Tbl[value3] = T1[value3]
-				elseif T[value3] == nil then
-					v1[value3] = nil
+					Tbl[value2] = T1[value2]
+				elseif T[value2] == nil then
+					v1[value2] = nil
 				end
 			end
 			if not FFlagViewRecyclerReact08 then
 				local t = {}
 				
-				for _, value4 in v9.entered do
-					v1[value4.placementId] = { state = nil, view = value4.view, source = value4.value }
-					t[value4.view] = true
+				for _, value3 in v9.entered do
+					v1[value3.placementId] = { state = nil, view = value3.view, source = value3.value }
+					t[value3.view] = true
 				end
-				for _, value in v9.updated do
-					v1[value.placementId].source = value.value
+				for _, value4 in v9.updated do
+					v1[value4.placementId].source = value4.value
 				end
 				Flag1 = true
 				

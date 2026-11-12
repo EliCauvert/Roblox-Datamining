@@ -1,1 +1,0 @@
-﻿return game:DefineFastString("FriendsChatConversationComposerIxpLayer", "ExperienceChat.FriendsTab.ConversationPage.Composer")

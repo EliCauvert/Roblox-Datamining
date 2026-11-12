@@ -1,9 +1,7 @@
 ﻿local CoreGui = game:GetService("CoreGui")
 local Players = game:GetService("Players")
 local DictationCore = script:FindFirstAncestor("DictationCore")
-local Parent = DictationCore.Parent
-local ReactModule = require(Parent.React)
-local FFlagDictationAudioDeviceInputEnabled = require(Parent.SharedFlags).FFlagDictationAudioDeviceInputEnabled
+local ReactModule = require(DictationCore.Parent.React)
 local FFlagDictationSendUsageTypeModule = require(DictationCore.Flags.FFlagDictationSendUsageType)
 local FinishDictationInputModule = require(script.Parent.finishDictationInput)
 local PrepareDictationInputModule = require(script.Parent.prepareDictationInput)
@@ -107,7 +105,7 @@ local function teardownPending(Current)
 end
 
 return function()
-	-- upvalues: ReactModule (copy), teardownPending (copy), Players (copy), CoreGui (copy), FFlagDictationAudioDeviceInputEnabled (copy), FFlagDictationSendUsageTypeModule (copy), SetDictationUsageTypeModule (copy), FFlagDictationExplicitFinishModule (copy), PrepareDictationInputModule (copy), FinishDictationInputModule (copy)
+	-- upvalues: ReactModule (copy), teardownPending (copy), Players (copy), CoreGui (copy), FFlagDictationSendUsageTypeModule (copy), SetDictationUsageTypeModule (copy), FFlagDictationExplicitFinishModule (copy), PrepareDictationInputModule (copy), FinishDictationInputModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseRefResult = ReactModule.useRef({})
 	local UseRefResult1 = ReactModule.useRef(nil)
@@ -235,7 +233,7 @@ return function()
 		UseStateResult2(nil)
 	end, { UseMemoResult })
 	local UseResult2 = ReactModule.useCallback(function(p1, p2)
-		-- upvalues: Players (upval), UseMemoResult (copy), CoreGui (upval), FFlagDictationAudioDeviceInputEnabled (upval), FFlagDictationSendUsageTypeModule (upval), SetDictationUsageTypeModule (upval), FFlagDictationExplicitFinishModule (upval), PrepareDictationInputModule (upval), UseStateResult2 (copy)
+		-- upvalues: Players (upval), UseMemoResult (copy), CoreGui (upval), FFlagDictationSendUsageTypeModule (upval), SetDictationUsageTypeModule (upval), FFlagDictationExplicitFinishModule (upval), PrepareDictationInputModule (upval), UseStateResult2 (copy)
 		local LocalPlayer = Players.LocalPlayer
 		
 		if not LocalPlayer then
@@ -283,13 +281,6 @@ return function()
 		Folder.Parent = CoreGui
 		UseMemoResult.container.current = Folder
 		local AudioDeviceInput1 = Instance.new("AudioDeviceInput")
-		
-		if FFlagDictationAudioDeviceInputEnabled then
-			pcall(function()
-				-- upvalues: AudioDeviceInput1 (copy)
-				AudioDeviceInput1.DictationEnabled = true
-			end)
-		end
 		AudioDeviceInput1.Player = LocalPlayer
 		AudioDeviceInput1.Muted = false
 		AudioDeviceInput1.Parent = Folder

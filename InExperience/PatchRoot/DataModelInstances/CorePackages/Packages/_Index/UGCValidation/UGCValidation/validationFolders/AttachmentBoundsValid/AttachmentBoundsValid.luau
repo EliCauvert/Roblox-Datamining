@@ -10,9 +10,10 @@ local PrettyPrintVector3Module = require(Parent.util.prettyPrintVector3)
 local R15plusUtilsModule = require(Parent.util.R15plusUtils)
 local GetAttachmentCFrameInPartSpaceModule = require(Parent.util.getAttachmentCFrameInPartSpace)
 local GetFStringUGCValidationAttachmentErrorLinkModule = require(Parent.flags.getFStringUGCValidationAttachmentErrorLink)
+local GetFFlagUGCValidateAttachmentBoundsErrorMessageModule = require(Parent.flags.getFFlagUGCValidateAttachmentBoundsErrorMessage)
 
 local function validateInMeshSpace(Name, p1, Bounds, p2, p3, HasFoundAt)
-	-- upvalues: GetAttachmentCFrameInPartSpaceModule (copy), BoundsDataUtilsModule (copy), ErrorSourceStringsModule (copy), MeshSpaceUtilsModule (copy), PrettyPrintVector3Module (copy), GetFStringUGCValidationAttachmentErrorLinkModule (copy)
+	-- upvalues: GetAttachmentCFrameInPartSpaceModule (copy), BoundsDataUtilsModule (copy), ErrorSourceStringsModule (copy), MeshSpaceUtilsModule (copy), GetFFlagUGCValidateAttachmentBoundsErrorMessageModule (copy), PrettyPrintVector3Module (copy), GetFStringUGCValidationAttachmentErrorLinkModule (copy)
 	local ScaledCframe = p2.cframe * GetAttachmentCFrameInPartSpaceModule(Name)
 	local BoundsCenters = BoundsDataUtilsModule.calculateBoundsCenters(p2.boundsData)
 	local BoundsDimensions: number = BoundsDataUtilsModule.calculateBoundsDimensions(p2.boundsData)
@@ -28,14 +29,34 @@ local function validateInMeshSpace(Name, p1, Bounds, p2, p3, HasFoundAt)
 	
 	for _, value in { "X", "Y", "Z" } do
 		if PositionRatio[value] < Min[value] or Max[value] < PositionRatio[value] then
-			p3:fail(if HasFoundAt then ErrorSourceStringsModule.Keys.RigAttachmentOutOfBounds else ErrorSourceStringsModule.Keys.AccessoryAttachmentOutOfBounds, {
-				AttachmentName = Name.Name,
-				PartName = p1.Name,
-				CurrentPosition = PrettyPrintVector3Module(Name.CFrame.Position, 3),
-				ClosestValidPosition = PrettyPrintVector3Module(MeshSpaceUtilsModule.clampAttachmentToBounds(Name, p2, Bounds, 0.001).Position, 3),
-				HelpLink = GetFStringUGCValidationAttachmentErrorLinkModule()
-			})
-			break
+			local ClampAttachmentToBoundsResult = MeshSpaceUtilsModule.clampAttachmentToBounds(Name, p2, Bounds, 0.001)
+			local AcceptableBoundsLocalSpace, AcceptableBoundsLocalSpace2 = MeshSpaceUtilsModule.calculateAcceptableBoundsLocalSpace(Bounds, p2, BoundsDimensions, BoundsCenters)
+			local Position = AcceptableBoundsLocalSpace.Position
+			local Rx, Ry, Rz = AcceptableBoundsLocalSpace.Rotation:ToOrientation()
+			local _Vector3 = Vector3.new(math.deg(Rx), math.deg(Ry), (math.deg(Rz)))
+			
+			if GetFFlagUGCValidateAttachmentBoundsErrorMessageModule() then
+				p3:fail(if HasFoundAt then ErrorSourceStringsModule.Keys.RigAttachmentOutOfBounds else ErrorSourceStringsModule.Keys.AccessoryAttachmentOutOfBounds, {
+					AttachmentName = Name.Name,
+					PartName = p1.Name,
+					CurrentPosition = PrettyPrintVector3Module(Name.CFrame.Position, 3),
+					ClosestValidPosition = PrettyPrintVector3Module(ClampAttachmentToBoundsResult.Position, 3),
+					HelpLink = GetFStringUGCValidationAttachmentErrorLinkModule()
+				})
+				break
+			else
+				p3:fail(ErrorSourceStringsModule.Keys.AttachmentOutOfBounds, {
+					AttachmentName = Name.Name,
+					PartName = p1.Name,
+					CurrentPosition = PrettyPrintVector3Module(Name.CFrame.Position, 3),
+					ClosestValidPosition = PrettyPrintVector3Module(ClampAttachmentToBoundsResult.Position, 3),
+					BoundsPosition = PrettyPrintVector3Module(Position, 3),
+					BoundsOrientation = PrettyPrintVector3Module(_Vector3, 3),
+					BoundsSize = PrettyPrintVector3Module(AcceptableBoundsLocalSpace2, 3),
+					HelpLink = GetFStringUGCValidationAttachmentErrorLinkModule()
+				})
+				break
+			end
 		end
 	end
 end

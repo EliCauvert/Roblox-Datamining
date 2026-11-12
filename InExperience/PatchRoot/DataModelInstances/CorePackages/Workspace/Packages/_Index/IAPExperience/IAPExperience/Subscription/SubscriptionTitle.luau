@@ -1,6 +1,8 @@
 ﻿local Parent = script.Parent.Parent.Parent
 local UIBloxModule = require(Parent.UIBlox)
-local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local ReactModule = require(Parent.React)
 local WithStyleFunction = UIBloxModule.Style.withStyle
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
@@ -18,10 +20,11 @@ SubscriptionTitle.validateProps = TModule.strictInterface({
 })
 
 local function _(p1, p2)
-	-- upvalues: WithStyleFunction (copy), ReactModule (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: WithStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	return WithStyleFunction(function(p3)
-		-- upvalues: ReactModule (upval), p1 (copy), p2 (copy), NormalizeFontFaceFunction (upval)
+		-- upvalues: ReactModule (upval), p1 (copy), p2 (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 		local Theme = p3.Theme
+		local BodyFont = p3.Font.Body.Font
 		
 		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -43,7 +46,8 @@ local function _(p1, p2)
 				Text = p1.subscriptionProviderName,
 				TextColor3 = Theme.TextEmphasis.Color,
 				TextTransparency = Theme.TextEmphasis.Transparency,
-				FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font),
+				Font = if FoundationFontFaceMigration then nil else BodyFont,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
 				TextXAlignment = p2 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
 				LayoutOrder = p1.layoutOrder
 			})
@@ -56,7 +60,8 @@ local function _(p1, p2)
 				Text = p1.name,
 				TextColor3 = Theme.TextEmphasis.Color,
 				TextTransparency = Theme.TextEmphasis.Transparency,
-				FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font),
+				Font = if FoundationFontFaceMigration then nil else BodyFont,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
 				TextXAlignment = p2 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
 				LayoutOrder = p1.layoutOrder + 1
 			})
@@ -83,7 +88,8 @@ local function _(p1, p2)
 					Text = p1.displayPrice,
 					TextColor3 = Theme.TextEmphasis.Color,
 					TextTransparency = Theme.TextDefault.Transparency,
-					FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font),
+					Font = if FoundationFontFaceMigration then nil else BodyFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
 					TextXAlignment = p2 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
 					LayoutOrder = p1.layoutOrder + 1,
 					AutomaticSize = Enum.AutomaticSize.X
@@ -97,7 +103,8 @@ local function _(p1, p2)
 					Text = p1.period,
 					TextColor3 = Theme.TextDefault.Color,
 					TextTransparency = Theme.TextDefault.Transparency,
-					FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font),
+					Font = if FoundationFontFaceMigration then nil else BodyFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
 					TextXAlignment = p2 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
 					LayoutOrder = p1.layoutOrder + 1,
 					AutomaticSize = Enum.AutomaticSize.X
@@ -111,7 +118,8 @@ local function _(p1, p2)
 				Size = UDim2.new(1, 0, 0, 16),
 				Text = p1.disclaimerText,
 				TextColor3 = Theme.TextDefault.Color,
-				FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font),
+				Font = if FoundationFontFaceMigration then nil else BodyFont,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
 				TextXAlignment = p2 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
 				LayoutOrder = p1.layoutOrder + 3
 			})
@@ -120,7 +128,7 @@ local function _(p1, p2)
 end
 
 local function createCompactSubscriptionTitle(Props)
-	-- upvalues: ReactModule (copy), ImageSetLabel (copy), WithStyleFunction (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: ReactModule (copy), ImageSetLabel (copy), WithStyleFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local v1 = true
 	
 	return ReactModule.createElement("Frame", {
@@ -144,8 +152,9 @@ local function createCompactSubscriptionTitle(Props)
 			Image = Props.itemIcon
 		}),
 		SubscriptionInfo = WithStyleFunction(function(p1)
-			-- upvalues: ReactModule (upval), Props (copy), v1 (copy), NormalizeFontFaceFunction (upval)
+			-- upvalues: ReactModule (upval), Props (copy), v1 (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 			local Theme = p1.Theme
+			local BodyFont = p1.Font.Body.Font
 			
 			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -167,7 +176,8 @@ local function createCompactSubscriptionTitle(Props)
 					Text = Props.subscriptionProviderName,
 					TextColor3 = Theme.TextEmphasis.Color,
 					TextTransparency = Theme.TextEmphasis.Transparency,
-					FontFace = NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font),
+					Font = if FoundationFontFaceMigration then nil else BodyFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font) else nil,
 					TextXAlignment = v1 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
 					LayoutOrder = Props.layoutOrder
 				})
@@ -180,7 +190,8 @@ local function createCompactSubscriptionTitle(Props)
 					Text = Props.name,
 					TextColor3 = Theme.TextEmphasis.Color,
 					TextTransparency = Theme.TextEmphasis.Transparency,
-					FontFace = NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font),
+					Font = if FoundationFontFaceMigration then nil else BodyFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font) else nil,
 					TextXAlignment = v1 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
 					LayoutOrder = Props.layoutOrder + 1
 				})
@@ -207,7 +218,8 @@ local function createCompactSubscriptionTitle(Props)
 						Text = Props.displayPrice,
 						TextColor3 = Theme.TextEmphasis.Color,
 						TextTransparency = Theme.TextDefault.Transparency,
-						FontFace = NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font),
+						Font = if FoundationFontFaceMigration then nil else BodyFont,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font) else nil,
 						TextXAlignment = v1 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
 						LayoutOrder = Props.layoutOrder + 1,
 						AutomaticSize = Enum.AutomaticSize.X
@@ -221,7 +233,8 @@ local function createCompactSubscriptionTitle(Props)
 						Text = Props.period,
 						TextColor3 = Theme.TextDefault.Color,
 						TextTransparency = Theme.TextDefault.Transparency,
-						FontFace = NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font),
+						Font = if FoundationFontFaceMigration then nil else BodyFont,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font) else nil,
 						TextXAlignment = v1 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
 						LayoutOrder = Props.layoutOrder + 1,
 						AutomaticSize = Enum.AutomaticSize.X
@@ -235,7 +248,8 @@ local function createCompactSubscriptionTitle(Props)
 					Size = UDim2.new(1, 0, 0, 16),
 					Text = Props.disclaimerText,
 					TextColor3 = Theme.TextDefault.Color,
-					FontFace = NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font),
+					Font = if FoundationFontFaceMigration then nil else BodyFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font) else nil,
 					TextXAlignment = v1 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
 					LayoutOrder = Props.layoutOrder + 3
 				})
@@ -245,7 +259,7 @@ local function createCompactSubscriptionTitle(Props)
 end
 
 local function createNormalSubscriptionTitle(Props)
-	-- upvalues: ReactModule (copy), ImageSetLabel (copy), WithStyleFunction (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: ReactModule (copy), ImageSetLabel (copy), WithStyleFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local v1 = false
 	
 	return ReactModule.createElement("Frame", {
@@ -269,8 +283,9 @@ local function createNormalSubscriptionTitle(Props)
 			Image = Props.itemIcon
 		}),
 		SubscriptionInfo = WithStyleFunction(function(p1)
-			-- upvalues: ReactModule (upval), Props (copy), v1 (copy), NormalizeFontFaceFunction (upval)
+			-- upvalues: ReactModule (upval), Props (copy), v1 (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 			local Theme = p1.Theme
+			local BodyFont = p1.Font.Body.Font
 			
 			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -292,7 +307,8 @@ local function createNormalSubscriptionTitle(Props)
 					Text = Props.subscriptionProviderName,
 					TextColor3 = Theme.TextEmphasis.Color,
 					TextTransparency = Theme.TextEmphasis.Transparency,
-					FontFace = NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font),
+					Font = if FoundationFontFaceMigration then nil else BodyFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font) else nil,
 					TextXAlignment = v1 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
 					LayoutOrder = Props.layoutOrder
 				})
@@ -305,7 +321,8 @@ local function createNormalSubscriptionTitle(Props)
 					Text = Props.name,
 					TextColor3 = Theme.TextEmphasis.Color,
 					TextTransparency = Theme.TextEmphasis.Transparency,
-					FontFace = NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font),
+					Font = if FoundationFontFaceMigration then nil else BodyFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font) else nil,
 					TextXAlignment = v1 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
 					LayoutOrder = Props.layoutOrder + 1
 				})
@@ -332,7 +349,8 @@ local function createNormalSubscriptionTitle(Props)
 						Text = Props.displayPrice,
 						TextColor3 = Theme.TextEmphasis.Color,
 						TextTransparency = Theme.TextDefault.Transparency,
-						FontFace = NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font),
+						Font = if FoundationFontFaceMigration then nil else BodyFont,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font) else nil,
 						TextXAlignment = v1 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
 						LayoutOrder = Props.layoutOrder + 1,
 						AutomaticSize = Enum.AutomaticSize.X
@@ -346,7 +364,8 @@ local function createNormalSubscriptionTitle(Props)
 						Text = Props.period,
 						TextColor3 = Theme.TextDefault.Color,
 						TextTransparency = Theme.TextDefault.Transparency,
-						FontFace = NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font),
+						Font = if FoundationFontFaceMigration then nil else BodyFont,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font) else nil,
 						TextXAlignment = v1 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
 						LayoutOrder = Props.layoutOrder + 1,
 						AutomaticSize = Enum.AutomaticSize.X
@@ -360,7 +379,8 @@ local function createNormalSubscriptionTitle(Props)
 					Size = UDim2.new(1, 0, 0, 16),
 					Text = Props.disclaimerText,
 					TextColor3 = Theme.TextDefault.Color,
-					FontFace = NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font),
+					Font = if FoundationFontFaceMigration then nil else BodyFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font) else nil,
 					TextXAlignment = v1 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
 					LayoutOrder = Props.layoutOrder + 3
 				})

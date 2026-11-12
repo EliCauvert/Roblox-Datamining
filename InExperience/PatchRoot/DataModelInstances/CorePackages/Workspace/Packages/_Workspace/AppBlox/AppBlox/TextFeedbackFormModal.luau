@@ -1,6 +1,7 @@
 ﻿local Parent = script:FindFirstAncestor("AppBlox").Parent
 local FoundationModule = require(Parent.Foundation)
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local ReactModule = require(Parent.React)
 local CloseCentralOverlayFunction = require(Parent.CentralOverlay).Thunks.CloseCentralOverlay
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
@@ -17,7 +18,7 @@ local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseDispatchFunction (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), CloseCentralOverlayFunction (copy), UseAppPolicyFunction (copy), AppPage (copy), UrlBuilder (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), Dialog (copy), LuaAppTextFeedbackFormModalStandardInput (copy), NormalizeFontFaceFunction (copy), ButtonVariant (copy)
+	-- upvalues: UseDispatchFunction (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), CloseCentralOverlayFunction (copy), UseAppPolicyFunction (copy), AppPage (copy), UrlBuilder (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), Dialog (copy), LuaAppTextFeedbackFormModalStandardInput (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ButtonVariant (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -97,7 +98,8 @@ return ReactModule.memo(function(p1)
 					AutomaticSize = Enum.AutomaticSize.Y,
 					BackgroundTransparency = 1,
 					ClearTextOnFocus = false,
-					FontFace = NormalizeFontFaceFunction(if LuaAppTextFeedbackFormModalStandardInput then UseTokensResult.Typography.BodyMedium.Font else UseTokensResult.Typography.CaptionMedium.Font),
+					Font = if FoundationFontFaceMigration then nil elseif LuaAppTextFeedbackFormModalStandardInput then UseTokensResult.Typography.BodyMedium.Font else UseTokensResult.Typography.CaptionMedium.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(if LuaAppTextFeedbackFormModalStandardInput then UseTokensResult.Typography.BodyMedium.Font else UseTokensResult.Typography.CaptionMedium.Font) else nil,
 					LineHeight = if LuaAppTextFeedbackFormModalStandardInput then UseTokensResult.Typography.BodyMedium.LineHeight else UseTokensResult.LineHeight.LineHeight_140,
 					MultiLine = true,
 					PlaceholderColor3 = UseTokensResult.Color.Content.Muted.Color3,

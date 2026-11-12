@@ -25,7 +25,6 @@ local FFlagLuaAppSuppressOneByTwoVideoDetectorDuringScroll = require(Parent.Shar
 local FFlagLuaAppSduiSuppressVideoDetectorDuringScroll = require(Parent.SharedFlags).FFlagLuaAppSduiSuppressVideoDetectorDuringScroll
 local FFlagLuaAppTileVideoKeepPlayingOnScroll = require(Parent.SharedFlags).FFlagLuaAppTileVideoKeepPlayingOnScroll
 local FFlagLuaAppVideoAutoplayFeedElection = require(Parent.SharedFlags).FFlagLuaAppVideoAutoplayFeedElection
-local FFlagMobileGameJoinCardVideo = require(Parent.SharedFlags).FFlagMobileGameJoinCardVideo
 local FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback = require(Parent.SharedFlags).FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback
 local FFlagLuaAppVideoAutoplayElectOnNewCandidateModule = require(script.Parent.FFlagLuaAppVideoAutoplayElectOnNewCandidate)
 local LuaAppVideoAutoplayMaxDistanceToWinnerLinePercent = game:DefineFastInt("LuaAppVideoAutoplayMaxDistanceToWinnerLinePercent", 50)
@@ -42,19 +41,19 @@ local function winnerStateEquals(p1, p2): boolean
 end
 
 local function _(AppBackgrounded): boolean
-	-- upvalues: VideoEndReason (copy), FFlagMobileGameJoinCardVideo (copy)
-	return AppBackgrounded == VideoEndReason.TileClicked or (AppBackgrounded == VideoEndReason.ExperienceLaunched or (AppBackgrounded == VideoEndReason.AppBackgrounded or FFlagMobileGameJoinCardVideo and AppBackgrounded == VideoEndReason.OverlayTakeover))
+	-- upvalues: VideoEndReason (copy)
+	return AppBackgrounded == VideoEndReason.TileClicked or (AppBackgrounded == VideoEndReason.ExperienceLaunched or AppBackgrounded == VideoEndReason.AppBackgrounded)
 end
 
-local function reportCandidateOverlap(p1, Frame: Frame, X)
+local function reportCandidateOverlap(Frame, Frame1: Frame, X)
 	-- upvalues: DiscoveryEventErrorLogger (copy)
 	DiscoveryEventErrorLogger.reportError("ViewportAutoplayCandidateOverlap", "Two visible autoplay candidates share identical reading-order position and AbsolutePosition.X", {
-		candidateA = p1.Name,
-		candidateB = Frame.Name,
+		candidateA = Frame.Name,
+		candidateB = Frame1.Name,
 		absolutePositionX = X,
-		absolutePositionY = Frame.AbsolutePosition.Y,
-		absoluteSizeX = Frame.AbsoluteSize.X,
-		absoluteSizeY = Frame.AbsoluteSize.Y
+		absolutePositionY = Frame1.AbsolutePosition.Y,
+		absoluteSizeX = Frame1.AbsoluteSize.X,
+		absoluteSizeY = Frame1.AbsoluteSize.Y
 	})
 end
 
@@ -62,13 +61,13 @@ local ViewportVideoAutoplayController = {}
 ViewportVideoAutoplayController.__index = ViewportVideoAutoplayController
 
 function ViewportVideoAutoplayController.new(Coordinator, Enabled, Enabled1, UserIntentWithSelectiveAutoplay)
-	-- upvalues: SignalsModule (copy), config (copy), winnerStateEquals (copy), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), FFlagLuaAppVideoAutoplayFeedElection (copy), FFlagLuaAppSuppressVideoDetectorDuringScroll (copy), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy), ViewportVideoAutoplayController (copy), ViewportVideoAutoplayModeModule (copy), ViewportAutoplayVideoKeyAttributeModule (copy), VideoEndReason (copy), FFlagMobileGameJoinCardVideo (copy)
+	-- upvalues: SignalsModule (copy), config (copy), winnerStateEquals (copy), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), FFlagLuaAppVideoAutoplayFeedElection (copy), FFlagLuaAppSuppressVideoDetectorDuringScroll (copy), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy), ViewportVideoAutoplayController (copy), ViewportVideoAutoplayModeModule (copy), ViewportAutoplayVideoKeyAttributeModule (copy), VideoEndReason (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(config, winnerStateEquals)
 	local v1 = nil
 	local v2 = nil
 	
 	if FFlagLuaAppSduiSuppressVideoDetectorDuringScroll then
-		v1, v34 = SignalsModule.createSignal(false)
+		v1, v33 = SignalsModule.createSignal(false)
 	end
 	local self = setmetatable({
 		isScrolling = false,
@@ -99,7 +98,7 @@ function ViewportVideoAutoplayController.new(Coordinator, Enabled, Enabled1, Use
 	end
 	if FFlagLuaAppOneByTwoHoverIdleAutoplay and UserIntentWithSelectiveAutoplay == ViewportVideoAutoplayModeModule.UserIntentWithSelectiveAutoplay then
 		self.playbackChangedConnection = Coordinator.changed:connect(function(Attribute, AppBackgrounded)
-			-- upvalues: self (copy), ViewportAutoplayVideoKeyAttributeModule (upval), config (upval), VideoEndReason (upval), FFlagMobileGameJoinCardVideo (upval)
+			-- upvalues: self (copy), ViewportAutoplayVideoKeyAttributeModule (upval), config (upval), VideoEndReason (upval)
 			local _Instance = self.getWinnerState(false).instance
 			local Attribute1 = if _Instance then _Instance:GetAttribute(ViewportAutoplayVideoKeyAttributeModule) else nil
 			
@@ -107,7 +106,7 @@ function ViewportVideoAutoplayController.new(Coordinator, Enabled, Enabled1, Use
 				if _Instance ~= nil then
 					self.setWinnerState(config)
 				end
-				if AppBackgrounded == VideoEndReason.TileClicked or (AppBackgrounded == VideoEndReason.ExperienceLaunched or (AppBackgrounded == VideoEndReason.AppBackgrounded or FFlagMobileGameJoinCardVideo and AppBackgrounded == VideoEndReason.OverlayTakeover)) then
+				if AppBackgrounded == VideoEndReason.TileClicked or (AppBackgrounded == VideoEndReason.ExperienceLaunched or AppBackgrounded == VideoEndReason.AppBackgrounded) then
 					self:_cancelPendingUpdate()
 					self:_cancelScrollUpdate()
 					
@@ -340,7 +339,7 @@ function ViewportVideoAutoplayController:setViewPortBounds(ViewPortBounds)
 		local Y = nil
 		
 		if FFlagLuaAppOneByTwoHoverIdleAutoplay and self:isUserIntentWithSelectiveAutoplay() then
-			Y, v51 = self:_selectUserIntentOrAutoplayWinner("Y", nil)
+			Y, v50 = self:_selectUserIntentOrAutoplayWinner("Y", nil)
 		else
 			Y = self:_selectWinner("Y", nil)
 		end
@@ -512,8 +511,8 @@ function ViewportVideoAutoplayController:onScrollSettled(p1, _, p2)
 end
 
 function ViewportVideoAutoplayController:_resetPairedPlayback(Coordinator, ExperienceLaunched, p1)
-	-- upvalues: VideoEndReason (copy), FFlagMobileGameJoinCardVideo (copy)
-	if self.isResettingPairedPlayback or ExperienceLaunched ~= VideoEndReason.TileClicked and ExperienceLaunched ~= VideoEndReason.ExperienceLaunched and (not FFlagMobileGameJoinCardVideo or ExperienceLaunched ~= VideoEndReason.OverlayTakeover) then return end
+	-- upvalues: VideoEndReason (copy)
+	if self.isResettingPairedPlayback or ExperienceLaunched ~= VideoEndReason.TileClicked and ExperienceLaunched ~= VideoEndReason.ExperienceLaunched then return end
 	self.isResettingPairedPlayback = true
 	self:_cancelPendingUpdate()
 	self:_cancelPendingAdsUpdate()
@@ -841,10 +840,10 @@ function ViewportVideoAutoplayController:_selectWinner(p1, p2, p3, UserIntentMod
 	local NewY = ViewPortBounds.min.Y + self.winnerLineOffsetFromTopBarPx
 	local Largest = math.max(ViewPortBounds.max.X - ViewPortBounds.min.X, 1)
 	local ScaledY = (ViewPortBounds.max.Y - ViewPortBounds.min.Y) * (LuaAppVideoAutoplayMaxDistanceToWinnerLinePercent / 100)
-	local v2 = nil
+	local Frame1 = nil
 	local Magnitude = 1e999
 	local X = 1e999
-	local Flag = false
+	local Flag1 = false
 	local Y: number? = nil
 	local Magnitude1: number? = nil
 	
@@ -853,43 +852,43 @@ function ViewportVideoAutoplayController:_selectWinner(p1, p2, p3, UserIntentMod
 		Magnitude1 = 1e999
 	end
 	local function _(AbsolutePositionX, Frame): boolean
-		-- upvalues: X (ref), Flag (ref), v2 (ref), reportCandidateOverlap (upval)
+		-- upvalues: X (ref), Flag1 (ref), Frame1 (ref), reportCandidateOverlap (upval)
 		if AbsolutePositionX < X then
 			return true
 		end
-		if AbsolutePositionX == X and not Flag and v2 then
-			Flag = true
-			reportCandidateOverlap(v2, Frame, AbsolutePositionX)
+		if AbsolutePositionX == X and not Flag1 and Frame1 then
+			Flag1 = true
+			reportCandidateOverlap(Frame1, Frame, AbsolutePositionX)
 		end
 		return false
 	end
 	
 	local _ = function(Frame, AbsolutePositionX, p5)
-		-- upvalues: NewY (copy), Magnitude (ref), X (ref), v2 (ref), Flag (ref), reportCandidateOverlap (upval)
+		-- upvalues: NewY (copy), Magnitude (ref), X (ref), Frame1 (ref), Flag1 (ref), reportCandidateOverlap (upval)
 		local Magnitude1 = math.abs(p5 - NewY)
 		
 		if Magnitude1 < Magnitude then
 			Magnitude = Magnitude1
 			X = AbsolutePositionX
-			v2 = Frame
+			Frame1 = Frame
 			
 			return
 		end
 		if Magnitude1 == Magnitude then
-			local Flag1 = nil
+			local Flag = nil
 			if AbsolutePositionX < X then
-				Flag1 = true
+				Flag = true
 			else
-				if AbsolutePositionX == X and not Flag and v2 then
-					Flag = true
-					reportCandidateOverlap(v2, Frame, AbsolutePositionX)
+				if AbsolutePositionX == X and not Flag1 and Frame1 then
+					Flag1 = true
+					reportCandidateOverlap(Frame1, Frame, AbsolutePositionX)
 				end
-				Flag1 = false
+				Flag = false
 			end
-			if Flag1 then
+			if Flag then
 				Magnitude = Magnitude1
 				X = AbsolutePositionX
-				v2 = Frame
+				Frame1 = Frame
 			end
 		end
 	end
@@ -912,53 +911,53 @@ function ViewportVideoAutoplayController:_selectWinner(p1, p2, p3, UserIntentMod
 				local Magnitude2 = math.abs(math.clamp(NewY, Frame.AbsolutePosition.Y, Frame.AbsolutePosition.Y + Frame.AbsoluteSize.Y) - NewY)
 				local Y1 = Frame.AbsoluteSize.Y
 				local Magnitude3 = math.abs(Frame.AbsolutePosition.Y + X1 / Largest * Y1 - NewY)
-				local Flag2 = false
+				local Flag3 = false
 				
 				if Magnitude2 < Magnitude then
-					Flag2 = true
+					Flag3 = true
 				elseif Magnitude2 == Magnitude then
 					if Y < Y1 then
-						Flag2 = true
+						Flag3 = true
 					elseif Y1 == Y then
 						if p3 then
-							local Flag4 = nil
+							local Flag5 = nil
 							if X1 < X then
-								Flag4 = true
+								Flag5 = true
 							else
-								if X1 == X and not Flag and v2 then
-									Flag = true
-									reportCandidateOverlap(v2, Frame, X1)
+								if X1 == X and not Flag1 and Frame1 then
+									Flag1 = true
+									reportCandidateOverlap(Frame1, Frame, X1)
 								end
-								Flag4 = false
+								Flag5 = false
 							end
-							if Flag4 then
-								Flag2 = true
+							if Flag5 then
+								Flag3 = true
 							end
 						elseif Magnitude3 < Magnitude1 then
-							Flag2 = true
+							Flag3 = true
 						elseif Magnitude3 == Magnitude1 then
-							local Flag1 = nil
+							local Flag2 = nil
 							if X1 < X then
-								Flag1 = true
-							else
-								if X1 == X and not Flag and v2 then
-									Flag = true
-									reportCandidateOverlap(v2, Frame, X1)
-								end
-								Flag1 = false
-							end
-							if Flag1 then
 								Flag2 = true
+							else
+								if X1 == X and (not Flag1 and Frame1) then
+									Flag1 = true
+									reportCandidateOverlap(Frame1, Frame, X1)
+								end
+								Flag2 = false
+							end
+							if Flag2 then
+								Flag3 = true
 							end
 						end
 					end
 				end
-				if Flag2 then
+				if Flag3 then
 					Magnitude = Magnitude2
 					Y = Y1
 					Magnitude1 = Magnitude3
 					X = X1
-					v2 = Frame
+					Frame1 = Frame
 				end
 			else
 				local TileRowSpan = GetTileRowSpanFunction(Frame)
@@ -970,86 +969,88 @@ function ViewportVideoAutoplayController:_selectWinner(p1, p2, p3, UserIntentMod
 					if RowAnchorOverride ~= nil then
 						ReadingOrderPositions[if IsTilePinnedLeftFunction(Frame) then 1 else TileRowSpan] = RowAnchorOverride
 					end
-					for _, readingOrderPosition in ReadingOrderPositions do
-						local Magnitude4 = math.abs(readingOrderPosition - NewY)
+					for _, value in ReadingOrderPositions do
+						local Magnitude6 = math.abs(value - NewY)
+						
+						if Magnitude6 < Magnitude then
+							Magnitude = Magnitude6
+							X = X1
+							Frame1 = Frame
+						elseif Magnitude6 == Magnitude then
+							local Flag4 = nil
+							if X1 < X then
+								Flag4 = true
+							else
+								if X1 == X and (not Flag1 and Frame1) then
+									Flag1 = true
+									reportCandidateOverlap(Frame1, Frame, X1)
+								end
+								Flag4 = false
+							end
+							if Flag4 then
+								Magnitude = Magnitude6
+								X = X1
+								Frame1 = Frame
+							end
+						end
+					end
+				else
+					if RowAnchorOverride == nil then
+						local Magnitude5 = math.abs(Frame.AbsolutePosition.Y + X1 / Largest * Frame.AbsoluteSize.Y - NewY)
+						
+						if Magnitude5 < Magnitude then
+							Magnitude = Magnitude5
+							X = X1
+							Frame1 = Frame
+							continue
+						elseif Magnitude5 == Magnitude then
+							local Flag = nil
+							if X1 < X then
+								Flag = true
+							else
+								if X1 == X and (not Flag1 and Frame1) then
+									Flag1 = true
+									reportCandidateOverlap(Frame1, Frame, X1)
+								end
+								Flag = false
+							end
+							if Flag then
+								Magnitude = Magnitude5
+								X = X1
+								Frame1 = Frame
+							end
+						end
+					else
+						local Magnitude4 = math.abs(RowAnchorOverride - NewY)
 						
 						if Magnitude4 < Magnitude then
 							Magnitude = Magnitude4
 							X = X1
-							v2 = Frame
+							Frame1 = Frame
+							continue
 						elseif Magnitude4 == Magnitude then
-							local Flag3 = nil
+							local Flag6 = nil
 							if X1 < X then
-								Flag3 = true
+								Flag6 = true
 							else
-								if X1 == X and not Flag and v2 then
-									Flag = true
-									reportCandidateOverlap(v2, Frame, X1)
+								if X1 == X and not Flag1 and Frame1 then
+									Flag1 = true
+									reportCandidateOverlap(Frame1, Frame, X1)
 								end
-								Flag3 = false
+								Flag6 = false
 							end
-							if Flag3 then
+							if Flag6 then
 								Magnitude = Magnitude4
 								X = X1
-								v2 = Frame
+								Frame1 = Frame
 							end
-						end
-					end
-				elseif RowAnchorOverride == nil then
-					local Magnitude6 = math.abs(Frame.AbsolutePosition.Y + X1 / Largest * Frame.AbsoluteSize.Y - NewY)
-					
-					if Magnitude6 < Magnitude then
-						Magnitude = Magnitude6
-						X = X1
-						v2 = Frame
-						continue
-					elseif Magnitude6 == Magnitude then
-						local Flag6 = nil
-						if X1 < X then
-							Flag6 = true
-						else
-							if X1 == X and not Flag and v2 then
-								Flag = true
-								reportCandidateOverlap(v2, Frame, X1)
-							end
-							Flag6 = false
-						end
-						if Flag6 then
-							Magnitude = Magnitude6
-							X = X1
-							v2 = Frame
-						end
-					end
-				else
-					local Magnitude5 = math.abs(RowAnchorOverride - NewY)
-					
-					if Magnitude5 < Magnitude then
-						Magnitude = Magnitude5
-						X = X1
-						v2 = Frame
-						continue
-					elseif Magnitude5 == Magnitude then
-						local Flag5 = nil
-						if X1 < X then
-							Flag5 = true
-						else
-							if X1 == X and not Flag and v2 then
-								Flag = true
-								reportCandidateOverlap(v2, Frame, X1)
-							end
-							Flag5 = false
-						end
-						if Flag5 then
-							Magnitude = Magnitude5
-							X = X1
-							v2 = Frame
 						end
 					end
 				end
 			end
 		end
 	end
-	return if ScaledY < Magnitude then nil else v2
+	return if ScaledY < Magnitude then nil else Frame1
 end
 
 return ViewportVideoAutoplayController

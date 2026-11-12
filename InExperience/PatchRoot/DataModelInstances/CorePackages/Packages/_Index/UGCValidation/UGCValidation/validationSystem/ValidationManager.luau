@@ -15,7 +15,6 @@ local ResetPhysicsDataModule = require(Parent.util.resetPhysicsData)
 local GetFFlagDebugAllowHRDUploadOnBundleBackendModule = require(Parent.flags.getFFlagDebugAllowHRDUploadOnBundleBackend)
 local GetEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule = require(Parent.flags.getEngineFeatureEngineUGCValidateInstanceTreesEquivalent)
 local GetFFlagUGCValidationAllowFullVaasModule = require(Parent.flags.getFFlagUGCValidationAllowFullVaas)
-local GetFFlagUGCValidateAQSRequiresOnlySummaryModule = require(Parent.flags.getFFlagUGCValidateAQSRequiresOnlySummary)
 local GetFFlagDebugUGCDisableAssetQualityChecksModule = require(Parent.flags.getFFlagDebugUGCDisableAssetQualityChecks)
 local GetEngineFeatureEngineDebugUGCValidationViaLocalRCCModule = require(Parent.flags.getEngineFeatureEngineDebugUGCValidationViaLocalRCC)
 local GetEngineFeatureEngineUGCValidateEmoteAnimationExportModule = require(Parent.flags.getEngineFeatureEngineUGCValidateEmoteAnimationExport)
@@ -55,7 +54,7 @@ local Config = if GetEngineFeatureEngineDebugUGCValidationViaLocalRCCModule() th
 } else nil
 
 local function initRunVariables(Value, ConsumerConfig)
-	-- upvalues: ValidationModuleLoaderModule (copy), GetFFlagDebugUGCDisableAssetQualityChecksModule (copy), GetFFlagUGCValidateAQSRequiresOnlySummaryModule (copy), RecreateSceneFromEditablesModule (copy)
+	-- upvalues: ValidationModuleLoaderModule (copy), GetFFlagDebugUGCDisableAssetQualityChecksModule (copy)
 	local List = {}
 	local t = {}
 	local t1 = {}
@@ -89,13 +88,8 @@ local function initRunVariables(Value, ConsumerConfig)
 			}
 		end
 	end
-	if GetFFlagUGCValidateAQSRequiresOnlySummaryModule() and #List > 0 and ConsumerConfig.aqFetchStage == "scene" then
-		for _, value2 in RecreateSceneFromEditablesModule.requiredData do
-			t1[value2] = true
-		end
-	end
-	for i, value3 in t do
-		for i1, _ in value3.prereqs do
+	for i, value2 in t do
+		for i1, _ in value2.prereqs do
 			if t[i1] == nil then
 				error(string.format("%s is needed for %s to run, but is not an included test", i1, i))
 			end
@@ -106,7 +100,7 @@ local function initRunVariables(Value, ConsumerConfig)
 end
 
 local function fetchQualityResults(p1, DesiredQualityChecks)
-	-- upvalues: AssetQualityService (copy), AssetQualityFetchStatus (copy), GetFFlagUGCValidateAQSRequiresOnlySummaryModule (copy), RecreateSceneFromEditablesModule (copy), FetchAllDesiredDataModule (copy), GetEngineFeatureEngineUGCValidateEmoteAnimationExportModule (copy), ValidationEnumsModule (copy), StripMeshFromGltfModule (copy), GetFIntUGCValidationFetchQualityRetryDelayMsModule (copy), GetFIntUGCValidationFetchQualityMaxRetryModule (copy), GetEngineFeatureEngineAssetQualityV2SummaryFromUrlModule (copy), GetFFlagUGCValidationAllowFullVaasModule (copy), HttpService (copy), GetFFlagDebugUGCValidationPrintNewStructureResultsModule (copy)
+	-- upvalues: AssetQualityService (copy), AssetQualityFetchStatus (copy), RecreateSceneFromEditablesModule (copy), GetEngineFeatureEngineUGCValidateEmoteAnimationExportModule (copy), ValidationEnumsModule (copy), StripMeshFromGltfModule (copy), GetFIntUGCValidationFetchQualityRetryDelayMsModule (copy), GetFIntUGCValidationFetchQualityMaxRetryModule (copy), GetEngineFeatureEngineAssetQualityV2SummaryFromUrlModule (copy), GetFFlagUGCValidationAllowFullVaasModule (copy), HttpService (copy), GetFFlagDebugUGCValidationPrintNewStructureResultsModule (copy), FetchAllDesiredDataModule (copy)
 	if not AssetQualityService then
 		p1.aqsFetchMetrics.fetchStatus = AssetQualityFetchStatus.assetQualityFetchFailure
 		p1.aqsFetchMetrics.fetchFailureReason = "Not enabled"
@@ -120,14 +114,7 @@ local function fetchQualityResults(p1, DesiredQualityChecks)
 	
 	if p1.consumerConfig.aqFetchStage == "scene" then
 		Success, FetchFailureReason = pcall(function()
-			-- upvalues: GetFFlagUGCValidateAQSRequiresOnlySummaryModule (upval), RecreateSceneFromEditablesModule (upval), p1 (copy), FetchAllDesiredDataModule (upval), ModelForGltfExport (ref), AssetQualityGltfFromInstanceAsync (ref), AssetQualityService (upval)
-			if GetFFlagUGCValidateAQSRequiresOnlySummaryModule() then
-				for _, value in RecreateSceneFromEditablesModule.requiredData do
-					if p1[value] == FetchAllDesiredDataModule.DATA_FETCH_FAILURE then
-						error(`Missing scene data: {value}`)
-					end
-				end
-			end
+			-- upvalues: ModelForGltfExport (ref), RecreateSceneFromEditablesModule (upval), p1 (copy), AssetQualityGltfFromInstanceAsync (ref), AssetQualityService (upval)
 			ModelForGltfExport = RecreateSceneFromEditablesModule.createModelForGltfExport(p1)
 			AssetQualityGltfFromInstanceAsync = AssetQualityService:GenerateAssetQualityGltfFromInstanceAsync(ModelForGltfExport)
 		end)

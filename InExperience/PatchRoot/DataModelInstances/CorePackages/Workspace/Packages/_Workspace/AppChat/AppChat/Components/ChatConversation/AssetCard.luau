@@ -7,6 +7,8 @@ local ChatBubbleContainerModule = require(script.Parent.Bubble.ChatBubbleContain
 local ConstantsModule = require(AppChat.Constants)
 local FoundationModule = require(Parent.Foundation)
 local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local Text = require(Parent.AppCommonLib).Text
 local GetTextSizeFunction = require(Parent.Style).GetTextSize
 local PlaceIdContainerModule = require(AppChat.Components.ChatConversation.ShareLinkComponents.GameCardComponents.PlaceIdContainer)
 local GameCardContainerModule = require(AppChat.Components.ChatConversation.ShareLinkComponents.GameCardComponents.GameCardContainer)
@@ -86,7 +88,7 @@ local function renderAssetCardViewRow(Frame, Card)
 end
 
 return function(p1)
-	-- upvalues: CryoModule (copy), config (copy), ShareLinkContainerModule (copy), PlaceIdContainerModule (copy), GameCardContainerModule (copy), UseScaledValueFunction (copy), ConstantsModule (copy), FFlagAppChatShareLinkV2FallbacksModule (copy), UseShareLinkV2PresentationModule (copy), FFlagAppChatPlusReferralAssetCardModule (copy), FFlagAppChatMomentAssetCardModule (copy), FFlagAppChatGameAssetCardModule (copy), useRendersAssetCardView (copy), ReactModule (copy), ToMessageGroupShapeModule (copy), ShareLinkV2PresentationModule (copy), FFlagAppChatFullPlaintextBeforeGameCardsModule (copy), TEXTBUBBLEXPADDING (copy), BUBBLEPADDING (copy), TEXTBUBBLEXWIDEADDITIONALPADDING (copy), GetTextSizeFunction (copy), RoactModule (copy), PlainTextModule (copy), renderAssetCardViewRow (copy), ChatBubbleContainerModule (copy), FFlagAppChatIntrinsicAssetCardHeightModule (copy)
+	-- upvalues: CryoModule (copy), config (copy), ShareLinkContainerModule (copy), PlaceIdContainerModule (copy), GameCardContainerModule (copy), UseScaledValueFunction (copy), ConstantsModule (copy), FFlagAppChatShareLinkV2FallbacksModule (copy), UseShareLinkV2PresentationModule (copy), FFlagAppChatPlusReferralAssetCardModule (copy), FFlagAppChatMomentAssetCardModule (copy), FFlagAppChatGameAssetCardModule (copy), useRendersAssetCardView (copy), ReactModule (copy), ToMessageGroupShapeModule (copy), ShareLinkV2PresentationModule (copy), FFlagAppChatFullPlaintextBeforeGameCardsModule (copy), TEXTBUBBLEXPADDING (copy), BUBBLEPADDING (copy), TEXTBUBBLEXWIDEADDITIONALPADDING (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), RoactModule (copy), PlainTextModule (copy), renderAssetCardViewRow (copy), ChatBubbleContainerModule (copy), FFlagAppChatIntrinsicAssetCardHeightModule (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UnionResult1 = CryoModule.Dictionary.union(config.additionalProps, UnionResult.additionalProps)
 	local ShareLinkContainerModule1 = if UnionResult1.shareLink then ShareLinkContainerModule else UnionResult1.placeId and PlaceIdContainerModule or GameCardContainerModule
@@ -117,23 +119,29 @@ return function(p1)
 	if Fallback == ShareLinkV2PresentationModule.Fallback then
 		local Url = UnionResult1.shareLink.url
 		
-		return if FFlagAppChatFullPlaintextBeforeGameCardsModule or Url == nil then nil else RoactModule.createElement(PlainTextModule, {
-			text = Url,
-			font = UnionResult.font,
-			textSize = UnionResult.textSize,
-			innerPadding = UnionResult.innerPadding,
-			maxWidth = GetTextSizeFunction(Url, UnionResult.textSize, UnionResult.font, Vector2.new(UnionResult.parentWidth - (TEXTBUBBLEXPADDING + BUBBLEPADDING) * 2 - (if UnionResult.wideMode then TEXTBUBBLEXWIDEADDITIONALPADDING else 0), 10000)).X + BUBBLEPADDING * 2,
-			hasTail = UnionResult.hasTail,
-			isIncoming = UnionResult.isIncoming,
-			isPending = UnionResult.isPending,
-			isUnfiltered = UnionResult.isUnfiltered,
-			isRepliedTo = UnionResult.isRepliedTo,
-			isPressed = UnionResult.isPressed,
-			isLastMessageInMessageGroup = UnionResult.isLastMessageInMessageGroup,
-			bubbleRef = UnionResult.bubbleRef,
-			LayoutOrder = UnionResult.LayoutOrder,
-			[RoactModule.Change.AbsoluteSize] = UnionResult[RoactModule.Change.AbsoluteSize]
-		})
+		if FFlagAppChatFullPlaintextBeforeGameCardsModule or Url == nil then
+			return nil
+		else
+			local ParentWidthDelta = UnionResult.parentWidth - (TEXTBUBBLEXPADDING + BUBBLEPADDING) * 2 - (if UnionResult.wideMode then TEXTBUBBLEXWIDEADDITIONALPADDING else 0)
+			
+			return RoactModule.createElement(PlainTextModule, {
+				text = Url,
+				font = UnionResult.font,
+				textSize = UnionResult.textSize,
+				innerPadding = UnionResult.innerPadding,
+				maxWidth = (if FoundationFontFaceMigration then GetTextSizeFunction(Url, UnionResult.textSize, UnionResult.font, Vector2.new(ParentWidthDelta, 10000)) else Text.GetTextBounds(Url, UnionResult.font, UnionResult.textSize, Vector2.new(ParentWidthDelta, 10000))).X + BUBBLEPADDING * 2,
+				hasTail = UnionResult.hasTail,
+				isIncoming = UnionResult.isIncoming,
+				isPending = UnionResult.isPending,
+				isUnfiltered = UnionResult.isUnfiltered,
+				isRepliedTo = UnionResult.isRepliedTo,
+				isPressed = UnionResult.isPressed,
+				isLastMessageInMessageGroup = UnionResult.isLastMessageInMessageGroup,
+				bubbleRef = UnionResult.bubbleRef,
+				LayoutOrder = UnionResult.LayoutOrder,
+				[RoactModule.Change.AbsoluteSize] = UnionResult[RoactModule.Change.AbsoluteSize]
+			})
+		end
 	else
 		UnionResult1.isStartOfGroup = UnionResult.hasTail
 		UnionResult1.isIncoming = UnionResult.isIncoming

@@ -58,7 +58,6 @@ return {
 	usePageEntrySnackbar = require(script.usePageEntrySnackbar),
 	useComponentConfig = require(script.hooks.useComponentConfig),
 	usePreferredTextSizeLineBudget = require(script.hooks.usePreferredTextSizeLineBudget),
-	usePublishContainerWidth = require(script.hooks.usePublishContainerWidth),
 	useEntrySurfacing = require(script.hooks.useEntrySurfacing),
 	useInputData = require(script.hooks.useInputData),
 	useSduiPageScopeField = require(script.hooks.useSduiPageScopeField),

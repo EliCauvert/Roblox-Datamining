@@ -6,7 +6,9 @@ local ApiFetchGameDetails = GameDetailRoduxModule.GameDetails.ApiFetchGameDetail
 local FetchGamePlayabilityAndProductInfo = GameDetailRoduxModule.FetchGamePlayabilityAndProductInfo
 local ApiFetchAgeRecommendations = GameDetailRoduxModule.AgeRecommendations.ApiFetchAgeRecommendations
 local FetchUserGameVotes = require(Parent.GameVotesRodux).UserGameVotes.FetchUserGameVotes
+local GameInfosReducer = require(Parent.GameInfosRodux).GameInfosReducer
 local DataHydrationModule = require(Parent.DataHydration)
+local FFlagMigrateGameInfoToStore = require(Parent.SharedFlags).FFlagMigrateGameInfoToStore
 local NextDataExpirationTimeRoduxModule = require(Parent.NextDataExpirationTimeRodux)
 local SetNextDataExpirationTimeFunction = NextDataExpirationTimeRoduxModule.SetNextDataExpirationTime
 local NextDataExpirationTimeReducer = NextDataExpirationTimeRoduxModule.NextDataExpirationTimeReducer
@@ -66,15 +68,19 @@ local _ = function(p1, Key, p2)
 end
 
 local function hasContentMaturity(State, p1): boolean
-	-- upvalues: DataHydrationModule (copy)
+	-- upvalues: FFlagMigrateGameInfoToStore (copy), DataHydrationModule (copy), GameInfosReducer (copy)
 	local AgeRecommendation = State.AgeRecommendations and State.AgeRecommendations[p1]
 	
 	if AgeRecommendation and AgeRecommendation.summary and AgeRecommendation.summary.ageRecommendation and AgeRecommendation.summary.ageRecommendation.contentMaturity then
 		return true
-	else
+	elseif FFlagMigrateGameInfoToStore then
 		local DataResult = DataHydrationModule.Game.getGameInfoStore(false).getGameInfo(p1).data(false)
 		
 		return DataResult ~= nil and DataResult.contentMaturity ~= nil
+	else
+		local PersonalizationEntry = State.Personalization and (State.Personalization[GameInfosReducer.key] and State.Personalization[GameInfosReducer.key][p1])
+		
+		return PersonalizationEntry and PersonalizationEntry.contentMaturity ~= nil
 	end
 end
 

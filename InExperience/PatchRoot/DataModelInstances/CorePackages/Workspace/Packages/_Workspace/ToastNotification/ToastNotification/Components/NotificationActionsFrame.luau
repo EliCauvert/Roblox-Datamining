@@ -2,7 +2,9 @@
 local Context = Parent.context
 local DependenciesModule = require(Parent.dependencies)
 local UIBlox = DependenciesModule.UIBlox
-local UseTokensFunction = require(Parent.Parent.Foundation).Hooks.useTokens
+local FoundationModule = require(Parent.Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseLocalizationFunction = DependenciesModule.Localization.Hooks.useLocalization
 local TypeModule = require(Parent.type)
 local ButtonStack = UIBlox.App.Button.ButtonStack
@@ -26,9 +28,9 @@ local function _(Alert)
 	return if Alert == TypeModule.SENDERButtonStyleEnum.Growth then ButtonType.PrimaryContextual elseif Alert == TypeModule.SENDERButtonStyleEnum.Primary then ButtonType.PrimarySystem elseif Alert == TypeModule.SENDERButtonStyleEnum.Secondary then ButtonType.Secondary elseif Alert == TypeModule.SENDERButtonStyleEnum.Alert then ButtonType.Alert else ButtonType.Secondary
 end
 
-local function v19(List, p1, Callback, UseRefResult)
-	-- upvalues: UseTokensFunction (copy), UseNotificationCardDataModule (copy), GetTimerFromCardDataFunction (copy), UseTimeRemainingMapModule (copy), TypeModule (copy), ButtonType (copy)
-	local UseTokensResult = UseTokensFunction()
+local function v21(List, p1, Callback, UseRefResult)
+	-- upvalues: FoundationFontFaceMigration (copy), UseTokensFunction (copy), UseNotificationCardDataModule (copy), GetTimerFromCardDataFunction (copy), UseTimeRemainingMapModule (copy), TypeModule (copy), ButtonType (copy)
+	local UseTokensResult = if FoundationFontFaceMigration then UseTokensFunction() else nil
 	local UseNotificationCardDataModuleResult = UseNotificationCardDataModule()
 	local t = {}
 	
@@ -48,7 +50,7 @@ local function v19(List, p1, Callback, UseRefResult)
 				buttonType = PrimaryContextual,
 				props = {
 					text = if value1 and value1.timer and value1.timer.showTimeOnElement then `{value1.label.text} ({UseTimeRemainingMapModuleResult[value1.timer.showTimeOnElement]}{p1.secondsAbbreviated})` else value1 and value1.label and value1.label.text or "",
-					fontStyle = UseTokensResult.Typography.TitleLarge,
+					fontStyle = if FoundationFontFaceMigration then UseTokensResult.Typography.TitleLarge else nil,
 					onActivated = function()
 						-- upvalues: Callback (copy), value1 (copy)
 						if Callback then
@@ -64,7 +66,7 @@ local function v19(List, p1, Callback, UseRefResult)
 end
 
 return function(p2)
-	-- upvalues: UseNotificationCardStateModule (copy), UseNotificationCardDataModule (copy), UseLocalizationFunction (copy), ReactModule (copy), UseFocusGuiObjectFunction (copy), v19 (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), ButtonStack (copy), DefaultButtonHeight (copy), DefaultContentPadding (copy)
+	-- upvalues: UseNotificationCardStateModule (copy), UseNotificationCardDataModule (copy), UseLocalizationFunction (copy), ReactModule (copy), UseFocusGuiObjectFunction (copy), v21 (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), ButtonStack (copy), DefaultButtonHeight (copy), DefaultContentPadding (copy)
 	local Button = UseNotificationCardStateModule("button")
 	local HandleActions = UseNotificationCardDataModule().handleActions
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -86,7 +88,7 @@ return function(p2)
 			UseFocusGuiObjectResult(nil)
 		end
 	end, { ShouldAutoFocus, UseFocusGuiObjectResult })
-	local Buttons = v19(Button, UseLocalizationResult, HandleActions, UseRefResult)
+	local Buttons = v21(Button, UseLocalizationResult, HandleActions, UseRefResult)
 	
 	return if #Buttons > 0 then ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

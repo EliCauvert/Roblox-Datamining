@@ -1,12 +1,14 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local ReactModule = require(CorePackages.Packages.React)
-local NormalizeFontFaceFunction = require(CorePackages.Packages.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseStyleFunction = require(CorePackages.Packages.UIBlox).Core.Style.useStyle
 local AvatarPartViewportModule = require(script.Parent.AvatarPartViewport)
 local GetFFlagSingleUploadMakeupSupportModule = require(script.Parent.Parent.Parent.Parent.Flags.GetFFlagSingleUploadMakeupSupport)
 
 return function(Frame)
-	-- upvalues: UseStyleFunction (copy), GetFFlagSingleUploadMakeupSupportModule (copy), ReactModule (copy), AvatarPartViewportModule (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseStyleFunction (copy), GetFFlagSingleUploadMakeupSupportModule (copy), ReactModule (copy), AvatarPartViewportModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseStyleResultFont = UseStyleResult.Font
 	local Asset = Frame.asset
@@ -62,7 +64,8 @@ return function(Frame)
 			TextYAlignment = Enum.TextYAlignment.Top,
 			Size = UDim2.new(1, 0, 0, 50),
 			TextColor3 = Color,
-			FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionLarge.Font),
+			Font = if FoundationFontFaceMigration then nil else CaptionHeader.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionLarge.Font) else nil,
 			TextSize = CaptionHeader.RelativeSize * UseStyleResultFont.BaseSize,
 			TextTruncate = Enum.TextTruncate.AtEnd
 		})

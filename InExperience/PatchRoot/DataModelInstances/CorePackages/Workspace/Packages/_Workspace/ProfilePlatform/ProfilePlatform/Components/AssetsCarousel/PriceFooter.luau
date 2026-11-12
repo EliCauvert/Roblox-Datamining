@@ -2,7 +2,9 @@
 local Parent = ProfilePlatform.Parent
 local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
-local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
@@ -11,7 +13,7 @@ local FFlagProfilePlatformFixResaleLimitedPriceModule = require(ProfilePlatform.
 local IconsCommonRobux = UIBloxModule.App.ImageSet.Images["icons/common/robux"]
 
 return function(p1)
-	-- upvalues: UseStyleFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), FFlagProfilePlatformFixResaleLimitedPriceModule (copy), ReactModule (copy), ImageSetLabel (copy), IconsCommonRobux (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseStyleFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), FFlagProfilePlatformFixResaleLimitedPriceModule (copy), ReactModule (copy), ImageSetLabel (copy), IconsCommonRobux (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseStyleResultFont = UseStyleResult.Font
 	local Theme = UseStyleResult.Theme
@@ -60,7 +62,8 @@ return function(p1)
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, if Flag then -(_Vector2.X + 4) else 0, 1, 0),
-			FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.TitleLarge.Font),
+			Font = if FoundationFontFaceMigration then nil else UseStyleResultFont.SubHeader1.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.TitleLarge.Font) else nil,
 			TextColor3 = Theme.SecondaryContent.Color,
 			TextTransparency = Theme.SecondaryContent.Transparency,
 			TextSize = ScaledBaseSize,

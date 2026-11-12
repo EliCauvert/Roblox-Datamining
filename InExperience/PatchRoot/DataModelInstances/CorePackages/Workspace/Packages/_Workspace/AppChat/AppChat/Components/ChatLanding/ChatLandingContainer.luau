@@ -387,7 +387,7 @@ function ChatLandingContainer(p2)
 	local UseCanAccessPartyModuleResult1 = SquadQuickStartExperimentation.getPartyQuickStartChangesEnabled() and UseCanAccessPartyModuleResult
 	local IsNotDone1 = IsNotDone
 	
-	if FFlagAppChatConversationLoadRetryModule and UseIsChatEnabledModuleResult and (not v1 and IsEmpty) then
+	if FFlagAppChatConversationLoadRetryModule and UseIsChatEnabledModuleResult and not v1 and IsEmpty then
 		IsNotDone1 = IsNotDone1 or IsFetchingMatch
 	end
 	local Element1 = nil
@@ -401,7 +401,7 @@ function ChatLandingContainer(p2)
 			pageBackgroundTransparency = if HasUseThemeBackgroundResult then 1 else nil
 		})
 		Flag = true
-	elseif FFlagAppChatConversationLoadRetryModule and UseIsChatEnabledModuleResult and not v1 and IsEmpty and UseIsAppLoadedModuleResult and not IsIsFetchingConversations and IsFailedMatch then
+	elseif FFlagAppChatConversationLoadRetryModule and UseIsChatEnabledModuleResult and (not v1 and IsEmpty and UseIsAppLoadedModuleResult and not IsIsFetchingConversations and IsFailedMatch) then
 		Element1 = ReactModule.createElement(FoundationModule.Empty, {
 			text = UseLocalizationResult.conversationLoadError,
 			button = {
@@ -410,7 +410,7 @@ function ChatLandingContainer(p2)
 			}
 		})
 		Flag = true
-	elseif UseIsChatEnabledModuleResult and (v1 or (not IsEmpty or not UseIsAppLoadedModuleResult or IsIsFetchingConversations)) then
+	elseif UseIsChatEnabledModuleResult and (v1 or not IsEmpty or not UseIsAppLoadedModuleResult or IsIsFetchingConversations) then
 		Flag = true
 		Flag1 = true
 		Flag2 = true
@@ -560,23 +560,23 @@ function ChatLandingContainer(p2)
 			#UseMemoResult
 		})
 	end
-	local UseRefResult2 = ReactModule.useRef({
+	local UseRefResult1 = ReactModule.useRef({
 		isChatEnabled = UseIsChatEnabledModuleResult,
 		isChatLoading = IsNotDone
 	})
 	ReactModule.useEffect(function()
-		-- upvalues: UseRefResult2 (copy), UseIsChatEnabledModuleResult (copy), IsNotDone (copy)
-		UseRefResult2.current = {
+		-- upvalues: UseRefResult1 (copy), UseIsChatEnabledModuleResult (copy), IsNotDone (copy)
+		UseRefResult1.current = {
 			isChatEnabled = UseIsChatEnabledModuleResult,
 			isChatLoading = IsNotDone
 		}
 	end, { UseIsChatEnabledModuleResult, IsNotDone })
 	UseEffectFunction(function()
-		-- upvalues: UseChatIsVisibleModuleResult (copy), EmitFunction (ref), ChatLandingTelemetryEventsModule (upval), UseRefResult2 (copy)
+		-- upvalues: UseChatIsVisibleModuleResult (copy), EmitFunction (ref), ChatLandingTelemetryEventsModule (upval), UseRefResult1 (copy)
 		return function()
-			-- upvalues: UseChatIsVisibleModuleResult (upval), EmitFunction (upval), ChatLandingTelemetryEventsModule (upval), UseRefResult2 (upval)
+			-- upvalues: UseChatIsVisibleModuleResult (upval), EmitFunction (upval), ChatLandingTelemetryEventsModule (upval), UseRefResult1 (upval)
 			if UseChatIsVisibleModuleResult then
-				EmitFunction(ChatLandingTelemetryEventsModule.AppChatClosed, UseRefResult2.current)
+				EmitFunction(ChatLandingTelemetryEventsModule.AppChatClosed, UseRefResult1.current)
 			end
 		end
 	end, { UseChatIsVisibleModuleResult })
@@ -584,12 +584,12 @@ function ChatLandingContainer(p2)
 	if not FFlagSignalsNavP3hMisc then
 		return Element
 	end
-	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(nil)
 	
-	if UseChatIsVisibleModuleResult or UseRefResult1.current == nil then
-		UseRefResult1.current = Element
+	if UseChatIsVisibleModuleResult or UseRefResult2.current == nil then
+		UseRefResult2.current = Element
 	end
-	return UseRefResult1.current
+	return UseRefResult2.current
 end
 
 local function paginatorParameters()

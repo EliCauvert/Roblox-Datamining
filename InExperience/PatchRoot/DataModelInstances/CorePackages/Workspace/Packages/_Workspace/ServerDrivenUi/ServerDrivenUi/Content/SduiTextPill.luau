@@ -4,9 +4,10 @@ local ReactModule = require(Parent.React)
 local Colors = require(Parent.Style).Colors
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Colors (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Colors (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	if p1.text and p1.text ~= "" then
 		local LayoutOrder = p1.layoutOrder
 		local AnchorPoint = p1.anchorPoint
@@ -44,7 +45,8 @@ return ReactModule.memo(function(p1)
 				AutomaticSize = Enum.AutomaticSize.X,
 				Text = p1.text,
 				TextColor3 = TextColor3 or UseTokensResult.LightMode.Content.Emphasis.Color3,
-				FontFace = NormalizeFontFaceFunction(FontStyle.Font),
+				Font = if FoundationFontFaceMigration then nil else FontStyle.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(FontStyle.Font) else nil,
 				TextSize = FontStyle.FontSize,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,

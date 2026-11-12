@@ -187,8 +187,8 @@ Common.Presence.Label.Online,在線
 Common.Presence.Label.RobloxStudio,Roblox Studio
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,動畫太長（{duration} 秒）。動作動畫最長只能 {maxLength} 秒。
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,動畫太短（{duration} 秒）。動作動畫必須超過 {minLength} 秒。
-Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,{cageName} 中的圍籠部位放置違規：{upperPart}未正確放置在{lowerPart}上方。
-Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,{cageName} 中的圍籠零件 {partName} 有 {actualCount} 個頂點，預期約有 {expectedCount} 個。這可能表示該圍籠區域缺少或出現重複幾何形狀。
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,{cageName} 中的圍籠零件放置違規：{upperPart} 未正確放置在 {lowerPart} 上方。
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,{cageName} 中的圍籠零件 {partName} 有 {actualCount} 個頂點，預期約為 {expectedCount} 個。這可能表示該身體區域缺少或出現重複幾何形狀。
 Common.UGCValidation.ErrorLabel.AQSFail_CageUV,{cage_name} 的 UV 值不正確，與範本不匹配。{incorrect_uv_count} 個 UV 不正確（{unreferenced_vertex_count} 個未參考、{non_template_uv_count} 個非範本、{duplicate_mapping_count} 個重複對映），以及 {unmatched_template_count} 個未匹配的範本頂點。請更正圍籠的 UV，使其與範本匹配。
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,你的身體包含小型未連接的網格元件（網格島）。請移除浮動幾何，並確保所有網格部位皆已正確連接。
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,{partName} 有 {num_disconnected_components} 個未連接的元件，超過 {max_disconnected_components} 個的上限。
@@ -199,7 +199,7 @@ Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,頭部圍籠未緊�
 Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,已修改的外部圍籠頂點中，有 {irrelevant_percent}% 未覆蓋飾品。請調整圍籠，使其更貼合飾品形狀。
 Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,{cage_name} 的 UV 值不正確。{incorrect_uv_count} 個 UV 不正確（{unreferenced_vertex_count} 個未參考、{non_template_uv_count} 個非範本、{duplicate_mapping_count} 個重複對映），以及 {unmatched_template_count} 個未匹配的範本頂點。
 Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,{partName} 有 {degenerate_triangle_percent}% 的退化三角形。
-Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,動態頭部出現表情品質問題。畫面上的左眼（視覺化外掛程式中頭部左側的紅色圓點）閉上：{left_eye_close}、畫面上的右眼（視覺化外掛程式中頭部右側的藍色圓點）閉上：{right_eye_close}、嘴巴張開（視覺化外掛程式中的綠色圓點）：{mouth_open}、開心：{is_happy}、悲傷：{is_sad}。
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,動態頭部有表情品質問題。左眼閉上：{left_eye_close}、右眼閉上：{right_eye_close}、嘴巴張開：{mouth_open}、開心：{is_happy}、悲傷：{is_sad}。
 Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,關節設定異常。關節總數：{joint_number}，左手關節：{left_hand_joint_number}，右手關節：{right_hand_joint_number}。
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,{partName} 在總共 {num_disconnected_components} 個元件中，有 {num_small_volume_islands} 個小型未連接的網格島嶼。請移除浮動幾何。
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,{partName} 具有非流形幾何。請檢查是否有非平面的面、自我相交表面，或是兩個以上的面共用的邊。
@@ -208,9 +208,7 @@ Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,{mesh_outside_outer
 Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,輸入的資料不完整或無效，因此無法計算 {measureName} 的驗證資料。這並不會使你無法上傳。
 Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,紋理 {textureName} 的複雜度較低。紋理可能缺乏足夠的細節或變化。
 Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,紋理 {textureName} 的解析度較低，為 {texture_width}x{texture_height}。建議使用解析度較高的紋理。
-Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,{partName} 有 {intersecting_tri_face_percent}% 個自相交面，超過允許的 {threshold}%。
 Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,"{partName} 有 {uv_outside_bound_vert_percent}% 的 UV 頂點超出 [0,1] 界限。"
-Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,{partName} 有 {similar_vertex_percent}% 個類似頂點，超過允許的 {threshold}%。
 Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,「{PartName}」中的飾品附件「{AttachmentName}」，必須放置在網格表面附近。目前位置 [{CurrentPosition}] 超出有效區域。請將其移動至更靠近 [{ClosestValidPosition}] 的位置。
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,手把已蒙皮至關節 {jointName}，但該關節不屬於允許的結構。僅允許使用標準 R15 關節和蒙皮轉移關節。
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,{assetType} 必須使用蒙皮轉移，但你缺少必要的關節 {requiredJointName}。
@@ -222,44 +220,14 @@ Common.UGCValidation.ErrorLabel.AccessorySkinning_WeightNotFull,已蒙皮至轉�
 Common.UGCValidation.ErrorLabel.AnimationPack_DuplicateAnimationId,動畫包組合中的多個片段使用了重複的動畫編號「{animationId}」：{instancePaths}。每個動畫片段都必須各自引用不同的動畫素材。
 Common.UGCValidation.ErrorLabel.AnimationPack_InvalidR15AnimChildren,動畫包組合缺少預期的動畫類型：{missingAnimationTypes}。每個動畫類型都必須有一個 R15Anim 資料夾，其中包含其預期的 StringValue 子資料夾。
 Common.UGCValidation.ErrorLabel.Animation_WeightNotPositive,動畫「{animationName}」的 Weight 值為 {weight}，但 Weight 必須大於 0。請修正此動畫。
-Common.UGCValidation.ErrorLabel.AssetBounds_InconsistentScaleType,所有網格結構在其 AvatarPartScaleType 子項中都必須具有相同的數值。請確認數值是否匹配。
-Common.UGCValidation.ErrorLabel.AssetBounds_TooLarge,{assetName} 網格和關節在 {axis} 軸上的大小為「{currentSize}」，大於允許的邊界方塊在 {axis} 軸上的最大尺寸「{maxSize}」。你必須縮小網格／關節
-Common.UGCValidation.ErrorLabel.AssetBounds_TooSmall,{assetName} 網格在 {axis} 軸上的大小為「{currentSize}」，小於允許的邊界方塊在 {axis} 軸上的最小尺寸「{minSize}」。你必須放大網格。
-Common.UGCValidation.ErrorLabel.AssetDoesNotExist,素材「{AssetId}」參照的實例「{InstancePath}」不存在或無法載入。請將其替換為有效的素材編號。
-Common.UGCValidation.ErrorLabel.AssetOpacity_BelowThreshold,從 {ViewName} 看來，{AssetName}不夠不透明。不透明度為 {Opacity}，但必須高於 {Threshold}。
-Common.UGCValidation.ErrorLabel.AssetOpacity_Invisible,「{AssetName}」的網格完全隱形。
-Common.UGCValidation.ErrorLabel.AssetOpacity_MeshLoadFailed,無法載入網格結構「{PartName}」的網格。請確認網格存在，然後再試一次。
-Common.UGCValidation.ErrorLabel.AssetOpacity_NoTriangles,「{AssetName}」的網格沒有三角形。
-Common.UGCValidation.ErrorLabel.AssetOpacity_NonZeroTransparency,零件「{PartName}」的透明度不是零。零件透明度應始終正好為零。
-Common.UGCValidation.ErrorLabel.AssetOpacity_ZeroSize,「{AssetName}」的網格大小不應為零。
 Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,無法在 {ParentPath} 中找到名為 {ExpectedName}、類型為 {ExpectedClass} 的必要項目
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,以下個體不屬於已核准的結構定義，應予以移除：{UnexpectedDescendantPaths}。
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,上傳的素材應為 {ExpectedClass}，但實際上為 {RootClass}。
-Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,上傳的素材應命名為 {ExpectedName}，但實際上命名為 {RootName}。
-Common.UGCValidation.ErrorLabel.AttachmentBoundsAssetCalculationFailed,在檢查附件位置之前，無法計算「{InstancePath}」的網格邊界。網格資料可能遺失或格式不正確；請重新匯入素材，然後再試一次。
-Common.UGCValidation.ErrorLabel.AttachmentBoundsCalculationFailed,無法計算「{PartName}」中附件「{AttachmentName}」的邊界。網格資料可能遺失或格式不正確；請重新匯入素材，然後再試一次。
-Common.UGCValidation.ErrorLabel.AttachmentOrientationDeviation,附件「{InstancePath}」的方向與預期相差過大。建議的方向為 {ExpectedOrientation}，最大偏差為 {MaxDeviation} 度。
-Common.UGCValidation.ErrorLabel.AttachmentOrientationRigRotated,"骨架附件無法旋轉。請將「{InstancePath}」的方向設定為 (0,0,0)。"
-Common.UGCValidation.ErrorLabel.BodyBlocking_ZeroMeshSize,將「{meshName}」的網格成像：{details}。請增加網格的大小。
-Common.UGCValidation.ErrorLabel.BodyMesh_LoadFailed,無法載入「{meshName}」的網格。請確認網格存在，然後再試一次。
-Common.UGCValidation.ErrorLabel.BodyMesh_SizeMismatch,{meshContext} 與另一個網格 {otherMeshContext} 相比，其大小的差異超過最大值 {maxDiff}。你必須編輯模型來調整其大小
-Common.UGCValidation.ErrorLabel.BodyPartCageDistanceValid_TooFar,在 {partName} 的圍籠網格上找到一個頂點，該頂點距離最近的成像網格有 {distance} 個磚塊，上限則為 {maxDistance} 個磚塊。請讓圍籠網格更貼近成像網格的形狀和大小。
-Common.UGCValidation.ErrorLabel.BoundingBox_ValidationFailed,{reason}
-Common.UGCValidation.ErrorLabel.CageMeshDistanceBounded_DistanceTooHigh,外部圍籠與網格之間的平均距離過大（{distance}）。請調整圍籠，使其更貼合網格。
-Common.UGCValidation.ErrorLabel.CageMeshDistanceBounded_MeshOutsideCage,外部圍籠與網格之間的平均距離過大。網格似乎位於外部圍籠之外。
-Common.UGCValidation.ErrorLabel.CageUV_ExtraDuplicateUVs,「{partName}」的 {cageType} 圍籠中有 {count} 個 UV 值不屬於該範本。請更正圍籠的 UV。
-Common.UGCValidation.ErrorLabel.CageUV_IncorrectUVCount,「{partName}」外部圍籠應有 {requiredUVCount} 個不重複的 UV，但實際上卻有 {actualUVCount} 個。請確認網格具有所需數量的不重複 UV，然後再試一次。
-Common.UGCValidation.ErrorLabel.CageUV_InvalidUVValue,"在「{partName}」中找到超出 [0, 1] 範圍的無效 UV 值。你必須編輯 UV 映射來解決此問題。"
-Common.UGCValidation.ErrorLabel.CageUV_RenderMeshBoundsCheckFailed,無法在外部圍籠修改區域的邊界方塊內執行測試成像網格。請確認圍籠網格和成像網格均存在，然後再試一次。
-Common.UGCValidation.ErrorLabel.CageUV_RenderMeshOutsideModifiedArea,只有 {currentPercent}% 的成像網格頂點位於 WrapLayer CageMesh（外部網格）的已修改 {allowedArea} 區域內。必須達到 {requiredPercent}%。將成像網格移至 WrapLayer CageMesh（外部網格）的已修改區域內。
-Common.UGCValidation.ErrorLabel.CageUV_TooFewMainModified,{assetTypeName} 的 WrapLayer CageMesh（外部網格）必須修改 {mainArea} 區域中 {requiredPercent}% 的圍籠 UV。目前僅修改了 {currentPercent}%。請將素材移至身體的正確區域。
-Common.UGCValidation.ErrorLabel.CageUV_TooManyExcludedModified,WrapLayer CageMesh（外部網格）中 {modifiedPercent}% 的已修改圍籠 UV 位於身體的預期區域之外。對於 {assetTypeName}，已修改的 UV 中最多只能有 {maxPercent}% 位於 {allowedArea} 區域外。請將素材移至身體的正確區域。
-Common.UGCValidation.ErrorLabel.CageUV_ZeroAreaTriangle,在「{partName}」的 UV 映射中偵測到零面積的三角形。你必須編輯 UV 映射以解決此問題。
-Common.UGCValidation.ErrorLabel.CollisionFidelityWrong,「{InstancePath}」的 CollisionFidelity 不正確。預期應為 {ExpectedFidelity}。
 Common.UGCValidation.ErrorLabel.ContentNotEditable,{InstanceFullName}.{FieldName} 仍有未儲存的可編輯內容。請在發佈前將其儲存為素材，然後再試一次。
-Common.UGCValidation.ErrorLabel.CoplanarTri_TooMany,偵測到模型網格「{MeshName}」中有過多共面三角形相交。在 {TriangleCount} 個三角形網格中，最多可以有 {MaxIntersections} 個交點。請編輯網格，以減少共面三角形的相交數量。
+Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,CurveAnimation 中的身體部位「{bodyPartName}」包含位移（平移）軌道。動畫身體部位僅可旋轉；不允許使用位移軌道。請移除此身體部位的位移軌道。
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,CurveAnimation 中的身體部位「{bodyPartName}」從起始位置移動 {distance} 個磚塊。允許的最大平移距離為 {maxDistance} 個磚塊。請減少身體部位的位移。
-Common.UGCValidation.ErrorLabel.CurveAnim_BoneRequiresParent,骨骼資料夾「{boneName}」要求「{parentBoneName}」也存在於動畫中。
+Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,CurveAnimation 包含 HRD/DRD 骨骼，且身體部位「{bodyPartName}」包含位移（平移）軌道。當動畫中存在任何骨骼時，任何身體部位都不得平移，以防止關節分離。請移除身體部位中的所有位移軌道。
+Common.UGCValidation.ErrorLabel.CurveAnim_BonePositionNotAllowed,CurveAnimation 中的骨骼 {boneName} 包含位移（平移）軌道。HRD/DRD 骨骼僅可旋轉；位移軌道會導致關節分離，因此不允許使用。請移除此骨骼的位移動畫。
 Common.UGCValidation.ErrorLabel.CurveAnim_BoneTranslationExceedsThreshold,CurveAnimation 中的骨骼「{boneName}」從起始位置移動 {distance} 個磚塊。允許的最大平移距離為 {maxDistance} 個磚塊。請減少骨骼的位移。
 Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation 包含尚未支援的 HRD/DRD 骨骼資料夾。請在上傳前移除所有骨骼子資料夾。
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,CurveAnimation 中的身體部位不能低於距 HumanoidRootPart 高度 {minHeight} 個磚塊的位置，也不能高於距 HumanoidRootPart 高度 {maxDistance} 個磚塊的位置。請修正此動畫。
@@ -271,27 +239,18 @@ Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,CurveAnimatio
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,CurveAnimation 中的資料夾「{boneName}」並非可辨識的 HRD/DRD 骨骼名稱。動畫子資料夾必須為有效的 R15 身體部位，或可辨識的骨骼名稱（例如：HeadBase、Spine、Chest、LeftClavicle、RightClavicle、LeftToeBase、RightToeBase，或 LeftHandIndex1 等手指骨骼）。
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidCurveData,CurveAnimation 包含具有無效 Time 或 Value 的 Curve。請修正此動畫。
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidInstanceTypes,CurveAnimation 層級只能包含 {allowedTypes}。請移除任何其他實例類型。
-Common.UGCValidation.ErrorLabel.CurveAnim_InvalidLength,曲線動畫 {animationName} 的長度必須介於 {minLength} 到 {maxLength} 秒之間。請修正此動畫。
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidMarkerData,CurveAnimation 包含具有無效 Time 或 Value 的 MarkerCurve，或者 Value 過長。請修正動畫。
-Common.UGCValidation.ErrorLabel.CurveAnim_InvalidNumericalData,曲線動畫 {animationName} 包含具有無效數值資料的曲線。請修正此動畫。
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidRigData,AnimationRigData 未通過內部驗證。請確認 AnimationRigData 已正確設定。
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidRigDataR15Plus,AnimationRigData 未通過 R15+ 內部驗證。請確認 AnimationRigData 已正確設定，可用於骨骼動畫。
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidTags,CurveAnimation 只能包含單一時間戳記標註。請移除所有其他標註。
-Common.UGCValidation.ErrorLabel.CurveAnim_JointRotationExceeded,在曲線動畫 {animationName} 中的第 {time} 秒，關節 {bodyPart} 相對於靜止姿勢具有 {rotation} 度的旋轉角度。允許的最大值為 {maxRotation} 度。請修正此動畫。
 Common.UGCValidation.ErrorLabel.CurveAnim_KeysTooClose,CurveAnimation 包含 Curve {curvePath}，其索引鍵在時間上過於接近，不及動畫的影格率上限 {maxFPS}。請修正此動畫。
 Common.UGCValidation.ErrorLabel.CurveAnim_LoopingNotEnabled,CurveAnimation「{animationName}」未啟用循環。上傳到市集的動畫必須循環。請啟用循環屬性。
 Common.UGCValidation.ErrorLabel.CurveAnim_MultipleBodyRoots,CurveAnimation 包含多個身體部位或 HumanoidRootPart 子資料夾。請確保只有一個子資料夾以身體部位或 HumanoidRootPart 命名。
 Common.UGCValidation.ErrorLabel.CurveAnim_MultipleRigData,CurveAnimation 包含多個 AnimationRigData 子資料夾類型。請確保只有一個 AnimationRigData 子資料夾類型。
 Common.UGCValidation.ErrorLabel.CurveAnim_NegativeKeyTime,CurveAnimation 包含 Curve {curvePath}，其索引鍵具有負值的時間。請修正此動畫。
 Common.UGCValidation.ErrorLabel.CurveAnim_NoBodyRoot,CurveAnimation 不包含任何以身體部位或 HumanoidRootPart 命名的子資料夾。請確保只有一個以身體部位或 HumanoidRootPart 命名的子資料夾。
-Common.UGCValidation.ErrorLabel.CurveAnim_NoJointManipulation,曲線動畫 {animationName} 不含任何關節操作。
 Common.UGCValidation.ErrorLabel.CurveAnim_NoRigData,CurveAnimation 不包含任何 AnimationRigData 子資料夾類型。請確保只有一個 AnimationRigData 子資料夾類型。
 Common.UGCValidation.ErrorLabel.CurveAnim_NotCurveAnimation,參考的動畫不是 CurveAnimation。請確認動畫已正確上傳。
-Common.UGCValidation.ErrorLabel.CurveAnim_PartTooFar,在曲線動畫 {animationName} 中的第 {time} 秒，身體部位 {bodyPart} 位於距 HumanoidRootPart 高度 {distance} 個磚塊的位置。身體部位不能高於距 HumanoidRootPart 高度 {maxDistance} 個磚塊的位置。請修正此動畫。
-Common.UGCValidation.ErrorLabel.CurveAnim_PartTooLow,在曲線動畫 {animationName} 中的第 {time} 秒，身體部位 {bodyPart} 位於距 HumanoidRootPart 高度 {height} 個磚塊的位置。身體部位不能低於距 HumanoidRootPart 高度 {minHeight} 個磚塊的位置。請修正此動畫。
-Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,曲線動畫 {animationName} 包含位置分離的身體部位。只有 LowerTorso 可以變更位置。所有其他身體部位只能變更其方向。{bodyPart} 從其父元素移動的距離超過 {maxMovement} 個磚塊。請修正此動畫。
-Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,在曲線動畫 {animationName} 中的第 {time} 秒，身體部位 {bodyPart} 以每秒 {speed} 度的旋轉速度移動。每秒最多可旋轉 {maxSpeed} 度。請修正此動畫。
-Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,在曲線動畫 {animationName} 中的第 {time} 秒，身體部位 {bodyPart} 以每秒 {speed} 個磚塊的速度移動。每秒最多可移動 {maxSpeed} 個磚塊。請修正此動畫。
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,CurveAnimation 中的身體部位 {bodyPart}，在不同影格之間移動的距離超過 {maxMovement} 個磚塊。請修正此動畫。
 Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,CurveAnimation 結構無效：{detail}。請確認動畫符合預期的架構。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation 具有 {count} 個後代（上限為 {maxAllowed} 個）。請減少後代數量。
@@ -300,24 +259,12 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation 包
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation 包含一個含有 {count} 個 Marker 的 MarkerCurve（每個 MarkerCurve 的上限為 {maxAllowed} 個）。請修正此動畫。
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation 包含未預期的子資料夾類型：{childName}
 Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,{InstanceFullName}.{FieldName} 將動畫 {AssetId} 置頂至版本 {Version}，但動畫目前尚無法置頂至特定版本。請移除「&version={Version}」，然後再試一次。
-Common.UGCValidation.ErrorLabel.DescendantIdFetchFailed,無法擷取 {InstanceFullName} 的審核結果。請確認所有素材皆由目前使用者擁有。
-Common.UGCValidation.ErrorLabel.DescendantIdMalformed,無法剖析 {InstanceFullName}.{FieldName} 中的 ContentId。請確認你使用的是包含有效編號的有效網址，然後再試一次。
-Common.UGCValidation.ErrorLabel.DescendantIdMissing,{InstanceFullName}.{FieldName} 不可為空白。請確認已指派有效的素材，然後再試一次。
-Common.UGCValidation.ErrorLabel.DescendantIdNotApproved,素材未通過審核：{ModerationMessages}
-Common.UGCValidation.ErrorLabel.DescendantIdNotOwned,素材 {AssetId}（{InstanceFullName}.{FieldName}）不屬於授權的創作者。
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,素材 {AssetId}（{InstanceFullName}.{FieldName}）未發佈。請發佈後再試一次。
-Common.UGCValidation.ErrorLabel.DescendantIdVersionNotLatest,{InstanceFullName}。{FieldName} 使用的是素材 {AssetId} 的第 {Version} 版，但目前只能使用其最新版本 {LatestVersion}。請使用第 {LatestVersion} 版或移除「&version={Version}」，然後再試一次。
-Common.UGCValidation.ErrorLabel.DescendantIdsTooMany,上傳的模型子素材（網格、材質等）過多，無法按原樣處理。你必須重新排列模型。
-Common.UGCValidation.ErrorLabel.DynHead_ControlsInactive,{headName} 網格 ({meshId}) 具有未啟用的 FACS 控制：{controlList}
-Common.UGCValidation.ErrorLabel.DynHead_ControlsMissing,{headName} 網格 ({meshId}) 缺少 FACS 控制：{controlList}
-Common.UGCValidation.ErrorLabel.DynHead_FacsMissing,因缺少 FACS 資訊，動態頭部「{headName}」驗證失敗。你必須為至少 17 個姿勢提供 FACS 控制（請參閱文件）。
-Common.UGCValidation.ErrorLabel.DynHead_JointAccumulatedExceeded,頭部臉部動畫可以合併，以將關節 {jointName} 延伸至頭部以外的遠處。請編輯你的臉部動畫再重新嘗試。
-Common.UGCValidation.ErrorLabel.DynHead_JointBoundsCheckFailed,無法驗證臉部動畫關節邊界，請稍後再試。
-Common.UGCValidation.ErrorLabel.DynHead_JointDirectExceeded,頭部臉部動畫 {actionName} 導致關節大幅移至頭部以外。請編輯你的臉部動畫再重新嘗試。
+Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,{InstanceFullName}.{FieldName} 使用的是素材 {AssetId} 的第 {Version} 版，但目前只支援第 1 版。請使用第 1 版，然後再試一次。
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,市集上的動態頭部必須妥善置於圍籠中，以便圍籠上的眼睛和嘴巴頂點與網格頂點對齊。請改善置於圍籠及其與網格的對齊情況。
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,畫面上左眼（視覺化外掛程式中頭部左側的紅色圓點）的圍籠標記點未對齊網格：部分圍籠點位於頭部網格內（網格穿過圍籠），或位於網格外且太遠。請調整相應的圍籠，使其位於這隻眼睛周圍的網格上，或剛好在網格外。
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,嘴巴（視覺化外掛程式中的綠色圓點）的圍籠標記點未對齊網格：部分圍籠點位於頭部網格內（網格穿過圍籠），或位於網格外且太遠。請調整嘴巴圍籠，使其位於嘴巴周圍的網格上，或剛好在網格外。
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,畫面上右眼（視覺化外掛程式中頭部右側的藍色圓點）的圍籠標記點未對齊網格：部分圍籠點位於頭部網格內（網格穿過圍籠），或位於網格外且太遠。請調整相應的圍籠，使其位於這隻眼睛周圍的網格上，或剛好在網格外。
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,動態頭部圍籠的左眼標記點未對齊網格。請調整眼睛圍籠，使左眼網格位於投影的圍籠區域內。
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,動態頭部圍籠的嘴部標記點未對齊網格。請調整嘴部圍籠，使嘴部網格位於投影的圍籠區域內。
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,動態頭部圍籠的右眼標記點未對齊網格。請調整眼睛圍籠，使右眼網格位於投影的圍籠區域內。
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,無法偵測到動態頭部微笑的表情。請根據嘴巴在頭部上的位置，調整嘴巴的圍籠地標，並確保嘴巴是微笑的狀態。
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,無法偵測到動態頭部閉上左眼的表情。請根據左眼在頭部上的位置，調整左眼的圍籠地標，並確保眼睛是閉上的狀態。
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,市集上的動態頭部沒有頭部圍籠。請為動態頭部建立頭部圍籠。
@@ -325,9 +272,7 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,無法偵測到動態頭
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,市集上的動態頭部必須要能夠活動，但這個頭部沒有 FACS 資料。
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,無法偵測到動態頭部閉上右眼的表情。請根據右眼在頭部上的位置，調整右眼的圍籠地標，並確保眼睛是閉上的狀態。
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,無法偵測到動態頭部皺眉的表情。請根據嘴巴在頭部上的位置，調整嘴巴的圍籠地標，並確保是皺眉的表情。
-Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,身體部位網格「{meshName}」的發光度為 {emissivePercentage}%。自發光覆蓋範圍不得超過 {maxEmissivePercentage}%。請降低自發光遮罩的強度或涵蓋範圍。
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,{meshName} 的發光度太高。發光區域 × 強度超過限制（目前為 {emissivePercentage}%，必須小於或等於 {maxEmissivePercentage}%）。請縮小發光區域或降低其 EmissiveStrength。
-Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,網格「{meshName}」的加權發光表面積為 {emissiveArea} 個平方磚塊，超過 {maxEmissiveArea} 個平方磚塊的上限。請降低自發光遮罩的強度或涵蓋範圍。
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,{assetTypeName} 的發光度太高。發光區域 × 強度超過限制（目前為 {emissiveArea}，必須小於或等於 {maxEmissiveArea}）。請縮小發光區域或降低其 EmissiveStrength。
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedInExperience,在體驗中建立的道具不支援發光貼圖。請從每個 SurfaceAppearance 中移除 EmissiveMaskContent。
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedOnDecal,貼花不具有發光效果。在「{InstancePath}」上，移除 EmissiveMaskContent，將 EmissiveStrength 設為 1，並將 EmissiveTint 設為白色。
@@ -335,29 +280,19 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribut
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,已發佈的動畫缺少有效的 UGC 動作標記。請重新發佈此動畫。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,無法從已發佈的動畫資料中，計算部位的最大平移距離。請重新發佈此動畫。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,已發佈的動畫指定部位的最大平移距離為 {taggedTranslation} 個磚塊，但其動畫資料計算出為 {calculatedTranslation} 個磚塊。請重新發佈此動畫。
-Common.UGCValidation.ErrorLabel.ExperienceCreatorNotSupported,體驗創作者無法建立虛擬人偶物品。CreatorType：{CreatorType}，CreatorId：{CreatorId}。
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,頭部必須放置在 UpperTorso 上方。頭部中心位於軀幹頂端下方，這意味著頭部網格塌陷或位置不對。
-Common.UGCValidation.ErrorLabel.Extents_ParentBelowPart,{upperPart} 無法延伸至 {lowerPart} 下方。你可以透過移動 {attachmentName} 來調整各部分的組合方式
-Common.UGCValidation.ErrorLabel.Extents_PartAboveParent,{lowerPart} 無法延伸至 {upperPart} 上方。你可以透過移動 {attachmentName} 來調整各部分的組合方式
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,FaceControls 上的 InternalOverrideFACSData 屬性在上傳時，必須為空。
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,基本臉部缺少必要的眼睛特徵。請在基本臉部上新增眼睛，然後再試一次。
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,基本臉部缺少必要的嘴巴。請在基本臉部上新增嘴巴，然後再試一次。
 Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,無法偵測到開心的表情。請調整嘴巴圍籠或開心表情 FACS，使投影的嘴巴網格如預期般變形。
-Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,畫面上的左眼（視覺化外掛程式中頭部左側的紅色圓點）閉得不夠緊。請檢查右眼的 FACS 控制和對應的圍籠。
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,無法偵測到閉左眼的表情。請調整左眼圍籠或左眼閉上 FACS，使投影的眼睛網格如預期般變形。
 Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,無法偵測到張嘴的表情。請調整嘴巴圍籠或張嘴 FACS，使投影的嘴巴網格如預期般變形。
-Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,畫面上的右眼（視覺化外掛程式中頭部右側的藍色圓點）閉得不夠緊。請檢查左眼的 FACS 控制和對應的圍籠。
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,無法偵測到閉右眼的表情。請調整右眼圍籠或右眼閉上 FACS，使投影的眼睛網格如預期般變形。
 Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,無法偵測到悲傷的表情。請調整嘴巴圍籠或悲傷表情 FACS，使投影的嘴巴網格如預期般變形。
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,FACS 偵測到你的頭部被放大至 {modPercent}%，但更改頭部的行為違反了市集的臉部動畫政策。
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,動態頭部最多可以有 {maxFacsJointCount} 個 FACS 關節，但這個頭部有 {actualJointCount} 個。請減少 FACS 關節的數量，然後再試一次。
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,FACS 偵測到你的頭部被縮小至 {modPercent}%，但更改頭部的行為違反了市集的臉部動畫政策。
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,上傳格式不符合預期的資料夾結構。請再試一次或提交錯誤報告。
-Common.UGCValidation.ErrorLabel.HSRAssetHasChildren,WrapLayer HSR 素材在 HiddenSurfaceRemovalAsset 根實例下方有子項。
-Common.UGCValidation.ErrorLabel.HSRAssetIdInvalidUrl,「{InstancePath}」的 HSRAssetId 網址無效。
-Common.UGCValidation.ErrorLabel.HSRAssetIdRequired,「{InstancePath}」需要設定 HSRAssetId。
-Common.UGCValidation.ErrorLabel.HSRAssetInvalidRoot,WrapLayer HSR 素材沒有剛好 1 個 HiddenSurfaceRemovalAsset 根。
-Common.UGCValidation.ErrorLabel.HSRDataNotReady,「{InstancePath}」缺少 HSR 資料。請再試一次。
-Common.UGCValidation.ErrorLabel.HSRMeshIdValidationError,驗證「{InstancePath}」的 HSR 網格編號時發生錯誤。
-Common.UGCValidation.ErrorLabel.HSRMeshIdsMismatch,偵測到「{InstancePath}」的 HSR 資料無效。請使用飾品調整工具重新生成素材，然後再試一次。
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,骨骼 {bonePath} 距離網格零件 {partName} 過遠，請將其移動至靠近網格零件的尺寸邊界處。
 Common.UGCValidation.ErrorLabel.HrdBone_TooCloseToParent,骨骼 {bonePath} 與其父骨骼距離過近。請稍微調整該骨骼的位置。
 Common.UGCValidation.ErrorLabel.HrdBone_TransformNotIdentity,骨骼 {bonePath} 具有 transform 屬性，但市集上傳功能尚未啟用此設定。請將其重置為 identity CFrame。
@@ -378,8 +313,6 @@ Common.UGCValidation.ErrorLabel.HrdProperties_UncontainedJoint,{foundMeshName} �
 Common.UGCValidation.ErrorLabel.HrdTposePosition,關節 {jointName} 的 TposeAdjustment 位置超出可接受的範圍。請將偏移值縮小至 +/-({offsetLimit}) 以內。
 Common.UGCValidation.ErrorLabel.HrdTposeRotation,關節 {jointName} 的 TposeAdjustment 與建議方向 {expectedOrientation} 相差超過 {degLimit} 度。
 Common.UGCValidation.ErrorLabel.InstanceTagsFound,以下個體帶有標註，但市集素材不得包含任何標註：{ProblematicDescendantPaths}
-Common.UGCValidation.ErrorLabel.InstanceTreeBannedClass,「{InstancePath}」屬於類型 {ClassName}，市集素材不允許使用此類型。
-Common.UGCValidation.ErrorLabel.InstanceTreeBannedName,「{InstancePath}」的名稱為保留名稱，無法在市集素材中使用。
 Common.UGCValidation.ErrorLabel.InternalError,由於內部錯誤，系統無法正確驗證你的素材。如果問題仍然存在，請建立錯誤報告。ValidationJobId：{ValidationJobId}
 Common.UGCValidation.ErrorLabel.JointRotAtt_Moved,{instPath} 的 jointRotation 已移動，但市集上傳功能可能尚未調整此實例。請將位置重置為 {expectedPosition}。
 Common.UGCValidation.ErrorLabel.JointRotAtt_MultipleAttachments,實例 {parentPath} 最多只能有 1 個 JointRotation 子物件。
@@ -387,21 +320,7 @@ Common.UGCValidation.ErrorLabel.JointRotAtt_Rotated,{instPath} 的 jointRotation
 Common.UGCValidation.ErrorLabel.JointRotAtt_UnrecognizedParent,實例 {parentPath} 含有 JointRotation 子物件，但這不符合 R15plus 結構的要求。
 Common.UGCValidation.ErrorLabel.JointRotAtt_WrongInstanceClass,實例 {instPath} 的名稱為 JointRotation，但 JointRotation 為保留名稱，僅可用於作為附件子物件的附件。
 Common.UGCValidation.ErrorLabel.LCDeformTooLarge,多層次穿搭套用至虛擬人偶身上時，其變形程度超出了可接受的 {maxSize} 尺寸範圍。
-Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NoHandle,飾品「{accessoryName}」沒有手把。無法驗證範圍外的多層次服飾。
-Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NoWrapLayer,飾品「{accessoryName}」沒有 WrapLayer。無法驗證範圍外的多層次服飾。
-Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NonZeroMaxSize,飾品的 MaxSize 不是零。
-Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_NonZeroOffset,飾品的偏移值不是零。
-Common.UGCValidation.ErrorLabel.LCWithinRenderBounds_OutOfBounds,「{accessoryName}」的多層次服飾驗證失敗。變形時，多層次服飾會變得過大。
 Common.UGCValidation.ErrorLabel.LeaderVertsNearCageIslands,睫毛上有套用 RBX_Leader 蒙皮的頂點，這些頂點距離內部圍籠上的眼睛參考點太遠。請確保所有套用 RBX_Leader 蒙皮的頂點，皆位於更靠近內部圍籠的眼睛區域
-Common.UGCValidation.ErrorLabel.LegsSeparated_HipAttachmentOutOfRange,{attachmentPath} 為 {currentValue}，且無法為 {comparison} {cutoff}。請修正此附件。
-Common.UGCValidation.ErrorLabel.LegsSeparated_LegsOverlap,腿部在 X 軸上重疊 {overlap} 個磚塊。{leftMax} 是左腿的最大值。{rightMax} 是右腿的最大值。請調整腿部以減少重疊。
-Common.UGCValidation.ErrorLabel.MakeupDecal_FailedToLoadTexture,無法載入貼花「{instanceName}」的 {fieldName}。請確認 TextureContent 存在且為有效，然後再試一次。
-Common.UGCValidation.ErrorLabel.MakeupDecal_FailedToLoadTextureData,無法載入「{fullName}」的紋理資料。請確認紋理存在，然後再試一次。
-Common.UGCValidation.ErrorLabel.MakeupDecal_NoColorMap,找不到貼花「{instanceName}」的 ColorMap。妝容貼花必須具有有效的 ColorMap。
-Common.UGCValidation.ErrorLabel.MakeupDecal_TextureTooBig,在「{fullName}」中找到的紋理解析度 {sizeX}x{sizeY} 像素高於欄位「{fieldName}」支援的最大尺寸值 {maxSize}x{maxSize} 像素。
-Common.UGCValidation.ErrorLabel.MakeupDecal_UVZoneExcludeViolation,在素材類型 {assetTypeName} 的 [{minBound}] 和 [{maxBound}] 受限 UV 區域內，發現 {instanceName} 的 ColorMap 中有不透明像素。
-Common.UGCValidation.ErrorLabel.MakeupDecal_UVZoneIncludeViolation,{instanceName} 的 ColorMap 不透明區域，不在素材類型 {assetTypeName} 的 [{minBound}] 和 [{maxBound}] 允許 UV 區域內。
-Common.UGCValidation.ErrorLabel.MaterialNotAllowed,以下個體具有無效的材質：{InstanceNameList}。只允許使用以下材質：{AllowedMaterials}。
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceAvatar_CageInsideMesh,身體圍籠與身體網格相交。有 {negtiveSDFPercent}% 的身體圍籠頂點位於身體網格內部。
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceAvatar_CageTooFar,身體圍籠與身體網格之間的距離過遠。身體圍籠與網格之間的最大距離為 {max_sdf}，已超過允許的門檻值 {max_sdf_threshold}
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistanceHead_CageInsideMesh,頭部圍籠與頭部網格相交。有 {negtiveSDFPercent}% 的頭部圍籠頂點位於頭部網格內部。
@@ -411,61 +330,18 @@ Common.UGCValidation.ErrorLabel.MeasureCageMeshDistance_CageTooFar,外部圍籠�
 Common.UGCValidation.ErrorLabel.MeasureCageRelevancy,已修改的外部圍籠頂點中，有 {outer_cage_face_irrelevant_percent}% 未覆蓋飾品。請確保僅在必要的位置移動外部圍籠。
 Common.UGCValidation.ErrorLabel.MeasureCageUV,圍籠 {cage_name} 中有 {incorrect_uv_count} 個 UV 值不正確或不屬於該範本。請更正圍籠的 UV。
 Common.UGCValidation.ErrorLabel.MeasureMeshOutsideOuterCage,配件的網格頂點中，有 {mesh_outside_outer_cage_percent}% 位於其外部圍籠之外。請進行調整，讓更多的飾品位於兩個圍籠之間。
-Common.UGCValidation.ErrorLabel.MeshGeometry_ExceedsBounds,"{meshName} 的大小大於允許的邊界大小上限。類型 {assetTypeName} 的最大尺寸為 [{maxSizeX}, {maxSizeY}, {maxSizeZ}]。"
-Common.UGCValidation.ErrorLabel.MeshGeometry_NotCentered,{meshName}{fieldName} 的網格資料未置中。請使用 Roblox 3D 匯入工具重新匯入此網格，並確保原始檔案中沒有鬆散的幾何圖形。
-Common.UGCValidation.ErrorLabel.MeshGeometry_PositionOutOfBounds,位置超出範圍。
-Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleAboveMaximum,{meshName} 已放大至原始網格大小的 {scaleMultiple} 倍。上限為 {maxScaleMultiple} 倍。請以你所需的大小重新匯出或匯入網格，而非在 Studio 中放大網格。
-Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleBelowMinimum,{meshName} 已縮小至原始網格大小的 {scalePercent}%。最小值為 {minScalePercent}%。請以你所需的大小重新匯出或匯入網格，而非在 Studio 中縮小網格。
-Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleNotPositive,{meshName} 的比例為零或負值。請使用正數縮放值。若要將網格鏡像呈現，請在 3D 模型化軟體中將其翻轉，然後重新匯出。
-Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooLarge,{meshName} 網格比例太大。
-Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooSmall,網格比例太小。
-Common.UGCValidation.ErrorLabel.MeshGeometry_SurfaceAreaExceeded,模型網格「{meshName}」的總表面積為 {surfaceArea}，不得大於 {maxSurfaceArea}。你必須減少所有三角形的數量和／或大小。
-Common.UGCValidation.ErrorLabel.MeshGeometry_TotalTriangleCountExceeded,「{assetTypeName}」的網格解析度「{triangleCount}」，高於支援的最大三角形數量「{maxTriangles}」。你必須重新建構模型的拓撲，來減少三角形數量。
-Common.UGCValidation.ErrorLabel.MeshGeometry_TriangleCountExceeded,模型網格 {meshName} 的解析度 {triangleCount}，高於支援的最大值 {maxTriangles}。你必須重新建構模型的拓撲，然後再試一次。
-Common.UGCValidation.ErrorLabel.MeshGeometry_VertexDensityExceeded,已超過頂點密度上限。減少兩者十分接近的頂點數量。
-Common.UGCValidation.ErrorLabel.MeshGeometry_ZeroAreaTriangle,在模型網格 {meshName} 中，偵測到零面積的三角形。你必須編輯網格以移除零面積的三角形。
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,「{partName}」網格在 {axis} 軸上的大小為 {currentSize} 個磚塊，大於允許的單一零件最大尺寸 {maxSize} 個磚塊。請縮小網格。
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,「{partName}」網格在 {axis} 軸上的大小為 {currentSize} 個磚塊，小於允許的單一零件最小尺寸 {minSize} 個磚塊。請放大網格。
-Common.UGCValidation.ErrorLabel.MeshSize_LoadFailed,
-Common.UGCValidation.ErrorLabel.MeshSize_Mismatch,{meshName} 的計算網格大小與 MeshSize 屬性值不符
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,附件 {attName} 必須且只能在 {partName} 的後代中出現一次。
 Common.UGCValidation.ErrorLabel.NoAttributes,「{RootInstanceName}」（或其子物件）包含屬性。請從以下項目中移除屬性：{InstanceNameList}
-Common.UGCValidation.ErrorLabel.NoMeshBelowFeet_PartBelowFeet,{partName}在腳底下方延伸 {distance} 個磚塊。只有腿部可以碰到地面，其他身體部位最多只能在其下方延伸 {maxDistance} 個磚塊。請縮短或抬高{partName}。
-Common.UGCValidation.ErrorLabel.Pose_AngleFromXYPlane,{assetName} 與 X、Y 平面成 {angle} 度角，必須在 {limit} 度以內。請確認角色處於 I 姿勢、A 姿勢或 T 姿勢。
-Common.UGCValidation.ErrorLabel.Pose_AngleOnXYPlane,{assetName} 與 X、Y 平面上 [{xVector}] 向量成 {angle} 度角，必須介於 {minAngle} 到 {maxAngle} 度之間。請確認角色處於 I 姿勢、A 姿勢或 T 姿勢。
-Common.UGCValidation.ErrorLabel.Pose_CFrameCalculationFailed,無法計算 {assetName} 素材的 CFrame。請確認角色處於 I 姿勢、A 姿勢或 T 姿勢，且各部分並非全部都位於相同位置。
-Common.UGCValidation.ErrorLabel.Pose_PointingAlongZVector,{assetName} 正沿著世界 Z 向量的方向。請確認角色處於 I 姿勢、A 姿勢或 T 姿勢。
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName}「{InstancePath}」具有無效的屬性：{ProblematicProperties}。屬性超過顯示的位元組上限（上限為 0 表示屬性必須為空白）；其他屬性則包含 NaN/Inf 值，或超過其預設大小上限。
-Common.UGCValidation.ErrorLabel.PropertyNotFound,在「{PropertyName}」上未找到屬性「{InstancePath}」。
-Common.UGCValidation.ErrorLabel.PropertyValueInvalid,「{InstancePath}」上的屬性「{PropertyName}」無效。預期應為 {ComparisonMethod} {ExpectedValue}。
 Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,已成像的動畫缺少一或多個必要的臉部表情（閉眼、張嘴、開心、悲傷）。
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,「{PartName}」中的骨架附件「{AttachmentName}」，必須放置在該身體部位與相鄰部位連接的關節邊界附近。目前位置 [{CurrentPosition}] 與連接平面距離過遠。請將其移動至更靠近 [{ClosestValidPosition}] 的位置。
-Common.UGCValidation.ErrorLabel.SAOpacity_FailedToLoadTexture,無法載入 SurfaceAppearance「{FullName}」的紋理「{FieldName}」。請確認紋理存在，然後再試一次。
-Common.UGCValidation.ErrorLabel.SAOpacity_InvalidAlphaMode,SurfaceAppearance（{FullName}）的 AlphaMode 無效。預期為 Enum.AlphaMode.Overlay。
-Common.UGCValidation.ErrorLabel.SAOpacity_TextureNotOpaque,紋理「{FullName}」並非完全不透明。請使用不透明紋理。
-Common.UGCValidation.ErrorLabel.ScaleTypeInvalid,「{ParentName}」中的 AvatarPartScaleType 值無效。可接受的值為 Classic、ProportionsSlender 或 ProportionsNormal。
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,若要將素材上傳至 Roblox，你必須選擇 1 個實例和關聯的上傳類型。
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,此素材太大，無法上傳（{sizeBytes} 位元組，超過 {maxSizeBytes} 位元組的上限）。請縮小大小，然後再試一次。
-Common.UGCValidation.ErrorLabel.SurfaceAppearance_MissingSA,（{MeshPartFullName}）的 TextureID 為空白，且沒有子項 SurfaceAppearance 個體。你必須至少定義其中一項。
-Common.UGCValidation.ErrorLabel.SurfaceAppearance_TextureAndSABothDefined,TextureID 和 SurfaceAppearance 都有為 MeshPart（{MeshPartFullName}）定義。發佈時只會使用 SurfaceAppearance。
 Common.UGCValidation.ErrorLabel.TexturePackInvalidURL,「{SurfaceAppearanceName}」的「TexturePack」屬性網址無效，請修正網址。
-Common.UGCValidation.ErrorLabel.TexturePack_DownloadFailed,無法下載 SurfaceAppearance「{SurfaceAppearanceName}」的 TexturePack。
-Common.UGCValidation.ErrorLabel.TexturePack_Mismatch,SurfaceAppearance「{SurfaceAppearanceName}」中的紋理與其 TexturePack 中的紋理無法匹配。請修正 TexturePack。
-Common.UGCValidation.ErrorLabel.TextureSize_FailedToLoad,無法載入「{FullName}」的紋理資料。請確認紋理存在，然後再試一次。
-Common.UGCValidation.ErrorLabel.TextureSize_TooBig,在「{FullName}」中找到的紋理解析度 {Width}x{Height} 像素，高於欄位「{FieldName}」支援的最大尺寸值 {MaxSize}x{MaxSize} 像素。
-Common.UGCValidation.ErrorLabel.ThumbnailInvalidTarget,用於生成縮圖的目標素材無效。預期應為「{ExpectedTarget}」。
-Common.UGCValidation.ErrorLabel.ThumbnailOutsideView,素材「{InstancePath}」位於縮圖攝影機檢視畫面之外。將素材重新定位在攝影機檢視的中心。
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,頭部網格零件包含 {jointName} 的臉部動畫，但該關節無法用於 FACs。請重新命名此關節，然後重新匯入頭部。
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,身體部位 {partName} 已蒙皮至虛擬關節 {jointName}，但該關節不屬於 R15plus 結構。
-Common.UGCValidation.ErrorLabel.UnsupportedCreatorType,不支援的創作者類型。CreatorType：{CreatorType}，CreatorId：{CreatorId}。
-Common.UGCValidation.ErrorLabel.VertexColors_NotOpaque,在網格模型「{MeshName}」中找到無效的頂點顏色。你必須將色彩映射編輯為全白色 {TransparencyNote}，然後再試一次。
-Common.UGCValidation.ErrorLabel.VerticesNotCoincident_TooManySimilar,{cageName} 有 {percentage}% 的頂點彼此過於接近。請編輯頂點，使最多 {threshold}% 個頂點重合或彼此接近。
-Common.UGCValidation.ErrorLabel.WrapTexture_FailedToLoadCage,無法載入 {instanceName} 的 ReferenceCageContent。
-Common.UGCValidation.ErrorLabel.WrapTexture_FailedToLoadUV,無法載入「{instanceName}」的 UV。請確認 UV 映射存在，然後再試一次。
-Common.UGCValidation.ErrorLabel.WrapTexture_InvalidMaxBound,{instanceName}.UVMaxBound [{actual}] 與所需的 UVMaxBound [{expected}] 無法匹配。
-Common.UGCValidation.ErrorLabel.WrapTexture_InvalidMinBound,{instanceName}.UVMinBound [{actual}] 與所需的 UVMinBound [{expected}] 無法匹配。
-Common.UGCValidation.ErrorLabel.WrapTexture_InvalidUV,在「{instanceName}」的圍籠中找到無效的 UV 值。你必須編輯 UV 映射以解決此問題。
-Common.UGCValidation.ErrorLabel.WrapTexture_NoCage,未提供 {instanceName} 的 ReferenceCageContent。
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,前往設定
@@ -1072,7 +948,6 @@ CoreScripts.InGameMenu.Ok,
 CoreScripts.InGameMenu.PageTitle.Controls,操作……
 CoreScripts.InGameMenu.PageTitle.GameSettings,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,邀請好友
-CoreScripts.InGameMenu.PageTitle.JoinOrInvite,加入或邀請
 CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends,加入或邀請好友
 CoreScripts.InGameMenu.PageTitle.Players,帳號
 CoreScripts.InGameMenu.PageTitle.Report,檢舉
@@ -1481,7 +1356,6 @@ Feature.AddFriends.Action.FriendAdded,已新增好友
 Feature.AddFriends.Action.IgnoreFriendRequest,忽略好友邀請
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,忽略信任的好友邀請
 Feature.AddFriends.Action.RequestIgnored,已忽略邀請
-Feature.AddFriends.Heading.AddFriends,
 Feature.AddFriends.Label.AddFriendsTooltip,先找到您的朋友，一起開始探索 Roblox。
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,搜尋使用者名稱或名字，在 Roblox 找到其他人。
 Feature.AddFriends.Label.ConnectWithContacts,邀請聯絡人或與已經在 Roblox 的好友交流！
@@ -1538,7 +1412,6 @@ Feature.Avatar.Action.Rename,更名
 Feature.Avatar.Action.RenameSet,重新命名組合
 Feature.Avatar.Action.Reset,重設
 Feature.Avatar.Action.RestoreLastSaved,還原上次儲存的虛擬人偶
-Feature.Avatar.Action.Retry,
 Feature.Avatar.Action.Revert,還原
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,
@@ -1752,7 +1625,6 @@ Feature.Avatar.Label.FaceMakeup,
 Feature.Avatar.Label.FacialAnimation,臉部動畫
 Feature.Avatar.Label.Fall,跌落
 Feature.Avatar.Label.FallAnimations,跌落動畫
-Feature.Avatar.Label.FromMarketplace,來自市集
 Feature.Avatar.Label.Front,正面
 Feature.Avatar.Label.FullBody,全身
 Feature.Avatar.Label.FullMasks,全臉面具
@@ -1810,7 +1682,6 @@ Feature.Avatar.Label.Name,
 Feature.Avatar.Label.Neck,頸部
 Feature.Avatar.Label.Newest,最新
 Feature.Avatar.Label.NoExpiredItems,沒有過期的{itemType}
-Feature.Avatar.Label.NoInventorySearchResults,沒有道具與「{query}」匹配
 Feature.Avatar.Label.NoItems,沒有{itemType}
 Feature.Avatar.Label.NoLongerAvailableInCollection,它將不再出現在此收藏中
 Feature.Avatar.Label.NoSets,尚無組合
@@ -1875,8 +1746,6 @@ Feature.Avatar.Label.Shoes,鞋子
 Feature.Avatar.Label.Shorts,短褲
 Feature.Avatar.Label.Shoulder,肩膀
 Feature.Avatar.Label.Skin,
-Feature.Avatar.Label.Spawn,生成
-Feature.Avatar.Label.SpawnEffects,生成效果
 Feature.Avatar.Label.Sweater,外套
 Feature.Avatar.Label.Sweaters,
 Feature.Avatar.Label.Swim,游泳
@@ -2009,7 +1878,6 @@ Feature.Avatar.Message.UnknownErrorCreatingOutfit,發生未知錯誤，未建立
 Feature.Avatar.Message.UpdateOutfitSuccess,已更新！
 Feature.Avatar.Message.UpdateRequired,需要更新。若要查看此物品，請將 Roblox 更新到最新版本。
 Feature.Avatar.Placeholder.NameYourAvatar,為您的虛擬人偶命名
-Feature.Avatar.Placeholder.SearchInventory,搜尋道具欄
 Feature.Avatar.Placeholder.WriteAvatarCaption,為您的虛擬人偶撰寫說明 (選填)
 Feature.Avatar.RevokedItems.BodyText,{category}「{item}」道具已從這個已儲存的虛擬人偶中移除，因此我們退還了你原先支付的金額。{lineBreak}如需更多詳細資訊，請查看收件箱。
 Feature.Avatar.RevokedItems.BodyTextMultiple,以下道具已從這個已儲存的虛擬人偶中移除，因此我們退還了你原先支付的金額。{lineBreak}{items}{lineBreak}如需更多詳細資訊，請查看收件箱。
@@ -2099,10 +1967,8 @@ Feature.AvatarSwitcher.Message.SelectAvatar,選擇虛擬人偶
 Feature.AvatarSwitcher.Message.SwitchingDeferred,下次重生或加入體驗時，將會看到此虛擬人偶。你可以隨時切換其他虛擬人偶。
 Feature.AvatarSwitcher.Message.UnknownSupport,你仍可切換虛擬人偶，但可能無法在此體驗中正確顯示。
 Feature.AvatarSwitcher.Message.Unsupported,此體驗使用自訂虛擬人偶，不支援 Roblox 虛擬人偶。
-Feature.AvatarWorkshop.Action.EditAvatar,編輯虛擬人偶
 Feature.AvatarWorkshop.Action.TryAgain,再試一次
-Feature.AvatarWorkshop.Heading.Customize,
-Feature.AvatarWorkshop.Heading.YourAvatars,你的虛擬人偶
+Feature.AvatarWorkshop.Heading.AvatarWorkshop,虛擬人偶工作坊
 Feature.AvatarWorkshop.Message.LoadItemsError,載入物品時發生錯誤。
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,無法載入更多物品。
 Feature.AvatarWorkshop.Message.NoItemsOwned,你在此處還沒有任何物品。
@@ -2421,7 +2287,6 @@ Feature.Build.Label.ManagedPricingMixed,混合套用於現有產品
 Feature.Build.Label.MaximizeForGamePlays,最大化遊戲遊玩次數
 Feature.Build.Label.ModelUnavailable,模型無法使用
 Feature.Build.Label.Models3D,3D 模型
-Feature.Build.Label.MonetizationCreateTitle,{NAME} - {PRICE} Robux
 Feature.Build.Label.MyGames,我的遊戲
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,無上限
@@ -2947,7 +2812,6 @@ Feature.Catalog.Label.FullBody,
 Feature.Catalog.Label.Gear,
 Feature.Catalog.Label.Get,領取
 Feature.Catalog.Label.GetPremiumAndPrice,訂閱 Premium 後，價格將為 
-Feature.Catalog.Label.Glowing,發光
 Feature.Catalog.Label.HD,HD
 Feature.Catalog.Label.Hair,
 Feature.Catalog.Label.HeadShape,
@@ -3048,7 +2912,6 @@ Feature.Catalog.Label.SerialNumberColon,序列號:
 Feature.Catalog.Label.ShareToMoments,分享至「美好時光」
 Feature.Catalog.Label.ShoulderAccessories,肩膀飾品
 Feature.Catalog.Label.SoldOut,
-Feature.Catalog.Label.SpecialFeatures,特殊功能
 Feature.Catalog.Label.SupportsHeadShapes,支援頭部形狀
 Feature.Catalog.Label.TakeOffResaleConfirmation,確定停止轉賣此道具？
 Feature.Catalog.Label.TimedOptions,計時選項
@@ -3259,6 +3122,7 @@ Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} 說...
 Feature.Chat.Label.ReplyingToYourself,你說…
 Feature.Chat.Label.SearchFriends,搜尋好友
 Feature.Chat.Label.SearchWord,
+Feature.Chat.Label.SnoozeChatNotifications,將體驗中的聊天通知靜音：
 Feature.Chat.Label.SnoozePartyNotifications,將體驗內的隊伍通知靜音：
 Feature.Chat.Label.SwipeToReplyTooltip,滑動以回覆
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} 天
@@ -3314,6 +3178,7 @@ Feature.Chat.Response.NetworkError,網路錯誤
 Feature.Chat.RobloxConnectUnavailableWithUser,此使用者目前無法使用 Roblox Connect。
 Feature.Chat.Text.NoFriends,你尚未新增任何好友。若要開始，請在 Roblox 上尋找並新增好友。
 Feature.Chat.Title.FriendsChat,好友聊天
+Feature.Chat.Title.MuteChatNotifications,在遊戲遊玩期間將好友的聊天通知靜音
 Feature.Chat.Title.NewChat,新聊天
 Feature.Chat.Toast.Error.InvalidUserSelected,此清單中有人員無法新增
 Feature.ContactUpsell.Action.Continue,
@@ -3460,10 +3325,8 @@ Feature.FaceChat.Subtitle.VideoPerformancePromptDisable,關閉相機可能會提
 Feature.FaceChat.Subtitle.VideoUnsupported,Roblox 無法使用您的相機製作帶有動作的虛擬人偶動畫。
 Feature.Favorites.Label.Favorite,
 Feature.FlyoutSidePanel.Action.ContinuePlaying,繼續遊玩
-Feature.FlyoutSidePanel.Description.SwitchAccountsHere,你現在可以在此處切換帳號。
 Feature.FlyoutSidePanel.Label.TooltipBody,你的個人檔案、內容和設定已移至新位置。
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> 已移動
-Feature.FlyoutSidePanel.Title.AccountSwitcherMoved,帳號切換工具已變更位置
 Feature.Friends.Action.AcceptFriend,
 Feature.Friends.Action.AccountDeleted,已刪除帳號
 Feature.Friends.Action.Add,
@@ -3852,7 +3715,6 @@ Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining}後結束
 Feature.InExperienceShop.Label.FreeTrial,免費試用
 Feature.InExperienceShop.Label.HaveTrial,專屬免費試用機會
-Feature.InExperienceShop.Label.KeepIt,
 Feature.InExperienceShop.Label.NoDescription,無說明
 Feature.InExperienceShop.Label.OfferEndTime,{offer}將於 {timeRemaining}後結束
 Feature.InExperienceShop.Label.PreviewBanner,這是你在 Roblox Studio 中的商店預覽。玩家不會看到此預覽。
@@ -3865,6 +3727,7 @@ Feature.InExperienceShop.Label.Timer.Minute.Singular,1 分鐘
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} 秒
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 秒
 Feature.InExperienceShop.Label.Trial,
+Feature.InExperienceShop.Label.Trialed,已試用
 Feature.InExperienceShop.Label.TryNow,取得免費試用
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,您已成功購買 {ROBUX_AMOUNT} Robux
 Feature.InExperienceShop.Tooltip.RecentlyRedeemed,喜歡試用方案嗎？
@@ -3884,8 +3747,6 @@ Feature.Moments.Action.Analytics,
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
-Feature.Moments.Action.CommentSeeOriginal,查看原文
-Feature.Moments.Action.CommentSeeTranslation,查看翻譯
 Feature.Moments.Action.CommentShowLess,顯示較少
 Feature.Moments.Action.CommentShowMore,
 Feature.Moments.Action.Continue,
@@ -3925,8 +3786,8 @@ Feature.Moments.Body.EDPMomentIPReportInstructions,若要檢舉此「美好時�
 Feature.Moments.Description.CommunityStandards,查看社群標準，瞭解哪些內容可以或不能發佈。
 Feature.Moments.Description.EmptyCapturesLibrary,這裡會顯示你的截圖。
 Feature.Moments.Description.FollowingCaughtUpBody,你已觀看此饋送中所有新的「美好時光」。切換饋送以檢視更多內容。
-Feature.Moments.Description.FollowingEmptyBodyRecommended,你將在此處看到追蹤創作者的「美好時光」。
-Feature.Moments.Description.FollowingEmptyBodyTrending,
+Feature.Moments.Description.FollowingEmptyBodyRecommended,追蹤創作者後，就能觀看來自「我的最愛」的美好時光。檢視推薦內容，以尋找創作者。
+Feature.Moments.Description.FollowingEmptyBodyTrending,追蹤創作者後，就能觀看來自「我的最愛」的美好時光。檢視熱門內容，以尋找創作者。
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI 生成內容。你必須對發佈的內容負責，張貼前請先審核。
 Feature.Moments.Description.HowToCaptureStep1,加入已啟用截圖功能的體驗，並選擇漢堡選單
 Feature.Moments.Description.HowToCaptureStep2,啟用截圖控制項
@@ -3989,7 +3850,7 @@ Feature.Moments.Label.FeedRecommended,推薦
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.FirstCommentInvite,尚無留言。成為第一個留言的人！
 Feature.Moments.Label.FollowingCaughtUpTitle,全都看完啦
-Feature.Moments.Label.FollowingEmptyTitle,追蹤創作者，即可在此處檢視對方的「美好時光」
+Feature.Moments.Label.FollowingEmptyTitle,追蹤創作者以檢視對方的「美好時光」
 Feature.Moments.Label.GameJoinConversion,遊戲加入轉換率
 Feature.Moments.Label.HowToUseCaptureTitle,如何使用截圖功能
 Feature.Moments.Label.LinkCopied,連結已複製
@@ -4014,7 +3875,6 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,相片
 Feature.Moments.Label.PostDeleted,美好時光已刪除
 Feature.Moments.Label.PostRemovedBody,你張貼的「美好時光」違反了我們的《社群標準》。
-Feature.Moments.Label.PostedOnDate,張貼日期：{date}
 Feature.Moments.Label.PublishingRodeoBody,這不會花太久時間。
 Feature.Moments.Label.Reactions,反應
 Feature.Moments.Label.ReportReason.BreaksRules,此貼文違反規定
@@ -4174,7 +4034,7 @@ Feature.PlayerSearchResults.Label.YouAreFollowing,您在追蹤
 Feature.PlayerSearchResults.Label.YouAreFriends,您們是好友
 Feature.PrivateServers.Action.CreatePrivateServer,建立私人伺服器
 Feature.PrivateServers.Action.FreeWithBlackbird,透過 Plus 免費使用
-Feature.PrivateServers.Action.Generate,
+Feature.PrivateServers.Action.Generate,生成
 Feature.PrivateServers.Description.FriendsAllowed,好友名單中的任何人無需邀請就能加入
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio 不支援購買私人伺服器。
 Feature.PrivateServers.Description.VipServersNotSupported,此遊戲不支援私人伺服器。
@@ -4197,7 +4057,7 @@ Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,複製個人檔案連結
 Feature.Profile.Action.CreateInBuild,在組建中建立
 Feature.Profile.Action.EditAppearance,編輯外觀
-Feature.Profile.Action.EditAvatar,
+Feature.Profile.Action.EditAvatar,編輯虛擬人偶
 Feature.Profile.Action.EditBackground,編輯背景
 Feature.Profile.Action.EditEmotes,編輯動作
 Feature.Profile.Action.EditLook,編輯造型
@@ -5036,7 +4896,6 @@ Features.Transfers.RobuxTransfer.Label.RecipientWillGetInApp,收件人將收到 
 Features.Transfers.RobuxTransfer.Label.RecipientWillGetInGame,收件人將收到扣除費用後的 {amount} Robux。遊戲內轉帳會收取 {commissionPercentage}% 的創作者費用。
 Features.Transfers.RobuxTransfer.SentInstantNoFee,Robux 將立即傳送，無須支付任何費用
 Features.Transfers.RobuxTransfers.Label.SuccessNotification,你傳送了 {amount} Robux
-Features.Transfers.Title.FreeTransfersExhausted,你已用完免費轉帳次數
 Features.Transfers.Title.UpsellSubscription,
 Features.Transfers.Transfer.Block.RequireReceiverFAE,請確認你的年齡，以便接受 Robux
 Features.Transfers.Transfer.Block.RequireSenderFAE,請先驗證你的年齡，以便傳送 Robux
@@ -5458,9 +5317,7 @@ Notifications.SquadRegroupPrompt.ToastAction.Join,
 Notifications.SquadRegroupPrompt.ToastLabel.ContinuePlayingTogether,繼續一起遊玩
 Notifications.SquadRegroupPrompt.ToastLabel.JoinANewServer,
 Notifications.ToastNotifications.Label.LeaveExperienceConfirmation,確定要離開並加入另一個體驗嗎？
-Notifications.ToastNotifications.Label.LeaveServerConfirmation,確定要離開並加入另一個伺服器嗎？
 Notifications.ToastNotifications.Title.LeavingExperience,離開體驗
-Notifications.ToastNotifications.Title.LeavingServer,即將離開伺服器
 PlayerFeedbacks.VoteForm.Message.Action.Report,
 PlayerFeedbacks.VoteForm.Message.MaxLengthCharacters,字元數需少於 {count} 個字元。
 PlayerFeedbacks.VoteForm.Message.MinLengthCharacters,字元數需多於 {count} 個字元。

@@ -28,6 +28,7 @@ local FFlagSduiAddCollectibleItemDataHydration = SharedFlagsModule.FFlagSduiAddC
 local FFlagSduiLeaderboardComponent = SharedFlagsModule.FFlagSduiLeaderboardComponent
 local FFlagSduiDevStoreSeeAllSupport = SharedFlagsModule.FFlagSduiDevStoreSeeAllSupport
 local FFlagSduiCapabilityBindings = SharedFlagsModule.FFlagSduiCapabilityBindings
+local FFlagMigrateGameInfoToStore = SharedFlagsModule.FFlagMigrateGameInfoToStore
 local FFlagSduiSupportRatingNoPercent = SharedFlagsModule.FFlagSduiSupportRatingNoPercent
 local FFlagSduiNotificationBadgeHydration = SharedFlagsModule.FFlagSduiNotificationBadgeHydration
 local FFlagSduiAddMarketplaceItemFavoriteHydrationModule = require(SduiCoreSystem.FFlagSduiAddMarketplaceItemFavoriteHydration)
@@ -46,8 +47,14 @@ local _ = function(p1)
 end
 
 local _ = function(p1)
-	-- upvalues: DataHydrationModule (copy)
-	DataHydrationModule.Game.getGameInfoStore(false).updateGameInfos(p1, false)
+	-- upvalues: FFlagMigrateGameInfoToStore (copy), DataHydrationModule (copy)
+	if FFlagMigrateGameInfoToStore then
+		DataHydrationModule.Game.getGameInfoStore(false).updateGameInfos(p1, false)
+		
+		return
+	else
+		DataHydrationModule.Game.getGameInfoStore(false).updateGameInfos(p1)
+	end
 end
 
 local _ = function(p1)
@@ -420,9 +427,17 @@ local _ = function(p3, Entry, p4, p5)
 end
 
 local function getDataHydrationField(p3, Entry, p4, p5, p6)
-	-- upvalues: getDataObjectSignal (copy), TryGetPathFromDataModule (copy), calculateDerivedFieldValue (copy)
+	-- upvalues: FFlagMigrateGameInfoToStore (copy), getUniverseIcon (copy), DataHydrationModule (copy), getDataObjectSignal (copy), TryGetPathFromDataModule (copy), calculateDerivedFieldValue (copy)
 	if #Entry < 2 then
 		return nil, nil
+	end
+	if not FFlagMigrateGameInfoToStore and p3 == "universe" and #Entry == 2 then
+		if Entry[2] == "icon" then
+			return getUniverseIcon(p4, p5)
+		end
+		if Entry[2] == "largeIcon" then
+			return getUniverseIcon(p4, p5, DataHydrationModule.Game.GameIconSize.Large)
+		end
 	end
 	local DataObjectSignal = getDataObjectSignal(p3, Entry, p4, p6)
 	
@@ -446,63 +461,65 @@ local function getDataHydrationField(p3, Entry, p4, p5, p6)
 	end
 end
 
+local function resolveUniverseField(p7, Entry, p8, p9, p10)
+	-- upvalues: getUniverseIcon (copy), DataHydrationModule (copy), getUniverseVoteRatingText (copy), FFlagSduiSupportRatingNoPercent (copy), getDataHydrationField (copy), TryGetPathFromDataModule (copy), calculateDerivedFieldValue (copy), DataStatus (copy)
+	if #Entry == 2 then
+		if Entry[2] == "icon" then
+			return getUniverseIcon(p8, p9)
+		end
+		if Entry[2] == "largeIcon" then
+			return getUniverseIcon(p8, p9, DataHydrationModule.Game.GameIconSize.Large)
+		end
+		if Entry[2] == "rating_text_formatted_brief" then
+			return getUniverseVoteRatingText(p8, p9)
+		end
+		if FFlagSduiSupportRatingNoPercent and Entry[2] == "rating_text_no_percent" then
+			return getUniverseVoteRatingText(p8, p9, true)
+		end
+	end
+	if not p10 then
+		return getDataHydrationField(p7, Entry, p8, p9, p10)
+	end
+	local GameInfoStore = DataHydrationModule.Game.getGameInfoStore(false)
+	local GameInfo, GameInfo2 = GameInfoStore.getGameInfo(p8)
+	local DataResult = GameInfo.data(p9)
+	local StatusResult = GameInfo.status(p9)
+	local Flag = nil
+	local v1 = nil
+	
+	if DataResult == nil then
+		Flag = false
+		v1 = nil
+	else
+		local TryGetPathFromDataModuleResult, TryGetPathFromDataModuleResult2 = TryGetPathFromDataModule(DataResult, Entry, 2)
+		
+		if TryGetPathFromDataModuleResult then
+			Flag = true
+			v1 = TryGetPathFromDataModuleResult2
+		elseif #Entry == 2 then
+			local DerivedFieldValue = calculateDerivedFieldValue(p7, Entry[2], DataResult, p9)
+			Flag = DerivedFieldValue ~= nil
+			v1 = DerivedFieldValue
+		else
+			Flag = false
+			v1 = nil
+		end
+	end
+	if Flag then
+		return v1, StatusResult
+	elseif GameInfo2 then
+		GameInfoStore.getAndFetchGameInfo(p8)
+		
+		return nil, DataStatus.NotReady
+	else
+		return nil, StatusResult
+	end
+end
+
 local config1 = {
 	badge = getDataHydrationField,
 	creator = getDataHydrationField,
-	universe = function(p7, Entry, p8, p9, p10)
-		-- upvalues: getUniverseIcon (copy), DataHydrationModule (copy), getUniverseVoteRatingText (copy), FFlagSduiSupportRatingNoPercent (copy), getDataHydrationField (copy), TryGetPathFromDataModule (copy), calculateDerivedFieldValue (copy), DataStatus (copy)
-		if #Entry == 2 then
-			if Entry[2] == "icon" then
-				return getUniverseIcon(p8, p9)
-			end
-			if Entry[2] == "largeIcon" then
-				return getUniverseIcon(p8, p9, DataHydrationModule.Game.GameIconSize.Large)
-			end
-			if Entry[2] == "rating_text_formatted_brief" then
-				return getUniverseVoteRatingText(p8, p9)
-			end
-			if FFlagSduiSupportRatingNoPercent and Entry[2] == "rating_text_no_percent" then
-				return getUniverseVoteRatingText(p8, p9, true)
-			end
-		end
-		if not p10 then
-			return getDataHydrationField(p7, Entry, p8, p9, p10)
-		end
-		local GameInfoStore = DataHydrationModule.Game.getGameInfoStore(false)
-		local GameInfo, GameInfo2 = GameInfoStore.getGameInfo(p8)
-		local DataResult = GameInfo.data(p9)
-		local StatusResult = GameInfo.status(p9)
-		local Flag = nil
-		local v1 = nil
-		
-		if DataResult == nil then
-			Flag = false
-			v1 = nil
-		else
-			local TryGetPathFromDataModuleResult, TryGetPathFromDataModuleResult2 = TryGetPathFromDataModule(DataResult, Entry, 2)
-			
-			if TryGetPathFromDataModuleResult then
-				Flag = true
-				v1 = TryGetPathFromDataModuleResult2
-			elseif #Entry == 2 then
-				local DerivedFieldValue = calculateDerivedFieldValue(p7, Entry[2], DataResult, p9)
-				Flag = DerivedFieldValue ~= nil
-				v1 = DerivedFieldValue
-			else
-				Flag = false
-				v1 = nil
-			end
-		end
-		if Flag then
-			return v1, StatusResult
-		elseif GameInfo2 then
-			GameInfoStore.getAndFetchGameInfo(p8)
-			
-			return nil, DataStatus.NotReady
-		else
-			return nil, StatusResult
-		end
-	end,
+	universe = if FFlagMigrateGameInfoToStore then resolveUniverseField else getDataHydrationField,
 	ageRecommendation = getDataHydrationField,
 	mediaAsset = getDataHydrationField,
 	socialLink = getDataHydrationField,
@@ -537,7 +554,7 @@ local config1 = {
 
 return {
 	updateDataStores = function(p7)
-		-- upvalues: DataHydrationModule (copy), updateVoteCountsFromUniverses (copy), FFlagSduiCommunitySectionSupport (copy), FFlagSduiMarketplaceCatalogCategorySupport (copy), FFlagSduiMarketplaceCatalogSortSupport (copy), FFlagSduiAddMarketplaceEntityDataHydration (copy), FFlagSduiAddMarketplaceItemFavoriteHydrationModule (copy), FFlagSduiAddCollectibleItemDataHydration (copy), FFlagSduiLeaderboardComponent (copy), FFlagSduiDevStoreSeeAllSupport (copy), FFlagSduiNotificationBadgeHydration (copy), FFlagSduiBuyRobuxHydration (copy), updateBuyRobuxStores (copy)
+		-- upvalues: DataHydrationModule (copy), FFlagMigrateGameInfoToStore (copy), updateVoteCountsFromUniverses (copy), FFlagSduiCommunitySectionSupport (copy), FFlagSduiMarketplaceCatalogCategorySupport (copy), FFlagSduiMarketplaceCatalogSortSupport (copy), FFlagSduiAddMarketplaceEntityDataHydration (copy), FFlagSduiAddMarketplaceItemFavoriteHydrationModule (copy), FFlagSduiAddCollectibleItemDataHydration (copy), FFlagSduiLeaderboardComponent (copy), FFlagSduiDevStoreSeeAllSupport (copy), FFlagSduiNotificationBadgeHydration (copy), FFlagSduiBuyRobuxHydration (copy), updateBuyRobuxStores (copy)
 		if p7.badge then
 			DataHydrationModule.Badges.getBadgeInfoStore(false).updateBadges(p7.badge)
 		end
@@ -545,8 +562,16 @@ return {
 			DataHydrationModule.Creator.getCreatorInfoStore(false).updateCreatorInfos(p7.creator)
 		end
 		if p7.universe then
-			DataHydrationModule.Game.getGameInfoStore(false).updateGameInfos(p7.universe, false)
-			updateVoteCountsFromUniverses(p7.universe)
+			local Universe = p7.universe
+			
+			if FFlagMigrateGameInfoToStore then
+				DataHydrationModule.Game.getGameInfoStore(false).updateGameInfos(Universe, false)
+			else
+				DataHydrationModule.Game.getGameInfoStore(false).updateGameInfos(Universe)
+			end
+			if FFlagMigrateGameInfoToStore then
+				updateVoteCountsFromUniverses(p7.universe)
+			end
 		end
 		if p7.ageRecommendation then
 			DataHydrationModule.Game.getAgeRecommendationStore(false).updateAgeRecommendations(p7.ageRecommendation)

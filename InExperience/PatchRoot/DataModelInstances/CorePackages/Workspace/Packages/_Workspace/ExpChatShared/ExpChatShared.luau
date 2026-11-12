@@ -1,6 +1,4 @@
-﻿local _ = require(script.Reducers.TextChannels)
-
-return {
+﻿return {
 	ActionBindableEvent = require(script.ActionBindableEvent),
 	Actions = require(script.Actions),
 	Analytics = require(script.Analytics),

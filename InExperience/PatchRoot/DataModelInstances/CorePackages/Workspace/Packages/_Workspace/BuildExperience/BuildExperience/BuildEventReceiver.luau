@@ -11,8 +11,6 @@ local GetPlayButtonStoreModule = require(BuildExperience.Stores.GetPlayButtonSto
 local GetCurrentExperienceProjectModule = require(BuildExperience.utils.getCurrentExperienceProject)
 local AdsCampaignNotificationModule = require(BuildExperience.utils.AdsCampaignNotification)
 local OpenDeepLinkModule = require(Parent.BuildExperiencePlaytestLaunch.openDeepLink)
-local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
-local FFlagBuildExperienceHomeTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceHomeTelemetry)
 local FFlagBuildAdUpsell = require(Parent.SharedFlags).FFlagBuildAdUpsell
 local FFlagConnectionRelaunchBuildPlaytest = require(Parent.SharedFlags).FFlagConnectionRelaunchBuildPlaytest
 local PlaytestRejoinModule = if require(Parent.SharedFlags).FFlagBuildExperienceLibrary or FFlagConnectionRelaunchBuildPlaytest then require(Parent.BuildExperiencePlaytestLaunch.PlaytestRejoin) else nil
@@ -71,29 +69,12 @@ local _ = function(p1)
 	MessageBusService:Publish(ToastNotificationProtocolConstants.MESSAGE_DISPLAY_TOAST_NOTIF, ResumeNotification.buildToastNotification(p1))
 end
 
-local function sendResumeNotificationClick(p1, p2, Destination, PlaceId)
-	-- upvalues: SendBuildExperienceEventModule (copy)
-	SendBuildExperienceEventModule("NOTIFICATION_CLICK", {
-		universeId = p1.universeId,
-		placeId = PlaceId,
-		conversationId = p1.sessionId
-	}, {
-		type = "creator_agent_resume",
-		kind = p1.kind,
-		destination = Destination,
-		surface = if p2 then "in_experience" else "app"
-	})
-end
-
 local function routeToBuildChat(p1, IsIsInExperience, IsIsBuildModeActive)
-	-- upvalues: GetCurrentExperienceProjectModule (copy), FFlagBuildExperienceHomeTelemetryModule (copy), sendResumeNotificationClick (copy), GetPlayButtonStoreModule (copy), OpenDeepLinkModule (copy), ResumeNotification (copy)
+	-- upvalues: GetCurrentExperienceProjectModule (copy), GetPlayButtonStoreModule (copy), OpenDeepLinkModule (copy), ResumeNotification (copy)
 	if IsIsInExperience and IsIsBuildModeActive then
 		local CurrentExperienceProjectModule = GetCurrentExperienceProjectModule()
 		
 		if p1.universeId ~= nil and CurrentExperienceProjectModule.universeId == p1.universeId then
-			if FFlagBuildExperienceHomeTelemetryModule then
-				sendResumeNotificationClick(p1, IsIsInExperience, "build_sheet", CurrentExperienceProjectModule.placeId)
-			end
 			local PlayButtonStoreModule = GetPlayButtonStoreModule()
 			PlayButtonStoreModule.setResumeTarget({
 				universeId = p1.universeId,
@@ -104,9 +85,6 @@ local function routeToBuildChat(p1, IsIsInExperience, IsIsBuildModeActive)
 			
 			return
 		end
-	end
-	if FFlagBuildExperienceHomeTelemetryModule then
-		sendResumeNotificationClick(p1, IsIsInExperience, "deep_link", nil)
 	end
 	OpenDeepLinkModule(ResumeNotification.getResumeDeepLink(p1), IsIsInExperience)
 end

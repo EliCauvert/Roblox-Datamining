@@ -1,1 +1,1 @@
-﻿return { BackdropClick = "BackdropClick", Swipe = "Swipe" }
+﻿return { BackdropClick = "BackdropClick" }

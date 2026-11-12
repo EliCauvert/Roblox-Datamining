@@ -11,7 +11,6 @@ local PublishPreviewCardModule = require(BuildExperience.Components.GameConfigur
 local PublishStatusModule = require(BuildExperience.Chat.PublishStatus)
 local UseScrollPerformanceTrackerModule = require(BuildExperience.Telemetry.useScrollPerformanceTracker)
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
-local FFlagBuildExperienceConfigurationRowTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceConfigurationRowTelemetry)
 local Sheet = FoundationModule.Sheet
 local Text = FoundationModule.Text
 local View = FoundationModule.View
@@ -42,7 +41,7 @@ local function PublishSheetContent(p1)
 end
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), Sheet (copy), Text (copy), PublishSheetContent (copy), View (copy), PublishPreview (copy), PublishConfigurationContentContainerModule (copy), FFlagBuildExperienceConfigurationRowTelemetryModule (copy), FFlagBuildCheckGamePermissionsModule (copy), PublishFooterModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), Sheet (copy), Text (copy), PublishSheetContent (copy), View (copy), PublishPreview (copy), PublishConfigurationContentContainerModule (copy), FFlagBuildCheckGamePermissionsModule (copy), PublishFooterModule (copy)
 	local TestId = p1.testId or "publish-bottom-sheet"
 	
 	return ReactModule.createElement(Sheet.Root, {
@@ -65,8 +64,6 @@ return function(p1)
 				Configuration = ReactModule.createElement(PublishConfigurationContentContainerModule, {
 					layoutOrder = 2,
 					universeId = p1.target.universeId,
-					placeId = if FFlagBuildExperienceConfigurationRowTelemetryModule then p1.target.placeId else nil,
-					sessionId = if FFlagBuildExperienceConfigurationRowTelemetryModule then p1.target.sessionId else nil,
 					onOpenTitleDescriptionPage = p1.onOpenTitleDescriptionPage,
 					onOpenMediaSelectionPage = p1.onOpenMediaSelectionPage,
 					onOpenVersionTitleDescriptionPage = p1.onOpenVersionTitleDescriptionPage,

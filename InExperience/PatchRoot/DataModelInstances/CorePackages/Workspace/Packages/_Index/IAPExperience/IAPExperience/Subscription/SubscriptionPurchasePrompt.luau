@@ -6,6 +6,7 @@ local FFlagSignalsNavP3Dispatch = require(Parent1.SharedFlags).FFlagSignalsNavP3
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent1.RobloxAppNavigation).NavigationCommands else nil
 local UseDispatchFunction = require(Parent1.RoactUtils).Hooks.RoactRodux.useDispatch
 local AppPage = require(Parent1.RobloxAppEnums).AppPage
+local TextService = game:GetService("TextService")
 local VerifiedBadgesModule = require(Parent1.VerifiedBadges)
 local ReactModule = require(Parent1.React)
 local GetTextSizeFunction = require(Parent1.Style).GetTextSize
@@ -21,14 +22,15 @@ local Text = FoundationModule.Text
 local Enums = FoundationModule.Enums
 local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local MultiTextLocalizerModule = require(Parent.Locale.MultiTextLocalizer)
 local SubscriptionTitleModule = require(Parent.Subscription.SubscriptionTitle)
 local FFlagHideDevSubsPriceIfSubscribed = require(Parent.Parent.SharedFlags).FFlagHideDevSubsPriceIfSubscribed
 local FFlagEnableDevSubsFastFollowFixes = require(Parent.Parent.SharedFlags).FFlagEnableDevSubsFastFollowFixes
 
-local function generateTestmodeDisclaimer(FooterText, _, Theme, X, p1)
-	-- upvalues: GetTextSizeFunction (copy), ReactModule (copy), NormalizeFontFaceFunction (copy)
+local function generateTestmodeDisclaimer(FooterText, p1, Theme, X, p2)
+	-- upvalues: FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), ReactModule (copy), NormalizeFontFaceFunction (copy)
 	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
@@ -43,8 +45,9 @@ local function generateTestmodeDisclaimer(FooterText, _, Theme, X, p1)
 			BackgroundTransparency = 1,
 			TextWrapped = true,
 			TextSize = 12,
-			Size = UDim2.new(1, 0, 0, GetTextSizeFunction(FooterText, 12, p1.Typography.CaptionSmall.Font, Vector2.new(X, 1e999), { addTemporaryPadding = false }).Y + 2),
-			FontFace = NormalizeFontFaceFunction(p1.Typography.CaptionSmall.Font),
+			Size = UDim2.new(1, 0, 0, if FoundationFontFaceMigration then GetTextSizeFunction(FooterText, 12, p2.Typography.CaptionSmall.Font, Vector2.new(X, 1e999), { addTemporaryPadding = false }).Y + 2 else TextService:GetTextSize(FooterText, 12, p1.Footer.Font, Vector2.new(X, 1e999)).Y + 2),
+			Font = if FoundationFontFaceMigration then nil else p1.Footer.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Typography.CaptionSmall.Font) else nil,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			Text = FooterText,
 			TextColor3 = Theme.TextDefault.Color
@@ -52,24 +55,25 @@ local function generateTestmodeDisclaimer(FooterText, _, Theme, X, p1)
 	})
 end
 
-local function generatePromptText(p1, _, Theme, XOffset, Callback, p2, p3)
-	-- upvalues: ReactModule (copy), NormalizeFontFaceFunction (copy), GetTextSizeFunction (copy)
+local function generatePromptText(p1, p2, Theme, XOffset, Callback, p3, p4)
+	-- upvalues: ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), GetTextSizeFunction (copy), TextService (copy)
 	return ReactModule.createElement("TextLabel", {
-		LayoutOrder = p2 or 2,
+		LayoutOrder = p3 or 2,
 		BackgroundTransparency = 1,
 		Size = UDim2.new(0, XOffset, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		TextXAlignment = Enum.TextXAlignment.Left,
-		FontFace = NormalizeFontFaceFunction(p3.Typography.BodyLarge.Font),
+		Font = if FoundationFontFaceMigration then nil else p2.Body.Font,
+		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p4.Typography.BodyLarge.Font) else nil,
 		Text = p1.description,
 		TextSize = 16,
 		TextWrapped = true,
 		TextColor3 = Theme.TextDefault.Color,
 		TextTransparency = Theme.TextDefault.Transparency,
 		RichText = true,
-		[ReactModule.Change.AbsoluteSize] = function(Frame)
-			-- upvalues: GetTextSizeFunction (upval), p3 (copy), Callback (copy)
-			Callback(GetTextSizeFunction(Frame.Text, Frame.TextSize, p3.Typography.BodyLarge.Font, Vector2.new(Frame.AbsoluteSize.X, 1e999), { addTemporaryPadding = false }).Y)
+		[ReactModule.Change.AbsoluteSize] = function(Frame: Frame)
+			-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), p4 (copy), TextService (upval), Callback (copy)
+			Callback(if FoundationFontFaceMigration then GetTextSizeFunction(Frame.Text, Frame.TextSize, p4.Typography.BodyLarge.Font, Vector2.new(Frame.AbsoluteSize.X, 1e999), { addTemporaryPadding = false }).Y else TextService:GetTextSize(Frame.Text, Frame.TextSize, Frame.Font, Vector2.new(Frame.AbsoluteSize.X, 1e999)).Y)
 		end
 	})
 end
@@ -156,7 +160,7 @@ local function generateDisclosure(p1, OnActivated)
 	})
 end
 
-local function renderNewModalDesign(p1, p2, Theme, p3, p4, YOffset: number, OnActivated, CalculatePromptHeight, p5)
+local function renderNewModalDesign(p1, p2, Theme, p3, X, YOffset: number, OnActivated, CalculatePromptHeight, p4)
 	-- upvalues: VerifiedBadgesModule (copy), GetIconRichTextFunction (copy), Enums (copy), ReactModule (copy), PartialPageModal (copy), createSubscribeButtonStacks (copy), generateTestmodeDisclaimer (copy), FFlagEnableDevSubsFastFollowFixes (copy), generateDisclosure (copy), ImageSetLabel (copy), View (copy), Text (copy), FFlagHideDevSubsPriceIfSubscribed (copy), FoundationModule (copy), generatePromptText (copy)
 	local Text1 = (if p1.isRobuxSubscription then GetIconRichTextFunction(Enums.IconName.Robux) .. " " else "") .. p1.displayPrice .. p1.period
 	
@@ -170,8 +174,8 @@ local function renderNewModalDesign(p1, p2, Theme, p3, p4, YOffset: number, OnAc
 		},
 		onCloseClicked = p1.cancelPurchaseActivated,
 		footerContent = function()
-			-- upvalues: p1 (copy), generateTestmodeDisclaimer (upval), p2 (copy), p3 (copy), Theme (copy), p4 (copy), p5 (copy), FFlagEnableDevSubsFastFollowFixes (upval), generateDisclosure (upval), OnActivated (copy)
-			return if p1.isTestingMode then generateTestmodeDisclaimer(p2.footerText, p3, Theme, p4, p5) elseif FFlagEnableDevSubsFastFollowFixes then nil else generateDisclosure(p2, OnActivated)
+			-- upvalues: p1 (copy), generateTestmodeDisclaimer (upval), p2 (copy), p3 (copy), Theme (copy), X (copy), p4 (copy), FFlagEnableDevSubsFastFollowFixes (upval), generateDisclosure (upval), OnActivated (copy)
+			return if p1.isTestingMode then generateTestmodeDisclaimer(p2.footerText, p3, Theme, X, p4) elseif FFlagEnableDevSubsFastFollowFixes then nil else generateDisclosure(p2, OnActivated)
 		end
 	}, {
 		ReactModule.createElement("Frame", {
@@ -223,20 +227,20 @@ local function renderNewModalDesign(p1, p2, Theme, p3, p4, YOffset: number, OnAc
 						LayoutOrder = 1,
 						tag = "auto-xy content-emphasis text-align-x-left",
 						Text = p1.name,
-						fontStyle = p5.Typography.HeadingSmall
+						fontStyle = p4.Typography.HeadingSmall
 					}),
 					CreatorName = ReactModule.createElement(Text, {
 						LayoutOrder = 2,
 						tag = "auto-xy content-default text-align-x-left",
 						Text = if p1.creatorName then p1.creatorName .. " " .. (p1.creatorVerified and VerifiedBadgesModule.emoji.verified or "") else nil,
-						fontStyle = p5.Typography.TitleLarge
+						fontStyle = p4.Typography.TitleLarge
 					}),
 					PriceRow = if p1.disablePurchase and FFlagHideDevSubsPriceIfSubscribed then nil else ReactModule.createElement(Text, {
 						LayoutOrder = 3,
 						RichText = true,
 						tag = "auto-xy content-emphasis text-align-x-left",
 						Text = Text1,
-						fontStyle = p5.Typography.TitleLarge
+						fontStyle = p4.Typography.TitleLarge
 					})
 				}),
 				ActionButtonsRow = ReactModule.createElement(View, {
@@ -258,7 +262,7 @@ local function renderNewModalDesign(p1, p2, Theme, p3, p4, YOffset: number, OnAc
 						onActivated = p1.onReport
 					}) else nil
 				}),
-				generatePromptText(p1, p3, Theme, p4, CalculatePromptHeight, 3, p5)
+				generatePromptText(p1, p3, Theme, X, CalculatePromptHeight, 3, p4)
 			})
 		})
 	})

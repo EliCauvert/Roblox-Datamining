@@ -9,6 +9,7 @@ local DataHydrationUtilsModule = require(DataHydration.DataHydrationUtils)
 local GetLocalPlayerUserIdFunction = DataHydrationUtilsModule.getLocalPlayerUserId
 local ObserveLocalPlayerUserIdFunction = DataHydrationUtilsModule.observeLocalPlayerUserId
 local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagMigrateGameInfoToStore = SharedFlagsModule.FFlagMigrateGameInfoToStore
 local FFlagDataHydrationAccountReset = SharedFlagsModule.FFlagDataHydrationAccountReset
 local FFlagDataHydrationStaleTime = SharedFlagsModule.FFlagDataHydrationStaleTime
 local FFlagSduiReleaseSearchResultsPageState = SharedFlagsModule.FFlagSduiReleaseSearchResultsPageState
@@ -17,7 +18,7 @@ local LuaAppDefaultDataTtlSec = game:DefineFastInt("LuaAppDefaultDataTtlSec", 36
 local LuaAppDefaultFailedDataTtlSec = game:DefineFastInt("LuaAppDefaultFailedDataTtlSec", 60)
 
 return function(p1, p2, p3)
-	-- upvalues: LuaAppDefaultDataTtlSec (copy), LuaAppDefaultFailedDataTtlSec (copy), FFlagDataHydrationPreserveIncompleteCatalogResultsModule (copy), SignalsModule (copy), DataStatus (copy), FFlagDataHydrationStaleTime (copy), SignalsExperimentalModule (copy), CryoModule (copy), FFlagDataHydrationAccountReset (copy), GetLocalPlayerUserIdFunction (copy), ObserveLocalPlayerUserIdFunction (copy), Players (copy), FFlagSduiReleaseSearchResultsPageState (copy)
+	-- upvalues: LuaAppDefaultDataTtlSec (copy), LuaAppDefaultFailedDataTtlSec (copy), FFlagDataHydrationPreserveIncompleteCatalogResultsModule (copy), SignalsModule (copy), DataStatus (copy), FFlagDataHydrationStaleTime (copy), SignalsExperimentalModule (copy), CryoModule (copy), FFlagMigrateGameInfoToStore (copy), FFlagDataHydrationAccountReset (copy), GetLocalPlayerUserIdFunction (copy), ObserveLocalPlayerUserIdFunction (copy), Players (copy), FFlagSduiReleaseSearchResultsPageState (copy)
 	local P0 = p1 or LuaAppDefaultDataTtlSec
 	local P1 = p2 or LuaAppDefaultFailedDataTtlSec
 	local SanitizeItem = if p3 then p3.sanitizeItem else nil
@@ -111,11 +112,11 @@ return function(p1, p2, p3)
 	end
 	
 	local function updateItems(p7, Enabled)
-		-- upvalues: P0 (copy), getOrCreateSignals (copy), CryoModule (upval), SanitizeItem (copy), t2 (ref), DataStatus (upval), NewClockTimes (ref), TtlSecondsForItem (copy), FFlagDataHydrationStaleTime (upval), ClockTimes (ref), SignalsExperimentalModule (upval)
+		-- upvalues: P0 (copy), getOrCreateSignals (copy), CryoModule (upval), SanitizeItem (copy), t2 (ref), DataStatus (upval), FFlagMigrateGameInfoToStore (upval), NewClockTimes (ref), TtlSecondsForItem (copy), FFlagDataHydrationStaleTime (upval), ClockTimes (ref), SignalsExperimentalModule (upval)
 		local ClockTime = os.clock()
 		local NewClockTime = ClockTime + P0
 		SignalsExperimentalModule.batch(function()
-			-- upvalues: p7 (copy), getOrCreateSignals (upval), CryoModule (upval), SanitizeItem (upval), t2 (upval), DataStatus (upval), Enabled (copy), NewClockTimes (upval), NewClockTime (copy), TtlSecondsForItem (upval), P0 (upval), FFlagDataHydrationStaleTime (upval), ClockTimes (upval), ClockTime (copy)
+			-- upvalues: p7 (copy), getOrCreateSignals (upval), CryoModule (upval), SanitizeItem (upval), t2 (upval), DataStatus (upval), FFlagMigrateGameInfoToStore (upval), Enabled (copy), NewClockTimes (upval), NewClockTime (copy), TtlSecondsForItem (upval), P0 (upval), FFlagDataHydrationStaleTime (upval), ClockTimes (upval), ClockTime (copy)
 			for i, value in p7 do
 				local OrCreateSignals, OrCreateSignals2 = getOrCreateSignals(i)
 				local DataResult = OrCreateSignals.data(false)
@@ -123,7 +124,13 @@ return function(p1, p2, p3)
 				OrCreateSignals2(if SanitizeItem then SanitizeItem(JoinResult) else JoinResult)
 				t2[i](DataStatus.Ready)
 				
-				if Enabled ~= false then
+				if not FFlagMigrateGameInfoToStore then
+					NewClockTimes[i] = if TtlSecondsForItem then os.clock() + (TtlSecondsForItem(JoinResult) or P0) else NewClockTime
+					
+					if FFlagDataHydrationStaleTime then
+						ClockTimes[i] = ClockTime
+					end
+				elseif Enabled ~= false then
 					NewClockTimes[i] = if TtlSecondsForItem then os.clock() + (TtlSecondsForItem(JoinResult) or P0) else NewClockTime
 					
 					if FFlagDataHydrationStaleTime then
@@ -135,19 +142,28 @@ return function(p1, p2, p3)
 	end
 	
 	local function updateItem(Key, p8, Enabled)
-		-- upvalues: getOrCreateSignals (copy), CryoModule (upval), SanitizeItem (copy), t2 (ref), DataStatus (upval), NewClockTimes (ref), P0 (copy), TtlSecondsForItem (copy), FFlagDataHydrationStaleTime (upval), ClockTimes (ref)
+		-- upvalues: getOrCreateSignals (copy), CryoModule (upval), SanitizeItem (copy), t2 (ref), DataStatus (upval), FFlagMigrateGameInfoToStore (upval), NewClockTimes (ref), P0 (copy), TtlSecondsForItem (copy), FFlagDataHydrationStaleTime (upval), ClockTimes (ref)
 		local OrCreateSignals, OrCreateSignals2 = getOrCreateSignals(Key)
 		local DataResult = OrCreateSignals.data(false)
 		local JoinResult = if DataResult and type(DataResult) == "table" and type(p8) == "table" then CryoModule.Dictionary.join(DataResult, p8) else p8
 		OrCreateSignals2(if SanitizeItem then SanitizeItem(JoinResult) else JoinResult)
 		t2[Key](DataStatus.Ready)
 		
-		if Enabled ~= false then
+		if not FFlagMigrateGameInfoToStore then
 			local NewClockTime = os.clock() + P0
 			NewClockTimes[Key] = if TtlSecondsForItem then os.clock() + (TtlSecondsForItem(JoinResult) or P0) else NewClockTime
 			
 			if FFlagDataHydrationStaleTime then
 				ClockTimes[Key] = os.clock()
+			end
+		elseif Enabled ~= false then
+			local NewClockTime = os.clock() + P0
+			NewClockTimes[Key] = if TtlSecondsForItem then os.clock() + (TtlSecondsForItem(JoinResult) or P0) else NewClockTime
+			
+			if FFlagDataHydrationStaleTime then
+				ClockTimes[Key] = os.clock()
+				
+				return
 			end
 		end
 	end

@@ -4,7 +4,9 @@ local FFlagAppChatUseProfileFrameThumbnailModule = require(AppChat.Flags.FFlagAp
 local CryoModule = require(Parent.Cryo)
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
+local Text = require(Parent.AppCommonLib).Text
 local GetTextSizeFunction = require(Parent.Style).GetTextSize
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseUserDataModule = require(AppChat.Hooks.useUserData)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FFlagEnableBlackbirdCheck = require(Parent.SharedFlags).FFlagEnableBlackbirdCheck
@@ -13,7 +15,7 @@ local Repeated = string.rep("W", 20)
 local config = { showDivider = true }
 
 return ReactModule.memo(function(p1)
-	-- upvalues: CryoModule (copy), config (copy), UseUserDataModule (copy), UseTokensFunction (copy), UseIsRobloxSubscriberFunction (copy), FFlagEnableBlackbirdCheck (copy), ReactModule (copy), GetTextSizeFunction (copy), Repeated (copy), FoundationModule (copy), FFlagAppChatUseProfileFrameThumbnailModule (copy)
+	-- upvalues: CryoModule (copy), config (copy), UseUserDataModule (copy), UseTokensFunction (copy), UseIsRobloxSubscriberFunction (copy), FFlagEnableBlackbirdCheck (copy), ReactModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Repeated (copy), Text (copy), FoundationModule (copy), FFlagAppChatUseProfileFrameThumbnailModule (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseUserDataModuleResult = UseUserDataModule(UnionResult.userId)
 	local UseTokensResult = UseTokensFunction()
@@ -25,8 +27,8 @@ return ReactModule.memo(function(p1)
 		end
 	end, { UnionResult.onActivated })
 	local UseMemoResult = ReactModule.useMemo(function(): UDim2
-		-- upvalues: GetTextSizeFunction (upval), Repeated (upval), UseTokensResult (copy)
-		local TextSize = GetTextSizeFunction(Repeated, UseTokensResult.Typography.TitleLarge.FontSize, UseTokensResult.Typography.TitleLarge.Font, Vector2.zero)
+		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Repeated (upval), UseTokensResult (copy), Text (upval)
+		local TextSize = if FoundationFontFaceMigration then GetTextSizeFunction(Repeated, UseTokensResult.Typography.TitleLarge.FontSize, UseTokensResult.Typography.TitleLarge.Font, Vector2.zero) else Text.GetTextBounds(Repeated, UseTokensResult.Typography.TitleLarge.Font, UseTokensResult.Typography.TitleLarge.FontSize, Vector2.zero)
 		
 		return UDim2.fromOffset(TextSize.X, TextSize.Y)
 	end, {
@@ -54,8 +56,8 @@ return ReactModule.memo(function(p1)
 			UserDataSkeleton = ReactModule.createElement(FoundationModule.Skeleton, {
 				LayoutOrder = 1,
 				Size = UDim2.new(UseMemoResult.X, UseMemoResult.Y + ReactModule.useMemo(function(): UDim2
-					-- upvalues: GetTextSizeFunction (upval), UseTokensResult (copy)
-					local RobloxStudio = GetTextSizeFunction("Roblox Studio", UseTokensResult.Typography.CaptionMedium.FontSize, UseTokensResult.Typography.CaptionMedium.Font, Vector2.zero)
+					-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), UseTokensResult (copy), Text (upval)
+					local RobloxStudio = if FoundationFontFaceMigration then GetTextSizeFunction("Roblox Studio", UseTokensResult.Typography.CaptionMedium.FontSize, UseTokensResult.Typography.CaptionMedium.Font, Vector2.zero) else Text.GetTextBounds("Roblox Studio", UseTokensResult.Typography.CaptionMedium.Font, UseTokensResult.Typography.CaptionMedium.FontSize, Vector2.zero)
 					
 					return UDim2.fromOffset(RobloxStudio.X, RobloxStudio.Y)
 				end, {

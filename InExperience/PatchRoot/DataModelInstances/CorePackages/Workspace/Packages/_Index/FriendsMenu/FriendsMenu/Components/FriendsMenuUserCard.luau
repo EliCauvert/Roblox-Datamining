@@ -4,7 +4,9 @@ local GetStandardSizeAvatarHeadShotRbxthumbFunction = require(Parent.UserLib).Ut
 local FFlagFriendsMenuUseProfileFrameThumbnailModule = require(FriendsMenu.Flags.FFlagFriendsMenuUseProfileFrameThumbnail)
 local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
-local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local Images = UIBloxModule.App.ImageSet.Images
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local Interactable = UIBloxModule.Core.Control.Interactable
@@ -15,7 +17,7 @@ local SelectedUsersContextModule = require(FriendsMenu.Context.SelectedUsersCont
 local _UDim = UDim.new(1, 0)
 
 return (ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: ReactModule (copy), SelectedUsersContextModule (copy), UseStyleFunction (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), FFlagFriendsMenuUseProfileFrameThumbnailModule (copy), Interactable (copy), ConstantsModule (copy), _UDim (copy), ImageSetLabel (copy), Images (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: ReactModule (copy), SelectedUsersContextModule (copy), UseStyleFunction (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), FFlagFriendsMenuUseProfileFrameThumbnailModule (copy), Interactable (copy), ConstantsModule (copy), _UDim (copy), ImageSetLabel (copy), Images (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseContextResult = ReactModule.useContext(SelectedUsersContextModule)
 	local UseStyleResult = UseStyleFunction()
 	local Theme = UseStyleResult.Theme
@@ -69,7 +71,8 @@ return (ReactModule.forwardRef(function(p1, Ref)
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Position = UDim2.fromScale(0.5, 1),
 			Size = UDim2.fromOffset(ConstantsModule.FRIEND_MENU_CARD_SIZE, 0),
-			FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionSmall.Font),
+			Font = if FoundationFontFaceMigration then nil else UseStyleResultFont.Footer.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionSmall.Font) else nil,
 			Text = p1.displayName,
 			TextColor3 = Theme.TextDefault.Color,
 			TextSize = UseStyleResultFont.BaseSize * UseStyleResultFont.Footer.RelativeSize,

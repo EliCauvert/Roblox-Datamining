@@ -57,6 +57,7 @@ local FFlagExpChatPresetChatGamepadEnabledModule = require(ExpChat.Flags.FFlagEx
 local FFlagLuaSupportMicroGamepadPreferredInput = SharedFlagsModule.FFlagLuaSupportMicroGamepadPreferredInput
 local FFlagDebugForceEnableChatButtonOnModule = require(ExpChat.Flags.FFlagDebugForceEnableChatButtonOn)
 local FFlagExpChatUseChatConfigStore = SharedFlagsModule.FFlagExpChatUseChatConfigStore
+local FFlagExpChatEnableFriendsTab = SharedFlagsModule.FFlagExpChatEnableFriendsTab
 local FFlagExpChatTabShortcutNav = SharedFlagsModule.FFlagExpChatTabShortcutNav
 local FFlagExpChatGenericChatFocusModule = require(ExpChat.Flags.FFlagExpChatGenericChatFocus)
 local FocusNavigationExperimentModule = require(ExpChat.ShortcutNav.FocusNavigationExperiment)
@@ -465,7 +466,7 @@ function AppLayout.didUpdate(p1, DefaultProps)
 end
 
 function AppLayout.render(p1)
-	-- upvalues: FocusNavigationExperimentModule (copy), GetFFlagExpChatTriggerWindowStatusEventModule (copy), FFlagExpChatWindowStatusEventFixesModule (copy), FFlagExpChatUseChatConfigStore (copy), ClientSettingsUtilityModule (copy), ShowChatEnabledUIModule (copy), IsInExperienceUIVREnabled (copy), GetFFlagExpChatConditionallyMountAppLayoutModule (copy), Config (copy), ConfigModule (copy), FFlagDebugForceEnableChatButtonOnModule (copy), IsChatRegionLockedModule (copy), ExpChatPresetButtonOldInputBarV2 (copy), FFlagExpChatPresetChatEnabled (copy), FFlagExpChatPresetButtonGlobalTabFixModule (copy), FFlagExpChatUniverseChatPresetEnabledModule (copy), RoactModule (copy), FFlagDebugFriendsChatModule (copy), FFlagExpChatTabShortcutNav (copy), FFlagExpChatGenericChatFocusModule (copy), ExpChatFixTopPaddingColor (copy), FFlagExpChatEnableV2ChatWindowModule (copy), FFlagExpChatKeepV2PoolMountedModule (copy), ChatWindowModule (copy), FFlagExpChatPresetChatSendEnabled (copy), PresetChatGateModule (copy), ConstantsModule (copy), PresetChatTrayModule (copy), FFlagExpChatNewInputBarModule (copy), PresetChatInputRow (copy), ManuallyInvokeAmpUpsellFunction (copy), ChatInputModule (copy), FriendsChatDependencyBridgeModule (copy), FriendsChatMainModule (copy), EnableChatButtonModule (copy), ExpChatPresetChatFixesEnabled (copy), PresetChatButtonModule (copy), FFlagExpChatCenterMobilePresetButtonModule (copy), FFlagExpChatPresetFullWidthButtonFixesModule (copy), PresetChatFlyOutModule (copy), ExpChatPresetFixChatHotkey (copy), ChannelBarModule (copy), SpatialUIModule (copy), ChatPlatformProviderModule (copy), ReactFocusNavigationModule (copy), SelectionCursorProvider (copy), CursorProvider (copy), WithSelectionCursorProviderFunction (copy), CursorKind (copy)
+	-- upvalues: FocusNavigationExperimentModule (copy), GetFFlagExpChatTriggerWindowStatusEventModule (copy), FFlagExpChatWindowStatusEventFixesModule (copy), FFlagExpChatUseChatConfigStore (copy), ClientSettingsUtilityModule (copy), ShowChatEnabledUIModule (copy), IsInExperienceUIVREnabled (copy), GetFFlagExpChatConditionallyMountAppLayoutModule (copy), Config (copy), ConfigModule (copy), FFlagDebugForceEnableChatButtonOnModule (copy), IsChatRegionLockedModule (copy), ExpChatPresetButtonOldInputBarV2 (copy), FFlagExpChatPresetChatEnabled (copy), FFlagExpChatPresetButtonGlobalTabFixModule (copy), FFlagExpChatUniverseChatPresetEnabledModule (copy), RoactModule (copy), FFlagDebugFriendsChatModule (copy), FFlagExpChatTabShortcutNav (copy), FFlagExpChatGenericChatFocusModule (copy), ExpChatFixTopPaddingColor (copy), FFlagExpChatEnableV2ChatWindowModule (copy), FFlagExpChatKeepV2PoolMountedModule (copy), ChatWindowModule (copy), FFlagExpChatPresetChatSendEnabled (copy), PresetChatGateModule (copy), ConstantsModule (copy), PresetChatTrayModule (copy), FFlagExpChatNewInputBarModule (copy), PresetChatInputRow (copy), ManuallyInvokeAmpUpsellFunction (copy), ChatInputModule (copy), FriendsChatDependencyBridgeModule (copy), FriendsChatMainModule (copy), EnableChatButtonModule (copy), ExpChatPresetChatFixesEnabled (copy), PresetChatButtonModule (copy), FFlagExpChatCenterMobilePresetButtonModule (copy), FFlagExpChatPresetFullWidthButtonFixesModule (copy), PresetChatFlyOutModule (copy), ExpChatPresetFixChatHotkey (copy), ChannelBarModule (copy), SpatialUIModule (copy), FFlagExpChatEnableFriendsTab (copy), ChatPlatformProviderModule (copy), ReactFocusNavigationModule (copy), SelectionCursorProvider (copy), CursorProvider (copy), WithSelectionCursorProviderFunction (copy), CursorKind (copy)
 	if FocusNavigationExperimentModule.isBackupExposureLoggingEnabled and p1.isChatSurfaceVisibleForStatusTracking() then
 		FocusNavigationExperimentModule.logExposure()
 	end
@@ -502,9 +503,9 @@ function AppLayout.render(p1)
 		IsPresetFlyOutAvailable = ExpChatPresetButtonOldInputBarV2 and (FFlagExpChatPresetChatEnabled and p1.state.isPresetChatAvailable == true)
 		NoShowChatEnabledUIModuleResult = FFlagExpChatPresetChatEnabled and (HasTargetTextChannel and (not FFlagDebugForceEnableChatButtonOnModule1 and not ShowChatEnabledUIModuleResult))
 	end
-	local function v108(SelectionImageObject)
-		-- upvalues: RoactModule (upval), p1 (copy), IsInExperienceUIVREnabled (upval), WITHCHANNELCHATINPUTBAR (ref), ConfigModule (upval), ChatWindowSettings (copy), FFlagExpChatPresetChatEnabled (upval), FFlagDebugFriendsChatModule (upval), FFlagExpChatTabShortcutNav (upval), FFlagExpChatGenericChatFocusModule (upval), BackgroundColor (copy), BackgroundTransparency (copy), RenderingFriends (copy), ExpChatFixTopPaddingColor (upval), IsExperienceChatRendered (copy), GetFFlagExpChatConditionallyMountAppLayoutModule (upval), FFlagExpChatEnableV2ChatWindowModule (upval), FFlagExpChatKeepV2PoolMountedModule (upval), ChatWindowModule (upval), FFlagExpChatPresetChatSendEnabled (upval), PresetChatGateModule (upval), ConstantsModule (upval), PresetChatTrayModule (upval), FFlagExpChatNewInputBarModule (upval), IsPresetFlyOutAvailable (ref), PresetChatInputRow (upval), ShowChatEnabledUIModuleResult (ref), FFlagDebugForceEnableChatButtonOnModule1 (copy), ManuallyInvokeAmpUpsellFunction (upval), FFlagExpChatPresetButtonGlobalTabFixModule (upval), HasTargetTextChannel (copy), ChatInputModule (upval), FriendsChatDependencyBridgeModule (upval), FriendsChatMainModule (upval), EnableChatButtonModule (upval), NoShowChatEnabledUIModuleResult (ref), ExpChatPresetChatFixesEnabled (upval), PresetChatButtonModule (upval), FFlagExpChatCenterMobilePresetButtonModule (upval), FFlagExpChatPresetFullWidthButtonFixesModule (upval), PresetChatFlyOutModule (upval), ExpChatPresetFixChatHotkey (upval), ChannelBarModule (upval), SpatialUIModule (upval), ChatPlatformProviderModule (upval)
-		local CreateElementFunction2 = RoactModule.createElement
+	local function v109(SelectionImageObject)
+		-- upvalues: RoactModule (upval), p1 (copy), IsInExperienceUIVREnabled (upval), WITHCHANNELCHATINPUTBAR (ref), ConfigModule (upval), ChatWindowSettings (copy), FFlagExpChatPresetChatEnabled (upval), FFlagDebugFriendsChatModule (upval), FFlagExpChatTabShortcutNav (upval), FFlagExpChatGenericChatFocusModule (upval), BackgroundColor (copy), BackgroundTransparency (copy), RenderingFriends (copy), ExpChatFixTopPaddingColor (upval), IsExperienceChatRendered (copy), GetFFlagExpChatConditionallyMountAppLayoutModule (upval), FFlagExpChatEnableV2ChatWindowModule (upval), FFlagExpChatKeepV2PoolMountedModule (upval), ChatWindowModule (upval), FFlagExpChatPresetChatSendEnabled (upval), PresetChatGateModule (upval), ConstantsModule (upval), PresetChatTrayModule (upval), FFlagExpChatNewInputBarModule (upval), IsPresetFlyOutAvailable (ref), PresetChatInputRow (upval), ShowChatEnabledUIModuleResult (ref), FFlagDebugForceEnableChatButtonOnModule1 (copy), ManuallyInvokeAmpUpsellFunction (upval), FFlagExpChatPresetButtonGlobalTabFixModule (upval), HasTargetTextChannel (copy), ChatInputModule (upval), FriendsChatDependencyBridgeModule (upval), FriendsChatMainModule (upval), EnableChatButtonModule (upval), NoShowChatEnabledUIModuleResult (ref), ExpChatPresetChatFixesEnabled (upval), PresetChatButtonModule (upval), FFlagExpChatCenterMobilePresetButtonModule (upval), FFlagExpChatPresetFullWidthButtonFixesModule (upval), PresetChatFlyOutModule (upval), ExpChatPresetFixChatHotkey (upval), ChannelBarModule (upval), SpatialUIModule (upval), FFlagExpChatEnableFriendsTab (upval), ChatPlatformProviderModule (upval)
+		local CreateElementFunction = RoactModule.createElement
 		local v1 = "Frame"
 		local config = {
 			AnchorPoint = p1.props.chatLayoutAlignment.AnchorPoint,
@@ -664,7 +665,7 @@ function AppLayout.render(p1)
 					onAbsolutePositionChanged = p1.onAbsolutePositionChanged
 				})
 			}) else nil,
-			enableChatButton = if IsExperienceChatRendered and not FFlagExpChatNewInputBarModule and not IsPresetFlyOutAvailable and FFlagDebugForceEnableChatButtonOnModule1 then RoactModule.createElement(EnableChatButtonModule, {
+			enableChatButton = if IsExperienceChatRendered and (not FFlagExpChatNewInputBarModule and not IsPresetFlyOutAvailable and FFlagDebugForceEnableChatButtonOnModule1) then RoactModule.createElement(EnableChatButtonModule, {
 				LayoutOrder = 3,
 				chatWindowSettings = ChatWindowSettings,
 				transparencyValue = p1.transparencyValue,
@@ -732,10 +733,10 @@ function AppLayout.render(p1)
 					})
 				}) else nil
 			}
-			local Element = nil
+			local FillArea = nil
 			
 			if ExpChatPresetFixChatHotkey or not NoShowChatEnabledUIModuleResult then
-				local CreateElementFunction = RoactModule.createElement
+				local CreateElementFunction2 = RoactModule.createElement
 				local v3 = "Frame"
 				local config4 = {
 					BackgroundTransparency = 1,
@@ -752,7 +753,7 @@ function AppLayout.render(p1)
 				end
 				config4.Size = _UDim2
 				config4.Visible = if ExpChatPresetFixChatHotkey then not NoShowChatEnabledUIModuleResult else nil
-				Element = CreateElementFunction(v3, config4, {
+				FillArea = CreateElementFunction2(v3, config4, {
 					enableChatButton = if FFlagDebugForceEnableChatButtonOnModule1 then RoactModule.createElement(EnableChatButtonModule, {
 						chatWindowSettings = ChatWindowSettings,
 						transparencyValue = p1.transparencyValue,
@@ -784,9 +785,9 @@ function AppLayout.render(p1)
 					}) else nil
 				})
 			else
-				Element = nil
+				FillArea = nil
 			end
-			config3.fillArea = Element
+			config3.fillArea = FillArea
 			ChatInputRow = CreateElementFunction1(v2, config2, config3)
 		else
 			ChatInputRow = nil
@@ -823,13 +824,12 @@ function AppLayout.render(p1)
 				MaxSize = Vector2.new(ConfigModule.ChatWindowMaxWidth, 1e999)
 			})
 		})
+		local Element = CreateElementFunction(v1, config, config1)
 		
 		return RoactModule.createElement(SpatialUIModule.Provider, {
 			value = { isSpatialUIEnabled = p1.props.isSpatialUIEnabled }
 		}, {
-			appLayout = RoactModule.createElement(ChatPlatformProviderModule, {}, {
-				appLayout = CreateElementFunction2(v1, config, config1)
-			})
+			appLayout = if FFlagExpChatEnableFriendsTab then RoactModule.createElement(ChatPlatformProviderModule, {}, { appLayout = Element }) else Element
 		})
 	end
 	
@@ -837,8 +837,8 @@ function AppLayout.render(p1)
 		CursorProvider = RoactModule.createElement(SelectionCursorProvider, {}, {
 			NewCursorProvider = RoactModule.createElement(CursorProvider, {}, {
 				WithSelectionCursorProviderFunction(function(Callback)
-					-- upvalues: v108 (copy), CursorKind (upval)
-					return v108(Callback(CursorKind.Invisible))
+					-- upvalues: v109 (copy), CursorKind (upval)
+					return v109(Callback(CursorKind.Invisible))
 				end)
 			})
 		})

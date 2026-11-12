@@ -203,7 +203,7 @@ function TypeInfo.enter(p1, p2)
 			end
 			if Kind1 == Kind.ARGUMENT then
 				local FindResult = nil
-				local Type1 = nil
+				local Type = nil
 				local Directive = p1:getDirective()
 				local Directive1 = if Directive then Directive else p1:getFieldDef()
 				
@@ -214,12 +214,12 @@ function TypeInfo.enter(p1, p2)
 					end)
 					
 					if FindResult then
-						Type1 = FindResult.type
+						Type = FindResult.type
 					end
 				end
 				p1._argument = FindResult
 				table.insert(p1._defaultValueStack, if FindResult then FindResult.defaultValue else NullModule)
-				table.insert(p1._inputTypeStack, if IsInputTypeFunction(Type1) then Type1 else NullModule)
+				table.insert(p1._inputTypeStack, if IsInputTypeFunction(Type) then Type else NullModule)
 				
 				return
 			else

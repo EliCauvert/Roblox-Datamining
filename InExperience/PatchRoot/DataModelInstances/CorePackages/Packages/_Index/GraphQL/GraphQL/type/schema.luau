@@ -110,18 +110,6 @@ function Module.new(Message)
 			self._typeMap:set(Name, value1)
 			
 			if IsInterfaceTypeFunction(value1) then
-				for _, interface1 in ipairs(value1:getInterfaces()) do
-					if IsInterfaceTypeFunction(interface1) then
-						local GetResult = self._implementationsMap:get(interface1.name)
-						
-						if GetResult == nil then
-							GetResult = { objects = {}, interfaces = {} }
-							self._implementationsMap:set(interface1.name, GetResult)
-						end
-						table.insert(GetResult.interfaces, value1)
-					end
-				end
-			elseif IsObjectTypeFunction(value1) then
 				for _, interface in ipairs(value1:getInterfaces()) do
 					if IsInterfaceTypeFunction(interface) then
 						local GetResult = self._implementationsMap:get(interface.name)
@@ -129,6 +117,18 @@ function Module.new(Message)
 						if GetResult == nil then
 							GetResult = { objects = {}, interfaces = {} }
 							self._implementationsMap:set(interface.name, GetResult)
+						end
+						table.insert(GetResult.interfaces, value1)
+					end
+				end
+			elseif IsObjectTypeFunction(value1) then
+				for _, interface1 in ipairs(value1:getInterfaces()) do
+					if IsInterfaceTypeFunction(interface1) then
+						local GetResult = self._implementationsMap:get(interface1.name)
+						
+						if GetResult == nil then
+							GetResult = { objects = {}, interfaces = {} }
+							self._implementationsMap:set(interface1.name, GetResult)
 						end
 						table.insert(GetResult.objects, value1)
 					end

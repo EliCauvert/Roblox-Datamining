@@ -7,7 +7,6 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local MomentsGetMomentsUserStoreModule = require(Parent.DataHydration.MomentsGetMomentsUserStore)
 local GetLocalUserIdModule = require(Moments.Utils.getLocalUserId)
 local MomentsPostReviewTelemetry = game:DefineFastFlag("MomentsPostReviewTelemetry", false)
-local MomentsUpload = require(Parent.Loggers).Logger:new("Moments.Upload")
 local Signal, Signal2 = require(Parent.Signals).createSignal({})
 
 local function _(Key)
@@ -22,10 +21,7 @@ local MomentsPostLifecycleV1 = nil
 local OnUnhideConnection = nil
 
 local function onPostLifecycleEvent(p1)
-	-- upvalues: SharedFlagsModule (copy), MomentsUpload (copy), GetLocalUserIdModule (copy), MomentsPostReviewTelemetry (copy), t (copy), MomentsCommonModule (copy), Signal (copy), Signal2 (copy), MomentsGetMomentsUserStoreModule (copy)
-	if SharedFlagsModule.FFlagMomentsPostFeedback and type(p1) == "table" then
-		MomentsUpload:debug("event=post_lifecycle_event type={} status={} isNewPost={} postAssetId={}", tostring(p1.type), tostring(p1.status), tostring(p1.isNewPost), (tostring(p1.postAssetId)))
-	end
+	-- upvalues: GetLocalUserIdModule (copy), MomentsPostReviewTelemetry (copy), t (copy), MomentsCommonModule (copy), SharedFlagsModule (copy), Signal (copy), Signal2 (copy), MomentsGetMomentsUserStoreModule (copy)
 	if type(p1) ~= "table" or p1.type ~= "PostStatusChanged" or p1.status ~= "Published" and p1.status ~= "Rejected" or (type(p1.postAssetId) ~= "string" or p1.postAssetId == "") then return end
 	local LocalUserIdModule = GetLocalUserIdModule()
 	

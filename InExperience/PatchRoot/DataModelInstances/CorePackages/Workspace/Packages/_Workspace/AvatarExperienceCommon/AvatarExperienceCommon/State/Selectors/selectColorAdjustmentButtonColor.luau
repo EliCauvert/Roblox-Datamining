@@ -1,8 +1,9 @@
-﻿local SelectAvatarPreviewColorsModule = require(script.Parent.selectAvatarPreviewColors)
+﻿local FFlagAXColorAdjustmentButtonShouldAccountForTryOns = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.AvatarExperienceFlags).FFlagAXColorAdjustmentButtonShouldAccountForTryOns
+local SelectAvatarPreviewColorsModule = require(script.Parent.selectAvatarPreviewColors)
 
 return function(p1)
-	-- upvalues: SelectAvatarPreviewColorsModule (copy)
-	local SelectAvatarPreviewColorsModuleResult = SelectAvatarPreviewColorsModule(p1)
+	-- upvalues: FFlagAXColorAdjustmentButtonShouldAccountForTryOns (copy), SelectAvatarPreviewColorsModule (copy)
+	local SelectAvatarPreviewColorsModuleResult = if FFlagAXColorAdjustmentButtonShouldAccountForTryOns then SelectAvatarPreviewColorsModule(p1) else p1.AvatarExperience.AvatarEditor.Character.BodyColor3s
 	
 	if SelectAvatarPreviewColorsModuleResult then
 		local TorsoColor3 = SelectAvatarPreviewColorsModuleResult.torsoColor3

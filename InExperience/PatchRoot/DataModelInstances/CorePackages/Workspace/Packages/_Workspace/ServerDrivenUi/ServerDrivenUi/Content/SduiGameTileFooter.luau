@@ -10,10 +10,11 @@ local SduiGameTileActiveFriendsFooterModule = require(ServerDrivenUi.Content.Sdu
 local SduiTileFooterModule = require(ServerDrivenUi.Content.SduiTileFooter)
 local SduiInGameFriendsDataModule = require(ServerDrivenUi.DataStore.SduiInGameFriendsData)
 local FFlagLuaAppFixInlineSignalsReactPattern = require(Parent.SharedFlags).FFlagLuaAppFixInlineSignalsReactPattern
+local FFlagLuaAppSduiGameTileMetadataFontStyle = require(Parent.SharedFlags).FFlagLuaAppSduiGameTileMetadataFontStyle
 local FFlagSduiGameTileUseFooterComponentAsDefault = require(Parent.SharedFlags).FFlagSduiGameTileUseFooterComponentAsDefault
 
 return ReactModule.memo(function(p1)
-	-- upvalues: SduiInGameFriendsDataModule (copy), FFlagLuaAppFixInlineSignalsReactPattern (copy), ReactModule (copy), SignalsReactModule (copy), SduiTileFooterModule (copy), SduiGameTileActiveFriendsFooterModule (copy), FFlagSduiGameTileUseFooterComponentAsDefault (copy), Images (copy), AbbreviateCountFunction (copy)
+	-- upvalues: SduiInGameFriendsDataModule (copy), FFlagLuaAppFixInlineSignalsReactPattern (copy), ReactModule (copy), SignalsReactModule (copy), SduiTileFooterModule (copy), FFlagLuaAppSduiGameTileMetadataFontStyle (copy), SduiGameTileActiveFriendsFooterModule (copy), FFlagSduiGameTileUseFooterComponentAsDefault (copy), Images (copy), AbbreviateCountFunction (copy)
 	local GetInGameFriendsByGameFunction = SduiInGameFriendsDataModule.getInGameFriendsByGame
 	local UseSignalStateResult = if FFlagLuaAppFixInlineSignalsReactPattern then SignalsReactModule.useSignalState((ReactModule.useCallback(function(p2): boolean
 		-- upvalues: GetInGameFriendsByGameFunction (copy), p1 (copy)
@@ -42,7 +43,7 @@ return ReactModule.memo(function(p1)
 			testId = "--sdui-game-tile-footer-age-rating",
 			leftText = p1.ageRatingText,
 			analyticsContext = p1.analyticsContext,
-			fontStyle = p1.metadataFontStyle
+			fontStyle = if FFlagLuaAppSduiGameTileMetadataFontStyle then p1.metadataFontStyle else nil
 		})
 	end
 	if UseSignalStateResult then
@@ -75,6 +76,6 @@ return ReactModule.memo(function(p1)
 		leftIcon = IconsStatusGamesRatingSmall,
 		rightText = RightText,
 		rightIcon = IconsStatusGamesPeoplePlayingSmall,
-		fontStyle = p1.metadataFontStyle
+		fontStyle = if FFlagLuaAppSduiGameTileMetadataFontStyle then p1.metadataFontStyle else nil
 	})
 end)

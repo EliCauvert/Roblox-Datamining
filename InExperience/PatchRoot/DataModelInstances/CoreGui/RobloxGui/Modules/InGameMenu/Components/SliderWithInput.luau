@@ -11,6 +11,7 @@ local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packa
 local FoundationModule = require(CorePackages.Packages.Foundation)
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local WithCursorMigration = if FFlagCoreUiMigrateUIBloxToFoundation then FoundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
 local CursorType = if FFlagCoreUiMigrateUIBloxToFoundation then FoundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
 local ExternalEventConnectionModule = require(script.Parent.Parent.Utility.ExternalEventConnection)
@@ -83,7 +84,7 @@ function SliderWithInput.renderFocusHandler(p1)
 end
 
 function SliderWithInput.renderWithSelectionCursor(p1, Callback)
-	-- upvalues: Cryo (copy), Roact (copy), SliderModule (copy), WithFoundationOrUIBloxStyleFunction (copy), AssetImageModule (copy), NormalizeFontFaceFunction (copy), CursorType (copy), ExternalEventConnectionModule (copy), UserInputService (copy)
+	-- upvalues: Cryo (copy), Roact (copy), SliderModule (copy), WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), AssetImageModule (copy), NormalizeFontFaceFunction (copy), CursorType (copy), ExternalEventConnectionModule (copy), UserInputService (copy)
 	local Props = p1.props
 	
 	return Roact.createElement("Frame", {
@@ -100,34 +101,35 @@ function SliderWithInput.renderWithSelectionCursor(p1, Callback)
 			keyboardInputStepInterval = Cryo.None,
 			NextSelectionRight = p1.textBoxRef
 		}))),
-		TextContainer = WithFoundationOrUIBloxStyleFunction(function(Tokens)
+		TextContainer = WithFoundationOrUIBloxStyleFunction(function(p2)
+			-- upvalues: FoundationFontFaceMigration (upval)
 			return {
-				Tokens = Tokens,
+				Tokens = if FoundationFontFaceMigration then p2 else nil,
 				Theme = {
 					TextMuted = {
-						Color = Tokens.Color.Content.Muted.Color3,
-						Transparency = Tokens.Color.Content.Muted.Transparency
+						Color = p2.Color.Content.Muted.Color3,
+						Transparency = p2.Color.Content.Muted.Transparency
 					},
 					TextDefault = {
-						Color = Tokens.Color.Content.Default.Color3,
-						Transparency = Tokens.Color.Content.Default.Transparency
+						Color = p2.Color.Content.Default.Color3,
+						Transparency = p2.Color.Content.Default.Transparency
 					},
 					BackgroundUIContrast = {
-						Color = Tokens.Color.OverMedia.OverMedia_0.Color3,
-						Transparency = Tokens.Color.OverMedia.OverMedia_0.Transparency
+						Color = p2.Color.OverMedia.OverMedia_0.Color3,
+						Transparency = p2.Color.OverMedia.OverMedia_0.Transparency
 					}
 				},
 				Font = {
 					BaseSize = 1,
 					Body = {
-						Font = Tokens.Typography.BodyLarge.Font,
-						RelativeSize = Tokens.Typography.BodyLarge.FontSize,
-						RelativeMinSize = Tokens.Typography.BodyLarge.FontSize
+						Font = p2.Typography.BodyLarge.Font,
+						RelativeSize = p2.Typography.BodyLarge.FontSize,
+						RelativeMinSize = p2.Typography.BodyLarge.FontSize
 					}
 				}
 			}
 		end, function(p2)
-			-- upvalues: Props (copy), Roact (upval), AssetImageModule (upval), p1 (copy), NormalizeFontFaceFunction (upval), Callback (copy), CursorType (upval)
+			-- upvalues: Props (copy), Roact (upval), AssetImageModule (upval), p1 (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), Callback (copy), CursorType (upval)
 			local TextMuted = Props.disabled and p2.Theme.TextMuted or p2.Theme.TextDefault
 			
 			return Roact.createElement(AssetImageModule.Label, {
@@ -145,7 +147,8 @@ function SliderWithInput.renderWithSelectionCursor(p1, Callback)
 					Size = UDim2.new(1, 0, 1, 0),
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.new(0.5, 0, 0.5, 0),
-					FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font),
+					Font = if FoundationFontFaceMigration then nil else p2.Font.Body.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font) else nil,
 					TextScaled = true,
 					ClearTextOnFocus = false,
 					TextEditable = not Props.disabled,

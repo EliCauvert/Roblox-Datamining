@@ -3,7 +3,9 @@ local UserInputService = game:GetService("UserInputService")
 local Parent = script:FindFirstAncestor("InputUi").Parent
 local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
-local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local Images = UIBloxModule.App.ImageSet.Images
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
@@ -12,7 +14,7 @@ local _ = require(script.Parent.GamepadDisconnectTokenMapper)
 local GamepadMessageKeyEngineFeature = game:GetEngineFeature("GamepadMessageKeyEngineFeature")
 
 return function(p1)
-	-- upvalues: UseDesignTokensFunction (copy), GamepadMessageKeyEngineFeature (copy), MemStorageService (copy), UseLocalizationFunction (copy), UserInputService (copy), ReactModule (copy), ImageSetLabel (copy), Images (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseDesignTokensFunction (copy), GamepadMessageKeyEngineFeature (copy), MemStorageService (copy), UseLocalizationFunction (copy), UserInputService (copy), ReactModule (copy), ImageSetLabel (copy), Images (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local EmphasisColor3 = UseDesignTokensResult.Color.Content.Emphasis.Color3
 	local Transparency = UseDesignTokensResult.Color.Content.Emphasis.Transparency
@@ -121,7 +123,8 @@ return function(p1)
 							TextColor3 = EmphasisColor3,
 							TextTransparency = Transparency,
 							TextSize = UseDesignTokensResult.Typography.HeadingLarge.FontSize,
-							FontFace = NormalizeFontFaceFunction(UseDesignTokensResult.Typography.HeadingLarge.Font),
+							Font = if FoundationFontFaceMigration then nil else UseDesignTokensResult.Typography.HeadingLarge.Font,
+							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseDesignTokensResult.Typography.HeadingLarge.Font) else nil,
 							TextXAlignment = Enum.TextXAlignment.Left
 						})
 					}),
@@ -135,7 +138,8 @@ return function(p1)
 						TextColor3 = EmphasisColor3,
 						TextTransparency = Transparency,
 						TextSize = UseDesignTokensResult.Typography.TitleLarge.FontSize,
-						FontFace = NormalizeFontFaceFunction(UseDesignTokensResult.Typography.TitleLarge.Font),
+						Font = if FoundationFontFaceMigration then nil else UseDesignTokensResult.Typography.TitleLarge.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseDesignTokensResult.Typography.TitleLarge.Font) else nil,
 						TextXAlignment = Enum.TextXAlignment.Left
 					})
 				})

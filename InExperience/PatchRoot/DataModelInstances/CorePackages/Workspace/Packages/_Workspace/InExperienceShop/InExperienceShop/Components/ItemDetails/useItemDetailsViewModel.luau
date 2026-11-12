@@ -6,7 +6,6 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local SharedFlagsModule = require(Parent.SharedFlags)
 local AbuseVectorModule = require(Parent.GenericAbuseReporting.AbuseVector)
 local FFlagLuaAppEnableGamePassFreeTrialsModule = require(InExperienceShop.Flags.FFlagLuaAppEnableGamePassFreeTrials)
-local FFlagEnableFreeTrialTopBarChipModule = require(InExperienceShop.Flags.FFlagEnableFreeTrialTopBarChip)
 local FFlagEnableGamePassTrialUnifiedLoggingModule = require(InExperienceShop.Flags.FFlagEnableGamePassTrialUnifiedLogging)
 local InitiateShopItemPurchaseModule = require(InExperienceShop.initiateShopItemPurchase)
 local FFlagCategoryLoggingInShopPurchaseModule = require(InExperienceShop.Flags.FFlagCategoryLoggingInShopPurchase)
@@ -36,7 +35,7 @@ local function _(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), config (copy), SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), ReactModule (copy), findSectionForItem (copy), ShopPageType (copy), FFlagEnableGamePassTrialUnifiedLoggingModule (copy), InitiateShopItemPurchaseModule (copy), UseGamePassTrialRedemptionModule (copy), FFlagEnableFreeTrialTopBarChipModule (copy), InExperienceShop (copy), SharedFlagsModule (copy), AbuseVectorModule (copy), UseShopReportOverflowModule (copy), FormatUpdatedDateModule (copy), ConstantsModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), config (copy), SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), ReactModule (copy), findSectionForItem (copy), ShopPageType (copy), FFlagEnableGamePassTrialUnifiedLoggingModule (copy), InitiateShopItemPurchaseModule (copy), UseGamePassTrialRedemptionModule (copy), InExperienceShop (copy), SharedFlagsModule (copy), AbuseVectorModule (copy), UseShopReportOverflowModule (copy), FormatUpdatedDateModule (copy), ConstantsModule (copy)
 	local Item = p1.item
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetInExperienceShopStoreModule)
@@ -106,7 +105,7 @@ return function(p1)
 			InitiateShopItemPurchaseModule(Item.id, Item.itemType, UseMemoResult.shopPageType, CategoryLocation)
 		end
 	end, { Item.id, Item.itemType, UseMemoResult })
-	local UseGamePassTrialRedemptionModuleResult = UseGamePassTrialRedemptionModule(Item.id, UseMemoResult, if FFlagEnableFreeTrialTopBarChipModule then Item.thumbnail else nil)
+	local UseGamePassTrialRedemptionModuleResult = UseGamePassTrialRedemptionModule(Item.id, UseMemoResult)
 	
 	if FFlagEnableGamePassTrialUnifiedLoggingModule then
 		local UseRefResult = ReactModule.useRef(nil)

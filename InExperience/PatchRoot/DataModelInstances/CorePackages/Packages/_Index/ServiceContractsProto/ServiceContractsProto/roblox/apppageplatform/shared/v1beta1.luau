@@ -63,6 +63,5 @@ return {
 	universe_user_vote_data = require(script.universe_user_vote_data),
 	universe_user_vote_feedback_metadata_data = require(script.universe_user_vote_feedback_metadata_data),
 	user_library_saved_state_data = require(script.user_library_saved_state_data),
-	user_profile_data = require(script.user_profile_data),
-	vote_data = require(script.vote_data)
+	user_profile_data = require(script.user_profile_data)
 }

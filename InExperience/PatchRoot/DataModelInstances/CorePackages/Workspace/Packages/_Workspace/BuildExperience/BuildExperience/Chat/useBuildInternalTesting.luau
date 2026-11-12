@@ -95,7 +95,7 @@ return function(Entry, Session, RouteSessionId)
 			end
 			return ExperimentOverride.getInternalSelection(UseResult(), p1)
 		end, function(p1, p2): boolean
-			return p1.isSelected == p2.isSelected and p1.previewHash == p2.previewHash and p1.previewSpecName == p2.previewSpecName
+			return p1.isSelected == p2.isSelected and p1.previewHash == p2.previewHash
 		end)
 	end, { Session, UseResult })))
 	
@@ -123,7 +123,6 @@ return function(Entry, Session, RouteSessionId)
 	return if Entry == nil then nil else {
 		isSelected = UseSignalStateResult.isSelected,
 		previewHash = UseSignalStateResult.previewHash,
-		previewSpecName = UseSignalStateResult.previewSpecName,
 		onSelect = function()
 			-- upvalues: Entry (copy), UseRefResult1 (copy), UseMemoResult1 (copy), ExperimentOverride (upval), UseResult (copy), Session (copy), UseMemoResult (copy)
 			local Selection = if Entry == nil then nil else Entry.getSelection(false)
@@ -136,12 +135,12 @@ return function(Entry, Session, RouteSessionId)
 				end
 			end
 		end,
-		onSaveSpec = function(p1, p2)
+		onSaveSpec = function(p1)
 			-- upvalues: Entry (copy), UseRefResult1 (copy), UseMemoResult1 (copy), ExperimentOverride (upval), UseResult (copy), Session (copy), UseMemoResult (copy)
 			local Selection = if Entry == nil then nil else Entry.getSelection(false)
 			
 			if UseRefResult1.current == UseMemoResult1 and (Selection ~= nil and not Selection.isBusy) and ExperimentOverride.getInternalSelection(UseResult(), false).isSelected then
-				ExperimentOverride.set(UseResult(), p1, p2)
+				ExperimentOverride.set(UseResult(), p1)
 				ExperimentOverride.selectInternal(UseResult(), true)
 				
 				if Session ~= nil then

@@ -2,6 +2,7 @@
 local Parent = Foundation.Parent
 local ReactModule = require(Parent.React)
 local ReactUtilsModule = require(Parent.ReactUtils)
+local FoundationFontFaceMigration = require(script:FindFirstAncestor("BuildExperience").Parent.Foundation).Utility.Flags.FoundationFontFaceMigration
 local Components = Foundation.Components
 local IconModule = require(Components.Icon)
 local PaddingModule = require(Components.Padding)
@@ -41,7 +42,7 @@ local config = {
 	variant = InputVariantModule.Standard
 }
 local MemoResult = ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: ReactModule (copy), NormalizeFontFaceModule (copy), IsPluginSecurityModule (copy), PaddingModule (copy)
+	-- upvalues: ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceModule (copy), IsPluginSecurityModule (copy), PaddingModule (copy)
 	local IsBoundsChecker = p1.isBoundsChecker
 	local IsMultiLine = p1.isMultiLine or IsBoundsChecker
 	
@@ -50,7 +51,8 @@ local MemoResult = ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 		Selectable = false,
 		Active = not IsBoundsChecker and nil,
 		Visible = not IsBoundsChecker and nil,
-		FontFace = NormalizeFontFaceModule(p1.fontStyle.Font),
+		Font = if FoundationFontFaceMigration then nil else p1.fontStyle.Font,
+		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceModule(p1.fontStyle.Font) else nil,
 		TextSize = p1.fontStyle.FontSize,
 		LineHeight = p1.fontStyle.LineHeight,
 		TextColor3 = if p1.textStyle then p1.textStyle.Color3 else nil,
@@ -81,7 +83,7 @@ local MemoResult = ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 end))
 
 return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1)
-	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), GetBindableValueModule (copy), UseTextInputVariantsModule (copy), InputVariantModule (copy), UseStyleTagsModule (copy), UsePreferredInputModule (copy), UseComposerFocusLockModule (copy), GetDisabledStyleModule (copy), GetMultiLineTextHeightModule (copy), ChatTextAreaDebugModule (copy), MeasureTextLineCountModule (copy), NormalizeFontFaceModule (copy), InputFocusBehaviorModule (copy), UseComposerKeyboardConnectionsModule (copy), ControlStateModule (copy), RadiusModule (copy), TruncateTextToCursorModule (copy), UseBindableModule (copy), ReactUtilsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), BlendTransparenciesModule (copy), ConstantsModule (copy), StateLayerAffordanceModule (copy), ScrollViewModule (copy), MemoResult (copy), MapBindableModule (copy), IconModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), GetBindableValueModule (copy), UseTextInputVariantsModule (copy), InputVariantModule (copy), UseStyleTagsModule (copy), UsePreferredInputModule (copy), UseComposerFocusLockModule (copy), GetDisabledStyleModule (copy), GetMultiLineTextHeightModule (copy), ChatTextAreaDebugModule (copy), MeasureTextLineCountModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceModule (copy), InputFocusBehaviorModule (copy), UseComposerKeyboardConnectionsModule (copy), ControlStateModule (copy), RadiusModule (copy), TruncateTextToCursorModule (copy), UseBindableModule (copy), ReactUtilsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), BlendTransparenciesModule (copy), ConstantsModule (copy), StateLayerAffordanceModule (copy), ScrollViewModule (copy), MemoResult (copy), MapBindableModule (copy), IconModule (copy)
 	local Tbl1 = Tbl
 	
 	if Tbl.Selectable == nil then
@@ -148,13 +150,13 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1)
 		end
 	end, {})
 	local UseResult1 = ReactModule.useCallback(function(Text)
-		-- upvalues: MeasureTextLineCountModule (upval), WithDefaultsModuleResult (copy), MultiLineTextHeightModule (copy), UseResult (copy), NormalizeFontFaceModule (upval), FontStyle (copy), FontSize (copy), UseStateResult2_4 (copy)
+		-- upvalues: MeasureTextLineCountModule (upval), WithDefaultsModuleResult (copy), MultiLineTextHeightModule (copy), UseResult (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceModule (upval), FontStyle (copy), FontSize (copy), UseStateResult2_4 (copy)
 		local MeasureTextLineCountModuleResult = MeasureTextLineCountModule({
 			text = Text,
 			maxLines = WithDefaultsModuleResult.maxLines,
 			singleLineHeight = MultiLineTextHeightModule,
 			layoutWidth = UseResult(),
-			font = NormalizeFontFaceModule(FontStyle.Font),
+			font = if FoundationFontFaceMigration then NormalizeFontFaceModule(FontStyle.Font) else FontStyle.Font,
 			fontSize = FontSize
 		})
 		UseStateResult2_4((math.max(if MeasureTextLineCountModuleResult.boundsY and MeasureTextLineCountModuleResult.boundsY > 0 then math.ceil(MeasureTextLineCountModuleResult.boundsY) else MultiLineTextHeightModule, MeasureTextLineCountModuleResult.lineCount * MultiLineTextHeightModule)))

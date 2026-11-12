@@ -251,11 +251,11 @@ return function(Callback, p2)
 							if CommentsByFeedItemId1 == nil then
 								v4 = v6
 							else
-								local V81 = v6 or {}
+								local V79 = v6 or {}
 								for i1, value1 in CommentsByFeedItemId1 do
-									V81[i1] = value1
+									V79[i1] = value1
 								end
-								v4 = V81
+								v4 = V79
 							end
 							if DeepLinkedMomentsForUnavailableDialog.reactionsByMomentId then
 								GetReactionsStoreModule(false).setBatchReactionCounts(DeepLinkedMomentsForUnavailableDialog.reactionsByMomentId)

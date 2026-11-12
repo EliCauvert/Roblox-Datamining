@@ -371,19 +371,19 @@ return function(p3)
 		CreatorCreditStore.refreshQuotaSummary():catch(function() end)
 	end, { CreatorCreditStore }), p3.attemptedOption, UseLocalizationResult.adsManager, if FFlagBuildAdsManagerUniverseUrlModule then p3.universeId else nil) else nil
 	local BalanceState = nil
-	local BALANCELOADING = nil
+	local LocalizeResult = nil
 	
 	if UseSignalStateResult == nil then
 		if UseSignalStateResult1 == DataStatus.Failed then
 			BalanceState = "failed"
-			BALANCELOADING = CreateAdCampaignSheetConfigModule.BALANCE_UNAVAILABLE
+			LocalizeResult = CreateAdCampaignSheetConfigModule.BALANCE_UNAVAILABLE
 		else
 			BalanceState = "loading"
-			BALANCELOADING = CreateAdCampaignSheetConfigModule.BALANCE_LOADING
+			LocalizeResult = CreateAdCampaignSheetConfigModule.BALANCE_LOADING
 		end
 	else
 		BalanceState = "ready"
-		BALANCELOADING = NumberLocalization.localize(string.format("%.0f", (math.floor(UseSignalStateResult.robuxBalance))), LocalizationService.RobloxLocaleId)
+		LocalizeResult = NumberLocalization.localize(string.format("%.0f", (math.floor(UseSignalStateResult.robuxBalance))), LocalizationService.RobloxLocaleId)
 	end
 	return if FFlagEnablePaidAdsModule then {
 		variant = "twoOptions",
@@ -408,7 +408,7 @@ return function(p3)
 		hasCreateError = UseTwoOptionsControlsResult.isErrorForSelectedOption,
 		createErrorText = CreateError,
 		balanceState = BalanceState,
-		balanceText = BALANCELOADING,
+		balanceText = LocalizeResult,
 		showCloseButton = UseTwoOptionsControlsResult.showCloseButton,
 		onOptionChanged = UseTwoOptionsControlsResult.onOptionChanged,
 		onOpenBuyRobux = UseTwoOptionsControlsResult.onOpenBuyRobux,
@@ -449,7 +449,7 @@ return function(p3)
 		createText = UseLocalizationResult.create,
 		moderationNotice = UseLocalizationResult.moderationNotice,
 		balanceState = BalanceState,
-		balanceText = BALANCELOADING,
+		balanceText = LocalizeResult,
 		isCreatePending = IsIsCreatePending,
 		hasCreateError = IsHasCreateError,
 		createErrorText = CreateError,

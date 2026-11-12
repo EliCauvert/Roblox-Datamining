@@ -7,6 +7,7 @@ local Checkbox = FoundationModule.Checkbox
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local Images = UIBloxModule.App.ImageSet.Images
 local CheckboxRow = RoactModule.PureComponent:extend("CheckboxRow")
@@ -30,38 +31,39 @@ CheckboxRow.validateProps = TModule.interface({
 })
 
 function CheckboxRow.render(p1)
-	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), RoactModule (copy), FoundationModule (copy), ImageSetLabel (copy), Images (copy), NormalizeFontFaceFunction (copy), Checkbox (copy)
-	return WithFoundationOrUIBloxStyleFunction(function(Tokens)
+	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), RoactModule (copy), FoundationModule (copy), ImageSetLabel (copy), Images (copy), NormalizeFontFaceFunction (copy), Checkbox (copy)
+	return WithFoundationOrUIBloxStyleFunction(function(p2)
+		-- upvalues: FoundationFontFaceMigration (upval)
 		return {
-			Tokens = Tokens,
+			Tokens = if FoundationFontFaceMigration then p2 else nil,
 			Theme = {
 				IconDefault = {
-					Color = Tokens.Color.Content.Default.Color3,
-					Transparency = Tokens.Color.Content.Default.Transparency
+					Color = p2.Color.Content.Default.Color3,
+					Transparency = p2.Color.Content.Default.Transparency
 				},
 				IconEmphasis = {
-					Color = Tokens.Color.Content.Emphasis.Color3,
-					Transparency = Tokens.Color.Content.Emphasis.Transparency
+					Color = p2.Color.Content.Emphasis.Color3,
+					Transparency = p2.Color.Content.Emphasis.Transparency
 				},
 				TextEmphasis = {
-					Color = Tokens.Color.Content.Emphasis.Color3,
-					Transparency = Tokens.Color.Content.Emphasis.Transparency
+					Color = p2.Color.Content.Emphasis.Color3,
+					Transparency = p2.Color.Content.Emphasis.Transparency
 				},
 				TextMuted = {
-					Color = Tokens.Color.Content.Muted.Color3,
-					Transparency = Tokens.Color.Content.Muted.Transparency
+					Color = p2.Color.Content.Muted.Color3,
+					Transparency = p2.Color.Content.Muted.Transparency
 				}
 			},
 			Font = {
 				BaseSize = 1,
 				Header2 = {
-					Font = Tokens.Typography.TitleLarge.Font,
-					RelativeSize = Tokens.Typography.TitleLarge.FontSize
+					Font = p2.Typography.TitleLarge.Font,
+					RelativeSize = p2.Typography.TitleLarge.FontSize
 				}
 			}
 		}
 	end, function(p2)
-		-- upvalues: p1 (copy), FFlagCoreUiMigrateUIBloxToFoundation (upval), RoactModule (upval), FoundationModule (upval), ImageSetLabel (upval), Images (upval), NormalizeFontFaceFunction (upval), Checkbox (upval)
+		-- upvalues: p1 (copy), FFlagCoreUiMigrateUIBloxToFoundation (upval), RoactModule (upval), FoundationModule (upval), ImageSetLabel (upval), Images (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), Checkbox (upval)
 		local BaseSize = p2.Font.BaseSize
 		local TextMuted = nil
 		local IconDefault = nil
@@ -109,7 +111,8 @@ function CheckboxRow.render(p1)
 				TextColor3 = TextMuted.Color,
 				TextTransparency = TextMuted.Transparency,
 				TextSize = p2.Font.Header2.RelativeSize * BaseSize,
-				FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.TitleLarge.Font),
+				Font = if FoundationFontFaceMigration then nil else p2.Font.Header2.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.TitleLarge.Font) else nil,
 				TextXAlignment = Enum.TextXAlignment.Left
 			}),
 			checkbox = RoactModule.createElement(Checkbox, {

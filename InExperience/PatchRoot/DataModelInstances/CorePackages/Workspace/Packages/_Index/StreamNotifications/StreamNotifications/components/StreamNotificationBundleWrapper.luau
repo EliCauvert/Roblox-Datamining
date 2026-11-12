@@ -11,6 +11,7 @@ local UIBloxModule = require(Parent.UIBlox)
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local Images = UIBloxModule.App.ImageSet.Images
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local IconsActionsTruncationExpand = Images["icons/actions/truncationExpand"]
@@ -24,11 +25,13 @@ local AnalyticsConstantsModule = require(StreamNotifications.analytics.analytics
 local config = { stiffness = 207, damping = 24, mass = 1 }
 
 return function(p1)
-	-- upvalues: UseStyleFunction (copy), UseTokensFunction (copy), NormalizeFontFaceFunction (copy), ReactModule (copy), ReactOtterModule (copy), UseLocalizationFunction (copy), ConstantsModule (copy), NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy), config (copy), StreamNotificationAnimationWrapperModule (copy), _UDim (copy), _UDim1 (copy), ImageSetLabel (copy), _UDim2 (copy), IconsActionsTruncationCollapse (copy), ScaledDefaultPadding (copy), IconsActionsTruncationExpand (copy)
+	-- upvalues: UseStyleFunction (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), NormalizeFontFaceFunction (copy), ReactModule (copy), ReactOtterModule (copy), UseLocalizationFunction (copy), ConstantsModule (copy), NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy), config (copy), StreamNotificationAnimationWrapperModule (copy), _UDim (copy), _UDim1 (copy), ImageSetLabel (copy), _UDim2 (copy), IconsActionsTruncationCollapse (copy), ScaledDefaultPadding (copy), IconsActionsTruncationExpand (copy)
 	local UseStyleResult = UseStyleFunction()
-	local UseTokensResult = UseTokensFunction()
-	local NormalizeFontFaceResult = NormalizeFontFaceFunction(UseTokensResult.Typography.TitleMedium.Font)
-	local FontSize = UseTokensResult.Typography.TitleMedium.FontSize
+	local UseTokensResult = if FoundationFontFaceMigration then UseTokensFunction() else nil
+	local UseStyleResultFont = UseStyleResult.Font
+	local HeaderFont = if FoundationFontFaceMigration then nil else UseStyleResultFont.Header1.Font
+	local NormalizeFontFaceResult = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.TitleMedium.Font) else nil
+	local FontSize = if FoundationFontFaceMigration then UseTokensResult.Typography.TitleMedium.FontSize else UseStyleResultFont.BaseSize * UseStyleResultFont.CaptionHeader.RelativeSize
 	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(74)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(true)
@@ -44,7 +47,7 @@ return function(p1)
 		end
 	end)
 	
-	local function v34(Notifications)
+	local function v37(Notifications)
 		local Ids = {}
 		
 		for _, notification in Notifications do
@@ -55,14 +58,14 @@ return function(p1)
 		return Ids
 	end
 	
-	local function v35()
-		-- upvalues: UseStateResult2 (copy), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), p1 (copy), v34 (copy)
+	local function v38()
+		-- upvalues: UseStateResult2 (copy), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), p1 (copy), v37 (copy)
 		UseStateResult2(function(p2): boolean
-			-- upvalues: NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), p1 (upval), v34 (upval)
+			-- upvalues: NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), p1 (upval), v37 (upval)
 			NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.click, if p2 then AnalyticsConstantsModule.EventNames.bundleOpened else AnalyticsConstantsModule.EventNames.bundleClosed, {
 				bundleKey = p1.notifications[1].content.bundleKey or nil,
 				totalNotifications = #p1.notifications or nil,
-				notificationIds = v34(p1.notifications) or nil
+				notificationIds = v37(p1.notifications) or nil
 			})
 			
 			if p2 then
@@ -93,7 +96,7 @@ return function(p1)
 	end, { p1.notifications })
 	
 	return (ReactModule.useMemo(function()
-		-- upvalues: p1 (copy), UseStateResult (copy), UseStateResult3 (copy), ReactModule (upval), StreamNotificationAnimationWrapperModule (upval), UseResult (copy), UseAnimatedBindingResult (copy), UseStateResult1 (copy), ConstantsModule (upval), UseStyleResult (copy), _UDim (upval), NormalizeFontFaceResult (copy), FontSize (copy), v35 (copy), _UDim1 (upval), UseLocalizationResult (copy), ImageSetLabel (upval), _UDim2 (upval), IconsActionsTruncationCollapse (upval), ScaledDefaultPadding (upval), IconsActionsTruncationExpand (upval)
+		-- upvalues: p1 (copy), UseStateResult (copy), UseStateResult3 (copy), ReactModule (upval), StreamNotificationAnimationWrapperModule (upval), UseResult (copy), UseAnimatedBindingResult (copy), UseStateResult1 (copy), ConstantsModule (upval), UseStyleResult (copy), _UDim (upval), HeaderFont (copy), NormalizeFontFaceResult (copy), FontSize (copy), v38 (copy), _UDim1 (upval), UseLocalizationResult (copy), ImageSetLabel (upval), _UDim2 (upval), IconsActionsTruncationCollapse (upval), ScaledDefaultPadding (upval), IconsActionsTruncationExpand (upval)
 		local Elements = {}
 		
 		for LayoutOrder, notification in ipairs(p1.notifications) do
@@ -185,9 +188,10 @@ return function(p1)
 			ShowLessButton = if UseStateResult or not UseStateResult3 then nil else ReactModule.createElement("TextButton", {
 				Size = UDim2.new(0, 160, 0, 40),
 				Text = "",
+				Font = HeaderFont,
 				FontFace = NormalizeFontFaceResult,
 				TextSize = FontSize,
-				[ReactModule.Event.Activated] = v35,
+				[ReactModule.Event.Activated] = v38,
 				BackgroundTransparency = 1,
 				BackgroundColor3 = UseStyleResult.Theme.BackgroundMuted.Color,
 				AutoButtonColor = false,
@@ -223,6 +227,7 @@ return function(p1)
 							LayoutOrder = 1,
 							BackgroundTransparency = 1,
 							Text = UseLocalizationResult and UseLocalizationResult.lessText,
+							Font = HeaderFont,
 							FontFace = NormalizeFontFaceResult,
 							TextSize = FontSize,
 							TextColor3 = UseStyleResult.Theme.TextMuted.Color,
@@ -250,7 +255,7 @@ return function(p1)
 				Size = UDim2.new(1, 0, 0, if UseStateResult and UseStateResult3 then UseStateResult1 + ConstantsModule.DefaultPadding * 2 else 0),
 				BackgroundTransparency = 1,
 				Text = "",
-				[ReactModule.Event.Activated] = v35,
+				[ReactModule.Event.Activated] = v38,
 				ZIndex = 5,
 				BorderSizePixel = 0,
 				AutoButtonColor = false
@@ -281,6 +286,7 @@ return function(p1)
 						LayoutOrder = 1,
 						BackgroundTransparency = 1,
 						Text = UseLocalizationResult and (UseLocalizationResult.moreText and string.gsub(UseLocalizationResult.moreText, "{notificationCount}", (tostring(#p1.notifications - 1)))),
+						Font = HeaderFont,
 						FontFace = NormalizeFontFaceResult,
 						TextSize = FontSize,
 						TextColor3 = UseStyleResult.Theme.TextMuted.Color,
@@ -314,6 +320,7 @@ return function(p1)
 	end, {
 		p1.notifications, UseStateResult, UseStateResult1, UseStateResult3,
 		p1.impressionsTag, p1.impressionMetadataByNotificationId,
-		NormalizeFontFaceResult, FontSize
+		if FoundationFontFaceMigration then NormalizeFontFaceResult else nil,
+		if FoundationFontFaceMigration then FontSize else nil
 	}))
 end

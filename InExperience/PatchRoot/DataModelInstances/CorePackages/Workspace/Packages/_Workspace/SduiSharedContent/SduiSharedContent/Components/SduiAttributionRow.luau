@@ -8,9 +8,10 @@ local Text = FoundationModule.Text
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local FFlagSduiAttributionRowV2 = require(Parent.SharedFlags).FFlagSduiAttributionRowV2
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), FFlagSduiAttributionRowV2 (copy), ReactModule (copy), View (copy), FoundationModule (copy), Image (copy), Text (copy), Icon (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseTokensFunction (copy), FFlagSduiAttributionRowV2 (copy), ReactModule (copy), View (copy), FoundationModule (copy), Image (copy), Text (copy), Icon (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local LayoutOrder = p1.layoutOrder
 	local ZIndex = p1.zIndex
 	local Position = p1.position
@@ -152,7 +153,8 @@ return ReactModule.memo(function(p1)
 					Position = UDim2.new(0, 0, 0, 0),
 					Size = UDim2.new(1, 0, 0, UseTokensResult.Size.Size_500),
 					TextSize = TitleMedium.FontSize,
-					FontFace = NormalizeFontFaceFunction(TitleMedium.Font),
+					Font = if FoundationFontFaceMigration then nil else TitleMedium.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(TitleMedium.Font) else nil,
 					TextColor3 = UseTokensResult.DarkMode.Content.Emphasis.Color3,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextTruncate = Enum.TextTruncate.SplitWord
@@ -164,7 +166,8 @@ return ReactModule.memo(function(p1)
 					Position = UDim2.new(0, 0, 1, 0),
 					Size = UDim2.new(1, 0, 0, UseTokensResult.Size.Size_500),
 					TextSize = BodyMedium.FontSize,
-					FontFace = NormalizeFontFaceFunction(BodyMedium.Font),
+					Font = if FoundationFontFaceMigration then nil else BodyMedium.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(BodyMedium.Font) else nil,
 					TextColor3 = UseTokensResult.DarkMode.Content.Emphasis.Color3,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextTruncate = Enum.TextTruncate.SplitWord

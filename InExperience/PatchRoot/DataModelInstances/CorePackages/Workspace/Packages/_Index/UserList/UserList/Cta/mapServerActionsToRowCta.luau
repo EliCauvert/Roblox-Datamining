@@ -1,10 +1,8 @@
 ﻿local UserList = script:FindFirstAncestor("UserList")
-local Parent = UserList.Parent
-local FoundationModule = require(Parent.Foundation)
+local FoundationModule = require(UserList.Parent.Foundation)
 local _ = require(UserList.Common.Types)
 local FFlagUserListChatCtaStandardVariantModule = require(UserList.Flags.FFlagUserListChatCtaStandardVariant)
 local FFlagUserListCanonicalCtaAnalyticsModule = require(UserList.Flags.FFlagUserListCanonicalCtaAnalytics)
-local FFlagUserListActionsV2 = require(Parent.SharedFlags).FFlagUserListActionsV2
 local IconName = FoundationModule.Enums.IconName
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local ButtonTypes = require(UserList.Common.Enums).ButtonTypes
@@ -28,7 +26,7 @@ local config = {
 	JoinExperience = { buttonType = ButtonTypes.Join }
 }
 
-local function v11() end
+local function v9() end
 
 local function _(List, p1): boolean
 	if not List then
@@ -43,7 +41,7 @@ local function _(List, p1): boolean
 end
 
 return function(p2, p3, p4, p5, p6)
-	-- upvalues: config (copy), FFlagUserListCanonicalCtaAnalyticsModule (copy), v11 (copy), FFlagUserListActionsV2 (copy), FFlagUserListChatCtaStandardVariantModule (copy), ButtonTypes (copy), IconName (copy)
+	-- upvalues: config (copy), FFlagUserListCanonicalCtaAnalyticsModule (copy), v9 (copy), FFlagUserListChatCtaStandardVariantModule (copy), ButtonTypes (copy), IconName (copy)
 	if not p2 or not p2.buttons then
 		return { primaryCta = nil, secondaryCta = nil }
 	end
@@ -75,8 +73,8 @@ return function(p2, p3, p4, p5, p6)
 					onActivated = if Callback then function()
 						-- upvalues: Callback (copy), p4 (copy), FFlagUserListCanonicalCtaAnalyticsModule (upval), p6 (copy)
 						Callback(p4, if FFlagUserListCanonicalCtaAnalyticsModule then p6 else nil)
-					end else v11,
-					isDisabled = if FFlagUserListActionsV2 then if Entry.isDisabled or button.disabledReason ~= nil then true else nil else Entry.isDisabled,
+					end else v9,
+					isDisabled = Entry.isDisabled,
 					disabledReason = button.disabledReason,
 					variant = if FFlagUserListChatCtaStandardVariantModule then Entry.variant else nil,
 					minWidth = if p5 then p5.primaryCtaMinWidth else nil,
@@ -92,7 +90,7 @@ return function(p2, p3, p4, p5, p6)
 						onActivated = if Callback1 then function()
 							-- upvalues: Callback1 (copy), p4 (copy), FFlagUserListCanonicalCtaAnalyticsModule (upval), p6 (copy)
 							Callback1(p4, if FFlagUserListCanonicalCtaAnalyticsModule then p6 else nil)
-						end else v11
+						end else v9
 					}
 				end
 				return { primaryCta = PrimaryCta, secondaryCta = SecondaryCta }

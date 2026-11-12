@@ -1,1 +1,0 @@
-﻿return game:DefineFastInt("InGameRsvpPushUpsellTimeoutMs", 2000)

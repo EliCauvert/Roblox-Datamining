@@ -123,11 +123,11 @@ return function(p1)
 			Callback1(true)
 		end, {})
 	end
-	local v3 = nil
+	local UseStateResult = nil
 	local Callback2 = nil
 	
 	if FFlagShowSwitchServerButton then
-		v3, Callback2 = ReactModule.useState(false)
+		UseStateResult, Callback2 = ReactModule.useState(false)
 	end
 	local Element1 = ReactModule.createElement(ReactModule.Fragment, {}, {
 		MenuButtonsWrapper = if IsSideSheetEnabledModule then nil else ReactModule.createElement(MenuButtonsWrapperModule),
@@ -170,7 +170,7 @@ return function(p1)
 			scrollingFrameStore = if FFlagEnablePeopleListLazyRender and p1.scrollingFrame then UseScrollingFrameStoreModuleResult else nil
 		}),
 		BlockingModalManager = ReactModule.createElement(UseMemoResult),
-		SwitchServerConfirmation = if FFlagShowSwitchServerButton and v3 then ReactModule.createElement(SwitchServerConfirmation, { setSwitchServerConfirmationOpen = Callback2 }) else nil
+		SwitchServerConfirmation = if FFlagShowSwitchServerButton and UseStateResult then ReactModule.createElement(SwitchServerConfirmation, { setSwitchServerConfirmationOpen = Callback2 }) else nil
 	})
 	
 	return if FFlagPeopleListButtonOverflowModule then ReactModule.createElement(PeoplePageLayoutContextModule.Provider, { value = UseMemoResult1 }, { Page = Element2 }) else Element2

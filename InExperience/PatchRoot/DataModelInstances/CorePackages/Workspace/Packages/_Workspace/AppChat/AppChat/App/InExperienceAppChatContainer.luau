@@ -40,6 +40,7 @@ local FFlagSquadAppChatRTNFix = require(Parent.SharedFlags).FFlagSquadAppChatRTN
 local FIntAppChatWideBreakpointMinHeightModule = require(AppChat.Flags.FIntAppChatWideBreakpointMinHeight)
 local FIntAppChatWideBreakpointMinWidthModule = require(AppChat.Flags.FIntAppChatWideBreakpointMinWidth)
 local PartyPageCarouselExperimentation = require(Parent.SocialExperiments).PartyPageCarouselExperimentation
+local GetFFlagAppChatEnableRootedNavigationModule = require(AppChat.Flags.getFFlagAppChatEnableRootedNavigation)
 local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
 local GetRootedNavigationStoreModule = require(AppChat.Stores.GetRootedNavigationStore)
 local DomLocatorsModule = require(AppChat.Utils.DomLocators)
@@ -50,7 +51,7 @@ local function _()
 end
 
 return function(p1)
-	-- upvalues: UseDispatchFunction (copy), UseContextFunction (copy), ParentContainerContextModule (copy), UseStateFunction (copy), UseExternalNavigationByScreenModule (copy), UseMemoFunction (copy), Signal (copy), RobloxEventReceiver (copy), NotificationService (copy), ReactModule (copy), ResponsiveModule (copy), FIntAppChatWideBreakpointMinWidthModule (copy), FIntAppChatWideBreakpointMinHeightModule (copy), FFlagAppChatInExpSelectChatMembersMobileHeightModule (copy), UseAppChatIsWideModeModule (copy), AppChat (copy), UseRefFunction (copy), UseSignalStateFunction (copy), GetRootedNavigationStoreModule (copy), UseEffectFunction (copy), PartyPageCarouselExperimentation (copy), SetFormFactorFunction (copy), FormFactorModule (copy), UseParentContainerExtentsModule (copy), UseCallbackFunction (copy), AppChatInExperienceMountMinLoadingTimeMs (copy), AppChatEntryPointModule (copy), LocalPlayer (copy), ChatPlacementContextModule (copy), Loading (copy), IconSize (copy), IconButton (copy), IconName (copy), ButtonSize (copy), ButtonVariant (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), ChatEventReceiverModule (copy), ChatExternalEventReceiverModule (copy), ContainerModule (copy), FFlagSquadAppChatRTNFix (copy), SquadAppChatEventReceiver (copy)
+	-- upvalues: UseDispatchFunction (copy), UseContextFunction (copy), ParentContainerContextModule (copy), UseStateFunction (copy), UseExternalNavigationByScreenModule (copy), UseMemoFunction (copy), Signal (copy), RobloxEventReceiver (copy), NotificationService (copy), ReactModule (copy), ResponsiveModule (copy), FIntAppChatWideBreakpointMinWidthModule (copy), FIntAppChatWideBreakpointMinHeightModule (copy), FFlagAppChatInExpSelectChatMembersMobileHeightModule (copy), UseAppChatIsWideModeModule (copy), GetFFlagAppChatEnableRootedNavigationModule (copy), AppChat (copy), UseRefFunction (copy), UseSignalStateFunction (copy), GetRootedNavigationStoreModule (copy), UseEffectFunction (copy), PartyPageCarouselExperimentation (copy), SetFormFactorFunction (copy), FormFactorModule (copy), UseParentContainerExtentsModule (copy), UseCallbackFunction (copy), AppChatInExperienceMountMinLoadingTimeMs (copy), AppChatEntryPointModule (copy), LocalPlayer (copy), ChatPlacementContextModule (copy), Loading (copy), IconSize (copy), IconButton (copy), IconName (copy), ButtonSize (copy), ButtonVariant (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), ChatEventReceiverModule (copy), ChatExternalEventReceiverModule (copy), ContainerModule (copy), FFlagSquadAppChatRTNFix (copy), SquadAppChatEventReceiver (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local HideParentContainerFunction = UseContextFunction(ParentContainerContextModule).hideParentContainer
 	local UseStateResult, UseStateResult2 = UseStateFunction(0)
@@ -73,14 +74,15 @@ return function(p1)
 		}
 	}) == "wide"
 	local NoFFlagAppChatInExpSelectChatMembersMobileHeightModule = if FFlagAppChatInExpSelectChatMembersMobileHeightModule or UseOrientationResult ~= ResponsiveModule.Keys.Portrait and IsWide then not FFlagAppChatInExpSelectChatMembersMobileHeightModule or UseAppChatIsWideModeModule(true) else false
-	local IsRooted: boolean = p1.requestedRoute ~= nil and (p1.requestedRoute.screen == require(AppChat.EnumScreens).ChatDetails and (p1.requestedRoute.params ~= nil and p1.requestedRoute.params.rooted == true))
+	local FFlagAppChatEnableRootedNavigationModule = GetFFlagAppChatEnableRootedNavigationModule()
+	local IsRooted: boolean = FFlagAppChatEnableRootedNavigationModule and (p1.requestedRoute ~= nil and (p1.requestedRoute.screen == require(AppChat.EnumScreens).ChatDetails and (p1.requestedRoute.params ~= nil and p1.requestedRoute.params.rooted == true)))
 	local UseRefResult1 = UseRefFunction(false)
 	
 	if IsRooted then
 		UseRefResult1.current = true
 	end
 	local NoFFlagAppChatInExpSelectChatMembersMobileHeightModule1 = not UseRefResult1.current and NoFFlagAppChatInExpSelectChatMembersMobileHeightModule
-	local UseSignalStateResult = UseSignalStateFunction(GetRootedNavigationStoreModule(false).getIsNavigationPending)
+	local UseSignalStateResult = if FFlagAppChatEnableRootedNavigationModule then UseSignalStateFunction(GetRootedNavigationStoreModule(false).getIsNavigationPending) else false
 	UseEffectFunction(function()
 		-- upvalues: PartyPageCarouselExperimentation (upval), NoFFlagAppChatInExpSelectChatMembersMobileHeightModule1 (copy), UseDispatchResult (copy), SetFormFactorFunction (upval), FormFactorModule (upval)
 		if PartyPageCarouselExperimentation.getAppChatFormFactorEnabled() then
@@ -153,13 +155,13 @@ return function(p1)
 					size = IconSize.Large,
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.fromScale(0.5, 0.5)
-				}) else ReactModule.createElement("Frame", {
+				}) elseif FFlagAppChatEnableRootedNavigationModule then ReactModule.createElement("Frame", {
 					Name = "AppChatContent",
 					[ReactModule.Tag] = "data-testid=app-chat-content",
 					BackgroundTransparency = 1,
 					Size = UDim2.fromScale(1, 1),
 					Visible = not UseSignalStateResult
-				}, { AppChatEntryPoint = Element }),
+				}, { AppChatEntryPoint = Element }) else Element,
 				LoadingOverlay = if UseSignalStateResult then ReactModule.createElement("Frame", {
 					Name = "AppChatLoadingOverlay",
 					[ReactModule.Tag] = "data-testid=app-chat-loading-overlay",

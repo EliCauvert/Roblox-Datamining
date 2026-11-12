@@ -12,6 +12,7 @@ local ButtonEnum = UIBloxModule.App.Button.Enum
 local FoundationModule = require(Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseChatPagePaddingModule = require(AppChat.Contexts.ChatPagePadding.useChatPagePadding)
 local UseIsInExperienceModule = require(AppChat.Hooks.useIsInExperience)
 local config = {
@@ -22,7 +23,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseTokensFunction (copy), UseIsInExperienceModule (copy), UseChatPagePaddingModule (copy), UseEffectFunction (copy), UseMemoFunction (copy), ButtonEnum (copy), ReactModule (copy), NormalizeFontFaceFunction (copy), ButtonStack (copy)
+	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseTokensFunction (copy), UseIsInExperienceModule (copy), UseChatPagePaddingModule (copy), UseEffectFunction (copy), UseMemoFunction (copy), ButtonEnum (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ButtonStack (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseStyleResult = UseStyleFunction()
 	local Style = JoinResult.style or UseStyleResult
@@ -101,7 +102,8 @@ return function(p1)
 			LayoutOrder = 1,
 			TextWrapped = true,
 			TextSize = Style.Tokens.FontSize.FontSize_300,
-			FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.BodyLarge.Font),
+			Font = if FoundationFontFaceMigration then nil else Style.Font.Body.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.BodyLarge.Font) else nil,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Text = JoinResult.bodyText,

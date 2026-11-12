@@ -178,11 +178,11 @@ local function pruneFeed(Tbl, TopicIdToNumCacheItems)
 								if Content_pools[PoolId1] == nil then
 									local Copy2 = table.clone(ContentPool)
 									local Items = ContentPool.items
-									local Largest1 = math.max(TopicIdToNumCacheItem.cap - TopicIdToNumCacheItem.count, 0)
+									local Largest = math.max(TopicIdToNumCacheItem.cap - TopicIdToNumCacheItem.count, 0)
 									local Items1 = {}
 									
 									if Items ~= nil then
-										for i1 = 1, math.min(#Items, Largest1) do
+										for i1 = 1, math.min(#Items, Largest) do
 											Items1[i1] = Items[i1]
 										end
 									end
@@ -208,12 +208,12 @@ local function pruneFeed(Tbl, TopicIdToNumCacheItems)
 								Copy[value4] = t1
 							end
 						end
-						local Copy1 = table.clone(Entry)
+						local Copy3 = table.clone(Entry)
 						local InputData1 = Entry.input_data
-						local Copy11 = table.clone(InputData1)
-						Copy11.kind = { type = InputData1.kind.type, value = Copy }
-						Copy1.input_data = Copy11
-						Entry_map[value2] = Copy1
+						local Copy4 = table.clone(InputData1)
+						Copy4.kind = { type = InputData1.kind.type, value = Copy }
+						Copy3.input_data = Copy4
+						Entry_map[value2] = Copy3
 					end
 				end
 			end
@@ -222,19 +222,19 @@ local function pruneFeed(Tbl, TopicIdToNumCacheItems)
 	if next(Entry_map) == nil then
 		return nil
 	end
-	local Copy3 = table.clone(Tbl)
-	Copy3.entry_map = Entry_map
+	local Copy1 = table.clone(Tbl)
+	Copy1.entry_map = Entry_map
 	
 	if Tbl.content_pools ~= nil then
-		Copy3.content_pools = Content_pools
+		Copy1.content_pools = Content_pools
 	end
 	if Tbl.entry_order ~= nil then
-		Copy3.entry_order = filterOrder(Tbl.entry_order, Entry_map)
+		Copy1.entry_order = filterOrder(Tbl.entry_order, Entry_map)
 	end
 	if Tbl.entry_order_map ~= nil then
-		Copy3.entry_order_map = filterOrderMap(Tbl.entry_order_map, Entry_map)
+		Copy1.entry_order_map = filterOrderMap(Tbl.entry_order_map, Entry_map)
 	end
-	return Copy3
+	return Copy1
 end
 
 local function pruneHydration(Tbl, p4)

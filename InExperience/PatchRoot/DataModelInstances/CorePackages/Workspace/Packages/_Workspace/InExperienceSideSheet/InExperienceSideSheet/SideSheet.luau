@@ -41,14 +41,12 @@ local ClosePeoplePageOpenedWithSideSheetModule = require(InExperienceSideSheet.U
 local GetDidSideSheetOpenWithPeoplePageModule = require(InExperienceSideSheet.Utils.getDidSideSheetOpenWithPeoplePage)
 local GetIsPeoplePageOpenModule = require(InExperienceSideSheet.Utils.getIsPeoplePageOpen)
 local GetSideSheetVisibilityModule = require(InExperienceSideSheet.Utils.getSideSheetVisibility)
-local NextWrappedIntegerFunction = require(Parent.AppCommonLib).nextWrappedInteger
 local ToggleSideSheetModule = require(InExperienceSideSheet.Utils.toggleSideSheet)
 local FlagsModule = require(InExperienceSideSheet.Flags)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagMountUnmountSideSheet = FlagsModule.FFlagMountUnmountSideSheet
 local FFlagSideSheetOpenPeoplePage = FlagsModule.FFlagSideSheetOpenPeoplePage
 local FFlagSideSheetOpenPeoplePageRestoreChat = FlagsModule.FFlagSideSheetOpenPeoplePageRestoreChat
-local FFlagSideSheetUnifiedMenuOrder = SharedFlagsModule.FFlagSideSheetUnifiedMenuOrder
 local FFlagSideSheetFocusNav = SharedFlagsModule.FFlagSideSheetFocusNav
 local FFlagEnableWhatsNew = SharedFlagsModule.FFlagEnableWhatsNew
 local FFlagUseAnimateScrollViewToSelectionHelper = SharedFlagsModule.FFlagUseAnimateScrollViewToSelectionHelper
@@ -102,7 +100,7 @@ local UseFocusGuiObject = if FFlagSideSheetFocusNav then require(Parent.ReactFoc
 local Root = nil
 
 local function SideSheetContent(p1)
-	-- upvalues: UseScaledValueFunction (copy), UseStyleSheetFunction (copy), UseBackgroundStyleModule (copy), SignalsReactModule (copy), getDeviceSafePadding (copy), FFlagMountUnmountSideSheet (copy), UseDrawerShouldMountFunction (copy), FFlagSideSheetOpenPeoplePage (copy), GetSideSheetVisibilityModule (copy), GetIsPeoplePageOpenModule (copy), GetDidSideSheetOpenWithPeoplePageModule (copy), getScrollableContentTopWidgetIntegrations (copy), FFlagEnableSideSheetWidgets (copy), ReactModule (copy), SidesheetAnalyticsModule (copy), FFlagSideSheetFocusNav (copy), UseFocusGuiObject (ref), UseLastInputModeFunction (copy), FFlagSideSheetOpenPeoplePageRestoreChat (copy), UsePreferredInputFunction (copy), SignalsModule (copy), GuiService (copy), NextWrappedIntegerFunction (copy), ResponsiveModule (copy), MouseIconOverrideService (copy), FFlagShowSwitchServerButton (copy), IsPioneerLaunchFunction (copy), GetSwitchServerStoreFunction (copy), SwitchServerTelemetry (copy), ContextActionService (copy), list (copy), ToggleSideSheetModule (copy), FFlagUseAnimateScrollViewToSelectionHelper (copy), UseSideSheetFocusNavScrollViewAnimationModule (copy), GetSideSheetConfigStoreModule (copy), ClosePeoplePageOpenedWithSideSheetModule (copy), UserProfileRowModule (copy), config (copy), ExperienceDetailsRowModule (copy), FFlagSideSheetUnifiedMenuOrder (copy), View (copy), Divider (copy), SideSheetWidgetListModule (copy), ChromeModule (copy), VerticalListModule (copy), getAboveFoldIntegrations (copy), getBelowFoldIntegrations (copy), getScrollableContentBottomWidgetIntegrations (copy), ScrollView (copy), FooterModule (copy), FFlagEnableWhatsNew (copy), WhatsNewAnchor (copy), DrawerContainer (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
+	-- upvalues: UseScaledValueFunction (copy), UseStyleSheetFunction (copy), UseBackgroundStyleModule (copy), SignalsReactModule (copy), getDeviceSafePadding (copy), FFlagMountUnmountSideSheet (copy), UseDrawerShouldMountFunction (copy), FFlagSideSheetOpenPeoplePage (copy), GetSideSheetVisibilityModule (copy), GetIsPeoplePageOpenModule (copy), GetDidSideSheetOpenWithPeoplePageModule (copy), getScrollableContentTopWidgetIntegrations (copy), FFlagEnableSideSheetWidgets (copy), ReactModule (copy), SidesheetAnalyticsModule (copy), FFlagSideSheetFocusNav (copy), UseFocusGuiObject (ref), UseLastInputModeFunction (copy), FFlagSideSheetOpenPeoplePageRestoreChat (copy), UsePreferredInputFunction (copy), SignalsModule (copy), GuiService (copy), ResponsiveModule (copy), MouseIconOverrideService (copy), FFlagShowSwitchServerButton (copy), IsPioneerLaunchFunction (copy), GetSwitchServerStoreFunction (copy), SwitchServerTelemetry (copy), ContextActionService (copy), list (copy), ToggleSideSheetModule (copy), FFlagUseAnimateScrollViewToSelectionHelper (copy), UseSideSheetFocusNavScrollViewAnimationModule (copy), GetSideSheetConfigStoreModule (copy), ClosePeoplePageOpenedWithSideSheetModule (copy), UserProfileRowModule (copy), config (copy), ExperienceDetailsRowModule (copy), View (copy), Divider (copy), SideSheetWidgetListModule (copy), ChromeModule (copy), VerticalListModule (copy), getAboveFoldIntegrations (copy), getBelowFoldIntegrations (copy), getScrollableContentBottomWidgetIntegrations (copy), ScrollView (copy), FooterModule (copy), FFlagEnableWhatsNew (copy), WhatsNewAnchor (copy), DrawerContainer (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
 	local UseScaledValueResult = UseScaledValueFunction(320)
 	local UseStyleSheetResult = UseStyleSheetFunction()
 	local UseBackgroundStyleModuleResult = UseBackgroundStyleModule()
@@ -136,18 +134,16 @@ local function SideSheetContent(p1)
 	end
 	local UseRefResult1 = ReactModule.useRef(false)
 	local UseRefResult2 = if FFlagSideSheetOpenPeoplePageRestoreChat then ReactModule.useRef(nil) else nil
-	local UseRefResult3 = if FFlagSideSheetOpenPeoplePageRestoreChat then ReactModule.useRef(false) else nil
-	local UseRefResult4 = if FFlagSideSheetOpenPeoplePageRestoreChat then ReactModule.useRef(0) else nil
-	local UseRefResult5 = ReactModule.useRef(false)
+	local UseRefResult3 = ReactModule.useRef(false)
 	local UsePreferredInputResult = UsePreferredInputFunction()
-	local UseRefResult6 = ReactModule.useRef(false)
+	local UseRefResult4 = ReactModule.useRef(false)
 	ReactModule.useEffect(function()
-		-- upvalues: SignalsModule (upval), GetSideSheetVisibilityModule (upval), FFlagSideSheetOpenPeoplePageRestoreChat (upval), p1 (copy), UseRefResult2 (copy), UseRefResult3 (copy), GuiService (upval), UseRefResult1 (copy), UseRefResult4 (copy), NextWrappedIntegerFunction (upval)
+		-- upvalues: SignalsModule (upval), GetSideSheetVisibilityModule (upval), FFlagSideSheetOpenPeoplePageRestoreChat (upval), UseRefResult2 (copy), p1 (copy), GuiService (upval), UseRefResult1 (copy)
 		local Effect = SignalsModule.createEffect(function(p2)
-			-- upvalues: GetSideSheetVisibilityModule (upval), FFlagSideSheetOpenPeoplePageRestoreChat (upval), p1 (upval), UseRefResult2 (upval), UseRefResult3 (upval), GuiService (upval), UseRefResult1 (upval), UseRefResult4 (upval), NextWrappedIntegerFunction (upval)
+			-- upvalues: GetSideSheetVisibilityModule (upval), FFlagSideSheetOpenPeoplePageRestoreChat (upval), UseRefResult2 (upval), p1 (upval), GuiService (upval), UseRefResult1 (upval)
 			local SideSheetVisibilityModule = GetSideSheetVisibilityModule(p2)
 			
-			if FFlagSideSheetOpenPeoplePageRestoreChat and p1.ChatSelector and SideSheetVisibilityModule and not UseRefResult2.current and not UseRefResult3.current then
+			if FFlagSideSheetOpenPeoplePageRestoreChat and UseRefResult2 and p1.ChatSelector and SideSheetVisibilityModule and not UseRefResult2.current then
 				local Visibility = p1.ChatSelector:GetVisibility()
 				
 				if GuiService.MenuIsOpen and not Visibility then
@@ -158,11 +154,8 @@ local function SideSheetContent(p1)
 			end
 			GuiService:SetMenuIsOpen(SideSheetVisibilityModule, "InExperienceSideSheet")
 			
-			if FFlagSideSheetOpenPeoplePageRestoreChat and p1.ChatSelector then
+			if FFlagSideSheetOpenPeoplePageRestoreChat and UseRefResult2 and p1.ChatSelector then
 				if SideSheetVisibilityModule then
-					UseRefResult4.current = NextWrappedIntegerFunction(UseRefResult4.current)
-					UseRefResult3.current = false
-					
 					if UseRefResult2.current then
 						UseRefResult2.current:Disconnect()
 						UseRefResult2.current = nil
@@ -171,44 +164,19 @@ local function SideSheetContent(p1)
 					
 					return
 				else
-					if UseRefResult1.current and not UseRefResult2.current and not UseRefResult3.current then
-						local function _()
-							-- upvalues: UseRefResult2 (upval), UseRefResult3 (upval), p1 (upval), UseRefResult1 (upval)
+					if UseRefResult1.current and not UseRefResult2.current then
+						local function restoreChat()
+							-- upvalues: UseRefResult2 (upval), p1 (upval), UseRefResult1 (upval)
 							if UseRefResult2.current then
 								UseRefResult2.current:Disconnect()
 							end
 							UseRefResult2.current = nil
-							UseRefResult3.current = false
 							p1.ChatSelector:SetVisible(true)
 							UseRefResult1.current = false
 						end
 						
 						if GuiService.MenuIsOpen then
-							UseRefResult2.current = GuiService.MenuClosed:Once(function()
-								-- upvalues: UseRefResult4 (upval), UseRefResult3 (upval), UseRefResult2 (upval), GetSideSheetVisibilityModule (upval), p1 (upval), UseRefResult1 (upval)
-								local Current = UseRefResult4.current
-								UseRefResult3.current = true
-								
-								if UseRefResult2.current then
-									UseRefResult2.current:Disconnect()
-									UseRefResult2.current = nil
-								end
-								task.defer(function()
-									-- upvalues: UseRefResult4 (upval), Current (copy), GetSideSheetVisibilityModule (upval), UseRefResult3 (upval), UseRefResult2 (upval), p1 (upval), UseRefResult1 (upval)
-									if UseRefResult4.current ~= Current or GetSideSheetVisibilityModule() then
-										UseRefResult3.current = false
-										
-										return
-									end
-									if UseRefResult2.current then
-										UseRefResult2.current:Disconnect()
-									end
-									UseRefResult2.current = nil
-									UseRefResult3.current = false
-									p1.ChatSelector:SetVisible(true)
-									UseRefResult1.current = false
-								end)
-							end)
+							UseRefResult2.current = GuiService.MenuClosed:Once(restoreChat)
 							
 							return
 						end
@@ -216,7 +184,6 @@ local function SideSheetContent(p1)
 							UseRefResult2.current:Disconnect()
 						end
 						UseRefResult2.current = nil
-						UseRefResult3.current = false
 						p1.ChatSelector:SetVisible(true)
 						UseRefResult1.current = false
 					end
@@ -225,14 +192,10 @@ local function SideSheetContent(p1)
 		end)
 		
 		return function()
-			-- upvalues: Effect (copy), FFlagSideSheetOpenPeoplePageRestoreChat (upval), UseRefResult4 (upval), NextWrappedIntegerFunction (upval), UseRefResult3 (upval), UseRefResult2 (upval), GuiService (upval)
+			-- upvalues: Effect (copy), FFlagSideSheetOpenPeoplePageRestoreChat (upval), UseRefResult2 (upval), GuiService (upval)
 			Effect()
 			
-			if FFlagSideSheetOpenPeoplePageRestoreChat then
-				UseRefResult4.current = NextWrappedIntegerFunction(UseRefResult4.current)
-				UseRefResult3.current = false
-			end
-			if FFlagSideSheetOpenPeoplePageRestoreChat and UseRefResult2.current then
+			if FFlagSideSheetOpenPeoplePageRestoreChat and UseRefResult2 and UseRefResult2.current then
 				UseRefResult2.current:Disconnect()
 				UseRefResult2.current = nil
 			end
@@ -244,9 +207,9 @@ local function SideSheetContent(p1)
 		if FFlagSideSheetOpenPeoplePageRestoreChat then p1.ChatSelector else nil
 	})
 	ReactModule.useEffect(function()
-		-- upvalues: SignalsModule (upval), GetSideSheetVisibilityModule (upval), FFlagSideSheetOpenPeoplePageRestoreChat (upval), p1 (copy), UseRefResult1 (copy), UsePreferredInputResult (copy), ResponsiveModule (upval), UseRefResult5 (copy), MouseIconOverrideService (upval), FFlagSideSheetFocusNav (upval), UseRefResult (ref), FFlagShowSwitchServerButton (upval), IsPioneerLaunchFunction (upval), GetSwitchServerStoreFunction (upval), UseRefResult6 (copy), SwitchServerTelemetry (upval)
+		-- upvalues: SignalsModule (upval), GetSideSheetVisibilityModule (upval), FFlagSideSheetOpenPeoplePageRestoreChat (upval), p1 (copy), UseRefResult1 (copy), UsePreferredInputResult (copy), ResponsiveModule (upval), UseRefResult3 (copy), MouseIconOverrideService (upval), FFlagSideSheetFocusNav (upval), UseRefResult (ref), FFlagShowSwitchServerButton (upval), IsPioneerLaunchFunction (upval), GetSwitchServerStoreFunction (upval), UseRefResult4 (copy), SwitchServerTelemetry (upval)
 		local Effect = SignalsModule.createEffect(function(p2)
-			-- upvalues: GetSideSheetVisibilityModule (upval), FFlagSideSheetOpenPeoplePageRestoreChat (upval), p1 (upval), UseRefResult1 (upval), UsePreferredInputResult (upval), ResponsiveModule (upval), UseRefResult5 (upval), MouseIconOverrideService (upval), FFlagSideSheetFocusNav (upval), UseRefResult (upval), FFlagShowSwitchServerButton (upval), IsPioneerLaunchFunction (upval), GetSwitchServerStoreFunction (upval), UseRefResult6 (upval), SwitchServerTelemetry (upval)
+			-- upvalues: GetSideSheetVisibilityModule (upval), FFlagSideSheetOpenPeoplePageRestoreChat (upval), p1 (upval), UseRefResult1 (upval), UsePreferredInputResult (upval), ResponsiveModule (upval), UseRefResult3 (upval), MouseIconOverrideService (upval), FFlagSideSheetFocusNav (upval), UseRefResult (upval), FFlagShowSwitchServerButton (upval), IsPioneerLaunchFunction (upval), GetSwitchServerStoreFunction (upval), UseRefResult4 (upval), SwitchServerTelemetry (upval)
 			local SideSheetVisibilityModule = GetSideSheetVisibilityModule(p2)
 			
 			if not FFlagSideSheetOpenPeoplePageRestoreChat and p1.ChatSelector then
@@ -259,12 +222,12 @@ local function SideSheetContent(p1)
 				end
 			end
 			if UsePreferredInputResult == ResponsiveModule.Input.Pointer then
-				if SideSheetVisibilityModule and not UseRefResult5.current then
+				if SideSheetVisibilityModule and not UseRefResult3.current then
 					MouseIconOverrideService.push("InExperienceSideSheet", Enum.OverrideMouseIconBehavior.ForceShow)
-					UseRefResult5.current = true
-				elseif not SideSheetVisibilityModule and UseRefResult5.current then
+					UseRefResult3.current = true
+				elseif not SideSheetVisibilityModule and UseRefResult3.current then
 					MouseIconOverrideService.pop("InExperienceSideSheet")
-					UseRefResult5.current = false
+					UseRefResult3.current = false
 				end
 			end
 			if FFlagSideSheetFocusNav then
@@ -274,8 +237,8 @@ local function SideSheetContent(p1)
 					UseRefResult.current = nil
 				end
 			end
-			if SideSheetVisibilityModule and (FFlagShowSwitchServerButton or IsPioneerLaunchFunction()) and (GetSwitchServerStoreFunction(p2).shouldEnableSwitchServer(p2) and not UseRefResult6.current) then
-				UseRefResult6.current = true
+			if SideSheetVisibilityModule and (FFlagShowSwitchServerButton or IsPioneerLaunchFunction()) and (GetSwitchServerStoreFunction(p2).shouldEnableSwitchServer(p2) and not UseRefResult4.current) then
+				UseRefResult4.current = true
 				SwitchServerTelemetry.sendSwitchServerButtonActions({ event_type = "impression" })
 			end
 		end)
@@ -377,17 +340,16 @@ local function SideSheetContent(p1)
 			AboveFoldList = ReactModule.createElement(VerticalListModule, {
 				layoutOrder = config.PrimaryList,
 				integrationsGetter = getAboveFoldIntegrations,
-				firstIntegrationToFocusCallback = if FFlagSideSheetFocusNav and not v1 and not FFlagSideSheetUnifiedMenuOrder then UseResult1 else nil,
+				firstIntegrationToFocusCallback = if FFlagSideSheetFocusNav and not v1 then UseResult1 else nil,
 				allowRightFocusEscape = UseSignalStateResult2_1
 			}),
-			FoldDivider = if FFlagSideSheetUnifiedMenuOrder then nil else ReactModule.createElement(View, {
+			FoldDivider = ReactModule.createElement(View, {
 				tag = "size-full-0 auto-y padding-y-xxlarge",
 				LayoutOrder = config.ListDivider
 			}, { Divider = ReactModule.createElement(Divider) }),
 			BelowFoldList = ReactModule.createElement(VerticalListModule, {
 				layoutOrder = config.SecondaryList,
 				integrationsGetter = getBelowFoldIntegrations,
-				firstIntegrationToFocusCallback = if FFlagSideSheetUnifiedMenuOrder and FFlagSideSheetFocusNav and not v1 then UseResult1 else nil,
 				allowRightFocusEscape = UseSignalStateResult2_1
 			}),
 			BottomWidgets = if FFlagEnableSideSheetWidgets then ReactModule.createElement(SideSheetWidgetListModule, {

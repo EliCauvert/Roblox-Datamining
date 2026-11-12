@@ -4,11 +4,12 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local FFlagLuaAppAlignHeroUnitBottomRowCtaButton = require(Parent.SharedFlags).FFlagLuaAppAlignHeroUnitBottomRowCtaButton
 local FFlagLuaAppHeroUnitSecondaryLabelTextModule = require(ServerDrivenUi.FFlagLuaAppHeroUnitSecondaryLabelText)
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), FFlagLuaAppHeroUnitSecondaryLabelTextModule (copy), ReactModule (copy), NormalizeFontFaceFunction (copy), FFlagLuaAppAlignHeroUnitBottomRowCtaButton (copy)
+	-- upvalues: UseTokensFunction (copy), FFlagLuaAppHeroUnitSecondaryLabelTextModule (copy), ReactModule (copy), NormalizeFontFaceFunction (copy), FoundationFontFaceMigration (copy), FFlagLuaAppAlignHeroUnitBottomRowCtaButton (copy)
 	local LayoutOrder = p1.layoutOrder
 	local ZIndex = p1.zIndex
 	local Position = p1.position
@@ -66,7 +67,7 @@ return ReactModule.memo(function(p1)
 		}, {
 			UIFlexItem = ReactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }),
 			Label = ReactModule.useMemo(function()
-				-- upvalues: p1 (copy), ReactModule (upval), FFlagLuaAppHeroUnitSecondaryLabelTextModule (upval), FontSize (ref), Size400 (ref), CaptionSmall (copy), UseMemoResult1 (ref), MutedColor3 (copy), UseMemoResult (ref), X (ref), NormalizeFontFaceFunction (upval)
+				-- upvalues: p1 (copy), ReactModule (upval), FFlagLuaAppHeroUnitSecondaryLabelTextModule (upval), FontSize (ref), Size400 (ref), CaptionSmall (copy), UseMemoResult1 (ref), MutedColor3 (copy), FoundationFontFaceMigration (upval), UseMemoResult (ref), X (ref), NormalizeFontFaceFunction (upval)
 				if p1.rightLabelContent then
 					return ReactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
@@ -117,7 +118,8 @@ return ReactModule.memo(function(p1)
 							Text = SecondaryLabelText,
 							TextSize = TextSize,
 							LineHeight = CaptionSmall.LineHeight,
-							FontFace = UseMemoResult,
+							Font = if FoundationFontFaceMigration then nil else CaptionSmall.Font,
+							FontFace = if FoundationFontFaceMigration then UseMemoResult else nil,
 							TextColor3 = MutedColor3,
 							TextXAlignment = Enum.TextXAlignment.Right,
 							TextTruncate = Enum.TextTruncate.SplitWord
@@ -134,7 +136,8 @@ return ReactModule.memo(function(p1)
 						Size = UDim2.new(0, 0, 0, CaptionSmall.FontSize * CaptionSmall.LineHeight),
 						Text = p1.labelText,
 						TextSize = CaptionSmall.FontSize,
-						FontFace = NormalizeFontFaceFunction(CaptionSmall.Font),
+						Font = if FoundationFontFaceMigration then nil else CaptionSmall.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(CaptionSmall.Font) else nil,
 						TextColor3 = MutedColor3,
 						TextXAlignment = Enum.TextXAlignment.Right,
 						TextTruncate = Enum.TextTruncate.SplitWord,

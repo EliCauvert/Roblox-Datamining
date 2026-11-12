@@ -23,7 +23,6 @@ return {
 		FFlagPlayerListReskin = require(script.Flags.FFlagPlayerListReskin),
 		FFlagPlayerListTwoTabsOnLegacy = require(script.Flags.FFlagPlayerListTwoTabsOnLegacy),
 		FFlagPlayerListLocalizeGameText = require(script.Flags.FFlagPlayerListLocalizeGameText),
-		FFlagPlayerListContrastingTeamText = require(script.Flags.FFlagPlayerListContrastingTeamText),
 		FFlagEnablePlayerListExposureEvents = require(script.Flags.FFlagEnablePlayerListExposureEvents),
 		FStringPlayerListIXPLayer = require(script.Flags.FStringPlayerListIXPLayer)
 	},
@@ -44,8 +43,7 @@ return {
 		PlayerListVisibilityStore = require(script.Common.PlayerListVisibilityStore),
 		computeStatColumns = require(script.Common.computeStatColumns),
 		PlatformLeaderboardStoreContext = require(script.Common.PlatformLeaderboardStoreContext),
-		GameTextTranslatorContext = require(script.Common.GameTextTranslatorContext),
-		getContrastingContentStyle = require(script.Common.getContrastingContentStyle)
+		GameTextTranslatorContext = require(script.Common.GameTextTranslatorContext)
 	},
 	Container = {
 		PlayerListContainer = require(script.Components.Containers.PlayerListContainer),

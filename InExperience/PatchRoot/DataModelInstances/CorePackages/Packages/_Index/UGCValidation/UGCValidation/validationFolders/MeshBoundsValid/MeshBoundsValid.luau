@@ -8,9 +8,7 @@ local GetAccessoryScaleModule = require(Parent.util.getAccessoryScale)
 local GetAttachmentModule = require(Parent.util.getAttachment)
 local GetMeshMinMaxModule = require(Parent.util.getMeshMinMax)
 local IsMeshPartAccessoryModule = require(Parent.util.isMeshPartAccessory)
-local ValueToStringModule = require(Parent.util.valueToString)
 local GetFFlagUGCValidateMeshMaxScaleModule = require(Parent.flags.getFFlagUGCValidateMeshMaxScale)
-local GetFFlagUGCValidateMeshScaleErrorMessageModule = require(Parent.flags.getFFlagUGCValidateMeshScaleErrorMessage)
 local GetFIntUGCValidateMeshCenteringHundredsThresholdModule = require(Parent.flags.getFIntUGCValidateMeshCenteringHundredsThreshold)
 local LegacyAccessoryCheckAvatarPartScaleType = game:DefineFastFlag("LegacyAccessoryCheckAvatarPartScaleType", false)
 local MeshpartAccessoryCheckAvatarPartScaleType = game:DefineFastFlag("MeshpartAccessoryCheckAvatarPartScaleType", false)
@@ -36,7 +34,7 @@ return {
 	requiredData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
 	expectedFailures = {},
 	run = function(p1, p2)
-		-- upvalues: ValidationEnumsModule (copy), ConstantsModule (copy), GetAttachmentModule (copy), IsMeshPartAccessoryModule (copy), MeshpartAccessoryCheckAvatarPartScaleType (copy), LegacyAccessoryCheckAvatarPartScaleType (copy), GetAccessoryScaleModule (copy), ErrorSourceStringsModule (copy), UGCValidationScaleMinimumThousandths (copy), GetFFlagUGCValidateMeshScaleErrorMessageModule (copy), ValueToStringModule (copy), GetFFlagUGCValidateMeshMaxScaleModule (copy), FIntUGCValidationScaleMaximumThousandths (copy), UGCValidationService (copy), pointInBounds (copy), GetMeshMinMaxModule (copy), GetFIntUGCValidateMeshCenteringHundredsThresholdModule (copy)
+		-- upvalues: ValidationEnumsModule (copy), ConstantsModule (copy), GetAttachmentModule (copy), IsMeshPartAccessoryModule (copy), MeshpartAccessoryCheckAvatarPartScaleType (copy), LegacyAccessoryCheckAvatarPartScaleType (copy), GetAccessoryScaleModule (copy), ErrorSourceStringsModule (copy), UGCValidationScaleMinimumThousandths (copy), GetFFlagUGCValidateMeshMaxScaleModule (copy), FIntUGCValidationScaleMaximumThousandths (copy), UGCValidationService (copy), pointInBounds (copy), GetMeshMinMaxModule (copy), GetFIntUGCValidateMeshCenteringHundredsThresholdModule (copy)
 		local RootInstance = p2.rootInstance
 		local AssetType = p2.uploadEnum.assetType
 		local IsValidationEnvMatch = p2.consumerConfig.validationEnv == ValidationEnumsModule.ValidationEnv.Backend
@@ -77,63 +75,19 @@ return {
 			return
 		end
 		if Scale.X < UGCValidationScaleMinimumThousandths / 1000 or Scale.Y < UGCValidationScaleMinimumThousandths / 1000 or Scale.Z < UGCValidationScaleMinimumThousandths / 1000 then
-			local Smallest = math.min(Scale.X, Scale.Y, Scale.Z)
+			p1:fail(ErrorSourceStringsModule.Keys.MeshGeometry_ScaleTooSmall, {})
 			
-			if not GetFFlagUGCValidateMeshScaleErrorMessageModule() or Smallest ~= Smallest then
-				p1:fail(ErrorSourceStringsModule.Keys.MeshGeometry_ScaleTooSmall, {})
-				
-				return
-			end
-			if Smallest <= 0 then
-				p1:fail(ErrorSourceStringsModule.Keys.MeshGeometry_ScaleNotPositive, { meshName = Handle:GetFullName() })
-				
-				return
-			else
-				local UGCValidationScaleMinimumThousandthsRatio = UGCValidationScaleMinimumThousandths / 10
-				p1:fail(ErrorSourceStringsModule.Keys.MeshGeometry_ScaleBelowMinimum, {
-					meshName = Handle:GetFullName(),
-					scalePercent = ValueToStringModule((math.clamp(math.round(Smallest * 10000) / 100, 0.01, UGCValidationScaleMinimumThousandthsRatio - 0.01))),
-					minScalePercent = ValueToStringModule(UGCValidationScaleMinimumThousandthsRatio)
-				})
-				
-				return
-			end
-		elseif GetFFlagUGCValidateMeshMaxScaleModule() and (FIntUGCValidationScaleMaximumThousandths / 1000 < Scale.X or FIntUGCValidationScaleMaximumThousandths / 1000 < Scale.Y or FIntUGCValidationScaleMaximumThousandths / 1000 < Scale.Z) then
-			local Largest = math.max(Scale.X, Scale.Y, Scale.Z)
+			return
+		end
+		if GetFFlagUGCValidateMeshMaxScaleModule() and (FIntUGCValidationScaleMaximumThousandths / 1000 < Scale.X or FIntUGCValidationScaleMaximumThousandths / 1000 < Scale.Y or FIntUGCValidationScaleMaximumThousandths / 1000 < Scale.Z) then
+			p1:fail(ErrorSourceStringsModule.Keys.MeshGeometry_ScaleTooLarge, { meshName = Handle.Name })
 			
-			if GetFFlagUGCValidateMeshScaleErrorMessageModule() and Largest < 1e999 then
-				local FIntUGCValidationScaleMaximumThousandthsRatio = FIntUGCValidationScaleMaximumThousandths / 1000
-				p1:fail(ErrorSourceStringsModule.Keys.MeshGeometry_ScaleAboveMaximum, {
-					meshName = Handle:GetFullName(),
-					scaleMultiple = ValueToStringModule((math.max(math.round(Largest * 100) / 100, FIntUGCValidationScaleMaximumThousandthsRatio + 0.01))),
-					maxScaleMultiple = ValueToStringModule(FIntUGCValidationScaleMaximumThousandthsRatio)
-				})
-				
-				return
-			else
-				p1:fail(ErrorSourceStringsModule.Keys.MeshGeometry_ScaleTooLarge, { meshName = Handle.Name })
-				
-				return
-			end
-		else
-			for _, editableMeshVert in pairs((UGCValidationService:GetEditableMeshVerts(Handle1.editable))) do
-				if not pointInBounds(Handle.CFrame:PointToWorldSpace(editableMeshVert * Scale), CF, Size) then
-					p1:fail(ErrorSourceStringsModule.Keys.MeshGeometry_ExceedsBounds, {
-						meshName = RootInstance.Name,
-						assetTypeName = AssetType.Name,
-						maxSizeX = string.format("%.2f", math.floor(Size.X * 100) / 100),
-						maxSizeY = string.format("%.2f", math.floor(Size.Y * 100) / 100),
-						maxSizeZ = string.format("%.2f", math.floor(Size.Z * 100) / 100)
-					})
-					
-					return
-				end
-			end
-			local AbsResult = (AttachmentModule.CFrame.Rotation * Handle.Size):Abs()
-			
-			if AbsResult.X > Size.X or AbsResult.Y > Size.Y or AbsResult.Z > Size.Z then
+			return
+		end
+		for _, editableMeshVert in pairs((UGCValidationService:GetEditableMeshVerts(Handle1.editable))) do
+			if not pointInBounds(Handle.CFrame:PointToWorldSpace(editableMeshVert * Scale), CF, Size) then
 				p1:fail(ErrorSourceStringsModule.Keys.MeshGeometry_ExceedsBounds, {
-					meshName = Handle:GetFullName(),
+					meshName = RootInstance.Name,
 					assetTypeName = AssetType.Name,
 					maxSizeX = string.format("%.2f", math.floor(Size.X * 100) / 100),
 					maxSizeY = string.format("%.2f", math.floor(Size.Y * 100) / 100),
@@ -142,21 +96,34 @@ return {
 				
 				return
 			end
-			if p2.consumerConfig.consumerEnv ~= ValidationEnumsModule.ConsumerEnv.IEC then
-				local MeshMinMaxModule, _, MeshMinMaxModule3, MeshMinMaxModule4 = GetMeshMinMaxModule({
-					fieldName = "MeshId",
-					fullName = Handle:GetFullName(),
-					editableMesh = Handle1.editable,
-					scale = Scale,
-					context = RootInstance.Name
-				}, { shouldYield = false, isServer = IsValidationEnvMatch })
-				
-				if not MeshMinMaxModule then
-					p1:fetchError(string.format("Failed to compute mesh min/max for %s", Handle:GetFullName()))
-				end
-				if MeshMinMaxModule3 and MeshMinMaxModule4 and GetFIntUGCValidateMeshCenteringHundredsThresholdModule() / 100 < ((MeshMinMaxModule3 + MeshMinMaxModule4) / 2).Magnitude then
-					p1:fail(ErrorSourceStringsModule.Keys.MeshGeometry_NotCentered, { fieldName = "MeshId", meshName = Handle:GetFullName() })
-				end
+		end
+		local AbsResult = (AttachmentModule.CFrame.Rotation * Handle.Size):Abs()
+		
+		if AbsResult.X > Size.X or AbsResult.Y > Size.Y or AbsResult.Z > Size.Z then
+			p1:fail(ErrorSourceStringsModule.Keys.MeshGeometry_ExceedsBounds, {
+				meshName = Handle:GetFullName(),
+				assetTypeName = AssetType.Name,
+				maxSizeX = string.format("%.2f", math.floor(Size.X * 100) / 100),
+				maxSizeY = string.format("%.2f", math.floor(Size.Y * 100) / 100),
+				maxSizeZ = string.format("%.2f", math.floor(Size.Z * 100) / 100)
+			})
+			
+			return
+		end
+		if p2.consumerConfig.consumerEnv ~= ValidationEnumsModule.ConsumerEnv.IEC then
+			local MeshMinMaxModule, _, MeshMinMaxModule3, MeshMinMaxModule4 = GetMeshMinMaxModule({
+				fieldName = "MeshId",
+				fullName = Handle:GetFullName(),
+				editableMesh = Handle1.editable,
+				scale = Scale,
+				context = RootInstance.Name
+			}, { shouldYield = false, isServer = IsValidationEnvMatch })
+			
+			if not MeshMinMaxModule then
+				p1:fetchError(string.format("Failed to compute mesh min/max for %s", Handle:GetFullName()))
+			end
+			if MeshMinMaxModule3 and MeshMinMaxModule4 and GetFIntUGCValidateMeshCenteringHundredsThresholdModule() / 100 < ((MeshMinMaxModule3 + MeshMinMaxModule4) / 2).Magnitude then
+				p1:fail(ErrorSourceStringsModule.Keys.MeshGeometry_NotCentered, { fieldName = "MeshId", meshName = Handle:GetFullName() })
 			end
 		end
 	end

@@ -3,7 +3,9 @@ local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDep
 local Roact = InGameMenuDependenciesModule.Roact
 local Cryo = InGameMenuDependenciesModule.Cryo
 local T = InGameMenuDependenciesModule.t
-local NormalizeFontFaceFunction = require(CorePackages.Packages.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local GlobalConfigModule = require(script.Parent.Parent.GlobalConfig)
 local config = {
@@ -38,189 +40,190 @@ local StrictInterfaceResult = T.strictInterface({
 })
 
 return function(p1)
-	-- upvalues: GlobalConfigModule (copy), StrictInterfaceResult (copy), WithFoundationOrUIBloxStyleFunction (copy), config (copy), NormalizeFontFaceFunction (copy), Cryo (copy), Roact (copy)
+	-- upvalues: GlobalConfigModule (copy), StrictInterfaceResult (copy), WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), config (copy), NormalizeFontFaceFunction (copy), Cryo (copy), Roact (copy)
 	if GlobalConfigModule.propValidation then
 		assert(StrictInterfaceResult(p1))
 	end
-	return WithFoundationOrUIBloxStyleFunction(function(Tokens)
+	return WithFoundationOrUIBloxStyleFunction(function(p2)
+		-- upvalues: FoundationFontFaceMigration (upval)
 		return {
-			Tokens = Tokens,
+			Tokens = if FoundationFontFaceMigration then p2 else nil,
 			Theme = {
 				BackgroundDefault = {
-					Color = Tokens.Color.Surface.Surface_0.Color3,
-					Transparency = Tokens.Color.Surface.Surface_0.Transparency
+					Color = p2.Color.Surface.Surface_0.Color3,
+					Transparency = p2.Color.Surface.Surface_0.Transparency
 				},
 				BackgroundContrast = {
-					Color = Tokens.Color.Surface.Surface_100.Color3,
-					Transparency = Tokens.Color.Surface.Surface_100.Transparency
+					Color = p2.Color.Surface.Surface_100.Color3,
+					Transparency = p2.Color.Surface.Surface_100.Transparency
 				},
 				BackgroundMuted = {
-					Color = Tokens.Color.Surface.Surface_200.Color3,
-					Transparency = Tokens.Color.Surface.Surface_200.Transparency
+					Color = p2.Color.Surface.Surface_200.Color3,
+					Transparency = p2.Color.Surface.Surface_200.Transparency
 				},
 				BackgroundUIDefault = {
-					Color = Tokens.Color.Surface.Surface_300.Color3,
-					Transparency = Tokens.Color.Surface.Surface_300.Transparency
+					Color = p2.Color.Surface.Surface_300.Color3,
+					Transparency = p2.Color.Surface.Surface_300.Transparency
 				},
 				BackgroundUIContrast = {
-					Color = Tokens.Color.OverMedia.OverMedia_0.Color3,
-					Transparency = Tokens.Color.OverMedia.OverMedia_0.Transparency
+					Color = p2.Color.OverMedia.OverMedia_0.Color3,
+					Transparency = p2.Color.OverMedia.OverMedia_0.Transparency
 				},
 				BackgroundOnHover = {
-					Color = Tokens.Color.State.Hover.Color3,
-					Transparency = Tokens.Color.State.Hover.Transparency
+					Color = p2.Color.State.Hover.Color3,
+					Transparency = p2.Color.State.Hover.Transparency
 				},
 				BackgroundOnPress = {
-					Color = Tokens.Color.State.Press.Color3,
-					Transparency = Tokens.Color.State.Press.Transparency
+					Color = p2.Color.State.Press.Color3,
+					Transparency = p2.Color.State.Press.Transparency
 				},
 				UIDefault = {
-					Color = Tokens.Color.Shift.Shift_200.Color3,
-					Transparency = Tokens.Color.Shift.Shift_200.Transparency
+					Color = p2.Color.Shift.Shift_200.Color3,
+					Transparency = p2.Color.Shift.Shift_200.Transparency
 				},
 				UIMuted = {
-					Color = Tokens.Color.Shift.Shift_100.Color3,
-					Transparency = Tokens.Color.Shift.Shift_100.Transparency
+					Color = p2.Color.Shift.Shift_100.Color3,
+					Transparency = p2.Color.Shift.Shift_100.Transparency
 				},
 				UIEmphasis = {
-					Color = Tokens.Color.Shift.Shift_400.Color3,
-					Transparency = Tokens.Color.Shift.Shift_400.Transparency
+					Color = p2.Color.Shift.Shift_400.Color3,
+					Transparency = p2.Color.Shift.Shift_400.Transparency
 				},
 				ContextualPrimaryDefault = {
-					Color = Tokens.Color.ActionEmphasis.Background.Color3,
-					Transparency = Tokens.Color.ActionEmphasis.Background.Transparency
+					Color = p2.Color.ActionEmphasis.Background.Color3,
+					Transparency = p2.Color.ActionEmphasis.Background.Transparency
 				},
 				ContextualPrimaryContent = {
-					Color = Tokens.Color.ActionEmphasis.Foreground.Color3,
-					Transparency = Tokens.Color.ActionEmphasis.Foreground.Transparency
+					Color = p2.Color.ActionEmphasis.Foreground.Color3,
+					Transparency = p2.Color.ActionEmphasis.Foreground.Transparency
 				},
 				SystemPrimaryDefault = {
-					Color = Tokens.Color.ActionSubEmphasis.Background.Color3,
-					Transparency = Tokens.Color.ActionSubEmphasis.Background.Transparency
+					Color = p2.Color.ActionSubEmphasis.Background.Color3,
+					Transparency = p2.Color.ActionSubEmphasis.Background.Transparency
 				},
 				SystemPrimaryContent = {
-					Color = Tokens.Color.ActionSubEmphasis.Foreground.Color3,
-					Transparency = Tokens.Color.ActionSubEmphasis.Foreground.Transparency
+					Color = p2.Color.ActionSubEmphasis.Foreground.Color3,
+					Transparency = p2.Color.ActionSubEmphasis.Foreground.Transparency
 				},
 				IconDefault = {
-					Color = Tokens.Color.Content.Default.Color3,
-					Transparency = Tokens.Color.Content.Default.Transparency
+					Color = p2.Color.Content.Default.Color3,
+					Transparency = p2.Color.Content.Default.Transparency
 				},
 				IconEmphasis = {
-					Color = Tokens.Color.Content.Emphasis.Color3,
-					Transparency = Tokens.Color.Content.Emphasis.Transparency
+					Color = p2.Color.Content.Emphasis.Color3,
+					Transparency = p2.Color.Content.Emphasis.Transparency
 				},
 				IconOnHover = {
-					Color = Tokens.Color.Content.Emphasis.Color3,
-					Transparency = Tokens.Color.Content.Emphasis.Transparency
+					Color = p2.Color.Content.Emphasis.Color3,
+					Transparency = p2.Color.Content.Emphasis.Transparency
 				},
 				TextEmphasis = {
-					Color = Tokens.Color.Content.Emphasis.Color3,
-					Transparency = Tokens.Color.Content.Emphasis.Transparency
+					Color = p2.Color.Content.Emphasis.Color3,
+					Transparency = p2.Color.Content.Emphasis.Transparency
 				},
 				TextDefault = {
-					Color = Tokens.Color.Content.Default.Color3,
-					Transparency = Tokens.Color.Content.Default.Transparency
+					Color = p2.Color.Content.Default.Color3,
+					Transparency = p2.Color.Content.Default.Transparency
 				},
 				TextMuted = {
-					Color = Tokens.Color.Content.Muted.Color3,
-					Transparency = Tokens.Color.Content.Muted.Transparency
+					Color = p2.Color.Content.Muted.Color3,
+					Transparency = p2.Color.Content.Muted.Transparency
 				},
 				TextLink = {
-					Color = Tokens.Color.Content.Link.Color3,
-					Transparency = Tokens.Color.Content.Link.Transparency
+					Color = p2.Color.Content.Link.Color3,
+					Transparency = p2.Color.Content.Link.Transparency
 				},
 				Divider = {
-					Color = Tokens.Color.Stroke.Emphasis.Color3,
-					Transparency = Tokens.Color.Stroke.Emphasis.Transparency
+					Color = p2.Color.Stroke.Emphasis.Color3,
+					Transparency = p2.Color.Stroke.Emphasis.Transparency
 				},
 				Overlay = {
-					Color = Tokens.Color.Common.Scrim.Color3,
-					Transparency = Tokens.Color.Common.Scrim.Transparency
+					Color = p2.Color.Common.Scrim.Color3,
+					Transparency = p2.Color.Common.Scrim.Transparency
 				},
 				DropShadow = {
-					Color = Tokens.Color.Common.Shadow.Color3,
-					Transparency = Tokens.Color.Common.Shadow.Transparency
+					Color = p2.Color.Common.Shadow.Color3,
+					Transparency = p2.Color.Common.Shadow.Transparency
 				},
 				NavigationBar = {
-					Color = Tokens.Color.Common.NavigationBar.Color3,
-					Transparency = Tokens.Color.Common.NavigationBar.Transparency
+					Color = p2.Color.Common.NavigationBar.Color3,
+					Transparency = p2.Color.Common.NavigationBar.Transparency
 				},
 				PlaceHolder = {
-					Color = Tokens.Color.Common.Shimmer.Color3,
-					Transparency = Tokens.Color.Common.Shimmer.Transparency
+					Color = p2.Color.Common.Shimmer.Color3,
+					Transparency = p2.Color.Common.Shimmer.Transparency
 				},
 				OnlineStatus = {
-					Color = Tokens.Color.System.Success.Color3,
-					Transparency = Tokens.Color.System.Success.Transparency
+					Color = p2.Color.System.Success.Color3,
+					Transparency = p2.Color.System.Success.Transparency
 				},
 				OfflineStatus = {
-					Color = Tokens.Color.System.Neutral.Color3,
-					Transparency = Tokens.Color.System.Neutral.Transparency
+					Color = p2.Color.System.Neutral.Color3,
+					Transparency = p2.Color.System.Neutral.Transparency
 				},
 				Success = {
-					Color = Tokens.Color.System.Success.Color3,
-					Transparency = Tokens.Color.System.Success.Transparency
+					Color = p2.Color.System.Success.Color3,
+					Transparency = p2.Color.System.Success.Transparency
 				},
 				Alert = {
-					Color = Tokens.Color.System.Alert.Color3,
-					Transparency = Tokens.Color.System.Alert.Transparency
+					Color = p2.Color.System.Alert.Color3,
+					Transparency = p2.Color.System.Alert.Transparency
 				},
 				Badge = {
-					Color = Tokens.Color.System.Contrast.Color3,
-					Transparency = Tokens.Color.System.Contrast.Transparency
+					Color = p2.Color.System.Contrast.Color3,
+					Transparency = p2.Color.System.Contrast.Transparency
 				},
 				BadgeContent = {
-					Color = Tokens.Inverse.Content.Emphasis.Color3,
-					Transparency = Tokens.Inverse.Content.Emphasis.Transparency
+					Color = p2.Inverse.Content.Emphasis.Color3,
+					Transparency = p2.Inverse.Content.Emphasis.Transparency
 				},
 				SecondaryContent = {
-					Color = Tokens.Color.Extended.White.White_70.Color3,
-					Transparency = Tokens.Color.Extended.White.White_70.Transparency
+					Color = p2.Color.Extended.White.White_70.Color3,
+					Transparency = p2.Color.Extended.White.White_70.Transparency
 				}
 			},
 			Font = {
 				BaseSize = 1,
 				Title = {
-					Font = Tokens.Typography.HeadingLarge.Font,
-					RelativeSize = Tokens.Typography.HeadingLarge.FontSize
+					Font = p2.Typography.HeadingLarge.Font,
+					RelativeSize = p2.Typography.HeadingLarge.FontSize
 				},
 				Header1 = {
-					Font = Tokens.Typography.HeadingSmall.Font,
-					RelativeSize = Tokens.Typography.HeadingSmall.FontSize
+					Font = p2.Typography.HeadingSmall.Font,
+					RelativeSize = p2.Typography.HeadingSmall.FontSize
 				},
 				Header2 = {
-					Font = Tokens.Typography.TitleLarge.Font,
-					RelativeSize = Tokens.Typography.TitleLarge.FontSize
+					Font = p2.Typography.TitleLarge.Font,
+					RelativeSize = p2.Typography.TitleLarge.FontSize
 				},
 				SubHeader1 = {
-					Font = Tokens.Typography.TitleLarge.Font,
-					RelativeSize = Tokens.Typography.TitleLarge.FontSize
+					Font = p2.Typography.TitleLarge.Font,
+					RelativeSize = p2.Typography.TitleLarge.FontSize
 				},
 				Body = {
-					Font = Tokens.Typography.BodyLarge.Font,
-					RelativeSize = Tokens.Typography.BodyLarge.FontSize
+					Font = p2.Typography.BodyLarge.Font,
+					RelativeSize = p2.Typography.BodyLarge.FontSize
 				},
 				CaptionHeader = {
-					Font = Tokens.Typography.CaptionLarge.Font,
-					RelativeSize = Tokens.Typography.CaptionLarge.FontSize
+					Font = p2.Typography.CaptionLarge.Font,
+					RelativeSize = p2.Typography.CaptionLarge.FontSize
 				},
 				CaptionSubHeader = {
-					Font = Tokens.Typography.CaptionLarge.Font,
-					RelativeSize = Tokens.Typography.CaptionLarge.FontSize
+					Font = p2.Typography.CaptionLarge.Font,
+					RelativeSize = p2.Typography.CaptionLarge.FontSize
 				},
 				CaptionBody = {
-					Font = Tokens.Typography.BodySmall.Font,
-					RelativeSize = Tokens.Typography.BodySmall.FontSize
+					Font = p2.Typography.BodySmall.Font,
+					RelativeSize = p2.Typography.BodySmall.FontSize
 				},
 				Footer = {
-					Font = Tokens.Typography.CaptionSmall.Font,
-					RelativeSize = Tokens.Typography.CaptionSmall.FontSize
+					Font = p2.Typography.CaptionSmall.Font,
+					RelativeSize = p2.Typography.CaptionSmall.FontSize
 				}
 			}
 		}
 	end, function(p2)
-		-- upvalues: p1 (copy), config (upval), NormalizeFontFaceFunction (upval), Cryo (upval), Roact (upval)
+		-- upvalues: p1 (copy), FoundationFontFaceMigration (upval), config (upval), NormalizeFontFaceFunction (upval), Cryo (upval), Roact (upval)
 		local ThemeEntry = p2.Theme[p1.themeKey or "TextDefault"]
 		local v1 = p2.Font[p1.fontKey or "Body"]
 		
@@ -231,8 +234,8 @@ return function(p1)
 			BackgroundTransparency = 1,
 			fontKey = Cryo.None,
 			themeKey = Cryo.None,
-			Font = Cryo.None,
-			FontFace = NormalizeFontFaceFunction((p2.Tokens.Typography[config[p1.fontKey or "Body"]] or v1).Font),
+			Font = if FoundationFontFaceMigration then Cryo.None else v1.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction((p2.Tokens.Typography[config[p1.fontKey or "Body"]] or v1).Font) else nil,
 			TextSize = v1.RelativeSize * p2.Font.BaseSize
 		})))
 	end)

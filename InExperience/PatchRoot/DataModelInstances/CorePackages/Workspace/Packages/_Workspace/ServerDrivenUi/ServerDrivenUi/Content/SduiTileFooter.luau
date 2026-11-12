@@ -3,11 +3,12 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local ImageSetLabel = require(Parent.UIBlox).Core.ImageSet.ImageSetLabel
 local TextSizeModule = require(Parent.TextSize)
 
 return ReactModule.memo(function(p1)
-	-- upvalues: TextSizeModule (copy), UseTokensFunction (copy), NormalizeFontFaceFunction (copy), ReactModule (copy), ImageSetLabel (copy)
+	-- upvalues: TextSizeModule (copy), UseTokensFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ReactModule (copy), ImageSetLabel (copy)
 	local LayoutOrder = p1.layoutOrder
 	local AnchorPoint = p1.anchorPoint
 	local AutomaticSize = p1.automaticSize
@@ -18,7 +19,8 @@ return ReactModule.memo(function(p1)
 	local TextSizeOffset = TextSizeModule.getTextSizeStore(false).getTextSizeOffset(false)
 	local UseTokensResult = UseTokensFunction()
 	local FontStyle = p1.fontStyle or UseTokensResult.Typography.BodyMedium
-	local NormalizeFontFaceResult = NormalizeFontFaceFunction(FontStyle.Font)
+	local FontStyleFont = if FoundationFontFaceMigration then nil else FontStyle.Font
+	local NormalizeFontFaceResult = if FoundationFontFaceMigration then NormalizeFontFaceFunction(FontStyle.Font) else nil
 	local TextColor = p1.textColor or UseTokensResult.Color.Content.Default.Color3
 	local _UDim2: UDim2 = if p1.iconWidth then UDim2.new(0, p1.iconWidth, 0, p1.iconWidth) else UDim2.new(0, UseTokensResult.Size.Size_350, 0, UseTokensResult.Size.Size_350)
 	local IconColor = p1.iconColor or TextColor
@@ -39,6 +41,7 @@ return ReactModule.memo(function(p1)
 			LayoutOrder = LayoutOrder,
 			ZIndex = ZIndex,
 			Text = p1.leftText or "",
+			Font = FontStyleFont,
 			FontFace = NormalizeFontFaceResult,
 			TextSize = FontStyle.FontSize,
 			TextTransparency = 0,
@@ -92,6 +95,7 @@ return ReactModule.memo(function(p1)
 				Text = p1.leftText or "",
 				AutomaticSize = Enum.AutomaticSize.X,
 				Size = UDim2.new(0, 0, 0, Ceiled),
+				Font = FontStyleFont,
 				FontFace = NormalizeFontFaceResult,
 				TextSize = FontStyle.FontSize,
 				TextColor3 = TextColor,
@@ -117,6 +121,7 @@ return ReactModule.memo(function(p1)
 				Text = p1.rightText or "",
 				AutomaticSize = Enum.AutomaticSize.X,
 				Size = UDim2.new(0, 0, 0, Ceiled),
+				Font = FontStyleFont,
 				FontFace = NormalizeFontFaceResult,
 				TextSize = FontStyle.FontSize,
 				TextColor3 = TextColor,

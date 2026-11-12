@@ -12,8 +12,8 @@ local LuauRegExpModule = require(Parent1.LuauRegExp)
 local PoliciesModule = {}
 local Callback2 = nil
 local Callback3 = nil
-local Callback1 = nil
 local Callback = nil
+local Callback1 = nil
 local Callback5 = nil
 local Callback4 = nil
 local _ = require(Parent1.GraphQL)
@@ -132,7 +132,7 @@ function Module.new(Config)
 end
 
 function Module:identify(p1, SelectionSet, FragmentMap)
-	-- upvalues: GetTypenameFromResultFunction (copy), Callback (ref)
+	-- upvalues: GetTypenameFromResultFunction (copy), Callback1 (ref)
 	local TypenameFromResult = if SelectionSet and FragmentMap then GetTypenameFromResultFunction(p1, SelectionSet, FragmentMap) else p1.__typename
 	
 	if TypenameFromResult == self.rootTypenamesById.ROOT_QUERY then
@@ -151,7 +151,7 @@ function Module:identify(p1, SelectionSet, FragmentMap)
 		KeyFnResult = KeyFn(TypePolicy, p1, config)
 		
 		if type(KeyFnResult) == "table" then
-			KeyFn = Callback(KeyFnResult)
+			KeyFn = Callback1(KeyFnResult)
 			continue
 		end
 		v1 = KeyFnResult
@@ -195,7 +195,7 @@ function Module.addTypePolicies(p2, TypePolicies)
 end
 
 function Module:updateTypePolicy(p2, p3)
-	-- upvalues: IsCallableModule (copy), mergeTrueFn (ref), mergeFalseFn (ref), nullKeyFieldsFn (copy), Callback (ref), ObjectKeysForEachModule (copy), simpleKeyArgsFn (copy), Callback1 (ref)
+	-- upvalues: IsCallableModule (copy), mergeTrueFn (ref), mergeFalseFn (ref), nullKeyFieldsFn (copy), Callback1 (ref), ObjectKeysForEachModule (copy), simpleKeyArgsFn (copy), Callback (ref)
 	local TypePolicy = self:getTypePolicy(p2)
 	local KeyFields = p3.keyFields
 	local Fields = p3.fields
@@ -238,7 +238,7 @@ function Module:updateTypePolicy(p2, p3)
 		local ValueType = type(KeyFields)
 		
 		if ValueType == "table" then
-			TypePolicy.keyFn = Callback(KeyFields)
+			TypePolicy.keyFn = Callback1(KeyFields)
 		elseif ValueType == "function" then
 			TypePolicy.keyFn = KeyFields
 		else
@@ -247,7 +247,7 @@ function Module:updateTypePolicy(p2, p3)
 	end
 	if Fields then
 		ObjectKeysForEachModule(Fields, function(p4)
-			-- upvalues: self (copy), p2 (copy), Fields (copy), simpleKeyArgsFn (upval), Callback1 (upval), IsCallableModule (upval), mergeTrueFn (upval), mergeFalseFn (upval)
+			-- upvalues: self (copy), p2 (copy), Fields (copy), simpleKeyArgsFn (upval), Callback (upval), IsCallableModule (upval), mergeTrueFn (upval), mergeFalseFn (upval)
 			local FieldPolicy = self:getFieldPolicy(p2, p4, true)
 			local Field = Fields[p4]
 			
@@ -264,7 +264,7 @@ function Module:updateTypePolicy(p2, p3)
 					local ValueType = type(KeyArgs)
 					
 					if ValueType == "table" then
-						FieldPolicy.keyFn = Callback1(KeyArgs)
+						FieldPolicy.keyFn = Callback(KeyArgs)
 					elseif ValueType == "function" then
 						FieldPolicy.keyFn = KeyArgs
 					else
@@ -465,7 +465,7 @@ function Module:hasKeyArgs(p6, p7): boolean
 end
 
 function Module:getStoreFieldName(FieldFunctionOptions)
-	-- upvalues: ArgumentsObjectFromFieldFunction (copy), Callback1 (ref), StoreKeyNameFromFieldFunction (copy), GetStoreKeyNameFunction (copy), FieldNameFromStoreNameFunction (copy)
+	-- upvalues: ArgumentsObjectFromFieldFunction (copy), Callback (ref), StoreKeyNameFromFieldFunction (copy), GetStoreKeyNameFunction (copy), FieldNameFromStoreNameFunction (copy)
 	local Typename = FieldFunctionOptions.typename
 	local FieldName = FieldFunctionOptions.fieldName
 	local FieldPolicy = self:getFieldPolicy(Typename, FieldName, false)
@@ -485,7 +485,7 @@ function Module:getStoreFieldName(FieldFunctionOptions)
 			KeyFnResult = KeyFn(ArgumentsObjectFromFieldResult, config)
 			
 			if type(KeyFnResult) == "table" then
-				KeyFn = Callback1(KeyFnResult)
+				KeyFn = Callback(KeyFnResult)
 				continue
 			end
 			Enabled = KeyFnResult or FieldName
@@ -660,7 +660,7 @@ local function keyObjEncode(KeyObject, p8): string
 	end), ",") .. "}" else "[]"
 end
 
-Callback1 = function(KeyArgs)
+Callback = function(KeyArgs)
 	-- upvalues: keyObjEncode (copy), Callback4 (ref)
 	return function(p8, p9)
 		-- upvalues: keyObjEncode (upval), Callback4 (upval), KeyArgs (copy)
@@ -668,7 +668,7 @@ Callback1 = function(KeyArgs)
 	end
 end
 
-Callback = function(KeyFields)
+Callback1 = function(KeyFields)
 	-- upvalues: Trie (copy), CanUseWeakMap (copy), Callback5 (ref), Callback4 (ref), keyObjEncode (copy)
 	local NewTrie = Trie.new(CanUseWeakMap)
 	

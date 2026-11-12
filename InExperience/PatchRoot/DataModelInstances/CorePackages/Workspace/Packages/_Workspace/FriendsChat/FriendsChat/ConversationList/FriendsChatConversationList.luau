@@ -7,10 +7,10 @@ local FoundationModule = require(Parent.Foundation)
 local PromiseModule = require(Parent.Promise)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local AppChatModule = require(Parent.AppChat)
+local FFlagAppChatUseUltimateListConversationListModule = require(Parent.AppChat.FFlagAppChatUseUltimateListConversationList)
 local UseConversationSearchModule = require(Parent.AppChat.useConversationSearch)
 local SearchIntroducedConversationIdsModule = require(Parent.AppChat.searchIntroducedConversationIds)
 local FFlagFriendsChatServerSideConversationSearchModule = require(FriendsChat.Flags.FFlagFriendsChatServerSideConversationSearch)
-local FFlagFriendsChatUseViewRecyclerConversationListModule = require(FriendsChat.Flags.FFlagFriendsChatUseViewRecyclerConversationList)
 local FFlagFriendsChatConversationListFocusNav = require(Parent.SharedFlags).FFlagFriendsChatConversationListFocusNav
 local FFlagExpChatTabShortcutNav = require(Parent.SharedFlags).FFlagExpChatTabShortcutNav
 local BidirectionalFlatList = require(Parent.VirtualizedList).BidirectionalFlatList
@@ -38,9 +38,10 @@ local InputSize = FoundationModule.Enums.InputSize
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseTextSizeOffsetFunction = FoundationModule.Hooks.useTextSizeOffset
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local ConversationListViewRecycler = AppChatModule.Components.ChatLanding.ConversationListViewRecycler
+local ConversationListUltimate = AppChatModule.Components.ChatLanding.ConversationListUltimate
 local ConversationRow = AppChatModule.Components.ChatLanding.ConversationRow
 local GetConversationTitleFunction = require(script.Parent.ExpChatConversationListAdapter).getConversationTitle
 local UseConversationListFunction = AppChatModule.Hooks.useConversationList
@@ -51,7 +52,7 @@ local FriendsChatConversationListScrollbarThickness = game:DefineFastInt("Friend
 local FriendsChatConversationListWindowSize = game:DefineFastInt("FriendsChatConversationListWindowSize", 2)
 local FFlagFriendsChatScaleConversationRowHeightModule = require(FriendsChat.Flags.FFlagFriendsChatScaleConversationRowHeight)
 local FFlagFriendsChatLandingTelemetryFieldsModule = require(FriendsChat.Flags.FFlagFriendsChatLandingTelemetryFields)
-local NoFFlagFriendsChatUseViewRecyclerConversationListModule = not FFlagFriendsChatUseViewRecyclerConversationListModule
+local NoFFlagAppChatUseUltimateListConversationListModule = not FFlagAppChatUseUltimateListConversationListModule
 local FriendsChatConversationListScrollbarIdleHideMsRatio = game:DefineFastInt("FriendsChatConversationListScrollbarIdleHideMs", 1500) / 1000
 local config = {
 	dampingRatio = 1,
@@ -119,7 +120,7 @@ local _ = function(p1, Pattern): boolean
 end
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: UseTokensFunction (copy), FFlagFriendsChatScaleConversationRowHeightModule (copy), UseTextSizeOffsetFunction (copy), UseChatPlatformModule (copy), UseChatWindowSettingsModule (copy), ReactModule (copy), UseLocalizationFunction (copy), config1 (copy), UseInterpolatedClientSettingsModule (copy), ReactIsModule (copy), mergeTransparency (copy), GetConversationRowHeightModule (copy), UseChatInputBarSettingsModule (copy), LayoutConstantsModule (copy), FFlagExpChatTabShortcutNav (copy), FoundationModule (copy), UseFocusConversationListModule (copy), UseConversationListFunction (copy), UseConversationListPaginationModule (copy), FFlagFriendsChatServerSideConversationSearchModule (copy), GetConversationTitleFunction (copy), UseConversationSearchModule (copy), FFlagAppChatSearchSessionTelemetryModule (copy), UseChatSearchResultsTelemetryModule (copy), ResolveListStateModule (copy), FFlagFriendsChatLandingTelemetryFieldsModule (copy), GetLandingEmptyStateTypeModule (copy), UseChatSearchSessionModule (copy), UseFriendsChatLandingTelemetryModule (copy), SearchIntroducedConversationIdsModule (copy), UseChatWindowReportModule (copy), NoFFlagFriendsChatUseViewRecyclerConversationListModule (copy), ReactOtterModule (copy), FriendsChatConversationListScrollbarIdleHideMsRatio (copy), config (copy), FFlagFriendsChatConversationListFocusNav (copy), ConversationRow (copy), PromiseModule (copy), FFlagFriendsChatUseViewRecyclerConversationListModule (copy), ConversationListViewRecycler (copy), FriendsChatConversationListScrollbarThickness (copy), BidirectionalFlatList (copy), FriendsChatConversationListWindowSize (copy), FriendsChatConversationListInitialNumToRender (copy), FriendsChatConversationListPaginationThresholdRows (copy), FriendsChatConversationListAutoscrollToTopThreshold (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy), NormalizeFontFaceFunction (copy), Text (copy), IconButton (copy), InputSize (copy), ButtonVariant (copy)
+	-- upvalues: UseTokensFunction (copy), FFlagFriendsChatScaleConversationRowHeightModule (copy), UseTextSizeOffsetFunction (copy), UseChatPlatformModule (copy), UseChatWindowSettingsModule (copy), ReactModule (copy), UseLocalizationFunction (copy), config1 (copy), UseInterpolatedClientSettingsModule (copy), ReactIsModule (copy), mergeTransparency (copy), GetConversationRowHeightModule (copy), UseChatInputBarSettingsModule (copy), LayoutConstantsModule (copy), FFlagExpChatTabShortcutNav (copy), FoundationModule (copy), UseFocusConversationListModule (copy), UseConversationListFunction (copy), UseConversationListPaginationModule (copy), FFlagFriendsChatServerSideConversationSearchModule (copy), GetConversationTitleFunction (copy), UseConversationSearchModule (copy), FFlagAppChatSearchSessionTelemetryModule (copy), UseChatSearchResultsTelemetryModule (copy), ResolveListStateModule (copy), FFlagFriendsChatLandingTelemetryFieldsModule (copy), GetLandingEmptyStateTypeModule (copy), UseChatSearchSessionModule (copy), UseFriendsChatLandingTelemetryModule (copy), SearchIntroducedConversationIdsModule (copy), UseChatWindowReportModule (copy), NoFFlagAppChatUseUltimateListConversationListModule (copy), ReactOtterModule (copy), FriendsChatConversationListScrollbarIdleHideMsRatio (copy), config (copy), FFlagFriendsChatConversationListFocusNav (copy), ConversationRow (copy), PromiseModule (copy), FFlagAppChatUseUltimateListConversationListModule (copy), ConversationListUltimate (copy), BidirectionalFlatList (copy), FriendsChatConversationListScrollbarThickness (copy), FriendsChatConversationListWindowSize (copy), FriendsChatConversationListInitialNumToRender (copy), FriendsChatConversationListPaginationThresholdRows (copy), FriendsChatConversationListAutoscrollToTopThreshold (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), Text (copy), IconButton (copy), InputSize (copy), ButtonVariant (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseTextSizeOffsetResult = if FFlagFriendsChatScaleConversationRowHeightModule then UseTextSizeOffsetFunction() else nil
 	local GetTransparencyStoreFunction = UseChatPlatformModule().getTransparencyStore
@@ -261,7 +262,7 @@ return ReactModule.memo(function(Frame)
 	local v4 = nil
 	local Callback = nil
 	
-	if NoFFlagFriendsChatUseViewRecyclerConversationListModule then
+	if NoFFlagAppChatUseUltimateListConversationListModule then
 		local UseRefResult1 = ReactModule.useRef(nil)
 		local UseAnimatedBindingResult2 = nil
 		v4, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1)
@@ -290,14 +291,14 @@ return ReactModule.memo(function(Frame)
 		end, {})
 	end
 	local UseResult3 = ReactModule.useCallback(function(_)
-		-- upvalues: NoFFlagFriendsChatUseViewRecyclerConversationListModule (upval), Callback (ref), GetTransparencyStoreFunction (copy)
-		if NoFFlagFriendsChatUseViewRecyclerConversationListModule then
+		-- upvalues: NoFFlagAppChatUseUltimateListConversationListModule (upval), Callback (ref), GetTransparencyStoreFunction (copy)
+		if NoFFlagAppChatUseUltimateListConversationListModule then
 			Callback()
 		end
 		GetTransparencyStoreFunction(false).resetAllTransparency()
 	end, {
 		GetTransparencyStoreFunction,
-		if NoFFlagFriendsChatUseViewRecyclerConversationListModule then Callback else nil
+		if NoFFlagAppChatUseUltimateListConversationListModule then Callback else nil
 	})
 	local Text1 = if FFlagFriendsChatConversationListFocusNav and Items1[1] ~= nil then tostring(Items1[1].id) else nil
 	local UseResult4 = ReactModule.useCallback(function(p1)
@@ -354,7 +355,7 @@ return ReactModule.memo(function(Frame)
 	local IsLoadingNextPage = ResolveListStateModuleResult.isLoadingNextPage
 	local OldestConversationIsFetched = ResolveListStateModuleResult.oldestConversationIsFetched
 	local ListKey = if FFlagFriendsChatServerSideConversationSearchModule then ResolveListStateModuleResult.listKey else nil
-	local CreateElementFunction2 = ReactModule.createElement
+	local CreateElementFunction = ReactModule.createElement
 	local v5 = "Frame"
 	local config3 = {
 		Name = "chatWindow",
@@ -428,7 +429,8 @@ return ReactModule.memo(function(Frame)
 						SelectionImageObject = UseCursorResult,
 						ClearTextOnFocus = false,
 						ClipsDescendants = true,
-						FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.BodySmall.Font),
+						Font = if FoundationFontFaceMigration then nil else UseTokensResult.Typography.BodySmall.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.BodySmall.Font) else nil,
 						LineHeight = UseTokensResult.Typography.BodySmall.LineHeight,
 						LayoutOrder = 2,
 						PlaceholderColor3 = UseTokensResult.Color.Content.Muted.Color3,
@@ -468,7 +470,7 @@ return ReactModule.memo(function(Frame)
 			})
 		})
 	}
-	local CreateElementFunction1 = ReactModule.createElement
+	local CreateElementFunction2 = ReactModule.createElement
 	local config5 = {
 		Name = "ListArea",
 		BorderSizePixel = 0,
@@ -476,7 +478,7 @@ return ReactModule.memo(function(Frame)
 		Size = UDim2.new(1, 0, 1, -Size1200)
 	}
 	local t = {}
-	local CreateElementFunction = ReactModule.createElement
+	local CreateElementFunction1 = ReactModule.createElement
 	local v6 = "CanvasGroup"
 	local config6 = {
 		Name = "ListContent",
@@ -494,12 +496,11 @@ return ReactModule.memo(function(Frame)
 			Size = UDim2.fromScale(1, 1),
 			ref = UseRefResult
 		}, {
-			List = if FFlagFriendsChatUseViewRecyclerConversationListModule then ReactModule.createElement(ConversationListViewRecycler, {
+			List = if FFlagAppChatUseUltimateListConversationListModule then ReactModule.createElement(ConversationListUltimate, {
 				isWideMode = false,
 				showScrollbarOnScroll = true,
 				showHeaderEntries = false,
 				shouldLogHeaderEntryExposures = false,
-				shouldLogPerfExposure = false,
 				key = ListKey,
 				Size = UDim2.fromScale(1, 1),
 				entryHeight = ConversationRowHeightModule,
@@ -507,7 +508,6 @@ return ReactModule.memo(function(Frame)
 				loadNext = UseResult6,
 				isLoadingNext = IsLoadingNextPage,
 				oldestConversationIsFetched = OldestConversationIsFetched,
-				scrollbarThickness = FriendsChatConversationListScrollbarThickness,
 				onScrollUpdate = UseResult3,
 				rowProps = { showBackground = false, localUserId = Frame.localUserId },
 				localUserId = Frame.localUserId,
@@ -530,7 +530,7 @@ return ReactModule.memo(function(Frame)
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
 					Selectable = false,
-					ScrollBarImageTransparency = if NoFFlagFriendsChatUseViewRecyclerConversationListModule then v4 else nil,
+					ScrollBarImageTransparency = if NoFFlagAppChatUseUltimateListConversationListModule then v4 else nil,
 					ScrollBarThickness = FriendsChatConversationListScrollbarThickness
 				},
 				contentContainerStyle = { BackgroundTransparency = 1, BorderSizePixel = 0 },
@@ -577,8 +577,8 @@ return ReactModule.memo(function(Frame)
 		}) or nil
 	end
 	config7.Status = Element
-	t.ListContent = CreateElementFunction(v6, config6, config7)
-	config4.ListArea = CreateElementFunction1(View, config5, t)
+	t.ListContent = CreateElementFunction1(v6, config6, config7)
+	config4.ListArea = CreateElementFunction2(View, config5, t)
 	
-	return (CreateElementFunction2(v5, config3, config4))
+	return (CreateElementFunction(v5, config3, config4))
 end)

@@ -8,8 +8,6 @@ local GetFFlagUGCValidateCheckTexturePackOwnerModule = require(Parent.flags.getF
 local UGCValidateMakeupDecalUVProperties = game:DefineFastFlag("UGCValidateMakeupDecalUVProperties", false)
 local GetFFlagUGCValidateMakeupCategoryParityModule = require(Parent.flags.getFFlagUGCValidateMakeupCategoryParity)
 local GetFFlagUGCValidateDisallowAeroMeshDataModule = require(Parent.flags.getFFlagUGCValidateDisallowAeroMeshData)
-local GetFFlagUGCValidateWrapLayerDeformationMapsEmptyModule = require(Parent.flags.getFFlagUGCValidateWrapLayerDeformationMapsEmpty)
-local EngineHasWrapLayerDeformationMapsModule = require(Parent.util.engineHasWrapLayerDeformationMaps)
 
 local function _(List)
 	local t = {}
@@ -211,7 +209,6 @@ setmetatable(config.INCLUSION_METHODS, {
 		return error("Invalid INCLUSION_METHOD " .. tostring(p1))
 	end
 })
-local EngineHasWrapLayerDeformationMapsModuleResult = GetFFlagUGCValidateWrapLayerDeformationMapsEmptyModule() and EngineHasWrapLayerDeformationMapsModule()
 config.PROPERTIES = {
 	Instance = { Archivable = true },
 	Attachment = { Visible = false },
@@ -325,9 +322,7 @@ config.PROPERTIES = {
 			Orientation = {
 				[config.COMPARISON_METHODS.EXACT_EQ] = vector.create(0, 0, 0)
 			}
-		},
-		RotateScaleDeformationMap = if EngineHasWrapLayerDeformationMapsModuleResult then Content.none else nil,
-		ScaleOnlyDeformationMap = if EngineHasWrapLayerDeformationMapsModuleResult then Content.none else nil
+		}
 	},
 	WrapTarget = {
 		CageOrigin = {

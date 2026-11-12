@@ -3,6 +3,7 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
 local AppLinking = require(Parent.RoactServiceTags).AppLinking
@@ -13,7 +14,7 @@ local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
 local ExtractAndStyleRichTextLinksFunction = require(Parent.DiscoveryUtils).extractAndStyleRichTextLinks
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), UseRoactServiceFunction (copy), AppLinking (copy), ReactModule (copy), ExtractAndStyleRichTextLinksFunction (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), CloseCentralOverlayFunction (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), UseRoactServiceFunction (copy), AppLinking (copy), ReactModule (copy), ExtractAndStyleRichTextLinksFunction (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), CloseCentralOverlayFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseRoactServiceResult = UseRoactServiceFunction(AppLinking)
@@ -54,7 +55,8 @@ return function(p1)
 		Size = UDim2.new(1, 0, 0, 0),
 		Text = UseMemoResult.styledText,
 		TextSize = UseTokensResult.Typography.BodyLarge.FontSize,
-		FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.BodyLarge.Font),
+		Font = if FoundationFontFaceMigration then nil else UseTokensResult.Typography.BodyLarge.Font,
+		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.BodyLarge.Font) else nil,
 		TextWrapped = true,
 		TextXAlignment = Enum.TextXAlignment.Left,
 		TextYAlignment = Enum.TextYAlignment.Center,

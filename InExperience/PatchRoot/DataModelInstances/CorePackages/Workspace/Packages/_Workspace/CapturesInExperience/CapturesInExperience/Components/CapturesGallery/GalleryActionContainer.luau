@@ -4,7 +4,9 @@ local CoreGui = game:GetService("CoreGui")
 local ReactModule = require(Parent1.React)
 local RoactUtilsModule = require(Parent1.RoactUtils)
 local UIBloxModule = require(Parent1.UIBlox)
-local NormalizeFontFaceFunction = require(Parent1.Foundation).Utility.normalizeFontFace
+local FoundationModule = require(Parent1.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
 local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
@@ -28,11 +30,12 @@ return (require(Parent.App.CapturesPolicy).connect(function(p1)
 		enableCapturesBulkManagement = p1.enableCapturesBulkManagement()
 	}
 end)(function(Frame)
-	-- upvalues: UseAnalyticsModule (copy), UseStyleFunction (copy), UseDispatchFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), EventNamesModule (copy), CaptureManagerOpenedModule (copy), GetCaptureStorageUsageModule (copy), UsePingLazyRenderResizingModule (copy), IconButton (copy), Images (copy), IconSize (copy), NormalizeFontFaceFunction (copy), WithTooltipFunction (copy), TooltipOrientation (copy), CoreGui (copy), Interactable (copy), ImageSetLabel (copy)
+	-- upvalues: UseAnalyticsModule (copy), UseStyleFunction (copy), UseDispatchFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), EventNamesModule (copy), CaptureManagerOpenedModule (copy), GetCaptureStorageUsageModule (copy), UsePingLazyRenderResizingModule (copy), IconButton (copy), Images (copy), IconSize (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), WithTooltipFunction (copy), TooltipOrientation (copy), CoreGui (copy), Interactable (copy), ImageSetLabel (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseStyleResult = UseStyleFunction()
 	local UseDispatchResult = UseDispatchFunction()
 	local Color = UseStyleResult.Theme.TextDefault.Color
+	local CaptionBodyFont = UseStyleResult.Font.CaptionBody.Font
 	local ScaledBaseSize = UseStyleResult.Font.BaseSize * UseStyleResult.Font.CaptionBody.RelativeSize
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -122,7 +125,8 @@ end)(function(Frame)
 					LayoutOrder = 1,
 					TextWrapped = false,
 					AutomaticSize = Enum.AutomaticSize.X,
-					FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodySmall.Font),
+					Font = if FoundationFontFaceMigration then nil else CaptionBodyFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodySmall.Font) else nil,
 					Size = UDim2.fromOffset(0, 20),
 					Text = Text,
 					TextColor3 = Color,
@@ -140,7 +144,7 @@ end)(function(Frame)
 					active = UseStateResult
 				}, function(Callback)
 					-- upvalues: UseStateResult2 (copy), ReactModule (upval), Interactable (upval), UseResult1 (copy), ImageSetLabel (upval), Images (upval)
-					local function v34(p1)
+					local function v37(p1)
 						-- upvalues: UseStateResult2 (upval), Callback (copy)
 						UseStateResult2(false)
 						Callback(p1)
@@ -152,8 +156,8 @@ end)(function(Frame)
 						LayoutOrder = 2,
 						Position = UDim2.fromScale(1, 0.5),
 						Size = UDim2.fromOffset(16, 16),
-						[ReactModule.Change.AbsolutePosition] = v34,
-						[ReactModule.Change.AbsoluteSize] = v34,
+						[ReactModule.Change.AbsolutePosition] = v37,
+						[ReactModule.Change.AbsoluteSize] = v37,
 						[ReactModule.Event.Activated] = UseResult1
 					}, {
 						InfoIcon = ReactModule.createElement(ImageSetLabel, {

@@ -13,8 +13,9 @@ local StyledTextLabel = UIBlox.App.Text.StyledTextLabel
 local WithStyleFunction = UIBlox.Style.withStyle
 local TextKeysModule = require(Parent.Common.TextKeys)
 local Dash = DependenciesModule.Dash
-local NormalizeFontFaceFunction = DependenciesModule.Foundation.Utility.normalizeFontFace
-local FFlagFontFaceSocialFriends = DependenciesModule.FFlagFontFaceSocialFriends
+local Foundation = DependenciesModule.Foundation
+local NormalizeFontFaceFunction = Foundation.Utility.normalizeFontFace
+local FoundationFontFaceMigration = DependenciesModule.FFlagFontFaceSocialFriends and Foundation.Utility.Flags.FoundationFontFaceMigration
 local ContactsImporterOverlay = Roact.PureComponent:extend("ContactsImporterOverlay")
 ContactsImporterOverlay.validateProps = T.strictInterface({
 	screenSize = T.Vector2,
@@ -27,7 +28,7 @@ ContactsImporterOverlay.validateProps = T.strictInterface({
 })
 
 function ContactsImporterOverlay.render(p1)
-	-- upvalues: WithLocalizationFunction (copy), TextKeysModule (copy), WithStyleFunction (copy), ButtonType (copy), Roact (copy), PartialPageModal (copy), ImageSetLabel (copy), Images (copy), IconSize (copy), StyledTextLabel (copy), FFlagFontFaceSocialFriends (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: WithLocalizationFunction (copy), TextKeysModule (copy), WithStyleFunction (copy), ButtonType (copy), Roact (copy), PartialPageModal (copy), ImageSetLabel (copy), Images (copy), IconSize (copy), StyledTextLabel (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	return WithLocalizationFunction({
 		connectWithFriends = TextKeysModule.CONTACTS_LIST_TITLE,
 		connectWithFriendsBody = TextKeysModule.CONNECT_CONTACTS_BODY,
@@ -37,9 +38,9 @@ function ContactsImporterOverlay.render(p1)
 		goToAddFriends = TextKeysModule.NOT_NOW,
 		learnMore = TextKeysModule.LEARN_MORE
 	})(function(p2)
-		-- upvalues: WithStyleFunction (upval), p1 (copy), ButtonType (upval), Roact (upval), PartialPageModal (upval), ImageSetLabel (upval), Images (upval), IconSize (upval), StyledTextLabel (upval), FFlagFontFaceSocialFriends (upval), NormalizeFontFaceFunction (upval)
+		-- upvalues: WithStyleFunction (upval), p1 (copy), ButtonType (upval), Roact (upval), PartialPageModal (upval), ImageSetLabel (upval), Images (upval), IconSize (upval), StyledTextLabel (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 		return WithStyleFunction(function(p3)
-			-- upvalues: p1 (upval), ButtonType (upval), p2 (copy), Roact (upval), PartialPageModal (upval), ImageSetLabel (upval), Images (upval), IconSize (upval), StyledTextLabel (upval), FFlagFontFaceSocialFriends (upval), NormalizeFontFaceFunction (upval)
+			-- upvalues: p1 (upval), ButtonType (upval), p2 (copy), Roact (upval), PartialPageModal (upval), ImageSetLabel (upval), Images (upval), IconSize (upval), StyledTextLabel (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 			local Theme = p3.Theme
 			local _Font = p3.Font
 			local Props = p1.props
@@ -135,8 +136,8 @@ function ContactsImporterOverlay.render(p1)
 					LearnMore = Roact.createElement("TextButton", {
 						AutomaticSize = Enum.AutomaticSize.Y,
 						BackgroundTransparency = 1,
-						Font = if FFlagFontFaceSocialFriends then nil else p3.Font.CaptionBody.Font,
-						FontFace = if FFlagFontFaceSocialFriends then NormalizeFontFaceFunction(p3.Tokens.Typography.BodySmall.Font) else nil,
+						Font = if FoundationFontFaceMigration then nil else p3.Font.CaptionBody.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodySmall.Font) else nil,
 						Size = UDim2.fromScale(1, 0),
 						Text = p2.learnMore,
 						TextColor3 = Theme.TextEmphasis.Color,

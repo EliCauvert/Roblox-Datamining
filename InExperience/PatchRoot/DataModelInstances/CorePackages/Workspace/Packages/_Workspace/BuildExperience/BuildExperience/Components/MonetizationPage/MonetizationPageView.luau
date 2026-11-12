@@ -152,7 +152,7 @@ local function ProductCard(Frame)
 			},
 			testId = if FFlagBuildExperienceMonetizationNativeUIModule then `monetization-product-title-{Identity}` else nil
 		}),
-		Kind = if FFlagBuildExperienceMonetizationMultiKindModule and Product.kind ~= nil and Frame.tileWidth == nil then ReactModule.createElement(Text, {
+		Kind = if FFlagBuildExperienceMonetizationMultiKindModule and (Product.kind ~= nil and Frame.tileWidth == nil) then ReactModule.createElement(Text, {
 			LayoutOrder = 3,
 			tag = "size-full-0 auto-y padding-top-xsmall text-body-small text-wrap text-align-x-left content-muted",
 			Text = Product.kind,

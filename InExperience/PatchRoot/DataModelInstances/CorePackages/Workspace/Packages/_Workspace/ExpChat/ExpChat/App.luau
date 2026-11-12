@@ -13,7 +13,8 @@ local FFlagExpChatUniverseChatPresetEnabledModule = require(ExpChat.Flags.FFlagE
 local ExpChatPresetChatLoadAnalyticsTimeoutMs = game:DefineFastInt("ExpChatPresetChatLoadAnalyticsTimeoutMs", 20000)
 local ExpChatReconcileOnAgeVerifiedChange = game:DefineFastFlag("ExpChatReconcileOnAgeVerifiedChange", false)
 local ExpChatEventReceiverModule = if ExpChatReconcileOnAgeVerifiedChange then require(script.Parent.ExpChatEventReceiver) else nil
-local FriendsChatEventReceiverConnectorModule = require(script.Parent.FriendsChatEventReceiverConnector)
+local FFlagExpChatEnableFriendsTab = require(Parent.SharedFlags).FFlagExpChatEnableFriendsTab
+local FriendsChatEventReceiverConnectorModule = if FFlagExpChatEnableFriendsTab then require(script.Parent.FriendsChatEventReceiverConnector) else nil
 local ShortcutNavReceiverModule = require(script.Parent.ShortcutNav.ShortcutNavReceiver)
 local ExpChatPresetChatEmojiTabExperimentation = require(Parent.SocialExperiments).ExpChatPresetChatEmojiTabExperimentation
 local PresetChatEmojiTabExposureLoggerModule = if ExpChatPresetChatEmojiTabExperimentation.isExperimentEnabled then require(script.Parent.PresetChat.PresetChatEmojiTabExposureLogger) else nil
@@ -64,13 +65,13 @@ App.defaultProps = {
 }
 
 function App.render(p1)
-	-- upvalues: RoactModule (copy), RoactRoduxModule (copy), LocalizationModule (copy), GameLocalizationModule (copy), ExpChatReconcileOnAgeVerifiedChange (copy), ExpChatEventReceiverModule (copy), FriendsChatEventReceiverConnectorModule (copy), ShortcutNavReceiverModule (copy), ExpChatPresetChatEmojiTabExperimentation (copy), PresetChatEmojiTabExposureLoggerModule (copy), AppContainerModule (copy)
+	-- upvalues: RoactModule (copy), RoactRoduxModule (copy), LocalizationModule (copy), GameLocalizationModule (copy), ExpChatReconcileOnAgeVerifiedChange (copy), ExpChatEventReceiverModule (copy), FFlagExpChatEnableFriendsTab (copy), FriendsChatEventReceiverConnectorModule (copy), ShortcutNavReceiverModule (copy), ExpChatPresetChatEmojiTabExperimentation (copy), PresetChatEmojiTabExposureLoggerModule (copy), AppContainerModule (copy)
 	return p1.props.isDefaultChatEnabled and RoactModule.createElement(RoactRoduxModule.StoreProvider, { store = p1.props.store }, {
 		localization = RoactModule.createElement(LocalizationModule.Provider, { value = p1.props.translator }, {
 			gameLocalization = RoactModule.createElement(GameLocalizationModule.Provider, { value = p1.props.gameTranslator }, {
 				eventReceiver = if ExpChatReconcileOnAgeVerifiedChange then RoactModule.createElement(ExpChatEventReceiverModule) else nil,
-				friendsChatEventReceiver = RoactModule.createElement(FriendsChatEventReceiverConnectorModule),
-				shortcutNavReceiver = RoactModule.createElement(ShortcutNavReceiverModule),
+				friendsChatEventReceiver = if FFlagExpChatEnableFriendsTab then RoactModule.createElement(FriendsChatEventReceiverConnectorModule) else nil,
+				shortcutNavReceiver = if FFlagExpChatEnableFriendsTab then RoactModule.createElement(ShortcutNavReceiverModule) else nil,
 				presetChatEmojiTabExposureLogger = if ExpChatPresetChatEmojiTabExperimentation.isExperimentEnabled then RoactModule.createElement(PresetChatEmojiTabExposureLoggerModule) else nil,
 				container = RoactModule.createElement(AppContainerModule, {
 					isChatInputBarVisible = p1.props.isChatInputBarVisible,

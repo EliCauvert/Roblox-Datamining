@@ -9,14 +9,11 @@ local SetHumanoidDescriptionColorsFromBodyColor3sModule = require(script.Parent.
 local CreateHumanoidDescriptionAccessoryInfoModule = require(script.Parent.createHumanoidDescriptionAccessoryInfo)
 local SetMakeupDescriptionsModule = require(script.Parent.setMakeupDescriptions)
 local IsMakeupAssetTypeModule = require(AvatarExperienceCommon.Utils.isMakeupAssetType)
-local IsSpawnEffectAssetTypeModule = require(AvatarExperienceCommon.Utils.isSpawnEffectAssetType)
-local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
-local FFlagAXOutfitPageRevamp = AvatarExperienceFlagsModule.FFlagAXOutfitPageRevamp
-local FFlagAXSpawnEffectSaveRoundTrip = AvatarExperienceFlagsModule.FFlagAXSpawnEffectSaveRoundTrip
+local FFlagAXOutfitPageRevamp = require(Parent.AvatarExperienceFlags).FFlagAXOutfitPageRevamp
 local GetHumanoidDescriptionFromStateForOutfitTypeModule = require(AvatarExperienceCommon.Utils.Humanoid.getHumanoidDescriptionFromStateForOutfitType)
 
 return function(p1)
-	-- upvalues: FFlagAXOutfitPageRevamp (copy), GetHumanoidDescriptionFromStateForOutfitTypeModule (copy), ASSETTYPETOACCESSORYTYPE (copy), CreateHumanoidDescriptionAccessoryInfoModule (copy), ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROP (copy), ASSETTYPENAMETOIDSTRING (copy), IsMakeupAssetTypeModule (copy), FFlagAXSpawnEffectSaveRoundTrip (copy), IsSpawnEffectAssetTypeModule (copy), MutedErrorFunction (copy), SetMakeupDescriptionsModule (copy), HUMANOIDDESCRIPTIONSCALETONAME (copy), SetHumanoidDescriptionColorsFromBodyColor3sModule (copy)
+	-- upvalues: FFlagAXOutfitPageRevamp (copy), GetHumanoidDescriptionFromStateForOutfitTypeModule (copy), ASSETTYPETOACCESSORYTYPE (copy), CreateHumanoidDescriptionAccessoryInfoModule (copy), ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROP (copy), ASSETTYPENAMETOIDSTRING (copy), IsMakeupAssetTypeModule (copy), MutedErrorFunction (copy), SetMakeupDescriptionsModule (copy), HUMANOIDDESCRIPTIONSCALETONAME (copy), SetHumanoidDescriptionColorsFromBodyColor3sModule (copy)
 	local HumanoidDescriptionFromStateForOutfitTypeModule = nil
 	if FFlagAXOutfitPageRevamp then
 		HumanoidDescriptionFromStateForOutfitTypeModule = GetHumanoidDescriptionFromStateForOutfitTypeModule(p1, nil)
@@ -45,7 +42,7 @@ return function(p1)
 					
 					if ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROPEntry then
 						HumanoidDescriptionFromStateForOutfitTypeModule[ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROPEntry] = Joined
-					elseif i ~= ASSETTYPENAMETOIDSTRING.Gear and not IsMakeupAssetTypeModule(i) and (not FFlagAXSpawnEffectSaveRoundTrip or not IsSpawnEffectAssetTypeModule(i)) then
+					elseif i ~= ASSETTYPENAMETOIDSTRING.Gear and not IsMakeupAssetTypeModule(i) then
 						MutedErrorFunction(string.format("assetTypeId: %s not recognized as member of humanoidDescription", (tostring(i))))
 					end
 				end

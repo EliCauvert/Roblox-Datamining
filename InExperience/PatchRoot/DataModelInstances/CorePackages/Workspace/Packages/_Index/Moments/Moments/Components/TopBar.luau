@@ -3,14 +3,13 @@ local Parent = Moments.Parent
 local ReactModule = require(Parent.React)
 local _ = require(Moments.Enums.MomentsFeedType)
 local MomentsHeaderContainerModule = require(Moments.Components.MomentsHeader.MomentsHeaderContainer)
-local FFlagMomentsCreateAvatarPosts = require(Parent.SharedFlags).FFlagMomentsCreateAvatarPosts
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local config = {
 	defaultTitle = "Feature.Moments.Label.MomentsExperienceName"
 }
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), MomentsHeaderContainerModule (copy), FFlagMomentsCreateAvatarPosts (copy)
+	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), MomentsHeaderContainerModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	
 	return ReactModule.createElement(MomentsHeaderContainerModule, {
@@ -20,7 +19,6 @@ return function(p1)
 		showFtuxTooltip = p1.showFtuxTooltip,
 		onFtuxTooltipDismissed = p1.onFtuxTooltipDismissed,
 		onCreatePressed = p1.onCreatePressed,
-		onCreateAvatarMomentPressed = if FFlagMomentsCreateAvatarPosts then p1.onCreateAvatarMomentPressed else nil,
 		onClose = p1.onClose,
 		onNavigateToTrending = p1.onNavigateToTrending,
 		onNavigateToMyMoments = p1.onNavigateToMyMoments,

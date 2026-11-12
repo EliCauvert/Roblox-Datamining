@@ -259,7 +259,10 @@ Common.UGCValidation.ErrorLabel.CageUV_ZeroAreaTriangle,Detected zero-area trian
 Common.UGCValidation.ErrorLabel.CollisionFidelityWrong,'{InstancePath}' has incorrect CollisionFidelity. Expected it to be {ExpectedFidelity}.
 Common.UGCValidation.ErrorLabel.ContentNotEditable,{InstanceFullName}.{FieldName} still holds unsaved editable content. Save it as an asset before publishing and try again.
 Common.UGCValidation.ErrorLabel.CoplanarTri_TooMany,Detected too many coplanar triangles intersecting in model mesh '{MeshName}'. The maximum is {MaxIntersections} intersections in a {TriangleCount} triangle mesh. Edit your mesh to reduce the number of coplanar triangle intersections.
+Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,Body part '{bodyPartName}' in CurveAnimation has a Position (translation) track. Animation body parts may only be rotated; position tracks are not allowed. Please remove the Position track from this body part.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,Body part '{bodyPartName}' in CurveAnimation moves {distance} studs from its start position. Maximum allowed translation is {maxDistance} studs. Please reduce the body part's positional movement.
+Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"CurveAnimation contains HRD/DRD bones and body part '{bodyPartName}' has a Position (translation) track. When any bones are present in the animation, no body parts may translate to prevent joint separation. Please remove all Position tracks from body parts."
+Common.UGCValidation.ErrorLabel.CurveAnim_BonePositionNotAllowed,Bone {boneName} in CurveAnimation has a Position (translation) track. HRD/DRD bones may only be rotated; position tracks cause joint separation and are not allowed. Please remove the position animation from this bone.
 Common.UGCValidation.ErrorLabel.CurveAnim_BoneRequiresParent,Bone folder '{boneName}' requires '{parentBoneName}' to also be present in the animation.
 Common.UGCValidation.ErrorLabel.CurveAnim_BoneTranslationExceedsThreshold,Bone '{boneName}' in CurveAnimation moves {distance} studs from its start position. Maximum allowed translation is {maxDistance} studs. Please reduce the bone's positional movement.
 Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation contains HRD/DRD bone folders which are not yet supported. Please remove all bone sub-folders before uploading.
@@ -308,7 +311,7 @@ Common.UGCValidation.ErrorLabel.DescendantIdMissing,{InstanceFullName}.{FieldNam
 Common.UGCValidation.ErrorLabel.DescendantIdNotApproved,Asset(s) failed to pass moderation: {ModerationMessages}
 Common.UGCValidation.ErrorLabel.DescendantIdNotOwned,Asset {AssetId} ({InstanceFullName}.{FieldName}) is not owned by an authorized creator.
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,Asset {AssetId} ({InstanceFullName}.{FieldName}) is not published. Publish it and try again.
-Common.UGCValidation.ErrorLabel.DescendantIdVersionNotLatest,"{InstanceFullName}.{FieldName} uses version {Version} of asset {AssetId}, but only its latest version, {LatestVersion}, can be used right now. Use version {LatestVersion} or remove '&version={Version}', and try again."
+Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,"{InstanceFullName}.{FieldName} uses version {Version} of asset {AssetId}, but only version 1 is supported right now. Use version 1 and try again."
 Common.UGCValidation.ErrorLabel.DescendantIdsTooMany,"Upload of model has too many children assets (Meshes, Textures, etc.) and cannot be processed as is. You need to rearrange the model."
 Common.UGCValidation.ErrorLabel.DynHead_ControlsInactive,{headName} mesh ({meshId}) has inactive FACS controls: {controlList}
 Common.UGCValidation.ErrorLabel.DynHead_ControlsMissing,{headName} mesh ({meshId}) is missing FACS controls: {controlList}
@@ -337,7 +340,6 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribut
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,The published animation is missing a valid UGC emote marker. Please republish the animation.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,The maximum part translation could not be calculated from the published animation data. Please republish the animation.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"The published animation specifies a maximum part translation of {taggedTranslation} studs, but its animation data calculates to {calculatedTranslation} studs. Please republish the animation."
-Common.UGCValidation.ErrorLabel.ExperienceCreatorNotSupported,"Experience creators cannot create avatar items. CreatorType: {CreatorType}, CreatorId: {CreatorId}."
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"Head must be placed above UpperTorso. The head center is below the top of the torso, which indicates the head mesh is collapsed or misplaced."
 Common.UGCValidation.ErrorLabel.Extents_ParentBelowPart,{upperPart} cannot extend below {lowerPart}. You can adjust how the parts are put together by moving {attachmentName}
 Common.UGCValidation.ErrorLabel.Extents_PartAboveParent,{lowerPart} cannot extend above {upperPart}. You can adjust how the parts are put together by moving {attachmentName}
@@ -416,9 +418,6 @@ Common.UGCValidation.ErrorLabel.MeasureMeshOutsideOuterCage,{mesh_outside_outer_
 Common.UGCValidation.ErrorLabel.MeshGeometry_ExceedsBounds,"{meshName} has size larger than max allowed bounding size. The max size for type {assetTypeName} is [{maxSizeX}, {maxSizeY}, {maxSizeZ}]."
 Common.UGCValidation.ErrorLabel.MeshGeometry_NotCentered,"{meshName}.{fieldName} has mesh data that is not centered. Please reimport this mesh with the roblox 3d importer, and ensure there is no loose geometry in the source file."
 Common.UGCValidation.ErrorLabel.MeshGeometry_PositionOutOfBounds,Position is outside of bounds.
-Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleAboveMaximum,{meshName} is scaled up to {scaleMultiple} times its original mesh size. The maximum is {maxScaleMultiple} times. Re-export or re-import the mesh at the size you need instead of scaling it up in Studio.
-Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleBelowMinimum,{meshName} is scaled down to {scalePercent}% of its original mesh size. The minimum is {minScalePercent}%. Re-export or re-import the mesh at the size you need instead of scaling it down in Studio.
-Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleNotPositive,"{meshName} has a zero or negative scale. Use positive scale values. To mirror a mesh, flip it in your 3D modeling software and re-export it."
 Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooLarge,{meshName} mesh scale is too large.
 Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooSmall,Mesh scale is too small.
 Common.UGCValidation.ErrorLabel.MeshGeometry_SurfaceAreaExceeded,"The total surface area of model mesh '{meshName}' is {surfaceArea}, it cannot be greater than {maxSurfaceArea}. You must reduce the number and/or size of all triangles."
@@ -432,7 +431,6 @@ Common.UGCValidation.ErrorLabel.MeshSize_LoadFailed,
 Common.UGCValidation.ErrorLabel.MeshSize_Mismatch,Calculated mesh size for {meshName} does not match MeshSize property value
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,Attachment {attName} must exist exactly once within {partName} descendants.
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}' (or its descendants) contain Attributes. You need to remove Attributes from the following: {InstanceNameList}
-Common.UGCValidation.ErrorLabel.NoMeshBelowFeet_PartBelowFeet,"{partName} extends {distance} studs below the bottom of the feet. Only the legs can reach the ground, and other body parts can go at most {maxDistance} studs below it. Shorten or raise {partName}."
 Common.UGCValidation.ErrorLabel.Pose_AngleFromXYPlane,"{assetName} is at a {angle} degree angle from the X,Y plane, it must be within {limit} degrees. Make sure the character is in I pose, A pose, or T pose."
 Common.UGCValidation.ErrorLabel.Pose_AngleOnXYPlane,"{assetName} is at a {angle} angle of the [{xVector}] vector on the X,Y plane, it must be between {minAngle} and {maxAngle} degrees. Make sure the character is in I pose, A pose, or T pose."
 Common.UGCValidation.ErrorLabel.Pose_CFrameCalculationFailed,"Failed to calculate {assetName} asset CFrame. Make sure the character is in I pose, A pose, or T pose, and the parts are not all in the same position."
@@ -459,7 +457,6 @@ Common.UGCValidation.ErrorLabel.ThumbnailInvalidTarget,Invalid target asset for 
 Common.UGCValidation.ErrorLabel.ThumbnailOutsideView,Asset '{InstancePath}' is positioned outside the thumbnail camera view. Reposition the asset at the center of the camera view.
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"Head meshpart has facial animations for {jointName}, which cannot be used in FACs. Please rename this joint then reimport your head."
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,"Bodypart {partName} is skinned to virtual joint {jointName}, which is not part of the R15plus schema."
-Common.UGCValidation.ErrorLabel.UnsupportedCreatorType,"Unsupported creator type. CreatorType: {CreatorType}, CreatorId: {CreatorId}."
 Common.UGCValidation.ErrorLabel.VertexColors_NotOpaque,Invalid vertex color found in mesh model '{MeshName}'. You need to edit the color map to be all white {TransparencyNote} and try again.
 Common.UGCValidation.ErrorLabel.VerticesNotCoincident_TooManySimilar,{cageName} has {percentage}% of vertices too close to each other. Please edit the vertices to have at most {threshold}% coincident or close to one another.
 Common.UGCValidation.ErrorLabel.WrapTexture_FailedToLoadCage,Failed to load ReferenceCageContent for {instanceName}.
@@ -1065,7 +1062,7 @@ CoreScripts.InGameMenu.InviteFriends.Loading,Loading!
 CoreScripts.InGameMenu.InviteFriends.MakeFriendsNow,Make Friends Now
 CoreScripts.InGameMenu.InviteFriends.NoFriends,"You don't have any friends yet, check out the people menu to make friend requests."
 CoreScripts.InGameMenu.InviteFriends.Search,
-CoreScripts.InGameMenu.Label.TouchpadButton,Touch pad button
+CoreScripts.InGameMenu.Label.TouchpadButton,Touchpad Button
 CoreScripts.InGameMenu.Label.ViewButton,View Button
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.LeaveGame,
@@ -1481,7 +1478,6 @@ Feature.AddFriends.Action.FriendAdded,Friend Added
 Feature.AddFriends.Action.IgnoreFriendRequest,Ignore friend request
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Ignore trusted friend request
 Feature.AddFriends.Action.RequestIgnored,Request Ignored
-Feature.AddFriends.Heading.AddFriends,Add friends
 Feature.AddFriends.Label.AddFriendsTooltip,Get started by finding your friends so you can explore Roblox together.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Find people on Roblox by searching for their username or name.
 Feature.AddFriends.Label.ConnectWithContacts,Invite contacts or connect with friends already on Roblox!
@@ -1877,7 +1873,6 @@ Feature.Avatar.Label.Shorts,Shorts
 Feature.Avatar.Label.Shoulder,Shoulder
 Feature.Avatar.Label.Skin,Skin
 Feature.Avatar.Label.Spawn,Spawn
-Feature.Avatar.Label.SpawnEffect,Spawn Effect
 Feature.Avatar.Label.SpawnEffects,Spawn Effects
 Feature.Avatar.Label.Sweater,Sweater
 Feature.Avatar.Label.Sweaters,Sweaters
@@ -2101,10 +2096,8 @@ Feature.AvatarSwitcher.Message.SelectAvatar,Select an avatar
 Feature.AvatarSwitcher.Message.SwitchingDeferred,"You’ll see this avatar after your next respawn, or when you join an experience. You can switch to a different avatar anytime."
 Feature.AvatarSwitcher.Message.UnknownSupport,"You can still switch your avatar, but it may not show up correctly in this experience."
 Feature.AvatarSwitcher.Message.Unsupported,This experience uses a custom avatar and doesn’t support Roblox avatars.
-Feature.AvatarWorkshop.Action.EditAvatar,Edit avatar
 Feature.AvatarWorkshop.Action.TryAgain,Try again
-Feature.AvatarWorkshop.Heading.Customize,Customize
-Feature.AvatarWorkshop.Heading.YourAvatars,Your avatars
+Feature.AvatarWorkshop.Heading.AvatarWorkshop,Avatar Workshop
 Feature.AvatarWorkshop.Message.LoadItemsError,Something went wrong loading your items.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,Couldn't load more items.
 Feature.AvatarWorkshop.Message.NoItemsOwned,You don't own any items here yet.
@@ -2263,7 +2256,7 @@ Feature.Build.Description.AdCampaignModerationReview,All ad campaigns are review
 Feature.Build.Description.AdCampaignSheetRunDates,Runs {startDate} – {endDate}
 Feature.Build.Description.AdComplete,Your ad has ended. Check your results.
 Feature.Build.Description.AdModerationReview,All ads are reviewed by Roblox moderation and may take up to 24 hours.
-Feature.Build.Description.AdvancedModel,Best for top quality. Usage runs out faster.
+Feature.Build.Description.AdvancedModel,Best for top quality. Usage runs out 3 times faster.
 Feature.Build.Description.AdvertisingAgreement,"By selecting Create, you agree to the {advertisingTermsStart}Roblox Advertising Terms{advertisingTermsEnd} and {advertisingStandardsStart}Advertising Standards{advertisingStandardsEnd}."
 Feature.Build.Description.ArchiveRemoval,"If you archive this game, it will be removed from Build. You can still access and restore it from Creator Hub or Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Use your Robux to automatically buy additional Build usage as you create. You can set a daily spend limit anytime.
@@ -2273,7 +2266,6 @@ Feature.Build.Description.BuildReplyNotif,Get notified when Build has a reply fo
 Feature.Build.Description.BuyRobuxToCreate,"Buy more Robux to keep creating, or wait for your free Build usage to reset tomorrow."
 Feature.Build.Description.BuyUsageOrWait,"Buy more Build usage with Robux, or wait for your daily limit to reset."
 Feature.Build.Description.CampaignRunDates,Your campaign will run {startDate} – {endDate}
-Feature.Build.Description.CaptureWhilePlaytesting,"Take a capture while you playtest, then add it to your prompt."
 Feature.Build.Description.ChooseAdCampaignLength,Choose how long you want your ad to run.
 Feature.Build.Description.ChoosePlaytesters,Choose friends to preview your game.
 Feature.Build.Description.CreateDeveloperProduct,"Create ""{NAME}"" for {PRICE} Robux, off sale."
@@ -2380,9 +2372,6 @@ Feature.Build.Label.BackToBuild,Back to Build
 Feature.Build.Label.Building,Building...
 Feature.Build.Label.CaptureLibrary,Capture library
 Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT} of {MAX_SELECTIONS} selected
-Feature.Build.Label.CaptureStepAddImages,Select Add images to attach your capture
-Feature.Build.Label.CaptureStepPlaytest,Playtest your game
-Feature.Build.Label.CaptureStepTapCamera,Select the camera in the Build toolbar
 Feature.Build.Label.ContentRating,Content rating
 Feature.Build.Label.CreatedDate,"{MONTH} {DAY}, {YEAR}"
 Feature.Build.Label.CreatorHub,Creator Hub
@@ -2439,7 +2428,7 @@ Feature.Build.Label.OnSale,On sale
 Feature.Build.Label.Pending,Pending
 Feature.Build.Label.PercentUsed,{PERCENT}% used
 Feature.Build.Label.PlayTime,Play time
-Feature.Build.Label.PreviewsTab,Playtests
+Feature.Build.Label.PreviewsTab,Previews
 Feature.Build.Label.PreviouslyPublished,Previously published
 Feature.Build.Label.Price,Price
 Feature.Build.Label.PriceUnavailable,--
@@ -2792,7 +2781,7 @@ Feature.Catalog.Action.CheckoutPlural,View Checkout ({count})
 Feature.Catalog.Action.CheckoutSingular,Checkout 1 item
 Feature.Catalog.Action.CloseDetails,Close Details
 Feature.Catalog.Action.CopyLink,Copy Link
-Feature.Catalog.Action.Customize,
+Feature.Catalog.Action.Customize,Customize
 Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,Delete Avatar
 Feature.Catalog.Action.DescribeAvatar,Describe your avatar (Optional)
@@ -3265,6 +3254,7 @@ Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} said...
 Feature.Chat.Label.ReplyingToYourself,You said...
 Feature.Chat.Label.SearchFriends,Search for friends
 Feature.Chat.Label.SearchWord,
+Feature.Chat.Label.SnoozeChatNotifications,Mute in-experience chat notifications:
 Feature.Chat.Label.SnoozePartyNotifications,Mute in-experience party notifications for:
 Feature.Chat.Label.SwipeToReplyTooltip,Swipe to reply
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}d
@@ -3320,6 +3310,7 @@ Feature.Chat.Response.NetworkError,Network Error
 Feature.Chat.RobloxConnectUnavailableWithUser,"At this time, Roblox Connect is not available with this user."
 Feature.Chat.Text.NoFriends,"You haven't added any friends yet. To get started, find and add your friends on Roblox."
 Feature.Chat.Title.FriendsChat,Friends chat
+Feature.Chat.Title.MuteChatNotifications,Mute chat notifications from friends during gameplay
 Feature.Chat.Title.NewChat,New chat
 Feature.Chat.Toast.Error.InvalidUserSelected,One or more people in this list can’t be added
 Feature.ContactUpsell.Action.Continue,
@@ -3858,7 +3849,6 @@ Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Ends in {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,Free trial
 Feature.InExperienceShop.Label.HaveTrial,Free trial for you
-Feature.InExperienceShop.Label.KeepIt,Keep it
 Feature.InExperienceShop.Label.NoDescription,No Description
 Feature.InExperienceShop.Label.OfferEndTime,{offer} ending in {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,This is a preview of your Shop in Roblox Studio. Players do not see this preview.
@@ -3871,6 +3861,7 @@ Feature.InExperienceShop.Label.Timer.Minute.Singular,1 minute
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} seconds
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 second
 Feature.InExperienceShop.Label.Trial,Trial
+Feature.InExperienceShop.Label.Trialed,Trialed
 Feature.InExperienceShop.Label.TryNow,Get free trial
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,You have successfully purchased {ROBUX_AMOUNT} Robux
 Feature.InExperienceShop.Tooltip.RecentlyRedeemed,Enjoyed your trial?
@@ -4020,7 +4011,6 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,Photos
 Feature.Moments.Label.PostDeleted,Moment deleted
 Feature.Moments.Label.PostRemovedBody,The Moment you posted goes against our Community Standards.
-Feature.Moments.Label.PostedOnDate,Posted on {date}
 Feature.Moments.Label.PublishingRodeoBody,This shouldn't take too long.
 Feature.Moments.Label.Reactions,Reactions
 Feature.Moments.Label.ReportReason.BreaksRules,This post breaks the rules
@@ -4203,7 +4193,7 @@ Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,Copy Profile Link
 Feature.Profile.Action.CreateInBuild,Create in Build
 Feature.Profile.Action.EditAppearance,Edit appearance
-Feature.Profile.Action.EditAvatar,
+Feature.Profile.Action.EditAvatar,Edit avatar
 Feature.Profile.Action.EditBackground,Edit background
 Feature.Profile.Action.EditEmotes,Edit emotes
 Feature.Profile.Action.EditLook,Edit look
@@ -5047,7 +5037,6 @@ Features.Transfers.RobuxTransfer.Label.RecipientWillGetInApp,The recipient will 
 Features.Transfers.RobuxTransfer.Label.RecipientWillGetInGame,The recipient will get {amount} Robux after fees. In-game transfers include a {commissionPercentage}% creator fee.
 Features.Transfers.RobuxTransfer.SentInstantNoFee,Robux are sent instantly with no fees
 Features.Transfers.RobuxTransfers.Label.SuccessNotification,You sent {amount} Robux
-Features.Transfers.Title.FreeTransfersExhausted,You've used up your free transfers
 Features.Transfers.Title.UpsellSubscription,
 Features.Transfers.Transfer.Block.RequireReceiverFAE,Let's check your age so you can accept Robux
 Features.Transfers.Transfer.Block.RequireSenderFAE,Let's check your age so you can send Robux

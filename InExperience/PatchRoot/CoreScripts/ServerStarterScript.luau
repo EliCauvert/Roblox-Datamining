@@ -48,10 +48,6 @@ if FFlagAXEnableInspectAndBuyBulkPurchase then
 end
 local SendChatAnalyticsModule: (any) -> () = require(RobloxGui.Modules.Server.SendChatAnalytics)
 ScriptContext:AddCoreScriptLocal("ServerCoreScripts/ServerDialog", script.Parent)
-
-if game:GetEngineFeature("LuauRewardedVideoServer") then
-	require(CorePackages.Workspace.Packages.RewardedVideoServer).serverStarterScript()
-end
 local GetServerVersion = Instance.new("RemoteFunction")
 GetServerVersion.Name = "GetServerVersion"
 GetServerVersion.Parent = RobloxReplicatedStorage

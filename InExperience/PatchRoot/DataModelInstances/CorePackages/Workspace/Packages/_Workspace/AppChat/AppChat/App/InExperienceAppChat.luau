@@ -43,6 +43,7 @@ local FFlagAppChatGateInExpSquadEventReceiverModule = require(AppChat.Flags.FFla
 local GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction = require(Parent.SharedFlags).GetFFlagAppChatInExpToastSnoozeMenuDismissFix
 local PartyPageCarouselExperimentation = require(Parent.SocialExperiments).PartyPageCarouselExperimentation
 local FFlagEnableAppChatSnoozeMenuFocus = require(Parent.SharedFlags).FFlagEnableAppChatSnoozeMenuFocus
+local FFlagExpChatEnableFriendsTab = require(Parent.SharedFlags).FFlagExpChatEnableFriendsTab
 local IsSideSheetEnabledModule = require(Parent.InExperienceSideSheetUtils.isSideSheetEnabled)
 local FFlagSideSheetFocusNav = require(Parent.SharedFlags).FFlagSideSheetFocusNav
 local FFlagEnableDrawerAnimatingHook = require(Parent.SharedFlags).FFlagEnableDrawerAnimatingHook
@@ -74,7 +75,7 @@ function wrapWithFocusRoot(p1, EventHandlers, p2)
 end
 
 function InExperienceAppChat()
-	-- upvalues: ReactModule (copy), UseDispatchFunction (copy), UseIsAppChatVisibleModule (copy), DebugAppChatDisplayOnJoin (copy), ParentContainerContextModule (copy), IsSideSheetEnabledModule (copy), FFlagSideSheetFocusNav (copy), FFlagEnableDrawerAnimatingHook (copy), UseDrawerVisibleFunction (copy), UseDrawerAnimatingFunction (copy), UseParentContainerVisibilitySignalModule (copy), UseAppChatUpdateSessionModule (copy), UsePreventExperienceControlsModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy), UsePartyChatReactiveFeatureRestrictionModule (copy), FFlagAppChatUseSignalsForAppLoadedModule (copy), GetAppLoadedStoreModule (copy), SetAppLoadedModule (copy), GetAllFriendsAsyncModule (copy), PartyPageCarouselExperimentation (copy), GetLocalUserFriendsCountModule (copy), GetLocalUserFunction (copy), GetFFlagIsSquadEnabledFunction (copy), UseSelectorFunction (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseAppPolicyFunction (copy), FFlagEnableAppChatSnoozeMenuFocus (copy), NotificationSnoozeMenuVisibleSignal (copy), EnteredChatFromEntryPointModule (copy), SocialCommonModule (copy), FFlagAppChatGateInExpSquadEventReceiverModule (copy), SquadEventReceiverModule (copy), AppChatPersistentEventReceiversModule (copy), AppChatToastManagerInExpModule (copy), GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction (copy), UiModeStyleProvider (copy), ColorMode (copy), Constants (copy), DesignTokenProvider (copy), AppChatInExperienceDisplayOrder (copy), SquadOverlayModule (copy), LayerCollectorProvider (copy), ResponsiveModule (copy), RoactServices (copy), AppSessionService (copy), SessionService (copy), InExperienceAppChatContainerModule (copy), OverlayHostModule (copy), FoundationModule (copy)
+	-- upvalues: ReactModule (copy), UseDispatchFunction (copy), UseIsAppChatVisibleModule (copy), DebugAppChatDisplayOnJoin (copy), ParentContainerContextModule (copy), IsSideSheetEnabledModule (copy), FFlagSideSheetFocusNav (copy), FFlagEnableDrawerAnimatingHook (copy), UseDrawerVisibleFunction (copy), UseDrawerAnimatingFunction (copy), UseParentContainerVisibilitySignalModule (copy), UseAppChatUpdateSessionModule (copy), UsePreventExperienceControlsModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy), UsePartyChatReactiveFeatureRestrictionModule (copy), FFlagAppChatUseSignalsForAppLoadedModule (copy), GetAppLoadedStoreModule (copy), SetAppLoadedModule (copy), GetAllFriendsAsyncModule (copy), PartyPageCarouselExperimentation (copy), GetLocalUserFriendsCountModule (copy), GetLocalUserFunction (copy), GetFFlagIsSquadEnabledFunction (copy), UseSelectorFunction (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseAppPolicyFunction (copy), FFlagEnableAppChatSnoozeMenuFocus (copy), NotificationSnoozeMenuVisibleSignal (copy), EnteredChatFromEntryPointModule (copy), SocialCommonModule (copy), FFlagExpChatEnableFriendsTab (copy), FFlagAppChatGateInExpSquadEventReceiverModule (copy), SquadEventReceiverModule (copy), AppChatPersistentEventReceiversModule (copy), AppChatToastManagerInExpModule (copy), GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction (copy), UiModeStyleProvider (copy), ColorMode (copy), Constants (copy), DesignTokenProvider (copy), AppChatInExperienceDisplayOrder (copy), SquadOverlayModule (copy), LayerCollectorProvider (copy), ResponsiveModule (copy), RoactServices (copy), AppSessionService (copy), SessionService (copy), InExperienceAppChatContainerModule (copy), OverlayHostModule (copy), FoundationModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseIsAppChatVisibleModuleResult, UseIsAppChatVisibleModuleResult2 = UseIsAppChatVisibleModule(DebugAppChatDisplayOnJoin)
@@ -195,7 +196,7 @@ function InExperienceAppChat()
 		end, {})
 	end
 	local UseResult = ReactModule.useCallback(function(p1)
-		-- upvalues: ShowParentContainerFunction (copy), UseStateResult2 (copy), UseDispatchResult (copy), EnteredChatFromEntryPointModule (upval), SocialCommonModule (upval), UseContextResult (copy)
+		-- upvalues: ShowParentContainerFunction (copy), UseStateResult2 (copy), UseDispatchResult (copy), EnteredChatFromEntryPointModule (upval), SocialCommonModule (upval), FFlagExpChatEnableFriendsTab (upval), UseContextResult (copy)
 		local function _()
 			-- upvalues: ShowParentContainerFunction (upval), UseStateResult2 (upval), p1 (copy), UseDispatchResult (upval), EnteredChatFromEntryPointModule (upval), SocialCommonModule (upval)
 			ShowParentContainerFunction()
@@ -203,15 +204,23 @@ function InExperienceAppChat()
 			UseDispatchResult(EnteredChatFromEntryPointModule(SocialCommonModule.Enums.ChatEntryPointNames.ToastInExp))
 		end
 		
-		return UseContextResult.openFriendsChatConversation(p1):andThen(function(Result)
-			-- upvalues: ShowParentContainerFunction (upval), UseStateResult2 (upval), p1 (copy), UseDispatchResult (upval), EnteredChatFromEntryPointModule (upval), SocialCommonModule (upval)
-			if not Result then
-				ShowParentContainerFunction()
-				UseStateResult2(p1)
-				UseDispatchResult(EnteredChatFromEntryPointModule(SocialCommonModule.Enums.ChatEntryPointNames.ToastInExp))
-			end
-			return Result
-		end)
+		if FFlagExpChatEnableFriendsTab then
+			return UseContextResult.openFriendsChatConversation(p1):andThen(function(Result)
+				-- upvalues: ShowParentContainerFunction (upval), UseStateResult2 (upval), p1 (copy), UseDispatchResult (upval), EnteredChatFromEntryPointModule (upval), SocialCommonModule (upval)
+				if not Result then
+					ShowParentContainerFunction()
+					UseStateResult2(p1)
+					UseDispatchResult(EnteredChatFromEntryPointModule(SocialCommonModule.Enums.ChatEntryPointNames.ToastInExp))
+				end
+				return Result
+			end)
+		else
+			ShowParentContainerFunction()
+			UseStateResult2(p1)
+			UseDispatchResult(EnteredChatFromEntryPointModule(SocialCommonModule.Enums.ChatEntryPointNames.ToastInExp))
+			
+			return nil
+		end
 	end, {
 		UseDispatchResult,
 		UseContextResult.openFriendsChatConversation,

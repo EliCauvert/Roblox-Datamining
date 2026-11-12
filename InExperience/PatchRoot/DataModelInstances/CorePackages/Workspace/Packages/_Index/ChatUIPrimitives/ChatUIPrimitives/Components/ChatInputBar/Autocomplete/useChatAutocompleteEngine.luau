@@ -7,7 +7,6 @@ local ReactModule = require(Parent.React)
 local InternalProvidersModule = require(script.Parent.internalProviders)
 local FFlagExpChatAutocompleteOptimization = require(Parent.SharedFlags).FFlagExpChatAutocompleteOptimization
 local FFlagExpChatAutocompleteLazyBuildModule = require(ChatUIPrimitives.Flags.FFlagExpChatAutocompleteLazyBuild)
-local FFlagExpChatMemoizeAutocompleteCallbackModule = require(ChatUIPrimitives.Flags.FFlagExpChatMemoizeAutocompleteCallback)
 local config = {
 	activated = false,
 	selectedIndex = 0,
@@ -23,7 +22,7 @@ local function _(p1, p2: number, p3: number, Text)
 end
 
 return function(p1, p2)
-	-- upvalues: ReactModule (copy), FFlagExpChatAutocompleteOptimization (copy), FFlagExpChatAutocompleteLazyBuildModule (copy), InternalProvidersModule (copy), config (copy), FFlagExpChatMemoizeAutocompleteCallbackModule (copy), UserInputService (copy), ContextActionService (copy), CryoModule (copy)
+	-- upvalues: ReactModule (copy), FFlagExpChatAutocompleteOptimization (copy), FFlagExpChatAutocompleteLazyBuildModule (copy), InternalProvidersModule (copy), config (copy), UserInputService (copy), ContextActionService (copy), CryoModule (copy)
 	local Commands = if p2 then p2.commands else nil
 	local Current: boolean = if p2 and p2.emojis then true else false
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -63,7 +62,7 @@ return function(p1, p2)
 		end
 	end, { p1.current, p2 })
 	
-	local function spliceResultImpl(p3)
+	local function _(p3)
 		-- upvalues: UseRefResult2 (copy), p1 (copy), InternalProvidersModule (upval), UseStateResult2 (copy), config (upval)
 		local Current = UseRefResult2.current
 		local Result = Current.results[p3]
@@ -82,12 +81,22 @@ return function(p1, p2)
 		end
 	end
 	
-	local UseResult = if FFlagExpChatMemoizeAutocompleteCallbackModule then ReactModule.useCallback(spliceResultImpl, { p1 }) else spliceResultImpl
-	
-	local function commitSelectionImpl(p3)
-		-- upvalues: UseRefResult1 (copy), UseResult (copy), p1 (copy)
+	local function commitSelection(p3)
+		-- upvalues: UseRefResult1 (copy), UseRefResult2 (copy), p1 (copy), InternalProvidersModule (upval), UseStateResult2 (copy), config (upval)
 		UseRefResult1.current = true
-		UseResult(p3)
+		local Current = UseRefResult2.current
+		local Result = Current.results[p3]
+		local Current1 = p1.current
+		local CurrentMatch = Current.currentMatch
+		
+		if Result and Current1 and CurrentMatch then
+			local ReplaceStart: number = CurrentMatch.replaceStart
+			local FormatReplacementResult = InternalProvidersModule.formatReplacement(Result)
+			local Text: string = Current1.Text
+			Current1.Text = string.sub(Text, 1, ReplaceStart - 1) .. FormatReplacementResult .. string.sub(Text, CurrentMatch.replaceFinish + 1)
+			Current1.CursorPosition = ReplaceStart + #FormatReplacementResult
+			UseStateResult2(config)
+		end
 		task.defer(function()
 			-- upvalues: UseRefResult1 (upval), p1 (upval)
 			UseRefResult1.current = false
@@ -99,7 +108,6 @@ return function(p1, p2)
 		end)
 	end
 	
-	local UseResult1 = if FFlagExpChatMemoizeAutocompleteCallbackModule then ReactModule.useCallback(commitSelectionImpl, { UseResult, p1 }) else commitSelectionImpl
 	ReactModule.useEffect(function()
 		-- upvalues: p2 (copy), UserInputService (upval), UseRefResult2 (copy), UseStateResult2 (copy), config (upval), p1 (copy), UseRefResult (copy)
 		if not p2 then return end
@@ -250,9 +258,9 @@ return function(p1, p2)
 				}
 			end)
 		end, {}),
-		commitSelection = UseResult1,
+		commitSelection = commitSelection,
 		interceptSend = ReactModule.useCallback(function(TextBox, p3): boolean
-			-- upvalues: UseRefResult2 (copy), UseRefResult1 (copy), UseResult (copy)
+			-- upvalues: UseRefResult2 (copy), UseRefResult1 (copy), p1 (copy), InternalProvidersModule (upval), UseStateResult2 (copy), config (upval)
 			if not p3 then
 				return false
 			end
@@ -260,25 +268,35 @@ return function(p1, p2)
 			
 			if not Current.activated or #Current.results == 0 then
 				return false
-			elseif Current.selectedIndex < 1 then
-				return false
-			else
-				UseRefResult1.current = true
-				UseResult(Current.selectedIndex)
-				task.defer(function()
-					-- upvalues: UseRefResult1 (upval), TextBox (copy)
-					UseRefResult1.current = false
-					
-					if TextBox then
-						TextBox:CaptureFocus()
-					end
-				end)
-				
-				return true
 			end
-		end, {
-			if FFlagExpChatMemoizeAutocompleteCallbackModule then UseResult else nil
-		}),
+			if Current.selectedIndex < 1 then
+				return false
+			end
+			UseRefResult1.current = true
+			local Current1 = UseRefResult2.current
+			local Result = Current1.results[Current.selectedIndex]
+			local Current2 = p1.current
+			local CurrentMatch = Current1.currentMatch
+			
+			if Result and Current2 and CurrentMatch then
+				local ReplaceStart: number = CurrentMatch.replaceStart
+				local FormatReplacementResult = InternalProvidersModule.formatReplacement(Result)
+				local Text: string = Current2.Text
+				Current2.Text = string.sub(Text, 1, ReplaceStart - 1) .. FormatReplacementResult .. string.sub(Text, CurrentMatch.replaceFinish + 1)
+				Current2.CursorPosition = ReplaceStart + #FormatReplacementResult
+				UseStateResult2(config)
+			end
+			task.defer(function()
+				-- upvalues: UseRefResult1 (upval), TextBox (copy)
+				UseRefResult1.current = false
+				
+				if TextBox then
+					TextBox:CaptureFocus()
+				end
+			end)
+			
+			return true
+		end, {}),
 		dismiss = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2 (copy), config (upval)
 			UseStateResult2(config)

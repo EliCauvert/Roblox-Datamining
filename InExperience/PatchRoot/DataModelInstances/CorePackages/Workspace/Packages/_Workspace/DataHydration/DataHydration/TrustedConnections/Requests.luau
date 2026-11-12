@@ -11,6 +11,5 @@
 	MultiGetUsersAreTrustedConnections = require(script.MultiGetUsersAreTrustedConnections),
 	GetUserTrustedConnections = require(script.GetUserTrustedConnections),
 	GetTrustedFriendRequests = require(script.GetTrustedFriendRequests),
-	GetTrustedFriendRequestsCount = require(script.GetTrustedFriendRequestsCount),
-	GetTrustedFriendCandidates = require(script.GetTrustedFriendCandidates)
+	GetTrustedFriendRequestsCount = require(script.GetTrustedFriendRequestsCount)
 }

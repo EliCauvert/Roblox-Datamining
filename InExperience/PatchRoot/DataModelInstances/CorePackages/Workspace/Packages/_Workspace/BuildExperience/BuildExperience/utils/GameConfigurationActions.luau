@@ -10,7 +10,6 @@ local UniverseActivationModule = require(Parent.DataHydration.UniverseActivation
 local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
 local GetBuildExperienceRefreshStoreModule = require(BuildExperience.Stores.GetBuildExperienceRefreshStore)
 local RehydrateGameMetadataModule = require(BuildExperience.utils.rehydrateGameMetadata)
-local FFlagBuildExperienceActionOutcomeTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceActionOutcomeTelemetry)
 local BuildExperienceSetAudiencesMaxRetries = game:DefineFastInt("BuildExperienceSetAudiencesMaxRetries", 3)
 local BuildExperienceSetAudiencesRetryDelayMs = game:DefineFastInt("BuildExperienceSetAudiencesRetryDelayMs", 3000)
 local BuildExperienceSecondActivateAfterSetAudiences = game:DefineFastFlag("BuildExperienceSecondActivateAfterSetAudiences", false)
@@ -59,13 +58,11 @@ local function _(List): boolean
 	return List ~= nil and table.find(List, UniverseActivationModule.Audience.Public) ~= nil
 end
 
-local function audienceFailure(p1, PublishResult)
-	-- upvalues: FFlagBuildExperienceActionOutcomeTelemetryModule (copy)
+local _ = function(p1, PublishResult)
 	return {
 		stage = "set_audience",
 		errorMessage = if typeof(p1) == "table" and p1.errorMessage ~= nil then tostring(p1.errorMessage) else tostring(p1),
-		publishResult = PublishResult,
-		cause = if FFlagBuildExperienceActionOutcomeTelemetryModule then p1 else nil
+		publishResult = PublishResult
 	}
 end
 
@@ -109,7 +106,7 @@ return {
 		return AddQueryStringResult
 	end,
 	publishExperience = function(p1)
-		-- upvalues: saveAndPublishPlace (copy), UniverseActivationModule (copy), setAudiencesForPublish (copy), PromiseModule (copy), audienceFailure (copy), Debug (copy), BuildExperienceSecondActivateAfterSetAudiences (copy), RehydrateGameMetadataModule (copy)
+		-- upvalues: saveAndPublishPlace (copy), UniverseActivationModule (copy), setAudiencesForPublish (copy), PromiseModule (copy), Debug (copy), BuildExperienceSecondActivateAfterSetAudiences (copy), RehydrateGameMetadataModule (copy)
 		local Promise = nil
 		
 		local function publishPlace()
@@ -128,13 +125,17 @@ return {
 				title = p1.title,
 				description = p1.description
 			}):andThen(function(Result)
-				-- upvalues: setAudiencesForPublish (upval), UniverseActivationStore (copy), p1 (copy), PromiseModule (upval), audienceFailure (upval)
+				-- upvalues: setAudiencesForPublish (upval), UniverseActivationStore (copy), p1 (copy), PromiseModule (upval)
 				return setAudiencesForPublish(UniverseActivationStore, p1.universeId, p1.audiences):andThen(function()
 					-- upvalues: Result (copy)
 					return Result
 				end, function(p2)
-					-- upvalues: PromiseModule (upval), audienceFailure (upval), Result (copy)
-					return PromiseModule.reject((audienceFailure(p2, Result)))
+					-- upvalues: PromiseModule (upval), Result (copy)
+					return PromiseModule.reject({
+						stage = "set_audience",
+						errorMessage = if typeof(p2) == "table" and p2.errorMessage ~= nil then tostring(p2.errorMessage) else tostring(p2),
+						publishResult = Result
+					})
 				end)
 			end)
 		else
@@ -156,7 +157,7 @@ return {
 				-- upvalues: publishPlace (copy)
 				return publishPlace()
 			end):andThen(function(Result)
-				-- upvalues: setAudiencesForPublish (upval), UniverseActivationStore1 (copy), p1 (copy), BuildExperienceSecondActivateAfterSetAudiences (upval), Debug (upval), PromiseModule (upval), audienceFailure (upval)
+				-- upvalues: setAudiencesForPublish (upval), UniverseActivationStore1 (copy), p1 (copy), BuildExperienceSecondActivateAfterSetAudiences (upval), Debug (upval), PromiseModule (upval)
 				return setAudiencesForPublish(UniverseActivationStore1, p1.universeId, p1.audiences):andThen(function()
 					-- upvalues: BuildExperienceSecondActivateAfterSetAudiences (upval), UniverseActivationStore1 (upval), p1 (upval), Debug (upval)
 					return if BuildExperienceSecondActivateAfterSetAudiences then UniverseActivationStore1.activate(p1.universeId):catch(function(Err)
@@ -167,8 +168,12 @@ return {
 					-- upvalues: Result (copy)
 					return Result
 				end, function(p2)
-					-- upvalues: PromiseModule (upval), audienceFailure (upval), Result (copy)
-					return PromiseModule.reject((audienceFailure(p2, Result)))
+					-- upvalues: PromiseModule (upval), Result (copy)
+					return PromiseModule.reject({
+						stage = "set_audience",
+						errorMessage = if typeof(p2) == "table" and p2.errorMessage ~= nil then tostring(p2.errorMessage) else tostring(p2),
+						publishResult = Result
+					})
 				end)
 			end)
 		end
@@ -185,7 +190,7 @@ return {
 	end,
 	saveAndPublishPlace = saveAndPublishPlace,
 	archiveGame = function(UniverseId)
-		-- upvalues: Debug (copy), UniverseConfigurationModule (copy), UniverseSearchModule (copy), GetBuildExperienceRefreshStoreModule (copy), FFlagBuildExperienceActionOutcomeTelemetryModule (copy), PromiseModule (copy)
+		-- upvalues: Debug (copy), UniverseConfigurationModule (copy), UniverseSearchModule (copy), GetBuildExperienceRefreshStoreModule (copy)
 		Debug.log("info", "GameConfigurationActions archive started", { universeId = UniverseId })
 		
 		return UniverseConfigurationModule.getUniverseConfigurationStore().patchConfiguration(UniverseId, { isArchived = true }):andThen(function()
@@ -194,11 +199,8 @@ return {
 			UniverseSearchModule.getUniverseSearchStore().invalidateAll()
 			GetBuildExperienceRefreshStoreModule().bumpRefreshTick()
 		end):catch(function(Err)
-			-- upvalues: Debug (upval), UniverseId (copy), FFlagBuildExperienceActionOutcomeTelemetryModule (upval), PromiseModule (upval)
+			-- upvalues: Debug (upval), UniverseId (copy)
 			Debug.log("warn", "GameConfigurationActions archive failed", { error = tostring(Err), universeId = UniverseId })
-			
-			if not FFlagBuildExperienceActionOutcomeTelemetryModule then return end
-			return PromiseModule.reject(Err)
 		end)
 	end,
 	updateCachedAudience = updateCachedAudience,

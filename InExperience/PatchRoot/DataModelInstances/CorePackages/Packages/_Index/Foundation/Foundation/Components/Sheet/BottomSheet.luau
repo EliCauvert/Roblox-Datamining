@@ -279,37 +279,17 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 			UseResult6(Entry.index)
 		end
 	end, { SnapPoints, UseResult6, UseResult5, UseResult8 })
-	local UseResult12 = if FlagsModule.FoundationBottomSheetKeepsSnapPoint then ReactModule.useCallback(function()
-		-- upvalues: SnapPoints (copy), UseRefResult (copy), UseResult (copy), Smallest1 (ref), UseRefResult2 (copy)
-		local SnapPoint = SnapPoints[UseRefResult.current]
-		
-		if SnapPoint == nil or Smallest1 <= UseResult(SnapPoint) then return end
-		local Current = 1
-		
-		for i, snapPoint in SnapPoints do
-			if UseResult(SnapPoints[Current]) < UseResult(snapPoint) then
-				Current = i
-			end
-		end
-		UseRefResult.current = Current
-		
-		if UseRefResult2.current then
-			UseRefResult2.current(SnapPoints[Current], Current)
-		end
-	end, { SnapPoints, UseResult, Smallest1 }) else nil
 	ReactModule.useEffect(function()
-		-- upvalues: UseOverlayModuleResult (copy), FlagsModule (upval), SnapPoints (copy), UseRefResult (copy), WithDefaultsModuleResult (copy), ReducedMotion (copy), UseResult7 (copy), UseAnimatedBindingResult2 (copy), OtterModule (upval), UseResult6 (copy), UseTokensModuleResult (copy), UseResult (copy), Smallest1 (ref), UseBindingResult2_6 (copy), UseRefResult6 (copy), UseResult3 (copy)
+		-- upvalues: UseOverlayModuleResult (copy), ReducedMotion (copy), UseResult7 (copy), WithDefaultsModuleResult (copy), UseAnimatedBindingResult2 (copy), OtterModule (upval), UseResult6 (copy), UseTokensModuleResult (copy), UseResult (copy), SnapPoints (copy), Smallest1 (ref), UseBindingResult2_6 (copy), FlagsModule (upval), UseRefResult6 (copy), UseResult3 (copy)
 		if UseOverlayModuleResult then
-			local Current = if FlagsModule.FoundationBottomSheetKeepsSnapPoint and SnapPoints[UseRefResult.current] ~= nil then UseRefResult.current else WithDefaultsModuleResult.defaultSnapPointIndex
-			
 			if ReducedMotion then
-				UseResult7(Current)
+				UseResult7(WithDefaultsModuleResult.defaultSnapPointIndex)
 				UseAnimatedBindingResult2(OtterModule.instant(0))
 			else
-				UseResult6(Current)
+				UseResult6(WithDefaultsModuleResult.defaultSnapPointIndex)
 				UseAnimatedBindingResult2(OtterModule.ease(0, { duration = UseTokensModuleResult.Time.Time_100 }))
 			end
-			local IsUseResultResultAbove = UseResult(SnapPoints[Current]) >= Smallest1
+			local IsUseResultResultAbove = UseResult(SnapPoints[WithDefaultsModuleResult.defaultSnapPointIndex]) >= Smallest1
 			UseBindingResult2_6(if FlagsModule.FoundationSheetReversedContent then IsUseResultResultAbove or UseRefResult6.current else IsUseResultResultAbove)
 		end
 		return function()
@@ -336,7 +316,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 		end
 	end, { UseOverlayModuleResult })
 	ReactModule.useEffect(function()
-		-- upvalues: UseRefResult8 (copy), UseRefResult7 (copy), UseResult2 (ref), UseResult10 (copy), UseResult3 (copy), UseRefResult4 (copy), FlagsModule (upval), UseRefResult6 (copy), UseBindingResult2_6 (copy), UseResult9 (copy), UseRefResult1 (copy), UseResult12 (copy), UseResult11 (copy)
+		-- upvalues: UseRefResult8 (copy), UseRefResult7 (copy), UseResult2 (ref), UseResult10 (copy), UseResult3 (copy), UseRefResult4 (copy), FlagsModule (upval), UseRefResult6 (copy), UseBindingResult2_6 (copy), UseResult9 (copy), UseRefResult1 (copy), UseResult11 (copy)
 		local TouchPanConnection = game:GetService("UserInputService").TouchPan:Connect(function(_, TotalTranslation, Velocity, _)
 			-- upvalues: UseRefResult8 (upval), UseRefResult7 (upval), UseResult2 (upval), UseResult10 (upval)
 			UseRefResult8.current = Velocity.Y
@@ -354,7 +334,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 			UseResult3()
 		end)
 		local InputEndedConnection = game:GetService("UserInputService").InputEnded:Connect(function()
-			-- upvalues: UseRefResult7 (upval), UseResult2 (upval), UseRefResult4 (upval), UseRefResult8 (upval), FlagsModule (upval), UseRefResult6 (upval), UseBindingResult2_6 (upval), UseResult9 (upval), UseRefResult1 (upval), UseResult12 (upval), UseResult11 (upval)
+			-- upvalues: UseRefResult7 (upval), UseResult2 (upval), UseRefResult4 (upval), UseRefResult8 (upval), FlagsModule (upval), UseRefResult6 (upval), UseBindingResult2_6 (upval), UseResult9 (upval), UseRefResult1 (upval), UseResult11 (upval)
 			if UseRefResult7.current == false then return end
 			UseRefResult7.current = false
 			UseResult2(false)
@@ -363,15 +343,12 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 			if FlagsModule.FoundationSheetReversedContent and UseRefResult6.current then
 				UseBindingResult2_6(true)
 			end
-			if not UseResult9() and not UseRefResult1.current then
-				UseResult11()
+			if UseResult9() or UseRefResult1.current then
+				UseBindingResult2_6(true)
 				
 				return
-			end
-			UseBindingResult2_6(true)
-			
-			if FlagsModule.FoundationBottomSheetKeepsSnapPoint and not UseRefResult1.current then
-				UseResult12()
+			else
+				UseResult11()
 			end
 		end)
 		
@@ -384,7 +361,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 		end
 	end, {
 		UseOverlayModuleResult, UseResult11, UseResult10, UseResult3, UseResult9,
-		UseResult2, UseResult12
+		UseResult2
 	})
 	local UseRefResult13 = ReactModule.useRef(nil)
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(nil)

@@ -3,13 +3,14 @@ local Parent = ExpChat.Parent
 local RoactModule = require(Parent.Roact)
 local Dictionary = require(Parent.llama).Dictionary
 local FFlagExpChatEnableV2ChatWindowModule = require(ExpChat.Flags.FFlagExpChatEnableV2ChatWindow)
+local FFlagExpChatEnableFriendsTab = require(Parent.SharedFlags).FFlagExpChatEnableFriendsTab
 local GetFFlagTextChatEnableUniverseChatTabsFunction = require(Parent.ExpChatShared).Flags.GetFFlagTextChatEnableUniverseChatTabs
 local BottomLockedScrollViewV3Module = require(ExpChat.ChatWindow.UI.BottomLockedScrollViewV3)
 local ScrollingView = RoactModule.PureComponent:extend("ScrollingView")
 ScrollingView.defaultProps = {}
 
 function ScrollingView.render(p1)
-	-- upvalues: FFlagExpChatEnableV2ChatWindowModule (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), RoactModule (copy), BottomLockedScrollViewV3Module (copy), Dictionary (copy)
+	-- upvalues: FFlagExpChatEnableV2ChatWindowModule (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), RoactModule (copy), BottomLockedScrollViewV3Module (copy), Dictionary (copy), FFlagExpChatEnableFriendsTab (copy)
 	local Config = if FFlagExpChatEnableV2ChatWindowModule then {
 		showTranslationButton = p1.props.showTranslationButton,
 		chatWindowSettings = p1.props.chatWindowSettings,
@@ -32,9 +33,9 @@ function ScrollingView.render(p1)
 			Size = UDim2.fromScale(1, 1),
 			isChannelBarVisible = p1.props.isChannelBarVisible,
 			scrollResetKey = p1.props.scrollResetKey,
-			scrollToTopOnReset = p1.props.scrollToTopOnReset,
-			onCanvasPositionChanged = p1.props.onCanvasPositionChanged,
-			contentTopPadding = p1.props.contentTopPadding
+			scrollToTopOnReset = if FFlagExpChatEnableFriendsTab then p1.props.scrollToTopOnReset else nil,
+			onCanvasPositionChanged = if FFlagExpChatEnableFriendsTab then p1.props.onCanvasPositionChanged else nil,
+			contentTopPadding = if FFlagExpChatEnableFriendsTab then p1.props.contentTopPadding else nil
 		}, Config))
 	})
 end

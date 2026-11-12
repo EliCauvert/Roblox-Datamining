@@ -7,6 +7,7 @@ local FoundationModule = require(Parent.Foundation)
 local Radius = FoundationModule.Enums.Radius
 local Skeleton = FoundationModule.Skeleton
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local UseTextSizeOffsetFunction = UIBloxModule.Core.Style.useTextSizeOffset
 local BaseCellModule = require(script.Parent.BaseCell)
@@ -62,7 +63,7 @@ local config = {
 }
 
 return ReactModule.memo(function(p1)
-	-- upvalues: CryoModule (copy), config (copy), UseTextSizeOffsetFunction (copy), FFlagAppChatTimestampInSubtitleModule (copy), ReactModule (copy), BaseCellModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), ConversationFacePileModule (copy), AvatarCircleModule (copy), Skeleton (copy), Radius (copy), FFlagAppChatFixPlusBadgeAlignmentModule (copy), NormalizeFontFaceFunction (copy), FoundationModule (copy), FFlagEnableBlackbirdCheck (copy), ImageSetLabel (copy)
+	-- upvalues: CryoModule (copy), config (copy), UseTextSizeOffsetFunction (copy), FFlagAppChatTimestampInSubtitleModule (copy), ReactModule (copy), BaseCellModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), ConversationFacePileModule (copy), AvatarCircleModule (copy), Skeleton (copy), Radius (copy), FFlagAppChatFixPlusBadgeAlignmentModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), FoundationModule (copy), FFlagEnableBlackbirdCheck (copy), ImageSetLabel (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseTextSizeOffsetResult = UseTextSizeOffsetFunction()
 	local NewSubTitleTextSize = JoinResult.subTitleTextSize + UseTextSizeOffsetResult
@@ -200,7 +201,8 @@ return ReactModule.memo(function(p1)
 						TextSize = JoinResult.titleTextSize,
 						TextColor3 = JoinResult.titleTextColor3,
 						TextTransparency = JoinResult.titleTextTransparency,
-						FontFace = NormalizeFontFaceFunction(JoinResult.titleFont),
+						Font = if FoundationFontFaceMigration then nil else JoinResult.titleFont,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(JoinResult.titleFont) else nil,
 						Text = JoinResult.titleText or "",
 						TextTruncate = Enum.TextTruncate.SplitWord,
 						TextXAlignment = Enum.TextXAlignment.Left
@@ -235,7 +237,8 @@ return ReactModule.memo(function(p1)
 						TextSize = JoinResult.secondaryTitleTextSize,
 						TextColor3 = JoinResult.secondaryTitleTextColor3,
 						TextTransparency = JoinResult.secondaryTitleTextTransparency,
-						FontFace = NormalizeFontFaceFunction(JoinResult.secondaryTitleFont),
+						Font = if FoundationFontFaceMigration then nil else JoinResult.secondaryTitleFont,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(JoinResult.secondaryTitleFont) else nil,
 						Text = JoinResult.secondaryTitleText or "",
 						TextTruncate = Enum.TextTruncate.AtEnd,
 						TextXAlignment = Enum.TextXAlignment.Left,
@@ -287,7 +290,8 @@ return ReactModule.memo(function(p1)
 						TextXAlignment = Enum.TextXAlignment.Left,
 						Text = JoinResult.subTitleText,
 						TextTruncate = if FFlagAppChatTimestampInSubtitleModule then Enum.TextTruncate.SplitWord else Enum.TextTruncate.AtEnd,
-						FontFace = NormalizeFontFaceFunction(JoinResult.subTitleTextFont)
+						Font = if FoundationFontFaceMigration then nil else JoinResult.subTitleTextFont,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(JoinResult.subTitleTextFont) else nil
 					}, if FFlagAppChatTimestampInSubtitleModule then {
 						sizeConstraint = ReactModule.createElement("UISizeConstraint", { MaxSize = MapResult })
 					} else nil),
@@ -300,7 +304,8 @@ return ReactModule.memo(function(p1)
 						TextTransparency = JoinResult.subTitleTextTransparency,
 						TextXAlignment = Enum.TextXAlignment.Left,
 						Text = UseMemoResult,
-						FontFace = NormalizeFontFaceFunction(JoinResult.subTitleTextFont),
+						Font = if FoundationFontFaceMigration then nil else JoinResult.subTitleTextFont,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(JoinResult.subTitleTextFont) else nil,
 						LayoutOrder = 3,
 						[ReactModule.Change.AbsoluteSize] = function(Frame)
 							-- upvalues: Callback1 (ref)

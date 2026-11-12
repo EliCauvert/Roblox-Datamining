@@ -628,7 +628,7 @@ local function ChildReconciler(p1)
 			
 			return WorkInProgress
 		else
-			if DEV and (ValueType == "function" and DEV) then
+			if DEV and ValueType == "function" and DEV then
 				local ComponentName = GetComponentNameFunction(Return_.type) or "Component"
 				
 				if not v2[ComponentName] then
@@ -683,39 +683,39 @@ local function ChildReconciler(p1)
 				v6 = warnOnInvalidKey(child, v6, Return)
 			end
 		end
-		local Sibling1 = nil
 		local v7 = nil
-		local Sibling2 = Sibling
-		local v8 = 1
+		local v8 = nil
+		local Sibling1 = Sibling
+		local v9 = 1
 		local Count = 1
 		local CountChildren = #Children
-		local Sibling3 = nil
-		while Sibling2 ~= nil and Count <= CountChildren do
-			if Count < Sibling2.index then
-				Sibling3 = Sibling2
-				Sibling2 = nil
+		local Sibling2 = nil
+		while Sibling1 ~= nil and Count <= CountChildren do
+			if Count < Sibling1.index then
+				Sibling2 = Sibling1
+				Sibling1 = nil
 			else
-				Sibling3 = Sibling2.sibling
+				Sibling2 = Sibling1.sibling
 			end
 			local Child = Children[Count]
-			local UpdateSlotResult = if Child == nil or type(Child) ~= "table" or Child["$$typeof"] == nil then updateSlot(Return, Sibling2, Child, p5) else updateSlot(Return, Sibling2, Child, p5, Count)
+			local UpdateSlotResult = if Child == nil or type(Child) ~= "table" or Child["$$typeof"] == nil then updateSlot(Return, Sibling1, Child, p5) else updateSlot(Return, Sibling1, Child, p5, Count)
 			
 			if UpdateSlotResult == nil then
-				if Sibling2 ~= nil then break end
-				Sibling2 = Sibling3
+				if Sibling1 ~= nil then break end
+				Sibling1 = Sibling2
 				break
 			end
-			if p1 and Sibling2 and UpdateSlotResult.alternate == nil and p1 then
+			if p1 and Sibling1 and UpdateSlotResult.alternate == nil and p1 then
 				local Deletions = Return.deletions
 				
 				if Deletions == nil then
-					Return.deletions = { Sibling2 }
+					Return.deletions = { Sibling1 }
 					Return.flags = bit32.bor(Return.flags, Deletion)
 				else
-					table.insert(Deletions, Sibling2)
+					table.insert(Deletions, Sibling1)
 				end
 			end
-			local v9: number = v8
+			local v10: number = v9
 			UpdateSlotResult.index = Count
 			
 			if p1 then
@@ -723,49 +723,49 @@ local function ChildReconciler(p1)
 				
 				if Alternate == nil then
 					UpdateSlotResult.flags = bit32.bor(UpdateSlotResult.flags, Placement)
-					v8 = v9
+					v9 = v10
 				else
 					local Index = Alternate.index
 					
-					if Index < v9 then
+					if Index < v10 then
 						UpdateSlotResult.flags = bit32.bor(UpdateSlotResult.flags, Placement)
-						v8 = v9
+						v9 = v10
 					else
-						v8 = Index
+						v9 = Index
 					end
 				end
 			else
-				v8 = v9
+				v9 = v10
 			end
-			if v7 == nil then
-				Sibling1 = UpdateSlotResult
+			if v8 == nil then
+				v7 = UpdateSlotResult
 			else
-				v7.sibling = UpdateSlotResult
+				v8.sibling = UpdateSlotResult
 			end
-			v7 = UpdateSlotResult
-			Sibling2 = Sibling3
+			v8 = UpdateSlotResult
+			Sibling1 = Sibling2
 			Count += 1
 		end
 		if CountChildren < Count then
 			if not p1 then
-				return Sibling1
+				return v7
 			end
-			local Sibling4 = Sibling2
-			while Sibling4 ~= nil do
+			local Sibling3 = Sibling1
+			while Sibling3 ~= nil do
 				if p1 then
 					local Deletions = Return.deletions
 					
 					if Deletions == nil then
-						Return.deletions = { Sibling4 }
+						Return.deletions = { Sibling3 }
 						Return.flags = bit32.bor(Return.flags, Deletion)
 					else
-						table.insert(Deletions, Sibling4)
+						table.insert(Deletions, Sibling3)
 					end
 				end
-				Sibling4 = Sibling4.sibling
+				Sibling3 = Sibling3.sibling
 			end
-			return Sibling1
-		elseif Sibling2 == nil then
+			return v7
+		elseif Sibling1 == nil then
 			while Count <= CountChildren do
 				local Child = Children[Count]
 				local Child1 = if Child == nil or type(Child) ~= "table" or Child["$$typeof"] == nil then createChild(Return, Child, p5) else createChild(Return, Child, p5, Count)
@@ -774,7 +774,7 @@ local function ChildReconciler(p1)
 					Count += 1
 					continue
 				else
-					local v10: number = v8
+					local v11: number = v9
 					Child1.index = Count
 					
 					if p1 then
@@ -782,32 +782,32 @@ local function ChildReconciler(p1)
 						
 						if Alternate == nil then
 							Child1.flags = bit32.bor(Child1.flags, Placement)
-							v8 = v10
+							v9 = v11
 						else
 							local Index = Alternate.index
 							
-							if Index < v10 then
+							if Index < v11 then
 								Child1.flags = bit32.bor(Child1.flags, Placement)
-								v8 = v10
+								v9 = v11
 							else
-								v8 = Index
+								v9 = Index
 							end
 						end
 					else
-						v8 = v10
+						v9 = v11
 					end
-					if v7 == nil then
-						Sibling1 = Child1
+					if v8 == nil then
+						v7 = Child1
 					else
-						v7.sibling = Child1
+						v8.sibling = Child1
 					end
-					v7 = Child1
+					v8 = Child1
 					Count += 1
 				end
 			end
-			return Sibling1
+			return v7
 		else
-			local MapRemainingChildrenResult = mapRemainingChildren(Return, Sibling2)
+			local MapRemainingChildrenResult = mapRemainingChildren(Return, Sibling1)
 			while Count <= CountChildren do
 				local Child = Children[Count]
 				local UpdateFromMapResult = if v1 and (Child == nil or (type(Child) ~= "table" or Child["$$typeof"] == nil)) then updateFromMap(MapRemainingChildrenResult, Return, Count, Child, p5) else updateFromMap(MapRemainingChildrenResult, Return, Count, Child, p5, Count)
@@ -816,7 +816,7 @@ local function ChildReconciler(p1)
 					if p1 and UpdateFromMapResult.alternate ~= nil then
 						MapRemainingChildrenResult[if UpdateFromMapResult.key == nil then Count else UpdateFromMapResult.key] = nil
 					end
-					local v11: number = v8
+					local v12: number = v9
 					UpdateFromMapResult.index = Count
 					
 					if p1 then
@@ -824,26 +824,26 @@ local function ChildReconciler(p1)
 						
 						if Alternate == nil then
 							UpdateFromMapResult.flags = bit32.bor(UpdateFromMapResult.flags, Placement)
-							v8 = v11
+							v9 = v12
 						else
 							local Index = Alternate.index
 							
-							if Index < v11 then
+							if Index < v12 then
 								UpdateFromMapResult.flags = bit32.bor(UpdateFromMapResult.flags, Placement)
-								v8 = v11
+								v9 = v12
 							else
-								v8 = Index
+								v9 = Index
 							end
 						end
 					else
-						v8 = v11
+						v9 = v12
 					end
-					if v7 == nil then
-						Sibling1 = UpdateFromMapResult
+					if v8 == nil then
+						v7 = UpdateFromMapResult
 					else
-						v7.sibling = UpdateFromMapResult
+						v8.sibling = UpdateFromMapResult
 					end
-					v7 = UpdateFromMapResult
+					v8 = UpdateFromMapResult
 				end
 				Count += 1
 			end
@@ -861,7 +861,7 @@ local function ChildReconciler(p1)
 					end
 				end
 			end
-			return Sibling1
+			return v7
 		end
 	end
 	
@@ -877,30 +877,30 @@ local function ChildReconciler(p1)
 			local CallbackResult1 = Callback(Children)
 			
 			if CallbackResult1 then
-				local v12 = nil
-				local v13 = CallbackResult1.next()
-				while not v13.done do
-					v13 = CallbackResult1.next()
-					v12 = warnOnInvalidKey(v13.value, v12, Return)
+				local v13 = nil
+				local v14 = CallbackResult1.next()
+				while not v14.done do
+					v14 = CallbackResult1.next()
+					v13 = warnOnInvalidKey(v14.value, v13, Return)
 				end
 			end
 		end
 		local CallbackResult = Callback(Children)
-		local v14 = nil
 		local v15 = nil
+		local v16 = nil
 		local Sibling1 = Sibling
-		local v16 = 1
+		local v17 = 1
 		local Count = 1
-		local v17 = CallbackResult.next()
+		local v18 = CallbackResult.next()
 		local Sibling2 = nil
-		while Sibling1 ~= nil and not v17.done do
+		while Sibling1 ~= nil and not v18.done do
 			if Count < Sibling1.index then
 				Sibling2 = Sibling1
 				Sibling1 = nil
 			else
 				Sibling2 = Sibling1.sibling
 			end
-			local UpdateSlotResult = updateSlot(Return, Sibling1, v17.value, p6, v17.key)
+			local UpdateSlotResult = updateSlot(Return, Sibling1, v18.value, p6, v18.key)
 			
 			if UpdateSlotResult == nil then
 				if Sibling1 ~= nil then break end
@@ -917,7 +917,7 @@ local function ChildReconciler(p1)
 					table.insert(Deletions, Sibling1)
 				end
 			end
-			local v18: number = v16
+			local v19: number = v17
 			UpdateSlotResult.index = Count
 			
 			if p1 then
@@ -925,33 +925,33 @@ local function ChildReconciler(p1)
 				
 				if Alternate == nil then
 					UpdateSlotResult.flags = bit32.bor(UpdateSlotResult.flags, Placement)
-					v16 = v18
+					v17 = v19
 				else
 					local Index = Alternate.index
 					
-					if Index < v18 then
+					if Index < v19 then
 						UpdateSlotResult.flags = bit32.bor(UpdateSlotResult.flags, Placement)
-						v16 = v18
+						v17 = v19
 					else
-						v16 = Index
+						v17 = Index
 					end
 				end
 			else
-				v16 = v18
+				v17 = v19
 			end
-			if v15 == nil then
-				v14 = UpdateSlotResult
+			if v16 == nil then
+				v15 = UpdateSlotResult
 			else
-				v15.sibling = UpdateSlotResult
+				v16.sibling = UpdateSlotResult
 			end
-			v15 = UpdateSlotResult
+			v16 = UpdateSlotResult
 			Sibling1 = Sibling2
 			Count += 1
-			v17 = CallbackResult.next()
+			v18 = CallbackResult.next()
 		end
-		if v17.done then
+		if v18.done then
 			if not p1 then
-				return v14
+				return v15
 			end
 			local Sibling3 = Sibling1
 			while Sibling3 ~= nil do
@@ -967,17 +967,17 @@ local function ChildReconciler(p1)
 				end
 				Sibling3 = Sibling3.sibling
 			end
-			return v14
+			return v15
 		elseif Sibling1 == nil then
-			while not v17.done do
-				local Child = createChild(Return, v17.value, p6, v17.key)
+			while not v18.done do
+				local Child = createChild(Return, v18.value, p6, v18.key)
 				
 				if Child == nil then
 					Count += 1
-					v17 = CallbackResult.next()
+					v18 = CallbackResult.next()
 					continue
 				else
-					local v19: number = v16
+					local v20: number = v17
 					Child.index = Count
 					
 					if p1 then
@@ -985,48 +985,48 @@ local function ChildReconciler(p1)
 						
 						if Alternate1 == nil then
 							Child.flags = bit32.bor(Child.flags, Placement)
-							v16 = v19
+							v17 = v20
 						else
 							local Index = Alternate1.index
 							
-							if Index < v19 then
+							if Index < v20 then
 								Child.flags = bit32.bor(Child.flags, Placement)
-								v16 = v19
+								v17 = v20
 							else
-								v16 = Index
+								v17 = Index
 							end
 						end
 					else
-						v16 = v19
+						v17 = v20
 					end
-					if v15 == nil then
-						v14 = Child
+					if v16 == nil then
+						v15 = Child
 					else
-						v15.sibling = Child
+						v16.sibling = Child
 					end
-					v15 = Child
+					v16 = Child
 					Count += 1
-					v17 = CallbackResult.next()
+					v18 = CallbackResult.next()
 				end
 			end
-			return v14
+			return v15
 		else
-			local v20 = nil
-			while not v17.done do
-				if not v20 then
-					v20 = mapRemainingChildren(Return, Sibling1)
+			local v21 = nil
+			while not v18.done do
+				if not v21 then
+					v21 = mapRemainingChildren(Return, Sibling1)
 				end
-				local UpdateFromMapResult = updateFromMap(v20, Return, Count, v17.value, p6, v17.key)
+				local UpdateFromMapResult = updateFromMap(v21, Return, Count, v18.value, p6, v18.key)
 				
 				if UpdateFromMapResult ~= nil then
 					if p1 and UpdateFromMapResult.alternate ~= nil then
 						if UpdateFromMapResult.key == nil then
-							v20[Count] = nil
+							v21[Count] = nil
 						else
-							v20[UpdateFromMapResult.key] = nil
+							v21[UpdateFromMapResult.key] = nil
 						end
 					end
-					local v21: number = v16
+					local v22: number = v17
 					UpdateFromMapResult.index = Count
 					
 					if p1 then
@@ -1034,32 +1034,32 @@ local function ChildReconciler(p1)
 						
 						if Alternate == nil then
 							UpdateFromMapResult.flags = bit32.bor(UpdateFromMapResult.flags, Placement)
-							v16 = v21
+							v17 = v22
 						else
 							local Index = Alternate.index
 							
-							if Index < v21 then
+							if Index < v22 then
 								UpdateFromMapResult.flags = bit32.bor(UpdateFromMapResult.flags, Placement)
-								v16 = v21
+								v17 = v22
 							else
-								v16 = Index
+								v17 = Index
 							end
 						end
 					else
-						v16 = v21
+						v17 = v22
 					end
-					if v15 == nil then
-						v14 = UpdateFromMapResult
+					if v16 == nil then
+						v15 = UpdateFromMapResult
 					else
-						v15.sibling = UpdateFromMapResult
+						v16.sibling = UpdateFromMapResult
 					end
-					v15 = UpdateFromMapResult
+					v16 = UpdateFromMapResult
 				end
 				Count += 1
-				v17 = CallbackResult.next()
+				v18 = CallbackResult.next()
 			end
 			if p1 then
-				for _, value in v20 do
+				for _, value in v21 do
 					if p1 then
 						local Deletions = Return.deletions
 						
@@ -1072,7 +1072,7 @@ local function ChildReconciler(p1)
 					end
 				end
 			end
-			return v14
+			return v15
 		end
 	end
 	

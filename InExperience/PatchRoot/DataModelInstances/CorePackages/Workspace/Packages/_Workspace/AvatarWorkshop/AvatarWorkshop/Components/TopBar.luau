@@ -8,14 +8,7 @@ return function(p1)
 	return (ReactModule.createElement(FoundationModule.View, {
 		tag = "row align-y-center gap-medium size-full-1200 padding-x-medium"
 	}, {
-		BackButton = if p1.onBack then ReactModule.createElement(FoundationModule.Image, {
-			tag = "size-600 radius-small",
-			Image = "icons/navigation/pushBack",
-			testId = "avatar-workshop-back-button",
-			LayoutOrder = 1,
-			onActivated = p1.onBack
-		}) else nil,
-		CloseButton = if p1.onBack then nil else ReactModule.createElement(FoundationModule.Image, {
+		CloseButton = ReactModule.createElement(FoundationModule.Image, {
 			tag = "size-600 radius-small",
 			Image = "icons/navigation/close",
 			testId = "avatar-workshop-close-button",
@@ -25,7 +18,9 @@ return function(p1)
 		HeaderText = ReactModule.createElement(FoundationModule.Text, {
 			tag = "auto-x text-title-large",
 			LayoutOrder = 2,
-			Text = UseLocalizationFunction({ headerText = p1.titleKey }).headerText
+			Text = UseLocalizationFunction({
+				headerText = "Feature.AvatarWorkshop.Heading.AvatarWorkshop"
+			}).headerText
 		})
 	}))
 end

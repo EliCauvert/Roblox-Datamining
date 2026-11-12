@@ -1,29 +1,31 @@
 ﻿local VirtualEvents = script:FindFirstAncestor("VirtualEvents")
 local ReactModule = require(VirtualEvents.Parent.React)
 local FoundationModule = require(VirtualEvents.Parent.Foundation)
+local Text = require(VirtualEvents.Parent.AppCommonLib).Text
 local GetTextSizeFunction = require(VirtualEvents.Parent.Style).GetTextSize
 local UseAnimationModule = require(VirtualEvents.Hooks.useAnimation)
-local Text = FoundationModule.Text
+local Text1 = FoundationModule.Text
 local UseTokensFunction = FoundationModule.Hooks.useTokens
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), GetTextSizeFunction (copy), UseAnimationModule (copy), Text (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), UseAnimationModule (copy), Text1 (copy)
 	local UseTokensResult = UseTokensFunction()
 	local BodyLarge = UseTokensResult.Typography.BodyLarge
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
 	
-	local function _(X, p2)
-		-- upvalues: GetTextSizeFunction (upval), BodyLarge (copy), UseStateResult2 (copy)
-		UseStateResult2(GetTextSizeFunction(p2, BodyLarge.FontSize, BodyLarge.Font, Vector2.new(X, 1e999)).Y)
+	local function updateDescriptionHeight(X, Description)
+		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), BodyLarge (copy), Text (upval), UseStateResult2 (copy)
+		UseStateResult2(if FoundationFontFaceMigration then GetTextSizeFunction(Description, BodyLarge.FontSize, BodyLarge.Font, Vector2.new(X, 1e999)).Y else Text.GetTextHeight(Description, BodyLarge.Font, BodyLarge.FontSize, X))
 	end
 	
 	local UseResult = ReactModule.useCallback(function(Frame)
-		-- upvalues: p1 (copy), GetTextSizeFunction (upval), BodyLarge (copy), UseStateResult2 (copy)
-		UseStateResult2(GetTextSizeFunction(p1.description, BodyLarge.FontSize, BodyLarge.Font, Vector2.new(Frame.AbsoluteSize.X, 1e999)).Y)
+		-- upvalues: updateDescriptionHeight (copy), p1 (copy)
+		updateDescriptionHeight(Frame.AbsoluteSize.X, p1.description)
 	end, { p1.description })
 	ReactModule.useEffect(function()
-		-- upvalues: p1 (copy), GetTextSizeFunction (upval), BodyLarge (copy), UseStateResult2 (copy)
-		UseStateResult2(GetTextSizeFunction(p1.description, BodyLarge.FontSize, BodyLarge.Font, Vector2.new(p1.width, 1e999)).Y)
+		-- upvalues: updateDescriptionHeight (copy), p1 (copy)
+		updateDescriptionHeight(p1.width, p1.description)
 	end, { p1.description, p1.width })
 	local Smallest: number = p1.isExpanded and math.min(UseStateResult, p1.maxHeight) or math.min(UseStateResult, 40)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Smallest)
@@ -45,7 +47,7 @@ return function(p1)
 		ScrollingDirection = Enum.ScrollingDirection.Y,
 		ScrollingEnabled = p1.maxHeight + 10 < UseStateResult
 	}, {
-		Text = ReactModule.createElement(Text, {
+		Text = ReactModule.createElement(Text1, {
 			RichText = true,
 			TextWrapped = true,
 			Size = UDim2.new(1, 0, 0, 0),
@@ -75,7 +77,7 @@ return function(p1)
 			p1.setIsExpanded(true)
 		end
 	}, {
-		Text = ReactModule.createElement(Text, {
+		Text = ReactModule.createElement(Text1, {
 			BackgroundTransparency = 1,
 			RichText = true,
 			TextWrapped = true,

@@ -2,7 +2,6 @@
 local Parent = SocialServerDrivenUi.Parent
 local ReactModule = require(Parent.React)
 local SharedFlagsModule = require(Parent.SharedFlags)
-local AppPage = require(Parent.RobloxAppEnums).AppPage
 local DiscoveryTypesModule = require(Parent.DiscoveryTypes)
 local FindAnalyticsFieldFunction = require(Parent.SduiCoreSystem).findAnalyticsField
 local SocialCarouselModule = require(Parent.SocialCarousel)
@@ -11,7 +10,6 @@ local OpenProfileQRCodePageBridgeModule = require(SocialServerDrivenUi.System.Op
 local FFlagEnableFlyoutFriendsHeaderFix = SharedFlagsModule.FFlagEnableFlyoutFriendsHeaderFix
 local FFlagFlyoutHideFriendsHeader = SocialCarouselModule.Flags.FFlagFlyoutHideFriendsHeader
 local FFlagLuaAppCompositionAlways = SharedFlagsModule.FFlagLuaAppCompositionAlways
-local FFlagMobileGameJoinCardVideo = SharedFlagsModule.FFlagMobileGameJoinCardVideo
 local FFlagLuaAppFriendsSortHeaderByPosition = SharedFlagsModule.FFlagLuaAppFriendsSortHeaderByPosition
 local FFlagLuaAppHomeFriendsRemoveItemImpressions = SharedFlagsModule.FFlagLuaAppHomeFriendsRemoveItemImpressions
 local FFlagSocialCarouselShareQREnabled = SharedFlagsModule.FFlagSocialCarouselShareQREnabled
@@ -36,7 +34,7 @@ local function _(p1)
 end
 
 return function(p1)
-	-- upvalues: FindAnalyticsFieldFunction (copy), ReactModule (copy), SocialCarouselModule (copy), FFlagLuaAppHomeFriendsRemoveItemImpressions (copy), SORTSELECTIONORDERBASE (copy), SORTINDEXSELECTIONORDERMULTIPLIER (copy), FFlagLuaAppFriendsSortHeaderByPosition (copy), FIntLuaAppFriendsSortHeaderMaxHiddenPosition (copy), FFlagFlyoutHideFriendsHeader (copy), FFlagEnableFlyoutFriendsHeaderFix (copy), FlyoutSidePanelIXP (copy), FFlagLuaAppCompositionAlways (copy), FFlagSocialCarouselShareQREnabled (copy), OpenProfileQRCodePageBridgeModule (copy), FFlagMobileGameJoinCardVideo (copy), AppPage (copy)
+	-- upvalues: FindAnalyticsFieldFunction (copy), ReactModule (copy), SocialCarouselModule (copy), FFlagLuaAppHomeFriendsRemoveItemImpressions (copy), SORTSELECTIONORDERBASE (copy), SORTINDEXSELECTIONORDERMULTIPLIER (copy), FFlagLuaAppFriendsSortHeaderByPosition (copy), FIntLuaAppFriendsSortHeaderMaxHiddenPosition (copy), FFlagFlyoutHideFriendsHeader (copy), FFlagEnableFlyoutFriendsHeaderFix (copy), FlyoutSidePanelIXP (copy), FFlagLuaAppCompositionAlways (copy), FFlagSocialCarouselShareQREnabled (copy), OpenProfileQRCodePageBridgeModule (copy)
 	local Number: number = tonumber(FindAnalyticsFieldFunction("collectionPosition", p1.analyticsContext.analyticsData or {}, -1)) or -1
 	
 	return ReactModule.createElement(SocialCarouselModule.Entry, {
@@ -62,8 +60,6 @@ return function(p1)
 		source = SocialCarouselModule.Constants.ANALYTICS.SRC.HOMEPAGE_FRIENDS_CAROUSEL,
 		hideCarouselHeader = if FFlagLuaAppFriendsSortHeaderByPosition then FIntLuaAppFriendsSortHeaderMaxHiddenPosition >= Number and (FFlagFlyoutHideFriendsHeader and (if FFlagEnableFlyoutFriendsHeaderFix then FlyoutSidePanelIXP.isFriendsSortHeaderHiddenInFlyoutIxp() else FlyoutSidePanelIXP.isFlyoutSidePanelEnabled())) elseif FFlagFlyoutHideFriendsHeader and (if FFlagEnableFlyoutFriendsHeaderFix then FlyoutSidePanelIXP.isFriendsSortHeaderHiddenInFlyoutIxp() else FlyoutSidePanelIXP.isFlyoutSidePanelEnabled()) then true else nil,
 		appCompositionEnabled = if FFlagLuaAppCompositionAlways then true else p1.sduiContext.appCompositionEnabled,
-		navigateToQRCodePage = if FFlagSocialCarouselShareQREnabled then OpenProfileQRCodePageBridgeModule.requestOpen else nil,
-		isJoinCardVideoEnabled = if FFlagMobileGameJoinCardVideo then p1.sduiContext.appPage == AppPage.Home else nil,
-		videoPlaybackContext = if FFlagMobileGameJoinCardVideo then p1.sduiContext.videoPlaybackContext else nil
+		navigateToQRCodePage = if FFlagSocialCarouselShareQREnabled then OpenProfileQRCodePageBridgeModule.requestOpen else nil
 	})
 end

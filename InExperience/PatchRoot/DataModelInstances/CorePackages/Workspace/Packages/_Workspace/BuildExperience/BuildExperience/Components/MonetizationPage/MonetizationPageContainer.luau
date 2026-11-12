@@ -625,7 +625,7 @@ return function(Tbl)
 	Copy.onRetryCatalog = UseResult1
 	Copy.onUpdateProductManagedPricing = if Tbl.universeId == nil or not IsCanMonetize then nil else UseResult2
 	
-	if FFlagBuildExperienceMonetizationProductEditingModule and (Tbl.universeId ~= nil and IsCanMonetize) then
+	if FFlagBuildExperienceMonetizationProductEditingModule and Tbl.universeId ~= nil and IsCanMonetize then
 		Copy.onUpdateProductSaleStatus = UseResult21
 		Copy.onUpdateProduct = UseResult3
 		

@@ -22,11 +22,6 @@ local config = {
 	[EventNamesModule.MomentCommentPostResult] = {
 		statusField = "outcome",
 		counter = RealtimeEventNamesModule.MomentsCommentPost
-	},
-	[EventNamesModule.MomentCommentTranslationToggled] = {
-		statusField = "isTranslationShown",
-		counter = RealtimeEventNamesModule.MomentsCommentTranslationToggle,
-		statusLabels = { ["true"] = "translated", ["false"] = "original" }
 	}
 }
 local config1 = {
@@ -51,11 +46,6 @@ return {
 		
 		if Status == nil and Entry.statusField ~= nil then
 			Status = p2[Entry.statusField]
-			local StatusLabels = Entry.statusLabels
-			
-			if StatusLabels ~= nil and Status ~= nil then
-				Status = StatusLabels[Status]
-			end
 		end;
 		(p3 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[Entry.counter], {
 			status = Status or "",

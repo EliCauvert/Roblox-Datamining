@@ -48,10 +48,11 @@ local FFlagLuaAppSuppressVideoDetectorDuringScroll = require(Parent.SharedFlags)
 local FIntLuaAppGameTileVideoDwellTimeInSec = require(Parent.SharedFlags).FIntLuaAppGameTileVideoDwellTimeInSec
 local FIntLuaAppGameTileVideoVisiblePercent = require(Parent.SharedFlags).FIntLuaAppGameTileVideoVisiblePercent
 local FFlagLuaAppGameTileSelectionVideoPlayback = require(Parent.SharedFlags).FFlagLuaAppGameTileSelectionVideoPlayback
+local FFlagMigrateGameInfoToStore = require(Parent.SharedFlags).FFlagMigrateGameInfoToStore
 local ResolveGameTileThumbnailUriModule = if FFlagLuaAppHomeThumbnailPrefetch then require(GameTile.resolveGameTileThumbnailUri) else nil
 
 return function(p1)
-	-- upvalues: UseDesignTokensFunction (copy), UseTokensFunction (copy), UseSelectorFunction (copy), GameInfosReducer (copy), GameHydrationReactModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UseDispatchFunction (copy), ReactModule (copy), ApiFetchGameDetails (copy), GetGameTileLayoutDataModule (copy), FFlagLuaAppHomeThumbnailPrefetch (copy), ResolveGameTileThumbnailUriModule (copy), ItemLayoutDataParsingUtilsModule (copy), FormatExperienceThumbnailModule (copy), GameTileViewConfigModule (copy), IsVRAppBuildFunction (copy), UseIsHoveredTileModule (copy), FFlagLuaAppEmphasisGameTileVideo (copy), VideoPlaybackCoordinator (copy), HoverTileCoordinatorModule (copy), VideoEndReason (copy), GameCollectionItemTypes (copy), SponsoredGamesRecordClickFunction (copy), AppExperienceActionRowModule (copy), GridTileTextFooterModule (copy), CreatorNameMetadataModule (copy), GameStatsModule (copy), GameTileConstantsModule (copy), ImpressionsTagUtility (copy), FFlagLuaAppSuppressVideoDetectorDuringScroll (copy), FFlagLuaAppGameTileSelectionVideoPlayback (copy), FFlagLuaAppEdpMediaGalleryVideoPreview (copy), UsePreferredInputFunction (copy), UseTagAsViewportAutoplayCandidateFunction (copy), FFlagLuaAppTileVideoCandidateOnly (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), GameTileVideoThumbnailModule (copy), GameVideoPlaybackDetectorModule (copy), ResponsiveModule (copy), FIntLuaAppGameTileVideoDwellTimeInSec (copy), FIntLuaAppGameTileVideoVisiblePercent (copy), GetTileBadgeByPositionConfigFromEntryModule (copy), GameTileThumbnailBadgesModule (copy), GameTileViewModule (copy), UserGameSettings (copy)
+	-- upvalues: UseDesignTokensFunction (copy), UseTokensFunction (copy), UseSelectorFunction (copy), GameInfosReducer (copy), FFlagMigrateGameInfoToStore (copy), GameHydrationReactModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UseDispatchFunction (copy), ReactModule (copy), ApiFetchGameDetails (copy), GetGameTileLayoutDataModule (copy), FFlagLuaAppHomeThumbnailPrefetch (copy), ResolveGameTileThumbnailUriModule (copy), ItemLayoutDataParsingUtilsModule (copy), FormatExperienceThumbnailModule (copy), GameTileViewConfigModule (copy), IsVRAppBuildFunction (copy), UseIsHoveredTileModule (copy), FFlagLuaAppEmphasisGameTileVideo (copy), VideoPlaybackCoordinator (copy), HoverTileCoordinatorModule (copy), VideoEndReason (copy), GameCollectionItemTypes (copy), SponsoredGamesRecordClickFunction (copy), AppExperienceActionRowModule (copy), GridTileTextFooterModule (copy), CreatorNameMetadataModule (copy), GameStatsModule (copy), GameTileConstantsModule (copy), ImpressionsTagUtility (copy), FFlagLuaAppSuppressVideoDetectorDuringScroll (copy), FFlagLuaAppGameTileSelectionVideoPlayback (copy), FFlagLuaAppEdpMediaGalleryVideoPreview (copy), UsePreferredInputFunction (copy), UseTagAsViewportAutoplayCandidateFunction (copy), FFlagLuaAppTileVideoCandidateOnly (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), GameTileVideoThumbnailModule (copy), GameVideoPlaybackDetectorModule (copy), ResponsiveModule (copy), FIntLuaAppGameTileVideoDwellTimeInSec (copy), FIntLuaAppGameTileVideoVisiblePercent (copy), GetTileBadgeByPositionConfigFromEntryModule (copy), GameTileThumbnailBadgesModule (copy), GameTileViewModule (copy), UserGameSettings (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local UseTokensResult = UseTokensFunction()
 	local UniverseId = p1.entry.universeId
@@ -59,8 +60,13 @@ return function(p1)
 		-- upvalues: GameInfosReducer (upval), UniverseId (copy)
 		return p2.Personalization[GameInfosReducer.key][UniverseId]
 	end)
-	local UseGameInfoResult = GameHydrationReactModule.useGameInfo(UniverseId)
-	local UseGameVotesResult = GameHydrationReactModule.useGameVotes(UniverseId)
+	local UseGameInfoResult = nil
+	local UseGameVotesResult = nil
+	
+	if FFlagMigrateGameInfoToStore then
+		UseGameInfoResult = GameHydrationReactModule.useGameInfo(UniverseId)
+		UseGameVotesResult = GameHydrationReactModule.useGameVotes(UniverseId)
+	end
 	local UseSelectorResult1 = UseSelectorFunction(function(p2)
 		-- upvalues: UniverseId (copy)
 		return p2.GameDetails[UniverseId]
@@ -102,7 +108,7 @@ return function(p1)
 		ResolveGameTileThumbnailUriModuleResult = if IsWide then FormatExperienceThumbnailModuleResult else UseLargeGameIconResult
 	end
 	local ImageAspectRatio = GameTileViewConfigModule.getImageAspectRatio(GameTileLayoutType)
-	local Title = GameTileLayoutDataModule and GameTileLayoutDataModule.title or (UseGameInfoResult and UseGameInfoResult.name or "")
+	local Title = (if FFlagMigrateGameInfoToStore then GameTileLayoutDataModule and GameTileLayoutDataModule.title or UseGameInfoResult and UseGameInfoResult.name else GameTileLayoutDataModule and GameTileLayoutDataModule.title or UseSelectorResult and UseSelectorResult.name) or ""
 	local HasImpressionsTag: boolean = not IsVRAppBuildFunction() and p1.useHoverTile and p1.impressionsTag ~= nil
 	local UseRefResult = ReactModule.useRef(nil)
 	local Text: string = `{p1.impressionsTag or ""}_{p1.index}_{GameTileLayoutType}`
@@ -140,18 +146,32 @@ return function(p1)
 		if FFlagLuaAppEmphasisGameTileVideo then VideoPlaybackCoordinator1 else nil
 	})
 	local ShowDescription = p1.showDescription or false
-	local UpVotes = UseGameVotesResult and UseGameVotesResult.upVotes or 0
-	local DownVotes = UseGameVotesResult and UseGameVotesResult.downVotes or 0
+	local UpVotes = nil
+	local DownVotes = nil
+	
+	if FFlagMigrateGameInfoToStore then
+		UpVotes = UseGameVotesResult and UseGameVotesResult.upVotes or 0
+		DownVotes = UseGameVotesResult and UseGameVotesResult.downVotes or 0
+	else
+		UpVotes = UseSelectorResult and UseSelectorResult.totalUpVotes or 0
+		DownVotes = UseSelectorResult and UseSelectorResult.totalDownVotes or 0
+	end
 	local HasVerifiedBadge = UseSelectorResult1 and (UseSelectorResult1.creator and UseSelectorResult1.creator.hasVerifiedBadge)
 	local Description = UseSelectorResult1 and UseSelectorResult1.description or ""
 	local LocalizedFiatPrice = UseSelectorResult1 and UseSelectorResult1.localizedFiatPrice or nil
 	local LicenseDescription = UseSelectorResult1 and UseSelectorResult1.licenseDescription or nil or LocalizedFiatPrice
 	local HideGameStats = p1.hideGameStats or (ShowDescription or LicenseDescription ~= nil)
-	local Name = UseGameInfoResult and (UseGameInfoResult.creator and UseGameInfoResult.creator.name)
-	local Name1 = if Name == "" then UseSelectorResult1 and (UseSelectorResult1.creator and UseSelectorResult1.creator.name) else Name or UseSelectorResult1 and (UseSelectorResult1.creator and UseSelectorResult1.creator.name)
+	local Name1 = nil
+	
+	if FFlagMigrateGameInfoToStore then
+		local Name = UseGameInfoResult and (UseGameInfoResult.creator and UseGameInfoResult.creator.name)
+		Name1 = if Name == "" then UseSelectorResult1 and (UseSelectorResult1.creator and UseSelectorResult1.creator.name) else Name or UseSelectorResult1 and (UseSelectorResult1.creator and UseSelectorResult1.creator.name)
+	else
+		Name1 = UseSelectorResult and UseSelectorResult.creatorName ~= "" and UseSelectorResult.creatorName or UseSelectorResult1 and (UseSelectorResult1.creator and UseSelectorResult1.creator.name)
+	end
 	local LinesOfText: number = if LicenseDescription then 2 else 3
 	local UseMemoResult = ReactModule.useMemo(function(): number
-		-- upvalues: Name1 (copy), ShowDescription (copy), LinesOfText (copy), HideGameStats (copy), LicenseDescription (copy)
+		-- upvalues: Name1 (ref), ShowDescription (copy), LinesOfText (copy), HideGameStats (copy), LicenseDescription (copy)
 		local Count = 0
 		
 		if Name1 and Name1 ~= "" then
@@ -215,7 +235,7 @@ return function(p1)
 		p1.launchExperienceEventContext, PlayButtonHeight, p1.index, ImageAspectRatio
 	})
 	local UseMemoResult2 = ReactModule.useMemo(function()
-		-- upvalues: ReactModule (upval), LicenseDescription (copy), GridTileTextFooterModule (upval), CreatorNameMetadataModule (upval), Name1 (copy), HasVerifiedBadge (copy), GameStatsModule (upval), UpVotes (copy), DownVotes (copy), p1 (copy), GameTileConstantsModule (upval), IsWide (copy), HideGameStats (copy), GameTileLayoutType (copy), ShowDescription (copy), Description (copy), LinesOfText (copy)
+		-- upvalues: ReactModule (upval), LicenseDescription (copy), GridTileTextFooterModule (upval), CreatorNameMetadataModule (upval), Name1 (ref), HasVerifiedBadge (copy), GameStatsModule (upval), UpVotes (ref), DownVotes (ref), p1 (copy), GameTileConstantsModule (upval), IsWide (copy), HideGameStats (copy), GameTileLayoutType (copy), ShowDescription (copy), Description (copy), LinesOfText (copy)
 		return ReactModule.createElement(ReactModule.Fragment, {}, {
 			UIListLayout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,

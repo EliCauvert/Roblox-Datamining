@@ -520,12 +520,12 @@ return (ReactModule.memo(function(p2)
 			UseResult5()
 		end
 	end, { Capture, v3, UseResult5 }) else UseResult5)
-	local CreateElementFunction1 = ReactModule.createElement
+	local CreateElementFunction = ReactModule.createElement
 	local Root = Dialog.Root
 	local config1 = { hasBackdrop = true, onClose = UseResult4 }
 	local config2 = {
 		Title = ReactModule.createElement(Dialog.Title, {
-			text = if FFlagEnablePlayerSupportCaptureAttachmentsModule and (v3 and Capture ~= nil) then if Capture.CaptureTime == nil then UseLocalizationResult.CapturesAdd else v5.dateTime elseif FFlagEnablePlayerSupportCaptureAttachmentsModule and v3 then UseLocalizationResult.CapturesAdd else UseLocalizationResult.Title
+			text = if FFlagEnablePlayerSupportCaptureAttachmentsModule and v3 and Capture ~= nil then if Capture.CaptureTime == nil then UseLocalizationResult.CapturesAdd else v5.dateTime elseif FFlagEnablePlayerSupportCaptureAttachmentsModule and v3 then UseLocalizationResult.CapturesAdd else UseLocalizationResult.Title
 		}),
 		Content = if FFlagEnablePlayerSupportCaptureAttachmentsModule and v3 then ReactModule.createElement(Dialog.Content, { LayoutOrder = 1 }, {
 			PickerBody = if Capture == nil then ReactModule.createElement(CapturePickerGridModule, {
@@ -687,7 +687,7 @@ return (ReactModule.memo(function(p2)
 	local Element = nil
 	
 	if FFlagEnablePlayerSupportCaptureAttachmentsModule and v3 then
-		local CreateElementFunction = ReactModule.createElement
+		local CreateElementFunction1 = ReactModule.createElement
 		local Actions = Dialog.Actions
 		local config3 = { LayoutOrder = 2 }
 		local Actions1 = nil
@@ -734,7 +734,7 @@ return (ReactModule.memo(function(p2)
 			}
 		end
 		config3.actions = Actions1
-		Element = CreateElementFunction(Actions, config3)
+		Element = CreateElementFunction1(Actions, config3)
 	else
 		Element = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 2,
@@ -750,5 +750,5 @@ return (ReactModule.memo(function(p2)
 	end
 	config2.Actions = Element
 	
-	return CreateElementFunction1(Root, config1, config2)
+	return CreateElementFunction(Root, config1, config2)
 end))

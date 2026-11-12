@@ -135,7 +135,7 @@ function buildReport(p2, Data, p3, Data1, Data2, Data3, p4, p5, Text)
 	if Text then
 		config1.tags.VARIANT.valueList[1].data = config.Variant.IGARv3 .. "-" .. Text
 	end
-	return if FFlagDropUnroutableMultiReportOptions or Data2 ~= "username" or #p3.extractedPlayers ~= 0 then HttpService:JSONEncode(config1) else nil
+	return if FFlagDropUnroutableMultiReportOptions or (Data2 ~= "username" or #p3.extractedPlayers ~= 0) then HttpService:JSONEncode(config1) else nil
 end
 
 return buildReport

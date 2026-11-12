@@ -3,7 +3,9 @@ local Parent = AppChat.Parent
 local ReactModule = require(Parent.React)
 local CryoModule = require(Parent.Cryo)
 local _ = require(Parent.UIBlox)
-local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
 local PresenceBubbleCellModule = require(script.Parent.PresenceBubbleCell)
 local config = {
@@ -26,7 +28,7 @@ local config = {
 }
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), CryoModule (copy), config (copy), ReactModule (copy), PresenceBubbleCellModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy)
+	-- upvalues: UseTokensFunction (copy), CryoModule (copy), config (copy), ReactModule (copy), PresenceBubbleCellModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), FoundationFontFaceMigration (copy)
 	local UseTokensResult = UseTokensFunction()
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local Style = JoinResult.style
@@ -59,17 +61,17 @@ return ReactModule.memo(function(p1)
 		avatarCircleDividerColor3 = Theme.PlaceHolder.Color,
 		avatarCirclePresenceImageColor3 = if IsTable then Theme.OnlineStatus.Color else nil,
 		avatarCirclePresenceImageTransparency = if IsTable then Theme.OnlineStatus.Transparency else nil,
-		subTitleTextFont = UseTokensResult.Typography.BodySmall.Font,
+		subTitleTextFont = if FoundationFontFaceMigration then UseTokensResult.Typography.BodySmall.Font else StyleFont.CaptionBody.Font,
 		subTitleTextTransparency = Theme.TextDefault.Transparency,
 		subTitleTextColor3 = Theme.TextDefault.Color,
 		subTitleTextSize = StyleFont.CaptionBody.RelativeSize * StyleFont.BaseSize,
 		subTitleIconColor3 = Style.Theme.IconDefault.Color,
 		subTitleIconTransparency = Style.Theme.IconDefault.Transparency,
-		titleFont = UseTokensResult.Typography.TitleLarge.Font,
+		titleFont = if FoundationFontFaceMigration then UseTokensResult.Typography.TitleLarge.Font else StyleFont.Header2.Font,
 		titleTextTransparency = if JoinResult.boldTitle then Theme.TextEmphasis.Transparency else Theme.TextDefault.Transparency,
 		titleTextColor3 = if JoinResult.boldTitle then Theme.TextEmphasis.Color else Theme.TextDefault.Color,
 		titleTextSize = StyleFont.Header2.RelativeSize * StyleFont.BaseSize,
-		secondaryTitleFont = UseTokensResult.Typography.TitleLarge.Font,
+		secondaryTitleFont = if FoundationFontFaceMigration then UseTokensResult.Typography.TitleLarge.Font else StyleFont.Header2.Font,
 		secondaryTitleTextTransparency = Theme.TextMuted.Transparency,
 		secondaryTitleTextColor3 = Theme.TextMuted.Color,
 		secondaryTitleTextSize = StyleFont.Header2.RelativeSize * StyleFont.BaseSize,

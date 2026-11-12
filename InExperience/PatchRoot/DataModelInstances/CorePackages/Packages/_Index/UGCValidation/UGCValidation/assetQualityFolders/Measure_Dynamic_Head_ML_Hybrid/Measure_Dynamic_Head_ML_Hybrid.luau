@@ -3,7 +3,6 @@ local _ = require(Parent.util.Types)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 local ReadAQSummaryNumberModule = require(Parent.util.readAQSummaryNumber)
 local GetFFlagUGCValidateAQDynamicHeadMLHybridNewFacsMessagesModule = require(Parent.flags.getFFlagUGCValidateAQDynamicHeadMLHybridNewFacsMessages)
-local GetFFlagUGCValidateAQDynamicHeadMLHybridWarningsModule = require(Parent.flags.getFFlagUGCValidateAQDynamicHeadMLHybridWarnings)
 local GetFIntUGCValidationDynamicHeadMLEyesMinScorePerMillionModule = require(Parent.flags.getFIntUGCValidationDynamicHeadMLEyesMinScorePerMillion)
 local GetFIntUGCValidationDynamicHeadMLMouthMinScorePerMillionModule = require(Parent.flags.getFIntUGCValidationDynamicHeadMLMouthMinScorePerMillion)
 local GetFIntUGCValidationDynamicHeadMLAnimationMinScorePerMillionModule = require(Parent.flags.getFIntUGCValidationDynamicHeadMLAnimationMinScorePerMillion)
@@ -38,26 +37,6 @@ end
 
 local _ = function(p1, p2: number): boolean
 	return p2 / 1000000 <= p1
-end
-
-local function warnExpressionQuality(p1, p2)
-	-- upvalues: ErrorSourceStringsModule (copy)
-	if p2.step2b_status == "completed" and p2.score ~= nil and tonumber(p2.score) ~= 100 then
-		local function _(p3): string
-			-- upvalues: p2 (copy)
-			return string.format("%.2f", tonumber(p2[p3]) or 0)
-		end
-		
-		p1:warn(ErrorSourceStringsModule.Keys.AQSWarn_DynamicHead, {
-			left_eye_close = string.format("%.2f", tonumber(p2.step2b_deformation_left_eye_close) or 0),
-			right_eye_close = string.format("%.2f", tonumber(p2.step2b_deformation_right_eye_close) or 0),
-			mouth_open = string.format("%.2f", tonumber(p2.step2b_deformation_mouth_open) or 0),
-			is_happy = string.format("%.2f", tonumber(p2.step2b_deformation_happy) or 0),
-			is_sad = string.format("%.2f", tonumber(p2.step2b_deformation_sad) or 0)
-		})
-		
-		return
-	end
 end
 
 local list = {
@@ -147,7 +126,7 @@ return {
 		NO_FACS = ErrorSourceStringsModule.Keys.DynamicHeadNOFACS
 	},
 	run = function(p5, p6)
-		-- upvalues: list (copy), GetFFlagUGCValidateAQDynamicHeadMLHybridWarningsModule (copy), warnExpressionQuality (copy)
+		-- upvalues: list (copy)
 		local MeasureDynamicHeadMLHybrid = p6.aqsSummaryData.Measure_Dynamic_Head_ML_Hybrid
 		
 		if MeasureDynamicHeadMLHybrid == nil then
@@ -161,9 +140,6 @@ return {
 				
 				for _, value1 in list do
 					if not value1(p5, value) then break end
-				end
-				if GetFFlagUGCValidateAQDynamicHeadMLHybridWarningsModule() then
-					warnExpressionQuality(p5, value)
 				end
 			end
 		end

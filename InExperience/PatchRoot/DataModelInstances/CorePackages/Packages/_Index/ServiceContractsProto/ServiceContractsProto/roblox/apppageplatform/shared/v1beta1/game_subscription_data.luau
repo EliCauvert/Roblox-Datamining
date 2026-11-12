@@ -44,20 +44,20 @@ function Module:encode()
 		Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, self.price_display)
 	end
 	if self.period_type ~= nil and self.period_type ~= "" then
-		local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.period_type)
+		local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.period_type)
 	end
 	if self.is_subscribed then
-		local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.varint)
-		Buf, Count = ProtoModule.writeVarInt(WriteTagResult7, WriteTagResult2_6, if self.is_subscribed then 1 else 0)
+		local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult8, WriteTagResult2_7, if self.is_subscribed then 1 else 0)
 	end
 	if self.price_in_robux ~= nil and self.price_in_robux ~= 0 then
-		local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.varint)
-		Buf, Count = ProtoModule.writeVarInt(WriteTagResult8, WriteTagResult2_7, self.price_in_robux)
+		local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult9, WriteTagResult2_8, self.price_in_robux)
 	end
 	if self.price_tier ~= nil and self.price_tier ~= 0 then
-		local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.varint)
-		Buf, Count = ProtoModule.writeVarInt(WriteTagResult9, WriteTagResult2_8, self.price_tier)
+		local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult6, WriteTagResult2_5, self.price_tier)
 	end
 	local Buf1 = buffer.create(Count)
 	buffer.copy(Buf1, 0, Buf, 0, Count)

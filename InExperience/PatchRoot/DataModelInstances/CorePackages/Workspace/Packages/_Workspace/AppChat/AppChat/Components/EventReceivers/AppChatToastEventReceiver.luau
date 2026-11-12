@@ -15,7 +15,9 @@ local ShowNotificationSnoozeMenuSignal = ToastNotificationModule.Signals.ShowNot
 local DismissNotificationSnoozeMenuSignal = ToastNotificationModule.Signals.DismissNotificationSnoozeMenuSignal
 local UniversalAppPolicyModule = require(Parent.UniversalAppPolicy)
 local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagExpChatEnableFriendsTab = SharedFlagsModule.FFlagExpChatEnableFriendsTab
 local GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction = SharedFlagsModule.GetFFlagAppChatInExpToastSnoozeMenuDismissFix
+local GetFFlagIsSquadEnabledFunction = SharedFlagsModule.GetFFlagIsSquadEnabled
 local FFlagAppChatToastChatTerminologyFixEnabled = SharedFlagsModule.FFlagAppChatToastChatTerminologyFixEnabled
 local config = {
 	hideAllChatToasts = false,
@@ -25,11 +27,11 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: CryoModule (copy), config (copy), UseLocalizationFunction (copy), FFlagAppChatToastChatTerminologyFixEnabled (copy), UniversalAppPolicyModule (copy), GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction (copy), UseIsChatEnabledModule (copy), ReactModule (copy), LifecycleEvents (copy), NotificationTypeEnum (copy), HttpService (copy), Default (copy), ShowNotificationSnoozeMenuSignal (copy), NotificationGroups (copy), ShouldHideFriendsChatToastModule (copy), DismissNotificationSnoozeMenuSignal (copy)
+	-- upvalues: CryoModule (copy), config (copy), UseLocalizationFunction (copy), FFlagAppChatToastChatTerminologyFixEnabled (copy), FFlagExpChatEnableFriendsTab (copy), UniversalAppPolicyModule (copy), GetFFlagIsSquadEnabledFunction (copy), GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction (copy), UseIsChatEnabledModule (copy), ReactModule (copy), LifecycleEvents (copy), NotificationTypeEnum (copy), HttpService (copy), Default (copy), ShowNotificationSnoozeMenuSignal (copy), NotificationGroups (copy), ShouldHideFriendsChatToastModule (copy), DismissNotificationSnoozeMenuSignal (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseLocalizationResult = UseLocalizationFunction({
 		snoozeDescription = "Feature.Chat.Description.SnoozeDescription",
-		snoozeTitle = if FFlagAppChatToastChatTerminologyFixEnabled then if UniversalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then "Feature.Chat.Label.MuteInGameChatToastNotifications" else "Feature.Chat.Label.MuteInGamePartyToastNotifications" else "Feature.Chat.Label.MuteInGameChatToastNotifications"
+		snoozeTitle = if FFlagAppChatToastChatTerminologyFixEnabled and FFlagExpChatEnableFriendsTab then if UniversalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then "Feature.Chat.Label.MuteInGameChatToastNotifications" else "Feature.Chat.Label.MuteInGamePartyToastNotifications" elseif FFlagExpChatEnableFriendsTab then "Feature.Chat.Label.MuteInGameChatToastNotifications" elseif GetFFlagIsSquadEnabledFunction() then "Feature.Chat.Label.SnoozePartyNotifications" else "Feature.Chat.Label.SnoozeChatNotifications"
 	})
 	local CanSeeChatTab = UniversalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTab()
 	local UseIsChatEnabledModuleResult = UseIsChatEnabledModule()
@@ -59,11 +61,11 @@ return function(p1)
 		end
 	end, { JoinResult.navigateToChat, UseLocalizationResult })
 	ReactModule.useEffect(function()
-		-- upvalues: Default (upval), NotificationTypeEnum (upval), JoinResult (copy), ShouldHideFriendsChatToastModule (upval), IsAppChatVisible (ref), CanSeeChatTab (copy)
+		-- upvalues: Default (upval), NotificationTypeEnum (upval), FFlagExpChatEnableFriendsTab (upval), JoinResult (copy), ShouldHideFriendsChatToastModule (upval), IsAppChatVisible (ref), CanSeeChatTab (copy)
 		local ListenToDisplayNotificationResult = Default:listenToDisplayNotification(function(p2)
-			-- upvalues: NotificationTypeEnum (upval), JoinResult (upval), ShouldHideFriendsChatToastModule (upval), IsAppChatVisible (upval), CanSeeChatTab (upval), Default (upval)
+			-- upvalues: NotificationTypeEnum (upval), FFlagExpChatEnableFriendsTab (upval), JoinResult (upval), ShouldHideFriendsChatToastModule (upval), IsAppChatVisible (upval), CanSeeChatTab (upval), Default (upval)
 			if p2.notificationType == NotificationTypeEnum.ChatNewMessage then
-				local ShouldHideFriendsChatToastModule1 = JoinResult.visibleFriendsConversationId ~= nil and ShouldHideFriendsChatToastModule(p2, JoinResult.visibleFriendsConversationId)
+				local ShouldHideFriendsChatToastModule1 = FFlagExpChatEnableFriendsTab and (JoinResult.visibleFriendsConversationId ~= nil and ShouldHideFriendsChatToastModule(p2, JoinResult.visibleFriendsConversationId))
 				
 				if IsAppChatVisible or not CanSeeChatTab or ShouldHideFriendsChatToastModule1 then
 					Default:dismissNotification(p2.notificationId)

@@ -11,7 +11,6 @@ local UGCValidationMaxAssetSizeAllowedFastInt = game:GetFastInt("UGCValidationMa
 local ConstantsModule = require(Parent.Constants)
 local FailureReasonsAccumulatorModule = require(Parent.util.FailureReasonsAccumulator)
 local GetFStringUGCValidationReferenceMeshIdWhitelistForIECModule = require(Parent.flags.getFStringUGCValidationReferenceMeshIdWhitelistForIEC)
-local GetFFlagUGCValidateRejectUnsupportedCreatorTypesModule = require(Parent.flags.getFFlagUGCValidateRejectUnsupportedCreatorTypes)
 
 local function getWhitelistIds()
 	-- upvalues: GetFStringUGCValidationReferenceMeshIdWhitelistForIECModule (copy)
@@ -57,37 +56,21 @@ local function _(Url, AssetIds, RestrictedEntities, p1, UniverseId)
 end
 
 return function(List, p1)
-	-- upvalues: GetFFlagUGCValidateRejectUnsupportedCreatorTypesModule (copy), Formatted (copy), FailureReasonsAccumulatorModule (copy), UGCValidationMaxAssetSizeAllowedFastInt (copy), AnalyticsModule (copy), UGCValidationCanPublishRequestPageSizeFastInt (copy), PromiseModule (copy), HttpService (copy), ConstantsModule (copy), GetFStringUGCValidationReferenceMeshIdWhitelistForIECModule (copy), getWhitelistIds (copy)
+	-- upvalues: Formatted (copy), FailureReasonsAccumulatorModule (copy), UGCValidationMaxAssetSizeAllowedFastInt (copy), AnalyticsModule (copy), UGCValidationCanPublishRequestPageSizeFastInt (copy), PromiseModule (copy), HttpService (copy), ConstantsModule (copy), GetFStringUGCValidationReferenceMeshIdWhitelistForIECModule (copy), getWhitelistIds (copy)
 	local IsServer = p1.isServer
 	local RestrictedUserIds = if p1.restrictedUserIds then p1.restrictedUserIds else {}
 	local Token = p1.token
 	local UniverseId = p1.universeId
-	
-	if GetFFlagUGCValidateRejectUnsupportedCreatorTypesModule() then
-		for _, restrictedUserId in RestrictedUserIds do
-			if restrictedUserId.creatorType == "Experience" then
-				return false, {
-					`Experience creators are not supported. CreatorType: Experience, CreatorId: {tostring(restrictedUserId.id)}.`
-				}
-			elseif restrictedUserId.creatorType ~= "User" and restrictedUserId.creatorType ~= "Group" then
-				return false, {
-					`Unsupported creator type. CreatorType: {tostring(restrictedUserId.creatorType)}, CreatorId: {tostring(restrictedUserId.id)}.`
-				}
-			end
-		end
-	else
-		local config = { User = {}, Group = {} }
-		
-		for _, restrictedUserId1 in ipairs(RestrictedUserIds) do
-			config[restrictedUserId1.creatorType][tonumber(restrictedUserId1.id)] = true
-		end
-	end
 	local Text = Formatted .. (if IsServer then "packages-api/v1/rcc/canPublish" else "packages-api/v1/canPublish")
+	local config = { User = {}, Group = {} }
 	local NewFailureReasonsAccumulator = FailureReasonsAccumulatorModule.new()
 	local t = {}
 	local List1 = {}
 	local Count = 0
 	
+	for _, restrictedUserId in ipairs(RestrictedUserIds) do
+		config[restrictedUserId.creatorType][tonumber(restrictedUserId.id)] = true
+	end
 	for i, _ in List do
 		if not t[i] then
 			Count += 1
@@ -173,9 +156,9 @@ return function(List, p1)
 	end
 	local IsNotFStringUGCValidationReferenceMeshIdWhitelistForIECModuleMatch = GetFStringUGCValidationReferenceMeshIdWhitelistForIECModule() ~= ""
 	local WhitelistIds = if IsNotFStringUGCValidationReferenceMeshIdWhitelistForIECModuleMatch then getWhitelistIds() else {}
-	for _, value1 in v2 do
-		for i2, value in pairs(value1.result) do
-			local v3 = if IsNotFStringUGCValidationReferenceMeshIdWhitelistForIECModuleMatch then value or WhitelistIds[i2] else value
+	for _, value in v2 do
+		for i2, value1 in pairs(value.result) do
+			local v3 = if IsNotFStringUGCValidationReferenceMeshIdWhitelistForIECModuleMatch then value1 or WhitelistIds[i2] else value1
 			
 			if not v3 then
 				AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateAssetCreator_DependencyNotOwnedByCreator, nil, p1)

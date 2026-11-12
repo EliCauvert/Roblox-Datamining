@@ -389,14 +389,14 @@ return function(p1, Callback, p2, p3)
 					local LoadingMore: string = Status
 					
 					if PendingFeedOverlayModule ~= nil then
-						local Count = 0
+						local Count1 = 0
 						
 						for _, value2 in PagerStoreModule.getItems(false) do
 							if value2.kind ~= "skeleton" and (value2.kind ~= "endState" and value2.kind ~= "caughtUp") then
-								Count += 1
+								Count1 += 1
 							end
 						end
-						if Count > 0 then
+						if Count1 > 0 then
 							LoadingMore = if Status == "LoadingMore" then "LoadingMore" else "Loaded"
 						elseif Status == "Loaded" then
 							LoadingMore = "Empty"
@@ -580,14 +580,14 @@ return function(p1, Callback, p2, p3)
 					local LoadingMore: string = Status
 					
 					if PendingFeedOverlayModule ~= nil then
-						local Count = 0
+						local Count1 = 0
 						
 						for _, value2 in PagerStoreModule.getItems(false) do
 							if value2.kind ~= "skeleton" and (value2.kind ~= "endState" and value2.kind ~= "caughtUp") then
-								Count += 1
+								Count1 += 1
 							end
 						end
-						if Count > 0 then
+						if Count1 > 0 then
 							LoadingMore = if Status == "LoadingMore" then "LoadingMore" else "Loaded"
 						elseif Status == "Loaded" then
 							LoadingMore = "Empty"
@@ -825,14 +825,14 @@ return function(p1, Callback, p2, p3)
 					local LoadingMore: string = Status
 					
 					if PendingFeedOverlayModule ~= nil then
-						local Count = 0
+						local Count1 = 0
 						
 						for _, value2 in PagerStoreModule.getItems(false) do
 							if value2.kind ~= "skeleton" and (value2.kind ~= "endState" and value2.kind ~= "caughtUp") then
-								Count += 1
+								Count1 += 1
 							end
 						end
-						if Count > 0 then
+						if Count1 > 0 then
 							LoadingMore = if Status == "LoadingMore" then "LoadingMore" else "Loaded"
 						elseif Status == "Loaded" then
 							LoadingMore = "Empty"
