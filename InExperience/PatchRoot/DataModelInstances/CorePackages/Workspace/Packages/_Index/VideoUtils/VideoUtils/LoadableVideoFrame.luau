@@ -14,7 +14,7 @@ local GetVideoEditsModule = require(script.Parent.getVideoEdits)
 local FFlagLuaAppEdpMediaGalleryAutoAdvance = require(Parent.SharedFlags).FFlagLuaAppEdpMediaGalleryAutoAdvance
 local FFlagLuaAppEdpMediaGalleryFullScreen = require(Parent.SharedFlags).FFlagLuaAppEdpMediaGalleryFullScreen
 local FFlagLuaAppEdpConsoleMediaGalleryVideo = require(Parent.SharedFlags).FFlagLuaAppEdpConsoleMediaGalleryVideo
-local FFlagLuaAppEnableHomepageOneByTwoTile = require(Parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile
+local FFlagLuaAppEnableNxMRoduxApportioning = require(Parent.SharedFlags).FFlagLuaAppEnableNxMRoduxApportioning
 local FFlagLuaAppHomePageFirstImageLoadObserver = require(Parent.SharedFlags).FFlagLuaAppHomePageFirstImageLoadObserver
 local FFlagLuaAppSduiVideoThumbnail = require(Parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
 local FFlagLuaAppHomeMomentVideoFallback = require(Parent.SharedFlags).FFlagLuaAppHomeMomentVideoFallback
@@ -22,7 +22,7 @@ local FFlagLuaAppVideoLoadFailureFallback = require(Parent.SharedFlags).FFlagLua
 local FFlagLuaAppVideoPlayerTrimAndMusic = require(Parent.SharedFlags).FFlagLuaAppVideoPlayerTrimAndMusic
 
 local function LoadableVideoFrame(Image, p1)
-	-- upvalues: ReactModule (copy), FFlagLuaAppVideoLoadFailureFallback (copy), FFlagLuaAppEdpMediaGalleryAutoAdvance (copy), FFlagLuaAppEdpMediaGalleryFullScreen (copy), FFlagLuaAppEdpConsoleMediaGalleryVideo (copy), FFlagLuaAppEnableHomepageOneByTwoTile (copy), FFlagLuaAppHomeMomentVideoFallback (copy), GetAuthorizedVideoUriModule (copy), ContentProvider (copy), ArgCheckModule (copy), FFlagLuaAppVideoPlayerTrimAndMusic (copy), GetVideoEditsModule (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), EditedVideoFrameModule (copy), VideoFrameWrapperModule (copy), FFlagLuaAppSduiVideoThumbnail (copy), LoadableImage (copy), Skeleton (copy), Radius (copy)
+	-- upvalues: ReactModule (copy), FFlagLuaAppVideoLoadFailureFallback (copy), FFlagLuaAppEdpMediaGalleryAutoAdvance (copy), FFlagLuaAppEdpMediaGalleryFullScreen (copy), FFlagLuaAppEdpConsoleMediaGalleryVideo (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), FFlagLuaAppHomeMomentVideoFallback (copy), GetAuthorizedVideoUriModule (copy), ContentProvider (copy), ArgCheckModule (copy), FFlagLuaAppVideoPlayerTrimAndMusic (copy), GetVideoEditsModule (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), EditedVideoFrameModule (copy), VideoFrameWrapperModule (copy), FFlagLuaAppSduiVideoThumbnail (copy), LoadableImage (copy), Skeleton (copy), Radius (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local v1 = nil
 	local Callback = nil
@@ -35,7 +35,7 @@ local function LoadableVideoFrame(Image, p1)
 		UseRefResult1 = ReactModule.useRef(Image.onVideoLoadFailed)
 		UseRefResult1.current = Image.onVideoLoadFailed
 	end
-	local UseRefResult2 = if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableHomepageOneByTwoTile then nil else ReactModule.useRef(nil)
+	local UseRefResult2 = if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableNxMRoduxApportioning then nil else ReactModule.useRef(nil)
 	local UseRefResult3 = ReactModule.useRef(nil)
 	
 	if Image.shouldStartPlayback and UseRefResult3.current == nil then
@@ -110,14 +110,14 @@ local function LoadableVideoFrame(Image, p1)
 	}, {
 		VideoFrame = ReactModule.createElement(if FFlagLuaAppVideoPlayerTrimAndMusic and Image.edits then EditedVideoFrameModule else VideoFrameWrapperModule, {
 			zIndex = 4,
-			videoFrameRef = if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableHomepageOneByTwoTile then p1 else UseRefResult2,
+			videoFrameRef = if FFlagLuaAppEdpMediaGalleryAutoAdvance or (FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableNxMRoduxApportioning) then p1 else UseRefResult2,
 			video = if FFlagLuaAppVideoLoadFailureFallback then Video elseif FFlagLuaAppHomeMomentVideoFallback then GetAuthorizedVideoUriModule(Image.video, Image.accessContext) else Image.video,
 			isPlaying = Image.shouldStartPlayback and (not FFlagLuaAppVideoLoadFailureFallback or not v1),
 			looped = Image.looped,
 			edits = if FFlagLuaAppVideoPlayerTrimAndMusic then Image.edits else nil,
 			volume = if Image.muted then 0 else nil,
 			onLoaded = ReactModule.useCallback(function()
-				-- upvalues: FFlagLuaAppVideoLoadFailureFallback (upval), UseRefResult (ref), FFlagLuaAppEdpMediaGalleryAutoAdvance (upval), FFlagLuaAppEdpMediaGalleryFullScreen (upval), FFlagLuaAppEdpConsoleMediaGalleryVideo (upval), FFlagLuaAppEnableHomepageOneByTwoTile (upval), p1 (copy), UseRefResult2 (copy), ArgCheckModule (upval), UseRefResult3 (copy), Image (copy), FFlagLuaAppVideoPlayerTrimAndMusic (upval), GetVideoEditsModule (upval), UseStateResult2 (copy)
+				-- upvalues: FFlagLuaAppVideoLoadFailureFallback (upval), UseRefResult (ref), FFlagLuaAppEdpMediaGalleryAutoAdvance (upval), FFlagLuaAppEdpMediaGalleryFullScreen (upval), FFlagLuaAppEdpConsoleMediaGalleryVideo (upval), FFlagLuaAppEnableNxMRoduxApportioning (upval), p1 (copy), UseRefResult2 (copy), ArgCheckModule (upval), UseRefResult3 (copy), Image (copy), FFlagLuaAppVideoPlayerTrimAndMusic (upval), GetVideoEditsModule (upval), UseStateResult2 (copy)
 				if FFlagLuaAppVideoLoadFailureFallback and UseRefResult.current then
 					local Current = UseRefResult.current
 					
@@ -130,7 +130,7 @@ local function LoadableVideoFrame(Image, p1)
 				end
 				local Sound = nil
 				
-				if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableHomepageOneByTwoTile then
+				if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableNxMRoduxApportioning then
 					if typeof(p1) == "table" then
 						Sound = p1.current
 					else
@@ -160,7 +160,7 @@ local function LoadableVideoFrame(Image, p1)
 				Image.onVideoLoaded,
 				if FFlagLuaAppVideoPlayerTrimAndMusic and Image.edits and Image.edits.trim then Image.edits.trim.startTime else nil,
 				if FFlagLuaAppVideoPlayerTrimAndMusic and Image.edits and Image.edits.trim then Image.edits.trim.endTime else nil,
-				if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableHomepageOneByTwoTile then p1 else UseRefResult2,
+				if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableNxMRoduxApportioning then p1 else UseRefResult2,
 				UseRefResult3,
 				if FFlagLuaAppVideoLoadFailureFallback then UseRefResult else nil
 			}),
@@ -197,4 +197,4 @@ local function LoadableVideoFrame(Image, p1)
 	})
 end
 
-return if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableHomepageOneByTwoTile then ReactModule.forwardRef(LoadableVideoFrame) else LoadableVideoFrame
+return if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableNxMRoduxApportioning then ReactModule.forwardRef(LoadableVideoFrame) else LoadableVideoFrame

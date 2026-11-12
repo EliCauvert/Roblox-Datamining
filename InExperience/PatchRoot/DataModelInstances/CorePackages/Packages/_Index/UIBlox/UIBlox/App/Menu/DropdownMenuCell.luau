@@ -231,13 +231,13 @@ function DropdownMenuCell.render(p1)
 				[RoactModule.Event.Activated] = p1.props.onActivated
 			}
 			local _UDim2 = nil
-			local config1 = nil
+			local t = nil
 			local JoinResult = nil
 			
 			if p1.props.enableTokenOverride then
 				local Size: number = p1.props.border.size
 				_UDim2 = UDim2.new(1, -2 * Size, 1, -2 * Size)
-				config1 = {
+				t = {
 					UIStroke = RoactModule.createElement("UIStroke", {
 						Color = ColorFromMap.Color,
 						Transparency = ColorFromMap.Transparency,
@@ -250,7 +250,7 @@ function DropdownMenuCell.render(p1)
 				JoinResult = CryoModule.Dictionary.join(p1.props, config)
 			else
 				_UDim2 = UDim2.new(1, 0, 1, 0)
-				config1 = {}
+				t = {}
 				JoinResult = CryoModule.Dictionary.join(p1.props, {
 					Image = ButtonImage,
 					ImageColor3 = ColorFromMap.Color,
@@ -258,7 +258,7 @@ function DropdownMenuCell.render(p1)
 				}, config)
 			end
 			return RoactModule.createElement(InteractableModule, JoinResult, {
-				ButtonContent = RoactModule.createElement("Frame", { BackgroundTransparency = 1, Size = _UDim2 }, CryoModule.Dictionary.join(config1, Config))
+				ButtonContent = RoactModule.createElement("Frame", { BackgroundTransparency = 1, Size = _UDim2 }, CryoModule.Dictionary.join(t, Config))
 			})
 		end)
 	end)

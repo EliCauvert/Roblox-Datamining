@@ -66,7 +66,7 @@ return ReactModule.memo(function(Frame)
 			AnchorPoint = if FFlagMomentsCommentRowRedesignModule then Vector2.new(0, 0.5) else nil,
 			Position = if FFlagMomentsCommentRowRedesignModule then UDim2.new(0, 0, 0.5, -1) else nil,
 			padding = {
-				right = UDim.new(0, Small),
+				right = UDim.new(0, Frame.rightInset or Small),
 				bottom = if FFlagMomentsCommentRowRedesignModule then nil else UDim.new(0, Small)
 			}
 		}, {

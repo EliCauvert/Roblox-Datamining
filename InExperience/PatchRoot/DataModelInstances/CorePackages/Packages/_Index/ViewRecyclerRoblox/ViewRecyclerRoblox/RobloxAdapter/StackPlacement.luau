@@ -1,4 +1,5 @@
-﻿local ViewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
+﻿local FFlagViewRecyclerReact084 = require(script:FindFirstAncestor("ViewRecyclerRoblox").Flags).FFlagViewRecyclerReact084
+local ViewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
 local ViewRecyclerModule = require(ViewRecyclerRoblox.Parent.ViewRecycler)
 local CanvasItemPlacerModule = require(ViewRecyclerRoblox.RobloxAdapter.CanvasItemPlacer)
 local HostPresentationPhaseModule = require(ViewRecyclerRoblox.RobloxAdapter.HostPresentationPhase)
@@ -29,7 +30,7 @@ local function createStackFrame(p1, IsYMatch, Offset, ViewRecyclerStack)
 end
 
 function StackPlacementModule.new(Parent, Y, p1, p2)
-	-- upvalues: Axis (copy), TransparentFrameModule (copy), createStackFrame (copy), StackPlacementModule (copy), ViewRecyclerModule (copy), HostPresentationPhaseModule (copy), CanvasItemPlacerModule (copy), _UDim2 (copy)
+	-- upvalues: Axis (copy), TransparentFrameModule (copy), createStackFrame (copy), FFlagViewRecyclerReact084 (copy), StackPlacementModule (copy), ViewRecyclerModule (copy), HostPresentationPhaseModule (copy), CanvasItemPlacerModule (copy), _UDim2 (copy)
 	local IsYMatch = Y == Axis.Y
 	local ViewRecyclerStack = TransparentFrameModule("ViewRecyclerStack")
 	ViewRecyclerStack.Size = UDim2.fromScale(1, 1)
@@ -46,6 +47,7 @@ function StackPlacementModule.new(Parent, Y, p1, p2)
 	local NewStartOffsets = {}
 	local OriginOffset = 0
 	local Tbl = {}
+	local self = if FFlagViewRecyclerReact084 then setmetatable({}, { __mode = "k" }) else nil
 	local Tbl1 = {}
 	local Placeholders = {}
 	local List = {}
@@ -240,7 +242,7 @@ function StackPlacementModule.new(Parent, Y, p1, p2)
 			end
 		end,
 		place = function(Frame: Frame, p4, Geometry, Presented): boolean
-			-- upvalues: Tbl (copy), HostPresentationPhaseModule (upval), v1 (ref), v2 (ref), CanvasItemPlacerModule (upval), Y (copy), p2 (copy), _UDim2 (upval), ClampedValue (ref), Leading (copy), Trailing (copy), Tbl1 (copy), Tbl2 (copy), Flag1 (ref)
+			-- upvalues: Tbl (copy), FFlagViewRecyclerReact084 (upval), self (ref), HostPresentationPhaseModule (upval), v1 (ref), v2 (ref), CanvasItemPlacerModule (upval), Y (copy), p2 (copy), _UDim2 (upval), ClampedValue (ref), Leading (copy), Trailing (copy), Tbl1 (copy), Tbl2 (copy), Flag1 (ref)
 			local Index = Geometry.index
 			local Entry = Tbl[Frame]
 			
@@ -253,6 +255,10 @@ function StackPlacementModule.new(Parent, Y, p1, p2)
 					restoreLayoutOrder = Frame.LayoutOrder
 				}
 				Tbl[Frame] = Entry
+				
+				if FFlagViewRecyclerReact084 then
+					self[Frame] = nil
+				end
 			end
 			local IsIndexBelow: boolean = Presented == HostPresentationPhaseModule.Presented and v1 <= Index and Index <= v2
 			local Geometry1 = CanvasItemPlacerModule.getGeometry(Geometry.itemLayout, Geometry.canvasPlacement, Y, p2, 0, Entry.geometry)
@@ -287,11 +293,15 @@ function StackPlacementModule.new(Parent, Y, p1, p2)
 			return IsIndexBelow
 		end,
 		remove = function(Key)
-			-- upvalues: Tbl (copy), Tbl1 (copy), Tbl2 (copy), Flag1 (ref)
+			-- upvalues: Tbl (copy), FFlagViewRecyclerReact084 (upval), self (ref), Tbl1 (copy), Tbl2 (copy), Flag1 (ref)
 			local Entry = Tbl[Key]
 			
 			if Entry == nil then return end
 			Tbl[Key] = nil
+			
+			if FFlagViewRecyclerReact084 then
+				self[Key] = true
+			end
 			local Index = if Entry.visible then Entry.index else nil
 			
 			if Index ~= nil and Index ~= nil then
@@ -309,6 +319,10 @@ function StackPlacementModule.new(Parent, Y, p1, p2)
 			-- upvalues: Tbl (copy)
 			return Tbl[p4] ~= nil
 		end,
+		isStackFrame = if FFlagViewRecyclerReact084 then function(Leading1): boolean
+			-- upvalues: Leading (copy), Trailing (copy)
+			return Leading1 == Leading or Leading1 == Trailing
+		end else nil,
 		getStaleHosts = function()
 			-- upvalues: Tbl (copy), v1 (ref), v2 (ref), ClampedValue (ref), Leading (copy), Trailing (copy)
 			local List = {}
@@ -364,9 +378,17 @@ function StackPlacementModule.new(Parent, Y, p1, p2)
 			end
 		end,
 		destroy = function()
-			-- upvalues: Tbl (copy), Tbl1 (copy), Placeholders (copy), List (copy), Tbl2 (copy), ViewRecyclerStack (copy)
+			-- upvalues: Tbl (copy), FFlagViewRecyclerReact084 (upval), self (ref), Leading (copy), Trailing (copy), Parent (copy), Tbl1 (copy), Placeholders (copy), List (copy), Tbl2 (copy), ViewRecyclerStack (copy)
 			for i, value in Tbl do
 				i.LayoutOrder = value.restoreLayoutOrder
+			end
+			if FFlagViewRecyclerReact084 then
+				for i1 in self do
+					if i1.Parent == Leading or i1.Parent == Trailing then
+						i1.Parent = Parent
+					end
+				end
+				table.clear(self)
 			end
 			table.clear(Tbl)
 			table.clear(Tbl1)

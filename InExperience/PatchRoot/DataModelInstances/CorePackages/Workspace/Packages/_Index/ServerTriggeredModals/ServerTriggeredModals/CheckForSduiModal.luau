@@ -6,6 +6,7 @@ local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local RoactServiceTagsModule = require(Parent.RoactServiceTags)
 local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local RoactNavigationModule = require(Parent.RoactNavigation)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local NotificationsUpsellModule = require(Parent.NotificationsUpsell)
 local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
@@ -17,10 +18,12 @@ local FetchModalMetadataModule = require(ServerTriggeredModals.fetchModalMetadat
 local UseHandleCustomModalCallbackModule = require(ServerTriggeredModals.useHandleCustomModalCallback)
 local FFlagLuaAppSupportNonSduiTypeForServerTriggeredModals = SharedFlagsModule.FFlagLuaAppSupportNonSduiTypeForServerTriggeredModals
 local FFlagEnableDeepLinkHistoryWithModalAPI = SharedFlagsModule.FFlagEnableDeepLinkHistoryWithModalAPI
+local FFlagSignalsNavP3hMisc = SharedFlagsModule.FFlagSignalsNavP3hMisc
+local WithNavigationFocusIgnoringNavigation = if FFlagSignalsNavP3hMisc then require(Parent.RobloxAppNavigation).withNavigationFocusIgnoringNavigation else nil
 local ServerTriggeredModalTrafficPercent = game:DefineFastInt("ServerTriggeredModalTrafficPercent", 0)
 local LuaAppAvoidPushUpsellConflicts = game:DefineFastFlag("LuaAppAvoidPushUpsellConflicts", false)
 
-return ReactModule.memo((require(Parent.RoactNavigation).withNavigationFocus(function(p1)
+local function CheckForSduiModal(p1)
 	-- upvalues: UseRoactServiceFunction (copy), RoactServiceTagsModule (copy), UseDispatchFunction (copy), UseModalSignalStoreModule (copy), UseSignalStateFunction (copy), EntryPointModule (copy), FFlagEnableDeepLinkHistoryWithModalAPI (copy), DeepLinkModule (copy), LuaAppAvoidPushUpsellConflicts (copy), ReactModule (copy), FFlagLuaAppSupportNonSduiTypeForServerTriggeredModals (copy), UseHandleCustomModalCallbackModule (copy), NotificationsUpsellModule (copy), LoggerModule (copy), ServerTriggeredModalTrafficPercent (copy), FetchModalMetadataModule (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactServiceTagsModule.RoactNetworking)
 	local UseDispatchResult = UseDispatchFunction()
@@ -117,4 +120,6 @@ return ReactModule.memo((require(Parent.RoactNavigation).withNavigationFocus(fun
 	})
 	
 	return nil
-end)))
+end
+
+return if FFlagSignalsNavP3hMisc then WithNavigationFocusIgnoringNavigation(CheckForSduiModal) else ReactModule.memo((RoactNavigationModule.withNavigationFocus(CheckForSduiModal)))

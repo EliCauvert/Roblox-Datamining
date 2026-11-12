@@ -7,7 +7,6 @@ local GetInputModeStoreFunction = ResponsiveModule.GetInputModeStore
 local FoundationModule = require(Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UIBloxModule = require(Parent.UIBlox)
 local CryoModule = require(Parent.Cryo)
 local LoadableImage = UIBloxModule.App.Loading.LoadableImage
@@ -66,7 +65,7 @@ local function maybeLayoutForButton(p1, RightContent, Small, Offset: number, p2)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), ContentProvider (copy), TextSizeModule (copy), UseTokensFunction (copy), FFlagSduiGameTileEnableHoverInVR (copy), GetInputModeStoreFunction (copy), ResponsiveModule (copy), UseTileHoldActionModule (copy), FFlagLuaAppSduiGameTileFeedback (copy), FFlagSduiTileDisableLegacyHover (copy), SduiTileInsetImageModule (copy), FFlagSduiTileThumbnailPadding (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), ImageSetLabel (copy), FFlagLuaAppSduiVideoThumbnail (copy), SduiDefaultTileImageModule (copy), LoadableImage (copy), maybeLayoutForButton (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), CryoModule (copy), t (copy), HoldDetector (copy)
+	-- upvalues: ReactModule (copy), ContentProvider (copy), TextSizeModule (copy), UseTokensFunction (copy), FFlagSduiGameTileEnableHoverInVR (copy), GetInputModeStoreFunction (copy), ResponsiveModule (copy), UseTileHoldActionModule (copy), FFlagLuaAppSduiGameTileFeedback (copy), FFlagSduiTileDisableLegacyHover (copy), SduiTileInsetImageModule (copy), FFlagSduiTileThumbnailPadding (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), ImageSetLabel (copy), FFlagLuaAppSduiVideoThumbnail (copy), SduiDefaultTileImageModule (copy), LoadableImage (copy), maybeLayoutForButton (copy), NormalizeFontFaceFunction (copy), CryoModule (copy), t (copy), HoldDetector (copy)
 	local LayoutOrder = p1.layoutOrder
 	local AnchorPoint = p1.anchorPoint
 	local AutomaticSize = p1.automaticSize
@@ -97,8 +96,8 @@ return ReactModule.memo(function(p1)
 	local HasCtaButtonComponent = p1.ctaButtonComponent ~= nil
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local IsContained = p1.isContained
-	local BackgroundStyle = nil
 	local BackgroundStyleColor3 = nil
+	local BackgroundStyle = nil
 	
 	if p1.backgroundStyle == nil then
 		BackgroundStyle = UseTokensResult.Color.Surface.Surface_100
@@ -332,8 +331,7 @@ return ReactModule.memo(function(p1)
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 0, Ceiled),
 				Text = p1.titleText,
-				Font = if FoundationFontFaceMigration then nil else TitleFont.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(TitleFont.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(TitleFont.Font),
 				TextSize = TitleFont.FontSize,
 				TextTransparency = Emphasis.Transparency,
 				TextColor3 = Emphasis.Color3,

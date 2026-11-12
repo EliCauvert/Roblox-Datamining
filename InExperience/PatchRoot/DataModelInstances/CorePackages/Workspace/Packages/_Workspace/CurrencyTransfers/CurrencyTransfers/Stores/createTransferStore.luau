@@ -33,6 +33,7 @@ return function()
 	local Signal21, Signal2_20 = SignalsModule.createSignal(nil)
 	local Signal22, Signal2_21 = SignalsModule.createSignal(nil)
 	local Signal23, Signal2_22 = SignalsModule.createSignal(nil)
+	local Signal24, Signal2_23 = SignalsModule.createSignal(false)
 	local Callback = nil
 	local Callback1 = nil
 	local Callback2 = nil
@@ -86,6 +87,8 @@ return function()
 		setTransferBenefitSource = Signal2_21,
 		getNumFreeTransfersRemaining = Signal23,
 		setNumFreeTransfersRemaining = Signal2_22,
+		getFreeTransfersExhausted = Signal24,
+		setFreeTransfersExhausted = Signal2_23,
 		setOnClose = function(Value)
 			-- upvalues: Callback (ref)
 			Callback = Value

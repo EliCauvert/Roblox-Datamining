@@ -5,6 +5,7 @@ local CompositionTags = require(Parent.AppComposition).CompositionTags
 local NavigationModule = require(Parent.Navigation)
 local ReactModule = require(Parent.React)
 local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
+local FFlagGroupSduiPublishContainerWidth = require(Parent.SharedFlags).FFlagGroupSduiPublishContainerWidth
 local UseGroupsWrapperContextModule = require(Groups.Contexts.useGroupsWrapperContext)
 local GetGroupOverviewPaneConfigModule = require(Groups.Common.getGroupOverviewPaneConfig)
 local FetchGroupOverviewPaneModule = require(Groups.Common.fetchGroupOverviewPane)
@@ -16,6 +17,7 @@ local SduiSurfaceLoadTimeTracker = SduiSharedUtilitiesModule.SduiSurfaceLoadTime
 local UiStatus = SduiSharedUtilitiesModule.UiStatus
 local UseComponentConfigFunction = SduiSharedUtilitiesModule.useComponentConfig
 local UsePageScopeRefFunction = SduiSharedUtilitiesModule.usePageScopeRef
+local UsePublishContainerWidthFunction = SduiSharedUtilitiesModule.usePublishContainerWidth
 local UseUiStatusFunction = SduiSharedUtilitiesModule.useUiStatus
 
 local function createPageTimer(p1, Page)
@@ -47,8 +49,18 @@ local function useFinishPageTimerWhenEmpty(ConfigKey, PageTimer)
 	end, { PageTimer, NoHasUseComponentConfigResult })
 end
 
+local function ContainerWidthFrame(p1)
+	-- upvalues: UsePublishContainerWidthFunction (copy), ReactModule (copy)
+	return ReactModule.createElement("Frame", {
+		BackgroundTransparency = 1,
+		BorderSizePixel = 0,
+		Size = UDim2.fromScale(1, 1),
+		ref = UsePublishContainerWidthFunction(p1.configKey)
+	}, p1.children)
+end
+
 local function GroupOverviewPaneContent(p1)
-	-- upvalues: NavigationModule (copy), UsePageScopeRefFunction (copy), ReactModule (copy), createPageTimer (copy), FetchGroupOverviewPaneModule (copy), useFinishPageTimerWhenEmpty (copy), SduiPageEntryPoint (copy), AppPage (copy)
+	-- upvalues: NavigationModule (copy), UsePageScopeRefFunction (copy), ReactModule (copy), createPageTimer (copy), FetchGroupOverviewPaneModule (copy), useFinishPageTimerWhenEmpty (copy), SduiPageEntryPoint (copy), AppPage (copy), FFlagGroupSduiPublishContainerWidth (copy), ContainerWidthFrame (copy)
 	local Config = p1.config
 	local UseRouteNameResult = NavigationModule.useRouteName()
 	UsePageScopeRefFunction(Config.configKey)
@@ -69,8 +81,7 @@ local function GroupOverviewPaneContent(p1)
 		FetchGroupOverviewPaneModule(Config, Refresh, true)
 	end, { Config })
 	useFinishPageTimerWhenEmpty(Config.configKey, UseStateResult1)
-	
-	return ReactModule.createElement(SduiPageEntryPoint, {
+	local Element = ReactModule.createElement(SduiPageEntryPoint, {
 		disableRootPadding = true,
 		appPage = AppPage.Groups,
 		routeName = UseRouteNameResult,
@@ -84,6 +95,8 @@ local function GroupOverviewPaneContent(p1)
 			return { source = p1.source }
 		end, { p1.source })
 	})
+	
+	return if FFlagGroupSduiPublishContainerWidth then ReactModule.createElement(ContainerWidthFrame, { configKey = Config.configKey }, { Page = Element }) else Element
 end
 
 local function GroupOverviewPaneEmpty(p1)

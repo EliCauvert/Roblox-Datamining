@@ -10,7 +10,6 @@ local UseCursorFunction = UIBloxModule.App.SelectionCursor.useCursor
 local FoundationModule = require(Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local RightAlignedButtonWrapperModule = require(GameTile.Footer.RightAlignedButtonWrapper)
 local ZoomAnimatedFrameModule = require(GameTile.ZoomAnimatedFrame)
 local GameTileViewConfigModule = require(GameTile.GameTileViewConfig)
@@ -20,7 +19,7 @@ local FFlagLuaAppGameViewTileBackgroundColorOverride = require(Parent.SharedFlag
 local FFlagLuaAppHomePageFirstImageLoadObserver = require(Parent.SharedFlags).FFlagLuaAppHomePageFirstImageLoadObserver
 
 return function(Gui)
-	-- upvalues: UseDesignTokensFunction (copy), UseTokensFunction (copy), GameTileViewConfigModule (copy), UseCursorFunction (copy), FFlagLuaAppMigrateGameTileHoverFixes (copy), FFlagLuaAppGameViewTileBackgroundColorOverride (copy), ReactModule (copy), FFlagLuaAppContinueSortInstantPlay (copy), ZoomAnimatedFrameModule (copy), ImageSetLabel (copy), Images (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), LoadableImage (copy), RightAlignedButtonWrapperModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseDesignTokensFunction (copy), UseTokensFunction (copy), GameTileViewConfigModule (copy), UseCursorFunction (copy), FFlagLuaAppMigrateGameTileHoverFixes (copy), FFlagLuaAppGameViewTileBackgroundColorOverride (copy), ReactModule (copy), FFlagLuaAppContinueSortInstantPlay (copy), ZoomAnimatedFrameModule (copy), ImageSetLabel (copy), Images (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), LoadableImage (copy), RightAlignedButtonWrapperModule (copy), NormalizeFontFaceFunction (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local NumLinesForTitle = if Gui.isUnifiedGameTile then Gui.numLinesForTitle or 1 else nil
 	local NumLinesForMetadata = Gui.numLinesForMetadata or 1
@@ -205,8 +204,7 @@ return function(Gui)
 							Position = UDim2.new(0, ContainmentSidePadding, 0, FooterTopPadding),
 							Size = UDim2.new(1, -2 * ContainmentSidePadding, 0, TitleHeight),
 							Text = Gui.title,
-							Font = if FoundationFontFaceMigration then nil else TitleMedium.Font,
-							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(TitleMedium.Font) else nil,
+							FontFace = NormalizeFontFaceFunction(TitleMedium.Font),
 							TextSize = FontSize,
 							TextTransparency = Emphasis.Transparency,
 							TextColor3 = Emphasis.Color3,

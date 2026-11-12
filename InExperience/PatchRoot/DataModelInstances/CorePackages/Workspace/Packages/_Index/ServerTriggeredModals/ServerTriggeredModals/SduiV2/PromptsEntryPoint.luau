@@ -4,5 +4,6 @@
 	ChartsLaunch = "ChartsLaunch",
 	ExperienceDetailsPageSessionEnd = "ExperienceDetailsPageSessionEnd",
 	ExperienceDetailsPageOpen = "ExperienceDetailsPageOpen",
+	ChatLandingOpen = "ChatLandingOpen",
 	NotificationStreamOpen = "NotificationStreamOpen"
 }

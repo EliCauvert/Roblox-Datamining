@@ -7,6 +7,9 @@ local ReactFilterInternalStackFrames = SafeFlagsModule.createGetFFlag("ReactFilt
 return {
 	enableDebugTracing = false,
 	enableSchedulingProfiler = SafeFlagsModule.createGetFFlag("ReactEnableSchedulingProfiler")() or ReactGlobalsModule.__PROFILE__ and ReactGlobalsModule.__EXPERIMENTAL__,
+	enableCompilerRuntimeRelease1 = SafeFlagsModule.createGetFFlag("ReactEnableCompilerRuntimeRelease1", false)(),
+	enableClassCompilerRuntimeRelease1 = SafeFlagsModule.createGetFFlag("ReactEnableClassCompilerRuntimeRelease1", false)(),
+	enableNoCloningCompilerMemoCache = SafeFlagsModule.createGetFFlag("ReactEnableNoCloningCompilerMemoCache", false)(),
 	catchYieldingInDEV = ReactGlobalsModule.__DEV__ and ReactCatchYieldingInDEV(),
 	debugRenderPhaseSideEffectsForStrictMode = ReactGlobalsModule.__DEV__,
 	replayFailedUnitOfWorkWithInvokeGuardedCallback = ReactGlobalsModule.__DEV__,

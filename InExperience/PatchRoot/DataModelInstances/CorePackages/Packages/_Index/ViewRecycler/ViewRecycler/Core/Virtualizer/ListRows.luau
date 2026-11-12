@@ -1,4 +1,5 @@
-﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+﻿local FFlagViewRecyclerReact084 = require(script:FindFirstAncestor("ViewRecycler").Flags).FFlagViewRecyclerReact084
+local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
 local _ = require(ViewRecycler.Core.DataSource)
 local DataSourceChangeTypeModule = require(ViewRecycler.Core.Enums.DataSourceChangeType)
 local DiagnosticsModule = require(ViewRecycler.Core.Diagnostics)
@@ -89,17 +90,80 @@ local function resolvePlacement(p1, ScrollOffset, State)
 	return Tbl, Tbl1
 end
 
-return function(p1)
-	-- upvalues: Frozen (copy), Frozen3 (copy), Frozen2 (copy), DataSourceChangeTypeModule (copy), TypesModule (copy), resolveLayout (copy), Frozen1 (copy), resolvePlacement (copy), DiagnosticsModule (copy)
-	local SlotBinder = p1.slotBinder
+local Callback: ((any, any) -> any)? = nil
+local sortByIndex = nil
+local Callback1: ((any, any, any, any) -> ())? = nil
+
+if FFlagViewRecyclerReact084 then
+	Callback = function(p1, Row)
+		local Index = Row.index
+		
+		return if Index == nil or Row.side then 0 elseif Index < p1.firstIndex then p1.firstIndex - Index else math.max(0, Index - p1.lastIndex)
+	end
+	
+	sortByIndex = function(p1)
+		for i = 2, #p1 do
+			local v1 = p1[i]
+			local Count: number = i
+			while Count > 1 and v1.index < p1[Count - 1].index do
+				p1[Count] = p1[Count - 1]
+				Count -= 1
+			end
+			p1[Count] = v1
+		end
+	end
+	
+	Callback1 = function(List2, VisibleRange, List, List1)
+		-- upvalues: sortByIndex (ref)
+		local FirstIndex = VisibleRange.firstIndex
+		local LastIndex = VisibleRange.lastIndex
+		local Count = 0
+		
+		for _, value in List2 do
+			local Index = value.index
+			
+			if Index == nil or value.side or FirstIndex <= Index and Index <= LastIndex then
+				Count += 1
+				List2[Count] = value
+			elseif Index < FirstIndex then
+				table.insert(List, value)
+			else
+				table.insert(List1, value)
+			end
+		end
+		sortByIndex(List)
+		sortByIndex(List1)
+		local CountList = #List
+		local Count1 = 1
+		
+		for i = Count + 1, #List2 do
+			local Entry = nil
+			if CountList >= 1 and (List1[Count1] == nil or FirstIndex - List[CountList].index <= List1[Count1].index - LastIndex) then
+				Entry = List[CountList]
+				CountList -= 1
+			else
+				Entry = List1[Count1]
+				Count1 += 1
+			end
+			List2[i] = Entry
+		end
+		table.clear(List)
+		table.clear(List1)
+	end
+end
+return function(p2)
+	-- upvalues: FFlagViewRecyclerReact084 (copy), Frozen (copy), Frozen3 (copy), Frozen2 (copy), DataSourceChangeTypeModule (copy), TypesModule (copy), resolveLayout (copy), Frozen1 (copy), resolvePlacement (copy), Callback (ref), Callback1 (ref), DiagnosticsModule (copy)
+	local SlotBinder = p2.slotBinder
+	local IsReadyOnAssignment = if FFlagViewRecyclerReact084 then p2.isReadyOnAssignment else nil
 	local Flag = false
 	local t = {}
 	local t1 = {}
 	local IsLargestMatch = true
 	local t2 = {}
-	local t3 = {}
+	local Rows = {}
 	local Flag1 = false
 	local Frozen4 = Frozen
+	local v2 = if FFlagViewRecyclerReact084 then nil else nil
 	local ContentStartOffset = 0
 	local Layout = nil
 	local Frozen5 = Frozen3
@@ -109,30 +173,73 @@ return function(p1)
 	local Flag3 = false
 	local Flag4 = false
 	local Tbl = {}
-	local v1 = nil
+	local v3 = nil
 	local Frozen7 = Frozen
 	
 	local function _()
-		-- upvalues: Flag1 (ref), Frozen4 (ref), v1 (ref), Frozen (upval), Frozen7 (ref)
-		return if Flag1 then Frozen4 elseif v1 == nil then Frozen else Frozen7
+		-- upvalues: Flag1 (ref), Frozen4 (ref), v3 (ref), Frozen (upval), Frozen7 (ref)
+		return if Flag1 then Frozen4 elseif v3 == nil then Frozen else Frozen7
 	end
 	
-	local function publish(p2, ItemLayout, CanvasPlacement, ViewportPlacement, ContentStartOffset): boolean
-		local State = p2.state
-		local Assignment = p2.assignment
+	local function noteDataChange(p3)
+		-- upvalues: DataSourceChangeTypeModule (upval), Flag2 (ref), Flag3 (ref), Tbl (copy), Flag1 (ref), Frozen4 (ref), v3 (ref), Frozen (upval), Frozen7 (ref), TypesModule (upval)
+		for _, change in p3.changes do
+			local Type = change.type
+			
+			if Type == DataSourceChangeTypeModule.Reset then
+				Flag2 = true
+				Flag3 = true
+			else
+				if Type == DataSourceChangeTypeModule.Reorder then
+					Flag2 = true
+					continue
+				end
+				if Type == DataSourceChangeTypeModule.Update then
+					for _, key in change.keys do
+						Tbl[key] = true
+					end
+				elseif Type == DataSourceChangeTypeModule.Insert then
+					for _, key1 in change.keys do
+						Tbl[key1] = true
+					end
+					local Frozen1 = if Flag1 then Frozen4 elseif v3 == nil then Frozen else Frozen7
+					
+					if not Flag2 and not TypesModule.isIndexRangeEmpty(Frozen1) and change.index <= Frozen1.lastIndex then
+						Flag2 = true
+					end
+				elseif Type == DataSourceChangeTypeModule.Remove then
+					local Frozen2 = if Flag1 then Frozen4 elseif v3 == nil then Frozen else Frozen7
+					
+					if not Flag2 and not TypesModule.isIndexRangeEmpty(Frozen2) and change.index <= Frozen2.lastIndex then
+						Flag2 = true
+					end
+				elseif Type == DataSourceChangeTypeModule.Move then
+					local Frozen3 = if Flag1 then Frozen4 elseif v3 == nil then Frozen else Frozen7
+					
+					if not Flag2 and not TypesModule.isIndexRangeEmpty(Frozen3) and math.min(change.fromIndex, change.toIndex) <= Frozen3.lastIndex and Frozen3.firstIndex <= math.max(change.fromIndex, change.toIndex) then
+						Flag2 = true
+					end
+				end
+			end
+		end
+	end
+	
+	local function publish(p4, ItemLayout, CanvasPlacement, ViewportPlacement, ContentStartOffset): boolean
+		local State = p4.state
+		local Assignment = p4.assignment
 		
-		if State == nil or State.assignment ~= Assignment or State.index ~= p2.index or State.pinnedPosition ~= p2.pinnedPosition or State.itemLayout ~= ItemLayout or State.canvasPlacement ~= CanvasPlacement or State.viewportPlacement ~= ViewportPlacement or State.contentStartOffset ~= ContentStartOffset or p2.record.itemView ~= p2.view then
+		if State == nil or State.assignment ~= Assignment or State.index ~= p4.index or State.pinnedPosition ~= p4.pinnedPosition or State.itemLayout ~= ItemLayout or State.canvasPlacement ~= CanvasPlacement or State.viewportPlacement ~= ViewportPlacement or State.contentStartOffset ~= ContentStartOffset or p4.record.itemView ~= p4.view then
 			local Frozen = table.freeze({
 				assignment = Assignment,
-				index = p2.index,
-				pinnedPosition = p2.pinnedPosition,
+				index = p4.index,
+				pinnedPosition = p4.pinnedPosition,
 				itemLayout = ItemLayout,
 				canvasPlacement = CanvasPlacement,
 				viewportPlacement = ViewportPlacement,
 				contentStartOffset = ContentStartOffset
 			})
-			p2.state = Frozen
-			p2.record = table.freeze({ itemView = p2.view, state = Frozen })
+			p4.state = Frozen
+			p4.record = table.freeze({ itemView = p4.view, state = Frozen })
 			
 			return true
 		else
@@ -145,15 +252,22 @@ return function(p1)
 	local Layout1 = nil
 	local ScrollOffset = 0
 	local ContentStartOffset1 = 0
-	local v2 = false
+	local v4 = false
 	local FirstIndex = 0
 	local Smallest = 0
 	local List = {}
 	local Keys = {}
 	local Count1 = 0
+	local v5 = nil
+	local v6 = nil
+	
+	if FFlagViewRecyclerReact084 then
+		v5 = {}
+		v6 = {}
+	end
 	local T = Frozen2
 	local T1 = Frozen2
-	local v3 = nil
+	local v7 = nil
 	local Placements = {}
 	
 	local _ = function(Key, Index, Value, ViewType)
@@ -174,36 +288,36 @@ return function(p1)
 		return config
 	end
 	
-	local _ = function(p2, Value, ViewType)
+	local _ = function(p4, Value, ViewType)
 		-- upvalues: Keys (copy), Epoch (ref), Count1 (ref), List (copy)
-		table.insert(Keys, p2.key)
+		table.insert(Keys, p4.key)
 		local config = {
 			side = false,
 			entered = true,
 			changed = true,
-			key = p2.key,
+			key = p4.key,
 			value = Value,
 			viewType = ViewType,
-			index = p2.index,
+			index = p4.index,
 			epoch = Epoch
 		}
 		Count1 += 1
 		table.insert(List, config)
-		config.side = p2.side
+		config.side = p4.side
 		
 		return config
 	end
 	
-	local _ = function(p2, p3)
+	local _ = function(p4, p5)
 		-- upvalues: Epoch (ref)
-		assert(p2.epoch ~= Epoch, `Virtualizer: duplicate key "{p24}"`)
-		p2.epoch = Epoch
-		p2.entered = false
-		p2.changed = false
+		assert(p4.epoch ~= Epoch, `Virtualizer: duplicate key "{p29}"`)
+		p4.epoch = Epoch
+		p4.entered = false
+		p4.changed = false
 	end
 	
 	local function enterIndex(Index)
-		-- upvalues: DataSource (ref), t2 (ref), Epoch (ref), p1 (copy), Count1 (ref), List (copy)
+		-- upvalues: DataSource (ref), t2 (ref), Epoch (ref), p2 (copy), Count1 (ref), List (copy)
 		local ItemKey = DataSource.getItemKey(Index)
 		local Entry = t2[ItemKey]
 		
@@ -215,7 +329,7 @@ return function(p1)
 				changed = true,
 				key = ItemKey,
 				value = Item,
-				viewType = p1.getItemViewType(Item, Index),
+				viewType = p2.getItemViewType(Item, Index),
 				index = Index,
 				epoch = Epoch
 			}
@@ -235,19 +349,19 @@ return function(p1)
 		end
 	end
 	
-	local function reread(p2, Changed)
-		-- upvalues: DataSource (ref), p1 (copy), Keys (copy), Epoch (ref), Count1 (ref), List (copy)
-		local Index = p2.index
+	local function reread(p4, Changed)
+		-- upvalues: DataSource (ref), p2 (copy), Keys (copy), Epoch (ref), Count1 (ref), List (copy)
+		local Index = p4.index
 		
-		if Index == nil or p2.entered then
+		if Index == nil or p4.entered then
 			return nil
 		end
 		local Item = DataSource.getItem(Index)
-		local ItemViewType = p1.getItemViewType(Item, Index)
+		local ItemViewType = p2.getItemViewType(Item, Index)
 		
-		if ItemViewType == p2.viewType then
+		if ItemViewType == p4.viewType then
 			table.insert(List, {
-				key = p2.key,
+				key = p4.key,
 				value = Item,
 				viewType = ItemViewType,
 				changed = Changed
@@ -255,55 +369,107 @@ return function(p1)
 			
 			return nil
 		else
-			table.insert(Keys, p2.key)
+			table.insert(Keys, p4.key)
 			local config = {
 				side = false,
 				entered = true,
 				changed = true,
-				key = p2.key,
+				key = p4.key,
 				value = Item,
 				viewType = ItemViewType,
-				index = p2.index,
+				index = p4.index,
 				epoch = Epoch
 			}
 			Count1 += 1
 			table.insert(List, config)
-			config.side = p2.side
+			config.side = p4.side
 			
 			return config
 		end
 	end
 	
-	local function restate(p2)
-		-- upvalues: Placements (ref), resolveLayout (upval), v2 (ref), v3 (ref), FirstIndex (ref), Smallest (ref), Layout1 (ref), Frozen1 (upval), resolvePlacement (upval), ScrollOffset (ref), publish (copy), ContentStartOffset1 (ref), T (ref), T1 (ref)
-		local State = p2.state
+	local function restate(p4)
+		-- upvalues: Placements (ref), resolveLayout (upval), v4 (ref), v7 (ref), FirstIndex (ref), Smallest (ref), Layout1 (ref), Frozen1 (upval), resolvePlacement (upval), ScrollOffset (ref), publish (copy), ContentStartOffset1 (ref), T (ref), T1 (ref)
+		local State = p4.state
 		local ItemLayout = if State == nil then nil else State.itemLayout
-		local Placement = Placements[p2.key]
-		local Index = p2.index
+		local Placement = Placements[p4.key]
+		local Index = p4.index
 		local ResolveLayoutResult = if Index == nil then resolveLayout({
 			startOffset = 0,
 			length = if Placement == nil then 0 else Placement.mainAxisLength or 0
-		}, ItemLayout, true) elseif ItemLayout == nil or v2 or State.index ~= Index then if v3 == nil or FirstIndex > Index or Index > Smallest then resolveLayout(Layout1.getItemLayout(Index), ItemLayout) else resolveLayout(v3[Index - FirstIndex + 1], ItemLayout, true) else ItemLayout
+		}, ItemLayout, true) elseif ItemLayout == nil or v4 or State.index ~= Index then if v7 == nil or FirstIndex > Index or Index > Smallest then resolveLayout(Layout1.getItemLayout(Index), ItemLayout) else resolveLayout(v7[Index - FirstIndex + 1], ItemLayout, true) else ItemLayout
 		local CanvasPlacement = Frozen1
 		local ViewportPlacement = nil
 		
 		if Placement ~= nil or State ~= nil and State.canvasPlacement ~= Frozen1 then
 			CanvasPlacement, ViewportPlacement = resolvePlacement(Placement, ScrollOffset, State)
 		end
-		if publish(p2, ResolveLayoutResult, CanvasPlacement, ViewportPlacement, ContentStartOffset1) then
-			if p2.entered then
+		if publish(p4, ResolveLayoutResult, CanvasPlacement, ViewportPlacement, ContentStartOffset1) then
+			if p4.entered then
 				T = if table.isfrozen(T) then {} else T
-				table.insert(T, p2.record)
+				table.insert(T, p4.record)
 				
 				return
 			end
 			T1 = if table.isfrozen(T1) then {} else T1
-			table.insert(T1, p2.record)
+			table.insert(T1, p4.record)
 		end
 	end
 	
+	local KeepReadyViewsAhead = if FFlagViewRecyclerReact084 then function(List, p4, p5: number)
+		-- upvalues: IsReadyOnAssignment (ref), Callback (upval), Rows (ref)
+		local Callback1 = IsReadyOnAssignment
+		local List1 = {}
+		local List2 = {}
+		
+		for _, Row in List do
+			local Index = Row.index
+			local IsIndexBelow: boolean = p5 > 0 and Index < p4.firstIndex or p5 < 0 and p4.lastIndex < Index
+			local IsIndexBelow1: boolean = Index < p4.firstIndex or Index > p4.lastIndex
+			
+			if Callback1(Row.view) then
+				if IsIndexBelow or p5 == 0 and IsIndexBelow1 then
+					table.insert(List2, { row = Row, distance = Callback(p4, Row) })
+				end
+			elseif not IsIndexBelow then
+				table.insert(List1, { row = Row, distance = Callback(p4, Row) })
+			end
+		end
+		if #List1 == 0 or #List2 == 0 then return end
+		table.sort(List1, function(A, B): boolean
+			return A.distance < B.distance
+		end)
+		table.sort(List2, function(A, B): boolean
+			return B.distance < A.distance
+		end)
+		local t = {}
+		local Row1 = nil
+		
+		for _, value in List1 do
+			Row1 = value.row
+			
+			for i, value1 in List2 do
+				if not t[i] and value1.row.viewType == Row1.viewType then
+					if p5 == 0 and value1.distance <= value.distance then break end
+					t[i] = true
+					local Row2 = value1.row
+					local View = Row1.view
+					Row1.view = Row2.view
+					Row2.view = View
+					Rows[Row1.view] = Row1
+					Rows[Row2.view] = Row2
+					Row1.entered = true
+					Row2.entered = true
+					break
+				else
+					continue
+				end
+			end
+		end
+	end else nil
+	
 	local function release()
-		-- upvalues: Flag1 (ref), Frozen2 (upval), IsLargestMatch (ref), t (ref), Flag2 (ref), v1 (ref), Frozen7 (ref), Frozen4 (ref), SlotBinder (copy), t1 (ref), t2 (ref), t3 (ref), Frozen (upval), Frozen5 (ref), Frozen3 (upval), Layout (ref), Frozen6 (ref)
+		-- upvalues: Flag1 (ref), Frozen2 (upval), IsLargestMatch (ref), t (ref), Flag2 (ref), v3 (ref), Frozen7 (ref), Frozen4 (ref), SlotBinder (copy), t1 (ref), t2 (ref), Rows (ref), Frozen (upval), FFlagViewRecyclerReact084 (upval), v2 (ref), Frozen5 (ref), Frozen3 (upval), Layout (ref), Frozen6 (ref)
 		if not Flag1 then
 			return Frozen2
 		end
@@ -313,69 +479,33 @@ return function(p1)
 			for i, value in t do
 				Buffer[i] = value.key
 			end
-			v1 = Buffer
+			v3 = Buffer
 			Frozen7 = Frozen4
 		else
-			v1 = nil
+			v3 = nil
 		end
 		Flag2 = false
+		local ReleaseAllResult = SlotBinder.releaseAll()
 		t = {}
 		t1 = {}
 		IsLargestMatch = true
 		t2 = {}
-		t3 = {}
+		Rows = {}
 		Flag1 = false
 		Frozen4 = Frozen
+		
+		if FFlagViewRecyclerReact084 then
+			v2 = nil
+		end
 		Frozen5 = Frozen3
 		Layout = nil
 		Frozen6 = Frozen2
 		
-		return (SlotBinder.releaseAll())
+		return ReleaseAllResult
 	end
 	
 	return {
-		noteDataChange = function(p2)
-			-- upvalues: DataSourceChangeTypeModule (upval), Flag2 (ref), Flag3 (ref), Tbl (copy), Flag1 (ref), Frozen4 (ref), v1 (ref), Frozen (upval), Frozen7 (ref), TypesModule (upval)
-			for _, change in p2.changes do
-				local Type = change.type
-				
-				if Type == DataSourceChangeTypeModule.Reset then
-					Flag2 = true
-					Flag3 = true
-				else
-					if Type == DataSourceChangeTypeModule.Reorder then
-						Flag2 = true
-						continue
-					end
-					if Type == DataSourceChangeTypeModule.Update then
-						for _, key in change.keys do
-							Tbl[key] = true
-						end
-					elseif Type == DataSourceChangeTypeModule.Insert then
-						for _, key1 in change.keys do
-							Tbl[key1] = true
-						end
-						local Frozen1 = if Flag1 then Frozen4 elseif v1 == nil then Frozen else Frozen7
-						
-						if not Flag2 and not TypesModule.isIndexRangeEmpty(Frozen1) and change.index <= Frozen1.lastIndex then
-							Flag2 = true
-						end
-					elseif Type == DataSourceChangeTypeModule.Remove then
-						local Frozen2 = if Flag1 then Frozen4 elseif v1 == nil then Frozen else Frozen7
-						
-						if not Flag2 and not TypesModule.isIndexRangeEmpty(Frozen2) and change.index <= Frozen2.lastIndex then
-							Flag2 = true
-						end
-					elseif Type == DataSourceChangeTypeModule.Move then
-						local Frozen3 = if Flag1 then Frozen4 elseif v1 == nil then Frozen else Frozen7
-						
-						if not Flag2 and not TypesModule.isIndexRangeEmpty(Frozen3) and math.min(change.fromIndex, change.toIndex) <= Frozen3.lastIndex and Frozen3.firstIndex <= math.max(change.fromIndex, change.toIndex) then
-							Flag2 = true
-						end
-					end
-				end
-			end
-		end,
+		noteDataChange = noteDataChange,
 		invalidateKeys = function()
 			-- upvalues: Flag2 (ref)
 			Flag2 = true
@@ -389,7 +519,7 @@ return function(p1)
 			Flag4 = true
 		end,
 		apply = function(Keys1)
-			-- upvalues: Flag (ref), DataSource (ref), Layout1 (ref), Frozen3 (upval), ScrollOffset (ref), ContentStartOffset1 (ref), v2 (ref), Flag4 (ref), Layout (ref), ContentStartOffset (ref), Frozen4 (ref), Tbl (copy), Flag1 (ref), Flag2 (ref), Flag3 (ref), Frozen5 (ref), Count (ref), Epoch (ref), FirstIndex (ref), Smallest (ref), List (copy), Keys (copy), Count1 (ref), IsLargestMatch (ref), t (ref), t1 (ref), enterIndex (copy), v1 (ref), Frozen7 (ref), t2 (ref), p1 (copy), reread (copy), SlotBinder (copy), t3 (ref), T (ref), Frozen2 (upval), T1 (ref), v3 (ref), Placements (ref), restate (copy), Frozen6 (ref), DiagnosticsModule (upval)
+			-- upvalues: Flag (ref), DataSource (ref), Layout1 (ref), Frozen3 (upval), ScrollOffset (ref), ContentStartOffset1 (ref), v4 (ref), Flag4 (ref), Layout (ref), ContentStartOffset (ref), Frozen4 (ref), Tbl (copy), Flag1 (ref), Flag2 (ref), Flag3 (ref), Frozen5 (ref), Count (ref), Epoch (ref), FirstIndex (ref), Smallest (ref), List (copy), Keys (copy), Count1 (ref), IsLargestMatch (ref), t (ref), t1 (ref), enterIndex (copy), v3 (ref), Frozen7 (ref), t2 (ref), p2 (copy), reread (copy), FFlagViewRecyclerReact084 (upval), IsReadyOnAssignment (ref), Callback1 (upval), v5 (ref), v6 (ref), SlotBinder (copy), Rows (ref), v2 (ref), KeepReadyViewsAhead (ref), T (ref), Frozen2 (upval), T1 (ref), v7 (ref), Placements (ref), restate (copy), Frozen6 (ref), DiagnosticsModule (upval)
 			if Flag then
 				return nil, nil
 			end
@@ -399,13 +529,13 @@ return function(p1)
 			local MountedRange = Keys1.mountedRange
 			ScrollOffset = Keys1.scrollOffset
 			ContentStartOffset1 = Keys1.contentStartOffset
-			v2 = Flag4 or Layout1 ~= Layout
+			v4 = Flag4 or Layout1 ~= Layout
 			local IsNotContentStartOffsetMatch = ContentStartOffset1 ~= ContentStartOffset
 			local Frozen = Frozen4
 			local Inverted = not (MountedRange.firstIndex == Frozen.firstIndex and MountedRange.lastIndex == Frozen.lastIndex)
 			local HasNextEntry = next(Tbl) ~= nil
 			
-			if Flag1 and not Flag2 and not Flag3 and not v2 and not IsNotContentStartOffsetMatch and not Inverted and not HasNextEntry and Plan == Frozen5 then
+			if Flag1 and not Flag2 and not Flag3 and not v4 and not IsNotContentStartOffsetMatch and not Inverted and not HasNextEntry and Plan == Frozen5 then
 				return nil, nil
 			end
 			Count += 1
@@ -420,25 +550,25 @@ return function(p1)
 			table.clear(Keys)
 			Count1 = 0
 			local NoFlag1 = not Flag1 or (not IsLargestMatch or Flag2)
-			local NoFlag1_1 = NoFlag1 or (v2 or IsNotContentStartOffsetMatch)
+			local NoFlag1_1 = NoFlag1 or (v4 or IsNotContentStartOffsetMatch)
 			
 			if NoFlag1 then
-				local v4 = if Flag2 or Flag1 then nil else v1
-				for i9 = FirstIndex, Smallest do
-					local ItemKey = if v4 == nil or Frozen7.firstIndex > i9 or i9 > Frozen7.lastIndex then DataSource.getItemKey(i9) else v4[i9 - Frozen7.firstIndex + 1]
+				local v8 = if Flag2 or Flag1 then nil else v3
+				for i5 = FirstIndex, Smallest do
+					local ItemKey = if v8 == nil or Frozen7.firstIndex > i5 or i5 > Frozen7.lastIndex then DataSource.getItemKey(i5) else v8[i5 - Frozen7.firstIndex + 1]
 					local Entry = t2[ItemKey]
 					
 					if Entry == nil then
-						local Item = DataSource.getItem(i9)
-						local NewI = i9 - FirstIndex + 1
+						local Item = DataSource.getItem(i5)
+						local NewI = i5 - FirstIndex + 1
 						local config = {
 							side = false,
 							entered = true,
 							changed = true,
 							key = ItemKey,
 							value = Item,
-							viewType = p1.getItemViewType(Item, i9),
-							index = i9,
+							viewType = p2.getItemViewType(Item, i5),
+							index = i5,
 							epoch = Epoch
 						}
 						Count1 += 1
@@ -449,14 +579,14 @@ return function(p1)
 						Entry.epoch = Epoch
 						Entry.entered = false
 						Entry.changed = false
-						Entry.index = i9
+						Entry.index = i5
 						Entry.side = false
-						Buffer[i9 - FirstIndex + 1] = Entry
+						Buffer[i5 - FirstIndex + 1] = Entry
 					end
 				end
-				for _, value5 in t2 do
-					if value5.epoch ~= Epoch then
-						table.insert(List2, value5)
+				for _, value3 in t2 do
+					if value3.epoch ~= Epoch then
+						table.insert(List2, value3)
 					end
 				end
 			else
@@ -465,37 +595,37 @@ return function(p1)
 				local Largest1 = math.max(FirstIndex1, FirstIndex)
 				local Smallest1 = math.min(LastIndex, Smallest)
 				
-				for i3 = FirstIndex1, math.min(LastIndex, FirstIndex - 1) do
-					table.insert(List2, t[i3 - FirstIndex1 + 1])
+				for i = FirstIndex1, math.min(LastIndex, FirstIndex - 1) do
+					table.insert(List2, t[i - FirstIndex1 + 1])
 				end
-				for i4 = math.max(FirstIndex1, Smallest + 1), LastIndex do
-					table.insert(List2, t[i4 - FirstIndex1 + 1])
+				for i1 = math.max(FirstIndex1, Smallest + 1), LastIndex do
+					table.insert(List2, t[i1 - FirstIndex1 + 1])
 				end
-				for _, value4 in t1 do
-					table.insert(List2, value4)
+				for _, value in t1 do
+					table.insert(List2, value)
 				end
 				if Largest1 <= Smallest1 then
 					table.move(t, Largest1 - FirstIndex1 + 1, Smallest1 - FirstIndex1 + 1, Largest1 - FirstIndex + 1, Buffer)
 					
-					for i6 = Largest1 - FirstIndex + 1, Smallest1 - FirstIndex + 1 do
-						local BufferEntry = Buffer[i6]
+					for i2 = Largest1 - FirstIndex + 1, Smallest1 - FirstIndex + 1 do
+						local BufferEntry = Buffer[i2]
 						BufferEntry.epoch = Epoch
 						BufferEntry.entered = false
 						BufferEntry.changed = false
 					end
 				end
-				for i7 = FirstIndex, math.min(Smallest, Largest1 - 1) do
-					Buffer[i7 - FirstIndex + 1] = enterIndex(i7)
+				for i3 = FirstIndex, math.min(Smallest, Largest1 - 1) do
+					Buffer[i3 - FirstIndex + 1] = enterIndex(i3)
 				end
-				for i8 = math.max(FirstIndex, Smallest1 + 1), Smallest do
-					Buffer[i8 - FirstIndex + 1] = enterIndex(i8)
+				for i4 = math.max(FirstIndex, Smallest1 + 1), Smallest do
+					Buffer[i4 - FirstIndex + 1] = enterIndex(i4)
 				end
 			end
 			for _, retainedItem in Plan.retainedItems do
 				if retainedItem.index < FirstIndex or Smallest < retainedItem.index then
-					local Entry = t2[retainedItem.key]
+					local Entry1 = t2[retainedItem.key]
 					
-					if Entry == nil then
+					if Entry1 == nil then
 						local Item = DataSource.getItem(retainedItem.index)
 						local config = {
 							side = false,
@@ -503,7 +633,7 @@ return function(p1)
 							changed = true,
 							key = retainedItem.key,
 							value = Item,
-							viewType = p1.getItemViewType(Item, retainedItem.index),
+							viewType = p2.getItemViewType(Item, retainedItem.index),
 							index = retainedItem.index,
 							epoch = Epoch
 						}
@@ -512,19 +642,19 @@ return function(p1)
 						config.side = true
 						table.insert(List1, config)
 					else
-						assert(Entry.epoch ~= Epoch, `Virtualizer: duplicate key "{retainedItem.key}"`)
-						Entry.epoch = Epoch
-						Entry.entered = false
-						Entry.changed = false
-						Entry.index = retainedItem.index
-						Entry.side = true
-						table.insert(List1, Entry)
+						assert(Entry1.epoch ~= Epoch, `Virtualizer: duplicate key "{retainedItem.key}"`)
+						Entry1.epoch = Epoch
+						Entry1.entered = false
+						Entry1.changed = false
+						Entry1.index = retainedItem.index
+						Entry1.side = true
+						table.insert(List1, Entry1)
 					end
 				end
 			end
 			for _, additionalItem in Plan.additionalItems do
 				local Position = additionalItem.identity.position
-				local PinnedItem = p1.getPinnedItem(Position)
+				local PinnedItem = p2.getPinnedItem(Position)
 				
 				if PinnedItem ~= nil and PinnedItem.key == additionalItem.key then
 					local Entry = t2[additionalItem.key]
@@ -585,103 +715,115 @@ return function(p1)
 				end
 			end
 			if Flag3 then
-				for i10, value6 in Buffer do
-					Buffer[i10] = reread(value6, false) or value6
+				for i6, value1 in Buffer do
+					Buffer[i6] = reread(value1, false) or value1
 				end
-				for i11, value7 in List1 do
-					List1[i11] = reread(value7, false) or value7
+				for i9, value5 in List1 do
+					List1[i9] = reread(value5, false) or value5
 				end
 			elseif HasNextEntry then
-				for i5 in Tbl do
-					local Entry1 = t2[i5]
-					local NoEntry: boolean = Entry1 == nil or Entry1.epoch ~= Epoch
+				for i10 in Tbl do
+					local Entry = t2[i10]
+					local NoEntry: boolean = Entry == nil or Entry.epoch ~= Epoch
 					local RereadResult = nil
 					
 					if not NoEntry then
-						RereadResult = reread(Entry1, true)
+						RereadResult = reread(Entry, true)
 						NoEntry = RereadResult == nil
 					end
 					if not NoEntry then
-						if Entry1.side then
-							List1[table.find(List1, Entry1)] = RereadResult
+						if Entry.side then
+							List1[table.find(List1, Entry)] = RereadResult
 						else
-							Buffer[Entry1.index - FirstIndex + 1] = RereadResult
+							Buffer[Entry.index - FirstIndex + 1] = RereadResult
 						end
 					end
 				end
 			end
-			for _, value2 in List2 do
-				if value2.epoch ~= Epoch then
-					table.insert(Keys, value2.key)
+			for _, value6 in List2 do
+				if value6.epoch ~= Epoch then
+					table.insert(Keys, value6.key)
+				end
+			end
+			local VisibleRange = nil
+			
+			if FFlagViewRecyclerReact084 then
+				VisibleRange = Keys1.visibleRange
+				
+				if VisibleRange ~= nil and IsReadyOnAssignment ~= nil and Count1 > 1 then
+					Callback1(List, VisibleRange, v5, v6)
 				end
 			end
 			local ApplyResult = SlotBinder.apply(Keys, List)
 			
 			for _, key in Keys do
 				t2[key] = nil
-				t3[t2[key].view] = nil
+				Rows[t2[key].view] = nil
 			end
-			for _, value8 in ApplyResult.entered do
-				t2[value8.key] = value8
-				t3[value8.view] = value8
+			for _, value7 in ApplyResult.entered do
+				t2[value7.key] = value7
+				Rows[value7.view] = value7
 			end
-			for _, value9 in ApplyResult.updated do
-				value9.changed = true
+			for _, value8 in ApplyResult.updated do
+				value8.changed = true
+			end
+			if FFlagViewRecyclerReact084 and (VisibleRange ~= nil and IsReadyOnAssignment ~= nil) then
+				KeepReadyViewsAhead(Buffer, VisibleRange, if v2 == nil then 0 else math.sign(ScrollOffset - v2))
 			end
 			local Reassigned = #Keys - #ApplyResult.departed
 			T = Frozen2
 			T1 = Frozen2
-			v3 = nil
+			v7 = nil
 			
-			if Largest > 1 and Layout1.getItemLayouts ~= nil and (NoFlag1_1 and (v2 or not Flag1) or Largest < Count1 * 2) then
-				local Buffer2 = table.create(Largest)
-				Layout1.getItemLayouts(FirstIndex, Smallest, Buffer2)
-				v3 = Buffer2
+			if Largest > 1 and Layout1.getItemLayouts ~= nil and (NoFlag1_1 and (v4 or not Flag1) or Largest < Count1 * 2) then
+				local Buffer1 = table.create(Largest)
+				Layout1.getItemLayouts(FirstIndex, Smallest, Buffer1)
+				v7 = Buffer1
 			end
 			Placements = Plan.placements
 			local Placements1 = Frozen5.placements
 			
 			if NoFlag1_1 then
-				for _, value10 in Buffer do
-					restate(value10)
+				for _, value9 in Buffer do
+					restate(value9)
 				end
 			else
-				for _, value11 in Buffer do
-					if value11.entered or value11.changed then
-						restate(value11)
+				for _, value10 in Buffer do
+					if value10.entered or value10.changed then
+						restate(value10)
 					end
 				end
 				for placement in Placements do
 					local Entry = t2[placement]
 					
-					if Entry ~= nil and not Entry.side and not Entry.entered and not Entry.changed then
+					if Entry ~= nil and not Entry.side and (not Entry.entered and not Entry.changed) then
 						restate(Entry)
 					end
 				end
-				for i1 in Placements1 do
-					local Entry = t2[i1]
+				for i11 in Placements1 do
+					local Entry = t2[i11]
 					
-					if Entry ~= nil and Placements[i1] == nil and not Entry.side and not Entry.entered and not Entry.changed then
+					if Entry ~= nil and Placements[i11] == nil and (not Entry.side and not Entry.entered and not Entry.changed) then
 						restate(Entry)
 					end
 				end
 			end
-			for _, value3 in List1 do
-				restate(value3)
+			for _, value11 in List1 do
+				restate(value11)
 			end
 			local Flag5: boolean = #Buffer ~= #t or (#List1 ~= #t1 or Inverted)
 			
 			if not Flag5 and NoFlag1 then
-				for i2, value1 in Buffer do
-					if t[i2] ~= value1 then
+				for i7, value2 in Buffer do
+					if t[i7] ~= value2 then
 						Flag5 = true
 						break
 					end
 				end
 			end
 			if not Flag5 then
-				for i, value in List1 do
-					if t1[i] ~= value then
+				for i8, value4 in List1 do
+					if t1[i8] ~= value4 then
 						Flag5 = true
 						break
 					end
@@ -692,6 +834,10 @@ return function(p1)
 			IsLargestMatch = Largest == math.max(0, MountedRange.lastIndex - MountedRange.firstIndex + 1)
 			Flag1 = true
 			Frozen4 = MountedRange
+			
+			if FFlagViewRecyclerReact084 then
+				v2 = ScrollOffset
+			end
 			ContentStartOffset = ContentStartOffset1
 			Layout = Layout1
 			Frozen5 = Plan
@@ -702,10 +848,10 @@ return function(p1)
 			if HasNextEntry then
 				table.clear(Tbl)
 			end
-			v1 = nil
+			v3 = nil
 			local Departed = ApplyResult.departed
 			
-			if not Flag5 and #T == 0 and (#T1 == 0 and #Departed == 0) then
+			if not Flag5 and #T == 0 and #T1 == 0 and #Departed == 0 then
 				return nil, nil
 			end
 			local Buffer1 = table.create(#t + #t1)
@@ -737,10 +883,10 @@ return function(p1)
 		end,
 		release = release,
 		destroy = function()
-			-- upvalues: Flag (ref), release (copy), v1 (ref), SlotBinder (copy)
+			-- upvalues: Flag (ref), release (copy), v3 (ref), SlotBinder (copy)
 			if not Flag then
 				release()
-				v1 = nil
+				v3 = nil
 				SlotBinder.destroy()
 				Flag = true
 				
@@ -756,16 +902,16 @@ return function(p1)
 			return Frozen6
 		end,
 		validate = function(List)
-			-- upvalues: t3 (ref), t2 (ref)
+			-- upvalues: Rows (ref), t2 (ref)
 			local List1 = {}
 			local Count = 0
 			
 			for _, value in List do
-				local Entry = t3[value.itemView]
+				local Row = Rows[value.itemView]
 				local State = value.state
 				
-				if Entry ~= nil then
-					local State1 = Entry.state
+				if Row ~= nil then
+					local State1 = Row.state
 					local IsCrossAxisSpacingMatch = nil
 					
 					if State1 == State then
@@ -777,10 +923,10 @@ return function(p1)
 					end
 					if IsCrossAxisSpacingMatch then
 						table.insert(List1, {
-							index = Entry.index,
-							key = Entry.key,
-							pinnedPosition = Entry.pinnedPosition,
-							pinnedRevision = Entry.pinnedRevision,
+							index = Row.index,
+							key = Row.key,
+							pinnedPosition = Row.pinnedPosition,
+							pinnedRevision = Row.pinnedRevision,
 							length = value.length
 						})
 						continue

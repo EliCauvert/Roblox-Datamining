@@ -12,7 +12,7 @@ return if game:DefineFastFlag("FFlagAXFixAvatarSaveContext", false) then ReactMo
 	end,
 	getLastSuccessfullySavedStateSignal = SignalsModule.createSignal({}),
 	getSaveEligibilityStatusSignal = SignalsModule.createSignal(SaveStatusEnumModule.AlreadySaved),
-	autoSaveNextNewSaveData = function()
+	autoSaveNextNewSaveData = function(_)
 		return nil
 	end,
 	trySaveAvatar = function()

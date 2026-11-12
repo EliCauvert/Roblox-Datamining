@@ -3,7 +3,6 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local config = {
 	searchPlaceholder = "Feature.Catalog.Label.Search",
@@ -11,7 +10,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), config (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ReactModule (copy), FoundationModule (copy)
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), config (copy), NormalizeFontFaceFunction (copy), ReactModule (copy), FoundationModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	
@@ -44,7 +43,7 @@ return function(p1)
 				BorderSizePixel = 0,
 				ClearTextOnFocus = false,
 				ClipsDescendants = true,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.BodyMedium.Font) else Font.fromEnum(UseTokensResult.Typography.BodyMedium.Font),
+				FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.BodyMedium.Font),
 				PlaceholderText = UseLocalizationResult.searchPlaceholder,
 				PlaceholderColor3 = UseTokensResult.Color.Content.Default.Color3,
 				Position = UDim2.new(0, 40, 0.5, 0),

@@ -1,16 +1,20 @@
 ﻿local RobloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
+local HttpService = game:GetService("HttpService")
 local RobloxSubscriptionStoreModule = require(RobloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
 local FFlagEnablePlusReferralTelemetryModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagEnablePlusReferralTelemetry)
 local FFlagEnablePlusReferralEntrypointTelemetry = require(RobloxSubscriptionPurchaseApp.Parent.SharedFlags).FFlagEnablePlusReferralEntrypointTelemetry
 local IsRobloxSubscriptionProductFreeTrialModule = require(RobloxSubscriptionPurchaseApp.Utils.isRobloxSubscriptionProductFreeTrial)
 local _ = require(RobloxSubscriptionPurchaseApp.Models.GetRobloxSubscriptionProductsModel)
+local RobloxPlusSheetKindModule = require(RobloxSubscriptionPurchaseApp.Enums.RobloxPlusSheetKind)
+local FFlagTTOnboardingSheetModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagTTOnboardingSheet)
 
 return function(Event_name)
-	-- upvalues: RobloxSubscriptionStoreModule (copy), IsRobloxSubscriptionProductFreeTrialModule (copy), FFlagEnablePlusReferralTelemetryModule (copy), FFlagEnablePlusReferralEntrypointTelemetry (copy)
+	-- upvalues: RobloxSubscriptionStoreModule (copy), FFlagTTOnboardingSheetModule (copy), IsRobloxSubscriptionProductFreeTrialModule (copy), FFlagEnablePlusReferralTelemetryModule (copy), FFlagEnablePlusReferralEntrypointTelemetry (copy), RobloxPlusSheetKindModule (copy), HttpService (copy)
 	local GetResult = RobloxSubscriptionStoreModule.get()
 	local EntryContext = GetResult.getEntryContext()
 	local RobloxSubscriptionProduct = GetResult.getRobloxSubscriptionProduct()
 	local PaymentSessionId = GetResult.getPaymentSessionId()
+	local PurchaseUIOptions = if FFlagTTOnboardingSheetModule then GetResult.getPurchaseUIOptions() else nil
 	local Id = ""
 	local Type = ""
 	
@@ -62,6 +66,9 @@ return function(Event_name)
 	end
 	if FFlagEnablePlusReferralEntrypointTelemetry and EntryContext.entrypoint then
 		config.entrypoint = EntryContext.entrypoint
+	end
+	if FFlagTTOnboardingSheetModule and PurchaseUIOptions and PurchaseUIOptions.sheetKind == RobloxPlusSheetKindModule.TT then
+		config.event_metadata = HttpService:JSONEncode({ sheet_kind = PurchaseUIOptions.sheetKind })
 	end
 	return config
 end

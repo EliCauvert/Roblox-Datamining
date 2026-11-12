@@ -17,6 +17,7 @@
 	ScrollCorrectionSource = table.freeze({
 		Data = "data",
 		Measurement = "measurement",
-		ProgrammaticScroll = "programmaticScroll"
+		ProgrammaticScroll = "programmaticScroll",
+		Policy = if require(script:FindFirstAncestor("ViewRecycler").Flags).FFlagViewRecyclerReact084 then "policy" else nil
 	})
 })

@@ -5,7 +5,7 @@ local UseStyleFunction = DependenciesModule.UIBlox.Core.Style.useStyle
 local _ = require(Parent1.type)
 local Text = require(Parent.AppCommonLib).Text
 local React = DependenciesModule.React
-local FoundationFontFaceMigration = require(Parent.Foundation).Utility.Flags.FoundationFontFaceMigration
+local _ = require(Parent.Foundation)
 local EnableNotificationStyledTextUtf16Offsets = game:DefineFastFlag("EnableNotificationStyledTextUtf16Offsets", false)
 local config = {
 	highlight = function(Text): string
@@ -158,7 +158,7 @@ local function formatString(p2)
 end
 
 return function(Label)
-	-- upvalues: UseStyleFunction (copy), formatString (copy), React (copy), FoundationFontFaceMigration (copy)
+	-- upvalues: UseStyleFunction (copy), formatString (copy), React (copy)
 	local UseStyleResult = UseStyleFunction()
 	
 	return React.createElement("TextLabel", {
@@ -168,8 +168,8 @@ return function(Label)
 		Text = if Label.Text then formatString(Label.Text) else "",
 		TextColor3 = Label.TextColor3 or UseStyleResult.Theme.TextDefault.Color,
 		TextTransparency = Label.TextTransparency or UseStyleResult.Theme.TextDefault.Transparency,
-		Font = if FoundationFontFaceMigration and Label.FontFace then nil else Label.Font or UseStyleResult.Font.Body.Font,
-		FontFace = if FoundationFontFaceMigration then Label.FontFace else nil,
+		Font = if Label.FontFace then nil else Label.Font or UseStyleResult.Font.Body.Font,
+		FontFace = Label.FontFace,
 		AutomaticSize = Label.AutomaticSize,
 		Size = Label.Size,
 		TextSize = Label.TextSize,

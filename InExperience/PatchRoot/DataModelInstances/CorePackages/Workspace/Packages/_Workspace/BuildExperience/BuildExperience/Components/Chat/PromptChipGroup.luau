@@ -2,9 +2,11 @@
 local Parent = BuildExperience.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local AnimatedChipGroupContainerModule = require(script.Parent.AnimatedChipGroup.AnimatedChipGroupContainer)
 local _ = require(BuildExperience.Chat.chatTypes)
 local FFlagBuildExperienceFTUXChipExhaustedTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceFTUXChipExhaustedTelemetry)
 local FIntBuildExperienceFTUXChipExhaustedThresholdPxModule = require(BuildExperience.Flags.FIntBuildExperienceFTUXChipExhaustedThresholdPx)
+local FFlagBuildExperienceFTUXChipLoadInAnimationModule = require(BuildExperience.Flags.FFlagBuildExperienceFTUXChipLoadInAnimation)
 local ChipGroup = FoundationModule.ChipGroup
 local ChipGroupVariant = FoundationModule.Enums.ChipGroupVariant
 local ChipSize = FoundationModule.Enums.ChipSize
@@ -56,7 +58,7 @@ local function useChipExhaustionListener(Frame)
 end
 
 return function(Frame)
-	-- upvalues: UseTokensFunction (copy), FFlagBuildExperienceFTUXChipExhaustedTelemetryModule (copy), useChipExhaustionListener (copy), IconName (copy), ReactModule (copy), Skeleton (copy), Radius (copy), View (copy), ChipGroup (copy), ChipSize (copy), ChipGroupVariant (copy)
+	-- upvalues: UseTokensFunction (copy), FFlagBuildExperienceFTUXChipExhaustedTelemetryModule (copy), useChipExhaustionListener (copy), IconName (copy), ReactModule (copy), Skeleton (copy), Radius (copy), View (copy), FFlagBuildExperienceFTUXChipLoadInAnimationModule (copy), AnimatedChipGroupContainerModule (copy), ChipGroup (copy), ChipSize (copy), ChipGroupVariant (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseChipExhaustionListenerResult = if FFlagBuildExperienceFTUXChipExhaustedTelemetryModule then useChipExhaustionListener(Frame) else nil
 	local Chips = {}
@@ -90,7 +92,10 @@ return function(Frame)
 		Content = if Frame.isLoading then ReactModule.createElement(View, {
 			tag = "row gap-small size-full-0 auto-y",
 			testId = "PromptChipGroup.Skeletons"
-		}, Elements) else ReactModule.createElement(ChipGroup, {
+		}, Elements) elseif FFlagBuildExperienceFTUXChipLoadInAnimationModule and #Chips > 0 then ReactModule.createElement(AnimatedChipGroupContainerModule, {
+			chips = Chips,
+			chipGroupRef = UseChipExhaustionListenerResult
+		}) else ReactModule.createElement(ChipGroup, {
 			testId = "PromptChipGroup.Chips",
 			chips = Chips,
 			size = ChipSize.Medium,

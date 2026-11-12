@@ -2,16 +2,19 @@
 local Parent = AppChat.Parent
 local FoundationModule = require(Parent.Foundation)
 local ConversationTitleWithFacePileModule = require(AppChat.Components.ChatConversation.ConversationTitleWithFacePile)
+local FFlagAppChatFoundationHeaderBarModule = require(AppChat.Flags.FFlagAppChatFoundationHeaderBar)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local ReactModule = require(Parent.React)
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FoundationModule (copy), ConversationTitleWithFacePileModule (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FoundationModule (copy), FFlagAppChatFoundationHeaderBarModule (copy), ConversationTitleWithFacePileModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	
 	return ReactModule.createElement(FoundationModule.View, {
 		Size = UDim2.new(1, 0, 1, 0),
 		layout = {
 			FillDirection = Enum.FillDirection.Horizontal,
-			Padding = UDim.new(0, UseTokensFunction().Gap.Medium),
+			Padding = UDim.new(0, UseTokensResult.Gap.Medium),
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			VerticalAlignment = Enum.VerticalAlignment.Center
 		}
@@ -24,7 +27,7 @@ return function(p1)
 		CenterFrame = ReactModule.createElement(FoundationModule.View, {
 			LayoutOrder = 2,
 			flexItem = { FlexMode = Enum.UIFlexMode.Fill },
-			Size = UDim2.new(1, 0, 1, 0)
+			Size = if FFlagAppChatFoundationHeaderBarModule then UDim2.new(1, 0, 0, UseTokensResult.Size.Size_1000) else UDim2.new(1, 0, 1, 0)
 		}, {
 			ConversationTitle = ReactModule.createElement(ConversationTitleWithFacePileModule, {
 				titleText = p1.titleText,

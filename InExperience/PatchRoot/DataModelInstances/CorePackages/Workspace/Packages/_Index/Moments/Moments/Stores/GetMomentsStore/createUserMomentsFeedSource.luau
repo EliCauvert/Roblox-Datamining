@@ -23,7 +23,7 @@ local FFlagProfileRenderAvatarMoments = SharedFlagsModule.FFlagProfileRenderAvat
 local MomentsGetMomentsCommentsStoreModule = if FFlagMomentsComments then require(Parent.DataHydration.MomentsGetMomentsCommentsStore) else nil
 
 return function(p1, p2)
-	-- upvalues: MomentsGetMomentsUserStoreModule (copy), FFlagMomentsComments (copy), MomentsGetMomentsCommentsStoreModule (copy), FFlagMomentsOptimisticProfilePending (copy), CreatePendingFeedGetterModule (copy), RecommendationSource (copy), GetReactionsStoreModule (copy), GetShareCountsStoreModule (copy), FFlagMomentsRemoveDeletedFromProfile (copy), GetDeletedMomentsStoreModule (copy), Analytics (copy), ShouldShowMomentInFeedModule (copy), ReportUnavailableFeedItemModule (copy), FFlagProfileRenderAvatarMoments (copy), HydrateAvatarMomentFeedItemsModule (copy), MomentsGetPostAssetStoreModule (copy)
+	-- upvalues: MomentsGetMomentsUserStoreModule (copy), FFlagMomentsComments (copy), MomentsGetMomentsCommentsStoreModule (copy), FFlagProfileRenderAvatarMoments (copy), MomentsGetPostAssetStoreModule (copy), FFlagMomentsOptimisticProfilePending (copy), CreatePendingFeedGetterModule (copy), RecommendationSource (copy), GetReactionsStoreModule (copy), GetShareCountsStoreModule (copy), FFlagMomentsRemoveDeletedFromProfile (copy), GetDeletedMomentsStoreModule (copy), Analytics (copy), ShouldShowMomentInFeedModule (copy), ReportUnavailableFeedItemModule (copy), HydrateAvatarMomentFeedItemsModule (copy)
 	local P1 = p2 or {}
 	local MomentsGetMomentsUserStoreModuleResult = if P1.userStore == nil then MomentsGetMomentsUserStoreModule(false) else P1.userStore
 	local CommentsStore = nil
@@ -35,6 +35,7 @@ return function(p1, p2)
 			CommentsStore = MomentsGetMomentsCommentsStoreModule(false)
 		end
 	end
+	local PostAssetStore = if FFlagProfileRenderAvatarMoments then P1.postAssetStore or MomentsGetPostAssetStoreModule(false) else nil
 	local InitialIndex = P1.initialIndex
 	
 	return {
@@ -43,7 +44,7 @@ return function(p1, p2)
 		getPendingItems = if FFlagMomentsOptimisticProfilePending then CreatePendingFeedGetterModule(p1, MomentsGetMomentsUserStoreModuleResult) else nil,
 		recommendationSource = RecommendationSource.Profile,
 		fetchAsync = function(NextCursor)
-			-- upvalues: CommentsStore (ref), MomentsGetMomentsUserStoreModuleResult (copy), p1 (copy), GetReactionsStoreModule (upval), GetShareCountsStoreModule (upval), FFlagMomentsRemoveDeletedFromProfile (upval), FFlagMomentsOptimisticProfilePending (upval), GetDeletedMomentsStoreModule (upval), Analytics (upval), RecommendationSource (upval), ShouldShowMomentInFeedModule (upval), ReportUnavailableFeedItemModule (upval), InitialIndex (copy), FFlagProfileRenderAvatarMoments (upval), HydrateAvatarMomentFeedItemsModule (upval), P1 (copy), MomentsGetPostAssetStoreModule (upval), FFlagMomentsComments (upval)
+			-- upvalues: CommentsStore (ref), MomentsGetMomentsUserStoreModuleResult (copy), p1 (copy), FFlagProfileRenderAvatarMoments (upval), GetReactionsStoreModule (upval), GetShareCountsStoreModule (upval), FFlagMomentsRemoveDeletedFromProfile (upval), FFlagMomentsOptimisticProfilePending (upval), GetDeletedMomentsStoreModule (upval), Analytics (upval), RecommendationSource (upval), ShouldShowMomentInFeedModule (upval), ReportUnavailableFeedItemModule (upval), PostAssetStore (copy), HydrateAvatarMomentFeedItemsModule (upval), InitialIndex (copy), FFlagMomentsComments (upval)
 			local OwnerGeneration = if CommentsStore == nil then nil else CommentsStore.getOwnerGeneration(false)
 			local v1 = nil
 			local Items = {}
@@ -54,6 +55,8 @@ return function(p1, p2)
 				if not v2 then
 					error(v3)
 				end
+				local T = if FFlagProfileRenderAvatarMoments then {} else nil
+				
 				if v3.commentsByFeedItemId ~= nil then
 					v1 = v1 or {}
 					
@@ -70,7 +73,7 @@ return function(p1, p2)
 					local ShouldShowMomentInFeedModule1 = ShouldShowMomentInFeedModule(moment)
 					
 					if not HasFoundIndex and ShouldShowMomentInFeedModule1 then
-						table.insert(Items, { kind = "moment", moment = moment })
+						table.insert(if T == nil then Items else T, { kind = "moment", moment = moment })
 						continue
 					end
 					if HasFoundIndex then
@@ -79,11 +82,16 @@ return function(p1, p2)
 						ReportUnavailableFeedItemModule(moment, RecommendationSource.Profile)
 					end
 				end
+				if FFlagProfileRenderAvatarMoments and T ~= nil then
+					if PostAssetStore ~= nil then
+						T = HydrateAvatarMomentFeedItemsModule(T, PostAssetStore)
+					end
+					for _, value1 in T do
+						table.insert(Items, value1)
+					end
+				end
 				NextCursor1 = v3.nextCursor
 			until not NoNextCursor or (InitialIndex == nil or (#Items >= InitialIndex or NextCursor1 == nil))
-			if FFlagProfileRenderAvatarMoments then
-				Items = HydrateAvatarMomentFeedItemsModule(Items, P1.postAssetStore or MomentsGetPostAssetStoreModule(false))
-			end
 			local OnAccepted: (() -> ())? = nil
 			
 			if FFlagMomentsComments and CommentsStore ~= nil and OwnerGeneration ~= nil and v1 ~= nil then

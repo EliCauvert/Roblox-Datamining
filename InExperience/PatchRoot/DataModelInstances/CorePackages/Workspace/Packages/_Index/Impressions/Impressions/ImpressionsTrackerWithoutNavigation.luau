@@ -4,11 +4,13 @@ local Signal = require(Parent.AppCommonLib).Signal
 local ImpressionsDetectorModule = require(script.Parent.ImpressionsDetector)
 local ImpressionDetectorWithoutNavigationModule = require(script.Parent.ImpressionDetectorWithoutNavigation)
 local ImpressionsVisualizerModule = require(script.Parent.ImpressionsVisualizer)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local LuaAppFixImpressionsHookDependencies = game:DefineFastFlag("LuaAppFixImpressionsHookDependencies", false)
-local FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions = require(Parent.SharedFlags).FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions
+local FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions = SharedFlagsModule.FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions
+local FFlagLuaAppSduiGameDwell = SharedFlagsModule.FFlagLuaAppSduiGameDwell
 
 return function(p1)
-	-- upvalues: ReactModule (copy), Signal (copy), ImpressionsVisualizerModule (copy), LuaAppFixImpressionsHookDependencies (copy), ImpressionsDetectorModule (copy), ImpressionDetectorWithoutNavigationModule (copy), FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions (copy)
+	-- upvalues: ReactModule (copy), Signal (copy), ImpressionsVisualizerModule (copy), LuaAppFixImpressionsHookDependencies (copy), ImpressionsDetectorModule (copy), ImpressionDetectorWithoutNavigationModule (copy), FFlagLuaAppSduiGameDwell (copy), FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions (copy)
 	local UseRefResult = ReactModule.useRef({})
 	local UseRefResult1 = ReactModule.useRef(Signal.new())
 	local UseRefResult2 = nil
@@ -90,6 +92,7 @@ return function(p1)
 	
 	return ReactModule.createElement(if p1.pageContext then ImpressionsDetectorModule else ImpressionDetectorWithoutNavigationModule, {
 		parentRef = p1.parentRef,
+		visibilityObserver = if FFlagLuaAppSduiGameDwell then p1.visibilityObserver else nil,
 		viewPortBounds = ViewPortBounds,
 		viewPortFillBounds = if FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions then p1.viewPortFillBounds else nil,
 		onRequestImpressionsSignal = UseRefResult1.current,

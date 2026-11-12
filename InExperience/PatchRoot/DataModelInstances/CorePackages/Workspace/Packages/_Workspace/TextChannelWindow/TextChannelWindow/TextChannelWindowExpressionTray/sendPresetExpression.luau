@@ -10,6 +10,8 @@ return function(p1, p2): boolean
 	end
 	if SendPresetModuleResult == "NoChannel" then
 		LoggerModule:warning("Preset not sent: no reachable channel")
+	elseif SendPresetModuleResult == "DirectChat" then
+		LoggerModule:warning("Preset not sent: direct chats do not support Quick Words")
 	end
 	return false
 end

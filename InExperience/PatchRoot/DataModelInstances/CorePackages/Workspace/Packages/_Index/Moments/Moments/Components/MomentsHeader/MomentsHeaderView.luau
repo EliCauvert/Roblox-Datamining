@@ -15,11 +15,14 @@ local ChipVariant = FoundationModule.Enums.ChipVariant
 local InputSize = FoundationModule.Enums.InputSize
 local PlusLarge = BuilderIconsModule.Icon.PlusLarge
 local ChevronLargeLeft = BuilderIconsModule.Icon.ChevronLargeLeft
+local CirclePerson = BuilderIconsModule.Icon.CirclePerson
 local GradientBackdrop = require(Parent.MomentsCommon).Components.GradientBackdrop
 local FlyoutLeftHeader = require(Parent.FlyoutSidePanel).Components.FlyoutLeftHeader
 local FlyoutSidePanelIXP = require(Parent.SharedExperimentDefinition).FlyoutSidePanelIXP
+local CreationMenuContainerModule = require(Moments.Components.CreationMenuContainer)
 local NavigationMenuModule = require(Moments.Components.NavigationMenu)
 local ConstantsModule = require(Moments.Constants)
+local FFlagMomentsCreateAvatarPosts = require(Parent.SharedFlags).FFlagMomentsCreateAvatarPosts
 local FFlagMomentsFtuxTooltipCreateCopyModule = require(Moments.Flags.FFlagMomentsFtuxTooltipCreateCopy)
 local FFlagMomentsFixFeedForDeviceSafeInsetsModule = require(Moments.Flags.FFlagMomentsFixFeedForDeviceSafeInsets)
 local ShouldUseDeviceSafeInsets = require(Parent.Display).shouldUseDeviceSafeInsets
@@ -61,8 +64,21 @@ local function renderAction(p1, Icon, OnActivated, LayoutOrder)
 	})
 end
 
+local function renderCreateAction(p1, LayoutOrder)
+	-- upvalues: ReactModule (copy), CreationMenuContainerModule (copy), ButtonVariant (copy), renderAction (copy), PlusLarge (copy)
+	return if p1.onCreateAvatarMomentPressed == nil then renderAction("create", PlusLarge, p1.onCreateMomentButtonPressed, LayoutOrder) else ReactModule.createElement(CreationMenuContainerModule, {
+		testId = "--moments-menu-creation",
+		buttonTestId = "--moments-header--actions--create",
+		layoutOrder = LayoutOrder,
+		buttonVariant = ButtonVariant.Utility,
+		onCreateFromCaptures = p1.onCreateMomentButtonPressed,
+		onCreateFromAvatar = p1.onCreateAvatarMomentPressed,
+		onTriggerActivated = if p1.showFtuxTooltip then p1.onFtuxTooltipClosed else nil
+	})
+end
+
 return function(p1)
-	-- upvalues: renderAction (copy), ChevronLargeLeft (copy), PlusLarge (copy), ReactModule (copy), IconButton (copy), ButtonVariant (copy), InputSize (copy), NavigationMenuModule (copy), View (copy), renderFeedTypeChips (copy), FlyoutSidePanelIXP (copy), FlyoutLeftHeader (copy), Text (copy), FFlagMomentsCreationFeatureGate (copy), FoundationModule (copy), FFlagMomentsFtuxTooltipCreateCopyModule (copy), Coachmark (copy), HeaderBar (copy), GradientBackdrop (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), ShouldUseDeviceSafeInsets (copy), ConstantsModule (copy)
+	-- upvalues: renderAction (copy), ChevronLargeLeft (copy), FFlagMomentsCreateAvatarPosts (copy), renderCreateAction (copy), PlusLarge (copy), ReactModule (copy), IconButton (copy), ButtonVariant (copy), InputSize (copy), NavigationMenuModule (copy), View (copy), renderFeedTypeChips (copy), FlyoutSidePanelIXP (copy), FlyoutLeftHeader (copy), Text (copy), FFlagMomentsCreationFeatureGate (copy), FoundationModule (copy), FFlagMomentsFtuxTooltipCreateCopyModule (copy), Coachmark (copy), CirclePerson (copy), HeaderBar (copy), GradientBackdrop (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), ShouldUseDeviceSafeInsets (copy), ConstantsModule (copy)
 	local RenderLeft: (() -> any)? = nil
 	local RenderRight: (() -> any)? = nil
 	local FeedTypeChips = nil
@@ -77,7 +93,7 @@ return function(p1)
 			local t = {}
 			
 			if p1.showCreateButton then
-				t.CreateMomentButton = ReactModule.createElement(IconButton, {
+				t.CreateMomentButton = if FFlagMomentsCreateAvatarPosts then renderCreateAction(p1, 1) else ReactModule.createElement(IconButton, {
 					LayoutOrder = 1,
 					isCircular = true,
 					Selectable = true,
@@ -102,8 +118,17 @@ return function(p1)
 			end
 		elseif p1.showInteractiveButtons and p1.showCreateButton then
 			RenderRight = function()
-				-- upvalues: renderAction (upval), PlusLarge (upval), p1 (copy)
-				return renderAction("create", PlusLarge, p1.onCreateMomentButtonPressed, 1)
+				-- upvalues: FFlagMomentsCreateAvatarPosts (upval), renderCreateAction (upval), p1 (copy), PlusLarge (upval), ReactModule (upval), IconButton (upval), ButtonVariant (upval), InputSize (upval)
+				return if FFlagMomentsCreateAvatarPosts then renderCreateAction(p1, 1) else ReactModule.createElement(IconButton, {
+					LayoutOrder = 1,
+					isCircular = true,
+					Selectable = true,
+					testId = "--moments-header--actions--create",
+					icon = PlusLarge,
+					onActivated = p1.onCreateMomentButtonPressed,
+					variant = ButtonVariant.Utility,
+					size = InputSize.Medium
+				})
 			end
 		end
 	elseif p1.variant == "base" then
@@ -133,7 +158,7 @@ return function(p1)
 			local Element = nil
 			
 			if p1.showCreateButton or not FFlagMomentsCreationFeatureGate then
-				local Element1 = ReactModule.createElement(IconButton, {
+				local RenderCreateActionResult = if FFlagMomentsCreateAvatarPosts then renderCreateAction(p1, 1) else ReactModule.createElement(IconButton, {
 					LayoutOrder = 1,
 					isCircular = true,
 					Selectable = true,
@@ -143,7 +168,7 @@ return function(p1)
 					variant = ButtonVariant.Utility,
 					size = InputSize.Medium
 				})
-				Element = if p1.showFtuxTooltip then ReactModule.createElement(Coachmark, {
+				Element = if FFlagMomentsCreateAvatarPosts or p1.showFtuxTooltip then ReactModule.createElement(Coachmark, {
 					LayoutOrder = 1,
 					isOpen = p1.showFtuxTooltip,
 					onClose = p1.onFtuxTooltipClosed,
@@ -151,13 +176,23 @@ return function(p1)
 					title = if FFlagMomentsFtuxTooltipCreateCopyModule then p1.ftuxTooltipTitle else "Share Your First Moment",
 					text = if FFlagMomentsFtuxTooltipCreateCopyModule then p1.ftuxTooltipText else "Tap + to share a moment from your captures",
 					align = FoundationModule.Enums.PopoverAlign.End
-				}, Element1) else ReactModule.createElement(View, { LayoutOrder = 1, tag = "auto-xy" }, { Action = Element1 })
+				}, RenderCreateActionResult) else ReactModule.createElement(View, { LayoutOrder = 1, tag = "auto-xy" }, { Action = RenderCreateActionResult })
 			end
 			RenderRight = function()
-				-- upvalues: ReactModule (upval), View (upval), Element (ref), NavigationMenuModule (upval), ButtonVariant (upval), p1 (copy)
+				-- upvalues: ReactModule (upval), View (upval), Element (ref), p1 (copy), CirclePerson (upval), IconButton (upval), ButtonVariant (upval), InputSize (upval), NavigationMenuModule (upval)
 				return ReactModule.createElement(View, { tag = "row align-y-center gap-xsmall auto-xy" }, {
 					CreateMomentButton = Element,
-					NavigationMenu = ReactModule.createElement(NavigationMenuModule, {
+					MyMomentsButton = if p1.showMyMomentsButton then ReactModule.createElement(IconButton, {
+						LayoutOrder = 2,
+						isCircular = true,
+						Selectable = true,
+						testId = "--moments-header--actions--my-moments",
+						icon = CirclePerson,
+						onActivated = p1.onNavigateToMyMoments,
+						variant = ButtonVariant.Utility,
+						size = InputSize.Medium
+					}) else nil,
+					NavigationMenu = if p1.showMyMomentsButton then nil else ReactModule.createElement(NavigationMenuModule, {
 						layoutOrder = 2,
 						buttonTestId = "--moments-header--actions--more",
 						buttonVariant = ButtonVariant.Utility,

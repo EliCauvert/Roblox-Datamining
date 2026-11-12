@@ -5,6 +5,7 @@ local _ = require(script.Parent.metricSeriesToChartPoints)
 local Frozen = table.freeze({
 	views = "MomentsLifetimeVideoViews",
 	watchTime = "MomentsLifetimeWatchTime",
+	watchTimeNoReplay = "MomentsLifetimeWatchTimeNoReplay",
 	joins = "MomentsLifetimeJoins"
 })
 
@@ -99,6 +100,15 @@ return function(p1, p2: number)
 				resourceType = CreatorAnalyticsModule.ResourceType.Creator,
 				resourceId = tostring(p1.creatorId),
 				metric = Frozen.watchTime,
+				granularity = None,
+				endTime = DateInfo,
+				filters = Filters
+			},
+			watchTimeNoReplay = {
+				lookbackSeconds = 2588400,
+				resourceType = CreatorAnalyticsModule.ResourceType.Creator,
+				resourceId = tostring(p1.creatorId),
+				metric = Frozen.watchTimeNoReplay,
 				granularity = None,
 				endTime = DateInfo,
 				filters = Filters

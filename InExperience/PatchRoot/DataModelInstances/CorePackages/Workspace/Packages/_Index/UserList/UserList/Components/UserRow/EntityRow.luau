@@ -6,10 +6,9 @@ local _ = require(UserList.Common.Types)
 local UserRowModule = require(script.Parent.UserRow)
 local ContactRowModule = require(script.Parent.ContactRow)
 local FFlagUserListCtaIntegrationEnabled = require(Parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
-local FFlagAddStatusIndicatorToBaseRow = require(Parent.SharedFlags).FFlagAddStatusIndicatorToBaseRow
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), EnumsModule (copy), ContactRowModule (copy), UserRowModule (copy), FFlagUserListCtaIntegrationEnabled (copy), FFlagAddStatusIndicatorToBaseRow (copy)
+	-- upvalues: ReactModule (copy), EnumsModule (copy), ContactRowModule (copy), UserRowModule (copy), FFlagUserListCtaIntegrationEnabled (copy)
 	local Entity = p1.entity
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), Entity (copy)
@@ -41,7 +40,7 @@ return ReactModule.memo(function(p1)
 		layoutOrder = p1.layoutOrder,
 		loadingState = p1.loadingState,
 		presence = p1.presence,
-		shouldShowNewIndicator = if FFlagAddStatusIndicatorToBaseRow then p1.shouldShowNewIndicator else nil,
+		shouldShowNewIndicator = p1.shouldShowNewIndicator,
 		trailingContent = p1.trailingContent,
 		configs = p1.configs
 	})

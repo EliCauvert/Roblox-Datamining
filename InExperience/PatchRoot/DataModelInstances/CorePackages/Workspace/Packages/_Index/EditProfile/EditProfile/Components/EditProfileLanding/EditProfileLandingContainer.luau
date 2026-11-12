@@ -23,6 +23,7 @@ local DataHydrationTypes = require(Parent.DataHydration).DataHydrationTypes
 local Signal = require(Parent.Signals).createSignal("")
 local AnalyticsServiceV2Module = require(EditProfile.Analytics.AnalyticsServiceV2)
 local FFlagAXEnableProfileTab = require(Parent.SharedFlags).FFlagAXEnableProfileTab
+local FFlagSplitPaneFullBleedEditProfile = require(Parent.SharedFlags).FFlagSplitPaneFullBleedEditProfile
 local FFlagAXPPEReturnToEntrySurface = require(Parent.SharedFlags).FFlagAXPPEReturnToEntrySurface
 local FFlagEditProfileImageV2Enabled = require(Parent.SharedFlags).FFlagEditProfileImageV2Enabled
 local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
@@ -81,7 +82,7 @@ local function openEditProfileImageFromProfilePlatform(Navigation, p2)
 end
 
 return function(p2)
-	-- upvalues: UseLocalUserIdFunction (copy), UseRealNamesInDisplayNamesEnabledModule (copy), ProfileRefreshSignal (copy), ReactModule (copy), FocusNavigationUtilsModule (copy), ReactFocusNavigationModule (copy), UseEffectFunction (copy), FFlagAXEnableProfileTab (copy), AnalyticsServiceV2Module (copy), EnumsModule (copy), ConstantsModule (copy), UseLocalRobuxBalanceFunction (copy), FFlagEditProfileUsernameServerPriceModule (copy), EditProfileStoreModule (copy), UseSignalStateFunction (copy), FFlagEditProfileImageV2Enabled (copy), openEditProfileImageFromProfilePlatform (copy), FFlagAXPPEReturnToEntrySurface (copy), FFlagEditProfilePPEStartOnEmotesPageModule (copy), getCoveredPage (copy), RoactNavigationModule (copy), GetResult (copy), Signal (copy), DataHydrationTypes (copy), FocusNavigatorWrapperModule (copy), NavigationEvents (copy), IXPService (copy), EditProfileIXPLayer (copy), FFlagEditProfileLandingV2EnabledModule (copy), EditProfileLandingV2Module (copy), CryoModule (copy), EditProfileLandingModule (copy)
+	-- upvalues: UseLocalUserIdFunction (copy), UseRealNamesInDisplayNamesEnabledModule (copy), ProfileRefreshSignal (copy), ReactModule (copy), FocusNavigationUtilsModule (copy), ReactFocusNavigationModule (copy), UseEffectFunction (copy), FFlagAXEnableProfileTab (copy), FFlagSplitPaneFullBleedEditProfile (copy), Parent (copy), AnalyticsServiceV2Module (copy), EnumsModule (copy), ConstantsModule (copy), UseLocalRobuxBalanceFunction (copy), FFlagEditProfileUsernameServerPriceModule (copy), EditProfileStoreModule (copy), UseSignalStateFunction (copy), FFlagEditProfileImageV2Enabled (copy), openEditProfileImageFromProfilePlatform (copy), FFlagAXPPEReturnToEntrySurface (copy), FFlagEditProfilePPEStartOnEmotesPageModule (copy), getCoveredPage (copy), RoactNavigationModule (copy), GetResult (copy), Signal (copy), DataHydrationTypes (copy), FocusNavigatorWrapperModule (copy), NavigationEvents (copy), IXPService (copy), EditProfileIXPLayer (copy), FFlagEditProfileLandingV2EnabledModule (copy), EditProfileLandingV2Module (copy), CryoModule (copy), EditProfileLandingModule (copy)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseRealNamesInDisplayNamesEnabledModuleResult = UseRealNamesInDisplayNamesEnabledModule()
 	
@@ -108,7 +109,12 @@ return function(p2)
 		end
 	end, { UseAutoFocusResult })
 	local IsFullBleedParam: boolean = FFlagAXEnableProfileTab and p2.navigation.getParam("fullBleed") == true
+	local NoIsFullScreen: boolean = IsFullBleedParam
 	
+	if FFlagSplitPaneFullBleedEditProfile then
+		local UseContextResult1 = ReactModule.useContext(require(Parent.SplitPane).PaneHostContext)
+		NoIsFullScreen = if UseContextResult1 == nil then IsFullBleedParam else not UseContextResult1.isFullScreen
+	end
 	local function DisplayName()
 		-- upvalues: AnalyticsServiceV2Module (upval), p2 (copy), EnumsModule (upval), IsFullBleedParam (copy)
 		AnalyticsServiceV2Module.sendDisplayNameModalOpened()
@@ -218,7 +224,7 @@ return function(p2)
 	
 	local config = {
 		userId = UseLocalUserIdResult,
-		fullBleed = IsFullBleedParam,
+		fullBleed = NoIsFullScreen,
 		onClose = OnClose,
 		username = UseSignalStateFunction(if Entry then Entry.names.getUsername else Signal) or "",
 		displayName = UseSignalStateFunction(if Entry then Entry.names.getDisplayName else Signal) or "",

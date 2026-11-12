@@ -21,6 +21,7 @@ local GetFundingErrorModule = require(script.Parent.getFundingError)
 local _ = require(script.Parent.types)
 local WithCsrfRetryModule = require(DataHydration.withCsrfRetry)
 local FFlagBuildExperienceModelPickerData = SharedFlagsModule.FFlagBuildExperienceModelPickerData
+local FFlagBuildExperienceChatOpenId = SharedFlagsModule.FFlagBuildExperienceChatOpenId
 local FFlagBuildExperiencePromptFailureTelemetry = SharedFlagsModule.FFlagBuildExperiencePromptFailureTelemetry
 local FFlagBuildExperienceLibrary = SharedFlagsModule.FFlagBuildExperienceLibrary
 
@@ -67,7 +68,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: WithCsrfRetryModule (copy), HttpClientModule (copy), AcpProtocolModule (copy), config (copy), FFlagBuildExperienceModelPickerData (copy), SignalsUtilsModule (copy), RpcDecoderModule (copy), SignalsModule (copy), OnTerminalModule (copy), appendSessionListEntries (copy), FFlagBuildAgentAdCampaignCardModule (copy), DecodeAdCampaignToolCallStatusResultModule (copy), CreateTurnHandleModule (copy), ExperimentOverrideModule (copy), FFlagBuildExperienceLibrary (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), ClassifyRequestFailureModule (copy), GetFundingErrorModule (copy), HistoryIngestModule (copy), SessionRegistryModule (copy), ConstantsModule (copy), IngestFrameHandlerModule (copy), FFlagBuildAgentAdCampaignToolCallStatusFallback (copy)
+	-- upvalues: WithCsrfRetryModule (copy), HttpClientModule (copy), AcpProtocolModule (copy), config (copy), FFlagBuildExperienceModelPickerData (copy), SignalsUtilsModule (copy), RpcDecoderModule (copy), FFlagBuildExperienceChatOpenId (copy), SignalsModule (copy), OnTerminalModule (copy), appendSessionListEntries (copy), FFlagBuildAgentAdCampaignCardModule (copy), DecodeAdCampaignToolCallStatusResultModule (copy), CreateTurnHandleModule (copy), ExperimentOverrideModule (copy), FFlagBuildExperienceLibrary (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), ClassifyRequestFailureModule (copy), GetFundingErrorModule (copy), HistoryIngestModule (copy), SessionRegistryModule (copy), ConstantsModule (copy), IngestFrameHandlerModule (copy), FFlagBuildAgentAdCampaignToolCallStatusFallback (copy)
 	local P5 = p1 or {}
 	local Network = P5.network or WithCsrfRetryModule(HttpClientModule.createRequestInternalNetwork())
 	local BaseUrl = P5.baseUrl or AcpProtocolModule.acpUrl()
@@ -207,7 +208,7 @@ return function(p1)
 	end
 	
 	local function sessionNew(p2)
-		-- upvalues: FFlagBuildExperienceModelPickerData (upval), rpcCallSync (copy), AcpProtocolModule (upval)
+		-- upvalues: FFlagBuildExperienceModelPickerData (upval), rpcCallSync (copy), AcpProtocolModule (upval), FFlagBuildExperienceChatOpenId (upval)
 		assert(p2 ~= nil, "sessionNew requires params")
 		assert(typeof(p2.project) == "table", "sessionNew requires params.project")
 		assert(typeof(p2.project.universeId) == "number", "sessionNew requires params.project.universeId")
@@ -223,7 +224,8 @@ return function(p1)
 			project = p2.project,
 			model = if FFlagBuildExperienceModelPickerData then p2.model else nil,
 			experiment = p2.experiment,
-			application = p2.application
+			application = p2.application,
+			chatOpenId = if FFlagBuildExperienceChatOpenId then p2.chatOpenId else nil
 		}))
 	end
 	
@@ -485,7 +487,7 @@ return function(p1)
 				local v4 = nil
 				
 				if FFlagBuildExperienceModelPickerData then
-					v3, v124 = GetFundingErrorModule(RpcCallResult.state(false))
+					v3, v125 = GetFundingErrorModule(RpcCallResult.state(false))
 				end
 				ActiveBySessionEntry.fail(p3, p4, ClassifyRequestFailureModuleResult, v3, v4)
 				

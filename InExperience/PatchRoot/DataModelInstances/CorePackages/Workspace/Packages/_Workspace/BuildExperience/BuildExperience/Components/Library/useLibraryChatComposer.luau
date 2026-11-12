@@ -52,16 +52,26 @@ return function(Current, p1, IsReadOnly, ModelPicker)
 		-- upvalues: UseSignalStateResult (copy), UseRefResult (copy), UseResult1 (copy), UseResult (copy), LibraryStoreModule (copy), p1 (copy), AnswerForm (copy), Current (copy)
 		if UseSignalStateResult == nil or UseSignalStateResult.token <= UseRefResult.current then return end
 		UseRefResult.current = UseSignalStateResult.token
+		local Resources = UseSignalStateResult.resources
 		
 		if UseSignalStateResult.action == "Remove" then
-			UseResult1(UseSignalStateResult.resource.path)
-		else
-			local ReplacePath = UseSignalStateResult.replacePath
-			
-			if ReplacePath ~= nil and ReplacePath ~= UseSignalStateResult.resource.path then
-				UseResult1(ReplacePath)
+			for _, resource in Resources do
+				UseResult1(resource.path)
 			end
-			UseResult(UseSignalStateResult.resource)
+		else
+			local t = {}
+			
+			for _, resource1 in Resources do
+				t[resource1.path] = true
+			end
+			for _, replacePath in UseSignalStateResult.replacePaths do
+				if not t[replacePath] then
+					UseResult1(replacePath)
+				end
+			end
+			for _, resource2 in Resources do
+				UseResult(resource2)
+			end
 		end
 		LibraryStoreModule.consumeChatResourceRequest(UseSignalStateResult.token)
 		

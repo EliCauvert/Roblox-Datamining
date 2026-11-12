@@ -2,9 +2,7 @@
 local Parent = CoreScriptsPlayerFeedback.Parent
 local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
-local FoundationModule = require(Parent.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
@@ -15,7 +13,7 @@ local UseEscapeDismissModule = require(CoreScriptsPlayerFeedback.Hooks.useEscape
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
 return (ReactModule.memo(function(p1)
-	-- upvalues: UseScreenSizeFunction (copy), UseStyleFunction (copy), ReactModule (copy), UseLastInputMethodFunction (copy), UseLocalizationFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), UseEscapeDismissModule (copy), GuiService (copy), ButtonType (copy), InteractiveAlert (copy)
+	-- upvalues: UseScreenSizeFunction (copy), UseStyleFunction (copy), ReactModule (copy), UseLastInputMethodFunction (copy), UseLocalizationFunction (copy), NormalizeFontFaceFunction (copy), UseEscapeDismissModule (copy), GuiService (copy), ButtonType (copy), InteractiveAlert (copy)
 	local UseScreenSizeResult = UseScreenSizeFunction()
 	local UseStyleResult = UseStyleFunction()
 	local UseRefResult = ReactModule.useRef(nil)
@@ -52,9 +50,7 @@ return (ReactModule.memo(function(p1)
 		HintUnder13 = UseLocalizationResult.HintDefault
 	end
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: UseStyleResult (copy), ReactModule (upval), HeaderUnder13 (ref), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), HintUnder13 (ref)
-		local Body = UseStyleResult.Font.Body
-		local Header2 = UseStyleResult.Font.Header2 or UseStyleResult.Font.Body
+		-- upvalues: UseStyleResult (copy), ReactModule (upval), HeaderUnder13 (ref), NormalizeFontFaceFunction (upval), HintUnder13 (ref)
 		local BaseSize = UseStyleResult.Font.BaseSize
 		
 		return ReactModule.createElement("Frame", {
@@ -77,9 +73,8 @@ return (ReactModule.memo(function(p1)
 				TextYAlignment = Enum.TextYAlignment.Top,
 				TextColor3 = UseStyleResult.Theme.TextEmphasis.Color,
 				TextTransparency = UseStyleResult.Theme.TextEmphasis.Transparency,
-				Font = if FoundationFontFaceMigration then nil else Header2.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.TitleLarge.Font) else nil,
-				TextSize = math.floor(Header2.RelativeSize * BaseSize),
+				FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.TitleLarge.Font),
+				TextSize = math.floor((UseStyleResult.Font.Header2 or UseStyleResult.Font.Body).RelativeSize * BaseSize),
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y
 			}),
@@ -92,9 +87,8 @@ return (ReactModule.memo(function(p1)
 				TextYAlignment = Enum.TextYAlignment.Top,
 				TextColor3 = UseStyleResult.Theme.TextMuted.Color,
 				TextTransparency = UseStyleResult.Theme.TextMuted.Transparency,
-				Font = if FoundationFontFaceMigration then nil else Body.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
-				TextSize = math.floor(Body.RelativeSize * BaseSize),
+				FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
+				TextSize = math.floor(UseStyleResult.Font.Body.RelativeSize * BaseSize),
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y
 			})

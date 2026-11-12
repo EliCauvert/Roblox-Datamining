@@ -5,7 +5,6 @@ local FoundationModule = require(Parent.Foundation)
 local NavigationModule = require(Parent.Navigation)
 local ReactModule = require(Parent.React)
 local ResponsiveModule = require(Parent.Responsive)
-local SharedFlagsModule = require(Parent.SharedFlags)
 local SignalsReactModule = require(Parent.SignalsReact)
 local UseOpenWebViewFunction = require(Parent.WebViewUtils).useOpenWebView
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
@@ -14,7 +13,6 @@ local PlaceVersionHistoryModule = require(Parent.DataHydration.PlaceVersionHisto
 local UniverseConfigurationModule = require(Parent.DataHydration.UniverseConfiguration)
 local UniverseActivationModule = require(Parent.DataHydration.UniverseActivation)
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
-local FFlagBuildPostPublishShareDismissibleModule = require(BuildExperience.Flags.FFlagBuildPostPublishShareDismissible)
 local FIntBuildPostPublishSnackbarAutoDismissSecondsModule = require(BuildExperience.Flags.FIntBuildPostPublishSnackbarAutoDismissSeconds)
 local FriendsOnlyShareDialogModule = require(BuildExperience.Components.ShareAudience.FriendsOnlyShareDialog)
 local ContentMaturityUtilsModule = require(BuildExperience.utils.ContentMaturityUtils)
@@ -36,11 +34,11 @@ local InputSize = FoundationModule.Enums.InputSize
 local PopoverAlign = FoundationModule.Enums.PopoverAlign
 local PopoverSide = FoundationModule.Enums.PopoverSide
 local PrivacyType = UniverseConfigurationModule.PrivacyType
-local FFlagEnableShareSheet = SharedFlagsModule.FFlagEnableShareSheet
-local FFlagShareSheetFriendsSort = SharedFlagsModule.FFlagShareSheetFriendsSort
+local FFlagEnableShareSheet = require(Parent.SharedFlags).FFlagEnableShareSheet
 local FFlagBuildPublishNavigationSheetModule = require(BuildExperience.Flags.FFlagBuildPublishNavigationSheet)
 local FFlagBuildAdUpsellModule = require(BuildExperience.Flags.FFlagBuildAdUpsell)
 local FFlagBuildExperiencePlaytestCardPublishCtaModule = require(BuildExperience.Flags.FFlagBuildExperiencePlaytestCardPublishCta)
+local FFlagBuildExperienceActionOutcomeTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceActionOutcomeTelemetry)
 local GetAdUpsellEventStoreModule = if FFlagBuildAdUpsellModule then require(BuildExperience.Stores.GetAdUpsellEventStore) else nil
 local UseStoreFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useStore
 local GetRootNavigationFunction = NavigationModule.getRootNavigation
@@ -48,10 +46,14 @@ local UseNavigationFunction = NavigationModule.useNavigation
 local OpenGameDetailsFunction = require(Parent.GameDetail).OpenGameDetails
 local Debug = require(Parent.DataHydration.CreatorAgentChat).debug
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
+local ConfigurationActionTelemetryModule = require(BuildExperience.Telemetry.ConfigurationActionTelemetry)
 local SharePublishedExperienceModule = require(BuildExperience.utils.sharePublishedExperience)
 local SharePublishedExperienceFunction = SharePublishedExperienceModule.sharePublishedExperience
 local UseSharePublishedExperienceFunction = SharePublishedExperienceModule.useSharePublishedExperience
-local UniversalShareSheet = require(Parent.ShareSheet).UniversalShareSheet
+local Action = ConfigurationActionTelemetryModule.Action
+local Context = ConfigurationActionTelemetryModule.Context
+local FailureReason = ConfigurationActionTelemetryModule.FailureReason
+local Stage = ConfigurationActionTelemetryModule.Stage
 local t = {}
 
 local function _(p1): boolean
@@ -72,8 +74,31 @@ local function buildPublicAudiences(Audiences)
 	return List
 end
 
+local function getPublishFailure(p1, Stage1)
+	-- upvalues: GameConfigurationActionsModule (copy), FailureReason (copy), Stage (copy)
+	local v1 = if type(p1) == "table" then p1 else nil
+	
+	if v1 == nil or v1.stage ~= GameConfigurationActionsModule.PublishFailureStage.SetAudience then
+		return {
+			reason = if v1 == nil or v1.responseCode ~= 16 then FailureReason.RequestFailed else FailureReason.AccountTooNew,
+			stage = Stage1,
+			error = p1
+		}
+	else
+		local config = {
+			reason = if IsNotVersionMatch then FailureReason.AudienceNotPublic else FailureReason.RequestFailed,
+			stage = Stage.SetAudience,
+			error = if v1.cause == nil then p1 else v1.cause
+		}
+		local PublishResult = v1.publishResult
+		local IsNotVersionMatch: boolean = typeof(PublishResult) == "table" and (PublishResult.status == "success" and typeof(PublishResult.version) == "string") and PublishResult.version ~= ""
+		
+		return config
+	end
+end
+
 local function PreviewButton(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseStoreFunction (copy), UseNavigationFunction (copy), ReactModule (copy), GetRootNavigationFunction (copy), OpenGameDetailsFunction (copy), GetGameDetailsNavigationModule (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseStoreFunction (copy), UseNavigationFunction (copy), ReactModule (copy), FFlagBuildExperienceActionOutcomeTelemetryModule (copy), Context (copy), SendBuildExperienceEventModule (copy), GetRootNavigationFunction (copy), OpenGameDetailsFunction (copy), GetGameDetailsNavigationModule (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy)
 	local Preview = UseLocalizationFunction({
 		preview = LocalizationStringsModule.GAME_CONFIGURATION_PREVIEW
 	}).preview
@@ -88,7 +113,10 @@ local function PreviewButton(p1)
 		variant = ButtonVariant.Standard,
 		fillBehavior = FillBehavior.Fill,
 		onActivated = ReactModule.useCallback(function()
-			-- upvalues: GetRootNavigationFunction (upval), UseNavigationResult (copy), OpenGameDetailsFunction (upval), p1 (copy), GetGameDetailsNavigationModule (upval), UseStoreResult (copy), OnPreviewFunction (copy)
+			-- upvalues: FFlagBuildExperienceActionOutcomeTelemetryModule (upval), Context (upval), SendBuildExperienceEventModule (upval), p1 (copy), GetRootNavigationFunction (upval), UseNavigationResult (copy), OpenGameDetailsFunction (upval), GetGameDetailsNavigationModule (upval), UseStoreResult (copy), OnPreviewFunction (copy)
+			if FFlagBuildExperienceActionOutcomeTelemetryModule then
+				SendBuildExperienceEventModule("PREVIEW_CLICK", p1.telemetryIds, { context = Context.PublishFooter })
+			end
 			OpenGameDetailsFunction(tostring(p1.target.universeId), GetGameDetailsNavigationModule((GetRootNavigationFunction(UseNavigationResult))), { source = "BuildExperiencePublish" })(UseStoreResult)
 			
 			if OnPreviewFunction then
@@ -98,7 +126,8 @@ local function PreviewButton(p1)
 			UseNavigationResult,
 			p1.target.universeId,
 			UseStoreResult,
-			OnPreviewFunction
+			OnPreviewFunction,
+			p1.telemetryIds
 		}),
 		width = UDim.new(1, 0),
 		testId = `{p1.actionsTestId}-preview`
@@ -106,7 +135,7 @@ local function PreviewButton(p1)
 end
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseSharePublishedExperienceFunction (copy), SignalsReactModule (copy), PlaceVersionHistoryModule (copy), UniverseConfigurationModule (copy), ReactModule (copy), GameConfigurationLabelsModule (copy), UniverseActivationModule (copy), ContentMaturityUtilsModule (copy), UseOpenWebViewFunction (copy), PrivacyType (copy), FFlagBuildPostPublishShareDismissibleModule (copy), FIntBuildPostPublishSnackbarAutoDismissSecondsModule (copy), FFlagEnableShareSheet (copy), FFlagShareSheetFriendsSort (copy), UniversalShareSheet (copy), SharePublishedExperienceFunction (copy), GameConfigurationActionsModule (copy), RefreshPublishEligibilityModule (copy), GetVersionInformationStoreModule (copy), SendBuildExperienceEventModule (copy), GetAdUpsellEventStoreModule (copy), FFlagBuildAdUpsellModule (copy), buildPublicAudiences (copy), ExperienceGuidelinesModule (copy), t (copy), Debug (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), FoundationModule (copy), UseClosableFocusRootModule (copy), FocusNavigationUtilsModule (copy), ResponsiveModule (copy), Snackbar (copy), View (copy), FFlagBuildPublishNavigationSheetModule (copy), Popover (copy), PopoverAlign (copy), PopoverSide (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), PreviewButton (copy), FriendsOnlyShareDialogModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseSharePublishedExperienceFunction (copy), SignalsReactModule (copy), PlaceVersionHistoryModule (copy), UniverseConfigurationModule (copy), ReactModule (copy), GameConfigurationLabelsModule (copy), UniverseActivationModule (copy), ContentMaturityUtilsModule (copy), UseOpenWebViewFunction (copy), PrivacyType (copy), FFlagBuildExperienceActionOutcomeTelemetryModule (copy), FIntBuildPostPublishSnackbarAutoDismissSecondsModule (copy), FFlagEnableShareSheet (copy), SharePublishedExperienceFunction (copy), ConfigurationActionTelemetryModule (copy), Action (copy), Context (copy), GameConfigurationActionsModule (copy), RefreshPublishEligibilityModule (copy), GetVersionInformationStoreModule (copy), SendBuildExperienceEventModule (copy), Stage (copy), GetAdUpsellEventStoreModule (copy), FFlagBuildAdUpsellModule (copy), buildPublicAudiences (copy), ExperienceGuidelinesModule (copy), t (copy), Debug (copy), FailureReason (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), getPublishFailure (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), FoundationModule (copy), UseClosableFocusRootModule (copy), FocusNavigationUtilsModule (copy), ResponsiveModule (copy), Snackbar (copy), View (copy), FFlagBuildPublishNavigationSheetModule (copy), Popover (copy), PopoverAlign (copy), PopoverSide (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), PreviewButton (copy), FriendsOnlyShareDialogModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		accountTooNewError = LocalizationStringsModule.GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR,
 		creatorHub = LocalizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB,
@@ -153,34 +182,43 @@ return function(p1)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState("")
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
 	local IsNotAudienceMatch: boolean = UseStateResult1 == PublishSuccess and (p1.target.placeId ~= nil and (Audience ~= nil and Audience ~= PrivacyType.Private))
+	local UseMemoResult1 = if FFlagBuildExperienceActionOutcomeTelemetryModule then ReactModule.useMemo(function()
+		-- upvalues: p1 (copy)
+		return {
+			universeId = p1.target.universeId,
+			placeId = p1.target.placeId,
+			conversationId = p1.target.sessionId
+		}
+	end, {
+		p1.target.universeId,
+		p1.target.placeId,
+		p1.target.sessionId
+	}) else nil
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy), UseStateResult2_2 (copy)
 		UseStateResult2_1("")
 		UseStateResult2_2(nil)
 	end, {})
-	
-	if FFlagBuildPostPublishShareDismissibleModule then
-		ReactModule.useEffect(function()
-			-- upvalues: UseStateResult1 (copy), FIntBuildPostPublishSnackbarAutoDismissSecondsModule (upval), UseStateResult2_1 (copy)
-			if UseStateResult1 == "" then
-				return nil
-			else
-				local DelayedThread = task.delay(FIntBuildPostPublishSnackbarAutoDismissSecondsModule, UseStateResult2_1, "")
-				
-				return function()
-					-- upvalues: DelayedThread (copy)
-					task.cancel(DelayedThread)
-				end
+	ReactModule.useEffect(function()
+		-- upvalues: UseStateResult1 (copy), FIntBuildPostPublishSnackbarAutoDismissSecondsModule (upval), UseStateResult2_1 (copy)
+		if UseStateResult1 == "" then
+			return nil
+		else
+			local DelayedThread = task.delay(FIntBuildPostPublishSnackbarAutoDismissSecondsModule, UseStateResult2_1, "")
+			
+			return function()
+				-- upvalues: DelayedThread (copy)
+				task.cancel(DelayedThread)
 			end
-		end, { UseStateResult1 })
-	end
+		end
+	end, { UseStateResult1 })
 	local UseResult1 = ReactModule.useCallback(function()
-		-- upvalues: p1 (copy), UseStateResult2_2 (copy), FFlagEnableShareSheet (upval), UseSharePublishedExperienceResult (copy), FFlagShareSheetFriendsSort (upval), UniversalShareSheet (upval), SharePublishedExperienceFunction (upval), LinkCopied (copy), UseStateResult2_1 (copy)
+		-- upvalues: p1 (copy), UseStateResult2_2 (copy), FFlagEnableShareSheet (upval), UseSharePublishedExperienceResult (copy), SharePublishedExperienceFunction (upval), LinkCopied (copy), UseStateResult2_1 (copy)
 		if p1.target.placeId == nil then return end
 		UseStateResult2_2(nil)
 		
 		if FFlagEnableShareSheet then
-			UseSharePublishedExperienceResult(p1.target.placeId, if FFlagShareSheetFriendsSort then UniversalShareSheet.RecipientSource.OneToOneFriends else nil)
+			UseSharePublishedExperienceResult(p1.target.placeId)
 			
 			return
 		end
@@ -195,10 +233,12 @@ return function(p1)
 		UseSharePublishedExperienceResult
 	})
 	local UseResult2 = ReactModule.useCallback(function()
-		-- upvalues: FFlagBuildPostPublishShareDismissibleModule (upval), UseStateResult2_1 (copy), Audience (copy), PrivacyType (upval), UseStateResult2_2 (copy), UseResult1 (copy)
-		if FFlagBuildPostPublishShareDismissibleModule then
-			UseStateResult2_1("")
+		-- upvalues: FFlagBuildExperienceActionOutcomeTelemetryModule (upval), ConfigurationActionTelemetryModule (upval), Action (upval), UseMemoResult1 (copy), Context (upval), Audience (copy), UseStateResult2_1 (copy), PrivacyType (upval), UseStateResult2_2 (copy), UseResult1 (copy)
+		if FFlagBuildExperienceActionOutcomeTelemetryModule then
+			ConfigurationActionTelemetryModule.sendClick(Action.Share, UseMemoResult1, Context.PublishSnackbar, { audience = tostring(Audience) })
 		end
+		UseStateResult2_1("")
+		
 		if Audience == PrivacyType.FriendsOnly then
 			UseStateResult2_2("friends")
 			
@@ -207,20 +247,28 @@ return function(p1)
 		if Audience == PrivacyType.Public then
 			UseResult1()
 		end
-	end, { Audience, UseResult1 })
+	end, { Audience, UseResult1, UseMemoResult1 })
 	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_2 (copy)
 		UseStateResult2_2(nil)
 	end, {})
 	local UseResult4 = ReactModule.useCallback(function()
-		-- upvalues: UseOpenWebViewResult (copy), GameConfigurationActionsModule (upval), p1 (copy), CreatorHub (copy), RefreshPublishEligibilityModule (upval)
+		-- upvalues: FFlagBuildExperienceActionOutcomeTelemetryModule (upval), ConfigurationActionTelemetryModule (upval), Action (upval), UseMemoResult1 (copy), Context (upval), UseOpenWebViewResult (copy), GameConfigurationActionsModule (upval), p1 (copy), CreatorHub (copy), RefreshPublishEligibilityModule (upval)
+		if FFlagBuildExperienceActionOutcomeTelemetryModule then
+			ConfigurationActionTelemetryModule.sendClick(Action.UpdateRating, UseMemoResult1, Context.PublishFooter)
+		end
 		UseOpenWebViewResult(GameConfigurationActionsModule.getExperienceQuestionnaireUrl(p1.target.universeId), CreatorHub, function()
 			-- upvalues: RefreshPublishEligibilityModule (upval), p1 (upval)
 			RefreshPublishEligibilityModule(p1.target.universeId)
 		end)
-	end, { CreatorHub, UseOpenWebViewResult, p1.target.universeId })
+	end, {
+		CreatorHub,
+		UseOpenWebViewResult,
+		p1.target.universeId,
+		UseMemoResult1
+	})
 	local UseResult5 = ReactModule.useCallback(function()
-		-- upvalues: UseStateResult (copy), p1 (copy), GetVersionInformationStoreModule (upval), SendBuildExperienceEventModule (upval), UseStateResult2 (copy), UseResult (copy), GetAdUpsellEventStoreModule (upval), UseSignalStateResult2 (copy), FFlagBuildAdUpsellModule (upval), GameConfigurationActionsModule (upval), buildPublicAudiences (upval), UseSignalStateResult4 (ref), ContentMaturityUtilsModule (upval), ExperienceGuidelinesModule (upval), t (upval), Debug (upval), UseSignalStateResult1 (copy), UseSignalStateResult (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (upval), UseStateResult2_1 (copy), PublishSuccess (copy), PublishAudienceError (copy), PublishError (copy), AccountTooNewError (copy)
+		-- upvalues: UseStateResult (copy), p1 (copy), GetVersionInformationStoreModule (upval), SendBuildExperienceEventModule (upval), UseStateResult2 (copy), UseResult (copy), Stage (upval), GetAdUpsellEventStoreModule (upval), UseSignalStateResult2 (copy), FFlagBuildAdUpsellModule (upval), GameConfigurationActionsModule (upval), buildPublicAudiences (upval), UseSignalStateResult4 (ref), ContentMaturityUtilsModule (upval), ExperienceGuidelinesModule (upval), t (upval), Debug (upval), UseSignalStateResult1 (copy), UseSignalStateResult (copy), FFlagBuildExperienceActionOutcomeTelemetryModule (upval), ConfigurationActionTelemetryModule (upval), Action (upval), UseMemoResult1 (copy), FailureReason (upval), FFlagBuildExperiencePlaytestCardPublishCtaModule (upval), UseStateResult2_1 (copy), PublishSuccess (copy), PublishAudienceError (copy), PublishError (copy), AccountTooNewError (copy), getPublishFailure (upval)
 		if UseStateResult then return end
 		local PlaceId = p1.target.placeId
 		
@@ -252,7 +300,7 @@ return function(p1)
 		})
 		UseStateResult2(true)
 		UseResult()
-		local v1 = "save_and_publish"
+		local SaveAndPublish = Stage.SaveAndPublish
 		local Flag = false
 		
 		local function _(p2)
@@ -265,9 +313,9 @@ return function(p1)
 		end
 		
 		local function publish(p2)
-			-- upvalues: v1 (ref), UseSignalStateResult2 (upval), FFlagBuildAdUpsellModule (upval), Flag (ref), GameConfigurationActionsModule (upval), p1 (upval), PlaceId (copy), Title (ref), Description (ref), buildPublicAudiences (upval)
-			v1 = "save_and_publish"
-			local P6 = p2 or UseSignalStateResult2
+			-- upvalues: SaveAndPublish (ref), Stage (upval), UseSignalStateResult2 (upval), FFlagBuildAdUpsellModule (upval), Flag (ref), GameConfigurationActionsModule (upval), p1 (upval), PlaceId (copy), Title (ref), Description (ref), buildPublicAudiences (upval)
+			SaveAndPublish = Stage.SaveAndPublish
+			local P8 = p2 or UseSignalStateResult2
 			
 			if FFlagBuildAdUpsellModule then
 				Flag = true
@@ -277,20 +325,20 @@ return function(p1)
 				placeId = PlaceId,
 				title = Title,
 				description = Description,
-				isActive = P6 ~= nil and P6.isActive == true,
-				audiences = buildPublicAudiences(if P6 then P6.audiences else nil)
+				isActive = P8 ~= nil and P8.isActive == true,
+				audiences = buildPublicAudiences(if P8 then P8.audiences else nil)
 			})
 		end
 		
 		local function startPublish()
-			-- upvalues: UseSignalStateResult4 (upval), publish (copy), v1 (ref), p1 (upval), ContentMaturityUtilsModule (upval), ExperienceGuidelinesModule (upval), t (upval), Debug (upval), UseSignalStateResult1 (upval)
+			-- upvalues: UseSignalStateResult4 (upval), publish (copy), SaveAndPublish (ref), Stage (upval), p1 (upval), ContentMaturityUtilsModule (upval), ExperienceGuidelinesModule (upval), t (upval), Debug (upval), UseSignalStateResult1 (upval)
 			if UseSignalStateResult4 == nil then
 				return publish()
 			else
-				v1 = "refresh_eligibility"
+				SaveAndPublish = Stage.RefreshEligibility
 				
 				return UseSignalStateResult4.refreshEligibility(p1.target.universeId):andThen(function()
-					-- upvalues: ContentMaturityUtilsModule (upval), p1 (upval), ExperienceGuidelinesModule (upval), t (upval), Debug (upval), v1 (upval), UseSignalStateResult1 (upval), publish (upval)
+					-- upvalues: ContentMaturityUtilsModule (upval), p1 (upval), ExperienceGuidelinesModule (upval), t (upval), Debug (upval), SaveAndPublish (upval), Stage (upval), UseSignalStateResult1 (upval), publish (upval)
 					if ContentMaturityUtilsModule.isSealBroken(p1.target.universeId) and ContentMaturityUtilsModule.isContentUnrated(p1.target.universeId) then
 						return ExperienceGuidelinesModule.getExperienceGuidelinesStore().refreshDetailedGuidelines(p1.target.universeId):andThen(function()
 							-- upvalues: t (upval)
@@ -305,7 +353,7 @@ return function(p1)
 							return t
 						end)
 					else
-						v1 = "refresh_summary"
+						SaveAndPublish = Stage.RefreshSummary
 						
 						return UseSignalStateResult1.refreshSummary(p1.target.universeId):andThen(function(Result)
 							-- upvalues: publish (upval)
@@ -341,9 +389,9 @@ return function(p1)
 			if UseSignalStateResult4 == nil then
 				Promise = publish()
 			else
-				v1 = "refresh_eligibility"
+				SaveAndPublish = Stage.RefreshEligibility
 				Promise = UseSignalStateResult4.refreshEligibility(p1.target.universeId):andThen(function()
-					-- upvalues: ContentMaturityUtilsModule (upval), p1 (upval), ExperienceGuidelinesModule (upval), t (upval), Debug (upval), v1 (ref), UseSignalStateResult1 (upval), publish (copy)
+					-- upvalues: ContentMaturityUtilsModule (upval), p1 (upval), ExperienceGuidelinesModule (upval), t (upval), Debug (upval), SaveAndPublish (ref), Stage (upval), UseSignalStateResult1 (upval), publish (copy)
 					if ContentMaturityUtilsModule.isSealBroken(p1.target.universeId) and ContentMaturityUtilsModule.isContentUnrated(p1.target.universeId) then
 						return ExperienceGuidelinesModule.getExperienceGuidelinesStore().refreshDetailedGuidelines(p1.target.universeId):andThen(function()
 							-- upvalues: t (upval)
@@ -358,7 +406,7 @@ return function(p1)
 							return t
 						end)
 					else
-						v1 = "refresh_summary"
+						SaveAndPublish = Stage.RefreshSummary
 						
 						return UseSignalStateResult1.refreshSummary(p1.target.universeId):andThen(function(Result)
 							-- upvalues: publish (upval)
@@ -369,37 +417,48 @@ return function(p1)
 			end
 		end
 		Promise:andThen(function(Result)
-			-- upvalues: t (upval), FFlagBuildAdUpsellModule (upval), GetAdUpsellEventStoreModule (upval), p1 (upval), Flag (ref), GetVersionInformationStoreModule (upval), PlaceId (copy), UseSignalStateResult (upval), FFlagBuildExperiencePlaytestCardPublishCtaModule (upval), UseStateResult2_1 (upval), PublishSuccess (upval)
-			if Result == t then return end
-			if typeof(Result) ~= "table" or Result.status ~= "success" or typeof(Result.version) ~= "string" or Result.version == "" then
-				error({
-					errorMessage = "save_and_publish expected status=success and a non-empty version; " .. `got status={tostring(Result.status)}, version={tostring(Result.version)}`
+			-- upvalues: t (upval), FFlagBuildExperienceActionOutcomeTelemetryModule (upval), ConfigurationActionTelemetryModule (upval), Action (upval), UseMemoResult1 (upval), FailureReason (upval), SaveAndPublish (ref), FFlagBuildAdUpsellModule (upval), GetAdUpsellEventStoreModule (upval), p1 (upval), Flag (ref), GetVersionInformationStoreModule (upval), PlaceId (copy), UseSignalStateResult (upval), FFlagBuildExperiencePlaytestCardPublishCtaModule (upval), UseStateResult2_1 (upval), PublishSuccess (upval)
+			if Result ~= t then
+				if typeof(Result) ~= "table" or Result.status ~= "success" or typeof(Result.version) ~= "string" or Result.version == "" then
+					error({
+						errorMessage = "save_and_publish expected status=success and a non-empty version; " .. `got status={tostring(Result.status)}, version={tostring(Result.version)}`
+					})
+				end
+				if FFlagBuildExperienceActionOutcomeTelemetryModule then
+					ConfigurationActionTelemetryModule.sendSuccess(Action.Publish, UseMemoResult1, nil, { version = tostring(Result.version) })
+				end
+				if FFlagBuildAdUpsellModule and (typeof(Result) == "table" and Result.status == "success" and typeof(Result.version) == "string" and Result.version ~= "") then
+					GetAdUpsellEventStoreModule(false).reportMenuPublish(p1.target.universeId, p1.target.sessionId, Result.version, Flag)
+				end
+				GetVersionInformationStoreModule().clearDraft(PlaceId)
+				UseSignalStateResult.fetchHistory(PlaceId)
+				
+				if FFlagBuildExperiencePlaytestCardPublishCtaModule then
+					UseSignalStateResult.fetchLiveVersion(PlaceId)
+				end
+				UseStateResult2_1(PublishSuccess)
+				
+				return
+			elseif FFlagBuildExperienceActionOutcomeTelemetryModule then
+				ConfigurationActionTelemetryModule.sendFailure(Action.Publish, UseMemoResult1, {
+					error = nil,
+					reason = FailureReason.RatingRequired,
+					stage = SaveAndPublish
 				})
 			end
-			if FFlagBuildAdUpsellModule and (typeof(Result) == "table" and Result.status == "success" and typeof(Result.version) == "string" and Result.version ~= "") then
-				GetAdUpsellEventStoreModule(false).reportMenuPublish(p1.target.universeId, p1.target.sessionId, Result.version, Flag)
-			end
-			GetVersionInformationStoreModule().clearDraft(PlaceId)
-			UseSignalStateResult.fetchHistory(PlaceId)
-			
-			if FFlagBuildExperiencePlaytestCardPublishCtaModule then
-				UseSignalStateResult.fetchLiveVersion(PlaceId)
-			end
-			UseStateResult2_1(PublishSuccess)
 		end):catch(function(Err)
-			-- upvalues: GameConfigurationActionsModule (upval), PublishAudienceError (upval), PublishError (upval), AccountTooNewError (upval), GetVersionInformationStoreModule (upval), PlaceId (copy), UseSignalStateResult (upval), FFlagBuildExperiencePlaytestCardPublishCtaModule (upval), Debug (upval), v1 (ref), p1 (upval), UseStateResult2_1 (upval)
+			-- upvalues: GameConfigurationActionsModule (upval), PublishAudienceError (upval), PublishError (upval), AccountTooNewError (upval), GetVersionInformationStoreModule (upval), PlaceId (copy), UseSignalStateResult (upval), FFlagBuildExperiencePlaytestCardPublishCtaModule (upval), getPublishFailure (upval), SaveAndPublish (ref), Debug (upval), p1 (upval), FFlagBuildExperienceActionOutcomeTelemetryModule (upval), ConfigurationActionTelemetryModule (upval), Action (upval), UseMemoResult1 (upval), UseStateResult2_1 (upval)
 			local IsTable = typeof(Err) == "table"
 			local IsStageMatch: boolean = IsTable and Err.stage == GameConfigurationActionsModule.PublishFailureStage.SetAudience
-			local IsNotVersionMatch: boolean = IsStageMatch
 			
-			if IsNotVersionMatch then
+			if IsStageMatch then
 				local PublishResult = Err.publishResult
-				IsNotVersionMatch = typeof(PublishResult) == "table" and (PublishResult.status == "success" and typeof(PublishResult.version) == "string") and PublishResult.version ~= ""
+				IsStageMatch = typeof(PublishResult) == "table" and (PublishResult.status == "success" and typeof(PublishResult.version) == "string") and PublishResult.version ~= ""
 			end
 			local IsResponseCodeMatch: boolean = IsTable and Err.responseCode == 16
-			local AccountTooNewError1 = if IsResponseCodeMatch then AccountTooNewError elseif IsNotVersionMatch then PublishAudienceError else PublishError
+			local AccountTooNewError1 = if IsResponseCodeMatch then AccountTooNewError elseif IsStageMatch then PublishAudienceError else PublishError
 			
-			if IsNotVersionMatch then
+			if IsStageMatch then
 				GetVersionInformationStoreModule().clearDraft(PlaceId)
 				UseSignalStateResult.fetchHistory(PlaceId)
 				
@@ -407,13 +466,18 @@ return function(p1)
 					UseSignalStateResult.fetchLiveVersion(PlaceId)
 				end
 			end
+			local PublishFailure = getPublishFailure(Err, SaveAndPublish)
 			Debug.log("warn", "build_experience publish failed", {
 				errorMessage = if IsTable and Err.errorMessage ~= nil then tostring(Err.errorMessage) else tostring(Err),
 				placeId = PlaceId,
 				responseCode = if IsTable then Err.responseCode else nil,
-				stage = if IsStageMatch then GameConfigurationActionsModule.PublishFailureStage.SetAudience else v1,
+				stage = PublishFailure.stage,
 				universeId = p1.target.universeId
 			})
+			
+			if FFlagBuildExperienceActionOutcomeTelemetryModule then
+				ConfigurationActionTelemetryModule.sendFailure(Action.Publish, UseMemoResult1, PublishFailure)
+			end
 			UseStateResult2_1(AccountTooNewError1)
 		end):finally(function()
 			-- upvalues: UseStateResult2 (upval)
@@ -424,7 +488,7 @@ return function(p1)
 		UseSignalStateResult, p1.target.placeId, p1.target.sessionId,
 		p1.target.universeId, UseSignalStateResult4, UseSignalStateResult1,
 		UseSignalStateResult2, AccountTooNewError, PublishAudienceError, PublishError,
-		PublishSuccess
+		PublishSuccess, UseMemoResult1
 	})
 	local ActionsName: string = `{p1.testId}.actions`
 	local UseGamePermissionsModuleResult = if FFlagBuildCheckGamePermissionsModule then UseGamePermissionsModule({
@@ -432,22 +496,8 @@ return function(p1)
 		isNewGame = p1.target.isNewGameTarget
 	}) else nil
 	local NoFFlagBuildCheckGamePermissionsModule = not FFlagBuildCheckGamePermissionsModule or UseGamePermissionsModuleResult.canPublish
-	local UseRefResult = if FFlagBuildPostPublishShareDismissibleModule then ReactModule.useRef(nil) else nil
-	local UseTokensResult = if FFlagBuildPostPublishShareDismissibleModule then FoundationModule.Hooks.useTokens() else nil
-	local UseClosableFocusRootModuleResult = if FFlagBuildPostPublishShareDismissibleModule then UseClosableFocusRootModule({
-		surfaceIdentifier = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum.PopUp,
-		isOpen = UseStateResult1 ~= "",
-		onClose = UseResult
-	}) else nil
-	local IsUsePreferredInputResultMatch = if FFlagBuildPostPublishShareDismissibleModule then ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Directional else nil
-	local Element = ReactModule.createElement(Snackbar, {
-		LayoutOrder = 1,
-		ref = if FFlagBuildPostPublishShareDismissibleModule then UseClosableFocusRootModuleResult else nil,
-		title = UseStateResult1,
-		action = if IsNotAudienceMatch then { text = Share, onActivated = UseResult2 } else nil,
-		onClose = if FFlagBuildPostPublishShareDismissibleModule then if IsUsePreferredInputResultMatch then nil else UseResult elseif IsNotAudienceMatch then nil else UseResult,
-		testId = `{p1.testId}.publish-snackbar`
-	})
+	local UseRefResult = ReactModule.useRef(nil)
+	local IsUsePreferredInputResultMatch = ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Directional
 	
 	return ReactModule.createElement(View, {
 		LayoutOrder = 3,
@@ -456,7 +506,7 @@ return function(p1)
 			["bg-surface-0"] = not FFlagBuildPublishNavigationSheetModule
 		}
 	}, {
-		PublishSnackbar = if FFlagBuildPostPublishShareDismissibleModule then ReactModule.createElement(Popover.Root, {
+		PublishSnackbar = ReactModule.createElement(Popover.Root, {
 			isOpen = UseStateResult1 ~= "",
 			testId = `{p1.testId}.publish-snackbar-popover`
 		}, {
@@ -465,18 +515,27 @@ return function(p1)
 				hasArrow = false,
 				selectionGroup = false,
 				align = PopoverAlign.Center,
-				backgroundStyle = UseTokensResult.Color.None,
+				backgroundStyle = FoundationModule.Hooks.useTokens().Color.None,
 				side = PopoverSide.Top
-			}, { Snackbar = Element })
-		}) else nil,
-		PublishSnackbarWrapper = if FFlagBuildPostPublishShareDismissibleModule then nil elseif UseStateResult1 == "" then nil else ReactModule.createElement(View, {
-			LayoutOrder = 1,
-			tag = "row align-x-center size-full-0 auto-y padding-x-large"
-		}, { PublishSnackbar = Element }),
+			}, {
+				Snackbar = ReactModule.createElement(Snackbar, {
+					LayoutOrder = 1,
+					ref = UseClosableFocusRootModule({
+						surfaceIdentifier = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum.PopUp,
+						isOpen = UseStateResult1 ~= "",
+						onClose = UseResult
+					}),
+					title = UseStateResult1,
+					action = if IsNotAudienceMatch then { text = Share, onActivated = UseResult2 } else nil,
+					onClose = if IsUsePreferredInputResultMatch then nil else UseResult,
+					testId = `{p1.testId}.publish-snackbar`
+				})
+			})
+		}),
 		Actions = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "row gap-small size-full-0 auto-y padding-y-medium",
-			ref = if FFlagBuildPostPublishShareDismissibleModule then UseRefResult else nil,
+			ref = UseRefResult,
 			testId = ActionsName
 		}, {
 			Publish = ReactModule.createElement(Button, {
@@ -494,7 +553,8 @@ return function(p1)
 			Preview = if p1.showPreviewButton == false then nil else ReactModule.createElement(PreviewButton, {
 				target = p1.target,
 				actionsTestId = ActionsName,
-				onPreview = p1.onPreview
+				onPreview = p1.onPreview,
+				telemetryIds = UseMemoResult1
 			})
 		}),
 		FriendsOnlyShareDialog = if UseStateResult3 == "friends" and Audience == PrivacyType.FriendsOnly then ReactModule.createElement(FriendsOnlyShareDialogModule, { onCancel = UseResult3, onShare = UseResult1 }) else nil

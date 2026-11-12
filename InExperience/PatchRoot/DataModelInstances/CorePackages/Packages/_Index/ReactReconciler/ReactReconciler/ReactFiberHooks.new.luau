@@ -20,10 +20,14 @@ local _ = require(Parent.Shared)
 local _ = require(script.Parent.ReactInternalTypes)
 local ReactFiberLaneModule = require(script.Parent.ReactFiberLane)
 local ReactHookEffectTagsModule = require(script.Parent.ReactHookEffectTags)
+local ReactSharedInternals = require(Parent.Shared).ReactSharedInternals
 local ReactFeatureFlags = require(Parent.Shared).ReactFeatureFlags
+local ReactCompilerRuntimeModule = require(Parent.ReactCompilerRuntime)
 local EnableDebugTracing = ReactFeatureFlags.enableDebugTracing
 local EnableSchedulingProfiler = ReactFeatureFlags.enableSchedulingProfiler
 local EnableNewReconciler = ReactFeatureFlags.enableNewReconciler
+local EnableCompilerRuntimeRelease1 = ReactFeatureFlags.enableCompilerRuntimeRelease1
+local EnableNoCloningCompilerMemoCache = ReactFeatureFlags.enableNoCloningCompilerMemoCache
 local EnableDoubleInvokingEffects = ReactFeatureFlags.enableDoubleInvokingEffects
 local EnableAllocationTrims = ReactFeatureFlags.enableAllocationTrims
 local EnableHookDoubleBuffering = ReactFeatureFlags.enableHookDoubleBuffering
@@ -71,7 +75,7 @@ local SetWorkInProgressVersionFunction = ReactMutableSourceNewModule.setWorkInPr
 local MarkSourceAsDirtyFunction = ReactMutableSourceNewModule.markSourceAsDirty
 local LogStateUpdateScheduledFunction = require(script.Parent.DebugTracing).logStateUpdateScheduled
 local MarkStateUpdateScheduledFunction = require(script.Parent.SchedulingProfiler).markStateUpdateScheduled
-local ReactCurrentDispatcher = require(Parent.Shared).ReactSharedInternals.ReactCurrentDispatcher
+local ReactCurrentDispatcher = ReactSharedInternals.ReactCurrentDispatcher
 local v1 = require(Parent.SafeFlags).createGetFFlag("ReactCleanQueueOnUpdateBailout")()
 local T = if DEV then {} else nil
 local Value = NoLanes
@@ -254,9 +258,14 @@ local ReactFiberHooksModule = {
 local Flag2 = false
 
 function ReactFiberHooksModule.resetHooksAfterThrow()
-	-- upvalues: ReactCurrentDispatcher (copy), ReactFiberHooksModule (copy), Flag (ref), Alternate (ref), Value (ref), NoLanes (copy), Alternate1 (ref), v2 (ref), EnableHookDoubleBuffering (copy), Next (ref), LastEffect (ref), DEV (copy), List (ref), Count (ref), v3 (ref), Flag2 (ref), Flag1 (ref)
+	-- upvalues: ReactCurrentDispatcher (copy), ReactFiberHooksModule (copy), EnableCompilerRuntimeRelease1 (copy), ReactSharedInternals (copy), Flag (ref), Alternate (ref), Value (ref), NoLanes (copy), Alternate1 (ref), v2 (ref), EnableHookDoubleBuffering (copy), Next (ref), LastEffect (ref), DEV (copy), List (ref), Count (ref), v3 (ref), Flag2 (ref), Flag1 (ref)
 	ReactCurrentDispatcher.current = ReactFiberHooksModule.ContextOnlyDispatcher
 	
+	if EnableCompilerRuntimeRelease1 then
+		local ReactCurrentCompilerRuntime = ReactSharedInternals.ReactCurrentCompilerRuntime
+		ReactCurrentCompilerRuntime.renderingComponent = nil
+		ReactCurrentCompilerRuntime.guardedCacheGranted = false
+	end
 	if Flag then
 		local MemoizedState = Alternate.memoizedState
 		while MemoizedState ~= nil do
@@ -404,6 +413,92 @@ local function updateWorkInProgressHook()
 		Alternate1 = MemoizedState
 	end
 	return v2
+end
+
+local _ = function()
+	return { lastEffect = nil, memoCache = nil }
+end
+
+local _ = function(FunctionComponentUpdateQueue)
+	-- upvalues: ReactCompilerRuntimeModule (copy)
+	FunctionComponentUpdateQueue.lastEffect = nil
+	local MemoCache = FunctionComponentUpdateQueue.memoCache
+	
+	if MemoCache ~= nil then
+		ReactCompilerRuntimeModule.resetMemoCache(MemoCache)
+	end
+end
+
+local function reuseFunctionComponentUpdateQueue()
+	-- upvalues: Alternate (ref), LastEffect (ref), Next (ref)
+	local Alternate1 = Alternate.alternate
+	local UpdateQueue = if Alternate1 == nil then nil else Alternate1.updateQueue
+	local Alternate2 = if UpdateQueue == nil then nil else UpdateQueue.alternate
+	
+	if Alternate2 ~= nil then
+		local LastEffect1 = Alternate2.lastEffect
+		LastEffect = LastEffect1
+		Next = if LastEffect1 == nil then nil else LastEffect1.next
+		Alternate2.lastEffect = nil
+		Alternate2.memoCache = nil
+		
+		return Alternate2
+	end
+	Next = nil
+	LastEffect = nil
+	
+	if UpdateQueue == nil then
+		return { lastEffect = nil }
+	else
+		local Alternate3 = { lastEffect = nil, alternate = UpdateQueue }
+		UpdateQueue.alternate = Alternate3
+		
+		return Alternate3
+	end
+end
+
+local function useMemoCache(Size)
+	-- upvalues: Alternate (ref), EnableNoCloningCompilerMemoCache (copy), ReactCompilerRuntimeModule (copy), EnableHookDoubleBuffering (copy), reuseFunctionComponentUpdateQueue (copy), DEV (copy), Console (copy)
+	local UpdateQueue = Alternate.updateQueue
+	local MemoCache = if UpdateQueue == nil then nil else UpdateQueue.memoCache
+	
+	if MemoCache == nil then
+		local Alternate1 = Alternate.alternate
+		
+		if Alternate1 ~= nil then
+			local UpdateQueue1 = Alternate1.updateQueue
+			
+			if UpdateQueue1 ~= nil and UpdateQueue1.memoCache ~= nil then
+				MemoCache = if EnableNoCloningCompilerMemoCache then UpdateQueue1.memoCache else ReactCompilerRuntimeModule.cloneMemoCache(UpdateQueue1.memoCache)
+			end
+		end
+	end
+	if MemoCache == nil then
+		MemoCache = ReactCompilerRuntimeModule.createMemoCache()
+	end
+	if UpdateQueue == nil then
+		UpdateQueue = if EnableHookDoubleBuffering then reuseFunctionComponentUpdateQueue() else { lastEffect = nil, memoCache = nil }
+		Alternate.updateQueue = UpdateQueue
+	end
+	local UpdateQueue2 = UpdateQueue
+	local MemoCache1 = MemoCache
+	
+	if UpdateQueue2.memoCache ~= MemoCache1 then
+		UpdateQueue2.memoCache = MemoCache1
+	end
+	local Index = MemoCache1.index
+	local Entry = MemoCache1.data[Index]
+	
+	if Entry == nil then
+		Entry = ReactCompilerRuntimeModule.createMemoCacheSlot(Size)
+		MemoCache1.data[Index] = Entry
+		MemoCache1.sizes[Index] = Size
+	elseif DEV and MemoCache1.sizes[Index] ~= Size then
+		Console.error("Expected a constant size argument for each invocation of useMemoCache. The previous cache was allocated with size %s but size %s was requested.", MemoCache1.sizes[Index], Size)
+	end
+	MemoCache1.index += 1
+	
+	return Entry
 end
 
 function basicStateReducer(p2, Callback)
@@ -734,35 +829,8 @@ function rerenderState(p2)
 	return rerenderReducer(basicStateReducer, p2)
 end
 
-local function reuseFunctionComponentUpdateQueue()
-	-- upvalues: Alternate (ref), LastEffect (ref), Next (ref)
-	local Alternate1 = Alternate.alternate
-	local UpdateQueue = if Alternate1 == nil then nil else Alternate1.updateQueue
-	local Alternate2 = if UpdateQueue == nil then nil else UpdateQueue.alternate
-	
-	if Alternate2 ~= nil then
-		local LastEffect1 = Alternate2.lastEffect
-		LastEffect = LastEffect1
-		Next = if LastEffect1 == nil then nil else LastEffect1.next
-		Alternate2.lastEffect = nil
-		
-		return Alternate2
-	end
-	Next = nil
-	LastEffect = nil
-	
-	if UpdateQueue == nil then
-		return { lastEffect = nil }
-	else
-		local Alternate3 = { lastEffect = nil, alternate = UpdateQueue }
-		UpdateQueue.alternate = Alternate3
-		
-		return Alternate3
-	end
-end
-
 local function pushEffect(Bits, Create, Destroy, Deps)
-	-- upvalues: EnableHookDoubleBuffering (copy), Alternate (ref), reuseFunctionComponentUpdateQueue (copy), Next (ref), LastEffect (ref)
+	-- upvalues: EnableHookDoubleBuffering (copy), Alternate (ref), reuseFunctionComponentUpdateQueue (copy), Next (ref), LastEffect (ref), EnableNoCloningCompilerMemoCache (copy)
 	if EnableHookDoubleBuffering then
 		local UpdateQueue = Alternate.updateQueue
 		
@@ -812,27 +880,27 @@ local function pushEffect(Bits, Create, Destroy, Deps)
 		local UpdateQueue1 = Alternate.updateQueue
 		
 		if UpdateQueue1 == nil then
-			UpdateQueue1 = { lastEffect = nil }
+			UpdateQueue1 = { lastEffect = nil, memoCache = nil }
 			Alternate.updateQueue = UpdateQueue1
-			LastEffect1.next = LastEffect1
-			UpdateQueue1.lastEffect = LastEffect1
+		elseif EnableNoCloningCompilerMemoCache then
+			local Alternate1 = Alternate.alternate
 			
-			return LastEffect1
+			if Alternate1 ~= nil and UpdateQueue1 == Alternate1.updateQueue then
+				UpdateQueue1 = { lastEffect = nil, memoCache = UpdateQueue1.memoCache }
+				Alternate.updateQueue = UpdateQueue1
+			end
 		end
 		local LastEffect4 = UpdateQueue1.lastEffect
 		
 		if LastEffect4 == nil then
-			UpdateQueue1.lastEffect = LastEffect1
 			LastEffect1.next = LastEffect1
-			
-			return LastEffect1
 		else
 			LastEffect4.next = LastEffect1
 			LastEffect1.next = LastEffect4.next
-			UpdateQueue1.lastEffect = LastEffect1
-			
-			return LastEffect1
 		end
+		UpdateQueue1.lastEffect = LastEffect1
+		
+		return LastEffect1
 	end
 end
 
@@ -1238,6 +1306,7 @@ local ContextOnlyDispatcher = {
 	useImperativeHandle = throwInvalidHookError,
 	useLayoutEffect = throwInvalidHookError,
 	useMemo = throwInvalidHookError,
+	useMemoCache = throwInvalidHookError,
 	useReducer = throwInvalidHookError,
 	useRef = throwInvalidHookError,
 	useBinding = throwInvalidHookError,
@@ -1256,6 +1325,7 @@ local config = {
 	useImperativeHandle = mountImperativeHandle,
 	useLayoutEffect = mountLayoutEffect,
 	useMemo = mountMemo,
+	useMemoCache = if EnableCompilerRuntimeRelease1 then useMemoCache else throwInvalidHookError,
 	useReducer = mountReducer,
 	useRef = mountRef,
 	useBinding = mountBinding,
@@ -1273,6 +1343,7 @@ local config1 = {
 	useImperativeHandle = updateImperativeHandle,
 	useLayoutEffect = updateLayoutEffect,
 	useMemo = updateMemo,
+	useMemoCache = if EnableCompilerRuntimeRelease1 then useMemoCache else throwInvalidHookError,
 	useReducer = updateReducer,
 	useRef = updateRef,
 	useBinding = updateBinding,
@@ -1290,6 +1361,7 @@ local config2 = {
 	useImperativeHandle = updateImperativeHandle,
 	useLayoutEffect = updateLayoutEffect,
 	useMemo = updateMemo,
+	useMemoCache = if EnableCompilerRuntimeRelease1 then useMemoCache else throwInvalidHookError,
 	useReducer = rerenderReducer,
 	useRef = updateRef,
 	useBinding = updateBinding,
@@ -1518,6 +1590,7 @@ if DEV then
 			end
 			return unpack(list, 2)
 		end,
+		useMemoCache = useMemoCache,
 		useReducer = function(p6, p7, p8)
 			-- upvalues: v3 (ref), DEV (copy), List (ref), ReactCurrentDispatcher (copy), Current3 (ref)
 			v3 = "useReducer"
@@ -1717,6 +1790,7 @@ if DEV then
 			end
 			return unpack(list, 2)
 		end,
+		useMemoCache = useMemoCache,
 		useReducer = function(p7, p8, p9)
 			-- upvalues: v3 (ref), ReactCurrentDispatcher (copy), Current3 (ref)
 			v3 = "useReducer"
@@ -1840,6 +1914,7 @@ if DEV then
 			end
 			return unpack(list, 2)
 		end,
+		useMemoCache = useMemoCache,
 		useReducer = function(p7, p8, p9)
 			-- upvalues: v3 (ref), ReactCurrentDispatcher (copy), Current4 (ref)
 			v3 = "useReducer"
@@ -1963,6 +2038,7 @@ if DEV then
 			end
 			return unpack(list, 2)
 		end,
+		useMemoCache = useMemoCache,
 		useReducer = function(p7, p8, p9)
 			-- upvalues: v3 (ref), ReactCurrentDispatcher (copy), Current5 (ref)
 			v3 = "useReducer"
@@ -2143,6 +2219,7 @@ if DEV then
 			end
 			return unpack(list, 2)
 		end,
+		useMemoCache = useMemoCache,
 		useReducer = function(p7, p8, p9)
 			-- upvalues: v3 (ref), Console (copy), DEV (copy), List (ref), ReactCurrentDispatcher (copy), Current3 (ref)
 			v3 = "useReducer"
@@ -2339,6 +2416,7 @@ if DEV then
 			end
 			return unpack(list, 2)
 		end,
+		useMemoCache = useMemoCache,
 		useReducer = function(p7, p8, p9)
 			-- upvalues: v3 (ref), Console (copy), ReactCurrentDispatcher (copy), Current4 (ref)
 			v3 = "useReducer"
@@ -2477,6 +2555,7 @@ if DEV then
 			end
 			return unpack(list, 2)
 		end,
+		useMemoCache = useMemoCache,
 		useReducer = function(p7, p8, p9)
 			-- upvalues: v3 (ref), Console (copy), ReactCurrentDispatcher (copy), Current4 (ref)
 			v3 = "useReducer"
@@ -2551,7 +2630,7 @@ if DEV then
 	}
 end
 function ReactFiberHooksModule.renderWithHooks(p6, p7, Callback, p8, p9, p10)
-	-- upvalues: Value (ref), Alternate (ref), DEV (copy), List (ref), Count (ref), ReactFeatureFlags (copy), NoLanes (copy), ReactCurrentDispatcher (copy), Current2 (ref), Current1 (ref), Current (ref), config (copy), config1 (copy), Flag1 (ref), Error1 (copy), Alternate1 (ref), v2 (ref), v4 (ref), config2 (copy), ContextOnlyDispatcher (copy), EnableHookDoubleBuffering (copy), Next (ref), LastEffect (ref), v3 (ref), Flag (ref), GetComponentNameFunction (copy)
+	-- upvalues: Value (ref), Alternate (ref), DEV (copy), List (ref), Count (ref), ReactFeatureFlags (copy), EnableHookDoubleBuffering (copy), EnableNoCloningCompilerMemoCache (copy), ReactCompilerRuntimeModule (copy), NoLanes (copy), ReactCurrentDispatcher (copy), Current2 (ref), Current1 (ref), Current (ref), config (copy), config1 (copy), ReactSharedInternals (copy), EnableCompilerRuntimeRelease1 (copy), Flag1 (ref), Error1 (copy), Alternate1 (ref), v2 (ref), v4 (ref), config2 (copy), ContextOnlyDispatcher (copy), Next (ref), LastEffect (ref), v3 (ref), Flag (ref), GetComponentNameFunction (copy)
 	Value = p10
 	Alternate = p7
 	
@@ -2563,12 +2642,32 @@ function ReactFiberHooksModule.renderWithHooks(p6, p7, Callback, p8, p9, p10)
 		if p7.memoizedState ~= nil then
 			p7.memoizedState = nil
 		end
-		if p7.updateQueue ~= nil then
+	else
+		p7.memoizedState = nil
+	end
+	local UpdateQueue = p7.updateQueue
+	
+	if EnableHookDoubleBuffering then
+		if UpdateQueue ~= nil then
 			p7.updateQueue = nil
 		end
 	else
-		p7.memoizedState = nil
-		p7.updateQueue = nil
+		local UpdateQueue1 = if p6 == nil then nil else p6.updateQueue
+		
+		if EnableNoCloningCompilerMemoCache and UpdateQueue ~= nil and UpdateQueue == UpdateQueue1 and UpdateQueue.memoCache ~= nil then
+			UpdateQueue.memoCache.index = 1
+		elseif UpdateQueue == nil or UpdateQueue == UpdateQueue1 then
+			if UpdateQueue ~= nil or not ReactFeatureFlags.enableWorkLoopTrims then
+				p7.updateQueue = nil
+			end
+		else
+			UpdateQueue.lastEffect = nil
+			local MemoCache = UpdateQueue.memoCache
+			
+			if MemoCache ~= nil then
+				ReactCompilerRuntimeModule.resetMemoCache(MemoCache)
+			end
+		end
 	end
 	p7.lanes = NoLanes
 	
@@ -2585,6 +2684,12 @@ function ReactFiberHooksModule.renderWithHooks(p6, p7, Callback, p8, p9, p10)
 	else
 		ReactCurrentDispatcher.current = (p6 == nil or p6.memoizedState == nil) and config or config1
 	end
+	local ReactCurrentCompilerRuntime = ReactSharedInternals.ReactCurrentCompilerRuntime
+	
+	if EnableCompilerRuntimeRelease1 then
+		ReactCurrentCompilerRuntime.renderingComponent = Callback
+		ReactCurrentCompilerRuntime.guardedCacheGranted = false
+	end
 	local CallbackResult = Callback(p8, p9)
 	
 	if Flag1 then
@@ -2597,17 +2702,39 @@ function ReactFiberHooksModule.renderWithHooks(p6, p7, Callback, p8, p9, p10)
 			Count1 += 1
 			Alternate1 = nil
 			v2 = nil
-			p7.updateQueue = nil
 			
+			if p7.updateQueue ~= nil then
+				local UpdateQueue2 = p7.updateQueue
+				local UpdateQueue21 = if p6 == nil then nil else p6.updateQueue
+				
+				if EnableNoCloningCompilerMemoCache and UpdateQueue2 == UpdateQueue21 and UpdateQueue2.memoCache ~= nil then
+					UpdateQueue2.memoCache.index = 1
+				else
+					UpdateQueue2.lastEffect = nil
+					local MemoCache = UpdateQueue2.memoCache
+					
+					if MemoCache ~= nil then
+						ReactCompilerRuntimeModule.resetMemoCache(MemoCache)
+					end
+				end
+			end
 			if DEV then
 				Count = 0
 			end
 			ReactCurrentDispatcher.current = DEV and v4 or config2
+			
+			if EnableCompilerRuntimeRelease1 then
+				ReactCurrentCompilerRuntime.guardedCacheGranted = false
+			end
 			CallbackResult = Callback(p8, p9)
 		until not Flag1
 	end
 	ReactCurrentDispatcher.current = ContextOnlyDispatcher
 	
+	if EnableCompilerRuntimeRelease1 then
+		ReactCurrentCompilerRuntime.renderingComponent = nil
+		ReactCurrentCompilerRuntime.guardedCacheGranted = false
+	end
 	if DEV then
 		p7._debugHookTypes = List
 	end
@@ -2629,12 +2756,12 @@ function ReactFiberHooksModule.renderWithHooks(p6, p7, Callback, p8, p9, p10)
 	Flag = false
 	
 	if HasNext then
-		local v13 = "unknown"
+		local ComponentName = "unknown"
 		
 		if CallbackResult and CallbackResult.type then
-			v13 = GetComponentNameFunction(CallbackResult.type) or v13
+			ComponentName = GetComponentNameFunction(CallbackResult.type) or ComponentName
 		end
-		error(Error1.new("Rendered fewer hooks than expected. This may be caused by an accidental " .. "early return statement. Inside '" .. v13 .. "'"))
+		error(Error1.new("Rendered fewer hooks than expected. This may be caused by an accidental " .. "early return statement. Inside '" .. ComponentName .. "'"))
 	end
 	return CallbackResult
 end

@@ -1,28 +1,25 @@
-﻿local Parent = script:FindFirstAncestor("GenericChallenges").Parent
+﻿local GenericChallenges = script:FindFirstAncestor("GenericChallenges")
+local Parent = GenericChallenges.Parent
 local HttpService = game:GetService("HttpService")
 local ReactModule = require(Parent.React)
-local Base64 = require(Parent.AuthCommon).Utils.Base64
 local RoCaptchaChallengeViewModule = require(script.Parent.RoCaptchaChallengeView)
 local RoCaptchaChallengeEventModule = require(script.Parent.RoCaptchaChallengeEvent)
 local RoCaptchaChallengeContextModule = require(script.Parent.RoCaptchaChallengeContext)
+local _ = require(GenericChallenges.Types.ChallengeMetadata)
 local ExperienceService = require(Parent.ExperienceService).ExperienceService
 local Default = require(Parent.LoggingProtocol).default
 
 return function(p1)
-	-- upvalues: ExperienceService (copy), Default (copy), ReactModule (copy), Base64 (copy), HttpService (copy), RoCaptchaChallengeEventModule (copy), RoCaptchaChallengeContextModule (copy), RoCaptchaChallengeViewModule (copy)
+	-- upvalues: ExperienceService (copy), Default (copy), ReactModule (copy), RoCaptchaChallengeEventModule (copy), RoCaptchaChallengeContextModule (copy), HttpService (copy), RoCaptchaChallengeViewModule (copy)
 	local ExperienceService1 = p1.experienceService or ExperienceService
 	local DesiredPlaceId = p1.desiredPlaceId or game.PlaceId
 	local Logging = p1.logging or Default
 	local ChallengeId = p1.challengeId
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: Base64 (upval), p1 (copy), HttpService (upval)
-		local DecodeResult = Base64.Decode(p1.challengeMetadata)
-		local Success, Result = pcall(function()
-			-- upvalues: HttpService (upval), DecodeResult (copy)
-			return HttpService:JSONDecode(DecodeResult)
-		end)
+		-- upvalues: p1 (copy)
+		local ChallengeMetadata = p1.challengeMetadata
 		
-		return Success and Result and tonumber(Result.challengePlaceId) or nil
+		return if ChallengeMetadata then tonumber(ChallengeMetadata.challengePlaceId) else nil
 	end, { p1.challengeMetadata })
 	local UseRefResult = ReactModule.useRef(p1.onChallengeFailed)
 	UseRefResult.current = p1.onChallengeFailed

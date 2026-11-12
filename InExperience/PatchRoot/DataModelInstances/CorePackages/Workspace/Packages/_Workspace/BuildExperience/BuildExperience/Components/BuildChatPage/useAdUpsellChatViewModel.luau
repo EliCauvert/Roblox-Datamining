@@ -233,14 +233,14 @@ return function(p1)
 				end
 			else
 				local AfterMessageKey = anchor.afterMessageKey
-				local NoAfterMessageKey = AfterMessageKey == nil
+				local NoUseMemoResultEntry = AfterMessageKey == nil
 				local UseMemoResultEntry = nil
 				
-				if not NoAfterMessageKey then
+				if not NoUseMemoResultEntry then
 					UseMemoResultEntry = UseMemoResult2[AfterMessageKey]
-					NoAfterMessageKey = UseMemoResultEntry == nil
+					NoUseMemoResultEntry = UseMemoResultEntry == nil
 				end
-				if not NoAfterMessageKey then
+				if not NoUseMemoResultEntry then
 					table.insert(List, {
 						id = anchor.id,
 						order = anchor.order,

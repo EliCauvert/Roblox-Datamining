@@ -232,10 +232,10 @@ return (ReactModule.forwardRef(function(p1, Ref)
 		})
 	end
 	local Frame = nil
-	local CornerRadius: UDim? = nil
+	local _UDim: UDim? = nil
 	
 	if JoinResult.layout == NavigationTabLayoutModule.Stacked then
-		CornerRadius = UDim.new(0, Tokens.Radius.Medium)
+		_UDim = UDim.new(0, Tokens.Radius.Medium)
 		local Size1200 = Tokens.Size.Size_1200
 		Frame = ReactModule.createElement("Frame", {
 			AutomaticSize = if HasWidth then Enum.AutomaticSize.Y else Enum.AutomaticSize.XY,
@@ -259,7 +259,7 @@ return (ReactModule.forwardRef(function(p1, Ref)
 			Label = Label1
 		})
 	elseif JoinResult.layout == NavigationTabLayoutModule.Inline then
-		CornerRadius = UDim.new(0, Tokens.Size.Size_300)
+		_UDim = UDim.new(0, Tokens.Size.Size_300)
 		local Press = if JoinResult.isChecked then Tokens.Color.State.Press else { Transparency = 1, Color3 = nil }
 		Frame = ReactModule.createElement("Frame", {
 			AutomaticSize = Enum.AutomaticSize.XY,
@@ -281,7 +281,7 @@ return (ReactModule.forwardRef(function(p1, Ref)
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				Padding = UDim.new(0, Tokens.Size.Size_300)
 			}),
-			UICorner = ReactModule.createElement("UICorner", { CornerRadius = CornerRadius }),
+			UICorner = ReactModule.createElement("UICorner", { CornerRadius = _UDim }),
 			Icon = RenderIconResult,
 			Label = Label1,
 			Badge = if JoinResult.badgeValue == nil then nil else ReactModule.createElement(StatusIndicator, {
@@ -305,7 +305,7 @@ return (ReactModule.forwardRef(function(p1, Ref)
 		StateLayer = ReactModule.createElement(StateLayerModule, {
 			affordance = "Background",
 			zIndex = 10,
-			cornerRadius = CornerRadius,
+			cornerRadius = _UDim,
 			onActivated = JoinResult.onActivated,
 			onStateChanged = if UIBloxConfigModule.addNavigationTabTooltipAndTruncation then UseResult2 else JoinResult.onStateChanged
 		}),

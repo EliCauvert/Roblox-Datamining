@@ -5,6 +5,10 @@ local _ = require(v1.types)
 
 return {
 	initiateRobloxSubscriptionPurchase = require(script.Flows.initiateRobloxSubscriptionPurchase),
+	resetRobloxSubscriptionPurchaseConfiguration = function()
+		require(script.Flows.resetRobloxSubscriptionPurchaseConfiguration)()
+	end,
+	openTTSheet = if require(v1.Flags.FFlagTTOnboardingSheet) then require(script.Flows.openTTSheet) else nil,
 	startRobloxSubscriptionPurchaseFromUpsell = require(script.Flows.startRobloxSubscriptionPurchaseFromUpsell),
 	SurfaceContext = require(v1.Enums.SurfaceContext),
 	SurfaceName = require(v1.Enums.SurfaceName),
@@ -12,6 +16,10 @@ return {
 	PurchaseClientSessionIdType = require(v1.Enums.PurchaseClientSessionIdType),
 	RobloxSubscriptionFlowCompleteReason = require(v1.Enums.RobloxSubscriptionFlowCompleteReason),
 	SubscriptionGrantType = require(v1.Enums.SubscriptionGrantType),
+	RobloxPlusSheetKind = require(v1.Enums.RobloxPlusSheetKind),
+	Flags = {
+		FFlagTTOnboardingSheet = require(v1.Flags.FFlagTTOnboardingSheet)
+	},
 	Components = {
 		BlackbirdUpsellBanner = require(v1.Components.BlackbirdUpsellBanner),
 		RobloxPlusUpsellBanner = require(v1.Components.RobloxPlusUpsellBanner)

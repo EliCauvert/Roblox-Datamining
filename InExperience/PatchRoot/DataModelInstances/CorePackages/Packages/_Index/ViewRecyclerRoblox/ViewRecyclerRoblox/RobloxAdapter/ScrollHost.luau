@@ -1,4 +1,5 @@
-﻿local FFlagViewRecyclerReact08 = require(script:FindFirstAncestor("ViewRecyclerRoblox").Flags).FFlagViewRecyclerReact08
+﻿local FFlagViewRecyclerReact084 = require(script:FindFirstAncestor("ViewRecyclerRoblox").Flags).FFlagViewRecyclerReact084
+local FFlagViewRecyclerReact08 = require(script:FindFirstAncestor("ViewRecyclerRoblox").Flags).FFlagViewRecyclerReact08
 local ViewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
 local ViewRecyclerModule = require(ViewRecyclerRoblox.Parent.ViewRecycler)
 local RunService = game:GetService("RunService")
@@ -12,18 +13,20 @@ end
 
 return {
 	new = function(p1)
-		-- upvalues: ScrollHostLifecyclePhaseModule (copy), FFlagViewRecyclerReact08 (copy), AxisMapModule (copy), ViewRecyclerModule (copy), RunService (copy), UserInputService (copy)
+		-- upvalues: ScrollHostLifecyclePhaseModule (copy), FFlagViewRecyclerReact084 (copy), FFlagViewRecyclerReact08 (copy), AxisMapModule (copy), ViewRecyclerModule (copy), RunService (copy), UserInputService (copy)
 		local GetCurrentFunction = p1.getCurrent
 		local Configuration = p1.getConfiguration()
 		local Axis = Configuration.axis
 		local Disconnected = ScrollHostLifecyclePhaseModule.Disconnected
 		local Count = 0
-		local v1 = nil
-		local CanvasSize = if FFlagViewRecyclerReact08 then nil else nil
+		local ScrollFrame = nil
+		local CanvasSize = nil
+		CanvasSize = if FFlagViewRecyclerReact084 then nil elseif FFlagViewRecyclerReact08 then nil else nil
 		local List = {}
 		local Count1 = 0
 		local ScrollOffset = nil
 		local ClampedValue = nil
+		local ScrollOffset1 = if FFlagViewRecyclerReact084 then nil else nil
 		local ClampedValue1 = nil
 		local CanvasOriginOffset = 0
 		local Count2 = 0
@@ -32,10 +35,16 @@ return {
 		local Flag = false
 		local Count3 = 0
 		local HeartbeatConnection1 = nil
-		local ScrollFrame = nil
+		local ScrollFrame1 = nil
 		local Axis1 = nil
-		local v2 = nil
+		local v1 = nil
+		local ViewportLength = nil
+		local HeartbeatConnection2 = nil
 		
+		if FFlagViewRecyclerReact084 then
+			ViewportLength = nil
+			HeartbeatConnection2 = nil
+		end
 		local function _()
 			-- upvalues: Configuration (ref), p1 (copy)
 			Configuration = p1.getConfiguration()
@@ -111,24 +120,34 @@ return {
 		end
 		
 		local _ = function(ViewportState)
-			-- upvalues: CanvasOriginOffset (ref), GetCurrentFunction (copy), ViewRecyclerModule (upval), p1 (copy), ScrollOffset (ref), ClampedValue (ref)
-			local ClampedValue1 = math.clamp(ViewportState.scrollOffset - CanvasOriginOffset, 0, (math.max(0, GetCurrentFunction().contentLength - ViewportState.viewportLength)))
+			-- upvalues: CanvasOriginOffset (ref), GetCurrentFunction (copy), ViewRecyclerModule (upval), p1 (copy), ScrollOffset (ref), ClampedValue (ref), FFlagViewRecyclerReact084 (upval), ScrollOffset1 (ref), Configuration (ref), ClampedValue1 (ref)
+			local ClampedValue2 = math.clamp(ViewportState.scrollOffset - CanvasOriginOffset, 0, (math.max(0, GetCurrentFunction().contentLength - ViewportState.viewportLength)))
 			p1.observeScrollOffset({
 				kind = ViewRecyclerModule.ScrollObservationKind.Programmatic,
-				offset = ClampedValue1
+				offset = ClampedValue2
 			})
 			ScrollOffset = ViewportState.scrollOffset
-			ClampedValue = ClampedValue1
+			ClampedValue = ClampedValue2
+			
+			if FFlagViewRecyclerReact084 then
+				ScrollOffset1 = ViewportState.scrollOffset
+				local OnScrollOffsetChangedFunction: (any) -> () = Configuration.onScrollOffsetChanged
+				
+				if OnScrollOffsetChangedFunction ~= nil and ClampedValue2 ~= ClampedValue1 then
+					OnScrollOffsetChangedFunction(ClampedValue2)
+					ClampedValue1 = ClampedValue2
+				end
+			end
 		end
 		
 		local function publishCanvas(): number
-			-- upvalues: GetCurrentFunction (copy), CanvasOriginOffset (ref), p1 (copy), ScrollFrame (ref), Axis1 (ref), Configuration (ref), v2 (ref), Disconnected (ref), ScrollHostLifecyclePhaseModule (upval), AxisMapModule (upval), Count1 (ref), getViewportState (copy), setHostScrollOffset (copy), ViewRecyclerModule (upval), ScrollOffset (ref), ClampedValue (ref)
+			-- upvalues: GetCurrentFunction (copy), CanvasOriginOffset (ref), p1 (copy), ScrollFrame1 (ref), Axis1 (ref), Configuration (ref), v1 (ref), Disconnected (ref), ScrollHostLifecyclePhaseModule (upval), AxisMapModule (upval), Count1 (ref), getViewportState (copy), setHostScrollOffset (copy), ViewRecyclerModule (upval), ScrollOffset (ref), ClampedValue (ref), FFlagViewRecyclerReact084 (upval), ScrollOffset1 (ref), ClampedValue1 (ref)
 			local Largest = math.max(0, GetCurrentFunction().contentLength + CanvasOriginOffset)
 			local _Instance = p1.getInstance()
 			
 			if _Instance ~= nil then
-				local IsAxisMatch: boolean = ScrollFrame == _Instance and Axis1 == Configuration.axis
-				local Largest1 = if IsAxisMatch then v2 else nil
+				local IsAxisMatch: boolean = ScrollFrame1 == _Instance and Axis1 == Configuration.axis
+				local Largest1 = if IsAxisMatch then v1 else nil
 				
 				if Largest1 == Largest then
 					return Largest
@@ -144,22 +163,32 @@ return {
 						_Instance.CanvasSize = AxisMapModule.canvasSizeFor(Largest, Configuration.axis)
 						
 						if ViewportState ~= nil then
-							local ClampedValue1 = math.clamp(ViewportState.scrollOffset, 0, (math.max(0, Largest - ViewportState.viewportLength)))
+							local ClampedValue2 = math.clamp(ViewportState.scrollOffset, 0, (math.max(0, Largest - ViewportState.viewportLength)))
 							
-							if ClampedValue1 ~= ViewportState.scrollOffset then
-								setHostScrollOffset(ClampedValue1)
+							if ClampedValue2 ~= ViewportState.scrollOffset then
+								setHostScrollOffset(ClampedValue2)
 								local config = {
-									scrollOffset = ClampedValue1,
+									scrollOffset = ClampedValue2,
 									viewportLength = ViewportState.viewportLength,
 									crossAxisLength = ViewportState.crossAxisLength
 								}
-								local ClampedValue2 = math.clamp(config.scrollOffset - CanvasOriginOffset, 0, (math.max(0, GetCurrentFunction().contentLength - config.viewportLength)))
+								local ClampedValue3 = math.clamp(config.scrollOffset - CanvasOriginOffset, 0, (math.max(0, GetCurrentFunction().contentLength - config.viewportLength)))
 								p1.observeScrollOffset({
 									kind = ViewRecyclerModule.ScrollObservationKind.Programmatic,
-									offset = ClampedValue2
+									offset = ClampedValue3
 								})
 								ScrollOffset = config.scrollOffset
-								ClampedValue = ClampedValue2
+								ClampedValue = ClampedValue3
+								
+								if FFlagViewRecyclerReact084 then
+									ScrollOffset1 = config.scrollOffset
+									local OnScrollOffsetChangedFunction: (any) -> () = Configuration.onScrollOffsetChanged
+									
+									if OnScrollOffsetChangedFunction ~= nil and ClampedValue3 ~= ClampedValue1 then
+										OnScrollOffsetChangedFunction(ClampedValue3)
+										ClampedValue1 = ClampedValue3
+									end
+								end
 							end
 						end
 						Count1 -= 1
@@ -167,29 +196,45 @@ return {
 				else
 					_Instance.CanvasSize = AxisMapModule.canvasSizeFor(Largest, Configuration.axis)
 				end
-				ScrollFrame = _Instance
+				ScrollFrame1 = _Instance
 				Axis1 = Configuration.axis
-				v2 = Largest
+				v1 = Largest
 			end
 			return Largest
 		end
 		
-		local function applyProgrammaticScrollOffset(ScrollOffset1)
-			-- upvalues: Disconnected (ref), ScrollHostLifecyclePhaseModule (upval), Count1 (ref), setHostScrollOffset (copy), p1 (copy), getViewportState (copy), CanvasOriginOffset (ref), GetCurrentFunction (copy), ViewRecyclerModule (upval), ScrollOffset (ref), ClampedValue (ref)
+		local PublishViewportSize = if FFlagViewRecyclerReact084 then function(ViewportState)
+			-- upvalues: ViewportLength (ref), p1 (copy)
+			ViewportLength = ViewportState.viewportLength
+			p1.setViewportSize(ViewportState.viewportLength, ViewportState.crossAxisLength)
+		end else nil
+		
+		local function applyProgrammaticScrollOffset(ClampedValue2)
+			-- upvalues: Disconnected (ref), ScrollHostLifecyclePhaseModule (upval), Count1 (ref), setHostScrollOffset (copy), p1 (copy), getViewportState (copy), CanvasOriginOffset (ref), GetCurrentFunction (copy), ViewRecyclerModule (upval), ScrollOffset (ref), ClampedValue (ref), FFlagViewRecyclerReact084 (upval), ScrollOffset1 (ref), Configuration (ref), ClampedValue1 (ref)
 			if Disconnected ~= ScrollHostLifecyclePhaseModule.Synchronized then return end
-			assert(ScrollOffset1 == ScrollOffset1 and (ScrollOffset1 ~= 1e999 and ScrollOffset1 ~= -1e999), "ScrollHost: invalid offset")
+			assert(ClampedValue2 == ClampedValue2 and (ClampedValue2 ~= 1e999 and ClampedValue2 ~= -1e999), "ScrollHost: invalid offset")
 			Count1 += 1
-			setHostScrollOffset(ScrollOffset1)
+			setHostScrollOffset(ClampedValue2)
 			local ViewportState = getViewportState((p1.getInstance()))
 			
 			if ViewportState ~= nil then
-				local ClampedValue1 = math.clamp(ViewportState.scrollOffset - CanvasOriginOffset, 0, (math.max(0, GetCurrentFunction().contentLength - ViewportState.viewportLength)))
+				local ClampedValue3 = math.clamp(ViewportState.scrollOffset - CanvasOriginOffset, 0, (math.max(0, GetCurrentFunction().contentLength - ViewportState.viewportLength)))
 				p1.observeScrollOffset({
 					kind = ViewRecyclerModule.ScrollObservationKind.Programmatic,
-					offset = ClampedValue1
+					offset = ClampedValue3
 				})
 				ScrollOffset = ViewportState.scrollOffset
-				ClampedValue = ClampedValue1
+				ClampedValue = ClampedValue3
+				
+				if FFlagViewRecyclerReact084 then
+					ScrollOffset1 = ViewportState.scrollOffset
+					local OnScrollOffsetChangedFunction: (any) -> () = Configuration.onScrollOffsetChanged
+					
+					if OnScrollOffsetChangedFunction ~= nil and ClampedValue3 ~= ClampedValue1 then
+						OnScrollOffsetChangedFunction(ClampedValue3)
+						ClampedValue1 = ClampedValue3
+					end
+				end
 			end
 			Count1 -= 1
 		end
@@ -213,6 +258,41 @@ return {
 			end
 		end
 		
+		local stopAnimationClock = nil
+		local Callback1: ((any) -> ())? = nil
+		local Callback: (() -> ())? = nil
+		
+		if FFlagViewRecyclerReact084 then
+			stopAnimationClock = function()
+				-- upvalues: HeartbeatConnection2 (ref)
+				if HeartbeatConnection2 ~= nil then
+					HeartbeatConnection2:Disconnect()
+					HeartbeatConnection2 = nil
+				end
+			end
+			
+			Callback1 = function(p2)
+				-- upvalues: Disconnected (ref), ScrollHostLifecyclePhaseModule (upval), stopAnimationClock (ref), HeartbeatConnection2 (ref), RunService (upval), p1 (copy)
+				if p2.animatedScrollTarget == nil or Disconnected ~= ScrollHostLifecyclePhaseModule.Synchronized then
+					stopAnimationClock()
+					
+					return
+				end
+				if HeartbeatConnection2 == nil then
+					HeartbeatConnection2 = RunService.Heartbeat:Connect(function(DeltaTime)
+						-- upvalues: p1 (upval)
+						p1.stepAnimatedScroll(DeltaTime)
+					end)
+				end
+			end
+			
+			Callback = function()
+				-- upvalues: HeartbeatConnection2 (ref), p1 (copy)
+				if HeartbeatConnection2 ~= nil then
+					p1.stopAnimatedScroll()
+				end
+			end
+		end
 		local _ = function()
 			-- upvalues: Flag (ref), Count3 (ref), HeartbeatConnection1 (ref), RunService (upval)
 			Flag = true
@@ -333,7 +413,10 @@ return {
 		end
 		
 		local function disconnectHost()
-			-- upvalues: HeartbeatConnection (ref), Count2 (ref), Flag (ref), HeartbeatConnection1 (ref), List (copy), Tbl (copy), FFlagViewRecyclerReact08 (upval), v1 (ref), CanvasSize (ref), ScrollFrame (ref), Axis1 (ref), v2 (ref), ScrollOffset (ref), ClampedValue (ref), ClampedValue1 (ref), CanvasOriginOffset (ref), p1 (copy)
+			-- upvalues: FFlagViewRecyclerReact084 (upval), Callback (ref), HeartbeatConnection (ref), Count2 (ref), Flag (ref), HeartbeatConnection1 (ref), List (copy), Tbl (copy), ScrollFrame (ref), CanvasSize (ref), FFlagViewRecyclerReact08 (upval), ScrollFrame1 (ref), Axis1 (ref), v1 (ref), ViewportLength (ref), ScrollOffset (ref), ClampedValue (ref), ScrollOffset1 (ref), ClampedValue1 (ref), CanvasOriginOffset (ref), p1 (copy)
+			if FFlagViewRecyclerReact084 then
+				Callback()
+			end
 			if HeartbeatConnection ~= nil then
 				HeartbeatConnection:Disconnect()
 				HeartbeatConnection = nil
@@ -350,22 +433,46 @@ return {
 			end
 			table.clear(List)
 			table.clear(Tbl)
+			local ScrollFrame2 = nil
+			local CanvasSize1 = nil
 			
-			if FFlagViewRecyclerReact08 then
-				local ScrollFrame1 = v1
-				local CanvasSize1 = CanvasSize
-				
-				if ScrollFrame1 ~= nil and CanvasSize1 ~= nil then
-					ScrollFrame1.CanvasSize = CanvasSize1
+			if FFlagViewRecyclerReact084 then
+				ScrollFrame2 = ScrollFrame
+				CanvasSize1 = CanvasSize
+			else
+				ScrollFrame2 = nil
+				CanvasSize1 = nil
+			end
+			if if FFlagViewRecyclerReact084 then ScrollFrame2 ~= nil and CanvasSize1 ~= nil else FFlagViewRecyclerReact08 then
+				if FFlagViewRecyclerReact084 then
+					ScrollFrame2.CanvasSize = CanvasSize1
+				else
+					local ScrollFrame3 = ScrollFrame
+					local CanvasSize2 = CanvasSize
+					
+					if ScrollFrame3 ~= nil and CanvasSize2 ~= nil then
+						ScrollFrame3.CanvasSize = CanvasSize2
+					end
+					CanvasSize = nil
 				end
+			end
+			if FFlagViewRecyclerReact084 then
 				CanvasSize = nil
 			end
-			v1 = nil
 			ScrollFrame = nil
+			ScrollFrame1 = nil
 			Axis1 = nil
-			v2 = nil
+			v1 = nil
+			
+			if FFlagViewRecyclerReact084 then
+				ViewportLength = nil
+			end
 			ScrollOffset = nil
 			ClampedValue = nil
+			
+			if FFlagViewRecyclerReact084 then
+				ScrollOffset1 = nil
+			end
 			ClampedValue1 = nil
 			
 			if CanvasOriginOffset == 0 then return end
@@ -377,56 +484,91 @@ return {
 			end
 		end
 		
-		local function synchronizeViewport(p2)
-			-- upvalues: Disconnected (ref), ScrollHostLifecyclePhaseModule (upval), getViewportState (copy), p1 (copy), FFlagViewRecyclerReact08 (upval), Count1 (ref), CanvasOriginOffset (ref), GetCurrentFunction (copy), ViewRecyclerModule (upval), ScrollOffset (ref), ClampedValue (ref), Configuration (ref)
+		local function synchronizeViewport(ScrollFrame)
+			-- upvalues: Disconnected (ref), ScrollHostLifecyclePhaseModule (upval), getViewportState (copy), FFlagViewRecyclerReact084 (upval), PublishViewportSize (ref), p1 (copy), FFlagViewRecyclerReact08 (upval), Count1 (ref), CanvasOriginOffset (ref), GetCurrentFunction (copy), ViewRecyclerModule (upval), ScrollOffset (ref), ClampedValue (ref), ScrollOffset1 (ref), Configuration (ref), ClampedValue1 (ref)
 			if Disconnected ~= ScrollHostLifecyclePhaseModule.Synchronized then return end
-			local ViewportState = getViewportState(p2)
+			local ViewportState = getViewportState(ScrollFrame)
 			
 			if ViewportState == nil then return end
-			p1.setViewportSize(ViewportState.viewportLength, ViewportState.crossAxisLength)
-			local ViewportState1 = if FFlagViewRecyclerReact08 then nil else getViewportState(p2)
-			
-			if if FFlagViewRecyclerReact08 then Count1 == 0 else ViewportState1 ~= nil then
-				if FFlagViewRecyclerReact08 then
-					local ViewportState2 = getViewportState(p2)
-					
-					if ViewportState2 ~= nil then
-						ViewportState = ViewportState2
+			if FFlagViewRecyclerReact084 then
+				PublishViewportSize(ViewportState)
+			else
+				p1.setViewportSize(ViewportState.viewportLength, ViewportState.crossAxisLength)
+				local ViewportState1 = if FFlagViewRecyclerReact08 then nil else getViewportState(ScrollFrame)
+				
+				if if FFlagViewRecyclerReact08 then Count1 == 0 else ViewportState1 ~= nil then
+					if FFlagViewRecyclerReact08 then
+						local ViewportState2 = getViewportState(ScrollFrame)
+						
+						if ViewportState2 ~= nil then
+							ViewportState = ViewportState2
+						end
+						local ClampedValue2 = math.clamp(ViewportState.scrollOffset - CanvasOriginOffset, 0, (math.max(0, GetCurrentFunction().contentLength - ViewportState.viewportLength)))
+						p1.observeScrollOffset({
+							kind = ViewRecyclerModule.ScrollObservationKind.Programmatic,
+							offset = ClampedValue2
+						})
+						ScrollOffset = ViewportState.scrollOffset
+						ClampedValue = ClampedValue2
+						
+						if FFlagViewRecyclerReact084 then
+							ScrollOffset1 = ViewportState.scrollOffset
+							local OnScrollOffsetChangedFunction: (any) -> () = Configuration.onScrollOffsetChanged
+							
+							if OnScrollOffsetChangedFunction ~= nil and ClampedValue2 ~= ClampedValue1 then
+								OnScrollOffsetChangedFunction(ClampedValue2)
+								ClampedValue1 = ClampedValue2
+							end
+						end
+					else
+						ViewportState = ViewportState1
 					end
-					local ClampedValue1 = math.clamp(ViewportState.scrollOffset - CanvasOriginOffset, 0, (math.max(0, GetCurrentFunction().contentLength - ViewportState.viewportLength)))
-					p1.observeScrollOffset({
-						kind = ViewRecyclerModule.ScrollObservationKind.Programmatic,
-						offset = ClampedValue1
-					})
-					ScrollOffset = ViewportState.scrollOffset
-					ClampedValue = ClampedValue1
-				else
-					ViewportState = ViewportState1
 				end
 			end
-			if not FFlagViewRecyclerReact08 then
-				local ClampedValue2 = math.clamp(ViewportState.scrollOffset - CanvasOriginOffset, 0, (math.max(0, GetCurrentFunction().contentLength - ViewportState.viewportLength)))
+			if if FFlagViewRecyclerReact084 then Count1 == 0 else not FFlagViewRecyclerReact08 then
+				if FFlagViewRecyclerReact084 then
+					local ViewportState3 = getViewportState(ScrollFrame)
+					
+					if ViewportState3 ~= nil then
+						ViewportState = ViewportState3
+					end
+				end
+				local ClampedValue3 = math.clamp(ViewportState.scrollOffset - CanvasOriginOffset, 0, (math.max(0, GetCurrentFunction().contentLength - ViewportState.viewportLength)))
 				p1.observeScrollOffset({
 					kind = ViewRecyclerModule.ScrollObservationKind.Programmatic,
-					offset = ClampedValue2
+					offset = ClampedValue3
 				})
 				ScrollOffset = ViewportState.scrollOffset
-				ClampedValue = ClampedValue2
+				ClampedValue = ClampedValue3
+				
+				if FFlagViewRecyclerReact084 then
+					ScrollOffset1 = ViewportState.scrollOffset
+					local OnScrollOffsetChangedFunction1: (any) -> () = Configuration.onScrollOffsetChanged
+					
+					if OnScrollOffsetChangedFunction1 ~= nil and ClampedValue3 ~= ClampedValue1 then
+						OnScrollOffsetChangedFunction1(ClampedValue3)
+						ClampedValue1 = ClampedValue3
+					end
+				end
 			end
 			local OnViewportChangedFunction: (any) -> () = Configuration.onViewportChanged
 			
 			if OnViewportChangedFunction ~= nil then
-				OnViewportChangedFunction(p2.AbsoluteWindowSize)
+				OnViewportChangedFunction(ScrollFrame.AbsoluteWindowSize)
 			end
 		end
 		
-		local function synchronizeScrollOffset(p2, Enabled)
-			-- upvalues: Disconnected (ref), ScrollHostLifecyclePhaseModule (upval), getViewportState (copy), CanvasOriginOffset (ref), GetCurrentFunction (copy), Count1 (ref), ScrollOffset (ref), Flag (ref), Count3 (ref), HeartbeatConnection1 (ref), RunService (upval), ClampedValue (ref), ViewRecyclerModule (upval), p1 (copy), Count2 (ref), settleCanvasOriginOffset (copy), Configuration (ref), ClampedValue1 (ref)
+		local function synchronizeScrollOffset(ScrollFrame, Enabled)
+			-- upvalues: Disconnected (ref), ScrollHostLifecyclePhaseModule (upval), getViewportState (copy), CanvasOriginOffset (ref), GetCurrentFunction (copy), FFlagViewRecyclerReact084 (upval), ScrollOffset1 (ref), Count1 (ref), ScrollOffset (ref), ViewportLength (ref), AxisMapModule (upval), Configuration (ref), PublishViewportSize (ref), ViewRecyclerModule (upval), p1 (copy), ClampedValue (ref), ClampedValue1 (ref), setHostScrollOffset (copy), Flag (ref), Count3 (ref), HeartbeatConnection1 (ref), RunService (upval), Count2 (ref), settleCanvasOriginOffset (copy)
 			if Disconnected ~= ScrollHostLifecyclePhaseModule.Synchronized then return end
-			local ViewportState = getViewportState(p2)
+			local ViewportState = getViewportState(ScrollFrame)
 			
 			if ViewportState == nil then return end
 			local ClampedValue2 = math.clamp(ViewportState.scrollOffset - CanvasOriginOffset, 0, (math.max(0, GetCurrentFunction().contentLength - ViewportState.viewportLength)))
+			
+			if FFlagViewRecyclerReact084 then
+				ScrollOffset1 = ViewportState.scrollOffset
+			end
 			local IsCountMatch = Count1 == 0
 			
 			if IsCountMatch and ScrollOffset ~= nil then
@@ -434,6 +576,45 @@ return {
 					IsCountMatch = false
 				else
 					ScrollOffset = nil
+				end
+			end
+			if FFlagViewRecyclerReact084 then
+				local ViewportLength1 = ViewportLength
+				
+				if IsCountMatch and ViewportLength1 ~= nil and ViewportState.viewportLength ~= ViewportLength1 then
+					local Largest = math.max(0, AxisMapModule.mainOf(ScrollFrame.AbsoluteCanvasSize, Configuration.axis) - ViewportState.viewportLength)
+					local IsMagnitudeBelow: boolean = ViewportLength1 < ViewportState.viewportLength and math.abs(ViewportState.scrollOffset - Largest) < 0.5
+					local ScrollOffsetDelta = ViewportState.scrollOffset - CanvasOriginOffset
+					PublishViewportSize(ViewportState)
+					ViewportState = getViewportState(ScrollFrame) or ViewportState
+					
+					if IsMagnitudeBelow then
+						local ClampedValue3 = math.clamp(ViewportState.scrollOffset - CanvasOriginOffset, 0, (math.max(0, GetCurrentFunction().contentLength - ViewportState.viewportLength)))
+						p1.observeScrollOffset({
+							kind = ViewRecyclerModule.ScrollObservationKind.Programmatic,
+							offset = ClampedValue3
+						})
+						ScrollOffset = ViewportState.scrollOffset
+						ClampedValue = ClampedValue3
+						
+						if FFlagViewRecyclerReact084 then
+							ScrollOffset1 = ViewportState.scrollOffset
+							local OnScrollOffsetChangedFunction1: (any) -> () = Configuration.onScrollOffsetChanged
+							
+							if OnScrollOffsetChangedFunction1 ~= nil and ClampedValue3 ~= ClampedValue1 then
+								OnScrollOffsetChangedFunction1(ClampedValue3)
+								ClampedValue1 = ClampedValue3
+							end
+						end
+						IsCountMatch = false
+					elseif ViewportState.scrollOffset ~= ScrollOffsetDelta + CanvasOriginOffset then
+						Count1 += 1
+						setHostScrollOffset(ScrollOffsetDelta + CanvasOriginOffset)
+						Count1 -= 1
+						ViewportState = getViewportState(ScrollFrame) or ViewportState
+						ScrollOffset = ViewportState.scrollOffset
+					end
+					ClampedValue2 = math.clamp(ViewportState.scrollOffset - CanvasOriginOffset, 0, (math.max(0, GetCurrentFunction().contentLength - ViewportState.viewportLength)))
 				end
 			end
 			if IsCountMatch and Enabled == true then
@@ -482,34 +663,58 @@ return {
 			return Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.MouseButton1
 		end
 		
-		local function connectHost(Object)
-			-- upvalues: v1 (ref), disconnectHost (copy), FFlagViewRecyclerReact08 (upval), CanvasSize (ref), List (copy), Configuration (ref), p1 (copy), publishCanvas (copy), synchronizeViewport (copy), synchronizeScrollOffset (copy), Tbl (copy), UserInputService (upval)
-			if v1 == Object then return end
+		local function connectHost(ScrollFrame1)
+			-- upvalues: ScrollFrame (ref), disconnectHost (copy), FFlagViewRecyclerReact084 (upval), CanvasSize (ref), FFlagViewRecyclerReact08 (upval), List (copy), Configuration (ref), p1 (copy), publishCanvas (copy), synchronizeViewport (copy), synchronizeScrollOffset (copy), RunService (upval), Disconnected (ref), ScrollHostLifecyclePhaseModule (upval), AxisMapModule (upval), ScrollOffset1 (ref), Tbl (copy), Callback (ref), UserInputService (upval)
+			if ScrollFrame == ScrollFrame1 then return end
 			disconnectHost()
-			v1 = Object
+			ScrollFrame = ScrollFrame1
 			
-			if Object == nil or typeof(Object) ~= "Instance" then return end
-			if FFlagViewRecyclerReact08 then
-				CanvasSize = Object.CanvasSize
+			if ScrollFrame1 == nil or typeof(ScrollFrame1) ~= "Instance" then return end
+			if FFlagViewRecyclerReact084 then
+				CanvasSize = ScrollFrame1.CanvasSize
+			elseif FFlagViewRecyclerReact08 then
+				CanvasSize = ScrollFrame1.CanvasSize
 			end
-			table.insert(List, Object:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function()
-				-- upvalues: Configuration (upval), p1 (upval), publishCanvas (upval), synchronizeViewport (upval), Object (copy)
+			table.insert(List, ScrollFrame1:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function()
+				-- upvalues: Configuration (upval), p1 (upval), publishCanvas (upval), synchronizeViewport (upval), ScrollFrame1 (copy)
 				Configuration = p1.getConfiguration()
 				publishCanvas()
-				synchronizeViewport(Object)
+				synchronizeViewport(ScrollFrame1)
 			end))
-			table.insert(List, Object:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
-				-- upvalues: Configuration (upval), p1 (upval), synchronizeScrollOffset (upval), Object (copy)
+			table.insert(List, ScrollFrame1:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
+				-- upvalues: Configuration (upval), p1 (upval), synchronizeScrollOffset (upval), ScrollFrame1 (copy)
 				Configuration = p1.getConfiguration()
-				synchronizeScrollOffset(Object, true)
+				synchronizeScrollOffset(ScrollFrame1, true)
 			end))
-			table.insert(List, Object.InputBegan:Connect(function(Input)
+			table.insert(List, (if FFlagViewRecyclerReact084 then RunService.RenderStepped else ScrollFrame1.InputBegan):Connect(if FFlagViewRecyclerReact084 then function()
+				-- upvalues: Disconnected (upval), ScrollHostLifecyclePhaseModule (upval), AxisMapModule (upval), ScrollFrame1 (copy), Configuration (upval), ScrollOffset1 (upval), p1 (upval), synchronizeScrollOffset (upval)
+				if Disconnected == ScrollHostLifecyclePhaseModule.Synchronized and AxisMapModule.mainOf(ScrollFrame1.CanvasPosition, Configuration.axis) ~= ScrollOffset1 then
+					Configuration = p1.getConfiguration()
+					synchronizeScrollOffset(ScrollFrame1, true)
+				end
+			end else function(Input)
 				-- upvalues: Tbl (upval)
 				if Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.MouseButton1 then
 					Tbl[Input] = true
 				end
 			end))
-			table.insert(List, Object.InputEnded:Connect(function(Input)
+			
+			if FFlagViewRecyclerReact084 then
+				table.insert(List, ScrollFrame1.InputBegan:Connect(function(Input)
+					-- upvalues: Tbl (upval), Callback (upval)
+					if Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.MouseButton1 then
+						Tbl[Input] = true
+						Callback()
+					end
+				end))
+				table.insert(List, ScrollFrame1.InputChanged:Connect(function(Input)
+					-- upvalues: Callback (upval)
+					if Input.UserInputType == Enum.UserInputType.MouseWheel then
+						Callback()
+					end
+				end))
+			end
+			table.insert(List, ScrollFrame1.InputEnded:Connect(function(Input)
 				-- upvalues: Tbl (upval)
 				Tbl[Input] = nil
 			end))
@@ -590,7 +795,10 @@ return {
 				end
 			end,
 			applyRecord = function(p2, Callback: () -> ())
-				-- upvalues: Disconnected (ref), ScrollHostLifecyclePhaseModule (upval), Configuration (ref), p1 (copy), CanvasOriginOffset (ref), Tbl (copy), AxisMapModule (upval), Flag (ref), publishCanvas (copy), Count2 (ref), HeartbeatConnection (ref), RunService (upval), settleCanvasOriginOffset (copy), ClampedValue (ref), ClampedValue1 (ref), applyProgrammaticScrollOffset (copy)
+				-- upvalues: FFlagViewRecyclerReact084 (upval), Callback1 (ref), Disconnected (ref), ScrollHostLifecyclePhaseModule (upval), Configuration (ref), p1 (copy), CanvasOriginOffset (ref), Tbl (copy), AxisMapModule (upval), Flag (ref), publishCanvas (copy), Count2 (ref), HeartbeatConnection (ref), RunService (upval), settleCanvasOriginOffset (copy), ClampedValue (ref), ClampedValue1 (ref), applyProgrammaticScrollOffset (copy)
+				if FFlagViewRecyclerReact084 then
+					Callback1(p2)
+				end
 				if Disconnected == ScrollHostLifecyclePhaseModule.Disconnected then
 					Callback()
 					

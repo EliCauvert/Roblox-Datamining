@@ -1,19 +1,25 @@
 ﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local UnifiedLoggingModule = require(SduiCoreSystem.Parent.UnifiedLogging)
+local Parent = SduiCoreSystem.Parent
+local UnifiedLoggingModule = require(Parent.UnifiedLogging)
 local SduiCollectionAnalyticsBuilderModule = require(SduiCoreSystem.Analytics.SduiCollectionAnalyticsBuilder)
 local _ = require(SduiCoreSystem.SduiBuilderTypes)
 local _ = require(SduiCoreSystem.SduiConfigTypes)
 local SduiErrorsModule = require(SduiCoreSystem.SduiErrors)
 local GetSduiImpressionHandlerRegistryModule = require(SduiCoreSystem.getSduiImpressionHandlerRegistry)
 local _ = require(SduiCoreSystem.SduiImpressionEventType)
+local FFlagLuaAppHomePerfLog = require(Parent.SharedFlags).FFlagLuaAppHomePerfLog
 
 return function(p1, p2, p3, p4, p5, p6, p7, p8)
-	-- upvalues: SduiErrorsModule (copy), SduiCollectionAnalyticsBuilderModule (copy), GetSduiImpressionHandlerRegistryModule (copy), UnifiedLoggingModule (copy)
+	-- upvalues: SduiErrorsModule (copy), SduiCollectionAnalyticsBuilderModule (copy), FFlagLuaAppHomePerfLog (copy), SduiCoreSystem (copy), GetSduiImpressionHandlerRegistryModule (copy), UnifiedLoggingModule (copy)
 	if not p4 then
 		p1.dependencies.logger.reportError(SduiErrorsModule.SduiErrorType.LogImpressionsMissingCollectionData, {}, p1.appPage)
 	end
 	local P3 = p4 or SduiCollectionAnalyticsBuilderModule.DUMMY_COLLECTION_DATA
 	assert(P3, "collectionAnalyticsData must exist")
+	
+	if FFlagLuaAppHomePerfLog then
+		require(SduiCoreSystem.Analytics.HomePerfLog).addTilesImpressed(#p2)
+	end
 	local ImpressionHandlerConfig = nil
 	
 	if p6 then

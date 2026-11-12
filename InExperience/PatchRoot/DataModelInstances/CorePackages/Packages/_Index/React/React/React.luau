@@ -2,25 +2,54 @@
 local Parent1 = Parent.Parent
 local ReactGlobalsModule = require(Parent1.ReactGlobals)
 local _ = require(Parent1.LuauPolyfill)
+local ReactMutableSourceModule = require(Parent.ReactMutableSource)
+local ReactSharedInternals = require(Parent1.Shared).ReactSharedInternals
 local ReactBaseClassesModule = require(Parent.ReactBaseClasses)
+local ReactChildrenModule = require(Parent.ReactChildren)
 local ReactElementValidatorModule = require(Parent.ReactElementValidator)
 local ReactElementModule = require(Parent.ReactElement)
+local ReactCreateRefModule = require(Parent.ReactCreateRef)
+local ReactCompilerRuntimeModule = require(Parent.ReactCompilerRuntime)
+local ReactForwardRefModule = require(Parent.ReactForwardRef)
 local ReactHooksModule = require(Parent.ReactHooks)
+local ReactMemoModule = require(Parent.ReactMemo)
+local ReactContextModule = require(Parent.ReactContext)
+local ReactLazyModule = require(Parent.ReactLazy)
 local ReactBindingRobloxModule = require(Parent["ReactBinding.roblox"])
-local ReactSymbols = require(Parent1.Shared).ReactSymbols
+local NoneRobloxModule = require(Parent["None.roblox"])
+local SharedModule = require(Parent1.Shared)
+local ReactSymbols = SharedModule.ReactSymbols
+local ReactFeatureFlags = SharedModule.ReactFeatureFlags
+local v1 = nil
+
+if ReactFeatureFlags.enableCompilerRuntimeRelease1 or ReactFeatureFlags.enableClassCompilerRuntimeRelease1 then
+	v1 = {}
+	
+	if ReactFeatureFlags.enableCompilerRuntimeRelease1 then
+		v1.c = ReactCompilerRuntimeModule.c
+		v1.cg = ReactCompilerRuntimeModule.cg
+	end
+	if ReactFeatureFlags.enableClassCompilerRuntimeRelease1 then
+		v1.cc = ReactCompilerRuntimeModule.cc
+	end
+end
 local DEV = ReactGlobalsModule.__DEV__ or ReactGlobalsModule.__DISABLE_ALL_WARNINGS_EXCEPT_PROP_VALIDATION__
+
+if v1 ~= nil and ReactFeatureFlags.enableCompilerRuntimeRelease1 and not DEV then
+	v1.jsx = ReactElementModule.createElementWithOwnedProps
+end
 local _ = require(Parent1.Shared)
 
 return {
-	Children = require(Parent.ReactChildren),
-	createMutableSource = require(Parent.ReactMutableSource),
-	createRef = require(Parent.ReactCreateRef).createRef,
+	Children = ReactChildrenModule,
+	createMutableSource = ReactMutableSourceModule,
+	createRef = ReactCreateRefModule.createRef,
 	Component = ReactBaseClassesModule.Component,
 	PureComponent = ReactBaseClassesModule.PureComponent,
-	createContext = require(Parent.ReactContext).createContext,
-	forwardRef = require(Parent.ReactForwardRef).forwardRef,
-	lazy = require(Parent.ReactLazy).lazy,
-	memo = require(Parent.ReactMemo).memo,
+	createContext = ReactContextModule.createContext,
+	forwardRef = ReactForwardRefModule.forwardRef,
+	lazy = ReactLazyModule.lazy,
+	memo = ReactMemoModule.memo,
 	useCallback = ReactHooksModule.useCallback,
 	useContext = ReactHooksModule.useContext,
 	useEffect = ReactHooksModule.useEffect,
@@ -41,11 +70,12 @@ return {
 	createElement = if DEV then ReactElementValidatorModule.createElementWithValidation else ReactElementModule.createElement,
 	cloneElement = if DEV then ReactElementValidatorModule.cloneElementWithValidation else ReactElementModule.cloneElement,
 	isValidElement = ReactElementModule.isValidElement,
-	__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = require(Parent1.Shared).ReactSharedInternals,
+	__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactSharedInternals,
+	__COMPILER_RUNTIME = v1,
 	unstable_LegacyHidden = ReactSymbols.REACT_LEGACY_HIDDEN_TYPE,
 	createBinding = ReactBindingRobloxModule.create,
 	joinBindings = ReactBindingRobloxModule.join,
-	None = require(Parent["None.roblox"]),
+	None = NoneRobloxModule,
 	__subscribeToBinding = ReactBindingRobloxModule.subscribe,
 	Event = require(Parent1.Shared).Event,
 	Change = require(Parent1.Shared).Change,

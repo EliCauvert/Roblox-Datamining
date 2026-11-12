@@ -3,19 +3,20 @@ local RenderNativeChallengeModule = require(script.Parent.RenderNativeChallenge)
 local FFlagEnableRenderNativeChallengeModule = require(script.Parent.Flags.FFlagEnableRenderNativeChallenge)
 local GenericChallenges = script:FindFirstAncestor("GenericChallenges")
 local ChallengeTypeModule = require(GenericChallenges.Types.ChallengeType)
+local DecodeChallengeMetadataModule = require(GenericChallenges.Utils.decodeChallengeMetadata)
 local Base64 = require(GenericChallenges.Parent.AuthCommon).Utils.Base64
 local HttpService = game:GetService("HttpService")
 local GenericChallengeService = game:GetService("GenericChallengeService")
 local FFlagEnableMutexOnGenericChallengeInterceptorMount = game:DefineFastFlag("FFlagEnableMutexOnGenericChallengeInterceptorMount", false)
 local Flag = false
 
-function challengeRequiredEventHandler(ChallengeId, ChallengeType, ChallengeMetadata)
-	-- upvalues: FFlagEnableRenderNativeChallengeModule (copy), RenderNativeChallengeModule (copy), RenderChallengeModule (copy), ChallengeTypeModule (copy), GenericChallengeService (copy), Base64 (copy), HttpService (copy)
+function challengeRequiredEventHandler(ChallengeId, ChallengeType, GenericChallengeMetadata)
+	-- upvalues: FFlagEnableRenderNativeChallengeModule (copy), RenderNativeChallengeModule (copy), DecodeChallengeMetadataModule (copy), RenderChallengeModule (copy), ChallengeTypeModule (copy), GenericChallengeService (copy), Base64 (copy), HttpService (copy)
 	if FFlagEnableRenderNativeChallengeModule and RenderNativeChallengeModule.canRenderNativeChallenge(ChallengeType) then
 		RenderNativeChallengeModule.render({
 			challengeId = ChallengeId,
 			challengeType = ChallengeType,
-			challengeMetadata = ChallengeMetadata
+			challengeMetadata = DecodeChallengeMetadataModule(GenericChallengeMetadata)
 		})
 		
 		return
@@ -26,7 +27,7 @@ function challengeRequiredEventHandler(ChallengeId, ChallengeType, ChallengeMeta
 			challengeParameters = {
 				genericChallengeId = ChallengeId,
 				genericChallengeType = ChallengeType,
-				genericChallengeMetadata = ChallengeMetadata
+				genericChallengeMetadata = GenericChallengeMetadata
 			},
 			callbacks = {
 				OnChallengeLoadFailed = function(_)

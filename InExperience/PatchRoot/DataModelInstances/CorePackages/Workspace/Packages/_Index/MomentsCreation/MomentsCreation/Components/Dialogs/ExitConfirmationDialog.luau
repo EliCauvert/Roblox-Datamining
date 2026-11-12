@@ -2,12 +2,18 @@
 local Parent = MomentsCreation.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local FFlagMomentsCreateAvatarPosts = require(Parent.SharedFlags).FFlagMomentsCreateAvatarPosts
 local Dialog = FoundationModule.Dialog
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseCreationFlowStringsModule = require(MomentsCreation.Hooks.useCreationFlowStrings)
+local CreationFlowStringsModule = require(MomentsCreation.creationFlowStrings)
 
 return function(p1)
-	-- upvalues: UseCreationFlowStringsModule (copy), ReactModule (copy), Dialog (copy), FoundationModule (copy)
+	-- upvalues: UseCreationFlowStringsModule (copy), FFlagMomentsCreateAvatarPosts (copy), UseLocalizationFunction (copy), CreationFlowStringsModule (copy), ReactModule (copy), Dialog (copy), FoundationModule (copy)
 	local UseCreationFlowStringsModuleResult = UseCreationFlowStringsModule()
+	local UseLocalizationResult = if FFlagMomentsCreateAvatarPosts then UseLocalizationFunction({
+		body = p1.bodyLocalizationKey or CreationFlowStringsModule.LeaveMomentCreationBody
+	}) else nil
 	
 	return ReactModule.createElement(Dialog.Root, {
 		disablePortal = false,
@@ -20,7 +26,7 @@ return function(p1)
 		}),
 		DialogContent = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
 			DialogText = ReactModule.createElement(Dialog.Text, {
-				Text = UseCreationFlowStringsModuleResult.LeaveMomentCreationBody
+				Text = if FFlagMomentsCreateAvatarPosts then UseLocalizationResult.body else UseCreationFlowStringsModuleResult.LeaveMomentCreationBody
 			})
 		}),
 		DialogActions = ReactModule.createElement(Dialog.Actions, {

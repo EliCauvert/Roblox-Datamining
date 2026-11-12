@@ -73,6 +73,9 @@ return {
 		if _roblox.application ~= nil then
 			config.application = _roblox.application
 		end
+		if _roblox.chatOpenId ~= nil then
+			config.chatOpenId = _roblox.chatOpenId
+		end
 		return {
 			cwd = _roblox.cwd,
 			mcpServers = _roblox.mcpServers,

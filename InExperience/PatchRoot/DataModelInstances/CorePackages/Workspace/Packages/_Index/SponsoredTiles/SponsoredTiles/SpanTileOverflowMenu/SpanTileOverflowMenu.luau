@@ -7,10 +7,10 @@ local GameTileContextualActions = GameTileModule.GameTileContextualActions
 local GameTileOverflowMenu = GameTileModule.GameTileOverflowMenu
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagLuaAppGameTileNotInterestedDirectAction = SharedFlagsModule.FFlagLuaAppGameTileNotInterestedDirectAction
-local FFlagLuaAppEnableHomepageOneByTwoTile = SharedFlagsModule.FFlagLuaAppEnableHomepageOneByTwoTile
+local FFlagLuaAppEnableNxMRoduxApportioning = SharedFlagsModule.FFlagLuaAppEnableNxMRoduxApportioning
 
 return function(p1)
-	-- upvalues: UseOverflowMenuOpenFunction (copy), ReactModule (copy), FFlagLuaAppEnableHomepageOneByTwoTile (copy), GameTileOverflowMenuActionFunction (copy), FFlagLuaAppGameTileNotInterestedDirectAction (copy), GameTileContextualActions (copy), GameTileOverflowMenu (copy)
+	-- upvalues: UseOverflowMenuOpenFunction (copy), ReactModule (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), GameTileOverflowMenuActionFunction (copy), FFlagLuaAppGameTileNotInterestedDirectAction (copy), GameTileContextualActions (copy), GameTileOverflowMenu (copy)
 	local HoverKey = p1.hoverKey
 	local UseOverflowMenuOpenResult = UseOverflowMenuOpenFunction(HoverKey)
 	local UseMemoResult = ReactModule.useMemo(function(): string
@@ -23,19 +23,19 @@ return function(p1)
 		return table.concat(List, ",")
 	end, { p1.availableMenuItems })
 	local UseResult = ReactModule.useCallback(function(p2, AvailableMenuItems)
-		-- upvalues: FFlagLuaAppEnableHomepageOneByTwoTile (upval), p1 (copy), GameTileOverflowMenuActionFunction (upval)
+		-- upvalues: FFlagLuaAppEnableNxMRoduxApportioning (upval), p1 (copy), GameTileOverflowMenuActionFunction (upval)
 		GameTileOverflowMenuActionFunction({
-			universeId = if FFlagLuaAppEnableHomepageOneByTwoTile then tostring(p1.universeId or "") else p1.universeId,
+			universeId = if FFlagLuaAppEnableNxMRoduxApportioning then tostring(p1.universeId or "") else p1.universeId,
 			sortId = p1.topicId,
 			actionType = if p2 then "GameTileOverflowMenuClosed" else "GameTileOverflowMenuOpened",
 			availableMenuItems = AvailableMenuItems,
-			contentType = if FFlagLuaAppEnableHomepageOneByTwoTile then p1.contentType else nil
+			contentType = if FFlagLuaAppEnableNxMRoduxApportioning then p1.contentType else nil
 		}, p1.appPage or "Unknown")
 	end, {
 		p1.universeId,
 		p1.appPage,
 		p1.topicId,
-		if FFlagLuaAppEnableHomepageOneByTwoTile then p1.contentType else nil
+		if FFlagLuaAppEnableNxMRoduxApportioning then p1.contentType else nil
 	})
 	local UseRefResult = ReactModule.useRef(false)
 	local UseResult1 = ReactModule.useCallback(function(p2, p3)
@@ -79,7 +79,7 @@ return function(p1)
 			sponsoredUserCohort = p1.sponsoredUserCohort,
 			adId = p1.adId,
 			availableMenuItems = p1.availableMenuItems,
-			contentType = if FFlagLuaAppEnableHomepageOneByTwoTile then p1.contentType else nil
+			contentType = if FFlagLuaAppEnableNxMRoduxApportioning then p1.contentType else nil
 		})
 	}) else nil
 end

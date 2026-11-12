@@ -1,16 +1,19 @@
 ﻿local SocialServerDrivenUi = script:FindFirstAncestor("SocialServerDrivenUi")
 local Parent = SocialServerDrivenUi.Parent
 local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local PYMKCarouselModule = require(Parent.PYMKCarousel)
-local FriendRecommendations = require(Parent.RecommendationsStore).FriendRecommendations
+local FriendRecommendations = require(Parent.DataHydration.FriendsRecommendations).FriendRecommendations
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local SetCurrentToastMessageFunction = require(Parent.ToastRodux).Actions.SetCurrentToastMessage
 local PymkNavigationBridgeModule = require(SocialServerDrivenUi.System.PymkNavigationBridge)
 local NormalizeDirectRecommendationsModule = require(SocialServerDrivenUi.Common.normalizeDirectRecommendations)
-local FFlagCreateConnectionsHub = require(Parent.SharedFlags).FFlagCreateConnectionsHub
+local FFlagCreateConnectionsHub = SharedFlagsModule.FFlagCreateConnectionsHub
+local FFlagLuaAppEnableSduiHomePage = SharedFlagsModule.FFlagLuaAppEnableSduiHomePage
+local FFlagPymkCarouselExtendProps = SharedFlagsModule.FFlagPymkCarouselExtendProps
 local t = {}
 
 local function readRecommendationHydration(Items, Store, p1)
@@ -27,23 +30,24 @@ local function readRecommendationHydration(Items, Store, p1)
 end
 
 return function(p2)
-	-- upvalues: t (copy), SduiCoreSystemModule (copy), FriendRecommendations (copy), ReactModule (copy), SignalsModule (copy), NormalizeDirectRecommendationsModule (copy), readRecommendationHydration (copy), SignalsReactModule (copy), PymkNavigationBridgeModule (copy), SetCurrentToastMessageFunction (copy), FFlagCreateConnectionsHub (copy), AppPage (copy), PYMKCarouselModule (copy)
+	-- upvalues: t (copy), SduiCoreSystemModule (copy), FFlagPymkCarouselExtendProps (copy), FriendRecommendations (copy), ReactModule (copy), SignalsModule (copy), NormalizeDirectRecommendationsModule (copy), readRecommendationHydration (copy), SignalsReactModule (copy), PymkNavigationBridgeModule (copy), SetCurrentToastMessageFunction (copy), FFlagCreateConnectionsHub (copy), AppPage (copy), PYMKCarouselModule (copy), FFlagLuaAppEnableSduiHomePage (copy)
 	local Items = p2.items or t
 	local Dependencies = p2.sduiContext.dependencies
 	local Number: number = tonumber(SduiCoreSystemModule.findAnalyticsField("collectionPosition", p2.analyticsContext.analyticsData or {}, -1)) or -1
 	local StartRow = p2.startRow or -1
-	local Store = FriendRecommendations.getStore()
+	local Store = if FFlagPymkCarouselExtendProps then FriendRecommendations.getStore(p2.sduiContext.configKey) else FriendRecommendations.getStore()
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
+		-- upvalues: SignalsModule (upval), NormalizeDirectRecommendationsModule (upval), Items (copy), readRecommendationHydration (upval), Store (copy)
+		return SignalsModule.createComputed(function(p3)
+			-- upvalues: NormalizeDirectRecommendationsModule (upval), Items (upval), readRecommendationHydration (upval), Store (upval)
+			return NormalizeDirectRecommendationsModule(Items, (readRecommendationHydration(Items, Store, p3)))
+		end)
+	end, { Items, Store })))
 	
 	return ReactModule.createElement(PYMKCarouselModule.PYMKCarouselEntryPoint, {
 		key = p2.recommendationRequestId,
 		carouselTitle = p2.title or "",
-		recommendations = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
-			-- upvalues: SignalsModule (upval), NormalizeDirectRecommendationsModule (upval), Items (copy), readRecommendationHydration (upval), Store (copy)
-			return SignalsModule.createComputed(function(p3)
-				-- upvalues: NormalizeDirectRecommendationsModule (upval), Items (upval), readRecommendationHydration (upval), Store (upval)
-				return NormalizeDirectRecommendationsModule(Items, (readRecommendationHydration(Items, Store, p3)))
-			end)
-		end, { Items, Store }))),
+		recommendations = if FFlagPymkCarouselExtendProps then if FFlagLuaAppEnableSduiHomePage or p2.sduiContext.appPage ~= AppPage.Home then UseSignalStateResult else nil else UseSignalStateResult,
 		recommendationSessionId = p2.recommendationRequestId,
 		openProfilePeekView = ReactModule.useCallback(function(p3, p4)
 			-- upvalues: PymkNavigationBridgeModule (upval)
@@ -76,6 +80,8 @@ return function(p2)
 		end, { Number, p2.sduiContext.appPage, p2.sortId, StartRow }),
 		diagService = Dependencies.appAnalytics.Diag,
 		eventIngestService = Dependencies.eventIngest,
-		appCompositionEnabled = p2.sduiContext.appCompositionEnabled
+		appCompositionEnabled = p2.sduiContext.appCompositionEnabled,
+		onRecommendationsShown = if FFlagPymkCarouselExtendProps then p2.onRecommendationsShown else nil,
+		analyticsSurface = if FFlagPymkCarouselExtendProps then p2.analyticsSurface else nil
 	})
 end

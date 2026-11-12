@@ -4,6 +4,8 @@ local Parent = ServerTriggeredModals.Parent
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagEdpGameLeavePromptsHandlerEnabled = SharedFlagsModule.FFlagEdpGameLeavePromptsHandlerEnabled
 local FFlagSplitPaneEducationalTour = SharedFlagsModule.FFlagSplitPaneEducationalTour
+local FFlagPlusUpsellSheetHomePromptModule = require(ServerTriggeredModals.Flags.FFlagPlusUpsellSheetHomePrompt)
+local FFlagTTOnboardingSheet = require(Parent.RobloxSubscriptionPurchaseApp).Flags.FFlagTTOnboardingSheet
 local FFlagHomepagePromptsHalloween2026ThemeModule = require(ServerTriggeredModals.Flags.FFlagHomepagePromptsHalloween2026Theme)
 local FFlagAppThemeHalloween2026Module = require(Parent.SharedFlags.FFlagAppThemeHalloween2026)
 local FFlagAppThemeHalloween2026ForAllModule = require(Parent.SharedFlags.FFlagAppThemeHalloween2026ForAll)
@@ -12,6 +14,7 @@ local NotificationsUpsellModule = require(Parent.NotificationsUpsell)
 local ReactModule = require(Parent.React)
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local GetAppFeaturePoliciesFunction = require(Parent.UniversalAppPolicy).getAppFeaturePolicies
 local PromptsEntryPointModule = require(script.Parent.PromptsEntryPoint)
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local PushNotificationsUpsellPromptsClientAttributesTimeoutMs = game:DefineFastInt("PushNotificationsUpsellPromptsClientAttributesTimeoutMs", 1000)
@@ -39,11 +42,14 @@ local _ = function(p1)
 end
 
 local function getExistingHomepageClientAttributes()
-	-- upvalues: FFlagSplitPaneEducationalTour (copy), Parent (copy), AppStorageService (copy), FFlagHomepagePromptsHalloween2026ThemeModule (copy), FFlagAppThemeHalloween2026Module (copy), FFlagAppThemeHalloween2026ForAllModule (copy)
+	-- upvalues: FFlagSplitPaneEducationalTour (copy), Parent (copy), FFlagPlusUpsellSheetHomePromptModule (copy), FFlagTTOnboardingSheet (copy), GetAppFeaturePoliciesFunction (copy), AppStorageService (copy), FFlagHomepagePromptsHalloween2026ThemeModule (copy), FFlagAppThemeHalloween2026Module (copy), FFlagAppThemeHalloween2026ForAllModule (copy)
 	local t = {}
 	
 	if FFlagSplitPaneEducationalTour and require(Parent.SplitPane).isSplitPaneTourSupported() then
 		t.isSplitPaneTourSupported = "true"
+	end
+	if FFlagPlusUpsellSheetHomePromptModule and FFlagTTOnboardingSheet and not GetAppFeaturePoliciesFunction().getDisableBlackbirdEntrypoints() then
+		t.isPlusUpsellSheetPromptSupported = "true"
 	end
 	local Success, Result = pcall(AppStorageService.GetItem, AppStorageService, "KidsAccountHasResetToDefaultTheme")
 	

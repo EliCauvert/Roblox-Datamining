@@ -6,7 +6,6 @@ local ImageSetLabel = require(Parent.UIBlox).Core.ImageSet.ImageSetLabel
 local FoundationModule = require(Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local BaseCellModule = require(script.Parent.BaseCell)
 local _ = require(AppChat.types)
 local config = {
@@ -30,12 +29,12 @@ local config = {
 }
 
 return ReactModule.memo(function(p1)
-	-- upvalues: CryoModule (copy), config (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), ReactModule (copy), BaseCellModule (copy), ImageSetLabel (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), ReactModule (copy), BaseCellModule (copy), ImageSetLabel (copy), NormalizeFontFaceFunction (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local Style = UnionResult.style
 	local Theme = Style.Theme
 	local StyleFont = Style.Font
-	local UseTokensResult = if FoundationFontFaceMigration then UseTokensFunction() else nil
+	local UseTokensResult = UseTokensFunction()
 	local NoPrimaryIcon = UnionResult.primaryIcon == nil
 	
 	return ReactModule.createElement(BaseCellModule, {
@@ -102,8 +101,7 @@ return ReactModule.memo(function(p1)
 					AutomaticSize = Enum.AutomaticSize.Y,
 					Text = UnionResult.Text,
 					TextSize = StyleFont.Header2.RelativeSize * StyleFont.BaseSize,
-					Font = if FoundationFontFaceMigration then nil else StyleFont.Header2.Font,
-					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.TitleLarge.Font) else nil,
+					FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.TitleLarge.Font),
 					TextColor3 = Theme.TextEmphasis.Color,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextTruncate = Enum.TextTruncate.AtEnd
@@ -116,8 +114,7 @@ return ReactModule.memo(function(p1)
 					AutomaticSize = Enum.AutomaticSize.Y,
 					Text = UnionResult.SubTitleText,
 					TextSize = StyleFont.BodySmall.RelativeSize * StyleFont.BaseSize,
-					Font = if FoundationFontFaceMigration then nil else StyleFont.BodySmall.Font,
-					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.BodySmall.Font) else nil,
+					FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.BodySmall.Font),
 					TextColor3 = Theme.TextDefault.Color,
 					TextXAlignment = Enum.TextXAlignment.Left
 				}) else nil

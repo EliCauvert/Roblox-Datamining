@@ -1,9 +1,7 @@
-﻿local TextService = game:GetService("TextService")
-local SocialCarousel = script:FindFirstAncestor("SocialCarousel")
+﻿local SocialCarousel = script:FindFirstAncestor("SocialCarousel")
 local Parent = SocialCarousel.Parent
 local FoundationModule = require(Parent.Foundation)
 local GetTextSizeFunction = require(Parent.Style).GetTextSize
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local ReactModule = require(Parent.React)
 local Enums = FoundationModule.Enums
 local Image = FoundationModule.Image
@@ -19,19 +17,46 @@ local Radius = FoundationModule.Enums.Radius
 local FFlagSocialCarouselShowLoadingSkeletonModule = require(SocialCarousel.Flags.FFlagSocialCarouselShowLoadingSkeleton)
 local FFlagSocialCarouselUnselectableSkeletonModule = require(SocialCarousel.Flags.FFlagSocialCarouselUnselectableSkeleton)
 local FFlagSocialCarouselRemoveStrokeForAddFriendsModule = require(SocialCarousel.Flags.FFlagSocialCarouselRemoveStrokeForAddFriends)
+local FFlagSocialCarouselXSmallTileTextModule = require(SocialCarousel.Flags.FFlagSocialCarouselXSmallTileText)
+local FFlagSocialCarouselXXSmallTilesModule = require(SocialCarousel.Flags.FFlagSocialCarouselXXSmallTiles)
+local UseXSmallTileTypographyModule = require(SocialCarousel.Hooks.useXSmallTileTypography)
 local FIntSocalCarouselMaxNewRequestsCountModule = require(SocialCarousel.Flags.FIntSocalCarouselMaxNewRequestsCount)
 
 return function(p1)
-	-- upvalues: ReactModule (copy), UseTokensFunction (copy), FFlagSocialCarouselShowLoadingSkeletonModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), View (copy), Image (copy), Enums (copy), Text (copy), StatusIndicator (copy), StatusIndicatorVariant (copy), FIntSocalCarouselMaxNewRequestsCountModule (copy), FFlagSocialCarouselUnselectableSkeletonModule (copy), Skeleton (copy), Radius (copy), FFlagSocialCarouselRemoveStrokeForAddFriendsModule (copy), Icon (copy), IconSize (copy)
+	-- upvalues: ReactModule (copy), UseTokensFunction (copy), FFlagSocialCarouselXXSmallTilesModule (copy), FFlagSocialCarouselXSmallTileTextModule (copy), UseXSmallTileTypographyModule (copy), FFlagSocialCarouselShowLoadingSkeletonModule (copy), GetTextSizeFunction (copy), View (copy), Image (copy), Enums (copy), Text (copy), StatusIndicator (copy), StatusIndicatorVariant (copy), FIntSocalCarouselMaxNewRequestsCountModule (copy), FFlagSocialCarouselUnselectableSkeletonModule (copy), Skeleton (copy), Radius (copy), FFlagSocialCarouselRemoveStrokeForAddFriendsModule (copy), Icon (copy), IconSize (copy)
 	local TileRef = p1.tileRef or ReactModule.useRef(nil)
 	local UseTokensResult = UseTokensFunction()
+	local v1 = nil
+	local UseResult = nil
+	local v2 = nil
+	local UseResult1 = nil
+	
+	if FFlagSocialCarouselXXSmallTilesModule then
+		local UseBindingResult2
+		v1, UseBindingResult2 = ReactModule.useBinding(0)
+		UseResult = ReactModule.useCallback(function(Frame)
+			-- upvalues: UseBindingResult2 (copy), p1 (copy)
+			UseBindingResult2(Frame.AbsoluteSize.X * (p1.iconScale or 0))
+		end, { p1.iconScale })
+		local UseBindingResult2_1
+		v2, UseBindingResult2_1 = ReactModule.useBinding(0)
+		UseResult1 = ReactModule.useCallback(function(Frame)
+			-- upvalues: UseBindingResult2_1 (copy)
+			UseBindingResult2_1(Frame.AbsoluteSize.X)
+		end, {})
+	end
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local TitleSmall = UseTokensResult.Typography.TitleSmall
+	local UseXSmallTileTypographyModuleResult = if FFlagSocialCarouselXSmallTileTextModule then UseXSmallTileTypographyModule() else nil
+	local Title = if UseXSmallTileTypographyModuleResult then UseXSmallTileTypographyModuleResult.title else UseTokensResult.Typography.TitleSmall
+	local Label = if UseXSmallTileTypographyModuleResult then UseXSmallTileTypographyModuleResult.label else UseTokensResult.Typography.LabelSmall
 	local IsLoading = FFlagSocialCarouselShowLoadingSkeletonModule and p1.isLoading
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: p1 (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), TitleSmall (copy), TextService (upval)
-		return if p1.title then if FoundationFontFaceMigration then GetTextSizeFunction(p1.title, TitleSmall.FontSize, TitleSmall.Font, Vector2.new(500, 500), { addTemporaryPadding = false }) else TextService:GetTextSize(p1.title, TitleSmall.FontSize, TitleSmall.Font, Vector2.new(500, 500)) else Vector2.new(0, 0)
-	end, { p1.title })
+		-- upvalues: p1 (copy), GetTextSizeFunction (upval), Title (copy)
+		return if p1.title then GetTextSizeFunction(p1.title, Title.FontSize, Title.Font, Vector2.new(500, 500), { addTemporaryPadding = false }) else Vector2.new(0, 0)
+	end, {
+		p1.title,
+		if FFlagSocialCarouselXSmallTileTextModule or FFlagSocialCarouselXXSmallTilesModule then Title else nil
+	})
 	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), ReactModule (upval), View (upval), Image (upval)
 		return if p1.presenceIconEnabled or p1.titleIcon then if p1.presenceIconEnabled then ReactModule.createElement(View, {
@@ -44,20 +69,33 @@ return function(p1)
 		}) else nil else nil
 	end, { p1.titleIcon, p1.presenceIconEnabled })
 	local UseMemoResult2 = ReactModule.useMemo(function()
-		-- upvalues: TileRef (copy), UseMemoResult1 (copy), ReactModule (upval), UseMemoResult (copy)
-		return if TileRef.current then ReactModule.createElement("UISizeConstraint", {
+		-- upvalues: FFlagSocialCarouselXXSmallTilesModule (upval), v2 (ref), ReactModule (upval), UseMemoResult1 (copy), p1 (copy), UseMemoResult (copy), TileRef (copy)
+		return if FFlagSocialCarouselXXSmallTilesModule and v2 then ReactModule.createElement("UISizeConstraint", {
+			MaxSize = v2:map(function(p2): Vector2
+				-- upvalues: UseMemoResult1 (upval), p1 (upval), UseMemoResult (upval)
+				return Vector2.new(math.max(0, p2 - (if UseMemoResult1 then 16 else 0) + 2 * (p1.titleOverhang or 0)), UseMemoResult.Y)
+			end)
+		}) elseif TileRef.current then ReactModule.createElement("UISizeConstraint", {
 			MaxSize = Vector2.new(if UseMemoResult1 then TileRef.current.AbsoluteSize.X - 16 else TileRef.current.AbsoluteSize.X, UseMemoResult.Y)
 		}) else nil
-	end, { UseMemoResult })
+	end, {
+		UseMemoResult,
+		if FFlagSocialCarouselXXSmallTilesModule then p1.titleOverhang else nil,
+		if FFlagSocialCarouselXXSmallTilesModule then v2 else nil,
+		if FFlagSocialCarouselXXSmallTilesModule then UseMemoResult1 else nil
+	})
 	local UseMemoResult3 = ReactModule.useMemo(function()
-		-- upvalues: p1 (copy), ReactModule (upval), Text (upval), UseTokensResult (copy)
+		-- upvalues: p1 (copy), ReactModule (upval), Text (upval), Label (copy)
 		return if p1.subtitle then ReactModule.createElement(Text, {
 			tag = "size-full-0 auto-y clip text-truncate-end",
 			LayoutOrder = 3,
-			fontStyle = UseTokensResult.Typography.LabelSmall,
+			fontStyle = Label,
 			Text = p1.subtitle
 		}) else nil
-	end, { p1.subtitle })
+	end, {
+		p1.subtitle,
+		if FFlagSocialCarouselXSmallTileTextModule then Label else nil
+	})
 	local UseMemoResult4 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), ReactModule (upval), StatusIndicator (upval), StatusIndicatorVariant (upval), FIntSocalCarouselMaxNewRequestsCountModule (upval)
 		return if p1.badge then ReactModule.createElement(StatusIndicator, {
@@ -71,9 +109,11 @@ return function(p1)
 	
 	return ReactModule.createElement(View, {
 		tag = "auto-none",
+		testId = p1.testId,
 		Size = p1.itemSize,
 		LayoutOrder = p1.index,
 		ref = TileRef,
+		onAbsoluteSizeChanged = UseResult1,
 		onStateChanged = ReactModule.useCallback(function(Hover)
 			-- upvalues: UseStateResult2 (copy), Enums (upval)
 			UseStateResult2(Hover == Enums.ControlState.Hover or Hover == Enums.ControlState.Pressed)
@@ -108,9 +148,14 @@ return function(p1)
 					Transparency = UseTokensResult.Color.Stroke.Emphasis.Transparency,
 					Thickness = UseTokensResult.Stroke.Thick,
 					BorderStrokePosition = Enum.BorderStrokePosition.Inner
-				}
+				},
+				onAbsoluteSizeChanged = if FFlagSocialCarouselXXSmallTilesModule and p1.iconScale then UseResult else nil
 			}, {
-				Icon = if p1.icon then ReactModule.createElement(Icon, { name = p1.icon, size = IconSize.Large }) else nil
+				Icon = if p1.icon then ReactModule.createElement(Icon, {
+					name = p1.icon,
+					size = if FFlagSocialCarouselXXSmallTilesModule and p1.iconScale then v1 else IconSize.Large,
+					variant = if FFlagSocialCarouselXXSmallTilesModule then p1.iconVariant else nil
+				}) else nil
 			}),
 			TextContainer = ReactModule.createElement(View, {
 				tag = "size-full-0 row auto-y gap-xsmall align-x-center align-y-center",
@@ -120,7 +165,7 @@ return function(p1)
 				Title = if p1.title and not IsLoading then ReactModule.createElement(Text, {
 					tag = "auto-xy text-align-x-left clip text-truncate-end",
 					LayoutOrder = 2,
-					fontStyle = UseTokensResult.Typography.TitleSmall,
+					fontStyle = Title,
 					Text = p1.title
 				}, { UISizeConstraint = UseMemoResult2 }) else ReactModule.createElement(Skeleton, {
 					LayoutOrder = 2,

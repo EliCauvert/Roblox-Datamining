@@ -396,7 +396,9 @@ function CollapsingTextInputValidator.init(p1)
 			onFocusGained = p1.onTextInputBoxFocused,
 			onFocusLost = p1.onTextInputBoxFocusLost,
 			onReturnPressed = p1.props.onReturnPressedFromOnScreenKeyboard,
-			textBoxRef = p1.foundationTextBoxRef
+			textBoxRef = p1.foundationTextBoxRef,
+			inputRef = p1.props.foundationInputRef,
+			NextSelectionDown = p1.props.NextSelectionDown
 		})
 	end
 end

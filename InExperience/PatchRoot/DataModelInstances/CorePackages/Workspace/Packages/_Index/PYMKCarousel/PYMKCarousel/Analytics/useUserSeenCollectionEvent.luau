@@ -20,6 +20,7 @@ local FIntUserSeenCollectionBatchTimeMs = SharedFlagsModule.FIntUserSeenCollecti
 local FFlagLuaAppUserSeenCollectionUnifiedFields = SharedFlagsModule.FFlagLuaAppUserSeenCollectionUnifiedFields
 local FFlagLuaAppEnableSduiHomePage = SharedFlagsModule.FFlagLuaAppEnableSduiHomePage
 local FFlagPYMKCarouselStableSelectorsModule = require(Parent.Flags.FFlagPYMKCarouselStableSelectors)
+local FFlagPymkCarouselExtendProps = SharedFlagsModule.FFlagPymkCarouselExtendProps
 local Frozen = table.freeze({})
 local GetResult = if FFlagPymkCarouselPresenceStoreMigrationModule then DataHydrationModule.Presence.PresenceStore.get() else nil
 local GetResult1 = if FFlagMigrateFriendshipStatusesPYMKModule then DataHydrationModule.Friends.FriendsStore.get() else nil
@@ -32,7 +33,7 @@ local function _(p1)
 end
 
 return function(Callback, p1)
-	-- upvalues: FFlagMigrateFriendshipStatusesPYMKModule (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), ConstantsModule (copy), FFlagPYMKCarouselStableSelectorsModule (copy), Frozen (copy), FFlagLuaAppEnableSduiHomePage (copy), FFlagPymkCarouselPresenceStoreMigrationModule (copy), React (copy), BuildUserSeenCollectionPayloadFunction (copy), EventNamesModule (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (copy), HttpService (copy), RepeatValueFunction (copy), GetResult (copy), GetFriendStatusModule (copy), GetResult1 (copy), FormatRecommendationContextTypeFunction (copy), UseBatchedImpressionsFunction (copy), FIntUserSeenCollectionBatchTimeMs (copy)
+	-- upvalues: FFlagMigrateFriendshipStatusesPYMKModule (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), ConstantsModule (copy), FFlagPYMKCarouselStableSelectorsModule (copy), Frozen (copy), FFlagLuaAppEnableSduiHomePage (copy), FFlagPymkCarouselPresenceStoreMigrationModule (copy), React (copy), BuildUserSeenCollectionPayloadFunction (copy), EventNamesModule (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (copy), HttpService (copy), RepeatValueFunction (copy), GetResult (copy), GetFriendStatusModule (copy), GetResult1 (copy), FFlagPymkCarouselExtendProps (copy), FormatRecommendationContextTypeFunction (copy), UseBatchedImpressionsFunction (copy), FIntUserSeenCollectionBatchTimeMs (copy)
 	local UseSelectorResult = if FFlagMigrateFriendshipStatusesPYMKModule then nil else UseSelectorFunction(function(p2)
 		-- upvalues: GetDeepValueFunction (upval), ConstantsModule (upval), FFlagPYMKCarouselStableSelectorsModule (upval), Frozen (upval)
 		local DeepValue = GetDeepValueFunction(p2, string.format("%s.Friends.friendshipStatus", ConstantsModule.RODUX_KEY))
@@ -72,7 +73,7 @@ return function(Callback, p1)
 	local UseBatchedImpressionsResult = UseBatchedImpressionsFunction({
 		batchTimeMs = FIntUserSeenCollectionBatchTimeMs,
 		mapItem = React.useCallback(function(UserId, p2, p3)
-			-- upvalues: FFlagPymkCarouselPresenceStoreMigrationModule (upval), GetResult (upval), UseSelectorResult2 (copy), GetFriendStatusModule (upval), FFlagMigrateFriendshipStatusesPYMKModule (upval), GetResult1 (upval), UseSelectorResult (ref), FFlagLuaAppEnableSduiHomePage (upval), UseSelectorResult1 (ref), FormatRecommendationContextTypeFunction (upval)
+			-- upvalues: FFlagPymkCarouselPresenceStoreMigrationModule (upval), GetResult (upval), UseSelectorResult2 (copy), GetFriendStatusModule (upval), FFlagMigrateFriendshipStatusesPYMKModule (upval), GetResult1 (upval), UseSelectorResult (ref), FFlagPymkCarouselExtendProps (upval), FFlagLuaAppEnableSduiHomePage (upval), UseSelectorResult1 (ref), FormatRecommendationContextTypeFunction (upval)
 			if not p3 or p3.isButtonTile or p3.isTooltip then
 				return nil
 			end
@@ -92,7 +93,7 @@ return function(Callback, p1)
 			else
 				DataResult1 = UseSelectorResult[UserId]
 			end
-			config.friendStatus = GetFriendStatusModule(DataResult1, if FFlagLuaAppEnableSduiHomePage then p3.hasIncomingFriendRequest else UseSelectorResult1[UserId])
+			config.friendStatus = GetFriendStatusModule(DataResult1, if FFlagPymkCarouselExtendProps then if FFlagLuaAppEnableSduiHomePage or p3.hasIncomingFriendRequest ~= nil then p3.hasIncomingFriendRequest else UseSelectorResult1[UserId] elseif FFlagLuaAppEnableSduiHomePage then p3.hasIncomingFriendRequest else UseSelectorResult1[UserId])
 			config.recommendationContextType = if p3.recommendationContextType then FormatRecommendationContextTypeFunction(p3.recommendationContextType) else "None"
 			config.recommendationRank = p3.recommendationRank or -1
 			config.universeId = UniverseId

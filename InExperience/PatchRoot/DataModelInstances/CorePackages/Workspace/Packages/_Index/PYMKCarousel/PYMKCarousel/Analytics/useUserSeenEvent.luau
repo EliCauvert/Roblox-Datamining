@@ -13,6 +13,7 @@ local GetFFlagPYMKAddFriendsEntryFunction = DependenciesModule.getFFlagPYMKAddFr
 local FFlagMigrateFriendshipStatusesPYMKModule = require(Parent.Flags.FFlagMigrateFriendshipStatusesPYMK)
 local FFlagLuaAppEnableSduiHomePage = require(Parent1.SharedFlags).FFlagLuaAppEnableSduiHomePage
 local FFlagPYMKCarouselStableSelectorsModule = require(Parent.Flags.FFlagPYMKCarouselStableSelectors)
+local FFlagPymkCarouselExtendProps = require(Parent1.SharedFlags).FFlagPymkCarouselExtendProps
 local Frozen = table.freeze({})
 local GetResult = if FFlagMigrateFriendshipStatusesPYMKModule then require(Parent1.DataHydration).Friends.FriendsStore.get() else nil
 
@@ -24,7 +25,7 @@ local function _(p1)
 end
 
 return function(Callback)
-	-- upvalues: React (copy), FFlagMigrateFriendshipStatusesPYMKModule (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), ConstantsModule (copy), FFlagPYMKCarouselStableSelectorsModule (copy), Frozen (copy), FFlagLuaAppEnableSduiHomePage (copy), GetFFlagPYMKAddFriendsEntryFunction (copy), EventNamesModule (copy), RecommendationContextType (copy), GetFriendStatusModule (copy), GetResult (copy), Llama (copy)
+	-- upvalues: React (copy), FFlagMigrateFriendshipStatusesPYMKModule (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), ConstantsModule (copy), FFlagPYMKCarouselStableSelectorsModule (copy), Frozen (copy), FFlagLuaAppEnableSduiHomePage (copy), GetFFlagPYMKAddFriendsEntryFunction (copy), EventNamesModule (copy), RecommendationContextType (copy), GetFriendStatusModule (copy), GetResult (copy), FFlagPymkCarouselExtendProps (copy), Llama (copy)
 	local UseRefResult = React.useRef({})
 	local UseSelectorResult = if FFlagMigrateFriendshipStatusesPYMKModule then nil else UseSelectorFunction(function(p1)
 		-- upvalues: GetDeepValueFunction (upval), ConstantsModule (upval), FFlagPYMKCarouselStableSelectorsModule (upval), Frozen (upval)
@@ -56,7 +57,7 @@ return function(Callback)
 	end)
 	
 	return React.useMemo(function()
-		-- upvalues: UseRefResult (copy), GetFFlagPYMKAddFriendsEntryFunction (upval), Callback (copy), EventNamesModule (upval), RecommendationContextType (upval), GetFriendStatusModule (upval), FFlagMigrateFriendshipStatusesPYMKModule (upval), GetResult (upval), UseSelectorResult (ref), FFlagLuaAppEnableSduiHomePage (upval), UseSelectorResult1 (ref), UseSelectorResult2 (copy), Llama (upval)
+		-- upvalues: UseRefResult (copy), GetFFlagPYMKAddFriendsEntryFunction (upval), Callback (copy), EventNamesModule (upval), RecommendationContextType (upval), GetFriendStatusModule (upval), FFlagMigrateFriendshipStatusesPYMKModule (upval), GetResult (upval), UseSelectorResult (ref), FFlagPymkCarouselExtendProps (upval), FFlagLuaAppEnableSduiHomePage (upval), UseSelectorResult1 (ref), UseSelectorResult2 (copy), Llama (upval)
 		return {
 			{
 				viewabilityConfig = {
@@ -64,7 +65,7 @@ return function(Callback)
 					waitForInteraction = false
 				},
 				onViewableItemsChanged = function(p1)
-					-- upvalues: UseRefResult (upval), GetFFlagPYMKAddFriendsEntryFunction (upval), Callback (upval), EventNamesModule (upval), RecommendationContextType (upval), GetFriendStatusModule (upval), FFlagMigrateFriendshipStatusesPYMKModule (upval), GetResult (upval), UseSelectorResult (upval), FFlagLuaAppEnableSduiHomePage (upval), UseSelectorResult1 (upval), UseSelectorResult2 (upval), Llama (upval)
+					-- upvalues: UseRefResult (upval), GetFFlagPYMKAddFriendsEntryFunction (upval), Callback (upval), EventNamesModule (upval), RecommendationContextType (upval), GetFriendStatusModule (upval), FFlagMigrateFriendshipStatusesPYMKModule (upval), GetResult (upval), UseSelectorResult (upval), FFlagPymkCarouselExtendProps (upval), FFlagLuaAppEnableSduiHomePage (upval), UseSelectorResult1 (upval), UseSelectorResult2 (upval), Llama (upval)
 					for _, value in pairs(p1.changed) do
 						local Item = value.item
 						local Current = UseRefResult.current or {}
@@ -83,7 +84,7 @@ return function(Callback)
 							else
 								DataResult = UseSelectorResult[Item.id]
 							end
-							config.friendStatus = GetFriendStatusModule(DataResult, if FFlagLuaAppEnableSduiHomePage then Item.hasIncomingFriendRequest else UseSelectorResult1[Item.id])
+							config.friendStatus = GetFriendStatusModule(DataResult, if FFlagPymkCarouselExtendProps then if FFlagLuaAppEnableSduiHomePage or Item.hasIncomingFriendRequest ~= nil then Item.hasIncomingFriendRequest else UseSelectorResult1[Item.id] elseif FFlagLuaAppEnableSduiHomePage then Item.hasIncomingFriendRequest else UseSelectorResult1[Item.id])
 							config.recommendationContextType = Item.recommendationContextType
 							config.recommendationRank = Item.recommendationRank
 							config.absolutePosition = Item.absolutePosition

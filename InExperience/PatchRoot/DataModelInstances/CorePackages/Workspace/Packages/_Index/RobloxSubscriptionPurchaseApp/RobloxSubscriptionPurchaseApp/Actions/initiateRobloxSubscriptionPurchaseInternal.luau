@@ -17,6 +17,8 @@ local RobloxSubscriptionUpsellTelemetryModule = require(RobloxSubscriptionPurcha
 local TransitionToErrorModule = require(RobloxSubscriptionPurchaseApp.Actions.transitionToError)
 local FFlagRobloxPlusAmpSubscriptionCheckModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusAmpSubscriptionCheck)
 local FFlagEnablePlusReferralLandingSheet = require(Parent.SharedFlags).FFlagEnablePlusReferralLandingSheet
+local FFlagTTOnboardingSheetModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagTTOnboardingSheet)
+local RobloxPlusSheetKindModule = require(RobloxSubscriptionPurchaseApp.Enums.RobloxPlusSheetKind)
 local FetchReferralEligibilityModule = require(RobloxSubscriptionPurchaseApp.Network.fetchReferralEligibility)
 local ErrorReasonModule = require(RobloxSubscriptionPurchaseApp.Enums.ErrorReason)
 local AmpAccessResponseModule = require(RobloxSubscriptionPurchaseApp.Enums.AmpAccessResponse)
@@ -26,13 +28,18 @@ local config = {
 }
 
 function initiateRobloxSubscriptionPurchaseInternal(p1)
-	-- upvalues: LogRobloxSubscriptionUpsellCounterModule (copy), RobloxSubscriptionUpsellTelemetryModule (copy), RobloxSubscriptionStoreModule (copy), GetAppFeaturePoliciesFunction (copy), TransitionToErrorModule (copy), ErrorReasonModule (copy), PromptStateModule (copy), FFlagEnableSubscriptionPurchaseFlowEventIngestModule (copy), LogSubscriptionPurchaseFlowEventModule (copy), CreatePaymentSessionModule (copy), FFlagEnablePlusReferralLandingSheet (copy), FFlagRobloxSubscriptionProductsDirectFetchModule (copy), GetRobloxSubscriptionProductsDirectModule (copy), GetRobloxSubscriptionProductsModule (copy), FFlagRobloxPlusAmpSubscriptionCheckModule (copy), GetAmpFeatureAccessModule (copy), FetchReferralEligibilityModule (copy), PromiseModule (copy), AmpAccessResponseModule (copy), config (copy)
+	-- upvalues: LogRobloxSubscriptionUpsellCounterModule (copy), RobloxSubscriptionUpsellTelemetryModule (copy), RobloxSubscriptionStoreModule (copy), GetAppFeaturePoliciesFunction (copy), TransitionToErrorModule (copy), ErrorReasonModule (copy), FFlagTTOnboardingSheetModule (copy), RobloxPlusSheetKindModule (copy), PromptStateModule (copy), FFlagEnableSubscriptionPurchaseFlowEventIngestModule (copy), LogSubscriptionPurchaseFlowEventModule (copy), CreatePaymentSessionModule (copy), FFlagEnablePlusReferralLandingSheet (copy), FFlagRobloxSubscriptionProductsDirectFetchModule (copy), GetRobloxSubscriptionProductsDirectModule (copy), GetRobloxSubscriptionProductsModule (copy), FFlagRobloxPlusAmpSubscriptionCheckModule (copy), GetAmpFeatureAccessModule (copy), FetchReferralEligibilityModule (copy), PromiseModule (copy), AmpAccessResponseModule (copy), config (copy)
 	LogRobloxSubscriptionUpsellCounterModule(RobloxSubscriptionUpsellTelemetryModule.RobloxSubscriptionUpsellModalInitiatedCounter)
 	local GetResult = RobloxSubscriptionStoreModule.get()
 	local PurchaseUIOptions = GetResult.getPurchaseUIOptions()
 	
 	if (PurchaseUIOptions == nil or not PurchaseUIOptions.skipGuacPolicy) and GetAppFeaturePoliciesFunction().getDisableBlackbirdEntrypoints() then
 		TransitionToErrorModule(ErrorReasonModule.UnsupportedPlatform, "initiateRobloxSubscriptionPurchaseInternal")
+		
+		return
+	end
+	if FFlagTTOnboardingSheetModule and PurchaseUIOptions and PurchaseUIOptions.sheetKind == RobloxPlusSheetKindModule.TT then
+		GetResult.setPromptState(PromptStateModule.SubscriptionPurchaseUIReady)
 		
 		return
 	end

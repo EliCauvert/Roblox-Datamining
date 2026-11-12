@@ -1,7 +1,10 @@
 ﻿local AppChat = script:FindFirstAncestor("AppChat")
-local AppChatNetworkingModule = require(AppChat.Parent.AppChatNetworking)
+local Parent = AppChat.Parent
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local FFlagAppChatEnableReactions = require(Parent.SharedFlags).FFlagAppChatEnableReactions
 local AppChatPaginateForNewerMessages = require(AppChat.Logger):new("AppChat.paginateForNewerMessages")
 local _ = require(AppChat.Models.ConversationChannels)
+local GetMessageReactionsStoreModule = require(AppChat.Stores.GetMessageReactionsStore)
 local AppChatNewMessageFetchMaxDepth = game:DefineFastInt("AppChatNewMessageFetchMaxDepth", 10)
 
 local function _(p1, p2): boolean
@@ -9,9 +12,12 @@ local function _(p1, p2): boolean
 end
 
 local function fetchOlderMessages(p1, p2, p3)
-	-- upvalues: AppChatNewMessageFetchMaxDepth (copy), AppChatPaginateForNewerMessages (copy), AppChatNetworkingModule (copy), fetchOlderMessages (copy)
+	-- upvalues: FFlagAppChatEnableReactions (copy), GetMessageReactionsStoreModule (copy), AppChatNewMessageFetchMaxDepth (copy), AppChatPaginateForNewerMessages (copy), AppChatNetworkingModule (copy), fetchOlderMessages (copy)
 	return function(p4)
-		-- upvalues: p3 (copy), AppChatNewMessageFetchMaxDepth (upval), AppChatPaginateForNewerMessages (upval), p2 (copy), p1 (copy), AppChatNetworkingModule (upval), fetchOlderMessages (upval)
+		-- upvalues: FFlagAppChatEnableReactions (upval), p2 (copy), GetMessageReactionsStoreModule (upval), p3 (copy), AppChatNewMessageFetchMaxDepth (upval), AppChatPaginateForNewerMessages (upval), p1 (copy), AppChatNetworkingModule (upval), fetchOlderMessages (upval)
+		if FFlagAppChatEnableReactions and p2.responseBody then
+			GetMessageReactionsStoreModule(false).ingestMessageReactions(p2.responseBody.messages)
+		end
 		if AppChatNewMessageFetchMaxDepth <= p3 then
 			AppChatPaginateForNewerMessages:warning("Reached max depth {} of fetching new messages", AppChatNewMessageFetchMaxDepth)
 			
@@ -54,17 +60,20 @@ local function fetchOlderMessages(p1, p2, p3)
 end
 
 return function(p1)
-	-- upvalues: AppChatPaginateForNewerMessages (copy), AppChatNetworkingModule (copy), AppChatNewMessageFetchMaxDepth (copy), fetchOlderMessages (copy)
+	-- upvalues: AppChatPaginateForNewerMessages (copy), AppChatNetworkingModule (copy), FFlagAppChatEnableReactions (copy), GetMessageReactionsStoreModule (copy), AppChatNewMessageFetchMaxDepth (copy), fetchOlderMessages (copy)
 	return function(p2)
-		-- upvalues: AppChatPaginateForNewerMessages (upval), p1 (copy), AppChatNetworkingModule (upval), AppChatNewMessageFetchMaxDepth (upval), fetchOlderMessages (upval)
+		-- upvalues: AppChatPaginateForNewerMessages (upval), p1 (copy), AppChatNetworkingModule (upval), FFlagAppChatEnableReactions (upval), GetMessageReactionsStoreModule (upval), AppChatNewMessageFetchMaxDepth (upval), fetchOlderMessages (upval)
 		AppChatPaginateForNewerMessages:info("Starting to fetch newest messages for conversation: {}", p1.id)
 		
 		return p2:dispatch(AppChatNetworkingModule.rodux.GetOlderMessages.API(p1.id, nil)):andThen(function(Result)
-			-- upvalues: p2 (copy), p1 (upval), AppChatNewMessageFetchMaxDepth (upval), AppChatPaginateForNewerMessages (upval), AppChatNetworkingModule (upval), fetchOlderMessages (upval)
+			-- upvalues: p2 (copy), p1 (upval), FFlagAppChatEnableReactions (upval), GetMessageReactionsStoreModule (upval), AppChatNewMessageFetchMaxDepth (upval), AppChatPaginateForNewerMessages (upval), AppChatNetworkingModule (upval), fetchOlderMessages (upval)
 			local v1 = 0
 			
 			return p2:dispatch(function(p3)
-				-- upvalues: v1 (copy), AppChatNewMessageFetchMaxDepth (upval), AppChatPaginateForNewerMessages (upval), Result (copy), p1 (copy), AppChatNetworkingModule (upval), fetchOlderMessages (upval)
+				-- upvalues: FFlagAppChatEnableReactions (upval), Result (copy), GetMessageReactionsStoreModule (upval), v1 (copy), AppChatNewMessageFetchMaxDepth (upval), AppChatPaginateForNewerMessages (upval), p1 (copy), AppChatNetworkingModule (upval), fetchOlderMessages (upval)
+				if FFlagAppChatEnableReactions and Result.responseBody then
+					GetMessageReactionsStoreModule(false).ingestMessageReactions(Result.responseBody.messages)
+				end
 				if AppChatNewMessageFetchMaxDepth <= v1 then
 					AppChatPaginateForNewerMessages:warning("Reached max depth {} of fetching new messages", AppChatNewMessageFetchMaxDepth)
 					

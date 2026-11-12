@@ -1,6 +1,7 @@
 ﻿local Parent = script:FindFirstAncestor("SplitPane").Parent
 local RoactNavigationModule = require(Parent.RoactNavigation)
 local SplitPaneSlot = require(Parent.AppSplitView).Enums.SplitPaneSlot
+local FFlagAXFixSplitPaneHomeTryOnReset = require(Parent.SharedFlags).FFlagAXFixSplitPaneHomeTryOnReset
 local ViewState = require(Parent.Navigation).ViewState
 local TempRnSwitchNavigatorName = require(Parent.NavigationRodux).Constants.TempRnSwitchNavigatorName
 
@@ -28,23 +29,29 @@ local function resolveOptions(p1)
 end
 
 return function(p1): boolean
-	-- upvalues: ViewState (copy), resolveOptions (copy), SplitPaneSlot (copy)
+	-- upvalues: ViewState (copy), FFlagAXFixSplitPaneHomeTryOnReset (copy), resolveOptions (copy), SplitPaneSlot (copy)
 	for i = #p1, 1, -1 do
 		local v1 = p1[i]
-		local IsViewStateMatch = v1.viewState == ViewState.Closing
-		local SplitPaneEligibility = nil
 		
-		if not IsViewStateMatch then
-			local ResolveOptionsResult = resolveOptions(v1)
-			SplitPaneEligibility = ResolveOptionsResult.splitPaneEligibility
-			IsViewStateMatch = SplitPaneEligibility == nil and (ResolveOptionsResult.transparent or ResolveOptionsResult.overlayEnabled)
-		end
-		if not IsViewStateMatch then
-			if SplitPaneEligibility == SplitPaneSlot.Content then
-				return true
+		if v1.viewState == ViewState.Closing then
+			if FFlagAXFixSplitPaneHomeTryOnReset then
+				local ResolveOptionsResult = resolveOptions(v1)
+				
+				if ResolveOptionsResult.splitPaneEligibility == nil and not ResolveOptionsResult.transparent and not ResolveOptionsResult.overlayEnabled then
+					return false
+				end
 			end
-			if SplitPaneEligibility == nil then
-				return false
+		else
+			local ResolveOptionsResult = resolveOptions(v1)
+			local SplitPaneEligibility = ResolveOptionsResult.splitPaneEligibility
+			
+			if SplitPaneEligibility ~= nil or not ResolveOptionsResult.transparent and not ResolveOptionsResult.overlayEnabled then
+				if SplitPaneEligibility == SplitPaneSlot.Content then
+					return true
+				end
+				if SplitPaneEligibility == nil then
+					return false
+				end
 			end
 		end
 	end

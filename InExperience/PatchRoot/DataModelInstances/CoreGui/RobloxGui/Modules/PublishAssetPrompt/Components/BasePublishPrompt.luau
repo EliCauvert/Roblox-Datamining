@@ -11,9 +11,7 @@ local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
 local TModule = require(CorePackages.Packages.t)
 local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
 local UIBloxModule = require(CorePackages.Packages.UIBlox)
-local FoundationModule = require(CorePackages.Packages.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(CorePackages.Packages.Foundation).Utility.normalizeFontFace
 local WithStyleFunction = UIBloxModule.Style.withStyle
 local FullPageModal = UIBloxModule.App.Dialog.Modal.FullPageModal
 local Overlay = UIBloxModule.App.Dialog.Overlay
@@ -181,12 +179,11 @@ function BasePublishPrompt.didUpdate(p1, p2, p3)
 end
 
 function BasePublishPrompt.renderMiddle(p1, p2)
-	-- upvalues: WithStyleFunction (copy), RoactModule (copy), ConstantsModule (copy), LabeledTextBoxModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: WithStyleFunction (copy), RoactModule (copy), ConstantsModule (copy), LabeledTextBoxModule (copy), NormalizeFontFaceFunction (copy)
 	return WithStyleFunction(function(p3)
-		-- upvalues: RoactModule (upval), p1 (copy), ConstantsModule (upval), LabeledTextBoxModule (upval), p2 (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+		-- upvalues: RoactModule (upval), p1 (copy), ConstantsModule (upval), LabeledTextBoxModule (upval), p2 (copy), NormalizeFontFaceFunction (upval)
 		local _Font = p3.Font
 		local Theme = p3.Theme
-		local Footer = _Font.Footer
 		
 		return RoactModule.createFragment({
 			ScrollingFrame = RoactModule.createElement("ScrollingFrame", {
@@ -259,9 +256,8 @@ function BasePublishPrompt.renderMiddle(p1, p2)
 					TextWrapped = true,
 					Size = UDim2.fromScale(1, 1),
 					Text = p2.disclaimer,
-					Font = if FoundationFontFaceMigration then nil else Footer.Font,
-					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.CaptionSmall.Font) else nil,
-					TextSize = _Font.BaseSize * Footer.RelativeSize,
+					FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.CaptionSmall.Font),
+					TextSize = _Font.BaseSize * _Font.Footer.RelativeSize,
 					TextColor3 = Theme.TextDefault.Color
 				})
 			})

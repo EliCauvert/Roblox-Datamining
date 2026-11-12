@@ -20,7 +20,10 @@ local GetPostFeedItemIdModule = require(Moments.Utils.getPostFeedItemId)
 local FireAnalyticsEventFunction = MomentsCommonModule.Analytics.fireAnalyticsEvent
 local ReportMomentsEngagementFunction = MomentsCommonModule.Analytics.reportMomentsEngagement
 local EventNames = MomentsCommonModule.Analytics.EventNames
+local RecommendationSource = MomentsCommonModule.Analytics.RecommendationSource
 local ReportModalCovering = MomentsCommonModule.Media.reportModalCovering
+local AccountSettingsCoveringModule = require(Moments.Components.Feed.accountSettingsCovering)
+local GetMomentsCapabilitiesFunction = MomentsCommonModule.Stores.GetMomentsCapabilities
 local MakeFeedActionFieldsModule = require(Moments.Analytics.makeFeedActionFields)
 local MakeRecommendationAttributionModule = require(Moments.Analytics.makeRecommendationAttribution)
 local _ = require(Moments.Analytics.RecommendationContentType)
@@ -35,18 +38,26 @@ local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptim
 local FFlagMomentsServeEDPVideos = SharedFlagsModule.FFlagMomentsServeEDPVideos
 local MomentsUseSmallOverflowMenu = game:DefineFastFlag("MomentsUseSmallOverflowMenu", false)
 local MomentsReportButtonAnalytics = game:DefineFastFlag("MomentsReportButtonAnalytics", false)
+local FFlagMomentsPersonalizedRecommendationsEntryPointModule = require(Moments.Flags.FFlagMomentsPersonalizedRecommendationsEntryPoint)
 local FFlagMomentsCreatorAnalyticsModule = require(Moments.Flags.FFlagMomentsCreatorAnalytics)
 local FFlagMomentsRecommendationContentTypeModule = require(Moments.Flags.FFlagMomentsRecommendationContentType)
 local GetPostInsightsPageStoreModule = require(Moments.Components.PostInsights.getPostInsightsPageStore)
 local PostInsightsStringsModule = require(Moments.Components.PostInsights.postInsightsStrings)
 local PostInsightsCoachmarkModule = require(Moments.Components.PostInsights.PostInsightsCoachmark)
 local DismissPostInsightsCoachmarkModule = require(Moments.Components.PostInsights.dismissPostInsightsCoachmark)
+local FFlagMomentsOverflowButtonAnalyticsModule = require(Moments.Flags.FFlagMomentsOverflowButtonAnalytics)
 local GetFFlagMomentsCoachmarkPersistenceFunction = MomentsCommonModule.Flags.GetFFlagMomentsCoachmarkPersistence
 local _ = require(Moments.Components.Feed.Items.Moment.createMomentStore)
 local ReportMomentDialogModule = require(Moments.Components.Feed.ReportMomentDialog)
 local IpReportConfirmationDialogModule = require(Moments.Components.Feed.IpReportConfirmationDialog)
 local UseMomentsHostFunction = require(Moments.MomentsHostContext).useMomentsHost
 local LocalPlayer = game:GetService("Players").LocalPlayer
+
+local function _(p1): boolean
+	-- upvalues: LocalPlayer (copy)
+	return p1.creatorId == (if LocalPlayer then LocalPlayer.UserId else nil)
+end
+
 local config = {
 	showDetails = "Feature.Moments.Action.ShowDetails",
 	hideDetails = "Feature.Moments.Action.Hide",
@@ -57,12 +68,17 @@ local config = {
 	reportSubmittedTitle = "Feature.Moments.Label.ReportSubmittedTitle",
 	reportSubmittedBody = "Feature.Moments.Label.ReportSubmittedBody"
 }
+local Frozen = table.freeze({
+	label = "Feature.AccountSettings.Heading.Tab.PersonalizedRecommendations"
+})
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), config (copy), FFlagMomentsCreatorAnalyticsModule (copy), PostInsightsStringsModule (copy), UseFeedFunction (copy), FFlagMomentsServeEDPVideos (copy), UseMomentsHostFunction (copy), UseToggleStateFunction (copy), ReactModule (copy), UseMomentsSessionFunction (copy), GetMomentsPreferencesStoreModule (copy), GetModeratedItemsStoreModule (copy), GetToastStoreModule (copy), SignalsReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), CheckDebugAccessModule (copy), ReportMomentModule (copy), MakeRecommendationAttributionModule (copy), FFlagMomentsRecommendationContentTypeModule (copy), SignalActionTypeModule (copy), MakeFeedActionFieldsModule (copy), MomentsReportButtonAnalytics (copy), ReportMomentsEngagementFunction (copy), GetPostFeedItemIdModule (copy), ReportModalCovering (copy), GetFFlagMomentsCoachmarkPersistenceFunction (copy), DismissPostInsightsCoachmarkModule (copy), GetPostInsightsPageStoreModule (copy), LocalPlayer (copy), FoundationModule (copy), FFlagMomentsOptimisticProfilePending (copy), Menu (copy), MomentsUseSmallOverflowMenu (copy), IconButton (copy), ThreeDotsVertical (copy), PostInsightsCoachmarkModule (copy), ReportMomentDialogModule (copy), IpReportConfirmationDialogModule (copy), Moments (copy), View (copy), SpeakerSlash (copy), Speaker (copy)
+	-- upvalues: UseLocalizationFunction (copy), config (copy), FFlagMomentsCreatorAnalyticsModule (copy), PostInsightsStringsModule (copy), FFlagMomentsPersonalizedRecommendationsEntryPointModule (copy), Frozen (copy), UseFeedFunction (copy), SignalsReactModule (copy), GetMomentsCapabilitiesFunction (copy), FFlagMomentsServeEDPVideos (copy), UseMomentsHostFunction (copy), UseToggleStateFunction (copy), ReactModule (copy), FFlagMomentsOverflowButtonAnalyticsModule (copy), MakeFeedActionFieldsModule (copy), LocalPlayer (copy), FireAnalyticsEventFunction (copy), EventNames (copy), UseMomentsSessionFunction (copy), GetMomentsPreferencesStoreModule (copy), GetModeratedItemsStoreModule (copy), GetToastStoreModule (copy), CheckDebugAccessModule (copy), ReportMomentModule (copy), MakeRecommendationAttributionModule (copy), FFlagMomentsRecommendationContentTypeModule (copy), SignalActionTypeModule (copy), MomentsReportButtonAnalytics (copy), ReportMomentsEngagementFunction (copy), GetPostFeedItemIdModule (copy), ReportModalCovering (copy), GetFFlagMomentsCoachmarkPersistenceFunction (copy), DismissPostInsightsCoachmarkModule (copy), GetPostInsightsPageStoreModule (copy), Parent (copy), AccountSettingsCoveringModule (copy), RecommendationSource (copy), FoundationModule (copy), FFlagMomentsOptimisticProfilePending (copy), Menu (copy), MomentsUseSmallOverflowMenu (copy), IconButton (copy), ThreeDotsVertical (copy), PostInsightsCoachmarkModule (copy), ReportMomentDialogModule (copy), IpReportConfirmationDialogModule (copy), Moments (copy), View (copy), SpeakerSlash (copy), Speaker (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local Analytics = if FFlagMomentsCreatorAnalyticsModule then UseLocalizationFunction(PostInsightsStringsModule.MENU_KEYS).analytics else ""
+	local Label = if FFlagMomentsPersonalizedRecommendationsEntryPointModule then UseLocalizationFunction(Frozen).label else ""
 	local UseFeedResult = UseFeedFunction()
+	local UseSignalStateResult = if FFlagMomentsPersonalizedRecommendationsEntryPointModule then SignalsReactModule.useSignalState(GetMomentsCapabilitiesFunction(false).getCanShowPersonalizedRecommendationsEntryPoint) else false
 	local IsEdpVideo: boolean = FFlagMomentsServeEDPVideos and p1.moment.entityType == "edpVideo"
 	local OpenMomentsFeedReportFunction = UseMomentsHostFunction().openMomentsFeedReport
 	local UseToggleStateResult = UseToggleStateFunction()
@@ -99,25 +115,35 @@ return function(p1)
 	local UseStateResult1, UseStateResult2_2 = ReactModule.useState(false)
 	local ReportCode, v2 = ReactModule.useState("------")
 	local UseResult2 = ReactModule.useCallback(function()
-		-- upvalues: UseToggleStateResult (copy)
+		-- upvalues: UseToggleStateResult (copy), FFlagMomentsOverflowButtonAnalyticsModule (upval), p1 (copy), MakeFeedActionFieldsModule (upval), LocalPlayer (upval), FireAnalyticsEventFunction (upval), EventNames (upval)
 		if UseToggleStateResult.enabled then
 			UseToggleStateResult.disable()
 			
 			return
-		else
-			UseToggleStateResult.enable()
+		end
+		UseToggleStateResult.enable()
+		
+		if FFlagMomentsOverflowButtonAnalyticsModule then
+			local RecommendationMetadata = p1.moment.recommendationMetadata
+			local Overflow = MakeFeedActionFieldsModule(p1.moment.momentId, if RecommendationMetadata == nil then nil else RecommendationMetadata.feedItemId, if RecommendationMetadata == nil then nil else RecommendationMetadata.tracingId, "overflow")
+			
+			if Overflow ~= nil then
+				Overflow.isOwnMoment = tostring(p1.moment.creatorId == (if LocalPlayer then LocalPlayer.UserId else nil))
+				FireAnalyticsEventFunction(EventNames.FeedOverflowButtonPressed, Overflow)
+			end
 		end
 	end, {
 		UseToggleStateResult.enabled,
 		UseToggleStateResult.enable,
-		UseToggleStateResult.disable
+		UseToggleStateResult.disable,
+		if FFlagMomentsOverflowButtonAnalyticsModule then p1.moment else false
 	})
 	local UseMomentsSessionResult = UseMomentsSessionFunction()
 	local MomentsPreferencesStoreModule = GetMomentsPreferencesStoreModule(false)
 	local ModeratedItemsStoreModule = GetModeratedItemsStoreModule(false)
 	local ToastStoreModule = GetToastStoreModule(false)
-	local UseSignalStateResult = SignalsReactModule.useSignalState(UseMomentsSessionResult.getHideDetails)
-	local UseSignalStateResult1 = SignalsReactModule.useSignalState(MomentsPreferencesStoreModule.getMinimized)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(UseMomentsSessionResult.getHideDetails)
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState(MomentsPreferencesStoreModule.getMinimized)
 	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseToggleStateResult (copy), UseMomentsSessionResult (copy), FireAnalyticsEventFunction (upval), EventNames (upval), p1 (copy)
 		UseToggleStateResult.disable()
@@ -158,7 +184,7 @@ return function(p1)
 		local v5 = nil
 		
 		if not p4 then
-			v3, v4, v84 = pcall(function()
+			v3, v4, v96 = pcall(function()
 				-- upvalues: ReportMomentModule (upval), p1 (upval), p2 (copy)
 				return ReportMomentModule(p1.moment.recommendationMetadata.feedItemId, p2):await()
 			end)
@@ -261,9 +287,14 @@ return function(p1)
 		UseMomentsSessionResult.requestDeletion
 	})
 	local UseResult11 = if FFlagMomentsCreatorAnalyticsModule then ReactModule.useCallback(function()
-		-- upvalues: UseToggleStateResult (copy), GetFFlagMomentsCoachmarkPersistenceFunction (upval), DismissPostInsightsCoachmarkModule (upval), p1 (copy), GetPostInsightsPageStoreModule (upval)
+		-- upvalues: UseToggleStateResult (copy), p1 (copy), MakeFeedActionFieldsModule (upval), FireAnalyticsEventFunction (upval), EventNames (upval), GetFFlagMomentsCoachmarkPersistenceFunction (upval), DismissPostInsightsCoachmarkModule (upval), GetPostInsightsPageStoreModule (upval)
 		UseToggleStateResult.disable()
+		local RecommendationMetadata = p1.moment.recommendationMetadata
+		local Analytics = MakeFeedActionFieldsModule(p1.moment.momentId, if RecommendationMetadata == nil then nil else RecommendationMetadata.feedItemId, if RecommendationMetadata == nil then nil else RecommendationMetadata.tracingId, "analytics")
 		
+		if Analytics ~= nil then
+			FireAnalyticsEventFunction(EventNames.FeedAnalyticsButtonPressed, Analytics)
+		end
 		if GetFFlagMomentsCoachmarkPersistenceFunction() then
 			DismissPostInsightsCoachmarkModule()
 		end
@@ -275,7 +306,26 @@ return function(p1)
 		p1.momentStore or false,
 		UseToggleStateResult.disable
 	}) else nil
-	local UseResult12 = ReactModule.useCallback(function()
+	local UseResult12 = if FFlagMomentsPersonalizedRecommendationsEntryPointModule then ReactModule.useCallback(function()
+		-- upvalues: UseToggleStateResult (copy), p1 (copy), MakeFeedActionFieldsModule (upval), FireAnalyticsEventFunction (upval), EventNames (upval), Parent (upval), AccountSettingsCoveringModule (upval)
+		UseToggleStateResult.disable()
+		local RecommendationMetadata = p1.moment.recommendationMetadata
+		local PersonalizedRecommendations = MakeFeedActionFieldsModule(p1.moment.momentId, if RecommendationMetadata == nil then nil else RecommendationMetadata.feedItemId, if RecommendationMetadata == nil then nil else RecommendationMetadata.tracingId, "personalized_recommendations")
+		
+		if PersonalizedRecommendations ~= nil then
+			FireAnalyticsEventFunction(EventNames.FeedPersonalizedRecommendationsButtonPressed, PersonalizedRecommendations)
+		end
+		local AccountSettingsEntryPointsModule = require(Parent.AccountSettingsEntryPoints)
+		AccountSettingsEntryPointsModule.openAccountSettings(AccountSettingsEntryPointsModule.Page.PersonalizedRecommendations, {
+			surfaceKey = "Client_Moments_Feed",
+			onClosed = function()
+				-- upvalues: AccountSettingsCoveringModule (upval)
+				AccountSettingsCoveringModule.setCovering(false)
+			end
+		})
+		AccountSettingsCoveringModule.setCovering(true)
+	end, { p1.moment, UseToggleStateResult.disable }) else nil
+	local UseResult13 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		if not p1.isDisabled then
 			p1.playbackVolume.toggle()
@@ -283,7 +333,7 @@ return function(p1)
 			return
 		end
 	end, { p1.isDisabled, p1.playbackVolume })
-	local UseResult13 = ReactModule.useCallback(function()
+	local UseResult14 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), FireAnalyticsEventFunction (upval), EventNames (upval)
 		if not p1.isDisabled then
 			FireAnalyticsEventFunction(if p1.playbackVolume.isMuted then EventNames.FeedUnmuteButtonPressed else EventNames.FeedMuteButtonPressed, { momentId = p1.moment.momentId })
@@ -292,23 +342,24 @@ return function(p1)
 			return
 		end
 	end, { p1.isDisabled, p1.playbackVolume, p1.moment })
-	local UseResult14 = if p1.isFeedMuteButtonAnalyticsEnabled then UseResult13 else UseResult12
+	local UseResult15 = if p1.isFeedMuteButtonAnalyticsEnabled then UseResult14 else UseResult13
+	local IsRecommendationSourceMatch: boolean = FFlagMomentsPersonalizedRecommendationsEntryPointModule and (UseSignalStateResult and UseFeedResult.recommendationSource == RecommendationSource.Trending)
 	local Element = ReactModule.createElement(Menu, {
 		align = FoundationModule.Enums.PopoverAlign.End,
 		isOpen = UseToggleStateResult.enabled,
 		items = ReactModule.useMemo(function()
-			-- upvalues: UseSignalStateResult (copy), UseLocalizationResult (copy), UseResult3 (copy), UseSignalStateResult1 (copy), UseResult4 (copy), p1 (copy), FFlagMomentsServeEDPVideos (upval), IsEdpVideo (copy), LocalPlayer (upval), FoundationModule (upval), UseResult7 (copy), FFlagMomentsOptimisticProfilePending (upval), UseResult10 (copy), FFlagMomentsCreatorAnalyticsModule (upval), Analytics (ref), UseResult11 (ref), CheckDebugAccessModule (upval), UseResult5 (copy)
+			-- upvalues: UseSignalStateResult1 (copy), UseLocalizationResult (copy), UseResult3 (copy), UseSignalStateResult2 (copy), UseResult4 (copy), p1 (copy), FFlagMomentsServeEDPVideos (upval), IsEdpVideo (copy), LocalPlayer (upval), FoundationModule (upval), UseResult7 (copy), FFlagMomentsOptimisticProfilePending (upval), UseResult10 (copy), FFlagMomentsCreatorAnalyticsModule (upval), UseFeedResult (copy), RecommendationSource (upval), Analytics (ref), UseResult11 (ref), CheckDebugAccessModule (upval), UseResult5 (copy), UseResult12 (copy), IsRecommendationSourceMatch (copy), Label (ref)
 			local List = {
 				{
 					id = "details",
-					icon = if UseSignalStateResult then "icons/actions/viewOn" else "icons/actions/viewOff",
-					text = if UseSignalStateResult then UseLocalizationResult.showDetails else UseLocalizationResult.hideDetails,
+					icon = if UseSignalStateResult1 then "icons/actions/viewOn" else "icons/actions/viewOff",
+					text = if UseSignalStateResult1 then UseLocalizationResult.showDetails else UseLocalizationResult.hideDetails,
 					onActivated = UseResult3
 				},
 				{
 					id = "minimize",
-					icon = if UseSignalStateResult1 then "icons/actions/previewExpand" else "icons/actions/previewShrink",
-					text = if UseSignalStateResult1 then UseLocalizationResult.expand else UseLocalizationResult.minimize,
+					icon = if UseSignalStateResult2 then "icons/actions/previewExpand" else "icons/actions/previewShrink",
+					text = if UseSignalStateResult2 then UseLocalizationResult.expand else UseLocalizationResult.minimize,
 					onActivated = UseResult4
 				}
 			}
@@ -329,7 +380,7 @@ return function(p1)
 					onActivated = UseResult10
 				})
 			end
-			if FFlagMomentsCreatorAnalyticsModule and p1.momentStore ~= nil and p1.moment.creatorId == (if LocalPlayer then LocalPlayer.UserId else nil) then
+			if FFlagMomentsCreatorAnalyticsModule and p1.momentStore ~= nil and (p1.moment.creatorId == (if LocalPlayer then LocalPlayer.UserId else nil) and UseFeedResult.recommendationSource == RecommendationSource.Profile) then
 				table.insert(List, {
 					id = "postInsights",
 					icon = FoundationModule.Enums.IconName.ChartThreeVerticalBars,
@@ -345,14 +396,27 @@ return function(p1)
 					onActivated = UseResult5
 				})
 			end
-			return List
+			return if IsRecommendationSourceMatch and UseResult12 ~= nil then {
+				{ items = List },
+				{
+					items = {
+						{
+							id = "personalizedRecommendations",
+							icon = FoundationModule.Enums.IconName.Gear,
+							text = Label,
+							onActivated = UseResult12
+						}
+					}
+				}
+			} else List
 		end, {
-			p1.moment, UseSignalStateResult, UseSignalStateResult1, UseLocalizationResult,
+			p1.moment, UseSignalStateResult1, UseSignalStateResult2, UseLocalizationResult,
 			UseResult5, UseResult3, UseResult4, UseResult7, UseResult10,
 			if FFlagMomentsServeEDPVideos then IsEdpVideo else false,
 			FFlagMomentsCreatorAnalyticsModule and p1.momentStore or false,
 			FFlagMomentsCreatorAnalyticsModule and UseResult11 or false,
-			if FFlagMomentsCreatorAnalyticsModule then Analytics else false
+			if FFlagMomentsCreatorAnalyticsModule then Analytics else false,
+			IsRecommendationSourceMatch, UseResult12 or false, Label
 		}),
 		onPressedOutside = UseToggleStateResult.disable,
 		side = FoundationModule.Enums.PopoverSide.Left,
@@ -395,7 +459,7 @@ return function(p1)
 				testId = "FeedMuteButton",
 				icon = if p1.playbackVolume.isMuted then SpeakerSlash else Speaker,
 				isDisabled = p1.isDisabled,
-				onActivated = UseResult14,
+				onActivated = UseResult15,
 				size = FoundationModule.Enums.InputSize.Medium
 			}),
 			ContextMenuPopover = Element

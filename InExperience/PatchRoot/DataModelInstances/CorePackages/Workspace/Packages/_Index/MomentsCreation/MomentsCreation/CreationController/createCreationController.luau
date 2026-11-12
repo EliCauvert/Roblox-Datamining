@@ -237,7 +237,8 @@ return function(p1)
 	end
 	
 	local function dismiss()
-		-- upvalues: FFlagMomentsCreateAvatarPosts (upval), Store (copy), IsAvatarMomentModule (upval), GetFFlagEnableMomentTextGenerationFunction (upval), GetActiveGenerationFunction (ref), SetActiveGenerationFunction (ref), SetIsGeneratingFunction (ref), Host (copy), Signal2 (copy), p1 (copy), CreationFlowStateModule (upval), TtsAudio (ref), GetFFlagMomentsCreationSaveDraftFunction (upval), MomentsDraftStorageModule (upval)
+		-- upvalues: FFlagMomentsRenderCreatePostStatus (upval), Host (copy), FFlagMomentsCreateAvatarPosts (upval), Store (copy), IsAvatarMomentModule (upval), GetFFlagEnableMomentTextGenerationFunction (upval), GetActiveGenerationFunction (ref), SetActiveGenerationFunction (ref), SetIsGeneratingFunction (ref), Signal2 (copy), p1 (copy), CreationFlowStateModule (upval), TtsAudio (ref), GetFFlagMomentsCreationSaveDraftFunction (upval), MomentsDraftStorageModule (upval)
+		if FFlagMomentsRenderCreatePostStatus and Host.canDismissCreationFlow ~= nil and not Host.canDismissCreationFlow() then return end
 		local SelectedCapture = if FFlagMomentsCreateAvatarPosts then Store.getSelectedCapture(false) else nil
 		local IsAvatarMomentModule1 = FFlagMomentsCreateAvatarPosts and IsAvatarMomentModule(SelectedCapture)
 		

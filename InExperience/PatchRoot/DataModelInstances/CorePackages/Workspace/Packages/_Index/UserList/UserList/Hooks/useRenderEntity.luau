@@ -5,11 +5,10 @@ local View = require(Parent.Foundation).View
 local _ = require(UserList.Common.Types)
 local EntityRow = require(UserList.Components.UserRow).EntityRow
 local FFlagUserListCtaIntegrationEnabled = require(Parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
-local FFlagAddStatusIndicatorToBaseRow = require(Parent.SharedFlags).FFlagAddStatusIndicatorToBaseRow
 local FFlagUserListSurfaceExtensions = require(Parent.SharedFlags).FFlagUserListSurfaceExtensions
 
 return function(p1)
-	-- upvalues: FFlagUserListSurfaceExtensions (copy), ReactModule (copy), View (copy), EntityRow (copy), FFlagUserListCtaIntegrationEnabled (copy), FFlagAddStatusIndicatorToBaseRow (copy)
+	-- upvalues: FFlagUserListSurfaceExtensions (copy), ReactModule (copy), View (copy), EntityRow (copy), FFlagUserListCtaIntegrationEnabled (copy)
 	local OnActivated = p1.onActivated
 	local RenderRowFunction = p1.renderRow
 	local EntitiesMap = p1.entitiesMap
@@ -18,11 +17,11 @@ return function(p1)
 	local FirstRowRef = if FFlagUserListSurfaceExtensions then p1.firstRowRef else nil
 	
 	return (ReactModule.useCallback(function(p2, LayoutOrder, Size)
-		-- upvalues: EntitiesMap (copy), RenderRowFunction (copy), OnActivated (copy), ReactModule (upval), View (upval), FFlagUserListSurfaceExtensions (upval), FirstRowRef (copy), EntityRow (upval), FFlagUserListCtaIntegrationEnabled (upval), FFlagAddStatusIndicatorToBaseRow (upval), Configs (copy), LayoutMode (copy)
+		-- upvalues: EntitiesMap (copy), RenderRowFunction (copy), OnActivated (copy), ReactModule (upval), View (upval), FFlagUserListSurfaceExtensions (upval), FirstRowRef (copy), EntityRow (upval), FFlagUserListCtaIntegrationEnabled (upval), Configs (copy), LayoutMode (copy)
 		local Entities = EntitiesMap[p2]
 		
 		return if Entities then if RenderRowFunction then RenderRowFunction(function(p3)
-			-- upvalues: Entities (copy), LayoutOrder (copy), OnActivated (upval), ReactModule (upval), View (upval), Size (copy), FFlagUserListSurfaceExtensions (upval), FirstRowRef (upval), EntityRow (upval), FFlagUserListCtaIntegrationEnabled (upval), FFlagAddStatusIndicatorToBaseRow (upval), Configs (upval), LayoutMode (upval)
+			-- upvalues: Entities (copy), LayoutOrder (copy), OnActivated (upval), ReactModule (upval), View (upval), Size (copy), FFlagUserListSurfaceExtensions (upval), FirstRowRef (upval), EntityRow (upval), FFlagUserListCtaIntegrationEnabled (upval), Configs (upval), LayoutMode (upval)
 			return ReactModule.createElement(View, {
 				tag = "size-full-full",
 				Size = Size,
@@ -41,7 +40,7 @@ return function(p1)
 					contextualInfo = p3.contextualInfo,
 					loadingState = p3.loadingState,
 					presence = p3.presence,
-					shouldShowNewIndicator = if FFlagAddStatusIndicatorToBaseRow then p3.shouldShowNewIndicator else nil,
+					shouldShowNewIndicator = p3.shouldShowNewIndicator,
 					trailingContent = p3.trailingContent,
 					configs = Configs,
 					layoutMode = LayoutMode

@@ -1,5 +1,4 @@
-﻿local TextService = game:GetService("TextService")
-local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
 local Parent = ProfilePlatform.Parent
 local FFlagProfilePlatformNewProfileHeader = require(Parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
 local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
@@ -11,7 +10,6 @@ local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
 local FoundationModule = require(Parent.Foundation)
 local GetTextSizeFunction = require(Parent.Style).GetTextSize
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local ResponsiveModule = require(Parent.Responsive)
 local UseScreenSizeFunction = require(Parent.RobloxAppHooks).useScreenSize
 local UseIsSpatialFunction = ResponsiveModule.useIsSpatial
@@ -24,7 +22,7 @@ local Text = FoundationModule.Text
 local View = FoundationModule.View
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseScreenSizeFunction (copy), UseDynamicSizeMarginModule (copy), UseProfileWrapperContextModule (copy), ReactModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseIsSpatialFunction (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), UseAboutSectionHeightModule (copy), FFlagProfilePlatformNewProfileHeader (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), EnumsModule (copy), View (copy), Text (copy), HorizontalPageMargin (copy), ExpandableTextArea (copy)
+	-- upvalues: UseTokensFunction (copy), UseScreenSizeFunction (copy), UseDynamicSizeMarginModule (copy), UseProfileWrapperContextModule (copy), ReactModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseIsSpatialFunction (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), UseAboutSectionHeightModule (copy), FFlagProfilePlatformNewProfileHeader (copy), GetTextSizeFunction (copy), EnumsModule (copy), View (copy), Text (copy), HorizontalPageMargin (copy), ExpandableTextArea (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseScreenSizeResult = UseScreenSizeFunction()
 	local UseDynamicSizeMarginModuleResult, UseDynamicSizeMarginModuleResult2 = UseDynamicSizeMarginModule()
@@ -42,10 +40,8 @@ return function(p1)
 	local UseIsSpatialResult1 = UseIsSpatialResult or IsUsePreferredInputResultMatch
 	local UseAboutSectionHeightModuleResult, UseAboutSectionHeightModuleResult2 = UseAboutSectionHeightModule(Description, UseStateResult, UseDynamicSizeMarginModuleResult)
 	local UseAboutSectionHeightModuleResult1 = if FFlagProfilePlatformNewProfileHeader then UseAboutSectionHeightModuleResult2 else ReactModule.useMemo(function()
-		-- upvalues: Description (ref), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), BodyMedium (copy), TextService (upval), UseIsSpatialResult1 (copy)
-		local Replaced = string.gsub(Description or "", "[\r\n]+", " ")
-		
-		return (if FoundationFontFaceMigration then GetTextSizeFunction(Replaced, BodyMedium.FontSize, BodyMedium.Font, Vector2.new(1e999, 1e999), { addTemporaryPadding = false }).Y else TextService:GetTextSize(Replaced, BodyMedium.FontSize, BodyMedium.Font, Vector2.new(1e999, 1e999)).Y) * (if UseIsSpatialResult1 then 2.6 else 2)
+		-- upvalues: Description (ref), GetTextSizeFunction (upval), BodyMedium (copy), UseIsSpatialResult1 (copy)
+		return GetTextSizeFunction(string.gsub(Description or "", "[\r\n]+", " "), BodyMedium.FontSize, BodyMedium.Font, Vector2.new(1e999, 1e999), { addTemporaryPadding = false }).Y * (if UseIsSpatialResult1 then 2.6 else 2)
 	end, {
 		Description,
 		BodyMedium.FontSize,

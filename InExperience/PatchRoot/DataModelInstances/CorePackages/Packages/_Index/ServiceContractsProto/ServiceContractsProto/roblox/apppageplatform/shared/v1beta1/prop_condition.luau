@@ -43,12 +43,12 @@ function Module:encode()
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult7, WriteTagResult2_6, EncodeResult, buffer.len(EncodeResult))
 		elseif self.kind.type == "is_not_empty" then
 			local EncodeResult = self.kind.value:encode()
-			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult8, WriteTagResult2_7, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult5, WriteTagResult2_4, EncodeResult, buffer.len(EncodeResult))
 		elseif self.kind.type == "contains" then
 			local EncodeResult = self.kind.value:encode()
-			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult5, WriteTagResult2_4, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult8, WriteTagResult2_7, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
 	local Buf1 = buffer.create(Count)
@@ -321,17 +321,17 @@ function Module1:encode()
 			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.varint)
 			Buf, Count = ProtoModule.writeVarInt(WriteTagResult5, WriteTagResult2_4, self.kind.value)
 		elseif self.kind.type == "int64_value" then
-			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult7, WriteTagResult2_6, self.kind.value)
+			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult6, WriteTagResult2_5, self.kind.value)
 		elseif self.kind.type == "float_value" then
 			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.i32)
 			Buf, Count = ProtoModule.writeFloat(WriteTagResult8, WriteTagResult2_7, self.kind.value)
 		elseif self.kind.type == "double_value" then
-			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.i64)
-			Buf, Count = ProtoModule.writeDouble(WriteTagResult9, WriteTagResult2_8, self.kind.value)
+			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.i64)
+			Buf, Count = ProtoModule.writeDouble(WriteTagResult7, WriteTagResult2_6, self.kind.value)
 		elseif self.kind.type == "binding_path_value" then
-			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.kind.value)
+			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.kind.value)
 		end
 	end
 	local Buf1 = buffer.create(Count)

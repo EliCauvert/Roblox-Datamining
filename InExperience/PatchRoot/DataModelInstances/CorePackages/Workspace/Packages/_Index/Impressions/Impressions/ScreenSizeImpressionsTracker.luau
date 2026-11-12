@@ -9,9 +9,10 @@ local GetShortcutBarStatusStoreFunction = require(Parent.AppShortcutBarStore).Ge
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagUnifyShortcutBarFixImpressions = SharedFlagsModule.FFlagUnifyShortcutBarFixImpressions
 local FFlagOptionalNavigation = SharedFlagsModule.FFlagOptionalNavigation
+local FFlagLuaAppSduiGameDwell = SharedFlagsModule.FFlagLuaAppSduiGameDwell
 
 return function(p1)
-	-- upvalues: FFlagOptionalNavigation (copy), UseNavigationFunction (copy), FFlagUnifyShortcutBarFixImpressions (copy), SignalsReactModule (copy), GetShortcutBarStatusStoreFunction (copy), UseViewportBoundsFunction (copy), ReactModule (copy), ImpressionsTrackerWithoutNavigationModule (copy), ImpressionsTrackerModule (copy)
+	-- upvalues: FFlagOptionalNavigation (copy), UseNavigationFunction (copy), FFlagUnifyShortcutBarFixImpressions (copy), SignalsReactModule (copy), GetShortcutBarStatusStoreFunction (copy), UseViewportBoundsFunction (copy), FFlagLuaAppSduiGameDwell (copy), ReactModule (copy), ImpressionsTrackerWithoutNavigationModule (copy), ImpressionsTrackerModule (copy)
 	local UseNavigationResult = if FFlagOptionalNavigation then UseNavigationFunction() else nil
 	local UseSignalStateResult = if FFlagUnifyShortcutBarFixImpressions then SignalsReactModule.useSignalState(GetShortcutBarStatusStoreFunction(false).getShortcutBarReservedHeight) else nil
 	local config = {
@@ -24,6 +25,9 @@ return function(p1)
 		viewPortBounds = UseViewportBoundsFunction(nil, p1.ignoreBottomInset, nil, if FFlagUnifyShortcutBarFixImpressions then UseSignalStateResult else nil)
 	}
 	
+	if FFlagLuaAppSduiGameDwell then
+		config.visibilityObserver = p1.visibilityObserver
+	end
 	if FFlagOptionalNavigation and UseNavigationResult == nil then
 		config.pageContext = nil
 		

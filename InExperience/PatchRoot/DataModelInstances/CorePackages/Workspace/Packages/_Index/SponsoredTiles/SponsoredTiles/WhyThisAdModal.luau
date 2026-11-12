@@ -23,14 +23,14 @@ local RetrievalStatus = require(Parent.Http).Enum.RetrievalStatus
 local SponsoredUserCohortModule = require(SponsoredTiles.Enums.SponsoredUserCohort)
 local OmniRecommendationsContentType = require(Parent.DiscoveryTypes).OmniRecommendationsContentType
 local FStringLuaAppAdPreferencesUrl = require(Parent.SharedFlags).FStringLuaAppAdPreferencesUrl
-local FFlagLuaAppEnableHomepageOneByTwoTile = require(Parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile
+local FFlagLuaAppEnableNxMRoduxApportioning = require(Parent.SharedFlags).FFlagLuaAppEnableNxMRoduxApportioning
 
 local function useCreatorName(UniverseId)
-	-- upvalues: UseDispatchFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), FFlagLuaAppEnableHomepageOneByTwoTile (copy), UseSelectorFunction (copy), ApiFetchGameDetails (copy), ReactModule (copy), RetrievalStatus (copy)
+	-- upvalues: UseDispatchFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), UseSelectorFunction (copy), ApiFetchGameDetails (copy), ReactModule (copy), RetrievalStatus (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
 	
-	if FFlagLuaAppEnableHomepageOneByTwoTile then
+	if FFlagLuaAppEnableNxMRoduxApportioning then
 		local IsNotUniverseIdMatch: boolean = UniverseId ~= nil and UniverseId ~= ""
 		local UseSelectorResult = UseSelectorFunction(function(p1)
 			-- upvalues: IsNotUniverseIdMatch (copy), ApiFetchGameDetails (upval), UniverseId (copy)
@@ -115,7 +115,7 @@ local function resolveSponsoredDisclosure(PayerName, IsContentTypeMatch, IsNotUn
 end
 
 return function(p1)
-	-- upvalues: UseDispatchFunction (copy), useCreatorName (copy), UseLocalizationFunction (copy), SponsoredUserCohortModule (copy), FFlagLuaAppEnableHomepageOneByTwoTile (copy), ReactModule (copy), CloseCentralOverlayFunction (copy), AppPage (copy), FStringLuaAppAdPreferencesUrl (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), RetrievalStatus (copy), OmniRecommendationsContentType (copy), resolveSponsoredDisclosure (copy), FlaggedMutedErrorFunction (copy), Dialog (copy), View (copy), Button (copy), ButtonVariant (copy)
+	-- upvalues: UseDispatchFunction (copy), useCreatorName (copy), UseLocalizationFunction (copy), SponsoredUserCohortModule (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), ReactModule (copy), CloseCentralOverlayFunction (copy), AppPage (copy), FStringLuaAppAdPreferencesUrl (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), RetrievalStatus (copy), OmniRecommendationsContentType (copy), resolveSponsoredDisclosure (copy), FlaggedMutedErrorFunction (copy), Dialog (copy), View (copy), Button (copy), ButtonVariant (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseCreatorNameResult, UseCreatorNameResult2 = useCreatorName(p1.universeId)
 	local SponsoredUserCohort = p1.sponsoredUserCohort
@@ -131,7 +131,7 @@ return function(p1)
 	}
 	local SponsoredDisclosureNoUniverse = nil
 	
-	if FFlagLuaAppEnableHomepageOneByTwoTile then
+	if FFlagLuaAppEnableNxMRoduxApportioning then
 		local SponsoredUserCohort1 = p1.sponsoredUserCohort
 		SponsoredDisclosureNoUniverse = {
 			if SponsoredUserCohort1 == SponsoredUserCohortModule.UnderEighteen then "Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18" elseif SponsoredUserCohort1 == SponsoredUserCohortModule.EighteenPlusPersonalized then "Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18PersonalizedNoLink" elseif SponsoredUserCohort1 == SponsoredUserCohortModule.EighteenPlusNonPersonalized then "Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18NonPersonalNoLink" else "Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18",
@@ -170,7 +170,7 @@ return function(p1)
 	local IsSponsoredUserCohortMatch: boolean? = nil
 	local ResolveSponsoredDisclosureResult = nil
 	
-	if FFlagLuaAppEnableHomepageOneByTwoTile then
+	if FFlagLuaAppEnableNxMRoduxApportioning then
 		ResolveSponsoredDisclosureResult, IsSponsoredUserCohortMatch = resolveSponsoredDisclosure(p1.payerName, p1.contentType == OmniRecommendationsContentType.AdLink, p1.universeId ~= nil and p1.universeId ~= "", UseCreatorNameResult, p1.sponsoredUserCohort, UseLocalizationResult)
 	elseif UseCreatorNameResult and p1.payerName then
 		ResolveSponsoredDisclosureResult = UseLocalizationResult.sponsoredDisclosure

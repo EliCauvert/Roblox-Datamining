@@ -86,17 +86,17 @@ function Module:encode()
 	end
 	if self.collection_layout ~= nil then
 		local EncodeResult = self.collection_layout:encode()
-		local WriteTagResult16, WriteTagResult2_15 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeBuffer(WriteTagResult16, WriteTagResult2_15, EncodeResult, buffer.len(EncodeResult))
+		local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult13, WriteTagResult2_12, EncodeResult, buffer.len(EncodeResult))
 	end
 	if self.cached_roblox_component_to_template_id ~= nil and next(self.cached_roblox_component_to_template_id) ~= nil then
 		for i, value in self.cached_roblox_component_to_template_id do
-			local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult, WriteStringResult2 = ProtoModule.writeString(WriteTagResult13, WriteTagResult2_12, i)
-			local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(WriteStringResult, WriteStringResult2, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult1, WriteStringResult2_1 = ProtoModule.writeString(WriteTagResult14, WriteTagResult2_13, value)
-			local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult15, WriteTagResult2_14, WriteStringResult1, WriteStringResult2_1)
+			local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult, WriteStringResult2 = ProtoModule.writeString(WriteTagResult14, WriteTagResult2_13, i)
+			local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(WriteStringResult, WriteStringResult2, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult1, WriteStringResult2_1 = ProtoModule.writeString(WriteTagResult15, WriteTagResult2_14, value)
+			local WriteTagResult16, WriteTagResult2_15 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult16, WriteTagResult2_15, WriteStringResult1, WriteStringResult2_1)
 		end
 	end
 	if self.client_capabilities ~= nil then
@@ -153,33 +153,33 @@ function Module.decode(Buf)
 				Buffer3, v65 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.country = buffer.tostring(Buffer3)
 			elseif Tag == 4 then
-				local Buffer4
-				Buffer4, v65 = ProtoModule.readBuffer(Buf, v1)
-				NewModule.age_group = buffer.tostring(Buffer4)
-			elseif Tag == 5 then
-				local Buffer5
-				Buffer5, v65 = ProtoModule.readBuffer(Buf, v1)
-				NewModule.session_id = buffer.tostring(Buffer5)
-			elseif Tag == 6 then
 				local Buffer6
 				Buffer6, v65 = ProtoModule.readBuffer(Buf, v1)
-				NewModule.entry_pagination_key = buffer.tostring(Buffer6)
-			elseif Tag == 7 then
+				NewModule.age_group = buffer.tostring(Buffer6)
+			elseif Tag == 5 then
 				local Buffer7
 				Buffer7, v65 = ProtoModule.readBuffer(Buf, v1)
-				NewModule.entry_page_token = buffer.tostring(Buffer7)
-			elseif Tag == 8 then
+				NewModule.session_id = buffer.tostring(Buffer7)
+			elseif Tag == 6 then
+				local Buffer8
+				Buffer8, v65 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.entry_pagination_key = buffer.tostring(Buffer8)
+			elseif Tag == 7 then
 				local Buffer9
 				Buffer9, v65 = ProtoModule.readBuffer(Buf, v1)
-				NewModule.max_memory = buffer.tostring(Buffer9)
-			elseif Tag == 9 then
+				NewModule.entry_page_token = buffer.tostring(Buffer9)
+			elseif Tag == 8 then
 				local Buffer10
 				Buffer10, v65 = ProtoModule.readBuffer(Buf, v1)
-				NewModule.page_type = buffer.tostring(Buffer10)
+				NewModule.max_memory = buffer.tostring(Buffer10)
+			elseif Tag == 9 then
+				local Buffer4
+				Buffer4, v65 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.page_type = buffer.tostring(Buffer4)
 			elseif Tag == 13 then
-				local Buffer11
-				Buffer11, v65 = ProtoModule.readBuffer(Buf, v1)
-				NewModule.collection_layout = t.CollectionLayoutInfo.decode(Buffer11)
+				local Buffer5
+				Buffer5, v65 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.collection_layout = t.CollectionLayoutInfo.decode(Buffer5)
 			elseif Tag == 14 then
 				local Buffer12
 				Buffer12, v65 = ProtoModule.readBuffer(Buf, v1)
@@ -190,9 +190,9 @@ function Module.decode(Buf)
 				Buffer13, v65 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.client_capabilities = ClientCapabilitiesModule.ClientCapabilities.decode(Buffer13)
 			elseif Tag == 16 then
-				local Buffer8
-				Buffer8, v65 = ProtoModule.readBuffer(Buf, v1)
-				NewModule.audience = buffer.tostring(Buffer8)
+				local Buffer11
+				Buffer11, v65 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.audience = buffer.tostring(Buffer11)
 			else
 				local VarInt2, VarInt2_1 = ProtoModule.readVarInt(Buf, v1)
 				v1 = VarInt2_1 + VarInt2
@@ -1142,31 +1142,31 @@ function Module7:encode()
 		Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, self.session_id)
 	end
 	if self.age_group ~= nil and self.age_group ~= "" then
-		local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.age_group)
+		local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.age_group)
 	end
 	if self.max_memory ~= nil and self.max_memory ~= "" then
-		local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeString(WriteTagResult10, WriteTagResult2_9, self.max_memory)
+		local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.max_memory)
 	end
 	if self.selected_genre ~= nil and self.selected_genre ~= "" then
-		local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeString(WriteTagResult12, WriteTagResult2_11, self.selected_genre)
+		local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, self.selected_genre)
 	end
 	if self.cached_roblox_component_to_template_id ~= nil and next(self.cached_roblox_component_to_template_id) ~= nil then
 		for i, value in self.cached_roblox_component_to_template_id do
-			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult, WriteStringResult2 = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, i)
-			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(WriteStringResult, WriteStringResult2, 2, ProtoModule.wireTypes.lengthDelimited)
-			local WriteStringResult1, WriteStringResult2_1 = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, value)
-			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult8, WriteTagResult2_7, WriteStringResult1, WriteStringResult2_1)
+			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult, WriteStringResult2 = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, i)
+			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(WriteStringResult, WriteStringResult2, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult1, WriteStringResult2_1 = ProtoModule.writeString(WriteTagResult10, WriteTagResult2_9, value)
+			local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult11, WriteTagResult2_10, WriteStringResult1, WriteStringResult2_1)
 		end
 	end
 	if self.client_capabilities ~= nil then
 		local EncodeResult = self.client_capabilities:encode()
-		local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeBuffer(WriteTagResult11, WriteTagResult2_10, EncodeResult, buffer.len(EncodeResult))
+		local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult12, WriteTagResult2_11, EncodeResult, buffer.len(EncodeResult))
 	end
 	if self.audience ~= nil and self.audience ~= "" then
 		local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)

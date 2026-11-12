@@ -14,26 +14,13 @@ local RobloxPlusUpdateDiscountIcons = game:DefineFastFlag("RobloxPlusUpdateDisco
 local FFlagRobloxPlusEnableNewFeatureListModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusEnableNewFeatureList)
 local FFlagRobloxPlusTrialDiscountTimingModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusTrialDiscountTiming)
 local FFlagEnablePlusReferralLandingSheet = require(Parent.SharedFlags).FFlagEnablePlusReferralLandingSheet
+local FFlagRobloxPlusAppIconBenefitModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusAppIconBenefit)
+local FFlagAppIconSelectionPage = require(Parent.SharedFlags).FFlagAppIconSelectionPage
+local UniversalAppPolicyModule = if FFlagRobloxPlusAppIconBenefitModule then require(Parent.UniversalAppPolicy) else nil
 local Array = require(Parent.LuauPolyfill).Array
+local FeatureRowModule = require(script.Parent.FeatureRow)
 local View = FoundationModule.View
-local Text = FoundationModule.Text
-local Icon = FoundationModule.Icon
 local IconName = FoundationModule.Enums.IconName
-local IconSize = FoundationModule.Enums.IconSize
-
-local function FeatureRow(p1)
-	-- upvalues: ReactModule (copy), View (copy), Icon (copy), IconSize (copy), Text (copy)
-	return ReactModule.createElement(View, {
-		tag = "row auto-y size-full-0 align-y-center align-x-left gap-medium",
-		LayoutOrder = p1.layoutOrder
-	}, {
-		Icon = ReactModule.createElement(Icon, { name = p1.iconName, size = IconSize.Medium }),
-		FeatureText = ReactModule.createElement(Text, {
-			tag = "size-full-0 auto-y text-body-medium content-default text-align-x-left",
-			Text = p1.text
-		})
-	})
-end
 
 local function getVirtualTransactionDiscounts(FeatureConfig)
 	if not FeatureConfig or not FeatureConfig.VirtualTransactionDiscounts then
@@ -62,7 +49,7 @@ local function _(p1)
 end
 
 return function(p1)
-	-- upvalues: RobloxSubscriptionStoreModule (copy), SignalsReactModule (copy), GetPeriodTypeDisplayLabelModule (copy), FFlagRobloxPlusTrialDiscountTimingModule (copy), GetFreeTrialOfferModule (copy), IsSupportedTrialPeriodTypeModule (copy), UseLocalizationFunction (copy), getVirtualTransactionDiscounts (copy), Array (copy), GetTrialUnlockDaysModule (copy), FeatureRow (copy), FFlagRobloxPlusEnableNewFeatureListModule (copy), IconName (copy), RobloxPlusUpdateDiscountIcons (copy), ReactModule (copy), View (copy), FFlagEnablePlusReferralLandingSheet (copy)
+	-- upvalues: RobloxSubscriptionStoreModule (copy), SignalsReactModule (copy), GetPeriodTypeDisplayLabelModule (copy), FFlagRobloxPlusTrialDiscountTimingModule (copy), GetFreeTrialOfferModule (copy), IsSupportedTrialPeriodTypeModule (copy), UseLocalizationFunction (copy), getVirtualTransactionDiscounts (copy), Array (copy), GetTrialUnlockDaysModule (copy), FFlagRobloxPlusAppIconBenefitModule (copy), FFlagAppIconSelectionPage (copy), UniversalAppPolicyModule (copy), FeatureRowModule (copy), FFlagRobloxPlusEnableNewFeatureListModule (copy), IconName (copy), RobloxPlusUpdateDiscountIcons (copy), ReactModule (copy), View (copy), FFlagEnablePlusReferralLandingSheet (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(RobloxSubscriptionStoreModule.get().getRobloxSubscriptionProduct)
 	local Text: string = UseSignalStateResult and UseSignalStateResult.PeriodType and tostring(UseSignalStateResult.PeriodType) or ""
 	local PeriodTypeDisplayLabelModule = GetPeriodTypeDisplayLabelModule(Text, true)
@@ -75,11 +62,11 @@ return function(p1)
 		return typeof(p2) == "table" and typeof(p2.PeriodIndex) == "number" and p2.PeriodIndex == 0
 	end) else nil
 	local TrialUnlockDaysModule = if IsSupportedTrialPeriodTypeModule1 then GetTrialUnlockDaysModule(FreeTrialOfferModule, VirtualTransactionDiscounts2 and VirtualTransactionDiscounts2.PeriodIndex, Text) else nil
+	local ShowAppIconSetting = FFlagRobloxPlusAppIconBenefitModule and (FFlagAppIconSelectionPage and UniversalAppPolicyModule.getAppFeaturePolicies().getShowAppIconSetting())
 	local UseLocalizationResult1 = UseLocalizationFunction({
 		robuxTransfersText = "Feature.RobloxSubscription.Label.BlackbirdTr",
 		privateServerDiscountText = "Feature.RobloxSubscription.Label.BlackbirdPSDiscount",
 		discountFeatureText = "Feature.RobloxSubscription.Description.Benefit.DiscountV2",
-		customizeFeatureText = "Feature.RobloxSubscription.Description.Benefit.Customize",
 		baseVirtualTransactionDiscountText = {
 			"Feature.RobloxSubscription.Label.BlackbirdVTDiscountFirst",
 			discountPercent = VirtualTransactionDiscounts and VirtualTransactionDiscounts.DiscountPercent or 0
@@ -93,13 +80,14 @@ return function(p1)
 		discountFeatureTextV3 = if IsSupportedTrialPeriodTypeModule1 then {
 			"Feature.RobloxSubscription.Description.Benefit.DiscountV3",
 			trialUnlockDays = TrialUnlockDaysModule
-		} else nil
+		} else nil,
+		customizeFeatureText = if ShowAppIconSetting then "Feature.RobloxSubscription.Description.Benefit.CustomizeWithAppIcon" else "Feature.RobloxSubscription.Description.Benefit.Customize"
 	})
 	local List = {}
 	
 	local function _(IconName, Text)
-		-- upvalues: List (copy), FeatureRow (upval)
-		table.insert(List, FeatureRow({
+		-- upvalues: List (copy), FeatureRowModule (upval)
+		table.insert(List, FeatureRowModule({
 			layoutOrder = #List + 1,
 			iconName = IconName,
 			text = Text
@@ -109,7 +97,7 @@ return function(p1)
 	if FFlagRobloxPlusEnableNewFeatureListModule then
 		if p1.noPurchaseMethodRequired then
 			if VirtualTransactionDiscounts then
-				table.insert(List, FeatureRow({
+				table.insert(List, FeatureRowModule({
 					layoutOrder = #List + 1,
 					iconName = IconName.Tag,
 					text = UseLocalizationResult1.baseVirtualTransactionDiscountText
@@ -117,19 +105,19 @@ return function(p1)
 			end
 		else
 			if VirtualTransactionDiscounts and VirtualTransactionDiscounts2 then
-				table.insert(List, FeatureRow({
+				table.insert(List, FeatureRowModule({
 					layoutOrder = #List + 1,
 					iconName = IconName.Tag,
 					text = if IsSupportedTrialPeriodTypeModule1 then UseLocalizationResult1.discountFeatureTextV3 else UseLocalizationResult1.discountFeatureText
 				}))
 			elseif VirtualTransactionDiscounts and not VirtualTransactionDiscounts2 then
-				table.insert(List, FeatureRow({
+				table.insert(List, FeatureRowModule({
 					layoutOrder = #List + 1,
 					iconName = IconName.Tag,
 					text = UseLocalizationResult1.baseVirtualTransactionDiscountText
 				}))
 			end
-			table.insert(List, FeatureRow({
+			table.insert(List, FeatureRowModule({
 				layoutOrder = #List + 1,
 				iconName = IconName.PaintBrush,
 				text = UseLocalizationResult1.customizeFeatureText
@@ -137,14 +125,14 @@ return function(p1)
 		end
 	else
 		if VirtualTransactionDiscounts and typeof(VirtualTransactionDiscounts.DiscountPercent) == "number" then
-			table.insert(List, FeatureRow({
+			table.insert(List, FeatureRowModule({
 				layoutOrder = #List + 1,
 				iconName = if RobloxPlusUpdateDiscountIcons then IconName.Tag else IconName.TagSparkle,
 				text = UseLocalizationResult1.baseVirtualTransactionDiscountText
 			}))
 		end
-		if VirtualTransactionDiscounts2 and (typeof(VirtualTransactionDiscounts2.DiscountPercent) == "number" and not p1.noPurchaseMethodRequired) then
-			table.insert(List, FeatureRow({
+		if VirtualTransactionDiscounts2 and typeof(VirtualTransactionDiscounts2.DiscountPercent) == "number" and not p1.noPurchaseMethodRequired then
+			table.insert(List, FeatureRowModule({
 				layoutOrder = #List + 1,
 				iconName = if RobloxPlusUpdateDiscountIcons then IconName.TagArrowUp else IconName.TagSparkleArrowUp,
 				text = UseLocalizationResult1.nextVirtualTransactionDiscountText
@@ -152,14 +140,14 @@ return function(p1)
 		end
 	end
 	if FindResult and typeof(FindResult.DiscountPercent) == "number" then
-		table.insert(List, FeatureRow({
+		table.insert(List, FeatureRowModule({
 			layoutOrder = #List + 1,
 			iconName = IconName.Controller,
 			text = UseLocalizationResult1.privateServerDiscountText
 		}))
 	end
 	if FeatureConfig and FeatureConfig.IsRobuxTransferEnabled then
-		table.insert(List, FeatureRow({
+		table.insert(List, FeatureRowModule({
 			layoutOrder = #List + 1,
 			iconName = IconName.Robux,
 			text = UseLocalizationResult1.robuxTransfersText

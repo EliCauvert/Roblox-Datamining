@@ -11,12 +11,14 @@ local UseContextualInfoModule = require(Parent.Components.PYMKUser.useContextual
 local UseUserPresenceModule = require(Parent.Components.PYMKUser.useUserPresence)
 local UseOnActivatedTileModule = require(Parent.Components.PYMKUser.useOnActivatedTile)
 local _ = require(Parent.Common.DirectRecommendationTypes)
+local _ = require(Parent.Analytics.AnalyticsTypes)
 local FFlagPymkCarouselPresenceStoreMigrationModule = require(Parent.Flags.FFlagPymkCarouselPresenceStoreMigration)
 local FFlagLuaAppEnableSduiHomePage = require(Parent1.SharedFlags).FFlagLuaAppEnableSduiHomePage
+local FFlagPymkCarouselExtendProps = require(Parent1.SharedFlags).FFlagPymkCarouselExtendProps
 local _ = require(Parent1.UserList)
 
 return function(p1)
-	-- upvalues: ReactModule (copy), ImpressionsTagUtility (copy), FFlagLuaAppEnableSduiHomePage (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), RoduxFriends (copy), UsePrimaryCtaModule (copy), UseContextualInfoModule (copy), UseUserPresenceModule (copy), FFlagPymkCarouselPresenceStoreMigrationModule (copy), UseOnActivatedTileModule (copy)
+	-- upvalues: ReactModule (copy), ImpressionsTagUtility (copy), FFlagLuaAppEnableSduiHomePage (copy), UseSelectorFunction (copy), FFlagPymkCarouselExtendProps (copy), GetDeepValueFunction (copy), RoduxFriends (copy), UsePrimaryCtaModule (copy), UseContextualInfoModule (copy), UseUserPresenceModule (copy), FFlagPymkCarouselPresenceStoreMigrationModule (copy), UseOnActivatedTileModule (copy)
 	local Text = tostring(p1.entity.id)
 	local UseRefResult = ReactModule.useRef(nil)
 	ReactModule.useEffect(function()
@@ -37,6 +39,20 @@ return function(p1)
 	if FFlagLuaAppEnableSduiHomePage then
 		HasIncomingFriendRequest = if p1.recommendation then p1.recommendation.hasIncomingFriendRequest else nil
 		Recommendation = p1.recommendation or {}
+	elseif FFlagPymkCarouselExtendProps then
+		HasIncomingFriendRequest = UseSelectorFunction(function(p2)
+			-- upvalues: GetDeepValueFunction (upval), Text (copy)
+			return GetDeepValueFunction(p2, string.format("PYMKCarousel.Friends.recommendations.hasIncomingFriendRequest.%s", Text))
+		end)
+		Recommendation = UseSelectorFunction(function(p2)
+			-- upvalues: RoduxFriends (upval), UseSelectorResult (ref), Text (copy)
+			return RoduxFriends.Selectors.selectRecommendationsForUserId(p2)(UseSelectorResult)[Text] or {}
+		end)
+		
+		if p1.recommendation then
+			HasIncomingFriendRequest = p1.recommendation.hasIncomingFriendRequest
+			Recommendation = p1.recommendation
+		end
 	else
 		HasIncomingFriendRequest = UseSelectorFunction(function(p2)
 			-- upvalues: GetDeepValueFunction (upval), Text (copy)
@@ -57,7 +73,7 @@ return function(p1)
 		fireAnalyticsEvent = p1.fireAnalyticsEvent,
 		absolutePosition = p1.absolutePosition,
 		entityType = p1.entity.type,
-		recommendation = if FFlagLuaAppEnableSduiHomePage then p1.recommendation else nil
+		recommendation = if FFlagPymkCarouselExtendProps or FFlagLuaAppEnableSduiHomePage then p1.recommendation else nil
 	})
 	local UseContextualInfoModuleResult = UseContextualInfoModule({
 		recommendation = Recommendation,
@@ -87,7 +103,8 @@ return function(p1)
 			recommendationSessionId = p1.recommendationSessionId,
 			fireAnalyticsEvent = p1.fireAnalyticsEvent,
 			friendshipStatus = UseSelectorResult1,
-			userPresenceType = UseUserPresenceModuleResult
+			userPresenceType = UseUserPresenceModuleResult,
+			analyticsSurface = if FFlagPymkCarouselExtendProps then p1.analyticsSurface else nil
 		})
 	})
 	

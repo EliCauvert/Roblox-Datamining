@@ -22,6 +22,8 @@ local FFlagExpChatTextChannelWindowExpressionTrayEmojiModule = require(script.Pa
 local FFlagExpChatTextChannelWindowFocusNavModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowFocusNav)
 local FFlagExpChatTextChannelWindowMessageComposerModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowMessageComposer)
 local FFlagExpChatTCWRestoreSendSelectionGatedByInputModeModule = require(script.Parent.Flags.FFlagExpChatTCWRestoreSendSelectionGatedByInputMode)
+local FFlagExpChatTextChannelWindowQuickWordsNonDirectModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowQuickWordsNonDirect)
+local IsDirectChatChannelModule = require(script.Parent.isDirectChatChannel)
 local GetDebugExpressionCatalogModule = require(script.Parent.TextChannelWindowExpressionTray.getDebugExpressionCatalog)
 local SendExpressionModule = require(script.Parent.TextChannelWindowExpressionTray.sendExpression)
 local UseTextChannelWindowComposerViewModelModule = require(script.Parent.useTextChannelWindowComposerViewModel)
@@ -31,7 +33,7 @@ local MessageComposerModule = require(Parent.ChatUIPrimitives.MessageComposer)
 local UseFocusInputBarFunction = ChatUIPrimitivesModule.Hooks.useFocusInputBar
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FoundationModule (copy), GuiService (copy), UseLastInputModeFunction (copy), UseCanSendToChannelFunction (copy), UseInExperienceLocalizationFunction (copy), ReactModule (copy), MessageWriterContextModule (copy), FFlagExpChatTCWRestoreSendSelectionGatedByInputModeModule (copy), GetFFlagExpChatUseChatMuteStoreModule (copy), RunVirtualChatCommandsModule (copy), MessageModule (copy), FFlagExpChatTextChannelWindowExpressionTrayEmojiModule (copy), SendTextToChannelModule (copy), GetFFlagExpChatProtectedChatInternalAPIsFunction (copy), TextChannelWindowAnalyticsModule (copy), LoggerModule (copy), UseFocusInputBarFunction (copy), SendExpressionModule (copy), FFlagExpChatTextChannelWindowExpressionTrayModule (copy), FFlagExpChatComposerFigmaParity (copy), FFlagExpChatTextChannelWindowFocusNavModule (copy), Static (copy), FFlagExpChatTextChannelWindowMessageComposerModule (copy), UseTextChannelWindowComposerViewModelModule (copy), MessageComposerModule (copy), ChatInputBarView (copy), FFlagExpChatTextChannelWindowThemeByBackgroundModule (copy)
+	-- upvalues: FoundationModule (copy), GuiService (copy), UseLastInputModeFunction (copy), UseCanSendToChannelFunction (copy), UseInExperienceLocalizationFunction (copy), ReactModule (copy), MessageWriterContextModule (copy), FFlagExpChatTCWRestoreSendSelectionGatedByInputModeModule (copy), GetFFlagExpChatUseChatMuteStoreModule (copy), RunVirtualChatCommandsModule (copy), MessageModule (copy), FFlagExpChatTextChannelWindowExpressionTrayEmojiModule (copy), SendTextToChannelModule (copy), GetFFlagExpChatProtectedChatInternalAPIsFunction (copy), TextChannelWindowAnalyticsModule (copy), LoggerModule (copy), UseFocusInputBarFunction (copy), SendExpressionModule (copy), FFlagExpChatTextChannelWindowQuickWordsNonDirectModule (copy), IsDirectChatChannelModule (copy), FFlagExpChatTextChannelWindowExpressionTrayModule (copy), FFlagExpChatComposerFigmaParity (copy), FFlagExpChatTextChannelWindowFocusNavModule (copy), Static (copy), FFlagExpChatTextChannelWindowMessageComposerModule (copy), UseTextChannelWindowComposerViewModelModule (copy), MessageComposerModule (copy), ChatInputBarView (copy), FFlagExpChatTextChannelWindowThemeByBackgroundModule (copy)
 	local TargetChannel = p1.targetChannel
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local GuiService1 = p1.guiService or GuiService
@@ -125,10 +127,11 @@ return ReactModule.memo(function(p1)
 		-- upvalues: SendExpressionModule (upval), TargetChannel (copy), NoCanLocalUserChat (copy)
 		return SendExpressionModule(p2, TargetChannel, NoCanLocalUserChat)
 	end, { TargetChannel, NoCanLocalUserChat })
+	local IsDirectChatChannelModule1 = FFlagExpChatTextChannelWindowQuickWordsNonDirectModule and (not FFlagExpChatTextChannelWindowExpressionTrayEmojiModule and (TargetChannel ~= nil and IsDirectChatChannelModule(TargetChannel)))
 	local Config = if FFlagExpChatTextChannelWindowExpressionTrayModule and FFlagExpChatComposerFigmaParity then {
 		sendExpression = UseResult1,
 		canLocalUserChat = NoCanLocalUserChat,
-		canSend = UseCanSendToChannelResult and TargetChannel ~= nil,
+		canSend = UseCanSendToChannelResult and (TargetChannel ~= nil and not IsDirectChatChannelModule1),
 		onKeyboardActivated = UseFocusInputBarResult.focus,
 		footerText = UseMemoResult.presetDisclaimer,
 		focusNavEnabled = FocusNavEnabled == true and FFlagExpChatTextChannelWindowFocusNavModule,

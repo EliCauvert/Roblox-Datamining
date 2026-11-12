@@ -4,7 +4,6 @@ local CryoModule = require(Parent.Cryo)
 local FoundationModule = require(Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local ImageSetLabel = require(Parent.UIBlox).Core.ImageSet.ImageSetLabel
 local CheckAndFormatPossibleLinkFunction = require(Parent.CollectionViews).checkAndFormatPossibleLink
 local TextSizeModule = require(Parent.TextSize)
@@ -39,7 +38,7 @@ local function applyOverrides(p1, IconOverrides)
 end
 
 return ReactModule.memo(function(p2)
-	-- upvalues: TextSizeModule (copy), UseTokensFunction (copy), CheckAndFormatPossibleLinkFunction (copy), ReactModule (copy), applyOverrides (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ImageSetLabel (copy)
+	-- upvalues: TextSizeModule (copy), UseTokensFunction (copy), CheckAndFormatPossibleLinkFunction (copy), ReactModule (copy), applyOverrides (copy), NormalizeFontFaceFunction (copy), ImageSetLabel (copy)
 	local LayoutOrder = p2.layoutOrder
 	local AnchorPoint = p2.anchorPoint
 	local AutomaticSize = p2.automaticSize
@@ -88,8 +87,7 @@ return ReactModule.memo(function(p2)
 			Text = CheckAndFormatPossibleLinkResult2 or "",
 			AutomaticSize = Enum.AutomaticSize.X,
 			Size = Size or UDim2.new(0, 0, 0, Ceiled),
-			Font = if FoundationFontFaceMigration then nil else FontStyle.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(FontStyle.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(FontStyle.Font),
 			TextSize = FontStyle.FontSize,
 			TextTransparency = 0,
 			TextColor3 = TextColor,

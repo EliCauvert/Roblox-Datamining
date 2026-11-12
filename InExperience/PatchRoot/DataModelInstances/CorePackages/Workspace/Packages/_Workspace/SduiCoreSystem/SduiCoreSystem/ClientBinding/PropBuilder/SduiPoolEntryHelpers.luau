@@ -12,7 +12,6 @@ local AnalyticsConstantsModule = require(SduiCoreSystem.Analytics.analyticsConst
 local FFlagSduiCollectionGridRevealRows = require(Parent.SharedFlags).FFlagSduiCollectionGridRevealRows
 local FFlagSduiSkipFeedAnalyticsPosition = require(Parent.SharedFlags).FFlagSduiSkipFeedAnalyticsPosition
 local FFlagSduiPerSectionPoolSizing = require(Parent.SharedFlags).FFlagSduiPerSectionPoolSizing
-local FFlagSduiVerticalFeedProgressiveFillOnScroll = require(Parent.SharedFlags).FFlagSduiVerticalFeedProgressiveFillOnScroll
 local FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui = require(Parent.SharedFlags).FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui
 local FFlagSduiSamePoolFeedItemSpacing = require(Parent.SharedFlags).FFlagSduiSamePoolFeedItemSpacing
 local T = if FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui then {} else nil
@@ -293,7 +292,7 @@ return {
 	end,
 	ingestPoolSections = ingestPoolSections,
 	createPoolEntryFns = function(List, p4, p5, p6, p7, p8, p9)
-		-- upvalues: ingestPoolSections (copy), FFlagSduiSamePoolFeedItemSpacing (copy), FFlagSduiVerticalFeedProgressiveFillOnScroll (copy), FFlagSduiCollectionGridRevealRows (copy), SduiListEntryRendererModule (copy)
+		-- upvalues: ingestPoolSections (copy), FFlagSduiSamePoolFeedItemSpacing (copy), FFlagSduiCollectionGridRevealRows (copy), SduiListEntryRendererModule (copy)
 		local IngestPoolSectionsResult = ingestPoolSections(List, p8, p6, p9)
 		local v2: ((any) -> any)? = nil
 		local EntryConfigExtrasFn: ((any, any) -> any)? = nil
@@ -327,13 +326,13 @@ return {
 			end
 			
 			EntryConfigExtrasFn = function(p10, _)
-				-- upvalues: IngestPoolSectionsResult (copy), FFlagSduiVerticalFeedProgressiveFillOnScroll (upval), FFlagSduiCollectionGridRevealRows (upval), FFlagSduiSamePoolFeedItemSpacing (upval), t2 (copy)
+				-- upvalues: IngestPoolSectionsResult (copy), FFlagSduiCollectionGridRevealRows (upval), FFlagSduiSamePoolFeedItemSpacing (upval), t2 (copy)
 				local Identifier = p10.identifier
 				
 				return if typeof(Identifier) == "string" then {
 					_requiresDataBinding = true,
 					startRowGetter = IngestPoolSectionsResult.getSectionStartRow(Identifier),
-					numberOfRowsGetter = if FFlagSduiVerticalFeedProgressiveFillOnScroll then IngestPoolSectionsResult.getSectionRowCount(Identifier) else nil,
+					numberOfRowsGetter = IngestPoolSectionsResult.getSectionRowCount(Identifier),
 					setDisplayedRowCount = if FFlagSduiCollectionGridRevealRows then function(p11)
 						-- upvalues: IngestPoolSectionsResult (upval), Identifier (copy)
 						IngestPoolSectionsResult.setSectionDisplayedRowCount(Identifier, p11)

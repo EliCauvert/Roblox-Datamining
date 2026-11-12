@@ -4,9 +4,9 @@ local _ = require(Foundation.Providers.Style.Tokens)
 local _ = require(script.Parent.Rules.Types)
 local FormatTokensModule = require(script.Parent.formatTokens)
 
-return function(p1, Callback, p2)
+return function(p1, Callback)
 	-- upvalues: FormatTokensModule (copy), DashModule (copy)
-	local CallbackResult, CallbackResult2, CallbackResult3, CallbackResult4 = Callback(p1, FormatTokensModule(p1), p2)
+	local CallbackResult, CallbackResult2, CallbackResult3, CallbackResult4 = Callback(p1, (FormatTokensModule(p1)))
 	
 	return DashModule.joinArrays(CallbackResult, CallbackResult2, CallbackResult3), CallbackResult, CallbackResult2, CallbackResult3, CallbackResult4
 end

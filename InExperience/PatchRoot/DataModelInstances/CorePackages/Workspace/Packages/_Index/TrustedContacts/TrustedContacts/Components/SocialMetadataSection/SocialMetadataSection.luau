@@ -1,7 +1,6 @@
 ﻿local TrustedContacts = script:FindFirstAncestor("TrustedContacts")
 local Parent = TrustedContacts.Parent
 local ReactModule = require(Parent.React)
-local UserProfilesModule = require(Parent.UserProfiles)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local _ = require(Parent.GraphQLServer)
 local ApolloProfileInsightsModule = require(Parent.ApolloProfileInsights)
@@ -24,40 +23,28 @@ local FFlagProfilePlatformAddTC = require(Parent.SharedFlags).FFlagProfilePlatfo
 local FStringParentLinkAmpNameSpace = require(Parent.SharedFlags).FStringParentLinkAmpNameSpace
 local GetFFlagEnableProfileInsightsApolloMigrationFunction = require(Parent.SharedFlags).GetFFlagEnableProfileInsightsApolloMigration
 local FFlagTFClassmatesProfileInsight = require(Parent.SharedFlags).FFlagTFClassmatesProfileInsight
-local SocialMetadataSectionMigrateUserProfileToSignals = game:DefineFastFlag("SocialMetadataSectionMigrateUserProfileToSignals", false)
-local GetResult = if SocialMetadataSectionMigrateUserProfileToSignals then UserProfilesModule.Stores.UserProfileStore.get() else nil
+local GetResult = require(Parent.UserProfiles).Stores.UserProfileStore.get()
 
 return function(p1)
-	-- upvalues: SocialMetadataSectionMigrateUserProfileToSignals (copy), UserProfilesModule (copy), ReactModule (copy), SignalsModule (copy), GetResult (copy), SignalsReactModule (copy), GetFFlagEnableProfileInsightsApolloMigrationFunction (copy), UseSignalProfileInsightsByUserIdFunction (copy), UseProfileInsightsByUserIdsFunction (copy), GetProfileInsightsByUserIdFromDataFunction (copy), IsCustomNilModule (copy), UseLocalizationFunction (copy), AmpApiProvider (copy), FStringParentLinkAmpNameSpace (copy), AccessResponseEnum (copy), FoundationModule (copy), View (copy), UserTile (copy), LayoutMode (copy), FFlagTFClassmatesProfileInsight (copy), Skeleton (copy), FFlagProfilePlatformAddTC (copy), SocialMetadataIconsAndTextsSectionModule (copy)
-	local UseUserProfilesFetchResult = if SocialMetadataSectionMigrateUserProfileToSignals then nil else UserProfilesModule.Hooks.useUserProfilesFetch({
-		userIds = { p1.userId },
-		query = UserProfilesModule.Queries.userProfilesCombinedNameAndUsernameByUserIds
-	})
+	-- upvalues: ReactModule (copy), SignalsModule (copy), GetResult (copy), SignalsReactModule (copy), GetFFlagEnableProfileInsightsApolloMigrationFunction (copy), UseSignalProfileInsightsByUserIdFunction (copy), UseProfileInsightsByUserIdsFunction (copy), GetProfileInsightsByUserIdFromDataFunction (copy), IsCustomNilModule (copy), UseLocalizationFunction (copy), AmpApiProvider (copy), FStringParentLinkAmpNameSpace (copy), AccessResponseEnum (copy), FoundationModule (copy), View (copy), UserTile (copy), LayoutMode (copy), FFlagTFClassmatesProfileInsight (copy), Skeleton (copy), FFlagProfilePlatformAddTC (copy), SocialMetadataIconsAndTextsSectionModule (copy)
 	local CombinedName = ""
 	local Username = ""
-	
-	if not SocialMetadataSectionMigrateUserProfileToSignals and UseUserProfilesFetchResult and UseUserProfilesFetchResult.data then
-		CombinedName = UserProfilesModule.Selectors.getCombinedNameFromId(UseUserProfilesFetchResult.data, p1.userId) or ""
-		Username = UserProfilesModule.Selectors.getUsernameFromId(UseUserProfilesFetchResult.data, p1.userId) or ""
-	end
-	if SocialMetadataSectionMigrateUserProfileToSignals then
-		local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
-			-- upvalues: SignalsModule (upval), GetResult (upval), p1 (copy)
-			return SignalsModule.createComputed(function(p2)
-				-- upvalues: GetResult (upval), p1 (upval)
-				local v1 = GetResult and GetResult.fetchNamesByUserIds({ (tostring(p1.userId)) })(p2)
-				local Entry = v1 and (v1.data and v1.data[1])
-				local Names = Entry and Entry.names
-				
-				return {
-					combinedName = if Names then Names.getCombinedName(p2) else "",
-					username = if Names then Names.getUsername() else ""
-				}
-			end)
-		end, { p1.userId })))
-		Username = UseSignalStateResult.username
-		CombinedName = UseSignalStateResult.combinedName
-	end
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
+		-- upvalues: SignalsModule (upval), GetResult (upval), p1 (copy)
+		return SignalsModule.createComputed(function(p2)
+			-- upvalues: GetResult (upval), p1 (upval)
+			local v1 = GetResult and GetResult.fetchNamesByUserIds({ (tostring(p1.userId)) })(p2)
+			local Entry = v1 and (v1.data and v1.data[1])
+			local Names = Entry and Entry.names
+			
+			return {
+				combinedName = if Names then Names.getCombinedName(p2) else "",
+				username = if Names then Names.getUsername() else ""
+			}
+		end)
+	end, { p1.userId })))
+	Username = UseSignalStateResult.username
+	CombinedName = UseSignalStateResult.combinedName
 	local t = {}
 	local UseSignalProfileInsightsByUserIdResult2 = nil
 	

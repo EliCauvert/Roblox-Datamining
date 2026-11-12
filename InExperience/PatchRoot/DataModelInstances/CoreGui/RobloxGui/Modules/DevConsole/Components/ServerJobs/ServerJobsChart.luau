@@ -170,10 +170,10 @@ function ServerJobsChart.render(p1)
 			LayoutOrder = LayoutOrder
 		})
 	end
-	local YOffset = 0
+	local YOffset1 = 0
 	
 	if AbsScrollSize then
-		local YOffset1 = -1
+		local YOffset = -1
 		local Total = 0
 		
 		for i1, value in pairs(ServerJobsList) do
@@ -185,7 +185,7 @@ function ServerJobsChart.render(p1)
 				local IsExpandIndexMatch = ExpandIndex == Name
 				local NewEntryFrameHeight = IsExpandIndexMatch and EntryFrameHeight + 3 * LineGraphHeight / 2 + CellPadding * 4 or EntryFrameHeight
 				
-				if CanvasPos.Y <= YOffset + NewEntryFrameHeight then
+				if CanvasPos.Y <= YOffset1 + NewEntryFrameHeight then
 					if Total < AbsScrollSize.Y then
 						local CountServerJobsListDelta = ReverseSort and CountServerJobsList - i1 or i1
 						local config = {
@@ -265,16 +265,16 @@ function ServerJobsChart.render(p1)
 							})
 						})
 					end
-					if YOffset1 < 0 then
-						YOffset1 = YOffset
+					if YOffset < 0 then
+						YOffset = YOffset1
 					else
 						Total += NewEntryFrameHeight
 					end
 				end
-				YOffset += NewEntryFrameHeight
+				YOffset1 += NewEntryFrameHeight
 			end
 		end
-		if YOffset1 == -1 then
+		if YOffset == -1 then
 			Frames.emptyResult = RoactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				Size = Size,
@@ -285,7 +285,7 @@ function ServerJobsChart.render(p1)
 			Frames.WindowingPadding = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
-				Size = UDim2.new(1, 0, 0, YOffset1)
+				Size = UDim2.new(1, 0, 0, YOffset)
 			})
 		end
 	end
@@ -343,7 +343,7 @@ function ServerJobsChart.render(p1)
 			BackgroundTransparency = 1,
 			VerticalScrollBarInset = 1,
 			ScrollBarThickness = 5,
-			CanvasSize = UDim2.new(0, Largest, 0, YOffset),
+			CanvasSize = UDim2.new(0, Largest, 0, YOffset1),
 			[RoactModule.Ref] = p1.scrollingRef
 		}, Frames)
 	})

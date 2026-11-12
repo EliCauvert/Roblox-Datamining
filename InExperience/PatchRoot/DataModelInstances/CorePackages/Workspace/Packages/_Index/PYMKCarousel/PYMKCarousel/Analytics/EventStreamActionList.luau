@@ -10,6 +10,7 @@ local BtnValuesModule = require(script.Parent.BtnValues)
 local ConstantsModule = require(Parent.Common.Constants)
 local FormatRecommendationContextType = SocialLuaAnalyticsModule.Analytics.Formatters.formatRecommendationContextType
 local FFlagLuaAppUserSeenCollectionUnifiedFields = SharedFlagsModule.FFlagLuaAppUserSeenCollectionUnifiedFields
+local FFlagPymkCarouselExtendProps = SharedFlagsModule.FFlagPymkCarouselExtendProps
 
 local function AbsolutePosition(p1)
 	return p1
@@ -23,7 +24,9 @@ local EventStreamActionListModule = {
 	[EventNamesModule.CarouselLoadedWithUsers] = {
 		context = Contexts.HomePage,
 		eventType = EventTypes.FriendsCarouselLoaded,
-		additionalInfo = { source = ConstantsModule.HomepagePYMKCarouselSourceName },
+		additionalInfo = {
+			source = if FFlagPymkCarouselExtendProps then nil else ConstantsModule.HomepagePYMKCarouselSourceName
+		},
 		formatRulesForAdditionalInfo = {
 			recommendationLimit = nil,
 			recommendationCount = AbsolutePosition,
@@ -33,7 +36,9 @@ local EventStreamActionListModule = {
 	[EventNamesModule.PYMKCarouselLoadingTime] = {
 		context = Contexts.HomePage,
 		eventType = EventTypes.LoadingTime,
-		additionalInfo = { source = ConstantsModule.HomepagePYMKCarouselSourceName },
+		additionalInfo = {
+			source = if FFlagPymkCarouselExtendProps then nil else ConstantsModule.HomepagePYMKCarouselSourceName
+		},
 		formatRulesForAdditionalInfo = { loadingTime = AbsolutePosition }
 	},
 	[EventNamesModule.UserSeen] = {
@@ -41,7 +46,7 @@ local EventStreamActionListModule = {
 		eventType = EventTypes.UserSeen,
 		additionalInfo = {
 			isRecommendation = true,
-			source = ConstantsModule.HomepagePYMKCarouselSourceName
+			source = if FFlagPymkCarouselExtendProps then nil else ConstantsModule.HomepagePYMKCarouselSourceName
 		},
 		formatRulesForAdditionalInfo = {
 			absolutePosition = AbsolutePosition,
@@ -60,7 +65,7 @@ local EventStreamActionListModule = {
 			isRecommendation = true,
 			contentType = "User",
 			actionType = "OpenProfile",
-			source = ConstantsModule.HomepagePYMKCarouselSourceName,
+			source = if FFlagPymkCarouselExtendProps then nil else ConstantsModule.HomepagePYMKCarouselSourceName,
 			btn = BtnValuesModule.OpenPeopleList
 		},
 		formatRulesForAdditionalInfo = {
@@ -82,7 +87,7 @@ local EventStreamActionListModule = {
 			contentType = "User",
 			actionType = "RequestFriendship",
 			btn = BtnValuesModule.RequestFriendship,
-			source = ConstantsModule.HomepagePYMKCarouselSourceName
+			source = if FFlagPymkCarouselExtendProps then nil else ConstantsModule.HomepagePYMKCarouselSourceName
 		},
 		formatRulesForAdditionalInfo = {
 			absolutePosition = AbsolutePosition,
@@ -100,7 +105,7 @@ local EventStreamActionListModule = {
 		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
 			btn = BtnValuesModule.AcceptFriendship,
-			source = ConstantsModule.HomepagePYMKCarouselSourceName
+			source = if FFlagPymkCarouselExtendProps then nil else ConstantsModule.HomepagePYMKCarouselSourceName
 		},
 		formatRulesForAdditionalInfo = {
 			absolutePosition = AbsolutePosition,
@@ -119,7 +124,9 @@ local EventStreamActionListModule = {
 	[EventNamesModule.UserSeenCollection] = if SharedFlagsModule.FFlagLuaAppPYMKSendUserSeenCollection then {
 		context = Contexts.HomePage,
 		eventType = EventTypes.UserSeenCollection,
-		additionalInfo = { source = ConstantsModule.HomepagePYMKCarouselSourceName },
+		additionalInfo = {
+			source = if FFlagPymkCarouselExtendProps then nil else ConstantsModule.HomepagePYMKCarouselSourceName
+		},
 		formatRulesForAdditionalInfo = {
 			userId = AbsolutePosition,
 			absolutePosition = AbsolutePosition,
@@ -147,7 +154,9 @@ if require(Parent.dependencies).getFFlagPYMKAddFriendsEntry() then
 	EventStreamActionListModule[EventNamesModule.CarouselGenericTileClicked] = {
 		context = Contexts.HomePage,
 		eventType = EventTypes.ButtonClick,
-		additionalInfo = { source = ConstantsModule.HomepagePYMKCarouselSourceName },
+		additionalInfo = {
+			source = if FFlagPymkCarouselExtendProps then nil else ConstantsModule.HomepagePYMKCarouselSourceName
+		},
 		formatRulesForAdditionalInfo = { btn = AbsolutePosition }
 	}
 end

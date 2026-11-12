@@ -1,5 +1,6 @@
 ﻿local Parent = script.Parent.Parent
 local _ = require(Parent.LuauPolyfill)
+local _ = require(Parent.ReactCompilerRuntime)
 local _ = require(Parent.Shared)
 local _ = require(script.Parent.ReactWorkTags)
 local _ = require(script.Parent.ReactTypeOfMode)

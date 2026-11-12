@@ -31,7 +31,6 @@ local SduiRetryPolicyModule = require(SduiSharedUtilities.SduiRetryPolicy)
 local SendSduiHttpRequestModule = require(SduiSharedUtilities.sendSduiHttpRequest)
 local FFlagSduiAllowNoConfigsBuilt = require(Parent.SharedFlags).FFlagSduiAllowNoConfigsBuilt
 local FFlagSduiAlwaysCacheWithIdentifier = require(Parent.SharedFlags).FFlagSduiAlwaysCacheWithIdentifier
-local FFlagLuaAppSduiStreamingChunkedResponses = require(Parent.SharedFlags).FFlagLuaAppSduiStreamingChunkedResponses
 local FFlagSduiDismissPromptAction = require(Parent.SharedFlags).FFlagSduiDismissPromptAction
 local FFlagPromptsEdpOpenReplaceOnFetch = require(Parent.SharedFlags).FFlagPromptsEdpOpenReplaceOnFetch
 local FFlagSduiApiStoreUpdateInputData = require(Parent.SharedFlags).FFlagSduiApiStoreUpdateInputData
@@ -40,7 +39,6 @@ local FFlagSduiUseHttpClientModule = require(SduiSharedUtilities.Flags.FFlagSdui
 local FFlagSduiRequestCountersModule = require(SduiSharedUtilities.Flags.FFlagSduiRequestCounters)
 local FFlagSduiFreshInputDataSignalOnRebuild = require(Parent.SharedFlags).FFlagSduiFreshInputDataSignalOnRebuild
 local FFlagSduiMrRouterHeadersModule = require(SduiSharedUtilities.Flags.FFlagSduiMrRouterHeaders)
-local FFlagHomeSduiOfflineCache = require(Parent.SharedFlags).FFlagHomeSduiOfflineCache
 local FFlagLuaAppEnableSduiHomePage = require(Parent.SharedFlags).FFlagLuaAppEnableSduiHomePage
 local FFlagSduiStreamingRefreshReplacesInputData = require(Parent.SharedFlags).FFlagSduiStreamingRefreshReplacesInputData
 local FFlagLuaAppSduiSearchAutocomplete = require(Parent.SharedFlags).FFlagLuaAppSduiSearchAutocomplete
@@ -86,7 +84,7 @@ local function getSduiRequestEndpointForCounters(Text: string): string
 end
 
 return function(p1)
-	-- upvalues: CreateDataCacheFunction (copy), FFlagDataHydrationAccountReset (copy), FFlagLuaAppEnableSduiHomePage (copy), FFlagSduiReleaseSearchResultsPageState (copy), SignalsModule (copy), PromiseModule (copy), FFlagSduiRequestCountersModule (copy), getSduiRequestEndpointForCounters (copy), SduiResponseType (copy), FFlagLuaAppSduiStreamingChunkedResponses (copy), MakeProtobufJsonResponseDecoderFunction (copy), MakeProtoResponseDecoderFunction (copy), FFlagSduiStreamingRefreshReplacesInputData (copy), HandleSduiApiResponseModule (copy), SduiProtobufResponseHelpersModule (copy), FFlagSduiFreshInputDataSignalOnRebuild (copy), FFlagSduiAllowNoConfigsBuilt (copy), FFlagHomeSduiOfflineCache (copy), SduiLogger (copy), SduiErrors (copy), SduiParseHelpers (copy), SduiRequestStatus (copy), CreateSduiStreamingResponseHandlerModule (copy), FFlagHomePageRefetchOnDataHydrationAccountReset (copy), SduiPageAnalyticsModule (copy), FFlagLuaAppSduiSearchAutocomplete (copy), FFlagSduiUseHttpClientModule (copy), AccumulateSduiCacheSubEntriesModule (copy), FFlagLuaAppEnableSduiApiStoreInFlightFix (copy), FFlagPromptsEdpOpenReplaceOnFetch (copy), CryoModule (copy), SduiApiStorePostConfigModule (copy), SduiRetryPolicyModule (copy), SduiPageRequestPriority (copy), SendSduiHttpRequestModule (copy), HttpService (copy), FFlagSduiMrRouterHeadersModule (copy), BuildSduiRequestHeadersModule (copy), CreateDataResolverFunction (copy), SduiRequestConcurrencyPolicy (copy), GetLocalPlayerUserIdFunction (copy), ResolveSduiCacheEntryModule (copy), FFlagSduiAlwaysCacheWithIdentifier (copy), FFlagAppChatConversationTrustedFriendUpsellBanner (copy), FFlagSduiDismissPromptAction (copy), FFlagSduiApiStoreUpdateInputData (copy)
+	-- upvalues: CreateDataCacheFunction (copy), FFlagDataHydrationAccountReset (copy), FFlagLuaAppEnableSduiHomePage (copy), FFlagSduiReleaseSearchResultsPageState (copy), SignalsModule (copy), PromiseModule (copy), FFlagSduiRequestCountersModule (copy), getSduiRequestEndpointForCounters (copy), SduiResponseType (copy), MakeProtobufJsonResponseDecoderFunction (copy), MakeProtoResponseDecoderFunction (copy), FFlagSduiStreamingRefreshReplacesInputData (copy), HandleSduiApiResponseModule (copy), SduiProtobufResponseHelpersModule (copy), FFlagSduiFreshInputDataSignalOnRebuild (copy), FFlagSduiAllowNoConfigsBuilt (copy), SduiLogger (copy), SduiErrors (copy), SduiParseHelpers (copy), SduiRequestStatus (copy), CreateSduiStreamingResponseHandlerModule (copy), FFlagHomePageRefetchOnDataHydrationAccountReset (copy), SduiPageAnalyticsModule (copy), FFlagLuaAppSduiSearchAutocomplete (copy), FFlagSduiUseHttpClientModule (copy), AccumulateSduiCacheSubEntriesModule (copy), FFlagLuaAppEnableSduiApiStoreInFlightFix (copy), FFlagPromptsEdpOpenReplaceOnFetch (copy), CryoModule (copy), SduiApiStorePostConfigModule (copy), SduiRetryPolicyModule (copy), SduiPageRequestPriority (copy), SendSduiHttpRequestModule (copy), HttpService (copy), FFlagSduiMrRouterHeadersModule (copy), BuildSduiRequestHeadersModule (copy), CreateDataResolverFunction (copy), SduiRequestConcurrencyPolicy (copy), GetLocalPlayerUserIdFunction (copy), ResolveSduiCacheEntryModule (copy), FFlagSduiAlwaysCacheWithIdentifier (copy), FFlagAppChatConversationTrustedFriendUpsellBanner (copy), FFlagSduiDismissPromptAction (copy), FFlagSduiApiStoreUpdateInputData (copy)
 	local DataCache = CreateDataCacheFunction(nil, nil, if FFlagDataHydrationAccountReset then { observeLocalUser = false } else nil)
 	local RequestConfigs = {}
 	local T = if FFlagLuaAppEnableSduiHomePage then {} else nil
@@ -260,7 +258,7 @@ return function(p1)
 	local SeedFromDecodedResponse = nil
 	
 	local function fetchFunction(ConfigKey, CachedItem, p2, Callback)
-		-- upvalues: FFlagLuaAppEnableSduiHomePage (upval), RequestConfigs (ref), PromiseModule (upval), FFlagSduiReleaseSearchResultsPageState (upval), t (ref), completeActiveRequest (copy), FFlagSduiRequestCountersModule (upval), getSduiRequestEndpointForCounters (upval), SduiResponseType (upval), FFlagLuaAppSduiStreamingChunkedResponses (upval), MakeProtobufJsonResponseDecoderFunction (upval), MakeProtoResponseDecoderFunction (upval), FFlagSduiStreamingRefreshReplacesInputData (upval), HandleSduiApiResponseModule (upval), SduiProtobufResponseHelpersModule (upval), T1 (ref), t2 (ref), SignalsModule (upval), getInputDataSignals (copy), FFlagSduiFreshInputDataSignalOnRebuild (upval), setInputDataSignals (copy), FFlagSduiAllowNoConfigsBuilt (upval), FFlagHomeSduiOfflineCache (upval), SduiLogger (upval), SduiErrors (upval), SduiParseHelpers (upval), SeedFromDecodedResponse (ref), SduiRequestStatus (upval), CreateSduiStreamingResponseHandlerModule (upval), FFlagHomePageRefetchOnDataHydrationAccountReset (upval), v1 (ref), SduiPageAnalyticsModule (upval), FFlagLuaAppSduiSearchAutocomplete (upval), FFlagSduiUseHttpClientModule (upval), AccumulateSduiCacheSubEntriesModule (upval), DataCache (copy), FFlagLuaAppEnableSduiApiStoreInFlightFix (upval), t1 (ref), FFlagPromptsEdpOpenReplaceOnFetch (upval), CryoModule (upval), SduiApiStorePostConfigModule (upval), SduiRetryPolicyModule (upval), p1 (copy), SduiPageRequestPriority (upval), SendSduiHttpRequestModule (upval), HttpService (upval), FFlagSduiMrRouterHeadersModule (upval), BuildSduiRequestHeadersModule (upval)
+		-- upvalues: FFlagLuaAppEnableSduiHomePage (upval), RequestConfigs (ref), PromiseModule (upval), FFlagSduiReleaseSearchResultsPageState (upval), t (ref), completeActiveRequest (copy), FFlagSduiRequestCountersModule (upval), getSduiRequestEndpointForCounters (upval), SduiResponseType (upval), MakeProtobufJsonResponseDecoderFunction (upval), MakeProtoResponseDecoderFunction (upval), FFlagSduiStreamingRefreshReplacesInputData (upval), HandleSduiApiResponseModule (upval), SduiProtobufResponseHelpersModule (upval), T1 (ref), t2 (ref), SignalsModule (upval), getInputDataSignals (copy), FFlagSduiFreshInputDataSignalOnRebuild (upval), setInputDataSignals (copy), FFlagSduiAllowNoConfigsBuilt (upval), SduiLogger (upval), SduiErrors (upval), SduiParseHelpers (upval), SeedFromDecodedResponse (ref), SduiRequestStatus (upval), CreateSduiStreamingResponseHandlerModule (upval), FFlagHomePageRefetchOnDataHydrationAccountReset (upval), v1 (ref), SduiPageAnalyticsModule (upval), FFlagLuaAppSduiSearchAutocomplete (upval), FFlagSduiUseHttpClientModule (upval), AccumulateSduiCacheSubEntriesModule (upval), DataCache (copy), FFlagLuaAppEnableSduiApiStoreInFlightFix (upval), t1 (ref), FFlagPromptsEdpOpenReplaceOnFetch (upval), CryoModule (upval), SduiApiStorePostConfigModule (upval), SduiRetryPolicyModule (upval), p1 (copy), SduiPageRequestPriority (upval), SendSduiHttpRequestModule (upval), HttpService (upval), FFlagSduiMrRouterHeadersModule (upval), BuildSduiRequestHeadersModule (upval)
 		local v2: boolean = FFlagLuaAppEnableSduiHomePage and p2 ~= nil
 		local RequestConfig = if FFlagLuaAppEnableSduiHomePage and v2 then p2 else RequestConfigs[ConfigKey]
 		
@@ -286,12 +284,12 @@ return function(p1)
 		local IsResponseTypeMatch = RequestConfig.responseType == SduiResponseType.ProtobufJson
 		local PostConfig = RequestConfig.postConfig
 		local POST: string = if PostConfig then "POST" else "GET"
-		local EnableStreaming = if FFlagLuaAppSduiStreamingChunkedResponses then RequestConfig.enableStreaming else nil
+		local EnableStreaming = RequestConfig.enableStreaming
 		local ProtobufJsonResponseDecoder = if IsResponseTypeMatch then MakeProtobufJsonResponseDecoderFunction(RequestConfig.apiProto) else MakeProtoResponseDecoderFunction(RequestConfig.apiProto)
 		local EnableInputDataMerge = if FFlagSduiStreamingRefreshReplacesInputData then RequestConfig.enableInputDataMerge else nil
 		
 		local function processSduiResponse(Response)
-			-- upvalues: RequestConfig (copy), CachedItem (copy), FFlagLuaAppEnableSduiHomePage (upval), FFlagSduiStreamingRefreshReplacesInputData (upval), EnableInputDataMerge (ref), FFlagLuaAppSduiStreamingChunkedResponses (upval), EnableStreaming (copy), HandleSduiApiResponseModule (upval), LoadTimer (copy), ProtobufJsonResponseDecoder (copy), SduiProtobufResponseHelpersModule (upval), FFlagSduiReleaseSearchResultsPageState (upval), ConfigKey (copy), T1 (upval), t2 (upval), SignalsModule (upval), getInputDataSignals (upval), FFlagSduiFreshInputDataSignalOnRebuild (upval), setInputDataSignals (upval), FFlagSduiAllowNoConfigsBuilt (upval)
+			-- upvalues: RequestConfig (copy), CachedItem (copy), FFlagLuaAppEnableSduiHomePage (upval), FFlagSduiStreamingRefreshReplacesInputData (upval), EnableInputDataMerge (ref), EnableStreaming (copy), HandleSduiApiResponseModule (upval), LoadTimer (copy), ProtobufJsonResponseDecoder (copy), SduiProtobufResponseHelpersModule (upval), FFlagSduiReleaseSearchResultsPageState (upval), ConfigKey (copy), T1 (upval), t2 (upval), SignalsModule (upval), getInputDataSignals (upval), FFlagSduiFreshInputDataSignalOnRebuild (upval), setInputDataSignals (upval), FFlagSduiAllowNoConfigsBuilt (upval)
 			local HandleSduiApiResponseModuleResult, HandleSduiApiResponseModuleResult2 = HandleSduiApiResponseModule({
 				response = Response,
 				loadTimer = LoadTimer,
@@ -327,8 +325,8 @@ return function(p1)
 					return v6
 				end else getInputDataSignals,
 				setInputDataSignalsForRequest = if FFlagSduiFreshInputDataSignalOnRebuild then setInputDataSignals else nil,
-				enableStreamingMerge = if FFlagLuaAppSduiStreamingChunkedResponses then EnableStreaming else nil,
-				enableInputDataMerge = if FFlagLuaAppEnableSduiHomePage or FFlagSduiStreamingRefreshReplacesInputData then if EnableInputDataMerge == nil then FFlagLuaAppSduiStreamingChunkedResponses and EnableStreaming or (RequestConfig.enableInputDataMerge or nil) else EnableInputDataMerge else nil,
+				enableStreamingMerge = EnableStreaming,
+				enableInputDataMerge = if FFlagLuaAppEnableSduiHomePage or FFlagSduiStreamingRefreshReplacesInputData then if EnableInputDataMerge == nil then EnableStreaming or (RequestConfig.enableInputDataMerge or nil) else EnableInputDataMerge else nil,
 				paginateResponse = RequestConfig.isPaginated and CachedItem.data(false) ~= nil,
 				buildNextPageUrl = RequestConfig.buildNextPageUrl,
 				buildNextPagePostBody = RequestConfig.buildNextPagePostBody,
@@ -344,7 +342,7 @@ return function(p1)
 			return HandleSduiApiResponseModuleResult, HandleSduiApiResponseModuleResult2
 		end
 		
-		local Callback1 = if FFlagHomeSduiOfflineCache then function(p3)
+		local function v119(p3)
 			-- upvalues: RequestConfig (copy), CachedItem (copy), SduiLogger (upval), SduiErrors (upval), SduiParseHelpers (upval), SeedFromDecodedResponse (upval), ConfigKey (copy), LoadTimer (copy), SduiRequestStatus (upval)
 			local RecoverFromError = RequestConfig.recoverFromError
 			
@@ -407,9 +405,10 @@ return function(p1)
 				RecoverFromError.onApplied()
 			end
 			return DataResult1
-		end else nil
+		end
+		
 		local v4 = nil
-		local SduiStreamingResponseHandlerModule = if FFlagLuaAppSduiStreamingChunkedResponses and EnableStreaming then CreateSduiStreamingResponseHandlerModule({
+		local SduiStreamingResponseHandlerModule = if EnableStreaming then CreateSduiStreamingResponseHandlerModule({
 			configKey = ConfigKey,
 			loadTimer = LoadTimer,
 			processFrame = function(p3)
@@ -450,51 +449,52 @@ return function(p1)
 			end
 		}) else nil
 		
-		local function createRequestPromise(Callback2)
-			-- upvalues: PromiseModule (upval), FFlagHomeSduiOfflineCache (upval), FFlagSduiRequestCountersModule (upval), SduiPageAnalyticsModule (upval), RequestConfig (copy), SduiRequestEndpointForCounters (copy), Callback1 (ref), FFlagLuaAppEnableSduiHomePage (upval), CompleteActiveRequest (ref), completeActiveRequest (upval), ConfigKey (copy), FFlagHomePageRefetchOnDataHydrationAccountReset (upval), v1 (upval), FFlagSduiReleaseSearchResultsPageState (upval), v3 (ref), LoadTimer (copy), v2 (copy), t (upval), FFlagSduiUseHttpClientModule (upval), SduiRequestStatus (upval), FFlagLuaAppSduiSearchAutocomplete (upval), Callback (copy), FFlagLuaAppEnableSduiApiStoreInFlightFix (upval), t1 (upval), SduiStreamingResponseHandlerModule (copy), v4 (ref), SduiParseHelpers (upval), SduiLogger (upval), SduiErrors (upval), processSduiResponse (copy), Url (copy), CachedItem (copy), FFlagPromptsEdpOpenReplaceOnFetch (upval), CryoModule (upval)
-			return PromiseModule.new(function(Callback9: (any) -> any, Callback6: (any) -> any, Callback3: (any) -> ())
-				-- upvalues: FFlagHomeSduiOfflineCache (upval), FFlagSduiRequestCountersModule (upval), SduiPageAnalyticsModule (upval), RequestConfig (upval), SduiRequestEndpointForCounters (upval), Callback1 (upval), FFlagLuaAppEnableSduiHomePage (upval), CompleteActiveRequest (upval), completeActiveRequest (upval), ConfigKey (upval), Callback2 (copy), FFlagHomePageRefetchOnDataHydrationAccountReset (upval), v1 (upval), FFlagSduiReleaseSearchResultsPageState (upval), v3 (upval), LoadTimer (upval), v2 (upval), t (upval), FFlagSduiUseHttpClientModule (upval), SduiRequestStatus (upval), FFlagLuaAppSduiSearchAutocomplete (upval), Callback (upval), FFlagLuaAppEnableSduiApiStoreInFlightFix (upval), t1 (upval), SduiStreamingResponseHandlerModule (upval), v4 (upval), SduiParseHelpers (upval), SduiLogger (upval), SduiErrors (upval), processSduiResponse (upval), Url (upval), CachedItem (upval), FFlagPromptsEdpOpenReplaceOnFetch (upval), CryoModule (upval)
-				local Callback8 = Callback9
-				local Callback7 = if FFlagHomeSduiOfflineCache then Callback9 else nil
+		local function createRequestPromise(Callback1)
+			-- upvalues: PromiseModule (upval), FFlagSduiRequestCountersModule (upval), SduiPageAnalyticsModule (upval), RequestConfig (copy), SduiRequestEndpointForCounters (copy), v119 (copy), FFlagLuaAppEnableSduiHomePage (upval), CompleteActiveRequest (ref), completeActiveRequest (upval), ConfigKey (copy), FFlagHomePageRefetchOnDataHydrationAccountReset (upval), v1 (upval), FFlagSduiReleaseSearchResultsPageState (upval), v3 (ref), LoadTimer (copy), v2 (copy), t (upval), FFlagSduiUseHttpClientModule (upval), SduiRequestStatus (upval), FFlagLuaAppSduiSearchAutocomplete (upval), Callback (copy), FFlagLuaAppEnableSduiApiStoreInFlightFix (upval), t1 (upval), SduiStreamingResponseHandlerModule (copy), v4 (ref), SduiParseHelpers (upval), SduiLogger (upval), SduiErrors (upval), processSduiResponse (copy), Url (copy), CachedItem (copy), FFlagPromptsEdpOpenReplaceOnFetch (upval), CryoModule (upval)
+			return PromiseModule.new(function(Callback8: (any) -> any, Callback5: (any) -> any, Callback2: (any) -> ())
+				-- upvalues: FFlagSduiRequestCountersModule (upval), SduiPageAnalyticsModule (upval), RequestConfig (upval), SduiRequestEndpointForCounters (upval), v119 (upval), FFlagLuaAppEnableSduiHomePage (upval), CompleteActiveRequest (upval), completeActiveRequest (upval), ConfigKey (upval), Callback1 (copy), FFlagHomePageRefetchOnDataHydrationAccountReset (upval), v1 (upval), FFlagSduiReleaseSearchResultsPageState (upval), v3 (upval), LoadTimer (upval), v2 (upval), t (upval), FFlagSduiUseHttpClientModule (upval), SduiRequestStatus (upval), FFlagLuaAppSduiSearchAutocomplete (upval), Callback (upval), FFlagLuaAppEnableSduiApiStoreInFlightFix (upval), t1 (upval), SduiStreamingResponseHandlerModule (upval), v4 (upval), SduiParseHelpers (upval), SduiLogger (upval), SduiErrors (upval), processSduiResponse (upval), Url (upval), CachedItem (upval), FFlagPromptsEdpOpenReplaceOnFetch (upval), CryoModule (upval)
+				local Callback7 = Callback8
+				local Callback6 = Callback8
 				local StatusCode = nil
 				local HttpError = nil
 				
 				if FFlagSduiRequestCountersModule then
-					local Callback5 = Callback9
-					local Callback4 = Callback6
+					local Callback3 = Callback8
+					local Callback4 = Callback5
 					
-					Callback9 = function(JoinResults)
-						-- upvalues: SduiPageAnalyticsModule (upval), RequestConfig (upval), SduiRequestEndpointForCounters (upval), StatusCode (ref), HttpError (ref), Callback5 (copy)
+					Callback8 = function(JoinResults)
+						-- upvalues: SduiPageAnalyticsModule (upval), RequestConfig (upval), SduiRequestEndpointForCounters (upval), StatusCode (ref), HttpError (ref), Callback3 (copy)
 						SduiPageAnalyticsModule.sendRequestOutcomeCounter(RequestConfig.surfaceKey, SduiRequestEndpointForCounters, "success", StatusCode, HttpError)
 						
-						return Callback5(JoinResults)
+						return Callback3(JoinResults)
 					end
 					
-					Callback6 = function(p3)
+					Callback5 = function(p3)
 						-- upvalues: SduiPageAnalyticsModule (upval), RequestConfig (upval), SduiRequestEndpointForCounters (upval), StatusCode (ref), HttpError (ref), Callback4 (copy)
 						SduiPageAnalyticsModule.sendRequestOutcomeCounter(RequestConfig.surfaceKey, SduiRequestEndpointForCounters, "failure", StatusCode, HttpError)
 						
 						return Callback4(p3)
 					end
 				end
-				local Callback10 = if FFlagHomeSduiOfflineCache then function(p3, p4)
-					-- upvalues: Callback1 (upval), FFlagSduiRequestCountersModule (upval), SduiPageAnalyticsModule (upval), RequestConfig (upval), SduiRequestEndpointForCounters (upval), StatusCode (ref), HttpError (ref), Callback7 (ref), FFlagLuaAppEnableSduiHomePage (upval), CompleteActiveRequest (upval), completeActiveRequest (upval), ConfigKey (upval), Callback6 (ref)
-					local CallbackResult = Callback1(p3)
+				local function v144(p3, p4)
+					-- upvalues: v119 (upval), FFlagSduiRequestCountersModule (upval), SduiPageAnalyticsModule (upval), RequestConfig (upval), SduiRequestEndpointForCounters (upval), StatusCode (ref), HttpError (ref), Callback6 (copy), FFlagLuaAppEnableSduiHomePage (upval), CompleteActiveRequest (upval), completeActiveRequest (upval), ConfigKey (upval), Callback5 (ref)
+					local v5 = v119(p3)
 					
-					if CallbackResult == nil then
+					if v5 == nil then
 						(if FFlagLuaAppEnableSduiHomePage then CompleteActiveRequest else completeActiveRequest)(ConfigKey, false, p3)
 						
-						return Callback6(if p4 == nil then p3 else p4)
+						return Callback5(if p4 == nil then p3 else p4)
 					end
 					if FFlagSduiRequestCountersModule then
 						SduiPageAnalyticsModule.sendRequestOutcomeCounter(RequestConfig.surfaceKey, SduiRequestEndpointForCounters, "failure", StatusCode, HttpError)
 					end
-					Callback7(CallbackResult)
+					Callback6(v5)
 					
 					return (if FFlagLuaAppEnableSduiHomePage then CompleteActiveRequest else completeActiveRequest)(ConfigKey, false, p3)
-				end else nil
-				local CallbackResult = Callback2(function(p3, p4)
-					-- upvalues: FFlagHomePageRefetchOnDataHydrationAccountReset (upval), v1 (upval), RequestConfig (upval), SduiPageAnalyticsModule (upval), Callback8 (copy), FFlagSduiReleaseSearchResultsPageState (upval), v3 (upval), LoadTimer (upval), FFlagLuaAppEnableSduiHomePage (upval), v2 (upval), t (upval), ConfigKey (upval), FFlagSduiUseHttpClientModule (upval), FFlagSduiRequestCountersModule (upval), StatusCode (ref), HttpError (ref), SduiRequestStatus (upval), FFlagLuaAppSduiSearchAutocomplete (upval), Callback (upval), FFlagLuaAppEnableSduiApiStoreInFlightFix (upval), t1 (upval), Callback9 (ref), FFlagHomeSduiOfflineCache (upval), Callback10 (ref), CompleteActiveRequest (upval), completeActiveRequest (upval), Callback6 (ref), SduiStreamingResponseHandlerModule (upval), v4 (upval), SduiParseHelpers (upval), SduiLogger (upval), SduiErrors (upval), processSduiResponse (upval), Url (upval), CachedItem (upval), FFlagPromptsEdpOpenReplaceOnFetch (upval), CryoModule (upval)
+				end
+				
+				local CallbackResult = Callback1(function(p3, p4)
+					-- upvalues: FFlagHomePageRefetchOnDataHydrationAccountReset (upval), v1 (upval), RequestConfig (upval), SduiPageAnalyticsModule (upval), Callback7 (copy), FFlagSduiReleaseSearchResultsPageState (upval), v3 (upval), LoadTimer (upval), FFlagLuaAppEnableSduiHomePage (upval), v2 (upval), t (upval), ConfigKey (upval), FFlagSduiUseHttpClientModule (upval), FFlagSduiRequestCountersModule (upval), StatusCode (ref), HttpError (ref), SduiRequestStatus (upval), FFlagLuaAppSduiSearchAutocomplete (upval), Callback (upval), FFlagLuaAppEnableSduiApiStoreInFlightFix (upval), t1 (upval), Callback8 (ref), v144 (copy), SduiStreamingResponseHandlerModule (upval), CompleteActiveRequest (upval), completeActiveRequest (upval), v4 (upval), SduiParseHelpers (upval), SduiLogger (upval), SduiErrors (upval), processSduiResponse (upval), Url (upval), CachedItem (upval), FFlagPromptsEdpOpenReplaceOnFetch (upval), CryoModule (upval)
 					if FFlagHomePageRefetchOnDataHydrationAccountReset then
 						local Flag = nil
 						if v1.isCurrentRequest(RequestConfig.accountPlayerId, RequestConfig.accountGeneration) then
@@ -504,11 +504,11 @@ return function(p1)
 							Flag = true
 						end
 						if Flag then
-							return Callback8(nil)
+							return Callback7(nil)
 						end
 					end
 					if FFlagSduiReleaseSearchResultsPageState and v3 and v3.released then
-						return Callback8(nil)
+						return Callback7(nil)
 					end
 					LoadTimer.logUiResponseReceived()
 					
@@ -536,23 +536,18 @@ return function(p1)
 						if Number and Number >= 400 or HttpError1 and HttpError1 ~= Enum.HttpError.OK or IsWasTransportFailure then
 							LoadTimer.updateRequestStatus(SduiRequestStatus.FailedToLoad)
 							
-							if (FFlagLuaAppEnableSduiHomePage or FFlagLuaAppSduiSearchAutocomplete) and not (if Callback == nil then RequestConfig.isResponseCurrent == nil or RequestConfig.isResponseCurrent() else Callback() and (RequestConfig.isResponseCurrent == nil or RequestConfig.isResponseCurrent())) then
-								if (FFlagLuaAppEnableSduiApiStoreInFlightFix or FFlagLuaAppSduiSearchAutocomplete) and not v2 then
-									local Entry = t1[ConfigKey]
-									
-									if Entry then
-										t1[ConfigKey] = nil
-										Entry.resolve(nil)
-									end
-								end
-								return Callback9(nil)
-							elseif FFlagHomeSduiOfflineCache then
-								return Callback10(p4)
-							else
-								(if FFlagLuaAppEnableSduiHomePage then CompleteActiveRequest else completeActiveRequest)(ConfigKey, false, p4)
-								
-								return Callback6(p4)
+							if not FFlagLuaAppEnableSduiHomePage and not FFlagLuaAppSduiSearchAutocomplete or (if Callback == nil then RequestConfig.isResponseCurrent == nil or RequestConfig.isResponseCurrent() else Callback() and (RequestConfig.isResponseCurrent == nil or RequestConfig.isResponseCurrent())) then
+								return v144(p4)
 							end
+							if (FFlagLuaAppEnableSduiApiStoreInFlightFix or FFlagLuaAppSduiSearchAutocomplete) and not v2 then
+								local Entry = t1[ConfigKey]
+								
+								if Entry then
+									t1[ConfigKey] = nil
+									Entry.resolve(nil)
+								end
+							end
+							return Callback8(nil)
 						else
 							LoadTimer.updateRequestStatus(SduiRequestStatus.LoadedFromNetwork)
 							
@@ -565,7 +560,7 @@ return function(p1)
 										Entry.resolve(nil)
 									end
 								end
-								return Callback9(nil)
+								return Callback8(nil)
 							else
 								local ResponseBody = if FFlagSduiUseHttpClientModule then p4.responseBody else p4.Body
 								SduiPageAnalyticsModule.sendPagePayloadSizeEvent(RequestConfig.surfaceKey, ResponseBody)
@@ -576,71 +571,62 @@ return function(p1)
 									if FinalizeResult.ok then
 										(if FFlagLuaAppEnableSduiHomePage then CompleteActiveRequest else completeActiveRequest)(ConfigKey, true, FinalizeResult.value, v4)
 										
-										return Callback9(FinalizeResult.value)
-									end
-									SduiLogger.reportError(SduiErrors.SduiErrorType.FailedToFetchPage, {
-										message = SduiParseHelpers.stringifyValue(FinalizeResult.value),
-										name = RequestConfig.surfaceKey
-									}, RequestConfig.surfaceKey)
-									LoadTimer.updateRequestStatus(SduiRequestStatus.FailedToLoad)
-									
-									if FFlagHomeSduiOfflineCache then
-										return Callback10(FinalizeResult.value)
+										return Callback8(FinalizeResult.value)
 									else
-										(if FFlagLuaAppEnableSduiHomePage then CompleteActiveRequest else completeActiveRequest)(ConfigKey, false, FinalizeResult.value)
+										SduiLogger.reportError(SduiErrors.SduiErrorType.FailedToFetchPage, {
+											message = SduiParseHelpers.stringifyValue(FinalizeResult.value),
+											name = RequestConfig.surfaceKey
+										}, RequestConfig.surfaceKey)
+										LoadTimer.updateRequestStatus(SduiRequestStatus.FailedToLoad)
 										
-										return Callback6(FinalizeResult.value)
+										return v144(FinalizeResult.value)
 									end
 								else
 									local Success, Result, Result3 = pcall(processSduiResponse, p4)
 									
-									if Success then
-										local JoinResults = {}
-										
-										if FFlagPromptsEdpOpenReplaceOnFetch and RequestConfig.replaceOnFetch then
-											local DataResult = CachedItem.data(false)
-											
-											for i, value in Result do
-												JoinResults[i] = value
-											end
-											if DataResult then
-												for i1 in DataResult do
-													if Result[i1] == nil then
-														JoinResults[i1] = CryoModule.None
-													end
-												end
-											end
-										elseif next(Result) then
-											local DataResult = CachedItem.data(false)
-											
-											for i2, value1 in Result do
-												local DataResultEntry = DataResult and DataResult[i2]
-												JoinResults[i2] = if DataResultEntry then CryoModule.Dictionary.join(DataResultEntry, value1) else value1
-											end
-										elseif RequestConfig.clearOnEmptyResponse and RequestConfig.configKey then
-											JoinResults[RequestConfig.configKey] = {}
-										end;
-										(if FFlagLuaAppEnableSduiHomePage then CompleteActiveRequest else completeActiveRequest)(ConfigKey, true, JoinResults, Result3)
-										
-										return Callback9(JoinResults)
-									else
+									if not Success then
 										SduiLogger.reportError(SduiErrors.SduiErrorType.FailedToFetchPage, {
 											message = `handleSduiApiResponse not successful for {Url} err {SduiParseHelpers.stringifyValue(Result)}`,
 											name = RequestConfig.surfaceKey
 										}, RequestConfig.surfaceKey)
 										
-										if FFlagHomeSduiOfflineCache then
-											return Callback10(Result, CachedItem)
-										else
-											(if FFlagLuaAppEnableSduiHomePage then CompleteActiveRequest else completeActiveRequest)(ConfigKey, false, Result)
-											
-											return Callback6(CachedItem)
-										end
+										return v144(Result, CachedItem)
 									end
+									local JoinResults = {}
+									
+									if FFlagPromptsEdpOpenReplaceOnFetch and RequestConfig.replaceOnFetch then
+										local DataResult = CachedItem.data(false)
+										
+										for i, value in Result do
+											JoinResults[i] = value
+										end
+										if DataResult then
+											for i1 in DataResult do
+												if Result[i1] == nil then
+													JoinResults[i1] = CryoModule.None
+												end
+											end
+										end
+									elseif next(Result) then
+										local DataResult = CachedItem.data(false)
+										
+										for i2, value1 in Result do
+											local DataResultEntry = DataResult and DataResult[i2]
+											JoinResults[i2] = if DataResultEntry then CryoModule.Dictionary.join(DataResultEntry, value1) else value1
+										end
+									elseif RequestConfig.clearOnEmptyResponse and RequestConfig.configKey then
+										JoinResults[RequestConfig.configKey] = {}
+									end;
+									(if FFlagLuaAppEnableSduiHomePage then CompleteActiveRequest else completeActiveRequest)(ConfigKey, true, JoinResults, Result3)
+									
+									return Callback8(JoinResults)
 								end
 							end
 						end
-					elseif (FFlagLuaAppEnableSduiHomePage or FFlagLuaAppSduiSearchAutocomplete) and not (if Callback == nil then RequestConfig.isResponseCurrent == nil or RequestConfig.isResponseCurrent() else Callback() and (RequestConfig.isResponseCurrent == nil or RequestConfig.isResponseCurrent())) then
+					else
+						if not FFlagLuaAppEnableSduiHomePage and not FFlagLuaAppSduiSearchAutocomplete or (if Callback == nil then RequestConfig.isResponseCurrent == nil or RequestConfig.isResponseCurrent() else Callback() and (RequestConfig.isResponseCurrent == nil or RequestConfig.isResponseCurrent())) then
+							return v144(p4)
+						end
 						if (FFlagLuaAppEnableSduiApiStoreInFlightFix or FFlagLuaAppSduiSearchAutocomplete) and not v2 then
 							local Entry = t1[ConfigKey]
 							
@@ -649,18 +635,12 @@ return function(p1)
 								Entry.resolve(nil)
 							end
 						end
-						return Callback9(nil)
-					elseif FFlagHomeSduiOfflineCache then
-						return Callback10(p4)
-					else
-						(if FFlagLuaAppEnableSduiHomePage then CompleteActiveRequest else completeActiveRequest)(ConfigKey, false, p4)
-						
-						return Callback6(p4)
+						return Callback8(nil)
 					end
 				end)
 				
 				if CallbackResult ~= nil then
-					Callback3(CallbackResult)
+					Callback2(CallbackResult)
 				end
 			end)
 		end
@@ -868,13 +848,11 @@ return function(p1)
 	end
 	
 	SeedFromDecodedResponse = function(p6)
-		-- upvalues: FFlagHomeSduiOfflineCache (upval), RequestConfigs (ref), SduiResponseType (upval), v1 (ref), HandleSduiApiResponseModule (upval), FFlagSduiUseHttpClientModule (upval), SduiProtobufResponseHelpersModule (upval), FFlagSduiReleaseSearchResultsPageState (upval), T1 (ref), t2 (ref), SignalsModule (upval), getInputDataSignals (copy), FFlagSduiFreshInputDataSignalOnRebuild (upval), setInputDataSignals (copy), FFlagSduiAllowNoConfigsBuilt (upval), SduiLogger (upval), SduiErrors (upval), SduiParseHelpers (upval), FFlagAppChatConversationTrustedFriendUpsellBanner (upval), DataCache (copy), AccumulateSduiCacheSubEntriesModule (upval)
+		-- upvalues: RequestConfigs (ref), SduiResponseType (upval), v1 (ref), HandleSduiApiResponseModule (upval), FFlagSduiUseHttpClientModule (upval), SduiProtobufResponseHelpersModule (upval), FFlagSduiReleaseSearchResultsPageState (upval), T1 (ref), t2 (ref), SignalsModule (upval), getInputDataSignals (copy), FFlagSduiFreshInputDataSignalOnRebuild (upval), setInputDataSignals (copy), FFlagSduiAllowNoConfigsBuilt (upval), SduiLogger (upval), SduiErrors (upval), SduiParseHelpers (upval), FFlagAppChatConversationTrustedFriendUpsellBanner (upval), DataCache (copy), AccumulateSduiCacheSubEntriesModule (upval)
 		local ConfigKey = p6.configKey
 		local LoadTimer = p6.loadTimer
 		
-		if FFlagHomeSduiOfflineCache and p6.requestConfig ~= nil then
-			RequestConfigs[ConfigKey] = p6.requestConfig
-		else
+		if p6.requestConfig == nil then
 			LoadTimer.logUiRequestQueued()
 			RequestConfigs[ConfigKey] = {
 				url = `inline://{ConfigKey}`,
@@ -884,11 +862,13 @@ return function(p1)
 				apiProto = p6.apiProto,
 				responseType = SduiResponseType.Protobuf
 			}
+		else
+			RequestConfigs[ConfigKey] = p6.requestConfig
 		end
-		local RequestConfig = if FFlagHomeSduiOfflineCache then p6.requestConfig else nil
+		local RequestConfig = p6.requestConfig
 		local DataResult = v1.getCachedItem(ConfigKey).data(false)
 		local Success, Result = pcall(function()
-			-- upvalues: HandleSduiApiResponseModule (upval), FFlagSduiUseHttpClientModule (upval), p6 (copy), LoadTimer (copy), ConfigKey (copy), SduiProtobufResponseHelpersModule (upval), FFlagHomeSduiOfflineCache (upval), RequestConfig (copy), FFlagSduiReleaseSearchResultsPageState (upval), T1 (upval), t2 (upval), SignalsModule (upval), getInputDataSignals (upval), FFlagSduiFreshInputDataSignalOnRebuild (upval), setInputDataSignals (upval), FFlagSduiAllowNoConfigsBuilt (upval)
+			-- upvalues: HandleSduiApiResponseModule (upval), FFlagSduiUseHttpClientModule (upval), p6 (copy), LoadTimer (copy), ConfigKey (copy), SduiProtobufResponseHelpersModule (upval), RequestConfig (copy), FFlagSduiReleaseSearchResultsPageState (upval), T1 (upval), t2 (upval), SignalsModule (upval), getInputDataSignals (upval), FFlagSduiFreshInputDataSignalOnRebuild (upval), setInputDataSignals (upval), FFlagSduiAllowNoConfigsBuilt (upval)
 			return HandleSduiApiResponseModule({
 				paginateResponse = false,
 				cacheSingleEntryWithIdentifier = true,
@@ -904,9 +884,9 @@ return function(p1)
 					return p7
 				end,
 				parseHydrationDataFromResponse = SduiProtobufResponseHelpersModule.parseHydrationDataFromResponse,
-				parseTemplateEntriesFromResponse = FFlagHomeSduiOfflineCache and RequestConfig ~= nil and RequestConfig.parseTemplateEntriesFromResponse or SduiProtobufResponseHelpersModule.parseTemplateEntriesFromResponse,
-				parsePageEntriesFromResponse = FFlagHomeSduiOfflineCache and RequestConfig ~= nil and RequestConfig.parsePageEntriesFromResponse or SduiProtobufResponseHelpersModule.parsePageEntriesFromResponse,
-				parseLocalizedLiteralsFromResponse = FFlagHomeSduiOfflineCache and RequestConfig ~= nil and RequestConfig.parseLocalizedLiteralsFromResponse or SduiProtobufResponseHelpersModule.parseLocalizedLiteralsFromResponse,
+				parseTemplateEntriesFromResponse = if RequestConfig == nil then SduiProtobufResponseHelpersModule.parseTemplateEntriesFromResponse else RequestConfig.parseTemplateEntriesFromResponse or SduiProtobufResponseHelpersModule.parseTemplateEntriesFromResponse,
+				parsePageEntriesFromResponse = if RequestConfig == nil then SduiProtobufResponseHelpersModule.parsePageEntriesFromResponse else RequestConfig.parsePageEntriesFromResponse or SduiProtobufResponseHelpersModule.parsePageEntriesFromResponse,
+				parseLocalizedLiteralsFromResponse = if RequestConfig == nil then SduiProtobufResponseHelpersModule.parseLocalizedLiteralsFromResponse else RequestConfig.parseLocalizedLiteralsFromResponse or SduiProtobufResponseHelpersModule.parseLocalizedLiteralsFromResponse,
 				getInputDataSignalsForRequest = if FFlagSduiReleaseSearchResultsPageState then function(Key)
 					-- upvalues: FFlagSduiReleaseSearchResultsPageState (upval), ConfigKey (copy), T1 (upval), t2 (upval), SignalsModule (upval)
 					if FFlagSduiReleaseSearchResultsPageState then
@@ -932,9 +912,9 @@ return function(p1)
 					return v7
 				end else getInputDataSignals,
 				setInputDataSignalsForRequest = if FFlagSduiFreshInputDataSignalOnRebuild then setInputDataSignals else nil,
-				allowNoConfigsBuilt = if FFlagHomeSduiOfflineCache and RequestConfig ~= nil and FFlagSduiAllowNoConfigsBuilt then RequestConfig.allowNoConfigsBuilt else nil,
-				mergeStrategy = if FFlagHomeSduiOfflineCache and RequestConfig ~= nil then RequestConfig.mergeStrategy else nil,
-				enableTemplateCache = if FFlagHomeSduiOfflineCache and RequestConfig ~= nil then RequestConfig.enableTemplateCache else nil
+				allowNoConfigsBuilt = if RequestConfig == nil or not FFlagSduiAllowNoConfigsBuilt then nil else RequestConfig.allowNoConfigsBuilt,
+				mergeStrategy = if RequestConfig == nil then nil else RequestConfig.mergeStrategy,
+				enableTemplateCache = if RequestConfig == nil then nil else RequestConfig.enableTemplateCache
 			})
 		end)
 		

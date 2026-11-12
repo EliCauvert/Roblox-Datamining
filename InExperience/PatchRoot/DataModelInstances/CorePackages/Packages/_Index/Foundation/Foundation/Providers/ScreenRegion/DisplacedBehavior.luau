@@ -1,0 +1,1 @@
+﻿return { Suspend = "Suspend", Dismiss = "Dismiss" }

@@ -78,6 +78,7 @@ function ReactUpdateQueueModule.initializeUpdateQueue(p1)
 		firstBaseUpdate = nil,
 		lastBaseUpdate = nil,
 		effects = nil,
+		memoCache = nil,
 		baseState = p1.memoizedState,
 		shared = { pending = nil }
 	}
@@ -187,7 +188,8 @@ function ReactUpdateQueueModule.enqueueCapturedUpdate(p1, LastBaseUpdate)
 				firstBaseUpdate = FirstBaseUpdate,
 				lastBaseUpdate = LastBaseUpdate2,
 				shared = UpdateQueue1.shared,
-				effects = UpdateQueue1.effects
+				effects = UpdateQueue1.effects,
+				memoCache = UpdateQueue1.memoCache
 			}
 			p1.updateQueue = UpdateQueue
 			

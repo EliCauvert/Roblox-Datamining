@@ -39,6 +39,7 @@ return function(p1)
 			showDateTime = Item.showDateTime,
 			messageId = Item.messageId,
 			senderTargetId = if GetFFlagEnableSocialCardsFunction() then Item.senderTargetId else nil,
+			conversationId = UseContextResult.conversationId,
 			debugElement = StringValue
 		}) else ReactModule.createElement(ChatMessageModule, {
 			additionalProps = CryoModule.Dictionary.join(Item.additionalProps or {}, {

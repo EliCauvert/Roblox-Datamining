@@ -8,12 +8,11 @@ local GetGameTileMetadataFontModule = require(GameTile.Footer.getGameTileMetadat
 local FoundationModule = require(Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseTextSizeOffsetFunction = UIBloxModule.Core.Style.useTextSizeOffset
 local GameTileTypesModule = require(GameTile.GameTileTypes)
 
 return function(p1)
-	-- upvalues: UseDesignTokensFunction (copy), UseTextSizeOffsetFunction (copy), UseTokensFunction (copy), GameTileTypesModule (copy), GetGameTileMetadataFontModule (copy), ReactModule (copy), ImageSetLabel (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseDesignTokensFunction (copy), UseTextSizeOffsetFunction (copy), UseTokensFunction (copy), GameTileTypesModule (copy), GetGameTileMetadataFontModule (copy), ReactModule (copy), ImageSetLabel (copy), NormalizeFontFaceFunction (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local UseTextSizeOffsetResult: number = UseTextSizeOffsetFunction()
 	local UseTokensResult = UseTokensFunction()
@@ -22,8 +21,8 @@ return function(p1)
 	local Default = if p1.isUnifiedGameTile then UseTokensResult.Color.Content.Default else UseDesignTokensResult.Color.Content.Default
 	local GameTileMetadataFontModule = GetGameTileMetadataFontModule(p1.useLargerFont, UseDesignTokensResult, UseTokensResult or nil, if p1.isUnifiedGameTile then true else nil)
 	local FontSize: number = GameTileMetadataFontModule.FontSize
-	local Size500_1 = nil
 	local IconSize = nil
+	local Size500_1 = nil
 	
 	if p1.iconSize then
 		IconSize = p1.iconSize
@@ -67,8 +66,7 @@ return function(p1)
 			Position = UDim2.new(0, Size500_1 + XXSmall, 0.5, 0),
 			AnchorPoint = Vector2.new(0, 0.5),
 			TextSize = FontSize,
-			Font = if FoundationFontFaceMigration then nil else GameTileMetadataFontModule.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(GameTileMetadataFontModule.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(GameTileMetadataFontModule.Font),
 			TextTransparency = Default.Transparency,
 			TextColor3 = Default.Color3,
 			TextTruncate = Enum.TextTruncate.AtEnd,

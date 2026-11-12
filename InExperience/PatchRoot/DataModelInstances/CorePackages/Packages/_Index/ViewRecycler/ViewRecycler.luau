@@ -1,5 +1,7 @@
-﻿local _ = require(script.Core.PinnedItems)
-local _ = require(script.Core.ViewportBehavior.ReachedThreshold)
+﻿local FFlagViewRecyclerReact084 = require(script.Flags).FFlagViewRecyclerReact084
+local _ = require(script.Core.PinnedItems)
+local ReachedThresholdModule = require(script.Core.ViewportBehavior.ReachedThreshold)
+local ScrollMotionModule = require(script.Core.Virtualizer.ScrollMotion)
 local _ = require(script.Core.Types)
 
 return table.freeze({
@@ -19,7 +21,11 @@ return table.freeze({
 		createRecyclingScope = require(script.Core.Recycling).createScope,
 		createVirtualizer = require(script.Core.Virtualizer.Virtualizer),
 		createSlotBinder = require(script.Core.Recycling.SlotBinder),
-		_Private = table.freeze({ ShallowTable = require(script.Internal.ShallowTable) })
+		_Private = table.freeze({
+			ReachedThreshold = if FFlagViewRecyclerReact084 then ReachedThresholdModule else nil,
+			ShallowTable = require(script.Internal.ShallowTable),
+			ScrollMotion = if FFlagViewRecyclerReact084 then ScrollMotionModule else nil
+		})
 	}),
 	["jest.config"] = script["jest.config"]
 })

@@ -107,6 +107,7 @@ local BlackbirdUpsellImpressionTrackerModule = require(PurchasePrompt.Utils.Blac
 local FFlagBlackbirdUpsellGateResaleAndTimedOptionModule = require(PurchasePrompt.Flags.FFlagBlackbirdUpsellGateResaleAndTimedOption)
 local FFlagSetMenuOnPurchasePromptModule = require(PurchasePrompt.Flags.FFlagSetMenuOnPurchasePrompt)
 local FFlagSkipBuyDelayForExperienceShopModule = require(PurchasePrompt.Flags.FFlagSkipBuyDelayForExperienceShop)
+local FFlagPurchasePromptIgnoreConfirmWhilePurchaseInProgressModule = require(PurchasePrompt.Flags.FFlagPurchasePromptIgnoreConfirmWhilePurchaseInProgress)
 local FFlagLuaAppsEnablePromptVIPServerPurchase = require(Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 
 local function isRelevantRequestType(RequestType, PurchaseFlow, InitializingPurchase): boolean
@@ -133,7 +134,7 @@ local _ = function(p1)
 end
 
 function ExtendResult.init(p1)
-	-- upvalues: HttpService (copy), FFlagEnablePurchaseFlowUUIDMigrationModule (copy), LoggingProtocolModule (copy), PurchaseFlowUUIDTelemetryModule (copy), CachedPolicyServiceModule (copy), PromptStateModule (copy), FFlagPurchasePromptUnifiedEventsUseOfferAdjustedPrice (copy), SendUnifiedPurchaseEventLogModule (copy), RemoveDelayedInputForUnifiedPurchaseModal (copy), FFlagSkipBuyDelayForExperienceShopModule (copy), AppContextModule (copy), Players (copy), isRelevantRequestType (copy), LogUnifiedPurchaseTelemetryCounterModule (copy), UnifiedPurchaseTelemetryModule (copy), UnifiedPurchaseEventNameEnumModule (copy), PurchaseErrorModule (copy), IsGenericChallengeResponseModule (copy), RequestTypeModule (copy), PublishAssetAnalyticsModule (copy), FFlagEnableLaunchAfterPurchase (copy), ExperienceService (copy), WindowStateModule (copy), ContextActionService (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), VPCModalTypeModule (copy), FFlagAddPerformanceMetricsToUnifiedPurchaseModal (copy), EmitPerformanceMetricsModule (copy), ConstantsModule (copy)
+	-- upvalues: HttpService (copy), FFlagEnablePurchaseFlowUUIDMigrationModule (copy), LoggingProtocolModule (copy), PurchaseFlowUUIDTelemetryModule (copy), CachedPolicyServiceModule (copy), PromptStateModule (copy), FFlagPurchasePromptUnifiedEventsUseOfferAdjustedPrice (copy), SendUnifiedPurchaseEventLogModule (copy), RemoveDelayedInputForUnifiedPurchaseModal (copy), FFlagSkipBuyDelayForExperienceShopModule (copy), AppContextModule (copy), Players (copy), isRelevantRequestType (copy), FFlagPurchasePromptIgnoreConfirmWhilePurchaseInProgressModule (copy), LogUnifiedPurchaseTelemetryCounterModule (copy), UnifiedPurchaseTelemetryModule (copy), UnifiedPurchaseEventNameEnumModule (copy), PurchaseErrorModule (copy), IsGenericChallengeResponseModule (copy), RequestTypeModule (copy), PublishAssetAnalyticsModule (copy), FFlagEnableLaunchAfterPurchase (copy), ExperienceService (copy), WindowStateModule (copy), ContextActionService (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), VPCModalTypeModule (copy), FFlagAddPerformanceMetricsToUnifiedPurchaseModal (copy), EmitPerformanceMetricsModule (copy), ConstantsModule (copy)
 	p1.state = {
 		isLuobu = false,
 		screenSize = Vector2.new(0, 0),
@@ -242,13 +243,16 @@ function ExtendResult.init(p1)
 		end
 	end
 	
-	function p1.getConfirmButtonAction(PromptState, RequestType, PurchaseError)
-		-- upvalues: PromptStateModule (upval), isRelevantRequestType (upval), p1 (copy), LogUnifiedPurchaseTelemetryCounterModule (upval), UnifiedPurchaseTelemetryModule (upval), UnifiedPurchaseEventNameEnumModule (upval), PurchaseErrorModule (upval), IsGenericChallengeResponseModule (upval)
-		if PromptState == PromptStateModule.None or not isRelevantRequestType(RequestType) then
+	function p1.getConfirmButtonAction(PurchaseInProgress, RequestType, PurchaseError)
+		-- upvalues: PromptStateModule (upval), isRelevantRequestType (upval), FFlagPurchasePromptIgnoreConfirmWhilePurchaseInProgressModule (upval), p1 (copy), LogUnifiedPurchaseTelemetryCounterModule (upval), UnifiedPurchaseTelemetryModule (upval), UnifiedPurchaseEventNameEnumModule (upval), PurchaseErrorModule (upval), IsGenericChallengeResponseModule (upval)
+		if PurchaseInProgress == PromptStateModule.None or not isRelevantRequestType(RequestType) then
 			return nil
 		end
-		if PromptState ~= PromptStateModule.PromptPurchase and PromptState ~= PromptStateModule.PurchaseInProgress then
-			return if PromptState == PromptStateModule.RobuxUpsell or PromptState == PromptStateModule.UpsellInProgress or PromptState == PromptStateModule.LeaveRobloxWarning then p1.props.onRobuxUpsell elseif PromptState == PromptStateModule.U13PaymentModal or PromptState == PromptStateModule.U13MonthlyThreshold1Modal or PromptState == PromptStateModule.U13MonthlyThreshold2Modal or PromptState == PromptStateModule.ParentalConsentWarningPaymentModal13To17 then p1.props.onScaryModalConfirm elseif PromptState == PromptStateModule.Error and PurchaseError == PurchaseErrorModule.TwoFactorNeededSettings then p1.props.onOpenSecuritySettings elseif IsGenericChallengeResponseModule(PurchaseError) then function()
+		if FFlagPurchasePromptIgnoreConfirmWhilePurchaseInProgressModule and PurchaseInProgress == PromptStateModule.PurchaseInProgress then
+			return nil
+		end
+		if PurchaseInProgress ~= PromptStateModule.PromptPurchase and PurchaseInProgress ~= PromptStateModule.PurchaseInProgress then
+			return if FFlagPurchasePromptIgnoreConfirmWhilePurchaseInProgressModule and PurchaseInProgress == PromptStateModule.UpsellInProgress then nil elseif PurchaseInProgress == PromptStateModule.RobuxUpsell or PurchaseInProgress == PromptStateModule.UpsellInProgress or PurchaseInProgress == PromptStateModule.LeaveRobloxWarning then p1.props.onRobuxUpsell elseif PurchaseInProgress == PromptStateModule.U13PaymentModal or PurchaseInProgress == PromptStateModule.U13MonthlyThreshold1Modal or PurchaseInProgress == PromptStateModule.U13MonthlyThreshold2Modal or PurchaseInProgress == PromptStateModule.ParentalConsentWarningPaymentModal13To17 then p1.props.onScaryModalConfirm elseif PurchaseInProgress == PromptStateModule.Error and PurchaseError == PurchaseErrorModule.TwoFactorNeededSettings then p1.props.onOpenSecuritySettings elseif IsGenericChallengeResponseModule(PurchaseError) then function()
 				-- upvalues: p1 (upval), PurchaseError (copy)
 				p1.props.onOpenSecuritySettings(PurchaseError)
 			end else p1.props.hideWindow
@@ -645,7 +649,7 @@ function ExtendResult.determinePrompt(p1)
 					})
 				end
 			})
-		elseif PromptState == PromptStateModule.Error and (PurchaseError == PurchaseErrorModule.NotEnoughRobuxXbox and DesktopUpsellExperiment.shouldShowNewModal()) then
+		elseif PromptState == PromptStateModule.Error and PurchaseError == PurchaseErrorModule.NotEnoughRobuxXbox and DesktopUpsellExperiment.shouldShowNewModal() then
 			return Roact.createElement(RobuxUpsellModalTooExpensiveFallback, {
 				screenSize = p1.state.screenSize,
 				product = {
@@ -736,7 +740,7 @@ function ExtendResult.determinePrompt(p1)
 		local ProductPrice1 = if IsProductPriceMatch or DeriveCartPricingViewResult == nil or UnifiedPurchaseModalTypeModule ~= UnifiedPurchaseModalTypeEnum.MultiItem then p1.props.productPrice else DeriveCartPricingViewResult.priceAfterDiscount
 		local BlackbirdUpsellBannerProductInfoModule = if ShouldShowBlackbirdUpsellModule(Price, p1.props.requestType, IsProductPriceMatch, if FFlagBlackbirdUpsellGateResaleAndTimedOptionModule then p1.props.productPayload else nil) and p1.props.robloxSubscriptionProducts then GetBlackbirdUpsellBannerProductInfoModule(p1.props.robloxSubscriptionProducts) else nil
 		
-		local function v147(p2)
+		local function v148(p2)
 			-- upvalues: p1 (copy), FFlagEnableSubscriptionUpsellUnifiedPurchaseEventTelemetry (upval), BlackbirdUpsellBannerProductInfoModule (copy), UnifiedPurchaseEventNameEnumModule (upval), FFlagEnableBlackbirdUpsellImpressionGating (upval), BlackbirdUpsellImpressionTrackerModule (upval)
 			p1.onBuyItemButtonMounted(p2)
 			
@@ -748,7 +752,7 @@ function ExtendResult.determinePrompt(p1)
 			end
 		end
 		
-		local OnBuyItemButtonMounted = if FFlagEnableSubscriptionUpsellUnifiedPurchaseEventTelemetry or FFlagEnableBlackbirdUpsellImpressionGating then v147 else p1.onBuyItemButtonMounted
+		local OnBuyItemButtonMounted = if FFlagEnableSubscriptionUpsellUnifiedPurchaseEventTelemetry or FFlagEnableBlackbirdUpsellImpressionGating then v148 else p1.onBuyItemButtonMounted
 		
 		local function OnCartOfferAppliedChanged(_, p2)
 			-- upvalues: p1 (copy), RequestTypeModule (upval)

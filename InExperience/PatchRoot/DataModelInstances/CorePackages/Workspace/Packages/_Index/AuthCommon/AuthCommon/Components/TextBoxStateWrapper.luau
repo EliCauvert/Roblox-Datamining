@@ -1,9 +1,7 @@
 ﻿local Parent = script:FindFirstAncestor("AuthCommon").Parent
 local CryoModule = require(Parent.Cryo)
 local UIBloxModule = require(Parent.UIBlox)
-local FoundationModule = require(Parent.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
 local RoactModule = require(Parent.Roact)
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local GetImageDataFunction = require(Parent.RobloxAppAssets).GetImageData
@@ -48,13 +46,13 @@ function TextBoxStateWrapper.init(p1)
 end
 
 function TextBoxStateWrapper.render(p1)
-	-- upvalues: WithStyleFunction (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ImageSetLabel (copy), GetImageDataFunction (copy), CryoModule (copy)
+	-- upvalues: WithStyleFunction (copy), RoactModule (copy), NormalizeFontFaceFunction (copy), ImageSetLabel (copy), GetImageDataFunction (copy), CryoModule (copy)
 	local HelpComponent = p1.props.HelpComponent
 	local ErrorText = p1.props.ErrorText
 	local LabelText = p1.props.LabelText
 	
 	return WithStyleFunction(function(p2)
-		-- upvalues: p1 (copy), RoactModule (upval), LabelText (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), ImageSetLabel (upval), GetImageDataFunction (upval), CryoModule (upval), ErrorText (copy), HelpComponent (copy)
+		-- upvalues: p1 (copy), RoactModule (upval), LabelText (copy), NormalizeFontFaceFunction (upval), ImageSetLabel (upval), GetImageDataFunction (upval), CryoModule (upval), ErrorText (copy), HelpComponent (copy)
 		local Color = p2.Theme.UIDefault.Color
 		local Transparency = p2.Theme.UIDefault.Transparency
 		
@@ -88,8 +86,7 @@ function TextBoxStateWrapper.render(p1)
 				LayoutOrder = 1,
 				TextWrapped = true,
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Font = if FoundationFontFaceMigration then nil else p2.Font.CaptionHeader.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.CaptionLarge.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.CaptionLarge.Font),
 				Size = UDim2.fromScale(1, 0),
 				Text = LabelText,
 				TextColor3 = p2.Theme.TextEmphasis.Color,
@@ -145,8 +142,7 @@ function TextBoxStateWrapper.render(p1)
 				LayoutOrder = 3,
 				TextWrapped = true,
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Font = if FoundationFontFaceMigration then nil else p2.Font.CaptionBody.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodySmall.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.BodySmall.Font),
 				Size = UDim2.fromScale(1, 0),
 				Text = ErrorText,
 				TextColor3 = p2.Theme.Alert.Color,

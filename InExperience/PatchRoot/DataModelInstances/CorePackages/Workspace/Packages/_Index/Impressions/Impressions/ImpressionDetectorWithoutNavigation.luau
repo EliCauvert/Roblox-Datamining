@@ -2,8 +2,10 @@
 local Parent = script:FindFirstAncestor("Impressions").Parent
 local ArgCheckModule = require(Parent.ArgCheck)
 local TModule = require(Parent.t)
-local FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions = require(Parent.SharedFlags).FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions
+local SharedFlagsModule = require(Parent.SharedFlags)
 local ConstantsModule = require(script.Parent.Constants)
+local FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions = SharedFlagsModule.FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions
+local FFlagLuaAppSduiGameDwell = SharedFlagsModule.FFlagLuaAppSduiGameDwell
 local ImpressionsDetectorWithoutNavigation = require(Parent.Roact).PureComponent:extend("ImpressionsDetectorWithoutNavigation")
 ImpressionsDetectorWithoutNavigation.validateProps = TModule.strictInterface({
 	scanDebounceSeconds = TModule.optional(TModule.number),
@@ -16,17 +18,33 @@ ImpressionsDetectorWithoutNavigation.validateProps = TModule.strictInterface({
 	filterImpressionFunc = TModule.optional(TModule.callback),
 	onImpressionsDetected = TModule.union(TModule.callback, TModule.table),
 	skipZeroSizes = TModule.optional(TModule.boolean),
+	visibilityObserver = if FFlagLuaAppSduiGameDwell then TModule.optional(TModule.table) else nil,
 	isFocused = TModule.optional(TModule.boolean),
 	navigation = TModule.optional(TModule.table)
 })
 ImpressionsDetectorWithoutNavigation.defaultProps = { scanDebounceSeconds = 1, viewFillPercent = 0.25 }
 
 function ImpressionsDetectorWithoutNavigation.init(p1)
+	-- upvalues: FFlagLuaAppSduiGameDwell (copy)
 	p1.isMounted = false
 	p1.lastImpressionTick = nil
 	p1.nextImpressionTick = nil
+	
+	if FFlagLuaAppSduiGameDwell then
+		p1.visibilityObserverCleanup = nil
+	end
 end
 
+if FFlagLuaAppSduiGameDwell then
+	function ImpressionsDetectorWithoutNavigation._attachVisibilityObserver(p1)
+		if p1.props.visibilityObserver then
+			p1.visibilityObserverCleanup = p1.props.visibilityObserver.attach(function()
+				-- upvalues: p1 (copy)
+				p1:_requestImpressions()
+			end, p1.props.scanDebounceSeconds)
+		end
+	end
+end
 function ImpressionsDetectorWithoutNavigation._boundingBoxIntersectsView(p1, Frame: Frame): boolean
 	-- upvalues: ArgCheckModule (copy)
 	if not Frame then
@@ -93,7 +111,7 @@ function ImpressionsDetectorWithoutNavigation._isInstanceVisible(p1, Frame: Fram
 end
 
 function ImpressionsDetectorWithoutNavigation._calculateImpressions(p1)
-	-- upvalues: CollectionService (copy), ConstantsModule (copy), ArgCheckModule (copy)
+	-- upvalues: FFlagLuaAppSduiGameDwell (copy), CollectionService (copy), ConstantsModule (copy), ArgCheckModule (copy)
 	if not p1.isMounted then return end
 	if p1.props.isFocused == false then return end
 	p1.lastImpressionTick = tick()
@@ -101,16 +119,30 @@ function ImpressionsDetectorWithoutNavigation._calculateImpressions(p1)
 	if p1.props.parentRef ~= nil then
 		local Current = p1.props.parentRef.current
 		
-		if Current == nil or not p1:_boundingBoxIntersectsView(Current) then return end
+		if Current == nil or not p1:_boundingBoxIntersectsView(Current) then
+			if FFlagLuaAppSduiGameDwell and p1.props.visibilityObserver then
+				p1.props.visibilityObserver.sample({}, Current ~= nil)
+			end
+			return
+		end
 	end
+	local ImpressionsTag = p1.props.impressionsTag
 	local List = {}
-	
-	for _, Gui in ipairs((CollectionService:GetTagged(p1.props.impressionsTag))) do
+	local T = if FFlagLuaAppSduiGameDwell and p1.props.visibilityObserver then {} else nil
+	for _, Gui in ipairs((CollectionService:GetTagged(ImpressionsTag))) do
 		local Attribute = Gui:GetAttribute(ConstantsModule.ItemIndex)
 		
-		if Attribute and Gui:IsA("GuiObject") and p1:_isInstanceVisible(Gui) and (p1.props.filterImpressionFunc == nil or p1.props.filterImpressionFunc(Attribute)) then
-			table.insert(List, Attribute)
+		if Attribute and Gui:IsA("GuiObject") and p1:_isInstanceVisible(Gui) then
+			if FFlagLuaAppSduiGameDwell and T then
+				table.insert(T, Attribute)
+			end
+			if p1.props.filterImpressionFunc == nil or p1.props.filterImpressionFunc(Attribute) then
+				table.insert(List, Attribute)
+			end
 		end
+	end
+	if FFlagLuaAppSduiGameDwell and T then
+		p1.props.visibilityObserver.sample(T, true)
 	end
 	if #List > 0 then
 		ArgCheckModule.assert(p1.props.onImpressionsDetected ~= nil)
@@ -150,7 +182,12 @@ function ImpressionsDetectorWithoutNavigation:render()
 end
 
 function ImpressionsDetectorWithoutNavigation.didMount(p2)
+	-- upvalues: FFlagLuaAppSduiGameDwell (copy)
 	p2.isMounted = true
+	
+	if FFlagLuaAppSduiGameDwell then
+		p2:_attachVisibilityObserver()
+	end
 	p2:_requestImpressions()
 	
 	if p2.props.onRequestImpressionsSignal then
@@ -162,15 +199,34 @@ function ImpressionsDetectorWithoutNavigation.didMount(p2)
 end
 
 function ImpressionsDetectorWithoutNavigation.willUnmount(p2)
+	-- upvalues: FFlagLuaAppSduiGameDwell (copy)
 	p2.isMounted = false
 	
+	if FFlagLuaAppSduiGameDwell and p2.visibilityObserverCleanup then
+		p2.visibilityObserverCleanup("teardown")
+		p2.visibilityObserverCleanup = nil
+	end
 	if p2.onRequestImpressionsConnection ~= nil then
 		p2.onRequestImpressionsConnection:disconnect()
 		p2.onRequestImpressionsConnection = nil
 	end
 end
 
-function ImpressionsDetectorWithoutNavigation.didUpdate(p2, _, _)
+function ImpressionsDetectorWithoutNavigation.didUpdate(p2, p3, _)
+	-- upvalues: FFlagLuaAppSduiGameDwell (copy)
+	if FFlagLuaAppSduiGameDwell then
+		if p3.visibilityObserver == p2.props.visibilityObserver then
+			if p2.props.visibilityObserver and p3.isFocused ~= p2.props.isFocused then
+				p2.props.visibilityObserver.focusChanged(p2.props.isFocused ~= false)
+			end
+		else
+			if p2.visibilityObserverCleanup then
+				p2.visibilityObserverCleanup("collectionReplaced")
+				p2.visibilityObserverCleanup = nil
+			end
+			p2:_attachVisibilityObserver()
+		end
+	end
 	p2:_requestImpressions()
 end
 

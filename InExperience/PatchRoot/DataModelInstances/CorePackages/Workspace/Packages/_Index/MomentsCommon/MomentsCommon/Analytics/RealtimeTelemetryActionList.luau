@@ -189,6 +189,27 @@ local _ = function(p1)
 	return if p1 == "clicked" then p1 else "unknown"
 end
 
+local config12 = {
+	views = "views",
+	lifetime_views = "lifetime_views",
+	lifetime_watch_time = "lifetime_watch_time",
+	lifetime_watch_time_no_replay = "lifetime_watch_time_no_replay",
+	lifetime_joins = "lifetime_joins"
+}
+
+local _ = function(p1)
+	-- upvalues: config12 (copy)
+	return config12[p1] or "unknown"
+end
+
+local _ = function(p1)
+	return if p1 == "success" or p1 == "failed" then p1 else "unknown"
+end
+
+local _ = function(p1)
+	return if p1 == "translated" or p1 == "original" then p1 else "unknown"
+end
+
 local _ = function(p1, Callback)
 	local config = { status = p1.status, feedType = p1.feedType }
 	
@@ -682,6 +703,69 @@ return {
 					
 					return {
 						status = config11[p1.status] or "unknown",
+						surface = if Surface == "watch_tab" or Surface == "profile" then Surface else "unknown"
+					}
+				end
+			}
+		}
+	}),
+	[RealtimeEventNamesModule.MomentsPostInsightsRequest] = Telemetry.new({
+		description = "Counts Post insights Creator Analytics (CAaaS) request outcomes in real time, once per query per page open, by bounded query (views series or one of the four lifetime totals) and status (success or failed).",
+		throttlingThousandths = 10000,
+		name = RealtimeEventNamesModule.MomentsPostInsightsRequest,
+		lastUpdated = { 2026, 11, 10 },
+		backendsList = {
+			{
+				incrementValue = 1,
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1)
+					-- upvalues: config12 (copy)
+					local Status = p1.status
+					
+					return {
+						query = config12[p1.query] or "unknown",
+						status = if Status == "success" or Status == "failed" then Status else "unknown"
+					}
+				end
+			}
+		}
+	}),
+	[RealtimeEventNamesModule.MomentsPostInsightsRequestLatency] = Telemetry.new({
+		description = "Post insights Creator Analytics (CAaaS) request latency in ms, as a stat (p50/p95/p99), by bounded query and status. Same requests as MomentsPostInsightsRequest: each query's first request on a cold page open, including the gateway's polling.",
+		throttlingThousandths = 10000,
+		name = RealtimeEventNamesModule.MomentsPostInsightsRequestLatency,
+		lastUpdated = { 2026, 11, 6 },
+		backendsList = {
+			{
+				type = SupportedTelemetryBackends.RobloxTelemetryStat,
+				format = function(p1)
+					-- upvalues: config12 (copy)
+					local Status = p1.status
+					
+					return {
+						query = config12[p1.query] or "unknown",
+						status = if Status == "success" or Status == "failed" then Status else "unknown"
+					}
+				end
+			}
+		}
+	}),
+	[RealtimeEventNamesModule.MomentsCommentTranslationToggle] = Telemetry.new({
+		description = "Counts taps on a Moments comment's translation toggle in real time by the text shown after the tap (translated/original) and surface. Counted at the same point as the product translation-toggled event.",
+		throttlingThousandths = 10000,
+		name = RealtimeEventNamesModule.MomentsCommentTranslationToggle,
+		lastUpdated = { 2026, 11, 5 },
+		backendsList = {
+			{
+				incrementValue = 1,
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1)
+					local Status = p1.status
+					local Status1 = if Status == "translated" or Status == "original" then Status else "unknown"
+					local Surface = p1.surface
+					
+					return {
+						status = Status1,
 						surface = if Surface == "watch_tab" or Surface == "profile" then Surface else "unknown"
 					}
 				end

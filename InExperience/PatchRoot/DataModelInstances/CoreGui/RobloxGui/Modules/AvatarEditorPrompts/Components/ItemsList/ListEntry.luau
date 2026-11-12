@@ -3,12 +3,9 @@ local _ = game:GetService("CoreGui").RobloxGui.Modules
 local CryoModule = require(CorePackages.Packages.Cryo)
 local RoactModule = require(CorePackages.Packages.Roact)
 local TModule = require(CorePackages.Packages.t)
-local FoundationModule = require(CorePackages.Packages.Foundation)
 local GetTextSizeFunction = require(CorePackages.Workspace.Packages.Style).GetTextSize
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
-local FoundationFontFaceMigration1 = require(CorePackages.Workspace.Packages.SharedFlags).FFlagFontFaceAX and FoundationFontFaceMigration
-local Text = require(CorePackages.Workspace.Packages.AppCommonLib).Text
+local NormalizeFontFaceFunction = require(CorePackages.Packages.Foundation).Utility.normalizeFontFace
+local FFlagFontFaceAX = require(CorePackages.Workspace.Packages.SharedFlags).FFlagFontFaceAX
 local RoactFitComponents = require(CorePackages.Packages.AvatarExperienceDeps).RoactFitComponents
 local FitTextLabel = RoactFitComponents.FitTextLabel
 local WithStyleFunction = require(CorePackages.Packages.UIBlox).Style.withStyle
@@ -26,14 +23,14 @@ ListEntry.validateProps = TModule.strictInterface({
 })
 
 function ListEntry.render(p1)
-	-- upvalues: WithStyleFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), RoactModule (copy), RoactFitComponents (copy), NormalizeFontFaceFunction (copy), FitTextLabel (copy), FoundationFontFaceMigration1 (copy)
+	-- upvalues: WithStyleFunction (copy), GetTextSizeFunction (copy), RoactModule (copy), RoactFitComponents (copy), NormalizeFontFaceFunction (copy), FitTextLabel (copy), FFlagFontFaceAX (copy)
 	return WithStyleFunction(function(p2)
-		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Text (upval), p1 (copy), RoactModule (upval), RoactFitComponents (upval), NormalizeFontFaceFunction (upval), FitTextLabel (upval), FoundationFontFaceMigration1 (upval)
+		-- upvalues: GetTextSizeFunction (upval), p1 (copy), RoactModule (upval), RoactFitComponents (upval), NormalizeFontFaceFunction (upval), FitTextLabel (upval), FFlagFontFaceAX (upval)
 		local _Font = p2.Font
 		local Theme = p2.Theme
 		local CaptionBodyFont = _Font.CaptionBody.Font
 		local ScaledBaseSize = _Font.BaseSize * _Font.CaptionBody.RelativeSize
-		local X = if FoundationFontFaceMigration then GetTextSizeFunction("• ", ScaledBaseSize, p2.Tokens.Typography.BodySmall.Font, Vector2.new(10000, 10000)).X else Text.GetTextWidth("• ", CaptionBodyFont, ScaledBaseSize)
+		local X = GetTextSizeFunction("• ", ScaledBaseSize, p2.Tokens.Typography.BodySmall.Font, Vector2.new(10000, 10000)).X
 		
 		return RoactModule.createElement(RoactFitComponents.FitFrameVertical, {
 			width = UDim.new(1, 0),
@@ -53,8 +50,7 @@ function ListEntry.render(p1)
 				Text = "• ",
 				LayoutOrder = 1,
 				Size = UDim2.fromOffset(X, ScaledBaseSize),
-				Font = if FoundationFontFaceMigration then nil else CaptionBodyFont,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodySmall.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.BodySmall.Font),
 				TextSize = ScaledBaseSize,
 				TextColor3 = Theme.TextDefault.Color,
 				TextTransparency = Theme.TextDefault.Transparency,
@@ -65,7 +61,7 @@ function ListEntry.render(p1)
 				LayoutOrder = 2,
 				width = UDim.new(1, p1.props.hasBullet and -X or 0),
 				Text = p1.props.text,
-				Font = if FoundationFontFaceMigration1 then NormalizeFontFaceFunction(p2.Tokens.Typography.BodySmall.Font) else CaptionBodyFont,
+				Font = if FFlagFontFaceAX then NormalizeFontFaceFunction(p2.Tokens.Typography.BodySmall.Font) else CaptionBodyFont,
 				TextSize = ScaledBaseSize,
 				TextColor3 = Theme.TextDefault.Color,
 				TextTransparency = Theme.TextDefault.Transparency,

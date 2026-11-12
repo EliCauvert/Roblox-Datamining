@@ -34,7 +34,7 @@ local function normalizeQuery(Text: string, p1): string
 	return Match
 end
 
-return function(p1, Enabled)
+return function(p1, Enabled, p2)
 	-- upvalues: GetConversationSearchDataHydrationModule (copy), GetConversationStoreModule (copy), normalizeQuery (copy), ReactModule (copy), config1 (copy), SignalsReactModule (copy), SignalsModule (copy), config (copy)
 	local IsEnabled = Enabled ~= false
 	local ConversationSearchDataHydrationModule = GetConversationSearchDataHydrationModule(false)
@@ -61,13 +61,13 @@ return function(p1, Enabled)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(config1)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(ConversationSearchDataHydrationModule.getInvalidationGeneration)
 	ReactModule.useEffect(function()
-		-- upvalues: UseStateResult (copy), UseStateResult2_1 (copy), config1 (upval), ConversationSearchDataHydrationModule (copy)
+		-- upvalues: UseStateResult (copy), UseStateResult2_1 (copy), config1 (upval), ConversationSearchDataHydrationModule (copy), p2 (copy)
 		if UseStateResult == "" then
 			UseStateResult2_1(config1)
 			
 			return
 		end
-		local Page = ConversationSearchDataHydrationModule.fetchPage(UseStateResult)
+		local Page = ConversationSearchDataHydrationModule.fetchPage(UseStateResult, nil, p2)
 		
 		if Page == nil then
 			UseStateResult2_1({ query = UseStateResult, pages = {} })
@@ -76,32 +76,37 @@ return function(p1, Enabled)
 		else
 			UseStateResult2_1({ query = UseStateResult, pages = { { result = Page } } })
 		end
-	end, { UseStateResult, ConversationSearchDataHydrationModule })
+	end, {
+		UseStateResult,
+		ConversationSearchDataHydrationModule,
+		p2
+	})
 	local UseRefResult = ReactModule.useRef(UseSignalStateResult)
 	ReactModule.useEffect(function()
-		-- upvalues: UseRefResult (copy), UseSignalStateResult (copy), UseStateResult1 (copy), ConversationSearchDataHydrationModule (copy)
+		-- upvalues: UseRefResult (copy), UseSignalStateResult (copy), UseStateResult1 (copy), ConversationSearchDataHydrationModule (copy), p2 (copy)
 		if UseRefResult.current == UseSignalStateResult then return end
 		UseRefResult.current = UseSignalStateResult
 		
 		for _, page in UseStateResult1.pages do
-			ConversationSearchDataHydrationModule.fetchPage(UseStateResult1.query, page.cursor)
+			ConversationSearchDataHydrationModule.fetchPage(UseStateResult1.query, page.cursor, p2)
 		end
 	end, {
 		UseStateResult1,
 		ConversationSearchDataHydrationModule,
-		UseSignalStateResult
+		UseSignalStateResult,
+		p2
 	})
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), ConversationStoreModule (copy), UseStateResult1 (copy), config (upval)
-		return SignalsModule.createComputed(function(p2)
+		return SignalsModule.createComputed(function(p3)
 			-- upvalues: ConversationStoreModule (upval), UseStateResult1 (upval), config (upval)
 			local function collectItems(Pages)
-				-- upvalues: p2 (copy), ConversationStoreModule (upval)
+				-- upvalues: p3 (copy), ConversationStoreModule (upval)
 				local List = {}
 				local t = {}
 				
 				for _, page in Pages do
-					local DataResult = page.result.data(p2)
+					local DataResult = page.result.data(p3)
 					
 					if DataResult ~= nil and DataResult.matchedConversationIds ~= nil then
 						for _, matchedConversationId in DataResult.matchedConversationIds do
@@ -115,7 +120,7 @@ return function(p1, Enabled)
 				local Conversations = {}
 				
 				for _, value in List do
-					local Conversation = ConversationStoreModule.getConversation(value, p2)
+					local Conversation = ConversationStoreModule.getConversation(value, p3)
 					
 					if Conversation ~= nil then
 						table.insert(Conversations, Conversation)
@@ -130,12 +135,12 @@ return function(p1, Enabled)
 				return config
 			else
 				local Page = Pages[#Pages]
-				local DataResult = Page.result.data(p2)
+				local DataResult = Page.result.data(p3)
 				
 				return {
 					query = UseStateResult1.query,
 					items = collectItems(Pages),
-					status = Page.result.status(p2),
+					status = Page.result.status(p3),
 					nextCursor = if DataResult == nil then nil else DataResult.nextCursor
 				}
 			end
@@ -153,7 +158,7 @@ return function(p1, Enabled)
 		hasSearched = UseSignalStateResult1.query ~= "",
 		nextCursor = UseSignalStateResult1.nextCursor,
 		loadNext = ReactModule.useCallback(function()
-			-- upvalues: UseStateResult1 (copy), ConversationSearchDataHydrationModule (copy), UseStateResult2_1 (copy)
+			-- upvalues: UseStateResult1 (copy), ConversationSearchDataHydrationModule (copy), p2 (copy), UseStateResult2_1 (copy)
 			local Pages = UseStateResult1.pages
 			local Page = Pages[#Pages]
 			
@@ -163,23 +168,27 @@ return function(p1, Enabled)
 			local NextCursor = if DataResult == nil then nil else DataResult.nextCursor
 			
 			if NextCursor == nil then return end
-			local Page1 = ConversationSearchDataHydrationModule.fetchPage(UseStateResult1.query, NextCursor)
+			local Page1 = ConversationSearchDataHydrationModule.fetchPage(UseStateResult1.query, NextCursor, p2)
 			
 			if Page1 ~= nil then
-				UseStateResult2_1(function(p3)
+				UseStateResult2_1(function(p4)
 					-- upvalues: UseStateResult1 (upval), Page1 (copy), NextCursor (copy)
-					if p3.query == UseStateResult1.query then
-						local Copy = table.clone(p3.pages)
+					if p4.query == UseStateResult1.query then
+						local Copy = table.clone(p4.pages)
 						table.insert(Copy, { result = Page1, cursor = NextCursor })
 						
-						return { query = p3.query, pages = Copy }
+						return { query = p4.query, pages = Copy }
 					else
-						return p3
+						return p4
 					end
 				end)
 				
 				return
 			end
-		end, { UseStateResult1, ConversationSearchDataHydrationModule })
+		end, {
+			UseStateResult1,
+			ConversationSearchDataHydrationModule,
+			p2
+		})
 	}
 end

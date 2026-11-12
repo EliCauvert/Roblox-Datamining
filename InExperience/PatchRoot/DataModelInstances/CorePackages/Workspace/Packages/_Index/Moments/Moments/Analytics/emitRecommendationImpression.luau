@@ -1,7 +1,9 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local ConstantsModule = require(Moments.Constants)
 local _ = require(script.Parent.RecommendationContentType)
+local _ = require(Moments.Enums.MomentsFeedType)
 local FFlagMomentsRecommendationContentTypeModule = require(Moments.Flags.FFlagMomentsRecommendationContentType)
+local FFlagMomentsRecommendationFeedTypeModule = require(Moments.Flags.FFlagMomentsRecommendationFeedType)
 local config = {
 	eventName = "RecommendationImpressionEvent",
 	throttlingPercentage = 10000,
@@ -11,7 +13,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: FFlagMomentsRecommendationContentTypeModule (copy), config (copy), ConstantsModule (copy)
+	-- upvalues: FFlagMomentsRecommendationContentTypeModule (copy), FFlagMomentsRecommendationFeedTypeModule (copy), config (copy), ConstantsModule (copy)
 	game:GetService("TelemetryService"):LogEvent(config, {
 		standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
 		customFields = {
@@ -28,7 +30,8 @@ return function(p1)
 			departure_intent = p1.departureIntent,
 			moments_session_id = p1.momentsSessionId,
 			source_surface = ConstantsModule.SOURCE_SURFACE,
-			content_type = if FFlagMomentsRecommendationContentTypeModule then p1.contentType else nil
+			content_type = if FFlagMomentsRecommendationContentTypeModule then p1.contentType else nil,
+			feed_type = if FFlagMomentsRecommendationFeedTypeModule then p1.feedType else nil
 		}
 	})
 end

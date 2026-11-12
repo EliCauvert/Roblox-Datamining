@@ -3,10 +3,9 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), NormalizeFontFaceFunction (copy)
 	local UseTokensResult = UseTokensFunction()
 	local config = {
 		TabsLayout = ReactModule.createElement("UIListLayout", {
@@ -65,8 +64,7 @@ return function(p1)
 			LayoutOrder = 2,
 			Size = UDim2.fromScale(1, 0),
 			Text = Text,
-			Font = if FoundationFontFaceMigration then nil else UseTokensResult.Typography.TitleLarge.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.TitleLarge.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.TitleLarge.Font),
 			TextSize = UseTokensResult.Typography.TitleLarge.FontSize,
 			TextColor3 = UseTokensResult.Color.Content.Emphasis.Color3,
 			TextTruncate = Enum.TextTruncate.AtEnd,

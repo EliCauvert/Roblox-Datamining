@@ -102,7 +102,7 @@ return function(p1)
 			}
 		end) else UseTokensResult.Color.Content.Default
 	end
-	local CreateElementFunction = ReactModule.createElement
+	local CreateElementFunction1 = ReactModule.createElement
 	local View = FoundationModule.View
 	local config1 = { Size = UDim2.new(0, ICONSIZE, 0, ICONSIZE) }
 	local config2 = {
@@ -114,10 +114,10 @@ return function(p1)
 			style = if FFlagEnableChatIconUnibarDropdownFixEnabled then MapResult else nil
 		})
 	}
-	local Badge = nil
+	local Element = nil
 	
 	if Contrast1 then
-		local CreateElementFunction1 = ReactModule.createElement
+		local CreateElementFunction = ReactModule.createElement
 		local View1 = FoundationModule.View
 		local config3 = {
 			ZIndex = 2,
@@ -158,11 +158,11 @@ return function(p1)
 			["anchor-top-right radius-circle size-200"] = true,
 			["stroke-thicker"] = not FFlagEnableChatIconUnibarDropdownFixEnabled
 		}
-		Badge = CreateElementFunction1(View1, config3)
+		Element = CreateElementFunction(View1, config3)
 	else
-		Badge = nil
+		Element = nil
 	end
-	config2.Badge = Badge
+	config2.Badge = Element
 	
-	return CreateElementFunction(View, config1, config2)
+	return CreateElementFunction1(View, config1, config2)
 end

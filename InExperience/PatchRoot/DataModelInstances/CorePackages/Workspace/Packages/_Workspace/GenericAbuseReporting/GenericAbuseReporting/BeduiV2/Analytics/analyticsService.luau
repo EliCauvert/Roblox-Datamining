@@ -227,10 +227,10 @@ local function formatErrorDetailForAnalytics(p2, p3, p4)
 			
 			if Body ~= nil then
 				local Text = tostring(Body)
-				local Text10 = if utf8.len(Text) == nil then nil elseif #Text <= 1000 then Text else string.sub(Text, 1, utf8.offset(Text, 0, 1001) - 1)
+				local Text11 = if utf8.len(Text) == nil then nil elseif #Text <= 1000 then Text else string.sub(Text, 1, utf8.offset(Text, 0, 1001) - 1)
 				
-				if Text10 ~= nil then
-					Error_metadata.response_body = Text10
+				if Text11 ~= nil then
+					Error_metadata.response_body = Text11
 				end
 			end
 		end
@@ -240,10 +240,10 @@ local function formatErrorDetailForAnalytics(p2, p3, p4)
 	end
 	if v2 ~= nil then
 		local Text = tostring(v2)
-		local Text11 = if utf8.len(Text) == nil then nil elseif #Text <= 1000 then Text else string.sub(Text, 1, utf8.offset(Text, 0, 1001) - 1)
+		local Text10 = if utf8.len(Text) == nil then nil elseif #Text <= 1000 then Text else string.sub(Text, 1, utf8.offset(Text, 0, 1001) - 1)
 		
-		if Text11 ~= nil then
-			Error_metadata.runtime_message = Text11
+		if Text10 ~= nil then
+			Error_metadata.runtime_message = Text10
 		end
 	end
 	local Text = tostring(p2)

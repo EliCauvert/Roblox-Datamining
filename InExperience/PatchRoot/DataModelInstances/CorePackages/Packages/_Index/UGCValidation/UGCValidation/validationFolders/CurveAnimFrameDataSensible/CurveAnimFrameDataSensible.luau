@@ -22,6 +22,28 @@ local function areNumbersGood(...): boolean
 	return true
 end
 
+local function validateCurveAnimClip(p1, p2)
+	-- upvalues: areNumbersGood (copy), ErrorSourceStringsModule (copy)
+	local FullName = p2.animation and p2.animation:GetFullName()
+	for _, animFrame in p2.animFrames do
+		for _, CF in animFrame do
+			if not areNumbersGood(CF:GetComponents()) then
+				p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_InvalidNumericalData, { animationName = FullName }, p2.animation)
+				
+				return
+			end
+		end
+	end
+	for _, positionMagnitudeFrame in p2.positionMagnitudeFrames do
+		for _, value in positionMagnitudeFrame do
+			if not areNumbersGood(value) then
+				p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_InvalidNumericalData, { animationName = FullName }, p2.animation)
+				break
+			end
+		end
+	end
+end
+
 return {
 	categories = {
 		ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
@@ -35,26 +57,10 @@ return {
 	prereqTests = {
 		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	},
-	run = function(p1, p2)
-		-- upvalues: areNumbersGood (copy), ErrorSourceStringsModule (copy)
-		local CurveAnimComputedFrames = p2.curveAnimComputedFrames
-		
-		for _, animFrame in CurveAnimComputedFrames.animFrames do
-			for _, CF in animFrame do
-				if not areNumbersGood(CF:GetComponents()) then
-					p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_InvalidNumericalData)
-					
-					return
-				end
-			end
-		end
-		for _, positionMagnitudeFrame in CurveAnimComputedFrames.positionMagnitudeFrames do
-			for _, value in positionMagnitudeFrame do
-				if not areNumbersGood(value) then
-					p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_InvalidNumericalData)
-					break
-				end
-			end
+	run = function(p3, p4)
+		-- upvalues: validateCurveAnimClip (copy)
+		for _, curveAnimComputedFrame in p4.curveAnimComputedFrames do
+			validateCurveAnimClip(p3, curveAnimComputedFrame)
 		end
 	end
 }

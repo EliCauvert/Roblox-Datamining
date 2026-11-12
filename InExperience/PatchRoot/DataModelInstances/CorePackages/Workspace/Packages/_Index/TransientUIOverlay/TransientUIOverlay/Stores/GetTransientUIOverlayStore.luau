@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("TransientUIOverlay").Parent.Signals).createComputed((require(script.createTransientUIOverlayStore)))

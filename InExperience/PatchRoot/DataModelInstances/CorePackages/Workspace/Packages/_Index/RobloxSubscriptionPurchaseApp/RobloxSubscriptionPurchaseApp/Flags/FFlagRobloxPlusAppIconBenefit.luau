@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("RobloxPlusAppIconBenefit2", false)

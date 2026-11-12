@@ -14,11 +14,16 @@ local PopoverAlign = FoundationModule.Enums.PopoverAlign
 local PopoverSide = FoundationModule.Enums.PopoverSide
 local Tooltip = FoundationModule.Tooltip
 local View = FoundationModule.View
+local GalleryButtonContentModule = require(Parent.Components.CoreUI.GalleryButtonContent)
 local VideoCaptureControlModule = require(Parent.Components.CoreUI.VideoCaptureControl)
 local VoiceChatIndicatorModule = require(Parent.Components.CoreUI.VoiceChatIndicator)
+local CapturesContextModule = require(Parent.Context.CapturesContext)
+local CarouselOpenedModule = require(Parent.Actions.CarouselOpened)
 local ConstantsModule = require(Parent.Constants)
 local EventNamesModule = require(Parent.Analytics.EventNames)
+local GetLatestCaptureStoreModule = require(Parent.Stores.GetLatestCaptureStore)
 local TakeCaptureModule = require(Parent.Thunks.TakeCapture)
+local FindCaptureIndexModule = require(Parent.Utils.findCaptureIndex)
 local SnapDirectionModule = require(Parent.Enums.SnapDirection)
 local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
 local UseCallbackFunction = ReactModule.useCallback
@@ -28,11 +33,14 @@ local UseEffectFunction = ReactModule.useEffect
 local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
 local UsePlayShutterSoundModule = require(Parent.Hooks.usePlayShutterSound)
 local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local UseLatestCaptureModule = require(Parent.Hooks.useLatestCapture)
+local UseSystemMenuDetectionModule = require(Parent.Hooks.useSystemMenuDetection)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseTopbarInsetModule = require(Parent.Hooks.useTopbarInset)
 local DebugOverrideCaptureControlsVideoGuacPolicy = game:DefineFastFlag("DebugOverrideCaptureControlsVideoGuacPolicy", false)
 local FStringSocialCaptureIXPLayer = require(Parent1.SharedFlags).FStringSocialCaptureIXPLayer
 local FFlagCapturesControlsUseBuilderIconsModule = require(Parent.Flags.FFlagCapturesControlsUseBuilderIcons)
+local FFlagCapturesControlsGalleryButtonModule = require(Parent.Flags.FFlagCapturesControlsGalleryButton)
 local FrameCameraCenter = if FFlagCapturesControlsUseBuilderIconsModule then IconName.FrameCameraCenter else "icons/controls/screenCapture"
 local Large = if FFlagCapturesControlsUseBuilderIconsModule then IconSize.Large else nil
 local config = {
@@ -48,30 +56,38 @@ return (require(Parent.App.CapturesPolicy).connect(function(p1)
 		hasVideoCaptureCapability = p1.hasVideoCaptureCapability() and CaptureService:CanCaptureVideo() or DebugOverrideCaptureControlsVideoGuacPolicy
 	}
 end)(function(p1)
-	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), UseTokensFunction (copy), UseTopbarInsetModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseEffectFunction (copy), IXPServiceWrapper (copy), FStringSocialCaptureIXPLayer (copy), UsePlayShutterSoundModule (copy), ReactModule (copy), UseCaptureControlsControllerModule (copy), EventNamesModule (copy), UseCallbackFunction (copy), SocialStopwatchModule (copy), TakeCaptureModule (copy), View (copy), FoundationModule (copy), VideoCaptureControlModule (copy), config (copy), Tooltip (copy), PopoverAlign (copy), Icon (copy), FrameCameraCenter (copy), Large (copy), VoiceChatIndicatorModule (copy), FFlagCapturesControlsUseBuilderIconsModule (copy), IconName (copy), Image (copy)
+	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), FFlagCapturesControlsGalleryButtonModule (copy), UseTokensFunction (copy), ReactModule (copy), CapturesContextModule (copy), UseSystemMenuDetectionModule (copy), UseLatestCaptureModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseTopbarInsetModule (copy), UseEffectFunction (copy), IXPServiceWrapper (copy), FStringSocialCaptureIXPLayer (copy), UsePlayShutterSoundModule (copy), UseCaptureControlsControllerModule (copy), EventNamesModule (copy), UseCallbackFunction (copy), SocialStopwatchModule (copy), TakeCaptureModule (copy), GetLatestCaptureStoreModule (copy), FindCaptureIndexModule (copy), CarouselOpenedModule (copy), GalleryButtonContentModule (copy), View (copy), FoundationModule (copy), VideoCaptureControlModule (copy), config (copy), Tooltip (copy), PopoverAlign (copy), Icon (copy), FrameCameraCenter (copy), Large (copy), VoiceChatIndicatorModule (copy), FFlagCapturesControlsUseBuilderIconsModule (copy), IconName (copy), Image (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
-		captureScreenshot = "Feature.Captures.Title.CaptureScreenshotTooltip"
+		captureScreenshot = "Feature.Captures.Title.CaptureScreenshotTooltip",
+		gallery = if FFlagCapturesControlsGalleryButtonModule then "Feature.Captures.Title.Gallery" else nil
 	})
 	local UseTokensResult = UseTokensFunction()
+	local OpenGallery = if FFlagCapturesControlsGalleryButtonModule then ReactModule.useContext(CapturesContextModule).openGallery else nil
+	local UseSystemMenuDetectionModuleResult = if FFlagCapturesControlsGalleryButtonModule then UseSystemMenuDetectionModule() else false
+	local UseLatestCaptureModuleResult = if FFlagCapturesControlsGalleryButtonModule then UseLatestCaptureModule() else nil
+	local UseSelectorResult = if FFlagCapturesControlsGalleryButtonModule then UseSelectorFunction(function(p2)
+		-- upvalues: ConstantsModule (upval)
+		return p2[ConstantsModule.RoduxKey].Captures
+	end) else nil
 	local UseTopbarInsetModuleResult = UseTopbarInsetModule()
-	local UseSelectorResult = UseSelectorFunction(function(p2)
+	local UseSelectorResult1 = UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval)
 		return p2[ConstantsModule.RoduxKey].IsActive
 	end)
-	local UseSelectorResult1 = UseSelectorFunction(function(p2)
+	local UseSelectorResult2 = UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval)
 		return p2[ConstantsModule.RoduxKey].IsVideoCaptureActive.status
 	end)
 	UseEffectFunction(function()
-		-- upvalues: UseSelectorResult (copy), IXPServiceWrapper (upval), FStringSocialCaptureIXPLayer (upval)
-		if UseSelectorResult then
+		-- upvalues: UseSelectorResult1 (copy), IXPServiceWrapper (upval), FStringSocialCaptureIXPLayer (upval)
+		if UseSelectorResult1 then
 			IXPServiceWrapper:LogFlagLinkedUserLayerExposure(FStringSocialCaptureIXPLayer)
 		end
-	end, { UseSelectorResult })
+	end, { UseSelectorResult1 })
 	local UsePlayShutterSoundModuleResult = UsePlayShutterSoundModule()
-	local UseCaptureControlsControllerModuleResult = UseCaptureControlsControllerModule(UseSelectorResult, (ReactModule.useMemo(function(): Vector2
+	local UseCaptureControlsControllerModuleResult = UseCaptureControlsControllerModule(UseSelectorResult1, (ReactModule.useMemo(function(): Vector2
 		-- upvalues: UseTopbarInsetModuleResult (copy), UseTokensResult (copy)
 		return Vector2.new(UseTopbarInsetModuleResult.Min.X - UseTokensResult.Padding.Small, UseTopbarInsetModuleResult.Height - UseTokensResult.Padding.XSmall - UseTokensResult.Padding.XXSmall)
 	end, { UseTopbarInsetModuleResult, UseTokensResult })))
@@ -84,11 +100,11 @@ end)(function(p1)
 	local ScreenshotButtonRef = UseCaptureControlsControllerModuleResult.screenshotButtonRef
 	local SnapDirection = UseCaptureControlsControllerModuleResult.snapDirection
 	UseEffectFunction(function()
-		-- upvalues: UseSelectorResult (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval)
-		if UseSelectorResult then
+		-- upvalues: UseSelectorResult1 (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval)
+		if UseSelectorResult1 then
 			UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesEntrypointViewed)
 		end
-	end, { UseSelectorResult })
+	end, { UseSelectorResult1 })
 	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: SocialStopwatchModule (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval), UsePlayShutterSoundModuleResult (copy), UseDispatchResult (copy), TakeCaptureModule (upval)
 		if not SocialStopwatchModule.Stopwatch.get(SocialStopwatchModule.Events.CaptureTaken) then
@@ -98,6 +114,25 @@ end)(function(p1)
 		UsePlayShutterSoundModuleResult()
 		UseDispatchResult(TakeCaptureModule())
 	end, { UsePlayShutterSoundModuleResult })
+	local UseCallbackResult1 = if FFlagCapturesControlsGalleryButtonModule then UseCallbackFunction(function()
+		-- upvalues: GetLatestCaptureStoreModule (upval), OpenGallery (copy), UseLatestCaptureModuleResult (copy), UseSelectorResult (copy), FindCaptureIndexModule (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval), UseDispatchResult (copy), CarouselOpenedModule (upval)
+		local LatestCaptureFilePath = GetLatestCaptureStoreModule(false).getLatestCaptureFilePath(false)
+		
+		if not OpenGallery() or UseLatestCaptureModuleResult == nil or UseSelectorResult == nil then return end
+		local CaptureIndexModule = FindCaptureIndexModule(UseSelectorResult, UseLatestCaptureModuleResult, LatestCaptureFilePath)
+		
+		if CaptureIndexModule then
+			UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesCarouselOpened)
+			UseDispatchResult(CarouselOpenedModule(CaptureIndexModule))
+		end
+	end, {
+		OpenGallery,
+		UseLatestCaptureModuleResult,
+		UseSelectorResult,
+		UseAnalyticsModuleResult.fireEvent,
+		UseDispatchResult
+	}) else nil
+	local Element = if FFlagCapturesControlsGalleryButtonModule then ReactModule.createElement(GalleryButtonContentModule, { latestCapture = UseLatestCaptureModuleResult }) else nil
 	
 	return ReactModule.createElement(View, {
 		tag = "padding-x-large padding-y-medium",
@@ -109,7 +144,7 @@ end)(function(p1)
 			tag = "anchor-center-center position-center-center size-full",
 			ref = DragContainerRef
 		}, {
-			CaptureControls = if UseSelectorResult then ReactModule.createElement(View, {
+			CaptureControls = if UseSelectorResult1 then ReactModule.createElement(View, {
 				AnchorPoint = DragItemAnchorPointBinding:map(function(Vector): Vector2
 					return Vector2.new(Vector.x, Vector.y)
 				end),
@@ -134,7 +169,7 @@ end)(function(p1)
 					ResponseStyle = Enum.UIDragDetectorResponseStyle.CustomOffset
 				}),
 				VideoCaptureControl = if p1.hasVideoCaptureCapability then ReactModule.createElement(VideoCaptureControlModule, { layoutOrder = 1, popoverSide = config[SnapDirection] }) else nil,
-				ScreenshotCTA = if UseSelectorResult1 then nil else ReactModule.createElement(View, {
+				ScreenshotCTA = if UseSelectorResult2 then nil else ReactModule.createElement(View, {
 					LayoutOrder = 2,
 					tag = {
 						["size-1200-1200"] = true,
@@ -157,10 +192,26 @@ end)(function(p1)
 						})
 					}))
 				}),
-				VoiceChatIndicator = if UseSelectorResult1 then ReactModule.createElement(VoiceChatIndicatorModule, { layoutOrder = 3, popoverSide = config[SnapDirection] }) else nil,
+				GalleryCTA = if FFlagCapturesControlsGalleryButtonModule and OpenGallery and not UseSelectorResult2 then ReactModule.createElement(View, {
+					LayoutOrder = 3,
+					tag = "position-center-center anchor-center-center size-1200-1200 auto-xy radius-circle clip",
+					testId = "--social-captures-controls-gallery-button",
+					onActivated = UseCallbackResult1
+				}, {
+					GalleryButtonContent = Element,
+					GalleryTooltip = if UseSystemMenuDetectionModuleResult then nil else ReactModule.createElement(Tooltip, {
+						align = PopoverAlign.Center,
+						side = config[SnapDirection],
+						title = UseLocalizationResult.gallery
+					}, ReactModule.createElement(View, { tag = "size-1200-1200" }))
+				}) else nil,
+				VoiceChatIndicator = if UseSelectorResult2 then ReactModule.createElement(VoiceChatIndicatorModule, {
+					layoutOrder = if FFlagCapturesControlsGalleryButtonModule then 4 else 3,
+					popoverSide = config[SnapDirection]
+				}) else nil,
 				DragAffordance = ReactModule.createElement(View, {
-					LayoutOrder = 4,
-					tag = "anchor-center-center auto-xy padding-xxsmall position-center-center"
+					tag = "anchor-center-center auto-xy padding-xxsmall position-center-center",
+					LayoutOrder = if FFlagCapturesControlsGalleryButtonModule then 5 else 4
 				}, {
 					DragAffordanceIcon = if FFlagCapturesControlsUseBuilderIconsModule then ReactModule.createElement(Icon, {
 						tag = "position-center-center anchor-center-center",

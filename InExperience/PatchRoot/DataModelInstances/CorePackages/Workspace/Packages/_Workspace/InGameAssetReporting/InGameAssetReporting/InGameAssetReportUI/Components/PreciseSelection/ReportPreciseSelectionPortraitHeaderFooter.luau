@@ -6,7 +6,6 @@ local Button = FoundationModule.Button
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local InputSize = FoundationModule.Enums.InputSize
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local HeaderBar = UIBloxModule.App.Bar.HeaderBar
 local IconButton = UIBloxModule.App.Button.IconButton
 local IconSize = UIBloxModule.App.ImageSet.Enum.IconSize
@@ -38,22 +37,20 @@ local function _(OnActivated)
 end
 
 local _ = function(Text)
-	-- upvalues: WithStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: WithStyleFunction (copy), ReactModule (copy), NormalizeFontFaceFunction (copy)
 	return function()
-		-- upvalues: WithStyleFunction (upval), ReactModule (upval), Text (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+		-- upvalues: WithStyleFunction (upval), ReactModule (upval), Text (copy), NormalizeFontFaceFunction (upval)
 		return WithStyleFunction(function(p1)
-			-- upvalues: ReactModule (upval), Text (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+			-- upvalues: ReactModule (upval), Text (upval), NormalizeFontFaceFunction (upval)
 			local CurrentCamera = game.Workspace.CurrentCamera
 			local Theme = p1.Theme
-			local _Font = p1.Font
 			
 			return ReactModule.createElement("TextLabel", {
 				TextSize = 20,
 				TextWrapped = true,
 				BackgroundTransparency = 1,
 				Text = Text,
-				Font = if FoundationFontFaceMigration then nil else _Font.Header2.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.TitleLarge.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(p1.Tokens.Typography.TitleLarge.Font),
 				TextColor3 = Theme.TextEmphasis.Color,
 				TextTransparency = Theme.TextEmphasis.Transparency,
 				TextXAlignment = Enum.TextXAlignment.Center,
@@ -84,7 +81,7 @@ end
 
 return {
 	PortraitModeHeader = function(p1)
-		-- upvalues: ReactModule (copy), HeaderBar (copy), IconButton (copy), IconSize (copy), Images (copy), WithStyleFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+		-- upvalues: ReactModule (copy), HeaderBar (copy), IconButton (copy), IconSize (copy), Images (copy), WithStyleFunction (copy), NormalizeFontFaceFunction (copy)
 		local BackAction = p1.backAction
 		
 		local function RenderLeft()
@@ -139,20 +136,18 @@ return {
 					})
 				end,
 				renderCenter = function()
-					-- upvalues: WithStyleFunction (upval), ReactModule (upval), TitleText (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+					-- upvalues: WithStyleFunction (upval), ReactModule (upval), TitleText (copy), NormalizeFontFaceFunction (upval)
 					return WithStyleFunction(function(p2)
-						-- upvalues: ReactModule (upval), TitleText (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+						-- upvalues: ReactModule (upval), TitleText (upval), NormalizeFontFaceFunction (upval)
 						local CurrentCamera = game.Workspace.CurrentCamera
 						local Theme = p2.Theme
-						local _Font = p2.Font
 						
 						return ReactModule.createElement("TextLabel", {
 							TextSize = 20,
 							TextWrapped = true,
 							BackgroundTransparency = 1,
 							Text = TitleText,
-							Font = if FoundationFontFaceMigration then nil else _Font.Header2.Font,
-							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.TitleLarge.Font) else nil,
+							FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.TitleLarge.Font),
 							TextColor3 = Theme.TextEmphasis.Color,
 							TextTransparency = Theme.TextEmphasis.Transparency,
 							TextXAlignment = Enum.TextXAlignment.Center,

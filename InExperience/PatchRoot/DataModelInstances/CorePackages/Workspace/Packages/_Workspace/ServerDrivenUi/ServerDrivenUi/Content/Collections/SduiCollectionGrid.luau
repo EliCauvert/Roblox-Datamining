@@ -30,11 +30,13 @@ local GetSduiComponentWrapperFunction = SduiCoreSystemModule.getSduiComponentWra
 local SduiCollectionItemModule = require(ServerDrivenUi.Content.Collections.SduiCollectionItem)
 local SduiCollectionGridRevealRowsModule = require(ServerDrivenUi.Content.Collections.SduiCollectionGridRevealRows)
 local UseCollectionAnalyticsContextFunction = require(Parent.SduiSharedContent).useCollectionAnalyticsContext
+local CreateGameDwellObserverFunction = require(Parent.DiscoveryAnalytics).Dwell.createGameDwellObserver
 local FFlagLuaAppLayoutParamsInContext = require(Parent.SharedFlags).FFlagLuaAppLayoutParamsInContext
 local FFlagLuaAppCompositionAlways = require(Parent.SharedFlags).FFlagLuaAppCompositionAlways
 local FFlagSduiFixSearchTelemetry = require(Parent.SharedFlags).FFlagSduiFixSearchTelemetry
 local FFlagSduiPreferredTextSizeLineBudgets = require(Parent.SharedFlags).FFlagSduiPreferredTextSizeLineBudgets
 local FFlagSduiCollectionGridRevealRows = require(Parent.SharedFlags).FFlagSduiCollectionGridRevealRows
+local FFlagLuaAppSduiGameDwell = require(Parent.SharedFlags).FFlagLuaAppSduiGameDwell
 
 local function _(p1, p2, p3): UDim2
 	local ColSpan = p1.colSpan or 1
@@ -46,7 +48,7 @@ end
 local t = {}
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FFlagLuaAppCompositionAlways (copy), ReactModule (copy), t (copy), FFlagLuaAppLayoutParamsInContext (copy), SignalsReactModule (copy), UseCollectionLayoutParamsFunction (copy), CollectionItemSize (copy), CryoModule (copy), UseCollectionLayoutFunction (copy), FindAnalyticsFieldFunction (copy), SduiBuilder (copy), UseCollectionAnalyticsContextFunction (copy), UseCollectionImpressionsSignalFunction (copy), GetImpressionsTagModule (copy), SduiParseHelpers (copy), SduiErrors (copy), ReportUnifiedLoggingImpressionsFunction (copy), SendLegacyGameImpressionsForSduiModule (copy), UseTokensFunction (copy), FFlagSduiPreferredTextSizeLineBudgets (copy), UsePreferredTextSizeLineBudgetFunction (copy), FFlagSduiFixSearchTelemetry (copy), SduiCollectionAnalyticsBuilder (copy), FFlagSduiErrorPaths (copy), GetSduiComponentWrapperFunction (copy), SduiCollectionItemModule (copy), FFlagSduiCollectionGridRevealRows (copy), SduiCollectionGridRevealRowsModule (copy), CollectionGrid (copy), WaitForPropWrapper (copy), FrameBoundsImpressionsTracker (copy), ScreenSizeImpressionsTracker (copy)
+	-- upvalues: FFlagLuaAppCompositionAlways (copy), ReactModule (copy), t (copy), FFlagLuaAppLayoutParamsInContext (copy), SignalsReactModule (copy), UseCollectionLayoutParamsFunction (copy), CollectionItemSize (copy), CryoModule (copy), UseCollectionLayoutFunction (copy), FindAnalyticsFieldFunction (copy), SduiBuilder (copy), UseCollectionAnalyticsContextFunction (copy), UseCollectionImpressionsSignalFunction (copy), GetImpressionsTagModule (copy), FFlagLuaAppSduiGameDwell (copy), CreateGameDwellObserverFunction (copy), SduiParseHelpers (copy), SduiErrors (copy), ReportUnifiedLoggingImpressionsFunction (copy), SendLegacyGameImpressionsForSduiModule (copy), UseTokensFunction (copy), FFlagSduiPreferredTextSizeLineBudgets (copy), UsePreferredTextSizeLineBudgetFunction (copy), FFlagSduiFixSearchTelemetry (copy), SduiCollectionAnalyticsBuilder (copy), FFlagSduiErrorPaths (copy), GetSduiComponentWrapperFunction (copy), SduiCollectionItemModule (copy), FFlagSduiCollectionGridRevealRows (copy), SduiCollectionGridRevealRowsModule (copy), CollectionGrid (copy), WaitForPropWrapper (copy), FrameBoundsImpressionsTracker (copy), ScreenSizeImpressionsTracker (copy)
 	local FFlagLuaAppCompositionAlways1 = FFlagLuaAppCompositionAlways or (p1.appCompositionEnabled or p1.sduiContext.appCompositionEnabled)
 	local LayoutOrder = p1.layoutOrder
 	local SduiContext = p1.sduiContext
@@ -105,6 +107,35 @@ return ReactModule.memo(function(p1)
 		p1.onCollectionViewabilityChanged
 	})
 	local ImpressionsTag = p1.impressionsTag or GetImpressionsTagModule(p1.index, UseCollectionAnalyticsContextResult2.current, SduiContext, p1.debugName)
+	local UseMemoResult1 = nil
+	
+	if FFlagLuaAppSduiGameDwell then
+		local Current = UseCollectionAnalyticsContextResult2.current
+		local IsDwellLoggingEnabled = p1.dwellLoggingEnabled == true
+		UseMemoResult1 = ReactModule.useMemo(function()
+			-- upvalues: IsDwellLoggingEnabled (copy), CreateGameDwellObserverFunction (upval), SduiContext (copy), UseCollectionAnalyticsContextResult2 (copy), UseRefResult1 (copy), p1 (copy)
+			return if IsDwellLoggingEnabled then CreateGameDwellObserverFunction({
+				pageContext = SduiContext.routeName or SduiContext.appPage,
+				getCollectionData = function()
+					-- upvalues: UseCollectionAnalyticsContextResult2 (upval)
+					return UseCollectionAnalyticsContextResult2.current
+				end,
+				getItemData = function(p2)
+					-- upvalues: UseRefResult1 (upval)
+					return UseRefResult1.current[p2]
+				end,
+				collectionItemSize = p1.collectionItemSize
+			}) else nil
+		end, {
+			IsDwellLoggingEnabled, SduiContext.routeName, SduiContext.appPage,
+			UseCollectionAnalyticsContextResult2, UseRefResult1, p1.collectionItemSize,
+			if Current then Current.collectionId else nil,
+			if Current then Current.collectionPosition else nil,
+			if Current then Current.collectionComponentType else nil,
+			if Current then Current.itemsPerRow else nil,
+			if Current then Current.startRowNumber else nil
+		})
+	end
 	local UseResult1 = ReactModule.useCallback(function(List)
 		-- upvalues: UseMemoResult (copy), UseCollectionAnalyticsContextResult (copy), SduiParseHelpers (upval), SduiContext (copy), SduiErrors (upval), ImpressionsTag (copy), p1 (copy), UseCollectionAnalyticsContextResult2 (copy), ReportUnifiedLoggingImpressionsFunction (upval), UseRefResult1 (copy), SendLegacyGameImpressionsForSduiModule (upval)
 		if UseMemoResult ~= nil and #UseMemoResult ~= 0 then
@@ -210,17 +241,17 @@ return ReactModule.memo(function(p1)
 				size = Size,
 				zIndex = -Index
 			}
-			local _UDim2 = nil
+			local InnerWrapperSize = nil
 			
 			if ComponentConfig.spanOverride == nil then
-				_UDim2 = nil
+				InnerWrapperSize = nil
 			else
 				local SpanOverride = ComponentConfig.spanOverride
 				local ColSpan = SpanOverride.colSpan or 1
 				local RowSpan = SpanOverride.rowSpan or 1
-				_UDim2 = UDim2.new(ColSpan, Gutter * (ColSpan - 1), RowSpan, VerticalGap * (RowSpan - 1))
+				InnerWrapperSize = UDim2.new(ColSpan, Gutter * (ColSpan - 1), RowSpan, VerticalGap * (RowSpan - 1))
 			end
-			config.innerWrapperSize = _UDim2
+			config.innerWrapperSize = InnerWrapperSize
 			
 			return CreateElementFunction(SduiCollectionItemModule, config, { Item = Element }), ComponentType or "unknown"
 		end, {
@@ -286,14 +317,16 @@ return ReactModule.memo(function(p1)
 				impressionsTag = ImpressionsTag,
 				scrollViewPositionChangedSignal = UseCollectionImpressionsSignalResult,
 				sendImpressions = UseResult1,
-				dataUpdatedTimestamp = p1.sduiContext.dataUpdatedTimestamp
+				dataUpdatedTimestamp = p1.sduiContext.dataUpdatedTimestamp,
+				visibilityObserver = if FFlagLuaAppSduiGameDwell then UseMemoResult1 else nil
 			}) else ReactModule.createElement(ScreenSizeImpressionsTracker, {
 				parentRef = UseRefResult,
 				pageContext = SduiContext.routeName or SduiContext.appPage,
 				impressionsTag = ImpressionsTag,
 				scrollViewPositionChangedSignal = UseCollectionImpressionsSignalResult,
 				sendImpressions = UseResult1,
-				dataUpdatedTimestamp = p1.sduiContext.dataUpdatedTimestamp
+				dataUpdatedTimestamp = p1.sduiContext.dataUpdatedTimestamp,
+				visibilityObserver = if FFlagLuaAppSduiGameDwell then UseMemoResult1 else nil
 			})
 		}),
 		FocusNavActions = ReactModule.useMemo(function()

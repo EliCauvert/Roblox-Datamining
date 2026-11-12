@@ -13,6 +13,7 @@ local ReactDebugCurrentFrameModule = require(script.ReactDebugCurrentFrame)
 
 return {
 	ReactCurrentDispatcher = require(script.ReactCurrentDispatcher),
+	ReactCurrentCompilerRuntime = require(script.ReactCurrentCompilerRuntime),
 	ReactCurrentBatchConfig = require(script.ReactCurrentBatchConfig),
 	ReactCurrentOwner = require(script.ReactCurrentOwner),
 	IsSomeRendererActing = require(script.IsSomeRendererActing),

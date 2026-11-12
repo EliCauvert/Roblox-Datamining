@@ -10,7 +10,8 @@ local FriendsMenuShareGameInviteLink = require(Parent.FriendsMenu).FriendsMenuSh
 local Configs = {
 	disableRowActivation = true,
 	showTrustedFriendIndicator = false,
-	disableVirtualization = true
+	disableVirtualization = true,
+	fixedRowHeight = if require(Parent.SharedFlags).FFlagUserListFixedRowHeightConfig then true else nil
 }
 
 local function GameInviteJoinCardPortal(p1)

@@ -3,9 +3,7 @@ local Parent1 = Parent.Parent
 local CoreGui = game:GetService("CoreGui")
 local ReactModule = require(Parent1.React)
 local UIBloxModule = require(Parent1.UIBlox)
-local FoundationModule = require(Parent1.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent1.Foundation).Utility.normalizeFontFace
 local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
 local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
@@ -14,7 +12,7 @@ local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 local EventNamesModule = require(Parent.Analytics.EventNames)
 
 return function(p1)
-	-- upvalues: UseAnalyticsModule (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), EventNamesModule (copy), CoreGui (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), Button (copy), ButtonType (copy)
+	-- upvalues: UseAnalyticsModule (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), EventNamesModule (copy), CoreGui (copy), NormalizeFontFaceFunction (copy), Button (copy), ButtonType (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseStyleResult = UseStyleFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -42,8 +40,6 @@ return function(p1)
 			end
 		end
 	end, { UseAnalyticsModuleResult.fireEvent })
-	local CaptionBodyFont = UseStyleResult.Font.CaptionBody.Font
-	local HeaderFont = UseStyleResult.Font.Header2.Font
 	
 	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -67,8 +63,7 @@ return function(p1)
 			Title = ReactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
-				Font = if FoundationFontFaceMigration then nil else HeaderFont,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.TitleLarge.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.TitleLarge.Font),
 				Size = UDim2.new(1, 0, 0, 30),
 				Text = UseLocalizationResult.videoCTATitle,
 				TextColor3 = UseStyleResult.Theme.TextEmphasis.Color,
@@ -79,8 +74,7 @@ return function(p1)
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
 				TextWrapped = true,
-				Font = if FoundationFontFaceMigration then nil else CaptionBodyFont,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodySmall.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodySmall.Font),
 				Size = UDim2.new(1, 0, 0, 40),
 				Text = UseLocalizationResult.videoEducationalText,
 				TextColor3 = UseStyleResult.Theme.TextDefault.Color,

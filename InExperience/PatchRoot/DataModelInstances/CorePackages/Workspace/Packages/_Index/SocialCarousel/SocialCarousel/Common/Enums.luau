@@ -1,4 +1,5 @@
 ﻿return {
+	MarqueeFriendIdAttribute = "SocialCarouselMarqueeFriendId",
 	MarqueePlayStatus = { Playing = "Playing", Paused = "Paused", Idle = "Idle" },
 	Tile = {
 		Friend = "Friend",

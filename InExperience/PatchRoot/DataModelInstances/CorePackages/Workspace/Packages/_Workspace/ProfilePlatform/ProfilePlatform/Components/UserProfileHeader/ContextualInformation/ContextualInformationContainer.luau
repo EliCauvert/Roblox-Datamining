@@ -15,19 +15,18 @@ local ContextualGenericModule = require(script.Parent.ContextualGeneric)
 local ContextualPresenceModule = require(script.Parent.ContextualPresence)
 local ContextualMutualFriendsModule = require(script.Parent.ContextualMutualFriends)
 local ContextualPlayedTogetherModule = require(script.Parent.ContextualPlayedTogether)
-local FFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceName)
 
 return function(p1)
-	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), FFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModule (copy), UseDispatchFunction (copy), UseEffectOnMountFunction (copy), NetworkingGamesModule (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), ReactModule (copy), ContextualPresenceModule (copy), ContextualMutualFriendsModule (copy), ContextualPlayedTogetherModule (copy), ContextualGenericModule (copy), HorizontalPageMargin (copy)
+	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), UseDispatchFunction (copy), UseEffectOnMountFunction (copy), NetworkingGamesModule (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), ReactModule (copy), ContextualPresenceModule (copy), ContextualMutualFriendsModule (copy), ContextualPlayedTogetherModule (copy), ContextualGenericModule (copy), HorizontalPageMargin (copy)
 	local SourceInfo = UseProfileWrapperContextModule().sourceInfo
 	local ContextualInformation = (UseProfileJsonComponentModule(EnumsModule.Components.UserProfileHeader) or {}).contextualInformation
 	local Context = ContextualInformation.context
 	local ContextDetails = ContextualInformation.contextDetails
-	local SourceUniverseId = if Context == EnumsModule.ContextualTypes.SentFromExperience then ContextDetails[Context].sourceUniverseId elseif FFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModule and Context == EnumsModule.ContextualTypes.PlayedTogether then ContextDetails[Context].mostFrequentUniverseId else nil
+	local SourceUniverseId = if Context == EnumsModule.ContextualTypes.SentFromExperience then ContextDetails[Context].sourceUniverseId elseif Context == EnumsModule.ContextualTypes.PlayedTogether then ContextDetails[Context].mostFrequentUniverseId else nil
 	local UseDispatchResult = UseDispatchFunction()
 	UseEffectOnMountFunction(function()
-		-- upvalues: Context (copy), EnumsModule (upval), FFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModule (upval), UseDispatchResult (copy), NetworkingGamesModule (upval), SourceUniverseId (copy)
-		if Context == EnumsModule.ContextualTypes.SentFromExperience or FFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModule and Context == EnumsModule.ContextualTypes.PlayedTogether then
+		-- upvalues: Context (copy), EnumsModule (upval), UseDispatchResult (copy), NetworkingGamesModule (upval), SourceUniverseId (copy)
+		if Context == EnumsModule.ContextualTypes.SentFromExperience or Context == EnumsModule.ContextualTypes.PlayedTogether then
 			UseDispatchResult(NetworkingGamesModule.GetExperiencesDetails.API({ SourceUniverseId })):catch(function(_) end)
 		end
 	end)
@@ -48,7 +47,7 @@ return function(p1)
 			mutualFriendsCount = ContextDetail.mutualFriendsCount
 		})
 	else
-		Element = if FFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModule and Context == EnumsModule.ContextualTypes.PlayedTogether then ReactModule.createElement(ContextualPlayedTogetherModule, { experienceName = UseSelectorResult }) else ReactModule.createElement(ContextualGenericModule, {
+		Element = if Context == EnumsModule.ContextualTypes.PlayedTogether then ReactModule.createElement(ContextualPlayedTogetherModule, { experienceName = UseSelectorResult }) else ReactModule.createElement(ContextualGenericModule, {
 			contextualType = Context,
 			experienceName = UseSelectorResult,
 			iconOverride = ContextualOverrideIcon,

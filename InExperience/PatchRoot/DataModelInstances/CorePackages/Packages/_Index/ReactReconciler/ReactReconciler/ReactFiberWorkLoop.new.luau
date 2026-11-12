@@ -137,14 +137,18 @@ local _ = function()
 end
 
 local _ = function()
-	-- upvalues: config (copy), ReactFiberHooksNewModule (ref)
+	-- upvalues: config (copy), ReactFiberHooksNewModule (ref), ReactFeatureFlags (copy)
 	if not config.resetHooksAfterThrowRef then
 		ReactFiberHooksNewModule = require(script.Parent["ReactFiberHooks.new"])
 		config.resetHooksAfterThrowRef = ReactFiberHooksNewModule.resetHooksAfterThrow
 		config.ContextOnlyDispatcherRef = ReactFiberHooksNewModule.ContextOnlyDispatcher
 		config.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef = ReactFiberHooksNewModule.getIsUpdatingOpaqueValueInRenderPhaseInDEV
 	end
-	return config.resetHooksAfterThrowRef()
+	config.resetHooksAfterThrowRef()
+	
+	if ReactFeatureFlags.enableClassCompilerRuntimeRelease1 then
+		require(script.Parent["ReactFiberClassMemoCache.new"]).resetAfterThrow()
+	end
 end
 
 local _ = function()
@@ -184,8 +188,8 @@ local ReactErrorUtils = require(Parent.Shared).ReactErrorUtils
 local InvokeGuardedCallbackFunction = ReactErrorUtils.invokeGuardedCallback
 local HasCaughtErrorFunction = ReactErrorUtils.hasCaughtError
 local ClearCaughtErrorFunction = ReactErrorUtils.clearCaughtError
-local OnCommitRootFunction1 = require(script.Parent["ReactFiberDevToolsHook.new"]).onCommitRoot
-local OnCommitRootFunction = require(script.Parent.ReactTestSelectors).onCommitRoot
+local OnCommitRootFunction = require(script.Parent["ReactFiberDevToolsHook.new"]).onCommitRoot
+local OnCommitRootFunction1 = require(script.Parent.ReactTestSelectors).onCommitRoot
 local EnqueueTask = require(Parent.Shared).enqueueTask
 local DoesFiberContainFunction = require(script.Parent.ReactFiberTreeReflection).doesFiberContain
 local ReactCurrentDispatcher = ReactSharedInternals.ReactCurrentDispatcher
@@ -497,7 +501,7 @@ function config1.performConcurrentWorkOnRoot(p1)
 end
 
 local Count2 = 0
-local Enabled = false
+local Enabled1 = false
 
 function shouldForceFlushFallbacksInDEV(): boolean
 	-- upvalues: DEV (copy), Count2 (ref)
@@ -973,11 +977,11 @@ function config1.prepareFreshStack(p1, NoLanes4)
 end
 
 function config1.handleError(p2, p3)
-	-- upvalues: WorkInProgress (ref), ResetContextDependenciesFunction (copy), config (copy), ReactFiberHooksNewModule (ref), ResetCurrentFiberFunction (copy), ReactCurrentOwner (copy), v2 (ref), v3 (ref), ReactFeatureFlags (copy), ReactTypeOfModeModule (copy), ReactProfilerTimerNewModule (copy), ThrowExceptionFunction (copy), NoLanes (ref), ReactFiberWorkLoopModule (copy), config1 (copy)
+	-- upvalues: WorkInProgress (ref), ResetContextDependenciesFunction (copy), config (copy), ReactFiberHooksNewModule (ref), ReactFeatureFlags (copy), ResetCurrentFiberFunction (copy), ReactCurrentOwner (copy), v2 (ref), v3 (ref), ReactTypeOfModeModule (copy), ReactProfilerTimerNewModule (copy), ThrowExceptionFunction (copy), NoLanes (ref), ReactFiberWorkLoopModule (copy), config1 (copy)
 	while true do
 		local Return = WorkInProgress
 		local Success, Result = pcall(function()
-			-- upvalues: ResetContextDependenciesFunction (upval), config (upval), ReactFiberHooksNewModule (upval), ResetCurrentFiberFunction (upval), ReactCurrentOwner (upval), Return (ref), v2 (upval), v3 (upval), p3 (ref), WorkInProgress (upval), ReactFeatureFlags (upval), ReactTypeOfModeModule (upval), ReactProfilerTimerNewModule (upval), ThrowExceptionFunction (upval), p2 (copy), NoLanes (upval), ReactFiberWorkLoopModule (upval), config1 (upval)
+			-- upvalues: ResetContextDependenciesFunction (upval), config (upval), ReactFiberHooksNewModule (upval), ReactFeatureFlags (upval), ResetCurrentFiberFunction (upval), ReactCurrentOwner (upval), Return (ref), v2 (upval), v3 (upval), p3 (ref), WorkInProgress (upval), ReactTypeOfModeModule (upval), ReactProfilerTimerNewModule (upval), ThrowExceptionFunction (upval), p2 (copy), NoLanes (upval), ReactFiberWorkLoopModule (upval), config1 (upval)
 			ResetContextDependenciesFunction()
 			
 			if not config.resetHooksAfterThrowRef then
@@ -986,7 +990,11 @@ function config1.handleError(p2, p3)
 				config.ContextOnlyDispatcherRef = ReactFiberHooksNewModule.ContextOnlyDispatcher
 				config.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef = ReactFiberHooksNewModule.getIsUpdatingOpaqueValueInRenderPhaseInDEV
 			end
-			local _ = config.resetHooksAfterThrowRef()
+			config.resetHooksAfterThrowRef()
+			
+			if ReactFeatureFlags.enableClassCompilerRuntimeRelease1 then
+				require(script.Parent["ReactFiberClassMemoCache.new"]).resetAfterThrow()
+			end
 			ResetCurrentFiberFunction()
 			ReactCurrentOwner.current = nil
 			
@@ -1127,7 +1135,7 @@ function config1.renderRootSync(p4, FinishedLanes)
 			Success = true
 			config1.workLoopSync()
 		else
-			Success, v188 = xpcall(config1.workLoopSync, DescribeError)
+			Success, v187 = xpcall(config1.workLoopSync, DescribeError)
 		end
 		if Success then break end
 		config1.handleError(p4, v11)
@@ -1396,7 +1404,7 @@ function config1.commitRoot(p6)
 end
 
 function config1.commitRootImpl(p6, p7)
-	-- upvalues: ReactFiberWorkLoopModule (copy), v9 (ref), InvariantFunction (copy), Bits (ref), DEV (copy), EnableDebugTracing (copy), DebugTracingModule (copy), EnableSchedulingProfiler (copy), SchedulingProfilerModule (copy), ReactFiberLaneModule (copy), MergeLanesFunction (copy), MarkRootFinishedFunction (copy), NewResult1 (ref), HasDiscreteLanesFunction (copy), v1 (ref), WorkInProgress (ref), NoLanes (ref), ReactFiberFlagsModule (copy), ReactFeatureFlags (copy), GetCurrentUpdateLanePriorityFunction (copy), SetCurrentUpdateLanePriorityFunction (copy), config1 (copy), ReactCurrentOwner (copy), Flag1 (ref), ScheduleCallbackFunction (copy), NormalPriority (copy), PrepareForCommitResult (ref), ReactFiberHostConfigModule (copy), Flag2 (ref), ReactProfilerTimerNewModule (copy), SetCurrentFiberFunction (copy), InvokeGuardedCallbackFunction (copy), RecursivelyCommitLayoutEffectsFunction (copy), HasCaughtErrorFunction (copy), ClearCaughtErrorFunction (copy), Callback1 (ref), ResetCurrentFiberFunction (copy), YOLO (copy), DescribeError (copy), RequestPaintFunction (copy), NoLanes4 (ref), NoPriority1 (ref), List (ref), NewResult (ref), EnableDoubleInvokingEffects (copy), SyncLane (copy), v10 (ref), Count (ref), OnCommitRootFunction1 (copy), OnCommitRootFunction (copy), Callback (ref), NowFunction (copy), Flag (ref), v8 (ref), FlushSyncCallbackQueueFunction (copy)
+	-- upvalues: ReactFiberWorkLoopModule (copy), v9 (ref), InvariantFunction (copy), Bits (ref), DEV (copy), EnableDebugTracing (copy), DebugTracingModule (copy), EnableSchedulingProfiler (copy), SchedulingProfilerModule (copy), ReactFiberLaneModule (copy), MergeLanesFunction (copy), MarkRootFinishedFunction (copy), NewResult1 (ref), HasDiscreteLanesFunction (copy), v1 (ref), WorkInProgress (ref), NoLanes (ref), ReactFiberFlagsModule (copy), ReactFeatureFlags (copy), GetCurrentUpdateLanePriorityFunction (copy), SetCurrentUpdateLanePriorityFunction (copy), config1 (copy), ReactCurrentOwner (copy), Flag1 (ref), ScheduleCallbackFunction (copy), NormalPriority (copy), PrepareForCommitResult (ref), ReactFiberHostConfigModule (copy), Flag2 (ref), ReactProfilerTimerNewModule (copy), SetCurrentFiberFunction (copy), InvokeGuardedCallbackFunction (copy), RecursivelyCommitLayoutEffectsFunction (copy), HasCaughtErrorFunction (copy), ClearCaughtErrorFunction (copy), Callback1 (ref), ResetCurrentFiberFunction (copy), YOLO (copy), DescribeError (copy), RequestPaintFunction (copy), NoLanes4 (ref), NoPriority1 (ref), List (ref), NewResult (ref), EnableDoubleInvokingEffects (copy), SyncLane (copy), v10 (ref), Count (ref), OnCommitRootFunction (copy), OnCommitRootFunction1 (copy), Callback (ref), NowFunction (copy), Flag (ref), v8 (ref), FlushSyncCallbackQueueFunction (copy)
 	repeat
 		ReactFiberWorkLoopModule.flushPassiveEffects()
 	until v9 == nil
@@ -1496,7 +1504,7 @@ function config1.commitRootImpl(p6, p7)
 					Success = true
 					RecursivelyCommitLayoutEffectsFunction(FinishedWork, p6, ReactFiberWorkLoopModule.captureCommitPhaseError, ReactFiberWorkLoopModule.schedulePassiveEffectCallback)
 				else
-					Success, v221 = xpcall(RecursivelyCommitLayoutEffectsFunction, DescribeError, FinishedWork, p6, ReactFiberWorkLoopModule.captureCommitPhaseError, ReactFiberWorkLoopModule.schedulePassiveEffectCallback)
+					Success, v220 = xpcall(RecursivelyCommitLayoutEffectsFunction, DescribeError, FinishedWork, p6, ReactFiberWorkLoopModule.captureCommitPhaseError, ReactFiberWorkLoopModule.schedulePassiveEffectCallback)
 				end
 				if not Success then
 					Callback1(FinishedWork, FinishedWork, v13)
@@ -1573,10 +1581,10 @@ function config1.commitRootImpl(p6, p7)
 		else
 			Count = 0
 		end
-		OnCommitRootFunction1(FinishedWork.stateNode, p7)
+		OnCommitRootFunction(FinishedWork.stateNode, p7)
 		
 		if DEV then
-			OnCommitRootFunction()
+			OnCommitRootFunction1()
 		end
 		Callback(p6, NowFunction())
 		
@@ -1636,7 +1644,7 @@ function config1.commitBeforeMutationEffects(Child)
 						Success = true
 						config1.commitBeforeMutationEffectsImpl(Sibling)
 					else
-						Success, v228 = xpcall(config1.commitBeforeMutationEffectsImpl, DescribeError, Sibling)
+						Success, v227 = xpcall(config1.commitBeforeMutationEffectsImpl, DescribeError, Sibling)
 					end
 					if not Success then
 						ReactFiberWorkLoopModule.captureCommitPhaseError(Sibling, Sibling.return_, v15)
@@ -1659,7 +1667,7 @@ function config1.commitBeforeMutationEffects(Child)
 				Success1 = true
 				config1.commitBeforeMutationEffectsImpl(Sibling)
 			else
-				Success1, v230 = xpcall(config1.commitBeforeMutationEffectsImpl, DescribeError, Sibling)
+				Success1, v229 = xpcall(config1.commitBeforeMutationEffectsImpl, DescribeError, Sibling)
 			end
 			if not Success1 then
 				ReactFiberWorkLoopModule.captureCommitPhaseError(Sibling, Sibling.return_, v16)
@@ -1740,7 +1748,7 @@ function config1.commitMutationEffects(Child, p8, p9)
 						Success1 = true
 						config1.commitMutationEffectsImpl(Sibling, p8, p9)
 					else
-						Success1, v238 = xpcall(config1.commitMutationEffectsImpl, DescribeError, Sibling, p8, p9)
+						Success1, v237 = xpcall(config1.commitMutationEffectsImpl, DescribeError, Sibling, p8, p9)
 					end
 					if not Success1 then
 						ReactFiberWorkLoopModule.captureCommitPhaseError(Sibling, Sibling.return_, v17)
@@ -1763,7 +1771,7 @@ function config1.commitMutationEffects(Child, p8, p9)
 				Success2 = true
 				config1.commitMutationEffectsImpl(Sibling, p8, p9)
 			else
-				Success2, v240 = xpcall(config1.commitMutationEffectsImpl, DescribeError, Sibling, p8, p9)
+				Success2, v239 = xpcall(config1.commitMutationEffectsImpl, DescribeError, Sibling, p8, p9)
 			end
 			if not Success2 then
 				ReactFiberWorkLoopModule.captureCommitPhaseError(Sibling, Sibling.return_, v18)
@@ -1895,7 +1903,7 @@ local function v107(p13, Current)
 					Success = true
 					CommitPassiveMountFunction(p13, Sibling)
 				else
-					Success, v254 = xpcall(CommitPassiveMountFunction, DescribeError, p13, Sibling)
+					Success, v253 = xpcall(CommitPassiveMountFunction, DescribeError, p13, Sibling)
 				end
 				if not Success then
 					ReactFiberWorkLoopModule.captureCommitPhaseError(Sibling, Sibling.return_, v21)
@@ -1934,7 +1942,7 @@ function config1.commitPassiveMountEffectsOnFibers(p14, PassiveMountFibers)
 				Success = true
 				CommitPassiveMountFunction(p14, PassiveMountFiber)
 			else
-				Success, v258 = xpcall(CommitPassiveMountFunction, DescribeError, p14, PassiveMountFiber)
+				Success, v257 = xpcall(CommitPassiveMountFunction, DescribeError, p14, PassiveMountFiber)
 			end
 			if not Success then
 				ReactFiberWorkLoopModule.captureCommitPhaseError(PassiveMountFiber, PassiveMountFiber.return_, v22)
@@ -2336,7 +2344,7 @@ end
 
 if DEV and ReactFeatureFlags.replayFailedUnitOfWorkWithInvokeGuardedCallback then
 	function config1.beginWork(Alternate, p16, SubtreeRenderLanes)
-		-- upvalues: ReactFiberNewModule (copy), BeginWork (copy), DescribeError (copy), ResetContextDependenciesFunction (copy), config (copy), ReactFiberHooksNewModule (ref), UnwindInterruptedWorkFunction (copy), ReactFeatureFlags (copy), ReactTypeOfModeModule (copy), ReactProfilerTimerNewModule (copy), InvokeGuardedCallbackFunction (copy), HasCaughtErrorFunction (copy), ClearCaughtErrorFunction (copy)
+		-- upvalues: ReactFiberNewModule (copy), BeginWork (copy), DescribeError (copy), ResetContextDependenciesFunction (copy), config (copy), ReactFiberHooksNewModule (ref), ReactFeatureFlags (copy), UnwindInterruptedWorkFunction (copy), ReactTypeOfModeModule (copy), ReactProfilerTimerNewModule (copy), InvokeGuardedCallbackFunction (copy), HasCaughtErrorFunction (copy), ClearCaughtErrorFunction (copy)
 		local AssignFiberPropertiesInDEVResult = ReactFiberNewModule.assignFiberPropertiesInDEV(nil, p16)
 		local Success, Result = xpcall(BeginWork, DescribeError, Alternate, p16, SubtreeRenderLanes)
 		
@@ -2352,7 +2360,11 @@ if DEV and ReactFeatureFlags.replayFailedUnitOfWorkWithInvokeGuardedCallback the
 				config.ContextOnlyDispatcherRef = ReactFiberHooksNewModule.ContextOnlyDispatcher
 				config.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef = ReactFiberHooksNewModule.getIsUpdatingOpaqueValueInRenderPhaseInDEV
 			end
-			local _ = config.resetHooksAfterThrowRef()
+			config.resetHooksAfterThrowRef()
+			
+			if ReactFeatureFlags.enableClassCompilerRuntimeRelease1 then
+				require(script.Parent["ReactFiberClassMemoCache.new"]).resetAfterThrow()
+			end
 			UnwindInterruptedWorkFunction(p16)
 			ReactFiberNewModule.assignFiberPropertiesInDEV(p16, AssignFiberPropertiesInDEVResult)
 			
@@ -2453,19 +2465,19 @@ function ReactFiberWorkLoopModule.warnIfNotCurrentlyActingUpdatesInDEV(p16)
 	end
 end
 
-local Enabled1 = false
+local Enabled = false
 
 function ReactFiberWorkLoopModule.warnIfUnmockedScheduler(p16)
-	-- upvalues: DEV (copy), Enabled1 (ref), SchedulerModule (copy), ReactTypeOfModeModule (copy), Console (copy), ReactFeatureFlags (copy)
-	if DEV and Enabled1 == false and SchedulerModule.unstable_flushAllWithoutAsserting == nil then
+	-- upvalues: DEV (copy), Enabled (ref), SchedulerModule (copy), ReactTypeOfModeModule (copy), Console (copy), ReactFeatureFlags (copy)
+	if DEV and Enabled == false and SchedulerModule.unstable_flushAllWithoutAsserting == nil then
 		if bit32.band(p16.mode, ReactTypeOfModeModule.BlockingMode) ~= 0 or bit32.band(p16.mode, ReactTypeOfModeModule.ConcurrentMode) ~= 0 then
-			Enabled1 = true
+			Enabled = true
 			Console.error("In Concurrent or Sync modes, the 'scheduler' module needs to be mocked to guarantee consistent behaviour across tests and client application. For example, with Jest: \njest.mock('scheduler', function() return require(Packages.Scheduler).unstable_mock end)\n\nFor more info, visit https://reactjs.org/link/mock-scheduler")
 			
 			return
 		end
 		if ReactFeatureFlags.warnAboutUnmockedScheduler == true then
-			Enabled1 = true
+			Enabled = true
 			Console.error("Starting from React v18, the 'scheduler' module will need to be mocked to guarantee consistent behaviour across tests and client applications. For example, with Jest: \njest.mock('scheduler', function() return require(Packages.Scheduler).unstable_mock end)\n\nFor more info, visit https://reactjs.org/link/mock-scheduler")
 		end
 	end
@@ -2567,7 +2579,7 @@ function config1.finishPendingInteractions(p18, FinishedLanes)
 	
 	if Current ~= nil and p18.memoizedInteractions.size > 0 then
 		Current = SubscriberRef.current
-		v23, v319 = xpcall(Current.onWorkStopped, DescribeError, p18.memoizedInteractions, (computeThreadID(p18, FinishedLanes)))
+		v23, v317 = xpcall(Current.onWorkStopped, DescribeError, p18.memoizedInteractions, (computeThreadID(p18, FinishedLanes)))
 	end
 	local PendingInteractionMap = p18.pendingInteractionMap
 	PendingInteractionMap:forEach(function(p19, p20)
@@ -2663,9 +2675,9 @@ local function flushWorkAndMicroTasks(Callback: (any) -> ())
 end
 
 function ReactFiberWorkLoopModule.act(p18)
-	-- upvalues: DEV (copy), ReactGlobalsModule (copy), Enabled (ref), Console (copy), Count2 (ref), IsSomeRendererActing (copy), ReactFiberWorkLoopModule (copy), Flag5 (ref), DescribeError (copy), PromiseModule (copy), IsFunction (copy), flushWorkAndMicroTasks (copy), flushActWork (copy)
-	if not DEV and not ReactGlobalsModule.__ROACT_17_MOCK_SCHEDULER__ and Enabled == false then
-		Enabled = true
+	-- upvalues: DEV (copy), ReactGlobalsModule (copy), Enabled1 (ref), Console (copy), Count2 (ref), IsSomeRendererActing (copy), ReactFiberWorkLoopModule (copy), Flag5 (ref), DescribeError (copy), PromiseModule (copy), IsFunction (copy), flushWorkAndMicroTasks (copy), flushActWork (copy)
+	if not DEV and not ReactGlobalsModule.__ROACT_17_MOCK_SCHEDULER__ and Enabled1 == false then
+		Enabled1 = true
 		Console.error("act(...) is not supported in production builds of React, and might not behave as expected.")
 	end
 	local Count: number = Count2
@@ -2703,15 +2715,15 @@ function ReactFiberWorkLoopModule.act(p18)
 		error(Result)
 	end
 	if Result == nil or typeof(Result) ~= "table" or typeof(Result.andThen) ~= "function" then
-		local Enabled1 = DEV
+		local Enabled = DEV
 		
-		if Enabled1 and Result ~= nil then
-			Enabled1 = Console
-			Enabled1 = Enabled1.error
-			Enabled1("The callback passed to act(...) function must return nil, or a Promise. You returned %s", (tostring(Result)))
+		if Enabled and Result ~= nil then
+			Enabled = Console
+			Enabled = Enabled.error
+			Enabled("The callback passed to act(...) function must return nil, or a Promise. You returned %s", (tostring(Result)))
 		end
-		Enabled1 = xpcall
-		local CallbackResult, CallbackResult2 = Enabled1(function()
+		Enabled = xpcall
+		local CallbackResult, CallbackResult2 = Enabled(function()
 			-- upvalues: Count2 (upval), IsFunction (upval), Current (copy), flushActWork (upval), IsSomeRendererActing (upval), ReactFiberWorkLoopModule (upval), Current1 (copy), Flag5 (upval), Flag (copy), DEV (upval), Count (copy), Console (upval)
 			if Count2 == 1 and (IsFunction == false or Current == false) then
 				flushActWork()
@@ -2747,20 +2759,20 @@ function ReactFiberWorkLoopModule.act(p18)
 			end
 		}
 	else
-		local Enabled1 = false
+		local Enabled = false
 		
 		if DEV and typeof(PromiseModule) ~= nil then
 			PromiseModule.resolve():andThen(function() end):andThen(function()
-				-- upvalues: Enabled1 (ref), Console (upval)
-				if Enabled1 == false then
+				-- upvalues: Enabled (ref), Console (upval)
+				if Enabled == false then
 					Console.error("You called act(Promise.new(function() --[[ ... ]] end)) without :await() or :expect(). This could lead to unexpected testing behaviour, interleaving multiple act calls and mixing their scopes. You should - act(function() Promise.new(function() --[[ ... ]] end):await() end);")
 				end
 			end)
 		end
 		return {
 			andThen = function(_, Callback, Callback1)
-				-- upvalues: Enabled1 (ref), Result (copy), Count2 (upval), IsFunction (upval), Current (copy), IsSomeRendererActing (upval), ReactFiberWorkLoopModule (upval), Current1 (copy), Flag5 (upval), Flag (copy), DEV (upval), Count (copy), Console (upval), flushWorkAndMicroTasks (upval)
-				Enabled1 = true
+				-- upvalues: Enabled (ref), Result (copy), Count2 (upval), IsFunction (upval), Current (copy), IsSomeRendererActing (upval), ReactFiberWorkLoopModule (upval), Current1 (copy), Flag5 (upval), Flag (copy), DEV (upval), Count (copy), Console (upval), flushWorkAndMicroTasks (upval)
+				Enabled = true
 				
 				return Result:andThen(function()
 					-- upvalues: Count2 (upval), IsFunction (upval), Current (upval), IsSomeRendererActing (upval), ReactFiberWorkLoopModule (upval), Current1 (upval), Flag5 (upval), Flag (upval), DEV (upval), Count (upval), Console (upval), Callback (copy), flushWorkAndMicroTasks (upval), Callback1 (copy)

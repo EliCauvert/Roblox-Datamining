@@ -3,5 +3,6 @@
 	HamburgerBlueDot = "HamburgerBlueDot",
 	ShopIconBlueDot = "ShopIconBlueDot",
 	EducationTooltipOnHamburger = "EducationTooltipOnHamburger",
-	EducationTooltipOnShopIcon = "EducationTooltipOnShopIcon"
+	EducationTooltipOnShopIcon = "EducationTooltipOnShopIcon",
+	FreeTrialTopBarChip = "FreeTrialTopBarChip"
 }

@@ -1,8 +1,9 @@
 ﻿local Parent = script:FindFirstAncestor("SocialServerDrivenUi").Parent
 local _ = require(Parent.PYMKCarousel)
-local ContextType = require(Parent.DataHydration.FriendsRecommendations).Enums.ContextType
+local FriendsRecommendationsModule = require(Parent.DataHydration.FriendsRecommendations)
+local ContextType = FriendsRecommendationsModule.Enums.ContextType
 local FFlagShowClassmatesOnPYMKModule = require(Parent.SharedFlags.FFlagShowClassmatesOnPYMK)
-local RecommendationType = require(Parent.RecommendationsStore).FriendRecommendations.RecommendationType
+local RecommendationType = FriendsRecommendationsModule.FriendRecommendations.RecommendationType
 
 return function(List, p1)
 	-- upvalues: RecommendationType (copy), ContextType (copy), FFlagShowClassmatesOnPYMKModule (copy)

@@ -8,13 +8,14 @@ local FFlagMomentsReactFeatureGate = SharedFlagsModule.FFlagMomentsReactFeatureG
 local FFlagMomentsCreationFeatureGate = SharedFlagsModule.FFlagMomentsCreationFeatureGate
 local FFlagMomentsEngagementMetricsFeatureModule = require(MomentsCommon.Flags.FFlagMomentsEngagementMetricsFeature)
 local FFlagDebugForceEnableMomentsModule = require(MomentsCommon.Flags.FFlagDebugForceEnableMoments)
+local FFlagMomentsParentTimeLimitModule = require(MomentsCommon.Flags.FFlagMomentsParentTimeLimit)
 local GetFFlagMomentsNonInfiniteScrollModule = require(MomentsCommon.Flags.GetFFlagMomentsNonInfiniteScroll)
 local GetFIntMomentsNonInfiniteScrollLimitModule = require(MomentsCommon.Flags.GetFIntMomentsNonInfiniteScrollLimit)
 local CreateComputedFunction = require(Parent.Signals).createComputed
 local GetAppPolicyStoreFunction = require(Parent.UniversalAppPolicy).GetAppPolicyStore
 
 return function()
-	-- upvalues: GetFFlagMomentsNonInfiniteScrollModule (copy), GetFIntMomentsNonInfiniteScrollLimitModule (copy), CreateComputedFunction (copy), FFlagDebugForceEnableMomentsModule (copy), GetAppPolicyStoreFunction (copy), FFlagMomentsCreationFeatureGate (copy), FFlagMomentsAutoplayAmpPolicy (copy), FFlagMomentsEngagementMetricsFeatureModule (copy), FFlagMomentsReactFeatureGate (copy), FFlagMomentsComments (copy), FFlagMomentsCommentsIxpEnabled (copy)
+	-- upvalues: GetFFlagMomentsNonInfiniteScrollModule (copy), GetFIntMomentsNonInfiniteScrollLimitModule (copy), CreateComputedFunction (copy), FFlagDebugForceEnableMomentsModule (copy), GetAppPolicyStoreFunction (copy), FFlagMomentsCreationFeatureGate (copy), FFlagMomentsAutoplayAmpPolicy (copy), FFlagMomentsEngagementMetricsFeatureModule (copy), FFlagMomentsReactFeatureGate (copy), FFlagMomentsComments (copy), FFlagMomentsCommentsIxpEnabled (copy), FFlagMomentsParentTimeLimitModule (copy), MomentsCommon (copy)
 	local FFlagMomentsNonInfiniteScrollModule = GetFFlagMomentsNonInfiniteScrollModule()
 	local Largest = math.max(1, GetFIntMomentsNonInfiniteScrollLimitModule())
 	
@@ -119,6 +120,10 @@ return function()
 		getCanReadComments = Computed6,
 		getCanWriteComments = Computed7,
 		getCanReactToComments = Computed8,
+		getCanShowPersonalizedRecommendationsEntryPoint = CreateComputedFunction(function(p1)
+			-- upvalues: GetAppPolicyStoreFunction (upval)
+			return GetAppPolicyStoreFunction(false).getAppPolicy(p1).getShowInContextPersonalizedRecommendationsMomentsFeed()
+		end),
 		getIsInfiniteScrollEnabled = CreateComputedFunction(function(p1): boolean
 			-- upvalues: FFlagMomentsNonInfiniteScrollModule (copy), FFlagDebugForceEnableMomentsModule (upval), GetAppPolicyStoreFunction (upval)
 			if not FFlagMomentsNonInfiniteScrollModule then
@@ -134,6 +139,10 @@ return function()
 		getMaxMomentsBeforeEndState = CreateComputedFunction(function(_)
 			-- upvalues: Largest (copy)
 			return Largest
-		end)
+		end),
+		getHasDailyLimit = if FFlagMomentsParentTimeLimitModule then CreateComputedFunction(function(p1): boolean
+			-- upvalues: MomentsCommon (upval), GetAppPolicyStoreFunction (upval)
+			return if require(MomentsCommon.Flags.FFlagDebugForceMomentsDailyLimit) then true else table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), "moments_daily_limit") ~= nil
+		end) else nil
 	}
 end

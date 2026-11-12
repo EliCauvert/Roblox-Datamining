@@ -1,0 +1,1 @@
+﻿return game:DefineFastInt("TTIFirstFrameMaxWaitMs", 2500)

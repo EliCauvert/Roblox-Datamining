@@ -7,12 +7,11 @@ local UseCtaForRowModule = require(UserList.Hooks.useCtaForRow)
 local UseProfileCtaModule = require(UserList.Hooks.useProfileCta)
 local ComposeCtaRowModule = require(script.Parent.composeCtaRow)
 local FFlagUserListCanonicalCtaAnalyticsModule = require(UserList.Flags.FFlagUserListCanonicalCtaAnalytics)
-local FFlagUserListComposeRenderRowWithCta = require(Parent.SharedFlags).FFlagUserListComposeRenderRowWithCta
 local FFlagUserListSurfaceExtensions = require(Parent.SharedFlags).FFlagUserListSurfaceExtensions
 local FFlagUserListSurfacePresenceWins = require(Parent.SharedFlags).FFlagUserListSurfacePresenceWins
 
 return require(Parent.React).memo(function(p1)
-	-- upvalues: UseProfileCtaModule (copy), UseGetPresenceByUserIdFunction (copy), UseJoinUserInExperienceFunction (copy), UseCtaForRowModule (copy), FFlagUserListCanonicalCtaAnalyticsModule (copy), FFlagUserListSurfaceExtensions (copy), ComposeCtaRowModule (copy), FFlagUserListComposeRenderRowWithCta (copy), FFlagUserListSurfacePresenceWins (copy)
+	-- upvalues: UseProfileCtaModule (copy), UseGetPresenceByUserIdFunction (copy), UseJoinUserInExperienceFunction (copy), UseCtaForRowModule (copy), FFlagUserListCanonicalCtaAnalyticsModule (copy), FFlagUserListSurfaceExtensions (copy), ComposeCtaRowModule (copy), FFlagUserListSurfacePresenceWins (copy)
 	local Id = p1.entity.id
 	local UseProfileCtaModuleResult, UseProfileCtaModuleResult2 = UseProfileCtaModule(Id)
 	local UseGetPresenceByUserIdResult = UseGetPresenceByUserIdFunction(Id)
@@ -29,7 +28,7 @@ return require(Parent.React).memo(function(p1)
 	} else nil
 	local RenderRowFunction = p1.renderRow
 	
-	if FFlagUserListComposeRenderRowWithCta and RenderRowFunction then
+	if RenderRowFunction then
 		local CreateRowFunction = p1.createRow
 		
 		return RenderRowFunction(function(Tbl)

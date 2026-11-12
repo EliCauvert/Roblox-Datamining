@@ -141,12 +141,12 @@ return ReactModule.memo(function(Frame)
 		GameEnded = UseLocalizationResult.statusGameEnded,
 		HttpError = UseLocalizationResult.statusHttpError
 	})[Frame.status]
-	local Result1 = nil
+	local StatusQueued = nil
 	
 	if Frame.status == ConstantsModule.QUEUED_STATE and Frame.queuePosition ~= nil then
-		Result1 = UseLocalizationResult.statusQueued
+		StatusQueued = UseLocalizationResult.statusQueued
 	elseif Entry then
-		Result1 = Entry
+		StatusQueued = Entry
 	else
 		local StatusText = Frame.statusText
 		local CoreScriptLocalization = CoreGui:FindFirstChild("CoreScriptLocalization")
@@ -156,9 +156,9 @@ return ReactModule.memo(function(Frame)
 				-- upvalues: CoreScriptLocalization (copy), LocalizationService (upval), CoreGui (upval), StatusText (copy)
 				return CoreScriptLocalization:GetTranslator(LocalizationService.RobloxLocaleId):Translate(CoreGui, StatusText)
 			end)
-			Result1 = if Success then Result else StatusText
+			StatusQueued = if Success then Result else StatusText
 		else
-			Result1 = StatusText
+			StatusQueued = StatusText
 		end
 	end
 	return ReactModule.createElement(View, {
@@ -187,10 +187,10 @@ return ReactModule.memo(function(Frame)
 				testId = "tilt-loading-screen-queue-description",
 				Text = FriendsServerIsFullJoiningNewServer
 			}) else nil,
-			StatusText = if Result1 == "" then nil else ReactModule.createElement(Text, {
+			StatusText = if StatusQueued == "" then nil else ReactModule.createElement(Text, {
 				LayoutOrder = 3,
 				tag = "size-full-0 auto-y text-body-small text-wrap text-align-x-center content-system-contrast",
-				Text = Result1
+				Text = StatusQueued
 			})
 		}),
 		Countdown = if UseStateResult then ReactModule.createElement(View, {

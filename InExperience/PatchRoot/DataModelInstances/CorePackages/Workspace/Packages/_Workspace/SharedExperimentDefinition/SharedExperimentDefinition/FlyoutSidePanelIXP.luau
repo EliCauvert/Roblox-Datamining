@@ -18,10 +18,11 @@ local FFlagSubTabRemoveFlyoutDependency = require(Parent.SharedFlags).FFlagSubTa
 local FFlagHiddenFriendsSortHeaderRemoveFlyoutDependency = require(Parent.SharedFlags).FFlagHiddenFriendsSortHeaderRemoveFlyoutDependency
 local HiddenFriendsSortHeaderAddSubTabDependency = game:DefineFastFlag("HiddenFriendsSortHeaderAddSubTabDependency", false)
 local FFlagAppIaHomeSubTab = require(Parent.SharedFlags).FFlagAppIaHomeSubTab
+local FFlagEnableSubTabOverride = require(Parent.SharedFlags).FFlagEnableSubTabOverride
+local FFlagSubTabHideChartsForNonArgo = require(Parent.SharedFlags).FFlagSubTabHideChartsForNonArgo
 local FFlagEnableChartsInFlyout = require(Parent.SharedFlags).FFlagEnableChartsInFlyout
 local FlyoutAmpGatedVariant = game:DefineFastInt("FlyoutAmpGatedVariant", 2)
-local FFlagFlyoutSidePanelUseAppPolicy = require(Parent.SharedFlags).FFlagFlyoutSidePanelUseAppPolicy
-local UniversalAppPolicyModule = if FFlagFlyoutSidePanelUseAppPolicy then require(Parent.UniversalAppPolicy) else nil
+local UniversalAppPolicyModule = require(Parent.UniversalAppPolicy)
 local v1 = nil
 local v2 = nil
 
@@ -47,9 +48,9 @@ local function getIXPVariant()
 end
 
 local function _()
-	-- upvalues: v2 (ref), FFlagFlyoutSidePanelUseAppPolicy (copy), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy)
+	-- upvalues: v2 (ref), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy)
 	if v2 == nil then
-		v2 = if FFlagFlyoutSidePanelUseAppPolicy and UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
+		v2 = if UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
 		
 		return v2
 	else
@@ -59,161 +60,127 @@ end
 
 return {
 	isFlyoutSidePanelEnabled = function(): boolean
-		-- upvalues: FFlagFlyoutSidePanelUseAppPolicy (copy), v2 (ref), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy), IxpFlyoutControl (copy)
-		local IXPVariant = nil
-		if FFlagFlyoutSidePanelUseAppPolicy then
-			if v2 == nil then
-				v2 = if FFlagFlyoutSidePanelUseAppPolicy and UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
-				IXPVariant = v2
-			else
-				IXPVariant = v2
-			end
+		-- upvalues: v2 (ref), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy), IxpFlyoutControl (copy)
+		local IxpFlyoutControl1 = nil
+		if v2 == nil then
+			v2 = if UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
+			IxpFlyoutControl1 = v2
 		else
-			IXPVariant = getIXPVariant()
+			IxpFlyoutControl1 = v2
 		end
-		return IXPVariant ~= IxpFlyoutControl
+		return IxpFlyoutControl1 ~= IxpFlyoutControl
 	end,
 	isRobloxLogoEnabled = function(): boolean
-		-- upvalues: FFlagFlyoutSidePanelUseAppPolicy (copy), v2 (ref), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy), IxpFlyoutControl (copy)
-		local IXPVariant = nil
-		if FFlagFlyoutSidePanelUseAppPolicy then
-			if v2 == nil then
-				v2 = if FFlagFlyoutSidePanelUseAppPolicy and UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
-				IXPVariant = v2
-			else
-				IXPVariant = v2
-			end
+		-- upvalues: v2 (ref), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy), IxpFlyoutControl (copy)
+		local IxpFlyoutControl1 = nil
+		if v2 == nil then
+			v2 = if UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
+			IxpFlyoutControl1 = v2
 		else
-			IXPVariant = getIXPVariant()
+			IxpFlyoutControl1 = v2
 		end
-		return IXPVariant ~= IxpFlyoutControl
+		return IxpFlyoutControl1 ~= IxpFlyoutControl
 	end,
 	isProfileEntryRemoved = function(): boolean
-		-- upvalues: FFlagFlyoutSidePanelUseAppPolicy (copy), v2 (ref), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy), FlyoutHamburgerEnableProfileEntry (copy), IxpFlyoutVariantHamburger (copy), FlyoutFacepileEnableProfileEntry (copy), IxpFlyoutVariantAlternateEntry (copy), IxpFlyoutVariantNoSubTabs (copy), IxpFlyoutControl (copy)
-		local IXPVariant = nil
-		if FFlagFlyoutSidePanelUseAppPolicy then
-			if v2 == nil then
-				v2 = if FFlagFlyoutSidePanelUseAppPolicy and UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
-				IXPVariant = v2
-			else
-				IXPVariant = v2
-			end
+		-- upvalues: v2 (ref), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy), FlyoutHamburgerEnableProfileEntry (copy), IxpFlyoutVariantHamburger (copy), FlyoutFacepileEnableProfileEntry (copy), IxpFlyoutVariantAlternateEntry (copy), IxpFlyoutVariantNoSubTabs (copy), IxpFlyoutControl (copy)
+		local IxpFlyoutControl1 = nil
+		if v2 == nil then
+			v2 = if UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
+			IxpFlyoutControl1 = v2
 		else
-			IXPVariant = getIXPVariant()
+			IxpFlyoutControl1 = v2
 		end
-		return (not FlyoutHamburgerEnableProfileEntry or IXPVariant ~= IxpFlyoutVariantHamburger) and ((not FlyoutFacepileEnableProfileEntry or IXPVariant ~= IxpFlyoutVariantAlternateEntry and IXPVariant ~= IxpFlyoutVariantNoSubTabs) and IXPVariant ~= IxpFlyoutControl)
+		return (not FlyoutHamburgerEnableProfileEntry or IxpFlyoutControl1 ~= IxpFlyoutVariantHamburger) and ((not FlyoutFacepileEnableProfileEntry or IxpFlyoutControl1 ~= IxpFlyoutVariantAlternateEntry and IxpFlyoutControl1 ~= IxpFlyoutVariantNoSubTabs) and IxpFlyoutControl1 ~= IxpFlyoutControl)
 	end,
 	isFriendsSortHeaderHiddenInFlyoutIxp = function(): boolean
-		-- upvalues: FFlagHiddenFriendsSortHeaderRemoveFlyoutDependency (copy), FFlagEnableChartsInFlyout (copy), FFlagFlyoutSidePanelUseAppPolicy (copy), v2 (ref), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy), IxpFlyoutControl (copy), HiddenFriendsSortHeaderAddSubTabDependency (copy), FFlagAppIaHomeSubTab (copy), FlyoutShowFriendsSortForCurrentVariant (copy)
+		-- upvalues: FFlagHiddenFriendsSortHeaderRemoveFlyoutDependency (copy), FFlagEnableSubTabOverride (copy), FlyoutShowFriendsSortForCurrentVariant (copy), FFlagEnableChartsInFlyout (copy), v2 (ref), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy), IxpFlyoutControl (copy), HiddenFriendsSortHeaderAddSubTabDependency (copy), FFlagAppIaHomeSubTab (copy)
 		if FFlagHiddenFriendsSortHeaderRemoveFlyoutDependency then
+			if FFlagEnableSubTabOverride then
+				return not FlyoutShowFriendsSortForCurrentVariant
+			end
 			local FFlagEnableChartsInFlyout1: boolean = FFlagEnableChartsInFlyout
 			
 			if FFlagEnableChartsInFlyout1 then
-				local IXPVariant = nil
-				if FFlagFlyoutSidePanelUseAppPolicy then
-					if v2 == nil then
-						v2 = if FFlagFlyoutSidePanelUseAppPolicy and UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
-						IXPVariant = v2
-					else
-						IXPVariant = v2
-					end
+				local IxpFlyoutControl1 = nil
+				if v2 == nil then
+					v2 = if UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
+					IxpFlyoutControl1 = v2
 				else
-					IXPVariant = getIXPVariant()
+					IxpFlyoutControl1 = v2
 				end
-				FFlagEnableChartsInFlyout1 = IXPVariant ~= IxpFlyoutControl
+				FFlagEnableChartsInFlyout1 = IxpFlyoutControl1 ~= IxpFlyoutControl
 			end
 			return not FFlagEnableChartsInFlyout1 and (if HiddenFriendsSortHeaderAddSubTabDependency then FFlagAppIaHomeSubTab and not FlyoutShowFriendsSortForCurrentVariant else not FlyoutShowFriendsSortForCurrentVariant)
 		else
-			local IXPVariant = nil
-			if FFlagFlyoutSidePanelUseAppPolicy then
-				if v2 == nil then
-					v2 = if FFlagFlyoutSidePanelUseAppPolicy and UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
-					IXPVariant = v2
-				else
-					IXPVariant = v2
-				end
+			local IxpFlyoutControl2 = nil
+			if v2 == nil then
+				v2 = if UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
+				IxpFlyoutControl2 = v2
 			else
-				IXPVariant = getIXPVariant()
+				IxpFlyoutControl2 = v2
 			end
-			return IXPVariant ~= IxpFlyoutControl and not FlyoutShowFriendsSortForCurrentVariant
+			return IxpFlyoutControl2 ~= IxpFlyoutControl and not FlyoutShowFriendsSortForCurrentVariant
 		end
 	end,
 	isAlternateEntryPointEnabled = function(): boolean
-		-- upvalues: FFlagFlyoutSidePanelUseAppPolicy (copy), v2 (ref), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy), FlyoutDisallowAlternativeEntryOnProfileEntryEnabled (copy), FlyoutHamburgerEnableProfileEntry (copy), IxpFlyoutVariantHamburger (copy), FlyoutFacepileEnableProfileEntry (copy), IxpFlyoutVariantAlternateEntry (copy), IxpFlyoutVariantNoSubTabs (copy), IxpFlyoutControl (copy)
-		local IXPVariant = nil
-		if FFlagFlyoutSidePanelUseAppPolicy then
-			if v2 == nil then
-				v2 = if FFlagFlyoutSidePanelUseAppPolicy and UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
-				IXPVariant = v2
-			else
-				IXPVariant = v2
-			end
+		-- upvalues: v2 (ref), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy), FlyoutDisallowAlternativeEntryOnProfileEntryEnabled (copy), FlyoutHamburgerEnableProfileEntry (copy), IxpFlyoutVariantHamburger (copy), FlyoutFacepileEnableProfileEntry (copy), IxpFlyoutVariantAlternateEntry (copy), IxpFlyoutVariantNoSubTabs (copy), IxpFlyoutControl (copy)
+		local IxpFlyoutVariantAlternateEntry1 = nil
+		if v2 == nil then
+			v2 = if UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
+			IxpFlyoutVariantAlternateEntry1 = v2
 		else
-			IXPVariant = getIXPVariant()
+			IxpFlyoutVariantAlternateEntry1 = v2
 		end
 		if not FlyoutDisallowAlternativeEntryOnProfileEntryEnabled then
-			return IXPVariant == IxpFlyoutVariantAlternateEntry or IXPVariant == IxpFlyoutVariantNoSubTabs
+			return IxpFlyoutVariantAlternateEntry1 == IxpFlyoutVariantAlternateEntry or IxpFlyoutVariantAlternateEntry1 == IxpFlyoutVariantNoSubTabs
 		end
-		local IXPVariant1 = nil
-		if FFlagFlyoutSidePanelUseAppPolicy then
-			if v2 == nil then
-				v2 = if FFlagFlyoutSidePanelUseAppPolicy and UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
-				IXPVariant1 = v2
-			else
-				IXPVariant1 = v2
-			end
+		local IxpFlyoutControl1 = nil
+		if v2 == nil then
+			v2 = if UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
+			IxpFlyoutControl1 = v2
 		else
-			IXPVariant1 = getIXPVariant()
+			IxpFlyoutControl1 = v2
 		end
-		return (not FlyoutHamburgerEnableProfileEntry or IXPVariant1 ~= IxpFlyoutVariantHamburger) and ((not FlyoutFacepileEnableProfileEntry or IXPVariant1 ~= IxpFlyoutVariantAlternateEntry and IXPVariant1 ~= IxpFlyoutVariantNoSubTabs) and IXPVariant1 ~= IxpFlyoutControl) and (IXPVariant == IxpFlyoutVariantAlternateEntry or IXPVariant == IxpFlyoutVariantNoSubTabs)
+		return (not FlyoutHamburgerEnableProfileEntry or IxpFlyoutControl1 ~= IxpFlyoutVariantHamburger) and ((not FlyoutFacepileEnableProfileEntry or IxpFlyoutControl1 ~= IxpFlyoutVariantAlternateEntry and IxpFlyoutControl1 ~= IxpFlyoutVariantNoSubTabs) and IxpFlyoutControl1 ~= IxpFlyoutControl) and (IxpFlyoutVariantAlternateEntry1 == IxpFlyoutVariantAlternateEntry or IxpFlyoutVariantAlternateEntry1 == IxpFlyoutVariantNoSubTabs)
 	end,
 	isRobuxIconRemoved = function(): boolean
-		-- upvalues: FFlagFlyoutSidePanelUseAppPolicy (copy), v2 (ref), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy), IxpFlyoutVariantRemovalRobuxIcon (copy)
-		local IXPVariant = nil
-		if FFlagFlyoutSidePanelUseAppPolicy then
-			if v2 == nil then
-				v2 = if FFlagFlyoutSidePanelUseAppPolicy and UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
-				IXPVariant = v2
-			else
-				IXPVariant = v2
-			end
+		-- upvalues: v2 (ref), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy), IxpFlyoutVariantRemovalRobuxIcon (copy)
+		local IxpFlyoutVariantRemovalRobuxIcon1 = nil
+		if v2 == nil then
+			v2 = if UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
+			IxpFlyoutVariantRemovalRobuxIcon1 = v2
 		else
-			IXPVariant = getIXPVariant()
+			IxpFlyoutVariantRemovalRobuxIcon1 = v2
 		end
-		return IXPVariant == IxpFlyoutVariantRemovalRobuxIcon
+		return IxpFlyoutVariantRemovalRobuxIcon1 == IxpFlyoutVariantRemovalRobuxIcon
 	end,
 	isScrollAwayEnabled = function(): boolean
-		-- upvalues: FFlagFlyoutSidePanelUseAppPolicy (copy), v2 (ref), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy), IxpFlyoutControl (copy)
-		local IXPVariant = nil
-		if FFlagFlyoutSidePanelUseAppPolicy then
-			if v2 == nil then
-				v2 = if FFlagFlyoutSidePanelUseAppPolicy and UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
-				IXPVariant = v2
-			else
-				IXPVariant = v2
-			end
+		-- upvalues: v2 (ref), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy), IxpFlyoutControl (copy)
+		local IxpFlyoutControl1 = nil
+		if v2 == nil then
+			v2 = if UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
+			IxpFlyoutControl1 = v2
 		else
-			IXPVariant = getIXPVariant()
+			IxpFlyoutControl1 = v2
 		end
-		return IXPVariant ~= IxpFlyoutControl
+		return IxpFlyoutControl1 ~= IxpFlyoutControl
 	end,
 	isHomeSubTabEnabled = function(): boolean
-		-- upvalues: FFlagEnableChartsInFlyout (copy), FFlagFlyoutSidePanelUseAppPolicy (copy), v2 (ref), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy), IxpFlyoutControl (copy), FFlagSubTabRemoveFlyoutDependency (copy), IxpFlyoutVariantAlternateEntry (copy), IxpFlyoutVariantHamburger (copy)
+		-- upvalues: FFlagEnableSubTabOverride (copy), FFlagEnableChartsInFlyout (copy), v2 (ref), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy), IxpFlyoutControl (copy), FFlagSubTabRemoveFlyoutDependency (copy), IxpFlyoutVariantAlternateEntry (copy), IxpFlyoutVariantHamburger (copy)
+		if FFlagEnableSubTabOverride then
+			return true
+		end
 		local FFlagEnableChartsInFlyout1: boolean = FFlagEnableChartsInFlyout
 		
 		if FFlagEnableChartsInFlyout1 then
-			local IXPVariant = nil
-			if FFlagFlyoutSidePanelUseAppPolicy then
-				if v2 == nil then
-					v2 = if FFlagFlyoutSidePanelUseAppPolicy and UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
-					IXPVariant = v2
-				else
-					IXPVariant = v2
-				end
+			local IxpFlyoutControl1 = nil
+			if v2 == nil then
+				v2 = if UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
+				IxpFlyoutControl1 = v2
 			else
-				IXPVariant = getIXPVariant()
+				IxpFlyoutControl1 = v2
 			end
-			FFlagEnableChartsInFlyout1 = IXPVariant ~= IxpFlyoutControl
+			FFlagEnableChartsInFlyout1 = IxpFlyoutControl1 ~= IxpFlyoutControl
 		end
 		if FFlagEnableChartsInFlyout1 then
 			return false
@@ -221,36 +188,48 @@ return {
 		if FFlagSubTabRemoveFlyoutDependency then
 			return true
 		end
-		local IXPVariant = nil
-		if FFlagFlyoutSidePanelUseAppPolicy then
-			if v2 == nil then
-				v2 = if FFlagFlyoutSidePanelUseAppPolicy and UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
-				IXPVariant = v2
-			else
-				IXPVariant = v2
-			end
+		local IxpFlyoutVariantAlternateEntry1 = nil
+		if v2 == nil then
+			v2 = if UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
+			IxpFlyoutVariantAlternateEntry1 = v2
 		else
-			IXPVariant = getIXPVariant()
+			IxpFlyoutVariantAlternateEntry1 = v2
 		end
-		return IXPVariant == IxpFlyoutVariantAlternateEntry or IXPVariant == IxpFlyoutVariantHamburger
+		return IxpFlyoutVariantAlternateEntry1 == IxpFlyoutVariantAlternateEntry or IxpFlyoutVariantAlternateEntry1 == IxpFlyoutVariantHamburger
+	end,
+	isChartsInSubTab = function(): boolean
+		-- upvalues: FFlagSubTabHideChartsForNonArgo (copy), FFlagEnableChartsInFlyout (copy), v2 (ref), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy), IxpFlyoutControl (copy)
+		local FFlagSubTabHideChartsForNonArgo1: boolean = FFlagSubTabHideChartsForNonArgo
+		
+		if not FFlagSubTabHideChartsForNonArgo1 then
+			FFlagSubTabHideChartsForNonArgo1 = FFlagEnableChartsInFlyout
+			
+			if FFlagSubTabHideChartsForNonArgo1 then
+				local IxpFlyoutControl1 = nil
+				if v2 == nil then
+					v2 = if UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
+					IxpFlyoutControl1 = v2
+				else
+					IxpFlyoutControl1 = v2
+				end
+				FFlagSubTabHideChartsForNonArgo1 = IxpFlyoutControl1 ~= IxpFlyoutControl
+			end
+		end
+		return not FFlagSubTabHideChartsForNonArgo1
 	end,
 	isChartsInFlyoutEnabled = function(): boolean
-		-- upvalues: FFlagEnableChartsInFlyout (copy), FFlagFlyoutSidePanelUseAppPolicy (copy), v2 (ref), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy), IxpFlyoutControl (copy)
+		-- upvalues: FFlagEnableChartsInFlyout (copy), v2 (ref), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy), IxpFlyoutControl (copy)
 		local FFlagEnableChartsInFlyout1: boolean = FFlagEnableChartsInFlyout
 		
 		if FFlagEnableChartsInFlyout1 then
-			local IXPVariant = nil
-			if FFlagFlyoutSidePanelUseAppPolicy then
-				if v2 == nil then
-					v2 = if FFlagFlyoutSidePanelUseAppPolicy and UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
-					IXPVariant = v2
-				else
-					IXPVariant = v2
-				end
+			local IxpFlyoutControl1 = nil
+			if v2 == nil then
+				v2 = if UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
+				IxpFlyoutControl1 = v2
 			else
-				IXPVariant = getIXPVariant()
+				IxpFlyoutControl1 = v2
 			end
-			FFlagEnableChartsInFlyout1 = IXPVariant ~= IxpFlyoutControl
+			FFlagEnableChartsInFlyout1 = IxpFlyoutControl1 ~= IxpFlyoutControl
 		end
 		return FFlagEnableChartsInFlyout1
 	end

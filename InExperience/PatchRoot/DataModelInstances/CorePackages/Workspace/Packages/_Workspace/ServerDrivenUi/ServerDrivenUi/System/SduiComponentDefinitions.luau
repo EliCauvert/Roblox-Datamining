@@ -34,7 +34,6 @@ local GetEngineEnumParserFunction = SduiParsers.getEngineEnumParser
 local GetLuaTableEnumParserFunction = SduiParsers.getLuaTableEnumParser
 local FFlagSduiTileDisableLegacyHover = require(ServerDrivenUi.Flags).FFlagSduiTileDisableLegacyHover
 local FFlagSduiEnableHeroUnitBottomRow = require(ServerDrivenUi.Flags).FFlagSduiEnableHeroUnitBottomRow
-local FFlagSduiAttributionRowV2 = require(Parent.SharedFlags).FFlagSduiAttributionRowV2
 local FFlagSduiExperienceDetailsSocialProof = require(Parent.SharedFlags).FFlagSduiExperienceDetailsSocialProof
 local FFlagSduiChipAccessoryProps = require(Parent.SharedFlags).FFlagSduiChipAccessoryProps
 local FFlagLuaAppDismissUnlockUpsell = require(Parent.SharedFlags).FFlagLuaAppDismissUnlockUpsell
@@ -51,7 +50,7 @@ local SduiComponentDefinitionsModule = {}
 SduiComponentDefinitionsModule.__index = SduiComponentDefinitionsModule
 
 function SduiComponentDefinitionsModule.new()
-	-- upvalues: ParseVector2Prop (copy), GetEngineEnumParserFunction (copy), ParseColor3Prop (copy), ParseNumberProp (copy), ParseIntegerProp (copy), ParseUDim2Prop (copy), CryoModule (copy), ParseBooleanProp (copy), ParseStringProp (copy), SduiComponentType (copy), Parent (copy), FFlagSduiAttributionRowV2 (copy), ParseCallbackProp (copy), ParseUiComponentProp (copy), ParseTypographyTokenProp (copy), ParseColorTokenProp (copy), GetLuaTableEnumParserFunction (copy), FoundationModule (copy), ParseImageStringProp (copy), TModule (copy), ParseIconProp (copy), ParseUDimProp (copy), ServerDrivenUi (copy), CollectionItemSize (copy), ItemHeightModeModule (copy), FFlagLuaAppRespectClipAncestorImpressions (copy), GetArrayMetatableParserFunction (copy), ParseLazyUiComponentProp (copy), FFlagSduiCollectionCarouselPlaceholderItem (copy), FFlagSduiOptionSelectorCollection (copy), FFlagSduiCollectionGridRevealRows (copy), ParseFocusNavActionsProp (copy), ReactModule (copy), ParseGradientProp (copy), FFlagLuaAppSduiSearchAutocompleteSuggestionComponent (copy), ParseImageSetOrImageProp (copy), FFlagSduiTileDisableLegacyHover (copy), FFlagLuaAppSduiGameTileFeedback (copy), FFlagSduiGameTileDirectAction (copy), FFlagSduiEnableHeroUnitBottomRow (copy), FFlagLuaAppHeroUnitSecondaryLabelTextModule (copy), FFlagSduiChipAccessoryProps (copy), FFlagSduiExperienceDetailsSocialProof (copy), FFlagSduiIndividualFeedItemSpacing (copy), FFlagLuaAppDismissUnlockUpsell (copy), SduiComponentDefinitionsModule (copy)
+	-- upvalues: ParseVector2Prop (copy), GetEngineEnumParserFunction (copy), ParseColor3Prop (copy), ParseNumberProp (copy), ParseIntegerProp (copy), ParseUDim2Prop (copy), CryoModule (copy), ParseBooleanProp (copy), ParseStringProp (copy), SduiComponentType (copy), Parent (copy), ParseCallbackProp (copy), ParseUiComponentProp (copy), ParseTypographyTokenProp (copy), ParseColorTokenProp (copy), GetLuaTableEnumParserFunction (copy), FoundationModule (copy), ParseImageStringProp (copy), TModule (copy), ParseIconProp (copy), ParseUDimProp (copy), ServerDrivenUi (copy), CollectionItemSize (copy), ItemHeightModeModule (copy), FFlagLuaAppRespectClipAncestorImpressions (copy), GetArrayMetatableParserFunction (copy), ParseLazyUiComponentProp (copy), FFlagSduiCollectionCarouselPlaceholderItem (copy), FFlagSduiOptionSelectorCollection (copy), FFlagSduiCollectionGridRevealRows (copy), ParseFocusNavActionsProp (copy), ReactModule (copy), ParseGradientProp (copy), FFlagLuaAppSduiSearchAutocompleteSuggestionComponent (copy), ParseImageSetOrImageProp (copy), FFlagSduiTileDisableLegacyHover (copy), FFlagLuaAppSduiGameTileFeedback (copy), FFlagSduiGameTileDirectAction (copy), FFlagSduiEnableHeroUnitBottomRow (copy), FFlagLuaAppHeroUnitSecondaryLabelTextModule (copy), FFlagSduiChipAccessoryProps (copy), FFlagSduiExperienceDetailsSocialProof (copy), FFlagSduiIndividualFeedItemSpacing (copy), FFlagLuaAppDismissUnlockUpsell (copy), SduiComponentDefinitionsModule (copy)
 	local IconOverrides = {
 		anchorPoint = ParseVector2Prop,
 		automaticSize = GetEngineEnumParserFunction(Enum.AutomaticSize),
@@ -77,30 +76,30 @@ function SduiComponentDefinitionsModule.new()
 				propParsers = {
 					layoutOrder = ParseIntegerProp,
 					position = ParseUDim2Prop,
-					size = if FFlagSduiAttributionRowV2 then ParseUDim2Prop else nil,
+					size = ParseUDim2Prop,
 					onActivated = ParseCallbackProp,
 					rightButtonContent = ParseUiComponentProp,
-					title = if FFlagSduiAttributionRowV2 then ParseStringProp else nil,
-					titleFontStyle = if FFlagSduiAttributionRowV2 then ParseTypographyTokenProp else nil,
-					titleTextColor = if FFlagSduiAttributionRowV2 then ParseColorTokenProp else nil,
-					subtitle = if FFlagSduiAttributionRowV2 then ParseStringProp else nil,
-					subtitleFontStyle = if FFlagSduiAttributionRowV2 then ParseTypographyTokenProp else nil,
-					subtitleTextColor = if FFlagSduiAttributionRowV2 then ParseColor3Prop else nil,
-					subtitleIconName = if FFlagSduiAttributionRowV2 then GetLuaTableEnumParserFunction(FoundationModule.Enums.IconName, "string") else nil,
-					subtitleIconSize = if FFlagSduiAttributionRowV2 then GetLuaTableEnumParserFunction(FoundationModule.Enums.IconSize, "string") else nil,
-					subtitleIconStyle = if FFlagSduiAttributionRowV2 then ParseColorTokenProp else nil,
-					subtitleIconVariant = if FFlagSduiAttributionRowV2 then GetLuaTableEnumParserFunction(FoundationModule.Enums.IconVariant, "string") else nil,
-					subtitleBackgroundIconName = if FFlagSduiAttributionRowV2 then GetLuaTableEnumParserFunction(FoundationModule.Enums.IconName, "string") else nil,
-					subtitleBackgroundIconStyle = if FFlagSduiAttributionRowV2 then ParseColorTokenProp else nil,
-					subtitleOnActivated = if FFlagSduiAttributionRowV2 then ParseCallbackProp else nil,
-					caption = if FFlagSduiAttributionRowV2 then ParseStringProp else nil,
-					captionTextColor = if FFlagSduiAttributionRowV2 then ParseColorTokenProp else nil,
-					captionFontStyle = if FFlagSduiAttributionRowV2 then ParseTypographyTokenProp else nil,
-					textContainerSize = if FFlagSduiAttributionRowV2 then ParseUDim2Prop else nil,
+					title = ParseStringProp,
+					titleFontStyle = ParseTypographyTokenProp,
+					titleTextColor = ParseColorTokenProp,
+					subtitle = ParseStringProp,
+					subtitleFontStyle = ParseTypographyTokenProp,
+					subtitleTextColor = ParseColor3Prop,
+					subtitleIconName = GetLuaTableEnumParserFunction(FoundationModule.Enums.IconName, "string"),
+					subtitleIconSize = GetLuaTableEnumParserFunction(FoundationModule.Enums.IconSize, "string"),
+					subtitleIconStyle = ParseColorTokenProp,
+					subtitleIconVariant = GetLuaTableEnumParserFunction(FoundationModule.Enums.IconVariant, "string"),
+					subtitleBackgroundIconName = GetLuaTableEnumParserFunction(FoundationModule.Enums.IconName, "string"),
+					subtitleBackgroundIconStyle = ParseColorTokenProp,
+					subtitleOnActivated = ParseCallbackProp,
+					caption = ParseStringProp,
+					captionTextColor = ParseColorTokenProp,
+					captionFontStyle = ParseTypographyTokenProp,
+					textContainerSize = ParseUDim2Prop,
 					image = ParseImageStringProp,
-					imageSize = if FFlagSduiAttributionRowV2 then ParseUDim2Prop else nil
+					imageSize = ParseUDim2Prop
 				},
-				propInterface = if FFlagSduiAttributionRowV2 then { title = TModule.string, subtitle = TModule.string } else nil
+				propInterface = { title = TModule.string, subtitle = TModule.string }
 			},
 			[SduiComponentType.Button] = {
 				component = require(Parent.SduiSharedContent).SduiButton,

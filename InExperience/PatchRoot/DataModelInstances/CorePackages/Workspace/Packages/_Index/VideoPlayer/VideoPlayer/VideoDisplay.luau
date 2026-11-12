@@ -5,10 +5,9 @@ local ReactModule = require(Parent.React)
 local ArgCheckModule = require(Parent.ArgCheck)
 local VideoPlayerWrapperModule = require(script.Parent.VideoPlayerWrapper)
 local VideoLoadingStateModule = require(script.Parent.VideoLoadingState)
-local LuaAppFixStartPlaybackProgress = game:DefineFastFlag("LuaAppFixStartPlaybackProgress", false)
 
 return function(Image)
-	-- upvalues: ReactModule (copy), VideoLoadingStateModule (copy), LuaAppFixStartPlaybackProgress (copy), UserGameSettings (copy), ArgCheckModule (copy), RunService (copy), VideoPlayerWrapperModule (copy)
+	-- upvalues: ReactModule (copy), VideoLoadingStateModule (copy), UserGameSettings (copy), ArgCheckModule (copy), RunService (copy), VideoPlayerWrapperModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local VideoPlayerRef = Image.videoPlayerRef or UseRefResult1
@@ -26,14 +25,9 @@ return function(Image)
 	UseRefResult7.current = Image.onAspectRatioChanged
 	local UseRefResult8 = ReactModule.useRef(nil)
 	UseRefResult8.current = Image.onVideoProgressChanged
-	local UseRefResult9 = nil
-	local UseRefResult10 = nil
-	
-	if LuaAppFixStartPlaybackProgress then
-		UseRefResult9 = ReactModule.useRef(Image.startPlaybackProgress)
-		UseRefResult9.current = Image.startPlaybackProgress
-		UseRefResult10 = ReactModule.useRef(false)
-	end
+	local UseRefResult9 = ReactModule.useRef(Image.startPlaybackProgress)
+	UseRefResult9.current = Image.startPlaybackProgress
+	local UseRefResult10 = ReactModule.useRef(false)
 	local UseResult = ReactModule.useCallback(function(p1)
 		-- upvalues: UseStateResult2_1 (copy), UseRefResult5 (copy)
 		UseStateResult2_1(p1)
@@ -85,7 +79,7 @@ return function(Image)
 		end
 	end, { Image.videoPlaybackStateRef })
 	ReactModule.useEffect(function()
-		-- upvalues: UseStateResult2 (copy), ShouldStartPlayback (copy), UseResult (copy), VideoLoadingStateModule (upval), VideoPlayerRef (copy), ArgCheckModule (upval), LuaAppFixStartPlaybackProgress (upval), UseRefResult9 (ref), UseRefResult10 (ref), Image (copy), UseRefResult6 (copy), UseRefResult7 (copy)
+		-- upvalues: UseStateResult2 (copy), ShouldStartPlayback (copy), UseResult (copy), VideoLoadingStateModule (upval), VideoPlayerRef (copy), ArgCheckModule (upval), UseRefResult9 (copy), UseRefResult10 (copy), UseRefResult6 (copy), UseRefResult7 (copy)
 		UseStateResult2(false)
 		
 		if not ShouldStartPlayback then
@@ -98,7 +92,7 @@ return function(Image)
 		UseResult(VideoLoadingStateModule.Loading)
 		local Flag = false
 		task.spawn(function()
-			-- upvalues: Current (copy), Flag (ref), UseResult (upval), VideoLoadingStateModule (upval), LuaAppFixStartPlaybackProgress (upval), UseRefResult9 (upval), UseRefResult10 (upval), Image (upval), UseRefResult6 (upval), UseRefResult7 (upval), UseStateResult2 (upval)
+			-- upvalues: Current (copy), Flag (ref), UseResult (upval), VideoLoadingStateModule (upval), UseRefResult9 (upval), UseRefResult10 (upval), UseRefResult6 (upval), UseRefResult7 (upval), UseStateResult2 (upval)
 			local CurrentTime = tick()
 			local Success, Result = pcall(function()
 				-- upvalues: Current (upval)
@@ -111,15 +105,11 @@ return function(Image)
 				
 				return
 			end
-			if LuaAppFixStartPlaybackProgress then
-				local Current1: number = UseRefResult9.current
-				
-				if Current1 ~= nil then
-					Current.TimePosition = math.clamp(Current1, 0, 1) * Current.TimeLength
-					UseRefResult10.current = true
-				end
-			elseif Image.startPlaybackProgress ~= nil then
-				Current.TimePosition = math.clamp(Image.startPlaybackProgress, 0, 1) * Current.TimeLength
+			local Current1: number = UseRefResult9.current
+			
+			if Current1 ~= nil then
+				Current.TimePosition = math.clamp(Current1, 0, 1) * Current.TimeLength
+				UseRefResult10.current = true
 			end
 			if UseRefResult6.current then
 				UseRefResult6.current(Current.TimeLength, tick() - CurrentTime)
@@ -148,12 +138,12 @@ return function(Image)
 		end
 	end, { Image.onVideoEnded })
 	ReactModule.useEffect(function()
-		-- upvalues: UseStateResult (copy), VideoPlayerRef (copy), ArgCheckModule (upval), LuaAppFixStartPlaybackProgress (upval), UseRefResult10 (ref), UseRefResult4 (copy), Image (copy)
+		-- upvalues: UseStateResult (copy), VideoPlayerRef (copy), ArgCheckModule (upval), UseRefResult10 (copy), UseRefResult4 (copy), Image (copy)
 		if not UseStateResult then return end
 		local Current = VideoPlayerRef.current
 		ArgCheckModule.assert(Current ~= nil, "VideoDisplay expects videoPlayer ref to be set before playback")
 		
-		if LuaAppFixStartPlaybackProgress and UseRefResult10.current then
+		if UseRefResult10.current then
 			UseRefResult10.current = false
 		elseif UseRefResult4.current and Image.shouldStartPlayback then
 			Current.TimePosition = 0

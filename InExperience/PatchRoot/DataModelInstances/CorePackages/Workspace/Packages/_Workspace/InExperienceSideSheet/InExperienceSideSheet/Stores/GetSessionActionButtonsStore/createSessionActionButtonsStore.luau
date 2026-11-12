@@ -10,8 +10,12 @@ local EnumsModule = require(InExperienceSideSheet.Common.Enums)
 local ConstantsModule = require(InExperienceSideSheet.Common.Constants)
 local _ = require(InExperienceSideSheet.Common.Types)
 local IsPioneerLaunchFunction = require(Parent.PioneerUtils).isPioneerLaunch
+local FFlagPioneerLeaveLogsOut = require(Parent.SharedFlags).FFlagPioneerLeaveLogsOut
+local GetPioneerLeaveCopyModule = require(InExperienceSideSheet.Common.getPioneerLeaveCopy)
 local GetSwitchServerStoreFunction = require(Parent.SwitchServer).GetSwitchServerStore
 local GetActionBindingsStoreModule = require(InExperienceSideSheet.Stores.GetActionBindingsStore)
+local FFlagPioneerLogoutButtonLabel = require(InExperienceSideSheet.Flags).FFlagPioneerLogoutButtonLabel
+local FFlagSideSheetEmphasizeLeave = require(InExperienceSideSheet.Flags).FFlagSideSheetEmphasizeLeave
 local ButtonWidth = EnumsModule.ButtonWidth
 local config = {
 	["rbxasset://textures/ui/Controls/DefaultController/ButtonX@2x.png"] = IconName.XboxX,
@@ -28,7 +32,7 @@ local function getIsSwitchServerButtonHidden(p1): boolean
 end
 
 local function createRespawnButtonConfig(SessionActionBindings, GetShortcutIcon, SetShortcutIcon)
-	-- upvalues: IconName (copy), EnumsModule (copy), ButtonWidth (copy)
+	-- upvalues: IconName (copy), EnumsModule (copy), ButtonWidth (copy), FFlagSideSheetEmphasizeLeave (copy)
 	return {
 		name = "RespawnButton",
 		label = "CoreScripts.InGameMenu.QuickActions.Respawn",
@@ -38,58 +42,64 @@ local function createRespawnButtonConfig(SessionActionBindings, GetShortcutIcon,
 		setShortcutIcon = SetShortcutIcon,
 		getOnActivated = SessionActionBindings[EnumsModule.ActionBinding.Respawn].getOnActivated,
 		getIsEnabled = SessionActionBindings[EnumsModule.ActionBinding.Respawn].getIsEnabled,
-		width = ButtonWidth.Full
+		width = ButtonWidth.Full,
+		testId = if FFlagSideSheetEmphasizeLeave then "--in-experience-side-sheet-button-respawn" else nil
 	}
 end
 
-local function createLeaveButtonConfig(SessionActionBindings, GetShortcutIcon, SetShortcutIcon, p1)
-	-- upvalues: ConstantsModule (copy), IconName (copy), EnumsModule (copy), ButtonWidth (copy)
+local function createLeaveButtonConfig(SessionActionBindings, GetShortcutIcon, SetShortcutIcon, p1, IsEmphasized)
+	-- upvalues: FFlagPioneerLogoutButtonLabel (copy), GetPioneerLeaveCopyModule (copy), FFlagPioneerLeaveLogsOut (copy), ConstantsModule (copy), IconName (copy), EnumsModule (copy), ButtonWidth (copy), FFlagSideSheetEmphasizeLeave (copy)
 	return {
 		name = "LeaveButton",
-		label = if p1 then ConstantsModule.LocalizationKeys.QuitButton else "CoreScripts.InGameMenu.LeaveGame",
+		label = if FFlagPioneerLogoutButtonLabel then GetPioneerLeaveCopyModule.getPioneerLeaveButtonKey(p1) elseif p1 and not FFlagPioneerLeaveLogsOut then ConstantsModule.LocalizationKeys.QuitButton else "CoreScripts.InGameMenu.LeaveGame",
 		keyboardIcon = IconName.SquareTextL,
 		gamepadKeyCode = Enum.KeyCode.ButtonX,
 		getShortcutIcon = GetShortcutIcon,
 		setShortcutIcon = SetShortcutIcon,
 		getOnActivated = SessionActionBindings[EnumsModule.ActionBinding.Leave].getOnActivated,
 		getIsEnabled = SessionActionBindings[EnumsModule.ActionBinding.Leave].getIsEnabled,
-		width = if p1 then ButtonWidth.Half else ButtonWidth.Full
+		width = if p1 then ButtonWidth.Half else ButtonWidth.Full,
+		isEmphasized = IsEmphasized,
+		testId = if FFlagSideSheetEmphasizeLeave then "--in-experience-side-sheet-button-leave" else nil
 	}
 end
 
-local function _(p1)
-	-- upvalues: ConstantsModule (copy), EnumsModule (copy), getIsSwitchServerButtonHidden (copy), ButtonWidth (copy)
+local function createSwitchServerButtonConfig(SessionActionBindings)
+	-- upvalues: ConstantsModule (copy), EnumsModule (copy), getIsSwitchServerButtonHidden (copy), ButtonWidth (copy), FFlagSideSheetEmphasizeLeave (copy)
 	return {
 		label = "CoreScripts.InGameMenu.PeoplePage.SwitchServer",
 		name = ConstantsModule.SessionActionButtonNames.SwitchServer,
-		getOnActivated = p1[EnumsModule.ActionBinding.SwitchServer].getOnActivated,
-		getIsEnabled = p1[EnumsModule.ActionBinding.SwitchServer].getIsEnabled,
+		getOnActivated = SessionActionBindings[EnumsModule.ActionBinding.SwitchServer].getOnActivated,
+		getIsEnabled = SessionActionBindings[EnumsModule.ActionBinding.SwitchServer].getIsEnabled,
 		getIsHidden = getIsSwitchServerButtonHidden,
-		width = ButtonWidth.Half
+		width = ButtonWidth.Half,
+		testId = if FFlagSideSheetEmphasizeLeave then "--in-experience-side-sheet-button-switch-server" else nil
 	}
 end
 
 return function()
-	-- upvalues: GetActionBindingsStoreModule (copy), IsPioneerLaunchFunction (copy), SignalsModule (copy), createRespawnButtonConfig (copy), ConstantsModule (copy), EnumsModule (copy), getIsSwitchServerButtonHidden (copy), ButtonWidth (copy), createLeaveButtonConfig (copy), GetInputModeStoreFunction (copy), Input (copy), UserInputService (copy), config (copy)
+	-- upvalues: GetActionBindingsStoreModule (copy), IsPioneerLaunchFunction (copy), SignalsModule (copy), createLeaveButtonConfig (copy), FFlagSideSheetEmphasizeLeave (copy), createRespawnButtonConfig (copy), createSwitchServerButtonConfig (copy), GetInputModeStoreFunction (copy), Input (copy), UserInputService (copy), config (copy)
 	local SessionActionBindings = GetActionBindingsStoreModule().sessionActionBindings
 	local IsPioneerLaunch = IsPioneerLaunchFunction()
 	local Signal, Signal2 = SignalsModule.createSignal(nil)
 	local Signal1, Signal2_1 = SignalsModule.createSignal(nil)
-	local List = {
-		(createRespawnButtonConfig(SessionActionBindings, Signal1, Signal2_1))
-	}
+	local LeaveButtonConfig = createLeaveButtonConfig(SessionActionBindings, Signal, Signal2, IsPioneerLaunch, FFlagSideSheetEmphasizeLeave)
+	local RespawnButtonConfig = createRespawnButtonConfig(SessionActionBindings, Signal1, Signal2_1)
+	local List = {}
 	
-	if IsPioneerLaunch then
-		table.insert(List, {
-			label = "CoreScripts.InGameMenu.PeoplePage.SwitchServer",
-			name = ConstantsModule.SessionActionButtonNames.SwitchServer,
-			getOnActivated = SessionActionBindings[EnumsModule.ActionBinding.SwitchServer].getOnActivated,
-			getIsEnabled = SessionActionBindings[EnumsModule.ActionBinding.SwitchServer].getIsEnabled,
-			getIsHidden = getIsSwitchServerButtonHidden,
-			width = ButtonWidth.Half
-		})
+	if FFlagSideSheetEmphasizeLeave then
+		table.insert(List, LeaveButtonConfig)
+	else
+		table.insert(List, RespawnButtonConfig)
 	end
-	table.insert(List, (createLeaveButtonConfig(SessionActionBindings, Signal, Signal2, IsPioneerLaunch)))
+	if IsPioneerLaunch then
+		table.insert(List, (createSwitchServerButtonConfig(SessionActionBindings)))
+	end
+	if FFlagSideSheetEmphasizeLeave then
+		table.insert(List, RespawnButtonConfig)
+	else
+		table.insert(List, LeaveButtonConfig)
+	end
 	local GamepadConnectedConnection = nil
 	local Effect = SignalsModule.createEffect(function(p1)
 		-- upvalues: GetInputModeStoreFunction (upval), GamepadConnectedConnection (ref), Input (upval), List (copy), UserInputService (upval), config (upval)

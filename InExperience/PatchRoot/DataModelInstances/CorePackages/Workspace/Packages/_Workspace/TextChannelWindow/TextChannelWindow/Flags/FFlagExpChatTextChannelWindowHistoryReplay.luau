@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("ExpChatTextChannelWindowHistoryReplay", false) and game:GetEngineFeature("EnableTextChannelHistoryReplay")

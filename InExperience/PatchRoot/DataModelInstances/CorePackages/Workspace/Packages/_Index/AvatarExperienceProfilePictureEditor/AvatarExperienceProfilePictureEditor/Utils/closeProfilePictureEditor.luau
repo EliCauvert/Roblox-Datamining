@@ -1,49 +1,21 @@
-﻿local Parent = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent
-local AvatarScreen = require(Parent.AvatarExperienceNavigation).Enums.AvatarScreen
-local FFlagAXPPEReturnToEntrySurface = require(Parent.SharedFlags).FFlagAXPPEReturnToEntrySurface
-
-local function _(p1)
-	if not p1.getParam then
-		return nil, nil
-	end
-	local EntryOriginParam = p1.getParam("entryOrigin")
-	
-	if EntryOriginParam and EntryOriginParam.screenName then
-		return EntryOriginParam.screenName, EntryOriginParam.screenParams
-	else
-		return p1.getParam("prevNavPage"), nil
-	end
-end
+﻿local FFlagAXPPEReturnToEntrySurface = require(script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent.SharedFlags).FFlagAXPPEReturnToEntrySurface
+local EntrySurfaceModule = require(script.Parent.entrySurface)
 
 return function(p1)
-	-- upvalues: FFlagAXPPEReturnToEntrySurface (copy), AvatarScreen (copy)
+	-- upvalues: EntrySurfaceModule (copy), FFlagAXPPEReturnToEntrySurface (copy)
 	if not p1 then return end
-	local PrevNavPageParam = nil
-	local ScreenParams = nil
-	if p1.getParam then
-		local EntryOriginParam = p1.getParam("entryOrigin")
-		
-		if EntryOriginParam and EntryOriginParam.screenName then
-			PrevNavPageParam = EntryOriginParam.screenName
-			ScreenParams = EntryOriginParam.screenParams
-		else
-			PrevNavPageParam = p1.getParam("prevNavPage")
-			ScreenParams = nil
-		end
-	else
-		PrevNavPageParam = nil
-		ScreenParams = nil
-	end
-	if PrevNavPageParam and p1.navigate then
+	local ResolveResult, ResolveResult2 = EntrySurfaceModule.resolve(p1)
+	
+	if ResolveResult and p1.navigate then
 		if FFlagAXPPEReturnToEntrySurface then
-			p1.navigate(if PrevNavPageParam == AvatarScreen.AvatarExperienceLandingPage then AvatarScreen.AvatarExperienceLandingPage else AvatarScreen.Catalog)
+			EntrySurfaceModule.park(p1, ResolveResult)
 		end
-		if ScreenParams then
-			p1.navigate(PrevNavPageParam, ScreenParams)
+		if ResolveResult2 then
+			p1.navigate(ResolveResult, ResolveResult2)
 			
 			return
 		else
-			p1.navigate(PrevNavPageParam)
+			p1.navigate(ResolveResult)
 			
 			return
 		end

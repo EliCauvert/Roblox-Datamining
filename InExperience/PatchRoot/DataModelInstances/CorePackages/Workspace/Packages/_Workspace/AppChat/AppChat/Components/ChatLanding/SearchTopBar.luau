@@ -5,7 +5,6 @@ local ReactModule = require(Parent.React)
 local CryoModule = require(Parent.Cryo)
 local UIBloxModule = require(Parent.UIBlox)
 local FoundationModule = require(Parent.Foundation)
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local Text = require(Parent.AppCommonLib).Text
 local MemoizeFunction = require(Parent.AppCommonLib).memoize
 local TextButton = UIBloxModule.App.Button.TextButton
@@ -83,7 +82,7 @@ function SearchTopBar.willUnmount(p1)
 end
 
 function SearchTopBar.render(p1)
-	-- upvalues: UIBloxModule (copy), RoactModule (copy), TextButton (copy), WithSelectionCursorProviderFunction (copy), FoundationModule (copy), CursorKind (copy), ImageSetLabel (copy), config (copy), IconSize (copy), IconsCommonSearch (copy), CallbackInputBox (copy), FoundationFontFaceMigration (copy), IconsActionsEditClearSmall (copy)
+	-- upvalues: UIBloxModule (copy), RoactModule (copy), TextButton (copy), WithSelectionCursorProviderFunction (copy), FoundationModule (copy), CursorKind (copy), ImageSetLabel (copy), config (copy), IconSize (copy), IconsCommonSearch (copy), CallbackInputBox (copy), IconsActionsEditClearSmall (copy)
 	local function TextChangedCallback(p2)
 		-- upvalues: p1 (copy)
 		if (not p2 or #p2 <= 0) and p1.focusNavigationService and p1.inputBoxRef.current then
@@ -100,13 +99,12 @@ function SearchTopBar.render(p1)
 	end
 	
 	return UIBloxModule.Style.withStyle(function(p2)
-		-- upvalues: p1 (copy), RoactModule (upval), TextButton (upval), WithSelectionCursorProviderFunction (upval), FoundationModule (upval), CursorKind (upval), ImageSetLabel (upval), config (upval), IconSize (upval), IconsCommonSearch (upval), CallbackInputBox (upval), FoundationFontFaceMigration (upval), IconsActionsEditClearSmall (upval), TextChangedCallback (copy)
+		-- upvalues: p1 (copy), RoactModule (upval), TextButton (upval), WithSelectionCursorProviderFunction (upval), FoundationModule (upval), CursorKind (upval), ImageSetLabel (upval), config (upval), IconSize (upval), IconsCommonSearch (upval), CallbackInputBox (upval), IconsActionsEditClearSmall (upval), TextChangedCallback (copy)
 		local CancelText = p1.props.cancelText
 		local Header2 = p2.Font.Header2
 		local TextWidth = p1.getTextWidth(CancelText, Header2.Font, p2.Font.BaseSize * Header2.RelativeSize)
 		local _UDim2: UDim2 = if p1.props.shouldShowCancel then UDim2.new(1, -TextWidth - 12, 1, 0) else UDim2.new(1, 0, 1, 0)
-		local Body = p2.Font.Body
-		local ScaledBaseSize = p2.Font.BaseSize * Body.RelativeSize
+		local ScaledBaseSize = p2.Font.BaseSize * p2.Font.Body.RelativeSize
 		
 		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = p2.Tokens.Color.None.Transparency,
@@ -135,7 +133,7 @@ function SearchTopBar.render(p1)
 				onActivated = p1.props.cancelCallback
 			}) else nil,
 			filterBoxContainer = WithSelectionCursorProviderFunction(function(Callback)
-				-- upvalues: RoactModule (upval), FoundationModule (upval), _UDim2 (ref), CursorKind (upval), p1 (upval), ImageSetLabel (upval), config (upval), p2 (copy), IconSize (upval), IconsCommonSearch (upval), CallbackInputBox (upval), FoundationFontFaceMigration (upval), Body (copy), ScaledBaseSize (copy), IconsActionsEditClearSmall (upval), TextChangedCallback (upval)
+				-- upvalues: RoactModule (upval), FoundationModule (upval), _UDim2 (ref), CursorKind (upval), p1 (upval), ImageSetLabel (upval), config (upval), p2 (copy), IconSize (upval), IconsCommonSearch (upval), CallbackInputBox (upval), ScaledBaseSize (copy), IconsActionsEditClearSmall (upval), TextChangedCallback (upval)
 				return RoactModule.createElement(FoundationModule.View, {
 					LayoutOrder = 1,
 					Size = _UDim2,
@@ -185,7 +183,7 @@ function SearchTopBar.render(p1)
 								clearButtonDisabled = false,
 								initialInputText = p1.props.initialInputText,
 								inputTextColor3 = p2.Theme.TextEmphasis.Color,
-								inputTextFont = if FoundationFontFaceMigration then p2.Tokens.Typography.BodyLarge.Font else Body.Font,
+								inputTextFont = p2.Tokens.Typography.BodyLarge.Font,
 								inputTextSize = ScaledBaseSize,
 								inputTextTransparency = p2.Theme.TextEmphasis.Transparency,
 								inputTextXAlignment = Enum.TextXAlignment.Left,

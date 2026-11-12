@@ -108,11 +108,11 @@ return ReactModule.memo(function(Frame)
 	local IsDisabled = false
 	local IsDisabled1 = false
 	local ButtonSize = Frame.buttonSize or InputSize.Medium
-	local Offset1 = nil
+	local YOffset = nil
 	
 	if FFlagLuaAppUseTokenHeightForPlayButton then
 		local ButtonHeightSizeKeyByInputSizeModuleEntry = ButtonHeightSizeKeyByInputSizeModule[ButtonSize] or "Size_1000"
-		Offset1 = if Tokens and Tokens.Size[ButtonHeightSizeKeyByInputSizeModuleEntry] then Tokens.Size[ButtonHeightSizeKeyByInputSizeModuleEntry] else 40
+		YOffset = if Tokens and Tokens.Size[ButtonHeightSizeKeyByInputSizeModuleEntry] then Tokens.Size[ButtonHeightSizeKeyByInputSizeModuleEntry] else 40
 	end
 	local Fill = if Frame.width then FillBehavior.Fill else Frame.fillBehavior
 	local Emphasis = nil
@@ -129,7 +129,7 @@ return ReactModule.memo(function(Frame)
 		if FFlagLuaAppPlayButtonLoadingSkeleton and (not Frame.useUIBloxButton and (not FFlagLuaAppUnifyPlayButtonAllSurfacesIxp or Frame.hasPlayButtonLoadingSkeletonIxp)) then
 			local Offset = nil
 			if FFlagLuaAppUseTokenHeightForPlayButton then
-				Offset = Offset1
+				Offset = YOffset
 			else
 				local ButtonHeightSizeKeyByInputSizeModuleEntry = ButtonHeightSizeKeyByInputSizeModule[ButtonSize] or "Size_1000"
 				Offset = Tokens and Tokens.Size[ButtonHeightSizeKeyByInputSizeModuleEntry]
@@ -220,10 +220,10 @@ return ReactModule.memo(function(Frame)
 	if Flag then
 		if not FFlagLuaAppUseTokenHeightForPlayButton then
 			local ButtonHeightSizeKeyByInputSizeModuleEntry = ButtonHeightSizeKeyByInputSizeModule[ButtonSize] or "Size_1000"
-			Offset1 = if Tokens and Tokens.Size[ButtonHeightSizeKeyByInputSizeModuleEntry] then Tokens.Size[ButtonHeightSizeKeyByInputSizeModuleEntry] else 40
+			YOffset = if Tokens and Tokens.Size[ButtonHeightSizeKeyByInputSizeModuleEntry] then Tokens.Size[ButtonHeightSizeKeyByInputSizeModuleEntry] else 40
 		end
 		Element2 = ReactModule.createElement(ComboButton, {
-			size = UDim2.new(1, 0, 0, Offset1),
+			size = UDim2.new(1, 0, 0, YOffset),
 			button = {
 				icon = Icon,
 				text = Text,
@@ -240,10 +240,10 @@ return ReactModule.memo(function(Frame)
 	elseif Frame.useUIBloxButton then
 		if not FFlagLuaAppUseTokenHeightForPlayButton then
 			local ButtonHeightSizeKeyByInputSizeModuleEntry = ButtonHeightSizeKeyByInputSizeModule[ButtonSize] or "Size_1000"
-			Offset1 = if Tokens and Tokens.Size[ButtonHeightSizeKeyByInputSizeModuleEntry] then Tokens.Size[ButtonHeightSizeKeyByInputSizeModuleEntry] else 40
+			YOffset = if Tokens and Tokens.Size[ButtonHeightSizeKeyByInputSizeModuleEntry] then Tokens.Size[ButtonHeightSizeKeyByInputSizeModuleEntry] else 40
 		end
 		local IsFit = Fill == "Fit"
-		local _UDim2: UDim2 = if IsFit then UDim2.new(0, 0, 0, Offset1) else UDim2.new(1, 0, 0, Offset1)
+		local _UDim2: UDim2 = if IsFit then UDim2.new(0, 0, 0, YOffset) else UDim2.new(1, 0, 0, YOffset)
 		local IsPlayButtonStateMatch = PlayButtonState == PlayButtonStatesModule.Loading
 		local PrimarySystem = if Emphasis == ButtonVariant.SubEmphasis then ButtonType.PrimarySystem elseif Emphasis == ButtonVariant.Subtle then ButtonType.Secondary else ButtonType.PrimaryContextual
 		local IconsCommonPlay1 = if Icon == PlayXlarge then IconsCommonPlay else Icon
@@ -308,7 +308,7 @@ return ReactModule.memo(function(Frame)
 		ref = if FFlagEnableGameJoinEarlyAccess and IsShowEarlyAccessTooltip then v1 else nil,
 		LayoutOrder = Frame.LayoutOrder,
 		Position = Frame.Position,
-		Size = if FFlagLuaAppUseTokenHeightForPlayButton then UDim2.new(if Frame.width then Frame.width elseif Fill == "Fill" then UDim.new(1, 0) else UDim.new(0, 0), UDim.new(0, Offset1)) elseif Frame.width then UDim2.new(Frame.width, UDim.new(0, 0)) elseif Fill == "Fill" then UDim2.new(1, 0, 1, 0) else nil,
+		Size = if FFlagLuaAppUseTokenHeightForPlayButton then UDim2.new(if Frame.width then Frame.width elseif Fill == "Fill" then UDim.new(1, 0) else UDim.new(0, 0), UDim.new(0, YOffset)) elseif Frame.width then UDim2.new(Frame.width, UDim.new(0, 0)) elseif Fill == "Fill" then UDim2.new(1, 0, 1, 0) else nil,
 		AutomaticSize = if FFlagLuaAppUseTokenHeightForPlayButton then if Fill == "Fill" then nil else Enum.AutomaticSize.X elseif Fill == "Fill" then Enum.AutomaticSize.Y else Enum.AutomaticSize.XY,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,

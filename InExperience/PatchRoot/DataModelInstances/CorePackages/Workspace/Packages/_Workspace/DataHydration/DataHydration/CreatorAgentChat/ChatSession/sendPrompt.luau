@@ -6,13 +6,15 @@ local SendConfigurationModule = require(script.Parent.Parent.sendConfiguration)
 local FFlagBuildExperienceModelPickerData = SharedFlagsModule.FFlagBuildExperienceModelPickerData
 local FFlagBuildExperiencePromptFailureTelemetry = SharedFlagsModule.FFlagBuildExperiencePromptFailureTelemetry
 local FFlagBuildExperienceLibrary = SharedFlagsModule.FFlagBuildExperienceLibrary
+local FFlagBuildExperienceChatOpenId = SharedFlagsModule.FFlagBuildExperienceChatOpenId
 
 return {
 	createSendPrompt = function(p1)
-		-- upvalues: FFlagBuildExperienceModelPickerData (copy), SendConfigurationModule (copy), SignalsModule (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), FFlagBuildExperienceLibrary (copy)
+		-- upvalues: FFlagBuildExperienceChatOpenId (copy), FFlagBuildExperienceModelPickerData (copy), SendConfigurationModule (copy), SignalsModule (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), FFlagBuildExperienceLibrary (copy)
 		return {
 			sendPrompt = function(p2)
-				-- upvalues: FFlagBuildExperienceModelPickerData (upval), SendConfigurationModule (upval), p1 (copy), SignalsModule (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), FFlagBuildExperienceLibrary (upval)
+				-- upvalues: FFlagBuildExperienceChatOpenId (upval), p1 (copy), FFlagBuildExperienceModelPickerData (upval), SendConfigurationModule (upval), SignalsModule (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), FFlagBuildExperienceLibrary (upval)
+				local SendChatOpenId = if FFlagBuildExperienceChatOpenId and p1.getSendChatOpenId ~= nil then p1.getSendChatOpenId() else nil
 				local CaptureResult = if FFlagBuildExperienceModelPickerData and p2.sendConfiguration ~= nil then SendConfigurationModule.capture(p2.sendConfiguration.tier, p2.sendConfiguration.experiment) else nil
 				local Model = if CaptureResult == nil then if FFlagBuildExperienceModelPickerData then p2.model else nil else CaptureResult.tier
 				
@@ -59,11 +61,11 @@ return {
 				end
 				
 				local function start()
-					-- upvalues: Flag (ref), Flag4 (ref), FFlagBuildExperienceModelPickerData (upval), p2 (copy), fireCompleted (copy), p1 (upval), Signal2_1 (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), Model (copy), CaptureResult (copy), v1 (ref), Signal2 (copy), Callback1 (ref), Callback (ref), SignalsModule (upval), FFlagBuildExperienceLibrary (upval), Flag3 (ref), Flag2 (ref)
+					-- upvalues: Flag (ref), Flag4 (ref), FFlagBuildExperienceModelPickerData (upval), p2 (copy), fireCompleted (copy), p1 (upval), Signal2_1 (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), Model (copy), CaptureResult (copy), FFlagBuildExperienceChatOpenId (upval), SendChatOpenId (copy), v1 (ref), Signal2 (copy), Callback1 (ref), Callback (ref), SignalsModule (upval), FFlagBuildExperienceLibrary (upval), Flag3 (ref), Flag2 (ref)
 					if not Flag then
 						Flag = true
 						task.spawn(function()
-							-- upvalues: Flag4 (upval), FFlagBuildExperienceModelPickerData (upval), p2 (upval), fireCompleted (upval), p1 (upval), Signal2_1 (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), Model (upval), CaptureResult (upval), v1 (upval), Signal2 (upval), Callback1 (upval), Callback (upval), SignalsModule (upval), FFlagBuildExperienceLibrary (upval), Flag3 (upval), Flag2 (upval)
+							-- upvalues: Flag4 (upval), FFlagBuildExperienceModelPickerData (upval), p2 (upval), fireCompleted (upval), p1 (upval), Signal2_1 (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), Model (upval), CaptureResult (upval), FFlagBuildExperienceChatOpenId (upval), SendChatOpenId (upval), v1 (upval), Signal2 (upval), Callback1 (upval), Callback (upval), SignalsModule (upval), FFlagBuildExperienceLibrary (upval), Flag3 (upval), Flag2 (upval)
 							if Flag4 or FFlagBuildExperienceModelPickerData and p2.isCancelled ~= nil and p2.isCancelled() then
 								fireCompleted(nil)
 								
@@ -83,12 +85,12 @@ return {
 									return
 								end
 							end
-							local EnsureCasSessionResult = nil
 							local EnsureCasSessionResult2 = nil
+							local EnsureCasSessionResult = nil
 							if FFlagBuildExperienceModelPickerData then
-								EnsureCasSessionResult, EnsureCasSessionResult2 = p1.ensureCasSession(Model, p2.isCancelled, CaptureResult, true)
+								EnsureCasSessionResult, EnsureCasSessionResult2 = p1.ensureCasSession(Model, p2.isCancelled, CaptureResult, true, if FFlagBuildExperienceChatOpenId then SendChatOpenId else nil)
 							else
-								EnsureCasSessionResult, EnsureCasSessionResult2 = p1.ensureCasSession(Model)
+								EnsureCasSessionResult, EnsureCasSessionResult2 = p1.ensureCasSession(Model, nil, nil, nil, if FFlagBuildExperienceChatOpenId then SendChatOpenId else nil)
 							end
 							if EnsureCasSessionResult == nil then
 								if not FFlagBuildExperienceModelPickerData or EnsureCasSessionResult2 ~= nil then

@@ -8,7 +8,8 @@
 	Utils = {
 		applyReactionTrigger = require(script.Utils.applyReactionTrigger),
 		abbreviateReactionCount = require(script.Utils.abbreviateReactionCount),
-		getTopReactions = require(script.Utils.getTopReactions)
+		getTopReactions = require(script.Utils.getTopReactions),
+		reactionTypeFromEmojiName = require(script.Utils.reactionTypeFromEmojiName)
 	},
 	Reaction = require(script.Components.Reaction),
 	ReactionButton = require(script.Components.ReactionButton),

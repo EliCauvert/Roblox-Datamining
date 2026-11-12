@@ -10,6 +10,7 @@ local BottomLockedScrollViewModule = require(script.Parent.BottomLockedScrollVie
 local TextLineEntryModule = require(script.Parent.TextLineEntry)
 local BubbleEntryModule = require(script.Parent.BubbleEntry)
 local _ = require(ChatUIPrimitives.Types)
+local FFlagExpChatLatestUsernameWithoutRenderModule = require(ChatUIPrimitives.Flags.FFlagExpChatLatestUsernameWithoutRender)
 
 local function _(p1, p2, FontFace, SelectableRows, SelectionCursor, IsTranslationSettingEnabled, p3, ReportLatestUsername)
 	-- upvalues: ReactModule (copy)
@@ -33,7 +34,7 @@ local Signal = SignalsModule.createSignal({})
 local config = { left = UDim.new(0, 8), right = UDim.new(0, 8) }
 
 return ReactModule.memo(function(p1)
-	-- upvalues: Signal (copy), ReactModule (copy), SignalsModule (copy), UseMessagesMapModule (copy), BubbleEntryModule (copy), TextLineEntryModule (copy), UseMessagePoolModule (copy), SignalsReactModule (copy), FoundationModule (copy), BottomLockedScrollViewModule (copy), config (copy)
+	-- upvalues: Signal (copy), ReactModule (copy), SignalsModule (copy), FFlagExpChatLatestUsernameWithoutRenderModule (copy), UseMessagesMapModule (copy), BubbleEntryModule (copy), TextLineEntryModule (copy), UseMessagePoolModule (copy), SignalsReactModule (copy), FoundationModule (copy), BottomLockedScrollViewModule (copy), config (copy)
 	local MessagesSignal = p1.messagesSignal or Signal
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), MessagesSignal (copy)
@@ -56,6 +57,19 @@ return ReactModule.memo(function(p1)
 			return UseMemoResultResult[#UseMemoResultResult]
 		end) else nil
 	end, { UseMemoResult, p1.selectableRows })
+	
+	if FFlagExpChatLatestUsernameWithoutRenderModule then
+		local OnLatestUsernameChangedFunction = p1.onLatestUsernameChanged
+		ReactModule.useEffect(function()
+			-- upvalues: UseMemoResult1 (copy), OnLatestUsernameChangedFunction (copy), SignalsModule (upval)
+			return if UseMemoResult1 == nil or OnLatestUsernameChangedFunction == nil then nil else SignalsModule.createEffect(function(p2)
+				-- upvalues: UseMemoResult1 (upval), OnLatestUsernameChangedFunction (upval)
+				if UseMemoResult1(p2) == nil then
+					OnLatestUsernameChangedFunction(nil)
+				end
+			end)
+		end, { UseMemoResult1, OnLatestUsernameChangedFunction })
+	end
 	local UseMessagesMapModuleResult = UseMessagesMapModule(MessagesSignal)
 	local BubbleEntryModule1 = if p1.layoutStyle == "bubble" then BubbleEntryModule else TextLineEntryModule
 	local UseSignalStateResult = SignalsReactModule.useSignalState((UseMessagePoolModule({

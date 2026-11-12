@@ -396,7 +396,7 @@ return function(Current)
 	if UseRefResult14.current == nil and not IsIsInitialMessageLoading then
 		UseRefResult14.current = if IsOpenAtStart then ViewRecyclerModule.ScrollAlignment.Start else ViewRecyclerModule.ScrollAlignment.End
 	end
-	local UseInitialScrollAlignmentModuleResult = UseRefResult14.current
+	local Current2 = UseRefResult14.current
 	local UseRefResult15 = ReactModule.useRef(UseMemoResult.byKey)
 	local UseRefResult16 = ReactModule.useRef(false)
 	local UseRefResult17 = ReactModule.useRef(nil)
@@ -404,8 +404,8 @@ return function(Current)
 	
 	if FFlagAppChatMessageListV2FollowIncomingModule and UseRefResult18.current ~= UseMemoResult then
 		UseRefResult18.current = UseMemoResult
-		local Current2 = UseRefResult10.current
-		UseRefResult17.current = if Current2 == nil then nil else Current2.getScrollState().distanceFromEnd
+		local Current3 = UseRefResult10.current
+		UseRefResult17.current = if Current3 == nil then nil else Current3.getScrollState().distanceFromEnd
 	end
 	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult15 (copy), UseMemoResult (copy), UseRefResult16 (copy), IsIsInitialMessageLoading (copy), UseRefResult10 (copy), ListItemsModule (upval), UseRefResult17 (copy), FFlagAppChatMessageListV2FollowIncomingModule (upval)
@@ -431,7 +431,7 @@ return function(Current)
 	end, { UseMemoResult, IsIsInitialMessageLoading })
 	
 	if FFlagAppChatMessageListV2ScrollToStartOnOpenModule then
-		UseInitialScrollAlignmentModuleResult = UseInitialScrollAlignmentModule(IsOpenAtStart, IsIsInitialMessageLoading, UseRefResult10, UseStateResult1)
+		Current2 = UseInitialScrollAlignmentModule(IsOpenAtStart, IsIsInitialMessageLoading, UseRefResult10, UseStateResult1)
 	end
 	if FFlagAppChatMessageListV2ScrollParityModule then
 		UseDelayedScrollToStartModule(IsOpenAtStart, IsIsInitialMessageLoading, UseRefResult10)
@@ -484,9 +484,9 @@ return function(Current)
 			Current.messageHiddenNoticeText, Current.unknownUserText
 		}),
 		listProps = ReactModule.useMemo(function()
-			-- upvalues: ViewRecyclerModule (upval), StartReachedThreshold (upval), UseInitialScrollAlignmentModuleResult (ref), Items (copy), ListItemsModule (upval), UseMessageListLayoutModuleResult (copy), MessageRowTypesModule (upval), UseRefResult10 (copy), FIntAppChatMessageListV2OverscanRowsModule (upval), HasLoadNext (copy), UseResult (copy), UseResult2 (copy), UseViewportResizeCompensationModuleResult (ref), FFlagAppChatScrollToLatestModule (upval), UseResult4 (copy), UseResult5 (copy), UseResult6 (copy), FFlagAppChatMessageListV2ShowBeforeMeasuredModule1 (copy)
+			-- upvalues: ViewRecyclerModule (upval), StartReachedThreshold (upval), Current2 (ref), Items (copy), ListItemsModule (upval), UseMessageListLayoutModuleResult (copy), MessageRowTypesModule (upval), UseRefResult10 (copy), FIntAppChatMessageListV2OverscanRowsModule (upval), HasLoadNext (copy), UseResult (copy), UseResult2 (copy), UseViewportResizeCompensationModuleResult (ref), FFlagAppChatScrollToLatestModule (upval), UseResult4 (copy), UseResult5 (copy), UseResult6 (copy), FFlagAppChatMessageListV2ShowBeforeMeasuredModule1 (copy)
 			local Copy = table.clone(ViewRecyclerModule.ChatPreset.create({ startReachedThreshold = StartReachedThreshold }))
-			Copy.initialScrollAlignment = UseInitialScrollAlignmentModuleResult or Copy.initialScrollAlignment
+			Copy.initialScrollAlignment = Current2 or Copy.initialScrollAlignment
 			Copy.data = { items = Items, getItemKey = ListItemsModule.getKey }
 			Copy.layout = UseMessageListLayoutModuleResult
 			Copy.axis = ViewRecyclerModule.Axis.Y
@@ -515,7 +515,7 @@ return function(Current)
 			
 			return Copy
 		end, {
-			UseResult6, HasLoadNext, UseInitialScrollAlignmentModuleResult,
+			UseResult6, HasLoadNext, Current2,
 			FFlagAppChatMessageListV2ShowBeforeMeasuredModule1, Items,
 			UseMessageListLayoutModuleResult, UseResult4, UseResult2, UseResult5,
 			UseResult, UseViewportResizeCompensationModuleResult

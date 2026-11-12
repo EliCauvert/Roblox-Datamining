@@ -210,7 +210,7 @@ return function(p1)
 				openEditName = p1.openEditName,
 				platformName = if FFlagAddPlatformNameToProfileHeader then p1.platformName else nil
 			}),
-			UserProfileSettingsToggle = if FFlagMoveInExperienceModeToEditProfile or (DisableStreamerModeToggle or not p1.shouldDisplayUserProfileSettings) then nil else ReactModule.createElement(UserProfileSettingsToggleModule, {
+			UserProfileSettingsToggle = if FFlagMoveInExperienceModeToEditProfile or DisableStreamerModeToggle or not p1.shouldDisplayUserProfileSettings then nil else ReactModule.createElement(UserProfileSettingsToggleModule, {
 				layoutOrder = 2,
 				size = UDim2.new(1, 0, 0, 30),
 				isInExperienceNameEnabled = p1.isInExperienceNameEnabled

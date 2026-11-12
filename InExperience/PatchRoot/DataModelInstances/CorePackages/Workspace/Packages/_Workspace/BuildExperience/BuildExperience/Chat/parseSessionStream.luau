@@ -1,10 +1,8 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
-local Parent = BuildExperience.Parent
-local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
+local CreatorAgentChatModule = require(BuildExperience.Parent.DataHydration.CreatorAgentChat)
 local ChatTypesModule = require(script.Parent.chatTypes)
 local FFlagBuildAdUpsellModule = require(BuildExperience.Flags.FFlagBuildAdUpsell)
-local FFlagBuildExperienceChatImageAttachmentsModule = require(BuildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
-local FFlagBuildExperienceChatResourceAttachments = require(Parent.SharedFlags).FFlagBuildExperienceChatResourceAttachments
+local FFlagBuildExperienceThoughtStatus = CreatorAgentChatModule.FFlagBuildExperienceThoughtStatus
 local PublishToolUtils = CreatorAgentChatModule.PublishToolUtils
 local TurnStateReducer = CreatorAgentChatModule.TurnStateReducer
 local SubagentTasks = CreatorAgentChatModule.SubagentTasks
@@ -14,8 +12,7 @@ local function _(p1)
 end
 
 local _ = function(p1)
-	-- upvalues: FFlagBuildExperienceChatImageAttachmentsModule (copy)
-	return if FFlagBuildExperienceChatImageAttachmentsModule and p1 ~= nil and p1.type == "image" and typeof(p1.uri) == "string" and p1.uri ~= "" then { uri = p1.uri } else nil
+	return if p1 == nil or p1.type ~= "image" or typeof(p1.uri) ~= "string" or p1.uri == "" then nil else { uri = p1.uri }
 end
 
 local function contentBlockToResourceAttachment(Content)
@@ -44,14 +41,13 @@ local function contentBlocksToText(Content): string
 end
 
 local function contentBlocksToImages(Content)
-	-- upvalues: FFlagBuildExperienceChatImageAttachmentsModule (copy)
 	local List = {}
 	
 	if typeof(Content) ~= "table" then
 		return List
 	end
 	for _, value in Content do
-		local Config = if FFlagBuildExperienceChatImageAttachmentsModule and value ~= nil and value.type == "image" and typeof(value.uri) == "string" and value.uri ~= "" then { uri = value.uri } else nil
+		local Config = if value == nil or value.type ~= "image" or typeof(value.uri) ~= "string" or value.uri == "" then nil else { uri = value.uri }
 		
 		if Config ~= nil then
 			table.insert(List, Config)
@@ -99,7 +95,8 @@ local _ = function(p1)
 end
 
 local _ = function(p1): boolean
-	return p1 == "agent_message" or (p1 == "agent_message_chunk" or (p1 == "tool_call_update" or (p1 == "tool_call_content_chunk" or p1 == "state_change")))
+	-- upvalues: FFlagBuildExperienceThoughtStatus (copy)
+	return p1 == "agent_message" or (p1 == "agent_message_chunk" or (p1 == "tool_call_update" or (p1 == "tool_call_content_chunk" or (p1 == "state_change" or FFlagBuildExperienceThoughtStatus and p1 == "agent_thought_chunk"))))
 end
 
 local _ = function(p1): boolean
@@ -107,7 +104,40 @@ local _ = function(p1): boolean
 end
 
 local _ = function(p1): boolean
-	return p1.assistantText ~= "" or (#p1.activityItems > 0 or p1.toolCallCount > 0) or (#p1.pendingAgentMessageContent > 0 or (p1.status == "cancelled" or (p1.stopReason == "cancelled" or p1.stopReason == "error")))
+	if p1.assistantText ~= "" or p1.toolCallCount > 0 then
+		return true
+	end
+	for _, activityItem in p1.activityItems do
+		if activityItem.kind ~= "thought" then
+			return true
+		end
+	end
+	return false
+end
+
+local function shouldEmitAssistantTurn(ApplySessionUpdateResult, p2): boolean
+	-- upvalues: FFlagBuildExperienceThoughtStatus (copy)
+	local IsNotAssistantTextMatch = nil
+	if FFlagBuildExperienceThoughtStatus then
+		if ApplySessionUpdateResult.assistantText == "" and ApplySessionUpdateResult.toolCallCount <= 0 then
+			IsNotAssistantTextMatch = false
+			
+			for _, activityItem in ApplySessionUpdateResult.activityItems do
+				if activityItem.kind ~= "thought" then
+					IsNotAssistantTextMatch = true
+					break
+				end
+			end
+		else
+			IsNotAssistantTextMatch = true
+		end
+	else
+		IsNotAssistantTextMatch = ApplySessionUpdateResult.assistantText ~= "" or (#ApplySessionUpdateResult.activityItems > 0 or ApplySessionUpdateResult.toolCallCount > 0)
+	end
+	if not IsNotAssistantTextMatch then
+		IsNotAssistantTextMatch = #ApplySessionUpdateResult.pendingAgentMessageContent > 0 or (FFlagBuildExperienceThoughtStatus and p2 and ApplySessionUpdateResult.latestThought ~= nil and not ApplySessionUpdateResult.isDone or (ApplySessionUpdateResult.status == "cancelled" or (ApplySessionUpdateResult.stopReason == "cancelled" or ApplySessionUpdateResult.stopReason == "error")))
+	end
+	return IsNotAssistantTextMatch
 end
 
 local _ = function(Tbl)
@@ -122,8 +152,8 @@ local _ = function(Tbl)
 	return Copy
 end
 
-local function parseChatItems(List, p1)
-	-- upvalues: contentBlocksToText (copy), contentBlocksToImages (copy), FFlagBuildExperienceChatImageAttachmentsModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), contentBlocksToResourceAttachments (copy), contentBlockToResourceAttachment (copy), TurnStateReducer (copy)
+local function parseChatItems(List, p3)
+	-- upvalues: shouldEmitAssistantTurn (copy), FFlagBuildExperienceThoughtStatus (copy), contentBlocksToText (copy), contentBlocksToImages (copy), contentBlocksToResourceAttachments (copy), contentBlockToResourceAttachment (copy), TurnStateReducer (copy)
 	local List1 = {}
 	local ApplySessionUpdateResult = nil
 	local StartSequenceId = nil
@@ -131,20 +161,16 @@ local function parseChatItems(List, p1)
 	local SequenceIds = {}
 	local Flag = false
 	
-	local function flushActiveTurn()
-		-- upvalues: ApplySessionUpdateResult (ref), Flag (ref), List1 (copy), StartSequenceId (ref), EndSequenceId (ref), SequenceIds (ref)
-		if ApplySessionUpdateResult ~= nil and Flag then
-			local ApplySessionUpdateResult1 = ApplySessionUpdateResult
-			
-			if ApplySessionUpdateResult1.assistantText ~= "" or (#ApplySessionUpdateResult1.activityItems > 0 or ApplySessionUpdateResult1.toolCallCount > 0) or (#ApplySessionUpdateResult1.pendingAgentMessageContent > 0 or (ApplySessionUpdateResult1.status == "cancelled" or (ApplySessionUpdateResult1.stopReason == "cancelled" or ApplySessionUpdateResult1.stopReason == "error"))) then
-				table.insert(List1, {
-					kind = "assistant_turn",
-					startSequenceId = StartSequenceId,
-					endSequenceId = EndSequenceId,
-					sequenceIds = SequenceIds,
-					turnState = ApplySessionUpdateResult
-				})
-			end
+	local function flushActiveTurn(p4)
+		-- upvalues: ApplySessionUpdateResult (ref), Flag (ref), shouldEmitAssistantTurn (upval), FFlagBuildExperienceThoughtStatus (upval), List1 (copy), StartSequenceId (ref), EndSequenceId (ref), SequenceIds (ref)
+		if ApplySessionUpdateResult ~= nil and Flag and shouldEmitAssistantTurn(ApplySessionUpdateResult, if FFlagBuildExperienceThoughtStatus then p4 else nil) then
+			table.insert(List1, {
+				kind = "assistant_turn",
+				startSequenceId = StartSequenceId,
+				endSequenceId = EndSequenceId,
+				sequenceIds = SequenceIds,
+				turnState = ApplySessionUpdateResult
+			})
 		end
 		ApplySessionUpdateResult = nil
 		StartSequenceId = nil
@@ -186,9 +212,9 @@ local function parseChatItems(List, p1)
 		local SequenceId1 = if typeof(SequenceId) == "number" and SequenceId >= 0 then SequenceId else nil
 		
 		if SessionUpdate ~= "user_message" and SessionUpdate ~= "user_message_chunk" then
-			if SessionUpdate == "agent_message" or (SessionUpdate == "agent_message_chunk" or (SessionUpdate == "tool_call_update" or (SessionUpdate == "tool_call_content_chunk" or SessionUpdate == "state_change"))) then
+			if SessionUpdate == "agent_message" or (SessionUpdate == "agent_message_chunk" or (SessionUpdate == "tool_call_update" or (SessionUpdate == "tool_call_content_chunk" or (SessionUpdate == "state_change" or FFlagBuildExperienceThoughtStatus and SessionUpdate == "agent_thought_chunk")))) then
 				if ApplySessionUpdateResult == nil then
-					ApplySessionUpdateResult = TurnStateReducer.createEmptyTurnState(p1)
+					ApplySessionUpdateResult = TurnStateReducer.createEmptyTurnState(p3)
 				end
 				if SessionUpdate == "state_change" and value.state == "running" then
 					Flag = true
@@ -232,59 +258,54 @@ local function parseChatItems(List, p1)
 		else
 			ContentBlocksToImagesResult = {}
 			local Content = value.content
-			local Config = if FFlagBuildExperienceChatImageAttachmentsModule and Content ~= nil and Content.type == "image" and typeof(Content.uri) == "string" and Content.uri ~= "" then { uri = Content.uri } else nil
+			local Config = if Content == nil or Content.type ~= "image" or typeof(Content.uri) ~= "string" or Content.uri == "" then nil else { uri = Content.uri }
 			
 			if Config ~= nil then
 				table.insert(ContentBlocksToImagesResult, Config)
 			end
 		end
-		local List2 = nil
-		if FFlagBuildExperienceChatResourceAttachments then
-			if SessionUpdate == "user_message" then
-				List2 = contentBlocksToResourceAttachments(value.content)
-			else
-				List2 = {}
-				local ContentBlockToResourceAttachmentResult = contentBlockToResourceAttachment(value.content)
-				
-				if ContentBlockToResourceAttachmentResult ~= nil then
-					table.insert(List2, ContentBlockToResourceAttachmentResult)
-				end
-			end
+		local ContentBlocksToResourceAttachmentsResult = nil
+		if SessionUpdate == "user_message" then
+			ContentBlocksToResourceAttachmentsResult = contentBlocksToResourceAttachments(value.content)
 		else
-			List2 = {}
+			ContentBlocksToResourceAttachmentsResult = {}
+			local ContentBlockToResourceAttachmentResult = contentBlockToResourceAttachment(value.content)
+			
+			if ContentBlockToResourceAttachmentResult ~= nil then
+				table.insert(ContentBlocksToResourceAttachmentsResult, ContentBlockToResourceAttachmentResult)
+			end
 		end
 		local MessageId = value.messageId
-		appendUserMessage(if typeof(MessageId) == "string" and MessageId ~= "" then MessageId else nil, SequenceId1, ContentBlocksToTextResult, ContentBlocksToImagesResult, List2)
+		appendUserMessage(if typeof(MessageId) == "string" and MessageId ~= "" then MessageId else nil, SequenceId1, ContentBlocksToTextResult, ContentBlocksToImagesResult, ContentBlocksToResourceAttachmentsResult)
 	end
-	flushActiveTurn()
+	flushActiveTurn(if FFlagBuildExperienceThoughtStatus then true else nil)
 	
 	return List1
 end
 
 local function buildUserMessageItem(UserMessageItem, SessionId)
-	-- upvalues: FFlagBuildExperienceChatImageAttachmentsModule (copy), FFlagBuildExperienceChatResourceAttachments (copy)
 	return {
 		kind = "user_message",
 		id = if SessionId == nil or UserMessageItem.sequenceId == nil then UserMessageItem.messageId else `{SessionId}:{UserMessageItem.sequenceId}:user`,
 		text = UserMessageItem.text,
-		images = if FFlagBuildExperienceChatImageAttachmentsModule then UserMessageItem.images else nil,
-		resourceAttachments = if FFlagBuildExperienceChatResourceAttachments and #UserMessageItem.resourceAttachments > 0 then UserMessageItem.resourceAttachments else nil
+		images = UserMessageItem.images,
+		resourceAttachments = if #UserMessageItem.resourceAttachments > 0 then UserMessageItem.resourceAttachments else nil
 	}
 end
 
-local _ = function(p2, p3)
-	return if p3 == nil or p2.eventMetaBySequenceId == nil then nil else p2.eventMetaBySequenceId[p3]
+local _ = function(p4, p5)
+	return if p5 == nil or p4.eventMetaBySequenceId == nil then nil else p4.eventMetaBySequenceId[p5]
 end
 
-local function resolveTurnId(TurnState, p2)
-	local EndSequenceId = p2.endSequenceId
+local function resolveTurnId(TurnState, p4)
+	local EndSequenceId = p4.endSequenceId
 	local EventMetaBySequenceIdEntry = if EndSequenceId == nil or TurnState.eventMetaBySequenceId == nil then nil else TurnState.eventMetaBySequenceId[EndSequenceId]
 	
 	if EventMetaBySequenceIdEntry ~= nil and EventMetaBySequenceIdEntry.turnId ~= nil then
 		return EventMetaBySequenceIdEntry.turnId
 	end
 	local EventMetaBySequenceIdEntry1 = nil
-	for _, sequenceId in p2.sequenceIds do
+	for _, sequenceId in p4.sequenceIds do
 		EventMetaBySequenceIdEntry1 = if sequenceId == nil or TurnState.eventMetaBySequenceId == nil then nil else TurnState.eventMetaBySequenceId[sequenceId]
 		
 		if EventMetaBySequenceIdEntry1 ~= nil and EventMetaBySequenceIdEntry1.turnId ~= nil then
@@ -294,24 +315,24 @@ local function resolveTurnId(TurnState, p2)
 	return nil
 end
 
-local function buildTurnFeedbackIds(p3, TurnFeedbackIds)
+local function buildTurnFeedbackIds(p5, TurnFeedbackIds)
 	-- upvalues: PublishToolUtils (copy), resolveTurnId (copy)
-	local LatestSuccessfulResult = PublishToolUtils.getLatestSuccessfulResult(p3.turnState)
+	local LatestSuccessfulResult = PublishToolUtils.getLatestSuccessfulResult(p5.turnState)
 	
 	return {
 		universeId = TurnFeedbackIds.universeId,
 		placeId = TurnFeedbackIds.placeId,
 		sessionId = TurnFeedbackIds.sessionId,
-		sequenceId = p3.endSequenceId,
-		turnId = resolveTurnId(p3.turnState, p3),
+		sequenceId = p5.endSequenceId,
+		turnId = resolveTurnId(p5.turnState, p5),
 		publishedVersionNumber = if LatestSuccessfulResult == nil then nil else LatestSuccessfulResult.publishedVersionNumber,
 		rollbackTargetVersionNumber = if LatestSuccessfulResult == nil then nil else LatestSuccessfulResult.rollbackTargetVersionNumber
 	}
 end
 
-return function(Tbl, p3)
-	-- upvalues: parseChatItems (copy), buildUserMessageItem (copy), TurnStateReducer (copy), PublishToolUtils (copy), SubagentTasks (copy), FFlagBuildAdUpsellModule (copy), buildTurnFeedbackIds (copy), FFlagBuildExperienceChatResourceAttachments (copy), ChatTypesModule (copy), FFlagBuildExperienceChatImageAttachmentsModule (copy)
-	local SessionId = p3.sessionId
+return function(Tbl, p5)
+	-- upvalues: parseChatItems (copy), buildUserMessageItem (copy), TurnStateReducer (copy), PublishToolUtils (copy), SubagentTasks (copy), FFlagBuildAdUpsellModule (copy), buildTurnFeedbackIds (copy), ChatTypesModule (copy)
+	local SessionId = p5.sessionId
 	local Copy = table.clone(Tbl)
 	table.sort(Copy, function(A, B): boolean
 		local SequenceId: number = A.sequenceId
@@ -345,7 +366,7 @@ return function(Tbl, p3)
 			continue
 		end
 		local TurnState = value1.turnState
-		local NoIsDone: boolean = p3.optimisticCancelledStartSequenceId ~= nil and (value1.startSequenceId == p3.optimisticCancelledStartSequenceId and not TurnState.isDone)
+		local NoIsDone: boolean = p5.optimisticCancelledStartSequenceId ~= nil and (value1.startSequenceId == p5.optimisticCancelledStartSequenceId and not TurnState.isDone)
 		
 		if NoIsDone then
 			TurnState = TurnStateReducer.applySessionUpdate(TurnState, {
@@ -375,10 +396,10 @@ return function(Tbl, p3)
 			startSequenceId = value1.startSequenceId,
 			endSequenceId = value1.endSequenceId,
 			isOptimisticallyCancelled = if FFlagBuildAdUpsellModule and NoIsDone then true else nil,
-			optimisticLocalTools = if NoIsDone1 then p3.optimisticLocalTools else nil,
-			universeId = p3.universeId,
+			optimisticLocalTools = if NoIsDone1 then p5.optimisticLocalTools else nil,
+			universeId = p5.universeId,
 			sessionId = SessionId,
-			turnFeedbackIds = buildTurnFeedbackIds(value1, p3)
+			turnFeedbackIds = buildTurnFeedbackIds(value1, p5)
 		})
 		
 		if IncludesPublishPlaceToolResult and TurnState.isDone then
@@ -395,12 +416,12 @@ return function(Tbl, p3)
 		List[Count1].isLatestPublishTurn = true
 	end
 	local IsAwaitingUserMessageEcho = false
-	local PendingUserMessage = p3.pendingUserMessage
-	local PendingUserImages = p3.pendingUserImages or {}
-	local PendingUserResourceAttachments = if FFlagBuildExperienceChatResourceAttachments then p3.pendingUserResourceAttachments or {} else {}
+	local PendingUserMessage = p5.pendingUserMessage
+	local PendingUserImages = p5.pendingUserImages or {}
+	local PendingUserResourceAttachments = p5.pendingUserResourceAttachments or {}
 	
 	if PendingUserMessage ~= nil and PendingUserMessage ~= "" or (#PendingUserImages > 0 or #PendingUserResourceAttachments > 0) then
-		local PendingUserMessageAfterSequenceId = p3.pendingUserMessageAfterSequenceId or -1
+		local PendingUserMessageAfterSequenceId = p5.pendingUserMessageAfterSequenceId or -1
 		local Flag = false
 		
 		for _, value2 in ParseChatItemsResult do
@@ -419,18 +440,18 @@ return function(Tbl, p3)
 				kind = "user_message",
 				id = if SessionId == nil then nil else `{SessionId}{ChatTypesModule.PENDING_USER_MESSAGE_ID_SUFFIX}`,
 				text = PendingUserMessage or "",
-				images = if FFlagBuildExperienceChatImageAttachmentsModule then PendingUserImages else nil,
-				resourceAttachments = if FFlagBuildExperienceChatResourceAttachments then PendingUserResourceAttachments else nil
+				images = PendingUserImages,
+				resourceAttachments = PendingUserResourceAttachments
 			})
 		end
 	end
-	local LiveAssistantMessage = p3.liveAssistantMessage
+	local LiveAssistantMessage = p5.liveAssistantMessage
 	local Entry = List[#List]
 	local IsAssistantTurn: boolean = Entry ~= nil and Entry.kind == "assistant_turn"
 	
 	if IsAssistantTurn then
 		local StartSequenceId1 = Entry.startSequenceId
-		IsAssistantTurn = StartSequenceId1 == nil or (p3.pendingUserMessageAfterSequenceId or -1) < StartSequenceId1
+		IsAssistantTurn = StartSequenceId1 == nil or (p5.pendingUserMessageAfterSequenceId or -1) < StartSequenceId1
 	end
 	if LiveAssistantMessage ~= nil and not IsAssistantTurn then
 		local LiveName = if SessionId == nil then nil else `{SessionId}:live`
@@ -441,7 +462,7 @@ return function(Tbl, p3)
 			turnKey = LiveName,
 			loading = LiveAssistantMessage.setupErrorText == nil or nil,
 			setupErrorText = LiveAssistantMessage.setupErrorText,
-			universeId = p3.universeId,
+			universeId = p5.universeId,
 			turnFeedbackIds = {}
 		})
 	end

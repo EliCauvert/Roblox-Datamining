@@ -1,0 +1,1 @@
+﻿return game:DefineFastString("FriendsChatConversationPerformanceIxpLayer", "ExperienceChat.FriendsTab.ConversationPage.Performance")

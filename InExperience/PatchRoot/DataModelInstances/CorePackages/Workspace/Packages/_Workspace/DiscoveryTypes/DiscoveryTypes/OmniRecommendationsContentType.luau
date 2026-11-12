@@ -6,5 +6,5 @@
 	GameCoPlay = "GameCoPlay",
 	TrendingSearches = "TrendingSearches",
 	Song = "Song",
-	AdLink = if require(script:FindFirstAncestor("DiscoveryTypes").Parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile then "AdLink" else nil
+	AdLink = if require(script:FindFirstAncestor("DiscoveryTypes").Parent.SharedFlags).FFlagLuaAppEnableNxMRoduxApportioning then "AdLink" else nil
 }

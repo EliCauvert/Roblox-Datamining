@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXEnableInventorySearch2", false)

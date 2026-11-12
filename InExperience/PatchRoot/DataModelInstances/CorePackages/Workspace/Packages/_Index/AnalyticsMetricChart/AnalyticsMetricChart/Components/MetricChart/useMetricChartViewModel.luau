@@ -2,17 +2,15 @@
 local Parent = AnalyticsMetricChart.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local _ = require(script.Parent.MetricChartTypes)
 local _ = require(script.Parent.MetricChartView)
 local DeriveChartAxesModule = require(AnalyticsMetricChart.Utils.deriveChartAxes)
 
 return function(p1)
-	-- upvalues: FoundationModule (copy), FoundationFontFaceMigration (copy), ReactModule (copy), DeriveChartAxesModule (copy)
+	-- upvalues: FoundationModule (copy), ReactModule (copy), DeriveChartAxesModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local BodySmall = UseTokensResult.Typography.BodySmall
 	local BodySmallFont = BodySmall.Font
-	local BodySmallFont1 = if FoundationFontFaceMigration then BodySmallFont elseif typeof(BodySmallFont) == "EnumItem" then BodySmallFont else Enum.Font.BuilderSans
 	local NewFontSize = BodySmall.FontSize + (FoundationModule.Hooks.useTextSizeOffset() or 0)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
@@ -94,6 +92,7 @@ return function(p1)
 		deltaText = p1.deltaText,
 		isDeltaPositive = p1.isDeltaPositive,
 		hasData = p1.hasData,
+		hideHeader = p1.hideHeader == true,
 		points = UseMemoResult.points,
 		minX = UseMemoResult.minX,
 		maxX = UseMemoResult.maxX,
@@ -101,7 +100,7 @@ return function(p1)
 		maxY = UseMemoResult.maxY,
 		yTicks = YTicks,
 		xAxisLabels = XAxisLabels,
-		labelFont = BodySmallFont1,
+		labelFont = BodySmallFont,
 		labelFontSize = NewFontSize,
 		inspectedIndex = UseStateResult,
 		tooltip = Tooltip,

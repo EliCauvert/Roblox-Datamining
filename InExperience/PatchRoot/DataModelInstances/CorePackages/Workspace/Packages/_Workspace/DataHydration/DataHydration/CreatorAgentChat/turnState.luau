@@ -1,4 +1,5 @@
 ﻿local _ = require(script.Parent.types)
+local FFlagBuildExperienceThoughtStatusModule = require(script.Parent.FFlagBuildExperienceThoughtStatus)
 
 local function _(p1)
 	local SequenceNumber = if p1 == nil then nil else p1.sequenceNumber
@@ -119,6 +120,7 @@ local function appendMessageContent(Tbl, List, Key, p2)
 end
 
 local function buildActivityItems(ActivitySlots, ToolCalls)
+	-- upvalues: FFlagBuildExperienceThoughtStatusModule (copy)
 	local List = {}
 	local List1 = {}
 	
@@ -132,6 +134,8 @@ local function buildActivityItems(ActivitySlots, ToolCalls)
 		
 		if ActivitySlot.kind == "agent_message" then
 			table.insert(List, { kind = "agent_message", text = ActivitySlot.text })
+		elseif FFlagBuildExperienceThoughtStatusModule and ActivitySlot.kind == "thought" then
+			table.insert(List, { kind = "thought", text = ActivitySlot.text })
 		elseif ActivitySlot.kind == "tool_call" then
 			local ToolCall = ToolCalls[ActivitySlot.toolCallId]
 			table.insert(List, {
@@ -482,7 +486,7 @@ end
 
 return {
 	applySessionUpdate = function(Tbl, p9, p10)
-		-- upvalues: recordEventMeta (copy), flushPendingAgentMessageToAssistant (copy), flushPendingAgentMessageToActivity (copy), messageMapToText (copy), appendPendingAgentMessage (copy), applyToolCallUpdate (copy), applyToolCallContentChunk (copy)
+		-- upvalues: recordEventMeta (copy), FFlagBuildExperienceThoughtStatusModule (copy), flushPendingAgentMessageToAssistant (copy), flushPendingAgentMessageToActivity (copy), messageMapToText (copy), appendPendingAgentMessage (copy), applyToolCallUpdate (copy), applyToolCallContentChunk (copy), buildActivityItems (copy)
 		local SessionUpdate = p9.sessionUpdate
 		local Copy = table.clone(Tbl)
 		recordEventMeta(Copy, if p10 == nil then nil else p10.sequenceNumber, p9)
@@ -490,7 +494,7 @@ return {
 		if Copy.status == "queued" then
 			Copy.status = "streaming"
 		end
-		if SessionUpdate ~= "agent_message_chunk" then
+		if SessionUpdate ~= "agent_message_chunk" and (not FFlagBuildExperienceThoughtStatusModule or SessionUpdate ~= "agent_thought_chunk") then
 			if SessionUpdate == "state_change" and p9.state == "idle" then
 				flushPendingAgentMessageToAssistant(Copy)
 			else
@@ -570,6 +574,32 @@ return {
 					Copy.isDone = true
 					
 					return Copy
+				end
+			elseif SessionUpdate == "agent_thought_chunk" then
+				local Content = p9.content
+				
+				if FFlagBuildExperienceThoughtStatusModule and typeof(Content) == "table" and typeof(Content.text) == "string" and Content.text ~= "" then
+					local MessageId = p9.messageId
+					Copy.latestThought = {
+						messageId = if typeof(MessageId) == "string" and MessageId ~= "" then MessageId else nil,
+						text = Content.text
+					}
+					local config = { kind = "thought", text = Content.text }
+					local SequenceNumber = if p10 == nil then nil else p10.sequenceNumber
+					local NewSequenceNumber = if typeof(SequenceNumber) == "number" and SequenceNumber >= 0 then SequenceNumber + 1 else nil
+					
+					if NewSequenceNumber == nil then
+						return Copy
+					elseif NewSequenceNumber <= 0 then
+						return Copy
+					else
+						local Copy2 = table.clone(Copy.activitySlots)
+						Copy2[NewSequenceNumber] = config
+						Copy.activitySlots = Copy2
+						Copy.activityItems = buildActivityItems(Copy.activitySlots, Copy.toolCalls)
+						
+						return Copy
+					end
 				end
 			elseif SessionUpdate == "session_info_update" then
 				Copy.infoUpdate = { title = p9.title }

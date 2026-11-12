@@ -4,9 +4,7 @@ local Parent2 = Parent1.Parent
 local RoactModule = require(Parent2.Roact)
 local FitFrameVertical = require(Parent2.RoactFitComponents).FitFrameVertical
 local UIBloxModule = require(Parent2.UIBlox)
-local FoundationModule = require(Parent2.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent2.Foundation).Utility.normalizeFontFace
 local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 local WithStyleFunction = UIBloxModule.Core.Style.withStyle
@@ -55,11 +53,11 @@ function ExtendResult.render(p1)
 end
 
 function ExtendResult.renderAlert(p1, p2)
-	-- upvalues: WithStyleFunction (copy), RoactModule (copy), InteractiveAlert (copy), FitFrameVertical (copy), ProductDetailsModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ButtonType (copy)
+	-- upvalues: WithStyleFunction (copy), RoactModule (copy), InteractiveAlert (copy), FitFrameVertical (copy), ProductDetailsModule (copy), NormalizeFontFaceFunction (copy), ButtonType (copy)
 	local Props = p1.props
 	
 	return WithStyleFunction(function(p3)
-		-- upvalues: Props (copy), p2 (copy), RoactModule (upval), InteractiveAlert (upval), FitFrameVertical (upval), p1 (copy), ProductDetailsModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), ButtonType (upval)
+		-- upvalues: Props (copy), p2 (copy), RoactModule (upval), InteractiveAlert (upval), FitFrameVertical (upval), p1 (copy), ProductDetailsModule (upval), NormalizeFontFaceFunction (upval), ButtonType (upval)
 		local Theme = p3.Theme
 		local _Font = p3.Font
 		local Robux = p2.YouNeed:gsub("{robux}", (string.format("<font color=\"rgb(%s)\">%s%s</font>", tostring((Color3.new(math.round(Theme.TextEmphasis.Color.R * 255), math.round(Theme.TextEmphasis.Color.G * 255), (math.round(Theme.TextEmphasis.Color.B * 255))))), utf8.char(57346), (tostring(Props.itemRobuxCost - Props.balanceAmount)))))
@@ -70,7 +68,7 @@ function ExtendResult.renderAlert(p1, p2)
 			anchorPoint = Props.anchorPoint,
 			title = p2.InsufficientRobuxTitle,
 			middleContent = function()
-				-- upvalues: RoactModule (upval), FitFrameVertical (upval), p1 (upval), ProductDetailsModule (upval), Props (upval), Theme (copy), FoundationFontFaceMigration (upval), _Font (copy), NormalizeFontFaceFunction (upval), p3 (copy), Robux (copy)
+				-- upvalues: RoactModule (upval), FitFrameVertical (upval), p1 (upval), ProductDetailsModule (upval), Props (upval), Theme (copy), NormalizeFontFaceFunction (upval), p3 (copy), Robux (copy), _Font (copy)
 				return RoactModule.createElement(FitFrameVertical, {
 					BackgroundTransparency = 1,
 					width = UDim.new(1, 0),
@@ -102,8 +100,7 @@ function ExtendResult.renderAlert(p1, p2)
 						TextWrapped = true,
 						Size = UDim2.new(0, p1.state.contentSize.X, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y,
-						Font = if FoundationFontFaceMigration then nil else _Font.Body.Font,
-						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
+						FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font),
 						Text = Robux,
 						TextSize = _Font.BaseSize * _Font.Body.RelativeSize,
 						TextColor3 = Theme.TextDefault.Color,

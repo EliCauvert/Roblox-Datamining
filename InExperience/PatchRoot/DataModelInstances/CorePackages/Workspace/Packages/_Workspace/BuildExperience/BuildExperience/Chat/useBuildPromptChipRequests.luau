@@ -4,11 +4,24 @@ local _ = require(BuildExperience.Chat.chatTypes)
 local _ = require(BuildExperience.Stores.GetBuildPromptChipsStore)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local FFlagBuildExperienceFTUXChipExhaustedTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceFTUXChipExhaustedTelemetry)
+local FFlagBuildExperienceEventContextTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceEventContextTelemetry)
 local PROMPTCHIPSSTATUS = require(BuildExperience.Stores.GetBuildPromptChipsStore.promptChipsStatus).PROMPT_CHIPS_STATUS
 local FIntBuildPromptChipEditDebounceMsModuleRatio = require(BuildExperience.Flags.FIntBuildPromptChipEditDebounceMs) / 1000
 
+local function getChipClickParameters(p1, Text: string, Value)
+	local Chips = p1.getChips()
+	local FoundIndex: number? = table.find(Chips, Value)
+	
+	return {
+		chipText = Value.value,
+		index = if FoundIndex == nil then nil else tostring(FoundIndex),
+		chipCount = tostring(#Chips),
+		hasPrompt = tostring(string.find(Text, "%S") ~= nil)
+	}
+end
+
 return function(p1, p2)
-	-- upvalues: ReactModule (copy), SendBuildExperienceEventModule (copy), PROMPTCHIPSSTATUS (copy), FIntBuildPromptChipEditDebounceMsModuleRatio (copy), FFlagBuildExperienceFTUXChipExhaustedTelemetryModule (copy)
+	-- upvalues: ReactModule (copy), SendBuildExperienceEventModule (copy), PROMPTCHIPSSTATUS (copy), FIntBuildPromptChipEditDebounceMsModuleRatio (copy), FFlagBuildExperienceEventContextTelemetryModule (copy), getChipClickParameters (copy), FFlagBuildExperienceFTUXChipExhaustedTelemetryModule (copy)
 	local IsActive = p2.isActive
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
@@ -117,16 +130,22 @@ return function(p1, p2)
 			TelemetryGranularity
 		}),
 		requestChipsForSelection = ReactModule.useCallback(function(Prompt, SelectedChip, p3)
-			-- upvalues: IsActive (copy), UseResult1 (copy), UseRefResult1 (copy), SendBuildExperienceEventModule (upval), TelemetryGranularity (copy), UseResult (copy)
+			-- upvalues: IsActive (copy), UseResult1 (copy), UseRefResult1 (copy), SendBuildExperienceEventModule (upval), TelemetryGranularity (copy), FFlagBuildExperienceEventContextTelemetryModule (upval), getChipClickParameters (upval), p1 (copy), UseResult (copy)
 			if IsActive then
 				UseResult1()
 				UseRefResult1.current = nil
-				SendBuildExperienceEventModule("CHIP_CLICK", TelemetryGranularity)
+				SendBuildExperienceEventModule("CHIP_CLICK", TelemetryGranularity, if FFlagBuildExperienceEventContextTelemetryModule then getChipClickParameters(p1, Prompt, SelectedChip) else nil)
 				UseResult({ prompt = Prompt, selectedChip = SelectedChip }, p3)
 				
 				return
 			end
-		end, { IsActive, UseResult1, UseResult, TelemetryGranularity }),
+		end, {
+			IsActive,
+			UseResult1,
+			UseResult,
+			TelemetryGranularity,
+			if FFlagBuildExperienceEventContextTelemetryModule then p1 else nil
+		}),
 		onChipExhausted = if FFlagBuildExperienceFTUXChipExhaustedTelemetryModule then ReactModule.useCallback(function()
 			-- upvalues: IsActive (copy), SendBuildExperienceEventModule (upval), TelemetryGranularity (copy)
 			if IsActive then

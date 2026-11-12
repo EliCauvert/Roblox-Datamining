@@ -1,18 +1,17 @@
-﻿local Frozen = table.freeze({ analytics = "Feature.Moments.Action.Analytics" })
-
-return table.freeze({
+﻿return table.freeze({
 	DURATION_SECONDS_KEY = "Feature.Moments.Label.DurationSeconds",
 	PERCENT_KEY = "Feature.Build.Analytics.Percent",
-	MENU_KEYS = Frozen,
+	POSTED_ON_DATE_KEY = "Feature.Moments.Label.PostedOnDate",
+	MENU_KEYS = table.freeze({ analytics = "Feature.Moments.Action.Analytics" }),
 	PAGE_KEYS = table.freeze({
+		title = "Feature.Moments.PostInsights.Stats",
 		overview = "Feature.Moments.Label.Overview",
 		engagement = "Feature.Moments.Label.Engagement",
 		totalViews = "Feature.Moments.Label.TotalViews",
 		averageWatchTime = "Feature.Moments.Label.AverageWatchTime",
 		averageCompletion = "Feature.Moments.Label.AverageCompletion",
 		gameJoinConversion = "Feature.Moments.Label.GameJoinConversion",
-		totalReactions = "Feature.Moments.Label.TotalReactions",
-		title = Frozen.analytics
+		totalReactions = "Feature.Moments.Label.TotalReactions"
 	}),
 	TOOLTIP_KEYS = table.freeze({
 		title = "Feature.Moments.Tooltip.PostInsightsTitle",

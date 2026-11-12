@@ -1,8 +1,5 @@
 ﻿local TelemetryService = game:GetService("TelemetryService")
-local Parent = script:FindFirstAncestor("GameCollections").Parent
-local _ = require(Parent.DiscoveryTypes)
-local LuaAppNullableGridLayoutTelemetryFields = game:DefineFastFlag("LuaAppNullableGridLayoutTelemetryFields", false)
-local FFlagLuaAppFixTotalColsBound = require(Parent.SharedFlags).FFlagLuaAppFixTotalColsBound
+local _ = require(script:FindFirstAncestor("GameCollections").Parent.DiscoveryTypes)
 local StandardizedFields = { "addOSInfo", "addSessionInfo", "addSessionId" }
 local config = {
 	eventName = "TileSkipped",
@@ -20,30 +17,30 @@ local config1 = {
 }
 
 return {
-	logTileSkipped = function(p1, p2, TileType, PageContext, NumColumns, NumRows, OriginalFeedIndex, p3, p4)
-		-- upvalues: LuaAppNullableGridLayoutTelemetryFields (copy), TelemetryService (copy), config (copy), StandardizedFields (copy)
+	logTileSkipped = function(AdId, UniverseId, TileType, PageContext, NumColumns, NumRows, OriginalFeedIndex, SortIndex, TopicId)
+		-- upvalues: TelemetryService (copy), config (copy), StandardizedFields (copy)
 		TelemetryService:LogEvent(config, {
 			standardizedFields = StandardizedFields,
 			customFields = {
-				adId = if LuaAppNullableGridLayoutTelemetryFields then p1 else p1 or "",
-				universeId = if LuaAppNullableGridLayoutTelemetryFields then p2 else p2 or "",
+				adId = AdId,
+				universeId = UniverseId,
 				tileType = TileType,
 				pageContext = PageContext,
 				numColumns = NumColumns,
 				numRows = NumRows,
 				originalFeedIndex = OriginalFeedIndex,
-				sortIndex = if LuaAppNullableGridLayoutTelemetryFields then p3 else p3 or -1,
-				topicId = if LuaAppNullableGridLayoutTelemetryFields then p4 else p4 or ""
+				sortIndex = SortIndex,
+				topicId = TopicId
 			}
 		})
 	end,
-	logTilePlaced = function(p1, p2, TileType, PageContext, NumColumns, NumRows, OriginalFeedIndex, FinalFeedIndex, SortIndex, TopicId, p3)
-		-- upvalues: LuaAppNullableGridLayoutTelemetryFields (copy), FFlagLuaAppFixTotalColsBound (copy), TelemetryService (copy), config1 (copy), StandardizedFields (copy)
+	logTilePlaced = function(AdId, UniverseId, TileType, PageContext, NumColumns, NumRows, OriginalFeedIndex, FinalFeedIndex, SortIndex, TopicId, TotalFilledColumns)
+		-- upvalues: TelemetryService (copy), config1 (copy), StandardizedFields (copy)
 		TelemetryService:LogEvent(config1, {
 			standardizedFields = StandardizedFields,
 			customFields = {
-				adId = if LuaAppNullableGridLayoutTelemetryFields then p1 else p1 or "",
-				universeId = if LuaAppNullableGridLayoutTelemetryFields then p2 else p2 or "",
+				adId = AdId,
+				universeId = UniverseId,
 				tileType = TileType,
 				pageContext = PageContext,
 				numColumns = NumColumns,
@@ -52,7 +49,7 @@ return {
 				finalFeedIndex = FinalFeedIndex,
 				sortIndex = SortIndex,
 				topicId = TopicId,
-				totalFilledColumns = if FFlagLuaAppFixTotalColsBound then p3 else nil
+				totalFilledColumns = TotalFilledColumns
 			}
 		})
 	end

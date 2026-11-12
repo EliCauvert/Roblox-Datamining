@@ -1,11 +1,12 @@
-﻿local list = {
+﻿local FFlagAXSpawnEffectSaveRoundTrip = require(game:GetService("CorePackages").Workspace.Packages.AvatarExperienceFlags).FFlagAXSpawnEffectSaveRoundTrip
+local list = {
 	"ClimbAnimation", "Face", "FallAnimation", "GraphicTShirt", "Head",
 	"IdleAnimation", "JumpAnimation", "LeftArm", "LeftLeg", "Pants", "RightArm",
 	"RightLeg", "RunAnimation", "Shirt", "SwimAnimation", "Torso", "WalkAnimation"
 }
 
 return function(Humanoid: Humanoid)
-	-- upvalues: list (copy)
+	-- upvalues: list (copy), FFlagAXSpawnEffectSaveRoundTrip (copy)
 	local List = {}
 	
 	for _, value in ipairs(list) do
@@ -22,9 +23,9 @@ return function(Humanoid: Humanoid)
 	for _, accessory in ipairs((Humanoid:GetAccessories(true))) do
 		table.insert(List, accessory.AssetId)
 	end
-	for _, MakeupDescription in Humanoid:GetChildren() do
-		if MakeupDescription:IsA("MakeupDescription") and MakeupDescription.AssetId > 0 then
-			table.insert(List, MakeupDescription.AssetId)
+	for _, child in Humanoid:GetChildren() do
+		if (child:IsA("MakeupDescription") or FFlagAXSpawnEffectSaveRoundTrip and child:IsA("AvatarEffectDescription")) and child.AssetId > 0 then
+			table.insert(List, child.AssetId)
 		end
 	end
 	local Emotes = Humanoid:GetEmotes()

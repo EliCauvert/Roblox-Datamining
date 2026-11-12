@@ -3,7 +3,6 @@ local Parent = Foundation.Parent
 local ReactModule = require(Parent.React)
 local ReactIsModule = require(Parent.ReactIs)
 local InteractableModule = require(Foundation.Components.Interactable)
-local FlagsModule = require(Foundation.Utility.Flags)
 local GuiObjectChildrenModule = require(Foundation.Utility.GuiObjectChildren)
 local _ = require(Foundation.Components.Types)
 local IndexBindableModule = require(Foundation.Utility.indexBindable)
@@ -21,7 +20,7 @@ local config = {
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: WithDefaultsModule (copy), config (copy), UseDefaultTagsModule (copy), UseStyleTagsModule (copy), ReactModule (copy), FlagsModule (copy), NormalizeFontFaceModule (copy), ReactIsModule (copy), FontScalesModule (copy), WithGuiObjectPropsModule (copy), IndexBindableModule (copy), InteractableModule (copy), GuiObjectChildrenModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseDefaultTagsModule (copy), UseStyleTagsModule (copy), ReactModule (copy), NormalizeFontFaceModule (copy), ReactIsModule (copy), FontScalesModule (copy), WithGuiObjectPropsModule (copy), IndexBindableModule (copy), InteractableModule (copy), GuiObjectChildrenModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local HasOnStateChanged: boolean = WithDefaultsModuleResult.onStateChanged ~= nil or WithDefaultsModuleResult.onActivated ~= nil or WithDefaultsModuleResult.onSecondaryActivated ~= nil
 	local GuiObjectDefaultsTextDefaultsTextSizeDefaultsTextColorDefaults: string = if WithDefaultsModuleResult.backgroundStyle == nil then "gui-object-defaults text-defaults text-size-defaults text-color-defaults" else "gui-object-defaults text-defaults text-size-defaults text-color-defaults x-default-transparency"
@@ -31,14 +30,8 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	end
 	local UseStyleTagsModuleResult = UseStyleTagsModule((UseDefaultTagsModule(WithDefaultsModuleResult.tag, GuiObjectDefaultsTextDefaultsTextSizeDefaultsTextColorDefaults)))
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: FlagsModule (upval), WithDefaultsModuleResult (copy), NormalizeFontFaceModule (upval), ReactIsModule (upval)
-		if FlagsModule.FoundationFontFaceMigration then
-			return NormalizeFontFaceModule(if WithDefaultsModuleResult.fontStyle == nil then nil else WithDefaultsModuleResult.fontStyle.Font)
-		else
-			local FontStyleFont = if WithDefaultsModuleResult.fontStyle == nil then nil else WithDefaultsModuleResult.fontStyle.Font
-			
-			return if typeof(FontStyleFont) == "table" and not ReactIsModule.isBinding(FontStyleFont) then Font.new(FontStyleFont.Family, FontStyleFont.Weight, FontStyleFont.Style) elseif typeof(FontStyleFont) == "EnumItem" then Font.fromEnum(FontStyleFont) else FontStyleFont
-		end
+		-- upvalues: WithDefaultsModuleResult (copy), NormalizeFontFaceModule (upval)
+		return NormalizeFontFaceModule(if WithDefaultsModuleResult.fontStyle == nil then nil else WithDefaultsModuleResult.fontStyle.Font)
 	end, { WithDefaultsModuleResult.fontStyle })
 	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsModuleResult (copy), UseMemoResult (copy), ReactIsModule (upval), FontScalesModule (upval)

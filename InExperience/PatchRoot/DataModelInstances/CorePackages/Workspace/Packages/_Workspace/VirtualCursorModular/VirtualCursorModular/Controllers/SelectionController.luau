@@ -7,12 +7,14 @@ local SharedFlagsModule = require(script:FindFirstAncestor("VirtualCursorModular
 local FFlagEnableVirtualCursorMoveAssist = SharedFlagsModule.FFlagEnableVirtualCursorMoveAssist
 local FIntVirtualCursorMoveAssistLevel = SharedFlagsModule.FIntVirtualCursorMoveAssistLevel
 local FIntVirtualCursorMoveAssistHoverSpeed = SharedFlagsModule.FIntVirtualCursorMoveAssistHoverSpeed
+local FFlagVirtualCursorInputSink = SharedFlagsModule.FFlagVirtualCursorInputSink
 local FIntVirtualCursorMoveAssistSpeedSizeMinScale = SharedFlagsModule.FIntVirtualCursorMoveAssistSpeedSizeMinScale
 local FIntVirtualCursorMoveAssistSpeedSizeMaxScale = SharedFlagsModule.FIntVirtualCursorMoveAssistSpeedSizeMaxScale
 local FIntVirtualCursorMoveAssistSpeedSmoothingTimeMs = SharedFlagsModule.FIntVirtualCursorMoveAssistSpeedSmoothingTimeMs
 local PropertiesModule = require(Parent.Properties)
 local UtilModule = require(Parent.Util)
 local GetMaxSpeedFunction = UtilModule.GetMaxSpeed
+local GetUsesInputSinkFunction = UtilModule.GetUsesInputSink
 local IsCircleContainedInGuiObjectFunction = UtilModule.IsCircleContainedInGuiObject
 local IsScreenSpaceGuiObjectFunction = UtilModule.IsScreenSpaceGuiObject
 local IsSelectableGuiObjectFunction = UtilModule.IsSelectableGuiObject
@@ -91,8 +93,8 @@ function SelectionController:processScrolling(ScrollFrame, Vector, p1): boolean
 	return false
 end
 
-function SelectionController:getClosestCandidate(Frames, p1, _, p2, p3)
-	-- upvalues: IsSelectableGuiObjectFunction (copy), GetPointRotatedAroundObjectFunction (copy), IsSinkingGuiObjectFunction (copy), IsCircleContainedInGuiObjectFunction (copy), PropertiesModule (copy)
+function SelectionController:getClosestCandidate(Frames, p1, _, p2, p3, CoreGui)
+	-- upvalues: FFlagVirtualCursorInputSink (copy), GetUsesInputSinkFunction (copy), IsSelectableGuiObjectFunction (copy), GetPointRotatedAroundObjectFunction (copy), IsSinkingGuiObjectFunction (copy), IsCircleContainedInGuiObjectFunction (copy), PropertiesModule (copy)
 	local ClosestCandidate = nil
 	local OccludingCandidate = nil
 	local ClosestDistance = 1e999
@@ -102,13 +104,16 @@ function SelectionController:getClosestCandidate(Frames, p1, _, p2, p3)
 		OccludingCandidate = p3.occludingCandidate
 		ClosestDistance = p3.closestDistance
 	end
-	for _, frame in ipairs(Frames) do
+	local IsCoreGui = CoreGui ~= nil and CoreGui:IsA("CoreGui")
+	for _, frame in Frames do
 		if self:processScrolling(frame, p1, p2) then
 			self._isScrolling = true
 			
 			return ClosestCandidate, OccludingCandidate, ClosestDistance
 		end
-		if IsSelectableGuiObjectFunction(frame) then
+		local UsesInputSink = if FFlagVirtualCursorInputSink and CoreGui ~= nil then GetUsesInputSinkFunction(frame, IsCoreGui) else false
+		
+		if IsSelectableGuiObjectFunction(frame, if FFlagVirtualCursorInputSink then UsesInputSink else nil) then
 			local AbsolutePosition = frame.AbsolutePosition
 			local NewAbsolutePosition = frame.AbsolutePosition + frame.AbsoluteSize
 			local SquareRoot = 0
@@ -122,7 +127,7 @@ function SelectionController:getClosestCandidate(Frames, p1, _, p2, p3)
 				ClosestDistance = SquareRoot
 			end
 		end
-		if IsSinkingGuiObjectFunction(frame) and IsCircleContainedInGuiObjectFunction(p1, PropertiesModule.CursorRadius * PropertiesModule.OcclusionRadiusScale, frame) then
+		if IsSinkingGuiObjectFunction(frame, if FFlagVirtualCursorInputSink then UsesInputSink else nil) and IsCircleContainedInGuiObjectFunction(p1, PropertiesModule.CursorRadius * PropertiesModule.OcclusionRadiusScale, frame) then
 			OccludingCandidate = frame
 			
 			return ClosestCandidate, OccludingCandidate, ClosestDistance
@@ -216,7 +221,7 @@ function SelectionController:processAncestors(ClosestCandidate, Parent, p4, p5)
 end
 
 function SelectionController:processCandidates(GamepadCursorPosition, SelectionRadius, p6)
-	-- upvalues: GuiService (copy)
+	-- upvalues: GuiService (copy), FFlagVirtualCursorInputSink (copy)
 	local GamepadCursorPositionDelta = GamepadCursorPosition - GuiService:GetGuiInset()
 	local Candidates = self:getCandidates(GamepadCursorPositionDelta, SelectionRadius)
 	local ClosestCandidate = nil
@@ -231,7 +236,7 @@ function SelectionController:processCandidates(GamepadCursorPosition, SelectionR
 			closestCandidate = ClosestCandidate,
 			occludingCandidate = OccludingCandidate,
 			closestDistance = ClosestDistance
-		})
+		}, if FFlagVirtualCursorInputSink then v1 else nil)
 		
 		if self._isScrolling then
 			return nil, 1e999
@@ -254,21 +259,59 @@ function SelectionController:processCandidates(GamepadCursorPosition, SelectionR
 	return ClosestCandidate, ClosestDistance
 end
 
-function SelectionController:getAssistCandidateList(GamepadCursorPosition, MoveAssistRadius)
-	-- upvalues: GuiService (copy)
+function SelectionController.getAssistCandidateList(p7, GamepadCursorPosition, MoveAssistRadius)
+	-- upvalues: GuiService (copy), CoreGui (copy), FFlagVirtualCursorInputSink (copy)
+	local t = {}
 	local Guis = {}
 	
-	for _, candidate in self:getCandidates(GamepadCursorPosition - GuiService:GetGuiInset(), MoveAssistRadius) do
+	for _, candidate in p7:getCandidates(GamepadCursorPosition - GuiService:GetGuiInset(), MoveAssistRadius) do
 		for _, Gui in candidate[2] do
 			if Gui:IsA("GuiObject") then
-				table.insert(Guis, Gui)
+				if candidate[1] == CoreGui then
+					table.insert(if FFlagVirtualCursorInputSink then t else Guis, Gui)
+				else
+					table.insert(Guis, Gui)
+				end
 			end
 		end
 	end
-	return self:filterAssistCandidates(Guis)
+	return if FFlagVirtualCursorInputSink then p7:filterAssistCandidates(t, Guis) else p7:DEPRECATED_filterAssistCandidates(Guis)
 end
 
-function SelectionController:filterAssistCandidates(Guis)
+function SelectionController:filterAssistCandidates(p8, Guis)
+	-- upvalues: PropertiesModule (copy), GetUsesInputSinkFunction (copy), IsSelectableGuiObjectFunction (copy), IsCircleContainedInGuiObjectFunction (copy), IsSinkingGuiObjectFunction (copy)
+	local Frames = {}
+	local Frames1 = {}
+	local ScaledCursorRadius = PropertiesModule.CursorRadius * PropertiesModule.OcclusionRadiusScale
+	local Flag = nil
+	
+	for _, value in { p8, Guis } do
+		for _, Frame in value do
+			local UsesInputSink = GetUsesInputSinkFunction(Frame, value == p8)
+			
+			if IsSelectableGuiObjectFunction(Frame, UsesInputSink) then
+				local NewAbsolutePosition = Frame.AbsolutePosition + Frame.AbsoluteSize * 0.5
+				Flag = false
+				
+				for _, value1 in Frames1 do
+					if value1 ~= Frame and IsCircleContainedInGuiObjectFunction(NewAbsolutePosition, ScaledCursorRadius, value1) then
+						Flag = true
+						break
+					end
+				end
+				if not Flag then
+					table.insert(Frames, Frame)
+				end
+			end
+			if IsSinkingGuiObjectFunction(Frame, UsesInputSink) then
+				table.insert(Frames1, Frame)
+			end
+		end
+	end
+	return Frames
+end
+
+function SelectionController:DEPRECATED_filterAssistCandidates(Guis)
 	-- upvalues: PropertiesModule (copy), IsSelectableGuiObjectFunction (copy), IsCircleContainedInGuiObjectFunction (copy), IsSinkingGuiObjectFunction (copy)
 	local Frames = {}
 	local Frames1 = {}
@@ -297,10 +340,10 @@ function SelectionController:filterAssistCandidates(Guis)
 	return Frames
 end
 
-function SelectionController:onRenderStep(p7)
+function SelectionController:onRenderStep(p9)
 	-- upvalues: GamepadService (copy), Players (copy), CoreGui (copy), GuiService (copy)
-	self:processMoving(p7)
-	local ProcessCandidatesResult = self:processCandidates(GamepadService:GetGamepadCursorPosition(), self._selectionRadius, p7)
+	self:processMoving(p9)
+	local ProcessCandidatesResult = self:processCandidates(GamepadService:GetGamepadCursorPosition(), self._selectionRadius, p9)
 	
 	if ProcessCandidatesResult ~= self._selectedObject then
 		local LocalPlayer = Players.LocalPlayer

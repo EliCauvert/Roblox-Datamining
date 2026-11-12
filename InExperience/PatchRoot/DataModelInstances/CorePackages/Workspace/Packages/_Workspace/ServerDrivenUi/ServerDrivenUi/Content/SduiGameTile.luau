@@ -40,16 +40,16 @@ local FFlagSduiTileDisableLegacyHover = require(ServerDrivenUi.Flags).FFlagSduiT
 local FFlagEnableGameJoinEarlyAccess = require(Parent.SharedFlags).FFlagEnableGameJoinEarlyAccess
 local FFlagLuaAppSduiVideoThumbnail = require(Parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
 local FFlagLuaAppSduiGameTileFeedback = require(Parent.SharedFlags).FFlagLuaAppSduiGameTileFeedback
-local FFlagLuaAppSduiGameTileMetadataFontStyle = require(Parent.SharedFlags).FFlagLuaAppSduiGameTileMetadataFontStyle
 local FFlagSduiFixSearchTelemetry = require(Parent.SharedFlags).FFlagSduiFixSearchTelemetry
 local SduiGameTileDisableDefaultPlayButtonOnHover = game:DefineFastFlag("SduiGameTileDisableDefaultPlayButtonOnHover", false)
 local FFlagSduiGameTileEnableHoverInVR = require(Parent.SharedFlags).FFlagSduiGameTileEnableHoverInVR
 local FFlagSduiGameTileDirectAction = require(Parent.SharedFlags).FFlagSduiGameTileDirectAction
 local FFlagSduiGameTileUseFooterComponentAsDefault = require(Parent.SharedFlags).FFlagSduiGameTileUseFooterComponentAsDefault
+local FFlagLuaAppSduiGameTileFooterTrailingComponent = require(Parent.SharedFlags).FFlagLuaAppSduiGameTileFooterTrailingComponent
 local Signal = if FFlagLuaAppSduiGameTileFeedback then SignalsModule.createSignal(false) else nil
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), UsePreferencesFunction (copy), FFlagSduiTileDisableLegacyHover (copy), FFlagLuaAppSduiVideoThumbnail (copy), ReactModule (copy), UseUidRefStringFunction (copy), FFlagLuaAppSduiGameTileFeedback (copy), Signal (ref), GetGameTileHiddenStoreFunction (copy), SignalsModule (copy), SignalsReactModule (copy), SduiErrors (copy), GetInputModeStoreFunction (copy), SduiParseHelpers (copy), VideoEndReason (copy), SduiParsers (copy), SduiActionType (copy), GetOverflowMenuSignalStoreFunction (copy), Default (copy), FFlagSduiGameTileEnableHoverInVR (copy), ResponsiveModule (copy), GameTileOverflowMenuActionFunction (copy), SduiGameTileDisableDefaultPlayButtonOnHover (copy), SduiBuilder (copy), FFlagSduiFixSearchTelemetry (copy), FindAnalyticsFieldInAncestorsFunction (copy), SduiPlayButton (copy), FFlagEnableGameJoinEarlyAccess (copy), LocalizeStringsFunction (copy), DiscoveryAnalyticsModule (copy), SduiHoldToPlayModule (copy), SduiGameTileFooterModule (copy), FFlagSduiGameTileUseFooterComponentAsDefault (copy), FFlagLuaAppSduiGameTileMetadataFontStyle (copy), SduiTileOverflowMenu (copy), FFlagSduiGameTileDirectAction (copy), SduiDefaultTileImageModule (copy), SduiGameVideoThumbnailModule (copy), GetSduiComponentWrapperFunction (copy), SduiTileModule (copy), CryoModule (copy), ZoomAnimatedFrame (copy), TileHoverShadowModule (copy)
+	-- upvalues: UseTokensFunction (copy), UsePreferencesFunction (copy), FFlagSduiTileDisableLegacyHover (copy), FFlagLuaAppSduiVideoThumbnail (copy), ReactModule (copy), UseUidRefStringFunction (copy), FFlagLuaAppSduiGameTileFeedback (copy), Signal (ref), GetGameTileHiddenStoreFunction (copy), SignalsModule (copy), SignalsReactModule (copy), SduiErrors (copy), GetInputModeStoreFunction (copy), SduiParseHelpers (copy), VideoEndReason (copy), SduiParsers (copy), SduiActionType (copy), GetOverflowMenuSignalStoreFunction (copy), Default (copy), FFlagSduiGameTileEnableHoverInVR (copy), ResponsiveModule (copy), GameTileOverflowMenuActionFunction (copy), SduiGameTileDisableDefaultPlayButtonOnHover (copy), SduiBuilder (copy), FFlagSduiFixSearchTelemetry (copy), FindAnalyticsFieldInAncestorsFunction (copy), SduiPlayButton (copy), FFlagEnableGameJoinEarlyAccess (copy), LocalizeStringsFunction (copy), DiscoveryAnalyticsModule (copy), SduiHoldToPlayModule (copy), SduiGameTileFooterModule (copy), FFlagSduiGameTileUseFooterComponentAsDefault (copy), FFlagLuaAppSduiGameTileFooterTrailingComponent (copy), SduiTileOverflowMenu (copy), FFlagSduiGameTileDirectAction (copy), SduiDefaultTileImageModule (copy), SduiGameVideoThumbnailModule (copy), GetSduiComponentWrapperFunction (copy), SduiTileModule (copy), CryoModule (copy), ZoomAnimatedFrame (copy), TileHoverShadowModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UsePreferencesResult = UsePreferencesFunction()
 	local EnableLegacyHoverState = not FFlagSduiTileDisableLegacyHover and p1.enableLegacyHoverState
@@ -363,7 +363,7 @@ return ReactModule.memo(function(p1)
 		end
 	end
 	local UseMemoResult1 = ReactModule.useMemo(function()
-		-- upvalues: p1 (copy), ReactModule (upval), SduiGameTileFooterModule (upval), UseStateResult1 (copy), UseStateResult (copy), FFlagSduiGameTileUseFooterComponentAsDefault (upval), UniverseId (copy), PlaceId (copy), FFlagLuaAppSduiGameTileMetadataFontStyle (upval)
+		-- upvalues: p1 (copy), ReactModule (upval), SduiGameTileFooterModule (upval), UseStateResult1 (copy), UseStateResult (copy), FFlagSduiGameTileUseFooterComponentAsDefault (upval), UniverseId (copy), PlaceId (copy)
 		return if p1.disableDefaultFooterLogic then p1.footerComponent else ReactModule.createElement(SduiGameTileFooterModule, {
 			isHovered = UseStateResult1,
 			isSelected = UseStateResult,
@@ -376,16 +376,32 @@ return ReactModule.memo(function(p1)
 			analyticsContext = p1.analyticsContext,
 			ratingText = p1.ratingText,
 			playerCount = p1.playerCount,
-			metadataFontStyle = if FFlagLuaAppSduiGameTileMetadataFontStyle then p1.metadataFontStyle else nil
+			metadataFontStyle = p1.metadataFontStyle
 		})
 	end, {
 		UseStateResult1, UseStateResult, UniverseId, PlaceId, p1.ageRatingText,
 		p1.disableDefaultFooterLogic, p1.footerComponent,
 		if FFlagSduiGameTileUseFooterComponentAsDefault then p1.useFooterComponentAsDefault else nil,
 		p1.sduiContext, p1.analyticsContext, p1.ratingText, p1.playerCount,
-		if FFlagLuaAppSduiGameTileMetadataFontStyle then p1.metadataFontStyle else nil
+		p1.metadataFontStyle
 	})
-	local Element = if FFlagLuaAppSduiGameTileFeedback and HasHiddenStateComponent and p1.overflowMenuComponent and not UseSignalStateResult then ReactModule.createElement(SduiTileOverflowMenu, {
+	local UseMemoResult2 = if FFlagLuaAppSduiGameTileFooterTrailingComponent then ReactModule.useMemo(function()
+		-- upvalues: p1 (copy), UseMemoResult1 (copy), ReactModule (upval)
+		return if p1.footerTrailingComponent then ReactModule.createElement("Frame", {
+			BackgroundTransparency = 1,
+			AutomaticSize = Enum.AutomaticSize.Y,
+			Size = UDim2.fromScale(1, 0)
+		}, {
+			UIListLayout = ReactModule.createElement("UIListLayout", {
+				FillDirection = Enum.FillDirection.Vertical,
+				SortOrder = Enum.SortOrder.Name,
+				HorizontalFlex = Enum.UIFlexAlignment.Fill
+			}),
+			["1_Footer"] = UseMemoResult1,
+			["2_FooterTrailing"] = p1.footerTrailingComponent
+		}) else UseMemoResult1
+	end, { p1.footerTrailingComponent, UseMemoResult1 }) else nil
+	local Element1 = if FFlagLuaAppSduiGameTileFeedback and HasHiddenStateComponent and p1.overflowMenuComponent and not UseSignalStateResult then ReactModule.createElement(SduiTileOverflowMenu, {
 		debugName = "SduiGameTile.OverflowMenu",
 		zIndex = 5,
 		componentConfig = p1.overflowMenuComponent,
@@ -397,11 +413,11 @@ return ReactModule.memo(function(p1)
 		parentRef = UseRefResult1,
 		sduiContext = p1.sduiContext
 	}) else nil
-	local Element1 = nil
+	local Element2 = nil
 	
 	if FFlagLuaAppSduiVideoThumbnail and p1.videoPlayer and (not FFlagLuaAppSduiGameTileFeedback or not UseSignalStateResult) then
 		local CornerRadius = p1.cornerRadius or UseTokensResult.Radius.Medium
-		Element1 = ReactModule.createElement(SduiGameVideoThumbnailModule, {
+		Element2 = ReactModule.createElement(SduiGameVideoThumbnailModule, {
 			sduiContext = p1.sduiContext,
 			analyticsContext = p1.analyticsContext,
 			videoPlayer = p1.videoPlayer,
@@ -419,7 +435,7 @@ return ReactModule.memo(function(p1)
 			playbackCandidateRef = UseRefResult1
 		})
 	end
-	local Element2 = if FFlagLuaAppSduiGameTileFeedback and UseSignalStateResult and p1.hiddenStateComponent then ReactModule.createElement(SduiTileModule, {
+	local Element = if FFlagLuaAppSduiGameTileFeedback and UseSignalStateResult and p1.hiddenStateComponent then ReactModule.createElement(SduiTileModule, {
 		isDisabled = true,
 		isHovered = false,
 		selectable = false,
@@ -456,13 +472,13 @@ return ReactModule.memo(function(p1)
 		onSelectionLost = UseResult4,
 		renderLegacyHoverState = if FFlagSduiTileDisableLegacyHover then nil else UseResult9,
 		isHovered = UseStateResult1,
-		imageComponent = if FFlagLuaAppSduiVideoThumbnail and Element1 then Element1 else p1.imageComponent,
+		imageComponent = if FFlagLuaAppSduiVideoThumbnail and Element2 then Element2 else p1.imageComponent,
 		setGuiObject = UseResult,
 		onActivated = UseResult2,
-		onTouchLongPress = if FFlagLuaAppSduiGameTileFeedback and Element then UseResult7 else nil,
-		thumbnailOverflowMenuComponent = if FFlagLuaAppSduiGameTileFeedback then Element else nil,
+		onTouchLongPress = if FFlagLuaAppSduiGameTileFeedback and Element1 then UseResult7 else nil,
+		thumbnailOverflowMenuComponent = if FFlagLuaAppSduiGameTileFeedback then Element1 else nil,
 		focusNavActionsComponent = CloneElementResult,
-		footerComponent = UseMemoResult1
+		footerComponent = if FFlagLuaAppSduiGameTileFooterTrailingComponent then UseMemoResult2 else UseMemoResult1
 	}))
 	
 	if EnableLegacyHoverState then
@@ -480,9 +496,9 @@ return ReactModule.memo(function(p1)
 				hoverPadding = p1.containmentPadding,
 				containmentPadding = p1.containmentPadding
 			}) else nil,
-			Tile = Element2
+			Tile = Element
 		})
 	else
-		return Element2
+		return Element
 	end
 end)

@@ -18,7 +18,8 @@
 	ReceiveLimitExceeded = "ReceiveLimitExceeded",
 	TransferAmountBelowMinimum = "TransferAmountBelowMinimum",
 	TransferAmountExceedsMaximum = "TransferAmountExceedsMaximum",
-	TransferAmountExceedsNonSecuredMaximum = "TransferAmountExceedsNonSecuredMaximum"
+	TransferAmountExceedsNonSecuredMaximum = "TransferAmountExceedsNonSecuredMaximum",
+	NoFreeTransfersRemaining = "NoFreeTransfersRemaining"
 }
 local config = {
 	[0] = FailureReasonModule.Invalid,
@@ -40,7 +41,8 @@ local config = {
 	[16] = FailureReasonModule.TransferAmountBelowMinimum,
 	[17] = FailureReasonModule.TransferAmountExceedsMaximum,
 	[18] = FailureReasonModule.TransferAmountExceedsNonSecuredMaximum,
-	[19] = FailureReasonModule.ReceiveLimitExceeded
+	[19] = FailureReasonModule.ReceiveLimitExceeded,
+	[21] = FailureReasonModule.NoFreeTransfersRemaining
 }
 
 function FailureReasonModule.fromValue(p1)

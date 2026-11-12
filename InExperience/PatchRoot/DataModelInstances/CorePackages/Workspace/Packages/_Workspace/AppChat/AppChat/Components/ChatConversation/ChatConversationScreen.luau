@@ -17,7 +17,6 @@ local FStringAppChatConversationMessagesIxpLayerModule = require(AppChat.Flags.F
 local FFlagAppChatMomentShareCardModule = require(AppChat.Flags.FFlagAppChatMomentShareCard)
 local IXPNavigationUtilsModule = require(AppChat.Utils.IXPNavigationUtils)
 local GetTopBarStoreModule = require(AppChat.Stores.GetTopBarStore)
-local GetFFlagAppChatEnableRootedNavigationModule = require(AppChat.Flags.getFFlagAppChatEnableRootedNavigation)
 local FFlagAppChatFixBackButtonOnRotationModule = require(AppChat.Flags.FFlagAppChatFixBackButtonOnRotation)
 local CanPopParentStackModule = require(AppChat.Utils.canPopParentStack)
 
@@ -59,7 +58,7 @@ function ChatConversationScreen.navigationOptions(p1)
 end
 
 function ChatConversationScreen.init(p1)
-	-- upvalues: FFlagAppChatIxpScreenExposureModule (copy), IXPNavigationUtilsModule (copy), FFlagAppChatIxpParallelScreenLayersModule (copy), FStringAppChatConversationComposerIxpLayerModule (copy), FStringAppChatConversationPerformanceIxpLayerModule (copy), FStringAppChatConversationMessagesIxpLayerModule (copy), RoactModule (copy), LoggerModule (copy), EnumScreensModule (copy), GetFFlagAppChatEnableRootedNavigationModule (copy), FFlagAppChatFixBackButtonOnRotationModule (copy), CanPopParentStackModule (copy), GetTopBarStoreModule (copy), CryoModule (copy), ReadingMessagesIsEnabledModule (copy)
+	-- upvalues: FFlagAppChatIxpScreenExposureModule (copy), IXPNavigationUtilsModule (copy), FFlagAppChatIxpParallelScreenLayersModule (copy), FStringAppChatConversationComposerIxpLayerModule (copy), FStringAppChatConversationPerformanceIxpLayerModule (copy), FStringAppChatConversationMessagesIxpLayerModule (copy), RoactModule (copy), LoggerModule (copy), EnumScreensModule (copy), FFlagAppChatFixBackButtonOnRotationModule (copy), CanPopParentStackModule (copy), GetTopBarStoreModule (copy), CryoModule (copy), ReadingMessagesIsEnabledModule (copy)
 	p1.ixpSubscription = if FFlagAppChatIxpScreenExposureModule then IXPNavigationUtilsModule.registerExposureOnFocus(p1.props.navigation, "Party.ConversationPage") else nil
 	p1.composerIxpSubscription = if FFlagAppChatIxpScreenExposureModule and FFlagAppChatIxpParallelScreenLayersModule then IXPNavigationUtilsModule.registerExposureOnFocus(p1.props.navigation, FStringAppChatConversationComposerIxpLayerModule) else nil
 	p1.performanceIxpSubscription = if FFlagAppChatIxpScreenExposureModule and FFlagAppChatIxpParallelScreenLayersModule then IXPNavigationUtilsModule.registerExposureOnFocus(p1.props.navigation, FStringAppChatConversationPerformanceIxpLayerModule) else nil
@@ -81,13 +80,13 @@ function ChatConversationScreen.init(p1)
 	end
 	
 	function p1.navigateToChatDetails()
-		-- upvalues: p1 (copy), LoggerModule (upval), GetFFlagAppChatEnableRootedNavigationModule (upval), Navigation (copy), EnumScreensModule (upval)
+		-- upvalues: p1 (copy), LoggerModule (upval), Navigation (copy), EnumScreensModule (upval)
 		local ConversationIdParam = p1.props.navigation.getParam and p1.props.navigation.getParam("conversationId", nil)
 		LoggerModule:info("Navigate To ChatDetails: {} from {screen}", ConversationIdParam)
-		Navigation.navigate(EnumScreensModule.ChatDetails, if GetFFlagAppChatEnableRootedNavigationModule() then {
+		Navigation.navigate(EnumScreensModule.ChatDetails, {
 			conversationId = ConversationIdParam,
 			isRooted = p1.props.navigation.getParam("isRooted", false)
-		} else { conversationId = ConversationIdParam })
+		})
 	end
 	
 	local WideModeScreenProps = Navigation.getScreenProps("wideMode", false)

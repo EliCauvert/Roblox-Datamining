@@ -6,7 +6,6 @@ local FoundationModule = require(Parent.Foundation)
 local Radius = FoundationModule.Enums.Radius
 local Skeleton = FoundationModule.Skeleton
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UserModel = require(Parent.UserLib).Models.UserModel
 local _ = require(Parent.NotificationsCommon)
 local _ = require(FriendsMenu.friendsMenuModalType)
@@ -29,7 +28,7 @@ local function _(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: UseStyleFunction (copy), GetLocalizedStringsFunction (copy), config (copy), UserModel (copy), UseIsRobloxSubscriberFunction (copy), FFlagEnableBlackbirdCheck (copy), ReactModule (copy), Skeleton (copy), Radius (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), FoundationModule (copy), ImageSetLabel (copy), IconsLogoStudiologoSmall (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), OpenTypeSupport (copy)
+	-- upvalues: UseStyleFunction (copy), GetLocalizedStringsFunction (copy), config (copy), UserModel (copy), UseIsRobloxSubscriberFunction (copy), FFlagEnableBlackbirdCheck (copy), ReactModule (copy), Skeleton (copy), Radius (copy), NormalizeFontFaceFunction (copy), FoundationModule (copy), ImageSetLabel (copy), IconsLogoStudiologoSmall (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), OpenTypeSupport (copy)
 	local UseStyleResult = UseStyleFunction()
 	local Theme = UseStyleResult.Theme
 	local UseStyleResultFont = UseStyleResult.Font
@@ -81,8 +80,7 @@ return function(p1)
 				TextSize = ScaledBaseSize,
 				TextColor3 = Theme.TextEmphasis.Color,
 				TextTransparency = Theme.TextEmphasis.Transparency,
-				Font = if FoundationFontFaceMigration then nil else UseStyleResultFont.Header2.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.TitleLarge.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.TitleLarge.Font),
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextTruncate = Enum.TextTruncate.AtEnd
 			}, {
@@ -107,8 +105,7 @@ return function(p1)
 			TextSize = ScaledBaseSize,
 			TextColor3 = Theme.TextEmphasis.Color,
 			TextTransparency = Theme.TextEmphasis.Transparency,
-			Font = if FoundationFontFaceMigration then nil else UseStyleResultFont.Header2.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.TitleLarge.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.TitleLarge.Font),
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextTruncate = Enum.TextTruncate.AtEnd
 		}),
@@ -145,8 +142,7 @@ return function(p1)
 				TextSize = ScaledBaseSize1,
 				TextColor3 = Theme.TextEmphasis.Color,
 				TextTransparency = Theme.TextEmphasis.Transparency,
-				Font = if FoundationFontFaceMigration then nil else UseStyleResultFont.CaptionBody.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodySmall.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodySmall.Font),
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextTruncate = Enum.TextTruncate.AtEnd,
 				OpenTypeFeatures = if GetFFlagLuaAppEnableOpenTypeSupportFunction() then OpenTypeSupport:getUserNameStylisticAlternative() else nil

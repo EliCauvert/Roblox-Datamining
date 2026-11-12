@@ -40,6 +40,14 @@ local function CallPipSession(p1)
 		-- upvalues: UseStateResult2 (copy), Frozen (upval)
 		UseStateResult2(Frozen.Expanded)
 	end, {})
+	local UseRefResult = ReactModule.useRef(p1.expandCount)
+	ReactModule.useEffect(function()
+		-- upvalues: p1 (copy), UseRefResult (copy), UseResult1 (copy)
+		if UseRefResult.current < p1.expandCount then
+			UseRefResult.current = p1.expandCount
+			UseResult1()
+		end
+	end, { p1.expandCount, UseResult1 })
 	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), Frozen (upval)
 		UseStateResult2(Frozen.Compact)
@@ -107,6 +115,7 @@ local function CallPipWindow(p1)
 		callId = UseCallPipViewModelModuleResult.callId,
 		connectedAt = UseCallPipViewModelModuleResult.connectedAt,
 		enabled = UseCallPipViewModelModuleResult.enabled,
+		expandCount = UseCallPipViewModelModuleResult.expandCount,
 		host = p1.host,
 		participant = UseCallPipViewModelModuleResult.participant,
 		isMicrophoneMuted = p1.isMicrophoneMuted,

@@ -1,18 +1,15 @@
 ﻿local Parent = script.Parent.Parent
 local Parent1 = Parent.Parent
-local TextService = game:GetService("TextService")
 local ReactModule = require(Parent1.React)
 local UIBloxModule = require(Parent1.UIBlox)
 local CryoModule = require(Parent1.Cryo)
-local FoundationModule = require(Parent1.Foundation)
 local GetTextSizeFunction = require(Parent1.Style).GetTextSize
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local NormalizeFontFaceFunction = require(Parent1.Foundation).Utility.normalizeFontFace
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local HeaderBar = UIBloxModule.App.Bar.HeaderBar
 local UtilityActionIcon = UIBloxModule.App.Button.UtilityActionIcon
 local SharedFlagsModule = require(Parent1.SharedFlags)
 local FFlagEnableConsoleRobloxLogo = SharedFlagsModule.FFlagEnableConsoleRobloxLogo
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local AppHeaderBarUseSizeFull = game:DefineFastFlag("AppHeaderBarUseSizeFull", false)
 local FFlagEnableClassicThemeHeaderBackground = SharedFlagsModule.FFlagEnableClassicThemeHeaderBackground
 local AppHeaderBarClassicThemeBackgroundModule = if FFlagEnableClassicThemeHeaderBackground then require(script.Parent.AppHeaderBarClassicThemeBackground) else nil
@@ -28,7 +25,7 @@ local config = {
 }
 
 local function BarTitle(p1)
-	-- upvalues: UseStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), NormalizeFontFaceFunction (copy), CryoModule (copy)
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), GetTextSizeFunction (copy), NormalizeFontFaceFunction (copy), CryoModule (copy)
 	local Tokens = UseStyleFunction().Tokens
 	local Title = p1.title
 	local TitleFont = p1.titleFont or Tokens.Typography.HeadingLarge
@@ -39,15 +36,13 @@ local function BarTitle(p1)
 		TextWrapped = true,
 		LayoutOrder = p1.layoutOrder,
 		Size = ReactModule.useMemo(function(): UDim2
-			-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Title (copy), TitleFont (copy), TextService (upval), Tokens (copy)
-			local _Vector2 = Vector2.new(1e999, 1e999)
-			local TextSize = if FoundationFontFaceMigration then GetTextSizeFunction(Title, TitleFont.FontSize, TitleFont.Font, _Vector2, { addTemporaryPadding = false }) else TextService:GetTextSize(Title, TitleFont.FontSize, TitleFont.Font, _Vector2)
+			-- upvalues: GetTextSizeFunction (upval), Title (copy), TitleFont (copy), Tokens (copy)
+			local TextSize = GetTextSizeFunction(Title, TitleFont.FontSize, TitleFont.Font, Vector2.new(1e999, 1e999), { addTemporaryPadding = false })
 			
 			return UDim2.fromOffset(TextSize.X + 2, TextSize.Y + Tokens.Size.Size_50 * 2)
 		end, { Title, TitleFont.FontSize, TitleFont.Font, Tokens }),
 		Text = Title,
-		Font = if FoundationFontFaceMigration then nil else TitleFont.Font,
-		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(TitleFont.Font) else nil,
+		FontFace = NormalizeFontFaceFunction(TitleFont.Font),
 		TextSize = TitleFont.FontSize,
 		LineHeight = TitleFont.LineHeight,
 		TextColor3 = White100.Color3,

@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AmpV2WizardVendorOverlay", false)

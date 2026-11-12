@@ -8,7 +8,6 @@ local ParentContainerContextModule = require(AppChat.Contexts.ParentContainer.Pa
 local GetTopBarStoreModule = require(AppChat.Stores.GetTopBarStore)
 local FFlagAppChatIxpScreenExposureModule = require(AppChat.Flags.FFlagAppChatIxpScreenExposure)
 local IXPNavigationUtilsModule = require(AppChat.Utils.IXPNavigationUtils)
-local GetFFlagAppChatEnableRootedNavigationModule = require(AppChat.Flags.getFFlagAppChatEnableRootedNavigation)
 local EditChatMembersContainerModule = require(script.Parent.EditChatMembersContainer)
 local LoggerModule = require(script.Parent.Logger)
 
@@ -62,16 +61,16 @@ function EditChatMembersScreen.navigationOptions(p1)
 end
 
 function EditChatMembersScreen.init(p1)
-	-- upvalues: FFlagAppChatIxpScreenExposureModule (copy), IXPNavigationUtilsModule (copy), LoggerModule (copy), GetFFlagAppChatEnableRootedNavigationModule (copy), EnumScreensModule (copy), GetTopBarStoreModule (copy)
+	-- upvalues: FFlagAppChatIxpScreenExposureModule (copy), IXPNavigationUtilsModule (copy), LoggerModule (copy), EnumScreensModule (copy), GetTopBarStoreModule (copy)
 	p1.ixpSubscription = if FFlagAppChatIxpScreenExposureModule then IXPNavigationUtilsModule.registerExposureOnFocus(p1.props.navigation, "Party.ChatMembersPage") else nil
 	
 	function p1.navigateToConversation(ConversationId)
-		-- upvalues: LoggerModule (upval), GetFFlagAppChatEnableRootedNavigationModule (upval), p1 (copy), EnumScreensModule (upval)
+		-- upvalues: LoggerModule (upval), p1 (copy), EnumScreensModule (upval)
 		LoggerModule:info("Navigate To Conversation: {} from {screen}", ConversationId)
-		p1.props.navigation.navigate(EnumScreensModule.ChatConversation, if GetFFlagAppChatEnableRootedNavigationModule() then {
+		p1.props.navigation.navigate(EnumScreensModule.ChatConversation, {
 			conversationId = ConversationId,
 			isRooted = p1.props.navigation.getParam("isRooted", false)
-		} else { conversationId = ConversationId })
+		})
 	end
 	
 	function p1.navigateToToast(p2)
@@ -92,12 +91,12 @@ function EditChatMembersScreen.init(p1)
 end
 
 function EditChatMembersScreen.render(p1)
-	-- upvalues: ArgCheckModule (copy), LoggerModule (copy), GetFFlagAppChatEnableRootedNavigationModule (copy), RoactModule (copy), RootedEditChatMembersContainer (copy), renderContainer (copy)
+	-- upvalues: ArgCheckModule (copy), LoggerModule (copy), RoactModule (copy), RootedEditChatMembersContainer (copy), renderContainer (copy)
 	local NavigationInEditChatMembersScreen = ArgCheckModule.isNotNil(p1.props.navigation, "navigation in EditChatMembersScreen")
 	local ConversationParam = NavigationInEditChatMembersScreen.getParam("conversation", nil)
 	
 	if ConversationParam then
-		return if GetFFlagAppChatEnableRootedNavigationModule() and NavigationInEditChatMembersScreen.getParam("isRooted", false) then RoactModule.createElement(RootedEditChatMembersContainer, {
+		return if NavigationInEditChatMembersScreen.getParam("isRooted", false) then RoactModule.createElement(RootedEditChatMembersContainer, {
 			navigation = NavigationInEditChatMembersScreen,
 			conversation = ConversationParam,
 			navigateToConversation = p1.navigateToConversation,

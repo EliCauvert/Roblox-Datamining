@@ -39,6 +39,8 @@ local FFlagPYMKCarouselStableSelectorsModule = require(PYMKCarousel.Flags.FFlagP
 local FFlagLuaAppPYMKSendUserSeenCollection = require(Parent.SharedFlags).FFlagLuaAppPYMKSendUserSeenCollection
 local FFlagLuaAppUserSeenCollectionUnifiedFields = require(Parent.SharedFlags).FFlagLuaAppUserSeenCollectionUnifiedFields
 local FFlagLuaAppEnableSduiHomePage = require(Parent.SharedFlags).FFlagLuaAppEnableSduiHomePage
+local FFlagPymkCarouselExtendProps = require(Parent.SharedFlags).FFlagPymkCarouselExtendProps
+local HttpService = if FFlagPymkCarouselExtendProps then game:GetService("HttpService") else nil
 local RefreshCount = 0
 local config = {
 	[Enum.KeyCode.ButtonX] = FocusNavigationEventNameEnum.SeeAll
@@ -74,19 +76,37 @@ local function buildDirectRecommendationOverrides(Recommendations)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), UseCollectionImpressionsSignalFunction (copy), FFlagLuaAppEnableSduiHomePage (copy), buildDirectRecommendationOverrides (copy), UseSelectorFunction (copy), GetPYMKSortedRecommendationIdsModule (copy), FFlagPYMKCarouselStableSelectorsModule (copy), TutilsModule (copy), UsePYMKCarouselItemListModule (copy), FFlagLuaAppPYMKSendUserSeenCollection (copy), DashModule (copy), SocialStopwatchModule (copy), FFlagPymkCarouselPresenceStoreMigrationModule (copy), UseDispatchFunction (copy), RecommendationContextType (copy), NetworkingPresence (copy), EventNames (copy), UseThrottledCallbackFunction (copy), HomePagePYMKPresenceFetchThrottleInterval (copy), UseCallbackWhenVisibleModule (copy), RefreshCount (ref), BtnValues (copy), UseUserSeenEventFunction (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (copy), UseUserSeenCollectionEventFunction (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), ReactFocusNavigationModule (copy), config (copy), UsePYMKCarouselUserEntitiesListModule (copy), UseContactsContextModule (copy), PYMKUserModule (copy), ContactsContext (copy), HorizontalUserList (copy), FFlagLuaAppUseFrameBoundsImpressions (copy), FrameBoundsImpressionsTracker (copy), ScreenSizeImpressionsTracker (copy)
+	-- upvalues: ReactModule (copy), FFlagPymkCarouselExtendProps (copy), HttpService (copy), UseCollectionImpressionsSignalFunction (copy), FFlagLuaAppEnableSduiHomePage (copy), buildDirectRecommendationOverrides (copy), UseSelectorFunction (copy), GetPYMKSortedRecommendationIdsModule (copy), FFlagPYMKCarouselStableSelectorsModule (copy), TutilsModule (copy), UsePYMKCarouselItemListModule (copy), FFlagLuaAppPYMKSendUserSeenCollection (copy), DashModule (copy), SocialStopwatchModule (copy), FFlagPymkCarouselPresenceStoreMigrationModule (copy), UseDispatchFunction (copy), RecommendationContextType (copy), NetworkingPresence (copy), EventNames (copy), UseThrottledCallbackFunction (copy), HomePagePYMKPresenceFetchThrottleInterval (copy), UseCallbackWhenVisibleModule (copy), RefreshCount (ref), BtnValues (copy), UseUserSeenEventFunction (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (copy), UseUserSeenCollectionEventFunction (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), ReactFocusNavigationModule (copy), config (copy), UsePYMKCarouselUserEntitiesListModule (copy), UseContactsContextModule (copy), PYMKUserModule (copy), ContactsContext (copy), HorizontalUserList (copy), FFlagLuaAppUseFrameBoundsImpressions (copy), FrameBoundsImpressionsTracker (copy), ScreenSizeImpressionsTracker (copy)
 	local UseRefResult = ReactModule.useRef(nil)
+	local UseMemoResult = if FFlagPymkCarouselExtendProps then ReactModule.useMemo(function(): string
+		-- upvalues: HttpService (upval)
+		return `PYMKCollectionCarousel{HttpService:GenerateGUID(false)}`
+	end, {}) else "PYMKCollectionCarousel"
 	local UseCollectionImpressionsSignalResult, UseCollectionImpressionsSignalResult2 = UseCollectionImpressionsSignalFunction(p1.scrollViewPositionChangedSignal)
 	local RecommendationIds = nil
 	local RecommendationsById = nil
 	
 	if FFlagLuaAppEnableSduiHomePage then
-		local UseMemoResult = ReactModule.useMemo(function()
+		local UseMemoResult1 = ReactModule.useMemo(function()
 			-- upvalues: buildDirectRecommendationOverrides (upval), p1 (copy)
 			return (buildDirectRecommendationOverrides(p1.recommendations or {}))
 		end, { p1.recommendations })
-		RecommendationIds = UseMemoResult.recommendationIds
-		RecommendationsById = UseMemoResult.recommendationsById
+		RecommendationIds = UseMemoResult1.recommendationIds
+		RecommendationsById = UseMemoResult1.recommendationsById
+	elseif FFlagPymkCarouselExtendProps then
+		RecommendationIds = UseSelectorFunction(function(p2)
+			-- upvalues: GetPYMKSortedRecommendationIdsModule (upval)
+			return GetPYMKSortedRecommendationIdsModule(p2.LocalUserId)(p2)
+		end, if FFlagPYMKCarouselStableSelectorsModule then TutilsModule.deepEqual else TutilsModule.shallowEqual)
+		local UseMemoResult3 = ReactModule.useMemo(function()
+			-- upvalues: buildDirectRecommendationOverrides (upval), p1 (copy)
+			return (buildDirectRecommendationOverrides(p1.recommendations or {}))
+		end, { p1.recommendations })
+		
+		if p1.recommendations then
+			RecommendationIds = UseMemoResult3.recommendationIds
+			RecommendationsById = UseMemoResult3.recommendationsById
+		end
 	else
 		RecommendationIds = UseSelectorFunction(function(p2)
 			-- upvalues: GetPYMKSortedRecommendationIdsModule (upval)
@@ -102,7 +122,7 @@ return ReactModule.memo(function(p1)
 		findFriendsTileEnabled = p1.findFriendsTileEnabled,
 		seeAllTileEnabled = p1.seeAllTileEnabled
 	})
-	local UseMemoResult = if FFlagLuaAppPYMKSendUserSeenCollection then ReactModule.useMemo(function()
+	local UseMemoResult2 = if FFlagLuaAppPYMKSendUserSeenCollection then ReactModule.useMemo(function()
 		-- upvalues: DashModule (upval), UsePYMKCarouselItemListModuleResult (copy)
 		return DashModule.filter(UsePYMKCarouselItemListModuleResult, function(p2): boolean
 			return not p2.isButtonTile and not p2.isTooltip
@@ -169,6 +189,16 @@ return ReactModule.memo(function(p1)
 		RefreshCount += 1
 		UseStateResult2(os.clock())
 	end, { RecommendationSessionId, CountRecommendationIds })
+	
+	if FFlagPymkCarouselExtendProps then
+		local IsCountRecommendationIdsAbove = CountRecommendationIds > 0
+		ReactModule.useEffect(function()
+			-- upvalues: IsCountRecommendationIdsAbove (copy), p1 (copy)
+			if IsCountRecommendationIdsAbove and p1.onRecommendationsShown then
+				p1.onRecommendationsShown()
+			end
+		end, { IsCountRecommendationIdsAbove, p1.onRecommendationsShown })
+	end
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FireAnalyticsEventFunction (copy), EventNames (upval), BtnValues (upval), p1 (copy)
 		FireAnalyticsEventFunction(EventNames.CarouselGenericTileClicked, { btn = BtnValues.SeeAll.rawValue() })
@@ -182,12 +212,12 @@ return ReactModule.memo(function(p1)
 		totalNumberOfItems = CountRecommendationIds
 	}) else UseUserSeenCollectionEventFunction(FireAnalyticsEventFunction) else nil
 	local UseResult1 = ReactModule.useCallback(function(List)
-		-- upvalues: FFlagLuaAppPYMKSendUserSeenCollection (upval), UseMemoResult (ref), UseUserSeenCollectionEventResult (ref), UsePYMKCarouselItemListModuleResult (copy), UseUserSeenEventResult (copy)
+		-- upvalues: FFlagLuaAppPYMKSendUserSeenCollection (upval), UseMemoResult2 (ref), UseUserSeenCollectionEventResult (ref), UsePYMKCarouselItemListModuleResult (copy), UseUserSeenEventResult (copy)
 		local Changed = {}
 		
 		for _, value in List do
 			if FFlagLuaAppPYMKSendUserSeenCollection then
-				local UseMemoResultEntry = UseMemoResult[value]
+				local UseMemoResultEntry = UseMemoResult2[value]
 				
 				if UseMemoResultEntry and UseMemoResultEntry.id then
 					UseUserSeenCollectionEventResult.addTileToCollection(UseMemoResultEntry.id, value, UseMemoResultEntry)
@@ -201,7 +231,7 @@ return ReactModule.memo(function(p1)
 	end, {
 		UseUserSeenEventResult,
 		UsePYMKCarouselItemListModuleResult,
-		if FFlagLuaAppPYMKSendUserSeenCollection then UseMemoResult else nil,
+		if FFlagLuaAppPYMKSendUserSeenCollection then UseMemoResult2 else nil,
 		if FFlagLuaAppPYMKSendUserSeenCollection then UseUserSeenCollectionEventResult else nil
 	})
 	local UseEventHandlerMapResult = ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function()
@@ -225,11 +255,10 @@ return ReactModule.memo(function(p1)
 		UseRefResult and UseRefResult.current
 	})
 	local UsePYMKCarouselUserEntitiesListModuleResult = UsePYMKCarouselUserEntitiesListModule(UsePYMKCarouselItemListModuleResult)
-	local UseContactsContextModuleResult = UseContactsContextModule(UsePYMKCarouselItemListModuleResult, if FFlagLuaAppEnableSduiHomePage then RecommendationsById else nil)
+	local UseContactsContextModuleResult = UseContactsContextModule(UsePYMKCarouselItemListModuleResult, if FFlagPymkCarouselExtendProps or FFlagLuaAppEnableSduiHomePage then RecommendationsById else nil)
 	local UseResult2 = ReactModule.useCallback(function(CreateRow, Entity, AbsolutePosition)
-		-- upvalues: ReactModule (upval), PYMKUserModule (upval), p1 (copy), FireAnalyticsEventFunction (copy), FFlagPymkCarouselPresenceStoreMigrationModule (upval), v1 (ref), FFlagLuaAppEnableSduiHomePage (upval), RecommendationsById (ref)
+		-- upvalues: ReactModule (upval), PYMKUserModule (upval), p1 (copy), FireAnalyticsEventFunction (copy), UseMemoResult (ref), FFlagPymkCarouselPresenceStoreMigrationModule (upval), v1 (ref), FFlagPymkCarouselExtendProps (upval), FFlagLuaAppEnableSduiHomePage (upval), RecommendationsById (ref)
 		return ReactModule.createElement(PYMKUserModule, {
-			impressionsTag = "PYMKCollectionCarousel",
 			createRow = CreateRow,
 			entity = Entity,
 			showToast = p1.showToast,
@@ -237,14 +266,18 @@ return ReactModule.memo(function(p1)
 			absolutePosition = AbsolutePosition,
 			recommendationSessionId = p1.recommendationSessionId,
 			openProfilePeekView = p1.openProfilePeekView,
+			impressionsTag = UseMemoResult,
 			forceFetchUserPresence = if FFlagPymkCarouselPresenceStoreMigrationModule then v1 else nil,
-			recommendation = if FFlagLuaAppEnableSduiHomePage and RecommendationsById then RecommendationsById[tostring(Entity.id)] else nil
+			recommendation = if (FFlagPymkCarouselExtendProps or FFlagLuaAppEnableSduiHomePage) and RecommendationsById then RecommendationsById[tostring(Entity.id)] else nil,
+			analyticsSurface = if FFlagPymkCarouselExtendProps then p1.analyticsSurface else nil
 		})
 	end, {
 		p1.showToast, FireAnalyticsEventFunction, p1.recommendationSessionId,
 		p1.openProfilePeekView,
 		if FFlagPymkCarouselPresenceStoreMigrationModule then v1 else nil,
-		if FFlagLuaAppEnableSduiHomePage then RecommendationsById else nil
+		if FFlagPymkCarouselExtendProps or FFlagLuaAppEnableSduiHomePage then RecommendationsById else nil,
+		if FFlagPymkCarouselExtendProps then p1.analyticsSurface else nil,
+		if FFlagPymkCarouselExtendProps then UseMemoResult else nil
 	})
 	
 	return if #UsePYMKCarouselItemListModuleResult == 0 then nil else ReactModule.createElement(ReactModule.Fragment, nil, {
@@ -263,9 +296,9 @@ return ReactModule.memo(function(p1)
 			})
 		}),
 		ScreenSizeImpressionsTracker = ReactModule.createElement(if FFlagLuaAppUseFrameBoundsImpressions then FrameBoundsImpressionsTracker else ScreenSizeImpressionsTracker, {
-			impressionsTag = "PYMKCollectionCarousel",
 			pageContext = p1.pageContext,
 			parentRef = UseRefResult,
+			impressionsTag = UseMemoResult,
 			scrollViewPositionChangedSignal = UseCollectionImpressionsSignalResult,
 			sendImpressions = UseResult1,
 			dataUpdatedTimestamp = UseStateResult

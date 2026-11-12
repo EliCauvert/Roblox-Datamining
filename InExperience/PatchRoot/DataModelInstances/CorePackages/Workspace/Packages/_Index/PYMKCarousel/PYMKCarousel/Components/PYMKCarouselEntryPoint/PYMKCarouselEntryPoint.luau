@@ -8,22 +8,27 @@ local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
 local SetupFireEventFunction = require(PYMKCarousel.Analytics).setupFireEvent
 local GetSessionIdByKeyFunction = DependenciesModule.RoduxAnalytics.Selectors.getSessionIdByKey
 local RECOMMENDATIONSESSIONIDKEY = require(PYMKCarousel.Common.Constants).RECOMMENDATION_SESSION_ID_KEY
+local HomepagePYMKCarouselSourceName = require(PYMKCarousel.Common.Constants).HomepagePYMKCarouselSourceName
 local PYMKCollectionCarouselModule = require(PYMKCarousel.Components.PYMKCollectionCarousel)
 local _ = require(PYMKCarousel.Analytics.AnalyticsTypes)
 local _ = require(PYMKCarousel.Common.DirectRecommendationTypes)
 local FFlagLuaAppUserSeenCollectionUnifiedFields = SharedFlagsModule.FFlagLuaAppUserSeenCollectionUnifiedFields
 local FFlagLuaAppEnableSduiHomePage = SharedFlagsModule.FFlagLuaAppEnableSduiHomePage
+local FFlagPymkCarouselExtendProps = SharedFlagsModule.FFlagPymkCarouselExtendProps
 
 return function(p1)
-	-- upvalues: UseLocalUserIdFunction (copy), FFlagLuaAppEnableSduiHomePage (copy), UseSelectorFunction (copy), GetSessionIdByKeyFunction (copy), RECOMMENDATIONSESSIONIDKEY (copy), React (copy), SetupFireEventFunction (copy), PYMKCollectionCarouselModule (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (copy)
+	-- upvalues: UseLocalUserIdFunction (copy), FFlagLuaAppEnableSduiHomePage (copy), FFlagPymkCarouselExtendProps (copy), UseSelectorFunction (copy), GetSessionIdByKeyFunction (copy), RECOMMENDATIONSESSIONIDKEY (copy), React (copy), SetupFireEventFunction (copy), HomepagePYMKCarouselSourceName (copy), PYMKCollectionCarouselModule (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (copy)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local RecommendationSessionId = nil
-	RecommendationSessionId = if FFlagLuaAppEnableSduiHomePage then p1.recommendationSessionId else UseSelectorFunction(function(p2)
+	RecommendationSessionId = if FFlagLuaAppEnableSduiHomePage then p1.recommendationSessionId elseif FFlagPymkCarouselExtendProps then if p1.recommendations then p1.recommendationSessionId else UseSelectorFunction(function(p2)
+		-- upvalues: GetSessionIdByKeyFunction (upval), RECOMMENDATIONSESSIONIDKEY (upval)
+		return GetSessionIdByKeyFunction(p2)(RECOMMENDATIONSESSIONIDKEY)
+	end) else UseSelectorFunction(function(p2)
 		-- upvalues: GetSessionIdByKeyFunction (upval), RECOMMENDATIONSESSIONIDKEY (upval)
 		return GetSessionIdByKeyFunction(p2)(RECOMMENDATIONSESSIONIDKEY)
 	end)
 	local UseMemoResult = React.useMemo(function()
-		-- upvalues: SetupFireEventFunction (upval), UseLocalUserIdResult (copy), RecommendationSessionId (ref), p1 (copy)
+		-- upvalues: SetupFireEventFunction (upval), UseLocalUserIdResult (copy), RecommendationSessionId (ref), p1 (copy), FFlagPymkCarouselExtendProps (upval), HomepagePYMKCarouselSourceName (upval)
 		return SetupFireEventFunction({
 			infoForAllEvents = {
 				rowNumber = 1,
@@ -32,17 +37,20 @@ return function(p1)
 				sortIndex = p1.sortAnalyticsData.sortIndex,
 				sortId = p1.sortAnalyticsData.sortId,
 				appPage = p1.sortAnalyticsData.appPage,
-				feedRowNumber = p1.sortAnalyticsData.startRow
+				feedRowNumber = p1.sortAnalyticsData.startRow,
+				source = if FFlagPymkCarouselExtendProps then if p1.analyticsSurface then p1.analyticsSurface.source else HomepagePYMKCarouselSourceName else nil
 			},
 			analytics = {
 				Diag = p1.diagService,
 				EventStream = p1.eventIngestService
-			}
+			},
+			context = if FFlagPymkCarouselExtendProps and p1.analyticsSurface then p1.analyticsSurface.context else nil
 		})
 	end, {
 		UseLocalUserIdResult,
 		RecommendationSessionId,
-		p1.sortAnalyticsData
+		p1.sortAnalyticsData,
+		if FFlagPymkCarouselExtendProps then p1.analyticsSurface else nil
 	})
 	
 	return if UseLocalUserIdResult and (RecommendationSessionId or p1.findFriendsTileEnabled) then React.createElement(PYMKCollectionCarouselModule, {
@@ -60,6 +68,8 @@ return function(p1)
 		fireAnalyticsEvent = UseMemoResult,
 		appCompositionEnabled = p1.appCompositionEnabled,
 		sortAnalyticsData = if FFlagLuaAppUserSeenCollectionUnifiedFields then p1.sortAnalyticsData else nil,
-		recommendations = if FFlagLuaAppEnableSduiHomePage then p1.recommendations else nil
+		recommendations = if FFlagPymkCarouselExtendProps or FFlagLuaAppEnableSduiHomePage then p1.recommendations else nil,
+		onRecommendationsShown = if FFlagPymkCarouselExtendProps then p1.onRecommendationsShown else nil,
+		analyticsSurface = if FFlagPymkCarouselExtendProps then p1.analyticsSurface else nil
 	}) else nil
 end

@@ -5,12 +5,11 @@ local Icon = FoundationModule.Icon
 local IconSize = FoundationModule.Enums.IconSize
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local ReactModule = require(Parent.React)
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local t = {}
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: t (copy), UseTokensFunction (copy), ReactModule (copy), GetTextSizeFunction (copy), Icon (copy), IconSize (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: t (copy), UseTokensFunction (copy), ReactModule (copy), GetTextSizeFunction (copy), Icon (copy), IconSize (copy), NormalizeFontFaceFunction (copy)
 	local Icons = Frame.icons or t
 	local Text = Frame.text or ""
 	local v1 = #Icons > 0
@@ -66,8 +65,7 @@ return ReactModule.memo(function(Frame)
 			Size = UDim2.fromOffset(UseMemoResult.X, UseMemoResult.Y),
 			Text = Text,
 			TextColor3 = ContentColorStyle.Color3,
-			Font = if FoundationFontFaceMigration then nil else TitleSmall.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(TitleSmall.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(TitleSmall.Font),
 			TextSize = TitleSmall.FontSize,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Center,

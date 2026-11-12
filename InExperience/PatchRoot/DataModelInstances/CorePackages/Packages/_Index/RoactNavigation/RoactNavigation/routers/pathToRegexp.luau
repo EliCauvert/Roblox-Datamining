@@ -91,9 +91,9 @@ local function lexer(Text: string)
 			local Count1 = 1
 			local NewStartIndex = ""
 			Count = StartIndex2 + 1
-			local StartIndex7: number = Count
+			local StartIndex8: number = Count
 			
-			if string.sub(Text, StartIndex7, StartIndex7) == "?" then
+			if string.sub(Text, StartIndex8, StartIndex8) == "?" then
 				error((("Pattern cannot start with \"?\" at %d"):format(Count)))
 			end
 			local _ = function(p1)
@@ -108,14 +108,13 @@ local function lexer(Text: string)
 				if string.sub(Text, StartIndex11, StartIndex11) == "\\" then
 					local StartIndex12: number = Count
 					Count += 1
-					local Segment1 = string.sub(Text, StartIndex12, StartIndex12)
 					local StartIndex13: number = Count
 					Count += 1
-					NewStartIndex ..= Segment1 .. string.sub(Text, StartIndex13, StartIndex13)
+					NewStartIndex ..= string.sub(Text, StartIndex12, StartIndex12) .. string.sub(Text, StartIndex13, StartIndex13)
 				end
-				local StartIndex8: number = Count
+				local StartIndex9: number = Count
 				
-				if string.sub(Text, StartIndex8, StartIndex8) == ")" then
+				if string.sub(Text, StartIndex9, StartIndex9) == ")" then
 					Count1 -= 1
 					
 					if Count1 == 0 then
@@ -123,9 +122,9 @@ local function lexer(Text: string)
 						break
 					end
 				else
-					local StartIndex10: number = Count
+					local StartIndex6: number = Count
 					
-					if string.sub(Text, StartIndex10, StartIndex10) == "(" then
+					if string.sub(Text, StartIndex6, StartIndex6) == "(" then
 						Count1 += 1
 						local StartIndex14 = Count + 1
 						
@@ -134,9 +133,9 @@ local function lexer(Text: string)
 						end
 					end
 				end
-				local StartIndex6: number = Count
+				local StartIndex7: number = Count
 				Count += 1
-				NewStartIndex ..= string.sub(Text, StartIndex6, StartIndex6)
+				NewStartIndex ..= string.sub(Text, StartIndex7, StartIndex7)
 			end
 			if Count1 ~= 0 then
 				error((("Unbalanced pattern at %d"):format(StartIndex2)))
@@ -151,12 +150,12 @@ local function lexer(Text: string)
 			})
 			StartIndex2 = Count
 		else
-			local StartIndex9: number = StartIndex2
+			local StartIndex10: number = StartIndex2
 			StartIndex2 += 1
 			Count = {
 				type = "CHAR",
 				index = StartIndex2,
-				value = string.sub(Text, StartIndex9, StartIndex9)
+				value = string.sub(Text, StartIndex10, StartIndex10)
 			}
 			local NewStartIndex = List1
 			table.insert(NewStartIndex, Count)
@@ -335,9 +334,9 @@ local PathToRegexpModule = {
 				
 				if not v5 then
 					if Count1 <= #LexerResult and LexerResult[Count1].type == "ESCAPED_CHAR" then
-						local Count7: number = Count1
+						local Count6: number = Count1
 						Count1 += 1
-						v5 = LexerResult[Count7].value
+						v5 = LexerResult[Count6].value
 					else
 						v5 = nil
 					end
@@ -351,9 +350,9 @@ local PathToRegexpModule = {
 					end
 					local v6 = nil
 					if Count1 <= #LexerResult and LexerResult[Count1].type == "OPEN" then
-						local Count8: number = Count1
+						local Count7: number = Count1
 						Count1 += 1
-						v6 = LexerResult[Count8].value
+						v6 = LexerResult[Count7].value
 					else
 						v6 = nil
 					end
@@ -362,50 +361,50 @@ local PathToRegexpModule = {
 						local v7 = nil
 						
 						if Count1 <= #LexerResult and LexerResult[Count1].type == "NAME" then
-							local Count9: number = Count1
+							local Count8: number = Count1
 							Count1 += 1
-							v7 = LexerResult[Count9].value
+							v7 = LexerResult[Count8].value
 						else
 							v7 = nil
 						end
-						local Name = v7 or ""
+						local V49 = v7 or ""
 						local v8 = nil
 						
 						if Count1 <= #LexerResult and LexerResult[Count1].type == "PATTERN" then
-							local Count10: number = Count1
+							local Count9: number = Count1
 							Count1 += 1
-							v8 = LexerResult[Count10].value
+							v8 = LexerResult[Count9].value
 						else
 							v8 = nil
 						end
-						local V43 = v8 or ""
+						local V52 = v8 or ""
 						local ConsumeTextResult1: string = consumeText()
 						mustConsume("CLOSE")
 						
-						if Name == "" and V43 ~= "" then
-							Name = Count
+						if V49 == "" and V52 ~= "" then
+							V49 = Count
 							Count += 1
 						end
-						if Name ~= "" and Name ~= 0 and (V43 == nil or V43 == "") then
-							V43 = Formatted
+						if V49 ~= "" and V49 ~= 0 and (V52 == nil or V52 == "") then
+							V52 = Formatted
 						end
-						local config1 = {
-							name = Name,
-							pattern = V43,
+						local config = {
+							name = V49,
+							pattern = V52,
 							prefix = ConsumeTextResult,
 							suffix = ConsumeTextResult1
 						}
-						local Value = nil
+						local v9 = nil
 						
 						if Count1 <= #LexerResult and LexerResult[Count1].type == "MODIFIER" then
-							local Count6: number = Count1
+							local Count10: number = Count1
 							Count1 += 1
-							Value = LexerResult[Count6].value
+							v9 = LexerResult[Count10].value
 						else
-							Value = nil
+							v9 = nil
 						end
-						config1.modifier = Value or ""
-						table.insert(List, config1)
+						config.modifier = v9 or ""
+						table.insert(List, config)
 					else
 						mustConsume("END")
 					end
@@ -449,22 +448,22 @@ function PathToRegexpModule.tokensToFunction(ParseResult, p3)
 				Text ..= value
 				continue
 			end
-			local v9 = if p4 then p4[tostring(value.name)] else nil
+			local v10 = if p4 then p4[tostring(value.name)] else nil
 			local IsModifierMatch: boolean = value.modifier == "?" or value.modifier == "*"
 			local IsModifierMatch1: boolean = value.modifier == "*" or value.modifier == "+"
 			
-			if Array.isArray(v9) then
+			if Array.isArray(v10) then
 				if not IsModifierMatch1 then
 					error((("Expected \"%s\" to not repeat, but got an array"):format(value.name)))
 				end
-				if #v9 == 0 then
+				if #v10 == 0 then
 					if not IsModifierMatch then
 						error((("Expected \"%s\" to not be empty"):format(value.name)))
 					else
 						continue
 					end
 				end
-				for _, value1 in v9 do
+				for _, value1 in v10 do
 					local EncodeResult = Encode(value1, value)
 					
 					if Validate and not MapResult[i]:test(EncodeResult) then
@@ -473,10 +472,10 @@ function PathToRegexpModule.tokensToFunction(ParseResult, p3)
 					Text ..= value.prefix .. EncodeResult .. value.suffix
 				end
 			else
-				local ValueType = type(v9)
+				local ValueType = type(v10)
 				
 				if ValueType == "string" or ValueType == "number" then
-					local EncodeResult = Encode(tostring(v9), value)
+					local EncodeResult = Encode(tostring(v10), value)
 					
 					if Validate and not MapResult[i]:test(EncodeResult) then
 						error((("Expected \"%s\" to match \"%s\", but got \"%s\""):format(value.name, value.pattern, EncodeResult)))
@@ -521,15 +520,15 @@ function PathToRegexpModule.regexpToFunction(PathToRegexpResult, p5, p6)
 		
 		for i = 2, ExecResult.n do
 			if ExecResult[i] ~= nil then
-				local v10 = p5[i - 1]
+				local v11 = p5[i - 1]
 				
-				if v10.modifier == "*" or v10.modifier == "+" then
-					Params[v10.name] = Array.map(string.split(ExecResult[i], v10.prefix .. v10.suffix), function(p8)
-						-- upvalues: Decode (upval), v10 (copy)
-						return Decode(p8, v10)
+				if v11.modifier == "*" or v11.modifier == "+" then
+					Params[v11.name] = Array.map(string.split(ExecResult[i], v11.prefix .. v11.suffix), function(p8)
+						-- upvalues: Decode (upval), v11 (copy)
+						return Decode(p8, v11)
 					end)
 				else
-					Params[v10.name] = Decode(ExecResult[i], v10)
+					Params[v11.name] = Decode(ExecResult[i], v11)
 				end
 			end
 		end

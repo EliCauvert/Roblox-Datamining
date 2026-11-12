@@ -4,7 +4,7 @@ local ReactModule = require(Parent1.React)
 local FoundationModule = require(Parent1.Foundation)
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local FoundationFontFaceMigration = require(Parent1.SharedFlags).FFlagFontFacePlayerList and FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local FFlagFontFacePlayerList = require(Parent1.SharedFlags).FFlagFontFacePlayerList
 local FormatStatStringModule = require(Parent.Common.FormatStatString)
 local UseStyleFunction = require(Parent1.UIBlox).Core.Style.useStyle
 local UseLayoutValuesModule = require(Parent.Common.useLayoutValues)
@@ -12,10 +12,10 @@ local FFlagRemoveNewPlayerListOverlayModule = require(Parent.Flags.FFlagRemoveNe
 local FFlagEnableMobilePlayerListOnConsoleModule = require(Parent.Flags.FFlagEnableMobilePlayerListOnConsole)
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseStyleFunction (copy), UseLayoutValuesModule (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), NormalizeFontFaceFunction (copy), FFlagEnableMobilePlayerListOnConsoleModule (copy), ReactModule (copy), FormatStatStringModule (copy), FFlagRemoveNewPlayerListOverlayModule (copy)
+	-- upvalues: UseStyleFunction (copy), UseLayoutValuesModule (copy), FFlagFontFacePlayerList (copy), UseTokensFunction (copy), NormalizeFontFaceFunction (copy), FFlagEnableMobilePlayerListOnConsoleModule (copy), ReactModule (copy), FormatStatStringModule (copy), FFlagRemoveNewPlayerListOverlayModule (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseLayoutValuesModuleResult = UseLayoutValuesModule()
-	local UseTokensResult = if FoundationFontFaceMigration then UseTokensFunction() else nil
+	local UseTokensResult = if FFlagFontFacePlayerList then UseTokensFunction() else nil
 	local NormalizeFontFaceResult = nil
 	local StatTextSize = nil
 	local TextDefault = UseStyleResult.Theme.TextDefault
@@ -27,13 +27,13 @@ return ReactModule.memo(function(p1)
 	
 	if UseLayoutValuesModuleResult.IsTenFoot then
 		StatTextSize = UseLayoutValuesModuleResult.StatTextSize
-		NormalizeFontFaceResult = if p1.isTeamEntry then if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseLayoutValuesModuleResult.TeamStatFont) else UseLayoutValuesModuleResult.TeamStatFont elseif FoundationFontFaceMigration then NormalizeFontFaceFunction(UseLayoutValuesModuleResult.StatFont) else UseLayoutValuesModuleResult.StatFont
+		NormalizeFontFaceResult = if p1.isTeamEntry then if FFlagFontFacePlayerList then NormalizeFontFaceFunction(UseLayoutValuesModuleResult.TeamStatFont) else UseLayoutValuesModuleResult.TeamStatFont elseif FFlagFontFacePlayerList then NormalizeFontFaceFunction(UseLayoutValuesModuleResult.StatFont) else UseLayoutValuesModuleResult.StatFont
 	else
-		NormalizeFontFaceResult = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.CaptionLarge.Font) else UseStyleResult.Font.CaptionHeader.Font
+		NormalizeFontFaceResult = if FFlagFontFacePlayerList then NormalizeFontFaceFunction(UseTokensResult.Typography.CaptionLarge.Font) else UseStyleResult.Font.CaptionHeader.Font
 		StatTextSize = if FFlagEnableMobilePlayerListOnConsoleModule then UseLayoutValuesModuleResult.StatTextSize else UseStyleResult.Font.CaptionHeader.RelativeSize * UseStyleResult.Font.BaseSize
 	end
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: p1 (copy), FormatStatStringModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceResult (ref), StatTextSize (ref), Color (copy), Transparency (copy), StrokeColor (copy), StrokeTransparency (copy)
+		-- upvalues: p1 (copy), FormatStatStringModule (upval), FFlagFontFacePlayerList (upval), NormalizeFontFaceResult (ref), StatTextSize (ref), Color (copy), Transparency (copy), StrokeColor (copy), StrokeTransparency (copy)
 		return {
 			BackgroundTransparency = 1,
 			Text = p1.statValue:map(function(p2)
@@ -42,8 +42,8 @@ return ReactModule.memo(function(p1)
 			end),
 			Size = p1.showStatTitle and UDim2.fromScale(1, 0.5) or UDim2.fromScale(1, 1),
 			Position = p1.showStatTitle and UDim2.fromScale(0, 0.5) or UDim2.fromScale(0, 0),
-			Font = if FoundationFontFaceMigration then nil else NormalizeFontFaceResult,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceResult else nil,
+			Font = if FFlagFontFacePlayerList then nil else NormalizeFontFaceResult,
+			FontFace = if FFlagFontFacePlayerList then NormalizeFontFaceResult else nil,
 			TextSize = StatTextSize,
 			TextColor3 = Color,
 			TextTransparency = Transparency,
@@ -74,8 +74,8 @@ return ReactModule.memo(function(p1)
 				Text = p1.statName,
 				Size = UDim2.fromScale(1, 0.5),
 				Position = UDim2.fromScale(0, 0),
-				Font = if FoundationFontFaceMigration then nil else UseLayoutValuesModuleResult.TitleStatFont,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseLayoutValuesModuleResult.TitleStatFont) else nil,
+				Font = if FFlagFontFacePlayerList then nil else UseLayoutValuesModuleResult.TitleStatFont,
+				FontFace = if FFlagFontFacePlayerList then NormalizeFontFaceFunction(UseLayoutValuesModuleResult.TitleStatFont) else nil,
 				TextSize = StatTextSize,
 				TextColor3 = Color,
 				TextTransparency = Transparency,
@@ -85,7 +85,7 @@ return ReactModule.memo(function(p1)
 			}),
 			StatText = ReactModule.createElement("TextLabel", UseMemoResult)
 		}) else ReactModule.createElement("TextLabel", UseMemoResult),
-		DoubleOverLay = if FFlagRemoveNewPlayerListOverlayModule or not p1.doubleOverlay or not p1.overlayStyle then nil else ReactModule.createElement("Frame", {
+		DoubleOverLay = if FFlagRemoveNewPlayerListOverlayModule or (not p1.doubleOverlay or not p1.overlayStyle) then nil else ReactModule.createElement("Frame", {
 			ZIndex = 1,
 			BorderSizePixel = 0,
 			Size = UDim2.new(1, 0, 1, 0),

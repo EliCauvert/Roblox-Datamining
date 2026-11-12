@@ -31,6 +31,22 @@ local config = {
 		lastUpdated = { 2026, 10, 22 }
 	}
 }
+local config1 = {
+	Connected = {
+		eventName = "VoiceConnected",
+		description = "Counted wherever the voiceConnectEvent event stream event is sent, so the two stay comparable. customFields: source (the VOICE_CONNECTION_SOURCE that started the join: AUTO_CONNECT, IN_EXPERIENCE, SETTINGS_TOGGLE_ON, or none). User-initiated connects are every source except AUTO_CONNECT.",
+		links = "",
+		backends = { "RobloxTelemetryCounter" },
+		lastUpdated = { 2026, 11, 3 }
+	},
+	Disconnected = {
+		eventName = "VoiceDisconnected",
+		description = "The voice session reached the Ended state, counted alongside the voiceDisconnectReasonEvent event stream event. customFields: reason (the VOICE_DISCONNECT_REASON: USER_DISCONNECT when the user turned voice off, MODERATED, or SYSTEM for everything else).",
+		links = "",
+		backends = { "RobloxTelemetryCounter" },
+		lastUpdated = { 2026, 11, 3 }
+	}
+}
 
 function AnalyticsModule.new(_impl)
 	-- upvalues: RbxAnalyticsService (copy), AnalyticsModule (copy)
@@ -326,6 +342,16 @@ function AnalyticsModule:reportVoiceRewarmClicked(p1, p2)
 	TelemetryService:LogCounter(config.Clicked, {
 		customFields = { rearmed = tostring(p1), consequence = p2 or "none" }
 	}, 1)
+end
+
+function AnalyticsModule:reportVoiceConnected(p1)
+	-- upvalues: TelemetryService (copy), config1 (copy)
+	TelemetryService:LogCounter(config1.Connected, { customFields = { source = p1 or "none" } }, 1)
+end
+
+function AnalyticsModule:reportVoiceDisconnected(p1)
+	-- upvalues: TelemetryService (copy), config1 (copy)
+	TelemetryService:LogCounter(config1.Disconnected, { customFields = { reason = p1 or "none" } }, 1)
 end
 
 return AnalyticsModule

@@ -4,10 +4,9 @@ local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagBuildExperienceInGameShell = SharedFlagsModule.FFlagBuildExperienceInGameShell
-local FFlagBuildExperienceChatResourceAttachments = SharedFlagsModule.FFlagBuildExperienceInstanceSelection and (FFlagBuildExperienceInGameShell and SharedFlagsModule.FFlagBuildExperienceChatResourceAttachments)
-local FFlagBuildExperienceChatImageAttachmentsModule = require(BuildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
-local IsImageAttachmentSupportedModule = if SharedFlagsModule.FFlagBuildExperienceInGameCaptureToChat and FFlagBuildExperienceChatImageAttachmentsModule then require(BuildExperience.utils.isImageAttachmentSupported) else nil
-local IsImageAttachmentSupportedModule1 = SharedFlagsModule.FFlagBuildExperienceInGameCaptureToChat and (FFlagBuildExperienceChatImageAttachmentsModule and IsImageAttachmentSupportedModule())
+local FFlagBuildExperienceInGameShell1 = SharedFlagsModule.FFlagBuildExperienceInstanceSelection and FFlagBuildExperienceInGameShell
+local IsImageAttachmentSupportedModule = if SharedFlagsModule.FFlagBuildExperienceInGameCaptureToChat then require(BuildExperience.utils.isImageAttachmentSupported) else nil
+local IsImageAttachmentSupportedModule1 = SharedFlagsModule.FFlagBuildExperienceInGameCaptureToChat and IsImageAttachmentSupportedModule()
 local DisplayModule = if FFlagBuildExperienceInGameShell then require(Parent.Display) else nil
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
@@ -18,9 +17,9 @@ local _ = require(BuildExperience.Components.BuildPillMenu.BuildPillMenuPortal)
 local BuildModeLaunchModule = require(Parent.BuildExperiencePlaytestLaunch.BuildModeLaunch)
 local ChatSheetModule = require(BuildExperience.Components.ChatSheet.ChatSheet)
 local InGameBuildShellModule = if FFlagBuildExperienceInGameShell then require(BuildExperience.Components.ChatSheet.InGameBuildShell) else nil
-local InstanceSelectionProtocolModule = if FFlagBuildExperienceChatResourceAttachments then require(BuildExperience.Components.ChatSheet.InstanceSelectionProtocol) else nil
-local LibraryTypesModule = if FFlagBuildExperienceChatResourceAttachments then require(BuildExperience.Components.Library.LibraryTypes) else nil
-local ClientDataModelCollectorModule = if FFlagBuildExperienceChatResourceAttachments then require(BuildExperience.Chat.clientDataModelCollector) else nil
+local InstanceSelectionProtocolModule = if FFlagBuildExperienceInGameShell1 then require(BuildExperience.Components.ChatSheet.InstanceSelectionProtocol) else nil
+local LibraryTypesModule = if FFlagBuildExperienceInGameShell1 then require(BuildExperience.Components.Library.LibraryTypes) else nil
+local ClientDataModelCollectorModule = if FFlagBuildExperienceInGameShell1 then require(BuildExperience.Chat.clientDataModelCollector) else nil
 local UseCaptureToChatModule = require(BuildExperience.Components.ChatSheet.useCaptureToChat)
 local GetAssistantBuildStoreModule = if FFlagBuildExperienceInGameShell then require(BuildExperience.Stores.GetAssistantBuildStore) else nil
 local GetPlayButtonStoreModule = require(BuildExperience.Stores.GetPlayButtonStore)
@@ -29,7 +28,6 @@ local TeamCreateUtilsModule = require(Parent.BuildExperiencePlaytestLaunch.teamC
 local TrackBuildOpenSafetyServiceModule = require(BuildExperience.utils.trackBuildOpenSafetyService)
 local FFlagReportBuildUIVisibilityModule = require(BuildExperience.Flags.FFlagReportBuildUIVisibility)
 local ClientLogsCollectorModule = require(BuildExperience.Chat.clientLogsCollector)
-local FFlagBuildExperienceChatSheetReversedContentModule = require(BuildExperience.Flags.FFlagBuildExperienceChatSheetReversedContent)
 local LocalizationProvider = require(Parent.Localization).LocalizationProvider
 local AppInteractionFeedbackProvider = require(Parent.RobloxAppInteractionFeedbackConfig).AppInteractionFeedbackProvider
 
@@ -64,7 +62,7 @@ local function beginInstanceSelection()
 end
 
 local function ConnectedChatSheet(p1)
-	-- upvalues: GetPlayButtonStoreModule (copy), IsImageAttachmentSupportedModule1 (copy), UseCaptureToChatModule (copy), TeamCreateUtilsModule (copy), BuildModeLaunchModule (copy), FFlagReportBuildUIVisibilityModule (copy), TrackBuildOpenSafetyServiceModule (copy), ReactModule (copy), BuildExperience (copy), ChatSheetModule (copy), list (copy), FFlagBuildExperienceChatSheetReversedContentModule (copy), list1 (copy), FIntInGameBuildChatSheetSnapPoint (copy), FFlagBuildExperienceInGameShell (copy), GetAssistantBuildStoreModule (copy), DisplayModule (copy), SignalsReactModule (copy), InGameBuildShellModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), beginInstanceSelection (copy)
+	-- upvalues: GetPlayButtonStoreModule (copy), IsImageAttachmentSupportedModule1 (copy), UseCaptureToChatModule (copy), TeamCreateUtilsModule (copy), BuildModeLaunchModule (copy), FFlagReportBuildUIVisibilityModule (copy), TrackBuildOpenSafetyServiceModule (copy), ReactModule (copy), BuildExperience (copy), ChatSheetModule (copy), list (copy), list1 (copy), FFlagBuildExperienceInGameShell (copy), GetAssistantBuildStoreModule (copy), DisplayModule (copy), SignalsReactModule (copy), InGameBuildShellModule (copy), FFlagBuildExperienceInGameShell1 (copy), beginInstanceSelection (copy)
 	local PlayButtonStoreModule = GetPlayButtonStoreModule()
 	local UseIsActiveResult = PlayButtonStoreModule.useIsActive()
 	local UseCaptureToChatModuleResult = if IsImageAttachmentSupportedModule1 then UseCaptureToChatModule(function()
@@ -90,7 +88,7 @@ local function ConnectedChatSheet(p1)
 			-- upvalues: PlayButtonStoreModule (copy)
 			PlayButtonStoreModule.setIsActive(false)
 		end, { PlayButtonStoreModule }),
-		snapPoints = if IsViewer then list elseif FFlagBuildExperienceChatSheetReversedContentModule then list1 else { FIntInGameBuildChatSheetSnapPoint / 100 },
+		snapPoints = if IsViewer then list else list1,
 		topBarPillMenuTarget = if UseIsActiveResult and not IsViewer then config else nil,
 		universeId = if UseResumeTargetResult then UseResumeTargetResult.universeId else nil,
 		placeId = if UseResumeTargetResult then UseResumeTargetResult.placeId else nil,
@@ -124,7 +122,7 @@ local function ConnectedChatSheet(p1)
 						}
 					end)
 				end, { DisplayStore }),
-				onSelectionActivated = if FFlagBuildExperienceChatResourceAttachments and not IsViewer then beginInstanceSelection else nil
+				onSelectionActivated = if FFlagBuildExperienceInGameShell1 and not IsViewer then beginInstanceSelection else nil
 			})
 		})
 	else

@@ -1,5 +1,6 @@
 ﻿local AppNavigationRegistryModule = require(script.AppNavigationRegistry)
-local FFlagEnableOnScreenAPIIntegration = require(script.Parent.SharedFlags).FFlagEnableOnScreenAPIIntegration
+local Parent = script.Parent
+local FFlagEnableOnScreenAPIIntegration = require(Parent.SharedFlags).FFlagEnableOnScreenAPIIntegration
 
 return {
 	AppNavigationRegistry = AppNavigationRegistryModule,
@@ -7,6 +8,7 @@ return {
 	NavigationCommands = require(script.NavigationCommands),
 	useNavigationProps = require(script.useNavigationProps),
 	withNavigationProps = require(script.withNavigationProps),
+	withNavigationFocusIgnoringNavigation = if require(Parent.SharedFlags).FFlagSignalsNavP3hMisc then require(script.withNavigationFocusIgnoringNavigation) else nil,
 	CurrentTabContext = require(script.CurrentTabContext),
 	TopBarContext = require(script.TopBarContext),
 	useIsRouteOnScreen = if FFlagEnableOnScreenAPIIntegration then require(script.useIsRouteOnScreen) else nil,

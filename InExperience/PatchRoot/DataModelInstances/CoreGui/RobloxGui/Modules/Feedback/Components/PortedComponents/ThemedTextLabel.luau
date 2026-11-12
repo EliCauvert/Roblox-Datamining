@@ -2,11 +2,9 @@
 local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
 local Roact = InGameMenuDependenciesModule.Roact
 local Cryo = InGameMenuDependenciesModule.Cryo
-local FoundationModule = require(CorePackages.Packages.Foundation)
 local T = InGameMenuDependenciesModule.t
 local WithStyleFunction = require(CorePackages.Packages.UIBlox).Core.Style.withStyle
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(CorePackages.Packages.Foundation).Utility.normalizeFontFace
 local GlobalConfigModule = require(script.Parent.Parent.Parent.GlobalConfig)
 local config = {
 	Title = "HeadingLarge",
@@ -40,14 +38,13 @@ local StrictInterfaceResult = T.strictInterface({
 })
 
 return function(p1)
-	-- upvalues: GlobalConfigModule (copy), StrictInterfaceResult (copy), WithStyleFunction (copy), Cryo (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), config (copy), Roact (copy)
+	-- upvalues: GlobalConfigModule (copy), StrictInterfaceResult (copy), WithStyleFunction (copy), Cryo (copy), NormalizeFontFaceFunction (copy), config (copy), Roact (copy)
 	if GlobalConfigModule.propValidation then
 		assert(StrictInterfaceResult(p1))
 	end
 	return WithStyleFunction(function(p2)
-		-- upvalues: p1 (copy), Cryo (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), config (upval), Roact (upval)
+		-- upvalues: p1 (copy), Cryo (upval), NormalizeFontFaceFunction (upval), config (upval), Roact (upval)
 		local ThemeEntry = p2.Theme[p1.themeKey or "TextDefault"]
-		local v1 = p2.Font[p1.fontKey or "Body"]
 		
 		return Roact.createElement("TextLabel", (Cryo.Dictionary.join({
 			TextColor3 = ThemeEntry.Color,
@@ -56,9 +53,9 @@ return function(p1)
 			BackgroundTransparency = 1,
 			fontKey = Cryo.None,
 			themeKey = Cryo.None,
-			Font = if FoundationFontFaceMigration then Cryo.None else v1.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography[config[p1.fontKey or "Body"]].Font) else nil,
-			TextSize = v1.RelativeSize * p2.Font.BaseSize
+			Font = Cryo.None,
+			FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography[config[p1.fontKey or "Body"]].Font),
+			TextSize = p2.Font[p1.fontKey or "Body"].RelativeSize * p2.Font.BaseSize
 		})))
 	end)
 end

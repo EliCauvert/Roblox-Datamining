@@ -3,7 +3,6 @@ local Parent = GameTile.Parent
 local _ = require(Parent.Style)
 local _ = require(Parent.Foundation)
 local _ = require(GameTile.GameTileTypes)
-local FFlagLuaAppMigrateGameTileFooterValueFixes = require(Parent.SharedFlags).FFlagLuaAppMigrateGameTileFooterValueFixes
 local FFlagLuaAppUnifyPlayButtonTile = require(Parent.SharedFlags).FFlagLuaAppUnifyPlayButtonTile
 local FFlagLuaAppUnifyPlayButtonTileIxp = require(Parent.SharedFlags).FFlagLuaAppUnifyPlayButtonTileIxp
 local GameTileExperimentationModule = require(GameTile.GameTileExperimentation)
@@ -76,7 +75,6 @@ return {
 	end,
 	getElementSizes = MemoizeResult,
 	getContainmentSidePadding = function(p1, p2, p3)
-		-- upvalues: FFlagLuaAppMigrateGameTileFooterValueFixes (copy)
-		return if p3 then if p2 == "Wide" or p2 == "Event" then if FFlagLuaAppMigrateGameTileFooterValueFixes then p3.Padding.Medium else p3.Padding.Large elseif FFlagLuaAppMigrateGameTileFooterValueFixes then p3.Size.Size_150 else p3.Padding.Small elseif p2 == "Wide" or p2 == "Event" then p1.Size.Size_300 else p1.Size.Size_150
+		return if p3 then if p2 == "Wide" or p2 == "Event" then p3.Padding.Medium else p3.Size.Size_150 elseif p2 == "Wide" or p2 == "Event" then p1.Size.Size_300 else p1.Size.Size_150
 	end
 }

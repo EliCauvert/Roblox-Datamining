@@ -3,9 +3,95 @@ local CryoModule = require(Parent.Cryo)
 local CreateSignalFunction = require(Parent.Signals).createSignal
 local FFlagPlayerSearchEnableOnlineFrequents = require(Parent.SharedFlags).FFlagPlayerSearchEnableOnlineFrequents
 local FFlagProfileInsightsParseClassmates = require(Parent.SharedFlags).FFlagProfileInsightsParseClassmates
+local FFlagProfileInsightsKeyByRankingStrategy = require(Parent.SharedFlags).FFlagProfileInsightsKeyByRankingStrategy
+local FFlagTrustedFriendCandidatesSection = require(Parent.SharedFlags).FFlagTrustedFriendCandidatesSection
 
-local function createProfileInsight(UserId, p1)
-	-- upvalues: CryoModule (copy), FFlagPlayerSearchEnableOnlineFrequents (copy), FFlagProfileInsightsParseClassmates (copy)
+local function _(p1): boolean
+	return p1 ~= nil and p1 ~= -1
+end
+
+local config = {
+	mutualFriendInsight = {
+		field = "mutualFriends",
+		hasValue = function(p1): boolean
+			return #p1.mutualFriends > 0
+		end
+	},
+	offlineFrequentsInsight = {
+		field = "isOfflineFrequents",
+		hasValue = function(p1): boolean
+			return p1.isOfflineFrequents == true
+		end
+	},
+	playedTogetherInsight = if FFlagPlayerSearchEnableOnlineFrequents then {
+		field = "isOfflineFrequents",
+		hasValue = function(p1): boolean
+			return p1.isOfflineFrequents == true
+		end
+	} else nil,
+	friendshipAgeInsight = {
+		field = "friendshipAgeUnixSeconds",
+		hasValue = function(p1): boolean
+			local FriendshipAgeUnixSeconds = p1.friendshipAgeUnixSeconds
+			
+			return FriendshipAgeUnixSeconds ~= nil and FriendshipAgeUnixSeconds ~= -1
+		end
+	},
+	friendRequestOriginInsight = {
+		field = "friendRequestOriginSource",
+		hasValue = function(p1): boolean
+			-- upvalues: FFlagTrustedFriendCandidatesSection (copy)
+			if FFlagTrustedFriendCandidatesSection then
+				local FriendRequestOriginSource = p1.friendRequestOriginSource
+				
+				return FriendRequestOriginSource ~= nil and FriendRequestOriginSource ~= -1
+			else
+				local FriendRequestOriginSource = p1.friendRequestOriginSource
+				
+				return FriendRequestOriginSource ~= nil and FriendRequestOriginSource ~= -1
+			end
+		end
+	},
+	accountCreationDateInsight = {
+		field = "accountCreationDateUnixSeconds",
+		hasValue = function(p1): boolean
+			local AccountCreationDateUnixSeconds = p1.accountCreationDateUnixSeconds
+			
+			return AccountCreationDateUnixSeconds ~= nil and AccountCreationDateUnixSeconds ~= -1
+		end
+	},
+	accountLocationInsight = {
+		field = "localizedCountryName",
+		hasValue = function(p1): boolean
+			local LocalizedCountryName = p1.localizedCountryName
+			
+			return LocalizedCountryName ~= nil and LocalizedCountryName ~= ""
+		end
+	},
+	classmatesInsight = if FFlagProfileInsightsParseClassmates then {
+		field = "isClassmate",
+		hasValue = function(p1): boolean
+			return p1.isClassmate == true
+		end
+	} else nil
+}
+
+local function getRankedInsightKeys(ProfileInsights, p1)
+	-- upvalues: config (copy)
+	local List = {}
+	
+	for _, profileInsight in ProfileInsights do
+		for i, value in config do
+			if profileInsight[i] and value and table.find(List, value.field) == nil and value.hasValue(p1) then
+				table.insert(List, value.field)
+			end
+		end
+	end
+	return List
+end
+
+local function createProfileInsight(UserId, p2)
+	-- upvalues: CryoModule (copy), FFlagPlayerSearchEnableOnlineFrequents (copy), FFlagProfileInsightsParseClassmates (copy), FFlagProfileInsightsKeyByRankingStrategy (copy), getRankedInsightKeys (copy)
 	local config = {
 		targetUserId = "",
 		isOfflineFrequents = false,
@@ -13,13 +99,13 @@ local function createProfileInsight(UserId, p1)
 		mutualFriends = {}
 	}
 	
-	if not p1 or type(p1) ~= "table" then
+	if not p2 or type(p2) ~= "table" then
 		return config
 	end
-	if p1.targetUser then
-		config.targetUserId = tostring(p1.targetUser)
+	if p2.targetUser then
+		config.targetUserId = tostring(p2.targetUser)
 	end
-	for _, profileInsight in p1.profileInsights do
+	for _, profileInsight in p2.profileInsights do
 		if profileInsight.mutualFriendInsight and profileInsight.mutualFriendInsight.mutualFriends then
 			local MutualFriends = profileInsight.mutualFriendInsight.mutualFriends
 			config.mutualFriends = CryoModule.List.foldLeft(CryoModule.Dictionary.keys(MutualFriends), function(List, Id)
@@ -66,6 +152,9 @@ local function createProfileInsight(UserId, p1)
 				config.userAgeVerifiedBracket = `{AccountCreationDateInsight.namespace}.{AccountCreationDateInsight.verifiedAgeBandLabel}`
 			end
 		end
+	end
+	if FFlagProfileInsightsKeyByRankingStrategy then
+		config.rankedInsightKeys = getRankedInsightKeys(p2.profileInsights, config)
 	end
 	return config
 end

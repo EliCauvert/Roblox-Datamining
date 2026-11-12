@@ -2,9 +2,7 @@
 local Parent = PhoneUpsell.Parent
 local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
-local FoundationModule = require(Parent.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseRefFunction = ReactModule.useRef
@@ -43,7 +41,7 @@ local function getButtonStackProps(Text, ButtonHeight, OnActivated, Text1, OnAct
 end
 
 return function(p1)
-	-- upvalues: CryoModule (copy), t (copy), UseDispatchFunction (copy), UseRefFunction (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), PostUserOptInFunction (copy), PostUpsellTrialOptInModule (copy), SetCurrentToastMessageFunction (copy), ToastRoduxModule (copy), Images (copy), ReactModule (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigableSurfaceIdentifierEnum (copy), InteractiveAlert (copy), getButtonStackProps (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: CryoModule (copy), t (copy), UseDispatchFunction (copy), UseRefFunction (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), PostUserOptInFunction (copy), PostUpsellTrialOptInModule (copy), SetCurrentToastMessageFunction (copy), ToastRoduxModule (copy), Images (copy), ReactModule (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigableSurfaceIdentifierEnum (copy), InteractiveAlert (copy), getButtonStackProps (copy), NormalizeFontFaceFunction (copy)
 	local UnionResult = CryoModule.Dictionary.union(t, p1)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseRefResult = UseRefFunction(nil)
@@ -97,7 +95,7 @@ return function(p1)
 			end, UseLocalizationResult.extraButtonKey, UnionResult.onClose),
 			onCloseClicked = UnionResult.onClose,
 			middleContent = function()
-				-- upvalues: ReactModule (upval), UseLocalizationResult (copy), BaseSize (copy), UseStyleResult (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+				-- upvalues: ReactModule (upval), UseLocalizationResult (copy), BaseSize (copy), UseStyleResult (copy), NormalizeFontFaceFunction (upval)
 				return ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					AutomaticSize = Enum.AutomaticSize.Y,
@@ -112,8 +110,7 @@ return function(p1)
 						TextSize = BaseSize,
 						TextColor3 = UseStyleResult.Theme.TextDefault.Color,
 						TextTransparency = UseStyleResult.Theme.TextDefault.Transparency,
-						Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
-						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
+						FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
 						TextXAlignment = Enum.TextXAlignment.Left,
 						Size = UDim2.new(1, 0, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y

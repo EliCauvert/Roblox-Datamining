@@ -11,7 +11,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 	actionType = TModule.string,
 	menuItem = TModule.optional(TModule.string),
 	availableMenuItems = TModule.optional(TModule.string),
-	contentType = if SharedFlagsModule.FFlagLuaAppEnableHomepageOneByTwoTile then TModule.optional(TModule.string) else nil,
+	contentType = if SharedFlagsModule.FFlagLuaAppEnableNxMRoduxApportioning then TModule.optional(TModule.string) else nil,
 	isDirectAction = if SharedFlagsModule.FFlagLuaAppGameTileDirectActionTelemetry or FFlagSduiGameTileDirectAction then TModule.optional(TModule.boolean) else nil
 })
 

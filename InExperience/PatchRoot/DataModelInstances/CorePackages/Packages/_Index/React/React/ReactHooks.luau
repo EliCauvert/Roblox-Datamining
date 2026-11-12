@@ -112,6 +112,15 @@ return {
 		end
 		return Current.useMemo(p1, p2)
 	end,
+	useMemoCache = function(p1)
+		-- upvalues: ReactCurrentDispatcher (copy), ReactGlobalsModule (copy), Console (copy)
+		local Current = ReactCurrentDispatcher.current
+		
+		if ReactGlobalsModule.__DEV__ and Current == nil then
+			Console.error("Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.")
+		end
+		return Current.useMemoCache(p1)
+	end,
 	useImperativeHandle = function(p1, p2, p3)
 		-- upvalues: ReactCurrentDispatcher (copy), ReactGlobalsModule (copy), Console (copy)
 		local Current = ReactCurrentDispatcher.current

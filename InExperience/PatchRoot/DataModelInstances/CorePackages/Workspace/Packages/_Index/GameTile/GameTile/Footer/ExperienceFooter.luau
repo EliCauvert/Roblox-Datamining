@@ -5,9 +5,7 @@ local _ = require(GameTile.GameTileTypes)
 local Parent = GameTile.Parent
 local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
-local FoundationModule = require(Parent.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
 local StatGroup = UIBloxModule.App.Indicator.StatGroup
@@ -24,7 +22,7 @@ local GetUserInputIsSelectionOnlyModule = require(GameTile.Footer.getUserInputIs
 local _UDim2 = UDim2.fromScale(1, 1)
 
 return function(p1)
-	-- upvalues: ArgCheckModule (copy), UsePlayerCountTextModule (copy), UseStyleFunction (copy), UseDesignTokensFunction (copy), UseLocalizationFunction (copy), GetUserInputIsSelectionOnlyModule (copy), ReactModule (copy), StyledTextLabel (copy), SponsoredTooltipHover (copy), TooltipOrientation (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), _UDim2 (copy), CoPlayFooter (copy), Colors (copy), CoPlayFooterModule (copy), TextFooter (copy), SocialProofFooter (copy), StatGroup (copy)
+	-- upvalues: ArgCheckModule (copy), UsePlayerCountTextModule (copy), UseStyleFunction (copy), UseDesignTokensFunction (copy), UseLocalizationFunction (copy), GetUserInputIsSelectionOnlyModule (copy), ReactModule (copy), StyledTextLabel (copy), SponsoredTooltipHover (copy), TooltipOrientation (copy), NormalizeFontFaceFunction (copy), _UDim2 (copy), CoPlayFooter (copy), Colors (copy), CoPlayFooterModule (copy), TextFooter (copy), SocialProofFooter (copy), StatGroup (copy)
 	if p1.automaticSize then
 		ArgCheckModule.isNotNil(p1.size, "If props.automaticSize is defined, props.size should also be defined.  Otherwise size falls back to a 1, 1 scale for this component.")
 	end
@@ -110,8 +108,7 @@ return function(p1)
 					Text = UseLocalizationResult.sponsoredText,
 					TextXAlignment = Enum.TextXAlignment.Center,
 					TextYAlignment = Enum.TextYAlignment.Center,
-					Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.CaptionHeader.Font,
-					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionLarge.Font) else nil,
+					FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionLarge.Font),
 					TextSize = UseStyleResult.Font.BaseSize * UseStyleResult.Font.CaptionHeader.RelativeSize,
 					TextColor3 = UseStyleResult.Tokens.Color.Content.Emphasis.Color3,
 					TextTransparency = UseStyleResult.Tokens.Color.Content.Emphasis.Transparency
@@ -200,14 +197,11 @@ return function(p1)
 				})
 			})
 		elseif p1.showFriendActivity and not UseExperienceTileMetadata then
-			local BodyFont = UseStyleResultFont.Body.Font
-			
 			return ReactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				Size = p1.size or _UDim2,
 				TextColor3 = Theme.TextMuted.Color,
-				Font = if FoundationFontFaceMigration then nil else BodyFont,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Center,
 				Text = p1.friendActivityTitle,

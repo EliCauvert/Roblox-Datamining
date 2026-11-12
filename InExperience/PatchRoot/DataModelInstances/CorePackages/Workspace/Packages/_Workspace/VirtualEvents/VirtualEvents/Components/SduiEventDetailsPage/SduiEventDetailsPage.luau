@@ -24,7 +24,6 @@ local AppPage = RobloxAppEnumsModule.AppPage
 local DeviceType = RobloxAppEnumsModule.DeviceType
 local FFlagLuaAppSduiEventDetailsLogExposure = require(Parent.SharedFlags).FFlagLuaAppSduiEventDetailsLogExposure
 local FFlagLuaAppSduiEventDetailsCenterSheet = require(Parent.SharedFlags).FFlagLuaAppSduiEventDetailsCenterSheet
-local FFlagLuaAppSduiEventDetailsLoadingSlot = require(Parent.SharedFlags).FFlagLuaAppSduiEventDetailsLoadingSlot
 local FFlagLuaAppSduiEventDetailsActionBarInFeed = require(Parent.SharedFlags).FFlagLuaAppSduiEventDetailsActionBarInFeed
 local FStringLuaAppSduiEventDetailsIxpLayer = require(Parent.SharedFlags).FStringLuaAppSduiEventDetailsIxpLayer
 local FFlagSduiPageEntryUseSharedHooks = require(Parent.SharedFlags).FFlagSduiPageEntryUseSharedHooks
@@ -40,7 +39,7 @@ local _ = function(Text, Text1): string
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), GetEventDetailsPageKeyModule (copy), ReactModule (copy), SduiLoadTimer (copy), AppPage (copy), UseNavigationFunction (copy), UseRouteNameFunction (copy), UseNavigationFocusFunction (copy), FFlagLuaAppSduiEventDetailsCenterSheet (copy), UseDeviceTypeFunction (copy), DeviceType (copy), FetchEventDetailsPageModule (copy), FFlagLuaAppSduiEventDetailsLogExposure (copy), IXPService (copy), FStringLuaAppSduiEventDetailsIxpLayer (copy), FireEventDetailsPageVisitModule (copy), FoundationModule (copy), SduiFeatureEntryPoint (copy), FFlagLuaAppSduiEventDetailsLoadingSlot (copy), EventDetailsFullBleedSkeletonModule (copy), SduiPageEntryPoint (copy), FFlagSduiPageEntryUseSharedHooks (copy), EventDetailsFeedSkeletonModule (copy), FFlagLuaAppSduiEventDetailsActionBarInFeed (copy), EventDetailsActionBarSkeletonModule (copy)
+	-- upvalues: UseTokensFunction (copy), GetEventDetailsPageKeyModule (copy), ReactModule (copy), SduiLoadTimer (copy), AppPage (copy), UseNavigationFunction (copy), UseRouteNameFunction (copy), UseNavigationFocusFunction (copy), FFlagLuaAppSduiEventDetailsCenterSheet (copy), UseDeviceTypeFunction (copy), DeviceType (copy), FetchEventDetailsPageModule (copy), FFlagLuaAppSduiEventDetailsLogExposure (copy), IXPService (copy), FStringLuaAppSduiEventDetailsIxpLayer (copy), FireEventDetailsPageVisitModule (copy), FoundationModule (copy), SduiFeatureEntryPoint (copy), EventDetailsFullBleedSkeletonModule (copy), SduiPageEntryPoint (copy), FFlagSduiPageEntryUseSharedHooks (copy), EventDetailsFeedSkeletonModule (copy), FFlagLuaAppSduiEventDetailsActionBarInFeed (copy), EventDetailsActionBarSkeletonModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ExtraPropsParam = p1.navigation and p1.navigation.getParam("extraProps")
 	local EventId = (if p1.eventId then p1.eventId else ExtraPropsParam and ExtraPropsParam.eventId) or p1.navigation and p1.navigation.getParam("detail")
@@ -112,8 +111,7 @@ return ReactModule.memo(function(p1)
 				shouldDisplayError = false,
 				appPage = AppPage.EventDetails,
 				configKey = EventDetailsPageKeyModule,
-				shouldDisplayLoading = FFlagLuaAppSduiEventDetailsLoadingSlot,
-				loadingSlot = if FFlagLuaAppSduiEventDetailsLoadingSlot then ReactModule.createElement(EventDetailsFullBleedSkeletonModule) else nil,
+				loadingSlot = ReactModule.createElement(EventDetailsFullBleedSkeletonModule),
 				Size = UDim2.fromScale(1, 1),
 				AutomaticSize = Enum.AutomaticSize.None
 			})
@@ -128,15 +126,14 @@ return ReactModule.memo(function(p1)
 			pageTimer = UseMemoResult,
 			backgroundStyle = UseTokensResult.Color.None,
 			scrollingFrameRef = UseRefResult,
-			loadingSlot = if FFlagLuaAppSduiEventDetailsLoadingSlot then ReactModule.createElement(EventDetailsFeedSkeletonModule) else nil
+			loadingSlot = ReactModule.createElement(EventDetailsFeedSkeletonModule)
 		})),
 		Actions = if FFlagLuaAppSduiEventDetailsActionBarInFeed then nil else ReactModule.createElement(FoundationModule.Sheet.Actions, nil, ReactModule.createElement(SduiFeatureEntryPoint, {
 			identifier = "event_details_action_bar",
 			shouldDisplayError = false,
 			appPage = AppPage.EventDetails,
 			configKey = EventDetailsPageKeyModule,
-			shouldDisplayLoading = FFlagLuaAppSduiEventDetailsLoadingSlot,
-			loadingSlot = if FFlagLuaAppSduiEventDetailsLoadingSlot then ReactModule.createElement(EventDetailsActionBarSkeletonModule) else nil
+			loadingSlot = ReactModule.createElement(EventDetailsActionBarSkeletonModule)
 		}))
 	})
 end)

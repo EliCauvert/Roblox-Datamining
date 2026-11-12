@@ -17,6 +17,7 @@ local ParseVector2Prop = SduiParsers.parseVector2Prop_
 local GetLuaTableEnumParserFunction = SduiParsers.getLuaTableEnumParser
 local FFlagSduiCardComponent = require(Parent.SharedFlags).FFlagSduiCardComponent
 local FFlagSduiContentRowStateLayerModule = require(SduiSharedContent.Flags.FFlagSduiContentRowStateLayer)
+local FFlagSduiCollectionSlotsLayoutModule = require(SduiSharedContent.Flags.FFlagSduiCollectionSlotsLayout)
 local FFlagSDUIContentRowSelectableModule = require(SduiSharedContent.Flags.FFlagSDUIContentRowSelectable)
 local FFlagSduiListComponents = require(Parent.SharedFlags).FFlagSduiListComponents
 local FFlagSduiAccordionComponent = require(Parent.SharedFlags).FFlagSduiAccordionComponent
@@ -40,9 +41,10 @@ local FFlagSduiCollectionCarouselPlaceholderItem = require(Parent.SharedFlags).F
 local FFlagLuaAppSduiVideoThumbnail = require(Parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
 local FFlagEnableGameJoinEarlyAccess = require(Parent.SharedFlags).FFlagEnableGameJoinEarlyAccess
 local FFlagSduiReactionsComponent = require(Parent.SharedFlags).FFlagSduiReactionsComponent
+local FFlagSduiMuralSection = require(Parent.SharedFlags).FFlagSduiMuralSection
 
 return function()
-	-- upvalues: SduiComponentType (copy), SduiSharedContent (copy), FFlagSduiCardComponent (copy), FFlagSduiBannerComponent (copy), FFlagSduiSheetComponent (copy), FFlagSduiSystemBannerComponent (copy), FFlagSduiBannerContextComponent (copy), FFlagSduiViewportVisibilityComponent (copy), FFlagSduiInteractableTileWrapper (copy), GetLuaTableEnumParserFunction (copy), FoundationModule (copy), ParseColorTokenProp (copy), ParseVector2Prop (copy), ParseIntegerProp (copy), ParseUDim2Prop (copy), ParseBooleanProp (copy), ParseNumberProp (copy), ParseStringProp (copy), FFlagSduiShimmerTextComponentEnabled (copy), FFlagSduiRevealTextComponentEnabled (copy), FFlagSduiPreferredTextSizeLineBudgets (copy), FFlagLuaAppSduiVideoThumbnail (copy), FFlagEnableGameJoinEarlyAccess (copy), FFlagSduiPlayWithRewardRefactor (copy), FFlagSduiPlayWithReward (copy), ParseUiComponentProp (copy), ParseCallbackProp (copy), FFlagSduiContentRowStateLayerModule (copy), FFlagSDUIContentRowSelectableModule (copy), FFlagSduiListComponents (copy), FFlagSduiExpandableListItem (copy), FFlagSduiAccordionComponent (copy), FFlagSduiDevStoreSeeAllSupport (copy), FFlagSduiTooltipComponentEnabled (copy), FFlagSduiCollectionCarouselPlaceholderItem (copy), FFlagSduiAiOverviewEnabled (copy), FFlagSduiVerticalListWithImpressionsEnabled (copy), FFlagSduiReactionsComponent (copy), GetSduiComponentRegistryFunction (copy)
+	-- upvalues: SduiComponentType (copy), SduiSharedContent (copy), FFlagSduiCardComponent (copy), FFlagSduiBannerComponent (copy), FFlagSduiSheetComponent (copy), FFlagSduiSystemBannerComponent (copy), FFlagSduiBannerContextComponent (copy), FFlagSduiViewportVisibilityComponent (copy), FFlagSduiInteractableTileWrapper (copy), GetLuaTableEnumParserFunction (copy), FoundationModule (copy), ParseColorTokenProp (copy), ParseVector2Prop (copy), ParseIntegerProp (copy), ParseUDim2Prop (copy), ParseBooleanProp (copy), ParseNumberProp (copy), ParseStringProp (copy), FFlagSduiShimmerTextComponentEnabled (copy), FFlagSduiRevealTextComponentEnabled (copy), FFlagSduiPreferredTextSizeLineBudgets (copy), FFlagSduiCollectionSlotsLayoutModule (copy), FFlagLuaAppSduiVideoThumbnail (copy), FFlagEnableGameJoinEarlyAccess (copy), FFlagSduiPlayWithRewardRefactor (copy), FFlagSduiPlayWithReward (copy), ParseUiComponentProp (copy), ParseCallbackProp (copy), FFlagSduiContentRowStateLayerModule (copy), FFlagSDUIContentRowSelectableModule (copy), FFlagSduiListComponents (copy), FFlagSduiExpandableListItem (copy), FFlagSduiAccordionComponent (copy), FFlagSduiDevStoreSeeAllSupport (copy), FFlagSduiTooltipComponentEnabled (copy), FFlagSduiCollectionCarouselPlaceholderItem (copy), FFlagSduiAiOverviewEnabled (copy), FFlagSduiVerticalListWithImpressionsEnabled (copy), FFlagSduiReactionsComponent (copy), FFlagSduiMuralSection (copy), GetSduiComponentRegistryFunction (copy)
 	GetSduiComponentRegistryFunction().registerComponentDefinitions({
 		[SduiComponentType.DetailsPageImageHeader] = {
 			getLazyComponent = function()
@@ -156,6 +158,12 @@ return function()
 			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiLineLimitedText)
+			end
+		} else nil,
+		[SduiComponentType.CollectionSlotsLayout] = if FFlagSduiCollectionSlotsLayoutModule then {
+			getLazyComponent = function()
+				-- upvalues: SduiSharedContent (upval)
+				return require(SduiSharedContent.Components.SduiCollectionSlotsLayout)
 			end
 		} else nil,
 		[SduiComponentType.ContentRatingLabel] = {
@@ -310,6 +318,12 @@ return function()
 			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiReactions)
+			end
+		} else nil,
+		[SduiComponentType.MuralSection] = if FFlagSduiMuralSection then {
+			getLazyComponent = function()
+				-- upvalues: SduiSharedContent (upval)
+				return require(SduiSharedContent.Components.SduiMuralSection)
 			end
 		} else nil
 	})

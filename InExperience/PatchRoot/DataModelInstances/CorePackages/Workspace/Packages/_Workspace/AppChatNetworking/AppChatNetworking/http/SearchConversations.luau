@@ -6,7 +6,7 @@ local Default = require(AppChatNetworking.url.HttpRequest).default
 local GetFFlagIsSquadEnabledFunction = require(Parent.SharedFlags).GetFFlagIsSquadEnabled
 local GetFFlagEnableSocialCardsFunction = require(Parent.SharedFlags).GetFFlagEnableSocialCards
 
-return function(p1, Query, p2, Limit)
+return function(p1, Query, p2, Limit, Placement)
 	-- upvalues: Default (copy), HttpService (copy), GetFFlagEnableSocialCardsFunction (copy), GetFFlagIsSquadEnabledFunction (copy), CHATPLATFORMBASEURLModule (copy)
 	return (p1 or Default)(`{CHATPLATFORMBASEURLModule}/v1/search-conversations`, "POST", {
 		postBody = HttpService:JSONEncode({
@@ -16,6 +16,7 @@ return function(p1, Query, p2, Limit)
 			query = Query,
 			limit = Limit,
 			cursor = if p2 == nil or p2 == "" then nil else p2,
+			placement = Placement,
 			include_cards = if GetFFlagEnableSocialCardsFunction() then true else false,
 			check_for_group_up = if GetFFlagIsSquadEnabledFunction() then true else false
 		})

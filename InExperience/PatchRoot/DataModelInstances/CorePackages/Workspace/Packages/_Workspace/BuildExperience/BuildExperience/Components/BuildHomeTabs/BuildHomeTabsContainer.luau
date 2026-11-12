@@ -3,6 +3,7 @@ local Parent = BuildExperience.Parent
 local _ = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local FFlagBuildExperienceFoundationTabsModule = require(BuildExperience.Flags.FFlagBuildExperienceFoundationTabs)
+local FFlagBuildExperienceHomeTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceHomeTelemetry)
 local BuildHomeTabsViewModule = require(script.Parent.BuildHomeTabsView)
 local _ = require(BuildExperience.Stores.GetSearchQueryStore.createSearchQueryStore)
 local GamesFilterModule = require(BuildExperience.Stores.GetMyCreationsFilterStore.GamesFilter)
@@ -21,7 +22,7 @@ local Options = {
 local DefaultFilter = { games = GamesFilterModule.SharedGames }
 
 return function(Frame)
-	-- upvalues: GetPreviewsFilterStoreModule (copy), UsePreviewResultsModule (copy), UseBuildHomeTabsViewModelModule (copy), FFlagBuildExperienceFoundationTabsModule (copy), UseBuildHomeTabsFillBehaviorModule (copy), UsePreviewsTabViewModelModule (copy), ReactModule (copy), BuildHomeTabsViewModule (copy), PreviewsTabViewModule (copy), MyCreationsFilterContainerModule (copy), DefaultFilter (copy), Options (copy)
+	-- upvalues: GetPreviewsFilterStoreModule (copy), UsePreviewResultsModule (copy), UseBuildHomeTabsViewModelModule (copy), FFlagBuildExperienceHomeTelemetryModule (copy), FFlagBuildExperienceFoundationTabsModule (copy), UseBuildHomeTabsFillBehaviorModule (copy), UsePreviewsTabViewModelModule (copy), ReactModule (copy), BuildHomeTabsViewModule (copy), PreviewsTabViewModule (copy), MyCreationsFilterContainerModule (copy), DefaultFilter (copy), Options (copy)
 	local CreatorGroupsStore = Frame.creatorGroupsStore
 	local PreviewsFilterStore = Frame.previewsFilterStore or GetPreviewsFilterStoreModule()
 	local UsePreviewResultsModuleResult = UsePreviewResultsModule({
@@ -32,7 +33,8 @@ return function(Frame)
 	})
 	local UseBuildHomeTabsViewModelModuleResult = UseBuildHomeTabsViewModelModule({
 		tabStore = Frame.tabStore,
-		searchQueryStore = Frame.searchQueryStore
+		searchQueryStore = Frame.searchQueryStore,
+		isFocused = if FFlagBuildExperienceHomeTelemetryModule then Frame.isFocused else nil
 	})
 	local UsePreviewsTabViewModelModuleResult = UsePreviewsTabViewModelModule({ results = UsePreviewResultsModuleResult })
 	

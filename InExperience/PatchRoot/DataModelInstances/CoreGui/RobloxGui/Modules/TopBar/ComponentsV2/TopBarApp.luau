@@ -9,6 +9,8 @@ local Chrome = Parent.Parent.Chrome
 local ConstantsModule = require(Parent.Constants)
 local ExperienceAgeRatingPolicyModule = require(Parent.ExperienceAgeRatingPolicy)
 local ExperienceAgeRatingBadgeModule = require(CorePackages.Workspace.Packages.InExperienceTopBar.ExperienceAgeRatingBadge)
+local FFlagEnableRestyleTopBarModule = require(CorePackages.Workspace.Packages.InExperienceCloudPlay.FFlagEnableRestyleTopBar)
+local RestyleTimerModule = if FFlagEnableRestyleTopBarModule then require(Presentation.RestyleTimer) else nil
 local FFlagExperienceAgeRatingBadge = require(CorePackages.Workspace.Packages.InExperienceTopBar).Flags.FFlagExperienceAgeRatingBadge
 local CoreGuiCommonModule = require(CorePackages.Workspace.Packages.CoreGuiCommon)
 local FoundationModule = require(CorePackages.Packages.Foundation)
@@ -23,6 +25,7 @@ local UniversalAppPolicyModule = require(CorePackages.Workspace.Packages.Univers
 local FFlagAddMenuNavigationToggleDialog = SharedFlagsModule.FFlagAddMenuNavigationToggleDialog
 local FFlagGamepadNavigationDialogABTestModule = require(Parent.Flags.FFlagGamepadNavigationDialogABTest)
 local FFlagEnablePlaytestModeUnibar = SharedFlagsModule.FFlagEnablePlaytestModeUnibar
+local FFlagUseUIOverlayForCloudPlay = SharedFlagsModule.FFlagUseUIOverlayForCloudPlay
 local FFlagEnableTeamTestLua = SharedFlagsModule.FFlagEnableTeamTestLua
 local FFlagAddTraversalBackButton = require(CorePackages.Workspace.Packages.CoreScriptsRoactCommon).Traversal.Flags.FFlagAddTraversalBackButton
 local GetFFlagEnableCrossExpVoiceFunction = SharedFlagsModule.GetFFlagEnableCrossExpVoice
@@ -42,6 +45,8 @@ local FFlagShowSwitchServerButton = SharedFlagsModule.FFlagShowSwitchServerButto
 local IsPioneerLaunchFunction = require(CorePackages.Workspace.Packages.PioneerUtils).isPioneerLaunch
 local FFlagShowSwitchServerButton1 = IsSideSheetEnabledModule and (FFlagShowSwitchServerButton or IsPioneerLaunchFunction())
 local ShopGlobalIcon = InExperienceShopModule.ShopGlobalIcon
+local FFlagEnableFreeTrialTopBarChip = InExperienceShopModule.FFlagEnableFreeTrialTopBarChip
+local FreeTrialChipHostModule = require(Presentation.FreeTrialChipHost)
 local FFlagTopBarShopIconV2Module = require(Parent.Flags.FFlagTopBarShopIconV2)
 local ShopIconModule = if FFlagTopBarShopIconV2Module then require(Components.Presentation.ShopIcon) else nil
 local View = FoundationModule.View
@@ -129,7 +134,7 @@ local function getIsConfirmationOpen(p1)
 end
 
 return function(_)
-	-- upvalues: FFlagShowGameAgeRating (copy), UniversalAppPolicyModule (copy), SignalsReactModule (copy), CoreGuiCommonModule (copy), DisplayModule (copy), FFlagEnableInExperienceShop1 (copy), FFlagTopBarShopIconV2Module (copy), getShopGlobalIconEnabled (copy), getShopGlobalStatusIndicatorEnabled (copy), handleShopGlobalIconActivated (copy), ReactModule (copy), InExperienceShopModule (copy), UseMappedSignal (copy), NewResult (copy), IsSpatialFunction (copy), FFlagExperienceAgeRatingBadge (copy), ExperienceAgeRatingPolicyModule (copy), GamepadConnectorModule (copy), VRService (copy), ConstantsModule (copy), FFlagShowSwitchServerButton1 (copy), getShouldEnableSwitchServer (copy), getIsConfirmationOpen (copy), GetSwitchServerStoreFunction (copy), View (copy), FFlagShowGameAgeRating1 (copy), IsSideSheetEnabledModule (copy), SelectionCursorProvider (copy), MenuIconModule (copy), FFlagAddTraversalBackButton (copy), TraversalBackButtonModule (copy), MenuIconContextModule (copy), UnibarModule (copy), ShopIconModule (ref), ShopGlobalIcon (copy), FFlagExperienceShopNewIconography (copy), CommonIconModule (copy), FFlagAddMenuNavigationToggleDialog (copy), MenuNavigationToggleDialogModule (copy), FFlagGamepadNavigationDialogABTestModule (copy), GamepadNavigationDialogModule (copy), SwitchServerConfirmation (copy), JoinVoiceBinderModule (copy), GetFFlagEnableCrossExpVoiceFunction (copy), PartyMicBinderModule (copy), AnalyticsModule (copy), FFlagEnablePlaytestModeUnibar (copy), PlaytestModeTooltipModule (copy), FFlagEnableTeamTestLua (copy), UnpublishedPlaytestModeTooltip (copy), ExperienceAgeRatingBadgeModule (copy), FFlagAppNavMyStatsTab (copy), BuildModeLaunchModule (copy), BuildPillMenuPortalHost (copy), HealthBar (copy), VoiceStateContextModule (copy), VRBottomUnibarModule (copy), Default (copy), IsInExperienceUIVREnabled (copy)
+	-- upvalues: FFlagShowGameAgeRating (copy), UniversalAppPolicyModule (copy), SignalsReactModule (copy), CoreGuiCommonModule (copy), DisplayModule (copy), FFlagEnableInExperienceShop1 (copy), FFlagTopBarShopIconV2Module (copy), getShopGlobalIconEnabled (copy), getShopGlobalStatusIndicatorEnabled (copy), handleShopGlobalIconActivated (copy), ReactModule (copy), InExperienceShopModule (copy), UseMappedSignal (copy), NewResult (copy), IsSpatialFunction (copy), FFlagExperienceAgeRatingBadge (copy), ExperienceAgeRatingPolicyModule (copy), GamepadConnectorModule (copy), VRService (copy), ConstantsModule (copy), FFlagShowSwitchServerButton1 (copy), getShouldEnableSwitchServer (copy), getIsConfirmationOpen (copy), GetSwitchServerStoreFunction (copy), View (copy), FFlagShowGameAgeRating1 (copy), IsSideSheetEnabledModule (copy), SelectionCursorProvider (copy), MenuIconModule (copy), FFlagAddTraversalBackButton (copy), TraversalBackButtonModule (copy), MenuIconContextModule (copy), UnibarModule (copy), ShopIconModule (ref), ShopGlobalIcon (copy), FFlagExperienceShopNewIconography (copy), CommonIconModule (copy), FFlagEnableRestyleTopBarModule (copy), FFlagUseUIOverlayForCloudPlay (copy), RestyleTimerModule (copy), FFlagAddMenuNavigationToggleDialog (copy), MenuNavigationToggleDialogModule (copy), FFlagGamepadNavigationDialogABTestModule (copy), GamepadNavigationDialogModule (copy), SwitchServerConfirmation (copy), JoinVoiceBinderModule (copy), GetFFlagEnableCrossExpVoiceFunction (copy), PartyMicBinderModule (copy), AnalyticsModule (copy), FFlagEnablePlaytestModeUnibar (copy), PlaytestModeTooltipModule (copy), FFlagEnableTeamTestLua (copy), UnpublishedPlaytestModeTooltip (copy), ExperienceAgeRatingBadgeModule (copy), FFlagAppNavMyStatsTab (copy), BuildModeLaunchModule (copy), BuildPillMenuPortalHost (copy), HealthBar (copy), FFlagEnableFreeTrialTopBarChip (copy), FreeTrialChipHostModule (copy), VoiceStateContextModule (copy), VRBottomUnibarModule (copy), Default (copy), IsInExperienceUIVREnabled (copy)
 	local UseAppPolicyResult = if FFlagShowGameAgeRating then UniversalAppPolicyModule.useAppPolicy(function(p1)
 		return p1.getShowGameAgeRating()
 	end) else UniversalAppPolicyModule.useAppPolicy(function(p1)
@@ -260,7 +265,8 @@ return function(_)
 			onActivated = OnActivated,
 			isActive = IsActive,
 			icon = if FFlagExperienceShopNewIconography or not CommonIconModule or not NewResult then nil else CommonIconModule("BuildingStore", nil, NewResult)
-		})
+		}),
+		RestyleTimer = if FFlagEnableRestyleTopBarModule and FFlagUseUIOverlayForCloudPlay then ReactModule.createElement(RestyleTimerModule, { layoutOrder = 4, buttonSize = ScaledTopBarButtonHeight }) else nil
 	})
 	
 	return ReactModule.createElement("ScreenGui", {
@@ -301,7 +307,12 @@ return function(_)
 			}, {
 				BuildPillMenu = if FFlagAppNavMyStatsTab and (BuildModeLaunchModule:hasBuildMode() and not VRService.VREnabled) then ReactModule.createElement(BuildPillMenuPortalHost) else nil,
 				HealthBar = ReactModule.createElement(HealthBar)
-			})
+			}),
+			FreeTrialChipHost = if FFlagEnableFreeTrialTopBarChip then ReactModule.createElement(FreeTrialChipHostModule, {
+				position = UDim2.new(1, -ScaledScreenSideOffset, 0, ScaledTopBarTopMargin),
+				size = UDim2.new(0.5, -ScaledScreenSideOffset, 0, ScaledTopBarButtonHeight),
+				visible = UseBindingResult
+			}) else nil
 		}),
 		VRBottomBar = if VRService.VREnabled then ReactModule.createElement(VoiceStateContextModule.Provider, {}, {
 			VRBottomBar = VoiceStateContextModule.withVoiceState(function(p1)

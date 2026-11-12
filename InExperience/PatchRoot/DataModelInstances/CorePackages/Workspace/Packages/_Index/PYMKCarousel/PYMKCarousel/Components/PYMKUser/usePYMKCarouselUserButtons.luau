@@ -19,6 +19,7 @@ local _ = require(Parent.Common.DirectRecommendationTypes)
 local GetFFlagPYMKDisableButtonsOnFetchModule = require(Parent.Flags.getFFlagPYMKDisableButtonsOnFetch)
 local FFlagMigrateFriendshipStatusesPYMKModule = require(Parent.Flags.FFlagMigrateFriendshipStatusesPYMK)
 local FFlagLuaAppEnableSduiHomePage = require(Parent1.SharedFlags).FFlagLuaAppEnableSduiHomePage
+local FFlagPymkCarouselExtendProps = require(Parent1.SharedFlags).FFlagPymkCarouselExtendProps
 local UseGetFriendshipStatusFunction = require(Parent1.FriendsHydrationReact).useGetFriendshipStatus
 local FriendsStoreChallengeNetworkModule = require(Parent.friendsStoreChallengeNetwork)
 local FFlagEnableFriendsStoreChallengeInterceptor = require(Parent1.SharedFlags).FFlagEnableFriendsStoreChallengeInterceptor
@@ -34,7 +35,7 @@ local function _(p1, p2, p3): boolean
 end
 
 return function(p1)
-	-- upvalues: UseDispatchFunction (copy), UseSelectorFunction (copy), FFlagMigrateFriendshipStatusesPYMKModule (copy), UseGetFriendshipStatusFunction (copy), config (copy), RoduxFriends (copy), FFlagLuaAppEnableSduiHomePage (copy), GetDeepValueFunction (copy), GetFFlagPYMKDisableButtonsOnFetchModule (copy), NetworkingFriends (copy), NetworkStatus (copy), React (copy), Images (copy), EventNames (copy), GetResult (copy), TextKeysModule (copy), FocusNavigationEventNameEnum (copy), HttpService (copy), ContextualInfoTypes (copy), FriendshipOriginSourceType (copy), config1 (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FriendsStoreChallengeNetworkModule (copy)
+	-- upvalues: UseDispatchFunction (copy), UseSelectorFunction (copy), FFlagMigrateFriendshipStatusesPYMKModule (copy), UseGetFriendshipStatusFunction (copy), config (copy), RoduxFriends (copy), FFlagLuaAppEnableSduiHomePage (copy), FFlagPymkCarouselExtendProps (copy), GetDeepValueFunction (copy), GetFFlagPYMKDisableButtonsOnFetchModule (copy), NetworkingFriends (copy), NetworkStatus (copy), React (copy), Images (copy), EventNames (copy), GetResult (copy), TextKeysModule (copy), FocusNavigationEventNameEnum (copy), HttpService (copy), ContextualInfoTypes (copy), FriendshipOriginSourceType (copy), config1 (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FriendsStoreChallengeNetworkModule (copy)
 	local Text = tostring(p1.userId)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseSelectorResult = UseSelectorFunction(function(p2): string
@@ -51,6 +52,20 @@ return function(p1)
 	if FFlagLuaAppEnableSduiHomePage then
 		Recommendation = p1.recommendation or {}
 		IsHasIncomingFriendRequest = p1.recommendation and p1.recommendation.hasIncomingFriendRequest == true
+	elseif FFlagPymkCarouselExtendProps then
+		Recommendation = UseSelectorFunction(function(p2)
+			-- upvalues: RoduxFriends (upval), UseSelectorResult (copy), Text (copy)
+			return RoduxFriends.Selectors.selectRecommendationsForUserId(p2)(UseSelectorResult)[Text] or {}
+		end)
+		IsHasIncomingFriendRequest = UseSelectorFunction(function(p2)
+			-- upvalues: GetDeepValueFunction (upval), Text (copy)
+			return GetDeepValueFunction(p2, string.format("PYMKCarousel.Friends.recommendations.hasIncomingFriendRequest.%s", Text)) or false
+		end)
+		
+		if p1.recommendation then
+			Recommendation = p1.recommendation
+			IsHasIncomingFriendRequest = p1.recommendation.hasIncomingFriendRequest == true
+		end
 	else
 		Recommendation = UseSelectorFunction(function(p2)
 			-- upvalues: RoduxFriends (upval), UseSelectorResult (copy), Text (copy)

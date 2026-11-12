@@ -11,12 +11,14 @@ local LoggerModule = require(script.Parent.Logger)
 local GetCurrentRouteModule = require(script.Parent.Utils.getCurrentRoute)
 local ChatSearchBoxModule = require(script.Parent.ChatSearchBox)
 local CheckAndOpenChatPushUpsellModule = require(script.Parent.CheckAndOpenChatPushUpsell)
+local ChatLandingPromptsModule = require(script.Parent.ChatLandingPrompts)
 local ResetForSquadLobbyForCompactModeModule = require(AppChat.Utils.resetForSquadLobbyForCompactMode)
 local GetFFlagEnableAppChatInExperienceFunction = require(Parent.SharedFlags).GetFFlagEnableAppChatInExperience
 local FFlagEnablePartyQuickStartButton = require(Parent.SharedFlags).FFlagEnablePartyQuickStartButton
 local GetFFlagEnablePushNotificationsUpsellModalChatFunction = require(Parent.SharedFlags).GetFFlagEnablePushNotificationsUpsellModalChat
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagEnableHeaderBarButtonsUpdate = SharedFlagsModule.FFlagEnableHeaderBarButtonsUpdate
+local FFlagChatPushUpsellPromptsEnabled = SharedFlagsModule.FFlagChatPushUpsellPromptsEnabled
 local GetTopBarStoreModule = require(AppChat.Stores.GetTopBarStore)
 local FFlagAppChatIxpScreenExposureModule = require(AppChat.Flags.FFlagAppChatIxpScreenExposure)
 local FFlagAppChatIxpParallelScreenLayersModule = require(AppChat.Flags.FFlagAppChatIxpParallelScreenLayers)
@@ -146,7 +148,7 @@ function ChatLandingScreen.init(p1)
 end
 
 function ChatLandingScreen.render(p1)
-	-- upvalues: LoggerModule (copy), ArgCheckModule (copy), RoactModule (copy), TopBarProviderModule (copy), EnumScreensModule (copy), ChatLandingContainerModule (copy), ChatSearchBoxModule (copy), GetFFlagEnablePushNotificationsUpsellModalChatFunction (copy), CheckAndOpenChatPushUpsellModule (copy)
+	-- upvalues: LoggerModule (copy), ArgCheckModule (copy), RoactModule (copy), TopBarProviderModule (copy), EnumScreensModule (copy), ChatLandingContainerModule (copy), ChatSearchBoxModule (copy), FFlagChatPushUpsellPromptsEnabled (copy), ChatLandingPromptsModule (copy), GetFFlagEnablePushNotificationsUpsellModalChatFunction (copy), CheckAndOpenChatPushUpsellModule (copy)
 	LoggerModule:info("{screen} render")
 	local NavigationInChatLandingScreen = ArgCheckModule.isNotNil(p1.props.navigation, "navigation in ChatLandingScreen")
 	local KeyParam = NavigationInChatLandingScreen and NavigationInChatLandingScreen.getParam("key", "") or ""
@@ -156,7 +158,7 @@ function ChatLandingScreen.render(p1)
 	return RoactModule.createElement(TopBarProviderModule, {
 		screenName = EnumScreensModule.ChatLanding,
 		render = function(p2)
-			-- upvalues: EnumScreensModule (upval), ArgCheckModule (upval), RoactModule (upval), ChatLandingContainerModule (upval), ShowSearchRowScreenProps (copy), NavigationInChatLandingScreen (copy), p1 (copy), KeyParam (copy), ChatSearchBoxModule (upval), TopBarHeightScreenProps (copy), GetFFlagEnablePushNotificationsUpsellModalChatFunction (upval), CheckAndOpenChatPushUpsellModule (upval)
+			-- upvalues: EnumScreensModule (upval), ArgCheckModule (upval), RoactModule (upval), ChatLandingContainerModule (upval), ShowSearchRowScreenProps (copy), NavigationInChatLandingScreen (copy), p1 (copy), KeyParam (copy), ChatSearchBoxModule (upval), TopBarHeightScreenProps (copy), FFlagChatPushUpsellPromptsEnabled (upval), ChatLandingPromptsModule (upval), GetFFlagEnablePushNotificationsUpsellModalChatFunction (upval), CheckAndOpenChatPushUpsellModule (upval)
 			local ScreenTopBar = p2.getScreenTopBar(EnumScreensModule.ChatLanding)
 			ArgCheckModule.isType(ScreenTopBar, "table", "screenTopBar")
 			local Element = RoactModule.createElement(ChatLandingContainerModule, {
@@ -172,24 +174,37 @@ function ChatLandingScreen.render(p1)
 				key = "ChatLanding" .. KeyParam
 			})
 			
-			return if ShowSearchRowScreenProps then RoactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
-				UIListLayout = RoactModule.createElement("UIListLayout", {
-					SortOrder = Enum.SortOrder.LayoutOrder,
-					FillDirection = Enum.FillDirection.Vertical,
-					VerticalAlignment = Enum.VerticalAlignment.Top,
-					VerticalFlex = Enum.UIFlexAlignment.Fill,
-					Padding = UDim.new(0, 0)
-				}),
-				ChatSearchBox = RoactModule.createElement(ChatSearchBoxModule, {
-					height = TopBarHeightScreenProps,
-					initialText = ScreenTopBar.filterText,
-					onFilter = function(FilterText)
-						-- upvalues: p2 (copy), EnumScreensModule (upval)
-						p2.setScreenTopBar(EnumScreensModule.ChatLanding, { filterText = FilterText })
-					end
-				}),
-				Element
-			}) elseif GetFFlagEnablePushNotificationsUpsellModalChatFunction() then RoactModule.createFragment({
+			if ShowSearchRowScreenProps then
+				return RoactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
+					UIListLayout = RoactModule.createElement("UIListLayout", {
+						SortOrder = Enum.SortOrder.LayoutOrder,
+						FillDirection = Enum.FillDirection.Vertical,
+						VerticalAlignment = Enum.VerticalAlignment.Top,
+						VerticalFlex = Enum.UIFlexAlignment.Fill,
+						Padding = UDim.new(0, 0)
+					}),
+					ChatSearchBox = RoactModule.createElement(ChatSearchBoxModule, {
+						height = TopBarHeightScreenProps,
+						initialText = ScreenTopBar.filterText,
+						onFilter = function(FilterText)
+							-- upvalues: p2 (copy), EnumScreensModule (upval)
+							p2.setScreenTopBar(EnumScreensModule.ChatLanding, { filterText = FilterText })
+						end
+					}),
+					Element
+				})
+			end
+			if FFlagChatPushUpsellPromptsEnabled then
+				local RenderChatLandingPromptsScreenProps = NavigationInChatLandingScreen.getScreenProps("renderChatLandingPrompts", nil)
+				
+				if RenderChatLandingPromptsScreenProps then
+					return RoactModule.createFragment({
+						Element,
+						ChatLandingPrompts = RoactModule.createElement(ChatLandingPromptsModule, { renderPrompts = RenderChatLandingPromptsScreenProps })
+					})
+				end
+			end
+			return if GetFFlagEnablePushNotificationsUpsellModalChatFunction() and not FFlagChatPushUpsellPromptsEnabled then RoactModule.createFragment({
 				Element,
 				CheckAndOpenChatPushUpsell = RoactModule.createElement(CheckAndOpenChatPushUpsellModule)
 			}) else Element

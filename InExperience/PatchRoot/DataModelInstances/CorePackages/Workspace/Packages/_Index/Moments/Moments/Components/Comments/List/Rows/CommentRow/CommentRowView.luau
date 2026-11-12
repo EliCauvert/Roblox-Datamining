@@ -3,6 +3,7 @@ local Parent = Moments.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local FFlagMomentsCommentRowRedesignModule = require(Moments.Flags.FFlagMomentsCommentRowRedesign)
+local FFlagMomentsCommentRowTrailingReactionModule = require(Moments.Flags.FFlagMomentsCommentRowTrailingReaction)
 local FFlagMomentsCommentsAttachSheetScrollerModule = require(Moments.Flags.FFlagMomentsCommentsAttachSheetScroller)
 local ImageWithSkeletonModule = require(Moments.Components.ImageWithSkeleton)
 local CommentActionsMenuModule = require(script.Parent.CommentActionsMenu)
@@ -22,7 +23,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local function noop() end
 
 return function(Frame)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), CommentTranslationToggleModule (copy), FFlagMomentsCommentRowRedesignModule (copy), UseComposedRefFunction (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), GetLineHeightsModule (copy), FFlagMomentsCommentsAttachSheetScrollerModule (copy), FoundationModule (copy), CommentRowHighlightModule (copy), noop (copy), StateLayerAffordance (copy), ImageWithSkeletonModule (copy), Radius (copy), CommentReactionButtonModule (copy), CommentActionsMenuModule (copy), CommentDeleteConfirmationDialogModule (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), CommentTranslationToggleModule (copy), FFlagMomentsCommentRowRedesignModule (copy), UseComposedRefFunction (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), GetLineHeightsModule (copy), FFlagMomentsCommentRowTrailingReactionModule (copy), FFlagMomentsCommentsAttachSheetScrollerModule (copy), FoundationModule (copy), CommentRowHighlightModule (copy), noop (copy), StateLayerAffordance (copy), ImageWithSkeletonModule (copy), Radius (copy), CommentReactionButtonModule (copy), CommentActionsMenuModule (copy), CommentDeleteConfirmationDialogModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ActionsMenu = Frame.actionsMenu
 	local DeleteConfirmation = Frame.deleteConfirmation
@@ -34,6 +35,7 @@ return function(Frame)
 		LayoutOrder = if FFlagMomentsCommentRowRedesignModule then 3 else 5
 	})
 	local HasAnchorRef: boolean = ActionsMenu ~= nil and ActionsMenu.anchorRef ~= nil
+	local NoHasAnchorRef: boolean = ActionsMenu ~= nil and not HasAnchorRef
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseComposedRefResult = UseComposedRefFunction(Frame.gestureRef, UseStateResult2)
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -42,12 +44,22 @@ return function(Frame)
 	end, { UseStateResult })
 	local RbxThumb = if Frame.avatarUserId == nil then nil else GetRbxThumbFunction(ThumbnailType.AvatarHeadShot, Frame.avatarUserId, ThumbnailSize.Medium)
 	local LineHeightsModule = GetLineHeightsModule(if FFlagMomentsCommentRowRedesignModule then UseTokensResult.Typography.TitleMedium else UseTokensResult.Typography.TitleSmall)
+	local NoHasAnchorRef1: boolean = FFlagMomentsCommentRowTrailingReactionModule and (NoHasAnchorRef or Frame.showReactionControl == true)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
+	local UseResult = ReactModule.useCallback(function(Frame)
+		-- upvalues: UseStateResult2_1 (copy)
+		UseStateResult2_1(Frame.AbsoluteSize.X)
+	end, {})
 	local Size: UDim2? = nil
 	
 	if FFlagMomentsCommentsAttachSheetScrollerModule then
 		local NewMedium = (if FFlagMomentsCommentRowRedesignModule then UseTokensResult.Size.Size_800 else UseTokensResult.Size.Size_700) + UseTokensResult.Gap.Medium
 		
-		if ActionsMenu ~= nil and not HasAnchorRef then
+		if FFlagMomentsCommentRowTrailingReactionModule then
+			if NoHasAnchorRef1 then
+				NewMedium += UseStateResult1 + UseTokensResult.Gap.Medium
+			end
+		elseif ActionsMenu ~= nil and not HasAnchorRef then
 			NewMedium += UseTokensResult.Size.Size_600 + UseTokensResult.Gap.Medium
 		end
 		Size = UDim2.new(1, -NewMedium, 0, 0)
@@ -177,8 +189,12 @@ return function(Frame)
 					onReactionActivated = Frame.onReactionActivated or noop
 				}),
 				Footer = if FFlagMomentsCommentRowRedesignModule and (Frame.metadataLabel ~= nil or Frame.headerAction ~= nil or Frame.showReactionControl or TranslationToggle ~= nil) then ReactModule.createElement(FoundationModule.View, {
-					tag = "row align-y-center gap-small size-full-0 auto-y",
 					LayoutOrder = 2,
+					tag = {
+						["row align-y-center gap-small"] = true,
+						["size-full-0 auto-y"] = not FFlagMomentsCommentRowTrailingReactionModule,
+						["size-full-600"] = FFlagMomentsCommentRowTrailingReactionModule
+					},
 					testId = `moments-comment-footer-{Frame.commentId}`
 				}, {
 					Metadata = ReactModule.createElement(FoundationModule.View, {
@@ -198,7 +214,7 @@ return function(Frame)
 						HeaderAction = if Frame.headerAction == nil then nil else ReactModule.createElement(FoundationModule.View, { tag = "auto-xy", LayoutOrder = 2 }, { Action = Frame.headerAction }),
 						TranslationToggle = Element
 					}),
-					Reaction = if Frame.showReactionControl then ReactModule.createElement(CommentReactionButtonModule, {
+					Reaction = if FFlagMomentsCommentRowTrailingReactionModule or not Frame.showReactionControl then nil else ReactModule.createElement(CommentReactionButtonModule, {
 						LayoutOrder = 2,
 						commentId = Frame.commentId,
 						isReactionSelected = Frame.isReactionSelected == true,
@@ -206,17 +222,52 @@ return function(Frame)
 						reactionCountLabel = Frame.reactionCountLabel or "0",
 						isReactionCountHidden = Frame.isReactionCountHidden,
 						onReactionActivated = Frame.onReactionActivated or noop
-					}) else nil
+					})
 				}) else nil
 			}),
-			ActionsMenu = if ActionsMenu == nil or HasAnchorRef then nil else ReactModule.createElement(CommentActionsMenuModule, {
+			ActionsMenu = if FFlagMomentsCommentRowTrailingReactionModule or ActionsMenu == nil or HasAnchorRef then nil else ReactModule.createElement(CommentActionsMenuModule, {
 				LayoutOrder = 3,
 				commentId = Frame.commentId,
 				items = ActionsMenu.items,
 				isOpen = ActionsMenu.isOpen,
 				onButtonActivated = ActionsMenu.onButtonActivated,
 				onClose = ActionsMenu.onClose
-			})
+			}),
+			Trailing = if NoHasAnchorRef1 then ReactModule.createElement(FoundationModule.View, {
+				tag = "col align-x-right self-stretch auto-x",
+				LayoutOrder = 3,
+				onAbsoluteSizeChanged = if FFlagMomentsCommentsAttachSheetScrollerModule then UseResult else nil,
+				testId = `moments-comment-trailing-{Frame.commentId}`
+			}, {
+				ActionsMenu = if ActionsMenu == nil or HasAnchorRef then nil else ReactModule.createElement(CommentActionsMenuModule, {
+					LayoutOrder = 1,
+					commentId = Frame.commentId,
+					items = ActionsMenu.items,
+					isOpen = ActionsMenu.isOpen,
+					onButtonActivated = ActionsMenu.onButtonActivated,
+					onClose = ActionsMenu.onClose
+				}),
+				ReactionTopSpacer = if Frame.showReactionControl then ReactModule.createElement(FoundationModule.View, {
+					tag = "grow",
+					LayoutOrder = 2,
+					Size = UDim2.fromOffset(0, if NoHasAnchorRef then UseTokensResult.Gap.XSmall else 0)
+				}) else nil,
+				Reaction = if Frame.showReactionControl then ReactModule.createElement(CommentReactionButtonModule, {
+					LayoutOrder = 3,
+					commentId = Frame.commentId,
+					isReactionSelected = Frame.isReactionSelected == true,
+					isReactionDisabled = Frame.isReactionDisabled == true,
+					reactionCountLabel = Frame.reactionCountLabel or "0",
+					isReactionCountHidden = Frame.isReactionCountHidden,
+					onReactionActivated = Frame.onReactionActivated or noop,
+					rightInset = (UseTokensResult.Size.Size_600 - UseTokensResult.Size.Size_400) / 2
+				}) else nil,
+				ReactionBottomSpacer = if Frame.showReactionControl then ReactModule.createElement(FoundationModule.View, {
+					tag = "fill",
+					LayoutOrder = 4,
+					Size = UDim2.fromOffset(0, if NoHasAnchorRef then UseTokensResult.Size.Size_600 + UseTokensResult.Gap.XSmall else 0)
+				}) else nil
+			}) else nil
 		}),
 		RowActionsMenu = if ActionsMenu == nil or not HasAnchorRef or UseStateResult == nil then nil else ReactModule.createElement(CommentActionsMenuModule, {
 			commentId = Frame.commentId,

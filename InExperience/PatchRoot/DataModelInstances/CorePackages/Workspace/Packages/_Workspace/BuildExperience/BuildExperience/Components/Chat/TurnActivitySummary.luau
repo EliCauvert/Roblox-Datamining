@@ -12,6 +12,7 @@ local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local FFlagBuildExperienceManageMonetizationTool = require(Parent.SharedFlags).FFlagBuildExperienceManageMonetizationTool
 local FFlagBuildExperienceChatAccordionScrollAnchorModule = require(BuildExperience.Flags.FFlagBuildExperienceChatAccordionScrollAnchor)
 local FFlagBuildExperiencePromptStallMessageModule = require(BuildExperience.Flags.FFlagBuildExperiencePromptStallMessage)
+local FFlagBuildExperienceToolDisplaySummaryModule = require(BuildExperience.Flags.FFlagBuildExperienceToolDisplaySummary)
 local Icon = FoundationModule.Icon
 local ScrollView = FoundationModule.ScrollView
 local Text = FoundationModule.Text
@@ -104,7 +105,7 @@ local function _(p1, p2, p3, p4, p5, p6, p7, p8, p9)
 end
 
 local function localizeActivityLabel(CHATTOOL, SummaryToolActivity, p1, Tool, UseContextResult)
-	-- upvalues: LocalizationStringsModule (copy), FFlagBuildExperienceManageMonetizationTool (copy)
+	-- upvalues: FFlagBuildExperienceToolDisplaySummaryModule (copy), LocalizationStringsModule (copy), FFlagBuildExperienceManageMonetizationTool (copy)
 	local v1 = p1[CHATTOOL]
 	
 	if v1 ~= nil then
@@ -112,6 +113,9 @@ local function localizeActivityLabel(CHATTOOL, SummaryToolActivity, p1, Tool, Us
 	end
 	if SummaryToolActivity == nil or SummaryToolActivity.kind ~= "tool_call" then
 		return CHATTOOL
+	end
+	if FFlagBuildExperienceToolDisplaySummaryModule and SummaryToolActivity.status ~= "failed" and typeof(SummaryToolActivity.displaySummary) == "string" and SummaryToolActivity.displaySummary ~= "" then
+		return SummaryToolActivity.displaySummary
 	end
 	local Title = if typeof(SummaryToolActivity.title) == "string" and SummaryToolActivity.title ~= "" then SummaryToolActivity.title else LocalizationStringsModule.CHAT_TOOL
 	local ChatToolActivityLocalizationKey = LocalizationStringsModule.getChatToolActivityLocalizationKey(SummaryToolActivity.title, SummaryToolActivity.status)
@@ -163,7 +167,7 @@ return function(Frame)
 	}
 	local LocalizeActivityLabelResult = if ActionCount == nil or ActionCount <= 1 or Segment.summaryToolActivity ~= nil then localizeActivityLabel(UseReactiveValueResult, Segment.summaryToolActivity, config, UseLocalizationResult.tool, UseContextResult) else UseLocalizationResult.taskCount
 	
-	local function v48(p1, LayoutOrder)
+	local function v49(p1, LayoutOrder)
 		-- upvalues: localizeActivityLabel (upval), LocalizationStringsModule (upval), config (copy), UseLocalizationResult (copy), UseContextResult (copy), createActivityText (upval)
 		return if p1.kind == "tool_call" then createActivityText(localizeActivityLabel(LocalizationStringsModule.CHAT_TOOL, p1, config, UseLocalizationResult.tool, UseContextResult), LayoutOrder) else nil
 	end
@@ -257,7 +261,7 @@ return function(Frame)
 	local Count = 0
 	
 	for i, value in UseReactiveValueResult1 do
-		local v2 = v48(value, i)
+		local v2 = v49(value, i)
 		
 		if v2 ~= nil then
 			t1[`Tool{i}`] = v2

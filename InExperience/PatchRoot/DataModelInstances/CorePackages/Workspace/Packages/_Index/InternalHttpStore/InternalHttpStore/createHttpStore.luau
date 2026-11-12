@@ -1,5 +1,7 @@
 ﻿local Parent = script.Parent
-local SignalsModule = require(Parent.Parent.Signals)
+local Parent1 = Parent.Parent
+local SignalsModule = require(Parent1.Signals)
+local FFlagDisableLegacyReportToDiagModule = require(Parent1.SharedFlags.FFlagDisableLegacyReportToDiag)
 local HttpSessionTrackerModule = require(Parent.HttpSessionTracker)
 local CreateFetchSignalModule = require(Parent.createFetchSignal)
 local CreateCancelRequestHandlerModule = require(Parent.GlobalHandlers.createCancelRequestHandler)
@@ -9,21 +11,23 @@ local _ = require(Parent.HttpStoreTypes)
 local t = {}
 
 return function()
-	-- upvalues: t (ref), CreateFetchSignalModule (copy), CreateCancelRequestHandlerModule (copy), CreateNetworkStatsHandlerModule (copy), CreateGrafanaLoggingHandlerModule (copy), SignalsModule (copy), HttpSessionTrackerModule (copy)
+	-- upvalues: t (ref), CreateFetchSignalModule (copy), CreateCancelRequestHandlerModule (copy), FFlagDisableLegacyReportToDiagModule (copy), CreateNetworkStatsHandlerModule (copy), CreateGrafanaLoggingHandlerModule (copy), SignalsModule (copy), HttpSessionTrackerModule (copy)
 	return {
 		fetch = function(Key, p1)
-			-- upvalues: t (upval), CreateFetchSignalModule (upval), CreateCancelRequestHandlerModule (upval), CreateNetworkStatsHandlerModule (upval), CreateGrafanaLoggingHandlerModule (upval), SignalsModule (upval)
+			-- upvalues: t (upval), CreateFetchSignalModule (upval), CreateCancelRequestHandlerModule (upval), FFlagDisableLegacyReportToDiagModule (upval), CreateNetworkStatsHandlerModule (upval), CreateGrafanaLoggingHandlerModule (upval), SignalsModule (upval)
 			if Key and t[Key] then
 				return t[Key].getFetchSignal, t[Key].cancelRequest
 			end
 			local FetchSignalModule, FetchSignalModule2 = CreateFetchSignalModule(p1)
 			local CancelRequestHandlerModule = CreateCancelRequestHandlerModule(FetchSignalModule)
-			local NetworkStatsHandlerModule = CreateNetworkStatsHandlerModule(CancelRequestHandlerModule)
+			local NetworkStatsHandlerModule = if FFlagDisableLegacyReportToDiagModule then nil else CreateNetworkStatsHandlerModule(CancelRequestHandlerModule)
 			local GrafanaLoggingHandlerModule = CreateGrafanaLoggingHandlerModule(CancelRequestHandlerModule)
 			
 			local function CancelRequest()
 				-- upvalues: NetworkStatsHandlerModule (copy), GrafanaLoggingHandlerModule (copy), FetchSignalModule2 (copy)
-				NetworkStatsHandlerModule()
+				if NetworkStatsHandlerModule then
+					NetworkStatsHandlerModule()
+				end
 				GrafanaLoggingHandlerModule()
 				FetchSignalModule2()
 			end
@@ -41,7 +45,10 @@ return function()
 				CancelRequest = function()
 					-- upvalues: Effect (copy), NetworkStatsHandlerModule (copy), GrafanaLoggingHandlerModule (copy), FetchSignalModule2 (copy), t (upval), Key (copy)
 					Effect()
-					NetworkStatsHandlerModule()
+					
+					if NetworkStatsHandlerModule then
+						NetworkStatsHandlerModule()
+					end
 					GrafanaLoggingHandlerModule()
 					FetchSignalModule2()
 					t[Key] = nil

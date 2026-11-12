@@ -1,3 +1,1 @@
-﻿local FFlagBuildExperienceChatResourceAttachments = require(script:FindFirstAncestor("BuildExperience").Parent.SharedFlags).FFlagBuildExperienceChatResourceAttachments
-
-return game:DefineFastFlag("BuildExperienceDeveloperProductContext", false) and FFlagBuildExperienceChatResourceAttachments
+﻿return game:DefineFastFlag("BuildExperienceDeveloperProductContext", false)

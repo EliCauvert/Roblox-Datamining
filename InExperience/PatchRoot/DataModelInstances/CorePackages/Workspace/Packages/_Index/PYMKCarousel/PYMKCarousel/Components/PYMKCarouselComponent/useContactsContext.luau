@@ -8,15 +8,26 @@ local RoduxFriends = DependenciesModule.RoduxFriends
 local RecommendationContextType = RoduxFriends.Enums.RecommendationContextType
 local _ = require(PYMKCarousel.Common.DirectRecommendationTypes)
 local FFlagLuaAppEnableSduiHomePage = require(Parent.SharedFlags).FFlagLuaAppEnableSduiHomePage
+local FFlagPymkCarouselExtendProps = require(Parent.SharedFlags).FFlagPymkCarouselExtendProps
 
 return function(p1, p2)
-	-- upvalues: FFlagLuaAppEnableSduiHomePage (copy), UseSelectorFunction (copy), RoduxFriends (copy), TutilsModule (copy), ReactModule (copy), RecommendationContextType (copy)
+	-- upvalues: FFlagLuaAppEnableSduiHomePage (copy), FFlagPymkCarouselExtendProps (copy), UseSelectorFunction (copy), RoduxFriends (copy), TutilsModule (copy), ReactModule (copy), RecommendationContextType (copy)
 	local P1 = nil
-	P1 = if FFlagLuaAppEnableSduiHomePage then p2 or {} else UseSelectorFunction(function(p3)
-		-- upvalues: RoduxFriends (upval)
-		return RoduxFriends.Selectors.selectRecommendationsForUserId(p3)((tostring(p3.LocalUserId))) or {}
-	end, TutilsModule.shallowEqual)
 	
+	if FFlagLuaAppEnableSduiHomePage then
+		P1 = p2 or {}
+	elseif FFlagPymkCarouselExtendProps then
+		local UseSelectorResult = UseSelectorFunction(function(p3)
+			-- upvalues: RoduxFriends (upval)
+			return RoduxFriends.Selectors.selectRecommendationsForUserId(p3)((tostring(p3.LocalUserId))) or {}
+		end, TutilsModule.shallowEqual)
+		P1 = p2 or UseSelectorResult
+	else
+		P1 = UseSelectorFunction(function(p3)
+			-- upvalues: RoduxFriends (upval)
+			return RoduxFriends.Selectors.selectRecommendationsForUserId(p3)((tostring(p3.LocalUserId))) or {}
+		end, TutilsModule.shallowEqual)
+	end
 	return (ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), RecommendationContextType (upval), P1 (ref)
 		local Contacts = {}

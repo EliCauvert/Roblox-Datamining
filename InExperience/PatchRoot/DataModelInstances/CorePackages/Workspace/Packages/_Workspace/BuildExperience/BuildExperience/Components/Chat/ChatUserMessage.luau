@@ -5,12 +5,10 @@ local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local Default = require(Parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
 local _ = require(BuildExperience.Chat.chatTypes)
-local FFlagBuildExperienceChatImageAttachmentsModule = require(BuildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
-local FFlagBuildExperienceChatResourceAttachments = require(Parent.SharedFlags).FFlagBuildExperienceChatResourceAttachments
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local EscapeRichTextModule = require(BuildExperience.utils.escapeRichText)
-local ChatImagePreviewListModule = if FFlagBuildExperienceChatImageAttachmentsModule then require(script.Parent.ChatImagePreviewList) else nil
-local ChatResourceAttachmentListModule = if FFlagBuildExperienceChatResourceAttachments then require(script.Parent.ChatResourceAttachmentList) else nil
+local ChatImagePreviewListModule = require(script.Parent.ChatImagePreviewList)
+local ChatResourceAttachmentListModule = require(script.Parent.ChatResourceAttachmentList)
 local UseTriggerFeedbackFunction = require(Parent.InteractionFeedback).useTriggerFeedback
 local Menu = FoundationModule.Menu
 local Text = FoundationModule.Text
@@ -96,11 +94,11 @@ local function CopyableUserMessageBubble(Frame)
 end
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: FFlagBuildExperienceChatImageAttachmentsModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), ReactModule (copy), View (copy), ChatResourceAttachmentListModule (copy), ChatImagePreviewListModule (copy), CopyableUserMessageBubble (copy)
+	-- upvalues: ReactModule (copy), View (copy), ChatResourceAttachmentListModule (copy), ChatImagePreviewListModule (copy), CopyableUserMessageBubble (copy)
 	local Text = Frame.message.text
 	local ResourceAttachments = Frame.message.resourceAttachments or {}
-	local v1: boolean = FFlagBuildExperienceChatImageAttachmentsModule and (Frame.message.images ~= nil and #Frame.message.images > 0)
-	local v2: boolean = FFlagBuildExperienceChatResourceAttachments and #ResourceAttachments > 0
+	local v1: boolean = Frame.message.images ~= nil and #Frame.message.images > 0
+	local v2 = #ResourceAttachments > 0
 	
 	return ReactModule.createElement(View, {
 		tag = "row gap-small size-full-0 auto-y",

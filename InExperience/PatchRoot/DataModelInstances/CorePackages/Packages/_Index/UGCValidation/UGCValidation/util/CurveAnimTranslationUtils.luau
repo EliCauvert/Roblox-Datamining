@@ -1,19 +1,4 @@
 ﻿return {
-	positionHasKeyframes = function(Object): boolean
-		local Position = Object:FindFirstChild("Position")
-		
-		if not Position or not Position:IsA("Vector3Curve") then
-			return false
-		end
-		for _, ChildName in { "X", "Y", "Z" } do
-			local Child = Position:FindFirstChild(ChildName)
-			
-			if Child and Child:IsA("FloatCurve") and #Child:GetKeys() > 0 then
-				return true
-			end
-		end
-		return false
-	end,
 	translationExceedsThreshold = function(Object, p1)
 		local Position = Object:FindFirstChild("Position")
 		

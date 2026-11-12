@@ -1,4 +1,5 @@
-﻿local ViewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
+﻿local FFlagViewRecyclerReact084 = require(script:FindFirstAncestor("ViewRecyclerRoblox").Flags).FFlagViewRecyclerReact084
+local ViewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
 local _ = require(ViewRecyclerRoblox.Parent.ViewRecycler)
 local SlotGeometryModule = require(ViewRecyclerRoblox.RobloxAdapter.SlotGeometry)
 
@@ -125,23 +126,22 @@ local CanvasItemPlacerModule = {
 			p1.Visible = false
 			p2.visible = false
 		end
-	end,
-	detach = function(Frame, State): number
+	end
+}
+
+if FFlagViewRecyclerReact084 then
+	function CanvasItemPlacerModule.release(p1, State): number
 		local Count = 0
 		
 		if State.unpinnedZIndex ~= nil then
-			if Frame.ZIndex ~= State.unpinnedZIndex then
-				Frame.ZIndex = State.unpinnedZIndex
+			if p1.ZIndex ~= State.unpinnedZIndex then
+				p1.ZIndex = State.unpinnedZIndex
 				Count += 1
 			end
 			State.unpinnedZIndex = nil
 		end
-		if Frame.Visible then
-			Frame.Visible = false
-			Count += 1
-		end
-		if Frame.Parent ~= nil then
-			Frame.Parent = nil
+		if p1.Visible then
+			p1.Visible = false
 			Count += 1
 		end
 		State.parent = nil
@@ -154,25 +154,61 @@ local CanvasItemPlacerModule = {
 		
 		return Count
 	end
-}
-
-function CanvasItemPlacerModule.detachForTransfer(Frame, p1)
-	-- upvalues: CanvasItemPlacerModule (copy)
-	local DetachResult = CanvasItemPlacerModule.detach(Frame, p1)
-	
-	if Frame.Position ~= UDim2.new() then
-		Frame.Position = UDim2.new()
-		DetachResult += 1
+end
+function CanvasItemPlacerModule.detach(Frame, State)
+	-- upvalues: FFlagViewRecyclerReact084 (copy), CanvasItemPlacerModule (copy)
+	local ReleaseResult = nil
+	if FFlagViewRecyclerReact084 then
+		ReleaseResult = CanvasItemPlacerModule.release(Frame, State)
+	else
+		ReleaseResult = 0
+		
+		if State.unpinnedZIndex ~= nil then
+			if Frame.ZIndex ~= State.unpinnedZIndex then
+				Frame.ZIndex = State.unpinnedZIndex
+				ReleaseResult += 1
+			end
+			State.unpinnedZIndex = nil
+		end
+		if Frame.Visible then
+			Frame.Visible = false
+			ReleaseResult += 1
+		end
 	end
-	if Frame.Size ~= UDim2.new() then
-		Frame.Size = UDim2.new()
-		DetachResult += 1
+	if Frame.Parent ~= nil then
+		Frame.Parent = nil
+		ReleaseResult += 1
 	end
-	if Frame.AutomaticSize ~= Enum.AutomaticSize.None then
-		Frame.AutomaticSize = Enum.AutomaticSize.None
-		DetachResult += 1
+	if not FFlagViewRecyclerReact084 then
+		State.parent = nil
+		State.anchorPointInitialized = false
+		State.position = nil
+		State.size = nil
+		State.automaticSize = nil
+		State.visible = nil
+		State.zIndex = nil
 	end
-	return DetachResult
+	return ReleaseResult
 end
 
+if not FFlagViewRecyclerReact084 then
+	function CanvasItemPlacerModule.detachForTransfer(Frame, p1)
+		-- upvalues: CanvasItemPlacerModule (copy)
+		local DetachResult = CanvasItemPlacerModule.detach(Frame, p1)
+		
+		if Frame.Position ~= UDim2.new() then
+			Frame.Position = UDim2.new()
+			DetachResult += 1
+		end
+		if Frame.Size ~= UDim2.new() then
+			Frame.Size = UDim2.new()
+			DetachResult += 1
+		end
+		if Frame.AutomaticSize ~= Enum.AutomaticSize.None then
+			Frame.AutomaticSize = Enum.AutomaticSize.None
+			DetachResult += 1
+		end
+		return DetachResult
+	end
+end
 return CanvasItemPlacerModule

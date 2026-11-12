@@ -1,0 +1,3 @@
+﻿local SharedFlagsModule = require(script:FindFirstAncestor("BuildExperience").Parent.SharedFlags)
+
+return require(script.Parent.FFlagBuildExperienceChatCaptureGalleryEmptyEducation) and (SharedFlagsModule.FFlagBuildExperienceInGameShell and SharedFlagsModule.FFlagBuildExperienceInGameCaptureToChat)

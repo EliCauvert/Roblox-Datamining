@@ -8,12 +8,11 @@ local WithStyleFunction = UIBloxModule.Style.withStyle
 local WithSelectionCursorProviderFunction = UIBloxModule.App.SelectionImage.withSelectionCursorProvider
 local CursorKind = UIBloxModule.App.SelectionImage.CursorKind
 local LoadableImage = UIBloxModule.App.Loading.LoadableImage
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), UserInputService (copy), WithSelectionCursorProviderFunction (copy), WithStyleFunction (copy), CursorKind (copy), FoundationModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), LoadableImage (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), UserInputService (copy), WithSelectionCursorProviderFunction (copy), WithStyleFunction (copy), CursorKind (copy), FoundationModule (copy), NormalizeFontFaceFunction (copy), LoadableImage (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsIsRich = p1.isRich == true
 	local v1 = (p1.layoutOrder or 1) > 1
@@ -45,9 +44,9 @@ return ReactModule.memo(function(p1)
 	end
 	
 	return WithSelectionCursorProviderFunction(function(Callback)
-		-- upvalues: WithStyleFunction (upval), ReactModule (upval), UseStateResult (copy), Size1600 (copy), p1 (copy), CursorKind (upval), onInputBegan (copy), UseStateResult2 (copy), v1 (copy), UseTokensResult (copy), FoundationModule (upval), Size600 (copy), Size1100 (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), IsIsRich (copy), UseLocalizationResult (copy), Size900 (copy), LoadableImage (upval)
+		-- upvalues: WithStyleFunction (upval), ReactModule (upval), UseStateResult (copy), Size1600 (copy), p1 (copy), CursorKind (upval), onInputBegan (copy), UseStateResult2 (copy), v1 (copy), UseTokensResult (copy), FoundationModule (upval), Size600 (copy), Size1100 (copy), NormalizeFontFaceFunction (upval), IsIsRich (copy), UseLocalizationResult (copy), Size900 (copy), LoadableImage (upval)
 		return WithStyleFunction(function(p2)
-			-- upvalues: ReactModule (upval), UseStateResult (upval), Size1600 (upval), p1 (upval), Callback (copy), CursorKind (upval), onInputBegan (upval), UseStateResult2 (upval), v1 (upval), UseTokensResult (upval), FoundationModule (upval), Size600 (upval), Size1100 (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), IsIsRich (upval), UseLocalizationResult (upval), Size900 (upval), LoadableImage (upval)
+			-- upvalues: ReactModule (upval), UseStateResult (upval), Size1600 (upval), p1 (upval), Callback (copy), CursorKind (upval), onInputBegan (upval), UseStateResult2 (upval), v1 (upval), UseTokensResult (upval), FoundationModule (upval), Size600 (upval), Size1100 (upval), NormalizeFontFaceFunction (upval), IsIsRich (upval), UseLocalizationResult (upval), Size900 (upval), LoadableImage (upval)
 			return ReactModule.createElement("ImageButton", {
 				Image = "",
 				BackgroundColor3 = if UseStateResult then p2.Theme.BackgroundOnPress.Color else p2.Theme.BackgroundDefault.Color,
@@ -130,8 +129,7 @@ return ReactModule.memo(function(p1)
 							Size = UDim2.new(1, 0, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y,
 							Text = p1.title,
-							Font = if FoundationFontFaceMigration then nil else p2.Font.Body.Font,
-							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font) else nil,
+							FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font),
 							TextSize = p2.Font.BaseSize * p2.Font.Body.RelativeSize,
 							TextColor3 = p2.Theme.TextDefault.Color,
 							TextTransparency = p2.Theme.TextDefault.Transparency,
@@ -147,8 +145,7 @@ return ReactModule.memo(function(p1)
 							Size = UDim2.new(1, 0, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y,
 							Text = UseLocalizationResult.category,
-							Font = if FoundationFontFaceMigration then nil else p2.Font.CaptionBody.Font,
-							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodySmall.Font) else nil,
+							FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.BodySmall.Font),
 							TextSize = p2.Font.BaseSize * p2.Font.CaptionBody.RelativeSize,
 							TextColor3 = p2.Theme.TextMuted.Color,
 							TextTransparency = p2.Theme.TextMuted.Transparency,

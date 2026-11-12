@@ -18,6 +18,7 @@ return {
 		FFlagMomentsTextOverlayV2Redesign = require(script.Flags.FFlagMomentsTextOverlayV2Redesign),
 		FFlagMomentsSmartVideoFill = require(script.Flags.FFlagMomentsSmartVideoFill),
 		FFlagMomentsAudioSaveButton = require(script.Flags.FFlagMomentsAudioSaveButton),
+		FFlagMomentsParentTimeLimit = require(script.Flags.FFlagMomentsParentTimeLimit),
 		FFlagMomentsTextOverlayChipGrowAboveKeyboard = require(script.Flags.FFlagMomentsTextOverlayChipGrowAboveKeyboard),
 		FFlagMomentsTextOverlayEdgeClipFix = require(script.Flags.FFlagMomentsTextOverlayEdgeClipFix),
 		GetFFlagMomentsUseUploadPostAsync = require(script.Flags.GetFFlagMomentsUseUploadPostAsync),
