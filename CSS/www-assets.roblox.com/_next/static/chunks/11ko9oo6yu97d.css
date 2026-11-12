@@ -1,0 +1,71 @@
+.trusted-friend-social-avatar-circle {
+    border-radius: 50%;
+    flex-shrink: 0;
+    width: 3rem;
+    height: 3rem;
+    position: relative;
+    overflow: hidden
+}
+
+.trusted-friend-social-avatar-circle:has(>.thumbnail-2d-container>img[src*=-ProfileFrame]) {
+    overflow: visible
+}
+
+.trusted-friend-social-avatar-circle .thumbnail-2d-container.shimmer {
+    background: 0 0 !important;
+    animation: none !important
+}
+
+.trusted-friend-social-avatar-circle .trusted-friend-social-avatar-thumb.thumbnail-2d-container {
+    float: none;
+    box-sizing: border-box;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    display: block
+}
+
+.trusted-friend-social-avatar-circle .trusted-friend-social-avatar-loading-overlay {
+    pointer-events: none;
+    box-sizing: border-box;
+    border-radius: 50%;
+    display: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0
+}
+
+.trusted-friend-social-avatar-circle:has(.thumbnail-2d-container.shimmer) .trusted-friend-social-avatar-loading-overlay {
+    z-index: 10;
+    -webkit-backdrop-filter: blur(40px);
+    background-size: 100% 100%;
+    animation: 1.7s linear infinite forwards trustedFriendsPlaceholderShimmer;
+    display: block
+}
+
+.light-theme .trusted-friend-social-avatar-circle:has(.thumbnail-2d-container.shimmer) .trusted-friend-social-avatar-loading-overlay {
+    background: linear-gradient(90deg, #0000 0%, #1212154d 50%, #0000 100%) 0 0/100% 100%
+}
+
+.dark-theme .trusted-friend-social-avatar-circle:has(.thumbnail-2d-container.shimmer) .trusted-friend-social-avatar-loading-overlay {
+    background: linear-gradient(90deg, #0000 0%, #ffffff4d 50%, #0000 100%) 0 0/100% 100%
+}
+
+@keyframes trustedFriendsPlaceholderShimmer {
+    0% {
+        background-position: -48px 0
+    }
+
+    to {
+        background-position: 48px 0
+    }
+}
+
+.trusted-friends-modal-learn-more-link {
+    text-underline-offset: .15em;
+    text-decoration: underline
+}
+
+/*# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/0gfouk7rzka10.css.map*/

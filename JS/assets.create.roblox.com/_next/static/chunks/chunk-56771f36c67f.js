@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "23bce802-ee20-7637-038e-b90aa5a0beeb")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "dce6061c-7e49-ccb8-c28d-5693fab10632")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 271773, e => {
@@ -1243,9 +1243,6 @@
         }
     }, "dashboard", 0, c, "developerForum", 0, {
         getBaseUrl: () => "https://devforum.roblox.com",
-        getCdnBaseUrl: () => "https://doy2mn9upadnk.cloudfront.net",
-        getMediaCdnBaseUrl: () => "//d3vcfwomg2mj2z.cloudfront.net",
-        getAnnouncementsPath: () => "/c/updates/announcements/36",
         getPublicSfxAnnouncementPath: () => "/t/public-sound-effects-upload-are-now-available-for-creators/2980704"
     }, "docs", 0, {
         getUrl: () => i,
@@ -1471,8 +1468,8 @@
             }
         }
     }
-    var b = e.i(609305),
-        y = e.i(41242),
+    var b = e.i(661736),
+        y = e.i(270921),
         x = e.i(79187),
         U = e.i(446475),
         P = e.i(47277),
@@ -1809,7 +1806,7 @@
                     color: "secondary",
                     component: "span",
                     children: [F, (0, t.jsx)("img", {
-                        src: "".concat("https://assets.create.roblox.com/dea85e59b76ad172160a6753a6bf9008dac07d11/assets", "/navigation/privacy_icon.png"),
+                        src: "".concat("https://assets.create.roblox.com/92f65b39fe672a81f211c389a9ba64ecea9165e2/assets", "/navigation/privacy_icon.png"),
                         alt: "",
                         style: {
                             marginLeft: "8px",
@@ -1880,5 +1877,5 @@
     e.s(["Y", 0, e => e.includes("/observability/server-management"), "E", 0, n])
 }]);
 
-//# debugId=23bce802-ee20-7637-038e-b90aa5a0beeb
-//# sourceMappingURL=3pu1hiix5tmdy.js.map
+//# debugId=dce6061c-7e49-ccb8-c28d-5693fab10632
+//# sourceMappingURL=0zc6pqhv1riat.js.map

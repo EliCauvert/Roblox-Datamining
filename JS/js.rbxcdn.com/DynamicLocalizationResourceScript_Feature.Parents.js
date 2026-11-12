@@ -459,7 +459,7 @@ Roblox.LangDynamic["Feature.Parents"] = {
     "Button.DontAllow": "Don't Allow",
     "Description.Legal.AllowIdVerification": "By selecting \"Allow,\" you agree that Roblox and Roblox’s vendor, Persona, may process your child’s ID and facial images only for safety purposes, including estimating their age and confirming their identity. See {aStart}Roblox's Facial Media Capture Privacy Notice{aEnd} and {aStart}Persona's Privacy Policy{aEnd}.",
     "Header.EmailNotif.AllowIdVerification": "Review your child’s request to use their ID for added safety",
-    "Description.EmailNotif.AllowIdVerification": "Your child, {childUsername}, requests to use their ID for added safety on Roblox. To approve this request, you’ll need a Roblox account with parent privileges.",
+    "Description.EmailNotif.AllowIdVerification": "Your child, {childUsername}, requests to use their ID for added safety on Roblox.",
     "Button.EmailNotif.AllowIdVerification": "View request",
     "Heading.ConversationalRequest.RobuxTransferLimits": "Set your child's Robux transfer limits",
     "ODPChallenge.ToS.HeaderTitle": "Parent mode",

@@ -1,0 +1,407 @@
+.account-switcher-list {
+    max-height: 432px;
+    margin-top: 12px;
+    padding: 0
+}
+
+.account-switcher-list .account-selection-list-item {
+    width: 100%;
+    height: 72px
+}
+
+.account-switcher-list .account-selection-list-item .account-selection,
+.account-switcher-list .account-selection-list-item .active-account {
+    cursor: pointer;
+    border-radius: 6px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 12px;
+    transition: all .1s linear;
+    display: flex
+}
+
+.account-switcher-list .account-selection-list-item .account-selection .thumbnail-2d-container,
+.account-switcher-list .account-selection-list-item .active-account .thumbnail-2d-container {
+    border-radius: 50%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    margin: 12px 12px 12px 0;
+    padding: 0;
+    display: inline-block
+}
+
+.account-switcher-list .account-selection-list-item .account-selection .account-switcher-icon-add,
+.account-switcher-list .account-selection-list-item .active-account .account-switcher-icon-add {
+    text-align: center;
+    border-radius: 50%;
+    flex: 0 0 48px;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    min-width: 48px;
+    max-width: 48px;
+    height: 48px;
+    min-height: 48px;
+    max-height: 48px;
+    margin-right: 12px;
+    display: flex
+}
+
+.light-theme .account-switcher-list .account-selection-list-item .account-selection .account-switcher-icon-add,
+.light-theme .account-switcher-list .account-selection-list-item .active-account .account-switcher-icon-add {
+    background: #c7cbce
+}
+
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection .account-switcher-icon-add,
+.dark-theme .account-switcher-list .account-selection-list-item .active-account .account-switcher-icon-add {
+    background: #656668
+}
+
+.account-switcher-list .account-selection-list-item .account-selection .account-switcher-icon-add .icon-plus,
+.account-switcher-list .account-selection-list-item .active-account .account-switcher-icon-add .icon-plus {
+    background-position: 0 -990px;
+    background-size: 100%;
+    width: 18px;
+    height: 18px
+}
+
+.account-switcher-list .account-selection-list-item .account-selection .account-switcher-icon-add .icon-plus:hover,
+.account-switcher-list .account-selection-list-item .active-account .account-switcher-icon-add .icon-plus:hover {
+    background-position: -18px -990px
+}
+
+.account-switcher-list .account-selection-list-item .account-selection .account-switcher-icon-add .icon-plus,
+.account-switcher-list .account-selection-list-item .active-account .account-switcher-icon-add .icon-plus {
+    background-size: 200%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    padding: 0
+}
+
+.account-switcher-list .account-selection-list-item .account-selection .account-selection-name-container,
+.account-switcher-list .account-selection-list-item .active-account .account-selection-name-container {
+    flex: 235px;
+    height: 100%;
+    padding-right: 48px;
+    display: grid
+}
+
+.account-switcher-list .account-selection-list-item .account-selection .account-selection-name-container .account-selection-displayname,
+.account-switcher-list .account-selection-list-item .active-account .account-selection-name-container .account-selection-displayname {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    align-self: end;
+    font-size: 14px;
+    font-weight: 700;
+    overflow: hidden
+}
+
+.account-switcher-list .account-selection-list-item .account-selection .account-selection-name-container .account-selection-username,
+.account-switcher-list .account-selection-list-item .active-account .account-selection-name-container .account-selection-username {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    align-self: start;
+    margin-top: 4px;
+    font-size: 12px;
+    overflow: hidden
+}
+
+.account-switcher-list .account-selection-list-item .account-selection .account-selection-name-container .account-selection-add-account,
+.account-switcher-list .account-selection-list-item .active-account .account-selection-name-container .account-selection-add-account {
+    align-self: center;
+    font-size: 14px;
+    font-weight: 700
+}
+
+.account-switcher-list .account-selection-list-item .account-selection .spinner,
+.account-switcher-list .account-selection-list-item .active-account .spinner {
+    margin: 0
+}
+
+.account-switcher-list .account-selection-list-item .account-selection .spinner-sm,
+.account-switcher-list .account-selection-list-item .active-account .spinner-sm {
+    background-size: 55px 16px;
+    flex-shrink: 0;
+    flex-basis: 55px;
+    height: 16px
+}
+
+.account-switcher-list .account-selection-list-item .account-selection .accept-icon-image,
+.account-switcher-list .account-selection-list-item .active-account .accept-icon-image {
+    background-image: url(../media/accept-icon.0jzubhlmljimt.png);
+    background-size: 28px;
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    margin: 0
+}
+
+.light-theme .account-switcher-list .account-selection-list-item .account-selection {
+    color: #0000;
+    background-color: var(--color-surface-300);
+    border-color: #0000
+}
+
+.light-theme .account-switcher-list .account-selection-list-item .account-selection:hover,
+.light-theme .account-switcher-list .account-selection-list-item .account-selection:focus,
+.light-theme .account-switcher-list .account-selection-list-item .account-selection:active,
+.light-theme .account-switcher-list .account-selection-list-item .account-selection.active,
+.open>.light-theme .account-switcher-list .account-selection-list-item .account-selection.dropdown-toggle {
+    color: #0000;
+    background-color: color-mix(in srgb, var(--color-surface-300), black 10%);
+    border-color: #0000
+}
+
+.light-theme .account-switcher-list .account-selection-list-item .account-selection:active,
+.light-theme .account-switcher-list .account-selection-list-item .account-selection.active,
+.open>.light-theme .account-switcher-list .account-selection-list-item .account-selection.dropdown-toggle {
+    background-image: none
+}
+
+.light-theme .account-switcher-list .account-selection-list-item .account-selection.disabled,
+.light-theme .account-switcher-list .account-selection-list-item .account-selection.disabled:hover,
+.light-theme .account-switcher-list .account-selection-list-item .account-selection.disabled:focus,
+.light-theme .account-switcher-list .account-selection-list-item .account-selection.disabled:active,
+.light-theme .account-switcher-list .account-selection-list-item .account-selection.disabled.active,
+.light-theme .account-switcher-list .account-selection-list-item .account-selection[disabled],
+.light-theme .account-switcher-list .account-selection-list-item .account-selection[disabled]:hover,
+.light-theme .account-switcher-list .account-selection-list-item .account-selection[disabled]:focus,
+.light-theme .account-switcher-list .account-selection-list-item .account-selection[disabled]:active,
+.light-theme .account-switcher-list .account-selection-list-item .account-selection[disabled].active,
+fieldset[disabled] .light-theme .account-switcher-list .account-selection-list-item .account-selection,
+fieldset[disabled] .light-theme .account-switcher-list .account-selection-list-item .account-selection:hover,
+fieldset[disabled] .light-theme .account-switcher-list .account-selection-list-item .account-selection:focus,
+fieldset[disabled] .light-theme .account-switcher-list .account-selection-list-item .account-selection:active,
+fieldset[disabled] .light-theme .account-switcher-list .account-selection-list-item .account-selection.active {
+    background-color: var(--color-surface-300);
+    border-color: #0000
+}
+
+.light-theme .account-switcher-list .account-selection-list-item .account-selection .badge {
+    color: var(--color-surface-300);
+    background-color: #0000
+}
+
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection {
+    color: #0000;
+    background-color: var(--color-surface-300);
+    border-color: #0000
+}
+
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection:hover,
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection:focus,
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection:active,
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection.active,
+.open>.dark-theme .account-switcher-list .account-selection-list-item .account-selection.dropdown-toggle {
+    color: #0000;
+    background-color: color-mix(in srgb, var(--color-surface-300), black 10%);
+    border-color: #0000
+}
+
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection:active,
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection.active,
+.open>.dark-theme .account-switcher-list .account-selection-list-item .account-selection.dropdown-toggle {
+    background-image: none
+}
+
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection.disabled,
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection.disabled:hover,
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection.disabled:focus,
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection.disabled:active,
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection.disabled.active,
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection[disabled],
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection[disabled]:hover,
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection[disabled]:focus,
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection[disabled]:active,
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection[disabled].active,
+fieldset[disabled] .dark-theme .account-switcher-list .account-selection-list-item .account-selection,
+fieldset[disabled] .dark-theme .account-switcher-list .account-selection-list-item .account-selection:hover,
+fieldset[disabled] .dark-theme .account-switcher-list .account-selection-list-item .account-selection:focus,
+fieldset[disabled] .dark-theme .account-switcher-list .account-selection-list-item .account-selection:active,
+fieldset[disabled] .dark-theme .account-switcher-list .account-selection-list-item .account-selection.active {
+    background-color: var(--color-surface-300);
+    border-color: #0000
+}
+
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection .badge {
+    color: var(--color-surface-300);
+    background-color: #0000
+}
+
+.account-switcher-list .account-selection-list-item .account-switcher-foundation-row {
+    text-align: left;
+    background: 0 0;
+    border: 0
+}
+
+.account-switcher-list .account-selection-list-item .account-switcher-foundation-row[type=button] {
+    font: inherit;
+    color: inherit
+}
+
+.account-switcher-list .account-selection-list-item .account-switcher-foundation-row[type=button]:hover,
+.account-switcher-list .account-selection-list-item .account-switcher-foundation-row[type=button]:focus,
+.account-switcher-list .account-selection-list-item .account-switcher-foundation-row[type=button]:active {
+    color: inherit
+}
+
+.account-switcher-list .account-selection-list-item .account-switcher-foundation-row .account-switcher-foundation-check {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    margin: 0
+}
+
+.account-switcher-list.account-switcher-foundation-list {
+    background-color: var(--color-surface-100);
+    margin-top: 0;
+    padding-bottom: 12px
+}
+
+.account-switcher-list.account-switcher-foundation-list .account-selection:not(:hover):not(:focus):not(:active),
+.account-switcher-list.account-switcher-foundation-list .active-account {
+    background-color: var(--color-surface-100)
+}
+
+.light-theme .login-revamp-account-switcher .account-switcher-container .account-switcher-list,
+.dark-theme .login-revamp-account-switcher .account-switcher-container .account-switcher-list,
+.login-revamp-account-switcher .account-switcher-container .account-switcher-list .account-selection:not(:hover):not(:focus):not(:active) {
+    background-color: var(--color-surface-200)
+}
+
+@media (max-width:319px) {
+    .account-switcher-modal .modal-dialog {
+        padding: 0
+    }
+}
+
+@media (min-width:543px) {
+    .account-switcher-modal .modal-dialog {
+        width: 400px
+    }
+}
+
+.account-switcher-modal .modal-dialog .modal-content {
+    border-radius: 8px
+}
+
+.account-switcher-modal .modal-dialog .modal-content .close {
+    float: left
+}
+
+.account-switcher-modal .modal-dialog .modal-content .modal-title {
+    text-align: center;
+    padding-right: 14px;
+    font-size: 20px
+}
+
+.account-switcher-modal .modal-dialog .modal-content .modal-body {
+    padding: 0 12px
+}
+
+.account-switcher-modal .modal-dialog .modal-content .modal-body .account-switcher-help-text {
+    text-align: center;
+    margin: 12px;
+    font-size: 15px
+}
+
+.account-switcher-modal .modal-dialog .modal-content .modal-body .modal-section {
+    padding: 0
+}
+
+.account-switcher-modal .modal-dialog .modal-content .modal-body .account-switcher-account-limit-text {
+    text-align: center;
+    font-size: 10px
+}
+
+.account-switcher-modal .modal-dialog .modal-content .modal-body .account-switcher-button-container {
+    margin: 12px 0
+}
+
+div.account-switcher-modal.account-switcher-foundation-dialog {
+    background-color: var(--color-surface-100);
+    color: var(--color-content-emphasis);
+    border-radius: 8px;
+    width: 400px;
+    min-width: 0;
+    max-width: calc(100vw - 24px);
+    padding: 0;
+    overflow: hidden
+}
+
+@media (max-width:319px) {
+    div.account-switcher-modal.account-switcher-foundation-dialog {
+        width: 100%;
+        max-width: 100%
+    }
+}
+
+div.account-switcher-modal.account-switcher-foundation-dialog .account-switcher-foundation-header {
+    border-bottom: var(--stroke-standard) solid var(--color-stroke-muted);
+    align-items: center;
+    min-height: 72px;
+    padding: 0 12px;
+    display: flex
+}
+
+div.account-switcher-modal.account-switcher-foundation-dialog .account-switcher-foundation-close,
+div.account-switcher-modal.account-switcher-foundation-dialog .account-switcher-foundation-header-spacer {
+    flex: 0 0 48px
+}
+
+div.account-switcher-modal.account-switcher-foundation-dialog .account-switcher-foundation-title {
+    text-align: center;
+    flex: auto;
+    margin: 0;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.4
+}
+
+div.account-switcher-modal.account-switcher-foundation-dialog .account-switcher-foundation-body {
+    background-color: var(--color-surface-100);
+    padding: 0 12px
+}
+
+div.account-switcher-modal.account-switcher-foundation-dialog .account-switcher-foundation-body .account-switcher-foundation-section {
+    background-color: var(--color-surface-100);
+    padding: 0
+}
+
+div.account-switcher-modal.account-switcher-foundation-dialog .account-switcher-foundation-body .account-switcher-help-text {
+    text-align: center;
+    margin: 12px;
+    font-size: 15px
+}
+
+div.account-switcher-modal.account-switcher-foundation-dialog .account-switcher-foundation-body .modal-section {
+    padding: 0
+}
+
+.login-revamp-account-switcher .account-switcher-container {
+    width: 100%
+}
+
+.login-revamp-account-switcher .account-switcher-section {
+    background-color: #0000;
+    width: 100%;
+    margin: 0;
+    padding: 0
+}
+
+.login-revamp-account-switcher .account-switcher-list {
+    border-radius: var(--radius-large);
+    margin-top: var(--padding-medium);
+    padding: var(--padding-medium);
+    border: none;
+    overflow: hidden
+}
+
+/*# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/0fmevh0er~nn4.css.map*/

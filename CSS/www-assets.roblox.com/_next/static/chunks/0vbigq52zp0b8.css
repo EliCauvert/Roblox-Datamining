@@ -1,0 +1,15 @@
+.navbar-download-app-instructions {
+    padding-left: 24px;
+    display: block
+}
+
+.navbar-download-app-instructions>li {
+    list-style: decimal;
+    display: list-item
+}
+
+.navbar-download-app-instructions>li+li {
+    margin-top: 16px
+}
+
+/*# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/08aaqjl8oo44z.css.map*/

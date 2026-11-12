@@ -1361,6 +1361,8 @@ Roblox.LangDynamic["Feature.Groups"] = {
     "Label.LoadingForums": "Loading forums…",
     "Heading.Overview": "Overview",
     "Label.Explore": "Explore",
-    "Message.NoForumCategories": "No forums yet"
+    "Message.NoForumCategories": "No forums yet",
+    "Label.Chat": "Chat",
+    "Header.UppercaseMyGroups": "MY COMMUNITIES"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Groups");

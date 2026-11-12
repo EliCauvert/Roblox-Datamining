@@ -1,0 +1,19 @@
+:root {
+    --left-nav-reserved-width: 0px
+}
+
+@media (min-width:1141px) {
+    .logged-in {
+        --left-nav-reserved-width: 289px
+    }
+}
+
+.left-nav-offset {
+    margin-left: var(--left-nav-reserved-width)
+}
+
+.nav-slots #navbar-robux {
+    min-width: 54px
+}
+
+/*# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/053n2f4duex6c.css.map*/
