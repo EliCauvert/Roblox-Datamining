@@ -1,0 +1,50 @@
+.site-alert {
+    text-align: center;
+    border: 0;
+    margin: 0;
+    padding: 12px 0;
+    font-size: 20px;
+    line-height: 1.4em
+}
+
+.site-alert a {
+    color: inherit;
+    font-weight: 500
+}
+
+@font-face {
+    font-family: Comic Neue;
+    src: url(../media/ComicNeue-Regular.0ncdvun9q.npd.woff2)format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: Comic Neue;
+    src: url(../media/ComicNeue-Bold.0fp08~3x9ol26.woff2)format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap
+}
+
+.theme-classic.classic-theme-variant-1 {
+    --light-mode-action-emphasis-background: #12891d;
+    --dark-mode-action-emphasis-background: #137f1f;
+    --light-mode-action-emphasis-foreground: #fff;
+    --dark-mode-action-emphasis-foreground: #f7f7f8;
+    --light-mode-action-soft-emphasis-background: #12891d4d;
+    --dark-mode-action-soft-emphasis-background: #137f1f66;
+    --light-mode-action-soft-emphasis-foreground: #022708;
+    --dark-mode-action-soft-emphasis-foreground: #e2f8e3;
+    --color-action-emphasis-background: var(--lightningcss-light, var(--light-mode-action-emphasis-background))var(--lightningcss-dark, var(--dark-mode-action-emphasis-background));
+    --color-action-emphasis-foreground: var(--lightningcss-light, var(--light-mode-action-emphasis-foreground))var(--lightningcss-dark, var(--dark-mode-action-emphasis-foreground));
+    --color-action-soft-emphasis-background: var(--lightningcss-light, var(--light-mode-action-soft-emphasis-background))var(--lightningcss-dark, var(--dark-mode-action-soft-emphasis-background));
+    --color-action-soft-emphasis-foreground: var(--lightningcss-light, var(--light-mode-action-soft-emphasis-foreground))var(--lightningcss-dark, var(--dark-mode-action-soft-emphasis-foreground));
+    --inverse-action-emphasis-background: var(--lightningcss-light, var(--dark-mode-action-emphasis-background))var(--lightningcss-dark, var(--light-mode-action-emphasis-background));
+    --inverse-action-emphasis-foreground: var(--lightningcss-light, var(--dark-mode-action-emphasis-foreground))var(--lightningcss-dark, var(--light-mode-action-emphasis-foreground));
+    --inverse-action-soft-emphasis-background: var(--lightningcss-light, var(--dark-mode-action-soft-emphasis-background))var(--lightningcss-dark, var(--light-mode-action-soft-emphasis-background));
+    --inverse-action-soft-emphasis-foreground: var(--lightningcss-light, var(--dark-mode-action-soft-emphasis-foreground))var(--lightningcss-dark, var(--light-mode-action-soft-emphasis-foreground))
+}
+
+/*# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/0gfucmykic6z_.css.map*/

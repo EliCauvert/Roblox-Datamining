@@ -72,6 +72,7 @@ Roblox.LangDynamic["Feature.Friends"] = {
     "Message.More": "{plusSign} {remainingCount} more",
     "Action.AccountDeleted": "Account deleted",
     "Label.MutualFriend": "{mutualFriendsCount, plural, =0 {# mutual friends} =1 {# mutual friend} other {# mutual friends}}",
+    "Action.FriendAdded": "Friend Added",
     "Label.Friend": "Friend",
     "Label.Follower": "Follower",
     "Action.FriendRequestSent": "Friend Request Sent",

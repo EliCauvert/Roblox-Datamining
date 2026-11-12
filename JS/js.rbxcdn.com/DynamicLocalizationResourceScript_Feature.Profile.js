@@ -1,7 +1,7 @@
 var Roblox = Roblox || {};
 Roblox.LangDynamic = Roblox.LangDynamic || {};
 Roblox.LangDynamic["Feature.Profile"] = {
-    "Label.About": "About",
+    "Label.About": "Bio",
     "Label.Creations": "Creations",
     "Label.ShowLess": "Show Less",
     "Label.ReadMore": "Read More",

@@ -117,6 +117,8 @@ Roblox.LangDynamic["Feature.Item"] = {
     "Label.ReportFailure": "Your report couldn't be submitted. Please try again later.",
     "Label.UseGamePass": "Use this Pass in:",
     "Label.By2": "By",
-    "Label.DeleteItemUndercase": "Delete item"
+    "Label.DeleteItemUndercase": "Delete item",
+    "Label.DeleteThisItem": "Delete this item?",
+    "Label.DeleteFromInventoryPermanently": "We'll remove it from your inventory permanently."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Item");

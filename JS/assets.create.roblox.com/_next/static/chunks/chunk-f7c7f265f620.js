@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "f58e2f08-d280-e39b-a33a-56b6f233c694")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "679aabcc-8d09-5440-3105-6218d23497b1")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 593430, e => {
@@ -1068,19 +1068,12 @@
         v = new Set([s.f.TShirt, s.f.Shirt, s.f.Pants, s.f.Hat, s.f.HairAccessory, s.f.FaceAccessory, s.f.NeckAccessory, s.f.ShoulderAccessory, s.f.FrontAccessory, s.f.BackAccessory, s.f.WaistAccessory, s.f.TShirtAccessory, s.f.ShirtAccessory, s.f.PantsAccessory, s.f.JacketAccessory, s.f.SweaterAccessory, s.f.ShortsAccessory, s.f.DressSkirtAccessory]),
         h = new Set([c.i.Body, c.i.DynamicHead, c.i.Shoes]),
         f = new Set,
-        y = new Set;
-
-    function w() {
-        return {
-            assetTypes: new Set(v),
-            bundleTypes: new Set(h)
-        }
-    }
-    let I = new Set,
-        m = new Set,
-        P = null,
-        b = null;
-    async function R(e, r, n) {
+        y = new Set,
+        w = new Set,
+        I = new Set,
+        m = null,
+        P = null;
+    async function b(e, r, n) {
         try {
             var i, l;
             let d = await a.f.getAllowedAssetTypes(e, [t.d.NUMBER_0, t.d.NUMBER_1]);
@@ -1095,40 +1088,43 @@
                 bundleTypes: n
             }
         } catch (e) {
-            return w()
+            return {
+                assetTypes: new Set(v),
+                bundleTypes: new Set(h)
+            }
         }
     }
-    async function S() {
+    async function R() {
         return f.size > 0 ? {
             assetTypes: f,
             bundleTypes: y
-        } : (null != P || (P = R(t.j.NUMBER_2, f, y).finally(() => {
+        } : (null != m || (m = b(t.j.NUMBER_2, f, y).finally(() => {
+            m = null
+        })), m)
+    }
+    async function S() {
+        return w.size > 0 ? {
+            assetTypes: w,
+            bundleTypes: I
+        } : (null != P || (P = b(t.j.NUMBER_1, w, I).finally(() => {
             P = null
         })), P)
     }
     async function T() {
-        return I.size > 0 ? {
-            assetTypes: I,
-            bundleTypes: m
-        } : (null != b || (b = R(t.j.NUMBER_1, I, m).finally(() => {
-            b = null
-        })), b)
-    }
-    async function g() {
-        let [e, t] = await Promise.all([S(), T()]), r = new Set(e.assetTypes);
+        let [e, t] = await Promise.all([R(), S()]), r = new Set(e.assetTypes);
         return t.assetTypes.has(s.f.AvatarBackground) && r.add(s.f.AvatarBackground), r
     }
-    let A = new Set([]),
-        C = {
+    let g = new Set([]),
+        A = {
             [r.V.GameCreated]: "Label.DateOfCreation",
             [r.V.GameName]: "Label.Alphabetical",
             [r.V.LastUpdated]: "Label.LastUpdatedDate"
         },
-        q = {
+        C = {
             [n.W.CreatedUtc]: "Label.DateOfCreation",
             [n.W.StartUtc]: "Label.StartDate"
         },
-        U = [{
+        q = [{
             type: s.f.Place,
             nameKey: "Label.Experiences",
             submenuItems: [{
@@ -1217,8 +1213,8 @@
             type: s.f.AssetPermissionRequests,
             nameKey: "Label.Requests"
         }];
-    e.s(["w", 0, d, "t", 0, l, "l", 0, p, "H", 0, A, "U", 0, U, "Q", 0, f, "x", 0, y, "R", 0, q, "V", 0, S, "X", 0, g, "u", 0, w, "I", 0, T, "s", 0, C])
+    e.s(["w", 0, d, "t", 0, l, "l", 0, p, "H", 0, g, "U", 0, q, "Q", 0, f, "x", 0, y, "R", 0, C, "V", 0, R, "X", 0, T, "I", 0, S, "s", 0, A])
 }]);
 
-//# debugId=f58e2f08-d280-e39b-a33a-56b6f233c694
-//# sourceMappingURL=19ihuk-vf1-it.js.map
+//# debugId=679aabcc-8d09-5440-3105-6218d23497b1
+//# sourceMappingURL=1prm2rtgbqbsb.js.map

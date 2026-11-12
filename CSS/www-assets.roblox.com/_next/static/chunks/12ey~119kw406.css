@@ -1,0 +1,667 @@
+.modal-dialog.modal-md {
+    width: 540px
+}
+
+.modal-dialog.modal-md .modal-content {
+    border-radius: 8px
+}
+
+.modal-dialog .modal-content .modal-header {
+    padding-inline-start: 24px;
+    padding-inline-end: 24px
+}
+
+.modal-dialog .modal-content .modal-header .modal-title {
+    text-align: left;
+    font-size: 22px;
+    font-weight: var(--font-weight-700)
+}
+
+.modal-dialog .modal-content .modal-body {
+    padding: 24px
+}
+
+.use-a-different-payment-method {
+    cursor: pointer;
+    margin: 20px 0
+}
+
+.use-a-different-payment-method div {
+    color: #52adf4;
+    text-decoration: none
+}
+
+.use-a-different-payment-method div:hover {
+    text-decoration: underline
+}
+
+.light-theme .text-footer.legal-text-holder .text-link,
+.dark-theme .text-footer.legal-text-holder .text-link {
+    color: var(--color-content-emphasis)
+}
+
+.text-footer.legal-text-holder .text-link {
+    text-decoration: none
+}
+
+.text-footer.legal-text-holder .text-link:hover {
+    text-decoration: underline
+}
+
+.price-info {
+    margin-top: 24px
+}
+
+.tax {
+    align-items: center;
+    gap: 4px;
+    margin-top: 6px;
+    display: inline-flex
+}
+
+.payment-method-info {
+    margin-top: 20px
+}
+
+.light-theme .divider {
+    border-bottom: 1px solid var(--color-extended-black-10);
+    margin-block-start: 7px;
+    margin-block-end: 7px
+}
+
+.dark-theme .divider {
+    border-bottom: 1px solid var(--color-extended-white-10);
+    margin-block-start: 7px;
+    margin-block-end: 7px
+}
+
+.space-between-container {
+    justify-content: space-between;
+    align-items: center;
+    display: flex
+}
+
+.light-theme .total-due,
+.dark-theme .total-due,
+.light-theme .total-due-price,
+.dark-theme .total-due-price {
+    color: var(--color-content-emphasis);
+    font-weight: var(--font-weight-500)
+}
+
+.light-theme .price-tag,
+.dark-theme .price-tag {
+    font-weight: var(--font-weight-500)
+}
+
+#tax-popover {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px #00000080
+}
+
+#tax-popover .popover-content {
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 12px
+}
+
+.dark-theme #tax-popover .popover-content {
+    color: #fff;
+    background-color: #111214cc
+}
+
+.light-theme #tax-popover .popover-content {
+    color: #202227;
+    background-color: #f7f7f8
+}
+
+.dark-theme #tax-popover .arrow,
+.dark-theme #tax-popover .arrow:after {
+    border-right-color: #111214cc
+}
+
+.light-theme #tax-popover .arrow,
+.light-theme #tax-popover .arrow:after {
+    border-right-color: #f7f7f8
+}
+
+@media (max-width:767px) {
+    .modal-dialog .modal-content .modal-body p {
+        font-size: 9px;
+        line-height: 1.2em
+    }
+}
+
+.delete-saved-payment-legal-text-bold {
+    font-weight: var(--font-weight-800)
+}
+
+.bonus-item-label {
+    font-size: 12px !important
+}
+
+.product {
+    flex-direction: row;
+    align-items: center;
+    display: flex
+}
+
+@media (max-width:543px) {
+    .product {
+        flex-direction: column;
+        align-items: flex-start
+    }
+}
+
+.product {
+    justify-content: flex-start;
+    gap: 8px
+}
+
+.product .icon-wrapper {
+    flex-direction: row;
+    flex: 50%;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    display: flex
+}
+
+.product .icon-wrapper .icon-robux-gold {
+    background-size: 126px;
+    flex: none;
+    width: 60px;
+    height: 60px
+}
+
+.product .icon-wrapper .icon-robux-redesign {
+    flex: none;
+    width: 60px;
+    height: 60px
+}
+
+.light-theme .product .icon-wrapper .icon-robux-redesign {
+    background-image: url(../media/robux_60x60_light.svg.11-1fhahgbtnm.svg)
+}
+
+.dark-theme .product .icon-wrapper .icon-robux-redesign {
+    background-image: url(../media/robux_60x60_dark.svg.02-_0ay9dswms.svg)
+}
+
+.product .icon-wrapper .product-detail {
+    flex-direction: column;
+    margin-top: auto;
+    margin-bottom: auto;
+    display: flex
+}
+
+.light-theme .product .icon-wrapper .product-detail .product-name,
+.dark-theme .product .icon-wrapper .product-detail .product-name {
+    color: var(--color-content-emphasis);
+    font-weight: var(--font-weight-700);
+    font-size: 24px
+}
+
+.light-theme .product .icon-wrapper .product-detail .product-price,
+.dark-theme .product .icon-wrapper .product-detail .product-price {
+    color: var(--color-content-emphasis);
+    font-size: 16px
+}
+
+.product .icon-plus {
+    flex: none
+}
+
+.product .bonus-item-card-small {
+    flex: 50%
+}
+
+.quick-pay-success-modal-body {
+    text-align: center;
+    white-space: pre-line
+}
+
+.quick-pay-success-modal-body .image-container {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    display: flex
+}
+
+.quick-pay-success-modal-body .image-thumb {
+    width: 120px;
+    height: 120px
+}
+
+.quick-pay-success-modal-footer {
+    align-items: center;
+    display: inline-flex
+}
+
+.icon-down,
+.icon-up {
+    flex: none
+}
+
+.payment-method-container {
+    -moz-column-gap: 12px;
+    font-family: var(--config-text-font), "Builder Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    flex-direction: row;
+    flex: 1;
+    align-items: center;
+    column-gap: 12px;
+    min-width: 0;
+    display: flex;
+    overflow: hidden
+}
+
+@media (max-width:410px) {
+    .payment-method-container .card-payment-label {
+        display: none
+    }
+}
+
+.light-theme .payment-method-container .card-asterisk-mask,
+.dark-theme .payment-method-container .card-asterisk-mask {
+    color: var(--color-content-emphasis)
+}
+
+.light-theme .payment-method-container .payment-profile-label,
+.dark-theme .payment-method-container .payment-profile-label {
+    color: var(--color-content-emphasis);
+    font-weight: var(--font-weight-500)
+}
+
+.payment-method-container .paypal-email {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden
+}
+
+.payment-method-container .card-number {
+    width: 111px
+}
+
+@media (max-width:543px) {
+    .payment-method-container .card-number {
+        width: 51px
+    }
+}
+
+.light-theme .payment-method-container .paypal-email,
+.dark-theme .payment-method-container .paypal-email {
+    color: var(--color-content-emphasis);
+    font-weight: var(--font-weight-500)
+}
+
+.payment-method-container .paypal-email {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
+    flex: 1;
+    min-width: 0;
+    padding-left: 1.4em;
+    overflow: hidden
+}
+
+.payment-method-container .card-icon {
+    background: url(../media/payment_methods.0knb5rx6op8~i.png) 50%/cover no-repeat;
+    width: 44px;
+    min-width: 44px;
+    height: 28px;
+    min-height: 28px;
+    display: inline-block
+}
+
+.payment-method-container .card-icon.icon-visa {
+    background-position: -2px -2px
+}
+
+.payment-method-container .card-icon.icon-mastercard {
+    background-position: -2px -34px
+}
+
+.payment-method-container .card-icon.icon-discover {
+    background-position: -2px -66px
+}
+
+.payment-method-container .card-icon.icon-amex {
+    background-position: -2px -98px
+}
+
+.payment-method-container .card-icon.icon-debit {
+    background-position: -2px -130px
+}
+
+.payment-method-container .card-icon.icon-paypal {
+    background-position: -2px -162px
+}
+
+.payment-method-container .card-icon.icon-roblox-credit {
+    background-position: -2px -194px
+}
+
+.payment-method-container .card-icon.icon-generic-card {
+    background-position: -2px -226px
+}
+
+.payment-method-container .card-icon.icon-apple {
+    background-position: -2px -290px
+}
+
+.payment-method-container .card-icon.icon-google {
+    background-position: -2px -322px
+}
+
+.payment-method-container .credit-label {
+    margin-right: 12px
+}
+
+.payment-method-container .credit-balance-price-tag {
+    margin-left: 6px
+}
+
+.light-theme .custom-select {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    position: relative
+}
+
+.light-theme .custom-select .error-message {
+    color: var(--color-extended-red-700);
+    margin-top: 8px;
+    font-size: 12px
+}
+
+.light-theme .custom-select .select-button {
+    cursor: pointer;
+    border: 1px solid var(--color-content-emphasis);
+    background-color: #0000;
+    border-radius: 10px;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 56px;
+    padding-inline-start: 20px;
+    padding-inline-end: 20px;
+    display: flex;
+    overflow: hidden
+}
+
+.light-theme .custom-select .select-button.active {
+    background-color: var(--color-surface-0);
+    border: none;
+    border-radius: 10px 10px 0 0;
+    padding-inline-start: 20px;
+    padding-inline-end: 20px
+}
+
+.light-theme .custom-select .select-button.error {
+    border-color: var(--color-extended-red-700)
+}
+
+.light-theme .custom-select .selected-value {
+    text-align: left
+}
+
+.light-theme .custom-select .select-dropdown {
+    background-color: var(--color-surface-0);
+    z-index: 2;
+    border-radius: 0 0 5px 5px;
+    width: 100%;
+    max-height: 0;
+    list-style: none;
+    transition: max-height .25s ease-in-out;
+    position: absolute;
+    overflow-y: hidden
+}
+
+.light-theme .custom-select .select-dropdown.active {
+    max-height: 200px;
+    overflow-y: auto
+}
+
+.light-theme .custom-select .select-dropdown .dropdown-selection-button {
+    cursor: pointer;
+    border-color: var(--color-extended-gray-500);
+    background-color: #0000;
+    border-width: 1px 0 0;
+    align-items: center;
+    width: 100%;
+    height: 56px;
+    padding-block-start: 10px;
+    padding-block-end: 10px;
+    padding-inline-start: 20px;
+    padding-inline-end: 20px;
+    display: flex;
+    position: relative
+}
+
+.light-theme .custom-select .select-dropdown .dropdown-selection-button .payment-method-container {
+    font-family: var(--config-text-font), "Builder Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    width: 100%
+}
+
+.light-theme .custom-select .select-dropdown .dropdown-selection-button :hover {
+    opacity: .8
+}
+
+.light-theme .custom-select .select-dropdown .dropdown-selection-button div {
+    cursor: pointer;
+    min-width: 100%
+}
+
+.light-theme .custom-select .select-dropdown::-webkit-scrollbar {
+    width: 7px
+}
+
+.light-theme .custom-select .select-dropdown::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 25px
+}
+
+.light-theme .custom-select .select-dropdown::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 25px
+}
+
+.dark-theme .custom-select {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    position: relative
+}
+
+.dark-theme .custom-select .error-message {
+    color: var(--color-extended-red-700);
+    margin-top: 8px;
+    font-size: 12px
+}
+
+.dark-theme .custom-select .select-button {
+    cursor: pointer;
+    border: 1px solid var(--color-content-emphasis);
+    background-color: #0000;
+    border-radius: 10px;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 56px;
+    padding-inline-start: 20px;
+    padding-inline-end: 20px;
+    display: flex;
+    overflow: hidden
+}
+
+.dark-theme .custom-select .select-button.active {
+    background-color: var(--color-surface-0);
+    border: none;
+    border-radius: 10px 10px 0 0;
+    padding-inline-start: 20px;
+    padding-inline-end: 20px
+}
+
+.dark-theme .custom-select .select-button.error {
+    border-color: var(--color-extended-red-700)
+}
+
+.dark-theme .custom-select .selected-value {
+    text-align: left
+}
+
+.dark-theme .custom-select .select-dropdown {
+    background-color: var(--color-surface-0);
+    z-index: 2;
+    border-radius: 0 0 5px 5px;
+    width: 100%;
+    max-height: 0;
+    list-style: none;
+    transition: max-height .25s ease-in-out;
+    position: absolute;
+    overflow-y: hidden
+}
+
+.dark-theme .custom-select .select-dropdown.active {
+    max-height: 200px;
+    overflow-y: auto
+}
+
+.dark-theme .custom-select .select-dropdown .dropdown-selection-button {
+    cursor: pointer;
+    border-color: var(--color-extended-gray-700);
+    background-color: #0000;
+    border-width: 1px 0 0;
+    align-items: center;
+    width: 100%;
+    height: 56px;
+    padding-block-start: 10px;
+    padding-block-end: 10px;
+    padding-inline-start: 20px;
+    padding-inline-end: 20px;
+    display: flex;
+    position: relative
+}
+
+.dark-theme .custom-select .select-dropdown .dropdown-selection-button .payment-method-container {
+    font-family: var(--config-text-font), "Builder Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    width: 100%
+}
+
+.dark-theme .custom-select .select-dropdown .dropdown-selection-button :hover {
+    opacity: .8
+}
+
+.dark-theme .custom-select .select-dropdown .dropdown-selection-button div {
+    cursor: pointer;
+    min-width: 100%
+}
+
+.dark-theme .custom-select .select-dropdown::-webkit-scrollbar {
+    width: 7px
+}
+
+.dark-theme .custom-select .select-dropdown::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 25px
+}
+
+.dark-theme .custom-select .select-dropdown::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 25px
+}
+
+.bonus-item-card-small {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    min-width: 160px;
+    display: flex
+}
+
+.bonus-item-card-small .thumbnail-2d-container {
+    background-color: #0000;
+    width: 55px;
+    height: 55px;
+    margin-top: 2px;
+    padding-top: 0 !important
+}
+
+.bonus-item-card-small .description-container {
+    flex-direction: column;
+    display: flex
+}
+
+.bonus-item-card-small .description-container .description-title {
+    -webkit-box-orient: vertical;
+    max-width: 160px;
+    display: -webkit-box;
+    overflow: hidden
+}
+
+.light-theme .bonus-item-card-small .description-container .description-title,
+.dark-theme .bonus-item-card-small .description-container .description-title {
+    color: var(--color-content-emphasis);
+    font-weight: var(--font-weight-700);
+    font-size: 17px
+}
+
+.light-theme .bonus-item-card-small .description-container .description-subtitle,
+.dark-theme .bonus-item-card-small .description-container .description-subtitle {
+    color: var(--color-content-emphasis);
+    white-space: nowrap;
+    font-size: 12px
+}
+
+.Placeholder {
+    opacity: 1
+}
+
+.Placeholder--animating {
+    color: #0000;
+    background-color: #00000013;
+    border-radius: 4px;
+    height: fit-content;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 10px #00000006
+}
+
+.Placeholder--animating:after {
+    content: "";
+    background: radial-gradient(circle at 80% -20%, #fff9 0, #fff0 20% 100%), radial-gradient(circle at 50% 150%, #fff9 0, #fff0 50% 100%), radial-gradient(circle at 20% -20%, #fff9 0, #fff0 20% 100%);
+    width: 800%;
+    height: 100%;
+    animation: 1.5s linear infinite transition;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-100%)
+}
+
+@keyframes transition {
+    0% {
+        transform: translate(-100%)
+    }
+
+    to {
+        transform: translate(10%)
+    }
+}
+
+.quick-pay-modal {
+    width: 100%
+}
+
+.light-theme .collectible-item-bonus-item-banner {
+    background-color: var(--color-shift-200)
+}
+
+.dark-theme .collectible-item-bonus-item-banner {
+    background-color: var(--color-surface-200)
+}
+
+/*# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/01qsu7dhvabza.css.map*/

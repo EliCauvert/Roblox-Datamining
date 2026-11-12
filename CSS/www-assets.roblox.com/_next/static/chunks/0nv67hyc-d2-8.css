@@ -1,0 +1,13 @@
+.env-overrides-overlay {
+    z-index: 2000;
+    position: fixed;
+    bottom: 12px;
+    left: 12px
+}
+
+.env-overrides-overlay-panel {
+    width: 340px;
+    max-width: calc(100vw - 24px)
+}
+
+/*# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/16vxz-iwhwyow.css.map*/

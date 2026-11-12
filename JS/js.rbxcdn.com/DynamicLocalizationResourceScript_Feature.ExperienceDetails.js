@@ -63,6 +63,7 @@ Roblox.LangDynamic["Feature.ExperienceDetails"] = {
     "PlayOnWebModal.Label.PlayInBrowserInstead": "You can play this game in your browser instead.",
     "PlayOnWebModal.Action.Get": "Get",
     "PlayOnWebModal.Label.CheckingYourDevice": "Checking your device...",
-    "PlayOnWebModal.Label.PlayInYourBrowser": "Play in your browser"
+    "PlayOnWebModal.Label.PlayInYourBrowser": "Play in your browser",
+    "PlayButtonText.PlayOnWebBetaNotice": "Play in browser is in beta"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.ExperienceDetails");

@@ -1,0 +1,19 @@
+.download-link-underline {
+    cursor: pointer;
+    text-decoration: underline
+}
+
+button.download-link-underline {
+    all: unset;
+    cursor: pointer;
+    color: inherit;
+    font: inherit;
+    text-decoration: underline
+}
+
+.install-dialog {
+    width: 728px;
+    max-width: unset !important
+}
+
+/*# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/0rh35ieuqx-fb.css.map*/

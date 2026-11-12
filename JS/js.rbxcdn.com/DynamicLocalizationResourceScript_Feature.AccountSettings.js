@@ -1974,10 +1974,10 @@ Roblox.LangDynamic["Feature.AccountSettings"] = {
     "Description.PersonalizedRecommendationsMoments": "Personalize recommendations on the Moments feed.",
     "Label.WhoCanSeeMyFriendsList": "Friend list",
     "Label.WhoCanSeeMyPastUsernames": "Previous usernames",
-    "Label.WhoCanSeeMyAboutSection": "About",
+    "Label.WhoCanSeeMyAboutSection": "Bio",
     "Description.ProfileVisibilityFriendList": "Who can see your friend list",
     "Description.ProfileVisibilityPreviousUsernames": "Who can see your previous usernames",
-    "Description.ProfileVisibilityAbout": "Who can see the About section on your profile",
+    "Description.ProfileVisibilityAbout": "Who can see your bio",
     "Heading.ProfileVisibility": "Profile visibility",
     "Feature.AccountSettings.Heading.ContentPersonalization": "Content Personalization",
     "Label.AlwaysAsk": "Always ask",
@@ -2005,6 +2005,13 @@ Roblox.LangDynamic["Feature.AccountSettings"] = {
     "ScopeType.Marketplace": "your Marketplace content",
     "ScopeType.MarketplaceItem": "your Marketplace items",
     "ScopeType.MarketplaceItemAppeal": "your Marketplace item appeals",
-    "ScopeType.MarketplaceItemUploadFee": "your Marketplace upload fees and Robux balance"
+    "ScopeType.MarketplaceItemUploadFee": "your Marketplace upload fees and Robux balance",
+    "Description.ParentSide.PersonalizedRecs": "Choose between general and personalized recommendations below. Roblox makes recommendations based on what your child plays and enjoys. {linkStart}Learn more{linkEnd}",
+    "Description.ParentSide.PersonalizedRecsGameSearch": "Personalize results when your child searches for games.",
+    "Description.ParentSide.PersonalizedRecsUserSearch": "Personalize results when your child searches for people.",
+    "Description.ParentSide.PersonalizedRecsAvatarSearch": "Personalize results when your child searches for avatars or avatar items.",
+    "Description.ParentSide.PersonalizedRecsGameRecs": "Personalize game recommendations on your child’s homepage and game details pages.",
+    "Description.ParentSide.PersonalizedRecsPeopleYouMayKnow": "Personalize suggestions for people your child may know on the homepage and Add friends page.",
+    "Description.ParentSide.PersonalizedRecsMoments": "Personalize recommendations on your child’s Moments feed."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.AccountSettings");

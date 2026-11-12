@@ -1,0 +1,78 @@
+.light-theme .buy-robux-section-header {
+    color: var(--color-extended-gray-900)
+}
+
+.dark-theme .buy-robux-section-header {
+    color: var(--color-extended-white-100)
+}
+
+body {
+    width: 100%;
+    min-width: 320px;
+    height: 100%;
+    margin: 0 0 168px;
+    font-family: Builder Sans, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    overflow-y: scroll
+}
+
+body.no-footer {
+    margin-bottom: 0
+}
+
+body.no-footer .container-main {
+    padding-bottom: 0
+}
+
+@media (max-width:991px) {
+    body {
+        margin-bottom: 0
+    }
+}
+
+@media (max-width:767px) {
+    body {
+        font-size: 12px;
+        font-weight: 400
+    }
+}
+
+*,
+:before,
+:after {
+    box-sizing: border-box;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none
+}
+
+a.text-link {
+    color: var(--color-content-emphasis)
+}
+
+a.text-link:hover {
+    text-decoration: underline
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 0;
+    padding: 5px 0
+}
+
+.dark-theme,
+.light-theme {
+    background-color: var(--color-surface-0);
+    color: var(--color-content-emphasis)
+}
+
+/*# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/0h_3d13mig-yg.css.map*/

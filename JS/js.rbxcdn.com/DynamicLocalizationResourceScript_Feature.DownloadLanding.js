@@ -35,6 +35,19 @@ Roblox.LangDynamic["Feature.DownloadLanding"] = {
     "Heading.PlatformVr": "VR",
     "Description.PlatformVr": "Play in virtual reality on Meta Quest.",
     "Action.ShowExperience": "Show {experienceName}",
-    "Action.PreviousExperience": "Previous game"
+    "Action.PreviousExperience": "Previous game",
+    "Heading.AppDownloadBannerWindows": "Download the Roblox Windows app",
+    "Description.AppDownloadBannerWindows": "The Windows app may be faster and gives you access to more features.",
+    "Heading.AppDownloadBannerMac": "Download the Roblox Mac app",
+    "Description.AppDownloadBannerMac": "The Mac app may be faster and gives you access to more features.",
+    "Heading.AppDownloadBannerMobile": "Download the Roblox app",
+    "Description.AppDownloadBannerMobile": "Millions of experiences made by people just like you.",
+    "Action.AppDownloadBannerGet": "Get",
+    "Action.AppDownloadBannerDismiss": "Dismiss",
+    "Label.ExperiencePrismRunway": "Prism Runway",
+    "Label.ExperienceAnimalHospital": "Animal Hospital",
+    "Label.ExperienceDragonAdventures": "Dragon Adventures",
+    "Label.ExperienceDuelingGrounds": "Dueling Grounds",
+    "Label.ExperienceEcosLaBrea": "Ecos La Brea"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.DownloadLanding");
