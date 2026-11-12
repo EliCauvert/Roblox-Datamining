@@ -1362,6 +1362,15 @@ Roblox.LangDynamic["Feature.Groups"] = {
     "Heading.Overview": "Overview",
     "Label.Explore": "Explore",
     "Message.NoForumCategories": "No forums yet",
+    "Action.RemoveImage": "Remove image",
+    "Description.CreateAnnouncement": "Share the latest news and updates with your followers.",
+    "Heading.Attachments": "Attachments",
+    "Description.Attachments": "Attachments appear beneath your announcement.",
+    "Label.DragImageOrUpload": "Drag an image here, or upload one",
+    "Description.AnnouncementImageDimensions": "Images display at {dimensions}.",
+    "Action.UploadImage": "Upload image",
+    "Description.AnnouncementPoll": "Ask members a question with up to 4 answer options.",
+    "Action.AddPoll": "Add poll",
     "Label.Chat": "Chat",
     "Header.UppercaseMyGroups": "MY COMMUNITIES"
 };

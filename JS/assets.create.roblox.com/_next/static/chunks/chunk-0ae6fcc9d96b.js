@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "7b48a4b1-1209-eb0c-84f3-776df3cd99b4")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "5e10a7c3-208d-96d0-2177-d7e467c70ac1")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 642663, e => {
@@ -420,20 +420,20 @@
         }
     }
 
-    function L(e) {
+    function C(e) {
         if (void 0 !== e) return null === e ? null : {
             id: e.id,
             lookType: e.lookType
         }
     }
 
-    function C(e, t) {
+    function L(e, t) {
         return null == e ? e : {
             isFavorited: (0, o.u)(e, "isFavorited") ? e.isFavorited : void 0
         }
     }
 
-    function R(e) {
+    function S(e) {
         if (void 0 !== e) return null === e ? null : {
             itemType: e.itemType,
             itemId: e.itemId,
@@ -441,706 +441,706 @@
         }
     }
 
-    function S(e) {
+    function R(e) {
         return e
     }
+    var q = o._;
+
+    function A() {
+        return null !== q && q.apply(this, arguments) || this
+    }
+    r(A, q), A.prototype.avatarUniverseLinkGetLinkedAvatarsByUniverseRaw = function(e, t) {
+        return n(this, void 0, void 0, function() {
+            var r, n, u;
+            return i(this, function(i) {
+                switch (i.label) {
+                    case 0:
+                        if (null === e.universeId || void 0 === e.universeId) throw new o.w("universeId", "Required parameter requestParameters.universeId was null or undefined when calling avatarUniverseLinkGetLinkedAvatarsByUniverse.");
+                        return r = {}, n = {}, [4, this.request({
+                            path: "/v1/universes/{universeId}/avatars".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))),
+                            schemaPath: "/v1/universes/{universeId}/avatars",
+                            method: "GET",
+                            headers: n,
+                            query: r
+                        }, t)];
+                    case 1:
+                        return u = i.sent(), [2, new o.H(u, function(e) {
+                            return null == e ? e : {
+                                lookIds: (0, o.u)(e, "lookIds") ? e.lookIds : void 0
+                            }
+                        })]
+                }
+            })
+        })
+    }, A.prototype.avatarUniverseLinkGetLinkedAvatarsByUniverse = function(e, o) {
+        return n(this, void 0, void 0, function() {
+            return i(this, function(t) {
+                switch (t.label) {
+                    case 0:
+                        return [4, this.avatarUniverseLinkGetLinkedAvatarsByUniverseRaw(e, o)];
+                    case 1:
+                        return [4, t.sent().value()];
+                    case 2:
+                        return [2, t.sent()]
+                }
+            })
+        })
+    }, A.prototype.avatarUniverseLinkLinkAvatarsToUniverseRaw = function(e, t) {
+        return n(this, void 0, void 0, function() {
+            var r, n, u;
+            return i(this, function(i) {
+                switch (i.label) {
+                    case 0:
+                        if (null === e.universeId || void 0 === e.universeId) throw new o.w("universeId", "Required parameter requestParameters.universeId was null or undefined when calling avatarUniverseLinkLinkAvatarsToUniverse.");
+                        return r = {}, (n = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
+                            path: "/v1/universes/{universeId}/avatars/link".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))),
+                            schemaPath: "/v1/universes/{universeId}/avatars/link",
+                            method: "POST",
+                            headers: n,
+                            query: r,
+                            body: function(e) {
+                                if (void 0 !== e) return null === e ? null : {
+                                    lookIds: e.lookIds
+                                }
+                            }(e.avatarUniverseLinkLinkAvatarsToUniverseRequest)
+                        }, t)];
+                    case 1:
+                        return u = i.sent(), [2, new o.H(u, function(e) {
+                            return null == e ? e : {
+                                success: (0, o.u)(e, "success") ? e.success : void 0,
+                                errorMessage: (0, o.u)(e, "errorMessage") ? e.errorMessage : void 0,
+                                results: (0, o.u)(e, "results") ? null === e.results ? null : e.results.map(l) : void 0
+                            }
+                        })]
+                }
+            })
+        })
+    }, A.prototype.avatarUniverseLinkLinkAvatarsToUniverse = function(e, o) {
+        return n(this, void 0, void 0, function() {
+            return i(this, function(t) {
+                switch (t.label) {
+                    case 0:
+                        return [4, this.avatarUniverseLinkLinkAvatarsToUniverseRaw(e, o)];
+                    case 1:
+                        return [4, t.sent().value()];
+                    case 2:
+                        return [2, t.sent()]
+                }
+            })
+        })
+    }, A.prototype.avatarUniverseLinkUnlinkAvatarsFromUniverseRaw = function(e, t) {
+        return n(this, void 0, void 0, function() {
+            var r, n, u;
+            return i(this, function(i) {
+                switch (i.label) {
+                    case 0:
+                        if (null === e.universeId || void 0 === e.universeId) throw new o.w("universeId", "Required parameter requestParameters.universeId was null or undefined when calling avatarUniverseLinkUnlinkAvatarsFromUniverse.");
+                        return r = {}, (n = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
+                            path: "/v1/universes/{universeId}/avatars/unlink".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))),
+                            schemaPath: "/v1/universes/{universeId}/avatars/unlink",
+                            method: "POST",
+                            headers: n,
+                            query: r,
+                            body: function(e) {
+                                if (void 0 !== e) return null === e ? null : {
+                                    lookIds: e.lookIds
+                                }
+                            }(e.avatarUniverseLinkUnlinkAvatarsFromUniverseRequest)
+                        }, t)];
+                    case 1:
+                        return u = i.sent(), [2, new o.H(u, function(e) {
+                            return null == e ? e : {
+                                success: (0, o.u)(e, "success") ? e.success : void 0,
+                                errorMessage: (0, o.u)(e, "errorMessage") ? e.errorMessage : void 0,
+                                results: (0, o.u)(e, "results") ? null === e.results ? null : e.results.map(l) : void 0
+                            }
+                        })]
+                }
+            })
+        })
+    }, A.prototype.avatarUniverseLinkUnlinkAvatarsFromUniverse = function(e, o) {
+        return n(this, void 0, void 0, function() {
+            return i(this, function(t) {
+                switch (t.label) {
+                    case 0:
+                        return [4, this.avatarUniverseLinkUnlinkAvatarsFromUniverseRaw(e, o)];
+                    case 1:
+                        return [4, t.sent().value()];
+                    case 2:
+                        return [2, t.sent()]
+                }
+            })
+        })
+    };
     var U = function(e) {
-            function t() {
-                return null !== e && e.apply(this, arguments) || this
-            }
-            return r(t, e), t.prototype.avatarUniverseLinkGetLinkedAvatarsByUniverseRaw = function(e, t) {
-                return n(this, void 0, void 0, function() {
-                    var r, n, u;
-                    return i(this, function(i) {
-                        switch (i.label) {
-                            case 0:
-                                if (null === e.universeId || void 0 === e.universeId) throw new o.w("universeId", "Required parameter requestParameters.universeId was null or undefined when calling avatarUniverseLinkGetLinkedAvatarsByUniverse.");
-                                return r = {}, n = {}, [4, this.request({
-                                    path: "/v1/universes/{universeId}/avatars".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))),
-                                    schemaPath: "/v1/universes/{universeId}/avatars",
-                                    method: "GET",
-                                    headers: n,
-                                    query: r
-                                }, t)];
-                            case 1:
-                                return u = i.sent(), [2, new o.H(u, function(e) {
-                                    return null == e ? e : {
-                                        lookIds: (0, o.u)(e, "lookIds") ? e.lookIds : void 0
+        function t() {
+            return null !== e && e.apply(this, arguments) || this
+        }
+        return r(t, e), t.prototype.lookCreateLookRaw = function(e, t) {
+            return n(this, void 0, void 0, function() {
+                var r, n, u;
+                return i(this, function(i) {
+                    switch (i.label) {
+                        case 0:
+                            return r = {}, (n = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
+                                path: "/v1/looks/create",
+                                schemaPath: "/v1/looks/create",
+                                method: "POST",
+                                headers: n,
+                                query: r,
+                                body: function(e) {
+                                    if (void 0 !== e) return null === e ? null : {
+                                        name: e.name,
+                                        description: e.description,
+                                        displayProperties: function(e) {
+                                            if (void 0 !== e) return null === e ? null : {
+                                                backgroundType: e.backgroundType,
+                                                backgroundValue: e.backgroundValue,
+                                                emoteAssetId: e.emoteAssetId
+                                            }
+                                        }(e.displayProperties),
+                                        avatarProperties: function(e) {
+                                            if (void 0 !== e) return null === e ? null : {
+                                                playerAvatarType: e.playerAvatarType,
+                                                bodyColor3s: function(e) {
+                                                    if (void 0 !== e) return null === e ? null : {
+                                                        headColor3: e.headColor3,
+                                                        leftArmColor3: e.leftArmColor3,
+                                                        leftLegColor3: e.leftLegColor3,
+                                                        rightArmColor3: e.rightArmColor3,
+                                                        rightLegColor3: e.rightLegColor3,
+                                                        torsoColor3: e.torsoColor3
+                                                    }
+                                                }(e.bodyColor3s),
+                                                scale: function(e) {
+                                                    if (void 0 !== e) return null === e ? null : {
+                                                        height: e.height,
+                                                        width: e.width,
+                                                        head: e.head,
+                                                        proportion: e.proportion,
+                                                        bodyType: e.bodyType,
+                                                        depth: e.depth
+                                                    }
+                                                }(e.scale)
+                                            }
+                                        }(e.avatarProperties),
+                                        assets: void 0 === e.assets ? void 0 : null === e.assets ? null : e.assets.map(a),
+                                        lookType: e.lookType,
+                                        validationType: e.validationType,
+                                        groupId: e.groupId
                                     }
-                                })]
-                        }
-                    })
+                                }(e.lookCreateLookRequest)
+                            }, t)];
+                        case 1:
+                            return u = i.sent(), [2, new o.H(u, function(e) {
+                                return null == e ? e : {
+                                    id: (0, o.u)(e, "id") ? e.id : void 0,
+                                    errorCode: (0, o.u)(e, "errorCode") ? e.errorCode : void 0,
+                                    errorDescription: (0, o.u)(e, "errorDescription") ? e.errorDescription : void 0,
+                                    warnings: (0, o.u)(e, "warnings") ? null === e.warnings ? null : e.warnings.map(v) : void 0
+                                }
+                            })]
+                    }
                 })
-            }, t.prototype.avatarUniverseLinkGetLinkedAvatarsByUniverse = function(e, o) {
-                return n(this, void 0, void 0, function() {
-                    return i(this, function(t) {
-                        switch (t.label) {
-                            case 0:
-                                return [4, this.avatarUniverseLinkGetLinkedAvatarsByUniverseRaw(e, o)];
-                            case 1:
-                                return [4, t.sent().value()];
-                            case 2:
-                                return [2, t.sent()]
-                        }
-                    })
+            })
+        }, t.prototype.lookCreateLook = function() {
+            return n(this, arguments, void 0, function(e, o) {
+                return void 0 === e && (e = {}), i(this, function(t) {
+                    switch (t.label) {
+                        case 0:
+                            return [4, this.lookCreateLookRaw(e, o)];
+                        case 1:
+                            return [4, t.sent().value()];
+                        case 2:
+                            return [2, t.sent()]
+                    }
                 })
-            }, t.prototype.avatarUniverseLinkLinkAvatarsToUniverseRaw = function(e, t) {
-                return n(this, void 0, void 0, function() {
-                    var r, n, u;
-                    return i(this, function(i) {
-                        switch (i.label) {
-                            case 0:
-                                if (null === e.universeId || void 0 === e.universeId) throw new o.w("universeId", "Required parameter requestParameters.universeId was null or undefined when calling avatarUniverseLinkLinkAvatarsToUniverse.");
-                                return r = {}, (n = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
-                                    path: "/v1/universes/{universeId}/avatars/link".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))),
-                                    schemaPath: "/v1/universes/{universeId}/avatars/link",
-                                    method: "POST",
-                                    headers: n,
-                                    query: r,
-                                    body: function(e) {
-                                        if (void 0 !== e) return null === e ? null : {
-                                            lookIds: e.lookIds
-                                        }
-                                    }(e.avatarUniverseLinkLinkAvatarsToUniverseRequest)
-                                }, t)];
-                            case 1:
-                                return u = i.sent(), [2, new o.H(u, function(e) {
-                                    return null == e ? e : {
-                                        success: (0, o.u)(e, "success") ? e.success : void 0,
-                                        errorMessage: (0, o.u)(e, "errorMessage") ? e.errorMessage : void 0,
-                                        results: (0, o.u)(e, "results") ? null === e.results ? null : e.results.map(l) : void 0
+            })
+        }, t.prototype.lookCreateLookFavoriteRaw = function(e, t) {
+            return n(this, void 0, void 0, function() {
+                var r, n, u;
+                return i(this, function(i) {
+                    switch (i.label) {
+                        case 0:
+                            return r = {}, (n = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
+                                path: "/v1/looks/favorite/create",
+                                schemaPath: "/v1/looks/favorite/create",
+                                method: "POST",
+                                headers: n,
+                                query: r,
+                                body: C(e.lookCreateLookFavoriteRequest)
+                            }, t)];
+                        case 1:
+                            return u = i.sent(), [2, new o.H(u, function(e) {
+                                return L(e)
+                            })]
+                    }
+                })
+            })
+        }, t.prototype.lookCreateLookFavorite = function() {
+            return n(this, arguments, void 0, function(e, o) {
+                return void 0 === e && (e = {}), i(this, function(t) {
+                    switch (t.label) {
+                        case 0:
+                            return [4, this.lookCreateLookFavoriteRaw(e, o)];
+                        case 1:
+                            return [4, t.sent().value()];
+                        case 2:
+                            return [2, t.sent()]
+                    }
+                })
+            })
+        }, t.prototype.lookDeleteAvatarRaw = function(e, t) {
+            return n(this, void 0, void 0, function() {
+                var r, n, u;
+                return i(this, function(i) {
+                    switch (i.label) {
+                        case 0:
+                            if (null === e.lookId || void 0 === e.lookId) throw new o.w("lookId", "Required parameter requestParameters.lookId was null or undefined when calling lookDeleteAvatar.");
+                            return r = {}, n = {}, [4, this.request({
+                                path: "/v1/looks/{lookId}".replace("{".concat("lookId", "}"), encodeURIComponent(String(e.lookId))),
+                                schemaPath: "/v1/looks/{lookId}",
+                                method: "DELETE",
+                                headers: n,
+                                query: r
+                            }, t)];
+                        case 1:
+                            return u = i.sent(), [2, new o.V(u)]
+                    }
+                })
+            })
+        }, t.prototype.lookDeleteAvatar = function(e, o) {
+            return n(this, void 0, void 0, function() {
+                return i(this, function(t) {
+                    switch (t.label) {
+                        case 0:
+                            return [4, this.lookDeleteAvatarRaw(e, o)];
+                        case 1:
+                            return t.sent(), [2]
+                    }
+                })
+            })
+        }, t.prototype.lookDeleteLookFavoriteRaw = function(e, t) {
+            return n(this, void 0, void 0, function() {
+                var r, n, u;
+                return i(this, function(i) {
+                    switch (i.label) {
+                        case 0:
+                            return r = {}, (n = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
+                                path: "/v1/looks/favorite/delete",
+                                schemaPath: "/v1/looks/favorite/delete",
+                                method: "POST",
+                                headers: n,
+                                query: r,
+                                body: C(e.lookCreateLookFavoriteRequest)
+                            }, t)];
+                        case 1:
+                            return u = i.sent(), [2, new o.H(u, function(e) {
+                                return L(e)
+                            })]
+                    }
+                })
+            })
+        }, t.prototype.lookDeleteLookFavorite = function() {
+            return n(this, arguments, void 0, function(e, o) {
+                return void 0 === e && (e = {}), i(this, function(t) {
+                    switch (t.label) {
+                        case 0:
+                            return [4, this.lookDeleteLookFavoriteRaw(e, o)];
+                        case 1:
+                            return [4, t.sent().value()];
+                        case 2:
+                            return [2, t.sent()]
+                    }
+                })
+            })
+        }, t.prototype.lookGetFavoriteLookRaw = function(e, t) {
+            return n(this, void 0, void 0, function() {
+                var r, n, u;
+                return i(this, function(i) {
+                    switch (i.label) {
+                        case 0:
+                            if (null === e.lookId || void 0 === e.lookId) throw new o.w("lookId", "Required parameter requestParameters.lookId was null or undefined when calling lookGetFavoriteLook.");
+                            return r = {}, n = {}, [4, this.request({
+                                path: "/v1/looks/{lookId}/favorite".replace("{".concat("lookId", "}"), encodeURIComponent(String(e.lookId))),
+                                schemaPath: "/v1/looks/{lookId}/favorite",
+                                method: "GET",
+                                headers: n,
+                                query: r
+                            }, t)];
+                        case 1:
+                            return u = i.sent(), [2, new o.H(u, function(e) {
+                                return L(e)
+                            })]
+                    }
+                })
+            })
+        }, t.prototype.lookGetFavoriteLook = function(e, o) {
+            return n(this, void 0, void 0, function() {
+                return i(this, function(t) {
+                    switch (t.label) {
+                        case 0:
+                            return [4, this.lookGetFavoriteLookRaw(e, o)];
+                        case 1:
+                            return [4, t.sent().value()];
+                        case 2:
+                            return [2, t.sent()]
+                    }
+                })
+            })
+        }, t.prototype.lookGetFavoritedLooksPagedRaw = function(e, t) {
+            return n(this, void 0, void 0, function() {
+                var r, n, u;
+                return i(this, function(i) {
+                    switch (i.label) {
+                        case 0:
+                            return r = {}, void 0 !== e.limit && (r.limit = e.limit), void 0 !== e.userId && (r.userId = e.userId), void 0 !== e.lookType && (r.lookType = e.lookType), void 0 !== e.cursor && (r.cursor = e.cursor), void 0 !== e.isPrevious && (r.isPrevious = e.isPrevious), n = {}, [4, this.request({
+                                path: "/v1/looks/favorites",
+                                schemaPath: "/v1/looks/favorites",
+                                method: "GET",
+                                headers: n,
+                                query: r
+                            }, t)];
+                        case 1:
+                            return u = i.sent(), [2, new o.H(u, function(e) {
+                                return null == e ? e : {
+                                    lookIds: (0, o.u)(e, "lookIds") ? e.lookIds : void 0,
+                                    previousPageCursor: (0, o.u)(e, "previousPageCursor") ? e.previousPageCursor : void 0,
+                                    nextPageCursor: (0, o.u)(e, "nextPageCursor") ? e.nextPageCursor : void 0
+                                }
+                            })]
+                    }
+                })
+            })
+        }, t.prototype.lookGetFavoritedLooksPaged = function() {
+            return n(this, arguments, void 0, function(e, o) {
+                return void 0 === e && (e = {}), i(this, function(t) {
+                    switch (t.label) {
+                        case 0:
+                            return [4, this.lookGetFavoritedLooksPagedRaw(e, o)];
+                        case 1:
+                            return [4, t.sent().value()];
+                        case 2:
+                            return [2, t.sent()]
+                    }
+                })
+            })
+        }, t.prototype.lookGetFeaturesEnabledRaw = function(e) {
+            return n(this, void 0, void 0, function() {
+                var t, r, n;
+                return i(this, function(i) {
+                    switch (i.label) {
+                        case 0:
+                            return t = {}, r = {}, [4, this.request({
+                                path: "/v1/me/features",
+                                schemaPath: "/v1/me/features",
+                                method: "GET",
+                                headers: r,
+                                query: t
+                            }, e)];
+                        case 1:
+                            return n = i.sent(), [2, new o.H(n, function(e) {
+                                return null == e ? e : {
+                                    makeupLookStudioCreation: (0, o.u)(e, "makeupLookStudioCreation") ? e.makeupLookStudioCreation : void 0,
+                                    avatarLookStudioCreation: (0, o.u)(e, "avatarLookStudioCreation") ? e.avatarLookStudioCreation : void 0
+                                }
+                            })]
+                    }
+                })
+            })
+        }, t.prototype.lookGetFeaturesEnabled = function(e) {
+            return n(this, void 0, void 0, function() {
+                return i(this, function(o) {
+                    switch (o.label) {
+                        case 0:
+                            return [4, this.lookGetFeaturesEnabledRaw(e)];
+                        case 1:
+                            return [4, o.sent().value()];
+                        case 2:
+                            return [2, o.sent()]
+                    }
+                })
+            })
+        }, t.prototype.lookGetLookDetailRaw = function(e, t) {
+            return n(this, void 0, void 0, function() {
+                var r, n, u;
+                return i(this, function(i) {
+                    switch (i.label) {
+                        case 0:
+                            if (null === e.lookId || void 0 === e.lookId) throw new o.w("lookId", "Required parameter requestParameters.lookId was null or undefined when calling lookGetLookDetail.");
+                            return r = {}, n = {}, [4, this.request({
+                                path: "/v1/looks/{LookId}".replace("{".concat("lookId", "}"), encodeURIComponent(String(e.lookId))),
+                                schemaPath: "/v1/looks/{LookId}",
+                                method: "GET",
+                                headers: n,
+                                query: r
+                            }, t)];
+                        case 1:
+                            return u = i.sent(), [2, new o.H(u, function(e) {
+                                var t;
+                                return null == e ? e : {
+                                    look: (0, o.u)(e, "look") ? null == (t = e.look) ? t : {
+                                        lookId: (0, o.u)(t, "lookId") ? t.lookId : void 0,
+                                        items: (0, o.u)(t, "items") ? null === t.items ? null : t.items.map(m) : void 0,
+                                        totalPrice: (0, o.u)(t, "totalPrice") ? t.totalPrice : void 0,
+                                        totalPremiumPrice: (0, o.u)(t, "totalPremiumPrice") ? t.totalPremiumPrice : void 0,
+                                        createdTime: (0, o.u)(t, "createdTime") ? new Date(t.createdTime) : void 0,
+                                        updatedTime: (0, o.u)(t, "updatedTime") ? new Date(t.updatedTime) : void 0
+                                    } : void 0,
+                                    errorCode: (0, o.u)(e, "errorCode") ? e.errorCode : void 0,
+                                    errorDescription: (0, o.u)(e, "errorDescription") ? e.errorDescription : void 0,
+                                    warnings: (0, o.u)(e, "warnings") ? null === e.warnings ? null : e.warnings.map(v) : void 0
+                                }
+                            })]
+                    }
+                })
+            })
+        }, t.prototype.lookGetLookDetail = function(e, o) {
+            return n(this, void 0, void 0, function() {
+                return i(this, function(t) {
+                    switch (t.label) {
+                        case 0:
+                            return [4, this.lookGetLookDetailRaw(e, o)];
+                        case 1:
+                            return [4, t.sent().value()];
+                        case 2:
+                            return [2, t.sent()]
+                    }
+                })
+            })
+        }, t.prototype.lookGetLooksByCuratorRaw = function(e, t) {
+            return n(this, void 0, void 0, function() {
+                var r, n, u;
+                return i(this, function(i) {
+                    switch (i.label) {
+                        case 0:
+                            if (null === e.curatorUserIdString || void 0 === e.curatorUserIdString) throw new o.w("curatorUserIdString", "Required parameter requestParameters.curatorUserIdString was null or undefined when calling lookGetLooksByCurator.");
+                            return r = {}, void 0 !== e.limit && (r.limit = e.limit), void 0 !== e.cursor && (r.cursor = e.cursor), void 0 !== e.isPrevious && (r.isPrevious = e.isPrevious), n = {}, [4, this.request({
+                                path: "/v1/users/{curatorUserIdString}/looks".replace("{".concat("curatorUserIdString", "}"), encodeURIComponent(String(e.curatorUserIdString))),
+                                schemaPath: "/v1/users/{curatorUserIdString}/looks",
+                                method: "GET",
+                                headers: n,
+                                query: r
+                            }, t)];
+                        case 1:
+                            return u = i.sent(), [2, new o.H(u, function(e) {
+                                return T(e)
+                            })]
+                    }
+                })
+            })
+        }, t.prototype.lookGetLooksByCurator = function(e, o) {
+            return n(this, void 0, void 0, function() {
+                return i(this, function(t) {
+                    switch (t.label) {
+                        case 0:
+                            return [4, this.lookGetLooksByCuratorRaw(e, o)];
+                        case 1:
+                            return [4, t.sent().value()];
+                        case 2:
+                            return [2, t.sent()]
+                    }
+                })
+            })
+        }, t.prototype.lookGetLooksByCuratorAndTypeRaw = function(e, t) {
+            return n(this, void 0, void 0, function() {
+                var r, n, u;
+                return i(this, function(i) {
+                    switch (i.label) {
+                        case 0:
+                            if (null === e.curatorUserIdString || void 0 === e.curatorUserIdString) throw new o.w("curatorUserIdString", "Required parameter requestParameters.curatorUserIdString was null or undefined when calling lookGetLooksByCuratorAndType.");
+                            if (null === e.lookType || void 0 === e.lookType) throw new o.w("lookType", "Required parameter requestParameters.lookType was null or undefined when calling lookGetLooksByCuratorAndType.");
+                            return r = {}, void 0 !== e.limit && (r.limit = e.limit), void 0 !== e.cursor && (r.cursor = e.cursor), void 0 !== e.isPrevious && (r.isPrevious = e.isPrevious), void 0 !== e.universeId && (r.universeId = e.universeId), n = {}, [4, this.request({
+                                path: "/v1/users/{curatorUserIdString}/looks/{lookType}".replace("{".concat("curatorUserIdString", "}"), encodeURIComponent(String(e.curatorUserIdString))).replace("{".concat("lookType", "}"), encodeURIComponent(String(e.lookType))),
+                                schemaPath: "/v1/users/{curatorUserIdString}/looks/{lookType}",
+                                method: "GET",
+                                headers: n,
+                                query: r
+                            }, t)];
+                        case 1:
+                            return u = i.sent(), [2, new o.H(u, function(e) {
+                                return T(e)
+                            })]
+                    }
+                })
+            })
+        }, t.prototype.lookGetLooksByCuratorAndType = function(e, o) {
+            return n(this, void 0, void 0, function() {
+                return i(this, function(t) {
+                    switch (t.label) {
+                        case 0:
+                            return [4, this.lookGetLooksByCuratorAndTypeRaw(e, o)];
+                        case 1:
+                            return [4, t.sent().value()];
+                        case 2:
+                            return [2, t.sent()]
+                    }
+                })
+            })
+        }, t.prototype.lookGetLooksByGroupCuratorAndTypeRaw = function(e, t) {
+            return n(this, void 0, void 0, function() {
+                var r, n, u;
+                return i(this, function(i) {
+                    switch (i.label) {
+                        case 0:
+                            if (null === e.curatorGroupIdString || void 0 === e.curatorGroupIdString) throw new o.w("curatorGroupIdString", "Required parameter requestParameters.curatorGroupIdString was null or undefined when calling lookGetLooksByGroupCuratorAndType.");
+                            if (null === e.lookType || void 0 === e.lookType) throw new o.w("lookType", "Required parameter requestParameters.lookType was null or undefined when calling lookGetLooksByGroupCuratorAndType.");
+                            return r = {}, void 0 !== e.limit && (r.limit = e.limit), void 0 !== e.cursor && (r.cursor = e.cursor), void 0 !== e.isPrevious && (r.isPrevious = e.isPrevious), void 0 !== e.universeId && (r.universeId = e.universeId), n = {}, [4, this.request({
+                                path: "/v1/groups/{curatorGroupIdString}/looks/{lookType}".replace("{".concat("curatorGroupIdString", "}"), encodeURIComponent(String(e.curatorGroupIdString))).replace("{".concat("lookType", "}"), encodeURIComponent(String(e.lookType))),
+                                schemaPath: "/v1/groups/{curatorGroupIdString}/looks/{lookType}",
+                                method: "GET",
+                                headers: n,
+                                query: r
+                            }, t)];
+                        case 1:
+                            return u = i.sent(), [2, new o.H(u, function(e) {
+                                return T(e)
+                            })]
+                    }
+                })
+            })
+        }, t.prototype.lookGetLooksByGroupCuratorAndType = function(e, o) {
+            return n(this, void 0, void 0, function() {
+                return i(this, function(t) {
+                    switch (t.label) {
+                        case 0:
+                            return [4, this.lookGetLooksByGroupCuratorAndTypeRaw(e, o)];
+                        case 1:
+                            return [4, t.sent().value()];
+                        case 2:
+                            return [2, t.sent()]
+                    }
+                })
+            })
+        }, t.prototype.lookPreviewLookRaw = function(e, t) {
+            return n(this, void 0, void 0, function() {
+                var r, n, u;
+                return i(this, function(i) {
+                    switch (i.label) {
+                        case 0:
+                            return r = {}, (n = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
+                                path: "/v1/looks/preview",
+                                schemaPath: "/v1/looks/preview",
+                                method: "POST",
+                                headers: n,
+                                query: r,
+                                body: function(e) {
+                                    if (void 0 !== e) return null === e ? null : {
+                                        assets: void 0 === e.assets ? void 0 : null === e.assets ? null : e.assets.map(a),
+                                        lookType: e.lookType,
+                                        validationType: e.validationType,
+                                        groupId: e.groupId
                                     }
-                                })]
-                        }
-                    })
+                                }(e.lookPreviewLookRequest)
+                            }, t)];
+                        case 1:
+                            return u = i.sent(), [2, new o.H(u, function(e) {
+                                var t;
+                                return null == e ? e : {
+                                    look: (0, o.u)(e, "look") ? null == (t = e.look) ? t : {
+                                        totalValue: (0, o.u)(t, "totalValue") ? t.totalValue : void 0,
+                                        totalPrice: (0, o.u)(t, "totalPrice") ? t.totalPrice : void 0,
+                                        items: (0, o.u)(t, "items") ? null === t.items ? null : t.items.map(w) : void 0
+                                    } : void 0,
+                                    errorCode: (0, o.u)(e, "errorCode") ? e.errorCode : void 0,
+                                    errorDescription: (0, o.u)(e, "errorDescription") ? e.errorDescription : void 0,
+                                    warnings: (0, o.u)(e, "warnings") ? null === e.warnings ? null : e.warnings.map(v) : void 0
+                                }
+                            })]
+                    }
                 })
-            }, t.prototype.avatarUniverseLinkLinkAvatarsToUniverse = function(e, o) {
-                return n(this, void 0, void 0, function() {
-                    return i(this, function(t) {
-                        switch (t.label) {
-                            case 0:
-                                return [4, this.avatarUniverseLinkLinkAvatarsToUniverseRaw(e, o)];
-                            case 1:
-                                return [4, t.sent().value()];
-                            case 2:
-                                return [2, t.sent()]
-                        }
-                    })
+            })
+        }, t.prototype.lookPreviewLook = function() {
+            return n(this, arguments, void 0, function(e, o) {
+                return void 0 === e && (e = {}), i(this, function(t) {
+                    switch (t.label) {
+                        case 0:
+                            return [4, this.lookPreviewLookRaw(e, o)];
+                        case 1:
+                            return [4, t.sent().value()];
+                        case 2:
+                            return [2, t.sent()]
+                    }
                 })
-            }, t.prototype.avatarUniverseLinkUnlinkAvatarsFromUniverseRaw = function(e, t) {
-                return n(this, void 0, void 0, function() {
-                    var r, n, u;
-                    return i(this, function(i) {
-                        switch (i.label) {
-                            case 0:
-                                if (null === e.universeId || void 0 === e.universeId) throw new o.w("universeId", "Required parameter requestParameters.universeId was null or undefined when calling avatarUniverseLinkUnlinkAvatarsFromUniverse.");
-                                return r = {}, (n = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
-                                    path: "/v1/universes/{universeId}/avatars/unlink".replace("{".concat("universeId", "}"), encodeURIComponent(String(e.universeId))),
-                                    schemaPath: "/v1/universes/{universeId}/avatars/unlink",
-                                    method: "POST",
-                                    headers: n,
-                                    query: r,
-                                    body: function(e) {
-                                        if (void 0 !== e) return null === e ? null : {
-                                            lookIds: e.lookIds
-                                        }
-                                    }(e.avatarUniverseLinkUnlinkAvatarsFromUniverseRequest)
-                                }, t)];
-                            case 1:
-                                return u = i.sent(), [2, new o.H(u, function(e) {
-                                    return null == e ? e : {
-                                        success: (0, o.u)(e, "success") ? e.success : void 0,
-                                        errorMessage: (0, o.u)(e, "errorMessage") ? e.errorMessage : void 0,
-                                        results: (0, o.u)(e, "results") ? null === e.results ? null : e.results.map(l) : void 0
+            })
+        }, t.prototype.lookPurchaseDetailsRaw = function(e, t) {
+            return n(this, void 0, void 0, function() {
+                var r, n, u;
+                return i(this, function(i) {
+                    switch (i.label) {
+                        case 0:
+                            return r = {}, (n = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
+                                path: "/v1/looks/purchase-details",
+                                schemaPath: "/v1/looks/purchase-details",
+                                method: "POST",
+                                headers: n,
+                                query: r,
+                                body: function(e) {
+                                    if (void 0 !== e) return null === e ? null : {
+                                        assets: void 0 === e.assets ? void 0 : null === e.assets ? null : e.assets.map(a)
                                     }
-                                })]
-                        }
-                    })
+                                }(e.lookPurchaseDetailsRequest)
+                            }, t)];
+                        case 1:
+                            return u = i.sent(), [2, new o.H(u, function(e) {
+                                return null == e ? e : {
+                                    assets: (0, o.u)(e, "assets") ? null === e.assets ? null : e.assets.map(s) : void 0
+                                }
+                            })]
+                    }
                 })
-            }, t.prototype.avatarUniverseLinkUnlinkAvatarsFromUniverse = function(e, o) {
-                return n(this, void 0, void 0, function() {
-                    return i(this, function(t) {
-                        switch (t.label) {
-                            case 0:
-                                return [4, this.avatarUniverseLinkUnlinkAvatarsFromUniverseRaw(e, o)];
-                            case 1:
-                                return [4, t.sent().value()];
-                            case 2:
-                                return [2, t.sent()]
-                        }
-                    })
+            })
+        }, t.prototype.lookPurchaseDetails = function() {
+            return n(this, arguments, void 0, function(e, o) {
+                return void 0 === e && (e = {}), i(this, function(t) {
+                    switch (t.label) {
+                        case 0:
+                            return [4, this.lookPurchaseDetailsRaw(e, o)];
+                        case 1:
+                            return [4, t.sent().value()];
+                        case 2:
+                            return [2, t.sent()]
+                    }
                 })
-            }, t
-        }(o._),
-        A = function(e) {
-            function t() {
-                return null !== e && e.apply(this, arguments) || this
-            }
-            return r(t, e), t.prototype.lookCreateLookRaw = function(e, t) {
-                return n(this, void 0, void 0, function() {
-                    var r, n, u;
-                    return i(this, function(i) {
-                        switch (i.label) {
-                            case 0:
-                                return r = {}, (n = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
-                                    path: "/v1/looks/create",
-                                    schemaPath: "/v1/looks/create",
-                                    method: "POST",
-                                    headers: n,
-                                    query: r,
-                                    body: function(e) {
-                                        if (void 0 !== e) return null === e ? null : {
-                                            name: e.name,
-                                            description: e.description,
-                                            displayProperties: function(e) {
-                                                if (void 0 !== e) return null === e ? null : {
-                                                    backgroundType: e.backgroundType,
-                                                    backgroundValue: e.backgroundValue,
-                                                    emoteAssetId: e.emoteAssetId
-                                                }
-                                            }(e.displayProperties),
-                                            avatarProperties: function(e) {
-                                                if (void 0 !== e) return null === e ? null : {
-                                                    playerAvatarType: e.playerAvatarType,
-                                                    bodyColor3s: function(e) {
-                                                        if (void 0 !== e) return null === e ? null : {
-                                                            headColor3: e.headColor3,
-                                                            leftArmColor3: e.leftArmColor3,
-                                                            leftLegColor3: e.leftLegColor3,
-                                                            rightArmColor3: e.rightArmColor3,
-                                                            rightLegColor3: e.rightLegColor3,
-                                                            torsoColor3: e.torsoColor3
-                                                        }
-                                                    }(e.bodyColor3s),
-                                                    scale: function(e) {
-                                                        if (void 0 !== e) return null === e ? null : {
-                                                            height: e.height,
-                                                            width: e.width,
-                                                            head: e.head,
-                                                            proportion: e.proportion,
-                                                            bodyType: e.bodyType,
-                                                            depth: e.depth
-                                                        }
-                                                    }(e.scale)
-                                                }
-                                            }(e.avatarProperties),
-                                            assets: void 0 === e.assets ? void 0 : null === e.assets ? null : e.assets.map(a),
-                                            lookType: e.lookType,
-                                            validationType: e.validationType,
-                                            groupId: e.groupId
-                                        }
-                                    }(e.lookCreateLookRequest)
-                                }, t)];
-                            case 1:
-                                return u = i.sent(), [2, new o.H(u, function(e) {
-                                    return null == e ? e : {
-                                        id: (0, o.u)(e, "id") ? e.id : void 0,
-                                        errorCode: (0, o.u)(e, "errorCode") ? e.errorCode : void 0,
-                                        errorDescription: (0, o.u)(e, "errorDescription") ? e.errorDescription : void 0,
-                                        warnings: (0, o.u)(e, "warnings") ? null === e.warnings ? null : e.warnings.map(v) : void 0
+            })
+        }, t.prototype.lookUpdateLookRaw = function(e, t) {
+            return n(this, void 0, void 0, function() {
+                var r, n, u;
+                return i(this, function(i) {
+                    switch (i.label) {
+                        case 0:
+                            if (null === e.lookId || void 0 === e.lookId) throw new o.w("lookId", "Required parameter requestParameters.lookId was null or undefined when calling lookUpdateLook.");
+                            return r = {}, (n = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
+                                path: "/v1/looks/{lookId}".replace("{".concat("lookId", "}"), encodeURIComponent(String(e.lookId))),
+                                schemaPath: "/v1/looks/{lookId}",
+                                method: "PATCH",
+                                headers: n,
+                                query: r,
+                                body: function(e) {
+                                    if (void 0 !== e) return null === e ? null : {
+                                        name: e.name,
+                                        description: e.description
                                     }
-                                })]
-                        }
-                    })
+                                }(e.lookUpdateLookRequest)
+                            }, t)];
+                        case 1:
+                            return u = i.sent(), [2, new o.V(u)]
+                    }
                 })
-            }, t.prototype.lookCreateLook = function() {
-                return n(this, arguments, void 0, function(e, o) {
-                    return void 0 === e && (e = {}), i(this, function(t) {
-                        switch (t.label) {
-                            case 0:
-                                return [4, this.lookCreateLookRaw(e, o)];
-                            case 1:
-                                return [4, t.sent().value()];
-                            case 2:
-                                return [2, t.sent()]
-                        }
-                    })
+            })
+        }, t.prototype.lookUpdateLook = function(e, o) {
+            return n(this, void 0, void 0, function() {
+                return i(this, function(t) {
+                    switch (t.label) {
+                        case 0:
+                            return [4, this.lookUpdateLookRaw(e, o)];
+                        case 1:
+                            return t.sent(), [2]
+                    }
                 })
-            }, t.prototype.lookCreateLookFavoriteRaw = function(e, t) {
-                return n(this, void 0, void 0, function() {
-                    var r, n, u;
-                    return i(this, function(i) {
-                        switch (i.label) {
-                            case 0:
-                                return r = {}, (n = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
-                                    path: "/v1/looks/favorite/create",
-                                    schemaPath: "/v1/looks/favorite/create",
-                                    method: "POST",
-                                    headers: n,
-                                    query: r,
-                                    body: L(e.lookCreateLookFavoriteRequest)
-                                }, t)];
-                            case 1:
-                                return u = i.sent(), [2, new o.H(u, function(e) {
-                                    return C(e)
-                                })]
-                        }
-                    })
-                })
-            }, t.prototype.lookCreateLookFavorite = function() {
-                return n(this, arguments, void 0, function(e, o) {
-                    return void 0 === e && (e = {}), i(this, function(t) {
-                        switch (t.label) {
-                            case 0:
-                                return [4, this.lookCreateLookFavoriteRaw(e, o)];
-                            case 1:
-                                return [4, t.sent().value()];
-                            case 2:
-                                return [2, t.sent()]
-                        }
-                    })
-                })
-            }, t.prototype.lookDeleteAvatarRaw = function(e, t) {
-                return n(this, void 0, void 0, function() {
-                    var r, n, u;
-                    return i(this, function(i) {
-                        switch (i.label) {
-                            case 0:
-                                if (null === e.lookId || void 0 === e.lookId) throw new o.w("lookId", "Required parameter requestParameters.lookId was null or undefined when calling lookDeleteAvatar.");
-                                return r = {}, n = {}, [4, this.request({
-                                    path: "/v1/looks/{lookId}".replace("{".concat("lookId", "}"), encodeURIComponent(String(e.lookId))),
-                                    schemaPath: "/v1/looks/{lookId}",
-                                    method: "DELETE",
-                                    headers: n,
-                                    query: r
-                                }, t)];
-                            case 1:
-                                return u = i.sent(), [2, new o.V(u)]
-                        }
-                    })
-                })
-            }, t.prototype.lookDeleteAvatar = function(e, o) {
-                return n(this, void 0, void 0, function() {
-                    return i(this, function(t) {
-                        switch (t.label) {
-                            case 0:
-                                return [4, this.lookDeleteAvatarRaw(e, o)];
-                            case 1:
-                                return t.sent(), [2]
-                        }
-                    })
-                })
-            }, t.prototype.lookDeleteLookFavoriteRaw = function(e, t) {
-                return n(this, void 0, void 0, function() {
-                    var r, n, u;
-                    return i(this, function(i) {
-                        switch (i.label) {
-                            case 0:
-                                return r = {}, (n = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
-                                    path: "/v1/looks/favorite/delete",
-                                    schemaPath: "/v1/looks/favorite/delete",
-                                    method: "POST",
-                                    headers: n,
-                                    query: r,
-                                    body: L(e.lookCreateLookFavoriteRequest)
-                                }, t)];
-                            case 1:
-                                return u = i.sent(), [2, new o.H(u, function(e) {
-                                    return C(e)
-                                })]
-                        }
-                    })
-                })
-            }, t.prototype.lookDeleteLookFavorite = function() {
-                return n(this, arguments, void 0, function(e, o) {
-                    return void 0 === e && (e = {}), i(this, function(t) {
-                        switch (t.label) {
-                            case 0:
-                                return [4, this.lookDeleteLookFavoriteRaw(e, o)];
-                            case 1:
-                                return [4, t.sent().value()];
-                            case 2:
-                                return [2, t.sent()]
-                        }
-                    })
-                })
-            }, t.prototype.lookGetFavoriteLookRaw = function(e, t) {
-                return n(this, void 0, void 0, function() {
-                    var r, n, u;
-                    return i(this, function(i) {
-                        switch (i.label) {
-                            case 0:
-                                if (null === e.lookId || void 0 === e.lookId) throw new o.w("lookId", "Required parameter requestParameters.lookId was null or undefined when calling lookGetFavoriteLook.");
-                                return r = {}, n = {}, [4, this.request({
-                                    path: "/v1/looks/{lookId}/favorite".replace("{".concat("lookId", "}"), encodeURIComponent(String(e.lookId))),
-                                    schemaPath: "/v1/looks/{lookId}/favorite",
-                                    method: "GET",
-                                    headers: n,
-                                    query: r
-                                }, t)];
-                            case 1:
-                                return u = i.sent(), [2, new o.H(u, function(e) {
-                                    return C(e)
-                                })]
-                        }
-                    })
-                })
-            }, t.prototype.lookGetFavoriteLook = function(e, o) {
-                return n(this, void 0, void 0, function() {
-                    return i(this, function(t) {
-                        switch (t.label) {
-                            case 0:
-                                return [4, this.lookGetFavoriteLookRaw(e, o)];
-                            case 1:
-                                return [4, t.sent().value()];
-                            case 2:
-                                return [2, t.sent()]
-                        }
-                    })
-                })
-            }, t.prototype.lookGetFavoritedLooksPagedRaw = function(e, t) {
-                return n(this, void 0, void 0, function() {
-                    var r, n, u;
-                    return i(this, function(i) {
-                        switch (i.label) {
-                            case 0:
-                                return r = {}, void 0 !== e.limit && (r.limit = e.limit), void 0 !== e.userId && (r.userId = e.userId), void 0 !== e.lookType && (r.lookType = e.lookType), void 0 !== e.cursor && (r.cursor = e.cursor), void 0 !== e.isPrevious && (r.isPrevious = e.isPrevious), n = {}, [4, this.request({
-                                    path: "/v1/looks/favorites",
-                                    schemaPath: "/v1/looks/favorites",
-                                    method: "GET",
-                                    headers: n,
-                                    query: r
-                                }, t)];
-                            case 1:
-                                return u = i.sent(), [2, new o.H(u, function(e) {
-                                    return null == e ? e : {
-                                        lookIds: (0, o.u)(e, "lookIds") ? e.lookIds : void 0,
-                                        previousPageCursor: (0, o.u)(e, "previousPageCursor") ? e.previousPageCursor : void 0,
-                                        nextPageCursor: (0, o.u)(e, "nextPageCursor") ? e.nextPageCursor : void 0
-                                    }
-                                })]
-                        }
-                    })
-                })
-            }, t.prototype.lookGetFavoritedLooksPaged = function() {
-                return n(this, arguments, void 0, function(e, o) {
-                    return void 0 === e && (e = {}), i(this, function(t) {
-                        switch (t.label) {
-                            case 0:
-                                return [4, this.lookGetFavoritedLooksPagedRaw(e, o)];
-                            case 1:
-                                return [4, t.sent().value()];
-                            case 2:
-                                return [2, t.sent()]
-                        }
-                    })
-                })
-            }, t.prototype.lookGetFeaturesEnabledRaw = function(e) {
-                return n(this, void 0, void 0, function() {
-                    var t, r, n;
-                    return i(this, function(i) {
-                        switch (i.label) {
-                            case 0:
-                                return t = {}, r = {}, [4, this.request({
-                                    path: "/v1/me/features",
-                                    schemaPath: "/v1/me/features",
-                                    method: "GET",
-                                    headers: r,
-                                    query: t
-                                }, e)];
-                            case 1:
-                                return n = i.sent(), [2, new o.H(n, function(e) {
-                                    return null == e ? e : {
-                                        makeupLookStudioCreation: (0, o.u)(e, "makeupLookStudioCreation") ? e.makeupLookStudioCreation : void 0,
-                                        avatarLookStudioCreation: (0, o.u)(e, "avatarLookStudioCreation") ? e.avatarLookStudioCreation : void 0
-                                    }
-                                })]
-                        }
-                    })
-                })
-            }, t.prototype.lookGetFeaturesEnabled = function(e) {
-                return n(this, void 0, void 0, function() {
-                    return i(this, function(o) {
-                        switch (o.label) {
-                            case 0:
-                                return [4, this.lookGetFeaturesEnabledRaw(e)];
-                            case 1:
-                                return [4, o.sent().value()];
-                            case 2:
-                                return [2, o.sent()]
-                        }
-                    })
-                })
-            }, t.prototype.lookGetLookDetailRaw = function(e, t) {
-                return n(this, void 0, void 0, function() {
-                    var r, n, u;
-                    return i(this, function(i) {
-                        switch (i.label) {
-                            case 0:
-                                if (null === e.lookId || void 0 === e.lookId) throw new o.w("lookId", "Required parameter requestParameters.lookId was null or undefined when calling lookGetLookDetail.");
-                                return r = {}, n = {}, [4, this.request({
-                                    path: "/v1/looks/{LookId}".replace("{".concat("lookId", "}"), encodeURIComponent(String(e.lookId))),
-                                    schemaPath: "/v1/looks/{LookId}",
-                                    method: "GET",
-                                    headers: n,
-                                    query: r
-                                }, t)];
-                            case 1:
-                                return u = i.sent(), [2, new o.H(u, function(e) {
-                                    var t;
-                                    return null == e ? e : {
-                                        look: (0, o.u)(e, "look") ? null == (t = e.look) ? t : {
-                                            lookId: (0, o.u)(t, "lookId") ? t.lookId : void 0,
-                                            items: (0, o.u)(t, "items") ? null === t.items ? null : t.items.map(m) : void 0,
-                                            totalPrice: (0, o.u)(t, "totalPrice") ? t.totalPrice : void 0,
-                                            totalPremiumPrice: (0, o.u)(t, "totalPremiumPrice") ? t.totalPremiumPrice : void 0,
-                                            createdTime: (0, o.u)(t, "createdTime") ? new Date(t.createdTime) : void 0,
-                                            updatedTime: (0, o.u)(t, "updatedTime") ? new Date(t.updatedTime) : void 0
-                                        } : void 0,
-                                        errorCode: (0, o.u)(e, "errorCode") ? e.errorCode : void 0,
-                                        errorDescription: (0, o.u)(e, "errorDescription") ? e.errorDescription : void 0,
-                                        warnings: (0, o.u)(e, "warnings") ? null === e.warnings ? null : e.warnings.map(v) : void 0
-                                    }
-                                })]
-                        }
-                    })
-                })
-            }, t.prototype.lookGetLookDetail = function(e, o) {
-                return n(this, void 0, void 0, function() {
-                    return i(this, function(t) {
-                        switch (t.label) {
-                            case 0:
-                                return [4, this.lookGetLookDetailRaw(e, o)];
-                            case 1:
-                                return [4, t.sent().value()];
-                            case 2:
-                                return [2, t.sent()]
-                        }
-                    })
-                })
-            }, t.prototype.lookGetLooksByCuratorRaw = function(e, t) {
-                return n(this, void 0, void 0, function() {
-                    var r, n, u;
-                    return i(this, function(i) {
-                        switch (i.label) {
-                            case 0:
-                                if (null === e.curatorUserIdString || void 0 === e.curatorUserIdString) throw new o.w("curatorUserIdString", "Required parameter requestParameters.curatorUserIdString was null or undefined when calling lookGetLooksByCurator.");
-                                return r = {}, void 0 !== e.limit && (r.limit = e.limit), void 0 !== e.cursor && (r.cursor = e.cursor), void 0 !== e.isPrevious && (r.isPrevious = e.isPrevious), n = {}, [4, this.request({
-                                    path: "/v1/users/{curatorUserIdString}/looks".replace("{".concat("curatorUserIdString", "}"), encodeURIComponent(String(e.curatorUserIdString))),
-                                    schemaPath: "/v1/users/{curatorUserIdString}/looks",
-                                    method: "GET",
-                                    headers: n,
-                                    query: r
-                                }, t)];
-                            case 1:
-                                return u = i.sent(), [2, new o.H(u, function(e) {
-                                    return T(e)
-                                })]
-                        }
-                    })
-                })
-            }, t.prototype.lookGetLooksByCurator = function(e, o) {
-                return n(this, void 0, void 0, function() {
-                    return i(this, function(t) {
-                        switch (t.label) {
-                            case 0:
-                                return [4, this.lookGetLooksByCuratorRaw(e, o)];
-                            case 1:
-                                return [4, t.sent().value()];
-                            case 2:
-                                return [2, t.sent()]
-                        }
-                    })
-                })
-            }, t.prototype.lookGetLooksByCuratorAndTypeRaw = function(e, t) {
-                return n(this, void 0, void 0, function() {
-                    var r, n, u;
-                    return i(this, function(i) {
-                        switch (i.label) {
-                            case 0:
-                                if (null === e.curatorUserIdString || void 0 === e.curatorUserIdString) throw new o.w("curatorUserIdString", "Required parameter requestParameters.curatorUserIdString was null or undefined when calling lookGetLooksByCuratorAndType.");
-                                if (null === e.lookType || void 0 === e.lookType) throw new o.w("lookType", "Required parameter requestParameters.lookType was null or undefined when calling lookGetLooksByCuratorAndType.");
-                                return r = {}, void 0 !== e.limit && (r.limit = e.limit), void 0 !== e.cursor && (r.cursor = e.cursor), void 0 !== e.isPrevious && (r.isPrevious = e.isPrevious), void 0 !== e.universeId && (r.universeId = e.universeId), n = {}, [4, this.request({
-                                    path: "/v1/users/{curatorUserIdString}/looks/{lookType}".replace("{".concat("curatorUserIdString", "}"), encodeURIComponent(String(e.curatorUserIdString))).replace("{".concat("lookType", "}"), encodeURIComponent(String(e.lookType))),
-                                    schemaPath: "/v1/users/{curatorUserIdString}/looks/{lookType}",
-                                    method: "GET",
-                                    headers: n,
-                                    query: r
-                                }, t)];
-                            case 1:
-                                return u = i.sent(), [2, new o.H(u, function(e) {
-                                    return T(e)
-                                })]
-                        }
-                    })
-                })
-            }, t.prototype.lookGetLooksByCuratorAndType = function(e, o) {
-                return n(this, void 0, void 0, function() {
-                    return i(this, function(t) {
-                        switch (t.label) {
-                            case 0:
-                                return [4, this.lookGetLooksByCuratorAndTypeRaw(e, o)];
-                            case 1:
-                                return [4, t.sent().value()];
-                            case 2:
-                                return [2, t.sent()]
-                        }
-                    })
-                })
-            }, t.prototype.lookGetLooksByGroupCuratorAndTypeRaw = function(e, t) {
-                return n(this, void 0, void 0, function() {
-                    var r, n, u;
-                    return i(this, function(i) {
-                        switch (i.label) {
-                            case 0:
-                                if (null === e.curatorGroupIdString || void 0 === e.curatorGroupIdString) throw new o.w("curatorGroupIdString", "Required parameter requestParameters.curatorGroupIdString was null or undefined when calling lookGetLooksByGroupCuratorAndType.");
-                                if (null === e.lookType || void 0 === e.lookType) throw new o.w("lookType", "Required parameter requestParameters.lookType was null or undefined when calling lookGetLooksByGroupCuratorAndType.");
-                                return r = {}, void 0 !== e.limit && (r.limit = e.limit), void 0 !== e.cursor && (r.cursor = e.cursor), void 0 !== e.isPrevious && (r.isPrevious = e.isPrevious), void 0 !== e.universeId && (r.universeId = e.universeId), n = {}, [4, this.request({
-                                    path: "/v1/groups/{curatorGroupIdString}/looks/{lookType}".replace("{".concat("curatorGroupIdString", "}"), encodeURIComponent(String(e.curatorGroupIdString))).replace("{".concat("lookType", "}"), encodeURIComponent(String(e.lookType))),
-                                    schemaPath: "/v1/groups/{curatorGroupIdString}/looks/{lookType}",
-                                    method: "GET",
-                                    headers: n,
-                                    query: r
-                                }, t)];
-                            case 1:
-                                return u = i.sent(), [2, new o.H(u, function(e) {
-                                    return T(e)
-                                })]
-                        }
-                    })
-                })
-            }, t.prototype.lookGetLooksByGroupCuratorAndType = function(e, o) {
-                return n(this, void 0, void 0, function() {
-                    return i(this, function(t) {
-                        switch (t.label) {
-                            case 0:
-                                return [4, this.lookGetLooksByGroupCuratorAndTypeRaw(e, o)];
-                            case 1:
-                                return [4, t.sent().value()];
-                            case 2:
-                                return [2, t.sent()]
-                        }
-                    })
-                })
-            }, t.prototype.lookPreviewLookRaw = function(e, t) {
-                return n(this, void 0, void 0, function() {
-                    var r, n, u;
-                    return i(this, function(i) {
-                        switch (i.label) {
-                            case 0:
-                                return r = {}, (n = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
-                                    path: "/v1/looks/preview",
-                                    schemaPath: "/v1/looks/preview",
-                                    method: "POST",
-                                    headers: n,
-                                    query: r,
-                                    body: function(e) {
-                                        if (void 0 !== e) return null === e ? null : {
-                                            assets: void 0 === e.assets ? void 0 : null === e.assets ? null : e.assets.map(a),
-                                            lookType: e.lookType,
-                                            validationType: e.validationType,
-                                            groupId: e.groupId
-                                        }
-                                    }(e.lookPreviewLookRequest)
-                                }, t)];
-                            case 1:
-                                return u = i.sent(), [2, new o.H(u, function(e) {
-                                    var t;
-                                    return null == e ? e : {
-                                        look: (0, o.u)(e, "look") ? null == (t = e.look) ? t : {
-                                            totalValue: (0, o.u)(t, "totalValue") ? t.totalValue : void 0,
-                                            totalPrice: (0, o.u)(t, "totalPrice") ? t.totalPrice : void 0,
-                                            items: (0, o.u)(t, "items") ? null === t.items ? null : t.items.map(w) : void 0
-                                        } : void 0,
-                                        errorCode: (0, o.u)(e, "errorCode") ? e.errorCode : void 0,
-                                        errorDescription: (0, o.u)(e, "errorDescription") ? e.errorDescription : void 0,
-                                        warnings: (0, o.u)(e, "warnings") ? null === e.warnings ? null : e.warnings.map(v) : void 0
-                                    }
-                                })]
-                        }
-                    })
-                })
-            }, t.prototype.lookPreviewLook = function() {
-                return n(this, arguments, void 0, function(e, o) {
-                    return void 0 === e && (e = {}), i(this, function(t) {
-                        switch (t.label) {
-                            case 0:
-                                return [4, this.lookPreviewLookRaw(e, o)];
-                            case 1:
-                                return [4, t.sent().value()];
-                            case 2:
-                                return [2, t.sent()]
-                        }
-                    })
-                })
-            }, t.prototype.lookPurchaseDetailsRaw = function(e, t) {
-                return n(this, void 0, void 0, function() {
-                    var r, n, u;
-                    return i(this, function(i) {
-                        switch (i.label) {
-                            case 0:
-                                return r = {}, (n = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
-                                    path: "/v1/looks/purchase-details",
-                                    schemaPath: "/v1/looks/purchase-details",
-                                    method: "POST",
-                                    headers: n,
-                                    query: r,
-                                    body: function(e) {
-                                        if (void 0 !== e) return null === e ? null : {
-                                            assets: void 0 === e.assets ? void 0 : null === e.assets ? null : e.assets.map(a)
-                                        }
-                                    }(e.lookPurchaseDetailsRequest)
-                                }, t)];
-                            case 1:
-                                return u = i.sent(), [2, new o.H(u, function(e) {
-                                    return null == e ? e : {
-                                        assets: (0, o.u)(e, "assets") ? null === e.assets ? null : e.assets.map(s) : void 0
-                                    }
-                                })]
-                        }
-                    })
-                })
-            }, t.prototype.lookPurchaseDetails = function() {
-                return n(this, arguments, void 0, function(e, o) {
-                    return void 0 === e && (e = {}), i(this, function(t) {
-                        switch (t.label) {
-                            case 0:
-                                return [4, this.lookPurchaseDetailsRaw(e, o)];
-                            case 1:
-                                return [4, t.sent().value()];
-                            case 2:
-                                return [2, t.sent()]
-                        }
-                    })
-                })
-            }, t.prototype.lookUpdateLookRaw = function(e, t) {
-                return n(this, void 0, void 0, function() {
-                    var r, n, u;
-                    return i(this, function(i) {
-                        switch (i.label) {
-                            case 0:
-                                if (null === e.lookId || void 0 === e.lookId) throw new o.w("lookId", "Required parameter requestParameters.lookId was null or undefined when calling lookUpdateLook.");
-                                return r = {}, (n = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
-                                    path: "/v1/looks/{lookId}".replace("{".concat("lookId", "}"), encodeURIComponent(String(e.lookId))),
-                                    schemaPath: "/v1/looks/{lookId}",
-                                    method: "PATCH",
-                                    headers: n,
-                                    query: r,
-                                    body: function(e) {
-                                        if (void 0 !== e) return null === e ? null : {
-                                            name: e.name,
-                                            description: e.description
-                                        }
-                                    }(e.lookUpdateLookRequest)
-                                }, t)];
-                            case 1:
-                                return u = i.sent(), [2, new o.V(u)]
-                        }
-                    })
-                })
-            }, t.prototype.lookUpdateLook = function(e, o) {
-                return n(this, void 0, void 0, function() {
-                    return i(this, function(t) {
-                        switch (t.label) {
-                            case 0:
-                                return [4, this.lookUpdateLookRaw(e, o)];
-                            case 1:
-                                return t.sent(), [2]
-                        }
-                    })
-                })
-            }, t
-        }(o._);
+            })
+        }, t
+    }(o._);
     (function(e) {
         function t() {
             return null !== e && e.apply(this, arguments) || this
@@ -1233,7 +1233,7 @@
                                         expectedPrice: e.expectedPrice,
                                         excludedAssets: void 0 === e.excludedAssets ? void 0 : null === e.excludedAssets ? null : Array.from(e.excludedAssets),
                                         excludedBundles: void 0 === e.excludedBundles ? void 0 : null === e.excludedBundles ? null : Array.from(e.excludedBundles),
-                                        timedOptions: void 0 === e.timedOptions ? void 0 : null === e.timedOptions ? null : e.timedOptions.map(R)
+                                        timedOptions: void 0 === e.timedOptions ? void 0 : null === e.timedOptions ? null : e.timedOptions.map(S)
                                     }
                                 }(e.lookV2PurchaseLookV2Request)
                             }, t)];
@@ -1241,8 +1241,8 @@
                             return u = i.sent(), [2, new o.H(u, function(e) {
                                 return null == e ? e : {
                                     purchaseLookStatus: (0, o.u)(e, "purchaseLookStatus") ? e.purchaseLookStatus : void 0,
-                                    assetPurchaseStatus: (0, o.u)(e, "assetPurchaseStatus") ? null === e.assetPurchaseStatus ? null : (0, o.A)(e.assetPurchaseStatus, S) : void 0,
-                                    bundlePurchaseStatus: (0, o.u)(e, "bundlePurchaseStatus") ? null === e.bundlePurchaseStatus ? null : (0, o.A)(e.bundlePurchaseStatus, S) : void 0
+                                    assetPurchaseStatus: (0, o.u)(e, "assetPurchaseStatus") ? null === e.assetPurchaseStatus ? null : (0, o.A)(e.assetPurchaseStatus, R) : void 0,
+                                    bundlePurchaseStatus: (0, o.u)(e, "bundlePurchaseStatus") ? null === e.bundlePurchaseStatus ? null : (0, o.A)(e.bundlePurchaseStatus, R) : void 0
                                 }
                             })]
                     }
@@ -1262,11 +1262,11 @@
                 })
             })
         }
-    })(o._), e.s(["Q", 0, U, "V", 0, {
+    })(o._), e.s(["V", 0, {
         Invalid: "Invalid",
         User: "User",
         Group: "Group"
-    }, "B", 0, A, "L", 0, {
+    }, "B", 0, U, "L", 0, {
         Free: "Free",
         OffSale: "OffSale",
         NoResellers: "NoResellers",
@@ -1320,35 +1320,14 @@
                 }
             })
         }
-        linkAvatarsToUniverse(e, o) {
-            return this.avatarUniverseLinkApi.avatarUniverseLinkLinkAvatarsToUniverse({
-                universeId: e,
-                avatarUniverseLinkLinkAvatarsToUniverseRequest: {
-                    lookIds: o
-                }
-            })
-        }
-        unlinkAvatarsFromUniverse(e, o) {
-            return this.avatarUniverseLinkApi.avatarUniverseLinkUnlinkAvatarsFromUniverse({
-                universeId: e,
-                avatarUniverseLinkUnlinkAvatarsFromUniverseRequest: {
-                    lookIds: o
-                }
-            })
-        }
-        getLinkedAvatarsByUniverse(e) {
-            return this.avatarUniverseLinkApi.avatarUniverseLinkGetLinkedAvatarsByUniverse({
-                universeId: e
-            })
-        }
         constructor() {
             let e = (0, n.f)("look-api", "bedev2");
-            super(e), (0, o._)(this, "looksV1Api", void 0), (0, o._)(this, "avatarUniverseLinkApi", void 0), this.looksV1Api = new t.B(e), this.avatarUniverseLinkApi = new t.Q(e)
+            super(e), (0, o._)(this, "looksV1Api", void 0), this.looksV1Api = new t.B(e)
         }
     }
     let u = new i;
     e.s(["f", 0, u])
 }]);
 
-//# debugId=7b48a4b1-1209-eb0c-84f3-776df3cd99b4
-//# sourceMappingURL=1ffxhooj47oxc.js.map
+//# debugId=5e10a7c3-208d-96d0-2177-d7e467c70ac1
+//# sourceMappingURL=0go6dve4_bxrk.js.map
