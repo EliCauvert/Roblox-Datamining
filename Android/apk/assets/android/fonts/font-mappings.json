@@ -1,0 +1,242 @@
+[
+    {
+        "enum" : 1,
+        "font" : "Arimo-Regular.ttf",
+        "fromRbxFontRatio" : 0.8951044945
+    },
+    {
+        "enum" : 2,
+        "font" : "Arimo-Bold.ttf",
+        "fromRbxFontRatio" : 0.8951044945
+    },
+    {
+        "enum" : 6,
+        "font" : "SourceSansPro-It.ttf",
+        "fromRbxFontRatio" : 0.8951044945
+    },
+    {
+        "enum" : 7,
+        "font" : "AccanthisADFStd-Regular.otf",
+        "fromRbxFontRatio" : 0.8561643836
+    },
+    {
+        "enum" : 8,
+        "font" : "Guru-Regular.otf",
+        "fromRbxFontRatio" : 0.8441881864
+    },
+    {
+        "enum" : 9,
+        "font" : "ComicNeue-Angular-Bold.ttf",
+        "fromRbxFontRatio" : 0.8271298594
+    },
+    {
+        "enum" : 10,
+        "font" : "Inconsolata-Regular.ttf",
+        "fromRbxFontRatio" : 0.9532888465
+    },
+    {
+        "enum" : 11,
+        "font" : "HWYGOTH.ttf",
+        "fromRbxFontRatio" : 0.9033423668
+    },
+    {
+        "enum" : 12,
+        "font" : "zekton_rg.ttf",
+        "fromRbxFontRatio" : 0.8333333333
+    },
+    {
+        "enum" : 13,
+        "font" : "PressStart2P-Regular.ttf",
+        "fromRbxFontRatio" : 0.9761678384
+    },
+    {
+        "enum" : 14,
+        "font" : "Balthazar-Regular.ttf",
+        "fromRbxFontRatio" : 0.9823182711
+    },
+    {
+        "enum" : 15,
+        "font" : "RomanAntique.otf",
+        "fromRbxFontRatio" : 0.9532888465
+    },
+    {
+        "enum" : 16,
+        "font" : "SourceSansPro-Semibold.ttf",
+        "fromRbxFontRatio" : 0.7955449483
+    },
+    {
+        "enum" : 17,
+        "font" : "Montserrat-Regular.ttf",
+        "fromRbxFontRatio" : 0.8203445
+    },
+    {
+        "enum" : 18,
+        "font" : "Montserrat-Medium.ttf",
+        "fromRbxFontRatio" : 0.8203445
+    },
+    {
+        "enum" : 19,
+        "font" : "Montserrat-Bold.ttf",
+        "fromRbxFontRatio" : 0.8203445
+    },
+    {
+        "enum" : 20,
+        "font" : "Montserrat-Black.ttf",
+        "fromRbxFontRatio" : 0.8203445
+    },
+    {
+        "enum" : 21,
+        "font" : "AmaticSC-Regular.ttf",
+        "fromRbxFontRatio" : 0.7930214116
+    },
+    {
+        "enum" : 22,
+        "font" : "Bangers-Regular.ttf",
+        "fromRbxFontRatio" : 0.9398496241
+    },
+    {
+        "enum" : 23,
+        "font" : "Creepster-Regular.ttf",
+        "fromRbxFontRatio" : 0.8554722421
+    },
+    {
+        "enum" : 24,
+        "font" : "DenkOne-Regular.ttf",
+        "fromRbxFontRatio" : 0.8
+    },
+    {
+        "enum" : 25,
+        "font" : "Fondamento-Regular.ttf",
+        "fromRbxFontRatio" : 0.7226535259
+    },
+    {
+        "enum" : 26,
+        "font" : "FredokaOne-Regular.ttf",
+        "fromRbxFontRatio" : 0.826446281
+    },
+    {
+        "enum" : 27,
+        "font" : "GrenzeGotisch-Regular.ttf",
+        "fromRbxFontRatio" : 0.6756756757
+    },
+    {
+        "enum" : 28,
+        "font" : "IndieFlower-Regular.ttf",
+        "fromRbxFontRatio" : 0.685408476
+    },
+    {
+        "enum" : 29,
+        "font" : "JosefinSans-Regular.ttf",
+        "fromRbxFontRatio" : 1.000000
+    },
+    {
+        "enum" : 30, 
+        "font" : "Jura-Regular.ttf",
+        "fromRbxFontRatio" : 0.8453085376
+    },
+    {
+        "enum" : 31,
+        "font" : "Kalam-Regular.ttf",
+        "fromRbxFontRatio" : 0.6273525721
+    },
+    {
+        "enum" : 32,
+        "font" : "LuckiestGuy-Regular.ttf",
+        "fromRbxFontRatio" : 1.000000
+    },
+    {
+        "enum" : 33,
+        "font" : "Merriweather-Regular.ttf",
+        "fromRbxFontRatio" : 0.7955449483
+    },
+    {
+        "enum" : 34,
+        "font" : "Michroma-Regular.ttf",
+        "fromRbxFontRatio" : 0.7032967033
+    },
+    {
+        "enum" : 35,
+        "font" : "Nunito-Regular.ttf",
+        "fromRbxFontRatio" : 0.7331378299
+    },
+    {
+        "enum" : 36,
+        "font" : "Oswald-Regular.ttf",
+        "fromRbxFontRatio" : 0.6747638327
+    },
+    {
+        "enum" : 37,
+        "font" : "PatrickHand-Regular.ttf",
+        "fromRbxFontRatio" : 0.7385524372
+    },
+    {
+        "enum" : 38,
+        "font" : "PermanentMarker-Regular.ttf",
+        "fromRbxFontRatio" : 0.7008897094
+    },
+    {
+        "enum" : 39,
+        "font" : "Roboto-Regular.ttf",
+        "fromRbxFontRatio" : 0.8533333333
+    },
+    {
+        "enum" : 40,
+        "font" : "RobotoCondensed-Regular.ttf",
+        "fromRbxFontRatio" : 0.8533333333
+    },
+    {
+        "enum" : 41,
+        "font" : "RobotoMono-Regular.ttf",
+        "fromRbxFontRatio" : 0.7582374921
+    },
+    {
+        "enum" : 42,
+        "font" : "Sarpanch-Regular.ttf",
+        "fromRbxFontRatio" : 0.7142857143
+    },
+    {
+        "enum" : 43,
+        "font" : "SpecialElite-Regular.ttf",
+        "fromRbxFontRatio" : 1.000000
+    },
+    {
+        "enum" : 44,
+        "font" : "TitilliumWeb-Regular.ttf",
+        "fromRbxFontRatio" : 0.6574621959
+    },
+    {
+        "enum" : 45,
+        "font" : "Ubuntu-Regular.ttf",
+        "fromRbxFontRatio" : 0.8920606601
+    },
+    {
+        "enum" : 46,
+        "font" : "BuilderSans-Regular.otf",
+        "fromRbxFontRatio" : 0.7936507937
+    },
+    {
+        "enum" : 47,
+        "font" : "BuilderSans-Medium.otf",
+        "fromRbxFontRatio" : 0.7936507937
+    },
+    {
+        "enum" : 48,
+        "font" : "BuilderSans-Bold.otf",
+        "fromRbxFontRatio" : 0.7936507937
+    },
+    {
+        "enum" : 49,
+        "font" : "BuilderSans-ExtraBold.otf",
+        "fromRbxFontRatio" : 0.7936507937
+    },
+    {
+        "enum" : 50,
+        "font" : "Arimo-Regular.ttf",
+        "fromRbxFontRatio" : 0.8951044945
+    },
+    {
+        "enum" : 51,
+        "font" : "Arimo-Bold.ttf",
+        "fromRbxFontRatio" : 0.8951044945
+    }
+]
