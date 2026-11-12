@@ -1430,6 +1430,7 @@ Feature.Accessibility.Heading.UiNavigationKeyBind,
 Feature.Accessibility.Heading.VREnvironmentSetting,VR 环境
 Feature.Accessibility.Label.AppThemeBadgeNew,新
 Feature.Accessibility.Label.AppThemeUnlockBanner,订阅 Plus，解锁 App 主题
+Feature.Accessibility.Menu.SelectModeToggle,选择模式切换
 Feature.Accessibility.PreferredTextSize.Default,
 Feature.Accessibility.PreferredTextSize.Largest,最大
 Feature.Accessibility.PreferredTransparency.Opaque,不透明
@@ -1547,6 +1548,7 @@ Feature.AccountSettings.Heading.Tab.BillingV2,
 Feature.AccountSettings.Heading.Tab.Notifications,通知
 Feature.AccountSettings.Heading.Tab.ParentalControls,家长控制
 Feature.AccountSettings.Heading.Tab.ParentalControlsV2,
+Feature.AccountSettings.Heading.Tab.PersonalizedRecommendations,个性化推荐
 Feature.AccountSettings.Heading.Tab.Privacy,
 Feature.AccountSettings.Heading.Tab.PrivacyContentRestrictions,隐私与内容限制
 Feature.AccountSettings.Heading.Tab.Robux,Robux
@@ -2167,7 +2169,8 @@ Feature.Avatar.Label.Shorts,短裤
 Feature.Avatar.Label.Shoulder,肩部
 Feature.Avatar.Label.Skin,皮肤
 Feature.Avatar.Label.Spawn,重生点
-Feature.Avatar.Label.SpawnEffects,重生点效果
+Feature.Avatar.Label.SpawnEffect,重生点效果
+Feature.Avatar.Label.SpawnEffects,
 Feature.Avatar.Label.Sweater,毛衣
 Feature.Avatar.Label.Sweaters,
 Feature.Avatar.Label.Swim,游泳
@@ -2547,6 +2550,7 @@ Feature.Build.Description.BuildReplyNotif,在 Build 回复你后获得通知。
 Feature.Build.Description.BuyRobuxToCreate,购买更多 Robux 以继续创建，或等待你的免费 Build 使用额度在明天重置。
 Feature.Build.Description.BuyUsageOrWait,使用 Robux 购买更多 Build 使用额度，或等待你的每日限额重置。
 Feature.Build.Description.CampaignRunDates,你的广告活动将在 {startDate} – {endDate}期间投放
+Feature.Build.Description.CaptureWhilePlaytesting,在游戏测试时截图，然后将其添加到你的提示词中。
 Feature.Build.Description.ChooseAdCampaignLength,选择你希望广告投放的时长。
 Feature.Build.Description.ChoosePlaytesters,选择好友来抢先体验你的游戏。
 Feature.Build.Description.CreateDeveloperProduct,创建“{NAME}”，售价 {PRICE} Robux，已下架。
@@ -2653,6 +2657,9 @@ Feature.Build.Label.BackToBuild,返回构建
 Feature.Build.Label.Building,正在构建…
 Feature.Build.Label.CaptureLibrary,截图库
 Feature.Build.Label.CaptureSelectionCount,已选择 {SELECTED_COUNT} 张，共 {MAX_SELECTIONS} 张
+Feature.Build.Label.CaptureStepAddImages,选择“添加图片”以附加你的截图
+Feature.Build.Label.CaptureStepPlaytest,测试你的游戏
+Feature.Build.Label.CaptureStepTapCamera,在“构建”工具栏中选择镜头
 Feature.Build.Label.ContentRating,内容评级
 Feature.Build.Label.CreatedDate,{YEAR} 年 {MONTH} {DAY} 日
 Feature.Build.Label.CreatorHub,创作者中心
@@ -3590,6 +3597,13 @@ Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes} 分钟前
 Feature.ContentFeed.Timestamp.Now,
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks} 周前
 Feature.CustomForms.Label.Percent,
+Feature.Denied.Denied.Action,
+Feature.Denied.Denied.Body,为了你的帐户安全，我们现在无法完成你的请求。请在之前使用过的设备上重试，或联系客户支持以获取帮助。
+Feature.Denied.Denied.Header,操作被限制
+Feature.Denied.Denied.Wasm.GameJoin.Body,出于安全原因，我们已结束此网页会话。若要继续游玩，请使用 Roblox App。
+Feature.Denied.Denied.Wasm.GameJoin.Header,在 Roblox App 中继续
+Feature.Denied.Denied.Wasm.InExperienceFeature.Body,出于安全原因，你无法在浏览器中使用此功能。要使用所有功能，请改用 Roblox App。
+Feature.Denied.Denied.Wasm.InExperienceFeature.Header,此功能在这里不可用
 Feature.DevSubs.Action.CancelSubscription,取消订阅
 Feature.DevSubs.Action.RenewSubscription,更新订阅
 Feature.DevSubs.Label.ActiveSubscriptions,激活订阅
@@ -4471,6 +4485,7 @@ Feature.Moments.Label.VoicePlaceholder,请输入你希望旁白说的话。
 Feature.Moments.Label.VoiceTimeoutBody,旁白生成超时。
 Feature.Moments.Label.VoiceTooManyNumbersError,脚本包含的数字过多
 Feature.Moments.Label.WriteComment,留下评论
+Feature.Moments.PostInsights.Stats,
 Feature.Moments.Title.Comments,评论
 Feature.Moments.Title.CommentsWithCappedCount,超过 {count} 条评论
 Feature.Moments.Title.CommentsWithCount,{count} 条评论

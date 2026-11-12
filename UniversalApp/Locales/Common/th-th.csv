@@ -1432,6 +1432,7 @@ Feature.Accessibility.Heading.UiNavigationKeyBind,
 Feature.Accessibility.Heading.VREnvironmentSetting,สภาพแวดล้อม VR
 Feature.Accessibility.Label.AppThemeBadgeNew,ใหม่
 Feature.Accessibility.Label.AppThemeUnlockBanner,ปลดล็อคธีมแอปเมื่อสมัคร Plus
+Feature.Accessibility.Menu.SelectModeToggle,ตัวเปิด/ปิดโหมดเลือก
 Feature.Accessibility.PreferredTextSize.Default,
 Feature.Accessibility.PreferredTextSize.Largest,ใหญ่ที่สุด
 Feature.Accessibility.PreferredTransparency.Opaque,ทึบ
@@ -1549,6 +1550,7 @@ Feature.AccountSettings.Heading.Tab.BillingV2,
 Feature.AccountSettings.Heading.Tab.Notifications,
 Feature.AccountSettings.Heading.Tab.ParentalControls,การควบคุมโดยผู้ปกครอง
 Feature.AccountSettings.Heading.Tab.ParentalControlsV2,
+Feature.AccountSettings.Heading.Tab.PersonalizedRecommendations,การแนะนำแบบกำหนดเอง
 Feature.AccountSettings.Heading.Tab.Privacy,
 Feature.AccountSettings.Heading.Tab.PrivacyContentRestrictions,ความเป็นส่วนตัวและการจำกัดเนื้อหา
 Feature.AccountSettings.Heading.Tab.Robux,Robux
@@ -2170,7 +2172,8 @@ Feature.Avatar.Label.Shorts,กางเกงขาสั้น
 Feature.Avatar.Label.Shoulder,ไหล่
 Feature.Avatar.Label.Skin,
 Feature.Avatar.Label.Spawn,การเกิดใหม่
-Feature.Avatar.Label.SpawnEffects,เอฟเฟกต์การเกิดใหม่
+Feature.Avatar.Label.SpawnEffect,เอฟเฟกต์การเกิดใหม่
+Feature.Avatar.Label.SpawnEffects,
 Feature.Avatar.Label.Sweater,เสื้อสเวตเตอร์
 Feature.Avatar.Label.Sweaters,
 Feature.Avatar.Label.Swim,ว่ายน้ำ
@@ -2549,6 +2552,7 @@ Feature.Build.Description.BuildReplyNotif,รับการแจ้งเต�
 Feature.Build.Description.BuyRobuxToCreate,ซื้อ Robux เพิ่มเพื่อสร้างต่อ หรือรอให้โควต้าการใช้งาน Build ฟรีของคุณรีเซ็ตในวันพรุ่งนี้
 Feature.Build.Description.BuyUsageOrWait,ซื้อโควต้าการใช้งาน Build เพิ่มด้วย Robux หรือรอให้โควต้ารายวันของคุณรีเซ็ต
 Feature.Build.Description.CampaignRunDates,แคมเปญของคุณจะใช้งานได้ในช่วงวันที่ {startDate} - {endDate}
+Feature.Build.Description.CaptureWhilePlaytesting,จับภาพขณะทดลองเล่น จากนั้นแนบภาพลงในพรอมต์ของคุณ
 Feature.Build.Description.ChooseAdCampaignLength,เลือกว่าต้องการให้แสดงโฆษณานานแค่ไหน
 Feature.Build.Description.ChoosePlaytesters,เลือกเพื่อนที่จะช่วยดูตัวอย่างเกมของคุณ
 Feature.Build.Description.CreateDeveloperProduct,"สร้าง ""{NAME}"" ในราคา {PRICE} Robux, ไม่ได้วางขาย"
@@ -2655,6 +2659,9 @@ Feature.Build.Label.BackToBuild,ย้อนกลับไปยังการ
 Feature.Build.Label.Building,กำลังสร้าง...
 Feature.Build.Label.CaptureLibrary,คลังภาพที่จับไว้
 Feature.Build.Label.CaptureSelectionCount,เลือกแล้ว {SELECTED_COUNT} จาก {MAX_SELECTIONS} ภาพ
+Feature.Build.Label.CaptureStepAddImages,เลือกเพิ่มภาพเพื่อแนบภาพที่จับไว้
+Feature.Build.Label.CaptureStepPlaytest,ทดลองเล่นเกมของคุณ
+Feature.Build.Label.CaptureStepTapCamera,เลือกกล้องในแถบเครื่องมือของ Build
 Feature.Build.Label.ContentRating,การจัดระดับความเหมาะสมของเนื้อหา
 Feature.Build.Label.CreatedDate,{DAY} {MONTH} {YEAR}
 Feature.Build.Label.CreatorHub,ศูนย์กลางครีเอเตอร์
@@ -2711,7 +2718,7 @@ Feature.Build.Label.OnSale,กำลังวางขายอยู่
 Feature.Build.Label.Pending,รอดำเนินการ
 Feature.Build.Label.PercentUsed,ใช้ไปแล้ว {PERCENT}%
 Feature.Build.Label.PlayTime,เวลาเล่น
-Feature.Build.Label.PreviewsTab,
+Feature.Build.Label.PreviewsTab,เปิดให้ทดลองเล่น
 Feature.Build.Label.PreviouslyPublished,เผยแพร่ไปก่อนหน้านี้
 Feature.Build.Label.Price,ราคา
 Feature.Build.Label.PriceUnavailable,--
@@ -3594,6 +3601,13 @@ Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes} นาทีที่แ�
 Feature.ContentFeed.Timestamp.Now,
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks} สัปดาห์ที่แล้ว
 Feature.CustomForms.Label.Percent,
+Feature.Denied.Denied.Action,
+Feature.Denied.Denied.Body,เพื่อความปลอดภัยของบัญชี เราไม่สามารถดำเนินการตามคำขอของคุณได้ในขณะนี้ โปรดลองอีกครั้งด้วยอุปกรณ์ที่ใช้ก่อนหน้านี้หรือติดต่อขอความช่วยเหลือจากฝ่ายบริการช่วยเหลือ
+Feature.Denied.Denied.Header,จำกัดการดำเนินการ
+Feature.Denied.Denied.Wasm.GameJoin.Body,เรายุติเซสชันบนเว็บนี้เพื่อความปลอดภัย หากต้องการเล่นต่อ โปรดใช้แอป Roblox
+Feature.Denied.Denied.Wasm.GameJoin.Header,ดำเนินการต่อในแอป Roblox
+Feature.Denied.Denied.Wasm.InExperienceFeature.Body,คุณไม่สามารถใช้คุณสมบัตินี้บนเว็บได้ เนื่องจากเหตุผลด้านความปลอดภัย เปลี่ยนไปใช้แอป Roblox เพื่อเข้าถึงทุกคุณสมบัติ
+Feature.Denied.Denied.Wasm.InExperienceFeature.Header,ไม่สามารถใช้คุณสมบัตินี้บนช่องทางนี้
 Feature.DevSubs.Action.CancelSubscription,ยกเลิกการเป็นสมาชิก
 Feature.DevSubs.Action.RenewSubscription,ต่ออายุการเป็นสมาชิก
 Feature.DevSubs.Label.ActiveSubscriptions,การเป็นสมาชิกที่ใช้งานอยู่
@@ -4476,6 +4490,7 @@ Feature.Moments.Label.VoicePlaceholder,พิมพ์ข้อความท�
 Feature.Moments.Label.VoiceTimeoutBody,การสร้างเสียงบรรยายหมดเวลา
 Feature.Moments.Label.VoiceTooManyNumbersError,สคริปต์มีตัวเลขมากเกินไป
 Feature.Moments.Label.WriteComment,เขียนความคิดเห็น
+Feature.Moments.PostInsights.Stats,
 Feature.Moments.Title.Comments,ความคิดเห็น
 Feature.Moments.Title.CommentsWithCappedCount,{count}+ ความคิดเห็น
 Feature.Moments.Title.CommentsWithCount,{count} ความคิดเห็น

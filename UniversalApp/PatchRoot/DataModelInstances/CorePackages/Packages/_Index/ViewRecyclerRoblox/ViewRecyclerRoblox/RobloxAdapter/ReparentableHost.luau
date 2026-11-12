@@ -1,4 +1,5 @@
-﻿local SlotGeometryModule = require(script:FindFirstAncestor("ViewRecyclerRoblox").RobloxAdapter.SlotGeometry)
+﻿local FFlagViewRecyclerReact084 = require(script:FindFirstAncestor("ViewRecyclerRoblox").Flags).FFlagViewRecyclerReact084
+local SlotGeometryModule = require(script:FindFirstAncestor("ViewRecyclerRoblox").RobloxAdapter.SlotGeometry)
 local GuiService = game:GetService("GuiService")
 local ReparentableHostModule = {
 	clearSelection = function(Ancestor)
@@ -20,8 +21,12 @@ local ReparentableHostModule = {
 		return Frame
 	end,
 	place = function(p1, p2)
-		-- upvalues: SlotGeometryModule (copy)
+		-- upvalues: FFlagViewRecyclerReact084 (copy), SlotGeometryModule (copy)
 		p1.AutomaticSize = p2.automaticSize
+		
+		if FFlagViewRecyclerReact084 then
+			p1.Position = UDim2.new()
+		end
 		p1.Size = SlotGeometryModule.getHostSize(p2.automaticSize)
 		p1.Parent = p2.placeholder
 	end

@@ -1,4 +1,5 @@
-﻿local FFlagViewRecyclerReact08 = require(script:FindFirstAncestor("ViewRecyclerRoblox").Flags).FFlagViewRecyclerReact08
+﻿local FFlagViewRecyclerReact084 = require(script:FindFirstAncestor("ViewRecyclerRoblox").Flags).FFlagViewRecyclerReact084
+local FFlagViewRecyclerReact08 = require(script:FindFirstAncestor("ViewRecyclerRoblox").Flags).FFlagViewRecyclerReact08
 local ViewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
 local _ = require(ViewRecyclerRoblox.Parent.ViewRecycler)
 local AbsolutePlacementModule = require(ViewRecyclerRoblox.RobloxAdapter.AbsolutePlacement)
@@ -7,6 +8,7 @@ local HostMeasurementModule = require(ViewRecyclerRoblox.RobloxAdapter.HostMeasu
 local HostPresentationPhaseModule = require(ViewRecyclerRoblox.RobloxAdapter.HostPresentationPhase)
 local ReparentableHostModule = require(ViewRecyclerRoblox.RobloxAdapter.ReparentableHost)
 local StackPlacementModule = require(ViewRecyclerRoblox.RobloxAdapter.StackPlacement)
+local _ = require(ViewRecyclerRoblox.RobloxAdapter.VacantHosts)
 
 local function zero(): number
 	return 0
@@ -14,7 +16,7 @@ end
 
 return {
 	new = function(Configuration)
-		-- upvalues: zero (copy), AbsolutePlacementModule (copy), HostMeasurementModule (copy), ReparentableHostModule (copy), CanvasItemPlacerModule (copy), FFlagViewRecyclerReact08 (copy), StackPlacementModule (copy), HostPresentationPhaseModule (copy)
+		-- upvalues: zero (copy), FFlagViewRecyclerReact084 (copy), AbsolutePlacementModule (copy), HostMeasurementModule (copy), CanvasItemPlacerModule (copy), ReparentableHostModule (copy), FFlagViewRecyclerReact08 (copy), StackPlacementModule (copy), HostPresentationPhaseModule (copy)
 		local Configuration1 = {
 			container = Configuration.container,
 			viewportContainer = Configuration.viewportContainer,
@@ -29,6 +31,7 @@ return {
 		local Count = 0
 		local Flag1 = false
 		local GetCanvasOriginOffset = Configuration.getCanvasOriginOffset or zero
+		local VacantHosts = if FFlagViewRecyclerReact084 then Configuration.vacantHosts else nil
 		local NewAbsolutePlacement = AbsolutePlacementModule.new(Configuration1.axis, Configuration1.selfSizing, GetCanvasOriginOffset)
 		
 		local function _()
@@ -71,27 +74,58 @@ return {
 			end
 		end
 		
-		local function detachHost(p1, p2)
-			-- upvalues: v1 (ref), ReparentableHostModule (upval), CanvasItemPlacerModule (upval), NewAbsolutePlacement (copy), NewHostMeasurement (copy)
-			local Host = p2.host
-			
-			if Host ~= nil then
-				if v1 ~= nil then
-					v1.remove(Host)
+		local Callback: ((any, any) -> ())? = nil
+		local IsContainer: ((any) -> any)? = nil
+		local Callback1: ((any, any) -> ())? = nil
+		
+		if FFlagViewRecyclerReact084 then
+			Callback = function(p1, p2)
+				-- upvalues: v1 (ref), CanvasItemPlacerModule (upval), NewAbsolutePlacement (copy), VacantHosts (ref), NewHostMeasurement (copy)
+				local Host = p2.host
+				
+				if Host ~= nil then
+					if v1 ~= nil then
+						v1.remove(Host)
+					end
+					CanvasItemPlacerModule.release(Host, p2.placerState)
+					NewAbsolutePlacement.remove(Host)
+					VacantHosts.leave(Host)
+					p2.host = nil
 				end
-				ReparentableHostModule.clearSelection(Host)
-				CanvasItemPlacerModule.detachForTransfer(Host, p2.placerState)
-				NewAbsolutePlacement.remove(Host)
-				p2.host = nil
+				p2.checkedSize = nil
+				
+				if p2.measuring then
+					p2.measuring = false
+					NewHostMeasurement.measure(p1, nil, nil)
+				end
 			end
-			p2.checkedSize = nil
 			
-			if p2.measuring then
-				p2.measuring = false
-				NewHostMeasurement.measure(p1, nil, nil)
+			IsContainer = function(Container)
+				-- upvalues: Configuration1 (ref), v1 (ref)
+				return Container == Configuration1.container or (Container == Configuration1.viewportContainer or v1 ~= nil and v1.isStackFrame(Container))
+			end
+		else
+			Callback1 = function(p1, p2)
+				-- upvalues: v1 (ref), ReparentableHostModule (upval), CanvasItemPlacerModule (upval), NewAbsolutePlacement (copy), NewHostMeasurement (copy)
+				local Host = p2.host
+				
+				if Host ~= nil then
+					if v1 ~= nil then
+						v1.remove(Host)
+					end
+					ReparentableHostModule.clearSelection(Host)
+					CanvasItemPlacerModule.detachForTransfer(Host, p2.placerState)
+					NewAbsolutePlacement.remove(Host)
+					p2.host = nil
+				end
+				p2.checkedSize = nil
+				
+				if p2.measuring then
+					p2.measuring = false
+					NewHostMeasurement.measure(p1, nil, nil)
+				end
 			end
 		end
-		
 		local _ = function(Key)
 			-- upvalues: Tbl (copy), CanvasItemPlacerModule (upval), Count (ref)
 			local Entry = Tbl[Key]
@@ -123,12 +157,15 @@ return {
 		end
 		
 		local function applyPhysical(Key, p1)
-			-- upvalues: detachHost (copy), Configuration (copy), FFlagViewRecyclerReact08 (upval), Configuration1 (ref), v1 (ref), StackPlacementModule (upval), NewAbsolutePlacement (copy), ReparentableHostModule (upval), HostPresentationPhaseModule (upval), NewHostMeasurement (copy)
+			-- upvalues: FFlagViewRecyclerReact084 (upval), Callback (ref), Callback1 (ref), Configuration (copy), FFlagViewRecyclerReact08 (upval), Configuration1 (ref), VacantHosts (ref), v1 (ref), StackPlacementModule (upval), NewAbsolutePlacement (copy), ReparentableHostModule (upval), HostPresentationPhaseModule (upval), NewHostMeasurement (copy)
 			local PhysicalState = p1.physicalState
 			
 			if PhysicalState == nil then
-				detachHost(Key, p1)
-				
+				if FFlagViewRecyclerReact084 then
+					Callback(Key, p1)
+				else
+					Callback1(Key, p1)
+				end
 				if p1.presentedAssignment == nil then return end
 				p1.presentedAssignment = nil
 				local OnItemViewPresentationChangedFunction: (any, any) -> () = Configuration.onItemViewPresentationChanged
@@ -142,14 +179,21 @@ return {
 				local Host = PhysicalState.host
 				
 				if p1.host ~= nil and p1.host ~= Host then
-					detachHost(Key, p1)
+					if FFlagViewRecyclerReact084 then
+						Callback(Key, p1)
+					else
+						Callback1(Key, p1)
+					end
 				end
-				local HasViewportPlacement: boolean = if FFlagViewRecyclerReact08 then State.viewportPlacement ~= nil else State.viewportPlacement ~= nil and Configuration1.viewportContainer ~= nil
+				local HasViewportPlacement: boolean = if FFlagViewRecyclerReact084 then State.viewportPlacement ~= nil elseif FFlagViewRecyclerReact08 then State.viewportPlacement ~= nil else State.viewportPlacement ~= nil and Configuration1.viewportContainer ~= nil
 				local ViewportContainer = if HasViewportPlacement then Configuration1.viewportContainer else Configuration1.container
 				
 				if ViewportContainer == nil then
-					detachHost(Key, p1)
-					
+					if FFlagViewRecyclerReact084 then
+						Callback(Key, p1)
+					else
+						Callback1(Key, p1)
+					end
 					if p1.presentedAssignment == nil then return end
 					p1.presentedAssignment = nil
 					local OnItemViewPresentationChangedFunction1: (any, any) -> () = Configuration.onItemViewPresentationChanged
@@ -159,6 +203,9 @@ return {
 					end
 					return
 				else
+					if FFlagViewRecyclerReact084 then
+						VacantHosts.reclaim(Host)
+					end
 					local v3 = v1
 					local PlaceResult = nil
 					
@@ -199,7 +246,7 @@ return {
 		end
 		
 		local function syncStack()
-			-- upvalues: Configuration1 (ref), v1 (ref), Tbl (copy), detachHost (copy), StackPlacementModule (upval), MountedWindow (ref), GetCanvasOriginOffset (copy)
+			-- upvalues: Configuration1 (ref), v1 (ref), Tbl (copy), FFlagViewRecyclerReact084 (upval), Callback (ref), Callback1 (ref), StackPlacementModule (upval), MountedWindow (ref), GetCanvasOriginOffset (copy)
 			local Container = Configuration1.container
 			local StackedSpacing = Configuration1.stackedSpacing
 			local v3 = v1
@@ -209,7 +256,11 @@ return {
 			if v3 ~= nil then
 				for i, value in Tbl do
 					if value.host ~= nil and v3.isStacked(value.host) then
-						detachHost(i, value)
+						if FFlagViewRecyclerReact084 then
+							Callback(i, value)
+						else
+							Callback1(i, value)
+						end
 					end
 				end
 				v3.destroy()
@@ -265,8 +316,11 @@ return {
 				end
 			end,
 			setConfiguration = function(Value)
-				-- upvalues: Flag1 (ref), Configuration1 (ref), NewHostMeasurement (copy), NewAbsolutePlacement (copy), syncStack (copy), Tbl (copy), applyPhysical (copy), v1 (ref), Flag (ref)
+				-- upvalues: Flag1 (ref), FFlagViewRecyclerReact084 (upval), Configuration1 (ref), VacantHosts (ref), IsContainer (ref), NewHostMeasurement (copy), NewAbsolutePlacement (copy), syncStack (copy), Tbl (copy), applyPhysical (copy), v1 (ref), Flag (ref)
 				if not Flag1 then
+					if FFlagViewRecyclerReact084 and (Value.container ~= Configuration1.container or Value.viewportContainer ~= Configuration1.viewportContainer) then
+						VacantHosts.evacuate(IsContainer)
+					end
 					Configuration1 = Value
 					NewHostMeasurement.setAxis(Configuration1.axis)
 					NewAbsolutePlacement.setConfiguration(Configuration1.axis, Configuration1.selfSizing)
@@ -331,7 +385,15 @@ return {
 				-- upvalues: NewHostMeasurement (copy)
 				NewHostMeasurement.cancelPending()
 			end,
-			hasDestroyedHost = if FFlagViewRecyclerReact08 then function(): boolean
+			hasDestroyedHost = if FFlagViewRecyclerReact084 then function(): boolean
+				-- upvalues: Tbl (copy)
+				for _, value in Tbl do
+					if value.host ~= nil and value.host.Parent == nil then
+						return true
+					end
+				end
+				return false
+			end elseif FFlagViewRecyclerReact08 then function(): boolean
 				-- upvalues: Tbl (copy)
 				for _, value in Tbl do
 					if value.host ~= nil and value.host.Parent == nil then
@@ -353,13 +415,20 @@ return {
 				return NewHostMeasurement.getPassReadCount()
 			end,
 			destroy = function()
-				-- upvalues: Flag1 (ref), NewHostMeasurement (copy), Tbl (copy), detachHost (copy), NewAbsolutePlacement (copy), v1 (ref), Count (ref)
+				-- upvalues: Flag1 (ref), NewHostMeasurement (copy), Tbl (copy), FFlagViewRecyclerReact084 (upval), Callback (ref), Callback1 (ref), VacantHosts (ref), IsContainer (ref), NewAbsolutePlacement (copy), v1 (ref), Count (ref)
 				if Flag1 then return end
 				Flag1 = true
 				NewHostMeasurement.destroy()
 				
 				for i, value in Tbl do
-					detachHost(i, value)
+					if FFlagViewRecyclerReact084 then
+						Callback(i, value)
+					else
+						Callback1(i, value)
+					end
+				end
+				if FFlagViewRecyclerReact084 then
+					VacantHosts.evacuate(IsContainer)
 				end
 				NewAbsolutePlacement.destroy()
 				
