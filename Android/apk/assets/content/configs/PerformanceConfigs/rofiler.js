@@ -1,0 +1,10925 @@
+//////////////////////////////////////////////////////////////////////////////////////////
+// This script is being embedded into MicroProfiler captures
+
+if (globalThis.g_cliMode) {
+    globalThis.window = globalThis;
+    globalThis.document = {
+        childNodes: [],
+        getElementById: function(x) { return {}; },
+        createElement: function(x) { return {}; },
+    };
+    globalThis.navigator = {
+        platform: "",
+    };
+    if (!window.location) {
+        window.location = {
+            hash: "",
+            pathname: "",
+        };
+    }
+}
+
+document.title = "MicroProfiler Capture";
+
+var S = {};
+var g_Loader = {};
+
+g_Loader.urlAnchor = window.location.hash;
+if (!window.g_Reload && g_Loader.urlAnchor != "") {
+    var newScriptSpecified = false;
+    var newScriptUrl = "";
+    if (g_Loader.urlAnchor == "#local") {
+        newScriptSpecified = true;
+    } else if (g_Loader.urlAnchor.startsWith("#www=")) {
+        newScriptSpecified = true;
+        newScriptUrl = g_Loader.urlAnchor.split("&")[0].split("=")[1];
+        newScriptUrl = decodeURIComponent(newScriptUrl);
+    }
+    if (newScriptSpecified) {
+        window.g_Reload = true;
+        var newViewerUrl = "rofiler.js";
+        var newToolsUrl = "rofiler.tools.js";
+        if (newScriptUrl.endsWith(".js")) {
+            newViewerUrl = newScriptUrl;
+            newToolsUrl = "";
+        } else if (newScriptUrl != "") {
+            newViewerUrl = newScriptUrl + "/" + newViewerUrl;
+            newToolsUrl = newScriptUrl + "/" + newToolsUrl;
+        }
+        var currentScript = document.currentScript;
+        var parentElement = currentScript.parentNode;
+        parentElement.removeChild(currentScript);
+
+        function AddNewScript(url, onloadFunc) {
+            var newScript = document.createElement('script');
+            newScript.src = url;
+            if (onloadFunc != undefined) {
+                newScript.onload = onloadFunc;
+            }
+            parentElement.appendChild(newScript);
+        };
+        if (newToolsUrl != "") {
+            AddNewScript(newToolsUrl, () => {
+                AddNewScript(newViewerUrl);
+            });
+        } else {
+            AddNewScript(newViewerUrl);
+        }
+    }
+} else {
+    if (window.g_Reload) {
+        window.g_wasReloaded = true;
+        console.log("Reloading the viewer");
+    }
+    window.g_Reload = false;
+}
+
+g_Loader.styleText = `
+/* about css: http://bit.ly/1eMQ42U */
+body {margin: 0px;padding: 0px; font: 12px Courier New;background-color:#474747; color:white;overflow:hidden;}
+ul {list-style-type: none;margin: 0;padding: 0;}
+li{display: inline; float:left;border:5px; position:relative;text-align:center;}
+a {
+    float:left;
+    text-decoration:none;
+    display: inline;
+    text-align: center;
+    padding:5px;
+    padding-bottom:0px;
+    padding-top:0px;
+    color: #FFFFFF;
+    background-color: #474747;
+    user-select: none;
+}
+a:hover, a:active{
+    background-color: #000000;
+}
+
+.highlighted-background {
+    background-color: #707070;
+    border-left: 1px solid #474747;
+    border-right: 1px solid #474747;
+}
+.highlighted-text {
+    font-weight: bold;
+    color: #ffcc77;
+}
+.spinner-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    pointer-events: none;
+}
+.spinner {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 8px solid rgba(0, 0, 0, 0.2);
+    border-top: 8px solid #000000;
+    animation: spin 1s linear infinite;
+    pointer-events: none;
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+ul ul {
+    position:absolute;
+    left:0;
+    top:100%;
+    margin-left:-999em;
+}
+li:hover ul {
+    margin-left:0;
+    margin-right:0;
+}
+ul li ul{ display:block;float:none;width:100%;}
+ul li ul li{ display:block;float:none;width:100%;}
+li li a{ display:block;float:none;width:100%;text-align:left;}
+li a{ float:none; }
+#nav li:hover div {margin-left:0;}
+.info {position:absolute;z-index:5;text-align:left;padding:2px;margin-left:-999em;background-color: #313131;}
+.helpstart {position:absolute;z-index:5;text-align:left;padding:2px;background-color: #313131;width:300px;display:none}
+.root {z-index:1;position:absolute;top:0px;left:0px;}
+.filterinput0{z-index:3;position:fixed;bottom:20px;left:25px;background-color: #313131}
+.filterinput1{z-index:3;position:fixed;bottom:20px;left:190px;background-color: #313131}
+.filterinputTooltip{z-index:2;position:fixed;bottom:5px;left:25px;background-color: #313131}
+#filtergroup,#filtertimer{box-sizing:border-box;width:165px}
+
+/* Diff UI */
+.tooltip-area .tooltip-text {
+    visibility: hidden;
+    font-weight: normal;
+    background-color: black;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 5px;
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip-area:hover .tooltip-text {
+    visibility: visible;
+}
+
+.tooltip-area:hover {
+    background-color: #555555;
+}
+
+.delete-button {
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #fff;
+    color: #000;
+    padding: 4px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1;
+    display: none;
+}
+
+.delete-button:hover {
+    background-color: #d33;
+    color: #fff;
+}
+
+.tr-highlight {
+    position: relative;
+}
+
+.tr-highlight:hover .delete-button {
+    display: block;
+}
+
+.td-highlight {
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.td-highlight:hover {
+    background-color: #555;
+}
+
+.drop-zone {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 9999;
+    visibility:hidden;
+}
+
+.drop-sign {
+    font-size: 90px;
+    color: #777;
+    text-shadow:
+        -1px -1px 0 #333,
+         1px -1px 0 #333,
+        -1px  1px 0 #333,
+         1px  1px 0 #333;
+    pointer-events: none;
+}
+`;
+
+g_Loader.bodyText = `
+<div id='filterinput' style="display: none;">
+<div class="filterinput0">Group<br><input type="text" id="filtergroup"></div>
+<div class="filterinput1">Timer/Thread<br><input type="text" id="filtertimer"></div>
+<div class="filterinputTooltip" id="filterinputTooltip">Ctrl + Left/Right  navigate matches   |   Esc  hides</div>
+</div>
+<canvas id="History" height="130" style="background-color:#474747;margin:0px;padding:0px;"></canvas>
+<canvas id="NetworkHistory" height="150" style="background-color:#474747;margin:0px;padding:0px;display:none;"></canvas>
+<div id="WarningBanner" style="color:#ffffff;background-color:#bb2222;margin:0px;padding:5px;display:none;">
+<div style="display:inline-block;cursor:pointer" onclick='document.getElementById("WarningBanner").style["display"] = "none"'>[X]</div>
+<div id="WarningBannerText" style="display:inline-block;"></div>
+</div>
+<canvas id="DetailedView" height="200" style="background-color:#474747;margin:0px;padding:0px;"></canvas>
+<div id="root" class="root" style="display: none;">
+<div class="helpstart" id="helpwindow" style="left:20px;top:20px">
+History View:<br>
+Click + Drag: Pan View<br>
+Right Click + Drag : Zoom on region<br>
+Click Frame : Center on frame<br>
+<hr>
+Main View:<br>
+Ctrl + Mouse up/down: Zoom<br>
+Mousewheel : Zoom<br>
+Right Click + Drag: Select region<br>
+Ctrl + Shift + Drag: Select region<br>
+Space: Zoom to Selection<br>
+Ctrl + Drag: Pan<br>
+Click + Drag: Pan<br>
+Ctrl + f: Search scope names<br>
+z: Toggle ToolTip<br>
+x: Toggle X-Ray view<br>
+c: Toggle X-Ray count/sum modes<br>
+<hr>
+Detailed View:<br>
+W: Go To Slowest (Worst) Instance<br>
+Left/Right Arrow: Next/Prev Instance<br>
+<hr>
+Timer Views:<br>
+Tab: go to filtering<br>
+Esc: Exit &amp; Clear filter
+<hr>
+<table style="width:100%">
+<tr>
+<td width="50%" align="left"><a href='javascript:void(0)' onclick="ShowHelp(0, 0);">Close</a></td>
+<td width="50%" align="right"><a href='javascript:void(0)' onclick="ShowHelp(0, 1);">Close, Never Show</a></td>
+</tr>
+</table>
+</div>
+<ul id="nav">
+<li><a href="javascript:void(0)" onclick="ToggleDebugMode();">Info</a>
+<div class="info" id="infowindow" style="left:0px;top:1em;width:450px;"></div>
+</li>
+<li><a id='ModeSubMenuText'>Mode</a>
+    <ul id='ModeSubMenu'>
+        <li><a href="javascript:void(0)" onclick="SetMode('timers', 0);" id="buttonTimers">Timers</a></li>
+        <li><a href="javascript:void(0)" onclick="SetMode('timers', 1);" id="buttonGroups">Groups</a></li> 
+        <li><a href="javascript:void(0)" onclick="SetMode('timers', 2);" id="buttonThreads">Threads</a></li>
+        <li><a href="javascript:void(0)" onclick="SetMode('detailed', 0);" id="buttonDetailed">Detailed</a></li>
+        <li><a href="javascript:void(0)" onclick="SetMode('counters', 0);" id="buttonCounters">Counters</a></li>
+    </ul>
+</li>
+<li><a>Reference</a>
+    <ul id='ReferenceSubMenu'>
+        <li><a href="javascript:void(0)" onclick="SetReferenceTime('5ms');">5ms</a></li>
+        <li><a href="javascript:void(0)" onclick="SetReferenceTime('10ms');">10ms</a></li>
+        <li><a href="javascript:void(0)" onclick="SetReferenceTime('15ms');">15ms</a></li>
+        <li><a href="javascript:void(0)" onclick="SetReferenceTime('20ms');">20ms</a></li>
+        <li><a href="javascript:void(0)" onclick="SetReferenceTime('33ms');">33ms</a></li>
+        <li><a href="javascript:void(0)" onclick="SetReferenceTime('50ms');">50ms</a></li>
+        <li><a href="javascript:void(0)" onclick="SetReferenceTime('100ms');">100ms</a></li>
+        <li><a href="javascript:void(0)" onclick="SetReferenceTime('250ms');">250ms</a></li>
+        <li><a href="javascript:void(0)" onclick="SetReferenceTime('500ms');">500ms</a></li>
+        <li><a href="javascript:void(0)" onclick="SetReferenceTime('1000ms');">1000ms</a></li>
+    </ul>
+</li>
+<li id="ilThreads"><a>Threads</a>
+    <ul id="ThreadSubMenu">
+        <li><a href="javascript:void(0)" onclick="ToggleThread();">All</a></li>
+        <li><a>---</a></li>
+    </ul>
+</li>
+<li id="ilGroups"><a>Groups</a>
+    <ul id="GroupSubMenu">
+        <li><a href="javascript:void(0)" onclick="ToggleGroup();">All</a></li>
+        <li><a>---</a></li>
+    </ul>
+</li>
+<li id="ilHighlight"><a class="highlighted-background">Highlight</a>
+    <ul id="HighlightSubMenu">
+        <li><a href="javascript:void(0)" onclick="SwitchHighlight('None');">None</a></li>
+        <li><a href="javascript:void(0)" onclick="SwitchHighlight('Render');">Render</a></li>
+        <li><a href="javascript:void(0)" onclick="SwitchHighlight('Jobs');">Jobs</a></li>
+        <li><a href="javascript:void(0)" onclick="SwitchHighlight('Physics');">Physics</a></li>
+        <li><a href="javascript:void(0)" onclick="SwitchHighlight('Sound');">Sound</a></li>
+        <li><a href="javascript:void(0)" onclick="SwitchHighlight('Network');">Network</a></li>
+        <li><a href="javascript:void(0)" onclick="SwitchHighlight('Script');">Script</a></li>
+    </ul>
+</li>
+<li id="ilDataModel" style="display: none;"><a class="highlighted-background">DataModel</a>
+    <ul id="DataModelSubMenu">
+        <li><a id="dmfilter_all" href="javascript:void(0)" onclick="SetDmFilterAll();">All</a></li>
+    </ul>
+</li>
+<li id="ilPlugins" style="display: none;"><a class="highlighted-background">X-Ray</a>
+    <ul id='PluginMenu'>
+    </ul>
+</li>
+<li id="ilExport"><a class="highlighted-background">Export</a>
+    <ul id="ExportSubMenu">
+        <li><a href="javascript:void(0)" onclick="ExportSummaryJSON();">Summary to JSON</a></li>
+        <li><a href="javascript:void(0)" onclick="ExportMarkersCSV();">Markers to CSV</a></li>
+        <li><a href="javascript:void(0)" onclick="ExportCountersCSV();">Counters to CSV</a></li>
+    </ul>
+</li>
+<li id="ilOptions"><a>Options</a>
+    <ul id='OptionsMenu'>
+        <li><a href="javascript:void(0)" onclick="ToggleContextSwitch();">Context Switch</a></li>
+        <li><a href="javascript:void(0)" onclick="ToggleDisableMerge();">MergeDisable</a></li>
+        <li><a href="javascript:void(0)" onclick="ToggleDisableLod();">LodDisable</a></li>
+        <li id='GroupColors'><a href="javascript:void(0)" onclick="ToggleGroupColors();">Group Colors</a></li>
+        <li id='TimersMeta'><a href="javascript:void(0)" onclick="ToggleTimersMeta();">Meta</a></li>
+        <li id='ZeroBasedBars'><a href="javascript:void(0)" onclick="ToggleZeroBasedBars();">0-based Bars</a></li>
+        <li id='DetailedNetwork'><a href="javascript:void(0)" onclick="ToggleNetworkPluginMode();">Detailed Network Graph</a></li>
+        <li id='NetworkLogScale'><a href="javascript:void(0)" onclick="ToggleNetworkScale();">Log Scale Graph</a></li>
+        <li id='ShowHelp'><a href="javascript:void(0)" onclick="ShowHelp(1,1);">Help</a></li>
+<!-- <li><a href="javascript:void(0)" onclick="ToggleDebug();">DEBUG</a></li> -->
+    </ul>
+</li>
+<li id="ilFind" title="Find timer (Ctrl + F)" style="cursor: pointer;"><a class="highlighted-text">&nbsp;&#8981;&nbsp;</a>
+</li>
+<li id="ilReload" title="Re-capture" style="cursor: pointer; display: none;"><a class="highlighted-text">&nbsp;&#8635;&nbsp;</a>
+</li>
+<li id="ilSave" title="Save to file" style="cursor: pointer; display: none;"><a class="highlighted-text">&nbsp;\u21e9&nbsp;</a>
+</li>
+</ul>
+</div>
+<div id="eventswindow" style="display:none;"></div>
+<span id="progressDotSample" style="position: absolute; top: 0px; left: 0px; visibility: hidden;">.</span>
+<div id="progressDots" style="position: absolute; top: 0px; left: 0px; width: 100%;"></div>
+<div id="progressSpinner" class="spinner-container" style="display: none;"><div class="spinner"></div></div>
+`;
+
+function InitCssHtml() {
+    const styleElId = "rofilerMainStyle";
+    var styleElement = document.getElementById(styleElId);
+    if (styleElement) {
+        styleElement.textContent = g_Loader.styleText;
+    } else {
+        styleElement = document.createElement("style");
+        styleElement.id = styleElId;
+        styleElement.textContent = g_Loader.styleText;
+        document.head.appendChild(styleElement);
+    }
+
+    if (document.body) {
+        document.body.innerHTML = g_Loader.bodyText;
+    } else {
+        var newBody = document.createElement("body");
+        newBody.innerHTML = g_Loader.bodyText;
+        document.documentElement.appendChild(newBody);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var bodyElements = document.getElementsByTagName("body");
+        for (var i = 1; i < bodyElements.length; i++) {
+            bodyElements[i].remove();
+        }
+    });
+}
+
+function GetGpuBoundThresholdInMs() {
+    return 2.5;
+}
+
+function InvertColor(hexTripletColor) {
+    var color = hexTripletColor;
+    color = color.substring(1); // remove #
+    color = parseInt(color, 16); // convert to integer
+    var R = ((color >> 16) % 256) / 255.0;
+    var G = ((color >> 8) % 256) / 255.0;
+    var B = ((color >> 0) % 256) / 255.0;
+    var lum = (0.2126 * R + 0.7152 * G + 0.0722 * B);
+    if (lum < 0.7) {
+        return '#ffffff';
+    }
+    else {
+        return '#333333';
+    }
+}
+function InvertColorIndex(hexTripletColor) {
+    var color = hexTripletColor;
+    color = color.substring(1); // remove #
+    color = parseInt(color, 16); // convert to integer
+    var R = ((color >> 16) % 256) / 255.0;
+    var G = ((color >> 8) % 256) / 255.0;
+    var B = ((color >> 0) % 256) / 255.0;
+    var lum = (0.2126 * R + 0.7152 * G + 0.0722 * B);
+    if (lum < 0.7) {
+        return 0;
+    }
+    else {
+        return 1;
+    }
+}
+function MakeGroup(id, name, category, numtimers, isgpu, total, average, max, color) {
+    var group = { "id": id, "name": name, "category": category, "numtimers": numtimers, "isgpu": isgpu, "total": total, "average": average, "max": max, "color": color };
+    return group;
+}
+
+function MakeTimer(id, name, group, color, colordark, average, max, min, exclaverage, exclmax, callaverage, callcount, total, meta, metaagg, metamax) {
+    var timer = { "id": id, "name": name, "color": color, "colordark": colordark, "timercolor": color, "textcolor": InvertColor(color), "group": group, "average": average, "max": max, "min": min, "exclaverage": exclaverage, "exclmax": exclmax, "callaverage": callaverage, "callcount": callcount, "total": total, "meta": meta, "textcolorindex": InvertColorIndex(color), "metaagg": metaagg, "metamax": metamax, "worst": 0, "worststart": 0, "worstend": 0 };
+    return timer;
+}
+
+function MakeTimes(scale, ts) {
+    for (var i = 0; i < ts.length; ++i) {
+        ts[i] *= scale;
+    }
+    return ts;
+}
+
+function MakeTimesType(scale, tt, ts) {
+    g_TickToTimeScale = scale;
+    for (var i = 0; i < ts.length; ++i) {
+        if (tt[i] <= 127)
+            ts[i] *= scale;
+    }
+    return ts;
+}
+
+function MakeTimesExtra(scale, scaleextra, tt, ts) {
+    for (var i = 0; i < ts.length; ++i) {
+        ts[i] *= (tt[i] == 4) ? scaleextra : scale;
+    }
+    return ts;
+}
+
+function MakeFrame(id, framestart, frameend, framestartgpu, frameendgpu, ts, tt, ti, tl, paused, incomplete, cpufreq, usedmemorymb, freememorymb, allocmsecs, allocs, freemsecs, frees, cpu_waits_for_gpu, jobs_walltime_ms, render_walltime_ms, gpu_time_ms) {
+    var frame = { "id": id, "framestart": framestart, "frameend": frameend, "framestartgpu": framestartgpu, "frameendgpu": frameendgpu, "ts": ts, "tt": tt, "ti": ti, "tl": tl, "paused": paused, "incomplete": incomplete, "cpufreq": cpufreq, "usedmemorymb": usedmemorymb, "freememorymb": freememorymb, "allocmsecs": allocmsecs, "allocs": allocs, "freemsecs": freemsecs, "frees": frees, "cpu_waits_for_gpu": cpu_waits_for_gpu, "jobs_walltime_ms": jobs_walltime_ms, "render_walltime_ms": render_walltime_ms, "gpu_time_ms": gpu_time_ms };
+    return frame;
+}
+
+function MakeCounter(id, parent, sibling, firstchild, level, name, value, minvalue, maxvalue, formatted, limit, formattedlimit, format, counterprc, boxprc, historydata) {
+    var historyprcoffset = (minvalue < 0) ? -minvalue : 0;
+    var historyprcscale = 1 / (maxvalue + historyprcoffset);
+
+    var historyprc = new Array(historydata.length);
+    for (var i = 0; i < historydata.length; ++i) {
+        historydata[i] += minvalue;
+        historyprc[i] = (historydata[i] + historyprcoffset) * historyprcscale;
+    }
+
+    var counter = { "id": id, "parent": parent, "sibling": sibling, "firstchild": firstchild, "level": level, "name": name, "value": value, "formatted": formatted, "limit": limit, "formattedlimit": formattedlimit, "format": format, "counterprc": counterprc, "boxprc": boxprc, "historyprc": historyprc, "historydata": historydata, "minvalue": minvalue, "maxvalue": maxvalue };
+    return counter;
+}
+
+function InitDataVars() {
+    window.DumpHost = undefined;
+    window.DumpUtcCaptureTime = undefined;
+    window.AggregateInfo = undefined;
+    window.PlatformInfo = undefined;
+    window.GeneralInfo = undefined;
+    window.CategoryInfo = undefined;
+    window.GroupInfo = undefined;
+    window.TimerInfo = undefined;
+
+    window.ThreadNames = undefined;
+    window.ThreadIds = undefined;
+    window.ThreadGpu = undefined;
+    window.ThreadClobbered = undefined;
+    window.ThreadBufferSizes = undefined;
+    window.ThreadGroupTimeArray = undefined;
+
+    window.MetaNames = undefined;
+    window.CounterInfo = undefined;
+    window.Frames = undefined;
+    window.gCpuCoreFreqData = undefined;
+    window.gDmContextData = undefined; // multi-DM RCC: per-thread active DataModel id over time (MpEvent_DmContext)
+    window.gDmFilter = {               // multi-DM RCC DataModel filter state (single struct)
+        set: {},                       // selected dmIds (empty = All)
+        active: false,                 // cached: set non-empty
+        cache: {},                     // per-thread sorted dmId-transition keys
+        ids: [],                       // dmIds present (incl 0 = shared)
+        hasData: false,                // capture has 2+ DataModels (gates menu + tooltip)
+    };
+
+    window.ExtensionList = undefined;
+    window.EnabledFastFlags = undefined;
+    window.CGlobalLabels = undefined;
+    window.CSwitchThreadInOutCpu = undefined;
+    window.CSwitchTime = undefined;
+    window.CSwitchThreads = undefined;
+
+    window.g_TickToTimeScale = 0;
+}
+
+function InitViewerVars() {
+    window.FFlagMicroprofilerPerFrameCpuSpeed = EnabledFastFlags.includes("MicroprofilerPerFrameCpuSpeed");
+
+    // Part 1
+    window.GroupInfoPerFrame = [];
+    window.TimerInfoPerFrame = [];
+    window.CanvasDetailedView = document.getElementById('DetailedView');
+    window.CanvasHistory = document.getElementById('History');
+    window.CanvasNetworkHistory = document.getElementById('NetworkHistory');
+    window.CanvasDetailedOffscreen = document.createElement('canvas');
+    window.FilterInputGroup = document.getElementById('filtergroup');
+    window.FilterInputTimer = document.getElementById('filtertimer');
+    window.FilterInputGroupString = null;
+    window.FilterInputTimerString = null;
+    window.FilterInputArray = [FilterInputGroup, FilterInputTimer];
+    window.FilterGroup = null;
+    window.FilterTimer = null;
+    window.g_Msg = '0';
+
+    window.Initialized = 0;
+    window.fDetailedOffset = Frames[0].framestart;
+    window.fDetailedRange = Frames[0].frameend - fDetailedOffset;
+    window.nWidth = CanvasDetailedView.width;
+    window.nHeight = CanvasDetailedView.height;
+    window.ReferenceTime = 33;
+    window.FrameOverflowDetection = 33; window.nHistoryHeightOrig = 130; window.nHistoryHeight = nHistoryHeightOrig;
+    window.nNetworkHistoryHeightOrig = 150;
+    window.nNetworkHistoryHeight = window.nNetworkHistoryHeightOrig;
+    window.nNetworkHistoryBaseHeightOrig = 130;
+    window.nNetworkHistoryBaseHeight = window.nNetworkHistoryBaseHeightOrig;
+    window.nNetworkHistoryCurrentHeight = window.nNetworkHistoryHeightOrig;
+    window.nNetworkHistoryLegendHeightOrig = 20;
+    window.nNetworkHistoryLegendHeight = window.nNetworkHistoryLegendHeightOrig;
+    window.nOffsetY = 0;
+    window.nOffsetBarsX = 0;
+    window.nOffsetBarsY = 0;
+    window.nOffsetCountersY = 0;
+    window.nBarsWidth = 80;
+    window.NameWidth = 200;
+    window.MouseButtonState = [0, 0, 0, 0, 0, 0, 0, 0];
+    window.KeyShiftDown = 0;
+    window.MouseDragButton = 0;
+    window.KeyCtrlDown = 0;
+    window.NanoScale = 0; // held-'N' momentary flag: render all durations in ns while set
+    window.ToolTip = 1; //0: off, 1: default, 2: flipped
+    window.DetailedViewMouseX = 0;
+    window.DetailedViewMouseY = 0;
+    window.HistoryViewMouseX = -1;
+    window.HistoryViewMouseY = -1;
+    window.NetworkViewMouseX = -1;
+    window.NetworkViewMouseY = -1;
+    window.MouseHistory = 0;
+    window.MouseDetailed = 0;
+    window.FontHeight = 10;
+    window.FontWidth = 1;
+    window.FontAscent = 3; //Set manually
+    window.Font = 'Bold ' + FontHeight + 'px Courier New';
+    window.FontFlashHeight = 35;
+    window.FontFlash = 'Bold ' + FontFlashHeight + 'px Courier New';
+    window.BoxHeight = FontHeight + 2;
+    window.HighlightGroup = 'None';
+    window.HighlightGroupIndex = -1;
+    window.kHighlightGroupNotMatched = -1;
+    window.kHighlightGroupMatched = 1;
+    window.kHighlightGroupMatchedAsChild = 2;
+    window.ThreadsActive = new Object();
+    window.ThreadsAllActive = 1;
+    window.GroupsActive = new Object();
+    window.GroupsAllActive = 1;
+    window.nMinWidth = 0.01;//subpixel width
+    window.nMinWidthPan = 1.0;//subpixel width when panning
+    window.nContextSwitchEnabled = 1;
+    window.DisableLod = 0;
+    window.DisableMerge = 0;
+    window.GroupColors = 0;
+    window.nModDown = 0;
+    window.g_MSG = 'no';
+    window.nDrawCount = 0;
+    window.nBackColors = ['#474747', '#313131'];
+    window.nBackColorOffset = '#606060';
+    window.CSwitchColors = ["#9DD8AF", "#D7B6DA", "#EAAC76", "#DBDA61", "#8AD5E1", "#8CE48B", "#C4D688", "#57E5C4"];//generated by http://tools.medialab.sciences-po.fr/iwanthue/index.php
+    window.CCoreColors = ["#8deba7", "#fff000", "#586b5c", "#7aff48", "#54543b", "#26ea43", "#d8d1be", "#6fdb00",
+                        "#485838", "#48ff6a", "#71612f", "#02e04e", "#bab19b", "#9de900", "#abb6a5", "#00ac12",
+                        "#f7e9cb", "#4bad00", "#b7d2bc", "#cec900", "#275d34", "#c5ff56", "#485924", "#e4ff65",
+                        "#00662e", "#ffe350", "#225f15", "#f8d144", "#018e3f", "#f0cd5e", "#53ed8b", "#756118",
+                        "#acff81", "#54560c", "#b9ff9e", "#907900", "#b1edbf", "#a3ca00", "#8aa48f", "#309800",
+                        "#ffefb8", "#157b00", "#f9ffb9", "#4c6300", "#d8ffc9", "#528300", "#b2dfbc", "#b2a900",
+                        "#3cbf6d", "#90781a", "#019937", "#ffe691", "#259b55", "#fff681", "#64a074", "#d9b955",
+                        "#63bc7d", "#b69a3a", "#d9ff96", "#a99972", "#869700", "#dfc88c", "#ac944e", "#c5ad6c"];
+    window.CSwitchHeight = 5;
+    window.FRAME_HISTORY_COLOR_CPU = '#ff7f27';
+    window.FRAME_HISTORY_COLOR_CPU_RENDER = '#37a0ee';
+    window.FRAME_HISTORY_COLOR_GPU = '#ff2f4f';
+    window.FRAME_HISTORY_COLOR_EMPTY = '#664a00';
+    window.FRAME_HISTORY_COLOR_INCOMPLETE = '#202020';
+    window.FRAME_HISTORY_COLOR_WRAPAROUND = '#ff0000'; // these frames are partially clobbered by the ring buffer
+    window.FRAME_HISTORY_COLOR_MOUSE_HOVER = '#ffffff';
+    // Per-thread buffer-status label colors (see InitFrameInfo classification + thread labels).
+    window.THREAD_STATUS_BOTTLENECK = '#ff8c00'; // orange: smallest buffer frame-capacity -> caps capture look-back
+    window.THREAD_STATUS_EARLY = '#3fa9f5';      // blue: has ok pre-capture scopes (e.g. occlusion-cull debug)
+    window.THREAD_STATUS_WRAPAROUND = '#ff0000'; // red: markers far outside the frame window -> possible wraparound
+    window.THREAD_STATUS_MISALIGNED = '#c586ff'; // purple: GPU thread with scattered (non-leading) wraparound frames -> GPU/CPU timestamp misalignment, not a true wraparound
+    window.ZOOM_TIME = 0.5;
+    window.AnimationActive = false;
+    window.nHoverCSCpu = -1;
+    window.nHoverCSCpuNext = -1;
+    window.nHoverCSToolTip = null;
+    window.nHoverToken = -1;
+    window.nHoverFrame = -1;
+    window.nHoverTokenIndex = -1;
+    window.nHoverTokenLogIndex = -1;
+    window.nHoverTokenNext = -1;
+    window.nHoverTokenLogIndexNext = -1;
+    window.nHoverTokenIndexNext = -1;
+    window.nHoverCounter = -1;
+    window.nHoverTokenDrawn = -1;
+    window.nHideHelp = 1;
+    window.fFrameScale = 33.33;
+    window.SortColumn = 0;
+    window.SortColumnOrderFlip = 0;
+    window.SortColumnMouseOver = null;
+    window.SortColumnMouseOverNext = null;
+    window.StartTime = Date.now();
+
+    // Part 2
+    window.RangeCpu = RangeInit();
+    window.RangeGpu = RangeInit();
+    window.RangeSelect = RangeInit();
+    window.SelectionSummary = null; // right-drag region top-scopes summary (set on release)
+
+    window.RangeCpuNext = RangeInit();
+    window.RangeGpuNext = RangeInit();
+
+    window.RangeCpuHistory = RangeInit();
+    window.RangeGpuHistory = RangeInit();
+
+    window.fRangeBegin = 0;
+    window.fRangeEnd = -1;
+    window.fRangeThreadId = -1;
+    window.fRangeThreadIdNext = -1;
+    window.fRangeBeginNext = 0;
+    window.fRangeEndNext = 0;
+    window.fRangeBeginGpuNext = 0;
+    window.fRangeEndGpuNext = 0;
+    window.fRangeBeginHistory = -1;
+    window.fRangeEndHistory = -1;
+    window.fRangeBeginHistoryGpu = -1;
+    window.fRangeEndHistoryGpu = -1;
+    window.fRangeBeginSelect = 0;
+    window.fRangeEndSelect = -1;
+    window.ThreadY = undefined;
+
+    window.ModeDetailed = 0;
+    window.ModeTimers = 1;
+    window.ModeCounters = 2;
+    window.Mode = ModeDetailed;
+
+    window.DebugDrawQuadCount = 0;
+    window.DebugDrawTextCount = 0;
+    window.ProfileMode = 0;
+    window.ProfileRedraw0 = 0;
+    window.ProfileRedraw1 = 0;
+    window.ProfileRedraw2 = 0;
+    window.ProfileFps = 0;
+    window.ProfileFpsAggr = 0;
+    window.ProfileFpsCount = 0;
+    window.ProfileLastTimeStamp = new Date();
+
+    window.CSwitchCache = {};
+    window.CSwitchOnlyThreads = [];
+    window.ProfileData = {};
+    window.ProfileStackTime = {};
+    window.ProfileStackName = {};
+    window.Debug = 1;
+
+    window.g_MaxStack = Array();
+    window.g_TypeArray;
+    window.g_TimeArray;
+    window.g_IndexArray;
+    window.g_XtraArray; // Events
+    window.LodData = new Array();
+    window.NumLodSplits = 10;
+    window.SplitMin = 100;
+    window.SPLIT_LIMIT = 1e20;
+    window.DPR = 1;
+    window.DetailedRedrawState = {};
+    window.OffscreenData;
+    window.DetailedFrameCounter = 0;
+    window.Invalidate = 0;
+    window.GroupOrder = Array();
+    window.ThreadOrder = Array();
+    window.TimersGroups = 0;
+    window.TimersMeta = 1;
+    window.ZeroBasedBars = 1;
+    window.MetaLengths = Array();
+    window.MetaLengthsAvg = Array();
+    window.MetaLengthsMax = Array();
+    window.DetailedNetworkMode = true;
+    window.NetworkLogScale = false;
+    window.ActiveNetworkCategory = -1;
+    window.dirSwapActive = false;
+    window.dirSwapCategory = -1;
+    window.ActiveNetworkFrame = -1;
+    window.ActiveNetworkGraph = -1;
+    window.NetworkMainActiveDirection = undefined;
+
+    window.ZoomActive = 0;
+
+    window.StrGroup = "Group";
+    window.StrThread = "Thread";
+    window.StrTimer = "Timer";
+    window.StrAverage = "Average";
+    window.StrMax = "Max";
+    window.StrTotal = "Total";
+    window.StrMin = "Min";
+    window.StrCallAverage = "Call Average";
+    window.StrCount = "Count";
+    window.StrExclAverage = "Excl Average";
+    window.StrExclMax = "Excl Max";
+
+    // Part 3
+    window.IsMac = navigator.platform.indexOf("Mac") === 0;
+    window.IsHtmlSavable = !window.g_wasReloaded && (GetHtmlSource(true) != null);
+    window.MaxStackDepthToVisualize = 50;
+    window.HelpTooltipShowTime = window.HelpTooltipShowTimeInitial = 10000;
+}
+
+function RangeInit() {
+    return { "Begin": -1, "End": -1, "YBegin": -1, "YEnd": -1, "Thread": -1, "Index": -1 };
+}
+function RangeValid(Range) {
+    return Range.Begin < Range.End;
+}
+function RangeCopy(Dst, Src) {
+    Dst.Begin = Src.Begin;
+    Dst.End = Src.End;
+    Dst.YBegin = Src.YBegin;
+    Dst.YEnd = Src.YEnd;
+    Dst.Thread = Src.Thread;
+}
+
+function ProfileModeClear() {
+    if (ProfileMode) {
+        ProfileData = new Object();
+        ProfileStackTime = new Array();
+        ProfileStackName = new Array();
+    }
+}
+function ProfileEnter(Name) {
+    if (ProfileMode) {
+        ProfileStackTime.push(new Date());
+        ProfileStackName.push(Name);
+    }
+}
+function ProfileLeave() {
+    if (ProfileMode) {
+        var Time = new Date();
+        var Delta = Time - ProfileStackTime.pop();
+        var Name = ProfileStackName.pop();
+        var Obj = ProfileData[Name];
+        if (!Obj) {
+            Obj = new Object();
+            Obj.Count = 0;
+            Obj.Name = Name;
+            Obj.Time = 0;
+            ProfileData[Name] = Obj;
+        }
+        Obj.Time += Delta;
+        Obj.Count += 1;
+    }
+}
+
+function ProfilePlot(s) {
+    if (ProfileMode) {
+        var A = ProfileData.Plot;
+        if (!A) {
+            ProfileData.Plot = Array();
+            A = ProfileData.Plot;
+        }
+        if (A.length < 10) {
+            A.push(s);
+        }
+    }
+}
+function ProfileModeDump() {
+    for (var idx in ProfileData) {
+        var Timer = ProfileData[idx];
+        console.log(Timer.Name + " " + Timer.Time + "ms " + Timer.Count);
+    }
+
+}
+function ProfileModeDraw(Canvas) {
+    if (ProfileMode) {
+        var StringArray = [];
+        for (var idx in ProfileData) {
+            if (idx == "Plot")
+                continue;
+            var Timer = ProfileData[idx];
+            StringArray.push(Timer.Name);
+            StringArray.push(Timer.Time + "ms");
+            StringArray.push("#");
+            StringArray.push("" + Timer.Count);
+        }
+        StringArray.push("debug");
+        StringArray.push(Debug);
+        var Time = new Date();
+        var Delta = Time - ProfileLastTimeStamp;
+        ProfileLastTimeStamp = Time;
+        StringArray.push("Frame Delta");
+        StringArray.push(Delta + "ms");
+        if (ProfileMode == 2) {
+            ProfileFpsAggr += Delta;
+            ProfileFpsCount++;
+            var AggrFrames = 10;
+            if (ProfileFpsCount == AggrFrames) {
+                ProfileFps = 1000 / (ProfileFpsAggr / AggrFrames);
+                ProfileFpsAggr = 0;
+                ProfileFpsCount = 0;
+            }
+            StringArray.push("FPS");
+            StringArray.push("" + ProfileFps.toFixed(2));
+        }
+        StringArray.push("ProfileRedraw0");
+        StringArray.push("" + ProfileRedraw0);
+        StringArray.push("ProfileRedraw1");
+        StringArray.push("" + ProfileRedraw1);
+        StringArray.push("ProfileRedraw2");
+        StringArray.push("" + ProfileRedraw2);
+        ProfileRedraw0 = 0;
+        ProfileRedraw1 = 0;
+        ProfileRedraw2 = 0;
+
+
+        for (var i = 0; i < ProfileData.Plot; ++i) {
+            StringArray.push("");
+            StringArray.push(ProfileData.Plot[i]);
+        }
+        ProfileData.Plot = Array();
+        DrawToolTip(StringArray, Canvas, 0, 200);
+    }
+}
+
+function ToggleDebugMode() {
+    ProfileMode = (ProfileMode + 1) % 4;
+    console.log('Toggle Debug Mode ' + ProfileMode);
+}
+
+function DetailedTotal() {
+    var Total = 0;
+    for (var i = 0; i < Frames.length; i++) {
+        var frfr = Frames[i];
+        Total += frfr.frameend - frfr.framestart;
+    }
+    return Total;
+}
+
+//if timestamps are more than 33ms after current frame, we assume buffer has wrapped.
+function OverflowAllowance(threadIdx, frame) {
+    return (ThreadGpu[threadIdx] ? frame.frameendgpu : frame.frameend) + FrameOverflowDetection;
+}
+
+/*
+
+"layout" is formatted as such...
+type InfoLayout = {
+    Name: string;
+    Contents: (
+        string |
+        {
+            [key: string]: (
+                string |
+                {
+                    Display: string;
+                    Link?: string;
+                    Style?: {
+                        [key: string]: string;
+                    };
+                }
+            );
+        }
+    )[];
+}[];
+
+*/
+function BuildInfoInnerHtml(div, layout) {
+    function createPair(key, value) {
+        const p = document.createElement("p");
+        p.style.margin = "0";
+        p.style.fontFamily = "monospace";
+
+        const keyText = document.createElement("span");
+        keyText.style.opacity = "0.5";
+        keyText.textContent = `${key} `;
+        p.appendChild(keyText);
+
+        const valueText = document.createElement("span");
+        valueText.style.opacity = "1";
+        valueText.style.fontWeight = "bold";
+
+        if (typeof value === "object" && value !== null) {
+            if ("Display" in value) {
+                if ("Link" in value && value.Link !== undefined) {
+                    const a = document.createElement("a");
+                    a.href = value.Link;
+                    a.textContent = value.Display;
+                    valueText.appendChild(a);
+                } else {
+                    valueText.textContent = value.Display;
+                }
+            } else {
+                valueText.textContent = String(value);
+            }
+
+            if ("Style" in value && typeof value.Style === "object" && value.Style !== null) {
+                for (const [styleKey, styleValue] of Object.entries(value.Style)) {
+                    valueText.style[styleKey] = styleValue;
+                }
+            }
+        } else {
+            valueText.textContent = value;
+        }
+
+        p.appendChild(valueText);
+        return p;
+    }
+
+    const categoryDivs = [];
+
+    layout.forEach((categoryObject, categoryIndex) => {
+        const pElementsForCategory = [];
+
+        const headerP = document.createElement("p");
+        headerP.classList.add("category-header");
+        headerP.style.fontWeight = "bold";
+        headerP.style.margin = "0 0 4px 0";
+        headerP.style.fontFamily = "monospace";
+        headerP.textContent = `${categoryObject.Name}`;
+        headerP.style.color = "#ccc";
+        pElementsForCategory.push(headerP);
+
+        categoryObject.Contents.forEach(item => {
+            if (typeof item === "string") {
+                const value = window.PlatformInfo[item] || window[item];
+                if (value !== null && value !== undefined) {
+                    pElementsForCategory.push(createPair(item, value));
+                }
+            } else if (typeof item === "object" && item !== null) {
+                for (const key in item) {
+                    if (Object.prototype.hasOwnProperty.call(item, key)) {
+                        const value = item[key];
+                        if (value !== null && value !== undefined) {
+                            pElementsForCategory.push(createPair(key, value));
+                        }
+                    }
+                }
+            }
+        });
+
+        if (pElementsForCategory.length === 1) {
+            return;
+        }
+
+        const categoryDiv = document.createElement("div");
+
+        pElementsForCategory.forEach((p, index) => {
+            categoryDiv.appendChild(p);
+        });
+
+        categoryDivs.push(categoryDiv);
+    });
+
+    for (let i = 0; i < categoryDivs.length; i++) {
+        const categoryDiv = categoryDivs[i];
+
+        div.appendChild(categoryDiv);
+
+        if (i < categoryDivs.length - 1) {
+            const hr = document.createElement("hr");
+            hr.style.border = "0.5px solid #888";
+            hr.style.margin = "8px 0";
+            div.appendChild(hr);
+        }
+    }
+
+    div.style.padding = "8px";
+}
+
+function DescribeBoundaryMarker(kind, threadIdx, timerIndex, entryType, time, frameEnd, wrapOvershoot, firstStart, avgFrameTime, frameIdx) {
+    // Console diagnostic explaining WHY a thread was flagged: the offending entry (enter/leave +
+    // timestamp), the reference boundary it was compared against and which frame value it derives
+    // from, the overshoot allowance added to that reference, and how far outside the marker fell.
+    var name = (TimerInfo[timerIndex] && TimerInfo[timerIndex].name) ? TimerInfo[timerIndex].name : ('#' + timerIndex);
+    var typeStr = entryType === 1 ? 'enter' : (entryType === 0 ? 'leave' : ('type' + entryType));
+    var futureLimit = frameEnd + wrapOvershoot;
+    var earliestOkStart = firstStart - avgFrameTime;
+    var detail;
+    if (time >= futureLimit) {
+        detail = (time - futureLimit).toFixed(3) + 'ms after boundary (ref frame-end ' + frameEnd.toFixed(3) +
+            ' + overshoot ' + wrapOvershoot.toFixed(3) + ' = ' + futureLimit.toFixed(3) + ')';
+    } else if (time < earliestOkStart) {
+        detail = (earliestOkStart - time).toFixed(3) + 'ms before boundary (ref first-frame-start ' + firstStart.toFixed(3) +
+            ' - avg-frame ' + avgFrameTime.toFixed(3) + ' = ' + earliestOkStart.toFixed(3) + ')';
+    } else {
+        detail = (firstStart - time).toFixed(3) + 'ms before first-frame-start (ref first-frame-start ' + firstStart.toFixed(3) +
+            ', within one avg-frame ' + avgFrameTime.toFixed(3) + ')';
+    }
+    console.log('[MicroProfiler] ' + kind + ': thread "' + ThreadNames[threadIdx] + '", frame ' + frameIdx +
+        ', timer "' + name + '", ' + typeStr + ' ts=' + time + ', ' + detail);
+}
+function InitFrameInfo() {
+    AggregateInfo.EmptyFrames = Array(Frames.length);
+    emptyFrames = 0;
+
+    var nNumLogs = (Frames.length > 0 && Frames[0].tt) ? Frames[0].tt.length : 0;
+
+    // Average frame duration sets how far outside its frame window a marker may fall before we
+    // treat it as a possible ring-buffer wraparound -- applied on both the past side (before the
+    // first frame) and the future side (after a frame's end).
+    var avgFrameTime = 0;
+    for (var i = 0; i < Frames.length; i++) {
+        avgFrameTime += Frames[i].frameend - Frames[i].framestart;
+    }
+    avgFrameTime = Frames.length > 0 ? avgFrameTime / Frames.length : 0;
+    var firstStart = Frames.length > 0 ? Frames[0].framestart : 0;
+    var earliestOkStart = firstStart - avgFrameTime; // earlier than this = wraparound; [here, firstStart) = ok early scope
+
+    // Per-thread classification accumulators (indexed by thread/log).
+    var totalEntries = new Array(nNumLogs).fill(0);
+    var hasEarlyScopes = new Array(nNumLogs).fill(false); // a: pre-capture scopes within one frame (ok)
+    var hasWraparound = new Array(nNumLogs).fill(false);  // b: markers far outside the window (suspect)
+    var loggedWrap = new Array(nNumLogs).fill(false);     // console-log each thread's marking reason once
+    var loggedEarly = new Array(nNumLogs).fill(false);
+    // GPU-only: a "misaligned" thread has wraparound frames MIXED with normal ones (a wrap frame that
+    // follows a normal, data-bearing frame) rather than a contiguous leading run of overwritten
+    // frames -- that scattered pattern is a GPU/CPU timestamp misalignment, not a true ring wraparound.
+    var misaligned = new Array(nNumLogs).fill(false);
+    var seenNormalWithData = new Array(nNumLogs).fill(false);
+
+    for (var i = 0; i < Frames.length; i++) {
+        var wraparoundFrame = false;
+        var empty = true;
+        var frame = Frames[i];
+        if (frame && frame.tt) {
+            for (var threadIdx = 0; threadIdx < frame.tt.length; ++threadIdx) {
+                var tt = frame.tt[threadIdx];
+                if (tt && tt.length > 0) {
+                    empty = false;
+                    totalEntries[threadIdx] += tt.length;
+                    var ts = frame.ts[threadIdx];
+                    var ti = frame.ti[threadIdx];
+                    // A GPU frame with no recorded GPU end (frameendgpu == 0) would give a bogus
+                    // boundary, so fall back to the CPU frame end for that frame.
+                    var frameEndRef = (ThreadGpu[threadIdx] && frame.frameendgpu) ? frame.frameendgpu : frame.frameend;
+                    // GPU work finishes a few frames behind the CPU, so its markers legitimately land
+                    // well past the frame end; allow a 3x-avg-frame overshoot before calling it a wrap.
+                    var wrapOvershoot = (ThreadGpu[threadIdx] ? 3 : 1) * avgFrameTime;
+                    var futureLimit = frameEndRef + wrapOvershoot;
+                    var threadWrappedThisFrame = false;
+                    for (var j = 0; j < tt.length; j++) {
+                        var type = tt[j];
+                        if (type == 1 || type == 0) { // enter or leave
+                            var time = ts[j] | 0; // Convert to signed
+                            // A normal scope records each marker within its own frame (a cross-frame
+                            // scope's leave lands in the frame it completes in), so a marker -- enter
+                            // OR leave -- timestamped outside its frame window is abnormal: a ring
+                            // buffer wraparound. (The one legit exception, occlusion-cull scopes that
+                            // backdate their enter before the capture, is the past-side "early" case.)
+                            if (time >= futureLimit || time < earliestOkStart) {
+                                hasWraparound[threadIdx] = true;
+                                wraparoundFrame = true;
+                                threadWrappedThisFrame = true;
+                                if (!loggedWrap[threadIdx]) {
+                                    loggedWrap[threadIdx] = true;
+                                    DescribeBoundaryMarker('Wraparound', threadIdx, ti[j], type, time, frameEndRef, wrapOvershoot, firstStart, avgFrameTime, i);
+                                }
+                            }
+                            else if (time < firstStart) {
+                                hasEarlyScopes[threadIdx] = true;
+                                if (!loggedEarly[threadIdx]) {
+                                    loggedEarly[threadIdx] = true;
+                                    DescribeBoundaryMarker('EarlyTime', threadIdx, ti[j], type, time, frameEndRef, wrapOvershoot, firstStart, avgFrameTime, i);
+                                }
+                            }
+                        }
+                    }
+                    // GPU-only misalignment: a wrap frame that follows a normal (data, no-wrap) frame
+                    // means the wrap frames are not a contiguous leading run -- flag as misaligned.
+                    if (ThreadGpu[threadIdx]) {
+                        if (threadWrappedThisFrame) {
+                            if (seenNormalWithData[threadIdx]) {
+                                misaligned[threadIdx] = true;
+                            }
+                        } else {
+                            seenNormalWithData[threadIdx] = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (empty) {
+            AggregateInfo.EmptyFrames[i] = 1;
+            emptyFrames += 1; // empty
+        }
+        else if (wraparoundFrame) {
+            // Wraparound: some thread's marker fell outside its frame window (overwritten ring data),
+            // so the whole frame is dropped from stats (see CalculateTimers) and excluded from the
+            // frame count. Drawn red in the history bar.
+            AggregateInfo.EmptyFrames[i] = 2;
+            emptyFrames += 1;
+        }
+        else {
+            AggregateInfo.EmptyFrames[i] = 0; // valid (buffer-full and ok-early frames included)
+        }
+    }
+    AggregateInfo.EmptyFrameCount = emptyFrames;
+    AggregateInfo.TotalFrames = function () {
+        return (Frames.length - AggregateInfo.EmptyFrameCount);
+    }
+
+    // The "LimitsHistory" thread is the one whose ring buffer holds the fewest frames of history:
+    // framesHeld = capacity / (totalEntries / Frames.length) -- capacity over the average entries
+    // per DUMPED frame. The rate MUST divide by the TOTAL frame count, not by the frames the thread
+    // was active in: dividing by active frames wrongly flags a rarely-active thread that writes a
+    // burst (its few active frames inflate its per-frame rate and collapse framesHeld). Min
+    // framesHeld caps how far back the whole capture reaches (equivalently: the highest fill len/cap).
+    var isBottleneck = new Array(nNumLogs).fill(false);
+    if (ThreadBufferSizes && ThreadBufferSizes.length > 0 && Frames.length > 0) {
+        var minFramesHeld = Infinity;
+        var bottleneckLog = -1;
+        for (var nLog = 0; nLog < nNumLogs; ++nLog) {
+            var capacity = ThreadBufferSizes[nLog];
+            var avgPerFrame = totalEntries[nLog] / Frames.length;
+            if (capacity > 0 && avgPerFrame > 0) {
+                var framesHeld = capacity / avgPerFrame;
+                if (framesHeld < minFramesHeld) {
+                    minFramesHeld = framesHeld;
+                    bottleneckLog = nLog;
+                }
+            }
+        }
+        if (bottleneckLog >= 0) {
+            isBottleneck[bottleneckLog] = true;
+        }
+    }
+    window.ThreadStatus = { isBottleneck: isBottleneck, hasEarlyScopes: hasEarlyScopes, hasWraparound: hasWraparound, isMisaligned: misaligned };
+
+    if (globalThis.g_cliMode) {
+        return;
+    }
+    var div = document.getElementById('infowindow');
+    if (window.EnabledFastFlags.includes("MicroProfilerPlatformInfoJson"))
+    {
+        try {
+            window.PlatformInfo = JSON.parse(window.PlatformInfo);
+        } catch (e) {
+            console.warn("Failed to parse PlatformInfo.", e);
+        }
+
+        BuildInfoInnerHtml(div, [
+            {
+                "Name": "General",
+                "Contents": [
+                    {
+                        "PlaceId": {
+                            "Display": window.GeneralInfo.PlaceId,
+                            "Link": `https://www.roblox.com/games/${window.GeneralInfo.PlaceId}/`
+                        }
+                    },
+                    ...(window.GeneralInfo.ContextLabel ? [
+                        {
+                            "ContextLabel": {
+                                "Display": window.GeneralInfo.ContextLabel,
+                                "Style": {
+                                    "color": "#ffff88"
+                                }
+                            }
+                        }
+                    ] : []),
+                    "TotalPlayers",
+                    "GameInstances",
+                    "GameIds",
+                ]
+            },
+            {
+                "Name": "Build",
+                "Contents": ["Build", "Version", "Configuration", "Platform"]
+            },
+            {
+                "Name": "System",
+                "Contents": ["DeviceName", "OS", "CpuMake", "CoreCount", "SystemMemoryMB", "GpuMake", "DeviceManufacturer"],
+            },
+            {
+                "Name": "GPU",
+                "Contents": ["GpuName", "GpuDriver", "FeatureLevel", "ShadingLanguage", "VideoMemoryMB"],
+            },
+            {
+                "Name": "Miscellaneous",
+                "Contents": ["Technology", "DisplaySize", "DrawSize", "ScreenDpiScale", "QualityLevel"]
+            }
+        ]);
+    }
+    else
+    {
+        div.innerHTML = PlatformInfo;
+    }
+}
+function InitGroups() {
+    for (groupid in GroupInfo) {
+        var TimerArray = Array();
+        for (timerid in TimerInfo) {
+            if (TimerInfo[timerid].group == groupid && TimerInfo[timerid].name && TimerInfo[timerid].name.length > 0) {
+                TimerArray.push(timerid);
+            }
+        }
+        GroupInfo[groupid].TimerArray = TimerArray;
+    }
+}
+
+function InitThreadMenu() {
+    var ThreadNamesCommon = Array();
+    var CommonNameIndices = Array();
+    for (var idx = 0; idx < ThreadNames.length - 1; ++idx) {
+        var threadName = ThreadNames[idx];
+        if (!ThreadNamesCommon.includes(threadName)) {
+            if (ThreadNames.includes(threadName, idx + 1)) {
+                ThreadNamesCommon.push(threadName);
+                CommonNameIndices.push(0);
+            }
+        }
+    }
+    for (var idx = 0; idx < ThreadNames.length; ++idx) {
+        var threadName = ThreadNames[idx];
+        var commonIndex = ThreadNamesCommon.indexOf(threadName);
+        if (commonIndex >= 0) {
+            threadName += CommonNameIndices[commonIndex];
+            ThreadNames[idx] = threadName;
+            CommonNameIndices[commonIndex]++;
+        }
+    }
+    var ulThreadMenu = document.getElementById('ThreadSubMenu');
+    var MaxLen = 7;
+    ThreadOrder = CreateOrderArray(ThreadNames, function (a) { return a; });
+    for (var idx in ThreadOrder) {
+        var name = ThreadNames[ThreadOrder[idx]];
+        var li = document.createElement('li');
+        if (name.length > MaxLen) {
+            MaxLen = name.length;
+        }
+        li.innerText = name;
+        var asText = li.innerHTML;
+        var html = '<a href="javascript:void(0)" onclick="ToggleThread(\'' + name + '\');">' + asText + '</a>';
+        li.innerHTML = html;
+        ulThreadMenu.appendChild(li);
+    }
+    var LenStr = (5 + (1 + MaxLen) * (1 + FontWidth)) + 'px';
+    var Lis = ulThreadMenu.getElementsByTagName('li');
+    for (var i = 0; i < Lis.length; ++i) {
+        Lis[i].style['width'] = LenStr;
+    }
+}
+
+function UpdateThreadMenu() {
+    var ulThreadMenu = document.getElementById('ThreadSubMenu');
+    var as = ulThreadMenu.getElementsByTagName('a');
+    for (var i = 0; i < as.length; ++i) {
+        var elem = as[i];
+        var inner = elem.innerText;
+        var bActive = false;
+        if (i < 2) {
+            if (inner == 'All') {
+                bActive = ThreadsAllActive;
+            }
+        }
+        else {
+            bActive = ThreadsActive[inner];
+        }
+        if (bActive) {
+            elem.style['text-decoration'] = 'underline';
+        }
+        else {
+            elem.style['text-decoration'] = 'none';
+        }
+    }
+}
+
+function SwitchHighlight(GroupName) {
+    var HighlightMenu = document.getElementById('HighlightSubMenu');
+    var Links = HighlightMenu.getElementsByTagName('a');
+    for (var i = 0; i < Links.length; ++i) {
+        if (Links[i].innerHTML == GroupName) {
+            Links[i].style['text-decoration'] = 'underline';
+        }
+        else {
+            Links[i].style['text-decoration'] = 'none';
+        }
+    }
+
+    HighlightGroup = GroupName;
+    HighlightGroupIndex = -1;
+
+    for (var i = 0; i < GroupInfo.length; ++i) {
+        if (GroupInfo[i].isgpu) {
+            continue;
+        }
+        if (GroupInfo[i].name == GroupName) {
+            HighlightGroupIndex = i;
+            break;
+        }
+    }
+    RequestRedraw();
+}
+
+// Multi-DM RCC DataModel filter for the detailed view; dmId 0 = shared (infra/non-DM work).
+function dmFilterLabel(dmId) {
+    return dmId == 0 ? '(shared)' : ('DM ' + dmId);
+}
+
+function UpdateDmFilterMenuSelection() {
+    if (globalThis.g_cliMode) { return; }
+    var all = document.getElementById('dmfilter_all');
+    if (all) { all.style['text-decoration'] = gDmFilter.active ? 'none' : 'underline'; }
+    gDmFilter.ids.forEach(function (dm) {
+        var el = document.getElementById('dmfilter_' + dm);
+        if (el) { el.style['text-decoration'] = gDmFilter.set[dm] ? 'underline' : 'none'; }
+    });
+}
+
+function SetDmFilterAll() {
+    gDmFilter.set = {};
+    gDmFilter.active = false;
+    UpdateDmFilterMenuSelection();
+    RequestRedraw();
+}
+
+function ToggleDmFilter(dmId) {
+    if (gDmFilter.set[dmId]) {
+        delete gDmFilter.set[dmId];
+        gDmFilter.active = Object.keys(gDmFilter.set).length > 0; // a delete may have emptied the set
+    } else {
+        gDmFilter.set[dmId] = true;
+        gDmFilter.active = true; // adding a selection always makes the set non-empty
+    }
+    UpdateDmFilterMenuSelection();
+    RequestRedraw();
+}
+
+// gDmFilter.hasData also gates the hover tooltip, so it is computed before the DOM/CLI guards -
+// it must be set even when headless or the menu element is absent.
+function PopulateDmFilterMenu() {
+    gDmFilter.cache = {}; // gDmContextData was just (re)built; drop stale caches
+    var ids = {};
+    var realDmCount = 0; // distinct dmIds > 0 (actual DataModels, excluding shared)
+    if (gDmContextData && gDmContextData.threadToDmId) {
+        for (var nLog in gDmContextData.threadToDmId) {
+            var timeline = gDmContextData.threadToDmId[nLog];
+            for (var ts in timeline) {
+                var dm = timeline[ts];
+                if (!ids[dm]) {
+                    ids[dm] = true;
+                    if (dm > 0) { realDmCount++; }
+                }
+            }
+        }
+    }
+    window.gDmFilter.hasData = realDmCount >= 2; // filter only meaningful for 2+ DataModels
+
+    if (globalThis.g_cliMode) { return; }
+    var il = document.getElementById('ilDataModel');
+    var menu = document.getElementById('DataModelSubMenu');
+    if (!il || !menu) {
+        return;
+    }
+    if (!window.gDmFilter.hasData) {
+        il.style['display'] = 'none';
+        gDmFilter.ids = [];
+        gDmFilter.set = {};
+        gDmFilter.active = false;
+        return;
+    }
+    gDmFilter.ids = Object.keys(ids).map(Number).sort(function (a, b) { return a - b; });
+    for (var sel in gDmFilter.set) { if (!ids[sel]) { delete gDmFilter.set[sel]; } } // drop gone selections
+    gDmFilter.active = Object.keys(gDmFilter.set).length > 0;
+
+    menu.innerHTML = '<li><a id="dmfilter_all" href="javascript:void(0)" onclick="SetDmFilterAll();">All</a></li>';
+    gDmFilter.ids.forEach(function (dm) {
+        var li = document.createElement('li');
+        li.innerHTML = '<a id="dmfilter_' + dm + '" href="javascript:void(0)" onclick="ToggleDmFilter(' + dm + ');">' + dmFilterLabel(dm) + '</a>';
+        menu.appendChild(li);
+    });
+    // mirror Highlight/X-Ray so the menu shows only in the detailed view
+    var ilHighlight = document.getElementById('ilHighlight');
+    il.style['display'] = (ilHighlight && ilHighlight.style['display']) ? ilHighlight.style['display'] : 'block';
+    UpdateDmFilterMenuSelection();
+}
+
+// dmId owning thread nLog at time t; 0 = unknown/shared. Per-thread sorted-key cache
+// keeps the per-scope DrawDetailedView lookup cheap.
+function getScopeDmId(nLog, t) {
+    if (!gDmContextData || !gDmContextData.threadToDmId || !gDmContextData.threadToDmId[nLog]) {
+        return 0;
+    }
+    var cache = gDmFilter.cache[nLog];
+    if (!cache) {
+        var dict = gDmContextData.threadToDmId[nLog];
+        var keys = Object.keys(dict).map(Number).sort(function (a, b) { return a - b; });
+        cache = gDmFilter.cache[nLog] = { keys: keys, dict: dict };
+    }
+    var keys = cache.keys;
+    if (keys.length == 0) {
+        return 0;
+    }
+    if (keys[0] > t) {
+        return cache.dict[keys[0]]; // before first transition: match tooltip's carry-forward
+    }
+    var lo = 0, hi = keys.length - 1, res = keys[0];
+    while (lo <= hi) {
+        var mid = (lo + hi) >> 1;
+        if (keys[mid] <= t) { res = keys[mid]; lo = mid + 1; }
+        else { hi = mid - 1; }
+    }
+    return cache.dict[res];
+}
+
+function ToggleThread(ThreadName) {
+    if (ThreadName) {
+        if (ThreadsActive[ThreadName]) {
+            ThreadsActive[ThreadName] = false;
+        }
+        else {
+            ThreadsActive[ThreadName] = true;
+        }
+    }
+    else {
+        if (ThreadsAllActive) {
+            ThreadsAllActive = 0;
+        }
+        else {
+            ThreadsAllActive = 1;
+        }
+    }
+    Invalidate = 0;
+    UpdateThreadMenu();
+    WriteCookie();
+    Draw(1);
+
+}
+
+function CreateOrderArray(Source, NameFunc) {
+    var Temp = Array(Source.length);
+    for (var i = 0; i < Source.length; ++i) {
+        Temp[i] = {};
+        Temp[i].index = i;
+        Temp[i].namezz = NameFunc(Source[i]).toLowerCase();
+    }
+    Temp.sort(function (l, r) {
+        if (r.namezz < l.namezz) { return 1; }
+        if (l.namezz < r.namezz) { return -1; }
+        return 0;
+    });
+    var OrderArray = Array(Source.length);
+    for (var i = 0; i < Source.length; ++i) {
+        OrderArray[i] = Temp[i].index;
+    }
+    return OrderArray;
+}
+
+
+function InitGroupMenu() {
+    var ulGroupMenu = document.getElementById('GroupSubMenu');
+    var MaxLen = 7;
+    var MenuArray = Array();
+    for (var i = 0; i < GroupInfo.length; ++i) {
+        var x = {};
+        x.IsCategory = 0;
+        x.category = GroupInfo[i].category;
+        x.name = GroupInfo[i].name;
+        x.index = i;
+        MenuArray.push(x);
+    }
+    for (var i = 0; i < CategoryInfo.length; ++i) {
+        var x = {};
+        x.IsCategory = 1;
+        x.category = i;
+        x.name = CategoryInfo[i];
+        x.index = i;
+        MenuArray.push(x);
+    }
+    var OrderFunction = function (a) { return a.category + "__" + a.name; };
+    var OrderFunctionMenu = function (a) { return a.IsCategory ? (a.category + '') : (a.category + "__" + a.name); };
+    GroupOrder = CreateOrderArray(GroupInfo, OrderFunction);
+    var MenuOrder = CreateOrderArray(MenuArray, OrderFunctionMenu);
+
+    for (var idx in MenuOrder) {
+        var MenuItem = MenuArray[MenuOrder[idx]];
+        var name = MenuItem.name;
+        var li = document.createElement('li');
+        if (name.length > MaxLen) {
+            MaxLen = name.length;
+        }
+        var jsfunc = '';
+        if (MenuItem.IsCategory) {
+            li.innerText = '[' + name + ']';
+            jsfunc = "ToggleCategory";
+        }
+        else {
+            li.innerText = name;
+            jsfunc = "ToggleGroup";
+        }
+        var asText = li.innerHTML;
+        var html = '<a href="javascript:void(0)" onclick="' + jsfunc + '(\'' + name + '\');">' + asText + '</a>';
+        li.innerHTML = html;
+        ulGroupMenu.appendChild(li);
+    }
+    var LenStr = (5 + (1 + MaxLen) * FontWidth) + 'px';
+    var Lis = ulGroupMenu.getElementsByTagName('li');
+    for (var i = 0; i < Lis.length; ++i) {
+        Lis[i].style['width'] = LenStr;
+    }
+    UpdateGroupMenu();
+}
+
+function UpdateGroupMenu() {
+    var ulThreadMenu = document.getElementById('GroupSubMenu');
+    var as = ulThreadMenu.getElementsByTagName('a');
+    for (var i = 0; i < as.length; ++i) {
+        var elem = as[i];
+        var inner = elem.innerText;
+        var bActive = false;
+        if (i < 2) {
+            if (inner == 'All') {
+                bActive = GroupsAllActive;
+            }
+        }
+        else {
+            var CategoryString = inner.length > 2 ? inner.substring(1, inner.length - 2) : "";
+            var CategoryIdx = CategoryIndex(CategoryString);
+            if (inner[0] == '[' && inner[inner.length - 1] == ']' && CategoryIdx >= 0) {
+                bActive = IsCategoryActive(CategoryIdx);
+            }
+            else {
+                bActive = GroupsActive[inner];
+            }
+        }
+        if (bActive) {
+            elem.style['text-decoration'] = 'underline';
+        }
+        else {
+            elem.style['text-decoration'] = 'none';
+        }
+    }
+}
+function CategoryIndex(CategoryName) {
+    for (var i = 0; i < CategoryInfo.length; ++i) {
+        if (CategoryInfo[i] == CategoryName) {
+            return i;
+        }
+    }
+    return -1;
+}
+function IsCategoryActive(CategoryIdx) {
+    for (var i = 0; i < GroupInfo.length; ++i) {
+        if (GroupInfo[i].category == CategoryIdx) {
+            var Name = GroupInfo[i].name;
+            if (!GroupsActive[Name]) {
+                return false;
+            }
+        }
+    }
+    return true;
+
+}
+function ToggleCategory(CategoryName) {
+    var CategoryIdx = CategoryIndex(CategoryName);
+    if (CategoryIdx < 0)
+        return;
+    var CategoryActive = IsCategoryActive(CategoryIdx);
+    for (var i = 0; i < GroupInfo.length; ++i) {
+        if (GroupInfo[i].category == CategoryIdx) {
+            var Name = GroupInfo[i].name;
+            if (CategoryActive) {
+                GroupsActive[Name] = false;
+            }
+            else {
+                GroupsActive[Name] = true;
+            }
+        }
+    }
+    UpdateGroupMenu();
+    WriteCookie();
+    RequestRedraw();
+}
+
+function ToggleGroup(GroupName) {
+    if (GroupName) {
+        if (GroupsActive[GroupName]) {
+            GroupsActive[GroupName] = false;
+        }
+        else {
+            GroupsActive[GroupName] = true;
+        }
+    }
+    else {
+        if (GroupsAllActive) {
+            GroupsAllActive = 0;
+        }
+        else {
+            GroupsAllActive = 1;
+        }
+    }
+    UpdateGroupMenu();
+    WriteCookie();
+    RequestRedraw();
+}
+function UpdateGroupColors() {
+    for (var i = 0; i < TimerInfo.length; ++i) {
+        if (GroupColors) {
+            TimerInfo[i].color = GroupInfo[TimerInfo[i].group].color;
+        }
+        else {
+            TimerInfo[i].color = TimerInfo[i].timercolor;
+        }
+        TimerInfo[i].textcolorindex = InvertColorIndex(TimerInfo[i].color);
+    }
+}
+
+function ToggleGroupColors() {
+    GroupColors = !GroupColors;
+    UpdateGroupColors();
+    UpdateOptionsMenu();
+    WriteCookie();
+    RequestRedraw();
+}
+
+function UpdateOptionsMenu() {
+    var ulTimersMeta = document.getElementById('TimersMeta');
+    ulTimersMeta.style['text-decoration'] = TimersMeta ? 'underline' : 'none';
+    var ulGroupColors = document.getElementById('GroupColors');
+    ulGroupColors.style['text-decoration'] = GroupColors ? 'underline' : 'none';
+    var ulZeroBasedBars = document.getElementById('ZeroBasedBars');
+    ulZeroBasedBars.style['text-decoration'] = ZeroBasedBars ? 'underline' : 'none';
+    var ulDetailedNetworkMode = document.getElementById('DetailedNetwork');
+    ulDetailedNetworkMode.style['text-decoration'] = window.DetailedNetworkMode ? 'underline' : 'none';
+    var ulNetworkLogScale = document.getElementById('NetworkLogScale');
+    ulNetworkLogScale.style['text-decoration'] = window.NetworkLogScale ? 'underline' : 'none';
+}
+
+function ToggleTimersMeta() {
+    TimersMeta = TimersMeta ? 0 : 1;
+    WriteCookie();
+    UpdateOptionsMenu();
+    RequestRedraw();
+}
+
+function ToggleZeroBasedBars() {
+    ZeroBasedBars = ZeroBasedBars ? 0 : 1;
+    WriteCookie();
+    UpdateOptionsMenu();
+    RequestRedraw();
+}
+
+function ToggleNetworkPluginMode() {
+    window.DetailedNetworkMode = !window.DetailedNetworkMode;
+    UpdateOptionsMenu();
+    RequestRedraw();
+}
+
+function ToggleNetworkScale() {
+    window.NetworkLogScale = !window.NetworkLogScale;
+    UpdateOptionsMenu();
+    RequestRedraw();
+}
+
+function getMedian(arr) {
+    var median;
+    arr.sort((a, b) => a - b);
+    var mid = Math.floor(arr.length / 2);
+    if (arr.length % 2 === 0) {
+        median = (arr[mid - 1] + arr[mid]) / 2;
+    } else {
+        median = arr[mid];
+    }
+    return median;
+}
+
+function getMax(arr) {
+    arr.sort((a, b) => a - b);
+    var max = arr[arr.length - 1];
+    return max;
+}
+
+function getStandardDeviation(array) {
+    const n = array.length;
+    mean = array.reduce((a, b) => a + b) / n;
+    deviation = Math.sqrt(array.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / n);
+    return [mean, deviation];
+}
+
+function ExportSummaryJSON() {
+    if (Frames.length == 0) {
+        console.log("No frames");
+        return;
+    }
+
+    var resultingJson = {};
+
+    var numJobsHeavyFrames = 0;
+    var numRenderingHeavyFrames = 0;
+    var numGpuHeavyFrames = 0;
+    var numFrames = 0;
+
+    var cpuTimeArray = [];
+    var gpuTimeArray = [];
+    var gpuTimeDeviceArray = [];
+
+    for (var i = 0; i < Frames.length; i++) {
+        if (Frames[i].paused) {
+            continue;
+        }
+        numFrames = numFrames + 1;
+
+        var cpuTimeIncl = Frames[i].frameend - Frames[i].framestart;
+        var gpuTime = Frames[i].frameendgpu - Frames[i].framestartgpu;
+        var gpuTimeDevice = Frames[i].gpu_time_ms;
+
+        if (Frames[i].render_walltime_ms > Frames[i].jobs_walltime_ms) {
+            if (Frames[i].cpu_waits_for_gpu > GetGpuBoundThresholdInMs()) {
+                numGpuHeavyFrames = numGpuHeavyFrames + 1;
+            } else {
+                numRenderingHeavyFrames = numRenderingHeavyFrames + 1;
+            }
+        } else {
+            numJobsHeavyFrames = numJobsHeavyFrames + 1;
+        }
+
+        cpuTimeArray.push(cpuTimeIncl);
+        gpuTimeArray.push(gpuTime);
+        gpuTimeDeviceArray.push(gpuTimeDevice);
+    }
+
+    if (numFrames == 0) {
+        console.log("No active frames");
+        return;
+    }
+
+    const cpuTimeMedian = getMedian(cpuTimeArray);
+    const gpuTimeMedian = getMedian(gpuTimeArray);
+    const gpuTimeDeviceMedian = getMedian(gpuTimeDeviceArray);
+
+    const [cpuTimeMean, cpuTimeDeviation] = getStandardDeviation(cpuTimeArray);
+    const [gpuTimeMean, gpuTimeDeviation] = getStandardDeviation(gpuTimeArray);
+    const [gpuTimeDeviceMean, gpuTimeDeviceDeviation] = getStandardDeviation(gpuTimeDeviceArray);
+
+    const cpuTimeMax = getMax(cpuTimeArray);
+    const gpuTimeMax = getMax(gpuTimeArray);
+    const gpuTimeDeviceMax = getMax(gpuTimeDeviceArray);
+
+    resultingJson["num_frames"] = numFrames;
+    resultingJson["num_frames_jobs_heavy"] = numJobsHeavyFrames;
+    resultingJson["num_frames_rendering_heavy"] = numRenderingHeavyFrames;
+    resultingJson["num_frames_gpu_heavy"] = numGpuHeavyFrames;
+
+    resultingJson["cpu_time_median"] = cpuTimeMedian;
+    resultingJson["gpu_time_median"] = gpuTimeMedian;
+    resultingJson["gpu_time_ext_median"] = gpuTimeDeviceMedian;
+
+    resultingJson["cpu_time_mean"] = cpuTimeMean;
+    resultingJson["gpu_time_mean"] = gpuTimeMean;
+    resultingJson["gpu_time_ext_mean"] = gpuTimeDeviceMean;
+
+    resultingJson["cpu_time_max"] = cpuTimeMax;
+    resultingJson["gpu_time_max"] = gpuTimeMax;
+    resultingJson["gpu_time_ext_max"] = gpuTimeDeviceMax;
+
+    resultingJson["cpu_time_stddev"] = cpuTimeDeviation;
+    resultingJson["gpu_time_stddev"] = gpuTimeDeviation;
+    resultingJson["gpu_time_ext_stddev"] = gpuTimeDeviceDeviation;
+
+    var debugPrint = 1;
+    if (debugPrint) {
+        console.log("numFrames : " + numFrames);
+        console.log("numJobsHeavyFrames : " + numJobsHeavyFrames);
+        console.log("numRenderingHeavyFrames : " + numRenderingHeavyFrames);
+        console.log("numGpuHeavyFrames : " + numGpuHeavyFrames);
+
+        console.log("cpuTimeMedian : " + cpuTimeMedian);
+        console.log("gpuTimeMedian : " + gpuTimeMedian);
+        console.log("gpuTimeDeviceMedian : " + gpuTimeDeviceMedian);
+        console.log("cpuTimeMean : " + cpuTimeMean);
+        console.log("gpuTimeMean : " + gpuTimeMean);
+        console.log("gpuTimeDeviceMean : " + gpuTimeDeviceMean);
+        console.log("cpuTimeMax : " + cpuTimeMax);
+        console.log("gpuTimeMax : " + gpuTimeMax);
+        console.log("gpuTimeDeviceMax : " + gpuTimeDeviceMax);
+        console.log("cpuTimeDeviation : " + cpuTimeDeviation);
+        console.log("gpuTimeDeviation : " + gpuTimeDeviation);
+        console.log("gpuTimeDeviceDeviation : " + gpuTimeDeviceDeviation);
+    }
+
+    var topTimersGpu = [];
+    var topTimersCpu = [];
+    for (timerid in TimerInfo) {
+        var timer = TimerInfo[timerid];
+        if (GroupInfo[timer.group].isgpu) {
+            topTimersGpu.push({ "name": timer.name, "group": GroupInfo[timer.group].name, "total": timer.total, "max": timer.max });
+        } else {
+            topTimersCpu.push({ "name": timer.name, "group": GroupInfo[timer.group].name, "total": timer.total, "max": timer.max });
+        }
+    }
+
+    {
+        // top by total time
+        var numCpuTimersToPrint = 250;
+        var numGpuTimersToPrint = 150;
+
+        topTimersCpu.sort((a, b) => {
+            if (a.total > b.total) {
+                return -1;
+            } else if (a.total < b.total) {
+                return 1;
+            }
+            return 0;
+        });
+
+        topTimersGpu.sort((a, b) => {
+            if (a.total > b.total) {
+                return -1;
+            } else if (a.total < b.total) {
+                return 1;
+            }
+            return 0;
+        });
+
+        var topByCpu = [];
+        var numItemsCpu = Math.min(numCpuTimersToPrint, topTimersCpu.length);
+        for (i = 0; i < numItemsCpu; i++) {
+            var bottleneckName = topTimersCpu[i].group + "::" + topTimersCpu[i].name;
+            topByCpu.push({ "name": bottleneckName, "total": topTimersCpu[i].total });
+            if (debugPrint) {
+                console.log(String(i + 1) + "," + bottleneckName + ", " + String(topTimersCpu[i].total));
+            }
+        }
+        resultingJson["cpu_top_by_total_time"] = topByCpu;
+
+        var topByGpu = [];
+        var numItemsGpu = Math.min(numGpuTimersToPrint, topTimersGpu.length);
+        for (i = 0; i < numItemsGpu; i++) {
+            var bottleneckName = topTimersGpu[i].group + "::" + topTimersGpu[i].name;
+            topByGpu.push({ "name": bottleneckName, "total": topTimersGpu[i].total });
+            if (debugPrint) {
+                console.log(String(i + 1) + "," + bottleneckName + ", " + String(topTimersGpu[i].total));
+            }
+        }
+        resultingJson["gpu_top_by_total_time"] = topByGpu;
+    }
+
+    {
+        // top by max time
+        var numCpuTimersToPrint = 100;
+        var numGpuTimersToPrint = 100;
+
+        topTimersCpu.sort((a, b) => {
+            if (a.max > b.max) {
+                return -1;
+            } else if (a.max < b.max) {
+                return 1;
+            }
+            return 0;
+        });
+
+        topTimersGpu.sort((a, b) => {
+            if (a.max > b.max) {
+                return -1;
+            } else if (a.max < b.max) {
+                return 1;
+            }
+            return 0;
+        });
+
+        var topByCpu = [];
+        var numItemsCpu = Math.min(10, topTimersCpu.length);
+        for (i = 0; i < numItemsCpu; i++) {
+            var bottleneckName = topTimersCpu[i].group + "::" + topTimersCpu[i].name;
+            topByCpu.push({ "name": bottleneckName, "max": topTimersCpu[i].max });
+            if (debugPrint) {
+                console.log(String(i + 1) + "," + bottleneckName + ", " + String(topTimersCpu[i].max));
+            }
+        }
+        resultingJson["cpu_by_max_time"] = topByCpu;
+
+        var topByGpu = [];
+        var numItemsGpu = Math.min(5, topTimersGpu.length);
+        for (i = 0; i < numItemsGpu; i++) {
+            var bottleneckName = topTimersGpu[i].group + "::" + topTimersGpu[i].name;
+            topByGpu.push({ "name": bottleneckName, "max": topTimersGpu[i].max });
+            if (debugPrint) {
+                console.log(String(i + 1) + "," + bottleneckName + ", " + String(topTimersGpu[i].max));
+            }
+        }
+        resultingJson["gpu_by_max_time"] = topByGpu;
+    }
+
+    if (debugPrint) {
+        console.log(PlatformInfo);
+    }
+    resultingJson["platform_info"] = PlatformInfo;
+    resultingJson["general_info"] = GeneralInfo;
+
+    const downloadContent = JSON.stringify(resultingJson);
+    SaveExportResult(downloadContent);
+    OpenNewExportTab("summary.json", "", true);
+}
+
+
+function ExportMarkersCSV(returnAsText) {
+    var parts = Array();
+    
+    parts.push('frames,' + AggregateInfo.Frames + '\nname,group,average,max,callaverage\n');
+    for (timerid in TimerInfo) {
+        var timer = TimerInfo[timerid];
+        parts.push(timer.name + ',' + GroupInfo[timer.group].name + ',' + timer.average + ',' + timer.max + ',' + timer.callaverage + '\n');
+    }
+    parts.push('\n\ngroup,average,max,total\n');
+    for (groupid in GroupInfo) {
+        var group = GroupInfo[groupid];
+        parts.push(group.name + ',' + group.average + ',' + group.max + ',' + group.total + '\n');
+    }
+    parts.push('\n\ngroup,thread,average,total\n');
+    for (groupid in GroupInfo) {
+        for (var i = 0; i < ThreadNames.length; ++i) {
+            var PerThreadTimerTotal = ThreadGroupTimeArray[i][groupid];
+            if (PerThreadTimerTotal > 0.01) {
+                var ave = PerThreadTimerTotal / AggregateInfo.Frames;
+                parts.push(GroupInfo[groupid].name + ',' + ThreadNames[i] + ',' + ave + ',' + PerThreadTimerTotal + '\n');
+            }
+        }
+    }
+    parts.push('\n\n\nframetimecpu\n');
+    for (var i = 0; i < Frames.length; ++i) {
+        var ms = Frames[i].frameend - Frames[i].framestart;
+        parts.push(ms + ',');
+    }
+    parts.push('\n\n\nframetimegpu\n');
+    for (var i = 0; i < Frames.length; ++i) {
+        var ms = Frames[i].frameendgpu - Frames[i].framestartgpu;
+        parts.push(ms + ',');
+    }
+    parts.push('\n\n\n\n\n\n');
+    for (var i = 0; i < Frames.length; ++i) {
+        var fr = Frames[i];
+        parts.push('\nFrame,Frame Begin Time CPU (ms),Frame End Time CPU (ms),Frame Begin Time GPU (ms),Frame End Time GPU (ms)\n' + i + ',');
+        parts.push(fr.framestart + ',' + fr.frameend + ',' + fr.framestartgpu + ',' + fr.frameendgpu + '\n\n');
+        if (fr.incomplete) {
+            parts.push('INCOMPLETE\n');
+            continue;
+        }
+        var nNumLogs = Frames[0].ts.length;
+        for (var nLog = 0; nLog < nNumLogs; ++nLog) {
+            var ts = fr.ts[nLog];        // timestamp (ms)    ts.length gives number of log entries. Indexes ts, ti, tt, tl
+            var ti = fr.ti[nLog];        // timer index
+            var tt = fr.tt[nLog];        // timer type    enter = 1, leave = 0, label = 3
+            var tl = fr.tl[nLog];        // timer label
+            var numEntries = ts.length;
+            if (numEntries == 0)
+                continue;
+            var ThreadName = ThreadNames[nLog];
+            var isGPU = ThreadGpu[nLog];
+            parts.push('Thread Name:,' + ThreadName + '\nGroup Name,Marker Name,Begin,End,Labels\n');
+            var callStack = Array();
+            var out = Array();
+            for (var j = 0; j < numEntries; ++j) {
+                var logType = tt[j];
+                var timerid = ti[j];
+                if (logType == 1) {
+                    // ENTER
+                    var timerName = TimerInfo[timerid].name;
+                    if (timerName[0] == '$') {
+                        var nextLog = j + 1;
+                        if (isGPU)
+                            ++nextLog;
+                        var nextLogType = tt[nextLog];
+                        if ((nextLogType == 3) || (nextLogType == 5)) {
+                            var labelIndex = ti[nextLog];
+                            timerName = tl[labelIndex];
+                        }
+                    }
+                    var log = { 'timerid': timerid, 'beginTime': ts[j], 'endTime': 0, 'label': '', 'name': timerName };
+                    curTimer = out.length;
+                    callStack.push(out.length);
+                    out.push(log);
+                }
+                else if (logType == 0) {
+                    // EXIT
+                    var update = callStack[callStack.length - 1];
+                    if (update >= 0) {
+                        out[update].endTime = ts[j];
+                    }
+                    callStack.pop();
+                }
+                else if ((logType == 3) || (logType == 5)) {
+                    // LABEL or LABEL_LITERAL
+                    if ((timerid >= 0) && (callStack.length > 0)) {
+                        var update = callStack[callStack.length - 1];
+                        out[update].label = tl[timerid];
+                    }
+                }
+            }
+            for (var ot in out) {
+                var outRow = out[ot];
+                var timer = TimerInfo[outRow.timerid];
+                var label = outRow.label;
+                if (label == undefined)
+                    label = ' ';
+                parts.push(GroupInfo[timer.group].name + ',' + outRow.name + ',' + outRow.beginTime + ',' + outRow.endTime + ',' + label + '\n');
+            }
+            parts.push('\n');
+        }
+    }
+
+    var tab_text = parts.join("");
+    if (returnAsText) {
+        return tab_text;
+    }
+
+    SaveExportResult(tab_text);
+    OpenNewExportTab(".csv", "", true);
+}
+
+function ShowHelp(Show, Forever) {
+    var HelpWindow = document.getElementById('helpwindow');
+    if (Show) {
+        HelpWindow.style['display'] = 'block';
+    }
+    else {
+        HelpWindow.style['display'] = 'none';
+    }
+    if (Forever) {
+        nHideHelp = Show ? 0 : 1;
+        WriteCookie();
+    }
+}
+
+function SetMode(NewMode, Groups) {
+    var buttonTimers = document.getElementById('buttonTimers');
+    var buttonDetailed = document.getElementById('buttonDetailed');
+    var buttonGroups = document.getElementById('buttonGroups');
+    var buttonThreads = document.getElementById('buttonThreads');
+    var buttonCounters = document.getElementById('buttonCounters');
+    var ilThreads = document.getElementById('ilThreads');
+    var ilGroups = document.getElementById('ilGroups');
+    var ilPlugins = document.getElementById('ilPlugins');
+    var ilHighlight = document.getElementById('ilHighlight');
+    var ilExport = document.getElementById('ilExport');
+    var ModeElement = null;
+    buttonTimers.style['text-decoration'] = 'none';
+    buttonGroups.style['text-decoration'] = 'none';
+    buttonThreads.style['text-decoration'] = 'none';
+    buttonDetailed.style['text-decoration'] = 'none';
+    buttonCounters.style['text-decoration'] = 'none';
+
+    let isDetailed = (NewMode == 'detailed' || NewMode == ModeDetailed);
+    let extraEntriesStyle = isDetailed ? 'block' : 'none';
+    ilPlugins.style['display'] = ilHighlight.style['display'] = ilExport.style['display'] = extraEntriesStyle;
+    if (window.gDmFilter.hasData) {
+        var ilDataModel = document.getElementById('ilDataModel');
+        if (ilDataModel) {
+            ilDataModel.style['display'] = extraEntriesStyle;
+        }
+    }
+
+    if (g_Ext && g_Ext.currentPlugin) {
+        if (isDetailed && g_Ext.currentPlugin.ShowCanvas) {
+            g_Ext.currentPlugin.ShowCanvas();
+        } else if (!isDetailed && g_Ext.currentPlugin.HideCanvas) {
+            g_Ext.currentPlugin.HideCanvas();
+        }
+    }
+
+    SetWarningBanner('');
+
+    if (NewMode == 'counters' || NewMode == ModeCounters) {
+        buttonCounters.style['text-decoration'] = 'underline';
+        ilThreads.style['display'] = 'none';
+        ilGroups.style['display'] = 'none';
+        Mode = ModeCounters;
+        ModeElement = buttonCounters;
+
+        if (EnabledFastFlags.includes("MicroProfilerMemoryTrackingAlertWeb")) {
+            SetWarningBanner("Memory category counters were disabled when this capture was saved to improve performance on player devices. If you restart the Client app with Microprofiler enabled, memory counters will be active for the duration of that session.");
+        }
+    }
+    else if (NewMode == 'timers' || NewMode == ModeTimers) {
+        TimersGroups = Groups;
+        buttonTimers.style['text-decoration'] = TimersGroups ? 'none' : 'underline';
+        buttonGroups.style['text-decoration'] = TimersGroups == 1 ? 'underline' : 'none';
+        buttonThreads.style['text-decoration'] = TimersGroups == 2 ? 'underline' : 'none';
+        buttonDetailed.style['text-decoration'] = 'none';
+        if (TimersGroups == 0) {
+            ilThreads.style['display'] = 'none';
+        }
+        else {
+            ilThreads.style['display'] = 'block';
+        }
+        ilGroups.style['display'] = 'block';
+        Mode = ModeTimers;
+        ModeElement = TimersGroups == 2 ? buttonThreads : TimersGroups == 1 ? buttonGroups : buttonTimers;
+
+    }
+    else if (NewMode == 'detailed' || NewMode == ModeDetailed) {
+        buttonDetailed.style['text-decoration'] = 'underline';
+
+        ilThreads.style['display'] = 'block';
+        ilGroups.style['display'] = 'none';
+        Mode = ModeDetailed;
+        ModeElement = buttonDetailed;
+    }
+    var ModeSubMenuText = document.getElementById('ModeSubMenuText');
+    ModeSubMenuText.innerText = 'Mode[' + ModeElement.innerText + ']';
+
+    if (Mode == ModeTimers) {
+        SetFilterInput(FilterInputGroupString, FilterInputTimerString);
+    }
+    else {
+        ShowFilterInput(0);
+    }
+
+    WriteCookie();
+    RequestRedraw();
+
+}
+
+function SetReferenceTime(TimeString) {
+    ReferenceTime = parseInt(TimeString);
+    var ReferenceMenu = document.getElementById('ReferenceSubMenu');
+    var Links = ReferenceMenu.getElementsByTagName('a');
+    for (var i = 0; i < Links.length; ++i) {
+        if (Links[i].innerHTML.match('^' + TimeString)) {
+            Links[i].style['text-decoration'] = 'underline';
+        }
+        else {
+            Links[i].style['text-decoration'] = 'none';
+        }
+    }
+    WriteCookie();
+    RequestRedraw();
+
+}
+
+function SetWarningBanner(BannerString) {
+    bannerDiv = document.getElementById('WarningBanner');
+    bannerDiv.style['display'] = BannerString === '' ? 'none' : 'block';
+    textDiv = document.getElementById('WarningBannerText');
+    textDiv.innerText = BannerString;
+}
+
+function ToggleContextSwitch() {
+    SetContextSwitch(nContextSwitchEnabled ? 0 : 1);
+}
+function SetContextSwitch(Enabled) {
+    nContextSwitchEnabled = Enabled ? 1 : 0;
+    var ReferenceMenu = document.getElementById('OptionsMenu');
+    var Links = ReferenceMenu.getElementsByTagName('a');
+    Links[0].style['text-decoration'] = nContextSwitchEnabled ? 'underline' : 'none';
+    WriteCookie();
+    RequestRedraw();
+}
+
+function ToggleDebug() {
+    Debug = (Debug + 1) % 2;
+}
+
+function ToggleDisableMerge() {
+    DisableMerge = DisableMerge ? 0 : 1;
+    var ReferenceMenu = document.getElementById('OptionsMenu');
+    var Links = ReferenceMenu.getElementsByTagName('a');
+    if (DisableMerge) {
+        Links[1].style['text-decoration'] = 'underline';
+    }
+    else {
+        Links[1].style['text-decoration'] = 'none';
+    }
+
+}
+
+function ToggleDisableLod() {
+    DisableLod = DisableLod ? 0 : 1;
+    var ReferenceMenu = document.getElementById('OptionsMenu');
+    var Links = ReferenceMenu.getElementsByTagName('a');
+    if (DisableLod) {
+        Links[2].style['text-decoration'] = 'underline';
+    }
+    else {
+        Links[2].style['text-decoration'] = 'none';
+    }
+
+}
+
+function GatherHoverMetaCounters(TimerIndex, StartIndex, nLog, nFrameLast) {
+    var HoverInfo = new Object();
+    var StackPos = 1;
+    //search backwards, count meta counters
+    for (var i = nFrameLast; i >= 0; i--) {
+        var fr = Frames[i];
+        var ts = fr.ts[nLog];
+        var ti = fr.ti[nLog];
+        var tt = fr.tt[nLog];
+        var start = i == nFrameLast ? StartIndex - 1 : ts.length - 1;
+
+        for (var j = start; j >= 0; j--) {
+            var type = tt[j];
+            var index = ti[j];
+            var time = ts[j];
+            if (type == 1) {
+                StackPos--;
+                if (StackPos == 0 && index == TimerIndex) {
+                    return HoverInfo;
+                }
+            }
+            else if (type == 0) {
+                StackPos++;
+            }
+            else if (type >= 8 && type <= 127) // EventBaseId
+            {
+                var nMetaCount = type - 8;
+                var nMetaIndex = MetaNames[index];
+                if (nMetaIndex in HoverInfo) {
+                    HoverInfo[nMetaIndex] += nMetaCount;
+                }
+                else {
+                    HoverInfo[nMetaIndex] = nMetaCount;
+                }
+            }
+        }
+    }
+}
+
+function GatherHoverLabels(TimerIndex, StartIndex, nLog, nFrameLast) {
+    var HoverInfo = [];
+    var StackPos = 1;
+    //search backwards, aggregate labels
+    for (var i = nFrameLast; i >= 0; i--) {
+        var fr = Frames[i];
+        var ts = fr.ts[nLog];
+        var ti = fr.ti[nLog];
+        var tt = fr.tt[nLog];
+        var tl = fr.tl[nLog];
+        var start = i == nFrameLast ? StartIndex - 1 : ts.length - 1;
+
+        for (var j = start; j >= 0; j--) {
+            var type = tt[j];
+            var index = ti[j];
+            var time = ts[j];
+            if (type == 1) {
+                StackPos--;
+                if (StackPos == 0 && index == TimerIndex) {
+                    return HoverInfo.reverse();
+                }
+            }
+            else if (type == 0) {
+                StackPos++;
+            }
+            else if (type == 3 && StackPos == 1) {
+                var Label = tl[index];
+                HoverInfo.push(Label ? Label : "??");
+            }
+        }
+    }
+}
+
+function CalculateTimers(GroupInfo, TimerInfo, nFrame) {
+    if (!nFrame || nFrame < 0)
+        nFrame = 0;
+    if (nFrame > Frames.length)
+        nFrame = Frames.length;
+
+    // init
+    for (const group of GroupInfo) {
+        group.Sum = 0;
+        group.ExclusiveSum = 0;
+    }
+    for (const timer of TimerInfo) {
+        timer.CallCount = 0;
+        timer.Sum = 0;
+        timer.ExclusiveSum = 0;
+        timer.Max = -1;
+        timer.worst = -1;
+        timer.worststart = -1;
+        timer.worstend = -1;
+        timer.worstthread = -1;
+    }
+
+    // Drop the whole frame from stats if it is empty (==1) or contains any wraparound marker (==2):
+    // the ring data is unreliable, so no thread in that frame is counted.
+    if (AggregateInfo.EmptyFrames[nFrame]) {
+        return;
+    }
+
+    const nNumLogs = Frames[0].ts.length;
+    const fr = Frames[nFrame];
+    for (let nLog = 0; nLog < nNumLogs; nLog++) {
+        const Stack = Array(20);
+        const StackChild = Array(20);
+        const GroupPos = Array(GroupInfo.length).fill(0);
+        const ts = fr.ts[nLog];
+        const ti = fr.ti[nLog];
+        const tt = fr.tt[nLog];
+        const count = ts.length;
+        const frameOverflow = OverflowAllowance(nLog, fr);
+        let StackPos = 0;
+        let discardLast = 0;
+        for (let j = 0; j < count; j++) {
+            const type = tt[j];
+            const index = ti[j];
+            const time = ts[j];
+            if (type === 1) //enter
+            {
+                // We do not want to include markers that are from the ring buffer wrap around
+                // They can and will confuse the issue completely. We filter them out
+                // by checking if the marker is past the next frame. If the marker is
+                // skip it!
+                discardLast = 0;
+                if (time >= frameOverflow) {
+                    discardLast = 1;
+                    continue;
+                }
+                //push
+                Stack[StackPos] = time;
+                StackPos++;
+                StackChild[StackPos] = 0;
+
+                const groupid = window.TimerInfo[index].group;
+                GroupPos[groupid]++;
+            } else if (type === 0) // leave
+            {
+                // Did we throw out the last start marker or this
+                // marker is way out of range?
+                if (discardLast || time >= frameOverflow) {
+                    continue;
+                }
+                let TimeDelta, TimeDeltaExclusive, TimeStart;
+                if (StackPos > 0) {
+                    StackPos--;
+                    TimeStart = Stack[StackPos];
+                    TimeDelta = time - Stack[StackPos];
+                    TimeDeltaExclusive = TimeDelta - StackChild[StackPos + 1];
+                    StackChild[StackPos] += TimeDelta;
+                } else {
+                    TimeStart = fr.framestart;
+                    TimeDelta = time - fr.framestart;
+                    TimeDeltaExclusive = TimeDelta;
+                }
+
+                TimerInfo[index].CallCount++;
+                TimerInfo[index].Sum += TimeDelta;
+                TimerInfo[index].ExclusiveSum += TimeDeltaExclusive;
+                if (TimeDelta > TimerInfo[index].Max) {
+                    TimerInfo[index].Max = TimeDelta;
+                    TimerInfo[index].worst = TimeDelta;
+                    TimerInfo[index].worststart = TimeStart;
+                    TimerInfo[index].worstend = time;
+                    TimerInfo[index].worstthread = nLog;
+                }
+
+                const groupid = window.TimerInfo[index].group;
+                if (GroupPos[groupid] > 0) {
+                    GroupPos[groupid]--;
+                }
+                if (GroupPos[groupid] === 0) {
+                    GroupInfo[groupid].Sum += TimeDelta;
+                }
+                GroupInfo[groupid].ExclusiveSum += TimeDeltaExclusive;
+            } else {
+                //meta
+            }
+        }
+    }
+}
+
+// For all timers matching the predicate, substitute it for a timer given by the NewTimerNameFunc function
+// NewTimerNameFunc: group name, timer name, timer label -> new timer name
+function PreprocessTimerSubstitutions(timerPredicate, newTimerNameFunc) {
+    function LogNonCli(...args) {
+        if (!globalThis.g_cliMode)
+            console.log(...args);
+    }
+    ProfileEnter('PreprocessTimerSubstitutions');
+    const nTimersWhenStarted = TimerInfo.length;
+    const newTimers = {};
+    // keys are the ids of timers that may be substituted, values are the number of subs made
+    const subsPerID = Object.fromEntries(TimerInfo.filter(timerPredicate).map(t => [t.id, 0]));
+    for (let nLog = 0; nLog < Frames[0].tt.length; nLog++) {
+        let discardLast = false;
+        const newTimerStack = [];
+        for (let i = 0; i < Frames.length; i++) {
+            const frame = Frames[i];
+            const frameDiscard = OverflowAllowance(nLog, frame);
+            const [tt, ts, ti, tl] = [frame.tt[nLog], frame.ts[nLog], frame.ti[nLog], frame.tl[nLog]];
+            for (let xx = 0; xx < tt.length; xx++) {
+                // discard markers that are from the ring buffer wrap around
+                if ((tt[xx] === 4) ? discardLast : (tt[xx] < EventBaseId && ts[xx] > frameDiscard)) {
+                    discardLast = true;
+                    continue;
+                }
+                discardLast = false;
+                // ENTER SCOPE
+                if (tt[xx] === 1 && subsPerID[ti[xx]] !== undefined) {
+                    // get label from next log entry
+                    const label = (xx + 1 < tt.length && tt[xx + 1] === 3) ? tl[ti[xx + 1]] : "UNLABELED_CUSTOM_TIMER";
+                    // get new timer name
+                    const oldTimer = TimerInfo[ti[xx]];
+                    const newTimerName = newTimerNameFunc(oldTimer.group.name, oldTimer.name, label);
+                    // make a new timer iff it doesn't exist already
+                    let newTimer = newTimers[newTimerName];
+                    if (!newTimer) {
+                        newTimer = { ...oldTimer, name: newTimerName, id: TimerInfo.length };
+                        newTimers[newTimerName] = newTimer;
+                        subsPerID[ti[xx]]++;
+                        TimerInfo.push(newTimer);
+                    }
+                    // replace timer index
+                    ti[xx] = newTimer.id;
+                    newTimerStack.push(newTimer.id);
+                }
+                // EXIT SCOPE
+                else if (tt[xx] === 0 && subsPerID[ti[xx]] && newTimerStack.length > 0) {
+                    ti[xx] = newTimerStack.pop();
+                }
+            } // for xx (log entries)
+        } // for i (frames)
+    } // for nLog
+    for (const [id, nSubs] of Object.entries(subsPerID)) {
+        const timer = TimerInfo[id];
+        if (nSubs > 0) {
+            LogNonCli(`Substitutions made for ${timer.name}: ${nSubs}`);
+            GroupInfo[timer.group].numtimers += nSubs;
+        }
+    }
+    const nTimersWhenFinished = TimerInfo.length;
+    const nTimersAdded = nTimersWhenFinished - nTimersWhenStarted;
+    if (nTimersAdded > 0) {
+        LogNonCli(`Total timer count increased from ${nTimersWhenStarted} to ${nTimersWhenFinished} (+${nTimersAdded})`);
+    } else {
+        LogNonCli(`No substitutions were made. Total timer count is still ${nTimersWhenStarted} (+0)`);
+    }
+    ProfileLeave();
+}
+
+function PreprocessCalculateAllTimers() {
+    ProfileEnter("PreprocessCalculateAllTimers");
+    // calculate stats within a given frame for all timers and groups
+    for (let i = 0; i < Frames.length; i++) {
+        const currGroupInfo = new Array(GroupInfo.length);
+        const currTimerInfo = new Array(TimerInfo.length);
+        for (let j = 0; j < GroupInfo.length; j++)
+            currGroupInfo[j] = {}; // note: there are extra fields in a Group that are not copied to the per-frame info
+        for (let j = 0; j < TimerInfo.length; j++)
+            currTimerInfo[j] = {}; // note: there are extra fields in a Timer that are not copied to the per-frame info
+        CalculateTimers(currGroupInfo, currTimerInfo, i);
+        GroupInfoPerFrame.push(currGroupInfo);
+        TimerInfoPerFrame.push(currTimerInfo);
+    }
+
+    // aggregate timer stats across frames
+    for (let i = 0; i < TimerInfo.length; i++) {
+        const timer = TimerInfo[i];
+        let [CallCount,    MaxCallCount,    MaxCallCountFrame]    = [0, -1, -1];
+        let [Sum,          MaxSum,          MaxSumFrame]          = [0, -1, -1];
+        let [ExclusiveSum, MaxExclusiveSum, MaxExclusiveSumFrame] = [0, -1, -1];
+        let [Max, MaxFrame, worst, worststart, worstend, worstthread] = [-1, -1, -1, -1, -1, -1];
+
+        for (let j = 0; j < Frames.length; j++) {
+            const frameTimer = TimerInfoPerFrame[j][i];
+            CallCount += frameTimer.CallCount;
+            Sum += frameTimer.Sum;
+            ExclusiveSum += frameTimer.ExclusiveSum;
+            if (frameTimer.CallCount > MaxCallCount) {
+                MaxCallCount = frameTimer.CallCount;
+                MaxCallCountFrame = j;
+            }
+            if (frameTimer.Sum > MaxSum) {
+                MaxSum = frameTimer.Sum;
+                MaxSumFrame = j;
+            }
+            if (frameTimer.ExclusiveSum > MaxExclusiveSum) {
+                MaxExclusiveSum = frameTimer.ExclusiveSum;
+                MaxExclusiveSumFrame = j;
+            }
+            if (frameTimer.Max > Max) {
+                ({Max, worst, worststart, worstend, worstthread} = frameTimer);
+                MaxFrame = j;
+            }
+        }
+
+        Object.assign(timer, {CallCount,    MaxCallCount,    MaxCallCountFrame});
+        Object.assign(timer, {Sum,          MaxSum,          MaxSumFrame});
+        Object.assign(timer, {ExclusiveSum, MaxExclusiveSum, MaxExclusiveSumFrame});
+        Object.assign(timer, {Max, MaxFrame, worst, worststart, worstend, worstthread});
+        timer.CallAverage = Sum / CallCount;
+        timer.ExclusiveAverage = ExclusiveSum / CallCount;
+        timer.CallCountFrameAverage = CallCount / Frames.length;
+        timer.FrameAverage = Sum / Frames.length;
+        timer.ExclusiveFrameAverage = ExclusiveSum / Frames.length;
+    }
+
+    // aggregate group stats across frames
+    for (let i = 0; i < GroupInfo.length; i++) {
+        const group = GroupInfo[i];
+        let [Sum, ExclusiveSum] = [0, 0];
+        let [MaxSum, MaxExclusiveSum] = [-1, -1];
+        let [MaxSumFrame, MaxExclusiveSumFrame] = [-1, -1];
+
+        for (let j = 0; j < Frames.length; j++) {
+            const frameGroup = GroupInfoPerFrame[j][i];
+            Sum += frameGroup.Sum;
+            ExclusiveSum += frameGroup.ExclusiveSum;
+            if (frameGroup.Sum > MaxSum) {
+                MaxSum = frameGroup.Sum;
+                MaxSumFrame = j;
+            }
+            if (frameGroup.ExclusiveSum > MaxExclusiveSum) {
+                MaxExclusiveSum = frameGroup.ExclusiveSum;
+                MaxExclusiveSumFrame = j;
+            }
+        }
+
+        Object.assign(group, {Sum, ExclusiveSum});
+        Object.assign(group, {MaxSum, MaxExclusiveSum});
+        Object.assign(group, {MaxSumFrame, MaxExclusiveSumFrame});
+        group.FrameAverage = Sum / Frames.length;
+        group.ExclusiveFrameAverage = ExclusiveSum / Frames.length;
+    }
+    ProfileLeave();
+}
+
+var FlashFrames = 10;
+var FlashFrameCounter = 0;
+var FlashMessage = '';
+var FlashColor = '';
+function TimeString(Diff) {
+    var DiffString = "0 sec";
+    var DiffTable = [1, 60, 60 * 60, 60 * 60 * 24];
+    var DiffNameTable = ["sec", "min", "hr", "day"];
+    for (var i = 0; i < DiffTable.length; ++i) {
+        if (Diff >= DiffTable[i]) {
+            DiffString = Math.floor(Diff / DiffTable[i]) + " " + DiffNameTable[i];
+        }
+    }
+    return DiffString;
+
+}
+function ShowFlashMessage(Message, FrameCount, Color) {
+    FlashMessage = Message;
+    FlashFrameCounter = FrameCount;
+    FlashColor = Color ? Color : 'red';
+}
+function OnPageReady() {
+    var DumpDate = DumpUtcCaptureTime;
+    var CurrentDate = Date.now() / 1000;
+    var Diff = CurrentDate - DumpDate;
+    var Limit = 10 * 60;//flash old message when loading captures older than 10 minutes
+    if (Diff > Limit) {
+        ShowFlashMessage("Captured " + TimeString(Diff) + " ago", 100);
+    }
+    if (!nHideHelp) {
+        ShowHelp(1, 0);
+    }
+    g_Loader.pageReady = true;
+}
+
+function DrawFlashMessage(context) {
+    if (FlashFrameCounter > 0) {
+        if (FlashFrameCounter > 1) {
+            var h = FontFlashHeight;
+            var lines = FlashMessage.split('\n');
+            var FlashPrc = Math.sin(FlashFrameCounter / FlashFrames);
+            context.font = FontFlash;
+            context.globalAlpha = FlashPrc * 0.35 + 0.5;
+            context.textAlign = 'center';
+            context.fillStyle = FlashColor;
+            for (var i = 0; i < lines.length; i++) {
+                var line = lines[i];
+                context.fillText(line, nWidth * 0.5, 50 + i * h);
+            }
+            context.globalAlpha = 1;
+            context.textAlign = 'left';
+            context.font = Font;
+        }
+        FlashFrameCounter -= 1;
+
+    }
+}
+
+function DrawCaptureInfo(context) {
+    context.fillStyle = 'white';
+    context.textAlign = 'right';
+    context.font = Font;
+    var DumpDate = DumpUtcCaptureTime;
+    var CurrentDate = Date.now() / 1000;
+    var Diff = CurrentDate - DumpDate;
+    var DiffString = TimeString(Diff) + " ago";
+    context.fillText(new Date(DumpDate * 1000).toLocaleString(), nWidth, FontHeight);
+    if (Mode == ModeTimers) {
+        context.fillText("Timer Frames: " + AggregateInfo.Frames, nWidth, FontHeight * 2);
+    }
+    else {
+        context.fillText("Detailed Frames " + Frames.length, nWidth, FontHeight * 2);
+    }
+    context.fillText(DumpHost, nWidth, FontHeight * 3);
+    context.fillText(DiffString, nWidth, FontHeight * 4);
+    context.textAlign = 'left';
+    DrawFlashMessage(context);
+}
+
+function DrawNetworkGraphLabel(startY, direction, categoryIndex) {
+    let plugin = g_Ext.currentPlugin;
+    let mouseX = NetworkViewMouseX;
+    let mouseY = NetworkViewMouseY;
+    let context = CanvasNetworkHistory.getContext('2d');
+    let dirText = direction === NetDirection.rx ? "Rx" : "Tx";
+    let categoryTextLabel = plugin.eventCategories[categoryIndex];
+    let fullText = categoryTextLabel + ', ' + dirText;
+    let labelWidth = context.measureText(fullText).width + 10;
+    let labelHeight = 15;
+    if (mouseX > 0 && mouseX < labelWidth && mouseY > startY && mouseY < startY + labelHeight) {
+        context.fillStyle = '#555555'
+        window.dirSwapActive = true;
+        window.dirSwapCategory = categoryIndex;
+    } else {
+        context.fillStyle = '#222222';
+    }
+    context.fillRect(0, startY, labelWidth, labelHeight);
+    context.fillStyle = '#ffffff';
+    context.font = Font;
+    context.fillText(fullText, 5, startY + 10);
+}
+
+function DrawNetworkGraph(startY, height, drawLabel, direction, categoryIndex) {
+    if (direction === undefined) {
+        DrawNetworkGraph(startY, height / 2, false, NetDirection.rx, categoryIndex);
+        DrawNetworkGraph(startY + height / 2, height / 2, false, NetDirection.tx, categoryIndex);
+        return;
+    }
+
+    let context = CanvasNetworkHistory.getContext('2d');
+    let allTraffic = categoryIndex === undefined;
+    let fHeight = height;
+    let fWidth = nWidth / Frames.length;
+    let fX = 0;
+    let plugin = g_Ext.currentPlugin;
+    let pluginStats = plugin.eventStats;
+    let currMode = g_Ext.xray.mode
+
+    for (let frameIndex = 0; frameIndex < Frames.length; frameIndex++) {
+        context.fillStyle = frameIndex % 2 === 0 ? '#333333' : '#444444';
+        context.fillRect(fX, startY, fWidth, fHeight);
+        let fr = Frames[frameIndex];
+        let frameMax = pluginStats.max.getField(currMode, direction);
+        frameMax = Math.max(frameMax, 1);
+        if (window.DetailedNetworkMode || categoryIndex !== undefined) {
+            // Draw baseline
+            context.fillStyle = "#aaaaaa";
+            context.fillRect(fX, startY + fHeight, fWidth, -1);
+            let frameStats = fr.netEventStats;
+            let frameTotals = fr.netTotals;
+            if (frameStats === undefined) {
+                frameStats = new Array();
+            }
+            if (categoryIndex !== undefined) {
+                frameMax = plugin.categoryMax[categoryIndex].getField(currMode, direction);
+                frameMax = Math.max(frameMax, 1);
+            }
+            // Calculate category blocks
+            let categoryBlocks = [];
+            let currFrameTotal = 0;
+            frameStats.forEach((categoryStats, index) => {
+                if (index === categoryIndex || categoryIndex === undefined) {
+                    let currCategoryValue = categoryStats.getField(currMode, direction);
+                    categoryBlocks.push({
+                        value: currCategoryValue,
+                        color: NetworkEventCategoryColor(index),
+                    });
+                    currFrameTotal += currCategoryValue;
+                }
+            });
+            currFrameTotal = Math.max(currFrameTotal, 1);
+            // Scale blocks and draw bar
+            let scale = fHeight / 1.1;
+            if (window.NetworkLogScale) {
+                scale *= ModifiedSafeLog(currFrameTotal) / (ModifiedSafeLog(frameMax) * currFrameTotal);
+            } else {
+                scale /= frameMax;
+            }
+            let currDelta = 0;
+            categoryBlocks.forEach((block) => {
+                context.fillStyle = block.color;
+                let blockHeight = Math.floor(block.value * scale);
+                context.fillRect(fX, startY + fHeight - currDelta - 1, fWidth - 1, -blockHeight);
+                currDelta += blockHeight;
+            });
+        } else {
+            let nFrames = Frames.length;
+            let avg = Math.round(pluginStats.total.getField(currMode, direction) / nFrames);
+            let frameTotals = fr.netTotals;
+            let diff = frameTotals.getField(currMode, direction) - avg;
+            if (window.NetworkLogScale) {
+                diff = diff >= 0 ? ModifiedSafeLog(diff) : -ModifiedSafeLog(-diff);
+                frameMax = ModifiedSafeLog(frameMax);
+            }
+            diff = Math.floor(diff);
+            context.fillStyle = '#0000ff';
+            if (diff === 0) {
+                context.fillRect(fX, startY + fHeight / 2, fWidth, -1);
+            }
+            let netBarHeight = diff * fHeight / (2 * frameMax);
+            context.fillStyle = diff > 0 ? '#ff0000' : '#00ff00';
+            context.fillRect(fX, startY + fHeight / 2, fWidth - 1, -netBarHeight);
+        }
+        fX += fWidth;
+    }
+
+    let mouseX = NetworkViewMouseX;
+    let mouseY = NetworkViewMouseY;
+
+    if (mouseY > startY && mouseY < startY + fHeight) {
+        if (categoryIndex !== undefined) {
+            window.ActiveNetworkGraph = categoryIndex;
+        } else {
+            window.NetworkMainActiveDirection = direction;
+            window.ActiveNetworkGraph = -2;
+        }
+        window.MouseOnNetworkSubgraph = true;
+        let frameIndex = Math.floor(mouseX / fWidth);
+        window.ActiveNetworkFrame = frameIndex;
+        let fr = Frames[frameIndex];
+        if (categoryIndex !== undefined && fr.netEventScopes !== undefined &&
+            fr.netEventScopes[categoryIndex] !== undefined &&
+            fr.netEventStats[categoryIndex].getField(XRayModes.Count, direction) > 0) {
+            let scopes = fr.netEventScopes[categoryIndex];
+            if (direction === NetDirection.rx) {
+                scopes = scopes.rx;
+            } else {
+                scopes = scopes.tx;
+            }
+            RangeCpuHistory.Begin = scopes.start;
+            RangeCpuHistory.End = scopes.end;
+        } else {
+            RangeCpuHistory.Begin = fr.framestart;
+            RangeCpuHistory.End = fr.frameend;
+        }
+        let frameStats;
+        if (categoryIndex === undefined) {
+            frameStats = fr.netTotals
+        } else {
+            frameStats = fr.netEventStats[categoryIndex];
+        }
+        let categoryVal = frameStats.getField(currMode, direction);
+        let frameTextArray = new Array();
+        let valueType = direction === NetDirection.rx ? 'Rx ' : 'Tx '
+        valueType += currMode === XRayModes.Count ? 'count: ' : 'size: ';
+        frameTextArray.push(valueType);
+        frameTextArray.push(plugin.decorate(categoryVal));
+        frameTextArray.push("Left click");
+        frameTextArray.push("Zoom to Scope");
+        frameTextArray.push("Right click");
+        frameTextArray.push("View Events");
+        DrawToolTip(frameTextArray, CanvasNetworkHistory, mouseX + 10, mouseY - 10);
+    }
+
+    if (drawLabel) {
+        DrawNetworkGraphLabel(startY, direction, categoryIndex);
+    }
+}
+
+function DrawNetworkFrameHistory() {
+    ProfileEnter("DrawNetworkFrameHistory");
+    let plugin = g_Ext.currentPlugin;
+
+
+    let mouseX = NetworkViewMouseX;
+    let mouseY = NetworkViewMouseY;
+    let context = CanvasNetworkHistory.getContext('2d');
+    context.clearRect(0, 0, CanvasNetworkHistory.width, CanvasNetworkHistory.height);
+
+    let fHeight = window.nNetworkHistoryBaseHeight;
+    let fWidth = nWidth / Frames.length;
+
+    let legendHeight = window.nNetworkHistoryLegendHeight;
+    let legendX = 2;
+    let legendY = fHeight + 2;
+    let activeCategories = [];
+    for (let i = 0; i < plugin.eventCategories.length; i++) {
+        let max = plugin.categoryMax[i];
+        if (max.rx.count > 0 || max.tx.count > 0) {
+            activeCategories.push(i);
+        }
+    }
+    let legendOffset = nWidth / activeCategories.length;
+    let dim = legendHeight - 4;
+    let legendActive = false;
+    let currMode = g_Ext.xray.mode;
+
+    let frameIndex = Math.floor(mouseX / fWidth);
+
+
+    // Draw legend
+    activeCategories.forEach((categoryIndex) => {
+        let bgColor;
+        if (mouseX > legendX && mouseX < legendX + legendOffset && mouseY > fHeight && mouseY < fHeight + legendHeight) {
+            bgColor = '#555555';
+            window.ActiveNetworkCategory = categoryIndex;
+            legendActive = true;
+        } else {
+            bgColor = '#222222';
+        }
+        context.fillStyle = bgColor;
+        context.fillRect(legendX - 2, legendY - 2, legendOffset, legendHeight);
+        context.fillStyle = NetworkEventCategoryColor(categoryIndex);
+        context.fillRect(legendX, legendY, dim, dim);
+        context.font = Font
+        context.fillStyle = '#ffffff';
+        context.fillText(plugin.eventCategories[categoryIndex], legendX + dim + 4, legendY + dim - 2);
+        legendX += legendOffset;
+    });
+    if (!legendActive) {
+        window.ActiveNetworkCategory = -1;
+    }
+
+    let categoryOverride = legendActive ? window.ActiveNetworkCategory : undefined;
+    window.MouseOnNetworkSubgraph = false;
+    // Draw base graph
+    DrawNetworkGraph(0, fHeight, false, undefined, categoryOverride);
+
+
+
+    let currHeight = nNetworkHistoryBaseHeight + nNetworkHistoryLegendHeight;
+    window.dirSwapActive = false;
+    plugin.activeDetailedCategories.forEach((direction, categoryIndex) => {
+        DrawNetworkGraph(currHeight, fHeight, true, direction, categoryIndex);
+        currHeight += nNetworkHistoryBaseHeight;
+    });
+    if (!window.dirSwapActive) {
+        window.dirSwapCategory = -1;
+    }
+    if (!window.MouseOnNetworkSubgraph) {
+        window.ActiveNetworkGraph = -1;
+    }
+
+    ProfileLeave();
+}
+
+function DrawDetailedFrameHistory() {
+    ProfileEnter("DrawDetailedFrameHistory");
+    var x = HistoryViewMouseX;
+
+    var context = CanvasHistory.getContext('2d');
+    context.clearRect(0, 0, CanvasHistory.width, CanvasHistory.height);
+
+    var fHeight = nHistoryHeight;
+    var fWidth = nWidth / Frames.length;
+    var fHeightScale = fHeight / ReferenceTime;
+    var fX = 0;
+    var FrameIndex = -1;
+    var MouseDragging = MouseDragState != MouseDragOff;
+    RangeCpuHistory = RangeInit();
+    RangeGpuHistory = RangeInit();
+
+    var aveAllocTime = 0;
+    var aveAllocCount = 0;
+    if (Frames.length > 0) {
+        for (var i = 0; i < Frames.length; i++) {
+            if (Frames[i].paused)
+                continue;
+            aveAllocTime += Frames[i].allocmsecs;
+            aveAllocCount++;
+        }
+        if (aveAllocCount > 0)
+            aveAllocTime /= aveAllocCount;
+    }
+
+    var viewSpan = { // SpanType
+        name: "",
+        tsBegin: fDetailedOffset,
+        tsEnd: fDetailedOffset + fDetailedRange,
+        colorBg: '#009900',
+        colorLine: '#00ff00',
+    };
+    var spansExtended = [viewSpan];
+    for (const spanName in g_Ext.spans) {
+        g_Ext.spans[spanName].forEach(function (span) {
+            spansExtended.push(span);
+        });
+    }
+    var spanOffsets = [];
+    spansExtended.forEach(function (span) {
+        var offsets = {
+            from: -1,
+            to: nWidth,
+            span: span,
+        };
+        spanOffsets.push(offsets);
+    });
+
+    for (i = 0; i < Frames.length; i++) {
+        var fMs = Frames[i].frameend - Frames[i].framestart;
+
+        spanOffsets.forEach(function (offsets) {
+            if (offsets.span.tsBegin <= Frames[i].frameend && offsets.span.tsBegin >= Frames[i].framestart) {
+                var lerp = (offsets.span.tsBegin - Frames[i].framestart) / (Frames[i].frameend - Frames[i].framestart);
+                offsets.from = fX + fWidth * lerp;
+            }
+            if (offsets.span.tsEnd <= Frames[i].frameend && offsets.span.tsEnd >= Frames[i].framestart) {
+                var lerp = (offsets.span.tsEnd - Frames[i].framestart) / (Frames[i].frameend - Frames[i].framestart);
+                offsets.to = fX + fWidth * lerp;
+            }
+        });
+
+        var fH = fHeightScale * fMs;
+        var bMouse = x > fX && x < fX + fWidth;
+        if (bMouse && !MouseDragging) {
+            context.fillStyle = FRAME_HISTORY_COLOR_MOUSE_HOVER;
+            RangeCpuHistory.Begin = Frames[i].framestart;
+            RangeCpuHistory.End = Frames[i].frameend;
+            if (Frames[i].framestartgpu) {
+                RangeGpuHistory.Begin = Frames[i].framestartgpu;
+                RangeGpuHistory.End = Frames[i].frameendgpu;
+            }
+            FrameIndex = i;
+        }
+        else {
+            if (AggregateInfo.EmptyFrames && AggregateInfo.EmptyFrames[i]) {
+                // Ring buffer wrap around
+                if (AggregateInfo.EmptyFrames[i] == 2) {
+                    context.fillStyle = FRAME_HISTORY_COLOR_WRAPAROUND;
+                }
+                else {
+                    context.fillStyle = FRAME_HISTORY_COLOR_EMPTY;
+                }
+            }
+            else {
+                if (Frames[i].paused) {
+                    context.fillStyle = FRAME_HISTORY_COLOR_EMPTY;
+                }
+                else if (Frames[i].incomplete) {
+                    context.fillStyle = FRAME_HISTORY_COLOR_INCOMPLETE;
+                }
+                else {
+                    if (aveAllocTime == 0)
+                        context.fillStyle = FRAME_HISTORY_COLOR_CPU;
+                    else {
+                        // Any allocation time above the average gets the maximum level.
+                        var level = Math.round((Frames[i].allocmsecs * 256.0) / aveAllocTime);
+                        level = Math.min(level, 255);
+                        var alpha = level.toString(16);
+                        context.fillStyle = FRAME_HISTORY_COLOR_CPU + alpha;
+                    }
+                    if (Frames[i].render_walltime_ms > Frames[i].jobs_walltime_ms) {
+                        if (Frames[i].cpu_waits_for_gpu > GetGpuBoundThresholdInMs()) {
+                            context.fillStyle = FRAME_HISTORY_COLOR_GPU;
+                        } else {
+                            context.fillStyle = FRAME_HISTORY_COLOR_CPU_RENDER;
+                        }
+                    }
+                }
+            }
+        }
+
+        var origColor = context.fillStyle;
+        var xrayColor = "";
+        if (g_Ext.xray.isViewEnabled() || g_Ext.xray.isBarEnabled()) {
+            var txAcc = Frames[i].txAcc;
+            var txNorm = GetNormalizedFromTx(txAcc, true);
+            xrayColor = txNorm.color;
+            if (g_Ext.xray.isViewEnabled()) {
+                context.fillStyle = xrayColor;
+            }
+        }
+
+        context.fillRect(fX, fHeight - fH, fWidth - 1, fH);
+
+        if (!g_Ext.xray.isViewEnabled() && g_Ext.xray.isBarEnabled()) {
+            // Top bar for frames
+            context.fillStyle = xrayColor;
+            context.fillRect(fX, fHeight - g_Ext.xray.barFrameHeight, fWidth - 1, g_Ext.xray.barFrameHeight);
+            context.fillStyle = origColor;
+        }
+
+        fX += fWidth;
+    }
+
+    // Current range + spans
+    var DrawFrameRange = function (from, to, colorBg, colorLine) {
+        var fRangeHistoryBegin = from;
+        var fRangeHistoryEnd = to;
+        var X = fRangeHistoryBegin;
+        var Y = 0;
+        var W = fRangeHistoryEnd - fRangeHistoryBegin;
+        context.globalAlpha = 0.35;
+        context.fillStyle = colorBg;
+        context.fillRect(X, Y, W, fHeight);
+        context.globalAlpha = 1;
+        context.strokeStyle = colorLine;
+        context.beginPath();
+        context.moveTo(X, Y);
+        context.lineTo(X, Y + fHeight);
+        context.moveTo(X + W, Y);
+        context.lineTo(X + W, Y + fHeight);
+        context.stroke();
+    };
+    spanOffsets.forEach(function (offsets) {
+        DrawFrameRange(offsets.from, offsets.to, offsets.span.colorBg, offsets.span.colorLine);
+    });
+
+    DrawCaptureInfo(context);
+
+    if (HistoryViewMouseY < fHeight && (HistoryViewMouseY >= fHeight - g_Ext.xray.barFrameHeight) &&
+        !g_Loader.barFramesTooltipBlocked && !MouseDragging &&
+        g_Ext.xray.isBarEnabled() && !g_Ext.xray.isViewEnabled() && g_Ext.currentPlugin && g_Ext.currentPlugin.tooltipBarFrames) {
+        var StringArray = [];
+        g_Ext.currentPlugin.tooltipBarFrames.forEach(line => {
+            StringArray.push(line);
+            StringArray.push("");
+        });
+        DrawToolTip(StringArray, CanvasHistory, HistoryViewMouseX, HistoryViewMouseY + 20);
+    }
+    else if (FrameIndex >= 0 && !MouseDragging && HistoryViewMouseX >= 0 && HistoryViewMouseY >= 0) {
+        var StringArray = [];
+        var cpuTimeIncl = Frames[FrameIndex].frameend - Frames[FrameIndex].framestart;
+        var cpuTimeExcl = cpuTimeIncl - Frames[FrameIndex].cpu_waits_for_gpu;
+        var gpuTime = Frames[FrameIndex].frameendgpu - Frames[FrameIndex].framestartgpu;
+        var gpuTimeDevice = Frames[FrameIndex].gpu_time_ms;
+        var render_walltime_ms = Frames[FrameIndex].render_walltime_ms - Frames[FrameIndex].framestart;
+        var jobs_walltime_ms = Frames[FrameIndex].jobs_walltime_ms - Frames[FrameIndex].framestart;
+
+        StringArray.push("Frame");
+        StringArray.push(String(FrameIndex));
+        StringArray.push("CPU Time (excl/incl)");
+        StringArray.push(String(cpuTimeExcl.toFixed(3)) + "ms/" + String(cpuTimeIncl.toFixed(3)) + "ms");
+        StringArray.push("GPU Time (mp/dev)");
+        StringArray.push(String(gpuTime.toFixed(3)) + "ms/" + String(gpuTimeDevice.toFixed(3)) + "ms");
+
+        var renderWallTimeColor = '#ffffff';
+        var gpuWaitTimeColor = '#ffffff';
+        var jobsWallTimeColor = '#ffffff';
+
+        if (Frames[FrameIndex].render_walltime_ms > Frames[FrameIndex].jobs_walltime_ms) {
+            if (Frames[FrameIndex].cpu_waits_for_gpu > GetGpuBoundThresholdInMs()) {
+                descColor = FRAME_HISTORY_COLOR_GPU;
+                renderWallTimeColor = '#ffff00';
+                gpuWaitTimeColor = '#ff0000';
+            } else {
+                descColor = FRAME_HISTORY_COLOR_CPU_RENDER;
+                renderWallTimeColor = '#ff0000';
+            }
+        } else {
+            jobsWallTimeColor = '#ff0000';
+        }
+
+        StringArray.push("Render Wall Time");
+        StringArray.push({ str: String(render_walltime_ms.toFixed(3)) + "ms", textColor: renderWallTimeColor });
+        StringArray.push(" GPU Wait Time");
+        StringArray.push({ str: String(Frames[FrameIndex].cpu_waits_for_gpu.toFixed(3)) + "ms", textColor: gpuWaitTimeColor });
+        StringArray.push("Jobs Wall Time");
+        StringArray.push({ str: String(jobs_walltime_ms.toFixed(3)) + "ms", textColor: jobsWallTimeColor });
+
+        StringArray.push("Mem Used/Free");
+        StringArray.push(String(Frames[FrameIndex].usedmemorymb.toFixed(1)) + "mb/" + String(Frames[FrameIndex].freememorymb.toFixed(1)) + "mb");
+        StringArray.push("Alloc/Free Time");
+        StringArray.push(String(Frames[FrameIndex].allocmsecs.toFixed(3)) + "ms/" + String(Frames[FrameIndex].freemsecs.toFixed(3)) + "ms");
+        StringArray.push("Alloc/Free Count");
+        StringArray.push(String(Frames[FrameIndex].allocs) + "/" + String(Frames[FrameIndex].frees));
+
+        if (AggregateInfo.EmptyFrames[FrameIndex] == 1) {
+            StringArray.push("");
+            StringArray.push("");
+            StringArray.push("EMPTY");
+            StringArray.push("");
+        }
+
+        DrawToolTip(StringArray, CanvasHistory, HistoryViewMouseX, HistoryViewMouseY + 20);
+
+        if (AggregateInfo.EmptyFrames[FrameIndex] == 2) {
+            let singleFrameError = (FrameIndex > 0 && FrameIndex < Frames.length - 1 && AggregateInfo.EmptyFrames[FrameIndex - 1] == 0 && AggregateInfo.EmptyFrames[FrameIndex + 1] == 0);
+            Warning = [];
+            Warning.push("");
+            Warning.push("");
+            if (singleFrameError) {
+                Warning.push("*** CPU and GPU data are misaligned ***");
+                Warning.push("");
+                Warning.push("");
+                Warning.push("");
+                Warning.push("    WARNING: GPU DATA WILL BE SUSPECT");
+            } else {
+                Warning.push("*** Ring Buffer Wrap Around Detected ***");
+                Warning.push("");
+                Warning.push("");
+                Warning.push("");
+                Warning.push("    WARNING: DATA WILL BE SUSPECT");
+            }
+            Warning.push("");
+            Warning.push("");
+            Warning.push("");
+            DrawToolTip(Warning, CanvasDetailedView, HistoryViewMouseX, DetailedViewMouseY, "#FF0000", "#FFAAFF");
+        }
+    }
+    ProfileLeave();
+}
+function FormatDuration(Time, msDecimals) {
+    // Central duration formatter. While 'N' is held (NanoScale), render every duration in
+    // nanoseconds; otherwise milliseconds with the caller's precision (default 3 decimals).
+    // Times are stored in ms, so 1 ms = 1e6 ns.
+    if (NanoScale) {
+        return (Time * 1e6).toFixed(0) + "ns";
+    }
+    return Time.toFixed(msDecimals === undefined ? 3 : msDecimals) + "ms";
+}
+function TimeToMsString(Time) {
+    return FormatDuration(Time, 3);
+}
+function TimeToString(Time) {
+    if (NanoScale) {
+        return FormatDuration(Time);
+    }
+    if (Time > 1000) {
+        return (Time / 1000.0).toFixed(0) + "s";
+    }
+    else if (Time > 0.9) {
+        return Time.toFixed(0) + "ms";
+    }
+    else if (Time > 0.0009) {
+        return (Time * 1000).toFixed(0) + "us";
+    }
+    else {
+        return (Time * 1000000).toFixed(0) + "ns";
+    }
+}
+
+function DrawDetailedBackground(context) {
+    var fMs = fDetailedRange;
+    var fMsEnd = fMs + fDetailedOffset;
+    var fMsToScreen = nWidth / fMs;
+    var fRate = Math.floor(2 * ((Math.log(fMs) / Math.log(10)) - 1)) / 2;
+    var fStep = Math.pow(10, fRate);
+    var fRcpStep = 1.0 / fStep;
+    var nColorIndex = Math.floor(fDetailedOffset * fRcpStep) % 2;
+    if (nColorIndex < 0)
+        nColorIndex = -nColorIndex;
+    var fStart = Math.floor(fDetailedOffset * fRcpStep) * fStep;
+    var fHeight = CanvasDetailedView.height;
+    var fScaleX = nWidth / fDetailedRange;
+    var HeaderString = TimeToString(fStep);
+    context.textAlign = 'center';
+    context.font = Font;
+
+    var barYOffset = 0;
+    if (g_Ext.xray.isBarEnabled()) {
+        // Background for the top bar for the detailed view
+        barYOffset = g_Ext.xray.barYOffset;
+        context.fillStyle = "#000000";
+        context.fillRect(0, 0, nWidth, barYOffset);
+    }
+
+    for (f = fStart; f < fMsEnd;) {
+        var fNext = f + fStep;
+        var X = (f - fDetailedOffset) * fScaleX;
+        var W = (fNext - f) * fScaleX;
+        context.fillStyle = nBackColors[nColorIndex];
+        context.fillRect(X, barYOffset, W + 2, fHeight);
+        nColorIndex = 1 - nColorIndex;
+        context.fillStyle = '#777777';
+        context.fillText(HeaderString, X + W * 0.5, 10 + barYOffset);
+        context.fillText(HeaderString, X + W * 0.5, nHeight - 10);
+        f = fNext;
+    }
+    context.textAlign = 'left';
+    var fScaleX = nWidth / fDetailedRange;
+    context.globalAlpha = 0.5;
+    context.strokeStyle = '#bbbbbb';
+    context.beginPath();
+    for (var i = 0; i < Frames.length; i++) {
+        var frfr = Frames[i];
+        if (frfr.frameend < fDetailedOffset || frfr.framestart > fDetailedOffset + fDetailedRange) {
+            continue;
+        }
+        var X = (frfr.framestart - fDetailedOffset) * fScaleX;
+        if (X >= 0 && X < nWidth) {
+            context.moveTo(X, 0);
+            context.lineTo(X, nHeight);
+        }
+    }
+    context.stroke();
+    context.globalAlpha = 1;
+
+}
+function DrawToolTip(StringArray, Canvas, x, y, color, textColor, updatedRect) {
+    function GetText(entry) {
+        return IsSimpleType(entry) ? entry : entry.str;
+    }
+    function UpdateFillStyle(ctx, entry, defaultColor) {
+        var curColor = IsSimpleType(entry) ? defaultColor : entry.textColor;
+        if (ctx.fillStyle != curColor) {
+            ctx.fillStyle = curColor;
+        }
+    }
+
+    var context = Canvas.getContext('2d');
+    context.font = Font;
+    var WidthArray = Array(StringArray.length);
+    var nMaxWidth = 0;
+    var nHeight = 0;
+    for (i = 0; i < StringArray.length; i += 2) {
+        var nWidth0 = context.measureText(GetText(StringArray[i])).width;
+        var nWidth1 = context.measureText(GetText(StringArray[i + 1])).width;
+        var nSum = nWidth0 + nWidth1;
+        WidthArray[i] = nWidth0;
+        WidthArray[i + 1] = nWidth1;
+        if (nSum > nMaxWidth) {
+            nMaxWidth = nSum;
+        }
+        nHeight += BoxHeight;
+    }
+    nMaxWidth += 15;
+    //bounds check.
+    var CanvasRect = Canvas.getBoundingClientRect();
+    if (y + nHeight > CanvasRect.height) {
+        y = CanvasRect.height - nHeight;
+        x += 20;
+    }
+    if (x + nMaxWidth > CanvasRect.width) {
+        x = CanvasRect.width - nMaxWidth;
+    }
+    if (updatedRect != undefined) {
+        updatedRect.x = x;
+        updatedRect.y = y;
+        updatedRect.w = nMaxWidth;
+        updatedRect.h = nHeight;
+    }
+
+    var defaultColor = textColor ? textColor : 'white';
+    context.fillStyle = color ? color : 'black';
+    context.fillRect(x - 2, y - 1, nMaxWidth + 4, nHeight + 2);
+    context.fillStyle = 'black';
+    context.fillRect(x - 1, y, nMaxWidth + 2, nHeight);
+    context.fillStyle = defaultColor;
+
+    var XPos = x;
+    var XPosRight = x + nMaxWidth;
+    var YPos = y + BoxHeight - 2;
+    for (i = 0; i < StringArray.length; i += 2) {
+        var left = StringArray[i];
+        var right = StringArray[i + 1];
+        UpdateFillStyle(context, left, defaultColor);
+        context.fillText(GetText(left), XPos, YPos);
+        UpdateFillStyle(context, right, defaultColor);
+        context.fillText(GetText(right), XPosRight - WidthArray[i + 1], YPos);
+        YPos += BoxHeight;
+    }
+}
+function CloneObject(obj) {
+    var copy = new Object();
+    for (var attr in obj) {
+        if (obj.hasOwnProperty(attr)) {
+            copy[attr] = obj[attr];
+        }
+    }
+    return copy;
+}
+function CloneArray(arr) {
+    var result = Array(arr.length);
+    for (var i = 0; i < arr.length; ++i) {
+        result[i] = CloneObject(arr[i]);
+    }
+    return result;
+}
+
+function IsMouseOnXRayDetailedBar(hasTooltip) {
+    let tooltipCheck = !hasTooltip || (g_Ext.currentPlugin && g_Ext.currentPlugin.tooltipBarDetailed);
+    return (DetailedViewMouseY <= g_Ext.xray.barYOffset && DetailedViewMouseY > 0 &&
+        g_Ext.xray.isBarEnabled() && g_Ext.currentPlugin && tooltipCheck);
+}
+
+function DrawHoverToolTip() {
+    // Do not draw the tooltip if the events window is visible
+    const EventsWindow = document.getElementById('eventswindow');
+    if (EventsWindow.style.display !== 'none')
+        return;
+    if (DetailedViewMouseX < 0 || DetailedViewMouseY < 0)
+        return;
+
+    if (!ToolTip) {
+        return;
+    }
+    ProfileEnter("DrawHoverToolTip");
+    
+    var skipTooltip = false;
+    var needToHighlightScope = g_Loader.hoverScope;
+
+    if (skipTooltip) {
+    } else if (needToHighlightScope != null) {
+        let StringArray = [];
+        let isFirstEnter = needToHighlightScope.jobInfo.isFirstEnter;
+        let isLastEnter = needToHighlightScope.jobInfo.isLastEnter;
+        const HoverJobLabel = nHoverToken != -1
+            ? GatherHoverLabels(nHoverToken, nHoverTokenIndex, nHoverTokenLogIndex, nHoverFrame)
+            : null;
+        if (HoverJobLabel != null && HoverJobLabel.length > 0) {
+            for (const label of HoverJobLabel) {
+                StringArray.push("Name: ");
+                StringArray.push(label);
+            }
+            StringArray.push("");
+            StringArray.push("");
+        }
+        if (isFirstEnter && isLastEnter) {
+            StringArray.push("This thread was fully executed within a single scope");
+            StringArray.push("");
+        } else {
+            StringArray.push("This thread was executed across multiple scopes");
+            StringArray.push("");
+            if (isFirstEnter) {
+                StringArray.push("It started here");
+                StringArray.push("");
+            } else if (isLastEnter) {
+                StringArray.push("It finished here");
+                StringArray.push("");
+            } else {
+                StringArray.push("It was midway through execution here");
+                StringArray.push("");
+            }
+            if (g_Loader.lockScope == null) {
+                StringArray.push("Right-click to hold this view");
+                StringArray.push("");
+            }
+        }
+        DrawToolTip(StringArray, CanvasDetailedView, DetailedViewMouseX, DetailedViewMouseY + 20);
+    } else if (nHoverToken != -1) {
+        const StringArray = [];
+
+        const Timer = TimerInfo[nHoverToken];
+        const Group = GroupInfo[Timer.group];
+
+        let bShowTimers = Mode === ModeTimers;
+        if (ToolTip === 2) { //0: off, 1: default, 2: flipped
+            bShowTimers = !bShowTimers;
+        }
+        // This frame is empty, we need to display something else.
+        let threadSuspect = 1;
+        if (nHoverTokenLogIndex !== -1 && window.ThreadStatus) {
+            // Only genuine wraparound threads are "suspect"; buffer-full and ok-early threads are not.
+            threadSuspect = ThreadStatus.hasWraparound[nHoverTokenLogIndex] ? 1 : 0;
+        }
+        if (threadSuspect && nHoverFrame >= 0 && AggregateInfo.EmptyFrames[nHoverFrame]) {
+            Warning = [];
+            Warning.push("Timer: ");
+            Warning.push(Timer.name);
+            Warning.push("");
+            Warning.push("");
+            Warning.push("Ring Buffer Wrap Around");
+            Warning.push("");
+            Warning.push("Warning: Data is highly suspect!");
+            Warning.push("");
+            Warning.push("");
+            Warning.push("");
+            DrawToolTip(Warning, CanvasDetailedView, DetailedViewMouseX, DetailedViewMouseY - 60, "#FF0000", "#FFAAFF");
+        }
+        if (bShowTimers || nHoverFrame === -1) {
+            StringArray.push("Timer:");
+            StringArray.push(Timer.name);
+
+            StringArray.push("");
+            StringArray.push("");
+
+            StringArray.push("Average:");
+            StringArray.push(FormatDuration(Timer.average));
+            StringArray.push("Max:");
+            StringArray.push(FormatDuration(Timer.max));
+
+            StringArray.push("");
+            StringArray.push("");
+
+            StringArray.push("Exclusive Average:");
+            StringArray.push(FormatDuration(Timer.exclaverage));
+            StringArray.push("Exclusive Max:");
+            StringArray.push(FormatDuration(Timer.exclmax));
+
+            StringArray.push("");
+            StringArray.push("");
+
+            StringArray.push("Call Average:");
+            StringArray.push(FormatDuration(Timer.callaverage));
+            StringArray.push("Call Count:");
+            StringArray.push((Timer.callcount / AggregateInfo.TotalFrames()).toFixed(2));
+
+            StringArray.push("");
+            StringArray.push("");
+
+            StringArray.push("Group:");
+            StringArray.push(Group.name);
+            StringArray.push("Frame Average:");
+            StringArray.push(FormatDuration(Group.average));
+            StringArray.push("Frame Max:");
+            StringArray.push(FormatDuration(Group.max));
+        }
+        else {
+            let FrameGroup, FrameTimer;
+            FrameGroup = GroupInfoPerFrame[nHoverFrame][Timer.group];
+            FrameTimer = TimerInfoPerFrame[nHoverFrame][nHoverToken];
+
+            StringArray.push("Timer:");
+            StringArray.push(Timer.name);
+            StringArray.push("Time:");
+            StringArray.push(FormatDuration(Group.isgpu ? RangeGpu.End - RangeGpu.Begin : RangeCpu.End - RangeCpu.Begin));
+
+            StringArray.push("");
+            StringArray.push("");
+
+            StringArray.push("Frame Time:");
+            StringArray.push(FormatDuration(FrameTimer.Sum));
+            StringArray.push("Average:");
+            StringArray.push(FormatDuration(Timer.FrameAverage));
+            StringArray.push("Max:");
+            StringArray.push(FormatDuration(Timer.MaxSum) + " @" + Timer.MaxSumFrame);
+
+            StringArray.push("");
+            StringArray.push("");
+
+            StringArray.push("Call Average:");
+            StringArray.push(FormatDuration(Timer.CallAverage));
+            StringArray.push("Call Count In Frame:");
+            StringArray.push(FrameTimer.CallCount);
+            StringArray.push("Call Count Average:");
+            StringArray.push(Timer.CallCountFrameAverage.toFixed(3));
+            StringArray.push("Call Count Max:");
+            StringArray.push(Timer.MaxCallCount + " @" + Timer.MaxCallCountFrame);
+
+            StringArray.push("");
+            StringArray.push("");
+
+            StringArray.push("Exclusive Frame Time:");
+            StringArray.push(FormatDuration(FrameTimer.ExclusiveSum));
+            StringArray.push("Exclusive Average:");
+            StringArray.push(FormatDuration(Timer.ExclusiveFrameAverage));
+            StringArray.push("Exclusive Max:");
+            StringArray.push(FormatDuration(Timer.MaxExclusiveSum) + " @" + Timer.MaxExclusiveSumFrame);
+
+            StringArray.push("");
+            StringArray.push("");
+
+            StringArray.push("Group:");
+            StringArray.push(Group.name);
+            StringArray.push("Frame Time:");
+            StringArray.push(FormatDuration(FrameGroup.Sum));
+            StringArray.push("Frame Average:");
+            StringArray.push(FormatDuration(Group.FrameAverage));
+            StringArray.push("Frame Max:");
+            StringArray.push(FormatDuration(Group.MaxSum) + " @" + Group.MaxSumFrame);
+            StringArray.push("Exclusive Frame Time:");
+            StringArray.push(FormatDuration(Group.ExclusiveSum));
+            StringArray.push("Exclusive Frame Average:");
+            StringArray.push(FormatDuration(Group.ExclusiveFrameAverage));
+            StringArray.push("Exclusive Frame Max:");
+            StringArray.push(FormatDuration(Group.MaxExclusiveSum) + " @" + Group.MaxExclusiveSumFrame);
+
+            const HoverMeta = GatherHoverMetaCounters(nHoverToken, nHoverTokenIndex, nHoverTokenLogIndex, nHoverFrame);
+            if (HoverMeta != null && Object.keys(HoverMeta).length > 0) {
+                StringArray.push("");
+                StringArray.push("");
+                for (const [index, value] of Object.entries(HoverMeta)) {
+                    StringArray.push("" + index);
+                    StringArray.push("" + value);
+                }
+            }
+
+            // Core/frequency is sampled periodically (per cooldown), so the hovered frame may
+            // contain no sample of its own. Gate on the global timeline and resolve by
+            // nearest-lower timestamp, which carries the last known value forward.
+            if (FFlagMicroprofilerPerFrameCpuSpeed && !Group.isgpu && gCpuCoreFreqData != null)
+            {
+                if (gCpuCoreFreqData.threadNumberToCpuIdMapping[nHoverTokenLogIndex]) {
+                    let closestTimestamp = binarySearchNearestLowerKey(gCpuCoreFreqData.threadNumberToCpuIdMapping[nHoverTokenLogIndex], RangeCpu.Begin);
+                    var FrameCoreId = gCpuCoreFreqData.threadNumberToCpuIdMapping[nHoverTokenLogIndex][closestTimestamp];
+                    if (FrameCoreId != null)
+                    {
+                        StringArray.push("");
+                        StringArray.push("");                
+                        StringArray.push("CPU Core used:");
+                        StringArray.push(FrameCoreId);
+                        StringArray.push("CPU Core Frequency:");
+                        StringArray.push(gCpuCoreFreqData.coreFreqs[FrameCoreId][closestTimestamp] + " MHz");
+                    }
+                }
+            }
+
+            // Owning DataModel of the hovered scope; shown only for multiplexed captures.
+            if (window.gDmFilter.hasData && gDmContextData && gDmContextData.threadToDmId[nHoverTokenLogIndex]) {
+                var HoverDmId = getScopeDmId(nHoverTokenLogIndex, RangeCpu.Begin); // same resolution as the filter
+                StringArray.push("");
+                StringArray.push("");
+                StringArray.push("DataModel:");
+                StringArray.push(HoverDmId == 0 ? "(none / shared)" : ("DM " + HoverDmId));
+            }
+
+            const HoverLabel = GatherHoverLabels(nHoverToken, nHoverTokenIndex, nHoverTokenLogIndex, nHoverFrame);
+            if (HoverLabel != null && HoverLabel.length > 0) {
+                StringArray.push("");
+                StringArray.push("");
+                for (const label of HoverLabel) {
+                    StringArray.push("Label:");
+                    StringArray.push(label);
+                }
+            }
+        }
+        const updatedRect = { x: 0, y: 0, w: 0, h: 0 };
+        DrawToolTip(StringArray, CanvasDetailedView, DetailedViewMouseX, DetailedViewMouseY + 20, Timer.color, 'white', updatedRect);
+
+        if (!bShowTimers && nHoverFrame !== -1) {
+            const frameVals = [];
+            let minVal;
+            let maxVal;
+            for (let i = 0; i < Frames.length; ++i) {
+                const FrameTime = TimerInfoPerFrame[i][nHoverToken];
+                frameVals.push(FrameTime.Sum);
+                if (i === 0) {
+                    minVal = FrameTime.Sum;
+                    maxVal = FrameTime.Sum;
+                } else {
+                    if (FrameTime.Sum < minVal)
+                        minVal = FrameTime.Sum;
+                    if (FrameTime.Sum > maxVal)
+                        maxVal = FrameTime.Sum;
+                }
+            }
+
+            const context = CanvasDetailedView.getContext('2d');
+            context.fillStyle = Timer.color;
+            let width = Frames.length;
+            let widthMult = 1;
+            if (width < 256) {
+                widthMult = 256 / width;
+                width = 256;
+            }
+            let left = updatedRect.x + updatedRect.w + 2;
+            const top = updatedRect.y;
+            const height = updatedRect.h;
+            const CanvasRect = CanvasDetailedView.getBoundingClientRect();
+            if (left + width >= CanvasRect.width) {
+                left = updatedRect.x - width - 2;
+            }
+            context.fillRect(left - 2, top - 1, width + 4, height + 2);
+            context.fillStyle = 'black';
+            context.fillRect(left - 1, top, width + 2, height);
+
+            const headerHeight = 2 * BoxHeight;
+            const footerHeight = BoxHeight;
+            context.textAlign = 'left';
+            context.fillStyle = 'white';
+            context.fillText('Frame ' + nHoverFrame, left + 1, top + BoxHeight - 2);
+            context.fillText('Max ' + maxVal.toFixed(3) + 'ms', left + 1, top + 2 * BoxHeight - 2);
+            context.fillText('Min ' + minVal.toFixed(3) + 'ms', left + 1, top + height - 2);
+            const barMaxHeight = height - headerHeight - footerHeight;
+            if (ZeroBasedBars)
+                minVal = 0;
+            for (let i = 0; i < Frames.length; ++i) {
+                if (i === nHoverFrame)
+                    context.fillStyle = 'white';
+                else
+                    context.fillStyle = Timer.color;
+                const height = barMaxHeight * (frameVals[i] - minVal) / (maxVal - minVal);
+                context.fillRect(left + i * widthMult, top + headerHeight + barMaxHeight - height, widthMult, height);
+            }
+        }
+    }
+    else if (nHoverCSCpu >= 0) {
+        const StringArray = [];
+        StringArray.push("Context Switch");
+        StringArray.push("");
+        StringArray.push("");
+        StringArray.push("");
+        StringArray.push("Cpu");
+        StringArray.push("" + nHoverCSCpu);
+        StringArray.push("Begin");
+        StringArray.push("" + RangeCpu.Begin);
+        StringArray.push("End");
+        StringArray.push("" + RangeCpu.End);
+        DrawToolTip(StringArray, CanvasDetailedView, DetailedViewMouseX, DetailedViewMouseY + 20);
+    }
+    else if (IsMouseOnXRayDetailedBar(true)) {
+        if (g_Loader.mouseOnDetailedBarStartTime == null) {
+            g_Loader.mouseOnDetailedBarStartTime = new Date;
+        }
+        if (!g_Loader.barDetailedTooltipBlocked) {
+            var StringArray = [];
+            g_Ext.currentPlugin.tooltipBarDetailed.forEach(line => {
+                StringArray.push(line);
+                StringArray.push("");
+            });
+            DrawToolTip(StringArray, CanvasDetailedView, DetailedViewMouseX, DetailedViewMouseY + 20);
+        }        
+    }
+    
+    ProfileLeave();
+}
+
+function FormatMeta(Value, Dec) {
+    if (!Value) {
+        Value = "0";
+    }
+    else {
+        Value = '' + Value.toFixed(Dec);
+    }
+    return Value;
+}
+
+function DrawBarView() {
+    ProfileEnter("DrawBarView");
+    Invalidate++;
+    nHoverToken = -1;
+    nHoverFrame = -1;
+    var context = CanvasDetailedView.getContext('2d');
+    context.clearRect(0, 0, nWidth, nHeight);
+
+    var Height = BoxHeight;
+    var Width = nWidth;
+
+    //clamp offset to prevent scrolling into the void
+    var nTotalRows = 0;
+    for (var groupid in GroupInfo) {
+        if (GroupsAllActive || GroupsActive[GroupInfo[groupid].name]) {
+            nTotalRows += GroupInfo[groupid].TimerArray.length + 1;
+        }
+    }
+    var nTotalRowPixels = nTotalRows * Height;
+    var nFrameRows = nHeight - BoxHeight;
+    if (nOffsetBarsY + nFrameRows > nTotalRowPixels && nTotalRowPixels > nFrameRows) {
+        nOffsetBarsY = nTotalRowPixels - nFrameRows;
+    }
+
+
+    var Y = -nOffsetBarsY + BoxHeight;
+    if (TimersGroups) {
+        nOffsetBarsX = 0;
+    }
+    var XBase = -nOffsetBarsX;
+    var nColorIndex = 0;
+
+    context.fillStyle = 'white';
+    context.font = Font;
+    var bMouseIn = 0;
+    var RcpReferenceTime = 1.0 / ReferenceTime;
+    var CountWidth = 8 * FontWidth;
+    var nMetaLen = TimerInfo[0].meta.length;
+    var nMetaCharacters = 10;
+    var InnerBoxHeight = BoxHeight - 2;
+    var TimerLen = 8; //todo: fix max digits.
+    var TimerWidth = TimerLen * FontWidth;
+    var nWidthBars = nBarsWidth + 2;
+    var nWidthMs = TimerWidth + 2 + 10;
+
+
+
+    for (var i = 0; i < nMetaLen; ++i) {
+        if (nMetaCharacters < MetaNames[i].length)
+            nMetaCharacters = MetaNames[i].length;
+    }
+    var nWidthMeta = nMetaCharacters * FontWidth + 6;
+    function HeaderMouseHandle(XBegin, X, Header) {
+        var bMouseIn = DetailedViewMouseY >= 0 && DetailedViewMouseY < BoxHeight && DetailedViewMouseX < X && DetailedViewMouseX > XBegin;
+        if (bMouseIn) {
+            SortColumnMouseOverNext = Header;
+        }
+    }
+    function HeaderString(Header) {
+        if (Header == SortColumnMouseOver) {
+            return Header + (SortColumnOrderFlip ? '<' : '>');
+        }
+        else {
+            return Header;
+        }
+
+    }
+    function DrawHeaderSplit(Header) {
+        context.fillStyle = 'white';
+        context.fillText(HeaderString(Header), X, Height - FontAscent);
+        var XBegin = X;
+        X += nWidthBars;
+        context.fillStyle = nBackColorOffset;
+        X += nWidthMs;
+
+        if (X >= NameWidth) {
+            context.fillRect(X - 3, 0, 1, nHeight);
+        }
+
+        HeaderMouseHandle(XBegin, X, Header);
+    }
+    function DrawHeaderSplitSingle(Header, Width) {
+        context.fillStyle = 'white';
+        context.fillText(HeaderString(Header), X, Height - FontAscent);
+        var XBegin = X;
+        X += Width;
+        context.fillStyle = nBackColorOffset;
+        if (X >= NameWidth) {
+            context.fillRect(X - 3, 0, 1, nHeight);
+        }
+        HeaderMouseHandle(XBegin, X, Header);
+    }
+    function DrawHeaderSplitLeftRight(HeaderLeft, HeaderRight, Width) {
+        context.textAlign = 'left';
+        context.fillStyle = 'white';
+        context.fillText(HeaderLeft, X, Height - FontAscent);
+        var XBegin = X;
+        X += Width;
+        context.textAlign = 'right';
+        context.fillText(HeaderRight, X - 5, Height - FontAscent);
+        context.textAlign = 'left';
+        context.fillStyle = nBackColorOffset;
+        if (X >= NameWidth) {
+            context.fillRect(X - 3, 0, 1, nHeight);
+        }
+        HeaderMouseHandle(XBegin, X, HeaderLeft);
+    }
+    function DrawTimer(Value, Color) {
+        var Prc = Value * RcpReferenceTime;
+        var YText = Y + Height - FontAscent;
+        if (Prc > 1) {
+            Prc = 1;
+        }
+        context.fillStyle = Color;
+        context.fillRect(X + 1, Y + 1, Prc * nBarsWidth, InnerBoxHeight);
+        X += nWidthBars;
+        context.fillStyle = 'white';
+        context.fillText(("      " + Value.toFixed(2)).slice(-TimerLen), X, YText);
+        X += nWidthMs;
+    }
+    function DrawMeta(Value, Width, Dec, YText) {
+        Value = FormatMeta(Value, Dec);
+        X += (FontWidth * Width);
+        context.textAlign = 'right';
+        context.fillText(Value, X - FontWidth, YText);
+        context.textAlign = 'left';
+    }
+
+
+    function DrawTimerRow(timerid, showgroup) {
+        var Timer = TimerInfo[timerid];
+        var Average = Timer.average;
+        var Max = Timer.max;
+        var Min = Timer.min;
+        var ExclusiveMax = Timer.exclmax;
+        var ExclusiveAverage = Timer.exclaverage;
+        var CallAverage = Timer.callaverage;
+        var CallCount = Timer.callcount;
+        var YText = Y + Height - FontAscent;
+        X = NameWidth + XBase;
+
+        nColorIndex = 1 - nColorIndex;
+        bMouseIn = DetailedViewMouseY >= Y && DetailedViewMouseY < Y + BoxHeight;
+        if (bMouseIn) {
+            nHoverToken = timerid;
+        }
+        context.fillStyle = bMouseIn ? nBackColorOffset : nBackColors[nColorIndex];
+        context.fillRect(0, Y, Width, FontHeight + 2);
+
+        DrawTimer(Average, Timer.color);
+        DrawTimer(Max, Timer.color);
+        DrawTimer(Timer.total, Timer.color);
+        DrawTimer(Min, Timer.color);
+        DrawTimer(CallAverage, Timer.color);
+        context.fillStyle = 'white';
+        context.fillText(CallCount, X, YText);
+        X += CountWidth;
+        DrawTimer(ExclusiveAverage, Timer.color);
+        DrawTimer(ExclusiveMax, Timer.color);
+
+        if (TimersMeta) {
+            context.fillStyle = 'white';
+            for (var j = 0; j < nMetaLen; ++j) {
+                DrawMeta(Timer.meta[j], MetaLengths[j], 0, YText);
+                DrawMeta(Timer.metaagg[j] / AggregateInfo.Frames, MetaLengthsAvg[j], 2, YText);
+                DrawMeta(Timer.metamax[j], MetaLengthsMax[j], 0, YText);
+            }
+        }
+        context.fillStyle = bMouseIn ? nBackColorOffset : nBackColors[nColorIndex];
+        context.fillRect(0, Y, NameWidth, Height);
+        context.textAlign = 'right';
+        context.fillStyle = Timer.color;
+        context.fillText(Timer.name, NameWidth - 5, YText);
+        context.textAlign = 'left';
+        if (showgroup) {
+            context.fillStyle = 'white';
+            context.fillText(GroupInfo[Timer.group].name, 1, YText);
+        }
+    }
+    function FilterMatch(FilterArray, value) {
+        if (!FilterArray)
+            return true;
+        for (var i = 0; i < FilterArray.length; ++i) {
+            var res = value.search(FilterArray[i]);
+            if (res < 0)
+                return false;
+        }
+        return true;
+    }
+    if (SortColumn) {
+        var OrderArray = new Array(TimerInfo.length);
+        var KeyArray = new Array(TimerInfo.length);
+        for (var idx in GroupOrder) {
+            var Group = GroupInfo[idx];
+            if ((GroupsAllActive || GroupsActive[Group.name]) && FilterMatch(FilterGroup, Group.name)) {
+                var TimerArray = Group.TimerArray;
+                for (var timerindex in TimerArray) {
+                    var timerid = TimerArray[timerindex];
+                    if (FilterMatch(FilterTimer, TimerInfo[timerid].name)) {
+                        OrderArray.push(timerid);
+                    }
+                }
+            }
+        }
+        var KeyFunc = null;
+        switch (SortColumn) {
+            case 1: KeyFunc = function (a) { return TimerInfo[a].average; }; break;
+            case 2: KeyFunc = function (a) { return TimerInfo[a].max; }; break;
+            case 3: KeyFunc = function (a) { return TimerInfo[a].total; }; break;
+            case 4: KeyFunc = function (a) { return TimerInfo[a].min; }; break;
+            case 5: KeyFunc = function (a) { return TimerInfo[a].callaverage; }; break;
+            case 6: KeyFunc = function (a) { return TimerInfo[a].callcount; }; break;
+            case 7: KeyFunc = function (a) { return TimerInfo[a].exclaverage; }; break;
+            case 8: KeyFunc = function (a) { return TimerInfo[a].exclmax; }; break;
+        }
+
+        var Flip = SortColumnOrderFlip == 1 ? -1 : 1;
+        OrderArray.sort(function (a, b) { return Flip * (KeyFunc(b) - KeyFunc(a)); });
+
+        for (var i in OrderArray) {
+            if (TimerInfo[OrderArray[i]].name && TimerInfo[OrderArray[i]].name.length > 0 && !TimerInfo[OrderArray[i]].name.startsWith("$UserToken_")) {
+                DrawTimerRow(OrderArray[i], 1);
+                Y += Height;
+            }
+        }
+    }
+    else if (2 == TimersGroups) {
+        for (var i = 0; i < ThreadNames.length; ++i) {
+            if ((ThreadsActive[ThreadNames[i]] || ThreadsAllActive) && FilterMatch(FilterTimer, ThreadNames[i])) {
+                var X = 0;
+                var YText = Y + Height - FontAscent;
+                bMouseIn = DetailedViewMouseY >= Y && DetailedViewMouseY < Y + BoxHeight;
+                nColorIndex = 1 - nColorIndex;
+                context.fillStyle = bMouseIn ? nBackColorOffset : nBackColors[nColorIndex];
+                context.fillRect(0, Y, Width, FontHeight + 2);
+                var ThreadColor = CSwitchColors[i % CSwitchColors.length];
+                context.fillStyle = ThreadColor;
+                context.fillText(ThreadNames[i], 1, YText);
+                context.textAlign = 'left';
+                Y += Height;
+                for (var idx in GroupOrder) {
+                    var groupid = GroupOrder[idx];
+                    var Group = GroupInfo[groupid];
+                    var PerThreadTimerTotal = ThreadGroupTimeArray[i][groupid];
+                    var PerThreadTimer = PerThreadTimerTotal / AggregateInfo.Frames;
+                    if ((PerThreadTimer > 0.0001 || PerThreadTimerTotal > 0.1) && (GroupsAllActive || GroupsActive[Group.name]) && FilterMatch(FilterGroup, Group.name)) {
+                        var GColor = GroupColors ? GroupInfo[groupid].color : 'white';
+                        var X = 0;
+                        nColorIndex = 1 - nColorIndex;
+                        bMouseIn = DetailedViewMouseY >= Y && DetailedViewMouseY < Y + BoxHeight;
+                        context.fillStyle = bMouseIn ? nBackColorOffset : nBackColors[nColorIndex];
+                        context.fillRect(0, Y, Width, nHeight);
+                        context.fillStyle = GColor;
+                        context.textAlign = 'right';
+                        context.fillText(Group.name, NameWidth - 5, Y + Height - FontAscent);
+                        context.textAlign = 'left';
+                        X += NameWidth;
+                        DrawTimer(PerThreadTimer, GColor);
+                        X += nWidthBars + nWidthMs;
+                        DrawTimer(PerThreadTimerTotal, GColor);
+
+                        Y += Height;
+                    }
+                }
+            }
+        }
+    }
+    else {
+        for (var idx in GroupOrder) {
+            var groupid = GroupOrder[idx];
+            var Group = GroupInfo[groupid];
+            var GColor = GroupColors ? GroupInfo[groupid].color : 'white';
+            if ((GroupsAllActive || GroupsActive[Group.name]) && FilterMatch(FilterGroup, Group.name)) {
+                var TimerArray = Group.TimerArray;
+                var X = XBase;
+                nColorIndex = 1 - nColorIndex;
+                bMouseIn = DetailedViewMouseY >= Y && DetailedViewMouseY < Y + BoxHeight;
+                context.fillStyle = bMouseIn ? nBackColorOffset : nBackColors[nColorIndex];
+                context.fillRect(0, Y, Width, FontHeight + 2);
+                context.fillStyle = GColor;
+                context.fillText(Group.name, 1, Y + Height - FontAscent);
+                X += NameWidth;
+                DrawTimer(Group.average, GColor);
+                DrawTimer(Group.max, GColor);
+                DrawTimer(Group.total, GColor);
+
+                context.fillStyle = bMouseIn ? nBackColorOffset : nBackColors[nColorIndex];
+                context.fillRect(0, Y, NameWidth, FontHeight + 2);
+                context.fillStyle = GColor;
+                context.fillText(Group.name, 1, Y + Height - FontAscent);
+
+
+
+                Y += Height;
+                if (TimersGroups) {
+                    for (var i = 0; i < ThreadNames.length; ++i) {
+                        var PerThreadTimerTotal = ThreadGroupTimeArray[i][groupid];
+                        var PerThreadTimer = PerThreadTimerTotal / AggregateInfo.Frames;
+                        if ((PerThreadTimer > 0.0001 || PerThreadTimerTotal > 0.1) && (ThreadsActive[ThreadNames[i]] || ThreadsAllActive) && FilterMatch(FilterTimer, ThreadNames[i])) {
+                            var YText = Y + Height - FontAscent;
+                            bMouseIn = DetailedViewMouseY >= Y && DetailedViewMouseY < Y + BoxHeight;
+                            nColorIndex = 1 - nColorIndex;
+                            context.fillStyle = bMouseIn ? nBackColorOffset : nBackColors[nColorIndex];
+                            context.fillRect(0, Y, Width, FontHeight + 2);
+                            var ThreadColor = CSwitchColors[i % CSwitchColors.length];
+                            context.fillStyle = ThreadColor;
+                            context.textAlign = 'right';
+                            context.fillText(ThreadNames[i], NameWidth - 5, YText);
+                            context.textAlign = 'left';
+                            X = NameWidth;
+                            DrawTimer(PerThreadTimer, ThreadColor);
+                            X += nWidthBars + nWidthMs;
+                            DrawTimer(PerThreadTimerTotal, ThreadColor);
+                            Y += Height;
+                        }
+                    }
+                }
+                else {
+                    for (var timerindex in TimerArray) {
+                        var timerid = TimerArray[timerindex];
+                        if (FilterMatch(FilterTimer, TimerInfo[timerid].name)) {
+                            if (TimerInfo[timerid].name && TimerInfo[timerid].name.length > 0 && !TimerInfo[timerid].name.startsWith("$UserToken_")) {
+                                DrawTimerRow(timerid, 0);
+                                Y += Height;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    X = 0;
+    context.fillStyle = nBackColorOffset;
+    context.fillRect(0, 0, Width, Height);
+    context.fillStyle = 'white';
+    SortColumnMouseOverNext = null;
+
+    if (TimersGroups) {
+        if (2 == TimersGroups) {
+            DrawHeaderSplitLeftRight(StrThread, StrGroup, NameWidth);
+            DrawHeaderSplit(StrAverage);
+        }
+        else {
+            DrawHeaderSplitLeftRight(StrGroup, StrThread, NameWidth);
+            DrawHeaderSplit(StrAverage);
+            DrawHeaderSplit(StrMax);
+            DrawHeaderSplit(StrTotal);
+        }
+    }
+    else {
+        X = NameWidth + XBase;
+        DrawHeaderSplit(StrAverage);
+        DrawHeaderSplit(StrMax);
+        DrawHeaderSplit(StrTotal);
+        DrawHeaderSplit(StrMin);
+        DrawHeaderSplit(StrCallAverage);
+        DrawHeaderSplitSingle(StrCount, CountWidth);
+        DrawHeaderSplit(StrExclAverage);
+        DrawHeaderSplit(StrExclMax);
+        if (TimersMeta) {
+            for (var i = 0; i < nMetaLen; ++i) {
+                DrawHeaderSplitSingle(MetaNames[i], MetaLengths[i] * FontWidth);
+                DrawHeaderSplitSingle(MetaNames[i] + " Avg", MetaLengthsAvg[i] * FontWidth);
+                DrawHeaderSplitSingle(MetaNames[i] + " Max", MetaLengthsMax[i] * FontWidth);
+            }
+        }
+        X = 0;
+        context.fillStyle = nBackColorOffset;
+        context.fillRect(0, 0, NameWidth, Height);
+        context.fillStyle = 'white';
+
+        DrawHeaderSplitLeftRight(StrGroup, StrTimer, NameWidth);
+
+    }
+
+    ProfileLeave();
+}
+
+var CounterNameWidth = 100;
+var CounterValueWidth = 100;
+var CounterLimitWidth = 100;
+
+var FormatCounterDefault = 0;
+var FormatCounterBytes = 1;
+var FormatCounterBytesExt = ["b", "kb", "mb", "gb", "tb", "pb", "eb", "zb", "yb"];
+
+function FormatCounter(Format, Counter) {
+    if (!Counter) {
+        return '0';
+    }
+    var Negative = 0;
+    if (Counter < 0) {
+        Counter = -Counter;
+        Negative = 1;
+        if (Counter < 0) // handle INT_MIN
+        {
+            Counter = -(Counter + 1);
+            if (Counter < 0) {
+                return '?';
+            }
+        }
+    }
+    var str = Negative ? '-' : '';
+    if (Format == FormatCounterDefault) {
+        var Seperate = 0;
+        var result = '';
+        while (Counter) {
+            if (Seperate) {
+                result += '.';
+            }
+            Seperate = 1;
+            for (var i = 0; Counter && i < 3; ++i) {
+                var Digit = Math.floor(Counter % 10);
+                Counter = Math.floor(Counter / 10);
+                result += '' + Digit;
+            }
+        }
+
+        for (var i = 0; i < result.length; ++i) {
+            str += result[result.length - 1 - i];
+        }
+        return str;
+    }
+    else if (Format == FormatCounterBytes) {
+        var Shift = 0;
+        var Divisor = 1;
+        var CountShifted = Counter >> 10;
+        while (CountShifted) {
+            Divisor <<= 10;
+            CountShifted >>= 10;
+            Shift++;
+        }
+        if (Shift) {
+            return str + (Counter / Divisor).toFixed(2) + '' + FormatCounterBytesExt[Shift];
+        }
+        else {
+            return str + Counter.toFixed(2) + '' + FormatCounterBytesExt[0];
+        }
+    }
+    return '?';
+}
+function ExportCountersCSV() {
+    let text = { csv: "Name, Value, Limit \n" };
+
+    function printCounter(Index, text, path) {
+        var Counter = CounterInfo[Index];
+
+        // append counter
+        text.csv += path + "/" + Counter.name + ", " + Counter.value + ", " + Counter.limit + "\n";
+
+        var ChildIndex = Counter.firstchild;
+
+        while(ChildIndex != -1) {
+            printCounter(ChildIndex, text, path + "/" + Counter.name);
+            ChildIndex = CounterInfo[ChildIndex].sibling;
+        }
+    }
+
+    for (var i = 0; i < CounterInfo.length; ++i) {
+        if (CounterInfo[i].parent == -1) {
+            printCounter(i, text, "");
+        }
+    }
+
+    SaveExportResult(text.csv);
+    OpenNewExportTab("counters.csv", "", true);
+}
+function DrawCounterView() {
+    ProfileEnter("DrawCounterView");
+    Invalidate++;
+    nHoverToken = -1;
+    nHoverFrame = -1;
+    var context = CanvasDetailedView.getContext('2d');
+    context.clearRect(0, 0, nWidth, nHeight);
+
+    var Height = BoxHeight;
+    var Width = nWidth;
+    //clamp offset to prevent scrolling into the void
+    var nTotalRows = CounterInfo.length;
+    var nTotalRowPixels = nTotalRows * Height;
+    var nFrameRows = nHeight - BoxHeight;
+    if (nOffsetCountersY + nFrameRows > nTotalRowPixels && nTotalRowPixels > nFrameRows) {
+        nOffsetCountersY = nTotalRowPixels - nFrameRows;
+    }
+
+    var CounterNameWidthTemp = 10;
+    var CounterValueWidthTemp = 10;
+    var CounterLimitWidthTemp = 10;
+
+    var CounterWidth = 150;
+    var Y = -nOffsetCountersY + BoxHeight;
+    var X = 0;
+    var nColorIndex = 0;
+    context.fillStyle = 'white';
+    context.font = Font;
+    var bMouseIn = 0;
+    function DrawHeaderSplitSingle(Header, Width) {
+        context.fillStyle = 'white';
+        context.fillText(Header, X, Height - FontAscent);
+        X += Width;
+        context.fillStyle = nBackColorOffset;
+        context.fillRect(X - 3, 0, 1, nHeight);
+    }
+    function DrawHeaderSplitSingleRight(Header, Width) {
+        X += Width;
+        context.fillStyle = 'white';
+        context.textAlign = 'right';
+        context.fillText(Header, X - FontWidth, Height - FontAscent);
+        context.fillStyle = nBackColorOffset;
+        context.fillRect(X, 0, 1, nHeight);
+        context.textAlign = 'left';
+    }
+    var TimerLen = 6;
+    var TimerWidth = TimerLen * FontWidth;
+    nHoverCounter = -1;
+    function CounterIndent(Level) {
+        return Level * 4 * FontWidth;
+    }
+    function Max(a, b) {
+        return a > b ? a : b;
+    }
+
+    function DrawCounterRecursive(Index) {
+        var Counter = CounterInfo[Index];
+        var Indent = CounterIndent(Counter.level);
+        CounterNameWidthTemp = Max(CounterNameWidthTemp, Counter.name.length + 1 + Indent / (FontWidth + 1));
+        CounterValueWidthTemp = Max(CounterValueWidthTemp, Counter.formatted.length);
+        CounterLimitWidthTemp = Max(CounterLimitWidthTemp, Counter.formattedlimit.length);
+
+        var X = 0;
+        nColorIndex = 1 - nColorIndex;
+        var HeightExpanded = Counter.Expanded ? Height * 5 : Height;
+
+        bMouseIn = DetailedViewMouseY >= Y && DetailedViewMouseY < Y + HeightExpanded;
+        if (bMouseIn) {
+            nHoverCounter = Index;
+        }
+        var bgcolor = bMouseIn ? nBackColorOffset : nBackColors[nColorIndex];
+        context.fillStyle = bgcolor;
+        context.fillRect(0, Y, Width, HeightExpanded);
+        context.fillStyle = 'white';
+        var c = Counter.closed ? '*' : ' ';
+        context.fillText(c + Counter.name, Indent, Y + Height - FontAscent);
+        X += CounterNameWidth;
+        X += CounterValueWidth - FontWidth;
+        context.textAlign = 'right';
+        context.fillText(Counter.formatted, X, Y + Height - FontAscent);
+        context.textAlign = 'left';
+        X += FontWidth * 4;
+        var Y0 = Y + 1;
+        if (Counter.limit != 0) {
+            context.fillText(Counter.formattedlimit, X, Y + Height - FontAscent);
+            X += CounterLimitWidth;
+            var X0 = X + 1;
+            context.fillStyle = 'white';
+            context.fillRect(X0, Y0, Counter.boxprc * (CounterWidth - 2), Height - 2);
+            context.fillStyle = bgcolor;
+            context.fillRect(X0 + 1, Y0 + 1, Counter.boxprc * (CounterWidth - 4), Height - 4);
+            context.fillStyle = 'cyan';
+            context.fillRect(X0 + 1, Y0 + 1, Counter.counterprc * (CounterWidth - 4), Height - 4);
+            X += CounterWidth + 10;
+        }
+        else {
+            X += CounterLimitWidth;
+            X += CounterWidth + 10;
+        }
+        if (Counter.historydata.length > 0) {
+            var Prc = Counter.historyprc;
+            var Data = Counter.historydata;
+
+            context.fillStyle = 'cyan';
+            context.strokeStyle = 'cyan';
+            context.globalAlpha = 0.5;
+            context.beginPath();
+            var x = X;
+            var YBase = Y0 + HeightExpanded - 1;
+            var YOffset = -(HeightExpanded - 2);
+
+            context.moveTo(X, Y0);
+            for (var i = 0; i < Prc.length; ++i) {
+                context.moveTo(x, YBase);
+                context.lineTo(x, YBase + Prc[i] * YOffset);
+
+                x += 1;
+            }
+            context.stroke();
+
+            x = X;
+            context.globalAlpha = 1.0;
+            context.beginPath();
+            context.moveTo(X, YBase);
+
+            for (var i = 0; i < Prc.length; ++i) {
+                context.lineTo(x, YBase + Prc[i] * YOffset);
+                x += 1;
+            }
+            context.stroke();
+            if (bMouseIn) {
+                var MouseGraphX = Math.floor(DetailedViewMouseX - X);
+                if (MouseGraphX >= 0 && MouseGraphX < Data.length) {
+                    context.fillStyle = 'white';
+                    var Formatted = FormatCounter(Counter.format, Data[MouseGraphX]);
+                    context.fillText(Formatted, X, Y + Height - FontAscent);
+                }
+                context.strokeStyle = 'orange';
+                context.beginPath();
+                var CrossX = X + MouseGraphX;
+                var CrossY = YBase + Prc[MouseGraphX] * YOffset;
+                context.moveTo(CrossX - 2, CrossY - 2);
+                context.lineTo(CrossX + 2, CrossY + 2);
+                context.moveTo(CrossX + 2, CrossY - 2);
+                context.lineTo(CrossX - 2, CrossY + 2);
+                context.stroke();
+
+            }
+            X += Prc.length + 5;
+            context.fillStyle = 'white';
+            context.fillText(FormatCounter(Counter.format, Counter.minvalue), X, Y + Height - FontAscent);
+            X += CounterWidth + 5;
+            context.fillText(FormatCounter(Counter.format, Counter.maxvalue), X, Y + Height - FontAscent);
+            X += CounterWidth + 5;
+        }
+
+        Y += HeightExpanded;
+
+        if (!Counter.closed) {
+            var ChildIndex = Counter.firstchild;
+            while (ChildIndex != -1) {
+                DrawCounterRecursive(ChildIndex);
+                ChildIndex = CounterInfo[ChildIndex].sibling;
+            }
+        }
+    }
+
+    for (var i = 0; i < CounterInfo.length; ++i) {
+        if (CounterInfo[i].parent == -1) {
+            DrawCounterRecursive(i);
+        }
+    }
+
+    X = 0;
+    context.fillStyle = nBackColorOffset;
+    context.fillRect(0, 0, Width, Height);
+    context.fillStyle = 'white';
+    DrawHeaderSplitSingle('Name', CounterNameWidth);
+    DrawHeaderSplitSingleRight('Value', CounterValueWidth + (FontWidth + 1));
+    DrawHeaderSplitSingle('Limit', CounterLimitWidth + CounterWidth + 3 * (FontWidth + 1));
+
+    var CounterNameWidthNew = CounterNameWidthTemp * (FontWidth + 1);
+    var CounterValueWidthNew = CounterValueWidthTemp * (FontWidth + 1);
+    var CounterLimitWidthNew = CounterLimitWidthTemp * (FontWidth + 1);
+    if (CounterNameWidthNew != CounterNameWidth || CounterValueWidthNew != CounterValueWidth || CounterLimitWidthNew != CounterLimitWidth) {
+        // console.log('requesting redraw 0' + CounterNameWidthNew + '= ' + CounterNameWidth );
+        // console.log('requesting redraw 1' + CounterValueWidthNew + '= ' + CounterValueWidth );
+        // console.log('requesting redraw 2' + CounterLimitWidthNew + '= ' + CounterLimitWidth );
+        CounterNameWidth = CounterNameWidthNew;
+        CounterValueWidth = CounterValueWidthNew;
+        CounterLimitWidth = CounterLimitWidthNew;
+        Invalidate = 0;
+    }
+
+    ProfileLeave();
+}
+
+
+//preprocess context switch data to contain array per thread
+function PreprocessContextSwitchCacheItem(ThreadId) {
+    var CSObject = CSwitchCache[ThreadId];
+    if (ThreadId > 0 && !CSObject) {
+        CSArrayIn = new Array();
+        CSArrayOut = new Array();
+        CSArrayCpu = new Array();
+        var nCount = CSwitchTime.length;
+        var j = 0;
+        var TimeIn = -1.0;
+        for (var i = 0; i < nCount; ++i) {
+            var ThreadIn = CSwitchThreadInOutCpu[j];
+            var ThreadOut = CSwitchThreadInOutCpu[j + 1];
+            var Cpu = CSwitchThreadInOutCpu[j + 2];
+            if (TimeIn < 0) {
+                if (ThreadIn == ThreadId) {
+                    TimeIn = CSwitchTime[i];
+                }
+            }
+            else {
+                if (ThreadOut == ThreadId) {
+                    var TimeOut = CSwitchTime[i];
+                    CSArrayIn.push(TimeIn);
+                    CSArrayOut.push(TimeOut);
+                    CSArrayCpu.push(Cpu);
+                    TimeIn = -1;
+                }
+            }
+            j += 3;
+        }
+        CSObject = new Object();
+        CSObject.Size = CSArrayIn.length;
+        CSObject.In = CSArrayIn;
+        CSObject.Out = CSArrayOut;
+        CSObject.Cpu = CSArrayCpu;
+        CSwitchCache[ThreadId] = CSObject;
+    }
+
+}
+function PreprocessContextSwitchCache() {
+    ProfileEnter("PreprocessContextSwitchCache");
+    var AllThreads = {};
+    var nCount = CSwitchTime.length;
+    for (var i = 0; i < nCount; ++i) {
+        var nThreadIn = CSwitchThreadInOutCpu[i];
+        if (!AllThreads[nThreadIn]) {
+            AllThreads[nThreadIn] = '' + nThreadIn;
+            var FoundThread = false;
+            for (var i = 0; i < ThreadIds.length; ++i) {
+                if (ThreadIds[i] == nThreadIn) {
+                    FoundThread = true;
+                }
+            }
+            if (!FoundThread) {
+                CSwitchOnlyThreads.push(nThreadIn);
+            }
+        }
+    }
+    for (var i = 0; i < CSwitchOnlyThreads.length; ++i) {
+        PreprocessContextSwitchCacheItem(CSwitchOnlyThreads[i]);
+    }
+    for (var i = 0; i < ThreadIds.length; ++i) {
+        PreprocessContextSwitchCacheItem(ThreadIds[i]);
+    }
+    function HandleMissingThread(a) {
+        if (!CSwitchThreads[a]) {
+            CSwitchThreads[a] = { 'tid': a, 'pid': -1, 't': '?', 'p': '?' };
+        }
+    }
+    function CompareThreadInfo(a, b) {
+        if (a.pid != b.pid)
+            return b.pid - a.pid;
+        else
+            return a.tid - b.tid;
+    }
+    CSwitchOnlyThreads.sort(function (a, b) {
+        HandleMissingThread(a);
+        HandleMissingThread(b);
+        return CompareThreadInfo(CSwitchThreads[a], CSwitchThreads[b]);
+    });
+
+    ProfileLeave();
+}
+
+function DrawContextSwitchBars(context, ThreadId, fScaleX, fOffsetY, fDetailedOffset, nHoverColor, MinWidth, bDrawEnabled) {
+    ProfileEnter("DrawContextSwitchBars");
+    var CSObject = CSwitchCache[ThreadId];
+    if (CSObject) {
+        var Size = CSObject.Size;
+        var In = CSObject.In;
+        var Out = CSObject.Out;
+        var Cpu = CSObject.Cpu;
+        var nNumColors = CSwitchColors.length;
+        for (var i = 0; i < Size; ++i) {
+            var TimeIn = In[i];
+            var TimeOut = Out[i];
+            var ActiveCpu = Cpu[i];
+
+            var X = (TimeIn - fDetailedOffset) * fScaleX;
+            if (X > nWidth) {
+                break;
+            }
+            var W = (TimeOut - TimeIn) * fScaleX;
+            if (W > MinWidth && X + W > 0) {
+                if (nHoverCSCpu == ActiveCpu || bDrawEnabled) {
+                    if (nHoverCSCpu == ActiveCpu) {
+                        context.fillStyle = nHoverColor;
+                    }
+                    else {
+                        context.fillStyle = CSwitchColors[ActiveCpu % nNumColors];
+                    }
+                    context.fillRect(X, fOffsetY, W, CSwitchHeight);
+                }
+                if (DetailedViewMouseX >= X && DetailedViewMouseX <= X + W && DetailedViewMouseY < fOffsetY + CSwitchHeight && DetailedViewMouseY >= fOffsetY) {
+                    nHoverCSCpuNext = ActiveCpu;
+                    RangeCpuNext.Begin = TimeIn;
+                    RangeCpuNext.End = TimeOut;
+                    RangeCpuNext.Thread = ThreadId;
+                    RangeGpuNext.Begin = RangeGpuNext.End = -1;
+                }
+            }
+        }
+    }
+    ProfileLeave();
+}
+
+function SetHoverToken(nToken, nIndex, nLog) {
+    for (var i = Frames.length - 1; i >= 0; --i) {
+        var IndexStart = LodData[0].LogStart[i][nLog];
+        if (nIndex >= IndexStart) {
+            nHoverFrame = i;
+            nHoverTokenNext = nToken;
+            nHoverTokenIndexNext = nIndex - IndexStart;
+            nHoverTokenLogIndexNext = nLog;
+            break;
+        }
+    }
+}
+
+function rgbToDesaturated(color, amount) {
+    if (color.charAt(0) === '#') {
+        color = color.slice(1);
+    }
+    const r = parseInt(color.slice(0, 2), 16);
+    const g = parseInt(color.slice(2, 4), 16);
+    const b = parseInt(color.slice(4, 6), 16);
+    const grayscale = Math.round(0.3 * r + 0.59 * g + 0.11 * b);
+    const newR = Math.round(r + (grayscale - r) * amount);
+    const newG = Math.round(g + (grayscale - g) * amount);
+    const newB = Math.round(b + (grayscale - b) * amount);
+    const desaturatedHex = `#${newR.toString(16).padStart(2, '0')}${newG.toString(16).padStart(2, '0')}${newB.toString(16).padStart(2, '0')}`;
+    return desaturatedHex;
+}
+
+function DrawAuxHints(context, fOffsetY) {
+    if (window.HelpTooltipShowTime > 0) {
+        var HelpFontHeight = 17;
+        var HelpFont = 'Bold ' + HelpFontHeight + 'px Courier New';        
+        var HelpBoxHeight = HelpFontHeight + 2;
+        var HelpAlpha = 0.8 * window.HelpTooltipShowTime / window.HelpTooltipShowTimeInitial;
+
+        context.font = HelpFont;
+        context.globalAlpha = HelpAlpha;
+
+        var lines = [
+            "Mouse drag = navigate",
+            "Mouse wheel = zoom",
+            "Ctrl(Cmd) + F = find",
+        ];
+        if (IsPluginsTabVisible()) {
+            lines.push("X key = X-Ray mode");
+        }
+        if (g_Loader.toolsData.ComboDiffFuncName) {
+            lines.push("Drop dump to view diff");
+        }
+        if (fOffsetY > nHeight) {
+            lines.push("\u21D3 More threads below \u21D3");
+        }
+
+        var textSizeMax = 0;
+        lines.forEach(line => {
+            var textSize = context.measureText(line).width;
+            textSizeMax = Math.max(textSizeMax, textSize);
+        });
+        lines.forEach((line, i) => {
+            context.fillText(line, nWidth - textSizeMax, nHeight - 10 - HelpBoxHeight * (lines.length - i));
+        });
+        
+        context.globalAlpha = 1;
+        context.font = Font;
+    }
+    
+    if (g_Ext.xray.isViewEnabled())
+    {
+        var ModeFontHeight = 20;
+        var ModeFont = 'Bold ' + ModeFontHeight + 'px Courier New';        
+        var ModeBoxHeight = ModeFontHeight + 2;
+        var ModeAlpha = 0.8;
+        
+        context.font = ModeFont;
+        context.globalAlpha = ModeAlpha;
+
+        var lines = [
+            "X-Ray view",
+        ];
+        if (g_Ext.currentPlugin.hint) {
+            lines.push("(" + g_Ext.currentPlugin.hint + ")");
+        }
+
+        lines.forEach((line, i) => {
+            var textSize = context.measureText(line).width;
+            context.fillText(line, nWidth / 2 - textSize / 2, nHeight - 10 - ModeBoxHeight * (lines.length - i));
+        });
+
+        context.globalAlpha = 1;
+        context.font = Font;
+    }
+}
+
+function SortScopeTimes(order, refEnterId) {
+    let ids = Array.from({ length: order.length }, (_, i) => i);
+    ids.sort((a, b) => order[a] - order[b]); // sort indexes by enterId
+    let refOffset = ids.findIndex(i => order[i] === refEnterId);
+    return {
+        ids: ids,
+        refOffset: refOffset,
+        prevOffset: refOffset > 0 ? refOffset - 1 : -1,
+        nextOffset: refOffset < ids.length - 1 ? refOffset + 1 : -1,
+    };
+}
+
+function DrawConnectedScopeLines(context, order, ids, a) {
+    for (let k = 0; k < ids.length - 1; k++) {
+        let id0 = ids[k + 0];
+        let id1 = ids[k + 1];
+        let enter0 = order[id0];
+        let enter1 = order[id1];
+        let isSequential = (enter1 === enter0 + 1);
+        let lineColor = '#59d0ff';
+
+        var entryOffset0 = id0 * 3;
+        var X0 = a[entryOffset0 + 0];
+        var Y0 = a[entryOffset0 + 1];
+        var W0 = a[entryOffset0 + 2];
+
+        var entryOffset1 = id1 * 3;
+        var X1 = a[entryOffset1 + 0];
+        var Y1 = a[entryOffset1 + 1];
+        var W1 = a[entryOffset1 + 2];
+
+        const arrowBridgeHeight = 20;
+        const arrowHeight = 4;
+        const arrowWidth = 2;
+        const minWidthToDrawArrows = 4;
+        var drawArrows = (X1 - (X0 + W0)) > minWidthToDrawArrows;
+
+        function DashPossible(isPossible) {
+            let dashStyle = (isPossible && !isSequential) ? [5, 5] : [];
+            context.setLineDash(dashStyle);
+        }
+
+        context.strokeStyle = lineColor;
+
+        DashPossible(true);
+        context.beginPath();
+
+        // Start
+        context.moveTo(X0 + W0, Y0);
+        context.lineTo(X0 + W0, Y0 - arrowBridgeHeight);
+
+        // Bridge
+        context.lineTo(X1, Y0 - arrowBridgeHeight);
+
+        // Finish
+        if (Y1 >= Y0) {
+            context.lineTo(X1, Y1);
+        } else {
+            context.lineTo(X1, Y1 + BoxHeight);
+        }
+
+        context.stroke();
+        DashPossible(false);
+
+        if (drawArrows) {
+            context.beginPath();
+
+            // Start
+            context.moveTo(X0 + W0, Y0 - arrowBridgeHeight + arrowHeight);
+            context.lineTo(X0 + W0 + arrowWidth, Y0 - arrowBridgeHeight + arrowHeight);
+            context.lineTo(X0 + W0, Y0 - arrowBridgeHeight);
+
+            // Finish
+            if (Y1 >= Y0) {
+                context.moveTo(X1, Y1 - arrowHeight);
+                context.lineTo(X1 - arrowWidth, Y1 - arrowHeight);
+                context.lineTo(X1, Y1);
+            } else {
+                context.moveTo(X1, Y1 + BoxHeight + arrowHeight);
+                context.lineTo(X1 - arrowWidth, Y1 + BoxHeight + arrowHeight);
+                context.lineTo(X1, Y1 + BoxHeight);
+            }
+
+            context.stroke();
+        }
+    } 
+}
+
+function CompareHoverScopes(s1, s2) {
+    if (!!s1 != !!s2)
+        return false;
+    if (!s1 && !s2)
+        return true;
+    if (s1 && s2 && s1.globIndex == s2.globIndex && s1.nLog == s2.nLog)
+        return true;
+    return false;
+}
+
+function DrawDetailedView(context, MinWidth, bDrawEnabled) {
+    var needToHighlightScope = g_Loader.needToHighlightScope;
+    if (bDrawEnabled) {
+        DrawDetailedBackground(context);
+    }
+
+    function ReplaceTopLevelName(name) {
+        const replacements = new Map([
+            ["Sleep", {
+                name: "\u{1F4A4}",
+                noTime: true,
+                transparent: true,
+            }],
+        ]);
+        if (replacements.has(name)) {
+            return replacements.get(name);
+        }
+        return null;
+    }
+    var transparentTimerIndexes = new Set;
+    const transparentTimerFillAlpha = 0.2;
+    const transparentTimerTextAlpha = 0.3;
+
+    // When a Ctrl+F search filter is active, dim scopes whose timer/group don't match so the
+    // matches stay bright and stand out -- this works off each drawn scope's timer index, so it
+    // highlights matches even in overflow threads that have no aggregated stats to jump to.
+    // Precompute the per-timer dim flags once (only for the full redraws that draw scopes).
+    var searchFilterActive = !!(FilterTimer || FilterGroup);
+    var searchDimmed = null;
+    if (searchFilterActive && bDrawEnabled) {
+        searchDimmed = new Uint8Array(TimerInfo.length);
+        for (var sfi = 0; sfi < TimerInfo.length; ++sfi) {
+            var matchesFilter = SearchFilterMatch(FilterTimer, TimerInfo[sfi].name) &&
+                SearchFilterMatch(FilterGroup, GroupInfo[TimerInfo[sfi].group].name);
+            searchDimmed[sfi] = matchesFilter ? 0 : 1;
+        }
+    }
+
+    var barYOffset = g_Ext.xray.isBarEnabled() ? g_Ext.xray.barYOffset : 0;
+    var fScaleX = nWidth / fDetailedRange;
+    var fOffsetY = -nOffsetY + BoxHeight + barYOffset;
+    nHoverTokenNext = -1;
+    nHoverTokenLogIndexNext = -1;
+    nHoverTokenIndexNext = -1;
+
+    let nHoverColor;
+    const color = 64 * Math.sin(2 * Math.PI * (Date.now() - window.StartTime)/1000 * 0.5) + 127; // 0.5Hz
+    const colorHex = Math.round(color).toString(16);
+    nHoverColor = '#' + colorHex + colorHex + colorHex;
+
+    context.fillStyle = 'black';
+    context.font = Font;
+    var nNumLogs = Frames[0].ts.length;
+    var fTimeEnd = fDetailedOffset + fDetailedRange;
+
+    var FirstFrame = 0;
+    var fLastFrameTimeEnd = fTimeEnd;
+    for (var i = 0; i < Frames.length; i++) {
+        if (Frames[i].frameend < fDetailedOffset) {
+            FirstFrame = i;
+        }
+        if (Frames[i].framestart > fTimeEnd) {
+            fLastFrameTimeEnd = Frames[i].frameend;
+            break;
+        }
+    }
+    
+    var nMinTimeMs = MinWidth / fScaleX;
+    {
+        // The first half is for regular scopes, while the second half is for highlighted TaskScheduler scopes
+        const maxBatches = TimerInfo.length * 2;
+        var BatchesHighlighted = new Array(maxBatches);
+        var Batches = new Array(maxBatches);
+        var BatchesXtra = new Array(maxBatches); // Color intensities for Events
+        var BatchesOrder = new Array(maxBatches); // Fiber enter ids
+        var BatchesDmDimmed = new Array(maxBatches); // DataModel filter: per-scope "grey out" flag
+        var selectedScopeInstanceCount = 0;
+        
+        var BatchesTxt = Array();
+        var BatchesTxtPos = Array();
+        var BatchesTxtColor = ['#ffffff', '#333333', '#ffffff']; // txtidx=2 is for transparent texts
+        if (!ThreadY) {
+            ThreadY = new Array(ThreadNames.length + 1);
+        }
+
+        for (var i = 0; i < BatchesTxtColor.length; ++i) {
+            BatchesTxt[i] = Array();
+            BatchesTxtPos[i] = Array();
+        }
+        for (var i = 0; i < Batches.length; ++i) {
+            Batches[i] = Array();
+            BatchesXtra[i] = Array();
+            BatchesOrder[i] = Array();
+            BatchesHighlighted[i] = Array();
+            BatchesDmDimmed[i] = Array();
+        }
+
+        if (FFlagMicroprofilerPerFrameCpuSpeed)
+        {
+            var coreBarBatch = {};
+        }
+
+        for (nLog = 0; nLog < nNumLogs; nLog++) {
+            var ThreadName = ThreadNames[nLog];
+            ThreadY[nLog] = fOffsetY;
+            if (ThreadsAllActive || ThreadsActive[ThreadName]) {
+                var LodIndex = 0;
+                var MinDelta = 0;
+                var NextLod = 1;
+                while (NextLod < LodData.length && LodData[NextLod].MinDelta[nLog] < nMinTimeMs) {
+                    LodIndex = NextLod;
+                    NextLod = NextLod + 1;
+                    MinDelta = LodData[LodIndex].MinDelta[nLog];
+                }
+                if (LodIndex == LodData.length) {
+                    LodIndex = LodData.length - 1;
+                }
+                if (DisableLod) {
+                    LodIndex = 0;
+                }
+
+                context.fillStyle = 'white';
+                const MaxStackCapped = Math.min(g_MaxStack[nLog], window.MaxStackDepthToVisualize);
+                const IsStackCapped = g_MaxStack[nLog] >= window.MaxStackDepthToVisualize;
+                // Always show the buffer fill "[len/cap]" (when buffer sizes are known), then append a
+                // single "[S1, S2, ...]" group listing every status that applies -- e.g. "[Wraparound]"
+                // or "[EarlyTime, StackLimit]".
+                var status = window.ThreadStatus;
+                if (ThreadBufferSizes && ThreadBufferSizes.length > 0) {
+                    var capacity = ThreadBufferSizes[nLog];
+                    var lastFrame = Frames.length - 1;
+                    var len = Frames[lastFrame].LogEnd[nLog] - Frames[0].LogStart[nLog];
+                    ThreadName += ' [' + len + '/' + capacity + ']';
+                }
+                var statuses = [];
+                if (status && status.hasWraparound[nLog]) statuses.push((status.isMisaligned && status.isMisaligned[nLog]) ? 'Misaligned' : 'Wraparound');
+                if (status && status.isBottleneck[nLog]) statuses.push('LimitsHistory');
+                if (status && status.hasEarlyScopes[nLog]) statuses.push('EarlyTime');
+                if (IsStackCapped) statuses.push('StackLimit/' + g_MaxStack[nLog]);
+                if (statuses.length > 0) {
+                    ThreadName += ' [' + statuses.join(', ') + ']';
+                }
+                // Colour by severity: StackLimit / Wraparound red > LimitsHistory orange > EarlyTime blue.
+                if (IsStackCapped) {
+                    context.fillStyle = 'red';
+                }
+                else if (status && status.hasWraparound[nLog]) {
+                    context.fillStyle = (status.isMisaligned && status.isMisaligned[nLog]) ? THREAD_STATUS_MISALIGNED : THREAD_STATUS_WRAPAROUND;
+                }
+                else if (status && status.isBottleneck[nLog]) {
+                    context.fillStyle = THREAD_STATUS_BOTTLENECK;
+                }
+                else if (status && status.hasEarlyScopes[nLog]) {
+                    context.fillStyle = THREAD_STATUS_EARLY;
+                }
+                fOffsetY += BoxHeight;
+                context.fillText(ThreadName, 0, fOffsetY);
+
+                if (FFlagMicroprofilerPerFrameCpuSpeed && bDrawEnabled && g_Ext.typeLookup[kCpuPluginId].plugin.isVisualizationActive) {
+                    if (!ThreadGpu[nLog]) {
+                        let cpuCoreFreqData = {};
+
+                        for (let frameLoop = FirstFrame; frameLoop < Frames.length; frameLoop++) {
+                            if (Frames[frameLoop].frameend > fLastFrameTimeEnd && fLastFrameTimeEnd > 0)
+                                break;
+
+                            // A frame may contain no core/frequency sample (periodic sampling);
+                            // skip it rather than dereferencing a null cpuCoreFreqData.
+                            if (Frames[frameLoop].cpuCoreFreqData == null)
+                                continue;
+
+                            for (let key in Frames[frameLoop].cpuCoreFreqData.threadNumberToCpuIdMapping[nLog]) {
+                                cpuCoreFreqData[key] = Frames[frameLoop].cpuCoreFreqData.threadNumberToCpuIdMapping[nLog][key];
+                            }
+                        }
+
+                        const keys = Object.keys(cpuCoreFreqData).map(Number).sort((a, b) => a - b);
+                        for (let cpuKey = 0; cpuKey < keys.length; cpuKey++) {
+                            let xBar = Math.floor((keys[cpuKey] - fDetailedOffset) * fScaleX);
+                            let wBar;
+                            if (cpuKey + 1 < keys.length) {
+                                wBar = Math.floor((keys[cpuKey + 1] - keys[cpuKey]) * fScaleX);
+                            } else {
+                                wBar = Math.floor((fTimeEnd - keys[cpuKey]) * fScaleX);
+                            }
+                            let Core = cpuCoreFreqData[keys[cpuKey]];
+                            coreBarBatch[Core] = coreBarBatch[Core] || [];
+                            coreBarBatch[Core].push([xBar, fOffsetY, wBar, (MaxStackCapped+1) * BoxHeight]);
+                        }
+                    }
+                }
+
+                if (nContextSwitchEnabled) {
+                    DrawContextSwitchBars(context, ThreadIds[nLog], fScaleX, fOffsetY, fDetailedOffset, nHoverColor, MinWidth, bDrawEnabled);
+                    fOffsetY += CSwitchHeight + 1;
+                }
+                var MaxDepth = 1;
+                var StackPos = 0;
+                var Stack = Array(20);
+                var HighlightedStack = Array(20);
+                var Lod = LodData[LodIndex];
+
+                var TypeArray = g_TypeArray[nLog];
+                var TimeArray = g_TimeArray[nLog];
+                var IndexArray = g_IndexArray[nLog];
+                var XtraArray = g_XtraArray[nLog];
+                var GlobalArray = Lod.GlobalArray[nLog];
+
+                var LocalFirstFrame = Frames[FirstFrame].FirstFrameIndex[nLog];
+                var IndexStart = Lod.LogStart[LocalFirstFrame][nLog];
+                var IndexEnd = GlobalArray.length;
+
+                for (var j = IndexStart; j < IndexEnd; ++j) {
+                    var glob = GlobalArray[j];
+                    var type = TypeArray[glob];
+                    var index = IndexArray[glob];
+                    var time = TimeArray[glob];
+
+                    if (type == 1) {
+                        Stack[StackPos] = glob;
+
+                        var hl = kHighlightGroupNotMatched;
+                        if (HighlightGroupIndex >= 0) {
+                            if (TimerInfo[index].group == HighlightGroupIndex) {
+                                hl = kHighlightGroupMatched;
+                            } else if (StackPos > 0) {
+                                var parentHl = HighlightedStack[StackPos - 1];
+                                if (parentHl != kHighlightGroupNotMatched) {
+                                    hl = kHighlightGroupMatchedAsChild;
+                                }
+                            }
+                        }
+                        HighlightedStack[StackPos] = hl;
+
+                        StackPos++;
+                        if (StackPos > MaxDepth) {
+                            MaxDepth = StackPos;
+                        }
+                    }
+                    else if (type == 0) {
+                        if (StackPos > 0) {
+                            StackPos--;
+                            var highlightedAttr = HighlightedStack[StackPos];
+                            var globstart = Stack[StackPos];
+                            var xtrastart = XtraArray[globstart];
+                            var timestart = TimeArray[globstart];
+                            var timeend = time;
+                            var X = (timestart - fDetailedOffset) * fScaleX;
+                            var Y = fOffsetY + StackPos * BoxHeight;
+                            var W = (timeend - timestart) * fScaleX;
+
+                            var onScreen = (X < nWidth && X + W > 0);
+                            if (StackPos < window.MaxStackDepthToVisualize && W > MinWidth && (onScreen || needToHighlightScope)) {
+                                const isMaxDepth = (StackPos == window.MaxStackDepthToVisualize - 1);
+
+                                let addToBatch = onScreen;
+                                let batchIndex = index;
+                                if (bDrawEnabled || index == nHoverToken) {
+                                    if (needToHighlightScope && xtrastart.jobInfo && needToHighlightScope.jobInfo.instanceId == xtrastart.jobInfo.instanceId) {
+                                        addToBatch = true;
+                                        selectedScopeInstanceCount++;
+                                        batchIndex = TimerInfo.length + index;
+                                        BatchesOrder[batchIndex].push(xtrastart.jobInfo.enterId);
+                                    }
+                                }
+
+                                if ((bDrawEnabled || index == nHoverToken) && addToBatch) {
+                                    BatchesHighlighted[batchIndex].push(highlightedAttr);
+                                    // DataModel filter: grey out (rather than hide) scopes from non-selected DMs,
+                                    // so child scopes don't float and the timeline keeps no empty holes.
+                                    BatchesDmDimmed[batchIndex].push(gDmFilter.active && gDmFilter.set[getScopeDmId(nLog, timestart)] !== true);
+
+                                    Batches[batchIndex].push(X);
+                                    Batches[batchIndex].push(Y);
+                                    Batches[batchIndex].push(W);
+                                    DebugDrawQuadCount++;
+
+                                    var XText = X < 0 ? 0 : X;
+                                    var WText = W - (XText - X);
+                                    if (XText + WText > nWidth) {
+                                        WText = nWidth - XText;
+                                    }
+                                    var Name = TimerInfo[index].name;
+                                    var BarTextLen = Math.floor((WText - 2) / FontWidth);
+                                    var TimeText = TimeToMsString(timeend - timestart);
+                                    var TimeTextLen = TimeText.length;
+                                    if (isMaxDepth) {
+                                        Name = "(STACK_LIMIT) " + Name;
+                                    }
+
+                                    if (xtrastart && xtrastart.jobInfo) {
+                                        const isFirstEnter = xtrastart.jobInfo.isFirstEnter;
+                                        const isLastEnter = xtrastart.jobInfo.isLastEnter;
+                                        if (!isFirstEnter || !isLastEnter) {
+                                            if (isFirstEnter) {
+                                                Name = "\u25B6 " + Name; // triangle
+                                            } else if (isLastEnter) {
+                                                Name = "\u25A0 " + Name; // square
+                                            } else {
+                                                Name = "\u25CF " + Name; // circle
+                                            }
+                                        }
+                                    }
+
+                                    var txNorm;
+                                    if (g_Ext.xray.isViewEnabled() || g_Ext.xray.isBarEnabled()) {
+                                        var txEntry = xtrastart;
+                                        txNorm = GetNormalizedFromTx(txEntry, false);
+                                        BatchesXtra[batchIndex].push(txNorm);
+                                        if (g_Ext.xray.isViewEnabled() && txNorm.value > 0 && g_Ext.currentPlugin) {
+                                            Name = "(" + g_Ext.currentPlugin.decorate(txNorm.value) + ") " + Name;
+                                        }
+                                    }
+
+                                    if (BarTextLen >= 2) {
+                                        var txtidx = TimerInfo[index].textcolorindex;
+                                        if (g_Ext.xray.isViewEnabled()) {
+                                            // Dark scope = bright text and vise versa
+                                            txtidx = txNorm.isDark ? 0 : 1;
+                                        }
+
+                                        var noTime = false;
+                                        if (StackPos == 0) {
+                                            var repl = ReplaceTopLevelName(Name);
+                                            if (repl) {
+                                                Name = repl.name;
+                                                noTime = repl.noTime;
+                                                if (repl.transparent) {
+                                                    txtidx = 2;
+                                                }
+                                                transparentTimerIndexes.add(index);
+                                            }
+                                        }
+
+                                        if (BarTextLen < Name.length)
+                                            Name = Name.substr(0, BarTextLen);
+
+                                        var YPos = Y + BoxHeight - FontAscent;
+                                        BatchesTxt[txtidx].push(Name);
+                                        BatchesTxtPos[txtidx].push(XText + 2);
+
+                                        BatchesTxtPos[txtidx].push(YPos);
+                                        DebugDrawTextCount++;
+
+                                        if (!noTime && BarTextLen - Name.length > TimeTextLen) {
+                                            BatchesTxt[txtidx].push(TimeText);
+                                            BatchesTxtPos[txtidx].push(XText + WText - 2 - TimeTextLen * FontWidth);
+                                            BatchesTxtPos[txtidx].push(YPos);
+                                            DebugDrawTextCount++;
+                                        }
+
+                                    }
+                                }
+
+                                if (DetailedViewMouseX >= 0 && DetailedViewMouseY >= 0 &&
+                                    DetailedViewMouseX >= X && DetailedViewMouseX <= X + W &&
+                                    DetailedViewMouseY < Y + BoxHeight && DetailedViewMouseY >= Y) {
+                                    RangeCpuNext.Begin = timestart;
+                                    RangeCpuNext.End = timeend;
+                                    RangeCpuNext.Thread = nLog;
+
+                                    if (TypeArray[globstart + 1] == 4 && TypeArray[glob + 1] == 4) {
+                                        RangeGpuNext.Begin = RangeCpuNext.Begin;
+                                        RangeGpuNext.End = RangeCpuNext.End;
+                                        RangeGpuNext.Thread = nLog;
+                                        //cpu tick is stored following
+                                        RangeCpuNext.Begin = TimeArray[globstart + 1];
+                                        RangeCpuNext.End = TimeArray[glob + 1];
+                                        RangeCpuNext.Thread = IndexArray[globstart + 1];
+                                    }
+                                    else {
+                                        RangeGpuNext.Begin = -1;
+                                        RangeGpuNext.End = -1;
+                                    }
+
+                                    if (xtrastart && xtrastart.jobInfo) {
+                                        g_Loader.hoverScope = {
+                                            nLog: nLog,
+                                            globIndex: globstart,
+                                            isScanPerformed: false,
+                                            hasSeveralInstances: false,
+                                            jobInfo: xtrastart.jobInfo,
+                                            timestart: timestart,
+                                            timeend: timeend,
+                                        };
+                                    }
+
+                                    SetHoverToken(index, glob, nLog);
+                                }
+                            }
+
+                            var endTime = needToHighlightScope ? fLastFrameTimeEnd : fTimeEnd;
+                            if (StackPos == 0 && time > endTime)
+                                break;
+                        }
+                    }
+                }
+                fOffsetY += (1 + MaxStackCapped) * BoxHeight;
+            }
+            ThreadY[nLog + 1] = fOffsetY;
+        }
+
+        if (bDrawEnabled) {
+            DrawAuxHints(context, fOffsetY);
+        }
+
+        if (FFlagMicroprofilerPerFrameCpuSpeed && bDrawEnabled)
+        {
+            function sortCoreBarBatch(coreBarBatch, Core) {
+                if (coreBarBatch[Core]) {
+                    coreBarBatch[Core].sort((a, b) => a[0] - b[0]);
+                }
+            }    
+
+            for (let core in coreBarBatch) {
+                sortCoreBarBatch(coreBarBatch, core);
+                context.fillStyle = hexToRGB(CCoreColors[core % CCoreColors.length], 0.7);
+                for (let i = 0; i < coreBarBatch[core].length; i++) {
+                    const [x, y, width, height] = coreBarBatch[core][i];
+                    context.fillRect(x, y, width, height);
+                }
+            }
+        }
+
+        if (nContextSwitchEnabled) //non instrumented threads.
+        {
+            var CurrentPid = -112;
+            var ContextSwitchThreads = CSwitchOnlyThreads;
+            function DrawHeader(str, X, Y) {
+                var width = str.length * FontWidth;
+                context.globalAlpha = 0.5;
+                context.fillStyle = 'grey';
+                context.fillRect(X, Y - FontHeight + 2, width, FontHeight);
+                context.globalAlpha = 1.0;
+                context.fillStyle = 'white';
+                context.fillText(str, X, Y);
+
+
+            }
+            for (var i = 0; i < ContextSwitchThreads.length; ++i) {
+                var ThreadId = ContextSwitchThreads[i];
+                var ThreadName = '' + ThreadId;
+                var TI = CSwitchThreads[ThreadId];
+
+                if (TI) {
+                    if (CurrentPid != TI.pid) {
+                        fOffsetY += BoxHeight + 1;
+                        CurrentPid = TI.pid;
+                        var str = TI.pid.toString(16) + ':' + TI.p;
+                        DrawHeader(str, 0, fOffsetY + 5);
+                        fOffsetY += BoxHeight + 1;
+                    }
+                }
+
+                DrawContextSwitchBars(context, ThreadId, fScaleX, fOffsetY, fDetailedOffset, nHoverColor, MinWidth, bDrawEnabled);
+
+                if (TI) {
+                    DrawHeader(TI.tid.toString(16) + ':' + TI.t, 10, fOffsetY + 5);
+                }
+                fOffsetY += BoxHeight + 1;
+            }
+        }
+
+        var hasHoverColors = false;
+        {
+            var hasSelectedScopeInstances = selectedScopeInstanceCount > 0;
+            var hasSeveralSelectedScopeInstances = selectedScopeInstanceCount > 1;
+
+            if (needToHighlightScope && g_Loader.hoverScope &&
+                needToHighlightScope.globIndex == g_Loader.hoverScope.globIndex &&
+                needToHighlightScope.nLog == g_Loader.hoverScope.nLog) {
+                g_Loader.hoverScope.isScanPerformed = true;
+                g_Loader.hoverScope.hasSeveralInstances = hasSeveralSelectedScopeInstances;
+            }
+
+            for (var i = 0; i < Batches.length; ++i) {
+                var isSelectedScope = (i >= TimerInfo.length);
+                var timerIndex = i % TimerInfo.length;
+                var isTransparentScope = transparentTimerIndexes.has(timerIndex);
+                var filterDim = searchDimmed ? searchDimmed[timerIndex] : 0;
+                if (!bDrawEnabled && isTransparentScope)
+                    continue;
+
+                var setHoverColor = false;
+                if (hasSelectedScopeInstances) {
+                    if (!hasSeveralSelectedScopeInstances && isSelectedScope && needToHighlightScope && g_Loader.hoverScope &&
+                        needToHighlightScope.jobInfo.instanceId == g_Loader.hoverScope.jobInfo.instanceId) {
+                        setHoverColor = true;
+                        hasHoverColors = true;
+                    }
+                } else if (timerIndex == nHoverToken && !isTransparentScope) {
+                    setHoverColor = true;
+                    hasHoverColors = true;
+                }
+                if (!bDrawEnabled && !setHoverColor)
+                    continue;
+
+                var origColor = setHoverColor ? nHoverColor : TimerInfo[timerIndex].color;
+                var a = Batches[i];
+                if (a.length) {
+                    if (hasSeveralSelectedScopeInstances && isSelectedScope) {
+                        var sortedScopes = SortScopeTimes(BatchesOrder[i], needToHighlightScope.jobInfo.enterId);
+                        var ids = sortedScopes.ids;
+                        DrawConnectedScopeLines(context, BatchesOrder[i], ids, a);
+                    }
+
+                    if (!DisableMerge) {
+                        for (var j = 0; j < a.length; j += 3) {
+                            var X = a[j];
+                            var Y = a[j + 1];
+                            var BaseWidth = j + 2;
+                            var W = a[BaseWidth];
+                            while (j + 1 < a.length && W < 1) {
+                                var jnext = j + 3;
+                                var XNext = a[jnext];
+                                var YNext = a[jnext + 1];
+                                var WNext = a[jnext + 2];
+                                var Delta = XNext - (X + W);
+                                var YDelta = Math.abs(Y - YNext);
+                                if (Delta < 0.3 && YDelta < 0.5 && WNext < 1) {
+                                    W = (XNext + WNext) - X;
+                                    a[BaseWidth] = W;
+                                    a[jnext + 2] = 0;
+                                    j += 3;
+                                }
+                                else {
+                                    break;
+                                }
+
+                            }
+                        }
+                    }
+
+                    var off = 0.7;
+                    var off2 = 2 * off;
+                    var outlineColor = TimerInfo[timerIndex].colordark;
+                    context.fillStyle = outlineColor;
+                    for (var j = 0; j < a.length; j += 3) {
+                        var colorChanged = false;
+                        if (HighlightGroupIndex >= 0) {
+                            if (BatchesHighlighted[i][j / 3] == kHighlightGroupNotMatched) {
+                                context.fillStyle = rgbToDesaturated(outlineColor, 1.0);
+                            }
+                            if (BatchesHighlighted[i][j / 3] == kHighlightGroupMatched) {
+                                context.fillStyle = '#ffff00';
+                            }
+                            colorChanged = true;
+                        }
+                        if (gDmFilter.active && BatchesDmDimmed[i][j / 3]) {
+                            context.fillStyle = rgbToDesaturated(outlineColor, 1.0);
+                            colorChanged = true;
+                        }
+                        if (filterDim) {
+                            context.fillStyle = rgbToDesaturated(outlineColor, 1.0);
+                            colorChanged = true;
+                        }
+                        var X = a[j];
+                        var Y = a[j + 1];
+                        var W = a[j + 2];
+                        if (W >= 1) {
+                            if (!isTransparentScope) {
+                                context.fillRect(X, Y, W, BoxHeight - 1);
+                            }
+                        }
+
+                        if (colorChanged) {
+                            context.fillStyle = outlineColor;
+                        }
+                    }
+
+                    context.fillStyle = origColor;
+                    for (var j = 0; j < a.length; j += 3) {
+                        var X = a[j];
+                        var Y = a[j + 1];
+                        var W = a[j + 2];
+
+                        var colorChanged = false;
+                        if (HighlightGroupIndex >= 0) {
+                            if (BatchesHighlighted[i][j / 3] == kHighlightGroupNotMatched) {
+                                context.fillStyle = rgbToDesaturated(origColor, 1.0);
+                                colorChanged = true;
+                            }
+                            if (BatchesHighlighted[i][j / 3] == kHighlightGroupMatchedAsChild) {
+                                context.fillStyle = rgbToDesaturated(origColor, 0.3);
+                                colorChanged = true;
+                            }
+                        }
+
+                        if (hasSeveralSelectedScopeInstances && !isSelectedScope) {
+                            context.fillStyle = rgbToDesaturated(origColor, 1);
+                            colorChanged = true;
+                        }
+
+                        if (gDmFilter.active && BatchesDmDimmed[i][j / 3]) {
+                            context.fillStyle = rgbToDesaturated(origColor, 1.0);
+                            colorChanged = true;
+                        }
+
+                        if (filterDim) {
+                            context.fillStyle = rgbToDesaturated(origColor, 1.0);
+                            colorChanged = true;
+                        }
+
+                        if (isTransparentScope) {
+                            context.globalAlpha = transparentTimerFillAlpha;
+                        }
+
+                        if (g_Ext.xray.isViewEnabled()) {
+                            var txNorm = BatchesXtra[i][j / 3];
+                            context.fillStyle = txNorm.color;
+                            colorChanged = true;
+                        }
+                        if (W > 0) {
+                            context.fillRect(X + off, Y + off, W - off2, BoxHeight - 1 - off2);
+                        }
+
+                        if (isTransparentScope) {
+                            context.globalAlpha = 1;
+                        }
+
+                        if (g_Ext.xray.isViewEnabled() || g_Ext.xray.isBarEnabled()) {
+                            var txNorm = BatchesXtra[i][j / 3];
+                            // Top bar for the detailed view
+                            if (g_Ext.xray.isBarEnabled() && (W > 0)) {
+                                var thresholds = g_Ext.xray.calculatedLimits.barThresholds;
+                                var barIntensityCoef = (g_Ext.xray.mode == XRayModes.Count) ? thresholds.count : thresholds.sum;
+                                const grad255 = Math.floor(txNorm.grad255 * (1 - barIntensityCoef / 100));
+                                const color = Grad255ToColor(grad255);
+                                context.globalCompositeOperation = "lighter";
+                                context.fillStyle = color;
+                                context.fillRect(X + off, off, W - off2, BoxHeight - 1 - off2);
+                                context.globalCompositeOperation = "source-over";
+                                colorChanged = true;
+                            }
+                            // Small scopes highlighting
+                            var smallScopes = g_Ext.xray.smallScopesHighlighting;
+                            if (g_Ext.xray.isViewEnabled() && (W > 0) && (txNorm.grad01 > smallScopes.thresholdIntensity) && (W - off2 < smallScopes.thresholdWidth)) {
+                                const extender = 3;
+                                context.globalCompositeOperation = "lighter";
+                                context.fillStyle = GradToColor(smallScopes.extraIntensity);
+                                context.fillRect(X + off - extender, Y + off - 0, W - off2 + extender * 2, BoxHeight - 1 - off2 + 0 * 2);
+                                context.globalCompositeOperation = "source-over";
+                                colorChanged = true;
+                            }
+                        } // xray.viewEnabled
+
+                        if (colorChanged) {
+                            context.fillStyle = origColor;
+                        }
+                    } // j
+                } // if (Batches[i].length)
+            }
+        }
+
+        if (!bDrawEnabled && !hasHoverColors)
+            return;
+
+        for (var i = 0; i < BatchesTxt.length; ++i) {
+            var isTransparent = (i >= 2);
+            if (!bDrawEnabled && isTransparent)
+                continue;
+            if (isTransparent) {
+                context.globalAlpha = transparentTimerTextAlpha;
+            }
+            context.fillStyle = BatchesTxtColor[i];
+            var TxtArray = BatchesTxt[i];
+            var PosArray = BatchesTxtPos[i];
+            for (var j = 0; j < TxtArray.length; ++j) {
+                var k = j * 2;
+                context.fillText(TxtArray[j], PosArray[k], PosArray[k + 1]);
+            }
+            if (isTransparent) {
+                context.globalAlpha = 1;
+            }
+        }
+
+    }
+}
+function DrawTextBox(context, text, x, y, align, bgColor) {
+    var textsize = context.measureText(text).width;
+    var offsetx = 0;
+    var offsety = -FontHeight;
+    if (align == 'center') {
+        offsetx = -textsize / 2.0;
+    }
+    else if (align == 'right') {
+        offsetx = -textsize;
+    }
+    context.fillStyle = (bgColor != undefined) ? bgColor : nBackColors[0];
+    context.fillRect(x + offsetx, y + offsety, textsize + 2, FontHeight + 2);
+    context.fillStyle = 'white';
+    context.fillText(text, x, y);
+
+}
+function DrawRange(context, Range, ColorBack, ColorFront, Name, IsSimplified) {
+    var fBegin = Range.Begin;
+    var fEnd = Range.End;
+    var OffsetTop = Range.YBegin;
+    var OffsetBottom = Range.YEnd;
+    if (fBegin < fEnd) {
+        var MarginTop = 0.5 * FontHeight;
+        var MarginBottom = nHeight - 1.5 * FontHeight;
+        if (OffsetTop < MarginTop)
+            OffsetTop = MarginTop;
+        if (OffsetBottom > MarginBottom)
+            OffsetBottom = MarginBottom;
+        var fRulerOffset = FontHeight * 0.5;
+        var fScaleX = nWidth / fDetailedRange;
+        var X = (fBegin - fDetailedOffset) * fScaleX;
+        var YSpace = (FontHeight + 2);
+        var Y = OffsetTop;
+        var YBottom = OffsetBottom;
+        var W = (fEnd - fBegin) * fScaleX;
+        context.globalAlpha = 0.1;
+        context.fillStyle = ColorBack;
+        context.fillRect(X, OffsetTop + fRulerOffset, W, OffsetBottom - OffsetTop);
+        context.globalAlpha = 1;
+
+        var Duration = FormatDuration(fEnd - fBegin, 2);
+        var Center = ((fBegin + fEnd) / 2.0) - fDetailedOffset;
+        var DurationWidth = context.measureText(Duration + "   ").width;
+        if (IsSimplified) {
+            context.textAlign = 'center';
+            DrawTextBox(context, Duration, Center * fScaleX, Y + YSpace, 'center');
+            context.textAlign = 'left';
+            return 1;
+        }
+        
+        context.strokeStyle = ColorFront;
+        context.beginPath();
+        context.moveTo(X, 0);
+        context.lineTo(X, nHeight);
+        context.moveTo(X + W, 0);
+        context.lineTo(X + W, nHeight);
+        context.stroke();
+
+        context.fillStyle = 'white';
+        context.textAlign = 'right';
+        var TextPosY = Y + YSpace;
+        DrawTextBox(context, fBegin.toFixed(2), X - 3, TextPosY, 'right');
+        var YS = [Y, YBottom];
+        for (var i = 0; i < YS.length; ++i) {
+            var Y = YS[i];
+            var Y0 = Y + fRulerOffset;
+            var W0 = W - DurationWidth + FontWidth * 1.5;
+            if (W0 > 6) {
+                context.textAlign = 'center';
+                DrawTextBox(context, Duration, Center * fScaleX, Y + YSpace, 'center');
+                W0 = W0 / 2.0;
+                var X0 = X + W0;
+                var X1 = X + W - W0;
+                context.strokeStyle = ColorFront;
+                context.beginPath();
+                context.moveTo(X, Y0);
+                context.lineTo(X0, Y0);
+                context.moveTo(X0, Y0 - 2);
+                context.lineTo(X0, Y0 + 2);
+                context.moveTo(X1, Y0 - 2);
+                context.lineTo(X1, Y0 + 2);
+                context.moveTo(X1, Y0);
+                context.lineTo(X + W, Y0);
+                context.stroke();
+            }
+            else {
+                if (i == 1) {
+                    context.textAlign = 'right';
+                    DrawTextBox(context, Duration, X - 3, Y0, 'right');
+                    context.textAlign = 'left';
+                    DrawTextBox(context, Duration, X + W + 2, Y0, 'left');
+                }
+                context.strokeStyle = ColorFront;
+                context.beginPath();
+                context.moveTo(X, Y0);
+                context.lineTo(X + W, Y0);
+                context.stroke();
+            }
+        }
+        context.textAlign = 'left';
+        DrawTextBox(context, fEnd.toFixed(2), X + W + 2, TextPosY, 'left');
+        DrawTextBox(context, Name, X + W + 2, OffsetTop + YSpace + FontHeight, 'left');
+    }
+    return 1;
+}
+
+function DrawDetailed(Animation) {
+    if (AnimationActive != Animation || !Initialized) {
+        return;
+    }
+    ProfileEnter("DrawDetailed");
+    DebugDrawQuadCount = 0;
+    DebugDrawTextCount = 0;
+    nHoverCSCpuNext = -1;
+
+    RangeCpuNext = RangeInit();
+    RangeGpuNext = RangeInit();
+    RangeGpu = RangeInit();
+
+    nDrawCount++;
+
+    var context = CanvasDetailedView.getContext('2d');
+    var offscreen = CanvasDetailedOffscreen.getContext('2d');
+    var fScaleX = nWidth / fDetailedRange;
+    var fOffsetY = -nOffsetY + BoxHeight;
+
+    if (DetailedRedrawState.fOffsetY == fOffsetY && DetailedRedrawState.fDetailedOffset == fDetailedOffset && DetailedRedrawState.fDetailedRange == fDetailedRange && !KeyCtrlDown && !KeyShiftDown && !MouseDragButton) {
+        Invalidate++;
+    }
+    else {
+        Invalidate = 0;
+        DetailedRedrawState.fOffsetY = fOffsetY;
+        DetailedRedrawState.fDetailedOffset = fDetailedOffset;
+        DetailedRedrawState.fDetailedRange = fDetailedRange;
+    }
+    if (nHoverTokenDrawn != nHoverToken) {
+        Invalidate = 1;
+    }
+    nHoverTokenDrawn = nHoverToken;
+
+    if (!CompareHoverScopes(g_Loader.hoverScope, g_Loader.prevHoverScope)) {
+        Invalidate = 1;
+    }
+    g_Loader.needToHighlightScope = g_Loader.lockScope ? g_Loader.lockScope : g_Loader.hoverScope;
+    g_Loader.prevHoverScope = g_Loader.hoverScope;
+    g_Loader.hoverScope = null;
+
+    if (Invalidate == 0) //when panning, only draw bars that are a certain width to keep decent framerate
+    {
+        context.clearRect(0, 0, CanvasDetailedView.width, CanvasDetailedView.height);
+        DrawDetailedView(context, nMinWidthPan, true);
+        ProfileRedraw0++;
+    }
+    else if (Invalidate == 1) //draw full and store
+    {
+        offscreen.clearRect(0, 0, CanvasDetailedView.width, CanvasDetailedView.height);
+        DrawDetailedView(offscreen, nMinWidth, true);
+        OffscreenData = offscreen.getImageData(0, 0, CanvasDetailedOffscreen.width, CanvasDetailedOffscreen.height);
+        ProfileRedraw1++;
+    }
+    else//reuse stored result untill next time viewport is changed.
+    {
+        context.clearRect(0, 0, CanvasDetailedView.width, CanvasDetailedView.height);
+        context.putImageData(OffscreenData, 0, 0);
+        DrawDetailedView(context, nMinWidth, false);
+        ProfileRedraw2++;
+    }
+
+    if (KeyShiftDown || KeyCtrlDown || MouseDragButton || MouseDragSelectRange() || ZoomActive) {
+        nHoverToken = -1;
+        nHoverTokenIndex = -1;
+        nHoverTokenLogIndex = -1;
+        RangeCpu = RangeInit();
+        RangeGpu = RangeInit();
+    }
+    else {
+        nHoverToken = nHoverTokenNext;
+        nHoverTokenIndex = nHoverTokenIndexNext;
+        nHoverTokenLogIndex = nHoverTokenLogIndexNext;
+        if (RangeValid(RangeCpuHistory)) {
+            RangeCopy(RangeCpu, RangeCpuHistory);
+            RangeCopy(RangeGpu, RangeGpuHistory);
+        }
+        else {
+            RangeCopy(RangeCpu, RangeCpuNext);
+            RangeCopy(RangeGpu, RangeGpuNext);
+        }
+        
+        if (nHoverToken >= 0) {
+            var timer = TimerInfo[nHoverToken];
+            if (GroupInfo[timer.group].isgpu) {
+                RangeCpu = RangeInit();
+            }
+        }
+    }
+
+    var barYOffset = g_Ext.xray.isBarEnabled() ? g_Ext.xray.barYOffset : 0;
+    DrawTextBox(context, TimeToMsString(fDetailedOffset), 0, FontHeight + barYOffset, 'left');
+    context.textAlign = 'right';
+    DrawTextBox(context, TimeToMsString(fDetailedOffset + fDetailedRange), nWidth, FontHeight + barYOffset, 'right');
+    if (g_Ext.xray.isBarEnabled() && g_Ext.currentPlugin) {
+        // Top bar text
+        var eventNames = [];
+        g_Ext.typeLookup.forEach(function (entry) {
+            if (entry.IsActive() && !entry.isBackground) {
+                entry.subSelections.forEach(function (sel, i) {
+                    if (sel) {
+                        eventNames.push(entry.subnames[i]);
+                    }
+                });
+            }
+        });
+        var eventNamesJoin = eventNames.join('|');
+        var actionSign = (g_Ext.xray.mode == XRayModes.Count) ? "#" : "\u2211";
+        var barText = g_Ext.currentPlugin.category + "[" + eventNamesJoin + "]" + actionSign;
+        DrawTextBox(context, barText, nWidth, FontHeight, 'right', '#000000');
+    }
+    context.textAlign = 'left';
+
+    var YBegin = ThreadY[fRangeThreadIdNext];
+    var YEnd = ThreadY[fRangeThreadIdNext + 1];
+    var YBeginGpu = YBegin;
+    var YEndGpu = YEnd;
+    function RangeSet(R) {
+        if (R.Thread >= 0) {
+            R.YBegin = ThreadY[R.Thread];
+            R.YEnd = ThreadY[R.Thread + 1];
+        }
+        else {
+            R.YBegin = 0;
+            R.YEnd = nHeight;
+        }
+    }
+    RangeSet(RangeSelect);
+    RangeSet(RangeCpu);
+    RangeSet(RangeGpu);
+
+    var Offset = 0;
+    // Spans in the detailed view
+    for (const spanName in g_Ext.spans) {
+        g_Ext.spans[spanName].forEach(function (span) {
+            var spanRange = RangeInit();
+            spanRange.Begin = span.tsBegin;
+            spanRange.End = span.tsEnd;
+            RangeSet(spanRange);
+            Offset = DrawRange(context, spanRange, span.colorBg, span.colorLine, span.name);
+        });
+    }
+
+    Offset = DrawRange(context, RangeSelect, '#59d0ff', '#00ddff', "Selection");
+
+    var IsSimplifiedCpuRange = (g_Loader.hoverScope != null);
+    Offset = DrawRange(context, RangeCpu, '#009900', '#00ff00', "Cpu", IsSimplifiedCpuRange);
+    Offset = DrawRange(context, RangeGpu, '#996600', '#775500', "Gpu");
+
+    DrawSelectionSummary(context);
+
+    nHoverCSCpu = nHoverCSCpuNext;
+    ProfileLeave();
+}
+function ZoomToHighlight(NoGpu) {
+    // In XRay mode, display events on scope click instead of zooming in
+    if (g_Ext.xray.isViewEnabled() && g_Ext.currentPlugin && g_Ext.currentPlugin.display &&
+        NoGpu == undefined && nHoverToken != -1) {
+        ShowEvents(true);
+        return;
+    }
+    if (RangeValid(RangeGpu) && !NoGpu) {
+        ZoomTo(RangeGpu.Begin, RangeGpu.End);
+    }
+    else if (RangeValid(RangeCpu)) {
+        ZoomTo(RangeCpu.Begin, RangeCpu.End);
+    }
+    RangeCpu = RangeInit();
+    RangeGpu = RangeInit();
+}
+
+function MoveToNext(direction) { //1 forward, -1 backwards
+    // next and previous scope instance determined by start time of the scope
+    direction = direction > 0 ? 1 : -1; // just in case, since this is used in math later
+    const forward = direction === 1;
+    const start = (arr) => forward ? 0 : (arr.length - 1);
+    let fTimeBegin, nSelectedIndex;
+    const numLogs = Frames[0].ts.length;
+
+    // While a Ctrl+F search filter is active, a stray mouse hover must not hijack next/prev
+    // navigation. Honor the search selection (set when a match is chosen) so navigation stays
+    // on the searched scope; outside search, hover still acts as the implicit selection.
+    const preferSelection = IsFilterActive() && RangeValid(RangeSelect) && RangeSelect.Index >= 0;
+    if (!preferSelection && nHoverToken !== -1 && nHoverTokenLogIndex !== -1) {
+        fTimeBegin = RangeCpu.Begin;
+        nSelectedIndex = nHoverToken;
+    } else if (RangeValid(RangeSelect)) {
+        fTimeBegin = RangeSelect.Begin;
+        nSelectedIndex = RangeSelect.Index;
+    } else {
+        return;
+    }
+    if (nLog < 0) {
+        return;
+    }
+
+    // seek to the frame of selected log entry
+    let nFrame;
+    for (nFrame = start(Frames); nFrame in Frames; nFrame += direction) { // each frame
+        const frame = Frames[nFrame];
+        if (frame.framestart <= fTimeBegin && fTimeBegin <= frame.frameend)
+            break;
+    }
+    if (!(nFrame in Frames))
+        return; // can't find current entry for some reason, bail out
+
+    // seek just past the start timestamp in each log
+    let xx = new Array(numLogs);
+    for (let i = 0; i < numLogs; ++i) { // each log
+        const ts = Frames[nFrame].ts[i];
+        const tt = Frames[nFrame].tt[i];
+        let j;
+        for (j = start(ts); j in ts; j += direction) { // each log entry (timestamp)
+            if (tt[j] === 0 || tt[j] === 1) { // begin or end scope, so that ts[j] is valid
+                if (forward && ts[j] > fTimeBegin)
+                    break;
+                if (!forward && ts[j] < fTimeBegin)
+                    break;
+            }
+        }
+        xx[i] = j; // either a candidate or out of range
+    }
+
+    // find next instance of selected index in each thread
+    let found = false;
+    for (; !found && nFrame in Frames; nFrame += direction) { // each frame
+        for (let i = 0; i < numLogs; ++i) { // each log
+            const ti = Frames[nFrame].ti[i];
+            const tt = Frames[nFrame].tt[i];
+            let j;
+            for (j = xx[i]; j in ti; j += direction) { // each log entry (timer index)
+                if (ti[j] === nSelectedIndex && tt[j] === 1) {
+                    found = true;
+                    break;
+                }
+            }
+            xx[i] = j; // either a candidate or out of range
+        }
+        if (!found && nFrame + direction in Frames)
+            xx = Frames[nFrame + direction].ti.map(start);
+    }
+    if (!found)
+        return; // no next log entry exists, bail out
+    nFrame -= direction; // back up to the frame with the found instance
+
+    // compare across threads to find the earliest match
+    const frame = Frames[nFrame];
+    let best = {time: forward ? Number.MAX_VALUE : Number.MIN_VALUE, nLog: -1, xx: -1};
+    for (let i = 0; i < numLogs; ++i) { // each log
+        const ts = frame.ts[i];
+        const ti = frame.ti[i];
+        if (xx[i] in ti) { // not out of range => is candidate
+            if (forward && ts[xx[i]] < best.time || !forward && ts[xx[i]] > best.time) // new best
+                best = {time: ts[xx[i]], nLog: i, xx: xx[i]};
+        }
+    }
+
+    RangeSelect.Begin = best.time;
+    RangeSelect.End = frame.frameend;
+    RangeSelect.Thread = best.nLog;
+    RangeSelect.Index = nSelectedIndex;
+    // need end time to finish updating RangeSelect (if it exists, else keep frameend)
+    const ts = frame.ts[best.nLog];
+    const ti = frame.ti[best.nLog];
+    const tt = frame.tt[best.nLog];
+    let subScopes = 0;
+    for (let i = best.xx + 1; i < ti.length; ++i) { // each log entry (timer index)
+        if (ti[i] === nSelectedIndex) {
+            const type = tt[i];
+            if (type === 1) { // enter subscope
+                ++subScopes;
+            } else if (type === 0 && subScopes > 0) { // leave subscope
+                --subScopes;
+            } else if (type === 0) { // leave target scope
+                RangeSelect.End = ts[i];
+                break;
+            }
+        }
+    }
+
+    MoveTo(
+        RangeSelect.Begin,
+        RangeSelect.End,
+        ThreadY[RangeSelect.Thread] + nOffsetY,
+        ThreadY[RangeSelect.Thread + 1] + nOffsetY,
+    );
+}
+
+function MoveTo(fMoveBegin, fMoveEnd, YTop, YBottom) {
+    var nOffsetYBottom = YBottom - nHeight;
+    var nOffsetYDest = nOffsetY;
+    if (nOffsetYDest < nOffsetYBottom) {
+        nOffsetYDest = nOffsetYBottom;
+    }
+    if (nOffsetYDest > YTop) {
+        nOffsetYDest = YTop;
+    }
+    var fRange = fDetailedRange;
+    var fMinRange = (fMoveEnd - fMoveBegin) * 2.0;
+    if (fRange < fMinRange) {
+        fRange = fMinRange;
+    }
+    var fMoveCenter = (fMoveBegin + fMoveEnd) * 0.5;
+    fMoveBegin = fMoveCenter - 0.5 * fRange;
+    fMoveEnd = fMoveCenter + 0.5 * fRange;
+    var nOffset;
+    if (nOffsetYDest != nOffsetY)
+        nOffset = nOffsetYDest;
+    ZoomTo(fMoveBegin, fMoveEnd, nOffsetYDest, -1);
+}
+function ZoomTo(fZoomBegin, fZoomEnd, OffsetYDest, ZoomTime) {
+    if (fZoomBegin < fZoomEnd) {
+        AnimationActive = true;
+        var fDetailedOffsetOriginal = fDetailedOffset;
+        var fDetailedRangeOriginal = fDetailedRange;
+        var fDetailedOffsetTarget = fZoomBegin;
+        var fDetailedRangeTarget = fZoomEnd - fZoomBegin;
+        var OffsetYOriginal = nOffsetY;
+        var OffsetYTarget = OffsetYDest;
+        var TimestampStart = new Date();
+        var count = 0;
+        if (!ZoomTime) {
+            ZoomTime = ZOOM_TIME;
+        }
+
+        function ZoomFunc(Timestamp) {
+            ZoomActive = 1;
+            var fPrc = (new Date() - TimestampStart) / (ZoomTime * 1000.0);
+            if (fPrc > 1.0 || ZoomTime < 0.01) {
+                fPrc = 1.0;
+            }
+            fPrc = Math.pow(fPrc, 0.3);
+            fDetailedOffset = fDetailedOffsetOriginal + (fDetailedOffsetTarget - fDetailedOffsetOriginal) * fPrc;
+            fDetailedRange = fDetailedRangeOriginal + (fDetailedRangeTarget - fDetailedRangeOriginal) * fPrc;
+            if (OffsetYDest) {
+                nOffsetY = OffsetYOriginal + (OffsetYTarget - OffsetYOriginal) * fPrc;
+            }
+            DrawDetailed(true);
+            // Keep the top frame-history viewport marker in sync with the animated view.
+            // AutoRedraw suppresses the normal Draw() (hence this redraw) while Ctrl is held,
+            // so keyboard navigation (Ctrl + Left/Right) would otherwise leave the marker
+            // stuck on the previous frame even though the detailed view has scrolled.
+            DrawDetailedFrameHistory();
+            if (fPrc >= 1.0) {
+                AnimationActive = false;
+                fDetailedOffset = fDetailedOffsetTarget;
+                fDetailedRange = fDetailedRangeTarget;
+                if (OffsetYDest) {
+                    nOffsetY = OffsetYTarget;
+                }
+            }
+            else {
+                requestAnimationFrame(ZoomFunc);
+            }
+        }
+        requestAnimationFrame(ZoomFunc);
+    }
+}
+function RequestRedraw() {
+    Invalidate = 0;
+    Draw(1);
+}
+
+function Draw(RedrawMode) {
+    if (!g_Loader.pageReady)
+        return;
+
+    if (ProfileMode) {
+        ProfileModeClear();
+        ProfileEnter("Total");
+    }
+    if (RedrawMode == 1) {
+        if (Mode == ModeTimers) {
+            DrawBarView();
+            DrawHoverToolTip();
+        }
+        else if (Mode == ModeDetailed) {
+            DrawDetailed(false);
+            DrawHoverToolTip();
+        }
+        else if (Mode == ModeCounters) {
+            DrawCounterView();
+            DrawHoverToolTip();
+        }
+    }
+    DrawDetailedFrameHistory();
+
+    if (g_Ext.currentPlugin && g_Ext.currentPlugin.DrawPluginFrameHistory) {
+        g_Ext.currentPlugin.DrawPluginFrameHistory();
+    }
+
+    if (ProfileMode) {
+        ProfileLeave();
+        ProfileModeDraw(CanvasDetailedView);
+    }
+}
+
+function AutoRedraw(Timestamp) {
+    var RedrawMode = 0;
+    if (Mode == ModeDetailed) {
+        if (ProfileMode == 2 || ((nHoverCSCpu >= 0 || nHoverToken != -1) && !KeyCtrlDown && !KeyShiftDown && !MouseDragButton) || (Invalidate < 2 && !KeyCtrlDown && !KeyShiftDown && !MouseDragButton)) {
+            RedrawMode = 1;
+        }
+    }
+    else {
+        if (Invalidate < 1) {
+            RedrawMode = 1;
+        }
+    }
+    if (RedrawMode) {
+        Draw(RedrawMode);
+    }
+    else if (FlashFrameCounter > 0) {
+        Draw(0);
+    }
+
+    // Short animations, delayed transitions
+    var needRedraw = false;
+    var curTime = new Date;
+    if (g_Loader.lastAutoRedrawTime > 0) {
+        var frameDeltaTime = curTime - g_Loader.lastAutoRedrawTime;
+
+        // Help hint fade-out
+        if (g_Loader.hasUserInteracted) {
+            if (window.HelpTooltipShowTime > 0) {
+                window.HelpTooltipShowTime -= frameDeltaTime;
+                needRedraw = true;
+            }
+        }
+
+        if (g_Loader.mouseOnDetailedBarStartTime != null) {
+            if (IsMouseOnXRayDetailedBar(true)) {
+                // X-Ray detailed bar hiding
+                if (!g_Loader.barDetailedTooltipBlocked) {
+                    g_Loader.mouseOnDetailedBarCounter = g_Loader.mouseOnDetailedBarCounter ? g_Loader.mouseOnDetailedBarCounter : 0;
+                    g_Loader.mouseOnDetailedBarCounter += frameDeltaTime;
+                    const hideAfterLastShownMs = 1200;
+                    const hideAfterTotalShownMs = 8000;
+                    if (curTime - g_Loader.mouseOnDetailedBarStartTime >= hideAfterLastShownMs && g_Loader.mouseOnDetailedBarCounter >= hideAfterTotalShownMs) {
+                        g_Loader.barDetailedTooltipBlocked = true;
+                        needRedraw = true;
+                    }
+                }
+                // Temporal enabling of X-Ray view
+                const xrayDetailedTooltipDelayMs = 140;
+                if (!g_Ext.xray.viewEnabledForced && curTime - g_Loader.mouseOnDetailedBarStartTime >= xrayDetailedTooltipDelayMs) {
+                    g_Ext.xray.viewEnabledForced = true;
+                    AdjustXRayStyle();
+                    needRedraw = true;
+                }
+            } else {
+                // Disabling the temporarily enabled X-Ray view
+                g_Loader.mouseOnDetailedBarStartTime = null;
+                if (g_Ext.xray.viewEnabledForced) {
+                    g_Ext.xray.viewEnabledForced = false;
+                    AdjustXRayStyle();
+                    needRedraw = true;
+                }
+            }
+        }
+    }
+    g_Loader.lastAutoRedrawTime = curTime;
+    
+    if (needRedraw)
+        RequestRedraw();
+    
+    requestAnimationFrame(AutoRedraw);
+}
+
+
+function ZoomGraph(nZoom) {
+    var fOldRange = fDetailedRange;
+    if (nZoom > 0) {
+        fDetailedRange *= Math.pow(nModDown ? 1.40 : 1.03, nZoom);
+    }
+    else {
+        var fNewDetailedRange = fDetailedRange / Math.pow((nModDown ? 1.40 : 1.03), -nZoom);
+        if (fNewDetailedRange < 0.0001) //100ns
+            fNewDetailedRange = 0.0001;
+        fDetailedRange = fNewDetailedRange;
+    }
+
+    var fDiff = fOldRange - fDetailedRange;
+    var fMousePrc = DetailedViewMouseX / nWidth;
+    if (fMousePrc < 0) {
+        fMousePrc = 0;
+    }
+    fDetailedOffset += fDiff * fMousePrc;
+
+    g_Loader.hasUserInteracted = true;
+}
+
+function MeasureFont() {
+    var context = CanvasDetailedView.getContext('2d');
+    context.font = Font;
+    FontWidth = context.measureText('W').width;
+
+}
+function ResizeCanvas() {
+    DPR = window.devicePixelRatio;
+    nHistoryHeight = nHistoryHeightOrig / (1 + (DPR - 1) * 0.4);
+    nNetworkHistoryHeight = nNetworkHistoryCurrentHeight / (1 + (DPR - 1) * 0.4);
+    nNetworkHistoryLegendHeight = nNetworkHistoryLegendHeightOrig / (1 + (DPR - 1) * 0.4);
+    nNetworkHistoryBaseHeight = nNetworkHistoryBaseHeightOrig / (1 + (DPR - 1) * 0.4);
+    nWidth = window.innerWidth;
+    nHeight = window.innerHeight - nHistoryHeight - 2;
+
+    if (DPR) {
+        CanvasDetailedView.style.width = nWidth + 'px';
+        CanvasDetailedView.style.height = nHeight + 'px';
+        CanvasDetailedView.width = nWidth * DPR;
+        CanvasDetailedView.height = nHeight * DPR;
+        CanvasHistory.style.width = window.innerWidth + 'px';
+        CanvasHistory.style.height = nHistoryHeight + 'px';
+        CanvasHistory.width = window.innerWidth * DPR;
+        CanvasHistory.height = nHistoryHeight * DPR;
+        CanvasHistory.getContext('2d').scale(DPR, DPR);
+        CanvasDetailedView.getContext('2d').scale(DPR, DPR);
+
+        CanvasNetworkHistory.style.width = window.innerWidth + 'px';
+        CanvasNetworkHistory.style.height = nNetworkHistoryHeight + 'px';
+        CanvasNetworkHistory.width = window.innerWidth * DPR;
+        CanvasNetworkHistory.height = nNetworkHistoryHeight * DPR;
+        CanvasNetworkHistory.getContext('2d').scale(DPR, DPR);
+
+        CanvasDetailedOffscreen.style.width = nWidth + 'px';
+        CanvasDetailedOffscreen.style.height = nHeight + 'px';
+        CanvasDetailedOffscreen.width = nWidth * DPR;
+        CanvasDetailedOffscreen.height = nHeight * DPR;
+        CanvasDetailedOffscreen.getContext('2d').scale(DPR, DPR);
+
+    }
+    else {
+        DPR = 1;
+        CanvasDetailedView.width = nWidth;
+        CanvasDetailedView.height = nHeight;
+        CanvasDetailedOffscreen.width = nWidth;
+        CanvasDetailedOffscreen.height = nHeight;
+        CanvasHistory.width = window.innerWidth;
+        CanvasNetworkHistory.width = window.innerWidth;
+        CanvasNetworkHistory.height = nNetworkHistoryHeight;
+    }
+    RequestRedraw();
+}
+
+var MouseDragOff = 0;
+var MouseDragDown = 1;
+var MouseDragUp = 2;
+var MouseDragMove = 3;
+var MouseDragState = MouseDragOff;
+var MouseDragTarget = 0;
+var MouseDragButton = 0;
+var MouseDragKeyShift = 0;
+var MouseDragKeyCtrl = 0;
+var MouseDragX = 0;
+var MouseDragY = 0;
+var MouseDragXLast = 0;
+var MouseDragYLast = 0;
+var MouseDragXStart = 0;
+var MouseDragYStart = 0;
+
+function clamp(number, min, max) {
+    return Math.max(min, Math.min(number, max));
+}
+
+function MouseDragPan() {
+    return MouseDragButton == 1 || MouseDragKeyShift;
+}
+function MouseDragSelectRange() {
+    return MouseDragState == MouseDragMove && (MouseDragButton == 3 || (MouseDragKeyShift && MouseDragKeyCtrl));
+}
+// Snap a screen Y to the nearest non-GPU (OS) thread band; -1 if none / not laid out yet.
+// ThreadY[n]..ThreadY[n+1] is thread n's band in screen space (see DrawDetailedView).
+function ClosestOsThread(y) {
+    if (!ThreadY || !Frames.length) return -1;
+    var nNumLogs = Frames[0].ts.length;
+    var best = -1, bestDist = Infinity;
+    for (var n = 0; n < nNumLogs; ++n) {
+        if (ThreadGpu[n]) continue;
+        var top = ThreadY[n], bot = ThreadY[n + 1];
+        if (top === undefined || bot === undefined) continue;
+        var d = (y < top) ? (top - y) : (y > bot ? (y - bot) : 0);
+        if (d < bestDist) { bestDist = d; best = n; }
+    }
+    return best;
+}
+
+// Aggregate one OS thread's scopes over the time region [B, E] into a top-scopes summary.
+// Walks the thread's log from FirstFrameIndex (so scopes open at the selection start, possibly
+// entered frames earlier, are reconstructed) through the last overlapping frame, maintaining a
+// persistent stack across frame borders. Each scope's [enter, leave] is clipped to [B, E];
+// per-timer inclusive (total) and exclusive (self) clipped time are accumulated (mirrors
+// CalculateTimers' StackChild exclusive-time bookkeeping and OverflowAllowance wrap filtering).
+function ComputeSelectionSummary(nLog, B, E) {
+    if (nLog < 0 || !Frames.length || ThreadGpu[nLog] || !(E > B)) return null;
+
+    // Frames tile contiguously by CPU framestart/frameend.
+    var selBeginFrame = -1, selEndFrame = -1;
+    for (var f = 0; f < Frames.length; ++f) {
+        if (selBeginFrame < 0 && Frames[f].frameend > B) selBeginFrame = f;
+        if (Frames[f].framestart < E) selEndFrame = f;
+    }
+    if (selBeginFrame < 0) return null;
+    if (selEndFrame < selBeginFrame) selEndFrame = selBeginFrame;
+
+    var startFrame = selBeginFrame;
+    if (Frames[selBeginFrame].FirstFrameIndex && Frames[selBeginFrame].FirstFrameIndex[nLog] !== undefined) {
+        startFrame = Frames[selBeginFrame].FirstFrameIndex[nLog];
+    }
+
+    var stackEnter = [], stackIdx = [], childClip = [0], sp = 0;
+    var acc = {}; // timer index -> { incl, excl, count }
+    for (var fi = startFrame; fi <= selEndFrame; ++fi) {
+        var frame = Frames[fi];
+        var ts = frame.ts[nLog], tt = frame.tt[nLog], ti = frame.ti[nLog];
+        if (!ts || !tt || !ti) continue;
+        var overflow = OverflowAllowance(nLog, frame);
+        var discardLast = 0;
+        for (var j = 0; j < ts.length; ++j) {
+            var type = tt[j], time = ts[j];
+            if (type === 1) { // enter
+                discardLast = 0;
+                if (time >= overflow) { discardLast = 1; continue; }
+                stackEnter[sp] = time; stackIdx[sp] = ti[j]; sp++; childClip[sp] = 0;
+            } else if (type === 0) { // leave
+                if (discardLast || time >= overflow) { discardLast = 0; continue; }
+                var enter, idx, depth;
+                if (sp > 0) { sp--; depth = sp; enter = stackEnter[sp]; idx = stackIdx[sp]; }
+                else { depth = -1; enter = frame.framestart; idx = ti[j]; } // orphan leave (no matching enter)
+                var cs = enter > B ? enter : B, ce = time < E ? time : E;
+                var incl = ce - cs; if (incl < 0) incl = 0;
+                if (incl > 0) {
+                    var childT = (depth >= 0) ? (childClip[depth + 1] || 0) : 0;
+                    var excl = incl - childT; if (excl < 0) excl = 0;
+                    var a = acc[idx] || (acc[idx] = { incl: 0, excl: 0, count: 0 });
+                    a.incl += incl; a.excl += excl; a.count++;
+                }
+                if (depth >= 0) childClip[depth] = (childClip[depth] || 0) + incl;
+            }
+            // labels / meta / events: ignored for timing
+        }
+    }
+    // Close out scopes still open at E (deepest first, so children roll into parents before parents close).
+    for (var d = sp - 1; d >= 0; --d) {
+        var cs2 = stackEnter[d] > B ? stackEnter[d] : B;
+        var incl2 = E - cs2; if (incl2 < 0) incl2 = 0;
+        if (incl2 > 0) {
+            var excl2 = incl2 - (childClip[d + 1] || 0); if (excl2 < 0) excl2 = 0;
+            var a2 = acc[stackIdx[d]] || (acc[stackIdx[d]] = { incl: 0, excl: 0, count: 0 });
+            a2.incl += incl2; a2.excl += excl2; a2.count++;
+        }
+        childClip[d] = (childClip[d] || 0) + incl2;
+    }
+
+    var lines = [];
+    for (var k in acc) {
+        if (acc[k].incl < 0.0005) continue; // drop scopes whose self/total round to 0.000ms
+        var t = TimerInfo[k];
+        lines.push({ name: (t ? t.name : ('#' + k)), color: (t ? t.color : '#ffffff'), incl: acc[k].incl, excl: acc[k].excl, count: acc[k].count });
+    }
+    lines.sort(function (a, b) { return b.excl - a.excl; }); // widest self-time first
+    return { threadName: ThreadNames[nLog], regionMs: E - B, lines: lines };
+}
+
+// Compute the selection summary once per settled selection (keyed by region+thread signature).
+// Called from every drag-end path so it fires even when the right-button scope-lock guard in
+// MouseDrag early-returns (e.g. the drag is released while the cursor is over a scope).
+function EnsureSelectionSummary() {
+    if (!(RangeValid(RangeSelect) && RangeSelect.Thread >= 0)) return;
+    var sig = RangeSelect.Begin + '_' + RangeSelect.End + '_' + RangeSelect.Thread;
+    if (window.SelectionSummary && window.SelectionSummary.sig === sig) return;
+    window.SelectionSummary = ComputeSelectionSummary(RangeSelect.Thread, RangeSelect.Begin, RangeSelect.End);
+    if (window.SelectionSummary) window.SelectionSummary.sig = sig;
+}
+
+// Draw the right-drag selection's top-scopes summary as bottom-anchored text starting at the
+// selection's right edge. Computed on release (EnsureSelectionSummary) into window.SelectionSummary.
+function DrawSelectionSummary(context) {
+    var s = window.SelectionSummary;
+    if (!s || !RangeValid(RangeSelect) || RangeSelect.Thread < 0) return;
+
+    var maxRows = 12;
+    var n = Math.min(s.lines.length, maxRows);
+    var NAME_W = 34, NUM_W = 10, CNT_W = 6;
+    function padR(v, w) { v = String(v); return v.length >= w ? v.substring(0, w) : v + ' '.repeat(w - v.length); }
+    function padL(v, w) { v = String(v); return v.length >= w ? v : ' '.repeat(w - v.length) + v; }
+    function clipName(v) { v = String(v); return v.length > NAME_W ? v.substring(0, NAME_W - 3) + '...' : v; }
+    function cols(a, b, c, d) { return padR(a, NAME_W) + padL(b, NUM_W) + '  ' + padL(c, NUM_W) + '  ' + padL(d, CNT_W); }
+
+    // Column-aligned monospace text; every line is drawn at a common textX so the title, header and
+    // rows line up, and each data row gets a filled color swatch in the fixed gutter to its left.
+    var lines = [s.threadName + '  [' + s.regionMs.toFixed(3) + 'ms selected]'];
+    lines.push(cols('scope', 'self', 'total', 'count'));
+    for (var i = 0; i < n; ++i) {
+        var L = s.lines[i];
+        lines.push(cols(clipName(L.name), L.excl.toFixed(3) + 'ms', L.incl.toFixed(3) + 'ms', 'x' + L.count));
+    }
+    if (n === 0) lines.push('(no scopes in selection)');
+    var firstDataLine = 2;
+
+    context.font = Font;
+    var SQ = FontHeight, GAP = 4, lead = SQ + GAP;
+    var maxW = 0;
+    for (var m = 0; m < lines.length; ++m) maxW = Math.max(maxW, context.measureText(lines[m]).width);
+    var boxW = lead + maxW;
+
+    // Stick the block to the selection's left vertical side, clamped on-screen.
+    var x = (RangeSelect.Begin - fDetailedOffset) * (nWidth / fDetailedRange) + 3;
+    if (x + boxW + 6 > nWidth) x = nWidth - boxW - 6;
+    if (x < 0) x = 0;
+    var textX = x + lead;
+
+    var lineH = BoxHeight;
+    var top = nHeight - 6 - lineH * lines.length;
+    context.globalAlpha = 0.78;
+    context.fillStyle = '#000000';
+    context.fillRect(x - 3, top - 2, boxW + 6, lineH * lines.length + 4);
+    context.globalAlpha = 1;
+    context.textAlign = 'left';
+    for (var r = 0; r < lines.length; ++r) {
+        var baseY = top + lineH * (r + 1) - 2;
+        if (r >= firstDataLine && (r - firstDataLine) < n) {
+            context.fillStyle = s.lines[r - firstDataLine].color || '#ffffff';
+            context.fillRect(x, baseY - SQ, SQ, SQ);
+        }
+        context.fillStyle = (r === 0) ? '#59d0ff' : (r === 1 ? '#a0a0a0' : 'white');
+        context.fillText(lines[r], textX, baseY);
+    }
+}
+
+function MouseHandleDrag() {
+    if (MouseDragTarget == CanvasDetailedView) {
+        if (Mode == ModeDetailed) {
+            if (MouseDragSelectRange()) {
+                var xStart = MouseDragXStart;
+                var xEnd = MouseDragX;
+                if (xStart > xEnd) {
+                    var Temp = xStart;
+                    xStart = xEnd;
+                    xEnd = Temp;
+                }
+                if (xEnd - xStart > 1) {
+                    RangeCpu.Begin = fDetailedOffset + fDetailedRange * (xStart / nWidth);
+                    RangeCpu.End = fDetailedOffset + fDetailedRange * (xEnd / nWidth);
+                    RangeSelect.Begin = fDetailedOffset + fDetailedRange * (xStart / nWidth);
+                    RangeSelect.End = fDetailedOffset + fDetailedRange * (xEnd / nWidth);
+                    RangeSelect.Thread = ClosestOsThread(MouseDragYStart);
+                    RangeSelect.Index = -1;
+                    window.SelectionSummary = null; // recomputed on release (MouseHandleDragEnd)
+                }
+            }
+            else if (MouseDragPan()) {
+                var X = MouseDragX - MouseDragXLast;
+                var Y = MouseDragY - MouseDragYLast;
+                if (X) {
+                    fDetailedOffset += -X * fDetailedRange / nWidth;
+                }
+                nOffsetY -= Y;
+                if (nOffsetY < 0) {
+                    nOffsetY = 0;
+                }
+            }
+            else if (MouseDragKeyCtrl) {
+                if (MouseDragY != MouseDragYLast) {
+                    ZoomGraph(MouseDragY - MouseDragYLast);
+                }
+            }
+        }
+        else if (Mode == ModeTimers) {
+            if (MouseDragKeyShift || MouseDragButton == 1) {
+                var X = MouseDragX - MouseDragXLast;
+                var Y = MouseDragY - MouseDragYLast;
+                nOffsetBarsY -= Y;
+                nOffsetBarsX -= X;
+                if (nOffsetBarsY < 0) {
+                    nOffsetBarsY = 0;
+                }
+                if (nOffsetBarsX < 0) {
+                    nOffsetBarsX = 0;
+                }
+            }
+        }
+        else if (Mode == ModeCounters) {
+            if (MouseDragKeyShift || MouseDragButton == 1) {
+                var Y = MouseDragY - MouseDragYLast;
+                nOffsetCountersY -= Y;
+                if (nOffsetCountersY < 0) {
+                    nOffsetCountersY = 0;
+                }
+            }
+        }
+
+    }
+    else if (MouseDragTarget == CanvasHistory) {
+        function HistoryFrameTime(x) {
+            var NumFrames = Frames.length;
+            var fBarWidth = nWidth / NumFrames;
+            var Index = clamp(Math.floor(NumFrames * x / nWidth), 0, NumFrames - 1);
+            var Lerp = clamp((x / fBarWidth - Index), 0, 1);
+            var time = Frames[Index].framestart + (Frames[Index].frameend - Frames[Index].framestart) * Lerp;
+            return time;
+        }
+        if (MouseDragSelectRange()) {
+            RangeCpu = RangeInit();
+            RangeGpu = RangeInit();
+
+            var xStart = MouseDragXStart;
+            var xEnd = MouseDragX;
+            if (xStart > xEnd) {
+                var Temp = xStart;
+                xStart = xEnd;
+                xEnd = Temp;
+            }
+            if (xEnd - xStart > 2) {
+                var timestart = HistoryFrameTime(xStart);
+                var timeend = HistoryFrameTime(xEnd);
+                fDetailedOffset = timestart;
+                fDetailedRange = timeend - timestart;
+            }
+        }
+        else if (MouseDragPan()) {
+            var Time = HistoryFrameTime(MouseDragX);
+            fDetailedOffset = Time - fDetailedRange / 2.0;
+        }
+    }
+}
+function MouseHandleDragEnd() {
+    if (MouseDragTarget == CanvasDetailedView) {
+        EnsureSelectionSummary();
+    }
+    else if (MouseDragTarget == CanvasHistory) {
+        if (!MouseDragSelectRange() && !MouseDragPan()) {
+            ZoomToHighlight(1);
+        }
+    }
+}
+
+function MouseHandleDragClick() {
+    if (MouseDragTarget == CanvasDetailedView) {
+        if (Mode == ModeCounters) {
+            if (nHoverCounter != -1) {
+                if (CounterInfo[nHoverCounter].firstchild != -1) {
+                    CounterInfo[nHoverCounter].closed = !CounterInfo[nHoverCounter].closed;
+                }
+                else {
+                    CounterInfo[nHoverCounter].Expanded = !CounterInfo[nHoverCounter].Expanded;
+                }
+                Draw(1);
+            }
+        }
+        else {
+            if (IsMouseOnXRayDetailedBar()) {
+                ClickMenuButton('xmode');
+            } else {
+                ZoomToHighlight();
+            }
+        }
+    }
+    else if (MouseDragTarget == CanvasHistory) {
+        if (Mode == ModeDetailed) {
+            ZoomToHighlight(1);
+        }
+    }
+}
+
+function MapMouseButton(Event) {
+    if (Event.button == 1 || Event.which == 1) {
+        return 1;
+    }
+    else if (Event.button == 3 || Event.which == 3) {
+        return 3;
+    }
+    else {
+        return 0;
+    }
+}
+
+function MouseDragReset() {
+    MouseDragState = MouseDragOff;
+    MouseDragTarget = 0;
+    MouseDragKeyShift = 0;
+    MouseDragKeyCtrl = 0;
+    MouseDragButton = 0;
+}
+function MouseDragKeyUp() {
+    if ((MouseDragKeyShift && !KeyShiftDown) || (MouseDragKeyCtrl && !KeyCtrlDown)) {
+        MouseHandleDragEnd();
+        MouseDragReset();
+    }
+}
+function MouseDrag(Source, Event) {
+    if (Source == MouseDragOff || (MouseDragTarget && MouseDragTarget != Event.target)) {
+        MouseDragReset();
+        return;
+    }
+
+    const MouseButtonRight = 3;
+    if (MapMouseButton(Event) == MouseButtonRight) {
+        if (g_Loader.hoverScope && g_Loader.hoverScope.jobInfo &&
+            g_Loader.hoverScope.jobInfo.isFirstEnter && g_Loader.hoverScope.jobInfo.isLastEnter) {
+            return;
+        } else {
+            g_Loader.lockScope = g_Loader.hoverScope;
+            if (g_Loader.lockScope != null)
+                return;
+        }
+    }
+    
+    var LocalRect = Event.target.getBoundingClientRect();
+    MouseDragX = Event.clientX - LocalRect.left;
+    MouseDragY = Event.clientY - LocalRect.top;
+
+    function GetDxDySum() {
+        var dx = Math.abs(MouseDragX - MouseDragXStart);
+        var dy = Math.abs(MouseDragY - MouseDragYStart);
+        return (dx + dy);
+    }
+    function HasSelection() {
+        return (GetDxDySum() > 1);
+    }
+
+    if (Source == MouseDragUp && !HasSelection()) {
+        RangeSelect = RangeInit();
+        window.SelectionSummary = null;
+        g_Loader.lockScope = null;
+        Invalidate = 0;
+    }
+
+    if (MouseDragState == MouseDragMove) {
+        if ((Source == MouseDragUp && MapMouseButton(Event) == MouseDragButton) ||
+            (MouseDragKeyCtrl && !KeyCtrlDown) ||
+            (MouseDragKeyShift && !KeyShiftDown)) {
+            MouseHandleDragEnd();
+            MouseDragReset();
+            return;
+        }
+        else {
+            MouseHandleDrag();
+        }
+        
+        if (window.HelpTooltipShowTime > 0) {
+            const pixelsToShowTime = 0.15 * DPR;
+            window.HelpTooltipShowTime -= GetDxDySum() * pixelsToShowTime;
+        }
+        g_Loader.hasUserInteracted = true;
+    }
+    else if (MouseDragState == MouseDragOff) {
+        if (Source == MouseDragDown || KeyShiftDown || KeyCtrlDown) {
+            MouseDragTarget = Event.target;
+            MouseDragButton = MapMouseButton(Event);
+            MouseDragState = MouseDragDown;
+            MouseDragXStart = MouseDragX;
+            MouseDragYStart = MouseDragY;
+            MouseDragKeyCtrl = 0;
+            MouseDragKeyShift = 0;
+
+            if (KeyShiftDown || KeyCtrlDown) {
+                MouseDragKeyShift = KeyShiftDown;
+                MouseDragKeyCtrl = KeyCtrlDown;
+                MouseDragState = MouseDragMove;
+            }
+        }
+    }
+    else if (MouseDragState == MouseDragDown) {
+        // Hide the Events window when starting to drag the mouse
+        ShowEvents(false);
+        ShowDiffWindow(false);
+
+        if (Source == MouseDragUp) {
+            if (MouseDragTarget === g_Ext.currentPlugin.canvas && g_Ext.currentPlugin.handleCanvasClick) {
+                g_Ext.currentPlugin.handleCanvasClick(Event);
+            } else {
+                MouseHandleDragClick();
+            }
+            MouseDragReset();
+        }
+        else if (Source == MouseDragMove) {
+            if (HasSelection()) {
+                MouseDragState = MouseDragMove;
+            }
+        }
+    }
+    MouseDragXLast = MouseDragX;
+    MouseDragYLast = MouseDragY;
+}
+
+function MouseMove(evt) {
+    evt.preventDefault();
+    ZoomActive = 0;
+    MouseDrag(MouseDragMove, evt);
+    MouseHistory = 0;
+    MouseDetailed = 0;
+    HistoryViewMouseX = HistoryViewMouseY = -1;
+    NetworkViewMouseX = NetworkViewMouseY = -1;
+    var rect = evt.target.getBoundingClientRect();
+    var x = evt.clientX - rect.left;
+    var y = evt.clientY - rect.top;
+    if (evt.target == CanvasDetailedView) {
+        if (!MouseDragSelectRange()) {
+            RangeCpu = RangeInit();
+        }
+        DetailedViewMouseX = x;
+        DetailedViewMouseY = y;
+    }
+    else if (evt.target == CanvasHistory) {
+        var Rect = CanvasHistory.getBoundingClientRect();
+        HistoryViewMouseX = x;
+        HistoryViewMouseY = y;
+    } else if (evt.target == CanvasNetworkHistory) {
+        var Rect = CanvasNetworkHistory.getBoundingClientRect();
+        NetworkViewMouseX = x;
+        NetworkViewMouseY = y;
+    }
+    Draw(1);
+}
+
+function MouseButton(bPressed, evt) {
+    evt.preventDefault();
+    MouseDrag(bPressed ? MouseDragDown : MouseDragUp, evt);
+    if (!bPressed) {
+        EnsureSelectionSummary(); // finalize a right-drag region summary (runs even if MouseDrag early-returned on the scope-lock)
+        if (window.SelectionSummary) RequestRedraw(); // paint it immediately on release
+        if (SortColumnMouseOverNext) {
+            if (SortColumnMouseOverNext == SortColumnMouseOver) {
+                SortColumnOrderFlip = 1 - SortColumnOrderFlip;
+            }
+            else {
+                SortColumnOrderFlip = 0;
+            }
+
+            SortColumnMouseOver = SortColumnMouseOverNext;
+            SortColumnMouseOverNext = null;
+            if (SortColumnMouseOver == StrAverage) {
+                SortColumn = 1;
+            }
+            else if (SortColumnMouseOver == StrMax) {
+                SortColumn = 2;
+            }
+            else if (SortColumnMouseOver == StrTotal) {
+                SortColumn = 3;
+            }
+            else if (SortColumnMouseOver == StrMin) {
+                SortColumn = 4;
+            }
+            else if (SortColumnMouseOver == StrCallAverage) {
+                SortColumn = 5;
+            }
+            else if (SortColumnMouseOver == StrCount) {
+                SortColumn = 6;
+            }
+            else if (SortColumnMouseOver == StrExclAverage) {
+                SortColumn = 7;
+            }
+            else if (SortColumnMouseOver == StrExclMax) {
+                SortColumn = 8;
+            }
+            else if (SortColumnMouseOver == StrGroup) {
+                SortColumn = 0;
+            }
+            RequestRedraw();
+        }
+    }
+}
+
+function MouseOut(evt) {
+    MouseDrag(MouseDragOff, evt);
+    KeyCtrlDown = 0;
+    KeyShiftDown = 0;
+    MouseDragButton = 0;
+    nHoverToken = -1;
+    RangeCpu = RangeInit();
+
+    if (evt.target == CanvasDetailedView) {
+        DetailedViewMouseX = -1;
+        DetailedViewMouseY = -1;
+    } else if (evt.target == CanvasHistory) {
+        HistoryViewMouseX = -1;
+        HistoryViewMouseY = -1;
+    } else if (evt.target == CanvasNetworkHistory) {
+        NetworkViewMouseX = -1;
+        NetworkViewMouseY = -1;
+    }
+
+    Draw(1);
+}
+
+function MouseWheel(e) {
+    var e = window.event || e;
+    var delta = (e.wheelDelta || e.detail * (-120));
+
+    var dir = delta > 0 ? 1 : -1;
+    function dirPostfix() {
+        return (dir > 0 ? "_dec" : "_inc");
+    }
+    function clickBtnIdDir(baseBtnId) {
+        var btnId = baseBtnId + dirPostfix();
+        document.getElementById(btnId).click();
+    }
+
+    if (e.target == CanvasDetailedView) {
+        if (KeyShiftDown == 1 && IsMouseOnXRayDetailedBar()) {
+            // Select X-Ray threshold for the preview bar
+            clickBtnIdDir("xthreshold_bar");
+        } else if (KeyShiftDown == 1 && g_Ext.xray.isViewEnabled()) {
+            // Select X-Ray threshold for the main view
+            clickBtnIdDir("xthreshold_main");
+        } else if (KeyCtrlDown == 0) {
+            // Default behaviour = zoom
+            ZoomGraph((-4 * delta / 120.0) | 0);
+        }
+    } else if (e.target = CanvasHistory) {
+        if (KeyShiftDown == 1 && (g_Ext.xray.isViewEnabled() || g_Ext.xray.isBarEnabled())) {
+            // Select X-Ray threshold for frames
+            clickBtnIdDir("xthreshold_frames");
+        } else if (KeyCtrlDown == 0) {
+            // Select reference time for frames
+            var selRefId = 0;
+            var ReferenceMenu = document.getElementById('ReferenceSubMenu');
+            var Links = ReferenceMenu.getElementsByTagName('a');
+            for (var i = 0; i < Links.length; ++i) {
+                var selected = (Links[i].style['text-decoration'] == 'underline');
+                if (selected) {
+                    selRefId = i;
+                    break;
+                }
+            }
+            selRefId = clamp(selRefId + (-dir), 0, Links.length - 1);
+            Links[selRefId].click();
+        }
+    }
+
+    Draw(1);
+}
+function ShowFilterInput(bShow) {
+    var el = document.getElementById('filterinput');
+    if (bShow == undefined)
+        return el.style['display'] == 'block';
+    el.style['display'] = bShow ? 'block' : 'none';
+    return bShow;
+}
+
+function SetFilterInput(group, timer) {
+    FilterInputGroupString = group;
+    FilterInputTimerString = timer;
+    FilterInputGroup.value = group ? group : '';
+    FilterInputTimer.value = timer ? timer : '';
+    FilterUpdate();
+    if (group || timer) {
+        ShowFilterInput(1);
+    }
+    else {
+        ShowFilterInput(0);
+    }
+}
+
+function ToggleFilterInput(escape) {
+    var ActiveElement = -1;
+    for (var i = 0; i < FilterInputArray.length; ++i) {
+        if (FilterInputArray[i] == document.activeElement) {
+            ActiveElement = i;
+        }
+    }
+    if (escape) {
+        // Esc closes the dialog outright on the first press (blur + clear + hide).
+        if (ActiveElement >= 0) {
+            FilterInputArray[ActiveElement].blur();
+        }
+        SetFilterInput();
+        return;
+    }
+    // Ctrl/Cmd+F opens the dialog, then toggles between the two inputs (group <-> timer),
+    // never landing on a "no input focused" state.
+    var target;
+    if (!ShowFilterInput()) {
+        target = FilterInputArray.length - 1;                   // first open focuses Timer/Thread
+    } else if (ActiveElement >= 0) {
+        target = (ActiveElement + 1) % FilterInputArray.length; // switch to the other field
+    } else {
+        target = FilterInputArray.length - 1;                   // visible but unfocused -> Timer/Thread
+    }
+    ShowFilterInput(1);
+    FilterInputArray[target].focus();
+}
+
+function IsFilterInputFocused() {
+    return FilterInputArray.indexOf(document.activeElement) >= 0;
+}
+
+function IsFilterActive() {
+    return !!(FilterInputTimerString || FilterInputGroupString);
+}
+
+function GotoWorst(Token) {
+    var start = TimerInfo[Token].worststart;
+    var end = TimerInfo[Token].worstend;
+    if (end > 0) {
+        RangeSelect.Begin = start;
+        RangeSelect.End = end;
+        RangeSelect.Thread = TimerInfo[Token].worstthread;
+        RangeSelect.Index = Token;
+        ShowFlashMessage('Slowest: ' + (end - start).toFixed(2) + 'ms ' + TimerInfo[Token].name, 100, '#5cd65c');
+        MoveTo(RangeSelect.Begin, RangeSelect.End, ThreadY[RangeSelect.Thread] + nOffsetY, ThreadY[RangeSelect.Thread + 1] + nOffsetY);
+        MouseHandleDragEnd();
+    }
+    else {
+        // The name matched but this timer has no recorded worst instance in the loaded frames.
+        // Surface it rather than failing silently, and log the stats that explain why (e.g. no
+        // complete scope, or all its scopes fell in dropped boundary frames).
+        var t = TimerInfo[Token];
+        ShowFlashMessage('No timing recorded for ' + t.name, 100);
+        console.log('[MicroProfiler] No worst instance for timer "' + t.name + '" (index ' + Token +
+            '): CallCount=' + t.CallCount + ', Max=' + t.Max + ', worstend=' + t.worstend +
+            ' -- CallCount>0 with Max<0 means no complete scope survived; CallCount=0 means all its scopes were in dropped first-frames.');
+    }
+}
+
+function ClickMenuButton(elId) {
+    if (IsPluginsTabVisible()) {
+        var XView = document.getElementById(elId);
+        var firstA = XView.querySelector('a');
+        firstA.click();
+    }
+}
+
+function KeyUp(evt) {
+    if (evt.keyCode == 78 && NanoScale) { // release 'N': leave nanosecond scale
+        NanoScale = 0;
+        Invalidate = 0;
+    }
+    // While the Ctrl+F search field is focused, suppress the viewer hotkeys so typing a
+    // query (x, c, z, w, space, ...) can't mutate viewer state. Keep Esc (close search),
+    // Enter (jump to first match) and Ctrl/Shift, which the search flow relies on.
+    if (IsFilterInputFocused() &&
+        evt.keyCode != 27 && evt.keyCode != 13 &&
+        evt.keyCode != 17 && evt.keyCode != 16) {
+        return;
+    }
+    if (evt.keyCode == 17) {
+        KeyCtrlDown = 0;
+        MouseDragKeyUp();
+    }
+    else if (evt.keyCode == 16) {
+        KeyShiftDown = 0;
+        MouseDragKeyUp();
+    }
+    if (evt.keyCode == 32) {
+        if (RangeSelect.Begin < RangeSelect.End) {
+            ZoomTo(RangeSelect.Begin, RangeSelect.End);
+            RangeSelect = RangeInit();
+            window.SelectionSummary = null;
+            MouseHandleDragEnd();
+        }
+    }
+    if (evt.keyCode == 87) {
+        evt.preventDefault();
+        if (Mode == ModeDetailed) {
+            var Token = nHoverToken;
+            if (Token == -1 && RangeValid(RangeSelect) && RangeSelect.Index >= 0) {
+                Token = RangeSelect.Index;
+            }
+            if (Token != -1 && Token < TimerInfo.length) {
+                GotoWorst(Token);
+            }
+        }
+        else if (Mode == ModeTimers) {
+            ToggleFilterInput(0);
+            evt.preventDefault();
+        }
+
+    }
+    if (Mode == ModeDetailed) {
+        if (evt.keyCode == 13 && (FilterInputTimerString || FilterInputGroupString)) {
+            var tokenCompareString = FilterInputTimerString ? FilterInputTimerString.toLowerCase() : "";
+            var tokenGroupCompareString = FilterInputGroupString ? FilterInputGroupString.toLowerCase() : "";
+            // Rank matches by name quality first -- exact name > prefix > mid-string -- then prefer
+            // a navigable timer (one with a recorded worst instance) as the tie-breaker within a
+            // quality tier (e.g. picks the CPU/GPU duplicate that has one), then the earliest timer. So typing
+            // a full timer name lands on THAT timer.
+            var bestToken = -1;
+            var bestRank = -1;
+            for (var Token = 0; Token < TimerInfo.length; ++Token) {
+                var groupIndex = TimerInfo[Token].group;
+                var tokenGroupString = GroupInfo[groupIndex].name.toLowerCase();
+                if (!tokenGroupString.startsWith(tokenGroupCompareString)) {
+                    continue;
+                }
+                var tokenName = TimerInfo[Token].name.toLowerCase();
+                var pos = tokenName.indexOf(tokenCompareString);
+                if (pos < 0) {
+                    continue;
+                }
+                var quality = (pos === 0) ? (tokenName.length === tokenCompareString.length ? 2 : 1) : 0; // exact 2 > prefix 1 > mid-string 0
+                var jumpable = TimerInfo[Token].worstend > 0;
+                var rank = quality * 2 + (jumpable ? 1 : 0); // exact 4-5 > prefix 2-3 > mid-string 0-1; +1 when navigable
+                if (rank > bestRank) {
+                    bestRank = rank;
+                    bestToken = Token;
+                    if (rank === 5) {
+                        break; // best possible: earliest navigable exact-name match
+                    }
+                }
+            }
+            if (bestToken !== -1) {
+                GotoWorst(bestToken);
+            }
+            else {
+                // If we searched by group and didn't find a matching group name, report that specifically.
+                var groupExists = !FilterInputGroupString;
+                if (FilterInputGroupString) {
+                    for (var gi = 0; gi < GroupInfo.length; ++gi) {
+                        if (GroupInfo[gi] && GroupInfo[gi].name.toLowerCase().startsWith(tokenGroupCompareString)) {
+                            groupExists = true;
+                            break;
+                        }
+                    }
+                }
+                if (!groupExists) {
+                    ShowFlashMessage('No group matches "' + FilterInputGroupString + '"', 100);
+                }
+                else if (FilterInputTimerString) {
+                    ShowFlashMessage('No timer matches "' + FilterInputTimerString + '"', 100);
+                }
+                else {
+                    ShowFlashMessage('No timers in group "' + FilterInputGroupString + '"', 100);
+                }
+            }
+        }
+    }
+    if (evt.keyCode == 27) {
+        RangeSelect = RangeInit();
+        window.SelectionSummary = null;
+        g_Loader.lockScope = null;
+        SortColumn = 0;
+        SortColumnMouseOver = "";
+        if ((Mode == ModeTimers) || (Mode == ModeDetailed)) {
+            ToggleFilterInput(1);
+            evt.preventDefault();
+        }
+    }
+
+    if (evt.keyCode == 90) // z to toggle tooltip
+    {
+        ToolTip = (ToolTip + 1) % 3; //0: off, 1: default, 2: flipped
+        var ToolTipStr = 'Off';
+        var bShowTimers = Mode == ModeTimers;
+        if (ToolTip == 2) {
+            bShowTimers = !bShowTimers;
+        }
+        if (ToolTip) {
+            if (bShowTimers)
+                ToolTipStr = "Timers";
+            else
+                ToolTipStr = "Detailed";
+        }
+        ShowFlashMessage('ToolTip: ' + ToolTipStr, 100);
+    }
+
+    if (evt.keyCode == 88) { // x to toggle XRay view
+        ClickMenuButton('xview');
+    }
+
+    if (evt.keyCode == 67) { // c to toggle XRay count/sum modes
+        ClickMenuButton('xmode');
+    }
+
+    Invalidate = 0;
+}
+function CreateFilter(Filter) {
+    if (!Filter || Filter.length == 0) {
+        return null;
+    }
+    Filter = Filter.split(' ');
+    for (var i = 0; i < Filter.length; ++i) {
+        try {
+            Filter[i] = new RegExp(Filter[i], "i");
+        } catch (e) {
+            // Not a valid regex (e.g. a literal '*' from the overflow display prefix) - escape
+            // and match it literally so the search box never throws on characters users see.
+            Filter[i] = new RegExp(Filter[i].replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), "i");
+        }
+    }
+    return Filter;
+}
+function FilterKeyUp() {
+    FilterInputTimerString = FilterInputTimer.value;
+    FilterInputGroupString = FilterInputGroup.value;
+    FilterUpdate();
+}
+
+function SearchFilterMatch(FilterArray, value) {
+    // Mirrors the Timers-view FilterMatch: every space-separated term must match (regex
+    // search); a null/empty filter matches everything.
+    if (!FilterArray) {
+        return true;
+    }
+    for (var i = 0; i < FilterArray.length; ++i) {
+        if (value.search(FilterArray[i]) < 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function FilterUpdate() {
+    FilterTimer = CreateFilter(FilterInputTimerString);
+    FilterGroup = CreateFilter(FilterInputGroupString);
+    // Repaint the detailed timeline so live match highlighting tracks the query as it changes.
+    Invalidate = 0;
+}
+
+function KeyDown(evt) {
+    // Left/Right step through scope instances. While the search field is focused, plain
+    // arrows edit the query text; Ctrl (Cmd on Mac) + arrow navigates instead, overriding
+    // the browser's word/line jump so the search box doubles as a match stepper.
+    var filterFocused = IsFilterInputFocused();
+    if (evt.keyCode === 39 || evt.keyCode === 37) {
+        var direction = evt.keyCode === 39 ? 1 : -1;
+        var navModifier = window.IsMac ? evt.metaKey : evt.ctrlKey;
+        if (!filterFocused) {
+            MoveToNext(direction);
+        } else if (navModifier) {
+            evt.preventDefault();
+            MoveToNext(direction);
+        } else {
+            // Plain Left/Right in the focused search field only moves the text caret. Return
+            // before the trailing Invalidate=0 so caret movement doesn't force a needless
+            // redraw of the detailed viewport's scope-selection highlight.
+            return;
+        }
+    }
+    if (evt.keyCode === 78 && !filterFocused) { // hold 'N': render durations in nanoseconds
+        NanoScale = 1;
+    }
+    if (evt.keyCode === 17) {
+        KeyCtrlDown = 1;
+    }
+    else if (evt.keyCode === 16) {
+        KeyShiftDown = 1;
+    }
+    else if (evt.keyCode === 9) {
+        evt.preventDefault();
+    }
+    else {
+        let isFindKey = false;
+        let isFindNextKey = false;
+        if (window.IsMac) {
+            isFindKey = evt.metaKey && evt.keyCode === 70;
+            isFindNextKey = evt.metaKey && evt.keyCode === 71;
+        } else {
+            isFindKey = evt.ctrlKey && evt.keyCode === 70;
+            isFindNextKey = evt.keyCode === 114;
+        }
+
+        if (isFindKey) {
+            evt.preventDefault();
+            ToggleFilterInput(0);
+        }
+
+        if (isFindNextKey) {
+            evt.preventDefault();
+            MoveToNext(1);
+        }
+    }
+
+    Invalidate = 0;
+}
+
+function ReadCookie() {
+    var result = document.cookie.match(/fisk=([^;]+)/);
+    var NewMode = ModeDetailed;
+    var ReferenceTimeString = '33ms';
+    if (result && result.length > 0) {
+        var Obj = JSON.parse(result[1]);
+        if (Obj.Mode) {
+            NewMode = Obj.Mode;
+        }
+        if (Obj.ReferenceTime) {
+            ReferenceTimeString = Obj.ReferenceTime;
+        }
+        if (Obj.ThreadsAllActive || Obj.ThreadsAllActive == 0 || Obj.ThreadsAllActive == false) {
+            ThreadsAllActive = Obj.ThreadsAllActive;
+        }
+        else {
+            ThreadsAllActive = 1;
+        }
+        if (Obj.ThreadsActive) {
+            ThreadsActive = Obj.ThreadsActive;
+        }
+        if (Obj.GroupsAllActive || Obj.GroupsAllActive == 0 || Obj.GroupsAllActive) {
+            GroupsAllActive = Obj.GroupsAllActive;
+        }
+        else {
+            GroupsAllActive = 1;
+        }
+        if (Obj.GroupsActive) {
+            GroupsActive = Obj.GroupsActive;
+        }
+        if (Obj.nContextSwitchEnabled) {
+            nContextSwitchEnabled = Obj.nContextSwitchEnabled;
+        }
+        else {
+            nContextSwitchEnabled = 1;
+        }
+        if (Obj.GroupColors) {
+            GroupColors = Obj.GroupColors;
+        }
+        else {
+            GroupColors = 0;
+        }
+        if (Obj.nHideHelp) {
+            nHideHelp = 1;
+        }
+        TimersGroups = Obj.TimersGroups ? Obj.TimersGroups : 0;
+        TimersMeta = Obj.TimersMeta ? 0 : 1;
+        ZeroBasedBars = Obj.ZeroBasedBars ? 0 : 1;
+    }
+    SetContextSwitch(nContextSwitchEnabled);
+    SetMode(NewMode, TimersGroups);
+    SetReferenceTime(ReferenceTimeString);
+    UpdateOptionsMenu();
+    UpdateGroupColors();
+}
+function WriteCookie() {
+    var Obj = new Object();
+    Obj.Mode = Mode;
+    Obj.ReferenceTime = ReferenceTime + 'ms';
+    Obj.ThreadsActive = ThreadsActive;
+    Obj.ThreadsAllActive = ThreadsAllActive;
+    Obj.GroupsActive = GroupsActive;
+    Obj.GroupsAllActive = GroupsAllActive;
+    Obj.nContextSwitchEnabled = nContextSwitchEnabled;
+    Obj.TimersGroups = TimersGroups ? TimersGroups : 0;
+    Obj.TimersMeta = TimersMeta ? 0 : 1;
+    Obj.ZeroBasedBars = ZeroBasedBars ? 0 : 1;
+    Obj.GroupColors = GroupColors;
+    if (nHideHelp) {
+        Obj.nHideHelp = 1;
+    }
+    var date = new Date();
+    date.setFullYear(2099);
+    var cookie = 'fisk=' + JSON.stringify(Obj) + ';expires=' + date;
+    document.cookie = cookie;
+}
+function RegisterInputListeners() {
+    var mousewheelevt = (/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel" //FF doesn't recognize mousewheel as of FF3.x
+
+    CanvasDetailedView.addEventListener('mousemove', MouseMove, false);
+    CanvasDetailedView.addEventListener('mousedown', function (evt) { MouseButton(true, evt); });
+    CanvasDetailedView.addEventListener('mouseup', function (evt) { MouseButton(false, evt); });
+    CanvasDetailedView.addEventListener('mouseout', MouseOut);
+    CanvasDetailedView.addEventListener("contextmenu", function (e) { e.preventDefault(); }, false);
+    CanvasDetailedView.addEventListener(mousewheelevt, MouseWheel, false);
+    CanvasHistory.addEventListener('mousemove', MouseMove);
+    CanvasHistory.addEventListener('mousedown', function (evt) { MouseButton(true, evt); });
+    CanvasHistory.addEventListener('mouseup', function (evt) { MouseButton(false, evt); });
+    CanvasHistory.addEventListener('mouseout', MouseOut);
+    CanvasHistory.addEventListener("contextmenu", function (e) { e.preventDefault(); }, false);
+    CanvasHistory.addEventListener(mousewheelevt, MouseWheel, false);
+    CanvasNetworkHistory.addEventListener('mousemove', MouseMove);
+    CanvasNetworkHistory.addEventListener('mousedown', function (evt) { MouseButton(true, evt); });
+    CanvasNetworkHistory.addEventListener('mouseup', function (evt) { MouseButton(false, evt); });
+    CanvasNetworkHistory.addEventListener('mouseout', MouseOut);
+    CanvasNetworkHistory.addEventListener('contextmenu', function (e) { e.preventDefault(); }, false);
+    FilterInputTimer.addEventListener('keyup', FilterKeyUp);
+    FilterInputGroup.addEventListener('keyup', FilterKeyUp);
+    // Ctrl is the nav modifier everywhere except Mac, where it is Cmd (see KeyDown).
+    document.getElementById('filterinputTooltip').textContent =
+        (window.IsMac ? 'Cmd' : 'Ctrl') + ' + Left/Right  navigate matches   |   Esc  hides';
+    window.addEventListener('keydown', KeyDown);
+    window.addEventListener('keyup', KeyUp);
+    window.addEventListener('resize', ResizeCanvas, false);
+}
+function RegisterDragDropListeners() {
+    window.addEventListener('dragover', DragOverHandler);
+    window.addEventListener('dragend', DragEndHandler);
+    window.addEventListener('dragleave', DragEndHandler);
+    window.addEventListener('drop', DropHandler);
+}
+
+
+function CalcAverage() {
+    var Sum = 0;
+    var Count = 0;
+    for (nLog = 0; nLog < nNumLogs; nLog++) {
+        StackPos = 0;
+        for (var i = 0; i < Frames.length; i++) {
+            var Frame_ = Frames[i];
+            var tt = Frame_.tt[nLog];
+            var ts = Frame_.ts[nLog];
+
+            var count = tt.length;
+            for (var j = 0; j < count; j++) {
+                var type = tt[j];
+                var time = ts[j];
+                if (type == 1) {
+                    Stack[StackPos] = time;//store the frame which it comes from
+                    StackPos++;
+                }
+                else if (type == 0) {
+                    if (StackPos > 0) {
+
+                        StackPos--;
+                        var localtime = time - Stack[StackPos];
+                        Count++;
+                        Sum += localtime;
+                    }
+                }
+            }
+        }
+    }
+    return Sum / Count;
+
+}
+
+function MakeLod(index, MinDelta, GlobalArray, LogStart) {
+    if (LodData[index]) {
+        console.log("error!!");
+    }
+    var o = new Object();
+    o.MinDelta = MinDelta;
+    o.GlobalArray = GlobalArray;
+    o.LogStart = LogStart;
+    LodData[index] = o;
+}
+
+function PreprocessBuildSplitArray() {
+    var nNumLogs = Frames[0].ts.length;
+
+    ProfileEnter("PreprocessBuildSplitArray");
+    var SplitArrays = new Array(nNumLogs);
+
+    for (nLog = 0; nLog < nNumLogs; nLog++) {
+        var MaxDepth = 1;
+        var StackPos = 0;
+        var Stack = Array(20);
+        var TypeArray = g_TypeArray[nLog];
+        var TimeArray = g_TimeArray[nLog];
+        var DeltaTimes = new Array(TypeArray.length);
+        var negativeDeltas = 0;
+
+        for (var j = 0; j < TypeArray.length; ++j) {
+            var type = TypeArray[j];
+            var time = TimeArray[j];
+            if (type == 1) {
+                //push
+                Stack[StackPos] = time;
+                StackPos++;
+            }
+            else if (type == 0) {
+                if (StackPos > 0) {
+                    StackPos--;
+                    var delta = time - Stack[StackPos];
+                    if (delta < 0) {
+                        // Leave before enter -> corrupted scope (ring-buffer wraparound). Clamp so a
+                        // negative duration can't poison the LOD split thresholds (this used to trip
+                        // an assert).
+                        negativeDeltas++;
+                        delta = 0;
+                    }
+                    DeltaTimes[j] = delta;
+                }
+                else {
+                    DeltaTimes[j] = 0;
+                }
+            }
+        }
+        if (negativeDeltas > 0) {
+            console.log('[MicroProfiler] LOD: thread "' + ThreadNames[nLog] + '" had ' + negativeDeltas +
+                ' scope(s) with leave before enter (negative duration, likely wraparound); clamped to 0');
+        }
+        DeltaTimes.sort(function (a, b) { return b - a; });
+        var SplitArray = Array(NumLodSplits);
+        var SplitIndex = DeltaTimes.length;
+
+        var j = 0;
+        for (j = 0; j < NumLodSplits; ++j) {
+            SplitIndex = Math.floor(SplitIndex / 2);
+            while (SplitIndex > 0 && !DeltaTimes[SplitIndex]) {
+                SplitIndex--;
+            }
+            if (SplitIndex < SplitMin) {
+                break;
+            }
+            //search.. if 0
+            var SplitTime = DeltaTimes[SplitIndex];
+            if (SplitTime >= 0) {
+                SplitArray[j] = SplitTime;
+            }
+            else {
+                SplitArray[j] = SPLIT_LIMIT;
+            }
+        }
+        for (; j < NumLodSplits; ++j) {
+            SplitArray[j] = SPLIT_LIMIT;
+        }
+
+
+        SplitArrays[nLog] = SplitArray;
+    }
+    ProfileLeave();
+    return SplitArrays;
+}
+
+function PreprocessBuildDurationArray() {
+    var nNumLogs = Frames[0].ts.length;
+    ProfileEnter("PreprocessBuildDurationArray");
+    var DurationArrays = new Array(nNumLogs);
+    for (nLog = 0; nLog < nNumLogs; ++nLog) {
+        var MaxDepth = 1;
+        var StackPos = 0;
+        var Stack = Array(20);
+        var StackIndex = Array(20);
+        var TypeArray = g_TypeArray[nLog];
+        var TimeArray = g_TimeArray[nLog];
+        var DurationArray = Array(g_TypeArray[nLog].length);
+        for (var j = 0; j < TypeArray.length; ++j) {
+            var type = TypeArray[j];
+            var time = TimeArray[j];
+            if (type == 1) {
+                //push
+                Stack[StackPos] = time;
+                StackIndex[StackPos] = j;
+                StackPos++;
+            }
+            else if (type == 0) {
+                if (StackPos > 0) {
+                    StackPos--;
+                    var Duration = time - Stack[StackPos];
+                    DurationArray[StackIndex[StackPos]] = Duration;
+                    DurationArray[j] = Duration;
+                }
+                else {
+                    DurationArray[j] = 0;
+                }
+            }
+        }
+        for (var j = 0; j < StackPos; ++j) {
+            DurationArray[j] = 0;
+        }
+        DurationArrays[nLog] = DurationArray;
+    }
+    ProfileLeave();
+    return DurationArrays;
+
+}
+function PreprocessLods() {
+    ProfileEnter("PreprocessLods");
+    var nNumLogs = Frames[0].ts.length;
+    var SplitArrays = PreprocessBuildSplitArray();
+    var DurationArrays = PreprocessBuildDurationArray();
+    var Source = LodData[0];
+    var SourceLogStart = Source.LogStart;
+    var NumFrames = SourceLogStart.length;
+
+    for (var i = 0; i < NumLodSplits - 1; ++i) {
+        var DestLogStart = Array(SourceLogStart.length);
+        for (var j = 0; j < DestLogStart.length; ++j) {
+            DestLogStart[j] = Array(nNumLogs);
+        }
+        var MinDelta = Array(nNumLogs);
+        var GlobalArray = Array(nNumLogs);
+
+        for (nLog = 0; nLog < nNumLogs; ++nLog) {
+            var Duration = DurationArrays[nLog];
+            var SplitTime = SplitArrays[nLog][i];
+
+            MinDelta[nLog] = SplitTime;
+            if (SplitTime < SPLIT_LIMIT) {
+                var SourceCount = Duration.length;
+                var DestGlobalArray = Array();
+                var RemapArray = Array(SourceCount);
+
+                for (var j = 0; j < SourceCount; ++j) {
+                    RemapArray[j] = DestGlobalArray.length;
+                    if (Duration[j] >= SplitTime) {
+                        DestGlobalArray.push(j);
+                    }
+                }
+                GlobalArray[nLog] = DestGlobalArray;
+                for (var j = 0; j < NumFrames; ++j) {
+                    var OldStart = SourceLogStart[j][nLog];
+                    var NewStart = RemapArray[OldStart];
+                    var FrameArray = DestLogStart[j];
+                    FrameArray[nLog] = NewStart;
+                }
+            }
+            else {
+
+                for (var j = 0; j < NumFrames; ++j) {
+                    var FrameArray = DestLogStart[j];
+
+                    FrameArray[nLog] = 0;
+                }
+
+            }
+
+        }
+        MakeLod(i + 1, MinDelta, GlobalArray, DestLogStart);
+    }
+    ProfileLeave();
+}
+function PreprocessGlobalArray() {
+    ProfileEnter("PreprocessGlobalArray");
+    var nNumLogs = Frames[0].ts.length;
+    var CaptureStart = Frames[0].framestart;
+    var CaptureEnd = Frames[Frames.length - 1].frameend;
+    g_GlobalArray = new Array(nNumLogs);
+    g_TypeArray = new Array(nNumLogs);
+    g_TimeArray = new Array(nNumLogs);
+    g_IndexArray = new Array(nNumLogs);
+    g_XtraArray = new Array(nNumLogs); // Events
+
+    var StackPos = 0;
+    var Stack = Array(20);
+    var LogStartArray = new Array(Frames.length);
+    for (var i = 0; i < Frames.length; i++) {
+        Frames[i].LogStart = new Array(nNumLogs);
+        LogStartArray[i] = Frames[i].LogStart;
+
+        Frames[i].LogEnd = new Array(nNumLogs);
+    }
+    var MinDelta = Array(nNumLogs);
+    for (nLog = 0; nLog < nNumLogs; nLog++) {
+        MinDelta[nLog] = 0;
+        var Discard = 0;
+        var GlobalArray = new Array();
+        var TypeArray = new Array();
+        var TimeArray = new Array();
+        var IndexArray = new Array();
+        var XtraArray = new Array();
+
+        for (var i = 0; i < Frames.length; i++) {
+            var Frame_ = Frames[i];
+            Frame_.LogStart[nLog] = TimeArray.length;
+            var FrameDiscard = OverflowAllowance(nLog, Frame_);
+            var tt = Frame_.tt[nLog];
+            var ts = Frame_.ts[nLog];
+            var ti = Frame_.ti[nLog];
+            var tx = Frame_.tx[nLog];
+            var len = tt.length;
+            var DiscardLast = 0;
+            for (var xx = 0; xx < len; ++xx) {
+                var Skip = (tt[xx] == 4) ? DiscardLast : (tt[xx] < EventBaseId && ts[xx] > FrameDiscard);
+                if (Skip) {
+                    Discard++;
+                    DiscardLast = 1;
+                }
+                else {
+                    DiscardLast = 0;
+                    GlobalArray.push(TypeArray.length);
+                    TypeArray.push(tt[xx]);
+                    TimeArray.push(ts[xx]);
+                    IndexArray.push(ti[xx]);
+                    if (tx[xx] != undefined)
+                        XtraArray[TypeArray.length - 1] = tx[xx];
+                }
+            }
+            Frame_.LogEnd[nLog] = TimeArray.length;
+        }
+        g_GlobalArray[nLog] = GlobalArray;
+        g_TypeArray[nLog] = TypeArray;
+        g_TimeArray[nLog] = TimeArray;
+        g_IndexArray[nLog] = IndexArray;
+        g_XtraArray[nLog] = XtraArray;
+
+        if (Discard) {
+            console.log('discarded ' + Discard + ' markers from ' + ThreadNames[nLog]);
+        }
+    }
+    MakeLod(0, MinDelta, g_GlobalArray, LogStartArray);
+    ProfileLeave();
+}
+
+function PreprocessFindFirstFrames() {
+    ProfileEnter("PreprocesFindFirstFrames");
+    //create arrays that show how far back we need to start search in order to get all markers.
+    var nNumLogs = Frames[0].ts.length;
+    for (var i = 0; i < Frames.length; i++) {
+        Frames[i].FirstFrameIndex = new Array(nNumLogs);
+    }
+
+    var StackPos = 0;
+    var Stack = Array(20);
+    g_MaxStack = Array(nNumLogs);
+
+    for (nLog = 0; nLog < nNumLogs; nLog++) {
+        var MaxStack = 0;
+        StackPos = 0;
+        for (var i = 0; i < Frames.length; i++) {
+            var Frame_ = Frames[i];
+            var tt = Frame_.tt[nLog];
+            var count = tt.length;
+
+            var FirstFrame = i;
+            if (StackPos > 0) {
+                FirstFrame = Stack[0];
+            }
+            Frames[i].FirstFrameIndex[nLog] = FirstFrame;
+
+            for (var j = 0; j < count; j++) {
+                var type = tt[j];
+                if (type == 1) {
+                    Stack[StackPos] = i;//store the frame which it comes from
+                    StackPos++;
+                    if (StackPos > MaxStack) {
+                        MaxStack = StackPos;
+                    }
+                }
+                else if (type == 0) {
+                    if (StackPos > 0) {
+                        StackPos--;
+                    }
+                }
+            }
+        }
+        g_MaxStack[nLog] = MaxStack;
+    }
+    ProfileLeave();
+}
+function PreprocessMeta() {
+    MetaLengths = Array(MetaNames.length);
+    MetaLengthsAvg = Array(MetaNames.length);
+    MetaLengthsMax = Array(MetaNames.length);
+    for (var i = 0; i < MetaNames.length; ++i) {
+        MetaLengths[i] = MetaNames[i].length + 1;
+        MetaLengthsAvg[i] = MetaNames[i].length + 5;
+        MetaLengthsMax[i] = MetaNames[i].length + 5;
+        if (MetaLengths[i] < 12)
+            MetaLengths[i] = 12;
+        if (MetaLengthsAvg[i] < 12)
+            MetaLengthsAvg[i] = 12;
+        if (MetaLengthsMax[i] < 12)
+            MetaLengthsMax[i] = 12;
+    }
+    for (var i = 0; i < TimerInfo.length; ++i) {
+        var Timer = TimerInfo[i];
+        for (var j = 0; j < MetaNames.length; ++j) {
+            var Len = FormatMeta(Timer.meta[j], 0).length + 2;
+            var LenAvg = FormatMeta(Timer.meta[j], 2).length + 2;
+            var LenMax = FormatMeta(Timer.meta[j], 0).length + 2;
+            if (Len > MetaLengths[j]) {
+                MetaLengths[j] = Len;
+            }
+            if (LenAvg > MetaLengthsAvg[j]) {
+                MetaLengthsAvg[j] = LenAvg;
+            }
+            if (LenMax > MetaLengthsMax[j]) {
+                MetaLengthsMax[j] = LenMax;
+            }
+        }
+    }
+}
+
+function PreprocessMinimal() {
+    PreprocessTimerSubstitutions(
+        timer => timer.name.startsWith("$"),
+        // Overflow buckets ($...Overflow) are aliased scopes: show '*' + the label alone.
+        // Other '$' timers keep the "<stripped>_<label>" form (e.g. $Script -> Script_<name>).
+        (groupName, oldTimerName, label) => oldTimerName.endsWith("Overflow")
+            ? "*" + label
+            : oldTimerName.slice(1) + "_" + label,
+    );
+    PreprocessCalculateAllTimers();
+}
+
+function Preprocess() {
+    var ProfileModeOld = ProfileMode;
+    ProfileMode = 1;
+    ProfileModeClear();
+    ProfileEnter("Preprocess");
+    PreprocessMinimal();
+    PreprocessFindFirstFrames();
+    PreprocessGlobalArray();
+    PreprocessLods();
+    PreprocessMeta();
+    PreprocessContextSwitchCache();
+    ProfileLeave();
+    ProfileModeDump();
+    ProfileMode = ProfileModeOld;
+    Initialized = 1;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// Data loader
+
+function SaveExportResult(str) {
+    g_Loader.toolsData.exportResult = str;
+}
+
+function ExecStatement(js) {
+    eval(js);
+}
+
+async function UnzipData(compressedData, prefix, postfix, hasSize, method) {
+    var compressedDataNoHeader = hasSize ? compressedData.slice(2 * 4) : compressedData;
+
+    let compressedStream;
+    let decompressionStream;
+    let readableStream;
+    let encoder;
+
+    try {
+        compressedStream = new ReadableStream({
+            start(controller) {
+                controller.enqueue(compressedDataNoHeader);
+                controller.close();
+            }
+        });
+        decompressionStream = new DecompressionStream(method);
+        readableStream = compressedStream.pipeThrough(decompressionStream);
+        encoder = new TextEncoder();
+    } catch (error) {
+        g_Loader.isBrowserUnsupported = true;
+        g_Loader.isBrowserUnzipError = true;
+        console.error("Error preparing data decompression:", error);
+        throw new Error("Browser does not support the required features");
+    }
+
+    var prefixData = (prefix.length > 0) ? encoder.encode(prefix) : new Uint8Array;
+    var postfixData = (postfix.length > 0) ? encoder.encode(postfix) : new Uint8Array;
+
+    const reader = readableStream.getReader();
+    var chunks = [];
+    var resData = null;
+    var resPos = 0;
+
+    if (hasSize) {
+        const view = new DataView(compressedData.buffer);
+        var uncompressedSize = view.getUint32(0, true);
+        resData = new Uint8Array(prefixData.length + uncompressedSize + postfixData.length);
+    }
+
+    if (prefixData.length > 0) {
+        if (hasSize) {
+            resData.set(prefixData, resPos);
+        } else {
+            chunks.push(prefixData);
+        }
+        resPos += prefixData.length;
+    }
+
+    while (true) {
+        const { done, value } = await reader.read();
+        if (done)
+            break;
+
+        if (hasSize) {
+            resData.set(value, resPos);
+        } else {
+            chunks.push(value);
+        }
+        resPos += value.length;
+    }
+
+    if (postfixData.length > 0) {
+        if (hasSize) {
+            resData.set(postfixData, resPos);
+        } else {
+            chunks.push(postfixData);
+        }
+        resPos += postfixData.length;
+    }
+
+    if (!hasSize) {
+        var resData = new Uint8Array(resPos);
+        resPos = 0;
+        chunks.forEach(chunk => {
+            resData.set(chunk, resPos);
+            resPos += chunk.length;
+        });
+    }
+    return resData;
+}
+
+function Base64StringToUint8Array(base64Str) {
+    return Uint8Array.from(atob(base64Str), c => c.charCodeAt(0));
+}
+
+function Base64ArrayToUint8Array(base64Arr) {
+    const base64Str = new TextDecoder().decode(base64Arr);
+    return Base64StringToUint8Array(base64Str);
+}
+
+async function UnzipDataCallback(compressedData, prefix, postfix, hasSize, method, callback) {
+    return UnzipData(compressedData, prefix, postfix, hasSize, method)
+        .then(data => {
+            callback(data);
+        })
+        .catch(error => {
+            console.error("Error unzipping data: ", error);
+            callback(new Uint8Array);
+        });
+}
+
+async function ExtractDataFromComment(nodeId, magic, prefix, postfix, hasSize, method, callback) {
+    var orig = null;
+    if (nodeId < document.childNodes.length) {
+        var node = document.childNodes[nodeId];
+        if (node.nodeType === Node.COMMENT_NODE && node.data.startsWith(magic)) {
+            orig = node.data.substring(magic.length);
+        }
+    }
+    if (orig === null) {
+        console.error("Error extracting data from node");
+        callback(new Uint8Array);
+        return;
+    }
+    const base64Str = orig;
+    const compressedData = Base64StringToUint8Array(base64Str);
+    return UnzipDataCallback(compressedData, prefix, postfix, hasSize, method, callback);
+}
+
+function UpdateLoadingProgress() {
+    if (!g_Loader.progress) {
+        g_Loader.progress = {};
+        var dotSpanElement = document.getElementById("progressDotSample");
+        var dotWidth = dotSpanElement.offsetWidth;
+        var windowWidth = window.innerWidth;
+        g_Loader.progress.dotsNum = Math.floor(windowWidth / dotWidth);
+        g_Loader.progress.dotsText = Array(g_Loader.progress.dotsNum).fill(".").join("");
+        g_Loader.progress.dotsDiv = document.getElementById("progressDots");
+        g_Loader.progress.nextFrameId = 0;
+    }
+
+    if (window.Frames != undefined && Frames[g_Loader.progress.nextFrameId] != undefined) {
+        var progressDots = Math.floor(g_Loader.progress.dotsNum * g_Loader.progress.nextFrameId / Frames.length);
+        g_Loader.progress.dotsDiv.textContent = g_Loader.progress.dotsText.substring(0, progressDots);
+        g_Loader.progress.nextFrameId++;
+    }
+}
+
+async function ExtractToolsJs() {
+    await ExtractDataFromComment(1, "", "",
+        "ToolsModule().then(Module => { self.Tools = Module; Tools.ccall('Init', 'number', []); });", true, "deflate",
+        function (dataArr) {
+            g_Loader.worker = {};
+            g_Loader.worker.jsDataArr = dataArr;
+            g_Loader.worker.blob = new Blob(
+                [g_Loader.worker.jsDataArr],
+                { type: 'text/javascript' }
+            );
+            g_Loader.worker.urlObj = URL.createObjectURL(g_Loader.worker.blob);
+        }
+    );
+}
+
+async function ExtractRawData() {
+    await ExtractDataFromComment(0, "R0FL", "    R0FL", "", true, "deflate",
+        function (dataArr) {
+            g_Loader.rawDataArr = dataArr;
+        }
+    );
+}
+
+function ComposeOrigDatetime(forTitle) {
+    function ZeroPad(number) {
+        return ('0' + number).slice(-2);
+    }
+    var utc = DumpUtcCaptureTime * 1000;
+    var date = new Date(utc);
+    var year = date.getUTCFullYear();
+    var month = ZeroPad(date.getUTCMonth() + 1); // Months are zero-indexed
+    var day = ZeroPad(date.getUTCDate());
+    var hours = ZeroPad(date.getUTCHours());
+    var minutes = ZeroPad(date.getUTCMinutes());
+    var seconds = ZeroPad(date.getUTCSeconds());
+    var res = forTitle ?
+        (year + "" + month + "" + day + " " + hours + "" + minutes + "" + seconds) :
+        (year + month + day + "-" + hours + minutes + seconds);
+    return res;
+}
+
+function ComposeOrigFilename() {
+    var res = "microprofile-" + ComposeOrigDatetime() + ".html";
+    return res;
+}
+
+function GetExportFilename(shortName, customExt) {
+    var filename = "";
+    var pathname = window.location.pathname;
+    if (pathname.endsWith('.htm') || pathname.endsWith('.html')) {
+        var parts = pathname.split('/');
+        filename = parts.pop();
+    } else {
+        filename = ComposeOrigFilename();
+    }
+    if (shortName != "") {
+        var noPostfix = shortName.startsWith('.');
+        var dotIndex = filename.lastIndexOf('.');
+        var baseName = filename.substring(0, dotIndex);
+        var extension = filename.substring(dotIndex);
+        filename =
+            baseName + (noPostfix ? '' : '_') +
+            shortName + (customExt ? '' : extension);
+    }
+    return filename;
+}
+
+function GetContentTypeByFilename(filename) {
+    const types = new Map([
+        ['.html', 'text/html'],
+        ['.json', 'application/json'],
+        ['.csv', 'text/csv'],
+        ['.txt', 'text/plain'],
+    ]);
+    
+    var name = filename.toLowerCase();
+    var dotIndex = name.lastIndexOf('.');
+    var ext = (dotIndex < 0) ? "" : name.substring(dotIndex);
+   
+    if (types.has(ext))
+        return types.get(ext);
+    
+    return "";
+}
+
+function ExportCliMode(shortName, fullName) {
+    var contentType = GetContentTypeByFilename(fullName ? fullName : shortName);
+    var customExt = (contentType != "");
+    var filename = fullName ? fullName : GetExportFilename(shortName, customExt);
+    if (cpp) {
+        cpp.ExportResult(g_Loader.toolsData.exportResult, filename);
+    }
+    g_Loader.toolsData.exportResult = null;
+    return;
+}
+
+function OpenNewExportTab(shortName, fullName, forceDownload) {
+    if (globalThis.g_cliMode) {
+        ExportCliMode(shortName, fullName);
+        return;
+    }
+
+    var tabOpened = false;
+
+    var contentType = GetContentTypeByFilename(fullName ? fullName : shortName);
+    var customExt = (contentType != "");
+    contentType = customExt ? contentType : 'text/html';
+    
+    var pageBlob = new Blob(
+        [g_Loader.toolsData.exportResult],
+        { type: contentType }
+    );
+    var pageObj = URL.createObjectURL(pageBlob);
+
+    if (g_Loader.toolsData.bExportToFile) {
+        forceDownload = true;
+    }
+
+    if (!forceDownload) {
+        if (window.open(pageObj)) {
+            tabOpened = true;
+        }
+    }
+
+    if (!tabOpened) {
+        var filename = fullName ? fullName : GetExportFilename(shortName, customExt);
+        var link = document.createElement('a');
+        link.setAttribute('download', filename);
+        link.href = pageObj;
+        link.click();
+        URL.revokeObjectURL(pageObj);
+        ShowFlashMessage("Saving started\n" + "Please allow file download if prompted", 150, "#ffcc77");
+    }
+
+    g_Loader.toolsData.exportResult = null;
+}
+
+function InitToolsExportMenu() {
+    if (g_Loader.toolsData.isExportMenuInitialized)
+        return;
+
+    g_Loader.toolsData.isExportMenuInitialized = true;
+    g_Loader.toolsData.bExportToFile = false;
+    var EnabledFastFlags = (window.EnabledFastFlags == undefined) ? [] : window.EnabledFastFlags;
+    var ExportMenu = document.getElementById('ExportSubMenu');
+
+    if (g_Loader.toolsData.exportOptions && g_Loader.toolsData.exportOptions.length > 0) {
+        var comboDiffDisplayName = "";
+        MenuAddEntry(ExportMenu, '', 'Extra tools', null, true);
+        g_Loader.toolsData.exportOptions.forEach(entry => {
+            if (entry.comboDiff) {
+                g_Loader.toolsData.ComboDiffFuncName = entry.funcName;
+                comboDiffDisplayName = entry.displayName;
+            }
+            if (entry.hidden)
+                return;
+            if (entry.eventIdsNeeded != undefined) {
+                var hasNeededEvents = false;
+                for (const eventId of entry.eventIdsNeeded) {
+                    if (g_Ext.typeLookup[EventBaseId + eventId].isPresented) {
+                        hasNeededEvents = true;
+                        break;
+                    }
+                }
+                if (!hasNeededEvents)
+                    return;
+            }
+            if (entry.rawExtensionsNeeded != undefined) {
+                var hasNeededFeatures = false;
+                var extensionList = (window.ExtensionList == undefined) ? [] : window.ExtensionList;
+                for (const extensionName of entry.rawExtensionsNeeded) {
+                    if (extensionList.includes(extensionName)) {
+                        hasNeededFeatures = true;
+                        break;
+                    }
+                }
+                if (!hasNeededFeatures)
+                    return;
+            }
+
+            MenuAddEntry(ExportMenu, '', entry.displayName, async function () {
+                if (window.InitDataImpl != undefined || g_Loader.isExportInProgress || !g_Loader.isViewerInitialized)
+                    return;
+
+                ShowSpinner(true);
+                await ExtractAndExportRaw(entry.funcName);
+                OpenNewExportTab(entry.shortName);
+                ShowSpinner(false);
+            });
+        });
+
+        if (g_Loader.toolsData.ComboDiffFuncName) {
+            MenuAddEntry(ExportMenu, '', comboDiffDisplayName, function () {
+                ShowDiffWindow(true);
+                ShowDropSigns(true);
+                setTimeout(function () {
+                    if (!g_Loader.isDragInProgress)
+                        ShowDropSigns(false);
+                }, 1100); // Brief highlighting of file drop areas. The timeout value is based on visual perception tests.
+            });
+        }
+
+        function UpdateExportToFile() {
+            MenuUpdateEntry('export_to_file', g_Loader.toolsData.bExportToFile);
+        }
+        MenuAddEntry(ExportMenu, '', 'Export options', null, true);
+        MenuAddEntry(ExportMenu, 'export_to_file', 'Save result as file', function () {
+            g_Loader.toolsData.bExportToFile = !g_Loader.toolsData.bExportToFile;
+            UpdateExportToFile();
+        });
+        UpdateExportToFile();
+    }
+
+    AdjustMenuItemsWidth(ExportMenu);
+}
+
+function GetHtmlSource(checkOnly, rawDataZipB64) {
+    var doc = "";
+    var startNodeIndex = 0;
+    if (rawDataZipB64) {
+        doc += "<!--R0FL" + rawDataZipB64 + "-->\n";
+        startNodeIndex++;
+    }
+    var commentsCount = startNodeIndex;
+    var nodes = document.childNodes;
+    for (var i = startNodeIndex; i < 2 && i < nodes.length; i++) {
+        var node = nodes[i];
+        if (node.nodeType == Node.COMMENT_NODE) {
+            commentsCount++;
+            if (!checkOnly) {
+                doc += "<!--" + node.data + "-->\n";
+            }
+        }
+    }
+    if (checkOnly && commentsCount < 2)
+        return null;
+
+    if (!checkOnly) {
+        doc += "<!DOCTYPE html>\n";
+        doc += "<html>";
+    }
+
+    var embeddedScriptsCount = 0;
+    var scripts = document.getElementsByTagName('script');
+    for (var i = 0; i < scripts.length; i++) {
+        var script = scripts[i];
+        var js = script.textContent;
+        var src = script.getAttribute('src');
+        if (src == null && js != "") {
+            embeddedScriptsCount++;
+        }
+        if (!checkOnly) {
+            doc += "<script";
+            doc += (src == null) ? ('>\n' + js) : (' src="' + src + '">');
+            doc += "</" + "script>"; // Breaking up the tag to ensure that it is not interpreted as the end of the script
+        }
+    }
+    if (checkOnly && embeddedScriptsCount < 1)
+        return null;
+
+    if (!checkOnly) {
+        doc += "</html>\n";
+    }
+
+    return doc;
+}
+
+function InitAuxMenus() {
+    var OptionsMenu = document.getElementById('OptionsMenu');
+    AdjustMenuItemsWidth(OptionsMenu);
+
+    // Always-visible Find button (unlike Re-capture/Save it isn't gated on http). Toggles the
+    // find inputs open/closed, mirroring Ctrl+F (Cmd+F on Mac).
+    var FindMenu = document.getElementById('ilFind');
+    if (FindMenu) {
+        FindMenu.title = 'Find timer (' + (window.IsMac ? 'Cmd' : 'Ctrl') + ' + F)';
+        FindMenu.onclick = function () {
+            // Toggle: close if the dialog is open (Esc path), else open and focus.
+            ToggleFilterInput(ShowFilterInput() ? 1 : 0);
+        };
+    }
+
+    var isHttpProtocol = window.location.protocol.startsWith("http");
+    var reloadAllowed = isHttpProtocol;
+    if (reloadAllowed) {
+        var ReloadMenu = document.getElementById('ilReload');
+        ReloadMenu.style.display = "";
+        ReloadMenu.onclick = function () {
+            if (!g_Loader.isExportInProgress) {
+                ShowSpinner(true);
+                window.location.reload(true);
+            }
+        }
+    }
+
+    var savingAllowed = isHttpProtocol && window.IsHtmlSavable;
+    if (savingAllowed) {
+        var SaveMenu = document.getElementById('ilSave');
+        SaveMenu.style.display = "";
+        SaveMenu.onclick = function () {
+            if (!g_Loader.isExportInProgress) {
+                var doc = GetHtmlSource();
+                SaveExportResult(doc);
+                OpenNewExportTab("", "", true);
+            }
+        };
+    }
+}
+
+async function ExtractAndExportRaw(funcName, rawFileStructs) {
+    rawFileStructs = rawFileStructs ? rawFileStructs : [{ isSelf: true }];
+    await ExtractRawData();
+    if (!funcName && (!g_Loader.rawDataArr || g_Loader.rawDataArr.length == 0)) {
+        return Promise.reject("No data");
+    }
+    if (window.ToolsModule != undefined) {
+        await ParseRawModule(funcName, rawFileStructs);
+    } else {
+        await ExtractToolsJs();
+        await ParseRawWorker(funcName, rawFileStructs);
+    }
+}
+
+function FindStringBytesInUint8Array(dataArray, start, pattern) {
+    for (var i = start; i < dataArray.length - pattern.length + 1; i++) {
+        const bytes = dataArray.slice(i, i + pattern.length);
+        if (CompareUint8ArrayWithStringBytes(bytes, pattern)) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+async function ExtractRawDataFromFile(file) {
+    try {
+        const errorText = "Incorrect input file format";
+        const rawMagic = "\0\0\0\0R0FL";
+        const htmlMagic = "<!--R0FL";
+        const htmlEndMarker = "-->";
+        const fileDataArray = await ReadFileToUint8Array(file);
+        if (CheckFileMagic(fileDataArray, rawMagic))
+            return fileDataArray;
+        if (!CheckFileMagic(fileDataArray, htmlMagic))
+            throw new Error(errorText);
+
+        const magicFullSize = htmlMagic.length;
+        const b64EndPos = FindStringBytesInUint8Array(fileDataArray, magicFullSize, htmlEndMarker);
+        if (b64EndPos < 0)
+            throw new Error(errorText);
+
+        var rawDataArray;
+        const b64Arr = fileDataArray.slice(magicFullSize, b64EndPos);
+        const compressedData = Base64ArrayToUint8Array(b64Arr);
+        await UnzipDataCallback(compressedData, rawMagic, "", true, "deflate",
+            function (dataArr) {
+                rawDataArray = dataArr;
+            });
+
+        return rawDataArray;
+    } catch (error) {
+        console.error("Error extracting data from file:", error);
+        return new Uint8Array();
+    }
+}
+
+function ComposeExporterFuncMetaArg(funcName, rawFilename, localId, localGroupId) {
+    var res = {
+        fileName: rawFilename ? rawFilename : "",
+        localId: localId ? localId : 0,
+        localGroupId: localGroupId ? localGroupId : 0,
+    };
+    return JSON.stringify(res);
+}
+
+function GetExporterFuncOptions(funcName) {
+    var res = null;
+    g_Loader.toolsData.exportOptions.forEach(entry => {
+        if (entry.funcName == funcName) {
+            res = entry;
+        }
+    });
+    return res;
+}
+
+async function GetFileDataAndMeta(funcName, rawFileStructs, fileStructId, localId) {
+    var res = {};
+    var fileStruct = rawFileStructs[fileStructId];
+    var fileName;
+    if (fileStruct.isSelf) {
+        res.data = g_Loader.rawDataArr;
+        fileName = GetExportFilename("");
+    } else {
+        res.data = await ExtractRawDataFromFile(fileStruct.file);
+        fileName = fileStruct.file.name;
+    }
+    res.meta = ComposeExporterFuncMetaArg(funcName, fileName, localId, fileStruct.localGroupId);
+    res.isInvalid = (!res.data || res.data.length == 0);
+    return res;
+}
+
+async function ParseRawModule(exporterFuncName, rawFileStructs) {
+    var funcName = exporterFuncName ? exporterFuncName : "ParseRaw";
+    var Module = await ToolsModule();
+
+    window.Tools = Module;
+    Tools.ccall('Init', 'number', []);
+    g_Loader.toolsData.exportOptions = JSON.parse(g_Loader.toolsData.exportResult);
+    g_Loader.toolsData.exportResult = null;
+
+    var func = Tools.cwrap(funcName, 'number', ['string', 'number', 'number']);
+
+    function CallFunc(meta, rawDataArr) {
+        var localRawDataArr = meta ? rawDataArr : new Uint8Array(1);
+        var dataPtr = Tools._malloc(localRawDataArr.length);
+        Tools.HEAPU8.set(localRawDataArr, dataPtr);
+        func(meta, dataPtr, localRawDataArr.length);
+        Tools._free(dataPtr);
+    }
+
+    var localId = 0;
+    for (var i = 0; i < rawFileStructs.length; i++) {
+        var fileInfo = await GetFileDataAndMeta(funcName, rawFileStructs, i, localId);
+        if (!fileInfo.isInvalid) {
+            CallFunc(fileInfo.meta, fileInfo.data);
+            localId++;
+        }
+    }
+
+    var options = GetExporterFuncOptions(funcName);
+    if (options && options.multiRaw) {
+        CallFunc("", null);
+    }
+
+    g_Loader.isDataInitialized = true;
+    g_Loader.rawDataArr = null;
+    window.Tools = null;
+}
+
+function ParseRawWorker(exporterFuncName, rawFileStructs) {
+    const funcName = exporterFuncName ? exporterFuncName : "";
+    var isMultiRawFunc = false;
+
+    function TerminateWorker() {
+        g_Loader.isDataInitialized = true;
+        g_Loader.worker.instance.terminate();
+        URL.revokeObjectURL(g_Loader.worker.urlObj);
+        g_Loader.worker = {};
+    }
+
+    return new Promise((resolve, reject) => {
+        var localId = 0;
+        var fileStructId = 0;
+        g_Loader.worker.isReady = false;
+        try {
+            g_Loader.worker.instance = new Worker(g_Loader.worker.urlObj);
+        } catch (error) {
+            g_Loader.isBrowserUnsupported = true;
+            g_Loader.isBrowserWorkerError = true;
+            console.error("Error creating a worker for data loading:", error);
+            throw new Error("Browser does not support the required features");
+        }
+        g_Loader.worker.instance.onmessage = async function (event) {
+            if (event.data == "") {
+                if (g_Loader.worker.isReady && g_Loader.worker.hasAllData) {
+                    TerminateWorker();
+                    resolve();
+                } else {
+                    g_Loader.worker.isReady = true;
+
+                    var fileInfo = {};
+                    fileInfo.meta = "";
+                    fileInfo.data = null;
+                    fileInfo.isInvalid = true;
+                    for (; fileStructId < rawFileStructs.length;) {
+                        fileInfo = await GetFileDataAndMeta(funcName, rawFileStructs, fileStructId, localId);
+
+                        fileStructId++;
+                        if (!fileInfo.isInvalid) {
+                            localId++;
+                            break;
+                        }
+                    }
+
+                    if (fileInfo.isInvalid) {
+                        fileInfo.meta = "";
+                        fileInfo.data = new Uint8Array(1);
+                        g_Loader.worker.hasAllData = true;
+                    }
+
+                    if (!isMultiRawFunc) {
+                        g_Loader.worker.hasAllData = true;
+                    }
+
+                    if (!isMultiRawFunc && fileInfo.isInvalid) {
+                        TerminateWorker();
+                        g_Loader.rawDataArr = null;
+                        resolve();
+                    } else {
+                        g_Loader.worker.instance.postMessage({
+                            func: funcName,
+                            meta: fileInfo.meta,
+                            payload: fileInfo.data.buffer,
+                        }, [fileInfo.data.buffer]);
+                        g_Loader.rawDataArr = null;
+                    }
+                }
+            } else {
+                if (g_Loader.worker.isReady) {
+                    if (funcName == "") {
+                        ExecStatement(event.data);
+                        UpdateLoadingProgress();
+                    } else {
+                        SaveExportResult(event.data);
+                    }
+                } else {
+                    g_Loader.toolsData.exportOptions = JSON.parse(event.data);
+                    const options = GetExporterFuncOptions(funcName);
+                    isMultiRawFunc = (options && options.multiRaw);
+                }
+            }
+        };
+    });
+}
+
+function ShowSpinner(vis) {
+    var divElement = document.getElementById("progressSpinner");
+    divElement.style.display = vis ? "" : "none";
+    g_Loader.isExportInProgress = vis;
+}
+
+function ShowUiRoot() {
+    g_Loader.progress = {};
+    var divElement = document.getElementById("progressDots");
+    divElement.textContent = "";
+    divElement.display = "none";
+
+    divElement = document.getElementById("root");
+    divElement.style.display = "";
+
+    var dt = ComposeOrigDatetime(true);
+    document.title += " " + dt;
+}
+
+function HaltPage() {
+    var dotsDiv = document.getElementById("progressDots");
+    dotsDiv.style.textAlign = "center";
+    if (g_Loader.isDataInitialized) {
+        if (Frames.length == 0) {
+            dotsDiv.innerHTML = "<span style='font-size: 1.2rem;'>This dump contains zero frames.</span><br>" +
+                "Something likely went wrong during the capture.";
+        } else {
+            dotsDiv.innerHTML = "<span style='font-size: 1.2rem;'>Error loading viewer.</span><br>" +
+                "See browser's developer console for details.";
+        }
+    } if (g_Loader.isBrowserUnsupported) {
+        let msg = "<span style='font-size: 1.2rem;'>Browser failed to load the profiling data.</span><br>";
+        if (g_Loader.isBrowserUnzipError) {
+            msg += "Preparation for data decompression was unsuccessful.";
+        } else if (g_Loader.isBrowserWorkerError) {
+            msg += "Creation of worker for data loading was unsuccessful.";
+        }
+        msg += " The browser may not support the required features for opening this dump.";
+        dotsDiv.innerHTML = msg;
+    } else {
+        dotsDiv.innerHTML = "<span style='font-size: 1.2rem;'>No profiling data found.</span><br>" +
+            "If this page was saved using a web browser, please retry saving it by clicking the " +
+            "top menu button \u21e9 (Save to file) in the Microprofiler's web UI.<br>" +
+            "This option ensures the original file name and internal data remain intact.<br>" +
+            "Alternatively, you can try 'Webpage, HTML Only' mode when saving.<br>" +
+            "Also, it is recommended to open dump files in a browser,<br>" +
+            "as document reader apps and previewers may skip some of the saved data.";
+    }
+}
+
+function ParseUrlArgs() {
+    const argsStr = g_Loader.urlAnchor.slice(1);
+    const pairs = argsStr.split('&');
+    const argsMap = new Map();
+    pairs.forEach(pair => {
+        const [key, value] = pair.split('=');
+        argsMap.set(key, value);
+    });
+    return argsMap;
+}
+
+function ProcessUrlArgs() {
+    var argsMap = ParseUrlArgs();
+    if (argsMap.has("ExportMarkersCSV")) {
+        ExportMarkersCSV();
+    }
+}
+
+async function InitData() {
+    g_Loader.toolsData = {};
+    if (window.InitDataImpl != undefined) {
+        InitDataImpl();
+        g_Loader.isDataInitialized = true;
+    } else {
+        await ExtractAndExportRaw();
+    }
+    if (Frames.length == 0) {
+        throw new Error("Zero frames found");
+    }
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// Drag and drop
+// Diff / Combine
+
+async function ZipData(inputData, skipFirstBytes, addPrefix) {
+    const zipPrefixSize = 2 * 4;
+    var binaryArray = skipFirstBytes ? inputData.slice(skipFirstBytes) : inputData;
+
+    const inputStream = new ReadableStream({
+        start(controller) {
+            controller.enqueue(binaryArray);
+            controller.close();
+        }
+    });
+
+    const compressionStream = new CompressionStream("deflate");
+    const readableStream = inputStream.pipeThrough(compressionStream);
+
+    const reader = readableStream.getReader();
+    var chunks = [];
+    var resPos = 0;
+
+    if (addPrefix) {
+        var prefixArray = new Uint8Array(zipPrefixSize);
+        const view = new DataView(prefixArray.buffer);
+        view.setUint32(0, binaryArray.length, true);
+        chunks.push(prefixArray);
+        resPos += prefixArray.length;
+    }
+
+    while (true) {
+        const { done, value } = await reader.read();
+        if (done)
+            break;
+        chunks.push(value);
+        resPos += value.length;
+    }
+
+    var resData = new Uint8Array(resPos);
+    resPos = 0;
+
+    chunks.forEach(chunk => {
+        resData.set(chunk, resPos);
+        resPos += chunk.length;
+    });
+
+    return resData;
+}
+
+function ReadFileToUint8Array(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+            const arrayBuffer = reader.result;
+            const binaryArray = new Uint8Array(arrayBuffer);
+            resolve(binaryArray);
+        };
+        reader.onerror = reject;
+        reader.readAsArrayBuffer(file);
+    });
+}
+
+function Uint8ArrayToBase64(uint8Array) {
+    let binaryString = "";
+    for (let i = 0; i < uint8Array.byteLength; i++) {
+        binaryString += String.fromCharCode(uint8Array[i]);
+    }
+    return btoa(binaryString);
+}
+
+function CompareUint8ArrayWithStringBytes(uint8Array, str) {
+    if (uint8Array.length !== str.length) {
+        return false;
+    }
+    for (let i = 0; i < uint8Array.length; i++) {
+        if (uint8Array[i] !== str.charCodeAt(i)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function CheckFileMagic(dataArray, magicStr) {
+    if (dataArray.length <= magicStr.length)
+        return false;
+    const firstBytes = dataArray.slice(0, magicStr.length);
+    const res = CompareUint8ArrayWithStringBytes(firstBytes, magicStr);
+    return res;
+}
+
+async function RawToHtml(file) {
+    try {
+        const rawMagic = "\0\0\0\0R0FL";
+        const rawArray = await ReadFileToUint8Array(file);
+        if (!CheckFileMagic(rawArray, rawMagic))
+            throw new Error("Incorrect input file format");
+
+        var zipArray = await ZipData(rawArray, rawMagic.length, true);
+        const zipBase64 = Uint8ArrayToBase64(zipArray);
+        var doc = GetHtmlSource(false, zipBase64);
+
+        var dotIndex = file.name.lastIndexOf('.');
+        var baseName = file.name.substring(0, dotIndex);
+        var resName = baseName + '.html';
+
+        SaveExportResult(doc);
+        OpenNewExportTab("", resName, true);
+    } catch (error) {
+        console.error("Error converting raw to html:", error);
+    }
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+function ChangeCssClassAttr(className, attrName, attrValue) {
+    const stylesheet = document.styleSheets[0];
+    for (let i = 0; i < stylesheet.cssRules.length; i++) {
+        const rule = stylesheet.cssRules[i];
+        if (rule.selectorText === className) {
+            rule.style[attrName] = attrValue;
+            break;
+        }
+    }
+}
+
+function ShowDropSigns(show) {
+    ChangeCssClassAttr('.drop-zone', 'visibility', (show ? '' : 'hidden'));
+}
+
+function DragOverHandler(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
+    if (g_Loader.isDragInProgress)
+        return;
+
+    // Check if the data is a file
+    var hasFiles = false;
+    const types = evt.dataTransfer.types;
+    for (let i = 0; i < types.length; i++) {
+        if (types[i] == 'Files') {
+            hasFiles = true;
+            break;
+        }
+    }
+
+    if (hasFiles) {
+        ShowDiffWindow(true);
+        ShowDropSigns(true);
+        g_Loader.isDragInProgress = true;
+    }
+}
+
+function DragEndHandler(evt, bForce) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
+    if (!g_Loader.isDragInProgress)
+        return;
+
+    const isDragEnded = bForce ||
+        (evt.x == 0 && evt.y == 0) ||
+        (evt.x < 0 || evt.y < 0 || evt.x >= window.innerWidth || evt.y >= window.innerHeight);
+    if (isDragEnded) {
+        ShowDropSigns(false);
+        g_Loader.isDragInProgress = false;
+    }
+}
+
+function DragOverSideHandler(evt, color) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
+    var signEl = evt.target.querySelector('.drop-sign');
+    signEl.style.color = color;
+}
+
+function DragEndSideHandler(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
+    var signEl = evt.target.querySelector('.drop-sign');
+    signEl.style.color = "";
+}
+
+function DropSideHandler(evt, sideId) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
+    DragEndSideHandler(evt);
+    DragEndHandler(evt, true);
+
+    for (var i = 0; i < evt.dataTransfer.files.length; i++) {
+        const file = evt.dataTransfer.files[i];
+        AddToDiffSide(sideId, file);
+    }
+    UpdateDiffSideTableHtml(sideId);
+}
+
+async function DropHandler(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
+    DragEndHandler(evt, true);
+
+    var files = evt.dataTransfer.files;
+    if (!files || files.length == 0)
+        return;
+
+    const file = files[0];
+
+    // Raw to HTML
+    if (files.length == 1 && file.name.endsWith(".raw")) {
+        if (window.IsHtmlSavable) {
+            return RawToHtml(file);
+        }
+        return;
+    }
+
+    if (!g_Loader.toolsData.ComboDiffFuncName)
+        return;
+    if (files.length == 1 && !IsSupportedDumpFileExt(file.name))
+        return;
+
+    // Generate a Diff either with the current dump or between the two dropped files
+    var rawFileStructs = [{ isSelf: true, localGroupId: 0 }, { file: file, localGroupId: 1 }];
+    if (files.length > 1) {
+        rawFileStructs = [{ file: files[0], localGroupId: 0 }, { file: files[1], localGroupId: 1 }];
+    }
+    ShowSpinner(true);
+    await ExtractAndExportRaw(g_Loader.toolsData.ComboDiffFuncName, rawFileStructs);
+    OpenNewExportTab("Diff");
+    ShowSpinner(false);
+}
+
+function IsSupportedDumpFileExt(fileName) {
+    return fileName.endsWith(".html") || fileName.endsWith(".htm") || fileName.endsWith(".raw");
+}
+
+function ClearDiffSides() {
+    g_Loader.DiffSides = [];
+}
+
+function InitDiffSides() {
+    g_Loader.DiffSides = [[], []];
+    var selfEntry = {
+        title: GetExportFilename("") + " (this file)",
+        name: GetExportFilename(""),
+        size: 0,
+        isSelf: true,
+    };
+    g_Loader.DiffSides[0].push(selfEntry);
+}
+
+function AddToDiffSide(sideId, file) {
+    if (!IsSupportedDumpFileExt(file.name))
+        return;
+    var side = g_Loader.DiffSides[sideId];
+    for (var j = 0; j < side.length; j++) {
+        var entry = side[j];
+        if (entry.name == file.name)
+            return;
+    }
+    var selfEntry = {
+        title: file.name,
+        name: file.name,
+        size: 0,
+        file: file,
+    };
+    g_Loader.DiffSides[sideId].push(selfEntry);
+}
+
+function RemoveFromDiffSide(sideId, j) {
+    var side = g_Loader.DiffSides[sideId];
+    side.splice(j, 1);
+    UpdateDiffSideTableHtml(sideId);
+}
+
+function DiffSidesToFileStructs(sideId) {
+    var rawFileStructs = [];
+
+    function PushFileStructs(side, localGroupId) {
+        for (var j = 0; j < side.length; j++) {
+            var entry = side[j];
+            var fileStruct = {};
+            fileStruct.localGroupId = localGroupId;
+            if (entry.isSelf) {
+                fileStruct.isSelf = true;
+            } else {
+                fileStruct.file = entry.file;
+            }
+            rawFileStructs.push(fileStruct);
+        }
+    }
+
+    if (sideId < 0) {
+        for (var i = 0; i < 2; i++) {
+            var side = g_Loader.DiffSides[i];
+            PushFileStructs(side, i);
+        }
+    } else {
+        var side = g_Loader.DiffSides[sideId];
+        PushFileStructs(side, 0);
+    }
+
+    return rawFileStructs;
+}
+
+function UpdateDiffSideTableHtml(sideId) {
+    var html = "";
+    var side = g_Loader.DiffSides[sideId];
+    for (var j = 0; j < side.length; j++) {
+        var entry = side[j];
+        html += '<tr class="tr-highlight"><td class="td-highlight">' + entry.title +
+            '<span class="delete-button" onclick="RemoveFromDiffSide(' + sideId + ', ' + j + ');">&#10006;</span>' +
+            '</td></tr>';
+    }
+    var tableBodyEl = document.getElementById('xtooltip_diff_tbody_' + sideId);
+    tableBodyEl.innerHTML = html;
+}
+
+async function ExportDiffSides(sideId) {
+    if (g_Loader.isExportInProgress)
+        return;
+    if (sideId < 0 && g_Loader.DiffSides[0].length == 0 && g_Loader.DiffSides[1].length == 0)
+        return;
+    if (sideId >= 0 && g_Loader.DiffSides[sideId].length == 0)
+        return;
+
+    ShowSpinner(true);
+    var rawFileStructs = DiffSidesToFileStructs(sideId);
+    await ExtractAndExportRaw(g_Loader.toolsData.ComboDiffFuncName, rawFileStructs);
+    const exportFilePostfix = (sideId < 0) ? "Diff" : "Combo";
+    OpenNewExportTab(exportFilePostfix);
+    ShowSpinner(false);
+}
+
+function ShowDiffWindow(Show) {
+    if (!g_Loader.toolsData.ComboDiffFuncName)
+        return;
+    if (Show && g_Loader.isDiffWindowVisible)
+        return;
+
+    if (Show && !g_Loader.isDiffWindowVisible) {
+        ShowEvents(false);
+    }
+
+    // Initial window setup
+    var EventsWindow = document.getElementById('eventswindow');
+    EventsWindow.innerHTML = '';
+    EventsWindow.style.cssText = `
+        user-select: none; font: 12px Courier New;
+        flex-direction: column; overflow: hidden; scrollbar-color: #ffffff #000000;
+        position: absolute; z-index: 5; text-align: left;
+        padding: 0px; background-color: #000000;
+        left: 50%; top: 50%;
+        transform: translate(-50%, -50%);
+        width: 880px; height: 330px;`;
+
+    if (Show) {
+        g_Loader.isDiffWindowVisible = true;
+        EventsWindow.style.display = 'flex';
+    } else {
+        g_Loader.isDiffWindowVisible = false;
+        EventsWindow.style.display = 'none';
+        ClearDiffSides();
+        return;
+    }
+
+    function SideHtml(baseDiv, color, id, text, sideId, tableBodyId) {
+        var html = `
+            <div style="` + baseDiv + ` display: flex;">
+                <div style="background-color: ` + color + `; display: flex;">
+                    <div class="tooltip-area" id="` + id + `" style="cursor: pointer; margin: 2px; padding: 5px; text-align: left; font-weight: bold; flex-grow: 1;">
+                        ` + text + `
+                        <span class="tooltip-text">Click to combine</span>
+                    </div>
+                </div>
+                <div style="position: relative; flex-grow: 1; display: flex;">
+                    <div class="drop-zone"
+                        ondragover="DragOverSideHandler(event, '` + color + `');"
+                        ondragend="DragEndSideHandler(event);" ondragleave="DragEndSideHandler(event);"
+                        ondrop="DropSideHandler(event, ` + sideId + `);"
+                    >
+                        <span class="drop-sign">&DownArrowBar;</span>
+                    </div>
+                    <div style="background-color:#333333; overflow-y: scroll; overflow-x: hidden;">
+                        <table style="padding: 2px; white-space: nowrap; text-overflow: ellipsis; table-layout:fixed; width:100%; height: 0%;">
+                            <colgroup></colgroup>
+                            <tbody id="` + tableBodyId + `">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>`;
+        return html;
+    };
+
+    var html = `
+        <div style="padding: 2px;">
+            <div id="xtooltip_list_header" style="display: flex;">
+                <div id="xtooltip_list_close" style="cursor: pointer;">&#10006;&nbsp;Close</div>
+                <div id="xtooltip_list_title" style="flex-grow: 1; text-align: right;"></div>
+            </div>
+        </div>
+        <div style="flex-grow: 1; flex-direction: column; display: flex;">
+            <div style="width: 100%; height: 0px; flex-grow: 1; display: flex;">`
+        + SideHtml('width: 50%;', '#22c222', 'xtooltip_combine_0', 'Left&nbsp;<br/>side', 0, "xtooltip_diff_tbody_0")
+        + SideHtml('width: 0%; flex-grow: 1;', '#5252d2', 'xtooltip_combine_1', 'Right<br/>side', 1, "xtooltip_diff_tbody_1") + `
+            </div>
+            <div style="padding: 2px;">
+                <div id="xtooltip_diff" style="cursor: pointer; padding: 7px; text-align: center; font-weight: bold;">Combine & Compare</div>
+            </div>
+        </div>`;
+
+    EventsWindow.innerHTML = html;
+
+    InitDiffSides();
+    UpdateDiffSideTableHtml(0);
+    UpdateDiffSideTableHtml(1);
+
+    var DivOnFn = function () {
+        this.style.backgroundColor = '#555555';
+    };
+    var DivOffFn = function () {
+        this.style.backgroundColor = '';
+    };
+
+    var XTitle = document.getElementById('xtooltip_list_title');
+    XTitle.textContent = 'MicroProfiler Dump Combine/Compare Tool';
+
+    var XClose = document.getElementById('xtooltip_list_close');
+    XClose.addEventListener('click', function () { ShowDiffWindow(false); });
+    XClose.addEventListener('mouseover', DivOnFn);
+    XClose.addEventListener('mouseout', DivOffFn);
+
+    var XCombine0 = document.getElementById('xtooltip_combine_0');
+    var XCombine1 = document.getElementById('xtooltip_combine_1');
+    XCombine0.addEventListener('click', async function () { return ExportDiffSides(0); });
+    XCombine1.addEventListener('click', async function () { return ExportDiffSides(1); });
+
+    var XDiff = document.getElementById('xtooltip_diff');
+    XDiff.addEventListener('click', async function () { return ExportDiffSides(-1); });
+    XDiff.addEventListener('mouseover', DivOnFn);
+    XDiff.addEventListener('mouseout', DivOffFn);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// Extension code for events support and XRay mode
+
+var EventBaseId = 128;
+
+var XRayModes = {
+    Count: 0,
+    Sum: 1,
+};
+
+// Accumulator type for counting events and their values
+var TxType = {
+    count: 0,
+    sum: 0,
+    add: function (v, c) {
+        c = (c == undefined) ? 1 : c;
+        this.count += c;
+        this.sum += v;
+    },
+    getField: function (mode) {
+        if (mode == XRayModes.Count) {
+            return this.count;
+        }
+        return this.sum;
+    },
+};
+
+var NetDirection = {
+    rx: 0,
+    tx: 1,
+};
+
+function NetType() {
+    return {
+        rx: DeepCopy(TxType),
+        tx: DeepCopy(TxType),
+
+        add: function(v, c, dir) {
+            if (dir === NetDirection.rx) {
+                this.rx.add(v, c);
+            } else {
+                this.tx.add(v, c);
+            }
+        },
+
+        getField: function(mode, dir) {
+            if (dir === NetDirection.rx) {
+                return this.rx.getField(mode);
+            } else {
+                return this.tx.getField(mode);
+            }
+        },
+
+        maximize: function(other, dir) {
+            if (dir === NetDirection.rx) {
+                this.rx.count = Math.max(this.rx.count, other.rx.count);
+                this.rx.sum = Math.max(this.rx.sum, other.rx.sum);
+            } else {
+                this.tx.count = Math.max(this.tx.count, other.tx.count);
+                this.tx.sum = Math.max(this.tx.sum, other.tx.sum);
+            }
+        }
+    }
+}
+
+var SpanType = {
+    name: "",
+    tsBegin: 0,
+    tsEnd: 0,
+    colorBg: "",
+    colorLine: "",
+};
+
+function DecimalToHex(d, padding) {
+    var hex = Number(Math.floor(d)).toString(16);
+    padding = typeof (padding) === "undefined" || padding === null ? padding = 2 : padding;
+    while (hex.length < padding) {
+        hex = "0" + hex;
+    }
+    return hex;
+}
+
+function IsString(s) {
+    return (typeof s === 'string' || s instanceof String);
+}
+
+function IsObject(v) {
+    return (typeof v === 'object' && v !== null);
+}
+
+function IsSimpleType(v) {
+    return (typeof v !== 'object' || v === null);
+}
+
+function DeepCopy(obj) {
+    return Object.create(obj);
+}
+
+function Grad255ToColor(grad255) {
+    var grad = DecimalToHex(grad255);
+    var color = "#" + grad + grad + grad;
+    return color;
+}
+
+function GradToColor(grad) {
+    return Grad255ToColor(grad * 255);
+}
+
+function hexToRGB(hex, alpha) {
+    var r = parseInt(hex.slice(1, 3), 16),
+        g = parseInt(hex.slice(3, 5), 16),
+        b = parseInt(hex.slice(5, 7), 16);
+
+    if (alpha) {
+        return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
+    } else {
+        return "rgb(" + r + ", " + g + ", " + b + ")";
+    }
+}
+
+function binarySearchNearestLowerKey(dict, target) {
+    const keys = Object.keys(dict).map(Number).sort((a, b) => a - b);
+    const keyCount = keys.length;
+
+    if (keyCount === 0) {
+        return null;
+    }
+
+    if (keys[0] > target) {
+        return keys[0];
+    }
+
+    let low = 0;
+    let high = keyCount - 1;
+    let resultKey = null;
+
+    while (low <= high) {
+        const mid = Math.floor((low + high) / 2);
+        const midKey = keys[mid];
+
+        if (midKey <= target) {
+            resultKey = midKey;
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+
+    return resultKey;
+}
+
+function GetNormalizedFromTx(txEntry, isFrameLimits) {
+    var limits = isFrameLimits ? g_Ext.xray.selectedLimits.frame : g_Ext.xray.selectedLimits.scope;
+    var maxValue = limits.getField(g_Ext.xray.mode);
+    var value = txEntry.getField(g_Ext.xray.mode);
+    var grad01 = (maxValue > 0) ? Math.min(value / maxValue, 1) : 0;
+    if (grad01 > 0) {
+        grad01 = Math.max(grad01, 0.02);
+    }
+    var grad255 = Math.floor(Math.pow(grad01, g_Ext.xray.intensityPower) * 255);
+    var color = Grad255ToColor(grad255);
+    return {
+        value: value,
+        grad01: grad01,
+        grad255: grad255,
+        color: color,
+        isDark: grad255 < 170,
+    };
+}
+
+function StrHtmlEscape(s) {
+    return s.replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+}
+
+function ValueByMode(v) {
+    return g_Ext.xray.mode === XRayModes.Count ? ValueToCount(v) : ValueToBytes(v);
+}
+
+function ValueToCount(v) {
+    return v;
+}
+
+function ValueToBytes(v) {
+    let res;
+    if (v > 1000000)
+        res = Math.floor(v / 100000) / 10 + "MB";
+    else if (v > 10000)
+        res = Math.floor(v / 1000) + "KB";
+    else if (v > 1000)
+        res = Math.floor(v / 100) / 10 + "KB";
+    else
+        res = v + "B";
+    return res;
+}
+
+function ColorUint32Multiply(color, k) {
+    var res = 0;
+    var r = ((color >> 16) & 0xff);
+    var g = ((color >> 8) & 0xff);
+    var b = ((color >> 0) & 0xff);
+    r = clamp(Math.floor(r * k), 0, 255);
+    g = clamp(Math.floor(g * k), 0, 255);
+    b = clamp(Math.floor(b * k), 0, 255);
+    res |= (r << 16);
+    res |= (g << 8);
+    res |= (b << 0);
+    return res;
+}
+
+/**
+ * Modified log function used for log scale graphs
+ * @param {number} x - the number to take the log of (base 2)
+ * @returns modified log result. Returns 0 if x < 1, returns 1 if 1 <= x < 2, else returns log_2(x) + 1
+ */
+function ModifiedSafeLog(x) {
+    if (x < 1) {
+        return 0;
+    } else if (x < 2) {
+        return 1;
+    }
+    return Math.log(x) / Math.log(2) + 1;
+}
+
+/**
+ * Generates a network event category based color for graphing purposes
+ * @param {number} categoryIndex - the index in netEventsCategory that corresponds to the event
+ * @returns - a unique color for the given category
+ */
+function NetworkEventCategoryColor(categoryIndex) {
+    const categoryColors = [
+        '#00FFFF',
+        '#8000FF',
+        '#FF0000',
+        '#BBFF00',
+        '#00AAFF',
+        '#FF00FF',
+        '#FF7B00',
+        '#00FF7B',
+        '#0000FF',
+        '#FF66B5',
+        '#FFCA00',
+        '#00FF4A',
+        '#6666FF',
+        '#FF005B',
+        '#DBFF00',
+        '#00FFA4',
+    ];
+    return categoryColors[categoryIndex];
+}
+
+/**
+ * Scales down a hex color proportionally towards #000000 by the given factor
+ * @param {string} color - the color to scale down
+ * @param {float} factor - the factor by which to scale down the color
+ * @returns {string} the scaled down color
+ */
+function ScaleDownColor(color, factor) {
+    if (factor >= 1 || factor < 0) {
+        return color;
+    }
+    var r = Number.parseInt(color.slice(1, 3), 16);
+    var g = Number.parseInt(color.slice(3, 5), 16);
+    var b = Number.parseInt(color.slice(5, 7), 16);
+    r *= factor;
+    g *= factor;
+    b *= factor;
+    return '#' + DecimalToHex(r) + DecimalToHex(g) + DecimalToHex(b);
+}
+
+// Calculate threshold values for all sensitivity levels from 0 to 100.
+// The concept is similar to percentiles.
+function CalcPercentiles(txEntries, mode) {
+    var values = [];
+    txEntries.forEach(function (entry) {
+        values.push(entry.getField(mode));
+    });
+
+    values.sort(function (a, b) {
+        return a - b;
+    });
+    // Filter out duplicates
+    var uniqueSorted = [...new Set(values)];
+
+    var res = Array(100 + 1);
+    for (var i = 0; i <= 100; i++) {
+        var val = 1;
+        if (uniqueSorted.length > 0) {
+            const pos = Math.floor((uniqueSorted.length - 1) * (i / 100));
+            val = uniqueSorted[pos];
+        }
+        res[i] = val;
+    }
+    return res;
+}
+
+/**
+ * Gathers all events within the given frame, matching category and direction.
+ * Similar to GatherHoverEvents but for an entire frame.
+ * @param nFrame - Index of the frame to gather from
+ * @param pluginInfo - Plugin specific information to be passed back to the plugin for filtering
+ * @returns {[Object]} - Array of decoded event objects
+ */
+function GatherFrameEvents(nFrame, pluginInfo) {
+    if (g_Ext.currentPlugin.gatherEventsBefore) {
+        g_Ext.currentPlugin.gatherEventsBefore();
+    }
+    let fr = Frames[nFrame];
+    let HoverInfo = [];
+    let nNumLogs = fr.ts.length;
+    for (let nLog = 0; nLog < nNumLogs; nLog++) {
+        let ts = fr.ts[nLog];
+        let ti = fr.ti[nLog];
+        let tt = fr.tt[nLog];
+        let tl = fr.tl[nLog];
+        let numEntries = ts.length;
+        for (let j = numEntries - 1; j >= 0; j--) {
+            let type = tt[j];
+            if (type > EventBaseId) {
+                let typeLookup = g_Ext.typeLookup[type];
+                let plugin = typeLookup.plugin;
+                if (typeLookup.IsActive() && !typeLookup.isBackground) {
+                    let evt = RawToEvent(ts, ti, tt, tl, j);
+                    let ctx = plugin.decode(evt, true);
+                    let eventList = [ctx];
+                    if (plugin.gatherEvent) {
+                        eventList = plugin.gatherEvent(ctx, nFrame, pluginInfo);
+                    }
+                    HoverInfo.push(...eventList);
+                }
+            }
+        }
+    }
+    return HoverInfo.reverse();
+}
+
+function GatherHoverEvents(TimerIndex, StartIndex, nLog, nFrameLast) {
+    var HoverInfo = [];
+    var StackPos = 1;
+    if (g_Ext.currentPlugin.gatherEventsBefore) {
+        g_Ext.currentPlugin.gatherEventsBefore();
+    }
+    //search backwards, aggregate events
+    for (var i = nFrameLast; i >= 0; i--) {
+        var fr = Frames[i];
+        var ts = fr.ts[nLog];
+        var ti = fr.ti[nLog];
+        var tt = fr.tt[nLog];
+        var tl = fr.tl[nLog];
+        var start = i == nFrameLast ? StartIndex - 1 : ts.length - 1;
+
+        for (var j = start; j >= 0; j--) {
+            var type = tt[j];
+            var index = ti[j];
+            if (type == 1) // enter
+            {
+                StackPos--;
+                if (StackPos == 0 && index == TimerIndex) {
+                    return HoverInfo.reverse();
+                }
+            }
+            else if (type == 0) // exit
+            {
+                StackPos++;
+            }
+            else if (type > EventBaseId && StackPos == 1) // event
+            {
+                var typeLookup = g_Ext.typeLookup[type];
+                if (typeLookup.IsActive() && !typeLookup.isBackground) {
+                    var evt = RawToEvent(ts, ti, tt, tl, j);
+                    var ctx = typeLookup.plugin.decode(evt, true);
+                    if (typeLookup.plugin.gatherEvent) {
+                        let eventList = typeLookup.plugin.gatherEvent(ctx, i);
+                        HoverInfo.push(...eventList);
+                    } else {
+                        HoverInfo.push(ctx);
+                    }
+                }
+            }
+        }
+    }
+}
+
+function UpdateThresholds() {
+    if (g_Ext.xray.autoLimits) {
+        var frameVariants = g_Ext.xray.calculatedLimits.frameVariants;
+        var frameThresholds = g_Ext.xray.calculatedLimits.frameThresholds;
+        g_Ext.xray.selectedLimits.frame.count = frameVariants.count[frameThresholds.count];
+        g_Ext.xray.selectedLimits.frame.sum = frameVariants.sum[frameThresholds.sum];
+
+        var scopeVariants = g_Ext.xray.calculatedLimits.scopeVariants;
+        var scopeThresholds = g_Ext.xray.calculatedLimits.scopeThresholds;
+        g_Ext.xray.selectedLimits.scope.count = scopeVariants.count[scopeThresholds.count];
+        g_Ext.xray.selectedLimits.scope.sum = scopeVariants.sum[scopeThresholds.sum];
+    } else {
+        g_Ext.xray.selectedLimits.frame.count = 5000;
+        g_Ext.xray.selectedLimits.frame.sum = 10000000;
+        g_Ext.xray.selectedLimits.scope.count = 200;
+        g_Ext.xray.selectedLimits.scope.sum = 200000;
+    }
+}
+
+function ScanEvents() {
+    for (var i = 0; i < Frames.length; ++i) {
+        var fr = Frames[i];
+        var nNumLogs = Frames[0].ts.length;
+        for (var nLog = 0; nLog < nNumLogs; ++nLog) {
+            var tt = fr.tt[nLog]; // timer type
+            var numEntries = tt.length;
+            for (var j = 0; j < numEntries; ++j) {
+                var logType = tt[j];
+                if (logType > EventBaseId) {
+                    // Event
+                    g_Ext.eventsPresented = true;
+                    var typeLookup = g_Ext.typeLookup[logType];
+                    if (typeLookup != undefined) {
+                        typeLookup.isPresented = true;
+                        typeLookup.plugin.isPresented = true;
+                        g_Ext.knownEventsPresented = true;
+                    }
+                } // logType
+            } // entries
+        } // threads
+    } // frames
+}
+
+function PrepareEvents() {
+    g_Ext.prepareEventsBefore();
+
+    var frameEntries = [];
+    var scopeEntries = [];
+
+    var nNumLogs = Frames[0].ts.length;
+    var threadContexts = Array(nNumLogs);
+    for (var nLog = 0; nLog < nNumLogs; ++nLog) {
+        threadContexts[nLog] = {
+            lastTimeStamp: 0,
+            lastExit: null,
+            scopeStack: Array(),
+        };
+    }
+    for (var i = 0; i < Frames.length; ++i) {
+        var fr = Frames[i];
+        fr.txAcc = DeepCopy(TxType);
+        if (fr.tx == undefined) {
+            fr.tx = [];
+        }
+        NotifyPluginsOnFrameStart(fr);
+        for (var nLog = 0; nLog < nNumLogs; ++nLog) {
+            var ts = fr.ts[nLog]; // timestamp (ms)
+            var ti = fr.ti[nLog]; // timer index
+            var tt = fr.tt[nLog]; // timer type
+            var tl = fr.tl[nLog]; // timer label
+            if (fr.tx[nLog] == undefined) {
+                fr.tx[nLog] = [];
+            }
+            var tx = fr.tx[nLog]; // custom events
+            var threadContext = threadContexts[nLog];
+            var scopeStack = threadContext.scopeStack;
+            var numEntries = tt.length;
+            for (var j = 0; j < numEntries; ++j) {
+                var logType = tt[j];
+                var scopeInfo = null;
+                if (logType == 1 || logType == 0) {
+                    scopeInfo = {
+                        frame: Frames[i],
+                        nFrame: i,
+                        nLog: nLog,
+                        txEntry: tx[j],
+                        timeStamp: ts[j],
+                    };
+                    threadContext.lastTimeStamp = scopeInfo.timeStamp;
+                }
+                if (logType == 1) {
+                    // ENTER
+                    if (tx[j] == undefined) {
+                        tx[j] = DeepCopy(TxType);
+                    } else {
+                        for (let key in tx[j]) {
+                            if (tx[j].hasOwnProperty(key)) {
+                                delete tx[j][key];
+                            }
+                        }
+                        tx[j].count = 0;
+                        tx[j].sum = 0;
+                    }
+                    scopeInfo.txEntry = tx[j];
+                    scopeStack.push(scopeInfo);
+                    NotifyPluginsOnScopeEnter(threadContext);
+                } else if (logType == 0) {
+                    // EXIT
+                    if (scopeStack.length > 0) {
+                        const curScope = scopeStack[scopeStack.length - 1];
+                        let curScopeTx = curScope.txEntry;
+                        if (curScopeTx.count > 0) { // Collect scopes
+                            scopeEntries.push(curScopeTx);
+                        }
+                        threadContext.lastExit = scopeInfo;
+                        // Notify on scope exit
+                        NotifyPluginsOnScopeExit(threadContext);
+                    }
+                    scopeStack.pop();
+                }
+                else if (logType > EventBaseId) {
+                    // Event
+                    var typeLookup = g_Ext.typeLookup[logType];
+                    if (typeLookup && typeLookup.IsActive()) {
+                        var plugin = typeLookup.plugin;
+                        var evt = RawToEvent(ts, ti, tt, tl, j);
+                        var ctx = plugin.decode(evt);
+                        if (typeLookup.isBackground) {
+                            plugin.prepare(ctx, {
+                                nLog: nLog,
+                                evtFrame: fr,
+                                ...threadContext,
+                            });
+                        } else if (scopeStack.length > 0) {
+                            const curScope = scopeStack[scopeStack.length - 1];
+                            if (!ctx.hidden) {
+                                curScope.txEntry.add(ctx.value, ctx.count);
+                                curScope.frame.txAcc.add(ctx.value, ctx.count);
+                            }
+                            if (plugin.notifyOnEvent) {
+                                plugin.notifyOnEvent(ctx, curScope);
+                            }
+                        }
+                    } // plugin
+                } // logType
+            } // entries
+        } // threads
+        if (fr.txAcc.count > 0) { // Collect frames
+            frameEntries.push(fr.txAcc);
+        }
+    } // frames
+
+    // Update frame limits
+    var frameVariants = g_Ext.xray.calculatedLimits.frameVariants;
+    frameVariants.count = CalcPercentiles(frameEntries, XRayModes.Count);
+    frameVariants.sum = CalcPercentiles(frameEntries, XRayModes.Sum);
+    // Update scope limits
+    var scopeVariants = g_Ext.xray.calculatedLimits.scopeVariants;
+    scopeVariants.count = CalcPercentiles(scopeEntries, XRayModes.Count);
+    scopeVariants.sum = CalcPercentiles(scopeEntries, XRayModes.Sum);
+
+    g_Ext.prepareEventsAfter();
+
+    PopulateDmFilterMenu();
+}
+
+function NotifyPluginsOnFrameStart(fr) {
+    g_Ext.subscribedFrameStart.forEach((plugin) => {
+        plugin.notifyOnFrameStart(fr);
+    });
+}
+
+function NotifyPluginsOnScopeEnter(threadContext) {
+    g_Ext.subscribedScopeEnter.forEach((plugin) => {
+        plugin.notifyOnScopeEnter(threadContext);
+    });
+}
+
+function NotifyPluginsOnScopeExit(threadContext) {
+    g_Ext.subscribedScopeExit.forEach((plugin) => {
+        plugin.notifyOnScopeExit(threadContext);
+    });
+}
+
+function ShowEvents(Show, frame, pluginInfo) {
+    if (Show) {
+        ShowDiffWindow(false);
+    }
+
+    // Initial window setup
+    var EventsWindow = document.getElementById('eventswindow');
+    EventsWindow.innerHTML = '';
+    EventsWindow.style.cssText = `
+        cursor: pointer; user-select: none; font: 12px Courier New;
+        flex-direction: column; overflow: hidden; scrollbar-color: #ffffff #000000;
+        position: absolute; z-index: 5; text-align: left;
+        padding: 0px; background-color: #000000;
+        display: none;`;
+    var hoverEvents;
+    if (Show) {
+        if (frame !== undefined) {
+            hoverEvents = GatherFrameEvents(frame, pluginInfo);
+        } else {
+            hoverEvents = GatherHoverEvents(nHoverToken, nHoverTokenIndex, nHoverTokenLogIndex, nHoverFrame);
+        }
+        Show = (hoverEvents.length > 0);
+    }
+    if (Show) {
+        EventsWindow.style.display = 'flex';
+    } else {
+        EventsWindow.style.display = 'none';
+        return;
+    }
+
+    // Size
+    var info = g_Ext.currentPlugin.displayInfo;
+    var w = info.w;
+    var h = info.h;
+
+    // Prepare list of Events
+    var head = '';
+    var rows = '';
+    var columnColors = ['#555555', '#333333'];
+    var dspColumns = g_Ext.currentPlugin.displayColumns(hoverEvents);
+    for (var j = 0; j < dspColumns.length; j++) {
+        head += "<th style='background-color: " + columnColors[j % 2] + ";'>" + dspColumns[j] + "</th>";
+    }
+
+    if (g_Ext.currentPlugin.eventsWindowOverride) {
+        // Plugin can generate its own html list of events
+        rows += g_Ext.currentPlugin.eventsWindowOverride(hoverEvents);
+    } else {
+        // Default events window behavior
+        for (var i = 0; i < hoverEvents.length; i++) {
+            var ctx = hoverEvents[i];
+            var dsp = g_Ext.currentPlugin.display(ctx);
+            rows += "<tr>";
+            for (var j = 0; j < dsp.length; j++) {
+                rows += "<td>" + dsp[j] + "</td>";
+            }
+            rows += "</tr>";
+        }
+    }
+
+    // Compose the final html that contains the header and 2 switchable divs for
+    // the list of events and the detailed info about 1 selected event
+    var html = `
+        <div style="padding: 2px;">
+            <div id="xtooltip_list_header" style="display: none;"> <!-- flex -->
+                <div id="xtooltip_list_close" style="">&#10006;&nbsp;Close</div>
+                <div id="xtooltip_list_title" style="flex-grow: 1; text-align: right;"></div>
+            </div>
+            <div id="xtooltip_details_header" style="display: none;"> <!-- flex -->
+                <div id="xtooltip_details_back">&#x1F868;&nbsp;Back</div>
+            </div>
+        </div>
+        <div id="xtooltip_list" style="flex-grow: 1; overflow: auto; display: none;">
+            <table style="white-space: nowrap;">
+                <colgroup></colgroup>
+                <thead>
+                    <tr>
+        ` + head + `
+                    </tr>
+                </thead>
+                <tbody>
+        ` + rows + `
+                </tbody>
+            </table>
+        </div>
+        <div id="xtooltip_details" style="cursor: auto; user-select: text; flex-grow: 1; overflow: auto; display: none;">
+        </div>`;
+    EventsWindow.innerHTML = html;
+
+    // Install mouse handlers
+    var XTitle = document.getElementById('xtooltip_list_title');
+    var XList = document.getElementById('xtooltip_list');
+    var XDetails = document.getElementById('xtooltip_details');
+    var XListHrd = document.getElementById('xtooltip_list_header');
+    var XDetailsHrd = document.getElementById('xtooltip_details_header');
+    var XClose = document.getElementById('xtooltip_list_close');
+    var XBack = document.getElementById('xtooltip_details_back');
+
+    XTitle.textContent = g_Ext.currentPlugin.category + ' events';
+    var BackFn = function () {
+        XList.style.display = '';
+        XListHrd.style.display = 'flex';
+        XDetails.style.display = 'none';
+        XDetailsHrd.style.display = 'none';
+        XDetails.innerHTML = '';
+    };
+    BackFn();
+
+    var DivOnFn = function () {
+        this.style.backgroundColor = '#555555';
+    };
+    var DivOffFn = function () {
+        this.style.backgroundColor = '';
+    };
+    XClose.addEventListener('click', function () {
+        ShowEvents(false);
+    });
+    XBack.addEventListener('click', BackFn);
+    XClose.addEventListener('mouseover', DivOnFn);
+    XClose.addEventListener('mouseout', DivOffFn);
+    XBack.addEventListener('mouseover', DivOnFn);
+    XBack.addEventListener('mouseout', DivOffFn);
+
+    // Display detailed info
+    var RowClickFn = function (index) {
+        let plugin = g_Ext.currentPlugin;
+        if (!plugin.detail)
+            return;
+
+        if (plugin.rowClickOverride) {
+            let shouldReturn = plugin.rowClickOverride(hoverEvents, index, EventsWindow);
+            if (shouldReturn) {
+                return;
+            }
+        }
+
+        XList.style.display = 'none';
+        XListHrd.style.display = 'none';
+        XDetails.style.display = '';
+        XDetailsHrd.style.display = 'flex';
+
+        var ctx = hoverEvents[index];
+        var dtl = g_Ext.currentPlugin.detail(ctx);
+        var rows = '';
+        for (var j = 0; j < dtl.fields.length; j++) {
+            rows += "<tr style='background-color: #555555;'><td>" + dtl.headers[j] + "</td></tr>";
+            rows += "<tr><td>" + dtl.fields[j] + "</td><tr>";
+        }
+        if (plugin.extendDetail) {
+            rows += plugin.extendDetail(ctx);
+        }
+        var html = "<table><tbody>" + rows + "</tbody></table>";
+        XDetails.innerHTML = html;
+        XDetails.scrollTop = 0;
+        XDetails.scrollLeft = 0;
+        if (plugin.detailEventListeners) {
+            plugin.detailEventListeners(ctx, EventsWindow, {DivOnFn, DivOffFn})
+        }
+    };
+
+    // Attach click event listener to each row
+    var rows = EventsWindow.querySelectorAll('tbody tr');
+    rows.forEach(function (row, index) {
+        row.addEventListener('click', function () { RowClickFn(index); });
+        row.addEventListener('mouseover', DivOnFn);
+        row.addEventListener('mouseout', DivOffFn);
+    });
+
+    // Calculate window pos
+    var CanvasRect = CanvasDetailedView.getBoundingClientRect();
+    var xOffset = 20;
+    var yOffset = 20;
+    var x = MouseDragX;
+    var y = MouseDragY;
+    if (frame !== undefined) {
+        y = 0;
+    }
+    if (x + w > CanvasRect.width) {
+        x = CanvasRect.width - w;
+    }
+    if (y + h + yOffset > CanvasRect.height) {
+        y = CanvasRect.height - h - yOffset;
+        x += xOffset;
+    }
+    x += CanvasRect.left - 0;
+    y += CanvasRect.top + yOffset;
+    EventsWindow.style.left = x + 'px';
+    EventsWindow.style.top = y + 'px';
+    EventsWindow.style.width = w + 'px';
+    EventsWindow.style.height = h + 'px';
+}
+
+function RawToEvent(ts, ti, tt, tl, k) {
+    var e = {
+        type: 0,
+        data: 0,
+        extra: new Uint8Array(),
+        str: "",
+    };
+
+    var tsk = ts[k];
+    e.type = tt[k] - EventBaseId;
+    e.data = Number(tsk & 0x0003ffffffffffffn);
+    var eventSize = Number((tsk >> 58n) & 0x3n);
+
+    var labelIdHigh = Number(tsk >> 60n);
+    var labelIdLow = ti[k];
+    if (labelIdLow > 0) {
+        // Label attached
+        labelIdLow--;
+        var isGlobal = false;
+        if (labelIdHigh > 0) {
+            labelIdHigh--;
+            isGlobal = true;
+        }
+        var labelId = labelIdLow | (labelIdHigh << (2 * 8));
+        e.str = isGlobal ? CGlobalLabels[labelId] : tl[labelId];
+    }
+    k++;
+
+    if (eventSize > 0) {
+        e.extra = new Uint8Array(eventSize * 10);
+        const extraView = new DataView(e.extra.buffer);
+        var offset = 0;
+        for (var i = 0; i < eventSize; i++) {
+            extraView.setBigUint64(offset, ts[k], true); // offset, value, little endian
+            offset += 8;
+            extraView.setUint16(offset, ti[k], true);
+            offset += 2;
+            k++;
+        }
+    }
+
+    return e;
+}
+
+function SetCurrentPlugin(p) {
+    if (g_Ext.currentPlugin) {
+        g_Ext.currentPlugin.isActive = false;
+        if (g_Ext.currentPlugin.HideCanvas) {
+            g_Ext.currentPlugin.HideCanvas();
+        }
+    }
+    p.isActive = true;
+    if (p.ShowCanvas) {
+        p.ShowCanvas();
+    }
+    g_Ext.currentPlugin = p;
+    if (p.preset && p.preset.mode) {
+        g_Ext.xray.mode = p.preset.mode;
+    }
+}
+
+function DefinePlugin(func) {
+    g_Loader.pluginDefines = g_Loader.pluginDefines ? g_Loader.pluginDefines : [];
+    g_Loader.pluginDefines.push(func);
+}
+
+function RegisterPlugin(p) {
+    if (window.g_Reload)
+        return;
+    p.isActive = (p.isBackground == true);
+    p.isHidden = false;
+    p.isPresented = false;
+    const id = p.baseId + EventBaseId;
+    for (var i = 0; i < p.events.length; i++) {
+        var entry = p.events[i];
+        var isStrEntry = IsString(entry);
+        var eventName = isStrEntry ? entry : entry.name;
+        if (eventName == "")
+            continue;
+        var eventSubnames = isStrEntry ? [eventName] : entry.subnames;
+        var isInPresetArr = [];
+        eventSubnames.forEach(subname => {
+            var found = p.preset && p.preset.events && p.preset.events.includes(subname);
+            isInPresetArr.push(found);
+        });
+        g_Ext.typeLookup[id + i] = {
+            id: p.baseId + i,
+            name: eventName,
+            subnames: eventSubnames,
+            subSelections: isInPresetArr,
+            plugin: p,
+            isBackground: p.isBackground,
+            isPresented: false,
+            IsSelected: function () {
+                const hasSubSelection = this.subSelections.some(Boolean);
+                return hasSubSelection || this.isBackground;
+            },
+            IsActive: function () {
+                return this.IsSelected() && this.plugin.isActive;
+            }
+        };
+    }
+    g_Ext.plugins.push(p);
+    return p;
+}
+
+function InitPluginStates() {
+    g_Ext.hasVisiblePlugins = false;
+    g_Ext.hasForegroundPlugins = false;
+    var isPresetSet = false;
+    g_Ext.subscribedFrameStart = [];
+    g_Ext.subscribedScopeEnter = [];
+    g_Ext.subscribedScopeExit = [];
+    g_Ext.plugins.forEach(function (p) {
+        var shouldHide = p.preset && (p.preset.hideAlways == true || (p.preset.hideIfNoEvents == true && !p.isPresented));
+        if (shouldHide) {
+            p.isHidden = true;
+            return;
+        }
+        if (p.isPresented) {
+            if (p.notifyOnFrameStart) {
+                g_Ext.subscribedFrameStart.push(p);
+            }
+            if (p.notifyOnScopeEnter) {
+                g_Ext.subscribedScopeEnter.push(p);
+            }
+            if (p.notifyOnScopeExit) {
+                g_Ext.subscribedScopeExit.push(p);
+            }
+        }
+        if (!isPresetSet && p.isPresented && !p.isBackground) {
+            isPresetSet = true;
+            SetCurrentPlugin(p);
+            if (p.preset && p.preset.mode != undefined) {
+                g_Ext.xray.mode = p.preset.mode;
+            }
+        }
+        g_Ext.hasVisiblePlugins = true;
+        if (!p.isBackground) {
+            g_Ext.hasForegroundPlugins = true;
+        }
+    });
+    g_Ext.xray.barEnabled = isPresetSet;
+}
+
+function AdjustXRayStyle() {
+    CanvasHistory.style.backgroundColor = g_Ext.xray.isViewEnabled() ? '#242424' : '#474747';
+}
+
+function MenuAddEntry(menuElement, id, text, clickFn, isCategory) {
+    var newLi = document.createElement('li');
+    newLi.id = id;
+
+    var newA = document.createElement('a');
+    newA.innerHTML = text;
+    if (clickFn) {
+        newA.href = "javascript:void(0)";
+        newA.onclick = function () {
+            if (newA.style.display != 'none') {
+                clickFn();
+            }
+        };
+    }
+    if (isCategory == true) {
+        newA.style.color = "black";
+        newA.style.backgroundColor = GradToColor(0.6);
+    }
+
+    newLi.appendChild(newA);
+    menuElement.appendChild(newLi);
+}
+
+function MenuUpdateEntry(elId, isSel, isHid, text) {
+    var el = document.getElementById(elId);
+    var a = el.getElementsByTagName('a')[0];
+    if (a) {
+        if (isSel != undefined) {
+            a.style['text-decoration'] = isSel ? 'underline' : 'none';
+        }
+        if (text != undefined) {
+            a.innerHTML = text;
+        }
+        a.style.display = (isHid == true) ? 'none' : '';
+    }
+};
+
+function GetMaxMenuItemTextWidth(As) {
+    let tempSpan = document.createElement('span');
+    tempSpan.style.visibility = 'hidden';
+    tempSpan.style.position = 'absolute';
+    tempSpan.style.whiteSpace = 'nowrap';
+    document.body.appendChild(tempSpan);
+
+    let maxWidth = 0;
+    for (var i = 0; i < As.length; ++i) {
+        let a = As[i];
+        if (i == 0) {
+            var computedStyle = getComputedStyle(a);
+            tempSpan.style.fontFamily = computedStyle.fontFamily;
+            tempSpan.style.fontSize = computedStyle.fontSize;
+            tempSpan.style.fontWeight = computedStyle.fontWeight;
+            tempSpan.style.fontStyle = computedStyle.fontStyle;
+        }
+        tempSpan.textContent = a.textContent;
+        let w = tempSpan.getBoundingClientRect().width;
+        maxWidth = Math.max(maxWidth, w);
+    }
+
+    document.body.removeChild(tempSpan);
+    return maxWidth;
+}
+
+function AdjustMenuItemsWidth(MenuElement) {
+    // Adjust the width of all menu items according to max text length
+    var As = MenuElement.getElementsByTagName('a');
+    var maxWidth = GetMaxMenuItemTextWidth(As);
+
+    var LenStr = (2 + maxWidth) + 'px'; 
+    var Lis = MenuElement.getElementsByTagName('li');
+    for (var i = 0; i < Lis.length; ++i) {
+        Lis[i].style['width'] = LenStr;
+    }
+}
+
+function IsPluginsTabVisible() {
+    var PluginsTab = document.getElementById('ilPlugins');
+    return PluginsTab.style.display != 'none';
+}
+
+function InitPluginUi() {
+    if (g_Ext.plugins.length == 0)
+        return;
+
+    AdjustXRayStyle();
+
+    var PluginsTab = document.getElementById('ilPlugins');
+    if (g_Ext.hasVisiblePlugins) {
+        PluginsTab.style.display = '';
+    }
+
+    var PluginMenu = document.getElementById('PluginMenu');
+    // Add a regular menu entry
+    var AddEntry = function (id, text, clickFn, isCategory) {
+        MenuAddEntry(PluginMenu, id, text, clickFn, isCategory);
+    };
+    // Add a value selector
+    var AddSelector = function (id, text, thresholds) {
+        var newLi = document.createElement('li');
+        newLi.innerHTML = "<a>" + text + "<span id='" + id + "_dec'> \<\< </span><span id='" + id + "'>00</span><span id='" + id + "_inc'> \>\> </span></a>";
+
+        var sps = newLi.getElementsByTagName('span');
+        for (var i = 0; i < sps.length; ++i) {
+            var sp = sps[i];
+            if (sp.id == id)
+                continue;
+            sp.style = "cursor: pointer;";
+            sp.onclick = function (clickEvent) {
+                var dir = clickEvent.target.textContent.includes("<<") ? -1 : 1;
+                var val = (g_Ext.xray.mode == XRayModes.Count) ? thresholds.count : thresholds.sum;
+                var dirK = dir * ((val + dir >= 90) ? 2 : 5);
+                if (g_Ext.xray.mode == XRayModes.Count) {
+                    thresholds.count = clamp(Math.floor(thresholds.count + dirK), 0, 100);
+                } else {
+                    thresholds.sum = clamp(Math.floor(thresholds.sum + dirK), 0, 100);
+                }
+                PluginUiUpdate(false, true);
+            };
+        }
+
+        PluginMenu.appendChild(newLi);
+    };
+
+    AddEntry('xview', 'Main view&nbsp;&nbsp;&nbsp;&nbsp;[x]', function () {
+        g_Ext.xray.viewEnabled = !g_Ext.xray.viewEnabled;
+        AdjustXRayStyle();
+        PluginUiUpdate(false, true);
+    });
+    AddEntry('xbar', 'Preview bar', function () {
+        g_Ext.xray.barEnabled = !g_Ext.xray.barEnabled;
+        PluginUiUpdate(false, true);
+    });
+    AddEntry('xmode', 'Mode:', function () {
+        g_Ext.xray.mode = (g_Ext.xray.mode == XRayModes.Count) ? XRayModes.Sum : XRayModes.Count;
+        PluginUiUpdate(false, true);
+    });
+
+    AddEntry('xthresholds', 'Thresholds', null, true);
+    AddSelector('xthreshold_frames', 'Frames', g_Ext.xray.calculatedLimits.frameThresholds);
+    AddSelector('xthreshold_bar', 'Bar&nbsp;&nbsp;&nbsp;', g_Ext.xray.calculatedLimits.barThresholds);
+    AddSelector('xthreshold_main', 'Main&nbsp;&nbsp;', g_Ext.xray.calculatedLimits.scopeThresholds);
+
+    AddEntry('', 'Categories', null, true);
+    g_Ext.plugins.forEach(function (p, i) {
+        if (p.isHidden)
+            return;
+        var pluginClosure = p;
+        AddEntry('xplugin_' + i, p.category, function () {
+            if (pluginClosure.isBackground) {
+                if (pluginClosure.isAlwaysActive) {
+                    pluginClosure.isVisualizationActive = !pluginClosure.isVisualizationActive; 
+                }
+                else {
+                    pluginClosure.isActive = !pluginClosure.isActive;
+                }
+                PluginUiUpdate();
+            } else if (g_Ext.currentPlugin != pluginClosure) {
+                SetCurrentPlugin(pluginClosure);
+                PluginUiUpdate();
+            }
+        });
+    });
+
+    AddEntry('xevents', 'Events', null, true);
+    g_Ext.typeLookup.forEach(function (e, i) {
+        if (e.isBackground || e.plugin.isHidden)
+            return;
+        var entryClosure = e;
+        e.subnames.forEach(function (subname, j) {
+            AddEntry('xevent_' + i + '_' + j, subname, function () {
+                entryClosure.subSelections[j] = !entryClosure.subSelections[j];
+                PluginUiUpdate();
+            });
+        });
+    });
+
+    AdjustMenuItemsWidth(PluginMenu);
+    PluginUiUpdate(true);
+}
+
+function PluginUiUpdate(isInitialCall, onlyThresholds) {
+    // Update a regular menu item
+    var UpdateElement = MenuUpdateEntry;
+    // Update a value selector
+    var UpdateSelector = function (elId, thresholds, isHid) {
+        var el = document.getElementById(elId);
+        var val = (g_Ext.xray.mode == XRayModes.Count) ? thresholds.count : thresholds.sum;
+        var valText = String(Math.floor(clamp(val, 0, 99)));
+        valText = (valText.length < 2) ? "0" + valText : valText;
+        el.innerHTML = valText;
+        el.parentNode.style.display = (isHid == true) ? 'none' : '';
+    };
+
+    var noFg = !g_Ext.hasForegroundPlugins;
+    UpdateElement('xview', g_Ext.xray.viewEnabled, noFg);
+    UpdateElement('xbar', g_Ext.xray.barEnabled, noFg);
+
+    var modeText = "Mode: " + (g_Ext.xray.mode == XRayModes.Count ? "#Count&nbsp;[c]" : "\u2211Sum&nbsp;&nbsp;&nbsp;[c]");
+    UpdateElement('xmode', false, noFg, modeText);
+
+    UpdateElement('xthresholds', undefined, noFg);
+    UpdateSelector('xthreshold_frames', g_Ext.xray.calculatedLimits.frameThresholds, noFg);
+    UpdateSelector('xthreshold_bar', g_Ext.xray.calculatedLimits.barThresholds, noFg);
+    UpdateSelector('xthreshold_main', g_Ext.xray.calculatedLimits.scopeThresholds, noFg);
+
+    g_Ext.plugins.forEach(function (p, i) {
+        if (p.isHidden)
+            return;
+        if (p.isAlwaysActive) {
+            UpdateElement('xplugin_' + i, p.isVisualizationActive);
+        }
+        else {
+            UpdateElement('xplugin_' + i, p.isActive);
+        }
+    });
+
+    UpdateElement('xevents', undefined, noFg);
+    g_Ext.typeLookup.forEach(function (e, i) {
+        if (e.isBackground || e.plugin.isHidden)
+            return;
+        e.subnames.forEach(function (subname, j) {
+            UpdateElement('xevent_' + i + '_' + j, e.subSelections[j], !e.plugin.isActive);
+        });
+    });
+
+    if (!isInitialCall) {
+        if (!onlyThresholds) {
+            PrepareEvents();
+        }
+        UpdateThresholds();
+        if (Initialized) {
+            RequestRedraw();
+        }
+    }
+}
+
+function InitPluginVars() {
+    // Main context of the extension code
+    window.g_Ext = {
+        plugins: [],
+        currentPlugin: null,
+        typeLookup: [],
+        eventsPresented: false,
+        knownEventsPresented: false,
+
+        xray: {
+            viewEnabled: false,
+            viewEnabledForced: false,
+            barEnabled: false,
+            isViewEnabled: function() { return this.viewEnabled || this.viewEnabledForced; },
+            isBarEnabled: function() { return this.barEnabled; },
+            mode: XRayModes.Count,
+            barFrameHeight: BoxHeight * 0.8,
+            barYOffset: BoxHeight,
+            intensityPower: 0.33,
+            smallScopesHighlighting: {
+                thresholdWidth: 20,
+                thresholdIntensity: 0.45,
+                extraIntensity: 0.2,
+            },
+            autoLimits: true,
+            selectedLimits: {
+                frame: DeepCopy(TxType),
+                scope: DeepCopy(TxType),
+            },
+            calculatedLimits: {
+                frameVariants: {
+                    count: [],
+                    sum: [],
+                },
+                scopeVariants: {
+                    count: [],
+                    sum: [],
+                },
+                frameThresholds: {
+                    count: 100,
+                    sum: 100,
+                },
+                barThresholds: {
+                    count: 45,
+                    sum: 60,
+                },
+                scopeThresholds: {
+                    count: 85,
+                    sum: 90,
+                },
+            }
+        },
+
+        spans: [],
+        reset: function () {
+            this.spans = [];
+        },
+        prepareEventsBefore: function () {
+            this.reset();
+            this.plugins.forEach(function (p) {
+                if (p.prepareEventsBefore) {
+                    p.prepareEventsBefore();
+                }
+            });
+        },
+        prepareEventsAfter: function () {
+            this.plugins.forEach(function (p) {
+                if (p.prepareEventsAfter) {
+                    p.prepareEventsAfter();
+                }
+            });
+        },
+    };
+
+    g_Loader.pluginDefines.forEach(func => {
+        var p = func();
+        RegisterPlugin(p);
+    });
+    g_Loader.pluginDefines = [];
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// Plugins
+
+DefinePlugin(function () {
+    return {
+        category: "Span",
+        events: ["Begin", "End"],
+        baseId: 29,
+        isBackground: true,
+        preset: {
+            hideIfNoEvents: true,
+        },
+        decode: function (evt, full) {
+            const extraView = new DataView(evt.extra.buffer);
+            var tsRaw = evt.data;
+            var tsNum = tsRaw * g_TickToTimeScale;
+            var ts = tsNum + Frames[0].framestart;
+            var hasColor = (evt.extra.length > 0);
+            var color = hasColor ? extraView.getUint32(0, true) : 0;
+            var ctx = {
+                evt: evt,
+                isBegin: evt.type == this.baseId,
+                ts: ts,
+                color: color,
+                hasColor: hasColor,
+                str: evt.str,
+            };
+            return ctx;
+        },
+        prepare: function (ctx) {
+            if (g_Ext.spans[ctx.str] == undefined) {
+                g_Ext.spans[ctx.str] = [];
+            }
+            var spanInstances = g_Ext.spans[ctx.str];
+            var newInstance = false;
+            if (ctx.isBegin || spanInstances.length == 0) {
+                spanInstances.push(DeepCopy(SpanType));
+                newInstance = true;
+            }
+            var span = spanInstances[spanInstances.length - 1];
+            if (newInstance) {
+                // Default span color
+                span.colorBg = '#8c62aa';
+                span.colorLine = '#5c42aa';
+                // Default timestamps
+                span.tsBegin = Frames[0].framestart;
+                span.tsEnd = Frames[Frames.length - 1].frameend;
+            }
+            if (ctx.isBegin) {
+                span.tsBegin = ctx.ts;
+            } else {
+                span.tsEnd = ctx.ts;
+            }
+            span.name = ctx.str;
+            if (ctx.hasColor) {
+                span.colorBg = "#" + DecimalToHex(ctx.color, 6);
+                span.colorLine = "#" + DecimalToHex(ColorUint32Multiply(ctx.color, 0.65), 6);
+            }
+        },
+    }
+});
+
+DefinePlugin(function () {
+    return {
+        category: "Multitasking",
+        events: ["ThreadInfo"],
+        baseId: 33,
+        isBackground: true,
+        preset: {
+            hideAlways: true,
+        },
+        decode: function (evt, full) {
+            let data = BigInt(evt.data);
+            let rtThreadId = Number(data & 0xffffffffffffn);
+            let isFirstEnter = Number((data >> 48n) & 0x1n) == 1;
+            let isLastEnter = Number((data >> 49n) & 0x1n) == 1;
+            var ctx = {
+                evt: evt,
+                rtThreadId: rtThreadId,
+                isFirstEnter: isFirstEnter,
+                isLastEnter: isLastEnter,
+            };
+            return ctx;
+        },
+        prepare: function (ctx, extraInfo) {
+            if (extraInfo.scopeStack.length > 0) {
+                let topScope = extraInfo.scopeStack[0];
+                topScope.txEntry.jobInfo = {
+                    instanceId: ctx.rtThreadId,
+                    enterId: 0,
+                    isFirstEnter: ctx.isFirstEnter,
+                    isLastEnter: ctx.isLastEnter,
+                };
+                if (!this.private.jobScopes.has(ctx.rtThreadId)) {
+                    this.private.jobScopes.set(ctx.rtThreadId, new Array);
+                }
+                let scopes = this.private.jobScopes.get(ctx.rtThreadId);
+                scopes.push(topScope);
+            }
+        },
+        prepareEventsAfter: function () {
+            this.private.jobScopes.forEach((arr, key) => {
+                arr.sort((a, b) => a.timeStamp - b.timeStamp);
+                arr.forEach((scope, index) => {
+                    scope.txEntry.jobInfo.enterId = index;
+                });
+            });
+            this.private.jobScopes.clear();
+        },
+        private: {
+            jobScopes: new Map(),
+        },
+    }
+});
+
+DefinePlugin(function () {
+    return {
+        category: "Memory",
+        events: ["Alloc", "Free", "Realloc"],
+        baseId: 17,
+        preset: {
+            mode: XRayModes.Count,
+            events: ["Alloc"],
+            hideIfNoEvents: true,
+        },
+        decorate: ValueByMode,
+        decode: function (evt, full) {
+            var data = BigInt(evt.data);
+            var count = Number((data >> 32n) & 0xffffn);
+            var ctx = {
+                value: Number(data & 0xffffffffn),
+                count: count ? count : 1,
+                evt: evt,
+            };
+            if (full) {
+                ctx.eventName = this.events[evt.type - this.baseId];
+            }
+            return ctx;
+        },
+        displayInfo: {
+            w: 550,
+            h: 250,
+        },
+        displayColumns: function (ctxs) {
+            return ["#", "Action", "Size", "Type", "Caller"];
+        },
+        display: function (ctx) {
+            var dsp = [
+                ctx.count,
+                ctx.eventName,
+                "<div style='text-align: right;'>" + this.decorate(ctx.value) + "</div>",
+                "",
+                "",
+            ];
+            return dsp;
+        },
+        detail: function (ctx) {
+            var dtl = {
+                headers: ["Action", "Size", "Type Info", "Call Stack"],
+                fields: [
+                    ctx.eventName,
+                    this.decorate(ctx.value),
+                    "<pre>" + StrHtmlEscape("") + "</pre>",
+                    "<pre>" + StrHtmlEscape("") + "</pre>",
+                ],
+            };
+            return dtl;
+        },
+    }
+});
+
+DefinePlugin(function () {
+    return {
+        category: "MemoryScope",
+        hint: "Memory operations",
+        events: [{ name: "MemoryScopeStats", subnames: ["Alloc", "Free"] }],
+        baseId: 20,
+        preset: {
+            mode: XRayModes.Count,
+            events: ["Alloc"],
+            hideIfNoEvents: true,
+        },
+        tooltipBarFrames: ["Memory operation intensity"],
+        tooltipBarDetailed: ["Memory operation intensity", "localized within frames.", "Use X-Ray for details."],
+        decorate: ValueByMode,
+        decode: function (evt, full) {
+            var count = 0;
+            var value = 0;
+            var data = BigInt(evt.data);
+            const extraView = new DataView(evt.extra.buffer);
+            const typeLookup = g_Ext.typeLookup[evt.type + EventBaseId];
+            const allocSelected = typeLookup.subSelections[0];
+            const freeSelected = typeLookup.subSelections[1];
+            if (allocSelected) {
+                var allocCounter = Number((data >> 24n) & 0xffffffn);
+                var allocSize = extraView.getUint32(4, true);
+                count += allocCounter;
+                value += allocSize;
+            }
+            if (freeSelected) {
+                var freeCounter = Number(data & 0xffffffn);
+                var freeSize = extraView.getUint32(0, true);
+                count += freeCounter;
+                value += freeSize;
+            }
+            var ctx = {
+                value: value,
+                count: count,
+                evt: evt,
+            };
+            return ctx;
+        },
+    }
+});
+
+var eventsCurl = ["Http Rx", "Http Tx"];
+var eventsReplica = ["Engine Network Rx", "Engine Network Tx"];
+var eventsReplicaCategory = [
+    "Physics",
+    "Input",
+    "Instance",
+    "Marker",
+    "Ping",
+    "Event",
+    "Tag",
+    "Statistics",
+    "Terrain",
+    "Streaming",
+    "Other",
+    "Data",
+    "LR Data",
+];
+var eventsCurlCategory = [
+    "Asset Fetching",
+];
+var eventsNetCategory = [...eventsReplicaCategory, ...eventsCurlCategory];
+var replicaSubtypeToCategoryMap = {0: 10, 1: 0, 2: 0, 3: 1, 4: 2, 5: 2, 6: 2, 7: 2, 8: 2, 9: 2,
+                            10: 3, 11: 4, 12: 5, 13: 6, 14: 7, 15: 8, 16: 9, 17: 9, 18: 9, 19: 9,
+                            20: 9, 21: 9, 22: 9, 23: 9, 30: 12, 31: 11};
+var eventsReplicaSubtype = [
+    "Other",
+    "Physics",
+    "Physics Touch",
+    "Input",
+    "Instance: New Instance",
+    "Instance: Delete Instance",
+    "Instance: Join Data",
+    "Instance: Change Property",
+    "Instance: Change Attribute",
+    "Instance: Other",
+    "Marker",
+    "Ping",
+    "Event Invocation",
+    "Tag",
+    "Statistics",
+    "Terrain",
+    "Streaming: Data",
+    "Streaming: Info",
+    "Streaming: Region Removal",
+    "Streaming: Instance Removal",
+    "Streaming: Terrain",
+    "Streaming: Other",
+    "UNUSED",
+    "UNUSED",
+    "UNUSED",
+    "UNUSED",
+    "UNUSED",
+    "UNUSED",
+    "UNUSED",
+    "UNUSED",
+    "LR Data",
+    "Batch Data",
+];
+var eventsCurlSubtype = [
+    "Batch Asset Request",
+    "Batch Asset Response",
+    "CDN Request",
+    "Asset Delivery",
+];
+var eventsNet = [...eventsCurl, ...eventsReplica];
+var eventNetRxTag = "Rx";
+DefinePlugin(function () {
+    return {
+        category: "Network",
+        events: eventsNet,
+        eventCategories: eventsNetCategory,
+        baseId: 1,
+        preset: {
+            mode: XRayModes.Sum,
+            events: eventsNet,
+            hideIfNoEvents: true,
+        },
+        tooltipBarFrames: ["Network activity"],
+        tooltipBarDetailed: ["Network activity", "localized within frames."],
+        eventStats: {
+            total: new NetType(),
+            max: new NetType(),
+        },
+        categoryMax: [],
+        activeDetailedCategories: new Map(),
+        canvas: CanvasNetworkHistory,
+        addPerFrameNetworkEvent: function(fr, ctx, start, end) {
+            let categoryScope = fr.netEventScopes[ctx.eventCategoryIndex];
+            let direction = ctx.direction;
+            categoryScope = direction === NetDirection.rx ? categoryScope.rx : categoryScope.tx;
+            categoryScope.start = Math.min(categoryScope.start, start);
+            categoryScope.end = Math.max(categoryScope.end, end);
+            fr.netEventStats[ctx.eventCategoryIndex].add(ctx.value, ctx.count, direction);
+            fr.netTotals.add(ctx.value, ctx.count, direction);
+            this.eventStats.total.add(ctx.value, ctx.count, direction);
+            this.eventStats.max.maximize(fr.netTotals, direction);
+            this.categoryMax[ctx.eventCategoryIndex].maximize(fr.netEventStats[ctx.eventCategoryIndex], direction);
+        },
+        notifyOnFrameStart: function(fr) {
+            fr.netTotals = new NetType();
+            fr.netEventStats = [];
+            fr.netEventScopes = [];
+            for (let i = 0; i < this.eventCategories.length; i++) {
+                fr.netEventStats.push(new NetType());
+                fr.netEventScopes.push({
+                    rx: {
+                        start: Infinity,
+                        end: -Infinity,
+                    },
+                    tx: {
+                        start: Infinity,
+                        end: -Infinity,
+                    },
+                });
+            }
+        },
+        notifyOnScopeEnter: function(threadContext) {
+            let scope = threadContext.scopeStack[threadContext.scopeStack.length - 1];
+            scope.accumulatedNetworkEvents = [];
+        },
+        notifyOnEvent: function(ctx, scope) {
+            if (ctx.isReplica && ctx.packetId !== undefined) {
+                if (!this.packetIdMap.has(ctx.packetId)) {
+                    this.packetIdMap.set(ctx.packetId, {
+                        rcv: {
+                            start: 0,
+                            end: 0,
+                        },
+                        deserialize: {
+                            packets: [],
+                        },
+                    });
+                }
+                let entry = this.packetIdMap.get(ctx.packetId);
+                if (ctx.stage === 1 || ctx.stage === 2) {
+                    this.currPacketIdPerThread[scope.nLog] = ctx.packetId;
+                    entry.deserialize.packets.push({
+                        values: [],
+                        start: 0,
+                        end: 0,
+                    });
+                }
+            }
+            scope.accumulatedNetworkEvents.push(ctx);
+        },
+        notifyOnScopeExit: function(threadContext) {
+            let scope = threadContext.scopeStack[threadContext.scopeStack.length - 1];
+            let start = scope.timeStamp;
+            let end = threadContext.lastExit.timeStamp;
+            let fr = scope.frame;
+            let events = scope.accumulatedNetworkEvents;
+            events.forEach((ctx) => {
+                if (!ctx.hidden) {
+                    this.addPerFrameNetworkEvent(fr, ctx, scope.timeStamp, end);
+                }
+                if (ctx.isReplica) {
+                    if (ctx.packetId !== undefined) {
+                        let entry = this.packetIdMap.get(ctx.packetId);
+                        if (entry) {
+                            if (ctx.stage === 0) {
+                                entry.rcv.start = start;
+                                entry.rcv.end = end;
+                            } else if (ctx.stage === 1 || ctx.stage === 2) {
+                                let packets = entry.deserialize.packets;
+                                if (packets.length > 0) {
+                                    let packet = packets[packets.length - 1];
+                                    packet.start = start;
+                                    packet.end = end;
+                                }
+                            }
+                        }
+                    } else if (ctx.stage === 2 && !ctx.ignoreEvent) {
+                        let entry = this.packetIdMap.get(this.currPacketIdPerThread[scope.nLog]);
+                        if (this.currPacketIdPerThread[scope.nLog] && entry) {
+                            let packets = entry.deserialize.packets;
+                            if (packets.length > 0) {
+                                packets[packets.length - 1].values.push(ctx.evt);
+                            }
+                        }
+                    }
+                } else if (ctx.isCurl && ctx.assetId !== undefined) {
+                    let stage = 0;
+                    if (ctx.isBatchReport && ctx.directionName === "Rx") {
+                        stage = 1;
+                    } else if (ctx.isCdnReport) {
+                        stage = 2;
+                    } else {
+                        stage = 3;
+                    }
+                    this.addAssetMapEntry(ctx.assetId, stage, {start: start, end: end});
+                }
+            });
+        },
+        addAssetMapEntry: function(assetId, stage, timeScope) {
+            if (!this.AssetMap.has(assetId)) {
+                this.AssetMap.set(assetId, {
+                    0: undefined,
+                    1: undefined,
+                    2: undefined,
+                    3: undefined,
+                });
+            }
+            let entry = this.AssetMap.get(assetId);
+            entry[stage] = timeScope;
+        },
+        /**
+         * Tries to get the time scope for the next stage in the asset fetching process for the given assetID
+         * @param assetId - assetID in question
+         * @param stage - current stage (0: Asset Req, 1: Asset Res, 2: CDN Req, 3: CDN Res)
+         * @returns {Object|undefined} - Object containing start and end times of times scope, or undefined if it does not exist
+         */
+        getNextAssetStage: function(assetId, stage) {
+            if (!this.AssetMap.has(assetId) || stage > 2) {
+                return undefined;
+            }
+            return this.AssetMap.get(assetId)[stage + 1];
+        },
+        DrawPluginFrameHistory: function() {
+            DrawNetworkFrameHistory();
+        },
+        eventsWindowOverride: function(hoverEvents) {
+            let rows = '';
+            hoverEvents.forEach((ctx) => {
+                let startIndex = 0;
+                let dsp = g_Ext.currentPlugin.display(ctx);
+                if (ctx.deferred === true) {
+                    rows += "<tr style='display: none;'>";
+                    rows += "<td></td><td></td>";
+                    rows += "<td style=text-align:right;>&#x21B3;</td>";
+                    startIndex = 3;
+                } else {
+                    rows += "<tr>";
+                }
+                for (var j = startIndex; j < dsp.length; j++) {
+                    rows += "<td>" + dsp[j] + "</td>";
+                }
+            });
+            return rows;
+        },
+        findDeserialize: function(ctx) {
+            if (!ctx.isReplica || !ctx.packetId || !ctx.deserializeStart || !ctx.deserializeEnd) {
+                return;
+            }
+            let entry = this.packetIdMap.get(ctx.packetId);
+            if (!entry) {
+                return;
+            }
+            RangeCpu.Begin = entry.rcv.start;
+            RangeCpu.End = ctx.deserializeEnd + (ctx.deserializeEnd - entry.rcv.start) * 0.25;
+            ZoomToHighlight(1);
+            RangeSelect.Begin = ctx.deserializeStart;
+            RangeSelect.End = ctx.deserializeEnd;
+        },
+        expandEvent: function(hoverEvents, index, EventsWindow) {
+            let currIndex = index + 1;
+            let rows = EventsWindow.querySelectorAll('tbody tr');
+            while (currIndex < hoverEvents.length && hoverEvents[currIndex].deferred === true) {
+                rows[currIndex].style.display = rows[currIndex].style.display === 'none' ? '' : 'none';
+                currIndex++;
+            }
+        },
+        rowClickOverride: function(hoverEvents, index, EventsWindow) {
+            if (hoverEvents[index].isReplica) {
+                this.findDeserialize(hoverEvents[index]);
+            }
+            if (hoverEvents[index].hasDeferred) {
+                this.expandEvent(hoverEvents, index, EventsWindow);
+                return true;
+            }
+            return false;
+        },
+        extendDetail: function(ctx) {
+            let rows = '';
+            if (ctx.assetIds && ctx.assetIds.length > 0) {
+                let label = ctx.assetIds.length > 1 ? "Asset IDs" : "Asset ID";
+                rows += "<tr style='background-color: #555555;'><td>" + label + "</td></tr>";
+                ctx.assetIds.forEach((assetId) => {
+                    rows += "<tr>";
+                    rows += "<td class='assetId'>" + assetId + "</td>";
+                    rows += "<td class='assetIdLink' style='user-select:none; font-size: 16px;'>+</td>";
+                    rows += "</tr>";
+                });
+            }
+            return rows;
+        },
+        assetIdClick: function(ctx, index) {
+            let nextScope = this.getNextAssetStage(ctx.assetIds[index], ctx.subtype);
+            if (nextScope === undefined) {
+                return;
+            }
+            RangeCpu.Begin = nextScope.start;
+            RangeCpu.End = nextScope.end;
+            ZoomToHighlight(1);
+        },
+        assetIdLinkClick: function(ctx, index) {
+            if (!ctx.assetIds) {
+                return;
+            }
+            let assetId = ctx.assetIds[index];
+            if (!assetId) {
+                return;
+            }
+            let url = 'https://create.roblox.com/store/asset/';
+            url += assetId.toString();
+            window.open(url);
+        },
+        detailEventListeners: function(ctx, EventsWindow, defaults) {
+            let assetIdRows = EventsWindow.querySelectorAll('.assetId');
+            assetIdRows.forEach((row, index) => {
+                row.addEventListener('click', () => {
+                    this.assetIdClick(ctx, index);
+                });
+                row.addEventListener('mouseover', defaults.DivOnFn);
+                row.addEventListener('mouseout', defaults.DivOffFn);
+            });
+            let assetIdLinkRows = EventsWindow.querySelectorAll('.assetIdLink');
+            assetIdLinkRows.forEach((row, index) => {
+                row.addEventListener('click', () => {
+                    this.assetIdLinkClick(ctx, index);
+                });
+                row.addEventListener('mouseover', defaults.DivOnFn);
+                row.addEventListener('mouseout', defaults.DivOffFn);
+            })
+        },
+        handleCanvasClick: function(Event) {
+            const MouseButtonRight = 3;
+            let left = MapMouseButton(Event) !== MouseButtonRight;
+            let activeCategory = window.ActiveNetworkCategory;
+            let activeFrame = window.ActiveNetworkFrame;
+            let categoryMap = this.activeDetailedCategories;
+            let activeGraph = window.ActiveNetworkGraph;
+            if (!left) {
+                if (activeGraph >= 0) {
+                    let dir = categoryMap.get(activeGraph);
+                    ShowEvents(true, activeFrame, {category: activeGraph, direction: dir});
+                } else if (activeGraph === -2) {
+                    ShowEvents(true, activeFrame, {category: undefined, direction: window.NetworkMainActiveDirection});
+                }
+                return;
+            }
+            if (activeCategory !== -1) {
+                if (!categoryMap.has(activeCategory)) {
+                    categoryMap.set(activeCategory, NetDirection.rx);
+                } else {
+                    categoryMap.delete(activeCategory);
+                }
+            } else if (dirSwapCategory !== -1) {
+                if (categoryMap.has(dirSwapCategory)) {
+                    let currDirection = categoryMap.get(dirSwapCategory);
+                    let newDirection = currDirection === NetDirection.rx ? NetDirection.tx : NetDirection.rx;
+                    categoryMap.set(dirSwapCategory, newDirection);
+                }
+            } else {
+                ZoomToHighlight(1);
+            }
+            let nAdditionalGraphs = this.activeDetailedCategories.size;
+            window.nNetworkHistoryCurrentHeight = window.nNetworkHistoryHeightOrig + window.nNetworkHistoryBaseHeightOrig * nAdditionalGraphs;
+            ResizeCanvas();
+        },
+        ShowCanvas: function() {
+            window.CanvasNetworkHistory.style.display = '';
+        },
+        HideCanvas: function() {
+            window.CanvasNetworkHistory.style.display = 'none';
+        },
+        gatherEventsBefore: function() {
+            this.tempMap = new Map();
+            this.currBatch = undefined;
+            this.currCdnReq = undefined;
+        },
+        gatherEvent: function(ctx, nFrame, pluginInfo) {
+            if (ctx.isReplica && ctx.hidden) {
+                return [];
+            }
+            if (pluginInfo !== undefined) {
+                if (pluginInfo.category !== undefined) {
+                    if (ctx.eventCategoryIndex !== pluginInfo.category || ctx.direction !== pluginInfo.direction) {
+                        return [];
+                    }
+                } else {
+                    if (ctx.direction !== pluginInfo.direction) {
+                        return [];
+                    }
+                }
+            }
+            let eventList = [];
+            let deferredArray = [];
+            if (ctx.isCurl) {
+                if (ctx.isBatchCollect) {
+                    this.currBatch = ctx;
+                } else if (ctx.isBatchReport && this.currBatch !== undefined) {
+                    this.currBatch.assetIds.push(ctx.assetId);
+                } else if (ctx.isCdnRequest) {
+                    this.currCdnReq = ctx;
+                } else if (ctx.isAssetIdReport && !ctx.isBatchReport && this.currCdnReq !== undefined) {
+                    this.currCdnReq.assetIds = [ctx.assetId];
+                }
+            } else if (ctx.isReplica) {
+                let deferredEvents = this.packetIdMap.get(ctx.packetId);
+                if (deferredEvents) {
+                    let deferredPackets = deferredEvents.deserialize.packets;
+                    let currPacketArrIndex = this.tempMap.get(ctx.packetId);
+                    if (currPacketArrIndex === undefined) {
+                        currPacketArrIndex = deferredPackets.length - 1;
+                    }
+                    this.tempMap.set(ctx.packetId, currPacketArrIndex - 1);
+                    if (currPacketArrIndex !== undefined && deferredPackets[currPacketArrIndex] !== undefined) {
+                        let packetInfo = deferredPackets[currPacketArrIndex]
+                        packetInfo.values.forEach((evt) => {
+                            var defctx = this.decode(evt, true);
+                            defctx.deferred = true;
+                            deferredArray.push(defctx);
+                        });
+                        ctx.deserializeStart = packetInfo.start;
+                        ctx.deserializeEnd = packetInfo.end;
+                    }
+                    ctx.hasDeferred = deferredArray.length > 0;
+                }
+            }
+            if (!ctx.hidden) {
+                eventList.push(...deferredArray.reverse());
+                eventList.push(ctx);
+            }
+            return eventList;
+        },
+        decorate: ValueByMode,
+        decode: function (evt, full) {
+            if (evt.type <= 2) {
+                return this.decodeCurl(evt, full);
+            } else {
+                return this.decodeReplica(evt, full);
+            }
+        },
+        decodeReplica: function(evt, full) {
+            let replicaBaseId = 6;
+            let ctx = {
+                value: Number(BigInt(evt.data) & 0xffffffffn),
+                count: 1,
+                evt: evt,
+                isCurl: false,
+                isReplica: true,
+                subtype: Number(BigInt(evt.data) >> 40n),
+                stage: Number((BigInt(evt.data) >> 32n) & 0xffn),
+                eventName: this.events[evt.type - this.baseId],
+                subsystemName: "Engine Network",
+            }
+            ctx.ignoreEvent = ctx.subtype === 10 || ctx.subtype === 13;
+            ctx.hidden = ctx.stage !== 0;
+            ctx.directionName = ctx.eventName.endsWith(eventNetRxTag) ? "Rx" : "Tx";
+            ctx.direction = ctx.directionName === "Rx" ? NetDirection.rx : NetDirection.tx;
+            ctx.eventCategoryIndex = replicaSubtypeToCategoryMap[ctx.subtype];
+            if (ctx.eventCategoryIndex === undefined) {
+                ctx.eventCategoryIndex = 9;
+            }
+            ctx.pktType = eventsReplicaCategory[ctx.eventCategoryIndex];
+            ctx.categoryName = ctx.pktType;
+            const extraView = new DataView(evt.extra.buffer);
+            if (extraView.byteLength >= 8) {
+                ctx.packetId = extraView.getBigUint64(0, true);
+            }
+            if (full) {
+                ctx.pktSubtype = eventsReplicaSubtype[ctx.subtype];
+            }
+            return ctx;
+        },
+        decodeCurl: function(evt, full) {
+            let ctx = {
+                value: 0,
+                count: 0,
+                evt: evt,
+                subtype: Number(BigInt(evt.data) >> 47n),
+                isCurl: true,
+                isReplica: false,
+                eventName: this.events[evt.type - this.baseId],
+                eventCategoryIndex: 13,
+                subsystemName: "HTTP",
+            }
+            ctx.isAssetIdReport = ctx.subtype === 4 || ctx.subtype === 5;
+            ctx.isBatchReport = ctx.subtype === 4;
+            ctx.isCdnReport = ctx.subtype === 5;
+            ctx.isBatchCollect = ctx.subtype <= 1;
+            ctx.isCdnRequest = ctx.subtype === 2;
+            ctx.directionName = ctx.eventName.endsWith(eventNetRxTag) ? "Rx" : "Tx";
+            ctx.direction = ctx.directionName === "Rx" ? NetDirection.rx : NetDirection.tx;
+            ctx.categoryName = eventsNetCategory[ctx.eventCategoryIndex];
+            ctx.hidden = ctx.isAssetIdReport;
+            if (!ctx.isAssetIdReport) {
+                ctx.value = Number(BigInt(evt.data) & 0xffffffffn);
+                ctx.count = 1;
+            }
+            const extraView = new DataView(evt.extra.buffer);
+            if (extraView.byteLength >= 8) {
+                ctx.assetId = extraView.getBigUint64(0, true);
+            }
+            if (full) {
+                if (ctx.assetId && !ctx.isAssetIdReport) {
+                    ctx.assetIds = [ctx.assetId];
+                }
+                if (ctx.isAssetIdReport) {
+                    ctx.curlSubtype = "None";
+                } else {
+                    if (ctx.isBatchCollect) {
+                        ctx.assetIds = [];
+                        ctx.batchSize = Number((BigInt(evt.data) >> 39n) & 0xffn);
+                        ctx.queued = Number((BigInt(evt.data) >> 32n) & 0x7fn);
+                    } else {
+                        ctx.queued = Number((BigInt(evt.data) >> 32n) & 0x7fffn);
+                    }
+                    ctx.curlSubtype = eventsCurlSubtype[ctx.subtype];
+                }
+            }
+            return ctx;
+        },
+        prepareEventsBefore: function () {
+            this.eventStats = {
+                total: new NetType(),
+                max: new NetType(),
+            };
+            for (let frameIndex = 0; frameIndex < Frames.length; frameIndex++) {
+                let fr = Frames[frameIndex];
+                fr.netEventStats = new Array();
+                for (let i = 0; i < this.eventCategories.length; i++) {
+                    fr.netEventStats.push(new NetType());
+                }
+            }
+            this.categoryMax = new Array();
+            for (let i = 0; i < this.eventCategories.length; i++) {
+                this.categoryMax.push(new NetType());
+            }
+            this.AssetMap = new Map();
+            this.tempMap = new Map();
+            this.packetIdMap = new Map();
+            this.currPacketIdPerThread = [];
+            for (let nLog = 0; nLog < Frames[0].ts.length; nLog++) {
+                this.currPacketIdPerThread.push(undefined);
+            }
+        },
+        displayInfo: {
+            w: 550,
+            h: 250,
+        },
+        displayColumns: function (ctxs) {
+            var hasCurl = false;
+            var hasReplica = false;
+            ctxs.forEach(function (ctx) {
+                hasCurl = hasCurl || ctx.isCurl;
+                hasReplica = hasReplica || ctx.isReplica;
+            });
+            var columns4 = [];
+            var columns6 = [];
+            if (hasCurl) {
+                columns6.push("Subtype");
+            }
+            if (hasReplica) {
+                columns6.push("Subtype");
+            }
+            return ["#", "Subsystem", "Direction", "Size", "Type"];
+        },
+        display: function (ctx) {
+            var dsp = [
+                ctx.count,
+                ctx.subsystemName,
+                ctx.directionName,
+                "<div style='text-align: right;'>" + ValueToBytes(ctx.value) + "</div>",
+            ];
+            if (ctx.isCurl) {
+                dsp.push(
+                    ctx.curlSubtype,
+                );
+            } else if (ctx.isReplica) {
+                dsp.push(
+                    ctx.pktSubtype,
+                );
+            }
+            return dsp;
+        },
+        detail: function (ctx) {
+            var headers = ["#", "Subsystem", "Direction"];
+            var fields = [
+                ctx.count,
+                ctx.subsystemName,
+                ctx.directionName,
+                ValueToBytes(ctx.value),
+            ];
+            if (ctx.isCurl) {
+                headers.push(
+                    "Body Size",
+                    "Packet type",
+                );
+                fields.push(
+                    ctx.curlSubtype,
+                );
+                if (ctx.directionName === "Tx") {
+                    headers.push("Queued Requests");
+                    fields.push(ctx.queued);
+                }
+                if (ctx.isBatchCollect) {
+                    headers.push(
+                        "Batch Size",
+                    );
+                    fields.push(
+                        ctx.batchSize,
+                    );
+                }
+            } else if (ctx.isReplica) {
+                headers.push(
+                    "Size",
+                    "Packet type",
+                );
+                fields.push(
+                    ctx.pktSubtype,
+                );
+            }
+            var dtl = {
+                headers: headers,
+                fields: fields,
+            };
+            return dtl;
+        },
+    }
+});
+
+var eventsCpu = ["CoreFrequency"];
+var kCpuPluginId = 37 + EventBaseId;
+DefinePlugin(function() {
+    return {
+        category: "Core Assignment",
+        events: eventsCpu,
+        baseId: 37,
+        isBackground: true,
+        isAlwaysActive: true,
+        isVisualizationActive: false,
+        preset: {
+            mode: XRayModes.Count,
+            events: eventsCpu,
+            hideAlways: false,
+        },
+        decorate: ValueToCount,
+        decode: function(evt, full) {
+            var ctx = {
+                value : evt.data,
+                count : 1,
+                evt : evt,
+            };
+            ctx.coreId = Number(BigInt(evt.data) & 0xffffn);
+            ctx.frequency = Number(BigInt(evt.data) >> 16n);
+            if (full)
+            {
+                ctx.eventName = this.events[evt.type - this.baseId];
+            }
+            return ctx;
+        },
+        displayInfo: {
+            w: 550,
+            h: 250,
+        },
+        displayColumns: function(ctxs) {
+            return [ "#", "Core ID", "Frequency" ]
+        },
+        display: function(ctx) {
+            var dsp = [
+                ctx.count,
+                ctx.coreId,
+                ctx.frequency,
+            ];
+            return dsp;
+        },
+        detail: function(ctx) {
+            var dtl = {
+                headers : this.displayColumns(undefined),
+                fields : this.display(ctx),
+            };
+            return dtl;
+        },
+        prepare: function(ctx, extraInfo) {
+            if (!FFlagMicroprofilerPerFrameCpuSpeed)
+                return;
+
+            function initializeCpuCoreFreqData() {
+                return {
+                    coreFreqs: {},
+                    threadNumberToCpuIdMapping: {},
+                };
+            };
+
+            let txInfo = extraInfo;
+            let timeStamp = txInfo.lastTimeStamp;
+              
+            txInfo.evtFrame.cpuCoreFreqData = txInfo.evtFrame.cpuCoreFreqData || initializeCpuCoreFreqData();
+            gCpuCoreFreqData = gCpuCoreFreqData || initializeCpuCoreFreqData();
+
+            txInfo.evtFrame.cpuCoreFreqData.coreFreqs[ctx.coreId] = txInfo.evtFrame.cpuCoreFreqData.coreFreqs[ctx.coreId] || {};
+            txInfo.evtFrame.cpuCoreFreqData.threadNumberToCpuIdMapping[txInfo.nLog] = txInfo.evtFrame.cpuCoreFreqData.threadNumberToCpuIdMapping[txInfo.nLog] || {};
+            gCpuCoreFreqData.coreFreqs[ctx.coreId] = gCpuCoreFreqData.coreFreqs[ctx.coreId] || {};
+            gCpuCoreFreqData.threadNumberToCpuIdMapping[txInfo.nLog] = gCpuCoreFreqData.threadNumberToCpuIdMapping[txInfo.nLog] || {};
+              
+            txInfo.evtFrame.cpuCoreFreqData.coreFreqs[ctx.coreId][timeStamp] = ctx.frequency;
+            txInfo.evtFrame.cpuCoreFreqData.threadNumberToCpuIdMapping[txInfo.nLog][timeStamp] = ctx.coreId;
+            gCpuCoreFreqData.coreFreqs[ctx.coreId][timeStamp] = ctx.frequency;
+            gCpuCoreFreqData.threadNumberToCpuIdMapping[txInfo.nLog][timeStamp] = ctx.coreId;
+        },
+    }
+});
+
+// Multi-DM RCC marker attribution. MpEvent_DmContext (baseId 41) is a sparse event
+// emitted on a thread whenever its active DataModel changes (dmId in evt.data; 0 = no DM).
+// Like "Core Assignment", this is a background plugin that just records a per-thread
+// timeline of dmId; the detailed-view scope tooltip then carry-forwards the most recent
+// dmId at the scope's start to show which DataModel produced that marker.
+var eventsDataModel = ["DmContext"];
+DefinePlugin(function () {
+    return {
+        category: "DataModel",
+        events: eventsDataModel,
+        baseId: 41,
+        isBackground: true,
+        isAlwaysActive: true,
+        isVisualizationActive: false,
+        preset: {
+            mode: XRayModes.Count,
+            events: eventsDataModel,
+            hideAlways: false,
+        },
+        decorate: function (v) { return "DM " + v; },
+        decode: function (evt, full) {
+            var ctx = {
+                value : evt.data,
+                count : 1,
+                evt : evt,
+            };
+            ctx.dmId = Number(evt.data);
+            if (full) {
+                ctx.eventName = this.events[evt.type - this.baseId];
+            }
+            return ctx;
+        },
+        prepare: function (ctx, extraInfo) {
+            function initializeDmContextData() {
+                return { threadToDmId: {} };
+            }
+
+            let txInfo = extraInfo;
+            let timeStamp = txInfo.lastTimeStamp;
+
+            txInfo.evtFrame.dmContextData = txInfo.evtFrame.dmContextData || initializeDmContextData();
+            gDmContextData = gDmContextData || initializeDmContextData();
+
+            txInfo.evtFrame.dmContextData.threadToDmId[txInfo.nLog] = txInfo.evtFrame.dmContextData.threadToDmId[txInfo.nLog] || {};
+            gDmContextData.threadToDmId[txInfo.nLog] = gDmContextData.threadToDmId[txInfo.nLog] || {};
+
+            txInfo.evtFrame.dmContextData.threadToDmId[txInfo.nLog][timeStamp] = ctx.dmId;
+            gDmContextData.threadToDmId[txInfo.nLog][timeStamp] = ctx.dmId;
+        },
+    }
+});
+
+var eventsTest = ["Test0", "Test1", "Test2", "Test3", "Test4", "Test5", "Test6", "Test7"];
+DefinePlugin(function () {
+    return {
+        category: "Test",
+        events: eventsTest,
+        baseId: 119,
+        preset: {
+            mode: XRayModes.Count,
+            events: eventsTest,
+            hideIfNoEvents: true,
+        },
+        decorate: ValueToCount,
+        decode: function (evt, full) {
+            var ctx = {
+                value: evt.data,
+                count: 1,
+                evt: evt,
+            };
+            if (full) {
+                var extra = "";
+                for (var i = 0; i < evt.extra.length; i++) {
+                    extra += DecimalToHex(evt.extra[i], 2);
+                    if (i < evt.extra.length - 1)
+                        extra += " ";
+                }
+                ctx.eventName = this.events[evt.type - this.baseId];
+                ctx.dataHex = "0x" + DecimalToHex(evt.data, 14);
+                ctx.extraDataHex = extra;
+                ctx.str = evt.str;
+            }
+            return ctx;
+        },
+        displayInfo: {
+            w: 550,
+            h: 250,
+        },
+        displayColumns: function (ctxs) {
+            return ["#", "MpEvent", "Data50bit", "ExtraData20bytes", "String"];
+        },
+        display: function (ctx) {
+            var dsp = [
+                ctx.count,
+                ctx.eventName,
+                ctx.dataHex,
+                ctx.extraDataHex,
+                ctx.str,
+            ];
+            return dsp;
+        },
+        detail: function (ctx) {
+            var dtl = {
+                headers: this.displayColumns(undefined),
+                fields: this.display(ctx),
+            };
+            return dtl;
+        },
+    }
+});
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// Initialization
+
+function InitMain() {
+    ShowUiRoot();
+    InitViewerVars();
+    InitPluginVars();
+    RegisterInputListeners();
+    RegisterDragDropListeners();
+    InitGroups();
+
+    ScanEvents(); // Events
+    InitPluginStates();
+    PrepareEvents();
+    UpdateThresholds();
+
+    ReadCookie();
+    MeasureFont();
+
+    InitToolsExportMenu();
+    InitAuxMenus();
+    InitPluginUi(); // Events
+
+    InitThreadMenu();
+    InitGroupMenu();
+    InitFrameInfo();
+    UpdateThreadMenu();
+    ResizeCanvas();
+
+    Preprocess();
+
+    OnPageReady();
+    Draw(1);
+    AutoRedraw();
+
+    g_Loader.isViewerInitialized = true;
+    ProcessUrlArgs();
+}
+
+function CliInitMinimal() {
+    g_Loader.toolsData = {};
+    InitDataVars();
+    InitDataImpl();
+    InitViewerVars();
+    InitPluginVars();
+    InitGroups();
+    if (globalThis.g_cliSkipInitLevel >= 2)
+        return;
+    InitFrameInfo();
+    if (globalThis.g_cliSkipInitLevel >= 1)
+        return;
+    PreprocessMinimal();
+}
+
+function CliInitPlugins(bPrepare) {
+    ScanEvents();
+    InitPluginStates();
+    if (bPrepare) {
+        PrepareEvents();
+    }
+}
+
+if (globalThis.g_cliMode) {
+    CliInitMinimal();
+} else if (!window.g_Reload) {
+    InitCssHtml();
+    InitDataVars();
+    InitData().then(() => {
+        InitMain();
+    }).catch(error => {
+        console.error(error);
+        HaltPage();
+    });
+}
