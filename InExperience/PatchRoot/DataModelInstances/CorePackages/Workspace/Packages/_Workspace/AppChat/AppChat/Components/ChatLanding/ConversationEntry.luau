@@ -9,12 +9,10 @@ local UseChatPagePaddingModule = require(AppChat.Contexts.ChatPagePadding.useCha
 local UIBloxModule = require(Parent.UIBlox)
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local UseTextSizeOffsetFunction = UIBloxModule.Core.Style.useTextSizeOffset
-local Text = require(Parent.AppCommonLib).Text
 local CryoModule = require(Parent.Cryo)
 local FoundationModule = require(Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local GetTextSizeFunction = require(Parent.Style).GetTextSize
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local GetBoldTextThemeModule = require(script.Parent.Utils.getBoldTextTheme)
 local ConversationCell = require(AppChat.Components.Cells).ConversationCell
 local ConversationRelativeTimestampModule = require(script.Parent.ConversationRelativeTimestamp)
@@ -52,7 +50,7 @@ local config = {
 }
 
 return ReactModule.memo(function(p1)
-	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseTokensFunction (copy), UseTextSizeOffsetFunction (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), UseIsUserPendingModule (copy), GetBoldTextThemeModule (copy), UseDispatchFunction (copy), UseChatPlacementContextFunction (copy), UseChatPagePaddingModule (copy), UseRelativeTimestampBindingModule (copy), UseMemoFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), FFlagAppChatTimestampInSubtitleModule (copy), ReactModule (copy), UseNavigationFunction (copy), GetOverlayStoreModule (copy), EnumScreensModule (copy), OverlayTypesModule (copy), ConversationModule (copy), RemovedConversationModule (copy), ShouldShowU13ChatOptInForConversationModule (copy), ConstantsModule (copy), ShouldShowOSAForConversationModule (copy), HttpService (copy), FFlagAppChatEnableU13ChatOptIn (copy), FFlagAppChatUseActivationOnFocus (copy), UseActivationOnFocusFunction (copy), ConversationFocusActivationDelaySecondsModule (copy), ReactFocusNavigationModule (copy), UseCanAccessPartyModule (copy), SquadComponentAccessWrapperModule (copy), SquadJoinButtonModule (copy), SquadButtonSourceEnum (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), ConversationCell (copy), GetFFlagDebugAppChatModule (copy), ConversationRelativeTimestampModule (copy), FoundationModule (copy)
+	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseTokensFunction (copy), UseTextSizeOffsetFunction (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), UseIsUserPendingModule (copy), GetBoldTextThemeModule (copy), UseDispatchFunction (copy), UseChatPlacementContextFunction (copy), UseChatPagePaddingModule (copy), UseRelativeTimestampBindingModule (copy), UseMemoFunction (copy), GetTextSizeFunction (copy), FFlagAppChatTimestampInSubtitleModule (copy), ReactModule (copy), UseNavigationFunction (copy), GetOverlayStoreModule (copy), EnumScreensModule (copy), OverlayTypesModule (copy), ConversationModule (copy), RemovedConversationModule (copy), ShouldShowU13ChatOptInForConversationModule (copy), ConstantsModule (copy), ShouldShowOSAForConversationModule (copy), HttpService (copy), FFlagAppChatEnableU13ChatOptIn (copy), FFlagAppChatUseActivationOnFocus (copy), UseActivationOnFocusFunction (copy), ConversationFocusActivationDelaySecondsModule (copy), ReactFocusNavigationModule (copy), UseCanAccessPartyModule (copy), SquadComponentAccessWrapperModule (copy), SquadJoinButtonModule (copy), SquadButtonSourceEnum (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), ConversationCell (copy), GetFFlagDebugAppChatModule (copy), ConversationRelativeTimestampModule (copy), FoundationModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseStyleResult = UseStyleFunction()
 	local UseTokensResult = UseTokensFunction()
@@ -72,14 +70,14 @@ return ReactModule.memo(function(p1)
 	local ShortRelativeTime = JoinResult.conversation.shortRelativeTime or ""
 	local UseRelativeTimestampBindingModuleResult = UseRelativeTimestampBindingModule(JoinResult.conversation.unixTime)
 	local UseMemoResult = UseMemoFunction(function()
-		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), ShortRelativeTime (copy), ScaledBaseSize (copy), UseTokensResult (copy), Text (upval), CaptionSubHeader (copy)
-		return if FoundationFontFaceMigration then GetTextSizeFunction(ShortRelativeTime, ScaledBaseSize, UseTokensResult.Typography.CaptionLarge.Font, Vector2.new(10000, 10000)).X else Text.GetTextWidth(ShortRelativeTime, CaptionSubHeader.Font, ScaledBaseSize)
+		-- upvalues: GetTextSizeFunction (upval), ShortRelativeTime (copy), ScaledBaseSize (copy), UseTokensResult (copy)
+		return GetTextSizeFunction(ShortRelativeTime, ScaledBaseSize, UseTokensResult.Typography.CaptionLarge.Font, Vector2.new(10000, 10000)).X
 	end, {
 		ShortRelativeTime,
 		CaptionSubHeader.Font,
 		ScaledBaseSize,
 		UseTextSizeOffsetResult,
-		if FoundationFontFaceMigration then UseTokensResult.Typography.CaptionLarge.Font else nil
+		UseTokensResult.Typography.CaptionLarge.Font
 	})
 	local UseRelativeTimestampBindingModuleResult1 = if FFlagAppChatTimestampInSubtitleModule then UseRelativeTimestampBindingModuleResult else nil
 	local UseRefResult = ReactModule.useRef(nil)

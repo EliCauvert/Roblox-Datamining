@@ -13,6 +13,7 @@ return {
 	getSduiComponentWrapper = require(script.getSduiComponentWrapper),
 	reportUnifiedLoggingAction = require(script.Analytics.reportUnifiedLoggingAction),
 	reportUnifiedLoggingImpressions = require(script.Analytics.reportUnifiedLoggingImpressions),
+	HomePerfLog = require(script.Analytics.HomePerfLog),
 	parseProps = require(script.parseProps),
 	SduiActionParams = require(script.SduiActionParams),
 	SduiActionType = require(script.SduiActionType),

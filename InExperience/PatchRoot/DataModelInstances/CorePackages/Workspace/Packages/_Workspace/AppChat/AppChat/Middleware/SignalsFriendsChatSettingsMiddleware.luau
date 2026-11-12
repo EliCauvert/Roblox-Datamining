@@ -1,12 +1,9 @@
 ﻿local AppChat = script:FindFirstAncestor("AppChat")
-local Parent = AppChat.Parent
-local FFlagAppChatFriendsTabIxpEnabledModule = require(AppChat.Flags.FFlagAppChatFriendsTabIxpEnabled)
-local FFlagExpChatEnableFriendsTab = require(Parent.SharedFlags).FFlagExpChatEnableFriendsTab
 local FFlagAppChatUseSignalsForChatSettingsModule = require(AppChat.Flags.FFlagAppChatUseSignalsForChatSettings)
 local GetFriendsChatMetadataStoreModule = require(AppChat.Stores.GetFriendsChatMetadataStore)
 local GetFriendsChatSettingsStoreModule = require(AppChat.Stores.GetFriendsChatSettingsStore)
 local config = {
-	[require(Parent.AppChatNetworking).rodux.GetMetadata.Succeeded.name] = function(p1)
+	[require(AppChat.Parent.AppChatNetworking).rodux.GetMetadata.Succeeded.name] = function(p1)
 		-- upvalues: GetFriendsChatMetadataStoreModule (copy)
 		GetFriendsChatMetadataStoreModule(false).updateFriendsChatMetadata(p1.responseBody)
 	end,
@@ -17,14 +14,11 @@ local config = {
 }
 
 return function(Callback, _)
-	-- upvalues: FFlagAppChatFriendsTabIxpEnabledModule (copy), FFlagExpChatEnableFriendsTab (copy), FFlagAppChatUseSignalsForChatSettingsModule (copy), config (copy)
+	-- upvalues: FFlagAppChatUseSignalsForChatSettingsModule (copy), config (copy)
 	return function(p1)
-		-- upvalues: Callback (copy), FFlagAppChatFriendsTabIxpEnabledModule (upval), FFlagExpChatEnableFriendsTab (upval), FFlagAppChatUseSignalsForChatSettingsModule (upval), config (upval)
+		-- upvalues: Callback (copy), FFlagAppChatUseSignalsForChatSettingsModule (upval), config (upval)
 		local CallbackResult = Callback(p1)
 		
-		if not FFlagAppChatFriendsTabIxpEnabledModule and not FFlagExpChatEnableFriendsTab then
-			return CallbackResult
-		end
 		if FFlagAppChatUseSignalsForChatSettingsModule then
 			return CallbackResult
 		end

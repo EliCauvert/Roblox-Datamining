@@ -76,32 +76,32 @@ function Module:encode()
 		end
 	end
 	if self.can_animate_camera_based_mood then
-		local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.varint)
-		Buf, Count = ProtoModule.writeVarInt(WriteTagResult10, WriteTagResult2_9, if self.can_animate_camera_based_mood then 1 else 0)
+		local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult11, WriteTagResult2_10, if self.can_animate_camera_based_mood then 1 else 0)
 	end
 	if self.camera_focus ~= nil and self.camera_focus ~= "" then
-		local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeString(WriteTagResult11, WriteTagResult2_10, self.camera_focus)
+		local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult12, WriteTagResult2_11, self.camera_focus)
 	end
 	if self.camera_zoom_radius ~= nil and self.camera_zoom_radius ~= 0 then
-		local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.i32)
-		Buf, Count = ProtoModule.writeFloat(WriteTagResult12, WriteTagResult2_11, self.camera_zoom_radius)
+		local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.i32)
+		Buf, Count = ProtoModule.writeFloat(WriteTagResult13, WriteTagResult2_12, self.camera_zoom_radius)
 	end
 	if self.tile_type ~= nil and self.tile_type ~= "" then
-		local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeString(WriteTagResult13, WriteTagResult2_12, self.tile_type)
+		local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult14, WriteTagResult2_13, self.tile_type)
 	end
 	if self.looks_widget_context_for_organic_content ~= nil and self.looks_widget_context_for_organic_content ~= "" then
-		local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.lengthDelimited)
-		Buf, Count = ProtoModule.writeString(WriteTagResult14, WriteTagResult2_13, self.looks_widget_context_for_organic_content)
+		local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult15, WriteTagResult2_14, self.looks_widget_context_for_organic_content)
 	end
 	if self.time_to_refresh ~= nil and self.time_to_refresh ~= 0 then
-		local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.varint)
-		Buf, Count = ProtoModule.writeVarInt(WriteTagResult15, WriteTagResult2_14, self.time_to_refresh)
+		local WriteTagResult16, WriteTagResult2_15 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult16, WriteTagResult2_15, self.time_to_refresh)
 	end
 	if self.category_id ~= nil and self.category_id ~= 0 then
-		local WriteTagResult16, WriteTagResult2_15 = ProtoModule.writeTag(Buf, Count, 16, ProtoModule.wireTypes.varint)
-		Buf, Count = ProtoModule.writeVarInt(WriteTagResult16, WriteTagResult2_15, self.category_id)
+		local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 16, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult10, WriteTagResult2_9, self.category_id)
 	end
 	if self.subcategory_id ~= nil and self.subcategory_id ~= 0 then
 		local WriteTagResult17, WriteTagResult2_16 = ProtoModule.writeTag(Buf, Count, 17, ProtoModule.wireTypes.varint)
@@ -142,17 +142,17 @@ function Module.decode(Buf)
 				Buffer1, v41 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.id = buffer.tostring(Buffer1)
 			elseif Tag == 2 then
-				local Buffer2
-				Buffer2, v41 = ProtoModule.readBuffer(Buf, v1)
-				NewModule.title = buffer.tostring(Buffer2)
+				local Buffer3
+				Buffer3, v41 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.title = buffer.tostring(Buffer3)
 			elseif Tag == 3 then
 				local Buffer4
 				Buffer4, v41 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.name = buffer.tostring(Buffer4)
 			elseif Tag == 4 then
-				local Buffer6
-				Buffer6, v41 = ProtoModule.readBuffer(Buf, v1)
-				NewModule.taxonomy_id = buffer.tostring(Buffer6)
+				local Buffer5
+				Buffer5, v41 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.taxonomy_id = buffer.tostring(Buffer5)
 			elseif Tag == 5 then
 				local Buffer7
 				Buffer7, v41 = ProtoModule.readBuffer(Buf, v1)
@@ -162,29 +162,29 @@ function Module.decode(Buf)
 				Buffer9, v41 = ProtoModule.readBuffer(Buf, v1)
 				table.insert(NewModule.subcategories, buffer.tostring(Buffer9))
 			elseif Tag == 7 then
+				local Buffer10
+				Buffer10, v41 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.default_subcategory_id = buffer.tostring(Buffer10)
+			elseif Tag == 8 then
+				local Buffer2
+				Buffer2, v41 = ProtoModule.readBuffer(Buf, v1)
+				table.insert(NewModule.asset_types, buffer.tostring(Buffer2))
+			elseif Tag == 9 then
 				local Buffer11
 				Buffer11, v41 = ProtoModule.readBuffer(Buf, v1)
-				NewModule.default_subcategory_id = buffer.tostring(Buffer11)
-			elseif Tag == 8 then
-				local Buffer12
-				Buffer12, v41 = ProtoModule.readBuffer(Buf, v1)
-				table.insert(NewModule.asset_types, buffer.tostring(Buffer12))
-			elseif Tag == 9 then
-				local Buffer3
-				Buffer3, v41 = ProtoModule.readBuffer(Buf, v1)
-				table.insert(NewModule.bundle_types, buffer.tostring(Buffer3))
+				table.insert(NewModule.bundle_types, buffer.tostring(Buffer11))
 			elseif Tag == 11 then
-				local Buffer5
-				Buffer5, v41 = ProtoModule.readBuffer(Buf, v1)
-				NewModule.camera_focus = buffer.tostring(Buffer5)
+				local Buffer6
+				Buffer6, v41 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.camera_focus = buffer.tostring(Buffer6)
 			elseif Tag == 13 then
 				local Buffer8
 				Buffer8, v41 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.tile_type = buffer.tostring(Buffer8)
 			elseif Tag == 14 then
-				local Buffer10
-				Buffer10, v41 = ProtoModule.readBuffer(Buf, v1)
-				NewModule.looks_widget_context_for_organic_content = buffer.tostring(Buffer10)
+				local Buffer12
+				Buffer12, v41 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.looks_widget_context_for_organic_content = buffer.tostring(Buffer12)
 			else
 				local VarInt1, VarInt2 = ProtoModule.readVarInt(Buf, v1)
 				v1 = VarInt2 + VarInt1

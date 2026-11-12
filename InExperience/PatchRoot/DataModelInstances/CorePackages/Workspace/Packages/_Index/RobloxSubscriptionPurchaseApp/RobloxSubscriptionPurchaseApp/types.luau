@@ -3,5 +3,6 @@ local _ = require(RobloxSubscriptionPurchaseApp.Enums.RobloxSubscriptionFlowComp
 local _ = require(RobloxSubscriptionPurchaseApp.Enums.SurfaceContext)
 local _ = require(RobloxSubscriptionPurchaseApp.Enums.SurfaceName)
 local _ = require(RobloxSubscriptionPurchaseApp.Enums.PurchaseClientSessionIdType)
+local _ = require(RobloxSubscriptionPurchaseApp.Enums.RobloxPlusSheetKind)
 
 return {}

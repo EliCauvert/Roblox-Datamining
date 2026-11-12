@@ -1,13 +1,16 @@
 ﻿local SocialCarousel = script:FindFirstAncestor("SocialCarousel")
-local FFlagSocialCarouselUpdateVerticalSpacingModule = require(SocialCarousel.Flags.FFlagSocialCarouselUpdateVerticalSpacing)
 local FFlagSocialCarouselShareQREnabled = require(SocialCarousel.Parent.SharedFlags).FFlagSocialCarouselShareQREnabled
+local v1: number = if require(SocialCarousel.Flags.FFlagSocialCarouselUpdateVerticalSpacing) then 38 else 45
 
 return {
+	TILE_ICON_SCALE = 0.5,
+	ADD_FRIENDS_TITLE_OVERHANG = 1,
 	RODUX_KEY = "FriendsCarousel",
 	LOCALIZATION = {
 		FRIENDS_LABEL = "Feature.Friends.Label.Friends",
 		FRIENDS_LABEL_WITH_COUNT = "Feature.Home.HeadingFriends",
 		ADD_FRIENDS_HEADING = "Feature.Friends.Feature.Friends.Heading.AddFriends",
+		ADD_FRIENDS_HEADING_SENTENCE_CASE = "Feature.AddFriends.Heading.AddFriends",
 		FRIENDS_HINT_TITLE = "Feature.SocialTab.Label.AddFriendHintBody",
 		FRIENDS_HINT_BODY = "Feature.Friends.Label.FindFriendsHintBody",
 		NEW_FRIEND_REQUESTS_MAX = "Feature.Friends.Label.NewFriendRequestsMax",
@@ -46,6 +49,7 @@ return {
 			SHARE_QR = "ShareQRBtn"
 		}
 	},
-	TILE_TEXT_HEIGHT = if FFlagSocialCarouselUpdateVerticalSpacingModule then 38 else 45,
+	TILE_TEXT_HEIGHT = v1,
+	XSMALL_TILE_TEXT_HEIGHT = v1 - 4,
 	TILE_TEXT_WIDTH = if FFlagSocialCarouselShareQREnabled then 30 else 125
 }

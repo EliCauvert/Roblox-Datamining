@@ -186,7 +186,7 @@ return function(p1)
 			tag = "col gap-large size-full-0 auto-y padding-bottom-large padding-top-medium"
 		}, Elements)
 	}
-	local Element = nil
+	local LoadingShimmer = nil
 	
 	if p1.isLoading then
 		local CreateElementFunction = ReactModule.createElement
@@ -196,11 +196,11 @@ return function(p1)
 		for i = 1, 4 do
 			Elements1[`Shimmer{i}`] = ReactModule.createElement(Skeleton, { Size = UDim2.new(1, 0, 0, 72), LayoutOrder = i })
 		end
-		Element = CreateElementFunction(View, config6, Elements1)
+		LoadingShimmer = CreateElementFunction(View, config6, Elements1)
 	else
-		Element = nil
+		LoadingShimmer = nil
 	end
-	config5.LoadingShimmer = Element
+	config5.LoadingShimmer = LoadingShimmer
 	t.ScrollContent = CreateElementFunction1(v1, config4, config5)
 	config2.ScrollWrapper = CreateElementFunction2(View, config3, t)
 	config2.FooterDivider = ReactModule.createElement(Divider, { LayoutOrder = 4, Size = UDim2.new(1, 0, 0, 1) })

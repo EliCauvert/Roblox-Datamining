@@ -18,7 +18,6 @@ local FillBehavior = FoundationModule.Enums.FillBehavior
 local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local RobuxTextModule = require(CurrencyTransfers.Components.Generic.RobuxText)
 local TransferRobuxHeaderModule = require(CurrencyTransfers.Components.Generic.TransferRobuxHeader)
@@ -48,7 +47,7 @@ local LogRobuxTransferFlowEventModule = require(CurrencyTransfers.Utils.logRobux
 local FormatNumberModule = require(CurrencyTransfers.Utils.formatNumber)
 
 return function(_)
-	-- upvalues: UseLocalizationFunction (copy), TransferLocalizationKeysModule (copy), UseTokensFunction (copy), GetFFlagCurrencyTransferFixDesktopInputModule (copy), UserInputService (copy), UseTransferStoreModule (copy), ReactModule (copy), LogCurrencyTransferCounterModule (copy), CurrencyTransferTelemetryModule (copy), SharedFlagsModule (copy), LogRobuxTransferFlowEventModule (copy), RobuxTransferFlowEventNameModule (copy), SignalsReactModule (copy), GetFFlagCurrencyTransferUseBackendTransferLimitsModule (copy), GetFIntCurrencyTransferMinAmountModule (copy), GetFIntCurrencyTransferMaxAmountModule (copy), FFlagShowRemainingTransfersForNonPlusModule (copy), FormatNumberModule (copy), LocalizationService (copy), SetTransferPromptStateModule (copy), PromptStateModule (copy), ProceedToConfirmModule (copy), UseTextBoxOnChangeRefModule (copy), GetFFlagCurrencyTransferFocusNavigationModule (copy), UseTransferSheetFocusModule (copy), UseAutoFocusTextBoxOnMountModule (copy), FFlagCurrencyTransferHideAmountChipsAboveMaxModule (copy), TransferBenefitSourceModule (copy), GetFFlagCurrencyTransferFlowUIImprovementFixModule (copy), TransferLocaleFormatModule (copy), UseScaledValueFunction (copy), Sheet (copy), TransferRobuxHeaderModule (copy), View (copy), GetFFlagCurrencyTransferFixTextBoxInputModule (copy), TransferProfileThumbnailModule (copy), RobuxTextModule (copy), Icon (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), Text (copy), TransferAmountOptionChipsModule (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)
+	-- upvalues: UseLocalizationFunction (copy), TransferLocalizationKeysModule (copy), UseTokensFunction (copy), GetFFlagCurrencyTransferFixDesktopInputModule (copy), UserInputService (copy), UseTransferStoreModule (copy), ReactModule (copy), LogCurrencyTransferCounterModule (copy), CurrencyTransferTelemetryModule (copy), SharedFlagsModule (copy), LogRobuxTransferFlowEventModule (copy), RobuxTransferFlowEventNameModule (copy), SignalsReactModule (copy), GetFFlagCurrencyTransferUseBackendTransferLimitsModule (copy), GetFIntCurrencyTransferMinAmountModule (copy), GetFIntCurrencyTransferMaxAmountModule (copy), FFlagShowRemainingTransfersForNonPlusModule (copy), FormatNumberModule (copy), LocalizationService (copy), SetTransferPromptStateModule (copy), PromptStateModule (copy), ProceedToConfirmModule (copy), UseTextBoxOnChangeRefModule (copy), GetFFlagCurrencyTransferFocusNavigationModule (copy), UseTransferSheetFocusModule (copy), UseAutoFocusTextBoxOnMountModule (copy), FFlagCurrencyTransferHideAmountChipsAboveMaxModule (copy), TransferBenefitSourceModule (copy), GetFFlagCurrencyTransferFlowUIImprovementFixModule (copy), TransferLocaleFormatModule (copy), UseScaledValueFunction (copy), Sheet (copy), TransferRobuxHeaderModule (copy), View (copy), GetFFlagCurrencyTransferFixTextBoxInputModule (copy), TransferProfileThumbnailModule (copy), RobuxTextModule (copy), Icon (copy), NormalizeFontFaceFunction (copy), Text (copy), TransferAmountOptionChipsModule (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)
 	local UseLocalizationResult = UseLocalizationFunction(TransferLocalizationKeysModule.Presets.TransferRobuxInputSheet)
 	local UseTokensResult = UseTokensFunction()
 	local NoTouchEnabled: boolean = GetFFlagCurrencyTransferFixDesktopInputModule() and not UserInputService.TouchEnabled
@@ -297,8 +296,7 @@ return function(_)
 											LayoutOrder = 2,
 											Text = if UseSignalStateResult and UseSignalStateResult > 0 then tostring(UseSignalStateResult) else "",
 											TextInputType = Enum.TextInputType.Number,
-											Font = if FoundationFontFaceMigration then nil else UseTokensResult.Typography.DisplaySmall.Font,
-											FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.DisplaySmall.Font) else nil,
+											FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.DisplaySmall.Font),
 											TextSize = UseTokensResult.Typography.DisplaySmall.FontSize,
 											TextColor3 = UseTokensResult.Color.Content.Emphasis.Color3,
 											PlaceholderColor3 = UseTokensResult.Color.Content.Emphasis.Color3,

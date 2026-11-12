@@ -1,12 +1,7 @@
-﻿local VerifiedBadges = script:FindFirstAncestor("VerifiedBadges")
-local FFlagLuaAppEdpBackendV2HydrateLegacyDefault = require(VerifiedBadges.Parent.SharedFlags).FFlagLuaAppEdpBackendV2HydrateLegacyDefault
-local FFlagLuaAppEdpBackendV2HydrateLegacyIxp = require(VerifiedBadges.Parent.SharedFlags).FFlagLuaAppEdpBackendV2HydrateLegacyIxp
-
-return function(p1, p2): boolean
-	-- upvalues: FFlagLuaAppEdpBackendV2HydrateLegacyDefault (copy), FFlagLuaAppEdpBackendV2HydrateLegacyIxp (copy)
+﻿return function(p1, p2): boolean
 	local Creator = nil
 	
-	if (FFlagLuaAppEdpBackendV2HydrateLegacyDefault or FFlagLuaAppEdpBackendV2HydrateLegacyIxp) and p2.shouldUseV2GameDetails then
+	if p2.shouldUseV2GameDetails then
 		if p1.GameDetailsV2 and p1.GameDetailsV2[p2.universeId] then
 			Creator = p1.GameDetailsV2[p2.universeId].creator
 		end

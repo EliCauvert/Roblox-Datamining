@@ -1,18 +1,15 @@
 ﻿local Parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
 local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
-local FoundationModule = require(Parent.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
 local UseCursorFunction = UIBloxModule.App.SelectionCursor.useCursor
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 
 return function(p1)
-	-- upvalues: ReactModule (copy), UseCursorFunction (copy), UseStyleFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: ReactModule (copy), UseCursorFunction (copy), UseStyleFunction (copy), NormalizeFontFaceFunction (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState("")
 	local UseCursorResult = UseCursorFunction()
 	local UseStyleResult = UseStyleFunction()
-	local BodyFont = UseStyleResult.Font.Body.Font
 	local Theme = UseStyleResult.Theme
 	
 	return ReactModule.createElement("Frame", {
@@ -36,8 +33,7 @@ return function(p1)
 			AnchorPoint = Vector2.new(0, 0),
 			BackgroundColor3 = p1.backgroundColor3 or Theme.BackgroundDefault.Color,
 			PlaceholderText = p1.placeholderText,
-			Font = if FoundationFontFaceMigration then nil else BodyFont,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
 			SelectionImageObject = UseCursorResult,
 			Text = p1.text,
 			TextSize = UseStyleResult.Font.BaseSize,

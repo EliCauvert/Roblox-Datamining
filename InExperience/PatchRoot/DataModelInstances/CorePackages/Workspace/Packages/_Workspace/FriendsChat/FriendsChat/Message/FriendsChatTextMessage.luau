@@ -1,11 +1,9 @@
-﻿local TextService = game:GetService("TextService")
-local FriendsChat = script:FindFirstAncestor("FriendsChat")
+﻿local FriendsChat = script:FindFirstAncestor("FriendsChat")
 local Parent = FriendsChat.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local GetTextBoundsAsyncFunction = FoundationModule.Utility.getTextBoundsAsync
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local GetMessageTextSizeFunction = require(Parent.ChatUIPrimitives).Utils.getMessageTextSize
@@ -27,11 +25,10 @@ local _ = function(p1): boolean
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FoundationModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), GetMessageTextSizeFunction (copy), ReactModule (copy), SignalsModule (copy), SignalsReactModule (copy), FFlagFriendsChatMessageSendPerfTrackingModule (copy), UseFinishChatWindowMessageRenderIntervalsFunction (copy), GetTextBoundsAsyncFunction (copy), TextService (copy), FFlagFriendsChatLazyMountMessageSkeletonModule (copy)
+	-- upvalues: FoundationModule (copy), NormalizeFontFaceFunction (copy), GetMessageTextSizeFunction (copy), ReactModule (copy), SignalsModule (copy), SignalsReactModule (copy), FFlagFriendsChatMessageSendPerfTrackingModule (copy), UseFinishChatWindowMessageRenderIntervalsFunction (copy), GetTextBoundsAsyncFunction (copy), FFlagFriendsChatLazyMountMessageSkeletonModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local ChatWindowSettings = p1.chatWindowSettings
-	local FontFace = (if ChatWindowSettings then ChatWindowSettings.FontFace else nil) or UseTokensResult.Typography.BodySmall.Font
-	local NormalizeFontFaceResult = if FoundationFontFaceMigration then NormalizeFontFaceFunction(FontFace) elseif typeof(FontFace) == "Font" then FontFace else Font.fromEnum(FontFace)
+	local NormalizeFontFaceResult = NormalizeFontFaceFunction((if ChatWindowSettings then ChatWindowSettings.FontFace else nil) or UseTokensResult.Typography.BodySmall.Font)
 	local _Font = Font.new(NormalizeFontFaceResult.Family, Enum.FontWeight.SemiBold, NormalizeFontFaceResult.Style)
 	local MessageTextSize = GetMessageTextSizeFunction(ChatWindowSettings, p1.isSpatialUIEnabled) or UseTokensResult.Typography.BodySmall.FontSize
 	local Largest = math.max(1, MessageTextSize - 2)
@@ -91,35 +88,16 @@ return ReactModule.memo(function(p1)
 		UseBindingResult2(UseMemoResult2)
 	end, { UseMemoResult2 })
 	ReactModule.useEffect(function()
-		-- upvalues: FoundationFontFaceMigration (upval), GetTextBoundsAsyncFunction (upval), NormalizeFontFaceResult (copy), MessageTextSize (copy), UseBindingResult2 (copy), TextService (upval)
+		-- upvalues: GetTextBoundsAsyncFunction (upval), NormalizeFontFaceResult (copy), MessageTextSize (copy), UseBindingResult2 (copy)
 		local Flag = false
 		task.spawn(function()
-			-- upvalues: FoundationFontFaceMigration (upval), GetTextBoundsAsyncFunction (upval), NormalizeFontFaceResult (upval), MessageTextSize (upval), Flag (ref), UseBindingResult2 (upval), TextService (upval)
-			if FoundationFontFaceMigration then
-				local Vector = GetTextBoundsAsyncFunction("          ", NormalizeFontFaceResult, MessageTextSize)
+			-- upvalues: GetTextBoundsAsyncFunction (upval), NormalizeFontFaceResult (upval), MessageTextSize (upval), Flag (ref), UseBindingResult2 (upval)
+			local Vector = GetTextBoundsAsyncFunction("          ", NormalizeFontFaceResult, MessageTextSize)
+			
+			if not Flag and Vector ~= nil then
+				UseBindingResult2(UDim2.fromOffset(Vector.X, Vector.Y))
 				
-				if not Flag and Vector ~= nil then
-					UseBindingResult2(UDim2.fromOffset(Vector.X, Vector.Y))
-					
-					return
-				end
 				return
-			else
-				local GetTextBoundsParams = Instance.new("GetTextBoundsParams")
-				GetTextBoundsParams.Text = "          "
-				GetTextBoundsParams.Font = NormalizeFontFaceResult
-				GetTextBoundsParams.Size = MessageTextSize
-				GetTextBoundsParams.Width = 1e999
-				local Success, Result = pcall(function()
-					-- upvalues: TextService (upval), GetTextBoundsParams (copy)
-					return TextService:GetTextBoundsAsync(GetTextBoundsParams)
-				end)
-				
-				if not Flag and Success and Result ~= nil then
-					UseBindingResult2(UDim2.fromOffset(Result.X, Result.Y))
-					
-					return
-				end
 			end
 		end)
 		

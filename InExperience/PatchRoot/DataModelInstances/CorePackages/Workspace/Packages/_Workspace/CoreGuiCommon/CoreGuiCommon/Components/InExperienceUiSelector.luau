@@ -7,19 +7,20 @@ local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local FocusOnChromeFunction = require(Parent.Chrome).FocusUtils.FocusOnChrome
+local FFlagUseSelectModeToggleLabel = require(CoreGuiCommon.Flags).FFlagUseSelectModeToggleLabel
 local GetUiSelectorSignalStore = require(CoreGuiCommon.Stores).GetUiSelectorSignalStore
 local BaseMenu = FoundationModule.UNSTABLE.BaseMenu
 local InputSize = FoundationModule.Enums.InputSize
 
 return function(_)
-	-- upvalues: SignalsReactModule (copy), GetUiSelectorSignalStore (copy), ReactModule (copy), UseLocalizationFunction (copy), GuiService (copy), FocusOnChromeFunction (copy), GamepadService (copy), FoundationModule (copy), BaseMenu (copy), InputSize (copy)
+	-- upvalues: SignalsReactModule (copy), GetUiSelectorSignalStore (copy), ReactModule (copy), UseLocalizationFunction (copy), FFlagUseSelectModeToggleLabel (copy), GuiService (copy), FocusOnChromeFunction (copy), GamepadService (copy), FoundationModule (copy), BaseMenu (copy), InputSize (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetUiSelectorSignalStore)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(UseSignalStateResult.getVisibility)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseLocalizationResult = UseLocalizationFunction({
 		robloxMenu = "CoreScripts.InGameMenu.Controls.RobloxMenu",
-		uiNavToggle = "CoreScripts.InGameMenu.GameSettings.UINavToggle"
+		uiNavToggle = if FFlagUseSelectModeToggleLabel then "Feature.Accessibility.Menu.SelectModeToggle" else "CoreScripts.InGameMenu.GameSettings.UINavToggle"
 	})
 	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult1 (copy), UseRefResult1 (copy), GuiService (upval)

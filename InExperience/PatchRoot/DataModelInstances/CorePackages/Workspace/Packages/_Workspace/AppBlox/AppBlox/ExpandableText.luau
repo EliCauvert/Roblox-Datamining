@@ -10,10 +10,9 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local SignalsReactModule = require(Parent.SignalsReact)
 local TextSizeModule = require(Parent.TextSize)
 local CryoModule = require(Parent.Cryo)
-local LuaAppExpandableTextNewLineStrip = game:DefineFastFlag("LuaAppExpandableTextNewLineStrip", true)
 local config = { Selectable = true }
 
-local function v11() end
+local function v10() end
 
 local config1 = {
 	affordance = FoundationModule.Enums.StateLayerAffordance.None
@@ -45,8 +44,8 @@ local function _(p1: number, NewFloored: number, p2: number, p3): number
 end
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: LuaAppExpandableTextNewLineStrip (copy), SignalsReactModule (copy), TextSizeModule (copy), UseTokensFunction (copy), CryoModule (copy), ReactModule (copy), ControlState (copy), UseLocalizationFunction (copy), UsePropertyFunction (copy), View (copy), config (copy), v11 (copy), config1 (copy), Text (copy), getCompactLineMeasureText (copy)
-	local Text1 = if LuaAppExpandableTextNewLineStrip then (Frame.text or ""):gsub("[\r\n]+$", "") else Frame.text
+	-- upvalues: SignalsReactModule (copy), TextSizeModule (copy), UseTokensFunction (copy), CryoModule (copy), ReactModule (copy), ControlState (copy), UseLocalizationFunction (copy), UsePropertyFunction (copy), View (copy), config (copy), v10 (copy), config1 (copy), Text (copy), getCompactLineMeasureText (copy)
+	local Text1 = (Frame.text or ""):gsub("[\r\n]+$", "")
 	local UseSignalStateResult = SignalsReactModule.useSignalState(function(p1)
 		-- upvalues: TextSizeModule (upval)
 		return TextSizeModule.getTextSizeStore(p1).getTextSizeOffset(p1)
@@ -137,7 +136,7 @@ return ReactModule.memo(function(Frame)
 			tag = "col size-full-0 auto-y",
 			LayoutOrder = Frame.LayoutOrder,
 			selection = if Frame.selectable == false then nil else config,
-			onActivated = if Frame.selectable == false then nil else v11,
+			onActivated = if Frame.selectable == false then nil else v10,
 			stateLayer = if Frame.selectable == false then nil else config1,
 			ref = UseRefResult
 		}, {

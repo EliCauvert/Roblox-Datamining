@@ -65,11 +65,11 @@ return function(p1, List, p2, AnalyticsData, p3, p4): number
 	local CollectionItemInstancesModule = FindCollectionItemInstancesModule(p4)
 	local Count = 0
 	
-	for _, value1 in List do
-		local v1 = p2[value1]
+	for _, value in List do
+		local v1 = p2[value]
 		
 		if v1 ~= nil then
-			local NewValue = (p3 or 0) + value1
+			local NewValue = (p3 or 0) + value
 			local GridPositionRow = nil
 			local GridPositionColumn = nil
 			
@@ -81,9 +81,9 @@ return function(p1, List, p2, AnalyticsData, p3, p4): number
 				GridPositionColumn = NewValue
 			end
 			if FFlagAXUnifiedEventStrictPayloads then
-				local CollectionItemInstancesModuleEntry = CollectionItemInstancesModule[value1]
-				local ScreenSize = if CollectionItemInstancesModuleEntry then UnifiedEventLoggingUtils.getScreenSize(CollectionItemInstancesModuleEntry) else nil
-				local ElementSizeAndPosition = if CollectionItemInstancesModuleEntry then UnifiedEventLoggingUtils.getElementSizeAndPosition(CollectionItemInstancesModuleEntry) else nil
+				local CollectionItemInstancesModuleEntry1 = CollectionItemInstancesModule[value]
+				local ScreenSize = if CollectionItemInstancesModuleEntry1 then UnifiedEventLoggingUtils.getScreenSize(CollectionItemInstancesModuleEntry1) else nil
+				local ElementSizeAndPosition = if CollectionItemInstancesModuleEntry1 then UnifiedEventLoggingUtils.getElementSizeAndPosition(CollectionItemInstancesModuleEntry1) else nil
 				local config1 = {
 					action = MarketplaceUnifiedAction.ITEM_IMPRESSION,
 					surface = UnifiedLoggingSurfaceEntry,
@@ -111,7 +111,7 @@ return function(p1, List, p2, AnalyticsData, p3, p4): number
 				SendPassthroughUnifiedEventLogFunction(config1, nil, if FFlagAXUnifiedEventCounters then { filterPassed = FilterResult } else nil)
 				Count += 1
 			else
-				local config1 = {
+				local config2 = {
 					action = MarketplaceUnifiedAction.ITEM_IMPRESSION,
 					surface = UnifiedLoggingSurfaceEntry,
 					itemType = MarketplaceUnifiedItemTypeEntry,
@@ -120,24 +120,24 @@ return function(p1, List, p2, AnalyticsData, p3, p4): number
 					gridPositionRow = GridPositionRow,
 					gridPositionColumn = GridPositionColumn
 				}
-				local CollectionItemInstancesModuleEntry = CollectionItemInstancesModule[value1]
+				local CollectionItemInstancesModuleEntry = CollectionItemInstancesModule[value]
 				
 				if CollectionItemInstancesModuleEntry then
-					for i, value in UnifiedEventLoggingUtils.getScreenSize(CollectionItemInstancesModuleEntry) do
-						config1[i] = value
+					for i, value1 in UnifiedEventLoggingUtils.getScreenSize(CollectionItemInstancesModuleEntry) do
+						config2[i] = value1
 					end
 					for i1, value2 in UnifiedEventLoggingUtils.getElementSizeAndPosition(CollectionItemInstancesModuleEntry) do
-						config1[i1] = value2
+						config2[i1] = value2
 					end
 				end
-				local FilterResult1 = nil
+				local FilterResult = nil
 				
 				if FFlagAXUnifiedEventCounters then
-					FilterResult1 = AXUnifiedEventFilter.filter(config1)
+					FilterResult = AXUnifiedEventFilter.filter(config2)
 				else
-					AXUnifiedEventFilter.filter(config1)
+					AXUnifiedEventFilter.filter(config2)
 				end
-				SendUnifiedEventLogFunction(config1, nil, if FFlagAXUnifiedEventCounters then { filterPassed = FilterResult1 } else nil)
+				SendUnifiedEventLogFunction(config2, nil, if FFlagAXUnifiedEventCounters then { filterPassed = FilterResult } else nil)
 				Count += 1
 			end
 		end

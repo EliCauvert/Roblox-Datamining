@@ -9,9 +9,11 @@ local RecommendationContextType = DependenciesModule.RoduxFriends.Enums.Recommen
 local GetRecommendationContextualInfoTypeFunction = require(Parent1.SocialCommon).Utils.getRecommendationContextualInfoType
 local GetFriendStatusModule = require(Parent.Analytics.getFriendStatus)
 local EventNames = require(Parent.Analytics).EventNames
+local _ = require(Parent.Analytics.AnalyticsTypes)
+local FFlagPymkCarouselExtendProps = require(Parent1.SharedFlags).FFlagPymkCarouselExtendProps
 
 return function(p1)
-	-- upvalues: React (copy), ConstantsModule (copy), GetRecommendationContextualInfoTypeFunction (copy), RecommendationContextType (copy), EventNames (copy), GetFriendStatusModule (copy), HttpService (copy)
+	-- upvalues: React (copy), FFlagPymkCarouselExtendProps (copy), ConstantsModule (copy), GetRecommendationContextualInfoTypeFunction (copy), RecommendationContextType (copy), EventNames (copy), GetFriendStatusModule (copy), HttpService (copy)
 	local UseMemoResult = React.useMemo(function()
 		-- upvalues: p1 (copy)
 		return if p1.recommendation.mutualFriendsCount then p1.recommendation.mutualFriendsCount elseif p1.recommendation.mutualFriendsList then #p1.recommendation.mutualFriendsList else nil
@@ -20,11 +22,11 @@ return function(p1)
 		p1.recommendation.mutualFriendsList
 	})
 	local UseResult = React.useCallback(function()
-		-- upvalues: p1 (copy), ConstantsModule (upval), UseMemoResult (copy), GetRecommendationContextualInfoTypeFunction (upval), RecommendationContextType (upval)
+		-- upvalues: p1 (copy), FFlagPymkCarouselExtendProps (upval), ConstantsModule (upval), UseMemoResult (copy), GetRecommendationContextualInfoTypeFunction (upval), RecommendationContextType (upval)
 		p1.openProfilePeekView(p1.userId, {
 			isRecommendation = true,
 			absolutePosition = p1.absolutePosition,
-			source = ConstantsModule.HomepagePYMKCarouselSourceName,
+			source = if FFlagPymkCarouselExtendProps and p1.analyticsSurface then p1.analyticsSurface.source else ConstantsModule.HomepagePYMKCarouselSourceName,
 			mutualFriendsCount = UseMemoResult,
 			recommendationSessionId = p1.recommendationSessionId,
 			recommendationRank = p1.recommendation.rank,
@@ -39,7 +41,8 @@ return function(p1)
 		})
 	end, {
 		p1.openProfilePeekView, p1.userId, p1.absolutePosition, UseMemoResult,
-		p1.recommendationSessionId, p1.recommendation
+		p1.recommendationSessionId, p1.recommendation,
+		if FFlagPymkCarouselExtendProps then p1.analyticsSurface else nil
 	})
 	
 	return (React.useCallback(function()

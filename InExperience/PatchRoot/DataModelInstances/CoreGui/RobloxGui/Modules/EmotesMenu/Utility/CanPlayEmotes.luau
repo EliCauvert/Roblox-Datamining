@@ -438,16 +438,16 @@ Callback = function(p1, Object)
 				
 				return
 			end
-			local Object5 = nil
+			local Animate1 = nil
 			if Object then
 				local Animate = Object:FindFirstChild("Animate")
-				Object5 = if Animate and Animate:IsA("LocalScript") then Animate elseif Animate and Animate:IsA("Script") and Animate.RunContext == Enum.RunContext.Client then Animate else nil
+				Animate1 = if Animate and Animate:IsA("LocalScript") then Animate elseif Animate and Animate:IsA("Script") and Animate.RunContext == Enum.RunContext.Client then Animate else nil
 			else
-				Object5 = nil
+				Animate1 = nil
 			end
 			local v4 = nil
-			if Object5 then
-				local PlayEmote = Object5:FindFirstChild("PlayEmote")
+			if Animate1 then
+				local PlayEmote = Animate1:FindFirstChild("PlayEmote")
 				v4 = if PlayEmote and PlayEmote:IsA("BindableFunction") then PlayEmote else nil
 			else
 				v4 = nil
@@ -499,27 +499,27 @@ Callback = function(p1, Object)
 				
 				return
 			end
-			local Animate1 = nil
+			local Object5 = nil
 			if Object then
 				local Animate = Object:FindFirstChild("Animate")
-				Animate1 = if Animate and Animate:IsA("LocalScript") then Animate elseif Animate and Animate:IsA("Script") and Animate.RunContext == Enum.RunContext.Client then Animate else nil
+				Object5 = if Animate and Animate:IsA("LocalScript") then Animate elseif Animate and Animate:IsA("Script") and Animate.RunContext == Enum.RunContext.Client then Animate else nil
 			else
-				Animate1 = nil
+				Object5 = nil
 			end
-			local PlayEmote1 = nil
-			if Animate1 then
-				local PlayEmote = Animate1:FindFirstChild("PlayEmote")
-				PlayEmote1 = if PlayEmote and PlayEmote:IsA("BindableFunction") then PlayEmote else nil
+			local v6 = nil
+			if Object5 then
+				local PlayEmote = Object5:FindFirstChild("PlayEmote")
+				v6 = if PlayEmote and PlayEmote:IsA("BindableFunction") then PlayEmote else nil
 			else
-				PlayEmote1 = nil
+				v6 = nil
 			end
-			local HasPlayEmote = PlayEmote1 ~= nil
+			local Value = v6 ~= nil
 			
-			if CanPlayEmotesModule.Value ~= HasPlayEmote then
-				CanPlayEmotesModule.Value = HasPlayEmote
-				CanPlayEmotesModule.ChangedEvent:Fire(HasPlayEmote)
+			if CanPlayEmotesModule.Value ~= Value then
+				CanPlayEmotesModule.Value = Value
+				CanPlayEmotesModule.ChangedEvent:Fire(Value)
 			end
-			Callback(HasPlayEmote, Object)
+			Callback(Value, Object)
 		end
 	end
 end

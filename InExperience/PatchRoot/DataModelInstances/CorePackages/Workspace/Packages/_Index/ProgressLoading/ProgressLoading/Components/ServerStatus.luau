@@ -13,7 +13,6 @@ local _ = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local QueuePositionEnabledEngineFeature = game:GetEngineFeature("QueuePositionEnabled")
 local FFlagEnableLuaAppsFollowUserId = require(Parent.SharedFlags).FFlagEnableLuaAppsFollowUserId
 local FFlagEnableLuaAppsFollowUserId1 = game:GetEngineFeature("ExperienceServiceFollowUserIdEnabled") and FFlagEnableLuaAppsFollowUserId
@@ -33,7 +32,7 @@ local function getStoreServerStatusText(p1)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), GuiService (copy), SignalsReactModule (copy), getStoreJoinState (copy), getStoreServerStatusText (copy), PlaceLauncherStateModule (copy), LoadingScreenTelemetryModule (copy), FFlagEnableLuaAppsFollowUserId1 (copy), ExperienceService (copy), QueuePositionEnabledEngineFeature (copy), FoundationModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), CoreGui (copy)
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), GuiService (copy), SignalsReactModule (copy), getStoreJoinState (copy), getStoreServerStatusText (copy), PlaceLauncherStateModule (copy), LoadingScreenTelemetryModule (copy), FFlagEnableLuaAppsFollowUserId1 (copy), ExperienceService (copy), QueuePositionEnabledEngineFeature (copy), FoundationModule (copy), NormalizeFontFaceFunction (copy), CoreGui (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
 		queuedDescription = "InGame.ConnectionError.Description.FriendsServerIsFullWaitingToJoin",
@@ -115,8 +114,7 @@ return ReactModule.memo(function(p1)
 				ZIndex = 2,
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Size = UDim2.new(1, 0, 0, 0),
-				Font = if FoundationFontFaceMigration then nil else UseTokensResult.Typography.TitleMedium.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.TitleMedium.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.TitleMedium.Font),
 				TextSize = UseTokensResult.Typography.TitleMedium.FontSize,
 				TextColor3 = UseTokensResult.Color.System.Contrast.Color3,
 				Text = UseSignalBindingResult,

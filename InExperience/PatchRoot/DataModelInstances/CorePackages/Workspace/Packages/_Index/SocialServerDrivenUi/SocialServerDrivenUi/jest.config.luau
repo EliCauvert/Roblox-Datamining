@@ -1,12 +1,8 @@
-﻿local JestConfigsModule = require(script.Parent.Parent.Dev.JestConfigs)
+﻿local Parent = script.Parent
 
 return {
-	displayName = "SocialServerDrivenUi",
-	testMatch = { "**/*.test" },
-	setupFilesAfterEnv = {
-		JestConfigsModule.setupFiles.LogHandler,
-		JestConfigsModule.setupFiles.UIBloxInitializer,
-		JestConfigsModule.setupFiles.createPromiseRejectionHandler(),
-		JestConfigsModule.setupFiles.RetryTimes
+	projects = {
+		Parent["jest.main.config"],
+		Parent["jest.mockDataModel.config"]
 	}
 }

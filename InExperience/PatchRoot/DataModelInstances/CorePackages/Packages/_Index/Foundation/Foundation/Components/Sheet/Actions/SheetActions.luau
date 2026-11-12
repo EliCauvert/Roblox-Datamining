@@ -5,12 +5,13 @@ local ReactRobloxModule = require(Parent.ReactRoblox)
 local Sheet = script:FindFirstAncestor("Sheet")
 local SheetContextModule = require(Sheet.SheetContext)
 local SheetTypeModule = require(Sheet.SheetType)
+local FlagsModule = require(Foundation.Utility.Flags)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local StateLayerAffordanceModule = require(Foundation.Enums.StateLayerAffordance)
 local ViewModule = require(Foundation.Components.View)
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: UseTokensModule (copy), ReactModule (copy), SheetContextModule (copy), SheetTypeModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), ReactRobloxModule (copy)
+	-- upvalues: UseTokensModule (copy), ReactModule (copy), SheetContextModule (copy), FlagsModule (copy), SheetTypeModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), ReactRobloxModule (copy)
 	local UseTokensModuleResult = UseTokensModule()
 	local UseContextResult = ReactModule.useContext(SheetContextModule)
 	local SheetHeightAvailable = UseContextResult.sheetHeightAvailable
@@ -23,6 +24,16 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	local TestId = UseContextResult.testId
 	assert(SheetHeightAvailable and (ActionsHeight and (SetActionsHeightFunction and (HasActionsDivider and (SafeAreaPadding and (BottomPadding and TestId))))), "SheetActions must be used within a Sheet")
 	local InnerSurface = UseContextResult.innerSurface
+	
+	if FlagsModule.FoundationBottomSheetClearsActionsHeight then
+		ReactModule.useLayoutEffect(function()
+			-- upvalues: SetActionsHeightFunction (copy)
+			return function()
+				-- upvalues: SetActionsHeightFunction (upval)
+				SetActionsHeightFunction(0)
+			end
+		end, { SetActionsHeightFunction })
+	end
 	local IsSheetTypeMatch = SheetType == SheetTypeModule.Bottom
 	local Element = ReactModule.createElement(ViewModule, {
 		ZIndex = 1,

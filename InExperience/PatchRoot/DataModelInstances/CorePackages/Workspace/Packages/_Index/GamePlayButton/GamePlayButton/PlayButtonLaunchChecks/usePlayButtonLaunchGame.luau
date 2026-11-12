@@ -86,7 +86,7 @@ return function(UniverseId, p1, p2, ReferralSource, Ctx, LaunchSource, ExtraPara
 			if FFlagLuaAppEnableStratusStreamingTestOnly then
 				if FFlagLuaAppEnableStratusStreamingCheck then
 					if VideoService:GameStreamingEnabled() then
-						local list2 = {
+						local list1 = {
 							{
 								name = AppPage.VideoServer,
 								placeId = if GetFFlagLuaAppEnableVirtualEventPlaceIdFunction() then p1 else p2,
@@ -97,11 +97,11 @@ return function(UniverseId, p1, p2, ReferralSource, Ctx, LaunchSource, ExtraPara
 						}
 						
 						if FFlagSignalsNavP3Dispatch then
-							NavigationCommands.to(NavigationCommands.fromLegacyPage(list2[#list2]))
+							NavigationCommands.to(NavigationCommands.fromLegacyPage(list1[#list1]))
 							
 							return
 						else
-							UseDispatchResult(NavigateToRouteFunction(list2))
+							UseDispatchResult(NavigateToRouteFunction(list1))
 							
 							return
 						end
@@ -145,7 +145,7 @@ return function(UniverseId, p1, p2, ReferralSource, Ctx, LaunchSource, ExtraPara
 			end
 			return
 		else
-			local list1 = {
+			local list = {
 				{
 					name = AppPage.VideoServer,
 					placeId = if GetFFlagLuaAppEnableVirtualEventPlaceIdFunction() then p1 else p2,
@@ -158,11 +158,11 @@ return function(UniverseId, p1, p2, ReferralSource, Ctx, LaunchSource, ExtraPara
 			}
 			
 			if FFlagSignalsNavP3Dispatch then
-				NavigationCommands.to(NavigationCommands.fromLegacyPage(list1[#list1]))
+				NavigationCommands.to(NavigationCommands.fromLegacyPage(list[#list]))
 				
 				return
 			else
-				UseDispatchResult(NavigateToRouteFunction(list1))
+				UseDispatchResult(NavigateToRouteFunction(list))
 			end
 		end
 	end, {

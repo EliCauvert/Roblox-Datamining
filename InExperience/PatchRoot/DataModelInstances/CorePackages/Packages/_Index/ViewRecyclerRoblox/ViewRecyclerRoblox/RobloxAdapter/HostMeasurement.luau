@@ -1,4 +1,5 @@
-﻿local FFlagViewRecyclerReact08 = require(script:FindFirstAncestor("ViewRecyclerRoblox").Flags).FFlagViewRecyclerReact08
+﻿local FFlagViewRecyclerReact084 = require(script:FindFirstAncestor("ViewRecyclerRoblox").Flags).FFlagViewRecyclerReact084
+local FFlagViewRecyclerReact08 = require(script:FindFirstAncestor("ViewRecyclerRoblox").Flags).FFlagViewRecyclerReact08
 local ViewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
 local _ = require(ViewRecyclerRoblox.Parent.ViewRecycler)
 local MeasurementBatcherModule = require(ViewRecyclerRoblox.RobloxAdapter.MeasurementBatcher)
@@ -8,7 +9,7 @@ local RunService = game:GetService("RunService")
 
 return {
 	new = function(OnItemMeasurements)
-		-- upvalues: FFlagViewRecyclerReact08 (copy), AxisMapModule (copy), RunService (copy), MeasurementBatcherModule (copy), MeasurerModule (copy)
+		-- upvalues: FFlagViewRecyclerReact084 (copy), AxisMapModule (copy), RunService (copy), FFlagViewRecyclerReact08 (copy), MeasurementBatcherModule (copy), MeasurerModule (copy)
 		local Axis = OnItemMeasurements.axis
 		local Tbl = {}
 		local Count = 0
@@ -17,19 +18,19 @@ return {
 		local PreRenderConnection = nil
 		local Count1 = 0
 		local v1 = nil
-		local Callback: (() -> any)? = nil
+		local deliver = nil
 		local queue = nil
 		local reportedState = nil
 		local publish = nil
-		local Callback2: ((any) -> ())? = nil
+		local measureNow = nil
 		local scheduleRead = nil
-		local Callback1: ((any) -> ())? = nil
+		local disconnect = nil
 		local NewResult = nil
 		
-		if FFlagViewRecyclerReact08 then
+		if FFlagViewRecyclerReact084 then
 			v1 = nil
 			
-			Callback = function()
+			deliver = function()
 				-- upvalues: v1 (ref), Flag (ref), OnItemMeasurements (copy)
 				local v2 = v1
 				
@@ -44,16 +45,16 @@ return {
 			end
 			
 			queue = function(p1)
-				-- upvalues: v1 (ref), Callback (ref)
+				-- upvalues: v1 (ref), deliver (ref)
 				local List = v1
 				
 				if List == nil then
 					List = {}
 					v1 = List
 					task.defer(function()
-						-- upvalues: v1 (upval), List (ref), Callback (upval)
+						-- upvalues: v1 (upval), List (ref), deliver (upval)
 						if v1 == List then
-							Callback()
+							deliver()
 						end
 					end)
 				end
@@ -89,7 +90,7 @@ return {
 				return true
 			end
 			
-			Callback2 = function(p1)
+			measureNow = function(p1)
 				-- upvalues: reportedState (ref), publish (ref)
 				local ReportedStateResult = reportedState(p1)
 				
@@ -116,7 +117,7 @@ return {
 				end
 			end
 			
-			Callback1 = function(p1)
+			disconnect = function(p1)
 				p1.sizeConnection:Disconnect()
 				
 				for _, pendingRead in p1.pendingReads do
@@ -125,10 +126,120 @@ return {
 				table.clear(p1.pendingReads)
 			end
 		else
-			NewResult = MeasurementBatcherModule.new(OnItemMeasurements.onItemMeasurements)
+			v1 = nil
+			deliver = nil
+			queue = nil
+			reportedState = nil
+			publish = nil
+			measureNow = nil
+			scheduleRead = nil
+			disconnect = nil
+			NewResult = nil
+			
+			if FFlagViewRecyclerReact08 then
+				v1 = nil
+				
+				deliver = function()
+					-- upvalues: v1 (ref), Flag (ref), OnItemMeasurements (copy)
+					local v2 = v1
+					
+					if Flag or v2 == nil then
+						return nil
+					else
+						v1 = nil
+						OnItemMeasurements.onItemMeasurements(v2)
+						
+						return v2
+					end
+				end
+				
+				queue = function(p2)
+					-- upvalues: v1 (ref), deliver (ref)
+					local List = v1
+					
+					if List == nil then
+						List = {}
+						v1 = List
+						task.defer(function()
+							-- upvalues: v1 (upval), List (ref), deliver (upval)
+							if v1 == List then
+								deliver()
+							end
+						end)
+					end
+					table.insert(List, p2)
+				end
+				
+				reportedState = function(p2)
+					-- upvalues: Tbl (copy)
+					return if Tbl[p2.itemView] == p2 and not p2.paused then p2.state else nil
+				end
+				
+				publish = function(p2, LastPublishedState): boolean
+					-- upvalues: AxisMapModule (upval), Axis (ref), queue (ref)
+					if LastPublishedState.assignment ~= p2.renderedAssignment then
+						return false
+					end
+					local Host = p2.host
+					
+					if AxisMapModule.crossOf(Host.AbsoluteSize, Axis) <= 0 then
+						return true
+					end
+					local MainOfResult = AxisMapModule.mainOf(Host.AbsoluteSize, Axis)
+					
+					if p2.lastPublishedState ~= LastPublishedState or p2.lastPublishedLength ~= MainOfResult then
+						p2.lastPublishedState = LastPublishedState
+						p2.lastPublishedLength = MainOfResult
+						queue({
+							itemView = p2.itemView,
+							state = LastPublishedState,
+							length = MainOfResult
+						})
+					end
+					return true
+				end
+				
+				measureNow = function(p2)
+					-- upvalues: reportedState (ref), publish (ref)
+					local ReportedStateResult = reportedState(p2)
+					
+					if ReportedStateResult ~= nil then
+						publish(p2, ReportedStateResult)
+					end
+				end
+				
+				scheduleRead = function(p2)
+					-- upvalues: reportedState (ref), RunService (upval), publish (ref), scheduleRead (ref)
+					local ReportedStateResult = reportedState(p2)
+					
+					if ReportedStateResult ~= nil and p2.pendingReads[ReportedStateResult] == nil then
+						p2.pendingReads[ReportedStateResult] = RunService.Heartbeat:Once(function()
+							-- upvalues: p2 (copy), ReportedStateResult (copy), reportedState (upval), publish (upval), scheduleRead (upval)
+							p2.pendingReads[ReportedStateResult] = nil
+							
+							if reportedState(p2) == ReportedStateResult and not publish(p2, ReportedStateResult) then
+								scheduleRead(p2)
+							end
+						end)
+						
+						return
+					end
+				end
+				
+				disconnect = function(p2)
+					p2.sizeConnection:Disconnect()
+					
+					for _, pendingRead in p2.pendingReads do
+						pendingRead:Disconnect()
+					end
+					table.clear(p2.pendingReads)
+				end
+			else
+				NewResult = MeasurementBatcherModule.new(OnItemMeasurements.onItemMeasurements)
+			end
 		end
 		local function measureRounds()
-			-- upvalues: Flag (ref), OnItemMeasurements (copy), Flag1 (ref), Tbl (copy), Count1 (ref), FFlagViewRecyclerReact08 (upval), Callback2 (ref), Callback (ref), NewResult (ref)
+			-- upvalues: Flag (ref), OnItemMeasurements (copy), Flag1 (ref), Tbl (copy), Count1 (ref), FFlagViewRecyclerReact084 (upval), measureNow (ref), FFlagViewRecyclerReact08 (upval), deliver (ref), NewResult (ref)
 			local Flag2 = nil
 			for _ = 1, 4 do
 				if Flag then break end
@@ -138,14 +249,16 @@ return {
 				for _, value in Tbl do
 					Count1 += 1
 					
-					if FFlagViewRecyclerReact08 then
-						Callback2(value)
+					if FFlagViewRecyclerReact084 then
+						measureNow(value)
+					elseif FFlagViewRecyclerReact08 then
+						measureNow(value)
 					else
 						value.measurer.measureNow()
 					end
 				end
 				Flag2 = false
-				local v2 = (if FFlagViewRecyclerReact08 then Callback else NewResult.flush)() or {}
+				local v2 = (if FFlagViewRecyclerReact084 then deliver elseif FFlagViewRecyclerReact08 then deliver else NewResult.flush)() or {}
 				for _, value1 in v2 do
 					if value1.length ~= value1.state.itemLayout.length then
 						Flag2 = true
@@ -188,15 +301,17 @@ return {
 		end
 		
 		local _ = function(Key)
-			-- upvalues: Tbl (copy), Count (ref), FFlagViewRecyclerReact08 (upval), Callback1 (ref), Flag (ref), PreRenderConnection (ref), Flag1 (ref), RunService (upval), measureBeforePaint (copy)
+			-- upvalues: Tbl (copy), Count (ref), FFlagViewRecyclerReact084 (upval), disconnect (ref), FFlagViewRecyclerReact08 (upval), Flag (ref), PreRenderConnection (ref), Flag1 (ref), RunService (upval), measureBeforePaint (copy)
 			local Entry = Tbl[Key]
 			
 			if Entry ~= nil then
 				Tbl[Key] = nil
 				Count -= 1
 				
-				if FFlagViewRecyclerReact08 then
-					Callback1(Entry)
+				if FFlagViewRecyclerReact084 then
+					disconnect(Entry)
+				elseif FFlagViewRecyclerReact08 then
+					disconnect(Entry)
 				else
 					Entry.measurer.disconnect()
 				end
@@ -215,21 +330,26 @@ return {
 			end
 		end
 		
-		local _ = function(p1, State)
-			-- upvalues: FFlagViewRecyclerReact08 (upval), scheduleRead (ref)
-			p1.state = State
+		local _ = function(p2, State)
+			-- upvalues: FFlagViewRecyclerReact084 (upval), scheduleRead (ref), FFlagViewRecyclerReact08 (upval)
+			p2.state = State
 			
+			if FFlagViewRecyclerReact084 then
+				scheduleRead(p2)
+				
+				return
+			end
 			if FFlagViewRecyclerReact08 then
-				scheduleRead(p1)
+				scheduleRead(p2)
 				
 				return
 			else
-				p1.measurer.scheduleSettle()
+				p2.measurer.scheduleSettle()
 			end
 		end
 		
 		local function measure(ItemView, Host, State)
-			-- upvalues: Flag (ref), Tbl (copy), Count (ref), FFlagViewRecyclerReact08 (upval), Callback1 (ref), PreRenderConnection (ref), Flag1 (ref), RunService (upval), measureBeforePaint (copy), scheduleRead (ref), MeasurerModule (upval), Axis (ref), NewResult (ref)
+			-- upvalues: Flag (ref), Tbl (copy), Count (ref), FFlagViewRecyclerReact084 (upval), disconnect (ref), FFlagViewRecyclerReact08 (upval), PreRenderConnection (ref), Flag1 (ref), RunService (upval), measureBeforePaint (copy), scheduleRead (ref), MeasurerModule (upval), Axis (ref), NewResult (ref)
 			if Flag then return end
 			local Entry = Tbl[ItemView]
 			
@@ -240,8 +360,10 @@ return {
 					Tbl[ItemView] = nil
 					Count -= 1
 					
-					if FFlagViewRecyclerReact08 then
-						Callback1(Entry1)
+					if FFlagViewRecyclerReact084 then
+						disconnect(Entry1)
+					elseif FFlagViewRecyclerReact08 then
+						disconnect(Entry1)
 					else
 						Entry1.measurer.disconnect()
 					end
@@ -262,17 +384,22 @@ return {
 				local config = {
 					paused = false,
 					renderedAssignment = nil,
-					measurer = nil,
-					itemView = if FFlagViewRecyclerReact08 then ItemView else nil,
+					itemView = if FFlagViewRecyclerReact084 then ItemView elseif FFlagViewRecyclerReact08 then ItemView else nil,
 					host = Host,
 					state = State,
-					sizeConnection = if FFlagViewRecyclerReact08 then nil else nil,
-					pendingReads = if FFlagViewRecyclerReact08 then {} else nil,
-					lastPublishedState = if FFlagViewRecyclerReact08 then nil else nil,
-					lastPublishedLength = if FFlagViewRecyclerReact08 then nil else nil
+					sizeConnection = if FFlagViewRecyclerReact084 then nil elseif FFlagViewRecyclerReact08 then nil else nil,
+					pendingReads = if FFlagViewRecyclerReact084 then {} elseif FFlagViewRecyclerReact08 then {} else nil,
+					lastPublishedState = if FFlagViewRecyclerReact084 then nil elseif FFlagViewRecyclerReact08 then nil else nil,
+					lastPublishedLength = if FFlagViewRecyclerReact084 then nil elseif FFlagViewRecyclerReact08 then nil else nil,
+					measurer = if FFlagViewRecyclerReact084 then nil else nil
 				}
 				
-				if FFlagViewRecyclerReact08 then
+				if FFlagViewRecyclerReact084 then
+					config.sizeConnection = Host:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
+						-- upvalues: scheduleRead (upval), config (copy)
+						scheduleRead(config)
+					end)
+				elseif FFlagViewRecyclerReact08 then
 					config.sizeConnection = Host:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 						-- upvalues: scheduleRead (upval), config (copy)
 						scheduleRead(config)
@@ -307,6 +434,11 @@ return {
 					PreRenderConnection:Disconnect()
 					PreRenderConnection = nil
 				end
+				if FFlagViewRecyclerReact084 then
+					scheduleRead(config)
+					
+					return
+				end
 				if FFlagViewRecyclerReact08 then
 					scheduleRead(config)
 					
@@ -321,6 +453,11 @@ return {
 				Flag1 = true
 				Entry.state = State
 				
+				if FFlagViewRecyclerReact084 then
+					scheduleRead(Entry)
+					
+					return
+				end
 				if FFlagViewRecyclerReact08 then
 					scheduleRead(Entry)
 					
@@ -333,6 +470,11 @@ return {
 			elseif Entry.state ~= State then
 				Entry.state = State
 				
+				if FFlagViewRecyclerReact084 then
+					scheduleRead(Entry)
+					
+					return
+				end
 				if FFlagViewRecyclerReact08 then
 					scheduleRead(Entry)
 					
@@ -357,7 +499,7 @@ return {
 				end
 			end,
 			setAxis = function(Value)
-				-- upvalues: Axis (ref), Tbl (copy), Count (ref), FFlagViewRecyclerReact08 (upval), Callback1 (ref), Flag (ref), PreRenderConnection (ref), Flag1 (ref), RunService (upval), measureBeforePaint (copy)
+				-- upvalues: Axis (ref), Tbl (copy), Count (ref), FFlagViewRecyclerReact084 (upval), disconnect (ref), FFlagViewRecyclerReact08 (upval), Flag (ref), PreRenderConnection (ref), Flag1 (ref), RunService (upval), measureBeforePaint (copy)
 				if Value == Axis then return end
 				Axis = Value
 				local List = {}
@@ -372,8 +514,10 @@ return {
 						Tbl[value] = nil
 						Count -= 1
 						
-						if FFlagViewRecyclerReact08 then
-							Callback1(Entry)
+						if FFlagViewRecyclerReact084 then
+							disconnect(Entry)
+						elseif FFlagViewRecyclerReact08 then
+							disconnect(Entry)
 						else
 							Entry.measurer.disconnect()
 						end
@@ -390,7 +534,12 @@ return {
 				end
 			end,
 			cancelPending = function()
-				-- upvalues: FFlagViewRecyclerReact08 (upval), v1 (ref), NewResult (ref)
+				-- upvalues: FFlagViewRecyclerReact084 (upval), v1 (ref), FFlagViewRecyclerReact08 (upval), NewResult (ref)
+				if FFlagViewRecyclerReact084 then
+					v1 = nil
+					
+					return
+				end
 				if FFlagViewRecyclerReact08 then
 					v1 = nil
 					
@@ -407,7 +556,17 @@ return {
 				-- upvalues: Count1 (ref)
 				return Count1
 			end,
-			getPendingReadCount = if FFlagViewRecyclerReact08 then function(): number
+			getPendingReadCount = if FFlagViewRecyclerReact084 then function(): number
+				-- upvalues: Tbl (copy)
+				local Count = 0
+				
+				for _, value in Tbl do
+					for _ in value.pendingReads do
+						Count += 1
+					end
+				end
+				return Count
+			end elseif FFlagViewRecyclerReact08 then function(): number
 				-- upvalues: Tbl (copy)
 				local Count = 0
 				
@@ -419,18 +578,22 @@ return {
 				return Count
 			end else nil,
 			destroy = function()
-				-- upvalues: Flag (ref), FFlagViewRecyclerReact08 (upval), v1 (ref), NewResult (ref), Tbl (copy), Callback1 (ref), Count (ref), PreRenderConnection (ref), Flag1 (ref), RunService (upval), measureBeforePaint (copy)
+				-- upvalues: Flag (ref), FFlagViewRecyclerReact084 (upval), v1 (ref), FFlagViewRecyclerReact08 (upval), NewResult (ref), Tbl (copy), disconnect (ref), Count (ref), PreRenderConnection (ref), Flag1 (ref), RunService (upval), measureBeforePaint (copy)
 				if Flag then return end
 				Flag = true
 				
-				if FFlagViewRecyclerReact08 then
+				if FFlagViewRecyclerReact084 then
+					v1 = nil
+				elseif FFlagViewRecyclerReact08 then
 					v1 = nil
 				else
 					NewResult.destroy()
 				end
 				for _, value in Tbl do
-					if FFlagViewRecyclerReact08 then
-						Callback1(value)
+					if FFlagViewRecyclerReact084 then
+						disconnect(value)
+					elseif FFlagViewRecyclerReact08 then
+						disconnect(value)
 					else
 						value.measurer.disconnect()
 					end

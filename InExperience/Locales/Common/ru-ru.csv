@@ -181,6 +181,7 @@ CommonUI.Features.Label.About,Сведения
 CommonUI.Features.Label.Add,Добавить
 CommonUI.Features.Label.AddConnection,Добавить контакт
 CommonUI.Features.Label.AddConnections,Добавить контакты
+CommonUI.Features.Label.AdjustScreen,Настройка экрана
 CommonUI.Features.Label.Avatar,Аватар
 CommonUI.Features.Label.Badges,Значки
 CommonUI.Features.Label.Charts,Чарты
@@ -1644,7 +1645,6 @@ Feature.Chat.Label.PrivacySettings,Настройки конфиденциаль
 Feature.Chat.Label.ReplyingToOthers,
 Feature.Chat.Label.ReplyingToYourself,Ответить себе
 Feature.Chat.Label.SearchWord,
-Feature.Chat.Label.SnoozeChatNotifications,Отключить уведомления чата внутри плейса:
 Feature.Chat.Label.SnoozePartyNotifications,Отключить уведомления команды внутри плейса:
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,неизвестный пользователь
@@ -1701,6 +1701,9 @@ Feature.Contacts.Message.AddFriends,
 Feature.Contacts.Message.ContactDiscoverable,"Чтобы помочь тебе найти друзей, пользователи Roblox с твоим номером телефона в контактах смогут добавить тебя и увидеть твоё имя, сохранённое на их телефоне."
 Feature.Contacts.Message.InviteToRoblox,"Добавь меня в контакты в Roblox, чтобы мы могли создавать, делиться и исследовать плейсы вместе."
 Feature.Contacts.Message.NoResults,Нет результатов.
+Feature.Denied.Denied.Action,
+Feature.Denied.Denied.Body,В целях безопасности твеого аккаунта мы не можем выполнить данный запрос в данный момент. Повтори попытку на ранее использованном устройстве или обратись в Службу поддержки.
+Feature.Denied.Denied.Header,Ограниченное действие
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Имя может содержать личную информацию.
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Твоё имя уже было изменено за последние 7 дней
@@ -2294,6 +2297,8 @@ Feature.ReportAbuse.Title.SelectInSceneFinishYourReport,
 Feature.ReportAbuse.Title.SelectInSceneThankYou,
 Feature.Screentime.Content.ScreentimeLimitDialog,"Достигнут дневной лимит экранного времени. Возвращайся завтра, чтобы снова получить доступ к Roblox."
 Feature.SecurityFeedback.Header.NewLogin,Оповещение о новой активности
+Feature.Settings.Description.AccountSettingsWebsite,"Чтобы получить доступ к настройкам конфиденциальности, Безопасности и пр.
+перейди на веб-сайт или вспомогательное устройство."
 Feature.Settings.Label.Error,
 Feature.SettingsHub.Action.Block,
 Feature.SettingsHub.Action.Cancel,

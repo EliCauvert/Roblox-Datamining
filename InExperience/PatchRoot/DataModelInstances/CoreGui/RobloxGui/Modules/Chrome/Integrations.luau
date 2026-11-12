@@ -4,21 +4,26 @@ local IsSpatialFunction = require(CorePackages.Workspace.Packages.AppCommonLib).
 local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local FFlagEnableInExperienceAvatarSwitcher = SharedFlagsModule.FFlagEnableInExperienceAvatarSwitcher
 local FFlagAddInviteFriendsIntegration = SharedFlagsModule.FFlagAddInviteFriendsIntegration
+local FFlagAppNavMyStatsTab = SharedFlagsModule.FFlagAppNavMyStatsTab
 local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 local FFlagEnableInExperienceShop = SharedFlagsModule.FFlagEnableInExperienceShop
 local FFlagEnableOffersPrefetch = SharedFlagsModule.FFlagEnableOffersPrefetch
 local FFlagIntegrateTraversalHistoryInSideSheet = SharedFlagsModule.FFlagIntegrateTraversalHistoryInSideSheet
+local FFlagRemoveFriendsChatUnibarEntrypoints = SharedFlagsModule.FFlagRemoveFriendsChatUnibarEntrypoints
 local FFlagExpChatCanShowFriendsTab = SharedFlagsModule.FFlagExpChatCanShowFriendsTab
 local FFlagShowSwitchServerButton = SharedFlagsModule.FFlagShowSwitchServerButton
 local IsPioneerLaunchFunction = require(CorePackages.Workspace.Packages.PioneerUtils).isPioneerLaunch
 local FFlagEnableSideSheetRobuxWidgetModule = require(script.Parent.Flags.FFlagEnableSideSheetRobuxWidget)
 local FFlagAddTraversalHistory = require(CorePackages.Workspace.Packages.CoreScriptsRoactCommon).Traversal.Flags.FFlagAddTraversalHistory
 
+if game:DefineFastFlag("SideSheetCloseOtherWindows", false) then
+	require(script.closeShopAndAvatarSwitcherOnSideSheet)()
+end
 return {
 	OverflowMenu = require(script.OverflowMenu),
-	AssistantBuild = if SharedFlagsModule.FFlagAppNavMyStatsTab then require(script.AssistantBuild) else nil,
+	AssistantBuild = if FFlagAppNavMyStatsTab then require(script.AssistantBuild) else nil,
 	Chat = require(script.ExpChat.ChatChromeIntegration),
-	ConnectDropdown = if SharedFlagsModule.FFlagRemoveFriendsChatUnibarEntrypoints and FFlagExpChatCanShowFriendsTab then nil else require(script.Connect.ConnectIconDropdown),
+	ConnectDropdown = if FFlagRemoveFriendsChatUnibarEntrypoints and FFlagExpChatCanShowFriendsTab then nil else require(script.Connect.ConnectIconDropdown),
 	TrustAndSafety = require(script.TrustAndSafety),
 	DummyWindow = require(script.DummyWindow),
 	DummyWindow2 = require(script.DummyWindow2),

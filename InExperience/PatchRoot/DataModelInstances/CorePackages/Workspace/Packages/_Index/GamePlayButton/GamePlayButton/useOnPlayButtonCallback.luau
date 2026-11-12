@@ -30,7 +30,6 @@ local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventE
 local HandleUpdateFunction = require(Parent.RobloxAppUpdate).HandleUpdate
 local LaunchPlaytestWithLoadingStateModule = require(Parent.BuildExperiencePlaytestLaunch.launchPlaytestWithLoadingState)
 local UseGameProductInfoSelectorFunction = require(Parent.GameProductInfoRodux).useGameProductInfoSelector
-local UseGameInfosSelectorFunction = require(Parent.GameInfosRodux).useGameInfosSelector
 local GameHydrationReactModule = require(Parent.GameHydrationReact)
 local CloseCentralOverlayFunction = require(Parent.CentralOverlay).Thunks.CloseCentralOverlay
 local FetchGamePlayabilityAndProductInfo = require(Parent.GameDetailRodux).FetchGamePlayabilityAndProductInfo
@@ -54,7 +53,6 @@ local FFlagLuaAppLaunchWhenLoadingEdp = require(Parent.SharedFlags).FFlagLuaAppL
 local FFlagEnableGameJoinEarlyAccess = require(Parent.SharedFlags).FFlagEnableGameJoinEarlyAccess
 local FFlagLuaAppLaunchWhenLoadingForce = require(Parent.SharedFlags).FFlagLuaAppLaunchWhenLoadingForce
 local FFlagLuaAppDemoModePlayButtonTelemetry = require(Parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
-local FFlagMigrateGameInfoToStore = require(Parent.SharedFlags).FFlagMigrateGameInfoToStore
 local FFlagLuaAppPlayButtonPrivatePT = require(Parent.SharedFlags).FFlagLuaAppPlayButtonPrivatePT
 local FFlagLuaAppPrivatePlaytestEarlyTesting = require(Parent.SharedFlags).FFlagLuaAppPrivatePlaytestEarlyTesting
 local FFlagLuaAppPrivatePlaytestWithoutBuildMode = require(Parent.SharedFlags).FFlagLuaAppPrivatePlaytestWithoutBuildMode
@@ -64,7 +62,7 @@ local FFlagLuaAppCloudClientPlayButtonOffer = require(Parent.SharedFlags).FFlagL
 local UsePlayButtonLaunchWithCloudClientOfferModule = if FFlagLuaAppCloudClientPlayButtonOffer then require(GamePlayButton.PlayButtonLaunchChecks.usePlayButtonLaunchWithCloudClientOffer) else nil
 
 return function(UniverseId, ReferralSource, Ctx, _, p1, p2, p3, Enabled)
-	-- upvalues: UseRoactServiceFunction (copy), RoactAnalytics (copy), AppUpdateService (copy), AppEventIngestService (copy), UseDispatchFunction (copy), UseSelectorFunction (copy), FFlagMigrateGameInfoToStore (copy), GameHydrationReactModule (copy), UseGameInfosSelectorFunction (copy), UseGameProductInfoSelectorFunction (copy), UseRouteNameFunction (copy), GetFFlagIsSquadEnabledFunction (copy), ReactModule (copy), SquadExternalContractContext (copy), GetFFlagLuaAppEnableVirtualEventPlaceIdFunction (copy), FFlagLuaAppPlayButtonPrivatePT (copy), UsePlayButtonLaunchGameModule (copy), FFlagLuaAppCloudClientPlayButtonOffer (copy), UsePlayButtonLaunchWithCloudClientOfferModule (copy), FFlagLuaAppPlayableUxTreatment (copy), UsePlayButtonLaunchWithUxTreatmentModule (copy), UsePlayButtonLaunchAfterSeventeenPlusUpsellModule (copy), UseAgeVerificationOverlayCallbackModule (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy), HandleUpdateFunction (copy), CanPerformBinaryUpdateEnabledEngineFeature (copy), RoactNetworking (copy), FFlagLuaAppLaunchWhenLoadingForce (copy), FFlagLuaAppLaunchWhenLoadingEdp (copy), DiscoveryEventErrorLogger (copy), FFlagLuaAppPrivatePlaytestEarlyTesting (copy), FFlagLuaAppPrivatePlaytestWithoutBuildMode (copy), LaunchPlaytestWithLoadingStateModule (copy), FFlagLuaAppPlayButtonPrivatePTEnableSingleButton (copy), UsePrivatePlaytestLaunchWithUpsellModule (copy), JoinGamePlayButtonFunction (copy), PlayButtonReferralSourceModule (copy), GamePlayButtonShareLinkAnalyticsModule (copy), PlayButtonStatesModule (copy), CloseCentralOverlayFunction (copy), FetchGamePlayabilityAndProductInfo (copy), OpenCentralOverlayForPurchaseGameModule (copy), FFlagShipUnifiedPurchaseFlowToPaidAccess (copy), OpenCentralOverlayForUnifiedPurchasePromptModule (copy), ProductPurchaseSurface (copy), GetIsUserEligibleForUnifiedPurchaseFlowFunction (copy), FFlagLuaAppPlayButtonPrivatePTEnableDualButton (copy), ApiPostPreparePurchaseModule (copy), UnlockPlayIntentFunction (copy), InvalidPlayIntentFunction (copy), FFlagLuaAppPlayButtonLoadingDurationTelemetry (copy), CreateExperienceInviteFunction (copy), FFlagEnableSquadRegroupExperimentation (copy), SquadExperienceInviteSource (copy), FFlagEnablePrivatePartyStartJoin (copy), SquadExperienceInviteType (copy), FFlagEnableGameJoinEarlyAccess (copy)
+	-- upvalues: UseRoactServiceFunction (copy), RoactAnalytics (copy), AppUpdateService (copy), AppEventIngestService (copy), UseDispatchFunction (copy), UseSelectorFunction (copy), GameHydrationReactModule (copy), UseGameProductInfoSelectorFunction (copy), UseRouteNameFunction (copy), GetFFlagIsSquadEnabledFunction (copy), ReactModule (copy), SquadExternalContractContext (copy), GetFFlagLuaAppEnableVirtualEventPlaceIdFunction (copy), FFlagLuaAppPlayButtonPrivatePT (copy), UsePlayButtonLaunchGameModule (copy), FFlagLuaAppCloudClientPlayButtonOffer (copy), UsePlayButtonLaunchWithCloudClientOfferModule (copy), FFlagLuaAppPlayableUxTreatment (copy), UsePlayButtonLaunchWithUxTreatmentModule (copy), UsePlayButtonLaunchAfterSeventeenPlusUpsellModule (copy), UseAgeVerificationOverlayCallbackModule (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy), HandleUpdateFunction (copy), CanPerformBinaryUpdateEnabledEngineFeature (copy), RoactNetworking (copy), FFlagLuaAppLaunchWhenLoadingForce (copy), FFlagLuaAppLaunchWhenLoadingEdp (copy), DiscoveryEventErrorLogger (copy), FFlagLuaAppPrivatePlaytestEarlyTesting (copy), FFlagLuaAppPrivatePlaytestWithoutBuildMode (copy), LaunchPlaytestWithLoadingStateModule (copy), FFlagLuaAppPlayButtonPrivatePTEnableSingleButton (copy), UsePrivatePlaytestLaunchWithUpsellModule (copy), JoinGamePlayButtonFunction (copy), PlayButtonReferralSourceModule (copy), GamePlayButtonShareLinkAnalyticsModule (copy), PlayButtonStatesModule (copy), CloseCentralOverlayFunction (copy), FetchGamePlayabilityAndProductInfo (copy), OpenCentralOverlayForPurchaseGameModule (copy), FFlagShipUnifiedPurchaseFlowToPaidAccess (copy), OpenCentralOverlayForUnifiedPurchasePromptModule (copy), ProductPurchaseSurface (copy), GetIsUserEligibleForUnifiedPurchaseFlowFunction (copy), FFlagLuaAppPlayButtonPrivatePTEnableDualButton (copy), ApiPostPreparePurchaseModule (copy), UnlockPlayIntentFunction (copy), InvalidPlayIntentFunction (copy), FFlagLuaAppPlayButtonLoadingDurationTelemetry (copy), CreateExperienceInviteFunction (copy), FFlagEnableSquadRegroupExperimentation (copy), SquadExperienceInviteSource (copy), FFlagEnablePrivatePartyStartJoin (copy), SquadExperienceInviteType (copy), FFlagEnableGameJoinEarlyAccess (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactAnalytics)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(AppUpdateService)
 	local UseRoactServiceResult2 = UseRoactServiceFunction(AppEventIngestService)
@@ -73,14 +71,7 @@ return function(UniverseId, ReferralSource, Ctx, _, p1, p2, p3, Enabled)
 		-- upvalues: UniverseId (copy)
 		return p4.GameDetails[UniverseId]
 	end)
-	local v1 = nil
-	local UseGameInfoResult = nil
-	
-	if FFlagMigrateGameInfoToStore then
-		UseGameInfoResult = GameHydrationReactModule.useGameInfo(UniverseId)
-	else
-		v1 = UseGameInfosSelectorFunction(UniverseId)
-	end
+	local UseGameInfoResult = GameHydrationReactModule.useGameInfo(UniverseId)
 	local UseGameProductInfoSelectorResult = UseGameProductInfoSelectorFunction(UniverseId)
 	local UseSelectorResult1 = UseSelectorFunction(function(p4)
 		-- upvalues: UniverseId (copy)
@@ -89,14 +80,14 @@ return function(UniverseId, ReferralSource, Ctx, _, p1, p2, p3, Enabled)
 	local UseGameIconResult = GameHydrationReactModule.useGameIcon(UniverseId)
 	local UseRouteNameResult = UseRouteNameFunction()
 	local UseContextResult = if GetFFlagIsSquadEnabledFunction() then ReactModule.useContext(SquadExternalContractContext) else nil
-	local RootPlaceId = UseSelectorResult and UseSelectorResult.rootPlaceId or ((if FFlagMigrateGameInfoToStore then UseGameInfoResult and UseGameInfoResult.rootPlaceId else v1 and v1.placeId) or nil)
+	local RootPlaceId = UseSelectorResult and UseSelectorResult.rootPlaceId or (UseGameInfoResult and UseGameInfoResult.rootPlaceId or nil)
 	local P6 = GetFFlagLuaAppEnableVirtualEventPlaceIdFunction() and p3 ~= "0" and p3 or RootPlaceId
-	local Name = UseSelectorResult and UseSelectorResult.name or ((if FFlagMigrateGameInfoToStore then UseGameInfoResult and UseGameInfoResult.name else v1 and v1.name) or nil)
-	local v2 = nil
+	local Name = UseSelectorResult and UseSelectorResult.name or (UseGameInfoResult and UseGameInfoResult.name or nil)
+	local v1 = nil
 	
 	if FFlagLuaAppPlayButtonPrivatePT then
-		local Id = UseSelectorResult and UseSelectorResult.creator and UseSelectorResult.creator.id or ((if FFlagMigrateGameInfoToStore then UseGameInfoResult and (UseGameInfoResult.creator and UseGameInfoResult.creator.id) else v1 and v1.creatorId) or nil)
-		v2 = if Id == nil then nil else tostring(Id)
+		local Id = UseSelectorResult and UseSelectorResult.creator and UseSelectorResult.creator.id or (UseGameInfoResult and UseGameInfoResult.creator and UseGameInfoResult.creator.id or nil)
+		v1 = if Id == nil then nil else tostring(Id)
 	end
 	local UsePlayButtonLaunchGameModuleResult = UsePlayButtonLaunchGameModule(UniverseId, P6, RootPlaceId, ReferralSource, Ctx, p1, p2)
 	local UsePlayButtonLaunchWithCloudClientOfferModuleResult = if FFlagLuaAppCloudClientPlayButtonOffer then UsePlayButtonLaunchWithCloudClientOfferModule(UniverseId, P6, RootPlaceId, UseSelectorResult1, UseRouteNameResult, UsePlayButtonLaunchGameModuleResult) else nil
@@ -136,7 +127,7 @@ return function(UniverseId, ReferralSource, Ctx, _, p1, p2, p3, Enabled)
 				Callback(if FFlagLuaAppDemoModePlayButtonTelemetry then p4 else nil)
 			end
 		end, { P6, p1, UniverseId })
-		Callback = UsePrivatePlaytestLaunchWithUpsellModule(UseSelectorResult1, tostring(UniverseId), if FFlagLuaAppPlayButtonPrivatePTEnableSingleButton then UseResult else UseResult1, Ctx, UseRouteNameResult, v2)
+		Callback = UsePrivatePlaytestLaunchWithUpsellModule(UseSelectorResult1, tostring(UniverseId), if FFlagLuaAppPlayButtonPrivatePTEnableSingleButton then UseResult else UseResult1, Ctx, UseRouteNameResult, v1)
 	end
 	return (ReactModule.useCallback(function(PlayButtonState, p4, p5)
 		-- upvalues: JoinGamePlayButtonFunction (upval), UseRoactServiceResult (copy), ReferralSource (copy), RootPlaceId (copy), Ctx (copy), PlayButtonReferralSourceModule (upval), GamePlayButtonShareLinkAnalyticsModule (upval), GetFFlagLuaAppEnableVirtualEventPlaceIdFunction (upval), P6 (ref), UniverseId (copy), PlayButtonStatesModule (upval), FFlagLuaAppPlayButtonPrivatePTEnableSingleButton (upval), UseSelectorResult1 (copy), Callback (ref), UseResult (copy), UseGameProductInfoSelectorResult (copy), UseDispatchResult (copy), CloseCentralOverlayFunction (upval), FetchGamePlayabilityAndProductInfo (upval), UseRoactServiceResult3 (copy), OpenCentralOverlayForPurchaseGameModule (upval), Name (copy), UseRouteNameResult (copy), FFlagShipUnifiedPurchaseFlowToPaidAccess (upval), OpenCentralOverlayForUnifiedPurchasePromptModule (upval), UseGameIconResult (copy), ProductPurchaseSurface (upval), GetIsUserEligibleForUnifiedPurchaseFlowFunction (upval), FFlagLuaAppDemoModePlayButtonTelemetry (upval), FFlagLuaAppPlayButtonPrivatePTEnableDualButton (upval), ApiPostPreparePurchaseModule (upval), UnlockPlayIntentFunction (upval), UseRoactServiceResult2 (copy), InvalidPlayIntentFunction (upval), FFlagLuaAppPlayButtonLoadingDurationTelemetry (upval), FFlagLuaAppLaunchWhenLoadingForce1 (copy), GetFFlagIsSquadEnabledFunction (upval), CreateExperienceInviteFunction (upval), UseContextResult (copy), FFlagEnableSquadRegroupExperimentation (upval), SquadExperienceInviteSource (upval), FFlagEnablePrivatePartyStartJoin (upval), SquadExperienceInviteType (upval), FFlagEnableGameJoinEarlyAccess (upval)
@@ -275,7 +266,7 @@ return function(UniverseId, ReferralSource, Ctx, _, p1, p2, p3, Enabled)
 				return
 			elseif GetFFlagIsSquadEnabledFunction() and PlayButtonState == PlayButtonStatesModule.PlayableWithParty then
 				if RootPlaceId then
-					UseDispatchResult(CreateExperienceInviteFunction(RootPlaceId, UseContextResult, if FFlagEnableSquadRegroupExperimentation then SquadExperienceInviteSource.Default else nil, if FFlagEnablePrivatePartyStartJoin and (p5 and p5.isPrivateParty) then SquadExperienceInviteType.PlayWithPartyInPrivatePartyServer else nil))
+					UseDispatchResult(CreateExperienceInviteFunction(RootPlaceId, UseContextResult, if FFlagEnableSquadRegroupExperimentation then SquadExperienceInviteSource.Default else nil, if FFlagEnablePrivatePartyStartJoin and p5 and p5.isPrivateParty then SquadExperienceInviteType.PlayWithPartyInPrivatePartyServer else nil))
 					
 					return
 				end

@@ -30,11 +30,8 @@ local FFlagBuildExperienceMonetizationNativeUIModule = require(BuildExperience.F
 local FFlagBuildExperienceChatCardEmphasisModule = require(BuildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
 local FFlagBuildExperienceInGameShell = require(Parent.SharedFlags).FFlagBuildExperienceInGameShell
 local FFlagBuildExperienceChatAccordionScrollAnchorModule = require(BuildExperience.Flags.FFlagBuildExperienceChatAccordionScrollAnchor)
-local FFlagBuildExperienceChatSheetReversedContentModule = require(BuildExperience.Flags.FFlagBuildExperienceChatSheetReversedContent)
-local FFlagBuildExperienceChatImageAttachmentsModule = require(BuildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local _ = require(BuildExperience.useGamePermissions)
-local FFlagBuildExperienceChatResourceAttachments = require(Parent.SharedFlags).FFlagBuildExperienceChatResourceAttachments
 local Sheet = FoundationModule.Sheet
 local UseScrollPerformanceTrackerModule = require(BuildExperience.Telemetry.useScrollPerformanceTracker)
 local DialogSize = FoundationModule.Enums.DialogSize
@@ -49,7 +46,7 @@ local EventMap = {
 }
 
 local function ChatSheetContent(p1)
-	-- upvalues: ReactModule (copy), FFlagBuildExperienceLibrary (copy), UseScrollPerformanceTrackerModule (copy), FFlagBuildExperienceChatSheetReversedContentModule (copy)
+	-- upvalues: ReactModule (copy), FFlagBuildExperienceLibrary (copy), UseScrollPerformanceTrackerModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local v1 = nil
 	local Callback = nil
@@ -76,14 +73,11 @@ local function ChatSheetContent(p1)
 			end
 		end, { p1.onFramesChanged, p1.sheet, v1 })
 	end
-	return ReactModule.createElement(p1.sheetComponent.Content, {
-		isReversed = if FFlagBuildExperienceChatSheetReversedContentModule then true else nil,
-		scrollingFrameRef = UseResult
-	}, p1.children)
+	return ReactModule.createElement(p1.sheetComponent.Content, { isReversed = true, scrollingFrameRef = UseResult }, p1.children)
 end
 
 return function(p1)
-	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), Sheet (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseTokensFunction (copy), ReactModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), ReactUtilsModule (copy), ChatMessageListModule (copy), BuildEmptyStateModule (copy), FFlagBuildExperienceModelPickerModule (copy), BuyMoreRobuxCardModule (copy), AnswerFormContainerModule (copy), ChatConstantsModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FFlagBuildCheckGamePermissionsModule (copy), ChatPermissionsContextModule (copy), View (copy), FFlagBuildExperienceLibrary (copy), ChatActionsModule (copy), FFlagBuildExperienceChatImageAttachmentsModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), DialogSize (copy), ChatSheetContent (copy), BuildPillMenuPageHostModule (copy), FFlagBuildExperienceInGameShell (copy), BuildPillMenuPortalModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ChatCardEmphasisProviderModule (copy)
+	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), Sheet (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseTokensFunction (copy), ReactModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), ReactUtilsModule (copy), ChatMessageListModule (copy), BuildEmptyStateModule (copy), FFlagBuildExperienceModelPickerModule (copy), BuyMoreRobuxCardModule (copy), AnswerFormContainerModule (copy), ChatConstantsModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FFlagBuildCheckGamePermissionsModule (copy), ChatPermissionsContextModule (copy), View (copy), FFlagBuildExperienceLibrary (copy), ChatActionsModule (copy), DialogSize (copy), ChatSheetContent (copy), BuildPillMenuPageHostModule (copy), FFlagBuildExperienceInGameShell (copy), BuildPillMenuPortalModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ChatCardEmphasisProviderModule (copy)
 	local HasAnswerForm: boolean = FFlagBuildExperienceAnswerFormModule and p1.answerForm ~= nil
 	local SheetComponent = p1.sheetComponent or Sheet
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -165,13 +159,13 @@ return function(p1)
 		composerText = p1.composerText,
 		composerErrorText = p1.composerErrorText,
 		onComposerChanged = p1.onComposerChanged,
-		images = if FFlagBuildExperienceChatImageAttachmentsModule then p1.composerImages else nil,
-		onImagesChanged = if FFlagBuildExperienceChatImageAttachmentsModule then p1.onComposerImagesChanged else nil,
-		onRetryImage = if FFlagBuildExperienceChatImageAttachmentsModule then p1.onRetryComposerImage else nil,
+		images = p1.composerImages,
+		onImagesChanged = p1.onComposerImagesChanged,
+		onRetryImage = p1.onRetryComposerImage,
 		isSendBlocked = p1.isComposerSendBlocked,
 		tracksExternalText = p1.tracksExternalComposerText,
-		resourceAttachments = if FFlagBuildExperienceChatResourceAttachments then p1.composerResourceAttachments else nil,
-		onRemoveResourceAttachment = if FFlagBuildExperienceChatResourceAttachments then p1.onRemoveComposerResourceAttachment else nil,
+		resourceAttachments = p1.composerResourceAttachments,
+		onRemoveResourceAttachment = p1.onRemoveComposerResourceAttachment,
 		onActivateResourceAttachment = p1.onActivateComposerResourceAttachment,
 		placeholder = UseLocalizationResult.composerPlaceholder,
 		textBoxRef = p1.textBoxRef,

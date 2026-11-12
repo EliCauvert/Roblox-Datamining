@@ -5,7 +5,8 @@ return {
 	testMatch = { "**/*.test" },
 	testPathIgnorePatterns = {
 		"/Mocks/", "/Api/", "/Stores/", "whenJoinSettles", "initShopGlobalIcon",
-		"useCloseOnCoreMenu", "submitFreeTrialMenuBadge", "submitFreeTrialTooltips"
+		"useCloseOnCoreMenu", "submitFreeTrialMenuBadge", "submitFreeTrialTooltips",
+		"submitFreeTrialTopBarChip"
 	},
 	setupFilesAfterEnv = {
 		JestConfigsModule.setupFiles.ErrorLogHandler,

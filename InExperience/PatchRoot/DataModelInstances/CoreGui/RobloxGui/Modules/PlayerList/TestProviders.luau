@@ -56,7 +56,7 @@ return function(p1)
 			LayoutValuesProvider_DEPRECATED = RoactModule.createElement(Provider, {
 				layoutValues = p1.layoutValues or CreateLayoutValuesModule(false)
 			}, {
-				ThemeProvider = RoactModule.createElement(UIBloxModule.App.Style.AppStyleProvider, {}, {
+				ThemeProvider = RoactModule.createElement(UIBloxModule.App.Style.AppStyleProvider, { style = p1.style }, {
 					FoundationProvider = RoactModule.createElement(FoundationModule.FoundationProvider, { colorMode = FoundationModule.Enums.ColorMode.Dark }, {
 						LayoutValuesProvider = RoactModule.createElement(LayoutValuesContext.Provider, {
 							value = p1.layoutValues or CreateLayoutValuesModule(false)

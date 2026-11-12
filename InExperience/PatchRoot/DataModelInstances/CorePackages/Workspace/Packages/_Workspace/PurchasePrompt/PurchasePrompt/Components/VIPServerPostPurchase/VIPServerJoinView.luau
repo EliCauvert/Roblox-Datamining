@@ -14,7 +14,8 @@ return function(p1)
 	return ReactModule.createElement(Sheet.Root, {
 		preferCenterSheet = true,
 		testId = "VIPServerJoinView",
-		onClose = p1.onClose
+		onClose = p1.onClose,
+		ref = p1.focusRootRef
 	}, {
 		Header = ReactModule.createElement(Sheet.Header, nil, {
 			Title = ReactModule.createElement(Text, {
@@ -65,7 +66,8 @@ return function(p1)
 				variant = ButtonVariant.Emphasis,
 				fillBehavior = FillBehavior.Fill,
 				onActivated = p1.onJoin,
-				isLoading = p1.isJoining
+				isLoading = p1.isJoining,
+				ref = p1.joinButtonRef
 			})
 		})
 	})

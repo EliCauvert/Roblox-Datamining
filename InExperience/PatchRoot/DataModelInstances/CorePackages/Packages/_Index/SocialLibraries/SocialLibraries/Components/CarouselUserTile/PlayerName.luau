@@ -4,19 +4,16 @@ local Llama = DependenciesModule.llama
 local UIBlox = DependenciesModule.UIBlox
 local StyledTextLabel = UIBlox.App.Text.StyledTextLabel
 local Style = UIBlox.Style
-local GetTextHeightModule = require(script.Parent.getTextHeight)
 local _ = require(script.Parent.StyleTypes)
-local FoundationFontFaceMigration = DependenciesModule.Foundation.Utility.Flags.FoundationFontFaceMigration
 local config = { width = require(script.Parent.Constants).TILE_SIZE }
 
 return function(p1)
-	-- upvalues: Llama (copy), config (copy), Style (copy), FoundationFontFaceMigration (copy), GetTextHeightModule (copy), Roact (copy), StyledTextLabel (copy)
+	-- upvalues: Llama (copy), config (copy), Style (copy), Roact (copy), StyledTextLabel (copy)
 	local JoinResult = Llama.Dictionary.join(config, p1)
 	
 	return Style.withStyle(function(p2)
-		-- upvalues: FoundationFontFaceMigration (upval), GetTextHeightModule (upval), JoinResult (copy), Roact (upval), StyledTextLabel (upval)
+		-- upvalues: Roact (upval), StyledTextLabel (upval), JoinResult (copy)
 		local _Font = p2.Font
-		local ScaledBaseSize = _Font.BaseSize * _Font.CaptionHeader.RelativeSize
 		
 		return Roact.createElement(StyledTextLabel, {
 			lineHeight = 1,
@@ -26,7 +23,7 @@ return function(p1)
 			text = JoinResult.name,
 			fontStyle = _Font.CaptionHeader,
 			colorStyle = p2.Theme.TextEmphasis,
-			size = UDim2.fromOffset(JoinResult.width, if FoundationFontFaceMigration then ScaledBaseSize else GetTextHeightModule(JoinResult.name, _Font.CaptionHeader.Font, ScaledBaseSize)),
+			size = UDim2.fromOffset(JoinResult.width, _Font.BaseSize * _Font.CaptionHeader.RelativeSize),
 			textTruncate = Enum.TextTruncate.AtEnd,
 			textXAlignment = Enum.TextXAlignment.Left,
 			textYAlignment = Enum.TextYAlignment.Center

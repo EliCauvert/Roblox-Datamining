@@ -2,7 +2,13 @@
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local HomeOmniFeedCache = require(Parent.DiscoveryUtils).HomeOmniFeedCache
 local GetSduiTemplateStoreFunction = require(Parent.SduiSharedUtilities).getSduiTemplateStore
+local FFlagSduiUniverseItemConnectionsPlayed = require(Parent.SharedFlags).FFlagSduiUniverseItemConnectionsPlayed
 local config = { universe = { "player_count" } }
+local List = if FFlagSduiUniverseItemConnectionsPlayed then {
+	"connection_played_display_name",
+	"connection_played_num_others",
+	"connection_played_total_count"
+} else nil
 
 local function _(Tbl)
 	return table.clone(Tbl)
@@ -44,41 +50,130 @@ local _ = function(p1)
 	return if type(PoolId) == "string" and PoolId ~= "" then PoolId else nil
 end
 
-local _ = function(p1, p2: number)
+local _ = function(p1): boolean
+	-- upvalues: List (copy)
+	for _, value in List do
+		if p1[value] ~= nil then
+			return true
+		end
+	end
+	return false
+end
+
+local _ = function(Tbl)
+	-- upvalues: List (copy)
+	local Flag = false
+	
+	for _, value in List do
+		if Tbl[value] ~= nil then
+			Flag = true
+			break
+		end
+	end
+	if not Flag then
+		return Tbl
+	end
+	local Copy = table.clone(Tbl)
+	
+	for _, value1 in List do
+		Copy[value1] = nil
+	end
+	return Copy
+end
+
+local function clearItemViewerFields(Tbl)
+	-- upvalues: List (copy)
+	if type(Tbl) ~= "table" then
+		return Tbl
+	end
+	local Kind = Tbl.kind
+	
+	if type(Kind) == "table" and type(Kind.value) == "table" then
+		local Value = Kind.value
+		local Flag1 = false
+		
+		for _, value2 in List do
+			if Value[value2] ~= nil then
+				Flag1 = true
+				break
+			end
+		end
+		local Value1 = nil
+		if Flag1 then
+			local Copy = table.clone(Value)
+			
+			for _, value3 in List do
+				Copy[value3] = nil
+			end
+			Value1 = Copy
+		else
+			Value1 = Value
+		end
+		if Value1 == Kind.value then
+			return Tbl
+		else
+			local Copy = table.clone(Tbl)
+			Copy.kind = { type = Kind.type, value = Value1 }
+			
+			return Copy
+		end
+	else
+		local Flag = false
+		
+		for _, value in List do
+			if Tbl[value] ~= nil then
+				Flag = true
+				break
+			end
+		end
+		if not Flag then
+			return Tbl
+		end
+		local Copy = table.clone(Tbl)
+		
+		for _, value1 in List do
+			Copy[value1] = nil
+		end
+		return Copy
+	end
+end
+
+local function takeItems(Items, Largest: number)
+	-- upvalues: FFlagSduiUniverseItemConnectionsPlayed (copy), clearItemViewerFields (copy)
 	local t = {}
 	
-	if p1 == nil then
+	if Items == nil then
 		return t
 	end
-	for i = 1, math.min(#p1, p2) do
-		t[i] = p1[i]
+	for i = 1, math.min(#Items, Largest) do
+		t[i] = if FFlagSduiUniverseItemConnectionsPlayed then clearItemViewerFields(Items[i]) else Items[i]
 	end
 	return t
 end
 
-local _ = function(p3, p4)
-	local SortId = p4.sort_id
+local _ = function(p2, p3)
+	local SortId = p3.sort_id
 	
 	if SortId == nil or SortId == "" then
-		warn(`Home SDUI cache entry "{p7}" has no sort_id; using its identifier`)
+		warn(`Home SDUI cache entry "{p8}" has no sort_id; using its identifier`)
 		
-		return p3
+		return p2
 	else
 		return (tostring(SortId))
 	end
 end
 
-local function collectReferencedKeys(List, p3)
+local function collectReferencedKeys(List, p2)
 	-- upvalues: collectReferencedKeys (copy)
 	local ValueType = type(List)
 	
 	if ValueType == "table" then
 		for _, value in List do
-			collectReferencedKeys(value, p3)
+			collectReferencedKeys(value, p2)
 		end
 		return
 	elseif ValueType == "string" or ValueType == "number" then
-		p3[tostring(List)] = true
+		p2[tostring(List)] = true
 	end
 end
 
@@ -116,7 +211,7 @@ local function filterOrderMap(EntryOrderMap, Entry_map)
 end
 
 local function pruneFeed(Tbl, TopicIdToNumCacheItems)
-	-- upvalues: itemListFields (copy), filterOrder (copy), filterOrderMap (copy)
+	-- upvalues: itemListFields (copy), takeItems (copy), filterOrder (copy), filterOrderMap (copy)
 	local Entry_map = {}
 	local Content_pools = {}
 	local List = {}
@@ -169,7 +264,7 @@ local function pruneFeed(Tbl, TopicIdToNumCacheItems)
 					local TopicIdToNumCacheItem = TopicIdToNumCacheItems[value3]
 					
 					if TopicIdToNumCacheItem ~= nil then
-						local Copy = table.clone(Value)
+						local Copy1 = table.clone(Value)
 						
 						if PoolId1 ~= nil then
 							local ContentPool = (Tbl.content_pools or {})[PoolId1]
@@ -177,16 +272,7 @@ local function pruneFeed(Tbl, TopicIdToNumCacheItems)
 							if ContentPool ~= nil then
 								if Content_pools[PoolId1] == nil then
 									local Copy2 = table.clone(ContentPool)
-									local Items = ContentPool.items
-									local Largest = math.max(TopicIdToNumCacheItem.cap - TopicIdToNumCacheItem.count, 0)
-									local Items1 = {}
-									
-									if Items ~= nil then
-										for i1 = 1, math.min(#Items, Largest) do
-											Items1[i1] = Items[i1]
-										end
-									end
-									Copy2.items = Items1
+									Copy2.items = takeItems(ContentPool.items, (math.max(TopicIdToNumCacheItem.cap - TopicIdToNumCacheItem.count, 0)))
 									TopicIdToNumCacheItem.count += #Copy2.items
 									Content_pools[PoolId1] = Copy2
 								end
@@ -195,23 +281,15 @@ local function pruneFeed(Tbl, TopicIdToNumCacheItems)
 							end
 						else
 							for _, value4 in ItemListFieldsResult do
-								local Entry1 = Value[value4]
-								local Largest = math.max(TopicIdToNumCacheItem.cap - TopicIdToNumCacheItem.count, 0)
-								local t1 = {}
-								
-								if Entry1 ~= nil then
-									for i2 = 1, math.min(#Entry1, Largest) do
-										t1[i2] = Entry1[i2]
-									end
-								end
-								TopicIdToNumCacheItem.count += #t1
-								Copy[value4] = t1
+								local TakeItemsResult = takeItems(Value[value4], (math.max(TopicIdToNumCacheItem.cap - TopicIdToNumCacheItem.count, 0)))
+								TopicIdToNumCacheItem.count += #TakeItemsResult
+								Copy1[value4] = TakeItemsResult
 							end
 						end
 						local Copy3 = table.clone(Entry)
 						local InputData1 = Entry.input_data
 						local Copy4 = table.clone(InputData1)
-						Copy4.kind = { type = InputData1.kind.type, value = Copy }
+						Copy4.kind = { type = InputData1.kind.type, value = Copy1 }
 						Copy3.input_data = Copy4
 						Entry_map[value2] = Copy3
 					end
@@ -222,22 +300,22 @@ local function pruneFeed(Tbl, TopicIdToNumCacheItems)
 	if next(Entry_map) == nil then
 		return nil
 	end
-	local Copy1 = table.clone(Tbl)
-	Copy1.entry_map = Entry_map
+	local Copy = table.clone(Tbl)
+	Copy.entry_map = Entry_map
 	
 	if Tbl.content_pools ~= nil then
-		Copy1.content_pools = Content_pools
+		Copy.content_pools = Content_pools
 	end
 	if Tbl.entry_order ~= nil then
-		Copy1.entry_order = filterOrder(Tbl.entry_order, Entry_map)
+		Copy.entry_order = filterOrder(Tbl.entry_order, Entry_map)
 	end
 	if Tbl.entry_order_map ~= nil then
-		Copy1.entry_order_map = filterOrderMap(Tbl.entry_order_map, Entry_map)
+		Copy.entry_order_map = filterOrderMap(Tbl.entry_order_map, Entry_map)
 	end
-	return Copy1
+	return Copy
 end
 
-local function pruneHydration(Tbl, p4)
+local function pruneHydration(Tbl, p3)
 	-- upvalues: config (copy)
 	if Tbl == nil then
 		return nil
@@ -250,7 +328,7 @@ local function pruneHydration(Tbl, p4)
 			local t = {}
 			
 			for i1, value1 in value do
-				if type(value1) == "table" and p4[tostring(i1)] then
+				if type(value1) == "table" and p3[tostring(i1)] then
 					local Copy1 = table.clone(value1)
 					
 					if Entry ~= nil then
@@ -267,13 +345,13 @@ local function pruneHydration(Tbl, p4)
 	return Copy
 end
 
-local function fillMissingTemplatesFromStore(p5)
+local function fillMissingTemplatesFromStore(p4)
 	-- upvalues: GetSduiTemplateStoreFunction (copy), AppPage (copy), Parent (copy)
 	local SduiTemplateStore = GetSduiTemplateStoreFunction()
 	local CachedRobloxComponentToTemplateId = SduiTemplateStore.getCachedRobloxComponentToTemplateId(AppPage.Home)
 	
 	if next(CachedRobloxComponentToTemplateId) == nil then return end
-	local Copy = table.clone(p5.templates or {})
+	local Copy = table.clone(p4.templates or {})
 	local TemplateEntry = require(Parent.ServiceContractsProto).apppageplatform.shared.template_entry.TemplateEntry
 	
 	for Roblox_component, value in CachedRobloxComponentToTemplateId do
@@ -285,7 +363,7 @@ local function fillMissingTemplatesFromStore(p5)
 			end
 		end
 	end
-	p5.templates = Copy
+	p4.templates = Copy
 end
 
 return {
@@ -326,21 +404,21 @@ return {
 			return Copy
 		end
 	end,
-	serializeSduiHomePageCache = function(p6)
+	serializeSduiHomePageCache = function(p5)
 		-- upvalues: Parent (copy)
-		return require(Parent.ServiceContractsProto).proto.json.serializeBuffer(p6:encode())
+		return require(Parent.ServiceContractsProto).proto.json.serializeBuffer(p5:encode())
 	end,
-	deserializeSduiHomePageCache = function(p6)
+	deserializeSduiHomePageCache = function(p5)
 		-- upvalues: Parent (copy)
-		if p6 == nil then
+		if p5 == nil then
 			return nil
 		else
 			local ServiceContractsProtoModule = require(Parent.ServiceContractsProto)
 			
-			return ServiceContractsProtoModule.apppageplatform.home.home_page.HomePageResponse.decode((ServiceContractsProtoModule.proto.json.deserializeBuffer(p6)))
+			return ServiceContractsProtoModule.apppageplatform.home.home_page.HomePageResponse.decode((ServiceContractsProtoModule.proto.json.deserializeBuffer(p5)))
 		end
 	end,
-	getSduiHomePageItemsForSortId = function(p6)
+	getSduiHomePageItemsForSortId = function(p5)
 		-- upvalues: HomeOmniFeedCache (copy), Parent (copy), itemListFields (copy)
 		local CachedSduiHomePageData = HomeOmniFeedCache.getCachedSduiHomePageData()
 		local DecodeResult = nil
@@ -384,7 +462,7 @@ return {
 							else
 								i1 = tostring(SortId)
 							end
-							if i1 == p6 then
+							if i1 == p5 then
 								if PoolId1 == nil then
 									return Value1[ItemListFieldsResult[1]]
 								end

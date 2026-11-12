@@ -2,20 +2,18 @@
 local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
 local GetTextSizeFunction = require(Parent.Style).GetTextSize
-local FoundationFontFaceMigration = require(Parent.Foundation).Utility.Flags.FoundationFontFaceMigration
 local Button = UIBloxModule.App.Button.Button
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
-local Text = require(Parent.AppCommonLib).Text
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 
 return function(Frame: Frame)
-	-- upvalues: UseStyleFunction (copy), FoundationFontFaceMigration (copy), ReactModule (copy), GetTextSizeFunction (copy), Text (copy), Button (copy), ButtonType (copy)
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), GetTextSizeFunction (copy), Button (copy), ButtonType (copy)
 	local UseStyleResult = UseStyleFunction()
-	local TitleLargeFont = if FoundationFontFaceMigration then UseStyleResult.Tokens.Typography.TitleLarge.Font else UseStyleResult.Font.Header2.Font
+	local TitleLargeFont = UseStyleResult.Tokens.Typography.TitleLarge.Font
 	local ScaledBaseSize = UseStyleResult.Font.BaseSize * UseStyleResult.Font.Header2.RelativeSize
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: Frame (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), ScaledBaseSize (copy), TitleLargeFont (copy), Text (upval)
-		return if Frame.buttonWidth then Frame.buttonWidth else (if FoundationFontFaceMigration then GetTextSizeFunction(Frame.text, ScaledBaseSize, TitleLargeFont, Vector2.new(10000, 10000)).X else Text.GetTextWidth(Frame.text, TitleLargeFont, ScaledBaseSize)) + 24
+		-- upvalues: Frame (copy), GetTextSizeFunction (upval), ScaledBaseSize (copy), TitleLargeFont (copy)
+		return if Frame.buttonWidth then Frame.buttonWidth else GetTextSizeFunction(Frame.text, ScaledBaseSize, TitleLargeFont, Vector2.new(10000, 10000)).X + 24
 	end, {
 		Frame.text,
 		TitleLargeFont,

@@ -18,6 +18,7 @@ local UserTileModule = require(Parent.UserTile)
 local EditProfileHeaderBarModule = require(EditProfile.BaseComponents.EditProfileHeaderBar)
 local TextKeysModule = require(EditProfile.Common.TextKeys)
 local FFlagAXEnableProfileTab = require(Parent.SharedFlags).FFlagAXEnableProfileTab
+local FFlagSplitPaneFullBleedEditProfile = require(Parent.SharedFlags).FFlagSplitPaneFullBleedEditProfile
 local FFlagFixNonTruncatedTextModule = require(EditProfile.Flags.FFlagFixNonTruncatedText)
 local EditProfileProfileFramesSectionModule = if require(Parent.SharedFlags).FFlagEditProfileFramesEnabled then require(EditProfile.Components.EditProfileLanding.EditProfileProfileFramesSection) else nil
 local Number: number = tonumber(game:DefineFastString("EditProfileLandingTrailingWidthRatio", "0.4")) or 0.4
@@ -42,10 +43,10 @@ local function renderRowTrailing(AreNamesLoading, Text1, YOffset, p1)
 end
 
 return function(p1)
-	-- upvalues: UseProfileCardWidthFunction (copy), UseTokensFunction (copy), FFlagAXEnableProfileTab (copy), TextKeysModule (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), EditProfileHeaderBarModule (copy), UserTileModule (copy), IconButton (copy), IconName (copy), IconSize (copy), ButtonVariant (copy), List (copy), config (copy), renderRowTrailing (copy), FFlagFixNonTruncatedTextModule (copy), EditProfileProfileFramesSectionModule (copy)
+	-- upvalues: UseProfileCardWidthFunction (copy), UseTokensFunction (copy), FFlagAXEnableProfileTab (copy), FFlagSplitPaneFullBleedEditProfile (copy), TextKeysModule (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), EditProfileHeaderBarModule (copy), UserTileModule (copy), IconButton (copy), IconName (copy), IconSize (copy), ButtonVariant (copy), List (copy), config (copy), renderRowTrailing (copy), FFlagFixNonTruncatedTextModule (copy), EditProfileProfileFramesSectionModule (copy)
 	local UseProfileCardWidthResult = UseProfileCardWidthFunction()
 	local UseTokensResult = UseTokensFunction()
-	local IsFullBleed: boolean = FFlagAXEnableProfileTab and p1.fullBleed == true
+	local IsFullBleed: boolean = if FFlagAXEnableProfileTab then p1.fullBleed == true else FFlagSplitPaneFullBleedEditProfile and p1.fullBleed == true
 	local UseLocalizationResult = UseLocalizationFunction({
 		TopBarTitle = TextKeysModule.Title,
 		UsernameLabel = TextKeysModule.Username,
@@ -56,7 +57,7 @@ return function(p1)
 	local Size400 = UseTokensResult.Size.Size_400
 	
 	return ReactModule.createElement(View, {
-		tag = if FFlagAXEnableProfileTab then {
+		tag = if FFlagAXEnableProfileTab or FFlagSplitPaneFullBleedEditProfile then {
 			["col items-start bg-surface-0"] = true,
 			["position-top-right anchor-top-right"] = not IsFullBleed,
 			["size-full-full"] = IsFullBleed

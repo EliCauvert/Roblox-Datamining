@@ -25,144 +25,144 @@ function Module:encode()
 	if self.oneof_prop ~= nil then
 		if self.oneof_prop.type == "string_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "int32_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "int64_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult5, WriteTagResult2_4, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "float_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult5, WriteTagResult2_4, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult7, WriteTagResult2_6, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "double_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult6, WriteTagResult2_5, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult9, WriteTagResult2_8, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "bool_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult7, WriteTagResult2_6, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult10, WriteTagResult2_9, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "struct_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult8, WriteTagResult2_7, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult12, WriteTagResult2_11, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "array_of_struct_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult10, WriteTagResult2_9, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult13, WriteTagResult2_12, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "string_array_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult11, WriteTagResult2_10, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult14, WriteTagResult2_13, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "image_string_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult12, WriteTagResult2_11, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult17, WriteTagResult2_16 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult17, WriteTagResult2_16, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "image_set_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult13, WriteTagResult2_12, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult18, WriteTagResult2_17 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult18, WriteTagResult2_17, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "icon_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult14, WriteTagResult2_13, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult19, WriteTagResult2_18 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult19, WriteTagResult2_18, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "icon_size_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult15, WriteTagResult2_14, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult20, WriteTagResult2_19 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult20, WriteTagResult2_19, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "foundation_icon_config_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult16, WriteTagResult2_15 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult16, WriteTagResult2_15, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult21, WriteTagResult2_20 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult21, WriteTagResult2_20, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "color_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult17, WriteTagResult2_16 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult17, WriteTagResult2_16, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult23, WriteTagResult2_22 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult23, WriteTagResult2_22, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "color_style_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult18, WriteTagResult2_17 = ProtoModule.writeTag(Buf, Count, 16, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult18, WriteTagResult2_17, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult24, WriteTagResult2_23 = ProtoModule.writeTag(Buf, Count, 16, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult24, WriteTagResult2_23, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "gradient_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult19, WriteTagResult2_18 = ProtoModule.writeTag(Buf, Count, 17, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult19, WriteTagResult2_18, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult16, WriteTagResult2_15 = ProtoModule.writeTag(Buf, Count, 17, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult16, WriteTagResult2_15, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "typography_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult20, WriteTagResult2_19 = ProtoModule.writeTag(Buf, Count, 18, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult20, WriteTagResult2_19, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult25, WriteTagResult2_24 = ProtoModule.writeTag(Buf, Count, 18, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult25, WriteTagResult2_24, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "typography_font_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult21, WriteTagResult2_20 = ProtoModule.writeTag(Buf, Count, 19, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult21, WriteTagResult2_20, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult26, WriteTagResult2_25 = ProtoModule.writeTag(Buf, Count, 19, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult26, WriteTagResult2_25, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "udim_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult22, WriteTagResult2_21 = ProtoModule.writeTag(Buf, Count, 20, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult22, WriteTagResult2_21, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 20, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult8, WriteTagResult2_7, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "udim2_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult23, WriteTagResult2_22 = ProtoModule.writeTag(Buf, Count, 21, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult23, WriteTagResult2_22, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 21, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "vector2_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult24, WriteTagResult2_23 = ProtoModule.writeTag(Buf, Count, 22, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult24, WriteTagResult2_23, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult27, WriteTagResult2_26 = ProtoModule.writeTag(Buf, Count, 22, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult27, WriteTagResult2_26, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "ui_scaled_float_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult25, WriteTagResult2_24 = ProtoModule.writeTag(Buf, Count, 23, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult25, WriteTagResult2_24, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult28, WriteTagResult2_27 = ProtoModule.writeTag(Buf, Count, 23, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult28, WriteTagResult2_27, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "ui_scaled_udim_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult26, WriteTagResult2_25 = ProtoModule.writeTag(Buf, Count, 24, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult26, WriteTagResult2_25, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult29, WriteTagResult2_28 = ProtoModule.writeTag(Buf, Count, 24, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult29, WriteTagResult2_28, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "ui_scaled_udim2_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult27, WriteTagResult2_26 = ProtoModule.writeTag(Buf, Count, 25, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult27, WriteTagResult2_26, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 25, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult15, WriteTagResult2_14, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "fill_behavior_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult28, WriteTagResult2_27 = ProtoModule.writeTag(Buf, Count, 26, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult28, WriteTagResult2_27, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 26, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult11, WriteTagResult2_10, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "input_size_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult29, WriteTagResult2_28 = ProtoModule.writeTag(Buf, Count, 27, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult29, WriteTagResult2_28, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult30, WriteTagResult2_29 = ProtoModule.writeTag(Buf, Count, 27, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult30, WriteTagResult2_29, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "automatic_size_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult30, WriteTagResult2_29 = ProtoModule.writeTag(Buf, Count, 28, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult30, WriteTagResult2_29, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult31, WriteTagResult2_30 = ProtoModule.writeTag(Buf, Count, 28, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult31, WriteTagResult2_30, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "text_truncate_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult31, WriteTagResult2_30 = ProtoModule.writeTag(Buf, Count, 29, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult31, WriteTagResult2_30, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult32, WriteTagResult2_31 = ProtoModule.writeTag(Buf, Count, 29, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult32, WriteTagResult2_31, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "text_x_alignment_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult32, WriteTagResult2_31 = ProtoModule.writeTag(Buf, Count, 30, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult32, WriteTagResult2_31, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult33, WriteTagResult2_32 = ProtoModule.writeTag(Buf, Count, 30, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult33, WriteTagResult2_32, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "text_y_alignment_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 31, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult9, WriteTagResult2_8, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 31, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult6, WriteTagResult2_5, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "ui_flex_mode_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult33, WriteTagResult2_32 = ProtoModule.writeTag(Buf, Count, 32, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult33, WriteTagResult2_32, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult34, WriteTagResult2_33 = ProtoModule.writeTag(Buf, Count, 32, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult34, WriteTagResult2_33, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "scale_type_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult34, WriteTagResult2_33 = ProtoModule.writeTag(Buf, Count, 33, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult34, WriteTagResult2_33, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult35, WriteTagResult2_34 = ProtoModule.writeTag(Buf, Count, 33, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult35, WriteTagResult2_34, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "resampler_mode_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult35, WriteTagResult2_34 = ProtoModule.writeTag(Buf, Count, 34, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult35, WriteTagResult2_34, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult36, WriteTagResult2_35 = ProtoModule.writeTag(Buf, Count, 34, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult36, WriteTagResult2_35, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "size_constraint_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
-			local WriteTagResult36, WriteTagResult2_35 = ProtoModule.writeTag(Buf, Count, 35, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult36, WriteTagResult2_35, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult22, WriteTagResult2_21 = ProtoModule.writeTag(Buf, Count, 35, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult22, WriteTagResult2_21, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "selection_behavior_prop" then
 			local EncodeResult = self.oneof_prop.value:encode()
 			local WriteTagResult37, WriteTagResult2_36 = ProtoModule.writeTag(Buf, Count, 36, ProtoModule.wireTypes.lengthDelimited)
@@ -192,268 +192,268 @@ function Module.decode(Buf)
 			_, v122 = ProtoModule.readVarInt(Buf, v1)
 		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 			if Tag == 1 then
-				local Buffer1
-				Buffer1, v122 = ProtoModule.readBuffer(Buf, v1)
-				NewModule.oneof_prop = {
-					type = "string_prop",
-					value = PropTypesModule.StringProp.decode(Buffer1)
-				}
-			elseif Tag == 2 then
 				local Buffer2
 				Buffer2, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "int32_prop",
-					value = PropTypesModule.Int32Prop.decode(Buffer2)
+					type = "string_prop",
+					value = PropTypesModule.StringProp.decode(Buffer2)
 				}
-			elseif Tag == 3 then
-				local Buffer3
-				Buffer3, v122 = ProtoModule.readBuffer(Buf, v1)
-				NewModule.oneof_prop = {
-					type = "int64_prop",
-					value = PropTypesModule.Int64Prop.decode(Buffer3)
-				}
-			elseif Tag == 4 then
+			elseif Tag == 2 then
 				local Buffer4
 				Buffer4, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "float_prop",
-					value = PropTypesModule.FloatProp.decode(Buffer4)
+					type = "int32_prop",
+					value = PropTypesModule.Int32Prop.decode(Buffer4)
 				}
-			elseif Tag == 5 then
+			elseif Tag == 3 then
 				local Buffer5
 				Buffer5, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "double_prop",
-					value = PropTypesModule.DoubleProp.decode(Buffer5)
+					type = "int64_prop",
+					value = PropTypesModule.Int64Prop.decode(Buffer5)
 				}
-			elseif Tag == 6 then
+			elseif Tag == 4 then
 				local Buffer6
 				Buffer6, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "bool_prop",
-					value = PropTypesModule.BoolProp.decode(Buffer6)
+					type = "float_prop",
+					value = PropTypesModule.FloatProp.decode(Buffer6)
 				}
-			elseif Tag == 7 then
+			elseif Tag == 5 then
 				local Buffer7
 				Buffer7, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "struct_prop",
-					value = PropTypesModule.StructProp.decode(Buffer7)
+					type = "double_prop",
+					value = PropTypesModule.DoubleProp.decode(Buffer7)
 				}
-			elseif Tag == 8 then
+			elseif Tag == 6 then
 				local Buffer8
 				Buffer8, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "array_of_struct_prop",
-					value = PropTypesModule.ArrayOfStructProp.decode(Buffer8)
+					type = "bool_prop",
+					value = PropTypesModule.BoolProp.decode(Buffer8)
 				}
-			elseif Tag == 9 then
+			elseif Tag == 7 then
 				local Buffer9
 				Buffer9, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "string_array_prop",
-					value = PropTypesModule.StringArrayProp.decode(Buffer9)
+					type = "struct_prop",
+					value = PropTypesModule.StructProp.decode(Buffer9)
 				}
-			elseif Tag == 10 then
+			elseif Tag == 8 then
 				local Buffer10
 				Buffer10, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "image_string_prop",
-					value = PropTypesModule.ImageStringProp.decode(Buffer10)
+					type = "array_of_struct_prop",
+					value = PropTypesModule.ArrayOfStructProp.decode(Buffer10)
 				}
-			elseif Tag == 11 then
+			elseif Tag == 9 then
 				local Buffer11
 				Buffer11, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "image_set_prop",
-					value = PropTypesModule.ImageSetProp.decode(Buffer11)
+					type = "string_array_prop",
+					value = PropTypesModule.StringArrayProp.decode(Buffer11)
 				}
-			elseif Tag == 12 then
-				local Buffer12
-				Buffer12, v122 = ProtoModule.readBuffer(Buf, v1)
-				NewModule.oneof_prop = {
-					type = "icon_prop",
-					value = PropTypesModule.IconProp.decode(Buffer12)
-				}
-			elseif Tag == 13 then
-				local Buffer13
-				Buffer13, v122 = ProtoModule.readBuffer(Buf, v1)
-				NewModule.oneof_prop = {
-					type = "icon_size_prop",
-					value = PropTypesModule.IconSizeProp.decode(Buffer13)
-				}
-			elseif Tag == 14 then
+			elseif Tag == 10 then
 				local Buffer14
 				Buffer14, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "foundation_icon_config_prop",
-					value = PropTypesModule.FoundationIconConfigProp.decode(Buffer14)
+					type = "image_string_prop",
+					value = PropTypesModule.ImageStringProp.decode(Buffer14)
 				}
-			elseif Tag == 15 then
+			elseif Tag == 11 then
 				local Buffer15
 				Buffer15, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "color_prop",
-					value = PropTypesModule.ColorProp.decode(Buffer15)
+					type = "image_set_prop",
+					value = PropTypesModule.ImageSetProp.decode(Buffer15)
 				}
-			elseif Tag == 16 then
-				local Buffer16
-				Buffer16, v122 = ProtoModule.readBuffer(Buf, v1)
-				NewModule.oneof_prop = {
-					type = "color_style_prop",
-					value = PropTypesModule.ColorStyleProp.decode(Buffer16)
-				}
-			elseif Tag == 17 then
+			elseif Tag == 12 then
 				local Buffer17
 				Buffer17, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "gradient_prop",
-					value = PropTypesModule.GradientProp.decode(Buffer17)
+					type = "icon_prop",
+					value = PropTypesModule.IconProp.decode(Buffer17)
 				}
-			elseif Tag == 18 then
+			elseif Tag == 13 then
 				local Buffer18
 				Buffer18, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "typography_prop",
-					value = PropTypesModule.TypographyProp.decode(Buffer18)
+					type = "icon_size_prop",
+					value = PropTypesModule.IconSizeProp.decode(Buffer18)
 				}
-			elseif Tag == 19 then
+			elseif Tag == 14 then
 				local Buffer19
 				Buffer19, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "typography_font_prop",
-					value = PropTypesModule.TypographyFontProp.decode(Buffer19)
+					type = "foundation_icon_config_prop",
+					value = PropTypesModule.FoundationIconConfigProp.decode(Buffer19)
 				}
-			elseif Tag == 20 then
+			elseif Tag == 15 then
 				local Buffer20
 				Buffer20, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "udim_prop",
-					value = PropTypesModule.UDimProp.decode(Buffer20)
+					type = "color_prop",
+					value = PropTypesModule.ColorProp.decode(Buffer20)
 				}
-			elseif Tag == 21 then
+			elseif Tag == 16 then
 				local Buffer21
 				Buffer21, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "udim2_prop",
-					value = PropTypesModule.UDim2Prop.decode(Buffer21)
+					type = "color_style_prop",
+					value = PropTypesModule.ColorStyleProp.decode(Buffer21)
 				}
-			elseif Tag == 22 then
+			elseif Tag == 17 then
 				local Buffer22
 				Buffer22, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "vector2_prop",
-					value = PropTypesModule.Vector2Prop.decode(Buffer22)
+					type = "gradient_prop",
+					value = PropTypesModule.GradientProp.decode(Buffer22)
 				}
-			elseif Tag == 23 then
+			elseif Tag == 18 then
 				local Buffer23
 				Buffer23, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "ui_scaled_float_prop",
-					value = PropTypesModule.UiScaledFloatProp.decode(Buffer23)
+					type = "typography_prop",
+					value = PropTypesModule.TypographyProp.decode(Buffer23)
 				}
-			elseif Tag == 24 then
+			elseif Tag == 19 then
 				local Buffer24
 				Buffer24, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "ui_scaled_udim_prop",
-					value = PropTypesModule.UiScaledUDimProp.decode(Buffer24)
+					type = "typography_font_prop",
+					value = PropTypesModule.TypographyFontProp.decode(Buffer24)
 				}
-			elseif Tag == 25 then
+			elseif Tag == 20 then
 				local Buffer25
 				Buffer25, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "ui_scaled_udim2_prop",
-					value = PropTypesModule.UiScaledUDim2Prop.decode(Buffer25)
+					type = "udim_prop",
+					value = PropTypesModule.UDimProp.decode(Buffer25)
 				}
-			elseif Tag == 26 then
+			elseif Tag == 21 then
 				local Buffer26
 				Buffer26, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "fill_behavior_prop",
-					value = PropTypesModule.FillBehaviorProp.decode(Buffer26)
+					type = "udim2_prop",
+					value = PropTypesModule.UDim2Prop.decode(Buffer26)
 				}
-			elseif Tag == 27 then
+			elseif Tag == 22 then
 				local Buffer27
 				Buffer27, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "input_size_prop",
-					value = PropTypesModule.InputSizeProp.decode(Buffer27)
+					type = "vector2_prop",
+					value = PropTypesModule.Vector2Prop.decode(Buffer27)
 				}
-			elseif Tag == 28 then
+			elseif Tag == 23 then
 				local Buffer28
 				Buffer28, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "automatic_size_prop",
-					value = PropTypesEngineModule.AutomaticSizeProp.decode(Buffer28)
+					type = "ui_scaled_float_prop",
+					value = PropTypesModule.UiScaledFloatProp.decode(Buffer28)
 				}
-			elseif Tag == 29 then
+			elseif Tag == 24 then
+				local Buffer13
+				Buffer13, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
+					type = "ui_scaled_udim_prop",
+					value = PropTypesModule.UiScaledUDimProp.decode(Buffer13)
+				}
+			elseif Tag == 25 then
 				local Buffer29
 				Buffer29, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "text_truncate_prop",
-					value = PropTypesEngineModule.TextTruncateProp.decode(Buffer29)
+					type = "ui_scaled_udim2_prop",
+					value = PropTypesModule.UiScaledUDim2Prop.decode(Buffer29)
 				}
-			elseif Tag == 30 then
+			elseif Tag == 26 then
+				local Buffer12
+				Buffer12, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
+					type = "fill_behavior_prop",
+					value = PropTypesModule.FillBehaviorProp.decode(Buffer12)
+				}
+			elseif Tag == 27 then
 				local Buffer30
 				Buffer30, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "text_x_alignment_prop",
-					value = PropTypesEngineModule.TextXAlignmentProp.decode(Buffer30)
+					type = "input_size_prop",
+					value = PropTypesModule.InputSizeProp.decode(Buffer30)
 				}
-			elseif Tag == 31 then
+			elseif Tag == 28 then
+				local Buffer16
+				Buffer16, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
+					type = "automatic_size_prop",
+					value = PropTypesEngineModule.AutomaticSizeProp.decode(Buffer16)
+				}
+			elseif Tag == 29 then
 				local Buffer31
 				Buffer31, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "text_y_alignment_prop",
-					value = PropTypesEngineModule.TextYAlignmentProp.decode(Buffer31)
+					type = "text_truncate_prop",
+					value = PropTypesEngineModule.TextTruncateProp.decode(Buffer31)
 				}
-			elseif Tag == 32 then
+			elseif Tag == 30 then
 				local Buffer32
 				Buffer32, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "ui_flex_mode_prop",
-					value = PropTypesEngineModule.UIFlexModeProp.decode(Buffer32)
+					type = "text_x_alignment_prop",
+					value = PropTypesEngineModule.TextXAlignmentProp.decode(Buffer32)
 				}
-			elseif Tag == 33 then
+			elseif Tag == 31 then
 				local Buffer33
 				Buffer33, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "scale_type_prop",
-					value = PropTypesEngineModule.ScaleTypeProp.decode(Buffer33)
+					type = "text_y_alignment_prop",
+					value = PropTypesEngineModule.TextYAlignmentProp.decode(Buffer33)
 				}
-			elseif Tag == 34 then
+			elseif Tag == 32 then
+				local Buffer1
+				Buffer1, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
+					type = "ui_flex_mode_prop",
+					value = PropTypesEngineModule.UIFlexModeProp.decode(Buffer1)
+				}
+			elseif Tag == 33 then
 				local Buffer34
 				Buffer34, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "resampler_mode_prop",
-					value = PropTypesEngineModule.ResamplerModeProp.decode(Buffer34)
+					type = "scale_type_prop",
+					value = PropTypesEngineModule.ScaleTypeProp.decode(Buffer34)
 				}
-			elseif Tag == 35 then
+			elseif Tag == 34 then
 				local Buffer35
 				Buffer35, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "size_constraint_prop",
-					value = PropTypesEngineModule.SizeConstraintProp.decode(Buffer35)
+					type = "resampler_mode_prop",
+					value = PropTypesEngineModule.ResamplerModeProp.decode(Buffer35)
 				}
-			elseif Tag == 36 then
+			elseif Tag == 35 then
 				local Buffer36
 				Buffer36, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "selection_behavior_prop",
-					value = PropTypesEngineModule.SelectionBehaviorProp.decode(Buffer36)
+					type = "size_constraint_prop",
+					value = PropTypesEngineModule.SizeConstraintProp.decode(Buffer36)
 				}
-			elseif Tag == 37 then
+			elseif Tag == 36 then
 				local Buffer37
 				Buffer37, v122 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.oneof_prop = {
-					type = "key_code_prop",
-					value = PropTypesEngineModule.KeyCodeProp.decode(Buffer37)
+					type = "selection_behavior_prop",
+					value = PropTypesEngineModule.SelectionBehaviorProp.decode(Buffer37)
 				}
-			elseif Tag == 1000 then
+			elseif Tag == 37 then
 				local Buffer38
 				Buffer38, v122 = ProtoModule.readBuffer(Buf, v1)
-				NewModule.prop_builder = buffer.tostring(Buffer38)
+				NewModule.oneof_prop = {
+					type = "key_code_prop",
+					value = PropTypesEngineModule.KeyCodeProp.decode(Buffer38)
+				}
+			elseif Tag == 1000 then
+				local Buffer3
+				Buffer3, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.prop_builder = buffer.tostring(Buffer3)
 			else
 				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v1)
 				v1 = VarInt2 + VarInt

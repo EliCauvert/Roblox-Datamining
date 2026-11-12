@@ -1,6 +1,5 @@
 ﻿local CoreGui = game:GetService("CoreGui")
 local RunService = game:GetService("RunService")
-local TextService = game:GetService("TextService")
 local CorePackages = game:GetService("CorePackages")
 local ContextActionService = game:GetService("ContextActionService")
 local GuiService = game:GetService("GuiService")
@@ -11,7 +10,6 @@ local UIBlox = InGameMenuDependenciesModule.UIBlox
 local Button = UIBlox.App.Button.Button
 local ButtonType = UIBlox.App.Button.Enum.ButtonType
 local GetTextSizeFunction = require(CorePackages.Workspace.Packages.Style).GetTextSize
-local FoundationFontFaceMigration = require(CorePackages.Packages.Foundation).Utility.Flags.FoundationFontFaceMigration
 local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local Parent = script.Parent.Parent
 local ConstantsModule = require(Parent.Resources.Constants)
@@ -57,41 +55,38 @@ function ConfirmationDialog.init(p1)
 end
 
 function ConfirmationDialog.render(p1)
-	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), Roact (copy), CoreGui (copy), ConstantsModule (copy), ImageSetLabel (copy), AssetsModule (copy), ThemedTextLabelModule (copy), Button (copy), ButtonType (copy), FFlagIGMDialogButtonsUseUIBloxButtonModule (copy), FocusHandlerModule (copy), GuiService (copy)
+	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), GetTextSizeFunction (copy), Roact (copy), CoreGui (copy), ConstantsModule (copy), ImageSetLabel (copy), AssetsModule (copy), ThemedTextLabelModule (copy), Button (copy), ButtonType (copy), FFlagIGMDialogButtonsUseUIBloxButtonModule (copy), FocusHandlerModule (copy), GuiService (copy)
 	local Props = p1.props
 	
-	return WithFoundationOrUIBloxStyleFunction(function(p2)
-		-- upvalues: FoundationFontFaceMigration (upval)
+	return WithFoundationOrUIBloxStyleFunction(function(Tokens)
 		return {
-			Tokens = if FoundationFontFaceMigration then p2 else nil,
+			Tokens = Tokens,
 			Theme = {
 				Overlay = {
-					Color = p2.Color.Common.Scrim.Color3,
-					Transparency = p2.Color.Common.Scrim.Transparency
+					Color = Tokens.Color.Common.Scrim.Color3,
+					Transparency = Tokens.Color.Common.Scrim.Transparency
 				},
 				BackgroundUIDefault = {
-					Color = p2.Color.Surface.Surface_300.Color3,
-					Transparency = p2.Color.Surface.Surface_300.Transparency
+					Color = Tokens.Color.Surface.Surface_300.Color3,
+					Transparency = Tokens.Color.Surface.Surface_300.Transparency
 				},
 				Divider = {
-					Color = p2.Color.Stroke.Emphasis.Color3,
-					Transparency = p2.Color.Stroke.Emphasis.Transparency
+					Color = Tokens.Color.Stroke.Emphasis.Color3,
+					Transparency = Tokens.Color.Stroke.Emphasis.Transparency
 				}
 			},
 			Font = {
 				BaseSize = 1,
 				Body = {
-					Font = p2.Typography.BodyLarge.Font,
-					RelativeSize = p2.Typography.BodyLarge.FontSize
+					Font = Tokens.Typography.BodyLarge.Font,
+					RelativeSize = Tokens.Typography.BodyLarge.FontSize
 				}
 			}
 		}
 	end, function(p2)
-		-- upvalues: Props (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), TextService (upval), Roact (upval), CoreGui (upval), ConstantsModule (upval), ImageSetLabel (upval), AssetsModule (upval), ThemedTextLabelModule (upval), p1 (copy), Button (upval), ButtonType (upval), FFlagIGMDialogButtonsUseUIBloxButtonModule (upval), FocusHandlerModule (upval), GuiService (upval)
-		local BodyFont = p2.Font.Body.Font
+		-- upvalues: Props (copy), GetTextSizeFunction (upval), Roact (upval), CoreGui (upval), ConstantsModule (upval), ImageSetLabel (upval), AssetsModule (upval), ThemedTextLabelModule (upval), p1 (copy), Button (upval), ButtonType (upval), FFlagIGMDialogButtonsUseUIBloxButtonModule (upval), FocusHandlerModule (upval), GuiService (upval)
 		local ScaledRelativeSize = p2.Font.Body.RelativeSize * p2.Font.BaseSize
-		local BodyText = Props.bodyText
-		local NewLargest = math.max(if FoundationFontFaceMigration then GetTextSizeFunction(BodyText, ScaledRelativeSize, p2.Tokens.Typography.BodyLarge.Font, Vector2.new(295, 1e999), { addTemporaryPadding = false }).Y else TextService:GetTextSize(BodyText, ScaledRelativeSize, BodyFont, Vector2.new(295, 1e999)).Y, ScaledRelativeSize * 2) + 20 + 20
+		local NewLargest = math.max(GetTextSizeFunction(Props.bodyText, ScaledRelativeSize, p2.Tokens.Typography.BodyLarge.Font, Vector2.new(295, 1e999), { addTemporaryPadding = false }).Y, ScaledRelativeSize * 2) + 20 + 20
 		
 		return Roact.createElement(Roact.Portal, { target = CoreGui }, {
 			InGameMenuConfirmationDialog = Roact.createElement("ScreenGui", {

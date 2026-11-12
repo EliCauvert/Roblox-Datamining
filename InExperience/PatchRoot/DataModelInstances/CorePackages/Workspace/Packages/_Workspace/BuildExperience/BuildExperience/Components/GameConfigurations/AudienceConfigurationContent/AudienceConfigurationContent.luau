@@ -15,7 +15,12 @@ local FormatErrorModule = require(BuildExperience.utils.formatError)
 local RefreshPublishEligibilityModule = require(BuildExperience.utils.refreshPublishEligibility)
 local RefreshAdCampaignEligibilityModule = require(BuildExperience.utils.refreshAdCampaignEligibility)
 local FFlagEnableBuildAdPromotionModule = require(BuildExperience.Flags.FFlagEnableBuildAdPromotion)
+local FFlagBuildExperienceActionOutcomeTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceActionOutcomeTelemetry)
+local ConfigurationActionTelemetryModule = require(BuildExperience.Telemetry.ConfigurationActionTelemetry)
 local Debug = require(Parent.DataHydration.CreatorAgentChat).debug
+local Action = ConfigurationActionTelemetryModule.Action
+local FailureReason = ConfigurationActionTelemetryModule.FailureReason
+local Stage = ConfigurationActionTelemetryModule.Stage
 local Icon = FoundationModule.Icon
 local List = FoundationModule.List
 local Popover = FoundationModule.Popover
@@ -41,6 +46,22 @@ local BuildExperienceAudienceTooltipMaxWidth = game:DefineFastInt("BuildExperien
 local function _(p1)
 	-- upvalues: config (copy), UniverseConfigurationModule (copy)
 	return if p1 == nil then nil else config[UniverseConfigurationModule.getPrivacyTypeForAudiences(p1)]
+end
+
+local config1 = {
+	Private = PrivacyType.Private,
+	Friends = PrivacyType.FriendsOnly,
+	Public = PrivacyType.Public
+}
+
+local _ = function(p1, p2)
+	-- upvalues: UniverseConfigurationModule (copy), config1 (copy)
+	local Audiences = if p1 == nil then nil else p1.audiences
+	
+	return {
+		fromAudience = if Audiences == nil then "unknown" else UniverseConfigurationModule.getPrivacyTypeForAudiences(Audiences),
+		toAudience = config1[p2]
+	}
 end
 
 local _ = function(Friends): boolean
@@ -207,7 +228,7 @@ local function useAudienceData(UniverseId, UniverseActivationStore, UniverseConf
 end
 
 local function useQuestionnaireHandler(UniverseId, QuestionnaireStore)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseOpenWebViewFunction (copy), ReactModule (copy), RefreshPublishEligibilityModule (copy), GameConfigurationActionsModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseOpenWebViewFunction (copy), ReactModule (copy), RefreshPublishEligibilityModule (copy), FFlagBuildExperienceActionOutcomeTelemetryModule (copy), ConfigurationActionTelemetryModule (copy), Action (copy), GameConfigurationActionsModule (copy)
 	local CreatorHub = UseLocalizationFunction({
 		creatorHub = LocalizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB
 	}).creatorHub
@@ -217,8 +238,11 @@ local function useQuestionnaireHandler(UniverseId, QuestionnaireStore)
 		RefreshPublishEligibilityModule(UniverseId)
 	end, { QuestionnaireStore, UniverseId })
 	
-	return ReactModule.useCallback(function()
-		-- upvalues: UseOpenWebViewResult (copy), GameConfigurationActionsModule (upval), UniverseId (copy), CreatorHub (copy), UseResult (copy)
+	return ReactModule.useCallback(function(p2)
+		-- upvalues: FFlagBuildExperienceActionOutcomeTelemetryModule (upval), ConfigurationActionTelemetryModule (upval), Action (upval), UniverseId (copy), UseOpenWebViewResult (copy), GameConfigurationActionsModule (upval), CreatorHub (copy), UseResult (copy)
+		if FFlagBuildExperienceActionOutcomeTelemetryModule then
+			ConfigurationActionTelemetryModule.sendClick(Action.UpdateRating, { universeId = UniverseId }, if p2 == nil then nil else p2.context)
+		end
 		UseOpenWebViewResult(GameConfigurationActionsModule.getExperienceQuestionnaireUrl(UniverseId), CreatorHub, UseResult)
 	end, { CreatorHub, UseOpenWebViewResult, UseResult, UniverseId })
 end
@@ -233,7 +257,7 @@ local _ = function(p2)
 end
 
 local function useAudienceController(UniverseId)
-	-- upvalues: useAudienceStores (copy), ReactModule (copy), useAudienceData (copy), useQuestionnaireHandler (copy), getAudiencesForValue (copy), GameConfigurationActionsModule (copy), FFlagEnableBuildAdPromotionModule (copy), RefreshAdCampaignEligibilityModule (copy), Debug (copy), FormatErrorModule (copy), ContentMaturityUtilsModule (copy)
+	-- upvalues: useAudienceStores (copy), ReactModule (copy), useAudienceData (copy), useQuestionnaireHandler (copy), getAudiencesForValue (copy), GameConfigurationActionsModule (copy), FFlagBuildExperienceActionOutcomeTelemetryModule (copy), ConfigurationActionTelemetryModule (copy), Action (copy), UniverseConfigurationModule (copy), config1 (copy), FFlagEnableBuildAdPromotionModule (copy), RefreshAdCampaignEligibilityModule (copy), Debug (copy), FormatErrorModule (copy), FailureReason (copy), Stage (copy), ContentMaturityUtilsModule (copy)
 	local UseAudienceStoresResult = useAudienceStores()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
@@ -265,7 +289,7 @@ local function useAudienceController(UniverseId)
 	
 	return {
 		handleAudienceActivated = ReactModule.useCallback(function(p2)
-			-- upvalues: UseStateResult2_2 (copy), NoIsAudiencesReady (copy), getAudiencesForValue (upval), ConfigurationData (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), UseAudienceStoresResult (copy), UniverseId (copy), GameConfigurationActionsModule (upval), FFlagEnableBuildAdPromotionModule (upval), RefreshAdCampaignEligibilityModule (upval), Debug (upval), FormatErrorModule (upval), IsNonPrivateLocked (copy), UseRefResult1 (ref), ContentMaturityUtilsModule (upval)
+			-- upvalues: UseStateResult2_2 (copy), NoIsAudiencesReady (copy), getAudiencesForValue (upval), ConfigurationData (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), UseAudienceStoresResult (copy), UniverseId (copy), GameConfigurationActionsModule (upval), FFlagBuildExperienceActionOutcomeTelemetryModule (upval), ConfigurationActionTelemetryModule (upval), Action (upval), UniverseConfigurationModule (upval), config1 (upval), FFlagEnableBuildAdPromotionModule (upval), RefreshAdCampaignEligibilityModule (upval), Debug (upval), FormatErrorModule (upval), FailureReason (upval), Stage (upval), IsNonPrivateLocked (copy), UseRefResult1 (ref), ContentMaturityUtilsModule (upval)
 			local function _()
 				-- upvalues: UseStateResult2_2 (upval), p2 (copy)
 				UseStateResult2_2(function(p3)
@@ -275,15 +299,23 @@ local function useAudienceController(UniverseId)
 			end
 			
 			local function applyAudienceChange()
-				-- upvalues: NoIsAudiencesReady (upval), getAudiencesForValue (upval), p2 (copy), ConfigurationData (upval), UseStateResult2_2 (upval), UseStateResult2 (upval), UseStateResult2_1 (upval), UseAudienceStoresResult (upval), UniverseId (upval), GameConfigurationActionsModule (upval), FFlagEnableBuildAdPromotionModule (upval), RefreshAdCampaignEligibilityModule (upval), Debug (upval), FormatErrorModule (upval)
+				-- upvalues: NoIsAudiencesReady (upval), getAudiencesForValue (upval), p2 (copy), ConfigurationData (upval), UseStateResult2_2 (upval), UseStateResult2 (upval), UseStateResult2_1 (upval), UseAudienceStoresResult (upval), UniverseId (upval), GameConfigurationActionsModule (upval), FFlagBuildExperienceActionOutcomeTelemetryModule (upval), ConfigurationActionTelemetryModule (upval), Action (upval), UniverseConfigurationModule (upval), config1 (upval), FFlagEnableBuildAdPromotionModule (upval), RefreshAdCampaignEligibilityModule (upval), Debug (upval), FormatErrorModule (upval), FailureReason (upval), Stage (upval)
 				if not NoIsAudiencesReady then
 					local AudiencesForValue = getAudiencesForValue(p2, ConfigurationData.audiences)
 					UseStateResult2_2(nil)
 					UseStateResult2(p2)
 					UseStateResult2_1(true)
 					UseAudienceStoresResult.universeActivationStore.setAudiences(UniverseId, AudiencesForValue):andThen(function(Result)
-						-- upvalues: GameConfigurationActionsModule (upval), UniverseId (upval), UseAudienceStoresResult (upval), FFlagEnableBuildAdPromotionModule (upval), RefreshAdCampaignEligibilityModule (upval), Debug (upval), FormatErrorModule (upval), UseStateResult2 (upval), UseStateResult2_1 (upval)
+						-- upvalues: GameConfigurationActionsModule (upval), UniverseId (upval), FFlagBuildExperienceActionOutcomeTelemetryModule (upval), ConfigurationActionTelemetryModule (upval), Action (upval), ConfigurationData (upval), p2 (upval), UniverseConfigurationModule (upval), config1 (upval), UseAudienceStoresResult (upval), FFlagEnableBuildAdPromotionModule (upval), RefreshAdCampaignEligibilityModule (upval), Debug (upval), FormatErrorModule (upval), UseStateResult2 (upval), UseStateResult2_1 (upval)
 						GameConfigurationActionsModule.updateCachedAudience(UniverseId, Result.audiences)
+						
+						if FFlagBuildExperienceActionOutcomeTelemetryModule then
+							local Audiences = if ConfigurationData == nil then nil else ConfigurationData.audiences
+							ConfigurationActionTelemetryModule.sendSuccess(Action.AudienceChange, { universeId = UniverseId }, nil, {
+								fromAudience = if Audiences == nil then "unknown" else UniverseConfigurationModule.getPrivacyTypeForAudiences(Audiences),
+								toAudience = config1[p2]
+							})
+						end
 						UseAudienceStoresResult.universeActivationStore.activate(UniverseId):andThen(function()
 							-- upvalues: FFlagEnableBuildAdPromotionModule (upval), RefreshAdCampaignEligibilityModule (upval), UniverseId (upval)
 							if FFlagEnableBuildAdPromotionModule then
@@ -301,11 +333,23 @@ local function useAudienceController(UniverseId)
 							UseStateResult2_1(false)
 						end)
 					end):catch(function(Err)
-						-- upvalues: Debug (upval), FormatErrorModule (upval), UniverseId (upval), UseStateResult2 (upval), UseStateResult2_1 (upval)
+						-- upvalues: Debug (upval), FormatErrorModule (upval), UniverseId (upval), FFlagBuildExperienceActionOutcomeTelemetryModule (upval), ConfigurationActionTelemetryModule (upval), Action (upval), FailureReason (upval), Stage (upval), ConfigurationData (upval), p2 (upval), UniverseConfigurationModule (upval), config1 (upval), UseStateResult2 (upval), UseStateResult2_1 (upval)
 						Debug.log("warn", "AudienceConfigurationContent set audiences failed", {
 							errorMessage = FormatErrorModule(Err),
 							universeId = UniverseId
 						})
+						
+						if FFlagBuildExperienceActionOutcomeTelemetryModule then
+							local Audiences = if ConfigurationData == nil then nil else ConfigurationData.audiences
+							ConfigurationActionTelemetryModule.sendFailure(Action.AudienceChange, { universeId = UniverseId }, {
+								reason = FailureReason.RequestFailed,
+								stage = Stage.SetAudience,
+								error = Err
+							}, nil, {
+								fromAudience = if Audiences == nil then "unknown" else UniverseConfigurationModule.getPrivacyTypeForAudiences(Audiences),
+								toAudience = config1[p2]
+							})
+						end
 						UseStateResult2(nil)
 						UseStateResult2_1(false)
 					end)
@@ -352,7 +396,7 @@ local function useAudienceController(UniverseId)
 					})
 				end
 			end):finally(function()
-				-- upvalues: UseRefResult (copy), RefreshEligibilityResult (copy), ContentMaturityUtilsModule (upval), UniverseId (upval), IsNotPrivate (copy), UseStateResult2 (upval), UseStateResult2_1 (upval), UseStateResult2_2 (upval), p2 (copy), applyAudienceChange (copy)
+				-- upvalues: UseRefResult (copy), RefreshEligibilityResult (copy), ContentMaturityUtilsModule (upval), UniverseId (upval), IsNotPrivate (copy), FFlagBuildExperienceActionOutcomeTelemetryModule (upval), ConfigurationActionTelemetryModule (upval), Action (upval), FailureReason (upval), Stage (upval), ConfigurationData (upval), p2 (copy), UniverseConfigurationModule (upval), config1 (upval), UseStateResult2 (upval), UseStateResult2_1 (upval), UseStateResult2_2 (upval), applyAudienceChange (copy)
 				if UseRefResult.current ~= RefreshEligibilityResult then return end
 				UseRefResult.current = nil
 				
@@ -362,6 +406,17 @@ local function useAudienceController(UniverseId)
 					return
 				end
 				if not IsNotPrivate then
+					if FFlagBuildExperienceActionOutcomeTelemetryModule then
+						local Audiences = if ConfigurationData == nil then nil else ConfigurationData.audiences
+						ConfigurationActionTelemetryModule.sendFailure(Action.AudienceChange, { universeId = UniverseId }, {
+							error = nil,
+							reason = FailureReason.ContentUnrated,
+							stage = Stage.RefreshEligibility
+						}, nil, {
+							fromAudience = if Audiences == nil then "unknown" else UniverseConfigurationModule.getPrivacyTypeForAudiences(Audiences),
+							toAudience = config1[p2]
+						})
+					end
 					UseStateResult2(nil)
 					UseStateResult2_1(false)
 					UseStateResult2_2(function(p3)
@@ -501,7 +556,7 @@ local function EligibilityTooltip(p2)
 				sizeConstraint = {
 					MaxSize = Vector2.new(UseScaledValueFunction(BuildExperienceAudienceTooltipMaxWidth), 1e999)
 				},
-				testId = if IsPublishRequired then `{p2.testId}-eligibility-tooltip--publish` else `{p28.testId}-eligibility-tooltip--not-eligible`
+				testId = if IsPublishRequired then `{p2.testId}-eligibility-tooltip--publish` else `{p31.testId}-eligibility-tooltip--not-eligible`
 			}, {
 				Title = ReactModule.createElement(Text, {
 					LayoutOrder = 1,
@@ -552,12 +607,19 @@ local function EligibilityBanner(p2)
 end
 
 return function(p2)
-	-- upvalues: useAudienceController (copy), ReactModule (copy), View (copy), AudienceHeader (copy), AudienceList (copy), EligibilityTooltip (copy), EligibilityBanner (copy)
+	-- upvalues: useAudienceController (copy), ReactModule (copy), FFlagBuildExperienceActionOutcomeTelemetryModule (copy), ConfigurationActionTelemetryModule (copy), View (copy), AudienceHeader (copy), AudienceList (copy), EligibilityTooltip (copy), EligibilityBanner (copy)
 	local TestId = p2.testId or "audience-configuration-content"
 	local UseAudienceControllerResult = useAudienceController(p2.universeId)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local IsRatingRequired: boolean = UseAudienceControllerResult.isNonPrivateLocked and UseAudienceControllerResult.lockReason == "RatingRequired"
+	local HandleQuestionnaireFunction = UseAudienceControllerResult.handleQuestionnaire
+	local UseResult = if FFlagBuildExperienceActionOutcomeTelemetryModule then ReactModule.useCallback(function()
+		-- upvalues: HandleQuestionnaireFunction (copy), ConfigurationActionTelemetryModule (upval)
+		HandleQuestionnaireFunction({
+			context = ConfigurationActionTelemetryModule.Context.AudienceBanner
+		})
+	end, { HandleQuestionnaireFunction }) else HandleQuestionnaireFunction
 	
 	return ReactModule.createElement(View, {
 		tag = "col gap-medium size-full-0 auto-y padding-y-large",
@@ -581,9 +643,6 @@ return function(p2)
 			onPressedOutside = UseAudienceControllerResult.onTooltipPressedOutside,
 			testId = TestId
 		}),
-		ContextBanner = if IsRatingRequired then ReactModule.createElement(EligibilityBanner, {
-			onActivated = UseAudienceControllerResult.handleQuestionnaire,
-			testId = TestId
-		}) else nil
+		ContextBanner = if IsRatingRequired then ReactModule.createElement(EligibilityBanner, { onActivated = UseResult, testId = TestId }) else nil
 	})
 end

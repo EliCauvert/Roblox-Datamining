@@ -42,6 +42,7 @@ local EnableExperienceGenericChallengeRenderingOnLoadingScript = game:DefineFast
 local EnableRobloxCommerceEngineFeature = game:GetEngineFeature("EnableRobloxCommerce")
 local EnableLinkSharingEvent = game:DefineFastFlag("EnableLinkSharingEvent", false)
 local FFlagEnableShareSheet = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableShareSheet
+local FFlagUseUIOverlayForCloudPlay = require(CorePackages.Workspace.Packages.SharedFlags).FFlagUseUIOverlayForCloudPlay
 local PlayerFeedbackEnabledEngineFeature = game:GetEngineFeature("PlayerFeedbackEnabled")
 local FFlagLuaAppInExperienceDetailsPrompt = require(CorePackages.Workspace.Packages.SharedFlags).FFlagLuaAppInExperienceDetailsPrompt
 local EnableSystemScrim = game:DefineFastFlag("EnableSystemScrim", false)
@@ -145,17 +146,17 @@ if FFlagLuaAppEnableInExperienceDataModelStreamStarter then
 end
 if game:GetEngineFeature("ProtocolLaunchPrivateChannelUpdateCheckEngineFeature") then
 	local ChannelUpdatePrompt = Modules.ChannelUpdatePrompt
-	local Success2, Result3 = pcall(require, ChannelUpdatePrompt)
-	local v1 = nil
+	local Success1, Result2 = pcall(require, ChannelUpdatePrompt)
+	local Result3 = nil
 	
-	if Success2 then
-		v1 = Result3
+	if Success1 then
+		Result3 = Result2
 	else
-		warn("Failure to Start CoreScript module " .. ChannelUpdatePrompt.Name .. ".\n" .. Result3)
-		v1 = nil
+		warn("Failure to Start CoreScript module " .. ChannelUpdatePrompt.Name .. ".\n" .. Result2)
+		Result3 = nil
 	end
-	if v1 then
-		v1.init()
+	if Result3 then
+		Result3.init()
 	end
 end
 if not IsViewer and GetFFlagChromeCentralizedConfigurationFunction() then
@@ -165,6 +166,13 @@ coroutine.wrap(safeRequire)(Modules.SelfieView)
 
 if not IsViewer then
 	coroutine.wrap(safeRequire)(Modules.TopBar)
+end
+if FFlagUseUIOverlayForCloudPlay and not IsViewer then
+	local v1 = coroutine.wrap(safeRequire)(CorePackages.Workspace.Packages.InExperienceCloudPlay)
+	
+	if v1 then
+		v1.mountCloudPlayUIOverlay()
+	end
 end
 local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 
@@ -247,11 +255,11 @@ ScriptContext:AddCoreScriptLocal("CoreScripts/PerformanceStatsManagerScript", Ro
 ScriptContext:AddCoreScriptLocal("CoreScripts/PlayerRagdoll", RobloxGui)
 coroutine.wrap(safeRequire)(RobloxGui.Modules.ChatSelector)
 coroutine.wrap(safeRequire)(RobloxGui.Modules.PlayerList.PlayerListManager)
-local Success3, Result5 = pcall(function()
+local Success2, Result4 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserRoactBubbleChatBeta")
 end)
 
-if game:GetEngineFeature("EnableBubbleChatFromChatService") or Success3 and Result5 then
+if game:GetEngineFeature("EnableBubbleChatFromChatService") or Success2 and Result4 then
 	ScriptContext:AddCoreScriptLocal("CoreScripts/PlayerBillboards", RobloxGui)
 end
 coroutine.wrap(function()
@@ -290,17 +298,17 @@ ScriptContext:AddCoreScriptLocal("CoreScripts/FriendPlayerPrompt", RobloxGui)
 
 if EnablePromptAgeCheckListener then
 	local PromptAgeCheckHandler = Modules.PromptAgeCheckHandler
-	local Success1, Result2 = pcall(require, PromptAgeCheckHandler)
-	local Result4 = nil
+	local Success3, Result5 = pcall(require, PromptAgeCheckHandler)
+	local Result6 = nil
 	
-	if Success1 then
-		Result4 = Result2
+	if Success3 then
+		Result6 = Result5
 	else
-		warn("Failure to Start CoreScript module " .. PromptAgeCheckHandler.Name .. ".\n" .. Result2)
-		Result4 = nil
+		warn("Failure to Start CoreScript module " .. PromptAgeCheckHandler.Name .. ".\n" .. Result5)
+		Result6 = nil
 	end
-	if Result4 then
-		Result4.init()
+	if Result6 then
+		Result6.init()
 	end
 end
 ScriptContext:AddCoreScriptLocal("CoreScripts/AvatarContextMenu", RobloxGui)

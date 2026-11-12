@@ -7,6 +7,7 @@ local InputHandlersModule = require(Parent.InputHandlers)
 local MomentsCommonModule = require(Parent.MomentsCommon)
 local ReactModule = require(Parent.React)
 local _ = require(Parent.ReactFocusNavigation)
+local FFlagMomentsUseSharedReactionsModule = require(Moments.Flags.FFlagMomentsUseSharedReactions)
 local HeaderBar = FoundationModule.HeaderBar
 local Icon = FoundationModule.Icon
 local ScrollView = FoundationModule.ScrollView
@@ -20,13 +21,16 @@ local FocusRoot = FocusNavigationUtilsModule.FocusRoot
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
 local MomentMediaTile = MomentsCommonModule.Media.MomentMediaTile
-local ReactionModule = if require(Moments.Flags.FFlagMomentsUseSharedReactions) then require(Parent.Reactions.Reaction) else MomentsCommonModule.Components.Reaction
+local ReactionModule = if FFlagMomentsUseSharedReactionsModule then require(Parent.Reactions.Reaction) else MomentsCommonModule.Components.Reaction
+local ReactionAssets = MomentsCommonModule.Components.ReactionAssets
 local ReactionSize = MomentsCommonModule.Enums.ReactionSize
 local FormFactor = MomentsCommonModule.Enums.FormFactor
 local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
 local UseFormFactorFunction = MomentsCommonModule.Hooks.useFormFactor
 local _ = require(script.Parent.usePostInsightsPageViewModel)
 local _Vector2 = Vector2.new(83, 124)
+local _Vector2_1 = Vector2.new(94, 140)
+local _UDim2 = UDim2.fromOffset(64, 24)
 local EventMap = {
 	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack,
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
@@ -36,13 +40,13 @@ local Frozen = table.freeze({ ZIndex = require(Moments.Constants).DisplayOrder.M
 local function noop() end
 
 local function Thumbnail(Frame)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), _Vector2 (copy), MomentMediaTile (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), MomentMediaTile (copy)
 	return ReactModule.createElement(View, {
 		tag = "radius-small clip bg-surface-300",
 		testId = "post-insights-thumbnail",
 		LayoutOrder = Frame.LayoutOrder,
 		cornerRadius = UDim.new(0, UseTokensFunction().Radius.Small),
-		Size = UDim2.fromOffset(_Vector2.X, _Vector2.Y)
+		Size = UDim2.fromOffset(Frame.size.X, Frame.size.Y)
 	}, {
 		Media = if Frame.mediaItem == nil then nil else ReactModule.createElement(MomentMediaTile, { isActive = false, mediaItem = Frame.mediaItem })
 	})
@@ -55,9 +59,13 @@ local function InteractionCounts(Frame)
 	
 	for LayoutOrder, interactionCount in Frame.interactionCounts do
 		Elements[interactionCount.key] = ReactModule.createElement(View, {
-			tag = "col align-x-center gap-xsmall auto-y padding-y-small",
 			LayoutOrder = LayoutOrder,
-			Size = UDim2.fromOffset(52, 0)
+			Size = if Frame.isWide then nil else UDim2.fromOffset(52, 0),
+			tag = {
+				["col align-x-center gap-xsmall padding-y-small"] = true,
+				["auto-xy"] = Frame.isWide,
+				["auto-y"] = not Frame.isWide
+			}
 		}, {
 			Icon = ReactModule.createElement(Icon, {
 				LayoutOrder = 1,
@@ -76,28 +84,47 @@ local function InteractionCounts(Frame)
 	return ReactModule.createElement(View, {
 		LayoutOrder = Frame.LayoutOrder,
 		tag = {
-			["row gap-small"] = true,
-			["auto-xy"] = Frame.isWide,
-			["align-x-center size-full-0 auto-y"] = not Frame.isWide
+			row = true,
+			["gap-xxlarge auto-xy"] = Frame.isWide,
+			["align-x-center gap-small size-full-0 auto-y"] = not Frame.isWide
 		}
 	}, Elements)
 end
 
 local function Summary(Frame: Frame)
-	-- upvalues: ReactModule (copy), View (copy), Thumbnail (copy), Text (copy), InteractionCounts (copy)
+	-- upvalues: ReactModule (copy), View (copy), Thumbnail (copy), _Vector2 (copy), InteractionCounts (copy), _Vector2_1 (copy), Text (copy)
 	local ViewProps = Frame.viewProps
 	
 	return if Frame.isWide then ReactModule.createElement(View, {
-		tag = "row align-y-center gap-large size-full-0 auto-y",
+		tag = "row align-y-center gap-xxlarge size-full-0 auto-y",
 		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Thumbnail = ReactModule.createElement(Thumbnail, { LayoutOrder = 1, mediaItem = ViewProps.mediaItem }),
-		Details = ReactModule.createElement(View, { LayoutOrder = 2, tag = "col fill gap-small auto-y" }, {
-			Caption = if ViewProps.caption == nil then nil else ReactModule.createElement(Text, {
+		Thumbnail = ReactModule.createElement(Thumbnail, {
+			LayoutOrder = 1,
+			mediaItem = ViewProps.mediaItem,
+			size = _Vector2_1
+		}),
+		Details = ReactModule.createElement(View, {
+			LayoutOrder = 2,
+			tag = "col align-x-left fill gap-medium auto-y"
+		}, {
+			Text = if ViewProps.caption == nil and ViewProps.postedOnText == nil then nil else ReactModule.createElement(View, {
 				LayoutOrder = 1,
-				tag = "size-full-0 auto-y text-title-large text-align-x-left text-truncate-end content-emphasis",
-				testId = "post-insights-caption",
-				Text = ViewProps.caption
+				tag = "col align-x-left gap-xsmall size-full-0 auto-y",
+				testId = "post-insights-summary-text"
+			}, {
+				Caption = if ViewProps.caption == nil then nil else ReactModule.createElement(Text, {
+					LayoutOrder = 1,
+					tag = "size-full-0 auto-y text-heading-small text-align-x-left text-truncate-end content-emphasis",
+					testId = "post-insights-caption",
+					Text = ViewProps.caption
+				}),
+				PostedOn = if ViewProps.postedOnText == nil then nil else ReactModule.createElement(Text, {
+					LayoutOrder = 2,
+					tag = "size-full-0 auto-y text-body-medium text-align-x-left content-default",
+					testId = "post-insights-posted-on",
+					Text = ViewProps.postedOnText
+				})
 			}),
 			Counts = ReactModule.createElement(InteractionCounts, {
 				LayoutOrder = 2,
@@ -109,7 +136,11 @@ local function Summary(Frame: Frame)
 		tag = "col align-x-center gap-xlarge size-full-0 auto-y",
 		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Thumbnail = ReactModule.createElement(Thumbnail, { LayoutOrder = 1, mediaItem = ViewProps.mediaItem }),
+		Thumbnail = ReactModule.createElement(Thumbnail, {
+			LayoutOrder = 1,
+			mediaItem = ViewProps.mediaItem,
+			size = _Vector2
+		}),
 		Counts = ReactModule.createElement(InteractionCounts, {
 			LayoutOrder = 2,
 			isWide = false,
@@ -128,17 +159,19 @@ local function SectionHeading(Frame)
 end
 
 local function Metric(Frame)
-	-- upvalues: ReactModule (copy), View (copy), Text (copy)
-	return ReactModule.createElement(View, {
-		tag = "col fill gap-xxsmall auto-y padding-x-xsmall padding-y-small",
-		LayoutOrder = Frame.LayoutOrder
-	}, {
+	-- upvalues: ReactModule (copy), View (copy), Text (copy), Skeleton (copy), _UDim2 (copy)
+	return ReactModule.createElement(View, { LayoutOrder = Frame.LayoutOrder, tag = Frame.tag }, {
 		Label = ReactModule.createElement(Text, {
 			LayoutOrder = 1,
 			tag = "auto-xy text-body-medium content-default",
-			Text = Frame.label
+			Text = Frame.label,
+			testId = `{Frame.testId}-label`
 		}),
-		Value = ReactModule.createElement(Text, {
+		Value = if Frame.isLoading then ReactModule.createElement(Skeleton, {
+			LayoutOrder = 2,
+			Size = _UDim2,
+			testId = `{Frame.testId}-skeleton`
+		}) else ReactModule.createElement(Text, {
 			LayoutOrder = 2,
 			tag = "auto-xy text-heading-small content-emphasis",
 			Text = Frame.valueText,
@@ -164,12 +197,25 @@ local function ViewsChartSkeleton(Frame)
 end
 
 local function OverviewSection(Frame)
-	-- upvalues: ReactModule (copy), SectionHeading (copy), ViewsChartSkeleton (copy), AnalyticsMetricChartModule (copy), Metric (copy), View (copy)
+	-- upvalues: ReactModule (copy), SectionHeading (copy), ViewsChartSkeleton (copy), View (copy), Metric (copy), AnalyticsMetricChartModule (copy)
 	local Copy = table.clone(Frame.viewsChart)
 	Copy.layoutOrder = 2
 	local config = {
 		Heading = ReactModule.createElement(SectionHeading, { LayoutOrder = 1, text = Frame.heading }),
-		ViewsChart = if Frame.isViewsChartLoading then ReactModule.createElement(ViewsChartSkeleton, { LayoutOrder = 2 }) else ReactModule.createElement(AnalyticsMetricChartModule.MetricChart, Copy)
+		ViewsChart = if Frame.isViewsChartLoading then ReactModule.createElement(ViewsChartSkeleton, { LayoutOrder = 2 }) elseif Frame.isViewsChartVisible then ReactModule.createElement(View, {
+			LayoutOrder = 2,
+			tag = "col gap-large size-full-0 auto-y"
+		}, {
+			TotalViews = ReactModule.createElement(Metric, {
+				LayoutOrder = 1,
+				tag = "col gap-xxsmall auto-xy",
+				testId = "post-insights-total-views",
+				label = Frame.totalViewsLabel,
+				valueText = Frame.totalViewsText,
+				isLoading = Frame.isTotalViewsLoading
+			}),
+			Chart = ReactModule.createElement(AnalyticsMetricChartModule.MetricChart, Copy)
+		}) else nil
 	}
 	
 	for i = 1, math.ceil(#Frame.overviewMetrics / 2) do
@@ -180,9 +226,11 @@ local function OverviewSection(Frame)
 			
 			if OverviewMetric ~= nil then
 				Elements[OverviewMetric.key] = ReactModule.createElement(Metric, {
+					tag = "col fill gap-xxsmall auto-y padding-y-small",
 					LayoutOrder = i1,
 					label = OverviewMetric.label,
 					valueText = OverviewMetric.valueText,
+					isLoading = OverviewMetric.isLoading,
 					testId = `post-insights-metric-{OverviewMetric.key}`
 				})
 			end
@@ -199,14 +247,17 @@ local function OverviewSection(Frame)
 end
 
 local function EngagementSection(Frame)
-	-- upvalues: ReactModule (copy), View (copy), ReactionModule (copy), ReactionSize (copy), Text (copy), SectionHeading (copy)
+	-- upvalues: UseTokensFunction (copy), FFlagMomentsUseSharedReactionsModule (copy), ReactionAssets (copy), ReactionSize (copy), ReactModule (copy), View (copy), ReactionModule (copy), Text (copy), SectionHeading (copy), Metric (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Size600 = if FFlagMomentsUseSharedReactionsModule then UseTokensResult.Size.Size_600 else assert(ReactionAssets.getSizePixels(ReactionSize.Small), "expected a pixel size for Small reactions")
 	local Elements = {}
 	
 	for LayoutOrder, reactionCount in Frame.viewProps.reactionCounts do
 		Elements[reactionCount.reactionType] = ReactModule.createElement(View, {
-			tag = "col align-x-center gap-xxsmall auto-y",
+			tag = "col align-x-center gap-xxsmall auto-xy",
 			LayoutOrder = LayoutOrder,
-			Size = UDim2.fromOffset(38, 0)
+			sizeConstraint = { MinSize = Vector2.new(Size600, 0) },
+			testId = `post-insights-reaction-item-{reactionCount.reactionType}`
 		}, {
 			Reaction = ReactModule.createElement(ReactionModule, {
 				LayoutOrder = 1,
@@ -231,20 +282,15 @@ local function EngagementSection(Frame)
 		}),
 		Card = ReactModule.createElement(View, {
 			LayoutOrder = 2,
-			tag = "col gap-large size-full-0 auto-y padding-xsmall"
+			tag = "col gap-large size-full-0 auto-y padding-y-xsmall",
+			testId = "post-insights-engagement-card"
 		}, {
-			Total = ReactModule.createElement(View, { LayoutOrder = 1, tag = "col gap-xsmall auto-xy" }, {
-				Label = ReactModule.createElement(Text, {
-					LayoutOrder = 1,
-					tag = "auto-xy text-label-medium content-muted",
-					Text = Frame.viewProps.totalReactionsLabel
-				}),
-				Value = ReactModule.createElement(Text, {
-					LayoutOrder = 2,
-					tag = "auto-xy text-heading-small content-emphasis",
-					testId = "post-insights-total-reactions",
-					Text = Frame.viewProps.totalReactionsText
-				})
+			Total = ReactModule.createElement(Metric, {
+				LayoutOrder = 1,
+				tag = "col gap-xxsmall auto-xy",
+				testId = "post-insights-total-reactions",
+				label = Frame.viewProps.totalReactionsLabel,
+				valueText = Frame.viewProps.totalReactionsText
 			}),
 			Reactions = ReactModule.createElement(View, {
 				LayoutOrder = 2,
@@ -346,8 +392,12 @@ return function(ViewProps)
 						Overview = ReactModule.createElement(OverviewSection, {
 							LayoutOrder = 2,
 							heading = ViewProps.overviewHeading,
+							totalViewsLabel = ViewProps.totalViewsLabel,
+							totalViewsText = ViewProps.totalViewsText,
+							isTotalViewsLoading = ViewProps.isTotalViewsLoading,
 							viewsChart = ViewProps.viewsChart,
 							isViewsChartLoading = ViewProps.isViewsChartLoading,
+							isViewsChartVisible = ViewProps.isViewsChartVisible,
 							overviewMetrics = ViewProps.overviewMetrics
 						}),
 						Engagement = ReactModule.createElement(EngagementSection, { LayoutOrder = 3, viewProps = ViewProps })

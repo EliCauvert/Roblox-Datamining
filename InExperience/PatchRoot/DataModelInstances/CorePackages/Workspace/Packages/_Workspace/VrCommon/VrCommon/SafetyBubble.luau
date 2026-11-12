@@ -178,11 +178,11 @@ function SafetyBubbleModule:update(p1)
 							table.remove(self.subjects, SubjectIndex)
 						end
 					elseif not self:SubjectExists(player.Character) and player.Character then
-						local BoundingCFrame, BoundingSize = player.Character:GetBoundingBox()
-						local MagnitudeDelta = (BoundingCFrame.Position - ScaledUserCFrame.Position).Magnitude - BoundingSize.Z
+						local BoundingCFrame1, BoundingSize1 = player.Character:GetBoundingBox()
+						local MagnitudeDelta1 = (BoundingCFrame1.Position - ScaledUserCFrame.Position).Magnitude - BoundingSize1.Z
 						
-						if MagnitudeDelta < NewLargest then
-							NewLargest = MagnitudeDelta
+						if MagnitudeDelta1 < NewLargest then
+							NewLargest = MagnitudeDelta1
 							Character = player.Character
 						end
 					end
@@ -195,9 +195,9 @@ function SafetyBubbleModule:update(p1)
 		if not self.subjects or #self.subjects == 0 then return end
 		local CountSubjects = #self.subjects
 		while CountSubjects > 0 do
-			local BoundingCFrame1, BoundingSize1 = self.subjects[CountSubjects].character:GetBoundingBox()
+			local BoundingCFrame2, BoundingSize2 = self.subjects[CountSubjects].character:GetBoundingBox()
 			
-			if Largest * 2 < (BoundingCFrame1.Position - ScaledUserCFrame.Position).Magnitude - BoundingSize1.Z then
+			if Largest * 2 < (BoundingCFrame2.Position - ScaledUserCFrame.Position).Magnitude - BoundingSize2.Z then
 				self:TeardownTransparency(CountSubjects)
 				table.remove(self.subjects, CountSubjects)
 			end
@@ -206,28 +206,28 @@ function SafetyBubbleModule:update(p1)
 		local CountSubjects1 = #self.subjects
 		local Count = 1
 		while Count <= CountSubjects1 do
-			local ScaledFIntSafetyBubbleTransparencyPercentModule1 = 0
+			local Value = 0
 			local Character1 = self.subjects[Count].character
-			local Distance = nil
+			local MagnitudeDelta = nil
 			
 			if Character1.PrimaryPart then
-				Distance = (Vector3.new(Character1:GetPrimaryPartCFrame().p.x, ScaledUserCFrame.Position.Y, Character1:GetPrimaryPartCFrame().p.z) - ScaledUserCFrame.Position).Magnitude
+				MagnitudeDelta = (Vector3.new(Character1:GetPrimaryPartCFrame().p.x, ScaledUserCFrame.Position.Y, Character1:GetPrimaryPartCFrame().p.z) - ScaledUserCFrame.Position).Magnitude
 			else
-				local BoundingCFrame2, BoundingSize2 = Character1:GetBoundingBox()
-				Distance = (BoundingCFrame2.Position - ScaledUserCFrame.Position).Magnitude - BoundingSize2.Z
+				local BoundingCFrame, BoundingSize = Character1:GetBoundingBox()
+				MagnitudeDelta = (BoundingCFrame.Position - ScaledUserCFrame.Position).Magnitude - BoundingSize.Z
 			end
-			if Distance < Largest then
+			if MagnitudeDelta < Largest then
 				if CountSubjects1 > 3 then
-					ScaledFIntSafetyBubbleTransparencyPercentModule1 = 1
+					Value = 1
 				else
 					local ScaledLargest = Largest * 0.75
-					ScaledFIntSafetyBubbleTransparencyPercentModule1 = if Distance < ScaledLargest then ScaledFIntSafetyBubbleTransparencyPercentModule else (1 - (Distance - ScaledLargest) / (Largest - ScaledLargest)) * ScaledFIntSafetyBubbleTransparencyPercentModule
+					Value = if MagnitudeDelta < ScaledLargest then ScaledFIntSafetyBubbleTransparencyPercentModule else (1 - (MagnitudeDelta - ScaledLargest) / (Largest - ScaledLargest)) * ScaledFIntSafetyBubbleTransparencyPercentModule
 				end
 			end
 			if not self.subjects[Count].lastTransparency then
 				self.subjects[Count].transparencyDirty = true
 			end
-			local ClampedValue = math.clamp(ScaledFIntSafetyBubbleTransparencyPercentModule1, 0, 1)
+			local ClampedValue = math.clamp(Value, 0, 1)
 			
 			if self.subjects[Count].transparencyDirty or self.subjects[Count].lastTransparency ~= ClampedValue then
 				for i1, _ in pairs(self.subjects[Count].cachedParts) do

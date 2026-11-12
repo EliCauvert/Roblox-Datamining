@@ -1,8 +1,6 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local UIBloxModule = require(CorePackages.Packages.UIBlox)
-local FoundationModule = require(CorePackages.Packages.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(CorePackages.Packages.Foundation).Utility.normalizeFontFace
 local ReactModule = require(CorePackages.Packages.React)
 local ButtonStack = UIBloxModule.App.Button.ButtonStack
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
@@ -68,7 +66,7 @@ local function ScreenshotReviewDialogSmallPortraitModeHeaderRight(p1)
 end
 
 return function(p1)
-	-- upvalues: UsePreferredInputFunction (copy), ResponsiveModule (copy), RobloxTranslatorModule (copy), ReactModule (copy), UseStyleFunction (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), RestartScreenshotDialogModule (copy), ImageSetButton (copy), AssetsModule (copy), HeaderBar (copy), IconButton (copy), IconSize (copy), Images (copy), ScreenshotReviewDialogSmallPortraitModeHeaderRight (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy), DividerModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ButtonStack (copy)
+	-- upvalues: UsePreferredInputFunction (copy), ResponsiveModule (copy), RobloxTranslatorModule (copy), ReactModule (copy), UseStyleFunction (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), RestartScreenshotDialogModule (copy), ImageSetButton (copy), AssetsModule (copy), HeaderBar (copy), IconButton (copy), IconSize (copy), Images (copy), ScreenshotReviewDialogSmallPortraitModeHeaderRight (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy), DividerModule (copy), NormalizeFontFaceFunction (copy), ButtonStack (copy)
 	local IsUsePreferredInputResultMatch = UsePreferredInputFunction() == ResponsiveModule.Input.Directional
 	
 	if RobloxTranslatorModule then
@@ -273,8 +271,7 @@ return function(p1)
 								TextWrapped = true,
 								BackgroundTransparency = 1,
 								Text = RobloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Message.ProblemNotInScene"),
-								Font = if FoundationFontFaceMigration then nil else UseStyleResultFont.Header1.Font,
-								FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.HeadingSmall.Font) else nil,
+								FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.HeadingSmall.Font),
 								TextColor3 = Theme.TextEmphasis.Color,
 								TextTransparency = Theme.TextEmphasis.Transparency,
 								TextSize = if p1.isSmallPortraitMode then 12 else 20,

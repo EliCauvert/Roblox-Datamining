@@ -119,7 +119,8 @@ local PushProviderFunction = ReactFiberNewContextNewModule.pushProvider
 local config = {
 	renderWithHooksRef = nil,
 	bailoutHooksRef = nil,
-	shouldSuspendRef = nil
+	shouldSuspendRef = nil,
+	classMemoCache = require(script.Parent["ReactFiberClassMemoCache.new"])
 }
 
 local _ = function(p1)
@@ -587,7 +588,7 @@ do
 	end
 
 	function finishClassComponent(p1, Current, p2, p3, p4, p5)
-		-- upvalues: Ref (copy), DidCapture (copy), NoFlags (copy), InvalidateContextProviderFunction (copy), Callback (ref), ReactCurrentOwner (copy), EnableProfilerTimer (copy), StopProfilerTimerIfRunningFunction (copy), DEV (copy), SetIsRenderingFunction (copy), DebugRenderPhaseSideEffectsForStrictMode (copy), StrictMode (copy), DisableLogsFunction (copy), DescribeError (copy), ReenableLogsFunction (copy), PerformedWork (copy), ReconcileChildFibersFunction (copy), reconcileChildren (copy)
+		-- upvalues: Ref (copy), DidCapture (copy), NoFlags (copy), InvalidateContextProviderFunction (copy), Callback (ref), ReactCurrentOwner (copy), EnableProfilerTimer (copy), StopProfilerTimerIfRunningFunction (copy), DEV (copy), SetIsRenderingFunction (copy), ReactFeatureFlags (copy), config (copy), DebugRenderPhaseSideEffectsForStrictMode (copy), StrictMode (copy), DisableLogsFunction (copy), DescribeError (copy), ReenableLogsFunction (copy), PerformedWork (copy), ReconcileChildFibersFunction (copy), reconcileChildren (copy)
 		local Ref1 = Current.ref
 		
 		if p1 == nil and Ref1 ~= nil or p1 ~= nil and p1.ref ~= Ref1 then
@@ -608,11 +609,26 @@ do
 				end
 			elseif DEV then
 				SetIsRenderingFunction(true)
+				
+				if ReactFeatureFlags.enableClassCompilerRuntimeRelease1 then
+					config.classMemoCache.prepareToRender(Current)
+				end
 				RenderResult = StateNode:render()
 				
+				if ReactFeatureFlags.enableClassCompilerRuntimeRelease1 then
+					config.classMemoCache.finishRendering()
+				end
 				if DebugRenderPhaseSideEffectsForStrictMode and bit32.band(Current.mode, StrictMode) ~= 0 then
 					DisableLogsFunction()
+					
+					if ReactFeatureFlags.enableClassCompilerRuntimeRelease1 then
+						config.classMemoCache.prepareToRender(Current)
+					end
 					local Success, Result = xpcall(StateNode.render, DescribeError, StateNode)
+					
+					if ReactFeatureFlags.enableClassCompilerRuntimeRelease1 then
+						config.classMemoCache.finishRendering()
+					end
 					ReenableLogsFunction()
 					
 					if not Success then
@@ -621,7 +637,14 @@ do
 				end
 				SetIsRenderingFunction(false)
 			else
+				if ReactFeatureFlags.enableClassCompilerRuntimeRelease1 then
+					config.classMemoCache.prepareToRender(Current)
+				end
 				RenderResult = StateNode:render()
+				
+				if ReactFeatureFlags.enableClassCompilerRuntimeRelease1 then
+					config.classMemoCache.finishRendering()
+				end
 			end
 			Current.flags = bit32.bor(Current.flags, PerformedWork)
 			
@@ -1002,14 +1025,14 @@ do
 		return ReactFiberLaneModule.removeLanes(p2.childLanes, p3)
 	end
 
-	local Callback4 = nil
 	local Callback7 = nil
 	local Callback6 = nil
 	local Callback5 = nil
 	local Callback3 = nil
+	local Callback4 = nil
 
 	local function updateSuspenseComponent(p2, Return, BaseLanes)
-		-- upvalues: DEV (copy), config (copy), DidCapture (copy), SuspenseStackCursor (copy), NoFlags (copy), HasSuspenseContextFunction (copy), ForceSuspenseFallback (copy), AddSubtreeSuspenseContextFunction (copy), InvisibleParentSuspenseContext (copy), SetDefaultShallowSuspenseContextFunction (copy), PushSuspenseContextFunction (copy), TryToClaimNextHydratableInstanceFunction (copy), EnableSuspenseServerRenderer (copy), Callback7 (ref), MemoizedState (copy), ReactFiberLaneModule (copy), EnableSchedulerTracing (copy), MarkSpawnedWorkFunction (copy), Callback6 (ref), Callback3 (ref), Callback5 (ref), Callback4 (ref)
+		-- upvalues: DEV (copy), config (copy), DidCapture (copy), SuspenseStackCursor (copy), NoFlags (copy), HasSuspenseContextFunction (copy), ForceSuspenseFallback (copy), AddSubtreeSuspenseContextFunction (copy), InvisibleParentSuspenseContext (copy), SetDefaultShallowSuspenseContextFunction (copy), PushSuspenseContextFunction (copy), TryToClaimNextHydratableInstanceFunction (copy), EnableSuspenseServerRenderer (copy), Callback6 (ref), MemoizedState (copy), ReactFiberLaneModule (copy), EnableSchedulerTracing (copy), MarkSpawnedWorkFunction (copy), Callback5 (ref), Callback4 (ref), Callback3 (ref), Callback7 (ref)
 		local PendingProps = Return.pendingProps
 		
 		if DEV then
@@ -1043,7 +1066,7 @@ do
 						local Dehydrated = MemoizedState2.dehydrated
 						
 						if Dehydrated ~= nil then
-							return Callback7(Return, Dehydrated, BaseLanes)
+							return Callback6(Return, Dehydrated, BaseLanes)
 						end
 					end
 				end
@@ -1058,7 +1081,7 @@ do
 				return (mountSuspenseFallbackChildren(Return, Children, Fallback, BaseLanes))
 			end
 			if PendingProps.unstable_expectedLoadTime == nil or type(PendingProps.unstable_expectedLoadTime) ~= "number" then
-				return Callback6(Return, Children, BaseLanes)
+				return Callback5(Return, Children, BaseLanes)
 			end
 			local MountSuspenseFallbackChildrenResult = mountSuspenseFallbackChildren(Return, Children, Fallback, BaseLanes)
 			Return.child.memoizedState = { baseLanes = BaseLanes }
@@ -1076,30 +1099,30 @@ do
 				if not Flag then
 					Return.memoizedState = nil
 					
-					return (Callback4(p2, Return, PendingProps.children, BaseLanes))
+					return (Callback7(p2, Return, PendingProps.children, BaseLanes))
 				end
-				local CallbackResult = Callback5(p2, Return, PendingProps.children, PendingProps.fallback, BaseLanes)
+				local CallbackResult1 = Callback3(p2, Return, PendingProps.children, PendingProps.fallback, BaseLanes)
 				local Child = Return.child
-				local MemoizedState3 = p2.child.memoizedState
+				local MemoizedState4 = p2.child.memoizedState
 				
-				if MemoizedState3 == nil then
+				if MemoizedState4 == nil then
 					Child.memoizedState = { baseLanes = BaseLanes }
 				else
 					Child.memoizedState = {
-						baseLanes = ReactFiberLaneModule.mergeLanes(MemoizedState3.baseLanes, BaseLanes)
+						baseLanes = ReactFiberLaneModule.mergeLanes(MemoizedState4.baseLanes, BaseLanes)
 					}
 				end
 				Child.childLanes = ReactFiberLaneModule.removeLanes(p2.childLanes, BaseLanes)
 				Return.memoizedState = MemoizedState
 				
-				return CallbackResult
+				return CallbackResult1
 			else
 				if EnableSuspenseServerRenderer then
 					local Dehydrated = MemoizedState1.dehydrated
 					
 					if Dehydrated ~= nil then
 						if not IsNotBitsMatch then
-							return Callback3(p2, Return, Dehydrated, MemoizedState1, BaseLanes)
+							return Callback4(p2, Return, Dehydrated, MemoizedState1, BaseLanes)
 						elseif Return.memoizedState == nil then
 							Return.child.memoizedState = { baseLanes = BaseLanes }
 							Return.memoizedState = MemoizedState
@@ -1116,28 +1139,28 @@ do
 				if not Flag then
 					Return.memoizedState = nil
 					
-					return (Callback4(p2, Return, PendingProps.children, BaseLanes))
+					return (Callback7(p2, Return, PendingProps.children, BaseLanes))
 				end
-				local CallbackResult1 = Callback5(p2, Return, PendingProps.children, PendingProps.fallback, BaseLanes)
-				local Child1 = Return.child
-				local MemoizedState4 = p2.child.memoizedState
+				local CallbackResult = Callback3(p2, Return, PendingProps.children, PendingProps.fallback, BaseLanes)
+				local Child = Return.child
+				local MemoizedState3 = p2.child.memoizedState
 				
-				if MemoizedState4 == nil then
-					Child1.memoizedState = { baseLanes = BaseLanes }
+				if MemoizedState3 == nil then
+					Child.memoizedState = { baseLanes = BaseLanes }
 				else
-					Child1.memoizedState = {
-						baseLanes = ReactFiberLaneModule.mergeLanes(MemoizedState4.baseLanes, BaseLanes)
+					Child.memoizedState = {
+						baseLanes = ReactFiberLaneModule.mergeLanes(MemoizedState3.baseLanes, BaseLanes)
 					}
 				end
-				Child1.childLanes = ReactFiberLaneModule.removeLanes(p2.childLanes, BaseLanes)
+				Child.childLanes = ReactFiberLaneModule.removeLanes(p2.childLanes, BaseLanes)
 				Return.memoizedState = MemoizedState
 				
-				return CallbackResult1
+				return CallbackResult
 			end
 		end
 	end
 
-	Callback6 = function(Return, Children, BaseLanes)
+	Callback5 = function(Return, Children, BaseLanes)
 		-- upvalues: CreateFiberFromOffscreenFunction (copy)
 		local FiberFromOffscreen = CreateFiberFromOffscreenFunction({ mode = "visible", children = Children }, Return.mode, BaseLanes, nil)
 		FiberFromOffscreen.return_ = Return
@@ -1183,7 +1206,7 @@ do
 		return CreateWorkInProgressFunction(p2, p3)
 	end
 
-	Callback4 = function(p2, Return, Children, BaseLanes)
+	Callback7 = function(p2, Return, Children, BaseLanes)
 		-- upvalues: CreateWorkInProgressFunction (copy), BlockingMode (copy), NoMode (copy), Deletion (copy)
 		local Child = p2.child
 		local Sibling = Child.sibling
@@ -1210,7 +1233,7 @@ do
 		return WorkInProgress
 	end
 
-	Callback5 = function(p2, Return_, Children, Fallback, BaseLanes)
+	Callback3 = function(p2, Return_, Children, Fallback, BaseLanes)
 		-- upvalues: BlockingMode (copy), NoMode (copy), ReactFiberLaneModule (copy), EnableProfilerTimer (copy), ProfileMode (copy), CreateWorkInProgressFunction (copy), StaticMask (copy), CreateFiberFromFragmentFunction (copy), Placement (copy)
 		local Mode: number = Return_.mode
 		local Child = p2.child
@@ -1250,9 +1273,9 @@ do
 	end
 
 	local _ = function(p2, Return, p3)
-		-- upvalues: ReconcileChildFibersFunction (copy), Callback6 (ref), Placement (copy)
+		-- upvalues: ReconcileChildFibersFunction (copy), Callback5 (ref), Placement (copy)
 		ReconcileChildFibersFunction(Return, p2.child, nil, p3)
-		local CallbackResult = Callback6(Return, Return.pendingProps.children, p3)
+		local CallbackResult = Callback5(Return, Return.pendingProps.children, p3)
 		CallbackResult.flags = bit32.bor(CallbackResult.flags, Placement)
 		Return.memoizedState = nil
 		
@@ -1276,7 +1299,7 @@ do
 		return FiberFromFragment
 	end
 
-	Callback7 = function(p2, Dehydrated, _)
+	Callback6 = function(p2, Dehydrated, _)
 		-- upvalues: BlockingMode (copy), NoMode (copy), DEV (copy), Console (copy), ReactFiberLaneModule (copy), IsSuspenseInstanceFallbackFunction (copy), EnableSchedulerTracing (copy), MarkSpawnedWorkFunction (copy)
 		if bit32.band(p2.mode, BlockingMode) == NoMode then
 			if DEV then
@@ -1298,13 +1321,13 @@ do
 		return nil
 	end
 
-	Callback3 = function(p2, Return, Dehydrated, MemoizedState, BaseLanes)
-		-- upvalues: WarnIfHydratingFunction (copy), GetExecutionContextFunction (copy), RetryAfterError (copy), NoContext (copy), ReconcileChildFibersFunction (copy), Callback6 (ref), Placement (copy), BlockingMode (copy), NoMode (copy), IsSuspenseInstanceFallbackFunction (copy), ReactFiberLaneModule (copy), IsNotBitsMatch (ref), GetWorkInProgressRootFunction (copy), ScheduleUpdateOnFiberFunction (copy), RenderDidSuspendDelayIfPossibleFunction (copy), IsSuspenseInstancePendingFunction (copy), DidCapture (copy), RetryDehydratedSuspenseBoundaryFunction (copy), EnableSchedulerTracing (copy), UnstableWrap (ref), Parent (copy), RegisterSuspenseInstanceRetryFunction (copy), ReenterHydrationStateFromDehydratedSuspenseInstanceFunction (copy), Hydrating (copy)
+	Callback4 = function(p2, Return, Dehydrated, MemoizedState, BaseLanes)
+		-- upvalues: WarnIfHydratingFunction (copy), GetExecutionContextFunction (copy), RetryAfterError (copy), NoContext (copy), ReconcileChildFibersFunction (copy), Callback5 (ref), Placement (copy), BlockingMode (copy), NoMode (copy), IsSuspenseInstanceFallbackFunction (copy), ReactFiberLaneModule (copy), IsNotBitsMatch (ref), GetWorkInProgressRootFunction (copy), ScheduleUpdateOnFiberFunction (copy), RenderDidSuspendDelayIfPossibleFunction (copy), IsSuspenseInstancePendingFunction (copy), DidCapture (copy), RetryDehydratedSuspenseBoundaryFunction (copy), EnableSchedulerTracing (copy), UnstableWrap (ref), Parent (copy), RegisterSuspenseInstanceRetryFunction (copy), ReenterHydrationStateFromDehydratedSuspenseInstanceFunction (copy), Hydrating (copy)
 		WarnIfHydratingFunction()
 		
 		if bit32.band(GetExecutionContextFunction(), RetryAfterError) ~= NoContext then
 			ReconcileChildFibersFunction(Return, p2.child, nil, BaseLanes)
-			local CallbackResult = Callback6(Return, Return.pendingProps.children, BaseLanes)
+			local CallbackResult = Callback5(Return, Return.pendingProps.children, BaseLanes)
 			CallbackResult.flags = bit32.bor(CallbackResult.flags, Placement)
 			Return.memoizedState = nil
 			
@@ -1312,7 +1335,7 @@ do
 		end
 		if bit32.band(Return.mode, BlockingMode) == NoMode then
 			ReconcileChildFibersFunction(Return, p2.child, nil, BaseLanes)
-			local CallbackResult = Callback6(Return, Return.pendingProps.children, BaseLanes)
+			local CallbackResult = Callback5(Return, Return.pendingProps.children, BaseLanes)
 			CallbackResult.flags = bit32.bor(CallbackResult.flags, Placement)
 			Return.memoizedState = nil
 			
@@ -1320,7 +1343,7 @@ do
 		end
 		if IsSuspenseInstanceFallbackFunction(Dehydrated) then
 			ReconcileChildFibersFunction(Return, p2.child, nil, BaseLanes)
-			local CallbackResult = Callback6(Return, Return.pendingProps.children, BaseLanes)
+			local CallbackResult = Callback5(Return, Return.pendingProps.children, BaseLanes)
 			CallbackResult.flags = bit32.bor(CallbackResult.flags, Placement)
 			Return.memoizedState = nil
 			
@@ -1341,7 +1364,7 @@ do
 			end
 			RenderDidSuspendDelayIfPossibleFunction()
 			ReconcileChildFibersFunction(Return, p2.child, nil, BaseLanes)
-			local CallbackResult = Callback6(Return, Return.pendingProps.children, BaseLanes)
+			local CallbackResult = Callback5(Return, Return.pendingProps.children, BaseLanes)
 			CallbackResult.flags = bit32.bor(CallbackResult.flags, Placement)
 			Return.memoizedState = nil
 			
@@ -1349,7 +1372,7 @@ do
 		else
 			if not IsSuspenseInstancePendingFunction(Dehydrated) then
 				ReenterHydrationStateFromDehydratedSuspenseInstanceFunction(Return, Dehydrated)
-				local CallbackResult = Callback6(Return, Return.pendingProps.children, BaseLanes)
+				local CallbackResult = Callback5(Return, Return.pendingProps.children, BaseLanes)
 				CallbackResult.flags = bit32.bor(CallbackResult.flags, Hydrating)
 				
 				return CallbackResult

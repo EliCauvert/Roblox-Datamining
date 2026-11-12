@@ -1,4 +1,5 @@
-﻿local FFlagViewRecyclerReact08 = require(script:FindFirstAncestor("ViewRecyclerReact").Flags).FFlagViewRecyclerReact08
+﻿local FFlagViewRecyclerReact084 = require(script:FindFirstAncestor("ViewRecyclerReact").Flags).FFlagViewRecyclerReact084
+local FFlagViewRecyclerReact08 = require(script:FindFirstAncestor("ViewRecyclerReact").Flags).FFlagViewRecyclerReact08
 local ViewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
 local ViewRecyclerModule = require(ViewRecyclerReact.Parent.ViewRecycler)
 local ItemHooksModule = require(ViewRecyclerReact.ReactAdapter.ItemHooks)
@@ -15,7 +16,7 @@ local CreateVirtualListModule = require(ViewRecyclerReact.ReactAdapter.createVir
 local UseRectPlacementModule = require(ViewRecyclerReact.ReactAdapter.useRectPlacement)
 
 return function(p1)
-	-- upvalues: VirtualListModule (copy), RecyclingScopeModule (copy), RecyclingViewportModule (copy), CreateVirtualListModule (copy), RecyclableViewSwitchModule (copy), CreatePinnedItemModule (copy), CreateRecyclableComponentModule (copy), CreateRecyclableViewModule (copy), ItemHooksModule (copy), LayoutHooksModule (copy), FFlagViewRecyclerReact08 (copy), UseRectPlacementModule (copy), RecyclableViewReadinessModule (copy), ViewRecyclerModule (copy), ViewRecyclerReact (copy)
+	-- upvalues: VirtualListModule (copy), RecyclingScopeModule (copy), RecyclingViewportModule (copy), CreateVirtualListModule (copy), RecyclableViewSwitchModule (copy), CreatePinnedItemModule (copy), CreateRecyclableComponentModule (copy), CreateRecyclableViewModule (copy), ItemHooksModule (copy), LayoutHooksModule (copy), FFlagViewRecyclerReact084 (copy), UseRectPlacementModule (copy), FFlagViewRecyclerReact08 (copy), RecyclableViewReadinessModule (copy), ViewRecyclerModule (copy), ViewRecyclerReact (copy)
 	local NewVirtualList = VirtualListModule.create(p1)
 	
 	return table.freeze({
@@ -34,7 +35,7 @@ return function(p1)
 		useRecyclingIndex = ItemHooksModule.useRecyclingIndex,
 		useMeasuredLayout = LayoutHooksModule.useMeasuredLayout,
 		useUniformLayout = LayoutHooksModule.useUniformLayout,
-		useRectPlacement = if FFlagViewRecyclerReact08 then UseRectPlacementModule else nil,
+		useRectPlacement = if FFlagViewRecyclerReact084 then UseRectPlacementModule elseif FFlagViewRecyclerReact08 then UseRectPlacementModule else nil,
 		RecyclableViewReadiness = RecyclableViewReadinessModule,
 		DataSource = ViewRecyclerModule.DataSource,
 		Diagnostics = ViewRecyclerModule.Diagnostics,

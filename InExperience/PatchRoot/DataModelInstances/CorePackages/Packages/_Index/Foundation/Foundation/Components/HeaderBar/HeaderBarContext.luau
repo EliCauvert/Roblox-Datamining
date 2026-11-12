@@ -10,8 +10,20 @@ return {
 		return ReactModule.createElement(Context.Provider, {
 			value = ReactModule.useMemo(function()
 				-- upvalues: p1 (copy)
-				return { testId = p1.testId, slot = p1.slot }
-			end, { p1.testId, p1.slot })
+				return {
+					testId = p1.testId,
+					slot = p1.slot,
+					leadingWidth = p1.leadingWidth,
+					trailingWidth = p1.trailingWidth,
+					onSideWidthChanged = p1.onSideWidthChanged
+				}
+			end, {
+				p1.testId,
+				p1.slot,
+				p1.leadingWidth,
+				p1.trailingWidth,
+				p1.onSideWidthChanged
+			})
 		}, p1.children)
 	end
 }

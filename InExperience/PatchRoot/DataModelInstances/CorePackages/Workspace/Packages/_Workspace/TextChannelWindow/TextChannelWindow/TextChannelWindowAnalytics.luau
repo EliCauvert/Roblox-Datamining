@@ -24,19 +24,10 @@ local Emitter = SocialLuaAnalyticsModule.Telemetry.createEmitter({
 		}
 	end
 })
-local list = {
-	"addOSInfo",
-	"addSessionInfo",
-	"addPlaceId",
-	"addUniverseId"
-}
-local TextChannelWindowExcludeStandardizedFieldsFromCounters = game:DefineFastFlag("TextChannelWindowExcludeStandardizedFieldsFromCounters", false)
 
 local function _()
-	-- upvalues: TextChannelWindowExcludeStandardizedFieldsFromCounters (copy), list (copy)
 	return {
 		type = "RobloxTelemetryCounter",
-		standardizedFields = if TextChannelWindowExcludeStandardizedFieldsFromCounters then nil else list,
 		format = function(Tbl, p1)
 			local Copy = table.clone(Tbl)
 			Copy.enable_protected_chat = tostring(p1.enableProtectedChat)
@@ -54,7 +45,6 @@ TextChannelWindowAnalyticsModule.Counters = {
 		backendsList = {
 			{
 				type = "RobloxTelemetryCounter",
-				standardizedFields = if TextChannelWindowExcludeStandardizedFieldsFromCounters then nil else list,
 				format = function(Tbl, p1)
 					local Copy = table.clone(Tbl)
 					Copy.enable_protected_chat = tostring(p1.enableProtectedChat)
@@ -72,7 +62,6 @@ TextChannelWindowAnalyticsModule.Counters = {
 		backendsList = {
 			{
 				type = "RobloxTelemetryCounter",
-				standardizedFields = if TextChannelWindowExcludeStandardizedFieldsFromCounters then nil else list,
 				format = function(Tbl, p1)
 					local Copy = table.clone(Tbl)
 					Copy.enable_protected_chat = tostring(p1.enableProtectedChat)
@@ -90,7 +79,6 @@ TextChannelWindowAnalyticsModule.Counters = {
 		backendsList = {
 			{
 				type = "RobloxTelemetryCounter",
-				standardizedFields = if TextChannelWindowExcludeStandardizedFieldsFromCounters then nil else list,
 				format = function(Tbl, p1)
 					local Copy = table.clone(Tbl)
 					Copy.enable_protected_chat = tostring(p1.enableProtectedChat)
@@ -102,22 +90,10 @@ TextChannelWindowAnalyticsModule.Counters = {
 		throttlingThousandths = game:DefineFastInt("TCWMessageReceivedCountThrottlePerMyriad", 1000)
 	})
 }
-game:SetFlagVersion("TextChannelWindowCountersEnabled", 2)
-local TextChannelWindowCountersEnabled = game:DefineFastFlag("TextChannelWindowCountersEnabled", false)
-local v1 = nil
-
-function TextChannelWindowAnalyticsModule._setCountersEnabledForTesting(p1)
-	-- upvalues: v1 (ref)
-	v1 = p1
-end
 
 function TextChannelWindowAnalyticsModule.emit(p1, p2)
-	-- upvalues: v1 (ref), TextChannelWindowCountersEnabled (copy), Emitter (copy)
-	if if v1 == nil then TextChannelWindowCountersEnabled else v1 then
-		Emitter.emit(p1, p2)
-		
-		return
-	end
+	-- upvalues: Emitter (copy)
+	Emitter.emit(p1, p2)
 end
 
 local TextChannelWindowEventStreamEnabled = game:DefineFastFlag("TextChannelWindowEventStreamEnabled", false)
@@ -163,12 +139,12 @@ end
 function TextChannelWindowAnalyticsModule.createOnScrollCallback(p1)
 	-- upvalues: TextChannelWindowAnalyticsModule (copy), TextChatService (copy)
 	if TextChannelWindowAnalyticsModule.getFFlagExpChatTelemetryEnabled() then
-		local function v16()
+		local function v12()
 			-- upvalues: TextChatService (upval), p1 (copy)
 			TextChatService:SendExpChatWindowScroll("text_channel_window", p1 or "")
 		end
 		
-		local function v17()
+		local function v13()
 			-- upvalues: TextChannelWindowAnalyticsModule (upval)
 			return TextChannelWindowAnalyticsModule.FIntTextChannelWindowScrollThrottleMs
 		end
@@ -176,10 +152,10 @@ function TextChannelWindowAnalyticsModule.createOnScrollCallback(p1)
 		local DelayedThread = nil
 		
 		return function()
-			-- upvalues: DelayedThread (ref), v16 (copy), v17 (copy)
+			-- upvalues: DelayedThread (ref), v12 (copy), v13 (copy)
 			if not DelayedThread then
-				v16()
-				DelayedThread = task.delay(v17() / 1000, function()
+				v12()
+				DelayedThread = task.delay(v13() / 1000, function()
 					-- upvalues: DelayedThread (upval)
 					DelayedThread = nil
 				end)

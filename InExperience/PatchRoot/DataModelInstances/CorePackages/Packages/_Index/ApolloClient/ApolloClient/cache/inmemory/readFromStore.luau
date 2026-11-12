@@ -281,8 +281,8 @@ function Module:execSelectionSetImpl(p1)
 					end
 					local Missing = config.missing
 					
-					for _, value in ExecuteSubSelectedArrayResult.missing do
-						table.insert(Missing, value)
+					for _, value1 in ExecuteSubSelectedArrayResult.missing do
+						table.insert(Missing, value1)
 					end
 				end
 				Field1 = ExecuteSubSelectedArrayResult.result
@@ -301,8 +301,8 @@ function Module:execSelectionSetImpl(p1)
 						end
 						local Missing = config.missing
 						
-						for _, value1 in ExecuteSelectionSetResult.missing do
-							table.insert(Missing, value1)
+						for _, value in ExecuteSelectionSetResult.missing do
+							table.insert(Missing, value)
 						end
 					end
 					Field1 = ExecuteSelectionSetResult.result

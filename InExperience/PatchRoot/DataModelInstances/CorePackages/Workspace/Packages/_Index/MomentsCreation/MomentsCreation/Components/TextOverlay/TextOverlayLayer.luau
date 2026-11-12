@@ -516,7 +516,7 @@ return function(p1)
 			return nil
 		end
 		local Size = nil
-		local _UDim2 = UDim2.fromScale(0.5, 0.5)
+		local Position = UDim2.fromScale(0.5, 0.5)
 		local FontSize = UseMemoResult
 		local IsUseOnScreenKeyboardHeightModuleResultAbove: boolean = FFlagMomentsTextOverlayV2Redesign and (FFlagMomentsTextOverlayChipGrowAboveKeyboard and UseOnScreenKeyboardHeightModuleResult > 0)
 		local v6: number? = nil
@@ -543,7 +543,7 @@ return function(p1)
 			})
 			FontSize = EditorChipLayoutModule.fontSize
 			Size = EditorChipLayoutModule.size
-			_UDim2 = EditorChipLayoutModule.position
+			Position = EditorChipLayoutModule.position
 		end
 		return ReactModule.createElement(View, {
 			tag = "size-full bg-over-media-0",
@@ -562,7 +562,7 @@ return function(p1)
 				size = if IsUseOnScreenKeyboardHeightModuleResultAbove then Size else UseBindingResult,
 				textOverlayEdit = DashModule.joinDeep(UseSignalStateResultEntry, {
 					rotation = 0,
-					position = _UDim2,
+					position = Position,
 					scale = Scale1,
 					textOverlayStyle = { fontSize = FontSize }
 				}),
@@ -609,7 +609,7 @@ return function(p1)
 		return nil
 	else
 		local IsUseSignalStateResultMatch1 = UseSignalStateResult == CreationFlowStateModule.Preview
-		local NoUseIsMultiTouchActiveResult: boolean = IsUseSignalStateResultMatch1 and not UseIsMultiTouchActiveResult
+		local Inverted: boolean = IsUseSignalStateResultMatch1 and not UseIsMultiTouchActiveResult
 		local IsUseSignalStateResultMatch1_1: boolean = FFlagMomentsTextOverlayV2Redesign and IsUseSignalStateResultMatch1
 		local IsUseSignalStateResultMatch1_2: boolean = FFlagMomentsTextOverlayV2Redesign and IsUseSignalStateResultMatch1
 		local FFlagMomentsTextOverlayDragToDeleteRefinementModule1 = FFlagMomentsTextOverlayV2Redesign and FFlagMomentsTextOverlayDragToDeleteRefinementModule
@@ -617,7 +617,7 @@ return function(p1)
 			editable = false,
 			clampToBoundsEnabled = not FFlagMomentsTextOverlayDragToDeleteRefinementModule1,
 			unboundedDragEnabled = if FFlagMomentsTextOverlayDragToDeleteRefinementModule1 then true else nil,
-			draggable = NoUseIsMultiTouchActiveResult,
+			draggable = Inverted,
 			itemResolution = UseSignalStateResult2,
 			itemSize = UseSignalStateResult1,
 			scaleType = Enum.ScaleType.Crop,
@@ -636,7 +636,7 @@ return function(p1)
 			editable = false,
 			clampToBoundsEnabled = not FFlagMomentsTextOverlayDragToDeleteRefinementModule1,
 			unboundedDragEnabled = if FFlagMomentsTextOverlayDragToDeleteRefinementModule1 then true else nil,
-			draggable = NoUseIsMultiTouchActiveResult,
+			draggable = Inverted,
 			itemResolution = UseSignalStateResult2,
 			itemSize = UseSignalStateResult1,
 			scaleType = Enum.ScaleType.Crop,

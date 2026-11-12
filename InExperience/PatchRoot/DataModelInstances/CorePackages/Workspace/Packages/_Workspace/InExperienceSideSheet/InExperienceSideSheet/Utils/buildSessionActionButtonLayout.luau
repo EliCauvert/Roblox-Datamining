@@ -4,69 +4,58 @@ local ReactModule = require(Parent.React)
 local View = require(Parent.Foundation).View
 local _ = require(InExperienceSideSheet.Common.Types)
 local ShortcutButtonModule = require(InExperienceSideSheet.Components.ShortcutButton)
+local FFlagSideSheetEmphasizeLeave = require(InExperienceSideSheet.Flags).FFlagSideSheetEmphasizeLeave
 local ButtonWidth = require(InExperienceSideSheet.Common.Enums).ButtonWidth
 
-local function _(p1, LayoutOrder, Width)
-	-- upvalues: ReactModule (copy), ShortcutButtonModule (copy)
+local function createShortcutButton(p1, LayoutOrder, Full)
+	-- upvalues: ReactModule (copy), ShortcutButtonModule (copy), FFlagSideSheetEmphasizeLeave (copy)
 	return ReactModule.createElement(ShortcutButtonModule, {
 		label = p1.label,
 		getShortcutIcon = p1.getShortcutIcon,
 		getOnActivated = p1.getOnActivated,
 		getIsEnabled = p1.getIsEnabled,
-		width = Width,
-		layoutOrder = LayoutOrder
+		width = Full,
+		layoutOrder = LayoutOrder,
+		isEmphasized = p1.isEmphasized,
+		testId = if FFlagSideSheetEmphasizeLeave then p1.testId else nil
 	})
 end
 
-local function buildHalfWidthRowLayoutItem(Entry, LayoutOrder)
-	-- upvalues: ButtonWidth (copy), ReactModule (copy), ShortcutButtonModule (copy), View (copy)
+local function buildHalfWidthRowLayoutItem(Entry, Count)
+	-- upvalues: createShortcutButton (copy), ButtonWidth (copy), ReactModule (copy), View (copy)
 	if #Entry == 1 then
 		local Entry1 = Entry[1]
 		
 		return {
 			key = Entry1.name,
-			node = ReactModule.createElement(ShortcutButtonModule, {
-				label = Entry1.label,
-				getShortcutIcon = Entry1.getShortcutIcon,
-				getOnActivated = Entry1.getOnActivated,
-				getIsEnabled = Entry1.getIsEnabled,
-				width = ButtonWidth.Full,
-				layoutOrder = LayoutOrder
-			})
+			node = createShortcutButton(Entry1, Count, ButtonWidth.Full)
 		}
 	end
-	local Elements = {}
+	local t = {}
 	
-	for LayoutOrder1, value in Entry do
-		Elements[value.name] = ReactModule.createElement(ShortcutButtonModule, {
-			label = value.label,
-			getShortcutIcon = value.getShortcutIcon,
-			getOnActivated = value.getOnActivated,
-			getIsEnabled = value.getIsEnabled,
-			width = ButtonWidth.Half,
-			layoutOrder = LayoutOrder1
-		})
+	for i, value in Entry do
+		t[value.name] = createShortcutButton(value, i, ButtonWidth.Half)
 	end
 	return {
-		key = "HalfWidthRow_" .. LayoutOrder,
+		key = "HalfWidthRow_" .. Count,
 		node = ReactModule.createElement(View, {
 			tag = "row gap-small size-full-0 auto-y",
-			LayoutOrder = LayoutOrder
-		}, Elements)
+			LayoutOrder = Count
+		}, t)
 	}
 end
 
 return function(List)
-	-- upvalues: buildHalfWidthRowLayoutItem (copy), ButtonWidth (copy), ReactModule (copy), ShortcutButtonModule (copy)
+	-- upvalues: buildHalfWidthRowLayoutItem (copy), ButtonWidth (copy), createShortcutButton (copy)
 	local Nodes = {}
-	local LayoutOrder = 0
+	local Count = 0
 	local Tbl = {}
 	
 	local function _()
-		-- upvalues: Tbl (copy), LayoutOrder (ref), buildHalfWidthRowLayoutItem (upval), Nodes (copy)
+		-- upvalues: Tbl (copy), Count (ref), buildHalfWidthRowLayoutItem (upval), Nodes (copy)
 		if #Tbl ~= 0 then
-			LayoutOrder += 1
-			local HalfWidthRowLayoutItem = buildHalfWidthRowLayoutItem(Tbl, LayoutOrder)
+			Count += 1
+			local HalfWidthRowLayoutItem = buildHalfWidthRowLayoutItem(Tbl, Count)
 			Nodes[HalfWidthRowLayoutItem.key] = HalfWidthRowLayoutItem.node
 			table.clear(Tbl)
 			
@@ -79,32 +68,25 @@ return function(List)
 			table.insert(Tbl, value)
 			
 			if #Tbl == 2 and #Tbl ~= 0 then
-				LayoutOrder += 1
-				local HalfWidthRowLayoutItem = buildHalfWidthRowLayoutItem(Tbl, LayoutOrder)
+				Count += 1
+				local HalfWidthRowLayoutItem = buildHalfWidthRowLayoutItem(Tbl, Count)
 				Nodes[HalfWidthRowLayoutItem.key] = HalfWidthRowLayoutItem.node
 				table.clear(Tbl)
 			end
 		else
 			if #Tbl ~= 0 then
-				LayoutOrder += 1
-				local HalfWidthRowLayoutItem = buildHalfWidthRowLayoutItem(Tbl, LayoutOrder)
+				Count += 1
+				local HalfWidthRowLayoutItem = buildHalfWidthRowLayoutItem(Tbl, Count)
 				Nodes[HalfWidthRowLayoutItem.key] = HalfWidthRowLayoutItem.node
 				table.clear(Tbl)
 			end
-			LayoutOrder += 1
-			Nodes[value.name] = ReactModule.createElement(ShortcutButtonModule, {
-				label = value.label,
-				getShortcutIcon = value.getShortcutIcon,
-				getOnActivated = value.getOnActivated,
-				getIsEnabled = value.getIsEnabled,
-				width = ButtonWidth.Full,
-				layoutOrder = LayoutOrder
-			})
+			Count += 1
+			Nodes[value.name] = createShortcutButton(value, Count, ButtonWidth.Full)
 		end
 	end
 	if #Tbl ~= 0 then
-		LayoutOrder += 1
-		local HalfWidthRowLayoutItem = buildHalfWidthRowLayoutItem(Tbl, LayoutOrder)
+		Count += 1
+		local HalfWidthRowLayoutItem = buildHalfWidthRowLayoutItem(Tbl, Count)
 		Nodes[HalfWidthRowLayoutItem.key] = HalfWidthRowLayoutItem.node
 		table.clear(Tbl)
 	end

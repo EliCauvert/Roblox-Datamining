@@ -1,6 +1,7 @@
 ﻿local Parent = script.Parent.Parent
 local _ = require(Parent.util.Types)
 local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local GetFFlagUGCValidateAQSRequiresOnlySummaryModule = require(Parent.flags.getFFlagUGCValidateAQSRequiresOnlySummary)
 local ValidationFolders = Parent.validationFolders
 local AssetQualityFolders = Parent.assetQualityFolders
 local t = {}
@@ -65,7 +66,7 @@ for ChildName, value3 in t1 do
 	end
 	local Module = require(ChildName1)
 	
-	for i2, value4 in Module do
+	for i2, _ in Module do
 		if typeof(i2) ~= "string" then
 			error(`{ChildName}.lua contains non-string key {tostring(i2)}`)
 		elseif not t2.ValidationConfig[i2] then
@@ -83,7 +84,8 @@ for ChildName, value3 in t1 do
 	Module.isAssetQualityModule = value3 == AssetQualityFolders
 	
 	if Module.isAssetQualityModule then
-		for _, value4 in list do
+		local List = if GetFFlagUGCValidateAQSRequiresOnlySummaryModule() then { ValidationEnumsModule.SharedDataMember.aqsSummaryData } else list
+		for _, value4 in List do
 			if not table.find(Module.requiredData, value4) then
 				table.insert(Module.requiredData, value4)
 			end

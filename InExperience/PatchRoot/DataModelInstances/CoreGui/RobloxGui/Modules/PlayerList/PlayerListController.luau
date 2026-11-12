@@ -14,7 +14,11 @@ local CachedPolicyServiceModule = require(CorePackages.Workspace.Packages.Cached
 local RoactModule = require(CorePackages.Packages.Roact)
 local RoduxModule = require(CorePackages.Packages.Rodux)
 local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
-local ColorMode = require(CorePackages.Packages.Foundation).Enums.ColorMode
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local FoundationProvider = FoundationModule.FoundationProvider
+local ColorMode = FoundationModule.Enums.ColorMode
+local ReactModule = require(CorePackages.Packages.React)
+local UseEventConnectionFunction = require(CorePackages.Packages.ReactUtils).useEventConnection
 local Constants = require(CorePackages.Packages.UIBlox).App.Style.Constants
 local ApolloClientModule = require(CoreGui.RobloxGui.Modules.ApolloClient)
 local ApolloProvider = require(CorePackages.Packages.ApolloClient).ApolloProvider
@@ -31,6 +35,9 @@ local PlayerIconInfoStoreModule = require(CorePackages.Workspace.Packages.Player
 local BlockingUtilityModule = require(CorePackages.Workspace.Packages.BlockingUtility)
 local Constants1 = PlayerListModule.Common.Constants
 local PlayerRelationshipStore = PlayerListModule.PlayerRelationshipStore
+local PlayerListPanel = PlayerListModule.Presentation.PlayerListPanel
+local PlayerContextualMenuView = PlayerListModule.Presentation.PlayerContextualMenuView
+local LeaderboardScrim = PlayerListModule.Presentation.LeaderboardScrim
 local SetPlayerListEnabledModule = require(Parent.Actions.SetPlayerListEnabled)
 local SetPlayerListVisibilityModule = require(Parent.Actions.SetPlayerListVisibility)
 local SetTempHideKeyModule = require(Parent.Actions.SetTempHideKey)
@@ -57,6 +64,7 @@ local FFlagPlayerListUseMobileOnSmallDisplay = PlayerListModule.Flags.FFlagPlaye
 local FFlagPlayerListIgnoreDevGamepadBindings = PlayerListModule.Flags.FFlagPlayerListIgnoreDevGamepadBindings
 local FFlagPlatformLeaderboardPersistStoreOnRemount = require(CorePackages.Workspace.Packages.SharedFlags).FFlagPlatformLeaderboardPersistStoreOnRemount
 local FFlagPlayerListReskin = PlayerListModule.Flags.FFlagPlayerListReskin
+local FFlagPlayerListContrastingTeamText = PlayerListModule.Flags.FFlagPlayerListContrastingTeamText
 local FFlagPlayerListPersistVisibilityModule = require(Parent.Flags.FFlagPlayerListPersistVisibility)
 local PlayerListContainer = PlayerListModule.Container.PlayerListContainer
 local LeaderboardStoreInstanceManager = PlayerListModule.LeaderboardStoreInstanceManager
@@ -144,12 +152,12 @@ local function setupSettings(Store)
 	end)
 end
 
-local Module = {}
-Module.__index = Module
+local PlayerListController = {}
+PlayerListController.__index = PlayerListController
 
-function Module.new()
-	-- upvalues: Module (copy), FFlagPlayerListReskin (copy), GlobalConfigModule (copy), RoactModule (copy), RoduxModule (copy), ReducerModule (copy), setupSettings (copy), StarterGui (copy), SetPlayerListEnabledModule (copy), SetSmallTouchDeviceModule (copy), UserInputService (copy), FFlagPlayerListUseMobileOnSmallDisplay (copy), GuiService (copy), UtilityModule (copy), IsReskinConsoleMobileRouteFunction (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy), FFlagEnableMobilePlayerListOnConsole (copy), FStringPlayerListOverrideTypeModule (copy), SetTenFootInterfaceModule (copy), TenFootInterfaceModule (copy), SetSubjectToChinaPoliciesModule (copy), CachedPolicyServiceModule (copy), ColorMode (copy), Constants (copy), RoactRoduxModule (copy), PlayerListSwitcherModule (copy), ApolloProvider (copy), ApolloClientModule (copy), SetIsUsingGamepadModule (copy), LeaderboardStoreInstanceManager (copy), FFlagReplacePlayerIconRoduxWithSignal (copy), PlayerIconInfoStore (copy), PlayerListContainer (copy), RobloxGui (copy), CoreGui (copy), FFlagAddNewPlayerListFocusNav (copy), FFlagTopBarSignalizeSetCores (copy), SignalsModule (copy), InExperienceTopBarModule (copy)
-	local self = setmetatable({}, Module)
+function PlayerListController.new()
+	-- upvalues: PlayerListController (copy), FFlagPlayerListReskin (copy), GlobalConfigModule (copy), RoactModule (copy), RoduxModule (copy), ReducerModule (copy), setupSettings (copy), StarterGui (copy), SetPlayerListEnabledModule (copy), SetSmallTouchDeviceModule (copy), UserInputService (copy), FFlagPlayerListUseMobileOnSmallDisplay (copy), GuiService (copy), UtilityModule (copy), IsReskinConsoleMobileRouteFunction (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy), FFlagEnableMobilePlayerListOnConsole (copy), FStringPlayerListOverrideTypeModule (copy), SetTenFootInterfaceModule (copy), TenFootInterfaceModule (copy), SetSubjectToChinaPoliciesModule (copy), CachedPolicyServiceModule (copy), ColorMode (copy), Constants (copy), RoactRoduxModule (copy), PlayerListSwitcherModule (copy), ApolloProvider (copy), ApolloClientModule (copy), SetIsUsingGamepadModule (copy), LeaderboardStoreInstanceManager (copy), FFlagReplacePlayerIconRoduxWithSignal (copy), PlayerIconInfoStore (copy), PlayerListContainer (copy), RobloxGui (copy), CoreGui (copy), FFlagAddNewPlayerListFocusNav (copy), FFlagTopBarSignalizeSetCores (copy), SignalsModule (copy), InExperienceTopBarModule (copy)
+	local self = setmetatable({}, PlayerListController)
 	
 	if FFlagPlayerListReskin then
 		return self:_setupReskin()
@@ -273,7 +281,7 @@ function Module.new()
 	return self
 end
 
-function Module:_updateMounted()
+function PlayerListController:_updateMounted()
 	-- upvalues: UserInputService (copy), IsReskinConsoleMobileRouteFunction (copy), GuiService (copy), FFlagEnableMobilePlayerListOnConsole (copy), TenFootInterfaceModule (copy), RoactModule (copy), CoreGui (copy)
 	if IsReskinConsoleMobileRouteFunction({
 		displaySize = GuiService.ViewportDisplaySize,
@@ -306,7 +314,7 @@ function Module:_updateMounted()
 	end
 end
 
-function Module._trackEnabled(p1)
+function PlayerListController._trackEnabled(p1)
 	-- upvalues: StarterGui (copy), SetPlayerListEnabledModule (copy), FFlagPlayerListIgnoreDevGamepadBindings (copy), GuiService (copy), Constants1 (copy)
 	StarterGui.CoreGuiChangedSignal:Connect(function(CoreGuiType, CoreGuiEnabled)
 		-- upvalues: p1 (copy), SetPlayerListEnabledModule (upval), FFlagPlayerListIgnoreDevGamepadBindings (upval), GuiService (upval), Constants1 (upval)
@@ -323,7 +331,7 @@ function Module._trackEnabled(p1)
 end
 
 if FFlagAddNewPlayerListMobileFocusNav then
-	function Module:GetIsModal()
+	function PlayerListController:GetIsModal()
 		-- upvalues: FFlagPlayerListReskin (copy), UserInputService (copy), FFlagPlayerListUseMobileOnSmallDisplay (copy), GuiService (copy), UtilityModule (copy), IsReskinConsoleMobileRouteFunction (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy), FFlagEnableMobilePlayerListOnConsole (copy), FStringPlayerListOverrideTypeModule (copy)
 		if FFlagPlayerListReskin then
 			local PreferredInput = UserInputService.PreferredInput
@@ -338,9 +346,47 @@ if FFlagAddNewPlayerListMobileFocusNav then
 		end
 	end
 end
-function Module:_setupReskin()
-	-- upvalues: CorePackages (copy), RobloxGui (copy), PlayerListModule (copy), Parent (copy), UserInputService (copy), IsReskinConsoleMobileRouteFunction (copy), GuiService (copy), FFlagEnableMobilePlayerListOnConsole (copy), TenFootInterfaceModule (copy), FFlagPlayerListUseMobileOnSmallDisplay (copy), UtilityModule (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy), FStringPlayerListOverrideTypeModule (copy), PlayerContextualMenuStore (copy), PlayerListVisibilityStore (copy), FFlagPlatformLeaderboardPersistStoreOnRemount (copy), PlatformLeaderboardsClientModule (copy), FFlagPlayerListPersistVisibilityModule (copy), SignalsModule (copy), Constants1 (copy), UserGameSettings (copy), PlayerListContainer (copy), LeaderboardStoreInstanceManager (copy), Players (copy), PlayerRelationshipStore (copy), MakePlayerInfoRequestsModule (copy), PlayerIconInfoStore (copy), BlockingUtilityModule (copy), FFlagBadgeVisibilitySettingEnabled (copy), RobloxReplicatedStorage (copy), CoreGui (copy), StarterGui (copy), FFlagEnableMobilePlayerListOnGamepad (copy), ContextActionService (copy), FFlagTopBarSignalizeSetCores (copy), InExperienceTopBarModule (copy)
-	local ReactModule = require(CorePackages.Packages.React)
+local PreferredTransparencyPropertyChangedSignal = UserGameSettings:GetPropertyChangedSignal("PreferredTransparency")
+
+local function ReskinElement(p1)
+	-- upvalues: FFlagPlayerListContrastingTeamText (copy), ReactModule (copy), UserGameSettings (copy), UseEventConnectionFunction (copy), PreferredTransparencyPropertyChangedSignal (copy), LeaderboardScrim (copy), FoundationModule (copy), PlayerListContainer (copy), LeaderboardStoreInstanceManager (copy), PlayerListPanel (copy), PlayerContextualMenuView (copy), FoundationProvider (copy), ColorMode (copy)
+	assert(FFlagPlayerListContrastingTeamText, "ReskinElement is only supported when FFlagPlayerListContrastingTeamText is on")
+	local UseStateResult, UseStateResult2 = ReactModule.useState(UserGameSettings.PreferredTransparency)
+	UseEventConnectionFunction(PreferredTransparencyPropertyChangedSignal, function()
+		-- upvalues: UseStateResult2 (copy), UserGameSettings (upval)
+		UseStateResult2(UserGameSettings.PreferredTransparency)
+	end, { PreferredTransparencyPropertyChangedSignal })
+	
+	return ReactModule.createElement(FoundationProvider, {
+		colorMode = ColorMode.Dark,
+		device = p1.foundationDevice,
+		preferences = { preferredTransparency = UseStateResult }
+	}, {
+		Scrim = ReactModule.createElement(LeaderboardScrim, { isSmallTouchDevice = p1.isSmallTouchDevice }),
+		Container = ReactModule.createElement(FoundationModule.View, p1.resolveContainerProps(), {
+			ReskinContainer = ReactModule.createElement(PlayerListContainer, {
+				leaderboardStore = LeaderboardStoreInstanceManager.getLeaderboardStoreInstance,
+				TopBarConstants = p1.TopBarConstants,
+				isTenFoot = p1.isTenFoot
+			}, {
+				PlayerListPanel = ReactModule.createElement(PlayerListPanel, {
+					isSmallTouchDevice = p1.isSmallTouchDevice,
+					title = p1.leaderboardTitle
+				})
+			})
+		}),
+		ContextMenu = ReactModule.createElement(PlayerContextualMenuView, { isSmallTouchDevice = p1.isSmallTouchDevice })
+	})
+end
+
+local _ = function(p1)
+	-- upvalues: ReactModule (copy), ReskinElement (copy)
+	return ReactModule.createElement(ReskinElement, p1)
+end
+
+function PlayerListController:_setupReskin()
+	-- upvalues: CorePackages (copy), RobloxGui (copy), Parent (copy), UserInputService (copy), IsReskinConsoleMobileRouteFunction (copy), GuiService (copy), FFlagEnableMobilePlayerListOnConsole (copy), TenFootInterfaceModule (copy), FFlagPlayerListUseMobileOnSmallDisplay (copy), UtilityModule (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy), FStringPlayerListOverrideTypeModule (copy), PlayerContextualMenuStore (copy), PlayerListVisibilityStore (copy), FFlagPlatformLeaderboardPersistStoreOnRemount (copy), PlatformLeaderboardsClientModule (copy), FFlagPlayerListPersistVisibilityModule (copy), SignalsModule (copy), Constants1 (copy), UserGameSettings (copy), LeaderboardScrim (copy), PlayerListContainer (copy), LeaderboardStoreInstanceManager (copy), PlayerListPanel (copy), PlayerContextualMenuView (copy), Players (copy), PlayerRelationshipStore (copy), MakePlayerInfoRequestsModule (copy), PlayerIconInfoStore (copy), BlockingUtilityModule (copy), FFlagBadgeVisibilitySettingEnabled (copy), RobloxReplicatedStorage (copy), CoreGui (copy), FFlagPlayerListContrastingTeamText (copy), ReactModule (copy), ReskinElement (copy), StarterGui (copy), FFlagEnableMobilePlayerListOnGamepad (copy), ContextActionService (copy), FFlagTopBarSignalizeSetCores (copy), InExperienceTopBarModule (copy)
+	local ReactModule1 = require(CorePackages.Packages.React)
 	local ReactRobloxModule = require(CorePackages.Packages.ReactRoblox)
 	local ConstantsModule = require(RobloxGui.Modules.TopBar.Constants)
 	local FoundationModule = require(CorePackages.Packages.Foundation)
@@ -348,9 +394,6 @@ function Module:_setupReskin()
 	local ColorMode = FoundationModule.Enums.ColorMode
 	local Device = FoundationModule.Enums.Device
 	local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
-	local PlayerListPanel = PlayerListModule.Presentation.PlayerListPanel
-	local PlayerContextualMenuView = PlayerListModule.Presentation.PlayerContextualMenuView
-	local LeaderboardScrim = PlayerListModule.Presentation.LeaderboardScrim
 	local ContextMenuControllerModule = require(Parent.ContextMenuController)
 	
 	local function _(p1, p2)
@@ -502,7 +545,7 @@ function Module:_setupReskin()
 		return UDim2.new(0.5, 0, 0, TopBarHeight + math.max(MOBILEEDGEGAP, ConstantsModule.ApplyDisplayScale(MOBILEEDGEGAP)))
 	end
 	
-	local Binding, Binding2 = ReactModule.createBinding(computeMobilePosition())
+	local Binding, Binding2 = ReactModule1.createBinding(computeMobilePosition())
 	
 	local function resolveContainerProps()
 		-- upvalues: IsSmallTouchScreen (ref), Binding (copy), ConstantsModule (copy), TopBarHeight (copy)
@@ -526,25 +569,25 @@ function Module:_setupReskin()
 	end
 	
 	local function buildReskinElement()
-		-- upvalues: ReactModule (copy), FoundationProvider (copy), ColorMode (copy), Console (ref), UserGameSettings (upval), LeaderboardScrim (copy), IsSmallTouchScreen (ref), FoundationModule (copy), resolveContainerProps (copy), PlayerListContainer (upval), LeaderboardStoreInstanceManager (upval), ConstantsModule (copy), IsEnabled (copy), PlayerListPanel (copy), Result1 (copy), PlayerContextualMenuView (copy)
-		return ReactModule.createElement(FoundationProvider, {
+		-- upvalues: ReactModule1 (copy), FoundationProvider (copy), ColorMode (copy), Console (ref), UserGameSettings (upval), LeaderboardScrim (upval), IsSmallTouchScreen (ref), FoundationModule (copy), resolveContainerProps (copy), PlayerListContainer (upval), LeaderboardStoreInstanceManager (upval), ConstantsModule (copy), IsEnabled (copy), PlayerListPanel (upval), Result1 (copy), PlayerContextualMenuView (upval)
+		return ReactModule1.createElement(FoundationProvider, {
 			colorMode = ColorMode.Dark,
 			device = Console,
 			preferences = {
 				preferredTransparency = UserGameSettings.PreferredTransparency
 			}
 		}, {
-			Scrim = ReactModule.createElement(LeaderboardScrim, { isSmallTouchDevice = IsSmallTouchScreen }),
-			Container = ReactModule.createElement(FoundationModule.View, resolveContainerProps(), {
-				ReskinContainer = ReactModule.createElement(PlayerListContainer, {
+			Scrim = ReactModule1.createElement(LeaderboardScrim, { isSmallTouchDevice = IsSmallTouchScreen }),
+			Container = ReactModule1.createElement(FoundationModule.View, resolveContainerProps(), {
+				ReskinContainer = ReactModule1.createElement(PlayerListContainer, {
 					leaderboardStore = LeaderboardStoreInstanceManager.getLeaderboardStoreInstance,
 					TopBarConstants = ConstantsModule,
 					isTenFoot = IsEnabled
 				}, {
-					PlayerListPanel = ReactModule.createElement(PlayerListPanel, { isSmallTouchDevice = IsSmallTouchScreen, title = Result1 })
+					PlayerListPanel = ReactModule1.createElement(PlayerListPanel, { isSmallTouchDevice = IsSmallTouchScreen, title = Result1 })
 				})
 			}),
-			ContextMenu = ReactModule.createElement(PlayerContextualMenuView, { isSmallTouchDevice = IsSmallTouchScreen })
+			ContextMenu = ReactModule1.createElement(PlayerContextualMenuView, { isSmallTouchDevice = IsSmallTouchScreen })
 		})
 	end
 	
@@ -652,7 +695,7 @@ function Module:_setupReskin()
 	end
 	
 	local function mountReskin()
-		-- upvalues: PlayerListVisibilityStore (upval), FFlagPlayerListPersistVisibilityModule (upval), IsSmallTouchScreen (ref), IsEnabled (copy), CoreGui (upval), ReactRobloxModule (copy), buildReskinElement (copy), self (copy), Binding2 (copy), computeMobilePosition (copy), setupPlayerInfoRequests (copy)
+		-- upvalues: PlayerListVisibilityStore (upval), FFlagPlayerListPersistVisibilityModule (upval), IsSmallTouchScreen (ref), IsEnabled (copy), CoreGui (upval), ReactRobloxModule (copy), FFlagPlayerListContrastingTeamText (upval), Console (ref), Result1 (copy), ConstantsModule (copy), resolveContainerProps (copy), ReactModule (upval), ReskinElement (upval), buildReskinElement (copy), self (copy), Binding2 (copy), computeMobilePosition (copy), setupPlayerInfoRequests (copy)
 		PlayerListVisibilityStore.setShouldPersistVisibility(FFlagPlayerListPersistVisibilityModule and (not IsSmallTouchScreen and not IsEnabled))
 		local PlayerListReskin = Instance.new("ScreenGui")
 		PlayerListReskin.Name = "PlayerListReskin"
@@ -663,7 +706,14 @@ function Module:_setupReskin()
 		PlayerListReskin.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 		PlayerListReskin.Parent = CoreGui
 		local Root = ReactRobloxModule.createRoot(PlayerListReskin)
-		Root:render(buildReskinElement())
+		Root:render(if FFlagPlayerListContrastingTeamText then ReactModule.createElement(ReskinElement, {
+			isSmallTouchDevice = IsSmallTouchScreen,
+			isTenFoot = IsEnabled,
+			foundationDevice = Console,
+			leaderboardTitle = Result1,
+			TopBarConstants = ConstantsModule,
+			resolveContainerProps = resolveContainerProps
+		}) else buildReskinElement())
 		self._reskinRoot = Root
 		self._reskinScreenGui = PlayerListReskin
 		
@@ -826,26 +876,26 @@ function Module:_setupReskin()
 	return self
 end
 
-function Module.GetVisibility(p1)
+function PlayerListController.GetVisibility(p1)
 	-- upvalues: FFlagPlayerListReskin (copy), PlayerListVisibilityStore (copy)
 	return if FFlagPlayerListReskin then PlayerListVisibilityStore.getEffectiveVisible(false) else p1.store:getState().displayOptions.isVisible
 end
 
 if FFlagAddNewPlayerListFocusNav then
-	function Module:GetVisibilityChangedEvent()
+	function PlayerListController:GetVisibilityChangedEvent()
 		return self.VisibilityChangedEvent
 	end
 end
-function Module.GetSetVisible(p1)
+function PlayerListController.GetSetVisible(p1)
 	-- upvalues: FFlagPlayerListReskin (copy), PlayerListVisibilityStore (copy)
 	return if FFlagPlayerListReskin then PlayerListVisibilityStore.getVisible(false) else p1.store:getState().displayOptions.setVisible
 end
 
-function Module:GetSetVisibleChangedEvent()
+function PlayerListController:GetSetVisibleChangedEvent()
 	return self.SetVisibleChangedEvent
 end
 
-function Module:SetVisibility(p1)
+function PlayerListController:SetVisibility(p1)
 	-- upvalues: FFlagPlayerListReskin (copy), PlayerContextualMenuStore (copy), PlayerListVisibilityStore (copy), SetPlayerListVisibilityModule (copy)
 	if not FFlagPlayerListReskin then
 		self.store:dispatch(SetPlayerListVisibilityModule(p1))
@@ -858,7 +908,7 @@ function Module:SetVisibility(p1)
 	PlayerListVisibilityStore.setVisible(p1)
 end
 
-function Module:HideTemp(p1, Enabled)
+function PlayerListController:HideTemp(p1, Enabled)
 	-- upvalues: FFlagPlayerListReskin (copy), PlayerContextualMenuStore (copy), PlayerListVisibilityStore (copy), SetTempHideKeyModule (copy)
 	if FFlagPlayerListReskin then
 		if Enabled and PlayerContextualMenuStore.getMenuData(false) ~= nil then
@@ -875,7 +925,7 @@ function Module:HideTemp(p1, Enabled)
 	end
 end
 
-function Module:SetTopBarEnabled(TopBarEnabled)
+function PlayerListController:SetTopBarEnabled(TopBarEnabled)
 	-- upvalues: FFlagPlayerListReskin (copy), LeaderboardStoreInstanceManager (copy)
 	if not FFlagPlayerListReskin then
 		self.topBarEnabled = TopBarEnabled
@@ -901,7 +951,7 @@ function Module:SetTopBarEnabled(TopBarEnabled)
 	end
 end
 
-function Module:SetMinimized(p1)
+function PlayerListController:SetMinimized(p1)
 	-- upvalues: FFlagPlayerListReskin (copy), SetMinimizedModule (copy)
 	if not FFlagPlayerListReskin then
 		self.store:dispatch(SetMinimizedModule(p1))
@@ -910,4 +960,4 @@ function Module:SetMinimized(p1)
 	end
 end
 
-return Module
+return PlayerListController

@@ -14,6 +14,13 @@ return function()
 				-- upvalues: SocialServerDrivenUi (upval)
 				return require(SocialServerDrivenUi.Impressions.SduiPlayerTileImpressionsHandler)
 			end
-		} else nil
+		} else nil,
+		[SduiImpressionEventType.socialProofTextImpressions] = {
+			skipItemImpressionsLog = true,
+			lazyHandler = function()
+				-- upvalues: SocialServerDrivenUi (upval)
+				return require(SocialServerDrivenUi.Impressions.SduiSocialProofTextImpressionsHandler)
+			end
+		}
 	})
 end

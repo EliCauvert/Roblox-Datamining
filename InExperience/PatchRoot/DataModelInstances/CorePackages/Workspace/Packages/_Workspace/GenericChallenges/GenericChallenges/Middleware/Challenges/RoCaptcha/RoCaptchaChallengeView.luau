@@ -162,7 +162,7 @@ local function DialogContent(p1)
 		Backdrop = ReactModule.createElement("Frame", {
 			Size = UDim2.fromScale(1, 1),
 			BackgroundColor3 = UseTokensResult.Color.Common.Backdrop.Color3,
-			BackgroundTransparency = UseTokensResult.Color.Common.Backdrop.Transparency,
+			BackgroundTransparency = 0,
 			BorderSizePixel = 0,
 			ZIndex = 1,
 			[ReactModule.Change.AbsoluteSize] = function(Frame)
@@ -288,6 +288,7 @@ return function(p2)
 	return ReactModule.createElement("ScreenGui", {
 		DisplayOrder = 200,
 		IgnoreGuiInset = true,
+		OnTopOfCoreBlur = true,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	}, {
 		FoundationRoot = ReactModule.createElement(FoundationProvider, { colorMode = ColorMode.Dark }, {

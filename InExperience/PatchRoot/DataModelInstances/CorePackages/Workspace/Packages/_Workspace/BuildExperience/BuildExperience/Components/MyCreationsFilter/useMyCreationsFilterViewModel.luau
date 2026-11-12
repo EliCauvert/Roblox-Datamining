@@ -5,6 +5,7 @@ local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local FFlagBuildExperienceFiltersSaveLabelModule = require(BuildExperience.Flags.FFlagBuildExperienceFiltersSaveLabel)
 local FFlagBuildExperiencePreviewsTabModule = require(BuildExperience.Flags.FFlagBuildExperiencePreviewsTab)
 local GamesFilterModule = require(BuildExperience.Stores.GetMyCreationsFilterStore.GamesFilter)
 local GetMyCreationsFilterStoreModule = require(BuildExperience.Stores.GetMyCreationsFilterStore)
@@ -20,7 +21,7 @@ local function _(p1): string
 end
 
 return function(Frame)
-	-- upvalues: GetMyCreationsFilterStoreModule (copy), CreatorGroupsModule (copy), ReactModule (copy), UseSignalStateFunction (copy), config (copy), list (copy), FFlagBuildExperiencePreviewsTabModule (copy), LocalizationStringsModule (copy), UseLocalizationFunction (copy), UseClosableFocusRootModule (copy), FocusNavigableSurfaceIdentifierEnum (copy), GamesFilterModule (copy), MatchesSearchQueryModule (copy)
+	-- upvalues: GetMyCreationsFilterStoreModule (copy), CreatorGroupsModule (copy), ReactModule (copy), UseSignalStateFunction (copy), config (copy), list (copy), FFlagBuildExperiencePreviewsTabModule (copy), LocalizationStringsModule (copy), FFlagBuildExperienceFiltersSaveLabelModule (copy), UseLocalizationFunction (copy), UseClosableFocusRootModule (copy), FocusNavigableSurfaceIdentifierEnum (copy), GamesFilterModule (copy), MatchesSearchQueryModule (copy)
 	local FilterStore = Frame.filterStore or GetMyCreationsFilterStoreModule()
 	local UseFilterResult = FilterStore.useFilter()
 	local CreatorGroupsStore = Frame.creatorGroupsStore or CreatorGroupsModule.getCreatorGroupsStore()
@@ -40,7 +41,7 @@ return function(Frame)
 	local UseLocalizationResult = UseLocalizationFunction({
 		all = LocalizationStringsModule.MY_CREATIONS_FILTER_ALL,
 		allGames = LocalizationStringsModule.MY_CREATIONS_FILTER_ALL_GAMES,
-		apply = LocalizationStringsModule.MY_CREATIONS_FILTER_APPLY,
+		apply = if FFlagBuildExperienceFiltersSaveLabelModule then LocalizationStringsModule.MY_CREATIONS_FILTER_SAVE else LocalizationStringsModule.MY_CREATIONS_FILTER_APPLY,
 		games = LocalizationStringsModule.MY_CREATIONS_FILTER_GAMES,
 		groupGames = LocalizationStringsModule.MY_CREATIONS_FILTER_GROUP_GAMES,
 		groups = LocalizationStringsModule.MY_CREATIONS_FILTER_GROUPS,

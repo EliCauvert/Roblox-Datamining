@@ -11,9 +11,7 @@ local RoactFitComponentsModule = require(Parent2.RoactFitComponents)
 local FitFrameVertical = RoactFitComponentsModule.FitFrameVertical
 local FitTextLabel = RoactFitComponentsModule.FitTextLabel
 local UIBloxModule = require(Parent2.UIBlox)
-local FoundationModule = require(Parent2.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent2.Foundation).Utility.normalizeFontFace
 local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
@@ -462,7 +460,7 @@ function ExtendResult.renderNewAlert(p1)
 end
 
 function ExtendResult.renderFooterExperiment(p1, p2, Text, Text1)
-	-- upvalues: Colors (copy), RoactModule (copy), FitFrameVertical (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), FFlagLowCogsBannerInfoIconModule (copy), InfoIconWithTooltipModule (copy)
+	-- upvalues: Colors (copy), RoactModule (copy), FitFrameVertical (copy), NormalizeFontFaceFunction (copy), FFlagLowCogsBannerInfoIconModule (copy), InfoIconWithTooltipModule (copy)
 	local _Font = p2.Font
 	local Flint = Colors.Flint
 	
@@ -498,8 +496,7 @@ function ExtendResult.renderFooterExperiment(p1, p2, Text, Text1)
 					RichText = true,
 					TextWrap = true,
 					AutomaticSize = Enum.AutomaticSize.XY,
-					Font = if FoundationFontFaceMigration then nil else _Font.Footer.Font,
-					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.CaptionSmall.Font) else nil,
+					FontFace = NormalizeFontFaceFunction(p2.Tokens.Typography.CaptionSmall.Font),
 					Text = Text,
 					TextSize = _Font.BaseSize * _Font.Footer.RelativeSize,
 					TextColor3 = Flint

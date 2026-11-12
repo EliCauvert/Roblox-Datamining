@@ -1,11 +1,15 @@
-﻿local FFlagLuaAppGamepadSelectionRespectsInteractable = require(script:FindFirstAncestor("VirtualCursorModular").Parent.SharedFlags).FFlagLuaAppGamepadSelectionRespectsInteractable
+﻿local SharedFlagsModule = require(script:FindFirstAncestor("VirtualCursorModular").Parent.SharedFlags)
+local FFlagLuaAppGamepadSelectionRespectsInteractable = SharedFlagsModule.FFlagLuaAppGamepadSelectionRespectsInteractable
+local FFlagVirtualCursorInputSink = SharedFlagsModule.FFlagVirtualCursorInputSink
 
-return function(Frame): boolean
-	-- upvalues: FFlagLuaAppGamepadSelectionRespectsInteractable (copy)
+return function(Frame, p1): boolean
+	-- upvalues: FFlagVirtualCursorInputSink (copy), FFlagLuaAppGamepadSelectionRespectsInteractable (copy)
 	if not Frame:IsA("GuiButton") and not Frame:IsA("TextBox") then
 		return false
 	end
-	if not Frame.Visible or not Frame.Active or not Frame.Selectable then
+	local Interactable = if FFlagVirtualCursorInputSink and p1 then Frame.Interactable else Frame.Active
+	
+	if not Frame.Visible or not Interactable or not Frame.Selectable then
 		return false
 	end
 	if Frame.AbsoluteSize.Magnitude == 0 then

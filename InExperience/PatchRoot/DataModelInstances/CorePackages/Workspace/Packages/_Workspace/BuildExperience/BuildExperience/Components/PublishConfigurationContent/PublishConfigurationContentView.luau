@@ -82,6 +82,7 @@ return function(p1)
 			title = VersionInformationTitle,
 			body = VersionInformationBody,
 			rows = List,
+			onRowActivated = p1.onRowActivated,
 			testId = `{TestId}-version-information`
 		}),
 		GameDetails = ReactModule.createElement(GameConfigurationListModule, {
@@ -89,6 +90,7 @@ return function(p1)
 			title = GameDetails,
 			body = GameDetailsBody,
 			rows = Rows,
+			onRowActivated = p1.onRowActivated,
 			testId = `{TestId}-game-details`
 		}),
 		Content = ReactModule.createElement(View, {
@@ -101,6 +103,7 @@ return function(p1)
 				title = ContentTitle,
 				body = ContentBody,
 				rows = Rows1,
+				onRowActivated = p1.onRowActivated,
 				testId = `{TestId}-content`
 			}),
 			BuildMaturityBanner = if p1.buildMaturityBannerText == nil then nil else ReactModule.createElement(BuildMaturityBannerModule, { text = p1.buildMaturityBannerText })

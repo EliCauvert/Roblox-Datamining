@@ -1,4 +1,5 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
 local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
 local InternalDrawerLayoutModule = require(Foundation.Enums.InternalDrawerLayout)
 local InternalDrawerSideModule = require(Foundation.Enums.InternalDrawerSide)
@@ -57,8 +58,11 @@ local function variantsFactory(p1)
 end
 
 return function(p1, p2)
-	-- upvalues: UseTokensModule (copy), VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
+	-- upvalues: UseTokensModule (copy), VariantsContextModule (copy), variantsFactory (copy), ReactModule (copy), ComposeStyleVariantModule (copy)
 	local InternalDrawer = VariantsContextModule.useVariants("InternalDrawer", variantsFactory, (UseTokensModule()))
 	
-	return ComposeStyleVariantModule(InternalDrawer.common, InternalDrawer.layout[p1], InternalDrawer.side[p2])
+	return ReactModule.useMemo(function()
+		-- upvalues: ComposeStyleVariantModule (upval), InternalDrawer (copy), p1 (copy), p2 (copy)
+		return ComposeStyleVariantModule(InternalDrawer.common, InternalDrawer.layout[p1], InternalDrawer.side[p2])
+	end, { InternalDrawer, p1, p2 })
 end

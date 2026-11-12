@@ -27,6 +27,7 @@ local FFlagIntegrationsChromeShortcutTelemetryModule = require(ChromeShared.Pare
 local ChromeDeprecateMRUs = game:DefineFastFlag("ChromeDeprecateMRUs", false)
 local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 local FFlagEnableSideSheetWidgets = SharedFlagsModule.FFlagEnableSideSheetWidgets
+local FFlagSideSheetUnifiedMenuOrder = SharedFlagsModule.FFlagSideSheetUnifiedMenuOrder
 local FFlagEnableChromeWindowsNotInMenu = require(ChromeShared.Flags).FFlagEnableChromeWindowsNotInMenu
 local FFlagChromeNineDotActivityIndicator = require(ChromeShared.Flags).FFlagChromeNineDotActivityIndicator
 local ToggleSideSheetFunction = nil
@@ -530,7 +531,7 @@ end
 
 if IsSideSheetEnabledModule then
 	function ChromeService.updateSideSheet(p2)
-		-- upvalues: SideSheetPlacement (copy), FFlagEnableSideSheetWidgets (copy), IsPioneerLaunchFunction (copy), RegisterSideSheetIntegrationsFunction (ref)
+		-- upvalues: SideSheetPlacement (copy), FFlagSideSheetUnifiedMenuOrder (copy), FFlagEnableSideSheetWidgets (copy), IsPioneerLaunchFunction (copy), RegisterSideSheetIntegrationsFunction (ref)
 		local Count = 0
 		local AboveFoldIntegrations = {}
 		local UnibarIntegrations = {}
@@ -540,7 +541,7 @@ if IsSideSheetEnabledModule then
 		local ScrollableContentBottomWidgetIntegrations = {}
 		
 		local function addIntegration(Id)
-			-- upvalues: p2 (copy), SideSheetPlacement (upval), UnibarIntegrations (copy), Count (ref), AboveFoldIntegrations (copy), BelowFoldIntegrations (copy), SessionActionIntegrations (copy), FFlagEnableSideSheetWidgets (upval), IsPioneerLaunchFunction (upval), ScrollableContentTopWidgetIntegrations (copy), ScrollableContentBottomWidgetIntegrations (copy)
+			-- upvalues: p2 (copy), SideSheetPlacement (upval), UnibarIntegrations (copy), Count (ref), FFlagSideSheetUnifiedMenuOrder (upval), BelowFoldIntegrations (copy), AboveFoldIntegrations (copy), SessionActionIntegrations (copy), FFlagEnableSideSheetWidgets (upval), IsPioneerLaunchFunction (upval), ScrollableContentTopWidgetIntegrations (copy), ScrollableContentBottomWidgetIntegrations (copy)
 			local Integration = p2._integrations[Id]
 			
 			if not Integration or Integration.sideSheetPlacement == SideSheetPlacement.None or not p2:isIntegrationValid(Id) then return end
@@ -549,13 +550,13 @@ if IsSideSheetEnabledModule then
 				
 				return
 			end
-			if Integration.sideSheetPlacement == SideSheetPlacement.AboveFold then
-				table.insert(AboveFoldIntegrations, p2:createIconProps(Id, Count))
+			if Integration.sideSheetPlacement == SideSheetPlacement.BelowFold or FFlagSideSheetUnifiedMenuOrder and Integration.sideSheetPlacement == SideSheetPlacement.AboveFold then
+				table.insert(BelowFoldIntegrations, p2:createIconProps(Id, Count))
 				
 				return
 			end
-			if Integration.sideSheetPlacement == SideSheetPlacement.BelowFold then
-				table.insert(BelowFoldIntegrations, p2:createIconProps(Id, Count))
+			if Integration.sideSheetPlacement == SideSheetPlacement.AboveFold then
+				table.insert(AboveFoldIntegrations, p2:createIconProps(Id, Count))
 				
 				return
 			end

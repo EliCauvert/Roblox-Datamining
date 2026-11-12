@@ -5,6 +5,7 @@ local FFlagBuildExperienceManageMonetizationTool = SharedFlagsModule.FFlagBuildE
 
 return {
 	FFlagBuildAgentAdCampaignCard = require(script.FFlagBuildAgentAdCampaignCard),
+	FFlagBuildExperienceThoughtStatus = require(script.FFlagBuildExperienceThoughtStatus),
 	getCreatorAgentChatStore = require(script.getCreatorAgentChatStore),
 	createCreatorAgentChatStore = require(script.createCreatorAgentChatStore),
 	createMockStore = require(script.createMockStore),
@@ -29,6 +30,7 @@ return {
 	requestBuildSuggestions = require(script.BuildSuggestions.requestBuildSuggestions),
 	debug = require(script.debug),
 	experimentOverride = require(script.experimentOverride),
+	chatOpenTelemetry = require(script.chatOpenTelemetry),
 	captureSendConfiguration = require(script.sendConfiguration).capture,
 	PreviewSpecs = require(script.PreviewSpecs),
 	ErrorCodes = require(script.Acp.AcpProtocol).ErrorCodes,

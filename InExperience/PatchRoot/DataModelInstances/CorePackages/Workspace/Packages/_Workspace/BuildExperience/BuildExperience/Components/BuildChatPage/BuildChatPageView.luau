@@ -36,10 +36,8 @@ local FFlagBuildExperienceLibrary = require(Parent.SharedFlags).FFlagBuildExperi
 local _ = require(BuildExperience.Chat.useChatSessionCore)
 local FFlagEnableBuildAdPromotionModule = require(BuildExperience.Flags.FFlagEnableBuildAdPromotion)
 local FFlagBuildExperienceChatAccordionScrollAnchorModule = require(BuildExperience.Flags.FFlagBuildExperienceChatAccordionScrollAnchor)
-local FFlagBuildExperienceChatImageAttachmentsModule = require(BuildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local _ = require(BuildExperience.useGamePermissions)
-local FFlagBuildExperienceChatResourceAttachments = require(Parent.SharedFlags).FFlagBuildExperienceChatResourceAttachments
 local UseScrollPerformanceTrackerModule = require(BuildExperience.Telemetry.useScrollPerformanceTracker)
 local Divider = FoundationModule.Divider
 local IconButton = FoundationModule.IconButton
@@ -135,7 +133,7 @@ local function renderAdUpsells(p1, Tbl, ScrollingFrameRef, CongratsText)
 end
 
 return function(p2)
-	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), IsEnabled (copy), ReactModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildAdUpsellModule (copy), UseTokensFunction (copy), UseScrollPerformanceTrackerModule (copy), ChatMessageListModule (copy), BuildEmptyStateModule (copy), FFlagBuildAgentAdCampaignCardModule (copy), ChatConstantsModule (copy), PushNotificationsUpsellCardModule (copy), renderAdUpsells (copy), AnswerFormContainerModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FFlagBuildCheckGamePermissionsModule (copy), ChatPermissionsContextModule (copy), View (copy), FFlagBuildAdUpsellPinnedModule (copy), BuyMoreRobuxCardModule (copy), ChatActionsModule (copy), FFlagBuildExperienceModelPickerModule (copy), FFlagBuildExperienceChatImageAttachmentsModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), FFlagBuildExperienceLibrary (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), Text (copy), PlayButtonModule (copy), IconVariant (copy), BuildOverflowMenuButtonModule (copy), FFlagEnableBuildAdPromotionModule (copy), Divider (copy), ScrollView (copy), AgentSpecDebugSheetModule (copy), CreateAdCampaignSheetContainerModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), AdCampaignCreatedToastModule (copy)
+	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), IsEnabled (copy), ReactModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildAdUpsellModule (copy), UseTokensFunction (copy), UseScrollPerformanceTrackerModule (copy), ChatMessageListModule (copy), BuildEmptyStateModule (copy), FFlagBuildAgentAdCampaignCardModule (copy), ChatConstantsModule (copy), PushNotificationsUpsellCardModule (copy), renderAdUpsells (copy), AnswerFormContainerModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FFlagBuildCheckGamePermissionsModule (copy), ChatPermissionsContextModule (copy), View (copy), FFlagBuildAdUpsellPinnedModule (copy), BuyMoreRobuxCardModule (copy), ChatActionsModule (copy), FFlagBuildExperienceModelPickerModule (copy), FFlagBuildExperienceLibrary (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), Text (copy), PlayButtonModule (copy), IconVariant (copy), BuildOverflowMenuButtonModule (copy), FFlagEnableBuildAdPromotionModule (copy), Divider (copy), ScrollView (copy), AgentSpecDebugSheetModule (copy), CreateAdCampaignSheetContainerModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), AdCampaignCreatedToastModule (copy)
 	local HasAnswerForm: boolean = FFlagBuildExperienceAnswerFormModule and p2.answerForm ~= nil
 	local v1 = false
 	local Callback = nil
@@ -382,12 +380,12 @@ return function(p2)
 					isPromptChipsLoading = p2.isPromptChipsLoading,
 					onPromptChipActivated = p2.onPromptChipActivated,
 					onPromptChipExhausted = p2.onPromptChipExhausted,
-					images = if FFlagBuildExperienceChatImageAttachmentsModule then p2.composerImages else nil,
-					onImagesChanged = if FFlagBuildExperienceChatImageAttachmentsModule then p2.onComposerImagesChanged else nil,
-					onRetryImage = if FFlagBuildExperienceChatImageAttachmentsModule then p2.onRetryComposerImage else nil,
+					images = p2.composerImages,
+					onImagesChanged = p2.onComposerImagesChanged,
+					onRetryImage = p2.onRetryComposerImage,
 					isSendBlocked = p2.isComposerSendBlocked,
-					resourceAttachments = if FFlagBuildExperienceChatResourceAttachments then p2.composerResourceAttachments else nil,
-					onRemoveResourceAttachment = if FFlagBuildExperienceChatResourceAttachments then p2.onRemoveComposerResourceAttachment else nil,
+					resourceAttachments = p2.composerResourceAttachments,
+					onRemoveResourceAttachment = p2.onRemoveComposerResourceAttachment,
 					placeholder = UseLocalizationResult.composerPlaceholder,
 					textBoxRef = p2.textBoxRef,
 					isAssistantResponding = p2.isAssistantResponding,
@@ -429,7 +427,7 @@ return function(p2)
 			attemptedOption = p2.agentAdCampaignAttemptedOption,
 			runStartTimeMs = p2.agentAdCampaignRunStartTimeMs
 		}) else nil,
-		AdCampaignCreatedToast = if FFlagBuildAdUpsellModule and (p2.isAdCampaignCreatedToastVisible and p2.isAdUpsellVisible) then ReactModule.createElement(AdCampaignCreatedToastModule, {
+		AdCampaignCreatedToast = if FFlagBuildAdUpsellModule and p2.isAdCampaignCreatedToastVisible and p2.isAdUpsellVisible then ReactModule.createElement(AdCampaignCreatedToastModule, {
 			testId = "AdCampaignCreatedToast",
 			actionText = if p2.onOpenGetUsersPage == nil then nil else UseLocalizationResult.adCampaignCreatedView,
 			onActionActivated = p2.onOpenGetUsersPage,

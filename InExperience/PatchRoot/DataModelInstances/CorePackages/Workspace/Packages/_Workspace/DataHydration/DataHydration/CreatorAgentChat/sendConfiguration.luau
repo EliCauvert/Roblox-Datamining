@@ -1,5 +1,6 @@
 ﻿local _ = require(script.Parent.Types.acpSession)
 local _ = require(script.Parent.Types.model)
+local FFlagBuildExperienceAdvancedPreviewSpecs = require(script:FindFirstAncestor("DataHydration").Parent.SharedFlags).FFlagBuildExperienceAdvancedPreviewSpecs
 
 return {
 	capture = function(Tier, Tbl)
@@ -17,10 +18,14 @@ return {
 		return table.freeze({ tier = Tier, experiment = Copy })
 	end,
 	sameExperiment = function(p1, p2): boolean
+		-- upvalues: FFlagBuildExperienceAdvancedPreviewSpecs (copy)
 		if p1 == nil or p2 == nil then
 			return p1 == p2
 		end
 		if p1.specVersion ~= p2.specVersion or p1.runId ~= p2.runId then
+			return false
+		end
+		if FFlagBuildExperienceAdvancedPreviewSpecs and p1.specName ~= p2.specName then
 			return false
 		end
 		local ClientToolConfig = p1.clientToolConfig

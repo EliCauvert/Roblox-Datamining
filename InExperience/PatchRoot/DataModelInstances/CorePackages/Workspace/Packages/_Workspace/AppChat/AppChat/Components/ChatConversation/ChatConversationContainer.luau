@@ -289,7 +289,7 @@ function ChatConversationContainer(p1)
 	ConversationTitleModule = GetConversationTitleModule(UseGetConversationFromIdModuleResult)
 	local UseGetUsersModuleResult = UseGetUsersModule()
 	local UseGetUsersTypingModuleResult = UseGetUsersTypingModule(JoinResult.conversationId)
-	local UseRefResult1 = ReactModule.useRef({
+	local UseRefResult = ReactModule.useRef({
 		itemList = {},
 		previousMessagesState = {},
 		previousSendingMessagesState = {},
@@ -297,7 +297,7 @@ function ChatConversationContainer(p1)
 	})
 	local UseMessageItemListResult = if SignalsMigrationConfigModule.shouldReadMessageListFromSignalsStore then UseMessageItemListFunction(JoinResult.conversationId, UseGetUsersModuleResult, UseLocalUserIdResult, UseGetConversationFromIdModuleResult) else nil
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: SignalsMigrationConfigModule (upval), UseMessageItemListResult (ref), FFlagAppChatPerfTrackingModule (upval), FFlagAppChatMessageTTIMilestonesModule (upval), AppChatPerfTrackerModule (upval), JoinResult (copy), UseRefResult1 (copy), SelectMessagesPureModule (upval), UseGetConversationFromIdModuleResult (ref), UseGetUsersModuleResult (copy), UseLocalUserIdResult (copy)
+		-- upvalues: SignalsMigrationConfigModule (upval), UseMessageItemListResult (ref), FFlagAppChatPerfTrackingModule (upval), FFlagAppChatMessageTTIMilestonesModule (upval), AppChatPerfTrackerModule (upval), JoinResult (copy), UseRefResult (copy), SelectMessagesPureModule (upval), UseGetConversationFromIdModuleResult (ref), UseGetUsersModuleResult (copy), UseLocalUserIdResult (copy)
 		if SignalsMigrationConfigModule.shouldReadMessageListFromSignalsStore then
 			return UseMessageItemListResult
 		end
@@ -308,19 +308,19 @@ function ChatConversationContainer(p1)
 			AppChatPerfTrackerModule.trackMilestone(AppChatPerfTrackerModule.Events.ChatConversationTTI, AppChatPerfTrackerModule.Milestone.DataProcessingStarted.Name, config)
 			AppChatPerfTrackerModule.trackSubphase(AppChatPerfTrackerModule.Events.ChatConversationTTI, AppChatPerfTrackerModule.Milestone.DataProcessingStarted.Name, AppChatPerfTrackerModule.Milestone.DataProcessingStarted.Subphase.DataUpdate, config)
 		end
-		UseRefResult1.current = SelectMessagesPureModule({
+		UseRefResult.current = SelectMessagesPureModule({
 			conversation = UseGetConversationFromIdModuleResult,
 			conversationId = JoinResult.conversationId,
 			Users = UseGetUsersModuleResult,
 			localUserId = UseLocalUserIdResult
-		}, UseRefResult1.current)
+		}, UseRefResult.current)
 		
 		if IsActive then
 			local config = { conversationId = JoinResult.conversationId }
 			AppChatPerfTrackerModule.trackMilestone(AppChatPerfTrackerModule.Events.ChatConversationTTI, AppChatPerfTrackerModule.Milestone.DataProcessingCompleted.Name, config)
 			AppChatPerfTrackerModule.trackSubphase(AppChatPerfTrackerModule.Events.ChatConversationTTI, AppChatPerfTrackerModule.Milestone.DataProcessingCompleted.Name, AppChatPerfTrackerModule.Milestone.DataProcessingCompleted.Subphase.DataUpdate, config)
 		end
-		return UseRefResult1.current.itemList
+		return UseRefResult.current.itemList
 	end, {
 		UseGetConversationFromIdModuleResult,
 		JoinResult.conversationId,
@@ -355,7 +355,7 @@ function ChatConversationContainer(p1)
 	local v2 = false
 	
 	if FFlagAppChatConversationLoadingSkeletonModule then
-		local UseSelectorResult = UseSelectorFunction(function(p2)
+		local UseSelectorResult1 = UseSelectorFunction(function(p2)
 			-- upvalues: AppChatNetworkingModule (upval), JoinResult (copy)
 			return AppChatNetworkingModule.rodux.GetOlderMessages.getStatus(p2, JoinResult.conversationId)
 		end)
@@ -369,19 +369,19 @@ function ChatConversationContainer(p1)
 			IsOsaCardReady = OsaState.fetchedOldestMessage == true and OsaState.isOsaCardReady
 			WillShowOsaCard = true
 		else
-			IsOsaCardReady = UseSelectorResult == RoduxNetworkingModule.Enum.NetworkStatus.Done or OsaState.fetchedOldestMessage == true
-			WillShowOsaCard = UseSelectorResult == RoduxNetworkingModule.Enum.NetworkStatus.NotStarted or UseSelectorResult == RoduxNetworkingModule.Enum.NetworkStatus.Fetching
+			IsOsaCardReady = UseSelectorResult1 == RoduxNetworkingModule.Enum.NetworkStatus.Done or OsaState.fetchedOldestMessage == true
+			WillShowOsaCard = UseSelectorResult1 == RoduxNetworkingModule.Enum.NetworkStatus.NotStarted or UseSelectorResult1 == RoduxNetworkingModule.Enum.NetworkStatus.Fetching
 		end
-		local UseRefResult2 = ReactModule.useRef({ conversationId = nil, hasLoadedFirstPage = false })
+		local UseRefResult1 = ReactModule.useRef({ conversationId = nil, hasLoadedFirstPage = false })
 		
-		if UseRefResult2.current.conversationId ~= JoinResult.conversationId then
-			UseRefResult2.current = {
+		if UseRefResult1.current.conversationId ~= JoinResult.conversationId then
+			UseRefResult1.current = {
 				hasLoadedFirstPage = false,
 				conversationId = JoinResult.conversationId
 			}
 		end
-		UseRefResult2.current.hasLoadedFirstPage = UseRefResult2.current.hasLoadedFirstPage or IsOsaCardReady
-		v2 = UseGetConversationFromIdModuleResult and (not UseRefResult2.current.hasLoadedFirstPage and WillShowOsaCard)
+		UseRefResult1.current.hasLoadedFirstPage = UseRefResult1.current.hasLoadedFirstPage or IsOsaCardReady
+		v2 = UseGetConversationFromIdModuleResult and (not UseRefResult1.current.hasLoadedFirstPage and WillShowOsaCard)
 	end
 	local CombinedNameFromProfileNamesModule = if FFlagAppChatUseUserProfileHydrationModule then GetCombinedNameFromProfileNamesModule(v1, UseGetUsersTypingModuleResult[1] and UseGetUsersTypingModuleResult[1].id) elseif UseGetUsersTypingModuleResult[1] and UseUserProfilesFetchResult.data then UserProfilesModule.Selectors.getCombinedNameFromId(UseUserProfilesFetchResult.data, UseGetUsersTypingModuleResult[1].id) else nil
 	local CombinedNameFromProfileNamesModule1 = if FFlagAppChatUseUserProfileHydrationModule then GetCombinedNameFromProfileNamesModule(v1, UseGetUsersTypingModuleResult[2] and UseGetUsersTypingModuleResult[2].id) elseif UseGetUsersTypingModuleResult[2] and UseUserProfilesFetchResult.data then UserProfilesModule.Selectors.getCombinedNameFromId(UseUserProfilesFetchResult.data, UseGetUsersTypingModuleResult[2].id) else nil
@@ -402,7 +402,7 @@ function ChatConversationContainer(p1)
 			local MessagesResultEntry = ConversationMessageStore.messages(false)[v5]
 			local Text = if MessagesResultEntry and MessagesResultEntry.sender_user_id then tostring(MessagesResultEntry.sender_user_id) else nil
 			IsSenderTargetIdMatch = Text == UseLocalUserIdResult
-			CombinedNameFromId = if FFlagAppChatUseUserProfileHydrationModule then if IsSenderTargetIdMatch then nil else GetCombinedNameFromProfileNamesModule(v1, Text) elseif IsSenderTargetIdMatch or (not Text or not UseUserProfilesFetchResult.data) then nil else UserProfilesModule.Selectors.getCombinedNameFromId(UseUserProfilesFetchResult.data, Text)
+			CombinedNameFromId = if FFlagAppChatUseUserProfileHydrationModule then if IsSenderTargetIdMatch then nil else GetCombinedNameFromProfileNamesModule(v1, Text) elseif IsSenderTargetIdMatch or not Text or not UseUserProfilesFetchResult.data then nil else UserProfilesModule.Selectors.getCombinedNameFromId(UseUserProfilesFetchResult.data, Text)
 		end
 	else
 		v3 = UseReplyingToMessageModule()
@@ -461,10 +461,10 @@ function ChatConversationContainer(p1)
 	})
 	local UseIsUserPendingModuleResult = UseIsUserPendingModule(UseGetConversationFromIdModuleResult or {})
 	local Source = UseGetConversationFromIdModuleResult and UseGetConversationFromIdModuleResult.source
-	local UseCallbackWithDynamicConversationIdModuleResult, UseCallbackWithDynamicConversationIdModuleResult2 = UseCallbackWithDynamicConversationIdModule(AppChatNetworkingModule.rodux.GetModalSequence.API, JoinResult.conversationId)
+	local UseCallbackWithDynamicConversationIdModuleResult1, UseCallbackWithDynamicConversationIdModuleResult2_1 = UseCallbackWithDynamicConversationIdModule(AppChatNetworkingModule.rodux.GetModalSequence.API, JoinResult.conversationId)
 	UseEffectFunction(function()
-		-- upvalues: UseCallbackWithDynamicConversationIdModuleResult2 (copy), UseIsUserPendingModuleResult (copy), Source (copy), UseDispatchResult (copy), AppChatNetworkingModule (upval), JoinResult (copy), UseIsInExperienceModuleResult (copy), LoggerModule (upval), UseCallbackWithDynamicConversationIdModuleResult (copy), FFlagAppChatConversationTrustedFriendUpsellBanner (upval), SeedConversationTopModalFromRequestModule (upval)
-		if not UseCallbackWithDynamicConversationIdModuleResult2 then return end
+		-- upvalues: UseCallbackWithDynamicConversationIdModuleResult2_1 (copy), UseIsUserPendingModuleResult (copy), Source (copy), UseDispatchResult (copy), AppChatNetworkingModule (upval), JoinResult (copy), UseIsInExperienceModuleResult (copy), LoggerModule (upval), UseCallbackWithDynamicConversationIdModuleResult1 (copy), FFlagAppChatConversationTrustedFriendUpsellBanner (upval), SeedConversationTopModalFromRequestModule (upval)
+		if not UseCallbackWithDynamicConversationIdModuleResult2_1 then return end
 		if UseIsUserPendingModuleResult and Source == "channels" then
 			UseDispatchResult(AppChatNetworkingModule.rodux.GetPendingStateModal.API(JoinResult.conversationId, UseIsInExperienceModuleResult)):catch(function(Err)
 				-- upvalues: LoggerModule (upval)
@@ -472,7 +472,7 @@ function ChatConversationContainer(p1)
 			end)
 		end
 		if not UseIsUserPendingModuleResult then
-			local UseDispatchResultResult = UseDispatchResult(UseCallbackWithDynamicConversationIdModuleResult({
+			local UseDispatchResultResult = UseDispatchResult(UseCallbackWithDynamicConversationIdModuleResult1({
 				modalSequence = AppChatNetworkingModule.Constants.ModalSequence.ConversationTopModal,
 				isInExperience = UseIsInExperienceModuleResult
 			}))
@@ -487,16 +487,16 @@ function ChatConversationContainer(p1)
 		end
 	end, {
 		JoinResult.conversationId,
-		UseCallbackWithDynamicConversationIdModuleResult2,
+		UseCallbackWithDynamicConversationIdModuleResult2_1,
 		UseIsInExperienceModuleResult,
 		UseIsUserPendingModuleResult,
 		Source
 	})
-	local UseCallbackWithDynamicConversationIdModuleResult1, UseCallbackWithDynamicConversationIdModuleResult2_1 = UseCallbackWithDynamicConversationIdModule(AppChatNetworkingModule.rodux.GetModalSequence.API, JoinResult.conversationId)
+	local UseCallbackWithDynamicConversationIdModuleResult3, UseCallbackWithDynamicConversationIdModuleResult2_2 = UseCallbackWithDynamicConversationIdModule(AppChatNetworkingModule.rodux.GetModalSequence.API, JoinResult.conversationId)
 	UseEffectFunction(function()
-		-- upvalues: UseIsUserPendingModuleResult (copy), UseCallbackWithDynamicConversationIdModuleResult2_1 (copy), UseDispatchResult (copy), UseCallbackWithDynamicConversationIdModuleResult1 (copy), AppChatNetworkingModule (upval), UseIsInExperienceModuleResult (copy), LoggerModule (upval)
-		if not UseIsUserPendingModuleResult and UseCallbackWithDynamicConversationIdModuleResult2_1 then
-			UseDispatchResult(UseCallbackWithDynamicConversationIdModuleResult1({
+		-- upvalues: UseIsUserPendingModuleResult (copy), UseCallbackWithDynamicConversationIdModuleResult2_2 (copy), UseDispatchResult (copy), UseCallbackWithDynamicConversationIdModuleResult3 (copy), AppChatNetworkingModule (upval), UseIsInExperienceModuleResult (copy), LoggerModule (upval)
+		if not UseIsUserPendingModuleResult and UseCallbackWithDynamicConversationIdModuleResult2_2 then
+			UseDispatchResult(UseCallbackWithDynamicConversationIdModuleResult3({
 				modalSequence = AppChatNetworkingModule.Constants.ModalSequence.ConversationOverlay,
 				isInExperience = UseIsInExperienceModuleResult
 			})):catch(function(Err)
@@ -505,7 +505,7 @@ function ChatConversationContainer(p1)
 			end)
 		end
 	end, {
-		UseCallbackWithDynamicConversationIdModuleResult2_1,
+		UseCallbackWithDynamicConversationIdModuleResult2_2,
 		JoinResult.conversationId,
 		UseIsUserPendingModuleResult,
 		UseIsInExperienceModuleResult,
@@ -552,11 +552,11 @@ function ChatConversationContainer(p1)
 			})
 		end, { UseDispatchResult, JoinResult.conversationId })
 	end
-	local UseCallbackWithDynamicConversationIdModuleResult3, UseCallbackWithDynamicConversationIdModuleResult2_2 = UseCallbackWithDynamicConversationIdModule(AppChatNetworkingModule.rodux.GetModalSequence.API, JoinResult.conversationId)
+	local UseCallbackWithDynamicConversationIdModuleResult, UseCallbackWithDynamicConversationIdModuleResult2 = UseCallbackWithDynamicConversationIdModule(AppChatNetworkingModule.rodux.GetModalSequence.API, JoinResult.conversationId)
 	UseEffectFunction(function()
-		-- upvalues: UseCallbackWithDynamicConversationIdModuleResult2_2 (copy), UseDispatchResult (copy), UseCallbackWithDynamicConversationIdModuleResult3 (copy), AppChatNetworkingModule (upval), UseIsInExperienceModuleResult (copy), LoggerModule (upval)
-		if UseCallbackWithDynamicConversationIdModuleResult2_2 then
-			UseDispatchResult(UseCallbackWithDynamicConversationIdModuleResult3({
+		-- upvalues: UseCallbackWithDynamicConversationIdModuleResult2 (copy), UseDispatchResult (copy), UseCallbackWithDynamicConversationIdModuleResult (copy), AppChatNetworkingModule (upval), UseIsInExperienceModuleResult (copy), LoggerModule (upval)
+		if UseCallbackWithDynamicConversationIdModuleResult2 then
+			UseDispatchResult(UseCallbackWithDynamicConversationIdModuleResult({
 				modalSequence = AppChatNetworkingModule.Constants.ModalSequence.ConversationBottomModal,
 				isInExperience = UseIsInExperienceModuleResult
 			})):catch(function(Err)
@@ -568,10 +568,10 @@ function ChatConversationContainer(p1)
 		end
 	end, {
 		JoinResult.conversationId,
-		UseCallbackWithDynamicConversationIdModuleResult2_2,
+		UseCallbackWithDynamicConversationIdModuleResult2,
 		UseIsInExperienceModuleResult,
 		UseDispatchResult,
-		UseCallbackWithDynamicConversationIdModuleResult3
+		UseCallbackWithDynamicConversationIdModuleResult
 	})
 	local UseShouldShowConversationOverlayModuleResult = UseShouldShowConversationOverlayModule(JoinResult.conversationId)
 	UseEffectFunction(function()
@@ -647,7 +647,7 @@ function ChatConversationContainer(p1)
 			end
 		end, { JoinResult.conversationId, UseMemoResult2 })
 	end
-	local UseResult2 = ReactModule.useCallback(function(ConversationExitType)
+	local UseResult1 = ReactModule.useCallback(function(ConversationExitType)
 		-- upvalues: UseTelemetryModuleResult (copy), ChatConversationTelemetryEventsModule (upval), UseClearStateResult (copy)
 		UseTelemetryModuleResult.emit(ChatConversationTelemetryEventsModule.ScreenExit, { conversationExitType = ConversationExitType })
 		UseClearStateResult()
@@ -657,13 +657,13 @@ function ChatConversationContainer(p1)
 	local UseIsChatUserMessagesEnabledModuleResult2 = not UseIsChatUserMessagesEnabledModuleResult1 and UseIsChatUserMessagesEnabledModuleResult
 	local UseIsExternalNavigationAvailableModuleResult = UseIsExternalNavigationAvailableModule({ EnumScreensModule.ViewUserProfile })
 	local IsConversationTypeMatch = UseGetConversationFromIdModuleResult.conversationType == ConversationModule.Type.MULTI_USER_CONVERSATION
-	local UseSelectorResult1 = UseSelectorFunction(function(p2): boolean
+	local UseSelectorResult2 = UseSelectorFunction(function(p2): boolean
 		-- upvalues: IsConversationTypeMatch (copy), UseGetConversationFromIdModuleResult (ref)
 		return IsConversationTypeMatch and UseGetConversationFromIdModuleResult.initiator == p2.LocalUserId
 	end)
 	
 	local function OpenViewProfile(ParticipantId)
-		-- upvalues: UseIsExternalNavigationAvailableModuleResult (copy), EnumScreensModule (upval), UseResult (copy), JoinResult (copy), GenericDialogTypeModule (upval), UseIsUserPendingModuleResult (copy), IsConversationTypeMatch (copy), UseSelectorResult1 (copy)
+		-- upvalues: UseIsExternalNavigationAvailableModuleResult (copy), EnumScreensModule (upval), UseResult (copy), JoinResult (copy), GenericDialogTypeModule (upval), UseIsUserPendingModuleResult (copy), IsConversationTypeMatch (copy), UseSelectorResult2 (copy)
 		if UseIsExternalNavigationAvailableModuleResult[EnumScreensModule.ViewUserProfile] then
 			UseResult(ParticipantId)
 			
@@ -672,7 +672,7 @@ function ChatConversationContainer(p1)
 			JoinResult.navigateToScreen(GenericDialogTypeModule.ParticipantDialog, {
 				conversationId = JoinResult.conversationId,
 				participantId = ParticipantId,
-				showRemoveUserButton = not UseIsUserPendingModuleResult and (IsConversationTypeMatch and UseSelectorResult1)
+				showRemoveUserButton = not UseIsUserPendingModuleResult and (IsConversationTypeMatch and UseSelectorResult2)
 			}, true)
 		end
 	end
@@ -686,7 +686,7 @@ function ChatConversationContainer(p1)
 		ConversationTitleModule,
 		JoinResult.updateConversationTitle
 	})
-	local UseResult3 = ReactModule.useCallback(function()
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: FFlagAppChatUniversalFeatureRestriction (upval), Parent (upval), JoinResult (copy), FFlagAppChatReactiveFeatureRestrictions (upval), ChatInputBoxDisabledPressedSignal (upval), TimeoutEndTimestamp (ref), DecisionEventId (ref), Duration (ref)
 		if not FFlagAppChatUniversalFeatureRestriction then
 			ChatInputBoxDisabledPressedSignal:fire({
@@ -721,27 +721,27 @@ function ChatConversationContainer(p1)
 	})
 	local UseStateResult, UseStateResult2 = ReactModule.useState(JoinResult.navigation and (JoinResult.navigation.isFocused and JoinResult.navigation.isFocused()))
 	local v7 = nil
-	local NoUseIsUserPendingModuleResult: boolean? = nil
+	local v8: boolean? = nil
 	
 	if FFlagAppChatPerfTrackingModule then
 		v7 = (not JoinResult.isFocused or JoinResult.isFocused()) and UseStateResult
-		NoUseIsUserPendingModuleResult = v7 and not UseIsUserPendingModuleResult
+		v8 = v7 and not UseIsUserPendingModuleResult
 	end
-	local UseResult1 = nil
+	local UseResult3 = nil
 	
 	if FFlagAppChatPerfTrackingModule then
-		local UseRefResult3 = ReactModule.useRef(false)
+		local UseRefResult2 = ReactModule.useRef(false)
 		ReactModule.useEffect(function()
-			-- upvalues: UseRefResult3 (copy), UseIsChatUserMessagesEnabledModuleResult1 (copy)
-			UseRefResult3.current = not UseIsChatUserMessagesEnabledModuleResult1
+			-- upvalues: UseRefResult2 (copy), UseIsChatUserMessagesEnabledModuleResult1 (copy)
+			UseRefResult2.current = not UseIsChatUserMessagesEnabledModuleResult1
 		end, {
 			JoinResult.conversationId,
 			UseIsChatUserMessagesEnabledModuleResult1
 		})
 		local UseResult4 = ReactModule.useCallback(function(p2)
-			-- upvalues: AppChatPerfTrackerModule (upval), JoinResult (copy), NoUseIsUserPendingModuleResult (ref), UseRefResult3 (copy), LoggerModule (upval), UseMemoResult (copy)
-			if not AppChatPerfTrackerModule.isActive(AppChatPerfTrackerModule.Events.ChatConversationTTI, { conversationId = JoinResult.conversationId }) or not NoUseIsUserPendingModuleResult then return end
-			if UseRefResult3.current then
+			-- upvalues: AppChatPerfTrackerModule (upval), JoinResult (copy), v8 (ref), UseRefResult2 (copy), LoggerModule (upval), UseMemoResult (copy)
+			if not AppChatPerfTrackerModule.isActive(AppChatPerfTrackerModule.Events.ChatConversationTTI, { conversationId = JoinResult.conversationId }) or not v8 then return end
+			if UseRefResult2.current then
 				AppChatPerfTrackerModule.finish(AppChatPerfTrackerModule.Events.ChatConversationTTI, {
 					conversationId = JoinResult.conversationId,
 					numElementsRendered = #UseMemoResult
@@ -749,7 +749,7 @@ function ChatConversationContainer(p1)
 				
 				return
 			else
-				LoggerModule:debug("TTI: Messages ready but waiting for input bar (chatInputBarReady={}, reason={})", UseRefResult3.current, p2)
+				LoggerModule:debug("TTI: Messages ready but waiting for input bar (chatInputBarReady={}, reason={})", UseRefResult2.current, p2)
 			end
 		end, {
 			JoinResult.conversationId,
@@ -761,18 +761,18 @@ function ChatConversationContainer(p1)
 			-- upvalues: UseResult4 (copy)
 			UseResult4("messages_ready")
 		end, { UseResult4, #UseMemoResult, JoinResult.conversationId })
-		UseResult1 = ReactModule.useCallback(function()
-			-- upvalues: UseRefResult3 (copy), UseResult4 (copy)
-			UseRefResult3.current = true
+		UseResult3 = ReactModule.useCallback(function()
+			-- upvalues: UseRefResult2 (copy), UseResult4 (copy)
+			UseRefResult2.current = true
 			UseResult4("input_bar_ready")
 		end, { UseResult4 })
 	end
 	if FFlagAppChatPerfTrackingModule then
-		local UseRefResult = ReactModule.useRef(nil)
+		local UseRefResult3 = ReactModule.useRef(nil)
 		ReactModule.useEffect(function()
-			-- upvalues: LoggerModule (upval), JoinResult (copy), UseRefResult (copy), FFlagAppChatMessageTTIMilestonesModule (upval), AppChatPerfTrackerModule (upval)
+			-- upvalues: LoggerModule (upval), JoinResult (copy), UseRefResult3 (copy), FFlagAppChatMessageTTIMilestonesModule (upval), AppChatPerfTrackerModule (upval)
 			LoggerModule:debug("Perf: Resetting message perf tracking for conversation {}", JoinResult.conversationId)
-			UseRefResult.current = nil
+			UseRefResult3.current = nil
 			local config = { conversationId = JoinResult.conversationId }
 			
 			if FFlagAppChatMessageTTIMilestonesModule then
@@ -788,7 +788,7 @@ function ChatConversationContainer(p1)
 			end
 		end, { JoinResult.conversationId })
 		ReactModule.useEffect(function()
-			-- upvalues: UseMemoResult (copy), JoinResult (copy), UseLocalUserIdResult (copy), UseRefResult (copy), FFlagAppChatMessageTTIMilestonesModule (upval), AppChatPerfTrackerModule (upval)
+			-- upvalues: UseMemoResult (copy), JoinResult (copy), UseLocalUserIdResult (copy), UseRefResult3 (copy), FFlagAppChatMessageTTIMilestonesModule (upval), AppChatPerfTrackerModule (upval)
 			local UseMemoResultEntry = UseMemoResult[1]
 			
 			if not UseMemoResultEntry or not UseMemoResultEntry.id then return end
@@ -796,8 +796,8 @@ function ChatConversationContainer(p1)
 			local IsSenderTargetIdMatch = UseMemoResultEntry.senderTargetId == UseLocalUserIdResult
 			
 			if not UseMemoResultEntry.isSending and (UseMemoResultEntry.senderType == "system" or not IsSenderTargetIdMatch) then
-				if UseMemoResultEntry.id ~= UseRefResult.current then
-					UseRefResult.current = UseMemoResultEntry.id
+				if UseMemoResultEntry.id ~= UseRefResult3.current then
+					UseRefResult3.current = UseMemoResultEntry.id
 					
 					if FFlagAppChatMessageTTIMilestonesModule then
 						AppChatPerfTrackerModule.finish(AppChatPerfTrackerModule.Events.MessageReceiveTTI, config)
@@ -895,7 +895,7 @@ function ChatConversationContainer(p1)
 		networkErrorText = UseLocalizationResult.networkErrorText,
 		navigateToToast = JoinResult.navigateToToast,
 		wideMode = JoinResult.wideMode,
-		onConversationUnmount = UseResult2,
+		onConversationUnmount = UseResult1,
 		navigateBack = JoinResult.navigateBack
 	}) else ReactModule.createElement(ChatConversationModule, CryoModule.Dictionary.join(JoinResult, UseMapDispatchModuleResult, UseLocalizationResult, {
 		moreMenuEnabled = GetCanAccessParty,
@@ -909,7 +909,7 @@ function ChatConversationContainer(p1)
 		Users = UseGetUsersModuleResult,
 		usersTyping = UseGetUsersTypingModuleResult,
 		displayNamesAvailable = DisplayNamesAvailable,
-		onConversationUnmount = UseResult2,
+		onConversationUnmount = UseResult1,
 		recipientIdsSerialized = Result1,
 		chatIsVisible = UseChatIsVisibleModuleResult,
 		chatInputPlaceholder = ReplyToYourselfChatInputPlaceholder,
@@ -919,9 +919,9 @@ function ChatConversationContainer(p1)
 		shouldShowChatInputBar = UseIsChatUserMessagesEnabledModuleResult1,
 		shouldShowLegacyBottomModal = UseIsChatUserMessagesEnabledModuleResult2,
 		shouldDisableChatInputBar = IsTimedOut,
-		onChatInputBarReady = if FFlagAppChatPerfTrackingModule then UseResult1 else nil,
+		onChatInputBarReady = if FFlagAppChatPerfTrackingModule then UseResult3 else nil,
 		inputBarDisabledEndTimestampDisplay = TimeoutEndTimestamp,
-		onDisabledInputBarActivated = UseResult3,
+		onDisabledInputBarActivated = UseResult2,
 		scrollToTopOnInitialOsaLoad = OsaState.shouldShowOsaCardOnInitialLoad and OsaState.fetchedOldestMessage,
 		openMessageListAtStart = OsaState.shouldShowOsaCardOnInitialLoad,
 		navigateToSquadLobby = if GetCanAccessParty then JoinResult.navigateToSquadLobby else nil,
@@ -933,7 +933,7 @@ function ChatConversationContainer(p1)
 		networkErrorText = UseLocalizationResult.networkErrorText,
 		navigateToToast = JoinResult.navigateToToast,
 		wideMode = JoinResult.wideMode,
-		onConversationUnmount = UseResult2,
+		onConversationUnmount = UseResult1,
 		navigateBack = JoinResult.navigateBack,
 		style = JoinResult.style
 	}) else ReactModule.createElement(ChatConversationModule, CryoModule.Dictionary.join(JoinResult, UseMapDispatchModuleResult, UseLocalizationResult, {
@@ -948,7 +948,7 @@ function ChatConversationContainer(p1)
 		Users = UseGetUsersModuleResult,
 		usersTyping = UseGetUsersTypingModuleResult,
 		displayNamesAvailable = DisplayNamesAvailable,
-		onConversationUnmount = UseResult2,
+		onConversationUnmount = UseResult1,
 		recipientIdsSerialized = Result1,
 		chatIsVisible = UseChatIsVisibleModuleResult,
 		chatInputPlaceholder = ReplyToYourselfChatInputPlaceholder,
@@ -958,9 +958,9 @@ function ChatConversationContainer(p1)
 		shouldShowChatInputBar = UseIsChatUserMessagesEnabledModuleResult1,
 		shouldShowLegacyBottomModal = UseIsChatUserMessagesEnabledModuleResult2,
 		shouldDisableChatInputBar = IsTimedOut,
-		onChatInputBarReady = if FFlagAppChatPerfTrackingModule then UseResult1 else nil,
+		onChatInputBarReady = if FFlagAppChatPerfTrackingModule then UseResult3 else nil,
 		inputBarDisabledEndTimestampDisplay = TimeoutEndTimestamp,
-		onDisabledInputBarActivated = UseResult3,
+		onDisabledInputBarActivated = UseResult2,
 		scrollToTopOnInitialOsaLoad = OsaState.shouldShowOsaCardOnInitialLoad and OsaState.fetchedOldestMessage,
 		openMessageListAtStart = OsaState.shouldShowOsaCardOnInitialLoad,
 		navigateToSquadLobby = if GetCanAccessParty then JoinResult.navigateToSquadLobby else nil,

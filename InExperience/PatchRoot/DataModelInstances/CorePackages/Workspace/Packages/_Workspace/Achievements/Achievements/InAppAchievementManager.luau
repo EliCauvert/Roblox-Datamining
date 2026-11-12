@@ -12,6 +12,7 @@ local GetAuthenticationStatusStore = if FFlagUseSignalsForAuthenticationStatus t
 local GetXboxLoginConsecutiveDaysModule = require(Achievements.Requests.GetXboxLoginConsecutiveDays)
 local VoteCountRefresherModule = require(Achievements.AchievementDataRefresher.VoteCountRefresher)
 local FFlagGateLoginStreaksByAchievementAvailabilityModule = require(Achievements.Flags.FFlagGateLoginStreaksByAchievementAvailability)
+local FFlagFixAvatarSaveAchievementListenerRaceModule = require(Achievements.Flags.FFlagFixAvatarSaveAchievementListenerRace)
 local AchievementServiceIsAchievementAvailableEngineFeature = game:GetEngineFeature("AchievementServiceIsAchievementAvailable")
 local ConfigResult = HttpRequestModule.config({
 	requestFunction = function(p1, p2, p3)
@@ -63,7 +64,7 @@ local InAppAchievementManager = {
 		return false
 	end,
 	setupAchievements = function(p2, Callback, Callback1)
-		-- upvalues: FFlagGateLoginStreaksByAchievementAvailabilityModule (copy), AchievementServiceIsAchievementAvailableEngineFeature (copy), GetXboxLoginConsecutiveDaysModule (copy), LoggerModule (copy)
+		-- upvalues: FFlagGateLoginStreaksByAchievementAvailabilityModule (copy), AchievementServiceIsAchievementAvailableEngineFeature (copy), GetXboxLoginConsecutiveDaysModule (copy), LoggerModule (copy), FFlagFixAvatarSaveAchievementListenerRaceModule (copy)
 		if if FFlagGateLoginStreaksByAchievementAvailabilityModule and AchievementServiceIsAchievementAvailableEngineFeature then p2:hasPendingLoginStreakAchievement() else p2.achievement3DayRoll.hasAchieved == false or (p2.achievement10DayRoll.hasAchieved == false or p2.achievement20DayRoll.hasAchieved == false) then
 			GetXboxLoginConsecutiveDaysModule(p2.requestImpl):andThen(function(Result)
 				-- upvalues: LoggerModule (upval), Callback (copy)
@@ -86,8 +87,31 @@ local InAppAchievementManager = {
 				LoggerModule:warning(Err)
 			end)
 		end
+		if FFlagFixAvatarSaveAchievementListenerRaceModule and p2.saveAvatarCompletedConnection then
+			p2.saveAvatarCompletedConnection:Disconnect()
+			p2.saveAvatarCompletedConnection = nil
+		end
 		if p2.achievementOneNameManyFaces.hasAchieved == false then
-			p2.saveAvatarCompletedConnection = p2.avatarEditorService.PromptSaveAvatarCompleted:Connect(function(AvatarPromptResult)
+			if FFlagFixAvatarSaveAchievementListenerRaceModule then
+				local Connection = nil
+				Connection = p2.avatarEditorService.PromptSaveAvatarCompleted:Connect(function(AvatarPromptResult)
+					-- upvalues: Connection (ref), p2 (copy), Callback1 (copy)
+					if AvatarPromptResult == Enum.AvatarPromptResult.Success and Connection.Connected then
+						Connection:Disconnect()
+						
+						if p2.saveAvatarCompletedConnection == Connection then
+							p2.saveAvatarCompletedConnection = nil
+						end
+						Callback1(true)
+					end
+				end)
+				p2.saveAvatarCompletedConnection = Connection
+				
+				return
+			end
+			local Connection = p2.avatarEditorService
+			Connection = Connection.PromptSaveAvatarCompleted
+			Connection = Connection:Connect(function(AvatarPromptResult)
 				-- upvalues: Callback1 (copy), p2 (copy)
 				if AvatarPromptResult == Enum.AvatarPromptResult.Success then
 					Callback1(true)
@@ -95,6 +119,7 @@ local InAppAchievementManager = {
 					p2.saveAvatarCompletedConnection = nil
 				end
 			end)
+			p2.saveAvatarCompletedConnection = Connection
 		end
 	end,
 	shutDown = function(p2)

@@ -1,8 +1,6 @@
-﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
-local Parent = BuildExperience.Parent
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
-local FFlagBuildExperienceChatImageAttachmentsModule = require(BuildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
 local Checkbox = FoundationModule.Checkbox
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
@@ -11,53 +9,15 @@ local function _(p1)
 	return if typeof(p1) == "Object" then Content.fromObject(p1) else Content.none
 end
 
-local function CaptureGridItem(Frame)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FFlagBuildExperienceChatImageAttachmentsModule (copy), View (copy), FoundationModule (copy), Checkbox (copy)
+return ReactModule.memo(function(Frame)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Checkbox (copy), FoundationModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: Frame (copy)
 		Frame.onActivated(Frame.capture)
 	end, { Frame.capture, Frame.onActivated })
-	
-	if not FFlagBuildExperienceChatImageAttachmentsModule then
-		local Capture = Frame.capture
-		
-		return ReactModule.createElement(View, {
-			tag = "size-full",
-			onActivated = UseResult,
-			stateLayer = {
-				affordance = FoundationModule.Enums.StateLayerAffordance.None
-			},
-			stroke = if Frame.isSelected then {
-				Color = UseTokensResult.Color.Content.Emphasis.Color3,
-				Thickness = UseTokensResult.Stroke.Thick,
-				ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-			} else nil
-		}, {
-			CaptureThumbnail = ReactModule.createElement("ImageLabel", {
-				BackgroundTransparency = 1,
-				BorderSizePixel = 0,
-				ZIndex = 1,
-				ImageContent = if typeof(Capture) == "Object" then Content.fromObject(Capture) else Content.none,
-				ScaleType = Enum.ScaleType.Crop,
-				Size = UDim2.fromScale(1, 1)
-			}),
-			SelectionOverlay = if Frame.isSelected then ReactModule.createElement(View, { tag = "size-full padding-small", ZIndex = 3 }, {
-				SelectedIndicator = ReactModule.createElement(Checkbox, {
-					isChecked = true,
-					label = "",
-					AnchorPoint = Vector2.new(1, 0),
-					onActivated = function()
-						-- upvalues: UseResult (copy)
-						UseResult()
-					end,
-					Position = UDim2.fromScale(1, 0),
-					size = FoundationModule.Enums.InputSize.Small
-				})
-			}) else nil
-		})
-	end
 	local Content1 = nil
+	
 	if Frame.imageContentEnabled == false then
 		Content1 = Content.none
 	else
@@ -99,6 +59,4 @@ local function CaptureGridItem(Frame)
 			})
 		}) else nil
 	})
-end
-
-return if FFlagBuildExperienceChatImageAttachmentsModule then ReactModule.memo(CaptureGridItem) else CaptureGridItem
+end)

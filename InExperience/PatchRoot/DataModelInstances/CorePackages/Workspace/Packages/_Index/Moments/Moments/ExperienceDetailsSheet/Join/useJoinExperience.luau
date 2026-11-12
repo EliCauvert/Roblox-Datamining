@@ -11,16 +11,23 @@ local ConstantsModule = require(Moments.Constants)
 local ConstantsModule1 = require(Moments.ExperienceDetailsSheet.Constants)
 local _ = require(Moments.ExperienceDetailsSheet.Types)
 local EmitRecommendationActionModule = require(Moments.Analytics.emitRecommendationAction)
+local MomentsFeedTypeModule = require(Moments.Enums.MomentsFeedType)
 local UseMomentsSessionFunction = require(Moments.Stores.GetMomentsStore.MomentsSessionContext).useMomentsSession
 local GetMomentsPreferencesStoreModule = require(Moments.Stores.GetMomentsPreferencesStore)
 local SessionUtilModule = require(Moments.Analytics.sessionUtil)
 local GetToastStoreModule = require(Moments.Stores.GetToastStore)
 local ListenForTeleportFailureModule = require(script.Parent.listenForTeleportFailure)
 local FFlagMomentsPlayEventModule = require(Moments.Flags.FFlagMomentsPlayEvent)
+local FFlagMomentsRecommendationFeedTypeModule = require(Moments.Flags.FFlagMomentsRecommendationFeedType)
 local config = { joining = ConstantsModule1.LocalizationKeys.joining }
 
+local function _(Following)
+	-- upvalues: Analytics (copy), MomentsFeedTypeModule (copy)
+	return if Following == Analytics.RecommendationSource.Following then MomentsFeedTypeModule.Following elseif Following == Analytics.RecommendationSource.Trending then MomentsFeedTypeModule.Trending else nil
+end
+
 return function()
-	-- upvalues: UseLocalizationFunction (copy), config (copy), UseMomentsSessionFunction (copy), ReactModule (copy), GetMomentsPreferencesStoreModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Analytics (copy), HttpService (copy), EmitRecommendationActionModule (copy), ConstantsModule (copy), GetToastStoreModule (copy), SessionUtilModule (copy), FFlagMomentsPlayEventModule (copy), Moments (copy), ListenForTeleportFailureModule (copy), LaunchGameFunction (copy), ConstantsModule1 (copy)
+	-- upvalues: UseLocalizationFunction (copy), config (copy), UseMomentsSessionFunction (copy), ReactModule (copy), GetMomentsPreferencesStoreModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Analytics (copy), FFlagMomentsRecommendationFeedTypeModule (copy), HttpService (copy), EmitRecommendationActionModule (copy), ConstantsModule (copy), MomentsFeedTypeModule (copy), GetToastStoreModule (copy), SessionUtilModule (copy), FFlagMomentsPlayEventModule (copy), Moments (copy), ListenForTeleportFailureModule (copy), LaunchGameFunction (copy), ConstantsModule1 (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseMomentsSessionResult = UseMomentsSessionFunction()
 	local UseRefResult = ReactModule.useRef(nil)
@@ -36,7 +43,7 @@ return function()
 	end, {})
 	
 	return ReactModule.useCallback(function(p1, p2, ViewId)
-		-- upvalues: GetMomentsPreferencesStoreModule (upval), UseRefResult (copy), UseMomentsSessionResult (copy), FireAnalyticsEventFunction (upval), EventNames (upval), Analytics (upval), HttpService (upval), EmitRecommendationActionModule (upval), ConstantsModule (upval), GetToastStoreModule (upval), UseLocalizationResult (copy), SessionUtilModule (upval), FFlagMomentsPlayEventModule (upval), Moments (upval), ListenForTeleportFailureModule (upval), LaunchGameFunction (upval), ConstantsModule1 (upval)
+		-- upvalues: GetMomentsPreferencesStoreModule (upval), UseRefResult (copy), UseMomentsSessionResult (copy), FireAnalyticsEventFunction (upval), EventNames (upval), Analytics (upval), FFlagMomentsRecommendationFeedTypeModule (upval), HttpService (upval), EmitRecommendationActionModule (upval), ConstantsModule (upval), MomentsFeedTypeModule (upval), GetToastStoreModule (upval), UseLocalizationResult (copy), SessionUtilModule (upval), FFlagMomentsPlayEventModule (upval), Moments (upval), ListenForTeleportFailureModule (upval), LaunchGameFunction (upval), ConstantsModule1 (upval)
 		local MomentsPreferencesStoreModule = GetMomentsPreferencesStoreModule(false)
 		
 		if UseRefResult.current ~= nil then
@@ -44,7 +51,7 @@ return function()
 			UseRefResult.current = nil
 		end
 		MomentsPreferencesStoreModule.setTeleporting(true)
-		local P1 = p2 or p1.placeId
+		local P2 = p2 or p1.placeId
 		local MomentsSessionId = UseMomentsSessionResult.getMomentsSessionId(false)
 		local FeedItemId = p1.feedItemId or ""
 		local TracingId = p1.tracingId or ""
@@ -57,17 +64,32 @@ return function()
 				feedSessionId = TracingId,
 				placeId = tostring(p1.placeId),
 				universeId = tostring(p1.universeId),
-				destinationPlaceId = tostring(P1)
+				destinationPlaceId = tostring(P2)
 			})
 		end
-		local Guid = if p1.recommendationSource == Analytics.RecommendationSource.Following then HttpService:GenerateGUID(false) else EmitRecommendationActionModule({
-			itemId = FeedItemId,
-			tracingId = TracingId,
-			momentsSessionId = MomentsSessionId,
-			actionType = ConstantsModule.RecommendationActionType.Play,
-			destinationPlaceId = P1,
-			contentType = p1.contentType
-		})
+		local Guid = nil
+		if FFlagMomentsRecommendationFeedTypeModule or p1.recommendationSource ~= Analytics.RecommendationSource.Following then
+			local config = {
+				itemId = FeedItemId,
+				tracingId = TracingId,
+				momentsSessionId = MomentsSessionId,
+				actionType = ConstantsModule.RecommendationActionType.Play,
+				destinationPlaceId = P2,
+				contentType = p1.contentType
+			}
+			local Following = nil
+			
+			if FFlagMomentsRecommendationFeedTypeModule then
+				local RecommendationSource = p1.recommendationSource
+				Following = if RecommendationSource == Analytics.RecommendationSource.Following then MomentsFeedTypeModule.Following elseif RecommendationSource == Analytics.RecommendationSource.Trending then MomentsFeedTypeModule.Trending else nil
+			else
+				Following = nil
+			end
+			config.feedType = Following
+			Guid = EmitRecommendationActionModule(config)
+		else
+			Guid = HttpService:GenerateGUID(false)
+		end
 		GetToastStoreModule(false).triggerToast({ text = "", title = UseLocalizationResult.joining })
 		
 		if Guid then
@@ -86,6 +108,6 @@ return function()
 			UseRefResult.current = nil
 			MomentsPreferencesStoreModule.setTeleporting(false)
 		end)
-		LaunchGameFunction(tostring(P1), ConstantsModule1.JoinReferralPage, { moments_play_intent_id = Guid }, nil, ConstantsModule1.JoinLaunchSource)
+		LaunchGameFunction(tostring(P2), ConstantsModule1.JoinReferralPage, { moments_play_intent_id = Guid }, nil, ConstantsModule1.JoinLaunchSource)
 	end, { UseLocalizationResult.joining, UseMomentsSessionResult })
 end

@@ -153,7 +153,7 @@ return function(p1)
 			primaryOnActivated = if p1.showSave then p1.onSave else p1.onCreateVoiceover,
 			primaryIsDisabled = not p1.showSave and (not p1.canGenerate and not IsGenerating),
 			primaryIsLoading = not p1.showSave and IsGenerating,
-			primaryVariant = if p1.showSave or p1.canGenerate or IsGenerating then FoundationModule.Enums.ButtonVariant.Emphasis else FoundationModule.Enums.ButtonVariant.Standard
+			primaryVariant = if p1.showSave or (p1.canGenerate or IsGenerating) then FoundationModule.Enums.ButtonVariant.Emphasis else FoundationModule.Enums.ButtonVariant.Standard
 		}) elseif p1.showSave then ReactModule.createElement(Button, {
 			LayoutOrder = 3,
 			fillBehavior = FoundationModule.Enums.FillBehavior.Fill,

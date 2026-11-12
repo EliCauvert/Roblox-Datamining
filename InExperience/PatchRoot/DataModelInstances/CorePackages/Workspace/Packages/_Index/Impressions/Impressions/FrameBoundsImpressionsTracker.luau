@@ -11,16 +11,17 @@ local FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions = SharedFlagsModul
 local FFlagLuaAppRespectClipAncestorImpressions = SharedFlagsModule.FFlagLuaAppRespectClipAncestorImpressions
 local FFlagUnifyShortcutBarFixImpressions = SharedFlagsModule.FFlagUnifyShortcutBarFixImpressions
 local FFlagOptionalNavigation = SharedFlagsModule.FFlagOptionalNavigation
+local FFlagLuaAppSduiGameDwell = SharedFlagsModule.FFlagLuaAppSduiGameDwell
 
 return function(p1)
-	-- upvalues: FFlagOptionalNavigation (copy), UseNavigationFunction (copy), FFlagUnifyShortcutBarFixImpressions (copy), SignalsReactModule (copy), GetShortcutBarStatusStoreFunction (copy), FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions (copy), UseViewportBoundsFunction (copy), FFlagLuaAppRespectClipAncestorImpressions (copy), ReactModule (copy), ImpressionsTrackerWithoutNavigationModule (copy), ImpressionsTrackerModule (copy)
+	-- upvalues: FFlagOptionalNavigation (copy), UseNavigationFunction (copy), FFlagUnifyShortcutBarFixImpressions (copy), SignalsReactModule (copy), GetShortcutBarStatusStoreFunction (copy), FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions (copy), UseViewportBoundsFunction (copy), FFlagLuaAppRespectClipAncestorImpressions (copy), FFlagLuaAppSduiGameDwell (copy), ReactModule (copy), ImpressionsTrackerWithoutNavigationModule (copy), ImpressionsTrackerModule (copy)
 	local UseNavigationResult = if FFlagOptionalNavigation then UseNavigationFunction() else nil
 	local UseSignalStateResult = if FFlagUnifyShortcutBarFixImpressions then SignalsReactModule.useSignalState(GetShortcutBarStatusStoreFunction(false).getShortcutBarReservedHeight) else nil
 	local v1 = nil
 	local UseViewportBoundsResult = nil
 	
 	if FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions then
-		UseViewportBoundsResult, v12 = UseViewportBoundsFunction(p1.parentRef, nil, if FFlagLuaAppRespectClipAncestorImpressions then p1.respectClipAncestors else nil, if FFlagUnifyShortcutBarFixImpressions then UseSignalStateResult else nil)
+		UseViewportBoundsResult, v13 = UseViewportBoundsFunction(p1.parentRef, nil, if FFlagLuaAppRespectClipAncestorImpressions then p1.respectClipAncestors else nil, if FFlagUnifyShortcutBarFixImpressions then UseSignalStateResult else nil)
 	else
 		UseViewportBoundsResult = UseViewportBoundsFunction(p1.parentRef, nil, if FFlagLuaAppRespectClipAncestorImpressions then p1.respectClipAncestors else nil, if FFlagUnifyShortcutBarFixImpressions then UseSignalStateResult else nil)
 	end
@@ -35,6 +36,9 @@ return function(p1)
 		viewPortFillBounds = if FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions then v1 else nil
 	}
 	
+	if FFlagLuaAppSduiGameDwell then
+		config.visibilityObserver = p1.visibilityObserver
+	end
 	if FFlagOptionalNavigation and UseNavigationResult == nil then
 		config.pageContext = nil
 		

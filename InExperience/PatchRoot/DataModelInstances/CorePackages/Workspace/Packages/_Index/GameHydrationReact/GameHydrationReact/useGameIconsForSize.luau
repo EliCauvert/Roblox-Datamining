@@ -1,18 +1,12 @@
 ﻿local Parent = script:FindFirstAncestor("GameHydrationReact").Parent
 local ReactModule = require(Parent.React)
-local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local DataHydrationModule = require(Parent.DataHydration)
-local FFlagMigrateGameInfoToStore = require(Parent.SharedFlags).FFlagMigrateGameInfoToStore
-local Callback = nil
-local v1 = nil
+local Signal = require(Parent.Signals).createSignal(false)
+local t = {}
 
-if FFlagMigrateGameInfoToStore then
-	Callback = SignalsModule.createSignal(false)
-	v1 = {}
-end
 return function(List, p1, p2)
-	-- upvalues: ReactModule (copy), DataHydrationModule (copy), FFlagMigrateGameInfoToStore (copy), Callback (ref), v1 (ref), SignalsReactModule (copy)
+	-- upvalues: ReactModule (copy), DataHydrationModule (copy), Signal (copy), t (copy), SignalsReactModule (copy)
 	local List1 = {}
 	
 	for _, value in List do
@@ -21,16 +15,16 @@ return function(List, p1, p2)
 	table.sort(List1)
 	
 	return SignalsReactModule.useSignalState((ReactModule.useMemo(function()
-		-- upvalues: DataHydrationModule (upval), p2 (copy), List1 (copy), p1 (copy), FFlagMigrateGameInfoToStore (upval), Callback (upval), v1 (upval)
+		-- upvalues: DataHydrationModule (upval), p2 (copy), List1 (copy), p1 (copy), Signal (upval), t (upval)
 		local GameIconStore = DataHydrationModule.Game.getGameIconStore(false)
 		local AndFetchGameIcons = if p2 then GameIconStore.getAndFetchGameIcons(List1, p1) else GameIconStore.getGameIcons(List1, p1)
 		
 		return function(p3)
-			-- upvalues: FFlagMigrateGameInfoToStore (upval), AndFetchGameIcons (copy), Callback (upval), v1 (upval)
-			if FFlagMigrateGameInfoToStore and next(AndFetchGameIcons) == nil then
-				Callback(p3)
+			-- upvalues: AndFetchGameIcons (copy), Signal (upval), t (upval)
+			if next(AndFetchGameIcons) == nil then
+				Signal(p3)
 				
-				return v1
+				return t
 			end
 			local Urls = {}
 			

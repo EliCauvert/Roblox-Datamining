@@ -970,21 +970,21 @@ end)(function(Frame)
 						for _, Frame1 in ipairs(Current.ScrollBarFrame.ScrollViewFrame.ScrollView.OffsetFrame:GetChildren()) do
 							if FFlagExpChatAutocompleteDropdownRedesignModule then
 								if Frame1.ClassName == "Frame" and Frame.autocompleteDropdownReducer.results[Frame1.LayoutOrder] == Lowered then
-									TextLabelButton = Frame1:FindFirstChild("TextLabelButton")
+									TextLabelButton1 = Frame1:FindFirstChild("TextLabelButton")
 									
-									if TextLabelButton then
-										UseResult2(TextLabelButton)
+									if TextLabelButton1 then
+										UseResult2(TextLabelButton1)
 										break
 									end
 								end
 							elseif Frame1.ClassName == "Frame" then
-								TextLabelButton1 = Frame1:FindFirstChild("TextLabelButton")
+								TextLabelButton = Frame1:FindFirstChild("TextLabelButton")
 								
-								if TextLabelButton1 then
-									local TextLabel = TextLabelButton1:FindFirstChild("TextLabel")
+								if TextLabelButton then
+									local TextLabel = TextLabelButton:FindFirstChild("TextLabel")
 									
 									if TextLabel and TextLabel.Text and TextLabel.Text == Lowered then
-										UseResult2(TextLabelButton1)
+										UseResult2(TextLabelButton)
 										break
 									end
 								end
@@ -1184,9 +1184,9 @@ end)(function(Frame)
 	local BackgroundTransparency = UseInterpolatedClientSettingsModule(ChatInputBarSettings).BackgroundTransparency
 	local BackgroundTransparency1 = UseInterpolatedClientSettingsModule(ChatWindowSettings).BackgroundTransparency
 	local IsSpatialUIEnabled = Frame.isSpatialUIEnabled
-	local CreateElementFunction = ReactModule.createElement
+	local CreateElementFunction3 = ReactModule.createElement
 	local v2 = "Frame"
-	local config5 = {
+	local config = {
 		AutomaticSize = Enum.AutomaticSize.Y,
 		BackgroundColor3 = UseInterpolatedClientSettingsModule(ChatWindowSettings).BackgroundColor3,
 		BackgroundTransparency = if FFlagExpChatNewInputBarModule then 1 else Frame.transparencyValue:map(function(p3): number
@@ -1217,7 +1217,7 @@ end)(function(Frame)
 			end
 		end)
 	}
-	local config6 = {
+	local config1 = {
 		AutocompleteDropdown = GetEnableChatInputBarConfigurationAutocompleteEnabledModule() and Frame.autocompleteEnabled and ReactModule.createElement(AutocompleteDropdownModule, {
 			chatInputBarSettings = ChatInputBarSettings,
 			chatWindowSettings = ChatWindowSettings,
@@ -1359,9 +1359,9 @@ end)(function(Frame)
 			placeholderSelectionImageObject = UseCursorResult
 		})
 	else
-		local CreateElementFunction2 = ReactModule.createElement
+		local CreateElementFunction1 = ReactModule.createElement
 		local v3 = "Frame"
-		local config = {
+		local config2 = {
 			AutomaticSize = Enum.AutomaticSize.XY,
 			BackgroundColor3 = ChatInputBarSettings.BackgroundColor3,
 			BackgroundTransparency = if FFlagExpChatNewInputBarModule then 1 else Frame.transparencyValue:map(function(p3): number
@@ -1371,7 +1371,7 @@ end)(function(Frame)
 			Size = UDim2.new(1, 0, 0, 0)
 		}
 		local ChatInputBarBorderTransparency = ConfigModule.ChatInputBarBorderTransparency
-		local config1 = {
+		local config3 = {
 			Border = ReactModule.createElement("UIStroke", {
 				ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
 				Color = ConfigModule.ChatInputBarBorderColor3,
@@ -1382,23 +1382,23 @@ end)(function(Frame)
 			}),
 			Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 3) })
 		}
-		local CreateElementFunction3 = ReactModule.createElement
+		local CreateElementFunction2 = ReactModule.createElement
 		local v4 = "Frame"
-		local config2 = {
+		local config4 = {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.fromScale(1, 0)
 		}
-		local t = {}
-		local CreateElementFunction1 = ReactModule.createElement
+		local t1 = {}
+		local CreateElementFunction = ReactModule.createElement
 		local v5 = "Frame"
-		local config3 = {
+		local config5 = {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.new(1, -Frame.sendButtonContainerWidth, 0, 0)
 		}
 		local v6 = 0
-		local config4 = {
+		local config6 = {
 			TargetChannelChip = ReactModule.createElement(ChannelChipModule, {
 				transparency = Frame.transparencyValue:map(function(p3): number
 					-- upvalues: v6 (copy)
@@ -1442,13 +1442,13 @@ end)(function(Frame)
 				ref = UseRefResult5
 			})
 		end
-		config4.DisabledPlaceholderLabel = NoUseSignalStateResult1
+		config6.DisabledPlaceholderLabel = NoUseSignalStateResult1
 		local TextBoxContainer = UseSignalStateResult1
 		
 		if TextBoxContainer then
 			local CreateElementFunction4 = ReactModule.createElement
 			local v8 = "Frame"
-			local config7 = {
+			local config21 = {
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(1, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
@@ -1457,7 +1457,7 @@ end)(function(Frame)
 					return UDim2.new(1, -(p3 + 8), 0, 0)
 				end)
 			}
-			local t1 = {}
+			local t = {}
 			local TextBox = UseSignalStateResult1
 			
 			if TextBox then
@@ -1497,19 +1497,19 @@ end)(function(Frame)
 					ref = if ChatInputBarSettings.TextBox then UseRefResult4 else UseRefResult3
 				})
 			end
-			t1.TextBox = TextBox
-			TextBoxContainer = CreateElementFunction4(v8, config7, t1)
+			t.TextBox = TextBox
+			TextBoxContainer = CreateElementFunction4(v8, config21, t)
 		end
-		config4.TextBoxContainer = TextBoxContainer
-		config4.UIPadding = ReactModule.createElement("UIPadding", {
+		config6.TextBoxContainer = TextBoxContainer
+		config6.UIPadding = ReactModule.createElement("UIPadding", {
 			PaddingBottom = UDim.new(0, 10),
 			PaddingLeft = UDim.new(0, 10),
 			PaddingRight = UDim.new(0, 10),
 			PaddingTop = UDim.new(0, 10)
 		})
-		t.TextContainer = CreateElementFunction1(v5, config3, config4)
+		t1.TextContainer = CreateElementFunction(v5, config5, config6)
 		local v10: number = if IsUseStateResultMatch then 0.5 else 0
-		t.SendButton = ReactModule.createElement("TextButton", {
+		t1.SendButton = ReactModule.createElement("TextButton", {
 			AnchorPoint = Vector2.new(1, 0),
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
@@ -1535,10 +1535,10 @@ end)(function(Frame)
 				Size = UDim2.new(0, 30, 0, 30)
 			})
 		})
-		config1.Container = CreateElementFunction3(v4, config2, t)
-		Element = CreateElementFunction2(v3, config, config1)
+		config3.Container = CreateElementFunction2(v4, config4, t1)
+		Element = CreateElementFunction1(v3, config2, config3)
 	end
-	config6.Background = Element
+	config1.Background = Element
 	
-	return CreateElementFunction(v2, config5, config6)
+	return CreateElementFunction3(v2, config, config1)
 end)))

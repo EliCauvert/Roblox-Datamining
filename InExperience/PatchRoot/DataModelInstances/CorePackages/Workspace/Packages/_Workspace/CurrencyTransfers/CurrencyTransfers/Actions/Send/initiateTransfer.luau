@@ -1,6 +1,7 @@
 ﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
 local SharedFlagsModule = require(CurrencyTransfers.Parent.SharedFlags)
 local GetFFlagCurrencyTransferUseBackendTransferLimitsModule = require(CurrencyTransfers.Flags.GetFFlagCurrencyTransferUseBackendTransferLimits)
+local FFlagCurrencyTransferNoFreeTransfersRemainingUpsellModule = require(CurrencyTransfers.Flags.FFlagCurrencyTransferNoFreeTransfersRemainingUpsell)
 local FFlagShowRemainingTransfersForNonPlusModule = require(CurrencyTransfers.Flags.FFlagShowRemainingTransfersForNonPlus)
 local _ = require(CurrencyTransfers.Stores.createTransferStore)
 local InitiateTransferRequestModule = require(CurrencyTransfers.NetworkRequests.initiateTransferRequest)
@@ -18,7 +19,7 @@ local LogCurrencyTransferCounterModule = require(CurrencyTransfers.Utils.logCurr
 local LogRobuxTransferFlowEventModule = require(CurrencyTransfers.Utils.logRobuxTransferFlowEvent)
 
 return function(p1)
-	-- upvalues: PromptStateModule (copy), SharedFlagsModule (copy), LogRobuxTransferFlowEventModule (copy), RobuxTransferFlowEventNameModule (copy), InitiateTransferRequestModule (copy), SetTransferPromptStateModule (copy), GetFFlagCurrencyTransferUseBackendTransferLimitsModule (copy), FFlagShowRemainingTransfersForNonPlusModule (copy), LogCurrencyTransferCounterModule (copy), CurrencyTransferTelemetryModule (copy), FailureReasonModule (copy), HandleTransferBlockModule (copy), TransferRetryOriginModule (copy), HandleTransferErrorModule (copy)
+	-- upvalues: PromptStateModule (copy), SharedFlagsModule (copy), LogRobuxTransferFlowEventModule (copy), RobuxTransferFlowEventNameModule (copy), InitiateTransferRequestModule (copy), SetTransferPromptStateModule (copy), GetFFlagCurrencyTransferUseBackendTransferLimitsModule (copy), FFlagShowRemainingTransfersForNonPlusModule (copy), LogCurrencyTransferCounterModule (copy), CurrencyTransferTelemetryModule (copy), FFlagCurrencyTransferNoFreeTransfersRemainingUpsellModule (copy), FailureReasonModule (copy), HandleTransferBlockModule (copy), TransferRetryOriginModule (copy), HandleTransferErrorModule (copy)
 	local NetworkImpl = p1.getNetworkImpl()
 	local SetTransferRequestIdFunction = p1.setTransferRequestId
 	local SetRobuxBalanceAmountFunction = p1.setRobuxBalanceAmount
@@ -74,7 +75,7 @@ return function(p1)
 			end
 		end
 	end):catch(function(Err)
-		-- upvalues: LogCurrencyTransferCounterModule (upval), p1 (copy), CurrencyTransferTelemetryModule (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), RobuxTransferFlowEventNameModule (upval), FailureReasonModule (upval), HandleTransferBlockModule (upval), TransferRetryOriginModule (upval), HandleTransferErrorModule (upval)
+		-- upvalues: LogCurrencyTransferCounterModule (upval), p1 (copy), CurrencyTransferTelemetryModule (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), RobuxTransferFlowEventNameModule (upval), FFlagCurrencyTransferNoFreeTransfersRemainingUpsellModule (upval), FailureReasonModule (upval), HandleTransferBlockModule (upval), TransferRetryOriginModule (upval), HandleTransferErrorModule (upval)
 		LogCurrencyTransferCounterModule(p1, CurrencyTransferTelemetryModule.CurrencyTransferInitiateFailedCounter)
 		
 		if SharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
@@ -85,8 +86,10 @@ return function(p1)
 			
 			return
 		end
-		if Err.failureReason == FailureReasonModule.AmpRecourseAvailable and Err.ampRecourseActions and Err.ampFeatureCheck then
-			HandleTransferBlockModule(p1, Err.ampRecourseActions, Err.ampFeatureCheck, TransferRetryOriginModule.InitiateTransfer)
+		local IsFailureReasonMatch: boolean = FFlagCurrencyTransferNoFreeTransfersRemainingUpsellModule and Err.failureReason == FailureReasonModule.NoFreeTransfersRemaining
+		
+		if (Err.failureReason == FailureReasonModule.AmpRecourseAvailable or IsFailureReasonMatch) and (Err.ampRecourseActions and Err.ampFeatureCheck) then
+			HandleTransferBlockModule(p1, Err.ampRecourseActions, Err.ampFeatureCheck, TransferRetryOriginModule.InitiateTransfer, IsFailureReasonMatch)
 			
 			return
 		else

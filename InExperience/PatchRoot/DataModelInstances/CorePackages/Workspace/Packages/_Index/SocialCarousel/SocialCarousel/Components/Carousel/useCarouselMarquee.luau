@@ -9,8 +9,12 @@ local UseMarqueeActiveTilesFunction = require(script.Parent.useMarqueeActiveTile
 local MarqueeTextMotionModule = require(SocialCarousel.Components.MarqueeText.MarqueeTextMotion)
 local UseNavigationFocusFunction = require(Parent.Navigation).useNavigationFocus
 local CreateMarqueeSessionStoreModule = require(SocialCarousel.Stores.MarqueeSession.createMarqueeSessionStore)
+local GetMarqueeSessionStoreFunction = require(SocialCarousel.Stores.MarqueeSession.getMarqueeSessionStore).getMarqueeSessionStore
+local _ = require(SocialCarousel.Stores.MarqueeSession.MarqueeScrollContext)
 local Tile = require(SocialCarousel.Common.Enums).Tile
 local FFlagSocialCarouselFixColdStartJitterModule = require(SocialCarousel.Flags.FFlagSocialCarouselFixColdStartJitter)
+local FFlagSocialCarouselInGameTitleMarquee = require(Parent.SharedFlags).FFlagSocialCarouselInGameTitleMarquee
+local t = {}
 
 local function _(Enabled, p1): boolean
 	return Enabled ~= true or p1 ~= nil
@@ -32,38 +36,126 @@ local _ = function(Console, Enabled, p1): boolean
 end
 
 return {
-	useCarouselMarquee = function(p1, p2, p3, p4)
-		-- upvalues: RobloxAppHooksModule (copy), FoundationModule (copy), RobloxAppEnumsModule (copy), UseNavigationFocusFunction (copy), ReactModule (copy), CreateMarqueeSessionStoreModule (copy), Tile (copy), MarqueeTextMotionModule (copy), FFlagSocialCarouselFixColdStartJitterModule (copy), CollectionViewsModule (copy), UseMarqueeActiveTilesFunction (copy)
+	useCarouselMarquee = function(p1, p2, JoinPopoverUserId, p3, JoinPopoverUserIdRef, JoinSheetUserIdRef, p4, Enabled)
+		-- upvalues: RobloxAppHooksModule (copy), FoundationModule (copy), UseNavigationFocusFunction (copy), RobloxAppEnumsModule (copy), ReactModule (copy), CreateMarqueeSessionStoreModule (copy), GetMarqueeSessionStoreFunction (copy), FFlagSocialCarouselInGameTitleMarquee (copy), Tile (copy), MarqueeTextMotionModule (copy), FFlagSocialCarouselFixColdStartJitterModule (copy), CollectionViewsModule (copy), UseMarqueeActiveTilesFunction (copy), t (copy)
 		local UseDeviceTypeResult = RobloxAppHooksModule.useDeviceType()
 		local ReducedMotion = FoundationModule.Hooks.usePreferences().reducedMotion
-		local IsUseDeviceTypeResultMatch: boolean = UseDeviceTypeResult == RobloxAppEnumsModule.DeviceType.Phone or UseDeviceTypeResult == RobloxAppEnumsModule.DeviceType.Tablet
 		local UseNavigationFocusResult = UseNavigationFocusFunction()
-		local IsNotUseNavigationFocusResult: boolean = UseNavigationFocusResult ~= true or p3 ~= nil
-		local DesktopEnabled: boolean = UseDeviceTypeResult == RobloxAppEnumsModule.DeviceType.Desktop and UseNavigationFocusResult == true and p3 == nil
-		local ConsoleEnabled: boolean = UseDeviceTypeResult == RobloxAppEnumsModule.DeviceType.Console and UseNavigationFocusResult == true and p3 == nil
-		local DesktopEnabled1: boolean = DesktopEnabled or ConsoleEnabled
+		local IsNotUseNavigationFocusResult: boolean = UseNavigationFocusResult ~= true or JoinPopoverUserId ~= nil
+		local IsEnabled = Enabled == true
+		local IsUseDeviceTypeResultMatch: boolean = IsEnabled and (UseDeviceTypeResult == RobloxAppEnumsModule.DeviceType.Phone or UseDeviceTypeResult == RobloxAppEnumsModule.DeviceType.Tablet)
+		local NoJoinPopoverUserId: boolean = IsEnabled and (UseDeviceTypeResult == RobloxAppEnumsModule.DeviceType.Desktop and UseNavigationFocusResult == true and JoinPopoverUserId == nil)
+		local NoJoinPopoverUserId1: boolean = IsEnabled and (UseDeviceTypeResult == RobloxAppEnumsModule.DeviceType.Console and UseNavigationFocusResult == true and JoinPopoverUserId == nil)
+		local NoJoinPopoverUserId2: boolean = NoJoinPopoverUserId or NoJoinPopoverUserId1
+		local IsUseDeviceTypeResultMatch1: boolean = IsEnabled and (UseDeviceTypeResult == RobloxAppEnumsModule.DeviceType.Phone or UseDeviceTypeResult == RobloxAppEnumsModule.DeviceType.Tablet)
 		local UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: CreateMarqueeSessionStoreModule (upval)
 			return CreateMarqueeSessionStoreModule()
 		end, {})
-		ReactModule.useEffect(function()
-			-- upvalues: UseNavigationFocusResult (copy), UseMemoResult (copy)
-			if UseNavigationFocusResult == true then
-				UseMemoResult.notifyHomeFocused()
+		local MarqueeSessionStore = if IsEnabled and p4 ~= nil then GetMarqueeSessionStoreFunction(p4) else UseMemoResult
+		local UseRefResult = ReactModule.useRef(nil)
+		local UseRefResult1 = ReactModule.useRef(false)
+		local UseRefResult2 = ReactModule.useRef(0)
+		
+		if not UseRefResult1.current then
+			UseRefResult1.current = true
+			
+			if IsEnabled then
+				UseRefResult2.current = MarqueeSessionStore.beginMount()
+				local CurrentScroll = MarqueeSessionStore.getCurrentScroll()
+				local HeldScroll = MarqueeSessionStore.getHeldScroll()
+				
+				if IsNotUseNavigationFocusResult and CurrentScroll ~= nil then
+					UseRefResult.current = CurrentScroll
+					MarqueeSessionStore.holdCurrentScroll()
+				elseif HeldScroll ~= nil then
+					UseRefResult.current = HeldScroll
+					MarqueeSessionStore.discardHeldScroll()
+				end
 			end
-		end, { UseNavigationFocusResult, UseMemoResult })
-		local X = if p4.containerFrame then p4.containerFrame.AbsoluteSize.X else 0
-		local Gutter = if p4.appCompositionEnabled then p4.gutter else p4.columnGap
-		local SideMargin = if p4.appCompositionEnabled then 0 else p4.sideMargin
-		local CountP7: number = if FFlagSocialCarouselFixColdStartJitterModule and not p4.isColdStartLayoutReady then 0 elseif p4.showSkeleton then (p4.itemsPerRow or p4.defaultSkeletonCount) + 1 elseif p2 then #p2 else 0
-		local Smallest = math.min(p4.maxTilesToShow or CountP7, CountP7)
-		local FractionalItemAmount = if p4.appCompositionEnabled then 0 else p4.fractionalItemAmount or 0
-		local FractionalItemAmount1 = if (p4.itemsPerRow or 0) < Smallest then FractionalItemAmount else 0
-		local CarouselPeek = if p4.appCompositionEnabled then p4.carouselPeek else 0
+		end
+		local UseRefResult3 = ReactModule.useRef(MarqueeSessionStore)
+		UseRefResult3.current = MarqueeSessionStore
+		local UseRefResult4 = ReactModule.useRef(IsNotUseNavigationFocusResult)
+		UseRefResult4.current = IsNotUseNavigationFocusResult
+		local UseRefResult5 = ReactModule.useRef(IsEnabled)
+		UseRefResult5.current = IsEnabled
+		ReactModule.useEffect(function()
+			-- upvalues: UseNavigationFocusResult (copy), FFlagSocialCarouselInGameTitleMarquee (upval), JoinSheetUserIdRef (copy), MarqueeSessionStore (copy)
+			if UseNavigationFocusResult == true then
+				if FFlagSocialCarouselInGameTitleMarquee and JoinSheetUserIdRef ~= nil then
+					JoinSheetUserIdRef.current = nil
+				end
+				MarqueeSessionStore.notifyHomeFocused()
+			end
+		end, {
+			UseNavigationFocusResult,
+			MarqueeSessionStore,
+			if FFlagSocialCarouselInGameTitleMarquee then JoinSheetUserIdRef else nil
+		})
+		ReactModule.useEffect(function()
+			-- upvalues: IsEnabled (copy), IsNotUseNavigationFocusResult (copy), MarqueeSessionStore (copy), UseRefResult2 (copy)
+			if not IsEnabled then return end
+			if IsNotUseNavigationFocusResult then
+				MarqueeSessionStore.holdCurrentScroll()
+				
+				return
+			end
+			if MarqueeSessionStore.isCurrentMount(UseRefResult2.current) then
+				MarqueeSessionStore.discardHeldScroll()
+			end
+		end, {
+			IsNotUseNavigationFocusResult,
+			MarqueeSessionStore,
+			IsEnabled,
+			UseRefResult2
+		})
+		ReactModule.useEffect(function()
+			-- upvalues: UseRefResult5 (copy), UseRefResult4 (copy), UseRefResult3 (copy), UseRefResult2 (copy)
+			return function()
+				-- upvalues: UseRefResult5 (upval), UseRefResult4 (upval), UseRefResult3 (upval), UseRefResult2 (upval)
+				if UseRefResult5.current ~= true or not UseRefResult4.current then return end
+				if UseRefResult3.current.isCurrentMount(UseRefResult2.current) then
+					UseRefResult3.current.holdCurrentScroll()
+				end
+			end
+		end, {})
+		local UseMemoResult1 = ReactModule.useMemo(function()
+			-- upvalues: IsEnabled (copy), UseRefResult (copy), UseRefResult3 (copy)
+			return if IsEnabled then {
+				initialOffsetFor = function(TileId)
+					-- upvalues: UseRefResult (upval)
+					local Current = UseRefResult.current
+					
+					return if Current == nil or Current.tileId ~= TileId then nil else Current.offset
+				end,
+				saveOffset = function(p5, p6)
+					-- upvalues: UseRefResult3 (upval)
+					UseRefResult3.current.setCurrentScroll(p5, p6)
+				end,
+				clearCurrentScroll = function(TileId)
+					-- upvalues: UseRefResult (upval), UseRefResult3 (upval)
+					local Current = UseRefResult.current
+					
+					if Current ~= nil and Current.tileId == TileId then
+						UseRefResult.current = nil
+					end
+					UseRefResult3.current.clearCurrentScroll(TileId)
+				end
+			} else nil
+		end, { IsEnabled, UseRefResult, UseRefResult3 })
+		local X = if p3.containerFrame then p3.containerFrame.AbsoluteSize.X else 0
+		local Gutter = if p3.appCompositionEnabled then p3.gutter else p3.columnGap
+		local SideMargin = if p3.appCompositionEnabled then 0 else p3.sideMargin
+		local CountP7: number = if FFlagSocialCarouselFixColdStartJitterModule and not p3.isColdStartLayoutReady then 0 elseif p3.showSkeleton then (p3.itemsPerRow or p3.defaultSkeletonCount) + 1 elseif p2 then #p2 else 0
+		local Smallest = math.min(p3.maxTilesToShow or CountP7, CountP7)
+		local FractionalItemAmount = if p3.appCompositionEnabled then 0 else p3.fractionalItemAmount or 0
+		local FractionalItemAmount1 = if (p3.itemsPerRow or 0) < Smallest then FractionalItemAmount else 0
+		local CarouselPeek = if p3.appCompositionEnabled then p3.carouselPeek else 0
 		local UseMarqueeActiveTilesResult = UseMarqueeActiveTilesFunction(p1, {
-			tileCount = if p4.showSkeleton or not p2 then 0 else #p2,
+			tileCount = if p3.showSkeleton or not p2 then 0 else #p2,
 			containerWidth = math.max(0, X - 2 * (SideMargin or 0)),
-			tileWidth = if p4.itemsPerRow > 0 and X > 0 then CollectionViewsModule.calculateItemWidth(p4.itemsPerRow, Gutter or 0, SideMargin or 0, X, FractionalItemAmount1 or 0, CarouselPeek or 0) else 0,
+			tileWidth = if p3.itemsPerRow > 0 and X > 0 then CollectionViewsModule.calculateItemWidth(p3.itemsPerRow, Gutter or 0, SideMargin or 0, X, FractionalItemAmount1 or 0, CarouselPeek or 0) else 0,
 			columnGap = Gutter or 0,
 			tiles = ReactModule.useMemo(function()
 				-- upvalues: p2 (copy), Tile (upval)
@@ -89,20 +181,29 @@ return {
 			direction = MarqueeTextMotionModule.textDirectionFromLocale(game:GetService("LocalizationService").RobloxLocaleId),
 			reducedMotion = ReducedMotion,
 			idleSequenceEnabled = IsUseDeviceTypeResultMatch,
-			manualMarqueeEnabled = DesktopEnabled1,
-			loopsRemainingStore = UseMemoResult
+			manualMarqueeEnabled = NoJoinPopoverUserId2,
+			homeBlurredOrJoinCardOpen = IsNotUseNavigationFocusResult,
+			joinPopoverUserId = JoinPopoverUserId,
+			joinPopoverUserIdRef = JoinPopoverUserIdRef,
+			joinSheetUserIdRef = JoinSheetUserIdRef,
+			isDesktop = UseDeviceTypeResult == RobloxAppEnumsModule.DeviceType.Desktop,
+			loopsRemainingStore = MarqueeSessionStore,
+			restoredTileId = if UseRefResult.current == nil then nil else UseRefResult.current.tileId,
+			marqueeEnabled = IsEnabled
 		})
 		
 		return {
-			activeByIndex = UseMarqueeActiveTilesResult.activeByIndex,
+			activeByIndex = if IsEnabled then UseMarqueeActiveTilesResult.activeByIndex else t,
 			isPaused = UseMarqueeActiveTilesResult.isPaused or IsNotUseNavigationFocusResult,
-			onMarqueeFinished = UseMarqueeActiveTilesResult.onMarqueeFinished,
-			onManualMarqueeStart = UseMarqueeActiveTilesResult.onManualMarqueeStart,
-			onManualMarqueeEnd = UseMarqueeActiveTilesResult.onManualMarqueeEnd,
-			marqueeRunId = UseMarqueeActiveTilesResult.marqueeRunId,
+			onMarqueeFinished = if IsEnabled then UseMarqueeActiveTilesResult.onMarqueeFinished else nil,
+			onManualMarqueeStart = if IsEnabled then UseMarqueeActiveTilesResult.onManualMarqueeStart else nil,
+			onManualMarqueeEnd = if IsEnabled then UseMarqueeActiveTilesResult.onManualMarqueeEnd else nil,
+			marqueeRunId = if IsEnabled then UseMarqueeActiveTilesResult.marqueeRunId else nil,
 			handsOff = IsUseDeviceTypeResultMatch,
-			desktopEnabled = DesktopEnabled,
-			consoleEnabled = ConsoleEnabled
+			desktopEnabled = NoJoinPopoverUserId,
+			consoleEnabled = NoJoinPopoverUserId1,
+			marqueeShortTitlesEnabled = IsUseDeviceTypeResultMatch1,
+			scrollContext = UseMemoResult1
 		}
 	end
 }

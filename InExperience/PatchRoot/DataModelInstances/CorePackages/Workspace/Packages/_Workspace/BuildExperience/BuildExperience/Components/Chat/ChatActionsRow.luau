@@ -4,7 +4,6 @@ local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
 local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPicker)
-local FFlagBuildExperienceConfirmStopModule = require(BuildExperience.Flags.FFlagBuildExperienceConfirmStop)
 local FFlagBuildExperienceGateSendDuringResponseModule = require(BuildExperience.Flags.FFlagBuildExperienceGateSendDuringResponse)
 local StopAssistantResponseDialogModule = require(script.Parent.StopAssistantResponseDialog)
 local IconButton = FoundationModule.IconButton
@@ -17,7 +16,7 @@ local function constantSource(): number
 end
 
 return function(Frame)
-	-- upvalues: ReactModule (copy), constantSource (copy), SignalsReactModule (copy), FFlagBuildExperienceModelPickerModule (copy), FFlagBuildExperienceGateSendDuringResponseModule (copy), FFlagBuildExperienceConfirmStopModule (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), StopAssistantResponseDialogModule (copy)
+	-- upvalues: ReactModule (copy), constantSource (copy), SignalsReactModule (copy), FFlagBuildExperienceModelPickerModule (copy), FFlagBuildExperienceGateSendDuringResponseModule (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), StopAssistantResponseDialogModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useCallback(function(Callback: (any) -> ())
 		-- upvalues: Frame (copy), constantSource (upval)
 		if Frame.getIsComposerEmpty ~= nil then
@@ -32,57 +31,42 @@ return function(Frame)
 	local IsNotCanSendWhileResponding1: boolean = if Frame.isAssistantResponding then IsNotCanSendWhileResponding else FFlagBuildExperienceModelPickerModule and (Frame.canStopAssistantResponse == true and IsNotCanSendWhileResponding)
 	local IsNotIsAssistantResponding: boolean = Frame.isAssistantResponding ~= true or Frame.canSendWhileResponding == true
 	local NoIsNotIsAssistantResponding: boolean = not IsNotCanSendWhileResponding1 and (FFlagBuildExperienceGateSendDuringResponseModule and not IsNotIsAssistantResponding or (UseSignalStateResult and Frame.hasAttachments ~= true or Frame.isSendDisabled == true))
-	local v1 = false
-	local Callback = nil
-	local UseResult = nil
-	local UseResult1 = nil
-	
-	if FFlagBuildExperienceConfirmStopModule then
-		local UseStateResult2 = nil
-		v1, UseStateResult2 = ReactModule.useState(false)
-		Callback = UseStateResult2
-		UseResult = ReactModule.useCallback(function()
-			-- upvalues: UseStateResult2 (ref)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseResult = ReactModule.useCallback(function()
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
+	end, {})
+	local UseResult1 = ReactModule.useCallback(function()
+		-- upvalues: UseStateResult2 (copy), Frame (copy)
+		UseStateResult2(false)
+		Frame.onStop()
+	end, { Frame.onStop })
+	ReactModule.useEffect(function()
+		-- upvalues: IsNotCanSendWhileResponding1 (copy), UseStateResult2 (copy)
+		if not IsNotCanSendWhileResponding1 then
 			UseStateResult2(false)
-		end, {})
-		UseResult1 = ReactModule.useCallback(function()
-			-- upvalues: UseStateResult2 (ref), Frame (copy)
-			UseStateResult2(false)
-			Frame.onStop()
-		end, { Frame.onStop })
-		ReactModule.useEffect(function()
-			-- upvalues: IsNotCanSendWhileResponding1 (copy), UseStateResult2 (ref)
-			if not IsNotCanSendWhileResponding1 then
-				UseStateResult2(false)
-			end
-		end, { IsNotCanSendWhileResponding1 })
-	end
-	local Element = ReactModule.createElement(IconButton, {
-		isCircular = true,
-		LayoutOrder = Frame.LayoutOrder,
-		icon = if IsNotCanSendWhileResponding1 then IconName.StopSmall else IconName.ArrowWideShortUp,
-		size = InputSize.Small,
-		variant = if IsNotCanSendWhileResponding1 then ButtonVariant.Standard elseif UseSignalStateResult and Frame.hasAttachments ~= true then ButtonVariant.Standard else ButtonVariant.Emphasis,
-		isDisabled = NoIsNotIsAssistantResponding or IsNotCanSendWhileResponding1 and Frame.isStopDisabled == true,
-		onActivated = function()
-			-- upvalues: IsNotCanSendWhileResponding1 (copy), FFlagBuildExperienceConfirmStopModule (upval), Callback (ref), Frame (copy)
-			if not IsNotCanSendWhileResponding1 then
-				Frame.onSend()
-				
-				return
-			end
-			if FFlagBuildExperienceConfirmStopModule then
-				Callback(true)
-				
-				return
-			else
-				Frame.onStop()
-			end
 		end
-	})
+	end, { IsNotCanSendWhileResponding1 })
 	
-	return if FFlagBuildExperienceConfirmStopModule then ReactModule.createElement(ReactModule.Fragment, nil, {
-		Action = Element,
-		StopDialog = if v1 and IsNotCanSendWhileResponding1 then ReactModule.createElement(StopAssistantResponseDialogModule, { onCancel = UseResult, onConfirm = UseResult1 }) else nil
-	}) else Element
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		Action = ReactModule.createElement(IconButton, {
+			isCircular = true,
+			LayoutOrder = Frame.LayoutOrder,
+			icon = if IsNotCanSendWhileResponding1 then IconName.StopSmall else IconName.ArrowWideShortUp,
+			size = InputSize.Small,
+			variant = if IsNotCanSendWhileResponding1 then ButtonVariant.Standard elseif UseSignalStateResult and Frame.hasAttachments ~= true then ButtonVariant.Standard else ButtonVariant.Emphasis,
+			isDisabled = NoIsNotIsAssistantResponding or IsNotCanSendWhileResponding1 and Frame.isStopDisabled == true,
+			onActivated = function()
+				-- upvalues: IsNotCanSendWhileResponding1 (copy), UseStateResult2 (copy), Frame (copy)
+				if IsNotCanSendWhileResponding1 then
+					UseStateResult2(true)
+					
+					return
+				else
+					Frame.onSend()
+				end
+			end
+		}),
+		StopDialog = if UseStateResult and IsNotCanSendWhileResponding1 then ReactModule.createElement(StopAssistantResponseDialogModule, { onCancel = UseResult, onConfirm = UseResult1 }) else nil
+	})
 end

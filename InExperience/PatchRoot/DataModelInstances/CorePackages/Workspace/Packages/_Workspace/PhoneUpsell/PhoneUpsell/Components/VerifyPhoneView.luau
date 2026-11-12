@@ -2,9 +2,7 @@
 local Parent = PhoneUpsell.Parent
 local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
-local FoundationModule = require(Parent.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
@@ -15,7 +13,7 @@ local LinkButton = UIBloxModule.App.Button.LinkButton
 local GetFFlagDisableVerifyPhoneViewOnSuccessModule = require(PhoneUpsell.Flags.GetFFlagDisableVerifyPhoneViewOnSuccess)
 
 return function(p1)
-	-- upvalues: UseStyleFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), ButtonType (copy), GetFFlagDisableVerifyPhoneViewOnSuccessModule (copy), GetPartialPageModalMiddleContentWidthFunction (copy), PartialPageModal (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), TextInputBoxWithBorder (copy), LinkButton (copy)
+	-- upvalues: UseStyleFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), ButtonType (copy), GetFFlagDisableVerifyPhoneViewOnSuccessModule (copy), GetPartialPageModalMiddleContentWidthFunction (copy), PartialPageModal (copy), NormalizeFontFaceFunction (copy), TextInputBoxWithBorder (copy), LinkButton (copy)
 	local UseStyleResult = UseStyleFunction()
 	local config = {
 		titleKey = "Feature.VerificationUpsell.Heading.VerifyYourPhone",
@@ -125,8 +123,7 @@ return function(p1)
 				TextSize = UseStyleResult.Font.BaseSize,
 				TextColor3 = UseStyleResult.Theme.TextDefault.Color,
 				TextTransparency = UseStyleResult.Theme.TextDefault.Transparency,
-				Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
 				TextXAlignment = Enum.TextXAlignment.Left,
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Size = UDim2.new(0, GetPartialPageModalMiddleContentWidthFunction(p1.screenSize.X), 0, 0)

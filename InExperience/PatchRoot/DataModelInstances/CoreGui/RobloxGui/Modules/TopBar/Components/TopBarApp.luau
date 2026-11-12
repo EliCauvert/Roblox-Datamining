@@ -52,6 +52,7 @@ local Chrome = script.Parent.Parent.Parent.Chrome
 local EnabledFunction = require(CorePackages.Workspace.Packages.Chrome).Enabled
 local PlaytestModeThemeProviderModule = require(Chrome.ChromeShared.Unibar.PlaytestModeThemeProvider)
 local FFlagEnablePlaytestModeUnibar = SharedFlagsModule.FFlagEnablePlaytestModeUnibar
+local FFlagUseUIOverlayForCloudPlay = SharedFlagsModule.FFlagUseUIOverlayForCloudPlay
 local FFlagEnableUISelector = CoreGuiCommonModule.Flags.FFlagEnableUISelector
 local FFlagAppNavMyStatsTab = SharedFlagsModule.FFlagAppNavMyStatsTab
 local FFlagEnableConsoleExpControls = SharedFlagsModule.FFlagEnableConsoleExpControls
@@ -68,7 +69,9 @@ local FFlagEnableInExperienceShop = SharedFlagsModule.FFlagEnableInExperienceSho
 local FFlagEnableInExperienceShop1 = InExperienceShopModule.FFlagEnableExperienceShopGlobalIcon and FFlagEnableInExperienceShop
 local FFlagCenterInExperienceShopWindow = InExperienceShopModule.FFlagCenterInExperienceShopWindow
 local FFlagExperienceShopNewIconography = InExperienceShopModule.FFlagExperienceShopNewIconography
+local FFlagEnableFreeTrialTopBarChip = InExperienceShopModule.FFlagEnableFreeTrialTopBarChip
 local ShopGlobalIcon = InExperienceShopModule.ShopGlobalIcon
+local FreeTrialChipHostModule = require(Presentation.FreeTrialChipHost)
 local FFlagTopBarShopIconV2Module = require(script.Parent.Parent.Flags.FFlagTopBarShopIconV2)
 local ShopIconModule = if FFlagTopBarShopIconV2Module then require(Presentation.ShopIcon) else nil
 local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
@@ -76,6 +79,8 @@ local FFlagShowGameAgeRating = SharedFlagsModule.FFlagShowGameAgeRating
 local FFlagExperienceAgeRatingBadge = require(CorePackages.Workspace.Packages.InExperienceTopBar).Flags.FFlagExperienceAgeRatingBadge
 local FFlagShowGameAgeRating1 = FFlagExperienceAgeRatingBadge and FFlagShowGameAgeRating
 local ExperienceAgeRatingBadgeModule = require(CorePackages.Workspace.Packages.InExperienceTopBar.ExperienceAgeRatingBadge)
+local FFlagEnableRestyleTopBarModule = require(CorePackages.Workspace.Packages.InExperienceCloudPlay.FFlagEnableRestyleTopBar)
+local RestyleTimerModule = if FFlagEnableRestyleTopBarModule then require(Presentation.RestyleTimer) else nil
 local ExperienceAgeRatingPolicyModule = require(script.Parent.Parent.ExperienceAgeRatingPolicy)
 local IsInExperienceUIVREnabled = require(CorePackages.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
 local IsSpatialFunction = require(CorePackages.Workspace.Packages.AppCommonLib).isSpatial
@@ -166,7 +171,7 @@ TopBarApp.validateProps = TModule.strictInterface({
 })
 
 function TopBarApp.init(p1)
-	-- upvalues: RoactModule (copy), SignalsModule (copy), DisplayModule (copy), FFlagAddUILessMode (copy), Stores (copy), FIntAddUILessModeVariant (copy), TweenService (copy), LocalStoreModule (ref), ConstantsModule1 (ref), UILessTooltipDuration (copy), SettingsHubModule (copy), ConstantsModule (copy), ContextActionService (copy), FFlagTopBarSignalizeMenuOpen (copy), SettingsShowSignal (copy), FFlagTopBarSignalizeKeepOutAreas (copy), CoreGuiCommonModule (copy), FFlagExperienceAgeRatingBadge (copy), IsSpatialFunction (copy), ReactModule (copy), ExperienceAgeRatingPolicyModule (copy), EnabledFunction (copy), Chrome (copy), FFlagEnableConsoleExpControls (copy), GamepadConnectorModule (ref), FFlagEnableInExperienceShop1 (copy), EnabledResult (copy), InExperienceShopModule (copy), FFlagCenterInExperienceShopWindow (copy), TextChatService (copy), FFlagShowSwitchServerButton1 (copy), GetSwitchServerStoreFunction (copy)
+	-- upvalues: RoactModule (copy), SignalsModule (copy), DisplayModule (copy), FFlagAddUILessMode (copy), Stores (copy), FIntAddUILessModeVariant (copy), TweenService (copy), LocalStoreModule (ref), ConstantsModule1 (ref), UILessTooltipDuration (copy), SettingsHubModule (copy), ConstantsModule (copy), ContextActionService (copy), FFlagTopBarSignalizeMenuOpen (copy), SettingsShowSignal (copy), FFlagTopBarSignalizeKeepOutAreas (copy), CoreGuiCommonModule (copy), FFlagExperienceAgeRatingBadge (copy), IsSpatialFunction (copy), ReactModule (copy), ExperienceAgeRatingPolicyModule (copy), FFlagEnableFreeTrialTopBarChip (copy), GamepadConnectorModule (ref), EnabledFunction (copy), Chrome (copy), FFlagEnableConsoleExpControls (copy), FFlagEnableInExperienceShop1 (copy), EnabledResult (copy), InExperienceShopModule (copy), FFlagCenterInExperienceShopWindow (copy), TextChatService (copy), FFlagShowSwitchServerButton1 (copy), GetSwitchServerStoreFunction (copy)
 	p1.unibarRightSidePosition, p1.setUnibarRightSidePosition = RoactModule.createBinding(UDim2.new())
 	p1.closeButtonState, p1.setCloseButtonState = RoactModule.createBinding(false)
 	p1.disposeUiScaleEffect = SignalsModule.createEffect(function(p2)
@@ -304,6 +309,10 @@ function TopBarApp.init(p1)
 			(if FFlagTopBarSignalizeKeepOutAreas then p1.keepOutAreasStore.setKeepOutArea else p1.props.setKeepOutArea)(ExperienceAgeRatingPolicyModule.keepOutAreaId, if Frame then Frame.AbsolutePosition else Vector2.zero, if Frame then Frame.AbsoluteSize else Vector2.zero)
 		end
 	end
+	if FFlagEnableFreeTrialTopBarChip then
+		p1.freeTrialShowTopBar, p1.setFreeTrialShowTopBar = ReactModule.createBinding(not GamepadConnectorModule or GamepadConnectorModule:getShowTopBar():get())
+		p1.freeTrialUiVisible, p1.setFreeTrialUiVisible = ReactModule.createBinding(not FFlagAddUILessMode or FIntAddUILessModeVariant == 0 or not p1.uiLessStore or not p1.uiLessStore.getUILessModeEnabled(false) or p1.uiLessStore.getUIVisible(false))
+	end
 	function p1:onCloseBtnStateChange(p2)
 		-- upvalues: p1 (copy)
 		p1.setCloseButtonState(p2)
@@ -376,7 +385,7 @@ function TopBarApp.init(p1)
 end
 
 function TopBarApp.didMount(p1)
-	-- upvalues: FFlagExperienceAgeRatingBadge (copy), GamepadConnectorModule (ref), FFlagAddUILessMode (copy), FIntAddUILessModeVariant (copy), SignalsModule (copy), VRService (copy), IsSpatialFunction (copy), EnabledFunction (copy), Chrome (copy), FFlagEnableInExperienceShop1 (copy), EnabledResult (copy), ConstantsModule1 (ref), FFlagEnableConsoleExpControls (copy)
+	-- upvalues: FFlagExperienceAgeRatingBadge (copy), GamepadConnectorModule (ref), FFlagAddUILessMode (copy), FIntAddUILessModeVariant (copy), SignalsModule (copy), VRService (copy), IsSpatialFunction (copy), FFlagEnableFreeTrialTopBarChip (copy), EnabledFunction (copy), Chrome (copy), FFlagEnableInExperienceShop1 (copy), EnabledResult (copy), ConstantsModule1 (ref), FFlagEnableConsoleExpControls (copy)
 	if FFlagExperienceAgeRatingBadge then
 		if GamepadConnectorModule then
 			local ShowTopBar = GamepadConnectorModule:getShowTopBar()
@@ -397,6 +406,27 @@ function TopBarApp.didMount(p1)
 			-- upvalues: p1 (copy), IsSpatialFunction (upval)
 			p1:setState({ ageRatingSpatial = IsSpatialFunction() })
 		end)
+	end
+	if FFlagEnableFreeTrialTopBarChip then
+		if GamepadConnectorModule then
+			local ShowTopBar1 = GamepadConnectorModule:getShowTopBar()
+			p1.freeTrialShowTopBarConnection = ShowTopBar1:connect(function()
+				-- upvalues: p1 (copy), ShowTopBar1 (copy)
+				p1.setFreeTrialShowTopBar(ShowTopBar1:get())
+			end, true)
+		end
+		if FFlagAddUILessMode and FIntAddUILessModeVariant ~= 0 and p1.uiLessStore then
+			p1.freeTrialUiVisibleEffect = SignalsModule.createEffect(function(p2)
+				-- upvalues: p1 (copy)
+				if p1.uiLessStore.getUILessModeEnabled(p2) then
+					p1.setFreeTrialUiVisible(p1.uiLessStore.getUIVisible(p2))
+					
+					return
+				else
+					p1.setFreeTrialUiVisible(true)
+				end
+			end)
+		end
 	end
 	if EnabledFunction() then
 		local ServiceModule = require(Chrome.Service)
@@ -432,7 +462,7 @@ function TopBarApp.didMount(p1)
 end
 
 function TopBarApp.willUnmount(p1)
-	-- upvalues: EnabledFunction (copy), FFlagEnableConsoleExpControls (copy), FFlagEnableInExperienceShop1 (copy), EnabledResult (copy), FFlagAddUILessMode (copy), FIntAddUILessModeVariant (copy), ContextActionService (copy), FFlagTopBarSignalizeMenuOpen (copy), FFlagTopBarSignalizeKeepOutAreas (copy), FFlagShowSwitchServerButton1 (copy)
+	-- upvalues: FFlagEnableFreeTrialTopBarChip (copy), EnabledFunction (copy), FFlagEnableConsoleExpControls (copy), FFlagEnableInExperienceShop1 (copy), EnabledResult (copy), FFlagAddUILessMode (copy), FIntAddUILessModeVariant (copy), ContextActionService (copy), FFlagTopBarSignalizeMenuOpen (copy), FFlagTopBarSignalizeKeepOutAreas (copy), FFlagShowSwitchServerButton1 (copy)
 	if p1.ageRatingVisibilityConnection then
 		p1.ageRatingVisibilityConnection:disconnect()
 	end
@@ -441,6 +471,14 @@ function TopBarApp.willUnmount(p1)
 	end
 	if p1.ageRatingSpatialConnection then
 		p1.ageRatingSpatialConnection:Disconnect()
+	end
+	if FFlagEnableFreeTrialTopBarChip then
+		if p1.freeTrialShowTopBarConnection then
+			p1.freeTrialShowTopBarConnection:disconnect()
+		end
+		if p1.freeTrialUiVisibleEffect then
+			p1.freeTrialUiVisibleEffect()
+		end
 	end
 	if EnabledFunction() then
 		if p1.orderAlignmentConnection then
@@ -571,7 +609,7 @@ function TopBarApp.renderUnibarFrame(p1, p2, IsEligible)
 end
 
 function TopBarApp.renderWithStyle(p1, p2)
-	-- upvalues: EnabledFunction (copy), ExperienceAgeRatingPolicyModule (copy), FFlagExperienceAgeRatingBadge (copy), IsSpatialFunction (copy), ConstantsModule2 (copy), EnabledResult (copy), FFlagEnableInExperienceShop1 (copy), FFlagAppNavMyStatsTab (copy), BuildModeLaunchModule (copy), VRService (copy), ConstantsModule1 (ref), FFlagTopBarSignalizeMenuOpen (copy), TenFootInterfaceModule (copy), RoactModule (copy), VoiceStateContextModule (copy), VRBottomUnibarModule (copy), Default (copy), IsInExperienceUIVREnabled (copy), MenuIconModule (copy), FFlagEnableConsoleExpControls (copy), FFlagTopBarSignalizeKeepOutAreas (copy), SelectionCursorProvider (copy), FFlagEnablePlaytestModeUnibar (copy), PlaytestModeThemeProviderModule (copy), ReactModule (copy), View (copy), ExperienceAgeRatingBadgeModule (copy), FFlagTopBarSignalizeScreenSize (copy), ConnectionModule (copy), PlaytestModeTooltipModule (copy), FFlagEnableTeamTestLua (copy), UnpublishedPlaytestModeTooltip (copy), FFlagEnableUISelector (copy), CoreGuiCommonModule (copy), GamepadMenuModule (ref), FFlagAddMenuNavigationToggleDialog (ref), MenuNavigationToggleDialogModule (ref), FFlagGamepadNavigationDialogABTestModule (copy), GamepadNavigationDialogModule (copy), FFlagShowSwitchServerButton1 (copy), SwitchServerConfirmation (copy), UseNewHeadsetDisconnectDialog (copy), HeadsetDisconnectDialog (copy), HeadsetMenuModule (copy), KeepOutAreasHandlerModule (ref), HurtOverlayModule (copy), IsSideSheetEnabledModule (copy), IsNewTiltIconEnabledModule (copy), FFlagAddUILessMode (copy), FIntAddUILessModeVariant (copy), WithLocalizationFunction (copy), UnibarModule (ref), IsNewInGameMenuEnabledModule (copy), Interactable (copy), RobloxGui (copy), ControlState (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), CloseIngame (copy), ImageSetButton (copy), SongbirdModule (copy), JoinVoiceBinderModule (ref), GetFFlagEnableCrossExpVoiceFunction (copy), PartyMicBinderModule (copy), AnalyticsModule (ref), FFlagAddTraversalBackButton (copy), TraversalBackButtonModule (copy), ShopIconModule (ref), FFlagShowGameAgeRating1 (copy), EnabledResult1 (copy), HealthBarModule (copy), BuildPillMenuPortalHost (copy), ShopGlobalIcon (copy), FFlagExperienceShopNewIconography (copy), Callback (ref), FFlagResponsiveUnitsDeprecateTenFoot (copy), ChatIconModule (copy), MoreMenuModule (copy)
+	-- upvalues: EnabledFunction (copy), ExperienceAgeRatingPolicyModule (copy), FFlagExperienceAgeRatingBadge (copy), IsSpatialFunction (copy), ConstantsModule2 (copy), EnabledResult (copy), FFlagEnableInExperienceShop1 (copy), FFlagAppNavMyStatsTab (copy), BuildModeLaunchModule (copy), VRService (copy), ConstantsModule1 (ref), FFlagTopBarSignalizeMenuOpen (copy), TenFootInterfaceModule (copy), RoactModule (copy), FFlagEnableFreeTrialTopBarChip (copy), VoiceStateContextModule (copy), VRBottomUnibarModule (copy), Default (copy), IsInExperienceUIVREnabled (copy), MenuIconModule (copy), FFlagEnableConsoleExpControls (copy), FFlagTopBarSignalizeKeepOutAreas (copy), SelectionCursorProvider (copy), FFlagEnablePlaytestModeUnibar (copy), PlaytestModeThemeProviderModule (copy), ReactModule (copy), View (copy), ExperienceAgeRatingBadgeModule (copy), FFlagTopBarSignalizeScreenSize (copy), ConnectionModule (copy), PlaytestModeTooltipModule (copy), FFlagEnableTeamTestLua (copy), UnpublishedPlaytestModeTooltip (copy), FFlagEnableUISelector (copy), CoreGuiCommonModule (copy), GamepadMenuModule (ref), FFlagAddMenuNavigationToggleDialog (ref), MenuNavigationToggleDialogModule (ref), FFlagGamepadNavigationDialogABTestModule (copy), GamepadNavigationDialogModule (copy), FFlagShowSwitchServerButton1 (copy), SwitchServerConfirmation (copy), UseNewHeadsetDisconnectDialog (copy), HeadsetDisconnectDialog (copy), HeadsetMenuModule (copy), KeepOutAreasHandlerModule (ref), HurtOverlayModule (copy), IsSideSheetEnabledModule (copy), IsNewTiltIconEnabledModule (copy), FFlagAddUILessMode (copy), FIntAddUILessModeVariant (copy), WithLocalizationFunction (copy), UnibarModule (ref), IsNewInGameMenuEnabledModule (copy), Interactable (copy), RobloxGui (copy), ControlState (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), CloseIngame (copy), ImageSetButton (copy), SongbirdModule (copy), JoinVoiceBinderModule (ref), GetFFlagEnableCrossExpVoiceFunction (copy), PartyMicBinderModule (copy), AnalyticsModule (ref), FFlagAddTraversalBackButton (copy), TraversalBackButtonModule (copy), ShopIconModule (ref), FFlagEnableRestyleTopBarModule (copy), FFlagUseUIOverlayForCloudPlay (copy), RestyleTimerModule (copy), FFlagShowGameAgeRating1 (copy), EnabledResult1 (copy), HealthBarModule (copy), BuildPillMenuPortalHost (copy), ShopGlobalIcon (copy), FFlagExperienceShopNewIconography (copy), Callback (ref), FreeTrialChipHostModule (copy), FFlagResponsiveUnitsDeprecateTenFoot (copy), ChatIconModule (copy), MoreMenuModule (copy)
 	local EnabledResult2 = EnabledFunction()
 	local Right = if p1.state.unibarAlignment == nil then Enum.HorizontalAlignment.Right else p1.state.unibarAlignment
 	local IsEligible = ExperienceAgeRatingPolicyModule.isEligible(p1.props.showGameAgeRating, EnabledResult2, Right == Enum.HorizontalAlignment.Left, if FFlagExperienceAgeRatingBadge then p1.state.ageRatingSpatial else IsSpatialFunction())
@@ -594,6 +632,22 @@ function TopBarApp.renderWithStyle(p1, p2)
 	local MapResult = if FFlagTopBarSignalizeMenuOpen then RoactModule.joinBindings({ p1.tiltMenuOpen, p1.inspectMenuOpen }):map(function(Entry): boolean
 		return not (Entry[0] or Entry[1])
 	end) else not (p1.props.menuOpen or p1.props.inspectMenuOpen)
+	local MapResult1 = MapResult
+	
+	if FFlagEnableFreeTrialTopBarChip then
+		local MapResult2 = RoactModule.joinBindings({
+			showTopBar = p1.freeTrialShowTopBar,
+			uiVisible = p1.freeTrialUiVisible
+		}):map(function(p3)
+			return p3.showTopBar and p3.uiVisible
+		end)
+		MapResult1 = if FFlagTopBarSignalizeMenuOpen then RoactModule.joinBindings({ menu = MapResult, controls = MapResult2 }):map(function(p3)
+			return p3.menu and p3.controls
+		end) else MapResult2:map(function(p3)
+			-- upvalues: MapResult (copy)
+			return MapResult and p3
+		end)
+	end
 	local _UDim2 = UDim2.new(0, 0, 0, ScaledTopBarTopMargin)
 	local YOffset = ScaledTopBarHeight - ScaledTopBarTopMargin
 	local _UDim2_1 = UDim2.new(0, ScaledScreenSideOffset, 0, 0)
@@ -835,7 +889,19 @@ function TopBarApp.renderWithStyle(p1, p2)
 					leftGap = ScaledTopBarPadding,
 					onAreaChanged = if FFlagTopBarSignalizeKeepOutAreas then p1.keepOutAreasStore.setKeepOutArea else p1.props.setKeepOutArea
 				}),
-				AgeRating = Element2
+				AgeRating = Element2,
+				RestyleTimer = if FFlagEnableRestyleTopBarModule and FFlagUseUIOverlayForCloudPlay then ReactModule.createElement(View, {
+					tag = "auto-xy",
+					LayoutOrder = 4,
+					padding = { left = UDim.new(0, ScaledTopBarPadding) }
+				}, {
+					Timer = ReactModule.createElement(RestyleTimerModule, {
+						followsUILessMode = true,
+						buttonSize = ConstantsModule2.TopBarButtonHeight * p1.state.UiScale,
+						onAreaChanged = if FFlagTopBarSignalizeKeepOutAreas then p1.keepOutAreasStore.setKeepOutArea else p1.props.setKeepOutArea,
+						onAreaRemoved = if FFlagTopBarSignalizeKeepOutAreas then p1.keepOutAreasStore.removeKeepOutArea else p1.props.removeKeepOutArea
+					})
+				}) else nil
 			}) else ReactModule.createElement(View, {
 				tag = "row gap-xsmall auto-xy",
 				onAbsoluteSizeChanged = if FFlagShowGameAgeRating1 then p1.onAgeRatingControlsSizeChanged else nil
@@ -886,12 +952,31 @@ function TopBarApp.renderWithStyle(p1, p2)
 					onActivated = p1.onShopGlobalIconActivated,
 					onAreaChanged = if FFlagTopBarSignalizeKeepOutAreas then p1.keepOutAreasStore.setKeepOutArea else p1.props.setKeepOutArea,
 					isActive = p1.state.shopGlobalIconIsActive,
-					icon = if FFlagExperienceShopNewIconography or (not Callback or not p1.shopIsActiveMappedSignal) then nil else Callback("BuildingStore", nil, p1.shopIsActiveMappedSignal)
+					icon = if FFlagExperienceShopNewIconography or not Callback or not p1.shopIsActiveMappedSignal then nil else Callback("BuildingStore", nil, p1.shopIsActiveMappedSignal)
 				}),
 				AgeRating = if EnabledResult then nil else Element2,
+				RestyleTimer = if FFlagEnableRestyleTopBarModule and FFlagUseUIOverlayForCloudPlay and not EnabledResult then ReactModule.createElement(View, {
+					tag = "auto-xy",
+					LayoutOrder = 4,
+					padding = { left = UDim.new(0, ScaledTopBarPadding) }
+				}, {
+					Timer = ReactModule.createElement(RestyleTimerModule, {
+						followsUILessMode = true,
+						layoutOrder = 4,
+						buttonSize = ConstantsModule2.TopBarButtonHeight * p1.state.UiScale,
+						onAreaChanged = if FFlagTopBarSignalizeKeepOutAreas then p1.keepOutAreasStore.setKeepOutArea else p1.props.setKeepOutArea,
+						onAreaRemoved = if FFlagTopBarSignalizeKeepOutAreas then p1.keepOutAreasStore.removeKeepOutArea else p1.props.removeKeepOutArea
+					})
+				}) else nil,
 				HealthBar = if EnabledResult1 then nil else RoactModule.createElement(HealthBarModule, { layoutOrder = 10 })
 			})
 		}) or nil,
+		FreeTrialChipHost = if FFlagEnableFreeTrialTopBarChip then ReactModule.createElement(FreeTrialChipHostModule, {
+			zIndex = 2,
+			position = UDim2.new(1, -ScaledScreenSideOffset, 0, ScaledTopBarTopMargin),
+			size = UDim2.new(0.5, -ScaledScreenSideOffset, 0, ConstantsModule2.TopBarButtonHeight * p1.state.UiScale),
+			visible = MapResult1
+		}) else nil,
 		UnibarRightFrame = UnibarModule and Right == Enum.HorizontalAlignment.Right and RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, YOffset),

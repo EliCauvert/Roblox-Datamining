@@ -1,61 +1,67 @@
 ﻿local Parent = script:FindFirstAncestor("SocialCards").Parent
 local ReactModule = require(Parent.React)
 local RealtimeDeliveryModule = require(Parent.RealtimeDelivery)
+local SignalsModule = require(Parent.Signals)
 local CallCardStatusModule = require(script.Parent.CallCardStatus)
 local GetCallCardModule = require(script.Parent.getCallCard)
 local _ = require(script.Parent.mapCallCard)
 local ParseCallCardModule = require(script.Parent.parseCallCard)
+local GetFriendsCallingStoreModule = require(Parent.FriendsCalling.GetFriendsCallingStore)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local config = {
 	[CallCardStatusModule.Answered] = true,
 	[CallCardStatusModule.Declined] = true,
 	[CallCardStatusModule.Cancelled] = true,
 	[CallCardStatusModule.Missed] = true
 }
-local FriendsCallingService = nil
-pcall(function()
-	-- upvalues: FriendsCallingService (ref)
-	FriendsCallingService = game:GetService("FriendsCallingService")
-end)
-local Players = game:GetService("Players")
+local FriendsCallingPhase = Enum.FriendsCallingPhase
+local config1 = {
+	[FriendsCallingPhase.Ringing] = CallCardStatusModule.Ringing,
+	[FriendsCallingPhase.Active] = CallCardStatusModule.Ongoing,
+	[FriendsCallingPhase.Ended] = CallCardStatusModule.Ended
+}
 
-local function liveInstance(CallId)
-	-- upvalues: FriendsCallingService (ref), CallCardStatusModule (copy)
-	if FriendsCallingService == nil then
-		return nil
-	end
-	for _, FriendsCallingInstance in FriendsCallingService:GetChildren() do
-		if FriendsCallingInstance.ClassName == "FriendsCallingInstance" and FriendsCallingInstance.CallId ~= "" and FriendsCallingInstance.CallId == CallId then
-			local Name = FriendsCallingInstance.Phase.Name
-			local Ringing = if Name == "Ringing" then CallCardStatusModule.Ringing elseif Name == "Active" then CallCardStatusModule.Ongoing elseif Name == "Ended" then CallCardStatusModule.Ended else nil
-			
-			return if Ringing == nil then nil else {
-				status = Ringing,
-				initiatorUserId = FriendsCallingInstance.InitiatorUserId
-			}
-		end
-	end
-	return nil
-end
-
-local function _(UserId, p1)
-	-- upvalues: Players (copy)
-	local LocalPlayer = Players.LocalPlayer
-	
-	return if LocalPlayer == nil or UserId == 0 then p1 else LocalPlayer.UserId == UserId
+local function sameSnapshot(p1, p2): boolean
+	return if p1 == nil or p2 == nil then p1 == p2 else p1.callId == p2.callId and (p1.status == p2.status and p1.otherCallId == p2.otherCallId) and p1.initiatorUserId == p2.initiatorUserId
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), liveInstance (copy), config (copy), GetCallCardModule (copy), ParseCallCardModule (copy), FriendsCallingService (ref), Players (copy), RealtimeDeliveryModule (copy)
+	-- upvalues: ReactModule (copy), SignalsModule (copy), GetFriendsCallingStoreModule (copy), config1 (copy), sameSnapshot (copy), UseSignalStateFunction (copy), config (copy), GetCallCardModule (copy), ParseCallCardModule (copy), RealtimeDeliveryModule (copy)
 	local CallId = p1.callId
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseRefResult = ReactModule.useRef(0)
-	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
-	local UseStateResult3 = if UseStateResult == nil or UseStateResult.callId ~= CallId then p1 else UseStateResult
-	local UseRefResult1 = ReactModule.useRef(UseStateResult3)
-	UseRefResult1.current = UseStateResult3
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseStateResult1 = if UseStateResult == nil or UseStateResult.callId ~= CallId then p1 else UseStateResult
+	local UseRefResult2 = ReactModule.useRef(UseStateResult1)
+	UseRefResult2.current = UseStateResult1
+	local UseMemoResult = ReactModule.useMemo(function()
+		-- upvalues: SignalsModule (upval), GetFriendsCallingStoreModule (upval), CallId (copy), config1 (upval), sameSnapshot (upval)
+		return SignalsModule.createComputed(function(p2)
+			-- upvalues: GetFriendsCallingStoreModule (upval), CallId (upval), config1 (upval)
+			local v1 = nil
+			local CallId1 = nil
+			
+			for _, value in GetFriendsCallingStoreModule(p2).getCalls(p2) do
+				if value.callId == CallId then
+					v1 = value
+				elseif value.callId ~= "" and CallId1 == nil then
+					CallId1 = value.callId
+				end
+			end
+			return {
+				callId = CallId,
+				status = if v1 == nil then nil else config1[v1.phase],
+				otherCallId = CallId1,
+				initiatorUserId = if v1 == nil then nil else v1.initiatorUserId
+			}
+		end, sameSnapshot)
+	end, { CallId })
+	local UseSignalStateResult = UseSignalStateFunction(UseMemoResult)
+	local UseSignalStateResult1 = if UseSignalStateResult.callId == CallId then UseSignalStateResult else nil
+	local Status = if UseSignalStateResult1 == nil then nil else UseSignalStateResult1.status
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: liveInstance (upval), CallId (copy), config (upval), UseRefResult1 (copy), UseRefResult (copy), GetCallCardModule (upval), UseStateResult2 (copy), ParseCallCardModule (upval), p1 (copy)
-		if liveInstance(CallId) == nil and not config[UseRefResult1.current.status] then
+		-- upvalues: UseMemoResult (copy), config (upval), UseRefResult2 (copy), UseRefResult (copy), GetCallCardModule (upval), CallId (copy), UseStateResult2 (copy), ParseCallCardModule (upval), p1 (copy)
+		if UseMemoResult(false).status == nil and not config[UseRefResult2.current.status] then
 			UseRefResult.current += 1
 			local Current = UseRefResult.current
 			GetCallCardModule(CallId, function(p2)
@@ -69,7 +75,7 @@ return function(p1)
 			
 			return
 		end
-	end, { CallId, p1 })
+	end, { CallId, UseMemoResult, p1 })
 	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy)
 		return function()
@@ -78,69 +84,14 @@ return function(p1)
 		end
 	end, {})
 	ReactModule.useEffect(function()
-		-- upvalues: FriendsCallingService (upval), liveInstance (upval), CallId (copy), UseStateResult2_1 (copy), UseRefResult1 (copy), Players (upval), UseResult (copy)
-		if FriendsCallingService == nil then return end
-		local List = {}
-		local Flag = true
-		local v1 = false
+		-- upvalues: Status (copy), CallId (copy), UseRefResult1 (copy), UseResult (copy)
+		local CallId1 = if Status == nil then nil else CallId
 		
-		local function sync()
-			-- upvalues: liveInstance (upval), CallId (upval), Flag (ref), v1 (ref), UseStateResult2_1 (upval), UseRefResult1 (upval), Players (upval), UseResult (upval)
-			local LiveInstanceResult = liveInstance(CallId)
-			local HasLiveInstanceResult = LiveInstanceResult ~= nil
-			local NoHasLiveInstanceResult: boolean = not Flag and (v1 and not HasLiveInstanceResult)
-			Flag = false
-			v1 = HasLiveInstanceResult
-			
-			if LiveInstanceResult == nil then
-				UseStateResult2_1(nil)
-			else
-				local InitiatorUserId = LiveInstanceResult.initiatorUserId
-				local IsInitiator = UseRefResult1.current.isInitiator
-				local LocalPlayer = Players.LocalPlayer
-				UseStateResult2_1({
-					callId = CallId,
-					status = LiveInstanceResult.status,
-					isInitiator = if LocalPlayer == nil or InitiatorUserId == 0 then IsInitiator else LocalPlayer.UserId == InitiatorUserId
-				})
-			end
-			if NoHasLiveInstanceResult then
-				UseResult()
-			end
+		if UseRefResult1.current == CallId and CallId1 == nil then
+			UseResult()
 		end
-		
-		local function watch(FriendsCallingInstance)
-			-- upvalues: List (copy), sync (copy)
-			if FriendsCallingInstance.ClassName == "FriendsCallingInstance" then
-				table.insert(List, FriendsCallingInstance:GetPropertyChangedSignal("CallId"):Connect(sync))
-				table.insert(List, FriendsCallingInstance:GetPropertyChangedSignal("Phase"):Connect(sync))
-				table.insert(List, FriendsCallingInstance:GetPropertyChangedSignal("InitiatorUserId"):Connect(sync))
-				
-				return
-			end
-		end
-		
-		for _, child in FriendsCallingService:GetChildren() do
-			watch(child)
-		end
-		table.insert(List, FriendsCallingService.ChildAdded:Connect(function(Child)
-			-- upvalues: watch (copy), sync (copy)
-			watch(Child)
-			sync()
-		end))
-		table.insert(List, FriendsCallingService.ChildRemoved:Connect(function()
-			-- upvalues: sync (copy)
-			sync()
-		end))
-		sync()
-		
-		return function()
-			-- upvalues: List (copy)
-			for _, Connection in List do
-				Connection:Disconnect()
-			end
-		end
-	end, { CallId, UseResult })
+		UseRefResult1.current = CallId1
+	end, { CallId, Status, UseResult })
 	RealtimeDeliveryModule.useRealtimeNamespace("CallV2", function(p2)
 		-- upvalues: CallId (copy), UseResult (copy)
 		if p2.type == "CallCardUpdated" and p2.callId == CallId then
@@ -153,12 +104,20 @@ return function(p1)
 			UseResult()
 		end
 	end, { UseResult })
+	local OtherCallId = if UseSignalStateResult1 == nil then nil else UseSignalStateResult1.otherCallId
+	local InitiatorUserId = if UseSignalStateResult1 == nil then nil else UseSignalStateResult1.initiatorUserId
+	local LocalPlayer = game:GetService("Players").LocalPlayer
+	local IsInitiator = if InitiatorUserId == nil or InitiatorUserId == 0 or LocalPlayer == nil then UseStateResult1.isInitiator else LocalPlayer.UserId == InitiatorUserId
 	
-	return if UseStateResult1 == nil or UseStateResult1.callId ~= CallId then UseStateResult3 else {
-		durationSeconds = nil,
-		enableJoin = true,
-		callId = UseStateResult3.callId,
-		isInitiator = UseStateResult1.isInitiator,
-		status = UseStateResult1.status
-	}
+	if Status == nil then
+		return UseStateResult1, OtherCallId, false
+	else
+		return {
+			durationSeconds = nil,
+			callId = UseStateResult1.callId,
+			isInitiator = IsInitiator,
+			status = Status,
+			enableJoin = UseStateResult1.enableJoin
+		}, OtherCallId, true
+	end
 end

@@ -3,6 +3,8 @@ local _ = require(Parent.util.Types)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 local GetFIntUGCValidationDynamicHeadMinimumQualityPercentModule = require(Parent.flags.getFIntUGCValidationDynamicHeadMinimumQualityPercent)
 local GetFFlagUGCValidateAQScoreWarningsModule = require(Parent.flags.getFFlagUGCValidateAQScoreWarnings)
+local GetFFlagUGCValidateAQDisableLegacyDynamicHeadModule = require(Parent.flags.getFFlagUGCValidateAQDisableLegacyDynamicHead)
+local GetFFlagUGCValidationShadowIsDynamicHeadModule = require(Parent.flags.getFFlagUGCValidationShadowIsDynamicHead)
 local config = {
 	left_eye_close = ErrorSourceStringsModule.Keys.DynamicHeadLeftEyeNotClose,
 	right_eye_close = ErrorSourceStringsModule.Keys.DynamicHeadRightEyeNotClose,
@@ -15,7 +17,14 @@ return {
 	categories = {
 		require(Parent.validationSystem.ValidationEnums).UploadCategory.DYNAMIC_HEAD
 	},
-	shadowFlag = require(Parent.flags.getFFlagUGCValidationShadowIsDynamicHead),
+	fflag = function(): boolean
+		-- upvalues: GetFFlagUGCValidateAQDisableLegacyDynamicHeadModule (copy)
+		return not GetFFlagUGCValidateAQDisableLegacyDynamicHeadModule()
+	end,
+	shadowFlag = function(): boolean
+		-- upvalues: GetFFlagUGCValidationShadowIsDynamicHeadModule (copy), GetFFlagUGCValidateAQDisableLegacyDynamicHeadModule (copy)
+		return GetFFlagUGCValidationShadowIsDynamicHeadModule() and not GetFFlagUGCValidateAQDisableLegacyDynamicHeadModule()
+	end,
 	knownAqsUserErrors = {
 		INVALID_LANDMARKS = ErrorSourceStringsModule.Keys.DynamicHeadCageMisaligned,
 		NO_FACS = ErrorSourceStringsModule.Keys.DynamicHeadNOFACS,

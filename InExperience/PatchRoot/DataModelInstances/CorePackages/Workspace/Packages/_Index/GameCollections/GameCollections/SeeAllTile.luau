@@ -3,7 +3,6 @@ local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
 local FoundationModule = require(Parent.Foundation)
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseCursorFunction = UIBloxModule.App.SelectionCursor.useCursor
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
@@ -13,7 +12,7 @@ local FFlagSduiComponentsUseFoundationTokens = require(Parent.SharedFlags).FFlag
 local IconsNavigationPushRight = UIBloxModule.App.ImageSet.Images["icons/navigation/pushRight"]
 
 function SeeAllTile(p1)
-	-- upvalues: FFlagSduiComponentsUseFoundationTokens (copy), UseTokensFunction (copy), UseDesignTokensFunction (copy), UseLocalizationFunction (copy), UseCursorFunction (copy), IconsNavigationPushRight (copy), ReactModule (copy), ImageSetLabel (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: FFlagSduiComponentsUseFoundationTokens (copy), UseTokensFunction (copy), UseDesignTokensFunction (copy), UseLocalizationFunction (copy), UseCursorFunction (copy), IconsNavigationPushRight (copy), ReactModule (copy), ImageSetLabel (copy), NormalizeFontFaceFunction (copy)
 	local Size = p1.size
 	local LayoutOrder = p1.layoutOrder
 	local UseTokensResult = if FFlagSduiComponentsUseFoundationTokens then UseTokensFunction() else UseDesignTokensFunction()
@@ -54,8 +53,7 @@ function SeeAllTile(p1)
 			Text = p1.title or UseLocalizationResult.seeAll,
 			Size = UDim2.new(1, 0, 0, TitleLarge.FontSize),
 			TextXAlignment = Enum.TextXAlignment.Center,
-			Font = if FoundationFontFaceMigration then nil else TitleLarge.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(TitleLarge.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(TitleLarge.Font),
 			TextSize = TitleLarge.FontSize,
 			TextColor3 = UseTokensResult.Color.Content.Emphasis.Color3,
 			TextTruncate = Enum.TextTruncate.AtEnd

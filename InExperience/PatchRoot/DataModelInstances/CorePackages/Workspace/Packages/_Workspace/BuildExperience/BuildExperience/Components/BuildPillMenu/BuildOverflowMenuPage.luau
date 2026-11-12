@@ -5,6 +5,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local FFlagBuildExperienceMonetizationNativeUIModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
+local FFlagBuildExperienceConfigurationRowTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceConfigurationRowTelemetry)
 local GameConfigurationContentModule = require(BuildExperience.Components.GameConfigurations.GameConfigurationContent.GameConfigurationContent)
 local PublishConfigurationContentContainerModule = require(BuildExperience.Components.PublishConfigurationContent.PublishConfigurationContentContainer)
 local OverflowMenuPageShellModule = require(script.Parent.OverflowMenuPageShell)
@@ -42,7 +43,7 @@ local function PublishPreview(p1)
 end
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), PublishPreview (copy), PublishConfigurationContentContainerModule (copy), FFlagBuildCheckGamePermissionsModule (copy), GameConfigurationContentModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), View (copy), OverflowMenuPageShellModule (copy), config (copy), PublishFooterModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), PublishPreview (copy), PublishConfigurationContentContainerModule (copy), FFlagBuildExperienceConfigurationRowTelemetryModule (copy), FFlagBuildCheckGamePermissionsModule (copy), GameConfigurationContentModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), View (copy), OverflowMenuPageShellModule (copy), config (copy), PublishFooterModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		loading = LocalizationStringsModule.BUILD_MENU_LOADING,
 		publish = LocalizationStringsModule.BUILD_MENU_PUBLISH,
@@ -54,6 +55,8 @@ return function(p1)
 	local Element1 = if p1.page == "publish" then ReactModule.createElement(PublishConfigurationContentContainerModule, {
 		layoutOrder = 2,
 		universeId = p1.target.universeId,
+		placeId = if FFlagBuildExperienceConfigurationRowTelemetryModule then p1.target.placeId else nil,
+		sessionId = if FFlagBuildExperienceConfigurationRowTelemetryModule then p1.target.sessionId else nil,
 		onOpenTitleDescriptionPage = p1.onOpenTitleDescriptionPage,
 		onOpenMediaSelectionPage = p1.onOpenMediaSelectionPage,
 		onOpenVersionTitleDescriptionPage = p1.onOpenVersionTitleDescriptionPage,
@@ -62,6 +65,7 @@ return function(p1)
 	}) else ReactModule.createElement(GameConfigurationContentModule, {
 		universeId = p1.target.universeId,
 		placeId = p1.target.placeId,
+		sessionId = if FFlagBuildExperienceConfigurationRowTelemetryModule then p1.target.sessionId else nil,
 		experienceName = ExperienceName,
 		onOpenAudiencePage = p1.onOpenAudiencePage,
 		onOpenTitleDescriptionPage = p1.onOpenTitleDescriptionPage,

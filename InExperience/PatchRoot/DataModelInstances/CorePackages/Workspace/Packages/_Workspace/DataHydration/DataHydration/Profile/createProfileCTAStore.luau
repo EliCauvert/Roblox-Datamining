@@ -11,6 +11,7 @@ local _ = require(DataHydration.Profile.Enums.ProfileCTAEnums)
 local HydratePresenceFromProfileMetadataModule = require(DataHydration.Profile.hydratePresenceFromProfileMetadata)
 local FFlagProfileCTAHydratePresenceFromMetadataModule = require(DataHydration.Flags.FFlagProfileCTAHydratePresenceFromMetadata)
 local FFlagJoinabilityCTARefactor = require(Parent.SharedFlags).FFlagJoinabilityCTARefactor
+local FFlagUserListActionsV2 = require(Parent.SharedFlags).FFlagUserListActionsV2
 game:DefineFastInt("ProfileCTAStoreProcessDelaySec", 1)
 
 local function _()
@@ -21,13 +22,21 @@ local ProfileJoinUserActionsProcessDelaySec = game:DefineFastInt("ProfileJoinUse
 local list = {
 	{ component = "Actions", excludeContextualActions = true }
 }
-local list1 = { { component = "JoinUserActions" } }
+local list1 = {
+	{
+		component = "Actions",
+		excludeContextualActions = true,
+		isActionsV2Supported = true,
+		supportedActions = require(DataHydration.Profile.UserListSupportedActions)
+	}
+}
+local list2 = { { component = "JoinUserActions" } }
 
 return function(p1)
-	-- upvalues: CreateDataCacheModule (copy), FFlagJoinabilityCTARefactor (copy), list (copy), CryoModule (copy), RequestsModule (copy), FFlagProfileCTAHydratePresenceFromMetadataModule (copy), HydratePresenceFromProfileMetadataModule (copy), CreateDataResolverModule (copy), ProfileJoinUserActionsProcessDelaySec (copy), NewResult (copy), list1 (copy), DataHydration (copy), PromiseModule (copy)
+	-- upvalues: CreateDataCacheModule (copy), FFlagJoinabilityCTARefactor (copy), FFlagUserListActionsV2 (copy), list1 (copy), list (copy), CryoModule (copy), RequestsModule (copy), FFlagProfileCTAHydratePresenceFromMetadataModule (copy), HydratePresenceFromProfileMetadataModule (copy), CreateDataResolverModule (copy), ProfileJoinUserActionsProcessDelaySec (copy), NewResult (copy), list2 (copy), DataHydration (copy), PromiseModule (copy)
 	local DataCacheModule = CreateDataCacheModule()
 	local DataCacheModule1 = if FFlagJoinabilityCTARefactor then CreateDataCacheModule() else nil
-	local Components = if FFlagJoinabilityCTARefactor and p1 and p1.components then p1.components else list
+	local Components = if FFlagJoinabilityCTARefactor and p1 and p1.components then p1.components elseif FFlagUserListActionsV2 then list1 else list
 	local Component = if FFlagJoinabilityCTARefactor and Components[1] then Components[1].component else "Actions"
 	
 	local function fetchComponent(p2, Components, Component, p3)
@@ -58,13 +67,13 @@ return function(p1)
 		cache = DataCacheModule,
 		queueProcessDelaySec = game:GetFastInt("ProfileCTAStoreProcessDelaySec"),
 		fetchFn = function(p4)
-			-- upvalues: FFlagJoinabilityCTARefactor (upval), fetchComponent (copy), Components (copy), Component (copy), CryoModule (upval), RequestsModule (upval), FFlagProfileCTAHydratePresenceFromMetadataModule (upval), HydratePresenceFromProfileMetadataModule (upval)
+			-- upvalues: FFlagJoinabilityCTARefactor (upval), fetchComponent (copy), Components (copy), Component (copy), CryoModule (upval), RequestsModule (upval), FFlagUserListActionsV2 (upval), list1 (upval), FFlagProfileCTAHydratePresenceFromMetadataModule (upval), HydratePresenceFromProfileMetadataModule (upval)
 			if FFlagJoinabilityCTARefactor then
 				return fetchComponent(p4, Components, Component, true)
 			else
 				local KeysResult = CryoModule.Dictionary.keys(p4)
 				
-				return RequestsModule.GetUserProfileCTA(KeysResult):andThen(function(Result)
+				return RequestsModule.GetUserProfileCTA(KeysResult, if FFlagUserListActionsV2 then list1 else nil):andThen(function(Result)
 					-- upvalues: KeysResult (copy), FFlagProfileCTAHydratePresenceFromMetadataModule (upval), HydratePresenceFromProfileMetadataModule (upval)
 					local t = {}
 					
@@ -96,13 +105,13 @@ return function(p1)
 			NewResult:warning(`Failed to fetch JoinUserActions: {tostring(p5)}`)
 		end,
 		fetchFn = function(p5)
-			-- upvalues: list1 (upval), CryoModule (upval), RequestsModule (upval), FFlagProfileCTAHydratePresenceFromMetadataModule (upval), HydratePresenceFromProfileMetadataModule (upval), DataHydration (upval), PromiseModule (upval)
-			local Component = list1[1].component
+			-- upvalues: list2 (upval), CryoModule (upval), RequestsModule (upval), FFlagProfileCTAHydratePresenceFromMetadataModule (upval), HydratePresenceFromProfileMetadataModule (upval), DataHydration (upval), PromiseModule (upval)
+			local Component = list2[1].component
 			local KeysResult = CryoModule.Dictionary.keys(p5)
 			local v1 = true
 			local JoinUserActionsTelemetryModule = require(DataHydration.Profile.JoinUserActionsTelemetry)
 			
-			return RequestsModule.GetUserProfileCTA(KeysResult, list1):andThen(function(Result)
+			return RequestsModule.GetUserProfileCTA(KeysResult, list2):andThen(function(Result)
 				-- upvalues: KeysResult (copy), Component (copy), FFlagProfileCTAHydratePresenceFromMetadataModule (upval), v1 (copy), HydratePresenceFromProfileMetadataModule (upval)
 				local Components = {}
 				

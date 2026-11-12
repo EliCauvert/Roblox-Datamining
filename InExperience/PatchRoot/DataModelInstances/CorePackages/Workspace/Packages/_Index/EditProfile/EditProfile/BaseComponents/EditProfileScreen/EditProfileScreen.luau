@@ -6,14 +6,15 @@ local EditProfileHeaderBarModule = require(EditProfile.BaseComponents.EditProfil
 local UseProfileCardWidthFunction = require(Parent.ProfilePlatformCommon).Hooks.useProfileCardWidth
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local FFlagAXEnableProfileTab = require(Parent.SharedFlags).FFlagAXEnableProfileTab
+local FFlagSplitPaneFullBleedEditProfile = require(Parent.SharedFlags).FFlagSplitPaneFullBleedEditProfile
 
 return function(p1)
-	-- upvalues: UseProfileCardWidthFunction (copy), UseLocalizationFunction (copy), FFlagAXEnableProfileTab (copy), ReactModule (copy), View (copy), EditProfileHeaderBarModule (copy)
+	-- upvalues: UseProfileCardWidthFunction (copy), UseLocalizationFunction (copy), FFlagAXEnableProfileTab (copy), FFlagSplitPaneFullBleedEditProfile (copy), ReactModule (copy), View (copy), EditProfileHeaderBarModule (copy)
 	local UseProfileCardWidthResult = UseProfileCardWidthFunction()
-	local IsFullBleed: boolean = FFlagAXEnableProfileTab and p1.fullBleed == true
+	local IsFullBleed: boolean = if FFlagAXEnableProfileTab then p1.fullBleed == true else FFlagSplitPaneFullBleedEditProfile and p1.fullBleed == true
 	
 	return ReactModule.createElement(View, {
-		tag = if FFlagAXEnableProfileTab then {
+		tag = if FFlagAXEnableProfileTab or FFlagSplitPaneFullBleedEditProfile then {
 			["col items-start bg-surface-0"] = true,
 			["position-top-right anchor-top-right"] = not IsFullBleed,
 			["size-full-full"] = IsFullBleed

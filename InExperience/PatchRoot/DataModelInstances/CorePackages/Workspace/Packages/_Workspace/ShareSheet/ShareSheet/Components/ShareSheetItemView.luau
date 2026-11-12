@@ -1,4 +1,5 @@
-﻿local Parent = script:FindFirstAncestor("ShareSheet").Parent
+﻿local ShareSheet = script:FindFirstAncestor("ShareSheet")
+local Parent = ShareSheet.Parent
 local FoundationModule = require(Parent.Foundation)
 local MotionModule = require(Parent.Motion)
 local ReactModule = require(Parent.React)
@@ -13,6 +14,7 @@ local UsePreferencesFunction = FoundationModule.Hooks.usePreferences
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UserTile = UserTileModule.UserTile
 local LayoutMode = UserTileModule.LayoutMode
+local FFlagShareSheetDesktopReadinessModule = require(ShareSheet.Flags.FFlagShareSheetDesktopReadiness)
 
 local function AnimatedIcon(p1)
 	-- upvalues: UseTokensFunction (copy), UsePreferencesFunction (copy), ReactModule (copy), MotionModule (copy), View (copy), Icon (copy), IconSize (copy)
@@ -53,17 +55,25 @@ local function AnimatedIcon(p1)
 end
 
 return function(Frame)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), UserTile (copy), LayoutMode (copy), Icon (copy), IconName (copy), IconSize (copy), IconVariant (copy), AnimatedIcon (copy), Text (copy)
+	-- upvalues: UseTokensFunction (copy), FFlagShareSheetDesktopReadinessModule (copy), ReactModule (copy), View (copy), UserTile (copy), LayoutMode (copy), Icon (copy), IconName (copy), IconSize (copy), IconVariant (copy), AnimatedIcon (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
+	local _UDim2 = if FFlagShareSheetDesktopReadinessModule then UDim2.fromOffset(Frame.width, Frame.width) else nil
 	
 	return ReactModule.createElement(View, {
-		tag = "col align-x-center gap-small size-1700-0 auto-y",
 		testId = "share-sheet-item-view",
+		tag = {
+			["col align-x-center gap-small auto-y"] = true,
+			["size-1700-0"] = not FFlagShareSheetDesktopReadinessModule
+		},
+		Size = if FFlagShareSheetDesktopReadinessModule then UDim2.fromOffset(Frame.width, 0) else nil,
 		LayoutOrder = Frame.LayoutOrder
 	}, {
 		Content = if Frame.primaryUserId then ReactModule.createElement(View, {
-			tag = "size-full-1700",
 			LayoutOrder = 1,
+			tag = {
+				["size-full-1700"] = not FFlagShareSheetDesktopReadinessModule
+			},
+			Size = _UDim2,
 			testId = if Frame.secondUserId then "share-sheet-item-avatar-pile" else "share-sheet-item-avatar"
 		}, {
 			Tile = ReactModule.createElement(UserTile, {
@@ -85,9 +95,13 @@ return function(Frame)
 				AnchorPoint = Vector2.new(0.5, 0.5)
 			}) else nil
 		}) else ReactModule.createElement(View, {
-			tag = "align-x-center align-y-center size-full-1700 radius-circle bg-shift-300",
 			LayoutOrder = 1,
 			testId = "share-sheet-item",
+			tag = {
+				["align-x-center align-y-center radius-circle bg-shift-300"] = true,
+				["size-full-1700"] = not FFlagShareSheetDesktopReadinessModule
+			},
+			Size = _UDim2,
 			onActivated = Frame.onActivated,
 			selection = { Selectable = true }
 		}, {

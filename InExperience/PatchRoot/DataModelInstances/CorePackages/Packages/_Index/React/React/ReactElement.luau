@@ -87,14 +87,14 @@ local function warnIfStringRefCannotBeAutoConverted(p1)
 	end
 end
 
-local function ReactElement(Type1, Key, Ref, _self, Source, Owner, Props)
+local function ReactElement(Type1, Key, Ref, _self, Source, Current, Props)
 	-- upvalues: REACTELEMENTTYPE (copy), DEV (copy)
 	local config = {
 		type = Type1,
 		key = Key,
 		ref = Ref,
 		props = Props,
-		_owner = Owner,
+		_owner = Current,
 		["$$typeof"] = REACTELEMENTTYPE
 	}
 	
@@ -205,21 +205,74 @@ return {
 		end
 		return (ReactElement(Callback, Key, Ref, nil, Source, ReactCurrentOwner.current, T))
 	end,
-	cloneAndReplaceKey = function(p1, Key)
-		-- upvalues: ReactElement (copy)
-		return (ReactElement(p1.type, Key, p1.ref, p1._self, p1._source, p1._owner, p1.props))
-	end,
-	cloneElement = function(p1, List, ...)
-		-- upvalues: Error1 (copy), ReactCurrentOwner (copy), DEV (copy), config (copy), ReactElement (copy)
-		if p1 == nil then
-			error(Error1.new("React.cloneElement(...): The argument must be a React element, but you passed " .. tostring(p1)))
+	createElementWithOwnedProps = function(p1, p2, ...)
+		-- upvalues: DEV (copy), ReactElement (copy), ReactCurrentOwner (copy)
+		local T = if p2 == nil then {} else p2
+		local Key = nil
+		local Ref = nil
+		local Source = nil
+		
+		if p2 ~= nil then
+			if (not DEV or T.ref == nil or type(T.ref) ~= "table" or not T.ref.isReactWarning) and T.ref ~= nil then
+				Ref = T.ref
+			end
+			if (not DEV or T.key == nil or type(T.key) ~= "table" or not T.key.isReactWarning) and T.key ~= nil then
+				local Key1 = T.key
+				Key = if type(Key1) == "number" then Key1 else tostring(Key1)
+			end
+			Source = T.__source
+			
+			if T.key ~= nil then
+				T.key = nil
+			end
+			if T.ref ~= nil then
+				T.ref = nil
+			end
+			if T.__self ~= nil then
+				T.__self = nil
+			end
+			if T.__source ~= nil then
+				T.__source = nil
+			end
 		end
-		local Props = p1.props
+		local Selected: number = select("#", ...)
+		
+		if Selected == 1 then
+			T.children = select(1, ...)
+		elseif Selected > 1 then
+			local Buffer = table.create(Selected)
+			
+			for i = 1, Selected do
+				table.insert(Buffer, (select(i, ...)))
+			end
+			T.children = Buffer
+		end
+		if type(p1) == "table" and p1.defaultProps then
+			local DefaultProps = p1.defaultProps
+			
+			for i1, _ in DefaultProps do
+				if T[i1] == nil then
+					T[i1] = DefaultProps[i1]
+				end
+			end
+		end
+		return (ReactElement(p1, Key, Ref, nil, Source, ReactCurrentOwner.current, T))
+	end,
+	cloneAndReplaceKey = function(p3, Key)
+		-- upvalues: ReactElement (copy)
+		return (ReactElement(p3.type, Key, p3.ref, p3._self, p3._source, p3._owner, p3.props))
+	end,
+	cloneElement = function(p3, List, ...)
+		-- upvalues: Error1 (copy), ReactCurrentOwner (copy), DEV (copy), config (copy), ReactElement (copy)
+		if p3 == nil then
+			error(Error1.new("React.cloneElement(...): The argument must be a React element, but you passed " .. tostring(p3)))
+		end
+		local Props = p3.props
 		local T = if Props == nil then {} else table.clone(Props)
-		local Key = p1.key
-		local Ref = p1.ref
-		local Source = p1._source
-		local Owner = p1._owner
+		local Key = p3.key
+		local Ref = p3.ref
+		local Source = p3._source
+		local Owner = p3._owner
 		
 		if List ~= nil then
 			local Ref1 = List.ref
@@ -234,7 +287,7 @@ return {
 				Key = if type(Key1) == "number" then Key1 else Key1 or "nil"
 			end
 		end
-		local Type1 = p1.type
+		local Type1 = p3.type
 		local DefaultProps = if type(Type1) == "table" then Type1.defaultProps else nil
 		
 		if List ~= nil then
@@ -255,10 +308,10 @@ return {
 		elseif Selected > 1 then
 			T.children = { ... }
 		end
-		return (ReactElement(p1.type, Key, Ref, nil, Source, Owner, T))
+		return (ReactElement(p3.type, Key, Ref, nil, Source, Owner, T))
 	end,
-	isValidElement = function(p2): boolean
+	isValidElement = function(p4): boolean
 		-- upvalues: REACTELEMENTTYPE (copy)
-		return type(p2) == "table" and p2["$$typeof"] == REACTELEMENTTYPE
+		return type(p4) == "table" and p4["$$typeof"] == REACTELEMENTTYPE
 	end
 }

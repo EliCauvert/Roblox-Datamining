@@ -2,15 +2,17 @@
 local FireDiagModule = require(script.Parent.fireDiag)
 local FireTelemetryModule = require(script.Parent.fireTelemetry)
 local _ = require(script.Parent.Parent.Types)
+local FFlagPymkCarouselExtendProps = require(script:FindFirstAncestor("SocialLuaAnalytics").Parent.SharedFlags).FFlagPymkCarouselExtendProps
 
 local function setupFireEvent(p1, p2)
-	-- upvalues: FireEventStreamModule (copy), FireDiagModule (copy), FireTelemetryModule (copy)
+	-- upvalues: FireEventStreamModule (copy), FFlagPymkCarouselExtendProps (copy), FireDiagModule (copy), FireTelemetryModule (copy)
 	local FireEventStreamModuleResult = if p1.analytics.EventStream and p2.EventStream then FireEventStreamModule({
 		eventStreamImpl = p1.analytics.EventStream,
 		eventList = p2.EventStream,
 		infoForAllEvents = p1.infoForAllEvents,
 		getInfoForAllEvents = p1.getInfoForAllEvents,
-		loggerImpl = p1.loggerImpl
+		loggerImpl = p1.loggerImpl,
+		context = if FFlagPymkCarouselExtendProps then p1.context else nil
 	}) else nil
 	local FireDiagModuleResult = if p1.analytics.Diag and p2.Diag then FireDiagModule({
 		diagImpl = p1.analytics.Diag,

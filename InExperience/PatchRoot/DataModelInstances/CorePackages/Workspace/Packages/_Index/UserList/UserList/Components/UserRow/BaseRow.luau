@@ -8,11 +8,9 @@ local EnumsModule = require(UserList.Common.Enums)
 local ConstantsModule = require(UserList.Common.Constants)
 local TextKeysModule = require(UserList.Common.TextKeys)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
-local UserListUseActionAddTranslation = game:DefineFastFlag("UserListUseActionAddTranslation", false)
 local FFlagFriendsPageViewBtnEnabled = require(Parent.SharedFlags).FFlagFriendsPageViewBtnEnabled
 local FFlagEnableBlackbirdCheck = require(Parent.SharedFlags).FFlagEnableBlackbirdCheck
 local FFlagUserListCtaIntegrationEnabled = require(Parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
-local FFlagAddStatusIndicatorToBaseRow = require(Parent.SharedFlags).FFlagAddStatusIndicatorToBaseRow
 local FFlagUserListSurfaceExtensions = require(Parent.SharedFlags).FFlagUserListSurfaceExtensions
 local FFlagUserListInviteCta = require(Parent.SharedFlags).FFlagUserListInviteCta
 local View = FoundationModule.View
@@ -35,10 +33,10 @@ local config = {
 }
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), FFlagUserListSurfaceExtensions (copy), UserListUseActionAddTranslation (copy), UseLocalizationFunction (copy), TextKeysModule (copy), EnumsModule (copy), FFlagUserListInviteCta (copy), FFlagFriendsPageViewBtnEnabled (copy), FFlagUserListCtaIntegrationEnabled (copy), ReactModule (copy), View (copy), ConstantsModule (copy), UserTile (copy), FoundationModule (copy), FFlagEnableBlackbirdCheck (copy), config (copy), FFlagAddStatusIndicatorToBaseRow (copy), StatusIndicator (copy), StatusIndicatorVariant (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), Skeleton (copy), Radius (copy), IconButton (copy), IconSize (copy)
+	-- upvalues: UseTokensFunction (copy), FFlagUserListSurfaceExtensions (copy), UseLocalizationFunction (copy), TextKeysModule (copy), EnumsModule (copy), FFlagUserListInviteCta (copy), FFlagFriendsPageViewBtnEnabled (copy), FFlagUserListCtaIntegrationEnabled (copy), ReactModule (copy), View (copy), ConstantsModule (copy), UserTile (copy), FoundationModule (copy), FFlagEnableBlackbirdCheck (copy), config (copy), StatusIndicator (copy), StatusIndicatorVariant (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), Skeleton (copy), Radius (copy), IconButton (copy), IconSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsDisableRowActivation: boolean = FFlagUserListSurfaceExtensions and p1.disableRowActivation == true
-	local UseLocalizationResult = if UserListUseActionAddTranslation then UseLocalizationFunction({
+	local UseLocalizationResult = UseLocalizationFunction({
 		Accept = TextKeysModule.Accept,
 		Add = TextKeysModule.Add,
 		Chat = TextKeysModule.Chat,
@@ -47,7 +45,7 @@ return ReactModule.memo(function(p1)
 		[EnumsModule.ButtonTypes.Invite] = if FFlagUserListInviteCta then TextKeysModule.Invite else nil,
 		[EnumsModule.ButtonTypes.Invited] = if FFlagUserListInviteCta then TextKeysModule.Invited else nil,
 		[EnumsModule.ButtonTypes.View] = if FFlagFriendsPageViewBtnEnabled or FFlagUserListCtaIntegrationEnabled then TextKeysModule.View else nil
-	}) else nil
+	})
 	
 	return ReactModule.createElement(View, {
 		LayoutOrder = p1.layoutOrder,
@@ -92,19 +90,19 @@ return ReactModule.memo(function(p1)
 			},
 			selectionGroup = if IsDisableRowActivation and p1.layoutMode == EnumsModule.RowLayoutMode.Wide then config else nil
 		}, {
-			StatusIndicatorContainer = if FFlagAddStatusIndicatorToBaseRow and p1.shouldShowNewIndicator then ReactModule.createElement(View, { LayoutOrder = 1, tag = "auto-xy padding-right-small" }, {
+			StatusIndicatorContainer = if p1.shouldShowNewIndicator then ReactModule.createElement(View, { LayoutOrder = 1, tag = "auto-xy padding-right-small" }, {
 				StatusIndicator = ReactModule.createElement(StatusIndicator, { variant = StatusIndicatorVariant.Emphasis })
 			}) else nil,
 			PrimaryActionCta = if p1.primaryCta and p1.primaryCta.onActivated then if p1.layoutMode == EnumsModule.RowLayoutMode.Wide then ReactModule.createElement(View, {
+				LayoutOrder = 2,
 				tag = "auto-xy",
-				LayoutOrder = if FFlagAddStatusIndicatorToBaseRow then 2 else 1,
 				sizeConstraint = {
 					MinSize = if p1.primaryCta.minWidth then Vector2.new(p1.primaryCta.minWidth, 0) else nil,
 					MaxSize = if p1.primaryCta.maxWidth then Vector2.new(p1.primaryCta.maxWidth, 1e999) else nil
 				}
 			}, {
 				Button = ReactModule.createElement(Button, {
-					text = if UserListUseActionAddTranslation then UseLocalizationResult[p1.primaryCta.type] else p1.primaryCta.type,
+					text = UseLocalizationResult[p1.primaryCta.type],
 					size = InputSize.Small,
 					variant = (FFlagFriendsPageViewBtnEnabled or FFlagUserListCtaIntegrationEnabled) and p1.primaryCta.variant or ButtonVariant.SoftEmphasis,
 					onActivated = p1.primaryCta.onActivated,
@@ -113,32 +111,29 @@ return ReactModule.memo(function(p1)
 					fillBehavior = FillBehavior.Fill
 				})
 			}) else ReactModule.createElement(Button, {
-				text = if UserListUseActionAddTranslation then UseLocalizationResult[p1.primaryCta.type] else p1.primaryCta.type,
+				LayoutOrder = 2,
+				text = UseLocalizationResult[p1.primaryCta.type],
 				size = InputSize.Small,
 				variant = (FFlagFriendsPageViewBtnEnabled or FFlagUserListCtaIntegrationEnabled) and p1.primaryCta.variant or ButtonVariant.SoftEmphasis,
 				onActivated = p1.primaryCta.onActivated,
 				isDisabled = p1.primaryCta.isDisabled,
 				isLoading = p1.primaryCta.isLoading,
-				LayoutOrder = if FFlagAddStatusIndicatorToBaseRow then 2 else 1,
 				width = if p1.layoutMode == EnumsModule.RowLayoutMode.Compact then UDim.new(1, 0) else nil
 			}) elseif FFlagUserListCtaIntegrationEnabled and p1.ctaLoading and p1.layoutMode == EnumsModule.RowLayoutMode.Wide then ReactModule.createElement(Skeleton, {
-				LayoutOrder = if FFlagAddStatusIndicatorToBaseRow then 2 else 1,
+				LayoutOrder = 2,
 				Size = UDim2.fromOffset(p1.ctaLoading.minWidth or 0, UseTokensResult.Size.Size_800),
 				radius = Radius.Medium
 			}) else nil,
-			SecondaryActionCta = if p1.layoutMode == EnumsModule.RowLayoutMode.Wide and (p1.secondaryCta and p1.secondaryCta.icon and p1.secondaryCta.onActivated) then ReactModule.createElement(IconButton, {
+			SecondaryActionCta = if p1.layoutMode == EnumsModule.RowLayoutMode.Wide and p1.secondaryCta and p1.secondaryCta.icon and p1.secondaryCta.onActivated then ReactModule.createElement(IconButton, {
+				LayoutOrder = 3,
 				icon = p1.secondaryCta.icon,
 				size = IconSize.Small,
 				variant = ButtonVariant.Utility,
 				onActivated = p1.secondaryCta.onActivated,
 				isDisabled = p1.secondaryCta.isDisabled,
-				isLoading = p1.secondaryCta.isLoading,
-				LayoutOrder = if FFlagAddStatusIndicatorToBaseRow then 3 else 2
+				isLoading = p1.secondaryCta.isLoading
 			}) else nil,
-			TrailingContentWrapper = if p1.layoutMode == EnumsModule.RowLayoutMode.Wide and p1.trailingContent then ReactModule.createElement(View, {
-				tag = "auto-xy",
-				LayoutOrder = if FFlagAddStatusIndicatorToBaseRow then 4 else 3
-			}, { Content = p1.trailingContent }) else nil
+			TrailingContentWrapper = if p1.layoutMode == EnumsModule.RowLayoutMode.Wide and p1.trailingContent then ReactModule.createElement(View, { tag = "auto-xy", LayoutOrder = 4 }, { Content = p1.trailingContent }) else nil
 		})
 	})
 end)

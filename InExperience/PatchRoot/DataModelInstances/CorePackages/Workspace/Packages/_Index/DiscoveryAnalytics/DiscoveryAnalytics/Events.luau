@@ -15,6 +15,7 @@
 	sortDeeplinkFailureCounter = require(script.sortDeeplinkFailureCounter),
 	gameConnectionsPlayedChipClicked = if require(script:FindFirstAncestor("DiscoveryAnalytics").Parent.SharedFlags).FFlagSduiExperienceDetailsSocialProof then require(script.gameConnectionsPlayedChipClicked) else nil,
 	gameTileOverflowMenuAction = require(script.gameTileOverflowMenuAction),
+	sendGameDwellEvent = require(script.sendGameDwellEvent),
 	discoveryVideoEndEvent = require(script.Video.discoveryVideoEndEvent),
 	discoveryVideoLoadEvent = require(script.Video.discoveryVideoLoadEvent),
 	discoveryVideoLoopEvent = require(script.Video.discoveryVideoLoopEvent),

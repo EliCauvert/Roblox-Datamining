@@ -191,10 +191,10 @@ return function(p1)
 			UseRefResult.current[i1] = createSlot(ChatWindowSettings)
 		end
 	end
-	local UseRefResult1 = ReactModule.useRef({})
-	local UseRefResult2 = ReactModule.useRef(0)
-	local UseRefResult3 = ReactModule.useRef(UseStateResult1)
-	UseRefResult3.current = UseStateResult1
+	local UseRefResult2 = ReactModule.useRef({})
+	local UseRefResult3 = ReactModule.useRef(0)
+	local UseRefResult4 = ReactModule.useRef(UseStateResult1)
+	UseRefResult4.current = UseStateResult1
 	
 	local function createSlotEffects(CurrentEntry, ComponentId, MessagesStore, ChatWindowSettings, ShowTranslationButton)
 		-- upvalues: SignalsModule (upval), FFlagEnableInExpChatRewriteModule (upval), GetRewriteDropdownStoreModule (upval), GetMessageSettingsModule (upval), FFlagExpChatGlobalTabDefaultModule (upval), HereLabel (copy), GetMessageTextModule (upval), resolvePrefixText (upval), FFlagExpChatFixRateLimitedMessageRemovalModule (upval), FFlagExpChatPresetChatEnabled (upval), IsChatWindowEnlargeEnabledModule (upval), GetMessageEffectsModule (upval), FFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module (upval), TextChatMessageChatActionTypeModule (upval), FFlagEnableVerifiedBadgeStore (upval), VerifiedBadgeDisplayStore (upval), FFlagExpChatEvictFloodcheckedFromWindowOrderModule (upval), GetFFlagExpChatUseUpdatedMessageRenderedModule (upval), ShouldSendHighFrequencyTelemetryModule (upval), v1 (upval), GetFFlagExpChatExcludeFOMORendersModule (upval), FFlagExpChatReportHistoricalRenders (upval), ShouldReportMessageRenderModule (upval), EngineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (upval), FFlagExpChatUseChannelTabsStore (upval), GetChannelTabsStoreModule (upval), UseStoreResult (copy), EngineFeatureTextChatReportEmojiTelemetryEnabledModule (upval), GetChatWindowMessageEffectsModule (upval), TextChatService (upval), FFlagExpChatEnableFOMOUpsellModule (upval), FFlagExpChatEnableCrossAgeChatActivityModule (upval), Players (upval), GetResult (upval)
@@ -358,18 +358,18 @@ return function(p1)
 		table.insert(List, IsVisible)
 	end
 	ReactModule.useEffect(function()
-		-- upvalues: IsVisible (copy), UseStateResult1 (copy), createSlotEffects (copy), UseRefResult (copy), MessagesStore (copy), ChatWindowSettings (copy), p1 (copy), UseRefResult1 (copy), UseRefResult2 (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (upval), FFlagEnableInExpChatRewriteModule (upval), GetRewriteDropdownStoreModule (upval)
+		-- upvalues: IsVisible (copy), UseStateResult1 (copy), createSlotEffects (copy), UseRefResult (copy), MessagesStore (copy), ChatWindowSettings (copy), p1 (copy), UseRefResult2 (copy), UseRefResult3 (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (upval), FFlagEnableInExpChatRewriteModule (upval), GetRewriteDropdownStoreModule (upval)
 		if not IsVisible then return end
 		for i = 1, UseStateResult1 do
-			table.insert(UseRefResult1.current, (createSlotEffects(UseRefResult.current[i], "msg-component-" .. i, MessagesStore, ChatWindowSettings, p1.showTranslationButton)))
+			table.insert(UseRefResult2.current, (createSlotEffects(UseRefResult.current[i], "msg-component-" .. i, MessagesStore, ChatWindowSettings, p1.showTranslationButton)))
 		end
-		UseRefResult2.current = UseStateResult1
+		UseRefResult3.current = UseStateResult1
 		MessagesStore.setActiveChannelFilter(if GetFFlagTextChatEnableUniverseChatTabsFunction() then if MessagesStore.getChannelTabsConfigurationEnabled(false) and p1.targetTextChannel then p1.targetTextChannel.Name else p1.selectedChannelName elseif p1.isChannelBarVisible and p1.targetTextChannel then p1.targetTextChannel.Name else nil)
 		MessagesStore.repopulateMessageComponents()
 		
 		return function()
-			-- upvalues: UseRefResult1 (upval), MessagesStore (upval), UseRefResult2 (upval), FFlagEnableInExpChatRewriteModule (upval), GetRewriteDropdownStoreModule (upval)
-			for _, SlotEffects in ipairs(UseRefResult1.current) do
+			-- upvalues: UseRefResult2 (upval), MessagesStore (upval), UseRefResult3 (upval), FFlagEnableInExpChatRewriteModule (upval), GetRewriteDropdownStoreModule (upval)
+			for _, SlotEffects in ipairs(UseRefResult2.current) do
 				if SlotEffects.cleanupMsg then
 					pcall(SlotEffects.cleanupMsg)
 				end
@@ -384,8 +384,8 @@ return function(p1)
 				end
 				MessagesStore.unregisterMessageComponent(SlotEffects.componentId)
 			end
-			UseRefResult1.current = {}
-			UseRefResult2.current = 0
+			UseRefResult2.current = {}
+			UseRefResult3.current = 0
 			
 			if FFlagEnableInExpChatRewriteModule then
 				GetRewriteDropdownStoreModule(false).setComponentId(nil)
@@ -395,26 +395,26 @@ return function(p1)
 	
 	if FFlagExpChatDynamicV2PoolModule and Enabled then
 		ReactModule.useEffect(function()
-			-- upvalues: FFlagExpChatKeepV2PoolMountedModule (upval), IsVisible (copy), UseRefResult2 (copy), UseStateResult1 (copy), createSlotEffects (copy), UseRefResult (copy), MessagesStore (copy), ChatWindowSettings (copy), p1 (copy), UseRefResult1 (copy)
+			-- upvalues: FFlagExpChatKeepV2PoolMountedModule (upval), IsVisible (copy), UseRefResult3 (copy), UseStateResult1 (copy), createSlotEffects (copy), UseRefResult (copy), MessagesStore (copy), ChatWindowSettings (copy), p1 (copy), UseRefResult2 (copy)
 			if FFlagExpChatKeepV2PoolMountedModule and not IsVisible then return end
-			local Current: number = UseRefResult2.current
+			local Current: number = UseRefResult3.current
 			
 			if UseStateResult1 <= Current then return end
 			for i = Current + 1, UseStateResult1 do
-				table.insert(UseRefResult1.current, (createSlotEffects(UseRefResult.current[i], "msg-component-" .. i, MessagesStore, ChatWindowSettings, p1.showTranslationButton)))
+				table.insert(UseRefResult2.current, (createSlotEffects(UseRefResult.current[i], "msg-component-" .. i, MessagesStore, ChatWindowSettings, p1.showTranslationButton)))
 			end
-			UseRefResult2.current = UseStateResult1
+			UseRefResult3.current = UseStateResult1
 			MessagesStore.repopulateMessageComponents()
 		end, if FFlagExpChatKeepV2PoolMountedModule then { UseStateResult1, IsVisible } else { UseStateResult1 })
 		ReactModule.useEffect(function()
-			-- upvalues: FFlagExpChatKeepV2PoolMountedModule (upval), IsVisible (copy), SignalsModule (upval), MessagesStore (copy), ExpChatSlotBatchSize (upval), UseRefResult3 (copy), UseStateResult2 (copy)
+			-- upvalues: FFlagExpChatKeepV2PoolMountedModule (upval), IsVisible (copy), SignalsModule (upval), MessagesStore (copy), ExpChatSlotBatchSize (upval), UseRefResult4 (copy), UseStateResult2 (copy)
 			if FFlagExpChatKeepV2PoolMountedModule and not IsVisible then return end
 			local Effect = SignalsModule.createEffect(function(p2)
-				-- upvalues: MessagesStore (upval), ExpChatSlotBatchSize (upval), UseRefResult3 (upval), UseStateResult2 (upval)
+				-- upvalues: MessagesStore (upval), ExpChatSlotBatchSize (upval), UseRefResult4 (upval), UseStateResult2 (upval)
 				local ActiveChannelFilter = MessagesStore.getActiveChannelFilter(p2)
 				local Smallest = math.min(math.ceil((#(if ActiveChannelFilter then MessagesStore.getWindowMessagesInOrderByTabId(p2)[ActiveChannelFilter] or {} else MessagesStore.getWindowMessagesInOrder(p2) or {}) + 2) / ExpChatSlotBatchSize) * ExpChatSlotBatchSize, 50)
 				
-				if UseRefResult3.current < Smallest then
+				if UseRefResult4.current < Smallest then
 					UseStateResult2(Smallest)
 				end
 			end)
@@ -427,21 +427,21 @@ return function(p1)
 			end
 		end, if FFlagExpChatKeepV2PoolMountedModule then { IsVisible } else {})
 	end
-	local UseRefResult4 = ReactModule.useRef(false)
+	local UseRefResult1 = ReactModule.useRef(false)
 	ReactModule.useEffect(function()
-		-- upvalues: IsVisible (copy), UseRefResult4 (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (upval), p1 (copy), MessagesStore (copy)
+		-- upvalues: IsVisible (copy), UseRefResult1 (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (upval), p1 (copy), MessagesStore (copy)
 		if not IsVisible then
-			UseRefResult4.current = false
+			UseRefResult1.current = false
 			
 			return
 		end
-		if UseRefResult4.current then
+		if UseRefResult1.current then
 			MessagesStore.setActiveChannelFilter(if GetFFlagTextChatEnableUniverseChatTabsFunction() then if MessagesStore.getChannelTabsConfigurationEnabled(false) and p1.targetTextChannel then p1.targetTextChannel.Name else p1.selectedChannelName elseif p1.isChannelBarVisible and p1.targetTextChannel then p1.targetTextChannel.Name else nil)
 			MessagesStore.repopulateMessageComponents()
 			
 			return
 		else
-			UseRefResult4.current = true
+			UseRefResult1.current = true
 		end
 	end, {
 		IsVisible,

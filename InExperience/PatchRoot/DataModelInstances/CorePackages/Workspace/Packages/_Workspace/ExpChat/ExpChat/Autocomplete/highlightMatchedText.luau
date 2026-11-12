@@ -42,9 +42,8 @@ return function(Text: string, Text1: string, p1): string
 		end
 		
 		local Segment = string.sub(Text, 1, MatchStart - 1)
-		local FontName: string = if Segment == "" then "" else `{ColorName}{string.gsub(Segment, "[&<>\"']", Replacement)}</font>`
 		local Segment1 = string.sub(Text, EndIndex + 1)
 		
-		return FontName .. `<b>{string.gsub(string.sub(Text, MatchStart, EndIndex), "[&<>\"']", Replacement)}</b>` .. (if Segment1 == "" then "" else `{ColorName}{string.gsub(Segment1, "[&<>\"']", Replacement)}</font>`)
+		return (if Segment == "" then "" else `{ColorName}{string.gsub(Segment, "[&<>\"']", Replacement)}</font>`) .. `<b>{string.gsub(string.sub(Text, MatchStart, EndIndex), "[&<>\"']", Replacement)}</b>` .. (if Segment1 == "" then "" else `{ColorName}{string.gsub(Segment1, "[&<>\"']", Replacement)}</font>`)
 	end
 end

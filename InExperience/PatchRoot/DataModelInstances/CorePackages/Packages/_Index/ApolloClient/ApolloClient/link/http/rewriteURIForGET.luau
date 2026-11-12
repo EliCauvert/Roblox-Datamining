@@ -8,7 +8,7 @@ local SerializeFetchParameterFunction = require(script.Parent.serializeFetchPara
 local _ = require(script.Parent.selectHttpOptionsAndBody)
 
 return {
-	rewriteURIForGET = function(Text: string, p1)
+	rewriteURIForGET = function(Text1: string, p1)
 		-- upvalues: EncodeURIComponentModule (copy), Array (copy), Object (copy), Boolean (copy), SerializeFetchParameterFunction (copy)
 		local List = {}
 		
@@ -48,15 +48,15 @@ return {
 			table.insert(List, ("%s=%s"):format("extensions", EncodeURIComponentModule(ExtensionsMap)))
 		end
 		local Segment = ""
-		local Text1: string = Text
-		local FoundAt: number? = string.find(Text, "#")
+		local Text: string = Text1
+		local FoundAt: number? = string.find(Text1, "#")
 		
 		if FoundAt ~= nil then
-			Segment = string.sub(Text, FoundAt)
-			Text1 = string.sub(Text, 1, FoundAt - 1)
+			Segment = string.sub(Text1, FoundAt)
+			Text = string.sub(Text1, 1, FoundAt - 1)
 		end
 		return {
-			newURI = Text1 .. (if string.find(Text1, "?") == nil then "?" else "&") .. Array.join(List, "&") .. Segment
+			newURI = Text .. (if string.find(Text, "?") == nil then "?" else "&") .. Array.join(List, "&") .. Segment
 		}
 	end
 }

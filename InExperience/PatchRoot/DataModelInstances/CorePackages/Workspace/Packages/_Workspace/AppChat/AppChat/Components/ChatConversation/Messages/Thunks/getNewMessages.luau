@@ -2,12 +2,15 @@
 local Parent = AppChat.Parent
 local AppChatNetworkingModule = require(Parent.AppChatNetworking)
 local PromiseModule = require(Parent.Promise)
+local FFlagDisableLegacyReportToDiagModule = require(Parent.SharedFlags.FFlagDisableLegacyReportToDiag)
+local FFlagAppChatEnableReactions = require(Parent.SharedFlags).FFlagAppChatEnableReactions
 local ConstantsModule = require(AppChat.Constants)
 local ReportToDiagByCountryCodeModule = require(AppChat.Utils.reportToDiagByCountryCode)
 local NewResult = require(AppChat.Logger):new(script.Name)
 local FFlagAppChatPerfTrackingModule = require(AppChat.Flags.FFlagAppChatPerfTracking)
 local FFlagAppChatMessageTTIMilestonesModule = require(AppChat.Flags.FFlagAppChatMessageTTIMilestones)
 local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
+local GetMessageReactionsStoreModule = require(AppChat.Stores.GetMessageReactionsStore)
 
 local function _(p1)
 	-- upvalues: ReportToDiagByCountryCodeModule (copy), ConstantsModule (copy)
@@ -15,11 +18,11 @@ local function _(p1)
 end
 
 return function(ConversationId, p1, p2)
-	-- upvalues: NewResult (copy), AppChatNetworkingModule (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), ReportToDiagByCountryCodeModule (copy), ConstantsModule (copy), PromiseModule (copy)
+	-- upvalues: NewResult (copy), AppChatNetworkingModule (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), FFlagDisableLegacyReportToDiagModule (copy), ReportToDiagByCountryCodeModule (copy), ConstantsModule (copy), FFlagAppChatEnableReactions (copy), GetMessageReactionsStoreModule (copy), PromiseModule (copy)
 	NewResult:info("Getting new messages for {}", ConversationId)
 	
 	return function(p3)
-		-- upvalues: ConversationId (copy), AppChatNetworkingModule (upval), NewResult (upval), FFlagAppChatPerfTrackingModule (upval), FFlagAppChatMessageTTIMilestonesModule (upval), p1 (copy), AppChatPerfTrackerModule (upval), p2 (copy), ReportToDiagByCountryCodeModule (upval), ConstantsModule (upval), PromiseModule (upval)
+		-- upvalues: ConversationId (copy), AppChatNetworkingModule (upval), NewResult (upval), FFlagAppChatPerfTrackingModule (upval), FFlagAppChatMessageTTIMilestonesModule (upval), p1 (copy), AppChatPerfTrackerModule (upval), FFlagDisableLegacyReportToDiagModule (upval), p2 (copy), ReportToDiagByCountryCodeModule (upval), ConstantsModule (upval), FFlagAppChatEnableReactions (upval), GetMessageReactionsStoreModule (upval), PromiseModule (upval)
 		local List = {}
 		
 		if not p3:getState().ChatAppReducer.Conversations[ConversationId] then
@@ -36,14 +39,18 @@ return function(ConversationId, p1, p2)
 			AppChatPerfTrackerModule.trackSubphase(AppChatPerfTrackerModule.Events.MessageReceiveTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name, AppChatPerfTrackerModule.Milestone.PrimaryDataStarted.Subphase.NetworkFetch, config)
 			AppChatPerfTrackerModule.trackRequest(AppChatPerfTrackerModule.Events.MessageReceiveTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name, "GetNewerMessages", config)
 		end
-		table.insert(List, p3:dispatch(AppChatNetworkingModule.rodux.GetNewerMessages.API(ConversationId)):andThen(function()
-			-- upvalues: p2 (upval), ReportToDiagByCountryCodeModule (upval), ConstantsModule (upval), NoP2 (copy), ConversationId (upval), AppChatPerfTrackerModule (upval)
-			ReportToDiagByCountryCodeModule(ConstantsModule.PerformanceMeasurement.LUA_CHAT_RECEIVE_MESSAGE, "MessageReceivedTime", tick() - p2)
-			
+		table.insert(List, p3:dispatch(AppChatNetworkingModule.rodux.GetNewerMessages.API(ConversationId)):andThen(function(Result)
+			-- upvalues: FFlagDisableLegacyReportToDiagModule (upval), p2 (upval), ReportToDiagByCountryCodeModule (upval), ConstantsModule (upval), NoP2 (copy), ConversationId (upval), AppChatPerfTrackerModule (upval), FFlagAppChatEnableReactions (upval), GetMessageReactionsStoreModule (upval)
+			if not FFlagDisableLegacyReportToDiagModule then
+				ReportToDiagByCountryCodeModule(ConstantsModule.PerformanceMeasurement.LUA_CHAT_RECEIVE_MESSAGE, "MessageReceivedTime", tick() - p2)
+			end
 			if NoP2 then
 				local config = { conversationId = ConversationId }
 				AppChatPerfTrackerModule.trackMilestone(AppChatPerfTrackerModule.Events.MessageReceiveTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataReady.Name, config)
 				AppChatPerfTrackerModule.trackSubphase(AppChatPerfTrackerModule.Events.MessageReceiveTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataReady.Name, AppChatPerfTrackerModule.Milestone.PrimaryDataReady.Subphase.ResponseReceived, config)
+			end
+			if FFlagAppChatEnableReactions and Result.responseBody then
+				GetMessageReactionsStoreModule(false).ingestMessageReactions(Result.responseBody.messages)
 			end
 		end):catch(function(Err)
 			-- upvalues: NewResult (upval)

@@ -2,37 +2,44 @@
 local Parent = script:FindFirstAncestor("DataHydration").Parent
 local SignalsModule = require(Parent.Signals)
 local _ = require(script.Parent.Types.acpSession)
-local FFlagBuildExperienceModelPickerData = require(Parent.SharedFlags).FFlagBuildExperienceModelPickerData
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagBuildExperienceModelPickerData = SharedFlagsModule.FFlagBuildExperienceModelPickerData
+local FFlagBuildExperienceAdvancedPreviewSpecs = SharedFlagsModule.FFlagBuildExperienceAdvancedPreviewSpecs
 local CreateSessionScopedSignal = if FFlagBuildExperienceModelPickerData and DebugMyStatsExperienceAgentSpec then require(Parent.SignalsUtils).createSessionScopedSignal else SignalsModule.createSignal
 local SessionScopedSignal, SessionScopedSignal2 = CreateSessionScopedSignal({})
 local SessionScopedSignal1, SessionScopedSignal2_1 = CreateSessionScopedSignal({})
 local t = {}
 
-local function v11(_)
+local function v13(_)
 	-- upvalues: t (copy)
 	return t
 end
 
-local function v12(_) end
+local function v14(_) end
 
 if FFlagBuildExperienceModelPickerData and DebugMyStatsExperienceAgentSpec then
-	v11, v12 = CreateSessionScopedSignal({})
+	v13, v14 = CreateSessionScopedSignal({})
 end
 local function getState(Key, p1)
-	-- upvalues: SessionScopedSignal (copy)
+	-- upvalues: SessionScopedSignal (copy), FFlagBuildExperienceAdvancedPreviewSpecs (copy)
 	local SessionScopedSignalResultEntry = if Key == nil then nil else SessionScopedSignal(p1 or false)[Key]
 	
 	return {
 		isSet = SessionScopedSignalResultEntry ~= nil,
-		specVersion = if SessionScopedSignalResultEntry == nil or SessionScopedSignalResultEntry.specVersion == "" then nil else SessionScopedSignalResultEntry.specVersion
+		specVersion = if SessionScopedSignalResultEntry == nil or SessionScopedSignalResultEntry.specVersion == "" then nil else SessionScopedSignalResultEntry.specVersion,
+		specName = if FFlagBuildExperienceAdvancedPreviewSpecs and SessionScopedSignalResultEntry ~= nil then SessionScopedSignalResultEntry.specName else nil
 	}
 end
 
-local function writeDisplay(Key, p1, p2)
-	-- upvalues: SessionScopedSignal (copy), SessionScopedSignal2 (copy)
+local function writeDisplay(Key, p1, p2, SpecName)
+	-- upvalues: SessionScopedSignal (copy), FFlagBuildExperienceAdvancedPreviewSpecs (copy), SessionScopedSignal2 (copy)
 	local Copy = table.clone(SessionScopedSignal(false))
 	local Copy1 = table.clone(p2 or (Copy[Key] or { clientToolConfig = { mode = "exclude", tools = {} } }))
 	Copy1.specVersion = if p1 == nil or p1 == "" or p1 == "latest" then "" else p1
+	
+	if FFlagBuildExperienceAdvancedPreviewSpecs and p2 == nil then
+		Copy1.specName = SpecName
+	end
 	Copy[Key] = Copy1
 	SessionScopedSignal2(Copy)
 end
@@ -52,12 +59,19 @@ end
 
 local Count = 0
 
-local _ = function(p1)
-	-- upvalues: SessionScopedSignal (copy), v11 (ref)
+local function buildPromptPayload(p1)
+	-- upvalues: SessionScopedSignal (copy), v13 (ref), FFlagBuildExperienceAdvancedPreviewSpecs (copy)
 	local Copy = table.clone(SessionScopedSignal(false)[p1])
 	
-	if v11(false)[p1] == false then
+	if v13(false)[p1] == false then
 		Copy.specVersion = ""
+		
+		if FFlagBuildExperienceAdvancedPreviewSpecs then
+			Copy.specName = nil
+		end
+	end
+	if FFlagBuildExperienceAdvancedPreviewSpecs and Copy.specName == "build-on-mobile-advanced" and Copy.specVersion == "" then
+		Copy.specVersion = "latest"
 	end
 	return Copy
 end
@@ -71,13 +85,13 @@ return {
 		return if p1 == nil or p1 == "" then nil else `session:{p1}`
 	end,
 	selectInternal = function(Key, p1)
-		-- upvalues: getState (copy), writeDisplay (copy), v11 (ref), v12 (ref), SessionScopedSignal1 (copy), SessionScopedSignal2_1 (copy)
+		-- upvalues: getState (copy), writeDisplay (copy), v13 (ref), v14 (ref), SessionScopedSignal1 (copy), SessionScopedSignal2_1 (copy)
 		if not getState(Key).isSet then
 			writeDisplay(Key, nil)
 		end
-		local Copy = table.clone(v11(false))
+		local Copy = table.clone(v13(false))
 		Copy[Key] = p1
-		v12(Copy)
+		v14(Copy)
 		
 		if Key == nil or SessionScopedSignal1(false)[Key] ~= true then
 			local Copy1 = table.clone(SessionScopedSignal1(false))
@@ -88,18 +102,19 @@ return {
 		end
 	end,
 	getInternalSelection = function(p1, p2)
-		-- upvalues: v11 (ref), getState (copy)
-		local v1 = v11(p2)[p1]
+		-- upvalues: v13 (ref), getState (copy)
+		local v1 = v13(p2)[p1]
 		local State = getState(p1, p2)
 		
 		return {
-			isSelected = if v1 == nil then State.specVersion ~= nil else v1,
-			previewHash = State.specVersion
+			isSelected = if v1 == nil then State.specVersion ~= nil or State.specName == "build-on-mobile-advanced" else v1,
+			previewHash = State.specVersion,
+			previewSpecName = State.specName
 		}
 	end,
 	hasInternalEdit = function(p1): boolean
-		-- upvalues: v11 (ref)
-		return p1 ~= nil and v11(false)[p1] ~= nil
+		-- upvalues: v13 (ref)
+		return p1 ~= nil and v13(false)[p1] ~= nil
 	end,
 	normalize = function(p1)
 		return if p1 == nil or p1 == "" or p1 == "latest" then "" else p1
@@ -130,10 +145,10 @@ return {
 		-- upvalues: SessionScopedSignal1 (copy)
 		return p1 ~= nil and SessionScopedSignal1(false)[p1] == true
 	end,
-	set = function(Key, p1)
+	set = function(Key, p1, SpecName)
 		-- upvalues: writeDisplay (copy), SessionScopedSignal1 (copy), SessionScopedSignal2_1 (copy)
 		if Key == nil then return end
-		writeDisplay(Key, p1)
+		writeDisplay(Key, p1, nil, SpecName)
 		
 		if Key == nil or SessionScopedSignal1(false)[Key] ~= true then
 			local Copy = table.clone(SessionScopedSignal1(false))
@@ -144,15 +159,15 @@ return {
 		end
 	end,
 	hydrate = function(p1, p2, p3)
-		-- upvalues: SessionScopedSignal1 (copy), v11 (ref), writeDisplay (copy)
-		if p1 ~= nil and ((p1 == nil or SessionScopedSignal1(false)[p1] ~= true) and v11(false)[p1] == nil) then
+		-- upvalues: SessionScopedSignal1 (copy), v13 (ref), writeDisplay (copy)
+		if p1 ~= nil and ((p1 == nil or SessionScopedSignal1(false)[p1] ~= true) and v13(false)[p1] == nil) then
 			writeDisplay(p1, p2, p3)
 			
 			return
 		end
 	end,
 	clear = function(Key)
-		-- upvalues: SessionScopedSignal (copy), SessionScopedSignal2 (copy), SessionScopedSignal1 (copy), SessionScopedSignal2_1 (copy), v11 (ref), v12 (ref)
+		-- upvalues: SessionScopedSignal (copy), SessionScopedSignal2 (copy), SessionScopedSignal1 (copy), SessionScopedSignal2_1 (copy), v13 (ref), v14 (ref)
 		if Key == nil then return end
 		local Copy = table.clone(SessionScopedSignal(false))
 		Copy[Key] = nil
@@ -163,9 +178,9 @@ return {
 			Copy1[Key] = nil
 			SessionScopedSignal2_1(Copy1)
 		end
-		local Copy2 = table.clone(v11(false))
+		local Copy2 = table.clone(v13(false))
 		Copy2[Key] = nil
-		v12(Copy2)
+		v14(Copy2)
 	end,
 	consumePending = function(Key)
 		-- upvalues: SessionScopedSignal1 (copy), SessionScopedSignal2_1 (copy)
@@ -179,7 +194,7 @@ return {
 		end
 	end,
 	move = function(Key, Key1)
-		-- upvalues: SessionScopedSignal (copy), SessionScopedSignal2 (copy), v11 (ref), v12 (ref), SessionScopedSignal1 (copy), SessionScopedSignal2_1 (copy)
+		-- upvalues: SessionScopedSignal (copy), SessionScopedSignal2 (copy), v13 (ref), v14 (ref), SessionScopedSignal1 (copy), SessionScopedSignal2_1 (copy)
 		local SessionScopedSignalResult = SessionScopedSignal(false)
 		
 		if Key == nil or Key1 == nil or SessionScopedSignalResult[Key] == nil or Key == Key1 then return end
@@ -187,10 +202,10 @@ return {
 		Copy[Key1] = Copy[Key]
 		Copy[Key] = nil
 		SessionScopedSignal2(Copy)
-		local Copy1 = table.clone(v11(false))
+		local Copy1 = table.clone(v13(false))
 		Copy1[Key1] = Copy1[Key]
 		Copy1[Key] = nil
-		v12(Copy1)
+		v14(Copy1)
 		local IsSessionScopedSignalResultEntry: boolean = Key ~= nil and SessionScopedSignal1(false)[Key] == true
 		
 		if Key ~= nil and SessionScopedSignal1(false)[Key] == true then
@@ -209,31 +224,20 @@ return {
 		SessionScopedSignal2_1(Copy3)
 	end,
 	getExperiment = function(p1)
-		-- upvalues: getState (copy), DebugMyStatsExperienceAgentSpec (copy), SessionScopedSignal (copy), v11 (ref)
+		-- upvalues: getState (copy), FFlagBuildExperienceAdvancedPreviewSpecs (copy), v13 (ref), DebugMyStatsExperienceAgentSpec (copy), buildPromptPayload (copy)
 		local State = getState(p1, nil)
+		local v1: boolean = FFlagBuildExperienceAdvancedPreviewSpecs and (State.specName == "build-on-mobile-advanced" and v13(false)[p1] ~= false)
 		
-		if not DebugMyStatsExperienceAgentSpec or State.specVersion == nil then
-			return nil
-		end
-		local Copy = table.clone(SessionScopedSignal(false)[p1])
-		
-		if v11(false)[p1] == false then
-			Copy.specVersion = ""
-		end
-		return Copy
+		return if DebugMyStatsExperienceAgentSpec and (State.specVersion ~= nil or v1) then buildPromptPayload(p1) else nil
 	end,
 	getPromptExperiment = function(p1)
-		-- upvalues: getState (copy), DebugMyStatsExperienceAgentSpec (copy), SessionScopedSignal1 (copy), SessionScopedSignal (copy), v11 (ref)
+		-- upvalues: getState (copy), DebugMyStatsExperienceAgentSpec (copy), SessionScopedSignal1 (copy), buildPromptPayload (copy)
 		local State = getState(p1, nil)
 		
-		if not DebugMyStatsExperienceAgentSpec or (p1 == nil or SessionScopedSignal1(false)[p1] ~= true or not State.isSet) then
+		if DebugMyStatsExperienceAgentSpec and (p1 ~= nil and SessionScopedSignal1(false)[p1] == true and State.isSet) then
+			return (buildPromptPayload(p1))
+		else
 			return nil
 		end
-		local Copy = table.clone(SessionScopedSignal(false)[p1])
-		
-		if v11(false)[p1] == false then
-			Copy.specVersion = ""
-		end
-		return Copy
 	end
 }

@@ -4,6 +4,7 @@ local FrameCameraModule = require(script.Parent._Utils.frameCamera)
 local CameraPathModule = require(script.Parent._Utils.cameraPath)
 local AvatarBackgroundModule = require(script.Parent._Utils.avatarBackground)
 local AvatarRigModule = require(script.Parent._Utils.avatarRig)
+local ApplyDefaultClothingModule = require(script.Parent._Utils.applyDefaultClothing)
 local CreatePlayheadModule = require(script.Parent._Utils.createPlayhead)
 local AddKeyLightModule = require(script.addKeyLight)
 local AddFallbackBackdropModule = require(script.addFallbackBackdrop)
@@ -70,7 +71,7 @@ local function resolveSnapshot(p1)
 end
 
 return function(p1)
-	-- upvalues: FlagsModule (copy), resolveSnapshot (copy), ResolveOutfitModule (copy), AddKeyLightModule (copy), AvatarBackgroundModule (copy), AddFallbackBackdropModule (copy), AvatarRigModule (copy), AvatarFloorPositionModule (copy), CameraPathModule (copy), FrameCameraModule (copy), resolveEmoteId (copy), CreatePlayheadModule (copy)
+	-- upvalues: FlagsModule (copy), resolveSnapshot (copy), ResolveOutfitModule (copy), AddKeyLightModule (copy), AvatarBackgroundModule (copy), AddFallbackBackdropModule (copy), ApplyDefaultClothingModule (copy), AvatarRigModule (copy), AvatarFloorPositionModule (copy), CameraPathModule (copy), FrameCameraModule (copy), resolveEmoteId (copy), CreatePlayheadModule (copy)
 	local P7 = p1 or {}
 	local ResolveSnapshotResult = nil
 	
@@ -96,7 +97,12 @@ return function(p1)
 	if AttachResult ~= nil then
 		AvatarBackgroundModule.pinToParent(AttachResult, Live3DScene)
 	end
-	local Avatar = AvatarRigModule.createAvatar(ResolveSnapshotResult.humanoidDescription, ResolveSnapshotResult.rigType)
+	local HumanoidDescription = ResolveSnapshotResult.humanoidDescription
+	
+	if FlagsModule.MomentScenesAvatarMomentDefaultClothing then
+		HumanoidDescription = ApplyDefaultClothingModule(HumanoidDescription)
+	end
+	local Avatar = AvatarRigModule.createAvatar(HumanoidDescription, ResolveSnapshotResult.rigType)
 	Avatar.Name = "Avatar"
 	local Humanoid = Avatar:FindFirstChildOfClass("Humanoid")
 	
@@ -107,6 +113,7 @@ return function(p1)
 	end
 	AvatarFloorPositionModule.positionOnFloor(Avatar, 0, CFrame.new())
 	Avatar.Parent = Live3DScene
+	local EquipGearResult = if ResolveSnapshotResult.gearAssetId == nil then nil else AvatarRigModule.equipGear(Avatar, ResolveSnapshotResult.gearAssetId, ResolveSnapshotResult.rigType)
 	local SceneCamera = Instance.new("Camera")
 	SceneCamera.Name = "SceneCamera"
 	SceneCamera.CameraType = Enum.CameraType.Scriptable
@@ -117,32 +124,20 @@ return function(p1)
 	local _, X, v1 = (if CameraPathModule.framingFor(CameraPath) == "face" then FrameCameraModule.fitStandingFace else FrameCameraModule.fitStandingCharacters)({ Avatar }, SceneCamera.FieldOfView)
 	SceneCamera.Focus = CFrame.new(X)
 	local PlayEmoteResult = AvatarRigModule.playEmote(Avatar, (resolveEmoteId(P7, ResolveSnapshotResult.rigType)))
-	local T = if PlayEmoteResult == nil then {} else { PlayEmoteResult }
 	local PlayheadModule = CreatePlayheadModule({
 		root = Live3DScene,
-		tracks = T,
+		tracks = if PlayEmoteResult == nil then {} else { PlayEmoteResult },
 		animator = if Humanoid == nil then nil else Humanoid:FindFirstChildOfClass("Animator"),
 		getDuration = function()
-			-- upvalues: T (copy)
-			local Length = 0
+			-- upvalues: PlayEmoteResult (copy)
+			local Length = if PlayEmoteResult == nil then 0 else PlayEmoteResult.Length
 			
-			for _, value in T do
-				if Length < value.Length then
-					Length = value.Length
-				end
-			end
 			return if Length <= 0 then 0 else Length * 4
 		end,
 		syncVisuals = function(p2: number)
-			-- upvalues: T (copy), SceneCamera (copy), CameraPathModule (upval), X (copy), v1 (copy), ResolveResult (copy)
-			local Length = 0
-			
-			for _, value in T do
-				if Length < value.Length then
-					Length = value.Length
-				end
-			end
-			local ScaledLength: number = if Length <= 0 then 0 else Length * 4
+			-- upvalues: PlayEmoteResult (copy), SceneCamera (copy), CameraPathModule (upval), X (copy), v1 (copy), ResolveResult (copy)
+			local Length = if PlayEmoteResult == nil then 0 else PlayEmoteResult.Length
+			local ScaledLength = if Length <= 0 then 0 else Length * 4
 			SceneCamera.CFrame = CameraPathModule.eval(X, v1, ResolveResult, if ScaledLength > 0 then p2 % ScaledLength / ScaledLength else 0)
 		end,
 		play = function(Callback: () -> ())
@@ -151,15 +146,17 @@ return function(p1)
 				Humanoid.AutoRotate = false
 			end
 			Callback()
+		end,
+		dispose = function(Callback: () -> ())
+			-- upvalues: EquipGearResult (ref)
+			if EquipGearResult ~= nil then
+				EquipGearResult:Stop(0)
+				EquipGearResult = nil
+			end
+			Callback()
 		end
 	})
-	local Length = 0
-	
-	for _, value in T do
-		if Length < value.Length then
-			Length = value.Length
-		end
-	end
+	local Length = if PlayEmoteResult == nil then 0 else PlayEmoteResult.Length
 	local CanUserToggle = (if Length <= 0 then 0 else Length * 4) > 0
 	
 	return {

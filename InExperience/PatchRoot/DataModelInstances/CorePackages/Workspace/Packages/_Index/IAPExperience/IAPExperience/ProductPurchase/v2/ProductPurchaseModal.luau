@@ -1,13 +1,11 @@
 ﻿local Parent = script.Parent.Parent.Parent
 local Parent1 = Parent.Parent
 local ReactModule = require(Parent1.React)
-local TextService = game:GetService("TextService")
 local GetTextSizeFunction = require(Parent1.Style).GetTextSize
 local UIBloxModule = require(Parent1.UIBlox)
 local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 local FoundationModule = require(Parent1.Foundation)
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local Text = FoundationModule.Text
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseTextSizeOffsetFunction = FoundationModule.Hooks.useTextSizeOffset
@@ -26,12 +24,12 @@ local PurchaseModalV2ShownCounter = require(Parent.Generic.Events.PurchaseModalC
 local FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule = require(Parent.Flags.FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePrompt)
 
 local function ProductPurchaseModal(p1)
-	-- upvalues: FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (copy), UseDefaultFocusBehaviorFunction (copy), ReactModule (copy), LoggerModule (copy), GetAppContextModule (copy), Default (copy), PurchaseModalV2ShownCounter (copy), UseLocalizationFunction (copy), FormatNumberModule (copy), LocalizationService (copy), UseTokensFunction (copy), UseTextSizeOffsetFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), InteractiveAlert (copy), ProductDetailsModule (copy), ButtonType (copy), Text (copy)
+	-- upvalues: FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (copy), UseDefaultFocusBehaviorFunction (copy), ReactModule (copy), LoggerModule (copy), GetAppContextModule (copy), Default (copy), PurchaseModalV2ShownCounter (copy), UseLocalizationFunction (copy), FormatNumberModule (copy), LocalizationService (copy), UseTokensFunction (copy), UseTextSizeOffsetFunction (copy), GetTextSizeFunction (copy), InteractiveAlert (copy), ProductDetailsModule (copy), ButtonType (copy), Text (copy)
 	local v1 = nil
 	local v2 = nil
 	
 	if FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then
-		v1, v23 = UseDefaultFocusBehaviorFunction()
+		v1, v21 = UseDefaultFocusBehaviorFunction()
 	end
 	ReactModule.useEffect(function()
 		-- upvalues: LoggerModule (upval), p1 (copy), GetAppContextModule (upval), Default (upval), PurchaseModalV2ShownCounter (upval)
@@ -72,8 +70,8 @@ local function ProductPurchaseModal(p1)
 		end
 	end, { p1 })
 	UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: CaptionSmall (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Robux (ref), UseStateResult (ref), TextService (upval)
-		return CaptionSmall.LineHeight * (if FoundationFontFaceMigration then GetTextSizeFunction(Robux, CaptionSmall.FontSize, CaptionSmall.Font, Vector2.new(UseStateResult, 1e999), { addTemporaryPadding = false }).Y else TextService:GetTextSize(Robux, CaptionSmall.FontSize, CaptionSmall.Font, Vector2.new(UseStateResult, 1e999)).Y)
+		-- upvalues: CaptionSmall (copy), GetTextSizeFunction (upval), Robux (ref), UseStateResult (ref)
+		return CaptionSmall.LineHeight * GetTextSizeFunction(Robux, CaptionSmall.FontSize, CaptionSmall.Font, Vector2.new(UseStateResult, 1e999), { addTemporaryPadding = false }).Y
 	end, { UseStateResult, UseTextSizeOffsetResult, Robux })
 	
 	return ReactModule.createElement(InteractiveAlert, {

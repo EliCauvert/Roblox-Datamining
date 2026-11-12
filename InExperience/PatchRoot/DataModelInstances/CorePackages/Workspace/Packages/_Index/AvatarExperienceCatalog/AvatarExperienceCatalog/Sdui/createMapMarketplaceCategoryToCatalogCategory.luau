@@ -4,6 +4,7 @@ local _ = require(Parent.DataHydration)
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXM41AllCategoriesToTaxonomy = AvatarExperienceFlagsModule.FFlagAXM41AllCategoriesToTaxonomy
 local FFlagAXSduiCatalogSearchShowWidgets = AvatarExperienceFlagsModule.FFlagAXSduiCatalogSearchShowWidgets
+local FFlagAXSduiCatalogTaxonomyFromServer = AvatarExperienceFlagsModule.FFlagAXSduiCatalogTaxonomyFromServer
 local HttpService = game:GetService("HttpService")
 local config = {
 	AllAnimations = "AllAnimation",
@@ -26,7 +27,7 @@ local function _(Text: string): string
 end
 
 return function()
-	-- upvalues: HttpService (copy), config1 (copy), FFlagAXSduiCatalogSearchShowWidgets (copy), FFlagAXM41AllCategoriesToTaxonomy (copy), config (copy)
+	-- upvalues: HttpService (copy), config1 (copy), FFlagAXSduiCatalogSearchShowWidgets (copy), FFlagAXSduiCatalogTaxonomyFromServer (copy), FFlagAXM41AllCategoriesToTaxonomy (copy), config (copy)
 	local Guids = {}
 	
 	local function _(Key)
@@ -46,7 +47,7 @@ return function()
 	local _ = nil
 	
 	local function mapInternal(p1, p2, p3, p4)
-		-- upvalues: mapInternal (ref), config1 (upval), FFlagAXSduiCatalogSearchShowWidgets (upval), Guids (copy), HttpService (upval), FFlagAXM41AllCategoriesToTaxonomy (upval), config (upval)
+		-- upvalues: mapInternal (ref), config1 (upval), FFlagAXSduiCatalogSearchShowWidgets (upval), Guids (copy), HttpService (upval), FFlagAXSduiCatalogTaxonomyFromServer (upval), FFlagAXM41AllCategoriesToTaxonomy (upval), config (upval)
 		p4[p1.id] = true
 		local List = nil
 		
@@ -91,7 +92,7 @@ return function()
 			SearchUuid = Guid1
 		end
 		config2.SearchUuid = SearchUuid
-		config2.TaxonomyUuid = if FFlagAXM41AllCategoriesToTaxonomy and p1.taxonomyId ~= nil and p1.taxonomyId ~= "" then p1.taxonomyId else nil
+		config2.TaxonomyUuid = if FFlagAXSduiCatalogTaxonomyFromServer or FFlagAXM41AllCategoriesToTaxonomy then if p1.taxonomyId == nil or p1.taxonomyId == "" then nil else p1.taxonomyId else nil
 		config2.AssetTypeIdStrings = p1.assetTypes
 		config2.BundleTypes = p1.bundleTypes
 		config2.TileType = p1.tileType

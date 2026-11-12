@@ -7,10 +7,9 @@ local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local ReactModule = require(Parent.React)
 local ResponsiveModule = require(Parent.Responsive)
 local FFlagLuaAppChartsFilterOptionTextTag = require(Parent.SharedFlags).FFlagLuaAppChartsFilterOptionTextTag
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
 return function(Frame)
-	-- upvalues: UseTokensFunction (copy), ResponsiveModule (copy), ReactModule (copy), FFlagLuaAppChartsFilterOptionTextTag (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), IconButton (copy), IconSize (copy)
+	-- upvalues: UseTokensFunction (copy), ResponsiveModule (copy), ReactModule (copy), FFlagLuaAppChartsFilterOptionTextTag (copy), NormalizeFontFaceFunction (copy), IconButton (copy), IconSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsUsePreferredInputResultMatch = ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Directional
 	local HeadingSmall = UseTokensResult.Typography.HeadingSmall
@@ -43,8 +42,7 @@ return function(Frame)
 			TextWrapped = true,
 			AutomaticSize = Enum.AutomaticSize.XY,
 			Text = Frame.title,
-			Font = if FoundationFontFaceMigration then nil else HeadingSmall.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(HeadingSmall.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(HeadingSmall.Font),
 			TextSize = HeadingSmall.FontSize,
 			TextColor3 = UseTokensResult.Color.Content.Emphasis.Color3,
 			TextXAlignment = Enum.TextXAlignment.Left,

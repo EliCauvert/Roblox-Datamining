@@ -115,6 +115,7 @@ function MessageList.init(p1)
 				showDateTime = p2.showDateTime,
 				messageId = p2.messageId,
 				senderTargetId = if GetFFlagEnableSocialCardsFunction() then p2.senderTargetId else nil,
+				conversationId = p1.props.conversationId,
 				debugElement = StringValue
 			})
 		end

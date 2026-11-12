@@ -106,8 +106,8 @@ local function visit(p1, p2, p3)
 	local List = {}
 	local List1 = {}
 	local v1 = p1
-	local SliceResult = nil
 	local Entry = nil
+	local SliceResult = nil
 	repeat
 		Index += 1
 		local IsIndexMatch = Index == #Keys + 1

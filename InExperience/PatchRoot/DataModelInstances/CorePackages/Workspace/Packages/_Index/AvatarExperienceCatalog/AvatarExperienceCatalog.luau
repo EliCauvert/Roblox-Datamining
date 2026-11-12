@@ -121,6 +121,7 @@ return {
 		getCatalogConfigKey = require(script.Sdui.Utils.getCatalogConfigKey),
 		getCatalogPageIdentifier = require(script.Sdui.Utils.getCatalogPageIdentifier),
 		buildOrderedWidgetsFromCatalogPage = require(script.Sdui.buildOrderedWidgetsFromCatalogPage),
+		getCatalogPageThumbnailPrefetchItems = require(script.Sdui.getCatalogPageThumbnailPrefetchItems),
 		hydrateCatalogSortEntities = require(script.Sdui.hydrateCatalogSortEntities),
 		hydrateCatalogSortById = require(script.Sdui.hydrateCatalogSortById),
 		buildFocusedSortWidgetInfo = require(script.Sdui.buildFocusedSortWidgetInfo),

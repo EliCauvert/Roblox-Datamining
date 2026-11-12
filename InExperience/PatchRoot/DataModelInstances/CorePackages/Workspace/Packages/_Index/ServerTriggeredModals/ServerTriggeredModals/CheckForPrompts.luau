@@ -4,6 +4,7 @@ local ReactModule = require(Parent.React)
 local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local RoactNavigationModule = require(Parent.RoactNavigation)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
 local AppPage = RobloxAppEnumsModule.AppPage
@@ -20,12 +21,14 @@ local UsePromptEntriesModule = require(ServerTriggeredModals.SduiV2.usePromptEnt
 local FFlagSduiAllowNoConfigsBuilt = SharedFlagsModule.FFlagSduiAllowNoConfigsBuilt
 local FFlagEnableHomepagePromptsForModalsAndBanners = SharedFlagsModule.FFlagEnableHomepagePromptsForModalsAndBanners
 local FFlagPromptsImpressionUsesTitle = SharedFlagsModule.FFlagPromptsImpressionUsesTitle
+local FFlagSignalsNavP3hMisc = SharedFlagsModule.FFlagSignalsNavP3hMisc
+local WithNavigationFocusIgnoringNavigation = if FFlagSignalsNavP3hMisc then require(Parent.RobloxAppNavigation).withNavigationFocusIgnoringNavigation else nil
 
 local function _(p1): boolean
 	return p1 ~= nil and (p1.config ~= nil and (p1.identifier ~= nil and (p1.robloxComponentType ~= nil and p1.title ~= nil)))
 end
 
-return ReactModule.memo((require(Parent.RoactNavigation).withNavigationFocus(function(p1)
+local function CheckForPrompts(p1)
 	-- upvalues: UseDispatchFunction (copy), UseModalSignalStoreModule (copy), UseSignalStateFunction (copy), EntryPointModule (copy), ReactModule (copy), PromptsEntryPointModule (copy), FFlagSduiAllowNoConfigsBuilt (copy), SduiLoadTimer (copy), FetchPromptsModule (copy), FFlagEnableHomepagePromptsForModalsAndBanners (copy), UsePromptEntriesModule (copy), PromptStyleModule (copy), GetSduiApiStoreFunction (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), AppPage (copy), FFlagPromptsImpressionUsesTitle (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseModalSignalStoreModuleResult = UseModalSignalStoreModule()
@@ -81,4 +84,6 @@ return ReactModule.memo((require(Parent.RoactNavigation).withNavigationFocus(fun
 	})
 	
 	return nil
-end)))
+end
+
+return if FFlagSignalsNavP3hMisc then WithNavigationFocusIgnoringNavigation(CheckForPrompts) else ReactModule.memo((RoactNavigationModule.withNavigationFocus(CheckForPrompts)))

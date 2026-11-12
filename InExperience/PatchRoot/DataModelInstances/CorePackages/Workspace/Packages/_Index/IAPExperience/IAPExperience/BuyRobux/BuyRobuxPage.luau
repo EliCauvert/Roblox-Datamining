@@ -17,7 +17,6 @@ local UseStyleMetadataFunction = UIBloxModule.Core.Style.useStyleMetadata
 local FoundationModule = require(Parent2.Foundation)
 local ColorMode = FoundationModule.Enums.ColorMode
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local RoactFitComponentsModule = require(Parent2.RoactFitComponents)
 local FitFrameHorizontal = RoactFitComponentsModule.FitFrameHorizontal
 local FitTextLabel = RoactFitComponentsModule.FitTextLabel
@@ -196,12 +195,12 @@ function ExtendResult.reportScrollingFrameCompensationHappened(p1)
 end
 
 function ExtendResult.renderWithLocale(p1, p2, Callback)
-	-- upvalues: FFlagBuyRobuxPageFitToViewportModule (copy), WithStyleFunction (copy), RoactModule (copy), RobuxPackageModule (copy), list (copy), ColorMode (copy), ImageSetButton (copy), IconsNavigationClose (copy), CursorKind (copy), AnimatorModule (copy), ImageSetLabel (copy), IconsLogoBlock (copy), FitTextLabel (copy), FitFrameHorizontal (copy), IconsCommonGoldrobux (copy), FormatNumberModule (copy), LocalizationService (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), FullscreenFrame (copy)
+	-- upvalues: FFlagBuyRobuxPageFitToViewportModule (copy), WithStyleFunction (copy), RoactModule (copy), RobuxPackageModule (copy), list (copy), ColorMode (copy), ImageSetButton (copy), IconsNavigationClose (copy), CursorKind (copy), AnimatorModule (copy), ImageSetLabel (copy), IconsLogoBlock (copy), FitTextLabel (copy), FitFrameHorizontal (copy), IconsCommonGoldrobux (copy), FormatNumberModule (copy), LocalizationService (copy), NormalizeFontFaceFunction (copy), FullscreenFrame (copy)
 	local Props = p1.props
 	local IsConsoleSize = FFlagBuyRobuxPageFitToViewportModule and Props.isConsoleSize
 	
 	return WithStyleFunction(function(p3)
-		-- upvalues: Props (copy), p1 (copy), IsConsoleSize (copy), RoactModule (upval), RobuxPackageModule (upval), list (upval), ColorMode (upval), ImageSetButton (upval), IconsNavigationClose (upval), Callback (copy), CursorKind (upval), AnimatorModule (upval), ImageSetLabel (upval), IconsLogoBlock (upval), FitTextLabel (upval), p2 (copy), FitFrameHorizontal (upval), IconsCommonGoldrobux (upval), FormatNumberModule (upval), LocalizationService (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), FullscreenFrame (upval)
+		-- upvalues: Props (copy), p1 (copy), IsConsoleSize (copy), RoactModule (upval), RobuxPackageModule (upval), list (upval), ColorMode (upval), ImageSetButton (upval), IconsNavigationClose (upval), Callback (copy), CursorKind (upval), AnimatorModule (upval), ImageSetLabel (upval), IconsLogoBlock (upval), FitTextLabel (upval), p2 (copy), FitFrameHorizontal (upval), IconsCommonGoldrobux (upval), FormatNumberModule (upval), LocalizationService (upval), NormalizeFontFaceFunction (upval), FullscreenFrame (upval)
 		local Theme = p3.Theme
 		local _Font = p3.Font
 		local HasRobuxPackages = Props.robuxPackages ~= nil
@@ -397,8 +396,7 @@ function ExtendResult.renderWithLocale(p1, p2, Callback)
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y,
 					TextXAlignment = Enum.TextXAlignment.Left,
-					Font = if FoundationFontFaceMigration then nil else _Font.Title.Font,
-					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.HeadingLarge.Font) else nil,
+					FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.HeadingLarge.Font),
 					Text = p2.BannerTitle,
 					TextSize = 46 * p1:getScale(),
 					TextColor3 = if Props.showBackground then Color3.new(255, 255, 255) else Theme.TextEmphasis.Color
@@ -410,8 +408,7 @@ function ExtendResult.renderWithLocale(p1, p2, Callback)
 					AutomaticSize = Enum.AutomaticSize.Y,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextWrapped = if IsConsoleSize then true else nil,
-					Font = if FoundationFontFaceMigration then nil else _Font.Header1.Font,
-					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.HeadingSmall.Font) else nil,
+					FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.HeadingSmall.Font),
 					Text = p2.BannerText,
 					TextSize = 38 * p1:getScale(),
 					TextColor3 = if Props.showBackground then Color3.new(255, 255, 255) else Theme.TextEmphasis.Color

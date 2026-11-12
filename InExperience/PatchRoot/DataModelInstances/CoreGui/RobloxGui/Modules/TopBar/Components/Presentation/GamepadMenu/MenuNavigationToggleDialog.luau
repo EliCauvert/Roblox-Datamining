@@ -1,14 +1,11 @@
 ﻿local CorePackages = game:GetService("CorePackages")
-local CoreGui = game:GetService("CoreGui")
 local LocalizationService = game:GetService("LocalizationService")
 local UserInputService = game:GetService("UserInputService")
-local _ = CoreGui:WaitForChild("RobloxGui")
+local _ = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 local ReactModule = require(CorePackages.Packages.React)
 local _ = require(CorePackages.Packages.UIBlox)
-local FoundationModule = require(CorePackages.Packages.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local NormalizeFontFaceFunction = require(CorePackages.Packages.Foundation).Utility.normalizeFontFace
 local FFlagEnableConsoleExpControls = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableConsoleExpControls
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseEventConnectionFunction = require(CorePackages.Packages.ReactUtils).useEventConnection
 local GetTextSizeFunction = require(CorePackages.Workspace.Packages.Style).GetTextSize
 local UseDesignTokensFunction = require(CorePackages.Workspace.Packages.Style).useDesignTokens
@@ -17,10 +14,9 @@ local EnabledResult = require(CorePackages.Workspace.Packages.Chrome).Enabled()
 local GamepadConnectorModule = if FFlagEnableConsoleExpControls and not EnabledResult then nil else require(Parent.Components.GamepadConnector)
 local UseObservableValueModule = require(Parent.Parent.Chrome.ChromeShared.Hooks.useObservableValue)
 local Localization = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization
-local FFlagLocalizeMenuNavigationToggleDialogModule = require(CoreGui.RobloxGui.Modules.TopBar.Flags.FFlagLocalizeMenuNavigationToggleDialog)
 
 return function(p1)
-	-- upvalues: UseDesignTokensFunction (copy), FFlagLocalizeMenuNavigationToggleDialogModule (copy), UserInputService (copy), ReactModule (copy), LocalizationService (copy), UseEventConnectionFunction (copy), Localization (copy), GetTextSizeFunction (copy), EnabledResult (copy), FFlagEnableConsoleExpControls (copy), UseObservableValueModule (copy), GamepadConnectorModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseDesignTokensFunction (copy), UserInputService (copy), ReactModule (copy), LocalizationService (copy), UseEventConnectionFunction (copy), Localization (copy), GetTextSizeFunction (copy), EnabledResult (copy), FFlagEnableConsoleExpControls (copy), UseObservableValueModule (copy), GamepadConnectorModule (copy), NormalizeFontFaceFunction (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local CaptionMedium = UseDesignTokensResult.Typography.CaptionMedium
 	local Size400 = UseDesignTokensResult.Size.Size_400
@@ -30,33 +26,27 @@ return function(p1)
 	local OverMedia0 = UseDesignTokensResult.Color.OverMedia.OverMedia_0
 	local EmphasisColor3 = UseDesignTokensResult.Color.Content.Emphasis.Color3
 	local Size100 = UseDesignTokensResult.Size.Size_100
-	local ImageForKeyCode = if FFlagLocalizeMenuNavigationToggleDialogModule and game:GetEngineFeature("GetImageForKeyCode") then UserInputService:GetImageForKeyCode(Enum.KeyCode.ButtonSelect) else "rbxasset://textures/ui/Controls/DesignSystem/ButtonSelect@2x.png"
+	local ImageForKeyCode = if game:GetEngineFeature("GetImageForKeyCode") then UserInputService:GetImageForKeyCode(Enum.KeyCode.ButtonSelect) else "rbxasset://textures/ui/Controls/DesignSystem/ButtonSelect@2x.png"
 	local UseMemoResult = nil
 	local UseMemoResult2 = nil
-	
-	if FFlagLocalizeMenuNavigationToggleDialogModule then
-		local UseStateResult, UseStateResult2 = ReactModule.useState(LocalizationService.RobloxLocaleId)
-		UseEventConnectionFunction(LocalizationService:GetPropertyChangedSignal("RobloxLocaleId"), function()
-			-- upvalues: UseStateResult2 (copy), LocalizationService (upval)
-			UseStateResult2(LocalizationService.RobloxLocaleId)
-		end)
-		UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function()
-			-- upvalues: Localization (upval), UseStateResult (copy)
-			local NewLocalization = Localization.new(UseStateResult)
-			local Success, Result = pcall(NewLocalization.Format, NewLocalization, "CoreScripts.InGameMenu.VirtualCursorHintPreIcon")
-			local Success1, Result1 = pcall(NewLocalization.Format, NewLocalization, "CoreScripts.InGameMenu.VirtualCursorHintPostIcon")
-			local Result2 = if Success then Result else "Some experiences require pressing"
-			
-			if Success1 then
-				return Result2, Result1
-			else
-				return Result2, "to toggle menu navigation"
-			end
-		end, { UseStateResult })
-	else
-		UseMemoResult = "Some experiences require pressing "
-		UseMemoResult2 = " to toggle menu navigation"
-	end
+	local UseStateResult, UseStateResult2 = ReactModule.useState(LocalizationService.RobloxLocaleId)
+	UseEventConnectionFunction(LocalizationService:GetPropertyChangedSignal("RobloxLocaleId"), function()
+		-- upvalues: UseStateResult2 (copy), LocalizationService (upval)
+		UseStateResult2(LocalizationService.RobloxLocaleId)
+	end)
+	UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function()
+		-- upvalues: Localization (upval), UseStateResult (copy)
+		local NewLocalization = Localization.new(UseStateResult)
+		local Success, Result = pcall(NewLocalization.Format, NewLocalization, "CoreScripts.InGameMenu.VirtualCursorHintPreIcon")
+		local Success1, Result1 = pcall(NewLocalization.Format, NewLocalization, "CoreScripts.InGameMenu.VirtualCursorHintPostIcon")
+		local Result2 = if Success then Result else "Some experiences require pressing"
+		
+		if Success1 then
+			return Result2, Result1
+		else
+			return Result2, "to toggle menu navigation"
+		end
+	end, { UseStateResult })
 	local UseMemoResult1, UseMemoResult2_1 = ReactModule.useMemo(function()
 		-- upvalues: GetTextSizeFunction (upval), UseMemoResult (ref), CaptionMedium (copy), UseMemoResult2 (ref)
 		return GetTextSizeFunction(UseMemoResult, CaptionMedium.FontSize, CaptionMedium.Font, Vector2.new(1e999, 1e999)), (GetTextSizeFunction(UseMemoResult2, CaptionMedium.FontSize, CaptionMedium.Font, Vector2.new(1e999, 1e999)))
@@ -82,7 +72,7 @@ return function(p1)
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
-			Padding = if FFlagLocalizeMenuNavigationToggleDialogModule then UDim.new(0, Size100) else nil
+			Padding = UDim.new(0, Size100)
 		}),
 		LeftText = ReactModule.createElement("TextLabel", {
 			TextWrapped = false,
@@ -93,8 +83,7 @@ return function(p1)
 			TextXAlignment = Enum.TextXAlignment.Center,
 			TextYAlignment = Enum.TextYAlignment.Center,
 			TextColor3 = EmphasisColor3,
-			Font = if FoundationFontFaceMigration then nil else CaptionMedium.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(CaptionMedium.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(CaptionMedium.Font),
 			TextSize = CaptionMedium.FontSize
 		}),
 		Icon = ReactModule.createElement("ImageLabel", {
@@ -112,8 +101,7 @@ return function(p1)
 			TextXAlignment = Enum.TextXAlignment.Center,
 			TextYAlignment = Enum.TextYAlignment.Center,
 			TextColor3 = EmphasisColor3,
-			Font = if FoundationFontFaceMigration then nil else CaptionMedium.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(CaptionMedium.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(CaptionMedium.Font),
 			TextSize = CaptionMedium.FontSize
 		}),
 		Padding = ReactModule.createElement("UIPadding", {

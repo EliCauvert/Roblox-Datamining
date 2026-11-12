@@ -1,18 +1,13 @@
 ﻿local AvatarWorkshop = script:FindFirstAncestor("AvatarWorkshop")
 local Parent = AvatarWorkshop.Parent
 local ReactModule = require(Parent.React)
-local FoundationModule = require(Parent.Foundation)
-local UseTokensFunction = FoundationModule.Hooks.useTokens
-local HorizontalLayoutModule = require(AvatarWorkshop.Components.HorizontalLayout)
-local VerticalLayoutModule = require(AvatarWorkshop.Components.VerticalLayout)
-local TopBarModule = require(AvatarWorkshop.Components.TopBar)
-local AppContainer = require(Parent.RoactNavigation).createAppContainer((require(AvatarWorkshop.Navigation.Navigators.InventoryNavigator)))
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local WorkshopWindowContextModule = require(AvatarWorkshop.Contexts.WorkshopWindowContext)
+local AppContainer = require(Parent.RoactNavigation).createAppContainer((require(AvatarWorkshop.Navigation.Navigators.WorkshopNavigator)))
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), TopBarModule (copy), AppContainer (copy), VerticalLayoutModule (copy), FoundationModule (copy), HorizontalLayoutModule (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), WorkshopWindowContextModule (copy), AppContainer (copy)
 	local UseTokensResult = UseTokensFunction()
-	local Element = ReactModule.createElement(TopBarModule, { onClose = p1.onClose })
-	local Element1 = ReactModule.createElement(AppContainer)
 	
 	return ReactModule.createElement("Frame", {
 		Active = true,
@@ -23,12 +18,11 @@ return function(p1)
 		Corner = ReactModule.createElement("UICorner", {
 			CornerRadius = UDim.new(0, UseTokensResult.Radius.Medium)
 		}),
-		Layout = if p1.verticalLayout then ReactModule.createElement(VerticalLayoutModule, {
-			headerSlot = Element,
-			bottomItemSlot = ReactModule.createElement(FoundationModule.View, { tag = "size-full-full padding-top-xlarge" }, { Inventory = Element1 })
-		}) else ReactModule.createElement(HorizontalLayoutModule, {
-			headerSlot = Element,
-			leftItemSlot = ReactModule.createElement(FoundationModule.View, { tag = "size-full-full" }, { Inventory = Element1 })
-		})
+		Navigation = ReactModule.createElement(WorkshopWindowContextModule.Provider, {
+			value = ReactModule.useMemo(function()
+				-- upvalues: p1 (copy)
+				return { verticalLayout = p1.verticalLayout, onClose = p1.onClose }
+			end, { p1.verticalLayout, p1.onClose })
+		}, ReactModule.createElement(AppContainer))
 	})
 end

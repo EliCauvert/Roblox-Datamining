@@ -82,8 +82,8 @@ return function(p2)
 				IsGamepadButtonDown = true
 			else
 				local LastInputType = UserInputService:GetLastInputType()
-				local LastInputType4 = if LastInputType.Name:match("^Gamepad") and table.find(UserInputService:GetConnectedGamepads(), LastInputType) ~= nil then LastInputType else nil
-				IsGamepadButtonDown = LastInputType4 ~= nil and UserInputService:IsGamepadButtonDown(LastInputType4, DPadDown)
+				local LastInputType5 = if LastInputType.Name:match("^Gamepad") and table.find(UserInputService:GetConnectedGamepads(), LastInputType) ~= nil then LastInputType else nil
+				IsGamepadButtonDown = LastInputType5 ~= nil and UserInputService:IsGamepadButtonDown(LastInputType5, DPadDown)
 			end
 		end
 	end
@@ -105,8 +105,8 @@ return function(p2)
 				IsGamepadButtonDown1 = true
 			else
 				local LastInputType = UserInputService:GetLastInputType()
-				local LastInputType7 = if LastInputType.Name:match("^Gamepad") and table.find(UserInputService:GetConnectedGamepads(), LastInputType) ~= nil then LastInputType else nil
-				IsGamepadButtonDown1 = LastInputType7 ~= nil and UserInputService:IsGamepadButtonDown(LastInputType7, DPadLeft1)
+				local LastInputType4 = if LastInputType.Name:match("^Gamepad") and table.find(UserInputService:GetConnectedGamepads(), LastInputType) ~= nil then LastInputType else nil
+				IsGamepadButtonDown1 = LastInputType4 ~= nil and UserInputService:IsGamepadButtonDown(LastInputType4, DPadLeft1)
 			end
 		end
 	else
@@ -116,8 +116,8 @@ return function(p2)
 			IsGamepadButtonDown1 = true
 		else
 			local LastInputType = UserInputService:GetLastInputType()
-			local LastInputType5 = if LastInputType.Name:match("^Gamepad") and table.find(UserInputService:GetConnectedGamepads(), LastInputType) ~= nil then LastInputType else nil
-			IsGamepadButtonDown1 = LastInputType5 ~= nil and UserInputService:IsGamepadButtonDown(LastInputType5, DPadLeft)
+			local LastInputType7 = if LastInputType.Name:match("^Gamepad") and table.find(UserInputService:GetConnectedGamepads(), LastInputType) ~= nil then LastInputType else nil
+			IsGamepadButtonDown1 = LastInputType7 ~= nil and UserInputService:IsGamepadButtonDown(LastInputType7, DPadLeft)
 		end
 		if not IsGamepadButtonDown1 then
 			local DPadUp = Enum.KeyCode.DPadUp

@@ -1,4 +1,6 @@
-﻿local PromiseModule = require(script:FindFirstAncestor("CloudClientOffer").Parent.Promise)
+﻿local CloudClientOffer = script:FindFirstAncestor("CloudClientOffer")
+local PromiseModule = require(CloudClientOffer.Parent.Promise)
+local FFlagLuaAppCloudClientSyncOfferEligibilityModule = require(CloudClientOffer.Flags.FFlagLuaAppCloudClientSyncOfferEligibility)
 
 local function parseReservationError(p1)
 	local Text = tostring(p1)
@@ -11,15 +13,15 @@ local function parseReservationError(p1)
 end
 
 local function createCloudClientServiceAdapter(p1)
-	-- upvalues: PromiseModule (copy), parseReservationError (copy)
+	-- upvalues: PromiseModule (copy), FFlagLuaAppCloudClientSyncOfferEligibilityModule (copy), parseReservationError (copy)
 	return {
 		checkEligibility = function(p2)
-			-- upvalues: PromiseModule (upval), p1 (copy), parseReservationError (upval)
+			-- upvalues: PromiseModule (upval), FFlagLuaAppCloudClientSyncOfferEligibilityModule (upval), p1 (copy), parseReservationError (upval)
 			return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ())
-				-- upvalues: p1 (upval), p2 (copy), parseReservationError (upval)
+				-- upvalues: FFlagLuaAppCloudClientSyncOfferEligibilityModule (upval), p1 (upval), p2 (copy), parseReservationError (upval)
 				local Success, Result = pcall(function()
-					-- upvalues: p1 (upval), p2 (upval)
-					return p1:CheckOfferEligibilityAsync(p2.kind)
+					-- upvalues: FFlagLuaAppCloudClientSyncOfferEligibilityModule (upval), p1 (upval), p2 (upval)
+					return if FFlagLuaAppCloudClientSyncOfferEligibilityModule then p1:CheckOfferEligibility(p2.kind) else p1:CheckOfferEligibilityAsync(p2.kind)
 				end)
 				
 				if Success then

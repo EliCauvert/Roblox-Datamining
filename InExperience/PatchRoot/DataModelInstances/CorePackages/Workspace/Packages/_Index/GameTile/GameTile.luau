@@ -1,7 +1,4 @@
-﻿local Parent = script.Parent
-local FFlagMigrateGameInfoToStore = require(Parent.SharedFlags).FFlagMigrateGameInfoToStore
-
-return {
+﻿return {
 	AppExperienceActionRow = require(script.AppExperienceActionRow),
 	AppGameTile = require(script.AppGameTile),
 	ExperienceFooter = require(script.Footer.ExperienceFooter),
@@ -31,8 +28,8 @@ return {
 	formatExperienceIcon = require(script.formatExperienceIcon),
 	formatExperienceRating = require(script.formatExperienceRating),
 	formatExperienceThumbnail = require(script.formatExperienceThumbnail),
-	resolveGameTileThumbnailUri = if require(Parent.SharedFlags).FFlagLuaAppHomeThumbnailPrefetch then require(script.resolveGameTileThumbnailUri) else nil,
-	resolveWideAssetId = if FFlagMigrateGameInfoToStore then require(script.resolveWideAssetId) else nil,
+	resolveGameTileThumbnailUri = if require(script.Parent.SharedFlags).FFlagLuaAppHomeThumbnailPrefetch then require(script.resolveGameTileThumbnailUri) else nil,
+	resolveWideAssetId = require(script.resolveWideAssetId),
 	useNavigateToGameDetails = require(script.useNavigateToGameDetails),
 	NotInterestedUserSignalTelemetryEventConfigs = require(script.NotInterestedUserSignalTelemetryEventConfigs),
 	activateGameNotInterested = require(script.activateGameNotInterested),

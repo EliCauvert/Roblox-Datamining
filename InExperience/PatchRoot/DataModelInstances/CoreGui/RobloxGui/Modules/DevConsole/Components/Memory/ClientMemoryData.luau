@@ -267,13 +267,13 @@ function ClientMemoryDataModule:recursiveUpdateEntry(Children, List, Player)
 		self:recursiveUpdateEntry(Child.children, Child.sortedChildren, Player1)
 	end
 	if Child.children then
-		for i, _ in pairs(Child.children) do
-			if t[i] == nil then
-				Child.children[i] = nil
+		for i1, _ in pairs(Child.children) do
+			if t[i1] == nil then
+				Child.children[i1] = nil
 				
-				for i1, value in ipairs(Child.sortedChildren) do
-					if i == value.name then
-						table.remove(Child.sortedChildren, i1)
+				for i, value in ipairs(Child.sortedChildren) do
+					if i1 == value.name then
+						table.remove(Child.sortedChildren, i)
 						break
 					end
 				end

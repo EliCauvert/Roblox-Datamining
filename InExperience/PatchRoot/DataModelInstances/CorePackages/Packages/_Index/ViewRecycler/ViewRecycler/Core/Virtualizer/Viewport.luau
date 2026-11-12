@@ -1,4 +1,5 @@
-﻿local FFlagViewRecyclerReact08 = require(script:FindFirstAncestor("ViewRecycler").Flags).FFlagViewRecyclerReact08
+﻿local FFlagViewRecyclerReact084 = require(script:FindFirstAncestor("ViewRecycler").Flags).FFlagViewRecyclerReact084
+local FFlagViewRecyclerReact08 = require(script:FindFirstAncestor("ViewRecycler").Flags).FFlagViewRecyclerReact08
 local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
 local _ = require(ViewRecycler.Core.Layout)
 local ReachedThresholdModule = require(ViewRecycler.Core.ViewportBehavior.ReachedThreshold)
@@ -27,7 +28,7 @@ local _ = function(p1, p2): boolean
 end
 
 return function(p1)
-	-- upvalues: ScrollAlignmentModule (copy), ReachedThresholdModule (copy), Frozen (copy), TypesModule (copy), FFlagViewRecyclerReact08 (copy)
+	-- upvalues: ScrollAlignmentModule (copy), ReachedThresholdModule (copy), Frozen (copy), TypesModule (copy), FFlagViewRecyclerReact084 (copy), FFlagViewRecyclerReact08 (copy)
 	local Layout = p1.layout
 	local Overscan = p1.overscan or 1
 	local Insets: boolean = Overscan >= 0 and Overscan % 1 == 0
@@ -284,7 +285,7 @@ return function(p1)
 				atEnd = IsLargestBelow
 			}) else p2
 		end,
-		scrollBy = if FFlagViewRecyclerReact08 then nil else function(Value: number): number
+		scrollBy = if FFlagViewRecyclerReact084 then nil elseif FFlagViewRecyclerReact08 then nil else function(Value: number): number
 			-- upvalues: ClampedValue (ref), Layout (ref), Size (ref), Insets (ref), Insets1 (ref), ContentAlignment (ref), ScrollAlignmentModule (upval)
 			assert(math.abs(Value) < 1e999, "Virtualizer: scroll delta must be finite")
 			local NewClampedValue = ClampedValue + Value

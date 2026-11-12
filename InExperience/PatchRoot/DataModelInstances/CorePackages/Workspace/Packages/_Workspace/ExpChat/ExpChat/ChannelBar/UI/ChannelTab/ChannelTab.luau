@@ -6,14 +6,12 @@ local ReactModule = require(Parent.React)
 local Dictionary = require(Parent.llama).Dictionary
 local UIBloxModule = require(Parent.UIBlox)
 local ExpChatSharedModule = require(Parent.ExpChatShared)
-local SharedFlagsModule = require(Parent.SharedFlags)
 local ChannelTabDisplayLabel = ExpChatSharedModule.ChannelTabDisplayLabel
 local CursorKind = UIBloxModule.App.SelectionImage.CursorKind
 local Interactable = UIBloxModule.Core.Control.Interactable
 local UseSelectionCursorFunction = UIBloxModule.App.SelectionImage.useSelectionCursor
 local FFlagExpChatChannelTabSizingUpdateModule = require(ExpChat.Flags.FFlagExpChatChannelTabSizingUpdate)
-local FFlagExpChatEnableFriendsTab = SharedFlagsModule.FFlagExpChatEnableFriendsTab
-local FFlagExpChatUseSharedChannelTabDisplayLabel = SharedFlagsModule.FFlagExpChatUseSharedChannelTabDisplayLabel
+local FFlagExpChatUseSharedChannelTabDisplayLabel = require(Parent.SharedFlags).FFlagExpChatUseSharedChannelTabDisplayLabel
 local TextService = if FFlagExpChatChannelTabSizingUpdateModule then game:GetService("TextService") else nil
 local LocalizationModule = require(ExpChat.Localization)
 local GetOtherDisplayNameInWhisperChannelModule = require(ExpChat.getOtherDisplayNameInWhisperChannel)
@@ -51,7 +49,7 @@ local function createUnreadDot(Position, SetTransparencyResult)
 end
 
 return function(p1)
-	-- upvalues: Dictionary (copy), config (copy), UseTabImpressionModule (copy), FFlagExpChatGlobalTabDefaultModule (copy), LocalizationModule (copy), FFlagExpChatUseSharedChannelTabDisplayLabel (copy), ChannelTabDisplayLabel (copy), FFlagExpChatEnableFriendsTab (copy), UnreachableFunction (copy), Players (copy), GetOtherDisplayNameInWhisperChannelModule (copy), ReactModule (copy), UseSelectionCursorFunction (copy), CursorKind (copy), FFlagExpChatChannelTabSizingUpdateModule (copy), TextService (copy), GetUnreadIndicatorLayoutModule (copy), Offset (copy), Interactable (copy), createUnreadDot (copy), _Color3 (copy), ConfigModule (copy)
+	-- upvalues: Dictionary (copy), config (copy), UseTabImpressionModule (copy), FFlagExpChatGlobalTabDefaultModule (copy), LocalizationModule (copy), FFlagExpChatUseSharedChannelTabDisplayLabel (copy), ChannelTabDisplayLabel (copy), Players (copy), GetOtherDisplayNameInWhisperChannelModule (copy), UnreachableFunction (copy), ReactModule (copy), UseSelectionCursorFunction (copy), CursorKind (copy), FFlagExpChatChannelTabSizingUpdateModule (copy), TextService (copy), GetUnreadIndicatorLayoutModule (copy), Offset (copy), Interactable (copy), createUnreadDot (copy), _Color3 (copy), ConfigModule (copy)
 	local JoinResult = Dictionary.join(config, p1)
 	UseTabImpressionModule({
 		enabled = JoinResult.isLayoutReady,
@@ -74,9 +72,6 @@ return function(p1)
 	local ChannelName = JoinResult.channelName
 	
 	if FFlagExpChatUseSharedChannelTabDisplayLabel then
-		if TabType == "FriendsChat" and not FFlagExpChatEnableFriendsTab then
-			UnreachableFunction(TabType)
-		end
 		ChannelName = ChannelTabDisplayLabel.getDisplayLabel(TabType, JoinResult.channelName, JoinResult.textChannel, Players.LocalPlayer, UseLocalizationResult)
 	elseif TabType == "TextChat" then
 		local ChannelName1: string = JoinResult.channelName
@@ -98,7 +93,7 @@ return function(p1)
 		if string.find(JoinResult.channelName, "RBXGlobal") then
 			ChannelName = UseLocalizationResult.moreServers
 		end
-	elseif FFlagExpChatEnableFriendsTab and TabType == "FriendsChat" then
+	elseif TabType == "FriendsChat" then
 		ChannelName = UseLocalizationResult.friends
 	else
 		UnreachableFunction(TabType)

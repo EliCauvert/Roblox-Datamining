@@ -1,4 +1,5 @@
 ﻿local FriendsLanding = script:FindFirstAncestor("FriendsLanding")
+local Parent = FriendsLanding.Parent
 local DependenciesModule = require(FriendsLanding.dependencies)
 local Roact = DependenciesModule.Roact
 local Logger = DependenciesModule.Logger
@@ -14,11 +15,13 @@ local BottomInsetBackground = DependenciesModule.SocialCommon.Components.BottomI
 local ComposeFunction = DependenciesModule.SocialLibraries.RoduxTools.compose
 local MapStateToPropsModule = require(script.mapStateToProps)
 local MapDispatchToPropsModule = require(script.mapDispatchToProps)
+local GetInitialFilterModule = require(script.getInitialFilter)
 local WithLocalizationFunction = DependenciesModule.withLocalization
 local GetFStringSocialAddFriendsPageLayerFunction = DependenciesModule.getFStringSocialAddFriendsPageLayer
-local FFlagFriendsPageAlwaysOpenPPV = require(FriendsLanding.Parent.SharedFlags).FFlagFriendsPageAlwaysOpenPPV
+local FFlagFriendsPageAlwaysOpenPPV = require(Parent.SharedFlags).FFlagFriendsPageAlwaysOpenPPV
+local FFlagFriendsDeepLinkInitialFilter = require(Parent.SharedFlags).FFlagFriendsDeepLinkInitialFilter
 
-local function v15() end
+local function v18() end
 
 local FriendsLandingEntryPoint = Roact.PureComponent:extend("FriendsLandingEntryPoint")
 FriendsLandingEntryPoint.defaultProps = {
@@ -30,7 +33,7 @@ FriendsLandingEntryPoint.defaultProps = {
 }
 
 function FriendsLandingEntryPoint.init(p1)
-	-- upvalues: Logger (copy), FilterStatesModule (copy), EnumScreensModule (copy), v15 (copy), MemoizeFunction (copy), FriendsLandingAnalyticsModule (copy)
+	-- upvalues: Logger (copy), FilterStatesModule (copy), EnumScreensModule (copy), FFlagFriendsDeepLinkInitialFilter (copy), GetInitialFilterModule (copy), v18 (copy), MemoizeFunction (copy), FriendsLandingAnalyticsModule (copy)
 	if p1.props.logger then
 		Logger:setParent(p1.props.logger)
 	end
@@ -40,6 +43,10 @@ function FriendsLandingEntryPoint.init(p1)
 			[EnumScreensModule.FriendsLanding] = { shouldRenderCenter = false }
 		}
 	}
+	
+	if FFlagFriendsDeepLinkInitialFilter then
+		p1.state.filter = GetInitialFilterModule(p1.props.initialFilter)
+	end
 	p1.localization = { pageError = "CommonUI.Messages.Response.PageError" }
 	
 	function p1.setFilterKeys(Filter)
@@ -56,7 +63,7 @@ function FriendsLandingEntryPoint.init(p1)
 	end
 	
 	function p1.refreshPage(p2)
-		-- upvalues: p1 (copy), Logger (upval), v15 (upval)
+		-- upvalues: p1 (copy), Logger (upval), v18 (upval)
 		return p1.props.refreshPageData({
 			localUserId = p1.props.localUserId,
 			inactiveFriendsNetworkRequestStatus = p1.props.inactiveFriendsNetworkRequestStatus,
@@ -65,7 +72,7 @@ function FriendsLandingEntryPoint.init(p1)
 				p1.showErrorToast(p2.errorMessage)
 				Logger:info("Refreshing FriendsLanding data failed")
 			end,
-			onResolve = p2.onResolve or v15
+			onResolve = p2.onResolve or v18
 		})
 	end
 	

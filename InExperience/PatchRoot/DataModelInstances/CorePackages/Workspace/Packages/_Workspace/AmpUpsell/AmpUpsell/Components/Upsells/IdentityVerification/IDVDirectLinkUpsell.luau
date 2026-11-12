@@ -1,9 +1,7 @@
 ﻿local AmpUpsell = script:FindFirstAncestor("AmpUpsell")
 local Parent = AmpUpsell.Parent
 local UIBloxModule = require(Parent.UIBlox)
-local FoundationModule = require(Parent.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
 local ReactModule = require(Parent.React)
 local RoactModule = require(Parent.Roact)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
@@ -20,13 +18,12 @@ local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), IdvWithQRCodeUpsellStrings (copy), UseStyleFunction (copy), AnalyticsServiceModule (copy), UseSelectorFunction (copy), ReactModule (copy), PartialPageModal (copy), SendButtonClickEventModule (copy), AppScreensModule (copy), ButtonType (copy), DirectionsTileModule (copy), ProgressChecklistModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), RoactModule (copy), LinkButton (copy)
+	-- upvalues: UseLocalizationFunction (copy), IdvWithQRCodeUpsellStrings (copy), UseStyleFunction (copy), AnalyticsServiceModule (copy), UseSelectorFunction (copy), ReactModule (copy), PartialPageModal (copy), SendButtonClickEventModule (copy), AppScreensModule (copy), ButtonType (copy), DirectionsTileModule (copy), ProgressChecklistModule (copy), NormalizeFontFaceFunction (copy), RoactModule (copy), LinkButton (copy)
 	local FeatureName = p1.featureName
 	local UseLocalizationResult = UseLocalizationFunction(IdvWithQRCodeUpsellStrings)
 	local UseStyleResult = UseStyleFunction()
 	local OnCloseFunction = p1.onClose
 	local OpenPrivacyPolicyLinkFunction = p1.openPrivacyPolicyLink
-	local BodyFont = UseStyleResult.Font.Body.Font
 	local AnalyticsService = p1.analyticsService or AnalyticsServiceModule.EventStream
 	local IdvLink = p1.idvLink
 	local LatestStepCompleted: number = p1.latestStepCompleted
@@ -136,8 +133,7 @@ return function(p1)
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
 					Text = UseLocalizationResult.disclaimer,
-					Font = if FoundationFontFaceMigration then nil else BodyFont,
-					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
+					FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
 					TextSize = UseStyleResult.Font.BaseSize * UseStyleResult.Font.CaptionBody.RelativeSize,
 					TextColor3 = UseStyleResult.Theme.TextDefault.Color,
 					TextTransparency = UseStyleResult.Theme.TextEmphasis.Transparency,

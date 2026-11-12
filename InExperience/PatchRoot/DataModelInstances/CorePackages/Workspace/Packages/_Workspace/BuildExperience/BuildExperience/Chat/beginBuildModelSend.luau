@@ -1,6 +1,7 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
 local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
+local FFlagBuildExperienceAdvancedPreviewSpecs = require(Parent.SharedFlags).FFlagBuildExperienceAdvancedPreviewSpecs
 local _ = require(Parent.DataHydration.CreatorCredit)
 local _ = require(BuildExperience.Stores.GetBuildModelSelectionStore.createBuildModelSelectionStore)
 local ChatConstantsModule = require(script.Parent.chatConstants)
@@ -45,8 +46,8 @@ local function awaitRefreshedQuota(p2, Tier, IsCurrent)
 	return nil
 end
 
-return function(p3, p4, p5, Enabled)
-	-- upvalues: CreatorAgentChatModule (copy), awaitRefreshedQuota (copy)
+return function(p3, p4, p5, p6)
+	-- upvalues: FFlagBuildExperienceAdvancedPreviewSpecs (copy), CreatorAgentChatModule (copy), awaitRefreshedQuota (copy)
 	if p3 == nil then
 		return nil
 	end
@@ -55,7 +56,9 @@ return function(p3, p4, p5, Enabled)
 	if AcquireLockResult == nil then
 		return nil
 	else
-		local CaptureSendConfigurationResult = CreatorAgentChatModule.captureSendConfiguration(if Enabled then "default" else assert(p3.getSelection(false)).intendedTier, p5)
+		local IsSelected = p6 ~= nil and p6.isSelected
+		local Advanced: string = if FFlagBuildExperienceAdvancedPreviewSpecs and p6 ~= nil and p6.previewSpecName == "build-on-mobile-advanced" then "advanced" else "default"
+		local CaptureSendConfigurationResult = CreatorAgentChatModule.captureSendConfiguration(if IsSelected then Advanced else assert(p3.getSelection(false)).intendedTier, p5)
 		local Flag = false
 		local Flag1 = false
 		local v1 = nil
@@ -67,20 +70,20 @@ return function(p3, p4, p5, Enabled)
 		end
 		
 		return {
-			prepare = function(p6)
-				-- upvalues: Flag1 (ref), Flag (ref), p3 (copy), v1 (ref), CasSessionId (ref), CaptureSendConfigurationResult (copy), AcquireLockResult (copy), Enabled (copy), awaitRefreshedQuota (upval), p4 (copy), isCurrent (copy), CreatorAgentChatModule (upval)
+			prepare = function(p7)
+				-- upvalues: Flag1 (ref), Flag (ref), p3 (copy), v1 (ref), CasSessionId (ref), CaptureSendConfigurationResult (copy), AcquireLockResult (copy), IsSelected (copy), awaitRefreshedQuota (upval), p4 (copy), isCurrent (copy), CreatorAgentChatModule (upval)
 				assert(not Flag1, "A model send attempt can only prepare once")
 				Flag1 = true
 				
 				if Flag or (p3.getSelection(false) == nil or v1 ~= nil and v1.getCasSessionId() ~= CasSessionId) then
 					return nil, nil
 				end
-				local NoCasSessionId = p6.getCasSessionId() == nil
+				local NoCasSessionId = p7.getCasSessionId() == nil
 				
 				if NoCasSessionId then
 					p3.restoreTier(CaptureSendConfigurationResult.tier)
 				end
-				local PrepareSessionResult, PrepareSessionResult2 = p6.prepareSession({
+				local PrepareSessionResult, PrepareSessionResult2 = p7.prepareSession({
 					sendConfiguration = CaptureSendConfigurationResult,
 					isCancelled = function(): boolean
 						-- upvalues: Flag (upval), p3 (upval), v1 (upval), CasSessionId (upval)
@@ -98,7 +101,7 @@ return function(p3, p4, p5, Enabled)
 					end
 					return nil, nil
 				else
-					if PrepareSessionResult == nil or p6.getCasSessionId() ~= PrepareSessionResult then
+					if PrepareSessionResult == nil or p7.getCasSessionId() ~= PrepareSessionResult then
 						return nil, {
 							kind = "setup",
 							errorCode = if PrepareSessionResult2 == nil then nil else PrepareSessionResult2.errorCode,
@@ -106,14 +109,14 @@ return function(p3, p4, p5, Enabled)
 							setupError = PrepareSessionResult2
 						}
 					end
-					v1 = p6
+					v1 = p7
 					CasSessionId = PrepareSessionResult
-					local Models = p6.getModels(false)
+					local Models = p7.getModels(false)
 					
 					if not NoCasSessionId and Models ~= nil then
 						p3.restoreTier(Models.current)
 					end
-					local Tier = if NoCasSessionId or Enabled == true then CaptureSendConfigurationResult.tier else assert(p3.getSelection(false)).intendedTier
+					local Tier = if NoCasSessionId or IsSelected == true then CaptureSendConfigurationResult.tier else assert(p3.getSelection(false)).intendedTier
 					p3.restoreTier(Tier)
 					local IsDefault = nil
 					
@@ -122,8 +125,8 @@ return function(p3, p4, p5, Enabled)
 					else
 						IsDefault = false
 						
-						for _, value in Models.available do
-							if value.id == Tier then
+						for _, value1 in Models.available do
+							if value1.id == Tier then
 								IsDefault = true
 								break
 							end
@@ -136,8 +139,8 @@ return function(p3, p4, p5, Enabled)
 						tier = Tier,
 						experiment = CaptureSendConfigurationResult.experiment,
 						sessionId = PrepareSessionResult,
-						universeId = p6.universeId,
-						placeId = p6.placeId
+						universeId = p7.universeId,
+						placeId = p7.placeId
 					})
 					local AwaitRefreshedQuotaResult = awaitRefreshedQuota(p4, Frozen.tier, isCurrent)
 					
@@ -154,7 +157,7 @@ return function(p3, p4, p5, Enabled)
 							reason = AwaitRefreshedQuotaResult.reason
 						}
 					end
-					local Models1 = p6.getModels(false)
+					local Models1 = p7.getModels(false)
 					local Tier1 = Frozen.tier
 					local IsDefault1 = nil
 					
@@ -163,8 +166,8 @@ return function(p3, p4, p5, Enabled)
 					else
 						IsDefault1 = false
 						
-						for _, value1 in Models1.available do
-							if value1.id == Tier1 then
+						for _, value in Models1.available do
+							if value.id == Tier1 then
 								IsDefault1 = true
 								break
 							end

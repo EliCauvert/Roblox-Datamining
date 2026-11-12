@@ -232,19 +232,19 @@ return ReactModule.memo(function(p1)
 		})
 	end
 	local ScaledCONTEXTMENUWIDTH = ConstantsModule.CONTEXT_MENU_WIDTH * UseTokensResult.Config.UI.Scale
-	local Copy = nil
+	local config1 = nil
 	
 	if p1.isSmallTouchDevice then
-		Copy = table.clone(config)
-		Copy.UIScale = ReactModule.createElement("UIScale", { Scale = UseMemoResult })
-		Copy.UIStroke = ReactModule.createElement("UIStroke", {
+		config1 = table.clone(config)
+		config1.UIScale = ReactModule.createElement("UIScale", { Scale = UseMemoResult })
+		config1.UIStroke = ReactModule.createElement("UIStroke", {
 			ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
 			Color = UseTokensResult.Color.Stroke.Default.Color3,
 			Transparency = UseMemoResult1,
 			Thickness = UseTokensResult.Stroke.Standard
 		})
 	else
-		Copy = {
+		config1 = {
 			SlideOffset = ReactModule.createElement(View, {
 				tag = "col align-x-left gap-xxsmall auto-y padding-small stroke-standard stroke-default radius-large",
 				Position = UseSlideOpenCloseAnimationResult.position,
@@ -285,6 +285,6 @@ return ReactModule.memo(function(p1)
 			backgroundStyle = if p1.isSmallTouchDevice then UsePreferredBackgroundStyleModuleResult else nil,
 			onActivated = if p1.isSmallTouchDevice then nil else v20,
 			stateLayer = if p1.isSmallTouchDevice then nil else StateLayer
-		}, Copy)
+		}, config1)
 	})
 end)

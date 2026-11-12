@@ -91,11 +91,11 @@ return {
 			
 			return false, p1
 		end
-		local ValidateInterfaceModuleResult, ValidateInterfaceModuleResult2 = ValidateInterfaceModule(DeepCopyResult, UiComponentInterface, false)
+		local ValidateInterfaceModuleResult1, ValidateInterfaceModuleResult2_1 = ValidateInterfaceModule(DeepCopyResult, UiComponentInterface, false)
 		
-		if not ValidateInterfaceModuleResult then
+		if not ValidateInterfaceModuleResult1 then
 			p2.dependencies.logger.reportError(SduiErrorType.InvalidComponentConfig, {
-				message = `(Eager) Invalid config for component. err: {ValidateInterfaceModuleResult2}`,
+				message = `(Eager) Invalid config for component. err: {ValidateInterfaceModuleResult2_1}`,
 				componentType = ComponentType,
 				name = Name,
 				value = DeepCopyResult
@@ -105,18 +105,18 @@ return {
 			return false, p1
 		end
 		if DeepCopyResult.props then
-			local MapServerBindingPropsResult1, MapServerBindingPropsResult2_1 = MapServerBindingPropsFunction(DeepCopyResult.props, ServerBindingPropMap)
+			local MapServerBindingPropsResult, MapServerBindingPropsResult2 = MapServerBindingPropsFunction(DeepCopyResult.props, ServerBindingPropMap)
 			
-			if MapServerBindingPropsResult1 then
-				for i1, value1 in MapServerBindingPropsResult1 do
+			if MapServerBindingPropsResult then
+				for i1, value1 in MapServerBindingPropsResult do
 					DeepCopyResult.props[i1] = value1
 				end
 			end
-			if MapServerBindingPropsResult2_1 then
+			if MapServerBindingPropsResult2 then
 				p2.dependencies.logger.reportError(SduiErrorType.UnmappedServerBindingProp, {
 					componentType = ComponentType,
 					name = Name,
-					message = `Unmapped PascalCase props detected: {table.concat(MapServerBindingPropsResult2_1, ", ")}. These props will not reach the camelCase component.`
+					message = `Unmapped PascalCase props detected: {table.concat(MapServerBindingPropsResult2, ", ")}. These props will not reach the camelCase component.`
 				}, p2.appPage)
 			end
 		end
@@ -130,18 +130,18 @@ return {
 		end
 		if DeepCopyResult.conditionalProps then
 			for _, conditionalProp in DeepCopyResult.conditionalProps do
-				local MapServerBindingPropsResult, MapServerBindingPropsResult2 = MapServerBindingPropsFunction(conditionalProp.propOverrides, ServerBindingPropMap)
+				local MapServerBindingPropsResult1, MapServerBindingPropsResult2_1 = MapServerBindingPropsFunction(conditionalProp.propOverrides, ServerBindingPropMap)
 				
-				if MapServerBindingPropsResult then
-					for i, value in MapServerBindingPropsResult do
+				if MapServerBindingPropsResult1 then
+					for i, value in MapServerBindingPropsResult1 do
 						conditionalProp.propOverrides[i] = value
 					end
 				end
-				if MapServerBindingPropsResult2 then
+				if MapServerBindingPropsResult2_1 then
 					p2.dependencies.logger.reportError(SduiErrorType.UnmappedServerBindingProp, {
 						componentType = ComponentType,
 						name = Name,
-						message = `Unmapped PascalCase conditional props detected: {table.concat(MapServerBindingPropsResult2, ", ")}. These props will not reach the camelCase component.`
+						message = `Unmapped PascalCase conditional props detected: {table.concat(MapServerBindingPropsResult2_1, ", ")}. These props will not reach the camelCase component.`
 					}, p2.appPage)
 				end
 				ParsePropsModule(ComponentType, conditionalProp.propOverrides, Name, p2, p3, nil, SduiBuilderProcessingPhase.Eager)
@@ -150,13 +150,13 @@ return {
 		local PropInterface = p2.componentDefinitions:getPropInterface(ComponentType)
 		
 		if PropInterface then
-			local ValidateInterfaceModuleResult1, ValidateInterfaceModuleResult2_1 = ValidateInterfaceModule(DeepCopyResult.props, PropInterface)
+			local ValidateInterfaceModuleResult, ValidateInterfaceModuleResult2 = ValidateInterfaceModule(DeepCopyResult.props, PropInterface)
 			
-			if not ValidateInterfaceModuleResult1 then
+			if not ValidateInterfaceModuleResult then
 				p2.dependencies.logger.reportError(SduiErrorType.InvalidProps, {
 					componentType = ComponentType,
 					name = Name,
-					message = ValidateInterfaceModuleResult2_1
+					message = ValidateInterfaceModuleResult2
 				}, p2.appPage)
 				Instrumentation:stopTimerFlow("EagerProcess", p2, true)
 				

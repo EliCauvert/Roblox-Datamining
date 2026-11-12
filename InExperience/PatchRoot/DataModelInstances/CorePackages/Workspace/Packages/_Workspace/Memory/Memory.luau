@@ -16,7 +16,7 @@ return {
 			end
 		end
 		if FFlagEnableMemoryShellModule then
-			MemoryShellModule:start()
+			MemoryShellModule.start(p2 or "app")
 		end
 	end
 }

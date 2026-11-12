@@ -1,10 +1,12 @@
-﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local Button = FoundationModule.Button
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local InputSize = FoundationModule.Enums.InputSize
 local View = FoundationModule.View
+local FFlagBuildExperienceLocalizeCaptureShowMoreModule = require(BuildExperience.Flags.FFlagBuildExperienceLocalizeCaptureShowMore)
 local MediaPreviewModule = require(script.Parent.MediaPreview)
 local CaptureGridItemModule = require(script.Parent.CaptureGridItem)
 local UseCaptureSelectionViewModelModule = require(script.Parent.useCaptureSelectionViewModel)
@@ -16,7 +18,7 @@ local function renderEmptyState()
 end
 
 local function CaptureSelectionView(p1)
-	-- upvalues: ReactModule (copy), CaptureGridItemModule (copy), View (copy), MediaPreviewModule (copy), ScrollingGridView (copy), renderEmptyState (copy), Button (copy), FoundationModule (copy), InputSize (copy), ButtonVariant (copy)
+	-- upvalues: ReactModule (copy), CaptureGridItemModule (copy), View (copy), MediaPreviewModule (copy), ScrollingGridView (copy), renderEmptyState (copy), FFlagBuildExperienceLocalizeCaptureShowMoreModule (copy), Button (copy), FoundationModule (copy), InputSize (copy), ButtonVariant (copy)
 	return ReactModule.createElement(View, { tag = "col gap-medium size-full padding-large" }, {
 		Preview = ReactModule.createElement(View, {
 			LayoutOrder = 1,
@@ -33,7 +35,6 @@ local function CaptureSelectionView(p1)
 			Grid = ReactModule.createElement(ScrollingGridView, {
 				aspectRatio = 1,
 				layoutOrder = 1,
-				showMoreButtonText = "Show More",
 				itemConfig = {
 					padding = 2,
 					maxItemsPerRow = 4,
@@ -51,7 +52,8 @@ local function CaptureSelectionView(p1)
 						onActivated = p1.onCaptureSelected
 					})
 				end, { p1.selectedCapture, p1.onCaptureSelected }),
-				shouldShowShowMoreButton = not p1.isFinished
+				shouldShowShowMoreButton = not p1.isFinished,
+				showMoreButtonText = if FFlagBuildExperienceLocalizeCaptureShowMoreModule then p1.showMoreText else "Show More"
 			})
 		}),
 		ConfirmButton = ReactModule.createElement(View, { LayoutOrder = 3, tag = "size-full-0 auto-y" }, {

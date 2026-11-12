@@ -1,17 +1,21 @@
 ﻿local _ = require(script.Parent.Parent.types)
 local NowModule = require(script.Parent.Parent.Parent.Utils.now)
+local FFlagLuaAppNavTTIMeasurementV2 = require(script:FindFirstAncestor("TimeToInteractiveTracker").Parent.SharedFlags).FFlagLuaAppNavTTIMeasurementV2
 
-return function(Callback)
-	-- upvalues: NowModule (copy)
+return function(Callback, p1)
+	-- upvalues: FFlagLuaAppNavTTIMeasurementV2 (copy), NowModule (copy)
 	local t = {}
 	
-	return function(p1, p2)
-		-- upvalues: Callback (copy), NowModule (upval), t (copy)
+	return function(Key, p2)
+		-- upvalues: FFlagLuaAppNavTTIMeasurementV2 (upval), p1 (copy), Callback (copy), NowModule (upval), t (copy)
+		if FFlagLuaAppNavTTIMeasurementV2 and p1 then
+			p1[Key] = nil
+		end
 		Callback(function(Tbl)
-			-- upvalues: p1 (copy), NowModule (upval), p2 (copy), t (upval)
-			local Entry = Tbl[p1]
+			-- upvalues: Key (copy), NowModule (upval), p2 (copy), t (upval)
+			local Entry = Tbl[Key]
 			local Copy = table.clone(Tbl)
-			Copy[p1] = {
+			Copy[Key] = {
 				endTime = nil,
 				deltaMs = nil,
 				sent = nil,
@@ -20,8 +24,8 @@ return function(Callback)
 			}
 			
 			if p2 then
-				Copy[p1].metadata.coldStart = not t[p1]
-				t[p1] = true
+				Copy[Key].metadata.coldStart = not t[Key]
+				t[Key] = true
 			end
 			return Copy
 		end)

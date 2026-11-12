@@ -158,8 +158,8 @@ return {
 						local CallbackResult1 = Callback1(value, p12)
 						
 						if CallbackResult1 ~= nil then
-							for i2, value2 in CallbackResult1 do
-								Stub[i2] = value2
+							for i3, value3 in CallbackResult1 do
+								Stub[i3] = value3
 							end
 						end
 					end
@@ -174,8 +174,8 @@ return {
 							local CallbackResult2 = Callback1(value, p12)
 							
 							if CallbackResult2 ~= nil then
-								for i3, value3 in CallbackResult2 do
-									ConfigForComponent[i3] = value3
+								for i2, value2 in CallbackResult2 do
+									ConfigForComponent[i2] = value2
 								end
 							end
 						end

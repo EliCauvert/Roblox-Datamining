@@ -74,14 +74,14 @@ local function mapIntoArray(p1, List, Text, Text1, Callback): number
 			
 			if typeof(IteratorFn) == "function" then
 				local IteratorFnResult = IteratorFn(p1)
-				local Count = 1
-				local v3 = IteratorFnResult.next()
-				while not v3.done do
-					local Value = v3.value
-					local Text4: string = if typeof(Value) == "table" and Value ~= nil and Value.key ~= nil then "$" .. string.gsub(string.gsub(tostring(Value.key), "=", "=0"), ":", "=2") else tostring(Count)
-					Count += 1
+				local v3 = 1
+				local v4 = IteratorFnResult.next()
+				while not v4.done do
+					local Value = v4.value
+					local Text4: string = if typeof(Value) == "table" and Value ~= nil and Value.key ~= nil then "$" .. string.gsub(string.gsub(tostring(Value.key), "=", "=0"), ":", "=2") else tostring(v3)
+					v3 += 1
 					Total += mapIntoArray(Value, List, Text, Text3 .. Text4, Callback)
-					v3 = IteratorFnResult.next()
+					v4 = IteratorFnResult.next()
 				end
 			end
 			return Total

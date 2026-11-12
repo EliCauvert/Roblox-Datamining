@@ -35,38 +35,58 @@ return function(Frame)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
-	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
-	local UseRefResult = ReactModule.useRef(0)
-	local UseRefResult1 = ReactModule.useRef(false)
+	local UseRefResult = ReactModule.useRef(if Frame.initialOffset == nil then 0 else Frame.initialOffset)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UseRefResult.current)
+	local UseRefResult1 = ReactModule.useRef(0)
+	local UseRefResult2 = ReactModule.useRef(false)
+	local UseRefResult3 = ReactModule.useRef(Frame.saveOffset)
+	UseRefResult3.current = Frame.saveOffset
 	local TravelDistanceResult: number = MarqueeTextMotionModule.travelDistance(UseStateResult, UseStateResult1)
 	local OverflowsResult = MarqueeTextMotionModule.overflows(UseStateResult, UseStateResult1)
-	local IsNotRequiresOverflow = PlayStatus ~= MarqueePlayStatus.Idle and (not ReducedMotion and (TravelDistanceResult > 0 and (Frame.requiresOverflow ~= true or OverflowsResult)))
-	local NoUseStateResult3: boolean = IsNotRequiresOverflow and not UseStateResult3
-	local IsHoldForNextLoop: boolean = IsNotRequiresOverflow and (UseStateResult3 and Frame.holdForNextLoop == true)
-	local IsPlayStatusMatch: boolean = NoUseStateResult3 and PlayStatus == MarqueePlayStatus.Playing
-	local NoUseStateResult3_1: boolean = NoUseStateResult3 or IsHoldForNextLoop
-	local OverflowsResult1 = not NoUseStateResult3_1 and OverflowsResult
+	local OverflowsResult1 = PlayStatus ~= MarqueePlayStatus.Idle and (not ReducedMotion and (not UseStateResult3 and (TravelDistanceResult > 0 and (OverflowsResult or Frame.marqueeShortTitlesEnabled == true))))
+	local OverflowsResult2 = Frame.holdForNextLoop == true and (UseStateResult3 and (PlayStatus ~= MarqueePlayStatus.Idle and (not ReducedMotion and (TravelDistanceResult > 0 and (OverflowsResult or Frame.marqueeShortTitlesEnabled == true)))))
+	local IsPlayStatusMatch: boolean = OverflowsResult1 and PlayStatus == MarqueePlayStatus.Playing
+	local OverflowsResult1_1 = OverflowsResult1 or OverflowsResult2
+	local OverflowsResult3 = not OverflowsResult1_1 and OverflowsResult
 	ReactModule.useEffect(function()
-		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseBindingResult2 (copy), UseStateResult2_2 (copy)
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseRefResult2 (copy), UseBindingResult2 (copy), UseStateResult2_2 (copy), UseRefResult3 (copy)
+		local Current = UseRefResult.current
 		UseRefResult.current = 0
-		UseRefResult1.current = false
-		UseBindingResult2(0)
+		UseRefResult1.current = 0
+		UseRefResult2.current = false
+		UseBindingResult2(Current)
 		UseStateResult2_2(false)
-	end, { Frame.text, DEFAULTMAXLOOPS, ReducedMotion, Frame.runId })
+		local CurrentFunction: (any) -> () = UseRefResult3.current
+		
+		if CurrentFunction ~= nil then
+			CurrentFunction(Current)
+		end
+	end, {
+		Frame.text,
+		DEFAULTMAXLOOPS,
+		ReducedMotion,
+		Frame.runId,
+		UseRefResult3
+	})
 	local UseResult = ReactModule.useCallback(function(p1)
-		-- upvalues: IsPlayStatusMatch (copy), MarqueeTextMotionModule (upval), UseBindingResult (copy), UseRefResult (copy), TravelDistanceResult (copy), DEFAULTSPEED (copy), DEFAULTMAXLOOPS (copy), UseRefResult1 (copy), UseBindingResult2 (copy), UseStateResult2_2 (copy), Frame (copy)
+		-- upvalues: IsPlayStatusMatch (copy), MarqueeTextMotionModule (upval), UseBindingResult (copy), UseRefResult1 (copy), TravelDistanceResult (copy), DEFAULTSPEED (copy), DEFAULTMAXLOOPS (copy), UseRefResult2 (copy), UseBindingResult2 (copy), UseStateResult2_2 (copy), Frame (copy), UseRefResult3 (copy)
 		if not IsPlayStatusMatch then return end
 		local AdvanceResult = MarqueeTextMotionModule.advance({
 			finished = false,
 			offset = UseBindingResult:getValue(),
-			loopsCompleted = UseRefResult.current
+			loopsCompleted = UseRefResult1.current
 		}, TravelDistanceResult, DEFAULTSPEED, p1, DEFAULTMAXLOOPS)
-		UseRefResult.current = AdvanceResult.loopsCompleted
+		UseRefResult1.current = AdvanceResult.loopsCompleted
 		
 		if not AdvanceResult.finished then
 			UseBindingResult2(AdvanceResult.offset)
-		elseif UseRefResult1.current then return end
-		UseRefResult1.current = true
+			local CurrentFunction: (any) -> () = UseRefResult3.current
+			
+			if CurrentFunction ~= nil then
+				CurrentFunction(AdvanceResult.offset)
+			end
+		elseif UseRefResult2.current then return end
+		UseRefResult2.current = true
 		UseBindingResult2(0)
 		UseStateResult2_2(true)
 		
@@ -77,7 +97,7 @@ return function(Frame)
 		end
 	end, {
 		IsPlayStatusMatch, TravelDistanceResult, DEFAULTSPEED, DEFAULTMAXLOOPS,
-		Frame.onFinished, UseBindingResult
+		Frame.onFinished, UseBindingResult, UseRefResult3
 	})
 	ReactModule.useEffect(function()
 		-- upvalues: IsPlayStatusMatch (copy), Heartbeat (copy), UseResult (copy)
@@ -92,10 +112,22 @@ return function(Frame)
 			return function() end
 		end
 	end, { IsPlayStatusMatch, Heartbeat, UseResult })
+	ReactModule.useEffect(function()
+		-- upvalues: UseRefResult2 (copy), UseRefResult3 (copy), UseBindingResult (copy)
+		return function()
+			-- upvalues: UseRefResult2 (upval), UseRefResult3 (upval), UseBindingResult (upval)
+			if UseRefResult2.current then return end
+			local CurrentFunction: (any) -> () = UseRefResult3.current
+			
+			if CurrentFunction ~= nil then
+				CurrentFunction(UseBindingResult:getValue())
+			end
+		end
+	end, { UseBindingResult, UseRefResult3 })
 	local IsDirectionMatch = Direction == Enum.TextDirection.RightToLeft
 	local MapResult = UseBindingResult:map(function(p1): UDim2
-		-- upvalues: NoUseStateResult3_1 (copy), MarqueeTextMotionModule (upval), Direction (copy), IsDirectionMatch (copy)
-		if NoUseStateResult3_1 then
+		-- upvalues: OverflowsResult1_1 (copy), MarqueeTextMotionModule (upval), Direction (copy), IsDirectionMatch (copy)
+		if OverflowsResult1_1 then
 			local SignedOffsetResult = MarqueeTextMotionModule.signedOffset(p1, Direction)
 			
 			return if IsDirectionMatch then UDim2.new(1, SignedOffsetResult, 0, 0) else UDim2.fromOffset(SignedOffsetResult, 0)
@@ -123,7 +155,7 @@ return function(Frame)
 				UseStateResult2(Frame.AbsoluteSize.X)
 			end
 		}),
-		Content = if NoUseStateResult3_1 then ReactModule.createElement(View, {
+		Content = if OverflowsResult1_1 then ReactModule.createElement(View, {
 			tag = "auto-y no-clip",
 			Size = UDim2.fromOffset(TravelDistanceResult + UseStateResult, 0),
 			AnchorPoint = if IsDirectionMatch then Vector2.new(1, 0) else Vector2.new(0, 0),
@@ -135,10 +167,10 @@ return function(Frame)
 			testId = "marquee-text",
 			Text = Frame.text,
 			fontStyle = FontStyle,
-			TextTruncate = if OverflowsResult1 then Enum.TextTruncate.AtEnd else Enum.TextTruncate.None,
+			TextTruncate = if OverflowsResult3 then Enum.TextTruncate.AtEnd else Enum.TextTruncate.None,
 			tag = {
-				["size-full-0 auto-y text-align-x-center text-truncate-end content-default"] = OverflowsResult1,
-				["size-full-0 auto-y text-align-x-center content-default"] = not OverflowsResult1
+				["size-full-0 auto-y text-align-x-center text-truncate-end content-default"] = OverflowsResult3,
+				["size-full-0 auto-y text-align-x-center content-default"] = not OverflowsResult3
 			}
 		})
 	})

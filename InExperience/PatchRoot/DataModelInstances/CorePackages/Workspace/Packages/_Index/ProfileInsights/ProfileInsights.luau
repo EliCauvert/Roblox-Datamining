@@ -1,4 +1,6 @@
 ﻿return {
+	Enums = require(script.Enums),
+	Formatters = require(script.Formatters),
 	ProfileInsightsStore = require(script["data-hydration"].ProfileInsightsStore),
 	ProfileInsightsModel = require(script["data-hydration"].ProfileInsightsModel),
 	useSignalProfileInsightsByUserId = require(script.Hooks.useSignalProfileInsightsByUserId),

@@ -1,7 +1,7 @@
 ﻿local SignalsModule = require(script:FindFirstAncestor("TextChannelWindow").Parent.Signals)
 local _ = require(script.Parent.Message)
 
-return function()
+return function(p1)
 	-- upvalues: SignalsModule (copy)
 	local t = {}
 	
@@ -15,10 +15,10 @@ return function()
 				setByMessageId = Signal2,
 				getOrderedIds = Signal1,
 				setOrderedIds = Signal2_1,
-				getMessages = SignalsModule.createComputed(function(p1)
+				getMessages = SignalsModule.createComputed(function(p2)
 					-- upvalues: Signal1 (copy), Signal (copy)
-					local SignalResult = Signal1(p1)
-					local SignalResult1 = Signal(p1)
+					local SignalResult = Signal1(p2)
+					local SignalResult1 = Signal(p2)
 					local Buffer = table.create(#SignalResult)
 					
 					for _, value in SignalResult do
@@ -36,14 +36,14 @@ return function()
 		return t[Key]
 	end
 	
-	local function upsertMessage(p1, p2)
+	local function upsertMessage(p2, p3)
 		-- upvalues: getOrCreate (copy)
-		local OrCreate = getOrCreate(p1)
-		local MessageId = p2.messageId
+		local OrCreate = getOrCreate(p2)
+		local MessageId = p3.messageId
 		OrCreate.setByMessageId(function(Tbl)
-			-- upvalues: MessageId (copy), p2 (copy)
+			-- upvalues: MessageId (copy), p3 (copy)
 			local Copy = table.clone(Tbl)
-			Copy[MessageId] = p2
+			Copy[MessageId] = p3
 			
 			return Copy
 		end)
@@ -89,11 +89,82 @@ return function()
 		end
 	end
 	
+	local function _(p4): boolean
+		return p4 ~= nil and p4.isHistorical == true
+	end
+	
 	return {
+		insertHistorical = function(p4, List)
+			-- upvalues: p1 (copy), getOrCreate (copy)
+			local HistoryArm = if p1 and p1.getHistoryArm then p1.getHistoryArm() else nil
+			
+			if not HistoryArm or #List == 0 then return end
+			local OrCreate = getOrCreate(p4)
+			local ByMessageId = OrCreate.getByMessageId(false)
+			local OrderedIds = OrCreate.getOrderedIds(false)
+			local Count = 0
+			
+			for _, orderedId in OrderedIds do
+				local ByMessageIdEntry = ByMessageId[orderedId]
+				
+				if ByMessageIdEntry == nil or ByMessageIdEntry.isHistorical ~= true then break end
+				Count += 1
+			end
+			local Elapsed = if HistoryArm.maxAgeSeconds > 0 then workspace:GetServerTimeNow() - HistoryArm.maxAgeSeconds else nil
+			local List1 = {}
+			local t = {}
+			
+			for _, value in List do
+				local MessageId = value.messageId
+				
+				if ByMessageId[MessageId] == nil and not t[MessageId] then
+					t[MessageId] = true
+					
+					if value.content ~= "" and (not Elapsed or value.timestamp.UnixTimestamp >= Elapsed) then
+						table.insert(List1, value)
+					end
+				end
+			end
+			if #List1 == 0 then return end
+			local v1 = #OrderedIds - Count
+			local Largest = math.max(0, (math.min(HistoryArm.maxCount, 200 - v1)))
+			local MoveResult = table.move(OrderedIds, 1, Count, 1, table.create(Count + #List1))
+			
+			for _, value1 in List1 do
+				table.insert(MoveResult, value1.messageId)
+			end
+			local Largest1 = math.max(0, #MoveResult - Largest)
+			local MoveResult1 = table.move(MoveResult, 1, Largest1, 1, table.create(Largest1))
+			local MoveResult2 = table.move(MoveResult, Largest1 + 1, #MoveResult, 1, table.create(Largest + v1))
+			table.move(OrderedIds, Count + 1, #OrderedIds, #MoveResult2 + 1, MoveResult2)
+			OrCreate.setByMessageId(function(Tbl)
+				-- upvalues: List1 (copy), MoveResult1 (copy)
+				local Copy = table.clone(Tbl)
+				
+				for _, value in List1 do
+					Copy[value.messageId] = value
+				end
+				for _, value1 in MoveResult1 do
+					Copy[value1] = nil
+				end
+				return Copy
+			end)
+			OrCreate.setOrderedIds(function()
+				-- upvalues: MoveResult2 (copy)
+				return MoveResult2
+			end)
+			
+			for _, value2 in MoveResult1 do
+				OrCreate.messageGetters[value2] = nil
+			end
+			if p1 and p1.logHistoryExposure then
+				p1.logHistoryExposure()
+			end
+		end,
 		upsertMessage = upsertMessage,
-		removeMessage = function(p3, Value)
+		removeMessage = function(p5, Value)
 			-- upvalues: getOrCreate (copy)
-			local OrCreate = getOrCreate(p3)
+			local OrCreate = getOrCreate(p5)
 			OrCreate.setByMessageId(function(Tbl)
 				-- upvalues: Value (copy)
 				if Tbl[Value] == nil then
@@ -119,10 +190,10 @@ return function()
 				end
 			end)
 		end,
-		insertIfAbsent = function(p3, p4)
+		insertIfAbsent = function(p5, p6)
 			-- upvalues: getOrCreate (copy), upsertMessage (copy)
-			if getOrCreate(p3).getByMessageId(false)[p4.messageId] == nil then
-				upsertMessage(p3, p4)
+			if getOrCreate(p5).getByMessageId(false)[p6.messageId] == nil then
+				upsertMessage(p5, p6)
 				
 				return
 			end
@@ -131,9 +202,9 @@ return function()
 			-- upvalues: t (copy)
 			t[Key] = nil
 		end,
-		clearChannel = function(p3)
+		clearChannel = function(p5)
 			-- upvalues: t (copy)
-			local Entry = t[p3]
+			local Entry = t[p5]
 			
 			if Entry then
 				Entry.setByMessageId(function()
@@ -147,21 +218,21 @@ return function()
 				return
 			end
 		end,
-		getMessagesForChannel = function(p3)
+		getMessagesForChannel = function(p5)
 			-- upvalues: getOrCreate (copy)
-			return getOrCreate(p3).getMessages
+			return getOrCreate(p5).getMessages
 		end,
-		getMessageById = function(p3, p4)
+		getMessageById = function(p5, p6)
 			-- upvalues: getOrCreate (copy), SignalsModule (upval)
-			local OrCreate = getOrCreate(p3)
+			local OrCreate = getOrCreate(p5)
 			
-			if not OrCreate.messageGetters[p4] then
-				OrCreate.messageGetters[p4] = SignalsModule.createComputed(function(p5)
-					-- upvalues: OrCreate (copy), p4 (copy)
-					return OrCreate.getByMessageId(p5)[p4]
+			if not OrCreate.messageGetters[p6] then
+				OrCreate.messageGetters[p6] = SignalsModule.createComputed(function(p7)
+					-- upvalues: OrCreate (copy), p6 (copy)
+					return OrCreate.getByMessageId(p7)[p6]
 				end)
 			end
-			return OrCreate.messageGetters[p4]
+			return OrCreate.messageGetters[p6]
 		end
 	}
 end

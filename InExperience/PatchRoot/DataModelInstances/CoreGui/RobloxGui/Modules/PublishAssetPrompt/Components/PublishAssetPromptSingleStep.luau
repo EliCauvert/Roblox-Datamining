@@ -5,9 +5,7 @@ local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
 local TModule = require(CorePackages.Packages.t)
 local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
 local UIBloxModule = require(CorePackages.Packages.UIBlox)
-local FoundationModule = require(CorePackages.Packages.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(CorePackages.Packages.Foundation).Utility.normalizeFontFace
 local WithStyleFunction = UIBloxModule.Style.withStyle
 local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
@@ -31,6 +29,7 @@ local config = {
 	[Enum.AssetType.HairAccessory] = true
 }
 local SendConsentDeniedOnCancel = game:DefineFastFlag("SendConsentDeniedOnCancel", false)
+local FFlagDisablePublishPlatformContentWithoutNameModule = require(script.Parent.Parent.Flags.FFlagDisablePublishPlatformContentWithoutName)
 local EnableImagePublishEngineFeature = game:GetEngineFeature("EnableImagePublish")
 local PublishAssetPromptSingleStep = RoactModule.PureComponent:extend("PublishAssetPromptSingleStep")
 PublishAssetPromptSingleStep.validateProps = TModule.strictInterface({
@@ -48,12 +47,17 @@ function PublishAssetPromptSingleStep.getDefaultText(p1)
 end
 
 function PublishAssetPromptSingleStep.init(p1)
-	-- upvalues: ExperienceAuthService (copy), RoactModule (copy)
+	-- upvalues: FFlagDisablePublishPlatformContentWithoutNameModule (copy), ExperienceAuthService (copy), RoactModule (copy)
 	p1.assetName = p1:getDefaultText()
 	p1.assetDescription = p1:getDefaultText()
 	p1.isNameValid = true
-	p1.isDescriptionValid = true
 	
+	if FFlagDisablePublishPlatformContentWithoutNameModule then
+		p1.defaultName = p1.assetName
+		p1:setState({
+			isPublishNameValid = string.match(p1.assetName, "^%s*$") == nil
+		})
+	end
 	function p1.closePrompt()
 		-- upvalues: p1 (copy)
 		p1.props.closePrompt()
@@ -66,8 +70,8 @@ function PublishAssetPromptSingleStep.init(p1)
 	end
 	
 	function p1.confirmAndUpload()
-		-- upvalues: p1 (copy), ExperienceAuthService (upval)
-		if p1.isNameValid then
+		-- upvalues: FFlagDisablePublishPlatformContentWithoutNameModule (upval), p1 (copy), ExperienceAuthService (upval)
+		if if FFlagDisablePublishPlatformContentWithoutNameModule then p1.state.isPublishNameValid else p1.isNameValid then
 			ExperienceAuthService:ScopeCheckUIComplete(p1.props.guid, p1.props.scopes, Enum.ScopeCheckResult.ConsentAccepted, {
 				assetName = p1.assetName,
 				assetDescription = p1.assetDescription
@@ -78,9 +82,16 @@ function PublishAssetPromptSingleStep.init(p1)
 		end
 	end
 	
-	function p1.onAssetNameUpdated(AssetName, p2)
-		-- upvalues: p1 (copy)
-		if p2 then
+	function p1.onAssetNameUpdated(AssetName, IsPublishNameValid)
+		-- upvalues: FFlagDisablePublishPlatformContentWithoutNameModule (upval), p1 (copy)
+		if FFlagDisablePublishPlatformContentWithoutNameModule then
+			if IsPublishNameValid then
+				p1.assetName = AssetName
+			end
+			p1:setState({ isPublishNameValid = IsPublishNameValid })
+			
+			return
+		elseif IsPublishNameValid then
 			p1.assetName = AssetName
 			p1.isNameValid = true
 			
@@ -90,10 +101,9 @@ function PublishAssetPromptSingleStep.init(p1)
 		end
 	end
 	
-	function p1.onAssetDescriptionUpdated(AssetDescription, IsDescriptionValid)
+	function p1.onAssetDescriptionUpdated(AssetDescription)
 		-- upvalues: p1 (copy)
 		p1.assetDescription = AssetDescription
-		p1.isDescriptionValid = IsDescriptionValid
 	end
 	
 	p1.nameTextBoxRef = RoactModule.createRef()
@@ -101,10 +111,9 @@ function PublishAssetPromptSingleStep.init(p1)
 end
 
 function PublishAssetPromptSingleStep.renderMiddle(p1, p2)
-	-- upvalues: WithStyleFunction (copy), EnableImagePublishEngineFeature (copy), RoactModule (copy), RoactGamepadModule (copy), ImagePreviewModule (copy), ObjectViewportModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), NameTextBoxModule (copy), AssetDescriptionTextBoxModule (copy)
+	-- upvalues: WithStyleFunction (copy), EnableImagePublishEngineFeature (copy), RoactModule (copy), RoactGamepadModule (copy), ImagePreviewModule (copy), ObjectViewportModule (copy), NormalizeFontFaceFunction (copy), NameTextBoxModule (copy), FFlagDisablePublishPlatformContentWithoutNameModule (copy), AssetDescriptionTextBoxModule (copy)
 	return WithStyleFunction(function(p3)
-		-- upvalues: EnableImagePublishEngineFeature (upval), p1 (copy), RoactModule (upval), RoactGamepadModule (upval), ImagePreviewModule (upval), ObjectViewportModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), p2 (copy), NameTextBoxModule (upval), AssetDescriptionTextBoxModule (upval)
-		local _Font = p3.Font
+		-- upvalues: EnableImagePublishEngineFeature (upval), p1 (copy), RoactModule (upval), RoactGamepadModule (upval), ImagePreviewModule (upval), ObjectViewportModule (upval), NormalizeFontFaceFunction (upval), p2 (copy), NameTextBoxModule (upval), FFlagDisablePublishPlatformContentWithoutNameModule (upval), AssetDescriptionTextBoxModule (upval)
 		local Theme = p3.Theme
 		local IsDecal = EnableImagePublishEngineFeature and (p1.props.assetType == Enum.AssetType.Image and p1.props.assetInstance:IsA("Decal"))
 		
@@ -139,8 +148,7 @@ function PublishAssetPromptSingleStep.renderMiddle(p1, p2)
 						TextSize = 12,
 						BackgroundTransparency = 1,
 						Size = UDim2.new(1, 0, 0, 15),
-						Font = if FoundationFontFaceMigration then nil else _Font.Body.Font,
-						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
+						FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font),
 						Text = p2.name,
 						TextColor3 = Theme.TextDefault.Color,
 						TextXAlignment = Enum.TextXAlignment.Left
@@ -151,15 +159,14 @@ function PublishAssetPromptSingleStep.renderMiddle(p1, p2)
 						onNameUpdated = p1.onAssetNameUpdated,
 						nameTextBoxRef = p1.nameTextBoxRef,
 						NextSelectionDown = p1.descriptionTextBoxRef,
-						defaultName = p1.assetName
+						defaultName = if FFlagDisablePublishPlatformContentWithoutNameModule then p1.defaultName else p1.assetName
 					}),
 					DescriptionLabel = RoactModule.createElement("TextLabel", {
 						TextSize = 12,
 						BackgroundTransparency = 1,
 						Size = UDim2.new(1, 0, 0, 15),
 						Position = UDim2.new(0, 0, 0, 60),
-						Font = if FoundationFontFaceMigration then nil else _Font.Body.Font,
-						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
+						FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font),
 						Text = p2.description,
 						TextColor3 = Theme.TextDefault.Color,
 						TextXAlignment = Enum.TextXAlignment.Left
@@ -181,8 +188,7 @@ function PublishAssetPromptSingleStep.renderMiddle(p1, p2)
 				Size = UDim2.new(1, 0, 0, 50),
 				TextYAlignment = Enum.TextYAlignment.Center,
 				Text = p2.disclaimer,
-				Font = if FoundationFontFaceMigration then nil else _Font.Body.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font),
 				TextColor3 = Theme.TextEmphasis.Color,
 				AnchorPoint = Vector2.new(0, 1),
 				Position = UDim2.fromScale(0, 1)
@@ -192,7 +198,7 @@ function PublishAssetPromptSingleStep.renderMiddle(p1, p2)
 end
 
 function PublishAssetPromptSingleStep.renderAlertLocalized(p1, p2)
-	-- upvalues: RoactModule (copy), InteractiveAlert (copy), SendConsentDeniedOnCancel (copy), ButtonType (copy)
+	-- upvalues: RoactModule (copy), InteractiveAlert (copy), SendConsentDeniedOnCancel (copy), ButtonType (copy), FFlagDisablePublishPlatformContentWithoutNameModule (copy)
 	return (RoactModule.createElement(InteractiveAlert, {
 		isMiddleContentFocusable = true,
 		title = p2.title,
@@ -213,7 +219,8 @@ function PublishAssetPromptSingleStep.renderAlertLocalized(p1, p2)
 						enableInputDelayed = true,
 						delayInputSeconds = 6,
 						onActivated = p1.confirmAndUpload,
-						text = p2.submit
+						text = p2.submit,
+						isDisabled = if FFlagDisablePublishPlatformContentWithoutNameModule then not p1.state.isPublishNameValid else nil
 					}
 				}
 			}

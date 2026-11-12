@@ -10,7 +10,6 @@ local RemoveGameDetailSessionIfDepartedModule = require(script.Parent.removeGame
 local UseEdpFunctionallyReadyLoggerModule = require(script.Parent.useEdpFunctionallyReadyLogger)
 local CreateExperienceDetailsPageTimerModule = require(script.Parent.createExperienceDetailsPageTimer)
 local UseMotionJitterMetricModule = require(script.Parent.useMotionJitterMetric)
-local UsePublishContainerWidthModule = require(script.Parent.usePublishContainerWidth)
 local ExperienceDetailsFallbackActionBarModule = require(script.Parent.Fallback.ExperienceDetailsFallbackActionBar)
 local ExperienceDetailsFallbackFeedModule = require(script.Parent.Fallback.ExperienceDetailsFallbackFeed)
 local SetTabBarVisibleFunction = require(Parent.AppTabBarRodux).Actions.SetTabBarVisible
@@ -49,6 +48,7 @@ local UsePageScopeRefFunction = SduiSharedUtilitiesModule.usePageScopeRef
 local SduiFeatureEntryPoint = SduiSharedUtilitiesModule.SduiFeatureEntryPoint
 local SduiPageEntryPoint = SduiSharedUtilitiesModule.SduiPageEntryPoint
 local UiStatus = SduiSharedUtilitiesModule.UiStatus
+local UsePublishContainerWidthFunction = SduiSharedUtilitiesModule.usePublishContainerWidth
 local UseUiStatusFunction = SduiSharedUtilitiesModule.useUiStatus
 local UseEntrySurfacingFunction = SduiSharedUtilitiesModule.useEntrySurfacing
 local FilterPlayWithReward = require(script.Parent.ExperienceDetailsPageScopeFields).FilterPlayWithReward
@@ -70,7 +70,7 @@ local function _(p1): number
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ExperienceDetailsPageUtilsModule (copy), GetExperienceDetailsPageKeyModule (copy), UsePageScopeRefFunction (copy), ReactModule (copy), FFlagEDPTTIParityDefinitions (copy), CreateExperienceDetailsPageTimerModule (copy), EDPTTIConstants (copy), SduiSurfaceLoadTimeTracker (copy), GetSduiClientPageScopeFunction (copy), FFlagSduiEdpRenderStartedModule (copy), UseEdpFunctionallyReadyLoggerModule (copy), UseTokensFunction (copy), UseNavigationFunction (copy), UseRoactServiceFunction (copy), AppSessionService (copy), UseDispatchFunction (copy), FFlagLuaAppEdpBottomSheetPeekViewEvents (copy), AppEventIngestService (copy), UseGetCurrentLegacyRouteFunction (copy), SetTabBarVisibleFunction (copy), FFlagSduiPlayWithRewardRefactor (copy), FilterPlayWithReward (copy), FFlagEnableExperienceDetailsBottomSheetTopBar (copy), UseTopBarHeightFunction (copy), UseScreenSizeFunction (copy), UseDeviceInsetsFunction (copy), FFlagFixOverlayTopInsetForDeviceSafeInsets (copy), ShouldUseDeviceSafeInsets (copy), GetSafeAreaSizeFunction (copy), FFlagSduiContainerQueries (copy), UsePublishContainerWidthModule (copy), DiscoveryTypesModule (copy), UseEntrySurfacingFunction (copy), ExperienceDetailsPageConstantsModule (copy), UseStoreFunction (copy), PeekViewState (copy), GameDetailsPeekViewEventsFunction (copy), SetGameDetailsPeekViewStateModule (copy), HasPageInCurrentRouteFunction (copy), AppPage (copy), FFlagEnableMotionJitterMetric (copy), UseMotionJitterMetricModule (copy), RemoveGameDetailSessionIfDepartedModule (copy), SessionType (copy), FetchExperienceDetailsPageModule (copy), UseUiStatusFunction (copy), UiStatus (copy), DataHydrationModule (copy), OverlayProvider (copy), ExperienceDetailsBottomSheetTopBarModule (copy), Sheet (copy), FoundationModule (copy), SduiPageEntryPoint (copy), FFlagSduiPageEntryUseSharedHooks (copy), CompositionTags (copy), ExperienceDetailsFallbackFeedModule (copy), FFlagSduiEdpPersistentActionBarPlayButton (copy), ExperienceDetailsPersistentActionBarModule (copy), SduiFeatureEntryPoint (copy), ExperienceDetailsFallbackActionBarModule (copy)
+	-- upvalues: ExperienceDetailsPageUtilsModule (copy), GetExperienceDetailsPageKeyModule (copy), UsePageScopeRefFunction (copy), ReactModule (copy), FFlagEDPTTIParityDefinitions (copy), CreateExperienceDetailsPageTimerModule (copy), EDPTTIConstants (copy), SduiSurfaceLoadTimeTracker (copy), GetSduiClientPageScopeFunction (copy), FFlagSduiEdpRenderStartedModule (copy), UseEdpFunctionallyReadyLoggerModule (copy), UseTokensFunction (copy), UseNavigationFunction (copy), UseRoactServiceFunction (copy), AppSessionService (copy), UseDispatchFunction (copy), FFlagLuaAppEdpBottomSheetPeekViewEvents (copy), AppEventIngestService (copy), UseGetCurrentLegacyRouteFunction (copy), SetTabBarVisibleFunction (copy), FFlagSduiPlayWithRewardRefactor (copy), FilterPlayWithReward (copy), FFlagEnableExperienceDetailsBottomSheetTopBar (copy), UseTopBarHeightFunction (copy), UseScreenSizeFunction (copy), UseDeviceInsetsFunction (copy), FFlagFixOverlayTopInsetForDeviceSafeInsets (copy), ShouldUseDeviceSafeInsets (copy), GetSafeAreaSizeFunction (copy), FFlagSduiContainerQueries (copy), UsePublishContainerWidthFunction (copy), DiscoveryTypesModule (copy), UseEntrySurfacingFunction (copy), ExperienceDetailsPageConstantsModule (copy), UseStoreFunction (copy), PeekViewState (copy), GameDetailsPeekViewEventsFunction (copy), SetGameDetailsPeekViewStateModule (copy), HasPageInCurrentRouteFunction (copy), AppPage (copy), FFlagEnableMotionJitterMetric (copy), UseMotionJitterMetricModule (copy), RemoveGameDetailSessionIfDepartedModule (copy), SessionType (copy), FetchExperienceDetailsPageModule (copy), UseUiStatusFunction (copy), UiStatus (copy), DataHydrationModule (copy), OverlayProvider (copy), ExperienceDetailsBottomSheetTopBarModule (copy), Sheet (copy), FoundationModule (copy), SduiPageEntryPoint (copy), FFlagSduiPageEntryUseSharedHooks (copy), CompositionTags (copy), ExperienceDetailsFallbackFeedModule (copy), FFlagSduiEdpPersistentActionBarPlayButton (copy), ExperienceDetailsPersistentActionBarModule (copy), SduiFeatureEntryPoint (copy), ExperienceDetailsFallbackActionBarModule (copy)
 	local UniverseId = ExperienceDetailsPageUtilsModule.getUniverseId(p1)
 	local OnPeekViewClosedFromPropsOrNavigationParams = ExperienceDetailsPageUtilsModule.getFromPropsOrNavigationParams(p1, "onPeekViewClosed")
 	local ExperienceDetailsPageKeyModule = GetExperienceDetailsPageKeyModule(UniverseId)
@@ -137,7 +137,7 @@ return ReactModule.memo(function(p1)
 	end
 	local SafeAreaSize = GetSafeAreaSizeFunction(UseScreenSizeResult, UseDeviceInsetsResult)
 	local Smallest = math.min(SafeAreaSize.X.Offset, 640)
-	local UsePublishContainerWidthModuleResult = if FFlagSduiContainerQueries then UsePublishContainerWidthModule(ExperienceDetailsPageKeyModule) else nil
+	local UsePublishContainerWidthResult = if FFlagSduiContainerQueries then UsePublishContainerWidthFunction(ExperienceDetailsPageKeyModule) else nil
 	local UseRefResult = if FFlagEnableExperienceDetailsBottomSheetTopBar then ReactModule.useRef(nil) else nil
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
@@ -312,7 +312,7 @@ return ReactModule.memo(function(p1)
 				}, {
 					ContentWrapper = ReactModule.createElement(FoundationModule.View, {
 						tag = "col size-full-0 auto-y",
-						ref = if FFlagSduiContainerQueries then UsePublishContainerWidthModuleResult else nil
+						ref = if FFlagSduiContainerQueries then UsePublishContainerWidthResult else nil
 					}, {
 						Content = ReactModule.createElement(SduiPageEntryPoint, {
 							includeNavigationHeaderBar = false,

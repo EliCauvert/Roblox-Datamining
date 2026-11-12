@@ -164,11 +164,11 @@ end
 
 local Callback6 = nil
 local getHostSibling = nil
-local Callback = nil
-local Callback5 = nil
-local Callback2 = nil
-local Callback3 = nil
 local Callback1 = nil
+local Callback5 = nil
+local Callback3 = nil
+local Callback = nil
+local Callback2 = nil
 local Callback4 = nil
 local commitNestedUnmounts = nil
 local commitUnmount = nil
@@ -357,7 +357,7 @@ function commitProfilerPassiveEffect(p1, p2)
 end
 
 local function recursivelyCommitLayoutEffects(Child, p1, CaptureCommitPhaseError, SchedulePassiveEffectCallback)
-	-- upvalues: captureCommitPhaseError (ref), schedulePassiveEffectCallback (ref), Profiler (copy), EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), v1 (ref), ReactFeatureFlags (copy), LayoutMask (copy), NoFlags (copy), DEV (copy), Current (copy), SetCurrentFiberFunction (copy), InvokeGuardedCallbackFunction (copy), recursivelyCommitLayoutEffects (copy), HasCaughtErrorFunction (copy), ClearCaughtErrorFunction (copy), ResetCurrentFiberFunction (copy), DescribeError (copy), Update (copy), Callback7 (copy), ReactCurrentFiberModule (copy), Count (ref), YOLO (copy), FunctionComponent (copy), ForwardRef (copy), SimpleMemoComponent (copy), Block (copy), ProfileMode (copy), StartLayoutEffectTimerFunction (copy), commitHookEffectListMount (copy), Layout (copy), HasEffect (copy), RecordLayoutEffectDurationFunction (copy), PassiveMask (copy), ClassComponent (copy), Callback1 (ref), HostRoot (copy), Callback2 (ref), HostComponent (copy), Callback3 (ref), SuspenseComponent (copy), FundamentalComponent (copy), HostPortal (copy), HostText (copy), IncompleteClassComponent (copy), LegacyHiddenComponent (copy), OffscreenComponent (copy), ScopeComponent (copy), SuspenseListComponent (copy), InvariantFunction (copy), Ref (copy)
+	-- upvalues: captureCommitPhaseError (ref), schedulePassiveEffectCallback (ref), Profiler (copy), EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), v1 (ref), ReactFeatureFlags (copy), LayoutMask (copy), NoFlags (copy), DEV (copy), Current (copy), SetCurrentFiberFunction (copy), InvokeGuardedCallbackFunction (copy), recursivelyCommitLayoutEffects (copy), HasCaughtErrorFunction (copy), ClearCaughtErrorFunction (copy), ResetCurrentFiberFunction (copy), DescribeError (copy), Update (copy), Callback7 (copy), ReactCurrentFiberModule (copy), Count (ref), YOLO (copy), FunctionComponent (copy), ForwardRef (copy), SimpleMemoComponent (copy), Block (copy), ProfileMode (copy), StartLayoutEffectTimerFunction (copy), commitHookEffectListMount (copy), Layout (copy), HasEffect (copy), RecordLayoutEffectDurationFunction (copy), PassiveMask (copy), ClassComponent (copy), Callback2 (ref), HostRoot (copy), Callback3 (ref), HostComponent (copy), Callback (ref), SuspenseComponent (copy), FundamentalComponent (copy), HostPortal (copy), HostText (copy), IncompleteClassComponent (copy), LegacyHiddenComponent (copy), OffscreenComponent (copy), ScopeComponent (copy), SuspenseListComponent (copy), InvariantFunction (copy), Ref (copy)
 	if CaptureCommitPhaseError ~= nil then
 		captureCommitPhaseError = CaptureCommitPhaseError
 	end
@@ -534,7 +534,7 @@ local function recursivelyCommitLayoutEffects(Child, p1, CaptureCommitPhaseError
 							recursivelyCommitLayoutEffects(Child4, p1, captureCommitPhaseError, schedulePassiveEffectCallback)
 						else
 							Count += 1
-							v6, v148 = xpcall(recursivelyCommitLayoutEffects, DescribeError, Child4, p1, captureCommitPhaseError, schedulePassiveEffectCallback)
+							v6, v146 = xpcall(recursivelyCommitLayoutEffects, DescribeError, Child4, p1, captureCommitPhaseError, schedulePassiveEffectCallback)
 							Count -= 1
 						end
 						if not v6 then
@@ -565,11 +565,11 @@ local function recursivelyCommitLayoutEffects(Child, p1, CaptureCommitPhaseError
 					schedulePassiveEffectCallback()
 				end
 			elseif Tag == ClassComponent then
-				Callback1(Child)
-			elseif Tag == HostRoot then
 				Callback2(Child)
-			elseif Tag == HostComponent then
+			elseif Tag == HostRoot then
 				Callback3(Child)
+			elseif Tag == HostComponent then
+				Callback(Child)
 			elseif Tag == SuspenseComponent then
 				commitSuspenseHydrationCallbacks(p1, Child)
 			elseif Tag ~= FundamentalComponent and Tag ~= HostPortal and Tag ~= HostText and Tag ~= IncompleteClassComponent and Tag ~= LegacyHiddenComponent and Tag ~= OffscreenComponent and Tag ~= ScopeComponent and Tag ~= SuspenseListComponent then
@@ -654,7 +654,7 @@ function commitLayoutEffectsForProfiler(p2, p3)
 	end
 end
 
-Callback1 = function(p2)
+Callback2 = function(p2)
 	-- upvalues: Update (copy), DEV (copy), v74 (copy), Console (copy), GetComponentNameFunction (copy), EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), ProfileMode (copy), StartLayoutEffectTimerFunction (copy), DescribeError (copy), RecordLayoutEffectDurationFunction (copy), ResolveDefaultPropsFunction (copy), CommitUpdateQueueFunction (copy)
 	local StateNode = p2.stateNode
 	local Alternate = p2.alternate
@@ -726,7 +726,7 @@ Callback1 = function(p2)
 	end
 end
 
-Callback2 = function(p2)
+Callback3 = function(p2)
 	-- upvalues: HostComponent (copy), GetPublicInstanceFunction (copy), ClassComponent (copy), CommitUpdateQueueFunction (copy)
 	local UpdateQueue = p2.updateQueue
 	
@@ -746,7 +746,7 @@ Callback2 = function(p2)
 	end
 end
 
-Callback3 = function(p2)
+Callback = function(p2)
 	-- upvalues: Update (copy), CommitMountFunction (copy)
 	local StateNode = p2.stateNode
 	
@@ -997,7 +997,7 @@ getHostSibling = function(Child)
 end
 
 local function commitPlacement(p6)
-	-- upvalues: SupportsMutation (copy), getHostParentFiber (copy), HostComponent (copy), HostRoot (copy), HostPortal (copy), InvariantFunction (copy), ContentReset (copy), ResetTextContentFunction (copy), IsNotSupportsChildOrdering (copy), getHostSibling (ref), Callback5 (ref), Callback (ref)
+	-- upvalues: SupportsMutation (copy), getHostParentFiber (copy), HostComponent (copy), HostRoot (copy), HostPortal (copy), InvariantFunction (copy), ContentReset (copy), ResetTextContentFunction (copy), IsNotSupportsChildOrdering (copy), getHostSibling (ref), Callback5 (ref), Callback1 (ref)
 	if not SupportsMutation then return end
 	local HostParentFiber = getHostParentFiber(p6)
 	local ContainerInfo = nil
@@ -1027,7 +1027,7 @@ local function commitPlacement(p6)
 		
 		return
 	else
-		Callback(p6, HostSibling, ContainerInfo)
+		Callback1(p6, HostSibling, ContainerInfo)
 	end
 end
 
@@ -1062,8 +1062,8 @@ Callback5 = function(Child, p6, ContainerInfo)
 	end
 end
 
-Callback = function(Child, p7, ContainerInfo)
-	-- upvalues: HostComponent (copy), HostText (copy), InsertBeforeFunction (copy), AppendChildFunction (copy), HostPortal (copy), Callback (ref)
+Callback1 = function(Child, p7, ContainerInfo)
+	-- upvalues: HostComponent (copy), HostText (copy), InsertBeforeFunction (copy), AppendChildFunction (copy), HostPortal (copy), Callback1 (ref)
 	local Tag = Child.tag
 	
 	if Tag == HostComponent or Tag == HostText then
@@ -1083,10 +1083,10 @@ Callback = function(Child, p7, ContainerInfo)
 		local Child1 = Child.child
 		
 		if Child1 ~= nil then
-			Callback(Child1, p7, ContainerInfo)
+			Callback1(Child1, p7, ContainerInfo)
 			local Sibling = Child1.sibling
 			while Sibling ~= nil do
-				Callback(Sibling, p7, ContainerInfo)
+				Callback1(Sibling, p7, ContainerInfo)
 				Sibling = Sibling.sibling
 			end
 		end

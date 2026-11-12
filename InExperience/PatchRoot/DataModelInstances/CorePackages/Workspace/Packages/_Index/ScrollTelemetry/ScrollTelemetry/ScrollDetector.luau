@@ -86,20 +86,20 @@ return function(p1)
 						if CurrentDelta == 0 or CurrentDelta1 == 0 or math.sign(CurrentDelta) == math.sign(CurrentDelta1) then
 							if not UseRefResult6.current and game:GetFastInt("ScrollDetectorTimeThresholdMillis") / 1000 <= CurrentTimeDelta then
 								UseRefResult.current = Current1
-								local CurrentDelta3 = UseRefResult.current - UseRefResult1.current
+								local CurrentDelta2 = UseRefResult.current - UseRefResult1.current
 								
-								if CurrentDelta3 ~= 0 and UseRefResult9.current then
-									UseRefResult9.current(CurrentDelta3, CurrentTime - UseRefResult4.current, UseRefResult1.current)
+								if CurrentDelta2 ~= 0 and UseRefResult9.current then
+									UseRefResult9.current(CurrentDelta2, CurrentTime - UseRefResult4.current, UseRefResult1.current)
 								end
 								UseRefResult1.current = Current1
 								UseRefResult4.current = CurrentTime
 							end
 						else
 							local Current = UseRefResult5.current
-							local CurrentDelta4 = UseRefResult.current - UseRefResult1.current
+							local CurrentDelta3 = UseRefResult.current - UseRefResult1.current
 							
-							if CurrentDelta4 ~= 0 and UseRefResult9.current then
-								UseRefResult9.current(CurrentDelta4, Current - UseRefResult4.current, UseRefResult1.current)
+							if CurrentDelta3 ~= 0 and UseRefResult9.current then
+								UseRefResult9.current(CurrentDelta3, Current - UseRefResult4.current, UseRefResult1.current)
 							end
 							UseRefResult1.current = UseRefResult.current
 							UseRefResult4.current = UseRefResult5.current
@@ -233,20 +233,20 @@ return function(p1)
 					if CurrentDelta == 0 or CurrentDelta1 == 0 or math.sign(CurrentDelta) == math.sign(CurrentDelta1) then
 						if not UseRefResult6.current and game:GetFastInt("ScrollDetectorTimeThresholdMillis") / 1000 <= CurrentTimeDelta then
 							UseRefResult.current = Current1
-							local CurrentDelta3 = UseRefResult.current - UseRefResult1.current
+							local CurrentDelta2 = UseRefResult.current - UseRefResult1.current
 							
-							if CurrentDelta3 ~= 0 and p1.sendScrollEvent then
-								p1.sendScrollEvent(CurrentDelta3, CurrentTime - UseRefResult4.current, UseRefResult1.current)
+							if CurrentDelta2 ~= 0 and p1.sendScrollEvent then
+								p1.sendScrollEvent(CurrentDelta2, CurrentTime - UseRefResult4.current, UseRefResult1.current)
 							end
 							UseRefResult1.current = Current1
 							UseRefResult4.current = CurrentTime
 						end
 					else
 						local Current = UseRefResult5.current
-						local CurrentDelta4 = UseRefResult.current - UseRefResult1.current
+						local CurrentDelta3 = UseRefResult.current - UseRefResult1.current
 						
-						if CurrentDelta4 ~= 0 and p1.sendScrollEvent then
-							p1.sendScrollEvent(CurrentDelta4, Current - UseRefResult4.current, UseRefResult1.current)
+						if CurrentDelta3 ~= 0 and p1.sendScrollEvent then
+							p1.sendScrollEvent(CurrentDelta3, Current - UseRefResult4.current, UseRefResult1.current)
 						end
 						UseRefResult1.current = UseRefResult.current
 						UseRefResult4.current = UseRefResult5.current

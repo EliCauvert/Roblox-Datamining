@@ -10,6 +10,8 @@ local SceneOutfitPosterModule = require(script.Parent.SceneOutfitPoster)
 local MomentEngagementCountModule = require(script.Parent.MomentEngagementCount)
 local FFlagMomentsEngagementMetricsFeature = MomentsCommonModule.Flags.FFlagMomentsEngagementMetricsFeature
 local FFlagProfileMomentSceneOutfitPoster = require(Parent.SharedFlags).FFlagProfileMomentSceneOutfitPoster
+local FFlagMomentsPostFeedback = require(Parent.SharedFlags).FFlagMomentsPostFeedback
+local PostStatusBadgeModule = require(Parent.Moments.PostStatusBadge)
 local View = FoundationModule.View
 local ControlState = FoundationModule.Enums.ControlState
 local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
@@ -25,7 +27,7 @@ local GradientBackdrop = MomentsCommonModule.Components.GradientBackdrop
 local ThumbUp = require(Parent.BuilderIcons).Icon.ThumbUp
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), FFlagMomentsEngagementMetricsFeature (copy), UseSignalStateFunction (copy), GetMomentsCapabilitiesFunction (copy), ReactModule (copy), MakeProfileTileFieldsModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), ToMediaItemModule (copy), FFlagProfileMomentSceneOutfitPoster (copy), UseSceneOutfitMediaItemModule (copy), ControlState (copy), View (copy), StateLayerAffordance (copy), MomentMediaTile (copy), SceneOutfitPosterModule (copy), GradientBackdrop (copy), MomentEngagementCountModule (copy), ThumbUp (copy)
+	-- upvalues: UseTokensFunction (copy), FFlagMomentsEngagementMetricsFeature (copy), UseSignalStateFunction (copy), GetMomentsCapabilitiesFunction (copy), ReactModule (copy), MakeProfileTileFieldsModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), ToMediaItemModule (copy), FFlagProfileMomentSceneOutfitPoster (copy), UseSceneOutfitMediaItemModule (copy), ControlState (copy), View (copy), StateLayerAffordance (copy), MomentMediaTile (copy), SceneOutfitPosterModule (copy), GradientBackdrop (copy), MomentEngagementCountModule (copy), ThumbUp (copy), FFlagMomentsPostFeedback (copy), PostStatusBadgeModule (copy)
 	local Moment = p1.moment
 	local OnHoverChangedFunction = p1.onHoverChanged
 	local UseTokensResult = UseTokensFunction()
@@ -84,6 +86,7 @@ return function(p1)
 				icon = ThumbUp,
 				count = Moment.metadata.likeCount
 			})
-		}) else nil
+		}) else nil,
+		StatusBadge = if FFlagMomentsPostFeedback then ReactModule.createElement(PostStatusBadgeModule, { ZIndex = 5, momentId = Moment.momentId }) else nil
 	})
 end

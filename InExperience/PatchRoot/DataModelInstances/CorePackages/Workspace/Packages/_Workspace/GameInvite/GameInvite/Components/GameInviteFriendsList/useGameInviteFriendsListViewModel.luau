@@ -18,6 +18,8 @@ local FFlagGameInviteInExpJoinCtaModule = require(GameInvite.Flags.FFlagGameInvi
 local FFlagGameInviteInExpLivePresenceModule = require(GameInvite.Flags.FFlagGameInviteInExpLivePresence)
 local FFlagGameInviteInExpRefetchOnPresenceEventModule = require(GameInvite.Flags.FFlagGameInviteInExpRefetchOnPresenceEvent)
 local UseRefetchOnlineFriendsOnPresenceEventModule = if FFlagGameInviteInExpRefetchOnPresenceEventModule then require(script.Parent.useRefetchOnlineFriendsOnPresenceEvent) else nil
+local FFlagUserListHideNotJoinableJoin = require(Parent.SharedFlags).FFlagUserListHideNotJoinableJoin
+local IsPioneerLaunch = if FFlagUserListHideNotJoinableJoin then require(Parent.PioneerUtils).isPioneerLaunch else nil
 local User = require(Parent.UserList).Enums.EntityType.User
 
 local function ignoreRowSelection() end
@@ -28,11 +30,12 @@ local function isJoinVisible(p1): boolean
 end
 
 local function createJoinCtaConfig(p1, OnActivated)
-	-- upvalues: GameInviteConstantsModule (copy), isJoinVisible (copy), IsJoinExpectedModule (copy)
+	-- upvalues: GameInviteConstantsModule (copy), FFlagUserListHideNotJoinableJoin (copy), IsPioneerLaunch (copy), isJoinVisible (copy), IsJoinExpectedModule (copy)
 	return {
 		supportedActions = { "JoinExperience" },
 		primaryCtaMinWidth = GameInviteConstantsModule.Layout.JoinCtaMinWidth,
 		primaryCtaMaxWidth = GameInviteConstantsModule.Layout.JoinCtaMaxWidth,
+		enableJoinabilityCheck = if FFlagUserListHideNotJoinableJoin and IsPioneerLaunch() then true else nil,
 		join = {
 			onActivated = OnActivated,
 			isVisible = isJoinVisible,

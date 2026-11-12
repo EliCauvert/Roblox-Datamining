@@ -2,9 +2,7 @@
 local Parent = EditProfile.Parent
 local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
-local FoundationModule = require(Parent.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local EditSocialNetworksItemModule = require(EditProfile.Components.EditSocialNetworksItem)
 local DropdownMenu = UIBloxModule.App.Menu.DropdownMenu
@@ -22,7 +20,7 @@ local FFlagEditProfileFixFocusNavigationModule = require(EditProfile.Flags.FFlag
 local FocusNavigatorWrapperModule = require(EditProfile.Utils.FocusNavigatorWrapper)
 
 return function(p1)
-	-- upvalues: ReactModule (copy), ConstantsModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseNavigationPropsFunction (copy), SocialNetworksInEditProfileIXPModule (copy), UseStyleFunction (copy), UseScreenSizeFunction (copy), FFlagEditProfileFixFocusNavigationModule (copy), FocusNavigatorWrapperModule (copy), VerticalScrollView (copy), InteractiveAlert (copy), EditSocialNetworksItemModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), DropdownMenu (copy), ButtonType (copy)
+	-- upvalues: ReactModule (copy), ConstantsModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseNavigationPropsFunction (copy), SocialNetworksInEditProfileIXPModule (copy), UseStyleFunction (copy), UseScreenSizeFunction (copy), FFlagEditProfileFixFocusNavigationModule (copy), FocusNavigatorWrapperModule (copy), VerticalScrollView (copy), InteractiveAlert (copy), EditSocialNetworksItemModule (copy), NormalizeFontFaceFunction (copy), DropdownMenu (copy), ButtonType (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(p1.socialNetworks.facebook)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(p1.socialNetworks.twitter)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(p1.socialNetworks.youtube)
@@ -84,7 +82,7 @@ return function(p1)
 				anchorPoint = Vector2.new(0.5, 0),
 				position = UDim2.new(0.5, 0, 0, 30 + UseStateResult7),
 				middleContent = function()
-					-- upvalues: ReactModule (upval), EditSocialNetworksItemModule (upval), UseStateResult2 (copy), UseLocalizationResult (copy), UseStateResult (copy), UseGetExperimentVariantResult (copy), SocialNetworksInEditProfileIXPModule (upval), UseNavigationPropsResult (copy), IsUseStateResultMatch (copy), UseStateResult2_6 (copy), UseStateResult2_1 (copy), UseStateResult1 (copy), UseStateResult2_2 (copy), UseStateResult3 (copy), UseStateResult2_3 (copy), UseStateResult4 (copy), UseStateResult2_4 (copy), UseStateResult5 (copy), FoundationFontFaceMigration (upval), UseStyleResultFont (copy), NormalizeFontFaceFunction (upval), UseStyleResult (copy), ScaledBaseSize (copy), Theme (copy), DropdownMenu (upval), UseStateResult6 (copy), UseResult (copy), UseScreenSizeResult (copy), ConstantsModule (upval)
+					-- upvalues: ReactModule (upval), EditSocialNetworksItemModule (upval), UseStateResult2 (copy), UseLocalizationResult (copy), UseStateResult (copy), UseGetExperimentVariantResult (copy), SocialNetworksInEditProfileIXPModule (upval), UseNavigationPropsResult (copy), IsUseStateResultMatch (copy), UseStateResult2_6 (copy), UseStateResult2_1 (copy), UseStateResult1 (copy), UseStateResult2_2 (copy), UseStateResult3 (copy), UseStateResult2_3 (copy), UseStateResult4 (copy), UseStateResult2_4 (copy), UseStateResult5 (copy), NormalizeFontFaceFunction (upval), UseStyleResult (copy), ScaledBaseSize (copy), Theme (copy), DropdownMenu (upval), UseStateResult6 (copy), UseResult (copy), UseScreenSizeResult (copy), ConstantsModule (upval)
 					return ReactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
 						AutomaticSize = Enum.AutomaticSize.XY
@@ -162,8 +160,7 @@ return function(p1)
 								BackgroundTransparency = 1,
 								RichText = true,
 								ZIndex = 0,
-								Font = if FoundationFontFaceMigration then nil else UseStyleResultFont.Body.Font,
-								FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
+								FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
 								Text = UseLocalizationResult.VisibleTo,
 								TextSize = ScaledBaseSize,
 								TextColor3 = Theme.TextDefault.Color,
@@ -237,7 +234,7 @@ return function(p1)
 			anchorPoint = Vector2.new(0.5, 0),
 			position = UDim2.new(0.5, 0, 0, 30 + UseStateResult7),
 			middleContent = function()
-				-- upvalues: ReactModule (upval), EditSocialNetworksItemModule (upval), UseStateResult2 (copy), UseLocalizationResult (copy), UseStateResult (copy), UseGetExperimentVariantResult (copy), SocialNetworksInEditProfileIXPModule (upval), UseNavigationPropsResult (copy), IsUseStateResultMatch (copy), UseStateResult2_6 (copy), UseStateResult2_1 (copy), UseStateResult1 (copy), UseStateResult2_2 (copy), UseStateResult3 (copy), UseStateResult2_3 (copy), UseStateResult4 (copy), UseStateResult2_4 (copy), UseStateResult5 (copy), FoundationFontFaceMigration (upval), UseStyleResultFont (copy), NormalizeFontFaceFunction (upval), UseStyleResult (copy), ScaledBaseSize (copy), Theme (copy), DropdownMenu (upval), UseStateResult6 (copy), UseResult (copy), UseScreenSizeResult (copy), ConstantsModule (upval)
+				-- upvalues: ReactModule (upval), EditSocialNetworksItemModule (upval), UseStateResult2 (copy), UseLocalizationResult (copy), UseStateResult (copy), UseGetExperimentVariantResult (copy), SocialNetworksInEditProfileIXPModule (upval), UseNavigationPropsResult (copy), IsUseStateResultMatch (copy), UseStateResult2_6 (copy), UseStateResult2_1 (copy), UseStateResult1 (copy), UseStateResult2_2 (copy), UseStateResult3 (copy), UseStateResult2_3 (copy), UseStateResult4 (copy), UseStateResult2_4 (copy), UseStateResult5 (copy), NormalizeFontFaceFunction (upval), UseStyleResult (copy), ScaledBaseSize (copy), Theme (copy), DropdownMenu (upval), UseStateResult6 (copy), UseResult (copy), UseScreenSizeResult (copy), ConstantsModule (upval)
 				return ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					AutomaticSize = Enum.AutomaticSize.XY
@@ -315,8 +312,7 @@ return function(p1)
 							BackgroundTransparency = 1,
 							RichText = true,
 							ZIndex = 0,
-							Font = if FoundationFontFaceMigration then nil else UseStyleResultFont.Body.Font,
-							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
+							FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
 							Text = UseLocalizationResult.VisibleTo,
 							TextSize = ScaledBaseSize,
 							TextColor3 = Theme.TextDefault.Color,

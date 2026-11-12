@@ -96,11 +96,12 @@ return SignalsModule.createComputed(function()
 			local Entry = t[Key]
 			local Query = if Entry == nil then "" else Entry.query
 			local Cursor = if Entry == nil then nil else Entry.cursor
+			local Placement = if Entry == nil then nil else Entry.placement
 			local Count1 = Count
 			t1[Key] = Signal(false)
 			
-			return AppChatNetworkingModule.http.SearchConversations(nil, Query, Cursor):andThen(function(Result)
-				-- upvalues: Count1 (copy), Count (upval), GetResponseBodyModule (upval), collectSearchOnlyIds (upval), ConversationStoreModule (upval), SignalsExperimentalModule (upval), IngestConversationListPageModule (upval), SearchIntroducedConversationIdsModule (upval), getOrderedMatchedIds (upval), t1 (upval), Key (copy), Signal (upval), Callback (upval), Query (copy), Cursor (copy)
+			return AppChatNetworkingModule.http.SearchConversations(nil, Query, Cursor, nil, Placement):andThen(function(Result)
+				-- upvalues: Count1 (copy), Count (upval), GetResponseBodyModule (upval), collectSearchOnlyIds (upval), ConversationStoreModule (upval), SignalsExperimentalModule (upval), IngestConversationListPageModule (upval), SearchIntroducedConversationIdsModule (upval), getOrderedMatchedIds (upval), t1 (upval), Key (copy), Signal (upval), Callback (upval), Query (copy), Cursor (copy), Placement (copy)
 				if Count1 ~= Count then
 					return { nextCursor = nil, matchedConversationIds = {} }
 				end
@@ -119,9 +120,9 @@ return SignalsModule.createComputed(function()
 				
 				if t1[Key] ~= Signal(false) then
 					task.defer(function()
-						-- upvalues: Count1 (upval), Count (upval), Callback (upval), Query (upval), Cursor (upval)
+						-- upvalues: Count1 (upval), Count (upval), Callback (upval), Query (upval), Cursor (upval), Placement (upval)
 						if Count1 == Count then
-							Callback(Query, Cursor)
+							Callback(Query, Cursor, Placement)
 						end
 					end)
 				end
@@ -133,13 +134,13 @@ return SignalsModule.createComputed(function()
 		end
 	})
 	
-	Callback = function(Query, Cursor)
+	Callback = function(Query, Cursor, Placement)
 		-- upvalues: t (ref), DataResolver (copy), t1 (ref), Signal (copy)
 		if Query == nil or Query == "" then
 			return nil
 		else
 			local Text: string = `{Query}\0{if Cursor == nil or Cursor == "" then "__initial__" else Cursor}`
-			t[Text] = { query = Query, cursor = Cursor }
+			t[Text] = { query = Query, cursor = Cursor, placement = Placement }
 			
 			return DataResolver.getAndFetchItem(Text, function(): boolean
 				-- upvalues: t1 (upval), Text (copy), Signal (upval)

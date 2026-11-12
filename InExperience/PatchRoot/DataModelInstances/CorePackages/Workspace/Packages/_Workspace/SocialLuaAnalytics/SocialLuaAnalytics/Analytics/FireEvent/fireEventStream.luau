@@ -1,11 +1,13 @@
 ﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
 local Llama = require(Parent.dependencies).llama
 local _ = require(script.Parent.Parent.Types)
 local ToStringAdditionalArgsModule = require(script.Parent.toStringAdditionalArgs)
 local GetEventInfoModule = require(script.Parent.getEventInfo)
 local OptionallyLogModule = require(script.Parent.optionallyLog)
 local IsEnumModule = require(script.Parent.Parent.Parent.Utils.isEnum)
-local DashModule = require(Parent.Parent.Dash)
+local DashModule = require(Parent1.Dash)
+local FFlagPymkCarouselExtendProps = require(Parent1.SharedFlags).FFlagPymkCarouselExtendProps
 
 local function _(p1)
 	-- upvalues: Llama (copy), IsEnumModule (copy)
@@ -15,7 +17,7 @@ local function _(p1)
 	end)
 end
 
-local function v9(p1, FormatRulesForAdditionalInfo)
+local function v11(p1, FormatRulesForAdditionalInfo)
 	-- upvalues: Llama (copy)
 	return if p1 and FormatRulesForAdditionalInfo then Llama.Dictionary.map(p1, function(p2, p3)
 		-- upvalues: FormatRulesForAdditionalInfo (copy), Llama (upval)
@@ -25,12 +27,12 @@ local function v9(p1, FormatRulesForAdditionalInfo)
 	end) else {}
 end
 
-local function v10(p1): string
+local function v12(p1): string
 	-- upvalues: ToStringAdditionalArgsModule (copy)
 	return string.format("context: (%s), eventName: (%s), additionalInfo: (%s)", p1.context, p1.eventType, ToStringAdditionalArgsModule(p1.additionalInfo))
 end
 
-local function v11(p1, p2)
+local function v13(p1, p2)
 	return function(p3)
 		-- upvalues: p2 (copy), p1 (copy)
 		if p2 then
@@ -46,11 +48,11 @@ local function v11(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: GetEventInfoModule (copy), v11 (copy), DashModule (copy), OptionallyLogModule (copy), v10 (copy), Llama (copy), IsEnumModule (copy), v9 (copy)
+	-- upvalues: GetEventInfoModule (copy), v13 (copy), DashModule (copy), OptionallyLogModule (copy), v12 (copy), FFlagPymkCarouselExtendProps (copy), Llama (copy), IsEnumModule (copy), v11 (copy)
 	local EventInfoModule = GetEventInfoModule(p1.eventList)
 	
 	return function(p2, p3)
-		-- upvalues: EventInfoModule (copy), v11 (upval), p1 (copy), DashModule (upval), OptionallyLogModule (upval), v10 (upval), Llama (upval), IsEnumModule (upval), v9 (upval)
+		-- upvalues: EventInfoModule (copy), v13 (upval), p1 (copy), DashModule (upval), OptionallyLogModule (upval), v12 (upval), FFlagPymkCarouselExtendProps (upval), Llama (upval), IsEnumModule (upval), v11 (upval)
 		local EventInfoModuleResult = EventInfoModule(p2)
 		local EventStreamImpl = p1.eventStreamImpl
 		local ShouldUseSendEventDeferred = p1.shouldUseSendEventDeferred
@@ -65,13 +67,13 @@ return function(p1)
 				
 				return p4
 			end
-		end, OptionallyLogModule(p1.loggerImpl, v10))({
-			context = EventInfoModuleResult.context,
+		end, OptionallyLogModule(p1.loggerImpl, v12))({
+			context = if FFlagPymkCarouselExtendProps and p1.context then p1.context else EventInfoModuleResult.context,
 			eventType = EventInfoModuleResult.eventType,
 			additionalInfo = Llama.Dictionary.join((if p1.getInfoForAllEvents then p1.getInfoForAllEvents() else p1.infoForAllEvents) or {}, Llama.Dictionary.map(EventInfoModuleResult.additionalInfo or {}, function(p4)
 				-- upvalues: IsEnumModule (upval)
 				return if IsEnumModule(p4) then p4.rawValue() else p4
-			end), v9(p3, EventInfoModuleResult.formatRulesForAdditionalInfo))
+			end), v11(p3, EventInfoModuleResult.formatRulesForAdditionalInfo))
 		})
 		
 		return p2, p3

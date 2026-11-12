@@ -14,11 +14,12 @@ local EditComponentRowModule = require(EditProfile.BaseComponents.EditComponentR
 local EditProfileHeaderBarModule = require(EditProfile.BaseComponents.EditProfileHeaderBar)
 local TextKeysModule = require(EditProfile.Common.TextKeys)
 local FFlagAXEnableProfileTab = require(Parent.SharedFlags).FFlagAXEnableProfileTab
+local FFlagSplitPaneFullBleedEditProfile = require(Parent.SharedFlags).FFlagSplitPaneFullBleedEditProfile
 
 return function(p1)
-	-- upvalues: UseProfileCardWidthFunction (copy), FFlagAXEnableProfileTab (copy), TextKeysModule (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), EditProfileHeaderBarModule (copy), UserTileModule (copy), IconButton (copy), IconName (copy), IconSize (copy), ButtonVariant (copy), EditComponentRowModule (copy)
+	-- upvalues: UseProfileCardWidthFunction (copy), FFlagAXEnableProfileTab (copy), FFlagSplitPaneFullBleedEditProfile (copy), TextKeysModule (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), EditProfileHeaderBarModule (copy), UserTileModule (copy), IconButton (copy), IconName (copy), IconSize (copy), ButtonVariant (copy), EditComponentRowModule (copy)
 	local UseProfileCardWidthResult = UseProfileCardWidthFunction()
-	local IsFullBleed: boolean = FFlagAXEnableProfileTab and p1.fullBleed == true
+	local IsFullBleed: boolean = if FFlagAXEnableProfileTab then p1.fullBleed == true else FFlagSplitPaneFullBleedEditProfile and p1.fullBleed == true
 	local UseLocalizationResult = UseLocalizationFunction({
 		TopBarTitle = TextKeysModule.Title,
 		UsernameLabel = TextKeysModule.Username,
@@ -28,7 +29,7 @@ return function(p1)
 	})
 	
 	return ReactModule.createElement(View, {
-		tag = if FFlagAXEnableProfileTab then {
+		tag = if FFlagAXEnableProfileTab or FFlagSplitPaneFullBleedEditProfile then {
 			["col items-start bg-surface-0"] = true,
 			["position-top-right anchor-top-right"] = not IsFullBleed,
 			["size-full-full"] = IsFullBleed

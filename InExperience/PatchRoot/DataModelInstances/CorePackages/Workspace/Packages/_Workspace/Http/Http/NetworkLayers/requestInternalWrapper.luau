@@ -3,6 +3,7 @@ local Http = script:FindFirstAncestor("Http")
 local Parent = Http.Parent
 local PromiseModule = require(Parent.Promise)
 local NetworkProfilerModule = require(Http.NetworkProfiler)
+local FFlagDisableLegacyReportToDiagModule = require(Parent.SharedFlags.FFlagDisableLegacyReportToDiag)
 local _ = require(Http.RequestTypes)
 local StatusCodesModule = require(Http.StatusCodes)
 local HttpCancellerModule = require(Http.NetworkLayers.HttpCanceller)
@@ -70,7 +71,7 @@ function Module:start(Resolve, Reject)
 end
 
 function Module:processResponse(p1)
-	-- upvalues: LuaAppHttpSupportNoContent (copy), StatusCodesModule (copy), HttpService (copy), NetworkProfilerModule (copy), GreenlistedEndpointsForLoggingModule (copy)
+	-- upvalues: LuaAppHttpSupportNoContent (copy), StatusCodesModule (copy), HttpService (copy), FFlagDisableLegacyReportToDiagModule (copy), NetworkProfilerModule (copy), GreenlistedEndpointsForLoggingModule (copy)
 	local Success = nil
 	local Result = nil
 	if LuaAppHttpSupportNoContent then
@@ -80,14 +81,19 @@ function Module:processResponse(p1)
 			v1 = true
 			v2 = nil
 		else
-			v1, v22 = pcall(HttpService.JSONDecode, HttpService, p1.Body)
+			v1, v23 = pcall(HttpService.JSONDecode, HttpService, p1.Body)
 		end
 		Success = v1
 		Result = v2
 	else
 		Success, Result = pcall(HttpService.JSONDecode, HttpService, p1.Body)
 	end
-	if Success then
+	if not Success then
+		self.reject({ isJSONValid = false, HttpError = Enum.HttpError.OK })
+		
+		return
+	end
+	if not FFlagDisableLegacyReportToDiagModule then
 		NetworkProfilerModule:track({
 			queued = p1.Stats.DurationInQueue,
 			nameLookup = p1.Stats.DurationNameLookup,
@@ -96,22 +102,18 @@ function Module:processResponse(p1)
 			makeRequest = p1.Stats.DurationMakeRequest,
 			receiveResponse = p1.Stats.DurationReceiveResponse
 		})
-		self.resolve({
-			responseCode = p1.StatusCode,
-			requestUrl = self.internalOptions.Url,
-			responseTimeMs = p1.Stats.RoundTripTime * 1000,
-			isJSONValid = true,
-			Result,
-			responseBody = Result,
-			responseStats = p1.Stats,
-			responseSize = if p1.Body and typeof(p1.Body) == "string" then #p1.Body else 0
-		})
-		GreenlistedEndpointsForLoggingModule.sendStatusCodeCounter(self.internalOptions.Url, p1.StatusCode)
-		
-		return
-	else
-		self.reject({ isJSONValid = false, HttpError = Enum.HttpError.OK })
 	end
+	self.resolve({
+		responseCode = p1.StatusCode,
+		requestUrl = self.internalOptions.Url,
+		responseTimeMs = p1.Stats.RoundTripTime * 1000,
+		isJSONValid = true,
+		Result,
+		responseBody = Result,
+		responseStats = p1.Stats,
+		responseSize = if p1.Body and typeof(p1.Body) == "string" then #p1.Body else 0
+	})
+	GreenlistedEndpointsForLoggingModule.sendStatusCodeCounter(self.internalOptions.Url, p1.StatusCode)
 end
 
 function Module:retry(p1, Number)

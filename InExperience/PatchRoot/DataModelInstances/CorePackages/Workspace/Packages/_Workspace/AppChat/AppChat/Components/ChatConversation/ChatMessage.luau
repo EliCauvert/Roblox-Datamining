@@ -5,7 +5,6 @@ if require(AppChat.Flags.FFlagAppChatRefactorChatMessage) then
 	local CryoModule = require(Parent.Cryo)
 	local _ = require(Parent.MomentsTypes)
 	local ReactModule = require(Parent.React)
-	local Text = require(Parent.AppCommonLib).Text
 	local GetTextSizeFunction = require(Parent.Style).GetTextSize
 	local EnumMessageTypesModule = require(AppChat.Components.ChatConversation.EnumMessageTypes)
 	local ChatMessageContainerModule = require(script.Parent.ChatMessageContainer)
@@ -15,7 +14,6 @@ if require(AppChat.Flags.FFlagAppChatRefactorChatMessage) then
 	local FFlagAppChatEnableAutotranslationModule = require(AppChat.Flags.FFlagAppChatEnableAutotranslation)
 	local MessageModelModule = require(AppChat.Models.MessageModel)
 	local FoundationModule = require(Parent.Foundation)
-	local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 	local View = FoundationModule.View
 	local Image = FoundationModule.Image
 	local ChatMessageContainerConstantsModule = require(script.Parent.ChatMessageContainerConstants)
@@ -91,7 +89,7 @@ if require(AppChat.Flags.FFlagAppChatRefactorChatMessage) then
 	}
 	
 	return function(p1)
-		-- upvalues: CryoModule (copy), config2 (copy), GetModeratedMaskTextModule (copy), TEXTBUBBLEXPADDING (copy), BUBBLEPADDING (copy), TEXTBUBBLEXWIDEADDITIONALPADDING (copy), UseTokensFunction (copy), FFlagAppChatEnableAutotranslationModule (copy), ReactModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), MessageModelModule (copy), config1 (copy), config (copy), PruneConsecutiveNewLinesFunction (copy), LoggerModule (copy), View (copy), ChatMessageContainerModule (copy), Image (copy)
+		-- upvalues: CryoModule (copy), config2 (copy), GetModeratedMaskTextModule (copy), TEXTBUBBLEXPADDING (copy), BUBBLEPADDING (copy), TEXTBUBBLEXWIDEADDITIONALPADDING (copy), UseTokensFunction (copy), FFlagAppChatEnableAutotranslationModule (copy), ReactModule (copy), GetTextSizeFunction (copy), MessageModelModule (copy), config1 (copy), config (copy), PruneConsecutiveNewLinesFunction (copy), LoggerModule (copy), View (copy), ChatMessageContainerModule (copy), Image (copy)
 		local UnionResult = CryoModule.Dictionary.union(config2, p1)
 		
 		local function _(p2)
@@ -112,11 +110,11 @@ if require(AppChat.Flags.FFlagAppChatRefactorChatMessage) then
 		local UseTokensResult = UseTokensFunction()
 		local UseResult = nil
 		UseResult = if FFlagAppChatEnableAutotranslationModule then ReactModule.useCallback(function(X, p2, p3, p4, p5): number
-			-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), UseTokensResult (copy), Text (upval), BUBBLEPADDING (upval)
-			return if p5 then math.max((if FoundationFontFaceMigration then GetTextSizeFunction(p2, UseTokensResult.Typography.BodySmall.FontSize, p4, Vector2.new(X, 10000)) else Text.GetTextBounds(p2, p4, UseTokensResult.Typography.BodySmall.FontSize, Vector2.new(X, 10000))).X, (if FoundationFontFaceMigration then GetTextSizeFunction(p5, p3, p4, Vector2.new(X, 10000)) else Text.GetTextBounds(p5, p4, p3, Vector2.new(X, 10000))).X) + BUBBLEPADDING * 2 else (if FoundationFontFaceMigration then GetTextSizeFunction(p2, p3, p4, Vector2.new(X, 10000)) else Text.GetTextBounds(p2, p4, p3, Vector2.new(X, 10000))).X + BUBBLEPADDING * 2
+			-- upvalues: GetTextSizeFunction (upval), UseTokensResult (copy), BUBBLEPADDING (upval)
+			return if p5 then math.max(GetTextSizeFunction(p2, UseTokensResult.Typography.BodySmall.FontSize, p4, Vector2.new(X, 10000)).X, GetTextSizeFunction(p5, p3, p4, Vector2.new(X, 10000)).X) + BUBBLEPADDING * 2 else GetTextSizeFunction(p2, p3, p4, Vector2.new(X, 10000)).X + BUBBLEPADDING * 2
 		end) else ReactModule.useCallback(function(X, p2, p3, p4, _): number
-			-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Text (upval), BUBBLEPADDING (upval)
-			return (if FoundationFontFaceMigration then GetTextSizeFunction(p2, p3, p4, Vector2.new(X, 10000)) else Text.GetTextBounds(p2, p4, p3, Vector2.new(X, 10000))).X + BUBBLEPADDING * 2
+			-- upvalues: GetTextSizeFunction (upval), BUBBLEPADDING (upval)
+			return GetTextSizeFunction(p2, p3, p4, Vector2.new(X, 10000)).X + BUBBLEPADDING * 2
 		end)
 		local Config = if UnionResult and UnionResult.visibility == MessageModelModule.VisibilityTypes.Hidden then config1 else config[UnionResult.messageType]
 		local UseMemoResult = ReactModule.useMemo(function()

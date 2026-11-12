@@ -3,9 +3,7 @@ local Parent1 = Parent.Parent
 local CapturesCommonModule = require(Parent1.CapturesCommon)
 local ReactModule = require(Parent1.React)
 local RoactUtilsModule = require(Parent1.RoactUtils)
-local FoundationModule = require(Parent1.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent1.Foundation).Utility.normalizeFontFace
 local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
 local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
@@ -23,7 +21,7 @@ local FFlagUseCaptureCommonComponentsModule = require(Parent.Flags.FFlagUseCaptu
 local FFlagCapturesGalleryDespawnOnMenuCloseModule = require(Parent.Flags.FFlagCapturesGalleryDespawnOnMenuClose)
 
 return function(Frame)
-	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseStyleFunction (copy), UseSystemMenuDetectionModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseLocalizationFunction (copy), ReactModule (copy), EventNamesModule (copy), CarouselOpenedModule (copy), FFlagCapturesGalleryDespawnOnMenuCloseModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), FFlagUseCaptureCommonComponentsModule (copy), CaptureGridView (copy), GalleryActionContainerModule (copy), CaptureItem (copy), GalleryGridViewModule (copy)
+	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseStyleFunction (copy), UseSystemMenuDetectionModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseLocalizationFunction (copy), ReactModule (copy), EventNamesModule (copy), CarouselOpenedModule (copy), FFlagCapturesGalleryDespawnOnMenuCloseModule (copy), NormalizeFontFaceFunction (copy), FFlagUseCaptureCommonComponentsModule (copy), CaptureGridView (copy), GalleryActionContainerModule (copy), CaptureItem (copy), GalleryGridViewModule (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseStyleResult = UseStyleFunction()
@@ -46,7 +44,6 @@ return function(Frame)
 		end
 	end, {})
 	local Color = UseStyleResult.Theme.TextMuted.Color
-	local CaptionBodyFont = UseStyleResult.Font.CaptionBody.Font
 	local ScaledBaseSize = UseStyleResult.Font.BaseSize * UseStyleResult.Font.CaptionBody.RelativeSize
 	local Transparency = UseStyleResult.Theme.TextMuted.Transparency
 	local NoNoNextEntry: boolean = if FFlagCapturesGalleryDespawnOnMenuCloseModule then UseSystemMenuDetectionModuleResult and not NoNextEntry else not NoNextEntry
@@ -69,8 +66,7 @@ return function(Frame)
 		NothingHereYet = NoNextEntry and ReactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			TextWrapped = true,
-			Font = if FoundationFontFaceMigration then nil else CaptionBodyFont,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodySmall.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodySmall.Font),
 			Size = UDim2.new(1, -12, 1, 12),
 			Text = FeatureCapturesTitleGallery.nothingHereYet,
 			TextColor3 = Color,

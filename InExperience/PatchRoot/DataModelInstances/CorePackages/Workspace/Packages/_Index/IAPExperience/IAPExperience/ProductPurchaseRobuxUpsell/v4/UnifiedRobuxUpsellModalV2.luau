@@ -326,7 +326,7 @@ local function UnifiedRobuxUpsellModalV2(p1)
 		hideDiscountSummary = p1.isCartPricingLoading,
 		savingsSummary = if p1.product.itemPrice and p1.product.itemPrice.savingsSummaryOverride then p1.product.itemPrice.savingsSummaryOverride else UseCartPricingModuleResult.cartPricingSavingsSummary
 	})
-	local CreateElementFunction1 = ReactModule.createElement
+	local CreateElementFunction2 = ReactModule.createElement
 	local Root = Dialog.Root
 	local config1 = {
 		disablePortal = false,
@@ -337,11 +337,11 @@ local function UnifiedRobuxUpsellModalV2(p1)
 	local config2 = {
 		DialogTitle = ReactModule.createElement(Dialog.Title, { text = UseStateResult1 })
 	}
-	local CreateElementFunction3 = ReactModule.createElement
+	local CreateElementFunction = ReactModule.createElement
 	local Content = Dialog.Content
 	local v1 = nil
 	local t = {}
-	local CreateElementFunction2 = ReactModule.createElement
+	local CreateElementFunction3 = ReactModule.createElement
 	local config3 = {
 		tag = "col align-x-center align-y-top gap-medium size-full-0 auto-y"
 	}
@@ -370,7 +370,7 @@ local function UnifiedRobuxUpsellModalV2(p1)
 			LayoutOrder = 3
 		}, Copy) else nil
 	}
-	local CreateElementFunction = ReactModule.createElement
+	local CreateElementFunction1 = ReactModule.createElement
 	local config5 = {
 		LayoutOrder = 3,
 		tag = "col align-x-center align-y-center gap-medium size-full-0 auto-y padding-x-xsmall padding-bottom-xxlarge padding-top-small"
@@ -418,9 +418,9 @@ local function UnifiedRobuxUpsellModalV2(p1)
 			}) else nil
 		}
 	end
-	config4.UpsellSuggestions = CreateElementFunction(View, config5, Elements)
-	t.ContentView = CreateElementFunction2(View, config3, config4)
-	config2.DialogContent = CreateElementFunction3(Content, v1, t)
+	config4.UpsellSuggestions = CreateElementFunction1(View, config5, Elements)
+	t.ContentView = CreateElementFunction3(View, config3, config4)
+	config2.DialogContent = CreateElementFunction(Content, v1, t)
 	config2.DialogActions = if OnRobloxPlusButtonActivated then ReactModule.createElement(ButtonGroup, {
 		LayoutOrder = 4,
 		orientation = Orientation.Vertical,
@@ -467,7 +467,7 @@ local function UnifiedRobuxUpsellModalV2(p1)
 		})
 	})
 	
-	return CreateElementFunction1(Root, config1, config2)
+	return CreateElementFunction2(Root, config1, config2)
 end
 
 return function(p2)

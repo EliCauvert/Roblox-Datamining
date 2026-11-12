@@ -10,6 +10,7 @@ local CreateFollowingFeedSourceModule = require(Moments.Stores.GetMomentsStore.c
 local IsStudioModule = require(Parent.MomentsCommon.isStudio)
 local GetFFlagArgusStudioMockFeedModule = require(Moments.Flags.GetFFlagArgusStudioMockFeed)
 local FFlagMomentsNavigationEventModule = require(Moments.Flags.FFlagMomentsNavigationEvent)
+local FFlagMomentsRecommendationFeedTypeModule = require(Moments.Flags.FFlagMomentsRecommendationFeedType)
 
 local function _(Trending)
 	-- upvalues: FFlagMomentsNavigationEventModule (copy), MomentsFeedTypeModule (copy), NavigationDestinationTypeModule (copy)
@@ -22,7 +23,7 @@ local _ = function()
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), MomentsFeedTypeModule (copy), FFlagMomentsNavigationEventModule (copy), NavigationDestinationTypeModule (copy), IsStudioModule (copy), GetFFlagArgusStudioMockFeedModule (copy), CreateMockFeedSourceModule (copy), CreateFollowingFeedSourceModule (copy), FollowingFeedStateModule (copy)
+	-- upvalues: ReactModule (copy), MomentsFeedTypeModule (copy), FFlagMomentsNavigationEventModule (copy), NavigationDestinationTypeModule (copy), IsStudioModule (copy), GetFFlagArgusStudioMockFeedModule (copy), CreateMockFeedSourceModule (copy), CreateFollowingFeedSourceModule (copy), FFlagMomentsRecommendationFeedTypeModule (copy), FollowingFeedStateModule (copy)
 	local RefreshFeedFunction = p1.refreshFeed
 	local FlushViewFunction = p1.flushView
 	local UseStateResult, UseStateResult2 = ReactModule.useState(MomentsFeedTypeModule.Trending)
@@ -51,7 +52,7 @@ return function(p1)
 	end
 	local Current = UseRefResult1.current
 	local Current1 = if IsUseStateResultMatch and Current ~= nil then Current else p1.trendingSource
-	local TrendingTelemetry = if IsUseStateResultMatch then nil else p1.trendingTelemetry
+	local FollowingTelemetry = if FFlagMomentsRecommendationFeedTypeModule and IsUseStateResultMatch then p1.followingTelemetry elseif IsUseStateResultMatch then nil else p1.trendingTelemetry
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: IsUseStateResultMatch (copy), UseResult1 (copy), MomentsFeedTypeModule (upval), ReactModule (upval), FollowingFeedStateModule (upval)
 		if IsUseStateResultMatch then
@@ -73,18 +74,18 @@ return function(p1)
 	end, { IsUseStateResultMatch, UseResult1 })
 	
 	return ReactModule.useMemo(function()
-		-- upvalues: UseStateResult (copy), UseResult (copy), UseResult1 (copy), Current1 (copy), TrendingTelemetry (copy), UseMemoResult (copy)
+		-- upvalues: UseStateResult (copy), UseResult (copy), UseResult1 (copy), Current1 (copy), FollowingTelemetry (ref), UseMemoResult (copy)
 		return {
 			selected = UseStateResult,
 			getSelected = UseResult,
 			select = UseResult1,
 			source = Current1,
-			telemetry = TrendingTelemetry,
+			telemetry = FollowingTelemetry,
 			emptyState = UseMemoResult.emptyState,
 			caughtUpState = UseMemoResult.caughtUpState
 		}
 	end, {
-		UseStateResult, UseResult, UseResult1, Current1, TrendingTelemetry,
+		UseStateResult, UseResult, UseResult1, Current1, FollowingTelemetry,
 		UseMemoResult
 	})
 end

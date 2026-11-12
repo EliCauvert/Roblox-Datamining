@@ -7,7 +7,9 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local Logger = require(Parent.Loggers).Logger
 local LoggerModule = require(AppChat.Logger)
 local GetRoactChatStackNavigatorModule = require(AppChat.getRoactChatStackNavigator)
-local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseHeaderBarHeightFunction = FoundationModule.Hooks.useHeaderBarHeight
 local RootNavigatorModule = nil
 local RootNavigatorModule1 = nil
 local Inverted = not require(AppChat.Flags.getFFlagAppChatRemoveDynamicRequires)()
@@ -57,11 +59,13 @@ local FFlagAppChatReactiveFeatureRestrictions = SharedFlagsModule.FFlagAppChatRe
 local EnteredChatFromEntryPointModule = require(AppChat.Actions.EnteredChatFromEntryPoint)
 local NavigateIntoChatModule = require(AppChat.Actions.NavigateIntoChat)
 local GetFFlagFixChatsBottomInsetBackgroundColorModule = require(AppChat.Flags.getFFlagFixChatsBottomInsetBackgroundColor)
+local FFlagAppChatFoundationHeaderBarModule = require(AppChat.Flags.FFlagAppChatFoundationHeaderBar)
 local GetOverlayStoreModule = require(AppChat.Stores.GetOverlayStore)
 local NavigateWithOsaGateModule = require(AppChat.Utils.navigateWithOsaGate)
 local FFlagAppChatShowOSAOnPageEntry = SharedFlagsModule.FFlagAppChatShowOSAOnPageEntry
 local FFlagEnableHeaderBarButtonsUpdate = SharedFlagsModule.FFlagEnableHeaderBarButtonsUpdate
 local FFlagLuaAppCompositionAppChat = SharedFlagsModule.FFlagLuaAppCompositionAppChat
+local FFlagChatPushUpsellPromptsEnabled = SharedFlagsModule.FFlagChatPushUpsellPromptsEnabled
 local FFlagAppChatUseSignalsForLastEntryPointModule = require(AppChat.Flags.FFlagAppChatUseSignalsForLastEntryPoint)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local GetLastEntryPointStoreModule = if FFlagAppChatUseSignalsForLastEntryPointModule then require(AppChat.Stores.GetLastEntryPointStore) else nil
@@ -111,7 +115,7 @@ local function useReactivePaneRestore(JoinResult)
 end
 
 function AppChatEntryPoint(p1)
-	-- upvalues: CryoModule (copy), config (copy), ChatPlacementContextModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy), UsePartyChatReactiveFeatureRestrictionModule (copy), UseTokensFunction (copy), Inverted (copy), RootNavigatorModule (ref), AppChat (copy), RootNavigatorModule1 (ref), UseSelectorFunction (copy), UseCallbackFunction (copy), FFlagAppChatUseSignalsForLastEntryPointModule (copy), UseSignalStateFunction (copy), GetLastEntryPointStoreModule (copy), UseDispatchFunction (copy), UseEffectFunction (copy), AppChatNetworkingModule (copy), LoggerModule (copy), UseChatIsVisibleModule (copy), FFlagAppChatReactivePaneLayoutOnRotation (copy), useReactivePaneRestore (copy), ReactModule (copy), RoactNavigationModule (copy), GetRoactChatStackNavigatorModule (copy), UseRefFunction (copy), GetOverlayStoreModule (copy), EnumScreensModule (copy), CreateConversationModule (copy), FetchLatestConversationDetailsModule (copy), GetFFlagIsSquadEnabledFunction (copy), FFlagAppChatShowOSAOnPageEntry (copy), NavigateWithOsaGateModule (copy), RootedChatDetailsNavigationModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), EnteredChatFromEntryPointModule (copy), NavigateIntoChatModule (copy), UseCurrentSquadParentChannelIdFunction (copy), GetFFlagEnableCrossExpVoiceFunction (copy), UseIsVoiceConnectedFunction (copy), UsePageSideMarginFunction (copy), FFlagLuaAppCompositionAppChat (copy), UseStyleFunction (copy), SetTabBarVisibleFunction (copy), UserInputService (copy), NAVBARWITHFACEPILESIZE (copy), FFlagEnableHeaderBarButtonsUpdate (copy), LuaAppNavigationContextProviderModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), ReplyingToMessageProviderModule (copy), InteractionFeedbackModule (copy), HapticFeedbackConfig (copy), LayerCollectorProvider (copy), UseRobloxLocaleModule (copy), RbxAnalyticsService (copy), AnalyticsProviderModule (copy), AppTelemetryLayerModule (copy), GetFFlagFixChatsBottomInsetBackgroundColorModule (copy), RoactChatAnalyticsProviderModule (copy)
+	-- upvalues: CryoModule (copy), config (copy), ChatPlacementContextModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy), UsePartyChatReactiveFeatureRestrictionModule (copy), UseTokensFunction (copy), Inverted (copy), RootNavigatorModule (ref), AppChat (copy), RootNavigatorModule1 (ref), UseSelectorFunction (copy), UseCallbackFunction (copy), FFlagAppChatUseSignalsForLastEntryPointModule (copy), UseSignalStateFunction (copy), GetLastEntryPointStoreModule (copy), UseDispatchFunction (copy), UseEffectFunction (copy), AppChatNetworkingModule (copy), LoggerModule (copy), UseChatIsVisibleModule (copy), FFlagAppChatReactivePaneLayoutOnRotation (copy), useReactivePaneRestore (copy), ReactModule (copy), RoactNavigationModule (copy), GetRoactChatStackNavigatorModule (copy), UseRefFunction (copy), GetOverlayStoreModule (copy), EnumScreensModule (copy), CreateConversationModule (copy), FetchLatestConversationDetailsModule (copy), GetFFlagIsSquadEnabledFunction (copy), FFlagAppChatShowOSAOnPageEntry (copy), NavigateWithOsaGateModule (copy), RootedChatDetailsNavigationModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), EnteredChatFromEntryPointModule (copy), NavigateIntoChatModule (copy), UseCurrentSquadParentChannelIdFunction (copy), GetFFlagEnableCrossExpVoiceFunction (copy), UseIsVoiceConnectedFunction (copy), UsePageSideMarginFunction (copy), FFlagLuaAppCompositionAppChat (copy), FFlagAppChatFoundationHeaderBarModule (copy), UseHeaderBarHeightFunction (copy), UseStyleFunction (copy), SetTabBarVisibleFunction (copy), UserInputService (copy), NAVBARWITHFACEPILESIZE (copy), FFlagEnableHeaderBarButtonsUpdate (copy), FFlagChatPushUpsellPromptsEnabled (copy), LuaAppNavigationContextProviderModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), ReplyingToMessageProviderModule (copy), InteractionFeedbackModule (copy), HapticFeedbackConfig (copy), LayerCollectorProvider (copy), UseRobloxLocaleModule (copy), RbxAnalyticsService (copy), AnalyticsProviderModule (copy), AppTelemetryLayerModule (copy), GetFFlagFixChatsBottomInsetBackgroundColorModule (copy), RoactChatAnalyticsProviderModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local IsPlacementInExperience = ChatPlacementContextModule.isPlacementInExperience(JoinResult.chatPlacement)
 	
@@ -500,7 +504,32 @@ function AppChatEntryPoint(p1)
 			inner = if IsPlacementInExperience then 12 else UsePageSideMarginResult
 		}
 	end, { UsePageSideMarginResult, IsPlacementInExperience })
+	local UseHeaderBarHeightResult = if FFlagAppChatFoundationHeaderBarModule then UseHeaderBarHeightFunction() else nil
 	local UseStyleResult = UseStyleFunction()
+	local UseHeaderBarHeightResult1 = if FFlagAppChatFoundationHeaderBarModule then UseHeaderBarHeightResult else math.max(UserInputService.NavBarSize.Y, if UseTokensResult then UseTokensResult.Size.Size_1400 else NAVBARWITHFACEPILESIZE)
+	local Size100 = if FFlagEnableHeaderBarButtonsUpdate then UseTokensResult.Size.Size_100 else nil
+	local RenderChatLandingPrompts = if FFlagChatPushUpsellPromptsEnabled then JoinResult.renderChatLandingPrompts else nil
+	
+	local function createScreenProps()
+		-- upvalues: JoinResult (copy), UseHeaderBarHeightResult1 (copy), IsPlacementInExperience (copy), UseMemoResult1 (copy), Size100 (copy), IsPlacementInExperience (copy), RenderChatLandingPrompts (copy)
+		return {
+			navigateToLuaAppPages = JoinResult.navigateToLuaAppPages,
+			topBarHeight = UseHeaderBarHeightResult1,
+			wideMode = JoinResult.wideMode,
+			isInExperience = IsPlacementInExperience,
+			isVisible = JoinResult.isVisible,
+			notificationCount = JoinResult.notificationCount,
+			appChatOuterPadding = UseMemoResult1.outer,
+			appChatInnerPadding = UseMemoResult1.inner,
+			appChatDefaultPadding = UseMemoResult1.default,
+			topBarUtilityIconSideMargin = Size100,
+			showSearchRow = IsPlacementInExperience,
+			navigateToRootStack = JoinResult.navigateToRootStack,
+			navigateToAddFriends = JoinResult.navigateToAddFriends,
+			renderChatLandingPrompts = RenderChatLandingPrompts
+		}
+	end
+	
 	local Element = ReactModule.createElement(ChatPlacementContextModule.Provider, {
 		value = ReactModule.useMemo(function()
 			-- upvalues: JoinResult (copy)
@@ -521,21 +550,13 @@ function AppChatEntryPoint(p1)
 					UseDispatchResult(SetTabBarVisibleFunction(p2))
 				end, { UseDispatchResult }),
 				chatIsVisible = UseChatIsVisibleModuleResult,
-				screenProps = {
-					navigateToLuaAppPages = JoinResult.navigateToLuaAppPages,
-					topBarHeight = math.max(UserInputService.NavBarSize.Y, if UseTokensResult then UseTokensResult.Size.Size_1400 else NAVBARWITHFACEPILESIZE),
-					wideMode = JoinResult.wideMode,
-					isInExperience = IsPlacementInExperience,
-					isVisible = JoinResult.isVisible,
-					notificationCount = JoinResult.notificationCount,
-					appChatOuterPadding = UseMemoResult1.outer,
-					appChatInnerPadding = UseMemoResult1.inner,
-					appChatDefaultPadding = UseMemoResult1.default,
-					topBarUtilityIconSideMargin = if FFlagEnableHeaderBarButtonsUpdate then UseTokensResult.Size.Size_100 else nil,
-					showSearchRow = IsPlacementInExperience,
-					navigateToRootStack = JoinResult.navigateToRootStack,
-					navigateToAddFriends = JoinResult.navigateToAddFriends
-				}
+				screenProps = if FFlagAppChatFoundationHeaderBarModule then ReactModule.useMemo(createScreenProps, {
+					JoinResult.navigateToLuaAppPages, UseHeaderBarHeightResult1,
+					JoinResult.wideMode, IsPlacementInExperience, JoinResult.isVisible,
+					JoinResult.notificationCount, UseMemoResult1, Size100, IsPlacementInExperience,
+					JoinResult.navigateToRootStack, JoinResult.navigateToAddFriends,
+					RenderChatLandingPrompts
+				}) else createScreenProps()
 			})
 		})
 	})
@@ -555,7 +576,7 @@ function AppChatEntryPoint(p1)
 		
 		return if CurrentSquad and CurrentSquad.squadId then CurrentSquad.squadId else nil
 	end) else nil
-	local Element2 = ReactModule.createElement(AnalyticsProviderModule, {
+	local Element11 = ReactModule.createElement(AnalyticsProviderModule, {
 		localUserId = UseSelectorResult,
 		entryPoint = UseSignalStateResult
 	}, {
@@ -602,7 +623,7 @@ function AppChatEntryPoint(p1)
 			UseSelectorResult2
 		})
 	end
-	return ReactModule.createElement(RoactChatAnalyticsProviderModule, { entryPoint = UseSignalStateResult }, { Element2 })
+	return ReactModule.createElement(RoactChatAnalyticsProviderModule, { entryPoint = UseSignalStateResult }, { Element11 })
 end
 
 return MemoFunction(AppChatEntryPoint)

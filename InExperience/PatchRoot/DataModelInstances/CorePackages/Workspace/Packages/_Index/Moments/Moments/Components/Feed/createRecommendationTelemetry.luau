@@ -3,6 +3,7 @@ local Parent = Moments.Parent
 local _ = require(Parent.Signals)
 local Analytics = require(Parent.MomentsCommon).Analytics
 local ConstantsModule = require(Moments.Constants)
+local _ = require(Moments.Enums.MomentsFeedType)
 local EmitRecommendationImpressionModule = require(Moments.Analytics.emitRecommendationImpression)
 local EmitRecommendationActionModule = require(Moments.Analytics.emitRecommendationAction)
 local _ = require(Moments.SignalTracker)
@@ -35,17 +36,19 @@ return function(p1)
 	-- upvalues: EmitRecommendationImpressionModule (copy), config (copy), config1 (copy), config2 (copy), Analytics (copy), EmitRecommendationActionModule (copy), FFlagMomentsComments (copy)
 	local GetMomentsSessionIdFunction = p1.getMomentsSessionId
 	local SignalTracker = p1.signalTracker
+	local FeedType = p1.feedType
 	
 	return {
 		logView = function(p2, p3)
-			-- upvalues: EmitRecommendationImpressionModule (upval), GetMomentsSessionIdFunction (copy), SignalTracker (copy)
+			-- upvalues: EmitRecommendationImpressionModule (upval), GetMomentsSessionIdFunction (copy), FeedType (copy), SignalTracker (copy)
 			EmitRecommendationImpressionModule({
 				itemId = p2.itemId,
 				tracingId = p2.tracingId or "",
 				momentsSessionId = GetMomentsSessionIdFunction(false),
 				position = p3.itemPosition,
 				durationSeconds = p3.durationSeconds,
-				contentType = p2.contentType
+				contentType = p2.contentType,
+				feedType = FeedType
 			})
 			
 			if SignalTracker then
@@ -53,7 +56,7 @@ return function(p1)
 			end
 		end,
 		logAction = function(p2, p3, p4)
-			-- upvalues: config (upval), SignalTracker (copy), config1 (upval), config2 (upval), Analytics (upval), EmitRecommendationActionModule (upval), FFlagMomentsComments (upval), GetMomentsSessionIdFunction (copy)
+			-- upvalues: config (upval), SignalTracker (copy), config1 (upval), config2 (upval), Analytics (upval), EmitRecommendationActionModule (upval), FFlagMomentsComments (upval), GetMomentsSessionIdFunction (copy), FeedType (copy)
 			local Entry = config[p2]
 			
 			if Entry == nil then
@@ -77,7 +80,8 @@ return function(p1)
 					commentText = p4.commentText,
 					actionWeight = p4.actionWeight,
 					contentType = p3.contentType,
-					commentSectionOpenDurationSeconds = if FFlagMomentsComments then p4.commentSectionOpenDurationSeconds else nil
+					commentSectionOpenDurationSeconds = if FFlagMomentsComments then p4.commentSectionOpenDurationSeconds else nil,
+					feedType = FeedType
 				})
 				
 				if SignalTracker then

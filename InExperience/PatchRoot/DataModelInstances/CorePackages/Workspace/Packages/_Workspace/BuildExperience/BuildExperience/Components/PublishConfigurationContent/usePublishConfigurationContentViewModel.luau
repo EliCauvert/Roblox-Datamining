@@ -14,10 +14,12 @@ local GameConfigurationLabelsModule = require(BuildExperience.utils.GameConfigur
 local RefreshPublishEligibilityModule = require(BuildExperience.utils.refreshPublishEligibility)
 local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
+local FFlagBuildExperienceConfigurationRowTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceConfigurationRowTelemetry)
+local SendConfigurationRowClickModule = require(BuildExperience.Telemetry.sendConfigurationRowClick)
 local FFlagMyStatsMediaSelector = require(Parent.SharedFlags).FFlagMyStatsMediaSelector
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseOpenWebViewFunction (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), ExperienceGuidelinesModule (copy), ReactModule (copy), SignalsReactModule (copy), UniverseActivationModule (copy), ContentMaturityUtilsModule (copy), GameConfigurationLabelsModule (copy), GameConfigurationActionsModule (copy), RefreshPublishEligibilityModule (copy), FFlagMyStatsMediaSelector (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseOpenWebViewFunction (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), ExperienceGuidelinesModule (copy), ReactModule (copy), SignalsReactModule (copy), UniverseActivationModule (copy), ContentMaturityUtilsModule (copy), GameConfigurationLabelsModule (copy), GameConfigurationActionsModule (copy), RefreshPublishEligibilityModule (copy), FFlagBuildExperienceConfigurationRowTelemetryModule (copy), SendConfigurationRowClickModule (copy), FFlagMyStatsMediaSelector (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		creatorHub = LocalizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB,
 		loading = LocalizationStringsModule.GAME_CONFIGURATION_LOADING,
@@ -51,6 +53,14 @@ return function(p1)
 		-- upvalues: UseOpenWebViewResult (copy), GameConfigurationActionsModule (upval), p1 (copy), CreatorHub (copy)
 		UseOpenWebViewResult(GameConfigurationActionsModule.getCreatorHubConfigureUrl(p1.universeId), CreatorHub)
 	end, { CreatorHub, UseOpenWebViewResult, p1.universeId })
+	local UseResult1 = if FFlagBuildExperienceConfigurationRowTelemetryModule then ReactModule.useCallback(function(p2)
+		-- upvalues: SendConfigurationRowClickModule (upval), p1 (copy)
+		SendConfigurationRowClickModule("publish", {
+			universeId = p1.universeId,
+			placeId = p1.placeId,
+			sessionId = p1.sessionId
+		}, p2)
+	end, { p1.universeId, p1.placeId, p1.sessionId }) else nil
 	
 	return {
 		buildMaturityBannerText = BuildMaturityBannerText,
@@ -66,6 +76,7 @@ return function(p1)
 		end, { CreatorHub, UseOpenWebViewResult, p1.universeId }),
 		onOpenVersionTitleDescriptionPage = p1.onOpenVersionTitleDescriptionPage,
 		onOpenVersionHistory = p1.onOpenVersionHistory,
+		onRowActivated = if FFlagBuildExperienceConfigurationRowTelemetryModule then UseResult1 else nil,
 		isEditDisabled = FFlagBuildCheckGamePermissionsModule and not UseGamePermissionsModuleResult.canEdit,
 		isIconAndThumbnailsDisabled = FFlagBuildCheckGamePermissionsModule and (not FFlagMyStatsMediaSelector and not UseGamePermissionsModuleResult.canViewOnCreatorHub),
 		layoutOrder = p1.layoutOrder,

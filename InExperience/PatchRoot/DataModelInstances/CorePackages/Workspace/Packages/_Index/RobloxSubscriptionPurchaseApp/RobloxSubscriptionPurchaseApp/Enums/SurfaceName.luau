@@ -16,5 +16,7 @@
 	AiBackgroundUpsell = "AiBackgroundUpsell",
 	AvatarBackgrounds = "AvatarBackgrounds",
 	GameJoinEarlyAccessUpsell = "GameJoinEarlyAccessUpsell",
-	PlusReferralLandingSheet = "PlusReferralLandingSheet"
+	PlusReferralLandingSheet = "PlusReferralLandingSheet",
+	TTGrantSheet = "TTGrantSheet",
+	HomepageLaunchPrompt = "HomepageLaunchPrompt"
 }

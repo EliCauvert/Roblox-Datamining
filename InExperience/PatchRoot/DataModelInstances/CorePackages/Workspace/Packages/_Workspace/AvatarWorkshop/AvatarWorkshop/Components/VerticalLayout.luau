@@ -14,6 +14,7 @@ return function(p1)
 				tag = "position-bottom-left anchor-bottom-left",
 				Size = UDim2.fromScale(1, 0.5)
 			}, { BottomItem = p1.bottomItemSlot })
-		})
+		}),
+		Footer = if p1.footerSlot then ReactModule.createElement(FoundationModule.View, { tag = "size-full-0 auto-y", LayoutOrder = 4 }, { FooterSlot = p1.footerSlot }) else nil
 	}))
 end

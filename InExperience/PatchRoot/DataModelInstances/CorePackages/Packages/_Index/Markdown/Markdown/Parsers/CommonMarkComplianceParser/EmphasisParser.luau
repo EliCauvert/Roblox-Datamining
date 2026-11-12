@@ -124,41 +124,41 @@ function EmphasisParserModule.processEmphasisRun(p2, NewEndIdx, p3: number)
 	local List3 = {}
 	local Flag1 = nil
 	
-	for i2, value1 in t do
-		if value1.name ~= "DELIMITER_RUN" then
-			table.insert(List3, value1)
+	for i2, value in t do
+		if value.name ~= "DELIMITER_RUN" then
+			table.insert(List3, value)
 			continue
 		end
-		local Entry1 = List[value1.delimiterIndex]
+		local Entry = List[value.delimiterIndex]
 		
-		if Entry1.char == "`" and Entry1.runLength > 0 and value1.delimiterIndex == #List and not Flag and i2 < #t then
+		if Entry.char == "`" and Entry.runLength > 0 and value.delimiterIndex == #List and not Flag and i2 < #t then
 			Flag1 = false
 			
 			for i3 = #List1, 1, -1 do
-				local Entry = List1[i3]
+				local Entry1 = List1[i3]
 				
-				if Entry1.tokenStart < Entry then
+				if Entry.tokenStart < Entry1 then
 					Flag1 = true
 					break
 				end
-				if Entry <= Entry1.tokenStart then break end
+				if Entry1 <= Entry.tokenStart then break end
 			end
 			if not Flag1 then
 				table.insert(List3, {
 					name = "EMPHASIS_START",
 					text = "INLINE_CODE",
-					offset = p2[Entry1.tokenStart].offset
+					offset = p2[Entry.tokenStart].offset
 				})
 				continue
 			end
 		end
-		local Matches = Entry1.matches
+		local Matches = Entry.matches
 		
 		if not Matches or #Matches == 0 then
 			table.insert(List3, {
 				name = "TEXT",
-				text = string.rep(Entry1.char, Entry1.origRunLength),
-				offset = value1.offset
+				text = string.rep(Entry.char, Entry.origRunLength),
+				offset = value.offset
 			})
 			continue
 		end
@@ -168,53 +168,53 @@ function EmphasisParserModule.processEmphasisRun(p2, NewEndIdx, p3: number)
 			for _, match in Matches do
 				NewLength += match.length
 			end
-			local OrigRunLengthDelta = Entry1.origRunLength - NewLength
+			local OrigRunLengthDelta = Entry.origRunLength - NewLength
 			
 			if OrigRunLengthDelta > 0 then
 				table.insert(List3, {
 					name = "TEXT",
-					text = string.rep(Entry1.char, OrigRunLengthDelta),
-					offset = value1.offset
+					text = string.rep(Entry.char, OrigRunLengthDelta),
+					offset = value.offset
 				})
 			end
-			for _, value in Matches do
-				local Length = value.length
+			for _, match1 in Matches do
+				local Length = match1.length
 				while Length > 0 do
 					local Smallest = math.min(Length, 2)
 					table.insert(List3, {
 						name = "EMPHASIS_START",
-						text = UtilsModule.getTokenNameFromCharAndLength(Entry1.char, Smallest),
-						offset = value1.offset
+						text = UtilsModule.getTokenNameFromCharAndLength(Entry.char, Smallest),
+						offset = value.offset
 					})
 					Length -= Smallest
 				end
 			end
 		else
-			local List31 = {}
+			local List4 = {}
 			
-			for _, match1 in Matches do
-				local Length = match1.length
+			for _, match2 in Matches do
+				local Length = match2.length
 				while Length > 0 do
 					local Smallest = math.min(Length, 2)
-					table.insert(List31, { name = "EMPHASIS_END", text = "", offset = value1.offset })
+					table.insert(List4, { name = "EMPHASIS_END", text = "", offset = value.offset })
 					Length -= Smallest
 				end
 			end
-			for i4 = #List31, 1, -1 do
-				table.insert(List3, List31[i4])
+			for i4 = #List4, 1, -1 do
+				table.insert(List3, List4[i4])
 			end
 			local NewLength = 0
 			
-			for _, match2 in Matches do
-				NewLength += match2.length
+			for _, match3 in Matches do
+				NewLength += match3.length
 			end
-			local OrigRunLengthDelta = Entry1.origRunLength - NewLength
+			local OrigRunLengthDelta = Entry.origRunLength - NewLength
 			
 			if OrigRunLengthDelta > 0 then
 				table.insert(List3, {
 					name = "TEXT",
-					text = string.rep(Entry1.char, OrigRunLengthDelta),
-					offset = value1.offset
+					text = string.rep(Entry.char, OrigRunLengthDelta),
+					offset = value.offset
 				})
 			end
 		end

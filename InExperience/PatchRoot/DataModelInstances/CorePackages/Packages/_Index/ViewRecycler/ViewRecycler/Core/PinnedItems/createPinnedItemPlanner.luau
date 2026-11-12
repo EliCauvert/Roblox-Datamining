@@ -1,4 +1,5 @@
-﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+﻿local FFlagViewRecyclerReact084 = require(script:FindFirstAncestor("ViewRecycler").Flags).FFlagViewRecyclerReact084
+local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
 local _ = require(ViewRecycler.Core.Virtualizer.ItemSequence)
 local _ = require(ViewRecycler.Core.Layout)
 local PlacementTypesModule = require(ViewRecycler.Core.Placement.PlacementTypes)
@@ -13,65 +14,111 @@ local function _(p1, p2)
 	return p1 == p2 or p1 ~= nil and (p2 ~= nil and ShallowTableModule.containsEqual(p1, p2, Frozen))
 end
 
+local Callback: ((any) -> any)? = nil
+local Callback1: ((any) -> any)? = nil
+
+if FFlagViewRecyclerReact084 then
+	Callback = function(PinnedEndItem)
+		local EstimatedLength = if PinnedEndItem == nil then nil else PinnedEndItem.estimatedLength
+		
+		if EstimatedLength == nil then
+			return 0
+		else
+			assert(EstimatedLength >= 0 and EstimatedLength < 1e999, "PinnedItems: estimated length must be finite and non-negative")
+			
+			return EstimatedLength
+		end
+	end
+	
+	Callback1 = function(p1)
+		-- upvalues: Callback (ref)
+		return if p1.item == nil then 0 else p1.measuredLength or Callback(p1.item)
+	end
+end
 return function(p1, Options)
-	-- upvalues: StickyIndexResolverModule (copy), ShallowTableModule (copy), Frozen (copy), BuildPlacementPlanModule (copy), PlacementTypesModule (copy)
+	-- upvalues: StickyIndexResolverModule (copy), FFlagViewRecyclerReact084 (copy), Callback (ref), ShallowTableModule (copy), Frozen (copy), Callback1 (ref), BuildPlacementPlanModule (copy), PlacementTypesModule (copy)
 	local Options1 = Options
 	local StickyIndexResolverModuleResult = StickyIndexResolverModule(p1, Options1.isItemStickyKey)
+	
+	if FFlagViewRecyclerReact084 then
+		Callback(Options1.pinnedStartItem)
+		Callback(Options1.pinnedEndItem)
+	end
 	local config = {
 		revision = 1,
-		length = 0,
-		item = Options1.pinnedStartItem
+		item = Options1.pinnedStartItem,
+		measuredLength = if FFlagViewRecyclerReact084 then nil else nil,
+		length = if FFlagViewRecyclerReact084 then nil else 0
 	}
-	local config1 = { revision = 1, length = 0, item = Options1.pinnedEndItem }
+	local config1 = {
+		revision = 1,
+		item = Options1.pinnedEndItem,
+		measuredLength = if FFlagViewRecyclerReact084 then nil else nil,
+		length = if FFlagViewRecyclerReact084 then nil else 0
+	}
 	
 	local function _(p2, Item): boolean
-		-- upvalues: ShallowTableModule (upval), Frozen (upval)
+		-- upvalues: ShallowTableModule (upval), Frozen (upval), FFlagViewRecyclerReact084 (upval), Callback1 (upval)
 		local Item1 = p2.item
 		
 		if Item1 == Item or Item1 ~= nil and (Item ~= nil and ShallowTableModule.containsEqual(Item1, Item, Frozen)) then
-			return false
+			local v1 = nil
+			
+			if FFlagViewRecyclerReact084 then
+				v1 = Callback1(p2)
+				p2.item = Item
+			end
+			return if FFlagViewRecyclerReact084 then Callback1(p2) ~= v1 else false
 		else
 			p2.item = Item
 			p2.revision += 1
-			p2.length = 0
 			
+			if FFlagViewRecyclerReact084 then
+				p2.measuredLength = nil
+			else
+				p2.length = 0
+			end
 			return true
 		end
 	end
 	
+	local function getContentInsets()
+		-- upvalues: FFlagViewRecyclerReact084 (upval), Callback1 (upval), config (copy), config1 (copy)
+		return {
+			start = if FFlagViewRecyclerReact084 then Callback1(config) elseif config.item == nil then 0 else config.length,
+			finish = if FFlagViewRecyclerReact084 then Callback1(config1) elseif config1.item == nil then 0 else config1.length
+		}
+	end
+	
 	local _ = function(p2, Position)
+		-- upvalues: FFlagViewRecyclerReact084 (upval), Callback1 (upval)
 		local Item = p2.item
 		
 		return if Item == nil then nil else {
 			key = Item.key,
 			revision = p2.revision,
-			length = p2.length,
+			length = if FFlagViewRecyclerReact084 then Callback1(p2) else p2.length,
 			position = Position
 		}
 	end
 	
 	return {
-		getContentInsets = function()
-			-- upvalues: config (copy), config1 (copy)
-			return {
-				start = if config.item == nil then 0 else config.length,
-				finish = if config1.item == nil then 0 else config1.length
-			}
-		end,
+		getContentInsets = getContentInsets,
 		update = function(p2)
-			-- upvalues: StickyIndexResolverModuleResult (copy), config (copy), BuildPlacementPlanModule (upval), PlacementTypesModule (upval), config1 (copy)
+			-- upvalues: StickyIndexResolverModuleResult (copy), FFlagViewRecyclerReact084 (upval), Callback1 (upval), config (copy), BuildPlacementPlanModule (upval), PlacementTypesModule (upval), config1 (copy)
 			StickyIndexResolverModuleResult.setItemSequence(p2.itemSequence)
-			local Length = if config.item == nil then 0 else config.length
+			local CallbackResult = nil
+			CallbackResult = if FFlagViewRecyclerReact084 then Callback1(config) elseif config.item == nil then 0 else config.length
 			local ResolveActiveResult, ResolveActiveResult2 = StickyIndexResolverModuleResult.resolveActive(function(p3): boolean
-				-- upvalues: p2 (copy), Length (copy)
-				return p2.layout.getItemLayout(p3).startOffset + p2.contentStartOffset - p2.scrollOffset < Length
+				-- upvalues: p2 (copy), CallbackResult (ref)
+				return p2.layout.getItemLayout(p3).startOffset + p2.contentStartOffset - p2.scrollOffset < CallbackResult
 			end)
 			local Start = PlacementTypesModule.PinnedPosition.Start
 			local Item = config.item
 			local Config = if Item == nil then nil else {
 				key = Item.key,
 				revision = config.revision,
-				length = config.length,
+				length = if FFlagViewRecyclerReact084 then Callback1(config) else config.length,
 				position = Start
 			}
 			local Finish = PlacementTypesModule.PinnedPosition.Finish
@@ -89,7 +136,7 @@ return function(p1, Options)
 				pinnedEndItem = if Item1 == nil then nil else {
 					key = Item1.key,
 					revision = config1.revision,
-					length = config1.length,
+					length = if FFlagViewRecyclerReact084 then Callback1(config1) else config1.length,
 					position = Finish
 				}
 			})
@@ -99,52 +146,87 @@ return function(p1, Options)
 			StickyIndexResolverModuleResult.applyDataSourceChange(p2)
 		end,
 		updatePinnedMeasurement = function(Start, Key, Revision, Length: number)
-			-- upvalues: PlacementTypesModule (upval), config (copy), config1 (copy)
+			-- upvalues: PlacementTypesModule (upval), config (copy), config1 (copy), FFlagViewRecyclerReact084 (upval), Callback1 (upval), getContentInsets (copy)
 			assert(Length >= 0 and Length < 1e999, "PinnedItems: measured length must be finite and non-negative")
 			local Config = if Start == PlacementTypesModule.PinnedPosition.Start then config else config1
 			local Item = Config.item
 			
-			if Item == nil or Item.key ~= Key or Config.revision ~= Revision or Config.length == Length then
-				return nil
-			else
+			if (if FFlagViewRecyclerReact084 then Item == nil else Item == nil or Item.key ~= Key) or (if FFlagViewRecyclerReact084 then Item.key else Config.revision) ~= (if FFlagViewRecyclerReact084 then Key else Revision) or (if FFlagViewRecyclerReact084 then Config.revision ~= Revision else Config.length == Length) then
+				if FFlagViewRecyclerReact084 then
+					return nil, false
+				else
+					return nil
+				end
+			elseif not FFlagViewRecyclerReact084 then
 				Config.length = Length
 				
-				return {
-					start = if config.item == nil then 0 else config.length,
-					finish = if config1.item == nil then 0 else config1.length
-				}
+				return (getContentInsets())
+			else
+				Config.measuredLength = Length
+				
+				if Length == Callback1(Config) then
+					return nil, true
+				else
+					return getContentInsets(), true
+				end
 			end
 		end,
 		setOptions = function(Value)
-			-- upvalues: Options1 (ref), StickyIndexResolverModuleResult (copy), config (copy), ShallowTableModule (upval), Frozen (upval), config1 (copy)
+			-- upvalues: FFlagViewRecyclerReact084 (upval), Callback (upval), Options1 (ref), StickyIndexResolverModuleResult (copy), config (copy), ShallowTableModule (upval), Frozen (upval), Callback1 (upval), config1 (copy)
+			if FFlagViewRecyclerReact084 then
+				Callback(Value.pinnedStartItem)
+				Callback(Value.pinnedEndItem)
+			end
 			Options1 = Value
 			local SetPredicateResult = StickyIndexResolverModuleResult.setPredicate(Value.isItemStickyKey)
 			local PinnedStartItem = Value.pinnedStartItem
 			local Item = config.item
-			local Flag = nil
+			local IsNotCallbackResultMatch = nil
 			
 			if Item == PinnedStartItem or Item ~= nil and (PinnedStartItem ~= nil and ShallowTableModule.containsEqual(Item, PinnedStartItem, Frozen)) then
-				Flag = false
+				local v1 = nil
+				
+				if FFlagViewRecyclerReact084 then
+					v1 = Callback1(config)
+					config.item = PinnedStartItem
+				end
+				IsNotCallbackResultMatch = if FFlagViewRecyclerReact084 then Callback1(config) ~= v1 else false
 			else
 				config.item = PinnedStartItem
 				config.revision += 1
-				config.length = 0
-				Flag = true
+				
+				if FFlagViewRecyclerReact084 then
+					config.measuredLength = nil
+				else
+					config.length = 0
+				end
+				IsNotCallbackResultMatch = true
 			end
-			local Flag1 = Flag or SetPredicateResult
+			local IsNotCallbackResultMatch1 = IsNotCallbackResultMatch or SetPredicateResult
 			local PinnedEndItem = Value.pinnedEndItem
 			local Item1 = config1.item
-			local Flag2 = nil
+			local IsNotCallbackResultMatch2 = nil
 			
 			if Item1 == PinnedEndItem or Item1 ~= nil and (PinnedEndItem ~= nil and ShallowTableModule.containsEqual(Item1, PinnedEndItem, Frozen)) then
-				Flag2 = false
+				local v2 = nil
+				
+				if FFlagViewRecyclerReact084 then
+					v2 = Callback1(config1)
+					config1.item = PinnedEndItem
+				end
+				IsNotCallbackResultMatch2 = if FFlagViewRecyclerReact084 then Callback1(config1) ~= v2 else false
 			else
 				config1.item = PinnedEndItem
 				config1.revision += 1
-				config1.length = 0
-				Flag2 = true
+				
+				if FFlagViewRecyclerReact084 then
+					config1.measuredLength = nil
+				else
+					config1.length = 0
+				end
+				IsNotCallbackResultMatch2 = true
 			end
-			return Flag2 or Flag1
+			return IsNotCallbackResultMatch2 or IsNotCallbackResultMatch1
 		end,
 		setItemSequence = StickyIndexResolverModuleResult.setItemSequence,
 		destroy = function() end

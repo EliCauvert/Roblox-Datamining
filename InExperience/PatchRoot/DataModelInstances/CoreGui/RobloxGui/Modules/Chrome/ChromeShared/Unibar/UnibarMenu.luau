@@ -678,7 +678,7 @@ return ReactModule.memo(function(p4)
 			SelectionBehaviorRight = Enum.SelectionBehavior.Stop,
 			ref = UseRefResult,
 			[ReactModule.Event.SelectionChanged] = if FFlagEnableConsoleExpControls then onUnibarSelectionChanged else nil,
-			Visible = if FFlagEnableConsoleExpControls or FFlagAddUILessMode and FIntAddUILessModeVariant ~= 0 and UseRefResult2.current.getUILessModeEnabled(false) then v3 else nil
+			Visible = if FFlagEnableConsoleExpControls or FFlagAddUILessMode and (FIntAddUILessModeVariant ~= 0 and UseRefResult2.current.getUILessModeEnabled(false)) then v3 else nil
 		}, {
 			ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,

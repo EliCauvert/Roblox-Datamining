@@ -195,15 +195,15 @@ return function(Frame)
 	Label.ClearTextOnFocus = false
 	local NewFunction = UDim2.new
 	local v6 = 1
-	local v7 = 0
+	local SizeDelta = 0
 	
 	if Frame.iconLeading then
-		v7 = v7 - Size400 - Tokens.Gap.Small * 2
+		SizeDelta = SizeDelta - Size400 - Tokens.Gap.Small * 2
 	end
 	if Frame.iconButton then
-		v7 = v7 - Size400 - Tokens.Gap.Small * 2
+		SizeDelta = SizeDelta - Size400 - Tokens.Gap.Small * 2
 	end
-	Label.Size = NewFunction(v6, v7, 1, 0)
+	Label.Size = NewFunction(v6, SizeDelta, 1, 0)
 	Label.TextEditable = not Frame.disabled
 	Label.BackgroundTransparency = 1
 	Label.TextXAlignment = Enum.TextXAlignment.Left

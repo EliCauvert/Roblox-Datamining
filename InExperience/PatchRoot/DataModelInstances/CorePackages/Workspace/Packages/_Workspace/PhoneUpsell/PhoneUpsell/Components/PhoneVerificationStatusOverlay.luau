@@ -1,14 +1,12 @@
 ﻿local Parent = script:FindFirstAncestor("PhoneUpsell").Parent
 local ReactModule = require(Parent.React)
-local FoundationModule = require(Parent.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
 local UIBloxModule = require(Parent.UIBlox)
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local Colors = UIBloxModule.App.Style.Colors
 
 return function(p1)
-	-- upvalues: UseStyleFunction (copy), ReactModule (copy), Colors (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), Colors (copy), NormalizeFontFaceFunction (copy)
 	local UseStyleResult = UseStyleFunction()
 	
 	return ReactModule.createElement("Frame", {
@@ -40,8 +38,7 @@ return function(p1)
 				TextSize = UseStyleResult.Font.BaseSize * UseStyleResult.Font.Header1.RelativeSize,
 				TextColor3 = Colors.White,
 				Text = p1.text,
-				Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Header1.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.HeadingSmall.Font) else nil
+				FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.HeadingSmall.Font)
 			})
 		})
 	})

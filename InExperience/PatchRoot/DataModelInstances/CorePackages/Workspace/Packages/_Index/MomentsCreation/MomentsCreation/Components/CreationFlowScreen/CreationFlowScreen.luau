@@ -275,9 +275,14 @@ local function CreationFlowContent(p1)
 		end
 	end, { UseSignalStateResult, UseToggleStateResult.disable })
 	local UseCallbackResult10 = UseCallbackFunction(function()
-		-- upvalues: UseSignalStateResult6 (copy), DialogTypeModule (upval), ReactModule (upval), ExitConfirmationDialogModule (upval), TextFilteredDialogModule (upval), GenerateTextOptionsDialogModule (upval), VoiceoverErrorDialogModule (upval), VoiceoverDeleteConfirmDialogModule (upval), VoiceSelectorDialogModule (upval)
-		return if UseSignalStateResult6 and UseSignalStateResult6.modalType then if UseSignalStateResult6.modalType == DialogTypeModule.ExitCreationConfirmation then ReactModule.createElement(ExitConfirmationDialogModule, UseSignalStateResult6.modalProps) elseif UseSignalStateResult6.modalType == DialogTypeModule.TextFiltered then ReactModule.createElement(TextFilteredDialogModule, UseSignalStateResult6.modalProps) elseif UseSignalStateResult6.modalType == DialogTypeModule.GenerateTextOptions then ReactModule.createElement(GenerateTextOptionsDialogModule, UseSignalStateResult6.modalProps) elseif UseSignalStateResult6.modalType == DialogTypeModule.VoiceoverError then ReactModule.createElement(VoiceoverErrorDialogModule, UseSignalStateResult6.modalProps) elseif UseSignalStateResult6.modalType == DialogTypeModule.VoiceoverDelete then ReactModule.createElement(VoiceoverDeleteConfirmDialogModule, UseSignalStateResult6.modalProps) elseif UseSignalStateResult6.modalType == DialogTypeModule.VoiceSelector then ReactModule.createElement(VoiceSelectorDialogModule, UseSignalStateResult6.modalProps) else nil else nil
-	end, { UseSignalStateResult6 })
+		-- upvalues: UseSignalStateResult6 (copy), DialogTypeModule (upval), ReactModule (upval), ExitConfirmationDialogModule (upval), FFlagMomentsCreateAvatarPosts (upval), UseSignalStateResult2 (copy), CryoModule (upval), TextFilteredDialogModule (upval), GenerateTextOptionsDialogModule (upval), VoiceoverErrorDialogModule (upval), VoiceoverDeleteConfirmDialogModule (upval), VoiceSelectorDialogModule (upval)
+		return if UseSignalStateResult6 and UseSignalStateResult6.modalType then if UseSignalStateResult6.modalType == DialogTypeModule.ExitCreationConfirmation then ReactModule.createElement(ExitConfirmationDialogModule, if FFlagMomentsCreateAvatarPosts and UseSignalStateResult2 ~= nil then CryoModule.Dictionary.join(UseSignalStateResult6.modalProps, {
+			bodyLocalizationKey = "Feature.Moments.Description.LeaveAvatarMomentsCreation"
+		}) else UseSignalStateResult6.modalProps) elseif UseSignalStateResult6.modalType == DialogTypeModule.TextFiltered then ReactModule.createElement(TextFilteredDialogModule, UseSignalStateResult6.modalProps) elseif UseSignalStateResult6.modalType == DialogTypeModule.GenerateTextOptions then ReactModule.createElement(GenerateTextOptionsDialogModule, UseSignalStateResult6.modalProps) elseif UseSignalStateResult6.modalType == DialogTypeModule.VoiceoverError then ReactModule.createElement(VoiceoverErrorDialogModule, UseSignalStateResult6.modalProps) elseif UseSignalStateResult6.modalType == DialogTypeModule.VoiceoverDelete then ReactModule.createElement(VoiceoverDeleteConfirmDialogModule, UseSignalStateResult6.modalProps) elseif UseSignalStateResult6.modalType == DialogTypeModule.VoiceSelector then ReactModule.createElement(VoiceSelectorDialogModule, UseSignalStateResult6.modalProps) else nil else nil
+	end, {
+		UseSignalStateResult6,
+		if FFlagMomentsCreateAvatarPosts then UseSignalStateResult2 else nil
+	})
 	local UseCallbackResult11 = UseCallbackFunction(function(Presentation)
 		-- upvalues: UseSignalStateResult5 (copy), UseSignalStateResult (copy), UseCreationControllerResult (copy), ReactModule (upval), StepStubModule (upval)
 		if UseSignalStateResult5 == nil or UseSignalStateResult5.presentation ~= Presentation or UseSignalStateResult ~= UseSignalStateResult5.step then
@@ -543,6 +548,7 @@ return function(p2)
 	local OnExit = p2.onExit
 	local Host = p2.host
 	local CaptureSource = p2.captureSource
+	local CanDismissCreationFlow = if FFlagMomentsRenderCreatePostStatus then p2.canDismissCreationFlow else nil
 	local UseRefResult = nil
 	
 	if FFlagMomentsRenderCreatePostStatus then
@@ -550,9 +556,10 @@ return function(p2)
 		UseRefResult.current = p2.onPublishFinished
 	end
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: Host (copy), OnExit (copy), FFlagMomentsRenderCreatePostStatus (upval), UseRefResult (ref), CaptureSource (copy), IsTextFilteredModule (upval), v1 (upval), PublishMomentModule (upval)
+		-- upvalues: Host (copy), OnExit (copy), FFlagMomentsRenderCreatePostStatus (upval), CanDismissCreationFlow (copy), UseRefResult (ref), CaptureSource (copy), IsTextFilteredModule (upval), v1 (upval), PublishMomentModule (upval)
 		return if Host == nil then {
 			exitCreationFlow = OnExit,
+			canDismissCreationFlow = if FFlagMomentsRenderCreatePostStatus then CanDismissCreationFlow else nil,
 			onPublishFinished = if FFlagMomentsRenderCreatePostStatus then function(p3)
 				-- upvalues: UseRefResult (upval)
 				local CurrentFunction: (any) -> () = UseRefResult.current
@@ -567,7 +574,12 @@ return function(p2)
 				print(`[moments-creation] dev publish (not uploaded): "{p14}"`)
 			end else PublishMomentModule
 		} else Host
-	end, { Host, OnExit, CaptureSource })
+	end, {
+		Host,
+		OnExit,
+		CaptureSource,
+		if FFlagMomentsRenderCreatePostStatus then CanDismissCreationFlow else nil
+	})
 	
 	return ReactModule.createElement(FoundationProvider, { colorMode = ColorMode.Dark }, {
 		Root = ReactModule.createElement(CreationControllerProvider, {

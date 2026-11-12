@@ -2,6 +2,7 @@
 local Parent = AppChat.Parent
 local CryoModule = require(Parent.Cryo)
 local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local BuildConversationMessageFromApiModule = require(AppChat.Stores.Ingestion.buildConversationMessageFromApi)
 local IngestBatchModule = require(AppChat.Stores.Ingestion.ingestBatch)
 local IngestOperationModule = require(AppChat.Stores.Ingestion.IngestOperation)
@@ -11,10 +12,13 @@ local EnumsModule = require(AppChat.MessageData.Enums)
 local MessageStatus = EnumsModule.MessageStatus
 local MessageType = EnumsModule.MessageType
 local MessageVisibility = EnumsModule.MessageVisibility
-local GetFFlagEnableSocialCardsFunction = require(Parent.SharedFlags).GetFFlagEnableSocialCards
+local GetFFlagEnableSocialCardsFunction = SharedFlagsModule.GetFFlagEnableSocialCards
 local GetConversationMessageViewModelStoreModule = require(AppChat.Stores.GetConversationMessageViewModelStore)
+local GetMessageReactionsStoreModule = require(AppChat.Stores.GetMessageReactionsStore)
+local GetMessageReactionsViewModelStoreModule = require(AppChat.Stores.GetMessageReactionsViewModelStore)
 local FFlagAppChatIncrementalPaginationProjectionModule = require(AppChat.Flags.FFlagAppChatIncrementalPaginationProjection)
 local FFlagAppChatSignalsMessageStoreModule = require(AppChat.Flags.FFlagAppChatSignalsMessageStore)
+local FFlagAppChatEnableReactions = SharedFlagsModule.FFlagAppChatEnableReactions
 
 local function _(p1, p2, p3, Hidden)
 	-- upvalues: MessageStatus (copy), MessageVisibility (copy)
@@ -78,8 +82,15 @@ local function buildFromLegacy(Message, ConversationId)
 end
 
 local function clearConversationStores(p1, ConversationId)
-	for _, value in p1.conversationMessageListStore.getOrderedIds(ConversationId) do
-		p1.conversationMessageStore.removeMessage(value)
+	-- upvalues: FFlagAppChatEnableReactions (copy), GetMessageReactionsStoreModule (copy), GetMessageReactionsViewModelStoreModule (copy)
+	local OrderedIds = p1.conversationMessageListStore.getOrderedIds(ConversationId)
+	
+	for _, orderedId in OrderedIds do
+		p1.conversationMessageStore.removeMessage(orderedId)
+	end
+	if FFlagAppChatEnableReactions then
+		GetMessageReactionsStoreModule(false).evictMessageReactions(OrderedIds)
+		GetMessageReactionsViewModelStoreModule(false).evictMessages(OrderedIds)
 	end
 	p1.conversationMessageViewModelStore.evictConversation(ConversationId)
 	p1.conversationMessageListStore.clearConversation(ConversationId)

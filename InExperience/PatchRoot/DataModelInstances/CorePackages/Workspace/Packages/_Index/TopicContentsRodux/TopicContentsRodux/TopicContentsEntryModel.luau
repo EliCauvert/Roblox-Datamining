@@ -4,7 +4,7 @@ local ParseBooleanStringFunction = require(Parent.DiscoveryUtils).parseBooleanSt
 local OmniRecommendationsContentType = require(Parent.DiscoveryTypes).OmniRecommendationsContentType
 local ResultModule = require(Parent.Result)
 local FFlagEnableTopSongsSort = require(Parent.SharedFlags).FFlagEnableTopSongsSort
-local FFlagLuaAppEnableHomepageOneByTwoTile = require(Parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile
+local FFlagLuaAppEnableNxMRoduxApportioning = require(Parent.SharedFlags).FFlagLuaAppEnableNxMRoduxApportioning
 local FFlagLuaAppEnableOneByTwoTileFunnelTelemetry = require(Parent.SharedFlags).FFlagLuaAppEnableOneByTwoTileFunnelTelemetry
 local FFlagLuaAppSponsoredGamePreviewVideo = require(Parent.SharedFlags).FFlagLuaAppSponsoredGamePreviewVideo
 local T = if FFlagLuaAppEnableOneByTwoTileFunnelTelemetry then {} else nil
@@ -148,7 +148,7 @@ if FFlagEnableTopSongsSort then
 	end
 end
 function TopicContentsEntryModelModule.fromOmniRecommendations(p1, RecommendationsRequestId)
-	-- upvalues: TopicContentsEntryModelModule (copy), FFlagLuaAppSponsoredGamePreviewVideo (copy), ParseBooleanStringFunction (copy), FFlagLuaAppEnableHomepageOneByTwoTile (copy), FFlagLuaAppEnableOneByTwoTileFunnelTelemetry (copy), T (copy), HttpService (copy), ResultModule (copy)
+	-- upvalues: TopicContentsEntryModelModule (copy), FFlagLuaAppSponsoredGamePreviewVideo (copy), ParseBooleanStringFunction (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), FFlagLuaAppEnableOneByTwoTileFunnelTelemetry (copy), T (copy), HttpService (copy), ResultModule (copy)
 	local NewTopicContentsEntryModel = TopicContentsEntryModelModule.new()
 	NewTopicContentsEntryModel.contentType = p1.contentType
 	NewTopicContentsEntryModel.contentId = tostring(p1.contentId)
@@ -183,10 +183,10 @@ function TopicContentsEntryModelModule.fromOmniRecommendations(p1, Recommendatio
 			local SponsoredGamePreviewVideoEligible = p1.contentMetadata.SponsoredGamePreviewVideoEligible
 			NewTopicContentsEntryModel.sponsoredGamePreviewVideoEligible = if SponsoredGamePreviewVideoEligible then ParseBooleanStringFunction(SponsoredGamePreviewVideoEligible) == true else false
 		end
-		NewTopicContentsEntryModel.primaryImageAssetId = if FFlagLuaAppEnableHomepageOneByTwoTile then p1.contentMetadata.PrimaryImageAssetId else nil
-		NewTopicContentsEntryModel.primaryVideoAssetId = if FFlagLuaAppEnableHomepageOneByTwoTile then p1.contentMetadata.PrimaryVideoAssetId else nil
-		NewTopicContentsEntryModel.attributionThumbnailAssetId = if FFlagLuaAppEnableHomepageOneByTwoTile then p1.contentMetadata.AttributionThumbnailAssetId else nil
-		NewTopicContentsEntryModel.clickoutUrl = if FFlagLuaAppEnableHomepageOneByTwoTile then p1.contentMetadata.ClickoutUrl else nil
+		NewTopicContentsEntryModel.primaryImageAssetId = if FFlagLuaAppEnableNxMRoduxApportioning then p1.contentMetadata.PrimaryImageAssetId else nil
+		NewTopicContentsEntryModel.primaryVideoAssetId = if FFlagLuaAppEnableNxMRoduxApportioning then p1.contentMetadata.PrimaryVideoAssetId else nil
+		NewTopicContentsEntryModel.attributionThumbnailAssetId = if FFlagLuaAppEnableNxMRoduxApportioning then p1.contentMetadata.AttributionThumbnailAssetId else nil
+		NewTopicContentsEntryModel.clickoutUrl = if FFlagLuaAppEnableNxMRoduxApportioning then p1.contentMetadata.ClickoutUrl else nil
 	else
 		NewTopicContentsEntryModel.adId = nil
 		NewTopicContentsEntryModel.isSponsored = false

@@ -1,5 +1,6 @@
 ﻿local SignalsModule = require(script:FindFirstAncestor("BuildExperience").Parent.Signals)
 local BuildExperienceLibraryImageClasses = game:DefineFastString("BuildExperienceLibraryImageClasses", "Decal,Texture,ImageLabel,ImageButton")
+local BuildExperienceLibrarySoundClasses = game:DefineFastString("BuildExperienceLibrarySoundClasses", "Sound")
 local BuildExperienceLibraryRoots = game:DefineFastString("BuildExperienceLibraryRoots", "Workspace,ReplicatedStorage,ReplicatedFirst,Lighting,SoundService,StarterGui,StarterPack,StarterPlayer")
 local BuildExperienceLibraryDescriptionAttribute = game:DefineFastString("BuildExperienceLibraryDescriptionAttribute", "SemanticDescription")
 local config = {
@@ -11,7 +12,8 @@ local config = {
 	Beam = "Texture",
 	Trail = "Texture"
 }
-local config1 = { Model = 1, Image = 2, Sound = 3 }
+local config1 = { Sound = "SoundId", AudioPlayer = "Asset" }
+local config2 = { Model = 1, Image = 2, Sound = 3 }
 
 local function parseList(Text: string)
 	local List = {}
@@ -27,10 +29,11 @@ local function parseList(Text: string)
 end
 
 return function(p1)
-	-- upvalues: parseList (copy), BuildExperienceLibraryImageClasses (copy), BuildExperienceLibraryRoots (copy), SignalsModule (copy), config (copy), BuildExperienceLibraryDescriptionAttribute (copy), config1 (copy)
+	-- upvalues: parseList (copy), BuildExperienceLibraryImageClasses (copy), BuildExperienceLibrarySoundClasses (copy), BuildExperienceLibraryRoots (copy), SignalsModule (copy), config (copy), config1 (copy), BuildExperienceLibraryDescriptionAttribute (copy), config2 (copy)
 	local P0 = p1 or game
 	local ParseListResult = parseList(BuildExperienceLibraryImageClasses)
-	local ParseListResult1 = parseList(BuildExperienceLibraryRoots)
+	local ParseListResult1 = parseList(BuildExperienceLibrarySoundClasses)
+	local ParseListResult2 = parseList(BuildExperienceLibraryRoots)
 	local Signal, Signal2 = SignalsModule.createSignal({})
 	local self = setmetatable({}, { __mode = "k" })
 	local Count = 0
@@ -70,7 +73,7 @@ return function(p1)
 	
 	return {
 		refresh = function()
-			-- upvalues: Ancestor (ref), self (copy), Count (ref), ParseListResult1 (copy), P0 (copy), ParseListResult (copy), config (upval), BuildExperienceLibraryDescriptionAttribute (upval), config1 (upval), sameItems (copy), Signal (copy), t (ref), Signal2 (copy)
+			-- upvalues: Ancestor (ref), self (copy), Count (ref), ParseListResult2 (copy), P0 (copy), ParseListResult (copy), config (upval), ParseListResult1 (copy), config1 (upval), BuildExperienceLibraryDescriptionAttribute (upval), config2 (upval), sameItems (copy), Signal (copy), t (ref), Signal2 (copy)
 			local List = {}
 			local t1 = {}
 			Ancestor = nil
@@ -109,7 +112,7 @@ return function(p1)
 				return nil
 			end
 			
-			for _, RootName in ParseListResult1 do
+			for _, RootName in ParseListResult2 do
 				local Success, Result = pcall(function()
 					-- upvalues: P0 (upval), RootName (copy)
 					return P0:GetService(RootName)
@@ -132,16 +135,17 @@ return function(p1)
 							end
 						end
 						local Entry = if table.find(ParseListResult, ClassName) then config[ClassName] else nil
+						local Entry1 = if table.find(ParseListResult1, ClassName) then config1[ClassName] else nil
 						local Kind = nil
 						
 						if ClassName == "Model" then
 							Kind = "Model"
-						elseif ClassName == "Sound" then
-							Kind = "Sound"
-							Entry = "SoundId"
-						else
+						elseif Entry1 == nil then
 							if Entry == nil then continue end
 							Kind = "Image"
+						else
+							Kind = "Sound"
+							Entry = Entry1
 						end
 						local ChildEntry = if Entry == nil then nil else Child[Entry]
 						
@@ -175,14 +179,14 @@ return function(p1)
 				t3[value] = string.lower(value.displayName)
 			end
 			table.sort(List, function(A, B): boolean
-				-- upvalues: config1 (upval), t3 (copy)
+				-- upvalues: config2 (upval), t3 (copy)
 				if A.kind == B.kind then
 					local Entry = t3[A]
 					local Entry1 = t3[B]
 					
 					return if Entry == Entry1 then if A.path == B.path then A.id < B.id else A.path < B.path else Entry < Entry1
 				else
-					return config1[A.kind] < config1[B.kind]
+					return config2[A.kind] < config2[B.kind]
 				end
 			end)
 			

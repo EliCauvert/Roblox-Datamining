@@ -9,17 +9,18 @@ local RobuxTransferFlowEventNameModule = require(CurrencyTransfers.Enums.RobuxTr
 local LogCurrencyTransferCounterModule = require(CurrencyTransfers.Utils.logCurrencyTransferCounter)
 local LogRobuxTransferFlowEventModule = require(CurrencyTransfers.Utils.logRobuxTransferFlowEvent)
 
-return function(p1, p2, p3, p4)
+return function(p1, p2, p3, p4, Enabled)
 	-- upvalues: LogCurrencyTransferCounterModule (copy), CurrencyTransferTelemetryModule (copy), SharedFlagsModule (copy), LogRobuxTransferFlowEventModule (copy), RobuxTransferFlowEventNameModule (copy), PromptStateModule (copy), GetTransferRequestByIdRequestModule (copy)
 	local SetPromptStateFunction = p1.setPromptState
 	local SetAmpRecourseActionsFunction = p1.setAmpRecourseActions
 	local SetAmpFeatureCheckFunction = p1.setAmpFeatureCheck
 	local SetTransferRetryOriginFunction = p1.setTransferRetryOrigin
+	local SetFreeTransfersExhaustedFunction = p1.setFreeTransfersExhausted
 	local SetRecipientFunction = p1.setRecipient
 	local GetTransferRequestIdFunction = p1.getTransferRequestId
 	
 	local function applyBlockState()
-		-- upvalues: LogCurrencyTransferCounterModule (upval), p1 (copy), CurrencyTransferTelemetryModule (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), RobuxTransferFlowEventNameModule (upval), p2 (copy), SetAmpRecourseActionsFunction (copy), p3 (copy), SetAmpFeatureCheckFunction (copy), p4 (copy), SetTransferRetryOriginFunction (copy), SetPromptStateFunction (copy), PromptStateModule (upval)
+		-- upvalues: LogCurrencyTransferCounterModule (upval), p1 (copy), CurrencyTransferTelemetryModule (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), RobuxTransferFlowEventNameModule (upval), p2 (copy), SetAmpRecourseActionsFunction (copy), p3 (copy), SetAmpFeatureCheckFunction (copy), p4 (copy), SetTransferRetryOriginFunction (copy), SetFreeTransfersExhaustedFunction (copy), Enabled (copy), SetPromptStateFunction (copy), PromptStateModule (upval)
 		LogCurrencyTransferCounterModule(p1, CurrencyTransferTelemetryModule.CurrencyTransferAmpRecourseRequiredCounter)
 		
 		if SharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
@@ -34,6 +35,7 @@ return function(p1, p2, p3, p4)
 		if p4 then
 			SetTransferRetryOriginFunction(p4)
 		end
+		SetFreeTransfersExhaustedFunction(Enabled == true)
 		SetPromptStateFunction(PromptStateModule.TransferBlocked)
 	end
 	

@@ -10,6 +10,7 @@ return {
 		-- upvalues: ReactModule (copy), ElevationLayerModule (copy), ElevationModule (copy), Context (copy)
 		local UseRefResult = ReactModule.useRef({
 			[ElevationLayerModule.Popover] = 0,
+			[ElevationLayerModule.Floating] = 0,
 			[ElevationLayerModule.Drawer] = 0,
 			[ElevationLayerModule.Sheet] = 0,
 			[ElevationLayerModule.Dialog] = 0,

@@ -21,6 +21,7 @@ local UseBuildPromptChipRequestsModule = require(BuildExperience.Chat.useBuildPr
 local UseBuildPromptDraftModule = require(BuildExperience.Chat.useBuildPromptDraft)
 local UseChatSessionCoreModule = require(BuildExperience.Chat.useChatSessionCore)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
+local FFlagBuildExperienceChatOpenIdModule = require(BuildExperience.Flags.FFlagBuildExperienceChatOpenId)
 local GetBuildPromptChipsStoreModule = require(BuildExperience.Stores.GetBuildPromptChipsStore)
 local GetBuildOverflowMenuStoreModule = require(BuildExperience.Stores.GetBuildOverflowMenuStore)
 local GetCreatorAgentResumeStoreModule = require(BuildExperience.Stores.GetCreatorAgentResumeStore)
@@ -234,8 +235,60 @@ local function usePromptChipViewModel(p1, Target, NoCanEditOnBuild)
 	}
 end
 
+local function useChatOpen(Target)
+	-- upvalues: ReactModule (copy), CreatorAgentChatModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	
+	if Target.chatOpenId ~= nil then
+		UseRefResult.current = Target.chatOpenId
+	end
+	local Current = UseRefResult.current
+	
+	if Current ~= nil then
+		CreatorAgentChatModule.chatOpenTelemetry.open(Current, Target.universeId)
+		
+		if Target.universeId ~= nil then
+			CreatorAgentChatModule.chatOpenTelemetry.setUniverseId(Current, Target.universeId)
+		end
+	end
+	ReactModule.useEffect(function()
+		-- upvalues: Current (copy), CreatorAgentChatModule (upval)
+		return if Current == nil then nil else function()
+			-- upvalues: CreatorAgentChatModule (upval), Current (copy)
+			CreatorAgentChatModule.chatOpenTelemetry.close(Current)
+		end
+	end, { Current })
+	
+	return Current
+end
+
+local function useChatOpenSessionLink(ChatOpenId, Target, CurrentSessionId)
+	-- upvalues: ReactModule (copy), CreatorAgentChatModule (copy), SendBuildExperienceEventModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local CurrentSessionId1 = CurrentSessionId or Target.sessionId
+	
+	if ChatOpenId ~= nil then
+		CreatorAgentChatModule.chatOpenTelemetry.setSessionId(ChatOpenId, CurrentSessionId1)
+	end
+	ReactModule.useEffect(function()
+		-- upvalues: ChatOpenId (copy), CurrentSessionId1 (copy), UseRefResult (copy), SendBuildExperienceEventModule (upval), Target (copy)
+		if ChatOpenId == nil or CurrentSessionId1 == nil then return end
+		local Current = UseRefResult.current
+		
+		if Current == nil or Current.chatOpenId ~= ChatOpenId or Current.sessionId ~= CurrentSessionId1 then
+			UseRefResult.current = { chatOpenId = ChatOpenId, sessionId = CurrentSessionId1 }
+			SendBuildExperienceEventModule("CHAT_SESSION_LINKED", {
+				universeId = Target.universeId,
+				placeId = Target.placeId,
+				conversationId = CurrentSessionId1,
+				chatOpenId = ChatOpenId
+			})
+		end
+	end, { ChatOpenId, CurrentSessionId1 })
+end
+
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), useUniverseSummary (copy), GetBuildOverflowMenuStoreModule (copy), GetCreatorAgentResumeStoreModule (copy), ReactModule (copy), BuildAppStorageKeyEngineFeature (copy), BuildAppStorageModule (copy), UserInputService (copy), GuiService (copy), PermissionsProtocol (copy), MessageBusService (copy), RealtimeMessageId (copy), Default (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), FFlagBuildExperienceModelPickerModule (copy), GetBuildModelSelectionStoreModule (copy), CreatorAgentChatModule (copy), FFlagBuildAdUpsellModule (copy), GetAdUpsellEventStoreModule (copy), UseChatSessionCoreModule (copy), usePromptChipViewModel (copy), UseBuildModelSelectionModule (copy), FFlagBuildExperienceAnalytics (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), UseBuildPromptDraftModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), FFlagBuildExperienceManageDevProductModule (copy), UseChatPlaytestFooterModule (copy), UniverseConfigurationModule (copy), FFlagEnableBuildAdPromotionModule (copy), UseCreatorCreditChatUpsellViewModelModule (copy), GameConfigurationLabelsModule (copy), FFlagBuildExperienceLibrary (copy), getResolvedSessionId (copy), UseAdUpsellChatViewModelModule (copy), config1 (copy), FFlagBuildAgentAdCampaignCardModule (copy), UseAgentAdCampaignChatViewModelModule (copy), config2 (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), config (copy), FFlagBuildExperienceAnswerFormModule (copy)
+	-- upvalues: UseTokensFunction (copy), useUniverseSummary (copy), GetBuildOverflowMenuStoreModule (copy), GetCreatorAgentResumeStoreModule (copy), ReactModule (copy), BuildAppStorageKeyEngineFeature (copy), BuildAppStorageModule (copy), UserInputService (copy), GuiService (copy), PermissionsProtocol (copy), MessageBusService (copy), RealtimeMessageId (copy), Default (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), FFlagBuildExperienceChatOpenIdModule (copy), useChatOpen (copy), FFlagBuildExperienceModelPickerModule (copy), GetBuildModelSelectionStoreModule (copy), CreatorAgentChatModule (copy), FFlagBuildAdUpsellModule (copy), GetAdUpsellEventStoreModule (copy), UseChatSessionCoreModule (copy), useChatOpenSessionLink (copy), usePromptChipViewModel (copy), UseBuildModelSelectionModule (copy), FFlagBuildExperienceAnalytics (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), UseBuildPromptDraftModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), FFlagBuildExperienceManageDevProductModule (copy), UseChatPlaytestFooterModule (copy), UniverseConfigurationModule (copy), FFlagEnableBuildAdPromotionModule (copy), UseCreatorCreditChatUpsellViewModelModule (copy), GameConfigurationLabelsModule (copy), FFlagBuildExperienceLibrary (copy), getResolvedSessionId (copy), UseAdUpsellChatViewModelModule (copy), config1 (copy), FFlagBuildAgentAdCampaignCardModule (copy), UseAgentAdCampaignChatViewModelModule (copy), config2 (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), config (copy), FFlagBuildExperienceAnswerFormModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseUniverseSummaryResult = useUniverseSummary(p1.target.universeId)
 	local BuildOverflowMenuStoreModule = GetBuildOverflowMenuStoreModule()
@@ -364,8 +417,9 @@ return function(p1)
 		NoCanEdit1 = not UseGamePermissionsModuleResult.canEdit
 		NoCanAdvertise = not UseGamePermissionsModuleResult.canAdvertise
 	end
+	local UseChatOpenResult = if FFlagBuildExperienceChatOpenIdModule then useChatOpen(p1.target) else nil
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: p1 (copy), UseUniverseSummaryResult (copy), FFlagBuildExperienceModelPickerModule (upval)
+		-- upvalues: p1 (copy), UseUniverseSummaryResult (copy), FFlagBuildExperienceModelPickerModule (upval), FFlagBuildExperienceChatOpenIdModule (upval), UseChatOpenResult (copy)
 		local ExperienceName = p1.target.experienceName
 		local Name = if UseUniverseSummaryResult == nil then nil else UseUniverseSummaryResult.name
 		
@@ -377,18 +431,23 @@ return function(p1)
 			isNewGameTarget = p1.target.isNewGameTarget,
 			modelSelectionDraftId = if FFlagBuildExperienceModelPickerModule then p1.target.modelSelectionDraftId else nil,
 			creatorName = p1.target.creatorName,
-			gameIcon = p1.target.gameIcon
+			gameIcon = p1.target.gameIcon,
+			chatOpenId = if FFlagBuildExperienceChatOpenIdModule then UseChatOpenResult else nil
 		}
 	end, {
 		p1.target.universeId, p1.target.placeId, p1.target.sessionId,
 		p1.target.experienceName, p1.target.isNewGameTarget,
 		p1.target.modelSelectionDraftId, p1.target.creatorName, p1.target.gameIcon,
-		UseUniverseSummaryResult
+		UseUniverseSummaryResult,
+		if FFlagBuildExperienceChatOpenIdModule then UseChatOpenResult else nil
 	})
 	local UseResult7 = ReactModule.useCallback(function(p2)
-		-- upvalues: FFlagBuildExperienceModelPickerModule (upval), UseMemoResult (copy), GetBuildModelSelectionStoreModule (upval), p1 (copy)
+		-- upvalues: FFlagBuildExperienceModelPickerModule (upval), UseMemoResult (copy), GetBuildModelSelectionStoreModule (upval), FFlagBuildExperienceChatOpenIdModule (upval), CreatorAgentChatModule (upval), p1 (copy)
 		if FFlagBuildExperienceModelPickerModule and UseMemoResult.modelSelectionDraftId ~= nil then
 			GetBuildModelSelectionStoreModule(false).promoteDraft(UseMemoResult.modelSelectionDraftId, p2.universeId)
+		end
+		if FFlagBuildExperienceChatOpenIdModule and UseMemoResult.chatOpenId ~= nil then
+			CreatorAgentChatModule.chatOpenTelemetry.setUniverseId(UseMemoResult.chatOpenId, p2.universeId)
 		end
 		if p1.onNavigateToResolvedTarget ~= nil then
 			p1.onNavigateToResolvedTarget({
@@ -399,15 +458,15 @@ return function(p1)
 				isNewGameTarget = UseMemoResult.isNewGameTarget,
 				modelSelectionDraftId = if FFlagBuildExperienceModelPickerModule then UseMemoResult.modelSelectionDraftId else nil,
 				creatorName = UseMemoResult.creatorName,
-				gameIcon = UseMemoResult.gameIcon
+				gameIcon = UseMemoResult.gameIcon,
+				chatOpenId = if FFlagBuildExperienceChatOpenIdModule then UseMemoResult.chatOpenId else nil
 			})
 		end
 	end, if FFlagBuildExperienceModelPickerModule then { p1.onNavigateToResolvedTarget, UseMemoResult } else {
-		p1.onNavigateToResolvedTarget,
-		UseMemoResult.experienceName,
-		UseMemoResult.isNewGameTarget,
-		UseMemoResult.creatorName,
-		UseMemoResult.gameIcon
+		p1.onNavigateToResolvedTarget, UseMemoResult.experienceName,
+		UseMemoResult.isNewGameTarget, UseMemoResult.creatorName,
+		UseMemoResult.gameIcon,
+		if FFlagBuildExperienceChatOpenIdModule then UseMemoResult.chatOpenId else nil
 	})
 	local UseStateResult11, UseStateResult2_10 = ReactModule.useState({ count = 0, reason = nil })
 	local UseResult8 = ReactModule.useCallback(function(OutOfCredits, Reason)
@@ -438,6 +497,10 @@ return function(p1)
 		end, { AdUpsellEventStoreModule }) else nil,
 		sendMessageWhen = not NoCanEditOnBuild
 	})
+	
+	if FFlagBuildExperienceChatOpenIdModule then
+		useChatOpenSessionLink(UseChatOpenResult, p1.target, UseChatSessionCoreModuleResult.currentSessionId)
+	end
 	local IsChatEmpty = #UseChatSessionCoreModuleResult.messages == 0
 	local UsePromptChipViewModelResult = usePromptChipViewModel(UseChatSessionCoreModuleResult, p1.target, NoCanEditOnBuild)
 	local PromptChips = UsePromptChipViewModelResult.promptChips

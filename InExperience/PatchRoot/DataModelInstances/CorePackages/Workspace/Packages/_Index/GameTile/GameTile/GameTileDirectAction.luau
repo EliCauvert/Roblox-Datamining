@@ -12,14 +12,14 @@ local IconSize = FoundationModule.Enums.IconSize
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local View = FoundationModule.View
 local GameTileOverflowMenuActionFunction = require(Parent.DiscoveryAnalytics).Events.gameTileOverflowMenuAction
-local FFlagLuaAppEnableHomepageOneByTwoTile = SharedFlagsModule.FFlagLuaAppEnableHomepageOneByTwoTile
+local FFlagLuaAppEnableNxMRoduxApportioning = SharedFlagsModule.FFlagLuaAppEnableNxMRoduxApportioning
 local FFlagLuaAppGameTileDirectActionTelemetry = SharedFlagsModule.FFlagLuaAppGameTileDirectActionTelemetry
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), CryoModule (copy), FFlagLuaAppGameTileDirectActionTelemetry (copy), GameTileOverflowMenuActionFunction (copy), FFlagLuaAppEnableHomepageOneByTwoTile (copy), UseGameTileActionsModule (copy), View (copy), IconButton (copy), IconSize (copy), ButtonVariant (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), CryoModule (copy), FFlagLuaAppGameTileDirectActionTelemetry (copy), GameTileOverflowMenuActionFunction (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), UseGameTileActionsModule (copy), View (copy), IconButton (copy), IconSize (copy), ButtonVariant (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseResult = if FFlagLuaAppGameTileDirectActionTelemetry then ReactModule.useCallback(function(AvailableMenuItems)
-		-- upvalues: GameTileOverflowMenuActionFunction (upval), p1 (copy), FFlagLuaAppEnableHomepageOneByTwoTile (upval)
+		-- upvalues: GameTileOverflowMenuActionFunction (upval), p1 (copy), FFlagLuaAppEnableNxMRoduxApportioning (upval)
 		GameTileOverflowMenuActionFunction({
 			actionType = "GameTileOverflowMenuItemActivated",
 			isDirectAction = true,
@@ -27,13 +27,13 @@ return function(p1)
 			sortId = p1.collectionId or "",
 			menuItem = AvailableMenuItems,
 			availableMenuItems = AvailableMenuItems,
-			contentType = if FFlagLuaAppEnableHomepageOneByTwoTile then p1.contentType else nil
+			contentType = if FFlagLuaAppEnableNxMRoduxApportioning then p1.contentType else nil
 		}, p1.appPage)
 	end, {
 		p1.appPage,
 		p1.universeId,
 		p1.collectionId,
-		if FFlagLuaAppEnableHomepageOneByTwoTile then p1.contentType else nil
+		if FFlagLuaAppEnableNxMRoduxApportioning then p1.contentType else nil
 	}) else nil
 	local UseGameTileActionsModuleResultEntry = UseGameTileActionsModule(CryoModule.Dictionary.join(p1, {
 		availableMenuItems = ReactModule.useMemo(function()

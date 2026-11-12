@@ -78,7 +78,8 @@
 			Ask = "Features.Transfers.Action.VPC.Ask"
 		},
 		SubscriptionUpsellContainer = {
-			UpsellSubscriptionTitle = "Features.Transfers.Title.UpsellSubscription"
+			UpsellSubscriptionTitle = "Features.Transfers.Title.UpsellSubscription",
+			FreeTransfersExhaustedTitle = "Features.Transfers.Title.FreeTransfersExhausted"
 		}
 	}
 }

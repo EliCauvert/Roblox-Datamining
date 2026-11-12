@@ -295,7 +295,7 @@ return {
 							local Current = UseRefResult6.current
 							local Current4 = UseRefResult.current
 							
-							if Current4 ~= nil and Current4.onRecordingStop ~= nil and (Current ~= nil and Current.startedAt ~= nil) then
+							if Current4 ~= nil and Current4.onRecordingStop ~= nil and Current ~= nil and Current.startedAt ~= nil then
 								Current4.onRecordingStop(Current.mode, P19, os.clock() - Current.startedAt, nil)
 							end
 							UseRefResult6.current = nil

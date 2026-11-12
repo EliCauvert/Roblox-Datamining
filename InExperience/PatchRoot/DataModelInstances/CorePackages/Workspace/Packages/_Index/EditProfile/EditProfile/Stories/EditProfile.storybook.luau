@@ -35,7 +35,7 @@ return {
 	name = "EditProfile",
 	storyRoot = EditProfile,
 	roact = ReactModule,
-	reactRoblox = require(Parent.Dev.ReactRoblox),
+	reactRoblox = require(Parent.ReactRoblox),
 	roactRodux = RoactRoduxModule,
 	mapDefinition = function(p1)
 		-- upvalues: CryoModule (copy), config (copy)

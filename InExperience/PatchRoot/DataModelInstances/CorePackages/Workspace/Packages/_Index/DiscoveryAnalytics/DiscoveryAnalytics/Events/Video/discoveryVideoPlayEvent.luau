@@ -4,8 +4,8 @@ local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventE
 local TModule = require(Parent.t)
 local GetVideoEventParamsValidatorModule = require(script.Parent.getVideoEventParamsValidator)
 local VideoEventInterfaceKeyModule = require(script.Parent.VideoEventInterfaceKey)
-local FFlagLuaAppEnableHomepageOneByTwoTile = require(Parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile
-local StrictInterfaceResult = if FFlagLuaAppEnableHomepageOneByTwoTile then TModule.strictInterface({
+local FFlagLuaAppEnableNxMRoduxApportioning = require(Parent.SharedFlags).FFlagLuaAppEnableNxMRoduxApportioning
+local StrictInterfaceResult = if FFlagLuaAppEnableNxMRoduxApportioning then TModule.strictInterface({
 	videoAssetId = TModule.string,
 	videoPlaybackSessionId = TModule.string,
 	gameSetTypeId = TModule.optional(TModule.string),
@@ -14,7 +14,7 @@ local StrictInterfaceResult = if FFlagLuaAppEnableHomepageOneByTwoTile then TMod
 	tileType = TModule.string,
 	contentType = TModule.optional(TModule.string)
 }) else nil
-local StrictInterfaceResult1 = if FFlagLuaAppEnableHomepageOneByTwoTile then TModule.strictInterface({
+local StrictInterfaceResult1 = if FFlagLuaAppEnableNxMRoduxApportioning then TModule.strictInterface({
 	videoAssetId = TModule.string,
 	videoPlaybackSessionId = TModule.string,
 	universeId = TModule.string,
@@ -38,8 +38,8 @@ local config = {
 		contentType = TModule.optional(TModule.string),
 		isMoment = if require(Parent.SharedFlags).FFlagLuaAppDiscoveryMomentVideoTelemetry then TModule.optional(TModule.boolean) else nil
 	}),
-	[VideoEventInterfaceKeyModule.OneByTwoTileAdLink] = if FFlagLuaAppEnableHomepageOneByTwoTile then StrictInterfaceResult else nil,
-	[VideoEventInterfaceKeyModule.OneByTwoTileGame] = if FFlagLuaAppEnableHomepageOneByTwoTile then StrictInterfaceResult1 else nil
+	[VideoEventInterfaceKeyModule.OneByTwoTileAdLink] = if FFlagLuaAppEnableNxMRoduxApportioning then StrictInterfaceResult else nil,
+	[VideoEventInterfaceKeyModule.OneByTwoTileGame] = if FFlagLuaAppEnableNxMRoduxApportioning then StrictInterfaceResult1 else nil
 }
 local config1 = {
 	eventName = "discoveryVideoPlay",

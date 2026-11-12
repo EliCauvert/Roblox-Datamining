@@ -1,82 +1,47 @@
-﻿local Parent = script:FindFirstAncestor("GenericChallenges").Parent
-local CoreGui = game:GetService("CoreGui")
-local ReactModule = require(Parent.React)
-local ReactRobloxModule = require(Parent.ReactRoblox)
+﻿local GenericChallenges = script:FindFirstAncestor("GenericChallenges")
+local ReactModule = require(GenericChallenges.Parent.React)
 local RoCaptchaChallengeModule = require(script.Parent.RoCaptchaChallenge)
-
-local function defaultShutdownGame()
-	game:Shutdown()
-end
-
-local function defaultMount(p1)
-	-- upvalues: ReactRobloxModule (copy), CoreGui (copy)
-	local Root = ReactRobloxModule.createRoot(CoreGui)
-	Root:render(p1)
-	
-	return function()
-		-- upvalues: Root (copy)
-		Root:unmount()
-	end
-end
-
-local t = {}
+local MountNativeChallengeModule = require(script.Parent.Parent.Common.mountNativeChallenge)
+local _ = require(GenericChallenges.Types.ChallengeMetadata)
 
 return function(p1)
-	-- upvalues: t (copy), defaultShutdownGame (copy), defaultMount (copy), ReactModule (copy), RoCaptchaChallengeModule (copy)
-	local ChallengeId = p1.challengeId
-	
-	if t[ChallengeId] then return end
-	t[ChallengeId] = true
-	local ShutdownGame = p1.shutdownGame or defaultShutdownGame
-	
-	local function v11() end
-	
-	local function _()
-		-- upvalues: t (upval), ChallengeId (copy), v11 (ref), ShutdownGame (copy)
-		t[ChallengeId] = nil
-		v11()
-		ShutdownGame()
-	end
-	
-	local Success, Result = pcall(p1.mount or defaultMount, (ReactModule.createElement(RoCaptchaChallengeModule, {
-		challengeId = ChallengeId,
-		challengeMetadata = p1.challengeMetadata,
-		experienceService = p1.experienceService,
-		desiredPlaceId = p1.desiredPlaceId,
-		logging = p1.logging,
-		onChallengeLoaded = p1.onChallengeLoaded,
-		onChallengeFailed = function()
-			-- upvalues: p1 (copy), t (upval), ChallengeId (copy), v11 (ref), ShutdownGame (copy)
-			if p1.onChallengeFailed then
-				p1.onChallengeFailed()
-			end
-			t[ChallengeId] = nil
-			v11()
-			ShutdownGame()
-		end,
-		onChallengeAbandoned = function()
-			-- upvalues: p1 (copy), t (upval), ChallengeId (copy), v11 (ref), ShutdownGame (copy)
-			if p1.onChallengeAbandoned then
-				p1.onChallengeAbandoned()
-			end
-			t[ChallengeId] = nil
-			v11()
-			ShutdownGame()
-		end,
-		onChallengeCompleted = function()
-			-- upvalues: p1 (copy), t (upval), ChallengeId (copy), v11 (ref), ShutdownGame (copy)
-			if p1.onChallengeCompleted then
-				p1.onChallengeCompleted()
-			end
-			t[ChallengeId] = nil
-			v11()
-			ShutdownGame()
+	-- upvalues: MountNativeChallengeModule (copy), ReactModule (copy), RoCaptchaChallengeModule (copy)
+	MountNativeChallengeModule({
+		shutdownOnTeardown = true,
+		challengeId = p1.challengeId,
+		mount = p1.mount,
+		shutdownGame = p1.shutdownGame,
+		render = function(Callback)
+			-- upvalues: ReactModule (upval), RoCaptchaChallengeModule (upval), p1 (copy)
+			return ReactModule.createElement(RoCaptchaChallengeModule, {
+				challengeId = p1.challengeId,
+				challengeMetadata = p1.challengeMetadata,
+				experienceService = p1.experienceService,
+				desiredPlaceId = p1.desiredPlaceId,
+				logging = p1.logging,
+				onChallengeLoaded = p1.onChallengeLoaded,
+				onChallengeFailed = function()
+					-- upvalues: p1 (upval), Callback (copy)
+					if p1.onChallengeFailed then
+						p1.onChallengeFailed()
+					end
+					Callback()
+				end,
+				onChallengeAbandoned = function()
+					-- upvalues: p1 (upval), Callback (copy)
+					if p1.onChallengeAbandoned then
+						p1.onChallengeAbandoned()
+					end
+					Callback()
+				end,
+				onChallengeCompleted = function()
+					-- upvalues: p1 (upval), Callback (copy)
+					if p1.onChallengeCompleted then
+						p1.onChallengeCompleted()
+					end
+					Callback()
+				end
+			})
 		end
-	})))
-	
-	if not Success then
-		t[ChallengeId] = nil
-		error(Result)
-	end
-	v11 = Result
+	})
 end

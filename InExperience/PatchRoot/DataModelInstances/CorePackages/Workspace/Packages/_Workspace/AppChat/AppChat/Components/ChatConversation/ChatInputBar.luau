@@ -3,7 +3,6 @@ local Parent = AppChat.Parent
 local UserInputService = game:GetService("UserInputService")
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local GetTextSizeFunction = require(Parent.Style).GetTextSize
 local Text = require(Parent.AppCommonLib).Text
 local BuilderIconsModule = require(Parent.BuilderIcons)
@@ -48,13 +47,13 @@ local config = {
 	eventLoggingFunc = require(Parent.LoggingProtocol).default.logRobloxTelemetryEvent
 }
 
-local function heightOfNLines(p1: number, BodyLargeFont, ScaledBaseSize, p2)
-	-- upvalues: FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy)
-	return if FoundationFontFaceMigration then GetTextSizeFunction(string.rep("A\n", p1 - 1), ScaledBaseSize, BodyLargeFont, Vector2.new(p2 or 10000, 10000)).Y else Text.GetTextHeight(string.rep("A\n", p1 - 1), BodyLargeFont, ScaledBaseSize, p2)
+local function _(p1: number, p2, p3, p4)
+	-- upvalues: GetTextSizeFunction (copy)
+	return GetTextSizeFunction(string.rep("A\n", p1 - 1), p3, p2, Vector2.new(p4 or 10000, 10000)).Y
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), ReactFocusNavigationModule (copy), FocusNavigationEventNameEnum (copy), UserInputService (copy), UseChatPagePaddingModule (copy), FFlagAppChatConsoleFocusFixesModule (copy), UseChatWideModeFocusModule (copy), FoundationModule (copy), UseStyleFunction (copy), FoundationFontFaceMigration (copy), heightOfNLines (copy), UseKeystrokeCollectionModule (copy), IsMessageValidModule (copy), Text (copy), SendButtonClickActionResultModule (copy), IsKeyCodePressedModule (copy), UseInputConnectionsModule (copy), GetTextSizeFunction (copy), UseIsSpatialFunction (copy), ChatInputBoxDisabledModule (copy), CallbackInputBox (copy), BuilderIconsModule (copy)
+	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), ReactFocusNavigationModule (copy), FocusNavigationEventNameEnum (copy), UserInputService (copy), UseChatPagePaddingModule (copy), FFlagAppChatConsoleFocusFixesModule (copy), UseChatWideModeFocusModule (copy), FoundationModule (copy), UseStyleFunction (copy), GetTextSizeFunction (copy), UseKeystrokeCollectionModule (copy), IsMessageValidModule (copy), Text (copy), SendButtonClickActionResultModule (copy), IsKeyCodePressedModule (copy), UseInputConnectionsModule (copy), UseIsSpatialFunction (copy), ChatInputBoxDisabledModule (copy), CallbackInputBox (copy), BuilderIconsModule (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
@@ -82,15 +81,15 @@ return ReactModule.memo(function(p1)
 	local UseChatWideModeFocusModuleResult = if FFlagAppChatConsoleFocusFixesModule then UseChatWideModeFocusModule() else nil
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseStyleResult = UseStyleFunction()
-	local BodyLargeFont = if FoundationFontFaceMigration then UseTokensResult.Typography.BodyLarge.Font else UseStyleResult.Font.Body.Font
+	local BodyLargeFont = UseTokensResult.Typography.BodyLarge.Font
 	local ScaledBaseSize = UseStyleResult.Font.BaseSize * UseStyleResult.Font.Body.RelativeSize
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: heightOfNLines (upval), BodyLargeFont (copy), ScaledBaseSize (copy), UseStateResult (copy)
-		return heightOfNLines(4, BodyLargeFont, ScaledBaseSize, UseStateResult)
+		-- upvalues: BodyLargeFont (copy), ScaledBaseSize (copy), UseStateResult (copy), GetTextSizeFunction (upval)
+		return GetTextSizeFunction(string.rep("A\n", 3), ScaledBaseSize, BodyLargeFont, Vector2.new(UseStateResult or 10000, 10000)).Y
 	end, { BodyLargeFont, ScaledBaseSize, UseStateResult })
 	local UseMemoResult1: number = ReactModule.useMemo(function()
-		-- upvalues: heightOfNLines (upval), BodyLargeFont (copy), ScaledBaseSize (copy)
-		return heightOfNLines(1, BodyLargeFont, ScaledBaseSize)
+		-- upvalues: BodyLargeFont (copy), ScaledBaseSize (copy), GetTextSizeFunction (upval)
+		return GetTextSizeFunction(string.rep("A\n", 0), ScaledBaseSize, BodyLargeFont, Vector2.new(10000, 10000)).Y
 	end, { BodyLargeFont, ScaledBaseSize })
 	local UseKeystrokeCollectionModuleResult = UseKeystrokeCollectionModule({
 		eventLoggingFunc = UnionResult.eventLoggingFunc,
@@ -165,8 +164,8 @@ return ReactModule.memo(function(p1)
 		onFocusLost = UnionResult.onFocusLost
 	})
 	local UseResult2 = ReactModule.useCallback(function(p2, X)
-		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), ScaledBaseSize (copy), UseTokensResult (copy), Text (upval), BodyLargeFont (copy), UseMemoResult (copy), UnionResult (copy)
-		local NewScaledBaseSize = ScaledBaseSize + math.min(if FoundationFontFaceMigration then GetTextSizeFunction(p2, ScaledBaseSize, UseTokensResult.Typography.BodyLarge.Font, Vector2.new(X, 10000)).Y else Text.GetTextHeight(p2, BodyLargeFont, ScaledBaseSize, X), UseMemoResult)
+		-- upvalues: GetTextSizeFunction (upval), ScaledBaseSize (copy), UseTokensResult (copy), UseMemoResult (copy), UnionResult (copy)
+		local NewScaledBaseSize = ScaledBaseSize + math.min(GetTextSizeFunction(p2, ScaledBaseSize, UseTokensResult.Typography.BodyLarge.Font, Vector2.new(X, 10000)).Y, UseMemoResult)
 		
 		if UnionResult.onHeightChanged then
 			UnionResult.onHeightChanged(NewScaledBaseSize)

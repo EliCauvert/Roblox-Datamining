@@ -23,6 +23,29 @@ local function _(p1): boolean
 	return p1.status == FriendsCallingParticipantStatus.Ringing
 end
 
+local _ = function()
+	-- upvalues: Players (copy)
+	local LocalPlayer = Players.LocalPlayer
+	
+	return if LocalPlayer then LocalPlayer.UserId else 0
+end
+
+local _ = function(p1): boolean
+	-- upvalues: FriendsCallingPhase (copy), Players (copy)
+	local InitiatorUserId = p1.initiatorUserId
+	local Flag = false
+	
+	if p1.phase == FriendsCallingPhase.Ringing then
+		Flag = false
+		
+		if InitiatorUserId ~= 0 then
+			local LocalPlayer = Players.LocalPlayer
+			Flag = InitiatorUserId ~= (if LocalPlayer then LocalPlayer.UserId else 0)
+		end
+	end
+	return Flag
+end
+
 local function getOtherParticipant(p1)
 	-- upvalues: Players (copy), FriendsCallingParticipantStatus (copy)
 	local LocalPlayer = Players.LocalPlayer
@@ -71,10 +94,11 @@ local function toCard(p2)
 end
 
 return function()
-	-- upvalues: GetFriendsCallingStoreModule (copy), UseSignalStateFunction (copy), ReactModule (copy), FriendsCallingPhase (copy), toCard (copy), config (copy), LoggerModule (copy)
+	-- upvalues: GetFriendsCallingStoreModule (copy), UseSignalStateFunction (copy), ReactModule (copy), FriendsCallingPhase (copy), toCard (copy), config (copy), Players (copy), LoggerModule (copy)
 	local FriendsCallingStoreModule = GetFriendsCallingStoreModule(false)
 	local UseSignalStateResult = UseSignalStateFunction(FriendsCallingStoreModule.getWindowView)
 	local UseSignalStateResult1 = UseSignalStateFunction(FriendsCallingStoreModule.getCall)
+	local UseSignalStateResult2 = UseSignalStateFunction(FriendsCallingStoreModule.getExpandCount)
 	local UseRefResult = ReactModule.useRef(nil)
 	local At = nil
 	
@@ -88,22 +112,43 @@ return function()
 		At = Config.at
 	end
 	local Card = if UseSignalStateResult1 then toCard(UseSignalStateResult1) else config
+	local HasCall = UseSignalStateResult.hasCall
+	
+	if HasCall then
+		local Flag = false
+		
+		if UseSignalStateResult1 ~= nil then
+			local InitiatorUserId = UseSignalStateResult1.initiatorUserId
+			Flag = false
+			
+			if UseSignalStateResult1.phase == FriendsCallingPhase.Ringing then
+				Flag = false
+				
+				if InitiatorUserId ~= 0 then
+					local LocalPlayer = Players.LocalPlayer
+					Flag = InitiatorUserId ~= (if LocalPlayer then LocalPlayer.UserId else 0)
+				end
+			end
+		end
+		HasCall = not Flag
+	end
 	local CallId = UseSignalStateResult1 and UseSignalStateResult1.callId or ""
 	local Name = if UseSignalStateResult1 then UseSignalStateResult1.phase.Name else ""
 	ReactModule.useEffect(function()
-		-- upvalues: LoggerModule (upval), UseSignalStateResult (copy), CallId (copy), Name (copy), At (ref)
-		LoggerModule:debug("{} - pip applied: enabled={}, session={}, callId={}, phase={}, connectedAt={}", script.Name, tostring(UseSignalStateResult.hasCall), UseSignalStateResult.session, CallId, Name, (tostring(At)))
+		-- upvalues: LoggerModule (upval), HasCall (copy), UseSignalStateResult (copy), CallId (copy), Name (copy), At (ref)
+		LoggerModule:debug("{} - pip applied: enabled={}, session={}, callId={}, phase={}, connectedAt={}", script.Name, tostring(HasCall), UseSignalStateResult.session, CallId, Name, (tostring(At)))
 	end, {
 		CallId,
 		At,
+		HasCall,
 		Name,
-		UseSignalStateResult.hasCall,
 		UseSignalStateResult.session
 	})
 	
 	return {
-		enabled = UseSignalStateResult.hasCall,
+		enabled = HasCall,
 		session = UseSignalStateResult.session,
+		expandCount = UseSignalStateResult2,
 		connectedAt = At,
 		callId = if UseSignalStateResult1 then UseSignalStateResult1.callId else nil,
 		participant = Card

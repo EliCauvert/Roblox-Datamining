@@ -19,7 +19,6 @@ local FFlagEnableLuaAppsFollowUserId = SharedFlagsModule.FFlagEnableLuaAppsFollo
 local FFlagEnableLuaAppsFollowUserId1 = game:GetEngineFeature("ExperienceServiceFollowUserIdEnabled") and FFlagEnableLuaAppsFollowUserId
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
 local function getStoreJoinState(p1)
 	-- upvalues: GetLoadingScreenStoreModule (copy)
@@ -36,7 +35,7 @@ local function getStoreServerStatusText(p1)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), GuiService (copy), SignalsReactModule (copy), getStoreJoinState (copy), getStoreServerStatusText (copy), FIntAutoJoinNewServerTimeMs (copy), RunService (copy), ExperienceService (copy), PlaceLauncherStateModule (copy), FFlagEnableLuaAppsFollowUserId1 (copy), LoadingScreenTelemetryModule (copy), QueuePositionEnabledEngineFeature (copy), FoundationModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), CoreGui (copy)
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), GuiService (copy), SignalsReactModule (copy), getStoreJoinState (copy), getStoreServerStatusText (copy), FIntAutoJoinNewServerTimeMs (copy), RunService (copy), ExperienceService (copy), PlaceLauncherStateModule (copy), FFlagEnableLuaAppsFollowUserId1 (copy), LoadingScreenTelemetryModule (copy), QueuePositionEnabledEngineFeature (copy), FoundationModule (copy), NormalizeFontFaceFunction (copy), CoreGui (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
 		friendsServerIsFullJoiningNewServer = "InGame.ConnectionError.Description.FriendsServerIsFullJoiningNewServer",
@@ -167,8 +166,7 @@ return ReactModule.memo(function(p1)
 				ZIndex = 2,
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Size = UDim2.new(1, 0, 0, 0),
-				Font = if FoundationFontFaceMigration then nil else UseTokensResult.Typography.TitleMedium.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.TitleMedium.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.TitleMedium.Font),
 				TextSize = UseTokensResult.Typography.TitleMedium.FontSize,
 				TextColor3 = UseTokensResult.Color.System.Contrast.Color3,
 				Text = UseSignalBindingResult,
@@ -187,7 +185,7 @@ return ReactModule.memo(function(p1)
 				value = UseBindingResult
 			})
 		}) else nil,
-		ActionContainer = if UseSignalStateResult == PlaceLauncherStateModule.Queued and UseStateResult and FFlagEnableLuaAppsFollowUserId1 and ExperienceService:GetFollowUserId() > 0 then ReactModule.createElement(FoundationModule.View, {
+		ActionContainer = if UseSignalStateResult == PlaceLauncherStateModule.Queued and (UseStateResult and FFlagEnableLuaAppsFollowUserId1 and ExperienceService:GetFollowUserId() > 0) then ReactModule.createElement(FoundationModule.View, {
 			LayoutOrder = 3,
 			tag = "col align-x-center align-y-bottom gap-xsmall auto-xy"
 		}, {

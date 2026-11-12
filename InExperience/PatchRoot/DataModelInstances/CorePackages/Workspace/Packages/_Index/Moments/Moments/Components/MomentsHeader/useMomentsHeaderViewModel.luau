@@ -10,6 +10,7 @@ local UseStatusBarHeightFunction = MomentsCommonModule.Hooks.useStatusBarHeight
 local UseIsTvRemoteDeviceFunction = require(Parent.RoactUtils).Hooks.useIsTvRemoteDevice
 local UseSetDrawerVisibleFunction = require(Parent.Drawer).Hooks.useSetDrawerVisible
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local FFlagMomentsCreateAvatarPosts = require(Parent.SharedFlags).FFlagMomentsCreateAvatarPosts
 local GetFFlagMomentsAndroidTvEnabledModule = require(Moments.Flags.GetFFlagMomentsAndroidTvEnabled)
 local FFlagMomentsFtuxTooltipCreateCopyModule = require(Moments.Flags.FFlagMomentsFtuxTooltipCreateCopy)
 local FFlagMomentsFixFeedForDeviceSafeInsetsModule = require(Moments.Flags.FFlagMomentsFixFeedForDeviceSafeInsets)
@@ -39,7 +40,7 @@ local function _()
 end
 
 return function(p1, p2, ShowHamburger)
-	-- upvalues: UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseSetDrawerVisibleFunction (copy), UseIsTvRemoteDeviceFunction (copy), UseCompositionLayoutFunction (copy), UseStatusBarHeightFunction (copy), FFlagMomentsFtuxTooltipCreateCopyModule (copy), UseLocalizationFunction (copy), config (copy), FFlagMomentsFollowingFeedModule (copy), config1 (copy), UseTrendingFeedLabelModule (copy), MomentsFeedTypeModule (copy), noop (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Players (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), ShouldUseDeviceSafeInsets (copy), GetFFlagMomentsAndroidTvEnabledModule (copy)
+	-- upvalues: UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseSetDrawerVisibleFunction (copy), UseIsTvRemoteDeviceFunction (copy), UseCompositionLayoutFunction (copy), UseStatusBarHeightFunction (copy), FFlagMomentsFtuxTooltipCreateCopyModule (copy), UseLocalizationFunction (copy), config (copy), FFlagMomentsFollowingFeedModule (copy), config1 (copy), UseTrendingFeedLabelModule (copy), MomentsFeedTypeModule (copy), noop (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Players (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), ShouldUseDeviceSafeInsets (copy), FFlagMomentsCreateAvatarPosts (copy), GetFFlagMomentsAndroidTvEnabledModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseSetDrawerVisibleResult = UseSetDrawerVisibleFunction()
@@ -57,6 +58,8 @@ return function(p1, p2, ShowHamburger)
 		FtuxTooltipText = UseLocalizationResult.text
 	end
 	local FeedTypeChips = nil
+	local ShowMyMomentsButton = false
+	local Size200 = 0
 	
 	if FFlagMomentsFollowingFeedModule then
 		local UseLocalizationResult = UseLocalizationFunction(config1)
@@ -85,6 +88,11 @@ return function(p1, p2, ShowHamburger)
 					end
 				}
 			}
+			ShowMyMomentsButton = true
+			
+			if p1.variant == "base" then
+				Size200 = UseTokensResult.Size.Size_200
+			end
 		end
 	end
 	local OnFtuxTooltipDismissed = p1.onFtuxTooltipDismissed or noop
@@ -122,7 +130,7 @@ return function(p1, p2, ShowHamburger)
 	local Margin: number = UseCompositionLayoutResult.margin
 	local HeaderPadding = {
 		left = UDim.new(0, (math.max(UseDeviceInsetsResult.left, Margin))),
-		right = UDim.new(0, (math.max(UseDeviceInsetsResult.right, Margin))),
+		right = UDim.new(0, (math.max(UseDeviceInsetsResult.right, Margin - Size200))),
 		top = UDim.new(0, UseStatusBarHeightResult)
 	}
 	local NewTop = UseDeviceInsetsResult.top + UseTokensResult.Size.Size_2000 + UseTokensResult.Size.Size_1600
@@ -137,6 +145,7 @@ return function(p1, p2, ShowHamburger)
 		ftuxTooltipTitle = Title,
 		ftuxTooltipText = FtuxTooltipText,
 		onCreateMomentButtonPressed = UseResult1,
+		onCreateAvatarMomentPressed = if FFlagMomentsCreateAvatarPosts then p1.onCreateAvatarMomentPressed else nil,
 		onFtuxTooltipClosed = UseResult,
 		onHamburgerPressed = UseResult2,
 		onBack = p1.onBack or noop,
@@ -149,6 +158,7 @@ return function(p1, p2, ShowHamburger)
 		showHamburger = ShowHamburger,
 		showCreateButton = p1.onCreatePressed ~= nil,
 		showNavigationMenu = p1.onNavigateToTrending ~= nil and p1.onNavigateToMyMoments ~= nil,
+		showMyMomentsButton = ShowMyMomentsButton,
 		headerHeight = Size1400,
 		headerPadding = HeaderPadding,
 		titleTextStyle = UseTokensResult.Color.Content.Emphasis,

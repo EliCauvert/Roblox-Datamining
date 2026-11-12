@@ -4,6 +4,7 @@ local ReactModule = require(CorePackages.Packages.React)
 local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
 local PlayerListModule = require(CorePackages.Workspace.Packages.PlayerList)
 local _ = require(CorePackages.Workspace.Packages.LeaderboardStore)
+local EnabledFunction = require(CorePackages.Workspace.Packages.Chrome).Enabled
 local FoundationModule = require(CorePackages.Packages.Foundation)
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local UseTokensFunction = FoundationModule.Hooks.useTokens
@@ -13,38 +14,58 @@ local EntryFrameView = PlayerListModule.Presentation.EntryFrameView
 local StatEntryContainerModule = require(Parent.Parent.Components.Container.StatEntryContainer)
 local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local FFlagPlayerListFixLeaderstatsStacking = SharedFlagsModule.FFlagPlayerListFixLeaderstatsStacking
-local FoundationFontFaceMigration = SharedFlagsModule.FFlagFontFacePlayerList and FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local FFlagFontFacePlayerList = SharedFlagsModule.FFlagFontFacePlayerList
 local FFlagEnableMobilePlayerListOnConsole = PlayerListModule.Flags.FFlagEnableMobilePlayerListOnConsole
+local FFlagPlayerListContrastingTeamText = PlayerListModule.Flags.FFlagPlayerListContrastingTeamText
+local GetContrastingContentStyleFunction = PlayerListModule.Common.getContrastingContentStyle
 local CellExtenderModule = require(Parent.Presentation.CellExtender)
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseLayoutValuesFunction (copy), UseStyleFunction (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), FFlagEnableMobilePlayerListOnConsole (copy), NormalizeFontFaceFunction (copy), ReactModule (copy), FFlagPlayerListFixLeaderstatsStacking (copy), SignalsReactModule (copy), StatEntryContainerModule (copy), EntryFrameView (copy), CellExtenderModule (copy)
+	-- upvalues: UseLayoutValuesFunction (copy), UseStyleFunction (copy), FFlagFontFacePlayerList (copy), FFlagPlayerListContrastingTeamText (copy), UseTokensFunction (copy), FFlagEnableMobilePlayerListOnConsole (copy), NormalizeFontFaceFunction (copy), EnabledFunction (copy), GetContrastingContentStyleFunction (copy), ReactModule (copy), FFlagPlayerListFixLeaderstatsStacking (copy), SignalsReactModule (copy), StatEntryContainerModule (copy), EntryFrameView (copy), CellExtenderModule (copy)
 	local UseLayoutValuesResult = UseLayoutValuesFunction()
 	local UseStyleResult = UseStyleFunction()
-	local UseTokensResult = if FoundationFontFaceMigration then UseTokensFunction() else nil
+	local UseTokensResult = if FFlagFontFacePlayerList or FFlagPlayerListContrastingTeamText then UseTokensFunction() else nil
 	local IsSmallTouchDevice = p1.isSmallTouchDevice or false
 	local IsDirectionalPreferred = p1.isDirectionalPreferred or false
 	local TextEmphasis = UseStyleResult.Theme.TextEmphasis
 	local TeamNameTextSize = if FFlagEnableMobilePlayerListOnConsole then UseLayoutValuesResult.TeamNameTextSize else UseStyleResult.Font.CaptionHeader.RelativeSize * UseStyleResult.Font.BaseSize
-	local NormalizeFontFaceResult = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.CaptionLarge.Font) else UseStyleResult.Font.CaptionHeader.Font
+	local NormalizeFontFaceResult = if FFlagFontFacePlayerList then NormalizeFontFaceFunction(UseTokensResult.Typography.CaptionLarge.Font) else UseStyleResult.Font.CaptionHeader.Font
 	
 	if IsDirectionalPreferred then
 		TextEmphasis = UseLayoutValuesResult.DefaultTextStyle
 		TeamNameTextSize = UseLayoutValuesResult.PlayerNameTextSize
-		NormalizeFontFaceResult = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseLayoutValuesResult.TeamEntryFont) else UseLayoutValuesResult.TeamEntryFont
+		NormalizeFontFaceResult = if FFlagFontFacePlayerList then NormalizeFontFaceFunction(UseLayoutValuesResult.TeamEntryFont) else UseLayoutValuesResult.TeamEntryFont
+	end
+	if FFlagPlayerListContrastingTeamText then
+		local ContrastingContentStyle = GetContrastingContentStyleFunction(p1.teamColor, if IsSmallTouchDevice then 0.5 elseif IsDirectionalPreferred then if UseLayoutValuesResult.BackgroundStyle then UseLayoutValuesResult.BackgroundStyle.Default.Transparency else 0 else UseLayoutValuesResult.TeamEntryBackgroundTransparency, {
+			Color3 = if EnabledFunction() then UseStyleResult.Theme.BackgroundUIContrast.Color else UseStyleResult.Theme.BackgroundContrast.Color,
+			Transparency = (UseLayoutValuesResult.OverrideBackgroundTransparency or 0) * UseStyleResult.Settings.PreferredTransparency
+		}, UseTokensResult.DarkMode.Content.Emphasis, UseTokensResult.LightMode.Content.Emphasis)
+		TextEmphasis = {
+			Color = ContrastingContentStyle.Color3,
+			Transparency = ContrastingContentStyle.Transparency,
+			StrokeColor = TextEmphasis.StrokeColor,
+			StrokeTransparency = TextEmphasis.StrokeTransparency
+		}
 	end
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: IsSmallTouchDevice (copy), UseStyleResult (copy), p1 (copy), IsDirectionalPreferred (copy), UseLayoutValuesResult (copy)
-		return if IsSmallTouchDevice then {
-			Color = p1.teamColor,
-			Transparency = UseStyleResult.Settings.PreferredTransparency * 0.5
-		} elseif IsDirectionalPreferred then {
-			Color = p1.teamColor,
-			Transparency = if UseLayoutValuesResult.BackgroundStyle then UseLayoutValuesResult.BackgroundStyle.Default.Transparency else 0
-		} else {
-			Color = p1.teamColor,
-			Transparency = UseLayoutValuesResult.TeamEntryBackgroundTransparency * UseStyleResult.Settings.PreferredTransparency
-		}
+		-- upvalues: IsSmallTouchDevice (copy), UseStyleResult (copy), p1 (copy), FFlagPlayerListContrastingTeamText (upval), IsDirectionalPreferred (copy), UseLayoutValuesResult (copy)
+		if IsSmallTouchDevice then
+			local Settings = UseStyleResult.Settings
+			
+			return {
+				Color = p1.teamColor,
+				Transparency = if FFlagPlayerListContrastingTeamText then 0.5 else Settings.PreferredTransparency * 0.5
+			}
+		else
+			return if IsDirectionalPreferred then {
+				Color = p1.teamColor,
+				Transparency = if UseLayoutValuesResult.BackgroundStyle then UseLayoutValuesResult.BackgroundStyle.Default.Transparency else 0
+			} else {
+				Color = p1.teamColor,
+				Transparency = if FFlagPlayerListContrastingTeamText then UseLayoutValuesResult.TeamEntryBackgroundTransparency else UseLayoutValuesResult.TeamEntryBackgroundTransparency * UseStyleResult.Settings.PreferredTransparency
+			}
+		end
 	end, {
 		IsSmallTouchDevice,
 		IsDirectionalPreferred,
@@ -68,8 +89,8 @@ return ReactModule.memo(function(p1)
 				BackgroundTransparency = 1,
 				Size = UDim2.new(0, UseLayoutValuesResult.PlayerNameSizeXMobile, 1, 0),
 				TextXAlignment = Enum.TextXAlignment.Left,
-				Font = if FoundationFontFaceMigration then nil else NormalizeFontFaceResult,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceResult else nil,
+				Font = if FFlagFontFacePlayerList then nil else NormalizeFontFaceResult,
+				FontFace = if FFlagFontFacePlayerList then NormalizeFontFaceResult else nil,
 				TextSize = TeamNameTextSize,
 				TextColor3 = TextEmphasis.Color,
 				TextStrokeTransparency = TextEmphasis.StrokeTransparency,
@@ -153,8 +174,8 @@ return ReactModule.memo(function(p1)
 						Position = UDim2.new(0, 0, 0, 0),
 						Size = UDim2.new(1, 0, 1, 0),
 						TextXAlignment = Enum.TextXAlignment.Left,
-						Font = if FoundationFontFaceMigration then nil else NormalizeFontFaceResult,
-						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceResult else nil,
+						Font = if FFlagFontFacePlayerList then nil else NormalizeFontFaceResult,
+						FontFace = if FFlagFontFacePlayerList then NormalizeFontFaceResult else nil,
 						TextSize = TeamNameTextSize,
 						TextColor3 = TextEmphasis.Color,
 						TextStrokeTransparency = TextEmphasis.StrokeTransparency,
@@ -185,7 +206,7 @@ return ReactModule.memo(function(p1)
 					})
 				end
 			end
-		elseif p1.gameStatsCount and p1.teamStatsCount and p1.gameStatsCount > 0 and p1.teamStatsCount >= 0 then
+		elseif p1.gameStatsCount and (p1.teamStatsCount and (p1.gameStatsCount > 0 and p1.teamStatsCount >= 0)) then
 			p1.gameStats.iterateData(function(StatName, p2)
 				-- upvalues: MaxLeaderstats (copy), p1 (copy), Elements1 (copy), ReactModule (upval), StatEntryContainerModule (upval), UseMemoResult (copy), OverlayStyle (copy), TextEmphasis (ref)
 				if MaxLeaderstats >= p2.order(false) then

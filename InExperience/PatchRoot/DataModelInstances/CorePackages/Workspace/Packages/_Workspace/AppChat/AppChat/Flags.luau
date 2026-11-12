@@ -1,5 +1,4 @@
 ﻿return {
-	getFFlagEnableModularExternalNavigationHandler = require(script.getFFlagEnableModularExternalNavigationHandler),
 	getFFlagEnableStandaloneAppChat = require(script.getFFlagEnableStandaloneAppChat),
 	getFFlagChatTabHideGroupsLinkOnVR = require(script.getFFlagChatTabHideGroupsLinkOnVR),
 	FFlagAppChatConversationStore = require(script.FFlagAppChatConversationStore),

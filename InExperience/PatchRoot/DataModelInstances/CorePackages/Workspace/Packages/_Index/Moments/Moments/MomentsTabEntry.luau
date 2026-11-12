@@ -12,6 +12,7 @@ local _ = require(Moments.Stores.GetDeepLinkStore.createDeepLinkStore)
 local CreateMomentsStoreModule = require(Moments.Stores.GetMomentsStore.createMomentsStore)
 local GetImmersiveChromeStoreModule = require(Moments.Stores.GetImmersiveChromeStore)
 local FFlagMomentsEmojiSetsApiModule = require(Moments.Flags.FFlagMomentsEmojiSetsApi)
+local FFlagMomentsFixDeepLinkRefocusStaleNavigationModule = require(Moments.Flags.FFlagMomentsFixDeepLinkRefocusStaleNavigation)
 local FStringMomentsExperienceJoinActionTextIxpLayerModule = require(Moments.Flags.FStringMomentsExperienceJoinActionTextIxpLayer)
 local UseMomentsTabIsVisibleModule = require(Moments.Hooks.useMomentsTabIsVisible)
 local ConsumeEntrySourceModule = require(Moments.Utils.consumeEntrySource)
@@ -32,6 +33,7 @@ local MomentsSurfaceLoadManager = MomentsCommonModule.Performance.MomentsSurface
 local UseMomentsGatingFunction = MomentsCommonModule.Hooks.useMomentsGating
 local CanRenderNativeMomentsFunction = MomentsCommonModule.canRenderNativeMoments
 local MomentsSessionHeartbeats = {}
+local FFlagMomentsCreateAvatarPosts = SharedFlagsModule.FFlagMomentsCreateAvatarPosts
 local FFlagMomentsAvatarLookTryOn = SharedFlagsModule.FFlagMomentsAvatarLookTryOn
 local FFlagMomentsCommentDeepLinks = SharedFlagsModule.FFlagMomentsCommentDeepLinks
 local ShareLinkTargetIdType = require(Parent.MomentsTypes).Enums.ShareLinkTargetIdType
@@ -280,7 +282,7 @@ local _ = function(p3, p4, p5, p6)
 end
 
 local function MomentsTabEntry(Current)
-	-- upvalues: ReactModule (copy), CreateMomentsStoreModule (copy), UseResetTeleportingOnGameLeaveModule (copy), getDeepLinkRequest (copy), GetDeepLinkStoreModule (copy), FFlagMomentsCommentDeepLinks (copy), RobloxAppEventsModule (copy), AppPage (copy), ConsumeEntrySourceModule (copy), LogMomentsLayerExposureFunction (copy), FStringMomentsExperienceJoinActionTextIxpLayerModule (copy), Moments (copy), FFlagMomentsEmojiSetsApiModule (copy), MomentsGetMomentsReactionsStoreModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Analytics (copy), MomentsSessionHeartbeats (copy), SessionManager (copy), FunnelEventNames (copy), FireFunnelAnalyticsEventFunction (copy), MomentsSurfaceLoadManager (copy), GetExperienceDetailsSheetStoreModule (copy), GetImmersiveChromeStoreModule (copy), RoactNavigationModule (copy), UseMomentsTabIsVisibleModule (copy), FFlagMomentsAvatarLookTryOn (copy), UseMomentsGatingFunction (copy), CanRenderNativeMomentsFunction (copy), MomentsHostShellModule (copy), InnerNavigatorModule (copy)
+	-- upvalues: ReactModule (copy), CreateMomentsStoreModule (copy), UseResetTeleportingOnGameLeaveModule (copy), getDeepLinkRequest (copy), GetDeepLinkStoreModule (copy), FFlagMomentsCommentDeepLinks (copy), RobloxAppEventsModule (copy), AppPage (copy), ConsumeEntrySourceModule (copy), LogMomentsLayerExposureFunction (copy), FStringMomentsExperienceJoinActionTextIxpLayerModule (copy), Moments (copy), FFlagMomentsEmojiSetsApiModule (copy), MomentsGetMomentsReactionsStoreModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Analytics (copy), MomentsSessionHeartbeats (copy), SessionManager (copy), FunnelEventNames (copy), FireFunnelAnalyticsEventFunction (copy), MomentsSurfaceLoadManager (copy), GetExperienceDetailsSheetStoreModule (copy), GetImmersiveChromeStoreModule (copy), RoactNavigationModule (copy), FFlagMomentsFixDeepLinkRefocusStaleNavigationModule (copy), UseMomentsTabIsVisibleModule (copy), FFlagMomentsCreateAvatarPosts (copy), FFlagMomentsAvatarLookTryOn (copy), UseMomentsGatingFunction (copy), CanRenderNativeMomentsFunction (copy), MomentsHostShellModule (copy), InnerNavigatorModule (copy)
 	local UseRefResult = ReactModule.useRef(Current)
 	UseRefResult.current = Current
 	local UseRefResult1 = ReactModule.useRef(false)
@@ -371,15 +373,15 @@ local function MomentsTabEntry(Current)
 		end
 	end, {})
 	ReactModule.useEffect(function()
-		-- upvalues: Current (copy), UseResult (copy), UseResult2 (copy), UseResult1 (copy), RoactNavigationModule (upval), getDeepLinkRequest (upval), UseRefResult4 (copy), GetDeepLinkStoreModule (upval), FFlagMomentsCommentDeepLinks (upval), RobloxAppEventsModule (upval), AppPage (upval)
+		-- upvalues: Current (copy), UseResult (copy), UseResult2 (copy), UseResult1 (copy), RoactNavigationModule (upval), FFlagMomentsFixDeepLinkRefocusStaleNavigationModule (upval), UseRefResult (copy), getDeepLinkRequest (upval), UseRefResult4 (copy), GetDeepLinkStoreModule (upval), FFlagMomentsCommentDeepLinks (upval), RobloxAppEventsModule (upval), AppPage (upval)
 		local Navigation = Current.navigation
 		
 		if Navigation and Navigation.addListener then
 			UseResult()
 			UseResult2()
 			local AddListenerResult = Navigation.addListener(RoactNavigationModule.Events.DidFocus, function()
-				-- upvalues: getDeepLinkRequest (upval), Navigation (copy), UseRefResult4 (upval), GetDeepLinkStoreModule (upval), FFlagMomentsCommentDeepLinks (upval), RobloxAppEventsModule (upval), AppPage (upval), UseResult (upval), UseResult2 (upval)
-				local DeepLinkRequest = getDeepLinkRequest(Navigation)
+				-- upvalues: FFlagMomentsFixDeepLinkRefocusStaleNavigationModule (upval), UseRefResult (upval), Navigation (copy), getDeepLinkRequest (upval), UseRefResult4 (upval), GetDeepLinkStoreModule (upval), FFlagMomentsCommentDeepLinks (upval), RobloxAppEventsModule (upval), AppPage (upval), UseResult (upval), UseResult2 (upval)
+				local DeepLinkRequest = getDeepLinkRequest(if FFlagMomentsFixDeepLinkRefocusStaleNavigationModule then UseRefResult.current.navigation else Navigation)
 				local IsCurrentMatch: boolean = DeepLinkRequest ~= nil and UseRefResult4.current == DeepLinkRequest.key
 				
 				if DeepLinkRequest ~= nil and not IsCurrentMatch then
@@ -419,7 +421,7 @@ local function MomentsTabEntry(Current)
 		end
 	end, { UseMomentsTabIsVisibleModuleResult, UseResult2 })
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: Current (copy), GetImmersiveChromeStoreModule (upval), FFlagMomentsAvatarLookTryOn (upval)
+		-- upvalues: Current (copy), GetImmersiveChromeStoreModule (upval), FFlagMomentsCreateAvatarPosts (upval), FFlagMomentsAvatarLookTryOn (upval)
 		local OpenProfileFunction = Current.openProfile
 		local OpenOwnMomentsFunction = Current.openOwnMoments
 		
@@ -434,14 +436,17 @@ local function MomentsTabEntry(Current)
 				GetImmersiveChromeStoreModule(false).setOverlayCovering(true)
 				OpenOwnMomentsFunction()
 			end else nil,
+			openAvatarMomentsCreation = if FFlagMomentsCreateAvatarPosts then Current.openAvatarMomentsCreation else nil,
 			openMomentsFeedReport = Current.openMomentsFeedReport,
 			openAvatarLookTryOn = if FFlagMomentsAvatarLookTryOn then Current.openAvatarLookTryOn else nil,
 			openMomentCommentReport = Current.openMomentCommentReport,
 			openBlockUser = Current.openBlockUser
 		}
 	end, {
-		Current.openProfile, Current.openOwnMoments, Current.openMomentsFeedReport,
-		Current.openMomentCommentReport, Current.openBlockUser,
+		Current.openProfile, Current.openOwnMoments,
+		if FFlagMomentsCreateAvatarPosts then Current.openAvatarMomentsCreation else nil,
+		Current.openMomentsFeedReport, Current.openMomentCommentReport,
+		Current.openBlockUser,
 		if FFlagMomentsAvatarLookTryOn then Current.openAvatarLookTryOn else nil
 	})
 	
@@ -449,6 +454,7 @@ local function MomentsTabEntry(Current)
 		sessionStore = UseRefResult3.current,
 		openProfile = UseMemoResult.openProfile,
 		openOwnMoments = UseMemoResult.openOwnMoments,
+		openAvatarMomentsCreation = if FFlagMomentsCreateAvatarPosts then UseMemoResult.openAvatarMomentsCreation else nil,
 		openMomentsFeedReport = UseMemoResult.openMomentsFeedReport,
 		openAvatarLookTryOn = if FFlagMomentsAvatarLookTryOn then UseMemoResult.openAvatarLookTryOn else nil,
 		openMomentCommentReport = UseMemoResult.openMomentCommentReport,

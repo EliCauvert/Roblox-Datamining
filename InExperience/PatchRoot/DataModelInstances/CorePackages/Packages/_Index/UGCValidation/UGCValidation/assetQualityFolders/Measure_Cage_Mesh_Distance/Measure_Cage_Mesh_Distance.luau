@@ -11,7 +11,6 @@ return {
 		ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
 		ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH
 	},
-	fflag = require(Parent.flags.getFFlagUGCValidateAQCageQualityLC),
 	run = function(p1, p2)
 		-- upvalues: UGCValidationCageMeshDistanceMaxCageMeshDistanceLC (copy), ErrorSourceStringsModule (copy), UGCValidationCageMeshDistanceMaxNegativeSDFThresholdLC (copy), GetFFlagUGCValidateAQScoreWarningsModule (copy)
 		local HandleOuterCage = p2.aqsSummaryData.Measure_Cage_Mesh_Distance.Handle_OuterCage

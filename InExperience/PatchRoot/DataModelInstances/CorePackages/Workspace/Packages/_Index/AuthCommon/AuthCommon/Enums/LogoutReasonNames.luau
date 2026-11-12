@@ -18,5 +18,6 @@
 	MultiStepSignupAccountSwitchNotAllowed = "LuaLogout-Multi-Step-Signup-Account-Switch-Not-Allowed",
 	VngUserAgreement = "LuaLogout-VNG-User-Agreement",
 	AccountLock = "LuaLogout-Account-Lock",
-	ManageAccountsRemoveCurrentUser = "LuaLogout-Manage-Accounts-Remove-Current-User"
+	ManageAccountsRemoveCurrentUser = "LuaLogout-Manage-Accounts-Remove-Current-User",
+	PioneerLeaveExperience = "LuaLogout-Pioneer-Leave-Experience"
 }

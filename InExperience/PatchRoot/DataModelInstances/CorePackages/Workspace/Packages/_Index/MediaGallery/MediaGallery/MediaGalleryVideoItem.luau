@@ -105,7 +105,7 @@ return ReactModule.memo(function(p1)
 			}),
 			onVideoProgressChanged = OnVideoProgressChanged,
 			onVideoEnded = OnVideoEnded,
-			onVideoLoadFailed = if FFlagLuaAppVideoLoadFailureFallback and (NoCurrentIndex and not p1.isMediaGalleryOccluded) then p1.onVideoLoadFailed else nil,
+			onVideoLoadFailed = if FFlagLuaAppVideoLoadFailureFallback and NoCurrentIndex and not p1.isMediaGalleryOccluded then p1.onVideoLoadFailed else nil,
 			toggleVideoPlaybackSignal = ToggleVideoPlaybackSignal,
 			toggleMuteSignal = ToggleMuteSignal,
 			onMutedChanged = OnMutedChanged,

@@ -1,5 +1,6 @@
 ﻿local Parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
 local FlyoutSidePanelIXP = require(Parent.SharedExperimentDefinition).FlyoutSidePanelIXP
+local FFlagFlyoutAddAdjustScreenModule = require(script.Parent.Flags.FFlagFlyoutAddAdjustScreen)
 
 return {
 	FLYOUT_SIDE_PANEL_WIDTH = 351,
@@ -16,7 +17,9 @@ return {
 			"Favorites", "ContinuePlaying",
 			if require(Parent.SharedFlags).FFlagEnableChartsInFlyout and FlyoutSidePanelIXP.isChartsInFlyoutEnabled() then "Charts" else nil,
 			"Connections", "Communities", "Inventory", "Trades", "Messages", "Blackbird",
-			"Premium", "GiftCards", "Redeem", "Settings", "HelpAndSafety"
+			"Premium", "GiftCards", "Redeem", "Settings",
+			if FFlagFlyoutAddAdjustScreenModule then "AdjustScreen" else nil,
+			"HelpAndSafety"
 		},
 		AdditionalNavigation = { "Events", "Moments", "Learn", "CreateGames" }
 	}

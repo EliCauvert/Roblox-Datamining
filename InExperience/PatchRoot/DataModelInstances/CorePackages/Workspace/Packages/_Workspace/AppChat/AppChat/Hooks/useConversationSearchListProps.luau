@@ -71,32 +71,32 @@ local function buildSearchItemList(Items, p1, p2)
 	return JoinResults
 end
 
-return function(p3, p4, p5, p6, Callback)
+return function(p3, p4, p5, p6, Callback, p7)
 	-- upvalues: UseConversationSearchModule (copy), UseDispatchFunction (copy), UseStoreFunction (copy), ReactModule (copy), GetConversationStoreModule (copy), SearchIntroducedConversationIdsModule (copy), SignalsExperimentalModule (copy), ReceivedConversationModule (copy), ConversationRoduxSeedModule (copy), FetchLatestConversationDetailsModule (copy), t (copy), buildSearchItemList (copy), FFlagAppChatSearchSessionTelemetryModule (copy), UseChatSearchResultsTelemetryModule (copy), t1 (copy), RoactPaginator (copy)
-	local UseConversationSearchModuleResult = UseConversationSearchModule(p3, p4)
+	local UseConversationSearchModuleResult = UseConversationSearchModule(p3, p4, p7)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseStoreResult = UseStoreFunction()
-	local UseResult = ReactModule.useCallback(function(p7)
+	local UseResult = ReactModule.useCallback(function(p8)
 		-- upvalues: GetConversationStoreModule (upval), UseStoreResult (copy), SearchIntroducedConversationIdsModule (upval), SignalsExperimentalModule (upval), UseDispatchResult (copy), ReceivedConversationModule (upval), ConversationRoduxSeedModule (upval), FetchLatestConversationDetailsModule (upval), Callback (copy)
-		local Conversation = GetConversationStoreModule(false).getConversation(p7, false)
+		local Conversation = GetConversationStoreModule(false).getConversation(p8, false)
 		local State = UseStoreResult:getState()
-		local NoConversation: boolean = Conversation ~= nil and State.ChatAppReducer.Conversations[p7] == nil
+		local NoConversation: boolean = Conversation ~= nil and State.ChatAppReducer.Conversations[p8] == nil
 		
-		if NoConversation or SearchIntroducedConversationIdsModule.has(p7) then
+		if NoConversation or SearchIntroducedConversationIdsModule.has(p8) then
 			SignalsExperimentalModule.batch(function()
-				-- upvalues: NoConversation (copy), UseDispatchResult (upval), ReceivedConversationModule (upval), ConversationRoduxSeedModule (upval), Conversation (copy), SearchIntroducedConversationIdsModule (upval), p7 (copy)
+				-- upvalues: NoConversation (copy), UseDispatchResult (upval), ReceivedConversationModule (upval), ConversationRoduxSeedModule (upval), Conversation (copy), SearchIntroducedConversationIdsModule (upval), p8 (copy)
 				if NoConversation then
 					UseDispatchResult(ReceivedConversationModule(ConversationRoduxSeedModule.normalizeStoreConversationForRodux(Conversation)))
 				end
-				SearchIntroducedConversationIdsModule.remove(p7)
+				SearchIntroducedConversationIdsModule.remove(p8)
 			end)
 			
-			if not ConversationRoduxSeedModule.isFriendsPlaceholderConversationId(p7) then
-				UseDispatchResult(FetchLatestConversationDetailsModule(p7))
+			if not ConversationRoduxSeedModule.isFriendsPlaceholderConversationId(p8) then
+				UseDispatchResult(FetchLatestConversationDetailsModule(p8))
 			end
 		end
 		if Callback ~= nil then
-			Callback(p7)
+			Callback(p8)
 		end
 	end, { UseDispatchResult, Callback, UseStoreResult })
 	local UseMemoResult = ReactModule.useMemo(function()

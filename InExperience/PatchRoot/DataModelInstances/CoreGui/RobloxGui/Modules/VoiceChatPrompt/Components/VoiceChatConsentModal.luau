@@ -1,13 +1,10 @@
 ﻿local CorePackages = game:GetService("CorePackages")
-local TextService = game:GetService("TextService")
 local RoactModule = require(CorePackages.Packages.Roact)
 local ReactModule = require(CorePackages.Packages.React)
 local TModule = require(CorePackages.Packages.t)
 local UIBloxModule = require(CorePackages.Packages.UIBlox)
-local FoundationModule = require(CorePackages.Packages.Foundation)
-local Checkbox = FoundationModule.Checkbox
+local Checkbox = require(CorePackages.Packages.Foundation).Checkbox
 local GetTextSizeFunction = require(CorePackages.Workspace.Packages.Style).GetTextSize
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local Button = UIBloxModule.App.Button.Button
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 local _ = UIBloxModule.App.ImageSet.Images
@@ -30,18 +27,12 @@ local WrapResult = require(CorePackages.Workspace.Packages.ArgCheck).wrap(TModul
 }))
 
 local function VoiceChatConsentModal(p1, p2)
-	-- upvalues: WrapResult (copy), ReactModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), FeatureSettingsHubPromptSubtitleSelectingTurnOn (copy), GetFFlagSupportGamepadNavInVoiceModalsFunction (copy), RoactModule (copy), UIBloxModule (copy), AssetsModule (copy), GetFFlagDisablePVUpsellDataConsentFunction (copy), Checkbox (copy), Button (copy), ButtonType (copy), FeatureSettingsHubActionNotNow (copy), FeatureSettingsHubActionTurnOn (copy)
+	-- upvalues: WrapResult (copy), ReactModule (copy), GetTextSizeFunction (copy), FeatureSettingsHubPromptSubtitleSelectingTurnOn (copy), GetFFlagSupportGamepadNavInVoiceModalsFunction (copy), RoactModule (copy), UIBloxModule (copy), AssetsModule (copy), GetFFlagDisablePVUpsellDataConsentFunction (copy), Checkbox (copy), Button (copy), ButtonType (copy), FeatureSettingsHubActionNotNow (copy), FeatureSettingsHubActionTurnOn (copy)
 	assert(WrapResult(p1))
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local HeaderFont = p1.promptStyle.Font.Header1.Font
-	local ScaledRelativeSize = p1.promptStyle.Font.Header1.RelativeSize * p1.promptStyle.Font.BaseSize
-	local YOffset = 20 + (if FoundationFontFaceMigration then GetTextSizeFunction(p1.titleText, ScaledRelativeSize, HeaderFont, Vector2.new(325, 1e999), { addTemporaryPadding = false }).Y else TextService:GetTextSize(p1.titleText, ScaledRelativeSize, HeaderFont, Vector2.new(325, 1e999)).Y)
-	local BodyFont = p1.promptStyle.Font.Body.Font
-	local ScaledRelativeSize1 = p1.promptStyle.Font.Body.RelativeSize * p1.promptStyle.Font.BaseSize
-	local YOffset1 = 20 + (if FoundationFontFaceMigration then GetTextSizeFunction(p1.bodyText, ScaledRelativeSize1, BodyFont, Vector2.new(325, 1e999), { addTemporaryPadding = false }).Y else TextService:GetTextSize(p1.bodyText, ScaledRelativeSize1, BodyFont, Vector2.new(325, 1e999)).Y)
-	local CaptionHeaderFont = p1.promptStyle.Font.CaptionHeader.Font
-	local ScaledRelativeSize2 = p1.promptStyle.Font.CaptionHeader.RelativeSize * p1.promptStyle.Font.BaseSize
-	local YOffset2 = 20 + (if FoundationFontFaceMigration then GetTextSizeFunction(FeatureSettingsHubPromptSubtitleSelectingTurnOn, ScaledRelativeSize2, CaptionHeaderFont, Vector2.new(325, 1e999), { addTemporaryPadding = false }).Y else TextService:GetTextSize(FeatureSettingsHubPromptSubtitleSelectingTurnOn, ScaledRelativeSize2, CaptionHeaderFont, Vector2.new(325, 1e999)).Y)
+	local NewY = 20 + GetTextSizeFunction(p1.titleText, p1.promptStyle.Font.Header1.RelativeSize * p1.promptStyle.Font.BaseSize, p1.promptStyle.Font.Header1.Font, Vector2.new(325, 1e999), { addTemporaryPadding = false }).Y
+	local NewY1 = 20 + GetTextSizeFunction(p1.bodyText, p1.promptStyle.Font.Body.RelativeSize * p1.promptStyle.Font.BaseSize, p1.promptStyle.Font.Body.Font, Vector2.new(325, 1e999), { addTemporaryPadding = false }).Y
+	local NewY2 = 20 + GetTextSizeFunction(FeatureSettingsHubPromptSubtitleSelectingTurnOn, p1.promptStyle.Font.CaptionHeader.RelativeSize * p1.promptStyle.Font.BaseSize, p1.promptStyle.Font.CaptionHeader.Font, Vector2.new(325, 1e999), { addTemporaryPadding = false }).Y
 	local Stop = if GetFFlagSupportGamepadNavInVoiceModalsFunction() then Enum.SelectionBehavior.Stop else nil
 	local Selectable = if GetFFlagSupportGamepadNavInVoiceModalsFunction() then true else nil
 	
@@ -68,7 +59,7 @@ local function VoiceChatConsentModal(p1, p2)
 			ImageTransparency = p1.promptStyle.Theme.BackgroundUIDefault.Transparency,
 			Position = UDim2.new(0.5, 0, 0.5, 0),
 			ScaleType = AssetsModule.Images.RoundedRect.ScaleType,
-			Size = UDim2.new(0, 365, 0, YOffset + 1 + YOffset1 + 14 + 36 + (if GetFFlagDisablePVUpsellDataConsentFunction() then 0 else 60 + YOffset2)),
+			Size = UDim2.new(0, 365, 0, NewY + 1 + NewY1 + 14 + 36 + (if GetFFlagDisablePVUpsellDataConsentFunction() then 0 else 60 + NewY2)),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			SliceCenter = AssetsModule.Images.RoundedRect.SliceCenter,
 			SelectionBehaviorDown = Stop,
@@ -92,7 +83,7 @@ local function VoiceChatConsentModal(p1, p2)
 			TitleTextContainer = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
-				Size = UDim2.new(1, 0, 0, YOffset),
+				Size = UDim2.new(1, 0, 0, NewY),
 				AutomaticSize = Enum.AutomaticSize.Y
 			}, {
 				TitleText = RoactModule.createElement(UIBloxModule.App.Text.StyledTextLabel, {
@@ -118,7 +109,7 @@ local function VoiceChatConsentModal(p1, p2)
 			BodyTextContainer = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 4,
-				Size = UDim2.new(1, 0, 0, YOffset1)
+				Size = UDim2.new(1, 0, 0, NewY1)
 			}, {
 				BodyText = RoactModule.createElement(UIBloxModule.App.Text.StyledTextLabel, {
 					lineHeight = 1.2,
@@ -132,7 +123,7 @@ local function VoiceChatConsentModal(p1, p2)
 			InfoTextContainer = if GetFFlagDisablePVUpsellDataConsentFunction() then nil else RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 5,
-				Size = UDim2.new(1, 0, 0, YOffset2 + 20)
+				Size = UDim2.new(1, 0, 0, NewY2 + 20)
 			}, {
 				Padding = RoactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 15) }),
 				Layout = RoactModule.createElement("UIListLayout", {
@@ -154,7 +145,7 @@ local function VoiceChatConsentModal(p1, p2)
 				TextContainer = RoactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
-					Size = UDim2.new(if p1.showCheckbox then 0.95 else 1, 0, 0, YOffset2)
+					Size = UDim2.new(if p1.showCheckbox then 0.95 else 1, 0, 0, NewY2)
 				}, {
 					Padding = p1.showCheckbox and RoactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, 10) }),
 					InfoText = RoactModule.createElement(UIBloxModule.App.Text.StyledTextLabel, {

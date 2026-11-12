@@ -3,10 +3,7 @@ local Context = Parent.context
 local DependenciesModule = require(Parent.dependencies)
 local React = DependenciesModule.React
 local UIBlox = DependenciesModule.UIBlox
-local FoundationModule = require(Parent.Parent.Foundation)
-local UseStyleFunction = UIBlox.Core.Style.useStyle
-local UseTokensFunction = FoundationModule.Hooks.useTokens
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local UseTokensFunction = require(Parent.Parent.Foundation).Hooks.useTokens
 local TypeModule = require(Parent.type)
 local ButtonStack = UIBlox.App.Button.ButtonStack
 local ButtonType = UIBlox.App.Button.Enum.ButtonType
@@ -21,11 +18,9 @@ local function _(Alert)
 	return if Alert == TypeModule.SENDERButtonStyleEnum.Growth then ButtonType.PrimaryContextual elseif Alert == TypeModule.SENDERButtonStyleEnum.Primary then ButtonType.PrimarySystem elseif Alert == TypeModule.SENDERButtonStyleEnum.Secondary then ButtonType.Secondary elseif Alert == TypeModule.SENDERButtonStyleEnum.Alert then ButtonType.Alert else ButtonType.Secondary
 end
 
-local function v16(Button, Callback, NotificationPayload)
-	-- upvalues: UseStyleFunction (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), TypeModule (copy), ButtonType (copy)
-	local UseStyleResult = UseStyleFunction()
-	local UseTokensResult = if FoundationFontFaceMigration then UseTokensFunction() else nil
-	local CaptionLarge = if FoundationFontFaceMigration then UseTokensResult.Typography.CaptionLarge else UseStyleResult.Font.CaptionHeader
+local function v14(Button, Callback, NotificationPayload)
+	-- upvalues: UseTokensFunction (copy), TypeModule (copy), ButtonType (copy)
+	local CaptionLarge = UseTokensFunction().Typography.CaptionLarge
 	local List = {}
 	
 	if Button then
@@ -50,10 +45,10 @@ local function v16(Button, Callback, NotificationPayload)
 end
 
 return function()
-	-- upvalues: UseNotificationCardStateModule (copy), UseNotificationCardDataModule (copy), v16 (copy), React (copy), DefaultContentPadding (copy), ButtonStack (copy), DefaultButtonHeight (copy)
+	-- upvalues: UseNotificationCardStateModule (copy), UseNotificationCardDataModule (copy), v14 (copy), React (copy), DefaultContentPadding (copy), ButtonStack (copy), DefaultButtonHeight (copy)
 	local Button = UseNotificationCardStateModule("button")
 	local UseNotificationCardDataModuleResult = UseNotificationCardDataModule()
-	local Buttons = v16(Button, UseNotificationCardDataModuleResult.handleActions, UseNotificationCardDataModuleResult.notificationPayload)
+	local Buttons = v14(Button, UseNotificationCardDataModuleResult.handleActions, UseNotificationCardDataModuleResult.notificationPayload)
 	
 	return if #Buttons > 0 then React.createElement("Frame", {
 		BackgroundTransparency = 1,

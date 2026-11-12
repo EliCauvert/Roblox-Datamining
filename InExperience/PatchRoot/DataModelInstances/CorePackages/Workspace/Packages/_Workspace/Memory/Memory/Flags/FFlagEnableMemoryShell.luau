@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("EnableMemoryShell", false)
+﻿return require(script:FindFirstAncestor("Memory").Parent.DevShell).FFlagEnableMemoryShell

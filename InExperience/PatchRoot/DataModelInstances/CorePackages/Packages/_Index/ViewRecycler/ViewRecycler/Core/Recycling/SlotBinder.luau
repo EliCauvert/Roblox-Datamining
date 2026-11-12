@@ -1,13 +1,15 @@
-﻿local FFlagViewRecyclerReact08 = require(script:FindFirstAncestor("ViewRecycler").Flags).FFlagViewRecyclerReact08
+﻿local FFlagViewRecyclerReact084 = require(script:FindFirstAncestor("ViewRecycler").Flags).FFlagViewRecyclerReact084
+local FFlagViewRecyclerReact08 = require(script:FindFirstAncestor("ViewRecycler").Flags).FFlagViewRecyclerReact08
 local _ = require(script:FindFirstAncestor("ViewRecycler").Core.Recycling.RecyclingScope)
 local Frozen = table.freeze({})
 local Frozen1 = table.freeze({ entered = Frozen, updated = Frozen, departed = Frozen })
 
 return function(p1)
-	-- upvalues: FFlagViewRecyclerReact08 (copy), Frozen1 (copy), Frozen (copy)
+	-- upvalues: FFlagViewRecyclerReact084 (copy), FFlagViewRecyclerReact08 (copy), Frozen1 (copy), Frozen (copy)
 	local RecyclingScope = p1.recyclingScope
 	local PrepareDesiredAssignmentFunction = p1.prepareDesiredAssignment
-	local Name = if FFlagViewRecyclerReact08 then p1.name or "SlotBinder" else nil
+	local Name = nil
+	Name = if FFlagViewRecyclerReact084 then p1.name or "SlotBinder" elseif FFlagViewRecyclerReact08 then p1.name or "SlotBinder" else nil
 	local Tbl = {}
 	local Frozens = {}
 	local Flag = false
@@ -15,7 +17,19 @@ return function(p1)
 	local Tbl2 = {}
 	local Tbl3 = {}
 	local MakeAssignment = nil
-	MakeAssignment = if FFlagViewRecyclerReact08 then function(p2)
+	MakeAssignment = if FFlagViewRecyclerReact084 then function(p2)
+		-- upvalues: PrepareDesiredAssignmentFunction (copy)
+		if PrepareDesiredAssignmentFunction == nil then
+			return table.freeze({ key = p2.key, value = p2.value })
+		else
+			local PrepareDesiredAssignmentResult = PrepareDesiredAssignmentFunction(p2)
+			
+			return table.freeze({
+				key = PrepareDesiredAssignmentResult.key,
+				value = PrepareDesiredAssignmentResult.value
+			})
+		end
+	end elseif FFlagViewRecyclerReact08 then function(p2)
 		-- upvalues: PrepareDesiredAssignmentFunction (copy)
 		if PrepareDesiredAssignmentFunction == nil then
 			return table.freeze({ key = p2.key, value = p2.value })
@@ -53,7 +67,7 @@ return function(p1)
 	end
 	
 	local function apply(List2, List3)
-		-- upvalues: Flag (ref), Tbl (copy), Tbl1 (copy), Tbl2 (copy), FFlagViewRecyclerReact08 (upval), Name (ref), Frozens (copy), Frozen1 (upval), Frozen (upval), RecyclingScope (copy), MakeAssignment (ref), Tbl3 (copy)
+		-- upvalues: Flag (ref), Tbl (copy), Tbl1 (copy), Tbl2 (copy), FFlagViewRecyclerReact084 (upval), Name (ref), FFlagViewRecyclerReact08 (upval), Frozens (copy), Frozen1 (upval), Frozen (upval), RecyclingScope (copy), MakeAssignment (ref), Tbl3 (copy)
 		assert(not Flag, "SlotBinder: cannot apply after destruction")
 		local List4 = {}
 		local Flag1 = false
@@ -69,7 +83,7 @@ return function(p1)
 		end
 		local Requests = {}
 		local List5 = {}
-		local List = nil
+		local List1 = nil
 		local v1 = #List3 > 1
 		for _, value1 in List3 do
 			local Key = value1.key
@@ -78,7 +92,7 @@ return function(p1)
 				if Tbl2[Key] then
 					table.clear(Tbl2)
 					table.clear(Tbl1)
-					error(if FFlagViewRecyclerReact08 then `{Name}: duplicate key "{Key}"` else `Virtualizer: duplicate key "{Key}"`, 0)
+					error(if FFlagViewRecyclerReact084 then `{Name}: duplicate key "{Key}"` elseif FFlagViewRecyclerReact08 then `{Name}: duplicate key "{Key}"` else `Virtualizer: duplicate key "{Key}"`, 0)
 				end
 				Tbl2[Key] = true
 			end
@@ -99,14 +113,14 @@ return function(p1)
 				end
 				table.insert(Requests, Frozen2)
 			elseif value1.changed or Entry.value ~= value1.value then
-				List = List or {}
-				table.insert(List, value1)
+				List1 = List1 or {}
+				table.insert(List1, value1)
 			end
 		end
 		if v1 then
 			table.clear(Tbl2)
 		end
-		if #List4 == 0 and #Requests == 0 and List == nil then
+		if #List4 == 0 and #Requests == 0 and List1 == nil then
 			return Frozen1
 		end
 		local Acquired = Frozen
@@ -131,7 +145,9 @@ return function(p1)
 			local AcquiredEntry = Acquired[i1]
 			value3.view = AcquiredEntry
 			
-			if FFlagViewRecyclerReact08 then
+			if FFlagViewRecyclerReact084 then
+				value3.assignment = MakeAssignment(value3)
+			elseif FFlagViewRecyclerReact08 then
 				value3.assignment = MakeAssignment(value3)
 			else
 				value3.assignment = MakeAssignment(value3.key, value3.value)
@@ -142,43 +158,45 @@ return function(p1)
 				Tbl3[AcquiredEntry] = true
 			end
 		end
-		local Updated = Frozen
+		local Buffer = Frozen
 		
-		if List ~= nil then
-			Updated = table.create(#List)
+		if List1 ~= nil then
+			Buffer = table.create(#List1)
 			
-			for i2, value4 in List do
+			for i2, value4 in List1 do
 				local Entry = Tbl[value4.key]
 				Entry.value = value4.value
 				
-				if FFlagViewRecyclerReact08 then
+				if FFlagViewRecyclerReact084 then
+					Entry.assignment = MakeAssignment(value4)
+				elseif FFlagViewRecyclerReact08 then
 					Entry.assignment = MakeAssignment(value4)
 				else
 					Entry.assignment = MakeAssignment(value4.key, value4.value)
 				end
-				Updated[i2] = Entry
+				Buffer[i2] = Entry
 			end
 		end
-		local List1 = Frozen
+		local List = Frozen
 		
 		if #List4 > 0 then
 			if v2 then
-				List1 = {}
+				List = {}
 				
 				for _, value2 in List4 do
 					if not Tbl3[value2] then
-						table.insert(List1, value2)
+						table.insert(List, value2)
 					end
 				end
 				table.clear(Tbl3)
 			else
-				List1 = List4
+				List = List4
 			end
 		end
 		return {
 			entered = if #List5 == 0 then Frozen else List5,
-			updated = Updated,
-			departed = List1
+			updated = Buffer,
+			departed = List
 		}
 	end
 	

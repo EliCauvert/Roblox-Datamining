@@ -1,7 +1,6 @@
 ﻿local TelemetryService = game:GetService("TelemetryService")
 local ShareSheet = script:FindFirstAncestor("ShareSheet")
 local Parent = ShareSheet.Parent
-local FFlagShareSheetFriendsSort = require(Parent.SharedFlags).FFlagShareSheetFriendsSort
 local _ = require(Parent.AppChat.GetExternalChatMessageSenderStore)
 local LoggingProtocolModule = require(Parent.LoggingProtocol)
 local _ = require(ShareSheet.Recipients.RecipientSource)
@@ -188,14 +187,14 @@ function ShareSheetTelemetryModule.logMessageSendResult(CustomFields)
 end
 
 function ShareSheetTelemetryModule.startMessageSendResult(p1)
-	-- upvalues: ShareSheetTelemetryModule (copy), FFlagShareSheetFriendsSort (copy), GetElapsedTimeMsModule (copy)
+	-- upvalues: ShareSheetTelemetryModule (copy), GetElapsedTimeMsModule (copy)
 	local ClockTime = os.clock()
 	
 	return function(p2)
-		-- upvalues: ShareSheetTelemetryModule (upval), p1 (copy), FFlagShareSheetFriendsSort (upval), GetElapsedTimeMsModule (upval), ClockTime (copy)
+		-- upvalues: ShareSheetTelemetryModule (upval), p1 (copy), GetElapsedTimeMsModule (upval), ClockTime (copy)
 		ShareSheetTelemetryModule.logMessageSendResult({
 			context = p1.context,
-			recipientSource = if FFlagShareSheetFriendsSort then p1.recipientSource else nil,
+			recipientSource = p1.recipientSource,
 			telemetryId = p1.telemetryId,
 			requestedConversationId = p1.requestedConversationId,
 			resolvedConversationId = p2.conversationId,

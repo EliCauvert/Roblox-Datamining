@@ -13,8 +13,6 @@ local UseTargetedWinnerModule = require(VideoUtils.useTargetedWinner)
 local FFlagLuaAppOneByTwoHoverIdleAutoplay = require(Parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
 local FFlagLuaAppEdpMediaGalleryFullScreen = require(Parent.SharedFlags).FFlagLuaAppEdpMediaGalleryFullScreen
 local FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback = require(Parent.SharedFlags).FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback
-local FFlagVideoPlaybackDetectorCancelPendingScanTask = require(Parent.SharedFlags).FFlagVideoPlaybackDetectorCancelPendingScanTask
-local FIntVideoPlaybackDetectorScanDebounceInMilliseconds: number = require(Parent.SharedFlags).FIntVideoPlaybackDetectorScanDebounceInMilliseconds
 local FFlagEnableOnScreenAPIIntegration = require(Parent.SharedFlags).FFlagEnableOnScreenAPIIntegration
 local UseIsRouteOnScreen = if FFlagEnableOnScreenAPIIntegration then require(Parent.RobloxAppNavigation).useIsRouteOnScreen else nil
 local FFlagLuaAppVideoViewportTargetedWinnerSubscription = require(Parent.SharedFlags).FFlagLuaAppVideoViewportTargetedWinnerSubscription
@@ -23,10 +21,10 @@ local Signal = require(Parent.Signals).createSignal({
 	shouldUseDwell = true,
 	isUserIntentWinner = not FFlagLuaAppOneByTwoHoverIdleAutoplay and nil
 })
-local FIntVideoPlaybackDetectorScanDebounceInMillisecondsRatio = if FFlagVideoPlaybackDetectorCancelPendingScanTask then FIntVideoPlaybackDetectorScanDebounceInMilliseconds / 1000 else 0.5
+local FIntVideoPlaybackDetectorScanDebounceInMillisecondsRatio = require(Parent.SharedFlags).FIntVideoPlaybackDetectorScanDebounceInMilliseconds / 1000
 
 return function(p1)
-	-- upvalues: FFlagEnableOnScreenAPIIntegration (copy), UseIsRouteOnScreen (copy), UseNavigationFocusFunction (copy), UseSelectorFunction (copy), ReactModule (copy), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy), FFlagLuaAppVideoViewportTargetedWinnerSubscription (copy), UseTargetedWinnerModule (copy), SignalsReactModule (copy), Signal (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), FFlagLuaAppEdpMediaGalleryFullScreen (copy), VideoEndReason (copy), AppLifecycleObserverService (copy), ExperienceService (copy), FIntVideoPlaybackDetectorScanDebounceInMillisecondsRatio (copy), FFlagVideoPlaybackDetectorCancelPendingScanTask (copy)
+	-- upvalues: FFlagEnableOnScreenAPIIntegration (copy), UseIsRouteOnScreen (copy), UseNavigationFocusFunction (copy), UseSelectorFunction (copy), ReactModule (copy), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy), FFlagLuaAppVideoViewportTargetedWinnerSubscription (copy), UseTargetedWinnerModule (copy), SignalsReactModule (copy), Signal (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), FFlagLuaAppEdpMediaGalleryFullScreen (copy), VideoEndReason (copy), AppLifecycleObserverService (copy), ExperienceService (copy), FIntVideoPlaybackDetectorScanDebounceInMillisecondsRatio (copy)
 	local UseIsRouteOnScreenResult = if FFlagEnableOnScreenAPIIntegration then UseIsRouteOnScreen() else UseNavigationFocusFunction()
 	local UseSelectorResult = UseSelectorFunction(function(p2)
 		return p2.ScreenSize
@@ -133,15 +131,15 @@ return function(p1)
 		end
 	end, { p1.viewportVideoAutoplayController })
 	ReactModule.useEffect(function()
-		-- upvalues: p1 (copy), UseIsRouteOnScreenResult (copy), FFlagLuaAppEdpMediaGalleryFullScreen (upval), UseMemoResult (copy), VideoEndReason (upval), FIntVideoPlaybackDetectorScanDebounceInMillisecondsRatio (upval), FFlagVideoPlaybackDetectorCancelPendingScanTask (upval), AppLifecycleObserverService (upval), ExperienceService (upval)
+		-- upvalues: p1 (copy), UseIsRouteOnScreenResult (copy), FFlagLuaAppEdpMediaGalleryFullScreen (upval), UseMemoResult (copy), VideoEndReason (upval), FIntVideoPlaybackDetectorScanDebounceInMillisecondsRatio (upval), AppLifecycleObserverService (upval), ExperienceService (upval)
 		if p1.viewportVideoAutoplayController ~= nil then return end
 		local List = {}
-		local v1 = nil
+		local DelayedThread = nil
 		
 		if p1.itemFrameRef.current ~= nil then
 			local Current = p1.itemFrameRef.current
 			local CurrentTime = nil
-			local v2 = nil
+			local v1 = nil
 			
 			local function requestPlaybackIfEligible()
 				-- upvalues: CurrentTime (ref), p1 (upval), UseIsRouteOnScreenResult (upval), FFlagLuaAppEdpMediaGalleryFullScreen (upval), UseMemoResult (upval), VideoEndReason (upval)
@@ -157,28 +155,24 @@ return function(p1)
 			end
 			
 			local function onItemFrameLayoutChange()
-				-- upvalues: v2 (ref), CurrentTime (ref), FIntVideoPlaybackDetectorScanDebounceInMillisecondsRatio (upval), requestPlaybackIfEligible (copy), FFlagVideoPlaybackDetectorCancelPendingScanTask (upval), v1 (ref)
-				if v2 ~= nil then return end
+				-- upvalues: v1 (ref), CurrentTime (ref), FIntVideoPlaybackDetectorScanDebounceInMillisecondsRatio (upval), requestPlaybackIfEligible (copy), DelayedThread (ref)
+				if v1 ~= nil then return end
 				local Delay = 0
 				
 				if CurrentTime ~= nil then
-					v2 = CurrentTime + FIntVideoPlaybackDetectorScanDebounceInMillisecondsRatio
-					Delay = v2 - tick()
+					v1 = CurrentTime + FIntVideoPlaybackDetectorScanDebounceInMillisecondsRatio
+					Delay = v1 - tick()
 				end
 				if Delay > 0 then
-					local DelayedThread = task.delay(Delay, function()
-						-- upvalues: v2 (upval), requestPlaybackIfEligible (upval)
-						v2 = nil
+					DelayedThread = task.delay(Delay, function()
+						-- upvalues: v1 (upval), requestPlaybackIfEligible (upval)
+						v1 = nil
 						requestPlaybackIfEligible()
 					end)
 					
-					if FFlagVideoPlaybackDetectorCancelPendingScanTask then
-						v1 = DelayedThread
-						
-						return
-					end
+					return
 				else
-					v2 = nil
+					v1 = nil
 					requestPlaybackIfEligible()
 				end
 			end
@@ -199,10 +193,10 @@ return function(p1)
 			table.insert(List, RegisterForExperienceLeaveResult)
 		end
 		return function()
-			-- upvalues: FFlagVideoPlaybackDetectorCancelPendingScanTask (upval), v1 (ref), List (ref)
-			if FFlagVideoPlaybackDetectorCancelPendingScanTask and v1 then
-				task.cancel(v1)
-				v1 = nil
+			-- upvalues: DelayedThread (ref), List (ref)
+			if DelayedThread then
+				task.cancel(DelayedThread)
+				DelayedThread = nil
 			end
 			for _, Connection in List do
 				Connection:Disconnect()

@@ -200,7 +200,7 @@ Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,"Khung bao của đ
 Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,{irrelevant_percent}% các đỉnh của khung bao ngoài đã sửa đổi không bao phủ được phụ kiện. Vui lòng điều chỉnh khung bao để vừa vặn hơn với hình dáng phụ kiện.
 Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,"{cage_name} có các giá trị UV không chính xác. Có {incorrect_uv_count} UV không chính xác ({unreferenced_vertex_count} chưa được tham chiếu, {non_template_uv_count} không phải mẫu, {duplicate_mapping_count} ánh xạ trùng lặp), {unmatched_template_count} điểm đỉnh mẫu không khớp."
 Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,{partName} có {degenerate_triangle_percent}% tam giác suy biến.
-Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,"Đầu hiệu ứng động có vấn đề về chất lượng biểu cảm. Nhắm mắt trái: {left_eye_close}, nhắm mắt phải: {right_eye_close}, mở miệng: {mouth_open}, vui vẻ: {is_happy}, buồn: {is_sad}."
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,"Đầu hiệu ứng động có vấn đề về chất lượng biểu cảm. Mắt trái trên màn hình (các chấm đỏ ở phía bên trái của đầu trong Plugin trực quan hóa) đang nhắm: {left_eye_close}, mắt phải trên màn hình (các chấm xanh dương ở phía bên phải của đầu trong Plugin trực quan hóa) đang nhắm: {right_eye_close}, miệng mở (các chấm xanh lá trong Plugin trực quan hóa): {mouth_open}, vui: {is_happy}, buồn: {is_sad}."
 Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"Cấu hình khớp không hợp lệ. Tổng số khớp: {joint_number}, khớp tay trái: {left_hand_joint_number}, khớp tay phải: {right_hand_joint_number}."
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,{partName} có {num_small_volume_islands} đảo lưới nhỏ không liên kết với nhau trong tổng số {num_disconnected_components} thành phần. Vui lòng xóa bớt các hình khối trôi nổi.
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,"{partName} có cấu trúc hình học không đa tạp. Vui lòng kiểm tra các mặt không đồng phẳng, các bề mặt tự cắt nhau hoặc các cạnh dùng chung cho nhiều hơn hai mặt."
@@ -259,10 +259,7 @@ Common.UGCValidation.ErrorLabel.CageUV_ZeroAreaTriangle,"Phát hiện tam giác 
 Common.UGCValidation.ErrorLabel.CollisionFidelityWrong,"""{InstancePath}"" có CollisionFidelity không chính xác. Giá trị dự kiến là {ExpectedFidelity}."
 Common.UGCValidation.ErrorLabel.ContentNotEditable,"{InstanceFullName}.{FieldName} còn chứa nội dung có thể chỉnh sửa chưa được lưu. Trước khi đăng, hãy lưu nội dung này thành một tài sản rồi thử lại."
 Common.UGCValidation.ErrorLabel.CoplanarTri_TooMany,"Phát hiện quá nhiều tam giác đồng phẳng giao cắt nhau trong lưới mô hình ""{MeshName}"". Mức tối đa là {MaxIntersections} giao cắt trong một lưới có {TriangleCount} tam giác. Hãy chỉnh sửa lưới của bạn để giảm số lượng tam giác đồng phẳng giao nhau."
-Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,"Bộ phận cơ thể ""{bodyPartName}"" trong CurveAnimation có một rãnh Vị trí (tịnh tiến). Bộ phận cơ thể trong hiệu ứng động chỉ có thể xoay; rãnh vị trí không được phép xoay. Vui lòng xóa rãnh Vị trí khỏi bộ phận cơ thể này."
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,"Bộ phận cơ thể ""{bodyPartName}"" trong CurveAnimation đã di chuyển {distance} stud so với vị trí ban đầu. Khoảng cách dịch chuyển tối đa cho phép là {maxDistance} stud. Vui lòng giảm khoảng cách dịch chuyển vị trí của bộ phận cơ thể này."
-Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"CurveAnimation chứa các xương HRD/DRD và bộ phận cơ thể ""{bodyPartName}"" có một rãnh Vị trí (tịnh tiến). Khi có bất kỳ xương nào xuất hiện trong hiệu ứng động, để tránh bị tách khớp, các bộ phận cơ thể không được phép tịnh tiến. Vui lòng xóa tất cả các rãnh Vị trí khỏi bộ phận cơ thể."
-Common.UGCValidation.ErrorLabel.CurveAnim_BonePositionNotAllowed,Xương {boneName} trong CurveAnimation có một rãnh Vị trí (tịnh tiến). Xương HRD/DRD chỉ có thể xoay; các rãnh vị trí sẽ gây ra hiện tượng tách khớp và không được phép. Vui lòng xóa hiệu ứng động cho vị trí khỏi xương này.
 Common.UGCValidation.ErrorLabel.CurveAnim_BoneRequiresParent,"Thư mục xương ""{boneName}"" yêu cầu ""{parentBoneName}"" cũng phải có trong hiệu ứng động."
 Common.UGCValidation.ErrorLabel.CurveAnim_BoneTranslationExceedsThreshold,"Xương ""{boneName}"" trong CurveAnimation đã di chuyển {distance} stud so với vị trí ban đầu. Khoảng cách dịch chuyển tối đa cho phép là {maxDistance} stud. Vui lòng giảm khoảng cách dịch chuyển vị trí của xương này."
 Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation chứa các thư mục xương HRD/DRD hiện chưa được hỗ trợ. Vui lòng xóa tất cả các thư mục con của xương trước khi tải lên.
@@ -310,7 +307,7 @@ Common.UGCValidation.ErrorLabel.DescendantIdMissing,{InstanceFullName}.{FieldNam
 Common.UGCValidation.ErrorLabel.DescendantIdNotApproved,(Các) tài sản không vượt qua bước kiểm duyệt: {ModerationMessages}
 Common.UGCValidation.ErrorLabel.DescendantIdNotOwned,Tài sản {AssetId} ({InstanceFullName}.{FieldName}) không thuộc sở hữu của một nhà sáng tạo được ủy quyền.
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,Tài sản {AssetId} ({InstanceFullName}.{FieldName}) chưa được đăng. Hãy đăng tài sản này rồi thử lại.
-Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,"{InstanceFullName}.{FieldName} sử dụng phiên bản {Version} của tài sản {AssetId}, nhưng hiện tại hệ thống chỉ hỗ trợ phiên bản 1. Hãy sử dụng phiên bản 1 rồi thử lại."
+Common.UGCValidation.ErrorLabel.DescendantIdVersionNotLatest,"{InstanceFullName}.{FieldName} sử dụng phiên bản {Version} của tài sản có ID {AssetId}, nhưng hiện tại chỉ có thể sử dụng phiên bản mới nhất của tài sản này là {LatestVersion}. Hãy sử dụng phiên bản {LatestVersion} hoặc xóa ""&version={Version}"" rồi thử lại."
 Common.UGCValidation.ErrorLabel.DescendantIdsTooMany,"Mô hình tải lên có quá nhiều tài sản con (Lưới, Kết cấu, v.v.) và không thể xử lý nguyên trạng. Bạn cần sắp xếp lại mô hình."
 Common.UGCValidation.ErrorLabel.DynHead_ControlsInactive,Lưới {headName} ({meshId}) có các thao tác điều khiển FACS không hoạt động: {controlList}
 Common.UGCValidation.ErrorLabel.DynHead_ControlsMissing,Lưới {headName} ({meshId}) bị thiếu các thao tác điều khiển FACS: {controlList}
@@ -319,9 +316,9 @@ Common.UGCValidation.ErrorLabel.DynHead_JointAccumulatedExceeded,Các hiệu ứ
 Common.UGCValidation.ErrorLabel.DynHead_JointBoundsCheckFailed,"Không thể xác thực giới hạn khớp của hiệu ứng động trên khuôn mặt, vui lòng thử lại sau."
 Common.UGCValidation.ErrorLabel.DynHead_JointDirectExceeded,Hiệu ứng động trên khuôn mặt {actionName} làm cho các khớp di chuyển quá xa ra khỏi phần đầu. Vui lòng chỉnh sửa các hiệu ứng động trên khuôn mặt rồi thử lại.
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,Đầu hiệu ứng động trên chợ phải được căn khung bao đúng chuẩn sao cho các đỉnh của mắt và miệng trên khung bao khớp với các đỉnh của lưới bề mặt. Vui lòng căn khung bao chính xác hơn sao cho khớp với lưới bề mặt.
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,Các điểm mốc của mắt trái trên khung bao của Đầu hiệu ứng động không khớp với lưới. Hãy điều chỉnh khung bao mắt để lưới mắt trái nằm trong vùng khung bao mô phỏng.
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,Các điểm mốc của miệng trên khung bao của Đầu hiệu ứng động không khớp với lưới. Hãy điều chỉnh khung bao miệng để lưới miệng nằm trong vùng khung bao mô phỏng.
-Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,Các điểm mốc của mắt phải trên khung bao của Đầu hiệu ứng động không khớp với lưới. Hãy điều chỉnh khung bao mắt để lưới mắt phải nằm trong vùng khung bao mô phỏng.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,Mắt trái trên màn hình (các chấm đỏ ở phía bên trái của đầu trong Plugin trực quan hóa) có các điểm mốc của khung bao bị lệch so với lưới bề mặt: một số điểm mốc của khung bao nằm bên trong lưới đầu (lưới đâm xuyên qua khung bao) hoặc nằm quá xa bên ngoài. Hãy điều chỉnh khung bao tương ứng sao cho nằm sát hoặc ngay bên ngoài phần lưới xung quanh con mắt này.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,Miệng (các chấm xanh lá cây trong Plugin trực quan hóa) có các điểm mốc của khung bao bị lệch so với lưới bề mặt: một số điểm mốc của khung bao nằm bên trong lưới đầu (lưới đâm xuyên qua khung bao) hoặc nằm quá xa bên ngoài. Hãy điều chỉnh khung bao miệng sao cho nằm sát hoặc ngay bên ngoài phần lưới xung quanh miệng.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,Mắt phải trên màn hình (các chấm xanh dương ở phía bên phải của đầu trong Plugin trực quan hóa) có các điểm mốc của khung bao bị lệch so với lưới bề mặt: một số điểm mốc của khung bao nằm bên trong lưới đầu (lưới đâm xuyên qua khung bao) hoặc nằm quá xa bên ngoài. Hãy điều chỉnh khung bao tương ứng sao cho nằm sát hoặc ngay bên ngoài phần lưới xung quanh con mắt này.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Không phát hiện được biểu cảm mỉm cười cho Đầu hiệu ứng động. Hãy điều chỉnh các điểm mốc của khung bao cho miệng để khớp với vị trí miệng trên đầu và đảm bảo miệng thể hiện được biểu cảm mỉm cười.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,Không phát hiện được biểu cảm nhắm mắt trái cho Đầu hiệu ứng động. Vui lòng điều chỉnh các điểm mốc của khung bao cho mắt trái để khớp với vị trí mắt trái trên đầu và đảm bảo mắt có thể nhắm lại.
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,Đầu hiệu ứng động trên chợ không có Khung bao cho đầu. Vui lòng tạo Khung bao cho đầu đối với Đầu hiệu ứng động.
@@ -339,6 +336,7 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribut
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Hiệu ứng động đã đăng bị thiếu điểm đánh dấu biểu cảm UGC hợp lệ. Vui lòng đăng lại hiệu ứng động này.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Không thể tính toán độ dịch chuyển tối đa của bộ phận dựa trên dữ liệu hiệu ứng động đã đăng. Vui lòng đăng lại hiệu ứng động này.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"Hiệu ứng động đã đăng cho biết độ dịch chuyển tối đa của bộ phận là {taggedTranslation} stud, nhưng kết quả tính toán dựa trên dữ liệu của hiệu ứng động này cho kết quả là {calculatedTranslation} stud. Vui lòng đăng lại hiệu ứng động này."
+Common.UGCValidation.ErrorLabel.ExperienceCreatorNotSupported,"Nhà sáng tạo trải nghiệm không được phép tạo các bộ phận của avatar. CreatorType: {CreatorType}, CreatorId: {CreatorId}."
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,Đầu phải được đặt phía trên Thân trên. Tâm của đầu đang nằm dưới đỉnh của thân – điều này cho thấy lưới của đầu đang bị xẹp hoặc đặt sai vị trí.
 Common.UGCValidation.ErrorLabel.Extents_ParentBelowPart,{upperPart} không thể kéo dài xuống dưới {lowerPart}. Bạn có thể điều chỉnh cách các bộ phận ghép lại với nhau bằng việc di chuyển {attachmentName}
 Common.UGCValidation.ErrorLabel.Extents_PartAboveParent,{lowerPart} không thể vượt cao hơn {upperPart}. Bạn có thể điều chỉnh cách các bộ phận ghép lại với nhau bằng việc di chuyển {attachmentName}
@@ -346,9 +344,9 @@ Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,Thuộc tính I
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,Khuôn mặt gốc còn thiếu các đặc điểm bắt buộc của mắt. Hãy thêm mắt vào khuôn mặt gốc và thử lại.
 Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,Khuôn mặt gốc còn thiếu phần bắt buộc là miệng. Hãy thêm miệng vào khuôn mặt gốc rồi thử lại.
 Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,Không phát hiện được biểu cảm vui. Hãy điều chỉnh khung bao miệng hoặc FACS biểu cảm vui để lưới miệng mô phỏng biến đổi hình dạng như dự kiến.
-Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,Không phát hiện được biểu cảm nhắm mắt trái. Hãy điều chỉnh khung bao mắt trái hoặc FACS nhắm mắt trái để lưới mắt mô phỏng biến đổi hình dạng như dự kiến.
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,Mắt trái trên màn hình (các chấm đỏ ở phía bên trái của đầu trong Plugin trực quan hóa) nhắm chưa đủ kín. Hãy kiểm tra các thao tác điều khiển FACS của mắt phải và khung bao tương ứng.
 Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,Không phát hiện được biểu cảm mở miệng. Hãy điều chỉnh khung bao miệng hoặc FACS miệng mở để lưới miệng mô phỏng biến đổi hình dạng như dự kiến.
-Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,Không phát hiện được biểu cảm nhắm mắt phải. Hãy điều chỉnh khung bao mắt phải hoặc FACS nhắm mắt phải để lưới mắt mô phỏng biến đổi hình dạng như dự kiến.
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,Mắt phải trên màn hình (các chấm xanh dương ở phía bên phải của đầu trong Plugin trực quan hóa) nhắm chưa đủ kín. Hãy kiểm tra các thao tác điều khiển FACS của mắt trái và khung bao tương ứng.
 Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,Không phát hiện được biểu cảm buồn. Hãy điều chỉnh khung bao miệng hoặc FACS biểu cảm buồn để lưới miệng mô phỏng biến đổi hình dạng như dự kiến.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"FACS phát hiện đầu của bạn bị phóng to lên {modPercent}%, tuy nhiên việc thay đổi kích thước đầu là vi phạm chính sách về chợ đối với hiệu ứng khuôn mặt."
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Đầu hiệu ứng động có thể có tối đa {maxFacsJointCount} khớp FACS, nhưng đầu này có {actualJointCount}. Vui lòng giảm số lượng khớp FACS rồi thử lại."
@@ -417,6 +415,11 @@ Common.UGCValidation.ErrorLabel.MeasureMeshOutsideOuterCage,{mesh_outside_outer_
 Common.UGCValidation.ErrorLabel.MeshGeometry_ExceedsBounds,"{meshName} có kích thước lớn hơn kích thước giới hạn tối đa cho phép. Kích thước tối đa cho loại {assetTypeName} là [{maxSizeX}, {maxSizeY}, {maxSizeZ}]."
 Common.UGCValidation.ErrorLabel.MeshGeometry_NotCentered,{meshName}.{fieldName} có dữ liệu lưới không được căn giữa. Vui lòng nhập lại lưới này bằng Công cụ nhập 3D của Roblox và đảm bảo không có chi tiết hình học nào bị thừa trong tệp nguồn.
 Common.UGCValidation.ErrorLabel.MeshGeometry_PositionOutOfBounds,Vị trí nằm ngoài giới hạn.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleAboveMaximum,{meshName} bị tăng tỷ lệ lên {scaleMultiple} lần so với kích thước lưới ban đầu. Mức tối đa là {maxScaleMultiple} lần. Vui lòng xuất lại hoặc nhập lại lưới ở kích thước bạn cần thay vì tăng tỷ lệ trong Studio.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleBelowMinimum,{meshName} bị giảm tỷ lệ xuống còn {scalePercent}% so với kích thước lưới ban đầu. Mức tối thiểu là {minScalePercent}%. Vui lòng xuất lại hoặc nhập lại lưới ở kích thước bạn cần thay vì giảm tỷ lệ trong Studio.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleNotPositive,"{meshName} có tỷ lệ bằng 0 hoặc số âm. Hãy sử dụng giá trị tỷ lệ dương. Để tạo bản sao đối xứng cho lưới, hãy lật lưới đó trong phần mềm mô hình hóa 3D của bạn rồi xuất lại."
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooLarge,Tỷ lệ khung lưới {meshName} quá lớn.
+Common.UGCValidation.ErrorLabel.MeshGeometry_ScaleTooSmall,Tỷ lệ khung lưới quá nhỏ.
 Common.UGCValidation.ErrorLabel.MeshGeometry_SurfaceAreaExceeded,"Tổng diện tích bề mặt của lưới mô hình ""{meshName}"" là {surfaceArea}, không được vượt quá {maxSurfaceArea}. Bạn phải giảm số lượng và/hoặc kích thước của tất cả các tam giác."
 Common.UGCValidation.ErrorLabel.MeshGeometry_TotalTriangleCountExceeded,"Độ phân giải lưới có ""{triangleCount}"" tam giác cho ""{assetTypeName}"" cao hơn số lượng tam giác tối đa được hỗ trợ là ""{maxTriangles}"". Bạn cần điều chỉnh lại cấu trúc liên kết cho mô hình của mình để giảm bớt số lượng tam giác."
 Common.UGCValidation.ErrorLabel.MeshGeometry_TriangleCountExceeded,Lưới mô hình {meshName} có độ phân giải {triangleCount} cao hơn mức tối đa được hỗ trợ là {maxTriangles}. Bạn cần điều chỉnh lại cấu trúc liên kết cho mô hình của mình rồi thử lại.
@@ -428,6 +431,7 @@ Common.UGCValidation.ErrorLabel.MeshSize_LoadFailed,
 Common.UGCValidation.ErrorLabel.MeshSize_Mismatch,Kích thước lưới được tính toán cho {meshName} không khớp với giá trị thuộc tính MeshSize
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,Chỗ đính {attName} phải tồn tại duy nhất một lần trong các mục con của {partName}.
 Common.UGCValidation.ErrorLabel.NoAttributes,"""{RootInstanceName}"" (hoặc các mục con) có chứa Thuộc tính. Bạn cần xóa Thuộc tính khỏi các mục sau: {InstanceNameList}"
+Common.UGCValidation.ErrorLabel.NoMeshBelowFeet_PartBelowFeet,"{partName} kéo dài {distance} stud xuống dưới lòng bàn chân. Chỉ chân mới được chạm đất, và các bộ phận cơ thể khác chỉ có thể thấp hơn mức đó tối đa {maxDistance} stud. Hãy rút ngắn hoặc nâng {partName} lên."
 Common.UGCValidation.ErrorLabel.Pose_AngleFromXYPlane,"{assetName} đang ở góc {angle} độ so với mặt phẳng X,Y, nhưng bắt buộc phải nằm trong giới hạn {limit} độ. Hãy đảm bảo nhân vật đang ở tư thế I, tư thế A hoặc tư thế T."
 Common.UGCValidation.ErrorLabel.Pose_AngleOnXYPlane,"{assetName} đang tạo một góc {angle} độ so với vectơ [{xVector}] trên mặt phẳng X,Y, nhưng bắt buộc phải nằm trong khoảng từ {minAngle} đến {maxAngle} độ. Hãy đảm bảo nhân vật đang ở tư thế I, tư thế A hoặc tư thế T."
 Common.UGCValidation.ErrorLabel.Pose_CFrameCalculationFailed,"Không tính toán được CFrame của tài sản {assetName}. Hãy đảm bảo nhân vật đang ở tư thế I, tư thế A hoặc tư thế T, và các bộ phận không nằm ở cùng một vị trí."
@@ -454,6 +458,7 @@ Common.UGCValidation.ErrorLabel.ThumbnailInvalidTarget,"Tài sản mục tiêu �
 Common.UGCValidation.ErrorLabel.ThumbnailOutsideView,"Tài sản ""{InstancePath}"" được đặt ở vị trí nằm ngoài góc nhìn của camera hình nhỏ. Hãy chuyển lại tài sản vào ngay chính giữa góc nhìn của camera."
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"Bộ phận meshpart đầu có các hiệu ứng khuôn mặt cho khớp {jointName}, là khớp không thể sử dụng được trong FAC. Vui lòng đổi tên khớp này, sau đó nhập lại phần đầu của bạn."
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,"Bộ phận cơ thể {partName} được gắn kết bề mặt vào khớp ảo {jointName}, là khớp không thuộc lược đồ R15plus."
+Common.UGCValidation.ErrorLabel.UnsupportedCreatorType,"Loại nhà sáng tạo không được hỗ trợ. CreatorType: {CreatorType}, CreatorId: {CreatorId}."
 Common.UGCValidation.ErrorLabel.VertexColors_NotOpaque,"Phát hiện màu đỉnh không hợp lệ trong mô hình lưới ""{MeshName}"". Bạn cần chỉnh sửa bản đồ màu thành toàn màu trắng {TransparencyNote} rồi thử lại."
 Common.UGCValidation.ErrorLabel.VerticesNotCoincident_TooManySimilar,{cageName} có {percentage}% số đỉnh nằm quá sát nhau. Vui lòng chỉnh sửa các đỉnh sao cho tối đa chỉ có {threshold}% là trùng lặp hoặc sát nhau.
 Common.UGCValidation.ErrorLabel.WrapTexture_FailedToLoadCage,Không tải được ReferenceCageContent cho {instanceName}.
@@ -548,6 +553,7 @@ CommonUI.Features.Label.Add,Thêm
 CommonUI.Features.Label.AddConnection,Thêm Người quen
 CommonUI.Features.Label.AddConnections,
 CommonUI.Features.Label.AddFriend,Thêm bạn bè
+CommonUI.Features.Label.AdjustScreen,Điều chỉnh màn hình
 CommonUI.Features.Label.Avatar,Avatar
 CommonUI.Features.Label.Badges,Huy hiệu
 CommonUI.Features.Label.Charts,Bảng xếp hạng
@@ -1068,6 +1074,7 @@ CoreScripts.InGameMenu.Ok,
 CoreScripts.InGameMenu.PageTitle.Controls,Đang Điều khiển...
 CoreScripts.InGameMenu.PageTitle.GameSettings,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Mời Bạn Bè
+CoreScripts.InGameMenu.PageTitle.JoinOrInvite,Tham gia hoặc mời
 CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends,Tham gia hoặc mời bạn bè
 CoreScripts.InGameMenu.PageTitle.Players,Mọi Người
 CoreScripts.InGameMenu.PageTitle.Report,Báo Cáo
@@ -1437,6 +1444,7 @@ Feature.Accessibility.Heading.PreferredTextSize,Cỡ văn bản
 Feature.Accessibility.Heading.PreferredTransparency,Độ trong suất của nền
 Feature.Accessibility.Heading.ReducedMotion,Giảm chuyển động
 Feature.Accessibility.Heading.UiNavigationKeyBind,Bật/tắt nút điều hướng của giao diện người dùng
+Feature.Accessibility.Menu.SelectModeToggle,Nút gạt Chế độ chọn
 Feature.Accessibility.PreferredTextSize.Default,Mặc định
 Feature.Accessibility.PreferredTextSize.Largest,
 Feature.Accessibility.PreferredTransparency.Opaque,Mờ
@@ -1452,6 +1460,7 @@ Feature.AccountSettings.Example.Twitter,ví dụ: @Roblox
 Feature.AccountSettings.Example.YouTube,ví dụ: www.youtube.com/user/roblox
 Feature.AccountSettings.Heading.SocialNetworks,Mạng Xã Hội
 Feature.AccountSettings.Heading.Tab.Notifications,Thông Báo
+Feature.AccountSettings.Heading.Tab.PersonalizedRecommendations,Đề xuất cá nhân hóa
 Feature.AccountSettings.Heading.Tab.Privacy,Quyền Riêng Tư
 Feature.AccountSettings.Heading.Tab.Robux,Robux
 Feature.AccountSettings.Heading.Tab.Security,Bảo Mật
@@ -1476,6 +1485,7 @@ Feature.AddFriends.Action.FriendAdded,Đã Thêm Người Bạn
 Feature.AddFriends.Action.IgnoreFriendRequest,Bỏ qua yêu cầu kết bạn
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Bỏ qua yêu cầu làm bạn bè đáng tin cậy
 Feature.AddFriends.Action.RequestIgnored,Đã Bỏ Qua Yêu Cầu
+Feature.AddFriends.Heading.AddFriends,
 Feature.AddFriends.Label.AddFriendsTooltip,Bắt đầu bằng cách tìm bạn bè của bạn để bạn có thể khám phá Roblox cùng nhau.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Tìm người chơi trên Roblox bằng cách tìm kiếm tên tài khoản hoặc tên của họ.
 Feature.AddFriends.Label.ConnectWithContacts,Mời liên hệ hoặc kết nối với bạn bè đang chơi Roblox!
@@ -1869,6 +1879,9 @@ Feature.Avatar.Label.Shoes,Giày
 Feature.Avatar.Label.Shorts,Quần Ngắn
 Feature.Avatar.Label.Shoulder,Vai
 Feature.Avatar.Label.Skin,Da
+Feature.Avatar.Label.Spawn,Điểm hồi sinh
+Feature.Avatar.Label.SpawnEffect,Hiệu ứng hồi sinh
+Feature.Avatar.Label.SpawnEffects,
 Feature.Avatar.Label.Sweater,Áo Len
 Feature.Avatar.Label.Sweaters,
 Feature.Avatar.Label.Swim,Bơi
@@ -2091,8 +2104,10 @@ Feature.AvatarSwitcher.Message.SelectAvatar,Chọn một avatar
 Feature.AvatarSwitcher.Message.SwitchingDeferred,"Bạn sẽ thấy avatar này sau lần hồi sinh tiếp theo, hoặc khi tham gia một trải nghiệm khác. Bạn có thể đổi sang avatar khác bất cứ lúc nào."
 Feature.AvatarSwitcher.Message.UnknownSupport,"Bạn vẫn có thể đổi avatar của mình, nhưng avatar có thể không hiển thị chính xác trong trải nghiệm này."
 Feature.AvatarSwitcher.Message.Unsupported,Trải nghiệm này sử dụng avatar tùy chỉnh và không hỗ trợ avatar Roblox.
+Feature.AvatarWorkshop.Action.EditAvatar,Chỉnh sửa avatar
 Feature.AvatarWorkshop.Action.TryAgain,
-Feature.AvatarWorkshop.Heading.AvatarWorkshop,Xưởng Avatar
+Feature.AvatarWorkshop.Heading.Customize,Tùy chỉnh
+Feature.AvatarWorkshop.Heading.YourAvatars,Avatar của bạn
 Feature.AvatarWorkshop.Message.LoadItemsError,Đã xảy ra lỗi khi tải vật phẩm của bạn.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,Không thể tải thêm vật phẩm.
 Feature.AvatarWorkshop.Message.NoItemsOwned,Bạn chưa sở hữu bất kỳ vật phẩm nào ở đây.
@@ -2261,6 +2276,7 @@ Feature.Build.Description.BuildReplyNotif,Nhận thông báo khi Build gửi ph�
 Feature.Build.Description.BuyRobuxToCreate,Hãy mua thêm Robux để tiếp tục sáng tạo hoặc chờ đến ngày mai để lượt sử dụng Build miễn phí của bạn được làm mới.
 Feature.Build.Description.BuyUsageOrWait,"Dùng Robux để mua thêm lượt sử dụng Build, hoặc đợi hạn mức hằng ngày được làm mới."
 Feature.Build.Description.CampaignRunDates,Chiến dịch của bạn sẽ diễn ra từ {startDate} – {endDate}
+Feature.Build.Description.CaptureWhilePlaytesting,"Chụp ảnh trong lúc chơi thử, rồi thêm ảnh đó vào câu lệnh của bạn."
 Feature.Build.Description.ChooseAdCampaignLength,Chọn thời gian bạn muốn chạy quảng cáo.
 Feature.Build.Description.ChoosePlaytesters,Chọn bạn bè để xem trước trò chơi của bạn.
 Feature.Build.Description.CreateDeveloperProduct,"Tạo ""{NAME}"" với giá {PRICE} Robux, không đăng bán."
@@ -2367,6 +2383,9 @@ Feature.Build.Label.BackToBuild,Quay lại phần Xây dựng
 Feature.Build.Label.Building,Đang xây dựng...
 Feature.Build.Label.CaptureLibrary,Thư viện ảnh/video
 Feature.Build.Label.CaptureSelectionCount,Đã chọn {SELECTED_COUNT}/{MAX_SELECTIONS}
+Feature.Build.Label.CaptureStepAddImages,Chọn Thêm hình ảnh để đính kèm ảnh chụp của bạn
+Feature.Build.Label.CaptureStepPlaytest,Chơi thử trò chơi của bạn
+Feature.Build.Label.CaptureStepTapCamera,Chọn camera trong thanh công cụ Dựng
 Feature.Build.Label.ContentRating,Mức phân loại nội dung
 Feature.Build.Label.CreatedDate,{DAY} {MONTH} năm {YEAR}
 Feature.Build.Label.CreatorHub,Trung tâm nhà sáng tạo
@@ -2411,6 +2430,7 @@ Feature.Build.Label.ManagedPricingMixed,Kết hợp trên các sản phẩm hi�
 Feature.Build.Label.MaximizeForGamePlays,Tăng tối đa lượt chơi
 Feature.Build.Label.ModelUnavailable,Mô hình không khả dụng
 Feature.Build.Label.Models3D,Mô hình 3D
+Feature.Build.Label.MonetizationCreateTitle,{NAME} – {PRICE} Robux
 Feature.Build.Label.MyGames,Trò chơi của tôi
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,Không giới hạn
@@ -2422,7 +2442,7 @@ Feature.Build.Label.OnSale,Đang bán
 Feature.Build.Label.Pending,Đang chờ xử lý
 Feature.Build.Label.PercentUsed,Đã dùng {PERCENT}%
 Feature.Build.Label.PlayTime,Thời gian chơi
-Feature.Build.Label.PreviewsTab,Bản xem trước
+Feature.Build.Label.PreviewsTab,Thử nghiệm trò chơi
 Feature.Build.Label.PreviouslyPublished,Đã đăng trước đây
 Feature.Build.Label.Price,Giá
 Feature.Build.Label.PriceUnavailable,--
@@ -2767,7 +2787,7 @@ Feature.Captures.Toast.VideoCaptureInitializationOtherError,Đã xảy ra lỗi 
 Feature.Captures.Toast.VideoCaptureOtherError,Đã xảy ra lỗi khi quay video
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
-Feature.Catalog.Action.Checkout.GoToCustomize,Tùy chỉnh
+Feature.Catalog.Action.Checkout.GoToCustomize,
 Feature.Catalog.Action.Checkout.ManageInCustomize,Quản lý trong mục Tùy chỉnh
 Feature.Catalog.Action.Checkout.UnavailableItems,
 Feature.Catalog.Action.Checkout.Wear,
@@ -3248,7 +3268,6 @@ Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} nói...
 Feature.Chat.Label.ReplyingToYourself,Bạn đã nói...
 Feature.Chat.Label.SearchFriends,Tìm kiếm bạn bè
 Feature.Chat.Label.SearchWord,
-Feature.Chat.Label.SnoozeChatNotifications,Tắt thông báo trò chuyện trong trải nghiệm:
 Feature.Chat.Label.SnoozePartyNotifications,Tắt thông báo tổ đội trong trải nghiệm đối với:
 Feature.Chat.Label.SwipeToReplyTooltip,Vuốt để trả lời
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}ng
@@ -3304,7 +3323,6 @@ Feature.Chat.Response.NetworkError,Lỗi Mạng
 Feature.Chat.RobloxConnectUnavailableWithUser,Roblox Connect không khả dụng với người dùng này tại thời điểm này.
 Feature.Chat.Text.NoFriends,"Bạn chưa thêm bất kỳ người bạn nào. Để bắt đầu, hãy tìm và thêm bạn bè trên Roblox."
 Feature.Chat.Title.FriendsChat,Trò chuyện cùng bạn bè
-Feature.Chat.Title.MuteChatNotifications,Tắt thông báo trò chuyện từ bạn bè trong suốt trải nghiệm chơi
 Feature.Chat.Title.NewChat,Cuộc trò chuyện mới
 Feature.Chat.Toast.Error.InvalidUserSelected,Không thể thêm một hoặc nhiều người vào danh sách này
 Feature.ContactUpsell.Action.Continue,
@@ -3333,6 +3351,13 @@ Feature.Contacts.Message.ContactsSyncWarning,Danh bạ của bạn sẽ được
 Feature.Contacts.Message.InviteToRoblox,"Kết bạn với mình trên Roblox để chúng ta cùng nhau sáng tạo, chia sẻ và khám phá các trải nghiệm nhé."
 Feature.Contacts.Message.NoResults,Không có kết quả.
 Feature.CustomForms.Label.Percent,
+Feature.Denied.Denied.Action,
+Feature.Denied.Denied.Body,"Vì lý do bảo mật tài khoản của bạn, lúc này chúng tôi không thể hoàn tất yêu cầu của bạn. Vui lòng thử lại trên thiết bị từng sử dụng trước đó hoặc liên hệ với bộ phận hỗ trợ để được trợ giúp."
+Feature.Denied.Denied.Header,Hành Động Bị Hạn Chế
+Feature.Denied.Denied.Wasm.GameJoin.Body,"Chúng tôi đã kết thúc phiên truy cập trên web này vì lý do bảo mật. Để tiếp tục chơi, hãy dùng ứng dụng Roblox."
+Feature.Denied.Denied.Wasm.GameJoin.Header,Tiếp tục trong ứng dụng Roblox
+Feature.Denied.Denied.Wasm.InExperienceFeature.Body,"Vì lý do bảo mật, bạn không thể sử dụng tính năng này trên web. Hãy chuyển sang ứng dụng Roblox để sử dụng toàn bộ tính năng."
+Feature.Denied.Denied.Wasm.InExperienceFeature.Header,Tính năng không được hỗ trợ trên nền tảng này
 Feature.DeveloperProducts.Label.Product,Sản phẩm
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Tên có thể chứa thông tin cá nhân
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Tên của bạn đã được thay đổi trong 7 ngày qua
@@ -3451,8 +3476,10 @@ Feature.FaceChat.Subtitle.VideoPerformancePromptDisable,Tắt camera có thể c
 Feature.FaceChat.Subtitle.VideoUnsupported,Roblox không sử dụng được camera của bạn để tạo hiệu ứng động cho avatar.
 Feature.Favorites.Label.Favorite,
 Feature.FlyoutSidePanel.Action.ContinuePlaying,Tiếp tục chơi
+Feature.FlyoutSidePanel.Description.SwitchAccountsHere,"Bây giờ, bạn có thể chuyển tài khoản ở đây."
 Feature.FlyoutSidePanel.Label.TooltipBody,"Hồ sơ, nội dung và tùy chọn cài đặt của bạn đã được di chuyển đến địa điểm mới."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> đã được di chuyển
+Feature.FlyoutSidePanel.Title.AccountSwitcherMoved,Đã dời vị trí bộ chuyển tài khoản
 Feature.Friends.Action.AcceptFriend,
 Feature.Friends.Action.AccountDeleted,Tài Khoản Đã Bị Xoá
 Feature.Friends.Action.Add,
@@ -3841,6 +3868,7 @@ Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Kết thúc sau {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,Dùng thử miễn phí
 Feature.InExperienceShop.Label.HaveTrial,Bản dùng thử miễn phí dành cho bạn
+Feature.InExperienceShop.Label.KeepIt,Giữ lại
 Feature.InExperienceShop.Label.NoDescription,Không có mô tả
 Feature.InExperienceShop.Label.OfferEndTime,{offer} sẽ kết thúc sau {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,Đây là bản xem trước Cửa hàng của bạn trong Roblox Studio. Người chơi sẽ không thấy bản xem trước này.
@@ -3853,7 +3881,6 @@ Feature.InExperienceShop.Label.Timer.Minute.Singular,1 phút
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} giây
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 giây
 Feature.InExperienceShop.Label.Trial,
-Feature.InExperienceShop.Label.Trialed,Đã dùng thử
 Feature.InExperienceShop.Label.TryNow,Nhận bản dùng thử miễn phí
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Bạn đã mua thành công {ROBUX_AMOUNT} Robux
 Feature.InExperienceShop.Tooltip.RecentlyRedeemed,Bạn có thích bản dùng thử của mình không?
@@ -4003,6 +4030,7 @@ Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,Ảnh
 Feature.Moments.Label.PostDeleted,Khoảnh khắc đã bị xóa
 Feature.Moments.Label.PostRemovedBody,Khoảnh khắc bạn đăng vi phạm Tiêu chuẩn cộng đồng của chúng tôi.
+Feature.Moments.Label.PostedOnDate,Đăng vào {date}
 Feature.Moments.Label.PublishingRodeoBody,Quá trình này sẽ không mất quá nhiều thời gian.
 Feature.Moments.Label.Reactions,Lượt bày tỏ cảm xúc
 Feature.Moments.Label.ReportReason.BreaksRules,Bài đăng này vi phạm quy tắc
@@ -4043,6 +4071,7 @@ Feature.Moments.Label.VoicePlaceholder,Nhập nội dung bạn muốn thuyết m
 Feature.Moments.Label.VoiceTimeoutBody,Đã hết thời gian chờ tạo phần thuyết minh.
 Feature.Moments.Label.VoiceTooManyNumbersError,Tập lệnh chứa quá nhiều chữ số
 Feature.Moments.Label.WriteComment,Viết bình luận
+Feature.Moments.PostInsights.Stats,
 Feature.Moments.Title.Comments,Bình luận
 Feature.Moments.Title.CommentsWithCappedCount,{count}+ bình luận
 Feature.Moments.Title.CommentsWithCount,{count} bình luận
@@ -4185,7 +4214,7 @@ Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,Sao Chép Liên Kết Hồ Sơ
 Feature.Profile.Action.CreateInBuild,Sáng tạo bằng Tạo dựng
 Feature.Profile.Action.EditAppearance,Chỉnh sửa ngoại hình
-Feature.Profile.Action.EditAvatar,Chỉnh sửa avatar
+Feature.Profile.Action.EditAvatar,
 Feature.Profile.Action.EditBackground,Chỉnh sửa hình nền
 Feature.Profile.Action.EditEmotes,Chỉnh sửa biểu cảm
 Feature.Profile.Action.EditLook,Chỉnh sửa diện mạo
@@ -4467,6 +4496,8 @@ Feature.SafetyDashboard.Heading.AccountStatus.V2,"Trạng thái tài khoản, vi
 Feature.Schools.Label.Classmates,Bạn cùng lớp
 Feature.Screentime.Content.ScreentimeLimitDialog,Bạn đã đạt giới hạn thời gian dùng máy hàng ngày. Hãy quay lại vào ngày mai để truy cập lại vào Roblox.
 Feature.SecurityFeedback.Header.NewLogin,Cảnh báo hoạt động mới
+Feature.Settings.Description.AccountSettingsWebsite,"Để truy cập vào Quyền Riêng Tư, Giám Sát Bảo Mật và các mục khác
+vui lòng truy cập vào trang web hoặc thiết bị đồng hành."
 Feature.Settings.Label.Error,
 Feature.SettingsHub.Action.AllowInSettings,Mở phần cài đặt để cho phép
 Feature.SettingsHub.Action.Block,
@@ -5024,6 +5055,7 @@ Features.Transfers.RobuxTransfer.Label.RecipientWillGetInApp,Người nhận s�
 Features.Transfers.RobuxTransfer.Label.RecipientWillGetInGame,Người nhận sẽ nhận được {amount} Robux sau khi trừ phí. Các giao dịch chuyển khoản trong trò chơi bao gồm {commissionPercentage}% phí dành cho nhà sáng tạo.
 Features.Transfers.RobuxTransfer.SentInstantNoFee,Robux được gửi ngay lập tức mà không mất phí
 Features.Transfers.RobuxTransfers.Label.SuccessNotification,Bạn đã gửi {amount} Robux
+Features.Transfers.Title.FreeTransfersExhausted,Bạn đã dùng hết các lượt chuyển miễn phí
 Features.Transfers.Title.UpsellSubscription,
 Features.Transfers.Transfer.Block.RequireReceiverFAE,Hãy thực hiện kiểm tra tuổi để có thể nhận Robux
 Features.Transfers.Transfer.Block.RequireSenderFAE,Hãy tiến hành kiểm tra độ tuổi để có thể gửi Robux
@@ -5445,7 +5477,9 @@ Notifications.SquadRegroupPrompt.ToastAction.Join,
 Notifications.SquadRegroupPrompt.ToastLabel.ContinuePlayingTogether,Tiếp tục chơi cùng nhau
 Notifications.SquadRegroupPrompt.ToastLabel.JoinANewServer,
 Notifications.ToastNotifications.Label.LeaveExperienceConfirmation,Bạn có chắc muốn thoát và tham gia trải nghiệm khác không?
+Notifications.ToastNotifications.Label.LeaveServerConfirmation,Bạn có chắc muốn rời đi và tham gia máy chủ khác không?
 Notifications.ToastNotifications.Title.LeavingExperience,Đang Rời Trải Nghiệm
+Notifications.ToastNotifications.Title.LeavingServer,Đang rời khỏi máy chủ
 PlayerFeedbacks.VoteForm.Message.Action.Report,
 PlayerFeedbacks.VoteForm.Message.MaxLengthCharacters,Dùng dưới {count} ký tự.
 PlayerFeedbacks.VoteForm.Message.MinLengthCharacters,Dùng trên {count} ký tự.

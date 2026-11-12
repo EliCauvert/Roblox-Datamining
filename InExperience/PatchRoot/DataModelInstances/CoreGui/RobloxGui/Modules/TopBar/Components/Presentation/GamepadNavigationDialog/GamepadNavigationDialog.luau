@@ -4,9 +4,7 @@ local _ = game:GetService("LocalizationService")
 local ContextActionService = game:GetService("ContextActionService")
 local ReactModule = require(CorePackages.Packages.React)
 local UIBloxModule = require(CorePackages.Packages.UIBlox)
-local FoundationModule = require(CorePackages.Packages.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(CorePackages.Packages.Foundation).Utility.normalizeFontFace
 local UseDesignTokensFunction = require(CorePackages.Workspace.Packages.Style).useDesignTokens
 local UseLocalizationFunction = require(CorePackages.Workspace.Packages.Localization).Hooks.useLocalization
 local TopBar = script:FindFirstAncestor("TopBar")
@@ -21,7 +19,7 @@ local config = {
 }
 
 local function HeaderArea()
-	-- upvalues: UseDesignTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseDesignTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), NormalizeFontFaceFunction (copy)
 	local MenuNavigationPrompt = UseDesignTokensFunction().LuaApps.MenuNavigationPrompt
 	local Typography = MenuNavigationPrompt.Typography
 	local Space = MenuNavigationPrompt.Space
@@ -36,8 +34,7 @@ local function HeaderArea()
 			Text = UseLocalizationFunction({
 				HeaderText = "CoreScripts.InGameMenu.EducationalPopup.UINavigation.Title"
 			}).HeaderText,
-			Font = if FoundationFontFaceMigration then nil else Typography.header.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Typography.header.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(Typography.header.Font),
 			TextSize = Typography.header.FontSize,
 			TextColor3 = MenuNavigationPrompt.Color.textColor.Color3,
 			Size = UDim2.fromOffset(0, 0),
@@ -55,7 +52,7 @@ local function HeaderArea()
 end
 
 local function GamepadImageArea()
-	-- upvalues: UseDesignTokensFunction (copy), UserInputService (copy), config (copy), UseLocalizationFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseDesignTokensFunction (copy), UserInputService (copy), config (copy), UseLocalizationFunction (copy), ReactModule (copy), NormalizeFontFaceFunction (copy)
 	local MenuNavigationPrompt = UseDesignTokensFunction().LuaApps.MenuNavigationPrompt
 	local Typography = MenuNavigationPrompt.Typography
 	local Size = MenuNavigationPrompt.Size
@@ -97,8 +94,7 @@ local function GamepadImageArea()
 				Text = UseLocalizationFunction({
 					ButtonLabelText = config[UserInputService:GetStringForKeyCode(Enum.KeyCode.ButtonSelect)] or "CoreScripts.InGameMenu.Label.ViewButton"
 				}).ButtonLabelText,
-				Font = if FoundationFontFaceMigration then nil else Typography.label.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Typography.label.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(Typography.label.Font),
 				TextSize = Typography.label.FontSize,
 				TextColor3 = MenuNavigationPrompt.Color.textColor.Color3,
 				Size = UDim2.fromOffset(0, 0),
@@ -123,7 +119,7 @@ local function GamepadImageArea()
 end
 
 local function Body(p1)
-	-- upvalues: UseDesignTokensFunction (copy), UserInputService (copy), config (copy), UseLocalizationFunction (copy), ReactModule (copy), GamepadImageArea (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), Button (copy), ButtonType (copy)
+	-- upvalues: UseDesignTokensFunction (copy), UserInputService (copy), config (copy), UseLocalizationFunction (copy), ReactModule (copy), GamepadImageArea (copy), NormalizeFontFaceFunction (copy), Button (copy), ButtonType (copy)
 	local MenuNavigationPrompt = UseDesignTokensFunction().LuaApps.MenuNavigationPrompt
 	local Typography = MenuNavigationPrompt.Typography
 	local Color = MenuNavigationPrompt.Color
@@ -159,8 +155,7 @@ local function Body(p1)
 			BackgroundTransparency = 1,
 			TextWrapped = true,
 			Text = UseLocalizationResult.Description,
-			Font = if FoundationFontFaceMigration then nil else Typography.caption.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Typography.caption.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(Typography.caption.Font),
 			TextSize = Typography.caption.FontSize,
 			TextColor3 = Color.textColor.Color3,
 			LineHeight = Typography.caption.LineHeight,

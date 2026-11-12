@@ -5,6 +5,7 @@ local Players = game:GetService("Players")
 local FFlagBuildExperienceMyCreationsCreateGameButtonModule = require(BuildExperience.Flags.FFlagBuildExperienceMyCreationsCreateGameButton)
 local FFlagBuildExperienceMyCreationsLongPressMenuModule = require(BuildExperience.Flags.FFlagBuildExperienceMyCreationsLongPressMenu)
 local FFlagBuildWithGroupsModule = require(BuildExperience.Flags.FFlagBuildWithGroups)
+local FFlagBuildExperienceEventContextTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceEventContextTelemetry)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
@@ -35,7 +36,7 @@ local MyCreationsFilterContainerModule = require(BuildExperience.Components.MyCr
 local UseMyCreationsResultsModule = require(script.Parent.useMyCreationsResults)
 
 return function(Frame: Frame)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildExperienceMyCreationsCreateGameButtonModule (copy), GetSearchQueryStoreModule (copy), ReactModule (copy), UseScrollPerformanceTrackerModule (copy), FFlagBuildWithGroupsModule (copy), GetMyCreationsFilterStoreModule (copy), UseMyCreationsResultsModule (copy), ChatConstantsModule (copy), Players (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), ListItemInputType (copy), ExperienceResultsLoadingSkeletonModule (copy), List (copy), IconName (copy), MyCreationsTabNewGameRow (copy), SearchEmptyStateModule (copy), View (copy), InputSize (copy), BuildEmptyStateModule (copy), ExperienceResultsListModule (copy), RefreshScrollingFrame (copy), MyCreationsFilterContainerModule (copy), Button (copy), ButtonVariant (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildExperienceMyCreationsCreateGameButtonModule (copy), GetSearchQueryStoreModule (copy), ReactModule (copy), UseScrollPerformanceTrackerModule (copy), FFlagBuildWithGroupsModule (copy), GetMyCreationsFilterStoreModule (copy), UseMyCreationsResultsModule (copy), ChatConstantsModule (copy), Players (copy), FFlagBuildExperienceEventContextTelemetryModule (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), ListItemInputType (copy), ExperienceResultsLoadingSkeletonModule (copy), List (copy), IconName (copy), MyCreationsTabNewGameRow (copy), SearchEmptyStateModule (copy), View (copy), InputSize (copy), BuildEmptyStateModule (copy), ExperienceResultsListModule (copy), RefreshScrollingFrame (copy), MyCreationsFilterContainerModule (copy), Button (copy), ButtonVariant (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		building = LocalizationStringsModule.MY_CREATIONS_BUILDING,
 		buildWithAI = LocalizationStringsModule.MY_CREATIONS_BUILD_WITH_AI,
@@ -86,20 +87,20 @@ return function(Frame: Frame)
 	local RetryLoadMore = UseMyCreationsResultsModuleResult.retryLoadMore
 	local Refresh = UseMyCreationsResultsModuleResult.refresh
 	local LoadMoreIfNeeded = UseMyCreationsResultsModuleResult.loadMoreIfNeeded
-	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: UseRefResult1 (copy), Frame (copy), ChatConstantsModule (upval), Players (upval)
+	local UseResult = ReactModule.useCallback(function(p1)
+		-- upvalues: UseRefResult1 (copy), Frame (copy), ChatConstantsModule (upval), Players (upval), FFlagBuildExperienceEventContextTelemetryModule (upval)
 		UseRefResult1.current = true
 		Frame.onOpenChat({
 			isNewGameTarget = true,
 			experienceName = ChatConstantsModule.BUILD_CHAT_PAGE_TITLE,
 			creatorName = if Players.LocalPlayer then Players.LocalPlayer.Name else nil
-		})
+		}, if FFlagBuildExperienceEventContextTelemetryModule then if p1 == "auto_new_game" then "auto_new_game" else "new_game" else nil)
 	end, { Frame.onOpenChat })
 	local IsUseDraftQueryResultMatch: boolean = UseMyCreationsResultsModuleResult.hasCompletedFocusedRefresh and (UseMyCreationsResultsModuleResult.sessionListStatus == "Ready" and UseMyCreationsResultsModuleResult.sessionCount == 0 and UseDraftQueryResult == "")
 	ReactModule.useEffect(function()
-		-- upvalues: Frame (copy), IsIsFocused (copy), IsUseDraftQueryResultMatch (copy), UseRefResult1 (copy), UseResult (copy)
+		-- upvalues: Frame (copy), IsIsFocused (copy), IsUseDraftQueryResultMatch (copy), UseRefResult1 (copy), UseResult (copy), FFlagBuildExperienceEventContextTelemetryModule (upval)
 		if Frame.autoOpenNewGame ~= false and IsIsFocused and IsUseDraftQueryResultMatch and not UseRefResult1.current then
-			UseResult()
+			UseResult(if FFlagBuildExperienceEventContextTelemetryModule then "auto_new_game" else nil)
 		end
 	end, {
 		IsUseDraftQueryResultMatch,

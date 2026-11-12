@@ -5,6 +5,8 @@ local ReactModule = require(Parent.React)
 local PublishBottomSheetContainerModule = require(script.Parent.PublishBottomSheetContainer)
 local VersionHistoryContainerModule = require(BuildExperience.Components.VersionHistory.VersionHistoryContainer)
 local GameInfoUtilsModule = require(BuildExperience.utils.GameInfoUtils)
+local FFlagBuildExperiencePageImpressionsModule = require(BuildExperience.Flags.FFlagBuildExperiencePageImpressions)
+local UseBuildPageImpressionModule = require(BuildExperience.Telemetry.useBuildPageImpression)
 local Screens = require(BuildExperience.Components.BuildPillMenu.BuildOverflowMenuScreens).Screens
 
 local function _(p1, p2)
@@ -13,7 +15,7 @@ local function _(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), GameInfoUtilsModule (copy), Screens (copy), PublishBottomSheetContainerModule (copy), VersionHistoryContainerModule (copy)
+	-- upvalues: ReactModule (copy), GameInfoUtilsModule (copy), FFlagBuildExperiencePageImpressionsModule (copy), UseBuildPageImpressionModule (copy), Screens (copy), PublishBottomSheetContainerModule (copy), VersionHistoryContainerModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local NavigateToSubPageFunction = p1.navigateToSubPage
 	local OnCloseFunction = p1.onClose
@@ -34,6 +36,11 @@ return function(p1)
 		Target.universeId, Number, Target.sessionId, Target.experienceName,
 		Target.gameIcon, Target.isNewGameTarget
 	})
+	
+	if FFlagBuildExperiencePageImpressionsModule then
+		UseBuildPageImpressionModule("publish", UseMemoResult, p1.isOpen)
+		UseBuildPageImpressionModule("version-history", UseMemoResult, UseStateResult and Number ~= nil)
+	end
 	local IsTitleDescriptionReady = GameInfoUtilsModule.isTitleDescriptionReady(UseGameInfoResult)
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: IsTitleDescriptionReady (copy), OnCloseFunction (copy), NavigateToSubPageFunction (copy), Screens (upval), UseMemoResult (copy)

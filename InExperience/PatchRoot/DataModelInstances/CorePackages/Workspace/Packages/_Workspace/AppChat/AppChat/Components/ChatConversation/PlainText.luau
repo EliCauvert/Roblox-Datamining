@@ -1,5 +1,4 @@
-﻿local TextService = game:GetService("TextService")
-local AppChat = script:FindFirstAncestor("AppChat")
+﻿local AppChat = script:FindFirstAncestor("AppChat")
 local Parent = AppChat.Parent
 local ChatBubbleContainerModule = require(script.Parent.Bubble.ChatBubbleContainer)
 local ReactModule = require(Parent.React)
@@ -15,7 +14,6 @@ local View = FoundationModule.View
 local Text = FoundationModule.Text
 local Divider = FoundationModule.Divider
 local DividerVariant = FoundationModule.Enums.DividerVariant
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local config = {
 	text = "",
 	maxWidth = 0,
@@ -32,7 +30,7 @@ local config = {
 }
 
 function PlainText(p1)
-	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), UseStyleFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), FFlagAppChatBlueSentBubblesModule (copy), FFlagAppChatEnableAutotranslationModule (copy), ReactModule (copy), NormalizeFontFaceFunction (copy), ChatBubbleContainerModule (copy), View (copy), Text (copy), Divider (copy), DividerVariant (copy)
+	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), UseStyleFunction (copy), GetTextSizeFunction (copy), FFlagAppChatBlueSentBubblesModule (copy), FFlagAppChatEnableAutotranslationModule (copy), ReactModule (copy), NormalizeFontFaceFunction (copy), ChatBubbleContainerModule (copy), View (copy), Text (copy), Divider (copy), DividerVariant (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseTokensResult = UseTokensFunction()
 	local UseStyleResult = UseStyleFunction()
@@ -44,8 +42,7 @@ function PlainText(p1)
 	local Text1 = JoinResult.text
 	local _Font = JoinResult.font or Body.Font
 	local IsRepliedTo = JoinResult.isRepliedTo
-	local _Vector2 = Vector2.new(Largest, if IsRepliedTo then TextSize * 3 else 1e999)
-	local TextSize1 = if FoundationFontFaceMigration then GetTextSizeFunction(Text1, TextSize, _Font, _Vector2, { addTemporaryPadding = false }) else TextService:GetTextSize(Text1, TextSize, _Font, _Vector2)
+	local TextSize1 = GetTextSizeFunction(Text1, TextSize, _Font, Vector2.new(Largest, if IsRepliedTo then TextSize * 3 else 1e999), { addTemporaryPadding = false })
 	local IsRepliedTo1 = JoinResult.isRepliedTo
 	local NoIsIncoming: boolean = if JoinResult.isUnfiltered then not JoinResult.isIncoming else FFlagAppChatBlueSentBubblesModule and not JoinResult.isIncoming
 	local Color = if IsRepliedTo1 then UseStyleResult.Theme.TextDefault.Color elseif NoIsIncoming then Color3.new(1, 1, 1) elseif JoinResult.isIncoming then UseTokensResult.Color.Content.Emphasis.Color3 else UseTokensResult.Color.ActionEmphasis.Foreground.Color3
@@ -67,8 +64,7 @@ function PlainText(p1)
 	if FFlagAppChatEnableAutotranslationModule and JoinResult.translatedText then
 		local config1 = {
 			TextColor3 = Color,
-			Font = if FoundationFontFaceMigration then nil else _Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(_Font) else nil,
+			FontFace = NormalizeFontFaceFunction(_Font),
 			TextSize = TextSize,
 			TextTransparency = JoinResult.isPending and UseStyleResult.Theme.TextMuted.Transparency or 0,
 			sizeConstraint = UseMemoResult
@@ -143,8 +139,7 @@ function PlainText(p1)
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextColor3 = Color,
 				AutomaticSize = Enum.AutomaticSize.XY,
-				Font = if FoundationFontFaceMigration then nil else _Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(_Font) else nil,
+				FontFace = NormalizeFontFaceFunction(_Font),
 				TextSize = TextSize,
 				Size = UDim2.fromOffset(math.ceil(TextSize1.X), (math.ceil(TextSize1.Y))),
 				TextTransparency = JoinResult.isPending and UseStyleResult.Theme.TextMuted.Transparency or 0,

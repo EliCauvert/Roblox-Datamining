@@ -8,7 +8,6 @@ local Default = require(Parent.ToastNotificationSnoozeManager).default
 local FoundationModule = require(Parent1.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local Cryo = DependenciesModule.Cryo
 local React = DependenciesModule.React
 local Roact = DependenciesModule.Roact
@@ -43,9 +42,9 @@ config1 = {
 }
 
 return function()
-	-- upvalues: UseStyleFunction (copy), FFlagEnableAppChatSnoozeMenuFocus (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), Cryo (copy), config (copy), React (copy), ShowNotificationSnoozeMenuSignal (copy), GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction (copy), DismissNotificationSnoozeMenuSignal (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), NotificationSnoozeMenuVisibleSignal (copy), UseCursorFunction (copy), config1 (ref), NormalizeFontFaceFunction (copy), Colors (copy), Default (copy), Interactable (copy), FocusRoot (copy), EventMap (copy), FocusNavigableSurfaceIdentifierEnum (copy), SnoozeMenuTextXAlignment (copy), Roact (copy)
+	-- upvalues: UseStyleFunction (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), Cryo (copy), config (copy), React (copy), ShowNotificationSnoozeMenuSignal (copy), GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction (copy), DismissNotificationSnoozeMenuSignal (copy), FFlagEnableAppChatSnoozeMenuFocus (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), NotificationSnoozeMenuVisibleSignal (copy), UseCursorFunction (copy), config1 (ref), NormalizeFontFaceFunction (copy), Colors (copy), Default (copy), Interactable (copy), FocusRoot (copy), EventMap (copy), FocusNavigableSurfaceIdentifierEnum (copy), SnoozeMenuTextXAlignment (copy), Roact (copy)
 	local UseStyleResult = UseStyleFunction()
-	local UseTokensResult = if FFlagEnableAppChatSnoozeMenuFocus or FoundationFontFaceMigration then UseTokensFunction() else nil
+	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction((Cryo.Dictionary.union(config, {
 		fifteenMinutes = "Feature.Notifications.Action.SnoozeFifteenMinutes",
 		fourHours = "Feature.Notifications.Action.SnoozeFourHours",
@@ -104,15 +103,14 @@ return function()
 	end
 	local UseCursorResult = if FFlagEnableAppChatSnoozeMenuFocus then UseCursorFunction() else nil
 	local UseMemoResult1 = React.useMemo(function()
-		-- upvalues: config1 (upval), React (upval), FFlagEnableAppChatSnoozeMenuFocus (upval), UseTokensResult (copy), FoundationFontFaceMigration (upval), UseStyleResult (copy), NormalizeFontFaceFunction (upval), UseCursorResult (copy), UseLocalizationResult (copy), Colors (upval), UseStateResult1 (copy), Default (upval), UseStateResult2 (copy)
+		-- upvalues: config1 (upval), React (upval), FFlagEnableAppChatSnoozeMenuFocus (upval), UseTokensResult (copy), NormalizeFontFaceFunction (upval), UseCursorResult (copy), UseLocalizationResult (copy), UseStyleResult (copy), Colors (upval), UseStateResult1 (copy), Default (upval), UseStateResult2 (copy)
 		local List = {}
 		
 		for LayoutOrder, value in ipairs(config1) do
 			table.insert(List, React.createElement("TextButton", {
 				Size = UDim2.new(1, 0, 0, if FFlagEnableAppChatSnoozeMenuFocus then UseTokensResult.Size.Size_1400 else 56),
 				BackgroundTransparency = 1,
-				Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Header2.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.TitleLarge.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.TitleLarge.Font),
 				LayoutOrder = LayoutOrder,
 				SelectionImageObject = UseCursorResult,
 				Text = UseLocalizationResult[value.textKey],
@@ -149,7 +147,7 @@ return function()
 		return List
 	end, {
 		UseStateResult1,
-		if FoundationFontFaceMigration then UseTokensResult.Typography.TitleLarge.Font else nil
+		UseTokensResult.Typography.TitleLarge.Font
 	})
 	
 	return if UseStateResult then React.createElement(Interactable, {
@@ -218,8 +216,7 @@ return function()
 					LayoutOrder = 1,
 					TextWrapped = true,
 					AutomaticSize = Enum.AutomaticSize.XY,
-					Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
-					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.BodyLarge.Font) else nil,
+					FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.BodyLarge.Font),
 					Text = UseStateResult1.title or "",
 					TextSize = UseStyleResult.Font.Body.RelativeSize * UseStyleResult.Font.BaseSize,
 					TextColor3 = Colors.White,
@@ -229,8 +226,7 @@ return function()
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
 					AutomaticSize = Enum.AutomaticSize.XY,
-					Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.CaptionBody.Font,
-					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.BodySmall.Font) else nil,
+					FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.BodySmall.Font),
 					Text = UseStateResult1.description or "",
 					TextSize = UseStyleResult.Font.CaptionBody.RelativeSize * UseStyleResult.Font.BaseSize,
 					TextColor3 = UseStyleResult.Theme.TextDefault.Color

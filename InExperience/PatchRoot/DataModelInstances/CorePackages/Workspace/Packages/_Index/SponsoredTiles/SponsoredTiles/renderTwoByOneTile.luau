@@ -7,10 +7,9 @@ local TwoByOneGameTileModule = require(SponsoredTiles.TwoByOneGameTile)
 local GetTileBadgeByPositionConfigFromEntryFunction = GameTileModule.getTileBadgeByPositionConfigFromEntry
 local ResolveWideAssetIdFunction = GameTileModule.resolveWideAssetId
 local _ = require(Parent.VideoUtils)
-local FFlagMigrateGameInfoToStore = require(Parent.SharedFlags).FFlagMigrateGameInfoToStore
 local FFlagLuaAppEnableReportExperience = require(Parent.SharedFlags).FFlagLuaAppEnableReportExperience
 local MemoResult = ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), GetTileBadgeByPositionConfigFromEntryFunction (copy), TwoByOneGameTileModule (copy), FFlagLuaAppEnableReportExperience (copy), FFlagMigrateGameInfoToStore (copy), ResolveWideAssetIdFunction (copy)
+	-- upvalues: ReactModule (copy), GetTileBadgeByPositionConfigFromEntryFunction (copy), TwoByOneGameTileModule (copy), FFlagLuaAppEnableReportExperience (copy), ResolveWideAssetIdFunction (copy)
 	local Negated = -((p1.maxItemIndex or 0) + 1)
 	
 	return ReactModule.createElement(TwoByOneGameTileModule, {
@@ -52,9 +51,8 @@ local MemoResult = ReactModule.memo(function(p1)
 			end
 		end, { p1.onSelectionGained, p1.item, p1.index }),
 		onSelectionLost = p1.onSelectionLost,
-		primaryWideImageAssetId = if FFlagMigrateGameInfoToStore then nil else p1.item.primaryWideImageAssetId,
-		wideAssetId = if FFlagMigrateGameInfoToStore then ResolveWideAssetIdFunction(p1.item.primaryWideImageAssetId, p1.item, p1.topicId) else nil,
-		ageRatingLabel = if FFlagMigrateGameInfoToStore then p1.item.ageRecommendationDisplayName else nil,
+		wideAssetId = ResolveWideAssetIdFunction(p1.item.primaryWideImageAssetId, p1.item, p1.topicId),
+		ageRatingLabel = p1.item.ageRecommendationDisplayName,
 		videoPlaybackContext = p1.videoPlaybackContext,
 		SelectionOrder = p1.SelectionOrder
 	})

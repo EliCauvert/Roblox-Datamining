@@ -7,34 +7,22 @@ local LoggerModule = require(script.Parent.Logger)
 local FFlagAppChatIxpScreenExposureModule = require(AppChat.Flags.FFlagAppChatIxpScreenExposure)
 local IXPNavigationUtilsModule = require(AppChat.Utils.IXPNavigationUtils)
 local GetTopBarStoreModule = require(AppChat.Stores.GetTopBarStore)
-local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
-local DomLocatorsModule = require(AppChat.Utils.DomLocators)
-local GetFFlagAppChatEnableRootedNavigationModule = require(AppChat.Flags.getFFlagAppChatEnableRootedNavigation)
 local GetRootedNavigationStoreModule = require(AppChat.Stores.GetRootedNavigationStore)
 local ChatDetailsScreen = RoactModule.PureComponent:extend("ChatDetailsScreen")
 ChatDetailsScreen.defaultProps = { navigation = nil }
-
-local function navigationOptions()
-	-- upvalues: ChatDetailsNavigationOptionsModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy)
-	return {
-		headerText = ChatDetailsNavigationOptionsModule.getHeaderText(),
-		backButtonTestId = if FFlagDebugAppChatEnableDomLocatorsModule then DomLocatorsModule.chatDetailsTopBarActionButton("back") else nil
-	}
-end
-
-ChatDetailsScreen.navigationOptions = if GetFFlagAppChatEnableRootedNavigationModule() then ChatDetailsNavigationOptionsModule.getNavigationOptions else navigationOptions
+ChatDetailsScreen.navigationOptions = ChatDetailsNavigationOptionsModule.getNavigationOptions
 
 function ChatDetailsScreen.init(p1)
-	-- upvalues: FFlagAppChatIxpScreenExposureModule (copy), IXPNavigationUtilsModule (copy), LoggerModule (copy), GetFFlagAppChatEnableRootedNavigationModule (copy), EnumScreensModule (copy)
+	-- upvalues: FFlagAppChatIxpScreenExposureModule (copy), IXPNavigationUtilsModule (copy), LoggerModule (copy), EnumScreensModule (copy)
 	p1.ixpSubscription = if FFlagAppChatIxpScreenExposureModule then IXPNavigationUtilsModule.registerExposureOnFocus(p1.props.navigation, "Party.ChatDetailsPage") else nil
 	
 	function p1.navigateToEditChatMembers(Conversation)
-		-- upvalues: LoggerModule (upval), GetFFlagAppChatEnableRootedNavigationModule (upval), p1 (copy), EnumScreensModule (upval)
+		-- upvalues: LoggerModule (upval), p1 (copy), EnumScreensModule (upval)
 		LoggerModule:info("Navigate To EditChatMembers from {screen}")
-		p1.props.navigation.navigate(EnumScreensModule.EditChatMembers, if GetFFlagAppChatEnableRootedNavigationModule() then {
+		p1.props.navigation.navigate(EnumScreensModule.EditChatMembers, {
 			conversation = Conversation,
 			isRooted = p1.props.navigation.getParam("isRooted", false)
-		} else { conversation = Conversation })
+		})
 	end
 	
 	function p1.navigateToToast(p2)
@@ -49,25 +37,24 @@ function ChatDetailsScreen.init(p1)
 		p1.props.navigation.navigate(p2, p3)
 	end
 	
-	if GetFFlagAppChatEnableRootedNavigationModule() then
-		function p1.closeRootedChatDetails()
-			-- upvalues: p1 (copy)
-			local NavigateToRootStackScreenProps: () -> () = p1.props.navigation.getScreenProps("navigateToRootStack", nil)
+	function p1.closeRootedChatDetails()
+		-- upvalues: p1 (copy)
+		local NavigateToRootStackScreenProps: () -> () = p1.props.navigation.getScreenProps("navigateToRootStack", nil)
+		
+		if NavigateToRootStackScreenProps then
+			NavigateToRootStackScreenProps()
 			
-			if NavigateToRootStackScreenProps then
-				NavigateToRootStackScreenProps()
-				
-				return
-			end
-			if p1.props.navigation.isFocused() then
-				p1.props.navigation.goBack()
-			end
+			return
+		end
+		if p1.props.navigation.isFocused() then
+			p1.props.navigation.goBack()
 		end
 	end
+	
 	function p1.navigateBack()
-		-- upvalues: p1 (copy), GetFFlagAppChatEnableRootedNavigationModule (upval)
+		-- upvalues: p1 (copy)
 		if p1.props.navigation.isFocused() then
-			if GetFFlagAppChatEnableRootedNavigationModule() and p1.props.navigation.getParam("isRooted", false) then
+			if p1.props.navigation.getParam("isRooted", false) then
 				p1.closeRootedChatDetails()
 				
 				return
@@ -77,19 +64,19 @@ function ChatDetailsScreen.init(p1)
 	end
 	
 	function p1.navigateToConversation(ConversationId)
-		-- upvalues: LoggerModule (upval), GetFFlagAppChatEnableRootedNavigationModule (upval), p1 (copy), EnumScreensModule (upval)
+		-- upvalues: LoggerModule (upval), p1 (copy), EnumScreensModule (upval)
 		LoggerModule:info("Navigate To Conversation from {screen}")
-		p1.props.navigation.navigate(EnumScreensModule.ChatConversation, if GetFFlagAppChatEnableRootedNavigationModule() then {
+		p1.props.navigation.navigate(EnumScreensModule.ChatConversation, {
 			conversationId = ConversationId,
 			isRooted = p1.props.navigation.getParam("isRooted", false)
-		} else { conversationId = ConversationId })
+		})
 	end
 	
 	function p1.navigateToChatLanding()
-		-- upvalues: LoggerModule (upval), GetFFlagAppChatEnableRootedNavigationModule (upval), p1 (copy), EnumScreensModule (upval)
+		-- upvalues: LoggerModule (upval), p1 (copy), EnumScreensModule (upval)
 		LoggerModule:info("Navigate To ChatLanding from {screen}")
 		
-		if GetFFlagAppChatEnableRootedNavigationModule() and p1.props.navigation.getParam("isRooted", false) then
+		if p1.props.navigation.getParam("isRooted", false) then
 			p1.closeRootedChatDetails()
 			
 			return
@@ -130,11 +117,11 @@ function ChatDetailsScreen.render(p1)
 end
 
 function ChatDetailsScreen.didMount(p1)
-	-- upvalues: LoggerModule (copy), GetTopBarStoreModule (copy), EnumScreensModule (copy), ChatDetailsNavigationOptionsModule (copy), GetFFlagAppChatEnableRootedNavigationModule (copy), GetRootedNavigationStoreModule (copy)
+	-- upvalues: LoggerModule (copy), GetTopBarStoreModule (copy), EnumScreensModule (copy), ChatDetailsNavigationOptionsModule (copy), GetRootedNavigationStoreModule (copy)
 	LoggerModule:info("{screen} mounted")
 	GetTopBarStoreModule(false).setScreenTopBar(EnumScreensModule.ChatDetails, ChatDetailsNavigationOptionsModule.getTopBarConfig(p1.props.navigation))
 	
-	if GetFFlagAppChatEnableRootedNavigationModule() and p1.props.navigation.getParam("isRooted", false) then
+	if p1.props.navigation.getParam("isRooted", false) then
 		GetRootedNavigationStoreModule(false).completeNavigation(p1.props.navigation.getParam("rootedNavigationRequestId", nil))
 	end
 end

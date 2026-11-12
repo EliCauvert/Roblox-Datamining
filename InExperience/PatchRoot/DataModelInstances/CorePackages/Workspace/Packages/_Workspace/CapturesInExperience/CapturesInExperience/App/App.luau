@@ -31,6 +31,7 @@ local CarouselScreenModule = require(Parent.Components.CapturesCarousel.Carousel
 local ConstantsModule = require(Parent.Constants)
 local EventNamesModule = require(Parent.Analytics.EventNames)
 local GetLocalUserIdModule = require(Parent.Utils.getLocalUserId)
+local GetLatestCaptureStoreModule = require(Parent.Stores.GetLatestCaptureStore)
 local GetUserIdsFromStringModule = require(Parent.Utils.getUserIdsFromString)
 local InstallReducerModule = require(Parent.installReducer)
 local MakeCaptureSavedHandlerModule = require(Parent.Utils.makeCaptureSavedHandler)
@@ -52,6 +53,7 @@ local SetupFireEventModule = require(Parent.Analytics.setupFireEvent)
 local TakeCaptureModule = require(Parent.Thunks.TakeCapture)
 local _ = require(Parent.Types)
 local FFlagCapturesVideoCaptureTriggerHandlerEnabledModule = require(Parent.Flags.FFlagCapturesVideoCaptureTriggerHandlerEnabled)
+local FFlagCapturesControlsGalleryButtonModule = require(Parent.Flags.FFlagCapturesControlsGalleryButton)
 local FFlagCreateMomentsToastModule = require(Parent.Flags.FFlagCreateMomentsToast)
 local FFlagMomentsCaptureEndIxpEnabledModule = require(Parent.Flags.FFlagMomentsCaptureEndIxpEnabled)
 local FFlagCapturesInExpReportMomentsCreationUIModule = require(Parent.Flags.FFlagCapturesInExpReportMomentsCreationUI)
@@ -60,7 +62,7 @@ local SSUIMetaLuaEngineFeature = game:GetEngineFeature("SSUIMetaLua")
 
 return {
 	createApp = function(p1)
-		-- upvalues: DashModule (copy), AnalyticsServiceModule (copy), AppStorageService (copy), CaptureService (copy), LocalizationService (copy), NotificationService (copy), Players (copy), RbxAnalyticsService (copy), RobloxReplicatedStorage (copy), StarterGui (copy), SetupFireEventModule (copy), ConstantsModule (copy), GetLocalUserIdModule (copy), InstallReducerModule (copy), NetworkingModule (copy), ScreenSizeModule (copy), ServerTypeModule (copy), MomentsCreationFlowModule (copy), RoduxModule (copy), RetrieveCapturesModule (copy), FFlagCreateMomentsToastModule (copy), FFlagMomentsCaptureEndIxpEnabledModule (copy), CheckMomentsEligibilityModule (copy), MakeCaptureSavedHandlerModule (copy), FFlagCapturesVideoCaptureTriggerHandlerEnabledModule (copy), MakeVideoCaptureInProgressHandlerModule (copy), GetUserIdsFromStringModule (copy), CapturesActivatedModule (copy), CapturesDeactivatedModule (copy), ServerTypeDetectedModule (copy), MenuClosedModule (copy), MenuOpenedModule (copy), TakeCaptureModule (copy), FIntCapturesCoreGuiEventsPerMyriadModule (copy), EventNamesModule (copy), CapturesCoreGuiEnabledModule (copy), CapturesCoreGuiDisabledModule (copy), Signal (copy), SSUIMetaLuaEngineFeature (copy), FFlagCapturesInExpReportMomentsCreationUIModule (copy), OnViewportSizeChangedFunction (copy), ScreenSizeChangedModule (copy), OnToggleActivationModule (copy), MakeWrapWithProvidersModule (copy), CapturesPolicyModule (copy), RoactModule (copy), FFlagCapturesInExpUseMomentsCreationModule (copy), Parent1 (copy), MomentsCreationFlowClosedModule (copy), ReactModule (copy), CaptureManagerScreenModule (copy), CaptureOverlayModule (copy), CarouselScreenModule (copy), CaptureServicePromptsModule (copy), CapturesCoreUIModule (copy), CapturesPageModule (copy), MomentsCreationFlowScreenModule (copy)
+		-- upvalues: DashModule (copy), AnalyticsServiceModule (copy), AppStorageService (copy), CaptureService (copy), LocalizationService (copy), NotificationService (copy), Players (copy), RbxAnalyticsService (copy), RobloxReplicatedStorage (copy), StarterGui (copy), SetupFireEventModule (copy), ConstantsModule (copy), GetLocalUserIdModule (copy), InstallReducerModule (copy), NetworkingModule (copy), ScreenSizeModule (copy), ServerTypeModule (copy), MomentsCreationFlowModule (copy), RoduxModule (copy), RetrieveCapturesModule (copy), FFlagCreateMomentsToastModule (copy), FFlagMomentsCaptureEndIxpEnabledModule (copy), CheckMomentsEligibilityModule (copy), MakeCaptureSavedHandlerModule (copy), FFlagCapturesVideoCaptureTriggerHandlerEnabledModule (copy), MakeVideoCaptureInProgressHandlerModule (copy), GetUserIdsFromStringModule (copy), CapturesActivatedModule (copy), CapturesDeactivatedModule (copy), ServerTypeDetectedModule (copy), MenuClosedModule (copy), MenuOpenedModule (copy), FFlagCapturesControlsGalleryButtonModule (copy), GetLatestCaptureStoreModule (copy), TakeCaptureModule (copy), FIntCapturesCoreGuiEventsPerMyriadModule (copy), EventNamesModule (copy), CapturesCoreGuiEnabledModule (copy), CapturesCoreGuiDisabledModule (copy), Signal (copy), SSUIMetaLuaEngineFeature (copy), FFlagCapturesInExpReportMomentsCreationUIModule (copy), OnViewportSizeChangedFunction (copy), ScreenSizeChangedModule (copy), OnToggleActivationModule (copy), MakeWrapWithProvidersModule (copy), CapturesPolicyModule (copy), RoactModule (copy), FFlagCapturesInExpUseMomentsCreationModule (copy), Parent1 (copy), MomentsCreationFlowClosedModule (copy), ReactModule (copy), CaptureManagerScreenModule (copy), CaptureOverlayModule (copy), CarouselScreenModule (copy), CaptureServicePromptsModule (copy), CapturesCoreUIModule (copy), CapturesPageModule (copy), MomentsCreationFlowScreenModule (copy)
 		local config = {
 			_momentsCreationFlowDestroyingConnection = nil,
 			_momentsCreationFlowHandle = nil
@@ -142,8 +144,12 @@ return {
 		end
 		
 		function config.openMenu()
-			-- upvalues: config (copy), MenuOpenedModule (upval)
+			-- upvalues: config (copy), MenuOpenedModule (upval), FFlagCapturesControlsGalleryButtonModule (upval), GetLatestCaptureStoreModule (upval)
 			config._store:dispatch(MenuOpenedModule())
+			
+			if FFlagCapturesControlsGalleryButtonModule then
+				GetLatestCaptureStoreModule(false).clearLatestCapture()
+			end
 		end
 		
 		function config.takeCapture(p2)
@@ -318,12 +324,13 @@ return {
 			end
 		end
 		
-		function config.mountCoreUI(p2, ChromeEnabled)
-			-- upvalues: EligibleForCapturesFeatureResult (copy), SetupFireEventModuleResult (copy), config (copy), WrapWithProvidersModule (copy), ReactModule (upval), CaptureServicePromptsModule (upval), CapturesCoreUIModule (upval)
+		function config.mountCoreUI(p2, ChromeEnabled, p3)
+			-- upvalues: EligibleForCapturesFeatureResult (copy), SetupFireEventModuleResult (copy), FFlagCapturesControlsGalleryButtonModule (upval), config (copy), WrapWithProvidersModule (copy), ReactModule (upval), CaptureServicePromptsModule (upval), CapturesCoreUIModule (upval)
 			if EligibleForCapturesFeatureResult then
 				config._coreUiHandle = WrapWithProvidersModule(p2, {
 					chromeEnabled = ChromeEnabled,
-					fireAnalyticsEvent = SetupFireEventModuleResult
+					fireAnalyticsEvent = SetupFireEventModuleResult,
+					openGallery = if FFlagCapturesControlsGalleryButtonModule then p3 else nil
 				}, {
 					CaptureServicePrompts = ReactModule.createElement(CaptureServicePromptsModule),
 					CapturesCoreUI = ReactModule.createElement(CapturesCoreUIModule)

@@ -1,4 +1,4 @@
 ﻿local SharedFlagsModule = require(script:FindFirstAncestor("GameInvite").Parent.SharedFlags)
 local FFlagGameInviteInExpUserListRendererModule = require(script.Parent.FFlagGameInviteInExpUserListRenderer)
 
-return SharedFlagsModule.FFlagGameInviteInExpJoinCta3 and (FFlagGameInviteInExpUserListRendererModule and (SharedFlagsModule.FFlagUserListCtaIntegrationEnabled and (SharedFlagsModule.FFlagUserListComposeRenderRowWithCta and SharedFlagsModule.FFlagGameJoinCardOptionalActions)))
+return SharedFlagsModule.FFlagGameInviteInExpJoinCta3 and (FFlagGameInviteInExpUserListRendererModule and (SharedFlagsModule.FFlagUserListCtaIntegrationEnabled and SharedFlagsModule.FFlagGameJoinCardOptionalActions))

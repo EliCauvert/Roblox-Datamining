@@ -307,7 +307,7 @@ return function(Frame: Frame)
 					})
 				})
 			}) else nil,
-			OfferAppliedBadge = if FFlagAXMISOffersChip and (not FFlagAXDurables2Option and Frame.offerApplied) and (not Frame.timedOptions or Frame.isOwned and not Frame.expirationTime) then ReactModule.createElement(FoundationModule.Badge, {
+			OfferAppliedBadge = if FFlagAXMISOffersChip and not FFlagAXDurables2Option and Frame.offerApplied and (not Frame.timedOptions or Frame.isOwned and not Frame.expirationTime) then ReactModule.createElement(FoundationModule.Badge, {
 				LayoutOrder = 101,
 				icon = {
 					name = FoundationModule.Enums.IconName.TagSparkle,

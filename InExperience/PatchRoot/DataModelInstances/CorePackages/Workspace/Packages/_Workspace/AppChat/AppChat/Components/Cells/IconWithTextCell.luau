@@ -6,7 +6,6 @@ local ImageSetLabel = require(Parent.UIBlox).Core.ImageSet.ImageSetLabel
 local FoundationModule = require(Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local BaseCellModule = require(script.Parent.BaseCell)
 local _ = require(AppChat.types)
 local config = {
@@ -26,12 +25,11 @@ local config = {
 }
 
 return ReactModule.memo(function(p1)
-	-- upvalues: CryoModule (copy), config (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), ReactModule (copy), BaseCellModule (copy), ImageSetLabel (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), ReactModule (copy), BaseCellModule (copy), ImageSetLabel (copy), NormalizeFontFaceFunction (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local Style = JoinResult.style
 	local Theme = Style.Theme
 	local StyleFont = Style.Font
-	local UseTokensResult = if FoundationFontFaceMigration then UseTokensFunction() else nil
 	local NoPrimaryIcon = JoinResult.primaryIcon == nil
 	
 	return ReactModule.createElement(BaseCellModule, {
@@ -82,8 +80,7 @@ return ReactModule.memo(function(p1)
 				Size = UDim2.new(1, if NoPrimaryIcon then 0 else -JoinResult.iconCellWidth, 1, 0),
 				Text = JoinResult.Text,
 				TextSize = StyleFont.Header2.RelativeSize * StyleFont.BaseSize,
-				Font = if FoundationFontFaceMigration then nil else StyleFont.Header2.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.TitleLarge.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(UseTokensFunction().Typography.TitleLarge.Font),
 				TextColor3 = Theme.TextEmphasis.Color,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextTruncate = Enum.TextTruncate.AtEnd

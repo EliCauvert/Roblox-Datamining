@@ -4,16 +4,34 @@ local ReactModule = require(Parent.React)
 local PeekViewModule = require(Parent.PeekView)
 local PeekView = PeekViewModule.PeekView
 local PeekViewState = PeekViewModule.PeekViewState
-local View = require(Parent.Foundation).View
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local BackgroundStyleContext = FoundationModule.BackgroundStyleContext
 local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
 local EnumsModule = require(ProfilePlatform.Common.Enums)
 local FFlagProfilePlatformNewProfileHeader = require(Parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
 local FFlagProfilePlatformPeekDraggerContrast = require(Parent.SharedFlags).FFlagProfilePlatformPeekDraggerContrast
+local FFlagSduiMarkdownTextComponentEnabled = require(Parent.SharedFlags).FFlagSduiMarkdownTextComponentEnabled
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 local v1: number = if FFlagProfilePlatformNewProfileHeader then 0 else 25
 
+local function SheetBackground(p1)
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), BackgroundStyleContext (copy)
+	local Theme = UseStyleFunction().Theme
+	
+	return ReactModule.createElement(BackgroundStyleContext.Provider, {
+		value = ReactModule.useMemo(function()
+			-- upvalues: Theme (copy)
+			return {
+				Transparency = 0,
+				Color3 = Theme.BackgroundContrast.Color
+			}
+		end, { Theme })
+	}, p1.children)
+end
+
 return function(p1)
-	-- upvalues: UseSelectorFunction (copy), FFlagProfilePlatformNewProfileHeader (copy), UseStyleFunction (copy), ReactModule (copy), PeekViewState (copy), v1 (copy), FFlagProfilePlatformPeekDraggerContrast (copy), EnumsModule (copy), View (copy), PeekView (copy)
+	-- upvalues: UseSelectorFunction (copy), FFlagProfilePlatformNewProfileHeader (copy), UseStyleFunction (copy), ReactModule (copy), PeekViewState (copy), v1 (copy), FFlagProfilePlatformPeekDraggerContrast (copy), EnumsModule (copy), View (copy), PeekView (copy), FFlagSduiMarkdownTextComponentEnabled (copy), SheetBackground (copy)
 	local StatusBarHeight = p1.statusBarHeight or UseSelectorFunction(function(p2)
 		return p2.TopBar.statusBarHeight
 	end)
@@ -70,7 +88,7 @@ return function(p1)
 					HorizontalAlignment = Enum.HorizontalAlignment.Left,
 					VerticalAlignment = Enum.VerticalAlignment.Top
 				}),
-				Content = p1.contentSlot
+				Content = if FFlagSduiMarkdownTextComponentEnabled then ReactModule.createElement(SheetBackground, nil, { Content = p1.contentSlot }) else p1.contentSlot
 			})
 		}),
 		PeekViewTopBar = if FFlagProfilePlatformNewProfileHeader then ReactModule.createElement("CanvasGroup", {

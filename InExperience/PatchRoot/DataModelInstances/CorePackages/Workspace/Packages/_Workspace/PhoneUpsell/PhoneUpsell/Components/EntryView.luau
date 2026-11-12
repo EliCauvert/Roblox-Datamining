@@ -2,9 +2,7 @@
 local Parent = PhoneUpsell.Parent
 local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
-local FoundationModule = require(Parent.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
@@ -52,7 +50,7 @@ local function getButtonStackProps(Text, OnActivated, IsDisabled, Text1, OnActiv
 end
 
 return function(p1)
-	-- upvalues: MergePropsModule (copy), config (copy), GetPartialPageModalMiddleContentWidthFunction (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), PartialPageModal (copy), getButtonStackProps (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: MergePropsModule (copy), config (copy), GetPartialPageModalMiddleContentWidthFunction (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), PartialPageModal (copy), getButtonStackProps (copy), NormalizeFontFaceFunction (copy)
 	local MergePropsModuleResult = MergePropsModule(config, p1)
 	local PartialPageModalMiddleContentWidth = GetPartialPageModalMiddleContentWidthFunction(MergePropsModuleResult.screenSize.X)
 	local config1 = {
@@ -102,8 +100,7 @@ return function(p1)
 				TextSize = UseStyleResult.Font.BaseSize,
 				TextColor3 = UseStyleResult.Theme.TextDefault.Color,
 				TextTransparency = UseStyleResult.Theme.TextDefault.Transparency,
-				Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
 				TextXAlignment = Enum.TextXAlignment.Left,
 				Size = UDim2.new(0, PartialPageModalMiddleContentWidth, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y

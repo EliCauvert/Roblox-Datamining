@@ -11,9 +11,12 @@ local _ = require(RobloxSubscriptionPurchaseApp.Models.GetRobloxSubscriptionProd
 local CompleteRobloxSubscriptionUpsellFlowModule = require(RobloxSubscriptionPurchaseApp.Actions.completeRobloxSubscriptionUpsellFlow)
 local TransitionToErrorModule = require(RobloxSubscriptionPurchaseApp.Actions.transitionToError)
 local ErrorReasonModule = require(RobloxSubscriptionPurchaseApp.Enums.ErrorReason)
+local ClaimEventSubscriptionModule = require(RobloxSubscriptionPurchaseApp.Network.claimEventSubscription)
+local RobloxPlusSheetKindModule = require(RobloxSubscriptionPurchaseApp.Enums.RobloxPlusSheetKind)
 local RobloxSubscriptionUpsellTelemetryModule = require(RobloxSubscriptionPurchaseApp.Events.RobloxSubscriptionUpsellTelemetry)
 local LogRobloxSubscriptionUpsellCounterModule = require(RobloxSubscriptionPurchaseApp.Utils.logRobloxSubscriptionUpsellCounter)
 local LogSubscriptionPurchaseFlowEventModule = require(RobloxSubscriptionPurchaseApp.Utils.logSubscriptionPurchaseFlowEvent)
+local FFlagTTOnboardingSheetModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagTTOnboardingSheet)
 local FFlagEnableSubscriptionPurchaseFlowEventIngestModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagEnableSubscriptionPurchaseFlowEventIngest)
 local FFlagEnableStudioMockPurchaseRobloxSubscriptionModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagEnableStudioMockPurchaseRobloxSubscription)
 local FFlagEnablePlusReferralLandingSheet = require(RobloxSubscriptionPurchaseApp.Parent.SharedFlags).FFlagEnablePlusReferralLandingSheet
@@ -25,7 +28,7 @@ local function _(Platform): string
 end
 
 function performRobloxSubscriptionPurchase()
-	-- upvalues: RobloxSubscriptionStoreModule (copy), FFlagEnableStudioMockPurchaseRobloxSubscriptionModule (copy), RunService (copy), MarketplaceService (copy), CompleteRobloxSubscriptionUpsellFlowModule (copy), FFlagEnableSubscriptionPurchaseFlowEventIngestModule (copy), LogSubscriptionPurchaseFlowEventModule (copy), UserInputService (copy), FFlagEnablePlusReferralLandingSheet (copy), PromptStateModule (copy), WebViewServiceWrapperModule (copy), GetSubscriptionPurchaseUrlModule (copy), FStringBlackbirdWebviewHeaderName (copy), EnableSubscriptionPurchaseReferrerIdEngineFeature (copy), ConstantsModule (copy), TransitionToErrorModule (copy), ErrorReasonModule (copy), LogRobloxSubscriptionUpsellCounterModule (copy), RobloxSubscriptionUpsellTelemetryModule (copy)
+	-- upvalues: RobloxSubscriptionStoreModule (copy), FFlagEnableStudioMockPurchaseRobloxSubscriptionModule (copy), RunService (copy), MarketplaceService (copy), CompleteRobloxSubscriptionUpsellFlowModule (copy), FFlagEnableSubscriptionPurchaseFlowEventIngestModule (copy), LogSubscriptionPurchaseFlowEventModule (copy), FFlagTTOnboardingSheetModule (copy), RobloxPlusSheetKindModule (copy), PromptStateModule (copy), ClaimEventSubscriptionModule (copy), TransitionToErrorModule (copy), ErrorReasonModule (copy), LogRobloxSubscriptionUpsellCounterModule (copy), RobloxSubscriptionUpsellTelemetryModule (copy), UserInputService (copy), FFlagEnablePlusReferralLandingSheet (copy), WebViewServiceWrapperModule (copy), GetSubscriptionPurchaseUrlModule (copy), FStringBlackbirdWebviewHeaderName (copy), EnableSubscriptionPurchaseReferrerIdEngineFeature (copy), ConstantsModule (copy)
 	local GetResult = RobloxSubscriptionStoreModule.get()
 	local RobloxSubscriptionProductId = GetResult.getRobloxSubscriptionProductId()
 	local PaymentSessionId = GetResult.getPaymentSessionId()
@@ -40,6 +43,21 @@ function performRobloxSubscriptionPurchase()
 	end
 	if FFlagEnableSubscriptionPurchaseFlowEventIngestModule then
 		LogSubscriptionPurchaseFlowEventModule("SubscriptionPurchaseAttempted")
+	end
+	if FFlagTTOnboardingSheetModule and GetResult.getPurchaseUIOptions().sheetKind == RobloxPlusSheetKindModule.TT then
+		GetResult.setIsNativePurchase(false)
+		GetResult.setPromptState(PromptStateModule.SubscriptionPurchaseInProgress)
+		ClaimEventSubscriptionModule():andThen(function()
+			-- upvalues: GetResult (copy), CompleteRobloxSubscriptionUpsellFlowModule (upval)
+			GetResult.setDidTryPurchasing(true)
+			CompleteRobloxSubscriptionUpsellFlowModule()
+		end, function()
+			-- upvalues: TransitionToErrorModule (upval), ErrorReasonModule (upval), LogRobloxSubscriptionUpsellCounterModule (upval), RobloxSubscriptionUpsellTelemetryModule (upval)
+			TransitionToErrorModule(ErrorReasonModule.GenericError, "performRobloxSubscriptionPurchase")
+			LogRobloxSubscriptionUpsellCounterModule(RobloxSubscriptionUpsellTelemetryModule.RobloxSubscriptionUpsellPurchaseFailedCounter)
+		end)
+		
+		return
 	end
 	local Platform = UserInputService:GetPlatform()
 	local ReferrerId = if FFlagEnablePlusReferralLandingSheet then GetResult.getReferrerId() else nil

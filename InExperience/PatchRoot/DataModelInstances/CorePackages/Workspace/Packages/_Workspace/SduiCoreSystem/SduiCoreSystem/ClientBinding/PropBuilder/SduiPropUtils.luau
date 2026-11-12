@@ -453,17 +453,17 @@ local function evaluateCondition(p9, Condition, p10, p11, p12)
 			return resolveBindingPathValue(p9, SplitDottedPathModuleResult1, p10, p12, nil, true, p11)
 		end)
 		local Result2 = nil
-		local Ready1 = nil
+		local Ready = nil
 		
 		if Success1 then
 			Result2 = Result1
-			Ready1 = Result3_1
+			Ready = Result3_1
 		else
 			Result2 = nil
-			Ready1 = Result3_1
+			Ready = Result3_1
 		end
-		if Ready1 and Ready1 ~= DataStatus.Ready then
-			return nil, Ready1
+		if Ready and Ready ~= DataStatus.Ready then
+			return nil, Ready
 		else
 			return Result2 == nil
 		end
@@ -474,17 +474,17 @@ local function evaluateCondition(p9, Condition, p10, p11, p12)
 			return resolveBindingPathValue(p9, SplitDottedPathModuleResult2, p10, p12, nil, true, p11)
 		end)
 		local Result5 = nil
-		local Ready3 = nil
+		local Ready1 = nil
 		
 		if Success2 then
 			Result5 = Result4
-			Ready3 = Result3_2
+			Ready1 = Result3_2
 		else
 			Result5 = nil
-			Ready3 = Result3_2
+			Ready1 = Result3_2
 		end
-		if Ready3 and Ready3 ~= DataStatus.Ready then
-			return nil, Ready3
+		if Ready1 and Ready1 ~= DataStatus.Ready then
+			return nil, Ready1
 		else
 			return Result5 ~= nil
 		end
@@ -494,41 +494,41 @@ local function evaluateCondition(p9, Condition, p10, p11, p12)
 			-- upvalues: resolveBindingPathValue (upval), p9 (copy), SplitDottedPathModuleResult3 (copy), p10 (copy), p12 (copy), p11 (copy)
 			return resolveBindingPathValue(p9, SplitDottedPathModuleResult3, p10, p12, nil, true, p11)
 		end)
-		local v3 = nil
-		local Ready = nil
-		
-		if Success3 then
-			v3 = Result6
-			Ready = Result3_3
-		else
-			v3 = nil
-			Ready = Result3_3
-		end
-		if Ready and Ready ~= DataStatus.Ready then
-			return nil, Ready
-		else
-			return v3 == nil or (if type(v3) == "string" then v3 == "" else type(v3) == "table" and next(v3) == nil)
-		end
-	elseif Type == "is_not_empty" then
-		local SplitDottedPathModuleResult4 = SplitDottedPathModule(Value.field)
-		local Success4, Result7, Result3_4 = pcall(function()
-			-- upvalues: resolveBindingPathValue (upval), p9 (copy), SplitDottedPathModuleResult4 (copy), p10 (copy), p12 (copy), p11 (copy)
-			return resolveBindingPathValue(p9, SplitDottedPathModuleResult4, p10, p12, nil, true, p11)
-		end)
-		local v4 = nil
+		local Result7 = nil
 		local Ready2 = nil
 		
-		if Success4 then
-			v4 = Result7
-			Ready2 = Result3_4
+		if Success3 then
+			Result7 = Result6
+			Ready2 = Result3_3
 		else
-			v4 = nil
-			Ready2 = Result3_4
+			Result7 = nil
+			Ready2 = Result3_3
 		end
 		if Ready2 and Ready2 ~= DataStatus.Ready then
 			return nil, Ready2
 		else
-			return not (v4 == nil or (if type(v4) == "string" then v4 == "" else type(v4) == "table" and next(v4) == nil))
+			return Result7 == nil or (if type(Result7) == "string" then Result7 == "" else type(Result7) == "table" and next(Result7) == nil)
+		end
+	elseif Type == "is_not_empty" then
+		local SplitDottedPathModuleResult4 = SplitDottedPathModule(Value.field)
+		local Success4, Result8, Result3_4 = pcall(function()
+			-- upvalues: resolveBindingPathValue (upval), p9 (copy), SplitDottedPathModuleResult4 (copy), p10 (copy), p12 (copy), p11 (copy)
+			return resolveBindingPathValue(p9, SplitDottedPathModuleResult4, p10, p12, nil, true, p11)
+		end)
+		local v3 = nil
+		local Ready = nil
+		
+		if Success4 then
+			v3 = Result8
+			Ready = Result3_4
+		else
+			v3 = nil
+			Ready = Result3_4
+		end
+		if Ready and Ready ~= DataStatus.Ready then
+			return nil, Ready
+		else
+			return not (v3 == nil or (if type(v3) == "string" then v3 == "" else type(v3) == "table" and next(v3) == nil))
 		end
 	else
 		if FFlagSduiDismissPromptPageScope and Type == "contains" then
@@ -584,7 +584,7 @@ end
 local function resolveTablePropValue(p17, p18, List, p19, _, _, _, _, _)
 	-- upvalues: CryoModule (copy), Frozen1 (copy), DataStatus (copy)
 	local JoinResult = CryoModule.Dictionary.join(p19 or Frozen1, p18 or Frozen1)
-	local v5 = nil
+	local v4 = nil
 	
 	if List then
 		for i, value in List do
@@ -592,11 +592,11 @@ local function resolveTablePropValue(p17, p18, List, p19, _, _, _, _, _)
 			local Status = value(p17).status
 			
 			if Status and Status ~= DataStatus.Ready then
-				v5 = Status
+				v4 = Status
 			end
 		end
 	end
-	return JoinResult, v5
+	return JoinResult, v4
 end
 
 return {

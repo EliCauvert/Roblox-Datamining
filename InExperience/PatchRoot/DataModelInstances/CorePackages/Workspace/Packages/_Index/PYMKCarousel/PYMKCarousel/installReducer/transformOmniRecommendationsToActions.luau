@@ -3,9 +3,8 @@ local Llama = require(PYMKCarousel.dependencies).llama
 local _ = require(PYMKCarousel.Common.OmniTypes)
 local GetRecommendationsMetadataModule = require(script.Parent.getRecommendationsMetadata)
 local ContextualInfoTypes = require(PYMKCarousel.Parent.SocialCommon).Enums.ContextualInfoTypes
-local GetFFlagTempFixInfiniteHomePYMKModule = require(PYMKCarousel.Flags.getFFlagTempFixInfiniteHomePYMK)
 
-local function v6(p1, TreatmentType)
+local function v5(p1, TreatmentType)
 	-- upvalues: Llama (copy)
 	local Sorts = p1.sorts or {}
 	local Where = Llama.List.findWhere(Sorts, function(p2): boolean
@@ -17,17 +16,17 @@ local function v6(p1, TreatmentType)
 end
 
 return function(List, p1, Callback1, Callback)
-	-- upvalues: GetRecommendationsMetadataModule (copy), v6 (copy), GetFFlagTempFixInfiniteHomePYMKModule (copy), Llama (copy), ContextualInfoTypes (copy)
+	-- upvalues: GetRecommendationsMetadataModule (copy), v5 (copy), Llama (copy), ContextualInfoTypes (copy)
 	local PushResult = {}
 	local ContentType = p1.contentType
 	local TreatmentType = p1.treatmentType
 	
 	for _, value in pairs(List) do
 		local RecommendationsMetadataModule = GetRecommendationsMetadataModule(value, ContentType)
-		local v1 = v6(value, TreatmentType)
+		local v1 = v5(value, TreatmentType)
 		local Recommendations = if v1 then v1.recommendations or {} else {}
 		
-		if not GetFFlagTempFixInfiniteHomePYMKModule() or #Recommendations ~= 0 then
+		if #Recommendations ~= 0 then
 			if Callback then
 				PushResult = Llama.List.push(PushResult, Callback(v1, RecommendationsMetadataModule))
 			end

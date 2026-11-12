@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("FriendsChat").Parent.AppChat.FFlagFriendsChatUseViewRecyclerConversationList)

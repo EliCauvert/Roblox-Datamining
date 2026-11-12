@@ -11,6 +11,7 @@ local GetFStringPlatformEventUrlFunction = SharedFlagsModule.GetFStringPlatformE
 local FlyoutMomentsPlaceURI = game:DefineFastString("FlyoutMomentsPlaceURI", "roblox://experiences/start?placeId=119524072047648")
 local FFlagEnableArgus = SharedFlagsModule.FFlagEnableArgus
 local FFlagEnableBlackbirdOnFlyoutMenu = SharedFlagsModule.FFlagEnableBlackbirdOnFlyoutMenu
+local FFlagFlyoutAddAdjustScreenModule = require(script.Parent.Parent.Flags.FFlagFlyoutAddAdjustScreen)
 local FFlagFlyoutSidePanelTradesEntryModule = require(script.Parent.Parent.Flags.FFlagFlyoutSidePanelTradesEntry)
 local FFlagFlyoutFilterWebViewsAndBrowserLinks = SharedFlagsModule.FFlagFlyoutFilterWebViewsAndBrowserLinks
 local FFlagFlyoutResolveItemContextOnActivationModule = require(FlyoutSidePanel.Flags.FFlagFlyoutResolveItemContextOnActivation)
@@ -24,6 +25,7 @@ local ItemType = {
 	Communities = "Communities",
 	Messages = "Messages",
 	Settings = "Settings",
+	AdjustScreen = "AdjustScreen",
 	HelpAndSafety = "HelpAndSafety",
 	Moments = "Moments",
 	Charts = "Charts",
@@ -59,6 +61,7 @@ local ItemTextKey = {
 	[ItemType.Communities] = "CommonUI.Features.Label.Groups",
 	[ItemType.Messages] = "CommonUI.Features.Label.Messages",
 	[ItemType.Settings] = "CommonUI.Features.Label.Settings",
+	[ItemType.AdjustScreen] = "CommonUI.Features.Label.AdjustScreen",
 	[ItemType.HelpAndSafety] = "CommonUI.Features.Label.HelpAndSafety",
 	[ItemType.Moments] = "CommonUI.Features.Label.RM",
 	[ItemType.Charts] = "CommonUI.Features.Label.Charts",
@@ -188,6 +191,15 @@ local ItemInfo = {
 			destinationType = DestinationType.AppPage
 		}
 	},
+	[ItemType.AdjustScreen] = if FFlagFlyoutAddAdjustScreenModule then {
+		itemType = ItemType.AdjustScreen,
+		textKey = ItemTextKey[ItemType.AdjustScreen],
+		icon = BuilderIconsModule.Icon.SquareDualArrowsToCorner,
+		context = {
+			appPage = AppPage.AdjustScreen,
+			destinationType = DestinationType.AppPage
+		}
+	} else nil,
 	[ItemType.HelpAndSafety] = {
 		itemType = ItemType.HelpAndSafety,
 		textKey = ItemTextKey[ItemType.HelpAndSafety],

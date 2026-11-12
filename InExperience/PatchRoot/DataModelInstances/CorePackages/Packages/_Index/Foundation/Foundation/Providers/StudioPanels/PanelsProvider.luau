@@ -35,7 +35,7 @@ return function(p1)
 			UseMemoResult:destroy()
 		end
 	end, { UseMemoResult })
-	local UseResult = ReactModule.useCallback(function(TargetWidgetUri, p2, p3, p4, p5, p6)
+	local UseResult = ReactModule.useCallback(function(TargetWidgetUri, p2, p3, p4, p5, p6, p7)
 		-- upvalues: FlagsModule (upval), UseWidgetsContextModuleResult (copy), UseMemoResult (copy)
 		if FlagsModule.FoundationPopoverPluginAnchorRefresh then
 			UseWidgetsContextModuleResult.refreshAsync(TargetWidgetUri)
@@ -45,7 +45,7 @@ return function(p1)
 			targetAnchorPoint = p2.targetAnchorPoint,
 			subjectAnchorPoint = p2.subjectAnchorPoint,
 			offset = p2.offset
-		}, p3, p4, p5, if FlagsModule.FoundationPopoverPluginFocusable then p6 else nil)
+		}, p3, p4, p5, if FlagsModule.FoundationPopoverPluginFocusable then p6 else nil, if FlagsModule.FoundationPopoverPluginPoolReclaim then p7 else nil)
 		
 		return OpenAtAsyncResult, function()
 			-- upvalues: OpenAtAsyncResult (copy)

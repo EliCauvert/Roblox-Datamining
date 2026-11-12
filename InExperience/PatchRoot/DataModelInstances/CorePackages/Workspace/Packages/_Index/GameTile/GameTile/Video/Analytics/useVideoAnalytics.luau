@@ -13,7 +13,7 @@ local DiscoveryVideoEndEventFunction = DiscoveryAnalyticsModule.Events.discovery
 local DiscoveryVideoLoadEventFunction = DiscoveryAnalyticsModule.Events.discoveryVideoLoadEvent
 local DiscoveryVideoLoopEventFunction = DiscoveryAnalyticsModule.Events.discoveryVideoLoopEvent
 local DiscoveryVideoPlayEventFunction = DiscoveryAnalyticsModule.Events.discoveryVideoPlayEvent
-local FFlagLuaAppEnableHomepageOneByTwoTile = require(Parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile
+local FFlagLuaAppEnableNxMRoduxApportioning = require(Parent.SharedFlags).FFlagLuaAppEnableNxMRoduxApportioning
 local FFlagLuaAppHomeMomentVideoFallback = require(Parent.SharedFlags).FFlagLuaAppHomeMomentVideoFallback
 local FFlagLuaAppDiscoveryMomentVideoTelemetry = require(Parent.SharedFlags).FFlagLuaAppDiscoveryMomentVideoTelemetry
 local OmniRecommendationsContentType = require(Parent.DiscoveryTypes).OmniRecommendationsContentType
@@ -23,10 +23,10 @@ local function _(p1, p2)
 end
 
 local _ = function(p1, p2)
-	-- upvalues: FFlagLuaAppEnableHomepageOneByTwoTile (copy), GetGameTileLayoutDataModule (copy), FFlagLuaAppHomeMomentVideoFallback (copy), GetLayoutDataVideoModule (copy)
+	-- upvalues: FFlagLuaAppEnableNxMRoduxApportioning (copy), GetGameTileLayoutDataModule (copy), FFlagLuaAppHomeMomentVideoFallback (copy), GetLayoutDataVideoModule (copy)
 	if p1 and p1.primaryWideVideoAssetId then
 		return p1.primaryWideVideoAssetId
-	elseif FFlagLuaAppEnableHomepageOneByTwoTile and p1 and p1.primaryVideoAssetId then
+	elseif FFlagLuaAppEnableNxMRoduxApportioning and p1 and p1.primaryVideoAssetId then
 		return p1.primaryVideoAssetId
 	else
 		local GameTileLayoutDataModule = GetGameTileLayoutDataModule(p1, p2)
@@ -42,8 +42,8 @@ local _ = function(p1, p2)
 end
 
 local _ = function(p1, p2)
-	-- upvalues: FFlagLuaAppEnableHomepageOneByTwoTile (copy), GetGameTileLayoutDataModule (copy), GetLayoutDataVideoModule (copy)
-	if FFlagLuaAppEnableHomepageOneByTwoTile and p1 and p1.primaryVideoAssetId then
+	-- upvalues: FFlagLuaAppEnableNxMRoduxApportioning (copy), GetGameTileLayoutDataModule (copy), GetLayoutDataVideoModule (copy)
+	if FFlagLuaAppEnableNxMRoduxApportioning and p1 and p1.primaryVideoAssetId then
 		return p1.primaryVideoAssetId, false
 	else
 		local LayoutDataVideoModule = GetLayoutDataVideoModule(GetGameTileLayoutDataModule(p1, p2), p1 and p1.primaryWideVideoAssetId)
@@ -53,10 +53,10 @@ local _ = function(p1, p2)
 end
 
 return function(p1, p2, PageContext, SortPos, p3)
-	-- upvalues: ReactModule (copy), MutedErrorFunction (copy), FFlagLuaAppDiscoveryMomentVideoTelemetry (copy), FFlagLuaAppEnableHomepageOneByTwoTile (copy), GetGameTileLayoutDataModule (copy), GetLayoutDataVideoModule (copy), FFlagLuaAppHomeMomentVideoFallback (copy), DiscoveryVideoPlayEventFunction (copy), OmniRecommendationsContentType (copy), DiscoveryEventErrorLogger (copy), DiscoveryVideoLoadEventFunction (copy), VideoLogger (copy), VideoActions (copy), DiscoveryVideoLoopEventFunction (copy), DiscoveryVideoEndEventFunction (copy)
+	-- upvalues: ReactModule (copy), MutedErrorFunction (copy), FFlagLuaAppDiscoveryMomentVideoTelemetry (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), GetGameTileLayoutDataModule (copy), GetLayoutDataVideoModule (copy), FFlagLuaAppHomeMomentVideoFallback (copy), DiscoveryVideoPlayEventFunction (copy), OmniRecommendationsContentType (copy), DiscoveryEventErrorLogger (copy), DiscoveryVideoLoadEventFunction (copy), VideoLogger (copy), VideoActions (copy), DiscoveryVideoLoopEventFunction (copy), DiscoveryVideoEndEventFunction (copy)
 	local TopicId = if p1 == nil then nil elseif p2 then p1.topicId else p1.gameSetTypeId
 	local UseResult = ReactModule.useCallback(function(p4, p5)
-		-- upvalues: p3 (copy), MutedErrorFunction (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval), TopicId (copy), FFlagLuaAppEnableHomepageOneByTwoTile (upval), GetGameTileLayoutDataModule (upval), GetLayoutDataVideoModule (upval), FFlagLuaAppHomeMomentVideoFallback (upval), DiscoveryVideoPlayEventFunction (upval), PageContext (copy), SortPos (copy)
+		-- upvalues: p3 (copy), MutedErrorFunction (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval), TopicId (copy), FFlagLuaAppEnableNxMRoduxApportioning (upval), GetGameTileLayoutDataModule (upval), GetLayoutDataVideoModule (upval), FFlagLuaAppHomeMomentVideoFallback (upval), DiscoveryVideoPlayEventFunction (upval), PageContext (copy), SortPos (copy)
 		if p4 ~= nil and p3 ~= nil then
 			local v1 = p3[p4]
 			
@@ -69,7 +69,7 @@ return function(p1, p2, PageContext, SortPos, p3)
 			if FFlagLuaAppDiscoveryMomentVideoTelemetry then
 				local AssetId = nil
 				local IsIsMoment = nil
-				if FFlagLuaAppEnableHomepageOneByTwoTile and v1 and v1.primaryVideoAssetId then
+				if FFlagLuaAppEnableNxMRoduxApportioning and v1 and v1.primaryVideoAssetId then
 					AssetId = v1.primaryVideoAssetId
 					IsIsMoment = false
 				else
@@ -81,7 +81,7 @@ return function(p1, p2, PageContext, SortPos, p3)
 				v2 = IsIsMoment
 			elseif v1 and v1.primaryWideVideoAssetId then
 				AssetId1 = v1.primaryWideVideoAssetId
-			elseif FFlagLuaAppEnableHomepageOneByTwoTile and v1 and v1.primaryVideoAssetId then
+			elseif FFlagLuaAppEnableNxMRoduxApportioning and v1 and v1.primaryVideoAssetId then
 				AssetId1 = v1.primaryVideoAssetId
 			else
 				local GameTileLayoutDataModule = GetGameTileLayoutDataModule(v1, TopicId)
@@ -111,7 +111,7 @@ return function(p1, p2, PageContext, SortPos, p3)
 		end
 	end, { PageContext, p3, TopicId, SortPos })
 	local UseResult1 = ReactModule.useCallback(function(Index, p4, TotalDuration, LoadTime)
-		-- upvalues: p3 (copy), MutedErrorFunction (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval), TopicId (copy), FFlagLuaAppEnableHomepageOneByTwoTile (upval), GetGameTileLayoutDataModule (upval), GetLayoutDataVideoModule (upval), FFlagLuaAppHomeMomentVideoFallback (upval), OmniRecommendationsContentType (upval), DiscoveryEventErrorLogger (upval), PageContext (copy), DiscoveryVideoLoadEventFunction (upval), SortPos (copy), VideoLogger (upval), VideoActions (upval)
+		-- upvalues: p3 (copy), MutedErrorFunction (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval), TopicId (copy), FFlagLuaAppEnableNxMRoduxApportioning (upval), GetGameTileLayoutDataModule (upval), GetLayoutDataVideoModule (upval), FFlagLuaAppHomeMomentVideoFallback (upval), OmniRecommendationsContentType (upval), DiscoveryEventErrorLogger (upval), PageContext (copy), DiscoveryVideoLoadEventFunction (upval), SortPos (copy), VideoLogger (upval), VideoActions (upval)
 		if Index ~= nil and p3 ~= nil then
 			local v1 = p3[Index]
 			
@@ -124,7 +124,7 @@ return function(p1, p2, PageContext, SortPos, p3)
 			if FFlagLuaAppDiscoveryMomentVideoTelemetry then
 				local AssetId = nil
 				local IsIsMoment = nil
-				if FFlagLuaAppEnableHomepageOneByTwoTile and v1 and v1.primaryVideoAssetId then
+				if FFlagLuaAppEnableNxMRoduxApportioning and v1 and v1.primaryVideoAssetId then
 					AssetId = v1.primaryVideoAssetId
 					IsIsMoment = false
 				else
@@ -136,7 +136,7 @@ return function(p1, p2, PageContext, SortPos, p3)
 				v2 = IsIsMoment
 			elseif v1 and v1.primaryWideVideoAssetId then
 				VideoAssetId = v1.primaryWideVideoAssetId
-			elseif FFlagLuaAppEnableHomepageOneByTwoTile and v1 and v1.primaryVideoAssetId then
+			elseif FFlagLuaAppEnableNxMRoduxApportioning and v1 and v1.primaryVideoAssetId then
 				VideoAssetId = v1.primaryVideoAssetId
 			else
 				local GameTileLayoutDataModule = GetGameTileLayoutDataModule(v1, TopicId)
@@ -151,7 +151,7 @@ return function(p1, p2, PageContext, SortPos, p3)
 			if not VideoAssetId then
 				MutedErrorFunction("reportVideoLoad requires a valid videoAssetId")
 			end
-			local IsContentTypeMatch = if FFlagLuaAppEnableHomepageOneByTwoTile then v1.contentType == OmniRecommendationsContentType.AdLink else nil
+			local IsContentTypeMatch = if FFlagLuaAppEnableNxMRoduxApportioning then v1.contentType == OmniRecommendationsContentType.AdLink else nil
 			
 			if not v1.universeId and not IsContentTypeMatch then
 				DiscoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingUniverseId", `reportVideoLoad: entry at index {Index} is missing universeId for unified "load" on page "{PageContext}"`, {
@@ -177,7 +177,7 @@ return function(p1, p2, PageContext, SortPos, p3)
 				isMoment = if FFlagLuaAppDiscoveryMomentVideoTelemetry then v2 else nil
 			})
 			
-			if FFlagLuaAppEnableHomepageOneByTwoTile then
+			if FFlagLuaAppEnableNxMRoduxApportioning then
 				if VideoAssetId and (IsContentTypeMatch or v1.universeId) then
 					VideoLogger.reportVideoAction(VideoActions.load, PageContext, {
 						videoAssetId = VideoAssetId,
@@ -199,7 +199,7 @@ return function(p1, p2, PageContext, SortPos, p3)
 		end
 	end, { PageContext, p3, TopicId, SortPos })
 	local UseResult2 = ReactModule.useCallback(function(p5, p6)
-		-- upvalues: p3 (copy), MutedErrorFunction (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval), TopicId (copy), FFlagLuaAppEnableHomepageOneByTwoTile (upval), GetGameTileLayoutDataModule (upval), GetLayoutDataVideoModule (upval), FFlagLuaAppHomeMomentVideoFallback (upval), DiscoveryVideoLoopEventFunction (upval), PageContext (copy), SortPos (copy)
+		-- upvalues: p3 (copy), MutedErrorFunction (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval), TopicId (copy), FFlagLuaAppEnableNxMRoduxApportioning (upval), GetGameTileLayoutDataModule (upval), GetLayoutDataVideoModule (upval), FFlagLuaAppHomeMomentVideoFallback (upval), DiscoveryVideoLoopEventFunction (upval), PageContext (copy), SortPos (copy)
 		if p5 ~= nil and p3 ~= nil then
 			local v3 = p3[p5]
 			
@@ -212,7 +212,7 @@ return function(p1, p2, PageContext, SortPos, p3)
 			if FFlagLuaAppDiscoveryMomentVideoTelemetry then
 				local AssetId = nil
 				local IsIsMoment = nil
-				if FFlagLuaAppEnableHomepageOneByTwoTile and v3 and v3.primaryVideoAssetId then
+				if FFlagLuaAppEnableNxMRoduxApportioning and v3 and v3.primaryVideoAssetId then
 					AssetId = v3.primaryVideoAssetId
 					IsIsMoment = false
 				else
@@ -224,7 +224,7 @@ return function(p1, p2, PageContext, SortPos, p3)
 				v4 = IsIsMoment
 			elseif v3 and v3.primaryWideVideoAssetId then
 				AssetId1 = v3.primaryWideVideoAssetId
-			elseif FFlagLuaAppEnableHomepageOneByTwoTile and v3 and v3.primaryVideoAssetId then
+			elseif FFlagLuaAppEnableNxMRoduxApportioning and v3 and v3.primaryVideoAssetId then
 				AssetId1 = v3.primaryVideoAssetId
 			else
 				local GameTileLayoutDataModule = GetGameTileLayoutDataModule(v3, TopicId)
@@ -254,7 +254,7 @@ return function(p1, p2, PageContext, SortPos, p3)
 		end
 	end, { PageContext, p3, TopicId, SortPos })
 	local UseResult3 = ReactModule.useCallback(function(p5, EndReason, p6, PlaybackTime, TargetUniverseId)
-		-- upvalues: p3 (copy), MutedErrorFunction (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval), TopicId (copy), FFlagLuaAppEnableHomepageOneByTwoTile (upval), GetGameTileLayoutDataModule (upval), GetLayoutDataVideoModule (upval), FFlagLuaAppHomeMomentVideoFallback (upval), DiscoveryVideoEndEventFunction (upval), PageContext (copy), SortPos (copy)
+		-- upvalues: p3 (copy), MutedErrorFunction (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval), TopicId (copy), FFlagLuaAppEnableNxMRoduxApportioning (upval), GetGameTileLayoutDataModule (upval), GetLayoutDataVideoModule (upval), FFlagLuaAppHomeMomentVideoFallback (upval), DiscoveryVideoEndEventFunction (upval), PageContext (copy), SortPos (copy)
 		if p5 ~= nil and p3 ~= nil then
 			local v3 = p3[p5]
 			
@@ -267,7 +267,7 @@ return function(p1, p2, PageContext, SortPos, p3)
 			if FFlagLuaAppDiscoveryMomentVideoTelemetry then
 				local AssetId = nil
 				local IsIsMoment = nil
-				if FFlagLuaAppEnableHomepageOneByTwoTile and v3 and v3.primaryVideoAssetId then
+				if FFlagLuaAppEnableNxMRoduxApportioning and v3 and v3.primaryVideoAssetId then
 					AssetId = v3.primaryVideoAssetId
 					IsIsMoment = false
 				else
@@ -279,7 +279,7 @@ return function(p1, p2, PageContext, SortPos, p3)
 				v4 = IsIsMoment
 			elseif v3 and v3.primaryWideVideoAssetId then
 				AssetId1 = v3.primaryWideVideoAssetId
-			elseif FFlagLuaAppEnableHomepageOneByTwoTile and v3 and v3.primaryVideoAssetId then
+			elseif FFlagLuaAppEnableNxMRoduxApportioning and v3 and v3.primaryVideoAssetId then
 				AssetId1 = v3.primaryVideoAssetId
 			else
 				local GameTileLayoutDataModule = GetGameTileLayoutDataModule(v3, TopicId)

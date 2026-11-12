@@ -23,6 +23,7 @@ return {
 	useCollectionLayout = require(script.CollectionLayoutStore.useCollectionLayout),
 	CollectionLayoutStoreProvider = require(script.CollectionLayoutStore.CollectionLayoutStoreProvider),
 	CollectionLayoutStoreContext = require(script.CollectionLayoutStore.CollectionLayoutStoreContext),
+	createColumnSpanCollectionLayoutStore = require(script.CollectionLayoutStore.createColumnSpanCollectionLayoutStore),
 	getItemsPerRow = require(script.CollectionLayoutStore.CollectionBreakpointConfig).getItemsPerRow,
 	getMainCollectionLayoutStore = require(script.CollectionLayoutStore.getMainCollectionLayoutStore),
 	calculateSpanAwareGrids = CalculateSpanAwareGridsModule.calculateSpanAwareGrids,

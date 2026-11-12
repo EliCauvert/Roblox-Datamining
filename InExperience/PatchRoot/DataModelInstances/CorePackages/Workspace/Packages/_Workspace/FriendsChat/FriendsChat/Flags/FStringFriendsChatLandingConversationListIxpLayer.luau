@@ -1,0 +1,1 @@
+﻿return game:DefineFastString("FriendsChatLandingConversationListIxpLayer", "ExperienceChat.FriendsTab.LandingPage.ConversationList")

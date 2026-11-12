@@ -12,6 +12,8 @@ local UseBuildPromptDraftModule = require(BuildExperience.Chat.useBuildPromptDra
 local FFlagBuildExperienceMonetizationNativeUIModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
 local FFlagBuildExperienceDeveloperProductContextModule = require(BuildExperience.Flags.FFlagBuildExperienceDeveloperProductContext)
 local UseChatSessionCoreModule = require(BuildExperience.Chat.useChatSessionCore)
+local FFlagBuildExperienceChatSheetDesktopAutoFocusModule = require(BuildExperience.Flags.FFlagBuildExperienceChatSheetDesktopAutoFocus)
+local ResponsiveModule = require(Parent.Responsive)
 local _ = require(BuildExperience.Components.BuildPillMenu.BuildPillMenuPortal)
 local GetAssistantBuildStoreModule = require(BuildExperience.Stores.GetAssistantBuildStore)
 local GetCreatorAgentResumeStoreModule = require(BuildExperience.Stores.GetCreatorAgentResumeStore)
@@ -20,9 +22,8 @@ local GetCurrentExperienceProjectModule = require(BuildExperience.utils.getCurre
 local _ = require(script.Parent.ChatSheetView)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagBuildExperienceAnalytics = SharedFlagsModule.FFlagBuildExperienceAnalytics
-local FFlagBuildExperienceChatResourceAttachments = SharedFlagsModule.FFlagBuildExperienceInstanceSelection and SharedFlagsModule.FFlagBuildExperienceChatResourceAttachments
-local FFlagBuildExperienceChatImageAttachmentsModule = require(BuildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
-local FFlagBuildExperienceChatImageAttachmentsModule1 = SharedFlagsModule.FFlagBuildExperienceInGameCaptureToChat and FFlagBuildExperienceChatImageAttachmentsModule
+local FFlagBuildExperienceInstanceSelection = SharedFlagsModule.FFlagBuildExperienceInstanceSelection
+local FFlagBuildExperienceInGameCaptureToChat = SharedFlagsModule.FFlagBuildExperienceInGameCaptureToChat
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
 local UseChatSheetFundingRecoveryModule = require(BuildExperience.Components.ChatSheet.useChatSheetFundingRecovery)
@@ -30,7 +31,7 @@ local UseChatSheetFundingRecoveryModule = require(BuildExperience.Components.Cha
 local function noop() end
 
 return function(p1)
-	-- upvalues: noop (copy), GetAssistantBuildStoreModule (copy), SignalsReactModule (copy), GetCreatorAgentResumeStoreModule (copy), GetCurrentExperienceProjectModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), UseChatSessionCoreModule (copy), FFlagBuildExperienceModelPickerModule (copy), UseBuildModelSelectionModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), UseBuildPromptDraftModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), UseChatPlaytestFooterModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), GetPlayButtonStoreModule (copy), ReactModule (copy), ChatTypesModule (copy), FFlagBuildExperienceChatImageAttachmentsModule1 (copy), FFlagBuildExperienceAnalytics (copy), UseChatSheetFundingRecoveryModule (copy), FFlagBuildExperienceAnswerFormModule (copy)
+	-- upvalues: noop (copy), GetAssistantBuildStoreModule (copy), SignalsReactModule (copy), GetCreatorAgentResumeStoreModule (copy), GetCurrentExperienceProjectModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), FFlagBuildExperienceChatSheetDesktopAutoFocusModule (copy), ResponsiveModule (copy), UseChatSessionCoreModule (copy), FFlagBuildExperienceModelPickerModule (copy), UseBuildModelSelectionModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), UseBuildPromptDraftModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), UseChatPlaytestFooterModule (copy), FFlagBuildExperienceInstanceSelection (copy), GetPlayButtonStoreModule (copy), ReactModule (copy), ChatTypesModule (copy), FFlagBuildExperienceInGameCaptureToChat (copy), FFlagBuildExperienceAnalytics (copy), UseChatSheetFundingRecoveryModule (copy), FFlagBuildExperienceAnswerFormModule (copy)
 	local OnClose = p1.onClose or noop
 	local NoIsOpen = p1.isOpen == nil or p1.isOpen
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetAssistantBuildStoreModule().getIsDisabled)
@@ -48,11 +49,17 @@ return function(p1)
 		NoCanEditOnBuild = not UseGamePermissionsModuleResult.canEditOnBuild
 		v1 = UseGamePermissionsModuleResult2
 	end
+	local IsAutoFocusComposer = p1.autoFocusComposer == true
+	
+	if FFlagBuildExperienceChatSheetDesktopAutoFocusModule then
+		local IsUsePreferredInputResultMatch = ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Pointer
+		IsAutoFocusComposer = IsAutoFocusComposer or IsUsePreferredInputResultMatch
+	end
 	local UseChatSessionCoreModuleResult = UseChatSessionCoreModule({
 		universeId = UniverseId,
 		placeId = PlaceId,
 		sessionId = p1.sessionId,
-		autoFocusComposer = p1.autoFocusComposer == true,
+		autoFocusComposer = IsAutoFocusComposer,
 		focusComposerWhen = NoIsOpen,
 		hydrateHistoryWhen = NoIsOpen,
 		sendMessageWhen = not NoCanEditOnBuild
@@ -64,7 +71,7 @@ return function(p1)
 	end
 	local ChatSheetPlaytestCta = UseChatPlaytestFooterModule(UseChatSessionCoreModuleResult, "ChatSheetPlaytestCta")
 	
-	if FFlagBuildExperienceChatResourceAttachments then
+	if FFlagBuildExperienceInstanceSelection then
 		local PlayButtonStoreModule = GetPlayButtonStoreModule()
 		local UseSignalStateResult1 = SignalsReactModule.useSignalState(PlayButtonStoreModule.getPendingResourceAttachment)
 		ReactModule.useEffect(function()
@@ -80,7 +87,7 @@ return function(p1)
 			UseChatSessionCoreModuleResult.findComposerResourceAttachmentIndexByUri
 		})
 	end
-	if FFlagBuildExperienceChatImageAttachmentsModule1 then
+	if FFlagBuildExperienceInGameCaptureToChat then
 		local UseRefResult = ReactModule.useRef(nil)
 		ReactModule.useEffect(function()
 			-- upvalues: p1 (copy), UseRefResult (copy), UseChatSessionCoreModuleResult (copy)

@@ -5,12 +5,17 @@ local Players = game:GetService("Players")
 local ReactModule = require(Parent.React)
 local LocalizationProvider = require(Parent.Localization).LocalizationProvider
 local Localization = require(Parent.RobloxAppLocales).Localization
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
 local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
-local FocusRoot = FocusNavigationUtilsModule.FocusRoot
+local UseFocusRootFunction = FocusNavigationUtilsModule.useFocusRoot
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local Provider = FocusNavigationUtilsModule.FocusNavigableSurfaceRegistry.Provider
 local GenerateVIPServerLinkModule = require(PurchasePrompt.Thunks.generateVIPServerLink)
 local SaveVIPServerConfigurationModule = require(PurchasePrompt.Thunks.saveVIPServerConfiguration)
 local SearchUsersModule = require(PurchasePrompt.Thunks.searchUsers)
+local SelectProductPriceModule = require(PurchasePrompt.Selectors.selectProductPrice)
+local SelectVIPServerOfferTypeModule = require(PurchasePrompt.Selectors.selectVIPServerOfferType)
+local SendPrivateServerConfigEventModule = require(PurchasePrompt.Utils.sendPrivateServerConfigEvent)
 local TeleportToVIPServerModule = require(PurchasePrompt.Utils.teleportToVIPServer)
 local _ = require(PurchasePrompt.types)
 local VIPServerConfigurationViewModule = require(script.Parent.VIPServerConfigurationView)
@@ -22,9 +27,12 @@ local function VIPServerConfiguration(p1)
 	-- upvalues: UseVIPServerConfigurationViewModelModule (copy), Players (copy), ReactModule (copy), VIPServerConfigurationViewModule (copy)
 	return ReactModule.createElement(VIPServerConfigurationViewModule, (UseVIPServerConfigurationViewModelModule({
 		defaultServerName = p1.serverName,
+		price = p1.price,
+		offerType = p1.offerType,
 		generateLink = p1.generateLink,
 		save = p1.save,
 		searchUsers = p1.searchUsers,
+		logEvent = p1.logEvent,
 		onSaved = p1.onSaved,
 		onClose = p1.onClose,
 		players = Players
@@ -32,23 +40,44 @@ local function VIPServerConfiguration(p1)
 end
 
 local function VIPServerJoin(p1)
-	-- upvalues: UseVIPServerJoinViewModelModule (copy), TeleportToVIPServerModule (copy), ReactModule (copy), VIPServerJoinViewModule (copy)
+	-- upvalues: UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), ReactFocusNavigationModule (copy), UseVIPServerJoinViewModelModule (copy), TeleportToVIPServerModule (copy), ReactModule (copy), VIPServerJoinViewModule (copy)
+	local UseDefaultFocusBehaviorResult, UseDefaultFocusBehaviorResult2 = ReactFocusNavigationModule.useDefaultFocusBehavior((UseFocusRootFunction({
+		isAutoFocusRoot = true,
+		shouldRestoreFocus = false,
+		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay
+	})))
+	
 	return ReactModule.createElement(VIPServerJoinViewModule, (UseVIPServerJoinViewModelModule({
 		vipServerAccessCode = p1.vipServerAccessCode,
 		serverName = p1.serverName,
 		gameName = p1.gameName,
 		thumbnailUrl = p1.thumbnailUrl,
 		teleport = TeleportToVIPServerModule,
-		onClose = p1.onClose
+		logEvent = p1.logEvent,
+		onClose = p1.onClose,
+		focusRootRef = UseDefaultFocusBehaviorResult2,
+		joinButtonRef = UseDefaultFocusBehaviorResult
 	})))
 end
 
 local function VIPServerPostPurchase(p1)
-	-- upvalues: ReactModule (copy), VIPServerJoin (copy), VIPServerConfiguration (copy)
+	-- upvalues: ReactModule (copy), SendPrivateServerConfigEventModule (copy), VIPServerJoin (copy), VIPServerConfiguration (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local VipServerAccessCode = p1.vipServerAccessCode
 	local OnCloseFunction = p1.onClose
-	local UseResult = ReactModule.useCallback(function()
+	local VipServerId = p1.vipServerId
+	local UniverseId = p1.universeId
+	local PurchaseFlowUUID = p1.purchaseFlowUUID
+	local UseResult = ReactModule.useCallback(function(Tbl)
+		-- upvalues: VipServerId (copy), UniverseId (copy), PurchaseFlowUUID (copy), SendPrivateServerConfigEventModule (upval)
+		local Copy = table.clone(Tbl)
+		Copy.privateServerId = VipServerId
+		Copy.universeId = UniverseId
+		Copy.surface = "in_experience"
+		Copy.purchase_flow_uuid = PurchaseFlowUUID
+		SendPrivateServerConfigEventModule(Copy)
+	end, { VipServerId, UniverseId, PurchaseFlowUUID })
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: VipServerAccessCode (copy), UseStateResult2 (copy), OnCloseFunction (copy)
 		if VipServerAccessCode == nil then
 			OnCloseFunction()
@@ -64,23 +93,33 @@ local function VIPServerPostPurchase(p1)
 		serverName = p1.serverName,
 		gameName = p1.gameName,
 		thumbnailUrl = p1.thumbnailUrl,
+		logEvent = UseResult,
 		onClose = OnCloseFunction
 	}) else ReactModule.createElement(VIPServerConfiguration, {
 		serverName = p1.serverName,
+		price = p1.price,
+		offerType = p1.offerType,
 		generateLink = p1.generateLink,
 		save = p1.save,
 		searchUsers = p1.searchUsers,
-		onSaved = UseResult,
+		logEvent = UseResult,
+		onSaved = UseResult1,
 		onClose = OnCloseFunction
 	})
 end
 
 return require(PurchasePrompt.connectToStore)(function(p1)
+	-- upvalues: SelectProductPriceModule (copy), SelectVIPServerOfferTypeModule (copy)
 	return {
 		serverName = p1.promptRequest.vipServerName or "",
 		vipServerAccessCode = p1.promptRequest.vipServerAccessCode,
 		gameName = p1.productInfo.name or "",
-		thumbnailUrl = p1.productInfo.imageUrl
+		thumbnailUrl = p1.productInfo.imageUrl,
+		vipServerId = p1.promptRequest.vipServerId,
+		universeId = if p1.productPayload then p1.productPayload.universeId else nil,
+		purchaseFlowUUID = p1.purchaseAnalyticsMetadata.purchaseFlowUUID,
+		price = SelectProductPriceModule(p1),
+		offerType = SelectVIPServerOfferTypeModule(p1)
 	}
 end, function(Callback)
 	-- upvalues: GenerateVIPServerLinkModule (copy), SaveVIPServerConfigurationModule (copy), SearchUsersModule (copy)
@@ -99,16 +138,26 @@ end, function(Callback)
 		end
 	}
 end)(function(p1)
-	-- upvalues: ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), VIPServerPostPurchase (copy)
+	-- upvalues: ReactModule (copy), ReactFocusNavigationModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), Provider (copy), VIPServerPostPurchase (copy)
+	local UseMemoResult = ReactModule.useMemo(function()
+		-- upvalues: ReactFocusNavigationModule (upval)
+		return ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
+	end, {})
+	ReactModule.useEffect(function()
+		-- upvalues: UseMemoResult (copy)
+		return function()
+			-- upvalues: UseMemoResult (upval)
+			UseMemoResult:teardown()
+		end
+	end, { UseMemoResult })
+	
 	return ReactModule.createElement(LocalizationProvider, {
 		localization = Localization.new(LocalizationService.RobloxLocaleId)
 	}, {
-		FocusRoot = ReactModule.createElement(FocusRoot, {
-			isIsolated = true,
-			isAutoFocusRoot = true,
-			surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay
-		}, {
-			VIPServerPostPurchase = ReactModule.createElement(VIPServerPostPurchase, p1)
+		FocusNavigationProvider = ReactModule.createElement(ReactFocusNavigationModule.FocusNavigationContext.Provider, { value = UseMemoResult }, {
+			FocusNavigationRegistryProvider = ReactModule.createElement(Provider, nil, {
+				VIPServerPostPurchase = ReactModule.createElement(VIPServerPostPurchase, p1)
+			})
 		})
 	})
 end)

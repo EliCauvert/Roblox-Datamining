@@ -68,6 +68,7 @@ local SignalsMigrationConfigModule = require(AppChat.Flags.SignalsMigrationConfi
 local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
 local FFlagAppChatConsoleFocusFixesModule = require(AppChat.Flags.FFlagAppChatConsoleFocusFixes)
 local FFlagAppChatServerSideConversationSearchModule = require(AppChat.Flags.FFlagAppChatServerSideConversationSearch)
+local FFlagAppChatSearchSendPlacementModule = require(AppChat.Flags.FFlagAppChatSearchSendPlacement)
 local FFlagAppChatSkipSearchWhenChatDisabledModule = require(AppChat.Flags.FFlagAppChatSkipSearchWhenChatDisabled)
 local UseCallbackFunction = ReactModule.useCallback
 local UseEffectFunction = ReactModule.useEffect
@@ -79,6 +80,9 @@ local NoFriendsView = ComponentsModule.NoFriendsView
 local FFlagAppIaScrollAway = SharedFlagsModule.FFlagAppIaScrollAway
 local FFlagEnableScrollAwayContentScrollableFix = SharedFlagsModule.FFlagEnableScrollAwayContentScrollableFix
 local FFlagSignalsNavP3hMisc = SharedFlagsModule.FFlagSignalsNavP3hMisc
+local FFlagSignalsNavDeferProjection = SharedFlagsModule.FFlagSignalsNavDeferProjection
+local UseSignalsEffect = if FFlagSignalsNavDeferProjection then require(Parent.RobloxAppHooks).useSignalsEffect else nil
+local IsChatVisible = if FFlagSignalsNavDeferProjection then require(AppChat.Utils.getIsChatVisibleNow).isChatVisible else nil
 local GetFFlagChatTabHideGroupsLinkOnVRModule = require(AppChat.Flags.getFFlagChatTabHideGroupsLinkOnVR)
 local GetTopBarStoreModule = require(AppChat.Stores.GetTopBarStore)
 local PartyPageCarouselExperimentation = require(Parent.SocialExperiments).PartyPageCarouselExperimentation
@@ -114,6 +118,13 @@ local function _(List, p1): boolean
 	return true
 end
 
+local _ = function(p2, NumElementsRendered)
+	-- upvalues: AppChatPerfTrackerModule (copy)
+	if p2 and AppChatPerfTrackerModule.isActive(AppChatPerfTrackerModule.Events.ChatLandingTTI) then
+		AppChatPerfTrackerModule.finish(AppChatPerfTrackerModule.Events.ChatLandingTTI, { numElementsRendered = NumElementsRendered })
+	end
+end
+
 local _ = function(p2)
 	-- upvalues: HttpService (copy)
 	local Success, Result = pcall(function()
@@ -125,7 +136,7 @@ local _ = function(p2)
 end
 
 function ChatLandingContainer(p2)
-	-- upvalues: CryoModule (copy), config (copy), UseAnalyticsModule (copy), UseChatPlacementContextFunction (copy), UseDispatchFunction (copy), UseIsChatEnabledModule (copy), UseIsGroupChatEnabledModule (copy), UseIsChatEnabledFromReasonModule (copy), UseIsInExperienceModule (copy), UseAppChatIsWideModeModule (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), UseIsAppLoadedModule (copy), UseAreConversationsFetchingModule (copy), UseHasConversationsModule (copy), UseIsOldestConversationFetchedModule (copy), UseLocalUserIdFunction (copy), UseNavigationFunction (copy), FFlagAppThemeHalloween2026ChatBackgroundModule (copy), UseThemeBackgroundFunction (copy), UseStyleFunction (copy), UseTextSizeOffsetFunction (copy), UseAnalyticsModule1 (copy), FFlagAppChatConsoleFocusFixesModule (copy), UseTokensFunction (copy), FFlagCreateConnectionsHub (copy), UseGetConversationsModule (copy), ShouldReadConversationListFromSignalsStore (copy), UseConversationListModule (copy), FFlagAppChatConversationLoadRetryModule (copy), UseSelectorFunction (copy), AppChatNetworkingModule (copy), RoduxNetworkingModule (copy), FFlagAppChatServerSideConversationSearchModule (copy), FFlagAppChatSkipSearchWhenChatDisabledModule (copy), UseConversationSearchListPropsModule (copy), FFlagAppChatSearchSessionTelemetryModule (copy), UseChatSearchSessionModule (copy), UseEffectFunction (copy), GetConversationIdsModule (copy), NewResult (copy), HttpService (copy), UsePreviousFunction (copy), FetchConversationsByPageModule (copy), ReactModule (copy), GetOtherParticipantsModule (copy), UseIsUserPendingModule (copy), ConversationChannelsModule (copy), GetConversationTitleModule (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), ChatLandingTelemetryStateModule (copy), UseEffectOnMountFunction (copy), ChatLandingTelemetryEventsModule (copy), UseLocalizationFunction (copy), UseCallbackFunction (copy), PartyPageCarouselExperimentation (copy), EventNamesModule (copy), Text (copy), Text1 (copy), EnumScreensModule (copy), CreateConversationModule (copy), ParseCreateConversationErrorsModule (copy), CreateConversationErrorModule (copy), UseChatSettingsRetrievalStatusModule (copy), UseIsExternalNavigationAvailableModule (copy), FFlagAppIaScrollAway (copy), AppNavBarModule (copy), UseCanAccessPartyModule (copy), SquadQuickStartExperimentation (copy), ChatLoadingContainerModule (copy), FoundationModule (copy), NoFriendsView (copy), EmptyStateTypeModule (copy), AppPage (copy), NoConversationsLandingModule (copy), ConversationListWithTopBarModule (copy), SignalsMigrationConfigModule (copy), FFlagEnableScrollAwayContentScrollableFix (copy), VisibilityControl (copy), GetFFlagChatTabHideGroupsLinkOnVRModule (copy), IsVRAppBuildFunction (copy), GetTopBarStoreModule (copy), ConversationGroupsEntryContainerModule (copy), UseChatIsVisibleModule (copy), FFlagAppChatVisibleIsInConversationModule (copy), GetIsInConversationForTelemetryModule (copy), FFlagSignalsNavP3hMisc (copy)
+	-- upvalues: CryoModule (copy), config (copy), UseAnalyticsModule (copy), UseChatPlacementContextFunction (copy), UseDispatchFunction (copy), UseIsChatEnabledModule (copy), UseIsGroupChatEnabledModule (copy), UseIsChatEnabledFromReasonModule (copy), UseIsInExperienceModule (copy), UseAppChatIsWideModeModule (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), UseIsAppLoadedModule (copy), UseAreConversationsFetchingModule (copy), UseHasConversationsModule (copy), UseIsOldestConversationFetchedModule (copy), UseLocalUserIdFunction (copy), UseNavigationFunction (copy), FFlagAppThemeHalloween2026ChatBackgroundModule (copy), UseThemeBackgroundFunction (copy), UseStyleFunction (copy), UseTextSizeOffsetFunction (copy), UseAnalyticsModule1 (copy), FFlagAppChatConsoleFocusFixesModule (copy), UseTokensFunction (copy), FFlagCreateConnectionsHub (copy), UseGetConversationsModule (copy), ShouldReadConversationListFromSignalsStore (copy), UseConversationListModule (copy), FFlagAppChatConversationLoadRetryModule (copy), UseSelectorFunction (copy), AppChatNetworkingModule (copy), RoduxNetworkingModule (copy), FFlagAppChatServerSideConversationSearchModule (copy), FFlagAppChatSkipSearchWhenChatDisabledModule (copy), UseConversationSearchListPropsModule (copy), FFlagAppChatSearchSendPlacementModule (copy), FFlagAppChatSearchSessionTelemetryModule (copy), UseChatSearchSessionModule (copy), UseEffectFunction (copy), GetConversationIdsModule (copy), NewResult (copy), HttpService (copy), UsePreviousFunction (copy), FetchConversationsByPageModule (copy), ReactModule (copy), GetOtherParticipantsModule (copy), UseIsUserPendingModule (copy), ConversationChannelsModule (copy), GetConversationTitleModule (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), ChatLandingTelemetryStateModule (copy), UseEffectOnMountFunction (copy), ChatLandingTelemetryEventsModule (copy), UseLocalizationFunction (copy), UseCallbackFunction (copy), PartyPageCarouselExperimentation (copy), EventNamesModule (copy), Text (copy), Text1 (copy), EnumScreensModule (copy), CreateConversationModule (copy), ParseCreateConversationErrorsModule (copy), CreateConversationErrorModule (copy), UseChatSettingsRetrievalStatusModule (copy), UseIsExternalNavigationAvailableModule (copy), FFlagAppIaScrollAway (copy), AppNavBarModule (copy), UseCanAccessPartyModule (copy), SquadQuickStartExperimentation (copy), ChatLoadingContainerModule (copy), FoundationModule (copy), NoFriendsView (copy), EmptyStateTypeModule (copy), AppPage (copy), NoConversationsLandingModule (copy), ConversationListWithTopBarModule (copy), SignalsMigrationConfigModule (copy), FFlagEnableScrollAwayContentScrollableFix (copy), VisibilityControl (copy), GetFFlagChatTabHideGroupsLinkOnVRModule (copy), IsVRAppBuildFunction (copy), GetTopBarStoreModule (copy), ConversationGroupsEntryContainerModule (copy), UseChatIsVisibleModule (copy), FFlagAppChatVisibleIsInConversationModule (copy), GetIsInConversationForTelemetryModule (copy), FFlagSignalsNavDeferProjection (copy), UseSignalsEffect (copy), IsChatVisible (copy), FFlagSignalsNavP3hMisc (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p2)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseChatPlacementContextResult = UseChatPlacementContextFunction()
@@ -193,7 +204,7 @@ function ChatLandingContainer(p2)
 		if FFlagAppChatSkipSearchWhenChatDisabledModule then
 			IsIsShowingFilterBox = IsIsShowingFilterBox and UseIsChatEnabledModuleResult
 		end
-		v1, t = UseConversationSearchListPropsModule(JoinResult.filterText, IsIsShowingFilterBox, UseLocalUserIdResult, UseIsGroupChatEnabledModuleResult, JoinResult.navigateToConversation)
+		v1, t = UseConversationSearchListPropsModule(JoinResult.filterText, IsIsShowingFilterBox, UseLocalUserIdResult, UseIsGroupChatEnabledModuleResult, JoinResult.navigateToConversation, if FFlagAppChatSearchSendPlacementModule then UseChatPlacementContextResult.chatPlacement else nil)
 	end
 	if FFlagAppChatSearchSessionTelemetryModule then
 		local HasS = JoinResult.isShowingFilterBox == true and (JoinResult.filterText ~= nil and JoinResult.filterText:match("%S") ~= nil)
@@ -385,14 +396,14 @@ function ChatLandingContainer(p2)
 	local ScrollAwayEnabled = FFlagAppIaScrollAway and (not UseIsInExperienceModuleResult and AppNavBarModule.getScrollAwayEnabled())
 	local UseCanAccessPartyModuleResult = UseCanAccessPartyModule()
 	local UseCanAccessPartyModuleResult1 = SquadQuickStartExperimentation.getPartyQuickStartChangesEnabled() and UseCanAccessPartyModuleResult
-	local IsNotDone1 = IsNotDone
+	local v2 = IsNotDone
 	
 	if FFlagAppChatConversationLoadRetryModule and UseIsChatEnabledModuleResult and not v1 and IsEmpty then
-		IsNotDone1 = IsNotDone1 or IsFetchingMatch
+		v2 = v2 or IsFetchingMatch
 	end
-	local Element1 = nil
-	if IsNotDone1 then
-		Element1 = ReactModule.createElement(ChatLoadingContainerModule, {
+	local Element = nil
+	if v2 then
+		Element = ReactModule.createElement(ChatLoadingContainerModule, {
 			cellWidth = 375,
 			topBarHeight = JoinResult.topBarHeight,
 			pageHeaderText = JoinResult.pageHeaderText,
@@ -401,8 +412,8 @@ function ChatLandingContainer(p2)
 			pageBackgroundTransparency = if HasUseThemeBackgroundResult then 1 else nil
 		})
 		Flag = true
-	elseif FFlagAppChatConversationLoadRetryModule and UseIsChatEnabledModuleResult and (not v1 and IsEmpty and UseIsAppLoadedModuleResult and not IsIsFetchingConversations and IsFailedMatch) then
-		Element1 = ReactModule.createElement(FoundationModule.Empty, {
+	elseif FFlagAppChatConversationLoadRetryModule and UseIsChatEnabledModuleResult and (not v1 and IsEmpty and UseIsAppLoadedModuleResult and (not IsIsFetchingConversations and IsFailedMatch)) then
+		Element = ReactModule.createElement(FoundationModule.Empty, {
 			text = UseLocalizationResult.conversationLoadError,
 			button = {
 				text = UseLocalizationResult.refresh,
@@ -414,7 +425,7 @@ function ChatLandingContainer(p2)
 		Flag = true
 		Flag1 = true
 		Flag2 = true
-		Element1 = ReactModule.createElement(ConversationListWithTopBarModule, CryoModule.Dictionary.join(JoinResult, {
+		Element = ReactModule.createElement(ConversationListWithTopBarModule, CryoModule.Dictionary.join(JoinResult, {
 			filterText = JoinResult.isShowingFilterBox and JoinResult.filterText or nil,
 			key = `conversationListWithTopBar{JoinResult.filterText}`,
 			itemList = UseMemoResult,
@@ -434,7 +445,7 @@ function ChatLandingContainer(p2)
 			isPartyQuickStartEnabled = UseCanAccessPartyModuleResult1
 		}, t))
 	elseif UseIsChatEnabledModuleResult then
-		Element1 = ReactModule.createElement("Frame", {
+		Element = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			Size = UDim2.new(1, 0, 1, 0),
 			BackgroundColor3 = UseStyleResult.Theme.BackgroundDefault.Color,
@@ -465,7 +476,7 @@ function ChatLandingContainer(p2)
 		})
 		Flag = true
 	else
-		Element1 = ReactModule.createElement(NoConversationsLandingModule, {
+		Element = ReactModule.createElement(NoConversationsLandingModule, {
 			chatEnabled = UseIsChatEnabledModuleResult,
 			privacySettingsEnabled = PrivacySettingsEnabled,
 			globalRulesEnabled = GlobalRulesEnabled,
@@ -517,7 +528,7 @@ function ChatLandingContainer(p2)
 			GetTopBarStoreModule(false).setScreenTopBar(EnumScreensModule.ChatLanding, { rightHidden = not Flag1 })
 		end
 	end, { Flag1, UseIsInExperienceModuleResult })
-	local Element = if not Flag and UseIsExternalNavigationAvailableModuleResult[EnumScreensModule.Groups] then ReactModule.createElement(ReactModule.Fragment, nil, {
+	local Element1 = if not Flag and UseIsExternalNavigationAvailableModuleResult[EnumScreensModule.Groups] then ReactModule.createElement(ReactModule.Fragment, nil, {
 		UIPadding = if FFlagAppIaScrollAway and ScrollAwayEnabled then ReactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, JoinResult.topBarHeight) }) else nil,
 		groupsLink = ReactModule.createElement(ConversationGroupsEntryContainerModule, { entryHeight = NewSize }),
 		chatFrame = ReactModule.createElement("Frame", {
@@ -525,8 +536,8 @@ function ChatLandingContainer(p2)
 			BorderSizePixel = 0,
 			Size = UDim2.new(1, 0, 1, -NewSize),
 			Position = UDim2.new(0, 0, 0, NewSize)
-		}, { chatContainer = Element1 })
-	}) else Element1
+		}, { chatContainer = Element })
+	}) else Element
 	local UseChatIsVisibleModuleResult = UseChatIsVisibleModule()
 	ReactModule.useEffect(function()
 		-- upvalues: UseChatIsVisibleModuleResult (copy), EmitFunction (ref), ChatLandingTelemetryEventsModule (upval), UseIsChatEnabledModuleResult (copy), IsNotDone (copy), FFlagAppChatVisibleIsInConversationModule (upval), GetIsInConversationForTelemetryModule (upval), UseNavigationResult (copy)
@@ -545,20 +556,43 @@ function ChatLandingContainer(p2)
 	
 	if FFlagAppChatPerfTrackingModule then
 		ReactModule.useEffect(function()
-			-- upvalues: UseChatIsVisibleModuleResult (copy), IsNotDone1 (ref), UseIsChatEnabledModuleResult (copy), NewResult (upval), UseMemoResult (copy), AppChatPerfTrackerModule (upval)
+			-- upvalues: UseChatIsVisibleModuleResult (copy), v2 (ref), UseIsChatEnabledModuleResult (copy), NewResult (upval), UseMemoResult (copy), AppChatPerfTrackerModule (upval)
 			if not UseChatIsVisibleModuleResult then return end
-			local UseIsChatEnabledModuleResult1 = not IsNotDone1 and UseIsChatEnabledModuleResult
-			NewResult:debug("TTI Ready Check (ChatLanding): isLoading={}, isChatEnabled={}, itemCount={}, ready={}", IsNotDone1, UseIsChatEnabledModuleResult, #UseMemoResult, UseIsChatEnabledModuleResult1)
+			local UseIsChatEnabledModuleResult1 = not v2 and UseIsChatEnabledModuleResult
+			NewResult:debug("TTI Ready Check (ChatLanding): isLoading={}, isChatEnabled={}, itemCount={}, ready={}", v2, UseIsChatEnabledModuleResult, #UseMemoResult, UseIsChatEnabledModuleResult1)
 			
 			if UseIsChatEnabledModuleResult1 and AppChatPerfTrackerModule.isActive(AppChatPerfTrackerModule.Events.ChatLandingTTI) then
 				AppChatPerfTrackerModule.finish(AppChatPerfTrackerModule.Events.ChatLandingTTI, { numElementsRendered = #UseMemoResult })
 			end
 		end, {
 			UseChatIsVisibleModuleResult,
-			IsNotDone1,
+			v2,
 			UseIsChatEnabledModuleResult,
 			#UseMemoResult
 		})
+		
+		if FFlagSignalsNavDeferProjection then
+			local Current = {
+				isInteractive = not v2 and UseIsChatEnabledModuleResult,
+				numElementsRendered = #UseMemoResult
+			}
+			local UseRefResult2 = ReactModule.useRef(Current)
+			
+			if UseChatIsVisibleModuleResult then
+				UseRefResult2.current = Current
+			end
+			UseSignalsEffect(IsChatVisible, function(p3)
+				-- upvalues: UseRefResult2 (copy), AppChatPerfTrackerModule (upval)
+				if p3 then
+					local Current = UseRefResult2.current
+					local NumElementsRendered = Current.numElementsRendered
+					
+					if Current.isInteractive and AppChatPerfTrackerModule.isActive(AppChatPerfTrackerModule.Events.ChatLandingTTI) then
+						AppChatPerfTrackerModule.finish(AppChatPerfTrackerModule.Events.ChatLandingTTI, { numElementsRendered = NumElementsRendered })
+					end
+				end
+			end)
+		end
 	end
 	local UseRefResult1 = ReactModule.useRef({
 		isChatEnabled = UseIsChatEnabledModuleResult,
@@ -582,14 +616,14 @@ function ChatLandingContainer(p2)
 	end, { UseChatIsVisibleModuleResult })
 	
 	if not FFlagSignalsNavP3hMisc then
-		return Element
+		return Element1
 	end
-	local UseRefResult2 = ReactModule.useRef(nil)
+	local UseRefResult3 = ReactModule.useRef(nil)
 	
-	if UseChatIsVisibleModuleResult or UseRefResult2.current == nil then
-		UseRefResult2.current = Element
+	if UseChatIsVisibleModuleResult or UseRefResult3.current == nil then
+		UseRefResult3.current = Element1
 	end
-	return UseRefResult2.current
+	return UseRefResult3.current
 end
 
 local function paginatorParameters()

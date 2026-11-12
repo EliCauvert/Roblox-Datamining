@@ -116,8 +116,8 @@ return function(Model: Model, p1, p2, p3, AllowEditableInstances, BypassFlags)
 	local Errors = {}
 	local Pieces = {}
 	
-	for i1, allowedAssetTypeSetting in p1[p2].allowedAssetTypeSettings do
-		local AssetTypeNameDoesnTMapToAnEnumItem = assert(Enum.AssetType[i1], "Asset type name doesn't map to an enum item")
+	for i2, allowedAssetTypeSetting in p1[p2].allowedAssetTypeSettings do
+		local AssetTypeNameDoesnTMapToAnEnumItem = assert(Enum.AssetType[i2], "Asset type name doesn't map to an enum item")
 		
 		if allowedAssetTypeSetting.isEligibleForUpload then
 			local Entry = t[AssetTypeNameDoesnTMapToAnEnumItem]
@@ -138,9 +138,9 @@ return function(Model: Model, p1, p2, p3, AllowEditableInstances, BypassFlags)
 		end
 	end
 	if ConstantsModule.ANIMATION_ASSET_INFO then
-		for i2, _ in ConstantsModule.ANIMATION_ASSET_INFO do
-			if t3[i2] then
-				table.insert(Pieces, t3[i2])
+		for i1, _ in ConstantsModule.ANIMATION_ASSET_INFO do
+			if t3[i1] then
+				table.insert(Pieces, t3[i1])
 			end
 		end
 	end

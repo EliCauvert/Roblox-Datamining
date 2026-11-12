@@ -1,4 +1,5 @@
-﻿local FFlagViewRecyclerReact08 = require(script:FindFirstAncestor("ViewRecyclerReact").Flags).FFlagViewRecyclerReact08
+﻿local FFlagViewRecyclerReact084 = require(script:FindFirstAncestor("ViewRecyclerReact").Flags).FFlagViewRecyclerReact084
+local FFlagViewRecyclerReact08 = require(script:FindFirstAncestor("ViewRecyclerReact").Flags).FFlagViewRecyclerReact08
 local ViewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
 local ViewRecyclerRobloxModule = require(ViewRecyclerReact.Parent.ViewRecyclerRoblox)
 local DestinationModule = require(script.Parent.Destination)
@@ -12,6 +13,7 @@ local _ = require(script.Parent.VirtualListShell)
 local UseCompositionPlacementModule = require(script.Parent.useCompositionPlacement)
 local UseRecyclingScopeModule = require(script.Parent.useRecyclingScope)
 local VirtualizerConfigurationModule = require(script.Parent.virtualizerConfiguration)
+local UseLayoutEffect = if FFlagViewRecyclerReact084 then ReactModule.useLayoutEffect else ReactModule.useEffect
 
 local function _(Callback: (any) -> (), Current)
 	if Callback == nil then return end
@@ -27,45 +29,50 @@ end
 local toCorePinnedItem = nil
 local Configuration: ((any, any) -> any)? = nil
 
-if not FFlagViewRecyclerReact08 then
-	toCorePinnedItem = function(PinnedEndItem)
-		return if PinnedEndItem == nil then nil else {
-			key = PinnedEndItem.key,
-			value = PinnedEndItem.value,
-			itemViewType = PinnedEndItem.itemType
-		}
-	end
+if not FFlagViewRecyclerReact084 then
+	toCorePinnedItem = nil
+	Configuration = nil
 	
-	Configuration = function(p1, p2)
-		-- upvalues: toCorePinnedItem (ref)
-		return {
-			scrollingFrame = p2.scrollingFrame,
-			viewportOverlay = p2.viewportOverlay,
-			axis = p1.axis,
-			dataSource = p1.dataSource,
-			layout = p1.layout,
-			onStartReached = p1.onStartReached,
-			onEndReached = p1.onEndReached,
-			onViewportChanged = p1.onViewportChanged,
-			onScrollOffsetChanged = p1.onScrollOffsetChanged,
-			onContentLengthChanged = p1.onContentLengthChanged,
-			onVisibleRangeChanged = p1.onVisibleRangeChanged,
-			onMountedRangeChanged = p1.onMountedRangeChanged,
-			onVisibleItemsPresented = p1.onVisibleItemsPresented,
-			onDataPrefetchRequested = p1.onDataPrefetchRequested,
-			overscan = p1.overscan,
-			dataPrefetch = p1.dataPrefetch,
-			contentAlignment = p1.contentAlignment,
-			endReachedThreshold = p1.endReachedThreshold,
-			initialScrollAlignment = p1.initialScrollAlignment,
-			autoScrollOnChange = p1.autoScrollOnChange,
-			autoScrollThreshold = p1.autoScrollThreshold,
-			startReachedThreshold = p1.startReachedThreshold,
-			isItemStickyHeader = p1.isItemStickyHeader,
-			pinnedStartItem = toCorePinnedItem(p1.pinnedStartItem),
-			pinnedEndItem = toCorePinnedItem(p1.pinnedEndItem),
-			preserveScrollPositionOnChange = p1.preserveScrollPositionOnChange
-		}
+	if not FFlagViewRecyclerReact08 then
+		toCorePinnedItem = function(PinnedEndItem)
+			return if PinnedEndItem == nil then nil else {
+				key = PinnedEndItem.key,
+				value = PinnedEndItem.value,
+				itemViewType = PinnedEndItem.itemType
+			}
+		end
+		
+		Configuration = function(p1, p2)
+			-- upvalues: toCorePinnedItem (ref)
+			return {
+				scrollingFrame = p2.scrollingFrame,
+				viewportOverlay = p2.viewportOverlay,
+				axis = p1.axis,
+				dataSource = p1.dataSource,
+				layout = p1.layout,
+				onStartReached = p1.onStartReached,
+				onEndReached = p1.onEndReached,
+				onViewportChanged = p1.onViewportChanged,
+				onScrollOffsetChanged = p1.onScrollOffsetChanged,
+				onContentLengthChanged = p1.onContentLengthChanged,
+				onVisibleRangeChanged = p1.onVisibleRangeChanged,
+				onMountedRangeChanged = p1.onMountedRangeChanged,
+				onVisibleItemsPresented = p1.onVisibleItemsPresented,
+				onDataPrefetchRequested = p1.onDataPrefetchRequested,
+				overscan = p1.overscan,
+				dataPrefetch = p1.dataPrefetch,
+				contentAlignment = p1.contentAlignment,
+				endReachedThreshold = p1.endReachedThreshold,
+				initialScrollAlignment = p1.initialScrollAlignment,
+				autoScrollOnChange = p1.autoScrollOnChange,
+				autoScrollThreshold = p1.autoScrollThreshold,
+				startReachedThreshold = p1.startReachedThreshold,
+				isItemStickyHeader = p1.isItemStickyHeader,
+				pinnedStartItem = toCorePinnedItem(p1.pinnedStartItem),
+				pinnedEndItem = toCorePinnedItem(p1.pinnedEndItem),
+				preserveScrollPositionOnChange = p1.preserveScrollPositionOnChange
+			}
+		end
 	end
 end
 local _ = function(p1, p2)
@@ -81,7 +88,7 @@ local _ = function(p1)
 end
 
 return function(Current)
-	-- upvalues: ReactModule (copy), FFlagViewRecyclerReact08 (copy), UseRecyclingScopeModule (copy), RecyclingScopeContextModule (copy), RecyclingViewportContextModule (copy), SignalsModule (copy), UseCompositionPlacementModule (copy), VirtualizerConfigurationModule (copy), Configuration (ref), ViewRecyclerRobloxModule (copy), RecyclableViewRegistryModule (copy), DestinationModule (copy), PlacementKindModule (copy)
+	-- upvalues: ReactModule (copy), FFlagViewRecyclerReact084 (copy), UseRecyclingScopeModule (copy), FFlagViewRecyclerReact08 (copy), RecyclingScopeContextModule (copy), RecyclingViewportContextModule (copy), SignalsModule (copy), UseCompositionPlacementModule (copy), VirtualizerConfigurationModule (copy), Configuration (ref), ViewRecyclerRobloxModule (copy), RecyclableViewRegistryModule (copy), DestinationModule (copy), PlacementKindModule (copy), UseLayoutEffect (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult = ReactModule.useState(Current.scrollingFrame ~= nil)
 	assert(Current.scrollingFrame ~= nil == UseStateResult, "VirtualList: `scrollingFrame` cannot be added or removed during the list's lifetime")
@@ -90,17 +97,24 @@ return function(Current)
 		assert(Current.scrollingFrameProps == nil, "VirtualList: `scrollingFrameProps` cannot style an attached `scrollingFrame`")
 		assert(Current.tag == nil, "VirtualList: `tag` cannot style an attached `scrollingFrame`")
 	end
-	local UseStateResult1 = nil
+	local VirtualList = nil
 	local UseContextResult = nil
 	
-	if FFlagViewRecyclerReact08 then
-		UseStateResult1 = UseRecyclingScopeModule("VirtualList")
+	if FFlagViewRecyclerReact084 then
+		VirtualList = UseRecyclingScopeModule("VirtualList")
 	else
-		UseContextResult = ReactModule.useContext(RecyclingScopeContextModule)
-		assert(UseContextResult ~= nil, "VirtualListRenderer requires a RecyclingScope")
+		VirtualList = nil
+		UseContextResult = nil
+		
+		if FFlagViewRecyclerReact08 then
+			VirtualList = UseRecyclingScopeModule("VirtualList")
+		else
+			UseContextResult = ReactModule.useContext(RecyclingScopeContextModule)
+			assert(UseContextResult ~= nil, "VirtualListRenderer requires a RecyclingScope")
+		end
 	end
 	local UseContextResult1 = ReactModule.useContext(RecyclingViewportContextModule)
-	local UseStateResult2 = ReactModule.useState(function()
+	local UseStateResult1 = ReactModule.useState(function()
 		-- upvalues: SignalsModule (upval)
 		local Signal, Signal2 = SignalsModule.createSignal(false)
 		
@@ -111,50 +125,51 @@ return function(Current)
 	local UseRefResult3 = ReactModule.useRef(nil)
 	local v1 = nil
 	
-	if not FFlagViewRecyclerReact08 then
-		UseStateResult1 = ReactModule.useState(function()
-			-- upvalues: UseContextResult (ref)
-			return UseContextResult.root.getScope(UseContextResult.listOptions)
-		end)
-		ReactModule.useEffect(function()
-			-- upvalues: UseStateResult1 (ref), UseContextResult (ref)
-			UseStateResult1.bind({
-				updateCapacity = true,
-				releases = {},
-				requests = {},
-				capacity = UseContextResult.listOptions.maxPoolSize
-			})
-		end, {
-			UseStateResult1,
-			UseContextResult.listOptions.maxPoolSize
-		})
-		v1 = UseCompositionPlacementModule(UseContextResult.root, UseContextResult.listOptions.maxPoolSize, UseContextResult.listOptions.diagnostics)
+	if not FFlagViewRecyclerReact084 then
+		v1 = nil
+		
+		if not FFlagViewRecyclerReact08 then
+			VirtualList = ReactModule.useState(function()
+				-- upvalues: UseContextResult (ref)
+				return UseContextResult.root.getScope(UseContextResult.listOptions)
+			end)
+			ReactModule.useEffect(function()
+				-- upvalues: VirtualList (ref), UseContextResult (ref)
+				VirtualList.bind({
+					updateCapacity = true,
+					releases = {},
+					requests = {},
+					capacity = UseContextResult.listOptions.maxPoolSize
+				})
+			end, { VirtualList, UseContextResult.listOptions.maxPoolSize })
+			v1 = UseCompositionPlacementModule(UseContextResult.root, UseContextResult.listOptions.maxPoolSize, UseContextResult.listOptions.diagnostics)
+		end
 	end
 	local UseRefResult4 = ReactModule.useRef(nil)
-	local UseStateResult3 = ReactModule.useState(function()
-		-- upvalues: Current (copy), UseRefResult (copy), UseRefResult4 (copy), FFlagViewRecyclerReact08 (upval), VirtualizerConfigurationModule (upval), Configuration (upval), UseRefResult2 (copy), UseRefResult3 (copy)
+	local UseStateResult2 = ReactModule.useState(function()
+		-- upvalues: Current (copy), UseRefResult (copy), UseRefResult4 (copy), FFlagViewRecyclerReact084 (upval), VirtualizerConfigurationModule (upval), FFlagViewRecyclerReact08 (upval), Configuration (upval), UseRefResult2 (copy), UseRefResult3 (copy)
 		local Current1 = Current
 		
 		return {
 			synchronize = function(Current)
-				-- upvalues: Current1 (ref), UseRefResult (upval), UseRefResult4 (upval), FFlagViewRecyclerReact08 (upval), VirtualizerConfigurationModule (upval), Configuration (upval), UseRefResult2 (upval), UseRefResult3 (upval)
+				-- upvalues: Current1 (ref), UseRefResult (upval), UseRefResult4 (upval), FFlagViewRecyclerReact084 (upval), VirtualizerConfigurationModule (upval), FFlagViewRecyclerReact08 (upval), Configuration (upval), UseRefResult2 (upval), UseRefResult3 (upval)
 				Current1 = Current
 				UseRefResult.current = Current
 				local Current2 = UseRefResult4.current
 				
 				if Current2 ~= nil then
-					Current2.update((if FFlagViewRecyclerReact08 then VirtualizerConfigurationModule else Configuration)(Current, {
+					Current2.update((if FFlagViewRecyclerReact084 then VirtualizerConfigurationModule elseif FFlagViewRecyclerReact08 then VirtualizerConfigurationModule else Configuration)(Current, {
 						scrollingFrame = UseRefResult2.current,
 						viewportOverlay = UseRefResult3.current
 					}))
 				end
 			end,
 			refreshHost = function()
-				-- upvalues: UseRefResult4 (upval), FFlagViewRecyclerReact08 (upval), VirtualizerConfigurationModule (upval), Configuration (upval), Current1 (ref), UseRefResult2 (upval), UseRefResult3 (upval)
+				-- upvalues: UseRefResult4 (upval), FFlagViewRecyclerReact084 (upval), VirtualizerConfigurationModule (upval), FFlagViewRecyclerReact08 (upval), Configuration (upval), Current1 (ref), UseRefResult2 (upval), UseRefResult3 (upval)
 				local Current = UseRefResult4.current
 				
 				if Current ~= nil then
-					Current.update((if FFlagViewRecyclerReact08 then VirtualizerConfigurationModule else Configuration)(Current1, {
+					Current.update((if FFlagViewRecyclerReact084 then VirtualizerConfigurationModule elseif FFlagViewRecyclerReact08 then VirtualizerConfigurationModule else Configuration)(Current1, {
 						scrollingFrame = UseRefResult2.current,
 						viewportOverlay = UseRefResult3.current
 					}))
@@ -163,7 +178,7 @@ return function(Current)
 		}
 	end)
 	local UseResult = ReactModule.useCallback(function(p1)
-		-- upvalues: UseRefResult1 (copy), UseContextResult1 (copy), UseStateResult2 (copy), UseStateResult3 (copy)
+		-- upvalues: UseRefResult1 (copy), UseContextResult1 (copy), UseStateResult1 (copy), UseStateResult2 (copy)
 		local CurrentFunction: () -> () = UseRefResult1.current
 		
 		if CurrentFunction ~= nil then
@@ -171,43 +186,53 @@ return function(Current)
 			CurrentFunction()
 		end
 		if p1 ~= nil and UseContextResult1 ~= nil then
-			UseRefResult1.current = UseContextResult1.register(p1, UseStateResult2.setActive)
+			UseRefResult1.current = UseContextResult1.register(p1, UseStateResult1.setActive)
 		end
-		UseStateResult3.refreshHost()
+		UseStateResult2.refreshHost()
 	end, {
-		UseStateResult2,
-		UseStateResult3.refreshHost,
+		UseStateResult1,
+		UseStateResult2.refreshHost,
 		UseContextResult1
 	})
 	local HasIsItemStickyHeader: boolean? = nil
 	local UseRefResult5 = nil
 	
-	if not FFlagViewRecyclerReact08 then
-		HasIsItemStickyHeader = Current.isItemStickyHeader ~= nil or Current.pinnedStartItem ~= nil or Current.pinnedEndItem ~= nil
-		UseRefResult5 = ReactModule.useRef(nil)
+	if not FFlagViewRecyclerReact084 then
+		HasIsItemStickyHeader = nil
+		UseRefResult5 = nil
+		
+		if not FFlagViewRecyclerReact08 then
+			HasIsItemStickyHeader = Current.isItemStickyHeader ~= nil or Current.pinnedStartItem ~= nil or Current.pinnedEndItem ~= nil
+			UseRefResult5 = ReactModule.useRef(nil)
+		end
 	end
 	ReactModule.useLayoutEffect(function()
-		-- upvalues: UseStateResult (copy), FFlagViewRecyclerReact08 (upval), UseRefResult5 (ref), HasIsItemStickyHeader (ref), ViewRecyclerRobloxModule (upval), Current (copy), UseRefResult2 (copy), UseRefResult3 (copy), UseResult (copy)
+		-- upvalues: UseStateResult (copy), FFlagViewRecyclerReact084 (upval), FFlagViewRecyclerReact08 (upval), UseRefResult5 (ref), HasIsItemStickyHeader (ref), ViewRecyclerRobloxModule (upval), Current (copy), UseRefResult2 (copy), UseRefResult3 (copy), UseResult (copy)
 		if not UseStateResult then return end
 		local Current1 = nil
 		local NewResult = nil
 		
-		if not FFlagViewRecyclerReact08 then
-			Current1 = UseRefResult5.current
-			NewResult = if HasIsItemStickyHeader then ViewRecyclerRobloxModule.Internal.AttachedViewportOverlay.new(Current.scrollingFrame, Current.axis) else nil
-			UseRefResult5.current = NewResult
+		if not FFlagViewRecyclerReact084 then
+			Current1 = nil
+			NewResult = nil
+			
+			if not FFlagViewRecyclerReact08 then
+				Current1 = UseRefResult5.current
+				NewResult = if HasIsItemStickyHeader then ViewRecyclerRobloxModule.Internal.AttachedViewportOverlay.new(Current.scrollingFrame, Current.axis) else nil
+				UseRefResult5.current = NewResult
+			end
 		end
 		UseRefResult2.current = Current.scrollingFrame
 		
-		if not FFlagViewRecyclerReact08 then
+		if not FFlagViewRecyclerReact084 and not FFlagViewRecyclerReact08 then
 			UseRefResult3.current = if NewResult == nil then nil else NewResult.overlay
 		end
 		UseResult(Current.scrollingFrame)
 		
-		if not FFlagViewRecyclerReact08 and Current1 ~= nil then
+		if not FFlagViewRecyclerReact084 and not FFlagViewRecyclerReact08 and Current1 ~= nil then
 			Current1.destroy()
 		end
-	end, if FFlagViewRecyclerReact08 then { UseStateResult, Current.scrollingFrame, UseResult } else {
+	end, if FFlagViewRecyclerReact084 then { UseStateResult, Current.scrollingFrame, UseResult } elseif FFlagViewRecyclerReact08 then { UseStateResult, Current.scrollingFrame, UseResult } else {
 		UseStateResult,
 		Current.scrollingFrame,
 		Current.axis,
@@ -215,7 +240,7 @@ return function(Current)
 		UseResult
 	})
 	ReactModule.useLayoutEffect(function()
-		-- upvalues: UseRefResult (copy), Current (copy), FFlagViewRecyclerReact08 (upval), VirtualizerConfigurationModule (upval), Configuration (upval), UseRefResult2 (copy), UseRefResult3 (copy), UseStateResult1 (ref), RecyclableViewRegistryModule (upval), UseContextResult1 (copy), UseStateResult2 (copy), DestinationModule (upval), PlacementKindModule (upval), v1 (ref), ViewRecyclerRobloxModule (upval), UseRefResult4 (copy), SignalsModule (upval)
+		-- upvalues: UseRefResult (copy), Current (copy), FFlagViewRecyclerReact084 (upval), FFlagViewRecyclerReact08 (upval), VirtualizerConfigurationModule (upval), Configuration (upval), UseRefResult2 (copy), UseRefResult3 (copy), VirtualList (ref), RecyclableViewRegistryModule (upval), UseContextResult1 (copy), UseStateResult1 (copy), DestinationModule (upval), PlacementKindModule (upval), v1 (ref), ViewRecyclerRobloxModule (upval), UseRefResult4 (copy), SignalsModule (upval)
 		UseRefResult.current = Current
 		
 		local function _()
@@ -228,30 +253,35 @@ return function(Current)
 		local self = nil
 		local Callback: ((any, any) -> any)? = nil
 		
-		if not FFlagViewRecyclerReact08 then
-			self = setmetatable({}, { __mode = "k" })
+		if not FFlagViewRecyclerReact084 then
+			self = nil
+			Callback = nil
 			
-			Callback = function(Key, p1)
-				-- upvalues: self (ref)
-				local SelfEntry = self[Key]
+			if not FFlagViewRecyclerReact08 then
+				self = setmetatable({}, { __mode = "k" })
 				
-				if SelfEntry == nil then
-					SelfEntry = table.freeze({
-						apply = function(Key1)
-							-- upvalues: p1 (copy), Key (copy)
-							p1.apply(Key, Key1)
-						end
-					})
-					self[Key] = SelfEntry
+				Callback = function(Key, p1)
+					-- upvalues: self (ref)
+					local SelfEntry = self[Key]
+					
+					if SelfEntry == nil then
+						SelfEntry = table.freeze({
+							apply = function(Key1)
+								-- upvalues: p1 (copy), Key (copy)
+								p1.apply(Key, Key1)
+							end
+						})
+						self[Key] = SelfEntry
+					end
+					return SelfEntry
 				end
-				return SelfEntry
 			end
 		end
-		local v2 = (if FFlagViewRecyclerReact08 then VirtualizerConfigurationModule else Configuration)(Current, {
+		local v2 = (if FFlagViewRecyclerReact084 then VirtualizerConfigurationModule elseif FFlagViewRecyclerReact08 then VirtualizerConfigurationModule else Configuration)(Current, {
 			scrollingFrame = UseRefResult2.current,
 			viewportOverlay = UseRefResult3.current
 		})
-		v2.recyclingScope = UseStateResult1
+		v2.recyclingScope = VirtualList
 		
 		function v2.getItemViewType(p1, p2)
 			-- upvalues: UseRefResult (upval), RecyclableViewRegistryModule (upval)
@@ -264,18 +294,23 @@ return function(Current)
 		end
 		
 		v2.diagnostics = Current.diagnostics
-		v2.active = if UseContextResult1 == nil then nil else UseStateResult2.active(false)
+		v2.active = if UseContextResult1 == nil then nil else UseStateResult1.active(false)
 		
+		if FFlagViewRecyclerReact084 then
+			function v2.isReadyOnAssignment(p1)
+				return p1.isReadyOnAssignment()
+			end
+		end
 		function v2.presentItemView(p1, State, p2, p3)
-			-- upvalues: FFlagViewRecyclerReact08 (upval), DestinationModule (upval), PlacementKindModule (upval), Callback (ref), v1 (upval), UseRefResult (upval)
+			-- upvalues: FFlagViewRecyclerReact084 (upval), DestinationModule (upval), FFlagViewRecyclerReact08 (upval), PlacementKindModule (upval), Callback (ref), v1 (upval), UseRefResult (upval)
 			p1.transition(if State == nil then nil else table.freeze({
 				assignment = State.assignment,
 				index = State.index,
 				destination = table.freeze({
-					kind = (if FFlagViewRecyclerReact08 then DestinationModule.Kind else PlacementKindModule).List,
+					kind = (if FFlagViewRecyclerReact084 then DestinationModule.Kind elseif FFlagViewRecyclerReact08 then DestinationModule.Kind else PlacementKindModule).List,
 					state = State,
-					sink = if FFlagViewRecyclerReact08 then p3 else Callback(p1, p3),
-					compositionPlacement = if FFlagViewRecyclerReact08 then nil else v1
+					sink = if FFlagViewRecyclerReact084 then p3 elseif FFlagViewRecyclerReact08 then p3 else Callback(p1, p3),
+					compositionPlacement = if FFlagViewRecyclerReact084 then nil elseif FFlagViewRecyclerReact08 then nil else v1
 				})
 			}))
 			local Current = UseRefResult.current
@@ -303,8 +338,8 @@ return function(Current)
 		if UseContextResult1 ~= nil then
 			local Active = v2.active
 			Callback1 = SignalsModule.createEffect(function(p1)
-				-- upvalues: UseStateResult2 (upval), Active (ref), Virtualizer (copy)
-				local ActiveResult = UseStateResult2.active(p1)
+				-- upvalues: UseStateResult1 (upval), Active (ref), Virtualizer (copy)
+				local ActiveResult = UseStateResult1.active(p1)
 				
 				if ActiveResult ~= Active then
 					Active = ActiveResult
@@ -320,9 +355,9 @@ return function(Current)
 			UseRefResult4.current = nil
 			Virtualizer.destroy()
 		end
-	end, { UseStateResult3 })
+	end, { UseStateResult2 })
 	
-	if not FFlagViewRecyclerReact08 then
+	if not FFlagViewRecyclerReact084 and not FFlagViewRecyclerReact08 then
 		ReactModule.useLayoutEffect(function()
 			-- upvalues: UseRefResult5 (ref)
 			return function()
@@ -353,8 +388,8 @@ return function(Current)
 		end
 	end, {})
 	ReactModule.useLayoutEffect(function()
-		-- upvalues: UseStateResult3 (copy), Current (copy)
-		UseStateResult3.synchronize(Current)
+		-- upvalues: UseStateResult2 (copy), Current (copy)
+		UseStateResult2.synchronize(Current)
 	end)
 	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult4 (copy)
@@ -364,8 +399,8 @@ return function(Current)
 			Current.refreshItemViews()
 		end
 	end, { Current.itemType })
-	ReactModule.useEffect(function()
-		-- upvalues: UseRefResult4 (copy), Current (copy)
+	UseLayoutEffect(function()
+		-- upvalues: UseRefResult4 (copy), FFlagViewRecyclerReact084 (upval), Current (copy)
 		local function _()
 			-- upvalues: UseRefResult4 (upval)
 			return assert(UseRefResult4.current, "VirtualList: list handle used after unmount")
@@ -376,15 +411,24 @@ return function(Current)
 				-- upvalues: UseRefResult4 (upval)
 				assert(UseRefResult4.current, "VirtualList: list handle used after unmount").scrollToIndex(p1, p2)
 			end,
-			scrollToOffset = function(p1)
+			scrollToOffset = if FFlagViewRecyclerReact084 then function(p1, p2)
+				-- upvalues: UseRefResult4 (upval)
+				return assert(UseRefResult4.current, "VirtualList: list handle used after unmount").scrollToOffset(p1, p2)
+			end else function(p1)
 				-- upvalues: UseRefResult4 (upval)
 				return assert(UseRefResult4.current, "VirtualList: list handle used after unmount").scrollToOffset(p1)
 			end,
-			scrollToStart = function()
+			scrollToStart = if FFlagViewRecyclerReact084 then function(p1)
+				-- upvalues: UseRefResult4 (upval)
+				assert(UseRefResult4.current, "VirtualList: list handle used after unmount").scrollToStart(p1)
+			end else function()
 				-- upvalues: UseRefResult4 (upval)
 				assert(UseRefResult4.current, "VirtualList: list handle used after unmount").scrollToStart()
 			end,
-			scrollToEnd = function()
+			scrollToEnd = if FFlagViewRecyclerReact084 then function(p1)
+				-- upvalues: UseRefResult4 (upval)
+				assert(UseRefResult4.current, "VirtualList: list handle used after unmount").scrollToEnd(p1)
+			end else function()
 				-- upvalues: UseRefResult4 (upval)
 				assert(UseRefResult4.current, "VirtualList: list handle used after unmount").scrollToEnd()
 			end,
@@ -428,7 +472,7 @@ return function(Current)
 			end
 		end
 	end, { Current.listRef })
-	ReactModule.useEffect(function()
+	UseLayoutEffect(function()
 		-- upvalues: Current (copy), UseRefResult2 (copy)
 		local ScrollingFrameRefFunction: (any) -> () = Current.scrollingFrameRef
 		local Current1 = UseRefResult2.current
@@ -463,9 +507,9 @@ return function(Current)
 		axis = Current.axis,
 		onScrollingFrameChanged = UseResult,
 		onViewportOverlayChanged = ReactModule.useCallback(function(_)
-			-- upvalues: UseStateResult3 (copy)
-			UseStateResult3.refreshHost()
-		end, { UseStateResult3.refreshHost }),
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2.refreshHost()
+		end, { UseStateResult2.refreshHost }),
 		internalRef = UseRefResult2,
 		viewportOverlayRef = UseRefResult3,
 		scrollingFrameProps = Current.scrollingFrameProps,

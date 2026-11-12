@@ -1,12 +1,10 @@
 ﻿local ShareSheet = script:FindFirstAncestor("ShareSheet")
-local Parent = ShareSheet.Parent
-local SignalsReactModule = require(Parent.SignalsReact)
-local FFlagShareSheetFriendsSort = require(Parent.SharedFlags).FFlagShareSheetFriendsSort
+local SignalsReactModule = require(ShareSheet.Parent.SignalsReact)
 local _ = require(script.Parent.Parent.useShareSheetViewModel)
 local GetUniversalShareSheetStoreModule = require(ShareSheet.Stores.GetUniversalShareSheetStore)
 
 return function()
-	-- upvalues: GetUniversalShareSheetStoreModule (copy), SignalsReactModule (copy), FFlagShareSheetFriendsSort (copy)
+	-- upvalues: GetUniversalShareSheetStoreModule (copy), SignalsReactModule (copy)
 	local UniversalShareSheetStoreModule = GetUniversalShareSheetStoreModule()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(UniversalShareSheetStoreModule.getRequest)
 	
@@ -16,7 +14,7 @@ return function()
 		formatSuccessSnackbarText = UseSignalStateResult.formatSuccessSnackbarText,
 		messagePlaceholder = UseSignalStateResult.messagePlaceholder,
 		onCloseWithReason = UniversalShareSheetStoreModule.hide,
-		recipientSource = if FFlagShareSheetFriendsSort then UseSignalStateResult.recipientSource else nil,
+		recipientSource = UseSignalStateResult.recipientSource,
 		telemetryId = UseSignalStateResult.telemetryId,
 		url = UseSignalStateResult.url
 	}

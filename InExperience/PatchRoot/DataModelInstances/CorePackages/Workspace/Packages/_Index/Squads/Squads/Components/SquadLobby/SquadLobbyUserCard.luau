@@ -372,7 +372,7 @@ return function(p1)
 				})
 			}, {})
 		}),
-		InactiveOverlay = if IsConnecting or (v2 or v5 or p1.user.partyStatus == SquadUserPartyStatusModule.Invited or p1.user.partyStatus == SquadUserPartyStatusModule.NoResponse) then React.createElement(Foundation.View, {
+		InactiveOverlay = if IsConnecting or v2 or v5 or (p1.user.partyStatus == SquadUserPartyStatusModule.Invited or p1.user.partyStatus == SquadUserPartyStatusModule.NoResponse) then React.createElement(Foundation.View, {
 			tag = "size-full radius-medium",
 			backgroundStyle = {
 				Transparency = 0.25,

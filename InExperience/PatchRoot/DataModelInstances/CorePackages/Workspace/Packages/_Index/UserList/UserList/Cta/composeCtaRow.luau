@@ -3,11 +3,10 @@ local Parent = UserList.Parent
 local _ = require(Parent.React)
 local _ = require(Parent.DataHydration)
 local _ = require(UserList.Common.Types)
-local FFlagUserListComposeRenderRowWithCta = require(Parent.SharedFlags).FFlagUserListComposeRenderRowWithCta
 local FFlagUserListSurfacePresenceWins = require(Parent.SharedFlags).FFlagUserListSurfacePresenceWins
 
 return function(p1, p2, p3, p4)
-	-- upvalues: FFlagUserListComposeRenderRowWithCta (copy), FFlagUserListSurfacePresenceWins (copy)
+	-- upvalues: FFlagUserListSurfacePresenceWins (copy)
 	local HasPrimaryCtaMinWidth: boolean = p2 ~= nil and (p2.showLoadingPlaceholder ~= false and p2.primaryCtaMinWidth ~= nil)
 	local Config = if p4.isLoading and HasPrimaryCtaMinWidth and p2 then {
 		minWidth = p2.primaryCtaMinWidth,
@@ -16,7 +15,7 @@ return function(p1, p2, p3, p4)
 	local UserPresenceType = if p3 then p3.userPresenceType else nil
 	local RenderRowFunction = p1.renderRow
 	
-	if FFlagUserListComposeRenderRowWithCta and RenderRowFunction then
+	if RenderRowFunction then
 		local CreateRowFunction = p1.createRow
 		
 		return RenderRowFunction(function(Tbl)

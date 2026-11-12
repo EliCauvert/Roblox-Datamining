@@ -13,6 +13,9 @@ local TextChannelWindowPerfTrackerModule = require(ChatUIPrimitives.Telemetry.Te
 local RewriteToggleModule = require(script.Parent.RewriteToggle)
 local TranslateHitOverlayModule = require(script.Parent.TranslateHitOverlay)
 local FFlagTCWTranslationSupportModule = require(ChatUIPrimitives.Flags.FFlagTCWTranslationSupport)
+local FFlagExpChatLazyMountRewriteToggleModule = require(ChatUIPrimitives.Flags.FFlagExpChatLazyMountRewriteToggle)
+local FFlagExpChatLatestUsernameWithoutRenderModule = require(ChatUIPrimitives.Flags.FFlagExpChatLatestUsernameWithoutRender)
+local UseLatestUsernameModule = require(script.Parent.useLatestUsername)
 local SelectableUsernameModule = require(script.Parent.SelectableUsername)
 local IconName = FoundationModule.Enums.IconName
 local UseSignalBindingFunction = SignalsReactModule.useSignalBinding
@@ -55,7 +58,7 @@ local _ = function(p1: number)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FoundationModule (copy), ReactModule (copy), SignalsModule (copy), UseStableSignalModule (copy), SignalsReactModule (copy), TextChannelWindowPerfTrackerModule (copy), UseSignalBindingFunction (copy), Signal (copy), FFlagTCWTranslationSupportModule (copy), UseTranslateToggleModule (copy), FormatInlineIconModule (copy), IconName (copy), ResolveDisplayTextModule (copy), RewriteToggleModule (copy), SelectableUsernameModule (copy), TranslateHitOverlayModule (copy), noop (copy), config (copy)
+	-- upvalues: FoundationModule (copy), ReactModule (copy), SignalsModule (copy), UseStableSignalModule (copy), SignalsReactModule (copy), TextChannelWindowPerfTrackerModule (copy), UseSignalBindingFunction (copy), FFlagExpChatLatestUsernameWithoutRenderModule (copy), UseLatestUsernameModule (copy), Signal (copy), FFlagTCWTranslationSupportModule (copy), UseTranslateToggleModule (copy), FormatInlineIconModule (copy), IconName (copy), ResolveDisplayTextModule (copy), RewriteToggleModule (copy), FFlagExpChatLazyMountRewriteToggleModule (copy), SelectableUsernameModule (copy), TranslateHitOverlayModule (copy), noop (copy), config (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseMemoResult = ReactModule.useMemo(function(): string
 		-- upvalues: UseTokensResult (copy)
@@ -91,11 +94,13 @@ return ReactModule.memo(function(p1)
 	local UseMemoResult2 = nil
 	UseSignalStateResult2 = SignalsReactModule.useSignalState(UseMemoResult1)
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseSignalStateResult3 = SignalsReactModule.useSignalState(p1.getLatestMessageId or Signal)
+	local UseLatestUsernameModuleResult = if FFlagExpChatLatestUsernameWithoutRenderModule then UseLatestUsernameModule(p1.getMessageId, p1.getLatestMessageId, p1.reportLatestUsername) else UseRefResult
+	local UseSignalStateResult3 = SignalsReactModule.useSignalState(if FFlagExpChatLatestUsernameWithoutRenderModule then Signal else p1.getLatestMessageId or Signal)
 	local IsUseSignalStateResultMatch: boolean = UseSignalStateResult ~= nil and UseSignalStateResult == UseSignalStateResult3
 	local ReportLatestUsernameFunction = p1.reportLatestUsername
 	ReactModule.useEffect(function()
-		-- upvalues: ReportLatestUsernameFunction (copy), IsUseSignalStateResultMatch (copy), UseRefResult (copy)
+		-- upvalues: FFlagExpChatLatestUsernameWithoutRenderModule (upval), ReportLatestUsernameFunction (copy), IsUseSignalStateResultMatch (copy), UseRefResult (copy)
+		if FFlagExpChatLatestUsernameWithoutRenderModule then return end
 		if ReportLatestUsernameFunction == nil or not IsUseSignalStateResultMatch then return end
 		ReportLatestUsernameFunction(UseRefResult.current)
 		
@@ -203,6 +208,15 @@ return ReactModule.memo(function(p1)
 			onToggle = UseResult
 		})
 	}
+	
+	if FFlagExpChatLazyMountRewriteToggleModule and (UseSignalStateResult2 == nil or UseSignalStateResult2.wasRewritten ~= true) then
+		config1.rewriteToggle = nil
+		config1.rewriteToggleSpacer = ReactModule.createElement("Frame", {
+			BackgroundTransparency = 1,
+			LayoutOrder = 2,
+			Size = UDim2.fromScale(0, 0)
+		})
+	end
 	local HasUseTranslateToggleModuleResult: boolean = IsOffered and UseTranslateToggleModuleResult ~= nil
 	
 	if IsNotPrefixTextMatch or HasUseTranslateToggleModuleResult then
@@ -218,7 +232,7 @@ return ReactModule.memo(function(p1)
 				fontFace = FontFace,
 				textSize = UseTokensResult.Typography.BodyLarge.FontSize,
 				selectionCursor = p1.selectionCursor,
-				buttonRef = UseRefResult
+				buttonRef = UseLatestUsernameModuleResult
 			}) else nil,
 			translateHit = if HasUseTranslateToggleModuleResult then ReactModule.createElement(TranslateHitOverlayModule, {
 				prefixText = PrefixText,

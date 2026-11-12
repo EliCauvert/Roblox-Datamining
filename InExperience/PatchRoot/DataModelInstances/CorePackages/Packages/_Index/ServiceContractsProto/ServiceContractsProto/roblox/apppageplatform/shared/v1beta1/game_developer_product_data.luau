@@ -14,7 +14,8 @@ function Module.new(p1)
 		pending_receipt_count = if p1 == nil or p1.pending_receipt_count == nil then 0 else p1.pending_receipt_count,
 		status_tooltip = if p1 == nil or p1.status_tooltip == nil then "" else p1.status_tooltip,
 		base_price_in_robux = if p1 == nil or p1.base_price_in_robux == nil then 0 else p1.base_price_in_robux,
-		is_discounted = p1 ~= nil and p1.is_discounted ~= nil and p1.is_discounted
+		is_discounted = p1 ~= nil and p1.is_discounted ~= nil and p1.is_discounted,
+		is_purchasable = p1 ~= nil and p1.is_purchasable ~= nil and p1.is_purchasable
 	}, Module))
 end
 
@@ -52,12 +53,16 @@ function Module:encode()
 		Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.status_tooltip)
 	end
 	if self.base_price_in_robux ~= nil and self.base_price_in_robux ~= 0 then
-		local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.varint)
-		Buf, Count = ProtoModule.writeVarInt(WriteTagResult8, WriteTagResult2_7, self.base_price_in_robux)
+		local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult9, WriteTagResult2_8, self.base_price_in_robux)
 	end
 	if self.is_discounted then
-		local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.varint)
-		Buf, Count = ProtoModule.writeVarInt(WriteTagResult9, WriteTagResult2_8, if self.is_discounted then 1 else 0)
+		local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult8, WriteTagResult2_7, if self.is_discounted then 1 else 0)
+	end
+	if self.is_purchasable then
+		local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult10, WriteTagResult2_9, if self.is_purchasable then 1 else 0)
 	end
 	local Buf1 = buffer.create(Count)
 	buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -71,52 +76,56 @@ function Module.decode(Buf)
 	local v1 = 0
 	while v1 < buffer.len(Buf) do
 		local Tag, Tag2
-		Tag, Tag2, v25 = ProtoModule.readTag(Buf, v1)
+		Tag, Tag2, v27 = ProtoModule.readTag(Buf, v1)
 		
 		if Tag2 == ProtoModule.wireTypes.varint then
 			if Tag == 4 then
-				NewModule.image_asset_id, v25 = ProtoModule.readVarIntI64(Buf, v1)
+				NewModule.image_asset_id, v27 = ProtoModule.readVarIntI64(Buf, v1)
 			elseif Tag == 5 then
-				NewModule.price_in_robux, v25 = ProtoModule.readVarIntI64(Buf, v1)
+				NewModule.price_in_robux, v27 = ProtoModule.readVarIntI64(Buf, v1)
 			elseif Tag == 6 then
-				NewModule.pending_receipt_count, v25 = ProtoModule.readVarIntI32(Buf, v1)
+				NewModule.pending_receipt_count, v27 = ProtoModule.readVarIntI32(Buf, v1)
 			elseif Tag == 8 then
-				NewModule.base_price_in_robux, v25 = ProtoModule.readVarIntI64(Buf, v1)
+				NewModule.base_price_in_robux, v27 = ProtoModule.readVarIntI64(Buf, v1)
 			elseif Tag == 9 then
 				local VarInt
-				VarInt, v25 = ProtoModule.readVarInt(Buf, v1)
+				VarInt, v27 = ProtoModule.readVarInt(Buf, v1)
 				NewModule.is_discounted = VarInt ~= 0
+			elseif Tag == 10 then
+				local VarInt1
+				VarInt1, v27 = ProtoModule.readVarInt(Buf, v1)
+				NewModule.is_purchasable = VarInt1 ~= 0
 			else
 				local _
-				_, v25 = ProtoModule.readVarInt(Buf, v1)
+				_, v27 = ProtoModule.readVarInt(Buf, v1)
 			end
 		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 			if Tag == 1 then
 				local Buffer1
-				Buffer1, v25 = ProtoModule.readBuffer(Buf, v1)
+				Buffer1, v27 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.id = buffer.tostring(Buffer1)
 			elseif Tag == 2 then
 				local Buffer2
-				Buffer2, v25 = ProtoModule.readBuffer(Buf, v1)
+				Buffer2, v27 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.name = buffer.tostring(Buffer2)
 			elseif Tag == 3 then
 				local Buffer3
-				Buffer3, v25 = ProtoModule.readBuffer(Buf, v1)
+				Buffer3, v27 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.description = buffer.tostring(Buffer3)
 			elseif Tag == 7 then
 				local Buffer4
-				Buffer4, v25 = ProtoModule.readBuffer(Buf, v1)
+				Buffer4, v27 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.status_tooltip = buffer.tostring(Buffer4)
 			else
-				local VarInt1, VarInt2 = ProtoModule.readVarInt(Buf, v1)
-				v1 = VarInt2 + VarInt1
+				local VarInt2, VarInt2_1 = ProtoModule.readVarInt(Buf, v1)
+				v1 = VarInt2_1 + VarInt2
 			end
 		elseif Tag2 == ProtoModule.wireTypes.i32 then
 			local _
-			_, v25 = ProtoModule.readFixed32(Buf, v1)
+			_, v27 = ProtoModule.readFixed32(Buf, v1)
 		elseif Tag2 == ProtoModule.wireTypes.i64 then
 			local _
-			_, v25 = ProtoModule.readFixed64(Buf, v1)
+			_, v27 = ProtoModule.readFixed64(Buf, v1)
 		else
 			error("Unsupported wire type: " .. Tag2)
 		end
@@ -153,6 +162,9 @@ function Module:jsonEncode()
 	end
 	if self.is_discounted then
 		t.isDiscounted = self.is_discounted
+	end
+	if self.is_purchasable then
+		t.isPurchasable = self.is_purchasable
 	end
 	return t
 end
@@ -205,6 +217,12 @@ function Module:jsonDecode()
 	end
 	if self.isDiscounted ~= nil then
 		NewModule.is_discounted = self.isDiscounted
+	end
+	if self.is_purchasable ~= nil then
+		NewModule.is_purchasable = self.is_purchasable
+	end
+	if self.isPurchasable ~= nil then
+		NewModule.is_purchasable = self.isPurchasable
 	end
 	return NewModule
 end

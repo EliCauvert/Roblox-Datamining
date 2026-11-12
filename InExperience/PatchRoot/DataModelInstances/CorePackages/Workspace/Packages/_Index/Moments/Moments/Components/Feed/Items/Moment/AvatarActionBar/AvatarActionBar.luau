@@ -12,13 +12,14 @@ local IconSize = FoundationModule.Enums.IconSize
 local Radius = FoundationModule.Enums.Radius
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local ImageWithSkeletonModule = require(Moments.Components.ImageWithSkeleton)
+local FFlagMomentsHideUnavailableAvatarActionBarModule = require(Moments.Flags.FFlagMomentsHideUnavailableAvatarActionBar)
 
 return function(Frame: Frame)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), ImageWithSkeletonModule (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy), Button (copy), FoundationModule (copy)
+	-- upvalues: UseTokensFunction (copy), FFlagMomentsHideUnavailableAvatarActionBarModule (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), ImageWithSkeletonModule (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy), Button (copy), FoundationModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Size1000 = UseTokensResult.Size.Size_1000
 	
-	return if Frame.isLoading then ReactModule.createElement(View, {
+	return if FFlagMomentsHideUnavailableAvatarActionBarModule and Frame.hasLookError then nil elseif Frame.isLoading then ReactModule.createElement(View, {
 		tag = "row align-x-left align-y-center gap-medium size-full-0 auto-y",
 		testId = "moments-avatar-action-bar-skeleton",
 		LayoutOrder = Frame.LayoutOrder

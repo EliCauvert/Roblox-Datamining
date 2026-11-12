@@ -698,7 +698,7 @@ local function MakeSlot(Parent1, p2)
 		end
 		
 		if P14 < 10 or P14 == NumberOfHotbarSlots then
-			local P14_1 = P14 < 10 and P14 or 0
+			local P14_1: number = P14 < 10 and P14 or 0
 			TextLabel1 = NewGui("TextLabel", "Number")
 			TextLabel1.Text = P14_1
 			TextLabel1.Size = UDim2.new(0.15, 0, 0.15, 0)
@@ -847,7 +847,7 @@ local function MakeSlot(Parent1, p2)
 	if NumberOfHotbarSlots < P14 then
 		UpdateScrollingFrameCanvasSize()
 		
-		if ScrollingFrame and (Frame2.Visible and not Flag4) then
+		if ScrollingFrame and Frame2.Visible and not Flag4 then
 			ScrollingFrame.CanvasPosition = Vector2.new(0, (math.max(0, ScrollingFrame.CanvasSize.Y.Offset - ScrollingFrame.AbsoluteSize.Y)))
 		end
 	end
@@ -1798,7 +1798,7 @@ function BackpackScriptModule.createGui()
 		end
 	end))
 	
-	local function v252(_, InputState, _)
+	local function v251(_, InputState, _)
 		-- upvalues: GuiService (upval), NumberOfHotbarSlots (upval), List (upval)
 		if InputState ~= Enum.UserInputState.Begin then return end
 		if not GuiService.SelectedCoreObject then return end
@@ -1811,7 +1811,7 @@ function BackpackScriptModule.createGui()
 	end
 	
 	local function openClose()
-		-- upvalues: Frame2 (upval), Tbl2 (upval), AdjustHotbarFrames (upval), Frame1 (upval), NumberOfHotbarSlots (upval), List (upval), Flag5 (upval), config (upval), UserInputService (upval), resizeGamepadHintsFrame (copy), Frame5 (copy), ContextActionService (upval), v252 (copy), BackpackScriptModule (upval)
+		-- upvalues: Frame2 (upval), Tbl2 (upval), AdjustHotbarFrames (upval), Frame1 (upval), NumberOfHotbarSlots (upval), List (upval), Flag5 (upval), config (upval), UserInputService (upval), resizeGamepadHintsFrame (copy), Frame5 (copy), ContextActionService (upval), v251 (copy), BackpackScriptModule (upval)
 		if not Frame2 then return end
 		if not next(Tbl2) then
 			Frame2.Visible = not Frame2.Visible
@@ -1838,7 +1838,7 @@ function BackpackScriptModule.createGui()
 			disableGamepadInventoryControl()
 		end
 		if Frame2.Visible then
-			ContextActionService:BindAction("RBXRemoveSlot", v252, false, Enum.KeyCode.ButtonX)
+			ContextActionService:BindAction("RBXRemoveSlot", v251, false, Enum.KeyCode.ButtonX)
 		else
 			ContextActionService:UnbindAction("RBXRemoveSlot")
 		end

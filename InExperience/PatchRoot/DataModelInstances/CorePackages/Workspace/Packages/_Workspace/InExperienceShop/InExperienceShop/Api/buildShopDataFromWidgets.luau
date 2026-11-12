@@ -160,11 +160,11 @@ return function(p2, Callback)
 				originalIndex = Entry.sectionItemIndex
 			}
 		end
-		local Categories, Sections = filterOutput(t)
+		local FilterOutputResult, FilterOutputResult2 = filterOutput(t)
 		
 		return PromiseModule.resolve({
-			categories = Categories,
-			sections = Sections,
+			categories = FilterOutputResult,
+			sections = FilterOutputResult2,
 			failedItems = Buffer,
 			metadata = if FFlagEnableExperienceShopGlobalIconModule then p2.metadata else nil,
 			notificationFreeTrialTopBarChip = readFreeTrialTopBarChipFromNotificationSettings(p2),

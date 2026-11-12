@@ -3,6 +3,7 @@ local Parent = Moments.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local FFlagMomentsCommentRowRedesignModule = require(Moments.Flags.FFlagMomentsCommentRowRedesign)
+local FFlagMomentsCommentRowTrailingReactionModule = require(Moments.Flags.FFlagMomentsCommentRowTrailingReaction)
 local GetLineHeightsModule = require(script.Parent.getLineHeights)
 local Skeleton = FoundationModule.Skeleton
 local View = FoundationModule.View
@@ -10,7 +11,7 @@ local Radius = FoundationModule.Enums.Radius
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
 return function(Frame)
-	-- upvalues: UseTokensFunction (copy), GetLineHeightsModule (copy), FFlagMomentsCommentRowRedesignModule (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy)
+	-- upvalues: UseTokensFunction (copy), GetLineHeightsModule (copy), FFlagMomentsCommentRowRedesignModule (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), FFlagMomentsCommentRowTrailingReactionModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Size300 = UseTokensResult.Size.Size_300
 	local LineHeightsModule = GetLineHeightsModule(if FFlagMomentsCommentRowRedesignModule then UseTokensResult.Typography.TitleMedium else UseTokensResult.Typography.TitleSmall)
@@ -110,7 +111,7 @@ return function(Frame)
 						testId = `{Frame.testId}--timestamp`
 					})
 				}),
-				Reaction = ReactModule.createElement(View, {
+				Reaction = if FFlagMomentsCommentRowTrailingReactionModule then nil else ReactModule.createElement(View, {
 					LayoutOrder = 2,
 					tag = "row align-y-center gap-xsmall auto-xy padding-right-small",
 					testId = `{Frame.testId}--reaction`
@@ -128,6 +129,30 @@ return function(Frame)
 					})
 				})
 			}) else nil
-		})
+		}),
+		Trailing = if FFlagMomentsCommentRowTrailingReactionModule then ReactModule.createElement(View, {
+			LayoutOrder = 3,
+			tag = "col align-x-right align-y-center self-stretch auto-x"
+		}, {
+			Reaction = ReactModule.createElement(View, {
+				tag = "row align-y-center gap-xsmall auto-xy",
+				padding = {
+					right = UDim.new(0, (UseTokensResult.Size.Size_600 - UseTokensResult.Size.Size_400) / 2)
+				},
+				testId = `{Frame.testId}--reaction`
+			}, {
+				Icon = ReactModule.createElement(Skeleton, {
+					LayoutOrder = 1,
+					Size = UDim2.fromOffset(UseTokensResult.Size.Size_400, UseTokensResult.Size.Size_400),
+					radius = Radius.Circle
+				}),
+				Count = ReactModule.createElement(Skeleton, {
+					LayoutOrder = 2,
+					Size = UDim2.fromOffset(UseTokensResult.Size.Size_400, Size300),
+					radius = Radius.Medium,
+					testId = `{Frame.testId}--reaction-count`
+				})
+			})
+		}) else nil
 	})
 end

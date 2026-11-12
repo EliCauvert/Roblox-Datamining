@@ -2,6 +2,7 @@
 local Parent = BuildExperience.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local FFlagBuildExperienceAdvancedPreviewSpecs = require(Parent.SharedFlags).FFlagBuildExperienceAdvancedPreviewSpecs
 local AgentSpecDebugSheetModule = if require(BuildExperience.Flags.FFlagBuildExperienceModelPicker) then require(BuildExperience.Components.AgentSpecDebug.AgentSpecDebugSheet) else nil
 local _ = require(script.Parent.ModelPickerTypes)
 local Chip = FoundationModule.Chip
@@ -40,7 +41,7 @@ local function Option(Frame)
 end
 
 return function(Frame)
-	-- upvalues: FoundationModule (copy), ReactModule (copy), Option (copy), View (copy), Text (copy), IconButton (copy), Chip (copy), AgentSpecDebugSheetModule (copy), Sheet (copy)
+	-- upvalues: FoundationModule (copy), ReactModule (copy), Option (copy), View (copy), Text (copy), IconButton (copy), Chip (copy), AgentSpecDebugSheetModule (copy), FFlagBuildExperienceAdvancedPreviewSpecs (copy), Sheet (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local Element = nil
 	local InternalTesting = Frame.internalTesting
@@ -176,6 +177,7 @@ return function(Frame)
 		AgentSpecSheet = if Frame.isSpecOpen and InternalTesting then ReactModule.createElement(AgentSpecDebugSheetModule, {
 			testId = "ModelPicker.AgentSpecSheet",
 			specVersion = InternalTesting.previewHash,
+			specName = if FFlagBuildExperienceAdvancedPreviewSpecs then InternalTesting.previewSpecName or "build-on-mobile" else nil,
 			onSave = InternalTesting.onSaveSpec,
 			onClose = Frame.onCloseSpec,
 			focusRootRef = Frame.focusRootRef,

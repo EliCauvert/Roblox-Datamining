@@ -99,6 +99,7 @@
 	ShowToast = "ShowToast",
 	JoinCommunity = "JoinCommunity",
 	OpenGroupPane = "OpenGroupPane",
+	OpenAccountSettings = "OpenAccountSettings",
 	ActionSequence = "ActionSequence",
 	SubmitCustomFormResponse = "SubmitCustomFormResponse",
 	RefreshCustomFormResults = "RefreshCustomFormResults"

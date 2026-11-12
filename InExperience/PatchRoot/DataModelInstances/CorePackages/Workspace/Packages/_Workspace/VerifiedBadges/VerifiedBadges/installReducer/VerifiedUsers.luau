@@ -1,9 +1,8 @@
 ﻿local VerifiedBadges = script:FindFirstAncestor("VerifiedBadges")
 local CryoModule = require(VerifiedBadges.Parent.Cryo)
 local DependenciesModule = require(VerifiedBadges.dependencies)
-local FFlagLuaAppEdpBackendV2HydrateLegacyIxp = require(VerifiedBadges.Parent.SharedFlags).FFlagLuaAppEdpBackendV2HydrateLegacyIxp
 
-local function v4(p1, List)
+local function v3(p1, List)
 	-- upvalues: CryoModule (copy)
 	local Nones = {}
 	
@@ -15,12 +14,12 @@ end
 
 return require(VerifiedBadges.Parent.Rodux).createReducer({}, {
 	[DependenciesModule.UsersNetworking.GetUserV2FromUserId.Succeeded.name] = function(p2, p3)
-		-- upvalues: v4 (copy)
-		return v4(p2, { p3.responseBody })
+		-- upvalues: v3 (copy)
+		return v3(p2, { p3.responseBody })
 	end,
 	[DependenciesModule.FriendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p2, p3)
-		-- upvalues: v4 (copy)
-		return v4(p2, p3.responseBody.data)
+		-- upvalues: v3 (copy)
+		return v3(p2, p3.responseBody.data)
 	end,
 	AddGameDetails = function(p2, p3)
 		-- upvalues: CryoModule (copy)
@@ -36,7 +35,7 @@ return require(VerifiedBadges.Parent.Rodux).createReducer({}, {
 		end
 		return CryoModule.Dictionary.join(p2, Nones)
 	end,
-	AddGameDetailsV2 = if require(VerifiedBadges.Parent.SharedFlags).FFlagLuaAppEdpBackendV2HydrateLegacyDefault or FFlagLuaAppEdpBackendV2HydrateLegacyIxp then function(p4, p5)
+	AddGameDetailsV2 = function(p4, p5)
 		-- upvalues: CryoModule (copy)
 		local Nones = {}
 		
@@ -49,7 +48,7 @@ return require(VerifiedBadges.Parent.Rodux).createReducer({}, {
 			end
 		end
 		return CryoModule.Dictionary.join(p4, Nones)
-	end else nil,
+	end,
 	SetAssetInfoFromCatalogItemAction = function(p6, p7)
 		-- upvalues: CryoModule (copy)
 		return if p7.assetData.creatorType == Enum.CreatorType.User.Name then CryoModule.Dictionary.join(p6, {

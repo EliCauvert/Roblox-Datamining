@@ -3,10 +3,13 @@ local SignalsModule = require(Parent.Signals)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local AcpProtocolModule = require(script.Parent.Acp.AcpProtocol)
 local ClassifyRequestFailureModule = require(script.Parent.classifyRequestFailure)
+local ChatOpenTelemetryModule = require(script.Parent.chatOpenTelemetry)
 local ExperimentOverrideModule = require(script.Parent.experimentOverride)
 local GetFundingErrorModule = require(script.Parent.getFundingError)
 local SendConfigurationModule = require(script.Parent.sendConfiguration)
 local FFlagBuildExperienceModelPickerData = SharedFlagsModule.FFlagBuildExperienceModelPickerData
+local FFlagBuildExperienceChatOpenId = SharedFlagsModule.FFlagBuildExperienceChatOpenId
+local FFlagBuildExperienceAdvancedPreviewSpecs = SharedFlagsModule.FFlagBuildExperienceAdvancedPreviewSpecs
 local SessionHistoryMergeModule = require(script.Parent.sessionHistoryMerge)
 local _ = require(script.Parent.types)
 local ConstantsModule = require(script.Parent.ChatSession.constants)
@@ -20,7 +23,7 @@ local _ = require(script.Parent.ChatSession.sessionDeps)
 local FFlagBuildExperiencePromptFailureTelemetry = SharedFlagsModule.FFlagBuildExperiencePromptFailureTelemetry
 
 return function(Deps, UniverseId, PlaceId, p1)
-	-- upvalues: SessionScalarStateModule (copy), ConstantsModule (copy), SessionHistoryCacheModule (copy), ExperimentOverrideModule (copy), SessionHistoryMergeModule (copy), SignalsModule (copy), HistoryPageUtilsModule (copy), FFlagBuildExperienceModelPickerData (copy), HistoryLoaderModule (copy), HistoryPollingModule (copy), AcpProtocolModule (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), ClassifyRequestFailureModule (copy), GetFundingErrorModule (copy), SendConfigurationModule (copy), SendPromptModule (copy)
+	-- upvalues: SessionScalarStateModule (copy), ConstantsModule (copy), SessionHistoryCacheModule (copy), ExperimentOverrideModule (copy), ChatOpenTelemetryModule (copy), SessionHistoryMergeModule (copy), SignalsModule (copy), HistoryPageUtilsModule (copy), FFlagBuildExperienceModelPickerData (copy), HistoryLoaderModule (copy), HistoryPollingModule (copy), AcpProtocolModule (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), ClassifyRequestFailureModule (copy), FFlagBuildExperienceChatOpenId (copy), GetFundingErrorModule (copy), FFlagBuildExperienceAdvancedPreviewSpecs (copy), SendConfigurationModule (copy), SendPromptModule (copy)
 	local LoadedBySequenceId = {}
 	local OverlayBySequenceId = {}
 	local SessionScalarState = SessionScalarStateModule.createSessionScalarState(p1)
@@ -41,6 +44,11 @@ return function(Deps, UniverseId, PlaceId, p1)
 	local _ = function()
 		-- upvalues: Experiment (ref), ExperimentOverrideModule (upval), SessionScalarState (copy), PendingExperimentKey (ref)
 		Experiment = if ExperimentOverrideModule.isEnabled() then ExperimentOverrideModule.getExperiment(ExperimentOverrideModule.getKey(SessionScalarState.getCasSessionId(false)) or PendingExperimentKey) else nil
+	end
+	
+	local function getSendChatOpenId()
+		-- upvalues: ChatOpenTelemetryModule (upval), UniverseId (copy)
+		return ChatOpenTelemetryModule.getChatOpenIdForUniverse(UniverseId)
 	end
 	
 	local function buildMergedHistory()
@@ -322,8 +330,8 @@ return function(Deps, UniverseId, PlaceId, p1)
 		end
 	end
 	
-	local function createCasSession(Model, Callback, p2, Callback1)
-		-- upvalues: Generation (ref), FFlagBuildExperienceModelPickerData (upval), Experiment (ref), SessionScalarState (copy), UniverseId (copy), PlaceId (copy), ensureInitialized (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), Deps (copy), HistoryPageUtilsModule (upval), RpcTimeoutSeconds (copy), GetFundingErrorModule (upval), ClassifyRequestFailureModule (upval), ExperimentOverrideModule (upval), PendingExperimentKey (ref), SendConfigurationModule (upval), setCasSessionIdInternal (copy)
+	local function createCasSession(Model, Callback, p2, Callback1, p3)
+		-- upvalues: Generation (ref), FFlagBuildExperienceModelPickerData (upval), Experiment (ref), SessionScalarState (copy), UniverseId (copy), PlaceId (copy), ensureInitialized (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), Deps (copy), FFlagBuildExperienceChatOpenId (upval), HistoryPageUtilsModule (upval), RpcTimeoutSeconds (copy), GetFundingErrorModule (upval), ClassifyRequestFailureModule (upval), ExperimentOverrideModule (upval), PendingExperimentKey (ref), FFlagBuildExperienceAdvancedPreviewSpecs (upval), SendConfigurationModule (upval), setCasSessionIdInternal (copy)
 		local Generation1 = Generation
 		
 		local function isStale()
@@ -362,7 +370,8 @@ return function(Deps, UniverseId, PlaceId, p1)
 			application = "build",
 			project = { universeId = UniverseId, placeId = PlaceId },
 			experiment = if FFlagBuildExperienceModelPickerData then Experiment1 else Experiment,
-			model = if FFlagBuildExperienceModelPickerData then Model else nil
+			model = if FFlagBuildExperienceModelPickerData then Model else nil,
+			chatOpenId = if FFlagBuildExperienceChatOpenId then p3 else nil
 		})
 		local IsStale = if FFlagBuildExperienceModelPickerData then isStale else Callback
 		local AwaitRequestStateResult = HistoryPageUtilsModule.awaitRequestState(SessionNewResult.state, os.clock() + RpcTimeoutSeconds, IsStale)
@@ -387,7 +396,7 @@ return function(Deps, UniverseId, PlaceId, p1)
 				if ExperimentOverrideModule.has(PendingExperimentKey) then
 					ExperimentOverrideModule.move(PendingExperimentKey, Key)
 				elseif Experiment2 ~= nil then
-					ExperimentOverrideModule.hydrate(Key, Experiment2.specVersion)
+					ExperimentOverrideModule.hydrate(Key, Experiment2.specVersion, if FFlagBuildExperienceAdvancedPreviewSpecs then Experiment2 else nil)
 				end
 				if not FFlagBuildExperienceModelPickerData or p2 == nil or SendConfigurationModule.sameExperiment(ExperimentOverrideModule.getPromptExperiment(Key), Experiment2) then
 					ExperimentOverrideModule.consumePending(Key)
@@ -424,8 +433,8 @@ return function(Deps, UniverseId, PlaceId, p1)
 	
 	local Setup = nil
 	
-	local function newSetup(Model, p2)
-		-- upvalues: Generation (ref), Experiment (ref)
+	local function newSetup(Model, p2, p3)
+		-- upvalues: Generation (ref), Experiment (ref), FFlagBuildExperienceChatOpenId (upval)
 		return {
 			persistent = false,
 			committed = false,
@@ -433,7 +442,8 @@ return function(Deps, UniverseId, PlaceId, p1)
 			generation = Generation,
 			model = Model,
 			experiment = if p2 == nil then Experiment else p2.experiment,
-			abandoners = {}
+			abandoners = {},
+			chatOpenId = if FFlagBuildExperienceChatOpenId then p3 else nil
 		}
 	end
 	
@@ -470,10 +480,10 @@ return function(Deps, UniverseId, PlaceId, p1)
 		return NoCommitted
 	end
 	
-	local function ensureCasSession(Model: Model, Callback, CaptureResult, p2)
-		-- upvalues: FFlagBuildExperienceModelPickerData (upval), SessionScalarState (copy), createCasSession (copy), Setup (ref), Generation (ref), newSetup (copy), SendConfigurationModule (upval)
+	local function ensureCasSession(Model: Model, Callback, CaptureResult, p2, ChatOpenIdForUniverse)
+		-- upvalues: FFlagBuildExperienceModelPickerData (upval), SessionScalarState (copy), createCasSession (copy), FFlagBuildExperienceChatOpenId (upval), Setup (ref), Generation (ref), newSetup (copy), SendConfigurationModule (upval)
 		if not FFlagBuildExperienceModelPickerData or SessionScalarState.getCasSessionId(false) ~= nil and SessionScalarState.getInitialized(false) then
-			return createCasSession(Model, Callback, CaptureResult)
+			return createCasSession(Model, Callback, CaptureResult, nil, if FFlagBuildExperienceChatOpenId then ChatOpenIdForUniverse else nil)
 		end
 		local function callerCancelled()
 			-- upvalues: Callback (copy)
@@ -487,7 +497,7 @@ return function(Deps, UniverseId, PlaceId, p1)
 		local NoSetup: boolean = Setup1 == nil or Setup1.generation ~= Generation
 		
 		if NoSetup then
-			Setup1 = newSetup(Model, CaptureResult)
+			Setup1 = newSetup(Model, CaptureResult, ChatOpenIdForUniverse)
 			Setup = Setup1
 		end
 		local Setup2 = Setup1
@@ -518,7 +528,7 @@ return function(Deps, UniverseId, PlaceId, p1)
 				end
 				if NoCommitted then
 					NoSetup = true
-					Setup2 = newSetup(Model, CaptureResult)
+					Setup2 = newSetup(Model, CaptureResult, ChatOpenIdForUniverse)
 					Setup = Setup2
 					break
 				end
@@ -567,7 +577,7 @@ return function(Deps, UniverseId, PlaceId, p1)
 						
 						return false
 					end
-				end)
+				end, Setup2.chatOpenId)
 				Setup2.sessionId = if Success then Result else nil
 				Setup2.error = if Success then Result3 else { stage = "session_new", message = tostring(Result) }
 				Setup2.done = true
@@ -588,7 +598,8 @@ return function(Deps, UniverseId, PlaceId, p1)
 	end
 	
 	local function prepareSession(p3)
-		-- upvalues: SendConfigurationModule (upval), Generation (ref), Experiment (ref), ExperimentOverrideModule (upval), SessionScalarState (copy), PendingExperimentKey (ref), Setup (ref), ensureCasSession (copy), loadSession (copy), FFlagBuildExperienceModelPickerData (upval), GetFundingErrorModule (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), ClassifyRequestFailureModule (upval), HistoryPageUtilsModule (upval)
+		-- upvalues: FFlagBuildExperienceChatOpenId (upval), ChatOpenTelemetryModule (upval), UniverseId (copy), SendConfigurationModule (upval), Generation (ref), Experiment (ref), ExperimentOverrideModule (upval), SessionScalarState (copy), PendingExperimentKey (ref), Setup (ref), ensureCasSession (copy), loadSession (copy), FFlagBuildExperienceModelPickerData (upval), GetFundingErrorModule (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), ClassifyRequestFailureModule (upval), HistoryPageUtilsModule (upval)
+		local ChatOpenIdForUniverse = if FFlagBuildExperienceChatOpenId then ChatOpenTelemetryModule.getChatOpenIdForUniverse(UniverseId) else nil
 		local CaptureResult = if p3 == nil or p3.sendConfiguration == nil then nil else SendConfigurationModule.capture(p3.sendConfiguration.tier, p3.sendConfiguration.experiment)
 		local Model = if CaptureResult == nil then if p3 == nil then nil else p3.model else CaptureResult.tier
 		assert(CaptureResult == nil or (p3 == nil or (p3.model == nil or p3.model == Model)), "conflicting model tiers")
@@ -637,9 +648,9 @@ return function(Deps, UniverseId, PlaceId, p1)
 					}
 				end
 			end
-			return ensureCasSession(Model, if p3 == nil then nil else p3.isCancelled, CaptureResult, CaptureResult ~= nil)
+			return ensureCasSession(Model, if p3 == nil then nil else p3.isCancelled, CaptureResult, CaptureResult ~= nil, ChatOpenIdForUniverse)
 		else
-			local EnsureCasSessionResult, EnsureCasSessionResult2 = ensureCasSession(nil, isCancelled, CaptureResult)
+			local EnsureCasSessionResult, EnsureCasSessionResult2 = ensureCasSession(nil, isCancelled, CaptureResult, nil, ChatOpenIdForUniverse)
 			
 			if Generation1 ~= Generation or p3 ~= nil and (p3.isCancelled ~= nil and p3.isCancelled()) then
 				return nil, nil
@@ -677,6 +688,7 @@ return function(Deps, UniverseId, PlaceId, p1)
 	local SendPrompt = SendPromptModule.createSendPrompt({
 		ensureInitialized = ensureInitialized,
 		ensureCasSession = ensureCasSession,
+		getSendChatOpenId = getSendChatOpenId,
 		getLatestObservedHistorySequenceId = function()
 			-- upvalues: SessionScalarState (copy)
 			return SessionScalarState.getLatestObservedHistorySequenceId(false)

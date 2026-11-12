@@ -39,6 +39,9 @@ local PictogramsPlusRobux = FoundationCloudAssetsModule.Assets["pictograms/plus_
 FoundationCloudAssetsModule.preloadAsset("pictograms/plus_robux")
 local FFlagRobloxPlusDynamicFreeTrialLengthModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusDynamicFreeTrialLength)
 local FFlagEnablePlusReferralLegalDisclosureModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagEnablePlusReferralLegalDisclosure)
+local FFlagTTOnboardingSheetModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagTTOnboardingSheet)
+local RobloxPlusSheetKindModule = require(RobloxSubscriptionPurchaseApp.Enums.RobloxPlusSheetKind)
+local TTSheetSlotsModule = require(script.Parent.TTSheetSlots)
 local GuiService = game:GetService("GuiService")
 local config = {
 	[PromptStateModule.SubscriptionPurchaseInProgress] = true,
@@ -46,7 +49,7 @@ local config = {
 }
 
 return function()
-	-- upvalues: RobloxSubscriptionStoreModule (copy), SignalsReactModule (copy), FFlagEnablePlusReferralLandingSheet (copy), UseReferrerNameModule (copy), UseLocalizationFunction (copy), FIntPlusReferralRewardRobux (copy), IsRobloxSubscriptionProductFreeTrialModule (copy), FFlagRobloxPlusDynamicFreeTrialLengthModule (copy), GetFreeTrialOfferModule (copy), ReactModule (copy), FFlagEnableSubscriptionPurchaseFlowEventIngestModule (copy), LogSubscriptionPurchaseFlowEventModule (copy), LogRobloxSubscriptionUpsellCounterModule (copy), RobloxSubscriptionUpsellTelemetryModule (copy), PromptStateModule (copy), FinalizeRobloxSubscriptionUpsellFlowModule (copy), CompleteRobloxSubscriptionUpsellFlowModule (copy), PerformRobloxSubscriptionPurchaseModule (copy), config (copy), GuiService (copy), Sheet (copy), View (copy), Text (copy), GetIconRichTextFunction (copy), IconName (copy), HandleBackButtonActionModule (copy), PlusHeroContentModule (copy), PictogramsPlusRobux (copy), RobloxSubscriptionPriceRowModule (copy), RobloxSubscriptionFeatureListModule (copy), Button (copy), FillBehavior (copy), ButtonVariant (copy), LegalDisclosureModule (copy), FFlagSupportFreeTrialModule (copy), FFlagEnablePlusReferralLegalDisclosureModule (copy)
+	-- upvalues: RobloxSubscriptionStoreModule (copy), SignalsReactModule (copy), FFlagEnablePlusReferralLandingSheet (copy), UseReferrerNameModule (copy), UseLocalizationFunction (copy), FIntPlusReferralRewardRobux (copy), IsRobloxSubscriptionProductFreeTrialModule (copy), FFlagRobloxPlusDynamicFreeTrialLengthModule (copy), GetFreeTrialOfferModule (copy), ReactModule (copy), FFlagEnableSubscriptionPurchaseFlowEventIngestModule (copy), LogSubscriptionPurchaseFlowEventModule (copy), LogRobloxSubscriptionUpsellCounterModule (copy), RobloxSubscriptionUpsellTelemetryModule (copy), PromptStateModule (copy), FinalizeRobloxSubscriptionUpsellFlowModule (copy), CompleteRobloxSubscriptionUpsellFlowModule (copy), PerformRobloxSubscriptionPurchaseModule (copy), config (copy), GuiService (copy), FFlagTTOnboardingSheetModule (copy), TTSheetSlotsModule (copy), RobloxPlusSheetKindModule (copy), Sheet (copy), View (copy), Text (copy), GetIconRichTextFunction (copy), IconName (copy), HandleBackButtonActionModule (copy), PlusHeroContentModule (copy), PictogramsPlusRobux (copy), RobloxSubscriptionPriceRowModule (copy), RobloxSubscriptionFeatureListModule (copy), Button (copy), FillBehavior (copy), ButtonVariant (copy), LegalDisclosureModule (copy), FFlagSupportFreeTrialModule (copy), FFlagEnablePlusReferralLegalDisclosureModule (copy)
 	local GetResult = RobloxSubscriptionStoreModule.get()
 	local OnCtaOverride = GetResult.getOnCtaOverride()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetResult.getPurchaseUIOptions)
@@ -72,10 +75,51 @@ return function()
 	local GetFreeTrialText = if IsRobloxSubscriptionProductFreeTrialModule1 then UseLocalizationResult.getFreeTrialText else UseLocalizationResult.buttonText
 	local NoShowLegalDisclosure = UseSignalStateResult.showLegalDisclosure == nil or UseSignalStateResult.showLegalDisclosure
 	local NoPurchaseMethodRequired = UseSignalStateResult.noPurchaseMethodRequired ~= nil and UseSignalStateResult.noPurchaseMethodRequired
+	local UseResult = ReactModule.useCallback(function(p1)
+		-- upvalues: FFlagEnableSubscriptionPurchaseFlowEventIngestModule (upval), LogSubscriptionPurchaseFlowEventModule (upval), LogRobloxSubscriptionUpsellCounterModule (upval), RobloxSubscriptionUpsellTelemetryModule (upval)
+		if p1 then
+			if FFlagEnableSubscriptionPurchaseFlowEventIngestModule then
+				LogSubscriptionPurchaseFlowEventModule("SubscriptionUpsellModalShown")
+			end
+			LogRobloxSubscriptionUpsellCounterModule(RobloxSubscriptionUpsellTelemetryModule.RobloxSubscriptionUpsellModalShownCounter)
+		end
+	end, {})
+	
+	local function onSubscribe()
+		-- upvalues: FFlagEnableSubscriptionPurchaseFlowEventIngestModule (upval), LogSubscriptionPurchaseFlowEventModule (upval), LogRobloxSubscriptionUpsellCounterModule (upval), RobloxSubscriptionUpsellTelemetryModule (upval), OnCtaOverride (copy), GetResult (copy), PromptStateModule (upval), FinalizeRobloxSubscriptionUpsellFlowModule (upval), CompleteRobloxSubscriptionUpsellFlowModule (upval), PerformRobloxSubscriptionPurchaseModule (upval)
+		if FFlagEnableSubscriptionPurchaseFlowEventIngestModule then
+			LogSubscriptionPurchaseFlowEventModule("SubscriptionUpsellSubscribeClicked")
+		end
+		LogRobloxSubscriptionUpsellCounterModule(RobloxSubscriptionUpsellTelemetryModule.RobloxSubscriptionUpsellModalBuyButtonClickedCounter)
+		
+		if OnCtaOverride then
+			GetResult.setPromptState(PromptStateModule.SubscriptionPurchaseRequested)
+			OnCtaOverride(function()
+				-- upvalues: GetResult (upval), FinalizeRobloxSubscriptionUpsellFlowModule (upval)
+				GetResult.setDidTryPurchasing(true)
+				FinalizeRobloxSubscriptionUpsellFlowModule(true)
+			end, function()
+				-- upvalues: CompleteRobloxSubscriptionUpsellFlowModule (upval)
+				CompleteRobloxSubscriptionUpsellFlowModule()
+			end)
+			
+			return
+		else
+			PerformRobloxSubscriptionPurchaseModule()
+		end
+	end
+	
+	local IsEntry = config[UseSignalStateResult1] == true
 	local HasReferralInvite: boolean = FFlagEnablePlusReferralLandingSheet and ReferralInvite ~= nil
 	local IsNotViewportDisplaySizeMatch: boolean = if FFlagEnablePlusReferralLandingSheet then GuiService.ViewportDisplaySize ~= Enum.DisplaySize.Small else false
+	local TTSheetSlotsModuleResult = if FFlagTTOnboardingSheetModule then TTSheetSlotsModule({
+		purchaseUIOptions = UseSignalStateResult,
+		isLoading = IsEntry,
+		onActivated = onSubscribe,
+		onButtonMounted = UseResult
+	}) else nil
 	
-	return {
+	return if TTSheetSlotsModuleResult and UseSignalStateResult.sheetKind == RobloxPlusSheetKindModule.TT then TTSheetSlotsModuleResult else {
 		Header = ReactModule.createElement(Sheet.Header, { hasCloseAffordance = true }, {
 			View = if HasReferralInvite then nil else ReactModule.createElement(View, { LayoutOrder = 1, tag = "row gap-small auto-xy" }, {
 				BackButton = if UseSignalStateResult.showBackButton then ReactModule.createElement(Text, {
@@ -130,42 +174,12 @@ return function()
 			}, {
 				SubscribeButton = ReactModule.createElement(Button, {
 					LayoutOrder = 1,
-					ref = ReactModule.useCallback(function(p1)
-						-- upvalues: FFlagEnableSubscriptionPurchaseFlowEventIngestModule (upval), LogSubscriptionPurchaseFlowEventModule (upval), LogRobloxSubscriptionUpsellCounterModule (upval), RobloxSubscriptionUpsellTelemetryModule (upval)
-						if p1 then
-							if FFlagEnableSubscriptionPurchaseFlowEventIngestModule then
-								LogSubscriptionPurchaseFlowEventModule("SubscriptionUpsellModalShown")
-							end
-							LogRobloxSubscriptionUpsellCounterModule(RobloxSubscriptionUpsellTelemetryModule.RobloxSubscriptionUpsellModalShownCounter)
-						end
-					end, {}),
+					ref = UseResult,
 					text = if UseSignalStateResult.ctaText then UseSignalStateResult.ctaText else GetFreeTrialText,
-					onActivated = function()
-						-- upvalues: FFlagEnableSubscriptionPurchaseFlowEventIngestModule (upval), LogSubscriptionPurchaseFlowEventModule (upval), LogRobloxSubscriptionUpsellCounterModule (upval), RobloxSubscriptionUpsellTelemetryModule (upval), OnCtaOverride (copy), GetResult (copy), PromptStateModule (upval), FinalizeRobloxSubscriptionUpsellFlowModule (upval), CompleteRobloxSubscriptionUpsellFlowModule (upval), PerformRobloxSubscriptionPurchaseModule (upval)
-						if FFlagEnableSubscriptionPurchaseFlowEventIngestModule then
-							LogSubscriptionPurchaseFlowEventModule("SubscriptionUpsellSubscribeClicked")
-						end
-						LogRobloxSubscriptionUpsellCounterModule(RobloxSubscriptionUpsellTelemetryModule.RobloxSubscriptionUpsellModalBuyButtonClickedCounter)
-						
-						if OnCtaOverride then
-							GetResult.setPromptState(PromptStateModule.SubscriptionPurchaseRequested)
-							OnCtaOverride(function()
-								-- upvalues: GetResult (upval), FinalizeRobloxSubscriptionUpsellFlowModule (upval)
-								GetResult.setDidTryPurchasing(true)
-								FinalizeRobloxSubscriptionUpsellFlowModule(true)
-							end, function()
-								-- upvalues: CompleteRobloxSubscriptionUpsellFlowModule (upval)
-								CompleteRobloxSubscriptionUpsellFlowModule()
-							end)
-							
-							return
-						else
-							PerformRobloxSubscriptionPurchaseModule()
-						end
-					end,
+					onActivated = onSubscribe,
 					fillBehavior = FillBehavior.Fill,
 					variant = ButtonVariant.Emphasis,
-					isLoading = config[UseSignalStateResult1] == true
+					isLoading = IsEntry
 				}),
 				LegalDisclosure = if NoShowLegalDisclosure then ReactModule.createElement(LegalDisclosureModule, {
 					layoutOrder = 2,

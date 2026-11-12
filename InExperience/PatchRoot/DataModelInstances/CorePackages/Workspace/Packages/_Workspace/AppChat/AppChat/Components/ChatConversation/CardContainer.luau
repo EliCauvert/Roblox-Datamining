@@ -61,7 +61,8 @@ return function(p1)
 			},
 			anchorPoint = if IsTextMatch then Vector2.new(1, 0) else Vector2.new(0, 0),
 			position = if IsTextMatch then UDim2.fromScale(1, 0) else UDim2.fromScale(0, 0),
-			cards = p1.cards
+			cards = p1.cards,
+			conversationId = p1.conversationId
 		})) else nil
 	})
 end

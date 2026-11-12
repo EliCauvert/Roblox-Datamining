@@ -5,5 +5,6 @@
 	FFlagTopBarSignalizeHealthBar = game:DefineFastFlag("TopBarSignalizeHealthBar4", false),
 	FFlagUseNewHurtOverlayImage = game:DefineFastFlag("UseNewHurtOverlayImage", false),
 	FFlagUseNewHurtOverlayAnimation = game:DefineFastFlag("UseNewHurtOverlayAnimation", false),
-	FFlagEnableUISelector = game:DefineFastFlag("EnableUISelector3", false)
+	FFlagEnableUISelector = game:DefineFastFlag("EnableUISelector3", false),
+	FFlagUseSelectModeToggleLabel = game:DefineFastFlag("UseSelectModeToggleLabel", false)
 }

@@ -1,14 +1,12 @@
 ﻿local GameInvite = script:FindFirstAncestor("GameInvite")
 local Parent = GameInvite.Parent
 local ReactModule = require(Parent.React)
-local FoundationModule = require(Parent.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
 local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
 local SidePadding = require(GameInvite.GameInviteConstants).Layout.SidePadding
 
 return function(p1)
-	-- upvalues: UseStyleFunction (copy), ReactModule (copy), SidePadding (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), SidePadding (copy), NormalizeFontFaceFunction (copy)
 	local UseStyleResult = UseStyleFunction()
 	local Theme = UseStyleResult.Theme
 	local UseStyleResultFont = UseStyleResult.Font
@@ -30,8 +28,7 @@ return function(p1)
 			TextSize = UseStyleResultFont.BaseSize * UseStyleResultFont.Body.RelativeSize,
 			TextColor3 = Theme.TextEmphasis.Color,
 			TextTransparency = Theme.TextEmphasis.Transparency,
-			Font = if FoundationFontFaceMigration then nil else UseStyleResultFont.Body.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
+			FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextTruncate = Enum.TextTruncate.AtEnd,
 			Size = UDim2.new(1, 0, 1, 0)

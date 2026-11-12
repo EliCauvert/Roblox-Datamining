@@ -4,7 +4,7 @@ local LocalizationService = game:GetService("LocalizationService")
 local _ = require(Parent.AnalyticsMetricChart)
 local BuilderIconsModule = require(Parent.BuilderIcons)
 local LocalizationModule = require(Parent.Localization)
-local _ = require(Parent.MomentsCommon)
+local MomentsCommonModule = require(Parent.MomentsCommon)
 local ReactModule = require(Parent.React)
 local AbbreviateCountFunction = LocalizationModule.abbreviateCount
 local NumberLocalization = LocalizationModule.NumberLocalization
@@ -14,12 +14,28 @@ local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local ReactionType = require(Parent.MomentsTypes).Enums.ReactionType
 local CreatorAnalyticsModule = require(Parent.DataHydration.CreatorAnalytics)
 local _ = require(script.Parent.createPostInsightsPageStore)
+local MakeFeedActionFieldsModule = require(Moments.Analytics.makeFeedActionFields)
 local PostInsightsStringsModule = require(script.Parent.postInsightsStrings)
 local UsePostInsightsAnalyticsModule = require(script.Parent.usePostInsightsAnalytics)
 local ToMediaItemModule = require(Moments.Components.Feed.Media.toMediaItem)
 local DataStatus = CreatorAnalyticsModule.DataStatus
+local EventNames = MomentsCommonModule.Analytics.EventNames
 
-local function _(p1)
+local function _(List): boolean
+	-- upvalues: DataStatus (copy)
+	local Flag = false
+	
+	for _, value in List do
+		if value == DataStatus.Failed then
+			return false
+		elseif value == DataStatus.NotReady then
+			Flag = true
+		end
+	end
+	return Flag
+end
+
+local _ = function(p1)
 	local Trim = if p1.edits == nil then nil else p1.edits.trim
 	
 	if Trim == nil or Trim.startTime >= Trim.endTime then
@@ -44,8 +60,8 @@ local ReactionTypes = {
 	ReactionType.Wow, ReactionType.Cry, ReactionType.Fire, ReactionType.Skull
 }
 
-return function(p1, OnBack)
-	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), PostInsightsStringsModule (copy), UseSignalStateFunction (copy), ReactModule (copy), ToMediaItemModule (copy), ReactionTypes (copy), AbbreviateCountFunction (copy), LocalizationService (copy), UsePostInsightsAnalyticsModule (copy), NumberLocalization (copy), CreatorAnalyticsModule (copy), BuilderIconsModule (copy), DataStatus (copy)
+return function(p1, Callback)
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), PostInsightsStringsModule (copy), UseSignalStateFunction (copy), ReactModule (copy), ToMediaItemModule (copy), ReactionTypes (copy), AbbreviateCountFunction (copy), LocalizationService (copy), UsePostInsightsAnalyticsModule (copy), MakeFeedActionFieldsModule (copy), MomentsCommonModule (copy), DataStatus (copy), EventNames (copy), NumberLocalization (copy), CreatorAnalyticsModule (copy), BuilderIconsModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction(PostInsightsStringsModule.PAGE_KEYS)
 	local Moment = p1.moment
@@ -82,6 +98,50 @@ return function(p1, OnBack)
 	end, { UseSignalStateResult1 })
 	local UsePostInsightsAnalyticsModuleResult = UsePostInsightsAnalyticsModule(Moment)
 	local RobloxLocaleId = LocalizationService.RobloxLocaleId
+	
+	local function _(p2, p3, p4)
+		-- upvalues: Moment (copy), MakeFeedActionFieldsModule (upval), MomentsCommonModule (upval)
+		local RecommendationMetadata = Moment.recommendationMetadata
+		local FeedActionFieldsModule = MakeFeedActionFieldsModule(Moment.momentId, if RecommendationMetadata == nil then nil else RecommendationMetadata.feedItemId, if RecommendationMetadata == nil then nil else RecommendationMetadata.tracingId, p3)
+		
+		if FeedActionFieldsModule ~= nil then
+			if p4 ~= nil then
+				FeedActionFieldsModule.durationMs = tostring(p4)
+			end
+			MomentsCommonModule.Analytics.fireAnalyticsEvent(p2, FeedActionFieldsModule)
+		end
+	end
+	
+	local IsNotLifetimeStatusMatch: boolean = UsePostInsightsAnalyticsModuleResult.viewsStatus ~= DataStatus.NotReady and UsePostInsightsAnalyticsModuleResult.lifetimeStatus ~= DataStatus.NotReady
+	local UseRefResult = ReactModule.useRef(false)
+	ReactModule.useEffect(function()
+		-- upvalues: IsNotLifetimeStatusMatch (copy), UseRefResult (copy), EventNames (upval), Moment (copy), MakeFeedActionFieldsModule (upval), MomentsCommonModule (upval)
+		if not IsNotLifetimeStatusMatch or UseRefResult.current then return end
+		UseRefResult.current = true
+		local PostInsightsPageImpression = EventNames.PostInsightsPageImpression
+		local RecommendationMetadata = Moment.recommendationMetadata
+		local PostInsightsImpression = MakeFeedActionFieldsModule(Moment.momentId, if RecommendationMetadata == nil then nil else RecommendationMetadata.feedItemId, if RecommendationMetadata == nil then nil else RecommendationMetadata.tracingId, "post_insights_impression")
+		
+		if PostInsightsImpression ~= nil then
+			MomentsCommonModule.Analytics.fireAnalyticsEvent(PostInsightsPageImpression, PostInsightsImpression)
+		end
+	end, { IsNotLifetimeStatusMatch })
+	local UseRefResult1 = ReactModule.useRef(os.clock())
+	local UseResult = ReactModule.useCallback(function()
+		-- upvalues: UseRefResult1 (copy), EventNames (upval), Moment (copy), MakeFeedActionFieldsModule (upval), MomentsCommonModule (upval), Callback (copy)
+		local Rounded = math.round((os.clock() - UseRefResult1.current) * 1000)
+		local PostInsightsBackButtonPressed = EventNames.PostInsightsBackButtonPressed
+		local RecommendationMetadata = Moment.recommendationMetadata
+		local PostInsightsBack = MakeFeedActionFieldsModule(Moment.momentId, if RecommendationMetadata == nil then nil else RecommendationMetadata.feedItemId, if RecommendationMetadata == nil then nil else RecommendationMetadata.tracingId, "post_insights_back")
+		
+		if PostInsightsBack ~= nil then
+			if Rounded ~= nil then
+				PostInsightsBack.durationMs = tostring(Rounded)
+			end
+			MomentsCommonModule.Analytics.fireAnalyticsEvent(PostInsightsBackButtonPressed, PostInsightsBack)
+		end
+		Callback()
+	end, { Callback, Moment })
 	local LifetimeViews: number = UsePostInsightsAnalyticsModuleResult.lifetimeViews
 	local Rounded: number? = nil
 	local Smallest: number? = nil
@@ -89,21 +149,20 @@ return function(p1, OnBack)
 	
 	if LifetimeViews ~= nil and LifetimeViews > 0 then
 		if UsePostInsightsAnalyticsModuleResult.lifetimeWatchTimeSeconds ~= nil then
-			local LifetimeWatchTimeSecondsRatio = UsePostInsightsAnalyticsModuleResult.lifetimeWatchTimeSeconds / LifetimeViews
-			Rounded = math.round(LifetimeWatchTimeSecondsRatio)
-			local Metadata = Moment.metadata
-			local Trim = if Metadata.edits == nil then nil else Metadata.edits.trim
-			local AssetTotalDuration1 = nil
-			
-			if Trim == nil or Trim.startTime >= Trim.endTime then
-				local AssetTotalDuration: number = Metadata.assetTotalDuration
-				AssetTotalDuration1 = if AssetTotalDuration == nil or AssetTotalDuration <= 0 then nil else AssetTotalDuration
-			else
-				AssetTotalDuration1 = Trim.endTime - Trim.startTime
-			end
-			if AssetTotalDuration1 ~= nil then
-				Smallest = math.min(LifetimeWatchTimeSecondsRatio / AssetTotalDuration1, 1)
-			end
+			Rounded = math.round(UsePostInsightsAnalyticsModuleResult.lifetimeWatchTimeSeconds / LifetimeViews)
+		end
+		local Metadata = Moment.metadata
+		local Trim = if Metadata.edits == nil then nil else Metadata.edits.trim
+		local AssetTotalDuration1 = nil
+		
+		if Trim == nil or Trim.startTime >= Trim.endTime then
+			local AssetTotalDuration: number = Metadata.assetTotalDuration
+			AssetTotalDuration1 = if AssetTotalDuration == nil or AssetTotalDuration <= 0 then nil else AssetTotalDuration
+		else
+			AssetTotalDuration1 = Trim.endTime - Trim.startTime
+		end
+		if UsePostInsightsAnalyticsModuleResult.lifetimeWatchTimeNoReplaySeconds ~= nil and AssetTotalDuration1 ~= nil then
+			Smallest = math.min(UsePostInsightsAnalyticsModuleResult.lifetimeWatchTimeNoReplaySeconds / LifetimeViews / AssetTotalDuration1, 1)
 		end
 		if UsePostInsightsAnalyticsModuleResult.lifetimeJoins ~= nil then
 			LifetimeJoinsRatio = UsePostInsightsAnalyticsModuleResult.lifetimeJoins / LifetimeViews
@@ -131,93 +190,189 @@ return function(p1, OnBack)
 		LifetimeJoinsRatio or false,
 		RobloxLocaleId
 	})))
-	local ViewsSeries = UsePostInsightsAnalyticsModuleResult.viewsSeries
-	local IsGranularityMatch: boolean = UsePostInsightsAnalyticsModuleResult.window ~= nil and UsePostInsightsAnalyticsModuleResult.window.granularity == CreatorAnalyticsModule.MetricGranularity.OneHour
-	local Total = if LifetimeViews == nil then if ViewsSeries == nil then nil else ViewsSeries.total else LifetimeViews
-	local Description = Moment.metadata.description
-	
-	return {
-		title = UseLocalizationResult.title,
-		overviewHeading = UseLocalizationResult.overview,
-		engagementHeading = UseLocalizationResult.engagement,
-		totalReactionsLabel = UseLocalizationResult.totalReactions,
-		onBack = OnBack,
-		mediaItem = UseMemoResult,
-		caption = if Description == nil or Description == "" then nil else Description,
-		interactionCounts = {
-			{
-				key = "likes",
-				icon = BuilderIconsModule.Icon.ThumbUp,
-				countText = AbbreviateCountFunction(UseSignalStateResult or 0, LocalizationService.RobloxLocaleId)
-			},
-			{
-				key = "comments",
-				icon = BuilderIconsModule.Icon.SpeechBubbleAlignLeft,
-				countText = AbbreviateCountFunction(UseSignalStateResult2 or 0, LocalizationService.RobloxLocaleId)
-			},
-			{
-				key = "shares",
-				icon = BuilderIconsModule.Icon.ArrowThickToRight,
-				countText = AbbreviateCountFunction(UseSignalStateResult3 or 0, LocalizationService.RobloxLocaleId)
+	local _DateTime = if Moment.createdAt == nil then nil else DateTime.fromIsoDate(Moment.createdAt)
+	local L = if _DateTime == nil then nil else _DateTime:FormatLocalTime("L", RobloxLocaleId)
+	local UseLocalizationResult2 = UseLocalizationFunction((ReactModule.useMemo(function()
+		-- upvalues: PostInsightsStringsModule (upval), L (copy)
+		return {
+			postedOn = {
+				PostInsightsStringsModule.POSTED_ON_DATE_KEY,
+				date = L or ""
 			}
-		},
-		viewsChart = {
-			isDeltaPositive = false,
-			testId = "post-insights-views-chart",
-			plotId = `views:{Moment.momentId}`,
-			series = if ViewsSeries == nil then nil else {
-				{
-					id = "views",
-					name = UseLocalizationResult.totalViews,
-					points = ViewsSeries.points
+		}
+	end, { L or false })))
+	local Flag = false
+	local IsLoading = nil
+	
+	for _, value in {
+		UsePostInsightsAnalyticsModuleResult.lifetimeViewsStatus,
+		UsePostInsightsAnalyticsModuleResult.lifetimeWatchTimeStatus
+	} do
+		if value == DataStatus.Failed then
+			IsLoading = false
+		else
+			if value == DataStatus.NotReady then
+				Flag = true
+				continue
+			end
+			continue
+		end
+		local Flag1 = false
+		local IsLoading1 = nil
+		
+		for _, value1 in {
+			UsePostInsightsAnalyticsModuleResult.lifetimeViewsStatus,
+			UsePostInsightsAnalyticsModuleResult.lifetimeWatchTimeNoReplayStatus
+		} do
+			if value1 == DataStatus.Failed then
+				IsLoading1 = false
+			else
+				if value1 == DataStatus.NotReady then
+					Flag1 = true
+					continue
+				end
+				continue
+			end
+			local Flag2 = false
+			local IsLoading2 = nil
+			
+			for _, value2 in {
+				UsePostInsightsAnalyticsModuleResult.lifetimeViewsStatus,
+				UsePostInsightsAnalyticsModuleResult.lifetimeJoinsStatus
+			} do
+				if value2 == DataStatus.Failed then
+					IsLoading2 = false
+				else
+					if value2 == DataStatus.NotReady then
+						Flag2 = true
+						continue
+					end
+					continue
+				end
+				local OverviewMetrics = {
+					{
+						key = "averageWatchTime",
+						label = UseLocalizationResult.averageWatchTime,
+						valueText = if Rounded == nil then "—" else UseLocalizationResult1.averageWatchTime,
+						isLoading = IsLoading
+					},
+					{
+						key = "averageCompletion",
+						label = UseLocalizationResult.averageCompletion,
+						valueText = if Smallest == nil then "—" else UseLocalizationResult1.averageCompletion,
+						isLoading = IsLoading1
+					},
+					{
+						key = "gameJoinConversion",
+						label = UseLocalizationResult.gameJoinConversion,
+						valueText = if LifetimeJoinsRatio == nil then "—" else UseLocalizationResult1.gameJoinConversion,
+						isLoading = IsLoading2
+					}
 				}
-			},
-			hasData = ViewsSeries ~= nil and ViewsSeries.hasData,
-			title = UseLocalizationResult.totalViews,
-			valueText = if Total == nil then "—" else AbbreviateCountFunction(Total, RobloxLocaleId),
-			yAxisFormatter = function(p2)
-				-- upvalues: AbbreviateCountFunction (upval), RobloxLocaleId (copy)
-				return AbbreviateCountFunction(p2.value, RobloxLocaleId)
-			end,
-			xAxisFormatter = function(p2)
-				-- upvalues: IsGranularityMatch (copy), RobloxLocaleId (copy)
-				local Value = p2.value
-				local _DateTime = DateTime.fromIsoDate(Value)
+				local ViewsSeries = UsePostInsightsAnalyticsModuleResult.viewsSeries
+				local IsGranularityMatch: boolean = UsePostInsightsAnalyticsModuleResult.window ~= nil and UsePostInsightsAnalyticsModuleResult.window.granularity == CreatorAnalyticsModule.MetricGranularity.OneHour
 				
-				return if _DateTime == nil then Value elseif IsGranularityMatch then _DateTime:FormatLocalTime("LT", RobloxLocaleId) else _DateTime:FormatUniversalTime("MMM D", RobloxLocaleId)
-			end,
-			tooltipFormatters = {
-				formatXForPoint = function(p2)
+				local function formatTime(p2)
 					-- upvalues: IsGranularityMatch (copy), RobloxLocaleId (copy)
 					local _DateTime = DateTime.fromIsoDate(p2)
 					
 					return if _DateTime == nil then p2 elseif IsGranularityMatch then _DateTime:FormatLocalTime("LT", RobloxLocaleId) else _DateTime:FormatUniversalTime("MMM D", RobloxLocaleId)
-				end,
-				formatSeriesValueForPoint = function(p2)
-					-- upvalues: NumberLocalization (upval), RobloxLocaleId (copy)
-					return NumberLocalization.localize(p2.y, RobloxLocaleId)
 				end
-			}
-		},
-		isViewsChartLoading = UsePostInsightsAnalyticsModuleResult.viewsStatus == DataStatus.NotReady,
-		overviewMetrics = {
-			{
-				key = "averageWatchTime",
-				label = UseLocalizationResult.averageWatchTime,
-				valueText = if Rounded == nil then "—" else UseLocalizationResult1.averageWatchTime
-			},
-			{
-				key = "averageCompletion",
-				label = UseLocalizationResult.averageCompletion,
-				valueText = if Smallest == nil then "—" else UseLocalizationResult1.averageCompletion
-			},
-			{
-				key = "gameJoinConversion",
-				label = UseLocalizationResult.gameJoinConversion,
-				valueText = if LifetimeJoinsRatio == nil then "—" else UseLocalizationResult1.gameJoinConversion
-			}
-		},
-		totalReactionsText = AbbreviateCountFunction(UseSignalStateResult or 0, LocalizationService.RobloxLocaleId),
-		reactionCounts = UseMemoResult1
-	}
+				
+				local IsViewsStatusMatch = UsePostInsightsAnalyticsModuleResult.viewsStatus == DataStatus.NotReady
+				local HasData = ViewsSeries ~= nil and ViewsSeries.hasData
+				local IsLifetimeViewsStatusMatch = UsePostInsightsAnalyticsModuleResult.lifetimeViewsStatus == DataStatus.NotReady
+				local LifetimeViews1: number? = LifetimeViews
+				
+				if not HasData and LifetimeViews1 == 0 then
+					LifetimeViews1 = nil
+				end
+				local AbbreviateCountResult = if LifetimeViews1 == nil then "—" else AbbreviateCountFunction(LifetimeViews1, RobloxLocaleId)
+				
+				if not HasData and not IsViewsStatusMatch then
+					table.insert(OverviewMetrics, 1, {
+						key = "totalViews",
+						label = UseLocalizationResult.totalViews,
+						valueText = AbbreviateCountResult,
+						isLoading = IsLifetimeViewsStatusMatch
+					})
+				end
+				local Description = Moment.metadata.description
+				local IsCountIsCapped: boolean = Moment.comments ~= nil and Moment.comments.countIsCapped == true
+				
+				return {
+					title = UseLocalizationResult.title,
+					overviewHeading = UseLocalizationResult.overview,
+					engagementHeading = UseLocalizationResult.engagement,
+					totalReactionsLabel = UseLocalizationResult.totalReactions,
+					onBack = UseResult,
+					mediaItem = UseMemoResult,
+					caption = if Description == nil or Description == "" then nil else Description,
+					postedOnText = if L == nil then nil else UseLocalizationResult2.postedOn,
+					interactionCounts = {
+						{
+							key = "likes",
+							icon = BuilderIconsModule.Icon.ThumbUp,
+							countText = AbbreviateCountFunction(UseSignalStateResult or 0, LocalizationService.RobloxLocaleId)
+						},
+						{
+							key = "comments",
+							icon = BuilderIconsModule.Icon.SpeechBubbleAlignLeft,
+							countText = AbbreviateCountFunction(UseSignalStateResult2 or 0, LocalizationService.RobloxLocaleId) .. (if IsCountIsCapped then "+" else "")
+						},
+						{
+							key = "shares",
+							icon = BuilderIconsModule.Icon.ArrowThickToRight,
+							countText = AbbreviateCountFunction(UseSignalStateResult3 or 0, LocalizationService.RobloxLocaleId)
+						}
+					},
+					totalViewsLabel = UseLocalizationResult.totalViews,
+					totalViewsText = AbbreviateCountResult,
+					isTotalViewsLoading = IsLifetimeViewsStatusMatch,
+					viewsChart = {
+						hideHeader = true,
+						isDeltaPositive = false,
+						testId = "post-insights-views-chart",
+						plotId = `views:{Moment.momentId}`,
+						series = if ViewsSeries == nil then nil else {
+							{
+								id = "views",
+								name = UseLocalizationResult.totalViews,
+								points = ViewsSeries.points
+							}
+						},
+						hasData = HasData,
+						title = UseLocalizationResult.totalViews,
+						valueText = AbbreviateCountResult,
+						yAxisFormatter = function(p2)
+							-- upvalues: AbbreviateCountFunction (upval), RobloxLocaleId (copy)
+							return AbbreviateCountFunction(p2.value, RobloxLocaleId)
+						end,
+						xAxisFormatter = function(p2)
+							-- upvalues: IsGranularityMatch (copy), RobloxLocaleId (copy)
+							local Value = p2.value
+							local _DateTime = DateTime.fromIsoDate(Value)
+							
+							return if _DateTime == nil then Value elseif IsGranularityMatch then _DateTime:FormatLocalTime("LT", RobloxLocaleId) else _DateTime:FormatUniversalTime("MMM D", RobloxLocaleId)
+						end,
+						tooltipFormatters = {
+							formatXForPoint = formatTime,
+							formatSeriesValueForPoint = function(p2)
+								-- upvalues: NumberLocalization (upval), RobloxLocaleId (copy)
+								return NumberLocalization.localize(p2.y, RobloxLocaleId)
+							end
+						}
+					},
+					isViewsChartLoading = IsViewsStatusMatch,
+					isViewsChartVisible = HasData,
+					overviewMetrics = OverviewMetrics,
+					totalReactionsText = AbbreviateCountFunction(UseSignalStateResult or 0, LocalizationService.RobloxLocaleId),
+					reactionCounts = UseMemoResult1
+				}
+			end
+			IsLoading2 = Flag2
+		end
+		IsLoading1 = Flag1
+	end
+	IsLoading = Flag
 end

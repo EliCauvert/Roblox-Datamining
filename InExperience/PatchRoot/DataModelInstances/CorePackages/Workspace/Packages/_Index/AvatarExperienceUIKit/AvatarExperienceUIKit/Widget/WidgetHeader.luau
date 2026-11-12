@@ -1,7 +1,6 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
 local ReactModule = require(Parent.React)
-local FoundationModule = require(Parent.Foundation)
-local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UIBloxModule = require(Parent.UIBlox)
 local IconWithTooltip = require(Parent.AppBlox).IconWithTooltip
@@ -13,7 +12,6 @@ local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXWidgetHeaderTreatEmptyTextAsNil = AvatarExperienceFlagsModule.FFlagAXWidgetHeaderTreatEmptyTextAsNil
 local FFlagAXCatalogItemInformationPopover = AvatarExperienceFlagsModule.FFlagAXCatalogItemInformationPopover
-local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local FFlagAXWidgetHeaderFlexLayout = AvatarExperienceFlagsModule.FFlagAXWidgetHeaderFlexLayout
 
 local function _(p1)
@@ -21,7 +19,7 @@ local function _(p1)
 end
 
 return function(Frame)
-	-- upvalues: ReactModule (copy), UseDesignTokensFunction (copy), UseLocalizationFunction (copy), FFlagAXWidgetHeaderTreatEmptyTextAsNil (copy), FFlagAXCatalogItemInformationPopover (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), FFlagAXWidgetHeaderFlexLayout (copy), IconWithTooltip (copy), TooltipOrientation (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy)
+	-- upvalues: ReactModule (copy), UseDesignTokensFunction (copy), UseLocalizationFunction (copy), FFlagAXWidgetHeaderTreatEmptyTextAsNil (copy), FFlagAXCatalogItemInformationPopover (copy), NormalizeFontFaceFunction (copy), FFlagAXWidgetHeaderFlexLayout (copy), IconWithTooltip (copy), TooltipOrientation (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.new())
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -58,8 +56,7 @@ return function(Frame)
 		LayoutOrder = 1,
 		BackgroundTransparency = 1,
 		Text = TitleText,
-		Font = if FoundationFontFaceMigration then nil else UseDesignTokensResult.Typography.HeadingSmall.Font,
-		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseDesignTokensResult.Typography.HeadingSmall.Font) else nil,
+		FontFace = NormalizeFontFaceFunction(UseDesignTokensResult.Typography.HeadingSmall.Font),
 		TextSize = UseDesignTokensResult.Typography.HeadingSmall.FontSize,
 		LineHeight = UseDesignTokensResult.Typography.HeadingSmall.LineHeight,
 		TextColor3 = UseDesignTokensResult.Color.Content.Emphasis.Color3,
@@ -145,8 +142,7 @@ return function(Frame)
 				LayoutOrder = 2,
 				BackgroundTransparency = 1,
 				Text = DescriptionText,
-				Font = if FoundationFontFaceMigration then nil else UseDesignTokensResult.Typography.BodyLarge.Font,
-				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseDesignTokensResult.Typography.BodyLarge.Font) else nil,
+				FontFace = NormalizeFontFaceFunction(UseDesignTokensResult.Typography.BodyLarge.Font),
 				TextSize = UseDesignTokensResult.Typography.BodyLarge.FontSize,
 				TextColor3 = UseDesignTokensResult.Color.Content.Default.Color3,
 				TextTransparency = UseDesignTokensResult.Color.Content.Default.Transparency,

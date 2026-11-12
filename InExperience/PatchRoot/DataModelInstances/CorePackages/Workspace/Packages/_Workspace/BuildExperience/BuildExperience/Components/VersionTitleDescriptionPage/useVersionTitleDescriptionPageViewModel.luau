@@ -4,11 +4,13 @@ local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
 local PlaceVersionHistoryModule = require(Parent.DataHydration.PlaceVersionHistory)
 local GetVersionInformationStoreModule = require(BuildExperience.Stores.GetVersionInformationStore)
+local ConfigurationActionTelemetryModule = require(BuildExperience.Telemetry.ConfigurationActionTelemetry)
+local FFlagBuildExperienceActionOutcomeTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceActionOutcomeTelemetry)
 local _ = require(script.Parent.VersionTitleDescriptionPageView)
 local DataStatus = require(Parent.DataHydration).DataStatus
 
 return function(p1)
-	-- upvalues: GetVersionInformationStoreModule (copy), PlaceVersionHistoryModule (copy), ReactModule (copy), SignalsReactModule (copy), DataStatus (copy)
+	-- upvalues: GetVersionInformationStoreModule (copy), PlaceVersionHistoryModule (copy), ReactModule (copy), SignalsReactModule (copy), DataStatus (copy), FFlagBuildExperienceActionOutcomeTelemetryModule (copy), ConfigurationActionTelemetryModule (copy)
 	local VersionInformationStoreModule = GetVersionInformationStoreModule()
 	local PlaceVersionHistoryStore = PlaceVersionHistoryModule.getPlaceVersionHistoryStore()
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -50,18 +52,21 @@ return function(p1)
 		HasUseSignalStateResult, p1.placeId, UseBindingResult
 	})
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: UseStateResult (copy), p1 (copy), UseBindingResult (copy), UseBindingResult1 (copy), UseRefResult (copy), UseRefResult1 (copy), VersionInformationStoreModule (copy)
+		-- upvalues: UseStateResult (copy), p1 (copy), UseBindingResult (copy), UseBindingResult1 (copy), UseRefResult (copy), UseRefResult1 (copy), VersionInformationStoreModule (copy), FFlagBuildExperienceActionOutcomeTelemetryModule (upval), ConfigurationActionTelemetryModule (upval)
 		if UseStateResult ~= p1.placeId then return end
 		local Value = UseBindingResult:getValue()
 		local Value1 = UseBindingResult1:getValue()
 		
-		if Value ~= UseRefResult.current or Value1 ~= UseRefResult1.current then
-			VersionInformationStoreModule.setDraft(p1.placeId, Value, Value1)
-			UseRefResult.current = Value
-			UseRefResult1.current = Value1
-			
-			return
+		if Value == UseRefResult.current and Value1 == UseRefResult1.current then return end
+		VersionInformationStoreModule.setDraft(p1.placeId, Value, Value1)
+		
+		if FFlagBuildExperienceActionOutcomeTelemetryModule then
+			ConfigurationActionTelemetryModule.sendSuccess(ConfigurationActionTelemetryModule.Action.VersionDetailsSave, { placeId = p1.placeId }, nil, {
+				changedFields = ConfigurationActionTelemetryModule.getChangedFields(Value ~= UseRefResult.current, Value1 ~= UseRefResult1.current)
+			})
 		end
+		UseRefResult.current = Value
+		UseRefResult1.current = Value1
 	end, {
 		UseBindingResult1,
 		UseStateResult,

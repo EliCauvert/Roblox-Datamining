@@ -13,7 +13,6 @@ return {
 		ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
 		ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH
 	},
-	fflag = require(Parent.flags.getFFlagUGCValidateAQCageQualityLC),
 	run = function(p1, p2)
 		-- upvalues: ValidationEnumsModule (copy), GetFFlagUGCValidateLCCageUVScoreCheckModule (copy), Cage_names (copy), UGCValidateLCCageUVMinScore (copy), ErrorSourceStringsModule (copy), GetFFlagUGCValidateAQScoreWarningsModule (copy), UGCValidateLCCagingIncorrectUVThreshold (copy)
 		local MeasureCageUV = p2.aqsSummaryData.Measure_Cage_UV

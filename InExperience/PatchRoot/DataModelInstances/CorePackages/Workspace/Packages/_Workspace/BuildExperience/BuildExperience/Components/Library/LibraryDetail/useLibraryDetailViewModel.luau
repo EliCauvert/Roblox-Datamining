@@ -123,7 +123,7 @@ return function(p1, p2)
 		soundId = SoundId,
 		modelName = if UseSignalStateResult1 == nil then nil else UseSignalStateResult1.displayName,
 		description = if UseSignalStateResult1 == nil then nil else UseSignalStateResult1.description,
-		status = if p1.isReady then if Config == nil and (UseSignalStateResult1 == nil or UseSignalStateResult1.kind ~= "Image" or UseSignalStateResult1.image == nil or UseSignalStateResult1.image == "") and (UseSignalStateResult1 == nil or UseSignalStateResult1.kind ~= "Sound" or SoundId == nil or SoundId == "") then "Failed" else "Ready" else "Loading",
+		status = if p1.isReady then if Config == nil and (UseSignalStateResult1 == nil or UseSignalStateResult1.kind ~= "Image" or UseSignalStateResult1.image == nil or UseSignalStateResult1.image == "") and (UseSignalStateResult1 == nil or (UseSignalStateResult1.kind ~= "Sound" or SoundId == nil or SoundId == "")) then "Failed" else "Ready" else "Loading",
 		unavailableText = p1.unavailableText,
 		soundLabel = UseLocalizationResult.soundLabel,
 		chatActions = ChatActions

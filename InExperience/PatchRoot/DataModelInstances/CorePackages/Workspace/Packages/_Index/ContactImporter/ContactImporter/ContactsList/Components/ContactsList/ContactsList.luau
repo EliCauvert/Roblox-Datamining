@@ -33,7 +33,6 @@ local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3D
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 local ContactImportButtonsIXPModule = require(ContactImporter.Flags.ContactImportButtonsIXP)
 local ContactImportButtonsExperimentEnabled = game:DefineFastFlag("ContactImportButtonsExperimentEnabled", false)
-local FFlagAddFriendsBannersNewUIIXP = require(Parent.SharedFlags).FFlagAddFriendsBannersNewUI_IXP
 local IXPService = game:GetService("IXPService")
 local UprankContactsWithEmojiFunction = require(ContactImporter.Utils).uprankContactsWithEmoji
 local FFlagContactsListEmojiSortingModule = require(ContactImporter.Flags.FFlagContactsListEmojiSorting)
@@ -49,7 +48,7 @@ local AmpEnums = require(Parent.AmpUpsell).AmpEnums
 local UserInputService = DependenciesModule.UserInputService
 
 return function(p1)
-	-- upvalues: UseAppPolicyFunction (copy), UseStyleFunction (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ContactImportButtonsExperimentEnabled (copy), ContactImportButtonsIXPModule (copy), Dash (copy), EventNames (copy), React (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), FFlagContactsListEmojiSortingModule (copy), UprankContactsWithEmojiFunction (copy), ContactsListEmojiSortingIxpEnabled (copy), IXPService (copy), ContactsListEmojiSortingIxpLayer (copy), FFlagQRCodeCopyUpdates (copy), FFlagTCPolicyCheckRedirect (copy), FStringIsUserInTcEligibleCountryAmpFeature (copy), FStringCanAccessTrustedContactsAmpFeature (copy), AmpApiProvider (copy), FStringCanAccessTrustedContactsAmpNameSpace (copy), AmpEnums (copy), Roact (copy), ContactsListEntryModule (copy), ContactsListInviteEntryModule (copy), StyledTextLabel (copy), ButtonType (copy), UserInputService (copy), FFlagAddFriendsBannersNewUIIXP (copy), ContactsSyncWarningMessageModule (copy), SectionList (copy), ContactsEmptyListModule (copy), InputLabel (copy), InputLabelSize (copy), ContactsListSearchBarModule (copy), ContactsGlimmerModule (copy), ContactsUploadErrorModalModule (copy), FullPageModal (copy), HorizontalPageMargin (copy)
+	-- upvalues: UseAppPolicyFunction (copy), UseStyleFunction (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ContactImportButtonsExperimentEnabled (copy), ContactImportButtonsIXPModule (copy), Dash (copy), EventNames (copy), React (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), FFlagContactsListEmojiSortingModule (copy), UprankContactsWithEmojiFunction (copy), ContactsListEmojiSortingIxpEnabled (copy), IXPService (copy), ContactsListEmojiSortingIxpLayer (copy), FFlagQRCodeCopyUpdates (copy), FFlagTCPolicyCheckRedirect (copy), FStringIsUserInTcEligibleCountryAmpFeature (copy), FStringCanAccessTrustedContactsAmpFeature (copy), AmpApiProvider (copy), FStringCanAccessTrustedContactsAmpNameSpace (copy), AmpEnums (copy), Roact (copy), ContactsListEntryModule (copy), ContactsListInviteEntryModule (copy), StyledTextLabel (copy), ButtonType (copy), UserInputService (copy), ContactsSyncWarningMessageModule (copy), SectionList (copy), ContactsEmptyListModule (copy), InputLabel (copy), InputLabelSize (copy), ContactsListSearchBarModule (copy), ContactsGlimmerModule (copy), ContactsUploadErrorModalModule (copy), FullPageModal (copy), HorizontalPageMargin (copy)
 	local UseAppPolicyResult = UseAppPolicyFunction(function(p2)
 		return p2.getWebViewSupport()
 	end)
@@ -68,7 +67,7 @@ return function(p1)
 	})
 	local UseIsRemoveCloseButtonExperimentEnabledResult = if ContactImportButtonsExperimentEnabled then ContactImportButtonsIXPModule.useIsRemoveCloseButtonExperimentEnabled({ isExposureEnabled = true }) else false
 	
-	local function v48(p2, FilterResult, FilterResult1)
+	local function v47(p2, FilterResult, FilterResult1)
 		-- upvalues: Dash (upval)
 		Dash.append(p2, FilterResult, if #FilterResult == 0 then nil else { { isSectionDivider = true } }, FilterResult1)
 	end
@@ -149,7 +148,7 @@ return function(p1)
 		end)
 	end
 	local t = {}
-	v48(t, FilterResult, FilterResult1)
+	v47(t, FilterResult, FilterResult1)
 	local List = {}
 	
 	if #FilterResult > 0 then
@@ -211,7 +210,7 @@ return function(p1)
 		end
 	end
 	
-	local function v65(p2)
+	local function v64(p2)
 		-- upvalues: Roact (upval), StyledTextLabel (upval), UseStyleResult (copy)
 		return if p2.section then Roact.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 0, 0) }, {
 			layout = Roact.createElement("UIListLayout", {
@@ -248,7 +247,7 @@ return function(p1)
 		})
 	end
 	
-	local function v66(p2)
+	local function v65(p2)
 		-- upvalues: p1 (copy), ButtonType (upval), Dash (upval), UseIsRemoveCloseButtonExperimentEnabledResult (copy), OnActivated (copy)
 		if p1.isFetching then
 			return {
@@ -290,14 +289,14 @@ return function(p1)
 	end
 	
 	local Y = UserInputService.StatusBarSize.Y
-	local UseIsVisibleResult = if FFlagAddFriendsBannersNewUIIXP then ContactsSyncWarningMessageModule.useIsVisible() else nil
+	local UseIsVisibleResult = ContactsSyncWarningMessageModule.useIsVisible()
 	local config = {
 		layout = Roact.createElement("UIListLayout", {
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Vertical
 		}),
-		contactsSyncWarning = if FFlagAddFriendsBannersNewUIIXP and UseIsVisibleResult then React.createElement(ContactsSyncWarningMessageModule.Component, { layoutOrder = -1 }) else nil
+		contactsSyncWarning = if UseIsVisibleResult then React.createElement(ContactsSyncWarningMessageModule.Component, { layoutOrder = -1 }) else nil
 	}
 	local Ref = React.createRef()
 	local config1 = {
@@ -306,13 +305,13 @@ return function(p1)
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Vertical
 		}),
-		contactsSyncWarning = if FFlagAddFriendsBannersNewUIIXP and UseIsVisibleResult then React.createElement(ContactsSyncWarningMessageModule.Component, { layoutOrder = -1 }) else nil,
-		spacer1 = if FFlagAddFriendsBannersNewUIIXP and UseIsVisibleResult then nil else Roact.createElement("Frame", {
+		contactsSyncWarning = if UseIsVisibleResult then React.createElement(ContactsSyncWarningMessageModule.Component, { layoutOrder = -1 }) else nil,
+		spacer1 = if UseIsVisibleResult then nil else Roact.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
 			Size = UDim2.new(1, 0, 0, 24)
 		}),
-		descriptionFrame = if FFlagAddFriendsBannersNewUIIXP and UseIsVisibleResult then nil else Roact.createElement("Frame", {
+		descriptionFrame = if UseIsVisibleResult then nil else Roact.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
 			Size = UDim2.new(1, 0, 0, 80)
@@ -343,7 +342,7 @@ return function(p1)
 				onActivated = UseResult
 			})
 		}),
-		spacer2 = if FFlagAddFriendsBannersNewUIIXP and UseIsVisibleResult then nil else Roact.createElement("Frame", {
+		spacer2 = if UseIsVisibleResult then nil else Roact.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 3,
 			Size = UDim2.new(1, 0, 0, 24)
@@ -368,7 +367,7 @@ return function(p1)
 			initialNumToRender = 15,
 			ref = Ref,
 			sections = List,
-			renderSectionHeader = if #FilterResult > 0 then v65 else nil,
+			renderSectionHeader = if #FilterResult > 0 then v64 else nil,
 			renderItem = RenderItem,
 			CanvasSize = UDim2.new(1, 0, 0, #t * 73),
 			contentContainerStyle = { BackgroundTransparency = 1, BorderSizePixel = 0 },
@@ -400,7 +399,7 @@ return function(p1)
 		distanceFromTop = Y,
 		onCloseClicked = OnCloseClicked,
 		buttonStackProps = {
-			buttons = v66(UseLocalizationResult),
+			buttons = v65(UseLocalizationResult),
 			buttonHeight = if UseIsRemoveCloseButtonExperimentEnabledResult then 0 else 48,
 			forcedFillDirection = Enum.FillDirection.Vertical
 		}
