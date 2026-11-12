@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "6b1e1143416d8fdeb0df2ac2ef03d868a32d649b"
+            id: "1a50765bbd54078d1bfc2e333b221548ba2b82c6"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "0305b47f-330b-437e-85c0-28ad787b5e9c", e._sentryDebugIdIdentifier = "sentry-dbid-0305b47f-330b-437e-85c0-28ad787b5e9c")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "4609ea80-cc45-4287-aaa6-ce9759e1e107", e._sentryDebugIdIdentifier = "sentry-dbid-4609ea80-cc45-4287-aaa6-ce9759e1e107")
     } catch (e) {}
 }(),
 function() {
@@ -38711,11 +38711,17 @@ function() {
                 }, function(e) {
                     return e.hostname.endsWith("studyquicks.com")
                 }],
-                Aw = ["/service/uv/", "/uv/service/", "/scramjet/"],
+                Aw = ["/service/uv/", "/uv/service/", "/scramjet/", "/__frame__/"],
                 A_ = [function(e) {
                     return e.hostname.includes("opiumbull")
                 }, function(e) {
                     return e.searchParams.has("$io")
+                }, function(e) {
+                    return e.pathname.includes("/~/blob:")
+                }, function(e) {
+                    return e.pathname.startsWith("/study/browse/")
+                }, function(e) {
+                    return "internal.goguardian" === e.hostname
                 }, function(e) {
                     return "commonsensehealthcare.org" === e.hostname
                 }],
@@ -39086,4 +39092,4 @@ function() {
             } catch (e) {}
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected(document.currentScript && document.currentScript.getAttribute("data-bundlename") || "CoreUtilities");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/coreUtilities-b43476860a413d77.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/coreUtilities-0a3adb37fb0f9195.js.map
